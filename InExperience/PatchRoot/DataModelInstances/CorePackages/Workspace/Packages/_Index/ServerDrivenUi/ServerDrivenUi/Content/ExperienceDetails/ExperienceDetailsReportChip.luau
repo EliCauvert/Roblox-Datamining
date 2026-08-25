@@ -18,12 +18,12 @@ local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
 local openDynamicAbuseReportModule = require(parent.GenericAbuseReporting.OpenDynamicAbuseReport)
 local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
 
-return reactModule.memo(function(p0) --[[ line: 32 | named "ExperienceDetailsReportChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), useAppPolicy (ref), useLocalization (ref), signalsReactModule (ref), game (ref), reactModule (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), closeCentralOverlay (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId
 	local var11 = useDispatch()
-	local var12 = useAppPolicy(function(p1) --[[ line: 37 ]]
+	local var12 = useAppPolicy(function(p1)
 		return p1.getGameReportingDisabled()
 	end)
 	local var13 = useLocalization({ report = "Feature.GameDetails.Action.Report" })
@@ -33,14 +33,14 @@ return reactModule.memo(function(p0) --[[ line: 32 | named "ExperienceDetailsRep
 	return if var12 then nil else reactModule.createElement(sduiChip, {
 		text = var13.report,
 		leadingIconName = foundationModule.Enums.IconName.Flag,
-		onActivated = reactModule.useCallback(function() --[[ line: 49 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: rootPlaceId (ref), var11 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), universeId (ref), closeCentralOverlay (copy)
 			if rootPlaceId then
 				var11(openDynamicAbuseReportModule({
 					abuseVector = abuseVectorModule.Place,
 					targetId = rootPlaceId,
 					custom = if fFlagAddThumbnailSelectorReport then { universeId = universeId } else nil,
-					onClose = function() --[[ line: 61 ]]
+					onClose = function()
 						-- upvalues: var11 (copy), closeCentralOverlay (copy)
 						var11(closeCentralOverlay())
 					end

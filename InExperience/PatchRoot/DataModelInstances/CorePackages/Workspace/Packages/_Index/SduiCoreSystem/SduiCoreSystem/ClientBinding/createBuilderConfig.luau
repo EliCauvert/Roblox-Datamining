@@ -9,9 +9,9 @@ local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiE
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 
-local function _(p0, p1) --[[ line: 17 | named "getLocalizedLiteralResolver" ]]
+local function _(p0, p1)
 	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref)
-	return function(p2) --[[ line: 18 ]]
+	return function(p2)
 		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p1 (ref), p0 (ref)
 		if typeof(p2) ~= "table" or not p2.map_key then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
@@ -32,7 +32,7 @@ local function _(p0, p1) --[[ line: 17 | named "getLocalizedLiteralResolver" ]]
 	end
 end
 
-return function(p3) --[[ line: 50 | named "createBuilderConfig" ]]
+return function(p3)
 	-- upvalues: getPropBuilderModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref)
 	local t = {
 		appPage = p3.appPage,
@@ -43,7 +43,7 @@ return function(p3) --[[ line: 50 | named "createBuilderConfig" ]]
 	local localizedLiterals = p3.localizedLiterals
 	local appPage = p3.appPage
 	
-	function t.resolveLocalizedLiteral(p4) --[[ line: 18 ]]
+	function t.resolveLocalizedLiteral(p4)
 		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), appPage (ref), localizedLiterals (ref)
 		if typeof(p4) ~= "table" or not p4.map_key then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {

@@ -4,7 +4,7 @@ local flags = foundationModule.Utility.Flags
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local badgeVariantModule = require(parent.App.Indicator.Enum.BadgeVariant)
 
-return function(p0) --[[ line: 9 | named "migrateBadgeVariantToStatusIndicatorVariant" ]]
+return function(p0)
 	-- upvalues: flags (ref), badgeVariantModule (ref), statusIndicatorVariant (ref)
 	return if flags.FoundationStatusIndicatorVariantExperiment then if p0 == badgeVariantModule.Alert then statusIndicatorVariant.Alert else statusIndicatorVariant.Contrast_Experiment else statusIndicatorVariant.Emphasis
 end

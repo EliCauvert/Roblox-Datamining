@@ -7,7 +7,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-function variantsFactory(p0) --[[ line: 41 ]]
+function variantsFactory(p0)
 	-- upvalues: statusBadgeVariantModule (ref), statusBadgeShapeModule (ref), statusBadgeSizeModule (ref)
 	return {
 		common = {
@@ -54,7 +54,7 @@ function variantsFactory(p0) --[[ line: 41 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ line: 113 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), composeStyleVariantModule (ref), statusBadgeShapeModule (ref)
 	local statusBadge = variantsContextModule.useVariants("StatusBadge", variantsFactory, p1)
 	

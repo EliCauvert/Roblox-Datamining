@@ -11,7 +11,7 @@ local t = {
 	lastUpdated = { 25, 9, 9 }
 }
 
-return function(p0, p1) --[[ line: 21 ]]
+return function(p0, p1)
 	-- upvalues: telemetryService (ref), t (ref), modalImpressionEventAddSessionInfo (ref)
 	telemetryService:LogEvent(t, {
 		standardizedFields = if modalImpressionEventAddSessionInfo then { "addSessionInfo" } else nil,

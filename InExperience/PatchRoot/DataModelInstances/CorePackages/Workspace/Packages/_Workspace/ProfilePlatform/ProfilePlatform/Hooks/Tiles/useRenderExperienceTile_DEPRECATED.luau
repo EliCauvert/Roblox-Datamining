@@ -13,14 +13,14 @@ local _ = require(profilePlatform.Common.Types)
 local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-return function(p0, p1, _) --[[ line: 29 | named "useRenderSquareExperienceTile" ]]
+return function(p0, p1, _)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), reactModule (ref), openGameDetails (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), experienceTileV3 (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
 	local var4 = useDispatch()
 	local var5 = useNavigation()
 	local var6 = useStyle()
 	p0 = p0 or "ProfileExperienceTile_"
 	
-	return reactModule.useCallback(function(p2, p3, _, p4) --[[ line: 46 ]]
+	return reactModule.useCallback(function(p2, p3, _, p4)
 		-- upvalues: p1 (ref), var4 (ref), openGameDetails (copy), var5 (ref), constants (copy), getRbxthumbWithTypeSizeAndOptions (copy), reactModule (copy), experienceTileV3 (copy), var6 (ref), p0 (write)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -34,7 +34,7 @@ return function(p0, p1, _) --[[ line: 29 | named "useRenderSquareExperienceTile"
 				hasOutline = false,
 				experienceName = p2.name,
 				thumbnail = getRbxthumbWithTypeSizeAndOptions(p2.experienceId, constants.RbxthumbTypes.GameIcon, 150),
-				onActivated = function() --[[ line: 47 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy), p2 (ref), p3 (ref), p4 (ref), var4 (copy), openGameDetails (copy), var5 (copy)
 					if p1 then
 						p1(p2, p3, p4)

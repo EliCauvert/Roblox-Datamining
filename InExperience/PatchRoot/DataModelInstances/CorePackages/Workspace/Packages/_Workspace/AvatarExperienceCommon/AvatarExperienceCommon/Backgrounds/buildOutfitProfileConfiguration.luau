@@ -1,7 +1,7 @@
 ﻿local selectActiveBackgroundModule = require(script.Parent.selectActiveBackground)
 local nOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
-return function(p0) --[[ line: 15 | named "buildOutfitProfileConfiguration" ]]
+return function(p0)
 	-- upvalues: selectActiveBackgroundModule (ref), nOBACKGROUNDASSETID (ref)
 	local var1 = selectActiveBackgroundModule(p0)
 	

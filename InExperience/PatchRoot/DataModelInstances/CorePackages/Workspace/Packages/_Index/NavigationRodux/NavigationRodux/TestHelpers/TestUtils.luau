@@ -12,7 +12,7 @@ local getLegacyRouteFromRoactNavigationState = require(navigationRodux.Utils).ge
 local createMockStackState = navigationModule.TestUtils.createMockStackState
 local createMockScreenState = navigationModule.TestUtils.createMockScreenState
 
-local function createMockReducerStateFromRouteState(p0) --[[ line: 28 ]]
+local function createMockReducerStateFromRouteState(p0)
 	-- upvalues: getLegacyRouteFromRoactNavigationState (ref), getCurrentRouteState (ref)
 	return {
 		lockNavigationActions = false,
@@ -23,7 +23,7 @@ local function createMockReducerStateFromRouteState(p0) --[[ line: 28 ]]
 	}
 end
 
-local function createMockRouteStateFromPages(p1) --[[ line: 41 ]]
+local function createMockRouteStateFromPages(p1)
 	-- upvalues: createMockScreenState (ref), createMockStackState (ref)
 	local t = {}
 	
@@ -33,7 +33,7 @@ local function createMockRouteStateFromPages(p1) --[[ line: 41 ]]
 	return createMockStackState("StackRouterRoot", t)
 end
 
-local function createMockNavigationState(...) --[[ line: 49 ]]
+local function createMockNavigationState(...)
 	-- upvalues: createMockRouteStateFromPages (ref), createMockReducerStateFromRouteState (ref)
 	local t = {}
 	
@@ -52,7 +52,7 @@ local t = {
 	[appPage.More] = true
 }
 
-local function navigateToRoute(p2, p3) --[[ line: 67 ]]
+local function navigateToRoute(p2, p3)
 	-- upvalues: actions (ref), t (ref), constantsModule (ref), stackActions (ref)
 	local t_1 = {}
 	
@@ -76,7 +76,7 @@ return {
 	createMockReducerStateFromRouteState = createMockReducerStateFromRouteState,
 	createMockRouteStateFromPages = createMockRouteStateFromPages,
 	createMockNavigationState = createMockNavigationState,
-	resetNavigation = function(value, p4) --[[ line: 87 ]]
+	resetNavigation = function(value, p4)
 		-- upvalues: navigateToRoute (ref)
 		value.notifyEvents()
 		

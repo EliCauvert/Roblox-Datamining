@@ -12,7 +12,7 @@ local getPlayerModule = require(chatLineReporting.Common.getPlayer)
 local mutePlayerModule = require(chatLineReporting.Common.mutePlayer)
 local sendSystemMessageModule = require(chatLineReporting.Common.sendSystemMessage)
 
-return function(p0) --[[ line: 40 | named "ChatLineReportCompleteModal" ]]
+return function(p0)
 	-- upvalues: expChatSharedModule (ref), useLocalization (ref), getPlayerModule (ref), getDisplayNameFromUserIdModule (ref), buttonType (ref), reactModule (ref), reportCompleteDialogModule (ref), localPlayer (ref), mutePlayerModule (ref), constantsModule (ref), sendSystemMessageModule (ref)
 	local context = expChatSharedModule.context
 	local var9 = useLocalization(p0.localizationKeys)
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 40 | named "ChatLineReportCompleteModal" ]]
 	local t_1 = {
 		buttonType = buttonType.PrimarySystem,
 		props = {
-			onActivated = function() --[[ line: 67 ]]
+			onActivated = function()
 				-- upvalues: p0 (ref)
 				p0.onDismiss(nil, "")
 			end,
@@ -57,7 +57,7 @@ return function(p0) --[[ line: 40 | named "ChatLineReportCompleteModal" ]]
 				{
 					buttonType = buttonType.Secondary,
 					props = {
-						onActivated = function() --[[ line: 82 ]]
+						onActivated = function()
 							-- upvalues: mutePlayerModule (copy), t (write), localPlayer (copy), p0 (ref), constantsModule (copy), sendSystemMessageModule (copy), var11 (ref)
 							local var13 = mutePlayerModule(t, localPlayer, p0.selectedMessage.isUniverseChat)
 							
@@ -73,7 +73,7 @@ return function(p0) --[[ line: 40 | named "ChatLineReportCompleteModal" ]]
 			} else { t_1 }
 		},
 		localizationKeys = p0.localizationKeys,
-		onDismiss = function() --[[ line: 98 ]]
+		onDismiss = function()
 			-- upvalues: p0 (ref)
 			p0.onDismiss(nil, "")
 		end

@@ -19,12 +19,12 @@ listSection.validateProps = tModule.strictInterface({
 	forwardRef = tModule.table
 })
 
-function listSection.init(p0) --[[ line: 29 ]]
+function listSection.init(p0)
 	-- upvalues: roactGamepadModule (ref)
 	p0.listRefCache = roactGamepadModule.createRefCache()
 end
 
-function listSection.render(p1) --[[ line: 33 ]]
+function listSection.render(p1)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref), listEntryModule (ref), roactFitComponents (ref)
 	local t = {
 		[0] = roactModule.createElement(roactGamepadModule.Focusable[listEntryModule], {
@@ -63,7 +63,7 @@ function listSection.render(p1) --[[ line: 33 ]]
 	}, t)
 end
 
-return roactModule.forwardRef(function(p2, p3) --[[ line: 84 ]]
+return roactModule.forwardRef(function(p2, p3)
 	-- upvalues: roactModule (ref), listSection (ref), cryoModule (ref)
 	return roactModule.createElement(listSection, cryoModule.Dictionary.join(p2, { forwardRef = p3 }))
 end)

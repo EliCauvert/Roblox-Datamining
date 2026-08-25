@@ -3,7 +3,7 @@ local selectRobuxSpentModule = require(bulkPurchaseApp.Store.Selectors.selectRob
 local selectResultItemsModule = require(bulkPurchaseApp.Store.Selectors.selectResultItems)
 local _ = require(bulkPurchaseApp.Store.Types)
 
-return function(p0) --[[ line: 14 | named "selectPurchaseResults" ]]
+return function(p0)
 	-- upvalues: selectRobuxSpentModule (ref), selectResultItemsModule (ref)
 	return {
 		RobuxSpent = selectRobuxSpentModule(p0),

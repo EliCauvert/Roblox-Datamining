@@ -16,10 +16,10 @@ local t = {
 	actionText = "PLACEHOLDER Action",
 	bodyText = "PLACEHOLDER Body",
 	height = 40,
-	onActivated = function() --[[ line: 36 ]] end
+	onActivated = function() end
 }
 
-return memo(function(p0) --[[ line: 39 | named "ConversationBanner" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), useChatPagePaddingModule (ref), useMemo (ref), text (ref), reactModule (ref), linkButton (ref)
 	local var7 = cryoModule.Dictionary.union(t, p0)
 	local style = var7.style or useStyle()
@@ -29,7 +29,7 @@ return memo(function(p0) --[[ line: 39 | named "ConversationBanner" ]]
 	local font = style.Font.CaptionBody.Font
 	local var11 = style.Font.CaptionBody.RelativeSize * style.Font.BaseSize
 	local var12 = useChatPagePaddingModule()
-	local var13 = useMemo(function() --[[ line: 51 ]]
+	local var13 = useMemo(function()
 		-- upvalues: text (copy), var7 (ref), font (ref), var11 (ref)
 		return text.GetTextBounds(var7.actionText, font, var11 + 2, Vector2.new(250, var7.height)).X
 	end, { var7.actionText, font, var11, var7.height })

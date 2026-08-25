@@ -2,7 +2,7 @@
 local _ = require(foundation.Components.BaseMenu)
 local _ = require(foundation.Components.Types)
 
-local function markSelectedItem(p0, p1) --[[ line: 10 ]]
+local function markSelectedItem(p0, p1)
 	-- upvalues: markSelectedItem (ref)
 	if p1 == nil then
 		return p0, nil

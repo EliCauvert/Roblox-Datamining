@@ -5,12 +5,12 @@ return {
 	componentType = "dropdown",
 	fieldLabel = "ReasonForAbuse",
 	componentName = "AbuseReason",
-	getIsVisible = function(_) --[[ line: 7 ]]
+	getIsVisible = function(_)
 		return true
 	end,
-	getMenuItems = function(_) --[[ line: 10 ]]
+	getMenuItems = function(_)
 		return {}
 	end,
-	onUpdateSelectedOption = function(_, _) --[[ line: 13 ]] end,
+	onUpdateSelectedOption = function(_, _) end,
 	readonlyValue = require(abuseReportMenu.Components.Constants).InappropriateContentAbuseReason
 }

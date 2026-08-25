@@ -8,7 +8,7 @@ local shopItemTileModule = require(inExperienceShop.Components.ShopItemTile)
 local _ = require(inExperienceShop.Types)
 local computeShopRowTileWidths = require(inExperienceShop.Components.computeShopRowTileWidths).computeShopRowTileWidths
 
-local function defaultRenderTile(p0, p1, _, p2, p3, p4, p5) --[[ line: 40 ]]
+local function defaultRenderTile(p0, p1, _, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), shopItemTileModule (ref)
 	return reactModule.createElement(shopItemTileModule, {
 		itemId = p0.id,
@@ -27,7 +27,7 @@ local function defaultRenderTile(p0, p1, _, p2, p3, p4, p5) --[[ line: 40 ]]
 	})
 end
 
-local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11) --[[ line: 68 ]]
+local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11)
 	-- upvalues: computeShopRowTileWidths (ref)
 	local var6 = false
 	
@@ -49,15 +49,15 @@ local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11) --[[ line: 68 ]]
 	}
 end
 
-local function _(p12) --[[ line: 102 | named "makeChildKey" ]]
+local function _(p12)
 	return "Item:" .. tostring(p12.itemType) .. ":" .. p12.id
 end
 
-return reactModule.memo(function(p13) --[[ line: 106 | named "ItemRow" ]]
+return reactModule.memo(function(p13)
 	-- upvalues: useTokens (ref), reactModule (ref), buildTileLayoutContext (ref), defaultRenderTile (ref), view (ref)
 	local medium = useTokens().Gap.Medium
 	local var8, var9 = reactModule.useState(0)
-	local var10 = reactModule.useCallback(function(p14) --[[ line: 111 ]]
+	local var10 = reactModule.useCallback(function(p14)
 		-- upvalues: var9 (ref)
 		local x = p14.AbsoluteSize.X
 		
@@ -66,10 +66,10 @@ return reactModule.memo(function(p13) --[[ line: 106 | named "ItemRow" ]]
 		end
 		var9(x)
 	end, {})
-	local isFeaturedDoubleWidthRobux = p13.isFeaturedDoubleWidthRobux or function(_, _) --[[ line: 120 ]]
+	local isFeaturedDoubleWidthRobux = p13.isFeaturedDoubleWidthRobux or function(_, _)
 		return false
 	end
-	local var12 = reactModule.useMemo(function() --[[ line: 124 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: buildTileLayoutContext (copy), p13 (ref), var8 (ref), medium (ref), isFeaturedDoubleWidthRobux (ref)
 		return buildTileLayoutContext(p13.items, p13.columnCount, var8, medium, p13.rowIndex, isFeaturedDoubleWidthRobux)
 	end, {

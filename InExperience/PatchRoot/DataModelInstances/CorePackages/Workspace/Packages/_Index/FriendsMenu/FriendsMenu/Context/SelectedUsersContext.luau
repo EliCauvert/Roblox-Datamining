@@ -1,11 +1,11 @@
 ﻿return require(script.Parent.Parent.Parent.React).createContext({
 	selectedFriendsSize = 0,
 	selectedFriends = {},
-	addFriend = function() --[[ line: 21 ]] end,
-	removeFriend = function() --[[ line: 22 ]] end,
-	isFriendSelected = function() --[[ line: 23 ]]
+	addFriend = function() end,
+	removeFriend = function() end,
+	isFriendSelected = function()
 		return false
 	end,
 	preselectedUsers = {},
-	onRemoveCallback = function() --[[ line: 27 ]] end
+	onRemoveCallback = function() end
 })

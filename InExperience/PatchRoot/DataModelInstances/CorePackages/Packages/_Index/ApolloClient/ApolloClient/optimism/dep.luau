@@ -12,12 +12,12 @@ local toArray = helpersModule.toArray
 local t_1 = { setDirty = true, dispose = true, forget = true }
 local _ = require(script.Parent.depTypes)
 
-function t.dep(p0) --[[ line: 66 ]]
+function t.dep(p0)
 	-- upvalues: parentEntrySlot (ref), set (ref), maybeUnsubscribe (ref), hasOwnProperty (ref), t_1 (ref), array (ref), toArray (ref)
 	local t = {}
 	local var5 = if p0 ~= nil then p0 else p0.subscribe
 	local tbl = setmetatable({}, {
-		__call = function(_, p1) --[[ line: 74 ]]
+		__call = function(_, p1)
 			-- upvalues: parentEntrySlot (copy), t (ref), set (copy), var5 (ref), maybeUnsubscribe (copy)
 			local value = parentEntrySlot:getValue()
 			
@@ -38,13 +38,13 @@ function t.dep(p0) --[[ line: 66 ]]
 		end
 	})
 	
-	function tbl.dirty(_, p2, p3) --[[ line: 101 ]]
+	function tbl.dirty(_, p2, p3)
 		-- upvalues: t (ref), hasOwnProperty (copy), t_1 (copy), array (copy), toArray (copy), maybeUnsubscribe (copy)
 		local var9 = t[p2]
 		
 		if var9 then
 			local var10 = if p3 and hasOwnProperty(t_1, p3) then p3 else "setDirty"
-			array.forEach(toArray(var9), function(p4) --[[ line: 112 ]]
+			array.forEach(toArray(var9), function(p4)
 				-- upvalues: var10 (ref)
 				p4[var10](p4)
 			end)

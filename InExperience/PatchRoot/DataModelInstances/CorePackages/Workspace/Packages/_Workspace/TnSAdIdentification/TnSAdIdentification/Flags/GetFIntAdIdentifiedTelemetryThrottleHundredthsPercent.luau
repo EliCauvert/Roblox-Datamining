@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("AdIdentifiedTelemetryThrottleHundredthsPercent", 10000)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastInt("AdIdentifiedTelemetryThrottleHundredthsPercent")
 end

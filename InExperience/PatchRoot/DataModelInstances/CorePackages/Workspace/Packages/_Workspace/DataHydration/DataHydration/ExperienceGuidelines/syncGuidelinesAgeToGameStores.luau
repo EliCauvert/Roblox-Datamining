@@ -7,7 +7,7 @@ local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiE
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
 
 return {
-	syncGuidelinesAgeToGameStores = function(p0, p1) --[[ line: 12 ]]
+	syncGuidelinesAgeToGameStores = function(p0, p1)
 		-- upvalues: fFlagLuaAppDataHydrationUpdateItem (ref), getGameInfoStoreModule (ref), fFlagSduiExperienceDetailsSupport (ref), getAgeRecommendationStoreModule (ref)
 		local ageRecommendationDetails = p1.ageRecommendationDetails
 		local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary

@@ -24,7 +24,7 @@ contactsImporterOverlay.validateProps = t.strictInterface({
 	isFromSignup = t.optional(t.boolean)
 })
 
-function contactsImporterOverlay.render(p0) --[[ line: 48 ]]
+function contactsImporterOverlay.render(p0)
 	-- upvalues: withLocalization (ref), textKeysModule (ref), withStyle (ref), buttonType (ref), roact (ref), partialPageModal (ref), imageSetLabel (ref), images (ref), iconSize (ref), styledTextLabel (ref)
 	return withLocalization({
 		connectWithFriends = textKeysModule.CONTACTS_LIST_TITLE,
@@ -34,9 +34,9 @@ function contactsImporterOverlay.render(p0) --[[ line: 48 ]]
 		closeModal = textKeysModule.CLOSE_MODAL,
 		goToAddFriends = textKeysModule.NOT_NOW,
 		learnMore = textKeysModule.LEARN_MORE
-	})(function(p1) --[[ line: 57 ]]
+	})(function(p1)
 		-- upvalues: withStyle (copy), p0 (ref), buttonType (copy), roact (copy), partialPageModal (copy), imageSetLabel (copy), images (copy), iconSize (copy), styledTextLabel (copy)
-		return withStyle(function(p2) --[[ line: 58 ]]
+		return withStyle(function(p2)
 			-- upvalues: p0 (copy), buttonType (copy), p1 (ref), roact (copy), partialPageModal (copy), imageSetLabel (copy), images (copy), iconSize (copy), styledTextLabel (copy)
 			local theme = p2.Theme
 			local font = p2.Font

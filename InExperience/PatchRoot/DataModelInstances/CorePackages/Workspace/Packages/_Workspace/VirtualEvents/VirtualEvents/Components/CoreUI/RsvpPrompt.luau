@@ -29,7 +29,7 @@ local scrollView = foundationModule.ScrollView
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local luaAppFixRsvpPromptDescriptionScrolling = game:DefineFastFlag("LuaAppFixRsvpPromptDescriptionScrolling", false)
 
-return function(p0) --[[ line: 74 ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), constantsModule (ref), useRoactService (ref), roactNetworking (ref), formatDateLocalizedModule (ref), useContext (ref), serviceOverrideContextModule (ref), postRsvpStatusModule (ref), notificationModalsManagerModule (ref), buttonType (ref), useDesignTokens (ref), useTokens (ref), luaAppFixRsvpPromptDescriptionScrolling (ref), textService (ref), loadableImage (ref), gameTileThumbnailBadges (ref), scrollView (ref), scrollBarVisibility (ref), text (ref), view (ref), interactiveAlert (ref)
 	local var12 = useScreenSize()
 	local var13 = p0.enableInputDelayed ~= nil or p0.enableInputDelayed
@@ -41,11 +41,11 @@ return function(p0) --[[ line: 74 ]]
 		dateAtTime = "Feature.VirtualEvents.Label.DateAtTime",
 		toastText = "Feature.VirtualEvents.Label.ReminderSetForEventTime"
 	})
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: mouseIconOverrideService (copy)
 		mouseIconOverrideService.push("RSVPPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function() --[[ line: 91 ]]
+		return function()
 			-- upvalues: mouseIconOverrideService (copy)
 			mouseIconOverrideService.pop("RSVPPromptOverride")
 		end
@@ -77,26 +77,26 @@ return function(p0) --[[ line: 74 ]]
 	end
 	local var21 = if isGoing then var14.unfollowEvent else var14.joinEvent
 	local socialService = useContext(serviceOverrideContextModule).socialService
-	local var22 = reactModule.useCallback(function() --[[ line: 142 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: isGoing (ref), postRsvpStatusModule (copy), var16 (ref), p0 (ref), socialService (ref), none (write), var14 (ref), displayTitle (ref), var20 (write), notificationModalsManagerModule (copy)
 		if isGoing then
-			postRsvpStatusModule(var16, p0.promptData.eventId, "notGoing"):andThen(function() --[[ line: 144 ]]
+			postRsvpStatusModule(var16, p0.promptData.eventId, "notGoing"):andThen(function()
 				-- upvalues: socialService (copy), p0 (copy), none (copy)
 				socialService:PromptRsvpToEventCompleted(p0.promptData.eventId, true, Enum.RsvpStatus.NotGoing, none)
-			end, function(p1) --[[ line: 151 ]]
+			end, function(p1)
 				-- upvalues: socialService (copy), p0 (copy), none (copy)
 				socialService:PromptRsvpToEventCompleted(p0.promptData.eventId, false, Enum.RsvpStatus.None, none)
 				warn("Error updating rsvp status: ", p1)
 			end)
 		else
-			postRsvpStatusModule(var16, p0.promptData.eventId, "going"):andThen(function() --[[ line: 161 ]]
+			postRsvpStatusModule(var16, p0.promptData.eventId, "going"):andThen(function()
 				-- upvalues: socialService (copy), p0 (copy), none (copy), var14 (copy), displayTitle (copy), var20 (copy), notificationModalsManagerModule (copy)
 				socialService:PromptRsvpToEventCompleted(p0.promptData.eventId, true, Enum.RsvpStatus.Going, none)
 				notificationModalsManagerModule.SetUIBloxToast({
 					toastTitle = var14.toastText:gsub("{(.-)}", { eventName = displayTitle, eventTime = var20 }),
 					sequenceNumber = DateTime.now().UnixTimestamp
 				})
-			end, function(p2) --[[ line: 178 ]]
+			end, function(p2)
 				-- upvalues: socialService (copy), p0 (copy), none (copy)
 				socialService:PromptRsvpToEventCompleted(p0.promptData.eventId, false, Enum.RsvpStatus.None, none)
 				warn("Error updating rsvp status: ", p2)
@@ -104,7 +104,7 @@ return function(p0) --[[ line: 74 ]]
 		end
 		p0.closePrompt()
 	end, { socialService, p0.closePrompt, isGoing })
-	local var23 = reactModule.useCallback(function() --[[ line: 191 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: eventDetails (ref), socialService (ref), p0 (ref), none (write)
 		local none_1 = Enum.RsvpStatus.None
 		
@@ -120,7 +120,7 @@ return function(p0) --[[ line: 74 ]]
 		p0.closePrompt,
 		eventDetails.userRsvpStatus
 	})
-	local var24 = reactModule.useMemo(function() --[[ line: 203 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: buttonType (copy), var13 (ref), var22 (ref), var18 (write)
 		return {
 			buttons = {
@@ -138,7 +138,7 @@ return function(p0) --[[ line: 74 ]]
 		}
 	end, { var14, var22, var13, var18 })
 	local var25, var26 = reactModule.useState(Vector2.new(0, 0))
-	local var27 = reactModule.useCallback(function(p3) --[[ line: 222 ]]
+	local var27 = reactModule.useCallback(function(p3)
 		-- upvalues: var26 (ref)
 		var26(p3.AbsoluteSize)
 	end, { var26 })
@@ -146,12 +146,12 @@ return function(p0) --[[ line: 74 ]]
 	local var30, var31 = reactModule.useState(0)
 	local var32 = reactModule.useRef(nil)
 	local var33 = reactModule.useRef(nil)
-	local var34 = reactModule.useCallback(function(p4) --[[ line: 232 ]]
+	local var34 = reactModule.useCallback(function(p4)
 		-- upvalues: var29 (ref)
 		local ceiled = math.ceil(p4.TextBounds.Y)
 		
 		if ceiled > 0 then
-			var29(function(p5) --[[ line: 235 ]]
+			var29(function(p5)
 				-- upvalues: ceiled (ref)
 				return if ceiled == p5 then p5 else ceiled
 			end)
@@ -161,13 +161,13 @@ return function(p0) --[[ line: 74 ]]
 	local var35 = useTokens()
 	local bodyLarge = var35.Typography.BodyLarge
 	local overrideUseWideMode = p0.overrideUseWideMode or (var12.Y < 600 and var12.Y < var12.X)
-	reactModule.useEffect(function() --[[ line: 255 ]]
+	reactModule.useEffect(function()
 		-- upvalues: luaAppFixRsvpPromptDescriptionScrolling (copy), var29 (ref)
 		if luaAppFixRsvpPromptDescriptionScrolling then
 			var29(0)
 		end
 	end, { overrideUseWideMode, displayDescription })
-	reactModule.useEffect(function() --[[ line: 261 ]]
+	reactModule.useEffect(function()
 		-- upvalues: luaAppFixRsvpPromptDescriptionScrolling (copy), var33 (ref), var31 (ref), var32 (ref), displayDescription (ref), textService (copy), var29 (ref)
 		if luaAppFixRsvpPromptDescriptionScrolling then
 			if var33.current then
@@ -191,7 +191,7 @@ return function(p0) --[[ line: 74 ]]
 		isMiddleContentFocusable = false,
 		onCloseClicked = var23,
 		buttonStackInfo = var24,
-		middleContent = reactModule.useCallback(function() --[[ line: 288 ]]
+		middleContent = reactModule.useCallback(function()
 			-- upvalues: var12 (ref), overrideUseWideMode (ref), var25 (ref), constantsModule (copy), luaAppFixRsvpPromptDescriptionScrolling (copy), var30 (ref), size300 (ref), var28 (ref), reactModule (copy), loadableImage (copy), var15 (write), dateTime (write), gameTileThumbnailBadges (copy), var20 (write), displayDescription (ref), bodyLarge (ref), var35 (ref), var34 (ref), var32 (ref), scrollView (copy), scrollBarVisibility (copy), text (copy), view (copy), var27 (ref), displayTitle (ref), var33 (ref)
 			local var39 = var12.Y - 80 - 200
 			

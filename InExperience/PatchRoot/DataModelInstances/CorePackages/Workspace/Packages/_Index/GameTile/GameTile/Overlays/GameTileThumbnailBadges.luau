@@ -9,7 +9,7 @@ local _ = require(gameTile.GameTileTypes)
 local tileBadgeIconNamesByType = gameTileConstantsModule.TileBadgeIconNamesByType
 local tileBadgeComponentTypeValues = gameTileConstantsModule.TileBadgeComponentTypeValues
 
-local function getBadgeStyleOptions(p0, p1) --[[ line: 19 ]]
+local function getBadgeStyleOptions(p0, p1)
 	-- upvalues: tileBadgeComponentTypeValues (ref), flaggedMutedError (ref)
 	local t = {
 		[tileBadgeComponentTypeValues.Pill] = {
@@ -33,14 +33,14 @@ local function getBadgeStyleOptions(p0, p1) --[[ line: 19 ]]
 	return var6 or t[tileBadgeComponentTypeValues.Pill]
 end
 
-return reactModule.memo(function(p2) --[[ line: 47 | named "GameTileThumbnailBadges" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: useTokens (ref), reactModule (ref), gameTileConstantsModule (ref), flaggedMutedError (ref), tileBadgeIconNamesByType (ref), gameTileOverlayBadgeModule (ref), getBadgeStyleOptions (ref)
 	local _ = nil
 	local _ = nil
 	local var7 = useTokens()
 	local medium = var7.Padding.Medium
 	local var8, var9 = reactModule.useBinding(0)
-	local var10 = reactModule.useCallback(function(p3) --[[ line: 55 ]]
+	local var10 = reactModule.useCallback(function(p3)
 		-- upvalues: var9 (ref), medium (write)
 		var9(p3.AbsoluteSize.X - medium * 2)
 	end, { medium })

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p0, p1) --[[ line: 14 | named "blendColors" ]]
+return function(p0, p1)
 	local var0 = 1 - (p1.Transparency or 0)
 	local var1 = 1 - (p0.Transparency or 0)
 	

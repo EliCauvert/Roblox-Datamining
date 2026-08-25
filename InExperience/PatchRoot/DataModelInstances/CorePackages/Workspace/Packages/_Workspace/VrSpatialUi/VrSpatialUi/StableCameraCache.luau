@@ -3,11 +3,11 @@ local var0 = game:DefineFastInt("SpatialUIHeadLookDotNoMovementThreshold", 990) 
 local t = {}
 t.__index = t
 
-function t:getCurrentStableCameraCFrame() --[[ line: 18 ]]
+function t:getCurrentStableCameraCFrame()
 	return self.lastCameraCFrame
 end
 
-function t:updateAndCheckCameraMoved() --[[ line: 22 ]]
+function t:updateAndCheckCameraMoved()
 	-- upvalues: VRUtil (ref), var0 (ref)
 	local userCFrameWorldSpace = VRUtil.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
 	
@@ -25,7 +25,7 @@ function t:updateAndCheckCameraMoved() --[[ line: 22 ]]
 	return true
 end
 
-function t.new() --[[ line: 44 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { lastUserHeadCFrame = nil, lastCameraCFrame = nil }
 	setmetatable(t_1, t)

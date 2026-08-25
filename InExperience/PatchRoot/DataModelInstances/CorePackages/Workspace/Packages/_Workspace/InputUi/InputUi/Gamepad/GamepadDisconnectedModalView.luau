@@ -10,7 +10,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local _ = require(script.Parent.GamepadDisconnectTokenMapper)
 local gamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref)
 	local gamepadDisconnectMessageKeyItem
 	local var5 = useDesignTokens()

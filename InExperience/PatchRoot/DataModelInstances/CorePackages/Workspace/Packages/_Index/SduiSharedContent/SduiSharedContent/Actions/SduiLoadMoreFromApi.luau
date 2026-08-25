@@ -8,7 +8,7 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 
-return function(p0, _, p1) --[[ line: 20 ]]
+return function(p0, _, p1)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiPageAnalytics (ref), sduiLoadTimer (ref), getSduiApiStore (ref), fFlagSduiChartsSupport (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	
@@ -49,7 +49,7 @@ return function(p0, _, p1) --[[ line: 20 ]]
 	local var4 = getSduiApiStore().loadMoreFromApi({ configKey = configKey, loadTimer = var3 })
 	
 	if fFlagSduiChartsSupport then
-		var4:finally(function() --[[ line: 64 ]]
+		var4:finally(function()
 			-- upvalues: var3 (ref)
 			var3.logRefreshComplete()
 		end)

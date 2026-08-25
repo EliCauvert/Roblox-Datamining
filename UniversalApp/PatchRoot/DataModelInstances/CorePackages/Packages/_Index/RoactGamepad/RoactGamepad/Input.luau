@@ -14,7 +14,7 @@ local t = {
 }
 local t_1 = {}
 
-local function _() --[[ line: 26 | named "initializeEngineGamepadState" ]]
+local function _()
 	return {
 		gamepadConnectedConnection = nil,
 		gamepadDisconnectedConnection = nil,
@@ -23,7 +23,7 @@ local function _() --[[ line: 26 | named "initializeEngineGamepadState" ]]
 	}
 end
 
-local _ = function(p0) --[[ line: 35 | named "getEngineState" ]]
+local _ = function(p0)
 	-- upvalues: t_1 (ref)
 	if t_1[p0] == nil then
 		t_1[p0] = {
@@ -36,7 +36,7 @@ local _ = function(p0) --[[ line: 35 | named "getEngineState" ]]
 	return t_1[p0]
 end
 
-local function updatePrimaryGamepad(p1) --[[ line: 43 ]]
+local function updatePrimaryGamepad(p1)
 	-- upvalues: t_1 (ref)
 	if t_1[p1] == nil then
 		t_1[p1] = {
@@ -63,9 +63,9 @@ local function updatePrimaryGamepad(p1) --[[ line: 43 ]]
 	end
 end
 
-local _ = function(p2, p3) --[[ line: 64 | named "getInputEvent" ]]
+local _ = function(p2, p3)
 	-- upvalues: debugPrintModule (ref)
-	return function(p4) --[[ line: 65 ]]
+	return function(p4)
 		-- upvalues: p3 (ref), debugPrintModule (copy), p2 (ref)
 		if p3(p4) then
 			debugPrintModule("[EVENT] Process input: ", p4.KeyCode, "-", p4.UserInputState)
@@ -74,7 +74,7 @@ local _ = function(p2, p3) --[[ line: 64 | named "getInputEvent" ]]
 	end
 end
 
-local function wrapWithGamepadStateListener(p5, p6) --[[ line: 73 ]]
+local function wrapWithGamepadStateListener(p5, p6)
 	-- upvalues: t_1 (ref), updatePrimaryGamepad (ref)
 	if t_1[p5] == nil then
 		t_1[p5] = {
@@ -88,18 +88,18 @@ local function wrapWithGamepadStateListener(p5, p6) --[[ line: 73 ]]
 	
 	if var13.onStepConnections == 0 then
 		updatePrimaryGamepad(p5)
-		var13.gamepadConnectedConnection = p5.subscribeToGamepadConnected(function() --[[ line: 78 ]]
+		var13.gamepadConnectedConnection = p5.subscribeToGamepadConnected(function()
 			-- upvalues: updatePrimaryGamepad (copy), p5 (ref)
 			updatePrimaryGamepad(p5)
 		end)
-		var13.gamepadDisconnectedConnection = p5.subscribeToGamepadDisconnected(function() --[[ line: 81 ]]
+		var13.gamepadDisconnectedConnection = p5.subscribeToGamepadDisconnected(function()
 			-- upvalues: updatePrimaryGamepad (copy), p5 (ref)
 			updatePrimaryGamepad(p5)
 		end)
 	end
 	var13.onStepConnections += 1
 	
-	return function() --[[ line: 87 ]]
+	return function()
 		-- upvalues: p6 (ref), var13 (ref)
 		p6:Disconnect()
 		var13.onStepConnections -= 1
@@ -113,15 +113,15 @@ local function wrapWithGamepadStateListener(p5, p6) --[[ line: 73 ]]
 	end
 end
 
-local function connectToEvent(p7, p8) --[[ line: 101 ]]
+local function connectToEvent(p7, p8)
 	-- upvalues: configModule (ref), inputBindingKindModule (ref), t (ref), debugPrintModule (ref), t_1 (ref), wrapWithGamepadStateListener (ref)
-	local function _(p9) --[[ line: 102 | named "matchesBindingKeyCode" ]]
+	local function _(p9)
 		-- upvalues: configModule (copy), p7 (ref)
 		return if configModule.DebugKeyboardBindings and table.find(configModule.DebugKeyboardBindings[p7.keyCode] or {}, p9.KeyCode) then true else p9.KeyCode == p7.keyCode
 	end
 	
 	if p7.kind == inputBindingKindModule.Begin then
-		local function matchInput(p10) --[[ line: 114 ]]
+		local function matchInput(p10)
 			-- upvalues: t (copy), configModule (copy), p7 (ref)
 			local userInputType = t[p10.UserInputType]
 			
@@ -139,7 +139,7 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 		end
 		
 		local action = p7.action
-		local var15 = p8.subscribeToInputBegan(function(p11) --[[ line: 65 ]]
+		local var15 = p8.subscribeToInputBegan(function(p11)
 			-- upvalues: matchInput (ref), debugPrintModule (copy), action (ref)
 			if matchInput(p11) then
 				debugPrintModule("[EVENT] Process input: ", p11.KeyCode, "-", p11.UserInputState)
@@ -147,12 +147,12 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 			end
 		end)
 		
-		return function() --[[ line: 122 ]]
+		return function()
 			-- upvalues: var15 (ref)
 			var15:Disconnect()
 		end
 	elseif p7.kind == inputBindingKindModule.End then
-		local function matchInput(p12) --[[ line: 126 ]]
+		local function matchInput(p12)
 			-- upvalues: t (copy), configModule (copy), p7 (ref)
 			local userInputType = t[p12.UserInputType]
 			
@@ -170,7 +170,7 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 		end
 		
 		local action = p7.action
-		local var17 = p8.subscribeToInputEnded(function(p13) --[[ line: 65 ]]
+		local var17 = p8.subscribeToInputEnded(function(p13)
 			-- upvalues: matchInput (ref), debugPrintModule (copy), action (ref)
 			if matchInput(p13) then
 				debugPrintModule("[EVENT] Process input: ", p13.KeyCode, "-", p13.UserInputState)
@@ -178,7 +178,7 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 			end
 		end)
 		
-		return function() --[[ line: 134 ]]
+		return function()
 			-- upvalues: var17 (ref)
 			var17:Disconnect()
 		end
@@ -193,7 +193,7 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 		end
 		local var18 = t_1[p8]
 		
-		return wrapWithGamepadStateListener(p8, p8.subscribeToRenderStepped(function(p14) --[[ line: 140 ]]
+		return wrapWithGamepadStateListener(p8, p8.subscribeToRenderStepped(function(p14)
 			-- upvalues: p7 (ref), var18 (ref)
 			p7.action(var18.primaryGamepadState[p7.keyCode], p14)
 		end))
@@ -209,7 +209,7 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 	end
 	local var19 = t_1[p8]
 	
-	return wrapWithGamepadStateListener(p8, p8.subscribeToRenderStepped(function(p15) --[[ line: 149 ]]
+	return wrapWithGamepadStateListener(p8, p8.subscribeToRenderStepped(function(p15)
 		-- upvalues: var19 (ref), p7 (ref)
 		p7.action({
 			[Enum.KeyCode.Thumbstick1] = var19.primaryGamepadState[Enum.KeyCode.Thumbstick1],
@@ -221,8 +221,8 @@ local function connectToEvent(p7, p8) --[[ line: 101 ]]
 	end))
 end
 
-local _ = function(p16) --[[ line: 167 | named "makeInputBinding" ]]
-	return function(p17, p18, p19) --[[ line: 168 ]]
+local _ = function(p16)
+	return function(p17, p18, p19)
 		-- upvalues: p16 (ref)
 		assert(typeof(p17) == "EnumItem" and p17.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 		assert(typeof(p18) == "function", "Invalid argument #2: expected a function")
@@ -231,13 +231,13 @@ local _ = function(p16) --[[ line: 167 | named "makeInputBinding" ]]
 	end
 end
 
-local function onMoveStepInputBinding(p20) --[[ line: 184 ]]
+local function onMoveStepInputBinding(p20)
 	-- upvalues: inputBindingKindModule (ref)
 	return { kind = inputBindingKindModule.MoveStep, action = p20 }
 end
 
 local t_2 = {
-	getUniqueKey = function(p21) --[[ line: 191 ]]
+	getUniqueKey = function(p21)
 		return if p21.keyCode then tostring(p21.kind) .. "-" .. tostring(p21.keyCode) else tostring(p21.kind)
 	end,
 	connectToEvent = connectToEvent
@@ -245,7 +245,7 @@ local t_2 = {
 local t_3 = {}
 local begin = inputBindingKindModule.Begin
 
-function t_3.onBegin(p22, p23, p24) --[[ line: 168 ]]
+function t_3.onBegin(p22, p23, p24)
 	-- upvalues: begin (ref)
 	assert(typeof(p22) == "EnumItem" and p22.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 	assert(typeof(p23) == "function", "Invalid argument #2: expected a function")
@@ -255,7 +255,7 @@ end
 
 local _end = inputBindingKindModule.End
 
-function t_3.onEnd(p25, p26, p27) --[[ line: 168 ]]
+function t_3.onEnd(p25, p26, p27)
 	-- upvalues: _end (ref)
 	assert(typeof(p25) == "EnumItem" and p25.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 	assert(typeof(p26) == "function", "Invalid argument #2: expected a function")
@@ -265,7 +265,7 @@ end
 
 local step = inputBindingKindModule.Step
 
-function t_3.onStep(p28, p29, p30) --[[ line: 168 ]]
+function t_3.onStep(p28, p29, p30)
 	-- upvalues: step (ref)
 	assert(typeof(p28) == "EnumItem" and p28.EnumType == Enum.KeyCode, "Invalid argument #1: expected a member of Enum.KeyCode")
 	assert(typeof(p29) == "function", "Invalid argument #2: expected a function")

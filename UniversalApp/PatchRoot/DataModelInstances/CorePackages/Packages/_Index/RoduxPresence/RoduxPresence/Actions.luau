@@ -1,4 +1,4 @@
-﻿return function(_) --[[ line: 1 ]]
+﻿return function(_)
 	return {
 		ReceivedUserPresence = require(script.ReceivedUserPresence),
 		ActionDomain = require(script.ActionDomain)

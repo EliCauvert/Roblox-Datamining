@@ -1,6 +1,6 @@
 ﻿local fFlagSduiAlwaysCacheWithIdentifier = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
 
-return function(p0, p1, p2) --[[ line: 15 | named "resolveSduiCacheEntry" ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagSduiAlwaysCacheWithIdentifier (ref)
 	if not p0 then
 		return nil

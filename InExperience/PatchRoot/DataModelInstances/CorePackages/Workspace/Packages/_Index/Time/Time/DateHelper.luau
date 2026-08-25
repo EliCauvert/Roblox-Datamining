@@ -99,7 +99,7 @@ local t = {
 			[timeUnitModule.Years] = 3
 		}
 	}, {
-		__index = function(_, _) --[[ line: 118 ]]
+		__index = function(_, _)
 			-- upvalues: timeUnitModule (ref)
 			return {
 				[timeUnitModule.Years] = 1,
@@ -115,7 +115,7 @@ local t = {
 		["ko-kr"] = "Suffix",
 		["ja-jp"] = "Suffix"
 	}, {
-		__index = function(_, _) --[[ line: 140 ]]
+		__index = function(_, _)
 			return "None"
 		end
 	}),
@@ -126,19 +126,19 @@ local t = {
 		["ko-kr"] = "Suffix",
 		["ja-jp"] = "Suffix"
 	}, {
-		__index = function(_, _) --[[ line: 152 ]]
+		__index = function(_, _)
 			return "None"
 		end
 	}),
-	GetFormattedDayString = function(p0, p1, p2, p3) --[[ line: 157 ]]
+	GetFormattedDayString = function(p0, p1, p2, p3)
 		-- upvalues: timeUnitModule (ref)
 		return p0:GetFormattedString(timeUnitModule.Days, p1, p2, p3)
 	end,
-	GetFormattedYearString = function(p4, p5, p6, p7) --[[ line: 161 ]]
+	GetFormattedYearString = function(p4, p5, p6, p7)
 		-- upvalues: timeUnitModule (ref)
 		return p4:GetFormattedString(timeUnitModule.Years, p5, p6, p7)
 	end,
-	GetFormattedString = function(p8, p9, p10, p11, p12) --[[ line: 165 ]]
+	GetFormattedString = function(p8, p9, p10, p11, p12)
 		-- upvalues: argCheckModule (ref), timeUnitModule (ref)
 		argCheckModule.isNotNil(p9, "timeUnit passed into DateHelper:GetFormattedString")
 		argCheckModule.isNotNil(p11, "affix passed into DateHelper:GetFormattedString")
@@ -152,7 +152,7 @@ local t = {
 		end
 		return if var9 == "Prefix" then p11 .. string elseif var9 == "Suffix" then string .. p11 else string
 	end,
-	GetFormattedFullString = function(p13, p14, p15, p16, p17, p18, p19, p20) --[[ line: 186 ]]
+	GetFormattedFullString = function(p13, p14, p15, p16, p17, p18, p19, p20)
 		-- upvalues: argCheckModule (ref), timeUnitModule (ref)
 		local string = argCheckModule.isType(p14, "string", "localizedMonthString passed into DateHelper:GetFormattedFullString")
 		local string_1 = argCheckModule.isType(p19, "string", "divider passed into DateHelper:GetFormattedFullString")
@@ -177,7 +177,7 @@ local t = {
 }
 local _ = { Prefix = "Prefix", Suffix = "Suffix", None = "None" }
 
-local function getCurrentDate() --[[ line: 217 ]]
+local function getCurrentDate()
 	-- upvalues: dateTimeModule (ref), timeUnitModule (ref), argCheckModule (ref)
 	local values = dateTimeModule.now():GetValues()
 	
@@ -188,12 +188,12 @@ local function getCurrentDate() --[[ line: 217 ]]
 	}
 end
 
-function t.getCurrentDate(_) --[[ line: 227 ]]
+function t.getCurrentDate(_)
 	-- upvalues: getCurrentDate (ref)
 	return getCurrentDate()
 end
 
-local function getCurrentDateWithOffset(value) --[[ line: 231 ]]
+local function getCurrentDateWithOffset(value)
 	-- upvalues: dateTimeModule (ref), timeUnitModule (ref), argCheckModule (ref)
 	local values = dateTimeModule.fromUnixTimestamp(dateTimeModule.now():GetUnixTimestamp() + value):GetValues()
 	
@@ -204,28 +204,28 @@ local function getCurrentDateWithOffset(value) --[[ line: 231 ]]
 	}
 end
 
-function t.isLeapYear(_, p21) --[[ line: 242 ]]
+function t.isLeapYear(_, p21)
 	return p21 % 4 == 0 and (if p21 % 100 == 0 then p21 % 400 == 0 else true)
 end
 
 local t_1 = {}
 
-function t._isFutureDate(_, p22, p23, p24, p25) --[[ line: 248 ]]
+function t._isFutureDate(_, p22, p23, p24, p25)
 	-- upvalues: timeUnitModule (ref)
 	return p22[timeUnitModule.Years] < p25 or (p25 == p22[timeUnitModule.Years] and p22[timeUnitModule.Months] < p23 or p25 == p22[timeUnitModule.Years] and p23 == p22[timeUnitModule.Months] and p22[timeUnitModule.Days] < p24)
 end
 
-function t.isFutureDate(p26, p27, p28, p29) --[[ line: 264 ]]
+function t.isFutureDate(p26, p27, p28, p29)
 	-- upvalues: getCurrentDate (ref)
 	return p26:_isFutureDate(getCurrentDate(), p27, p28, p29)
 end
 
-function t.isRecentOrFutureDate(p30, p31, p32, p33) --[[ line: 270 ]]
+function t.isRecentOrFutureDate(p30, p31, p32, p33)
 	-- upvalues: getCurrentDateWithOffset (ref)
 	return p30:_isFutureDate(getCurrentDateWithOffset(-172800), p31, p32, p33)
 end
 
-function t.getLastDayOfTheMonthInYear(p34, p35, p36) --[[ line: 275 ]]
+function t.getLastDayOfTheMonthInYear(p34, p35, p36)
 	-- upvalues: t_1 (ref)
 	if t_1[p35] and t_1[p35][p36] then
 		return t_1[p35][p36]
@@ -241,11 +241,11 @@ function t.getLastDayOfTheMonthInYear(p34, p35, p36) --[[ line: 275 ]]
 	return var17
 end
 
-function t.isInvalidDayOfTheMonth(p37, p38, p39, p40) --[[ line: 297 ]]
+function t.isInvalidDayOfTheMonth(p37, p38, p39, p40)
 	return p37:getLastDayOfTheMonthInYear(p38, p40) < p39
 end
 
-function t.isValidDate(p41, p42, p43, p44) --[[ line: 309 ]]
+function t.isValidDate(p41, p42, p43, p44)
 	-- upvalues: getFFlagSignUpBirthdayPickerRequireManualSelection (ref)
 	if getFFlagSignUpBirthdayPickerRequireManualSelection() and (p42 == nil or p43 == nil or p44 == nil) then
 		return false, p41.ReasonDateInvalid.IsIncompleteDate
@@ -257,7 +257,7 @@ function t.isValidDate(p41, p42, p43, p44) --[[ line: 309 ]]
 	return true, nil
 end
 
-local function generateCellDatas(p45, p46, p47) --[[ line: 326 ]]
+local function generateCellDatas(p45, p46, p47)
 	local t = {}
 	
 	for i = p45, p46, p47 or 1 do
@@ -266,17 +266,17 @@ local function generateCellDatas(p45, p46, p47) --[[ line: 326 ]]
 	return t
 end
 
-function t.generateMonthCellDatas(_) --[[ line: 338 ]]
+function t.generateMonthCellDatas(_)
 	-- upvalues: generateCellDatas (ref)
 	return generateCellDatas(1, 12)
 end
 
-function t.generateDayCellDatas(_) --[[ line: 342 ]]
+function t.generateDayCellDatas(_)
 	-- upvalues: generateCellDatas (ref)
 	return generateCellDatas(1, 31)
 end
 
-function t.generateYearCellDatas(_, p48, p49) --[[ line: 346 ]]
+function t.generateYearCellDatas(_, p48, p49)
 	-- upvalues: getCurrentDate (ref), timeUnitModule (ref), generateCellDatas (ref)
 	return generateCellDatas(p49 or getCurrentDate()[timeUnitModule.Years], p48 or p49 - 100, -1)
 end

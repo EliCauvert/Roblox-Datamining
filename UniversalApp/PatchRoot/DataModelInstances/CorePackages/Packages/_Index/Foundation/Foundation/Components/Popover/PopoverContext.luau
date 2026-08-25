@@ -9,11 +9,11 @@ return reactModule.createContext({
 	anchorUri = nil,
 	isOpen = false,
 	testId = "",
-	setAnchor = function(_) --[[ line: 13 ]]
+	setAnchor = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("No PopoverProvider found for Popover")
 	end,
-	setAnchorUri = function(_) --[[ line: 17 ]]
+	setAnchorUri = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("No PopoverProvider found for Popover")
 	end

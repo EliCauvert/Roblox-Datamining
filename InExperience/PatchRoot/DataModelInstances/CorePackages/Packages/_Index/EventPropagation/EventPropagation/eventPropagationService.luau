@@ -4,21 +4,21 @@ local mockableWarn = focusNavigationUtilsModule.mockableWarn
 local eventPropagationEventModule = require(script.Parent.eventPropagationEvent)
 local dEBUGEVENTPROPAGATION = _G.__DEBUG_EVENT_PROPAGATION__
 
-local function describeFunction(p0) --[[ line: 113 ]]
+local function describeFunction(p0)
 	return table.concat(table.pack(debug.info(p0, "sln")), " ")
 end
 
-local function _(p1, p2) --[[ line: 117 | named "getEventsFromRegistry" ]]
+local function _(p1, p2)
 	return p1[p2]
 end
 
-local _ = function(p3, p4, p5) --[[ line: 121 | named "getEventPhasesFromRegistry" ]]
+local _ = function(p3, p4, p5)
 	local var4 = p3[p4]
 	
 	return if var4 then var4[p5] else nil
 end
 
-local _ = function(p6, p7, p8, p9) --[[ line: 130 | named "getEventHandler" ]]
+local _ = function(p6, p7, p8, p9)
 	local var5 = p6[p7]
 	local var6 = if var5 then var5[p8] else nil
 	
@@ -28,7 +28,7 @@ end
 local t = {}
 t.__index = t
 
-function t:registerEventHandler(p10, p11, p12, p13) --[[ line: 143 ]]
+function t:registerEventHandler(p10, p11, p12, p13)
 	-- upvalues: dEBUGEVENTPROPAGATION (ref), mockableWarn (ref), describeFunction (ref)
 	if dEBUGEVENTPROPAGATION then
 		print("+++ register handler", p11, tostring(p10), p13 or "Bubble")
@@ -47,7 +47,7 @@ function t:registerEventHandler(p10, p11, p12, p13) --[[ line: 143 ]]
 	self.eventHandlerRegistry[p10][p11][p13] = p12
 end
 
-function t:registerEventHandlers(p14, p15) --[[ line: 174 ]]
+function t:registerEventHandlers(p14, p15)
 	if not self.eventHandlerRegistry[p14] then
 		self.eventHandlerRegistry[p14] = {}
 	end
@@ -56,14 +56,14 @@ function t:registerEventHandlers(p14, p15) --[[ line: 174 ]]
 	end
 end
 
-function t:deregisterEventHandlers(p16, p17) --[[ line: 183 ]]
+function t:deregisterEventHandlers(p16, p17)
 	if not self.eventHandlerRegistry[p16] then return end
 	for i, v in p17 do
 		self:deregisterEventHandler(p16, i, v.handler, v.phase)
 	end
 end
 
-function t:deregisterEventHandler(p18, p19, p20, p21) --[[ line: 192 ]]
+function t:deregisterEventHandler(p18, p19, p20, p21)
 	-- upvalues: dEBUGEVENTPROPAGATION (ref), mockableWarn (ref)
 	if dEBUGEVENTPROPAGATION then
 		print("--- deregister handler", p19, tostring(p18), p21 or "Bubble")
@@ -88,7 +88,7 @@ function t:deregisterEventHandler(p18, p19, p20, p21) --[[ line: 192 ]]
 	end
 end
 
-function t:getRegisteredEventHandlers(p22) --[[ line: 233 ]]
+function t:getRegisteredEventHandlers(p22)
 	local var13 = self.eventHandlerRegistry[p22]
 	
 	if not var13 then
@@ -102,13 +102,13 @@ function t:getRegisteredEventHandlers(p22) --[[ line: 233 ]]
 	return t
 end
 
-function t:propagateEvent(p23, p24, p25, p26) --[[ line: 247 ]]
+function t:propagateEvent(p23, p24, p25, p26)
 	-- upvalues: eventPropagationEventModule (ref), getAncestors (ref), dEBUGEVENTPROPAGATION (ref)
 	p26 = p26 or {}
 	local synthetic = p26.synthetic or false
 	local silent = p26.silent or false
 	
-	local function _(p27, p28) --[[ line: 257 | named "runEventHandler" ]]
+	local function _(p27, p28)
 		-- upvalues: self (ref), p24 (ref), eventPropagationEventModule (copy), p23 (ref), synthetic (ref), p25 (ref)
 		local var33 = self.eventHandlerRegistry[p27]
 		local var34 = if var33 then var33[p24] else nil
@@ -183,7 +183,7 @@ function t:propagateEvent(p23, p24, p25, p26) --[[ line: 247 ]]
 	end
 end
 
-function t.new() --[[ line: 304 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {
 		eventHandlerRegistry = setmetatable({}, { __mode = "k" })

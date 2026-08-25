@@ -44,9 +44,9 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 36 | named "Frame" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), t (ref)
-	local var2, var3 = reactModule.useMemo(function() --[[ line: 37 ]]
+	local var2, var3 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), t (copy)
 		if p0.horizontalAlignment and p0.verticalAlignment then
 			return t[p0.horizontalAlignment][p0.verticalAlignment].anchor, t[p0.horizontalAlignment][p0.verticalAlignment].position

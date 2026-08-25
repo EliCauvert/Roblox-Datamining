@@ -16,7 +16,7 @@ local useImpressionsTagger = require(parent.Impressions).useImpressionsTagger
 local fFlagStreamNotificationImpressionLogging = sharedFlagsModule.FFlagStreamNotificationImpressionLogging
 local t = { stiffness = 207, damping = 24, mass = 1 }
 
-return function(p0) --[[ line: 51 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), streamNotificationDropdownExperimentationModule (ref), marshalStreamNotificationData (ref), reactModule (ref), reactOtterModule (ref), t (ref), constantsModule (ref), fFlagStreamNotificationImpressionLogging (ref), useImpressionsTagger (ref), darkTheme (ref), notificationCardProvider (ref), notificationCard (ref)
 	local var9 = useStyle()
 	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
@@ -28,13 +28,13 @@ return function(p0) --[[ line: 51 ]]
 		transparency = 1,
 		collapsedHeight = if p0.collapsed then 0 else 1,
 		collapsedWidth = if p0.collapsed then 1 else 0
-	}, function() --[[ line: 63 ]]
+	}, function()
 		-- upvalues: p0 (ref)
 		if p0.notification.dismiss then
 			p0.finishDismissNotification(p0.notification.id)
 		end
 	end)
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), reactOtterModule (copy), p0 (ref), t (copy)
 		var16({
 			dismissHeight = reactOtterModule.spring(if p0.notification.dismiss then 0 else 1, t),
@@ -44,14 +44,14 @@ return function(p0) --[[ line: 51 ]]
 		})
 	end, { p0.notification.dismiss, p0.collapsed })
 	
-	local var17 = function(p1) --[[ line: 79 ]]
+	local var17 = function(p1)
 		-- upvalues: p0 (ref)
 		if p0.onHeightChange then
 			p0.onHeightChange(p0.layoutOrder, p1.AbsoluteSize.Y)
 		end
 	end
 	
-	local var18 = function(p2) --[[ line: 85 ]]
+	local var18 = function(p2)
 		-- upvalues: p0 (ref), dropdownEnabled (ref), constantsModule (copy), var14 (ref)
 		if p0.notification.dismiss ~= true then
 			var14(p2.AbsoluteSize.Y + (if dropdownEnabled then 0 else constantsModule.DefaultPadding))
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 51 ]]
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ref = var12,
-		Size = var15:map(function(p3) --[[ line: 114 ]]
+		Size = var15:map(function(p3)
 			-- upvalues: p0 (ref), var19 (write), var20 (write), var13 (ref), dropdownEnabled (ref), constantsModule (copy)
 			return if p0.layoutOrder == 1 and p0.collapsed then UDim2.new(1, -(var19 + var20 * p3.collapsedWidth), 0, p3.collapsedHeight * p3.dismissHeight * var13 + (if dropdownEnabled then 0 else constantsModule.DefaultPadding)) else UDim2.new(1, -(var19 + var20 * p3.collapsedWidth), 0, p3.collapsedHeight * p3.dismissHeight * var13)
 		end),
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 51 ]]
 		ZIndex = if p0.layoutOrder then -p0.layoutOrder else 1
 	}, {
 		DismissFrame = reactModule.createElement("Frame", {
-			Size = var15:map(function(p4) --[[ line: 138 ]]
+			Size = var15:map(function(p4)
 				-- upvalues: var13 (ref)
 				return UDim2.new(1, 0, 0, p4.dismissHeight * var13)
 			end),
@@ -101,7 +101,7 @@ return function(p0) --[[ line: 51 ]]
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundColor3 = if var9.theme == darkTheme then var9.Theme.Overlay.Color else var9.Theme.BackgroundMuted.Color,
-				BackgroundTransparency = var15:map(function(p5) --[[ line: 152 ]]
+				BackgroundTransparency = var15:map(function(p5)
 					return p5.transparency
 				end),
 				Position = UDim2.fromScale(0.5, 0),

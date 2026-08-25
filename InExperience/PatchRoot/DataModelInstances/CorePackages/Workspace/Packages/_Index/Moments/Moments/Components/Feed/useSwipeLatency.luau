@@ -12,7 +12,7 @@ local t = {
 }
 local momentsSwipeLatencyCapMs = game:DefineFastInt("MomentsSwipeLatencyCapMs", 15000)
 
-local function fireSwipeLatency(p0, p1, p2) --[[ line: 58 ]]
+local function fireSwipeLatency(p0, p1, p2)
 	-- upvalues: analytics (ref), t (ref)
 	analytics.fireAnalyticsEvent(analytics.EventNames.MomentsSwipeLatency, {
 		mediaWaitMs = tostring(p0),
@@ -21,7 +21,7 @@ local function fireSwipeLatency(p0, p1, p2) --[[ line: 58 ]]
 	})
 end
 
-return function(p3) --[[ line: 66 | named "useSwipeLatency" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), fireSwipeLatency (ref), swipeLatencyMachineModule (ref), momentsSwipeLatencyCapMs (ref), signalsModule (ref)
 	local getIsSettled = p3.getIsSettled
 	local getHasPresentedFrame = p3.getHasPresentedFrame
@@ -29,20 +29,20 @@ return function(p3) --[[ line: 66 | named "useSwipeLatency" ]]
 	local getCaptureType = p3.getCaptureType
 	local var7 = reactModule.useRef(p3.onMeasurement or fireSwipeLatency)
 	var7.current = p3.onMeasurement or fireSwipeLatency
-	local var8 = reactModule.useMemo(function() --[[ line: 80 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: p3 (ref), swipeLatencyMachineModule (copy), momentsSwipeLatencyCapMs (copy), var7 (ref)
 		return swipeLatencyMachineModule({
-			now = p3.now or function() --[[ line: 81 ]]
+			now = p3.now or function()
 				return os.clock() * 1000
 			end,
 			capMs = p3.capMs or momentsSwipeLatencyCapMs,
-			onMeasurement = function(p4, p5, p6) --[[ line: 87 ]]
+			onMeasurement = function(p4, p5, p6)
 				-- upvalues: var7 (copy)
 				var7.current(p4, p5, p6)
 			end
 		})
 	end, {})
-	local var9 = reactModule.useCallback(function(_, _, p7) --[[ line: 93 ]]
+	local var9 = reactModule.useCallback(function(_, _, p7)
 		-- upvalues: var8 (ref), getIsSettled (ref), getTargetHasPresentedFrame (ref), getCaptureType (ref)
 		var8.start(getIsSettled(false), getTargetHasPresentedFrame(p7), { captureType = getCaptureType(p7) })
 	end, {
@@ -51,9 +51,9 @@ return function(p3) --[[ line: 66 | named "useSwipeLatency" ]]
 		getTargetHasPresentedFrame,
 		getCaptureType
 	})
-	reactModule.useEffect(function() --[[ line: 100 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var8 (ref), getIsSettled (ref), getHasPresentedFrame (ref)
-		return signalsModule.createEffect(function(p8) --[[ line: 101 ]]
+		return signalsModule.createEffect(function(p8)
 			-- upvalues: var8 (copy), getIsSettled (copy), getHasPresentedFrame (copy)
 			var8.update(getIsSettled(p8), getHasPresentedFrame(p8))
 		end)

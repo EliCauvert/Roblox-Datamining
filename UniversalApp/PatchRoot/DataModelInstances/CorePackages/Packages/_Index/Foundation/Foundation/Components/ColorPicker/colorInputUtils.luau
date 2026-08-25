@@ -5,9 +5,9 @@ local _ = require(parent.React)
 local colorInputModeModule = require(foundation.Enums.ColorInputMode)
 
 return {
-	createInputConfigs = function(p0, p1, p2, p3, p4, p5, p6, p7, _) --[[ line: 24 ]]
+	createInputConfigs = function(p0, p1, p2, p3, p4, p5, p6, p7, _)
 		-- upvalues: dashModule (ref), colorInputModeModule (ref)
-		local var3 = dashModule.map({ "R", "G", "B" }, function(p8) --[[ line: 35 ]]
+		local var3 = dashModule.map({ "R", "G", "B" }, function(p8)
 			-- upvalues: p0 (ref), p4 (ref)
 			return {
 				minimum = 0,
@@ -15,7 +15,7 @@ return {
 				step = 1,
 				key = p8,
 				component = p8:lower(),
-				value = p0:map(function(p9) --[[ line: 39 ]]
+				value = p0:map(function(p9)
 					-- upvalues: p8 (ref)
 					return p9[p8:lower()]
 				end),
@@ -36,13 +36,13 @@ return {
 		return {
 			[colorInputModeModule.RGB] = var3,
 			[colorInputModeModule.RGBA] = cloned,
-			[colorInputModeModule.HSV] = dashModule.map({ "H", "S", "V" }, function(p10) --[[ line: 60 ]]
+			[colorInputModeModule.HSV] = dashModule.map({ "H", "S", "V" }, function(p10)
 				-- upvalues: p1 (ref), p5 (ref)
 				return {
 					minimum = 0,
 					key = p10,
 					component = p10:lower(),
-					value = p1:map(function(p11) --[[ line: 64 ]]
+					value = p1:map(function(p11)
 						-- upvalues: p10 (ref)
 						return p11[p10:lower()]
 					end),

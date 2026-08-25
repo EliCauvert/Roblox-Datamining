@@ -27,7 +27,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function walkInstanceTree(p0, p1, p2) --[[ line: 40 ]]
+local function walkInstanceTree(p0, p1, p2)
 	-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref), describeProblematicPropertiesModule (ref)
 	local descendants = p1:GetDescendants()
 	table.insert(descendants, p1)
@@ -46,7 +46,7 @@ local function walkInstanceTree(p0, p1, p2) --[[ line: 40 ]]
 	end
 end
 
-function t.run(p3, p4) --[[ line: 65 ]]
+function t.run(p3, p4)
 	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), getFIntUGCValidateMaxHSRDataLenModule (ref), getFFlagUGCValidateWrapDataCapsModule (ref), validationEnumsModule (ref), list (ref), getFIntUGCValidateMaxHSRMeshIdDataLenModule (ref), walkInstanceTree (ref)
 	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then return end
 	local t = {

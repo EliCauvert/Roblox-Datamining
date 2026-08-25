@@ -5,7 +5,7 @@ local gameJoinCardTTIModule = require(gameJoinCard.Telemetry.GameJoinCardTTI)
 local useGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
 local fFlagJoinCardAgeCheckUpsell = require(parent.SharedFlags).FFlagJoinCardAgeCheckUpsell
 
-return function(p0) --[[ line: 46 | named "useJoinCardCtaLoadTime" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagJoinCardAgeCheckUpsell (ref), gameJoinCardTTIModule (ref), useGameJoinCardAnalyticsModule (ref)
 	local var4 = reactModule.useRef(tick())
 	local var5 = reactModule.useRef(nil)
@@ -15,7 +15,7 @@ return function(p0) --[[ line: 46 | named "useJoinCardCtaLoadTime" ]]
 	var8.current = p0.ctaType
 	local var9 = reactModule.useRef(p0.wasCached)
 	var9.current = p0.wasCached
-	reactModule.useEffect(function() --[[ line: 57 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagJoinCardAgeCheckUpsell (copy), var6 (ref), var5 (ref), gameJoinCardTTIModule (copy), var7 (ref), p0 (ref), var4 (ref), useGameJoinCardAnalyticsModule (copy), var8 (ref), var9 (ref)
 		if not fFlagJoinCardAgeCheckUpsell then return end
 		if not var6.current then

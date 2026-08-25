@@ -12,7 +12,7 @@ local blockingModalScreenModule = require(script.Parent.Components.Blocking.Bloc
 local fFlagAddNewPlayerListMobileFocusNav = playerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
 local var10 = nil
 
-local _ = function() --[[ line: 23 ]]
+local _ = function()
 	-- upvalues: var10 (write), roactModule (ref), contextActionService (ref)
 	if var10 ~= nil then
 		roactModule.unmount(var10)
@@ -21,9 +21,9 @@ local _ = function() --[[ line: 23 ]]
 	end
 end
 
-return function(p0, p1, p2, p3) --[[ line: 32 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: promiseModule (ref), blockingAnalyticsModule (ref), var10 (write), roactModule (ref), contextActionService (ref), fFlagAddNewPlayerListMobileFocusNav (ref), guiService (ref), blockingModalScreenModule (ref), coreScriptsRootProvider (ref), robloxGui (ref)
-	return promiseModule.new(function(p4) --[[ line: 33 ]]
+	return promiseModule.new(function(p4)
 		-- upvalues: p1 (ref), blockingAnalyticsModule (copy), p0 (ref), p2 (ref), var10 (copy), roactModule (copy), contextActionService (copy), fFlagAddNewPlayerListMobileFocusNav (copy), p3 (ref), guiService (copy), blockingModalScreenModule (copy), coreScriptsRootProvider (copy), robloxGui (copy)
 		local p1_1 = p1 or blockingAnalyticsModule.new()
 		p1_1:action("SettingsHub", "blockUserButtonClick", { blockeeUserId = p0.UserId, source = p2 })
@@ -33,7 +33,7 @@ return function(p0, p1, p2, p3) --[[ line: 32 ]]
 			var10 = nil
 			contextActionService:UnbindCoreAction("BlockingModalScreen")
 		end
-		local var12 = function() --[[ line: 42 ]]
+		local var12 = function()
 			-- upvalues: var10 (copy), roactModule (copy), contextActionService (copy), p4 (ref), fFlagAddNewPlayerListMobileFocusNav (copy), p3 (copy), guiService (copy)
 			if var10 ~= nil then
 				roactModule.unmount(var10)

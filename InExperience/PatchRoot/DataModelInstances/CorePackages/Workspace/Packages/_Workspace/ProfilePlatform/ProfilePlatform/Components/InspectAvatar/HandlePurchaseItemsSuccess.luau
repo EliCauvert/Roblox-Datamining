@@ -7,11 +7,11 @@ local bundleOwnershipStore = catalogNetworkingModule.BundleOwnershipStore
 local _ = require(profilePlatform.Contexts.ProfileWrapperContext)
 local fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
 
-local function buildEquippableAssets(value, p0, p1) --[[ line: 63 ]]
+local function buildEquippableAssets(value, p0, p1)
 	local t = {}
 	local t_1 = {}
 	
-	local function append(p2) --[[ line: 71 ]]
+	local function append(p2)
 		-- upvalues: t_1 (ref), p1 (ref), t (ref)
 		for i, v in p2 do
 			if not t_1[v] then
@@ -31,7 +31,7 @@ local function buildEquippableAssets(value, p0, p1) --[[ line: 63 ]]
 	return t
 end
 
-local function parseLineItems(p3) --[[ line: 94 ]]
+local function parseLineItems(p3)
 	local t = {}
 	local t_1 = {}
 	local var11 = 0
@@ -49,7 +49,7 @@ local function parseLineItems(p3) --[[ line: 94 ]]
 	return t, t_1, var11
 end
 
-return function(p4) --[[ line: 115 | named "HandlePurchaseItemsSuccess" ]]
+return function(p4)
 	-- upvalues: parseLineItems (ref), purchaseDetailsStore (ref), bundleOwnershipStore (ref), buildEquippableAssets (ref), fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (ref), setCurrentToastMessage (ref)
 	local lineItems
 	local responseBody = p4.result and p4.result.responseBody

@@ -12,7 +12,7 @@ local scrollIntervalTrackerModule = require(parent.ScrollIntervalTracker)
 local fFlagExpChatMigrateScrollIntervalTrackerModule = require(chatUIPrimitives.Flags.FFlagExpChatMigrateScrollIntervalTracker)
 local fFlagExpChatPerfTrackerTabNameModule = require(chatUIPrimitives.Flags.FFlagExpChatPerfTrackerTabName)
 local t = {
-	start = function(p0, p1, p2) --[[ line: 25 ]]
+	start = function(p0, p1, p2)
 		-- upvalues: eventConfig (ref), eventTypes (ref), timeToInteractiveTracker (ref), fFlagExpChatPerfTrackerTabNameModule (ref), intervalPerformanceTracker (ref), expChatPerfTracker (ref)
 		local var8 = eventConfig[p0] or {}
 		
@@ -41,7 +41,7 @@ local t = {
 		end
 		return true
 	end,
-	finish = function(p3, p4, p5) --[[ line: 61 ]]
+	finish = function(p3, p4, p5)
 		-- upvalues: eventConfig (ref), eventTypes (ref), fFlagExpChatPerfTrackerTabNameModule (ref), timeToInteractiveTracker (ref), expChatPerfTracker (ref), intervalPerformanceTracker (ref)
 		local var9 = eventConfig[p3] or {}
 		
@@ -64,7 +64,7 @@ local t = {
 		var9.onFinish(p4)
 		intervalPerformanceTracker:stopAndLogTracking(var9.name)
 	end,
-	cancel = function(p6, p7) --[[ line: 85 ]]
+	cancel = function(p6, p7)
 		-- upvalues: eventConfig (ref), eventTypes (ref), timeToInteractiveTracker (ref), intervalPerformanceTracker (ref), expChatPerfTracker (ref)
 		local var10 = eventConfig[p6] or {}
 		
@@ -82,7 +82,7 @@ local t = {
 	end
 }
 
-function t.cancelAll() --[[ line: 97 ]]
+function t.cancelAll()
 	-- upvalues: eventConfig (ref), t (ref)
 	for i, v in eventConfig do
 		t.cancel(i)
@@ -91,16 +91,16 @@ end
 
 t.Events = events
 
-function t.startChatWindowScrollInterval(p8, p9, p10, p11) --[[ line: 104 ]]
+function t.startChatWindowScrollInterval(p8, p9, p10, p11)
 	-- upvalues: t (ref), fFlagExpChatMigrateScrollIntervalTrackerModule (ref), scrollIntervalTrackerModule (ref), socialLuaAnalyticsModule (ref)
 	local t_1 = { debugName = p8 }
 	
-	local var12 = function(p12) --[[ line: 113 ]]
+	local var12 = function(p12)
 		-- upvalues: t (copy), p8 (ref), p11 (ref)
 		return t.start(p8, p12, p11)
 	end
 	
-	local var13 = function(p13) --[[ line: 116 ]]
+	local var13 = function(p13)
 		-- upvalues: t (copy), p8 (ref)
 		t.finish(p8, p13)
 	end

@@ -4,7 +4,7 @@ local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local constantsModule = require(script.Parent.Parent.Constants)
 local slotNumbers = roactModule.PureComponent:extend("SlotNumbers")
 
-function slotNumbers.render(p0) --[[ line: 13 ]]
+function slotNumbers.render(p0)
 	-- upvalues: constantsModule (ref), roactModule (ref)
 	local layout = constantsModule.Layouts[p0.props.layout]
 	local t = {}
@@ -34,6 +34,6 @@ function slotNumbers.render(p0) --[[ line: 13 ]]
 	return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, t)
 end
 
-return roactRoduxModule.connect(function(p1) --[[ line: 61 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p1)
 	return { layout = p1.layout }
 end, nil)(slotNumbers)

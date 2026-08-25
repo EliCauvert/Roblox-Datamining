@@ -8,7 +8,7 @@ t.SecondsBetweenUpdate = 1
 t.NumSamplesToKeep = 20
 local var5 = nil
 
-function t.getSingleton() --[[ line: 26 ]]
+function t.getSingleton()
 	-- upvalues: var5 (write), t (ref), getFFlagLazyPerfStatsInitModule (ref)
 	if var5 == nil then
 		var5 = t.__new()
@@ -20,7 +20,7 @@ function t.getSingleton() --[[ line: 26 ]]
 	return var5
 end
 
-function t.__new() --[[ line: 36 ]]
+function t.__new()
 	-- upvalues: t (ref), statsUtilsModule (ref), statsAggregatorModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -32,19 +32,19 @@ function t.__new() --[[ line: 36 ]]
 	return t_1
 end
 
-function t.StartListening(p0) --[[ line: 53 ]]
+function t.StartListening(p0)
 	for i, v in pairs(p0._statsAggregators) do
 		v:StartListening()
 	end
 end
 
-function t.StopListening(p1) --[[ line: 59 ]]
+function t.StopListening(p1)
 	for i, v in pairs(p1._statsAggregators) do
 		v:StopListening()
 	end
 end
 
-function t.GetAggregator(p2, p3) --[[ line: 65 ]]
+function t.GetAggregator(p2, p3)
 	return p2._statsAggregators[p3]
 end
 

@@ -22,7 +22,7 @@ local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local var15 = 0
 local name = require(appChat.Logger):new(script.Name)
 
-local function _() --[[ line: 31 | named "getAscendingNumber" ]]
+local function _()
 	-- upvalues: var15 (write)
 	var15 += 1
 	
@@ -32,7 +32,7 @@ end
 local tbl = setmetatable({}, sendMessagePolicyModule)
 tbl.__index = tbl
 
-function tbl.new(p0, p1, p2) --[[ line: 39 ]]
+function tbl.new(p0, p1, p2)
 	-- upvalues: messageModelModule (ref)
 	return setmetatable({
 		messageSendingId = messageModelModule.newSendingId(),
@@ -41,7 +41,7 @@ function tbl.new(p0, p1, p2) --[[ line: 39 ]]
 	}, p0)
 end
 
-function tbl:onBeforeSendingMessage(p3) --[[ line: 47 ]]
+function tbl:onBeforeSendingMessage(p3)
 	-- upvalues: name (ref), getDeepValue2Module (ref), messageModelModule (ref), immutable (ref), var15 (write), dateTime (ref), sendingMessageModule (ref)
 	name:trace("onBeforeSendingMessage conversationId: {} messageSendingId: {}, replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	local _ = nil
@@ -62,11 +62,11 @@ function tbl:onBeforeSendingMessage(p3) --[[ line: 47 ]]
 	p3:dispatch(sendingMessageModule(self.conversationId, newSending))
 end
 
-function tbl.sendingMessagePayload(_) --[[ line: 74 ]]
+function tbl.sendingMessagePayload(_)
 	error("Override me")
 end
 
-function tbl:onSuccess(p4, p5) --[[ line: 78 ]]
+function tbl:onSuccess(p4, p5)
 	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), sentMessageModule (ref), receivedChatResponseModule (ref)
 	name:debug("Message sent successfully. conversationId: {} messageSendingId: {} replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
@@ -85,7 +85,7 @@ function tbl:onSuccess(p4, p5) --[[ line: 78 ]]
 	return p5
 end
 
-function tbl:onFailure(p6, p7) --[[ line: 112 ]]
+function tbl:onFailure(p6, p7)
 	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), statusCodes (ref), receivedChannelsMigrationConflictModule (ref), navigateIntoChatModule (ref), enumScreensModule (ref), messageFailedToSendModule (ref), responseStatus (ref), messageModeratedModule (ref)
 	name:error("Failed to send message. conversationId: {}, messageSendingId: {}, responseCode: {}", self.conversationId, self.messageSendingId, p7.responseCode)
 	

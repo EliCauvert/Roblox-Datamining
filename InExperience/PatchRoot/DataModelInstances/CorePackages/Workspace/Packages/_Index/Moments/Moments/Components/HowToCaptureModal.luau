@@ -43,7 +43,7 @@ local list = {
 	}
 }
 
-return function(p0) --[[ line: 65 | named "HowToCaptureModal" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), list (ref), view (ref), formFactor (ref), icon (ref), foundationModule (ref), text (ref), fFlagMomentsFixHowToCaptureTextOverflowModule (ref), image (ref), button (ref)
 	local var9 = useLocalization(t)
 	local var10 = useDeviceInsets()
@@ -51,22 +51,22 @@ return function(p0) --[[ line: 65 | named "HowToCaptureModal" ]]
 	local var12 = useFormFactor()
 	local var13, var14 = reactModule.useState(1)
 	local var15 = reactModule.useRef({ [1] = true })
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), var13 (ref), fireAnalyticsEvent (copy), eventNames (copy)
 		if not var15.current[var13] then
 			var15.current[var13] = true
 			fireAnalyticsEvent(eventNames.FTUXHowToCaptureCarouselImpression)
 		end
 	end, { var13 })
-	local var16 = reactModule.useCallback(function() --[[ line: 82 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref)
-		var14(function(p1) --[[ line: 83 ]]
+		var14(function(p1)
 			return math.max(1, p1 - 1)
 		end)
 	end, {})
-	local var17 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), list (copy)
-		var14(function(p2) --[[ line: 89 ]]
+		var14(function(p2)
 			-- upvalues: list (copy)
 			return math.min(#list, p2 + 1)
 		end)

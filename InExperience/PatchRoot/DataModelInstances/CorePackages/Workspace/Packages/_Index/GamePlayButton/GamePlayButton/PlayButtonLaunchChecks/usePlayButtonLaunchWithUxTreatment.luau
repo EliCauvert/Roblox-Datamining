@@ -15,15 +15,15 @@ local playabilityStatusEnum = discoveryTypesModule.PlayabilityStatusEnum
 local _ = require(parent.PlayabilityRodux)
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-local function _(p0) --[[ line: 20 | named "asReconfirmLaunchModalData" ]]
+local function _(p0)
 	return if p0 then if type(p0.titleText) == "string" and type(p0.bodyText) == "string" and (type(p0.primaryActionText) == "string" and type(p0.secondaryActionText) == "string") then p0 else nil else nil
 end
 
-return function(p1, p2, p3, p4) --[[ line: 44 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), useDispatch (ref), reactModule (ref), unlockPlayIntent (ref), playabilityStatusEnum (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), playableUxTreatmentEnum (ref), flaggedMutedError (ref), openPlayButtonUpsellDialog (ref), closeCentralOverlay (ref)
 	local var3 = useRoactService(appEventIngestService)
 	local var4 = useDispatch()
-	local var5 = reactModule.useCallback(function(p5) --[[ line: 53 ]]
+	local var5 = reactModule.useCallback(function(p5)
 		-- upvalues: unlockPlayIntent (copy), var3 (ref), p2 (ref), p1 (ref), p4 (ref)
 		unlockPlayIntent(var3, {
 			universeId = p2,
@@ -33,7 +33,7 @@ return function(p1, p2, p3, p4) --[[ line: 44 ]]
 		})
 	end, { var3, p2, p1, p4 })
 	
-	return reactModule.useCallback(function(p6, p7) --[[ line: 68 ]]
+	return reactModule.useCallback(function(p6, p7)
 		-- upvalues: p1 (ref), playabilityStatusEnum (copy), p3 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), playableUxTreatmentEnum (copy), flaggedMutedError (copy), p2 (ref), var5 (ref), var4 (ref), openPlayButtonUpsellDialog (copy), closeCentralOverlay (copy)
 		if not p1 or not p1.playableUxTreatment or (not p1.playableUxTreatment.treatment or p1.playabilityStatus ~= playabilityStatusEnum.Playable) then
 			p3(p6, if fFlagLuaAppDemoModePlayButtonTelemetry then p7 else nil)
@@ -50,14 +50,14 @@ return function(p1, p2, p3, p4) --[[ line: 44 ]]
 		local var6 = if not data then if type(data.titleText) == "string" and type(data.bodyText) == "string" and (type(data.primaryActionText) == "string" and type(data.secondaryActionText) == "string") then data else nil else nil
 		
 		if var6 then
-			var4(openPlayButtonUpsellDialog(var6.titleText, var6.bodyText, var6.primaryActionText, var6.secondaryActionText, function() --[[ line: 102 ]]
+			var4(openPlayButtonUpsellDialog(var6.titleText, var6.bodyText, var6.primaryActionText, var6.secondaryActionText, function()
 				-- upvalues: var4 (copy), closeCentralOverlay (copy), p3 (copy), p6 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p7 (ref)
 				var4(closeCentralOverlay())
 				p3(p6, if fFlagLuaAppDemoModePlayButtonTelemetry then p7 else nil)
-			end, function() --[[ line: 109 ]]
+			end, function()
 				-- upvalues: var4 (copy), closeCentralOverlay (copy)
 				var4(closeCentralOverlay())
-			end, function() --[[ line: 112 ]]
+			end, function()
 				-- upvalues: var4 (copy), closeCentralOverlay (copy)
 				var4(closeCentralOverlay())
 			end))

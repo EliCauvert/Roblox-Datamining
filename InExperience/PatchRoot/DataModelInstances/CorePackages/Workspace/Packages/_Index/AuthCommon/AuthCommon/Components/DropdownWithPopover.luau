@@ -20,11 +20,11 @@ local view = foundationModule.View
 local sideModalDropdownButtonModule = require(authCommon.Components.SideModalDropdownButton)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 
-local function selectScreenSize(p0) --[[ line: 52 ]]
+local function selectScreenSize(p0)
 	return p0.ScreenSize
 end
 
-return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useSelector (ref), selectScreenSize (ref), reactModule (ref), useLastInputMode (ref), reactFocusNavigationModule (ref), view (ref), text (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), popoverSide (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var8 = useTokens()
 	local var9 = useSelector(selectScreenSize)
@@ -36,7 +36,7 @@ return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover"
 	local var19 = reactModule.useRef(nil)
 	local isFocus = useLastInputMode() == "Focus"
 	local var21 = reactFocusNavigationModule.useFocusGuiObject()
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var13 (ref)
 		if p1.value == nil then
 			var13({})
@@ -51,20 +51,20 @@ return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover"
 			end
 		end
 	end, { p1.value, p1.cellDatas })
-	local var22 = reactModule.useCallback(function() --[[ line: 84 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref), isFocus (ref), var18 (ref), var11 (ref)
 		if var21 and isFocus then
 			var21(var18.current)
 		end
 		var11(false)
 	end, { var18.current, isFocus, var21 })
-	reactModule.useEffect(function() --[[ line: 91 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var21 (ref), p1 (ref), var18 (ref)
 		if var21 and p1.focusOnMount then
 			var21(var18.current)
 		end
 	end, { var18.current, var21, p1.focusOnMount })
-	reactModule.useEffect(function() --[[ line: 97 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var10 (ref)
 		if p1.onDropdownOpened then
 			p1.onDropdownOpened(var10)
@@ -74,7 +74,7 @@ return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover"
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		ref = var18,
-		onAbsoluteSizeChanged = function(value) --[[ line: 152 ]]
+		onAbsoluteSizeChanged = function(value)
 			-- upvalues: var15 (ref)
 			var15(value.AbsoluteSize)
 		end,
@@ -83,7 +83,7 @@ return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover"
 		Popover = reactModule.createElement(popover.Root, { isOpen = var10 }, {
 			Anchor = reactModule.createElement(popover.Anchor, nil, reactModule.createElement(view, { Size = UDim2.new(0, var14.X, 0, var14.Y) }, {
 				DropdownButton = reactModule.createElement(sideModalDropdownButtonModule, {
-					onActivated = reactModule.useCallback(function() --[[ line: 145 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var11 (ref), var10 (ref)
 						var11(not var10)
 					end, { var10 }),
@@ -121,18 +121,18 @@ return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover"
 							BaseMenu = reactModule.createElement(view, {
 								tag = "auto-y col align-y-center gap-xsmall padding-xsmall",
 								Size = UDim2.new(0, var14.X + var8.Stroke.Standard * 2, 0, 0),
-								onAbsoluteSizeChanged = function(value) --[[ line: 227 ]]
+								onAbsoluteSizeChanged = function(value)
 									-- upvalues: var17 (ref)
 									var17(value.AbsoluteSize)
 								end,
 								ref = var19
-							}, reactModule.useMemo(function() --[[ line: 104 ]]
+							}, reactModule.useMemo(function()
 								-- upvalues: p1 (ref), var22 (ref), reactModule (copy), view (copy), var12 (ref), text (copy)
 								local t = {}
 								
 								for i, v in ipairs(p1.cellDatas) do
 									table.insert(t, reactModule.createElement(view, {
-										onActivated = function() --[[ line: 107 ]]
+										onActivated = function()
 											-- upvalues: p1 (copy), v (ref), var22 (copy)
 											p1.onChange(v.value)
 											var22()

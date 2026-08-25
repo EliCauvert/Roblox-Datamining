@@ -27,12 +27,12 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local var9 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatNudgeCustomDialog(p0) --[[ line: 41 ]]
+function ChatNudgeCustomDialog(p0)
 	-- upvalues: reactModule (ref), inExperienceInterventionAnalyticsModule (ref), useLocalization (ref), constants (ref), useStyle (ref), useLayerCollector (ref), useTokens (ref), useProperty (ref), localPlayer (ref), view (ref), text (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var9 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
 	local var10 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
 	local var11 = reactModule.useRef(nil)
 	local var12, var13 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
 		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var10.current, p0.eventId, p0.violatingChatLine, nil)
 	end, { var10 })
@@ -41,7 +41,7 @@ function ChatNudgeCustomDialog(p0) --[[ line: 41 ]]
 	local var16 = useLayerCollector()
 	local var17 = useTokens()
 	local var18 = useProperty(var11, "AbsoluteSize")
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), var16 (ref), constants (copy), var13 (ref)
 		var13(math.min(var16.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var18 then var18.Y else 0))
 	end, { var16.absoluteSize.Y, var18 })
@@ -139,7 +139,7 @@ function ChatNudgeCustomDialog(p0) --[[ line: 41 ]]
 							UnderstandButton = reactModule.createElement(button, {
 								text = var14.IUnderstandText,
 								variant = buttonVariant.Standard,
-								onActivated = reactModule.useCallback(function() --[[ line: 75 ]]
+								onActivated = reactModule.useCallback(function()
 									-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
 									inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, var10.current, p0.eventId, p0.violatingChatLine, nil)
 									p0.onDismiss()

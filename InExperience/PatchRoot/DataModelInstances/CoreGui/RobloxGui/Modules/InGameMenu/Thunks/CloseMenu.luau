@@ -5,7 +5,7 @@ local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local constantsModule = require(parent.Resources.Constants)
 local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: guiService (ref), setMenuOpenModule (ref), setCurrentPageModule (ref), constantsModule (ref), sendAnalyticsModule (ref)
 	guiService:SetMenuIsOpen(false, "InGameMenu")
 	guiService.SelectedCoreObject = nil

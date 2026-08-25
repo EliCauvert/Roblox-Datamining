@@ -14,7 +14,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-local function PageNumberText(p0) --[[ line: 44 ]]
+local function PageNumberText(p0)
 	-- upvalues: reactModule (ref), textModule (ref)
 	return reactModule.createElement(textModule, {
 		LayoutOrder = 1,
@@ -35,7 +35,7 @@ local t_1 = {
 	[paginationSizeModule.Medium] = "size-0-800"
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | named "PageNumberSlot" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokensModule (ref), paginationUtilsModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), t_1 (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), PageNumberText (ref)
 	local var17 = useTokensModule()
 	local var18 = not p1.isChecked
@@ -44,7 +44,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 	local var21 = useChipVariantsModule(var17, var20, chipVariantModule.Utility, true, false, false)
 	local var22 = useChipVariantsModule(var17, var20, chipVariantModule.Utility, false, false, false)
 	local slotSize = `row align-x-center align-y-center auto-x radius-circle {t_1[p1.slotSize]}`
-	local var24 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.onPageActivated(p1.page)
 	end, { p1.onPageActivated, p1.page })

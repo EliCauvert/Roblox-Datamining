@@ -9,7 +9,7 @@ local builderIconsModule = require(parent.BuilderIcons)
 local iconVariant = builderIconsModule.IconVariant
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 
-return reactModule.memo(function(p0) --[[ line: 28 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), loading (ref), iconSize (ref), icon (ref), builderIconsModule (ref), iconVariant (ref)
 	local var4, var5 = reactModule.useState(false)
 	local var6, var7 = reactModule.useState(false)
@@ -22,19 +22,19 @@ return reactModule.memo(function(p0) --[[ line: 28 ]]
 		Image = "",
 		LayoutOrder = p0.layoutOrder,
 		Size = UDim2.new(0, 80, 0, 80),
-		[reactModule.Event.MouseEnter] = function() --[[ line: 43 ]]
+		[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var5 (ref)
 			var5(true)
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 46 ]]
+		[reactModule.Event.MouseLeave] = function()
 			-- upvalues: var5 (ref)
 			var5(false)
 		end,
-		[reactModule.Event.SelectionGained] = function() --[[ line: 49 ]]
+		[reactModule.Event.SelectionGained] = function()
 			-- upvalues: var7 (ref)
 			var7(true)
 		end,
-		[reactModule.Event.SelectionLost] = function() --[[ line: 52 ]]
+		[reactModule.Event.SelectionLost] = function()
 			-- upvalues: var7 (ref)
 			var7(false)
 		end

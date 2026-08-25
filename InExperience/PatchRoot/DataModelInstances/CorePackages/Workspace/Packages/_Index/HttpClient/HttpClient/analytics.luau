@@ -4,7 +4,7 @@ local luaHttpClientRequestTimerEventHundredthsPercent = game:DefineFastInt("LuaH
 game:DefineFastInt("LuaHttpClientRequestStatusEventHundredthsPercent", 0)
 game:DefineFastInt("LuaHttpClientPayloadSizeEventHundredthsPercent", 0)
 
-local function _(p0) --[[ line: 18 | named "shouldSample" ]]
+local function _(p0)
 	return if p0 <= 0 then false else p0 >= 10000 or math.random(1, 10000) <= p0
 end
 
@@ -43,7 +43,7 @@ local t_3 = {
 	[Enum.HttpError.Unknown] = "Unknown"
 }
 
-local _ = function(p1) --[[ line: 66 | named "payloadSizeOf" ]]
+local _ = function(p1)
 	return if typeof(p1) == "buffer" then buffer.len(p1) elseif typeof(p1) == "string" then string.len(p1) else nil
 end
 
@@ -54,7 +54,7 @@ local list = {
 }
 
 return {
-	defaultAnalytics = function(p2, p3, _, p4, p5, p6) --[[ line: 87 ]]
+	defaultAnalytics = function(p2, p3, _, p4, p5, p6)
 		-- upvalues: list (ref), telemetryService (ref), t (ref), t_1 (ref), t_3 (ref), t_2 (ref)
 		local t_4 = {
 			analyticsKey = p2,

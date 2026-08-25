@@ -1,7 +1,7 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("DiscoveryAvailability").Parent.Signals)
 local _ = require(script.Parent.CacheStoreTypes)
 
-return signalsModule.createComputed(function() --[[ line: 15 | named "createCacheStore" ]]
+return signalsModule.createComputed(function()
 	-- upvalues: signalsModule (ref)
 	local var1, var2 = signalsModule.createSignal(nil)
 	

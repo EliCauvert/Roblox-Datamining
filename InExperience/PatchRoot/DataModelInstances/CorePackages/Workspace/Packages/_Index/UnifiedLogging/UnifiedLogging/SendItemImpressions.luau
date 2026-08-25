@@ -16,7 +16,7 @@ local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagP
 local fFlagItemImpressionsAddGameMetadata = require(parent.SharedFlags).FFlagItemImpressionsAddGameMetadata
 local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
 
-local var10 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 25 ]]
+local var10 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: argCheckModule (ref), discoveryEventErrorLogger (ref), fFlagProfilePlatformEnableImpressions (ref)
 	local t = {}
 	local t_1 = {}
@@ -93,7 +93,7 @@ local var10 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 25 ]]
 	return t_6
 end
 
-local var11 = function(p10, p11, p12) --[[ line: 125 ]]
+local var11 = function(p10, p11, p12)
 	-- upvalues: fFlagLuaAppDesktopFriendCarouselClicks (ref), userEntryUtilsModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -124,7 +124,7 @@ local var11 = function(p10, p11, p12) --[[ line: 125 ]]
 end
 
 return {
-	sendFromFriendsCarousel = function(p13, p14, p15, p16, p17, p18, p19, p20) --[[ line: 166 ]]
+	sendFromFriendsCarousel = function(p13, p14, p15, p16, p17, p18, p19, p20)
 		-- upvalues: fFlagLuaAppDesktopFriendCarouselClicks (ref), discoveryEventErrorLogger (ref), contentTypeModule (ref), var10 (ref), var11 (ref), cryoModule (ref), itemImpressionsEventModule (ref)
 		if p13 and p14 then
 			if not p15 or #p15 == 0 then return end
@@ -139,7 +139,7 @@ return {
 			discoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {p19}`, { eventIngest = p13, appAnalytics = p14, sortId = p19 })
 		end
 	end,
-	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31) --[[ line: 346 ]]
+	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31)
 		-- upvalues: discoveryEventErrorLogger (ref), var10 (ref), fFlagItemImpressionsAddGameMetadata (ref), contentTypeModule (ref), buildGameMetadataFieldsModule (ref), cryoModule (ref), itemImpressionsEventModule (ref)
 		if not p21 or not p22 then
 			discoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {p30}`, { eventIngest = p21, appAnalytics = p22, sortId = p30 })
@@ -158,7 +158,7 @@ return {
 		end
 		itemImpressionsEventModule(p21, p26, p28, var28)
 	end else nil,
-	sendFromProfile = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then function(p32, p33, p34, p35, p36, p37, p38, p39, p40) --[[ line: 214 ]]
+	sendFromProfile = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then function(p32, p33, p34, p35, p36, p37, p38, p39, p40)
 		-- upvalues: discoveryEventErrorLogger (ref), var10 (ref), fFlagItemImpressionsAddGameMetadata (ref), contentTypeModule (ref), buildGameMetadataFieldsModule (ref), cryoModule (ref), itemImpressionsEventModule (ref)
 		if not p32 or not p33 then
 			discoveryEventErrorLogger.reportError("SendItemImpressionsFromProfile", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {p40} on Profile Platform`, {
@@ -184,7 +184,7 @@ return {
 		end
 		itemImpressionsEventModule(p32, p37, p38, var30)
 	end else nil else nil,
-	sendFromServerDrivenUi = function(p41, p42, p43, p44, p45, p46, p47, p48, p49, p50, p51) --[[ line: 273 ]]
+	sendFromServerDrivenUi = function(p41, p42, p43, p44, p45, p46, p47, p48, p49, p50, p51)
 		-- upvalues: discoveryEventErrorLogger (ref), var10 (ref), buildItemMetadataFieldsModule (ref), cryoModule (ref), appStorageService (ref), sduiCustomImpressionsEventModule (ref), itemImpressionsEventModule (ref)
 		if not p41 then
 			discoveryEventErrorLogger.reportError("SendItemImpressionsFromSduiNilService", `Event Ingest was nil when trying to send itemImpressions for collection {p46}`, { collectionId = p46 })

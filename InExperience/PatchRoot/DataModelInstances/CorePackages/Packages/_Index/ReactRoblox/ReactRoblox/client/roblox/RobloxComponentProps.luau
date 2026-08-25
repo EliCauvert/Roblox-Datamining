@@ -16,11 +16,11 @@ local tag = require(parent.React).Tag
 local t = {}
 local t_1 = {}
 
-local function identity(...) --[[ line: 72 ]]
+local function identity(...)
 	return ...
 end
 
-local function setRobloxInstanceProperty(value, p0, p1) --[[ line: 76 ]]
+local function setRobloxInstanceProperty(value, p0, p1)
 	-- upvalues: getDefaultInstancePropertyModule (ref)
 	if p1 == nil then
 		local ok, _ = pcall(value.ResetPropertyToDefault, value, p0)
@@ -32,7 +32,7 @@ local function setRobloxInstanceProperty(value, p0, p1) --[[ line: 76 ]]
 	value[p0] = p1
 end
 
-local function _(p2, p3) --[[ line: 92 | named "removeBinding" ]]
+local function _(p2, p3)
 	-- upvalues: t_1 (ref)
 	local var18 = t_1[p2]
 	
@@ -42,9 +42,9 @@ local function _(p2, p3) --[[ line: 92 | named "removeBinding" ]]
 	end
 end
 
-local function attachBinding(p4, p5, p6) --[[ line: 101 ]]
+local function attachBinding(p4, p5, p6)
 	-- upvalues: setRobloxInstanceProperty (ref), identity (ref), console (ref), t_1 (ref), reactModule (ref)
-	local function updateBoundProperty(p7) --[[ line: 102 ]]
+	local function updateBoundProperty(p7)
 		-- upvalues: setRobloxInstanceProperty (copy), identity (copy), p4 (ref), p5 (ref), p6 (ref), console (copy)
 		local ok, status = xpcall(setRobloxInstanceProperty, identity, p4, p5, p7)
 		
@@ -62,7 +62,7 @@ local function attachBinding(p4, p5, p6) --[[ line: 101 ]]
 	updateBoundProperty(p6:getValue())
 end
 
-local function applyTags(p8, p9, p10) --[[ line: 134 ]]
+local function applyTags(p8, p9, p10)
 	-- upvalues: dEV (ref), console (ref), inspect (ref), collectionService (ref)
 	if dEV and p10 ~= nil and typeof(p10) ~= "string" then
 		console.error("Type provided for ReactRoblox.Tag is invalid - tags should be specified as a single string, with individual tags delimited by spaces. Instead received:\n%s", inspect(p10))
@@ -91,14 +91,14 @@ local function applyTags(p8, p9, p10) --[[ line: 134 ]]
 	end
 end
 
-local _ = function(p11) --[[ line: 168 | named "removeAllTags" ]]
+local _ = function(p11)
 	-- upvalues: collectionService (ref)
 	for i, v in collectionService:GetTags(p11) do
 		collectionService:RemoveTag(p11, v)
 	end
 end
 
-local function applyProp(p12, p13, p14, p15) --[[ line: 174 ]]
+local function applyProp(p12, p13, p14, p15)
 	-- upvalues: type (ref), t (ref), singleEventManagerModule (ref), reactSymbols (ref), t_1 (ref), attachBinding (ref), tag (ref), applyTags (ref), getDefaultInstancePropertyModule (ref)
 	local var23 = type.of(p13)
 	
@@ -152,7 +152,7 @@ local function applyProp(p12, p13, p14, p15) --[[ line: 174 ]]
 	end
 end
 
-local function applyProps(p16, p17) --[[ line: 219 ]]
+local function applyProps(p16, p17)
 	-- upvalues: applyProp (ref)
 	for i, v in p17 do
 		if i ~= "ref" and i ~= "children" then
@@ -161,7 +161,7 @@ local function applyProps(p16, p17) --[[ line: 219 ]]
 	end
 end
 
-local function setInitialProperties(value, _, p18, _) --[[ line: 230 ]]
+local function setInitialProperties(value, _, p18, _)
 	-- upvalues: applyProps (ref), identity (ref), console (ref), t (ref)
 	local ok, status = xpcall(applyProps, identity, value, p18)
 	
@@ -175,7 +175,7 @@ local function setInitialProperties(value, _, p18, _) --[[ line: 230 ]]
 	end
 end
 
-local function safelyApplyProperties(p19, p20, p21) --[[ line: 259 ]]
+local function safelyApplyProperties(p19, p20, p21)
 	-- upvalues: object (ref), applyProp (ref)
 	for i = 1, #p20, 2 do
 		local var30 = p20[i]
@@ -190,7 +190,7 @@ local function safelyApplyProperties(p19, p20, p21) --[[ line: 259 ]]
 	end
 end
 
-local function updateProperties(p22, p23, p24) --[[ line: 278 ]]
+local function updateProperties(p22, p23, p24)
 	-- upvalues: t (ref), safelyApplyProperties (ref), identity (ref), console (ref)
 	if t[p22] ~= nil then
 		t[p22]:suspend()
@@ -207,13 +207,13 @@ local function updateProperties(p22, p23, p24) --[[ line: 278 ]]
 	end
 end
 
-local _, status = xpcall(function() --[[ line: 312 ]]
+local _, status = xpcall(function()
 	return game:DefineFastFlag("ReactFixBindingMemoryLeak", false)
-end, function() --[[ line: 314 ]]
+end, function()
 	return true
 end)
 
-local _ = function(p25) --[[ line: 318 | named "cleanupBindings" ]]
+local _ = function(p25)
 	-- upvalues: t_1 (ref)
 	local var33 = t_1[p25]
 	
@@ -228,7 +228,7 @@ end
 return {
 	setInitialProperties = setInitialProperties,
 	updateProperties = updateProperties,
-	cleanupHostComponent = function(p26) --[[ line: 331 ]]
+	cleanupHostComponent = function(p26)
 		-- upvalues: t (ref), status (ref), t_1 (ref), collectionService (ref)
 		if t[p26] ~= nil then
 			t[p26] = nil

@@ -3,7 +3,7 @@ local reactModule = require(foundation.Parent.React)
 local viewModule = require(foundation.Components.View)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0) --[[ line: 9 | named "BaseMenuDivider" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref)
 	local var4 = useTokensModule()
 	

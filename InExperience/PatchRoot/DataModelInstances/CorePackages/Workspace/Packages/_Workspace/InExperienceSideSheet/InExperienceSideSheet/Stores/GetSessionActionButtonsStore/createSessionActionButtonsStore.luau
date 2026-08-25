@@ -19,7 +19,7 @@ local t = {
 	["rbxasset://textures/ui/Controls/PlayStationController/ButtonTriangle@2x.png"] = iconName.PsTriagle
 }
 
-return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
+return function()
 	-- upvalues: getActionBindingsStoreModule (ref), signalsModule (ref), fFlagDebugEnablePioneerUX (ref), constantsModule (ref), enumsModule (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
 	local sessionActionBindings = getActionBindingsStoreModule().sessionActionBindings
 	local var8, var9 = signalsModule.createSignal(nil)
@@ -49,7 +49,7 @@ return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
 		}
 	}
 	local var13 = nil
-	local var14 = signalsModule.createEffect(function(p0) --[[ line: 84 ]]
+	local var14 = signalsModule.createEffect(function(p0)
 		-- upvalues: getInputModeStore (copy), var13 (write), input (copy), list (ref), userInputService (copy), t (copy)
 		local lastInputType = getInputModeStore(p0).getLastInputType(p0)
 		
@@ -57,14 +57,14 @@ return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
 			var13:Disconnect()
 		end
 		if lastInputType == input.Directional then
-			local function setGamepadIcons() --[[ line: 92 ]]
+			local function setGamepadIcons()
 				-- upvalues: list (copy), userInputService (copy), t (copy)
 				for i, v in list do
 					v.setShortcutIcon(t[userInputService:GetImageForKeyCode(v.gamepadKeyCode)])
 				end
 			end
 			
-			var13 = userInputService.GamepadConnected:Connect(function(_) --[[ line: 101 ]]
+			var13 = userInputService.GamepadConnected:Connect(function(_)
 				-- upvalues: setGamepadIcons (ref)
 				setGamepadIcons()
 			end)
@@ -85,7 +85,7 @@ return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
 	
 	return {
 		sessionActionButtonConfigs = list,
-		cleanUp = function() --[[ line: 117 ]]
+		cleanUp = function()
 			-- upvalues: var13 (write), var14 (ref)
 			if var13 then
 				var13:Disconnect()

@@ -21,15 +21,15 @@ local fStringConnectionGraphCoreAmpNameSpace = require(parent.SharedFlags).FStri
 local _ = require(trustedContacts.Common.Types)
 local var7 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
-return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: useNavigation (ref), useAppPolicy (ref), reactModule (ref), ampApiProvider (ref), fStringConnectionGraphCoreAmpNameSpace (ref), ampEnums (ref), userProfilesModule (ref), useLocalization (ref), useTCAnalytics (ref), eventNames (ref), fFlagTCUpdateProfileCTAButton (ref), appPage (ref), inverseTFRequestEnabled (ref), var7 (ref), contexts (ref), trustedConnectionStatus (ref), foundationModule (ref)
 	local var8 = useNavigation()
-	local var9 = useAppPolicy(function(p4) --[[ line: 65 ]]
+	local var9 = useAppPolicy(function(p4)
 		return p4.getShareSheetEnabled()
 	end)
 	local var10, var11 = reactModule.useState(false)
 	local var12, var13 = reactModule.useState(true)
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), ampApiProvider (copy), fStringConnectionGraphCoreAmpNameSpace (copy), ampEnums (copy), var11 (ref), var13 (ref)
 		if ampApiProvider.upsellFeatureAccess("ShowTrustedFriendVPCModalVariant", {}, fStringConnectionGraphCoreAmpNameSpace, { { name = "targetUser", type = "UserId", value = p0 } }).access == ampEnums.AccessResponseEnum.Granted then
 			var11(true)
@@ -60,7 +60,7 @@ return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
 		}
 	})
 	local fireAnalyticsEvent = useTCAnalytics({ friendId = p0, modalVariant = p2, source = p1 }).fireAnalyticsEvent
-	local var17 = reactModule.useCallback(function() --[[ line: 115 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p3 (ref)
 		fireAnalyticsEvent(eventNames.TrustedFriendsModalOkClicked)
 		
@@ -69,7 +69,7 @@ return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
 		end
 		p3.closeModal()
 	end, { p3.closeModal, p3.onAcknowledged, fireAnalyticsEvent })
-	local var18 = reactModule.useCallback(function() --[[ line: 124 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagTCUpdateProfileCTAButton (copy), p3 (ref), var8 (ref), appPage (copy), p0 (ref)
 		fireAnalyticsEvent(eventNames.TrustedFriendsVPCPrologueOpened)
 		local onRequestAccepted = nil
@@ -89,17 +89,17 @@ return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
 		if fFlagTCUpdateProfileCTAButton then p3.onRequestSent else nil,
 		if fFlagTCUpdateProfileCTAButton then p3.onRequestAccepted else nil
 	})
-	local var19 = if inverseTFRequestEnabled then reactModule.useCallback(function() --[[ line: 152 ]]
+	local var19 = if inverseTFRequestEnabled then reactModule.useCallback(function()
 		-- upvalues: var7 (copy), p0 (ref), p3 (ref), var18 (ref)
-		var7.addTrustedFriendFromLink(p0, p3.tokens or {}):andThen(function() --[[ line: 154 ]]
+		var7.addTrustedFriendFromLink(p0, p3.tokens or {}):andThen(function()
 			-- upvalues: var18 (copy)
 			var18()
-		end):catch(function() --[[ line: 157 ]]
+		end):catch(function()
 			-- upvalues: p3 (copy)
 			p3.showGenericErrorModal()
 		end)
 	end, { p0, p3.tokens, var18, p3.showGenericErrorModal }) else nil
-	local var20 = reactModule.useCallback(function() --[[ line: 171 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p3 (ref), var16 (ref)
 		fireAnalyticsEvent(eventNames.TCUpsellAcceptTrustedConnectionClicked)
 		p3.showToast(var16.isATrustedConnectionNowToast)
@@ -108,30 +108,30 @@ return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
 		fireAnalyticsEvent,
 		p3.showToast
 	})
-	local var21 = reactModule.useCallback(function() --[[ line: 182 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p3 (ref)
 		fireAnalyticsEvent(eventNames.TCUpsellCancelClicked)
 		p3.closeModal()
 	end, { p3.closeModal, fireAnalyticsEvent })
-	local var22 = reactModule.useCallback(function() --[[ line: 188 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var7 (copy), p0 (ref), p3 (ref), contexts (copy), var9 (ref), var16 (ref)
 		fireAnalyticsEvent(eventNames.TCUpsellAddViaLinkClicked)
-		var7.createTrustedFriendLink(p0):andThen(function(p5) --[[ line: 191 ]]
+		var7.createTrustedFriendLink(p0):andThen(function(p5)
 			-- upvalues: p3 (copy), contexts (copy)
 			p3.shareUrl({
 				url = p5.responseBody.link,
 				context = contexts.TCUpsellModal
 			})
-		end):andThen(function() --[[ line: 197 ]]
+		end):andThen(function()
 			-- upvalues: p3 (copy)
 			return p3.onRequestSent and p3.onRequestSent()
-		end):andThen(function() --[[ line: 200 ]]
+		end):andThen(function()
 			-- upvalues: var9 (copy), p3 (copy), var16 (copy)
 			if not var9 then
 				p3.showToast(var16.linkCopiedToast)
 			end
 			p3.closeModal()
-		end):catch(function() --[[ line: 206 ]]
+		end):catch(function()
 			-- upvalues: p3 (copy)
 			p3.showGenericErrorModal()
 			p3.closeModal()
@@ -140,57 +140,57 @@ return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
 		p3.closeModal, p3.showGenericErrorModal, fireAnalyticsEvent, p0, var16, var9,
 		p3.shareUrl, p3.showToast
 	})
-	local var23 = reactModule.useCallback(function() --[[ line: 223 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var7 (copy), p0 (ref), var20 (ref), p3 (ref)
-		var7.acceptTrustedConnectionRequest(p0):andThen(function() --[[ line: 225 ]]
+		var7.acceptTrustedConnectionRequest(p0):andThen(function()
 			-- upvalues: var20 (copy)
 			var20()
-		end):andThen(function() --[[ line: 228 ]]
+		end):andThen(function()
 			-- upvalues: p3 (copy)
 			return p3.onRequestAccepted and p3.onRequestAccepted()
-		end):andThen(function() --[[ line: 231 ]]
+		end):andThen(function()
 			-- upvalues: p3 (copy)
 			p3.closeModal()
-		end):catch(function() --[[ line: 234 ]]
+		end):catch(function()
 			-- upvalues: p3 (copy)
 			p3.showGenericErrorModal()
 		end)
 	end, { p3, p0, var20 })
-	local var24 = reactModule.useCallback(function() --[[ line: 239 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var7 (copy), p0 (ref), p3 (ref), var20 (ref), fFlagTCUpdateProfileCTAButton (copy)
-		var7.addTrustedFriendFromLink(p0, p3.tokens or {}):andThen(function() --[[ line: 241 ]]
+		var7.addTrustedFriendFromLink(p0, p3.tokens or {}):andThen(function()
 			-- upvalues: var20 (copy)
 			var20()
-		end):andThen(if fFlagTCUpdateProfileCTAButton then function() --[[ line: 245 ]]
+		end):andThen(if fFlagTCUpdateProfileCTAButton then function()
 			-- upvalues: p3 (copy)
 			return p3.onRequestAccepted and p3.onRequestAccepted()
-		end else nil):andThen(function() --[[ line: 249 ]]
+		end else nil):andThen(function()
 			-- upvalues: p3 (copy)
 			p3.closeModal()
-		end):catch(function() --[[ line: 252 ]]
+		end):catch(function()
 			-- upvalues: p3 (copy)
 			p3.showGenericErrorModal()
 		end)
 	end, { p3, p0, var20 })
-	local var25 = reactModule.useCallback(function() --[[ line: 258 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var7 (copy), p0 (ref), p3 (ref), fireAnalyticsEvent (ref), eventNames (copy), var16 (ref)
-		var7.sendTrustedConnectionRequest(p0, if p3.sentFromQrCode then "qr" else nil):andThen(function() --[[ line: 263 ]]
+		var7.sendTrustedConnectionRequest(p0, if p3.sentFromQrCode then "qr" else nil):andThen(function()
 			-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), p3 (copy), var16 (copy)
 			fireAnalyticsEvent(eventNames.TCUpsellAddTrustedConnectionClicked)
 			p3.showToast(var16.trustedConnectionRequestSentToast)
-		end):andThen(function() --[[ line: 267 ]]
+		end):andThen(function()
 			-- upvalues: p3 (copy)
 			return p3.onRequestSent and p3.onRequestSent()
-		end):andThen(function() --[[ line: 270 ]]
+		end):andThen(function()
 			-- upvalues: p3 (copy)
 			p3.closeModal()
-		end):catch(function() --[[ line: 273 ]]
+		end):catch(function()
 			-- upvalues: p3 (copy)
 			p3.showGenericErrorModal()
 		end)
 	end, { p3, p0, var16, fireAnalyticsEvent })
 	
-	return reactModule.useMemo(function() --[[ line: 286 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p2 (ref), trustedConnectionStatus (copy), var16 (ref), var17 (ref), var21 (ref), var12 (ref), inverseTFRequestEnabled (copy), p3 (ref), var10 (ref), foundationModule (copy), var19 (ref), var18 (ref), var24 (ref), var23 (ref), var22 (ref), var25 (ref)
 		if not p2 then
 			return nil
@@ -207,7 +207,7 @@ return function(p0, p1, p2, p3) --[[ line: 58 | named "useModalButtonActions" ]]
 		return if var12 then {
 			{
 				isLoading = true,
-				onActivated = function() --[[ line: 306 ]] end
+				onActivated = function() end
 			},
 			t
 		} elseif p2 == trustedConnectionStatus.RequestReceived then if var10 then {

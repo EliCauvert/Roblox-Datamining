@@ -68,28 +68,28 @@ local var17 = object.freeze({
 	ARG_DEFAULT_VALUE_CHANGE = "ARG_DEFAULT_VALUE_CHANGE"
 })
 
-local function findBreakingChanges(p0, p1) --[[ line: 122 ]]
+local function findBreakingChanges(p0, p1)
 	-- upvalues: array (ref), findSchemaChanges (write), var16 (ref)
-	return array.filter(findSchemaChanges(p0, p1), function(p2) --[[ line: 126 ]]
+	return array.filter(findSchemaChanges(p0, p1), function(p2)
 		-- upvalues: var16 (copy)
 		return var16[p2.type] ~= nil
 	end)
 end
 
-local function findDangerousChanges(p3, p4) --[[ line: 136 ]]
+local function findDangerousChanges(p3, p4)
 	-- upvalues: array (ref), findSchemaChanges (write), var17 (ref)
-	return array.filter(findSchemaChanges(p3, p4), function(p5) --[[ line: 140 ]]
+	return array.filter(findSchemaChanges(p3, p4), function(p5)
 		-- upvalues: var17 (copy)
 		return var17[p5.type] ~= nil
 	end)
 end
 
-findSchemaChanges = function(p6, p7) --[[ line: 146 | named "findSchemaChanges" ]]
+findSchemaChanges = function(p6, p7)
 	-- upvalues: array (ref), findTypeChanges (write), findDirectiveChanges (write)
 	return array.concat(findTypeChanges(p6, p7), findDirectiveChanges(p6, p7))
 end
 
-findDirectiveChanges = function(p8, p9) --[[ line: 156 | named "findDirectiveChanges" ]]
+findDirectiveChanges = function(p8, p9)
 	-- upvalues: diff (write), var16 (ref), isRequiredArgument (ref)
 	local t = {}
 	local var21 = diff(p8:getDirectives(), p9:getDirectives())
@@ -137,7 +137,7 @@ findDirectiveChanges = function(p8, p9) --[[ line: 156 | named "findDirectiveCha
 	return t
 end
 
-findTypeChanges = function(p10, p11) --[[ line: 215 | named "findTypeChanges" ]]
+findTypeChanges = function(p10, p11)
 	-- upvalues: diff (write), var16 (ref), isSpecifiedScalarType (ref), isEnumType (ref), findEnumTypeChanges (write), isUnionType (ref), findUnionTypeChanges (write), isInputObjectType (ref), findInputObjectTypeChanges (write), isObjectType (ref), array (ref), findFieldChanges (write), findImplementedInterfacesChanges (write), isInterfaceType (ref), typeKindName (write)
 	local t = {}
 	local var26 = diff(p10:getTypeMap():values(), p11:getTypeMap():values())
@@ -184,7 +184,7 @@ findTypeChanges = function(p10, p11) --[[ line: 215 | named "findTypeChanges" ]]
 	return t
 end
 
-findInputObjectTypeChanges = function(p12, p13) --[[ line: 284 | named "findInputObjectTypeChanges" ]]
+findInputObjectTypeChanges = function(p12, p13)
 	-- upvalues: diff (write), isRequiredInputField (ref), var16 (ref), var17 (ref), isChangeSafeForInputObjectFieldOrFieldArg (write)
 	local t = {}
 	local var30 = diff(p12:getFields():values(), p13:getFields():values())
@@ -222,7 +222,7 @@ findInputObjectTypeChanges = function(p12, p13) --[[ line: 284 | named "findInpu
 	return t
 end
 
-findUnionTypeChanges = function(p14, p15) --[[ line: 339 | named "findUnionTypeChanges" ]]
+findUnionTypeChanges = function(p14, p15)
 	-- upvalues: diff (write), var17 (ref), var16 (ref)
 	local t = {}
 	local var34 = diff(p14:getTypes(), p15:getTypes())
@@ -242,7 +242,7 @@ findUnionTypeChanges = function(p14, p15) --[[ line: 339 | named "findUnionTypeC
 	return t
 end
 
-findEnumTypeChanges = function(p16, p17) --[[ line: 368 | named "findEnumTypeChanges" ]]
+findEnumTypeChanges = function(p16, p17)
 	-- upvalues: diff (write), var17 (ref), var16 (ref)
 	local t = {}
 	local var36 = diff(p16:getValues(), p17:getValues())
@@ -262,7 +262,7 @@ findEnumTypeChanges = function(p16, p17) --[[ line: 368 | named "findEnumTypeCha
 	return t
 end
 
-findImplementedInterfacesChanges = function(p18, p19) --[[ line: 390 | named "findImplementedInterfacesChanges" ]]
+findImplementedInterfacesChanges = function(p18, p19)
 	-- upvalues: diff (write), var17 (ref), var16 (ref)
 	local t = {}
 	local var38 = diff(p18:getInterfaces(), p19:getInterfaces())
@@ -282,7 +282,7 @@ findImplementedInterfacesChanges = function(p18, p19) --[[ line: 390 | named "fi
 	return t
 end
 
-findFieldChanges = function(p20, p21) --[[ line: 420 | named "findFieldChanges" ]]
+findFieldChanges = function(p20, p21)
 	-- upvalues: diff (write), var16 (ref), findArgChanges (write), isChangeSafeForObjectOrInterfaceField (write)
 	local t = {}
 	local var40 = diff(p20:getFields():values(), p21:getFields():values())
@@ -310,7 +310,7 @@ findFieldChanges = function(p20, p21) --[[ line: 420 | named "findFieldChanges" 
 	return t
 end
 
-findArgChanges = function(p22, p23, p24) --[[ line: 461 | named "findArgChanges" ]]
+findArgChanges = function(p22, p23, p24)
 	-- upvalues: diff (write), var16 (ref), isChangeSafeForInputObjectFieldOrFieldArg (write), var17 (ref), stringifyValue (write), isRequiredArgument (ref)
 	local t = {}
 	local var44 = diff(p23.args, p24.args)
@@ -365,17 +365,17 @@ findArgChanges = function(p22, p23, p24) --[[ line: 461 | named "findArgChanges"
 	return t
 end
 
-isChangeSafeForObjectOrInterfaceField = function(p25, p26) --[[ line: 550 | named "isChangeSafeForObjectOrInterfaceField" ]]
+isChangeSafeForObjectOrInterfaceField = function(p25, p26)
 	-- upvalues: isListType (ref), isChangeSafeForObjectOrInterfaceField (write), isNonNullType (ref), isNamedType (ref)
 	return if isListType(p25) then isListType(p26) and isChangeSafeForObjectOrInterfaceField(p25.ofType, p26.ofType) or isNonNullType(p26) and isChangeSafeForObjectOrInterfaceField(p25, p26.ofType) elseif isNonNullType(p25) then isNonNullType(p26) and isChangeSafeForObjectOrInterfaceField(p25.ofType, p26.ofType) elseif isNamedType(p26) then true else isNonNullType(p26) and isChangeSafeForObjectOrInterfaceField(p25, p26.ofType)
 end
 
-isChangeSafeForInputObjectFieldOrFieldArg = function(p27, p28) --[[ line: 572 | named "isChangeSafeForInputObjectFieldOrFieldArg" ]]
+isChangeSafeForInputObjectFieldOrFieldArg = function(p27, p28)
 	-- upvalues: isListType (ref), isChangeSafeForInputObjectFieldOrFieldArg (write), isNonNullType (ref), isNamedType (ref)
 	return if isListType(p27) then isListType(p28) and isChangeSafeForInputObjectFieldOrFieldArg(p27.ofType, p28.ofType) elseif isNonNullType(p27) then isNonNullType(p28) and isChangeSafeForInputObjectFieldOrFieldArg(p27.ofType, p28.ofType) or not isNonNullType(p28) and isChangeSafeForInputObjectFieldOrFieldArg(p27.ofType, p28) else isNamedType(p28) and p27.name == p28.name
 end
 
-typeKindName = function(p29) --[[ line: 593 | named "typeKindName" ]]
+typeKindName = function(p29)
 	-- upvalues: isScalarType (ref), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isInputObjectType (ref), invariant (ref), inspect (ref)
 	if isScalarType(p29) then
 		return "a Scalar type"
@@ -395,16 +395,16 @@ typeKindName = function(p29) --[[ line: 593 | named "typeKindName" ]]
 	return ""
 end
 
-stringifyValue = function(p30, p31) --[[ line: 620 | named "stringifyValue" ]]
+stringifyValue = function(p30, p31)
 	-- upvalues: astFromValue (ref), invariant (ref), visit (ref), array (ref), naturalCompare (ref), object (ref), print (ref)
 	local var49 = astFromValue(p30, p31)
 	invariant(var49 ~= nil)
 	
 	return print(visit(var49, {
-		ObjectValue = function(_, p32) --[[ line: 628 ]]
+		ObjectValue = function(_, p32)
 			-- upvalues: array (copy), naturalCompare (copy), object (copy)
 			local var50 = array.concat({}, p32.fields)
-			array.sort(var50, function(p33, p34) --[[ line: 632 ]]
+			array.sort(var50, function(p33, p34)
 				-- upvalues: naturalCompare (copy)
 				return naturalCompare(p33.name.value, p34.name.value)
 			end)
@@ -414,15 +414,15 @@ stringifyValue = function(p30, p31) --[[ line: 620 | named "stringifyValue" ]]
 	}))
 end
 
-diff = function(p35, p36) --[[ line: 645 | named "diff" ]]
+diff = function(p35, p36)
 	-- upvalues: keyMapOrdered (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
-	local var54 = keyMapOrdered(p35, function(p37) --[[ line: 656 ]]
+	local var54 = keyMapOrdered(p35, function(p37)
 		return p37.name
 	end)
-	local var55 = keyMapOrdered(p36, function(p38) --[[ line: 659 ]]
+	local var55 = keyMapOrdered(p36, function(p38)
 		return p38.name
 	end)
 	

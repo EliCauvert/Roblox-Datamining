@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("UserProfiles").Parent.ApolloClient)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	local client = p0.client
 	local query = p0.query
 	local userId = p0.userId

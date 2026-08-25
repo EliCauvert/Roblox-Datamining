@@ -4,7 +4,7 @@ local getConversationMessageStoreModule = require(appChat.Stores.GetConversation
 local getConversationMessageListStoreModule = require(appChat.Stores.GetConversationMessageListStore)
 local ingestOperationModule = require(script.Parent.IngestOperation)
 
-return function(p0, p1, p2, p3) --[[ line: 31 | named "ingestBatch" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: getConversationMessageStoreModule (ref), getConversationMessageListStoreModule (ref), ingestOperationModule (ref)
 	local var4 = getConversationMessageStoreModule(false)
 	local var5 = getConversationMessageListStoreModule(false)

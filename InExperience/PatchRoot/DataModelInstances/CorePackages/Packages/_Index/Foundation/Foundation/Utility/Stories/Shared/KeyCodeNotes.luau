@@ -84,7 +84,7 @@ local t_2 = {
 }
 
 return {
-	getKeyCodeNote = function(p0) --[[ line: 97 ]]
+	getKeyCodeNote = function(p0)
 		-- upvalues: keyCodeCategoriesModule (ref), t_1 (ref), t (ref), t_2 (ref)
 		local keyCodeName = keyCodeCategoriesModule.getKeyCodeName(p0)
 		

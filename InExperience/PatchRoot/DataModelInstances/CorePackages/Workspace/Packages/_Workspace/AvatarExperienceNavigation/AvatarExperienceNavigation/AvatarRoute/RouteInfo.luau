@@ -12,7 +12,7 @@ t.Interface = tModule.strictInterface({
 	params = tModule.table
 })
 
-function t.new(p0, p1, p2) --[[ line: 20 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = { name = p0, key = p1, params = p2 or {} }
 	setmetatable(t_1, t)
@@ -22,11 +22,11 @@ end
 
 t.EMPTY = t.new(avatarScreenModule.None, avatarScreenModule.None)
 
-function t:__tostring() --[[ line: 32 ]]
+function t:__tostring()
 	return string.format("%s(key=%s)", self.name, tostring(self.key))
 end
 
-function t:__eq(p3) --[[ line: 36 ]]
+function t:__eq(p3)
 	-- upvalues: tutilsModule (ref)
 	return if rawequal(self, p3) then true else self.key == p3.key and (self.name == p3.name and tutilsModule.shallowEqual(self.params, p3.params, nil))
 end

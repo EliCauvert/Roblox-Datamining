@@ -8,7 +8,7 @@ local getEncodedAuditHeader = require(legallySensitiveContent.Utils.AuditUtils).
 local consentNameModule = require(legallySensitiveContent.Enums.ConsentName)
 local _ = require(legallySensitiveContent.Types.LegallySensitiveContentTypes)
 
-return function(value, p0) --[[ line: 31 | named "useTranslatedLegallySensitiveContentAndActions" ]]
+return function(value, p0)
 	-- upvalues: useLocalization (ref), legallySensitiveContentConstantsModule (ref), consentNameModule (ref), getEncodedAuditHeader (ref), updateUserSetting (ref), grantOneTimeUserConsent (ref)
 	local var3 = useLocalization({
 		phoneNumberDiscoverabilityUpsellNotNow = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.notNow,
@@ -32,14 +32,14 @@ return function(value, p0) --[[ line: 31 | named "useTranslatedLegallySensitiveC
 			}
 		}
 	})[value], {
-		getBase64EncodedAuditHeader = function(p1) --[[ line: 101 ]]
+		getBase64EncodedAuditHeader = function(p1)
 			-- upvalues: getEncodedAuditHeader (copy), value (ref), var3 (ref), p0 (ref)
 			return getEncodedAuditHeader(value, var3, p0, p1)
 		end,
-		updateSettingWithAuditing = function(value_1, p2, p3) --[[ line: 85 ]]
+		updateSettingWithAuditing = function(value_1, p2, p3)
 			-- upvalues: getEncodedAuditHeader (copy), value (ref), var3 (ref), p0 (ref), updateUserSetting (copy)
 			local var4 = getEncodedAuditHeader(value, var3, p0, p3)
-			local ok, status = pcall(function() --[[ line: 92 ]]
+			local ok, status = pcall(function()
 				-- upvalues: updateUserSetting (copy), value_1 (ref), p2 (ref), var4 (ref)
 				updateUserSetting(value_1, p2, var4)
 			end)
@@ -48,10 +48,10 @@ return function(value, p0) --[[ line: 31 | named "useTranslatedLegallySensitiveC
 				warn("Failed to update setting with auditing:", status)
 			end
 		end,
-		grantOneTimeUserConsentWithAuditing = function(p4, p5) --[[ line: 105 ]]
+		grantOneTimeUserConsentWithAuditing = function(p4, p5)
 			-- upvalues: getEncodedAuditHeader (copy), value (ref), var3 (ref), p0 (ref), grantOneTimeUserConsent (copy)
 			local var5 = getEncodedAuditHeader(value, var3, p0, p5)
-			local ok, status = pcall(function() --[[ line: 111 ]]
+			local ok, status = pcall(function()
 				-- upvalues: grantOneTimeUserConsent (copy), value (copy), p4 (ref), var5 (ref)
 				grantOneTimeUserConsent(value, p4, var5)
 			end)

@@ -5,7 +5,7 @@ local getAssetCreationDetailsModule = require(parent.util.getAssetCreationDetail
 local parseContentIdsModule = require(parent.util.ParseContentIds)
 local _ = require(parent.util.Types)
 
-local function validateUser(p0, p1, p2) --[[ line: 11 ]]
+local function validateUser(p0, p1, p2)
 	if not p0 or #p0 == 0 then
 		return true
 	end
@@ -27,7 +27,7 @@ local function validateUser(p0, p1, p2) --[[ line: 11 ]]
 	return true
 end
 
-return function(p3, p4, p5) --[[ line: 45 | named "validateModeration" ]]
+return function(p3, p4, p5)
 	-- upvalues: parseContentIdsModule (ref), analyticsModule (ref), getAssetCreationDetailsModule (ref), validateUser (ref), constantsModule (ref)
 	if p5.isServer or p5.allowUnreviewedAssets then
 		return true

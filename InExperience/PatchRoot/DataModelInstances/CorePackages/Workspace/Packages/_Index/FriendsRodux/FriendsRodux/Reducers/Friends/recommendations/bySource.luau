@@ -6,13 +6,13 @@ local recommendationSourceCreatedModule = require(parent.Actions.RecommendationS
 local _ = require(parent.roduxFriendsTypes)
 local t = {}
 
-return function(_) --[[ line: 13 ]]
+return function(_)
 	-- upvalues: roduxModule (ref), t (ref), recommendationSourceCreatedModule (ref), llamaModule (ref)
 	return roduxModule.createReducer(t, {
-		[recommendationSourceCreatedModule.name] = function(p0, p1) --[[ line: 15 ]]
+		[recommendationSourceCreatedModule.name] = function(p0, p1)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p0, {
-				[p1.payload.source] = llamaModule.List.reduce(p1.payload.recommendationIds or {}, function(p2, p3) --[[ line: 22 ]]
+				[p1.payload.source] = llamaModule.List.reduce(p1.payload.recommendationIds or {}, function(p2, p3)
 					p2[tostring(p3)] = true
 					
 					return p2

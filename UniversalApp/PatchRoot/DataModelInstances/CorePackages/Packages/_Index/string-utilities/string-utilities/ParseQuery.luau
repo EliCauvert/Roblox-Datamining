@@ -1,22 +1,22 @@
 ﻿local runService = game:GetService("RunService")
 local stringSplitModule = require(script.Parent.StringSplit)
 
-function assertIsType(p0, p1, p2) --[[ line: 5 ]]
+function assertIsType(p0, p1, p2)
 	-- upvalues: runService (ref)
 	if runService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ then
 		assert(typeof(p0) == p1, string.format("expects %s to be a %s! it was: %s", p2, p1, typeof(p0)))
 	end
 end
 
-local function urlDecode(p3) --[[ line: 14 ]]
+local function urlDecode(p3)
 	assertIsType(p3, "string", "input")
 	
-	return string.gsub(string.gsub(p3, "%%(%x%x)", function(p4) --[[ line: 16 ]]
+	return string.gsub(string.gsub(p3, "%%(%x%x)", function(p4)
 		return string.char(tonumber(p4, 16))
 	end), "+", " ")
 end
 
-return function(p5, p6) --[[ line: 36 | named "ParseQuery" ]]
+return function(p5, p6)
 	-- upvalues: stringSplitModule (ref), urlDecode (ref)
 	if p5 ~= nil then
 		assertIsType(p5, "string", "input")

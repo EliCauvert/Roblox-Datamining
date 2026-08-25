@@ -11,12 +11,12 @@ local useRefreshCreatorCreditOnUnhideModule = require(buildExperience.Components
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-local function _(p0) --[[ line: 38 | named "getQuotaBlockReason" ]]
+local function _(p0)
 	-- upvalues: creatorCreditConfigModule (ref)
 	return if p0 == nil then nil elseif p0.allowed == nil then if p0.freeTrialRemaining > 0 then nil elseif p0.limitSettings.additionalUsageEnabled then if p0.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif p0.limitSettings.dailyLimitSet and p0.limitRemaining < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif p0.allowed then nil else p0.reason
 end
 
-return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" ]]
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), creatorCreditConfigModule (ref), useOpenBuyRobuxWebViewModule (ref), useRefreshCreatorCreditOnUnhideModule (ref)
 	local var9 = if fFlagBuildLocalization then useLocalization({
 		adjustLimit = localizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON,
@@ -31,7 +31,7 @@ return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" 
 		viewUsage = localizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
 	}) else nil
 	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 79 ]]
+	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getQuotaSummary()
 	end, { creatorCreditStore }).data)
@@ -41,17 +41,17 @@ return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" 
 	local var16 = reactModule.useRef(outOfCreditsPromptFailureCount)
 	local var17 = reactModule.useRef(0)
 	local var18, var19 = reactModule.useState(nil)
-	local var20 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), creatorCreditStore (ref), var19 (ref), creatorCreditConfigModule (copy)
 		local current = var17.current
-		creatorCreditStore.refreshQuotaSummary():andThen(function(p2) --[[ line: 95 ]]
+		creatorCreditStore.refreshQuotaSummary():andThen(function(p2)
 			-- upvalues: current (ref), var17 (copy), var19 (copy), creatorCreditConfigModule (copy)
 			if p2 ~= nil and current == var17.current then
 				var19(if p2 == nil then nil elseif p2.allowed ~= nil then if p2.freeTrialRemaining > 0 then nil elseif not p2.limitSettings.additionalUsageEnabled then if p2.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif p2.limitSettings.dailyLimitSet and p2.limitRemaining < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif p2.allowed then nil else p2.reason)
 			end
-		end):catch(function() --[[ line: 100 ]] end)
+		end):catch(function() end)
 	end, { creatorCreditStore })
-	reactModule.useEffect(function() --[[ line: 102 ]]
+	reactModule.useEffect(function()
 		-- upvalues: outOfCreditsPromptFailureCount (ref), var16 (ref), var17 (ref), var19 (ref), p1 (ref), var14 (ref), var20 (ref)
 		if var16.current < outOfCreditsPromptFailureCount then
 			var17.current += 1
@@ -66,7 +66,7 @@ return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" 
 		var20
 	})
 	local var21 = reactModule.useRef(p1.isAssistantResponding)
-	reactModule.useEffect(function() --[[ line: 113 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var21 (ref), p1 (ref), creatorCreditConfigModule (copy), var20 (ref)
 		local var28 = var21.current and not p1.isAssistantResponding
 		var21.current = p1.isAssistantResponding
@@ -74,13 +74,13 @@ return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" 
 		if var28 then
 			local delayedThread = task.delay(creatorCreditConfigModule.FIntPostTurnRefreshDelaySeconds, var20)
 			
-			return function() --[[ line: 120 ]]
+			return function()
 				-- upvalues: delayedThread (ref)
 				task.cancel(delayedThread)
 			end
 		end
 	end, { p1.isAssistantResponding, var20 })
-	reactModule.useEffect(function() --[[ line: 125 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), creatorCreditConfigModule (copy), var20 (ref)
 		if var12 == nil or var12 == "" then return end
 		local dateTime = DateTime.fromIsoDate(var12)
@@ -90,18 +90,18 @@ return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" 
 		end
 		local delayedThread = task.delay(math.max(1, dateTime.UnixTimestamp - DateTime.now().UnixTimestamp + creatorCreditConfigModule.FIntResetRefreshBufferSeconds), var20)
 		
-		return function() --[[ line: 140 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
 	end, { var12, var20 })
-	local var22 = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function() --[[ line: 145 ]]
+	local var22 = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function()
 		-- upvalues: var20 (ref), var14 (ref)
 		var20()
 		var14(true)
 	end, { var20 }))
 	useRefreshCreatorCreditOnUnhideModule(var20)
-	local var23 = reactModule.useCallback(function() --[[ line: 152 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), p1 (ref)
 		var14(true)
 		
@@ -109,7 +109,7 @@ return function(p1) --[[ line: 63 | named "useCreatorCreditChatUpsellViewModel" 
 			p1.onOpenCreatorCreditPage()
 		end
 	end, { p1.onOpenCreatorCreditPage })
-	local var24 = reactModule.useCallback(function() --[[ line: 158 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref)
 		var14(true)
 	end, {})

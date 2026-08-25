@@ -14,7 +14,7 @@ local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 local t = {}
 
-local function orientSingleAssetToWorldAxes(value, p0, p1) --[[ line: 34 ]]
+local function orientSingleAssetToWorldAxes(value, p0, p1)
 	-- upvalues: assetCalculatorModule (ref)
 	if p0 ~= Enum.AssetType.LeftArm and p0 ~= Enum.AssetType.RightArm and (p0 ~= Enum.AssetType.LeftLeg and p0 ~= Enum.AssetType.RightLeg) then return end
 	for i, v in assetCalculatorModule.calculateStraightenedLimb(p0, value, p1) do
@@ -22,9 +22,9 @@ local function orientSingleAssetToWorldAxes(value, p0, p1) --[[ line: 34 ]]
 	end
 end
 
-local function orientFullBodyArmsLegsToWorldAxes(p2, p3) --[[ line: 55 ]]
+local function orientFullBodyArmsLegsToWorldAxes(p2, p3)
 	-- upvalues: orientSingleAssetToWorldAxes (ref), getPartNamesInHierarchyOrderModule (ref), constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
-	local function orientAndMoveParts(p4, p5) --[[ line: 56 ]]
+	local function orientAndMoveParts(p4, p5)
 		-- upvalues: orientSingleAssetToWorldAxes (copy), p2 (ref), p3 (ref), getPartNamesInHierarchyOrderModule (copy), constantsInterfaceModule (copy), r15plusUtilsModule (copy), getAttachmentCFrameInPartSpaceModule (copy)
 		orientSingleAssetToWorldAxes(p2, p4, p3)
 		local var21 = getPartNamesInHierarchyOrderModule(p4)
@@ -50,7 +50,7 @@ local function orientFullBodyArmsLegsToWorldAxes(p2, p3) --[[ line: 55 ]]
 	orientAndMoveParts(Enum.AssetType.RightLeg, "LowerTorso")
 end
 
-local function calculateBoundsDataForPart(p6, p7, p8, p9, p10) --[[ line: 91 ]]
+local function calculateBoundsDataForPart(p6, p7, p8, p9, p10)
 	-- upvalues: getExpectedPartSizeModule (ref), getMeshVertsModule (ref), boundsDataUtilsModule (ref), constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
 	assert(p6 ~= nil ~= (p10 ~= nil))
 	local var29 = getExpectedPartSizeModule(p7, p9) / p7.MeshSize
@@ -92,7 +92,7 @@ local function calculateBoundsDataForPart(p6, p7, p8, p9, p10) --[[ line: 91 ]]
 	end
 end
 
-local function buildValidationContextFromRenderMeshes(p11, p12, p13) --[[ line: 149 ]]
+local function buildValidationContextFromRenderMeshes(p11, p12, p13)
 	local t = {}
 	local descendants = p11:GetDescendants()
 	table.insert(descendants, p11)
@@ -112,7 +112,7 @@ local function buildValidationContextFromRenderMeshes(p11, p12, p13) --[[ line: 
 	return { assetTypeEnum = p12, editableMeshes = t }
 end
 
-local function calculateAllPartsBoundsData(p14, p15, p16, p17) --[[ line: 170 ]]
+local function calculateAllPartsBoundsData(p14, p15, p16, p17)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), calculateBoundsDataForPart (ref)
 	local t = {}
 	
@@ -146,7 +146,7 @@ local function calculateAllPartsBoundsData(p14, p15, p16, p17) --[[ line: 170 ]]
 	return true, nil, t
 end
 
-local function calculateTotalBoundsForAsset(value, p18, p19) --[[ line: 201 ]]
+local function calculateTotalBoundsForAsset(value, p18, p19)
 	-- upvalues: calculateAllPartsBoundsData (ref), boundsDataUtilsModule (ref)
 	local var49, var50, var51 = calculateAllPartsBoundsData(value, p18, p19)
 	
@@ -161,9 +161,9 @@ local function calculateTotalBoundsForAsset(value, p18, p19) --[[ line: 201 ]]
 	return true, nil, t
 end
 
-local function calculatePartBounds(p20, p21) --[[ line: 220 ]]
+local function calculatePartBounds(p20, p21)
 	-- upvalues: calculateTotalBoundsForAsset (ref)
-	local var53, var54, var55 = calculateTotalBoundsForAsset({ [p20.Name] = CFrame.new() }, function(p22) --[[ line: 225 | named "findMeshHandle" ]]
+	local var53, var54, var55 = calculateTotalBoundsForAsset({ [p20.Name] = CFrame.new() }, function(p22)
 		-- upvalues: p20 (ref)
 		assert(p22 == p20.Name)
 		
@@ -176,7 +176,7 @@ local function calculatePartBounds(p20, p21) --[[ line: 220 ]]
 	return var53, var54
 end
 
-function t.calculateAssetBounds(value, p23) --[[ line: 239 ]]
+function t.calculateAssetBounds(value, p23)
 	-- upvalues: calculatePartBounds (ref), assetCalculatorModule (ref), orientSingleAssetToWorldAxes (ref), calculateTotalBoundsForAsset (ref)
 	local assetTypeEnum = p23.assetTypeEnum
 	assert(assetTypeEnum)
@@ -186,7 +186,7 @@ function t.calculateAssetBounds(value, p23) --[[ line: 239 ]]
 	end
 	local var56 = assetCalculatorModule.calculateAllTransformsForAsset(assetTypeEnum, value)
 	
-	local function findMeshHandle(p24) --[[ line: 252 ]]
+	local function findMeshHandle(p24)
 		-- upvalues: value (ref)
 		return value:FindFirstChild(p24)
 	end
@@ -200,13 +200,13 @@ function t.calculateAssetBounds(value, p23) --[[ line: 239 ]]
 	return var58, var59
 end
 
-function t.calculateIndividualAssetPartsData(value, p25) --[[ line: 268 ]]
+function t.calculateIndividualAssetPartsData(value, p25)
 	-- upvalues: assetCalculatorModule (ref), orientSingleAssetToWorldAxes (ref), calculateAllPartsBoundsData (ref)
 	local assetTypeEnum = p25.assetTypeEnum
 	assert(assetTypeEnum)
 	local var61 = assetCalculatorModule.calculateAllTransformsForAsset(assetTypeEnum, value)
 	
-	local function findMeshHandle(p26) --[[ line: 277 ]]
+	local function findMeshHandle(p26)
 		-- upvalues: assetTypeEnum (ref), value (ref)
 		return if assetTypeEnum == Enum.AssetType.DynamicHead then value else value:FindFirstChild(p26)
 	end
@@ -225,9 +225,9 @@ function t.calculateIndividualAssetPartsData(value, p25) --[[ line: 268 ]]
 	return true, nil, t
 end
 
-function t.calculateIndividualFullBodyPartsData(p27, p28, p29, p30) --[[ line: 302 ]]
+function t.calculateIndividualFullBodyPartsData(p27, p28, p29, p30)
 	-- upvalues: assetCalculatorModule (ref), getFFlagUGCValidateLegFullBodySeparationModule (ref), orientFullBodyArmsLegsToWorldAxes (ref), calculateAllPartsBoundsData (ref)
-	local function findMeshHandle(p31) --[[ line: 308 ]]
+	local function findMeshHandle(p31)
 		-- upvalues: p27 (ref)
 		return p27[p31]
 	end
@@ -252,9 +252,9 @@ function t.calculateIndividualFullBodyPartsData(p27, p28, p29, p30) --[[ line: 3
 	return true, nil, t
 end
 
-function t.calculateFullBodyBounds(p32, p33) --[[ line: 335 ]]
+function t.calculateFullBodyBounds(p32, p33)
 	-- upvalues: assetCalculatorModule (ref), orientFullBodyArmsLegsToWorldAxes (ref), calculateTotalBoundsForAsset (ref)
-	local function findMeshHandle(p34) --[[ line: 339 ]]
+	local function findMeshHandle(p34)
 		-- upvalues: p32 (ref)
 		return p32[p34]
 	end
@@ -269,14 +269,14 @@ function t.calculateFullBodyBounds(p32, p33) --[[ line: 335 ]]
 	return var75, var76
 end
 
-function t.calculateAssetBoundsFromData(value, p35, p36) --[[ line: 353 ]]
+function t.calculateAssetBoundsFromData(value, p35, p36)
 	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), buildValidationContextFromRenderMeshes (ref), t (ref)
 	assert(getFFlagUGCValidateMigrateBodyPartBoundsModule(), "calculateAssetBoundsFromData requires FFlagUGCValidateMigrateBodyPartBounds")
 	
 	return t.calculateAssetBounds(value, buildValidationContextFromRenderMeshes(value, p35, p36))
 end
 
-function t.calculateFullBodyBoundsFromData(p37, p38) --[[ line: 366 ]]
+function t.calculateFullBodyBoundsFromData(p37, p38)
 	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), buildValidationContextFromRenderMeshes (ref), t (ref)
 	assert(getFFlagUGCValidateMigrateBodyPartBoundsModule(), "calculateFullBodyBoundsFromData requires FFlagUGCValidateMigrateBodyPartBounds")
 	local var78 = next(p37)
@@ -287,7 +287,7 @@ function t.calculateFullBodyBoundsFromData(p37, p38) --[[ line: 366 ]]
 	return false, { "No body parts provided" }
 end
 
-function t.calculateIndividualAssetPartsDataFromData(value, p39, p40) --[[ line: 383 ]]
+function t.calculateIndividualAssetPartsDataFromData(value, p39, p40)
 	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), buildValidationContextFromRenderMeshes (ref), t (ref)
 	assert(getFFlagUGCValidateMigrateBodyPartBoundsModule(), "calculateIndividualAssetPartsDataFromData requires FFlagUGCValidateMigrateBodyPartBounds")
 	

@@ -24,17 +24,17 @@ searchBox.validateProps = t.strictInterface({
 	itemRef = t.optional(t.table)
 })
 
-function searchBox.init(p0) --[[ line: 50 ]]
+function searchBox.init(p0)
 	p0.state = { searchText = "" }
 end
 
-function searchBox.renderWithSelectionCursor(p1, p2) --[[ line: 56 ]]
+function searchBox.renderWithSelectionCursor(p1, p2)
 	-- upvalues: withLocalizationModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), var4 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), themedTextLabelModule (ref)
 	return withLocalizationModule({
 		searchPlaceholder = "CoreScripts.InGameMenu.InviteFriends.Search"
-	})(function(p3) --[[ line: 59 ]]
+	})(function(p3)
 		-- upvalues: withFoundationOrUIBloxStyle (copy), p1 (ref), roact (copy), p2 (ref), var4 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy)
-		return withFoundationOrUIBloxStyle(function(p4) --[[ line: 60 ]]
+		return withFoundationOrUIBloxStyle(function(p4)
 			return {
 				Theme = {
 					TextEmphasis = {
@@ -62,7 +62,7 @@ function searchBox.renderWithSelectionCursor(p1, p2) --[[ line: 56 ]]
 					}
 				}
 			}
-		end, function(p5) --[[ line: 73 ]]
+		end, function(p5)
 			-- upvalues: p1 (copy), roact (copy), p2 (copy), var4 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), p3 (ref)
 			local textEmphasis = p5.Theme.TextEmphasis
 			local body = p5.Font.Body
@@ -127,7 +127,7 @@ function searchBox.renderWithSelectionCursor(p1, p2) --[[ line: 56 ]]
 					TextSize = body.RelativeSize * p5.Font.BaseSize,
 					TextWrapped = false,
 					SelectionImageObject = p2(var4.InputFields),
-					[roact.Change.Text] = function(p6) --[[ line: 181 ]]
+					[roact.Change.Text] = function(p6)
 						-- upvalues: p1 (copy)
 						if p1.state.searchText ~= p6.Text then
 							p1:setState({ searchText = p6.Text })
@@ -155,7 +155,7 @@ function searchBox.renderWithSelectionCursor(p1, p2) --[[ line: 56 ]]
 					Visible = var9,
 					SelectionImageObject = p2(var4.SmallPill),
 					Selectable = true,
-					[roact.Event.Activated] = function() --[[ line: 94 ]]
+					[roact.Event.Activated] = function()
 						-- upvalues: p1 (copy)
 						p1:setState({ searchText = "" })
 						p1.props.searchCleared()
@@ -188,9 +188,9 @@ function searchBox.renderWithSelectionCursor(p1, p2) --[[ line: 56 ]]
 	end)
 end
 
-function searchBox.render(p7) --[[ line: 211 ]]
+function searchBox.render(p7)
 	-- upvalues: var3 (ref)
-	return var3(function(p8) --[[ line: 212 ]]
+	return var3(function(p8)
 		-- upvalues: p7 (ref)
 		return p7:renderWithSelectionCursor(p8)
 	end)

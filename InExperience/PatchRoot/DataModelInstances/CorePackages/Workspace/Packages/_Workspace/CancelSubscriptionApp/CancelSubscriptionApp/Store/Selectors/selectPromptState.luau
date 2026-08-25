@@ -2,6 +2,6 @@
 local _ = require(cancelSubscriptionApp.Store.Types)
 local _ = require(cancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
 
-return function(p0) --[[ line: 8 | named "selectPromptState" ]]
+return function(p0)
 	return p0.promptState
 end

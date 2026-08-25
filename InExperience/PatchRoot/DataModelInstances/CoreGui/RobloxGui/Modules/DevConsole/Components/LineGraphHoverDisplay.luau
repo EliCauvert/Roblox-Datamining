@@ -5,7 +5,7 @@ local lineWidth = constantsModule.GeneralFormatting.LineWidth
 local textPadding = constantsModule.Graph.TextPadding
 local innerPaddingY = constantsModule.Graph.InnerPaddingY
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: roactModule (ref), lineWidth (ref), hoverGreen (ref), textPadding (ref), innerPaddingY (ref)
 	local hoverLineX = p0.hoverLineX
 	local hoverLineY = p0.hoverLineY

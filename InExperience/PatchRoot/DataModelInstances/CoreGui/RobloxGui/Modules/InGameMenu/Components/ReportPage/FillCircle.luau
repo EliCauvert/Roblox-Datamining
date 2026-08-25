@@ -21,19 +21,19 @@ fillCircle.validateProps = t.strictInterface({
 	BackgroundColor = t.Color3
 })
 
-local function _(p0) --[[ line: 42 | named "getFillRingZIndex" ]]
+local function _(p0)
 	return if p0 > 0.75 then 8 elseif p0 > 0.5 then 6 elseif p0 > 0.25 then 4 elseif p0 > 0 then 2 else 0
 end
 
-local _ = function(p1, p2, p3) --[[ line: 55 | named "linearTween" ]]
+local _ = function(p1, p2, p3)
 	return (p1 - p2 / 30) / ((p3 - p2) / 30)
 end
 
-local _ = function(p4, p5, p6) --[[ line: 60 | named "isBetweenFrames" ]]
+local _ = function(p4, p5, p6)
 	return p5 / 30 <= p4 and p4 <= p6 / 30
 end
 
-local function largerCircleAnimation(p7, p8, p9, p10) --[[ line: 64 ]]
+local function largerCircleAnimation(p7, p8, p9, p10)
 	if p9 then
 		p7 = 0.266666666667 - p7
 	end
@@ -62,7 +62,7 @@ local function largerCircleAnimation(p7, p8, p9, p10) --[[ line: 64 ]]
 	p10()
 end
 
-local function popCircleAnimation(p11, p12, _, p13) --[[ line: 92 ]]
+local function popCircleAnimation(p11, p12, _, p13)
 	if p11 >= 0 and p11 <= 0.1 then
 		local var15 = 20 + 4 * ((p11 - 0) / 0.1)
 		p12.size(UDim2.new(0, var15, 0, var15))
@@ -78,7 +78,7 @@ local function popCircleAnimation(p11, p12, _, p13) --[[ line: 92 ]]
 	p13()
 end
 
-local function shakeCircleAnimation(p14, p15, _, p16) --[[ line: 113 ]]
+local function shakeCircleAnimation(p14, p15, _, p16)
 	if p14 >= 0 and p14 <= 0.1 then
 		p15.positionOffset(UDim2.new(0, -4 * ((p14 - 0) / 0.1), 0, 0))
 		
@@ -108,12 +108,12 @@ local function shakeCircleAnimation(p14, p15, _, p16) --[[ line: 113 ]]
 	p16()
 end
 
-function fillCircle.init(p17) --[[ line: 148 ]]
+function fillCircle.init(p17)
 	-- upvalues: roact (ref)
 	local var17, var18 = roact.createBinding(UDim2.new(0, 16, 0, 16))
 	p17.sizeBinding = var17
 	p17.sizeBindingUpdate = var18
-	p17.largerSizeBinding = p17.sizeBinding:map(function(p18) --[[ line: 151 ]]
+	p17.largerSizeBinding = p17.sizeBinding:map(function(p18)
 		return p18 + UDim2.new(0, 2, 0, 2)
 	end)
 	local var19, var20 = roact.createBinding(UDim2.new(0, 0, 0, 0))
@@ -129,7 +129,7 @@ function fillCircle.init(p17) --[[ line: 148 ]]
 	p17.renderSteppedConnection = nil
 end
 
-function fillCircle.render(p19) --[[ line: 167 ]]
+function fillCircle.render(p19)
 	-- upvalues: color_2 (ref), color_1 (ref), roact (ref), color (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
 	local props = p19.props
 	local var21 = if props.fillFraction >= 1 then color_2 else color_1
@@ -270,7 +270,7 @@ function fillCircle.render(p19) --[[ line: 167 ]]
 	return createElement(var22, t, t_1)
 end
 
-function fillCircle.didUpdate(p20, p21, _) --[[ line: 313 ]]
+function fillCircle.didUpdate(p20, p21, _)
 	-- upvalues: largerCircleAnimation (ref), popCircleAnimation (ref), shakeCircleAnimation (ref)
 	local var30 = p20.props.largerCircleFraction <= p20.props.fillFraction
 	
@@ -285,19 +285,19 @@ function fillCircle.didUpdate(p20, p21, _) --[[ line: 313 ]]
 	end
 end
 
-function fillCircle.playAnimation(p22, p23, p24) --[[ line: 333 ]]
+function fillCircle.playAnimation(p22, p23, p24)
 	-- upvalues: runService (ref)
 	if p22.animationFunction then
-		p22.animationFunction(100, p22.updateBindings, p22.reverseAnimation, function() --[[ line: 336 ]] end)
+		p22.animationFunction(100, p22.updateBindings, p22.reverseAnimation, function() end)
 	end
 	p22.animationStartTime = tick()
 	p22.animationFunction = p23
 	p22.reverseAnimation = p24
 	
 	if not p22.renderSteppedConnection then
-		p22.renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 342 ]]
+		p22.renderSteppedConnection = runService.RenderStepped:Connect(function()
 			-- upvalues: p22 (ref)
-			p22.animationFunction(tick() - p22.animationStartTime, p22.updateBindings, p22.reverseAnimation, function() --[[ line: 347 ]]
+			p22.animationFunction(tick() - p22.animationStartTime, p22.updateBindings, p22.reverseAnimation, function()
 				-- upvalues: p22 (copy)
 				p22:stopAnimation()
 			end)
@@ -305,14 +305,14 @@ function fillCircle.playAnimation(p22, p23, p24) --[[ line: 333 ]]
 	end
 end
 
-function fillCircle.stopAnimation(p25) --[[ line: 355 ]]
+function fillCircle.stopAnimation(p25)
 	if p25.renderSteppedConnection then
 		p25.renderSteppedConnection:Disconnect()
 		p25.renderSteppedConnection = nil
 	end
 end
 
-function fillCircle.willUnmount(p26) --[[ line: 362 ]]
+function fillCircle.willUnmount(p26)
 	p26:stopAnimation()
 end
 

@@ -1,6 +1,6 @@
 ﻿local text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(p0, p1, p2) --[[ line: 23 ]]
+return function(p0, p1, p2)
 	-- upvalues: text (ref)
 	local p0Count = #p0
 	local var2 = if p2 ~= nil then 1 elseif p2 < 1 then 1 else p2

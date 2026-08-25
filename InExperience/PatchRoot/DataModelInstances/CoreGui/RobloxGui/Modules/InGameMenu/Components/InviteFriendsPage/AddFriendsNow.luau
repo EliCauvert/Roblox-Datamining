@@ -25,16 +25,16 @@ addFriendsNow.validateProps = t.strictInterface({
 	canCaptureFocus = t.boolean
 })
 
-function addFriendsNow.init(p0) --[[ line: 46 ]]
+function addFriendsNow.init(p0)
 	-- upvalues: roact (ref)
 	p0.buttonRef = roact.createRef()
 end
 
-function addFriendsNow.render(p1) --[[ line: 50 ]]
+function addFriendsNow.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), textService (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), rootedConnectionModule (ref), focusHandlerModule (ref), guiService (ref), button (ref), buttonType (ref)
 	local props = p1.props
 	
-	return withFoundationOrUIBloxStyle(function(p2) --[[ line: 53 ]]
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Font = {
 				BaseSize = 1,
@@ -44,12 +44,12 @@ function addFriendsNow.render(p1) --[[ line: 50 ]]
 				}
 			}
 		}
-	end, function(p3) --[[ line: 60 ]]
+	end, function(p3)
 		-- upvalues: withLocalizationModule (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (ref), guiService (copy), p1 (ref), button (copy), buttonType (copy)
 		return withLocalizationModule({
 			noFriendsText = "CoreScripts.InGameMenu.InviteFriends.NoFriends",
 			makeFriendsNow = "CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow"
-		})(function(p4) --[[ line: 64 ]]
+		})(function(p4)
 			-- upvalues: p3 (ref), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -95,11 +95,11 @@ function addFriendsNow.render(p1) --[[ line: 50 ]]
 					})
 				}),
 				RootedConnection = roact.createElement(rootedConnectionModule, {
-					render = function(p5) --[[ line: 122 ]]
+					render = function(p5)
 						-- upvalues: roact (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy), p4 (ref)
 						return roact.createElement(focusHandlerModule, {
 							isFocused = props.canCaptureFocus and p5,
-							didFocus = function() --[[ line: 126 ]]
+							didFocus = function()
 								-- upvalues: guiService (copy), p1 (copy)
 								guiService.SelectedCoreObject = p1.buttonRef:getValue()
 							end
@@ -120,10 +120,10 @@ function addFriendsNow.render(p1) --[[ line: 50 ]]
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p6) --[[ line: 148 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p6)
 	-- upvalues: setCurrentPageModule (ref)
 	return {
-		switchToPlayers = function() --[[ line: 150 ]]
+		switchToPlayers = function()
 			-- upvalues: p6 (ref), setCurrentPageModule (copy)
 			p6(setCurrentPageModule("Players"))
 		end

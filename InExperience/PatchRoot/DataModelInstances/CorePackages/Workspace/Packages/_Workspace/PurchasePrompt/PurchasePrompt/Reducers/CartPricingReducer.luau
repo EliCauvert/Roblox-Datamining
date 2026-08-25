@@ -19,20 +19,20 @@ local requestRobuxUpsellPurchaseModule = require(purchasePrompt.Actions.RequestR
 local requestDeveloperSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestDeveloperSubscriptionPurchase)
 local t = { response = nil, isFetching = false, requestId = nil }
 
-local function clear() --[[ line: 52 ]]
+local function clear()
 	-- upvalues: t (ref)
 	return t
 end
 
 return rodux.createReducer(t, {
-	[setCartPricingFetchingModule.name] = function(p0, p1) --[[ line: 57 ]]
+	[setCartPricingFetchingModule.name] = function(p0, p1)
 		return {
 			isFetching = true,
 			response = p0.response,
 			requestId = p1.requestId
 		}
 	end,
-	[setCartPricingResponseModule.name] = function(p2, p3) --[[ line: 60 ]]
+	[setCartPricingResponseModule.name] = function(p2, p3)
 		return {
 			isFetching = false,
 			response = p3.response,

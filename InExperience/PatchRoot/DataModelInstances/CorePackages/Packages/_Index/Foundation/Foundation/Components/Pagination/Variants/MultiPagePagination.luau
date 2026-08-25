@@ -20,14 +20,14 @@ local t = {
 	size = paginationSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "MultiPagePagination" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), paginationSlotsUtilsModule (ref), usePaginationNavModule (ref), usePaginationAnimatedHighlightModule (ref), paginationSizeModule (ref), chipSizeModule (ref), useChipVariantsModule (ref), chipVariantModule (ref), ellipsisModule (ref), pageNumberSlotModule (ref), viewModule (ref), paginationUtilsModule (ref)
 	local var16 = withDefaultsModule(p0, t)
 	local size = var16.size
 	local var17 = useTokensModule()
 	local var18 = var16.page <= 1
 	local var19 = var16.count <= var16.page
-	local var20 = reactModule.useMemo(function() --[[ line: 52 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: paginationSlotsUtilsModule (copy), var16 (ref)
 		return paginationSlotsUtilsModule.getVisiblePageSlots(var16.page, var16.count)
 	end, { var16.page, var16.count })
@@ -43,12 +43,12 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 			isLastDisabled = var19
 		}
 	}, var22)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 70 ]]
+	reactModule.useImperativeHandle(p1, function()
 		-- upvalues: var21 (ref)
 		return var21
 	end, { var21 })
 	local var24 = reactModule.useRef(nil)
-	local var25 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), paginationSlotsUtilsModule (copy), var23 (ref)
 		local t = {}
 		
@@ -74,10 +74,10 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 			tag = "radius-circle clip",
 			ZIndex = 1,
 			backgroundStyle = useChipVariantsModule(var17, if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium, chipVariantModule.Utility, true, false, false).chip.backgroundStyle,
-			Size = reactModule.joinBindings({ var27.highlightWidth, var27.activeItemHeight }):map(function(p2) --[[ line: 158 ]]
+			Size = reactModule.joinBindings({ var27.highlightWidth, var27.activeItemHeight }):map(function(p2)
 				return UDim2.fromOffset(p2[1], p2[2])
 			end),
-			Position = var27.highlightPosition:map(function(p3) --[[ line: 161 ]]
+			Position = var27.highlightPosition:map(function(p3)
 				return UDim2.fromOffset(p3, 0)
 			end),
 			Visible = var27.isVisible,
@@ -88,7 +88,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 			tag = "row gap-xsmall auto-xy",
 			LayoutOrder = 1,
 			ZIndex = 2,
-			onAbsoluteSizeChanged = reactModule.useCallback(function() --[[ line: 138 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function()
 				-- upvalues: var25 (ref), pageSlotId (ref), var24 (ref), var27 (ref)
 				local var30 = var25[pageSlotId]
 				
@@ -96,7 +96,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 					var27.updateHighlight(var30, true)
 				end
 			end, { pageSlotId, var25, var27.updateHighlight })
-		}, reactModule.useMemo(function() --[[ line: 94 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: var20 (ref), reactModule (copy), ellipsisModule (copy), size (ref), var16 (ref), paginationSlotsUtilsModule (copy), var23 (ref), pageNumberSlotModule (copy)
 			local t = {}
 			

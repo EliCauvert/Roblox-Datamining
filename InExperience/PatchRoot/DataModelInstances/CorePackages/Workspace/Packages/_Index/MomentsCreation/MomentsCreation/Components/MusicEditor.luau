@@ -27,7 +27,7 @@ local _ = require(parent.MomentsTypes)
 local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
 local uDim2 = UDim2.new(0, 48, 1, 0)
 
-return function(p0) --[[ line: 59 | named "MusicEditor" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useDeviceInsets (ref), useCreationFlowStringsModule (ref), useToggleState (ref), useMusicInfoModule (ref), reactModule (ref), useEffect (ref), signalsModule (ref), useCallback (ref), useMusicEditorControllerModule (ref), useMemo (ref), useSignalBinding (ref), view (ref), button (ref), foundationModule (ref), gradientBackdrop (ref), uDim2 (ref), segmentSelectorWidth (ref), waveformModule (ref), loading (ref), musicPreviewItemModule (ref)
 	local playback = p0.controller.preview.playback
 	local var13 = useTokens()
@@ -38,33 +38,33 @@ return function(p0) --[[ line: 59 | named "MusicEditor" ]]
 	local var18 = useMusicInfoModule(p0.musicEdit.assetId)
 	local var19 = if var18 == nil or var18.Duration == nil then 0 else var18.Duration
 	local var20, var21 = reactModule.useState(playback.getDuration(false))
-	useEffect(function() --[[ line: 73 ]]
+	useEffect(function()
 		-- upvalues: signalsModule (copy), var21 (ref), playback (ref)
-		return signalsModule.createEffect(function(p1) --[[ line: 74 ]]
+		return signalsModule.createEffect(function(p1)
 			-- upvalues: var21 (copy), playback (copy)
 			var21(playback.getDuration(p1))
 		end)
 	end, { playback })
-	local var22 = useCallback(function() --[[ line: 79 ]]
+	local var22 = useCallback(function()
 		-- upvalues: playback (ref), var17 (ref)
 		playback.setMuted(true)
 		playback.seek(0)
 		playback.pause()
 		var17.enable()
 	end, { playback, var17.enable })
-	local var23 = useCallback(function() --[[ line: 86 ]]
+	local var23 = useCallback(function()
 		-- upvalues: playback (ref), var17 (ref)
 		playback.setMuted(false)
 		playback.play()
 		var17.disable()
 	end, { playback, var17.disable })
-	local var24 = useCallback(function() --[[ line: 92 ]]
+	local var24 = useCallback(function()
 		-- upvalues: playback (ref), var16 (ref)
 		playback.setMuted(false)
 		playback.play()
 		var16.enable()
 	end, { playback, var16.enable })
-	useEffect(function() --[[ line: 98 ]]
+	useEffect(function()
 		-- upvalues: var16 (ref)
 		var16.disable()
 	end, { p0.musicEdit.assetId, var16.disable })
@@ -134,7 +134,7 @@ return function(p0) --[[ line: 59 | named "MusicEditor" ]]
 					WaveformDisplay = reactModule.createElement(waveformModule, {
 						zIndex = 1,
 						audioAssetId = p0.musicEdit.assetId,
-						position = var25.waveformPosition:map(function(p2) --[[ line: 203 ]]
+						position = var25.waveformPosition:map(function(p2)
 							return UDim2.fromScale(p2, 0.5)
 						end),
 						onWaveformReady = var24,
@@ -155,15 +155,15 @@ return function(p0) --[[ line: 59 | named "MusicEditor" ]]
 			}, {
 				Scrubber = if var16.enabled and not var17.enabled then reactModule.createElement(view, {
 					tag = "anchor-center-center size-100-1900 radius-circle bg-system-contrast",
-					Position = useSignalBinding(useMemo(function() --[[ line: 116 ]]
+					Position = useSignalBinding(useMemo(function()
 						-- upvalues: signalsModule (copy), playback (ref)
-						return signalsModule.createComputed(function(p4) --[[ line: 117 ]]
+						return signalsModule.createComputed(function(p4)
 							-- upvalues: playback (copy)
 							local duration = playback.getDuration(p4)
 							
 							return if duration <= 0 then 0 else math.clamp(playback.getPosition(p4) / duration, 0, 1)
 						end)
-					end, { playback })):map(function(p3) --[[ line: 227 ]]
+					end, { playback })):map(function(p3)
 						return UDim2.fromScale(p3, 0.5)
 					end)
 				}) else nil,

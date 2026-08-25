@@ -18,7 +18,7 @@ voiceChatPrompt.validateProps = tModule.strictInterface({
 	settingsAppAvailable = tModule.optional(tModule.boolean)
 })
 
-function voiceChatPrompt.render(p0) --[[ line: 27 ]]
+function voiceChatPrompt.render(p0)
 	-- upvalues: roactModule (ref), inGameMenuPolicyModule (ref), voiceChatPromptFrameModule (ref)
 	return roactModule.createElement("ScreenGui", {
 		AutoLocalize = false,

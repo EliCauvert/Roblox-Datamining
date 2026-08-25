@@ -14,14 +14,14 @@ while not localPlayer do
 	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 	localPlayer = playersService.LocalPlayer
 end
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: runService (ref), chatService (ref), localPlayer (write), setCanChatModule (ref), chatSelectorModule (ref)
-	coroutine.wrap(function() --[[ line: 27 ]]
+	coroutine.wrap(function()
 		-- upvalues: runService (copy), chatService (copy), localPlayer (copy), p0 (ref), setCanChatModule (copy), chatSelectorModule (copy)
 		local var6 = true
 		
 		if not runService:IsStudio() then
-			local ok, status = pcall(function() --[[ line: 30 ]]
+			local ok, status = pcall(function()
 				-- upvalues: chatService (copy), localPlayer (copy)
 				return chatService:CanUserChatAsync(localPlayer.UserId)
 			end)

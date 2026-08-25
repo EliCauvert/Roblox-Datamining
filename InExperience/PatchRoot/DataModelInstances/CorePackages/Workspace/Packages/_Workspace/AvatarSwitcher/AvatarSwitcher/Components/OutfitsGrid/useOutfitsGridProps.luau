@@ -5,7 +5,7 @@ local _ = require(avatarSwitcher.types)
 local experienceAvatarSupportTypeModule = require(avatarSwitcher.Enums.ExperienceAvatarSupportType)
 local avatarSwitcherShimmerTiles = game:DefineFastInt("AvatarSwitcherShimmerTiles", 12)
 
-return function() --[[ line: 19 | named "useOutfitsGridProps" ]]
+return function()
 	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), experienceAvatarSupportTypeModule (ref), avatarSwitcherShimmerTiles (ref)
 	local var5 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
 	local var6 = signalsReactModule.useSignalState(var5.getOutfits)

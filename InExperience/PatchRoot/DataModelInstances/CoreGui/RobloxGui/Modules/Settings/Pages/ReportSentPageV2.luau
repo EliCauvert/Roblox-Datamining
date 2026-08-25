@@ -22,7 +22,7 @@ local var14 = if var13 then require(robloxGui.Modules.Chrome.Service) else nil
 local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 local var15 = nil
 
-local _ = function() --[[ line: 33 ]]
+local _ = function()
 	-- upvalues: var15 (write), roactModule (ref)
 	if var15 ~= nil then
 		roactModule.unmount(var15)
@@ -37,7 +37,7 @@ while not localPlayer do
 end
 local var16 = reportAbuseAnalytics.new(eventIngest.new(eventIngestService), var6.Diag, reportAbuseAnalytics.MenuContexts.LegacySentPage)
 local var17 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
-local var18 = (function() --[[ line: 54 | named "Initialize" ]]
+local var18 = (function()
 	-- upvalues: settingsPageFactoryModule (ref), create (ref)
 	local reportSentPageV2 = settingsPageFactoryModule:CreateNewPage()
 	reportSentPageV2.TabHeader = nil
@@ -58,7 +58,7 @@ local var18 = (function() --[[ line: 54 | named "Initialize" ]]
 	return reportSentPageV2
 end)()
 
-function var18.UpdateMenu(p0) --[[ line: 78 ]]
+function var18.UpdateMenu(p0)
 	-- upvalues: var15 (write), roactModule (ref), var16 (ref), var17 (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reportConfirmationContainerModule (ref), var13 (ref), fFlagEnableConsoleExpControls (ref), var14 (ref)
 	local reportedPlayer = p0.ReportedPlayer
 	
@@ -70,14 +70,14 @@ function var18.UpdateMenu(p0) --[[ line: 78 ]]
 		p0.settingsShowChangedSignal:disconnect()
 		p0.settingsShowChangedSignal = nil
 	end
-	p0.settingsShowChangedSignal = p0.HubRef.SettingsShowSignal:connect(function(p1) --[[ line: 87 ]]
+	p0.settingsShowChangedSignal = p0.HubRef.SettingsShowSignal:connect(function(p1)
 		-- upvalues: p0 (ref)
 		if not p1 then
 			p0:HandleDone()
 		end
 	end)
 	local bindableEvent = Instance.new("BindableEvent")
-	p0.SizeChangedSignal = p0.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 95 ]]
+	p0.SizeChangedSignal = p0.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: bindableEvent (ref), p0 (ref)
 		bindableEvent:Fire(p0.Root.AbsoluteSize)
 	end)
@@ -93,7 +93,7 @@ function var18.UpdateMenu(p0) --[[ line: 78 ]]
 					Name = reportedPlayer.Name,
 					DisplayName = reportedPlayer.DisplayName
 				},
-				closeMenu = function() --[[ line: 105 ]]
+				closeMenu = function()
 					-- upvalues: p0 (ref)
 					p0:HandleDone()
 				end,
@@ -112,7 +112,7 @@ function var18.UpdateMenu(p0) --[[ line: 78 ]]
 	var15 = roactModule.mount(var21, p0.Root, "ReportSentPageV2")
 end
 
-function var18.ShowReportedPlayer(p2, p3, p4) --[[ line: 135 ]]
+function var18.ShowReportedPlayer(p2, p3, p4)
 	-- upvalues: var18 (ref)
 	p2.ReportedPlayer = p3
 	p2.isVoiceReport = p4
@@ -120,7 +120,7 @@ function var18.ShowReportedPlayer(p2, p3, p4) --[[ line: 135 ]]
 	p2.HubRef:SwitchToPage(var18, true)
 end
 
-function var18.HandleDone(p5) --[[ line: 143 ]]
+function var18.HandleDone(p5)
 	-- upvalues: var13 (ref), fFlagEnableConsoleExpControls (ref), var14 (ref), var15 (write), roactModule (ref)
 	if var13 and fFlagEnableConsoleExpControls then
 		var14:setHideShortcutBar("ReportSentPageV2", false)

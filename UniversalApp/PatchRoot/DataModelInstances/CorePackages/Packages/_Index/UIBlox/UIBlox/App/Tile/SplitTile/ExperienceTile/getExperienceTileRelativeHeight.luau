@@ -8,7 +8,7 @@ local constantsModule = require(parent.Constants)
 local aspectRatioModeModule = require(parent.Enum.AspectRatioMode)
 local getAspectRatioModule = require(parent.getAspectRatio)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 33 ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: cryoModule (ref), constantsModule (ref), setDefaultModule (ref), aspectRatioModeModule (ref), getAspectRatioModule (ref)
 	local var5 = cryoModule.Dictionary.join(constantsModule.getDefaultStyleProps(p0), p4 or {})
 	local var6 = setDefaultModule(p3, constantsModule.DEFAULT_FOOTER_HEIGHT)

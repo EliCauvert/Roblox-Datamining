@@ -24,12 +24,12 @@ local t = {
 	[Enum.UserInputType.None] = nil
 }
 
-return function() --[[ line: 43 | named "useLastInputMethod" ]]
+return function()
 	-- upvalues: t (ref), userInputService (ref), reactModule (ref)
 	local var3, var4 = reactModule.useState(t[userInputService:GetLastInputType()] or "None")
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), t (copy), var4 (ref)
-		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p0) --[[ line: 47 ]]
+		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p0)
 			-- upvalues: t (copy), var4 (copy)
 			local var6 = t[p0]
 			
@@ -38,7 +38,7 @@ return function() --[[ line: 43 | named "useLastInputMethod" ]]
 			end
 		end)
 		
-		return function() --[[ line: 54 ]]
+		return function()
 			-- upvalues: lastInputTypeChangedConnection (ref)
 			lastInputTypeChangedConnection:Disconnect()
 		end

@@ -1,10 +1,10 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0, p1) --[[ line: 29 | named "useForwardRef" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function(p2) --[[ line: 33 ]]
+	local var3 = reactModule.useCallback(function(p2)
 		-- upvalues: var2 (ref), var1 (ref), p1 (ref)
 		if var2.current then
 			var2.current()
@@ -15,7 +15,7 @@ return function(p0, p1) --[[ line: 29 | named "useForwardRef" ]]
 			var2.current = p1(p2)
 		end
 	end, { p1 })
-	reactModule.useImperativeHandle(p0, function() --[[ line: 44 ]]
+	reactModule.useImperativeHandle(p0, function()
 		-- upvalues: var1 (ref)
 		return var1.current
 	end)

@@ -6,9 +6,9 @@ local appChatNetworkingModule = require(parent.AppChatNetworking)
 local _ = require(appChat.Models.ConversationChannels)
 local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
 
-return function(p0, p1) --[[ line: 15 ]]
+return function(p0, p1)
 	-- upvalues: getDeepValue2Module (ref), name (ref), getOtherParticipantsModule (ref), appChatNetworkingModule (ref)
-	return function(p2) --[[ line: 16 ]]
+	return function(p2)
 		-- upvalues: getDeepValue2Module (copy), p0 (ref), name (copy), getOtherParticipantsModule (copy), appChatNetworkingModule (copy), p1 (ref)
 		local state = p2:getState()
 		local var6 = getDeepValue2Module(state, `ChatAppReducer.Conversations.{p0}`)
@@ -37,7 +37,7 @@ return function(p0, p1) --[[ line: 15 ]]
 				isInExperience = p1,
 				conversationId = if var6.source == "channels" then var7 else nil,
 				friendId = if var6.source == "friends" then var7 else nil
-			})):catch(function(p3) --[[ line: 45 ]]
+			})):catch(function(p3)
 				-- upvalues: name (copy)
 				name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationTopModal request. Error: {tostring(p3)}`)
 			end)
@@ -46,7 +46,7 @@ return function(p0, p1) --[[ line: 15 ]]
 				isInExperience = p1,
 				conversationId = if var6.source == "channels" then var7 else nil,
 				friendId = if var6.source == "friends" then var7 else nil
-			})):catch(function(p4) --[[ line: 59 ]]
+			})):catch(function(p4)
 				-- upvalues: name (copy)
 				name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationOverlay request. Error: {tostring(p4)}`)
 			end)

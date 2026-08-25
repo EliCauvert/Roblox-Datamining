@@ -38,7 +38,7 @@ local t = {
 	}
 }
 
-return reactModule.memo(function(p0) --[[ line: 68 | named "SduiSlotOverlay" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), t (ref)
 	local padding = p0.padding or 0
 	
@@ -50,7 +50,7 @@ return reactModule.memo(function(p0) --[[ line: 68 | named "SduiSlotOverlay" ]]
 		Position = p0.position,
 		BackgroundTransparency = 1,
 		[reactModule.Tag] = "data-testid=--sdui-slot-overlay"
-	}, reactModule.useMemo(function() --[[ line: 77 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), padding (ref), t (copy), p0 (ref)
 		local t_1 = {
 			UIPadding = reactModule.createElement("UIPadding", {

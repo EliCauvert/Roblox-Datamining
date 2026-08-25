@@ -6,26 +6,26 @@ local reactModule = require(parent.React)
 local presetCooldownContextModule = require(script.Parent.PresetCooldownContext)
 local var5 = expChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
 
-return reactModule.memo(function(value) --[[ line: 21 | named "PresetMessageButton" ]]
+return reactModule.memo(function(value)
 	-- upvalues: foundationModule (ref), reactModule (ref), presetCooldownContextModule (ref), var5 (ref), tweenService (ref)
 	local var6 = foundationModule.Hooks.useTokens()
 	local circle = var6.Radius.Circle
 	local var7 = reactModule.useContext(presetCooldownContextModule)
 	local var8 = var7 ~= nil and var7.isCooldownActive
 	local var9 = if var7 ~= nil then nil else var7.endsAt
-	local var10 = reactModule.useCallback(function() --[[ line: 28 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: value (ref)
 		value.onActivated(value.presetId)
 	end, { value.onActivated, value.presetId })
 	local var11, var12 = reactModule.useState(nil)
 	local var13 = reactModule.useRef(nil)
-	local var14 = reactModule.useCallback(function(p0) --[[ line: 35 ]]
+	local var14 = reactModule.useCallback(function(p0)
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11 == nil and p0 and p0.AbsoluteSize.X > 0 then
 			var12(p0.AbsoluteSize)
 		end
 	end, { var11 })
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var11 (ref), var13 (ref), var5 (copy), tweenService (copy)
 		if var9 == nil or var11 == nil then return end
 		local current = var13.current
@@ -40,7 +40,7 @@ return reactModule.memo(function(value) --[[ line: 21 | named "PresetMessageButt
 		local var16 = tweenService:Create(current, TweenInfo.new(var15, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, var11.Y) })
 		var16:Play()
 		
-		return function() --[[ line: 59 ]]
+		return function()
 			-- upvalues: var16 (ref)
 			var16:Cancel()
 			var16:Destroy()

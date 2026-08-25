@@ -9,7 +9,7 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
-local var4 = reactModule.memo(function(p0) --[[ line: 24 ]]
+local var4 = reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-y-center align-x-left size-full-0 auto-y padding-x-small padding-y-small",
@@ -24,13 +24,13 @@ local var4 = reactModule.memo(function(p0) --[[ line: 24 ]]
 	})
 end)
 
-return reactModule.memo(function(p1) --[[ line: 48 ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), var4 (ref), keyboardActionModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-y-top align-x-center size-full gap-xxsmall",
 		testId = "KeyboardGroup",
 		LayoutOrder = p1.group.layoutOrder
-	}, reactModule.useMemo(function() --[[ line: 49 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var4 (copy), p1 (ref), keyboardActionModule (copy)
 		local t = {}
 		table.insert(t, reactModule.createElement(var4, {

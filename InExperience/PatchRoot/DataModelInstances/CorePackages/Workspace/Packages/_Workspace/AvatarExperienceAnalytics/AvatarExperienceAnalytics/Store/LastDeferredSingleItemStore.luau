@@ -1,15 +1,15 @@
 ﻿local var0 = nil
 
 return {
-	setSnapshot = function(value) --[[ line: 10 ]]
+	setSnapshot = function(value)
 		-- upvalues: var0 (write)
 		var0 = value
 	end,
-	getSnapshot = function() --[[ line: 14 ]]
+	getSnapshot = function()
 		-- upvalues: var0 (write)
 		return var0
 	end,
-	clearSnapshot = function() --[[ line: 18 ]]
+	clearSnapshot = function()
 		-- upvalues: var0 (write)
 		var0 = nil
 	end

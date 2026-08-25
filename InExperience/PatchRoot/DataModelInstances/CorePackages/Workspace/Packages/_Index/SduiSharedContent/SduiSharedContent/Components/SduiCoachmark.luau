@@ -21,20 +21,20 @@ local useSignalState = signalsReactModule.useSignalState
 local streamNotificationStore = streamNotificationsModule.StreamNotificationStore
 local collectionService = game:GetService("CollectionService")
 
-return reactModule.memo(function(p0) --[[ line: 46 | named "SduiCoachmark" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), luaAppUseNavFocusInSduiCoachmark (ref), useNavigationFocus (ref), luaAppHideSduiCoachmarkWhenFlyoutOpen (ref), useDrawerVisible (ref), luaAppHideSduiCoachmarkWhenCentralOverlayOpen (ref), useSelector (ref), luaAppHideSduiCoachmarkWhenNotificationStreamOpen (ref), useSignalState (ref), streamNotificationStore (ref), collectionService (ref), luaAppCoachmarkImpression (ref), sendCoachmarkImpressionModule (ref), coachmark (ref)
 	local var15 = reactModule.useRef(nil)
 	local var16, var17 = reactModule.useState(false)
 	local var18, var19 = reactModule.useState(false)
 	local var20 = if luaAppUseNavFocusInSduiCoachmark then useNavigationFocus() else nil
 	local var21 = if luaAppHideSduiCoachmarkWhenFlyoutOpen then useDrawerVisible() else false
-	local var22 = if luaAppHideSduiCoachmarkWhenCentralOverlayOpen then useSelector(function(p1) --[[ line: 53 ]]
+	local var22 = if luaAppHideSduiCoachmarkWhenCentralOverlayOpen then useSelector(function(p1)
 		return p1.CentralOverlay.OverlayType ~= nil
 	end) else nil
 	local var23 = if luaAppHideSduiCoachmarkWhenNotificationStreamOpen then useSignalState(streamNotificationStore.getStreamPresented) else nil
-	reactModule.useEffect(function() --[[ line: 61 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), var19 (ref), collectionService (copy), p0 (ref)
-		local function onTagAdded(p2) --[[ line: 62 ]]
+		local function onTagAdded(p2)
 			-- upvalues: var15 (copy), var19 (copy)
 			if p2:IsA("GuiObject") then
 				var15.current = p2
@@ -44,7 +44,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiCoachmark" ]]
 			end
 		end
 		
-		local function onTagRemoved(_) --[[ line: 70 ]]
+		local function onTagRemoved(_)
 			-- upvalues: var15 (copy), var19 (copy)
 			var15.current = nil
 			var19(false)
@@ -61,13 +61,13 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiCoachmark" ]]
 		local var29 = collectionService:GetInstanceAddedSignal(p0.collectionServiceAnchorTag):Connect(onTagAdded)
 		local var30 = collectionService:GetInstanceRemovedSignal(p0.collectionServiceAnchorTag):Connect(onTagRemoved)
 		
-		return function() --[[ line: 87 ]]
+		return function()
 			-- upvalues: var29 (ref), var30 (ref)
 			var29:Disconnect()
 			var30:Disconnect()
 		end
 	end, { p0.collectionServiceAnchorTag })
-	local var24 = reactModule.useCallback(function() --[[ line: 93 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), p0 (ref)
 		var17(true)
 		
@@ -79,7 +79,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiCoachmark" ]]
 	if luaAppCoachmarkImpression then
 		local var25 = reactModule.useRef(false)
 		local var26 = var18 and (not var16 and (not (luaAppUseNavFocusInSduiCoachmark and not var20) and (not (luaAppHideSduiCoachmarkWhenFlyoutOpen and var21) and (not (luaAppHideSduiCoachmarkWhenCentralOverlayOpen and var22) and not (luaAppHideSduiCoachmarkWhenNotificationStreamOpen and var23)))))
-		reactModule.useEffect(function() --[[ line: 110 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var26 (ref), var25 (ref), p0 (ref), sendCoachmarkImpressionModule (copy)
 			if not var26 or var25.current then return end
 			local media = p0.media

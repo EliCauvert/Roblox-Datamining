@@ -1,7 +1,7 @@
 ﻿local url = require(script.Parent.Parent.Parent.Http).Url
 local httpService = game:GetService("HttpService")
 
-return function(p0, p1, p2) --[[ line: 14 ]]
+return function(p0, p1, p2)
 	-- upvalues: url (ref), httpService (ref)
 	assert(type(p1) == "string", "FollowingsPostFollow request expects userId to be a string")
 	assert(type(p2) == "string", "FollowingsPostFollow request expects universeId to be a string")

@@ -9,7 +9,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local authModalShown = require(parent.AuthAnalytics).Events.authModalShown
 local getFFlagEnableAmpUserMismatchTelemetryModule = require(ampUpsell.Flags.GetFFlagEnableAmpUserMismatchTelemetry)
 
-return function(p0) --[[ line: 22 | named "AmpWizardUserMismatchModal" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), getFFlagEnableAmpUserMismatchTelemetryModule (ref), authModalShown (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
 	local navigation = p0.navigation
 	local entryPointEventCtx = p0.entryPointEventCtx
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 22 | named "AmpWizardUserMismatchModal" ]]
 		description = "Amp.ErrorScreen.UserMismatchBody",
 		ok = "CommonUI.Controls.Action.OK"
 	})
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getFFlagEnableAmpUserMismatchTelemetryModule (copy), authModalShown (copy), entryPointEventCtx (ref)
 		if getFFlagEnableAmpUserMismatchTelemetryModule() then
 			authModalShown(entryPointEventCtx or "", nil, "userMismatch")
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 22 | named "AmpWizardUserMismatchModal" ]]
 				{
 					text = var4.ok,
 					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function() --[[ line: 38 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: navigation (ref)
 						navigation.goBack()
 					end, { navigation })

@@ -21,7 +21,7 @@ local fFlagInExperienceUseAppStyleProvider = require(corePackagesService.Workspa
 local feedbackApp = roactModule.PureComponent:extend("FeedbackApp")
 feedbackApp.validateProps = tModule.strictInterface({ setScreenGuiSize = tModule.callback })
 
-function feedbackApp.render(p0) --[[ line: 48 ]]
+function feedbackApp.render(p0)
 	-- upvalues: roactModule (ref), fFlagInExperienceUseAppStyleProvider (ref), appStyleProvider (ref), UIBloxModule (ref), dark (ref), feedbackSubmissionToastModule (ref), helpModalModule (ref), onboardingModalModule (ref), feedbackReportDialogModule (ref), withLocalization (ref), withStyle (ref), refinedFeedbackBarModule (ref), assetsModule (ref)
 	return roactModule.createElement(if fFlagInExperienceUseAppStyleProvider then appStyleProvider else UIBloxModule.Core.Style.Provider, if fFlagInExperienceUseAppStyleProvider then { style = { themeName = dark } } else {}, {
 		Gui = roactModule.createElement("ScreenGui", {
@@ -43,9 +43,9 @@ function feedbackApp.render(p0) --[[ line: 48 ]]
 			}),
 			RefinedFeedbackBar = withLocalization({
 				feedbackBarText = "CoreScripts.Feedback.FeedbackBar.MainLabel"
-			})(function(p1) --[[ line: 80 ]]
+			})(function(p1)
 				-- upvalues: withStyle (copy), roactModule (copy), refinedFeedbackBarModule (copy), assetsModule (copy)
-				return withStyle(function(p2) --[[ line: 81 ]]
+				return withStyle(function(p2)
 					-- upvalues: roactModule (copy), refinedFeedbackBarModule (copy), p1 (ref), assetsModule (copy)
 					local font = p2.Font
 					
@@ -63,16 +63,16 @@ function feedbackApp.render(p0) --[[ line: 48 ]]
 	})
 end
 
-return roactRoduxModule.connect(function() --[[ line: 98 ]] end, function(p3) --[[ line: 98 ]]
+return roactRoduxModule.connect(function() end, function(p3)
 	-- upvalues: setScreenSizeModule (ref), setFeedbackFlowStateModule (ref)
 	return {
-		setScreenGuiSize = function(value) --[[ line: 100 ]]
+		setScreenGuiSize = function(value)
 			-- upvalues: p3 (ref), setScreenSizeModule (copy)
 			p3(setScreenSizeModule(value.AbsoluteSize))
 		end,
-		setFeedbackFlowState = function(value) --[[ line: 103 ]]
+		setFeedbackFlowState = function(value)
 			-- upvalues: p3 (ref), setFeedbackFlowStateModule (copy)
-			p3(function(p4) --[[ line: 104 ]]
+			p3(function(p4)
 				-- upvalues: setFeedbackFlowStateModule (copy), value (ref)
 				p4:dispatch(setFeedbackFlowStateModule(value))
 			end)

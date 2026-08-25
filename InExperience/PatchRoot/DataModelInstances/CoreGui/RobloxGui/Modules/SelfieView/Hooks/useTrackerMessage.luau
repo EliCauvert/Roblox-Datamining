@@ -9,7 +9,7 @@ local faceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
 local trackerMode = Enum.TrackerMode
 
-return function() --[[ line: 27 ]]
+return function()
 	-- upvalues: reactModule (ref), faceChatUtilsModule (ref), useTrackerModeModule (ref), useLocalization (ref), trackerMode (ref), clearTimeout (ref), setTimeout (ref)
 	local var5 = reactModule.useRef(faceChatUtilsModule.getTrackerMode())
 	local var6 = useTrackerModeModule()
@@ -26,7 +26,7 @@ return function() --[[ line: 27 ]]
 	})
 	local var10 = reactModule.useRef(nil)
 	
-	local var11 = function() --[[ line: 42 ]]
+	local var11 = function()
 		-- upvalues: var7 (ref), var6 (ref), trackerMode (copy), var5 (ref)
 		local controlMessageOn, var12
 		local _ = var7.controlMessageMotion
@@ -44,13 +44,13 @@ return function() --[[ line: 27 ]]
 		return { visible = true, text = var12, status = controlMessageOn }
 	end
 	
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), clearTimeout (copy), var9 (ref), var11 (ref), setTimeout (copy), var8 (ref)
 		if var10.current then
 			clearTimeout(var10.current)
 		end
 		var9(var11())
-		var10.current = setTimeout(function() --[[ line: 81 ]]
+		var10.current = setTimeout(function()
 			-- upvalues: var9 (copy), var8 (copy)
 			var9({ visible = false, text = var8.text, status = var8.status })
 		end, 2000)

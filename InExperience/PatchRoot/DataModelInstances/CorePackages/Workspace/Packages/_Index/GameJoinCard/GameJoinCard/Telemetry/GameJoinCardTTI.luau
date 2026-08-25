@@ -15,7 +15,7 @@ local t_1 = {
 local t_2 = { EventName = t, Surface = t_1 }
 local var4 = nil
 
-function t_2.trackMobileCardClickStart() --[[ line: 52 ]]
+function t_2.trackMobileCardClickStart()
 	-- upvalues: fFlagJoinCardAgeCheckUpsell (ref), var4 (write), fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
 	if fFlagJoinCardAgeCheckUpsell then
 		var4 = tick() * 1000
@@ -36,14 +36,14 @@ function t_2.trackMobileCardClickStart() --[[ line: 52 ]]
 	end
 end
 
-function t_2.consumeMobileCardClickStartMs() --[[ line: 74 ]]
+function t_2.consumeMobileCardClickStartMs()
 	-- upvalues: var4 (write)
 	var4 = nil
 	
 	return var4
 end
 
-function t_2.trackCardMounted() --[[ line: 80 ]]
+function t_2.trackCardMounted()
 	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref)
 	if fFlagMobileGameJoinCardTTITracking then
 		timeToInteractiveTracker.trackEnd(t.MobileCardMounted)
@@ -52,7 +52,7 @@ function t_2.trackCardMounted() --[[ line: 80 ]]
 	end
 end
 
-function t_2.trackBannerLoaded() --[[ line: 88 ]]
+function t_2.trackBannerLoaded()
 	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref)
 	if fFlagMobileGameJoinCardTTITracking then
 		timeToInteractiveTracker.trackEnd(t.MobileBannerMounted)
@@ -61,7 +61,7 @@ function t_2.trackBannerLoaded() --[[ line: 88 ]]
 	end
 end
 
-function t_2.trackPeopleListClickStart() --[[ line: 96 ]]
+function t_2.trackPeopleListClickStart()
 	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref), t_1 (ref)
 	if fFlagMobileGameJoinCardTTITracking then
 		timeToInteractiveTracker.trackStart(t.PeopleListMounted, true)
@@ -74,7 +74,7 @@ function t_2.trackPeopleListClickStart() --[[ line: 96 ]]
 	end
 end
 
-function t_2.trackPeopleListMounted() --[[ line: 108 ]]
+function t_2.trackPeopleListMounted()
 	-- upvalues: fFlagMobileGameJoinCardTTITracking (ref), timeToInteractiveTracker (ref), t (ref)
 	if fFlagMobileGameJoinCardTTITracking then
 		timeToInteractiveTracker.trackEnd(t.PeopleListMounted)

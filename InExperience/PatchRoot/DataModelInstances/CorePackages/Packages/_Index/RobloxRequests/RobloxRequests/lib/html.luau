@@ -1,41 +1,41 @@
-﻿local function _(p0) --[[ line: 3 | named "rine" ]]
+﻿local function _(p0)
 	return p0 and (#p0 > 0 and p0)
 end
 
-local _ = function(p1) --[[ line: 6 | named "rit" ]]
+local _ = function(p1)
 	return type(p1) == "table" and p1
 end
 
-local _ = function() --[[ line: 10 | named "dont_crash" ]]
+local _ = function()
 	if math.random() <= 0.004 then
 		wait()
 	end
 	return true
 end
 
-local var0 = function() --[[ line: 18 ]] end
+local var0 = function() end
 
-local _ = function(p2) --[[ line: 19 ]]
+local _ = function(p2)
 	return string.gsub(p2, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
 end
 
 local _tostring = tostring
 local char = string.char
 local t = {}
-local var3 = if t.silent then var0 else function(p3, p4, ...) --[[ line: 26 ]]
+local var3 = if t.silent then var0 else function(p3, p4, ...)
 	-- upvalues: t (ref)
 	local _ = if p3 == "i" then "stdout" else "stderr"
 	print("[HTMLParser]" .. (" [%s] "):format(p3:upper()) .. p4:format(...) .. (t.nonl or "\n"))
 end
-local var4 = if t.noerr then var0 else function(p5, ...) --[[ line: 32 ]]
+local var4 = if t.noerr then var0 else function(p5, ...)
 	-- upvalues: var3 (ref)
 	var3("e", p5, ...)
 end
-local _ = if t.noout then var0 else function(p6, ...) --[[ line: 36 ]]
+local _ = if t.noout then var0 else function(p6, ...)
 	-- upvalues: var3 (ref)
 	var3("i", p6, ...)
 end
-local var5 = if t.debug then function(p7, ...) --[[ line: 41 ]]
+local var5 = if t.debug then function(p7, ...)
 	-- upvalues: var3 (ref), var0 (ref), _tostring (ref)
 	var3("d", p7:gsub("#LINE#", _tostring(var0(3))), ...)
 end else var0
@@ -43,7 +43,7 @@ local elementNodeModule = require(script.ElementNode)
 local voidelementsModule = require(script.voidelements)
 
 return {
-	parse = function(p8, p9, p10) --[[ line: 53 ]]
+	parse = function(p8, p9, p10)
 		-- upvalues: t (ref), _tostring (ref), char (ref), var5 (ref), var4 (ref), elementNodeModule (ref), voidelementsModule (ref)
 		local var8 = t and (#t > 0 and t) or ({} or {})
 		var8.looplimit = var8.looplimit or 100000000

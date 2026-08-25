@@ -14,7 +14,7 @@ local useStepperVariantsModule = require(script.Parent.useStepperVariants)
 local icon = builderIconsModule.Icon
 local iconVariant = builderIconsModule.IconVariant
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 41 | named "StepItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokensModule (ref), fillBehaviorModule (ref), useStepperVariantsModule (ref), reactModule (ref), viewModule (ref), stepperStepStateModule (ref), iconModule (ref), icon (ref), iconVariant (ref), textModule (ref)
 	local var10 = useTokensModule()
 	local var11 = useStepperVariantsModule(var10, p0.size, p0.stepState, p0.fillBehavior == fillBehaviorModule.Fill)

@@ -24,17 +24,17 @@ hurtOverlay.validateProps = tModule.strictInterface(if fFlagTopBarSignalizeHealt
 	isDead = tModule.boolean
 })
 
-function hurtOverlay.init(p0) --[[ line: 46 ]]
+function hurtOverlay.init(p0)
 	-- upvalues: roactModule (ref), fFlagUseNewHurtOverlayAnimation (ref), fFlagTopBarSignalizeHealthBar (ref), constantsModule (ref), otterModule (ref), t (ref), coreGuiCommonModule (ref), signalsModule (ref), starterGuiService (ref)
 	local var15, var16 = roactModule.createBinding(0)
 	p0.animationBinding = var15
 	p0.animationBindingUpdate = var16
 	
 	if not fFlagUseNewHurtOverlayAnimation then
-		p0.positionBinding = p0.animationBinding:map(function(p1) --[[ line: 51 ]]
+		p0.positionBinding = p0.animationBinding:map(function(p1)
 			return UDim2.new(-10 * p1, 0, -10 * p1, 0)
 		end)
-		p0.sizeBinding = p0.animationBinding:map(function(p2) --[[ line: 54 ]]
+		p0.sizeBinding = p0.animationBinding:map(function(p2)
 			return UDim2.new(1 + 19 * p2, 0, 1 + 19 * p2, 0)
 		end)
 	end
@@ -53,7 +53,7 @@ function hurtOverlay.init(p0) --[[ line: 46 ]]
 		p0.setIsDead = var24
 		p0.prevHealth = p0.health:getValue()
 		p0.prevIsDead = p0.isDead:getValue()
-		p0.showHurtOverlay = roactModule.joinBindings({ p0.isAnimating, p0.health, p0.maxHealth, p0.isDead }):map(function(p3) --[[ line: 67 ]]
+		p0.showHurtOverlay = roactModule.joinBindings({ p0.isAnimating, p0.health, p0.maxHealth, p0.isDead }):map(function(p3)
 			-- upvalues: p0 (ref), constantsModule (copy), fFlagUseNewHurtOverlayAnimation (copy), otterModule (copy), t (copy)
 			local var25 = p3[1]
 			local var26 = p3[2]
@@ -82,7 +82,7 @@ function hurtOverlay.init(p0) --[[ line: 46 ]]
 		
 		if coreGuiCommonModule.Stores.GetLocalHumanoidStore then
 			p0.localHumanoidStore = coreGuiCommonModule.Stores.GetLocalHumanoidStore(false)
-			p0.disposeHealthConnection = signalsModule.createEffect(function(p4) --[[ line: 104 ]]
+			p0.disposeHealthConnection = signalsModule.createEffect(function(p4)
 				-- upvalues: p0 (ref), constantsModule (copy)
 				local healthValue = p0.localHumanoidStore.getHealthValue(p4)
 				p0.setHealth(healthValue.health or constantsModule.InitialHealth)
@@ -94,11 +94,11 @@ function hurtOverlay.init(p0) --[[ line: 46 ]]
 		p0.state = { isAnimating = false }
 	end
 	p0.motor = otterModule.createSingleMotor(if fFlagUseNewHurtOverlayAnimation then 1 else 0)
-	p0.motor:onStep(function(p5) --[[ line: 119 ]]
+	p0.motor:onStep(function(p5)
 		-- upvalues: p0 (ref)
 		p0.animationBindingUpdate(p5)
 	end)
-	p0.motor:onComplete(if fFlagUseNewHurtOverlayAnimation then function(p6) --[[ line: 123 ]]
+	p0.motor:onComplete(if fFlagUseNewHurtOverlayAnimation then function(p6)
 		-- upvalues: p0 (ref), otterModule (copy), fFlagTopBarSignalizeHealthBar (copy)
 		if p6 == 0 then
 			p0.motor:setGoal(otterModule.ease(1, { duration = 0.5 }))
@@ -113,7 +113,7 @@ function hurtOverlay.init(p0) --[[ line: 46 ]]
 			end
 			p0:setState({ isAnimating = false })
 		end
-	end else function() --[[ line: 138 ]]
+	end else function()
 		-- upvalues: fFlagTopBarSignalizeHealthBar (copy), p0 (ref)
 		if fFlagTopBarSignalizeHealthBar then
 			p0.setIsAnimating(false)
@@ -124,12 +124,12 @@ function hurtOverlay.init(p0) --[[ line: 46 ]]
 	end)
 	
 	if fFlagTopBarSignalizeHealthBar then
-		local function _() --[[ line: 149 | named "getHealthEnabled" ]]
+		local function _()
 			-- upvalues: starterGuiService (copy)
 			return starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health)
 		end
 		
-		p0.coreGuiChangedSignalConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p7, p8) --[[ line: 154 ]]
+		p0.coreGuiChangedSignalConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p7, p8)
 			-- upvalues: p0 (ref)
 			if p7 == Enum.CoreGuiType.Health or p7 == Enum.CoreGuiType.All then
 				p0:setState({ mountHurtOverlay = p8 })
@@ -141,7 +141,7 @@ function hurtOverlay.init(p0) --[[ line: 46 ]]
 	end
 end
 
-function hurtOverlay.renderOverlay(p9) --[[ line: 168 ]]
+function hurtOverlay.renderOverlay(p9)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), fFlagUseNewHurtOverlayImage (ref), color (ref), cachedPolicyServiceModule (ref), color3 (ref), roactModule (ref), fFlagUseNewHurtOverlayAnimation (ref)
 	local var30 = nil
 	
@@ -160,12 +160,12 @@ function hurtOverlay.renderOverlay(p9) --[[ line: 168 ]]
 	})
 end
 
-function hurtOverlay.render(p10) --[[ line: 194 ]]
+function hurtOverlay.render(p10)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref)
 	return if fFlagTopBarSignalizeHealthBar then if p10.state.mountHurtOverlay then p10:renderOverlay() else nil else p10:renderOverlay()
 end
 
-function hurtOverlay.didUpdate(p11, p12, _) --[[ line: 202 ]]
+function hurtOverlay.didUpdate(p11, p12, _)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), constantsModule (ref), otterModule (ref), t (ref)
 	if fFlagTopBarSignalizeHealthBar then return end
 	if p11.props.health < p12.health and (not p11.props.isDead or not p12.isDead) and constantsModule.HealthPercentForOverlay <= (p12.health - p11.props.health) / p11.props.maxHealth then
@@ -178,12 +178,12 @@ function hurtOverlay.didUpdate(p11, p12, _) --[[ line: 202 ]]
 end
 
 if fFlagTopBarSignalizeHealthBar then
-	function hurtOverlay.onUnmount(p13) --[[ line: 224 ]]
+	function hurtOverlay.onUnmount(p13)
 		p13.coreGuiChangedSignalConn:Disconnect()
 		p13.disposeHealthConnection()
 	end
 end
-return if fFlagTopBarSignalizeHealthBar then hurtOverlay else roactRoduxModule.UNSTABLE_connect2(function(p14) --[[ line: 230 | named "mapStateToProps" ]]
+return if fFlagTopBarSignalizeHealthBar then hurtOverlay else roactRoduxModule.UNSTABLE_connect2(function(p14)
 	return {
 		health = p14.health.currentHealth,
 		maxHealth = p14.health.maxHealth,

@@ -19,12 +19,12 @@ local var7 = if fFlagPopularFillIconEnabledModule then images[require(parent.Fla
 local var8 = if fFlagPopularFillIconEnabledModule then UDim2.new(0, 16, 0, 16) else UDim2.new(0, 0, 0, 0)
 local name = roactModule.Component:extend(script.Name)
 
-function name.init(p0) --[[ line: 57 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p0.changeContentSize(p1) --[[ line: 62 ]]
+	function p0.changeContentSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.contentSize ~= p1.AbsoluteSize then
 			p0:setState({ contentSize = p1.AbsoluteSize })
@@ -32,11 +32,11 @@ function name.init(p0) --[[ line: 57 ]]
 	end
 end
 
-local function getPopularityThreshold(p2, p3) --[[ line: 91 ]]
+local function getPopularityThreshold(p2, p3)
 	return if not (p3 ~= 1 and p3 ~= 2) then if p2 <= 2 then 0 elseif p2 <= 5 then 1 elseif p2 <= 7 then if p3 == 1 then 1 else 2 elseif p2 <= 9 then if p3 == 1 then 2 elseif p2 <= 8 then 2 else 3 elseif p2 <= 20 then if p3 == 1 then 2 else 4 elseif p2 <= 50 then if p3 == 1 then 3 else 5 elseif p2 <= 100 then if p3 == 1 then 4 else 7 elseif p3 == 1 then 7 else 12 else 0
 end
 
-local function createItemBadge(_, p4) --[[ line: 115 ]]
+local function createItemBadge(_, p4)
 	-- upvalues: fFlagPopularFillIconEnabledModule (ref), roactModule (ref), imageSetLabel (ref), var8 (ref), var7 (ref)
 	local var14 = if fFlagPopularFillIconEnabledModule and p4.isPopularItem then roactModule.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
@@ -88,7 +88,7 @@ local function createItemBadge(_, p4) --[[ line: 115 ]]
 	}, t)
 end
 
-local function createItemIconComponent(p5, p6, p7, p8, _) --[[ line: 177 ]]
+local function createItemIconComponent(p5, p6, p7, p8, _)
 	-- upvalues: roactModule (ref), imageSetLabel (ref), imageunavailable (ref), fitFrameVertical (ref)
 	return roactModule.createElement(fitFrameVertical, {
 		BackgroundTransparency = 1,
@@ -108,7 +108,7 @@ local function createItemIconComponent(p5, p6, p7, p8, _) --[[ line: 177 ]]
 	})
 end
 
-local function createItemDetailsComponent(p9, p10, p11, p12) --[[ line: 198 ]]
+local function createItemDetailsComponent(p9, p10, p11, p12)
 	-- upvalues: roactModule (ref), fitTextLabel (ref), fitFrameVertical (ref), imageSetLabel (ref), robux (ref), getPopularityThreshold (ref), createItemBadge (ref)
 	local t = {
 		ItemName = roactModule.createElement(fitTextLabel, {
@@ -169,11 +169,11 @@ local function createItemDetailsComponent(p9, p10, p11, p12) --[[ line: 198 ]]
 	}, t)
 end
 
-function name.render(p13) --[[ line: 262 ]]
+function name.render(p13)
 	-- upvalues: withStyle (ref), constantsModule (ref), iconSize (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), modelViewportModule (ref), imageunavailable (ref), createItemIconComponent (ref), createItemDetailsComponent (ref), fitFrameVertical (ref)
 	local props = p13.props
 	
-	return withStyle(function(p14) --[[ line: 265 ]]
+	return withStyle(function(p14)
 		-- upvalues: constantsModule (copy), props (ref), iconSize (copy), getEnableCondenseRobuxUpsellModule (copy), roactModule (copy), modelViewportModule (copy), imageunavailable (copy), createItemIconComponent (copy), createItemDetailsComponent (copy), p13 (ref), fitFrameVertical (copy)
 		local theme = p14.Theme
 		local font = p14.Font

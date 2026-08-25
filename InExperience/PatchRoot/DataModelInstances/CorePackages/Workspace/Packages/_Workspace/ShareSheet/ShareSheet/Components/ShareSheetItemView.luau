@@ -14,11 +14,11 @@ local useTokens = foundationModule.Hooks.useTokens
 local userTile = userTileModule.UserTile
 local layoutMode = userTileModule.LayoutMode
 
-local function AnimatedIcon(p0) --[[ line: 27 ]]
+local function AnimatedIcon(p0)
 	-- upvalues: useTokens (ref), usePreferences (ref), reactModule (ref), motionModule (ref), view (ref), icon (ref), iconSize (ref)
 	local var5 = useTokens()
 	local reducedMotion = usePreferences().reducedMotion
-	local var6 = reactModule.useMemo(function() --[[ line: 30 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: motionModule (copy), reducedMotion (ref), var5 (ref)
 		return {
 			compressed = motionModule.createState({ scale = 0.75 }, { default = motionModule.transition({ duration = 0 }) }),
@@ -31,11 +31,11 @@ local function AnimatedIcon(p0) --[[ line: 27 ]]
 		}
 	end, { reducedMotion, var5 })
 	local var7, var8 = motionModule.useMotion(var6.rest)
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var8 (ref), var6 (ref)
 		if p0.shouldAnimate then
 			var8(var6.compressed, {
-				onAnimationComplete = function(p1) --[[ line: 55 ]]
+				onAnimationComplete = function(p1)
 					-- upvalues: var8 (copy), var6 (copy)
 					if p1 == true then
 						var8(var6.rest)
@@ -52,7 +52,7 @@ local function AnimatedIcon(p0) --[[ line: 27 ]]
 	})
 end
 
-return function(p2) --[[ line: 86 | named "ShareSheetItemView" ]]
+return function(p2)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), AnimatedIcon (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-small size-1700-0 auto-y",

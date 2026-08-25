@@ -1,6 +1,6 @@
 ﻿local getPlayersFromServiceModule = require(script.Parent.getPlayersFromService)
 
-return function(p0, p1, p2) --[[ line: 15 | named "resolvePlayerTarget" ]]
+return function(p0, p1, p2)
 	-- upvalues: getPlayersFromServiceModule (ref)
 	if not p0 or p0 == "" then
 		return {

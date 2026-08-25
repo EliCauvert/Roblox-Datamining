@@ -6,7 +6,7 @@ local fetchMoreOmniRecommendationMetadata = omniFeedConnectorModule.fetchMoreOmn
 local _ = require(script.Parent.Parent.Parent.generatedTypes)
 t.default = {
 	OmniFeedItem = {
-		experiences = function(p0) --[[ line: 35 ]]
+		experiences = function(p0)
 			if not p0.metadata or not p0.metadata.Game or not p0.recommendations then
 				return nil
 			end
@@ -39,35 +39,35 @@ t.default = {
 		end
 	},
 	OmniFeedMetadata = {
-		GameJSON = function(p1) --[[ line: 73 ]]
+		GameJSON = function(p1)
 			return p1.Game
 		end,
-		CatalogAssetJSON = function(value) --[[ line: 76 ]]
+		CatalogAssetJSON = function(value)
 			return value.CatalogAsset
 		end,
-		CatalogBundleJSON = function(p2) --[[ line: 79 ]]
+		CatalogBundleJSON = function(p2)
 			return p2.CatalogBundle
 		end,
-		RecommendedFriendJSON = function(p3) --[[ line: 82 ]]
+		RecommendedFriendJSON = function(p3)
 			return p3.RecommendedFriend
 		end
 	},
 	OmniFeed = {
-		metadata = function(p4) --[[ line: 87 ]]
+		metadata = function(p4)
 			return p4.contentMetadata
 		end,
-		sortsExpirationTime = function(p5) --[[ line: 90 ]]
+		sortsExpirationTime = function(p5)
 			return if p5.sortsRefreshInterval then math.floor(tick()) + p5.sortsRefreshInterval else nil
 		end,
-		recommendationsId = function(p6) --[[ line: 96 ]]
+		recommendationsId = function(p6)
 			return p6.requestId
 		end,
-		globalLayoutData = function(p7) --[[ line: 99 ]]
+		globalLayoutData = function(p7)
 			return p7.globalLayoutData
 		end,
-		sorts = function(p8) --[[ line: 102 ]]
+		sorts = function(p8)
 			-- upvalues: array (ref)
-			return if p8.sorts then array.map(p8.sorts, function(p9) --[[ line: 107 ]]
+			return if p8.sorts then array.map(p8.sorts, function(p9)
 				-- upvalues: p8 (ref)
 				return {
 					topic = p9.topic,
@@ -80,10 +80,10 @@ t.default = {
 		end
 	},
 	OmniFeedItemWithMetadata = {
-		metadata = function(p10) --[[ line: 121 ]]
+		metadata = function(p10)
 			return p10.contentMetadata
 		end,
-		sort = function(p11) --[[ line: 124 ]]
+		sort = function(p11)
 			return {
 				topicId = p11.topicId,
 				metadata = p11.contentMetadata,
@@ -92,11 +92,11 @@ t.default = {
 		end
 	},
 	Query = {
-		omniFeed = function(_, p12, p13) --[[ line: 135 ]]
+		omniFeed = function(_, p12, p13)
 			-- upvalues: findOmniFeedBySessionId (ref)
 			return findOmniFeedBySessionId(p12, p13.fetchImpl)
 		end,
-		refreshOmniFeedItem = function(_, p14, p15) --[[ line: 138 ]]
+		refreshOmniFeedItem = function(_, p14, p15)
 			-- upvalues: fetchMoreOmniRecommendationMetadata (ref)
 			return fetchMoreOmniRecommendationMetadata(p14, p15.fetchImpl)
 		end

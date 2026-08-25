@@ -6,7 +6,7 @@ local avatarIconSizeModule = require(foundation.Enums.AvatarIconSize)
 local _ = require(foundation.Components.Types)
 local indexBindableModule = require(foundation.Utility.indexBindable)
 
-local function composeStroke(p0, p1) --[[ line: 18 ]]
+local function composeStroke(p0, p1)
 	-- upvalues: indexBindableModule (ref)
 	return if p0 and p1 then {
 		container = {
@@ -19,7 +19,7 @@ local function composeStroke(p0, p1) --[[ line: 18 ]]
 	} else {}
 end
 
-local function variantsFactory(p2) --[[ line: 34 ]]
+local function variantsFactory(p2)
 	-- upvalues: avatarIconSizeModule (ref)
 	return {
 		strokes = {
@@ -46,7 +46,7 @@ local function variantsFactory(p2) --[[ line: 34 ]]
 	}
 end
 
-return function(p3, p4, p5) --[[ line: 66 ]]
+return function(p3, p4, p5)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), composeStroke (ref)
 	local avatarIcon = variantsContextModule.useVariants("AvatarIcon", variantsFactory, p3)
 	

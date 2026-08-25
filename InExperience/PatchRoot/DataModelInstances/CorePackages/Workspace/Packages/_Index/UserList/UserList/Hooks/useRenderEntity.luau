@@ -7,7 +7,7 @@ local entityRow = require(userList.Components.UserRow).EntityRow
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 
-return function(p0) --[[ line: 40 | named "useRenderEntity" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), entityRow (ref), fFlagUserListCtaIntegrationEnabled (ref), fFlagAddStatusIndicatorToBaseRow (ref)
 	local onActivated = p0.onActivated
 	local renderRow = p0.renderRow
@@ -15,16 +15,16 @@ return function(p0) --[[ line: 40 | named "useRenderEntity" ]]
 	local configs = p0.configs
 	local layoutMode = p0.layoutMode
 	
-	return reactModule.useCallback(function(p1, p2, p3) --[[ line: 48 ]]
+	return reactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: entitiesMap (ref), renderRow (ref), onActivated (ref), reactModule (copy), view (copy), entityRow (copy), fFlagUserListCtaIntegrationEnabled (copy), fFlagAddStatusIndicatorToBaseRow (copy), configs (ref), layoutMode (ref)
 		local var2 = entitiesMap[p1]
 		
-		return if var2 then if renderRow then renderRow(function(p4) --[[ line: 56 ]]
+		return if var2 then if renderRow then renderRow(function(p4)
 			-- upvalues: var2 (ref), p2 (ref), onActivated (copy), reactModule (copy), view (copy), p3 (ref), entityRow (copy), fFlagUserListCtaIntegrationEnabled (copy), fFlagAddStatusIndicatorToBaseRow (copy), configs (copy), layoutMode (copy)
 			return reactModule.createElement(view, { tag = "size-full-full", Size = p3, LayoutOrder = p2 }, {
 				reactModule.createElement(entityRow, {
 					entity = var2,
-					onActivated = if p4.onRowActivated then function() --[[ line: 59 ]]
+					onActivated = if p4.onRowActivated then function()
 						-- upvalues: p4 (ref), var2 (copy), p2 (copy)
 						p4.onRowActivated(var2.id, var2.type, p2)
 					end else onActivated,

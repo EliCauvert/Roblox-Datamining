@@ -7,7 +7,7 @@ local fFlagExpChatEmojiInputParity = require(parent.SharedFlags).FFlagExpChatEmo
 local trieModule = require(script.Parent.Trie)
 
 return {
-	buildTrie = function(p0, p1) --[[ line: 28 ]]
+	buildTrie = function(p0, p1)
 		-- upvalues: trieModule (ref), cryoModule (ref), emojiListModule (ref)
 		local var5 = trieModule.new()
 		
@@ -23,7 +23,7 @@ return {
 		end
 		return var5
 	end,
-	matchTrigger = function(p2, p3) --[[ line: 53 ]]
+	matchTrigger = function(p2, p3)
 		-- upvalues: fFlagExpChatEmojiInputParity (ref)
 		if p3 < 2 then
 			return nil
@@ -69,7 +69,7 @@ return {
 		end
 		var6 = var9
 	end,
-	matchColonCompletion = function(p4, p5) --[[ line: 103 ]]
+	matchColonCompletion = function(p4, p5)
 		-- upvalues: fFlagExpChatEmojiInputParity (ref), emojiListModule (ref)
 		if not fFlagExpChatEmojiInputParity then
 			return nil
@@ -91,10 +91,10 @@ return {
 			replaceFinish = p5 - 1
 		} else nil
 	end,
-	search = function(p6, p7) --[[ line: 132 ]]
+	search = function(p6, p7)
 		-- upvalues: emojiListModule (ref)
 		local var13 = p6:autocomplete(p7:lower())
-		table.sort(var13, function(p8, p9) --[[ line: 134 ]]
+		table.sort(var13, function(p8, p9)
 			-- upvalues: emojiListModule (copy)
 			if string.sub(p8, 1, 1) ~= ":" or not (string.sub(p9, 1, 1) == ":") then
 				return p8 < p9
@@ -107,11 +107,11 @@ return {
 		
 		return var13
 	end,
-	formatReplacement = function(p10) --[[ line: 151 ]]
+	formatReplacement = function(p10)
 		-- upvalues: emojiListModule (ref)
 		return if string.sub(p10, 1, 1) == ":" then emojiListModule[string.sub(p10, 2)].base else p10
 	end,
-	renderEntry = function(p11, _) --[[ line: 158 ]]
+	renderEntry = function(p11, _)
 		-- upvalues: emojiListModule (ref), reactModule (ref), foundationModule (ref)
 		if string.sub(p11, 1, 1) == ":" then
 			local substring = string.sub(p11, 2)

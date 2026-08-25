@@ -17,7 +17,7 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
 local brandVideosFixCloseFullscreen = game:DefineFastFlag("BrandVideosFixCloseFullscreen", false)
 
-return function() --[[ line: 42 ]]
+return function()
 	-- upvalues: useNavigation (ref), useScreenSize (ref), useStyle (ref), reactModule (ref), brandVideosFixCloseFullscreen (ref), userInputService (ref), fullscreenPageWithSafeArea (ref), view (ref), iconButton (ref), buttonSize (ref), videoPlayerModule (ref), progressBarModule (ref), interactable (ref)
 	local var9 = useNavigation()
 	local extraProps = var9.getParam("extraProps")
@@ -30,13 +30,13 @@ return function() --[[ line: 42 ]]
 	local var18 = if extraProps and extraProps.isMuted ~= nil then extraProps.isMuted else true
 	useState, var18 = useState(var18)
 	local var19 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: extraProps (ref), useState (ref)
 		if extraProps and extraProps.onMuteUpdate then
 			extraProps.onMuteUpdate(useState)
 		end
 	end, { useState, extraProps })
-	local var20 = reactModule.useMemo(function() --[[ line: 62 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref)
 		local x = var11.X
 		local var26 = x / 1.777777777778
@@ -47,41 +47,41 @@ return function() --[[ line: 42 ]]
 		end
 		return UDim2.new(0, x, 0, var26)
 	end, { var11.X, var11.Y })
-	local var21 = reactModule.useCallback(function() --[[ line: 74 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: brandVideosFixCloseFullscreen (copy), var19 (ref), var16 (ref), var9 (ref)
 		if brandVideosFixCloseFullscreen and var19.current and var16 then
 			var19.current.togglePlayPause()
 		end
 		var9.goBack()
 	end, { var9.goBack })
-	local var22 = reactModule.useCallback(function(p0, p1, p2, p3) --[[ line: 83 ]]
+	local var22 = reactModule.useCallback(function(p0, p1, p2, p3)
 		-- upvalues: var13 (ref), var15 (ref), var17 (ref), var18 (ref)
 		var13(p0)
 		var15(p1)
 		var17(p2)
 		var18(p3)
 	end, {})
-	local var23 = reactModule.useCallback(function(p4) --[[ line: 90 ]]
+	local var23 = reactModule.useCallback(function(p4)
 		-- upvalues: var19 (ref), var14 (ref)
 		if var19.current and var19.current.setTimePosition then
 			var19.current.setTimePosition(var14 * p4)
 		end
 	end, { var14 })
-	local var24 = reactModule.useCallback(function() --[[ line: 96 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var19 (ref)
 		if var19.current and var19.current.togglePlayPause then
 			var19.current.togglePlayPause()
 		end
 	end, {})
-	local var25 = reactModule.useCallback(function() --[[ line: 102 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var19 (ref)
 		if var19.current and var19.current.toggleMute then
 			var19.current.toggleMute()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 108 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var24 (ref), var21 (ref)
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p5, p6) --[[ line: 109 ]]
+		local inputBeganConnection = userInputService.InputBegan:Connect(function(p5, p6)
 			-- upvalues: var24 (copy), var21 (copy)
 			if p6 then return end
 			if p5.KeyCode == Enum.KeyCode.Space then
@@ -92,7 +92,7 @@ return function() --[[ line: 42 ]]
 			end
 		end)
 		
-		return function() --[[ line: 123 ]]
+		return function()
 			-- upvalues: inputBeganConnection (ref)
 			inputBeganConnection:Disconnect()
 		end

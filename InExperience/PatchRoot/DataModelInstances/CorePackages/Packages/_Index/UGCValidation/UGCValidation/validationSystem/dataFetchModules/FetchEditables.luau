@@ -6,7 +6,7 @@ local _ = require(parent.util.Types)
 local getFFlagUGCValidationAddPBRToSharedDataModule = require(parent.flags.getFFlagUGCValidationAddPBRToSharedData)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {
-	cleanup = function(p0) --[[ line: 20 ]]
+	cleanup = function(p0)
 		-- upvalues: getFFlagUGCValidationAddPBRToSharedDataModule (ref)
 		for i, v in p0 do
 			if v.createdInValidation then
@@ -24,7 +24,7 @@ local t = {
 	end
 }
 
-local function getMeshData(p1, p2, p3) --[[ line: 45 ]]
+local function getMeshData(p1, p2, p3)
 	-- upvalues: createEditableInstancesForContextModule (ref), getMeshSizeModule (ref)
 	local editableMesh, editableMesh_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(if p1:IsA("MeshPart") then p1.MeshContent else Content.fromUri(p1.MeshId), p3, "EditableMesh", p2)
 	
@@ -54,7 +54,7 @@ local function getMeshData(p1, p2, p3) --[[ line: 45 ]]
 	}
 end
 
-local function getTextureData_deprecated(p4, p5, p6) --[[ line: 85 ]]
+local function getTextureData_deprecated(p4, p5, p6)
 	-- upvalues: createEditableInstancesForContextModule (ref)
 	local editableImage, editableImage_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(if p4:IsA("MeshPart") then p4.TextureContent else Content.fromUri(p4.TextureId), p6, "EditableImage", p5)
 	
@@ -67,7 +67,7 @@ local function getTextureData_deprecated(p4, p5, p6) --[[ line: 85 ]]
 	return false
 end
 
-local function getTextureData(p7, p8, p9) --[[ line: 113 ]]
+local function getTextureData(p7, p8, p9)
 	-- upvalues: getFFlagUGCValidateAllowEmissivesModule (ref), createEditableInstancesForContextModule (ref), t (ref)
 	local t_1
 	local surfaceAppearance = p7:FindFirstChildWhichIsA("SurfaceAppearance")
@@ -112,7 +112,7 @@ local function getTextureData(p7, p8, p9) --[[ line: 113 ]]
 	return true, t_2
 end
 
-local function getCageData(p10, p11, p12, p13) --[[ line: 172 ]]
+local function getCageData(p10, p11, p12, p13)
 	-- upvalues: createEditableInstancesForContextModule (ref), getMeshSizeModule (ref)
 	local referenceMeshContent, referenceOrigin
 	local _ = nil
@@ -138,7 +138,7 @@ local function getCageData(p10, p11, p12, p13) --[[ line: 172 ]]
 	return false
 end
 
-local function getDataInstance_deprecated(p14, p15) --[[ line: 206 ]]
+local function getDataInstance_deprecated(p14, p15)
 	-- upvalues: sharedDataMember (ref)
 	if p14:IsA("MeshPart") or p14:IsA("Part") and p14:FindFirstChildOfClass("SpecialMesh") then
 		local var23 = if p14:IsA("MeshPart") then p14 else p14:FindFirstChildOfClass("SpecialMesh")
@@ -159,7 +159,7 @@ local function getDataInstance_deprecated(p14, p15) --[[ line: 206 ]]
 	return false
 end
 
-local function getDataInstance(p16, p17) --[[ line: 241 ]]
+local function getDataInstance(p16, p17)
 	-- upvalues: sharedDataMember (ref)
 	local var25 = if p16:IsA("MeshPart") then p16 else p16:FindFirstChildOfClass("SpecialMesh")
 	
@@ -179,7 +179,7 @@ local function getDataInstance(p16, p17) --[[ line: 241 ]]
 	return false
 end
 
-function t.getDatas(p18, p19, p20, p21, p22) --[[ line: 271 ]]
+function t.getDatas(p18, p19, p20, p21, p22)
 	-- upvalues: getFFlagUGCValidationAddPBRToSharedDataModule (ref), getDataInstance (ref), getDataInstance_deprecated (ref), sharedDataMember (ref), getMeshData (ref), getCageData (ref), getTextureData (ref), getTextureData_deprecated (ref), t (ref)
 	local var30, var31, var32
 	local t_1 = {}

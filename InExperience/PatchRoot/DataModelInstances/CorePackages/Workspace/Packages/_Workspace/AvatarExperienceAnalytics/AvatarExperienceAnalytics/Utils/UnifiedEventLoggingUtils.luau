@@ -4,20 +4,20 @@ local dashModule = require(parent.Dash)
 local unifiedEventLogConstantsModule = require(script.Parent.Parent.UnifiedEventLogConstants)
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = require(parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents
 local t = {
-	getUnifiedLoggingFieldName = function(p0) --[[ line: 28 ]]
+	getUnifiedLoggingFieldName = function(p0)
 		-- upvalues: unifiedEventLogConstantsModule (ref)
 		return p0:sub(string.len(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX) + 1, string.len(p0))
 	end,
-	isUnifiedLoggingAttribute = function(p1) --[[ line: 33 ]]
+	isUnifiedLoggingAttribute = function(p1)
 		-- upvalues: dashModule (ref), unifiedEventLogConstantsModule (ref)
 		return dashModule.startsWith(p1, unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX)
 	end,
-	formatLookTypeAttribute = function(p2) --[[ line: 37 ]]
+	formatLookTypeAttribute = function(p2)
 		return string.upper("LOOK_TYPE_" .. p2)
 	end
 }
 
-local function getParentScrollingFrames(p3, p4) --[[ line: 14 ]]
+local function getParentScrollingFrames(p3, p4)
 	-- upvalues: getParentScrollingFrames (ref)
 	if not p4 then
 		p4 = {}
@@ -33,7 +33,7 @@ local function getParentScrollingFrames(p3, p4) --[[ line: 14 ]]
 end
 
 if fFlagAXMISEnableMultiShoppingUnifiedEvents then
-	function t.getFieldsToSendFromInstanceAttributes(a) --[[ line: 42 ]]
+	function t.getFieldsToSendFromInstanceAttributes(a)
 		-- upvalues: t (ref)
 		local t_1 = {}
 		
@@ -47,7 +47,7 @@ if fFlagAXMISEnableMultiShoppingUnifiedEvents then
 		return t_1
 	end
 end
-function t.getElementSizeAndPosition(p5) --[[ line: 57 ]]
+function t.getElementSizeAndPosition(p5)
 	-- upvalues: getParentScrollingFrames (ref)
 	local var8
 	local x = p5.AbsolutePosition.X
@@ -78,7 +78,7 @@ function t.getElementSizeAndPosition(p5) --[[ line: 57 ]]
 	}
 end
 
-function t.getScreenSize(p6) --[[ line: 78 ]]
+function t.getScreenSize(p6)
 	-- upvalues: coreGuiService (ref)
 	local var12
 	local var9 = nil

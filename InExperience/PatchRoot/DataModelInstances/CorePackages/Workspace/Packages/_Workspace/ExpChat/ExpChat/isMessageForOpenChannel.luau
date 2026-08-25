@@ -1,4 +1,4 @@
-﻿local function _(p0) --[[ line: 3 | named "getOpenChannelName" ]]
+﻿local function _(p0)
 	local textChannels = p0.TextChannels
 	
 	if textChannels == nil then
@@ -15,7 +15,7 @@
 	return if not (selectedChannelName ~= nil and channelTabs ~= nil and channelTabs.allChannelTabs[selectedChannelName] ~= nil) then if channelTabs == nil then selectedChannelName else channelTabs.selectedTabName or "RBXGeneral" else selectedChannelName
 end
 
-local _ = function(p1, p2) --[[ line: 28 | named "getMessageChannelName" ]]
+local _ = function(p1, p2)
 	local var0 = nil
 	
 	if p2 == nil then
@@ -32,7 +32,7 @@ local _ = function(p1, p2) --[[ line: 28 | named "getMessageChannelName" ]]
 	return var0
 end
 
-return function(p3, p4, p5) --[[ line: 45 | named "isMessageForOpenChannel" ]]
+return function(p3, p4, p5)
 	local var1, targetTextChannel
 	local textChannels = p3.TextChannels
 	

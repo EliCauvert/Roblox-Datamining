@@ -5,7 +5,7 @@ local createHttpLink = require(script.Parent.createHttpLink).createHttpLink
 local tbl = setmetatable({}, { __index = apolloLink })
 tbl.__index = tbl
 
-function tbl.new(p0) --[[ line: 23 ]]
+function tbl.new(p0)
 	-- upvalues: apolloLink (ref), createHttpLink (ref), tbl (ref)
 	if p0 == nil then
 		p0 = {}

@@ -5,7 +5,7 @@ local _ = require(parent.types)
 local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTelemetry)
 local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnifiedPurchaseTelemetryCounter)
 
-local function _(p0, p1) --[[ line: 18 | named "buildCartPricingRequestBody" ]]
+local function _(p0, p1)
 	local t = { featureKey = "MARKETPLACE_CART", items = p0 }
 	
 	if p1 ~= nil then
@@ -14,7 +14,7 @@ local function _(p0, p1) --[[ line: 18 | named "buildCartPricingRequestBody" ]]
 	return t
 end
 
-return function(p2, p3, p4, p5, p6) --[[ line: 32 | named "postCartPricing" ]]
+return function(p2, p3, p4, p5, p6)
 	-- upvalues: promiseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
 	if p3 == nil or #p3 == 0 or p2.postCartPricing == nil then
 		return promiseModule.resolve(nil)
@@ -25,12 +25,12 @@ return function(p2, p3, p4, p5, p6) --[[ line: 32 | named "postCartPricing" ]]
 	if p4 ~= nil then
 		t.unselectedOffers = p4
 	end
-	return postCartPricing(t):andThen(function(p8) --[[ line: 48 ]]
+	return postCartPricing(t):andThen(function(p8)
 		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p5 (ref), p6 (ref)
 		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p5, p6)
 		
 		return p8
-	end):catch(function(p7) --[[ line: 56 ]]
+	end):catch(function(p7)
 		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p5 (ref), p6 (ref)
 		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p5, p6)
 		warn(string.format("postCartPricing failed: %s", tostring(p7)))

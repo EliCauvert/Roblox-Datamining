@@ -1,6 +1,6 @@
 ﻿local equalObjectsModule = require(script.Parent.Parent.equalObjects)
 
-local function equalsDeepOneWay(p0, p1) --[[ line: 4 ]]
+local function equalsDeepOneWay(p0, p1)
 	-- upvalues: equalsDeepOneWay (ref)
 	if type(p0) == "table" and type(p1) == "table" then
 		for i = 1, #p0 do
@@ -14,7 +14,7 @@ local function equalsDeepOneWay(p0, p1) --[[ line: 4 ]]
 	end
 end
 
-return function(...) --[[ line: 20 | named "equalsDeep" ]]
+return function(...)
 	-- upvalues: equalObjectsModule (ref), equalsDeepOneWay (ref)
 	if equalObjectsModule(...) then
 		return true

@@ -2,11 +2,11 @@
 local var1 = require(script:FindFirstAncestor("ContactImporter").Parent.AppCommonLib).Signal.new()
 
 return {
-	getStatus = function() --[[ line: 14 ]]
+	getStatus = function()
 		-- upvalues: var0 (write)
 		return var0
 	end,
-	setStatus = function(value) --[[ line: 9 ]]
+	setStatus = function(value)
 		-- upvalues: var0 (write), var1 (ref)
 		var0 = value
 		var1:fire(value)

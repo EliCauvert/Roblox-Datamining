@@ -9,7 +9,7 @@ local t = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p0) --[[ line: 30 | named "emitRecommendationAction" ]]
+return function(p0)
 	-- upvalues: constantsModule (ref), t (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref)
 	local var4 = if p0.actionType == constantsModule.RecommendationActionType.Play then game:GetService("HttpService"):GenerateGUID(false) else nil
 	game:GetService("TelemetryService"):LogEvent(t, {

@@ -12,7 +12,7 @@ local _ = require(parent.Common.Types)
 local _ = { PromptJoinGroup = "PromptJoinGroup" }
 local t = { PromptJoinGroup = groupJoinPromptModule }
 
-return function(p0) --[[ line: 54 ]]
+return function(p0)
 	-- upvalues: useState (ref), reactModule (ref), cryoModule (ref), t (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var6, var7 = useState({
 		promptType = nil,
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 54 ]]
 	local promptType = var6.promptType
 	local data = var6.data
 	local callbacks = var6.callbacks
-	local var8 = reactModule.useCallback(function() --[[ line: 68 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: cryoModule (copy), var6 (ref), var7 (ref)
 		if cryoModule.isEmpty(var6.promptQueue) then
 			var7({
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 54 ]]
 	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		PromptConnections = reactModule.createElement(promptConnectionsModule, {
-			openGroupJoinPrompt = reactModule.useCallback(function(p1, p2, p3) --[[ line: 105 ]]
+			openGroupJoinPrompt = reactModule.useCallback(function(p1, p2, p3)
 				-- upvalues: var6 (ref), var7 (ref), cryoModule (copy)
 				if var6.promptType == nil then
 					var7({

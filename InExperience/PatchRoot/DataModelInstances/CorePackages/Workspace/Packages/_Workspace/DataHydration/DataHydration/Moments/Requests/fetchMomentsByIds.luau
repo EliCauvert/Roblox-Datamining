@@ -14,7 +14,7 @@ local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPa
 local momentGetIdType = momentsTypesModule.Enums.MomentGetIdType
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
-return function(p0, p1, p2) --[[ line: 33 | named "fetchMomentsByIds" ]]
+return function(p0, p1, p2)
 	-- upvalues: constructApiUrlModule (ref), momentsFixBatchedGetMomentsQueryParams (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), momentGetIdType (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
 	local var10, var11 = constructApiUrlModule("content-captures-api/v2/moments/get-moments")
 	local t = { Ids = table.concat(p0, ",") }
@@ -31,7 +31,7 @@ return function(p0, p1, p2) --[[ line: 33 | named "fetchMomentsByIds" ]]
 		url = `{var10}?{httpModule.Url:makeQueryString(t)}`,
 		headers = var11,
 		network = p1,
-		decode = function(p3) --[[ line: 57 ]]
+		decode = function(p3)
 			-- upvalues: convertApiMomentsToMomentItemsModule (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
 			return {
 				moments = convertApiMomentsToMomentItemsModule(p3.items),

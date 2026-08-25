@@ -8,11 +8,11 @@ local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspect
 local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemTypeEnum
 
 return roduxModule.createReducer({}, {
-	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p0, p1) --[[ line: 31 ]]
+	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, { totalPrice = p0.totalPrice - p1.result.RobuxSpent })
 	end else nil,
-	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p2, p3) --[[ line: 41 ]]
+	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p2, p3)
 		-- upvalues: cryoModule (ref), itemTypeEnum (ref)
 		local t = {}
 		local totalPrice = nil
@@ -24,7 +24,7 @@ return roduxModule.createReducer({}, {
 			totalValue = look.totalValue
 			
 			if look.items then
-				t = cryoModule.List.map(look.items, function(p4) --[[ line: 53 ]]
+				t = cryoModule.List.map(look.items, function(p4)
 					-- upvalues: itemTypeEnum (copy)
 					return {
 						id = tostring(p4.id),

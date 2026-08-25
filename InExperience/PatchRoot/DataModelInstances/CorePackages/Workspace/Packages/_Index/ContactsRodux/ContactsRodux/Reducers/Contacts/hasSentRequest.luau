@@ -8,10 +8,10 @@ local requestSent = require(parent.Actions).RequestSent
 local dashModule = require(parent_1.Dash)
 local t = {}
 
-return function(_) --[[ line: 13 ]]
+return function(_)
 	-- upvalues: roduxModule (ref), t (ref), requestSent (ref), dashModule (ref)
 	return roduxModule.createReducer(t, {
-		[requestSent.name] = function(p0, p1) --[[ line: 15 ]]
+		[requestSent.name] = function(p0, p1)
 			-- upvalues: dashModule (copy)
 			return dashModule.join(p0, { [p1.payload.id] = true })
 		end

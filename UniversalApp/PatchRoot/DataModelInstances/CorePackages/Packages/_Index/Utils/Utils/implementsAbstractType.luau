@@ -6,7 +6,7 @@ local doTypesOverlap = graphQLModule.doTypesOverlap
 local isCompositeType = graphQLModule.isCompositeType
 local _ = require(script.Parent.types)
 
-function t.implementsAbstractType(value, p0, p1) --[[ line: 20 ]]
+function t.implementsAbstractType(value, p0, p1)
 	-- upvalues: boolean (ref), isCompositeType (ref), doTypesOverlap (ref)
 	if p1 == nil or p0 == nil then
 		return false

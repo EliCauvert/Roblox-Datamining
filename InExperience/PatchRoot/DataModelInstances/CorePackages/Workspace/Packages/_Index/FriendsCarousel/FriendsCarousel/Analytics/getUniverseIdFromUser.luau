@@ -2,7 +2,7 @@
 local _ = require(friendsCarousel.Parent.GraphQLServer)
 local _ = require(friendsCarousel.Common.LocalTypes)
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	local universeId = nil
 	
 	if p0.__typename == "Friend" then

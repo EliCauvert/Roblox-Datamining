@@ -18,18 +18,18 @@ local var9 = t.strictInterface({
 	sendAnalytics = t.callback
 })
 
-return roactRodux.UNSTABLE_connect2(function(p2, _) --[[ line: 69 ]]
+return roactRodux.UNSTABLE_connect2(function(p2, _)
 	return { isLeavingGame = p2.leavingGame }
-end, function(p3) --[[ line: 73 ]]
+end, function(p3)
 	-- upvalues: cancelLeavingGameModule (ref), sendAnalyticsModule (ref), constantsModule (ref)
 	return {
-		onCancel = function() --[[ line: 75 ]]
+		onCancel = function()
 			-- upvalues: p3 (ref), cancelLeavingGameModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			p3(cancelLeavingGameModule())
 			sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsLeaveGameName, { confirmed = constantsModule.AnalyticsCancelledName })
 		end
 	}
-end)(function(p0) --[[ line: 31 | named "LeaveGameDialog" ]]
+end)(function(p0)
 	-- upvalues: globalConfigModule (ref), var9 (ref), withLocalizationModule (ref), roact (ref), confirmationDialogModule (ref), sendAnalyticsModule (ref), constantsModule (ref), runService (ref), getDefaultQualityLevel (ref)
 	if globalConfigModule.propValidation then
 		assert(var9(p0))
@@ -39,7 +39,7 @@ end)(function(p0) --[[ line: 31 | named "LeaveGameDialog" ]]
 		confirmText = "CoreScripts.InGameMenu.Leave",
 		titleText = "CoreScripts.InGameMenu.LeaveGameQuestion",
 		cancelText = "CoreScripts.InGameMenu.Cancel"
-	})(function(p1) --[[ line: 41 ]]
+	})(function(p1)
 		-- upvalues: roact (copy), confirmationDialogModule (copy), p0 (ref), sendAnalyticsModule (copy), constantsModule (copy), runService (copy), getDefaultQualityLevel (copy)
 		return roact.createElement(confirmationDialogModule, {
 			bindReturnToConfirm = true,
@@ -49,7 +49,7 @@ end)(function(p0) --[[ line: 31 | named "LeaveGameDialog" ]]
 			titleText = p1.titleText,
 			cancelText = p1.cancelText,
 			onCancel = p0.onCancel,
-			onConfirm = function() --[[ line: 51 ]]
+			onConfirm = function()
 				-- upvalues: sendAnalyticsModule (copy), constantsModule (copy), runService (copy), getDefaultQualityLevel (copy)
 				sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsLeaveGameName, { confirmed = constantsModule.AnalyticsConfirmedName })
 				runService.Heartbeat:Wait()

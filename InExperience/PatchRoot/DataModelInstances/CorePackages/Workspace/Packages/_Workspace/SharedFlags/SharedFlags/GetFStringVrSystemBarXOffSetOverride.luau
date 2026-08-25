@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("VrSystemBarXOffSetOverride", "-0.4")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("VrSystemBarXOffSetOverride")
 end

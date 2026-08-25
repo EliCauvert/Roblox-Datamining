@@ -7,12 +7,12 @@ local url = httpModule.Url
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 59 ]]
+function t.new(p0)
 	-- upvalues: httpRequestModule (ref), t (ref)
 	return setmetatable({
 		_placeInfo = {},
 		_requestImpl = p0 or httpRequestModule.config({
-			requestFunction = function(p1, p2, p3) --[[ line: 63 ]]
+			requestFunction = function(p1, p2, p3)
 				-- upvalues: httpRequestModule (copy)
 				return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 			end
@@ -20,28 +20,28 @@ function t.new(p0) --[[ line: 59 ]]
 	}, t)
 end
 
-function t:name(p4) --[[ line: 74 ]]
+function t:name(p4)
 	return self:_getInfo(p4, "name")
 end
 
-function t:description(p5) --[[ line: 78 ]]
+function t:description(p5)
 	return self:_getInfo(p5, "description")
 end
 
-function t:universeId(p6) --[[ line: 82 ]]
+function t:universeId(p6)
 	return self:_getInfo(p6, "universeId")
 end
 
-function t:_fetchPlacesInfo(p7) --[[ line: 88 ]]
+function t:_fetchPlacesInfo(p7)
 	-- upvalues: url (ref)
 	return self._requestImpl(string.format("%sv1/games/multiget-place-details?%s", url.GAME_URL, url:makeQueryString({ placeIds = p7 })), "GET")
 end
 
-function t:getPlacesInfo(p8) --[[ line: 101 ]]
+function t:getPlacesInfo(p8)
 	-- upvalues: promiseModule (ref)
-	local var4 = promiseModule.new(function(p9, p10) --[[ line: 102 ]]
+	local var4 = promiseModule.new(function(p9, p10)
 		-- upvalues: self (ref), p8 (ref)
-		self:_fetchPlacesInfo(p8):andThen(function(p12) --[[ line: 104 ]]
+		self:_fetchPlacesInfo(p8):andThen(function(p12)
 			-- upvalues: p9 (ref), self (copy)
 			if not p12 or not p12.responseBody then
 				p9(nil)
@@ -60,7 +60,7 @@ function t:getPlacesInfo(p8) --[[ line: 101 ]]
 				self._placeInfo[v.placeId] = t_1
 			end
 			p9(t)
-		end):catch(function(p11) --[[ line: 124 ]]
+		end):catch(function(p11)
 			-- upvalues: p10 (ref)
 			p10(p11)
 		end)
@@ -71,7 +71,7 @@ function t:getPlacesInfo(p8) --[[ line: 101 ]]
 		if self._placeInfo[v] then
 			t[v] = promiseModule.resolve(self._placeInfo[v])
 		else
-			self._placeInfo[v] = var4:andThen(function(p13) --[[ line: 135 ]]
+			self._placeInfo[v] = var4:andThen(function(p13)
 				-- upvalues: v (ref)
 				return p13[v]
 			end)
@@ -81,12 +81,12 @@ function t:getPlacesInfo(p8) --[[ line: 101 ]]
 	return t
 end
 
-function t:_getInfo(p14, p15) --[[ line: 144 ]]
+function t:_getInfo(p14, p15)
 	-- upvalues: promiseModule (ref)
-	return if self._placeInfo[p14] and self._placeInfo[p14][p15] then promiseModule.resolve(self._placeInfo[p14][p15]) elseif self._placeInfo[p14] then self._placeInfo[p14]:andThen(function(_) --[[ line: 151 ]]
+	return if self._placeInfo[p14] and self._placeInfo[p14][p15] then promiseModule.resolve(self._placeInfo[p14][p15]) elseif self._placeInfo[p14] then self._placeInfo[p14]:andThen(function(_)
 		-- upvalues: self (ref), p14 (ref), p15 (ref)
 		return self._placeInfo[p14][p15]
-	end) else self:getPlacesInfo({ p14 })[p14]:andThen(function(p16) --[[ line: 156 ]]
+	end) else self:getPlacesInfo({ p14 })[p14]:andThen(function(p16)
 		-- upvalues: p15 (ref)
 		return p16[p15]
 	end)

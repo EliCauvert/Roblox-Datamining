@@ -12,14 +12,14 @@ local fIntMomentsSurfaceLoadTTISamplingRate = sharedFlagsModule.FIntMomentsSurfa
 local var4 = 0
 local var5 = nil
 
-local function _(p0) --[[ line: 49 | named "scheduleCapTimeout" ]]
+local function _(p0)
 	-- upvalues: sharedFlagsModule (ref), var4 (write), timeToInteractiveTracker (ref), fFlagMomentsRealtimeObservabilityModule (ref), analyticsModule (ref), var5 (write)
 	local fIntMomentsSurfaceLoadTTIMaxMs = sharedFlagsModule.FIntMomentsSurfaceLoadTTIMaxMs
 	
 	if fIntMomentsSurfaceLoadTTIMaxMs <= 0 then
 		return
 	end
-	task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function() --[[ line: 54 ]]
+	task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
 		-- upvalues: p0 (ref), var4 (copy), timeToInteractiveTracker (copy), fFlagMomentsRealtimeObservabilityModule (copy), analyticsModule (copy), var5 (copy)
 		if p0 == var4 then
 			local events = timeToInteractiveTracker.getEvents()
@@ -42,7 +42,7 @@ end
 
 return {
 	EVENT_NAME = "Watch_MomentsFeed",
-	start = function() --[[ line: 65 ]]
+	start = function()
 		-- upvalues: var4 (write), var5 (write), timeToInteractiveTracker (ref), sharedFlagsModule (ref), fFlagMomentsRealtimeObservabilityModule (ref), analyticsModule (ref)
 		var4 += 1
 		var5 = os.clock()
@@ -53,7 +53,7 @@ return {
 		if fIntMomentsSurfaceLoadTTIMaxMs <= 0 then
 			return
 		end
-		task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function() --[[ line: 54 ]]
+		task.delay(fIntMomentsSurfaceLoadTTIMaxMs / 1000, function()
 			-- upvalues: var9 (ref), var4 (copy), timeToInteractiveTracker (copy), fFlagMomentsRealtimeObservabilityModule (copy), analyticsModule (copy), var5 (copy)
 			if var9 == var4 then
 				local events = timeToInteractiveTracker.getEvents()
@@ -73,21 +73,21 @@ return {
 			end
 		end)
 	end,
-	isSessionActive = function() --[[ line: 26 ]]
+	isSessionActive = function()
 		-- upvalues: timeToInteractiveTracker (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
 		return events ~= nil and events.Watch_MomentsFeed ~= nil
 	end,
-	getSessionGeneration = function() --[[ line: 74 ]]
+	getSessionGeneration = function()
 		-- upvalues: var4 (write)
 		return var4
 	end,
-	elapsedMs = function() --[[ line: 31 ]]
+	elapsedMs = function()
 		-- upvalues: var5 (write)
 		return if var5 == nil then 0 else (os.clock() - var5) * 1000
 	end,
-	renderStarted = function() --[[ line: 80 ]]
+	renderStarted = function()
 		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -97,7 +97,7 @@ return {
 			return
 		end
 	end,
-	surfaceMounted = function() --[[ line: 87 ]]
+	surfaceMounted = function()
 		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -107,7 +107,7 @@ return {
 			return
 		end
 	end,
-	primaryDataStarted = function() --[[ line: 94 ]]
+	primaryDataStarted = function()
 		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -117,7 +117,7 @@ return {
 			return
 		end
 	end,
-	primaryDataNetworkFetch = function() --[[ line: 101 ]]
+	primaryDataNetworkFetch = function()
 		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -127,7 +127,7 @@ return {
 			return
 		end
 	end,
-	primaryDataResponseReceived = function() --[[ line: 112 ]]
+	primaryDataResponseReceived = function()
 		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -137,7 +137,7 @@ return {
 			return
 		end
 	end,
-	primaryDataReady = function() --[[ line: 123 ]]
+	primaryDataReady = function()
 		-- upvalues: timeToInteractiveTracker (ref), milestone (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -147,7 +147,7 @@ return {
 			return
 		end
 	end,
-	markSurfaceReady = function(p1) --[[ line: 130 ]]
+	markSurfaceReady = function(p1)
 		-- upvalues: timeToInteractiveTracker (ref), var5 (write), sharedFlagsModule (ref), fFlagMomentsRealtimeObservabilityModule (ref), analyticsModule (ref), milestone (ref), fIntMomentsSurfaceLoadTTISamplingRate (ref), fireAnalyticsEvent (ref), eventNames (ref)
 		local events = timeToInteractiveTracker.getEvents()
 		
@@ -177,7 +177,7 @@ return {
 		fireAnalyticsEvent(eventNames.MomentsFirstContentLoadedTimestamp, { value = var18 })
 		var5 = nil
 	end,
-	abort = function(p2) --[[ line: 38 ]]
+	abort = function(p2)
 		-- upvalues: timeToInteractiveTracker (ref), analyticsModule (ref), var5 (write)
 		local events = timeToInteractiveTracker.getEvents()
 		

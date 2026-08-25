@@ -5,7 +5,7 @@ local parent = gameTile.Parent
 local reactModule = require(parent.React)
 local ratingSmall = require(parent.UIBlox).App.ImageSet.Images["icons/status/games/rating_small"]
 
-return reactModule.memo(function(p0) --[[ line: 22 | named "RatingWithGenreFooter" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getGameStatsRatingPercentageTextModule (ref), reactModule (ref), gridTileIconTextFooterModule (ref), ratingSmall (ref)
 	return reactModule.createElement(gridTileIconTextFooterModule, {
 		Position = p0.Position,

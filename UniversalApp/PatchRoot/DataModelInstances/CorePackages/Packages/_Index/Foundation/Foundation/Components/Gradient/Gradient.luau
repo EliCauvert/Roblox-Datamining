@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p0) --[[ line: 11 | named "Gradient" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("UIGradient", {
 		Rotation = if p0.fillDirection == Enum.FillDirection.Vertical then 90 else 0,

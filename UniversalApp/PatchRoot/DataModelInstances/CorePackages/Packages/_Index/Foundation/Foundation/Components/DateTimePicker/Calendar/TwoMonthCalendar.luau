@@ -9,16 +9,16 @@ local twoMonthCalendarPaneModule = require(script.Parent.TwoMonthCalendarPane)
 local viewModule = require(foundation.Components.View)
 local useScaledValueModule = require(foundation.Utility.useScaledValue)
 
-return function(p0) --[[ line: 26 | named "TwoMonthCalendar" ]]
+return function(p0)
 	-- upvalues: useScaledValueModule (ref), dateTimeLayoutUtilitiesModule (ref), reactModule (ref), dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref), viewModule (ref), twoMonthCalendarHeaderModule (ref), dividerModule (ref), twoMonthCalendarPaneModule (ref)
 	local var10 = useScaledValueModule(dateTimeLayoutUtilitiesModule.PANE_WIDTH)
 	local var11 = var10 / 7
 	local var12, var13 = reactModule.useState(dateTimeCalendarViewUtilitiesModule.toViewDate(dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(p0.selectedDates, p0.referenceDate)))
-	local var14, var15 = reactModule.useState(function() --[[ line: 36 ]]
+	local var14, var15 = reactModule.useState(function()
 		return nil
 	end)
 	local var16 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var13 (ref), dateTimeCalendarViewUtilitiesModule (copy)
 		if p0.viewAnchorDate then
 			var13(dateTimeCalendarViewUtilitiesModule.toViewDate(p0.viewAnchorDate))
@@ -26,14 +26,14 @@ return function(p0) --[[ line: 26 | named "TwoMonthCalendar" ]]
 			return
 		end
 	end, { p0.viewAnchorDate })
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var13 (ref), dateTimeCalendarViewUtilitiesModule (copy)
 		if p0.viewAnchorDate or p0.selectedDates and p0.selectedDates[1] then return end
 		if p0.referenceDate then
 			var13(dateTimeCalendarViewUtilitiesModule.toViewDate(p0.referenceDate))
 		end
 	end, { p0.viewAnchorDate, p0.referenceDate, p0.selectedDates })
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var15 (ref)
 		local selectedDates = p0.selectedDates
 		
@@ -41,46 +41,46 @@ return function(p0) --[[ line: 26 | named "TwoMonthCalendar" ]]
 			var15(nil)
 		end
 	end, { p0.selectedDates })
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var15 (ref)
 		local current = var16.current
 		
 		if current == nil then
 			return
 		end
-		local mouseLeaveConnection = current.MouseLeave:Connect(function() --[[ line: 75 ]]
+		local mouseLeaveConnection = current.MouseLeave:Connect(function()
 			-- upvalues: var15 (copy)
 			var15(nil)
 		end)
 		
-		return function() --[[ line: 78 ]]
+		return function()
 			-- upvalues: mouseLeaveConnection (ref)
 			mouseLeaveConnection:Disconnect()
 		end
 	end, {})
-	local var17 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), dateTimeUtilitiesModule (copy)
-		var13(function(p1) --[[ line: 84 ]]
+		var13(function(p1)
 			-- upvalues: dateTimeUtilitiesModule (copy)
 			local prevMonthInfo, prevMonthInfo_1 = dateTimeUtilitiesModule.getPrevMonthInfo(p1.month, p1.year)
 			
 			return { month = prevMonthInfo, year = prevMonthInfo_1 }
 		end)
 	end, {})
-	local var18 = reactModule.useCallback(function() --[[ line: 90 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), dateTimeUtilitiesModule (copy)
-		var13(function(p2) --[[ line: 91 ]]
+		var13(function(p2)
 			-- upvalues: dateTimeUtilitiesModule (copy)
 			local nextMonthInfo, nextMonthInfo_1 = dateTimeUtilitiesModule.getNextMonthInfo(p2.month, p2.year)
 			
 			return { month = nextMonthInfo, year = nextMonthInfo_1 }
 		end)
 	end, {})
-	local var19 = reactModule.useCallback(function(p3) --[[ line: 97 ]]
+	local var19 = reactModule.useCallback(function(p3)
 		-- upvalues: var15 (ref)
 		var15(p3)
 	end, {})
-	local var20 = reactModule.useCallback(function(p4) --[[ line: 101 ]]
+	local var20 = reactModule.useCallback(function(p4)
 		-- upvalues: var15 (ref), p0 (ref)
 		var15(nil)
 		p0.onDayActivated(p4)

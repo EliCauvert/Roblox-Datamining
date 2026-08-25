@@ -8,9 +8,9 @@ local buildProfileConfigurationApplyConfigModule = require(script.Parent.buildPr
 local reportAvatarEventCounterNoAnalyticsArgument = avatarExperienceAnalyticsModule.reportAvatarEventCounterNoAnalyticsArgument
 local AVATAR_EDITOR_SERVICE_ERRORS = avatarExperienceAnalyticsModule.Constants.AVATAR_EDITOR_SERVICE_ERRORS
 
-return function(p0) --[[ line: 34 | named "saveProfileConfiguration" ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), avatarExperienceFlagsModule (ref), buildProfileConfigurationApplyConfigModule (ref), avatarEditorService (ref), reportAvatarEventCounterNoAnalyticsArgument (ref), AVATAR_EDITOR_SERVICE_ERRORS (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 37 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: avatarExperienceFlagsModule (copy), buildProfileConfigurationApplyConfigModule (copy), p0 (ref), avatarEditorService (copy), reportAvatarEventCounterNoAnalyticsArgument (copy), AVATAR_EDITOR_SERVICE_ERRORS (copy)
 		local var5 = if avatarExperienceFlagsModule.FFlagAXProfileConfigurationMultiFieldApply then buildProfileConfigurationApplyConfigModule(p0) else { BackgroundAssetId = p0 }
 		local var6 = avatarEditorService:NoPromptApplyProfileConfiguration(var5)

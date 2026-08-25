@@ -10,7 +10,7 @@ local _ = {
 	PARENT_BLOCKED_TARGET_USER_ERROR = 14
 }
 
-return function() --[[ line: 17 | named "useShowToastOnError" ]]
+return function()
 	-- upvalues: useDispatch (ref), useLocalization (ref), reactModule (ref), setCurrentToastMessage (ref)
 	local var1 = useDispatch()
 	local var2 = useLocalization({
@@ -19,7 +19,7 @@ return function() --[[ line: 17 | named "useShowToastOnError" ]]
 		blocktargetAlreadyBlockedToast = "Feature.Friends.Error.TargetAlreadyBlockedError"
 	})
 	
-	return reactModule.useCallback(function(p0) --[[ line: 25 ]]
+	return reactModule.useCallback(function(p0)
 		-- upvalues: var1 (ref), setCurrentToastMessage (copy), var2 (ref)
 		local body
 		if p0 then

@@ -9,7 +9,7 @@ local tModule = require(parent.t)
 local flaggedMutedError = require(parent.Loggers).flaggedMutedError
 local _ = require(playerFeedback.Types)
 
-local function _(p0) --[[ line: 14 | named "fetchKeymapper" ]]
+local function _(p0)
 	return "luaapp.asset-review-api.channels" .. p0
 end
 
@@ -18,7 +18,7 @@ local t = {
 	[voteStatus.VotedDown] = "Downvote"
 }
 
-local _ = function(p1, p2) --[[ line: 23 | named "findCategoryByType" ]]
+local _ = function(p1, p2)
 	for i, v in ipairs(p1) do
 		if v.type == p2 then
 			return v
@@ -53,11 +53,11 @@ local var7 = tModule.interface({
 	})
 })
 
-function t_1.Get(p3, _, p4, p5) --[[ line: 62 ]]
+function t_1.Get(p3, _, p4, p5)
 	-- upvalues: performFetch (ref), gameGetPlayerFeedbackMetadataModule (ref), feedbackChannelModule (ref), var7 (ref), flaggedMutedError (ref), promiseModule (ref), t (ref)
-	return performFetch.Single("luaapp.asset-review-api.channels" .. p4, function(_) --[[ line: 63 ]]
+	return performFetch.Single("luaapp.asset-review-api.channels" .. p4, function(_)
 		-- upvalues: gameGetPlayerFeedbackMetadataModule (copy), p3 (ref), feedbackChannelModule (copy), p4 (ref), var7 (copy), flaggedMutedError (copy), promiseModule (copy), t (copy), p5 (ref)
-		return gameGetPlayerFeedbackMetadataModule(p3, feedbackChannelModule.ExperienceDiscoveryPage, p4):andThen(function(p6) --[[ line: 65 ]]
+		return gameGetPlayerFeedbackMetadataModule(p3, feedbackChannelModule.ExperienceDiscoveryPage, p4):andThen(function(p6)
 			-- upvalues: var7 (copy), flaggedMutedError (copy), promiseModule (copy), t (copy), p5 (copy), p4 (copy)
 			local responseBody = p6 and p6.responseBody
 			local var9, var10 = var7(responseBody)
@@ -90,14 +90,14 @@ function t_1.Get(p3, _, p4, p5) --[[ line: 62 ]]
 				end
 			end
 			var12 = nil
-		end, function(p7) --[[ line: 94 ]]
+		end, function(p7)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.reject(p7)
 		end)
 	end)
 end
 
-function t_1.GetFetchingStatus(p8, p9) --[[ line: 100 ]]
+function t_1.GetFetchingStatus(p8, p9)
 	-- upvalues: performFetch (ref)
 	return performFetch.GetStatus(p8, "luaapp.asset-review-api.channels" .. p9)
 end

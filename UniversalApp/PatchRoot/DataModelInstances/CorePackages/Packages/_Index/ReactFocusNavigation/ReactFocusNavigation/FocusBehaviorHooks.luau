@@ -8,24 +8,24 @@ local mostRecentOrDefault = focusBehaviorsModule.mostRecentOrDefault
 local useContainerFocusBehaviorModule = require(script.Parent.useContainerFocusBehavior)
 
 return {
-	useDefaultFocusBehavior = function(p0) --[[ line: 15 ]]
+	useDefaultFocusBehavior = function(p0)
 		-- upvalues: reactModule (ref), default (ref), useContainerFocusBehaviorModule (ref)
 		local var3, var4 = reactModule.useState(nil)
 		
-		return var4, useContainerFocusBehaviorModule(reactModule.useMemo(function() --[[ line: 20 ]]
+		return var4, useContainerFocusBehaviorModule(reactModule.useMemo(function()
 			-- upvalues: default (copy), var3 (ref)
 			return default(var3)
 		end, { var3 }), p0)
 	end,
-	useMostRecentFocusBehavior = function(p1) --[[ line: 29 ]]
+	useMostRecentFocusBehavior = function(p1)
 		-- upvalues: reactModule (ref), mostRecent (ref), useContainerFocusBehaviorModule (ref)
 		return useContainerFocusBehaviorModule(reactModule.useMemo(mostRecent, {}), p1)
 	end,
-	useMostRecentOrDefaultFocusBehavior = function(p2) --[[ line: 35 ]]
+	useMostRecentOrDefaultFocusBehavior = function(p2)
 		-- upvalues: reactModule (ref), mostRecentOrDefault (ref), useContainerFocusBehaviorModule (ref)
 		local var5, var6 = reactModule.useState(nil)
 		
-		return var6, useContainerFocusBehaviorModule(reactModule.useMemo(function() --[[ line: 40 ]]
+		return var6, useContainerFocusBehaviorModule(reactModule.useMemo(function()
 			-- upvalues: mostRecentOrDefault (copy), var5 (ref)
 			return mostRecentOrDefault(var5)
 		end, { var5 }), p2)

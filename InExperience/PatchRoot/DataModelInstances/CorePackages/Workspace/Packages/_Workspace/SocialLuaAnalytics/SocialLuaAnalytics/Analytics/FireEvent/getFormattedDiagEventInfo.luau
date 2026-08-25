@@ -1,13 +1,13 @@
 ﻿local diagEventTypes = require(script:FindFirstAncestor("SocialLuaAnalytics").Analytics.Enums).DiagEventTypes
 local _ = require(script.Parent.Parent.Types)
 
-local function _(p0, p1) --[[ line: 7 | named "formatValue" ]]
+local function _(p0, p1)
 	return if type(p0) == "function" then p0(p1) else p0
 end
 
-return function() --[[ line: 11 | named "getFormattedDiagEventInfo" ]]
+return function()
 	-- upvalues: diagEventTypes (ref)
-	return function(p2, p3) --[[ line: 12 ]]
+	return function(p2, p3)
 		-- upvalues: diagEventTypes (copy)
 		local name = p2.name
 		local var0 = if type(name) == "function" then name(p3) else name

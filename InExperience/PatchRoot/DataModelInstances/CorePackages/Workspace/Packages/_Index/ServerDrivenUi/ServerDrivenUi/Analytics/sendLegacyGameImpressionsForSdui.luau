@@ -14,7 +14,7 @@ local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlag
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local t = {}
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 30 | named "sendLegacyGameImpressionsForSdui" ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: t (ref), cryoModule (ref), sduiParsers (ref), sduiBuilder (ref), appPage (ref), findAnalyticsFieldInAncestors (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), sduiParseHelpers (ref), sduiErrors (ref)
 	local t_1 = {}
 	
@@ -51,7 +51,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 30 | named "s
 			
 			return
 		end
-		sendGameImpressions.sendFromTopicContents(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, p0, t_1, p6.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, nil, nil, p8, var5 or false, var4, nil, nil, function(p10) --[[ line: 135 ]]
+		sendGameImpressions.sendFromTopicContents(p6.dependencies.eventIngest, p6.dependencies.appAnalytics, p0, t_1, p6.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, nil, nil, p8, var5 or false, var4, nil, nil, function(p10)
 			-- upvalues: p3 (ref), sduiParseHelpers (copy), p6 (ref), sduiErrors (copy), var4 (ref), p9 (ref)
 			p6.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 				componentType = var4,

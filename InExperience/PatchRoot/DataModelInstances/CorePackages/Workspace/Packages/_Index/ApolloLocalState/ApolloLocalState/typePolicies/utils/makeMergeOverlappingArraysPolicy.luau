@@ -1,5 +1,5 @@
-﻿return function(p0) --[[ line: 1 | named "makeMergeOverlappingArraysPolicy" ]]
-	return function(_, p1, p2, p3) --[[ line: 2 | named "mergeOverlappingArraysPolicy" ]]
+﻿return function(p0)
+	return function(_, p1, p2, p3)
 		-- upvalues: p0 (ref)
 		p1 = p1 or {}
 		p2 = p2 or {}

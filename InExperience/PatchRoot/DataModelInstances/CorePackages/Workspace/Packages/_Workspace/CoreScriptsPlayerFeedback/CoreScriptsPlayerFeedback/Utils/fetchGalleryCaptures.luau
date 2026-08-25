@@ -1,7 +1,7 @@
-﻿return function(p0, p1) --[[ line: 8 | named "fetchGalleryCaptures" ]]
+﻿return function(p0, p1)
 	p1 = p1 or { Enum.CaptureType.Screenshot }
 	local var1 = if p0 ~= nil then game:GetService("CaptureService") else p0
-	local ok, status = pcall(function() --[[ line: 17 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var1 (write), p1 (ref)
 		local var2, var3 = var1:ReadCapturesFromGalleryAsync(p1, false)
 		

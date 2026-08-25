@@ -6,8 +6,8 @@ local getChildRouterModule = require(script.Parent.getChildRouter)
 local getNavigationActionCreatorsModule = require(script.Parent.routers.getNavigationActionCreators)
 local getChildrenNavigationCacheModule = require(script.Parent.getChildrenNavigationCache)
 
-local function _(p0) --[[ line: 12 | named "createParamGetter" ]]
-	return function(p1, p2) --[[ line: 13 ]]
+local function _(p0)
+	return function(p1, p2)
 		-- upvalues: p0 (ref)
 		local params = p0.params
 		
@@ -15,10 +15,10 @@ local function _(p0) --[[ line: 12 | named "createParamGetter" ]]
 	end
 end
 
-local function getChildNavigation(p3, p4, p5) --[[ line: 24 ]]
+local function getChildNavigation(p3, p4, p5)
 	-- upvalues: getChildrenNavigationCacheModule (ref), array (ref), getChildRouterModule (ref), object (ref), getNavigationActionCreatorsModule (ref), getChildNavigation (ref), getEventManagerModule (ref)
 	local var6 = getChildrenNavigationCacheModule(p3)
-	local var7 = array.findIndex(p3.state.routes, function(p6) --[[ line: 27 ]]
+	local var7 = array.findIndex(p3.state.routes, function(p6)
 		-- upvalues: p4 (ref)
 		return p6.key == p4
 	end)
@@ -37,7 +37,7 @@ local function getChildNavigation(p3, p4, p5) --[[ line: 24 ]]
 	local t = {}
 	
 	for i, v in var11 do
-		t[i] = function(...) --[[ line: 66 ]]
+		t[i] = function(...)
 			-- upvalues: v (ref), p3 (ref)
 			return p3.dispatch(v(...))
 		end
@@ -55,15 +55,15 @@ local function getChildNavigation(p3, p4, p5) --[[ line: 24 ]]
 			state = var8,
 			router = var10,
 			actions = var11,
-			getParam = function(p7, p8) --[[ line: 13 ]]
+			getParam = function(p7, p8)
 				-- upvalues: var8 (ref)
 				local params = var8.params
 				
 				return if params and params[p7] ~= nil then params[p7] else p8
 			end,
-			getChildNavigation = function(p9) --[[ line: 88 ]]
+			getChildNavigation = function(p9)
 				-- upvalues: getChildNavigation (copy), var15 (write), p5 (ref), p4 (ref)
-				return getChildNavigation(var15, p9, function() --[[ line: 89 ]]
+				return getChildNavigation(var15, p9, function()
 					-- upvalues: p5 (copy), p4 (copy)
 					local var17 = p5()
 					
@@ -81,22 +81,22 @@ local function getChildNavigation(p3, p4, p5) --[[ line: 24 ]]
 		state = var8,
 		router = var10,
 		actions = var11,
-		getParam = function(p10, p11) --[[ line: 13 ]]
+		getParam = function(p10, p11)
 			-- upvalues: var8 (ref)
 			local params = var8.params
 			
 			return if params and params[p10] ~= nil then params[p10] else p11
 		end,
-		getChildNavigation = function(p12) --[[ line: 109 ]]
+		getChildNavigation = function(p12)
 			-- upvalues: getChildNavigation (copy), var16 (write), p5 (ref), p4 (ref)
-			return getChildNavigation(var16, p12, function() --[[ line: 110 ]]
+			return getChildNavigation(var16, p12, function()
 				-- upvalues: p5 (copy), p4 (copy)
 				local var18 = p5()
 				
 				return if var18 then var18.getChildNavigation(p4) else nil
 			end)
 		end,
-		isFocused = function() --[[ line: 115 ]]
+		isFocused = function()
 			-- upvalues: p5 (ref), p4 (ref)
 			local var19 = p5()
 			
@@ -109,7 +109,7 @@ local function getChildNavigation(p3, p4, p5) --[[ line: 24 ]]
 			
 			return state.routes[state.index].key == p4
 		end,
-		isFirstRouteInParent = function() --[[ line: 135 ]]
+		isFirstRouteInParent = function()
 			-- upvalues: var13 (write)
 			return var13
 		end,

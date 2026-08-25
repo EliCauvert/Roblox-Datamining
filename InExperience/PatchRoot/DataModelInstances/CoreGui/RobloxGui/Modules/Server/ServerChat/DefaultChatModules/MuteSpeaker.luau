@@ -5,7 +5,7 @@ local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstant
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 local displayNameHelpersModule = require(chatModules.Utility.DisplayNameHelpers)
 local t = nil
-pcall(function() --[[ line: 15 ]]
+pcall(function()
 	-- upvalues: t (write)
 	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -14,7 +14,7 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0) --[[ line: 18 ]]
+	function t.FormatMessageToSend(_, _, p0)
 		return p0
 	end
 end
@@ -22,9 +22,9 @@ local t_1 = {
 	ChatColor = chatSettingsModule.ErrorMessageTextColor or Color3.fromRGB(245, 50, 50)
 }
 
-return function(p1) --[[ line: 24 | named "Run" ]]
+return function(p1)
 	-- upvalues: chatSettingsModule (ref), displayNameHelpersModule (ref), t (write), t_1 (ref), chatConstantsModule (ref)
-	local function _(p2) --[[ line: 26 | named "GetSpeakerNameFromMessage" ]]
+	local function _(p2)
 		local var10 = p2
 		
 		if string.sub(p2, 1, 1) == "\"" then
@@ -45,7 +45,7 @@ return function(p1) --[[ line: 24 | named "Run" ]]
 		return var10
 	end
 	
-	local function DoMuteCommand(p3, p4, p5) --[[ line: 42 ]]
+	local function DoMuteCommand(p3, p4, p5)
 		-- upvalues: p1 (ref), chatSettingsModule (copy), displayNameHelpersModule (copy), t (copy), t_1 (copy)
 		local var13 = p4
 		
@@ -102,7 +102,7 @@ return function(p1) --[[ line: 24 | named "Run" ]]
 		end
 	end
 	
-	local function DoUnmuteCommand(p6, p7, p8) --[[ line: 94 ]]
+	local function DoUnmuteCommand(p6, p7, p8)
 		-- upvalues: p1 (ref), chatSettingsModule (copy), displayNameHelpersModule (copy), t (copy), t_1 (copy)
 		local var26 = p7
 		
@@ -161,7 +161,7 @@ return function(p1) --[[ line: 24 | named "Run" ]]
 		end
 	end
 	
-	p1:RegisterProcessCommandsFunction("mute_commands", function(p9, p10, p11) --[[ line: 149 | named "MuteCommandsFunction" ]]
+	p1:RegisterProcessCommandsFunction("mute_commands", function(p9, p10, p11)
 		-- upvalues: DoMuteCommand (ref), DoUnmuteCommand (ref)
 		local var39 = false
 		

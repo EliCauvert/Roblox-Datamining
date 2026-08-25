@@ -28,11 +28,11 @@ local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSdu
 local sduiTileInsetImageModule = require(script.Parent.SduiTileInsetImage)
 local t = {}
 
-local function _(p0) --[[ line: 50 | named "isRobloxContentUrl" ]]
+local function _(p0)
 	return if string.match(p0, "^rbxthumb://") == nil then string.match(p0, "^rbxasset") ~= nil else true
 end
 
-local function maybeLayoutForButton(p1, p2, p3, p4, p5) --[[ line: 152 ]]
+local function maybeLayoutForButton(p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), cryoModule (ref)
 	return if p2 == nil or p5 then p1 else {
 		Content = reactModule.createElement("Frame", {
@@ -67,7 +67,7 @@ local function maybeLayoutForButton(p1, p2, p3, p4, p5) --[[ line: 152 ]]
 	}
 end
 
-return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
+return reactModule.memo(function(p6)
 	-- upvalues: reactModule (ref), fFlagSduiGameIconSupport (ref), contentProviderService (ref), textSizeModule (ref), useTokens (ref), fFlagSduiTileBottomButton (ref), fFlagSduiExperienceDetailsSupport (ref), getInputModeStore (ref), responsiveModule (ref), fFlagSduiTileHoldAction (ref), useTileHoldActionModule (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileImagePaddingInset (ref), sduiTileInsetImageModule (ref), fFlagSduiTileThumbnailPadding (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), imageSetLabel (ref), fFlagLuaAppSduiVideoThumbnail (ref), sduiDefaultTileImageModule (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), maybeLayoutForButton (ref), fFlagSduiTileTitleTextAlignment (ref), cryoModule (ref), t (ref), holdDetector (ref)
 	local layoutOrder = p6.layoutOrder
 	local anchorPoint = p6.anchorPoint
@@ -77,12 +77,12 @@ return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
 	local position = p6.position
 	local backgroundColor3 = p6.backgroundColor3
 	local selectionOrder = p6.selectionOrder
-	reactModule.useLayoutEffect(function() --[[ line: 215 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: p6 (ref), fFlagSduiGameIconSupport (copy), contentProviderService (copy)
 		local image = p6.image
 		
 		if image and (not fFlagSduiGameIconSupport or (if string.match(image, "^rbxthumb://") == nil then string.match(image, "^rbxasset") ~= nil else true)) then
-			task.spawn(function() --[[ line: 218 ]]
+			task.spawn(function()
 				-- upvalues: contentProviderService (copy), image (ref)
 				contentProviderService:PreloadAsync({ image })
 			end)
@@ -120,7 +120,7 @@ return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
 	local containmentPadding = p6.containmentPadding or var13.Padding.Small
 	local var26, var27 = reactModule.useState(false)
 	local var28 = if p6.isHovered ~= nil then var26 else p6.isHovered
-	local var29 = reactModule.useCallback(function() --[[ line: 265 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: getInputModeStore (copy), responsiveModule (copy), var27 (ref), p6 (ref)
 		if getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Pointer then
 			var27(true)
@@ -134,7 +134,7 @@ return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
 			end
 		end
 	end, { p6.onMouseEnter, p6.setCustomConditionState })
-	local var30 = reactModule.useCallback(function() --[[ line: 278 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: var27 (ref), p6 (ref)
 		var27(false)
 		
@@ -146,7 +146,7 @@ return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
 			p6.setCustomConditionState("hovered", false)
 		end
 	end, { p6.onMouseLeave, p6.setCustomConditionState })
-	local var31 = reactModule.useCallback(function() --[[ line: 287 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: p6 (ref)
 		if p6.onSelectionGained then
 			p6.onSelectionGained()
@@ -156,7 +156,7 @@ return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
 			p6.setCustomConditionState("selected", true)
 		end
 	end, { p6.onSelectionGained, p6.setCustomConditionState })
-	local var32 = reactModule.useCallback(function() --[[ line: 295 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: p6 (ref)
 		if p6.onSelectionLost then
 			p6.onSelectionLost()
@@ -313,13 +313,13 @@ return reactModule.memo(function(p6) --[[ line: 205 | named "SduiTile" ]]
 				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
-				[reactModule.Event.MouseEnter] = function() --[[ line: 513 ]]
+				[reactModule.Event.MouseEnter] = function()
 					-- upvalues: var21 (write)
 					if var21 then
 						var21(true)
 					end
 				end,
-				[reactModule.Event.MouseLeave] = function() --[[ line: 518 ]]
+				[reactModule.Event.MouseLeave] = function()
 					-- upvalues: var21 (write)
 					if var21 then
 						var21(false)

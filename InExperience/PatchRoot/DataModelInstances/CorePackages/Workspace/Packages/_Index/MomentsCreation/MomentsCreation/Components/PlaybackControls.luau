@@ -23,7 +23,7 @@ local useSignalBinding = signalsReactModule.useSignalBinding
 local useSignalState = signalsReactModule.useSignalState
 local getFormatTimeModule = require(momentsCreation.Utils.getFormatTime)
 
-return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), getFormatTimeModule (ref), useSignalState (ref), view (ref), gradientBackdrop (ref), slider (ref), foundationModule (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), speakerSlash (ref), speaker (ref), text (ref), twoArrowsFromCenter (ref), twoArrowsToCenter (ref)
 	local var8 = useDeviceInsets()
 	local var9 = useTokens()
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 		Controls = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1) --[[ line: 107 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
 				-- upvalues: var11 (ref)
 				var11(UDim2.new(0, p1.AbsoluteSize.X, 1, 0))
 			end, {}),
@@ -53,9 +53,9 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 		}, {
 			Slider = reactModule.createElement(slider, {
 				LayoutOrder = 1,
-				value = useSignalBinding(reactModule.useMemo(function() --[[ line: 62 ]]
+				value = useSignalBinding(reactModule.useMemo(function()
 					-- upvalues: signalsModule (copy), playback (ref)
-					return signalsModule.createComputed(function(p2) --[[ line: 63 ]]
+					return signalsModule.createComputed(function(p2)
 						-- upvalues: playback (copy)
 						local duration = playback.getDuration(p2)
 						
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 				size = foundationModule.Enums.InputSize.XSmall,
 				knobVisibility = foundationModule.Enums.Visibility.None,
 				variant = foundationModule.Enums.SliderVariant.Standard,
-				onValueChanged = reactModule.useCallback(function(p3) --[[ line: 99 ]]
+				onValueChanged = reactModule.useCallback(function(p3)
 					-- upvalues: playback (ref), onSeek (ref)
 					local var14 = p3 * playback.getDuration(false)
 					playback.seek(var14)
@@ -74,14 +74,14 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 						onSeek(var14)
 					end
 				end, { playback, onSeek }),
-				onDragStarted = reactModule.useCallback(function() --[[ line: 84 ]]
+				onDragStarted = reactModule.useCallback(function()
 					-- upvalues: playback (ref), var12 (ref)
 					if playback.getIsPlaying(false) then
 						var12.current = true
 						playback.toggle()
 					end
 				end, { playback }),
-				onDragEnded = reactModule.useCallback(function() --[[ line: 91 ]]
+				onDragEnded = reactModule.useCallback(function()
 					-- upvalues: var12 (ref), playback (ref)
 					if var12.current and not playback.getIsPlaying(false) then
 						playback.toggle()
@@ -97,7 +97,7 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 					PlaybackToggle = reactModule.createElement(iconButton, {
 						LayoutOrder = 1,
 						icon = if useSignalState(playback.getIsPlaying) then pauseLarge else playLarge,
-						onActivated = reactModule.useCallback(function() --[[ line: 111 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: playback (ref)
 							playback.toggle()
 						end, { playback }),
@@ -106,7 +106,7 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 					MuteToggle = reactModule.createElement(iconButton, {
 						LayoutOrder = 2,
 						icon = if useSignalState(playback.getIsMuted) then speakerSlash else speaker,
-						onActivated = reactModule.useCallback(function() --[[ line: 115 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: playback (ref)
 							playback.toggleMute()
 						end, { playback }),
@@ -116,9 +116,9 @@ return function(p0) --[[ line: 53 | named "PlaybackControls" ]]
 				DurationDisplay = reactModule.createElement(text, {
 					LayoutOrder = 2,
 					tag = "position-center-center anchor-center-center auto-xy text-body-medium content-emphasis",
-					Text = useSignalBinding(reactModule.useMemo(function() --[[ line: 73 ]]
+					Text = useSignalBinding(reactModule.useMemo(function()
 						-- upvalues: signalsModule (copy), getFormatTimeModule (copy), playback (ref)
-						return signalsModule.createComputed(function(p4) --[[ line: 74 ]]
+						return signalsModule.createComputed(function(p4)
 							-- upvalues: getFormatTimeModule (copy), playback (copy)
 							return `{getFormatTimeModule(playback.getPosition(p4))} / {getFormatTimeModule(playback.getDuration(p4))}`
 						end)

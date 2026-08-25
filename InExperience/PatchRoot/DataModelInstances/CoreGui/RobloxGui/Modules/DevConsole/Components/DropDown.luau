@@ -10,17 +10,17 @@ local var4 = dropDownArrowHeight / 2
 local downArrow = constantsModule.Image.DownArrow
 local dropDown = roactModule.Component:extend("DropDown")
 
-function dropDown.init(p0) --[[ line: 19 ]]
+function dropDown.init(p0)
 	-- upvalues: devConsoleDropdownFlipFix (ref), roactModule (ref)
 	if devConsoleDropdownFlipFix then
 		p0.guiInset = game:GetService("GuiService"):GetGuiInset()
 	end
-	function p0.onMainButtonPressed(_, _) --[[ line: 24 ]]
+	function p0.onMainButtonPressed(_, _)
 		-- upvalues: p0 (ref)
 		p0:setState({ showDropDown = true })
 	end
 	
-	function p0.nonDropDownSelection(_, p1) --[[ line: 30 ]]
+	function p0.nonDropDownSelection(_, p1)
 		-- upvalues: p0 (ref)
 		if p1.UserInputType == Enum.UserInputType.MouseButton1 or p1.UserInputType == Enum.UserInputType.Touch and p1.UserInputState == Enum.UserInputState.End then
 			p0:setState({ showDropDown = false })
@@ -31,7 +31,7 @@ function dropDown.init(p0) --[[ line: 19 ]]
 	p0.ref = roactModule.createRef()
 end
 
-function dropDown.render(p2) --[[ line: 48 ]]
+function dropDown.render(p2)
 	-- upvalues: devConsoleDropdownMultiSelect (ref), roactModule (ref), constantsModule (ref), utilBar_1 (ref), utilBar (ref), devConsoleDropdownFlipFix (ref), downArrow (ref), dropDownArrowHeight (ref), var4 (ref)
 	local buttonSize = p2.props.buttonSize
 	local dropDownList = p2.props.dropDownList
@@ -72,7 +72,7 @@ function dropDown.render(p2) --[[ line: 48 ]]
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
 				LayoutOrder = i,
-				[roactModule.Event.Activated] = function() --[[ line: 106 ]]
+				[roactModule.Event.Activated] = function()
 					-- upvalues: var6 (ref), onToggle (ref), i (ref), onSelection (ref), p2 (ref)
 					if var6 then
 						onToggle(i)

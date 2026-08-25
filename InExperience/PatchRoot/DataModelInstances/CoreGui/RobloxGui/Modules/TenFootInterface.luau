@@ -5,19 +5,19 @@ local playersService = game:GetService("Players")
 local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 local var4 = guiService:IsTenFootInterface()
 local t = {
-	IsEnabled = function(_) --[[ line: 361 ]]
+	IsEnabled = function(_)
 		-- upvalues: var4 (ref)
 		return var4
 	end
 }
-local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
+local var6 = (function()
 	-- upvalues: create (ref), robloxGui (ref), color3 (ref), playersService (ref)
 	local t = { Container = nil }
 	local t_1 = {}
 	local bindableEvent = Instance.new("BindableEvent")
 	local bindableEvent_1 = Instance.new("BindableEvent")
 	
-	local function createContainer() --[[ line: 39 ]]
+	local function createContainer()
 		-- upvalues: t (ref), create (copy), robloxGui (copy)
 		if not t.Container then
 			t.Container = create("ImageButton")({
@@ -33,7 +33,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		end
 	end
 	
-	function removeFromDisplayStack(p0) --[[ line: 55 ]]
+	function removeFromDisplayStack(p0)
 		-- upvalues: t_1 (ref), bindableEvent (ref)
 		local var12 = nil
 		
@@ -54,7 +54,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		bindableEvent:Fire()
 	end
 	
-	function addBackToDisplayStack(p1) --[[ line: 75 ]]
+	function addBackToDisplayStack(p1)
 		-- upvalues: t_1 (ref), bindableEvent (ref)
 		local var15 = 0
 		
@@ -75,14 +75,14 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		bindableEvent:Fire()
 	end
 	
-	function addToDisplayStack(p2) --[[ line: 96 ]]
+	function addToDisplayStack(p2)
 		-- upvalues: t_1 (ref), createContainer (ref), t (ref), bindableEvent (ref)
 		local var18 = if #t_1 > 0 then t_1[#t_1] else nil
 		t_1[#t_1 + 1] = p2
 		p2.Position = UDim2.new(p2.Position.X.Scale, p2.Position.X.Offset, p2.Position.Y.Scale, if var18 then var18.AbsolutePosition.Y + var18.AbsoluteSize.Y + 4 else 0)
 		createContainer()
 		p2.Parent = t.Container
-		p2.Changed:connect(function(p3) --[[ line: 114 ]]
+		p2.Changed:connect(function(p3)
 			-- upvalues: p2 (ref)
 			if p3 == "Visible" then
 				if not p2.Visible then
@@ -96,7 +96,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		bindableEvent:Fire()
 	end
 	
-	function t.CreateHealthBar(_) --[[ line: 126 ]]
+	function t.CreateHealthBar(_)
 		-- upvalues: t (ref), create (copy), color3 (copy), createContainer (ref), bindableEvent_1 (ref)
 		t.HealthContainer = create("Frame")({
 			Name = "HealthContainer",
@@ -140,7 +140,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		local var21 = create("TextLabel")({ Visible = false })
 		addToDisplayStack(t.HealthContainer)
 		createContainer()
-		t.HealthContainer.Changed:connect(function() --[[ line: 181 ]]
+		t.HealthContainer.Changed:connect(function()
 			-- upvalues: bindableEvent_1 (copy)
 			bindableEvent_1:Fire()
 		end)
@@ -148,7 +148,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		return t.Container, var20, t.HealthContainer, var19, var21
 	end
 	
-	function t.CreateAccountType(_, p4) --[[ line: 188 ]]
+	function t.CreateAccountType(_, p4)
 		-- upvalues: t (ref), create (copy), robloxGui (copy)
 		t.AccountTypeContainer = create("Frame")({
 			Name = "AccountTypeContainer",
@@ -176,7 +176,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		})
 	end
 	
-	function t.SetupTopStat(_) --[[ line: 216 ]]
+	function t.SetupTopStat(_)
 		-- upvalues: create (copy), playersService (copy)
 		local var22 = true
 		local var23 = nil
@@ -185,7 +185,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		local var26 = nil
 		local var27 = nil
 		
-		local function makeTenFootInterfaceStat() --[[ line: 224 ]]
+		local function makeTenFootInterfaceStat()
 			-- upvalues: var27 (write), create (copy)
 			if var27 then
 				return
@@ -222,7 +222,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 		
 		local updateTenFootStat = nil
 		
-		local function setDisplayedStat(value) --[[ line: 261 ]]
+		local function setDisplayedStat(value)
 			-- upvalues: var24 (write), var25 (write), var23 (write), makeTenFootInterfaceStat (ref), updateTenFootStat (write)
 			if var24 then
 				var24:disconnect()
@@ -237,18 +237,18 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 			if var23 then
 				makeTenFootInterfaceStat()
 				updateTenFootStat(var23)
-				var25 = var23.AncestryChanged:connect(function() --[[ line: 276 ]]
+				var25 = var23.AncestryChanged:connect(function()
 					-- upvalues: updateTenFootStat (copy), var23 (copy)
 					updateTenFootStat(var23, "Parent")
 				end)
-				var24 = var23.Changed:connect(function(p5) --[[ line: 277 ]]
+				var24 = var23.Changed:connect(function(p5)
 					-- upvalues: updateTenFootStat (copy), var23 (copy)
 					updateTenFootStat(var23, p5)
 				end)
 			end
 		end
 		
-		updateTenFootStat = function(p6, p7) --[[ line: 281 | named "updateTenFootStat" ]]
+		updateTenFootStat = function(p6, p7)
 			-- upvalues: var27 (write), setDisplayedStat (ref), var22 (write)
 			if p7 and p7 == "Parent" then
 				var27.StatName.Text = ""
@@ -267,11 +267,11 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 			var27.StatValue.Text = ""
 		end
 		
-		local function isValidStat(p8) --[[ line: 299 ]]
+		local function isValidStat(p8)
 			return p8:IsA("StringValue") or (p8:IsA("IntValue") or (p8:IsA("BoolValue") or (p8:IsA("NumberValue") or (p8:IsA("DoubleConstrainedValue") or p8:IsA("IntConstrainedValue")))))
 		end
 		
-		local function _(p9) --[[ line: 304 | named "tenFootInterfaceNewStat" ]]
+		local function _(p9)
 			-- upvalues: var23 (write), isValidStat (ref), setDisplayedStat (ref)
 			if not var23 and isValidStat(p9) then
 				setDisplayedStat(p9)
@@ -283,7 +283,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 			playersService.PlayerAdded:wait()
 			localPlayer = playersService.LocalPlayer
 		end
-		function tenFootInterfaceChanged() --[[ line: 316 ]]
+		function tenFootInterfaceChanged()
 			-- upvalues: localPlayer (write), var23 (write), isValidStat (ref), setDisplayedStat (ref), var26 (write)
 			local leaderstats = localPlayer:FindFirstChild("leaderstats")
 			
@@ -300,7 +300,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 				if var26 then
 					var26:disconnect()
 				end
-				var26 = leaderstats.ChildAdded:connect(function(p10) --[[ line: 324 ]]
+				var26 = leaderstats.ChildAdded:connect(function(p10)
 					-- upvalues: var23 (copy), isValidStat (copy), setDisplayedStat (copy)
 					if not var23 and isValidStat(p10) then
 						setDisplayedStat(p10)
@@ -315,7 +315,7 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 			localPlayer.ChildAdded:connect(tenFootInterfaceChanged)
 		end
 		return {
-			SetTopStatEnabled = function(_, p11) --[[ line: 341 ]]
+			SetTopStatEnabled = function(_, p11)
 				-- upvalues: var22 (write), var23 (write), updateTenFootStat (write)
 				var22 = p11
 				
@@ -329,17 +329,17 @@ local var6 = (function() --[[ line: 30 | named "CreateModule" ]]
 	return t
 end)()
 
-function t.CreateHealthBar(_) --[[ line: 365 ]]
+function t.CreateHealthBar(_)
 	-- upvalues: var6 (ref)
 	return var6:CreateHealthBar()
 end
 
-function t.CreateAccountType(_, p12) --[[ line: 369 ]]
+function t.CreateAccountType(_, p12)
 	-- upvalues: var6 (ref)
 	return var6:CreateAccountType(p12)
 end
 
-function t.SetupTopStat(_) --[[ line: 373 ]]
+function t.SetupTopStat(_)
 	-- upvalues: var6 (ref)
 	return var6:SetupTopStat()
 end

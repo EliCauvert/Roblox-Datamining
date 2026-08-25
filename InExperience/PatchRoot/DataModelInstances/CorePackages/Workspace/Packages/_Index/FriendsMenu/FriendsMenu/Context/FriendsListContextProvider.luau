@@ -37,7 +37,7 @@ t.ThumbnailRequest = {
 	}
 }
 
-return function(p0) --[[ line: 62 ]]
+return function(p0)
 	-- upvalues: networkImpl (ref), reactModule (ref), generateDummyFriendsModule (ref), useDispatch (ref), userProfilesModule (ref), getFFlagEnableFriendsListSearchNormalizationErrorFix (ref), playersService (ref), DEPRECATED_UsersGetFriends (ref), userSorts (ref), userModel (ref), updateUsers (ref), preloadUsersThumbnail (ref), t (ref), apiFetchUsersPresences (ref), useSelector (ref), sortFriendsByCorrectedPresenceAndRank (ref), friendsListContextModule (ref)
 	local var10 = if p0.networkImplOverride then p0.networkImplOverride else networkImpl
 	local var11, var12 = reactModule.useState(false)
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 62 ]]
 		query = userProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
 	
-	local var23 = function(p1) --[[ line: 89 ]]
+	local var23 = function(p1)
 		-- upvalues: p0 (ref), var17 (ref), var22 (write), userProfilesModule (copy), getFFlagEnableFriendsListSearchNormalizationErrorFix (copy)
 		if not p1 or not p1.isFriend then
 			return false
@@ -85,7 +85,7 @@ return function(p0) --[[ line: 62 ]]
 		local normalized_4 = nil
 		
 		if getFFlagEnableFriendsListSearchNormalizationErrorFix() then
-			pcall(function() --[[ line: 126 ]]
+			pcall(function()
 				-- upvalues: normalized_4 (write), var17 (copy)
 				normalized_4 = utf8.nfdnormalize(var17)
 			end)
@@ -101,28 +101,28 @@ return function(p0) --[[ line: 62 ]]
 		return var35
 	end
 	
-	local _ = function(p2) --[[ line: 156 ]]
+	local _ = function(p2)
 		-- upvalues: var22 (write), userProfilesModule (copy)
 		local var36 = if var22 and var22.data then userProfilesModule.Selectors.getCombinedNameFromId(var22.data, p2.id) else nil
 		
 		return if var36 == nil then p2.displayName else var36
 	end
 	
-	local _ = function(p3) --[[ line: 168 ]]
+	local _ = function(p3)
 		-- upvalues: var22 (write), userProfilesModule (copy)
 		local var37 = if var22 and var22.data then userProfilesModule.Selectors.getUsernameFromId(var22.data, p3.id) else nil
 		
 		return if var37 == nil then p3.name else var37
 	end
 	
-	reactModule.useEffect(function() --[[ line: 180 ]]
+	reactModule.useEffect(function()
 		-- upvalues: playersService (copy), var11 (ref), var12 (ref), var14 (ref), DEPRECATED_UsersGetFriends (copy), var10 (write), userSorts (copy), userModel (copy), var21 (ref), updateUsers (copy), var16 (ref), preloadUsersThumbnail (copy), t (copy), apiFetchUsersPresences (copy)
 		local var38 = if playersService and playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else nil
 		
 		if not var11 and var38 then
 			var12(true)
 			var14(false)
-			DEPRECATED_UsersGetFriends(var10, var38, userSorts.StatusFrequents):andThen(function(p5) --[[ line: 190 ]]
+			DEPRECATED_UsersGetFriends(var10, var38, userSorts.StatusFrequents):andThen(function(p5)
 				-- upvalues: userModel (copy), var21 (copy), updateUsers (copy), var16 (copy)
 				local responseBody = p5.responseBody
 				local t = {}
@@ -142,31 +142,31 @@ return function(p0) --[[ line: 62 ]]
 				var16(t)
 				
 				return t
-			end, function(_) --[[ line: 209 ]]
+			end, function(_)
 				-- upvalues: var12 (copy), var14 (copy)
 				var12(false)
 				var14(true)
 				
 				return {}
-			end):andThen(function(p4) --[[ line: 215 ]]
+			end):andThen(function(p4)
 				-- upvalues: var21 (copy), preloadUsersThumbnail (copy), t (copy), apiFetchUsersPresences (copy), var10 (copy)
 				var21(preloadUsersThumbnail(p4, t.ThumbnailRequest.InviteToGame, nil))
 				
 				return var21(apiFetchUsersPresences(var10, p4))
-			end):andThen(function(_) --[[ line: 223 ]]
+			end):andThen(function(_)
 				-- upvalues: var12 (copy)
 				var12(false)
-			end, function(_) --[[ line: 225 ]]
+			end, function(_)
 				-- upvalues: var12 (copy), var14 (copy)
 				var12(false)
 				var14(true)
 			end)
 		end
 	end, {})
-	local var24 = useSelector(function(p6) --[[ line: 232 ]]
+	local var24 = useSelector(function(p6)
 		return p6.Users
 	end)
-	reactModule.useEffect(function() --[[ line: 236 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var20 (ref), generateDummyFriendsModule (copy), var24 (ref), var23 (ref), var22 (write), userProfilesModule (copy), sortFriendsByCorrectedPresenceAndRank (copy)
 		if var11 then
 			var20(generateDummyFriendsModule(7))

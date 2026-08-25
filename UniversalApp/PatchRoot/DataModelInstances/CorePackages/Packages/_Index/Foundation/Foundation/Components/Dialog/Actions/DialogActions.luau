@@ -17,14 +17,14 @@ local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDia
 local useDialogModule = require(script.Parent.Parent.useDialog)
 local t = { orientation = orientationModule.Horizontal }
 
-return function(p0) --[[ line: 48 | named "DialogActions" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), useDialogVariants (ref), useDialogModule (ref), reactModule (ref), dashModule (ref), buttonModule (ref), fillBehaviorModule (ref), dialogSizeModule (ref), orientationModule (ref), viewModule (ref), flagsModule (ref), buttonGroupModule (ref), textModule (ref)
 	local var14 = withDefaultsModule(p0, t)
 	local var15 = useDialogVariants()
 	local var16 = useDialogModule()
-	local var17 = reactModule.useMemo(function() --[[ line: 53 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), reactModule (copy), dashModule (copy), buttonModule (copy), fillBehaviorModule (copy)
-		return if var14.actions then reactModule.createElement(reactModule.Fragment, nil, dashModule.map(var14.actions, function(p1, p2) --[[ line: 60 ]]
+		return if var14.actions then reactModule.createElement(reactModule.Fragment, nil, dashModule.map(var14.actions, function(p1, p2)
 			-- upvalues: reactModule (copy), buttonModule (copy), dashModule (copy), fillBehaviorModule (copy)
 			return reactModule.createElement(buttonModule, dashModule.join(p1, {
 				key = `{p2}-{p1.text}`,

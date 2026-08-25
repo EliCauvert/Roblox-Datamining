@@ -9,7 +9,7 @@ local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Sine)
 local tweenInfo_1 = TweenInfo.new(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true)
 local localizeGameplayPaused = game:DefineFastFlag("LocalizeGameplayPaused", false)
 
-local function build() --[[ line: 23 ]]
+local function build()
 	-- upvalues: create (ref), uDim2_1 (ref), appFonts (ref), localizeGameplayPaused (ref), robloxTranslatorModule (ref)
 	return create("ImageLabel")({
 		Name = "NetworkPause",
@@ -88,7 +88,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 122 ]]
+function t.new()
 	-- upvalues: t (ref), build (ref), tweenService (ref), tweenInfo (ref), tweenInfo_1 (ref), uDim2 (ref)
 	local tbl = setmetatable({}, t)
 	local var11 = build()
@@ -103,7 +103,7 @@ function t.new() --[[ line: 122 ]]
 	return tbl
 end
 
-function t:Show() --[[ line: 146 ]]
+function t:Show()
 	-- upvalues: uDim2_1 (ref)
 	self.__gui.Upper.IconContainer.Icon.Size = uDim2_1
 	self.__gui.Upper.IconContainer.Icon.ImageTransparency = 0
@@ -112,13 +112,13 @@ function t:Show() --[[ line: 146 ]]
 	self.__animations.pulse:Play()
 end
 
-function t:Hide() --[[ line: 154 ]]
+function t:Hide()
 	self.__show = false
 	self.__gui.Parent = nil
 	self.__animations.pulse:Cancel()
 end
 
-function t:SetParent(p0) --[[ line: 160 ]]
+function t:SetParent(p0)
 	self.__guiParent = p0
 	
 	if self.__show then

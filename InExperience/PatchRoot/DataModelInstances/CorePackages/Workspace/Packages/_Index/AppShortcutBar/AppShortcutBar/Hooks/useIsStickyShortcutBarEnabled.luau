@@ -4,7 +4,7 @@ local parent = script:FindFirstAncestor("AppShortcutBar").Parent
 local responsiveModule = require(parent.Responsive)
 local useProperty = require(parent.GuiObjectUtils).useProperty
 
-return function(p0, p1) --[[ line: 11 | named "useIsStickyShortcutBarEnabled" ]]
+return function(p0, p1)
 	-- upvalues: guiService (ref), userInputService (ref), responsiveModule (ref), useProperty (ref)
 	p1 = p1 or userInputService
 	

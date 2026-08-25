@@ -10,12 +10,12 @@ local t = {
 	totalNumberOfItems = true
 }
 
-local function _(p0) --[[ line: 17 | named "shouldIgnoreKey" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	return t[p0]
 end
 
-return function(p1, p2, p3) --[[ line: 21 | named "buildItemMetadataFields" ]]
+return function(p1, p2, p3)
 	-- upvalues: t (ref), discoveryEventErrorLogger (ref)
 	local v_2
 	local t_1 = {}

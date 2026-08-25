@@ -21,7 +21,7 @@ local default = require(parent_1.LoggingProtocol).default
 local tooExpensiveUnifiedUpsellShownCounter = require(parent.Generic.Events.TooExpensiveUpsellCounter).TooExpensiveUnifiedUpsellShownCounter
 local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNavigationRefs)
 
-local function UnifiedRobuxUpsellModalTooExpensiveV2(p0) --[[ line: 63 ]]
+local function UnifiedRobuxUpsellModalTooExpensiveV2(p0)
 	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), tooExpensiveUnifiedUpsellShownCounter (ref), dialog (ref), dialogSize (ref), view (ref), unifiedPurchaseModalTypeEnumModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), orientation (ref), buttonVariant (ref), foundationModule (ref)
 	local var11 = useLocalization({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
@@ -31,7 +31,7 @@ local function UnifiedRobuxUpsellModalTooExpensiveV2(p0) --[[ line: 63 ]]
 	local _ = nil
 	local _ = nil
 	local var12, var13 = useFocusNavigationRefsModule(p0.buttons.cancelPurchaseActivated, nil)
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: loggerModule (copy), p0 (ref), getAppContextModule (copy), default (copy), tooExpensiveUnifiedUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Too Expensive Unified Upsell Modal Shown (Dialog)",
@@ -86,7 +86,7 @@ local function UnifiedRobuxUpsellModalTooExpensiveV2(p0) --[[ line: 63 ]]
 	})
 end
 
-return function(p1) --[[ line: 133 | named "UnifiedRobuxUpsellModalTooExpensiveV2Container" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedRobuxUpsellModalTooExpensiveV2 (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

@@ -20,11 +20,11 @@ local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlag
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 
-return function(p0) --[[ line: 54 | named "GameVideoPlaybackDetector" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), useIsVideoEligibleModule (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfigModule (ref), retrievalStatus (ref), videoEndReason (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), usePreferredInput (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref)
 	local var6 = useDispatch()
 	local var7 = useRoactService(roactNetworking)
-	local var8 = useSelector(function(p1) --[[ line: 58 ]]
+	local var8 = useSelector(function(p1)
 		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p0 (ref)
 		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p1, p0.universeId)
 	end)
@@ -47,13 +47,13 @@ return function(p0) --[[ line: 54 | named "GameVideoPlaybackDetector" ]]
 		videoDwellTimeInSec = p0.videoDwellTimeInSec,
 		videoVisiblePercent = p0.videoVisiblePercent,
 		isVideoEligible = var9 and var10,
-		onVideoIneligible = reactModule.useCallback(function(p2) --[[ line: 74 ]]
+		onVideoIneligible = reactModule.useCallback(function(p2)
 			-- upvalues: p0 (ref), var8 (ref), retrievalStatus (copy), videoEndReason (copy)
 			if p0.videoAnalytics and var8 == retrievalStatus.Done then
 				p0.videoAnalytics.reportVideoEnd(p0.itemIndex, videoEndReason.PlayabilityCheckFailed, p2, -1)
 			end
 		end, { p0.videoAnalytics, var8 }),
-		onPlaybackCandidate = reactModule.useCallback(function() --[[ line: 81 ]]
+		onPlaybackCandidate = reactModule.useCallback(function()
 			-- upvalues: var8 (ref), retrievalStatus (copy), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p0 (ref), var6 (ref), fetchGamePlayabilityAndProductInfo (copy), var7 (ref), var11 (ref), var12 (ref)
 			if (var8 == retrievalStatus.NotStarted or var8 == retrievalStatus.Failed) and (if fFlagLuaAppUsePrevalidatedVideoGamePlayability then not p0.hasPrevalidatedVideoGamePlayability else true) then
 				var6(fetchGamePlayabilityAndProductInfo.Fetch(var7, p0.universeId))

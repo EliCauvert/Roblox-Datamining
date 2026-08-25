@@ -17,21 +17,21 @@ local t_2 = {
 	[userModel.PresenceType.OFFLINE] = 0
 }
 
-local _ = function(p0) --[[ line: 42 ]]
+local _ = function(p0)
 	-- upvalues: presenceType (ref)
 	local userPresenceType = p0.userPresenceType
 	
 	return if (userPresenceType == presenceType.InGame or userPresenceType == presenceType.InStudio) and #(p0.lastLocation or "") == 0 then presenceType.Online.rawValue() else userPresenceType.rawValue()
 end
 
-local _ = function(p1) --[[ line: 51 ]]
+local _ = function(p1)
 	-- upvalues: userModel (ref)
 	local presence = p1.presence
 	
 	return if (presence == userModel.PresenceType.IN_GAME or presence == userModel.PresenceType.IN_STUDIO) and #(p1.lastLocation or "") == 0 then userModel.PresenceType.ONLINE else presence
 end
 
-local _ = function(p2) --[[ line: 63 ]]
+local _ = function(p2)
 	-- upvalues: presenceType (ref), t (ref), t_1 (ref)
 	local userPresenceType = p2.userPresenceType
 	local var3 = if (userPresenceType == presenceType.InGame or userPresenceType == presenceType.InStudio) and #(p2.lastLocation or "") == 0 then presenceType.Online.rawValue() else userPresenceType.rawValue()
@@ -39,7 +39,7 @@ local _ = function(p2) --[[ line: 63 ]]
 	return if t.number(var3) then t_1[var3] else t_1[presenceType.Offline]
 end
 
-local _ = function(p3) --[[ line: 69 ]]
+local _ = function(p3)
 	-- upvalues: userModel (ref), t (ref), t_2 (ref)
 	local presence = p3.presence
 	local var4 = if (presence == userModel.PresenceType.IN_GAME or presence == userModel.PresenceType.IN_STUDIO) and #(p3.lastLocation or "") == 0 then userModel.PresenceType.ONLINE else presence
@@ -47,7 +47,7 @@ local _ = function(p3) --[[ line: 69 ]]
 	return if t.string(var4) then t_2[var4] else t_2[userModel.PresenceType.OFFLINE]
 end
 
-local _ = function(p4, p5) --[[ line: 75 ]]
+local _ = function(p4, p5)
 	-- upvalues: presenceType (ref), t (ref), t_1 (ref), userModel (ref), t_2 (ref)
 	local userPresenceType
 	local var5 = 0
@@ -81,11 +81,11 @@ local _ = function(p4, p5) --[[ line: 75 ]]
 	end
 end
 
-local _ = function(p6, p7) --[[ line: 90 ]]
+local _ = function(p6, p7)
 	return p6.username or (p6.name or ""), p7.username or (p7.name or "")
 end
 
-return function(p8, p9) --[[ line: 94 ]]
+return function(p8, p9)
 	-- upvalues: presenceType (ref), t (ref), t_1 (ref), userModel (ref), t_2 (ref)
 	local presence
 	local var11 = 0

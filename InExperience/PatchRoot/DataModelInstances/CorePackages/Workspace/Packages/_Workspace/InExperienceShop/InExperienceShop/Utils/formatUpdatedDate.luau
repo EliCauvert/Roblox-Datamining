@@ -1,6 +1,6 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 
-return function(p0) --[[ line: 12 | named "formatUpdatedDate" ]]
+return function(p0)
 	-- upvalues: localizationService (ref)
 	if p0 == nil or p0 == "" then
 		return nil

@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local UIManagerModule = require(vrSpatialUi.UIManager)
 local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
 
-local function _(p0, p1) --[[ line: 7 | named "checkAndScalePart" ]]
+local function _(p0, p1)
 	-- upvalues: UIManagerModule (ref)
 	local additionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 	
@@ -13,13 +13,13 @@ local function _(p0, p1) --[[ line: 7 | named "checkAndScalePart" ]]
 	end
 end
 
-return function(p2, p3) --[[ line: 15 | named "useHeadScale" ]]
+return function(p2, p3)
 	-- upvalues: reactModule (ref), UIManagerModule (ref), inExperienceUIVRIXP (ref)
-	local var4, var5 = reactModule.useState(function() --[[ line: 16 ]]
+	local var4, var5 = reactModule.useState(function()
 		-- upvalues: UIManagerModule (copy)
 		return UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 	end)
-	reactModule.useEffect(function() --[[ line: 19 ]]
+	reactModule.useEffect(function()
 		-- upvalues: inExperienceUIVRIXP (copy), p2 (ref), p3 (ref), UIManagerModule (copy), var5 (ref)
 		if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
 			local var6 = p2
@@ -32,7 +32,7 @@ return function(p2, p3) --[[ line: 15 | named "useHeadScale" ]]
 		else
 			var5(UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded())
 		end
-		local var9 = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(function() --[[ line: 26 ]]
+		local var9 = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(function()
 			-- upvalues: inExperienceUIVRIXP (copy), p2 (copy), p3 (copy), UIManagerModule (copy), var5 (copy)
 			if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
 				local var10 = p2
@@ -49,7 +49,7 @@ return function(p2, p3) --[[ line: 15 | named "useHeadScale" ]]
 			end
 		end)
 		
-		return function() --[[ line: 33 ]]
+		return function()
 			-- upvalues: var9 (ref)
 			var9:Disconnect()
 		end

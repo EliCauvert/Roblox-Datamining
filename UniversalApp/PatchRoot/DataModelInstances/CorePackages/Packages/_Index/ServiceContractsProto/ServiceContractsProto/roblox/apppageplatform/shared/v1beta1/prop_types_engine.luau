@@ -5,14 +5,14 @@ local propConditionModule = require(script.Parent.prop_condition)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 1202 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		kind = if p0 == nil or p0.kind == nil then nil else p0.kind
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 1208 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var41 = 0
@@ -42,7 +42,7 @@ function t_1:encode() --[[ line: 1208 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 1232 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var50 = t_1.new()
 	local var51 = 0
@@ -107,7 +107,7 @@ function t_1.decode(p1) --[[ line: 1232 ]]
 	return var50
 end
 
-function t_1:jsonEncode() --[[ line: 1289 ]]
+function t_1:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -127,7 +127,7 @@ function t_1:jsonEncode() --[[ line: 1289 ]]
 	return t_1
 end
 
-function t_1:jsonDecode() --[[ line: 1307 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var73 = t_1.new()
 	
@@ -161,7 +161,7 @@ typeRegistryModule.default:register(t.AutomaticSizeProp)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 1351 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		condition = if p2 == nil or p2.condition == nil then nil else p2.condition,
@@ -169,7 +169,7 @@ function t_2.new(p2) --[[ line: 1351 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 1360 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var75 = 0
@@ -200,7 +200,7 @@ function t_2:encode() --[[ line: 1360 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 1386 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var84 = t_2.new()
 	local var85 = 0
@@ -262,7 +262,7 @@ function t_2.decode(p3) --[[ line: 1386 ]]
 	return var84
 end
 
-function t_2:jsonEncode() --[[ line: 1442 ]]
+function t_2:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -281,7 +281,7 @@ function t_2:jsonEncode() --[[ line: 1442 ]]
 	return t_1
 end
 
-function t_2:jsonDecode() --[[ line: 1462 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), propConditionModule (ref), t (ref)
 	local var107 = t_2.new()
 	
@@ -312,14 +312,14 @@ typeRegistryModule.default:register(t.AutomaticSizeProp_ConditionalOption)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 1506 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		options = if p4 == nil or p4.options == nil then {} else p4.options
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 1514 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var109 = 0
@@ -339,7 +339,7 @@ function t_3:encode() --[[ line: 1514 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 1531 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var114 = t_3.new()
 	local var115 = 0
@@ -386,7 +386,7 @@ function t_3.decode(p5) --[[ line: 1531 ]]
 	return var114
 end
 
-function t_3:jsonEncode() --[[ line: 1574 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -400,7 +400,7 @@ function t_3:jsonEncode() --[[ line: 1574 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 1588 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), t (ref)
 	local var133 = t_3.new()
 	
@@ -424,14 +424,14 @@ typeRegistryModule.default:register(t.AutomaticSizeProp_ConditionalOptions)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 1619 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		kind = if p6 == nil or p6.kind == nil then nil else p6.kind
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 1625 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var136 = 0
@@ -461,7 +461,7 @@ function t_4:encode() --[[ line: 1625 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 1649 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), t (ref)
 	local var145 = t_4.new()
 	local var146 = 0
@@ -526,7 +526,7 @@ function t_4.decode(p7) --[[ line: 1649 ]]
 	return var145
 end
 
-function t_4:jsonEncode() --[[ line: 1706 ]]
+function t_4:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -546,7 +546,7 @@ function t_4:jsonEncode() --[[ line: 1706 ]]
 	return t_1
 end
 
-function t_4:jsonDecode() --[[ line: 1724 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), t (ref)
 	local var168 = t_4.new()
 	
@@ -580,7 +580,7 @@ typeRegistryModule.default:register(t.TextTruncateProp)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 1768 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		condition = if p8 == nil or p8.condition == nil then nil else p8.condition,
@@ -588,7 +588,7 @@ function t_5.new(p8) --[[ line: 1768 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 1777 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var170 = 0
@@ -619,7 +619,7 @@ function t_5:encode() --[[ line: 1777 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 1803 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var179 = t_5.new()
 	local var180 = 0
@@ -681,7 +681,7 @@ function t_5.decode(p9) --[[ line: 1803 ]]
 	return var179
 end
 
-function t_5:jsonEncode() --[[ line: 1859 ]]
+function t_5:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -700,7 +700,7 @@ function t_5:jsonEncode() --[[ line: 1859 ]]
 	return t_1
 end
 
-function t_5:jsonDecode() --[[ line: 1879 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), propConditionModule (ref), t (ref)
 	local var202 = t_5.new()
 	
@@ -731,14 +731,14 @@ typeRegistryModule.default:register(t.TextTruncateProp_ConditionalOption)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1923 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		options = if p10 == nil or p10.options == nil then {} else p10.options
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1931 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var204 = 0
@@ -758,7 +758,7 @@ function t_6:encode() --[[ line: 1931 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1948 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
 	local var209 = t_6.new()
 	local var210 = 0
@@ -805,7 +805,7 @@ function t_6.decode(p11) --[[ line: 1948 ]]
 	return var209
 end
 
-function t_6:jsonEncode() --[[ line: 1991 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -819,7 +819,7 @@ function t_6:jsonEncode() --[[ line: 1991 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 2005 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), t (ref)
 	local var228 = t_6.new()
 	
@@ -843,14 +843,14 @@ typeRegistryModule.default:register(t.TextTruncateProp_ConditionalOptions)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 2036 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		kind = if p12 == nil or p12.kind == nil then nil else p12.kind
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 2042 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var231 = 0
@@ -880,7 +880,7 @@ function t_7:encode() --[[ line: 2042 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 2066 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref), t (ref)
 	local var240 = t_7.new()
 	local var241 = 0
@@ -945,7 +945,7 @@ function t_7.decode(p13) --[[ line: 2066 ]]
 	return var240
 end
 
-function t_7:jsonEncode() --[[ line: 2123 ]]
+function t_7:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -965,7 +965,7 @@ function t_7:jsonEncode() --[[ line: 2123 ]]
 	return t_1
 end
 
-function t_7:jsonDecode() --[[ line: 2141 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref), t (ref)
 	local var263 = t_7.new()
 	
@@ -999,7 +999,7 @@ typeRegistryModule.default:register(t.TextXAlignmentProp)
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 2185 ]]
+function t_8.new(p14)
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		condition = if p14 == nil or p14.condition == nil then nil else p14.condition,
@@ -1007,7 +1007,7 @@ function t_8.new(p14) --[[ line: 2185 ]]
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 2194 ]]
+function t_8:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var265 = 0
@@ -1038,7 +1038,7 @@ function t_8:encode() --[[ line: 2194 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 2220 ]]
+function t_8.decode(p15)
 	-- upvalues: t_8 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var274 = t_8.new()
 	local var275 = 0
@@ -1100,7 +1100,7 @@ function t_8.decode(p15) --[[ line: 2220 ]]
 	return var274
 end
 
-function t_8:jsonEncode() --[[ line: 2276 ]]
+function t_8:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1119,7 +1119,7 @@ function t_8:jsonEncode() --[[ line: 2276 ]]
 	return t_1
 end
 
-function t_8:jsonDecode() --[[ line: 2296 ]]
+function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), propConditionModule (ref), t (ref)
 	local var297 = t_8.new()
 	
@@ -1150,14 +1150,14 @@ typeRegistryModule.default:register(t.TextXAlignmentProp_ConditionalOption)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 2340 ]]
+function t_9.new(p16)
 	-- upvalues: t_9 (ref)
 	return setmetatable({
 		options = if p16 == nil or p16.options == nil then {} else p16.options
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 2348 ]]
+function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var299 = 0
@@ -1177,7 +1177,7 @@ function t_9:encode() --[[ line: 2348 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 2365 ]]
+function t_9.decode(p17)
 	-- upvalues: t_9 (ref), protoModule (ref), t (ref)
 	local var304 = t_9.new()
 	local var305 = 0
@@ -1224,7 +1224,7 @@ function t_9.decode(p17) --[[ line: 2365 ]]
 	return var304
 end
 
-function t_9:jsonEncode() --[[ line: 2408 ]]
+function t_9:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -1238,7 +1238,7 @@ function t_9:jsonEncode() --[[ line: 2408 ]]
 	return t
 end
 
-function t_9:jsonDecode() --[[ line: 2422 ]]
+function t_9:jsonDecode()
 	-- upvalues: t_9 (ref), t (ref)
 	local var323 = t_9.new()
 	
@@ -1262,14 +1262,14 @@ typeRegistryModule.default:register(t.TextXAlignmentProp_ConditionalOptions)
 local t_10 = {}
 t_10.__index = t_10
 
-function t_10.new(p18) --[[ line: 2453 ]]
+function t_10.new(p18)
 	-- upvalues: t_10 (ref)
 	return setmetatable({
 		kind = if p18 == nil or p18.kind == nil then nil else p18.kind
 	}, t_10)
 end
 
-function t_10:encode() --[[ line: 2459 ]]
+function t_10:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var326 = 0
@@ -1299,7 +1299,7 @@ function t_10:encode() --[[ line: 2459 ]]
 	return buff_1
 end
 
-function t_10.decode(p19) --[[ line: 2483 ]]
+function t_10.decode(p19)
 	-- upvalues: t_10 (ref), protoModule (ref), t (ref)
 	local var335 = t_10.new()
 	local var336 = 0
@@ -1364,7 +1364,7 @@ function t_10.decode(p19) --[[ line: 2483 ]]
 	return var335
 end
 
-function t_10:jsonEncode() --[[ line: 2540 ]]
+function t_10:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1384,7 +1384,7 @@ function t_10:jsonEncode() --[[ line: 2540 ]]
 	return t_1
 end
 
-function t_10:jsonDecode() --[[ line: 2558 ]]
+function t_10:jsonDecode()
 	-- upvalues: t_10 (ref), t (ref)
 	local var358 = t_10.new()
 	
@@ -1418,7 +1418,7 @@ typeRegistryModule.default:register(t.TextYAlignmentProp)
 local t_11 = {}
 t_11.__index = t_11
 
-function t_11.new(p20) --[[ line: 2602 ]]
+function t_11.new(p20)
 	-- upvalues: t_11 (ref)
 	return setmetatable({
 		condition = if p20 == nil or p20.condition == nil then nil else p20.condition,
@@ -1426,7 +1426,7 @@ function t_11.new(p20) --[[ line: 2602 ]]
 	}, t_11)
 end
 
-function t_11:encode() --[[ line: 2611 ]]
+function t_11:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var360 = 0
@@ -1457,7 +1457,7 @@ function t_11:encode() --[[ line: 2611 ]]
 	return buff_1
 end
 
-function t_11.decode(p21) --[[ line: 2637 ]]
+function t_11.decode(p21)
 	-- upvalues: t_11 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var369 = t_11.new()
 	local var370 = 0
@@ -1519,7 +1519,7 @@ function t_11.decode(p21) --[[ line: 2637 ]]
 	return var369
 end
 
-function t_11:jsonEncode() --[[ line: 2693 ]]
+function t_11:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1538,7 +1538,7 @@ function t_11:jsonEncode() --[[ line: 2693 ]]
 	return t_1
 end
 
-function t_11:jsonDecode() --[[ line: 2713 ]]
+function t_11:jsonDecode()
 	-- upvalues: t_11 (ref), propConditionModule (ref), t (ref)
 	local var392 = t_11.new()
 	
@@ -1569,14 +1569,14 @@ typeRegistryModule.default:register(t.TextYAlignmentProp_ConditionalOption)
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p22) --[[ line: 2757 ]]
+function t_12.new(p22)
 	-- upvalues: t_12 (ref)
 	return setmetatable({
 		options = if p22 == nil or p22.options == nil then {} else p22.options
 	}, t_12)
 end
 
-function t_12:encode() --[[ line: 2765 ]]
+function t_12:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var394 = 0
@@ -1596,7 +1596,7 @@ function t_12:encode() --[[ line: 2765 ]]
 	return buff_1
 end
 
-function t_12.decode(p23) --[[ line: 2782 ]]
+function t_12.decode(p23)
 	-- upvalues: t_12 (ref), protoModule (ref), t (ref)
 	local var399 = t_12.new()
 	local var400 = 0
@@ -1643,7 +1643,7 @@ function t_12.decode(p23) --[[ line: 2782 ]]
 	return var399
 end
 
-function t_12:jsonEncode() --[[ line: 2825 ]]
+function t_12:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -1657,7 +1657,7 @@ function t_12:jsonEncode() --[[ line: 2825 ]]
 	return t
 end
 
-function t_12:jsonDecode() --[[ line: 2839 ]]
+function t_12:jsonDecode()
 	-- upvalues: t_12 (ref), t (ref)
 	local var418 = t_12.new()
 	
@@ -1681,14 +1681,14 @@ typeRegistryModule.default:register(t.TextYAlignmentProp_ConditionalOptions)
 local t_13 = {}
 t_13.__index = t_13
 
-function t_13.new(p24) --[[ line: 2870 ]]
+function t_13.new(p24)
 	-- upvalues: t_13 (ref)
 	return setmetatable({
 		kind = if p24 == nil or p24.kind == nil then nil else p24.kind
 	}, t_13)
 end
 
-function t_13:encode() --[[ line: 2876 ]]
+function t_13:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var421 = 0
@@ -1718,7 +1718,7 @@ function t_13:encode() --[[ line: 2876 ]]
 	return buff_1
 end
 
-function t_13.decode(p25) --[[ line: 2899 ]]
+function t_13.decode(p25)
 	-- upvalues: t_13 (ref), protoModule (ref), t (ref)
 	local var430 = t_13.new()
 	local var431 = 0
@@ -1783,7 +1783,7 @@ function t_13.decode(p25) --[[ line: 2899 ]]
 	return var430
 end
 
-function t_13:jsonEncode() --[[ line: 2956 ]]
+function t_13:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1803,7 +1803,7 @@ function t_13:jsonEncode() --[[ line: 2956 ]]
 	return t_1
 end
 
-function t_13:jsonDecode() --[[ line: 2974 ]]
+function t_13:jsonDecode()
 	-- upvalues: t_13 (ref), t (ref)
 	local var453 = t_13.new()
 	
@@ -1837,7 +1837,7 @@ typeRegistryModule.default:register(t.UIFlexModeProp)
 local t_14 = {}
 t_14.__index = t_14
 
-function t_14.new(p26) --[[ line: 3018 ]]
+function t_14.new(p26)
 	-- upvalues: t_14 (ref)
 	return setmetatable({
 		condition = if p26 == nil or p26.condition == nil then nil else p26.condition,
@@ -1845,7 +1845,7 @@ function t_14.new(p26) --[[ line: 3018 ]]
 	}, t_14)
 end
 
-function t_14:encode() --[[ line: 3027 ]]
+function t_14:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var455 = 0
@@ -1876,7 +1876,7 @@ function t_14:encode() --[[ line: 3027 ]]
 	return buff_1
 end
 
-function t_14.decode(p27) --[[ line: 3052 ]]
+function t_14.decode(p27)
 	-- upvalues: t_14 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var464 = t_14.new()
 	local var465 = 0
@@ -1938,7 +1938,7 @@ function t_14.decode(p27) --[[ line: 3052 ]]
 	return var464
 end
 
-function t_14:jsonEncode() --[[ line: 3108 ]]
+function t_14:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1957,7 +1957,7 @@ function t_14:jsonEncode() --[[ line: 3108 ]]
 	return t_1
 end
 
-function t_14:jsonDecode() --[[ line: 3128 ]]
+function t_14:jsonDecode()
 	-- upvalues: t_14 (ref), propConditionModule (ref), t (ref)
 	local var487 = t_14.new()
 	
@@ -1988,14 +1988,14 @@ typeRegistryModule.default:register(t.UIFlexModeProp_ConditionalOption)
 local t_15 = {}
 t_15.__index = t_15
 
-function t_15.new(p28) --[[ line: 3172 ]]
+function t_15.new(p28)
 	-- upvalues: t_15 (ref)
 	return setmetatable({
 		options = if p28 == nil or p28.options == nil then {} else p28.options
 	}, t_15)
 end
 
-function t_15:encode() --[[ line: 3180 ]]
+function t_15:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var489 = 0
@@ -2015,7 +2015,7 @@ function t_15:encode() --[[ line: 3180 ]]
 	return buff_1
 end
 
-function t_15.decode(p29) --[[ line: 3197 ]]
+function t_15.decode(p29)
 	-- upvalues: t_15 (ref), protoModule (ref), t (ref)
 	local var494 = t_15.new()
 	local var495 = 0
@@ -2062,7 +2062,7 @@ function t_15.decode(p29) --[[ line: 3197 ]]
 	return var494
 end
 
-function t_15:jsonEncode() --[[ line: 3240 ]]
+function t_15:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -2076,7 +2076,7 @@ function t_15:jsonEncode() --[[ line: 3240 ]]
 	return t
 end
 
-function t_15:jsonDecode() --[[ line: 3254 ]]
+function t_15:jsonDecode()
 	-- upvalues: t_15 (ref), t (ref)
 	local var513 = t_15.new()
 	
@@ -2100,14 +2100,14 @@ typeRegistryModule.default:register(t.UIFlexModeProp_ConditionalOptions)
 local t_16 = {}
 t_16.__index = t_16
 
-function t_16.new(p30) --[[ line: 3285 ]]
+function t_16.new(p30)
 	-- upvalues: t_16 (ref)
 	return setmetatable({
 		kind = if p30 == nil or p30.kind == nil then nil else p30.kind
 	}, t_16)
 end
 
-function t_16:encode() --[[ line: 3291 ]]
+function t_16:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var516 = 0
@@ -2137,7 +2137,7 @@ function t_16:encode() --[[ line: 3291 ]]
 	return buff_1
 end
 
-function t_16.decode(p31) --[[ line: 3314 ]]
+function t_16.decode(p31)
 	-- upvalues: t_16 (ref), protoModule (ref), t (ref)
 	local var525 = t_16.new()
 	local var526 = 0
@@ -2202,7 +2202,7 @@ function t_16.decode(p31) --[[ line: 3314 ]]
 	return var525
 end
 
-function t_16:jsonEncode() --[[ line: 3371 ]]
+function t_16:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2222,7 +2222,7 @@ function t_16:jsonEncode() --[[ line: 3371 ]]
 	return t_1
 end
 
-function t_16:jsonDecode() --[[ line: 3389 ]]
+function t_16:jsonDecode()
 	-- upvalues: t_16 (ref), t (ref)
 	local var548 = t_16.new()
 	
@@ -2256,7 +2256,7 @@ typeRegistryModule.default:register(t.ScaleTypeProp)
 local t_17 = {}
 t_17.__index = t_17
 
-function t_17.new(p32) --[[ line: 3433 ]]
+function t_17.new(p32)
 	-- upvalues: t_17 (ref)
 	return setmetatable({
 		condition = if p32 == nil or p32.condition == nil then nil else p32.condition,
@@ -2264,7 +2264,7 @@ function t_17.new(p32) --[[ line: 3433 ]]
 	}, t_17)
 end
 
-function t_17:encode() --[[ line: 3442 ]]
+function t_17:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var550 = 0
@@ -2295,7 +2295,7 @@ function t_17:encode() --[[ line: 3442 ]]
 	return buff_1
 end
 
-function t_17.decode(p33) --[[ line: 3467 ]]
+function t_17.decode(p33)
 	-- upvalues: t_17 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var559 = t_17.new()
 	local var560 = 0
@@ -2357,7 +2357,7 @@ function t_17.decode(p33) --[[ line: 3467 ]]
 	return var559
 end
 
-function t_17:jsonEncode() --[[ line: 3523 ]]
+function t_17:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2376,7 +2376,7 @@ function t_17:jsonEncode() --[[ line: 3523 ]]
 	return t_1
 end
 
-function t_17:jsonDecode() --[[ line: 3543 ]]
+function t_17:jsonDecode()
 	-- upvalues: t_17 (ref), propConditionModule (ref), t (ref)
 	local var582 = t_17.new()
 	
@@ -2407,14 +2407,14 @@ typeRegistryModule.default:register(t.ScaleTypeProp_ConditionalOption)
 local t_18 = {}
 t_18.__index = t_18
 
-function t_18.new(p34) --[[ line: 3585 ]]
+function t_18.new(p34)
 	-- upvalues: t_18 (ref)
 	return setmetatable({
 		options = if p34 == nil or p34.options == nil then {} else p34.options
 	}, t_18)
 end
 
-function t_18:encode() --[[ line: 3593 ]]
+function t_18:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var584 = 0
@@ -2434,7 +2434,7 @@ function t_18:encode() --[[ line: 3593 ]]
 	return buff_1
 end
 
-function t_18.decode(p35) --[[ line: 3610 ]]
+function t_18.decode(p35)
 	-- upvalues: t_18 (ref), protoModule (ref), t (ref)
 	local var589 = t_18.new()
 	local var590 = 0
@@ -2481,7 +2481,7 @@ function t_18.decode(p35) --[[ line: 3610 ]]
 	return var589
 end
 
-function t_18:jsonEncode() --[[ line: 3653 ]]
+function t_18:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -2495,7 +2495,7 @@ function t_18:jsonEncode() --[[ line: 3653 ]]
 	return t
 end
 
-function t_18:jsonDecode() --[[ line: 3667 ]]
+function t_18:jsonDecode()
 	-- upvalues: t_18 (ref), t (ref)
 	local var608 = t_18.new()
 	
@@ -2519,14 +2519,14 @@ typeRegistryModule.default:register(t.ScaleTypeProp_ConditionalOptions)
 local t_19 = {}
 t_19.__index = t_19
 
-function t_19.new(p36) --[[ line: 3698 ]]
+function t_19.new(p36)
 	-- upvalues: t_19 (ref)
 	return setmetatable({
 		kind = if p36 == nil or p36.kind == nil then nil else p36.kind
 	}, t_19)
 end
 
-function t_19:encode() --[[ line: 3704 ]]
+function t_19:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var611 = 0
@@ -2556,7 +2556,7 @@ function t_19:encode() --[[ line: 3704 ]]
 	return buff_1
 end
 
-function t_19.decode(p37) --[[ line: 3728 ]]
+function t_19.decode(p37)
 	-- upvalues: t_19 (ref), protoModule (ref), t (ref)
 	local var620 = t_19.new()
 	local var621 = 0
@@ -2621,7 +2621,7 @@ function t_19.decode(p37) --[[ line: 3728 ]]
 	return var620
 end
 
-function t_19:jsonEncode() --[[ line: 3785 ]]
+function t_19:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2641,7 +2641,7 @@ function t_19:jsonEncode() --[[ line: 3785 ]]
 	return t_1
 end
 
-function t_19:jsonDecode() --[[ line: 3803 ]]
+function t_19:jsonDecode()
 	-- upvalues: t_19 (ref), t (ref)
 	local var643 = t_19.new()
 	
@@ -2675,7 +2675,7 @@ typeRegistryModule.default:register(t.ResamplerModeProp)
 local t_20 = {}
 t_20.__index = t_20
 
-function t_20.new(p38) --[[ line: 3847 ]]
+function t_20.new(p38)
 	-- upvalues: t_20 (ref)
 	return setmetatable({
 		condition = if p38 == nil or p38.condition == nil then nil else p38.condition,
@@ -2683,7 +2683,7 @@ function t_20.new(p38) --[[ line: 3847 ]]
 	}, t_20)
 end
 
-function t_20:encode() --[[ line: 3856 ]]
+function t_20:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var645 = 0
@@ -2714,7 +2714,7 @@ function t_20:encode() --[[ line: 3856 ]]
 	return buff_1
 end
 
-function t_20.decode(p39) --[[ line: 3882 ]]
+function t_20.decode(p39)
 	-- upvalues: t_20 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var654 = t_20.new()
 	local var655 = 0
@@ -2776,7 +2776,7 @@ function t_20.decode(p39) --[[ line: 3882 ]]
 	return var654
 end
 
-function t_20:jsonEncode() --[[ line: 3938 ]]
+function t_20:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2795,7 +2795,7 @@ function t_20:jsonEncode() --[[ line: 3938 ]]
 	return t_1
 end
 
-function t_20:jsonDecode() --[[ line: 3958 ]]
+function t_20:jsonDecode()
 	-- upvalues: t_20 (ref), propConditionModule (ref), t (ref)
 	local var677 = t_20.new()
 	
@@ -2826,14 +2826,14 @@ typeRegistryModule.default:register(t.ResamplerModeProp_ConditionalOption)
 local t_21 = {}
 t_21.__index = t_21
 
-function t_21.new(p40) --[[ line: 4002 ]]
+function t_21.new(p40)
 	-- upvalues: t_21 (ref)
 	return setmetatable({
 		options = if p40 == nil or p40.options == nil then {} else p40.options
 	}, t_21)
 end
 
-function t_21:encode() --[[ line: 4010 ]]
+function t_21:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var679 = 0
@@ -2853,7 +2853,7 @@ function t_21:encode() --[[ line: 4010 ]]
 	return buff_1
 end
 
-function t_21.decode(p41) --[[ line: 4027 ]]
+function t_21.decode(p41)
 	-- upvalues: t_21 (ref), protoModule (ref), t (ref)
 	local var684 = t_21.new()
 	local var685 = 0
@@ -2900,7 +2900,7 @@ function t_21.decode(p41) --[[ line: 4027 ]]
 	return var684
 end
 
-function t_21:jsonEncode() --[[ line: 4070 ]]
+function t_21:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -2914,7 +2914,7 @@ function t_21:jsonEncode() --[[ line: 4070 ]]
 	return t
 end
 
-function t_21:jsonDecode() --[[ line: 4084 ]]
+function t_21:jsonDecode()
 	-- upvalues: t_21 (ref), t (ref)
 	local var703 = t_21.new()
 	
@@ -2938,14 +2938,14 @@ typeRegistryModule.default:register(t.ResamplerModeProp_ConditionalOptions)
 local t_22 = {}
 t_22.__index = t_22
 
-function t_22.new(p42) --[[ line: 4115 ]]
+function t_22.new(p42)
 	-- upvalues: t_22 (ref)
 	return setmetatable({
 		kind = if p42 == nil or p42.kind == nil then nil else p42.kind
 	}, t_22)
 end
 
-function t_22:encode() --[[ line: 4121 ]]
+function t_22:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var706 = 0
@@ -2975,7 +2975,7 @@ function t_22:encode() --[[ line: 4121 ]]
 	return buff_1
 end
 
-function t_22.decode(p43) --[[ line: 4145 ]]
+function t_22.decode(p43)
 	-- upvalues: t_22 (ref), protoModule (ref), t (ref)
 	local var715 = t_22.new()
 	local var716 = 0
@@ -3040,7 +3040,7 @@ function t_22.decode(p43) --[[ line: 4145 ]]
 	return var715
 end
 
-function t_22:jsonEncode() --[[ line: 4202 ]]
+function t_22:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3060,7 +3060,7 @@ function t_22:jsonEncode() --[[ line: 4202 ]]
 	return t_1
 end
 
-function t_22:jsonDecode() --[[ line: 4220 ]]
+function t_22:jsonDecode()
 	-- upvalues: t_22 (ref), t (ref)
 	local var738 = t_22.new()
 	
@@ -3094,7 +3094,7 @@ typeRegistryModule.default:register(t.SizeConstraintProp)
 local t_23 = {}
 t_23.__index = t_23
 
-function t_23.new(p44) --[[ line: 4264 ]]
+function t_23.new(p44)
 	-- upvalues: t_23 (ref)
 	return setmetatable({
 		condition = if p44 == nil or p44.condition == nil then nil else p44.condition,
@@ -3102,7 +3102,7 @@ function t_23.new(p44) --[[ line: 4264 ]]
 	}, t_23)
 end
 
-function t_23:encode() --[[ line: 4273 ]]
+function t_23:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var740 = 0
@@ -3133,7 +3133,7 @@ function t_23:encode() --[[ line: 4273 ]]
 	return buff_1
 end
 
-function t_23.decode(p45) --[[ line: 4299 ]]
+function t_23.decode(p45)
 	-- upvalues: t_23 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var749 = t_23.new()
 	local var750 = 0
@@ -3195,7 +3195,7 @@ function t_23.decode(p45) --[[ line: 4299 ]]
 	return var749
 end
 
-function t_23:jsonEncode() --[[ line: 4355 ]]
+function t_23:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3214,7 +3214,7 @@ function t_23:jsonEncode() --[[ line: 4355 ]]
 	return t_1
 end
 
-function t_23:jsonDecode() --[[ line: 4375 ]]
+function t_23:jsonDecode()
 	-- upvalues: t_23 (ref), propConditionModule (ref), t (ref)
 	local var772 = t_23.new()
 	
@@ -3245,14 +3245,14 @@ typeRegistryModule.default:register(t.SizeConstraintProp_ConditionalOption)
 local t_24 = {}
 t_24.__index = t_24
 
-function t_24.new(p46) --[[ line: 4419 ]]
+function t_24.new(p46)
 	-- upvalues: t_24 (ref)
 	return setmetatable({
 		options = if p46 == nil or p46.options == nil then {} else p46.options
 	}, t_24)
 end
 
-function t_24:encode() --[[ line: 4427 ]]
+function t_24:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var774 = 0
@@ -3272,7 +3272,7 @@ function t_24:encode() --[[ line: 4427 ]]
 	return buff_1
 end
 
-function t_24.decode(p47) --[[ line: 4444 ]]
+function t_24.decode(p47)
 	-- upvalues: t_24 (ref), protoModule (ref), t (ref)
 	local var779 = t_24.new()
 	local var780 = 0
@@ -3319,7 +3319,7 @@ function t_24.decode(p47) --[[ line: 4444 ]]
 	return var779
 end
 
-function t_24:jsonEncode() --[[ line: 4487 ]]
+function t_24:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -3333,7 +3333,7 @@ function t_24:jsonEncode() --[[ line: 4487 ]]
 	return t
 end
 
-function t_24:jsonDecode() --[[ line: 4501 ]]
+function t_24:jsonDecode()
 	-- upvalues: t_24 (ref), t (ref)
 	local var798 = t_24.new()
 	
@@ -3357,14 +3357,14 @@ typeRegistryModule.default:register(t.SizeConstraintProp_ConditionalOptions)
 local t_25 = {}
 t_25.__index = t_25
 
-function t_25.new(p48) --[[ line: 4532 ]]
+function t_25.new(p48)
 	-- upvalues: t_25 (ref)
 	return setmetatable({
 		kind = if p48 == nil or p48.kind == nil then nil else p48.kind
 	}, t_25)
 end
 
-function t_25:encode() --[[ line: 4538 ]]
+function t_25:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var801 = 0
@@ -3394,7 +3394,7 @@ function t_25:encode() --[[ line: 4538 ]]
 	return buff_1
 end
 
-function t_25.decode(p49) --[[ line: 4562 ]]
+function t_25.decode(p49)
 	-- upvalues: t_25 (ref), protoModule (ref), t (ref)
 	local var810 = t_25.new()
 	local var811 = 0
@@ -3459,7 +3459,7 @@ function t_25.decode(p49) --[[ line: 4562 ]]
 	return var810
 end
 
-function t_25:jsonEncode() --[[ line: 4621 ]]
+function t_25:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3479,7 +3479,7 @@ function t_25:jsonEncode() --[[ line: 4621 ]]
 	return t_1
 end
 
-function t_25:jsonDecode() --[[ line: 4639 ]]
+function t_25:jsonDecode()
 	-- upvalues: t_25 (ref), t (ref)
 	local var833 = t_25.new()
 	
@@ -3513,7 +3513,7 @@ typeRegistryModule.default:register(t.HorizontalAlignmentProp)
 local t_26 = {}
 t_26.__index = t_26
 
-function t_26.new(p50) --[[ line: 4683 ]]
+function t_26.new(p50)
 	-- upvalues: t_26 (ref)
 	return setmetatable({
 		condition = if p50 == nil or p50.condition == nil then nil else p50.condition,
@@ -3521,7 +3521,7 @@ function t_26.new(p50) --[[ line: 4683 ]]
 	}, t_26)
 end
 
-function t_26:encode() --[[ line: 4692 ]]
+function t_26:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var835 = 0
@@ -3552,7 +3552,7 @@ function t_26:encode() --[[ line: 4692 ]]
 	return buff_1
 end
 
-function t_26.decode(p51) --[[ line: 4720 ]]
+function t_26.decode(p51)
 	-- upvalues: t_26 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var844 = t_26.new()
 	local var845 = 0
@@ -3614,7 +3614,7 @@ function t_26.decode(p51) --[[ line: 4720 ]]
 	return var844
 end
 
-function t_26:jsonEncode() --[[ line: 4778 ]]
+function t_26:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3633,7 +3633,7 @@ function t_26:jsonEncode() --[[ line: 4778 ]]
 	return t_1
 end
 
-function t_26:jsonDecode() --[[ line: 4800 ]]
+function t_26:jsonDecode()
 	-- upvalues: t_26 (ref), propConditionModule (ref), t (ref)
 	local var867 = t_26.new()
 	
@@ -3664,14 +3664,14 @@ typeRegistryModule.default:register(t.HorizontalAlignmentProp_ConditionalOption)
 local t_27 = {}
 t_27.__index = t_27
 
-function t_27.new(p52) --[[ line: 4844 ]]
+function t_27.new(p52)
 	-- upvalues: t_27 (ref)
 	return setmetatable({
 		option = if p52 == nil or p52.option == nil then {} else p52.option
 	}, t_27)
 end
 
-function t_27:encode() --[[ line: 4852 ]]
+function t_27:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var869 = 0
@@ -3691,7 +3691,7 @@ function t_27:encode() --[[ line: 4852 ]]
 	return buff_1
 end
 
-function t_27.decode(p53) --[[ line: 4871 ]]
+function t_27.decode(p53)
 	-- upvalues: t_27 (ref), protoModule (ref), t (ref)
 	local var874 = t_27.new()
 	local var875 = 0
@@ -3738,7 +3738,7 @@ function t_27.decode(p53) --[[ line: 4871 ]]
 	return var874
 end
 
-function t_27:jsonEncode() --[[ line: 4916 ]]
+function t_27:jsonEncode()
 	local t = {}
 	
 	if self.option ~= nil and #self.option > 0 then
@@ -3752,7 +3752,7 @@ function t_27:jsonEncode() --[[ line: 4916 ]]
 	return t
 end
 
-function t_27:jsonDecode() --[[ line: 4932 ]]
+function t_27:jsonDecode()
 	-- upvalues: t_27 (ref), t (ref)
 	local var893 = t_27.new()
 	
@@ -3776,14 +3776,14 @@ typeRegistryModule.default:register(t.HorizontalAlignmentProp_ConditionalOptions
 local t_28 = {}
 t_28.__index = t_28
 
-function t_28.new(p54) --[[ line: 4963 ]]
+function t_28.new(p54)
 	-- upvalues: t_28 (ref)
 	return setmetatable({
 		kind = if p54 == nil or p54.kind == nil then nil else p54.kind
 	}, t_28)
 end
 
-function t_28:encode() --[[ line: 4969 ]]
+function t_28:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var896 = 0
@@ -3813,7 +3813,7 @@ function t_28:encode() --[[ line: 4969 ]]
 	return buff_1
 end
 
-function t_28.decode(p55) --[[ line: 4993 ]]
+function t_28.decode(p55)
 	-- upvalues: t_28 (ref), protoModule (ref), t (ref)
 	local var905 = t_28.new()
 	local var906 = 0
@@ -3878,7 +3878,7 @@ function t_28.decode(p55) --[[ line: 4993 ]]
 	return var905
 end
 
-function t_28:jsonEncode() --[[ line: 5052 ]]
+function t_28:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3898,7 +3898,7 @@ function t_28:jsonEncode() --[[ line: 5052 ]]
 	return t_1
 end
 
-function t_28:jsonDecode() --[[ line: 5070 ]]
+function t_28:jsonDecode()
 	-- upvalues: t_28 (ref), t (ref)
 	local var928 = t_28.new()
 	
@@ -3932,7 +3932,7 @@ typeRegistryModule.default:register(t.SelectionBehaviorProp)
 local t_29 = {}
 t_29.__index = t_29
 
-function t_29.new(p56) --[[ line: 5114 ]]
+function t_29.new(p56)
 	-- upvalues: t_29 (ref)
 	return setmetatable({
 		condition = if p56 == nil or p56.condition == nil then nil else p56.condition,
@@ -3940,7 +3940,7 @@ function t_29.new(p56) --[[ line: 5114 ]]
 	}, t_29)
 end
 
-function t_29:encode() --[[ line: 5123 ]]
+function t_29:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var930 = 0
@@ -3971,7 +3971,7 @@ function t_29:encode() --[[ line: 5123 ]]
 	return buff_1
 end
 
-function t_29.decode(p57) --[[ line: 5149 ]]
+function t_29.decode(p57)
 	-- upvalues: t_29 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var939 = t_29.new()
 	local var940 = 0
@@ -4033,7 +4033,7 @@ function t_29.decode(p57) --[[ line: 5149 ]]
 	return var939
 end
 
-function t_29:jsonEncode() --[[ line: 5205 ]]
+function t_29:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4052,7 +4052,7 @@ function t_29:jsonEncode() --[[ line: 5205 ]]
 	return t_1
 end
 
-function t_29:jsonDecode() --[[ line: 5225 ]]
+function t_29:jsonDecode()
 	-- upvalues: t_29 (ref), propConditionModule (ref), t (ref)
 	local var962 = t_29.new()
 	
@@ -4083,14 +4083,14 @@ typeRegistryModule.default:register(t.SelectionBehaviorProp_ConditionalOption)
 local t_30 = {}
 t_30.__index = t_30
 
-function t_30.new(p58) --[[ line: 5269 ]]
+function t_30.new(p58)
 	-- upvalues: t_30 (ref)
 	return setmetatable({
 		options = if p58 == nil or p58.options == nil then {} else p58.options
 	}, t_30)
 end
 
-function t_30:encode() --[[ line: 5277 ]]
+function t_30:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var964 = 0
@@ -4110,7 +4110,7 @@ function t_30:encode() --[[ line: 5277 ]]
 	return buff_1
 end
 
-function t_30.decode(p59) --[[ line: 5296 ]]
+function t_30.decode(p59)
 	-- upvalues: t_30 (ref), protoModule (ref), t (ref)
 	local var969 = t_30.new()
 	local var970 = 0
@@ -4157,7 +4157,7 @@ function t_30.decode(p59) --[[ line: 5296 ]]
 	return var969
 end
 
-function t_30:jsonEncode() --[[ line: 5341 ]]
+function t_30:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -4171,7 +4171,7 @@ function t_30:jsonEncode() --[[ line: 5341 ]]
 	return t
 end
 
-function t_30:jsonDecode() --[[ line: 5357 ]]
+function t_30:jsonDecode()
 	-- upvalues: t_30 (ref), t (ref)
 	local var988 = t_30.new()
 	
@@ -4195,14 +4195,14 @@ typeRegistryModule.default:register(t.SelectionBehaviorProp_ConditionalOptions)
 local t_31 = {}
 t_31.__index = t_31
 
-function t_31.new(p60) --[[ line: 5388 ]]
+function t_31.new(p60)
 	-- upvalues: t_31 (ref)
 	return setmetatable({
 		kind = if p60 == nil or p60.kind == nil then nil else p60.kind
 	}, t_31)
 end
 
-function t_31:encode() --[[ line: 5394 ]]
+function t_31:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var991 = 0
@@ -4232,7 +4232,7 @@ function t_31:encode() --[[ line: 5394 ]]
 	return buff_1
 end
 
-function t_31.decode(p61) --[[ line: 5417 ]]
+function t_31.decode(p61)
 	-- upvalues: t_31 (ref), protoModule (ref), t (ref)
 	local var1000 = t_31.new()
 	local var1001 = 0
@@ -4297,7 +4297,7 @@ function t_31.decode(p61) --[[ line: 5417 ]]
 	return var1000
 end
 
-function t_31:jsonEncode() --[[ line: 5473 ]]
+function t_31:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4317,7 +4317,7 @@ function t_31:jsonEncode() --[[ line: 5473 ]]
 	return t_1
 end
 
-function t_31:jsonDecode() --[[ line: 5491 ]]
+function t_31:jsonDecode()
 	-- upvalues: t_31 (ref), t (ref)
 	local var1023 = t_31.new()
 	
@@ -4351,7 +4351,7 @@ typeRegistryModule.default:register(t.KeyCodeProp)
 local t_32 = {}
 t_32.__index = t_32
 
-function t_32.new(p62) --[[ line: 5533 ]]
+function t_32.new(p62)
 	-- upvalues: t_32 (ref)
 	return setmetatable({
 		condition = if p62 == nil or p62.condition == nil then nil else p62.condition,
@@ -4359,7 +4359,7 @@ function t_32.new(p62) --[[ line: 5533 ]]
 	}, t_32)
 end
 
-function t_32:encode() --[[ line: 5542 ]]
+function t_32:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var1025 = 0
@@ -4390,7 +4390,7 @@ function t_32:encode() --[[ line: 5542 ]]
 	return buff_1
 end
 
-function t_32.decode(p63) --[[ line: 5567 ]]
+function t_32.decode(p63)
 	-- upvalues: t_32 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var1034 = t_32.new()
 	local var1035 = 0
@@ -4452,7 +4452,7 @@ function t_32.decode(p63) --[[ line: 5567 ]]
 	return var1034
 end
 
-function t_32:jsonEncode() --[[ line: 5623 ]]
+function t_32:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4471,7 +4471,7 @@ function t_32:jsonEncode() --[[ line: 5623 ]]
 	return t_1
 end
 
-function t_32:jsonDecode() --[[ line: 5643 ]]
+function t_32:jsonDecode()
 	-- upvalues: t_32 (ref), propConditionModule (ref), t (ref)
 	local var1057 = t_32.new()
 	
@@ -4502,14 +4502,14 @@ typeRegistryModule.default:register(t.KeyCodeProp_ConditionalOption)
 local t_33 = {}
 t_33.__index = t_33
 
-function t_33.new(p64) --[[ line: 5685 ]]
+function t_33.new(p64)
 	-- upvalues: t_33 (ref)
 	return setmetatable({
 		options = if p64 == nil or p64.options == nil then {} else p64.options
 	}, t_33)
 end
 
-function t_33:encode() --[[ line: 5693 ]]
+function t_33:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1059 = 0
@@ -4529,7 +4529,7 @@ function t_33:encode() --[[ line: 5693 ]]
 	return buff_1
 end
 
-function t_33.decode(p65) --[[ line: 5710 ]]
+function t_33.decode(p65)
 	-- upvalues: t_33 (ref), protoModule (ref), t (ref)
 	local var1064 = t_33.new()
 	local var1065 = 0
@@ -4576,7 +4576,7 @@ function t_33.decode(p65) --[[ line: 5710 ]]
 	return var1064
 end
 
-function t_33:jsonEncode() --[[ line: 5753 ]]
+function t_33:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -4590,7 +4590,7 @@ function t_33:jsonEncode() --[[ line: 5753 ]]
 	return t
 end
 
-function t_33:jsonDecode() --[[ line: 5767 ]]
+function t_33:jsonDecode()
 	-- upvalues: t_33 (ref), t (ref)
 	local var1083 = t_33.new()
 	
@@ -4614,14 +4614,14 @@ typeRegistryModule.default:register(t.KeyCodeProp_ConditionalOptions)
 local t_34 = {}
 t_34.__index = t_34
 
-function t_34.new(p66) --[[ line: 5796 ]]
+function t_34.new(p66)
 	-- upvalues: t_34 (ref)
 	return setmetatable({
 		kind = if p66 == nil or p66.kind == nil then nil else p66.kind
 	}, t_34)
 end
 
-function t_34:encode() --[[ line: 5802 ]]
+function t_34:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var1086 = 0
@@ -4651,7 +4651,7 @@ function t_34:encode() --[[ line: 5802 ]]
 	return buff_1
 end
 
-function t_34.decode(p67) --[[ line: 5826 ]]
+function t_34.decode(p67)
 	-- upvalues: t_34 (ref), protoModule (ref), t (ref)
 	local var1095 = t_34.new()
 	local var1096 = 0
@@ -4716,7 +4716,7 @@ function t_34.decode(p67) --[[ line: 5826 ]]
 	return var1095
 end
 
-function t_34:jsonEncode() --[[ line: 5885 ]]
+function t_34:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4736,7 +4736,7 @@ function t_34:jsonEncode() --[[ line: 5885 ]]
 	return t_1
 end
 
-function t_34:jsonDecode() --[[ line: 5903 ]]
+function t_34:jsonDecode()
 	-- upvalues: t_34 (ref), t (ref)
 	local var1118 = t_34.new()
 	
@@ -4770,7 +4770,7 @@ typeRegistryModule.default:register(t.VerticalAlignmentProp)
 local t_35 = {}
 t_35.__index = t_35
 
-function t_35.new(p68) --[[ line: 5947 ]]
+function t_35.new(p68)
 	-- upvalues: t_35 (ref)
 	return setmetatable({
 		condition = if p68 == nil or p68.condition == nil then nil else p68.condition,
@@ -4778,7 +4778,7 @@ function t_35.new(p68) --[[ line: 5947 ]]
 	}, t_35)
 end
 
-function t_35:encode() --[[ line: 5956 ]]
+function t_35:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var1120 = 0
@@ -4809,7 +4809,7 @@ function t_35:encode() --[[ line: 5956 ]]
 	return buff_1
 end
 
-function t_35.decode(p69) --[[ line: 5982 ]]
+function t_35.decode(p69)
 	-- upvalues: t_35 (ref), protoModule (ref), t (ref), propConditionModule (ref)
 	local var1129 = t_35.new()
 	local var1130 = 0
@@ -4871,7 +4871,7 @@ function t_35.decode(p69) --[[ line: 5982 ]]
 	return var1129
 end
 
-function t_35:jsonEncode() --[[ line: 6038 ]]
+function t_35:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4890,7 +4890,7 @@ function t_35:jsonEncode() --[[ line: 6038 ]]
 	return t_1
 end
 
-function t_35:jsonDecode() --[[ line: 6058 ]]
+function t_35:jsonDecode()
 	-- upvalues: t_35 (ref), propConditionModule (ref), t (ref)
 	local var1152 = t_35.new()
 	
@@ -4921,14 +4921,14 @@ typeRegistryModule.default:register(t.VerticalAlignmentProp_ConditionalOption)
 local t_36 = {}
 t_36.__index = t_36
 
-function t_36.new(p70) --[[ line: 6102 ]]
+function t_36.new(p70)
 	-- upvalues: t_36 (ref)
 	return setmetatable({
 		option = if p70 == nil or p70.option == nil then {} else p70.option
 	}, t_36)
 end
 
-function t_36:encode() --[[ line: 6110 ]]
+function t_36:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1154 = 0
@@ -4948,7 +4948,7 @@ function t_36:encode() --[[ line: 6110 ]]
 	return buff_1
 end
 
-function t_36.decode(p71) --[[ line: 6129 ]]
+function t_36.decode(p71)
 	-- upvalues: t_36 (ref), protoModule (ref), t (ref)
 	local var1159 = t_36.new()
 	local var1160 = 0
@@ -4995,7 +4995,7 @@ function t_36.decode(p71) --[[ line: 6129 ]]
 	return var1159
 end
 
-function t_36:jsonEncode() --[[ line: 6174 ]]
+function t_36:jsonEncode()
 	local t = {}
 	
 	if self.option ~= nil and #self.option > 0 then
@@ -5009,7 +5009,7 @@ function t_36:jsonEncode() --[[ line: 6174 ]]
 	return t
 end
 
-function t_36:jsonDecode() --[[ line: 6190 ]]
+function t_36:jsonDecode()
 	-- upvalues: t_36 (ref), t (ref)
 	local var1178 = t_36.new()
 	
@@ -5031,134 +5031,134 @@ t_36.descriptor = {
 t.VerticalAlignmentProp_ConditionalOptions = t_36
 typeRegistryModule.default:register(t.VerticalAlignmentProp_ConditionalOptions)
 t.AutomaticSize = {
-	fromNumber = function(p72) --[[ line: 6218 ]]
+	fromNumber = function(p72)
 		return if p72 == 0 then "AUTOMATIC_SIZE_INVALID" elseif p72 == 1 then "AUTOMATIC_SIZE_NONE" elseif p72 == 2 then "AUTOMATIC_SIZE_X" elseif p72 == 3 then "AUTOMATIC_SIZE_Y" elseif p72 == 4 then "AUTOMATIC_SIZE_XY" else nil
 	end,
-	toNumber = function(p73) --[[ line: 6234 ]]
+	toNumber = function(p73)
 		return if p73 == "AUTOMATIC_SIZE_INVALID" then 0 elseif p73 == "AUTOMATIC_SIZE_NONE" then 1 elseif p73 == "AUTOMATIC_SIZE_X" then 2 elseif p73 == "AUTOMATIC_SIZE_Y" then 3 elseif p73 == "AUTOMATIC_SIZE_XY" then 4 else p73
 	end,
-	fromName = function(p74) --[[ line: 6250 ]]
+	fromName = function(p74)
 		return if p74 == "AUTOMATIC_SIZE_INVALID" then "AUTOMATIC_SIZE_INVALID" elseif p74 == "AUTOMATIC_SIZE_NONE" then "AUTOMATIC_SIZE_NONE" elseif p74 == "AUTOMATIC_SIZE_X" then "AUTOMATIC_SIZE_X" elseif p74 == "AUTOMATIC_SIZE_Y" then "AUTOMATIC_SIZE_Y" elseif p74 == "AUTOMATIC_SIZE_XY" then "AUTOMATIC_SIZE_XY" else nil
 	end
 }
 t.TextTruncate = {
-	fromNumber = function(p75) --[[ line: 6268 ]]
+	fromNumber = function(p75)
 		return if p75 == 0 then "TEXT_TRUNCATE_INVALID" elseif p75 == 1 then "TEXT_TRUNCATE_NONE" elseif p75 == 2 then "TEXT_TRUNCATE_AT_END" elseif p75 == 3 then "TEXT_TRUNCATE_SPLIT_WORD" else nil
 	end,
-	toNumber = function(p76) --[[ line: 6282 ]]
+	toNumber = function(p76)
 		return if p76 == "TEXT_TRUNCATE_INVALID" then 0 elseif p76 == "TEXT_TRUNCATE_NONE" then 1 elseif p76 == "TEXT_TRUNCATE_AT_END" then 2 elseif p76 == "TEXT_TRUNCATE_SPLIT_WORD" then 3 else p76
 	end,
-	fromName = function(p77) --[[ line: 6296 ]]
+	fromName = function(p77)
 		return if p77 == "TEXT_TRUNCATE_INVALID" then "TEXT_TRUNCATE_INVALID" elseif p77 == "TEXT_TRUNCATE_NONE" then "TEXT_TRUNCATE_NONE" elseif p77 == "TEXT_TRUNCATE_AT_END" then "TEXT_TRUNCATE_AT_END" elseif p77 == "TEXT_TRUNCATE_SPLIT_WORD" then "TEXT_TRUNCATE_SPLIT_WORD" else nil
 	end
 }
 t.TextXAlignment = {
-	fromNumber = function(p78) --[[ line: 6312 ]]
+	fromNumber = function(p78)
 		return if p78 == 0 then "TEXT_X_ALIGNMENT_INVALID" elseif p78 == 1 then "TEXT_X_ALIGNMENT_LEFT" elseif p78 == 2 then "TEXT_X_ALIGNMENT_CENTER" elseif p78 == 3 then "TEXT_X_ALIGNMENT_RIGHT" else nil
 	end,
-	toNumber = function(p79) --[[ line: 6326 ]]
+	toNumber = function(p79)
 		return if p79 == "TEXT_X_ALIGNMENT_INVALID" then 0 elseif p79 == "TEXT_X_ALIGNMENT_LEFT" then 1 elseif p79 == "TEXT_X_ALIGNMENT_CENTER" then 2 elseif p79 == "TEXT_X_ALIGNMENT_RIGHT" then 3 else p79
 	end,
-	fromName = function(p80) --[[ line: 6340 ]]
+	fromName = function(p80)
 		return if p80 == "TEXT_X_ALIGNMENT_INVALID" then "TEXT_X_ALIGNMENT_INVALID" elseif p80 == "TEXT_X_ALIGNMENT_LEFT" then "TEXT_X_ALIGNMENT_LEFT" elseif p80 == "TEXT_X_ALIGNMENT_CENTER" then "TEXT_X_ALIGNMENT_CENTER" elseif p80 == "TEXT_X_ALIGNMENT_RIGHT" then "TEXT_X_ALIGNMENT_RIGHT" else nil
 	end
 }
 t.TextYAlignment = {
-	fromNumber = function(p81) --[[ line: 6356 ]]
+	fromNumber = function(p81)
 		return if p81 == 0 then "TEXT_Y_ALIGNMENT_INVALID" elseif p81 == 1 then "TEXT_Y_ALIGNMENT_TOP" elseif p81 == 2 then "TEXT_Y_ALIGNMENT_CENTER" elseif p81 == 3 then "TEXT_Y_ALIGNMENT_BOTTOM" else nil
 	end,
-	toNumber = function(p82) --[[ line: 6370 ]]
+	toNumber = function(p82)
 		return if p82 == "TEXT_Y_ALIGNMENT_INVALID" then 0 elseif p82 == "TEXT_Y_ALIGNMENT_TOP" then 1 elseif p82 == "TEXT_Y_ALIGNMENT_CENTER" then 2 elseif p82 == "TEXT_Y_ALIGNMENT_BOTTOM" then 3 else p82
 	end,
-	fromName = function(p83) --[[ line: 6384 ]]
+	fromName = function(p83)
 		return if p83 == "TEXT_Y_ALIGNMENT_INVALID" then "TEXT_Y_ALIGNMENT_INVALID" elseif p83 == "TEXT_Y_ALIGNMENT_TOP" then "TEXT_Y_ALIGNMENT_TOP" elseif p83 == "TEXT_Y_ALIGNMENT_CENTER" then "TEXT_Y_ALIGNMENT_CENTER" elseif p83 == "TEXT_Y_ALIGNMENT_BOTTOM" then "TEXT_Y_ALIGNMENT_BOTTOM" else nil
 	end
 }
 t.UIFlexMode = {
-	fromNumber = function(p84) --[[ line: 6400 ]]
+	fromNumber = function(p84)
 		return if p84 == 0 then "UI_FLEX_MODE_INVALID" elseif p84 == 1 then "UI_FLEX_MODE_NONE" elseif p84 == 2 then "UI_FLEX_MODE_GROW" elseif p84 == 3 then "UI_FLEX_MODE_SHRINK" elseif p84 == 4 then "UI_FLEX_MODE_FILL" elseif p84 == 5 then "UI_FLEX_MODE_CUSTOM" else nil
 	end,
-	toNumber = function(p85) --[[ line: 6418 ]]
+	toNumber = function(p85)
 		return if p85 == "UI_FLEX_MODE_INVALID" then 0 elseif p85 == "UI_FLEX_MODE_NONE" then 1 elseif p85 == "UI_FLEX_MODE_GROW" then 2 elseif p85 == "UI_FLEX_MODE_SHRINK" then 3 elseif p85 == "UI_FLEX_MODE_FILL" then 4 elseif p85 == "UI_FLEX_MODE_CUSTOM" then 5 else p85
 	end,
-	fromName = function(p86) --[[ line: 6436 ]]
+	fromName = function(p86)
 		return if p86 == "UI_FLEX_MODE_INVALID" then "UI_FLEX_MODE_INVALID" elseif p86 == "UI_FLEX_MODE_NONE" then "UI_FLEX_MODE_NONE" elseif p86 == "UI_FLEX_MODE_GROW" then "UI_FLEX_MODE_GROW" elseif p86 == "UI_FLEX_MODE_SHRINK" then "UI_FLEX_MODE_SHRINK" elseif p86 == "UI_FLEX_MODE_FILL" then "UI_FLEX_MODE_FILL" elseif p86 == "UI_FLEX_MODE_CUSTOM" then "UI_FLEX_MODE_CUSTOM" else nil
 	end
 }
 t.ScaleType = {
-	fromNumber = function(p87) --[[ line: 6456 ]]
+	fromNumber = function(p87)
 		return if p87 == 0 then "SCALE_TYPE_INVALID" elseif p87 == 1 then "SCALE_TYPE_STRETCH" elseif p87 == 2 then "SCALE_TYPE_SLICE" elseif p87 == 3 then "SCALE_TYPE_TILE" elseif p87 == 4 then "SCALE_TYPE_FIT" elseif p87 == 5 then "SCALE_TYPE_CROP" else nil
 	end,
-	toNumber = function(p88) --[[ line: 6474 ]]
+	toNumber = function(p88)
 		return if p88 == "SCALE_TYPE_INVALID" then 0 elseif p88 == "SCALE_TYPE_STRETCH" then 1 elseif p88 == "SCALE_TYPE_SLICE" then 2 elseif p88 == "SCALE_TYPE_TILE" then 3 elseif p88 == "SCALE_TYPE_FIT" then 4 elseif p88 == "SCALE_TYPE_CROP" then 5 else p88
 	end,
-	fromName = function(p89) --[[ line: 6492 ]]
+	fromName = function(p89)
 		return if p89 == "SCALE_TYPE_INVALID" then "SCALE_TYPE_INVALID" elseif p89 == "SCALE_TYPE_STRETCH" then "SCALE_TYPE_STRETCH" elseif p89 == "SCALE_TYPE_SLICE" then "SCALE_TYPE_SLICE" elseif p89 == "SCALE_TYPE_TILE" then "SCALE_TYPE_TILE" elseif p89 == "SCALE_TYPE_FIT" then "SCALE_TYPE_FIT" elseif p89 == "SCALE_TYPE_CROP" then "SCALE_TYPE_CROP" else nil
 	end
 }
 t.ResamplerMode = {
-	fromNumber = function(p90) --[[ line: 6512 ]]
+	fromNumber = function(p90)
 		return if p90 == 0 then "RESAMPLER_MODE_INVALID" elseif p90 == 1 then "RESAMPLER_MODE_DEFAULT" elseif p90 == 2 then "RESAMPLER_MODE_PIXELATED" else nil
 	end,
-	toNumber = function(p91) --[[ line: 6524 ]]
+	toNumber = function(p91)
 		return if p91 == "RESAMPLER_MODE_INVALID" then 0 elseif p91 == "RESAMPLER_MODE_DEFAULT" then 1 elseif p91 == "RESAMPLER_MODE_PIXELATED" then 2 else p91
 	end,
-	fromName = function(p92) --[[ line: 6536 ]]
+	fromName = function(p92)
 		return if p92 == "RESAMPLER_MODE_INVALID" then "RESAMPLER_MODE_INVALID" elseif p92 == "RESAMPLER_MODE_DEFAULT" then "RESAMPLER_MODE_DEFAULT" elseif p92 == "RESAMPLER_MODE_PIXELATED" then "RESAMPLER_MODE_PIXELATED" else nil
 	end
 }
 t.SizeConstraint = {
-	fromNumber = function(p93) --[[ line: 6550 ]]
+	fromNumber = function(p93)
 		return if p93 == 0 then "SIZE_CONSTRAINT_INVALID" elseif p93 == 1 then "SIZE_CONSTRAINT_RELATIVE_XY" elseif p93 == 2 then "SIZE_CONSTRAINT_RELATIVE_XX" elseif p93 == 3 then "SIZE_CONSTRAINT_RELATIVE_YY" else nil
 	end,
-	toNumber = function(p94) --[[ line: 6564 ]]
+	toNumber = function(p94)
 		return if p94 == "SIZE_CONSTRAINT_INVALID" then 0 elseif p94 == "SIZE_CONSTRAINT_RELATIVE_XY" then 1 elseif p94 == "SIZE_CONSTRAINT_RELATIVE_XX" then 2 elseif p94 == "SIZE_CONSTRAINT_RELATIVE_YY" then 3 else p94
 	end,
-	fromName = function(p95) --[[ line: 6578 ]]
+	fromName = function(p95)
 		return if p95 == "SIZE_CONSTRAINT_INVALID" then "SIZE_CONSTRAINT_INVALID" elseif p95 == "SIZE_CONSTRAINT_RELATIVE_XY" then "SIZE_CONSTRAINT_RELATIVE_XY" elseif p95 == "SIZE_CONSTRAINT_RELATIVE_XX" then "SIZE_CONSTRAINT_RELATIVE_XX" elseif p95 == "SIZE_CONSTRAINT_RELATIVE_YY" then "SIZE_CONSTRAINT_RELATIVE_YY" else nil
 	end
 }
 t.HorizontalAlignment = {
-	fromNumber = function(p96) --[[ line: 6594 ]]
+	fromNumber = function(p96)
 		return if p96 == 0 then "HORIZONTAL_ALIGNMENT_INVALID" elseif p96 == 1 then "HORIZONTAL_ALIGNMENT_LEFT" elseif p96 == 2 then "HORIZONTAL_ALIGNMENT_CENTER" elseif p96 == 3 then "HORIZONTAL_ALIGNMENT_RIGHT" else nil
 	end,
-	toNumber = function(p97) --[[ line: 6608 ]]
+	toNumber = function(p97)
 		return if p97 == "HORIZONTAL_ALIGNMENT_INVALID" then 0 elseif p97 == "HORIZONTAL_ALIGNMENT_LEFT" then 1 elseif p97 == "HORIZONTAL_ALIGNMENT_CENTER" then 2 elseif p97 == "HORIZONTAL_ALIGNMENT_RIGHT" then 3 else p97
 	end,
-	fromName = function(p98) --[[ line: 6622 ]]
+	fromName = function(p98)
 		return if p98 == "HORIZONTAL_ALIGNMENT_INVALID" then "HORIZONTAL_ALIGNMENT_INVALID" elseif p98 == "HORIZONTAL_ALIGNMENT_LEFT" then "HORIZONTAL_ALIGNMENT_LEFT" elseif p98 == "HORIZONTAL_ALIGNMENT_CENTER" then "HORIZONTAL_ALIGNMENT_CENTER" elseif p98 == "HORIZONTAL_ALIGNMENT_RIGHT" then "HORIZONTAL_ALIGNMENT_RIGHT" else nil
 	end
 }
 t.VerticalAlignment = {
-	fromNumber = function(p99) --[[ line: 6638 ]]
+	fromNumber = function(p99)
 		return if p99 == 0 then "VERTICAL_ALIGNMENT_INVALID" elseif p99 == 1 then "VERTICAL_ALIGNMENT_TOP" elseif p99 == 2 then "VERTICAL_ALIGNMENT_CENTER" elseif p99 == 3 then "VERTICAL_ALIGNMENT_BOTTOM" else nil
 	end,
-	toNumber = function(p100) --[[ line: 6652 ]]
+	toNumber = function(p100)
 		return if p100 == "VERTICAL_ALIGNMENT_INVALID" then 0 elseif p100 == "VERTICAL_ALIGNMENT_TOP" then 1 elseif p100 == "VERTICAL_ALIGNMENT_CENTER" then 2 elseif p100 == "VERTICAL_ALIGNMENT_BOTTOM" then 3 else p100
 	end,
-	fromName = function(p101) --[[ line: 6666 ]]
+	fromName = function(p101)
 		return if p101 == "VERTICAL_ALIGNMENT_INVALID" then "VERTICAL_ALIGNMENT_INVALID" elseif p101 == "VERTICAL_ALIGNMENT_TOP" then "VERTICAL_ALIGNMENT_TOP" elseif p101 == "VERTICAL_ALIGNMENT_CENTER" then "VERTICAL_ALIGNMENT_CENTER" elseif p101 == "VERTICAL_ALIGNMENT_BOTTOM" then "VERTICAL_ALIGNMENT_BOTTOM" else nil
 	end
 }
 t.SelectionBehavior = {
-	fromNumber = function(p102) --[[ line: 6682 ]]
+	fromNumber = function(p102)
 		return if p102 == 0 then "SELECTION_BEHAVIOR_INVALID" elseif p102 == 1 then "SELECTION_BEHAVIOR_ESCAPE" elseif p102 == 2 then "SELECTION_BEHAVIOR_STOP" else nil
 	end,
-	toNumber = function(p103) --[[ line: 6694 ]]
+	toNumber = function(p103)
 		return if p103 == "SELECTION_BEHAVIOR_INVALID" then 0 elseif p103 == "SELECTION_BEHAVIOR_ESCAPE" then 1 elseif p103 == "SELECTION_BEHAVIOR_STOP" then 2 else p103
 	end,
-	fromName = function(p104) --[[ line: 6706 ]]
+	fromName = function(p104)
 		return if p104 == "SELECTION_BEHAVIOR_INVALID" then "SELECTION_BEHAVIOR_INVALID" elseif p104 == "SELECTION_BEHAVIOR_ESCAPE" then "SELECTION_BEHAVIOR_ESCAPE" elseif p104 == "SELECTION_BEHAVIOR_STOP" then "SELECTION_BEHAVIOR_STOP" else nil
 	end
 }
 t.KeyCode = {
-	fromNumber = function(p105) --[[ line: 6720 ]]
+	fromNumber = function(p105)
 		return if p105 == 0 then "KEY_CODE_INVALID" elseif p105 == 1 then "KEY_CODE_BUTTON_A" elseif p105 == 2 then "KEY_CODE_BUTTON_B" elseif p105 == 3 then "KEY_CODE_BUTTON_X" elseif p105 == 4 then "KEY_CODE_BUTTON_Y" elseif p105 == 5 then "KEY_CODE_BUTTON_L1" elseif p105 == 6 then "KEY_CODE_BUTTON_R1" elseif p105 == 7 then "KEY_CODE_BUTTON_L2" elseif p105 == 8 then "KEY_CODE_BUTTON_R2" elseif p105 == 9 then "KEY_CODE_BUTTON_L3" elseif p105 == 10 then "KEY_CODE_BUTTON_R3" else nil
 	end,
-	toNumber = function(p106) --[[ line: 6748 ]]
+	toNumber = function(p106)
 		return if p106 == "KEY_CODE_INVALID" then 0 elseif p106 == "KEY_CODE_BUTTON_A" then 1 elseif p106 == "KEY_CODE_BUTTON_B" then 2 elseif p106 == "KEY_CODE_BUTTON_X" then 3 elseif p106 == "KEY_CODE_BUTTON_Y" then 4 elseif p106 == "KEY_CODE_BUTTON_L1" then 5 elseif p106 == "KEY_CODE_BUTTON_R1" then 6 elseif p106 == "KEY_CODE_BUTTON_L2" then 7 elseif p106 == "KEY_CODE_BUTTON_R2" then 8 elseif p106 == "KEY_CODE_BUTTON_L3" then 9 elseif p106 == "KEY_CODE_BUTTON_R3" then 10 else p106
 	end,
-	fromName = function(p107) --[[ line: 6776 ]]
+	fromName = function(p107)
 		return if p107 == "KEY_CODE_INVALID" then "KEY_CODE_INVALID" elseif p107 == "KEY_CODE_BUTTON_A" then "KEY_CODE_BUTTON_A" elseif p107 == "KEY_CODE_BUTTON_B" then "KEY_CODE_BUTTON_B" elseif p107 == "KEY_CODE_BUTTON_X" then "KEY_CODE_BUTTON_X" elseif p107 == "KEY_CODE_BUTTON_Y" then "KEY_CODE_BUTTON_Y" elseif p107 == "KEY_CODE_BUTTON_L1" then "KEY_CODE_BUTTON_L1" elseif p107 == "KEY_CODE_BUTTON_R1" then "KEY_CODE_BUTTON_R1" elseif p107 == "KEY_CODE_BUTTON_L2" then "KEY_CODE_BUTTON_L2" elseif p107 == "KEY_CODE_BUTTON_R2" then "KEY_CODE_BUTTON_R2" elseif p107 == "KEY_CODE_BUTTON_L3" then "KEY_CODE_BUTTON_L3" elseif p107 == "KEY_CODE_BUTTON_R3" then "KEY_CODE_BUTTON_R3" else nil
 	end
 }

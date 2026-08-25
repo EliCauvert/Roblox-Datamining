@@ -8,7 +8,7 @@ t.bind = bind
 t.noContext = noContext
 local setTimeout = luauPolyfillModule.setTimeout
 
-function t.setTimeoutWithContext(value, p0) --[[ line: 27 ]]
+function t.setTimeoutWithContext(value, p0)
 	-- upvalues: setTimeout (ref), bind (ref)
 	return setTimeout(bind(value), p0)
 end

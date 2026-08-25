@@ -17,7 +17,7 @@ local var9 = require(robloxGui.Modules.VoiceChat.Logger)(script.Name)
 local var10 = require(robloxGui.Modules.VoiceChat.Analytics).new()
 local voiceChatService = game:GetService("VoiceChatService")
 
-local function initializeDefaultChannel(p0) --[[ line: 27 ]]
+local function initializeDefaultChannel(p0)
 	-- upvalues: default (ref), var9 (ref), var10 (ref)
 	local service = default:getService()
 	
@@ -66,22 +66,22 @@ if voiceServiceEnableDefaultVoiceAvailableEngineFeature and defaultChannelEnable
 		var9:info("VoiceChatService not found. Assuming default values.")
 	end
 end
-default_1:getCallState():andThen(function(p1) --[[ line: 74 ]]
+default_1:getCallState():andThen(function(p1)
 	-- upvalues: enums (ref), debugDefaultChannelStartMuted (ref), default (ref), initializeDefaultChannel (ref), var9 (ref)
 	local var16 = if p1.status == enums.CallStatus.Idle.rawValue() or p1.status == enums.CallStatus.Ringing.rawValue() then debugDefaultChannelStartMuted else p1.muted
-	default:asyncInit():andThen(function() --[[ line: 81 ]]
+	default:asyncInit():andThen(function()
 		-- upvalues: initializeDefaultChannel (copy), var16 (ref), default (copy)
 		if initializeDefaultChannel(var16) == false then
 			default:InitialJoinFailedPrompt()
 		end
-	end):catch(function() --[[ line: 87 ]]
+	end):catch(function()
 		-- upvalues: var9 (copy)
 		var9:info("VoiceChatServiceManager did not initialize")
 	end)
 end)
 
 if getFFlagSeamlessVoiceFTUX() then
-	task.spawn(function() --[[ line: 96 ]]
+	task.spawn(function()
 		-- upvalues: default (ref)
 		default:VoiceChatFirstTimeUX(game:GetService("AppStorageService"))
 	end)

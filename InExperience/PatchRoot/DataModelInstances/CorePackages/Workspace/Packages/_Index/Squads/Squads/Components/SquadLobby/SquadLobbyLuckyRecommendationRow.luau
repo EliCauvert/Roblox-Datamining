@@ -17,7 +17,7 @@ local useCurrentSquadMembers = require(parent.SquadsCore.Hooks).useCurrentSquadM
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 local squadLobbyLuckyRecommendationModalModule = require(script.Parent.SquadLobbyLuckyRecommendationModal)
 
-return function(_) --[[ line: 28 | named "SquadLobbyLuckyRecommendationRow" ]]
+return function(_)
 	-- upvalues: useTokens (ref), react (ref), useLocalization (ref), useLocalUserId (ref), squadExternalContractContext (ref), useCurrentSquadMembers (ref), useEffectOnce (ref), eventNamesModule (ref), httpService (ref), view (ref), text (ref), icon (ref), iconSize (ref), squadLobbyLuckyRecommendationModalModule (ref)
 	local var5 = useTokens()
 	local var6, var7 = react.useState(false)
@@ -31,7 +31,7 @@ return function(_) --[[ line: 28 | named "SquadLobbyLuckyRecommendationRow" ]]
 	local var12 = react.useRef(var11)
 	var12.current = var11
 	local var13 = react.useRef("")
-	useEffectOnce(function() --[[ line: 44 ]]
+	useEffectOnce(function()
 		-- upvalues: var10 (ref), eventNamesModule (copy), var9 (ref)
 		var10.fireSquadAnalytics(eventNamesModule.LuckyRecommendationRowImpression, { localUserId = var9, clientTimestamp = os.time() })
 	end, true)
@@ -46,7 +46,7 @@ return function(_) --[[ line: 28 | named "SquadLobbyLuckyRecommendationRow" ]]
 					top = UDim.new(0, var5.Padding.Large),
 					bottom = UDim.new(0, var5.Padding.Large)
 				},
-				onActivated = react.useCallback(function() --[[ line: 51 ]]
+				onActivated = react.useCallback(function()
 					-- upvalues: httpService (copy), var13 (ref), var12 (ref), var10 (ref), eventNamesModule (copy), var9 (ref), var7 (ref)
 					local var14 = httpService:GenerateGUID(false)
 					var13.current = var14
@@ -80,7 +80,7 @@ return function(_) --[[ line: 28 | named "SquadLobbyLuckyRecommendationRow" ]]
 			})
 		}),
 		Modal = if var6 then react.createElement(squadLobbyLuckyRecommendationModalModule, {
-			onClose = react.useCallback(function() --[[ line: 64 ]]
+			onClose = react.useCallback(function()
 				-- upvalues: var7 (ref)
 				var7(false)
 			end, {}),

@@ -15,42 +15,42 @@ local withLocalization = require(corePackagesService.Workspace.Packages.Localiza
 local onboardingModal = roactModule.PureComponent:extend("OnboardingModal")
 local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 
-function onboardingModal.init(p0) --[[ line: 35 ]]
+function onboardingModal.init(p0)
 	-- upvalues: experienceStateCaptureService (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
-	function p0.onDismiss() --[[ line: 36 ]]
+	function p0.onDismiss()
 		-- upvalues: p0 (ref)
 		p0.props.showOnboardingModal(false)
 	end
 	
-	function p0.onCancel() --[[ line: 40 ]]
+	function p0.onCancel()
 		-- upvalues: experienceStateCaptureService (copy)
 		experienceStateCaptureService:ToggleCaptureMode()
 	end
 	
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p0.disposeScreenSize = signalsModule.createEffect(function(p1) --[[ line: 47 ]]
+		p0.disposeScreenSize = signalsModule.createEffect(function(p1)
 			-- upvalues: p0 (ref), getViewportSize (ref)
 			p0:setState({ screenSize = getViewportSize(p1) })
 		end)
 	end
 end
 
-function onboardingModal.willUnmount(p2) --[[ line: 55 ]]
+function onboardingModal.willUnmount(p2)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeScreenSize then
 		p2.disposeScreenSize()
 	end
 end
 
-function onboardingModal.render(p3) --[[ line: 61 ]]
+function onboardingModal.render(p3)
 	-- upvalues: withLocalization (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), buttonStack (ref), buttonType (ref), themedTextLabelModule (ref)
 	return withLocalization({
 		mainHeader = "CoreScripts.Feedback.Onboarding.MainHeader",
 		instructionLabel = "CoreScripts.Feedback.Onboarding.Instructions",
 		cancel = "CoreScripts.Feedback.Onboarding.Cancel",
 		start = "CoreScripts.Feedback.Onboarding.Start"
-	})(function(p4) --[[ line: 67 ]]
+	})(function(p4)
 		-- upvalues: roactModule (copy), modalDialogModule (copy), p3 (ref), fFlagTopBarSignalizeScreenSize (copy), buttonStack (copy), buttonType (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(modalDialogModule, {
 			maxHeight = 200,
@@ -104,16 +104,16 @@ function onboardingModal.render(p3) --[[ line: 61 ]]
 	end)
 end
 
-return roactRoduxModule.connect(function(p5) --[[ line: 126 ]]
+return roactRoduxModule.connect(function(p5)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	return {
 		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p5.displayOptions.screenSize,
 		visible = p5.common.showOnboardingModal
 	}
-end, function(p6) --[[ line: 131 ]]
+end, function(p6)
 	-- upvalues: showOnboardingModalThunkModule (ref)
 	return {
-		showOnboardingModal = function(p7) --[[ line: 133 ]]
+		showOnboardingModal = function(p7)
 			-- upvalues: p6 (ref), showOnboardingModalThunkModule (copy)
 			p6(showOnboardingModalThunkModule(p7))
 		end

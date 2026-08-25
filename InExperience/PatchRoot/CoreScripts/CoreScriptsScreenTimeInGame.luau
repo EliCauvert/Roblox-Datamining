@@ -10,7 +10,7 @@ local getFFlagScreenTimeSignalR = screenTimeModule.GetFFlagScreenTimeSignalR
 local logging = require(corePackagesService.Workspace.Packages.AppCommonLib).Logging
 local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
 
-local function _() --[[ line: 16 | named "leaveGame" ]]
+local function _()
 	-- upvalues: guiService (ref)
 	guiService.SelectedCoreObject = nil
 	game:Shutdown()
@@ -20,7 +20,7 @@ local _ = { Warning = 1, Lockout = 2, OpenWebView = 3 }
 local var6 = httpRequests:new(httpService)
 local robloxEventReceivedConnection = nil
 
-local _ = function() --[[ line: 32 | named "disconnectAndLeaveGame" ]]
+local _ = function()
 	-- upvalues: robloxEventReceivedConnection (write), guiService (ref)
 	if robloxEventReceivedConnection then
 		robloxEventReceivedConnection:Disconnect()
@@ -35,7 +35,7 @@ local t = {
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p0, p1) --[[ line: 53 ]]
+	update = function(p0, p1)
 		for i, v in pairs(p1) do
 			table.insert(p0.pendingResolveMessage, {
 				id = v.serialId,
@@ -46,7 +46,7 @@ local t = {
 		end
 		p0:processNext()
 	end,
-	processNext = function(p2) --[[ line: 66 ]]
+	processNext = function(p2)
 		if p2.displaying then return end
 		local removed = table.remove(p2.pendingResolveMessage, 1)
 		
@@ -62,7 +62,7 @@ local t = {
 			p2.displayMessageCallback(removed.message)
 		end
 	end,
-	resolve = function(p3) --[[ line: 88 ]]
+	resolve = function(p3)
 		-- upvalues: var6 (ref)
 		p3.resolvedMessage[p3.displaying.id] = p3.displaying.message
 		var6:reportExecution(p3.displaying.instructionName, p3.displaying.id)
@@ -82,7 +82,7 @@ local list = {
 		LocalizationKey = "InGame.CommonUI.Button.Ok",
 		LayoutOrder = 1,
 		Primary = true,
-		Callback = function() --[[ line: 112 ]]
+		Callback = function()
 			-- upvalues: default (ref), t (ref)
 			default:_close()
 			t:resolve()
@@ -90,7 +90,7 @@ local list = {
 	}
 }
 
-function t.displayMessage(p4) --[[ line: 108 ]]
+function t.displayMessage(p4)
 	-- upvalues: default (ref)
 	default:_open(p4)
 end
@@ -99,7 +99,7 @@ default:updateButtons(list)
 default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
 local x = robloxGui.AbsoluteSize.X
 local y = robloxGui.AbsoluteSize.Y
-robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ line: 135 | named "onScreenSizeChanged" ]]
+robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
 	-- upvalues: default (ref), robloxGui (ref), x (write), y (write)
 	if not default then return end
 	local x_1 = robloxGui.AbsoluteSize.X
@@ -120,7 +120,7 @@ if default then
 		default:resizeWidthAndHeight(x_1, y_1)
 	end
 end
-local function x_1(p5) --[[ line: 151 | named "screenTimeStatesUpdated" ]]
+local function x_1(p5)
 	-- upvalues: robloxEventReceivedConnection (write), guiService (ref), t (ref)
 	local t_1 = {}
 	
@@ -141,9 +141,9 @@ local function x_1(p5) --[[ line: 151 | named "screenTimeStatesUpdated" ]]
 	t:update(t_1)
 end
 
-local _ = function() --[[ line: 170 | named "requestInstructions" ]]
+local _ = function()
 	-- upvalues: var6 (ref), x_1 (ref), logging (ref)
-	var6:getInstructions(function(p6, p7, p8) --[[ line: 171 ]]
+	var6:getInstructions(function(p6, p7, p8)
 		-- upvalues: x_1 (copy), logging (copy)
 		if p6 then
 			x_1(p8)
@@ -158,11 +158,11 @@ local _ = function() --[[ line: 170 | named "requestInstructions" ]]
 	end)
 end
 
-robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p9) --[[ line: 183 ]]
+robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p9)
 	-- upvalues: getFFlagScreenTimeSignalR (ref), constants (ref), var6 (ref), x_1 (ref), logging (ref), robloxEventReceivedConnection (write), guiService (ref), httpService (ref)
 	if getFFlagScreenTimeSignalR() then
 		if p9.namespace == constants.SIGNALR_NAMESPACE and p9.detailType == constants.SIGNALR_TYPE_NEW_INSTRUCTION then
-			var6:getInstructions(function(p10, p11, p12) --[[ line: 171 ]]
+			var6:getInstructions(function(p10, p11, p12)
 				-- upvalues: x_1 (copy), logging (copy)
 				if p10 then
 					x_1(p12)
@@ -189,7 +189,7 @@ robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(
 			
 			return
 		else
-			local ok, status = pcall(function() --[[ line: 198 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpService (copy), p9 (ref)
 				return httpService:JSONDecode(p9.detail)
 			end)
@@ -205,7 +205,7 @@ robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(
 			end
 			for i, v in ipairs(status.notifications) do
 				if v.type == constants.HEARTBEAT_NOTIFICATION_TYPE_NEW_INSTRUCTION then
-					var6:getInstructions(function(p13, p14, p15) --[[ line: 171 ]]
+					var6:getInstructions(function(p13, p14, p15)
 						-- upvalues: x_1 (copy), logging (copy)
 						if p13 then
 							x_1(p15)

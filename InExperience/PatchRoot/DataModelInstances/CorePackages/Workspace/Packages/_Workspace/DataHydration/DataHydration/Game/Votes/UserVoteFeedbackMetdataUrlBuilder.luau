@@ -12,7 +12,7 @@ return {
 		channel = "experience-discovery-page",
 		serviceRoute = getFStringEdpPlayerFeedbackServiceRoute()
 	}),
-	buildUserVoteFeedbackMetadataUrl = function(p0) --[[ line: 22 ]]
+	buildUserVoteFeedbackMetadataUrl = function(p0)
 		-- upvalues: urlBuilder (ref), url (ref), getFStringEdpPlayerFeedbackServiceRoute (ref)
 		return urlBuilder.new({
 			path = "{serviceRoute}/v1/channels/{channel}/assets/{rootPlaceId}",

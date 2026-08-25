@@ -3,7 +3,7 @@ local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
 
-return function(p0, p1) --[[ line: 9 | named "validateMaterials" ]]
+return function(p0, p1)
 	-- upvalues: constantsModule (ref), analyticsModule (ref)
 	local t = {}
 	local descendants = p0:GetDescendants()

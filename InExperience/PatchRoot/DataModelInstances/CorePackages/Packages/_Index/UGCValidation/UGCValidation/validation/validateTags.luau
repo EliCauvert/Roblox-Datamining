@@ -3,7 +3,7 @@ local parent = script.Parent.Parent
 local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 
-return function(p0, p1) --[[ line: 8 | named "validateTags" ]]
+return function(p0, p1)
 	-- upvalues: collectionService (ref), analyticsModule (ref)
 	local descendants = p0:GetDescendants()
 	table.insert(descendants, p0)

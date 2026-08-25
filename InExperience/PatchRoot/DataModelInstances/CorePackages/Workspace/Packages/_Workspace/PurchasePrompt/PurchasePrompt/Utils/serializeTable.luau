@@ -1,4 +1,4 @@
-﻿local function serializeTable(p0, p1, p2, p3) --[[ line: 3 ]]
+﻿local function serializeTable(p0, p1, p2, p3)
 	-- upvalues: serializeTable (ref)
 	p2 = p2 or false
 	p3 = p3 or 0

@@ -13,12 +13,12 @@ local loadingStagesExtensionModule = require(profilePlatform.Analytics.LoadingSt
 local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0) --[[ line: 24 | named "CTAButtonRowContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useMapJsonToButtonListModule (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), useProfileAnalyticsContextModule (ref), useEffectOnMount (ref), socialStopwatchModule (ref), eventNamesModule (ref), loadingStagesExtensionModule (ref), reactModule (ref), CTAButtonsRowModule (ref), horizontalPageMargin (ref)
 	local var10 = useMapJsonToButtonListModule(useProfileWrapperContextModule().profileId)
 	local var11 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
 	local var12 = useProfileAnalyticsContextModule()
-	useEffectOnMount(function() --[[ line: 30 ]]
+	useEffectOnMount(function()
 		-- upvalues: socialStopwatchModule (copy), var12 (ref), eventNamesModule (copy), loadingStagesExtensionModule (copy)
 		local var13 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
 		var12.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {

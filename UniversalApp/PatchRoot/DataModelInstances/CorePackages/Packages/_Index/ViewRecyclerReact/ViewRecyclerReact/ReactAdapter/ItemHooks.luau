@@ -3,17 +3,17 @@ local reactModule = require(viewRecyclerReact.Parent.React)
 local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
 local t = {
-	useItemValue = function(p0) --[[ line: 68 ]]
+	useItemValue = function(p0)
 		-- upvalues: signalsReactModule (ref)
 		return signalsReactModule.useSignalState(p0)
 	end
 }
 
-local function _(p1) --[[ line: 20 | named "initialize" ]]
+local function _(p1)
 	return if type(p1) == "function" then p1() else p1
 end
 
-local function useRecyclingToken(p2) --[[ line: 24 ]]
+local function useRecyclingToken(p2)
 	-- upvalues: reactModule (ref), signalsModule (ref)
 	local _, var6 = reactModule.useState(0)
 	local var7 = reactModule.useRef({})
@@ -33,9 +33,9 @@ local function useRecyclingToken(p2) --[[ line: 24 ]]
 		var7.current = list
 		var8.current = {}
 	end
-	reactModule.useLayoutEffect(function() --[[ line: 42 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: signalsModule (copy), p2 (ref), var7 (ref), var8 (ref), var6 (ref)
-		return signalsModule.createEffect(function(p3) --[[ line: 43 ]]
+		return signalsModule.createEffect(function(p3)
 			-- upvalues: p2 (copy), var7 (copy), var8 (copy), var6 (copy)
 			local list = table.create(#p2)
 			local var13 = #var7.current ~= #p2
@@ -51,7 +51,7 @@ local function useRecyclingToken(p2) --[[ line: 24 ]]
 			if var13 then
 				var7.current = list
 				var8.current = {}
-				var6(function(p4) --[[ line: 56 ]]
+				var6(function(p4)
 					return p4 + 1
 				end)
 			end
@@ -61,10 +61,10 @@ local function useRecyclingToken(p2) --[[ line: 24 ]]
 	return var8.current
 end
 
-function t.useRecyclingState(p5, p6, p7) --[[ line: 74 ]]
+function t.useRecyclingState(p5, p6, p7)
 	-- upvalues: useRecyclingToken (ref), reactModule (ref)
 	local var15 = useRecyclingToken(p6)
-	local var16, var17 = reactModule.useState(function() --[[ line: 80 ]]
+	local var16, var17 = reactModule.useState(function()
 		-- upvalues: var15 (ref), p5 (ref)
 		return {
 			token = var15,
@@ -83,7 +83,7 @@ function t.useRecyclingState(p5, p6, p7) --[[ line: 74 ]]
 	local var20 = reactModule.useRef(false)
 	local var21 = reactModule.useRef(p7)
 	var21.current = p7
-	reactModule.useLayoutEffect(function() --[[ line: 99 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var20 (ref), var21 (ref)
 		if var20.current then
 			local current = var21.current
@@ -100,9 +100,9 @@ function t.useRecyclingState(p5, p6, p7) --[[ line: 74 ]]
 		end
 	end, { var15 })
 	
-	return var18_1.value, reactModule.useCallback(function(p8) --[[ line: 111 ]]
+	return var18_1.value, reactModule.useCallback(function(p8)
 		-- upvalues: var17 (ref), var15 (ref)
-		var17(function(p9) --[[ line: 112 ]]
+		var17(function(p9)
 			-- upvalues: var15 (copy), p8 (ref)
 			return if p9.token == var15 then {
 				token = p9.token,
@@ -112,10 +112,10 @@ function t.useRecyclingState(p5, p6, p7) --[[ line: 74 ]]
 	end, { var15 })
 end
 
-function t.useRecyclingSignal(value, p10, p11) --[[ line: 126 ]]
+function t.useRecyclingSignal(value, p10, p11)
 	-- upvalues: useRecyclingToken (ref), reactModule (ref), signalsModule (ref)
 	local var22 = useRecyclingToken(p10)
-	local var23 = reactModule.useState(function() --[[ line: 132 ]]
+	local var23 = reactModule.useState(function()
 		-- upvalues: signalsModule (copy), value (ref), var22 (ref)
 		local var26, var27 = signalsModule.createSignal(if type(value) == "function" then value() else value)
 		
@@ -129,7 +129,7 @@ function t.useRecyclingSignal(value, p10, p11) --[[ line: 126 ]]
 	local var24 = reactModule.useRef(false)
 	local var25 = reactModule.useRef(p11)
 	var25.current = p11
-	reactModule.useLayoutEffect(function() --[[ line: 148 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var24 (ref), var25 (ref)
 		if var24.current then
 			local current = var25.current
@@ -146,7 +146,7 @@ function t.useRecyclingSignal(value, p10, p11) --[[ line: 126 ]]
 		end
 	end, { var22 })
 	
-	return var23.getter, reactModule.useCallback(function(p12) --[[ line: 160 ]]
+	return var23.getter, reactModule.useCallback(function(p12)
 		-- upvalues: var23 (ref), var22 (ref)
 		if var23.token == var22 then
 			var23.setter(p12)
@@ -154,20 +154,20 @@ function t.useRecyclingSignal(value, p10, p11) --[[ line: 126 ]]
 	end, { var22, var23 })
 end
 
-function t.useItemBinding(p13, p14) --[[ line: 170 ]]
+function t.useItemBinding(p13, p14)
 	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var28, var29 = reactModule.useBinding(reactModule.useMemo(function() --[[ line: 171 ]]
+	local var28, var29 = reactModule.useBinding(reactModule.useMemo(function()
 		-- upvalues: p14 (ref), p13 (ref)
 		return p14(p13(false), false)
 	end, { p13, p14 }))
-	reactModule.useLayoutEffect(function() --[[ line: 176 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: p14 (ref), p13 (ref), var28 (ref), var29 (ref), signalsModule (copy)
 		local var30 = p14(p13(false), false)
 		
 		if var30 ~= var28:getValue() then
 			var29(var30)
 		end
-		return signalsModule.createEffect(function(p15) --[[ line: 182 ]]
+		return signalsModule.createEffect(function(p15)
 			-- upvalues: p14 (copy), p13 (copy), var30 (write), var29 (copy)
 			local var31 = p14(p13(p15), p15)
 			

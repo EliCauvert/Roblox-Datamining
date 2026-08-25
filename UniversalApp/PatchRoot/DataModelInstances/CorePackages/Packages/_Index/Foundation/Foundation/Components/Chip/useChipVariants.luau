@@ -5,7 +5,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 17 ]]
+local function variantsFactory(p0)
 	-- upvalues: chipSizeModule (ref), chipVariantModule (ref)
 	return {
 		common = {
@@ -58,7 +58,7 @@ local function variantsFactory(p0) --[[ line: 17 ]]
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6) --[[ line: 75 ]]
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local chip = variantsContextModule.useVariants("Chip", variantsFactory, p1)
 	

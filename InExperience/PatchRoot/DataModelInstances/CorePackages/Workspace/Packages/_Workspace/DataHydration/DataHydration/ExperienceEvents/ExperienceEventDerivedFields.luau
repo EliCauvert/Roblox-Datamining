@@ -6,7 +6,7 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local experienceEventTypesModule = require(script.Parent.ExperienceEventTypes)
 local eventStatusCheckIntervalSec = game:DefineFastInt("EventStatusCheckIntervalSec", 30)
 
-local function _(p0) --[[ line: 21 | named "parseIsoDateTime" ]]
+local function _(p0)
 	if not p0 then
 		return nil
 	end
@@ -15,7 +15,7 @@ local function _(p0) --[[ line: 21 | named "parseIsoDateTime" ]]
 	return if ok and status ~= nil then status else nil
 end
 
-local function enrichWithTimestamps(p1) --[[ line: 32 ]]
+local function enrichWithTimestamps(p1)
 	local var8, ok
 	local eventStart = p1.eventStart
 	
@@ -40,7 +40,7 @@ local function enrichWithTimestamps(p1) --[[ line: 32 ]]
 	return p1
 end
 
-local function deriveFormattedStartDate(p2, p3) --[[ line: 41 ]]
+local function deriveFormattedStartDate(p2, p3)
 	-- upvalues: localizationService (ref)
 	local var10
 	local eventStart = p2.eventStart
@@ -61,7 +61,7 @@ end
 
 local eventStatus = experienceEventTypesModule.EventStatus
 
-local function deriveFormattedRelativeTime(p4, p5, p6) --[[ line: 69 ]]
+local function deriveFormattedRelativeTime(p4, p5, p6)
 	-- upvalues: createCurrentTimeSignal (ref), eventStatusCheckIntervalSec (ref), deriveFormattedStartDate (ref)
 	local eventStartTimestamp = p4.eventStartTimestamp
 	local eventEndTimestamp = p4.eventEndTimestamp
@@ -99,7 +99,7 @@ local function deriveFormattedRelativeTime(p4, p5, p6) --[[ line: 69 ]]
 	end
 end
 
-local function deriveEventStatus(p7, p8) --[[ line: 122 ]]
+local function deriveEventStatus(p7, p8)
 	-- upvalues: eventStatus (ref), createCurrentTimeSignal (ref), eventStatusCheckIntervalSec (ref)
 	local eventStartTimestamp = p7.eventStartTimestamp
 	
@@ -112,14 +112,14 @@ local function deriveEventStatus(p7, p8) --[[ line: 122 ]]
 	return if var16 < eventStartTimestamp then if eventStartTimestamp - var16 <= 14400 then eventStatus.UpcomingImminent else eventStatus.Upcoming elseif eventEndTimestamp and eventEndTimestamp <= var16 then eventStatus.Elapsed elseif eventEndTimestamp and eventEndTimestamp - var16 <= 14400 then eventStatus.ElapsedImminent else eventStatus.Ongoing
 end
 
-local _ = function(p9, p10) --[[ line: 145 | named "deriveIsActive" ]]
+local _ = function(p9, p10)
 	-- upvalues: deriveEventStatus (ref), eventStatus (ref)
 	local var17 = deriveEventStatus(p9, p10)
 	
 	return if var17 ~= eventStatus.Ongoing then var17 == eventStatus.ElapsedImminent else true
 end
 
-local function deriveShareUrl(p11) --[[ line: 150 ]]
+local function deriveShareUrl(p11)
 	-- upvalues: urlBuilder (ref)
 	local id = p11.id
 	
@@ -128,7 +128,7 @@ end
 
 return {
 	enrichWithTimestamps = enrichWithTimestamps,
-	calculateDerivedField = function(p12, p13, p14, p15) --[[ line: 159 ]]
+	calculateDerivedField = function(p12, p13, p14, p15)
 		-- upvalues: deriveFormattedStartDate (ref), deriveEventStatus (ref), eventStatus (ref), deriveFormattedRelativeTime (ref), deriveShareUrl (ref)
 		if not p13 then
 			return nil

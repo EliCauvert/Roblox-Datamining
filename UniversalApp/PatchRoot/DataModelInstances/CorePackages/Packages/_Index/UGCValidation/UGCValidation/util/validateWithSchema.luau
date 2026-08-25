@@ -1,6 +1,6 @@
 ﻿local getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule = require(script.Parent.Parent.flags.getFFlagUGCValidationExtendSchemaToIgnoreDescendants)
 
-local function _(p0, p1) --[[ line: 7 | named "checkName" ]]
+local function _(p0, p1)
 	if type(p0) == "table" then
 		for i, v in pairs(p0) do
 			if v == p1 then
@@ -12,11 +12,11 @@ local function _(p0, p1) --[[ line: 7 | named "checkName" ]]
 	end
 end
 
-local _ = function(p2) --[[ line: 20 | named "getReadableName" ]]
+local _ = function(p2)
 	return if type(p2) == "table" then table.concat(p2, " or ") elseif type(p2) == "string" then p2 else "*"
 end
 
-local function validateWithSchemaHelper(p3, p4, p5) --[[ line: 29 ]]
+local function validateWithSchemaHelper(p3, p4, p5)
 	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), validateWithSchemaHelper (ref)
 	local v
 	if p4.ClassName == p3.ClassName then
@@ -85,7 +85,7 @@ local function validateWithSchemaHelper(p3, p4, p5) --[[ line: 29 ]]
 	end
 end
 
-return function(p6, p7, _) --[[ line: 90 | named "validateWithSchema" ]]
+return function(p6, p7, _)
 	-- upvalues: validateWithSchemaHelper (ref)
 	local name_1
 	if p7.ClassName == p6.ClassName then

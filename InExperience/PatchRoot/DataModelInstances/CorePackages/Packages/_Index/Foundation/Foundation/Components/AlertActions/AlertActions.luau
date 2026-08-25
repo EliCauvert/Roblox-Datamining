@@ -12,16 +12,16 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local MAX_ACTION_COUNT = require(script.Parent.AlertConstants).MAX_ACTION_COUNT
 local t = { testId = "--foundation-alert-actions" }
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "AlertActions" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), MAX_ACTION_COUNT (ref), loggerModule (ref), dashModule (ref), inputSizeModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var10 = withDefaultsModule(p0, t)
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), MAX_ACTION_COUNT (copy), loggerModule (copy)
 		if var10.actions and MAX_ACTION_COUNT < #var10.actions then
 			loggerModule:warning(`Alert components only support up to {MAX_ACTION_COUNT} actions`)
 		end
 	end, { var10.actions })
-	local var11 = reactModule.useMemo(function() --[[ line: 41 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var10 (ref), MAX_ACTION_COUNT (copy), dashModule (copy), inputSizeModule (copy), reactModule (copy), buttonModule (copy)
 		if not var10.actions or #var10.actions <= 0 then
 			return nil

@@ -17,9 +17,9 @@ local fFlagExpChatNewInputBarModule = require(expChat.Flags.FFlagExpChatNewInput
 local getFFlagExpChatAlwaysRunTCS = sharedFlagsModule.getFFlagExpChatAlwaysRunTCS
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 
-function getChatWindowEnabled() --[[ line: 25 ]]
+function getChatWindowEnabled()
 	-- upvalues: textChatService (ref)
-	local ok, status = pcall(function() --[[ line: 26 ]]
+	local ok, status = pcall(function()
 		-- upvalues: textChatService (copy)
 		local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -29,9 +29,9 @@ function getChatWindowEnabled() --[[ line: 25 ]]
 	return ok and status
 end
 
-function getChatTranslationEnabled() --[[ line: 38 ]]
+function getChatTranslationEnabled()
 	-- upvalues: textChatService (ref)
-	local ok, status = pcall(function() --[[ line: 39 ]]
+	local ok, status = pcall(function()
 		-- upvalues: textChatService (copy)
 		return textChatService.ChatTranslationEnabled
 	end)
@@ -39,9 +39,9 @@ function getChatTranslationEnabled() --[[ line: 38 ]]
 	return ok and status
 end
 
-function getChatTranslationToggleEnabled() --[[ line: 46 ]]
+function getChatTranslationToggleEnabled()
 	-- upvalues: textChatService (ref)
-	local ok, status = pcall(function() --[[ line: 47 ]]
+	local ok, status = pcall(function()
 		-- upvalues: textChatService (copy)
 		return textChatService.ChatTranslationToggleEnabled
 	end)
@@ -49,10 +49,10 @@ function getChatTranslationToggleEnabled() --[[ line: 46 ]]
 	return ok and status
 end
 
-function shouldShowChatTranslationFTUX() --[[ line: 54 ]]
+function shouldShowChatTranslationFTUX()
 	-- upvalues: textChatService (ref)
 	if game:GetEngineFeature("TextChatServiceSettingsSaved") then
-		local ok, status = pcall(function() --[[ line: 56 ]]
+		local ok, status = pcall(function()
 			-- upvalues: textChatService (copy)
 			return textChatService.ChatTranslationFTUXShown
 		end)
@@ -79,31 +79,31 @@ appContainer.defaultProps = {
 }
 local var17 = nil
 
-function appContainer.init(p0) --[[ line: 86 ]]
+function appContainer.init(p0)
 	p0:setState({
 		showTranslationButton = false,
 		isTextChatServiceEnabled = false
 	})
 end
 
-function appContainer.willUnmount(_) --[[ line: 93 ]]
+function appContainer.willUnmount(_)
 	-- upvalues: var17 (write)
 	var17:Disconnect()
 end
 
-function appContainer.didMount(p1) --[[ line: 97 ]]
+function appContainer.didMount(p1)
 	-- upvalues: textChatService (ref), var17 (write), getFFlagExpChatAlwaysRunTCS (ref)
-	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ line: 98 ]]
+	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 		-- upvalues: p1 (ref)
 		if p1.props.chat.IsAutoMigrated then
 			p1:setState({ isTextChatServiceEnabled = true })
 		end
 	end)
 	
-	local function onTextChatServicePropertyChanged(p2) --[[ line: 106 ]]
+	local function onTextChatServicePropertyChanged(p2)
 		-- upvalues: textChatService (copy), p1 (ref)
 		if p2 == "ChatTranslationEnabled" then
-			local ok, status = pcall(function() --[[ line: 108 ]]
+			local ok, status = pcall(function()
 				-- upvalues: textChatService (copy)
 				return textChatService.ChatTranslationEnabled
 			end)
@@ -117,11 +117,11 @@ function appContainer.didMount(p1) --[[ line: 97 ]]
 				return
 			end
 		elseif p2 == "ChatTranslationToggleEnabled" then
-			local ok, _ = pcall(function() --[[ line: 120 ]]
+			local ok, _ = pcall(function()
 				-- upvalues: textChatService (copy)
 				return textChatService.ChatTranslationToggleEnabled
 			end)
-			local ok_1, status = pcall(function() --[[ line: 124 ]]
+			local ok_1, status = pcall(function()
 				-- upvalues: textChatService (copy)
 				return textChatService.ChatTranslationEnabled
 			end)
@@ -146,7 +146,7 @@ function appContainer.didMount(p1) --[[ line: 97 ]]
 	})
 end
 
-function appContainer.render(p3) --[[ line: 152 ]]
+function appContainer.render(p3)
 	-- upvalues: roactModule (ref), bubbleChatModule (ref), clientSettingsModule (ref), appLayoutModule (ref), fFlagExpChatUseMessagesStore (ref), isChatRegionLockedModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref), getFFlagChatTranslationShowFTUXModule (ref), var14 (ref), chatTranslationFTUXModule (ref)
 	local isTextChatServiceEnabled = p3.state.isTextChatServiceEnabled
 	local var20 = roactModule.createElement(bubbleChatModule, {

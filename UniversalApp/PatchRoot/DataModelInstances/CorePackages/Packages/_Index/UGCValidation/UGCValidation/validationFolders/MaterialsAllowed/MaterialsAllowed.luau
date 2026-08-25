@@ -15,7 +15,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function buildAcceptedMaterialList() --[[ line: 24 ]]
+local function buildAcceptedMaterialList()
 	-- upvalues: constantsModule (ref)
 	local t = {}
 	
@@ -25,7 +25,7 @@ local function buildAcceptedMaterialList() --[[ line: 24 ]]
 	return table.concat(t, ", ")
 end
 
-function t.run(p0, p1) --[[ line: 32 ]]
+function t.run(p0, p1)
 	-- upvalues: constantsModule (ref), buildAcceptedMaterialList (ref), errorSourceStringsModule (ref)
 	local rootInstance = p1.rootInstance
 	local descendants = rootInstance:GetDescendants()

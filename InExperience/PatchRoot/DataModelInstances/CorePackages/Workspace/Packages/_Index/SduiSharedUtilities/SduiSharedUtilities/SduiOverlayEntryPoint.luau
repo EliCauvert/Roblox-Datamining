@@ -2,7 +2,7 @@
 local reactModule = require(sduiSharedUtilities.Parent.React)
 local sduiFeatureEntryPointModule = require(sduiSharedUtilities.SduiFeatureEntryPoint)
 
-return function(p0) --[[ line: 12 | named "SduiOverlayEntryPoint" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), sduiFeatureEntryPointModule (ref)
 	return reactModule.createElement(sduiFeatureEntryPointModule, {
 		shouldDisplayLoading = false,

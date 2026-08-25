@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 4 | named "getAQEmotePartData" ]]
+﻿return function(p0)
 	if not p0 then
 		return nil
 	end

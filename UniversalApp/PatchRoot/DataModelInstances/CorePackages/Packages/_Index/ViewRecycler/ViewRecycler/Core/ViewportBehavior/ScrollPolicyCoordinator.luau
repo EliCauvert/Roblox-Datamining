@@ -6,23 +6,23 @@ local _ = require(viewRecycler.Core.Enums.ScrollAlignment)
 local _ = require(viewRecycler.Core.Types)
 local initialScrollPositionModule = require(script.Parent.InitialScrollPosition)
 
-return function(p0) --[[ line: 38 | named "createScrollPolicyCoordinator" ]]
+return function(p0)
 	-- upvalues: initialScrollPositionModule (ref), autoScrollModule (ref), paginationEdgesModule (ref), autoScrollPolicyModule (ref)
 	local var5 = initialScrollPositionModule()
 	local var6 = autoScrollModule.create()
 	local var7 = paginationEdgesModule.create()
 	
-	local function _(p1) --[[ line: 43 | named "applyScrollAnchor" ]]
+	local function _(p1)
 		-- upvalues: p0 (ref)
 		p0.applyScrollAnchorOffset(p1)
 	end
 	
-	local _ = function() --[[ line: 47 | named "updateAutoScrollFromCurrentOffset" ]]
+	local _ = function()
 		-- upvalues: p0 (ref), var6 (ref), autoScrollPolicyModule (copy)
 		var6.onScrollOffsetChanged(p0.getScrollState().atEnd, p0.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
 	end
 	
-	local function checkEdges(p2) --[[ line: 52 ]]
+	local function checkEdges(p2)
 		-- upvalues: p0 (ref), var7 (ref)
 		local onStartReached = p0.getOnStartReached()
 		local onEndReached = p0.getOnEndReached()
@@ -55,7 +55,7 @@ return function(p0) --[[ line: 38 | named "createScrollPolicyCoordinator" ]]
 	
 	return {
 		checkEdges = checkEdges,
-		onContentLengthChanged = function(p3) --[[ line: 84 ]]
+		onContentLengthChanged = function(p3)
 			-- upvalues: p0 (ref), var6 (ref)
 			local viewportState = p0.getViewportState()
 			
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 38 | named "createScrollPolicyCoordinator" ]]
 				p0.onContentLengthChanged(p3)
 			end
 		end,
-		onDataSourceChanged = function(p4, p5) --[[ line: 97 ]]
+		onDataSourceChanged = function(p4, p5)
 			-- upvalues: var5 (ref), p0 (ref), var6 (ref), autoScrollModule (copy), checkEdges (ref), paginationEdgesModule (copy)
 			local var16 = var5.onDataSourceChange(p0.getItemCount(), p0.getInitialScrollAlignment(), p0.getScrollOffsetForItem)
 			
@@ -88,12 +88,12 @@ return function(p0) --[[ line: 38 | named "createScrollPolicyCoordinator" ]]
 			end
 			checkEdges(paginationEdgesModule.hasStructuralChange(p4))
 		end,
-		onDataSourceReplaced = function() --[[ line: 123 ]]
+		onDataSourceReplaced = function()
 			-- upvalues: var5 (ref), p0 (ref), var6 (ref), autoScrollPolicyModule (copy)
 			p0.applyScrollAnchorOffset(var5.onDataSourceReplaced(p0.getItemCount(), p0.getInitialScrollAlignment(), p0.getScrollOffsetForItem))
 			var6.onScrollOffsetChanged(p0.getScrollState().atEnd, p0.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
 		end,
-		onViewportChanged = function() --[[ line: 134 ]]
+		onViewportChanged = function()
 			-- upvalues: p0 (ref), var5 (ref), var6 (ref), autoScrollPolicyModule (copy)
 			local itemCount = p0.getItemCount()
 			
@@ -106,7 +106,7 @@ return function(p0) --[[ line: 38 | named "createScrollPolicyCoordinator" ]]
 			end
 			var6.onScrollOffsetChanged(p0.getScrollState().atEnd, p0.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
 		end,
-		onScrollOffsetChanged = function() --[[ line: 152 ]]
+		onScrollOffsetChanged = function()
 			-- upvalues: p0 (ref), var6 (ref), autoScrollPolicyModule (copy)
 			var6.onScrollOffsetChanged(p0.getScrollState().atEnd, p0.getAutoScrollPolicy() == autoScrollPolicyModule.WhenAtEnd)
 		end

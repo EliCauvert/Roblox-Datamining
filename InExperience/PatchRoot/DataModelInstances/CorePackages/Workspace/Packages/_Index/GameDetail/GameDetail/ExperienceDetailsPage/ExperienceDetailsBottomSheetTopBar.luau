@@ -7,19 +7,19 @@ local iconName = foundationModule.Enums.IconName
 local buttonSize = foundationModule.Enums.ButtonSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-return function(p0) --[[ line: 29 | named "ExperienceDetailsBottomSheetTopBar" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), roactNavigationModule (ref), foundationModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref)
 	local tokens = p0.tokens
 	local navigation = p0.navigation
 	local var3, var4 = reactModule.useBinding(0)
 	local var5, var6 = reactModule.useBinding(false)
 	local var7 = tokens.Padding.Small + tokens.Size.Size_100
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var4 (ref), var7 (ref)
 		local current = p0.sheetContentRef.current
 		
 		if current then
-			local function updateTopBarState() --[[ line: 46 ]]
+			local function updateTopBarState()
 				-- upvalues: current (ref), p0 (copy), var7 (copy), var4 (copy)
 				var4(1 - math.clamp((math.ceil(current.AbsolutePosition.Y) + p0.deviceInsets.top - p0.topBarHeight - var7) / math.max(p0.fullH - p0.briefH, 1), 0, 1))
 			end
@@ -27,7 +27,7 @@ return function(p0) --[[ line: 29 | named "ExperienceDetailsBottomSheetTopBar" ]
 			var4(1 - math.clamp((math.ceil(current.AbsolutePosition.Y) + p0.deviceInsets.top - p0.topBarHeight - var7) / math.max(p0.fullH - p0.briefH, 1), 0, 1))
 			local var9 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateTopBarState)
 			
-			return function() --[[ line: 60 ]]
+			return function()
 				-- upvalues: var9 (ref)
 				var9:Disconnect()
 			end
@@ -37,19 +37,19 @@ return function(p0) --[[ line: 29 | named "ExperienceDetailsBottomSheetTopBar" ]
 		p0.overlayFrame, p0.deviceInsets.top, p0.topBarHeight, var7, p0.fullH,
 		p0.briefH
 	})
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), navigation (ref), roactNavigationModule (copy)
 		var6(navigation.isFocused())
-		local var10 = navigation.addListener(roactNavigationModule.Events.WillFocus, function() --[[ line: 70 ]]
+		local var10 = navigation.addListener(roactNavigationModule.Events.WillFocus, function()
 			-- upvalues: var6 (copy)
 			var6(true)
 		end)
-		local var11 = navigation.addListener(roactNavigationModule.Events.WillBlur, function() --[[ line: 74 ]]
+		local var11 = navigation.addListener(roactNavigationModule.Events.WillBlur, function()
 			-- upvalues: var6 (copy)
 			var6(false)
 		end)
 		
-		return function() --[[ line: 78 ]]
+		return function()
 			-- upvalues: var10 (ref), var11 (ref)
 			var10.remove()
 			var11.remove()
@@ -72,7 +72,7 @@ return function(p0) --[[ line: 29 | named "ExperienceDetailsBottomSheetTopBar" ]
 			Position = UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 0, p0.topBarHeight),
 			BackgroundColor3 = tokens.Color.Surface.Surface_0.Color3,
-			GroupTransparency = if p0.shouldMountAsFullView then 0 else var3:map(function(p1) --[[ line: 100 ]]
+			GroupTransparency = if p0.shouldMountAsFullView then 0 else var3:map(function(p1)
 				return 1 - p1
 			end),
 			BorderColor3 = tokens.Color.Common.Shimmer.Color3

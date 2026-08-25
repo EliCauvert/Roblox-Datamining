@@ -2,7 +2,7 @@
 local roduxModule = require(parent.Parent.Rodux)
 local roduxNetworkingModule = require(parent.Networking.RoduxNetworking)
 
-return function() --[[ line: 6 ]]
+return function()
 	-- upvalues: roduxModule (ref), roduxNetworkingModule (ref)
 	return roduxModule.combineReducers({ NetworkStatus = roduxNetworkingModule.installReducer() })
 end

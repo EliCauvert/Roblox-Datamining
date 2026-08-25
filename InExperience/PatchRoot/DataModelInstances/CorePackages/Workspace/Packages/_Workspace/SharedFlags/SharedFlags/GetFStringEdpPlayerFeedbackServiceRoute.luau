@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("EdpPlayerFeedbackServiceRoute", "asset-reviews-api")
 
-return function() --[[ line: 4 ]]
+return function()
 	return game:GetFastString("EdpPlayerFeedbackServiceRoute")
 end

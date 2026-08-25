@@ -5,7 +5,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 
-local function _(p0) --[[ line: 15 | named "splitInputType" ]]
+local function _(p0)
 	local var7 = p0.UserInputType == Enum.UserInputType.Touch
 	local var8 = p0.UserInputType == Enum.UserInputType.MouseButton1
 	local var9 = p0.UserInputType == Enum.UserInputType.MouseButton2
@@ -27,7 +27,7 @@ interactionFrame.validateProps = tModule.interface({
 	ZIndex = tModule.optional(tModule.number)
 })
 
-function interactionFrame.disconnectEvents(p1) --[[ line: 43 ]]
+function interactionFrame.disconnectEvents(p1)
 	p1.inputChangedConnection:Disconnect()
 	p1.inputEndedConnection:Disconnect()
 	p1.renderSteppedConnection:Disconnect()
@@ -36,7 +36,7 @@ function interactionFrame.disconnectEvents(p1) --[[ line: 43 ]]
 	p1.renderSteppedConnection = nil
 end
 
-function interactionFrame.getActiveInput(p2, p3) --[[ line: 52 ]]
+function interactionFrame.getActiveInput(p2, p3)
 	local var10 = p3.UserInputType == Enum.UserInputType.Touch
 	local var11 = p3.UserInputType == Enum.UserInputType.MouseMovement or (p3.UserInputType == Enum.UserInputType.MouseButton1 or p3.UserInputType == Enum.UserInputType.MouseButton2)
 	
@@ -53,7 +53,7 @@ function interactionFrame.getActiveInput(p2, p3) --[[ line: 52 ]]
 	return var12
 end
 
-function interactionFrame.removeActivePointerInput(p4, p5, p6) --[[ line: 71 ]]
+function interactionFrame.removeActivePointerInput(p4, p5, p6)
 	-- upvalues: userInputService (ref)
 	if p6 then
 		if not userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then return end
@@ -69,7 +69,7 @@ function interactionFrame.removeActivePointerInput(p4, p5, p6) --[[ line: 71 ]]
 	end
 end
 
-function interactionFrame.handleDoubleTap(p7, p8, p9) --[[ line: 94 ]]
+function interactionFrame.handleDoubleTap(p7, p8, p9)
 	if p7.lastPrimaryPointerInputBeganPosition then
 		if p7.props.doubleTap and (p7.lastPrimaryPointerInputBeganPosition - p8.Position).Magnitude < 30 and p9 - p7.lastPrimaryPointerInputBeganTime < 0.25 then
 			p7.props.doubleTap()
@@ -79,7 +79,7 @@ function interactionFrame.handleDoubleTap(p7, p8, p9) --[[ line: 94 ]]
 	p7.lastPrimaryPointerInputBeganTime = p9
 end
 
-function interactionFrame.addActivePointerInput(p10, p11, p12, p13) --[[ line: 112 ]]
+function interactionFrame.addActivePointerInput(p10, p11, p12, p13)
 	-- upvalues: cryoModule (ref), userInputService (ref), runService (ref)
 	if p10:getActiveInput(p11) then return end
 	local t = { lastPosition = p11.Position, lastTime = p13 }
@@ -103,7 +103,7 @@ function interactionFrame.addActivePointerInput(p10, p11, p12, p13) --[[ line: 1
 	end
 end
 
-function interactionFrame.init(p14) --[[ line: 141 ]]
+function interactionFrame.init(p14)
 	-- upvalues: userInputService (ref)
 	p14.inputChangedConnection = nil
 	p14.inputEndedConnection = nil
@@ -116,21 +116,21 @@ function interactionFrame.init(p14) --[[ line: 141 ]]
 	p14.activeMouseInput = nil
 	p14.numActiveInputs = 0
 	
-	function p14.handleScroll(_, p15) --[[ line: 156 ]]
+	function p14.handleScroll(_, p15)
 		-- upvalues: p14 (ref), userInputService (copy)
 		if p15.UserInputType == Enum.UserInputType.MouseWheel then
 			p14.props.zoomToPoint(-p15.Position.Z, userInputService:GetMouseLocation())
 		end
 	end
 	
-	function p14.setInputNotChanged(_) --[[ line: 163 ]]
+	function p14.setInputNotChanged(_)
 		-- upvalues: p14 (ref)
 		for i, v in p14.activeTouchInputs do
 			v.changedThisFrame = false
 		end
 	end
 	
-	function p14.onInputChanged(p16, _) --[[ line: 169 ]]
+	function p14.onInputChanged(p16, _)
 		-- upvalues: p14 (ref), userInputService (copy)
 		local var14 = p16.UserInputType == Enum.UserInputType.MouseMovement
 		local var15 = p16.UserInputType == Enum.UserInputType.Touch
@@ -168,7 +168,7 @@ function interactionFrame.init(p14) --[[ line: 141 ]]
 		end
 	end
 	
-	function p14.onInputEnded(p17, _) --[[ line: 221 ]]
+	function p14.onInputEnded(p17, _)
 		-- upvalues: p14 (ref)
 		local var22 = p17.UserInputType == Enum.UserInputType.Touch
 		local var23 = p17.UserInputType == Enum.UserInputType.MouseButton1
@@ -197,7 +197,7 @@ function interactionFrame.init(p14) --[[ line: 141 ]]
 		p14:removeActivePointerInput(p17, var23_1)
 	end
 	
-	function p14.onInputBegan(p18, p19) --[[ line: 259 ]]
+	function p14.onInputBegan(p18, p19)
 		-- upvalues: p14 (ref)
 		p14.handleScroll(p18, p19)
 		local var29 = p19.UserInputType == Enum.UserInputType.Touch
@@ -213,7 +213,7 @@ function interactionFrame.init(p14) --[[ line: 141 ]]
 		p14:addActivePointerInput(p19, var30_1, currentTime)
 	end
 	
-	function p14.onTouchPinch(_, p20, _, _, p21) --[[ line: 279 ]]
+	function p14.onTouchPinch(_, p20, _, _, p21)
 		-- upvalues: p14 (ref)
 		if p20[2] == nil then return end
 		if p21 == Enum.UserInputState.Begin then
@@ -228,13 +228,13 @@ function interactionFrame.init(p14) --[[ line: 141 ]]
 	end
 end
 
-function interactionFrame.willUnmount(p22) --[[ line: 296 ]]
+function interactionFrame.willUnmount(p22)
 	if p22.inputChangedConnection then
 		p22:disconnectEvents()
 	end
 end
 
-function interactionFrame.render(p23) --[[ line: 302 ]]
+function interactionFrame.render(p23)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

@@ -7,7 +7,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 21 | named "AdCampaignCard" ]]
+return function(p0)
 	-- upvalues: useAdCampaignCardViewModelModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref)
 	local var3 = useAdCampaignCardViewModelModule(p0)
 	

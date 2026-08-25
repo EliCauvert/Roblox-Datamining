@@ -4,15 +4,15 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/console" },
-	clientRun = function() --[[ line: 7 ]]
+	clientRun = function()
 		-- upvalues: starterGuiService (ref)
-		local ok, status = pcall(function() --[[ line: 8 ]]
+		local ok, status = pcall(function()
 			-- upvalues: starterGuiService (copy)
 			return starterGuiService:GetCore("DevConsoleVisible")
 		end)
 		
 		if ok then
-			pcall(function() --[[ line: 12 ]]
+			pcall(function()
 				-- upvalues: starterGuiService (copy), status (ref)
 				starterGuiService:SetCore("DevConsoleVisible", not status)
 			end)

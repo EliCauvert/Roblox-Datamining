@@ -6,7 +6,7 @@ local _ = require(dataHydration.Moments.MomentsStoreTypes)
 local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
 local decodeEmojiSetsModule = require(dataHydration.Moments.Util.decodeEmojiSets)
 
-return function(value) --[[ line: 16 | named "getEmojiSets" ]]
+return function(value)
 	-- upvalues: constructApiUrlModule (ref), httpClientModule (ref), decodeEmojiSetsModule (ref)
 	local var4, var5 = constructApiUrlModule("emoji-api/v1/get-emoji-sets?product=Moments")
 	
@@ -16,7 +16,7 @@ return function(value) --[[ line: 16 | named "getEmojiSets" ]]
 		url = var4,
 		headers = var5,
 		network = value,
-		decode = function(p0) --[[ line: 25 ]]
+		decode = function(p0)
 			-- upvalues: decodeEmojiSetsModule (copy)
 			return decodeEmojiSetsModule.decodeGetEmojiSetsResponse(p0)
 		end

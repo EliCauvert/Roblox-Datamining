@@ -33,14 +33,14 @@ local callbackInputBox = socialLibraries.Components.CallbackInputBox
 local fFlagConnectionsToFriendsRename = require(parent_1.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagSetAliasFixFocusNavigationModule = require(parent.Flags.FFlagSetAliasFixFocusNavigation)
 
-return function(p0) --[[ line: 63 ]]
+return function(p0)
 	-- upvalues: react (ref), useEffectOnce (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagConnectionsToFriendsRename (ref), useAnalytics (ref), eventNames (ref), fFlagSetAliasFixFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), interactiveAlert (ref), fitFrameVertical (ref), fitTextLabel (ref), skeleton (ref), radius (ref), imageSetLabel (ref), images (ref), callbackInputBox (ref), iconSize (ref), buttonType (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var7 = react.useRef(nil)
 	local var8, var9 = react.useState(Vector2.new(0, 0))
 	local var10, var11 = react.useState(p0.alias)
 	local var12 = if p0.alias then utf8.len(p0.alias) or 0 else 0
 	local var13, var14 = react.useState(var12)
-	useEffectOnce(function() --[[ line: 70 ]]
+	useEffectOnce(function()
 		-- upvalues: var11 (ref), p0 (ref), var14 (ref), var12 (ref)
 		var11(p0.alias)
 		var14(var12)
@@ -64,19 +64,19 @@ return function(p0) --[[ line: 63 ]]
 	local var18 = useAnalytics()
 	local var19 = react.useRef(false)
 	local var20 = not p0.hasSaveAliasError
-	local var21 = react.useCallback(function(p1) --[[ line: 100 ]]
+	local var21 = react.useCallback(function(p1)
 		-- upvalues: var8 (ref), var9 (ref)
 		if var8.X ~= p1.AbsoluteSize.X then
 			var9(p1.AbsoluteSize)
 		end
 	end, { var8 })
 	
-	local var22 = function() --[[ line: 106 ]]
+	local var22 = function()
 		-- upvalues: p0 (ref), var10 (ref)
 		p0.saveOnActivated(var10)
 	end
 	
-	local var23 = function() --[[ line: 110 ]]
+	local var23 = function()
 		-- upvalues: var18 (ref), eventNames (copy), p0 (ref)
 		if var18 then
 			var18.fireAnalyticsEvent(eventNames.CustomizeNameModalClosed)
@@ -84,7 +84,7 @@ return function(p0) --[[ line: 63 ]]
 		p0.cancelOnActivated()
 	end
 	
-	local var24 = function(p2) --[[ line: 117 ]]
+	local var24 = function(p2)
 		-- upvalues: var13 (ref), var10 (ref), var7 (ref), var14 (ref), var11 (ref), p0 (ref), var18 (ref), eventNames (copy), var19 (ref)
 		local charCount = utf8.len(p2)
 		
@@ -119,7 +119,7 @@ return function(p0) --[[ line: 63 ]]
 		screenSize = p0.screenSize,
 		anchorPoint = Vector2.new(0.5, 0),
 		position = UDim2.new(0.5, 0, 0, var8.Y),
-		middleContent = function() --[[ line: 184 ]]
+		middleContent = function()
 			-- upvalues: react (copy), fitFrameVertical (copy), var21 (ref), fitTextLabel (copy), var8 (ref), font (ref), var17 (ref), theme (ref), p0 (ref), skeleton (copy), var16 (ref), radius (copy), imageSetLabel (copy), images (copy), callbackInputBox (copy), iconSize (copy), var24 (ref), var7 (ref), var13 (ref)
 			return react.createElement(fitFrameVertical, {
 				BackgroundTransparency = 1,
@@ -273,11 +273,11 @@ return function(p0) --[[ line: 63 ]]
 		isAutoFocusRoot = true,
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventHandlers = if fFlagSetAliasFixFocusNavigationModule then react.useMemo(function() --[[ line: 167 ]]
+		eventHandlers = if fFlagSetAliasFixFocusNavigationModule then react.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var18 (ref), eventNames (copy), p0 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p3) --[[ line: 170 ]]
+					handler = inputHandlersModule.onRelease(function(p3)
 						-- upvalues: var18 (copy), eventNames (copy), p0 (copy)
 						if var18 then
 							var18.fireAnalyticsEvent(eventNames.CustomizeNameModalClosed)

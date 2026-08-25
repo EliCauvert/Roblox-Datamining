@@ -21,7 +21,7 @@ local t = {
 	style = require(appChat.SocialLibraries).Components.TestStyle
 }
 
-return reactModule.memo(function(p0) --[[ line: 62 | named "StyledCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), presenceBubbleCellModule (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local style = var5.style

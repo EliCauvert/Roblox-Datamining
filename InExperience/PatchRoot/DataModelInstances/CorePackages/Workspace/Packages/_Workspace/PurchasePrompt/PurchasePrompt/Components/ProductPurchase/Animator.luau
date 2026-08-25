@@ -13,7 +13,7 @@ name.validateProps = t.interface({
 	onHidden = t.optional(t.callback)
 })
 
-function name.init(p0) --[[ line: 26 ]]
+function name.init(p0)
 	-- upvalues: roact (ref), otter (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), t_1 (ref)
 	local var3, var4 = roact.createBinding(1)
 	p0.motor = otter.createSingleMotor(1)
@@ -22,7 +22,7 @@ function name.init(p0) --[[ line: 26 ]]
 	p0.animationProgress = var3
 	p0.setProgress = var4
 	
-	function p0.onComplete() --[[ line: 36 ]]
+	function p0.onComplete()
 		-- upvalues: p0 (ref)
 		if p0.props.shouldShow then
 			if p0.props.onShown then
@@ -41,7 +41,7 @@ function name.init(p0) --[[ line: 26 ]]
 	if fFlagEnableUnifiedProductPurchaseFlow and p0.props.skipAnimation then
 		p0.motor:stop()
 		var4(var5)
-		task.defer(function() --[[ line: 54 ]]
+		task.defer(function()
 			-- upvalues: p0 (ref)
 			p0.onComplete()
 		end)
@@ -51,7 +51,7 @@ function name.init(p0) --[[ line: 26 ]]
 	p0.motor:setGoal(otter.spring(var5, t_1))
 end
 
-function name.didUpdate(p1, p2, _) --[[ line: 62 ]]
+function name.didUpdate(p1, p2, _)
 	-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (ref), otter (ref), t_1 (ref)
 	if p2.shouldShow ~= p1.props.shouldShow or fFlagEnableUnifiedProductPurchaseFlow and p2.skipAnimation ~= p1.props.skipAnimation then
 		local var6 = if p1.props.shouldShow then 0 else 1
@@ -59,7 +59,7 @@ function name.didUpdate(p1, p2, _) --[[ line: 62 ]]
 		if fFlagEnableUnifiedProductPurchaseFlow and p1.props.skipAnimation then
 			p1.motor:stop()
 			p1.setProgress(var6)
-			task.defer(function() --[[ line: 72 ]]
+			task.defer(function()
 				-- upvalues: p1 (ref)
 				p1.onComplete()
 			end)
@@ -70,13 +70,13 @@ function name.didUpdate(p1, p2, _) --[[ line: 62 ]]
 	end
 end
 
-function name.render(p3) --[[ line: 81 ]]
+function name.render(p3)
 	-- upvalues: roact (ref)
 	return roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Position = p3.animationProgress:map(function(p4) --[[ line: 86 ]]
+		Position = p3.animationProgress:map(function(p4)
 			return UDim2.new(0, 0, -1 * p4, 0)
 		end)
 	}, p3.props[roact.Children])

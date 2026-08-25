@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-return function(vectorA) --[[ line: 21 | named "splitDottedPath" ]]
+return function(vectorA)
 	-- upvalues: t (ref)
 	local var1 = t[vectorA]
 	

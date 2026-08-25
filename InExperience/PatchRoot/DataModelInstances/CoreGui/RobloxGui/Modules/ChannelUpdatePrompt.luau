@@ -6,9 +6,9 @@ local appUpdateService = game:GetService("AppUpdateService")
 local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function _(p0, p1, p2) --[[ line: 21 | named "translateOrFallback" ]]
+local function _(p0, p1, p2)
 	-- upvalues: robloxTranslatorModule (ref)
-	local ok, status = pcall(function() --[[ line: 22 ]]
+	local ok, status = pcall(function()
 		-- upvalues: robloxTranslatorModule (copy), p0 (ref), p2 (ref)
 		return robloxTranslatorModule:FormatByKey(p0, p2)
 	end)
@@ -16,17 +16,17 @@ local function _(p0, p1, p2) --[[ line: 21 | named "translateOrFallback" ]]
 	return if ok then status else p1
 end
 
-local function performUpdate() --[[ line: 28 ]]
+local function performUpdate()
 	-- upvalues: appUpdateService (ref)
 	appUpdateService:PerformManagedUpdate()
 end
 
-local _ = function(p3, p4) --[[ line: 32 | named "resolveUpdateName" ]]
+local _ = function(p3, p4)
 	return if p3 == "BetaProgram" then p4.betaProgramName elseif p3 == "BoundChannel" then p4.channelName else nil
 end
 
 return {
-	init = function() --[[ line: 43 ]]
+	init = function()
 		-- upvalues: errorPromptModule (ref), robloxGui (ref), robloxTranslatorModule (ref), performUpdate (ref), notificationService (ref), httpService (ref), appUpdateService (ref)
 		local default = errorPromptModule.new("Default", {
 			MessageTextScaled = true,
@@ -35,7 +35,7 @@ return {
 		})
 		default:setParent(robloxGui)
 		
-		local function showUpdatePrompt(p5, p6) --[[ line: 57 ]]
+		local function showUpdatePrompt(p5, p6)
 			-- upvalues: robloxTranslatorModule (copy), default (ref)
 			p6 = p6 or ""
 			local var10 = nil
@@ -44,7 +44,7 @@ return {
 				local text = "An update is required for the Beta Program you are in: \"" .. p6 .. "\"."
 				local t = { RBX_NAME = p6 }
 				local var13 = "InGame.ChannelUpdatePrompt.Message.BetaProgram"
-				local ok, status = pcall(function() --[[ line: 22 ]]
+				local ok, status = pcall(function()
 					-- upvalues: robloxTranslatorModule (copy), var13 (ref), t (ref)
 					return robloxTranslatorModule:FormatByKey(var13, t)
 				end)
@@ -53,7 +53,7 @@ return {
 				local text = "An update is required for the channel you are bound to: \"" .. p6 .. "\"."
 				local t = { RBX_NAME = p6 }
 				local var16 = "InGame.ChannelUpdatePrompt.Message.BoundChannel"
-				local ok, status = pcall(function() --[[ line: 22 ]]
+				local ok, status = pcall(function()
 					-- upvalues: robloxTranslatorModule (copy), var16 (ref), t (ref)
 					return robloxTranslatorModule:FormatByKey(var16, t)
 				end)
@@ -78,7 +78,7 @@ return {
 		default:setErrorTitle("Update Required", "InGame.CommonUI.Title.UpdateRequired")
 		local x = robloxGui.AbsoluteSize.X
 		local y = robloxGui.AbsoluteSize.Y
-		robloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 95 | named "onScreenSizeChanged" ]]
+		robloxGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: robloxGui (copy), x (write), y (write), default (ref)
 			local x_1 = robloxGui.AbsoluteSize.X
 			local y_1 = robloxGui.AbsoluteSize.Y
@@ -95,7 +95,7 @@ return {
 		if x ~= ok or y ~= y_1 then
 			default:resizeWidthAndHeight(ok, y_1)
 		end
-		notificationService.RobloxEventReceived:Connect(function(p7) --[[ line: 108 ]]
+		notificationService.RobloxEventReceived:Connect(function(p7)
 			-- upvalues: httpService (copy), showUpdatePrompt (ref)
 			if p7.namespace == "ChannelUpdateRequired" then
 				local detail = httpService:JSONDecode(p7.detail)
@@ -103,11 +103,11 @@ return {
 				showUpdatePrompt(detail.updateType, if updateType == "BetaProgram" then detail.betaProgramName elseif updateType == "BoundChannel" then detail.channelName else nil)
 			end
 		end)
-		ok, status = pcall(function() --[[ line: 117 ]]
+		ok, status = pcall(function()
 			-- upvalues: appUpdateService (copy)
 			return appUpdateService:GetProtocolLaunchUpdateType()
 		end)
-		local ok_1, status_1 = pcall(function() --[[ line: 120 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: appUpdateService (copy)
 			return appUpdateService:GetProtocolLaunchUpdateName()
 		end)

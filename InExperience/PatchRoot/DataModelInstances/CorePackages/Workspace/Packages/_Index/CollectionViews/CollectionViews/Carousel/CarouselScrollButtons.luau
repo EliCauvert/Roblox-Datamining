@@ -8,14 +8,14 @@ local icon = foundationModule.Icon
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function ScrollButton(p0) --[[ line: 41 ]]
+local function ScrollButton(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), icon (ref), iconSize (ref)
 	return reactModule.createElement(view, {
 		tag = "size-1000 radius-circle bg-over-media-100",
 		AnchorPoint = p0.AnchorPoint,
 		Position = p0.Position,
 		Visible = p0.Visible,
-		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 43 ]]
+		onStateChanged = reactModule.useCallback(function(p1)
 			-- upvalues: controlState (copy), p0 (ref)
 			if p1 == controlState.Hover or p1 == controlState.Pressed then
 				if p0.onScrollButtonEnter then
@@ -39,7 +39,7 @@ local function ScrollButton(p0) --[[ line: 41 ]]
 	})
 end
 
-return function(p2) --[[ line: 73 | named "CarouselScrollButtons" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), reactIsModule (ref), ScrollButton (ref)
 	local buttonOffsetFromEdge = p2.buttonOffsetFromEdge or 0
 	local var5, var6 = reactModule.useState(false)
@@ -53,11 +53,11 @@ return function(p2) --[[ line: 73 | named "CarouselScrollButtons" ]]
 		ZIndex = p2.ZIndex or 10,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Event.MouseEnter] = reactModule.useCallback(function() --[[ line: 100 ]]
+		[reactModule.Event.MouseEnter] = reactModule.useCallback(function()
 			-- upvalues: var6 (ref)
 			var6(true)
 		end, {}),
-		[reactModule.Event.MouseLeave] = reactModule.useCallback(function() --[[ line: 103 ]]
+		[reactModule.Event.MouseLeave] = reactModule.useCallback(function()
 			-- upvalues: var6 (ref)
 			var6(false)
 		end, {})
@@ -66,7 +66,7 @@ return function(p2) --[[ line: 73 | named "CarouselScrollButtons" ]]
 			icon = "chevron-large-left",
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0, buttonOffsetFromEdge, 0.5, 0),
-			Visible = if reactIsModule.isBinding(p2.leftScrollingEnabled) then p2.leftScrollingEnabled:map(function(p3) --[[ line: 81 ]]
+			Visible = if reactIsModule.isBinding(p2.leftScrollingEnabled) then p2.leftScrollingEnabled:map(function(p3)
 				-- upvalues: var5 (ref)
 				return var5 and p3
 			end) else var5 and p2.leftScrollingEnabled,
@@ -78,7 +78,7 @@ return function(p2) --[[ line: 73 | named "CarouselScrollButtons" ]]
 			icon = "chevron-large-right",
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, -buttonOffsetFromEdge, 0.5, 0),
-			Visible = if reactIsModule.isBinding(p2.rightScrollingEnabled) then p2.rightScrollingEnabled:map(function(p4) --[[ line: 92 ]]
+			Visible = if reactIsModule.isBinding(p2.rightScrollingEnabled) then p2.rightScrollingEnabled:map(function(p4)
 				-- upvalues: var5 (ref)
 				return var5 and p4
 			end) else var5 and p2.rightScrollingEnabled,

@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.SduiCompat)
 
-local function normalizeAvatars(p0) --[[ line: 26 ]]
+local function normalizeAvatars(p0)
 	if typeof(p0) ~= "table" then
 		return nil
 	end
@@ -27,7 +27,7 @@ local function normalizeAvatars(p0) --[[ line: 26 ]]
 	return t
 end
 
-return reactModule.memo(function(p1) --[[ line: 52 | named "SduiAvatarGroup" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: normalizeAvatars (ref), reactModule (ref), foundationModule (ref)
 	local var6 = normalizeAvatars(p1.avatars)
 	

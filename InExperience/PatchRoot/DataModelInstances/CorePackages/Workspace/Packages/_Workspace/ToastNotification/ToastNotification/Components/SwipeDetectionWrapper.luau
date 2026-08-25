@@ -1,14 +1,14 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local reactModule = require(script.Parent.Parent.Parent.React)
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), userInputService (ref)
 	local var2 = reactModule.createRef()
 	local var3, var4 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 23 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), userInputService (copy), var2 (ref), var4 (ref), var3 (ref)
 		if p0.swipeEnabled and p0.swipeCallback then
-			local touchStartedConnection = userInputService.TouchStarted:Connect(function(p1) --[[ line: 29 ]]
+			local touchStartedConnection = userInputService.TouchStarted:Connect(function(p1)
 				-- upvalues: var2 (copy), var4 (copy)
 				local current = var2 and var2.current
 				
@@ -19,18 +19,18 @@ return function(p0) --[[ line: 19 ]]
 					var4(true)
 				end
 			end)
-			local touchEndedConnection = userInputService.TouchEnded:Connect(function() --[[ line: 46 ]]
+			local touchEndedConnection = userInputService.TouchEnded:Connect(function()
 				-- upvalues: var4 (copy)
 				var4(false)
 			end)
-			local var7 = if var3 then userInputService.TouchSwipe:Connect(function(p2) --[[ line: 50 ]]
+			local var7 = if var3 then userInputService.TouchSwipe:Connect(function(p2)
 				-- upvalues: var3 (copy), p0 (copy)
 				if var3 then
 					p0.swipeCallback(p2)
 				end
 			end) else nil
 			
-			return function() --[[ line: 57 ]]
+			return function()
 				-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), var7 (ref)
 				touchStartedConnection:Disconnect()
 				touchEndedConnection:Disconnect()

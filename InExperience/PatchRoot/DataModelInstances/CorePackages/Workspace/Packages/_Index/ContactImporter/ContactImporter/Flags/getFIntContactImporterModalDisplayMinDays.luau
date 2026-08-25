@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("ContactImporterModalDisplayMinDays", 7)
 
-return function() --[[ line: 2 ]]
+return function()
 	return game:GetFastInt("ContactImporterModalDisplayMinDays")
 end

@@ -26,7 +26,7 @@ local t_2 = {
 }
 
 return {
-	buildAndValidateCollectionAnalyticsData = function(p0, p1, p2, p3, p4, p5, _, p6, p7) --[[ line: 41 ]]
+	buildAndValidateCollectionAnalyticsData = function(p0, p1, p2, p3, p4, p5, _, p6, p7)
 		-- upvalues: cryoModule (ref), t (ref), unifiedLoggingModule (ref), validateInterfaceModule (ref), sduiErrorsModule (ref), t_2 (ref)
 		local var8 = cryoModule.Dictionary.join(p1 or t, p2 or t)
 		var8.collectionId = tonumber(var8.collectionId) or var8.collectionId
@@ -43,7 +43,7 @@ return {
 		end
 		return var8
 	end,
-	buildAndValidateItemAnalyticsData = function(p8, p9, p10, p11, p12, p13) --[[ line: 74 ]]
+	buildAndValidateItemAnalyticsData = function(p8, p9, p10, p11, p12, p13)
 		-- upvalues: cryoModule (ref), t (ref), unifiedLoggingModule (ref), validateInterfaceModule (ref), sduiErrorsModule (ref), t_1 (ref)
 		local var11 = cryoModule.Dictionary.join(p10 or t, p9 or t, p11 or t)
 		local var12, var13 = validateInterfaceModule(var11, unifiedLoggingModule.SduiAnalyticsTypes.ItemAnalyticsDataInterface, true)

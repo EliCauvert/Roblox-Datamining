@@ -7,7 +7,7 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local text = require(parent.AppCommonLib).Text
 local t = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), text (ref), styledTextLabel (ref)
 	local var4 = cryoModule.Dictionary.join(t, p0)
 	local var5 = useStyle()
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 25 ]]
 		text = var4.name,
 		fontStyle = font.CaptionHeader,
 		colorStyle = var5.Theme.TextEmphasis,
-		size = UDim2.fromOffset(var4.width, reactModule.useMemo(function() --[[ line: 32 ]]
+		size = UDim2.fromOffset(var4.width, reactModule.useMemo(function()
 			-- upvalues: text (copy), var4 (ref), font (ref)
 			return text.GetTextHeight(var4.name, font.CaptionHeader.Font, font.BaseSize * font.CaptionHeader.RelativeSize, 10000)
 		end, {

@@ -7,7 +7,7 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
 local refreshChartsSortDetailGenre = chartsModule.refreshChartsSortDetailGenre
 
-local function _(p0, p1, p2) --[[ line: 19 | named "reportInvalidActionParams" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
 	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.RefreshChartsSortDetail,
@@ -16,7 +16,7 @@ local function _(p0, p1, p2) --[[ line: 19 | named "reportInvalidActionParams" ]
 	}, p0.appPage)
 end
 
-return function(p3, _, p4) --[[ line: 27 | named "SduiRefreshChartsSortDetailAction" ]]
+return function(p3, _, p4)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiLoadTimer (ref), refreshChartsSortDetailGenre (ref)
 	local var3 = if p3 then p3.actionParams else nil
 	
@@ -64,7 +64,7 @@ return function(p3, _, p4) --[[ line: 27 | named "SduiRefreshChartsSortDetailAct
 	})
 	
 	if var5 then
-		var5:finally(function() --[[ line: 71 ]]
+		var5:finally(function()
 			-- upvalues: chartsSortDetail (ref)
 			chartsSortDetail.logRefreshComplete()
 		end)

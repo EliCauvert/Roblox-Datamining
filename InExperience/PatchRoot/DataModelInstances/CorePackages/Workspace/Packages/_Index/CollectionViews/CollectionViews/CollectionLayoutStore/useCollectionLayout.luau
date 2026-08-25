@@ -8,7 +8,7 @@ local collectionItemSize = require(collectionViews.CollectionViewTypes).Collecti
 local collectionLayoutStoreContextModule = require(collectionViews.CollectionLayoutStore.CollectionLayoutStoreContext)
 local getMainCollectionLayoutStoreModule = require(collectionViews.CollectionLayoutStore.getMainCollectionLayoutStore)
 
-return function(p0) --[[ line: 23 | named "useCollectionLayout" ]]
+return function(p0)
 	-- upvalues: foundationModule (ref), collectionItemSize (ref), appCompositionModule (ref), reactModule (ref), collectionLayoutStoreContextModule (ref), getMainCollectionLayoutStoreModule (ref), signalsReactModule (ref)
 	local var7 = foundationModule.Hooks.useTokens()
 	p0 = p0 or collectionItemSize.Small
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 23 | named "useCollectionLayout" ]]
 	local var10 = reactModule.useContext(collectionLayoutStoreContextModule) or getMainCollectionLayoutStoreModule(false)
 	local var11 = signalsReactModule.useSignalState(var10.getItemsPerRow[p0])
 	
-	return reactModule.useMemo(function() --[[ line: 33 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var9 (ref), var7 (ref), var11 (ref), var10 (ref)
 		return {
 			margin = var9.margin,

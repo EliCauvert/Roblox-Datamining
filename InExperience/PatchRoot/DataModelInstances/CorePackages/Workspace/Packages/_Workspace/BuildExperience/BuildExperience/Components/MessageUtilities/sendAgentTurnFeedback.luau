@@ -12,7 +12,7 @@ local t = {
 	lastUpdated = { 2026, 7, 30 }
 }
 
-return function(p0, p1) --[[ line: 24 | named "sendAgentTurnFeedback" ]]
+return function(p0, p1)
 	-- upvalues: debug (ref), telemetryService (ref), t (ref)
 	local t_1 = {
 		action = p0,

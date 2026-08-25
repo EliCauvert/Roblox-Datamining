@@ -11,7 +11,7 @@ return roduxModule.createReducer({
 	AnchorPoint = Vector2.new(0, 0),
 	UIListLayoutVerticalAlignment = Enum.VerticalAlignment.Top
 }, {
-	[require(actions.ChatLayoutHorizontalAlignmentChanged).name] = function(p0, p1) --[[ line: 22 ]]
+	[require(actions.ChatLayoutHorizontalAlignmentChanged).name] = function(p0, p1)
 		-- upvalues: dictionary (ref)
 		local position = p0.Position
 		local anchorPoint = p0.AnchorPoint
@@ -28,7 +28,7 @@ return roduxModule.createReducer({
 		end
 		return dictionary.join(p0, { Position = position, AnchorPoint = anchorPoint })
 	end,
-	[require(actions.ChatLayoutVerticalAlignmentChanged).name] = function(p2, p3) --[[ line: 43 ]]
+	[require(actions.ChatLayoutVerticalAlignmentChanged).name] = function(p2, p3)
 		-- upvalues: y (ref), dictionary (ref)
 		local position = p2.Position
 		local anchorPoint = p2.AnchorPoint

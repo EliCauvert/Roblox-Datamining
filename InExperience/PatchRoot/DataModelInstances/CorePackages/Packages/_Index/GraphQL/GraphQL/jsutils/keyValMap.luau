@@ -1,7 +1,7 @@
 ﻿local map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 
 return {
-	keyValMap = function(p0, p1, p2) --[[ line: 32 ]]
+	keyValMap = function(p0, p1, p2)
 		-- upvalues: map (ref)
 		local var0 = map.new()
 		

@@ -12,7 +12,7 @@ local completionDataToRawHeadersModule = require(genericChallenges.Utils.complet
 local enableRejectPromiseOnWebviewClosed = game:DefineFastFlag("EnableRejectPromiseOnWebviewClosed", false)
 local _ = require(genericChallenges.Parent.LuauPolyfill)
 
-return function(p0) --[[ line: 41 ]]
+return function(p0)
 	-- upvalues: challengeWebViewModule (ref), getLocalizedTitleModule (ref), enableRejectPromiseOnWebviewClosed (ref), constantsModule (ref), buildHybridCallbackModule (ref), buildCredentialsProtocolHookModule (ref), challengeErrorModule (ref), errorKindModule (ref), completionDataToRawHeadersModule (ref), initializeHybridCallbackModule (ref)
 	if p0.rawResponseHeaders == nil then
 		assert(p0.callbacks ~= nil, "Callbacks must be specified in manual challenge mode")
@@ -27,24 +27,24 @@ return function(p0) --[[ line: 41 ]]
 		local var14 = false
 		var13:setHybridCallback(buildHybridCallbackModule({
 			Hooks = { buildCredentialsProtocolHookModule() },
-			OnChallengeLoadFailed = function(p1) --[[ line: 128 ]]
+			OnChallengeLoadFailed = function(p1)
 				-- upvalues: p0 (ref), var13 (ref)
 				p0.callbacks.OnChallengeLoadFailed(p1)
 				var13:close()
 			end,
-			OnChallengeInvalidated = function(p2) --[[ line: 132 ]]
+			OnChallengeInvalidated = function(p2)
 				-- upvalues: p0 (ref), var13 (ref)
 				p0.callbacks.OnChallengeInvalidated(p2)
 				var13:close()
 			end,
-			OnChallengeCompleted = function(p3) --[[ line: 136 ]]
+			OnChallengeCompleted = function(p3)
 				-- upvalues: var14 (write), p0 (ref), var13 (ref)
 				var14 = true
 				p0.callbacks.OnChallengeCompleted(p3)
 				var13:close()
 			end
 		}))
-		var13:setCloseCallback(function() --[[ line: 142 ]]
+		var13:setCloseCallback(function()
 			-- upvalues: var14 (write), p0 (ref)
 			if not var14 and p0.callbacks.OnChallengeAbandoned ~= nil then
 				p0.callbacks.OnChallengeAbandoned()
@@ -73,7 +73,7 @@ return function(p0) --[[ line: 41 ]]
 			local var12 = false
 			var11:setHybridCallback(buildHybridCallbackModule({
 				Hooks = { buildCredentialsProtocolHookModule() },
-				OnChallengeLoadFailed = function(_) --[[ line: 61 ]]
+				OnChallengeLoadFailed = function(_)
 					-- upvalues: p0 (ref), challengeErrorModule (copy), errorKindModule (copy), challengeTypeHeader (ref), var11 (ref)
 					if p0.challengeErrorCallback ~= nil then
 						p0.challengeErrorCallback()
@@ -81,7 +81,7 @@ return function(p0) --[[ line: 41 ]]
 					p0.reject(challengeErrorModule.new(errorKindModule.LoadFailed, { challengeType = challengeTypeHeader }))
 					var11:close()
 				end,
-				OnChallengeInvalidated = function(p4) --[[ line: 70 ]]
+				OnChallengeInvalidated = function(p4)
 					-- upvalues: p0 (ref), challengeErrorModule (copy), errorKindModule (copy), var11 (ref)
 					if p0.challengeErrorCallback ~= nil and p4.data ~= nil then
 						p0.challengeErrorCallback(p4.data)
@@ -89,7 +89,7 @@ return function(p0) --[[ line: 41 ]]
 					p0.reject(challengeErrorModule.new(errorKindModule.Invalidated, p4.data))
 					var11:close()
 				end,
-				OnChallengeCompleted = function(p5) --[[ line: 77 ]]
+				OnChallengeCompleted = function(p5)
 					-- upvalues: p0 (ref), completionDataToRawHeadersModule (copy), challengeIdHeader (ref), var12 (write), var11 (ref)
 					if p5.data ~= nil and p5.data.challengeType ~= nil and p5.data.metadata ~= nil then
 						p0.resolve(p0.retryRequestCallback(completionDataToRawHeadersModule({
@@ -102,7 +102,7 @@ return function(p0) --[[ line: 41 ]]
 					var11:close()
 				end
 			}))
-			var11:setCloseCallback(function() --[[ line: 91 ]]
+			var11:setCloseCallback(function()
 				-- upvalues: var12 (write), p0 (ref), challengeErrorModule (copy), errorKindModule (copy), challengeTypeHeader (ref)
 				if not var12 then
 					p0.reject(challengeErrorModule.new(errorKindModule.Invalidated, { challengeType = challengeTypeHeader }))

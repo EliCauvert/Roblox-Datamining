@@ -19,7 +19,7 @@ local collectionCarousel = collectionViewsModule.CollectionCarousel
 local useCollectionLayoutParams = collectionViewsModule.useCollectionLayoutParams
 local collectionItemSize = collectionViewsModule.CollectionViewTypes.CollectionItemSize
 
-return function(p0) --[[ line: 44 | named "VideoTile" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), useDynamicSizeMarginModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), videoPlaybackCoordinator (ref), useDispatch (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), videoPlayerModule (ref), footerModule (ref), collectionCarousel (ref)
 	local var10, var11 = reactModule.useState(true)
 	local var12 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
@@ -27,25 +27,25 @@ return function(p0) --[[ line: 44 | named "VideoTile" ]]
 	local var14, var15 = reactModule.useState(nil)
 	local var16, var17 = useDynamicSizeMarginModule()
 	local var18 = useCollectionLayoutParams(collectionItemSize.Large, var14, true, { sideMargin = var16 })
-	local var19 = reactModule.useMemo(function() --[[ line: 60 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: videoPlaybackCoordinator (copy)
 		return videoPlaybackCoordinator.new()
 	end, {})
-	local var20 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), var18 (ref)
 		return (if var14 then var14.AbsoluteSize.X else 300) - var18.sideMargin - 60
 	end, { var14 })
-	local var21 = reactModule.useCallback(function(p1) --[[ line: 70 ]]
+	local var21 = reactModule.useCallback(function(p1)
 		-- upvalues: var12 (ref), var20 (ref)
 		return (if var12 then p1 else var20()) * 0.5625 + 32 + 8
 	end, { var12, var20 })
 	local var22 = useDispatch()
 	local var23, var24 = reactModule.useState(0)
-	local var25 = reactModule.useCallback(function(p2) --[[ line: 79 ]]
+	local var25 = reactModule.useCallback(function(p2)
 		-- upvalues: var24 (ref)
 		var24(p2)
 	end, {})
-	local var26 = reactModule.useCallback(function(p3, p4) --[[ line: 84 ]]
+	local var26 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var19 (ref), appPage (copy), var23 (ref), var10 (ref), var11 (ref), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var22 (ref), navigateDown (copy)
 		if p3 then
 			if var19 then
@@ -89,12 +89,12 @@ return function(p0) --[[ line: 44 | named "VideoTile" ]]
 			getItemHeight = var21,
 			items = p0.videos or {},
 			numColumns = if var12 then 3 else 1,
-			onScrollingFrameRefCallback = if var12 then reactModule.useCallback(function(p5) --[[ line: 115 ]]
+			onScrollingFrameRefCallback = if var12 then reactModule.useCallback(function(p5)
 				if p5 then
 					p5.ClipsDescendants = true
 				end
 			end, {}) else nil,
-			renderItem = reactModule.useCallback(function(p6, p7, p8) --[[ line: 122 ]]
+			renderItem = reactModule.useCallback(function(p6, p7, p8)
 				-- upvalues: var12 (ref), var20 (ref), var21 (ref), reactModule (copy), videoPlayerModule (copy), var26 (ref), var25 (ref), var19 (ref), footerModule (copy)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -115,7 +115,7 @@ return function(p0) --[[ line: 44 | named "VideoTile" ]]
 							cornerRadius = 8,
 							isFullscreen = false,
 							looped = false,
-							onExpandCallback = function(p9) --[[ line: 146 ]]
+							onExpandCallback = function(p9)
 								-- upvalues: var26 (copy), p6 (ref)
 								var26(p6, p9)
 							end,

@@ -25,12 +25,12 @@ local getFFlagEnableSocialCards = sharedFlagsModule.GetFFlagEnableSocialCards
 local getConversationMessageViewModelStoreModule = require(appChat.Stores.GetConversationMessageViewModelStore)
 local fFlagAppChatSignalsMessageStoreModule = require(appChat.Flags.FFlagAppChatSignalsMessageStore)
 
-local function _(a, b, p0, p1) --[[ line: 64 | named "determineStatus" ]]
+local function _(a, b, p0, p1)
 	-- upvalues: messageStatus (ref), messageVisibility (ref)
 	return if a then messageStatus.Pending elseif b then messageStatus.Failed elseif p0 then messageStatus.Moderated elseif p1 == messageVisibility.Hidden then messageStatus.Hidden else messageStatus.Default
 end
 
-local function extractLegacyTimestamp(p2) --[[ line: 83 ]]
+local function extractLegacyTimestamp(p2)
 	if p2 == nil or typeof(p2) ~= "table" then
 		return nil
 	elseif p2.ToIsoDate then
@@ -50,7 +50,7 @@ local function extractLegacyTimestamp(p2) --[[ line: 83 ]]
 	end
 end
 
-local function messagesFromWebResponse(p3, p4) --[[ line: 105 ]]
+local function messagesFromWebResponse(p3, p4)
 	-- upvalues: messageModelModule (ref)
 	if p4 == nil then
 		return {}
@@ -72,7 +72,7 @@ local function messagesFromWebResponse(p3, p4) --[[ line: 105 ]]
 	return t
 end
 
-local function buildFromLegacy(p5, p6) --[[ line: 127 ]]
+local function buildFromLegacy(p5, p6)
 	-- upvalues: extractLegacyTimestamp (ref), messageType (ref), getFFlagEnableSocialCards (ref), messageStatus (ref), messageVisibility (ref)
 	return {
 		id = p5.id or p5.messageId,
@@ -99,7 +99,7 @@ local function buildFromLegacy(p5, p6) --[[ line: 127 ]]
 	}
 end
 
-local function clearConversationStores(p7, p8) --[[ line: 159 ]]
+local function clearConversationStores(p7, p8)
 	for i, v in p7.conversationMessageListStore.getOrderedIds(p8) do
 		p7.conversationMessageStore.removeMessage(v)
 	end
@@ -107,14 +107,14 @@ local function clearConversationStores(p7, p8) --[[ line: 159 ]]
 	p7.conversationMessageListStore.clearConversation(p8)
 end
 
-local function ingestConversationsFromResponse(p9, _) --[[ line: 253 ]]
+local function ingestConversationsFromResponse(p9, _)
 	-- upvalues: cryoModule (ref), buildConversationMessageFromApiModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 	if not p9 or not p9.conversations then return end
 	for i, v in p9.conversations do
 		local id = v.id
 		
 		if id and v.messages then
-			ingestBatchModule(id, cryoModule.List.filterMap(v.messages, function(p10) --[[ line: 260 ]]
+			ingestBatchModule(id, cryoModule.List.filterMap(v.messages, function(p10)
 				-- upvalues: buildConversationMessageFromApiModule (copy), id (ref)
 				return if p10 and p10.id then buildConversationMessageFromApiModule(p10, id) else nil
 			end), ingestOperationModule.Prepend)
@@ -123,19 +123,19 @@ local function ingestConversationsFromResponse(p9, _) --[[ line: 253 ]]
 end
 
 local t = {
-	[receivedMessages.name] = function(p11, _) --[[ line: 170 ]]
+	[receivedMessages.name] = function(p11, _)
 		-- upvalues: cryoModule (ref), buildFromLegacy (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 		local conversationId = p11.conversationId
 		local messages = p11.messages
 		
 		if messages and conversationId then
-			ingestBatchModule(conversationId, cryoModule.List.filterMap(messages, function(p12) --[[ line: 174 ]]
+			ingestBatchModule(conversationId, cryoModule.List.filterMap(messages, function(p12)
 				-- upvalues: buildFromLegacy (copy), conversationId (ref)
 				return if p12 and p12.id then buildFromLegacy(p12, conversationId) else nil
 			end), ingestOperationModule.Prepend)
 		end
 	end,
-	[sendingMessage.name] = function(p13, _) --[[ line: 181 ]]
+	[sendingMessage.name] = function(p13, _)
 		-- upvalues: buildFromLegacy (ref), messageStatus (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 		local conversationId = p13.conversationId
 		local message = p13.message
@@ -146,7 +146,7 @@ local t = {
 			ingestBatchModule(conversationId, { var24 }, ingestOperationModule.Prepend)
 		end
 	end,
-	[sentMessage.name] = function(p14, p15) --[[ line: 191 ]]
+	[sentMessage.name] = function(p14, p15)
 		local conversationId = p14.conversationId
 		local messageId = p14.messageId
 		
@@ -155,7 +155,7 @@ local t = {
 			p15.conversationMessageStore.removeMessage(messageId)
 		end
 	end,
-	[messageModerated.name] = function(p16, p17) --[[ line: 200 ]]
+	[messageModerated.name] = function(p16, p17)
 		-- upvalues: messageStatus (ref)
 		local messageId = p16.messageId
 		
@@ -163,7 +163,7 @@ local t = {
 			p17.conversationMessageStore.updateMessage(messageId, { status = messageStatus.Moderated })
 		end
 	end,
-	[messageFailedToSend.name] = function(p18, p19) --[[ line: 207 ]]
+	[messageFailedToSend.name] = function(p18, p19)
 		-- upvalues: messageStatus (ref)
 		local messageId = p18.messageId
 		
@@ -171,57 +171,57 @@ local t = {
 			p19.conversationMessageStore.updateMessage(messageId, { status = messageStatus.Failed })
 		end
 	end,
-	[appChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p20, _) --[[ line: 214 ]]
+	[appChatNetworkingModule.rodux.GetOlderMessages.Succeeded.name] = function(p20, _)
 		-- upvalues: cryoModule (ref), buildConversationMessageFromApiModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 		local conversationId = p20.queryArgs and p20.queryArgs.conversation_id
 		local responseBody = p20.responseBody
 		
 		if conversationId and responseBody and responseBody.messages then
 			local nextCursor = responseBody.next_cursor
-			ingestBatchModule(conversationId, cryoModule.List.filterMap(responseBody.messages, function(p21) --[[ line: 218 ]]
+			ingestBatchModule(conversationId, cryoModule.List.filterMap(responseBody.messages, function(p21)
 				-- upvalues: buildConversationMessageFromApiModule (copy), conversationId (ref)
 				return if p21 and p21.id then buildConversationMessageFromApiModule(p21, conversationId) else nil
 			end), ingestOperationModule.AppendAndAdvanceCursor, if nextCursor == "" then nil else nextCursor)
 		end
 	end,
-	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p22, _) --[[ line: 226 ]]
+	[appChatNetworkingModule.rodux.GetNewerMessages.Succeeded.name] = function(p22, _)
 		-- upvalues: cryoModule (ref), buildConversationMessageFromApiModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 		local conversationId = p22.queryArgs and p22.queryArgs.conversation_id
 		local responseBody = p22.responseBody
 		
 		if conversationId and responseBody and responseBody.messages then
-			ingestBatchModule(conversationId, cryoModule.List.filterMap(responseBody.messages, function(p23) --[[ line: 230 ]]
+			ingestBatchModule(conversationId, cryoModule.List.filterMap(responseBody.messages, function(p23)
 				-- upvalues: buildConversationMessageFromApiModule (copy), conversationId (ref)
 				return if p23 and p23.id then buildConversationMessageFromApiModule(p23, conversationId) else nil
 			end), ingestOperationModule.Prepend)
 		end
 	end,
-	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p24, _) --[[ line: 237 ]]
+	[networkingChatModule.GetLatestMessages.Succeeded.name] = function(p24, _)
 		-- upvalues: messagesFromWebResponse (ref), cryoModule (ref), buildFromLegacy (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 		local responseBody = p24.responseBody
 		
 		if responseBody == nil then return end
 		for i, v in ipairs(responseBody) do
 			local var27 = tostring(v.conversationId)
-			ingestBatchModule(var27, cryoModule.List.filterMap(messagesFromWebResponse(var27, v.chatMessages), function(p25) --[[ line: 246 ]]
+			ingestBatchModule(var27, cryoModule.List.filterMap(messagesFromWebResponse(var27, v.chatMessages), function(p25)
 				-- upvalues: buildFromLegacy (copy), var27 (ref)
 				return if p25 and p25.id then buildFromLegacy(p25, var27) else nil
 			end), ingestOperationModule.Prepend)
 		end
 	end,
-	[appChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p26, p27) --[[ line: 268 ]]
+	[appChatNetworkingModule.rodux.GetUserConversations.Succeeded.name] = function(p26, p27)
 		-- upvalues: ingestConversationsFromResponse (ref)
 		ingestConversationsFromResponse(p26.responseBody, p27)
 	end,
-	[appChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = function(p28, p29) --[[ line: 272 ]]
+	[appChatNetworkingModule.rodux.GetConversationDetails.Succeeded.name] = function(p28, p29)
 		-- upvalues: ingestConversationsFromResponse (ref)
 		ingestConversationsFromResponse(p28.responseBody, p29)
 	end,
-	[appChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = function(p30, p31) --[[ line: 276 ]]
+	[appChatNetworkingModule.rodux.MultiGetConversationDetails.Succeeded.name] = function(p30, p31)
 		-- upvalues: ingestConversationsFromResponse (ref)
 		ingestConversationsFromResponse(p30.responseBody, p31)
 	end,
-	[removedConversationModule.name] = function(p32, p33) --[[ line: 280 ]]
+	[removedConversationModule.name] = function(p32, p33)
 		-- upvalues: clearConversationStores (ref)
 		local conversationId = p32.conversationId
 		
@@ -229,7 +229,7 @@ local t = {
 			clearConversationStores(p33, conversationId)
 		end
 	end,
-	[reloadedMessagesForConversationsModule.name] = function(p34, p35) --[[ line: 287 ]]
+	[reloadedMessagesForConversationsModule.name] = function(p34, p35)
 		-- upvalues: clearConversationStores (ref)
 		local conversationIds = p34.conversationIds
 		
@@ -241,9 +241,9 @@ local t = {
 	end
 }
 
-return function(value, _) --[[ line: 312 | named "SignalsMessageIngestionMiddleware" ]]
+return function(value, _)
 	-- upvalues: fFlagAppChatSignalsMessageStoreModule (ref), t (ref), getConversationMessageViewModelStoreModule (ref)
-	return function(p36) --[[ line: 313 ]]
+	return function(p36)
 		-- upvalues: value (ref), fFlagAppChatSignalsMessageStoreModule (copy), t (copy), getConversationMessageViewModelStoreModule (copy)
 		local var28 = value(p36)
 		

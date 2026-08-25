@@ -9,7 +9,7 @@ local _ = require(parent.util.Types)
 local httpService = game:GetService("HttpService")
 local formattedText = string.format("https://apis.%s", APIUtilModule.getBaseDomain())
 
-local function getWhitelistIds() --[[ line: 35 ]]
+local function getWhitelistIds()
 	-- upvalues: getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref)
 	local t = {}
 	local var9 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
@@ -23,9 +23,9 @@ local function getWhitelistIds() --[[ line: 35 ]]
 	return t
 end
 
-local function createCanPublishPromise(p0, p1, p2, p3, p4) --[[ line: 49 ]]
+local function createCanPublishPromise(p0, p1, p2, p3, p4)
 	-- upvalues: promiseModule (ref), httpService (ref), constantsModule (ref)
-	return if #p1 == 0 then promiseModule.resolve() else promiseModule.new(function(p5, p6) --[[ line: 59 ]]
+	return if #p1 == 0 then promiseModule.resolve() else promiseModule.new(function(p5, p6)
 		-- upvalues: httpService (copy), p1 (ref), p2 (ref), p4 (ref), p0 (ref), constantsModule (copy), p3 (ref)
 		httpService:RequestInternal({
 			Method = "POST",
@@ -35,7 +35,7 @@ local function createCanPublishPromise(p0, p1, p2, p3, p4) --[[ line: 49 ]]
 				[constantsModule.ExperienceAuthHeaderKey] = p3,
 				[constantsModule.ContentType] = constantsModule.ApplicationJson
 			}
-		}):Start(function(p7, p8) --[[ line: 76 ]]
+		}):Start(function(p7, p8)
 			-- upvalues: p5 (ref), httpService (copy), p6 (ref)
 			if p7 and p8.StatusCode == 200 then
 				p5(httpService:JSONDecode(p8.Body))
@@ -47,7 +47,7 @@ local function createCanPublishPromise(p0, p1, p2, p3, p4) --[[ line: 49 ]]
 	end)
 end
 
-return function(value, p9, p10, p11, p12) --[[ line: 86 | named "canPublishAssets" ]]
+return function(value, p9, p10, p11, p12)
 	-- upvalues: formattedText (ref), createCanPublishPromise (ref), promiseModule (ref), getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref), getWhitelistIds (ref)
 	local UGCValidationCanPublishRequestPageSizeFastInt = game:GetFastInt("UGCValidationCanPublishRequestPageSize")
 	local UGCValidationMaxAssetSizeAllowedFastInt = game:GetFastInt("UGCValidationMaxAssetSizeAllowed")

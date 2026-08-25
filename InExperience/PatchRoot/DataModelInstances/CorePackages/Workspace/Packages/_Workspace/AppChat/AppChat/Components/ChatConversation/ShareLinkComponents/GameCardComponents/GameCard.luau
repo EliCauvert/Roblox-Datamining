@@ -30,7 +30,7 @@ gameCard.defaultProps = {
 	viewDetailsEnabled = true
 }
 
-function gameCard.makeButtons(p0, _) --[[ line: 64 ]]
+function gameCard.makeButtons(p0, _)
 	-- upvalues: roactModule (ref), skeleton (ref), radius (ref), playButtonModule (ref), viewDetailsButtonModule (ref)
 	if not p0.props.playabilityStatus then return end
 	local isPlayable = p0.props.playabilityStatus.isPlayable
@@ -46,7 +46,7 @@ function gameCard.makeButtons(p0, _) --[[ line: 64 ]]
 				universeId = p0.props.universeId,
 				text = p0.props.playText,
 				conversationId = p0.props.conversationId,
-				onActivated = function() --[[ line: 88 ]]
+				onActivated = function()
 					-- upvalues: p0 (ref)
 					p0.props.onPlayButtonActivated(p0.props)
 				end,
@@ -57,7 +57,7 @@ function gameCard.makeButtons(p0, _) --[[ line: 64 ]]
 		return {
 			viewDetails = roactModule.createElement(viewDetailsButtonModule, {
 				text = p0.props.viewDetailsText,
-				onActivated = function() --[[ line: 100 ]]
+				onActivated = function()
 					-- upvalues: p0 (ref)
 					p0.props.openDetails(p0.props)
 				end,
@@ -67,9 +67,9 @@ function gameCard.makeButtons(p0, _) --[[ line: 64 ]]
 	end
 end
 
-function gameCard.render(p1) --[[ line: 110 ]]
+function gameCard.render(p1)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), assetCardModule (ref)
-	return UIBloxModule.Style.withStyle(function(p2) --[[ line: 111 ]]
+	return UIBloxModule.Style.withStyle(function(p2)
 		-- upvalues: p1 (ref), roactModule (copy), assetCardModule (copy)
 		if not p1.props.universeId then
 			return roactModule.createElement(assetCardModule, {
@@ -99,7 +99,7 @@ function gameCard.render(p1) --[[ line: 110 ]]
 			cardBodyText = noDescriptionText,
 			cardIcon = p1.props.gameIcon,
 			contentLoadedCallback = p1.props.contentLoadedCallback,
-			bodyActivated = function() --[[ line: 131 ]]
+			bodyActivated = function()
 				-- upvalues: p1 (copy)
 				if p1.props.viewDetailsEnabled then
 					p1.props.openDetails(p1.props)

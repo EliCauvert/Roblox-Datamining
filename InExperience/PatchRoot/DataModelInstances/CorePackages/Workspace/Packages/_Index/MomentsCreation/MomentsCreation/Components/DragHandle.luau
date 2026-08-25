@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
 	local var2 = useTokens()
 	

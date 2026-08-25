@@ -1,6 +1,6 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref)
 	return {
 		Settings = nil,

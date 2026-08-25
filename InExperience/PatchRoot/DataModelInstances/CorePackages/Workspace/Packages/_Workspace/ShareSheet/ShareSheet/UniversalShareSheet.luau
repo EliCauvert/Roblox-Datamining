@@ -2,11 +2,11 @@
 local getUniversalShareSheetStoreModule = require(script.Parent.Stores.GetUniversalShareSheetStore)
 
 return {
-	show = function(p0) --[[ line: 10 ]]
+	show = function(p0)
 		-- upvalues: getUniversalShareSheetStoreModule (ref)
 		getUniversalShareSheetStoreModule().show(p0)
 	end,
-	hide = function() --[[ line: 14 ]]
+	hide = function()
 		-- upvalues: getUniversalShareSheetStoreModule (ref)
 		getUniversalShareSheetStoreModule().hide()
 	end

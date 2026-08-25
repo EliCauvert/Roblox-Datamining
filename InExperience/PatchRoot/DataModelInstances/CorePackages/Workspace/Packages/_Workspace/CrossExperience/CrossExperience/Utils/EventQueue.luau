@@ -4,7 +4,7 @@ local loggerModule = require(crossExperience.Logger)
 local t = {}
 t.__index = t
 
-local function _(p0) --[[ line: 40 | named "getFirstKeyInTable" ]]
+local function _(p0)
 	local var3 = nil
 	
 	if p0 then
@@ -17,7 +17,7 @@ local function _(p0) --[[ line: 40 | named "getFirstKeyInTable" ]]
 	return var3
 end
 
-function t.new(p1) --[[ line: 51 ]]
+function t.new(p1)
 	-- upvalues: t (ref)
 	local t_1 = { queues = {}, requiresEventsInOrder = p1 }
 	setmetatable(t_1, t)
@@ -25,7 +25,7 @@ function t.new(p1) --[[ line: 51 ]]
 	return t_1
 end
 
-function t:processNextEvent(p2, p3) --[[ line: 60 ]]
+function t:processNextEvent(p2, p3)
 	-- upvalues: loggerModule (ref)
 	local var5 = self.queues[p2]
 	
@@ -69,11 +69,11 @@ function t:processNextEvent(p2, p3) --[[ line: 60 ]]
 	end
 end
 
-function t:reset() --[[ line: 98 ]]
+function t:reset()
 	self.queues = {}
 end
 
-function t:process(p4, p5, p6) --[[ line: 102 ]]
+function t:process(p4, p5, p6)
 	-- upvalues: loggerModule (ref)
 	if not p5 then
 		loggerModule:error("EventQueue: invalid event {} params missing", p4.NOTIFY)

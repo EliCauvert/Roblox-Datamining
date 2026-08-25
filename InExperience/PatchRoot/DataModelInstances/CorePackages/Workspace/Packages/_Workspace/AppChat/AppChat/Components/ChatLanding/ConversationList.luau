@@ -59,21 +59,21 @@ conversationList.defaultProps = {
 	canAccessParty = false,
 	focusLock = {},
 	itemList = {},
-	navigateToQuickStartSquadInviteFriends = function() --[[ line: 79 ]] end,
-	navigateToSquadLobby = function() --[[ line: 80 ]] end,
+	navigateToQuickStartSquadInviteFriends = function() end,
+	navigateToSquadLobby = function() end,
 	Size = UDim2.fromScale(1, 1),
-	onScrollUpdate = function() --[[ line: 84 ]] end,
-	dismissUnfilteredThreadsFtux = function() --[[ line: 89 ]] end,
+	onScrollUpdate = function() end,
+	dismissUnfilteredThreadsFtux = function() end,
 	canvasTopPadding = if fFlagAppIaScrollAway then 0 else nil,
-	fireConversationImpressionEvent = function() --[[ line: 91 ]] end,
-	fireConversationClickedEvent = function() --[[ line: 93 ]] end
+	fireConversationImpressionEvent = function() end,
+	fireConversationClickedEvent = function() end
 }
 
-local function _(p0) --[[ line: 97 | named "getIsSquadEnabledForRows" ]]
+local function _(p0)
 	return p0.canAccessParty == true
 end
 
-function conversationList.init(p1) --[[ line: 101 ]]
+function conversationList.init(p1)
 	-- upvalues: conversationList (ref), fFlagAppChatPerfTrackingModule (ref), signal (ref), appPage (ref), constants (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref), partyPageCarouselExperimentation (ref), memoize (ref), enums (ref), roactModule (ref), chatLandingModalContainerModule (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), reactModule (ref), socialCarouselModule (ref), fFlagAppChatSignalsMessageStore (ref), conversationRowModule (ref), conversationEntryModule (ref), focusNavigationService (ref), coreGui (ref), appChatPerfExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), fFlagAppChatTimestampInSubtitleIxpEnabledModule (ref), fStringAppChatTimestampInSubtitleIxpLayerModule (ref)
 	conversationList.ENTRY_HEIGHT = p1.props.entryHeight
 	
@@ -89,7 +89,7 @@ function conversationList.init(p1) --[[ line: 101 ]]
 		scrollViewPositionChangedSignal = p1.scrollViewPositionChangedSignal
 	}
 	
-	function p1.onScrollUpdate(p2) --[[ line: 118 ]]
+	function p1.onScrollUpdate(p2)
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), p1 (ref)
 		if fFlagAppChatPerfTrackingModule and p1.scrollIntervalTracker then
 			p1.scrollIntervalTracker.onScrollTick()
@@ -102,7 +102,7 @@ function conversationList.init(p1) --[[ line: 101 ]]
 	if fFlagAppIaScrollAway and fFlagEnableScrollAwayContentScrollableFix then
 		p1.lastContentHeight = 0
 		
-		function p1.onViewportAbsoluteSizeChange(p3) --[[ line: 131 ]]
+		function p1.onViewportAbsoluteSizeChange(p3)
 			-- upvalues: visibilityControl (copy), p1 (ref)
 			visibilityControl.setContentScrollable(p3.AbsoluteSize.Y < p1.lastContentHeight)
 		end
@@ -110,16 +110,16 @@ function conversationList.init(p1) --[[ line: 101 ]]
 	p1.focusLock = p1.props.focusLock
 	
 	if partyPageCarouselExperimentation.getPartyPageCarouselEnabled() then
-		function p1.navigateToConversationFromSocialCarousel(p4) --[[ line: 139 ]]
+		function p1.navigateToConversationFromSocialCarousel(p4)
 			-- upvalues: p1 (ref)
 			p1.props.navigateToConversationFromUserId(p4.id)
 		end
 	end
-	function p1.identifier(p5) --[[ line: 144 ]]
+	function p1.identifier(p5)
 		return if p5 then p5.id .. tostring(p5.unixTime) else nil
 	end
 	
-	local var30 = memoize(function() --[[ line: 152 ]]
+	local var30 = memoize(function()
 		-- upvalues: enums (copy), p1 (ref)
 		return {
 			{
@@ -133,12 +133,12 @@ function conversationList.init(p1) --[[ line: 101 ]]
 		}
 	end)
 	
-	function p1.isPartyQuickStartEnabled() --[[ line: 165 ]]
+	function p1.isPartyQuickStartEnabled()
 		-- upvalues: p1 (ref)
 		return p1.props.isPartyQuickStartEnabled
 	end
 	
-	function p1.renderItem(p6, _) --[[ line: 170 ]]
+	function p1.renderItem(p6, _)
 		-- upvalues: roactModule (copy), chatLandingModalContainerModule (copy), conversationGroupsEntryContainerModule (copy), p1 (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), reactModule (copy), socialCarouselModule (copy), var30 (ref), constants (copy), fFlagAppIaScrollAway (copy), fFlagAppChatSignalsMessageStore (copy), conversationRowModule (copy), conversationEntryModule (copy)
 		local item = p6.item
 		
@@ -183,7 +183,7 @@ function conversationList.init(p1) --[[ line: 101 ]]
 	p1.initialFetchesAttempted = 0
 	p1.focusNavigationService = focusNavigationService.new(coreGui)
 	
-	function p1.getScrollRef() --[[ line: 243 ]]
+	function p1.getScrollRef()
 		-- upvalues: p1 (ref)
 		if p1.ref.current == nil then
 			return nil
@@ -207,7 +207,7 @@ function conversationList.init(p1) --[[ line: 101 ]]
 	end
 end
 
-function conversationList.didMount(p7) --[[ line: 272 ]]
+function conversationList.didMount(p7)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref)
 	if fFlagAppChatPerfTrackingModule and p7.getScrollRef then
 		local scrollRef = p7.getScrollRef()
@@ -223,7 +223,7 @@ function conversationList.didMount(p7) --[[ line: 272 ]]
 	end
 end
 
-function conversationList.willUnmount(p8) --[[ line: 286 ]]
+function conversationList.willUnmount(p8)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), fFlagAppIaScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref), visibilityControl (ref)
 	if fFlagAppChatPerfTrackingModule and p8.scrollIntervalTracker then
 		p8.scrollIntervalTracker.cleanup()
@@ -234,7 +234,7 @@ function conversationList.willUnmount(p8) --[[ line: 286 ]]
 	p8.focusNavigationService:teardown()
 end
 
-function conversationList.willUpdate(p9, p10, _) --[[ line: 296 ]]
+function conversationList.willUpdate(p9, p10, _)
 	-- upvalues: appChatChatLandingInitialFetchLimit (ref), appChatChatLandingInitialFetchMinimumConversations (ref), name (ref), conversationList (ref)
 	if p10.filterText and p10.filterText ~= "" and p10.filterText ~= p9.props.filterText then
 		p9.focusLock = p10.filterText
@@ -251,7 +251,7 @@ function conversationList.willUpdate(p9, p10, _) --[[ line: 296 ]]
 	end
 end
 
-function conversationList.render(p11) --[[ line: 331 ]]
+function conversationList.render(p11)
 	-- upvalues: cryoModule (ref), partyPageCarouselExperimentation (ref), fFlagAppIaScrollAway (ref), roactModule (ref), fFlagEnableScrollAwayContentScrollableFix (ref), bidirectionalFlatList (ref), appChatPerfChatLandingPaginationWindowSize (ref), appChatPerfChatLandingPaginationInitialRender (ref), name (ref), promiseModule (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref), withStyle (ref)
 	local itemList = p11.props.itemList
 	local var34 = if p11.props.filterText ~= "" then p11.props.filterText == nil else true
@@ -286,7 +286,7 @@ function conversationList.render(p11) --[[ line: 331 ]]
 			}
 		}, itemList)
 	end
-	local var35 = if fFlagAppIaScrollAway then function(_, p12) --[[ line: 389 ]]
+	local var35 = if fFlagAppIaScrollAway then function(_, p12)
 		-- upvalues: p11 (ref)
 		local canvasTopPadding, var37
 		local _ = nil
@@ -305,7 +305,7 @@ function conversationList.render(p11) --[[ line: 331 ]]
 		return { length = canvasTopPadding, offset = var37, index = p12 }
 	end else nil
 	
-	local function renderScroller(p13) --[[ line: 413 ]]
+	local function renderScroller(p13)
 		-- upvalues: roactModule (copy), p11 (ref), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy), bidirectionalFlatList (copy), itemList (write), var35 (ref), appChatPerfChatLandingPaginationWindowSize (copy), appChatPerfChatLandingPaginationInitialRender (copy), name (copy), promiseModule (copy), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), appChatPerfChatLandingPaginationOnStartReachedUnits (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -316,7 +316,7 @@ function conversationList.render(p11) --[[ line: 331 ]]
 			scroller = roactModule.createElement(bidirectionalFlatList, {
 				data = itemList,
 				renderItem = p11.renderItem,
-				getItemLayout = if fFlagAppIaScrollAway then var35 else function(_, p14) --[[ line: 427 ]]
+				getItemLayout = if fFlagAppIaScrollAway then var35 else function(_, p14)
 					-- upvalues: p11 (copy)
 					return {
 						length = p11.ENTRY_HEIGHT,
@@ -338,7 +338,7 @@ function conversationList.render(p11) --[[ line: 331 ]]
 				windowSize = appChatPerfChatLandingPaginationWindowSize,
 				initialNumToRender = appChatPerfChatLandingPaginationInitialRender,
 				onScroll = p11.onScrollUpdate,
-				onContentSizeChange = function(_, p15) --[[ line: 449 ]]
+				onContentSizeChange = function(_, p15)
 					-- upvalues: p11 (copy), name (copy), fFlagAppIaScrollAway (copy), fFlagEnableScrollAwayContentScrollableFix (copy)
 					local current = p11.viewRef.current
 					
@@ -355,14 +355,14 @@ function conversationList.render(p11) --[[ line: 331 ]]
 						end
 					end
 				end,
-				onEndReached = function() --[[ line: 467 ]]
+				onEndReached = function()
 					-- upvalues: name (copy), p11 (copy), promiseModule (copy)
 					name:debug("onEndReached - Loading more conversations")
 					p11.props.loadNext()
 					
 					return promiseModule.resolve()
 				end,
-				onStartReached = function() --[[ line: 472 ]]
+				onStartReached = function()
 					-- upvalues: name (copy), p11 (copy), promiseModule (copy)
 					name:debug("onStartReached - Loading previous conversations")
 					
@@ -375,7 +375,7 @@ function conversationList.render(p11) --[[ line: 331 ]]
 				CanvasSize = UDim2.fromScale(0, 0),
 				onEndReachedThreshold = p11.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnEndReachedUnits,
 				onStartReachedThreshold = p11.ENTRY_HEIGHT * appChatPerfChatLandingPaginationOnStartReachedUnits,
-				compareItemData = function(p16, p17) --[[ line: 483 ]]
+				compareItemData = function(p16, p17)
 					return p16.id == p17.id
 				end,
 				[roactModule.Ref] = p11.ref,
@@ -385,7 +385,7 @@ function conversationList.render(p11) --[[ line: 331 ]]
 		})
 	end
 	
-	return withStyle(function(p18) --[[ line: 493 ]]
+	return withStyle(function(p18)
 		-- upvalues: itemList (write), roactModule (copy), p11 (ref), renderScroller (ref)
 		return if #itemList == 0 then roactModule.createElement("Frame", {
 			BorderSizePixel = 0,

@@ -7,19 +7,19 @@ local userInputService = require(parent_1.MockableProxyServices).UserInputServic
 local placementModule = require(parent.Enum.Placement)
 local mocksModule = require(parent.Mocks)
 
-return function() --[[ line: 17 | named "useNavBarPlacement" ]]
+return function()
 	-- upvalues: useDeviceOrientation (ref), deviceOrientationMode (ref), reactModule (ref), userInputService (ref), mocksModule (ref), placementModule (ref)
 	local var3 = useDeviceOrientation() == deviceOrientationMode.Portrait
 	local var4, var5 = reactModule.useState(userInputService.TouchEnabled)
-	reactModule.useEffect(function() --[[ line: 22 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), userInputService (copy)
 		var5(userInputService.TouchEnabled)
-		local var6 = userInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(function() --[[ line: 24 ]]
+		local var6 = userInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(function()
 			-- upvalues: var5 (copy), userInputService (copy)
 			var5(userInputService.TouchEnabled)
 		end)
 		
-		return function() --[[ line: 27 ]]
+		return function()
 			-- upvalues: var6 (ref)
 			var6:Disconnect()
 		end

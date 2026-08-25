@@ -18,9 +18,9 @@ local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local getFFlagNewPeoplePageIcons = flags.GetFFlagNewPeoplePageIcons
 
-local function useIconName(p0, p1, p2) --[[ line: 45 ]]
+local function useIconName(p0, p1, p2)
 	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function() --[[ line: 46 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p0 (ref), p1 (ref), p2 (ref)
 		return if p0.animatedIcon then p1 elseif p0.icon then if not (not p0.icon.off or not p0.buttonState) then if p2 then p0.icon.off else p0.icon.on else p0.icon.on else ""
 	end, {
@@ -32,33 +32,33 @@ local function useIconName(p0, p1, p2) --[[ line: 45 ]]
 	})
 end
 
-local function _(value, p3) --[[ line: 63 | named "useTransparency" ]]
+local function _(value, p3)
 	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function() --[[ line: 64 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: value (ref), p3 (ref)
 		return if value then p3.Color.Common.Shadow.Transparency else nil
 	end, { value })
 end
 
-local _ = function(p4, p5) --[[ line: 73 | named "useButtonSize" ]]
+local _ = function(p4, p5)
 	-- upvalues: reactModule (ref), getFFlagNewPeoplePageIcons (ref)
-	return reactModule.useMemo(function() --[[ line: 74 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p4 (ref), getFFlagNewPeoplePageIcons (copy), p5 (ref)
 		return if p4 then if getFFlagNewPeoplePageIcons() then UDim2.fromOffset(p5.Size.Size_1800 * 2, p5.Size.Size_1000) else UDim2.new(0, p5.Size.Size_1800 * 2, 1, 0) else UDim2.fromOffset(p5.Size.Size_1000, p5.Size.Size_1000)
 	end, { p4 })
 end
 
-local function MemoizedIconElement(p6) --[[ line: 87 ]]
+local function MemoizedIconElement(p6)
 	-- upvalues: useTokens (ref), useSignalState (ref), signalsModule (ref), useIconName (ref), reactModule (ref), iconButton (ref), iconSize (ref), buttonVariant (ref), icon (ref)
 	local var8 = useTokens()
 	local var9 = useSignalState(p6.isGrayedOut or signalsModule.createSignal(false))
 	local var10 = useIconName(p6, useSignalState(p6.animatedIcon or signalsModule.createSignal("")), useSignalState(p6.buttonState or signalsModule.createSignal(false)))
-	local var11 = if p6.isBuilderIcon then nil else reactModule.useMemo(function() --[[ line: 64 ]]
+	local var11 = if p6.isBuilderIcon then nil else reactModule.useMemo(function()
 		-- upvalues: var9 (ref), var8 (ref)
 		return if var9 then var8.Color.Common.Shadow.Transparency else nil
 	end, { var9 })
 	
-	return reactModule.useMemo(function() --[[ line: 110 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var10 (ref), p6 (ref), reactModule (copy), iconButton (copy), iconSize (copy), buttonVariant (copy), var9 (ref), icon (copy), var11 (ref)
 		return if not (not var10 or var10 == "") then if p6.isBuilderIcon then reactModule.createElement(iconButton, {
 			Selectable = false,
@@ -81,7 +81,7 @@ local function MemoizedIconElement(p6) --[[ line: 87 ]]
 	})
 end
 
-local _ = function(p7, p8, p9, p10, p11) --[[ line: 145 | named "createTextElement" ]]
+local _ = function(p7, p8, p9, p10, p11)
 	-- upvalues: reactModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
 	return if p7 then reactModule.createElement(button, {
 		Selectable = false,
@@ -93,7 +93,7 @@ local _ = function(p7, p8, p9, p10, p11) --[[ line: 145 | named "createTextEleme
 	}) else nil
 end
 
-return function(p12) --[[ line: 166 | named "PersonButton" ]]
+return function(p12)
 	-- upvalues: useTokens (ref), useSignalState (ref), signalsModule (ref), reactModule (ref), getFFlagNewPeoplePageIcons (ref), useCursor (ref), button (ref), fillBehavior (ref), buttonVariant (ref), view (ref), getFFlagAddPeoplePageCardLayout (ref), MemoizedIconElement (ref)
 	local var12 = useTokens()
 	local var13 = useSignalState(p12.isDisabled or signalsModule.createSignal(false))
@@ -108,7 +108,7 @@ return function(p12) --[[ line: 166 | named "PersonButton" ]]
 			["radius-medium row align-y-center align-x-center"] = p12.text ~= nil,
 			["radius-medium row align-y-center align-x-center bg-action-standard"] = p12.text == nil
 		},
-		Size = reactModule.useMemo(function() --[[ line: 74 ]]
+		Size = reactModule.useMemo(function()
 			-- upvalues: var15 (ref), getFFlagNewPeoplePageIcons (copy), var12 (ref)
 			return if var15 then if getFFlagNewPeoplePageIcons() then UDim2.fromOffset(var12.Size.Size_1800 * 2, var12.Size.Size_1000) else UDim2.new(0, var12.Size.Size_1800 * 2, 1, 0) else UDim2.fromOffset(var12.Size.Size_1000, var12.Size.Size_1000)
 		end, { var15 }),

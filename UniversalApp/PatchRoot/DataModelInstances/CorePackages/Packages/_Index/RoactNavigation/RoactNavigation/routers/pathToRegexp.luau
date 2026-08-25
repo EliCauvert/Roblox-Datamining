@@ -2,7 +2,7 @@
 local array = require(parent.LuauPolyfill).Array
 local regExpModule = require(parent.RegExp)
 
-local function _(p0) --[[ line: 35 | named "TypeError" ]]
+local function _(p0)
 	return p0
 end
 
@@ -10,19 +10,19 @@ local t = {}
 local escapeString = nil
 local flags = nil
 
-local function lexer(p1) --[[ line: 65 ]]
+local function lexer(p1)
 	local var26
 	local t = {}
 	local var8 = 1
 	
-	local function _(p2) --[[ line: 72 | named "preIncrement_i" ]]
+	local function _(p2)
 		-- upvalues: var8 (write)
 		var8 += 1
 		
 		return p2
 	end
 	
-	local _ = function(p3) --[[ line: 77 | named "getChar" ]]
+	local _ = function(p3)
 		-- upvalues: p1 (ref)
 		return string.sub(p1, p3, p3)
 	end
@@ -67,7 +67,7 @@ local function lexer(p1) --[[ line: 65 ]]
 			local var19 = ""
 			var20 = var8 + 1
 			
-			local _ = function(p4) --[[ line: 129 | named "preIncrement_j" ]]
+			local _ = function(p4)
 				-- upvalues: var20 (write)
 				var20 += 1
 				
@@ -97,7 +97,7 @@ local function lexer(p1) --[[ line: 65 ]]
 			if string.sub(p1, var27, var27) == "?" then
 				error(("Pattern cannot start with \"?\" at %d"):format(var26))
 			end
-			local function byteValue(p5) --[[ line: 179 | named "preIncrement_j" ]]
+			local function byteValue(p5)
 				-- upvalues: var26 (write)
 				var26 += 1
 				
@@ -166,7 +166,7 @@ local function lexer(p1) --[[ line: 65 ]]
 	return t
 end
 
-function t.parse(p6, p7) --[[ line: 252 ]]
+function t.parse(p6, p7)
 	-- upvalues: lexer (ref), escapeString (write)
 	p7 = p7 or {}
 	local var39 = lexer(p6)
@@ -177,21 +177,21 @@ function t.parse(p6, p7) --[[ line: 252 ]]
 	local var44 = 1
 	local var45 = ""
 	
-	local function _(p8) --[[ line: 269 | named "preIncrement_i" ]]
+	local function _(p8)
 		-- upvalues: var44 (write)
 		var44 += 1
 		
 		return p8
 	end
 	
-	local _ = function(p9) --[[ line: 277 | named "preIncrement_key" ]]
+	local _ = function(p9)
 		-- upvalues: var43 (write)
 		var43 += 1
 		
 		return p9
 	end
 	
-	local _ = function(p10) --[[ line: 282 | named "tryConsume" ]]
+	local _ = function(p10)
 		-- upvalues: var44 (write), var39 (ref)
 		if var44 <= #var39 and var39[var44].type == p10 then
 			local var64 = var39
@@ -203,7 +203,7 @@ function t.parse(p6, p7) --[[ line: 252 ]]
 		return nil
 	end
 	
-	local function mustConsume(p11) --[[ line: 290 ]]
+	local function mustConsume(p11)
 		-- upvalues: var44 (write), var39 (ref)
 		local value
 		if var44 <= #var39 and var39[var44].type == p11 then
@@ -225,7 +225,7 @@ function t.parse(p6, p7) --[[ line: 252 ]]
 		error(("Unexpected %s at %d, expected %s"):format(var68.type, var68.index, p11))
 	end
 	
-	local function consumeText() --[[ line: 304 ]]
+	local function consumeText()
 		-- upvalues: var44 (write), var39 (ref)
 		local var70
 		local var69 = ""
@@ -417,18 +417,18 @@ function t.parse(p6, p7) --[[ line: 252 ]]
 	return t
 end
 
-function t.compile(p12, p13) --[[ line: 416 ]]
+function t.compile(p12, p13)
 	-- upvalues: t (ref)
 	return t.tokensToFunction(t.parse(p12, p13), p13)
 end
 
-function t.tokensToFunction(p14, p15) --[[ line: 425 ]]
+function t.tokensToFunction(p14, p15)
 	-- upvalues: flags (write), array (ref), regExpModule (ref)
 	if p15 == nil then
 		p15 = {}
 	end
 	local var79 = flags(p15)
-	local encode = p15.encode or function(p16) --[[ line: 431 ]]
+	local encode = p15.encode or function(p16)
 		return p16
 	end
 	local validate = p15.validate
@@ -436,12 +436,12 @@ function t.tokensToFunction(p14, p15) --[[ line: 425 ]]
 	if validate == nil then
 		validate = true
 	end
-	local var81 = array.map(p14, function(p17) --[[ line: 440 ]]
+	local var81 = array.map(p14, function(p17)
 		-- upvalues: regExpModule (copy), var79 (ref)
 		return if type(p17) == "table" then regExpModule(("^(?:%s)$"):format(p17.pattern), var79) else nil
 	end)
 	
-	return function(p18) --[[ line: 447 ]]
+	return function(p18)
 		-- upvalues: p14 (ref), array (copy), encode (ref), validate (write), var81 (ref)
 		local var82 = ""
 		
@@ -490,23 +490,23 @@ function t.tokensToFunction(p14, p15) --[[ line: 425 ]]
 	end
 end
 
-function t.match(p19, p20) --[[ line: 554 ]]
+function t.match(p19, p20)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
 	return t.regexpToFunction(t.pathToRegexp(p19, t_1, p20), t_1, p20)
 end
 
-function t.regexpToFunction(p21, p22, p23) --[[ line: 563 ]]
+function t.regexpToFunction(p21, p22, p23)
 	-- upvalues: array (ref)
 	if p23 == nil then
 		p23 = {}
 	end
-	local decode = p23.decode or function(p24) --[[ line: 567 ]]
+	local decode = p23.decode or function(p24)
 		return p24
 	end
 	
-	return function(p25) --[[ line: 571 ]]
+	return function(p25)
 		-- upvalues: p21 (ref), p22 (ref), array (copy), decode (ref)
 		local var91 = p21:exec(p25)
 		
@@ -524,7 +524,7 @@ function t.regexpToFunction(p21, p22, p23) --[[ line: 563 ]]
 			local var95 = p22[i - 1]
 			
 			if var95.modifier == "*" or var95.modifier == "+" then
-				t[var95.name] = array.map(string.split(var91[i], var95.prefix .. var95.suffix), function(p26) --[[ line: 592 ]]
+				t[var95.name] = array.map(string.split(var91[i], var95.prefix .. var95.suffix), function(p26)
 					-- upvalues: decode (copy), var95 (ref)
 					return decode(p26, var95)
 				end)
@@ -536,30 +536,30 @@ function t.regexpToFunction(p21, p22, p23) --[[ line: 563 ]]
 	end
 end
 
-escapeString = function(p27) --[[ line: 611 | named "escapeString" ]]
-	return string.gsub(p27, "[%.%+%*%?=%^!:${}%(%)%[%]|/\\]", function(p28) --[[ line: 612 ]]
+escapeString = function(p27)
+	return string.gsub(p27, "[%.%+%*%?=%^!:${}%(%)%[%]|/\\]", function(p28)
 		return "\\" .. p28
 	end)
 end
 
-flags = function(p29) --[[ line: 620 | named "flags" ]]
+flags = function(p29)
 	return if p29 and p29.sensitive then "" else "i"
 end
 
-local function arrayToRegexp(p30, p31, p32) --[[ line: 686 ]]
+local function arrayToRegexp(p30, p31, p32)
 	-- upvalues: array (ref), t (ref), regExpModule (ref), flags (write)
-	return regExpModule(("(?:%s)"):format(table.concat(array.map(p30, function(p33) --[[ line: 691 ]]
+	return regExpModule(("(?:%s)"):format(table.concat(array.map(p30, function(p33)
 		-- upvalues: t (copy), p31 (ref), p32 (ref)
 		return t.pathToRegexp(p33, p31, p32).source
 	end), "|")), flags(p32))
 end
 
-local function stringToRegexp(p34, p35, p36) --[[ line: 701 ]]
+local function stringToRegexp(p34, p35, p36)
 	-- upvalues: t (ref)
 	return t.tokensToRegexp(t.parse(p34, p36), p35, p36)
 end
 
-function t.tokensToRegexp(p37, p38, p39) --[[ line: 739 ]]
+function t.tokensToRegexp(p37, p38, p39)
 	-- upvalues: escapeString (write), regExpModule (ref), flags (write)
 	local var96 = if p39 ~= nil then p39 else {}
 	local strict = var96.strict
@@ -577,7 +577,7 @@ function t.tokensToRegexp(p37, p38, p39) --[[ line: 739 ]]
 	if _end == nil then
 		_end = true
 	end
-	local encode = var96.encode or function(p40) --[[ line: 756 ]]
+	local encode = var96.encode or function(p40)
 		return p40
 	end
 	local var98 = if var96.endsWith then ("[%s]|$"):format(escapeString(var96.endsWith or "")) else "$"
@@ -620,7 +620,7 @@ function t.tokensToRegexp(p37, p38, p39) --[[ line: 739 ]]
 	return regExpModule(var100, flags(var96))
 end
 
-function t.pathToRegexp(p41, p42, p43) --[[ line: 841 ]]
+function t.pathToRegexp(p41, p42, p43)
 	-- upvalues: array (ref), arrayToRegexp (ref), stringToRegexp (ref)
 	return if array.isArray(p41) then arrayToRegexp(p41, p42, p43) else stringToRegexp(p41, p42, p43)
 end

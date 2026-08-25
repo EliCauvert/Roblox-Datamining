@@ -14,7 +14,7 @@ local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useStyle (ref), useAnalyticsModule (ref), useLocalization (ref), useCallback (ref), default (ref), eventNamesModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
 	local var6 = useScreenSize()
 	local var7 = useStyle()
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 27 ]]
 					{
 						buttonType = buttonType.Secondary,
 						props = {
-							onActivated = useCallback(function() --[[ line: 48 ]]
+							onActivated = useCallback(function()
 								-- upvalues: var8 (ref), eventNamesModule (copy), p0 (ref)
 								var8.fireEvent(eventNamesModule.CapturesSavePermissionModalCancelPressed)
 								p0.closeModal()
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 27 ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = useCallback(function() --[[ line: 42 ]]
+							onActivated = useCallback(function()
 								-- upvalues: default (copy), var8 (ref), eventNamesModule (copy), p0 (ref)
 								default:requestPermissions({ default.Permissions.WRITE_MEDIA_STORAGE })
 								var8.fireEvent(eventNamesModule.CapturesSavePermissionModalAllowPressed)

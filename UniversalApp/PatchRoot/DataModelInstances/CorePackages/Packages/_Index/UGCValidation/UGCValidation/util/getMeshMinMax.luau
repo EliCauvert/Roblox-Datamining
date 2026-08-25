@@ -4,9 +4,9 @@ local _ = require(parent.util.Types)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local calculateMinMaxModule = require(parent.util.calculateMinMax)
 
-local function getVerts(p0, p1, p2) --[[ line: 14 ]]
+local function getVerts(p0, p1, p2)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref)
-	local var5, var6 = pcallDeferredModule(function() --[[ line: 19 ]]
+	local var5, var6 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p0 (ref)
 		return UGCValidationService:GetEditableMeshVerts(p0.editableMesh)
 	end, p2)
@@ -22,7 +22,7 @@ local function getVerts(p0, p1, p2) --[[ line: 14 ]]
 	return false, { text }
 end
 
-local function getBoundsInfo(p3, p4) --[[ line: 36 ]]
+local function getBoundsInfo(p3, p4)
 	-- upvalues: calculateMinMaxModule (ref)
 	local var8 = nil
 	local var9 = nil
@@ -36,7 +36,7 @@ local function getBoundsInfo(p3, p4) --[[ line: 36 ]]
 	return var8, var9
 end
 
-return function(a, b) --[[ line: 47 | named "getMeshMinMax" ]]
+return function(a, b)
 	-- upvalues: getVerts (ref), getBoundsInfo (ref)
 	local var13, var14, var15 = getVerts(a, b.isServer, b)
 	

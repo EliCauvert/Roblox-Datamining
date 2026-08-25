@@ -3,7 +3,7 @@ local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local immutableModule = require(script.Parent.Parent.Immutable)
 local dataContextModule = require(components.DataContext)
 
-return function(p0, ...) --[[ line: 8 ]]
+return function(p0, ...)
 	-- upvalues: roactModule (ref), immutableModule (ref), dataContextModule (ref)
 	if not p0 then
 		error("Expected component to be passed to connection, got nil.")
@@ -15,7 +15,7 @@ return function(p0, ...) --[[ line: 8 ]]
 	end
 	local var4 = roactModule.Component:extend(string.format("Consumer(%s)_DependsOn_%s", tostring(p0), t[1]))
 	
-	function var4.init(p1) --[[ line: 21 ]]
+	function var4.init(p1)
 		-- upvalues: t (ref)
 		local t_1 = {}
 		
@@ -33,15 +33,15 @@ return function(p0, ...) --[[ line: 8 ]]
 		p1:setState(t_1)
 	end
 	
-	function var4.render(p2) --[[ line: 40 ]]
+	function var4.render(p2)
 		-- upvalues: immutableModule (copy), roactModule (copy), p0 (ref)
 		return roactModule.createElement(p0, immutableModule.JoinDictionaries(p2.props.componentProps, p2.state))
 	end
 	
-	return function(p3) --[[ line: 45 | named "DataConsumerWrapper" ]]
+	return function(p3)
 		-- upvalues: roactModule (copy), dataContextModule (copy), var4 (ref)
 		return roactModule.createElement(dataContextModule.Consumer, {
-			render = function(p4) --[[ line: 47 ]]
+			render = function(p4)
 				-- upvalues: roactModule (copy), var4 (copy), p3 (ref)
 				return roactModule.createElement(var4, { componentProps = p3, DevConsoleData = p4 })
 			end

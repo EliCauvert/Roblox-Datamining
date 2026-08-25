@@ -1,8 +1,8 @@
 ﻿local useSelector = require(script:FindFirstAncestor("AppChat").Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: useSelector (ref)
-	local var0 = useSelector(function(p1) --[[ line: 7 ]]
+	local var0 = useSelector(function(p1)
 		return tonumber(p1.LocalUserId)
 	end)
 	local t = {}

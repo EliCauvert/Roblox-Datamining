@@ -22,7 +22,7 @@ local var8 = tModule.interface({
 })
 local t = {}
 
-local function getModalMetadataUrl(p0) --[[ line: 37 ]]
+local function getModalMetadataUrl(p0)
 	-- upvalues: fFlagEnableDeepLinkHistoryWithModalAPI (ref), deepLinkModule (ref), urlBuilder (ref), urlBase (ref)
 	local var12 = nil
 	
@@ -40,7 +40,7 @@ local function getModalMetadataUrl(p0) --[[ line: 37 ]]
 	})()
 end
 
-local function parseResponseToMetadata(value) --[[ line: 56 ]]
+local function parseResponseToMetadata(value)
 	-- upvalues: var8 (ref), fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (ref), validateSduiComponentConfig (ref)
 	local var14, var15 = var8(value)
 	
@@ -64,7 +64,7 @@ local function parseResponseToMetadata(value) --[[ line: 56 ]]
 	end
 end
 
-return function(p1, p2) --[[ line: 90 ]]
+return function(p1, p2)
 	-- upvalues: getModalSignalStoreModule (ref), promiseModule (ref), t (ref), getModalMetadataUrl (ref), logResponseLatencyModule (ref), parseResponseToMetadata (ref), logResponseStatusModule (ref)
 	local var18 = getModalSignalStoreModule(false)
 	local var19 = var18.getMetadataGetter(p2)(false)
@@ -79,10 +79,10 @@ return function(p1, p2) --[[ line: 90 ]]
 	end
 	local var21 = getModalMetadataUrl(p2)
 	local _ = nil
-	local var22 = promiseModule.new(function(p3, p4, p5) --[[ line: 105 ]]
+	local var22 = promiseModule.new(function(p3, p4, p5)
 		-- upvalues: p1 (ref), var21 (ref), logResponseLatencyModule (copy), parseResponseToMetadata (copy), var18 (ref), p2 (ref), logResponseStatusModule (copy)
 		local var23 = p1(var21, "GET")
-		var23:andThen(function(p7) --[[ line: 108 ]]
+		var23:andThen(function(p7)
 			-- upvalues: logResponseLatencyModule (copy), p4 (ref), parseResponseToMetadata (copy), var18 (copy), p2 (copy), p3 (ref)
 			local var24 = if p7 then p7.responseCode else nil
 			logResponseLatencyModule("modals-api/v1/modal", p7.responseTimeMs, var24)
@@ -101,18 +101,18 @@ return function(p1, p2) --[[ line: 90 ]]
 				return
 			end
 			p4(`Failed to parse modal metadata response: {var25.errorMessage}`)
-		end):catch(function(p6) --[[ line: 125 ]]
+		end):catch(function(p6)
 			-- upvalues: logResponseStatusModule (copy), p4 (ref)
 			logResponseStatusModule("modals-api/v1/modal", p6.StatusCode)
 			p4(`Failed to fetch modal metadata: {p6}`)
 		end)
-		p5(function() --[[ line: 130 ]]
+		p5(function()
 			-- upvalues: var23 (ref)
 			var23:cancel()
 		end)
 	end)
 	t[p2] = var22
-	var22:finally(function() --[[ line: 136 ]]
+	var22:finally(function()
 		-- upvalues: t (copy), p2 (ref), var22 (write)
 		assert(t[p2] == var22, "In-flight request promise mismatch")
 		t[p2] = nil

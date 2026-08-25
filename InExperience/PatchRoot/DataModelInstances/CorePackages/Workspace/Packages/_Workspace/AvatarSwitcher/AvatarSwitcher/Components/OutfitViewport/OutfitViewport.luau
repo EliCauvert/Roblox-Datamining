@@ -10,7 +10,7 @@ local avatarSwitcherPlayRandomEmote = game:DefineFastFlag("AvatarSwitcherPlayRan
 local fFlagAvatarSwitcherAccurateAvatarWarning = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
 local color = Color3.fromRGB(218, 203, 173)
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "OutfitViewport" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useOutfitViewportInteractionsModule (ref), httpService (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref), outfitViewportUtilsModule (ref), avatarSwitcherPlayRandomEmote (ref), color (ref), foundationModule (ref), eventConnection (ref), userInputService (ref)
 	local var8 = reactModule.useRef(nil)
 	local var9 = reactModule.useRef(nil)
@@ -20,7 +20,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "OutfitViewport" ]]
 	local var14 = reactModule.useRef(0)
 	local var15 = not var11
 	local var16 = useOutfitViewportInteractionsModule({ defaultCameraDistanceRef = var14 })
-	local var17 = reactModule.useCallback(function(p1, p2) --[[ line: 50 ]]
+	local var17 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var12 (ref), var8 (ref), httpService (copy), var13 (ref), fFlagAvatarSwitcherAccurateAvatarWarning (copy), outfitViewportUtilsModule (copy), p0 (ref), var14 (ref), avatarSwitcherPlayRandomEmote (copy)
 		var12(true)
 		
@@ -37,7 +37,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "OutfitViewport" ]]
 		if fFlagAvatarSwitcherAccurateAvatarWarning then
 			local _ = nil
 			local _ = nil
-			local ok, status, var20 = pcall(function() --[[ line: 71 ]]
+			local ok, status, var20 = pcall(function()
 				-- upvalues: outfitViewportUtilsModule (copy), p1 (ref), p2 (ref)
 				return outfitViewportUtilsModule.buildOutfitModel(p1, p2)
 			end)
@@ -66,7 +66,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "OutfitViewport" ]]
 			end
 			return
 		else
-			ok, status = pcall(function() --[[ line: 99 ]]
+			ok, status = pcall(function()
 				-- upvalues: outfitViewportUtilsModule (copy), p1 (ref), p2 (ref)
 				return outfitViewportUtilsModule.buildOutfitModel(p1, p2)
 			end)
@@ -106,20 +106,20 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "OutfitViewport" ]]
 		end
 		var12(false)
 	end, { p0.onLoadingFailed })
-	reactModule.useEffect(function() --[[ line: 143 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), p0 (ref)
-		task.spawn(function() --[[ line: 144 ]]
+		task.spawn(function()
 			-- upvalues: var17 (copy), p0 (copy)
 			var17(p0.outfitId, p0.rigType)
 		end)
 	end, { p0.outfitId, p0.rigType, var17 })
-	reactModule.useLayoutEffect(function() --[[ line: 150 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var10 (ref), var9 (ref)
 		if var10.current then
 			var10.current.CurrentCamera = var9.current
 		end
 	end, {})
-	local var18 = reactModule.useCallback(function(p3) --[[ line: 159 ]]
+	local var18 = reactModule.useCallback(function(p3)
 		-- upvalues: var10 (ref)
 		local screenGui = var10.current and var10.current:FindFirstAncestorOfClass("ScreenGui")
 		local inputWrapper = screenGui and screenGui:FindFirstChild("InputWrapper", true)
@@ -136,11 +136,11 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "OutfitViewport" ]]
 		BackgroundTransparency = 1,
 		ref = var10,
 		[reactModule.Event.InputBegan] = if var15 then var16.onInputBegan else nil,
-		[reactModule.Event.MouseEnter] = function() --[[ line: 176 ]]
+		[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var18 (ref)
 			var18(false)
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 179 ]]
+		[reactModule.Event.MouseLeave] = function()
 			-- upvalues: var18 (ref)
 			var18(true)
 		end

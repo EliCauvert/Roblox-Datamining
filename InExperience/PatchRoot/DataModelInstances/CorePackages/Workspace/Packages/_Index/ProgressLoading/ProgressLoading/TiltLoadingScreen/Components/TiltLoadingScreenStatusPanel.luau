@@ -21,14 +21,14 @@ local fIntAutoJoinNewServerTimeMs = sharedFlagsModule.FIntAutoJoinNewServerTimeM
 local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
 local fStringTiltLoadingScreenPreLogoText = sharedFlagsModule.FStringTiltLoadingScreenPreLogoText
 
-local function _(p0) --[[ line: 30 | named "localizeUiMessage" ]]
+local function _(p0)
 	-- upvalues: coreGuiService (ref), localizationService (ref)
 	local coreScriptLocalization = coreGuiService:FindFirstChild("CoreScriptLocalization")
 	
 	if not coreScriptLocalization then
 		return p0
 	end
-	local ok, status = pcall(function() --[[ line: 35 ]]
+	local ok, status = pcall(function()
 		-- upvalues: coreScriptLocalization (ref), localizationService (copy), coreGuiService (copy), p0 (ref)
 		return coreScriptLocalization:GetTranslator(localizationService.RobloxLocaleId):Translate(coreGuiService, p0)
 	end)
@@ -36,7 +36,7 @@ local function _(p0) --[[ line: 30 | named "localizeUiMessage" ]]
 	return if ok then status else p0
 end
 
-return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenStatusPanel" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), constantsModule (ref), coreGuiService (ref), localizationService (ref), view (ref), enums (ref), text (ref), progress (ref), button (ref), fFlagDebugEnablePioneerUX (ref), fStringTiltLoadingScreenPreLogoText (ref), image (ref)
 	local var27
 	local var10 = useTokens()
@@ -61,7 +61,7 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 	local var15, var16 = reactModule.useState(false)
 	local var17 = reactModule.useRef(nil)
 	local var18 = reactModule.useRef(nil)
-	local var19 = reactModule.useCallback(function() --[[ line: 67 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), var17 (ref)
 		var16(false)
 		
@@ -70,7 +70,7 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 			var17.current = nil
 		end
 	end, {})
-	local var20 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), var16 (ref), fIntAutoJoinNewServerTimeMs (copy), runService (copy), var14 (ref), var19 (ref), p1 (ref)
 		if var17.current then
 			return
@@ -78,7 +78,7 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 		var16(true)
 		local processTime = os.clock()
 		local var30 = fIntAutoJoinNewServerTimeMs / 1000
-		var17.current = runService.Heartbeat:Connect(function() --[[ line: 84 ]]
+		var17.current = runService.Heartbeat:Connect(function()
 			-- upvalues: processTime (ref), var30 (ref), var14 (copy), var19 (copy), p1 (copy)
 			local clampedValue = math.clamp((os.clock() - processTime) / var30 * 100, 0, 100)
 			var14(clampedValue)
@@ -89,13 +89,13 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 			end
 		end)
 	end, { p1.onAutoJoinNewServer, var19 })
-	reactModule.useEffect(function() --[[ line: 95 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), constantsModule (copy), var18 (ref)
 		if p1.status == constantsModule.QUEUED_STATE then
 			var18.current = os.clock()
 		end
 	end, { p1.status })
-	reactModule.useEffect(function() --[[ line: 101 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), constantsModule (copy), var20 (ref), var19 (ref)
 		if p1.status == constantsModule.QUEUED_STATE and p1.queueTreatment == constantsModule.AUTO_JOIN_TREATMENT and p1.followUserId > 0 then
 			var20()
@@ -110,7 +110,7 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 		var20,
 		var19
 	})
-	local var21 = reactModule.useCallback(function() --[[ line: 115 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var12 (ref), constantsModule (copy)
 		if p1.isSubjectToChinaPolicies then return end
 		local processTime = os.clock()
@@ -123,12 +123,12 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 		end
 		var12.current = processTime
 	end, { p1.isSubjectToChinaPolicies, p1.onShowConnectionHealth })
-	local var22 = reactModule.useCallback(function() --[[ line: 128 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var19 (ref), p1 (ref), var18 (ref)
 		var19()
 		p1.onJoinTheLine(if var18.current then math.floor((os.clock() - var18.current) * 1000) else nil)
 	end, { p1.onJoinTheLine, var19 })
-	local var23 = reactModule.useCallback(function() --[[ line: 135 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var18 (ref)
 		p1.onJoinNewServer(if var18.current then math.floor((os.clock() - var18.current) * 1000) else nil)
 	end, { p1.onJoinNewServer })
@@ -151,7 +151,7 @@ return reactModule.memo(function(p1) --[[ line: 42 | named "TiltLoadingScreenSta
 		local coreScriptLocalization = coreGuiService:FindFirstChild("CoreScriptLocalization")
 		
 		if coreScriptLocalization then
-			local ok, status_1 = pcall(function() --[[ line: 35 ]]
+			local ok, status_1 = pcall(function()
 				-- upvalues: coreScriptLocalization (ref), localizationService (copy), coreGuiService (copy), statusText (ref)
 				return coreScriptLocalization:GetTranslator(localizationService.RobloxLocaleId):Translate(coreGuiService, statusText)
 			end)

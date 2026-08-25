@@ -3,7 +3,7 @@ local parent = script:FindFirstAncestor("AppChat").Parent
 local _ = require(parent.Time).DateTime
 local var1 = require(parent.RobloxAppLocales).Localization.new(localizationService.RobloxLocaleId)
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: var1 (ref)
 	local var2 = DateTime.now().UnixTimestamp - p0.dateTime.UnixTimestamp
 	

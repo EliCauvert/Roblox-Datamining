@@ -12,7 +12,7 @@ local fFlagMomentsReactToFeedItemV2Module = require(moments.Flags.FFlagMomentsRe
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 
-return function(p0, p1) --[[ line: 155 | named "createMomentStore" ]]
+return function(p0, p1)
 	-- upvalues: createSignal (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), createComputed (ref), fFlagMomentsReactToFeedItemV2Module (ref), reactionActionModule (ref)
 	local var6 = createSignal(p0)
 	local momentId = p0.momentId
@@ -22,12 +22,12 @@ return function(p0, p1) --[[ line: 155 | named "createMomentStore" ]]
 	local var10, var11 = createSignal(if p0.kind == "experience" then p0.commentCount else nil)
 	local var12, var13 = createSignal(p0.isModerated == true)
 	local userReactionForMoment = var8.getUserReactionForMoment(momentId)
-	local var15 = createComputed(function(p2) --[[ line: 180 ]]
+	local var15 = createComputed(function(p2)
 		-- upvalues: userReactionForMoment (ref)
 		return userReactionForMoment(p2) ~= nil
 	end)
 	local totalReactionCountForMoment = var8.getTotalReactionCountForMoment(momentId)
-	local var17 = createComputed(function(p3) --[[ line: 184 ]]
+	local var17 = createComputed(function(p3)
 		-- upvalues: totalReactionCountForMoment (ref)
 		local var29 = totalReactionCountForMoment(p3)
 		
@@ -35,19 +35,19 @@ return function(p0, p1) --[[ line: 155 | named "createMomentStore" ]]
 	end)
 	local individualReactionCountsForMoment = var8.getIndividualReactionCountsForMoment(momentId)
 	local shareInfo = var9.getShareInfo(momentId)
-	local var20 = createComputed(function(p4) --[[ line: 194 ]]
+	local var20 = createComputed(function(p4)
 		-- upvalues: shareInfo (ref)
 		local shareCount = shareInfo(p4).shareCount
 		
 		return if shareCount > 0 then shareCount else nil
 	end)
 	
-	local function setShareCount(value) --[[ line: 198 ]]
+	local function setShareCount(value)
 		-- upvalues: shareInfo (ref), var9 (ref), momentId (ref)
 		var9.setShareCount(momentId, value or 0, shareInfo(false).hasShared)
 	end
 	
-	local function commitReaction(p5) --[[ line: 205 ]]
+	local function commitReaction(p5)
 		-- upvalues: var8 (ref), p0 (ref), momentId (ref)
 		local var30 = var8.reactToFeedItem({
 			entityType = "userCreatedMoment",
@@ -58,11 +58,11 @@ return function(p0, p1) --[[ line: 155 | named "createMomentStore" ]]
 		})
 		
 		if type(var30) == "table" and var30.catch ~= nil then
-			var30:catch(function() --[[ line: 220 ]] end)
+			var30:catch(function() end)
 		end
 	end
 	
-	local function clearReaction() --[[ line: 223 ]]
+	local function clearReaction()
 		-- upvalues: fFlagMomentsReactToFeedItemV2Module (copy), userReactionForMoment (ref), var8 (ref), p0 (ref), momentId (ref), reactionActionModule (copy)
 		if fFlagMomentsReactToFeedItemV2Module then
 			local var31 = userReactionForMoment(false)
@@ -84,13 +84,13 @@ return function(p0, p1) --[[ line: 155 | named "createMomentStore" ]]
 			})
 			
 			if type(var32) == "table" and var32.catch ~= nil then
-				var32:catch(function() --[[ line: 235 ]] end)
+				var32:catch(function() end)
 			end
 		end
 	end
 	
 	local var24, var25 = createSignal(nil)
-	local var26 = createComputed(function(p6) --[[ line: 247 ]]
+	local var26 = createComputed(function(p6)
 		-- upvalues: var24 (ref)
 		return var24(p6) ~= nil
 	end)

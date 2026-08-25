@@ -11,7 +11,7 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1, p2, p3) --[[ line: 34 ]]
+function t_1.new(p0, p1, p2, p3)
 	-- upvalues: cryoModule (ref), httpSessionModule (ref), t_1 (ref)
 	p0 = p0 or {}
 	p0 = {
@@ -35,13 +35,13 @@ function t_1.new(p0, p1, p2, p3) --[[ line: 34 ]]
 	return p0
 end
 
-function t_1:start(p4, p5) --[[ line: 59 ]]
+function t_1:start(p4, p5)
 	self.resolve = p4
 	self.reject = p5
 	self:makeRequest()
 end
 
-function t_1:processResponse(p6) --[[ line: 65 ]]
+function t_1:processResponse(p6)
 	-- upvalues: httpService (ref), httpResponseModule (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, p6.Body)
 	
@@ -60,7 +60,7 @@ function t_1:processResponse(p6) --[[ line: 65 ]]
 	self.resolve(httpResponseModule.success(p6.StatusCode, status))
 end
 
-function t_1:retry(p7, p8) --[[ line: 84 ]]
+function t_1:retry(p7, p8)
 	self.retryCount += 1
 	
 	if self.maxRetryCount < self.retryCount then
@@ -71,20 +71,20 @@ function t_1:retry(p7, p8) --[[ line: 84 ]]
 	self:wait(p8 or math.pow(2, self.retryCount))
 end
 
-function t_1:wait(p9) --[[ line: 94 ]]
-	self.waitImpl(p9, function() --[[ line: 95 ]]
+function t_1:wait(p9)
+	self.waitImpl(p9, function()
 		-- upvalues: self (ref)
 		self:makeRequest()
 	end)
 end
 
-function t_1:makeRequest() --[[ line: 100 ]]
+function t_1:makeRequest()
 	-- upvalues: httpSessionModule (ref), t (ref), statusCodeModule (ref), httpResponseModule (ref)
 	if self.canceled then
 		return
 	end
 	self.httpRequest = self.requestFunction(self.url, self.requestMethod, self.options)
-	self.httpRequest:Start(function(p10, p11) --[[ line: 105 ]]
+	self.httpRequest:Start(function(p10, p11)
 		-- upvalues: self (ref), httpSessionModule (copy), t (copy), statusCodeModule (copy), httpResponseModule (copy)
 		if self.session ~= httpSessionModule.currentSession() then
 			warn("Http request aborted", self.url)
@@ -120,7 +120,7 @@ function t_1:makeRequest() --[[ line: 100 ]]
 	end)
 end
 
-function t_1:cancel() --[[ line: 132 ]]
+function t_1:cancel()
 	-- upvalues: httpResponseModule (ref)
 	self.canceled = true
 	self.reject(httpResponseModule.error(Enum.HttpError.Aborted))

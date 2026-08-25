@@ -30,13 +30,13 @@ local t = {
 	variant = inputVariantModule.Standard
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 64 | named "DropdownControl" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), useDropdownVariantsModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), blendTransparenciesModule (ref), constantsModule (ref), textModule (ref), iconModule (ref), chevronLargeUp (ref), chevronLargeDown (ref)
 	local var18 = withDefaultsModule(p0, t)
 	local var19 = useTokensModule()
 	local var20, var21 = reactModule.useState(controlStateModule.Initialize)
 	local var22 = useDropdownVariantsModule(var19, var18.size, var18.variant, var20, var18.item == nil, var18.hasError or false, var18.isMenuOpen, var20 == controlStateModule.Hover)
-	local var23 = reactModule.useMemo(function() --[[ line: 80 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var19 (ref)
 		return {
 			radius = UDim.new(0, var19.Radius.Small),
@@ -53,7 +53,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 64 | 
 		hint = var18.hint,
 		ref = p1,
 		width = var18.width,
-		input = function(_) --[[ line: 98 ]]
+		input = function(_)
 			-- upvalues: reactModule (copy), viewModule (copy), var21 (ref), var18 (ref), var23 (ref), stateLayerAffordanceModule (copy), var22 (ref), blendTransparenciesModule (copy), constantsModule (copy), textModule (copy), iconModule (copy), chevronLargeUp (copy), chevronLargeDown (copy), var19 (ref)
 			return reactModule.createElement(viewModule, {
 				onStateChanged = var21,

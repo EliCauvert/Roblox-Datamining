@@ -4,13 +4,13 @@ local userInputService = game:GetService("UserInputService")
 local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 local scrollFrameUtilsModule = require(script.Parent.scrollFrameUtils)
 
-return function(value) --[[ line: 22 | named "useThumbstickScroll" ]]
+return function(value)
 	-- upvalues: reactModule (ref), runService (ref), guiService (ref), scrollFrameUtilsModule (ref), userInputService (ref)
-	reactModule.useEffect(function() --[[ line: 23 ]]
+	reactModule.useEffect(function()
 		-- upvalues: value (ref), runService (copy), guiService (copy), scrollFrameUtilsModule (copy), userInputService (copy)
 		if value.enabled then
 			local var5 = nil
-			local heartbeatConnection = runService.Heartbeat:Connect(function(p0) --[[ line: 30 ]]
+			local heartbeatConnection = runService.Heartbeat:Connect(function(p0)
 				-- upvalues: var5 (write), value (copy), guiService (copy), scrollFrameUtilsModule (copy)
 				if var5 == nil or var5.KeyCode ~= Enum.KeyCode.Thumbstick2 then return end
 				local current = value.containerRef.current
@@ -23,7 +23,7 @@ return function(value) --[[ line: 22 | named "useThumbstickScroll" ]]
 				end
 				scrollFrameUtilsModule.scrollByAnalogInput(var8, var5, p0)
 			end)
-			local inputChangedConnection = userInputService.InputChanged:Connect(function(p1, _) --[[ line: 50 ]]
+			local inputChangedConnection = userInputService.InputChanged:Connect(function(p1, _)
 				-- upvalues: var5 (write)
 				if p1.KeyCode ~= Enum.KeyCode.Thumbstick2 then return end
 				if p1.UserInputState == Enum.UserInputState.Change then
@@ -35,7 +35,7 @@ return function(value) --[[ line: 22 | named "useThumbstickScroll" ]]
 				end
 			end)
 			
-			return function() --[[ line: 62 ]]
+			return function()
 				-- upvalues: heartbeatConnection (ref), inputChangedConnection (ref)
 				heartbeatConnection:Disconnect()
 				inputChangedConnection:Disconnect()

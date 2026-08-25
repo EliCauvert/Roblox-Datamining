@@ -2,7 +2,7 @@
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
 return {
-	useTickClock = function(value) --[[ line: 38 ]]
+	useTickClock = function(value)
 		-- upvalues: reactModule (ref), runService (ref)
 		local var2 = reactModule.useRef(value.onTick)
 		var2.current = value.onTick
@@ -11,11 +11,11 @@ return {
 		local intervalSec = value.intervalSec
 		local enabled = value.enabled
 		local testHeartbeat = value.testHeartbeat or runService.Heartbeat
-		reactModule.useEffect(function() --[[ line: 49 ]]
+		reactModule.useEffect(function()
 			-- upvalues: enabled (ref), testHeartbeat (ref), intervalSec (ref), var2 (ref), var3 (ref)
 			if enabled then
 				local var5 = 0
-				local var6 = testHeartbeat:Connect(function(p0) --[[ line: 55 ]]
+				local var6 = testHeartbeat:Connect(function(p0)
 					-- upvalues: var5 (write), intervalSec (copy), var2 (copy), var3 (copy)
 					local var8, var9
 					local var7 = var5 + p0
@@ -36,14 +36,14 @@ return {
 					var3.current(if intervalSec > 0 then var5 / intervalSec else 0)
 				end)
 				
-				return function() --[[ line: 67 ]]
+				return function()
 					-- upvalues: var6 (ref)
 					var6:Disconnect()
 				end
 			end
 		end, { enabled, intervalSec, testHeartbeat })
 	end,
-	advanceClock = function(p1, p2, p3) --[[ line: 29 ]]
+	advanceClock = function(p1, p2, p3)
 		p1 += p2
 		
 		if p3 <= 0 then

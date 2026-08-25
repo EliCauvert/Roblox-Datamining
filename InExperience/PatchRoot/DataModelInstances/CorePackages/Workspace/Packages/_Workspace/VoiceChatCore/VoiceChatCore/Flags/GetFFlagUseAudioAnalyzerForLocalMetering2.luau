@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UseAudioAnalyzerForLocalMetering2", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UseAudioAnalyzerForLocalMetering2")
 end

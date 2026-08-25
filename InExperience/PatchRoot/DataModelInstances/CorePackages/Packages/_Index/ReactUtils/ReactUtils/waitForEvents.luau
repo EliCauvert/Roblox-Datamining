@@ -1,14 +1,14 @@
 ﻿local reactRobloxModule = require(script:FindFirstAncestor("ReactUtils").Parent.ReactRoblox)
 
 return setmetatable({
-	act = function() --[[ line: 13 ]]
+	act = function()
 		-- upvalues: reactRobloxModule (ref)
-		reactRobloxModule.act(function() --[[ line: 14 ]]
+		reactRobloxModule.act(function()
 			task.wait(0)
 		end)
 	end
 }, {
-	__call = function() --[[ line: 6 ]]
+	__call = function()
 		task.wait(0)
 	end
 })

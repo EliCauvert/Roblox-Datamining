@@ -7,7 +7,7 @@ local pageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 112 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		page_entries = if p0 == nil or p0.page_entries == nil then {} else p0.page_entries,
@@ -17,7 +17,7 @@ function t_1.new(p0) --[[ line: 112 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 121 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var10 = 0
@@ -73,7 +73,7 @@ function t_1:encode() --[[ line: 121 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 171 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var32 = t_1.new()
 	local var33 = 0
@@ -137,7 +137,7 @@ function t_1.decode(p1) --[[ line: 171 ]]
 	return var32
 end
 
-function t_1:jsonEncode() --[[ line: 247 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -170,7 +170,7 @@ function t_1:jsonEncode() --[[ line: 247 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 281 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var59 = t_1.new()
 	
@@ -232,7 +232,7 @@ typeRegistryModule.default:register(t.PartyChatResponse)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 364 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		key = if p2 == nil or p2.key == nil then "" else p2.key,
@@ -240,7 +240,7 @@ function t_2.new(p2) --[[ line: 364 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 373 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var66 = 0
@@ -264,7 +264,7 @@ function t_2:encode() --[[ line: 373 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 393 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), templateEntryModule (ref)
 	local var73 = t_2.new()
 	local var74 = 0
@@ -316,7 +316,7 @@ function t_2.decode(p3) --[[ line: 393 ]]
 	return var73
 end
 
-function t_2:jsonEncode() --[[ line: 441 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -328,7 +328,7 @@ function t_2:jsonEncode() --[[ line: 441 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 455 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), templateEntryModule (ref)
 	local var93 = t_2.new()
 	
@@ -350,7 +350,7 @@ typeRegistryModule.default:register(t.PartyChatResponse_TemplatesEntry)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 485 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		key = if p4 == nil or p4.key == nil then "" else p4.key,
@@ -358,7 +358,7 @@ function t_3.new(p4) --[[ line: 485 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 494 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var95 = 0
@@ -381,7 +381,7 @@ function t_3:encode() --[[ line: 494 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 515 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref)
 	local var101 = t_3.new()
 	local var102 = 0
@@ -433,7 +433,7 @@ function t_3.decode(p5) --[[ line: 515 ]]
 	return var101
 end
 
-function t_3:jsonEncode() --[[ line: 565 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -445,7 +445,7 @@ function t_3:jsonEncode() --[[ line: 565 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 581 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref)
 	local var121 = t_3.new()
 	

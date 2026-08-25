@@ -1,6 +1,6 @@
 ﻿local discountType = require(script:FindFirstAncestor("IAPExperience").ProductPurchase.PricingTypes).DiscountType
 
-return function(p0) --[[ line: 12 | named "multiItemPriceQualifiesForDetailsDiscountSummary" ]]
+return function(p0)
 	-- upvalues: discountType (ref)
 	if not p0 then
 		return false

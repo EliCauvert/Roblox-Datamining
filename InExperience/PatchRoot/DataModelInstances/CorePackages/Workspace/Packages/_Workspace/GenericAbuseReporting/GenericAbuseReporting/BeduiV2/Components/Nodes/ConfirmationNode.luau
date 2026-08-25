@@ -33,19 +33,19 @@ local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.F
 local fFlagSupportSubmissionOnAllReportNodes = sharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
-local function useBlockToggle(p0) --[[ line: 73 ]]
+local function useBlockToggle(p0)
 	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useRoactService (ref), roactNetworking (ref), isBlockedUser (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatHttpErrorMessageForAnalytics (ref), dashModule (ref), unblockUser (ref), blockUser (ref)
 	local var15, var16 = reactModule.useState(if p0 then "Loading" else "Hidden")
 	local var17, var18 = reactModule.useState(false)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	local var19 = useRoactService(roactNetworking)
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), isBlockedUser (copy), var19 (ref), var16 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), dashModule (copy)
 		if p0 and p0.userId then
-			isBlockedUser(var19, p0.userId):andThen(function(p2) --[[ line: 83 ]]
+			isBlockedUser(var19, p0.userId):andThen(function(p2)
 				-- upvalues: var16 (copy)
 				var16(if p2.responseBody then "Hidden" else "Visible")
-			end):catch(function(p1) --[[ line: 87 ]]
+			end):catch(function(p1)
 				-- upvalues: var16 (copy), sendEvent (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), p0 (copy), dashModule (copy)
 				var16("Hidden")
 				sendEvent({
@@ -64,14 +64,14 @@ local function useBlockToggle(p0) --[[ line: 73 ]]
 	
 	return {
 		blockToggleState = var15,
-		handleBlockToggleChange = reactModule.useCallback(function() --[[ line: 107 ]]
+		handleBlockToggleChange = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), var17 (ref), unblockUser (copy), var19 (ref), var18 (ref), var16 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), dashModule (copy), blockUser (copy)
 			if p0 == nil or p0.userId == nil then return end
 			if var17 then
-				unblockUser(var19, p0.userId):andThen(function() --[[ line: 114 ]]
+				unblockUser(var19, p0.userId):andThen(function()
 					-- upvalues: var18 (copy)
 					var18(false)
-				end):catch(function(p3) --[[ line: 117 ]]
+				end):catch(function(p3)
 					-- upvalues: var16 (copy), sendEvent (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), p0 (copy), dashModule (copy)
 					var16("Error")
 					sendEvent({
@@ -85,11 +85,11 @@ local function useBlockToggle(p0) --[[ line: 73 ]]
 				
 				return
 			end
-			blockUser(var19, p0.userId):andThen(function() --[[ line: 134 ]]
+			blockUser(var19, p0.userId):andThen(function()
 				-- upvalues: sendEvent (copy), telemetryEventType (copy), var18 (copy)
 				sendEvent({ sub_event_type = telemetryEventType.DidBlockUser })
 				var18(true)
-			end):catch(function(p4) --[[ line: 138 ]]
+			end):catch(function(p4)
 				-- upvalues: var16 (copy), sendEvent (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), p0 (copy), dashModule (copy)
 				var16("Error")
 				sendEvent({
@@ -104,7 +104,7 @@ local function useBlockToggle(p0) --[[ line: 73 ]]
 	}
 end
 
-return reactModule.memo(function(p5) --[[ line: 166 | named "ConfirmationNode" ]]
+return reactModule.memo(function(p5)
 	-- upvalues: useArTranslation (ref), useOpenLinkModule (ref), useAbuseReportAnalytics (ref), useBlockToggle (ref), useLayoutSlots (ref), fFlagAbuseReportMenuV2 (ref), reactModule (ref), telemetryEventType (ref), eyebrowModule (ref), textWithTranslationModule (ref), view (ref), toggle (ref), button (ref), buttonVariant (ref), footerModule (ref), fillBehavior (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
 	local var27
 	local translateIntoString = useArTranslation().translateIntoString
@@ -119,19 +119,19 @@ return reactModule.memo(function(p5) --[[ line: 166 | named "ConfirmationNode" ]
 	local actions = var22.Actions
 	local title = var22.Title
 	local var23 = if fFlagAbuseReportMenuV2 then var22.Layout else nil
-	reactModule.useEffect(function() --[[ line: 187 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), sendEvent (ref), telemetryEventType (copy)
 		if p5.helpline and p5.helpline.href then
 			sendEvent({ sub_event_type = telemetryEventType.HelplineShown })
 		end
 	end, { p5.helpline and p5.helpline.href, sendEvent })
-	local var24 = reactModule.useCallback(function() --[[ line: 193 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: p5 (ref)
 		if p5.onNext then
 			p5.onNext()
 		end
 	end, { p5.onNext })
-	local var25 = reactModule.useCallback(function() --[[ line: 200 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: p5 (ref), var20 (ref), translateIntoString (ref), sendEvent (ref), telemetryEventType (copy)
 		if p5.helpline and p5.helpline.href then
 			var20(translateIntoString(p5.helpline.heading or ""), p5.helpline.href)

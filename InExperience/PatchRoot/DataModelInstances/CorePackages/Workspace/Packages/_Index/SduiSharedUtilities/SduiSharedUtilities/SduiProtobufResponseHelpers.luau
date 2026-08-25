@@ -11,16 +11,16 @@ local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandl
 local fFlagSduiPageEntrySurfacing = require(parent.SharedFlags).FFlagSduiPageEntrySurfacing
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 
-local function decodeProto(p0, p1) --[[ line: 27 ]]
+local function decodeProto(p0, p1)
 	return p0.decode(if typeof(p1) == "string" then buffer.fromstring(p1) else p1)
 end
 
-local function decodeProtobufJson(p2, p3) --[[ line: 39 ]]
+local function decodeProtobufJson(p2, p3)
 	-- upvalues: httpService (ref)
 	return p2.jsonDecode(httpService:JSONDecode(if typeof(p3) == "buffer" then buffer.tostring(p3) else p3))
 end
 
-local function parseSurfacing(p4) --[[ line: 71 ]]
+local function parseSurfacing(p4)
 	-- upvalues: getProtoVariableMapper (ref)
 	if not p4 or not p4.kind then
 		return nil
@@ -40,21 +40,21 @@ end
 return {
 	decodeProto = decodeProto,
 	decodeProtobufJson = decodeProtobufJson,
-	makeProtoResponseDecoder = function(p5) --[[ line: 47 ]]
+	makeProtoResponseDecoder = function(p5)
 		-- upvalues: decodeProto (ref)
-		return function(p6) --[[ line: 48 ]]
+		return function(p6)
 			-- upvalues: decodeProto (copy), p5 (ref)
 			return decodeProto(p5, p6)
 		end
 	end,
-	makeProtobufJsonResponseDecoder = function(p7) --[[ line: 56 ]]
+	makeProtobufJsonResponseDecoder = function(p7)
 		-- upvalues: decodeProtobufJson (ref)
-		return function(p8) --[[ line: 57 ]]
+		return function(p8)
 			-- upvalues: decodeProtobufJson (copy), p7 (ref)
 			return decodeProtobufJson(p7, p8)
 		end
 	end,
-	parsePageEntriesFromResponse = function(p9) --[[ line: 88 ]]
+	parsePageEntriesFromResponse = function(p9)
 		-- upvalues: fFlagSduiUniversalPageEntry (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), fFlagSduiPageEntrySurfacing (ref), parseSurfacing (ref)
 		local t = {}
 		
@@ -76,7 +76,7 @@ return {
 		end
 		return t
 	end,
-	parseHydrationDataFromResponse = function(p10) --[[ line: 122 ]]
+	parseHydrationDataFromResponse = function(p10)
 		-- upvalues: fFlagSduiHydrationDataCamelCasePropertyKeys (ref), getProtoVariableMapper (ref), fFlagSduiHydrationDataCamelCaseTopLevelKeys (ref)
 		local hydrationData = p10.hydration_data
 		
@@ -114,10 +114,10 @@ return {
 		end
 		return hydrationData
 	end,
-	parseLocalizedLiteralsFromResponse = function(p11) --[[ line: 171 ]]
+	parseLocalizedLiteralsFromResponse = function(p11)
 		return if p11.localized_literals then p11.localized_literals else nil
 	end,
-	parseTemplateEntriesFromResponse = function(value, p12) --[[ line: 186 ]]
+	parseTemplateEntriesFromResponse = function(value, p12)
 		-- upvalues: fFlagSduiClientTemplateCache (ref)
 		local t = {}
 		local t_1 = {}

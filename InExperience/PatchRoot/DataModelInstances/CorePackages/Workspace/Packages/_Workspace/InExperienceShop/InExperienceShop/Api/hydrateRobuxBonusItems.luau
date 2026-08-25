@@ -6,7 +6,7 @@ local toShopItem = shopItemMappingModule.toShopItem
 local gamePass = Enum.InfoType.GamePass
 
 return {
-	appendBonusItemRequests = function(p0, p1) --[[ line: 20 ]]
+	appendBonusItemRequests = function(p0, p1)
 		-- upvalues: makeRequestKey (ref), gamePass (ref)
 		local t = {}
 		
@@ -33,7 +33,7 @@ return {
 		end
 		return p0
 	end,
-	mergeBonusItemDetailsIntoSections = function(p2, p3) --[[ line: 57 ]]
+	mergeBonusItemDetailsIntoSections = function(p2, p3)
 		-- upvalues: makeRequestKey (ref), gamePass (ref), toShopItem (ref)
 		local t = {}
 		

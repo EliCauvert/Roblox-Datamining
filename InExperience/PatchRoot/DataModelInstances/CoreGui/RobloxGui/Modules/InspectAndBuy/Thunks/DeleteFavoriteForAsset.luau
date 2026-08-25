@@ -14,16 +14,16 @@ local constantsModule = require(parent.Constants)
 local list = { networkModule, analyticsModule }
 local var12 = createInspectAndBuyKeyMapperModule("deleteFavoriteForAsset")
 
-return function(value) --[[ line: 26 | named "DeleteFavoriteForAsset" ]]
+return function(value)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), var12 (ref), performFetch (ref), setFavoriteAssetModule (ref), assetInfoModule (ref), setAssetsModule (ref), sendCounterModule (ref), constantsModule (ref), promiseModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1) --[[ line: 27 ]]
+	return thunkModule.new(script.Name, list, function(p0, p1)
 		-- upvalues: networkModule (copy), analyticsModule (copy), var12 (copy), value (ref), performFetch (copy), setFavoriteAssetModule (copy), assetInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy), promiseModule (copy)
 		local var13 = p1[networkModule]
 		local var14 = p1[analyticsModule]
 		
-		return performFetch.Single(var12(p0:getState().storeId, value), function(_) --[[ line: 33 ]]
+		return performFetch.Single(var12(p0:getState().storeId, value), function(_)
 			-- upvalues: var13 (ref), value (copy), p0 (ref), setFavoriteAssetModule (copy), assetInfoModule (copy), setAssetsModule (copy), var14 (ref), sendCounterModule (copy), constantsModule (copy), promiseModule (copy)
-			return var13.deleteFavoriteForAsset(value):andThen(function() --[[ line: 34 ]]
+			return var13.deleteFavoriteForAsset(value):andThen(function()
 				-- upvalues: p0 (copy), setFavoriteAssetModule (copy), value (copy), assetInfoModule (copy), setAssetsModule (copy), var14 (copy), sendCounterModule (copy), constantsModule (copy), promiseModule (copy)
 				p0:dispatch(setFavoriteAssetModule(value, false))
 				local numFavorites = p0:getState().assets[value].numFavorites
@@ -34,13 +34,13 @@ return function(value) --[[ line: 26 | named "DeleteFavoriteForAsset" ]]
 				p0:dispatch(sendCounterModule(constantsModule.Counters.DeleteFavoriteForAsset .. constantsModule.CounterSuffix.RequestSucceeded))
 				
 				return promiseModule.resolve()
-			end, function(p3) --[[ line: 45 ]]
+			end, function(p3)
 				-- upvalues: p0 (copy), sendCounterModule (copy), constantsModule (copy), promiseModule (copy)
 				p0:dispatch(sendCounterModule(constantsModule.Counters.DeleteFavoriteForAsset .. constantsModule.CounterSuffix.RequestRejected))
 				
 				return promiseModule.reject(tostring(p3.StatusMessage))
 			end)
-		end)(p0):catch(function(p2) --[[ line: 51 ]]
+		end)(p0):catch(function(p2)
 			-- upvalues: p0 (ref), value (copy), var14 (ref), sendCounterModule (copy), constantsModule (copy)
 			var14.reportFavoriteItem("Asset", value, false, false, p2, p0:getState().assets[value].numFavorites)
 			p0:dispatch(sendCounterModule(constantsModule.Counters.DeleteFavoriteForAsset .. constantsModule.CounterSuffix.RequestFailed))

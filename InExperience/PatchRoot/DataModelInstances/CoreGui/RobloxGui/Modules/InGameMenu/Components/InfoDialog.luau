@@ -23,11 +23,11 @@ infoDialog.validateProps = t.strictInterface({
 	buttonRef = t.optional(t.table)
 })
 
-function infoDialog.render(p0) --[[ line: 41 ]]
+function infoDialog.render(p0)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
 	local props = p0.props
 	
-	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 44 ]]
+	return withFoundationOrUIBloxStyle(function(p1)
 		return {
 			Theme = {
 				Overlay = {
@@ -47,7 +47,7 @@ function infoDialog.render(p0) --[[ line: 41 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ line: 55 ]]
+	end, function(p2)
 		-- upvalues: props (ref), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p0 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
 		local var8 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
 		local var9 = math.max(textService:GetTextSize(props.bodyText, var8, p2.Font.Body.Font, Vector2.new(264, 1e999)).Y, var8 * 2) + 48
@@ -126,9 +126,9 @@ function infoDialog.render(p0) --[[ line: 41 ]]
 	end)
 end
 
-function infoDialog.bindActions(p3) --[[ line: 150 ]]
+function infoDialog.bindActions(p3)
 	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p4, _) --[[ line: 151 | named "dismissFunc" ]]
+	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p4, _)
 		-- upvalues: p3 (ref)
 		if p4 == Enum.UserInputState.Begin then
 			p3.props.onDismiss()
@@ -136,18 +136,18 @@ function infoDialog.bindActions(p3) --[[ line: 150 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function infoDialog.unbindActions(_) --[[ line: 160 ]]
+function infoDialog.unbindActions(_)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("InGameMenuModalDismiss")
 end
 
-function infoDialog.didMount(p5) --[[ line: 164 ]]
+function infoDialog.didMount(p5)
 	if p5.props.visible then
 		p5:bindActions()
 	end
 end
 
-function infoDialog.didUpdate(p6) --[[ line: 170 ]]
+function infoDialog.didUpdate(p6)
 	if p6.props.visible then
 		p6:bindActions()
 		
@@ -156,7 +156,7 @@ function infoDialog.didUpdate(p6) --[[ line: 170 ]]
 	p6:unbindActions()
 end
 
-function infoDialog.willUnmount(p7) --[[ line: 178 ]]
+function infoDialog.willUnmount(p7)
 	p7:unbindActions()
 end
 

@@ -6,7 +6,7 @@ local REACT_PROVIDER_TYPE = reactSymbols.REACT_PROVIDER_TYPE
 local REACT_CONTEXT_TYPE = reactSymbols.REACT_CONTEXT_TYPE
 
 return {
-	createContext = function(p0, p1) --[[ line: 34 ]]
+	createContext = function(p0, p1)
 		-- upvalues: REACT_CONTEXT_TYPE (ref), REACT_PROVIDER_TYPE (ref), reactGlobalsModule (ref), console (ref)
 		local t = {
 			["$$typeof"] = REACT_CONTEXT_TYPE,
@@ -30,11 +30,11 @@ return {
 				_calculateChangedBits = t._calculateChangedBits
 			}
 			setmetatable(t_1, {
-				__index = function(_, p2) --[[ line: 79 ]]
+				__index = function(_, p2)
 					-- upvalues: t (ref)
 					return if p2 == "_currentValue" then t._currentValue elseif p2 == "_currentValue2" then t._currentValue2 elseif p2 == "_threadCount" then t._threadCount elseif p2 == "displayName" then t.displayName else nil
 				end,
-				__newindex = function(_, p3, p4) --[[ line: 92 ]]
+				__newindex = function(_, p3, p4)
 					-- upvalues: t (ref), var2 (write), console (copy)
 					if p3 == "_currentValue" then
 						t._currentValue = p4

@@ -14,7 +14,7 @@ local fFlagAXAvatarSortInDiscoveryUnifiedPurchase = require(parent.SharedFlags).
 local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), lastDeferredSingleItemStoreModule (ref), unifiedEventLoggingUtilsModule (ref), sendUnifiedEventLogModule (ref), cryoModule (ref), collectionService (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), sendUnifiedEventLogForInstanceModule (ref)
 	if fFlagAXMISEnableMultiShoppingUnifiedEvents then
 		local selectionList = unifiedSelectionListStoreModule.getSelectionList()

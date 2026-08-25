@@ -12,7 +12,7 @@ local t_1 = {
 	CrossExpVoiceDebugVariant_1 = { partyVoiceExp = true }
 }
 
-function t.new() --[[ line: 50 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { initialized = false, variant = {} }
 	setmetatable(t_1, t)
@@ -20,7 +20,7 @@ function t.new() --[[ line: 50 ]]
 	return t_1
 end
 
-function t:initialize() --[[ line: 61 ]]
+function t:initialize()
 	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref), debugCrossExpVoiceIXPLayer (ref), t_1 (ref), partyVoiceDisallowIXPLayerExposureOnInit (ref)
 	local var8 = experimentCacheManager.default:getLayerVariables(crossExpVoiceIXPLayer)
 	
@@ -37,12 +37,12 @@ function t:initialize() --[[ line: 61 ]]
 	end
 end
 
-function t.logLayerExposure(_) --[[ line: 81 ]]
+function t.logLayerExposure(_)
 	-- upvalues: experimentCacheManager (ref), crossExpVoiceIXPLayer (ref)
 	experimentCacheManager.default:logLayerExposure(crossExpVoiceIXPLayer)
 end
 
-function t.getHasPartyVoiceVolume() --[[ line: 85 ]]
+function t.getHasPartyVoiceVolume()
 	-- upvalues: partyVoiceVolumeEngineFeature (ref), t (ref)
 	return partyVoiceVolumeEngineFeature and t.default.variant.partyVoiceExp
 end

@@ -12,7 +12,7 @@ local textInput = foundationModule.TextInput
 if creatorAgentChatModule.experimentOverride.isEnabled() then
 	creatorAgentChatModule.experimentOverride.set(buildAppStorageModule.getAgentSpecVersion())
 end
-return function(p0) --[[ line: 23 | named "AgentSpecDebugSheet" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), creatorAgentChatModule (ref), var5 (ref), text (ref), textInput (ref), button (ref), foundationModule (ref), buildAppStorageModule (ref)
 	local var6, var7 = reactModule.useState(creatorAgentChatModule.experimentOverride.get() or "")
 	
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 23 | named "AgentSpecDebugSheet" ]]
 				size = foundationModule.Enums.InputSize.Large,
 				variant = foundationModule.Enums.ButtonVariant.Emphasis,
 				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-				onActivated = function() --[[ line: 52 ]]
+				onActivated = function()
 					-- upvalues: creatorAgentChatModule (copy), var6 (ref), buildAppStorageModule (copy), p0 (ref)
 					creatorAgentChatModule.experimentOverride.set(var6)
 					buildAppStorageModule.setAgentSpecVersion(creatorAgentChatModule.experimentOverride.get())

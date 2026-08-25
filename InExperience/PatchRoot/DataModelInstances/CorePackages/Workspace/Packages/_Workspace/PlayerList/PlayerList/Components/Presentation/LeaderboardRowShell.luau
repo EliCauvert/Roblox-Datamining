@@ -7,7 +7,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local constantsModule = require(parent.Common.Constants)
 local usePreferredBackgroundStyleModule = require(parent.Hooks.usePreferredBackgroundStyle)
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "LeaderboardRowShell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), usePreferredBackgroundStyleModule (ref), constantsModule (ref), reactModule (ref), view (ref), foundationModule (ref)
 	local var4 = usePreferredBackgroundStyleModule(useTokens().Color.OverMedia.OverMedia_100)
 	local t = {

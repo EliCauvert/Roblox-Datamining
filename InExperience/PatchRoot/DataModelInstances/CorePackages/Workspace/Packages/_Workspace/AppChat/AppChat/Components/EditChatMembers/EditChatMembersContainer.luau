@@ -30,37 +30,37 @@ local t = {
 	conversation = nil,
 	systemButtonText = if getFFlagIsSquadEnabled() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends",
 	pageHeaderText = if getFFlagIsSquadEnabled() then "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections",
-	setSystemButtonActivated = function(_) --[[ line: 70 ]] end,
-	setSystemButtonEnabled = function(_) --[[ line: 71 ]] end
+	setSystemButtonActivated = function(_) end,
+	setSystemButtonEnabled = function(_) end
 }
 
-return memo(function(p0) --[[ line: 75 | named "EditChatMembersContainer" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useState (ref), useAnalyticsModule (ref), useSelector (ref), useCallback (ref), useDispatch (ref), appChatNetworkingModule (ref), createConversationModule (ref), promiseModule (ref), parseCreateConversationErrorsModule (ref), conversationModule (ref), conversationChannelsModule (ref), expandToGroupConversationModule (ref), useEffect (ref), reactModule (ref), responseIndicator (ref), selectChatMembersContainerModule (ref)
 	local var14 = cryoModule.Dictionary.join(t, p0)
 	local var15 = useRef({})
 	local var16 = useRef(false)
 	local var17, var18 = useState(false)
 	local var19 = useAnalyticsModule()
-	local var20 = useSelector(useCallback(function(p1) --[[ line: 82 ]]
+	local var20 = useSelector(useCallback(function(p1)
 		return p1.LocalUserId
 	end, {}))
 	local var21 = useDispatch()
-	local var22 = useCallback(function(p2, p3) --[[ line: 88 ]]
+	local var22 = useCallback(function(p2, p3)
 		-- upvalues: var21 (ref), appChatNetworkingModule (copy)
 		return var21(appChatNetworkingModule.rodux.AddUserToConversation.API(p3, p2))
 	end, { var21 })
-	local var23 = useCallback(function(p4) --[[ line: 92 ]]
+	local var23 = useCallback(function(p4)
 		-- upvalues: var21 (ref), createConversationModule (copy), var19 (ref)
 		return var21(createConversationModule("group", p4, var19, "userAddedParticipantToOneToOne"))
 	end, { var21 })
-	local var24 = useCallback(function(p5) --[[ line: 98 ]]
+	local var24 = useCallback(function(p5)
 		-- upvalues: var14 (ref)
 		var14.navigateToToast({ toastProps = { toastContent = { toastTitle = p5 } } })
 	end, { var14.navigateToToast })
 	
-	local var25 = function(p6, p7) --[[ line: 108 ]]
+	local var25 = function(p6, p7)
 		-- upvalues: var15 (ref), cryoModule (copy), var16 (ref), var14 (ref)
-		var15.current = cryoModule.List.map(p6, function(p8) --[[ line: 109 ]]
+		var15.current = cryoModule.List.map(p6, function(p8)
 			return p8.id
 		end)
 		local var27 = p7 <= #p6
@@ -71,7 +71,7 @@ return memo(function(p0) --[[ line: 75 | named "EditChatMembersContainer" ]]
 		end
 	end
 	
-	local var26 = useCallback(function(p9) --[[ line: 120 ]]
+	local var26 = useCallback(function(p9)
 		-- upvalues: var17 (ref), promiseModule (copy), var14 (ref), parseCreateConversationErrorsModule (copy), var24 (ref), var18 (ref), conversationModule (copy), var22 (ref), var15 (ref), conversationChannelsModule (copy), cryoModule (copy), var20 (ref), var21 (ref), expandToGroupConversationModule (copy), var19 (ref), var23 (ref)
 		if var17 then
 			return promiseModule.resolve()
@@ -79,7 +79,7 @@ return memo(function(p0) --[[ line: 75 | named "EditChatMembersContainer" ]]
 		local id = var14.conversation.id
 		local conversationType = var14.conversation.conversationType
 		
-		local var28 = function(p10) --[[ line: 126 ]]
+		local var28 = function(p10)
 			-- upvalues: parseCreateConversationErrorsModule (copy), p9 (ref), var24 (copy), var18 (copy)
 			var24(if parseCreateConversationErrorsModule(p10) == "participant_chat_disabled" then p9.invalidParticipantText else p9.networkErrorText)
 			var18(false)
@@ -88,7 +88,7 @@ return memo(function(p0) --[[ line: 75 | named "EditChatMembersContainer" ]]
 		var18(true)
 		
 		if conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then
-			return var22(var15.current, id):andThen(function() --[[ line: 138 ]]
+			return var22(var15.current, id):andThen(function()
 				-- upvalues: var14 (copy), id (ref)
 				var14.navigateToConversation(id)
 			end, var28)
@@ -106,15 +106,15 @@ return memo(function(p0) --[[ line: 75 | named "EditChatMembersContainer" ]]
 			
 			return promiseModule.reject("Cannot expand to group chat while there is an active party if the chat has expanded chat features")
 		end
-		local var29 = cryoModule.List.filter(cryoModule.List.join(var15.current, var14.conversation.participants), function(p11) --[[ line: 155 ]]
+		local var29 = cryoModule.List.filter(cryoModule.List.join(var15.current, var14.conversation.participants), function(p11)
 			-- upvalues: var20 (copy)
 			return p11 ~= var20
 		end)
 		
-		return if var14.conversation.source == "channels" or var14.conversation.source == "chat" then var21(expandToGroupConversationModule(id, var29, var19)):andThen(function(p13) --[[ line: 163 ]]
+		return if var14.conversation.source == "channels" or var14.conversation.source == "chat" then var21(expandToGroupConversationModule(id, var29, var19)):andThen(function(p13)
 			-- upvalues: var14 (copy)
 			var14.navigateToConversation(p13.id)
-		end, var28) else var23(var29):andThen(function(p12) --[[ line: 167 ]]
+		end, var28) else var23(var29):andThen(function(p12)
 			-- upvalues: var14 (copy)
 			var14.navigateToConversation(p12.id)
 		end, var28)
@@ -123,7 +123,7 @@ return memo(function(p0) --[[ line: 75 | named "EditChatMembersContainer" ]]
 		var14.conversation.id, var14.conversation.conversationType,
 		var14.conversation.participants, var14.conversation.source, var24, var19
 	})
-	useEffect(function() --[[ line: 193 ]]
+	useEffect(function()
 		-- upvalues: var14 (ref), var26 (ref)
 		var14.setSystemButtonActivated(var26)
 	end, { var14.setSystemButtonActivated, var26 })

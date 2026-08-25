@@ -28,9 +28,9 @@ local t_2 = {
 	expectedFailures = {}
 }
 
-local function validateTextureSize(p0, p1, p2, p3, p4, p5) --[[ line: 52 ]]
+local function validateTextureSize(p0, p1, p2, p3, p4, p5)
 	-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)
-	local ok, status = pcall(function() --[[ line: 60 ]]
+	local ok, status = pcall(function()
 		-- upvalues: UGCValidationService (copy), p1 (ref)
 		return UGCValidationService:GetEditableImageSize(p1)
 	end)
@@ -52,7 +52,7 @@ local function validateTextureSize(p0, p1, p2, p3, p4, p5) --[[ line: 52 ]]
 	p0:fail(errorSourceStringsModule.Keys.MakeupDecal_FailedToLoadTextureData, { fullName = p2 })
 end
 
-local function validateCoverageOutsideIncludeBounds(p6, p7, p8, p9, p10, p11, p12) --[[ line: 91 ]]
+local function validateCoverageOutsideIncludeBounds(p6, p7, p8, p9, p10, p11, p12)
 	-- upvalues: validateMakeupZoneIncludeToleranceHundredthsPercent (ref), errorSourceStringsModule (ref)
 	local var17 = (p10.X - p9.X) * (p10.Y - p9.Y) * validateMakeupZoneIncludeToleranceHundredthsPercent / 10000 * 255
 	local var18 = 0
@@ -82,7 +82,7 @@ local function validateCoverageOutsideIncludeBounds(p6, p7, p8, p9, p10, p11, p1
 	end
 end
 
-local function validateCoverageInsideExcludeBounds(p13, p14, p15, p16, p17, p18, p19) --[[ line: 137 ]]
+local function validateCoverageInsideExcludeBounds(p13, p14, p15, p16, p17, p18, p19)
 	-- upvalues: validateMakeupZoneExcludeHundredthsPercent (ref), errorSourceStringsModule (ref)
 	local var23 = (p17.X - p16.X) * (p17.Y - p16.Y) * validateMakeupZoneExcludeHundredthsPercent / 10000 * 255
 	local var24 = 0
@@ -112,7 +112,7 @@ local function validateCoverageInsideExcludeBounds(p13, p14, p15, p16, p17, p18,
 	end
 end
 
-local function validateUVZones(p20, p21, p22, p23, p24, p25) --[[ line: 183 ]]
+local function validateUVZones(p20, p21, p22, p23, p24, p25)
 	-- upvalues: validateCoverageOutsideIncludeBounds (ref), validateCoverageInsideExcludeBounds (ref)
 	local var29 = p23.UVMaxBound - p23.UVMinBound
 	
@@ -128,7 +128,7 @@ local function validateUVZones(p20, p21, p22, p23, p24, p25) --[[ line: 183 ]]
 	end
 end
 
-function t_2.run(p26, p27) --[[ line: 224 ]]
+function t_2.run(p26, p27)
 	-- upvalues: t (ref), t_1 (ref), constantsModule (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateDecalTextureLimitsModule (ref), constantsInterfaceModule (ref), validateTextureSize (ref), validateUVZones (ref)
 	local rootInstance = p27.rootInstance
 	local assetType = p27.uploadEnum.assetType

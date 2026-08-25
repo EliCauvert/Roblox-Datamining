@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InputUi").Parent.Style)
 
-return function(_, _) --[[ line: 18 ]]
+return function(_, _)
 	return {
 		designWidth = 1920,
 		imageWidth = 580,

@@ -31,9 +31,9 @@ badge.defaultProps = {
 	badgeVariant = badgeVariantModule.Default
 }
 
-function badge.render(p0) --[[ line: 67 ]]
+function badge.render(p0)
 	-- upvalues: withStyleModule (ref), tModule (ref), badgeStatesModule (ref), getTextSizeModule (ref), UIBloxConfigModule (ref), badgeVariantModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), divideTransparencyModule (ref), circle25 (ref), circle21 (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p1) --[[ line: 68 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: p0 (ref), tModule (copy), badgeStatesModule (copy), getTextSizeModule (copy), UIBloxConfigModule (copy), badgeVariantModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), divideTransparencyModule (copy), circle25 (copy), circle21 (copy), genericTextLabelModule (copy)
 		local theme = p1.Theme
 		local font = p1.Font

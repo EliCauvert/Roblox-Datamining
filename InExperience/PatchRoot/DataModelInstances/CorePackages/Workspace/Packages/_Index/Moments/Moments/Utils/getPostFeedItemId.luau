@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsTypes)
 
-return function(p0) --[[ line: 21 | named "getPostFeedItemId" ]]
+return function(p0)
 	if p0 == nil then
 		return nil
 	end

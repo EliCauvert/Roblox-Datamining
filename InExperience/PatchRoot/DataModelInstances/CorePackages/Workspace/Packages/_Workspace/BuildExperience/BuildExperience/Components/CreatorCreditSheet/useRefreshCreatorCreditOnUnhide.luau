@@ -1,16 +1,16 @@
 ﻿local appLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function(p0, p1) --[[ line: 12 | named "useRefreshCreatorCreditOnUnhide" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), appLifecycleObserverService (ref)
-	reactModule.useEffect(function() --[[ line: 16 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), p1 (ref), appLifecycleObserverService (copy)
 		if p0 == nil then
-			return function() --[[ line: 18 ]] end
+			return function() end
 		end
 		local onUnhideConnection = (p1 or appLifecycleObserverService).OnUnhide:Connect(p0)
 		
-		return function() --[[ line: 22 ]]
+		return function()
 			-- upvalues: onUnhideConnection (ref)
 			onUnhideConnection:Disconnect()
 		end

@@ -25,13 +25,13 @@ local t_2 = {
 local var5 = nil
 
 return {
-	logLoadingAssetsActivated = function() --[[ line: 41 ]]
+	logLoadingAssetsActivated = function()
 		-- upvalues: var5 (write), telemetryService (ref), t (ref), default (ref)
 		var5 = os.clock()
 		telemetryService:LogCounter(t, {}, 1)
 		default:logEvent("progress_loading_assets_activated")
 	end,
-	logLoadingAssetsDeactivated = function() --[[ line: 47 ]]
+	logLoadingAssetsDeactivated = function()
 		-- upvalues: var5 (write), telemetryService (ref), t_1 (ref), t_2 (ref), default (ref)
 		assert(var5 ~= nil, "logLoadingAssetsDeactivated called without a prior logLoadingAssetsActivated")
 		local floored = math.floor((os.clock() - var5) * 1000)

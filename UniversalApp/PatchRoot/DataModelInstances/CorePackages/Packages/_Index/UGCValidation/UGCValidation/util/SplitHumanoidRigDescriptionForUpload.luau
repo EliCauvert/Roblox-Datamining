@@ -1,7 +1,7 @@
 ﻿local constantsModule = require(script.Parent.Parent.Constants)
 
 return {
-	fixUploadInstance = function(p0) --[[ line: 17 ]]
+	fixUploadInstance = function(p0)
 		-- upvalues: constantsModule (ref)
 		local humanoidRigDescription = p0:FindFirstChildWhichIsA("HumanoidRigDescription")
 		

@@ -2,13 +2,13 @@
 local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
 local _ = require(viewRecycler.Core.Types)
 
-return function() --[[ line: 11 | named "createItemRevisionTracker" ]]
+return function()
 	-- upvalues: dataSourceChangeTypeModule (ref)
 	local var2 = 0
 	local var3 = 0
 	local t = {}
 	
-	local function _(p0) --[[ line: 20 | named "bump" ]]
+	local function _(p0)
 		-- upvalues: var2 (write), t (write)
 		for i, v in p0 do
 			var2 += 1
@@ -17,11 +17,11 @@ return function() --[[ line: 11 | named "createItemRevisionTracker" ]]
 	end
 	
 	return {
-		get = function(p1) --[[ line: 16 ]]
+		get = function(p1)
 			-- upvalues: t (write), var3 (write)
 			return t[p1] or var3
 		end,
-		applyChange = function(p2) --[[ line: 27 ]]
+		applyChange = function(p2)
 			-- upvalues: dataSourceChangeTypeModule (copy), var2 (write), var3 (write), t (write)
 			if p2.type == dataSourceChangeTypeModule.Reset then
 				var2 += 1

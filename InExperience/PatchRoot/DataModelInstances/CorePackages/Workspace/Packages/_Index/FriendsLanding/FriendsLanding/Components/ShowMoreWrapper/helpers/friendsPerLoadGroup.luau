@@ -9,7 +9,7 @@ local var3 = t.interface({
 	minimumItemsPerRow = t.optional(t.number)
 })
 
-return function(p0, p1) --[[ line: 17 ]]
+return function(p0, p1)
 	-- upvalues: var2 (ref), var3 (ref), friendsPerRowModule (ref), llama (ref)
 	assert(var2(p0))
 	assert(var3(p1))

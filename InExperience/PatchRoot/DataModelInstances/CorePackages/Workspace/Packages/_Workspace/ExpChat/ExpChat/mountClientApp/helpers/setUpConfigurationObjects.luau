@@ -38,7 +38,7 @@ local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConf
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local var29 = nil
 
-local function _(p0) --[[ line: 52 | named "isKeyboardKeyCodeSanitized" ]]
+local function _(p0)
 	-- upvalues: userInputService (ref)
 	local var31 = userInputService:GetStringForKeyCode(p0)
 	
@@ -50,7 +50,7 @@ local function _(p0) --[[ line: 52 | named "isKeyboardKeyCodeSanitized" ]]
 	return true
 end
 
-local function shouldReorderTabs(value, p1) --[[ line: 65 ]]
+local function shouldReorderTabs(value, p1)
 	-- upvalues: textChatService (ref), configModule (ref)
 	if p1 == nil or value[p1.Name] == nil then
 		return false
@@ -70,12 +70,12 @@ local function shouldReorderTabs(value, p1) --[[ line: 65 ]]
 	return false
 end
 
-return function(p2, p3) --[[ line: 91 ]]
+return function(p2, p3)
 	-- upvalues: analytics (ref), textChatService (ref), getTransparencyStoreModule (ref), chatInputBarConfigurationEnabledModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), shouldReorderTabs (ref), targetTextChannelPropertyChanged (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), devTextBoxEnabledChangedModule (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), userInputService (ref), guiService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), chatInputBarSettingsChangedModule (ref), chatWindowConfigurationEnabledModule (ref), chatLayoutHorizontalAlignmentChangedModule (ref), chatLayoutVerticalAlignmentChangedModule (ref), chatWindowSettingsChangedModule (ref), bubbleChatSettingsChangedModule (ref), setUpBubbleChatConfigurationChildrenModule (ref), playersService (ref), localTextChannelParticipantAddedModule (ref), fFlagExpChatEnableFriendsTab (ref), var29 (write), syncFriendsTabVisibilityModule (ref), channelTabsConfigurationEnabledModule (ref), fFlagExpChatUseMessagesStore (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getMessagesStoreModule (ref), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (ref), channelTabsSettingsChangedModule (ref), configurationObjectsLoadedModule (ref)
 	if p3.analytics then
 		analytics.with(p3.analytics)
 	end
-	local var34 = function(p4, p5, p6) --[[ line: 96 ]]
+	local var34 = function(p4, p5, p6)
 		-- upvalues: analytics (copy)
 		local text = nil
 		
@@ -92,7 +92,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		analytics.FireClientAnalyticsWithEventName(p4, { [p5] = text })
 	end
 	
-	local var35 = function() --[[ line: 115 ]]
+	local var35 = function()
 		-- upvalues: textChatService (copy), getTransparencyStoreModule (copy), p2 (ref), chatInputBarConfigurationEnabledModule (copy), getFFlagExpChatEnableChannelTabsUIModule (copy), shouldReorderTabs (copy), targetTextChannelPropertyChanged (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), p3 (ref), devTextBoxEnabledChangedModule (copy), getEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), userInputService (copy), var34 (ref), guiService (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), chatInputBarSettingsChangedModule (copy)
 		local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
 		local t = {}
@@ -106,7 +106,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		if chatInputBarConfiguration.Enabled then
 			var48.resetAllTransparency()
 		end
-		chatInputBarConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function() --[[ line: 124 ]]
+		chatInputBarConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function()
 			-- upvalues: p2 (copy), chatInputBarConfigurationEnabledModule (copy), chatInputBarConfiguration (ref), var48 (ref)
 			p2:dispatch(chatInputBarConfigurationEnabledModule(chatInputBarConfiguration.Enabled))
 			
@@ -114,7 +114,7 @@ return function(p2, p3) --[[ line: 91 ]]
 				var48.resetAllTransparency()
 			end
 		end)
-		chatInputBarConfiguration:GetPropertyChangedSignal("TargetTextChannel"):Connect(function() --[[ line: 131 ]]
+		chatInputBarConfiguration:GetPropertyChangedSignal("TargetTextChannel"):Connect(function()
 			-- upvalues: chatInputBarConfiguration (ref), getFFlagExpChatEnableChannelTabsUIModule (copy), shouldReorderTabs (copy), p2 (copy), targetTextChannelPropertyChanged (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy)
 			local targetTextChannel = chatInputBarConfiguration.TargetTextChannel
 			local var53 = if getFFlagExpChatEnableChannelTabsUIModule() then shouldReorderTabs(p2:getState().ChannelTabs.allChannelTabs, targetTextChannel) else false
@@ -128,7 +128,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		if p3.defaultTargetTextChannel then
 			chatInputBarConfiguration.TargetTextChannel = p3.defaultTargetTextChannel
 		elseif textChatService.ChatVersion == Enum.ChatVersion.LegacyChatService then
-			game:GetService("Chat"):GetPropertyChangedSignal("IsAutoMigrated"):Once(function() --[[ line: 148 ]]
+			game:GetService("Chat"):GetPropertyChangedSignal("IsAutoMigrated"):Once(function()
 				-- upvalues: textChatService (copy), chatInputBarConfiguration (ref)
 				local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
 				
@@ -138,11 +138,11 @@ return function(p2, p3) --[[ line: 91 ]]
 			end)
 		end
 		p2:dispatch(devTextBoxEnabledChangedModule(chatInputBarConfiguration.TextBox ~= nil))
-		chatInputBarConfiguration:GetPropertyChangedSignal("TextBox"):Connect(function() --[[ line: 157 ]]
+		chatInputBarConfiguration:GetPropertyChangedSignal("TextBox"):Connect(function()
 			-- upvalues: p2 (copy), devTextBoxEnabledChangedModule (copy), chatInputBarConfiguration (ref)
 			p2:dispatch(devTextBoxEnabledChangedModule(chatInputBarConfiguration.TextBox ~= nil))
 		end)
-		p2.changed:connect(function(p7, p8) --[[ line: 162 ]]
+		p2.changed:connect(function(p7, p8)
 			-- upvalues: chatInputBarConfiguration (ref)
 			if p7.TextChannels ~= p8.TextChannels and p7.TextChannels.targetTextChannel ~= p8.TextChannels.targetTextChannel then
 				chatInputBarConfiguration.TargetTextChannel = p7.TextChannels.targetTextChannel
@@ -184,7 +184,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		if guiService:IsTenFootInterface() then
 			t.TextSize = math.floor(0.5 + t.TextSize * 1.5)
 		end
-		chatInputBarConfiguration.Changed:Connect(function(p9) --[[ line: 214 ]]
+		chatInputBarConfiguration.Changed:Connect(function(p9)
 			-- upvalues: chatInputBarConfiguration (ref), userInputService (copy), p2 (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), chatInputBarSettingsChangedModule (copy), var34 (copy)
 			local var55 = chatInputBarConfiguration[p9]
 			
@@ -214,7 +214,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		return t
 	end
 	
-	local var36 = function() --[[ line: 239 ]]
+	local var36 = function()
 		-- upvalues: textChatService (copy), p2 (ref), chatWindowConfigurationEnabledModule (copy), chatLayoutHorizontalAlignmentChangedModule (copy), chatLayoutVerticalAlignmentChangedModule (copy), var34 (ref), guiService (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), chatWindowSettingsChangedModule (copy)
 		local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		local t = {}
@@ -223,17 +223,17 @@ return function(p2, p3) --[[ line: 91 ]]
 			return {}
 		end
 		p2:dispatch(chatWindowConfigurationEnabledModule(chatWindowConfiguration.Enabled))
-		chatWindowConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function() --[[ line: 245 ]]
+		chatWindowConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function()
 			-- upvalues: p2 (copy), chatWindowConfigurationEnabledModule (copy), chatWindowConfiguration (ref)
 			p2:dispatch(chatWindowConfigurationEnabledModule(chatWindowConfiguration.Enabled))
 		end)
 		p2:dispatch(chatLayoutHorizontalAlignmentChangedModule(chatWindowConfiguration.HorizontalAlignment))
-		chatWindowConfiguration:GetPropertyChangedSignal("HorizontalAlignment"):Connect(function() --[[ line: 250 ]]
+		chatWindowConfiguration:GetPropertyChangedSignal("HorizontalAlignment"):Connect(function()
 			-- upvalues: p2 (copy), chatLayoutHorizontalAlignmentChangedModule (copy), chatWindowConfiguration (ref)
 			p2:dispatch(chatLayoutHorizontalAlignmentChangedModule(chatWindowConfiguration.HorizontalAlignment))
 		end)
 		p2:dispatch(chatLayoutVerticalAlignmentChangedModule(chatWindowConfiguration.VerticalAlignment))
-		chatWindowConfiguration:GetPropertyChangedSignal("VerticalAlignment"):Connect(function() --[[ line: 255 ]]
+		chatWindowConfiguration:GetPropertyChangedSignal("VerticalAlignment"):Connect(function()
 			-- upvalues: p2 (copy), chatLayoutVerticalAlignmentChangedModule (copy), chatWindowConfiguration (ref)
 			p2:dispatch(chatLayoutVerticalAlignmentChangedModule(chatWindowConfiguration.VerticalAlignment))
 		end)
@@ -252,7 +252,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		if guiService:IsTenFootInterface() then
 			t.TextSize = math.floor(0.5 + t.TextSize * 1.5)
 		end
-		chatWindowConfiguration.Changed:Connect(function(p10) --[[ line: 292 ]]
+		chatWindowConfiguration.Changed:Connect(function(p10)
 			-- upvalues: chatWindowConfiguration (ref), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), p2 (copy), chatWindowSettingsChangedModule (copy), var34 (copy)
 			local var61 = chatWindowConfiguration[p10]
 			
@@ -267,7 +267,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		return t
 	end
 	
-	local var37 = function() --[[ line: 310 ]]
+	local var37 = function()
 		-- upvalues: textChatService (copy), var34 (ref), guiService (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), p2 (ref), bubbleChatSettingsChangedModule (copy), setUpBubbleChatConfigurationChildrenModule (copy)
 		local bubbleChatConfiguration = textChatService:FindFirstChildOfClass("BubbleChatConfiguration")
 		local t = {}
@@ -290,7 +290,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		if guiService:IsTenFootInterface() then
 			t.TextSize = math.floor(0.5 + t.TextSize * 1.5)
 		end
-		bubbleChatConfiguration.Changed:Connect(function(p11) --[[ line: 351 ]]
+		bubbleChatConfiguration.Changed:Connect(function(p11)
 			-- upvalues: bubbleChatConfiguration (ref), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), p2 (copy), bubbleChatSettingsChangedModule (copy), var34 (copy)
 			local var66 = bubbleChatConfiguration[p11]
 			
@@ -311,7 +311,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		return t
 	end
 	
-	local var38 = function() --[[ line: 376 ]]
+	local var38 = function()
 		-- upvalues: playersService (copy), textChatService (copy), p2 (ref), localTextChannelParticipantAddedModule (copy)
 		local localPlayer = playersService.LocalPlayer
 		
@@ -327,7 +327,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		end
 	end
 	
-	local var39 = function() --[[ line: 396 ]]
+	local var39 = function()
 		-- upvalues: textChatService (copy), fFlagExpChatEnableFriendsTab (copy), var29 (copy), syncFriendsTabVisibilityModule (copy), p2 (ref), channelTabsConfigurationEnabledModule (copy), fFlagExpChatUseMessagesStore (copy), getFFlagTextChatEnableUniverseChatTabs (copy), getMessagesStoreModule (copy), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), var38 (ref), var34 (ref), guiService (copy), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), channelTabsSettingsChangedModule (copy)
 		local channelTabsConfiguration = textChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
 		local t = {}
@@ -350,7 +350,7 @@ return function(p2, p3) --[[ line: 91 ]]
 				var69.setChannelTabsConfigurationEnabled(channelTabsConfiguration.Enabled)
 			end
 		end
-		channelTabsConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function() --[[ line: 415 ]]
+		channelTabsConfiguration:GetPropertyChangedSignal("Enabled"):Connect(function()
 			-- upvalues: p2 (copy), channelTabsConfigurationEnabledModule (copy), channelTabsConfiguration (ref), fFlagExpChatUseMessagesStore (copy), getFFlagTextChatEnableUniverseChatTabs (copy), getMessagesStoreModule (copy), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), var38 (copy)
 			p2:dispatch(channelTabsConfigurationEnabledModule(channelTabsConfiguration.Enabled))
 			
@@ -380,7 +380,7 @@ return function(p2, p3) --[[ line: 91 ]]
 		if guiService:IsTenFootInterface() then
 			t.TextSize = math.floor(0.5 + t.TextSize * 1.5)
 		end
-		channelTabsConfiguration.Changed:Connect(function(p12) --[[ line: 465 ]]
+		channelTabsConfiguration.Changed:Connect(function(p12)
 			-- upvalues: channelTabsConfiguration (ref), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), p2 (copy), channelTabsSettingsChangedModule (copy), var34 (copy)
 			local var72 = channelTabsConfiguration[p12]
 			

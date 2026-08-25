@@ -15,7 +15,7 @@ local useScrollToSelectedRefModule = require(script.Parent.useScrollToSelectedRe
 local useTextSizeModule = require(foundation.Utility.useTextSize)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0) --[[ line: 46 | named "CalendarHeader" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), dateTimeUtilitiesModule (ref), useTextSizeModule (ref), useScaledValueModule (ref), reactModule (ref), useScrollToSelectedRefModule (ref), viewModule (ref), iconButtonModule (ref), icon (ref), inputSizeModule (ref), buttonVariantModule (ref), dropdownModule (ref), inputVariantModule (ref)
 	local viewDate = p0.viewDate
 	local var13 = useTokensModule()
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 46 | named "CalendarHeader" ]]
 	local var17 = useScaledValueModule(200)
 	local var18 = if var14 then math.ceil(var14.X) + var16 else 110
 	local var19 = if var15 then math.ceil(var15.X) + var16 else 70
-	local var20 = reactModule.useMemo(function() --[[ line: 59 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: dateTimeUtilitiesModule (copy)
 		local t = {}
 		
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 46 | named "CalendarHeader" ]]
 		end
 		return t
 	end, {})
-	local var21 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), dateTimeUtilitiesModule (copy), viewDate (ref)
 		local year, year_1
 		local _ = nil
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 46 | named "CalendarHeader" ]]
 				LayoutOrder = 1,
 				items = var20,
 				maxHeight = var17,
-				onItemChanged = reactModule.useCallback(function(p1) --[[ line: 92 ]]
+				onItemChanged = reactModule.useCallback(function(p1)
 					-- upvalues: p0 (ref), viewDate (ref)
 					local var24 = tonumber(p1)
 					
@@ -96,7 +96,7 @@ return function(p0) --[[ line: 46 | named "CalendarHeader" ]]
 				LayoutOrder = 2,
 				items = var21,
 				maxHeight = var17,
-				onItemChanged = reactModule.useCallback(function(p2) --[[ line: 99 ]]
+				onItemChanged = reactModule.useCallback(function(p2)
 					-- upvalues: p0 (ref), viewDate (ref)
 					local var25 = tonumber(p2)
 					

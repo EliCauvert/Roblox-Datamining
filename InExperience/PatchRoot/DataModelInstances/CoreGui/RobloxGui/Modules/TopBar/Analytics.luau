@@ -12,7 +12,7 @@ local _ = require(parent.Flags.GetFFlagEnableTopBarAnalytics)()
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 42 ]]
+function t.new()
 	-- upvalues: rbxAnalyticsService (ref), t (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), cryoModule (ref), constantsModule (ref)
 	local tbl = setmetatable({
 		_target = "client",
@@ -27,14 +27,14 @@ function t.new() --[[ line: 42 ]]
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		tbl._defaultProps.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function tbl._sendEvent(p0, p1) --[[ line: 59 ]]
+	function tbl._sendEvent(p0, p1)
 		-- upvalues: cryoModule (copy), tbl (ref), rbxAnalyticsService (copy)
 		rbxAnalyticsService:SendEventDeferred(tbl._target, tbl._context, p0, cryoModule.Dictionary.join(tbl._defaultProps, p1 or {}))
 		
 		return nil
 	end
 	
-	function tbl._onButtonActivated(p2, p3) --[[ line: 65 ]]
+	function tbl._onButtonActivated(p2, p3)
 		-- upvalues: tbl (ref), constantsModule (copy)
 		return tbl._sendEvent(constantsModule.Analytics.EventNameTopBarButtonActivated, {
 			button = p2,
@@ -45,37 +45,37 @@ function t.new() --[[ line: 42 ]]
 	return tbl
 end
 
-function t:onChatButtonActivated(p4) --[[ line: 75 ]]
+function t:onChatButtonActivated(p4)
 	-- upvalues: constantsModule (ref)
 	return self._onButtonActivated(constantsModule.Analytics.ChatButtonName, p4)
 end
 
-function t:onMoreMenuActivated() --[[ line: 79 ]]
+function t:onMoreMenuActivated()
 	-- upvalues: constantsModule (ref)
 	return self._onButtonActivated(constantsModule.Analytics.MoreMenuButtonName, true)
 end
 
-function t:onInventoryActivated(p5) --[[ line: 84 ]]
+function t:onInventoryActivated(p5)
 	-- upvalues: constantsModule (ref)
 	return self._onButtonActivated(constantsModule.Analytics.InventoryButtonName, p5)
 end
 
-function t:onLeaderboardActivated(p6) --[[ line: 88 ]]
+function t:onLeaderboardActivated(p6)
 	-- upvalues: constantsModule (ref)
 	return self._onButtonActivated(constantsModule.Analytics.LeaderboardButtonName, p6)
 end
 
-function t:onEmotesActivated(p7) --[[ line: 92 ]]
+function t:onEmotesActivated(p7)
 	-- upvalues: constantsModule (ref)
 	return self._onButtonActivated(constantsModule.Analytics.EmotesButtonName, p7)
 end
 
-function t:onShowGamepadNavigationDialog() --[[ line: 96 ]]
+function t:onShowGamepadNavigationDialog()
 	-- upvalues: constantsModule (ref)
 	return self._sendEvent(constantsModule.Analytics.ShowGamepadNavigationDialog)
 end
 
-function t:onDismissGamepadNavigationDialog() --[[ line: 100 ]]
+function t:onDismissGamepadNavigationDialog()
 	-- upvalues: constantsModule (ref)
 	return self._sendEvent(constantsModule.Analytics.DismissGamepadNavigationDialog)
 end

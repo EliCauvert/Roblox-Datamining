@@ -11,7 +11,7 @@ local wrappersModule = require(foundation.Utility.Wrappers)
 local connection = wrappersModule.Connection
 local signal = wrappersModule.Signal
 
-local function calculateGridRadius(p0) --[[ line: 49 ]]
+local function calculateGridRadius(p0)
 	for i = 3, 20, 2 do
 		if p0 >= i * i - math.floor(i / 2) * (math.floor(i / 2) + 1) then
 			continue
@@ -21,11 +21,11 @@ local function calculateGridRadius(p0) --[[ line: 49 ]]
 	return 7
 end
 
-local function BottomRowSwatches(p1) --[[ line: 71 ]]
+local function BottomRowSwatches(p1)
 	-- upvalues: reactModule (ref), signal (ref), connection (ref), imageModule (ref), viewModule (ref)
 	local var11, var12 = reactModule.useState(0)
 	local var13 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var11 (ref), var12 (ref), signal (copy), connection (copy)
 		local current = var13.current
 		
@@ -35,12 +35,12 @@ local function BottomRowSwatches(p1) --[[ line: 71 ]]
 		if rounded ~= var11 then
 			var12(rounded)
 		end
-		local var20 = signal.Connect(current:GetPropertyChangedSignal("AbsoluteSize"), function() --[[ line: 84 ]]
+		local var20 = signal.Connect(current:GetPropertyChangedSignal("AbsoluteSize"), function()
 			-- upvalues: var12 (copy), current (ref)
 			var12(math.round(current.AbsoluteSize.X))
 		end)
 		
-		return function() --[[ line: 87 ]]
+		return function()
 			-- upvalues: connection (copy), var20 (ref)
 			connection.Disconnect(var20)
 		end
@@ -66,7 +66,7 @@ local function BottomRowSwatches(p1) --[[ line: 71 ]]
 	return reactModule.createElement(viewModule, { tag = "size-full", ref = var13 }, t)
 end
 
-return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
+return function(p2)
 	-- upvalues: useTokensModule (ref), reactModule (ref), brickColorConstantsModule (ref), calculateGridRadius (ref), imageModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), BottomRowSwatches (ref)
 	local var21 = useTokensModule()
 	local size200 = var21.Size.Size_200
@@ -76,15 +76,15 @@ return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
 	local size350_1 = var21.Size.Size_350
 	local size400_1 = var21.Size.Size_400
 	local size200_1 = var21.Size.Size_200
-	local var22 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: brickColorConstantsModule (copy)
 		return brickColorConstantsModule.MAIN
 	end, {})
-	local var23 = reactModule.useMemo(function() --[[ line: 138 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: brickColorConstantsModule (copy)
 		return brickColorConstantsModule.BOTTOM
 	end, {})
-	local var24 = reactModule.useMemo(function() --[[ line: 142 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: calculateGridRadius (copy), var22 (ref)
 		local var28 = calculateGridRadius(#var22)
 		
@@ -95,7 +95,7 @@ return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
 		end
 		return var28
 	end, {})
-	local var25, var26 = reactModule.useMemo(function() --[[ line: 153 ]]
+	local var25, var26 = reactModule.useMemo(function()
 		-- upvalues: var24 (ref), size200 (ref), var22 (ref), size350 (ref), size400 (ref)
 		local t = {}
 		local var30 = 1
@@ -133,7 +133,7 @@ return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
 	end, {
 		var24, size200, var22, var23, var21.Size.Size_100, var21.Size.Size_50
 	})
-	local var27 = reactModule.useCallback(function(p3, p4) --[[ line: 252 ]]
+	local var27 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var26 (ref), reactModule (copy), imageModule (copy), size350 (ref), size200_1 (ref), size400 (ref), var21 (ref)
 		local uDim2 = UDim2.fromOffset(p3.x - var26.offset.X, p3.y - var26.offset.Y)
 		local t = {}
@@ -164,7 +164,7 @@ return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
 		ColorGrid = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(var26.width, var26.height),
-			onActivated = reactModule.useCallback(function(p5, p6) --[[ line: 207 ]]
+			onActivated = reactModule.useCallback(function(p5, p6)
 				-- upvalues: var26 (ref), var25 (ref), size200 (ref), p2 (ref)
 				if p6.UserInputType == Enum.UserInputType.MouseButton1 then
 					local var39 = nil
@@ -196,7 +196,7 @@ return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
 				p2.onColorChanged
 			}),
 			stateLayer = { affordance = stateLayerAffordanceModule.None }
-		}, reactModule.useCallback(function() --[[ line: 285 ]]
+		}, reactModule.useCallback(function()
 			-- upvalues: p2 (ref), var25 (ref), var27 (ref)
 			local t = {}
 			local var45 = p2.selectedColor and p2.selectedColor:getValue() or nil
@@ -212,7 +212,7 @@ return function(p2) --[[ line: 122 | named "BrickColorPicker" ]]
 			tag = "stroke-standard stroke-muted radius-circle bg-surface-100",
 			LayoutOrder = 2,
 			Size = UDim2.new(1, -var21.Size.Size_400, 0, var21.Size.Size_500),
-			onActivated = reactModule.useCallback(function(p7, p8) --[[ line: 233 ]]
+			onActivated = reactModule.useCallback(function(p7, p8)
 				-- upvalues: size100 (ref), var23 (ref), p2 (ref)
 				if p8.UserInputType == Enum.UserInputType.MouseButton1 then
 					local var46 = p7.AbsoluteSize.X - 2 * size100

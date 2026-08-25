@@ -8,16 +8,16 @@ local friendsChatRealtimeSubscriberModule = require(script.Parent.FriendsChatRea
 local friendsTabUnreadBridgeModule = require(script.Parent.FriendsTabUnreadBridge)
 local friendsChatTabNameModule = require(script.Parent.Parent.FriendsChatTabName)
 
-return function(p0) --[[ line: 39 | named "FriendsChatEventReceiver" ]]
+return function(p0)
 	-- upvalues: getFriendsChatRealtimeStoreModule (ref), signalsReactModule (ref), getFriendsChatNavigationStoreModule (ref), reactModule (ref), friendsChatTabNameModule (ref), friendsSurfaceVisibility (ref), friendsTabUnreadBridgeModule (ref), friendsChatRealtimeSubscriberModule (ref)
 	local var7 = signalsReactModule.useSignalState(getFriendsChatRealtimeStoreModule(false).getHasEnteredFriendsTab)
 	local var8 = signalsReactModule.useSignalState(getFriendsChatNavigationStoreModule(false).getSelectedConversationId)
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), friendsChatTabNameModule (copy), var8 (ref), friendsSurfaceVisibility (copy)
 		local var9 = if p0.isChatWindowVisible and p0.selectedTabName == friendsChatTabNameModule then var8 else nil
 		friendsSurfaceVisibility.setVisibleConversationId(var9)
 		
-		return function() --[[ line: 52 ]]
+		return function()
 			-- upvalues: friendsSurfaceVisibility (copy), var9 (ref)
 			if friendsSurfaceVisibility.getVisibleConversationId(false) == var9 then
 				friendsSurfaceVisibility.setVisibleConversationId(nil)

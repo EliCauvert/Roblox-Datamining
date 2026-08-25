@@ -25,7 +25,7 @@ local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 
-return function(p0) --[[ line: 48 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), view (ref), constantsModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), generatedTextFeedbackContainerModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
 	local var12 = useDeviceInsets()
 	local var13 = useTokens()
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 48 ]]
 	local var16 = reactModule.useRef(nil)
 	local publishingCtaSecondary = var14.PublishingCtaSecondary
 	local var17 = useSignalState(var15.getDescription)
-	reactModule.useEffect(function() --[[ line: 61 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var17 (ref)
 		local current = var16.current
 		
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 48 ]]
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = useCallback(function(p1) --[[ line: 84 ]]
+					[reactModule.Change.Text] = useCallback(function(p1)
 						local var18 = p1.Text:gsub("[\r\n]+", " ")
 						local charCount = utf8.len(var18)
 						
@@ -88,7 +88,7 @@ return function(p0) --[[ line: 48 ]]
 							p1.Text = var18
 						end
 					end, {}),
-					[reactModule.Event.FocusLost] = useCallback(function() --[[ line: 68 ]]
+					[reactModule.Event.FocusLost] = useCallback(function()
 						-- upvalues: var16 (ref), var15 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
 						local current = var16.current
 						var15.updateDescription(if current ~= nil then "" else current.Text)

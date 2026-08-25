@@ -1,15 +1,15 @@
 ﻿local signalsExperimentalModule = require(script.Parent.Parent.SignalsExperimental)
 
-return function(value) --[[ line: 4 | named "createSignalsMiddleware" ]]
+return function(value)
 	-- upvalues: signalsExperimentalModule (ref)
-	return function(p0, _) --[[ line: 5 ]]
+	return function(p0, _)
 		-- upvalues: value (ref), signalsExperimentalModule (copy)
-		return function(p1) --[[ line: 6 ]]
+		return function(p1)
 			-- upvalues: value (copy), signalsExperimentalModule (copy), p0 (ref)
 			local type = value[p1.type]
 			
 			if type and #type > 0 then
-				signalsExperimentalModule.batch(function() --[[ line: 10 ]]
+				signalsExperimentalModule.batch(function()
 					-- upvalues: type (ref), p1 (ref), p0 (copy)
 					local var1 = true
 					

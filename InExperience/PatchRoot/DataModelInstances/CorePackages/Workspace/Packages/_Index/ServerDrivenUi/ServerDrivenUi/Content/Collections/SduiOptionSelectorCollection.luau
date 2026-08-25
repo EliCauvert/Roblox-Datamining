@@ -11,18 +11,18 @@ local sduiVariableItemWidthCarouselModule = require(serverDrivenUi.Content.Colle
 local fFlagSduiOptionImpressionsEventName = require(parent.SharedFlags).FFlagSduiOptionImpressionsEventName
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 
-return reactModule.memo(function(p0) --[[ line: 66 | named "SduiOptionSelectorCollection" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), sduiErrorType (ref), sduiComponentType (ref), fFlagSduiChartsSortDetailGenreFilter (ref), cryoModule (ref), sduiVariableItemWidthCarouselModule (ref), fFlagSduiOptionImpressionsEventName (ref), sduiPlaceholderWrapper (ref)
 	local sduiContext = p0.sduiContext
 	local paddingBetweenOptionSelectorAndCollection = p0.paddingBetweenOptionSelectorAndCollection or useTokens().Size.Size_400
 	local var6, var7 = reactModule.useState(nil)
 	local var6_1 = var6 or p0.selectedOption
 	local var9 = reactModule.useRef(0)
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref)
 		var7(nil)
 	end, { p0.selectedOption })
-	local var10 = reactModule.useCallback(function(p1) --[[ line: 84 ]]
+	local var10 = reactModule.useCallback(function(p1)
 		-- upvalues: sduiContext (ref), sduiErrorType (copy), sduiComponentType (copy), var6 (ref), fFlagSduiChartsSortDetailGenreFilter (copy), var7 (ref), var9 (ref), p0 (ref)
 		if typeof(p1) ~= "string" or p1 == "" then
 			sduiContext.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -49,7 +49,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "SduiOptionSelectorCo
 			current = var9.current
 		end
 		if typeof(var11) == "table" and typeof(var11.finally) == "function" then
-			var11:finally(function() --[[ line: 131 ]]
+			var11:finally(function()
 				-- upvalues: var9 (copy), current (write), var7 (copy)
 				if var9.current == current then
 					var7(nil)
@@ -94,7 +94,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "SduiOptionSelectorCo
 			startRow = p0.startRow,
 			numUpdatesToDelayImpressions = p0.numUpdatesToDelayImpressions,
 			appCompositionEnabled = p0.appCompositionEnabled,
-			items = reactModule.useMemo(function() --[[ line: 139 ]]
+			items = reactModule.useMemo(function()
 				-- upvalues: p0 (ref), cryoModule (copy), var6_1 (ref), var10 (ref)
 				local t = {}
 				
@@ -104,7 +104,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "SduiOptionSelectorCo
 					local cloned = table.clone(v)
 					cloned.props = cryoModule.Dictionary.join(v.props or {}, {
 						isChecked = var14 ~= nil and var14 == var6_1,
-						onActivated = function() --[[ line: 151 ]]
+						onActivated = function()
 							-- upvalues: var10 (copy), var14 (ref)
 							var10(var14)
 						end
@@ -123,7 +123,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "SduiOptionSelectorCo
 			mountRealDuringPlaceholder = false,
 			isPlaceholder = var6 ~= nil,
 			transitionDurationSeconds = p0.placeholderTransitionDurationSeconds,
-			real = reactModule.useMemo(function() --[[ line: 163 ]]
+			real = reactModule.useMemo(function()
 				-- upvalues: p0 (ref), reactModule (copy), cryoModule (copy)
 				return reactModule.cloneElement(p0.collectionComponent, {
 					extraLocalProps = cryoModule.Dictionary.join(if p0.collectionComponent.props then p0.collectionComponent.props.extraLocalProps else {}, {

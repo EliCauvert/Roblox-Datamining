@@ -1,8 +1,8 @@
-﻿local function captureSize(...) --[[ line: 31 ]]
+﻿local function captureSize(...)
 	return { ... }, select("#", ...)
 end
 
-return function(p0) --[[ line: 37 | named "memoize" ]]
+return function(p0)
 	-- upvalues: captureSize (ref)
 	assert(type(p0) == "function", "memoize requires a function to memoize")
 	local var1 = nil
@@ -10,7 +10,7 @@ return function(p0) --[[ line: 37 | named "memoize" ]]
 	local var3 = nil
 	local var4 = nil
 	
-	return function(...) --[[ line: 45 ]]
+	return function(...)
 		-- upvalues: var2 (write), var3 (write), var4 (write), captureSize (copy), p0 (ref), var1 (write)
 		local var5 = select("#", ...)
 		while var5 > 0 and select(var5, ...) == nil do

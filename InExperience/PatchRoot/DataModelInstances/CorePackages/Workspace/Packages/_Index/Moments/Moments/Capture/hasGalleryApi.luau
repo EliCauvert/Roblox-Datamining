@@ -1,5 +1,5 @@
-﻿return function() --[[ line: 8 | named "hasGalleryApi" ]]
-	local ok, status = pcall(function() --[[ line: 9 ]]
+﻿return function()
+	local ok, status = pcall(function()
 		local captureService = game:GetService("CaptureService")
 		
 		return captureService ~= nil and captureService.PromptCaptureGalleryPermissionAsync ~= nil

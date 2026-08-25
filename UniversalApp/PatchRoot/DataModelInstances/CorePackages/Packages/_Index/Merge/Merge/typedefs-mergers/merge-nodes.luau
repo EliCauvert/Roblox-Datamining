@@ -6,7 +6,7 @@ local object = luauPolyfillModule.Object
 local map = luauPolyfillModule.Map
 local t = {
 	schemaDefSymbol = "SCHEMA_DEF_SYMBOL",
-	isNamedDefinitionNode = function(p0) --[[ line: 71 ]]
+	isNamedDefinitionNode = function(p0)
 		-- upvalues: array (ref), object (ref)
 		return array.indexOf(object.keys(p0), "name") ~= -1
 	end
@@ -23,7 +23,7 @@ local mergeDirective = require(script.Parent.directives).mergeDirective
 local mergeSchemaDefs = require(script.Parent["schema-def"]).mergeSchemaDefs
 local collectComment = require(parent.Utils).collectComment
 
-function t.mergeGraphQLNodes(p1, p2) --[[ line: 77 ]]
+function t.mergeGraphQLNodes(p1, p2)
 	-- upvalues: map (ref), boolean (ref), array (ref), object (ref), collectComment (ref), kind (ref), mergeType (ref), mergeEnum (ref), mergeUnion (ref), mergeScalar (ref), mergeInputType (ref), mergeInterface (ref), mergeDirective (ref), mergeSchemaDefs (ref)
 	local var2 = map.new()
 	

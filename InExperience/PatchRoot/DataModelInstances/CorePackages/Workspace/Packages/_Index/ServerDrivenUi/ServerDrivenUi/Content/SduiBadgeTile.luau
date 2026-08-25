@@ -7,7 +7,7 @@ local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 local sduiTileModule = require(serverDrivenUi.Content.SduiTile)
 local fFlagSduiTileImagePaddingInset = require(parent.SharedFlags).FFlagSduiTileImagePaddingInset
 
-return reactModule.memo(function(p0) --[[ line: 20 | named "SduiBadgeTile" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), fFlagSduiTileImagePaddingInset (ref), cryoModule (ref), reactModule (ref), loadableImage (ref), sduiTileModule (ref)
 	local var10
 	local var4 = useTokens()

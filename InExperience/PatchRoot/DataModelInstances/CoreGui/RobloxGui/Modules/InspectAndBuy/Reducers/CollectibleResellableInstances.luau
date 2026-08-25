@@ -5,7 +5,7 @@ local parent = script.Parent.Parent
 local collectibleInstanceModule = require(parent.Models.CollectibleInstance)
 
 return roduxModule.createReducer({}, {
-	[require(parent.Actions.SetCollectibleResellableInstances).name] = function(p0, p1) --[[ line: 13 ]]
+	[require(parent.Actions.SetCollectibleResellableInstances).name] = function(p0, p1)
 		-- upvalues: collectibleInstanceModule (ref), cryoModule (ref)
 		local collectibleItemId = p1.collectibleItemId
 		local t = {}

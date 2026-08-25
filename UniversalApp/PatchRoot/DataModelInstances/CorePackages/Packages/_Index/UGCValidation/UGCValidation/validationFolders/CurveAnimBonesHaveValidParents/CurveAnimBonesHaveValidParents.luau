@@ -16,7 +16,7 @@ end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
 t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 
-function t.fflag() --[[ line: 23 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
 end
@@ -30,7 +30,7 @@ local list = {
 }
 local var8 = nil
 
-local function getParentMap() --[[ line: 33 ]]
+local function getParentMap()
 	-- upvalues: var8 (write), list (ref), r15plusUtilsModule (ref)
 	if var8 then
 		return var8
@@ -57,7 +57,7 @@ local function getParentMap() --[[ line: 33 ]]
 	return t
 end
 
-function t.run(p0, p1) --[[ line: 61 ]]
+function t.run(p0, p1)
 	-- upvalues: getParentMap (ref), curveAnimBoneHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
 	local var14 = getParentMap()
 	

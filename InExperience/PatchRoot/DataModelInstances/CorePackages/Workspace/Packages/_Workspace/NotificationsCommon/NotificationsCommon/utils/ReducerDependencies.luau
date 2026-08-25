@@ -9,13 +9,13 @@ local var4 = lumberyakModule.Logger.new(nil, "ShareGame"):new("ShareGame Network
 local var5 = roduxNetworking.config({
 	keyPath = "NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 17 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: var4 (ref), httpRequest (ref)
 			var4:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
 			
 			return httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
 		end,
-		postRequestFunction = function(p3, p4) --[[ line: 21 ]]
+		postRequestFunction = function(p3, p4)
 			-- upvalues: var4 (ref)
 			var4:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p4.requestMethod, p4.url, p3.StatusCode, p3.Body))
 		end,

@@ -5,7 +5,7 @@ local navigateDownModule = require(navigationRodux.Thunks.NavigateDown)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 
-return function(p0, p1, p2) --[[ line: 12 ]]
+return function(p0, p1, p2)
 	-- upvalues: argCheckModule (ref), navigateDownModule (ref), appPage (ref), urlBuilder (ref)
 	argCheckModule.isInTypes(p0, { "string", "number" }, "userId")
 	argCheckModule.isInTypes(p1, { "string", "number" }, "conversationId")

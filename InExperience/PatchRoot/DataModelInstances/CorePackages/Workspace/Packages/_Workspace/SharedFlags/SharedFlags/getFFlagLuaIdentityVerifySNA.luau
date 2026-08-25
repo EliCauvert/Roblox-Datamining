@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaIdentityVerifySNA", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaIdentityVerifySNA")
 end

@@ -2,11 +2,11 @@
 local _ = require(script.Parent.UserPickerTypes)
 local buildExperienceUserPickerSearchDebounceMs = game:DefineFastInt("BuildExperienceUserPickerSearchDebounceMs", 250)
 
-local function _(p0) --[[ line: 23 | named "trim" ]]
+local function _(p0)
 	return string.gsub(p0, "^%s*(.-)%s*$", "%1")
 end
 
-local _ = function(p1) --[[ line: 27 | named "countKeys" ]]
+local _ = function(p1)
 	local var3 = 0
 	
 	for i, v in p1 do
@@ -17,7 +17,7 @@ local _ = function(p1) --[[ line: 27 | named "countKeys" ]]
 	return var3
 end
 
-local function appendUniqueIds(p2, p3) --[[ line: 39 ]]
+local function appendUniqueIds(p2, p3)
 	local t = {}
 	
 	for i, v in p2 do
@@ -33,7 +33,7 @@ local function appendUniqueIds(p2, p3) --[[ line: 39 ]]
 	return cloned
 end
 
-return function(p4) --[[ line: 53 | named "useUserPicker" ]]
+return function(p4)
 	-- upvalues: reactModule (ref), buildExperienceUserPickerSearchDebounceMs (ref), appendUniqueIds (ref)
 	local browseIds = p4.browseIds
 	local browseIsLoading = p4.browseIsLoading
@@ -54,7 +54,7 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 	local var21 = reactModule.useRef(0)
 	local var22 = reactModule.useRef(false)
 	local var23 = string.gsub(var6, "^%s*(.-)%s*$", "%1") ~= ""
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var9 (ref), var11 (ref), var13 (ref), var21 (ref), buildExperienceUserPickerSearchDebounceMs (copy), onSearch (ref)
 		local replaced = string.gsub(var6, "^%s*(.-)%s*$", "%1")
 		
@@ -70,16 +70,16 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 		var9({})
 		var11(nil)
 		var13(true)
-		replaced = task.delay(buildExperienceUserPickerSearchDebounceMs / 1000, function() --[[ line: 96 ]]
+		replaced = task.delay(buildExperienceUserPickerSearchDebounceMs / 1000, function()
 			-- upvalues: onSearch (copy), replaced (ref), var21 (copy), current (ref), var9 (copy), var11 (copy), var13 (copy)
-			onSearch(replaced):andThen(function(p5) --[[ line: 99 ]]
+			onSearch(replaced):andThen(function(p5)
 				-- upvalues: var21 (copy), current (copy), var9 (copy), var11 (copy), var13 (copy)
 				if var21.current == current then
 					var9(p5.ids)
 					var11(p5.nextCursor)
 					var13(false)
 				end
-			end):catch(function() --[[ line: 106 ]]
+			end):catch(function()
 				-- upvalues: var21 (copy), current (copy), var9 (copy), var11 (copy), var13 (copy)
 				if var21.current == current then
 					var9({})
@@ -89,12 +89,12 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 			end)
 		end)
 		
-		return function() --[[ line: 117 ]]
+		return function()
 			-- upvalues: replaced (ref)
 			pcall(task.cancel, replaced)
 		end
 	end, { var6, onSearch })
-	local var24 = reactModule.useCallback(function() --[[ line: 122 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), var20 (ref), var10 (ref), var21 (ref), onSearch (ref), var6 (ref), var9 (ref), appendUniqueIds (copy), var11 (ref), loadMoreBrowse (ref)
 		if not var23 then
 			loadMoreBrowse()
@@ -105,10 +105,10 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 		end
 		var20.current = true
 		local current = var21.current
-		onSearch(string.gsub(var6, "^%s*(.-)%s*$", "%1"), var10):andThen(function(p6) --[[ line: 132 ]]
+		onSearch(string.gsub(var6, "^%s*(.-)%s*$", "%1"), var10):andThen(function(p6)
 			-- upvalues: var21 (copy), current (ref), var9 (copy), appendUniqueIds (copy), var11 (copy)
 			if var21.current == current then
-				var9(function(p7) --[[ line: 137 ]]
+				var9(function(p7)
 					-- upvalues: appendUniqueIds (copy), p6 (ref)
 					return appendUniqueIds(p7, p6.ids)
 				end)
@@ -116,7 +116,7 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 				
 				return
 			end
-		end):finally(function() --[[ line: 142 ]]
+		end):finally(function()
 			-- upvalues: var20 (copy)
 			var20.current = false
 		end)
@@ -127,7 +127,7 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 		onSearch,
 		loadMoreBrowse
 	})
-	local var25 = reactModule.useMemo(function() --[[ line: 154 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var23 (ref), var8 (ref), browseIds (ref), excludeUserIds (ref)
 		local var28 = if var23 then var8 else browseIds
 		
@@ -150,12 +150,12 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 			var26 += 1
 		end
 	end
-	reactModule.useEffect(function() --[[ line: 173 ]]
+	reactModule.useEffect(function()
 		-- upvalues: selectionLimit (ref), var15 (ref)
 		if selectionLimit == nil then
 			return
 		end
-		var15(function(p8) --[[ line: 178 ]]
+		var15(function(p8)
 			-- upvalues: selectionLimit (ref)
 			local var30 = 0
 			
@@ -179,7 +179,7 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 			return t
 		end)
 	end, { selectionLimit })
-	reactModule.useEffect(function() --[[ line: 194 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref), onSelectionChanged (ref), var14 (ref)
 		if not var22.current then
 			var22.current = true
@@ -206,11 +206,11 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 		selectedCount = var26,
 		hasSelection = var26 > 0,
 		selectionLimit = selectionLimit,
-		isSelected = reactModule.useCallback(function(p9) --[[ line: 210 ]]
+		isSelected = reactModule.useCallback(function(p9)
 			-- upvalues: var14 (ref)
 			return var14[p9] == true
 		end, { var14 }),
-		canSelect = reactModule.useCallback(function(p10) --[[ line: 214 ]]
+		canSelect = reactModule.useCallback(function(p10)
 			-- upvalues: var14 (ref), selectionLimit (ref)
 			if var14[p10] == true then
 				return true
@@ -229,9 +229,9 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 			end
 			return var34
 		end, { var14, selectionLimit }),
-		toggleSelected = reactModule.useCallback(function(p11) --[[ line: 221 ]]
+		toggleSelected = reactModule.useCallback(function(p11)
 			-- upvalues: var15 (ref), selectionLimit (ref)
-			var15(function(p12) --[[ line: 222 ]]
+			var15(function(p12)
 				-- upvalues: p11 (ref), selectionLimit (copy)
 				local cloned = table.clone(p12)
 				
@@ -260,7 +260,7 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 		message = var16,
 		setMessage = var17,
 		isSubmitting = var18,
-		submit = reactModule.useCallback(function() --[[ line: 235 ]]
+		submit = reactModule.useCallback(function()
 			-- upvalues: var18 (ref), var14 (ref), var19 (ref), onSubmit (ref), var16 (ref)
 			if var18 then return end
 			local t = {}
@@ -274,7 +274,7 @@ return function(p4) --[[ line: 53 | named "useUserPicker" ]]
 				return
 			end
 			var19(true)
-			onSubmit(t, if string.gsub(var16, "^%s*(.-)%s*$", "%1") ~= "" then nil else var16):finally(function() --[[ line: 249 ]]
+			onSubmit(t, if string.gsub(var16, "^%s*(.-)%s*$", "%1") ~= "" then nil else var16):finally(function()
 				-- upvalues: var19 (copy)
 				var19(false)
 			end)

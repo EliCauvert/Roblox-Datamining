@@ -10,17 +10,17 @@ t.VirtualizedListContext = var2
 if _G.__DEV__ then
 	var2.displayName = "VirtualizedListContext"
 end
-function t.VirtualizedListContextResetter(value) --[[ line: 96 ]]
+function t.VirtualizedListContextResetter(value)
 	-- upvalues: reactModule (ref), var2 (ref)
 	return reactModule.createElement(var2.Provider, { value = nil }, value.children)
 end
 
-function t.VirtualizedListContextProvider(p0) --[[ line: 109 ]]
+function t.VirtualizedListContextProvider(p0)
 	-- upvalues: useMemo (ref), reactModule (ref), var2 (ref)
 	local value = p0.value
 	
 	return reactModule.createElement(var2.Provider, {
-		value = useMemo(function() --[[ line: 116 ]]
+		value = useMemo(function()
 			-- upvalues: value (ref)
 			return {
 				cellKey = nil,
@@ -46,7 +46,7 @@ function t.VirtualizedListContextProvider(p0) --[[ line: 109 ]]
 	}, p0.children)
 end
 
-function t.VirtualizedListCellContextProvider(p1) --[[ line: 156 ]]
+function t.VirtualizedListCellContextProvider(p1)
 	-- upvalues: useContext (ref), var2 (ref), reactModule (ref), object (ref)
 	local var3 = useContext(var2)
 	

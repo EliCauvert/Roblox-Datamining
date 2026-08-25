@@ -10,7 +10,7 @@ local callOncePerDMModule = require(parent.callOncePerDM)
 local signal = appCommonLibModule.Signal
 game:DefineFastFlag("EnableTelemetryProtocol", false)
 
-function getDomainName() --[[ line: 82 ]]
+function getDomainName()
 	return if game:GetFastFlag("EnableTelemetryProtocol") then "Telemetry" else "Logging"
 end
 
@@ -62,7 +62,7 @@ local t_1 = {
 }
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 150 ]]
+function t_1.new(p0)
 	-- upvalues: messageBus (ref), signal (ref), t_1 (ref)
 	local t = {
 		messageBus = p0 or messageBus,
@@ -73,11 +73,11 @@ function t_1.new(p0) --[[ line: 150 ]]
 	return t
 end
 
-function t_1:setDurationLoggerListener(p1) --[[ line: 159 ]]
+function t_1:setDurationLoggerListener(p1)
 	return self.durationLoggerSignal:connect(p1)
 end
 
-function t_1:logEventWithTimestamp(p2, p3, p4) --[[ line: 163 ]]
+function t_1:logEventWithTimestamp(p2, p3, p4)
 	-- upvalues: argCheckModule (ref)
 	argCheckModule.isType(p2, "string", "eventName")
 	argCheckModule.isType(p3, "number", "timestamp")
@@ -85,35 +85,35 @@ function t_1:logEventWithTimestamp(p2, p3, p4) --[[ line: 163 ]]
 	self.durationLoggerSignal:fire(p2)
 end
 
-function t_1:logEvent(p5, p6) --[[ line: 175 ]]
+function t_1:logEvent(p5, p6)
 	-- upvalues: argCheckModule (ref)
 	argCheckModule.isType(p5, "string", "eventName")
 	self:logEventWithTimestamp(p5, 0, p6)
 end
 
-function t_1.logEventOnce(p7, p8, p9) --[[ line: 180 ]]
+function t_1.logEventOnce(p7, p8, p9)
 	-- upvalues: argCheckModule (ref), callOncePerDMModule (ref), callOnce (ref)
 	argCheckModule.isType(p8, "string", "eventName")
 	
 	if game:DefineFastFlag("LuaAppSendTTIEventsPerDM", false) then
-		callOncePerDMModule(string.format("logging_protocol_key-%s", p8), function() --[[ line: 184 ]]
+		callOncePerDMModule(string.format("logging_protocol_key-%s", p8), function()
 			-- upvalues: p7 (ref), p8 (ref), p9 (ref)
 			p7:logEvent(p8, p9)
 		end)
 		
 		return
 	end
-	callOnce(string.format("logging_protocol_key-%s", p8), function() --[[ line: 188 ]]
+	callOnce(string.format("logging_protocol_key-%s", p8), function()
 		-- upvalues: p7 (ref), p8 (ref), p9 (ref)
 		p7:logEvent(p8, p9)
 	end)
 end
 
-function t_1:getTimestamp() --[[ line: 195 ]]
+function t_1:getTimestamp()
 	return self.messageBus.call(self.GET_TIMESTAMP_DESCRIPTOR, {})
 end
 
-function t_1:logRobloxTelemetryCounter(p10, p11, p12) --[[ line: 199 ]]
+function t_1:logRobloxTelemetryCounter(p10, p11, p12)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetryCounter",
 		config = p10,
@@ -121,7 +121,7 @@ function t_1:logRobloxTelemetryCounter(p10, p11, p12) --[[ line: 199 ]]
 	})
 end
 
-function t_1:logRobloxTelemetryStat(p13, p14, p15) --[[ line: 221 ]]
+function t_1:logRobloxTelemetryStat(p13, p14, p15)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetryStat",
 		config = p13,
@@ -129,7 +129,7 @@ function t_1:logRobloxTelemetryStat(p13, p14, p15) --[[ line: 221 ]]
 	})
 end
 
-function t_1:logRobloxTelemetryEvent(p16, p17, p18, p19) --[[ line: 237 ]]
+function t_1:logRobloxTelemetryEvent(p16, p17, p18, p19)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetry",
 		config = p16,
@@ -141,7 +141,7 @@ function t_1:logRobloxTelemetryEvent(p16, p17, p18, p19) --[[ line: 237 ]]
 	})
 end
 
-function t_1:logEphemeralCounterEvent(p20, p21) --[[ line: 255 ]]
+function t_1:logEphemeralCounterEvent(p20, p21)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "EphemeralCounter",
 		config = p20,
@@ -149,7 +149,7 @@ function t_1:logEphemeralCounterEvent(p20, p21) --[[ line: 255 ]]
 	})
 end
 
-function t_1:logEphemeralStatEvent(p22, p23) --[[ line: 269 ]]
+function t_1:logEphemeralStatEvent(p22, p23)
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "EphemeralStat",
 		config = p22,

@@ -16,7 +16,7 @@ local operationData = require(script.Parent.OperationData).OperationData
 local tbl = setmetatable({}, { __index = operationData })
 tbl.__index = tbl
 
-function tbl.new(p0) --[[ line: 114 ]]
+function tbl.new(p0)
 	-- upvalues: operationData (ref), boolean (ref), tbl (ref)
 	local onNewData = p0.onNewData
 	local var6 = operationData.new(p0.options, p0.context)
@@ -24,7 +24,7 @@ function tbl.new(p0) --[[ line: 114 ]]
 	var6.previous = {}
 	var6.onNewData = onNewData
 	
-	function var6.runLazyQuery(p1) --[[ line: 133 ]]
+	function var6.runLazyQuery(p1)
 		-- upvalues: var6 (ref)
 		var6:cleanup()
 		var6.runLazy = true
@@ -32,32 +32,32 @@ function tbl.new(p0) --[[ line: 114 ]]
 		var6:onNewData()
 	end
 	
-	function var6.obsRefetch(_, p2) --[[ line: 140 ]]
+	function var6.obsRefetch(_, p2)
 		-- upvalues: boolean (copy), var6 (ref)
 		return if boolean.toJSBoolean(var6.currentObservable) then var6.currentObservable:refetch(p2) else nil
 	end
 	
-	function var6.obsFetchMore(_, p3) --[[ line: 147 ]]
+	function var6.obsFetchMore(_, p3)
 		-- upvalues: var6 (ref)
 		return if var6.currentObservable then var6.currentObservable:fetchMore(p3) else nil
 	end
 	
-	function var6.obsUpdateQuery(_, p4) --[[ line: 161 ]]
+	function var6.obsUpdateQuery(_, p4)
 		-- upvalues: var6 (ref)
 		return if var6.currentObservable then var6.currentObservable:updateQuery(p4) else nil
 	end
 	
-	function var6.obsStartPolling(_, p5) --[[ line: 168 ]]
+	function var6.obsStartPolling(_, p5)
 		-- upvalues: var6 (ref)
 		return if var6.currentObservable then var6.currentObservable:startPolling(p5) else nil
 	end
 	
-	function var6.obsStopPolling(_) --[[ line: 172 ]]
+	function var6.obsStopPolling(_)
 		-- upvalues: var6 (ref)
 		return if var6.currentObservable then var6.currentObservable:stopPolling() else nil
 	end
 	
-	function var6.obsSubscribeToMore(p6) --[[ line: 187 ]]
+	function var6.obsSubscribeToMore(p6)
 		-- upvalues: var6 (ref)
 		return if var6.currentObservable then var6.currentObservable:subscribeToMore(p6) else nil
 	end
@@ -65,7 +65,7 @@ function tbl.new(p0) --[[ line: 114 ]]
 	return setmetatable(var6, tbl)
 end
 
-function tbl:execute() --[[ line: 200 ]]
+function tbl:execute()
 	-- upvalues: boolean (ref)
 	self:refreshClient()
 	local options = self:getOptions()
@@ -82,7 +82,7 @@ function tbl:execute() --[[ line: 200 ]]
 	return self:getExecuteSsrResult() or self:getExecuteResult()
 end
 
-function tbl:executeLazy() --[[ line: 214 ]]
+function tbl:executeLazy()
 	-- upvalues: boolean (ref), networkStatus (ref)
 	return if boolean.toJSBoolean(self.runLazy) then table.pack(self.runLazyQuery, self:execute()) else table.pack(self.runLazyQuery, {
 		loading = false,
@@ -92,17 +92,17 @@ function tbl:executeLazy() --[[ line: 214 ]]
 	})
 end
 
-function tbl:fetchData() --[[ line: 226 ]]
+function tbl:fetchData()
 	-- upvalues: boolean (ref), promiseModule (ref)
 	local options = self:getOptions()
 	
-	return if boolean.toJSBoolean(if boolean.toJSBoolean(options.skip) then options.skip else options.ssr == false) then false else promiseModule.new(function(p7) --[[ line: 231 ]]
+	return if boolean.toJSBoolean(if boolean.toJSBoolean(options.skip) then options.skip else options.ssr == false) then false else promiseModule.new(function(p7)
 		-- upvalues: self (ref)
 		return self:startQuerySubscription(p7)
 	end)
 end
 
-function tbl:afterExecute(p8) --[[ line: 236 ]]
+function tbl:afterExecute(p8)
 	-- upvalues: boolean (ref)
 	local var9 = p8 or {}
 	local var10 = if var9.lazy then var9.lazy else false
@@ -117,19 +117,19 @@ function tbl:afterExecute(p8) --[[ line: 236 ]]
 	end
 	self.previousOptions = options
 	
-	return function(...) --[[ line: 254 ]]
+	return function(...)
 		-- upvalues: self (ref)
 		return self:unmount(...)
 	end
 end
 
-function tbl:cleanup() --[[ line: 259 ]]
+function tbl:cleanup()
 	self:removeQuerySubscription()
 	self:removeObservable(true)
 	self.previous.result = nil
 end
 
-function tbl:getOptions() --[[ line: 265 ]]
+function tbl:getOptions()
 	-- upvalues: boolean (ref), object (ref)
 	local options = getmetatable(getmetatable(self)).__index.getOptions(self)
 	
@@ -143,12 +143,12 @@ function tbl:getOptions() --[[ line: 265 ]]
 	return options
 end
 
-function tbl:ssrInitiated() --[[ line: 281 ]]
+function tbl:ssrInitiated()
 	-- upvalues: boolean (ref)
 	return if boolean.toJSBoolean(self.context) then self.context.renderPromises else self.context
 end
 
-function tbl:getExecuteSsrResult() --[[ line: 289 ]]
+function tbl:getExecuteSsrResult()
 	-- upvalues: object (ref), networkStatus (ref), boolean (ref)
 	local options = self:getOptions()
 	local skip = options.skip
@@ -171,14 +171,14 @@ function tbl:getExecuteSsrResult() --[[ line: 289 ]]
 	local var15 = boolean.toJSBoolean(self:getExecuteResult()) and self:getExecuteResult() or var14
 	
 	if boolean.toJSBoolean(var15.loading) and not boolean.toJSBoolean(skip) then
-		self.context.renderPromises:addQueryPromise(self, function() --[[ line: 315 ]]
+		self.context.renderPromises:addQueryPromise(self, function()
 			return nil
 		end)
 	end
 	return var15
 end
 
-function tbl:prepareObservableQueryOptions() --[[ line: 325 ]]
+function tbl:prepareObservableQueryOptions()
 	-- upvalues: documentType (ref), boolean (ref), object (ref)
 	local options = self:getOptions()
 	self:verifyDocumentType(options.query, documentType.Query)
@@ -190,7 +190,7 @@ function tbl:prepareObservableQueryOptions() --[[ line: 325 ]]
 	return object.assign({}, options, { displayName = var17, context = options.context })
 end
 
-function tbl:initializeObservableQuery() --[[ line: 341 ]]
+function tbl:initializeObservableQuery()
 	-- upvalues: boolean (ref), object (ref)
 	if boolean.toJSBoolean(self:ssrInitiated()) then
 		self.currentObservable = self.context.renderPromises:getSSRObservable(self:getOptions())
@@ -206,7 +206,7 @@ function tbl:initializeObservableQuery() --[[ line: 341 ]]
 	end
 end
 
-function tbl:updateObservableQuery() --[[ line: 358 ]]
+function tbl:updateObservableQuery()
 	-- upvalues: boolean (ref), object (ref), equalModule (ref)
 	if not boolean.toJSBoolean(self.currentObservable) then
 		self:initializeObservableQuery()
@@ -221,11 +221,11 @@ function tbl:updateObservableQuery() --[[ line: 358 ]]
 		return
 	elseif not equalModule(var19, self.previous.observableQueryOptions) then
 		self.previous.observableQueryOptions = var19
-		self.currentObservable:setOptions(var19):catch(function() --[[ line: 378 ]] end)
+		self.currentObservable:setOptions(var19):catch(function() end)
 	end
 end
 
-function tbl:startQuerySubscription(p9) --[[ line: 388 ]]
+function tbl:startQuerySubscription(p9)
 	-- upvalues: boolean (ref), equalModule (ref), hasOwnPropertyModule (ref)
 	if p9 == nil then
 		p9 = self.onNewData
@@ -234,7 +234,7 @@ function tbl:startQuerySubscription(p9) --[[ line: 388 ]]
 		return
 	end
 	self.currentSubscription = self.currentObservable:subscribe({
-		next = function(_, p10) --[[ line: 396 ]]
+		next = function(_, p10)
 			-- upvalues: self (ref), boolean (copy), equalModule (copy), p9 (write)
 			local result = self.previous.result
 			
@@ -243,7 +243,7 @@ function tbl:startQuerySubscription(p9) --[[ line: 388 ]]
 			end
 			p9(self)
 		end,
-		error = function(_, p11) --[[ line: 412 ]]
+		error = function(_, p11)
 			-- upvalues: self (ref), hasOwnPropertyModule (copy), boolean (copy), equalModule (copy), p9 (write)
 			self:resubscribeToQuery()
 			
@@ -260,7 +260,7 @@ function tbl:startQuerySubscription(p9) --[[ line: 388 ]]
 	})
 end
 
-function tbl:resubscribeToQuery() --[[ line: 429 ]]
+function tbl:resubscribeToQuery()
 	-- upvalues: boolean (ref), object (ref)
 	self:removeQuerySubscription()
 	local currentObservable = self.currentObservable
@@ -274,7 +274,7 @@ function tbl:resubscribeToQuery() --[[ line: 429 ]]
 	end
 end
 
-function tbl:getExecuteResult() --[[ line: 449 ]]
+function tbl:getExecuteResult()
 	-- upvalues: boolean (ref), object (ref), networkStatus (ref), apolloError (ref)
 	local var22 = self:observableQueryFields()
 	local options = self:getOptions()
@@ -338,7 +338,7 @@ function tbl:getExecuteResult() --[[ line: 449 ]]
 	return var22
 end
 
-function tbl:handleErrorOrCompleted() --[[ line: 554 ]]
+function tbl:handleErrorOrCompleted()
 	-- upvalues: boolean (ref), equalModule (ref)
 	if not self.currentObservable or not self.previous.result then return end
 	local result = self.previous.result
@@ -364,7 +364,7 @@ function tbl:handleErrorOrCompleted() --[[ line: 554 ]]
 	end
 end
 
-function tbl:removeQuerySubscription() --[[ line: 583 ]]
+function tbl:removeQuerySubscription()
 	-- upvalues: boolean (ref)
 	if boolean.toJSBoolean(self.currentSubscription) then
 		self.currentSubscription:unsubscribe()
@@ -372,7 +372,7 @@ function tbl:removeQuerySubscription() --[[ line: 583 ]]
 	end
 end
 
-function tbl:removeObservable(p12) --[[ line: 590 ]]
+function tbl:removeObservable(p12)
 	-- upvalues: boolean (ref)
 	if boolean.toJSBoolean(self.currentObservable) then
 		self.currentObservable.tearDownQuery(self.currentObservable)
@@ -383,7 +383,7 @@ function tbl:removeObservable(p12) --[[ line: 590 ]]
 	end
 end
 
-function tbl:observableQueryFields() --[[ line: 599 ]]
+function tbl:observableQueryFields()
 	-- upvalues: boolean (ref)
 	return {
 		variables = if boolean.toJSBoolean(self.currentObservable) then self.currentObservable.variables else nil,

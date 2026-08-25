@@ -6,7 +6,7 @@ local attendanceCountModule = require(virtualEvents.Components.AttendanceCount)
 local facePileModule = require(virtualEvents.Components.FacePile)
 local _ = require(virtualEvents.Parent.VirtualEventsState)
 
-return function(p0) --[[ line: 16 | named "Attendance" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), attendanceCountModule (ref), facePileModule (ref), playersService (ref)
 	local experienceDetails = p0.virtualEvent.experienceDetails
 	local rsvpCounters = p0.virtualEvent.rsvpCounters
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 16 | named "Attendance" ]]
 		}),
 		FacePile = reactModule.createElement(facePileModule, {
 			layoutOrder = 2,
-			userIds = reactModule.useMemo(function() --[[ line: 20 ]]
+			userIds = reactModule.useMemo(function()
 				-- upvalues: p0 (ref)
 				local t = {}
 				

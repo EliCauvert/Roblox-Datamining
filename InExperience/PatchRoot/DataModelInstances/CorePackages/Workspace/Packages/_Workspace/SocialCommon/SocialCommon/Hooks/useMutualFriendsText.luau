@@ -4,7 +4,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getMutualFriendsTextModule = require(socialCommon.Utils.getMutualFriendsText)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getMutualFriendsTextModule (ref)
 	return getMutualFriendsTextModule({
 		mutualFriendsCount = p0,

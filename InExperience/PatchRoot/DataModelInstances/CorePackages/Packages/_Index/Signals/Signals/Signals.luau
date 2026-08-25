@@ -4,22 +4,22 @@ local schedule = signalsSchedulerModule.schedule
 local callUserSpaceModule = require(script.Parent.callUserSpace)
 local frozen = table.freeze({ __mode = "k" })
 
-local function _(value) --[[ line: 29 | named "createWeakSet" ]]
+local function _(value)
 	-- upvalues: frozen (ref)
 	return setmetatable(value, frozen)
 end
 
-local function defaultEquals(p0, p1) --[[ line: 33 ]]
+local function defaultEquals(p0, p1)
 	return p0 == p1
 end
 
-local function handleError(p2, ...) --[[ line: 37 ]]
+local function handleError(p2, ...)
 	if not p2 then
 		error(...)
 	end
 end
 
-local function handleScopeValidation(p3, p4, ...) --[[ line: 44 ]]
+local function handleScopeValidation(p3, p4, ...)
 	-- upvalues: handleError (ref)
 	p3()
 	handleError(p4, ...)
@@ -27,14 +27,14 @@ local function handleScopeValidation(p3, p4, ...) --[[ line: 44 ]]
 	return ...
 end
 
-local var6 = if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p5, p6) --[[ line: 50 | named "callUserSpaceWithScopeValidation" ]]
+local var6 = if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p5, p6)
 	-- upvalues: handleScopeValidation (ref), callUserSpaceModule (ref)
 	local var7 = true
 	
-	return handleScopeValidation(function() --[[ line: 60 | named "kill" ]]
+	return handleScopeValidation(function()
 		-- upvalues: var7 (write)
 		var7 = false
-	end, pcall(callUserSpaceModule, p5, function(p7) --[[ line: 53 | named "wrappedScope" ]]
+	end, pcall(callUserSpaceModule, p5, function(p7)
 		-- upvalues: var7 (write), p6 (ref)
 		if not var7 then
 			error("attempted to use scope beyond scope's lifetime")
@@ -44,7 +44,7 @@ local var6 = if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p5
 end else callUserSpaceModule
 
 return {
-	createSignal = function(value, p8) --[[ line: 70 ]]
+	createSignal = function(value, p8)
 		-- upvalues: defaultEquals (ref), callUserSpaceModule (ref), frozen (ref), flush (ref)
 		local var8 = false
 		local var9 = 0
@@ -52,7 +52,7 @@ return {
 		local var11 = nil
 		local var12 = if p8 ~= nil then defaultEquals else p8
 		
-		local function ensureInitialized() --[[ line: 79 ]]
+		local function ensureInitialized()
 			-- upvalues: var8 (write), var10 (write), value (ref), callUserSpaceModule (copy), var9 (write), var11 (write), frozen (copy)
 			if not var8 then
 				var8 = true
@@ -62,7 +62,7 @@ return {
 			end
 		end
 		
-		local function source(p9, p10) --[[ line: 88 ]]
+		local function source(p9, p10)
 			-- upvalues: var11 (write), var9 (write)
 			if p9 == nil then
 				return var9
@@ -74,14 +74,14 @@ return {
 			return 0
 		end
 		
-		local function _(p11) --[[ line: 101 | named "connectToScope" ]]
+		local function _(p11)
 			-- upvalues: source (ref), var11 (write)
 			if p11 then
 				var11[p11(source)] = true
 			end
 		end
 		
-		local _ = function() --[[ line: 108 | named "notifyObservers" ]]
+		local _ = function()
 			-- upvalues: var11 (write)
 			for i in var11 do
 				i()
@@ -89,7 +89,7 @@ return {
 			table.clear(var11)
 		end
 		
-		return function(p12) --[[ line: 115 | named "getter" ]]
+		return function(p12)
 			-- upvalues: ensureInitialized (ref), source (ref), var11 (write), var10 (write)
 			ensureInitialized()
 			
@@ -97,7 +97,7 @@ return {
 				var11[p12(source)] = true
 			end
 			return var10
-		end, function(value) --[[ line: 121 | named "setter" ]]
+		end, function(value)
 			-- upvalues: ensureInitialized (ref), callUserSpaceModule (copy), var10 (write), var12 (ref), var9 (write), var11 (write), flush (copy)
 			ensureInitialized()
 			local var15 = if typeof(value) == "function" then callUserSpaceModule(value, var10) else value
@@ -114,7 +114,7 @@ return {
 			end
 		end
 	end,
-	createComputed = function(p13, p14) --[[ line: 135 ]]
+	createComputed = function(p13, p14)
 		-- upvalues: defaultEquals (ref), frozen (ref), var6 (ref), callUserSpaceModule (ref)
 		local var16 = false
 		local var17 = false
@@ -125,7 +125,7 @@ return {
 		local var22 = nil
 		local var23 = if p14 ~= nil then defaultEquals else p14
 		
-		local function _() --[[ line: 147 | named "notifyObservers" ]]
+		local function _()
 			-- upvalues: var22 (write)
 			for i in var22 do
 				i()
@@ -133,7 +133,7 @@ return {
 			table.clear(var22)
 		end
 		
-		local function observer() --[[ line: 154 ]]
+		local function observer()
 			-- upvalues: var17 (write), var22 (write)
 			if not var17 then
 				var17 = true
@@ -145,14 +145,14 @@ return {
 			end
 		end
 		
-		local function scope(p15) --[[ line: 161 ]]
+		local function scope(p15)
 			-- upvalues: var21 (write), observer (ref)
 			var21[p15] = true
 			
 			return observer
 		end
 		
-		local function ensureInitialized() --[[ line: 166 ]]
+		local function ensureInitialized()
 			-- upvalues: var16 (write), var22 (write), frozen (copy), var21 (write), var20 (write), var6 (copy), p13 (ref), scope (ref), var19 (write), var18 (write)
 			if not var16 then
 				var16 = true
@@ -164,7 +164,7 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ line: 177 | named "disconnectSources" ]]
+		local _ = function()
 			-- upvalues: var21 (write), observer (ref)
 			for i in var21 do
 				i(observer, true)
@@ -172,7 +172,7 @@ return {
 			table.clear(var21)
 		end
 		
-		local function flushNotifications() --[[ line: 184 ]]
+		local function flushNotifications()
 			-- upvalues: var17 (write), var21 (write), var19 (write), observer (ref), var6 (copy), p13 (ref), scope (ref), callUserSpaceModule (copy), var23 (ref), var20 (write), var18 (write)
 			if var17 then
 				var17 = false
@@ -199,7 +199,7 @@ return {
 			end
 		end
 		
-		local function source(p16, p17) --[[ line: 206 ]]
+		local function source(p16, p17)
 			-- upvalues: var22 (write), flushNotifications (ref), var18 (write)
 			if p16 == nil then
 				flushNotifications()
@@ -213,14 +213,14 @@ return {
 			return 0
 		end
 		
-		local _ = function(p18) --[[ line: 220 | named "connectToScope" ]]
+		local _ = function(p18)
 			-- upvalues: source (ref), var22 (write)
 			if p18 then
 				var22[p18(source)] = true
 			end
 		end
 		
-		return function(p19) --[[ line: 227 | named "getter" ]]
+		return function(p19)
 			-- upvalues: ensureInitialized (ref), flushNotifications (ref), source (ref), var22 (write), var20 (write)
 			ensureInitialized()
 			flushNotifications()
@@ -231,7 +231,7 @@ return {
 			return var20
 		end
 	end,
-	createEffect = function(p20) --[[ line: 237 ]]
+	createEffect = function(p20)
 		-- upvalues: var6 (ref), schedule (ref)
 		local var30 = false
 		local var31 = false
@@ -239,7 +239,7 @@ return {
 		local t = {}
 		local observer = nil
 		
-		local function _() --[[ line: 246 | named "disconnectSources" ]]
+		local function _()
 			-- upvalues: t (ref), observer (write)
 			for i in t do
 				i(observer, true)
@@ -247,7 +247,7 @@ return {
 			table.clear(t)
 		end
 		
-		local function dispose() --[[ line: 253 ]]
+		local function dispose()
 			-- upvalues: var31 (write), t (ref), observer (write)
 			var31 = true
 			
@@ -257,14 +257,14 @@ return {
 			table.clear(t)
 		end
 		
-		local function scope(p21) --[[ line: 258 ]]
+		local function scope(p21)
 			-- upvalues: t (ref), observer (write)
 			t[p21] = true
 			
 			return observer
 		end
 		
-		local function processNotification() --[[ line: 263 ]]
+		local function processNotification()
 			-- upvalues: var31 (write), var30 (write), t (ref), var32 (write), observer (write), var6 (copy), p20 (ref), scope (ref)
 			if not var31 then
 				var30 = false
@@ -287,7 +287,7 @@ return {
 			end
 		end
 		
-		observer = function() --[[ line: 281 | named "observer" ]]
+		observer = function()
 			-- upvalues: var31 (write), var30 (write), schedule (copy), processNotification (ref)
 			if not var31 and not var30 then
 				var30 = true

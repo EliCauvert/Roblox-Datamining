@@ -9,14 +9,14 @@ local var3 = reactModule.createContext(nil)
 
 return {
 	Context = var3,
-	Provider = function(p0) --[[ line: 56 ]]
+	Provider = function(p0)
 		-- upvalues: usePreferences (ref), reactModule (ref), signalsModule (ref), MAX_CONCURRENT_EXPLOSIONS (ref), var3 (ref)
 		local reducedMotion = usePreferences().reducedMotion
 		local var4 = reactModule.useRef(0)
 		local var5 = reactModule.useRef(nil)
 		local var6 = reactModule.useRef(reducedMotion)
 		var6.current = reducedMotion
-		local var7 = reactModule.useMemo(function() --[[ line: 65 ]]
+		local var7 = reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy)
 			local var8, var9 = signalsModule.createSignal({})
 			
@@ -24,10 +24,10 @@ return {
 		end, {})
 		
 		return reactModule.createElement(var3.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 70 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: var5 (ref), var6 (ref), var7 (ref), MAX_CONCURRENT_EXPLOSIONS (copy), var4 (ref)
 				return {
-					spawnExplosion = function(p1, p2) --[[ line: 71 ]]
+					spawnExplosion = function(p1, p2)
 						-- upvalues: var5 (copy), var6 (copy), var7 (copy), MAX_CONCURRENT_EXPLOSIONS (copy), var4 (copy)
 						local current = var5.current
 						
@@ -48,7 +48,7 @@ return {
 						var7.set(cloned)
 					end,
 					getExplosions = var7.get,
-					onExplosionComplete = function(p3) --[[ line: 101 ]]
+					onExplosionComplete = function(p3)
 						-- upvalues: var7 (copy)
 						local t = {}
 						
@@ -64,7 +64,7 @@ return {
 			end, { var7 })
 		}, p0.children)
 	end,
-	useReactionEffects = function() --[[ line: 125 ]]
+	useReactionEffects = function()
 		-- upvalues: reactModule (ref), var3 (ref)
 		return reactModule.useContext(var3)
 	end

@@ -12,31 +12,31 @@ local var1 = nil
 local var2 = nil
 local var3 = if dEV then {} else nil
 local t_1 = {
-	jsx = function(_, _, _) --[[ line: 278 ]]
+	jsx = function(_, _, _)
 		error("JSX is currently unsupported")
 	end,
-	jsxDEV = function(_, _, _, _, _) --[[ line: 333 ]]
+	jsxDEV = function(_, _, _, _, _)
 		error("JSX is currently unsupported")
 		
 		return nil
 	end
 }
 
-local function _(p0) --[[ line: 60 | named "hasValidRef" ]]
+local function _(p0)
 	-- upvalues: dEV (ref)
 	return if dEV and p0.ref ~= nil and (type(p0.ref) == "table" and p0.ref.isReactWarning) then false else p0.ref ~= nil
 end
 
-local _ = function(p1) --[[ line: 74 | named "hasValidKey" ]]
+local _ = function(p1)
 	-- upvalues: dEV (ref)
 	return if dEV and p1.key ~= nil and (type(p1.key) == "table" and p1.key.isReactWarning) then false else p1.key ~= nil
 end
 
 local t_2 = { isReactWarning = true }
 
-local function defineKeyPropWarningGetter(p2, p3) --[[ line: 93 ]]
+local function defineKeyPropWarningGetter(p2, p3)
 	-- upvalues: dEV (ref), var1 (write), console (ref), t_2 (ref)
-	local _ = function() --[[ line: 94 ]]
+	local _ = function()
 		-- upvalues: dEV (copy), var1 (copy), console (copy), p3 (ref)
 		if dEV and not var1 then
 			var1 = true
@@ -46,7 +46,7 @@ local function defineKeyPropWarningGetter(p2, p3) --[[ line: 93 ]]
 	
 	p2.key = nil
 	setmetatable(p2, {
-		__index = function(_, p4) --[[ line: 113 ]]
+		__index = function(_, p4)
 			-- upvalues: dEV (copy), var1 (copy), console (copy), p3 (ref), t_2 (copy)
 			if p4 ~= "key" then
 				return nil
@@ -59,9 +59,9 @@ local function defineKeyPropWarningGetter(p2, p3) --[[ line: 93 ]]
 	})
 end
 
-local function defineRefPropWarningGetter(p5, p6) --[[ line: 125 ]]
+local function defineRefPropWarningGetter(p5, p6)
 	-- upvalues: dEV (ref), var2 (write), console (ref), t_2 (ref)
-	local _ = function() --[[ line: 128 ]]
+	local _ = function()
 		-- upvalues: dEV (copy), var2 (copy), console (copy), p6 (ref)
 		if dEV and not var2 then
 			var2 = true
@@ -71,7 +71,7 @@ local function defineRefPropWarningGetter(p5, p6) --[[ line: 125 ]]
 	
 	p5.ref = nil
 	setmetatable(p5, {
-		__index = function(_, p7) --[[ line: 147 ]]
+		__index = function(_, p7)
 			-- upvalues: dEV (copy), var2 (copy), console (copy), p6 (ref), t_2 (copy)
 			if p7 ~= "ref" then
 				return nil
@@ -84,7 +84,7 @@ local function defineRefPropWarningGetter(p5, p6) --[[ line: 125 ]]
 	})
 end
 
-local function warnIfStringRefCannotBeAutoConverted(p8) --[[ line: 159 ]]
+local function warnIfStringRefCannotBeAutoConverted(p8)
 	-- upvalues: dEV (ref), reactCurrentOwner (ref), getComponentName (ref), var3 (write)
 	if dEV and type(p8.ref) == "string" and reactCurrentOwner.current then
 		local var10 = getComponentName(reactCurrentOwner.current.type)
@@ -95,7 +95,7 @@ local function warnIfStringRefCannotBeAutoConverted(p8) --[[ line: 159 ]]
 	end
 end
 
-local function ReactElement(p9, p10, p11, p12, p13, p14, p15) --[[ line: 210 ]]
+local function ReactElement(p9, p10, p11, p12, p13, p14, p15)
 	-- upvalues: REACT_ELEMENT_TYPE (ref), dEV (ref)
 	local t = {
 		type = p9,
@@ -110,7 +110,7 @@ local function ReactElement(p9, p10, p11, p12, p13, p14, p15) --[[ line: 210 ]]
 		local t_1 = { validated = false }
 		t._store = setmetatable({}, {
 			__index = t_1,
-			__newindex = function(p16, p17, p18) --[[ line: 247 ]]
+			__newindex = function(p16, p17, p18)
 				-- upvalues: t_1 (ref)
 				if p17 == "validated" then
 					t_1.validated = p18
@@ -125,7 +125,7 @@ local function ReactElement(p9, p10, p11, p12, p13, p14, p15) --[[ line: 210 ]]
 	return t
 end
 
-function t_1.createElement(p19, p20, ...) --[[ line: 409 ]]
+function t_1.createElement(p19, p20, ...)
 	-- upvalues: dEV (ref), warnIfStringRefCannotBeAutoConverted (ref), defineKeyPropWarningGetter (ref), defineRefPropWarningGetter (ref), ReactElement (ref), reactCurrentOwner (ref)
 	local var13 = if p20 ~= nil then {} else table.clone(p20)
 	local var14 = nil
@@ -207,12 +207,12 @@ function t_1.createElement(p19, p20, ...) --[[ line: 409 ]]
 	return ReactElement(p19, var14, ref, nil, t, reactCurrentOwner.current, var13)
 end
 
-function t_1.cloneAndReplaceKey(p21, p22) --[[ line: 587 ]]
+function t_1.cloneAndReplaceKey(p21, p22)
 	-- upvalues: ReactElement (ref)
 	return ReactElement(p21.type, p22, p21.ref, p21._self, p21._source, p21._owner, p21.props)
 end
 
-function t_1.cloneElement(p23, p24, ...) --[[ line: 608 ]]
+function t_1.cloneElement(p23, p24, ...)
 	-- upvalues: error (ref), reactCurrentOwner (ref), dEV (ref), t (ref), ReactElement (ref)
 	if p23 == nil then
 		error(error.new("React.cloneElement(...): The argument must be a React element, but you passed " .. tostring(p23)))
@@ -265,7 +265,7 @@ function t_1.cloneElement(p23, p24, ...) --[[ line: 608 ]]
 	return ReactElement(p23.type, key, ref, nil, source, owner, var20)
 end
 
-function t_1.isValidElement(p25) --[[ line: 724 ]]
+function t_1.isValidElement(p25)
 	-- upvalues: REACT_ELEMENT_TYPE (ref)
 	return type(p25) == "table" and p25["$$typeof"] == REACT_ELEMENT_TYPE
 end

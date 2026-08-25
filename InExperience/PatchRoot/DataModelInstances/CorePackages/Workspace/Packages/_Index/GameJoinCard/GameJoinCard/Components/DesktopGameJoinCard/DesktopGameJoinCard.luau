@@ -27,7 +27,7 @@ local fFlagBlockEDPClickthrough = sharedFlagsModule.FFlagBlockEDPClickthrough
 local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
 local ageCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 
-return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagDesktopGameJoinCardUIImprovements (ref), controlState (ref), fFlagJoinCardAgeCheckUpsell (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), skeleton (ref), radius (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
 	local var5 = useTokens()
 	local var6 = useScaledValue(260)
@@ -43,19 +43,19 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 	local gameIconUrl = p0.gameIconUrl
 	local isLoading = p0.isLoading
 	local var8 = if p0.isConsole then var5.Size.Size_1500 else var5.Size.Size_1000
-	local var9 = reactModule.useMemo(function() --[[ line: 79 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: getBuilderIconForCurrentPlatform (copy)
 		return getBuilderIconForCurrentPlatform()
 	end, {})
-	local var10 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
 		p0.onViewExperienceDetails(viewEDPsourceValues.Thumbnail)
 	end, { p0 })
-	local var11 = reactModule.useCallback(function() --[[ line: 87 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
 		p0.onViewExperienceDetails(viewEDPsourceValues.Title)
 	end, { p0 })
-	local var12 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewProfileSourceValues (copy)
 		if p0.onViewProfile then
 			p0.onViewProfile(viewProfileSourceValues.ViewProfileButton)
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 		local var15, var16 = reactModule.useState(false)
 		var13 = var15
 		local var17 = var16
-		var14 = reactModule.useCallback(function(p1) --[[ line: 101 ]]
+		var14 = reactModule.useCallback(function(p1)
 			-- upvalues: var17 (write), controlState (copy)
 			var17(p1 == controlState.Hover)
 		end, {})
@@ -209,7 +209,7 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 	}, {
 		JoinButton = if var19 then reactModule.createElement(ageCheckUpsellCTAModule, {
 			LayoutOrder = 1,
-			onUnlockPressed = p0.onAgeCheckPressed or function() --[[ line: 260 ]] end
+			onUnlockPressed = p0.onAgeCheckPressed or function() end
 		}) else reactModule.createElement(button, {
 			tag = "align-x-center fill size-full-0",
 			LayoutOrder = 1,

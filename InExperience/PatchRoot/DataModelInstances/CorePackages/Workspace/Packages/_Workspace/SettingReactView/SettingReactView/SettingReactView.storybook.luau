@@ -20,9 +20,9 @@ return {
 	storyRoot = settingReactView,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0) --[[ line: 26 ]]
+	mapStory = function(p0)
 		-- upvalues: reactModule (ref), foundationProvider (ref), t (ref), t_1 (ref)
-		return function(p1) --[[ line: 27 ]]
+		return function(p1)
 			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p0 (ref)
 			return reactModule.createElement(foundationProvider, {
 				colorMode = if p1 then t[p1.theme] else t.Default,

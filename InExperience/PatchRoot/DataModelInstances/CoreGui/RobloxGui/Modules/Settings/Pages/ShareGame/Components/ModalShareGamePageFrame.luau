@@ -22,11 +22,11 @@ local color = Color3.fromRGB(41, 41, 41)
 local modalShareGamePageFrame = roactModule.PureComponent:extend("ModalShareGamePageFrame")
 modalShareGamePageFrame.defaultProps = { isVisible = true }
 
-function modalShareGamePageFrame.init(p0) --[[ line: 53 ]]
+function modalShareGamePageFrame.init(p0)
 	-- upvalues: constantsModule (ref), themeModule (ref), text (ref), roactModule (ref)
 	p0.state = { promptMessageFitsFrame = true }
 	
-	function p0.onCustomTextAreaSizeChange(p1) --[[ line: 58 ]]
+	function p0.onCustomTextAreaSizeChange(p1)
 		-- upvalues: p0 (ref), constantsModule (copy), themeModule (copy), text (copy)
 		local promptMessage = p0.props.promptMessage
 		p0:setState({
@@ -36,7 +36,7 @@ function modalShareGamePageFrame.init(p0) --[[ line: 53 ]]
 	
 	p0.customTextAreaRef = roactModule.createRef()
 	
-	function p0.onClosePage() --[[ line: 71 ]]
+	function p0.onClosePage()
 		-- upvalues: p0 (ref)
 		p0.props.closePage()
 		
@@ -46,7 +46,7 @@ function modalShareGamePageFrame.init(p0) --[[ line: 53 ]]
 	end
 end
 
-function modalShareGamePageFrame.didMount(p2) --[[ line: 79 ]]
+function modalShareGamePageFrame.didMount(p2)
 	-- upvalues: getFFlagEnableNewInviteMenuModule (ref), getFFlagEnableNewInviteSendEndpointModule (ref), constantsModule (ref), gameInviteEvents (ref)
 	if getFFlagEnableNewInviteMenuModule() and p2.customTextAreaRef.current then
 		p2.onCustomTextAreaSizeChange(p2.customTextAreaRef.current)
@@ -56,7 +56,7 @@ function modalShareGamePageFrame.didMount(p2) --[[ line: 79 ]]
 	end
 end
 
-function modalShareGamePageFrame.render(p3) --[[ line: 92 ]]
+function modalShareGamePageFrame.render(p3)
 	-- upvalues: getFFlagEnableNewInviteMenuModule (ref), uDim_2 (ref), uDim (ref), constantsModule (ref), uDim_1 (ref), themeModule (ref), roactModule (ref), color (ref), coreGuiService (ref), errorToasterModule (ref), headerModule (ref), backButtonModule (ref), conversationListModule (ref)
 	local analytics = p3.props.analytics
 	local deviceLayout = p3.props.deviceLayout
@@ -149,6 +149,6 @@ function modalShareGamePageFrame.render(p3) --[[ line: 92 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p4) --[[ line: 211 ]]
+return roactRoduxModule.connect(function(p4)
 	return { deviceInfo = p4.DeviceInfo }
 end)(modalShareGamePageFrame)

@@ -8,11 +8,11 @@ local t = {
 	lastUpdated = { 24, 12, 2 }
 }
 
-local function _(p0) --[[ line: 19 | named "getStatusCode" ]]
+local function _(p0)
 	return (if typeof(p0) == "table" then tostring(p0.StatusCode) else nil) or "unknown"
 end
 
-return function(p1, p2, p3) --[[ line: 28 | named "logResponseError" ]]
+return function(p1, p2, p3)
 	-- upvalues: default (ref), t (ref)
 	if p3 == nil then
 		p3 = default

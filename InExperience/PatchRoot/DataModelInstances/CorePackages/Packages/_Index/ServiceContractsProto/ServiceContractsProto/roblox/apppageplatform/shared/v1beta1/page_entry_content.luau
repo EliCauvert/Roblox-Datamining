@@ -6,7 +6,7 @@ local pageEntryModule = require(script.Parent.page_entry)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 4231 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		page_entry = if p0 == nil or p0.page_entry == nil then nil else p0.page_entry,
@@ -14,7 +14,7 @@ function t_1.new(p0) --[[ line: 4231 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 4238 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var136 = 0
@@ -39,7 +39,7 @@ function t_1:encode() --[[ line: 4238 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 4259 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), pageEntryModule (ref), t (ref)
 	local var144 = t_1.new()
 	local var145 = 0
@@ -91,7 +91,7 @@ function t_1.decode(p1) --[[ line: 4259 ]]
 	return var144
 end
 
-function t_1:jsonEncode() --[[ line: 4307 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.page_entry ~= nil then
@@ -103,7 +103,7 @@ function t_1:jsonEncode() --[[ line: 4307 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 4321 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), pageEntryModule (ref), t (ref)
 	local var164 = t_1.new()
 	
@@ -131,7 +131,7 @@ typeRegistryModule.default:register(t.UniversalPageEntry)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 4357 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		input_data = if p2 == nil or p2.input_data == nil then nil else p2.input_data,
@@ -139,7 +139,7 @@ function t_2.new(p2) --[[ line: 4357 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 4364 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var166 = 0
@@ -163,7 +163,7 @@ function t_2:encode() --[[ line: 4364 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 4384 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var173 = t_2.new()
 	local var174 = 0
@@ -215,7 +215,7 @@ function t_2.decode(p3) --[[ line: 4384 ]]
 	return var173
 end
 
-function t_2:jsonEncode() --[[ line: 4432 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.input_data ~= nil then
@@ -227,7 +227,7 @@ function t_2:jsonEncode() --[[ line: 4432 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 4446 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref)
 	local var193 = t_2.new()
 	
@@ -255,7 +255,7 @@ typeRegistryModule.default:register(t.FeedEntry)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 4482 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		roblox_component = if p4 == nil or p4.roblox_component == nil then "" else p4.roblox_component,
@@ -264,7 +264,7 @@ function t_3.new(p4) --[[ line: 4482 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 4490 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var195 = 0
@@ -295,7 +295,7 @@ function t_3:encode() --[[ line: 4490 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 4518 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var205 = t_3.new()
 	local var206 = 0
@@ -355,7 +355,7 @@ function t_3.decode(p5) --[[ line: 4518 ]]
 	return var205
 end
 
-function t_3:jsonEncode() --[[ line: 4572 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
@@ -370,7 +370,7 @@ function t_3:jsonEncode() --[[ line: 4572 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 4592 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), t (ref)
 	local var227 = t_3.new()
 	
@@ -410,7 +410,7 @@ typeRegistryModule.default:register(t.ForegroundHeaderEntry)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 4638 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		roblox_component = if p6 == nil or p6.roblox_component == nil then "" else p6.roblox_component,
@@ -418,7 +418,7 @@ function t_4.new(p6) --[[ line: 4638 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 4645 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var229 = 0
@@ -450,7 +450,7 @@ function t_4:encode() --[[ line: 4645 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 4671 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), t (ref)
 	local var239 = t_4.new()
 	local var240 = 0
@@ -507,7 +507,7 @@ function t_4.decode(p7) --[[ line: 4671 ]]
 	return var239
 end
 
-function t_4:jsonEncode() --[[ line: 4724 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
@@ -525,7 +525,7 @@ function t_4:jsonEncode() --[[ line: 4724 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 4742 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), t (ref)
 	local var261 = t_4.new()
 	
@@ -559,14 +559,14 @@ typeRegistryModule.default:register(t.BackgroundHeaderEntry)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 4778 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		kind = if p8 == nil or p8.kind == nil then nil else p8.kind
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 4784 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var263 = 0
@@ -994,7 +994,7 @@ function t_5:encode() --[[ line: 4784 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 5073 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), t (ref)
 	local var472 = t_5.new()
 	local var473 = 0
@@ -1582,7 +1582,7 @@ function t_5.decode(p9) --[[ line: 5073 ]]
 	return var472
 end
 
-function t_5:jsonEncode() --[[ line: 5554 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -1865,7 +1865,7 @@ function t_5:jsonEncode() --[[ line: 5554 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 5702 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), t (ref)
 	local var626 = t_5.new()
 	
@@ -2673,7 +2673,7 @@ typeRegistryModule.default:register(t.PageEntryInputData)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 6566 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		section_title = if p10 == nil or p10.section_title == nil then "" else p10.section_title,
@@ -2684,7 +2684,7 @@ function t_6.new(p10) --[[ line: 6566 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 6578 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var628 = 0
@@ -2728,7 +2728,7 @@ function t_6:encode() --[[ line: 6578 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 6615 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
 	local var641 = t_6.new()
 	local var642 = 0
@@ -2795,7 +2795,7 @@ function t_6.decode(p11) --[[ line: 6615 ]]
 	return var641
 end
 
-function t_6:jsonEncode() --[[ line: 6678 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.section_title ~= nil and self.section_title ~= "" then
@@ -2821,7 +2821,7 @@ function t_6:jsonEncode() --[[ line: 6678 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 6708 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), t (ref)
 	local var668 = t_6.new()
 	
@@ -2869,14 +2869,14 @@ typeRegistryModule.default:register(t.BadgesGridInputData)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 6769 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		badge_id = if p12 == nil or p12.badge_id == nil then "" else p12.badge_id
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 6777 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var671 = 0
@@ -2893,7 +2893,7 @@ function t_7:encode() --[[ line: 6777 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 6791 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref)
 	local var675 = t_7.new()
 	local var676 = 0
@@ -2940,7 +2940,7 @@ function t_7.decode(p13) --[[ line: 6791 ]]
 	return var675
 end
 
-function t_7:jsonEncode() --[[ line: 6834 ]]
+function t_7:jsonEncode()
 	local t = {}
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
@@ -2949,7 +2949,7 @@ function t_7:jsonEncode() --[[ line: 6834 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 6844 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref)
 	local var693 = t_7.new()
 	
@@ -2971,7 +2971,7 @@ typeRegistryModule.default:register(t.BadgesGridInputData_BadgeInputData)
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 6874 ]]
+function t_8.new(p14)
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		badge_id = if p14 == nil or p14.badge_id == nil then "" else p14.badge_id,
@@ -2981,7 +2981,7 @@ function t_8.new(p14) --[[ line: 6874 ]]
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 6883 ]]
+function t_8:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var695 = 0
@@ -3017,7 +3017,7 @@ function t_8:encode() --[[ line: 6883 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 6913 ]]
+function t_8.decode(p15)
 	-- upvalues: t_8 (ref), protoModule (ref), t (ref)
 	local var706 = t_8.new()
 	local var707 = 0
@@ -3079,7 +3079,7 @@ function t_8.decode(p15) --[[ line: 6913 ]]
 	return var706
 end
 
-function t_8:jsonEncode() --[[ line: 6971 ]]
+function t_8:jsonEncode()
 	local t = {}
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
@@ -3097,7 +3097,7 @@ function t_8:jsonEncode() --[[ line: 6971 ]]
 	return t
 end
 
-function t_8:jsonDecode() --[[ line: 6993 ]]
+function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), t (ref)
 	local var730 = t_8.new()
 	
@@ -3137,7 +3137,7 @@ typeRegistryModule.default:register(t.BadgeDetailsInputData)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 7047 ]]
+function t_9.new(p16)
 	-- upvalues: t_9 (ref)
 	return setmetatable({
 		info_table = if p16 == nil or p16.info_table == nil then nil else p16.info_table,
@@ -3146,7 +3146,7 @@ function t_9.new(p16) --[[ line: 7047 ]]
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 7057 ]]
+function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var732 = 0
@@ -3178,7 +3178,7 @@ function t_9:encode() --[[ line: 7057 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 7084 ]]
+function t_9.decode(p17)
 	-- upvalues: t_9 (ref), protoModule (ref), t (ref)
 	local var743 = t_9.new()
 	local var744 = 0
@@ -3235,7 +3235,7 @@ function t_9.decode(p17) --[[ line: 7084 ]]
 	return var743
 end
 
-function t_9:jsonEncode() --[[ line: 7137 ]]
+function t_9:jsonEncode()
 	local t = {}
 	
 	if self.info_table ~= nil then
@@ -3250,7 +3250,7 @@ function t_9:jsonEncode() --[[ line: 7137 ]]
 	return t
 end
 
-function t_9:jsonDecode() --[[ line: 7155 ]]
+function t_9:jsonDecode()
 	-- upvalues: t_9 (ref), t (ref)
 	local var765 = t_9.new()
 	
@@ -3284,7 +3284,7 @@ typeRegistryModule.default:register(t.BadgeDetailsInputData_LocalizedLiterals)
 local t_10 = {}
 t_10.__index = t_10
 
-function t_10.new(p18) --[[ line: 7206 ]]
+function t_10.new(p18)
 	-- upvalues: t_10 (ref)
 	return setmetatable({
 		type_label = if p18 == nil or p18.type_label == nil then "" else p18.type_label,
@@ -3297,7 +3297,7 @@ function t_10.new(p18) --[[ line: 7206 ]]
 	}, t_10)
 end
 
-function t_10:encode() --[[ line: 7225 ]]
+function t_10:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var767 = 0
@@ -3350,7 +3350,7 @@ function t_10:encode() --[[ line: 7225 ]]
 	return buff_1
 end
 
-function t_10.decode(p19) --[[ line: 7271 ]]
+function t_10.decode(p19)
 	-- upvalues: t_10 (ref), protoModule (ref)
 	local var783 = t_10.new()
 	local var784 = 0
@@ -3427,7 +3427,7 @@ function t_10.decode(p19) --[[ line: 7271 ]]
 	return var783
 end
 
-function t_10:jsonEncode() --[[ line: 7346 ]]
+function t_10:jsonEncode()
 	local t = {}
 	
 	if self.type_label ~= nil and self.type_label ~= "" then
@@ -3454,7 +3454,7 @@ function t_10:jsonEncode() --[[ line: 7346 ]]
 	return t
 end
 
-function t_10:jsonDecode() --[[ line: 7382 ]]
+function t_10:jsonDecode()
 	-- upvalues: t_10 (ref)
 	local var813 = t_10.new()
 	
@@ -3512,7 +3512,7 @@ typeRegistryModule.default:register(t.BadgeDetailsInputData_LocalizedLiterals_In
 local t_11 = {}
 t_11.__index = t_11
 
-function t_11.new(p20) --[[ line: 7462 ]]
+function t_11.new(p20)
 	-- upvalues: t_11 (ref)
 	return setmetatable({
 		share = if p20 == nil or p20.share == nil then "" else p20.share,
@@ -3520,7 +3520,7 @@ function t_11.new(p20) --[[ line: 7462 ]]
 	}, t_11)
 end
 
-function t_11:encode() --[[ line: 7474 ]]
+function t_11:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var815 = 0
@@ -3543,7 +3543,7 @@ function t_11:encode() --[[ line: 7474 ]]
 	return buff_1
 end
 
-function t_11.decode(p21) --[[ line: 7495 ]]
+function t_11.decode(p21)
 	-- upvalues: t_11 (ref), protoModule (ref)
 	local var821 = t_11.new()
 	local var822 = 0
@@ -3595,7 +3595,7 @@ function t_11.decode(p21) --[[ line: 7495 ]]
 	return var821
 end
 
-function t_11:jsonEncode() --[[ line: 7545 ]]
+function t_11:jsonEncode()
 	local t = {}
 	
 	if self.share ~= nil and self.share ~= "" then
@@ -3607,7 +3607,7 @@ function t_11:jsonEncode() --[[ line: 7545 ]]
 	return t
 end
 
-function t_11:jsonDecode() --[[ line: 7561 ]]
+function t_11:jsonDecode()
 	-- upvalues: t_11 (ref)
 	local var841 = t_11.new()
 	
@@ -3629,7 +3629,7 @@ typeRegistryModule.default:register(t.BadgeDetailsInputData_LocalizedLiterals_Ac
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p22) --[[ line: 7593 ]]
+function t_12.new(p22)
 	-- upvalues: t_12 (ref)
 	return setmetatable({
 		report = if p22 == nil or p22.report == nil then "" else p22.report,
@@ -3637,7 +3637,7 @@ function t_12.new(p22) --[[ line: 7593 ]]
 	}, t_12)
 end
 
-function t_12:encode() --[[ line: 7605 ]]
+function t_12:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var843 = 0
@@ -3660,7 +3660,7 @@ function t_12:encode() --[[ line: 7605 ]]
 	return buff_1
 end
 
-function t_12.decode(p23) --[[ line: 7626 ]]
+function t_12.decode(p23)
 	-- upvalues: t_12 (ref), protoModule (ref)
 	local var849 = t_12.new()
 	local var850 = 0
@@ -3712,7 +3712,7 @@ function t_12.decode(p23) --[[ line: 7626 ]]
 	return var849
 end
 
-function t_12:jsonEncode() --[[ line: 7676 ]]
+function t_12:jsonEncode()
 	local t = {}
 	
 	if self.report ~= nil and self.report ~= "" then
@@ -3724,7 +3724,7 @@ function t_12:jsonEncode() --[[ line: 7676 ]]
 	return t
 end
 
-function t_12:jsonDecode() --[[ line: 7692 ]]
+function t_12:jsonDecode()
 	-- upvalues: t_12 (ref)
 	local var869 = t_12.new()
 	
@@ -3746,19 +3746,19 @@ typeRegistryModule.default:register(t.BadgeDetailsInputData_LocalizedLiterals_Ov
 local t_13 = {}
 t_13.__index = t_13
 
-function t_13.new(_) --[[ line: 7723 ]]
+function t_13.new(_)
 	-- upvalues: t_13 (ref)
 	return setmetatable({}, t_13)
 end
 
-function t_13.encode(_) --[[ line: 7727 ]]
+function t_13.encode(_)
 	local buff = buffer.create(0)
 	buffer.copy(buff, 0, buffer.create(0), 0, 0)
 	
 	return buff
 end
 
-function t_13.decode(p24) --[[ line: 7736 ]]
+function t_13.decode(p24)
 	-- upvalues: t_13 (ref), protoModule (ref)
 	local var871 = t_13.new()
 	local var872 = 0
@@ -3796,11 +3796,11 @@ function t_13.decode(p24) --[[ line: 7736 ]]
 	return var871
 end
 
-function t_13.jsonEncode(_) --[[ line: 7774 ]]
+function t_13.jsonEncode(_)
 	return {}
 end
 
-function t_13.jsonDecode(_) --[[ line: 7780 ]]
+function t_13.jsonDecode(_)
 	-- upvalues: t_13 (ref)
 	return t_13.new()
 end
@@ -3814,7 +3814,7 @@ typeRegistryModule.default:register(t.StaticInputData)
 local t_14 = {}
 t_14.__index = t_14
 
-function t_14.new(p25) --[[ line: 7800 ]]
+function t_14.new(p25)
 	-- upvalues: t_14 (ref)
 	return setmetatable({
 		universe_id = if p25 == nil or p25.universe_id == nil then "" else p25.universe_id,
@@ -3825,7 +3825,7 @@ function t_14.new(p25) --[[ line: 7800 ]]
 	}, t_14)
 end
 
-function t_14:encode() --[[ line: 7812 ]]
+function t_14:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var887 = 0
@@ -3886,7 +3886,7 @@ function t_14:encode() --[[ line: 7812 ]]
 	return buff_1
 end
 
-function t_14.decode(p26) --[[ line: 7866 ]]
+function t_14.decode(p26)
 	-- upvalues: t_14 (ref), protoModule (ref), t (ref)
 	local var911 = t_14.new()
 	local var912 = 0
@@ -3955,7 +3955,7 @@ function t_14.decode(p26) --[[ line: 7866 ]]
 	return var911
 end
 
-function t_14:jsonEncode() --[[ line: 7943 ]]
+function t_14:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -3991,7 +3991,7 @@ function t_14:jsonEncode() --[[ line: 7943 ]]
 	return t
 end
 
-function t_14:jsonDecode() --[[ line: 7981 ]]
+function t_14:jsonDecode()
 	-- upvalues: t_14 (ref), t (ref)
 	local var940 = t_14.new()
 	
@@ -4067,7 +4067,7 @@ typeRegistryModule.default:register(t.ExperienceDetailsFeedInputData)
 local t_15 = {}
 t_15.__index = t_15
 
-function t_15.new(p27) --[[ line: 8071 ]]
+function t_15.new(p27)
 	-- upvalues: t_15 (ref)
 	return setmetatable({
 		key = if p27 == nil or p27.key == nil then "" else p27.key,
@@ -4075,7 +4075,7 @@ function t_15.new(p27) --[[ line: 8071 ]]
 	}, t_15)
 end
 
-function t_15:encode() --[[ line: 8080 ]]
+function t_15:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var948 = 0
@@ -4099,7 +4099,7 @@ function t_15:encode() --[[ line: 8080 ]]
 	return buff_1
 end
 
-function t_15.decode(p28) --[[ line: 8102 ]]
+function t_15.decode(p28)
 	-- upvalues: t_15 (ref), protoModule (ref), t (ref)
 	local var955 = t_15.new()
 	local var956 = 0
@@ -4151,7 +4151,7 @@ function t_15.decode(p28) --[[ line: 8102 ]]
 	return var955
 end
 
-function t_15:jsonEncode() --[[ line: 8152 ]]
+function t_15:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4163,7 +4163,7 @@ function t_15:jsonEncode() --[[ line: 8152 ]]
 	return t
 end
 
-function t_15:jsonDecode() --[[ line: 8168 ]]
+function t_15:jsonDecode()
 	-- upvalues: t_15 (ref), t (ref)
 	local var975 = t_15.new()
 	
@@ -4185,7 +4185,7 @@ typeRegistryModule.default:register(t.ExperienceDetailsFeedInputData_EntryMapEnt
 local t_16 = {}
 t_16.__index = t_16
 
-function t_16.new(p29) --[[ line: 8199 ]]
+function t_16.new(p29)
 	-- upvalues: t_16 (ref)
 	return setmetatable({
 		key = if p29 == nil or p29.key == nil then "" else p29.key,
@@ -4193,7 +4193,7 @@ function t_16.new(p29) --[[ line: 8199 ]]
 	}, t_16)
 end
 
-function t_16:encode() --[[ line: 8211 ]]
+function t_16:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var977 = 0
@@ -4217,7 +4217,7 @@ function t_16:encode() --[[ line: 8211 ]]
 	return buff_1
 end
 
-function t_16.decode(p30) --[[ line: 8233 ]]
+function t_16.decode(p30)
 	-- upvalues: t_16 (ref), protoModule (ref), t (ref)
 	local var984 = t_16.new()
 	local var985 = 0
@@ -4269,7 +4269,7 @@ function t_16.decode(p30) --[[ line: 8233 ]]
 	return var984
 end
 
-function t_16:jsonEncode() --[[ line: 8283 ]]
+function t_16:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4281,7 +4281,7 @@ function t_16:jsonEncode() --[[ line: 8283 ]]
 	return t
 end
 
-function t_16:jsonDecode() --[[ line: 8299 ]]
+function t_16:jsonDecode()
 	-- upvalues: t_16 (ref), t (ref)
 	local var1004 = t_16.new()
 	
@@ -4303,14 +4303,14 @@ typeRegistryModule.default:register(t.ExperienceDetailsFeedInputData_EntryOrderM
 local t_17 = {}
 t_17.__index = t_17
 
-function t_17.new(p31) --[[ line: 8330 ]]
+function t_17.new(p31)
 	-- upvalues: t_17 (ref)
 	return setmetatable({
 		items = if p31 == nil or p31.items == nil then {} else p31.items
 	}, t_17)
 end
 
-function t_17:encode() --[[ line: 8336 ]]
+function t_17:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1006 = 0
@@ -4329,7 +4329,7 @@ function t_17:encode() --[[ line: 8336 ]]
 	return buff_1
 end
 
-function t_17.decode(p32) --[[ line: 8352 ]]
+function t_17.decode(p32)
 	-- upvalues: t_17 (ref), protoModule (ref)
 	local var1010 = t_17.new()
 	local var1011 = 0
@@ -4376,7 +4376,7 @@ function t_17.decode(p32) --[[ line: 8352 ]]
 	return var1010
 end
 
-function t_17:jsonEncode() --[[ line: 8395 ]]
+function t_17:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -4390,7 +4390,7 @@ function t_17:jsonEncode() --[[ line: 8395 ]]
 	return t
 end
 
-function t_17:jsonDecode() --[[ line: 8409 ]]
+function t_17:jsonDecode()
 	-- upvalues: t_17 (ref)
 	local var1029 = t_17.new()
 	
@@ -4414,7 +4414,7 @@ typeRegistryModule.default:register(t.EntryOrder)
 local t_18 = {}
 t_18.__index = t_18
 
-function t_18.new(p33) --[[ line: 8438 ]]
+function t_18.new(p33)
 	-- upvalues: t_18 (ref)
 	return setmetatable({
 		universe_id = if p33 == nil or p33.universe_id == nil then "" else p33.universe_id,
@@ -4422,7 +4422,7 @@ function t_18.new(p33) --[[ line: 8438 ]]
 	}, t_18)
 end
 
-function t_18:encode() --[[ line: 8449 ]]
+function t_18:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1032 = 0
@@ -4445,7 +4445,7 @@ function t_18:encode() --[[ line: 8449 ]]
 	return buff_1
 end
 
-function t_18.decode(p34) --[[ line: 8468 ]]
+function t_18.decode(p34)
 	-- upvalues: t_18 (ref), protoModule (ref)
 	local var1038 = t_18.new()
 	local var1039 = 0
@@ -4498,7 +4498,7 @@ function t_18.decode(p34) --[[ line: 8468 ]]
 	return var1038
 end
 
-function t_18:jsonEncode() --[[ line: 8516 ]]
+function t_18:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -4510,7 +4510,7 @@ function t_18:jsonEncode() --[[ line: 8516 ]]
 	return t
 end
 
-function t_18:jsonDecode() --[[ line: 8530 ]]
+function t_18:jsonDecode()
 	-- upvalues: t_18 (ref)
 	local var1058 = t_18.new()
 	
@@ -4538,14 +4538,14 @@ typeRegistryModule.default:register(t.ExperienceDetailsActionBarInputData)
 local t_19 = {}
 t_19.__index = t_19
 
-function t_19.new(p35) --[[ line: 8568 ]]
+function t_19.new(p35)
 	-- upvalues: t_19 (ref)
 	return setmetatable({
 		media_asset_id = if p35 == nil or p35.media_asset_id == nil then "" else p35.media_asset_id
 	}, t_19)
 end
 
-function t_19:encode() --[[ line: 8576 ]]
+function t_19:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1060 = 0
@@ -4562,7 +4562,7 @@ function t_19:encode() --[[ line: 8576 ]]
 	return buff_1
 end
 
-function t_19.decode(p36) --[[ line: 8590 ]]
+function t_19.decode(p36)
 	-- upvalues: t_19 (ref), protoModule (ref)
 	local var1064 = t_19.new()
 	local var1065 = 0
@@ -4609,7 +4609,7 @@ function t_19.decode(p36) --[[ line: 8590 ]]
 	return var1064
 end
 
-function t_19:jsonEncode() --[[ line: 8633 ]]
+function t_19:jsonEncode()
 	local t = {}
 	
 	if self.media_asset_id ~= nil and self.media_asset_id ~= "" then
@@ -4618,7 +4618,7 @@ function t_19:jsonEncode() --[[ line: 8633 ]]
 	return t
 end
 
-function t_19:jsonDecode() --[[ line: 8643 ]]
+function t_19:jsonDecode()
 	-- upvalues: t_19 (ref)
 	local var1082 = t_19.new()
 	
@@ -4640,14 +4640,14 @@ typeRegistryModule.default:register(t.ExperienceDetailsBannerImageInputData)
 local t_20 = {}
 t_20.__index = t_20
 
-function t_20.new(p37) --[[ line: 8673 ]]
+function t_20.new(p37)
 	-- upvalues: t_20 (ref)
 	return setmetatable({
 		universe_id = if p37 == nil or p37.universe_id == nil then "" else p37.universe_id
 	}, t_20)
 end
 
-function t_20:encode() --[[ line: 8681 ]]
+function t_20:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1084 = 0
@@ -4664,7 +4664,7 @@ function t_20:encode() --[[ line: 8681 ]]
 	return buff_1
 end
 
-function t_20.decode(p38) --[[ line: 8695 ]]
+function t_20.decode(p38)
 	-- upvalues: t_20 (ref), protoModule (ref)
 	local var1088 = t_20.new()
 	local var1089 = 0
@@ -4711,7 +4711,7 @@ function t_20.decode(p38) --[[ line: 8695 ]]
 	return var1088
 end
 
-function t_20:jsonEncode() --[[ line: 8738 ]]
+function t_20:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -4720,7 +4720,7 @@ function t_20:jsonEncode() --[[ line: 8738 ]]
 	return t
 end
 
-function t_20:jsonDecode() --[[ line: 8748 ]]
+function t_20:jsonDecode()
 	-- upvalues: t_20 (ref)
 	local var1106 = t_20.new()
 	
@@ -4742,7 +4742,7 @@ typeRegistryModule.default:register(t.ExperienceDetailsStickyHeaderInputData)
 local t_21 = {}
 t_21.__index = t_21
 
-function t_21.new(p39) --[[ line: 8778 ]]
+function t_21.new(p39)
 	-- upvalues: t_21 (ref)
 	return setmetatable({
 		universe_id = if p39 == nil or p39.universe_id == nil then "" else p39.universe_id,
@@ -4750,7 +4750,7 @@ function t_21.new(p39) --[[ line: 8778 ]]
 	}, t_21)
 end
 
-function t_21:encode() --[[ line: 8787 ]]
+function t_21:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1108 = 0
@@ -4773,7 +4773,7 @@ function t_21:encode() --[[ line: 8787 ]]
 	return buff_1
 end
 
-function t_21.decode(p40) --[[ line: 8806 ]]
+function t_21.decode(p40)
 	-- upvalues: t_21 (ref), protoModule (ref)
 	local var1114 = t_21.new()
 	local var1115 = 0
@@ -4825,7 +4825,7 @@ function t_21.decode(p40) --[[ line: 8806 ]]
 	return var1114
 end
 
-function t_21:jsonEncode() --[[ line: 8854 ]]
+function t_21:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -4837,7 +4837,7 @@ function t_21:jsonEncode() --[[ line: 8854 ]]
 	return t
 end
 
-function t_21:jsonDecode() --[[ line: 8868 ]]
+function t_21:jsonDecode()
 	-- upvalues: t_21 (ref)
 	local var1134 = t_21.new()
 	
@@ -4865,7 +4865,7 @@ typeRegistryModule.default:register(t.ExperienceAttributionRowInputData)
 local t_22 = {}
 t_22.__index = t_22
 
-function t_22.new(p41) --[[ line: 8906 ]]
+function t_22.new(p41)
 	-- upvalues: t_22 (ref)
 	return setmetatable({
 		universe_id = if p41 == nil or p41.universe_id == nil then "" else p41.universe_id,
@@ -4878,7 +4878,7 @@ function t_22.new(p41) --[[ line: 8906 ]]
 	}, t_22)
 end
 
-function t_22:encode() --[[ line: 8928 ]]
+function t_22:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1136 = 0
@@ -4934,7 +4934,7 @@ function t_22:encode() --[[ line: 8928 ]]
 	return buff_1
 end
 
-function t_22.decode(p42) --[[ line: 8975 ]]
+function t_22.decode(p42)
 	-- upvalues: t_22 (ref), protoModule (ref), t (ref)
 	local var1153 = t_22.new()
 	local var1154 = 0
@@ -5012,7 +5012,7 @@ function t_22.decode(p42) --[[ line: 8975 ]]
 	return var1153
 end
 
-function t_22:jsonEncode() --[[ line: 9051 ]]
+function t_22:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -5044,7 +5044,7 @@ function t_22:jsonEncode() --[[ line: 9051 ]]
 	return t
 end
 
-function t_22:jsonDecode() --[[ line: 9089 ]]
+function t_22:jsonDecode()
 	-- upvalues: t_22 (ref), t (ref)
 	local var1184 = t_22.new()
 	
@@ -5112,14 +5112,14 @@ typeRegistryModule.default:register(t.ExperienceActionModuleInputData)
 local t_23 = {}
 t_23.__index = t_23
 
-function t_23.new(p43) --[[ line: 9176 ]]
+function t_23.new(p43)
 	-- upvalues: t_23 (ref)
 	return setmetatable({
 		user_id = if p43 == nil or p43.user_id == nil then "" else p43.user_id
 	}, t_23)
 end
 
-function t_23:encode() --[[ line: 9187 ]]
+function t_23:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1188 = 0
@@ -5136,7 +5136,7 @@ function t_23:encode() --[[ line: 9187 ]]
 	return buff_1
 end
 
-function t_23.decode(p44) --[[ line: 9203 ]]
+function t_23.decode(p44)
 	-- upvalues: t_23 (ref), protoModule (ref)
 	local var1192 = t_23.new()
 	local var1193 = 0
@@ -5183,7 +5183,7 @@ function t_23.decode(p44) --[[ line: 9203 ]]
 	return var1192
 end
 
-function t_23:jsonEncode() --[[ line: 9248 ]]
+function t_23:jsonEncode()
 	local t = {}
 	
 	if self.user_id ~= nil and self.user_id ~= "" then
@@ -5192,7 +5192,7 @@ function t_23:jsonEncode() --[[ line: 9248 ]]
 	return t
 end
 
-function t_23:jsonDecode() --[[ line: 9260 ]]
+function t_23:jsonDecode()
 	-- upvalues: t_23 (ref)
 	local var1210 = t_23.new()
 	
@@ -5214,7 +5214,7 @@ typeRegistryModule.default:register(t.ExperienceActionModuleInputData_Connection
 local t_24 = {}
 t_24.__index = t_24
 
-function t_24.new(p45) --[[ line: 9291 ]]
+function t_24.new(p45)
 	-- upvalues: t_24 (ref)
 	return setmetatable({
 		media_items = if p45 == nil or p45.media_items == nil then {} else p45.media_items,
@@ -5223,7 +5223,7 @@ function t_24.new(p45) --[[ line: 9291 ]]
 	}, t_24)
 end
 
-function t_24:encode() --[[ line: 9301 ]]
+function t_24:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1212 = 0
@@ -5255,7 +5255,7 @@ function t_24:encode() --[[ line: 9301 ]]
 	return buff_1
 end
 
-function t_24.decode(p46) --[[ line: 9328 ]]
+function t_24.decode(p46)
 	-- upvalues: t_24 (ref), protoModule (ref), t (ref)
 	local var1221 = t_24.new()
 	local var1222 = 0
@@ -5312,7 +5312,7 @@ function t_24.decode(p46) --[[ line: 9328 ]]
 	return var1221
 end
 
-function t_24:jsonEncode() --[[ line: 9381 ]]
+function t_24:jsonEncode()
 	local t = {}
 	
 	if self.media_items ~= nil and #self.media_items > 0 then
@@ -5332,7 +5332,7 @@ function t_24:jsonEncode() --[[ line: 9381 ]]
 	return t
 end
 
-function t_24:jsonDecode() --[[ line: 9403 ]]
+function t_24:jsonDecode()
 	-- upvalues: t_24 (ref), t (ref)
 	local var1244 = t_24.new()
 	
@@ -5376,14 +5376,14 @@ typeRegistryModule.default:register(t.ExperienceMediaGalleryInputData)
 local t_25 = {}
 t_25.__index = t_25
 
-function t_25.new(p47) --[[ line: 9457 ]]
+function t_25.new(p47)
 	-- upvalues: t_25 (ref)
 	return setmetatable({
 		media_asset_id = if p47 == nil or p47.media_asset_id == nil then "" else p47.media_asset_id
 	}, t_25)
 end
 
-function t_25:encode() --[[ line: 9465 ]]
+function t_25:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1248 = 0
@@ -5400,7 +5400,7 @@ function t_25:encode() --[[ line: 9465 ]]
 	return buff_1
 end
 
-function t_25.decode(p48) --[[ line: 9481 ]]
+function t_25.decode(p48)
 	-- upvalues: t_25 (ref), protoModule (ref)
 	local var1252 = t_25.new()
 	local var1253 = 0
@@ -5447,7 +5447,7 @@ function t_25.decode(p48) --[[ line: 9481 ]]
 	return var1252
 end
 
-function t_25:jsonEncode() --[[ line: 9526 ]]
+function t_25:jsonEncode()
 	local t = {}
 	
 	if self.media_asset_id ~= nil and self.media_asset_id ~= "" then
@@ -5456,7 +5456,7 @@ function t_25:jsonEncode() --[[ line: 9526 ]]
 	return t
 end
 
-function t_25:jsonDecode() --[[ line: 9538 ]]
+function t_25:jsonDecode()
 	-- upvalues: t_25 (ref)
 	local var1270 = t_25.new()
 	
@@ -5478,14 +5478,14 @@ typeRegistryModule.default:register(t.ExperienceMediaGalleryInputData_MediaItem)
 local t_26 = {}
 t_26.__index = t_26
 
-function t_26.new(p49) --[[ line: 9568 ]]
+function t_26.new(p49)
 	-- upvalues: t_26 (ref)
 	return setmetatable({
 		universe_id = if p49 == nil or p49.universe_id == nil then "" else p49.universe_id
 	}, t_26)
 end
 
-function t_26:encode() --[[ line: 9576 ]]
+function t_26:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1272 = 0
@@ -5502,7 +5502,7 @@ function t_26:encode() --[[ line: 9576 ]]
 	return buff_1
 end
 
-function t_26.decode(p50) --[[ line: 9590 ]]
+function t_26.decode(p50)
 	-- upvalues: t_26 (ref), protoModule (ref)
 	local var1276 = t_26.new()
 	local var1277 = 0
@@ -5549,7 +5549,7 @@ function t_26.decode(p50) --[[ line: 9590 ]]
 	return var1276
 end
 
-function t_26:jsonEncode() --[[ line: 9633 ]]
+function t_26:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -5558,7 +5558,7 @@ function t_26:jsonEncode() --[[ line: 9633 ]]
 	return t
 end
 
-function t_26:jsonDecode() --[[ line: 9643 ]]
+function t_26:jsonDecode()
 	-- upvalues: t_26 (ref)
 	local var1294 = t_26.new()
 	
@@ -5580,14 +5580,14 @@ typeRegistryModule.default:register(t.ExperienceDescriptionInputData)
 local t_27 = {}
 t_27.__index = t_27
 
-function t_27.new(p51) --[[ line: 9671 ]]
+function t_27.new(p51)
 	-- upvalues: t_27 (ref)
 	return setmetatable({
 		universe_id = if p51 == nil or p51.universe_id == nil then "" else p51.universe_id
 	}, t_27)
 end
 
-function t_27:encode() --[[ line: 9679 ]]
+function t_27:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1296 = 0
@@ -5604,7 +5604,7 @@ function t_27:encode() --[[ line: 9679 ]]
 	return buff_1
 end
 
-function t_27.decode(p52) --[[ line: 9693 ]]
+function t_27.decode(p52)
 	-- upvalues: t_27 (ref), protoModule (ref)
 	local var1300 = t_27.new()
 	local var1301 = 0
@@ -5651,7 +5651,7 @@ function t_27.decode(p52) --[[ line: 9693 ]]
 	return var1300
 end
 
-function t_27:jsonEncode() --[[ line: 9736 ]]
+function t_27:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -5660,7 +5660,7 @@ function t_27:jsonEncode() --[[ line: 9736 ]]
 	return t
 end
 
-function t_27:jsonDecode() --[[ line: 9746 ]]
+function t_27:jsonDecode()
 	-- upvalues: t_27 (ref)
 	local var1318 = t_27.new()
 	
@@ -5682,7 +5682,7 @@ typeRegistryModule.default:register(t.ExperienceStatRowInputData)
 local t_28 = {}
 t_28.__index = t_28
 
-function t_28.new(p53) --[[ line: 9774 ]]
+function t_28.new(p53)
 	-- upvalues: t_28 (ref)
 	return setmetatable({
 		universe_id = if p53 == nil or p53.universe_id == nil then "" else p53.universe_id,
@@ -5692,7 +5692,7 @@ function t_28.new(p53) --[[ line: 9774 ]]
 	}, t_28)
 end
 
-function t_28:encode() --[[ line: 9785 ]]
+function t_28:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1320 = 0
@@ -5727,7 +5727,7 @@ function t_28:encode() --[[ line: 9785 ]]
 	return buff_1
 end
 
-function t_28.decode(p54) --[[ line: 9814 ]]
+function t_28.decode(p54)
 	-- upvalues: t_28 (ref), protoModule (ref)
 	local var1330 = t_28.new()
 	local var1331 = 0
@@ -5790,7 +5790,7 @@ function t_28.decode(p54) --[[ line: 9814 ]]
 	return var1330
 end
 
-function t_28:jsonEncode() --[[ line: 9872 ]]
+function t_28:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -5808,7 +5808,7 @@ function t_28:jsonEncode() --[[ line: 9872 ]]
 	return t
 end
 
-function t_28:jsonDecode() --[[ line: 9894 ]]
+function t_28:jsonDecode()
 	-- upvalues: t_28 (ref)
 	local var1354 = t_28.new()
 	
@@ -5848,14 +5848,14 @@ typeRegistryModule.default:register(t.ExperienceInfoTableInputData)
 local t_29 = {}
 t_29.__index = t_29
 
-function t_29.new(p55) --[[ line: 9946 ]]
+function t_29.new(p55)
 	-- upvalues: t_29 (ref)
 	return setmetatable({
 		universe_id = if p55 == nil or p55.universe_id == nil then "" else p55.universe_id
 	}, t_29)
 end
 
-function t_29:encode() --[[ line: 9954 ]]
+function t_29:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1356 = 0
@@ -5872,7 +5872,7 @@ function t_29:encode() --[[ line: 9954 ]]
 	return buff_1
 end
 
-function t_29.decode(p56) --[[ line: 9968 ]]
+function t_29.decode(p56)
 	-- upvalues: t_29 (ref), protoModule (ref)
 	local var1360 = t_29.new()
 	local var1361 = 0
@@ -5919,7 +5919,7 @@ function t_29.decode(p56) --[[ line: 9968 ]]
 	return var1360
 end
 
-function t_29:jsonEncode() --[[ line: 10011 ]]
+function t_29:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -5928,7 +5928,7 @@ function t_29:jsonEncode() --[[ line: 10011 ]]
 	return t
 end
 
-function t_29:jsonDecode() --[[ line: 10021 ]]
+function t_29:jsonDecode()
 	-- upvalues: t_29 (ref)
 	local var1378 = t_29.new()
 	
@@ -5950,7 +5950,7 @@ typeRegistryModule.default:register(t.ExperienceContentRatingLabelInputData)
 local t_30 = {}
 t_30.__index = t_30
 
-function t_30.new(p57) --[[ line: 10051 ]]
+function t_30.new(p57)
 	-- upvalues: t_30 (ref)
 	return setmetatable({
 		universe_id = if p57 == nil or p57.universe_id == nil then "" else p57.universe_id,
@@ -5958,7 +5958,7 @@ function t_30.new(p57) --[[ line: 10051 ]]
 	}, t_30)
 end
 
-function t_30:encode() --[[ line: 10062 ]]
+function t_30:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1380 = 0
@@ -5981,7 +5981,7 @@ function t_30:encode() --[[ line: 10062 ]]
 	return buff_1
 end
 
-function t_30.decode(p58) --[[ line: 10081 ]]
+function t_30.decode(p58)
 	-- upvalues: t_30 (ref), protoModule (ref)
 	local var1386 = t_30.new()
 	local var1387 = 0
@@ -6034,7 +6034,7 @@ function t_30.decode(p58) --[[ line: 10081 ]]
 	return var1386
 end
 
-function t_30:jsonEncode() --[[ line: 10129 ]]
+function t_30:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -6046,7 +6046,7 @@ function t_30:jsonEncode() --[[ line: 10129 ]]
 	return t
 end
 
-function t_30:jsonDecode() --[[ line: 10143 ]]
+function t_30:jsonDecode()
 	-- upvalues: t_30 (ref)
 	local var1406 = t_30.new()
 	
@@ -6074,7 +6074,7 @@ typeRegistryModule.default:register(t.ExperienceRefundPolicyInputData)
 local t_31 = {}
 t_31.__index = t_31
 
-function t_31.new(p59) --[[ line: 10179 ]]
+function t_31.new(p59)
 	-- upvalues: t_31 (ref)
 	return setmetatable({
 		universe_id = if p59 == nil or p59.universe_id == nil then "" else p59.universe_id,
@@ -6082,7 +6082,7 @@ function t_31.new(p59) --[[ line: 10179 ]]
 	}, t_31)
 end
 
-function t_31:encode() --[[ line: 10188 ]]
+function t_31:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1408 = 0
@@ -6105,7 +6105,7 @@ function t_31:encode() --[[ line: 10188 ]]
 	return buff_1
 end
 
-function t_31.decode(p60) --[[ line: 10207 ]]
+function t_31.decode(p60)
 	-- upvalues: t_31 (ref), protoModule (ref)
 	local var1414 = t_31.new()
 	local var1415 = 0
@@ -6157,7 +6157,7 @@ function t_31.decode(p60) --[[ line: 10207 ]]
 	return var1414
 end
 
-function t_31:jsonEncode() --[[ line: 10255 ]]
+function t_31:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -6169,7 +6169,7 @@ function t_31:jsonEncode() --[[ line: 10255 ]]
 	return t
 end
 
-function t_31:jsonDecode() --[[ line: 10269 ]]
+function t_31:jsonDecode()
 	-- upvalues: t_31 (ref)
 	local var1434 = t_31.new()
 	
@@ -6197,14 +6197,14 @@ typeRegistryModule.default:register(t.ExperiencePlayWithRewardInputData)
 local t_32 = {}
 t_32.__index = t_32
 
-function t_32.new(p61) --[[ line: 10307 ]]
+function t_32.new(p61)
 	-- upvalues: t_32 (ref)
 	return setmetatable({
 		community_id = if p61 == nil or p61.community_id == nil then "" else p61.community_id
 	}, t_32)
 end
 
-function t_32:encode() --[[ line: 10315 ]]
+function t_32:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1436 = 0
@@ -6221,7 +6221,7 @@ function t_32:encode() --[[ line: 10315 ]]
 	return buff_1
 end
 
-function t_32.decode(p62) --[[ line: 10329 ]]
+function t_32.decode(p62)
 	-- upvalues: t_32 (ref), protoModule (ref)
 	local var1440 = t_32.new()
 	local var1441 = 0
@@ -6268,7 +6268,7 @@ function t_32.decode(p62) --[[ line: 10329 ]]
 	return var1440
 end
 
-function t_32:jsonEncode() --[[ line: 10372 ]]
+function t_32:jsonEncode()
 	local t = {}
 	
 	if self.community_id ~= nil and self.community_id ~= "" then
@@ -6277,7 +6277,7 @@ function t_32:jsonEncode() --[[ line: 10372 ]]
 	return t
 end
 
-function t_32:jsonDecode() --[[ line: 10382 ]]
+function t_32:jsonDecode()
 	-- upvalues: t_32 (ref)
 	local var1458 = t_32.new()
 	
@@ -6299,14 +6299,14 @@ typeRegistryModule.default:register(t.CommunitySectionInputData)
 local t_33 = {}
 t_33.__index = t_33
 
-function t_33.new(p63) --[[ line: 10410 ]]
+function t_33.new(p63)
 	-- upvalues: t_33 (ref)
 	return setmetatable({
 		social_link_items = if p63 == nil or p63.social_link_items == nil then {} else p63.social_link_items
 	}, t_33)
 end
 
-function t_33:encode() --[[ line: 10416 ]]
+function t_33:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1460 = 0
@@ -6326,7 +6326,7 @@ function t_33:encode() --[[ line: 10416 ]]
 	return buff_1
 end
 
-function t_33.decode(p64) --[[ line: 10433 ]]
+function t_33.decode(p64)
 	-- upvalues: t_33 (ref), protoModule (ref), t (ref)
 	local var1465 = t_33.new()
 	local var1466 = 0
@@ -6373,7 +6373,7 @@ function t_33.decode(p64) --[[ line: 10433 ]]
 	return var1465
 end
 
-function t_33:jsonEncode() --[[ line: 10476 ]]
+function t_33:jsonEncode()
 	local t = {}
 	
 	if self.social_link_items ~= nil and #self.social_link_items > 0 then
@@ -6387,7 +6387,7 @@ function t_33:jsonEncode() --[[ line: 10476 ]]
 	return t
 end
 
-function t_33:jsonDecode() --[[ line: 10490 ]]
+function t_33:jsonDecode()
 	-- upvalues: t_33 (ref), t (ref)
 	local var1484 = t_33.new()
 	
@@ -6419,14 +6419,14 @@ typeRegistryModule.default:register(t.SocialLinkRowInputData)
 local t_34 = {}
 t_34.__index = t_34
 
-function t_34.new(p65) --[[ line: 10528 ]]
+function t_34.new(p65)
 	-- upvalues: t_34 (ref)
 	return setmetatable({
 		social_link_id = if p65 == nil or p65.social_link_id == nil then "" else p65.social_link_id
 	}, t_34)
 end
 
-function t_34:encode() --[[ line: 10536 ]]
+function t_34:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1488 = 0
@@ -6443,7 +6443,7 @@ function t_34:encode() --[[ line: 10536 ]]
 	return buff_1
 end
 
-function t_34.decode(p66) --[[ line: 10550 ]]
+function t_34.decode(p66)
 	-- upvalues: t_34 (ref), protoModule (ref)
 	local var1492 = t_34.new()
 	local var1493 = 0
@@ -6490,7 +6490,7 @@ function t_34.decode(p66) --[[ line: 10550 ]]
 	return var1492
 end
 
-function t_34:jsonEncode() --[[ line: 10593 ]]
+function t_34:jsonEncode()
 	local t = {}
 	
 	if self.social_link_id ~= nil and self.social_link_id ~= "" then
@@ -6499,7 +6499,7 @@ function t_34:jsonEncode() --[[ line: 10593 ]]
 	return t
 end
 
-function t_34:jsonDecode() --[[ line: 10603 ]]
+function t_34:jsonDecode()
 	-- upvalues: t_34 (ref)
 	local var1510 = t_34.new()
 	
@@ -6521,7 +6521,7 @@ typeRegistryModule.default:register(t.SocialLinkRowInputData_SocialLinkItem)
 local t_35 = {}
 t_35.__index = t_35
 
-function t_35.new(p67) --[[ line: 10633 ]]
+function t_35.new(p67)
 	-- upvalues: t_35 (ref)
 	return setmetatable({
 		title = if p67 == nil or p67.title == nil then "" else p67.title,
@@ -6543,7 +6543,7 @@ function t_35.new(p67) --[[ line: 10633 ]]
 	}, t_35)
 end
 
-function t_35:encode() --[[ line: 10662 ]]
+function t_35:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1512 = 0
@@ -6653,7 +6653,7 @@ function t_35:encode() --[[ line: 10662 ]]
 	return buff_1
 end
 
-function t_35.decode(p68) --[[ line: 10754 ]]
+function t_35.decode(p68)
 	-- upvalues: t_35 (ref), protoModule (ref), t (ref)
 	local var1547 = t_35.new()
 	local var1548 = 0
@@ -6776,7 +6776,7 @@ function t_35.decode(p68) --[[ line: 10754 ]]
 	return var1547
 end
 
-function t_35:jsonEncode() --[[ line: 10872 ]]
+function t_35:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -6835,7 +6835,7 @@ function t_35:jsonEncode() --[[ line: 10872 ]]
 	return t
 end
 
-function t_35:jsonDecode() --[[ line: 10946 ]]
+function t_35:jsonDecode()
 	-- upvalues: t_35 (ref), t (ref)
 	local var1596 = t_35.new()
 	
@@ -6951,7 +6951,7 @@ typeRegistryModule.default:register(t.ExperienceCarouselInputData)
 local t_36 = {}
 t_36.__index = t_36
 
-function t_36.new(p69) --[[ line: 11096 ]]
+function t_36.new(p69)
 	-- upvalues: t_36 (ref)
 	return setmetatable({
 		universe_id = if p69 == nil or p69.universe_id == nil then "" else p69.universe_id,
@@ -6977,7 +6977,7 @@ function t_36.new(p69) --[[ line: 11096 ]]
 	}, t_36)
 end
 
-function t_36:encode() --[[ line: 11123 ]]
+function t_36:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1600 = 0
@@ -7108,7 +7108,7 @@ function t_36:encode() --[[ line: 11123 ]]
 	return buff_1
 end
 
-function t_36.decode(p70) --[[ line: 11234 ]]
+function t_36.decode(p70)
 	-- upvalues: t_36 (ref), protoModule (ref)
 	local var1642 = t_36.new()
 	local var1643 = 0
@@ -7251,7 +7251,7 @@ function t_36.decode(p70) --[[ line: 11234 ]]
 	return var1642
 end
 
-function t_36:jsonEncode() --[[ line: 11374 ]]
+function t_36:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -7318,7 +7318,7 @@ function t_36:jsonEncode() --[[ line: 11374 ]]
 	return t
 end
 
-function t_36:jsonDecode() --[[ line: 11462 ]]
+function t_36:jsonDecode()
 	-- upvalues: t_36 (ref), protoModule (ref)
 	local var1698 = t_36.new()
 	
@@ -7445,7 +7445,7 @@ typeRegistryModule.default:register(t.ExperienceCarouselInputData_UniverseItem)
 local t_37 = {}
 t_37.__index = t_37
 
-function t_37.new(p71) --[[ line: 11632 ]]
+function t_37.new(p71)
 	-- upvalues: t_37 (ref)
 	return setmetatable({
 		title = if p71 == nil or p71.title == nil then "" else p71.title,
@@ -7462,7 +7462,7 @@ function t_37.new(p71) --[[ line: 11632 ]]
 	}, t_37)
 end
 
-function t_37:encode() --[[ line: 11648 ]]
+function t_37:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1700 = 0
@@ -7542,7 +7542,7 @@ function t_37:encode() --[[ line: 11648 ]]
 	return buff_1
 end
 
-function t_37.decode(p72) --[[ line: 11715 ]]
+function t_37.decode(p72)
 	-- upvalues: t_37 (ref), protoModule (ref), t (ref)
 	local var1725 = t_37.new()
 	local var1726 = 0
@@ -7640,7 +7640,7 @@ function t_37.decode(p72) --[[ line: 11715 ]]
 	return var1725
 end
 
-function t_37:jsonEncode() --[[ line: 11808 ]]
+function t_37:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -7684,7 +7684,7 @@ function t_37:jsonEncode() --[[ line: 11808 ]]
 	return t
 end
 
-function t_37:jsonDecode() --[[ line: 11862 ]]
+function t_37:jsonDecode()
 	-- upvalues: t_37 (ref), t (ref)
 	local var1764 = t_37.new()
 	
@@ -7770,14 +7770,14 @@ typeRegistryModule.default:register(t.SongCarouselInputData)
 local t_38 = {}
 t_38.__index = t_38
 
-function t_38.new(p73) --[[ line: 11972 ]]
+function t_38.new(p73)
 	-- upvalues: t_38 (ref)
 	return setmetatable({
 		song_id = if p73 == nil or p73.song_id == nil then "" else p73.song_id
 	}, t_38)
 end
 
-function t_38:encode() --[[ line: 11980 ]]
+function t_38:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1768 = 0
@@ -7794,7 +7794,7 @@ function t_38:encode() --[[ line: 11980 ]]
 	return buff_1
 end
 
-function t_38.decode(p74) --[[ line: 11994 ]]
+function t_38.decode(p74)
 	-- upvalues: t_38 (ref), protoModule (ref)
 	local var1772 = t_38.new()
 	local var1773 = 0
@@ -7841,7 +7841,7 @@ function t_38.decode(p74) --[[ line: 11994 ]]
 	return var1772
 end
 
-function t_38:jsonEncode() --[[ line: 12037 ]]
+function t_38:jsonEncode()
 	local t = {}
 	
 	if self.song_id ~= nil and self.song_id ~= "" then
@@ -7850,7 +7850,7 @@ function t_38:jsonEncode() --[[ line: 12037 ]]
 	return t
 end
 
-function t_38:jsonDecode() --[[ line: 12047 ]]
+function t_38:jsonDecode()
 	-- upvalues: t_38 (ref)
 	local var1790 = t_38.new()
 	
@@ -7872,7 +7872,7 @@ typeRegistryModule.default:register(t.SongCarouselInputData_SongItem)
 local t_39 = {}
 t_39.__index = t_39
 
-function t_39.new(p75) --[[ line: 12075 ]]
+function t_39.new(p75)
 	-- upvalues: t_39 (ref)
 	return setmetatable({
 		title = if p75 == nil or p75.title == nil then "" else p75.title,
@@ -7884,7 +7884,7 @@ function t_39.new(p75) --[[ line: 12075 ]]
 	}, t_39)
 end
 
-function t_39:encode() --[[ line: 12086 ]]
+function t_39:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1792 = 0
@@ -7934,7 +7934,7 @@ function t_39:encode() --[[ line: 12086 ]]
 	return buff_1
 end
 
-function t_39.decode(p76) --[[ line: 12128 ]]
+function t_39.decode(p76)
 	-- upvalues: t_39 (ref), protoModule (ref), t (ref)
 	local var1807 = t_39.new()
 	local var1808 = 0
@@ -8006,7 +8006,7 @@ function t_39.decode(p76) --[[ line: 12128 ]]
 	return var1807
 end
 
-function t_39:jsonEncode() --[[ line: 12196 ]]
+function t_39:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -8035,7 +8035,7 @@ function t_39:jsonEncode() --[[ line: 12196 ]]
 	return t
 end
 
-function t_39:jsonDecode() --[[ line: 12230 ]]
+function t_39:jsonDecode()
 	-- upvalues: t_39 (ref), t (ref)
 	local var1836 = t_39.new()
 	
@@ -8091,14 +8091,14 @@ typeRegistryModule.default:register(t.EventsCarouselInputData)
 local t_40 = {}
 t_40.__index = t_40
 
-function t_40.new(p77) --[[ line: 12300 ]]
+function t_40.new(p77)
 	-- upvalues: t_40 (ref)
 	return setmetatable({
 		event_id = if p77 == nil or p77.event_id == nil then "" else p77.event_id
 	}, t_40)
 end
 
-function t_40:encode() --[[ line: 12308 ]]
+function t_40:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1840 = 0
@@ -8115,7 +8115,7 @@ function t_40:encode() --[[ line: 12308 ]]
 	return buff_1
 end
 
-function t_40.decode(p78) --[[ line: 12322 ]]
+function t_40.decode(p78)
 	-- upvalues: t_40 (ref), protoModule (ref)
 	local var1844 = t_40.new()
 	local var1845 = 0
@@ -8162,7 +8162,7 @@ function t_40.decode(p78) --[[ line: 12322 ]]
 	return var1844
 end
 
-function t_40:jsonEncode() --[[ line: 12365 ]]
+function t_40:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -8171,7 +8171,7 @@ function t_40:jsonEncode() --[[ line: 12365 ]]
 	return t
 end
 
-function t_40:jsonDecode() --[[ line: 12375 ]]
+function t_40:jsonDecode()
 	-- upvalues: t_40 (ref)
 	local var1862 = t_40.new()
 	
@@ -8193,7 +8193,7 @@ typeRegistryModule.default:register(t.EventsCarouselInputData_EventItem)
 local t_41 = {}
 t_41.__index = t_41
 
-function t_41.new(p79) --[[ line: 12405 ]]
+function t_41.new(p79)
 	-- upvalues: t_41 (ref)
 	return setmetatable({
 		universe_id = if p79 == nil or p79.universe_id == nil then "" else p79.universe_id,
@@ -8203,7 +8203,7 @@ function t_41.new(p79) --[[ line: 12405 ]]
 	}, t_41)
 end
 
-function t_41:encode() --[[ line: 12414 ]]
+function t_41:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1864 = 0
@@ -8249,7 +8249,7 @@ function t_41:encode() --[[ line: 12414 ]]
 	return buff_1
 end
 
-function t_41.decode(p80) --[[ line: 12454 ]]
+function t_41.decode(p80)
 	-- upvalues: t_41 (ref), protoModule (ref), t (ref)
 	local var1880 = t_41.new()
 	local var1881 = 0
@@ -8312,7 +8312,7 @@ function t_41.decode(p80) --[[ line: 12454 ]]
 	return var1880
 end
 
-function t_41:jsonEncode() --[[ line: 12519 ]]
+function t_41:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -8340,7 +8340,7 @@ function t_41:jsonEncode() --[[ line: 12519 ]]
 	return t
 end
 
-function t_41:jsonDecode() --[[ line: 12549 ]]
+function t_41:jsonDecode()
 	-- upvalues: t_41 (ref), t (ref)
 	local var1906 = t_41.new()
 	
@@ -8400,7 +8400,7 @@ typeRegistryModule.default:register(t.DevStoreFeedInputData)
 local t_42 = {}
 t_42.__index = t_42
 
-function t_42.new(p81) --[[ line: 12621 ]]
+function t_42.new(p81)
 	-- upvalues: t_42 (ref)
 	return setmetatable({
 		key = if p81 == nil or p81.key == nil then "" else p81.key,
@@ -8408,7 +8408,7 @@ function t_42.new(p81) --[[ line: 12621 ]]
 	}, t_42)
 end
 
-function t_42:encode() --[[ line: 12630 ]]
+function t_42:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1912 = 0
@@ -8432,7 +8432,7 @@ function t_42:encode() --[[ line: 12630 ]]
 	return buff_1
 end
 
-function t_42.decode(p82) --[[ line: 12650 ]]
+function t_42.decode(p82)
 	-- upvalues: t_42 (ref), protoModule (ref), t (ref)
 	local var1919 = t_42.new()
 	local var1920 = 0
@@ -8484,7 +8484,7 @@ function t_42.decode(p82) --[[ line: 12650 ]]
 	return var1919
 end
 
-function t_42:jsonEncode() --[[ line: 12698 ]]
+function t_42:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -8496,7 +8496,7 @@ function t_42:jsonEncode() --[[ line: 12698 ]]
 	return t
 end
 
-function t_42:jsonDecode() --[[ line: 12712 ]]
+function t_42:jsonDecode()
 	-- upvalues: t_42 (ref), t (ref)
 	local var1939 = t_42.new()
 	
@@ -8518,14 +8518,14 @@ typeRegistryModule.default:register(t.DevStoreFeedInputData_EntryMapEntry)
 local t_43 = {}
 t_43.__index = t_43
 
-function t_43.new(p83) --[[ line: 12742 ]]
+function t_43.new(p83)
 	-- upvalues: t_43 (ref)
 	return setmetatable({
 		game_passes = if p83 == nil or p83.game_passes == nil then {} else p83.game_passes
 	}, t_43)
 end
 
-function t_43:encode() --[[ line: 12750 ]]
+function t_43:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1941 = 0
@@ -8545,7 +8545,7 @@ function t_43:encode() --[[ line: 12750 ]]
 	return buff_1
 end
 
-function t_43.decode(p84) --[[ line: 12767 ]]
+function t_43.decode(p84)
 	-- upvalues: t_43 (ref), protoModule (ref), t (ref)
 	local var1946 = t_43.new()
 	local var1947 = 0
@@ -8592,7 +8592,7 @@ function t_43.decode(p84) --[[ line: 12767 ]]
 	return var1946
 end
 
-function t_43:jsonEncode() --[[ line: 12810 ]]
+function t_43:jsonEncode()
 	local t = {}
 	
 	if self.game_passes ~= nil and #self.game_passes > 0 then
@@ -8606,7 +8606,7 @@ function t_43:jsonEncode() --[[ line: 12810 ]]
 	return t
 end
 
-function t_43:jsonDecode() --[[ line: 12824 ]]
+function t_43:jsonDecode()
 	-- upvalues: t_43 (ref), t (ref)
 	local var1965 = t_43.new()
 	
@@ -8638,14 +8638,14 @@ typeRegistryModule.default:register(t.GamePassCollectionInputData)
 local t_44 = {}
 t_44.__index = t_44
 
-function t_44.new(p85) --[[ line: 12862 ]]
+function t_44.new(p85)
 	-- upvalues: t_44 (ref)
 	return setmetatable({
 		game_pass_id = if p85 == nil or p85.game_pass_id == nil then "" else p85.game_pass_id
 	}, t_44)
 end
 
-function t_44:encode() --[[ line: 12870 ]]
+function t_44:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1969 = 0
@@ -8662,7 +8662,7 @@ function t_44:encode() --[[ line: 12870 ]]
 	return buff_1
 end
 
-function t_44.decode(p86) --[[ line: 12886 ]]
+function t_44.decode(p86)
 	-- upvalues: t_44 (ref), protoModule (ref)
 	local var1973 = t_44.new()
 	local var1974 = 0
@@ -8709,7 +8709,7 @@ function t_44.decode(p86) --[[ line: 12886 ]]
 	return var1973
 end
 
-function t_44:jsonEncode() --[[ line: 12931 ]]
+function t_44:jsonEncode()
 	local t = {}
 	
 	if self.game_pass_id ~= nil and self.game_pass_id ~= "" then
@@ -8718,7 +8718,7 @@ function t_44:jsonEncode() --[[ line: 12931 ]]
 	return t
 end
 
-function t_44:jsonDecode() --[[ line: 12943 ]]
+function t_44:jsonDecode()
 	-- upvalues: t_44 (ref)
 	local var1991 = t_44.new()
 	
@@ -8740,14 +8740,14 @@ typeRegistryModule.default:register(t.GamePassCollectionInputData_GamePassItem)
 local t_45 = {}
 t_45.__index = t_45
 
-function t_45.new(p87) --[[ line: 12973 ]]
+function t_45.new(p87)
 	-- upvalues: t_45 (ref)
 	return setmetatable({
 		developer_products = if p87 == nil or p87.developer_products == nil then {} else p87.developer_products
 	}, t_45)
 end
 
-function t_45:encode() --[[ line: 12981 ]]
+function t_45:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1993 = 0
@@ -8767,7 +8767,7 @@ function t_45:encode() --[[ line: 12981 ]]
 	return buff_1
 end
 
-function t_45.decode(p88) --[[ line: 12998 ]]
+function t_45.decode(p88)
 	-- upvalues: t_45 (ref), protoModule (ref), t (ref)
 	local var1998 = t_45.new()
 	local var1999 = 0
@@ -8814,7 +8814,7 @@ function t_45.decode(p88) --[[ line: 12998 ]]
 	return var1998
 end
 
-function t_45:jsonEncode() --[[ line: 13044 ]]
+function t_45:jsonEncode()
 	local t = {}
 	
 	if self.developer_products ~= nil and #self.developer_products > 0 then
@@ -8828,7 +8828,7 @@ function t_45:jsonEncode() --[[ line: 13044 ]]
 	return t
 end
 
-function t_45:jsonDecode() --[[ line: 13058 ]]
+function t_45:jsonDecode()
 	-- upvalues: t_45 (ref), t (ref)
 	local var2017 = t_45.new()
 	
@@ -8860,14 +8860,14 @@ typeRegistryModule.default:register(t.DeveloperProductCollectionInputData)
 local t_46 = {}
 t_46.__index = t_46
 
-function t_46.new(p89) --[[ line: 13105 ]]
+function t_46.new(p89)
 	-- upvalues: t_46 (ref)
 	return setmetatable({
 		developer_product_id = if p89 == nil or p89.developer_product_id == nil then "" else p89.developer_product_id
 	}, t_46)
 end
 
-function t_46:encode() --[[ line: 13118 ]]
+function t_46:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2021 = 0
@@ -8884,7 +8884,7 @@ function t_46:encode() --[[ line: 13118 ]]
 	return buff_1
 end
 
-function t_46.decode(p90) --[[ line: 13134 ]]
+function t_46.decode(p90)
 	-- upvalues: t_46 (ref), protoModule (ref)
 	local var2025 = t_46.new()
 	local var2026 = 0
@@ -8931,7 +8931,7 @@ function t_46.decode(p90) --[[ line: 13134 ]]
 	return var2025
 end
 
-function t_46:jsonEncode() --[[ line: 13179 ]]
+function t_46:jsonEncode()
 	local t = {}
 	
 	if self.developer_product_id ~= nil and self.developer_product_id ~= "" then
@@ -8940,7 +8940,7 @@ function t_46:jsonEncode() --[[ line: 13179 ]]
 	return t
 end
 
-function t_46:jsonDecode() --[[ line: 13191 ]]
+function t_46:jsonDecode()
 	-- upvalues: t_46 (ref)
 	local var2043 = t_46.new()
 	
@@ -8962,14 +8962,14 @@ typeRegistryModule.default:register(t.DeveloperProductCollectionInputData_Develo
 local t_47 = {}
 t_47.__index = t_47
 
-function t_47.new(p91) --[[ line: 13222 ]]
+function t_47.new(p91)
 	-- upvalues: t_47 (ref)
 	return setmetatable({
 		subscriptions = if p91 == nil or p91.subscriptions == nil then {} else p91.subscriptions
 	}, t_47)
 end
 
-function t_47:encode() --[[ line: 13230 ]]
+function t_47:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2045 = 0
@@ -8989,7 +8989,7 @@ function t_47:encode() --[[ line: 13230 ]]
 	return buff_1
 end
 
-function t_47.decode(p92) --[[ line: 13247 ]]
+function t_47.decode(p92)
 	-- upvalues: t_47 (ref), protoModule (ref), t (ref)
 	local var2050 = t_47.new()
 	local var2051 = 0
@@ -9036,7 +9036,7 @@ function t_47.decode(p92) --[[ line: 13247 ]]
 	return var2050
 end
 
-function t_47:jsonEncode() --[[ line: 13293 ]]
+function t_47:jsonEncode()
 	local t = {}
 	
 	if self.subscriptions ~= nil and #self.subscriptions > 0 then
@@ -9050,7 +9050,7 @@ function t_47:jsonEncode() --[[ line: 13293 ]]
 	return t
 end
 
-function t_47:jsonDecode() --[[ line: 13307 ]]
+function t_47:jsonDecode()
 	-- upvalues: t_47 (ref), t (ref)
 	local var2069 = t_47.new()
 	
@@ -9074,14 +9074,14 @@ typeRegistryModule.default:register(t.SubscriptionCollectionInputData)
 local t_48 = {}
 t_48.__index = t_48
 
-function t_48.new(p93) --[[ line: 13337 ]]
+function t_48.new(p93)
 	-- upvalues: t_48 (ref)
 	return setmetatable({
 		subscription_id = if p93 == nil or p93.subscription_id == nil then "" else p93.subscription_id
 	}, t_48)
 end
 
-function t_48:encode() --[[ line: 13348 ]]
+function t_48:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2072 = 0
@@ -9098,7 +9098,7 @@ function t_48:encode() --[[ line: 13348 ]]
 	return buff_1
 end
 
-function t_48.decode(p94) --[[ line: 13364 ]]
+function t_48.decode(p94)
 	-- upvalues: t_48 (ref), protoModule (ref)
 	local var2076 = t_48.new()
 	local var2077 = 0
@@ -9145,7 +9145,7 @@ function t_48.decode(p94) --[[ line: 13364 ]]
 	return var2076
 end
 
-function t_48:jsonEncode() --[[ line: 13409 ]]
+function t_48:jsonEncode()
 	local t = {}
 	
 	if self.subscription_id ~= nil and self.subscription_id ~= "" then
@@ -9154,7 +9154,7 @@ function t_48:jsonEncode() --[[ line: 13409 ]]
 	return t
 end
 
-function t_48:jsonDecode() --[[ line: 13421 ]]
+function t_48:jsonDecode()
 	-- upvalues: t_48 (ref)
 	local var2094 = t_48.new()
 	
@@ -9176,7 +9176,7 @@ typeRegistryModule.default:register(t.SubscriptionCollectionInputData_Subscripti
 local t_49 = {}
 t_49.__index = t_49
 
-function t_49.new(p95) --[[ line: 13452 ]]
+function t_49.new(p95)
 	-- upvalues: t_49 (ref)
 	return setmetatable({
 		items = if p95 == nil or p95.items == nil then {} else p95.items,
@@ -9191,7 +9191,7 @@ function t_49.new(p95) --[[ line: 13452 ]]
 	}, t_49)
 end
 
-function t_49:encode() --[[ line: 13472 ]]
+function t_49:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2096 = 0
@@ -9259,7 +9259,7 @@ function t_49:encode() --[[ line: 13472 ]]
 	return buff_1
 end
 
-function t_49.decode(p96) --[[ line: 13529 ]]
+function t_49.decode(p96)
 	-- upvalues: t_49 (ref), protoModule (ref), t (ref)
 	local var2117 = t_49.new()
 	local var2118 = 0
@@ -9346,7 +9346,7 @@ function t_49.decode(p96) --[[ line: 13529 ]]
 	return var2117
 end
 
-function t_49:jsonEncode() --[[ line: 13615 ]]
+function t_49:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -9384,7 +9384,7 @@ function t_49:jsonEncode() --[[ line: 13615 ]]
 	return t
 end
 
-function t_49:jsonDecode() --[[ line: 13661 ]]
+function t_49:jsonDecode()
 	-- upvalues: t_49 (ref), t (ref)
 	local var2152 = t_49.new()
 	
@@ -9456,7 +9456,7 @@ typeRegistryModule.default:register(t.DynamicStoreCategoryInputData)
 local t_50 = {}
 t_50.__index = t_50
 
-function t_50.new(p97) --[[ line: 13758 ]]
+function t_50.new(p97)
 	-- upvalues: t (ref), t_50 (ref)
 	return setmetatable({
 		item_id = if p97 == nil or p97.item_id == nil then "" else p97.item_id,
@@ -9464,7 +9464,7 @@ function t_50.new(p97) --[[ line: 13758 ]]
 	}, t_50)
 end
 
-function t_50:encode() --[[ line: 13775 ]]
+function t_50:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var2155 = 0
@@ -9487,7 +9487,7 @@ function t_50:encode() --[[ line: 13775 ]]
 	return buff_1
 end
 
-function t_50.decode(p98) --[[ line: 13807 ]]
+function t_50.decode(p98)
 	-- upvalues: t_50 (ref), protoModule (ref), t (ref)
 	local var2161 = t_50.new()
 	local var2162 = 0
@@ -9541,7 +9541,7 @@ function t_50.decode(p98) --[[ line: 13807 ]]
 	return var2161
 end
 
-function t_50:jsonEncode() --[[ line: 13859 ]]
+function t_50:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -9554,7 +9554,7 @@ function t_50:jsonEncode() --[[ line: 13859 ]]
 	return t_1
 end
 
-function t_50:jsonDecode() --[[ line: 13886 ]]
+function t_50:jsonDecode()
 	-- upvalues: t_50 (ref), t (ref)
 	local var2182 = t_50.new()
 	
@@ -9577,20 +9577,20 @@ t_50.descriptor = {
 t.DynamicStoreCategoryInputData_DynamicStoreCategoryItem = t_50
 typeRegistryModule.default:register(t.DynamicStoreCategoryInputData_DynamicStoreCategoryItem)
 t.DynamicStoreCategoryInputData_DynamicStoreCategoryItemType = {
-	fromNumber = function(p99) --[[ line: 13925 ]]
+	fromNumber = function(p99)
 		return if p99 == 0 then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_INVALID" elseif p99 == 1 then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_GAME_PASS" elseif p99 == 2 then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_DEVELOPER_PRODUCT" elseif p99 == 3 then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_SUBSCRIPTION" else nil
 	end,
-	toNumber = function(p100) --[[ line: 13939 ]]
+	toNumber = function(p100)
 		return if p100 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_INVALID" then 0 elseif p100 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_GAME_PASS" then 1 elseif p100 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_DEVELOPER_PRODUCT" then 2 elseif p100 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_SUBSCRIPTION" then 3 else p100
 	end,
-	fromName = function(p101) --[[ line: 13953 ]]
+	fromName = function(p101)
 		return if p101 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_INVALID" then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_INVALID" elseif p101 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_GAME_PASS" then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_GAME_PASS" elseif p101 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_DEVELOPER_PRODUCT" then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_DEVELOPER_PRODUCT" elseif p101 == "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_SUBSCRIPTION" then "DYNAMIC_STORE_CATEGORY_ITEM_TYPE_SUBSCRIPTION" else nil
 	end
 }
 local t_51 = {}
 t_51.__index = t_51
 
-function t_51.new(p102) --[[ line: 13972 ]]
+function t_51.new(p102)
 	-- upvalues: t_51 (ref)
 	return setmetatable({
 		roblox_component = if p102 == nil or p102.roblox_component == nil then "" else p102.roblox_component,
@@ -9605,7 +9605,7 @@ function t_51.new(p102) --[[ line: 13972 ]]
 	}, t_51)
 end
 
-function t_51:encode() --[[ line: 13988 ]]
+function t_51:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2184 = 0
@@ -9670,7 +9670,7 @@ function t_51:encode() --[[ line: 13988 ]]
 	return buff_1
 end
 
-function t_51.decode(p103) --[[ line: 14042 ]]
+function t_51.decode(p103)
 	-- upvalues: t_51 (ref), protoModule (ref)
 	local var2204 = t_51.new()
 	local var2205 = 0
@@ -9757,7 +9757,7 @@ function t_51.decode(p103) --[[ line: 14042 ]]
 	return var2204
 end
 
-function t_51:jsonEncode() --[[ line: 14125 ]]
+function t_51:jsonEncode()
 	local t = {}
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
@@ -9790,7 +9790,7 @@ function t_51:jsonEncode() --[[ line: 14125 ]]
 	return t
 end
 
-function t_51:jsonDecode() --[[ line: 14167 ]]
+function t_51:jsonDecode()
 	-- upvalues: t_51 (ref)
 	local var2238 = t_51.new()
 	
@@ -9851,7 +9851,7 @@ typeRegistryModule.default:register(t.CardContainerCardInputData)
 local t_52 = {}
 t_52.__index = t_52
 
-function t_52.new(p104) --[[ line: 14247 ]]
+function t_52.new(p104)
 	-- upvalues: t_52 (ref)
 	return setmetatable({
 		group_id = if p104 == nil or p104.group_id == nil then "" else p104.group_id,
@@ -9859,7 +9859,7 @@ function t_52.new(p104) --[[ line: 14247 ]]
 	}, t_52)
 end
 
-function t_52:encode() --[[ line: 14256 ]]
+function t_52:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2240 = 0
@@ -9882,7 +9882,7 @@ function t_52:encode() --[[ line: 14256 ]]
 	return buff_1
 end
 
-function t_52.decode(p105) --[[ line: 14275 ]]
+function t_52.decode(p105)
 	-- upvalues: t_52 (ref), protoModule (ref)
 	local var2246 = t_52.new()
 	local var2247 = 0
@@ -9934,7 +9934,7 @@ function t_52.decode(p105) --[[ line: 14275 ]]
 	return var2246
 end
 
-function t_52:jsonEncode() --[[ line: 14323 ]]
+function t_52:jsonEncode()
 	local t = {}
 	
 	if self.group_id ~= nil and self.group_id ~= "" then
@@ -9946,7 +9946,7 @@ function t_52:jsonEncode() --[[ line: 14323 ]]
 	return t
 end
 
-function t_52:jsonDecode() --[[ line: 14337 ]]
+function t_52:jsonDecode()
 	-- upvalues: t_52 (ref)
 	local var2266 = t_52.new()
 	
@@ -9974,7 +9974,7 @@ typeRegistryModule.default:register(t.CommunitiesCardClientAttributes)
 local t_53 = {}
 t_53.__index = t_53
 
-function t_53.new(p106) --[[ line: 14373 ]]
+function t_53.new(p106)
 	-- upvalues: t_53 (ref)
 	return setmetatable({
 		title = if p106 == nil or p106.title == nil then "" else p106.title,
@@ -9989,7 +9989,7 @@ function t_53.new(p106) --[[ line: 14373 ]]
 	}, t_53)
 end
 
-function t_53:encode() --[[ line: 14387 ]]
+function t_53:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2268 = 0
@@ -10058,7 +10058,7 @@ function t_53:encode() --[[ line: 14387 ]]
 	return buff_1
 end
 
-function t_53.decode(p107) --[[ line: 14447 ]]
+function t_53.decode(p107)
 	-- upvalues: t_53 (ref), protoModule (ref), t (ref)
 	local var2290 = t_53.new()
 	local var2291 = 0
@@ -10148,7 +10148,7 @@ function t_53.decode(p107) --[[ line: 14447 ]]
 	return var2290
 end
 
-function t_53:jsonEncode() --[[ line: 14533 ]]
+function t_53:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -10186,7 +10186,7 @@ function t_53:jsonEncode() --[[ line: 14533 ]]
 	return t
 end
 
-function t_53:jsonDecode() --[[ line: 14581 ]]
+function t_53:jsonDecode()
 	-- upvalues: t_53 (ref), t (ref)
 	local var2325 = t_53.new()
 	
@@ -10261,7 +10261,7 @@ typeRegistryModule.default:register(t.CardContainerInputData)
 local t_54 = {}
 t_54.__index = t_54
 
-function t_54.new(p108) --[[ line: 14676 ]]
+function t_54.new(p108)
 	-- upvalues: t_54 (ref)
 	return setmetatable({
 		title = if p108 == nil or p108.title == nil then "" else p108.title,
@@ -10274,7 +10274,7 @@ function t_54.new(p108) --[[ line: 14676 ]]
 	}, t_54)
 end
 
-function t_54:encode() --[[ line: 14688 ]]
+function t_54:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2328 = 0
@@ -10327,7 +10327,7 @@ function t_54:encode() --[[ line: 14688 ]]
 	return buff_1
 end
 
-function t_54.decode(p109) --[[ line: 14732 ]]
+function t_54.decode(p109)
 	-- upvalues: t_54 (ref), protoModule (ref)
 	local var2344 = t_54.new()
 	local var2345 = 0
@@ -10404,7 +10404,7 @@ function t_54.decode(p109) --[[ line: 14732 ]]
 	return var2344
 end
 
-function t_54:jsonEncode() --[[ line: 14805 ]]
+function t_54:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -10431,7 +10431,7 @@ function t_54:jsonEncode() --[[ line: 14805 ]]
 	return t
 end
 
-function t_54:jsonDecode() --[[ line: 14839 ]]
+function t_54:jsonDecode()
 	-- upvalues: t_54 (ref)
 	local var2374 = t_54.new()
 	
@@ -10483,7 +10483,7 @@ typeRegistryModule.default:register(t.CardInputData)
 local t_55 = {}
 t_55.__index = t_55
 
-function t_55.new(p110) --[[ line: 14907 ]]
+function t_55.new(p110)
 	-- upvalues: t_55 (ref)
 	return setmetatable({
 		prompt_id = if p110 == nil or p110.prompt_id == nil then "" else p110.prompt_id,
@@ -10493,7 +10493,7 @@ function t_55.new(p110) --[[ line: 14907 ]]
 	}, t_55)
 end
 
-function t_55:encode() --[[ line: 14916 ]]
+function t_55:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2376 = 0
@@ -10528,7 +10528,7 @@ function t_55:encode() --[[ line: 14916 ]]
 	return buff_1
 end
 
-function t_55.decode(p111) --[[ line: 14945 ]]
+function t_55.decode(p111)
 	-- upvalues: t_55 (ref), protoModule (ref)
 	local var2386 = t_55.new()
 	local var2387 = 0
@@ -10590,7 +10590,7 @@ function t_55.decode(p111) --[[ line: 14945 ]]
 	return var2386
 end
 
-function t_55:jsonEncode() --[[ line: 15003 ]]
+function t_55:jsonEncode()
 	local t = {}
 	
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
@@ -10608,7 +10608,7 @@ function t_55:jsonEncode() --[[ line: 15003 ]]
 	return t
 end
 
-function t_55:jsonDecode() --[[ line: 15025 ]]
+function t_55:jsonDecode()
 	-- upvalues: t_55 (ref)
 	local var2410 = t_55.new()
 	
@@ -10648,7 +10648,7 @@ typeRegistryModule.default:register(t.DialogInputData)
 local t_56 = {}
 t_56.__index = t_56
 
-function t_56.new(p112) --[[ line: 15077 ]]
+function t_56.new(p112)
 	-- upvalues: t_56 (ref)
 	return setmetatable({
 		sender_count = if p112 == nil or p112.sender_count == nil then 0 else p112.sender_count,
@@ -10656,7 +10656,7 @@ function t_56.new(p112) --[[ line: 15077 ]]
 	}, t_56)
 end
 
-function t_56:encode() --[[ line: 15084 ]]
+function t_56:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2412 = 0
@@ -10679,7 +10679,7 @@ function t_56:encode() --[[ line: 15084 ]]
 	return buff_1
 end
 
-function t_56.decode(p113) --[[ line: 15103 ]]
+function t_56.decode(p113)
 	-- upvalues: t_56 (ref), protoModule (ref)
 	local var2418 = t_56.new()
 	local var2419 = 0
@@ -10729,7 +10729,7 @@ function t_56.decode(p113) --[[ line: 15103 ]]
 	return var2418
 end
 
-function t_56:jsonEncode() --[[ line: 15151 ]]
+function t_56:jsonEncode()
 	local t = {}
 	
 	if self.sender_count ~= nil and self.sender_count ~= 0 then
@@ -10741,7 +10741,7 @@ function t_56:jsonEncode() --[[ line: 15151 ]]
 	return t
 end
 
-function t_56:jsonDecode() --[[ line: 15165 ]]
+function t_56:jsonDecode()
 	-- upvalues: t_56 (ref)
 	local var2438 = t_56.new()
 	
@@ -10769,7 +10769,7 @@ typeRegistryModule.default:register(t.IncomingTransferContent)
 local t_57 = {}
 t_57.__index = t_57
 
-function t_57.new(p114) --[[ line: 15201 ]]
+function t_57.new(p114)
 	-- upvalues: t_57 (ref)
 	return setmetatable({
 		title = if p114 == nil or p114.title == nil then "" else p114.title,
@@ -10783,7 +10783,7 @@ function t_57.new(p114) --[[ line: 15201 ]]
 	}, t_57)
 end
 
-function t_57:encode() --[[ line: 15214 ]]
+function t_57:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2440 = 0
@@ -10843,7 +10843,7 @@ function t_57:encode() --[[ line: 15214 ]]
 	return buff_1
 end
 
-function t_57.decode(p115) --[[ line: 15266 ]]
+function t_57.decode(p115)
 	-- upvalues: t_57 (ref), protoModule (ref), t (ref)
 	local var2459 = t_57.new()
 	local var2460 = 0
@@ -10929,7 +10929,7 @@ function t_57.decode(p115) --[[ line: 15266 ]]
 	return var2459
 end
 
-function t_57:jsonEncode() --[[ line: 15345 ]]
+function t_57:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -10959,7 +10959,7 @@ function t_57:jsonEncode() --[[ line: 15345 ]]
 	return t
 end
 
-function t_57:jsonDecode() --[[ line: 15385 ]]
+function t_57:jsonDecode()
 	-- upvalues: t_57 (ref), t (ref)
 	local var2491 = t_57.new()
 	
@@ -11023,7 +11023,7 @@ typeRegistryModule.default:register(t.BannerInputData)
 local t_58 = {}
 t_58.__index = t_58
 
-function t_58.new(p116) --[[ line: 15467 ]]
+function t_58.new(p116)
 	-- upvalues: t_58 (ref)
 	return setmetatable({
 		tooltip_text = if p116 == nil or p116.tooltip_text == nil then "" else p116.tooltip_text,
@@ -11032,7 +11032,7 @@ function t_58.new(p116) --[[ line: 15467 ]]
 	}, t_58)
 end
 
-function t_58:encode() --[[ line: 15475 ]]
+function t_58:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2493 = 0
@@ -11061,7 +11061,7 @@ function t_58:encode() --[[ line: 15475 ]]
 	return buff_1
 end
 
-function t_58.decode(p117) --[[ line: 15499 ]]
+function t_58.decode(p117)
 	-- upvalues: t_58 (ref), protoModule (ref)
 	local var2501 = t_58.new()
 	local var2502 = 0
@@ -11118,7 +11118,7 @@ function t_58.decode(p117) --[[ line: 15499 ]]
 	return var2501
 end
 
-function t_58:jsonEncode() --[[ line: 15552 ]]
+function t_58:jsonEncode()
 	local t = {}
 	
 	if self.tooltip_text ~= nil and self.tooltip_text ~= "" then
@@ -11133,7 +11133,7 @@ function t_58:jsonEncode() --[[ line: 15552 ]]
 	return t
 end
 
-function t_58:jsonDecode() --[[ line: 15570 ]]
+function t_58:jsonDecode()
 	-- upvalues: t_58 (ref)
 	local var2523 = t_58.new()
 	
@@ -11167,7 +11167,7 @@ typeRegistryModule.default:register(t.TooltipInputData)
 local t_59 = {}
 t_59.__index = t_59
 
-function t_59.new(p118) --[[ line: 15614 ]]
+function t_59.new(p118)
 	-- upvalues: t_59 (ref)
 	return setmetatable({
 		media_id = if p118 == nil or p118.media_id == nil then "" else p118.media_id,
@@ -11179,7 +11179,7 @@ function t_59.new(p118) --[[ line: 15614 ]]
 	}, t_59)
 end
 
-function t_59:encode() --[[ line: 15625 ]]
+function t_59:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2525 = 0
@@ -11226,7 +11226,7 @@ function t_59:encode() --[[ line: 15625 ]]
 	return buff_1
 end
 
-function t_59.decode(p119) --[[ line: 15664 ]]
+function t_59.decode(p119)
 	-- upvalues: t_59 (ref), protoModule (ref)
 	local var2539 = t_59.new()
 	local var2540 = 0
@@ -11298,7 +11298,7 @@ function t_59.decode(p119) --[[ line: 15664 ]]
 	return var2539
 end
 
-function t_59:jsonEncode() --[[ line: 15732 ]]
+function t_59:jsonEncode()
 	local t = {}
 	
 	if self.media_id ~= nil and self.media_id ~= "" then
@@ -11322,7 +11322,7 @@ function t_59:jsonEncode() --[[ line: 15732 ]]
 	return t
 end
 
-function t_59:jsonDecode() --[[ line: 15762 ]]
+function t_59:jsonDecode()
 	-- upvalues: t_59 (ref)
 	local var2567 = t_59.new()
 	
@@ -11368,7 +11368,7 @@ typeRegistryModule.default:register(t.CoachmarkInputData)
 local t_60 = {}
 t_60.__index = t_60
 
-function t_60.new(p120) --[[ line: 15822 ]]
+function t_60.new(p120)
 	-- upvalues: t_60 (ref)
 	return setmetatable({
 		prompt_id = if p120 == nil or p120.prompt_id == nil then "" else p120.prompt_id,
@@ -11376,7 +11376,7 @@ function t_60.new(p120) --[[ line: 15822 ]]
 	}, t_60)
 end
 
-function t_60:encode() --[[ line: 15829 ]]
+function t_60:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2569 = 0
@@ -11399,7 +11399,7 @@ function t_60:encode() --[[ line: 15829 ]]
 	return buff_1
 end
 
-function t_60.decode(p121) --[[ line: 15848 ]]
+function t_60.decode(p121)
 	-- upvalues: t_60 (ref), protoModule (ref)
 	local var2575 = t_60.new()
 	local var2576 = 0
@@ -11451,7 +11451,7 @@ function t_60.decode(p121) --[[ line: 15848 ]]
 	return var2575
 end
 
-function t_60:jsonEncode() --[[ line: 15896 ]]
+function t_60:jsonEncode()
 	local t = {}
 	
 	if self.prompt_id ~= nil and self.prompt_id ~= "" then
@@ -11463,7 +11463,7 @@ function t_60:jsonEncode() --[[ line: 15896 ]]
 	return t
 end
 
-function t_60:jsonDecode() --[[ line: 15910 ]]
+function t_60:jsonDecode()
 	-- upvalues: t_60 (ref)
 	local var2595 = t_60.new()
 	
@@ -11491,14 +11491,14 @@ typeRegistryModule.default:register(t.SystemBannerInputData)
 local t_61 = {}
 t_61.__index = t_61
 
-function t_61.new(p122) --[[ line: 15946 ]]
+function t_61.new(p122)
 	-- upvalues: t_61 (ref)
 	return setmetatable({
 		upsell_prompt = if p122 == nil or p122.upsell_prompt == nil then "" else p122.upsell_prompt
 	}, t_61)
 end
 
-function t_61:encode() --[[ line: 15952 ]]
+function t_61:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2597 = 0
@@ -11515,7 +11515,7 @@ function t_61:encode() --[[ line: 15952 ]]
 	return buff_1
 end
 
-function t_61.decode(p123) --[[ line: 15966 ]]
+function t_61.decode(p123)
 	-- upvalues: t_61 (ref), protoModule (ref)
 	local var2601 = t_61.new()
 	local var2602 = 0
@@ -11562,7 +11562,7 @@ function t_61.decode(p123) --[[ line: 15966 ]]
 	return var2601
 end
 
-function t_61:jsonEncode() --[[ line: 16009 ]]
+function t_61:jsonEncode()
 	local t = {}
 	
 	if self.upsell_prompt ~= nil and self.upsell_prompt ~= "" then
@@ -11571,7 +11571,7 @@ function t_61:jsonEncode() --[[ line: 16009 ]]
 	return t
 end
 
-function t_61:jsonDecode() --[[ line: 16019 ]]
+function t_61:jsonDecode()
 	-- upvalues: t_61 (ref)
 	local var2619 = t_61.new()
 	
@@ -11593,7 +11593,7 @@ typeRegistryModule.default:register(t.AgeCheckUpsellInputData)
 local t_62 = {}
 t_62.__index = t_62
 
-function t_62.new(p124) --[[ line: 16047 ]]
+function t_62.new(p124)
 	-- upvalues: t_62 (ref)
 	return setmetatable({
 		modal_variant = if p124 == nil or p124.modal_variant == nil then "" else p124.modal_variant,
@@ -11603,7 +11603,7 @@ function t_62.new(p124) --[[ line: 16047 ]]
 	}, t_62)
 end
 
-function t_62:encode() --[[ line: 16058 ]]
+function t_62:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2621 = 0
@@ -11638,7 +11638,7 @@ function t_62:encode() --[[ line: 16058 ]]
 	return buff_1
 end
 
-function t_62.decode(p125) --[[ line: 16087 ]]
+function t_62.decode(p125)
 	-- upvalues: t_62 (ref), protoModule (ref)
 	local var2631 = t_62.new()
 	local var2632 = 0
@@ -11700,7 +11700,7 @@ function t_62.decode(p125) --[[ line: 16087 ]]
 	return var2631
 end
 
-function t_62:jsonEncode() --[[ line: 16145 ]]
+function t_62:jsonEncode()
 	local t = {}
 	
 	if self.modal_variant ~= nil and self.modal_variant ~= "" then
@@ -11718,7 +11718,7 @@ function t_62:jsonEncode() --[[ line: 16145 ]]
 	return t
 end
 
-function t_62:jsonDecode() --[[ line: 16167 ]]
+function t_62:jsonDecode()
 	-- upvalues: t_62 (ref)
 	local var2655 = t_62.new()
 	
@@ -11758,7 +11758,7 @@ typeRegistryModule.default:register(t.PartyChatConversationUpsellInputData)
 local t_63 = {}
 t_63.__index = t_63
 
-function t_63.new(p126) --[[ line: 16221 ]]
+function t_63.new(p126)
 	-- upvalues: t_63 (ref)
 	return setmetatable({
 		event_id = if p126 == nil or p126.event_id == nil then "" else p126.event_id,
@@ -11768,7 +11768,7 @@ function t_63.new(p126) --[[ line: 16221 ]]
 	}, t_63)
 end
 
-function t_63:encode() --[[ line: 16232 ]]
+function t_63:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2657 = 0
@@ -11814,7 +11814,7 @@ function t_63:encode() --[[ line: 16232 ]]
 	return buff_1
 end
 
-function t_63.decode(p127) --[[ line: 16272 ]]
+function t_63.decode(p127)
 	-- upvalues: t_63 (ref), protoModule (ref), t (ref)
 	local var2673 = t_63.new()
 	local var2674 = 0
@@ -11877,7 +11877,7 @@ function t_63.decode(p127) --[[ line: 16272 ]]
 	return var2673
 end
 
-function t_63:jsonEncode() --[[ line: 16337 ]]
+function t_63:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -11905,7 +11905,7 @@ function t_63:jsonEncode() --[[ line: 16337 ]]
 	return t
 end
 
-function t_63:jsonDecode() --[[ line: 16367 ]]
+function t_63:jsonDecode()
 	-- upvalues: t_63 (ref), t (ref)
 	local var2699 = t_63.new()
 	
@@ -11965,7 +11965,7 @@ typeRegistryModule.default:register(t.EventDetailsFeedInputData)
 local t_64 = {}
 t_64.__index = t_64
 
-function t_64.new(p128) --[[ line: 16439 ]]
+function t_64.new(p128)
 	-- upvalues: t_64 (ref)
 	return setmetatable({
 		key = if p128 == nil or p128.key == nil then "" else p128.key,
@@ -11973,7 +11973,7 @@ function t_64.new(p128) --[[ line: 16439 ]]
 	}, t_64)
 end
 
-function t_64:encode() --[[ line: 16448 ]]
+function t_64:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2705 = 0
@@ -11997,7 +11997,7 @@ function t_64:encode() --[[ line: 16448 ]]
 	return buff_1
 end
 
-function t_64.decode(p129) --[[ line: 16468 ]]
+function t_64.decode(p129)
 	-- upvalues: t_64 (ref), protoModule (ref), t (ref)
 	local var2712 = t_64.new()
 	local var2713 = 0
@@ -12049,7 +12049,7 @@ function t_64.decode(p129) --[[ line: 16468 ]]
 	return var2712
 end
 
-function t_64:jsonEncode() --[[ line: 16516 ]]
+function t_64:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -12061,7 +12061,7 @@ function t_64:jsonEncode() --[[ line: 16516 ]]
 	return t
 end
 
-function t_64:jsonDecode() --[[ line: 16530 ]]
+function t_64:jsonDecode()
 	-- upvalues: t_64 (ref), t (ref)
 	local var2732 = t_64.new()
 	
@@ -12083,7 +12083,7 @@ typeRegistryModule.default:register(t.EventDetailsFeedInputData_EntryMapEntry)
 local t_65 = {}
 t_65.__index = t_65
 
-function t_65.new(p130) --[[ line: 16560 ]]
+function t_65.new(p130)
 	-- upvalues: t_65 (ref)
 	return setmetatable({
 		event_id = if p130 == nil or p130.event_id == nil then "" else p130.event_id,
@@ -12091,7 +12091,7 @@ function t_65.new(p130) --[[ line: 16560 ]]
 	}, t_65)
 end
 
-function t_65:encode() --[[ line: 16569 ]]
+function t_65:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2734 = 0
@@ -12114,7 +12114,7 @@ function t_65:encode() --[[ line: 16569 ]]
 	return buff_1
 end
 
-function t_65.decode(p131) --[[ line: 16588 ]]
+function t_65.decode(p131)
 	-- upvalues: t_65 (ref), protoModule (ref)
 	local var2740 = t_65.new()
 	local var2741 = 0
@@ -12166,7 +12166,7 @@ function t_65.decode(p131) --[[ line: 16588 ]]
 	return var2740
 end
 
-function t_65:jsonEncode() --[[ line: 16636 ]]
+function t_65:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -12178,7 +12178,7 @@ function t_65:jsonEncode() --[[ line: 16636 ]]
 	return t
 end
 
-function t_65:jsonDecode() --[[ line: 16650 ]]
+function t_65:jsonDecode()
 	-- upvalues: t_65 (ref)
 	local var2760 = t_65.new()
 	
@@ -12206,14 +12206,14 @@ typeRegistryModule.default:register(t.EventDetailsActionBarInputData)
 local t_66 = {}
 t_66.__index = t_66
 
-function t_66.new(p132) --[[ line: 16686 ]]
+function t_66.new(p132)
 	-- upvalues: t_66 (ref)
 	return setmetatable({
 		event_id = if p132 == nil or p132.event_id == nil then "" else p132.event_id
 	}, t_66)
 end
 
-function t_66:encode() --[[ line: 16694 ]]
+function t_66:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2762 = 0
@@ -12230,7 +12230,7 @@ function t_66:encode() --[[ line: 16694 ]]
 	return buff_1
 end
 
-function t_66.decode(p133) --[[ line: 16708 ]]
+function t_66.decode(p133)
 	-- upvalues: t_66 (ref), protoModule (ref)
 	local var2766 = t_66.new()
 	local var2767 = 0
@@ -12277,7 +12277,7 @@ function t_66.decode(p133) --[[ line: 16708 ]]
 	return var2766
 end
 
-function t_66:jsonEncode() --[[ line: 16751 ]]
+function t_66:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -12286,7 +12286,7 @@ function t_66:jsonEncode() --[[ line: 16751 ]]
 	return t
 end
 
-function t_66:jsonDecode() --[[ line: 16761 ]]
+function t_66:jsonDecode()
 	-- upvalues: t_66 (ref)
 	local var2784 = t_66.new()
 	
@@ -12308,7 +12308,7 @@ typeRegistryModule.default:register(t.EventDescriptionInputData)
 local t_67 = {}
 t_67.__index = t_67
 
-function t_67.new(p134) --[[ line: 16789 ]]
+function t_67.new(p134)
 	-- upvalues: t_67 (ref)
 	return setmetatable({
 		event_id = if p134 == nil or p134.event_id == nil then "" else p134.event_id,
@@ -12317,7 +12317,7 @@ function t_67.new(p134) --[[ line: 16789 ]]
 	}, t_67)
 end
 
-function t_67:encode() --[[ line: 16799 ]]
+function t_67:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2786 = 0
@@ -12349,7 +12349,7 @@ function t_67:encode() --[[ line: 16799 ]]
 	return buff_1
 end
 
-function t_67.decode(p135) --[[ line: 16826 ]]
+function t_67.decode(p135)
 	-- upvalues: t_67 (ref), protoModule (ref), t (ref)
 	local var2795 = t_67.new()
 	local var2796 = 0
@@ -12406,7 +12406,7 @@ function t_67.decode(p135) --[[ line: 16826 ]]
 	return var2795
 end
 
-function t_67:jsonEncode() --[[ line: 16879 ]]
+function t_67:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -12426,7 +12426,7 @@ function t_67:jsonEncode() --[[ line: 16879 ]]
 	return t
 end
 
-function t_67:jsonDecode() --[[ line: 16901 ]]
+function t_67:jsonDecode()
 	-- upvalues: t_67 (ref), t (ref)
 	local var2818 = t_67.new()
 	
@@ -12470,14 +12470,14 @@ typeRegistryModule.default:register(t.EventAttributionRowInputData)
 local t_68 = {}
 t_68.__index = t_68
 
-function t_68.new(p136) --[[ line: 16955 ]]
+function t_68.new(p136)
 	-- upvalues: t_68 (ref)
 	return setmetatable({
 		user_id = if p136 == nil or p136.user_id == nil then 0 else p136.user_id
 	}, t_68)
 end
 
-function t_68:encode() --[[ line: 16963 ]]
+function t_68:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2822 = 0
@@ -12494,7 +12494,7 @@ function t_68:encode() --[[ line: 16963 ]]
 	return buff_1
 end
 
-function t_68.decode(p137) --[[ line: 16977 ]]
+function t_68.decode(p137)
 	-- upvalues: t_68 (ref), protoModule (ref)
 	local var2826 = t_68.new()
 	local var2827 = 0
@@ -12539,7 +12539,7 @@ function t_68.decode(p137) --[[ line: 16977 ]]
 	return var2826
 end
 
-function t_68:jsonEncode() --[[ line: 17020 ]]
+function t_68:jsonEncode()
 	local t = {}
 	
 	if self.user_id ~= nil and self.user_id ~= 0 then
@@ -12548,7 +12548,7 @@ function t_68:jsonEncode() --[[ line: 17020 ]]
 	return t
 end
 
-function t_68:jsonDecode() --[[ line: 17030 ]]
+function t_68:jsonDecode()
 	-- upvalues: t_68 (ref)
 	local var2844 = t_68.new()
 	
@@ -12570,14 +12570,14 @@ typeRegistryModule.default:register(t.EventAttributionRowInputData_RsvpUser)
 local t_69 = {}
 t_69.__index = t_69
 
-function t_69.new(p138) --[[ line: 17060 ]]
+function t_69.new(p138)
 	-- upvalues: t_69 (ref)
 	return setmetatable({
 		event_id = if p138 == nil or p138.event_id == nil then "" else p138.event_id
 	}, t_69)
 end
 
-function t_69:encode() --[[ line: 17066 ]]
+function t_69:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2846 = 0
@@ -12594,7 +12594,7 @@ function t_69:encode() --[[ line: 17066 ]]
 	return buff_1
 end
 
-function t_69.decode(p139) --[[ line: 17080 ]]
+function t_69.decode(p139)
 	-- upvalues: t_69 (ref), protoModule (ref)
 	local var2850 = t_69.new()
 	local var2851 = 0
@@ -12641,7 +12641,7 @@ function t_69.decode(p139) --[[ line: 17080 ]]
 	return var2850
 end
 
-function t_69:jsonEncode() --[[ line: 17123 ]]
+function t_69:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -12650,7 +12650,7 @@ function t_69:jsonEncode() --[[ line: 17123 ]]
 	return t
 end
 
-function t_69:jsonDecode() --[[ line: 17133 ]]
+function t_69:jsonDecode()
 	-- upvalues: t_69 (ref)
 	local var2868 = t_69.new()
 	
@@ -12672,14 +12672,14 @@ typeRegistryModule.default:register(t.EventInfoTableInputData)
 local t_70 = {}
 t_70.__index = t_70
 
-function t_70.new(p140) --[[ line: 17161 ]]
+function t_70.new(p140)
 	-- upvalues: t_70 (ref)
 	return setmetatable({
 		event_id = if p140 == nil or p140.event_id == nil then "" else p140.event_id
 	}, t_70)
 end
 
-function t_70:encode() --[[ line: 17169 ]]
+function t_70:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2870 = 0
@@ -12696,7 +12696,7 @@ function t_70:encode() --[[ line: 17169 ]]
 	return buff_1
 end
 
-function t_70.decode(p141) --[[ line: 17183 ]]
+function t_70.decode(p141)
 	-- upvalues: t_70 (ref), protoModule (ref)
 	local var2874 = t_70.new()
 	local var2875 = 0
@@ -12743,7 +12743,7 @@ function t_70.decode(p141) --[[ line: 17183 ]]
 	return var2874
 end
 
-function t_70:jsonEncode() --[[ line: 17226 ]]
+function t_70:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -12752,7 +12752,7 @@ function t_70:jsonEncode() --[[ line: 17226 ]]
 	return t
 end
 
-function t_70:jsonDecode() --[[ line: 17236 ]]
+function t_70:jsonDecode()
 	-- upvalues: t_70 (ref)
 	local var2892 = t_70.new()
 	
@@ -12774,7 +12774,7 @@ typeRegistryModule.default:register(t.EventDetailsSheetFullBleedInputData)
 local t_71 = {}
 t_71.__index = t_71
 
-function t_71.new(p142) --[[ line: 17266 ]]
+function t_71.new(p142)
 	-- upvalues: t_71 (ref)
 	return setmetatable({
 		event_id = if p142 == nil or p142.event_id == nil then "" else p142.event_id,
@@ -12782,7 +12782,7 @@ function t_71.new(p142) --[[ line: 17266 ]]
 	}, t_71)
 end
 
-function t_71:encode() --[[ line: 17275 ]]
+function t_71:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2894 = 0
@@ -12805,7 +12805,7 @@ function t_71:encode() --[[ line: 17275 ]]
 	return buff_1
 end
 
-function t_71.decode(p143) --[[ line: 17294 ]]
+function t_71.decode(p143)
 	-- upvalues: t_71 (ref), protoModule (ref)
 	local var2900 = t_71.new()
 	local var2901 = 0
@@ -12857,7 +12857,7 @@ function t_71.decode(p143) --[[ line: 17294 ]]
 	return var2900
 end
 
-function t_71:jsonEncode() --[[ line: 17342 ]]
+function t_71:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil and self.event_id ~= "" then
@@ -12869,7 +12869,7 @@ function t_71:jsonEncode() --[[ line: 17342 ]]
 	return t
 end
 
-function t_71:jsonDecode() --[[ line: 17356 ]]
+function t_71:jsonDecode()
 	-- upvalues: t_71 (ref)
 	local var2920 = t_71.new()
 	
@@ -12897,7 +12897,7 @@ typeRegistryModule.default:register(t.EventNotificationsModalInputData)
 local t_72 = {}
 t_72.__index = t_72
 
-function t_72.new(p144) --[[ line: 17394 ]]
+function t_72.new(p144)
 	-- upvalues: t_72 (ref)
 	return setmetatable({
 		entry_map = if p144 == nil or p144.entry_map == nil then {} else p144.entry_map,
@@ -12908,7 +12908,7 @@ function t_72.new(p144) --[[ line: 17394 ]]
 	}, t_72)
 end
 
-function t_72:encode() --[[ line: 17406 ]]
+function t_72:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2922 = 0
@@ -12961,7 +12961,7 @@ function t_72:encode() --[[ line: 17406 ]]
 	return buff_1
 end
 
-function t_72.decode(p145) --[[ line: 17452 ]]
+function t_72.decode(p145)
 	-- upvalues: t_72 (ref), protoModule (ref), t (ref)
 	local var2941 = t_72.new()
 	local var2942 = 0
@@ -13029,7 +13029,7 @@ function t_72.decode(p145) --[[ line: 17452 ]]
 	return var2941
 end
 
-function t_72:jsonEncode() --[[ line: 17522 ]]
+function t_72:jsonEncode()
 	local t = {}
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
@@ -13060,7 +13060,7 @@ function t_72:jsonEncode() --[[ line: 17522 ]]
 	return t
 end
 
-function t_72:jsonDecode() --[[ line: 17556 ]]
+function t_72:jsonDecode()
 	-- upvalues: t_72 (ref), t (ref)
 	local var2969 = t_72.new()
 	
@@ -13126,7 +13126,7 @@ typeRegistryModule.default:register(t.ChartsFeedInputData)
 local t_73 = {}
 t_73.__index = t_73
 
-function t_73.new(p146) --[[ line: 17636 ]]
+function t_73.new(p146)
 	-- upvalues: t_73 (ref)
 	return setmetatable({
 		key = if p146 == nil or p146.key == nil then "" else p146.key,
@@ -13134,7 +13134,7 @@ function t_73.new(p146) --[[ line: 17636 ]]
 	}, t_73)
 end
 
-function t_73:encode() --[[ line: 17645 ]]
+function t_73:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2975 = 0
@@ -13158,7 +13158,7 @@ function t_73:encode() --[[ line: 17645 ]]
 	return buff_1
 end
 
-function t_73.decode(p147) --[[ line: 17665 ]]
+function t_73.decode(p147)
 	-- upvalues: t_73 (ref), protoModule (ref), t (ref)
 	local var2982 = t_73.new()
 	local var2983 = 0
@@ -13210,7 +13210,7 @@ function t_73.decode(p147) --[[ line: 17665 ]]
 	return var2982
 end
 
-function t_73:jsonEncode() --[[ line: 17713 ]]
+function t_73:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -13222,7 +13222,7 @@ function t_73:jsonEncode() --[[ line: 17713 ]]
 	return t
 end
 
-function t_73:jsonDecode() --[[ line: 17727 ]]
+function t_73:jsonDecode()
 	-- upvalues: t_73 (ref), t (ref)
 	local var3002 = t_73.new()
 	
@@ -13244,7 +13244,7 @@ typeRegistryModule.default:register(t.ChartsFeedInputData_EntryMapEntry)
 local t_74 = {}
 t_74.__index = t_74
 
-function t_74.new(p148) --[[ line: 17757 ]]
+function t_74.new(p148)
 	-- upvalues: t_74 (ref)
 	return setmetatable({
 		filter_groups = if p148 == nil or p148.filter_groups == nil then {} else p148.filter_groups,
@@ -13256,7 +13256,7 @@ function t_74.new(p148) --[[ line: 17757 ]]
 	}, t_74)
 end
 
-function t_74:encode() --[[ line: 17768 ]]
+function t_74:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3004 = 0
@@ -13306,7 +13306,7 @@ function t_74:encode() --[[ line: 17768 ]]
 	return buff_1
 end
 
-function t_74.decode(p149) --[[ line: 17810 ]]
+function t_74.decode(p149)
 	-- upvalues: t_74 (ref), protoModule (ref), t (ref)
 	local var3019 = t_74.new()
 	local var3020 = 0
@@ -13379,7 +13379,7 @@ function t_74.decode(p149) --[[ line: 17810 ]]
 	return var3019
 end
 
-function t_74:jsonEncode() --[[ line: 17878 ]]
+function t_74:jsonEncode()
 	local t = {}
 	
 	if self.filter_groups ~= nil and #self.filter_groups > 0 then
@@ -13408,7 +13408,7 @@ function t_74:jsonEncode() --[[ line: 17878 ]]
 	return t
 end
 
-function t_74:jsonDecode() --[[ line: 17912 ]]
+function t_74:jsonDecode()
 	-- upvalues: t_74 (ref), t (ref)
 	local var3048 = t_74.new()
 	
@@ -13467,7 +13467,7 @@ typeRegistryModule.default:register(t.FilterPillsInputData)
 local t_75 = {}
 t_75.__index = t_75
 
-function t_75.new(p150) --[[ line: 17986 ]]
+function t_75.new(p150)
 	-- upvalues: t_75 (ref)
 	return setmetatable({
 		filter_id = if p150 == nil or p150.filter_id == nil then "" else p150.filter_id,
@@ -13481,7 +13481,7 @@ function t_75.new(p150) --[[ line: 17986 ]]
 	}, t_75)
 end
 
-function t_75:encode() --[[ line: 18003 ]]
+function t_75:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3052 = 0
@@ -13545,7 +13545,7 @@ function t_75:encode() --[[ line: 18003 ]]
 	return buff_1
 end
 
-function t_75.decode(p151) --[[ line: 18057 ]]
+function t_75.decode(p151)
 	-- upvalues: t_75 (ref), protoModule (ref), t (ref)
 	local var3071 = t_75.new()
 	local var3072 = 0
@@ -13627,7 +13627,7 @@ function t_75.decode(p151) --[[ line: 18057 ]]
 	return var3071
 end
 
-function t_75:jsonEncode() --[[ line: 18135 ]]
+function t_75:jsonEncode()
 	local t = {}
 	
 	if self.filter_id ~= nil and self.filter_id ~= "" then
@@ -13667,7 +13667,7 @@ function t_75:jsonEncode() --[[ line: 18135 ]]
 	return t
 end
 
-function t_75:jsonDecode() --[[ line: 18181 ]]
+function t_75:jsonDecode()
 	-- upvalues: t_75 (ref), t (ref)
 	local var3105 = t_75.new()
 	
@@ -13743,7 +13743,7 @@ typeRegistryModule.default:register(t.FilterPillsInputData_FilterGroup)
 local t_76 = {}
 t_76.__index = t_76
 
-function t_76.new(p152) --[[ line: 18278 ]]
+function t_76.new(p152)
 	-- upvalues: t_76 (ref)
 	return setmetatable({
 		option_id = if p152 == nil or p152.option_id == nil then "" else p152.option_id,
@@ -13752,7 +13752,7 @@ function t_76.new(p152) --[[ line: 18278 ]]
 	}, t_76)
 end
 
-function t_76:encode() --[[ line: 18288 ]]
+function t_76:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3110 = 0
@@ -13781,7 +13781,7 @@ function t_76:encode() --[[ line: 18288 ]]
 	return buff_1
 end
 
-function t_76.decode(p153) --[[ line: 18312 ]]
+function t_76.decode(p153)
 	-- upvalues: t_76 (ref), protoModule (ref)
 	local var3118 = t_76.new()
 	local var3119 = 0
@@ -13838,7 +13838,7 @@ function t_76.decode(p153) --[[ line: 18312 ]]
 	return var3118
 end
 
-function t_76:jsonEncode() --[[ line: 18365 ]]
+function t_76:jsonEncode()
 	local t = {}
 	
 	if self.option_id ~= nil and self.option_id ~= "" then
@@ -13853,7 +13853,7 @@ function t_76:jsonEncode() --[[ line: 18365 ]]
 	return t
 end
 
-function t_76:jsonDecode() --[[ line: 18383 ]]
+function t_76:jsonDecode()
 	-- upvalues: t_76 (ref)
 	local var3140 = t_76.new()
 	
@@ -13887,7 +13887,7 @@ typeRegistryModule.default:register(t.FilterPillsInputData_FilterOption)
 local t_77 = {}
 t_77.__index = t_77
 
-function t_77.new(p154) --[[ line: 18429 ]]
+function t_77.new(p154)
 	-- upvalues: t_77 (ref)
 	return setmetatable({
 		sort_options = if p154 == nil or p154.sort_options == nil then {} else p154.sort_options,
@@ -13895,7 +13895,7 @@ function t_77.new(p154) --[[ line: 18429 ]]
 	}, t_77)
 end
 
-function t_77:encode() --[[ line: 18436 ]]
+function t_77:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3142 = 0
@@ -13921,7 +13921,7 @@ function t_77:encode() --[[ line: 18436 ]]
 	return buff_1
 end
 
-function t_77.decode(p155) --[[ line: 18458 ]]
+function t_77.decode(p155)
 	-- upvalues: t_77 (ref), protoModule (ref), t (ref)
 	local var3149 = t_77.new()
 	local var3150 = 0
@@ -13973,7 +13973,7 @@ function t_77.decode(p155) --[[ line: 18458 ]]
 	return var3149
 end
 
-function t_77:jsonEncode() --[[ line: 18506 ]]
+function t_77:jsonEncode()
 	local t = {}
 	
 	if self.sort_options ~= nil and #self.sort_options > 0 then
@@ -13990,7 +13990,7 @@ function t_77:jsonEncode() --[[ line: 18506 ]]
 	return t
 end
 
-function t_77:jsonDecode() --[[ line: 18524 ]]
+function t_77:jsonDecode()
 	-- upvalues: t_77 (ref), t (ref)
 	local var3170 = t_77.new()
 	
@@ -14028,7 +14028,7 @@ typeRegistryModule.default:register(t.SortSelectorInputData)
 local t_78 = {}
 t_78.__index = t_78
 
-function t_78.new(p156) --[[ line: 18570 ]]
+function t_78.new(p156)
 	-- upvalues: t_78 (ref)
 	return setmetatable({
 		sort_id = if p156 == nil or p156.sort_id == nil then "" else p156.sort_id,
@@ -14037,7 +14037,7 @@ function t_78.new(p156) --[[ line: 18570 ]]
 	}, t_78)
 end
 
-function t_78:encode() --[[ line: 18580 ]]
+function t_78:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3174 = 0
@@ -14066,7 +14066,7 @@ function t_78:encode() --[[ line: 18580 ]]
 	return buff_1
 end
 
-function t_78.decode(p157) --[[ line: 18604 ]]
+function t_78.decode(p157)
 	-- upvalues: t_78 (ref), protoModule (ref)
 	local var3182 = t_78.new()
 	local var3183 = 0
@@ -14123,7 +14123,7 @@ function t_78.decode(p157) --[[ line: 18604 ]]
 	return var3182
 end
 
-function t_78:jsonEncode() --[[ line: 18657 ]]
+function t_78:jsonEncode()
 	local t = {}
 	
 	if self.sort_id ~= nil and self.sort_id ~= "" then
@@ -14138,7 +14138,7 @@ function t_78:jsonEncode() --[[ line: 18657 ]]
 	return t
 end
 
-function t_78:jsonDecode() --[[ line: 18675 ]]
+function t_78:jsonDecode()
 	-- upvalues: t_78 (ref)
 	local var3204 = t_78.new()
 	
@@ -14172,7 +14172,7 @@ typeRegistryModule.default:register(t.SortSelectorInputData_SortOption)
 local t_79 = {}
 t_79.__index = t_79
 
-function t_79.new(p158) --[[ line: 18721 ]]
+function t_79.new(p158)
 	-- upvalues: t_79 (ref)
 	return setmetatable({
 		selected_option = if p158 == nil or p158.selected_option == nil then "" else p158.selected_option,
@@ -14181,7 +14181,7 @@ function t_79.new(p158) --[[ line: 18721 ]]
 	}, t_79)
 end
 
-function t_79:encode() --[[ line: 18733 ]]
+function t_79:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3206 = 0
@@ -14214,7 +14214,7 @@ function t_79:encode() --[[ line: 18733 ]]
 	return buff_1
 end
 
-function t_79.decode(p159) --[[ line: 18761 ]]
+function t_79.decode(p159)
 	-- upvalues: t_79 (ref), protoModule (ref), t (ref)
 	local var3216 = t_79.new()
 	local var3217 = 0
@@ -14271,7 +14271,7 @@ function t_79.decode(p159) --[[ line: 18761 ]]
 	return var3216
 end
 
-function t_79:jsonEncode() --[[ line: 18814 ]]
+function t_79:jsonEncode()
 	local t = {}
 	
 	if self.selected_option ~= nil and self.selected_option ~= "" then
@@ -14291,7 +14291,7 @@ function t_79:jsonEncode() --[[ line: 18814 ]]
 	return t
 end
 
-function t_79:jsonDecode() --[[ line: 18836 ]]
+function t_79:jsonDecode()
 	-- upvalues: t_79 (ref), t (ref)
 	local var3239 = t_79.new()
 	
@@ -14327,7 +14327,7 @@ typeRegistryModule.default:register(t.ChartsGenreSelectorInputData)
 local t_80 = {}
 t_80.__index = t_80
 
-function t_80.new(p160) --[[ line: 18881 ]]
+function t_80.new(p160)
 	-- upvalues: t_80 (ref)
 	return setmetatable({
 		id = if p160 == nil or p160.id == nil then "" else p160.id,
@@ -14338,7 +14338,7 @@ function t_80.new(p160) --[[ line: 18881 ]]
 	}, t_80)
 end
 
-function t_80:encode() --[[ line: 18895 ]]
+function t_80:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3242 = 0
@@ -14380,7 +14380,7 @@ function t_80:encode() --[[ line: 18895 ]]
 	return buff_1
 end
 
-function t_80.decode(p161) --[[ line: 18930 ]]
+function t_80.decode(p161)
 	-- upvalues: t_80 (ref), protoModule (ref), t (ref)
 	local var3255 = t_80.new()
 	local var3256 = 0
@@ -14448,7 +14448,7 @@ function t_80.decode(p161) --[[ line: 18930 ]]
 	return var3255
 end
 
-function t_80:jsonEncode() --[[ line: 18993 ]]
+function t_80:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -14469,7 +14469,7 @@ function t_80:jsonEncode() --[[ line: 18993 ]]
 	return t
 end
 
-function t_80:jsonDecode() --[[ line: 19019 ]]
+function t_80:jsonDecode()
 	-- upvalues: t_80 (ref), t (ref)
 	local var3281 = t_80.new()
 	
@@ -14512,7 +14512,7 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogItemGroupInputData)
 local t_81 = {}
 t_81.__index = t_81
 
-function t_81.new(p162) --[[ line: 19077 ]]
+function t_81.new(p162)
 	-- upvalues: t_81 (ref)
 	return setmetatable({
 		id = if p162 == nil or p162.id == nil then "" else p162.id,
@@ -14523,7 +14523,7 @@ function t_81.new(p162) --[[ line: 19077 ]]
 	}, t_81)
 end
 
-function t_81:encode() --[[ line: 19091 ]]
+function t_81:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3283 = 0
@@ -14565,7 +14565,7 @@ function t_81:encode() --[[ line: 19091 ]]
 	return buff_1
 end
 
-function t_81.decode(p163) --[[ line: 19128 ]]
+function t_81.decode(p163)
 	-- upvalues: t_81 (ref), protoModule (ref), t (ref)
 	local var3296 = t_81.new()
 	local var3297 = 0
@@ -14633,7 +14633,7 @@ function t_81.decode(p163) --[[ line: 19128 ]]
 	return var3296
 end
 
-function t_81:jsonEncode() --[[ line: 19193 ]]
+function t_81:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -14654,7 +14654,7 @@ function t_81:jsonEncode() --[[ line: 19193 ]]
 	return t
 end
 
-function t_81:jsonDecode() --[[ line: 19221 ]]
+function t_81:jsonDecode()
 	-- upvalues: t_81 (ref), t (ref)
 	local var3322 = t_81.new()
 	
@@ -14697,14 +14697,14 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogItemCarouselInputData)
 local t_82 = {}
 t_82.__index = t_82
 
-function t_82.new(p164) --[[ line: 19279 ]]
+function t_82.new(p164)
 	-- upvalues: t_82 (ref)
 	return setmetatable({
 		background_layers = if p164 == nil or p164.background_layers == nil then {} else p164.background_layers
 	}, t_82)
 end
 
-function t_82:encode() --[[ line: 19285 ]]
+function t_82:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3324 = 0
@@ -14724,7 +14724,7 @@ function t_82:encode() --[[ line: 19285 ]]
 	return buff_1
 end
 
-function t_82.decode(p165) --[[ line: 19302 ]]
+function t_82.decode(p165)
 	-- upvalues: t_82 (ref), protoModule (ref), backgroundLayerModule (ref)
 	local var3329 = t_82.new()
 	local var3330 = 0
@@ -14771,7 +14771,7 @@ function t_82.decode(p165) --[[ line: 19302 ]]
 	return var3329
 end
 
-function t_82:jsonEncode() --[[ line: 19348 ]]
+function t_82:jsonEncode()
 	local t = {}
 	
 	if self.background_layers ~= nil and #self.background_layers > 0 then
@@ -14785,7 +14785,7 @@ function t_82:jsonEncode() --[[ line: 19348 ]]
 	return t
 end
 
-function t_82:jsonDecode() --[[ line: 19362 ]]
+function t_82:jsonDecode()
 	-- upvalues: t_82 (ref), backgroundLayerModule (ref)
 	local var3348 = t_82.new()
 	
@@ -14817,7 +14817,7 @@ typeRegistryModule.default:register(t.WidgetStyleData)
 local t_83 = {}
 t_83.__index = t_83
 
-function t_83.new(p166) --[[ line: 19406 ]]
+function t_83.new(p166)
 	-- upvalues: t_83 (ref)
 	return setmetatable({
 		id = if p166 == nil or p166.id == nil then "" else p166.id,
@@ -14826,7 +14826,7 @@ function t_83.new(p166) --[[ line: 19406 ]]
 	}, t_83)
 end
 
-function t_83:encode() --[[ line: 19416 ]]
+function t_83:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3352 = 0
@@ -14856,7 +14856,7 @@ function t_83:encode() --[[ line: 19416 ]]
 	return buff_1
 end
 
-function t_83.decode(p167) --[[ line: 19441 ]]
+function t_83.decode(p167)
 	-- upvalues: t_83 (ref), protoModule (ref), t (ref)
 	local var3361 = t_83.new()
 	local var3362 = 0
@@ -14913,7 +14913,7 @@ function t_83.decode(p167) --[[ line: 19441 ]]
 	return var3361
 end
 
-function t_83:jsonEncode() --[[ line: 19494 ]]
+function t_83:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -14928,7 +14928,7 @@ function t_83:jsonEncode() --[[ line: 19494 ]]
 	return t
 end
 
-function t_83:jsonDecode() --[[ line: 19512 ]]
+function t_83:jsonDecode()
 	-- upvalues: t_83 (ref), t (ref)
 	local var3383 = t_83.new()
 	
@@ -14959,7 +14959,7 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogHeroUnitInputData)
 local t_84 = {}
 t_84.__index = t_84
 
-function t_84.new(p168) --[[ line: 19554 ]]
+function t_84.new(p168)
 	-- upvalues: t_84 (ref)
 	return setmetatable({
 		entry_map = if p168 == nil or p168.entry_map == nil then {} else p168.entry_map,
@@ -14967,7 +14967,7 @@ function t_84.new(p168) --[[ line: 19554 ]]
 	}, t_84)
 end
 
-function t_84:encode() --[[ line: 19563 ]]
+function t_84:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3385 = 0
@@ -15001,7 +15001,7 @@ function t_84:encode() --[[ line: 19563 ]]
 	return buff_1
 end
 
-function t_84.decode(p169) --[[ line: 19593 ]]
+function t_84.decode(p169)
 	-- upvalues: t_84 (ref), protoModule (ref), t (ref)
 	local var3397 = t_84.new()
 	local var3398 = 0
@@ -15054,7 +15054,7 @@ function t_84.decode(p169) --[[ line: 19593 ]]
 	return var3397
 end
 
-function t_84:jsonEncode() --[[ line: 19648 ]]
+function t_84:jsonEncode()
 	local t = {}
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
@@ -15076,7 +15076,7 @@ function t_84:jsonEncode() --[[ line: 19648 ]]
 	return t
 end
 
-function t_84:jsonDecode() --[[ line: 19670 ]]
+function t_84:jsonDecode()
 	-- upvalues: t_84 (ref), t (ref)
 	local var3419 = t_84.new()
 	
@@ -15124,7 +15124,7 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogFeedInputData)
 local t_85 = {}
 t_85.__index = t_85
 
-function t_85.new(p170) --[[ line: 19728 ]]
+function t_85.new(p170)
 	-- upvalues: t_85 (ref)
 	return setmetatable({
 		key = if p170 == nil or p170.key == nil then "" else p170.key,
@@ -15132,7 +15132,7 @@ function t_85.new(p170) --[[ line: 19728 ]]
 	}, t_85)
 end
 
-function t_85:encode() --[[ line: 19737 ]]
+function t_85:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3425 = 0
@@ -15156,7 +15156,7 @@ function t_85:encode() --[[ line: 19737 ]]
 	return buff_1
 end
 
-function t_85.decode(p171) --[[ line: 19759 ]]
+function t_85.decode(p171)
 	-- upvalues: t_85 (ref), protoModule (ref), t (ref)
 	local var3432 = t_85.new()
 	local var3433 = 0
@@ -15208,7 +15208,7 @@ function t_85.decode(p171) --[[ line: 19759 ]]
 	return var3432
 end
 
-function t_85:jsonEncode() --[[ line: 19809 ]]
+function t_85:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -15220,7 +15220,7 @@ function t_85:jsonEncode() --[[ line: 19809 ]]
 	return t
 end
 
-function t_85:jsonDecode() --[[ line: 19825 ]]
+function t_85:jsonDecode()
 	-- upvalues: t_85 (ref), t (ref)
 	local var3452 = t_85.new()
 	
@@ -15242,7 +15242,7 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogFeedInputData_EntryMap
 local t_86 = {}
 t_86.__index = t_86
 
-function t_86.new(p172) --[[ line: 19856 ]]
+function t_86.new(p172)
 	-- upvalues: t_86 (ref)
 	return setmetatable({
 		marketplace_catalog_category_items = if p172 == nil or p172.marketplace_catalog_category_items == nil then {} else p172.marketplace_catalog_category_items,
@@ -15251,7 +15251,7 @@ function t_86.new(p172) --[[ line: 19856 ]]
 	}, t_86)
 end
 
-function t_86:encode() --[[ line: 19869 ]]
+function t_86:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3454 = 0
@@ -15283,7 +15283,7 @@ function t_86:encode() --[[ line: 19869 ]]
 	return buff_1
 end
 
-function t_86.decode(p173) --[[ line: 19898 ]]
+function t_86.decode(p173)
 	-- upvalues: t_86 (ref), protoModule (ref), t (ref)
 	local var3463 = t_86.new()
 	local var3464 = 0
@@ -15341,7 +15341,7 @@ function t_86.decode(p173) --[[ line: 19898 ]]
 	return var3463
 end
 
-function t_86:jsonEncode() --[[ line: 19956 ]]
+function t_86:jsonEncode()
 	local t = {}
 	
 	if self.marketplace_catalog_category_items ~= nil and #self.marketplace_catalog_category_items > 0 then
@@ -15361,7 +15361,7 @@ function t_86:jsonEncode() --[[ line: 19956 ]]
 	return t
 end
 
-function t_86:jsonDecode() --[[ line: 19980 ]]
+function t_86:jsonDecode()
 	-- upvalues: t_86 (ref), t (ref)
 	local var3486 = t_86.new()
 	
@@ -15405,14 +15405,14 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogCategoryMenuInputData)
 local t_87 = {}
 t_87.__index = t_87
 
-function t_87.new(p174) --[[ line: 20043 ]]
+function t_87.new(p174)
 	-- upvalues: t_87 (ref)
 	return setmetatable({
 		marketplace_catalog_category_item_id = if p174 == nil or p174.marketplace_catalog_category_item_id == nil then "" else p174.marketplace_catalog_category_item_id
 	}, t_87)
 end
 
-function t_87:encode() --[[ line: 20057 ]]
+function t_87:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3490 = 0
@@ -15429,7 +15429,7 @@ function t_87:encode() --[[ line: 20057 ]]
 	return buff_1
 end
 
-function t_87.decode(p175) --[[ line: 20073 ]]
+function t_87.decode(p175)
 	-- upvalues: t_87 (ref), protoModule (ref)
 	local var3494 = t_87.new()
 	local var3495 = 0
@@ -15476,7 +15476,7 @@ function t_87.decode(p175) --[[ line: 20073 ]]
 	return var3494
 end
 
-function t_87:jsonEncode() --[[ line: 20118 ]]
+function t_87:jsonEncode()
 	local t = {}
 	
 	if self.marketplace_catalog_category_item_id ~= nil and self.marketplace_catalog_category_item_id ~= "" then
@@ -15485,7 +15485,7 @@ function t_87:jsonEncode() --[[ line: 20118 ]]
 	return t
 end
 
-function t_87:jsonDecode() --[[ line: 20130 ]]
+function t_87:jsonDecode()
 	-- upvalues: t_87 (ref)
 	local var3512 = t_87.new()
 	
@@ -15507,7 +15507,7 @@ typeRegistryModule.default:register(t.UAMarketplaceCatalogCategoryMenuInputData_
 local t_88 = {}
 t_88.__index = t_88
 
-function t_88.new(p176) --[[ line: 20163 ]]
+function t_88.new(p176)
 	-- upvalues: t_88 (ref)
 	return setmetatable({
 		hero_icon = if p176 == nil or p176.hero_icon == nil then nil else p176.hero_icon,
@@ -15522,7 +15522,7 @@ function t_88.new(p176) --[[ line: 20163 ]]
 	}, t_88)
 end
 
-function t_88:encode() --[[ line: 20185 ]]
+function t_88:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3514 = 0
@@ -15587,7 +15587,7 @@ function t_88:encode() --[[ line: 20185 ]]
 	return buff_1
 end
 
-function t_88.decode(p177) --[[ line: 20239 ]]
+function t_88.decode(p177)
 	-- upvalues: t_88 (ref), protoModule (ref)
 	local var3534 = t_88.new()
 	local var3535 = 0
@@ -15674,7 +15674,7 @@ function t_88.decode(p177) --[[ line: 20239 ]]
 	return var3534
 end
 
-function t_88:jsonEncode() --[[ line: 20322 ]]
+function t_88:jsonEncode()
 	local t = {}
 	
 	if self.hero_icon ~= nil then
@@ -15707,7 +15707,7 @@ function t_88:jsonEncode() --[[ line: 20322 ]]
 	return t
 end
 
-function t_88:jsonDecode() --[[ line: 20364 ]]
+function t_88:jsonDecode()
 	-- upvalues: t_88 (ref)
 	local var3568 = t_88.new()
 	
@@ -15777,7 +15777,7 @@ typeRegistryModule.default:register(t.MarketplaceOfferModalInputData)
 local t_89 = {}
 t_89.__index = t_89
 
-function t_89.new(p178) --[[ line: 20456 ]]
+function t_89.new(p178)
 	-- upvalues: t_89 (ref)
 	return setmetatable({
 		items = if p178 == nil or p178.items == nil then {} else p178.items,
@@ -15786,7 +15786,7 @@ function t_89.new(p178) --[[ line: 20456 ]]
 	}, t_89)
 end
 
-function t_89:encode() --[[ line: 20464 ]]
+function t_89:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3570 = 0
@@ -15818,7 +15818,7 @@ function t_89:encode() --[[ line: 20464 ]]
 	return buff_1
 end
 
-function t_89.decode(p179) --[[ line: 20491 ]]
+function t_89.decode(p179)
 	-- upvalues: t_89 (ref), protoModule (ref), t (ref)
 	local var3579 = t_89.new()
 	local var3580 = 0
@@ -15876,7 +15876,7 @@ function t_89.decode(p179) --[[ line: 20491 ]]
 	return var3579
 end
 
-function t_89:jsonEncode() --[[ line: 20544 ]]
+function t_89:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -15896,7 +15896,7 @@ function t_89:jsonEncode() --[[ line: 20544 ]]
 	return t
 end
 
-function t_89:jsonDecode() --[[ line: 20566 ]]
+function t_89:jsonDecode()
 	-- upvalues: t_89 (ref), t (ref)
 	local var3602 = t_89.new()
 	
@@ -15932,7 +15932,7 @@ typeRegistryModule.default:register(t.CatalogItemGridInputData)
 local t_90 = {}
 t_90.__index = t_90
 
-function t_90.new(p180) --[[ line: 20611 ]]
+function t_90.new(p180)
 	-- upvalues: t_90 (ref)
 	return setmetatable({
 		id = if p180 == nil or p180.id == nil then "" else p180.id,
@@ -15940,7 +15940,7 @@ function t_90.new(p180) --[[ line: 20611 ]]
 	}, t_90)
 end
 
-function t_90:encode() --[[ line: 20620 ]]
+function t_90:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3605 = 0
@@ -15963,7 +15963,7 @@ function t_90:encode() --[[ line: 20620 ]]
 	return buff_1
 end
 
-function t_90.decode(p181) --[[ line: 20639 ]]
+function t_90.decode(p181)
 	-- upvalues: t_90 (ref), protoModule (ref)
 	local var3611 = t_90.new()
 	local var3612 = 0
@@ -16015,7 +16015,7 @@ function t_90.decode(p181) --[[ line: 20639 ]]
 	return var3611
 end
 
-function t_90:jsonEncode() --[[ line: 20687 ]]
+function t_90:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -16027,7 +16027,7 @@ function t_90:jsonEncode() --[[ line: 20687 ]]
 	return t
 end
 
-function t_90:jsonDecode() --[[ line: 20701 ]]
+function t_90:jsonDecode()
 	-- upvalues: t_90 (ref)
 	local var3631 = t_90.new()
 	
@@ -16049,7 +16049,7 @@ typeRegistryModule.default:register(t.CatalogItemGridInputData_CatalogItem)
 local t_91 = {}
 t_91.__index = t_91
 
-function t_91.new(p182) --[[ line: 20731 ]]
+function t_91.new(p182)
 	-- upvalues: t_91 (ref)
 	return setmetatable({
 		entry_map = if p182 == nil or p182.entry_map == nil then {} else p182.entry_map,
@@ -16059,7 +16059,7 @@ function t_91.new(p182) --[[ line: 20731 ]]
 	}, t_91)
 end
 
-function t_91:encode() --[[ line: 20742 ]]
+function t_91:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3633 = 0
@@ -16114,7 +16114,7 @@ function t_91:encode() --[[ line: 20742 ]]
 	return buff_1
 end
 
-function t_91.decode(p183) --[[ line: 20791 ]]
+function t_91.decode(p183)
 	-- upvalues: t_91 (ref), protoModule (ref), t (ref)
 	local var3655 = t_91.new()
 	local var3656 = 0
@@ -16178,7 +16178,7 @@ function t_91.decode(p183) --[[ line: 20791 ]]
 	return var3655
 end
 
-function t_91:jsonEncode() --[[ line: 20863 ]]
+function t_91:jsonEncode()
 	local t = {}
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
@@ -16211,7 +16211,7 @@ function t_91:jsonEncode() --[[ line: 20863 ]]
 	return t
 end
 
-function t_91:jsonDecode() --[[ line: 20897 ]]
+function t_91:jsonDecode()
 	-- upvalues: t_91 (ref), t (ref)
 	local var3682 = t_91.new()
 	
@@ -16281,7 +16281,7 @@ typeRegistryModule.default:register(t.SearchResultsFeedInputData)
 local t_92 = {}
 t_92.__index = t_92
 
-function t_92.new(p184) --[[ line: 20979 ]]
+function t_92.new(p184)
 	-- upvalues: t_92 (ref)
 	return setmetatable({
 		key = if p184 == nil or p184.key == nil then "" else p184.key,
@@ -16289,7 +16289,7 @@ function t_92.new(p184) --[[ line: 20979 ]]
 	}, t_92)
 end
 
-function t_92:encode() --[[ line: 20988 ]]
+function t_92:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3690 = 0
@@ -16313,7 +16313,7 @@ function t_92:encode() --[[ line: 20988 ]]
 	return buff_1
 end
 
-function t_92.decode(p185) --[[ line: 21010 ]]
+function t_92.decode(p185)
 	-- upvalues: t_92 (ref), protoModule (ref), t (ref)
 	local var3697 = t_92.new()
 	local var3698 = 0
@@ -16365,7 +16365,7 @@ function t_92.decode(p185) --[[ line: 21010 ]]
 	return var3697
 end
 
-function t_92:jsonEncode() --[[ line: 21060 ]]
+function t_92:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -16377,7 +16377,7 @@ function t_92:jsonEncode() --[[ line: 21060 ]]
 	return t
 end
 
-function t_92:jsonDecode() --[[ line: 21076 ]]
+function t_92:jsonDecode()
 	-- upvalues: t_92 (ref), t (ref)
 	local var3717 = t_92.new()
 	
@@ -16399,7 +16399,7 @@ typeRegistryModule.default:register(t.SearchResultsFeedInputData_EntryMapEntry)
 local t_93 = {}
 t_93.__index = t_93
 
-function t_93.new(p186) --[[ line: 21106 ]]
+function t_93.new(p186)
 	-- upvalues: t_93 (ref)
 	return setmetatable({
 		key = if p186 == nil or p186.key == nil then "" else p186.key,
@@ -16407,7 +16407,7 @@ function t_93.new(p186) --[[ line: 21106 ]]
 	}, t_93)
 end
 
-function t_93:encode() --[[ line: 21115 ]]
+function t_93:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3719 = 0
@@ -16431,7 +16431,7 @@ function t_93:encode() --[[ line: 21115 ]]
 	return buff_1
 end
 
-function t_93.decode(p187) --[[ line: 21137 ]]
+function t_93.decode(p187)
 	-- upvalues: t_93 (ref), protoModule (ref), t (ref)
 	local var3726 = t_93.new()
 	local var3727 = 0
@@ -16483,7 +16483,7 @@ function t_93.decode(p187) --[[ line: 21137 ]]
 	return var3726
 end
 
-function t_93:jsonEncode() --[[ line: 21187 ]]
+function t_93:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -16495,7 +16495,7 @@ function t_93:jsonEncode() --[[ line: 21187 ]]
 	return t
 end
 
-function t_93:jsonDecode() --[[ line: 21203 ]]
+function t_93:jsonDecode()
 	-- upvalues: t_93 (ref), t (ref)
 	local var3746 = t_93.new()
 	
@@ -16517,7 +16517,7 @@ typeRegistryModule.default:register(t.SearchResultsFeedInputData_ContentPoolsEnt
 local t_94 = {}
 t_94.__index = t_94
 
-function t_94.new(p188) --[[ line: 21233 ]]
+function t_94.new(p188)
 	-- upvalues: t_94 (ref)
 	return setmetatable({
 		universe_id = if p188 == nil or p188.universe_id == nil then "" else p188.universe_id,
@@ -16525,7 +16525,7 @@ function t_94.new(p188) --[[ line: 21233 ]]
 	}, t_94)
 end
 
-function t_94:encode() --[[ line: 21242 ]]
+function t_94:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3748 = 0
@@ -16548,7 +16548,7 @@ function t_94:encode() --[[ line: 21242 ]]
 	return buff_1
 end
 
-function t_94.decode(p189) --[[ line: 21261 ]]
+function t_94.decode(p189)
 	-- upvalues: t_94 (ref), protoModule (ref)
 	local var3754 = t_94.new()
 	local var3755 = 0
@@ -16601,7 +16601,7 @@ function t_94.decode(p189) --[[ line: 21261 ]]
 	return var3754
 end
 
-function t_94:jsonEncode() --[[ line: 21309 ]]
+function t_94:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -16613,7 +16613,7 @@ function t_94:jsonEncode() --[[ line: 21309 ]]
 	return t
 end
 
-function t_94:jsonDecode() --[[ line: 21323 ]]
+function t_94:jsonDecode()
 	-- upvalues: t_94 (ref)
 	local var3774 = t_94.new()
 	
@@ -16641,7 +16641,7 @@ typeRegistryModule.default:register(t.ExperienceEmphasisTileInputData)
 local t_95 = {}
 t_95.__index = t_95
 
-function t_95.new(p190) --[[ line: 21359 ]]
+function t_95.new(p190)
 	-- upvalues: t_95 (ref)
 	return setmetatable({
 		overview_rich_text = if p190 == nil or p190.overview_rich_text == nil then "" else p190.overview_rich_text,
@@ -16654,7 +16654,7 @@ function t_95.new(p190) --[[ line: 21359 ]]
 	}, t_95)
 end
 
-function t_95:encode() --[[ line: 21373 ]]
+function t_95:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3776 = 0
@@ -16710,7 +16710,7 @@ function t_95:encode() --[[ line: 21373 ]]
 	return buff_1
 end
 
-function t_95.decode(p191) --[[ line: 21420 ]]
+function t_95.decode(p191)
 	-- upvalues: t_95 (ref), protoModule (ref), t (ref)
 	local var3793 = t_95.new()
 	local var3794 = 0
@@ -16788,7 +16788,7 @@ function t_95.decode(p191) --[[ line: 21420 ]]
 	return var3793
 end
 
-function t_95:jsonEncode() --[[ line: 21493 ]]
+function t_95:jsonEncode()
 	local t = {}
 	
 	if self.overview_rich_text ~= nil and self.overview_rich_text ~= "" then
@@ -16820,7 +16820,7 @@ function t_95:jsonEncode() --[[ line: 21493 ]]
 	return t
 end
 
-function t_95:jsonDecode() --[[ line: 21531 ]]
+function t_95:jsonDecode()
 	-- upvalues: t_95 (ref), t (ref)
 	local var3824 = t_95.new()
 	
@@ -16885,7 +16885,7 @@ typeRegistryModule.default:register(t.PowerSearchAIOverviewInputData)
 local t_96 = {}
 t_96.__index = t_96
 
-function t_96.new(p192) --[[ line: 21613 ]]
+function t_96.new(p192)
 	-- upvalues: t_96 (ref)
 	return setmetatable({
 		title = if p192 == nil or p192.title == nil then "" else p192.title,
@@ -16895,7 +16895,7 @@ function t_96.new(p192) --[[ line: 21613 ]]
 	}, t_96)
 end
 
-function t_96:encode() --[[ line: 21622 ]]
+function t_96:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3828 = 0
@@ -16933,7 +16933,7 @@ function t_96:encode() --[[ line: 21622 ]]
 	return buff_1
 end
 
-function t_96.decode(p193) --[[ line: 21654 ]]
+function t_96.decode(p193)
 	-- upvalues: t_96 (ref), protoModule (ref), t (ref)
 	local var3839 = t_96.new()
 	local var3840 = 0
@@ -16996,7 +16996,7 @@ function t_96.decode(p193) --[[ line: 21654 ]]
 	return var3839
 end
 
-function t_96:jsonEncode() --[[ line: 21712 ]]
+function t_96:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -17019,7 +17019,7 @@ function t_96:jsonEncode() --[[ line: 21712 ]]
 	return t
 end
 
-function t_96:jsonDecode() --[[ line: 21738 ]]
+function t_96:jsonDecode()
 	-- upvalues: t_96 (ref), t (ref)
 	local var3864 = t_96.new()
 	
@@ -17066,14 +17066,14 @@ typeRegistryModule.default:register(t.UserListInputData)
 local t_97 = {}
 t_97.__index = t_97
 
-function t_97.new(p194) --[[ line: 21796 ]]
+function t_97.new(p194)
 	-- upvalues: t_97 (ref)
 	return setmetatable({
 		user_id = if p194 == nil or p194.user_id == nil then "" else p194.user_id
 	}, t_97)
 end
 
-function t_97:encode() --[[ line: 21804 ]]
+function t_97:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3868 = 0
@@ -17090,7 +17090,7 @@ function t_97:encode() --[[ line: 21804 ]]
 	return buff_1
 end
 
-function t_97.decode(p195) --[[ line: 21818 ]]
+function t_97.decode(p195)
 	-- upvalues: t_97 (ref), protoModule (ref)
 	local var3872 = t_97.new()
 	local var3873 = 0
@@ -17137,7 +17137,7 @@ function t_97.decode(p195) --[[ line: 21818 ]]
 	return var3872
 end
 
-function t_97:jsonEncode() --[[ line: 21861 ]]
+function t_97:jsonEncode()
 	local t = {}
 	
 	if self.user_id ~= nil and self.user_id ~= "" then
@@ -17146,7 +17146,7 @@ function t_97:jsonEncode() --[[ line: 21861 ]]
 	return t
 end
 
-function t_97:jsonDecode() --[[ line: 21871 ]]
+function t_97:jsonDecode()
 	-- upvalues: t_97 (ref)
 	local var3890 = t_97.new()
 	
@@ -17168,7 +17168,7 @@ typeRegistryModule.default:register(t.UserListInputData_UserItem)
 local t_98 = {}
 t_98.__index = t_98
 
-function t_98.new(p196) --[[ line: 21899 ]]
+function t_98.new(p196)
 	-- upvalues: t_98 (ref)
 	return setmetatable({
 		title = if p196 == nil or p196.title == nil then "" else p196.title,
@@ -17178,7 +17178,7 @@ function t_98.new(p196) --[[ line: 21899 ]]
 	}, t_98)
 end
 
-function t_98:encode() --[[ line: 21908 ]]
+function t_98:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3892 = 0
@@ -17216,7 +17216,7 @@ function t_98:encode() --[[ line: 21908 ]]
 	return buff_1
 end
 
-function t_98.decode(p197) --[[ line: 21940 ]]
+function t_98.decode(p197)
 	-- upvalues: t_98 (ref), protoModule (ref), t (ref)
 	local var3903 = t_98.new()
 	local var3904 = 0
@@ -17279,7 +17279,7 @@ function t_98.decode(p197) --[[ line: 21940 ]]
 	return var3903
 end
 
-function t_98:jsonEncode() --[[ line: 21998 ]]
+function t_98:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -17302,7 +17302,7 @@ function t_98:jsonEncode() --[[ line: 21998 ]]
 	return t
 end
 
-function t_98:jsonDecode() --[[ line: 22024 ]]
+function t_98:jsonDecode()
 	-- upvalues: t_98 (ref), t (ref)
 	local var3928 = t_98.new()
 	
@@ -17341,7 +17341,7 @@ typeRegistryModule.default:register(t.CatalogItemListInputData)
 local t_99 = {}
 t_99.__index = t_99
 
-function t_99.new(p198) --[[ line: 22073 ]]
+function t_99.new(p198)
 	-- upvalues: t_99 (ref)
 	return setmetatable({
 		item_id = if p198 == nil or p198.item_id == nil then "" else p198.item_id,
@@ -17349,7 +17349,7 @@ function t_99.new(p198) --[[ line: 22073 ]]
 	}, t_99)
 end
 
-function t_99:encode() --[[ line: 22082 ]]
+function t_99:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3931 = 0
@@ -17372,7 +17372,7 @@ function t_99:encode() --[[ line: 22082 ]]
 	return buff_1
 end
 
-function t_99.decode(p199) --[[ line: 22101 ]]
+function t_99.decode(p199)
 	-- upvalues: t_99 (ref), protoModule (ref)
 	local var3937 = t_99.new()
 	local var3938 = 0
@@ -17424,7 +17424,7 @@ function t_99.decode(p199) --[[ line: 22101 ]]
 	return var3937
 end
 
-function t_99:jsonEncode() --[[ line: 22149 ]]
+function t_99:jsonEncode()
 	local t = {}
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
@@ -17436,7 +17436,7 @@ function t_99:jsonEncode() --[[ line: 22149 ]]
 	return t
 end
 
-function t_99:jsonDecode() --[[ line: 22163 ]]
+function t_99:jsonDecode()
 	-- upvalues: t_99 (ref)
 	local var3957 = t_99.new()
 	
@@ -17464,14 +17464,14 @@ typeRegistryModule.default:register(t.CatalogItemListInputData_CatalogItem)
 local t_100 = {}
 t_100.__index = t_100
 
-function t_100.new(p200) --[[ line: 22201 ]]
+function t_100.new(p200)
 	-- upvalues: t_100 (ref)
 	return setmetatable({
 		universe_id = if p200 == nil or p200.universe_id == nil then "" else p200.universe_id
 	}, t_100)
 end
 
-function t_100:encode() --[[ line: 22209 ]]
+function t_100:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3959 = 0
@@ -17488,7 +17488,7 @@ function t_100:encode() --[[ line: 22209 ]]
 	return buff_1
 end
 
-function t_100.decode(p201) --[[ line: 22223 ]]
+function t_100.decode(p201)
 	-- upvalues: t_100 (ref), protoModule (ref)
 	local var3963 = t_100.new()
 	local var3964 = 0
@@ -17535,7 +17535,7 @@ function t_100.decode(p201) --[[ line: 22223 ]]
 	return var3963
 end
 
-function t_100:jsonEncode() --[[ line: 22266 ]]
+function t_100:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -17544,7 +17544,7 @@ function t_100:jsonEncode() --[[ line: 22266 ]]
 	return t
 end
 
-function t_100:jsonDecode() --[[ line: 22276 ]]
+function t_100:jsonDecode()
 	-- upvalues: t_100 (ref)
 	local var3981 = t_100.new()
 	
@@ -17566,7 +17566,7 @@ typeRegistryModule.default:register(t.ExperienceGuidelinesDialogInputData)
 local t_101 = {}
 t_101.__index = t_101
 
-function t_101.new(p202) --[[ line: 22306 ]]
+function t_101.new(p202)
 	-- upvalues: t_101 (ref)
 	return setmetatable({
 		title = if p202 == nil or p202.title == nil then "" else p202.title,
@@ -17575,7 +17575,7 @@ function t_101.new(p202) --[[ line: 22306 ]]
 	}, t_101)
 end
 
-function t_101:encode() --[[ line: 22314 ]]
+function t_101:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3983 = 0
@@ -17607,7 +17607,7 @@ function t_101:encode() --[[ line: 22314 ]]
 	return buff_1
 end
 
-function t_101.decode(p203) --[[ line: 22341 ]]
+function t_101.decode(p203)
 	-- upvalues: t_101 (ref), protoModule (ref), t (ref)
 	local var3992 = t_101.new()
 	local var3993 = 0
@@ -17664,7 +17664,7 @@ function t_101.decode(p203) --[[ line: 22341 ]]
 	return var3992
 end
 
-function t_101:jsonEncode() --[[ line: 22394 ]]
+function t_101:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -17684,7 +17684,7 @@ function t_101:jsonEncode() --[[ line: 22394 ]]
 	return t
 end
 
-function t_101:jsonDecode() --[[ line: 22416 ]]
+function t_101:jsonDecode()
 	-- upvalues: t_101 (ref), t (ref)
 	local var4015 = t_101.new()
 	
@@ -17722,7 +17722,7 @@ typeRegistryModule.default:register(t.MomentsCarouselInputData)
 local t_102 = {}
 t_102.__index = t_102
 
-function t_102.new(p204) --[[ line: 22462 ]]
+function t_102.new(p204)
 	-- upvalues: t_102 (ref)
 	return setmetatable({
 		moment_id = if p204 == nil or p204.moment_id == nil then "" else p204.moment_id,
@@ -17734,7 +17734,7 @@ function t_102.new(p204) --[[ line: 22462 ]]
 	}, t_102)
 end
 
-function t_102:encode() --[[ line: 22477 ]]
+function t_102:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4019 = 0
@@ -17781,7 +17781,7 @@ function t_102:encode() --[[ line: 22477 ]]
 	return buff_1
 end
 
-function t_102.decode(p205) --[[ line: 22516 ]]
+function t_102.decode(p205)
 	-- upvalues: t_102 (ref), protoModule (ref)
 	local var4033 = t_102.new()
 	local var4034 = 0
@@ -17853,7 +17853,7 @@ function t_102.decode(p205) --[[ line: 22516 ]]
 	return var4033
 end
 
-function t_102:jsonEncode() --[[ line: 22584 ]]
+function t_102:jsonEncode()
 	local t = {}
 	
 	if self.moment_id ~= nil and self.moment_id ~= "" then
@@ -17877,7 +17877,7 @@ function t_102:jsonEncode() --[[ line: 22584 ]]
 	return t
 end
 
-function t_102:jsonDecode() --[[ line: 22614 ]]
+function t_102:jsonDecode()
 	-- upvalues: t_102 (ref)
 	local var4061 = t_102.new()
 	
@@ -17929,7 +17929,7 @@ typeRegistryModule.default:register(t.MomentsCarouselInputData_MomentItem)
 local t_103 = {}
 t_103.__index = t_103
 
-function t_103.new(p206) --[[ line: 22684 ]]
+function t_103.new(p206)
 	-- upvalues: t_103 (ref)
 	return setmetatable({
 		title = if p206 == nil or p206.title == nil then "" else p206.title,
@@ -17937,7 +17937,7 @@ function t_103.new(p206) --[[ line: 22684 ]]
 	}, t_103)
 end
 
-function t_103:encode() --[[ line: 22691 ]]
+function t_103:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4063 = 0
@@ -17960,7 +17960,7 @@ function t_103:encode() --[[ line: 22691 ]]
 	return buff_1
 end
 
-function t_103.decode(p207) --[[ line: 22710 ]]
+function t_103.decode(p207)
 	-- upvalues: t_103 (ref), protoModule (ref)
 	local var4069 = t_103.new()
 	local var4070 = 0
@@ -18012,7 +18012,7 @@ function t_103.decode(p207) --[[ line: 22710 ]]
 	return var4069
 end
 
-function t_103:jsonEncode() --[[ line: 22758 ]]
+function t_103:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -18024,7 +18024,7 @@ function t_103:jsonEncode() --[[ line: 22758 ]]
 	return t
 end
 
-function t_103:jsonDecode() --[[ line: 22772 ]]
+function t_103:jsonDecode()
 	-- upvalues: t_103 (ref)
 	local var4089 = t_103.new()
 	
@@ -18046,7 +18046,7 @@ typeRegistryModule.default:register(t.AttributionRowInputData)
 local t_104 = {}
 t_104.__index = t_104
 
-function t_104.new(p208) --[[ line: 22800 ]]
+function t_104.new(p208)
 	-- upvalues: t_104 (ref)
 	return setmetatable({
 		primary_cta_button_text = if p208 == nil or p208.primary_cta_button_text == nil then "" else p208.primary_cta_button_text,
@@ -18056,7 +18056,7 @@ function t_104.new(p208) --[[ line: 22800 ]]
 	}, t_104)
 end
 
-function t_104:encode() --[[ line: 22813 ]]
+function t_104:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4091 = 0
@@ -18091,7 +18091,7 @@ function t_104:encode() --[[ line: 22813 ]]
 	return buff_1
 end
 
-function t_104.decode(p209) --[[ line: 22842 ]]
+function t_104.decode(p209)
 	-- upvalues: t_104 (ref), protoModule (ref)
 	local var4101 = t_104.new()
 	local var4102 = 0
@@ -18153,7 +18153,7 @@ function t_104.decode(p209) --[[ line: 22842 ]]
 	return var4101
 end
 
-function t_104:jsonEncode() --[[ line: 22900 ]]
+function t_104:jsonEncode()
 	local t = {}
 	
 	if self.primary_cta_button_text ~= nil and self.primary_cta_button_text ~= "" then
@@ -18171,7 +18171,7 @@ function t_104:jsonEncode() --[[ line: 22900 ]]
 	return t
 end
 
-function t_104:jsonDecode() --[[ line: 22922 ]]
+function t_104:jsonDecode()
 	-- upvalues: t_104 (ref)
 	local var4125 = t_104.new()
 	
@@ -18211,14 +18211,14 @@ typeRegistryModule.default:register(t.CtaButtonsInputData)
 local t_105 = {}
 t_105.__index = t_105
 
-function t_105.new(p210) --[[ line: 22974 ]]
+function t_105.new(p210)
 	-- upvalues: t_105 (ref)
 	return setmetatable({
 		image_asset_id = if p210 == nil or p210.image_asset_id == nil then "" else p210.image_asset_id
 	}, t_105)
 end
 
-function t_105:encode() --[[ line: 22980 ]]
+function t_105:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4127 = 0
@@ -18235,7 +18235,7 @@ function t_105:encode() --[[ line: 22980 ]]
 	return buff_1
 end
 
-function t_105.decode(p211) --[[ line: 22994 ]]
+function t_105.decode(p211)
 	-- upvalues: t_105 (ref), protoModule (ref)
 	local var4131 = t_105.new()
 	local var4132 = 0
@@ -18282,7 +18282,7 @@ function t_105.decode(p211) --[[ line: 22994 ]]
 	return var4131
 end
 
-function t_105:jsonEncode() --[[ line: 23037 ]]
+function t_105:jsonEncode()
 	local t = {}
 	
 	if self.image_asset_id ~= nil and self.image_asset_id ~= "" then
@@ -18291,7 +18291,7 @@ function t_105:jsonEncode() --[[ line: 23037 ]]
 	return t
 end
 
-function t_105:jsonDecode() --[[ line: 23047 ]]
+function t_105:jsonDecode()
 	-- upvalues: t_105 (ref)
 	local var4149 = t_105.new()
 	
@@ -18313,7 +18313,7 @@ typeRegistryModule.default:register(t.ImageInputData)
 local t_106 = {}
 t_106.__index = t_106
 
-function t_106.new(p212) --[[ line: 23075 ]]
+function t_106.new(p212)
 	-- upvalues: t_106 (ref)
 	return setmetatable({
 		video_asset_id = if p212 == nil or p212.video_asset_id == nil then "" else p212.video_asset_id,
@@ -18321,7 +18321,7 @@ function t_106.new(p212) --[[ line: 23075 ]]
 	}, t_106)
 end
 
-function t_106:encode() --[[ line: 23084 ]]
+function t_106:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4151 = 0
@@ -18344,7 +18344,7 @@ function t_106:encode() --[[ line: 23084 ]]
 	return buff_1
 end
 
-function t_106.decode(p213) --[[ line: 23103 ]]
+function t_106.decode(p213)
 	-- upvalues: t_106 (ref), protoModule (ref)
 	local var4157 = t_106.new()
 	local var4158 = 0
@@ -18396,7 +18396,7 @@ function t_106.decode(p213) --[[ line: 23103 ]]
 	return var4157
 end
 
-function t_106:jsonEncode() --[[ line: 23151 ]]
+function t_106:jsonEncode()
 	local t = {}
 	
 	if self.video_asset_id ~= nil and self.video_asset_id ~= "" then
@@ -18408,7 +18408,7 @@ function t_106:jsonEncode() --[[ line: 23151 ]]
 	return t
 end
 
-function t_106:jsonDecode() --[[ line: 23165 ]]
+function t_106:jsonDecode()
 	-- upvalues: t_106 (ref)
 	local var4177 = t_106.new()
 	
@@ -18436,7 +18436,7 @@ typeRegistryModule.default:register(t.VideoInputData)
 local t_107 = {}
 t_107.__index = t_107
 
-function t_107.new(p214) --[[ line: 23201 ]]
+function t_107.new(p214)
 	-- upvalues: t_107 (ref)
 	return setmetatable({
 		text = if p214 == nil or p214.text == nil then "" else p214.text,
@@ -18444,7 +18444,7 @@ function t_107.new(p214) --[[ line: 23201 ]]
 	}, t_107)
 end
 
-function t_107:encode() --[[ line: 23208 ]]
+function t_107:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4179 = 0
@@ -18467,7 +18467,7 @@ function t_107:encode() --[[ line: 23208 ]]
 	return buff_1
 end
 
-function t_107.decode(p215) --[[ line: 23227 ]]
+function t_107.decode(p215)
 	-- upvalues: t_107 (ref), protoModule (ref)
 	local var4185 = t_107.new()
 	local var4186 = 0
@@ -18520,7 +18520,7 @@ function t_107.decode(p215) --[[ line: 23227 ]]
 	return var4185
 end
 
-function t_107:jsonEncode() --[[ line: 23275 ]]
+function t_107:jsonEncode()
 	local t = {}
 	
 	if self.text ~= nil and self.text ~= "" then
@@ -18532,7 +18532,7 @@ function t_107:jsonEncode() --[[ line: 23275 ]]
 	return t
 end
 
-function t_107:jsonDecode() --[[ line: 23289 ]]
+function t_107:jsonDecode()
 	-- upvalues: t_107 (ref)
 	local var4205 = t_107.new()
 	
@@ -18557,7 +18557,7 @@ typeRegistryModule.default:register(t.TextInputData)
 local t_108 = {}
 t_108.__index = t_108
 
-function t_108.new(p216) --[[ line: 23321 ]]
+function t_108.new(p216)
 	-- upvalues: t_108 (ref)
 	return setmetatable({
 		entry_map = if p216 == nil or p216.entry_map == nil then {} else p216.entry_map,
@@ -18567,7 +18567,7 @@ function t_108.new(p216) --[[ line: 23321 ]]
 	}, t_108)
 end
 
-function t_108:encode() --[[ line: 23330 ]]
+function t_108:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4207 = 0
@@ -18631,7 +18631,7 @@ function t_108:encode() --[[ line: 23330 ]]
 	return buff_1
 end
 
-function t_108.decode(p217) --[[ line: 23388 ]]
+function t_108.decode(p217)
 	-- upvalues: t_108 (ref), protoModule (ref), t (ref)
 	local var4235 = t_108.new()
 	local var4236 = 0
@@ -18696,7 +18696,7 @@ function t_108.decode(p217) --[[ line: 23388 ]]
 	return var4235
 end
 
-function t_108:jsonEncode() --[[ line: 23467 ]]
+function t_108:jsonEncode()
 	local t = {}
 	
 	if self.entry_map ~= nil and next(self.entry_map) ~= nil then
@@ -18734,7 +18734,7 @@ function t_108:jsonEncode() --[[ line: 23467 ]]
 	return t
 end
 
-function t_108:jsonDecode() --[[ line: 23505 ]]
+function t_108:jsonDecode()
 	-- upvalues: t_108 (ref), t (ref)
 	local var4263 = t_108.new()
 	
@@ -18814,7 +18814,7 @@ typeRegistryModule.default:register(t.VerticalFeedInputData)
 local t_109 = {}
 t_109.__index = t_109
 
-function t_109.new(p218) --[[ line: 23597 ]]
+function t_109.new(p218)
 	-- upvalues: t_109 (ref)
 	return setmetatable({
 		key = if p218 == nil or p218.key == nil then "" else p218.key,
@@ -18822,7 +18822,7 @@ function t_109.new(p218) --[[ line: 23597 ]]
 	}, t_109)
 end
 
-function t_109:encode() --[[ line: 23606 ]]
+function t_109:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4273 = 0
@@ -18846,7 +18846,7 @@ function t_109:encode() --[[ line: 23606 ]]
 	return buff_1
 end
 
-function t_109.decode(p219) --[[ line: 23626 ]]
+function t_109.decode(p219)
 	-- upvalues: t_109 (ref), protoModule (ref), t (ref)
 	local var4280 = t_109.new()
 	local var4281 = 0
@@ -18898,7 +18898,7 @@ function t_109.decode(p219) --[[ line: 23626 ]]
 	return var4280
 end
 
-function t_109:jsonEncode() --[[ line: 23674 ]]
+function t_109:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -18910,7 +18910,7 @@ function t_109:jsonEncode() --[[ line: 23674 ]]
 	return t
 end
 
-function t_109:jsonDecode() --[[ line: 23688 ]]
+function t_109:jsonDecode()
 	-- upvalues: t_109 (ref), t (ref)
 	local var4300 = t_109.new()
 	
@@ -18932,7 +18932,7 @@ typeRegistryModule.default:register(t.VerticalFeedInputData_EntryMapEntry)
 local t_110 = {}
 t_110.__index = t_110
 
-function t_110.new(p220) --[[ line: 23718 ]]
+function t_110.new(p220)
 	-- upvalues: t_110 (ref)
 	return setmetatable({
 		key = if p220 == nil or p220.key == nil then "" else p220.key,
@@ -18940,7 +18940,7 @@ function t_110.new(p220) --[[ line: 23718 ]]
 	}, t_110)
 end
 
-function t_110:encode() --[[ line: 23727 ]]
+function t_110:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4302 = 0
@@ -18964,7 +18964,7 @@ function t_110:encode() --[[ line: 23727 ]]
 	return buff_1
 end
 
-function t_110.decode(p221) --[[ line: 23749 ]]
+function t_110.decode(p221)
 	-- upvalues: t_110 (ref), protoModule (ref), t (ref)
 	local var4309 = t_110.new()
 	local var4310 = 0
@@ -19016,7 +19016,7 @@ function t_110.decode(p221) --[[ line: 23749 ]]
 	return var4309
 end
 
-function t_110:jsonEncode() --[[ line: 23799 ]]
+function t_110:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -19028,7 +19028,7 @@ function t_110:jsonEncode() --[[ line: 23799 ]]
 	return t
 end
 
-function t_110:jsonDecode() --[[ line: 23815 ]]
+function t_110:jsonDecode()
 	-- upvalues: t_110 (ref), t (ref)
 	local var4329 = t_110.new()
 	
@@ -19050,7 +19050,7 @@ typeRegistryModule.default:register(t.VerticalFeedInputData_EntryOrderMapEntry)
 local t_111 = {}
 t_111.__index = t_111
 
-function t_111.new(p222) --[[ line: 23845 ]]
+function t_111.new(p222)
 	-- upvalues: t_111 (ref)
 	return setmetatable({
 		key = if p222 == nil or p222.key == nil then "" else p222.key,
@@ -19058,7 +19058,7 @@ function t_111.new(p222) --[[ line: 23845 ]]
 	}, t_111)
 end
 
-function t_111:encode() --[[ line: 23854 ]]
+function t_111:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4331 = 0
@@ -19082,7 +19082,7 @@ function t_111:encode() --[[ line: 23854 ]]
 	return buff_1
 end
 
-function t_111.decode(p223) --[[ line: 23874 ]]
+function t_111.decode(p223)
 	-- upvalues: t_111 (ref), protoModule (ref), t (ref)
 	local var4338 = t_111.new()
 	local var4339 = 0
@@ -19134,7 +19134,7 @@ function t_111.decode(p223) --[[ line: 23874 ]]
 	return var4338
 end
 
-function t_111:jsonEncode() --[[ line: 23922 ]]
+function t_111:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -19146,7 +19146,7 @@ function t_111:jsonEncode() --[[ line: 23922 ]]
 	return t
 end
 
-function t_111:jsonDecode() --[[ line: 23936 ]]
+function t_111:jsonDecode()
 	-- upvalues: t_111 (ref), t (ref)
 	local var4358 = t_111.new()
 	
@@ -19168,7 +19168,7 @@ typeRegistryModule.default:register(t.VerticalFeedInputData_ContentPoolsEntry)
 local t_112 = {}
 t_112.__index = t_112
 
-function t_112.new(p224) --[[ line: 23966 ]]
+function t_112.new(p224)
 	-- upvalues: t_112 (ref)
 	return setmetatable({
 		foreground_header_entry = if p224 == nil or p224.foreground_header_entry == nil then nil else p224.foreground_header_entry,
@@ -19177,7 +19177,7 @@ function t_112.new(p224) --[[ line: 23966 ]]
 	}, t_112)
 end
 
-function t_112:encode() --[[ line: 23978 ]]
+function t_112:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4360 = 0
@@ -19208,7 +19208,7 @@ function t_112:encode() --[[ line: 23978 ]]
 	return buff_1
 end
 
-function t_112.decode(p225) --[[ line: 24004 ]]
+function t_112.decode(p225)
 	-- upvalues: t_112 (ref), protoModule (ref), t (ref)
 	local var4370 = t_112.new()
 	local var4371 = 0
@@ -19265,7 +19265,7 @@ function t_112.decode(p225) --[[ line: 24004 ]]
 	return var4370
 end
 
-function t_112:jsonEncode() --[[ line: 24057 ]]
+function t_112:jsonEncode()
 	local t = {}
 	
 	if self.foreground_header_entry ~= nil then
@@ -19280,7 +19280,7 @@ function t_112:jsonEncode() --[[ line: 24057 ]]
 	return t
 end
 
-function t_112:jsonDecode() --[[ line: 24075 ]]
+function t_112:jsonDecode()
 	-- upvalues: t_112 (ref), t (ref)
 	local var4392 = t_112.new()
 	
@@ -19314,7 +19314,7 @@ typeRegistryModule.default:register(t.PageHeaderInputData)
 local t_113 = {}
 t_113.__index = t_113
 
-function t_113.new(p226) --[[ line: 24119 ]]
+function t_113.new(p226)
 	-- upvalues: t_113 (ref)
 	return setmetatable({
 		cta_button_text = if p226 == nil or p226.cta_button_text == nil then "" else p226.cta_button_text,
@@ -19322,7 +19322,7 @@ function t_113.new(p226) --[[ line: 24119 ]]
 	}, t_113)
 end
 
-function t_113:encode() --[[ line: 24128 ]]
+function t_113:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4394 = 0
@@ -19345,7 +19345,7 @@ function t_113:encode() --[[ line: 24128 ]]
 	return buff_1
 end
 
-function t_113.decode(p227) --[[ line: 24147 ]]
+function t_113.decode(p227)
 	-- upvalues: t_113 (ref), protoModule (ref)
 	local var4400 = t_113.new()
 	local var4401 = 0
@@ -19397,7 +19397,7 @@ function t_113.decode(p227) --[[ line: 24147 ]]
 	return var4400
 end
 
-function t_113:jsonEncode() --[[ line: 24195 ]]
+function t_113:jsonEncode()
 	local t = {}
 	
 	if self.cta_button_text ~= nil and self.cta_button_text ~= "" then
@@ -19409,7 +19409,7 @@ function t_113:jsonEncode() --[[ line: 24195 ]]
 	return t
 end
 
-function t_113:jsonDecode() --[[ line: 24209 ]]
+function t_113:jsonDecode()
 	-- upvalues: t_113 (ref)
 	local var4420 = t_113.new()
 	
@@ -19437,7 +19437,7 @@ typeRegistryModule.default:register(t.PreAuthLandingStickyHeaderInputData)
 local t_114 = {}
 t_114.__index = t_114
 
-function t_114.new(p228) --[[ line: 24247 ]]
+function t_114.new(p228)
 	-- upvalues: t_114 (ref)
 	return setmetatable({
 		title = if p228 == nil or p228.title == nil then "" else p228.title,
@@ -19447,7 +19447,7 @@ function t_114.new(p228) --[[ line: 24247 ]]
 	}, t_114)
 end
 
-function t_114:encode() --[[ line: 24256 ]]
+function t_114:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4422 = 0
@@ -19482,7 +19482,7 @@ function t_114:encode() --[[ line: 24256 ]]
 	return buff_1
 end
 
-function t_114.decode(p229) --[[ line: 24285 ]]
+function t_114.decode(p229)
 	-- upvalues: t_114 (ref), protoModule (ref)
 	local var4432 = t_114.new()
 	local var4433 = 0
@@ -19544,7 +19544,7 @@ function t_114.decode(p229) --[[ line: 24285 ]]
 	return var4432
 end
 
-function t_114:jsonEncode() --[[ line: 24343 ]]
+function t_114:jsonEncode()
 	local t = {}
 	
 	if self.title ~= nil and self.title ~= "" then
@@ -19562,7 +19562,7 @@ function t_114:jsonEncode() --[[ line: 24343 ]]
 	return t
 end
 
-function t_114:jsonDecode() --[[ line: 24365 ]]
+function t_114:jsonDecode()
 	-- upvalues: t_114 (ref)
 	local var4456 = t_114.new()
 	
@@ -19599,7 +19599,7 @@ typeRegistryModule.default:register(t.ImageCtaSectionInputData)
 local t_115 = {}
 t_115.__index = t_115
 
-function t_115.new(p230) --[[ line: 24413 ]]
+function t_115.new(p230)
 	-- upvalues: t_115 (ref)
 	return setmetatable({
 		universe_id = if p230 == nil or p230.universe_id == nil then nil else p230.universe_id,
@@ -19616,7 +19616,7 @@ function t_115.new(p230) --[[ line: 24413 ]]
 	}, t_115)
 end
 
-function t_115:encode() --[[ line: 24429 ]]
+function t_115:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4458 = 0
@@ -19697,7 +19697,7 @@ function t_115:encode() --[[ line: 24429 ]]
 	return buff_1
 end
 
-function t_115.decode(p231) --[[ line: 24497 ]]
+function t_115.decode(p231)
 	-- upvalues: t_115 (ref), protoModule (ref), t (ref)
 	local var4486 = t_115.new()
 	local var4487 = 0
@@ -19794,7 +19794,7 @@ function t_115.decode(p231) --[[ line: 24497 ]]
 	return var4486
 end
 
-function t_115:jsonEncode() --[[ line: 24590 ]]
+function t_115:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -19833,7 +19833,7 @@ function t_115:jsonEncode() --[[ line: 24590 ]]
 	return t
 end
 
-function t_115:jsonDecode() --[[ line: 24640 ]]
+function t_115:jsonDecode()
 	-- upvalues: t_115 (ref), t (ref)
 	local var4524 = t_115.new()
 	
@@ -19900,7 +19900,7 @@ typeRegistryModule.default:register(t.HeroUnitInputData)
 local t_116 = {}
 t_116.__index = t_116
 
-function t_116.new(p232) --[[ line: 24728 ]]
+function t_116.new(p232)
 	-- upvalues: t_116 (ref)
 	return setmetatable({
 		asset_id = if p232 == nil or p232.asset_id == nil then "" else p232.asset_id,
@@ -19909,7 +19909,7 @@ function t_116.new(p232) --[[ line: 24728 ]]
 	}, t_116)
 end
 
-function t_116:encode() --[[ line: 24738 ]]
+function t_116:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4526 = 0
@@ -19938,7 +19938,7 @@ function t_116:encode() --[[ line: 24738 ]]
 	return buff_1
 end
 
-function t_116.decode(p233) --[[ line: 24762 ]]
+function t_116.decode(p233)
 	-- upvalues: t_116 (ref), protoModule (ref)
 	local var4534 = t_116.new()
 	local var4535 = 0
@@ -19996,7 +19996,7 @@ function t_116.decode(p233) --[[ line: 24762 ]]
 	return var4534
 end
 
-function t_116:jsonEncode() --[[ line: 24815 ]]
+function t_116:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -20012,7 +20012,7 @@ function t_116:jsonEncode() --[[ line: 24815 ]]
 	return t
 end
 
-function t_116:jsonDecode() --[[ line: 24833 ]]
+function t_116:jsonDecode()
 	-- upvalues: t_116 (ref), protoModule (ref)
 	local var4556 = t_116.new()
 	
@@ -20046,7 +20046,7 @@ typeRegistryModule.default:register(t.HeroUnitInputData_VisualAsset)
 local t_117 = {}
 t_117.__index = t_117
 
-function t_117.new(p234) --[[ line: 24877 ]]
+function t_117.new(p234)
 	-- upvalues: t_117 (ref)
 	return setmetatable({
 		start_color = if p234 == nil or p234.start_color == nil then nil else p234.start_color,
@@ -20057,7 +20057,7 @@ function t_117.new(p234) --[[ line: 24877 ]]
 	}, t_117)
 end
 
-function t_117:encode() --[[ line: 24889 ]]
+function t_117:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4558 = 0
@@ -20098,7 +20098,7 @@ function t_117:encode() --[[ line: 24889 ]]
 	return buff_1
 end
 
-function t_117.decode(p235) --[[ line: 24923 ]]
+function t_117.decode(p235)
 	-- upvalues: t_117 (ref), protoModule (ref)
 	local var4570 = t_117.new()
 	local var4571 = 0
@@ -20165,7 +20165,7 @@ function t_117.decode(p235) --[[ line: 24923 ]]
 	return var4570
 end
 
-function t_117:jsonEncode() --[[ line: 24986 ]]
+function t_117:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -20187,7 +20187,7 @@ function t_117:jsonEncode() --[[ line: 24986 ]]
 	return t
 end
 
-function t_117:jsonDecode() --[[ line: 25012 ]]
+function t_117:jsonDecode()
 	-- upvalues: t_117 (ref), protoModule (ref)
 	local var4596 = t_117.new()
 	
@@ -20230,7 +20230,7 @@ typeRegistryModule.default:register(t.HeroUnitInputData_Gradient)
 local t_118 = {}
 t_118.__index = t_118
 
-function t_118.new(p236) --[[ line: 25068 ]]
+function t_118.new(p236)
 	-- upvalues: t_118 (ref)
 	return setmetatable({
 		items = if p236 == nil or p236.items == nil then {} else p236.items,
@@ -20239,7 +20239,7 @@ function t_118.new(p236) --[[ line: 25068 ]]
 	}, t_118)
 end
 
-function t_118:encode() --[[ line: 25080 ]]
+function t_118:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4598 = 0
@@ -20271,7 +20271,7 @@ function t_118:encode() --[[ line: 25080 ]]
 	return buff_1
 end
 
-function t_118.decode(p237) --[[ line: 25107 ]]
+function t_118.decode(p237)
 	-- upvalues: t_118 (ref), protoModule (ref), t (ref)
 	local var4607 = t_118.new()
 	local var4608 = 0
@@ -20328,7 +20328,7 @@ function t_118.decode(p237) --[[ line: 25107 ]]
 	return var4607
 end
 
-function t_118:jsonEncode() --[[ line: 25163 ]]
+function t_118:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -20348,7 +20348,7 @@ function t_118:jsonEncode() --[[ line: 25163 ]]
 	return t
 end
 
-function t_118:jsonDecode() --[[ line: 25185 ]]
+function t_118:jsonDecode()
 	-- upvalues: t_118 (ref), t (ref)
 	local var4630 = t_118.new()
 	
@@ -20384,14 +20384,14 @@ typeRegistryModule.default:register(t.FriendRecommendationCarouselInputData)
 local t_119 = {}
 t_119.__index = t_119
 
-function t_119.new(p238) --[[ line: 25236 ]]
+function t_119.new(p238)
 	-- upvalues: t_119 (ref)
 	return setmetatable({
 		user_id = if p238 == nil or p238.user_id == nil then "" else p238.user_id
 	}, t_119)
 end
 
-function t_119:encode() --[[ line: 25247 ]]
+function t_119:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4633 = 0
@@ -20408,7 +20408,7 @@ function t_119:encode() --[[ line: 25247 ]]
 	return buff_1
 end
 
-function t_119.decode(p239) --[[ line: 25263 ]]
+function t_119.decode(p239)
 	-- upvalues: t_119 (ref), protoModule (ref)
 	local var4637 = t_119.new()
 	local var4638 = 0
@@ -20455,7 +20455,7 @@ function t_119.decode(p239) --[[ line: 25263 ]]
 	return var4637
 end
 
-function t_119:jsonEncode() --[[ line: 25308 ]]
+function t_119:jsonEncode()
 	local t = {}
 	
 	if self.user_id ~= nil and self.user_id ~= "" then
@@ -20464,7 +20464,7 @@ function t_119:jsonEncode() --[[ line: 25308 ]]
 	return t
 end
 
-function t_119:jsonDecode() --[[ line: 25320 ]]
+function t_119:jsonDecode()
 	-- upvalues: t_119 (ref)
 	local var4655 = t_119.new()
 	
@@ -20486,14 +20486,14 @@ typeRegistryModule.default:register(t.FriendRecommendationCarouselInputData_User
 local t_120 = {}
 t_120.__index = t_120
 
-function t_120.new(p240) --[[ line: 25352 ]]
+function t_120.new(p240)
 	-- upvalues: t_120 (ref)
 	return setmetatable({
 		contact_id = if p240 == nil or p240.contact_id == nil then "" else p240.contact_id
 	}, t_120)
 end
 
-function t_120:encode() --[[ line: 25363 ]]
+function t_120:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4657 = 0
@@ -20510,7 +20510,7 @@ function t_120:encode() --[[ line: 25363 ]]
 	return buff_1
 end
 
-function t_120.decode(p241) --[[ line: 25379 ]]
+function t_120.decode(p241)
 	-- upvalues: t_120 (ref), protoModule (ref)
 	local var4661 = t_120.new()
 	local var4662 = 0
@@ -20557,7 +20557,7 @@ function t_120.decode(p241) --[[ line: 25379 ]]
 	return var4661
 end
 
-function t_120:jsonEncode() --[[ line: 25424 ]]
+function t_120:jsonEncode()
 	local t = {}
 	
 	if self.contact_id ~= nil and self.contact_id ~= "" then
@@ -20566,7 +20566,7 @@ function t_120:jsonEncode() --[[ line: 25424 ]]
 	return t
 end
 
-function t_120:jsonDecode() --[[ line: 25436 ]]
+function t_120:jsonDecode()
 	-- upvalues: t_120 (ref)
 	local var4679 = t_120.new()
 	
@@ -20588,7 +20588,7 @@ typeRegistryModule.default:register(t.FriendRecommendationCarouselInputData_Cont
 local t_121 = {}
 t_121.__index = t_121
 
-function t_121.new(p242) --[[ line: 25468 ]]
+function t_121.new(p242)
 	-- upvalues: t_121 (ref)
 	return setmetatable({
 		kind = if p242 == nil or p242.kind == nil then nil else p242.kind,
@@ -20596,7 +20596,7 @@ function t_121.new(p242) --[[ line: 25468 ]]
 	}, t_121)
 end
 
-function t_121:encode() --[[ line: 25482 ]]
+function t_121:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4681 = 0
@@ -20628,7 +20628,7 @@ function t_121:encode() --[[ line: 25482 ]]
 	return buff_1
 end
 
-function t_121.decode(p243) --[[ line: 25510 ]]
+function t_121.decode(p243)
 	-- upvalues: t_121 (ref), protoModule (ref), t (ref)
 	local var4691 = t_121.new()
 	local var4692 = 0
@@ -20692,7 +20692,7 @@ function t_121.decode(p243) --[[ line: 25510 ]]
 	return var4691
 end
 
-function t_121:jsonEncode() --[[ line: 25571 ]]
+function t_121:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -20708,7 +20708,7 @@ function t_121:jsonEncode() --[[ line: 25571 ]]
 	return t
 end
 
-function t_121:jsonDecode() --[[ line: 25591 ]]
+function t_121:jsonDecode()
 	-- upvalues: t_121 (ref), t (ref)
 	local var4713 = t_121.new()
 	
@@ -20742,7 +20742,7 @@ typeRegistryModule.default:register(t.FriendRecommendationCarouselInputData_Reco
 local t_122 = {}
 t_122.__index = t_122
 
-function t_122.new(p244) --[[ line: 25636 ]]
+function t_122.new(p244)
 	-- upvalues: t_122 (ref)
 	return setmetatable({
 		selected_option = if p244 == nil or p244.selected_option == nil then "" else p244.selected_option,
@@ -20753,7 +20753,7 @@ function t_122.new(p244) --[[ line: 25636 ]]
 	}, t_122)
 end
 
-function t_122:encode() --[[ line: 25650 ]]
+function t_122:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4715 = 0
@@ -20798,7 +20798,7 @@ function t_122:encode() --[[ line: 25650 ]]
 	return buff_1
 end
 
-function t_122.decode(p245) --[[ line: 25688 ]]
+function t_122.decode(p245)
 	-- upvalues: t_122 (ref), protoModule (ref), t (ref)
 	local var4729 = t_122.new()
 	local var4730 = 0
@@ -20865,7 +20865,7 @@ function t_122.decode(p245) --[[ line: 25688 ]]
 	return var4729
 end
 
-function t_122:jsonEncode() --[[ line: 25751 ]]
+function t_122:jsonEncode()
 	local t = {}
 	
 	if self.selected_option ~= nil and self.selected_option ~= "" then
@@ -20891,7 +20891,7 @@ function t_122:jsonEncode() --[[ line: 25751 ]]
 	return t
 end
 
-function t_122:jsonDecode() --[[ line: 25781 ]]
+function t_122:jsonDecode()
 	-- upvalues: t_122 (ref), t (ref)
 	local var4756 = t_122.new()
 	
@@ -20939,7 +20939,7 @@ typeRegistryModule.default:register(t.OptionSelectorCarouselInputData)
 local t_123 = {}
 t_123.__index = t_123
 
-function t_123.new(p246) --[[ line: 25842 ]]
+function t_123.new(p246)
 	-- upvalues: t_123 (ref)
 	return setmetatable({
 		id = if p246 == nil or p246.id == nil then "" else p246.id,
@@ -20948,7 +20948,7 @@ function t_123.new(p246) --[[ line: 25842 ]]
 	}, t_123)
 end
 
-function t_123:encode() --[[ line: 25850 ]]
+function t_123:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4759 = 0
@@ -20977,7 +20977,7 @@ function t_123:encode() --[[ line: 25850 ]]
 	return buff_1
 end
 
-function t_123.decode(p247) --[[ line: 25874 ]]
+function t_123.decode(p247)
 	-- upvalues: t_123 (ref), protoModule (ref)
 	local var4767 = t_123.new()
 	local var4768 = 0
@@ -21035,7 +21035,7 @@ function t_123.decode(p247) --[[ line: 25874 ]]
 	return var4767
 end
 
-function t_123:jsonEncode() --[[ line: 25927 ]]
+function t_123:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -21050,7 +21050,7 @@ function t_123:jsonEncode() --[[ line: 25927 ]]
 	return t
 end
 
-function t_123:jsonDecode() --[[ line: 25945 ]]
+function t_123:jsonDecode()
 	-- upvalues: t_123 (ref)
 	local var4789 = t_123.new()
 	
@@ -21081,7 +21081,7 @@ typeRegistryModule.default:register(t.SelectorOption)
 local t_124 = {}
 t_124.__index = t_124
 
-function t_124.new(p248) --[[ line: 25985 ]]
+function t_124.new(p248)
 	-- upvalues: t_124 (ref)
 	return setmetatable({
 		cards = if p248 == nil or p248.cards == nil then {} else p248.cards,
@@ -21089,7 +21089,7 @@ function t_124.new(p248) --[[ line: 25985 ]]
 	}, t_124)
 end
 
-function t_124:encode() --[[ line: 25994 ]]
+function t_124:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4791 = 0
@@ -21115,7 +21115,7 @@ function t_124:encode() --[[ line: 25994 ]]
 	return buff_1
 end
 
-function t_124.decode(p249) --[[ line: 26016 ]]
+function t_124.decode(p249)
 	-- upvalues: t_124 (ref), protoModule (ref), t (ref)
 	local var4798 = t_124.new()
 	local var4799 = 0
@@ -21167,7 +21167,7 @@ function t_124.decode(p249) --[[ line: 26016 ]]
 	return var4798
 end
 
-function t_124:jsonEncode() --[[ line: 26064 ]]
+function t_124:jsonEncode()
 	local t = {}
 	
 	if self.cards ~= nil and #self.cards > 0 then
@@ -21184,7 +21184,7 @@ function t_124:jsonEncode() --[[ line: 26064 ]]
 	return t
 end
 
-function t_124:jsonDecode() --[[ line: 26082 ]]
+function t_124:jsonDecode()
 	-- upvalues: t_124 (ref), t (ref)
 	local var4819 = t_124.new()
 	
@@ -21211,7 +21211,7 @@ typeRegistryModule.default:register(t.GameItemsCarouselInputData)
 local t_125 = {}
 t_125.__index = t_125
 
-function t_125.new(p250) --[[ line: 26115 ]]
+function t_125.new(p250)
 	-- upvalues: t_125 (ref)
 	return setmetatable({
 		universe_id = if p250 == nil or p250.universe_id == nil then "" else p250.universe_id,
@@ -21219,7 +21219,7 @@ function t_125.new(p250) --[[ line: 26115 ]]
 	}, t_125)
 end
 
-function t_125:encode() --[[ line: 26122 ]]
+function t_125:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4822 = 0
@@ -21245,7 +21245,7 @@ function t_125:encode() --[[ line: 26122 ]]
 	return buff_1
 end
 
-function t_125.decode(p251) --[[ line: 26144 ]]
+function t_125.decode(p251)
 	-- upvalues: t_125 (ref), protoModule (ref), t (ref)
 	local var4829 = t_125.new()
 	local var4830 = 0
@@ -21297,7 +21297,7 @@ function t_125.decode(p251) --[[ line: 26144 ]]
 	return var4829
 end
 
-function t_125:jsonEncode() --[[ line: 26192 ]]
+function t_125:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil and self.universe_id ~= "" then
@@ -21314,7 +21314,7 @@ function t_125:jsonEncode() --[[ line: 26192 ]]
 	return t
 end
 
-function t_125:jsonDecode() --[[ line: 26210 ]]
+function t_125:jsonDecode()
 	-- upvalues: t_125 (ref), t (ref)
 	local var4850 = t_125.new()
 	
@@ -21344,7 +21344,7 @@ typeRegistryModule.default:register(t.GameItemsCardInputData)
 local t_126 = {}
 t_126.__index = t_126
 
-function t_126.new(p252) --[[ line: 26247 ]]
+function t_126.new(p252)
 	-- upvalues: t_126 (ref)
 	return setmetatable({
 		item_id = if p252 == nil or p252.item_id == nil then "" else p252.item_id,
@@ -21352,7 +21352,7 @@ function t_126.new(p252) --[[ line: 26247 ]]
 	}, t_126)
 end
 
-function t_126:encode() --[[ line: 26254 ]]
+function t_126:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4853 = 0
@@ -21375,7 +21375,7 @@ function t_126:encode() --[[ line: 26254 ]]
 	return buff_1
 end
 
-function t_126.decode(p253) --[[ line: 26273 ]]
+function t_126.decode(p253)
 	-- upvalues: t_126 (ref), protoModule (ref)
 	local var4859 = t_126.new()
 	local var4860 = 0
@@ -21427,7 +21427,7 @@ function t_126.decode(p253) --[[ line: 26273 ]]
 	return var4859
 end
 
-function t_126:jsonEncode() --[[ line: 26321 ]]
+function t_126:jsonEncode()
 	local t = {}
 	
 	if self.item_id ~= nil and self.item_id ~= "" then
@@ -21439,7 +21439,7 @@ function t_126:jsonEncode() --[[ line: 26321 ]]
 	return t
 end
 
-function t_126:jsonDecode() --[[ line: 26335 ]]
+function t_126:jsonDecode()
 	-- upvalues: t_126 (ref)
 	local var4879 = t_126.new()
 	
@@ -21467,7 +21467,7 @@ typeRegistryModule.default:register(t.GameItemInputData)
 local t_127 = {}
 t_127.__index = t_127
 
-function t_127.new(p254) --[[ line: 26371 ]]
+function t_127.new(p254)
 	-- upvalues: t_127 (ref)
 	return setmetatable({
 		clickout_url = if p254 == nil or p254.clickout_url == nil then "" else p254.clickout_url,
@@ -21486,7 +21486,7 @@ function t_127.new(p254) --[[ line: 26371 ]]
 	}, t_127)
 end
 
-function t_127:encode() --[[ line: 26389 ]]
+function t_127:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4881 = 0
@@ -21575,7 +21575,7 @@ function t_127:encode() --[[ line: 26389 ]]
 	return buff_1
 end
 
-function t_127.decode(p255) --[[ line: 26463 ]]
+function t_127.decode(p255)
 	-- upvalues: t_127 (ref), protoModule (ref)
 	local var4909 = t_127.new()
 	local var4910 = 0
@@ -21682,7 +21682,7 @@ function t_127.decode(p255) --[[ line: 26463 ]]
 	return var4909
 end
 
-function t_127:jsonEncode() --[[ line: 26566 ]]
+function t_127:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -21728,7 +21728,7 @@ function t_127:jsonEncode() --[[ line: 26566 ]]
 	return t
 end
 
-function t_127:jsonDecode() --[[ line: 26624 ]]
+function t_127:jsonDecode()
 	-- upvalues: t_127 (ref), protoModule (ref)
 	local var4951 = t_127.new()
 	
@@ -21816,7 +21816,7 @@ typeRegistryModule.default:register(t.AdLinkItem)
 local t_128 = {}
 t_128.__index = t_128
 
-function t_128.new(p256) --[[ line: 26740 ]]
+function t_128.new(p256)
 	-- upvalues: t_128 (ref)
 	return setmetatable({
 		layout = if p256 == nil or p256.layout == nil then nil else p256.layout,
@@ -21824,7 +21824,7 @@ function t_128.new(p256) --[[ line: 26740 ]]
 	}, t_128)
 end
 
-function t_128:encode() --[[ line: 26747 ]]
+function t_128:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4953 = 0
@@ -21857,7 +21857,7 @@ function t_128:encode() --[[ line: 26747 ]]
 	return buff_1
 end
 
-function t_128.decode(p257) --[[ line: 26774 ]]
+function t_128.decode(p257)
 	-- upvalues: t_128 (ref), protoModule (ref), t (ref)
 	local var4964 = t_128.new()
 	local var4965 = 0
@@ -21917,7 +21917,7 @@ function t_128.decode(p257) --[[ line: 26774 ]]
 	return var4964
 end
 
-function t_128:jsonEncode() --[[ line: 26828 ]]
+function t_128:jsonEncode()
 	local t = {}
 	
 	if self.layout ~= nil then
@@ -21935,7 +21935,7 @@ function t_128:jsonEncode() --[[ line: 26828 ]]
 	return t
 end
 
-function t_128:jsonDecode() --[[ line: 26846 ]]
+function t_128:jsonDecode()
 	-- upvalues: t_128 (ref), t (ref)
 	local var4986 = t_128.new()
 	
@@ -21972,7 +21972,7 @@ typeRegistryModule.default:register(t.ItemWithLayout)
 local t_129 = {}
 t_129.__index = t_129
 
-function t_129.new(p258) --[[ line: 26885 ]]
+function t_129.new(p258)
 	-- upvalues: t_129 (ref)
 	return setmetatable({
 		items = if p258 == nil or p258.items == nil then {} else p258.items,
@@ -21980,7 +21980,7 @@ function t_129.new(p258) --[[ line: 26885 ]]
 	}, t_129)
 end
 
-function t_129:encode() --[[ line: 26894 ]]
+function t_129:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4988 = 0
@@ -22006,7 +22006,7 @@ function t_129:encode() --[[ line: 26894 ]]
 	return buff_1
 end
 
-function t_129.decode(p259) --[[ line: 26916 ]]
+function t_129.decode(p259)
 	-- upvalues: t_129 (ref), protoModule (ref), t (ref)
 	local var4995 = t_129.new()
 	local var4996 = 0
@@ -22058,7 +22058,7 @@ function t_129.decode(p259) --[[ line: 26916 ]]
 	return var4995
 end
 
-function t_129:jsonEncode() --[[ line: 26964 ]]
+function t_129:jsonEncode()
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
@@ -22075,7 +22075,7 @@ function t_129:jsonEncode() --[[ line: 26964 ]]
 	return t
 end
 
-function t_129:jsonDecode() --[[ line: 26982 ]]
+function t_129:jsonDecode()
 	-- upvalues: t_129 (ref), t (ref)
 	local var5016 = t_129.new()
 	
@@ -22105,7 +22105,7 @@ typeRegistryModule.default:register(t.ContentPool)
 local t_130 = {}
 t_130.__index = t_130
 
-function t_130.new(p260) --[[ line: 27019 ]]
+function t_130.new(p260)
 	-- upvalues: t_130 (ref)
 	return setmetatable({
 		col_span = if p260 == nil or p260.col_span == nil then 0 else p260.col_span,
@@ -22115,7 +22115,7 @@ function t_130.new(p260) --[[ line: 27019 ]]
 	}, t_130)
 end
 
-function t_130:encode() --[[ line: 27028 ]]
+function t_130:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5019 = 0
@@ -22150,7 +22150,7 @@ function t_130:encode() --[[ line: 27028 ]]
 	return buff_1
 end
 
-function t_130.decode(p261) --[[ line: 27057 ]]
+function t_130.decode(p261)
 	-- upvalues: t_130 (ref), protoModule (ref)
 	local var5029 = t_130.new()
 	local var5030 = 0
@@ -22213,7 +22213,7 @@ function t_130.decode(p261) --[[ line: 27057 ]]
 	return var5029
 end
 
-function t_130:jsonEncode() --[[ line: 27115 ]]
+function t_130:jsonEncode()
 	local t = {}
 	
 	if self.col_span ~= nil and self.col_span ~= 0 then
@@ -22231,7 +22231,7 @@ function t_130:jsonEncode() --[[ line: 27115 ]]
 	return t
 end
 
-function t_130:jsonDecode() --[[ line: 27137 ]]
+function t_130:jsonDecode()
 	-- upvalues: t_130 (ref)
 	local var5053 = t_130.new()
 	
@@ -22269,13 +22269,13 @@ t_130.descriptor = {
 t.ItemLayout = t_130
 typeRegistryModule.default:register(t.ItemLayout)
 t.PageEntryFormat = {
-	fromNumber = function(p262) --[[ line: 27186 ]]
+	fromNumber = function(p262)
 		return if p262 == 0 then "PAGE_ENTRY_FORMAT_INVALID" elseif p262 == 1 then "PAGE_ENTRY_FORMAT_UNIVERSAL" else nil
 	end,
-	toNumber = function(p263) --[[ line: 27196 ]]
+	toNumber = function(p263)
 		return if p263 == "PAGE_ENTRY_FORMAT_INVALID" then 0 elseif p263 == "PAGE_ENTRY_FORMAT_UNIVERSAL" then 1 else p263
 	end,
-	fromName = function(p264) --[[ line: 27206 ]]
+	fromName = function(p264)
 		return if p264 == "PAGE_ENTRY_FORMAT_INVALID" then "PAGE_ENTRY_FORMAT_INVALID" elseif p264 == "PAGE_ENTRY_FORMAT_UNIVERSAL" then "PAGE_ENTRY_FORMAT_UNIVERSAL" else nil
 	end
 }

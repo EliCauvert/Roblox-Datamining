@@ -25,7 +25,7 @@ local t = {
 	type = avatarGroupTypeModule.Spread
 }
 
-local function AvatarOverflow(p0) --[[ line: 61 ]]
+local function AvatarOverflow(p0)
 	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
 	local emphasis = useTokensModule()[usePresentationContext().colorNamespace or colorNamespaceModule.Color].Content.Emphasis
 	
@@ -46,7 +46,7 @@ local function AvatarOverflow(p0) --[[ line: 61 ]]
 	}))
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 96 | named "InternalAvatarGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), colorNamespaceModule (ref), reactIsModule (ref), getBindableValueModule (ref), reactModule (ref), AvatarOverflow (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var17 = withDefaultsModule(p1, t)
 	local var18 = useTokensModule()

@@ -2,7 +2,7 @@
 local enumsModule = require(whatsNew.Enums)
 local _ = require(whatsNew.Types)
 local t = {
-	isEntryInScopeSubtree = function(p0, p1, p2) --[[ line: 27 ]]
+	isEntryInScopeSubtree = function(p0, p1, p2)
 		local scopeId = p0.scopeId
 		while scopeId ~= nil do
 			if scopeId ~= p1 then
@@ -18,7 +18,7 @@ local t = {
 		end
 		return false
 	end,
-	isEntryExpired = function(p3, p4, p5) --[[ line: 46 ]]
+	isEntryExpired = function(p3, p4, p5)
 		-- upvalues: enumsModule (ref)
 		local var5
 		if p3.publishedTime == nil then
@@ -40,22 +40,22 @@ local t = {
 	end
 }
 
-local function _(p6, p7) --[[ line: 11 | named "clientGatesPass" ]]
+local function _(p6, p7)
 	-- upvalues: enumsModule (ref)
 	return if p6 == enumsModule.TourType.Onboarding then p7.onboardingEligible else true
 end
 
-local _ = function(p8) --[[ line: 18 | named "isNonEmptyString" ]]
+local _ = function(p8)
 	return p8 ~= nil and p8 ~= ""
 end
 
-local _ = function(p9) --[[ line: 22 | named "isoDateToUnix" ]]
+local _ = function(p9)
 	local dateTime = DateTime.fromIsoDate(p9)
 	
 	return if dateTime then dateTime.UnixTimestamp else nil
 end
 
-function t.deriveEntryDisplay(p10, p11, p12) --[[ line: 74 ]]
+function t.deriveEntryDisplay(p10, p11, p12)
 	-- upvalues: t (ref), enumsModule (ref)
 	local var9 = t.isEntryExpired(p10, p11, p12)
 	local id = p12.storage[p10.id]
@@ -78,7 +78,7 @@ function t.deriveEntryDisplay(p10, p11, p12) --[[ line: 74 ]]
 	}
 end
 
-function t.getLabels(p13, p14) --[[ line: 102 ]]
+function t.getLabels(p13, p14)
 	-- upvalues: enumsModule (ref)
 	return if p14 == enumsModule.TourType.Onboarding then {
 		title = p13.onboardingTitle or "",
@@ -89,7 +89,7 @@ function t.getLabels(p13, p14) --[[ line: 102 ]]
 	}
 end
 
-function t.hasLabels(p15) --[[ line: 116 ]]
+function t.hasLabels(p15)
 	local title = p15.title
 	local var11 = title ~= nil and title ~= ""
 	
@@ -100,7 +100,7 @@ function t.hasLabels(p15) --[[ line: 116 ]]
 	return var11
 end
 
-function t.countScopeSteps(p16) --[[ line: 120 ]]
+function t.countScopeSteps(p16)
 	local var12 = 0
 	
 	for i, v in p16.tourTips do

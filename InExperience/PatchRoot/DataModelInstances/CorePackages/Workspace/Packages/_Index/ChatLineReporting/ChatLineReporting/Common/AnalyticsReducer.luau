@@ -2,7 +2,7 @@
 local _ = require(chatLineReporting.Common.Types)
 local analyticsActions = require(chatLineReporting.Common.Constants).AnalyticsActions
 
-return function(p0, p1) --[[ line: 7 | named "analyticsReducer" ]]
+return function(p0, p1)
 	-- upvalues: analyticsActions (ref)
 	local cloned = table.clone(p0)
 	local type = p1.type

@@ -1,6 +1,6 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0) --[[ line: 9 | named "respawnAvatar" ]]
+return function(p0)
 	-- upvalues: playersService (ref)
 	local var1, var2 = p0()
 	

@@ -5,7 +5,7 @@ local expChatLocalChatEnabledMessageForcedKey = game:DefineFastString("ExpChatLo
 local enableExpChatLocalChatEnabledMessageExperimentation2 = game:DefineFastFlag("EnableExpChatLocalChatEnabledMessageExperimentation2", false)
 
 return {
-	getSystemMessageKey = function() --[[ line: 18 ]]
+	getSystemMessageKey = function()
 		-- upvalues: expChatLocalChatEnabledMessageForcedKey (ref), experimentCacheManager (ref), expChatLocalChatEnabledMessageExperimentLayer (ref), expChatLocalChatEnabledMessageVariable (ref)
 		if expChatLocalChatEnabledMessageForcedKey ~= "" then
 			return expChatLocalChatEnabledMessageForcedKey
@@ -14,7 +14,7 @@ return {
 		
 		return if var4 and var4[expChatLocalChatEnabledMessageVariable] ~= nil then var4[expChatLocalChatEnabledMessageVariable] else nil
 	end,
-	logExposure = function() --[[ line: 33 ]]
+	logExposure = function()
 		-- upvalues: enableExpChatLocalChatEnabledMessageExperimentation2 (ref), experimentCacheManager (ref), expChatLocalChatEnabledMessageExperimentLayer (ref)
 		if enableExpChatLocalChatEnabledMessageExperimentation2 and experimentCacheManager.default:getLayerVariables(expChatLocalChatEnabledMessageExperimentLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(expChatLocalChatEnabledMessageExperimentLayer)

@@ -32,15 +32,15 @@ local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFl
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
-return function(p0) --[[ line: 57 | named "StickerOverlayControls" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), makeDefaultStickerOverlayEditModule (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), useFormFactor (ref), formFactor (ref), reactionType (ref), reactionAssets (ref), reactModule (ref), stickerPickerItemModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref), scrollView (ref)
 	local controller = p0.controller
 	local var13 = useDeviceInsets()
 	local var14 = useTokens()
 	local var15 = useCreationFlowStringsModule()
-	local var16 = useSignalState(useMemo(function() --[[ line: 64 ]]
+	local var16 = useSignalState(useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref), constantsModule (copy)
-		return signalsModule.createComputed(function(p1) --[[ line: 65 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: controller (copy), constantsModule (copy)
 			local activeSession = controller.getActiveSession(p1)
 			local var23 = if activeSession ~= nil then nil else activeSession.getDraft(p1)
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 57 | named "StickerOverlayControls" ]]
 			return if var24 == nil then constantsModule.StickerOverlay.DefaultStickerSize else var24.stickerSize
 		end)
 	end, { controller }))
-	local var17 = useCallback(function(p2) --[[ line: 74 ]]
+	local var17 = useCallback(function(p2)
 		-- upvalues: controller (ref), dashModule (copy)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -62,15 +62,15 @@ return function(p0) --[[ line: 57 | named "StickerOverlayControls" ]]
 		end
 		activeSession.update({ dashModule.joinDeep(var27, { stickerSize = p2 }) })
 	end, { controller })
-	local var18 = useCallback(function() --[[ line: 87 ]]
+	local var18 = useCallback(function()
 		-- upvalues: controller (ref)
 		controller.discardActiveTool()
 	end, { controller })
-	local var19 = useCallback(function() --[[ line: 91 ]]
+	local var19 = useCallback(function()
 		-- upvalues: controller (ref)
 		controller.commitActiveTool()
 	end, { controller })
-	local var20 = useCallback(function(p3) --[[ line: 95 ]]
+	local var20 = useCallback(function(p3)
 		-- upvalues: controller (ref), dashModule (copy), makeDefaultStickerOverlayEditModule (copy), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -147,7 +147,7 @@ return function(p0) --[[ line: 57 | named "StickerOverlayControls" ]]
 					CanvasSize = UDim2.fromOffset(0, 0),
 					scrollBarVisibility = if var21 then foundationModule.Enums.Visibility.None else foundationModule.Enums.Visibility.Auto
 				}
-			}, useMemo(function() --[[ line: 137 ]]
+			}, useMemo(function()
 				-- upvalues: reactionType (copy), reactionAssets (copy), reactModule (copy), stickerPickerItemModule (copy), var20 (ref)
 				local t = {}
 				local var33 = 0

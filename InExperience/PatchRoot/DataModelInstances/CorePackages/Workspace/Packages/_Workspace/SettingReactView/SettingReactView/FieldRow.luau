@@ -14,7 +14,7 @@ local enums = foundationModule.Enums
 local controlState = enums.ControlState
 local stateLayerAffordance = enums.StateLayerAffordance
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), createNextOrder (ref), reactModule (ref), controlState (ref), signalsReactModule (ref), view (ref), stateLayerAffordance (ref), text (ref), fieldModule (ref)
 	local var5 = useTokens()
 	local var6 = createNextOrder()
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 26 ]]
 	return reactModule.createElement(view, {
 		tag = "auto-y row size-full-1300 radius-medium",
 		backgroundStyle = var11,
-		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 36 ]]
+		onStateChanged = reactModule.useCallback(function(p1)
 			-- upvalues: var12 (ref), controlState (copy), t_1 (ref), t (ref)
 			var12(if p1 == controlState.Default then t_1 else t)
 		end, { var12 }),

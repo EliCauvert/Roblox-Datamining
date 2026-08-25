@@ -7,7 +7,7 @@ local reactModule = require(parent.React)
 local useTokens = foundationModule.Hooks.useTokens
 local t = {}
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "GameTileOverlayBadge" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: t (ref), useTokens (ref), reactModule (ref), getTextSize (ref), icon (ref), iconSize (ref)
 	local icons = p0.icons or t
 	local text = p0.text or ""
@@ -22,7 +22,7 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "GameTileOverlayBadge
 	local xSmall = var7.Padding.XSmall
 	local titleSmall = var7.Typography.TitleSmall
 	local size400 = var7.Size.Size_400
-	local var13 = reactModule.useMemo(function() --[[ line: 60 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var6 (ref), getTextSize (copy), text (ref), titleSmall (ref)
 		return if var6 then getTextSize(text, titleSmall.FontSize, titleSmall.Font, Vector2.new(1e999, 1e999)) else Vector2.new(0, 0)
 	end, { text, var6, titleSmall.FontSize, titleSmall.Font })
@@ -71,7 +71,7 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "GameTileOverlayBadge
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
 			UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MaxSize = p0.maxWidthBinding:map(function(p1) --[[ line: 114 ]]
+				MaxSize = p0.maxWidthBinding:map(function(p1)
 					-- upvalues: var11 (ref), var15 (write)
 					local var16 = p1 - 2 * var11 - var15
 					

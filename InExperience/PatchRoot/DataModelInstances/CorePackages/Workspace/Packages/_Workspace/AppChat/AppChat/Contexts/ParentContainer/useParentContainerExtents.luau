@@ -11,7 +11,7 @@ local useOrientation = responsiveModule.useOrientation
 local parentContainerContextModule = require(appChat.Contexts.ParentContainer.ParentContainerContext)
 local getFFlagAppChatInExperienceTabBarAdjustmentModule = require(appChat.Flags.getFFlagAppChatInExperienceTabBarAdjustment)
 
-return function() --[[ line: 22 | named "useParentContainerExtents" ]]
+return function()
 	-- upvalues: useContext (ref), parentContainerContextModule (ref), useLayerCollector (ref), getFFlagAppChatInExperienceTabBarAdjustmentModule (ref), useOrientation (ref), useBinding (ref), responsiveModule (ref), useEffect (ref), guiService (ref)
 	local var13
 	local parentContainer = useContext(parentContainerContextModule).getParentContainer()
@@ -26,20 +26,20 @@ return function() --[[ line: 22 | named "useParentContainerExtents" ]]
 		var13 = var8 == responsiveModule.Keys.Landscape
 		var13 = nil
 	end
-	useEffect(function() --[[ line: 37 ]]
+	useEffect(function()
 		-- upvalues: parentContainer (ref), var7 (ref), getFFlagAppChatInExperienceTabBarAdjustmentModule (copy), var13 (ref), guiService (copy), var10 (ref), var12 (ref)
 		if not parentContainer then
-			return function() --[[ line: 100 ]] end
+			return function() end
 		end
 		local _ = nil
 		local _ = nil
 		local safeZoneOffsetsChangedConnection = nil
 		
-		local _ = function(p0, p1, p2) --[[ line: 41 ]]
+		local _ = function(p0, p1, p2)
 			return Vector2.new(math.clamp(p0.X, p1.X, p2.X), math.clamp(p0.Y, p1.Y, p2.Y))
 		end
 		
-		local var15 = function() --[[ line: 45 ]]
+		local var15 = function()
 			-- upvalues: parentContainer (copy), var7 (copy), getFFlagAppChatInExperienceTabBarAdjustmentModule (copy), var13 (copy), guiService (copy), var10 (copy), var12 (copy)
 			local absoluteSize = parentContainer.AbsoluteSize
 			local absolutePosition = parentContainer.AbsolutePosition
@@ -61,7 +61,7 @@ return function() --[[ line: 22 | named "useParentContainerExtents" ]]
 		end
 		var15()
 		
-		return function() --[[ line: 85 ]]
+		return function()
 			-- upvalues: var16 (write), var17 (write), getFFlagAppChatInExperienceTabBarAdjustmentModule (copy), safeZoneOffsetsChangedConnection (write)
 			if var16 and var16.Connected then
 				var16:Disconnect()

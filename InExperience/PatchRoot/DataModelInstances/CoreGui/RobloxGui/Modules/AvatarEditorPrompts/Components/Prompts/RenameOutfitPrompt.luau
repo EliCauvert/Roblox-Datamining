@@ -24,24 +24,24 @@ renameOutfitNamePrompt.validateProps = tModule.strictInterface({
 	showCustomOutfitNames = tModule.boolean
 })
 
-function renameOutfitNamePrompt.init(p0) --[[ line: 43 ]]
+function renameOutfitNamePrompt.init(p0)
 	p0:setState({
 		outfitName = "",
 		alertPosition = UDim2.fromScale(0.5, 0.5)
 	})
 	
-	function p0.textUpdated(p1) --[[ line: 49 ]]
+	function p0.textUpdated(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ outfitName = p1 })
 	end
 	
-	function p0.confirmRenameOutfit() --[[ line: 55 ]]
+	function p0.confirmRenameOutfit()
 		-- upvalues: p0 (ref)
 		p0.props.performRenameOutfit(p0.state.outfitName)
 	end
 end
 
-function renameOutfitNamePrompt.render(p2) --[[ line: 60 ]]
+function renameOutfitNamePrompt.render(p2)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref), promptWithTextFieldModule (ref)
 	return if p2.props.showCustomOutfitNames then roactModule.createElement(promptWithTextFieldModule, {
 		fieldText = p2.state.outfitName,
@@ -89,22 +89,22 @@ function renameOutfitNamePrompt.render(p2) --[[ line: 60 ]]
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p6, _) --[[ line: 141 ]]
+return avatarEditorPromptsPolicyModule.connect(function(p6, _)
 	return { showCustomOutfitNames = p6.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p3) --[[ line: 119 | named "mapStateToProps" ]]
+end)(roactRoduxModule.connect(function(p3)
 	return {
 		outfitId = p3.promptInfo.outfitId,
 		outfitName = p3.promptInfo.outfitName,
 		screenSize = p3.screenSize
 	}
-end, function(p4) --[[ line: 127 | named "mapDispatchToProps" ]]
+end, function(p4)
 	-- upvalues: signalRenameOutfitPermissionDeniedModule (ref), performRenameOutfitModule (ref)
 	return {
-		signalRenameOutfitPermissionDenied = function() --[[ line: 129 ]]
+		signalRenameOutfitPermissionDenied = function()
 			-- upvalues: p4 (ref), signalRenameOutfitPermissionDeniedModule (copy)
 			return p4(signalRenameOutfitPermissionDeniedModule)
 		end,
-		performRenameOutfit = function(p5) --[[ line: 133 ]]
+		performRenameOutfit = function(p5)
 			-- upvalues: p4 (ref), performRenameOutfitModule (copy)
 			return p4(performRenameOutfitModule(p5))
 		end

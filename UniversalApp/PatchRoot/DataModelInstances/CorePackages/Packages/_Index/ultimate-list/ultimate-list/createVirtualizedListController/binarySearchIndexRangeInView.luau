@@ -4,10 +4,10 @@ local _ = require(var0.DataSources)
 local _ = require(var0.Dimensions)
 local exhaustiveMatchModule = require(var0.Util.exhaustiveMatch)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 8 | named "binarySearchIndexRangeInView" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: exhaustiveMatchModule (ref), dataSourceMethodsModule (ref)
 	local var7, var8, var9
-	local function compareInView(p5) --[[ line: 18 ]]
+	local function compareInView(p5)
 		-- upvalues: p4 (ref), exhaustiveMatchModule (copy), p2 (ref), p3 (ref)
 		local var16 = if p4 == "x" then p5.position.X.Offset elseif p4 == "y" then p5.position.Y.Offset else exhaustiveMatchModule(p4)
 		

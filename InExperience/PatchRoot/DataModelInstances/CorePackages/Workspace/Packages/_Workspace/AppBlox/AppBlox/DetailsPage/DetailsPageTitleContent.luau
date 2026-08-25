@@ -14,27 +14,27 @@ detailsPageTitleContent.validateProps = tModule.strictInterface({
 	verticalAlignment = tModule.optional(tModule.enum(Enum.VerticalAlignment))
 })
 
-function detailsPageTitleContent.init(p0) --[[ line: 27 ]]
+function detailsPageTitleContent.init(p0)
 	-- upvalues: getTextSize (ref)
 	p0.state = { containerWidth = nil }
 	
-	function p0.onContainerSizeChange(p1) --[[ line: 31 ]]
+	function p0.onContainerSizeChange(p1)
 		-- upvalues: p0 (ref)
-		p0:setState(function(_, _) --[[ line: 32 ]]
+		p0:setState(function(_, _)
 			-- upvalues: p1 (ref)
 			return { containerWidth = p1.AbsoluteSize.X }
 		end)
 	end
 	
-	function p0.getTextSize(p2, p3, p4) --[[ line: 38 ]]
+	function p0.getTextSize(p2, p3, p4)
 		-- upvalues: getTextSize (copy)
 		return getTextSize(p2, p3.RelativeSize * p4.Font.BaseSize, p3.Font, Vector2.new(10000, 10000))
 	end
 end
 
-function detailsPageTitleContent.render(p5) --[[ line: 46 ]]
+function detailsPageTitleContent.render(p5)
 	-- upvalues: withStyle (ref), roactModule (ref), styledTextLabel (ref)
-	return withStyle(function(p6) --[[ line: 47 ]]
+	return withStyle(function(p6)
 		-- upvalues: p5 (ref), roactModule (copy), styledTextLabel (copy)
 		local theme = p6.Theme
 		local font = p6.Font

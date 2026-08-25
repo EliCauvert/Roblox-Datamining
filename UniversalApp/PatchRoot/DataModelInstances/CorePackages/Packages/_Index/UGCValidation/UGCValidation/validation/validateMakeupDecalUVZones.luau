@@ -5,7 +5,7 @@ local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumu
 local validateMakeupZoneIncludeToleranceHundredthsPercent = game:DefineFastInt("ValidateMakeupZoneIncludeToleranceHundredthsPercent", 100)
 local validateMakeupZoneExcludeHundredthsPercent = game:DefineFastInt("ValidateMakeupZoneExcludeHundredthsPercent", 200)
 
-local function createIncludeError(p0, p1, p2) --[[ line: 21 ]]
+local function createIncludeError(p0, p1, p2)
 	-- upvalues: analyticsModule (ref)
 	local assetTypeEnum = p2.assetTypeEnum
 	analyticsModule.reportFailure(analyticsModule.ErrorType.validateMakeupDecal_UVZoneError, nil, p2)
@@ -15,7 +15,7 @@ local function createIncludeError(p0, p1, p2) --[[ line: 21 ]]
 	}
 end
 
-local function createExcludeError(p3, p4, p5) --[[ line: 36 ]]
+local function createExcludeError(p3, p4, p5)
 	-- upvalues: analyticsModule (ref)
 	local assetTypeEnum = p5.assetTypeEnum
 	analyticsModule.reportFailure(analyticsModule.ErrorType.validateMakeupDecal_UVZoneError, nil, p5)
@@ -25,7 +25,7 @@ local function createExcludeError(p3, p4, p5) --[[ line: 36 ]]
 	}
 end
 
-local function validateCoverageOutsideIncludeBounds(p6, p7, p8, p9, p10, p11) --[[ line: 52 ]]
+local function validateCoverageOutsideIncludeBounds(p6, p7, p8, p9, p10, p11)
 	-- upvalues: validateMakeupZoneIncludeToleranceHundredthsPercent (ref), createIncludeError (ref)
 	local var8 = (p9.X - p8.X) * (p9.Y - p8.Y) * validateMakeupZoneIncludeToleranceHundredthsPercent / 10000 * 255
 	local var9 = 0
@@ -48,7 +48,7 @@ local function validateCoverageOutsideIncludeBounds(p6, p7, p8, p9, p10, p11) --
 	return if var8 < var9 then createIncludeError(p6, p10, p11) else true
 end
 
-local function validateCoverageInsideExcludeBounds(p12, p13, p14, p15, p16, p17) --[[ line: 94 ]]
+local function validateCoverageInsideExcludeBounds(p12, p13, p14, p15, p16, p17)
 	-- upvalues: validateMakeupZoneExcludeHundredthsPercent (ref), createExcludeError (ref)
 	local var14 = (p15.X - p14.X) * (p15.Y - p14.Y) * validateMakeupZoneExcludeHundredthsPercent / 10000 * 255
 	local var15 = 0
@@ -71,7 +71,7 @@ local function validateCoverageInsideExcludeBounds(p12, p13, p14, p15, p16, p17)
 	return if var14 < var15 then createExcludeError(p12, p16, p17) else true
 end
 
-return function(p18, p19, p20, p21, p22) --[[ line: 135 | named "validateMakeupDecalUVZones" ]]
+return function(p18, p19, p20, p21, p22)
 	-- upvalues: failureReasonsAccumulatorModule (ref), validateCoverageOutsideIncludeBounds (ref), validateCoverageInsideExcludeBounds (ref)
 	local var20 = p20.UVMaxBound - p20.UVMinBound
 	local var21 = failureReasonsAccumulatorModule.new()

@@ -6,7 +6,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local itemCardIconModule = require(script.Parent.ItemCardIcon)
 local AXItemCardBadgeCheckText = game:DefineFastFlag("AXItemCardBadgeCheckText", false)
 
-return function(p0) --[[ line: 24 | named "ItemCardBadge" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), AXItemCardBadgeCheckText (ref), text (ref), itemCardIconModule (ref)
 	local var4 = useTokens()
 	local t = {

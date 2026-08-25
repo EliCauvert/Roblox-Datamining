@@ -17,19 +17,19 @@ local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScr
 local fFlagAXPartialPageModalBackgroundShim = avatarExperienceFlagsModule.FFlagAXPartialPageModalBackgroundShim
 local AXCatalogPartialPageModalBottomInsetMultiplier = game:DefineFastInt("AXCatalogPartialPageModalBottomInsetMultiplier", 25)
 
-local function selectDeviceOrientation(p0) --[[ line: 35 ]]
+local function selectDeviceOrientation(p0)
 	return p0.DeviceOrientation
 end
 
-local var9 = function(p1) --[[ line: 56 ]]
+local var9 = function(p1)
 	return p1.ScreenSize
 end
 
-local var10 = function(p2) --[[ line: 60 ]]
+local var10 = function(p2)
 	return if p2.GlobalGuiInset then p2.GlobalGuiInset.bottom else 0
 end
 
-return function(p3) --[[ line: 64 | named "AXPartialPageModal" ]]
+return function(p3)
 	-- upvalues: useTokens (ref), useSelector (ref), var9 (ref), reactModule (ref), fFlagAXFixAvatarScreenVR (ref), var10 (ref), useIsSpatial (ref), useAXPartialPageModalFocusHandlerModule (ref), AXPartialPageModalDockedPadding (ref), AXCatalogPartialPageModalBottomInsetMultiplier (ref), selectDeviceOrientation (ref), responsiveModule (ref), view (ref), button (ref), fillBehavior (ref), fFlagAXPartialPageModalBackgroundShim (ref), modalWindow (ref), wrapForReactPortalModule (ref)
 	local var11 = useTokens()
 	local var12 = useSelector(var9)
@@ -50,7 +50,7 @@ return function(p3) --[[ line: 64 | named "AXPartialPageModal" ]]
 	local var22 = useAXPartialPageModalFocusHandlerModule(var14)
 	
 	if fFlagAXFixAvatarScreenVR then
-		reactModule.useLayoutEffect(function() --[[ line: 84 ]]
+		reactModule.useLayoutEffect(function()
 			-- upvalues: var21 (ref), var15 (ref), var17 (write)
 			if not var21 then return end
 			local current = var15.current
@@ -61,7 +61,7 @@ return function(p3) --[[ line: 64 | named "AXPartialPageModal" ]]
 			if surfaceGui == nil then
 				return
 			end
-			local function syncSize() --[[ line: 98 ]]
+			local function syncSize()
 				-- upvalues: var17 (copy), surfaceGui (ref)
 				var17(surfaceGui.AbsoluteSize)
 			end
@@ -69,7 +69,7 @@ return function(p3) --[[ line: 64 | named "AXPartialPageModal" ]]
 			var17(surfaceGui.AbsoluteSize)
 			local var32 = surfaceGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(syncSize)
 			
-			return function() --[[ line: 104 ]]
+			return function()
 				-- upvalues: var32 (ref)
 				var32:Disconnect()
 			end
@@ -87,7 +87,7 @@ return function(p3) --[[ line: 64 | named "AXPartialPageModal" ]]
 	local textButton
 	local var24 = if p3.position then p3.position else nil
 	
-	local var25 = function() --[[ line: 134 ]]
+	local var25 = function()
 		-- upvalues: p3 (ref), reactModule (copy), view (copy), button (copy), fillBehavior (copy)
 		local t = {}
 		
@@ -113,7 +113,7 @@ return function(p3) --[[ line: 64 | named "AXPartialPageModal" ]]
 		return t
 	end
 	
-	local var26 = function() --[[ line: 164 ]]
+	local var26 = function()
 		-- upvalues: p3 (ref), reactModule (copy), button (copy), fillBehavior (copy)
 		local t = {}
 		

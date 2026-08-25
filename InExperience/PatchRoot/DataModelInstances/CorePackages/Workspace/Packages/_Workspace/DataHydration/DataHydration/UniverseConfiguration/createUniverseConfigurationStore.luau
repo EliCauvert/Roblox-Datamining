@@ -9,18 +9,18 @@ local getPrivacyTypeForAudiencesModule = require(script.Parent.getPrivacyTypeFor
 local _ = require(script.Parent.UniverseConfigurationStoreTypes)
 local fFlagBuildExperienceShareUseUniverseSummary = sharedFlagsModule.FFlagBuildExperienceShareUseUniverseSummary
 
-return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
+return function(p0)
 	-- upvalues: createSingleEntityResolverModule (ref), fetchUniverseConfigurationModule (ref), cryoModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), getPrivacyTypeForAudiencesModule (ref)
 	p0 = p0 or {}
 	local t = { network = p0.network, baseUrl = p0.baseUrl }
 	local var8 = 0
 	local t_1 = {}
-	local var10 = createSingleEntityResolverModule(function(p1) --[[ line: 33 ]]
+	local var10 = createSingleEntityResolverModule(function(p1)
 		-- upvalues: var8 (write), fetchUniverseConfigurationModule (copy), t (ref), t_1 (write), cryoModule (copy)
 		var8 += 1
 		local var14 = var8
 		
-		return fetchUniverseConfigurationModule.fetchSummary(p1, t):andThen(function(p2) --[[ line: 36 ]]
+		return fetchUniverseConfigurationModule.fetchSummary(p1, t):andThen(function(p2)
 			-- upvalues: t_1 (copy), p1 (ref), var14 (ref), cryoModule (copy)
 			local var15 = t_1[p1]
 			
@@ -34,16 +34,16 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 			return p2
 		end)
 	end)
-	local var11 = createSingleEntityResolverModule(function(p3) --[[ line: 49 ]]
+	local var11 = createSingleEntityResolverModule(function(p3)
 		-- upvalues: fetchUniverseConfigurationModule (copy), t (ref)
 		return fetchUniverseConfigurationModule.fetchConfiguration(p3, t)
 	end)
-	local var12 = createSingleEntityResolverModule(function(p4) --[[ line: 52 ]]
+	local var12 = createSingleEntityResolverModule(function(p4)
 		-- upvalues: fetchUniverseConfigurationModule (copy), t (ref)
 		return fetchUniverseConfigurationModule.fetchTeamCreate(p4, t)
 	end)
 	
-	local function getSummaryPatch(p5) --[[ line: 56 ]]
+	local function getSummaryPatch(p5)
 		-- upvalues: fFlagBuildExperienceShareUseUniverseSummary (copy), getPrivacyTypeForAudiencesModule (copy)
 		local t = {}
 		
@@ -66,9 +66,9 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 	return {
 		getSummary = var10.get,
 		fetchSummary = var10.fetch,
-		refreshSummary = function(p6) --[[ line: 101 ]]
+		refreshSummary = function(p6)
 			-- upvalues: fetchUniverseConfigurationModule (copy), t (ref), var10 (ref)
-			return fetchUniverseConfigurationModule.fetchSummary(p6, t):andThen(function(p7) --[[ line: 102 ]]
+			return fetchUniverseConfigurationModule.fetchSummary(p6, t):andThen(function(p7)
 				-- upvalues: var10 (copy), p6 (ref)
 				var10.cache.replaceItem(tostring(p6), p7)
 				
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 			end)
 		end,
 		getAndFetchSummary = var10.getAndFetch,
-		updateSummary = function(p8, p9) --[[ line: 89 ]]
+		updateSummary = function(p8, p9)
 			-- upvalues: var10 (ref), cryoModule (copy)
 			local var17 = var10.get(p8).data(false)
 			
@@ -87,9 +87,9 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 		end,
 		getConfiguration = var11.get,
 		fetchConfiguration = var11.fetch,
-		refreshConfiguration = function(p10) --[[ line: 108 ]]
+		refreshConfiguration = function(p10)
 			-- upvalues: fetchUniverseConfigurationModule (copy), t (ref), var11 (ref)
-			return fetchUniverseConfigurationModule.fetchConfiguration(p10, t):andThen(function(p11) --[[ line: 111 ]]
+			return fetchUniverseConfigurationModule.fetchConfiguration(p10, t):andThen(function(p11)
 				-- upvalues: var11 (copy), p10 (ref)
 				var11.cache.replaceItem(tostring(p10), p11)
 				
@@ -97,7 +97,7 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 			end)
 		end,
 		getAndFetchConfiguration = var11.getAndFetch,
-		updateConfiguration = function(p12, p13) --[[ line: 79 ]]
+		updateConfiguration = function(p12, p13)
 			-- upvalues: var11 (ref), cryoModule (copy)
 			local var18 = var11.get(p12).data(false)
 			
@@ -106,9 +106,9 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 			end
 			var11.update(p12, cryoModule.Dictionary.join(var18, p13))
 		end,
-		patchConfiguration = function(p14, p15) --[[ line: 117 ]]
+		patchConfiguration = function(p14, p15)
 			-- upvalues: fetchUniverseConfigurationModule (copy), t (ref), var11 (ref), getSummaryPatch (ref), var10 (ref), t_1 (write), var8 (write), cryoModule (copy)
-			return fetchUniverseConfigurationModule.patchConfiguration(p14, p15, t):andThen(function(p16) --[[ line: 123 ]]
+			return fetchUniverseConfigurationModule.patchConfiguration(p14, p15, t):andThen(function(p16)
 				-- upvalues: var11 (copy), p14 (ref), p15 (ref), getSummaryPatch (copy), var10 (copy), t_1 (copy), var8 (copy), cryoModule (copy)
 				var11.update(p14, p16)
 				var11.update(p14, p15)
@@ -129,16 +129,16 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 		getTeamCreate = var12.get,
 		fetchTeamCreate = var12.fetch,
 		getAndFetchTeamCreate = var12.getAndFetch,
-		setTeamCreate = function(value, p17) --[[ line: 140 ]]
+		setTeamCreate = function(value, p17)
 			-- upvalues: fetchUniverseConfigurationModule (copy), t (ref), var12 (ref)
-			return fetchUniverseConfigurationModule.setTeamCreate(value, p17, t):andThen(function(p18) --[[ line: 141 ]]
+			return fetchUniverseConfigurationModule.setTeamCreate(value, p17, t):andThen(function(p18)
 				-- upvalues: var12 (copy), value (ref)
 				var12.update(value, p18)
 				
 				return p18
 			end)
 		end,
-		clear = function() --[[ line: 147 ]]
+		clear = function()
 			-- upvalues: var8 (write), t_1 (write), var10 (ref), var11 (ref), var12 (ref)
 			var8 = 0
 			t_1 = {}
@@ -146,7 +146,7 @@ return function(p0) --[[ line: 27 | named "createUniverseConfigurationStore" ]]
 			var11.clear()
 			var12.clear()
 		end,
-		dispose = function() --[[ line: 155 ]]
+		dispose = function()
 			-- upvalues: var10 (ref), var11 (ref), var12 (ref)
 			var10.dispose()
 			var11.dispose()

@@ -10,7 +10,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
 local robux = images["icons/common/robux"]
 
-return function(p0) --[[ line: 27 | named "PriceFooter" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), imageSetLabel (ref), robux (ref)
 	local var5 = useStyle()
 	local font = var5.Font

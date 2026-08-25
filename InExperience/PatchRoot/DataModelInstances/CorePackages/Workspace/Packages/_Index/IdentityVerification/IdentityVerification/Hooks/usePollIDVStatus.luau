@@ -12,25 +12,25 @@ local var7 = getFIntIDVPollDelayModule()
 local var8 = getFIntIDVMaxRetriesModule()
 local var9 = getFFlagIDVGuardStartPollingAfterUnmountModule()
 
-local function _(p0) --[[ line: 31 | named "isFailure" ]]
+local function _(p0)
 	-- upvalues: IDVSessionStatusEnum (ref)
 	return if p0 ~= IDVSessionStatusEnum.RequiresManualReview then if p0 ~= IDVSessionStatusEnum.RequiresRetry then p0 == IDVSessionStatusEnum.Expired else true else true
 end
 
-return function(p1) --[[ line: 37 | named "usePollIDVStatus" ]]
+return function(p1)
 	-- upvalues: var8 (ref), var7 (ref), reactModule (ref), IDVSessionStatusEnum (ref), IDVApiProviderModule (ref), IDVSessionErrorEnum (ref), promiseModule (ref), var9 (ref)
 	local retries = p1.retries or var8
 	local delay = p1.delay or var7
 	local onStatusUpdate = p1.onStatusUpdate
 	local var12 = nil
-	var12 = reactModule.useCallback(function(p2, p3, p4, p5) --[[ line: 44 ]]
+	var12 = reactModule.useCallback(function(p2, p3, p4, p5)
 		-- upvalues: IDVSessionStatusEnum (copy), IDVApiProviderModule (copy), onStatusUpdate (ref), IDVSessionErrorEnum (copy), delay (ref), var12 (write)
 		if p3 == 0 then
 			p5({ sessionStatus = IDVSessionStatusEnum.Expired })
 			
 			return
 		end
-		IDVApiProviderModule.getVerifiedStatus(p2):andThen(function(p6) --[[ line: 51 ]]
+		IDVApiProviderModule.getVerifiedStatus(p2):andThen(function(p6)
 			-- upvalues: onStatusUpdate (copy), p3 (ref), IDVSessionStatusEnum (copy), IDVSessionErrorEnum (copy), p5 (ref), p4 (ref), delay (copy), var12 (copy), p2 (ref)
 			local isVerified = p6.isVerified
 			local sessionStatus = p6.sessionStatus
@@ -47,7 +47,7 @@ return function(p1) --[[ line: 37 | named "usePollIDVStatus" ]]
 				
 				return
 			end
-			task.spawn(function() --[[ line: 71 ]]
+			task.spawn(function()
 				-- upvalues: delay (copy), var12 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy)
 				task.wait(delay)
 				
@@ -55,15 +55,15 @@ return function(p1) --[[ line: 37 | named "usePollIDVStatus" ]]
 					var12(p2, p3 - 1, p4, p5)
 				end
 			end)
-		end):catch(function(_) --[[ line: 79 ]]
+		end):catch(function(_)
 			-- upvalues: p5 (ref), IDVSessionStatusEnum (copy)
 			p5({ sessionStatus = IDVSessionStatusEnum.RequiresRetry })
 		end)
 	end, { delay, onStatusUpdate })
 	
-	return reactModule.useCallback(function(p7) --[[ line: 84 ]]
+	return reactModule.useCallback(function(p7)
 		-- upvalues: promiseModule (copy), var9 (copy), var12 (write), retries (ref)
-		return promiseModule.new(function(p8, p9) --[[ line: 85 ]]
+		return promiseModule.new(function(p8, p9)
 			-- upvalues: var9 (copy), var12 (copy), p7 (ref), retries (copy)
 			if not var9 then
 				var12(p7, retries, p8, p9)
@@ -76,7 +76,7 @@ return function(p1) --[[ line: 37 | named "usePollIDVStatus" ]]
 			end
 			p8()
 		end)
-	end, { var12, retries }), reactModule.useCallback(function() --[[ line: 98 ]]
+	end, { var12, retries }), reactModule.useCallback(function()
 		-- upvalues: var12 (write)
 		var12 = nil
 	end, {})

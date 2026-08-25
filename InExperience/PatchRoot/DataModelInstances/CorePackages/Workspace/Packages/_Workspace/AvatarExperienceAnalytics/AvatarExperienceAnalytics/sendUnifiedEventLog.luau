@@ -8,7 +8,7 @@ local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlag
 local fFlagAXDebugPanelImpressed = avatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
 local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInStudio", false)
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: fFlagAXDebugPanelImpressed (ref), debugPanelModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), AXSendUnifiedEventsInStudio (ref), analyticsServiceModule (ref)
 	if fFlagAXDebugPanelImpressed then
 		debugPanelModule.AnalyticsFeed.notify({

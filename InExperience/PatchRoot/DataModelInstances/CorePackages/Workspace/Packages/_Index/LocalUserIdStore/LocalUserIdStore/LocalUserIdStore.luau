@@ -3,7 +3,7 @@
 return {
 	getCurrentUserId = var0,
 	setCurrentUserId = var1,
-	reset = function() --[[ line: 26 ]]
+	reset = function()
 		-- upvalues: var1 (ref)
 		var1("")
 	end

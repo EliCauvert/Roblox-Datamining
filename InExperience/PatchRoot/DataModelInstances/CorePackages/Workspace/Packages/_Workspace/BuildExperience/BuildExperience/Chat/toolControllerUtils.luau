@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
 
 return {
-	awaitRequestState = function(p0, p1) --[[ line: 14 ]]
+	awaitRequestState = function(p0, p1)
 		while p0(false).status == "pending" do
 			if p1 > os.clock() then
 				task.wait()
@@ -11,7 +11,7 @@ return {
 		end
 		return p0(false)
 	end,
-	getToolCallOrder = function(p2, p3) --[[ line: 25 ]]
+	getToolCallOrder = function(p2, p3)
 		for i, v in p2.activityItems do
 			if v.kind == "tool_call" and v.toolCallId == p3 then
 				return i

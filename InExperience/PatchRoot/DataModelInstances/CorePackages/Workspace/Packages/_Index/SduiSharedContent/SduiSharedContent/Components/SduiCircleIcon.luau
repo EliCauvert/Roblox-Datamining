@@ -5,7 +5,7 @@ local _ = require(parent.SduiCompat)
 local sduiViewModule = require(script.Parent.SduiView)
 local sduiIconModule = require(script.Parent.SduiIcon)
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "SduiCircleIcon" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), sduiViewModule (ref), sduiIconModule (ref)
 	return reactModule.createElement(sduiViewModule, {
 		tag = "radius-circle align-x-center align-y-center aspect-1-1",

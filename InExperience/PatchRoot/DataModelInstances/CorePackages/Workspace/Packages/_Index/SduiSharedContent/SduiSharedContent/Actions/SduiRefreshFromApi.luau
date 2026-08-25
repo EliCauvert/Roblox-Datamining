@@ -6,7 +6,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1) --[[ line: 17 ]]
+return function(p0, _, p1)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiLoadTimer (ref), getSduiApiStore (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	
@@ -36,7 +36,7 @@ return function(p0, _, p1) --[[ line: 17 ]]
 		local var3 = sduiLoadTimer.createLoadTimer(surfaceKey)
 		var3.start("refresh")
 		
-		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = var3 }):finally(function() --[[ line: 59 ]]
+		return getSduiApiStore().refreshFromApi({ configKey = configKey, loadTimer = var3 }):finally(function()
 			-- upvalues: var3 (ref)
 			var3.logRefreshComplete()
 		end)

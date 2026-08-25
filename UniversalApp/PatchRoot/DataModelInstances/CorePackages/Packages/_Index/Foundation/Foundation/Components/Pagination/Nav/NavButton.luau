@@ -22,12 +22,12 @@ local t = {
 	}
 }
 
-local function _(p0) --[[ line: 43 | named "getInputSize" ]]
+local function _(p0)
 	-- upvalues: paginationSizeModule (ref), inputSizeModule (ref)
 	return if p0 == paginationSizeModule.Small then inputSizeModule.XSmall else inputSizeModule.Small
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 60 | named "NavButton" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: t (ref), reactModule (ref), iconButtonModule (ref), paginationSizeModule (ref), inputSizeModule (ref), buttonVariantModule (ref)
 	local direction = t[p1.direction]
 	
@@ -40,7 +40,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 60 | 
 		size = if p1.slotSize == paginationSizeModule.Small then inputSizeModule.XSmall else inputSizeModule.Small,
 		variant = buttonVariantModule.Utility,
 		isDisabled = p1.isDisabled,
-		onActivated = reactModule.useCallback(function() --[[ line: 64 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: p1 (ref)
 			p1.onDirectionActivated(p1.direction)
 		end, { p1.onDirectionActivated, p1.direction }),

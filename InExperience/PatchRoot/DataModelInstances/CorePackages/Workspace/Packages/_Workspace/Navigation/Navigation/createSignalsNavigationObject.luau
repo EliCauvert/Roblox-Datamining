@@ -11,7 +11,7 @@ local fFlagSignalsNavP2NavigationPrimitives = require(parent.SharedFlags).FFlagS
 local dEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 local _ = require(script.Parent.types)
 
-local function _(p0, p1, p2) --[[ line: 28 | named "makeEvent" ]]
+local function _(p0, p1, p2)
 	-- upvalues: events (ref)
 	return table.freeze({
 		type = events.Action,
@@ -21,20 +21,20 @@ local function _(p0, p1, p2) --[[ line: 28 | named "makeEvent" ]]
 	})
 end
 
-return function(value) --[[ line: 37 | named "createSignalsNavigationObject" ]]
+return function(value)
 	-- upvalues: createSignal (ref), fFlagSignalsNavP2NavigationPrimitives (ref), actions (ref), events (ref), dEV (ref), signalsExperimentalModule (ref), createComputed (ref), getNavigation (ref)
 	local t = {}
 	local t_1 = {}
 	local var6, var7 = createSignal(false)
 	
-	local function _(p3) --[[ line: 42 | named "notifySubscribers" ]]
+	local function _(p3)
 		-- upvalues: t (ref)
 		for i in t do
 			task.spawn(i, p3)
 		end
 	end
 	
-	local function notifyEvents() --[[ line: 48 ]]
+	local function notifyEvents()
 		-- upvalues: fFlagSignalsNavP2NavigationPrimitives (copy), var7 (ref), t_1 (write), t (ref)
 		if fFlagSignalsNavP2NavigationPrimitives then
 			var7(false)
@@ -48,7 +48,7 @@ return function(value) --[[ line: 37 | named "createSignalsNavigationObject" ]]
 		end
 	end
 	
-	local var9, var10 = createSignal(function() --[[ line: 59 ]]
+	local var9, var10 = createSignal(function()
 		-- upvalues: actions (copy), value (ref), events (copy), t_1 (write)
 		local var14 = actions.init()
 		local stateForAction = value.getStateForAction(var14)
@@ -62,7 +62,7 @@ return function(value) --[[ line: 37 | named "createSignalsNavigationObject" ]]
 		return stateForAction
 	end)
 	
-	local function dispatch(p4) --[[ line: 67 ]]
+	local function dispatch(p4)
 		-- upvalues: dEV (copy), fFlagSignalsNavP2NavigationPrimitives (copy), var7 (ref), var10 (ref), value (ref), actions (copy), var9 (ref), events (copy), t (ref), t_1 (write), signalsExperimentalModule (copy)
 		if dEV and p4.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
 			if fFlagSignalsNavP2NavigationPrimitives then
@@ -91,7 +91,7 @@ return function(value) --[[ line: 37 | named "createSignalsNavigationObject" ]]
 				table.insert(t_1, frozen)
 				
 				if fFlagSignalsNavP2NavigationPrimitives then
-					signalsExperimentalModule.batch(function() --[[ line: 88 ]]
+					signalsExperimentalModule.batch(function()
 						-- upvalues: var7 (copy), var10 (copy), stateForAction_1 (ref)
 						var7(true)
 						var10(stateForAction_1)
@@ -104,15 +104,15 @@ return function(value) --[[ line: 37 | named "createSignalsNavigationObject" ]]
 		end
 	end
 	
-	local var12 = function() --[[ line: 98 ]]
+	local var12 = function()
 		return nil
 	end
 	
-	local var13 = createComputed(function(p5) --[[ line: 102 ]]
+	local var13 = createComputed(function(p5)
 		-- upvalues: var9 (ref), getNavigation (copy), value (ref), dispatch (ref), t (ref), var12 (write)
-		return getNavigation(value, var9(p5), dispatch, t, function(_, p6) --[[ line: 104 ]]
+		return getNavigation(value, var9(p5), dispatch, t, function(_, p6)
 			return p6
-		end, function() --[[ line: 106 ]]
+		end, function()
 			-- upvalues: var12 (copy)
 			return var12()
 		end)

@@ -3,7 +3,7 @@ local _ = require(foundation.Components.Types)
 local reactModule = require(foundation.Parent.React)
 local tileContextModule = require(script.Parent.TileContext)
 
-return function() --[[ line: 17 ]]
+return function()
 	-- upvalues: reactModule (ref), tileContextModule (ref)
 	return reactModule.useContext(tileContextModule)
 end

@@ -1,7 +1,7 @@
 ﻿local noneModule = require(script.Parent.Parent.None)
 local copyDeepModule = require(script.Parent.copyDeep)
 
-local function joinDeep(...) --[[ line: 5 ]]
+local function joinDeep(...)
 	-- upvalues: noneModule (ref), copyDeepModule (ref), joinDeep (ref)
 	local t = {}
 	

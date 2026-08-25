@@ -18,7 +18,7 @@ local socialNetworksInEditProfileIXPModule = require(editProfile.Flags.SocialNet
 local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlagEditProfileFixFocusNavigation)
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 
-return function(p0) --[[ line: 41 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), constantsModule (ref), useLocalization (ref), textKeysModule (ref), useNavigationProps (ref), socialNetworksInEditProfileIXPModule (ref), useStyle (ref), useScreenSize (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), verticalScrollView (ref), interactiveAlert (ref), editSocialNetworksItemModule (ref), dropdownMenu (ref), buttonType (ref)
 	local var9, var10 = reactModule.useState(p0.socialNetworks.facebook)
 	local var11, var12 = reactModule.useState(p0.socialNetworks.twitter)
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 41 ]]
 		FriendsAndFollowing = textKeysModule.FriendsAndFollowingDropDown,
 		VisibleTo = textKeysModule.VisibleTo
 	})
-	local var25 = useNavigationProps(function(_, p1) --[[ line: 71 ]]
+	local var25 = useNavigationProps(function(_, p1)
 		return { focusOn = p1.focusOn }
 	end)
 	local var26 = socialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
@@ -59,12 +59,12 @@ return function(p0) --[[ line: 41 ]]
 	local var28 = font.BaseSize * font.Body.RelativeSize
 	local var29 = useScreenSize()
 	
-	local function onSave() --[[ line: 85 ]]
+	local function onSave()
 		-- upvalues: p0 (ref), var19 (ref), var9 (ref), var11 (ref), var13 (ref), var15 (ref), var17 (ref)
 		p0.saveOnActivated(var19, var9, var11, var13, var15, var17)
 	end
 	
-	local var31 = reactModule.useCallback(function(p2) --[[ line: 89 ]]
+	local var31 = reactModule.useCallback(function(p2)
 		-- upvalues: var20 (ref)
 		var20(p2)
 	end, {})
@@ -80,7 +80,7 @@ return function(p0) --[[ line: 41 ]]
 				screenSize = var29,
 				anchorPoint = Vector2.new(0.5, 0),
 				position = UDim2.new(0.5, 0, 0, 30 + var21),
-				middleContent = function() --[[ line: 107 ]]
+				middleContent = function()
 					-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var10 (ref), var24 (ref), var9 (ref), var26 (ref), socialNetworksInEditProfileIXPModule (copy), var25 (ref), var23 (ref), var22 (ref), var12 (ref), var11 (ref), var14 (ref), var13 (ref), var16 (ref), var15 (ref), var18 (ref), var17 (ref), font (ref), var28 (ref), theme (ref), dropdownMenu (copy), var19 (ref), var31 (ref), var29 (ref), constantsModule (copy)
 					return reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
@@ -229,7 +229,7 @@ return function(p0) --[[ line: 41 ]]
 			screenSize = var29,
 			anchorPoint = Vector2.new(0.5, 0),
 			position = UDim2.new(0.5, 0, 0, 30 + var21),
-			middleContent = function() --[[ line: 290 ]]
+			middleContent = function()
 				-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var10 (ref), var24 (ref), var9 (ref), var26 (ref), socialNetworksInEditProfileIXPModule (copy), var25 (ref), var23 (ref), var22 (ref), var12 (ref), var11 (ref), var14 (ref), var13 (ref), var16 (ref), var15 (ref), var18 (ref), var17 (ref), font (ref), var28 (ref), theme (ref), dropdownMenu (copy), var19 (ref), var31 (ref), var29 (ref), constantsModule (copy)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

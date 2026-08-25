@@ -19,7 +19,7 @@ local t_1 = {
 	[privacyType.Private] = privacyType.Private
 }
 
-local function getAudience(p0) --[[ line: 38 ]]
+local function getAudience(p0)
 	-- upvalues: t_1 (ref), universeConfigurationModule (ref)
 	if p0 == nil then
 		return nil
@@ -31,7 +31,7 @@ local function getAudience(p0) --[[ line: 38 ]]
 	return if privacyType == nil then nil else t_1[privacyType]
 end
 
-local function getAudienceText(p1) --[[ line: 53 ]]
+local function getAudienceText(p1)
 	-- upvalues: t_1 (ref), universeConfigurationModule (ref), fFlagBuildLocalization (ref), t (ref), GAME_CONFIGURATION_AUDIENCE_UNKNOWN (ref)
 	local privacyTypeForAudiences
 	if p1 == nil then
@@ -47,7 +47,7 @@ local function getAudienceText(p1) --[[ line: 53 ]]
 	return if fFlagBuildLocalization then if privacyTypeForAudiences == nil then nil else t[privacyTypeForAudiences] elseif privacyTypeForAudiences == nil then GAME_CONFIGURATION_AUDIENCE_UNKNOWN else t[privacyTypeForAudiences]
 end
 
-local function _(p2) --[[ line: 66 | named "getDescriptorDisplayName" ]]
+local function _(p2)
 	local experienceDescriptorUsages = p2 and p2.experienceDescriptorUsages
 	local items = experienceDescriptorUsages and experienceDescriptorUsages.items
 	local var12 = items and items[1]
@@ -56,7 +56,7 @@ local function _(p2) --[[ line: 66 | named "getDescriptorDisplayName" ]]
 	return if descriptorDisplayName == nil or descriptorDisplayName == "" then nil else descriptorDisplayName
 end
 
-local function getContentRatingText(p3) --[[ line: 74 ]]
+local function getContentRatingText(p3)
 	local ageRecommendationDetails = p3 and p3.ageRecommendationDetails
 	local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
 	local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
@@ -87,7 +87,7 @@ return {
 	getAudience = getAudience,
 	getAudienceText = getAudienceText,
 	getContentRatingText = getContentRatingText,
-	getContentMaturityText = function(p4, p5, p6) --[[ line: 108 ]]
+	getContentMaturityText = function(p4, p5, p6)
 		-- upvalues: getContentRatingText (ref)
 		if p6 then
 			local ageRecommendationDetails = p5 and p5.ageRecommendationDetails
@@ -108,7 +108,7 @@ return {
 			return if var30 == nil then var26 else `{var26} - {var30}`
 		end
 	end,
-	getProvisionalRatingText = function(p7) --[[ line: 92 ]]
+	getProvisionalRatingText = function(p7)
 		local ageRecommendationDetails = p7 and p7.ageRecommendationDetails
 		local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
 		local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
@@ -116,7 +116,7 @@ return {
 		
 		return if displayName == nil or displayName == "" then nil else displayName
 	end,
-	getProvisionalRatingDescriptor = function(p8) --[[ line: 100 ]]
+	getProvisionalRatingDescriptor = function(p8)
 		local ageRecommendationDetails = p8 and p8.ageRecommendationDetails
 		local experienceDescriptorUsages = ageRecommendationDetails and ageRecommendationDetails.experienceDescriptorUsages
 		local var37 = experienceDescriptorUsages and experienceDescriptorUsages[1]

@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 37 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	
@@ -16,11 +16,11 @@ function t.new(p0) --[[ line: 37 ]]
 	return tbl
 end
 
-function t:_setMetadata(p1, p2, p3) --[[ line: 50 ]]
+function t:_setMetadata(p1, p2, p3)
 	self._sessionService:SetMetadata(p1, p2, p3)
 end
 
-function t:OpenExperienceMenu(p4) --[[ line: 54 ]]
+function t:OpenExperienceMenu(p4)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(sessionTypeModule.StructuralIdentifier.Level2a, sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.Tag.level3.ExperienceMenu)
 	
@@ -31,20 +31,20 @@ function t:OpenExperienceMenu(p4) --[[ line: 54 ]]
 	end
 end
 
-function t:CloseExperienceMenu() --[[ line: 67 ]]
+function t:CloseExperienceMenu()
 	-- upvalues: sessionTypeModule (ref)
 	self:CloseOpenedMenuTab()
 	self._sessionService:RemoveSession(sessionTypeModule.StructuralIdentifier.ExperienceMenu)
 end
 
-function t:CloseOpenedMenuTab() --[[ line: 72 ]]
+function t:CloseOpenedMenuTab()
 	if self._currentMenuTab then
 		self._sessionService:RemoveSession(self._currentMenuTab)
 		self._currentMenuTab = nil
 	end
 end
 
-function t:OpenPeopleTab(p5, p6) --[[ line: 79 ]]
+function t:OpenPeopleTab(p5, p6)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p5 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.PeopleTab, sessionTypeModule.Tag.level3.PeopleTab)
 	
@@ -56,7 +56,7 @@ function t:OpenPeopleTab(p5, p6) --[[ line: 79 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.PeopleTab
 end
 
-function t:OpenSettingsTab(p7, p8) --[[ line: 91 ]]
+function t:OpenSettingsTab(p7, p8)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p7 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.SettingsTab, sessionTypeModule.Tag.level3.SettingsTab)
 	
@@ -68,7 +68,7 @@ function t:OpenSettingsTab(p7, p8) --[[ line: 91 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.SettingsTab
 end
 
-function t:OpenCapturesTab(p9, p10) --[[ line: 107 ]]
+function t:OpenCapturesTab(p9, p10)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p9 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.CapturesTab, sessionTypeModule.Tag.level3.CapturesTab)
 	
@@ -80,7 +80,7 @@ function t:OpenCapturesTab(p9, p10) --[[ line: 107 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.CapturesTab
 end
 
-function t:OpenReportTab(p11, p12) --[[ line: 123 ]]
+function t:OpenReportTab(p11, p12)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p11 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.ReportTab, sessionTypeModule.Tag.level3.ReportTab)
 	
@@ -92,7 +92,7 @@ function t:OpenReportTab(p11, p12) --[[ line: 123 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.ReportTab
 end
 
-function t:OpenHelpTab(p13, p14) --[[ line: 135 ]]
+function t:OpenHelpTab(p13, p14)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p13 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.HelpTab, sessionTypeModule.Tag.level3.HelpTab)
 	
@@ -104,7 +104,7 @@ function t:OpenHelpTab(p13, p14) --[[ line: 135 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.HelpTab
 end
 
-function t:OpenLeaveExperience(p15, p16) --[[ line: 147 ]]
+function t:OpenLeaveExperience(p15, p16)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p15 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.LeaveExperience, sessionTypeModule.Tag.level3.LeaveExperience)
 	
@@ -116,7 +116,7 @@ function t:OpenLeaveExperience(p15, p16) --[[ line: 147 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.LeaveExperience
 end
 
-function t:OpenResetCharacter(p17, p18) --[[ line: 163 ]]
+function t:OpenResetCharacter(p17, p18)
 	-- upvalues: sessionTypeModule (ref)
 	self._sessionService:SetSession(p17 or sessionTypeModule.StructuralIdentifier.ExperienceMenu, sessionTypeModule.StructuralIdentifier.ResetCharacter, sessionTypeModule.Tag.level3.ResetCharacter)
 	
@@ -128,7 +128,7 @@ function t:OpenResetCharacter(p17, p18) --[[ line: 163 ]]
 	self._currentMenuTab = sessionTypeModule.StructuralIdentifier.ResetCharacter
 end
 
-function t:MenuSwitchToPage(p19) --[[ line: 179 ]]
+function t:MenuSwitchToPage(p19)
 	if p19 == nil then return end
 	self:CloseOpenedMenuTab()
 	local name = p19.Name

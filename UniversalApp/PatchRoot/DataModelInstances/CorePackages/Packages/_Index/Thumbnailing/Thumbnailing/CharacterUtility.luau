@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-local function getHeadAttachments(p0) --[[ line: 11 ]]
+local function getHeadAttachments(p0)
 	local t = {}
 	local head = p0:FindFirstChild("Head")
 	
@@ -14,15 +14,15 @@ local function getHeadAttachments(p0) --[[ line: 11 ]]
 	return t
 end
 
-local function _(p1, p2, p3, p4, p5) --[[ line: 32 | named "makeRotatedCorner" ]]
+local function _(p1, p2, p3, p4, p5)
 	return p5 * Vector3.new(p1 * p4.X, p2 * p4.Y, p3 * p4.Z)
 end
 
-local function growExtentsToIncludePoint(p6, p7, p8) --[[ line: 41 ]]
+local function growExtentsToIncludePoint(p6, p7, p8)
 	return Vector3.new(math.min(p8.X, p6.X), math.min(p8.Y, p6.Y), math.min(p8.Z, p6.Z)), Vector3.new(math.max(p8.X, p7.X), math.max(p8.Y, p7.Y), math.max(p8.Z, p7.Z))
 end
 
-local function growExtentsToInclude(p9, p10, p11, p12, p13, p14) --[[ line: 68 ]]
+local function growExtentsToInclude(p9, p10, p11, p12, p13, p14)
 	-- upvalues: growExtentsToIncludePoint (ref)
 	local var7 = p11.Size / 2
 	local _ = nil
@@ -45,11 +45,11 @@ local function growExtentsToInclude(p9, p10, p11, p12, p13, p14) --[[ line: 68 ]
 	return p9, p10
 end
 
-local _ = function() --[[ line: 103 | named "initExtents" ]]
+local _ = function()
 	return Vector3.new(1e999, 1e999, 1e999), Vector3.new(-1e999, -1e999, -1e999)
 end
 
-local function recursiveCalculateExtents(p15, p16, p17, p18, p19) --[[ line: 118 ]]
+local function recursiveCalculateExtents(p15, p16, p17, p18, p19)
 	-- upvalues: growExtentsToInclude (ref), recursiveCalculateExtents (ref)
 	if not p19 then
 		p19 = ""
@@ -70,14 +70,14 @@ local function recursiveCalculateExtents(p15, p16, p17, p18, p19) --[[ line: 118
 	return p15, p16
 end
 
-function t.CalculateModelExtents(p20, p21) --[[ line: 145 ]]
+function t.CalculateModelExtents(p20, p21)
 	-- upvalues: recursiveCalculateExtents (ref)
 	local var16, var17 = recursiveCalculateExtents(Vector3.new(1e999, 1e999, 1e999), Vector3.new(-1e999, -1e999, -1e999), p20, p21:Inverse(), "  ")
 	
 	return var16, var17
 end
 
-function t.CalculateHeadExtents(p22, p23) --[[ line: 160 ]]
+function t.CalculateHeadExtents(p22, p23)
 	-- upvalues: growExtentsToInclude (ref), getHeadAttachments (ref)
 	local var18 = Vector3.new(1e999, 1e999, 1e999)
 	local var19 = Vector3.new(-1e999, -1e999, -1e999)
@@ -111,7 +111,7 @@ function t.CalculateHeadExtents(p22, p23) --[[ line: 160 ]]
 	return var25, var26
 end
 
-function t.CalculateBodyPartsExtents(p24, p25) --[[ line: 201 ]]
+function t.CalculateBodyPartsExtents(p24, p25)
 	-- upvalues: growExtentsToInclude (ref)
 	local var32 = Vector3.new(1e999, 1e999, 1e999)
 	local var33 = Vector3.new(-1e999, -1e999, -1e999)
@@ -125,7 +125,7 @@ function t.CalculateBodyPartsExtents(p24, p25) --[[ line: 201 ]]
 	return var32, var33
 end
 
-function t.AllocateDebugExtentParts() --[[ line: 217 ]]
+function t.AllocateDebugExtentParts()
 	local t = {}
 	
 	for i = 1, 8 do
@@ -141,7 +141,7 @@ function t.AllocateDebugExtentParts() --[[ line: 217 ]]
 	return t
 end
 
-function t.PositionDebugExtentParts(p26, p27, p28, p29) --[[ line: 237 ]]
+function t.PositionDebugExtentParts(p26, p27, p28, p29)
 	for i_2 = 0, 1 do
 		for i_1 = 0, 1 do
 			for i = 0, 1 do

@@ -13,7 +13,7 @@ local t = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p0) --[[ line: 33 | named "IpReportConfirmationDialog" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), view (ref), text (ref)
 	local var4 = useLocalization(t)
 	

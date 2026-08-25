@@ -16,9 +16,9 @@ local unknownModule = require(parent:FindFirstChild("ChildIsScreenRouterSymbol.r
 local unknownModule_1 = require(parent:FindFirstChild("NullPathSymbol.roblox"))
 local decodeURIComponentModule = require(parent.decodeURIComponent)
 local t = {
-	getParamsFromPath = function(p0, p1, p2) --[[ line: 27 ]]
+	getParamsFromPath = function(p0, p1, p2)
 		-- upvalues: array (ref), decodeURIComponentModule (ref)
-		return array.reduce(array.slice(p1, 2), function(p3, p4, p5) --[[ line: 31 ]]
+		return array.reduce(array.slice(p1, 2), function(p3, p4, p5)
 			-- upvalues: p2 (ref), decodeURIComponentModule (copy)
 			local var11 = p2[p5]
 			
@@ -42,14 +42,14 @@ local t = {
 	end
 }
 
-local function _(p6, p7) --[[ line: 59 | named "getRestOfPath" ]]
+local function _(p6, p7)
 	-- upvalues: array (ref)
-	return p6[array.findIndex(p7, function(p8) --[[ line: 62 ]]
+	return p6[array.findIndex(p7, function(p8)
 		return p8.pattern == ".*"
 	end) + 1]
 end
 
-local function determineDelimiter(a, b) --[[ line: 69 ]]
+local function determineDelimiter(a, b)
 	-- upvalues: array (ref), string (ref)
 	if not array.isArray(b) then
 		return b
@@ -64,7 +64,7 @@ local function determineDelimiter(a, b) --[[ line: 69 ]]
 	return nil
 end
 
-function t.urlToPathAndParams(p9, p10) --[[ line: 85 ]]
+function t.urlToPathAndParams(p9, p10)
 	-- upvalues: regExpModule (ref), queryStringModule (ref), determineDelimiter (ref)
 	local var13 = regExpModule("^(.*)\\?(.*)$"):exec(p9)
 	local var14 = if var13 then var13[2] else p9
@@ -88,7 +88,7 @@ function t.urlToPathAndParams(p9, p10) --[[ line: 85 ]]
 	return { path = var17, params = var15 }
 end
 
-function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
+function t.createPathParser(p11, p12, p13)
 	-- upvalues: unknownModule_1 (ref), invariantModule (ref), pathToRegexp (ref), compile (ref), object (ref), array (ref), navigationActionsModule (ref), t (ref), unknownModule (ref)
 	local paths = p13.paths or {}
 	local disableRouteNamePaths = p13.disableRouteNamePaths
@@ -118,7 +118,7 @@ function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
 			extendedPathRe = pathToRegexp(if var26 then "(.*)" else ("%s/(.*)"):format(var21), t_3),
 			extendedPathReKeys = t_3,
 			isWildcard = var26,
-			toPath = if var21 == unknownModule_1 then function() --[[ line: 172 ]]
+			toPath = if var21 == unknownModule_1 then function()
 				return ""
 			end else compile(var21)
 		}
@@ -126,7 +126,7 @@ function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
 	local var20 = object.entries(t_1)
 	
 	return {
-		getActionForPathAndParams = function(p14, p15) --[[ line: 180 ]]
+		getActionForPathAndParams = function(p14, p15)
 			-- upvalues: var20 (write), p11 (ref), array (copy), navigationActionsModule (copy), t (copy)
 			if p14 == nil then
 				p14 = ""
@@ -151,7 +151,7 @@ function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
 					return navigationActionsModule.navigate({
 						routeName = var32,
 						params = t.getParamsFromPath(p15, var31, exactReKeys),
-						action = if var35 and var34 then var34.getActionForPathAndParams(var35[array.findIndex(extendedPathReKeys, function(p16) --[[ line: 62 ]]
+						action = if var35 and var34 then var34.getActionForPathAndParams(var35[array.findIndex(extendedPathReKeys, function(p16)
 							return p16.pattern == ".*"
 						end) + 1], p15) else nil
 					})
@@ -166,7 +166,7 @@ function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
 				local var30 = extendedPathRe and extendedPathRe:exec(p14)
 				
 				if var30 and var30.n ~= 0 then
-					var31 = if var29 then var29.getActionForPathAndParams(var30[array.findIndex(extendedPathReKeys, function(p17) --[[ line: 62 ]]
+					var31 = if var29 then var29.getActionForPathAndParams(var30[array.findIndex(extendedPathReKeys, function(p17)
 						return p17.pattern == ".*"
 					end) + 1], p15) else nil
 					
@@ -181,7 +181,7 @@ function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
 			end
 			return nil
 		end,
-		getPathAndParamsForRoute = function(p18) --[[ line: 247 ]]
+		getPathAndParamsForRoute = function(p18)
 			-- upvalues: p11 (ref), t_1 (ref), array (copy), object (copy), unknownModule (copy)
 			local routeName = p18.routeName
 			local params = p18.params
@@ -192,9 +192,9 @@ function t.createPathParser(p11, p12, p13) --[[ line: 112 ]]
 			local t = {}
 			
 			if params then
-				for i, v in array.filter(object.keys(params), function(p19) --[[ line: 257 ]]
+				for i, v in array.filter(object.keys(params), function(p19)
 					-- upvalues: array (copy), exactReKeys (ref)
-					return not array.find(exactReKeys, function(p20) --[[ line: 258 ]]
+					return not array.find(exactReKeys, function(p20)
 						-- upvalues: p19 (ref)
 						return p20.name == p19
 					end)

@@ -3,7 +3,7 @@
 if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 	local reactModule = require(adPlayer.Parent.React)
 	
-	local function transparencyGradient(p0) --[[ line: 33 ]]
+	local function transparencyGradient(p0)
 		return NumberSequence.new({
 			NumberSequenceKeypoint.new(0, 0),
 			NumberSequenceKeypoint.new(p0 - 0.001, 0),
@@ -12,15 +12,15 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		})
 	end
 	
-	local function rightRotation(p1) --[[ line: 42 ]]
+	local function rightRotation(p1)
 		return math.clamp(p1 * 360, 0, 180)
 	end
 	
-	local function _(p2) --[[ line: 46 | named "leftRotation" ]]
+	local function _(p2)
 		return math.clamp(p2 * 360 - 180, 0, 180)
 	end
 	
-	return function(p3) --[[ line: 50 ]]
+	return function(p3)
 		-- upvalues: reactModule (ref), rightRotation (ref), transparencyGradient (ref)
 		local thickness = p3.thickness or 3
 		local var5 = if p3.children then table.clone(p3.children) else {}
@@ -44,7 +44,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 					Color = p3.ImageColor3,
 					Transparency = p3.ImageTransparency,
 					Thickness = thickness,
-					Enabled = p3.alpha:map(function(p4) --[[ line: 76 ]]
+					Enabled = p3.alpha:map(function(p4)
 						return math.clamp(p4 * 360, 0, 180) > 0
 					end)
 				}, {
@@ -75,15 +75,15 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 					Color = p3.ImageColor3,
 					Transparency = p3.ImageTransparency,
 					Thickness = thickness,
-					Enabled = p3.alpha:map(function(p5) --[[ line: 110 ]]
+					Enabled = p3.alpha:map(function(p5)
 						return math.clamp(p5 * 360 - 180, 0, 180) > 0
 					end)
 				}, {
 					gradient = reactModule.createElement("UIGradient", {
-						Rotation = p3.alpha:map(function(p6) --[[ line: 115 ]]
+						Rotation = p3.alpha:map(function(p6)
 							return math.clamp(p6 * 360 - 180, 0, 180) - 180
 						end),
-						Transparency = p3.alpha:map(function(p7) --[[ line: 118 ]]
+						Transparency = p3.alpha:map(function(p7)
 							-- upvalues: transparencyGradient (copy)
 							return transparencyGradient(math.clamp(math.clamp(p7 * 360 - 180, 0, 180) / 180, 0, 1) * 0.02 + 0.5)
 						end)

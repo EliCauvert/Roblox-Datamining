@@ -35,7 +35,7 @@ local var7 = urlBuilder.new({
 	}
 })
 
-local _ = function() --[[ line: 98 ]]
+local _ = function()
 	-- upvalues: httpService (ref)
 	return string.format("friends-sort-%s", httpService:GenerateGUID(false))
 end
@@ -46,7 +46,7 @@ local var8 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function() --[[ line: 108 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })
@@ -57,7 +57,7 @@ local var9 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = supportedTelemetryBackends.EventIngest,
-			format = function(p0, _) --[[ line: 120 ]]
+			format = function(p0, _)
 				return p0
 			end
 		}
@@ -70,14 +70,14 @@ local var10 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = supportedTelemetryBackends.EventIngest,
-			format = function(p1, _) --[[ line: 134 ]]
+			format = function(p1, _)
 				return p1
 			end
 		}
 	}
 })
 
-local _ = function(p2, p3, p4, p5) --[[ line: 141 ]]
+local _ = function(p2, p3, p4, p5)
 	-- upvalues: var8 (ref)
 	var8.emit(p4, {
 		requestId = p2,
@@ -86,17 +86,17 @@ local _ = function(p2, p3, p4, p5) --[[ line: 141 ]]
 	})
 end
 
-local function fireLoadingEvent(p6, p7, p8) --[[ line: 261 ]]
+local function fireLoadingEvent(p6, p7, p8)
 	-- upvalues: createDiagMetricString (ref), getPlatformSuffix (ref), platformSpecificity (ref), diag (ref)
 	diag:reportStats(createDiagMetricString(p6, p7) .. getPlatformSuffix(platformSpecificity.BucketsOnly), p8)
 end
 
 return {
-	getAllFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p9, p10) --[[ line: 150 | named "getAllFriendsByUserId" ]]
+	getAllFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p9, p10)
 		-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), httpService (ref), response (ref), graphQLError (ref), var9 (ref), var8 (ref)
 		local var12 = p10 or fetch
 		
-		return promiseModule.new(function(p11, p12) --[[ line: 153 ]]
+		return promiseModule.new(function(p11, p12)
 			-- upvalues: var6 (copy), p9 (ref), httpService (copy), var12 (ref), response (copy), graphQLError (copy), var9 (copy), var8 (copy)
 			local formattedText = string.format("friends-sort-%s", httpService:GenerateGUID(false))
 			local var14 = var12(var6({
@@ -107,7 +107,7 @@ return {
 			}), {
 				method = "GET",
 				headers = { ["friends-sort"] = formattedText }
-			}):catch(function(p13) --[[ line: 163 ]]
+			}):catch(function(p13)
 				-- upvalues: response (copy)
 				local var17 = response.error()
 				var17.statusText = p13.message
@@ -122,7 +122,7 @@ return {
 				
 				return
 			end
-			local var15 = var14:json():catch(function() --[[ line: 182 ]]
+			local var15 = var14:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -145,23 +145,23 @@ return {
 				friendIds = table.concat(t, ",")
 			})
 		end)
-	end, function(p14) --[[ line: 269 ]]
+	end, function(p14)
 		return {
 			fetch = "friends_find",
 			nextPage = p14.pageCursor and p14.pageCursor ~= ""
 		}
 	end, { fireEvent = fireLoadingEvent }),
-	getOnlineFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p15, p16) --[[ line: 206 | named "getOnlineFriendsByUserId" ]]
+	getOnlineFriendsByUserId = reportPromiseLoadingTimeWrapper(function(p15, p16)
 		-- upvalues: fetch (ref), promiseModule (ref), var7 (ref), httpService (ref), response (ref), graphQLError (ref), var10 (ref), var8 (ref)
 		local var18 = p16 or fetch
 		
-		return promiseModule.new(function(p17, p18) --[[ line: 209 ]]
+		return promiseModule.new(function(p17, p18)
 			-- upvalues: var7 (copy), p15 (ref), httpService (copy), var18 (ref), response (copy), graphQLError (copy), var10 (copy), var8 (copy)
 			local formattedText = string.format("friends-sort-%s", httpService:GenerateGUID(false))
 			local var20 = var18(var7({ userId = p15.userId, userSort = p15.sort }), {
 				method = "GET",
 				headers = { ["friends-sort"] = formattedText }
-			}):catch(function(p19) --[[ line: 217 ]]
+			}):catch(function(p19)
 				-- upvalues: response (copy)
 				local var24 = response.error()
 				var24.statusText = p19.message
@@ -176,7 +176,7 @@ return {
 				
 				return
 			end
-			local var21 = var20:json():catch(function() --[[ line: 236 ]]
+			local var21 = var20:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -200,7 +200,7 @@ return {
 				friendIds = table.concat(t, ",")
 			})
 		end)
-	end, function(_) --[[ line: 277 ]]
+	end, function(_)
 		return { fetch = "friends_online" }
 	end, { fireEvent = fireLoadingEvent })
 }

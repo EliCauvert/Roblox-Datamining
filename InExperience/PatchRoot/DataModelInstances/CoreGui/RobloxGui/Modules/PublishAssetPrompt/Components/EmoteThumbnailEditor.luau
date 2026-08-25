@@ -29,31 +29,31 @@ emoteThumbnailEditor.validateProps = tModule.strictInterface({
 	updateThumbnailCallback = tModule.callback
 })
 
-function emoteThumbnailEditor.init(p0) --[[ line: 62 ]]
+function emoteThumbnailEditor.init(p0)
 	-- upvalues: emoteThumbnailParametersModule (ref), roactModule (ref)
 	p0:setState({
 		thumbnailParameters = p0.props.initialThumbnailParameters or emoteThumbnailParametersModule.defaultParameters
 	})
 	
-	function p0.onCancelPressed() --[[ line: 70 ]]
+	function p0.onCancelPressed()
 		-- upvalues: p0 (ref)
 		p0.props.closePromptCallback()
 	end
 	
-	function p0.onUpdatePressed() --[[ line: 74 ]]
+	function p0.onUpdatePressed()
 		-- upvalues: p0 (ref)
 		p0.props.updateThumbnailCallback(p0.state.thumbnailParameters)
 		p0.props.closePromptCallback()
 	end
 	
-	function p0.onRotateChanged(p1) --[[ line: 80 ]]
+	function p0.onRotateChanged(p1)
 		-- upvalues: p0 (ref)
 		local cloned = table.clone(p0.state.thumbnailParameters)
 		cloned.thumbnailCharacterRotation = p1
 		p0:updateThumbnailParameters(cloned)
 	end
 	
-	function p0.onKeyframeOrTimeChanged(p2) --[[ line: 86 ]]
+	function p0.onKeyframeOrTimeChanged(p2)
 		-- upvalues: p0 (ref)
 		local cloned = table.clone(p0.state.thumbnailParameters)
 		cloned.thumbnailTime = p2
@@ -66,7 +66,7 @@ function emoteThumbnailEditor.init(p0) --[[ line: 62 ]]
 	p0:updateSliderValuesForAnimationClip()
 end
 
-function emoteThumbnailEditor.updateSliderValuesForAnimationClip(p3) --[[ line: 100 ]]
+function emoteThumbnailEditor.updateSliderValuesForAnimationClip(p3)
 	-- upvalues: emoteUtility (ref)
 	local props = p3.props
 	local var13 = nil
@@ -91,13 +91,13 @@ function emoteThumbnailEditor.updateSliderValuesForAnimationClip(p3) --[[ line: 
 	})
 end
 
-function emoteThumbnailEditor.updateThumbnailParameters(p4, p5) --[[ line: 128 ]]
+function emoteThumbnailEditor.updateThumbnailParameters(p4, p5)
 	p4:setState({ thumbnailParameters = p5 })
 end
 
-function emoteThumbnailEditor.renderMiddle(p6, p7) --[[ line: 134 ]]
+function emoteThumbnailEditor.renderMiddle(p6, p7)
 	-- upvalues: withStyle (ref), roactModule (ref), roactGamepadModule (ref), emoteThumbnailViewModule (ref), systemSlider (ref), t (ref)
-	return withStyle(function(p8) --[[ line: 135 ]]
+	return withStyle(function(p8)
 		-- upvalues: p6 (ref), roactModule (copy), roactGamepadModule (copy), emoteThumbnailViewModule (copy), p7 (ref), systemSlider (copy), t (copy)
 		local font = p8.Font
 		local theme = p8.Theme
@@ -120,7 +120,7 @@ function emoteThumbnailEditor.renderMiddle(p6, p7) --[[ line: 134 ]]
 		local thumbnailKeyframe = thumbnailParameters.thumbnailKeyframe
 		local thumbnailCharacterRotation = thumbnailParameters.thumbnailCharacterRotation
 		
-		local function _(p9) --[[ line: 161 | named "getStepIntervalForOption" ]]
+		local function _(p9)
 			return (p9.Range.Max - p9.Range.Min) / (p9.Increments - 1)
 		end
 		
@@ -226,7 +226,7 @@ function emoteThumbnailEditor.renderMiddle(p6, p7) --[[ line: 134 ]]
 	end)
 end
 
-function emoteThumbnailEditor.renderAlertLocalized(p10, p11) --[[ line: 258 ]]
+function emoteThumbnailEditor.renderAlertLocalized(p10, p11)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	return roactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = true,
@@ -250,7 +250,7 @@ function emoteThumbnailEditor.renderAlertLocalized(p10, p11) --[[ line: 258 ]]
 				}
 			}
 		},
-		middleContent = function() --[[ line: 280 ]]
+		middleContent = function()
 			-- upvalues: p10 (ref), p11 (ref)
 			return p10:renderMiddle(p11)
 		end,
@@ -259,7 +259,7 @@ function emoteThumbnailEditor.renderAlertLocalized(p10, p11) --[[ line: 258 ]]
 	})
 end
 
-local function GetLocalizedStrings() --[[ line: 289 ]]
+local function GetLocalizedStrings()
 	-- upvalues: robloxTranslatorModule (ref)
 	return {
 		cancelButtonText = robloxTranslatorModule:FormatByKey("CoreScripts.EmoteThumbnailEditor.Action.Cancel"),
@@ -270,7 +270,7 @@ local function GetLocalizedStrings() --[[ line: 289 ]]
 	}
 end
 
-function emoteThumbnailEditor.render(p12) --[[ line: 301 ]]
+function emoteThumbnailEditor.render(p12)
 	-- upvalues: GetLocalizedStrings (ref)
 	return p12:renderAlertLocalized(GetLocalizedStrings())
 end

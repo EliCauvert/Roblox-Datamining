@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableVRWrapperTransparency", false)
 
-return function() --[[ line: 2 ]]
+return function()
 	return game:GetFastFlag("EnableVRWrapperTransparency")
 end

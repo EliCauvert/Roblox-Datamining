@@ -13,12 +13,12 @@ local setGamePlaySession = robloxAppSessionizationModule.SetGamePlaySession
 local sessionType = robloxAppSessionizationModule.SessionType
 local holdToPlayLauncher = require(parent.ExperienceAnalytics).Constants.Context.HoldToPlayLauncher
 
-return function(p0) --[[ line: 33 | named "HoldToPlayLoader" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), appSessionService (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), holdToPlayLauncher (ref), reactModule (ref), setGamePlaySession (ref), sessionType (ref), playButtonStates (ref)
 	local var4 = useRoactService(appSessionService)
 	local var5 = usePlayButtonState(useRoactService(roactNetworking), p0.universeId)
 	local var6 = useOnPlayButtonCallback(p0.universeId, nil, holdToPlayLauncher, nil, nil)
-	reactModule.useEffect(function() --[[ line: 40 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), p0 (ref), setGamePlaySession (copy), var4 (ref), sessionType (copy), var6 (ref), playButtonStates (copy)
 		local playButtonState = var5.playButtonState
 		

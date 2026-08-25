@@ -6,69 +6,69 @@ local squadRootViewTypeModule = require(squadsCore.Enums.SquadRootViewType)
 local _ = require(script.Parent.SquadContractType)
 
 return {
-	closeSquadPrompt = function() --[[ line: 16 ]] end,
-	createConversation = function(_, _, _, _) --[[ line: 19 ]]
+	closeSquadPrompt = function() end,
+	createConversation = function(_, _, _, _)
 		-- upvalues: promiseModule (ref)
-		return function(_) --[[ line: 25 ]]
+		return function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.reject("No createConversation function supplied.")
 		end
 	end,
-	createFriendConversation = function(_, _) --[[ line: 29 ]] end,
-	createExperienceInvite = if require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(_, _, _) --[[ line: 33 ]]
+	createFriendConversation = function(_, _) end,
+	createExperienceInvite = if require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(_, _, _)
 		-- upvalues: promiseModule (ref)
-		return function(_) --[[ line: 34 ]]
+		return function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.reject("No createExperienceInvite function supplied.")
 		end
 	end else nil,
-	fetchParentChannelDetails = function(_, _) --[[ line: 39 ]]
+	fetchParentChannelDetails = function(_, _)
 		return nil
 	end,
-	inviteToParentChannel = function(_, _, _) --[[ line: 42 ]]
-		return function(_) --[[ line: 43 ]]
+	inviteToParentChannel = function(_, _, _)
+		return function(_)
 			return nil
 		end
 	end,
-	navigateIntoSquadLobby = function(_, _) --[[ line: 47 ]] end,
-	removeUserFromParentChannel = function(_, _, _) --[[ line: 50 ]]
-		return function(_) --[[ line: 51 ]]
+	navigateIntoSquadLobby = function(_, _) end,
+	removeUserFromParentChannel = function(_, _, _)
+		return function(_)
 			return nil
 		end
 	end,
-	setSquadPrompt = function(_, _) --[[ line: 55 ]] end,
-	showSearchOverlay = function(_, _) --[[ line: 58 ]] end,
-	useIsChatEnabled = function() --[[ line: 61 ]]
+	setSquadPrompt = function(_, _) end,
+	showSearchOverlay = function(_, _) end,
+	useIsChatEnabled = function()
 		return false
 	end,
-	useGetConversationFromId = function(_) --[[ line: 64 ]]
+	useGetConversationFromId = function(_)
 		return nil
 	end,
-	useParentChannelHasGroupUp = function(_) --[[ line: 67 ]]
+	useParentChannelHasGroupUp = function(_)
 		return false
 	end,
-	useParentChannelHasSquadAccess = function(_) --[[ line: 70 ]]
+	useParentChannelHasSquadAccess = function(_)
 		return false
 	end,
-	useParentChannelTitleSelector = function(_) --[[ line: 73 ]]
+	useParentChannelTitleSelector = function(_)
 		return ""
 	end,
-	useParentChannelIsPartyVoiceEligible = function(_) --[[ line: 76 ]]
+	useParentChannelIsPartyVoiceEligible = function(_)
 		return nil
 	end,
-	useSquadRootView = function() --[[ line: 79 ]]
+	useSquadRootView = function()
 		-- upvalues: squadRootViewTypeModule (ref)
 		return squadRootViewTypeModule.None
 	end,
-	useSquadTopBannerManager = function() --[[ line: 82 ]]
+	useSquadTopBannerManager = function()
 		return {
-			disableSquadTopBanner = function(_, _) --[[ line: 84 ]] end,
-			useSquadTopBannerDisabled = function() --[[ line: 85 ]]
+			disableSquadTopBanner = function(_, _) end,
+			useSquadTopBannerDisabled = function()
 				return false
 			end
 		}
 	end,
-	useIsChatUserMessagesEnabled = function() --[[ line: 90 ]]
+	useIsChatUserMessagesEnabled = function()
 		return false
 	end
 }

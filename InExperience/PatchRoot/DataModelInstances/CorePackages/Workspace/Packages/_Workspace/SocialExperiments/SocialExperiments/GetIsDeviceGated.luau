@@ -4,7 +4,7 @@ local _ = require(socialExperiments.DeviceGateFeature)
 local t = {}
 local t_1 = {}
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: t (ref), t_1 (ref), systemInfoProtocol (ref)
 	if t[p0.featureName] == nil then
 		t[p0.featureName] = p0.enabled
@@ -12,7 +12,7 @@ return function(p0) --[[ line: 18 ]]
 	if not t[p0.featureName] then
 		t_1[p0.featureName] = false
 	elseif t_1[p0.featureName] == nil then
-		local _, _ = pcall(function() --[[ line: 25 ]]
+		local _, _ = pcall(function()
 			-- upvalues: systemInfoProtocol (copy), p0 (ref), t_1 (copy)
 			local var3 = systemInfoProtocol.default:getSystemInfo({
 				systemInfoProtocol.InfoNames.DEVICE_NAME,

@@ -4,7 +4,7 @@ local _ = require(parent.Constants)
 local _ = require(parent.Enum.AspectRatioMode)
 local getExperienceTileRelativeHeightModule = require(parent.getExperienceTileRelativeHeight)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 18 ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: getExperienceTileRelativeHeightModule (ref)
 	local var1 = getExperienceTileRelativeHeightModule(p0, p2, p3, p4, p5)
 	

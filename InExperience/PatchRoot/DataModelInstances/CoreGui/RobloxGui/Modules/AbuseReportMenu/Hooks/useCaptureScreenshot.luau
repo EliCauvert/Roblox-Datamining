@@ -8,9 +8,9 @@ local screenshotManager = require(corePackagesService.Workspace.Packages.TnSScre
 local avatarIdentification = tnSAvatarIdentificationModule.AvatarIdentification
 local adIdentification = tnSAdIdentificationModule.AdIdentification
 
-return function(p0, p1, p2) --[[ line: 18 ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), screenshotManager (ref), avatarIdentification (ref), adIdentification (ref)
-	return reactModule.useCallback(function() --[[ line: 23 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: screenshotManager (copy), p1 (ref), p0 (ref), avatarIdentification (copy), adIdentification (copy), p2 (ref)
 		screenshotManager:TakeScreenshotWithCallback(p1, p0)
 		local visibleAvatars, visibleAvatars_1 = avatarIdentification.getVisibleAvatars()

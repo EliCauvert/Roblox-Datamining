@@ -12,11 +12,11 @@ local inviteButtonModule = require(shareGame.Components.InviteButton)
 local inviteStatus = require(shareGame.Constants).InviteStatus
 local conversationEntry = roactModule.PureComponent:extend("ConversationEntry")
 
-function conversationEntry.init(p0) --[[ line: 30 ]]
+function conversationEntry.init(p0)
 	-- upvalues: eventStream (ref), rbxAnalyticsService (ref), inviteStatus (ref), playersService (ref)
 	p0.eventStream = eventStream.new(rbxAnalyticsService)
 	
-	function p0.onInvite() --[[ line: 33 ]]
+	function p0.onInvite()
 		-- upvalues: p0 (ref), inviteStatus (copy), playersService (copy)
 		local inviteStatus_1 = p0.props.inviteStatus
 		
@@ -26,7 +26,7 @@ function conversationEntry.init(p0) --[[ line: 30 ]]
 		local inviteUser = p0.props.inviteUser
 		
 		if #users == 1 then
-			inviteUser(users[1].id):andThen(function(p1) --[[ line: 45 ]]
+			inviteUser(users[1].id):andThen(function(p1)
 				-- upvalues: users (ref), playersService (copy), analytics (ref)
 				if not p1 then return end
 				local t = {}
@@ -35,12 +35,12 @@ function conversationEntry.init(p0) --[[ line: 30 ]]
 					table.insert(t, v.id)
 				end
 				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p1.conversationId, t)
-			end, function() --[[ line: 60 ]] end)
+			end, function() end)
 		end
 	end
 end
 
-function conversationEntry.render(p2) --[[ line: 66 ]]
+function conversationEntry.render(p2)
 	-- upvalues: roactModule (ref), themeModule (ref), conversationThumbnailModule (ref), conversationDetailsModule (ref), inviteButtonModule (ref)
 	local zIndex = p2.props.zIndex
 	

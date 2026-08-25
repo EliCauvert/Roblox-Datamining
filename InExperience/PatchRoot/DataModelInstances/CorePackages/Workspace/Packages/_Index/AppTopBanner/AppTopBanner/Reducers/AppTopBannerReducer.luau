@@ -9,11 +9,11 @@ local t = {
 	appTopBannerContentProps = nil,
 	appTopBannerContentHeight = 0,
 	appTopBannerType = require(appTopBanner.Enums.AppTopBannerType).None,
-	onAppTopBannerClick = function() --[[ line: 37 ]] end
+	onAppTopBannerClick = function() end
 }
 
 return roduxModule.createReducer(t, {
-	[require(appTopBanner.Actions.SetAppTopBanner).name] = function(p0, p1) --[[ line: 41 ]]
+	[require(appTopBanner.Actions.SetAppTopBanner).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref), constantsModule (ref), t (ref)
 		local isDisabled = p0.isDisabled
 		
@@ -33,7 +33,7 @@ return roduxModule.createReducer(t, {
 		end
 		return p0
 	end,
-	[require(appTopBanner.Actions.DisableAppTopBanner).name] = function(p2, p3) --[[ line: 61 ]]
+	[require(appTopBanner.Actions.DisableAppTopBanner).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return if p2.isDisabled == p3.isDisabled then p2 else cryoModule.Dictionary.join(p2, { isDisabled = not p2.isDisabled })
 	end

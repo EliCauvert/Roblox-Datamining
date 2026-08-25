@@ -13,14 +13,14 @@ local t = {
 	SurfaceAppearance = "SurfaceAppearance"
 }
 
-local function getFaceControls(p0) --[[ line: 24 ]]
+local function getFaceControls(p0)
 	if p0 == nil then
 		return
 	end
 	return p0:FindFirstChildWhichIsA("FaceControls", true)
 end
 
-local function getNeck(p1, p2) --[[ line: 31 ]]
+local function getNeck(p1, p2)
 	-- upvalues: selfViewNeckCheck (ref)
 	if p1 == nil or p2 == nil then
 		return nil
@@ -48,7 +48,7 @@ local function getNeck(p1, p2) --[[ line: 31 ]]
 	return nil
 end
 
-local function findObjectOfNameAndTypeName(p3, p4, p5) --[[ line: 72 ]]
+local function findObjectOfNameAndTypeName(p3, p4, p5)
 	if p5 == nil then
 		return nil
 	end
@@ -60,7 +60,7 @@ local function findObjectOfNameAndTypeName(p3, p4, p5) --[[ line: 72 ]]
 	return nil
 end
 
-local function getHead(p6) --[[ line: 85 ]]
+local function getHead(p6)
 	-- upvalues: findObjectOfNameAndTypeName (ref)
 	if not p6 then
 		return nil
@@ -74,7 +74,7 @@ local function getHead(p6) --[[ line: 85 ]]
 	return parent or findObjectOfNameAndTypeName("Head", "MeshPart", p6) or findObjectOfNameAndTypeName("Head", "Part", p6)
 end
 
-local function getAnimator(p7, p8) --[[ line: 118 ]]
+local function getAnimator(p7, p8)
 	local var22
 	local animator = nil
 	local _ = nil
@@ -100,7 +100,7 @@ local list = {
 	"LeftLowerArm", "LeftUpperArm", "RightHand", "RightLowerArm", "RightUpperArm"
 }
 
-local function updateTransparency(p9, p10) --[[ line: 172 ]]
+local function updateTransparency(p9, p10)
 	-- upvalues: list (ref), collectionService (ref)
 	for i, v in ipairs(p9:GetDescendants()) do
 		if v:IsA("Decal") then
@@ -124,7 +124,7 @@ local function updateTransparency(p9, p10) --[[ line: 172 ]]
 	end
 end
 
-local function shouldMarkCloneDirtyForDescendant(p11) --[[ line: 201 ]]
+local function shouldMarkCloneDirtyForDescendant(p11)
 	-- upvalues: t (ref)
 	if p11:IsA("MeshPart") or p11:IsA("Part") or p11:IsA("Decal") then
 		return p11.Transparency < 1
@@ -133,7 +133,7 @@ local function shouldMarkCloneDirtyForDescendant(p11) --[[ line: 201 ]]
 	end
 end
 
-local function resetPartOrientation(value) --[[ line: 214 ]]
+local function resetPartOrientation(value)
 	for i, v in ipairs(value:GetDescendants()) do
 		if v:IsA("Motor6D") then
 			v.C0 = CFrame.new(v.C0.Position)
@@ -142,7 +142,7 @@ local function resetPartOrientation(value) --[[ line: 214 ]]
 	end
 end
 
-local function _(p12, p13) --[[ line: 223 | named "removeChild" ]]
+local function _(p12, p13)
 	local var23 = p12:FindFirstChild(p13)
 	
 	if var23 then
@@ -150,7 +150,7 @@ local function _(p12, p13) --[[ line: 223 | named "removeChild" ]]
 	end
 end
 
-local function removeScripts(p14) --[[ line: 229 ]]
+local function removeScripts(p14)
 	local animate = p14:FindFirstChild("Animate")
 	
 	if animate then
@@ -168,7 +168,7 @@ local function removeScripts(p14) --[[ line: 229 ]]
 	end
 end
 
-local function removeTags(p15) --[[ line: 240 ]]
+local function removeTags(p15)
 	-- upvalues: collectionService (ref)
 	for i, v in ipairs(collectionService:GetTags(p15)) do
 		if v ~= "NoFace" then
@@ -222,7 +222,7 @@ local t_1 = {
 	WrapTextureTransfer = "WrapTextureTransfer"
 }
 
-local function disableScripts(p16) --[[ line: 298 ]]
+local function disableScripts(p16)
 	-- upvalues: disableScripts (ref)
 	for i, v in p16:GetChildren() do
 		if v:IsA("Script") then
@@ -233,7 +233,7 @@ local function disableScripts(p16) --[[ line: 298 ]]
 	end
 end
 
-local function removeUI(p17) --[[ line: 308 ]]
+local function removeUI(p17)
 	-- upvalues: removeUI (ref)
 	for i, v in p17:GetChildren() do
 		if v:IsA("GuiObject") or v:IsA("ScreenGui") or (v:IsA("BillboardGui") or v:IsA("AdGui")) or v:IsA("SurfaceGui") then
@@ -243,7 +243,7 @@ local function removeUI(p17) --[[ line: 308 ]]
 	end
 end
 
-local function removeInstancesStrict(p18) --[[ line: 323 ]]
+local function removeInstancesStrict(p18)
 	-- upvalues: t_1 (ref), removeInstancesStrict (ref)
 	for i, v in p18:GetChildren() do
 		if not t_1[v.ClassName] then
@@ -263,7 +263,7 @@ return {
 	resetPartOrientation = resetPartOrientation,
 	removeScripts = removeScripts,
 	removeTags = removeTags,
-	sanitizeCharacter = function(p19) --[[ line: 332 ]]
+	sanitizeCharacter = function(p19)
 		-- upvalues: removeInstancesStrict (ref)
 		if p19 then
 			removeInstancesStrict(p19)
@@ -271,11 +271,11 @@ return {
 			return
 		end
 	end,
-	isValidAvatar = function(p20) --[[ line: 340 ]]
+	isValidAvatar = function(p20)
 		-- upvalues: getAnimator (ref), getHead (ref)
 		return if getAnimator(p20, 10) then getHead(p20) else false
 	end,
-	hasDynamicHead = function(p21) --[[ line: 354 ]]
+	hasDynamicHead = function(p21)
 		return (if p21 == nil then nil else p21:FindFirstChildWhichIsA("FaceControls", true)) ~= nil
 	end
 }

@@ -18,14 +18,14 @@ local getFFlagUserProfilesDataLoaderEnabled = require(parent.SharedFlags).getFFl
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 71 ]]
+function t.new(p0)
 	-- upvalues: graphQLModule (ref), typeDefs (ref), resolvers (ref), addMockResolversModule (ref), buildRootValueModule (ref), buildTypeResolverModule (ref), buildFieldResolverModule (ref), fetch (ref), getFFlagUserProfilesDataLoaderEnabled (ref), object (ref), dataLoaders (ref), t (ref)
 	local t_1 = { port = if p0.port then p0.port else 4000 }
 	local var11 = false
 	local var12 = nil
 	
 	if not p0.typeDefs then
-		local ok, status = pcall(function() --[[ line: 78 ]]
+		local ok, status = pcall(function()
 			return require(script.Parent.compiled_schema)
 		end)
 		var11 = ok
@@ -54,12 +54,12 @@ function t.new(p0) --[[ line: 71 ]]
 	return t_1
 end
 
-function t.fetchLocal(p1, p2) --[[ line: 115 ]]
+function t.fetchLocal(p1, p2)
 	-- upvalues: httpService (ref), promiseModule (ref), graphQLModule (ref), getFFlagUserProfilesDataLoaderEnabled (ref), object (ref), responseModule (ref)
 	local var14 = if p2 then httpService:JSONDecode(p2.body) else {}
 	local t = {}
 	
-	return promiseModule.new(function(p3, _) --[[ line: 119 ]]
+	return promiseModule.new(function(p3, _)
 		-- upvalues: graphQLModule (copy), p1 (ref), var14 (ref), getFFlagUserProfilesDataLoaderEnabled (copy), object (copy), t (ref), responseModule (copy)
 		graphQLModule.graphql({
 			schema = p1.schema,
@@ -72,7 +72,7 @@ function t.fetchLocal(p1, p2) --[[ line: 115 ]]
 			typeResolver = p1.typeResolver,
 			fieldResolver = p1.fieldResolver,
 			variableValues = var14.variables
-		}):andThen(function(p4) --[[ line: 133 ]]
+		}):andThen(function(p4)
 			-- upvalues: p3 (ref), responseModule (copy)
 			p3(responseModule.new(p4))
 		end)

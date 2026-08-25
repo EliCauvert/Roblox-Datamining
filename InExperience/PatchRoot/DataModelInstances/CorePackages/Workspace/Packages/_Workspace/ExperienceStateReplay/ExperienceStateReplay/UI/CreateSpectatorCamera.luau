@@ -13,7 +13,7 @@ local var11 = Vector3.new(0, 0, 0)
 local var12 = nil
 
 return {
-	createSpectatorCamera = function(p0) --[[ line: 41 ]]
+	createSpectatorCamera = function(p0)
 		-- upvalues: var10 (write), t (write), var8 (write), userInputService (ref), var5 (write), var11 (write), var12 (write), workspaceService (ref), runService (ref), var4 (write), createTemporaryOverlayModule (ref), var9 (write), var6 (write)
 		local inputFrame = Instance.new("Frame")
 		inputFrame.Name = "InputFrame"
@@ -61,7 +61,7 @@ return {
 		applyButton.Font = Enum.Font.SourceSansBold
 		applyButton.TextScaled = true
 		applyButton.Parent = inputFrame
-		applyButton.MouseButton1Click:Connect(function() --[[ line: 106 ]]
+		applyButton.MouseButton1Click:Connect(function()
 			-- upvalues: speedTextBox (ref), var10 (copy), speedLabel (ref)
 			local ok, status = pcall(tonumber, speedTextBox.Text)
 			
@@ -76,7 +76,7 @@ return {
 		end)
 		local var18 = false
 		
-		local function updateHumanoidList() --[[ line: 126 ]]
+		local function updateHumanoidList()
 			-- upvalues: t (copy)
 			t = {}
 			
@@ -87,14 +87,14 @@ return {
 			end
 		end
 		
-		local function _() --[[ line: 138 | named "getCurrentHumanoid" ]]
+		local function _()
 			-- upvalues: updateHumanoidList (ref), t (copy), var8 (copy)
 			updateHumanoidList()
 			
 			return if #t == 0 then nil else t[var8]
 		end
 		
-		local _ = function() --[[ line: 147 | named "getNextHumanoid" ]]
+		local _ = function()
 			-- upvalues: updateHumanoidList (ref), t (copy), var8 (copy)
 			updateHumanoidList()
 			
@@ -106,7 +106,7 @@ return {
 			return t[var8]
 		end
 		
-		local _ = function(p1) --[[ line: 159 | named "getHumanoidWithName" ]]
+		local _ = function(p1)
 			-- upvalues: updateHumanoidList (ref), t (copy)
 			updateHumanoidList()
 			
@@ -121,7 +121,7 @@ return {
 			return nil
 		end
 		
-		local function StepFreecam(p2) --[[ line: 177 ]]
+		local function StepFreecam(p2)
 			-- upvalues: var10 (copy), userInputService (copy), var5 (copy), var11 (copy), var12 (copy), workspaceService (copy)
 			local var23 = if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) then var10 * 3 else var10
 			local var24 = Vector3.new(0, 0, 0)
@@ -171,7 +171,7 @@ return {
 			workspaceService.CurrentCamera.CFrame = var5
 		end
 		
-		local function setCameraMode(value) --[[ line: 270 ]]
+		local function setCameraMode(value)
 			-- upvalues: runService (copy), userInputService (copy), inputFrame (ref), var4 (copy), workspaceService (copy), updateHumanoidList (ref), t (copy), setCameraMode (ref), createTemporaryOverlayModule (copy), p0 (ref), var5 (copy), StepFreecam (ref), var18 (write), speedTextBox (ref), var10 (copy), speedLabel (ref), var9 (copy), var8 (copy), var6 (copy)
 			runService:UnbindFromRenderStep("Freecam")
 			userInputService.MouseBehavior = Enum.MouseBehavior.Default
@@ -237,13 +237,13 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ line: 342 | named "cycleCameraMode" ]]
+		local _ = function()
 			-- upvalues: var6 (copy), setCameraMode (ref)
 			var6 = (var6 + 1) % 3
 			setCameraMode(var6)
 		end
 		
-		local function onInputBegan(p3, p4) --[[ line: 348 ]]
+		local function onInputBegan(p3, p4)
 			-- upvalues: var6 (copy), setCameraMode (ref), updateHumanoidList (ref), t (copy), var8 (copy), var18 (write), inputFrame (ref), speedTextBox (ref)
 			if p4 then return end
 			if p3.KeyCode == Enum.KeyCode.C then

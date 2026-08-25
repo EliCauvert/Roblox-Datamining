@@ -14,10 +14,10 @@ local _ = require(script.Parent.types)
 local filterRootFields = nil
 local filterElementFields = nil
 
-function t.filterSchema(p0) --[[ line: 64 ]]
+function t.filterSchema(p0)
 	-- upvalues: mapSchema (ref), mapperKind (ref), filterRootFields (write), boolean (ref), filterElementFields (write), graphQLObjectType (ref), object (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
 	local schema = p0.schema
-	local var5 = if p0.typeFilter == nil then function(...) --[[ line: 82 ]]
+	local var5 = if p0.typeFilter == nil then function(...)
 		return true
 	end else p0.typeFilter
 	local var6 = if p0.fieldFilter == nil then nil else p0.fieldFilter
@@ -28,46 +28,46 @@ function t.filterSchema(p0) --[[ line: 64 ]]
 	local var11 = if p0.argumentFilter == nil then nil else p0.argumentFilter
 	
 	return mapSchema(schema, {
-		[mapperKind.QUERY] = function(p1) --[[ line: 100 ]]
+		[mapperKind.QUERY] = function(p1)
 			-- upvalues: filterRootFields (copy), var7 (ref), var11 (ref)
 			return filterRootFields(p1, "Query", var7, var11)
 		end,
-		[mapperKind.MUTATION] = function(p2) --[[ line: 106 ]]
+		[mapperKind.MUTATION] = function(p2)
 			-- upvalues: filterRootFields (copy), var7 (ref), var11 (ref)
 			return filterRootFields(p2, "Mutation", var7, var11)
 		end,
-		[mapperKind.SUBSCRIPTION] = function(p3) --[[ line: 112 ]]
+		[mapperKind.SUBSCRIPTION] = function(p3)
 			-- upvalues: filterRootFields (copy), var7 (ref), var11 (ref)
 			return filterRootFields(p3, "Subscription", var7, var11)
 		end,
-		[mapperKind.OBJECT_TYPE] = function(p4) --[[ line: 118 ]]
+		[mapperKind.OBJECT_TYPE] = function(p4)
 			-- upvalues: boolean (copy), var5 (ref), filterElementFields (copy), graphQLObjectType (copy), var8 (ref), var6 (ref), var11 (ref), object (copy)
 			return if boolean.toJSBoolean(var5(p4.name, p4)) then filterElementFields(graphQLObjectType, p4, if boolean.toJSBoolean(var8) then var8 else var6, var11) else object.None
 		end,
-		[mapperKind.INTERFACE_TYPE] = function(p5) --[[ line: 134 ]]
+		[mapperKind.INTERFACE_TYPE] = function(p5)
 			-- upvalues: boolean (copy), var5 (ref), filterElementFields (copy), graphQLInterfaceType (copy), var9 (ref), var6 (ref), var11 (ref), object (copy)
 			return if boolean.toJSBoolean(var5(p5.name, p5)) then filterElementFields(graphQLInterfaceType, p5, if boolean.toJSBoolean(var9) then var9 else var6, var11) else object.None
 		end,
-		[mapperKind.INPUT_OBJECT_TYPE] = function(p6) --[[ line: 150 ]]
+		[mapperKind.INPUT_OBJECT_TYPE] = function(p6)
 			-- upvalues: boolean (copy), var5 (ref), filterElementFields (copy), graphQLInputObjectType (copy), var10 (ref), var6 (ref), object (copy)
 			return if boolean.toJSBoolean(var5(p6.name, p6)) then filterElementFields(graphQLInputObjectType, p6, if boolean.toJSBoolean(var10) then var10 else var6) else object.None
 		end,
-		[mapperKind.UNION_TYPE] = function(p7) --[[ line: 165 ]]
+		[mapperKind.UNION_TYPE] = function(p7)
 			-- upvalues: boolean (copy), var5 (ref), object (copy)
 			return if boolean.toJSBoolean(var5(p7.name, p7)) then nil else object.None
 		end,
-		[mapperKind.ENUM_TYPE] = function(p8) --[[ line: 174 ]]
+		[mapperKind.ENUM_TYPE] = function(p8)
 			-- upvalues: boolean (copy), var5 (ref), object (copy)
 			return if boolean.toJSBoolean(var5(p8.name, p8)) then nil else object.None
 		end,
-		[mapperKind.SCALAR_TYPE] = function(p9) --[[ line: 183 ]]
+		[mapperKind.SCALAR_TYPE] = function(p9)
 			-- upvalues: boolean (copy), var5 (ref), object (copy)
 			return if boolean.toJSBoolean(var5(p9.name, p9)) then nil else object.None
 		end
 	})
 end
 
-filterRootFields = function(p10, p11, p12, p13) --[[ line: 199 | named "filterRootFields" ]]
+filterRootFields = function(p10, p11, p12, p13)
 	-- upvalues: boolean (ref), graphQLObjectType (ref)
 	if not boolean.toJSBoolean(if boolean.toJSBoolean(p12) then p12 else p13) then
 		return p10
@@ -93,7 +93,7 @@ filterRootFields = function(p10, p11, p12, p13) --[[ line: 199 | named "filterRo
 	return graphQLObjectType.new(var12)
 end
 
-filterElementFields = function(p14, p15, p16, p17) --[[ line: 273 | named "filterElementFields" ]]
+filterElementFields = function(p14, p15, p16, p17)
 	-- upvalues: boolean (ref), array (ref), object (ref)
 	if not boolean.toJSBoolean(if boolean.toJSBoolean(p16) then p16 else p17) then
 		return nil

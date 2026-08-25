@@ -11,7 +11,7 @@ local t = {
 	[nodeTypeModule.InlineCustom] = require(nodeRenderers.InlineCustomRenderer)
 }
 
-return function(p0, p1) --[[ line: 20 | named "processChildren" ]]
+return function(p0, p1)
 	-- upvalues: nodeConfigModule (ref), name (ref), cryoModule (ref), t (ref)
 	local t_1 = {}
 	local byNode = nodeConfigModule.getByNode(p0)
@@ -21,7 +21,7 @@ return function(p0, p1) --[[ line: 20 | named "processChildren" ]]
 		
 		return t_1
 	end
-	for i, v in cryoModule.List.map(p0.children, function(p2) --[[ line: 28 ]]
+	for i, v in cryoModule.List.map(p0.children, function(p2)
 		-- upvalues: nodeConfigModule (copy), name (copy), byNode (ref), p0 (ref), t (copy), p1 (ref), cryoModule (copy)
 		local byNode_1 = nodeConfigModule.getByNode(p2)
 		
@@ -46,7 +46,7 @@ return function(p0, p1) --[[ line: 20 | named "processChildren" ]]
 		if typeof(var9) ~= "table" then
 			var9 = { var9 }
 		end
-		if cryoModule.List.foldLeft(var9, function(p3, p4) --[[ line: 49 ]]
+		if cryoModule.List.foldLeft(var9, function(p3, p4)
 			-- upvalues: byNode_1 (ref)
 			return p3 and byNode_1.validateRenderResult(p4)
 		end, true) then

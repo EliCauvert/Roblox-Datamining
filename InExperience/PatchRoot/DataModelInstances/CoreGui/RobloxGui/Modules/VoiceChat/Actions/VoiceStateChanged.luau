@@ -4,7 +4,7 @@ local makeActionCreator = require(corePackagesService.Packages.Rodux).makeAction
 local tModule = require(corePackagesService.Packages.t)
 local maybeAssertModule = require(robloxGui.Modules.VoiceChat.Helpers.maybeAssert)
 
-return makeActionCreator(script.Name, function(p0, p1) --[[ line: 9 ]]
+return makeActionCreator(script.Name, function(p0, p1)
 	-- upvalues: maybeAssertModule (ref), tModule (ref)
 	maybeAssertModule(tonumber(p0) ~= nil)
 	maybeAssertModule(tModule.string(p1))

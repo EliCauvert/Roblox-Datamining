@@ -6,7 +6,7 @@ local messageModelModule = require(appChat.Models.MessageModel)
 local cryoModule = require(parent.Cryo)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 31 ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: messageModelModule (ref), getThumbnailsForUserIdsModule (ref), conversationModule (ref), name (ref), cryoModule (ref)
 	local var6 = p1.senderTargetId ~= tostring(p0.LocalUserId)
 	local var7 = p1.repliesTo ~= nil
@@ -14,32 +14,32 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 31 ]]
 	local _ = nil
 	local _ = nil
 	
-	local function _(p7, p8, p9) --[[ line: 37 | named "timeDiffExceeds" ]]
+	local function _(p7, p8, p9)
 		return if p7 and p8 and (p7.sent and p8.sent) then p9 < math.abs(p7.sent:GetUnixTimestamp() - p8.sent:GetUnixTimestamp()) else false
 	end
 	
-	local _ = function(p10) --[[ line: 43 | named "isSystemMessage" ]]
+	local _ = function(p10)
 		return p10 and p10.messageType == "System"
 	end
 	
-	local _ = function(p11) --[[ line: 47 | named "isModerated" ]]
+	local _ = function(p11)
 		return p11 and p11.moderated == true
 	end
 	
-	local _ = function(p12) --[[ line: 51 | named "isHiddenMessage" ]]
+	local _ = function(p12)
 		-- upvalues: messageModelModule (copy)
 		return p12 and p12.visibility == messageModelModule.VisibilityTypes.Hidden
 	end
 	
-	local _ = function(p13) --[[ line: 55 | named "isReplyMessage" ]]
+	local _ = function(p13)
 		return p13 and p13.repliesTo ~= nil
 	end
 	
-	local _ = function(p14, p15) --[[ line: 59 | named "hasSenderChange" ]]
+	local _ = function(p14, p15)
 		return p14 and (p15 and p14.senderTargetId ~= p15.senderTargetId)
 	end
 	
-	local _ = function(p16, p17) --[[ line: 63 | named "hasModeratedBreak" ]]
+	local _ = function(p16, p17)
 		return p16 and p16.moderated == true or p17 and p17.moderated == true
 	end
 	

@@ -1,6 +1,6 @@
 ﻿local refreshOwnMomentsAfterPublishModule = require(script.Parent.refreshOwnMomentsAfterPublish)
 
-return function(value, p0, p1) --[[ line: 23 | named "setPublishedMomentOnUploadStore" ]]
+return function(value, p0, p1)
 	-- upvalues: refreshOwnMomentsAfterPublishModule (ref)
 	local var1 = refreshOwnMomentsAfterPublishModule(value, p1)
 	

@@ -10,11 +10,11 @@ local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
 local useMusicInfoModule = require(moments.Hooks.useMusicInfo)
 local musicModalModule = require(moments.Components.MusicModal)
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "MusicButton" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useMusicInfoModule (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), musicModalModule (ref)
 	local moment = p0.moment
 	local var6, var7 = reactModule.useState(false)
-	local var8 = useMusicInfoModule(reactModule.useMemo(function() --[[ line: 30 ]]
+	local var8 = useMusicInfoModule(reactModule.useMemo(function()
 		-- upvalues: moment (ref)
 		if moment == nil then
 			return nil
@@ -40,7 +40,7 @@ return reactModule.memo(function(p0) --[[ line: 26 | named "MusicButton" ]]
 			Inner = reactModule.createElement(view, {
 				tag = "align-x-center align-y-center size-1200-1200 radius-medium",
 				isDisabled = p0.isDisabled,
-				onActivated = reactModule.useCallback(function() --[[ line: 47 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var7 (ref)
 					var7(true)
 				end, {})
@@ -53,7 +53,7 @@ return reactModule.memo(function(p0) --[[ line: 26 | named "MusicButton" ]]
 		}),
 		Modal = if var6 then reactModule.createElement(musicModalModule, {
 			musicInfo = var8,
-			onClose = reactModule.useCallback(function() --[[ line: 51 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: var7 (ref)
 				var7(false)
 			end, {})

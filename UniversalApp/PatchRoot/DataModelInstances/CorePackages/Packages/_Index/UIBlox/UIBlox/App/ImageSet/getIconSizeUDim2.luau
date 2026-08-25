@@ -2,7 +2,7 @@
 local iconSizeModule = require(parent.Enum.IconSize)
 local getIconSizeModule = require(parent.getIconSize)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: iconSizeModule (ref), getIconSizeModule (ref)
 	assert(iconSizeModule.isEnumValue(p0))
 	local var2 = getIconSizeModule(p0)

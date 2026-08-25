@@ -2,10 +2,10 @@
 local var1 = nil
 local var2 = false
 
-local _ = function() --[[ line: 7 ]]
+local _ = function()
 	-- upvalues: var2 (write), var1 (write)
 	if not var2 then
-		local ok, status = pcall(function() --[[ line: 9 ]]
+		local ok, status = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -17,10 +17,10 @@ local _ = function() --[[ line: 7 ]]
 	return var1
 end
 
-return function() --[[ line: 20 ]]
+return function()
 	-- upvalues: var2 (write), var1 (write), constantsModule (ref)
 	if not var2 then
-		local ok, status = pcall(function() --[[ line: 9 ]]
+		local ok, status = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		

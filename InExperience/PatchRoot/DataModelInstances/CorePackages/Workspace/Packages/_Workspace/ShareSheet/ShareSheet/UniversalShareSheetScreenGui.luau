@@ -10,7 +10,7 @@ local getLocalizationServiceStore = localizationModule.GetLocalizationServiceSto
 local localization = inExperienceLocalesModule.Localization
 local localizationProvider = localizationModule.LocalizationProvider
 
-local function UniversalShareSheetScreenGui() --[[ line: 22 ]]
+local function UniversalShareSheetScreenGui()
 	-- upvalues: reactModule (ref), getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), foundationModule (ref), localizationProvider (ref), universalShareSheetHostModule (ref)
 	local var8, var9 = reactModule.useState(nil)
 	local var10 = signalsReactModule.useSignalState(getLocalizationServiceStore().getRobloxLocaleId)
@@ -25,7 +25,7 @@ local function UniversalShareSheetScreenGui() --[[ line: 22 ]]
 	}, {
 		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			LocalizationProvider = reactModule.createElement(localizationProvider, {
-				localization = reactModule.useMemo(function() --[[ line: 26 ]]
+				localization = reactModule.useMemo(function()
 					-- upvalues: localization (copy), var10 (ref)
 					return localization.new(var10)
 				end, { var10 })
@@ -39,7 +39,7 @@ local function UniversalShareSheetScreenGui() --[[ line: 22 ]]
 end
 
 return {
-	mount = function(p0) --[[ line: 56 ]]
+	mount = function(p0)
 		-- upvalues: reactRobloxModule (ref), reactModule (ref), UniversalShareSheetScreenGui (ref)
 		local universalShareSheetScreenGuiRoot = Instance.new("Folder")
 		universalShareSheetScreenGuiRoot.Name = "UniversalShareSheetScreenGuiRoot"

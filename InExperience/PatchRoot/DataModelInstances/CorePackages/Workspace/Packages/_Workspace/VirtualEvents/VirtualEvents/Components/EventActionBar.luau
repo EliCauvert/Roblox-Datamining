@@ -19,7 +19,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
 local playButtonStates = gamePlayButtonModule.PlayButtonStates
 
-return function(p0) --[[ line: 43 | named "EventActionBar" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useExperienceSubtitleModule (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), playButtonStates (ref), reactModule (ref), text (ref), view (ref), button (ref), buttonVariant (ref), fillBehavior (ref), buttonSize (ref), imageSetLabel (ref), images (ref)
 	local var6 = useTokens()
 	local var7 = if p0.universeId then useExperienceSubtitleModule(p0.universeId) else nil
@@ -97,7 +97,7 @@ return function(p0) --[[ line: 43 | named "EventActionBar" ]]
 			CTAButton = reactModule.createElement(button, {
 				text = p0.ctaProps.button.text,
 				variant = buttonVariant[p0.ctaProps.button.variant],
-				onActivated = if var9 then p0.ctaProps.button.onActivated else function() --[[ line: 132 ]] end,
+				onActivated = if var9 then p0.ctaProps.button.onActivated else function() end,
 				fillBehavior = fillBehavior.Fill,
 				size = buttonSize.Medium,
 				isDisabled = not var9
@@ -108,7 +108,7 @@ return function(p0) --[[ line: 43 | named "EventActionBar" ]]
 			}, {
 				ShareButton = reactModule.createElement(button, {
 					variant = buttonVariant.Standard,
-					onActivated = if var9 then p0.ctaProps.icon.onActivated else function() --[[ line: 144 ]] end,
+					onActivated = if var9 then p0.ctaProps.icon.onActivated else function() end,
 					fillBehavior = fillBehavior.Fill,
 					size = buttonSize.Medium,
 					isDisabled = not var9

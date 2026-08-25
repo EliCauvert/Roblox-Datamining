@@ -4,17 +4,17 @@ local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
 local typesModule = require(viewRecycler.Core.Types)
 local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
 
-return function(p0) --[[ line: 17 | named "create" ]]
+return function(p0)
 	-- upvalues: typesModule (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
 	local getItemLayout = p0.getItemLayout
 	local var4 = 0
 	
 	return {
-		getItemCount = function() --[[ line: 21 ]]
+		getItemCount = function()
 			-- upvalues: var4 (write)
 			return var4
 		end,
-		getContentLength = function() --[[ line: 25 ]]
+		getContentLength = function()
 			-- upvalues: var4 (write), getItemLayout (ref)
 			if var4 == 0 then
 				return 0
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 17 | named "create" ]]
 			
 			return var5.startOffset + var5.length
 		end,
-		getIntersectingIndexRange = function(p1, p2) --[[ line: 33 ]]
+		getIntersectingIndexRange = function(p1, p2)
 			-- upvalues: var4 (write), typesModule (copy), getItemLayout (ref)
 			if var4 == 0 or p2 <= p1 then
 				return typesModule.EMPTY_INDEX_RANGE
@@ -58,14 +58,14 @@ return function(p0) --[[ line: 17 | named "create" ]]
 			end
 			return if p2 <= getItemLayout(var11).startOffset or var11 < var6 then typesModule.EMPTY_INDEX_RANGE else { firstIndex = var6, lastIndex = var11 }
 		end,
-		expandIndexRange = function(p3, p4, p5) --[[ line: 90 ]]
+		expandIndexRange = function(p3, p4, p5)
 			-- upvalues: staticPartsModule (copy), var4 (write)
 			return staticPartsModule.expandItemRange(p3, p4, p5 or p4, var4)
 		end,
 		getItemLayout = getItemLayout,
 		updateItemMeasurement = staticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = staticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p6) --[[ line: 73 ]]
+		applyDataSourceChange = function(p6)
 			-- upvalues: dataSourceChangeTypeModule (copy), var4 (write)
 			if p6.type == dataSourceChangeTypeModule.Reset then
 				var4 = #p6.keys

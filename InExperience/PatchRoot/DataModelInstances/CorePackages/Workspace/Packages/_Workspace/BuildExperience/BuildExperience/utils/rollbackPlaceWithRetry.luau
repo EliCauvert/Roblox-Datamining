@@ -7,10 +7,10 @@ local buildExperienceRollbackPlaceMaxRetries = game:DefineFastInt("BuildExperien
 local buildExperienceRollbackPlaceRetryDelayMs = game:DefineFastInt("BuildExperienceRollbackPlaceRetryDelayMs", 1000)
 local debug = creatorAgentChatModule.debug
 
-local function _(p0) --[[ line: 27 | named "formatDebugValue" ]]
+local function _(p0)
 	-- upvalues: httpService (ref)
 	if typeof(p0) == "table" then
-		local ok, status = pcall(function() --[[ line: 29 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p0 (ref)
 			return httpService:JSONEncode(p0)
 		end)
@@ -19,15 +19,15 @@ local function _(p0) --[[ line: 27 | named "formatDebugValue" ]]
 	end
 end
 
-local _ = function(p1) --[[ line: 39 | named "hasVersionNote" ]]
+local _ = function(p1)
 	return if p1.title == nil then p1.description ~= nil else true
 end
 
-local _ = function(p2, p3) --[[ line: 43 | named "debugMessage" ]]
+local _ = function(p2, p3)
 	return `{p2.debugSource or "rollback"} {p3}`
 end
 
-local function copyVersionNoteAfterRollback(p4, p5, p6, p7, p8, p9) --[[ line: 47 ]]
+local function copyVersionNoteAfterRollback(p4, p5, p6, p7, p8, p9)
 	-- upvalues: promiseModule (ref), debug (ref), httpService (ref)
 	if p8.note == nil then
 		return promiseModule.resolve()
@@ -51,7 +51,7 @@ local function copyVersionNoteAfterRollback(p4, p5, p6, p7, p8, p9) --[[ line: 4
 	elseif if p9.title == nil then p9.description ~= nil else true then
 		local var7 = tostring(p7.newVersionNumber)
 		
-		return p4.addVersionNote(p5, var7, p9):catch(function(p10) --[[ line: 89 ]]
+		return p4.addVersionNote(p5, var7, p9):catch(function(p10)
 			-- upvalues: debug (copy), p8 (ref), p5 (ref), p6 (ref), var7 (ref), p9 (ref), httpService (copy)
 			local var11
 			local log = debug.log
@@ -66,7 +66,7 @@ local function copyVersionNoteAfterRollback(p4, p5, p6, p7, p8, p9) --[[ line: 4
 			}
 			
 			if typeof(p10) == "table" then
-				local ok, status = pcall(function() --[[ line: 29 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p10 (ref)
 					return httpService:JSONEncode(p10)
 				end)
@@ -89,15 +89,15 @@ local function copyVersionNoteAfterRollback(p4, p5, p6, p7, p8, p9) --[[ line: 4
 	return promiseModule.resolve()
 end
 
-local _ = function(p11, p12) --[[ line: 103 | named "waitForRetry" ]]
+local _ = function(p11, p12)
 	-- upvalues: promiseModule (ref)
-	return if p12 == 0 then promiseModule.resolve() else promiseModule.new(function(p13) --[[ line: 108 ]]
+	return if p12 == 0 then promiseModule.resolve() else promiseModule.new(function(p13)
 		-- upvalues: p12 (ref), p11 (ref)
 		task.delay(p12 * p11 / 1000, p13)
 	end)
 end
 
-return function(p14, p15, p16) --[[ line: 113 | named "rollbackPlaceWithRetry" ]]
+return function(p14, p15, p16)
 	-- upvalues: buildExperienceRollbackPlaceMaxRetries (ref), buildExperienceRollbackPlaceRetryDelayMs (ref), placeVersionHistoryModule (ref), promiseModule (ref), copyVersionNoteAfterRollback (ref)
 	p16 = p16 or {}
 	local var13 = if p16.retries ~= nil then buildExperienceRollbackPlaceMaxRetries else p16.retries
@@ -105,19 +105,19 @@ return function(p14, p15, p16) --[[ line: 113 | named "rollbackPlaceWithRetry" ]
 	local var15 = if p16.published ~= nil then false else p16.published
 	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
 	
-	local function rollbackWithRetry(p17, p18) --[[ line: 128 ]]
+	local function rollbackWithRetry(p17, p18)
 		-- upvalues: placeVersionHistoryStore (ref), p14 (ref), p15 (ref), var15 (ref), var13 (ref), promiseModule (copy), var14 (ref), rollbackWithRetry (ref)
-		return placeVersionHistoryStore.rollbackPlace(p14, p15, if p18 ~= nil then nil else p18.description, var15):catch(function(p19) --[[ line: 130 ]]
+		return placeVersionHistoryStore.rollbackPlace(p14, p15, if p18 ~= nil then nil else p18.description, var15):catch(function(p19)
 			-- upvalues: p17 (ref), var13 (copy), promiseModule (copy), var14 (copy), rollbackWithRetry (copy), p18 (ref)
 			if var13 <= p17 then
 				return promiseModule.reject(p19)
 			end
 			local var19 = p17 + 1
 			
-			return (if var14 == 0 then promiseModule.resolve() else promiseModule.new(function(p20) --[[ line: 108 ]]
+			return (if var14 == 0 then promiseModule.resolve() else promiseModule.new(function(p20)
 				-- upvalues: var14 (ref), var19 (ref)
 				task.delay(var14 * var19 / 1000, p20)
-			end)):andThen(function() --[[ line: 136 ]]
+			end)):andThen(function()
 				-- upvalues: rollbackWithRetry (copy), var19 (ref), p18 (copy)
 				return rollbackWithRetry(var19, p18)
 			end)
@@ -127,23 +127,23 @@ return function(p14, p15, p16) --[[ line: 113 | named "rollbackPlaceWithRetry" ]
 	local note = p16.note
 	local var18 = 0
 	
-	return placeVersionHistoryStore.rollbackPlace(p14, p15, if note ~= nil then nil else note.description, var15):catch(function(p22) --[[ line: 130 ]]
+	return placeVersionHistoryStore.rollbackPlace(p14, p15, if note ~= nil then nil else note.description, var15):catch(function(p22)
 		-- upvalues: var18 (ref), var13 (ref), promiseModule (copy), var14 (ref), rollbackWithRetry (ref), note (ref)
 		if var13 <= var18 then
 			return promiseModule.reject(p22)
 		end
 		local var19 = var18 + 1
 		
-		return (if var14 == 0 then promiseModule.resolve() else promiseModule.new(function(p23) --[[ line: 108 ]]
+		return (if var14 == 0 then promiseModule.resolve() else promiseModule.new(function(p23)
 			-- upvalues: var14 (ref), var19 (ref)
 			task.delay(var14 * var19 / 1000, p23)
-		end)):andThen(function() --[[ line: 136 ]]
+		end)):andThen(function()
 			-- upvalues: rollbackWithRetry (copy), var19 (ref), note (copy)
 			return rollbackWithRetry(var19, note)
 		end)
-	end):andThen(function(p21) --[[ line: 143 ]]
+	end):andThen(function(p21)
 		-- upvalues: copyVersionNoteAfterRollback (copy), placeVersionHistoryStore (ref), p14 (ref), p15 (ref), p16 (ref), note (ref)
-		return copyVersionNoteAfterRollback(placeVersionHistoryStore, p14, p15, p21, p16, note):andThen(function() --[[ line: 145 ]]
+		return copyVersionNoteAfterRollback(placeVersionHistoryStore, p14, p15, p21, p16, note):andThen(function()
 			-- upvalues: p21 (ref)
 			return p21
 		end)

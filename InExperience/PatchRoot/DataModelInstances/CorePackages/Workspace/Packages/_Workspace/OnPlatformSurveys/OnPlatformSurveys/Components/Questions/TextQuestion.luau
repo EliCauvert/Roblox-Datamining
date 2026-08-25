@@ -6,7 +6,7 @@ local textInput = foundationModule.TextInput
 local view = foundationModule.View
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "TextQuestion" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), view (ref), textInput (ref)
 	local onAnswerChanged = p0.onAnswerChanged
 	
@@ -16,7 +16,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "TextQuestion" ]]
 			text = p0.answer.text or "",
 			width = UDim.new(1, 0),
 			isDisabled = p0.isDisabled,
-			onChanged = reactModule.useCallback(function(p1) --[[ line: 23 ]]
+			onChanged = reactModule.useCallback(function(p1)
 				-- upvalues: onAnswerChanged (ref)
 				onAnswerChanged({ text = p1 })
 			end, { onAnswerChanged })

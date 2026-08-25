@@ -26,12 +26,12 @@ local t_1 = {
 	settings = "LuaApp_Build_Settings_Scroll"
 }
 
-local function _(p0) --[[ line: 66 | named "getPublishPreview" ]]
+local function _(p0)
 	-- upvalues: publishLatestPreviewCardModule (ref), publishPreviewCardModule (ref)
 	return if p0 then publishLatestPreviewCardModule else publishPreviewCardModule
 end
 
-local function PublishPreview(p1) --[[ line: 70 ]]
+local function PublishPreview(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), publishStatusModule (ref), publishLatestPreviewCardModule (ref), publishPreviewCardModule (ref), reactModule (ref)
 	local target = p1.target
 	
@@ -48,7 +48,7 @@ local function PublishPreview(p1) --[[ line: 70 ]]
 	})
 end
 
-return function(p2) --[[ line: 94 | named "BuildOverflowMenuPageComponent" ]]
+return function(p2)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), PublishPreview (ref), publishConfigurationContentContainerModule (ref), gameConfigurationContentModule (ref), view (ref), fFlagEnableProvisionalRatingModule (ref), overflowMenuPageShellModule (ref), t (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), t_1 (ref), publishFooterModule (ref)
 	local var17 = if fFlagBuildLocalization then useLocalization({
 		loading = localizationStringsModule.BUILD_MENU_LOADING,

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppCustomizableEntryPoint", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaAppCustomizableEntryPoint")
 end

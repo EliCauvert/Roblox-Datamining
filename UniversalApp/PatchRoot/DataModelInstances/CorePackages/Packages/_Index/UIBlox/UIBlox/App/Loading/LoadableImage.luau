@@ -1,5 +1,5 @@
 ﻿local var0 = nil
-pcall(function() --[[ line: 5 ]]
+pcall(function()
 	-- upvalues: var0 (write)
 	var0 = game:GetService("RbxAnalyticsService")
 end)
@@ -65,7 +65,7 @@ loadableImage.defaultProps = {
 	loadingStrategy = loadingStrategyModule.Default
 }
 
-function loadableImage.init(p0) --[[ line: 115 ]]
+function loadableImage.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.currentImageLoadIndex = 0
 	p0:setState({ eagerRetrying = false })
@@ -73,7 +73,7 @@ function loadableImage.init(p0) --[[ line: 115 ]]
 	p0._isMounted = false
 end
 
-function loadableImage.renderShimmer(p1, p2, p3, p4) --[[ line: 125 ]]
+function loadableImage.renderShimmer(p1, p2, p3, p4)
 	-- upvalues: roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -101,7 +101,7 @@ function loadableImage.renderShimmer(p1, p2, p3, p4) --[[ line: 125 ]]
 	})
 end
 
-function loadableImage.defaultRenderOnFail(p5, p6, p7) --[[ line: 159 ]]
+function loadableImage.defaultRenderOnFail(p5, p6, p7)
 	-- upvalues: imagesModule (ref), roactModule (ref), imageSetComponentModule (ref)
 	local cornerRadius = p5.props.cornerRadius
 	local imageunavailable = imagesModule["icons/status/imageunavailable"]
@@ -133,12 +133,12 @@ function loadableImage.defaultRenderOnFail(p5, p6, p7) --[[ line: 159 ]]
 	})
 end
 
-function loadableImage.isImageNonNil(p8) --[[ line: 195 ]]
+function loadableImage.isImageNonNil(p8)
 	-- upvalues: roactModule (ref)
 	return p8.props.Image ~= roactModule.None and p8.props.Image ~= nil
 end
 
-function loadableImage.getCurrentImageAssetFetchStatus(value, p9) --[[ line: 199 ]]
+function loadableImage.getCurrentImageAssetFetchStatus(value, p9)
 	local currentImageLoadIndex = p9[value:getAssetFetchStatusStateKey(value.currentImageLoadIndex)]
 	
 	if currentImageLoadIndex == nil then
@@ -147,13 +147,13 @@ function loadableImage.getCurrentImageAssetFetchStatus(value, p9) --[[ line: 199
 	return currentImageLoadIndex
 end
 
-function loadableImage.isLoadingComplete(p10, p11) --[[ line: 209 ]]
+function loadableImage.isLoadingComplete(p10, p11)
 	local var15 = p10:getCurrentImageAssetFetchStatus(p11)
 	
 	return if var15 == Enum.AssetFetchStatus.None or var15 == Enum.AssetFetchStatus.Loading then false else (var15 == Enum.AssetFetchStatus.Failure or var15 == Enum.AssetFetchStatus.TimedOut) and p11.eagerRetrying
 end
 
-function loadableImage.render(p12) --[[ line: 222 ]]
+function loadableImage.render(p12)
 	-- upvalues: debugPropsModule (ref), roactModule (ref), withStyleModule (ref), loadingStrategyModule (ref), imageSetComponentModule (ref)
 	local anchorPoint = p12.props.AnchorPoint
 	local layoutOrder = p12.props.LayoutOrder
@@ -194,7 +194,7 @@ function loadableImage.render(p12) --[[ line: 222 ]]
 	end
 	local UISizeConstraint = var20 and roactModule.createElement("UISizeConstraint", { MaxSize = maxSize, MinSize = minSize })
 	
-	return withStyleModule(function(p13) --[[ line: 270 ]]
+	return withStyleModule(function(p13)
 		-- upvalues: var19 (write), renderOnFailed (ref), showFailedStateWhenLoadingFailed (ref), p12 (ref), UISizeConstraint (ref), state (write), renderOnLoading (ref), loadingStrategy (ref), loadingStrategyModule (copy), useShimmerAnimationWhileLoading (ref), var18 (ref), roactModule (copy), imageSetComponentModule (copy), anchorPoint (ref), backgroundColor3 (ref), backgroundTransparency (ref), image (ref), loadingImage (ref), imageTransparency (ref), imageRectOffset (ref), imageRectSize (ref), imageColor3 (ref), layoutOrder (ref), position (ref), scaleType (ref), size (ref), zIndex (ref), cornerRadius (ref)
 		local theme = p13.Theme
 		local tokens = p13.Tokens
@@ -236,7 +236,7 @@ function loadableImage.render(p12) --[[ line: 222 ]]
 	end)
 end
 
-function loadableImage.maybeCallOnLoaded(p14, p15) --[[ line: 334 ]]
+function loadableImage.maybeCallOnLoaded(p14, p15)
 	if p14.props.onLoaded then
 		if not p14:isLoadingComplete(p15) and p14:isLoadingComplete(p14.state) then
 			p14.props.onLoaded()
@@ -244,36 +244,36 @@ function loadableImage.maybeCallOnLoaded(p14, p15) --[[ line: 334 ]]
 	end
 end
 
-function loadableImage.didUpdate(p16, p17, p18) --[[ line: 344 ]]
+function loadableImage.didUpdate(p16, p17, p18)
 	if p17.Image ~= p16.props.Image then
 		p16:loadImage()
 	end
 	p16:maybeCallOnLoaded(p18)
 end
 
-function loadableImage.didMount(p19) --[[ line: 351 ]]
+function loadableImage.didMount(p19)
 	p19._isMounted = true
 	p19:loadImage()
 end
 
-function loadableImage.willUnmount(p20) --[[ line: 359 ]]
+function loadableImage.willUnmount(p20)
 	p20._isMounted = false
 	p20:dropConnections()
 end
 
-function loadableImage.isTerminalStatus(_, b) --[[ line: 364 ]]
+function loadableImage.isTerminalStatus(_, b)
 	return if b ~= Enum.AssetFetchStatus.Success then if b ~= Enum.AssetFetchStatus.Failure then b == Enum.AssetFetchStatus.TimedOut else true else true
 end
 
-function loadableImage.getImageUri(p21) --[[ line: 374 ]]
+function loadableImage.getImageUri(p21)
 	return if p21.props.Image then if typeof(p21.props.Image) == "string" then p21.props.Image else p21.props.Image.Image else nil
 end
 
-function loadableImage.awaitImageLoaded(p22, p23, p24) --[[ line: 388 ]]
+function loadableImage.awaitImageLoaded(p22, p23, p24)
 	if p22:isTerminalStatus(p24) then return end
 	local imageUri = p22:getImageUri()
 	
-	local var24 = function(p25) --[[ line: 399 ]]
+	local var24 = function(p25)
 		-- upvalues: p22 (ref), p23 (ref), imageUri (ref)
 		p22:updateAssetFetchStatusForImageLoadIndex(p25, p23, imageUri)
 		p22:maybeReportCounter("Await", p25)
@@ -299,15 +299,15 @@ function loadableImage.awaitImageLoaded(p22, p23, p24) --[[ line: 388 ]]
 	end
 end
 
-function loadableImage.maybeReportCounter(_, p26, p27) --[[ line: 417 ]]
+function loadableImage.maybeReportCounter(_, p26, p27)
 	-- upvalues: var0 (write)
-	pcall(function() --[[ line: 420 ]]
+	pcall(function()
 		-- upvalues: p26 (ref), p27 (ref), var0 (copy)
 		var0:ReportCounter("UIBlox_LoadableImage_" .. p26 .. "_" .. tostring(p27))
 	end)
 end
 
-function loadableImage.preloadImageWithRetryLogic(p28, p29) --[[ line: 432 ]]
+function loadableImage.preloadImageWithRetryLogic(p28, p29)
 	local imageUri = p28:getImageUri()
 	local var26 = 0
 	local none = Enum.AssetFetchStatus.None
@@ -316,7 +316,7 @@ function loadableImage.preloadImageWithRetryLogic(p28, p29) --[[ line: 432 ]]
 			if var26 > 0 then
 				task.wait(math.pow(2, var26 - 1) * 1.5)
 			end
-			p28.props.contentProvider:PreloadAsync({ imageUri }, function(_, p30) --[[ line: 447 ]]
+			p28.props.contentProvider:PreloadAsync({ imageUri }, function(_, p30)
 				-- upvalues: p28 (ref), imageUri (ref), none (write), p29 (ref)
 				if p28._isMounted and p28:getImageUri() == imageUri then
 					p28:maybeReportCounter("PreloadAsync", p30)
@@ -338,15 +338,15 @@ function loadableImage.preloadImageWithRetryLogic(p28, p29) --[[ line: 432 ]]
 	p28:setState({ eagerRetrying = false })
 end
 
-function loadableImage.getAssetFetchStatusStateKey(_, p31) --[[ line: 494 ]]
+function loadableImage.getAssetFetchStatusStateKey(_, p31)
 	return "assetFetchStatus_" .. tostring(p31)
 end
 
-function loadableImage.updateAssetFetchStatusForImageLoadIndex(value, p32, p33, _) --[[ line: 498 ]]
+function loadableImage.updateAssetFetchStatusForImageLoadIndex(value, p32, p33, _)
 	value:setState({ [value:getAssetFetchStatusStateKey(p33)] = p32 })
 end
 
-function loadableImage.dropConnections(p34) --[[ line: 505 ]]
+function loadableImage.dropConnections(p34)
 	if p34.listenForReloadsConnection then
 		p34.listenForReloadsConnection:Disconnect()
 		p34.listenForReloadsConnection = nil
@@ -357,7 +357,7 @@ function loadableImage.dropConnections(p34) --[[ line: 505 ]]
 	end
 end
 
-function loadableImage.loadImage(p35) --[[ line: 516 ]]
+function loadableImage.loadImage(p35)
 	-- upvalues: loadingStrategyModule (ref)
 	local var27 = p35.currentImageLoadIndex + 1
 	p35.currentImageLoadIndex = var27
@@ -376,14 +376,14 @@ function loadableImage.loadImage(p35) --[[ line: 516 ]]
 	p35:updateAssetFetchStatusForImageLoadIndex(var29, var27, imageUri)
 	
 	if p35.props.shouldHandleReloads then
-		p35.listenForReloadsConnection = p35.props.contentProvider:GetAssetFetchStatusChangedSignal(imageUri):Connect(function(p36, _) --[[ line: 547 ]]
+		p35.listenForReloadsConnection = p35.props.contentProvider:GetAssetFetchStatusChangedSignal(imageUri):Connect(function(p36, _)
 			-- upvalues: p35 (ref), var27 (ref), imageUri (ref)
 			p35:maybeReportCounter("Reloads", p36)
 			p35:updateAssetFetchStatusForImageLoadIndex(p36, var27, imageUri)
 		end)
 	end
 	if loadingStrategy == loadingStrategyModule.Eager then
-		task.spawn(function() --[[ line: 556 ]]
+		task.spawn(function()
 			-- upvalues: p35 (ref), var27 (ref)
 			p35:preloadImageWithRetryLogic(var27)
 		end)
@@ -394,10 +394,10 @@ function loadableImage.loadImage(p35) --[[ line: 516 ]]
 	end
 end
 
-return function(p37) --[[ line: 564 ]]
+return function(p37)
 	-- upvalues: roactModule (ref), contentProviderModule (ref), cryoModule (ref), loadableImage (ref)
 	return roactModule.createElement(contentProviderModule.Consumer, {
-		render = function(p38) --[[ line: 566 ]]
+		render = function(p38)
 			-- upvalues: cryoModule (copy), p37 (ref), roactModule (copy), loadableImage (copy)
 			return roactModule.createElement(loadableImage, cryoModule.Dictionary.join(p37, { contentProvider = p38 }))
 		end

@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 3 | named "getScale" ]]
+﻿return function(p0, p1, p2)
 	if p0.X == 0 or p0.Y == 0 or (p1.X == 0 or p1.Y == 0) then
 		return 1
 	end

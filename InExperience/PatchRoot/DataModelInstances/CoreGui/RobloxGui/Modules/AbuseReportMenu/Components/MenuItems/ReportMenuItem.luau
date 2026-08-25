@@ -9,7 +9,7 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local getMenuItemDimensionsModule = require(abuseReportMenu.Components.getMenuItemDimensions)
 
-return function(p0) --[[ line: 23 | named "DropdownReportMenuItem" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), getMenuItemDimensionsModule (ref), constantsModule (ref), reactModule (ref), textService (ref), appFonts (ref), cryoModule (ref)
 	local var8 = useStyle()
 	local var9 = if p0.label == "" or p0.isRightComponentFullWidth then 0 else var8.Tokens.Size.Size_150
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 23 | named "DropdownReportMenuItem" ]]
 	local var10 = getMenuItemDimensionsModule(p0.menuContainerWidth)
 	local maxValue = math.max(p0.menuContainerWidth - constantsModule.MenuItemDynamicWidthOffset, var10.LeftWidth + var10.RightWidth)
 	local var12, var13 = reactModule.useState(var8.Tokens.Size.Size_1000)
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var8 (ref), textService (copy), p0 (ref), var10 (ref), appFonts (copy), maxValue (ref)
 		var13(math.max(var8.Tokens.Size.Size_1000, textService:GetTextSize(p0.label, var10.TextSize, appFonts.default:getMedium(), Vector2.new(if p0.isSmallPortraitViewport then maxValue else var10.LeftWidth, 1e999)).Y))
 	end, {})

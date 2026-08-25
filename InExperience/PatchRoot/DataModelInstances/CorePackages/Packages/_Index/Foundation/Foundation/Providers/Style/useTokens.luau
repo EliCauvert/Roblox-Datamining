@@ -4,7 +4,7 @@ local _ = require(parent.Tokens)
 local tokensContextModule = require(parent.TokensContext)
 local reactModule = require(parent_1.React)
 
-return function() --[[ line: 10 | named "useTokens" ]]
+return function()
 	-- upvalues: reactModule (ref), tokensContextModule (ref)
 	return reactModule.useContext(tokensContextModule)
 end

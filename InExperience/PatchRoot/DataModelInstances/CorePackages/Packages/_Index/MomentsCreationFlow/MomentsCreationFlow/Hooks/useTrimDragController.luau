@@ -10,7 +10,7 @@ local useRef = reactModule.useRef
 local validateRefsModule = require(momentsCreationFlow.Utils.validateRefs)
 local dragHandleModule = require(momentsCreationFlow.Enums.DragHandle)
 
-return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDragController" ]]
+return function(value, p0, p1, p2, p3, p4, p5)
 	-- upvalues: useRef (ref), useAnimatedBinding (ref), useCallback (ref), validateRefsModule (ref), dragHandleModule (ref), momentsCommonModule (ref), reactOtterModule (ref), useEffect (ref)
 	local var6 = useRef(nil)
 	local var7 = useRef(nil)
@@ -24,7 +24,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 	local var17 = useRef(nil)
 	local var18 = useRef(nil)
 	local var19 = useRef(nil)
-	local var20 = useCallback(function() --[[ line: 47 ]]
+	local var20 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var7 (ref), var19 (ref), dragHandleModule (copy), var16 (ref), var12 (ref), p1 (ref)
 		if validateRefsModule({ var7 }) and not var19.current then
 			assert(var7.current ~= nil, "Left handle ref is nil")
@@ -35,7 +35,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p1 })
-	local var21 = useCallback(function() --[[ line: 58 ]]
+	local var21 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var16 (ref), var7 (ref), var14 (ref), momentsCommonModule (copy), p5 (ref), var13 (ref), reactOtterModule (copy)
 		if validateRefsModule({ var16, var7 }) then
 			assert(var16.current ~= nil, "Left handle initial position ref is nil")
@@ -45,7 +45,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p5 })
-	local var22 = useCallback(function() --[[ line: 75 ]]
+	local var22 = useCallback(function()
 		-- upvalues: var19 (ref), dragHandleModule (copy), p2 (ref), var12 (ref), p5 (ref), var16 (ref), p0 (ref)
 		if var19.current == dragHandleModule.LeftHandle then
 			p2(var12:getValue() * p5, nil)
@@ -56,7 +56,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p0, p2, p5 })
-	local var23 = useCallback(function() --[[ line: 86 ]]
+	local var23 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var8 (ref), var19 (ref), dragHandleModule (copy), var17 (ref), var14 (ref), p1 (ref)
 		if validateRefsModule({ var8 }) and not var19.current then
 			assert(var8.current ~= nil, "Right handle ref is nil")
@@ -67,7 +67,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p1 })
-	local var24 = useCallback(function() --[[ line: 97 ]]
+	local var24 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var17 (ref), var8 (ref), var12 (ref), momentsCommonModule (copy), p5 (ref), var15 (ref), reactOtterModule (copy)
 		if validateRefsModule({ var17, var8 }) then
 			assert(var8.current ~= nil, "Right handle ref is nil")
@@ -76,7 +76,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p5 })
-	local var25 = useCallback(function() --[[ line: 113 ]]
+	local var25 = useCallback(function()
 		-- upvalues: var19 (ref), dragHandleModule (copy), p2 (ref), var14 (ref), p5 (ref), var17 (ref), p0 (ref)
 		if var19.current == dragHandleModule.RightHandle then
 			p2(nil, var14:getValue() * p5)
@@ -87,7 +87,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p0, p2, p5 })
-	local var26 = useCallback(function() --[[ line: 124 ]]
+	local var26 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var11 (ref), var10 (ref), var19 (ref), dragHandleModule (copy), var18 (ref), p1 (ref)
 		if validateRefsModule({ var11, var10 }) and not var19.current then
 			assert(var11.current ~= nil, "Scrubber ref is nil")
@@ -99,7 +99,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p1 })
-	local var27 = useCallback(function() --[[ line: 136 ]]
+	local var27 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var18 (ref), var11 (ref), p3 (ref)
 		if validateRefsModule({ var18, var11 }) then
 			assert(var18.current ~= nil, "Scrubber initial position ref is nil")
@@ -109,7 +109,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p3 })
-	local var28 = useCallback(function() --[[ line: 149 ]]
+	local var28 = useCallback(function()
 		-- upvalues: var19 (ref), dragHandleModule (copy), var18 (ref), p0 (ref)
 		if var19.current == dragHandleModule.Scrubber then
 			var19.current = nil
@@ -119,7 +119,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p0 })
-	local var29 = useCallback(function() --[[ line: 159 ]]
+	local var29 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var9 (ref), var19 (ref), dragHandleModule (copy), var16 (ref), var12 (ref), var17 (ref), var14 (ref), p1 (ref)
 		if validateRefsModule({ var9 }) and not var19.current then
 			assert(var9.current ~= nil, "Selected outline ref is nil")
@@ -131,7 +131,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p1 })
-	local var30 = useCallback(function() --[[ line: 171 ]]
+	local var30 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var9 (ref), var16 (ref), var7 (ref), var17 (ref), var8 (ref), var13 (ref), reactOtterModule (copy), var15 (ref), p2 (ref), p5 (ref)
 		if not validateRefsModule({
 			var9,
@@ -159,7 +159,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 		var15(reactOtterModule.instant(var34))
 		p2(var33 * p5, var34 * p5)
 	end, { p2, p5 })
-	local var31 = useCallback(function() --[[ line: 209 ]]
+	local var31 = useCallback(function()
 		-- upvalues: var19 (ref), dragHandleModule (copy), var16 (ref), var17 (ref), p0 (ref)
 		if var19.current == dragHandleModule.Segment then
 			var19.current = nil
@@ -170,7 +170,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			return
 		end
 	end, { p0 })
-	useEffect(function() --[[ line: 220 ]]
+	useEffect(function()
 		-- upvalues: value (ref), var7 (ref), var20 (ref), var21 (ref), var22 (ref), var8 (ref), var23 (ref), var24 (ref), var25 (ref), var11 (ref), var26 (ref), var27 (ref), var28 (ref), var9 (ref), var29 (ref), var30 (ref), var31 (ref)
 		if not value then return end
 		local t = {}
@@ -195,7 +195,7 @@ return function(value, p0, p1, p2, p3, p4, p5) --[[ line: 20 | named "useTrimDra
 			table.insert(t, var9.current.DragContinue:Connect(var30))
 			table.insert(t, var9.current.DragEnd:Connect(var31))
 		end
-		return function() --[[ line: 251 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

@@ -13,13 +13,13 @@ local useNavigation = require(parent_1.Navigation).useNavigation
 local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
 local userProfilesDisplayNameAndUsernameByUserIds = userProfilesModule.Queries.userProfilesDisplayNameAndUsernameByUserIds
 
-return function() --[[ line: 30 ]]
+return function()
 	-- upvalues: useScreenSize (ref), useDispatch (ref), useLocalUserId (ref), useNavigation (ref), robloxAppNavigationModule (ref), useUserProfilesFetch (ref), userProfilesDisplayNameAndUsernameByUserIds (ref), userProfilesModule (ref), friendsNetworkingModule (ref), reactModule (ref), setNicknameModalModule (ref)
 	local var6 = useScreenSize()
 	local var7 = useDispatch()
 	local var8 = useLocalUserId()
 	local var9 = useNavigation()
-	local friendRequestParams = robloxAppNavigationModule.useNavigationProps(function(_, p0) --[[ line: 36 ]]
+	local friendRequestParams = robloxAppNavigationModule.useNavigationProps(function(_, p0)
 		return { friendRequestParams = p0.friendRequestParams }
 	end).friendRequestParams
 	local var10 = useUserProfilesFetch({
@@ -29,7 +29,7 @@ return function() --[[ line: 30 ]]
 	local _ = nil
 	local var11 = if friendRequestParams and var10 and var10.data then userProfilesModule.Selectors.getDisplayNameFromId(var10.data, friendRequestParams.targetUserId) else nil
 	
-	local var12 = function(p1) --[[ line: 57 ]]
+	local var12 = function(p1)
 		-- upvalues: var8 (ref), var7 (ref), friendsNetworkingModule (copy)
 		return var7(friendsNetworkingModule.ValidateFriendRequestNickname.API({ senderNickname = p1, currentUserId = var8 }))
 	end
@@ -42,7 +42,7 @@ return function() --[[ line: 30 ]]
 		recipientDisplayName = var11,
 		screenSize = var6,
 		navigateBack = var9.goBack,
-		sendFriendRequest = function() --[[ line: 68 ]]
+		sendFriendRequest = function()
 			-- upvalues: var8 (ref), friendRequestParams (ref), var7 (ref), friendsNetworkingModule (copy)
 			return var7(friendsNetworkingModule.RequestFriendshipFromUserId.API({
 				currentUserId = var8,
@@ -50,7 +50,7 @@ return function() --[[ line: 30 ]]
 				friendshipOriginSourceType = friendRequestParams.source
 			}))
 		end,
-		sendFriendRequestWithNickname = function(p2) --[[ line: 77 ]]
+		sendFriendRequestWithNickname = function(p2)
 			-- upvalues: var8 (ref), friendRequestParams (ref), var7 (ref), friendsNetworkingModule (copy)
 			return var7(friendsNetworkingModule.RequestFriendshipFromUserId.API({
 				currentUserId = var8,

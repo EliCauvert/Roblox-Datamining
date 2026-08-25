@@ -9,10 +9,10 @@ return {
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 24 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationService (ref), errorSourceStringsModule (ref)
 		local head = p1.renderMeshesData.Head
-		local ok, status = pcall(function() --[[ line: 27 ]]
+		local ok, status = pcall(function()
 			-- upvalues: UGCValidationService (copy), head (ref)
 			return UGCValidationService:ValidateDynamicHeadEditableMesh(head.editable)
 		end)

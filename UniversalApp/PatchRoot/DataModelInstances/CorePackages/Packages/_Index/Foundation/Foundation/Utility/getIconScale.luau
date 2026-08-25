@@ -32,7 +32,7 @@ local t_1 = {
 	}
 }
 
-return function(p0, p1) --[[ line: 55 | named "useIcon" ]]
+return function(p0, p1)
 	-- upvalues: isBuilderIconModule (ref), images (ref), resolutionScale (ref), iconSizeModule (ref), dashModule (ref), t (ref), t_1 (ref)
 	if not p0 or isBuilderIconModule(p0) then
 		return nil, 1

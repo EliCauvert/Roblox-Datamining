@@ -2,7 +2,7 @@
 local emphasisParserModule = require(script.Parent.EmphasisParser)
 
 return ({
-	postProcessTokens = function(p0) --[[ line: 11 ]]
+	postProcessTokens = function(p0)
 		-- upvalues: emphasisParserModule (ref)
 		local t = {}
 		local var2 = 1

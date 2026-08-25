@@ -11,7 +11,7 @@ local tabDropDownWidth = constantsModule.TabRowFormatting.TabDropDownWidth
 local tabOverlapThreshold = constantsModule.TabRowFormatting.TabOverlapThreshold
 local tabRowContainer = roactModule.Component:extend("TabRowContainer")
 
-local function initTabList(p0) --[[ line: 19 ]]
+local function initTabList(p0)
 	-- upvalues: textService (ref), constantsModule (ref)
 	local t = {}
 	local var12 = 0
@@ -26,7 +26,7 @@ local function initTabList(p0) --[[ line: 19 ]]
 	return t, var12, var13
 end
 
-function tabRowContainer.init(p1) --[[ line: 33 ]]
+function tabRowContainer.init(p1)
 	-- upvalues: initTabList (ref)
 	local var15, var16, var17 = initTabList(p1.props.tabList)
 	p1.state = {
@@ -36,7 +36,7 @@ function tabRowContainer.init(p1) --[[ line: 33 ]]
 		totalTabCount = var17
 	}
 	
-	function p1.onTabButtonClicked(p2) --[[ line: 45 ]]
+	function p1.onTabButtonClicked(p2)
 		-- upvalues: p1 (ref)
 		for i, v in pairs(p1.props.tabList) do
 			if v.layoutOrder == p2 then
@@ -48,7 +48,7 @@ function tabRowContainer.init(p1) --[[ line: 33 ]]
 	end
 end
 
-function tabRowContainer.didUpdate(p3, p4, _) --[[ line: 55 ]]
+function tabRowContainer.didUpdate(p3, p4, _)
 	-- upvalues: initTabList (ref)
 	if p4.tabList ~= p3.props.tabList then
 		local var18, var19, var20 = initTabList(p3.props.tabList)
@@ -60,7 +60,7 @@ function tabRowContainer.didUpdate(p3, p4, _) --[[ line: 55 ]]
 	end
 end
 
-function tabRowContainer.render(p5) --[[ line: 66 ]]
+function tabRowContainer.render(p5)
 	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), roactModule (ref), fullScreenDropDownButtonModule (ref), tabDropDownWidth (ref), dropDownModule (ref), tabRowButtonModule (ref)
 	local tabList = p5.props.tabList
 	local currTabIndex = p5.props.currTabIndex
@@ -131,15 +131,15 @@ function tabRowContainer.render(p5) --[[ line: 66 ]]
 	}, t)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _) --[[ line: 146 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
 	return {
 		tabList = p6.MainView.tabList,
 		currTabIndex = p6.MainView.currTabIndex
 	}
-end, function(p7) --[[ line: 153 | named "mapDispatchToProps" ]]
+end, function(p7)
 	-- upvalues: setActiveTabModule (ref)
 	return {
-		dispatchSetActiveTab = function(value, p8) --[[ line: 155 ]]
+		dispatchSetActiveTab = function(value, p8)
 			-- upvalues: p7 (ref), setActiveTabModule (copy)
 			p7(setActiveTabModule(value, p8))
 		end

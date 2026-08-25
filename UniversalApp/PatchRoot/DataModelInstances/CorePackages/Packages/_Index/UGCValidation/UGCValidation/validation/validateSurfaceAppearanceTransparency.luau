@@ -8,7 +8,7 @@ local getEditableImageFromContextModule = require(parent.util.getEditableImageFr
 local parseContentIdsModule = require(parent.util.ParseContentIds)
 local t = { ColorMap = true, NormalMap = true }
 
-return function(p0, p1) --[[ line: 22 | named "validateSurfaceAppearanceTransparency" ]]
+return function(p0, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref), parseContentIdsModule (ref), constantsModule (ref), t (ref), getEditableImageFromContextModule (ref), validateTextureTransparencyModule (ref)
 	local currentTime = tick()
 	local descendants = p0:GetDescendants()

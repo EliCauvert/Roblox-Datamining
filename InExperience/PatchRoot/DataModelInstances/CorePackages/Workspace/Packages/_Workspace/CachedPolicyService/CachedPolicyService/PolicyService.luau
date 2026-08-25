@@ -7,7 +7,7 @@ local var5 = false
 local bindableEvent = Instance.new("BindableEvent")
 
 return {
-	InitAsync = function(_) --[[ line: 21 ]]
+	InitAsync = function(_)
 		-- upvalues: var1 (write), var2 (write), var4 (write), var5 (write), bindableEvent (ref), playersService (ref), var3 (write)
 		if _G.__TESTEZ_RUNNING_TEST__ then
 			var1 = false
@@ -27,7 +27,7 @@ return {
 			localPlayer = playersService.LocalPlayer
 		end
 		assert(localPlayer, "")
-		pcall(function() --[[ line: 45 ]]
+		pcall(function()
 			-- upvalues: var3 (copy), localPlayer (write)
 			var3 = game:GetService("PolicyService"):GetPolicyInfoForPlayerAsync(localPlayer)
 		end)
@@ -39,13 +39,13 @@ return {
 		var4 = true
 		bindableEvent:Fire()
 	end,
-	IsSubjectToChinaPolicies = function(p0) --[[ line: 57 ]]
+	IsSubjectToChinaPolicies = function(p0)
 		-- upvalues: var1 (write)
 		p0:InitAsync()
 		
 		return var1
 	end,
-	IsContentSharingAllowed = function(p1) --[[ line: 63 ]]
+	IsContentSharingAllowed = function(p1)
 		-- upvalues: var2 (write)
 		p1:InitAsync()
 		

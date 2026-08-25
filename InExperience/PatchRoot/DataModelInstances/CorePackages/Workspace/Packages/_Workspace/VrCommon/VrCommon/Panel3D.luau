@@ -25,7 +25,7 @@ local var17 = create("ImageLabel")({
 })
 local var18 = create("Folder")({ Name = "VRCorePanelParts", Archivable = false })
 local var19 = create("Folder")({ Name = "VRCoreEffectParts", Archivable = false })
-pcall(function() --[[ line: 57 ]]
+pcall(function()
 	-- upvalues: guiService (ref), var18 (ref), var19 (ref)
 	guiService.CoreGuiFolder = var18
 	guiService.CoreEffectFolder = var19
@@ -43,7 +43,7 @@ local t_1 = {
 		UIManagerManaged = 8
 	},
 	OnPanelClosed = create("BindableEvent")({ Name = "OnPanelClosed" }),
-	GetHeadLookXZ = function(p0) --[[ line: 81 ]]
+	GetHeadLookXZ = function(p0)
 		-- upvalues: VRService (ref)
 		local headUserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head)
 		local lookVector = headUserCFrame.lookVector
@@ -54,7 +54,7 @@ local t_1 = {
 		end
 		return cframe
 	end,
-	FindContainerOf = function(p1) --[[ line: 93 ]]
+	FindContainerOf = function(p1)
 		-- upvalues: t (ref)
 		for i, v in pairs(t) do
 			if not v.gui or not v.gui:IsAncestorOf(p1) then
@@ -68,7 +68,7 @@ local t_1 = {
 		end
 		return nil
 	end,
-	SetModalPanel = function(value) --[[ line: 107 ]]
+	SetModalPanel = function(value)
 		-- upvalues: var11 (write), var12 (write)
 		if var11 == value then return end
 		if var11 then
@@ -80,7 +80,7 @@ local t_1 = {
 		var12 = var11
 		var11 = value
 	end,
-	RaycastOntoPanel = function(p2, p3, p4, p5) --[[ line: 121 ]]
+	RaycastOntoPanel = function(p2, p3, p4, p5)
 		-- upvalues: VRUtilModule (ref)
 		local size = p2.Size
 		local z = size.Z
@@ -106,7 +106,7 @@ local t_1 = {
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p6) --[[ line: 169 ]]
+function t_2.new(p6)
 	-- upvalues: t_1 (ref), t (ref), t_2 (ref)
 	local t_3 = {
 		name = p6,
@@ -160,7 +160,7 @@ function t_2.new(p6) --[[ line: 169 ]]
 	return setmetatable(t_3, t_2)
 end
 
-function t_2:GetPart() --[[ line: 232 ]]
+function t_2:GetPart()
 	-- upvalues: create (ref), var18 (ref)
 	if not self.part then
 		self.part = create("Part")({
@@ -176,7 +176,7 @@ function t_2:GetPart() --[[ line: 232 ]]
 	return self.part
 end
 
-function t_2:GetGUI() --[[ line: 250 ]]
+function t_2:GetGUI()
 	-- upvalues: create (ref), coreGuiService (ref)
 	if not self.gui then
 		self.gui = create("SurfaceGui")({
@@ -194,7 +194,7 @@ function t_2:GetGUI() --[[ line: 250 ]]
 	return self.gui
 end
 
-function t_2:FindHoveredGuiElement(p7) --[[ line: 268 ]]
+function t_2:FindHoveredGuiElement(p7)
 	local x = self.lookAtPixel.X
 	local y = self.lookAtPixel.Y
 	
@@ -208,12 +208,12 @@ function t_2:FindHoveredGuiElement(p7) --[[ line: 268 ]]
 	end
 end
 
-function t_2:SetPartCFrame(p8) --[[ line: 282 ]]
+function t_2:SetPartCFrame(p8)
 	-- upvalues: var10 (ref)
 	self:GetPart().CFrame = p8 * var10
 end
 
-function t_2:SetEnabled(p9) --[[ line: 286 ]]
+function t_2:SetEnabled(p9)
 	-- upvalues: var18 (ref)
 	if self.isEnabled == p9 then return end
 	self.isEnabled = p9
@@ -236,7 +236,7 @@ function t_2:SetEnabled(p9) --[[ line: 286 ]]
 	self:OnEnabled(p9)
 end
 
-function t_2:StartLerp(endValue) --[[ line: 309 ]]
+function t_2:StartLerp(endValue)
 	-- upvalues: t_1 (ref)
 	if self.panelType == t_1.Type.UIManagerManaged then
 		return
@@ -247,7 +247,7 @@ function t_2:StartLerp(endValue) --[[ line: 309 ]]
 	self.lerpScaleSize = endValue or Vector2.new(0, 0)
 end
 
-function t_2:EvaluatePositioning(p10, p11, p12, p13) --[[ line: 320 ]]
+function t_2:EvaluatePositioning(p10, p11, p12, p13)
 	-- upvalues: t_1 (ref), cFrame (ref), VRService (ref), cFrame_1 (ref), VRUtilModule (ref)
 	if self.panelType == t_1.Type.UIManagerManaged then return end
 	if self.panelType == t_1.Type.Fixed then
@@ -321,7 +321,7 @@ function t_2:EvaluatePositioning(p10, p11, p12, p13) --[[ line: 320 ]]
 	end
 end
 
-function t_2:SetLookedAt(p14) --[[ line: 462 ]]
+function t_2:SetLookedAt(p14)
 	if not self.isLookedAt and p14 then
 		self.isLookedAt = true
 		self:OnMouseEnter(self.lookAtPixel.X, self.lookAtPixel.Y)
@@ -337,7 +337,7 @@ function t_2:SetLookedAt(p14) --[[ line: 462 ]]
 	end
 end
 
-function t_2:EvaluateGaze(p15, p16, _, _, p17) --[[ line: 475 ]]
+function t_2:EvaluateGaze(p15, p16, _, _, p17)
 	-- upvalues: vector2 (ref), t_1 (ref), var15 (write), var14 (write), VRService (ref), var13 (write)
 	self.isClosest = false
 	self.lookAtPixel = vector2
@@ -421,7 +421,7 @@ function t_2:EvaluateGaze(p15, p16, _, _, p17) --[[ line: 475 ]]
 	end
 end
 
-function t_2:EvaluateTransparency() --[[ line: 581 ]]
+function t_2:EvaluateTransparency()
 	-- upvalues: t_1 (ref)
 	if self.panelType == t_1.Type.UIManagerManaged then
 		self.transparency = 1
@@ -443,7 +443,7 @@ function t_2:EvaluateTransparency() --[[ line: 581 ]]
 	self.transparency = self:CalculateTransparency()
 end
 
-function t_2:Update(p18, p19, p20, p21, p22, p23) --[[ line: 607 ]]
+function t_2:Update(p18, p19, p20, p21, p22, p23)
 	-- upvalues: var11 (write)
 	if (self.forceShowUntilLookedAt or tick() < self.forceShowUntilTick) and not self.part then
 		self:GetPart()
@@ -477,21 +477,21 @@ function t_2:Update(p18, p19, p20, p21, p22, p23) --[[ line: 607 ]]
 	end
 end
 
-function t_2.PreUpdate(_, _, _, _, _, _) --[[ line: 644 ]] end
+function t_2.PreUpdate(_, _, _, _, _, _) end
 
-function t_2.OnUpdate(_, _) --[[ line: 647 ]] end
+function t_2.OnUpdate(_, _) end
 
-function t_2.OnMouseEnter(_, _, _) --[[ line: 650 ]] end
+function t_2.OnMouseEnter(_, _, _) end
 
-function t_2.OnMouseLeave(_, _, _) --[[ line: 653 ]] end
+function t_2.OnMouseLeave(_, _, _) end
 
-function t_2.OnEnabled(_, _) --[[ line: 656 ]] end
+function t_2.OnEnabled(_, _) end
 
-function t_2.OnModalChanged(_, _) --[[ line: 659 ]] end
+function t_2.OnModalChanged(_, _) end
 
-function t_2.OnVisibilityChanged(_, _) --[[ line: 662 ]] end
+function t_2.OnVisibilityChanged(_, _) end
 
-function t_2:CalculateTransparency() --[[ line: 665 ]]
+function t_2:CalculateTransparency()
 	if not self.canFade then
 		return 0
 	end
@@ -511,7 +511,7 @@ function t_2:CalculateTransparency() --[[ line: 665 ]]
 	return math.max(0, math.min(1, (math.sqrt(var63 ^ 2 + var64 ^ 2) - 10) / 20))
 end
 
-function t_2:ResizeStuds(p24, p25, p26) --[[ line: 695 ]]
+function t_2:ResizeStuds(p24, p25, p26)
 	-- upvalues: t_1 (ref)
 	if self.panelType == t_1.Type.UIManagerManaged then return end
 	p26 = p26 or 64
@@ -533,16 +533,16 @@ function t_2:ResizeStuds(p24, p25, p26) --[[ line: 695 ]]
 	end
 end
 
-function t_2:ResizePixels(p27, p28, p29) --[[ line: 726 ]]
+function t_2:ResizePixels(p27, p28, p29)
 	p29 = p29 or 64
 	self:ResizeStuds(p27 / p29, p28 / p29, p29)
 end
 
-function t_2:OnHeadScaleChanged() --[[ line: 734 ]]
+function t_2:OnHeadScaleChanged()
 	self:ResizeStuds(self.width, self.height, self.pixelScale * 64)
 end
 
-function t_2:SetType(p30, p31) --[[ line: 739 ]]
+function t_2:SetType(p30, p31)
 	-- upvalues: t_1 (ref)
 	self.panelType = p30
 	self.localCF = CFrame.new()
@@ -593,17 +593,17 @@ function t_2:SetType(p30, p31) --[[ line: 739 ]]
 	error("Invalid Panel type")
 end
 
-function t_2:IsUIManagerManagedType() --[[ line: 781 ]]
+function t_2:IsUIManagerManagedType()
 	-- upvalues: t_1 (ref)
 	return self.panelType == t_1.Type.UIManagerManaged
 end
 
-function t_2:IsPositionLockedType() --[[ line: 785 ]]
+function t_2:IsPositionLockedType()
 	-- upvalues: t_1 (ref)
 	return self.panelType == t_1.Type.PositionLocked
 end
 
-function t_2:SetVisible(p32, p33) --[[ line: 789 ]]
+function t_2:SetVisible(p32, p33)
 	-- upvalues: t_1 (ref), VRService (ref), cFrame_1 (ref), var11 (write), var12 (write)
 	if p32 ~= self.isVisible then
 		self:OnVisibilityChanged(p32)
@@ -640,11 +640,11 @@ function t_2:SetVisible(p32, p33) --[[ line: 789 ]]
 	end
 end
 
-function t_2:IsVisible() --[[ line: 829 ]]
+function t_2:IsVisible()
 	return self.isVisible
 end
 
-function t_2:LinkTo(p34) --[[ line: 833 ]]
+function t_2:LinkTo(p34)
 	-- upvalues: t_1 (ref)
 	if type(p34) == "string" then
 		self.linkedTo = t_1.Get(p34)
@@ -654,7 +654,7 @@ function t_2:LinkTo(p34) --[[ line: 833 ]]
 	self.linkedTo = p34
 end
 
-function t_2:ForceShowUntilLookedAt(p35) --[[ line: 841 ]]
+function t_2:ForceShowUntilLookedAt(p35)
 	self:GetPart()
 	self:GetGUI()
 	self:SetVisible(true, p35)
@@ -662,7 +662,7 @@ function t_2:ForceShowUntilLookedAt(p35) --[[ line: 841 ]]
 	self.forceShowUntilLookedAt = true
 end
 
-function t_2:ForceShowForSeconds(p36) --[[ line: 851 ]]
+function t_2:ForceShowForSeconds(p36)
 	self:GetPart()
 	self:GetGUI()
 	self:SetVisible(true)
@@ -673,26 +673,26 @@ function t_2:ForceShowForSeconds(p36) --[[ line: 851 ]]
 	self.forceShowUntilTick = tick() + p36
 end
 
-function t_2:SetCanFade(p37) --[[ line: 862 ]]
+function t_2:SetCanFade(p37)
 	self.canFade = p37
 end
 
-function t_2:RequestPositionUpdate() --[[ line: 866 ]]
+function t_2:RequestPositionUpdate()
 	self.needsPositionUpdate = true
 end
 
-function t_2:ForcePositionUpdate(p38) --[[ line: 870 ]]
+function t_2:ForcePositionUpdate(p38)
 	self.alwaysUpdatePosition = p38
 end
 
-function t_2:GetGuiPositionInPanelSpace(p39) --[[ line: 874 ]]
+function t_2:GetGuiPositionInPanelSpace(p39)
 	local absoluteSize = self.gui.AbsoluteSize
 	local var67 = (p39 - absoluteSize / 2) / absoluteSize * Vector2.new(self.part.Size.X, self.part.Size.Y)
 	
 	return Vector3.new(var67.X, var67.Y, 0.1)
 end
 
-function t_2:GetCFrameInCameraSpace() --[[ line: 885 ]]
+function t_2:GetCFrameInCameraSpace()
 	-- upvalues: t_1 (ref)
 	return if self.panelType == t_1.Type.Standard or self.panelType == t_1.Type.NewStandard then self.originCF * self.localCF else self.localCF or CFrame.new()
 end
@@ -700,7 +700,7 @@ end
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p40, p41) --[[ line: 896 ]]
+function t_3.new(p40, p41)
 	-- upvalues: t_3 (ref)
 	local t = {
 		parentPanel = p40,
@@ -723,7 +723,7 @@ function t_3.new(p40, p41) --[[ line: 896 ]]
 	t:WatchParent(t.lastParent)
 	p41.Parent = t.guiSurrogate
 	
-	local function ancestryCallback(_, p42) --[[ line: 924 ]]
+	local function ancestryCallback(_, p42)
 		-- upvalues: t (ref), p41 (ref), ancestryCallback (ref)
 		t:GetGUI().Enabled = t.parentPanel:GetGUI():IsAncestorOf(t.lastParent)
 		
@@ -746,14 +746,14 @@ function t_3.new(p40, p41) --[[ line: 896 ]]
 	return t
 end
 
-function t_3:Cleanup() --[[ line: 948 ]]
+function t_3:Cleanup()
 	self.guiElement.Parent = self.lastParent
 	
 	if self.part then
 		self.part:Destroy()
 		self.part = nil
 	end
-	spawn(function() --[[ line: 954 ]]
+	spawn(function()
 		-- upvalues: self (ref)
 		wait()
 		
@@ -777,11 +777,11 @@ function t_3:Cleanup() --[[ line: 948 ]]
 	self.guiSurrogate = nil
 end
 
-function t_3.OnMouseEnter(_, _, _) --[[ line: 975 ]] end
+function t_3.OnMouseEnter(_, _, _) end
 
-function t_3.OnMouseLeave(_, _, _) --[[ line: 976 ]] end
+function t_3.OnMouseLeave(_, _, _) end
 
-function t_3:SetLookedAt(p43) --[[ line: 978 ]]
+function t_3:SetLookedAt(p43)
 	if p43 and not self.lookedAt then
 		self:OnMouseEnter(self.lookAtPixel.X, self.lookAtPixel.Y)
 	elseif not p43 and self.lookedAt then
@@ -790,11 +790,11 @@ function t_3:SetLookedAt(p43) --[[ line: 978 ]]
 	self.lookedAt = p43
 end
 
-function t_3:WatchParent(p44) --[[ line: 987 ]]
+function t_3:WatchParent(p44)
 	if self.changedConn then
 		self.changedConn:disconnect()
 	end
-	self.changedConn = p44.Changed:connect(function(p45) --[[ line: 991 ]]
+	self.changedConn = p44.Changed:connect(function(p45)
 		-- upvalues: self (ref)
 		if p45 == "AbsolutePosition" or p45 == "AbsoluteSize" or p45 == "Parent" then
 			self:UpdateSurrogate()
@@ -802,13 +802,13 @@ function t_3:WatchParent(p44) --[[ line: 987 ]]
 	end)
 end
 
-function t_3:UpdateSurrogate() --[[ line: 998 ]]
+function t_3:UpdateSurrogate()
 	local lastParent = self.lastParent
 	self.guiSurrogate.Position = UDim2.new(0, lastParent.AbsolutePosition.X, 0, lastParent.AbsolutePosition.Y)
 	self.guiSurrogate.Size = UDim2.new(0, lastParent.AbsoluteSize.X, 0, lastParent.AbsoluteSize.Y)
 end
 
-function t_3:GetPart() --[[ line: 1004 ]]
+function t_3:GetPart()
 	-- upvalues: var18 (ref)
 	if self.part then
 		return self.part
@@ -819,7 +819,7 @@ function t_3:GetPart() --[[ line: 1004 ]]
 	return self.part
 end
 
-function t_3:GetGUI() --[[ line: 1014 ]]
+function t_3:GetGUI()
 	-- upvalues: create (ref), coreGuiService (ref)
 	if self.gui then
 		return self.gui
@@ -844,11 +844,11 @@ function t_3:GetGUI() --[[ line: 1014 ]]
 	return self.gui
 end
 
-function t_3:SetDepthOffset(p46) --[[ line: 1041 ]]
+function t_3:SetDepthOffset(p46)
 	self.depthOffset = p46
 end
 
-function t_3:Update() --[[ line: 1045 ]]
+function t_3:Update()
 	local part = self:GetPart()
 	local part_1 = self.parentPanel:GetPart()
 	
@@ -857,7 +857,7 @@ function t_3:Update() --[[ line: 1045 ]]
 	end
 end
 
-function t_3:SetEnabled(p47) --[[ line: 1054 ]]
+function t_3:SetEnabled(p47)
 	-- upvalues: var18 (ref)
 	self.isEnabled = p47
 	
@@ -871,19 +871,19 @@ function t_3:SetEnabled(p47) --[[ line: 1054 ]]
 	self:GetGUI().Enabled = false
 end
 
-function t_3:GetEnabled() --[[ line: 1067 ]]
+function t_3:GetEnabled()
 	return self.isEnabled
 end
 
-function t_3:GetPixelScale() --[[ line: 1071 ]]
+function t_3:GetPixelScale()
 	return self.parentPanel:GetPixelScale()
 end
 
-function t_2:GetPixelScale() --[[ line: 1074 ]]
+function t_2:GetPixelScale()
 	return self.pixelScale
 end
 
-function t_2:AddSubpanel(p48) --[[ line: 1078 ]]
+function t_2:AddSubpanel(p48)
 	-- upvalues: t_3 (ref)
 	local var72 = t_3.new(self, p48)
 	self.subpanels[p48] = var72
@@ -891,7 +891,7 @@ function t_2:AddSubpanel(p48) --[[ line: 1078 ]]
 	return var72
 end
 
-function t_2:RemoveSubpanel(p49) --[[ line: 1084 ]]
+function t_2:RemoveSubpanel(p49)
 	local var73 = self.subpanels[p49]
 	
 	if var73 then
@@ -900,7 +900,7 @@ function t_2:RemoveSubpanel(p49) --[[ line: 1084 ]]
 	self.subpanels[p49] = nil
 end
 
-function t_2:SetSubpanelDepth(p50, p51) --[[ line: 1092 ]]
+function t_2:SetSubpanelDepth(p50, p51)
 	local var74 = self.subpanels[p50]
 	
 	if p51 ~= 0 then
@@ -914,7 +914,7 @@ function t_2:SetSubpanelDepth(p50, p51) --[[ line: 1092 ]]
 	return nil
 end
 
-function t_1.Get(p52) --[[ line: 1114 ]]
+function t_1.Get(p52)
 	-- upvalues: t (ref), t_2 (ref)
 	local var75 = t[p52]
 	
@@ -927,7 +927,7 @@ end
 
 local currentTime = tick()
 
-local function onRenderStep() --[[ line: 1126 ]]
+local function onRenderStep()
 	-- upvalues: VRService (ref), currentTime (write), var14 (write), var13 (write), t (ref), var11 (write), var15 (write), var17 (ref)
 	if not VRService.VREnabled then return end
 	local currentTime_1 = tick()
@@ -985,7 +985,7 @@ end
 
 local var25 = true
 
-local function _(p53) --[[ line: 1212 | named "putFoldersIn" ]]
+local function _(p53)
 	-- upvalues: var18 (ref), var19 (ref)
 	var18.Parent = p53
 	var19.Parent = p53
@@ -993,7 +993,7 @@ end
 
 local var26 = nil
 
-local function onHeadScaleChanged() --[[ line: 1218 ]]
+local function onHeadScaleChanged()
 	-- upvalues: t (ref)
 	for i, v in pairs(t) do
 		v:OnHeadScaleChanged()
@@ -1002,7 +1002,7 @@ end
 
 local var28 = nil
 
-local function onCameraCFrameChanged() --[[ line: 1225 ]]
+local function onCameraCFrameChanged()
 	-- upvalues: VRService (ref), t (ref)
 	local currentCamera = workspace.CurrentCamera
 	local cFrame = currentCamera.CFrame
@@ -1017,7 +1017,7 @@ local function onCameraCFrameChanged() --[[ line: 1225 ]]
 	end
 end
 
-local function onCurrentCameraChanged() --[[ line: 1241 ]]
+local function onCurrentCameraChanged()
 	-- upvalues: t (ref), var26 (write), onHeadScaleChanged (ref), var28 (write), onCameraCFrameChanged (ref), VRService (ref), var25 (write), var18 (ref), var19 (ref)
 	for i, v in pairs(t) do
 		v:OnHeadScaleChanged()
@@ -1042,7 +1042,7 @@ end
 local var31 = nil
 local var32 = false
 
-local function onVREnabledChanged() --[[ line: 1264 ]]
+local function onVREnabledChanged()
 	-- upvalues: VRService (ref), var25 (write), onCurrentCameraChanged (ref), var31 (write), var18 (ref), var19 (ref), var32 (write), runService (ref), text (ref), onRenderStep (ref)
 	if VRService.VREnabled then
 		while not var25 do
@@ -1079,7 +1079,7 @@ end
 
 VRService:GetPropertyChangedSignal("VREnabled"):connect(onVREnabledChanged)
 spawn(onVREnabledChanged)
-coroutine.wrap(function() --[[ line: 1297 ]]
+coroutine.wrap(function()
 	-- upvalues: var25 (write)
 	while true do
 		if not workspace.CurrentCamera then

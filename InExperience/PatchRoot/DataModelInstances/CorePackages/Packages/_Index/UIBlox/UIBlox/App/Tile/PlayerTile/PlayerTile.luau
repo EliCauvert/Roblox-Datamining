@@ -64,15 +64,15 @@ playerTile.defaultProps = {
 	buttons = {},
 	relevancyInfo = {},
 	tileSize = UDim2.new(0, 150, 0, 150),
-	onActivated = function() --[[ line: 89 ]] end
+	onActivated = function() end
 }
 local t = { dampingRatio = 1, frequency = 4 }
 local t_1 = { [controlStateModule.Default] = "SystemPrimaryContent" }
 local vignette246 = imagesModule["component_assets/vignette_246"]
 
-local function _(p0) --[[ line: 108 | named "footer" ]]
+local function _(p0)
 	-- upvalues: withStyleModule (ref), object (ref), UIBloxConfigModule (ref), roactModule (ref), playerContextModule (ref)
-	return withStyleModule(function(p1) --[[ line: 109 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: object (copy), p0 (ref), UIBloxConfigModule (copy), roactModule (copy), playerContextModule (copy)
 		local tokens = p1.Tokens
 		
@@ -94,9 +94,9 @@ local function _(p0) --[[ line: 108 | named "footer" ]]
 	end)
 end
 
-local _ = function(p2) --[[ line: 153 | named "thumbnailOverlayComponents" ]]
+local _ = function(p2)
 	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), getContentStyleModule (ref), t_1 (ref), roactModule (ref), cryoModule (ref), springAnimatedItemModule (ref), t (ref), vignette246 (ref), list (ref), playerTileButtonModule (ref)
-	return withStyleModule(function(p3) --[[ line: 154 ]]
+	return withStyleModule(function(p3)
 		-- upvalues: UIBloxConfigModule (copy), getContentStyleModule (copy), t_1 (copy), p2 (ref), roactModule (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
 		local tokens = p3.Tokens
 		local var19 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100
@@ -125,7 +125,7 @@ local _ = function(p2) --[[ line: 153 | named "thumbnailOverlayComponents" ]]
 			HoverTransparency = roactModule.createElement(springAnimatedItemModule.AnimatedImageLabel, {
 				springOptions = t,
 				animatedValues = { imageTransparency = if p2.mouseEntered then 0.6 else 1 },
-				mapValuesToProps = function(p4) --[[ line: 199 ]]
+				mapValuesToProps = function(p4)
 					return { ImageTransparency = p4.imageTransparency }
 				end,
 				regularProps = {
@@ -157,7 +157,7 @@ local _ = function(p2) --[[ line: 153 | named "thumbnailOverlayComponents" ]]
 					Position = UDim2.new(1, 0, 1, 0),
 					Size = UDim2.new(0, p2.tileSize.X.Offset - var19 * 2, 0, var20),
 					AnchorPoint = Vector2.new(1, 1)
-				}, list.join(list.map(p2.buttons, function(p5) --[[ line: 237 ]]
+				}, list.join(list.map(p2.buttons, function(p5)
 					-- upvalues: roactModule (copy), playerTileButtonModule (copy), var20 (ref), var19 (ref), p2 (copy)
 					return roactModule.createElement(playerTileButtonModule, {
 						buttonHeight = var20,
@@ -187,7 +187,7 @@ local _ = function(p2) --[[ line: 153 | named "thumbnailOverlayComponents" ]]
 	end)
 end
 
-function playerTile.init(p6) --[[ line: 269 ]]
+function playerTile.init(p6)
 	-- upvalues: roactModule (ref), controlStateModule (ref)
 	p6.firstButtonIcon = roactModule.createRef()
 	p6.secondButtonIcon = roactModule.createRef()
@@ -197,7 +197,7 @@ function playerTile.init(p6) --[[ line: 269 ]]
 		controlState = controlStateModule.Initialize
 	}
 	
-	function p6.onStateChanged(p7, p8) --[[ line: 278 ]]
+	function p6.onStateChanged(p7, p8)
 		-- upvalues: p6 (ref)
 		p6:setState({ controlState = p8 })
 		
@@ -206,25 +206,25 @@ function playerTile.init(p6) --[[ line: 269 ]]
 		end
 	end
 	
-	function p6.hoverMouseEnter() --[[ line: 287 ]]
+	function p6.hoverMouseEnter()
 		-- upvalues: p6 (ref)
 		p6:setState({ mouseEntered = true })
 	end
 	
-	function p6.hoverMouseLeave() --[[ line: 293 ]]
+	function p6.hoverMouseLeave()
 		-- upvalues: p6 (ref)
 		p6:setState({ mouseEntered = false })
 	end
 end
 
-function playerTile.render(p9) --[[ line: 300 ]]
+function playerTile.render(p9)
 	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), roactModule (ref), tileModule (ref), dictionary (ref), object (ref), playerContextModule (ref), imagesModule (ref), getContentStyleModule (ref), t_1 (ref), cryoModule (ref), springAnimatedItemModule (ref), t (ref), vignette246 (ref), list (ref), playerTileButtonModule (ref)
 	local tileSize = p9.props.tileSize
 	local title = p9.props.title
 	local onActivated = p9.props.onActivated
 	local thumbnail = p9.props.thumbnail
 	
-	return withStyleModule(function(p10) --[[ line: 306 ]]
+	return withStyleModule(function(p10)
 		-- upvalues: p9 (ref), UIBloxConfigModule (copy), roactModule (copy), tileSize (ref), tileModule (copy), dictionary (copy), withStyleModule (copy), object (copy), playerContextModule (copy), title (ref), onActivated (ref), thumbnail (ref), imagesModule (copy), getContentStyleModule (copy), t_1 (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
 		local tokens = p10.Tokens
 		local subtitleFontStyle = p9.props.subtitleFontStyle or (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.CaptionMedium else tokens.Semantic.Typography.CaptionHeader)
@@ -250,7 +250,7 @@ function playerTile.render(p9) --[[ line: 300 ]]
 			playerContext = if p9.props.Selectable then dictionary.join(p9.props.relevancyInfo, { Selectable = false }) else p9.props.relevancyInfo,
 			controlState = p9.state.controlState
 		}
-		t_4.footer = withStyleModule(function(p11) --[[ line: 109 ]]
+		t_4.footer = withStyleModule(function(p11)
 			-- upvalues: object (copy), t_5 (ref), UIBloxConfigModule (copy), roactModule (copy), playerContextModule (copy)
 			local tokens = p11.Tokens
 			
@@ -288,7 +288,7 @@ function playerTile.render(p9) --[[ line: 300 ]]
 			hoverMouseLeave = p9.hoverMouseLeave,
 			mouseEntered = p9.state.mouseEntered
 		})
-		t_4.thumbnailOverlayComponents = withStyleModule(function(p12) --[[ line: 154 ]]
+		t_4.thumbnailOverlayComponents = withStyleModule(function(p12)
 			-- upvalues: UIBloxConfigModule (copy), getContentStyleModule (copy), t_1 (copy), var28 (ref), roactModule (copy), cryoModule (copy), springAnimatedItemModule (copy), t (copy), vignette246 (copy), list (copy), playerTileButtonModule (copy)
 			local tokens = p12.Tokens
 			local var19 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100
@@ -319,7 +319,7 @@ function playerTile.render(p9) --[[ line: 300 ]]
 					animatedValues = {
 						imageTransparency = if var28.mouseEntered then 0.6 else 1
 					},
-					mapValuesToProps = function(p13) --[[ line: 199 ]]
+					mapValuesToProps = function(p13)
 						return { ImageTransparency = p13.imageTransparency }
 					end,
 					regularProps = {
@@ -351,7 +351,7 @@ function playerTile.render(p9) --[[ line: 300 ]]
 						Position = UDim2.new(1, 0, 1, 0),
 						Size = UDim2.new(0, var28.tileSize.X.Offset - var19 * 2, 0, var20),
 						AnchorPoint = Vector2.new(1, 1)
-					}, list.join(list.map(var28.buttons, function(p14) --[[ line: 237 ]]
+					}, list.join(list.map(var28.buttons, function(p14)
 						-- upvalues: roactModule (copy), playerTileButtonModule (copy), var20 (ref), var19 (ref), var28 (copy)
 						return roactModule.createElement(playerTileButtonModule, {
 							buttonHeight = var20,
@@ -390,7 +390,7 @@ function playerTile.render(p9) --[[ line: 300 ]]
 	end)
 end
 
-return roactModule.forwardRef(function(p15, p16) --[[ line: 377 ]]
+return roactModule.forwardRef(function(p15, p16)
 	-- upvalues: roactModule (ref), playerTile (ref), dictionary (ref)
 	return roactModule.createElement(playerTile, dictionary.join(p15, { forwardedRef = p16 }))
 end)

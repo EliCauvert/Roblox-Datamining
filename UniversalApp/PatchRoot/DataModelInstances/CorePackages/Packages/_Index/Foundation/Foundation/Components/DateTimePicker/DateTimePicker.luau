@@ -26,7 +26,7 @@ local t = {
 	variant = dateTimePickerVariantModule.Single
 }
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "DateTimePicker" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: flagsModule (ref), reactModule (ref), dateTimePickerBetaModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), dateTimePickerVariantModule (ref), dateTimeUtilitiesModule (ref), guiService (ref), dateTimeParsingUtilitiesModule (ref), popoverModule (ref), textInputModule (ref), withCommonPropsModule (ref), icon (ref), translatorModule (ref), inputSizeModule (ref), popoverSideModule (ref), viewModule (ref), calendarModule (ref), buttonModule (ref), buttonVariantModule (ref)
 	if flagsModule.FoundationDateTimePickerBetaUpdate then
 		return reactModule.createElement(dateTimePickerBetaModule, p0)
@@ -35,7 +35,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "DateTimePicker" ]]
 	local var21 = useTokensModule()
 	local var22, var23 = reactModule.useState(false)
 	local var24 = reactModule.useRef(nil)
-	local var25 = reactModule.useMemo(function() --[[ line: 48 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref)
 		local defaultDates = var20.defaultDates
 		
@@ -43,21 +43,21 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "DateTimePicker" ]]
 	end, { var20.defaultDates })
 	local var26, var27 = reactModule.useState(if var25 then if var20.variant == dateTimePickerVariantModule.Dual then `{dateTimeUtilitiesModule.formatLocalTime(var25[1])} - {if var25[2] then dateTimeUtilitiesModule.formatLocalTime(var25[2]) else ""}` else dateTimeUtilitiesModule.formatLocalTime(var25[1], var20.variant == dateTimePickerVariantModule.SingleWithTime) else "")
 	local var28, var29 = reactModule.useState(var25)
-	local var30 = reactModule.useCallback(function() --[[ line: 77 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref)
 		var23(false)
 	end, {})
-	local var31 = reactModule.useCallback(function() --[[ line: 81 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref)
 		var23(true)
 	end, {})
-	local var32 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: guiService (copy), var31 (ref)
 		if guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
 			var31()
 		end
 	end, { var31, guiService.ViewportDisplaySize })
-	local var33 = reactModule.useCallback(function(p1) --[[ line: 92 ]]
+	local var33 = reactModule.useCallback(function(p1)
 		-- upvalues: var27 (ref), var20 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), dateTimeParsingUtilitiesModule (copy)
 		var27(p1)
 		
@@ -70,7 +70,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "DateTimePicker" ]]
 		end
 		var20.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(dateTimeParsingUtilitiesModule.trimInputText(p1)))
 	end, { var20.onChanged, var20.variant })
-	local var34 = reactModule.useCallback(function() --[[ line: 114 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), var28 (ref), var27 (ref), var30 (ref)
 		if var20.variant == dateTimePickerVariantModule.Dual then
 			var27(dateTimeUtilitiesModule.formatLocalTime(var28[1]) .. " - " .. (if var28[2] then dateTimeUtilitiesModule.formatLocalTime(var28[2]) else ""))
@@ -80,7 +80,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "DateTimePicker" ]]
 		var30()
 	end, { var28, var30, var20.variant })
 	
-	local _ = function() --[[ line: 139 ]]
+	local _ = function()
 		-- upvalues: var28 (ref), var20 (ref), dateTimePickerVariantModule (copy)
 		return if var28 then if var20.variant == dateTimePickerVariantModule.Single or var20.variant == dateTimePickerVariantModule.SingleWithTime then var28[1] == nil else var20.variant == dateTimePickerVariantModule.Dual and (if var28[1] ~= nil then if var28[2] ~= nil then var28[2].UnixTimestamp < var28[1].UnixTimestamp else true else true) else false
 	end

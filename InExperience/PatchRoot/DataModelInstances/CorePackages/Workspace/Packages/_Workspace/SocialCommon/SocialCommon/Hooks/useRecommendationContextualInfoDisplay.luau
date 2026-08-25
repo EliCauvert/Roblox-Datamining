@@ -4,7 +4,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getRecommendationContextualInfoDisplayModule = require(socialCommon.Utils.getRecommendationContextualInfoDisplay)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getRecommendationContextualInfoDisplayModule (ref)
 	return getRecommendationContextualInfoDisplayModule({
 		recommendation = p0,

@@ -4,31 +4,31 @@ local foundationModule = require(parent.Foundation)
 local useMenuItemCursorModule = require(script.Parent.useMenuItemCursor)
 local chatAutocompleteMaxVisibleEntries = game:DefineFastInt("ChatAutocompleteMaxVisibleEntries", 3)
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "ChatAutocompleteDropdown" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: foundationModule (ref), useMenuItemCursorModule (ref), reactModule (ref), chatAutocompleteMaxVisibleEntries (ref)
 	local var4 = foundationModule.Hooks.useTokens()
 	local var5 = useMenuItemCursorModule()
 	local var6 = reactModule.useRef(nil)
 	local var7, var8 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var8 (ref)
 		local current = p0.anchorRef.current
 		
 		if current and current:IsA("GuiObject") then
 			var8(current.AbsoluteSize.X)
-			local var12 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 51 ]]
+			local var12 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var8 (copy), current (ref)
 				var8(current.AbsoluteSize.X)
 			end)
 			
-			return function() --[[ line: 54 ]]
+			return function()
 				-- upvalues: var12 (ref)
 				var12:Disconnect()
 			end
 		end
 	end, { p0.anchorRef })
 	local XXSmall = var4.Padding.XXSmall
-	reactModule.useEffect(function() --[[ line: 65 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), p0 (ref), XXSmall (ref)
 		local current = var6.current
 		
@@ -46,7 +46,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "ChatAutocompleteDrop
 			current.CanvasPosition = Vector2.new(0, var13)
 		end
 	end, { p0.keyboardIndex, p0.isOpen, XXSmall })
-	local var9 = reactModule.useMemo(function() --[[ line: 83 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), reactModule (copy), foundationModule (copy), var4 (ref), var5 (ref)
 		local t = {}
 		
@@ -73,11 +73,11 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "ChatAutocompleteDrop
 					top = UDim.new(0, 10),
 					bottom = UDim.new(0, 10)
 				},
-				onActivated = function() --[[ line: 111 ]]
+				onActivated = function()
 					-- upvalues: p0 (copy), i (ref)
 					p0.onSelect(i)
 				end,
-				onStateChanged = function(p1) --[[ line: 114 ]]
+				onStateChanged = function(p1)
 					-- upvalues: p0 (copy), i (ref)
 					if p1 == "Hover" then
 						p0.onHover(i)

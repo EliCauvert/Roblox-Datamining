@@ -16,7 +16,7 @@ local fFlagSduiImprovedErrorDimensions = sharedFlagsModule.FFlagSduiImprovedErro
 local fFlagSduiClientPageScope = sharedFlagsModule.FFlagSduiClientPageScope
 local sduiArrayMapSupport = game:DefineFastFlag("SduiArrayMapSupport", false)
 
-local function buildRepeatedProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 39 ]]
+local function buildRepeatedProp(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), sduiPropUtilsModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiExperienceDetailsSupport (ref), sduiArrayMapSupport (ref), signalsModule (ref), fFlagSduiClientPageScope (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), tutilsModule (ref), buildRepeatedProp (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
@@ -39,7 +39,7 @@ local function buildRepeatedProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 39 ]]
 		end
 		return sduiPropUtilsModule.generateTablePropSignalValue(array, p2, p4, p5, p3, sduiClientBindingBuilderModule.buildPropTable, p6), propResultCategory.PropSignal
 	elseif p0 == "binding_path" then
-		return sduiPropUtilsModule.generateDynamicBindingPropValue(p1, p2, p4, p3, function(p7, p8) --[[ line: 83 | named "evaluatePropArray" ]]
+		return sduiPropUtilsModule.generateDynamicBindingPropValue(p1, p2, p4, p3, function(p7, p8)
 			-- upvalues: sduiClientBindingBuilderModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), sduiPropUtilsModule (copy)
 			local var13, var14, var15 = sduiClientBindingBuilderModule.buildPropTable(p7, p2, p3, p4, p5)
 			
@@ -54,9 +54,9 @@ local function buildRepeatedProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 39 ]]
 		if fieldMap == nil then
 			error("buildRepeatedProp array_map: missing field_map")
 		end
-		return signalsModule.createComputed(function(p9) --[[ line: 123 ]]
+		return signalsModule.createComputed(function(p9)
 			-- upvalues: sduiPropUtilsModule (copy), type (ref), value (ref), p2 (ref), p3 (ref), fFlagSduiClientPageScope (copy), p4 (ref), itemHydrationSpecs (ref), fieldMap (ref), p5 (ref), sduiClientBindingBuilderModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
-			local ok, status = pcall(function() --[[ line: 124 ]]
+			local ok, status = pcall(function()
 				-- upvalues: sduiPropUtilsModule (copy), type (copy), value (copy), p9 (ref), p2 (copy), p3 (copy), fFlagSduiClientPageScope (copy), p4 (copy), itemHydrationSpecs (copy), fieldMap (copy), p5 (copy), sduiClientBindingBuilderModule (copy)
 				local var16 = sduiPropUtilsModule.resolveSourceArray(type, value, p9, p2, p3, if fFlagSduiClientPageScope then p4 else nil)
 				

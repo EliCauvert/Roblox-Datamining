@@ -11,7 +11,7 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local t = { stiffness = 400, damping = 40, mass = 1 }
 
-return function(value) --[[ line: 31 | named "InGameAssetReportIPInfringementModal" ]]
+return function(value)
 	-- upvalues: reactModule (ref), useLocalization (ref), reactOtterModule (ref), t (ref), view (ref), text (ref), interactiveAlert (ref), buttonType (ref)
 	local var6, var7 = reactModule.useState(true)
 	local var8 = useLocalization({
@@ -20,21 +20,21 @@ return function(value) --[[ line: 31 | named "InGameAssetReportIPInfringementMod
 		reportCompleteClose = "Feature.ReportAbuse.Action.Close",
 		thankYouIpInfringementReport = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 	})
-	local var9, var10 = reactOtterModule.useAnimatedBinding(1, function() --[[ line: 40 ]]
+	local var9, var10 = reactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: var6 (ref), value (ref)
 		if not var6 then
 			value.onClose()
 		end
 	end)
-	local var11 = reactModule.useMemo(function() --[[ line: 47 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var6 (ref)
 		return if var6 then 0 else 1
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), reactOtterModule (copy), var11 (ref), t (copy)
 		var10(reactOtterModule.spring(var11, t))
 	end, { var11 })
-	local var12 = reactModule.useCallback(function() --[[ line: 55 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		var7(false)
 	end, { var7 })
@@ -42,7 +42,7 @@ return function(value) --[[ line: 31 | named "InGameAssetReportIPInfringementMod
 	return reactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundTransparency = var9:map(function(p0) --[[ line: 85 ]]
+		BackgroundTransparency = var9:map(function(p0)
 			return p0 + 0.3
 		end),
 		BackgroundColor3 = Color3.fromHex("#000000"),
@@ -57,7 +57,7 @@ return function(value) --[[ line: 31 | named "InGameAssetReportIPInfringementMod
 			richText = true,
 			screenSize = value.screenSize,
 			title = var8.thankYouIpInfringementReport,
-			middleContent = reactModule.useCallback(function() --[[ line: 59 ]]
+			middleContent = reactModule.useCallback(function()
 				-- upvalues: reactModule (copy), view (copy), text (copy), var8 (ref), value (ref)
 				return reactModule.createElement(view, { tag = "auto-xy col gap-small align-x-center" }, {
 					text1 = reactModule.createElement(text, {
@@ -79,7 +79,7 @@ return function(value) --[[ line: 31 | named "InGameAssetReportIPInfringementMod
 				})
 			end, { value.reportCode }),
 			anchorPoint = Vector2.new(0.5, 0.5),
-			position = var9:map(function(p1) --[[ line: 102 ]]
+			position = var9:map(function(p1)
 				return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p1)
 			end),
 			buttonStackInfo = {

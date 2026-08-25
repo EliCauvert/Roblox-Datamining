@@ -8,14 +8,14 @@ return {
 	componentType = "dropdown",
 	fieldLabel = "ReasonForAbuse",
 	componentName = "AbuseReason",
-	getIsVisible = function(_) --[[ line: 9 ]]
+	getIsVisible = function(_)
 		return true
 	end,
-	getMenuItems = function(p0) --[[ line: 12 ]]
+	getMenuItems = function(p0)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
 		return cryoModule.Dictionary.values(if p0.methodOfAbuse == "Voice Chat" then constantsModule.PlayerVoiceAbuseTypes else constantsModule.PlayerAbuseTypes)
 	end,
-	onUpdateSelectedOption = function(p1, _, p2, p3) --[[ line: 18 ]]
+	onUpdateSelectedOption = function(p1, _, p2, p3)
 		-- upvalues: constantsModule (ref)
 		p3.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.IncrementReasonChanged

@@ -8,7 +8,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 
-return function(p0) --[[ line: 34 | named "GenerateTextOptionsDialog" ]]
+return function(p0)
 	-- upvalues: useCreationFlowStringsModule (ref), reactModule (ref), view (ref), text (ref), radioGroup (ref), dialog (ref), foundationModule (ref)
 	local var4 = useCreationFlowStringsModule()
 	local hype, hype_1 = reactModule.useState("hype")
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 34 | named "GenerateTextOptionsDialog" ]]
 				{
 					text = var4.GenerateTextCta,
 					variant = foundationModule.Enums.ButtonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function() --[[ line: 38 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: p0 (ref), hype (ref)
 						p0.onSelect(if p0.showTone then hype else nil)
 					end, { p0.showTone, hype, p0.onSelect })

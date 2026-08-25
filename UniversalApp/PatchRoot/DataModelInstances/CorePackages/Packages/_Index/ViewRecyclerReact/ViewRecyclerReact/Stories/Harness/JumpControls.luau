@@ -3,9 +3,9 @@ assert(viewRecyclerReact ~= nil, "JumpControls must be mounted under view-recycl
 local reactModule = require(viewRecyclerReact.Parent.React)
 local createElement = reactModule.createElement
 
-return function(p0) --[[ line: 8 | named "JumpControls" ]]
+return function(p0)
 	-- upvalues: createElement (ref), reactModule (ref)
-	local function _(p1) --[[ line: 9 | named "jump" ]]
+	local function _(p1)
 		-- upvalues: p0 (ref)
 		local current = p0.listRef.current
 		
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 8 | named "JumpControls" ]]
 			Position = UDim2.fromOffset(8, 6),
 			Size = UDim2.fromOffset(100, 30),
 			Text = "Jump to #1",
-			[reactModule.Event.Activated] = function() --[[ line: 26 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p0 (ref)
 				local current = p0.listRef.current
 				
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 8 | named "JumpControls" ]]
 			Position = UDim2.fromOffset(114, 6),
 			Size = UDim2.fromOffset(176, 30),
 			Text = `Jump to #{p0.target} ({p0.alignment})`,
-			[reactModule.Event.Activated] = function() --[[ line: 34 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p0 (ref)
 				local target = p0.target
 				local current = p0.listRef.current
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 8 | named "JumpControls" ]]
 			Position = UDim2.fromOffset(296, 6),
 			Size = UDim2.fromOffset(120, 30),
 			Text = `Jump to #{p0.itemCount}`,
-			[reactModule.Event.Activated] = function() --[[ line: 42 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p0 (ref)
 				local itemCount = p0.itemCount
 				local current = p0.listRef.current

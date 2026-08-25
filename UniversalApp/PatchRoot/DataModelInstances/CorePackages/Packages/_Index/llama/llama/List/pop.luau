@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 2 | named "pop" ]]
+﻿return function(p0, p1)
 	local var0 = type(p0)
 	assert(var0 == "table", "expected a table for first argument, got " .. var0)
 	p1 = p1 or 1

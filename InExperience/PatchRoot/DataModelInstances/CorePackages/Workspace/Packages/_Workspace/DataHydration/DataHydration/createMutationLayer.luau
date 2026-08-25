@@ -4,14 +4,14 @@ local cryoModule = require(parent.Cryo)
 local signalsModule = require(parent.Signals)
 local _ = require(dataHydration.DataHydrationTypes)
 
-return function() --[[ line: 10 | named "createMutationLayer" ]]
+return function()
 	-- upvalues: signalsModule (ref), cryoModule (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	local t_3 = {}
 	
-	local function _(value) --[[ line: 18 | named "getOrCreateMutationSignal" ]]
+	local function _(value)
 		-- upvalues: t (ref), t_1 (ref), signalsModule (copy)
 		if not t[value] then
 			local var7 = t
@@ -24,7 +24,7 @@ return function() --[[ line: 10 | named "createMutationLayer" ]]
 	end
 	
 	return {
-		set = function(value, p0) --[[ line: 30 ]]
+		set = function(value, p0)
 			-- upvalues: t (ref), t_1 (ref), signalsModule (copy), cryoModule (copy)
 			if not t[value] then
 				local var11 = t
@@ -43,32 +43,32 @@ return function() --[[ line: 10 | named "createMutationLayer" ]]
 			end
 			var15(p0)
 		end,
-		clear = function(p1) --[[ line: 40 ]]
+		clear = function(p1)
 			-- upvalues: t_1 (ref), t_3 (write)
 			if t_1[p1] then
 				t_1[p1](nil)
 			end
 			t_3[p1] = nil
 		end,
-		has = function(p2) --[[ line: 47 ]]
+		has = function(p2)
 			-- upvalues: t (ref)
 			return if t[p2] then t[p2](false) ~= nil else false
 		end,
-		get = function(p3) --[[ line: 57 ]]
+		get = function(p3)
 			-- upvalues: t (ref)
 			return if t[p3] then t[p3](false) else nil
 		end,
-		markCommitted = function(p4) --[[ line: 65 ]]
+		markCommitted = function(p4)
 			-- upvalues: t (ref), t_3 (write)
 			if if not t[p4] then false else t[p4](false) ~= nil then
 				t_3[p4] = true
 			end
 		end,
-		isCommitted = function(p5) --[[ line: 71 ]]
+		isCommitted = function(p5)
 			-- upvalues: t_3 (write)
 			return t_3[p5] == true
 		end,
-		drainCommitted = function(p6, p7) --[[ line: 77 ]]
+		drainCommitted = function(p6, p7)
 			-- upvalues: t_3 (write), t (ref), t_1 (ref)
 			for i, v in p6 do
 				if t_3[v] then
@@ -84,7 +84,7 @@ return function() --[[ line: 10 | named "createMutationLayer" ]]
 				end
 			end
 		end,
-		getMergedResult = function(p8, p9) --[[ line: 97 ]]
+		getMergedResult = function(p8, p9)
 			-- upvalues: t_2 (write), t (ref), t_1 (ref), signalsModule (copy), cryoModule (copy)
 			if t_2[p8] then
 				return t_2[p8]
@@ -98,7 +98,7 @@ return function() --[[ line: 10 | named "createMutationLayer" ]]
 			local var22 = t[p8]
 			local _ = t_1[p8]
 			t_2[p8] = {
-				data = signalsModule.createComputed(function(p10) --[[ line: 104 ]]
+				data = signalsModule.createComputed(function(p10)
 					-- upvalues: var22 (ref), p9 (ref), cryoModule (copy)
 					local var23 = var22(p10)
 					local var24 = p9.data(p10)
@@ -110,7 +110,7 @@ return function() --[[ line: 10 | named "createMutationLayer" ]]
 			
 			return t_2[p8]
 		end,
-		clearAll = function() --[[ line: 127 ]]
+		clearAll = function()
 			-- upvalues: t_1 (ref), t_3 (write), t_2 (write)
 			for i, v in t_1 do
 				v(nil)

@@ -3,7 +3,7 @@ local momentModule = require(script.Parent.Items.Moment)
 local endStateModule = require(script.Parent.Items.EndState)
 local t = {}
 
-local function _(p0) --[[ line: 18 | named "register" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	for i, v in p0 do
 		t[v.kind] = v

@@ -9,13 +9,13 @@ local loggingProtocolModule = require(parent.LoggingProtocol)
 local stopwatchTelemetryConfigModule = require(socialStopwatch.StopwatchTelemetryConfig)
 local _ = require(script.Parent.Types)
 
-return function() --[[ line: 21 ]]
+return function()
 	-- upvalues: timers (ref), loggingProtocolModule (ref), eventRegisterModule (ref), stopwatchTelemetryConfigModule (ref), eventModesModule (ref), httpService (ref)
 	local t = {}
 	local var7 = timers()
 	local default = loggingProtocolModule.default
 	
-	local _ = function(p0) --[[ line: 26 ]]
+	local _ = function(p0)
 		-- upvalues: eventRegisterModule (copy)
 		local var12 = eventRegisterModule[p0]
 		
@@ -25,9 +25,9 @@ return function() --[[ line: 21 ]]
 		return var12
 	end
 	
-	local _ = function(p1) --[[ line: 34 ]]
+	local _ = function(p1)
 		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy), var7 (ref)
-		return function(p2) --[[ line: 35 ]]
+		return function(p2)
 			-- upvalues: eventRegisterModule (copy), t (copy), default (copy), stopwatchTelemetryConfigModule (copy), p1 (ref), eventModesModule (copy), var7 (copy)
 			local var13 = eventRegisterModule[p2]
 			
@@ -53,7 +53,7 @@ return function() --[[ line: 21 ]]
 	
 	local var8 = "Get"
 	
-	local var9 = function(p3) --[[ line: 35 ]]
+	local var9 = function(p3)
 		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var8 (ref), eventModesModule (copy), var7 (ref)
 		local var13 = eventRegisterModule[p3]
 		
@@ -78,7 +78,7 @@ return function() --[[ line: 21 ]]
 	
 	local var10 = "Stop"
 	
-	local var11 = function(p4) --[[ line: 35 ]]
+	local var11 = function(p4)
 		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var10 (ref), eventModesModule (copy), var7 (ref)
 		local var13 = eventRegisterModule[p4]
 		
@@ -102,7 +102,7 @@ return function() --[[ line: 21 ]]
 	end
 	
 	return {
-		start = function(p5, p6) --[[ line: 65 ]]
+		start = function(p5, p6)
 			-- upvalues: eventRegisterModule (copy), var7 (ref), httpService (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy)
 			local var15 = eventRegisterModule[p5]
 			
@@ -123,14 +123,14 @@ return function() --[[ line: 21 ]]
 			return { startTime = var7.getStartTimestamp(var16), id = var16 }
 		end,
 		get = var9,
-		stop = function(p7) --[[ line: 90 ]]
+		stop = function(p7)
 			-- upvalues: var11 (ref), t (write)
 			local var17 = var11(p7)
 			t[p7] = nil
 			
 			return var17
 		end,
-		_unsafeClearEventLog = function() --[[ line: 95 ]]
+		_unsafeClearEventLog = function()
 			-- upvalues: t (write)
 			t = {}
 		end

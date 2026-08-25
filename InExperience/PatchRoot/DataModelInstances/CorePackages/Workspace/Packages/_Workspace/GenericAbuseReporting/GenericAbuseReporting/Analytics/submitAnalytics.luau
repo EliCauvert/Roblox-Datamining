@@ -13,7 +13,7 @@ local t = {
 }
 local list = { "Unspecified", "Submit", "Abandon" }
 
-return function(p0, p1) --[[ line: 22 | named "submitAnalytics" ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), t (ref), cryoModule (ref), list (ref), eventIngest (ref), eventIngestService (ref), var5 (ref)
 	local diag = var3.Diag
 	diag:reportStats(p0.context .. "_" .. t.ReportTimeSpent, p0.accumulated_time_ms)

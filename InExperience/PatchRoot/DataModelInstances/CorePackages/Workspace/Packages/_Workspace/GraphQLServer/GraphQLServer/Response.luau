@@ -5,7 +5,7 @@ local stringify = require(parent.GraphQL).stringify
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 19 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { body = p0 }
 	setmetatable(t_1, t)
@@ -13,11 +13,11 @@ function t.new(p0) --[[ line: 19 ]]
 	return t_1
 end
 
-function t.text(p1) --[[ line: 28 ]]
+function t.text(p1)
 	-- upvalues: promiseModule (ref), stringify (ref), error (ref)
-	return promiseModule.new(function(p2, p3) --[[ line: 29 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: p1 (ref), stringify (copy), error (copy)
-		local ok, status = pcall(function() --[[ line: 30 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (copy), stringify (copy)
 			if p1.body.errors then
 				for i, v in p1.body.errors do

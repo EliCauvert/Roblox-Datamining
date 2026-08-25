@@ -1,8 +1,8 @@
 ﻿local t = {
-	cloneFrozen = function(p0) --[[ line: 3 ]]
+	cloneFrozen = function(p0)
 		return table.freeze(table.clone(p0))
 	end,
-	containsEqual = function(p1, p2, p3) --[[ line: 7 ]]
+	containsEqual = function(p1, p2, p3)
 		for i, v in p3 do
 			if p1[v] ~= p2[v] then
 				return false
@@ -12,12 +12,12 @@
 	end
 }
 
-function t.optionalContainsEqual(p4, p5, p6) --[[ line: 18 ]]
+function t.optionalContainsEqual(p4, p5, p6)
 	-- upvalues: t (ref)
 	return if p4 ~= p5 then p4 ~= nil and (p5 ~= nil and t.containsEqual(p4, p5, p6)) else true
 end
 
-function t.equal(p7, p8) --[[ line: 22 ]]
+function t.equal(p7, p8)
 	if p7 == p8 then
 		return true
 	end

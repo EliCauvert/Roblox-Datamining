@@ -20,7 +20,7 @@ local list = {
 	}
 }
 
-return function(p0) --[[ line: 39 ]]
+return function(p0)
 	-- upvalues: list (ref), var0 (ref)
 	local var2 = ""
 	

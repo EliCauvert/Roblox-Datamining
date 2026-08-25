@@ -21,7 +21,7 @@ local var5 = t.strictInterface({
 	LayoutOrder = t.optional(t.integer)
 })
 
-return function(p0) --[[ line: 34 | named "PointerLabel" ]]
+return function(p0)
 	-- upvalues: globalConfigModule (ref), var5 (ref), t_1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), imageSetLabel (ref)
 	if globalConfigModule.propValidation then
 		assert(var5(p0))

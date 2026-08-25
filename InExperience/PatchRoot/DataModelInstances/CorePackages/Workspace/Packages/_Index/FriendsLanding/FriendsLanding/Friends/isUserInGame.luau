@@ -1,6 +1,6 @@
 ﻿local presenceType = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxPresence.Enums.PresenceType
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: presenceType (ref)
 	if not p0 then
 		return false

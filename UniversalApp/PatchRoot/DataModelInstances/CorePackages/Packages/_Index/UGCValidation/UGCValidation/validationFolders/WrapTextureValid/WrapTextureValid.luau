@@ -23,7 +23,7 @@ return {
 		validationEnumsModule.SharedDataMember.consumerConfig
 	},
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 42 ]]
+	run = function(p0, p1)
 		-- upvalues: t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref)
 		local rootInstance = p1.rootInstance
 		local wrapTextureTransfer = rootInstance:FindFirstChildOfClass("WrapTextureTransfer")
@@ -41,7 +41,7 @@ return {
 		
 		if editableMesh and editableMesh_1 and editableMesh_1.instance then
 			local instance = editableMesh_1.instance
-			local ok, status = pcall(function() --[[ line: 95 ]]
+			local ok, status = pcall(function()
 				-- upvalues: UGCValidationService (copy), wrapTargetCageUVReferenceValuesModule (copy), instance (ref)
 				return UGCValidationService:ValidateEditableMeshUVValuesInReference(wrapTargetCageUVReferenceValuesModule.Head, instance)
 			end)

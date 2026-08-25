@@ -22,7 +22,7 @@ local t_1 = {
 }
 
 return {
-	logWebviewToggled = function(p0, p1, p2) --[[ line: 33 ]]
+	logWebviewToggled = function(p0, p1, p2)
 		-- upvalues: telemetryService (ref), t (ref), list (ref), t_1 (ref), list_1 (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,

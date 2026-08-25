@@ -14,7 +14,7 @@ local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCVal
 local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 
-return function(value, p0) --[[ line: 24 | named "validateLegacyAccessoryMeshPartAssetFormat" ]]
+return function(value, p0)
 	-- upvalues: validateSingleInstanceModule (ref), createLegacyAccessoryMeshPartAssetFormatSchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), validateSurfaceAppearanceTextureSizeModule (ref), validateSurfaceAppearanceTransparencyModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateLegacyAccessoryMeshPartAssetFormatMatchModule (ref)
 	assert(p0.instances ~= nil, "instances required in validationContext for validateLegacyAccessoryMeshPartAssetFormat")
 	local instances = p0.instances

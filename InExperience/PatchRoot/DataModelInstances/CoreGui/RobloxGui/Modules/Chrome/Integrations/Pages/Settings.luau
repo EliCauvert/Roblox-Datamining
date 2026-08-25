@@ -11,13 +11,13 @@ return serviceModule:register({
 	label = "CoreScripts.InGameMenu.PageTitle.GameSettings",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Page,
-	activated = function(_) --[[ line: 19 ]]
+	activated = function(_)
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), gameSettingsPage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("GameSettingsPage", gameSettingsPage:get())
 	end,
 	isActivated = gameSettingsPage,
 	components = {
-		Icon = function(_) --[[ line: 24 ]]
+		Icon = function(_)
 			-- upvalues: commonIconModule (ref), gameSettingsPage (ref)
 			return commonIconModule("icons/common/settings", "icons/common/settingsOn", gameSettingsPage)
 		end

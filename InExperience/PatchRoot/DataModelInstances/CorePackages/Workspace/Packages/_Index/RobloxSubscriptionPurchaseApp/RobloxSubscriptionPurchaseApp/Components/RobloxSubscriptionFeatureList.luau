@@ -18,7 +18,7 @@ local icon = foundationModule.Icon
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
-local function FeatureRow(p0) --[[ line: 34 ]]
+local function FeatureRow(p0)
 	-- upvalues: reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "row auto-y size-full-0 align-y-center align-x-left gap-medium",
@@ -32,7 +32,7 @@ local function FeatureRow(p0) --[[ line: 34 ]]
 	})
 end
 
-local function getVirtualTransactionDiscounts(p1) --[[ line: 50 ]]
+local function getVirtualTransactionDiscounts(p1)
 	if not p1 or not p1.VirtualTransactionDiscounts then
 		return nil, nil
 	end
@@ -51,14 +51,14 @@ local function getVirtualTransactionDiscounts(p1) --[[ line: 50 ]]
 	return var12, var13
 end
 
-local function _(p2) --[[ line: 78 | named "getPrivateServerDiscount" ]]
+local function _(p2)
 	-- upvalues: array (ref)
-	return if p2 and p2.PrivateServerDiscounts then array.find(p2.PrivateServerDiscounts, function(p3) --[[ line: 83 ]]
+	return if p2 and p2.PrivateServerDiscounts then array.find(p2.PrivateServerDiscounts, function(p3)
 		return typeof(p3) == "table" and (typeof(p3.PeriodIndex) == "number" and p3.PeriodIndex == 0)
 	end) else nil
 end
 
-return function(p4) --[[ line: 88 | named "RobloxSubscriptionFeatureList" ]]
+return function(p4)
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), getVirtualTransactionDiscounts (ref), array (ref), FeatureRow (ref), fFlagRobloxPlusEnableNewFeatureListModule (ref), iconName (ref), robloxPlusUpdateDiscountIcons (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), view (ref)
 	local var14 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)
 	local var15 = useLocalization({
@@ -66,7 +66,7 @@ return function(p4) --[[ line: 88 | named "RobloxSubscriptionFeatureList" ]]
 	})
 	local featureConfig = var14 and (var14.ProductTypeDetails and (var14.ProductTypeDetails.RobloxSubscriptionProductDetails and var14.ProductTypeDetails.RobloxSubscriptionProductDetails.FeatureConfig))
 	local var17, var18 = getVirtualTransactionDiscounts(featureConfig)
-	local var19 = if featureConfig and featureConfig.PrivateServerDiscounts then array.find(featureConfig.PrivateServerDiscounts, function(p5) --[[ line: 83 ]]
+	local var19 = if featureConfig and featureConfig.PrivateServerDiscounts then array.find(featureConfig.PrivateServerDiscounts, function(p5)
 		return typeof(p5) == "table" and (typeof(p5.PeriodIndex) == "number" and p5.PeriodIndex == 0)
 	end) else nil
 	local var20 = useLocalization({
@@ -87,7 +87,7 @@ return function(p4) --[[ line: 88 | named "RobloxSubscriptionFeatureList" ]]
 	})
 	local t = {}
 	
-	local function _(p6, p7) --[[ line: 127 | named "addRow" ]]
+	local function _(p6, p7)
 		-- upvalues: t (ref), FeatureRow (copy)
 		table.insert(t, FeatureRow({ layoutOrder = #t + 1, iconName = p6, text = p7 }))
 	end

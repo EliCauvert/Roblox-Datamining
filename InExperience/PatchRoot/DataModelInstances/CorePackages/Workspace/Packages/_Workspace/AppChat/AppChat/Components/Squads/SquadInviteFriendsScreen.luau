@@ -18,7 +18,7 @@ local squadInviteFriendsContainerModule = require(parent.Squads.SquadInviteFrien
 local squadInviteFriendsScreen = reactModule.PureComponent:extend("SquadInviteFriendsScreen")
 
 if not fFlagEnablePartyQuickStartButton then
-	function squadInviteFriendsScreen.navigationOptions(_) --[[ line: 29 ]]
+	function squadInviteFriendsScreen.navigationOptions(_)
 		return {
 			headerText = {
 				raw = "Feature.Squads.Label.InviteToSquad",
@@ -27,18 +27,18 @@ if not fFlagEnablePartyQuickStartButton then
 		}
 	end
 end
-local function navigationOptions(p0) --[[ line: 39 ]]
+local function navigationOptions(p0)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), navProps (ref), reactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), withLocalization (ref), createSystemMenuButtonModule (ref)
 	return if fFlagAppChatTopBarConfigDrivenModule() then {} elseif p0.navigation and (p0.navigation.getScreenProps and p0.navigation.getScreenProps(navProps.WIDE_MODE, false)) then {
-		renderRight = function() --[[ line: 53 ]]
+		renderRight = function()
 			-- upvalues: reactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy)
 			return reactModule.createElement(topBarProviderModule, {
 				screenName = enumScreensModule.SquadInviteFriends,
-				render = function(p1) --[[ line: 56 ]]
+				render = function(p1)
 					-- upvalues: enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy)
 					local screenTopBar = p1.getScreenTopBar(enumScreensModule.SquadInviteFriends)
 					
-					return withLocalization({ systemButtonText = "Feature.Squads.Action.Add" })(function(p2) --[[ line: 61 ]]
+					return withLocalization({ systemButtonText = "Feature.Squads.Action.Add" })(function(p2)
 						-- upvalues: createSystemMenuButtonModule (copy), screenTopBar (ref)
 						return createSystemMenuButtonModule({
 							localizedStrings = p2,
@@ -54,7 +54,7 @@ end
 
 squadInviteFriendsScreen.navigationOptions = navigationOptions
 
-function squadInviteFriendsScreen.init(p3) --[[ line: 75 ]]
+function squadInviteFriendsScreen.init(p3)
 	-- upvalues: navProps (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), fFlagEnablePartyQuickStartButton (ref), fFlagAppChatTopBarSignalsStoreModule (ref), argCheckModule (ref)
 	p3.wideMode = p3.props.navigation.getScreenProps(navProps.WIDE_MODE, false)
 	
@@ -65,7 +65,7 @@ function squadInviteFriendsScreen.init(p3) --[[ line: 75 ]]
 			headerText = if fFlagEnablePartyQuickStartButton then { raw = "Feature.Squads.Action.Add", shouldLocalize = true } else nil
 		})
 	end
-	function p3.onSelectedFriendsChanged(p4, p5) --[[ line: 91 ]]
+	function p3.onSelectedFriendsChanged(p4, p5)
 		-- upvalues: p3 (ref), fFlagAppChatTopBarSignalsStoreModule (copy), fFlagAppChatTopBarConfigDrivenModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), navProps (copy), argCheckModule (copy)
 		if not p3.wideMode then return end
 		if fFlagAppChatTopBarSignalsStoreModule or fFlagAppChatTopBarConfigDrivenModule() then
@@ -84,7 +84,7 @@ function squadInviteFriendsScreen.init(p3) --[[ line: 75 ]]
 	end
 end
 
-function squadInviteFriendsScreen.render(p6) --[[ line: 117 ]]
+function squadInviteFriendsScreen.render(p6)
 	-- upvalues: reactModule (ref), fFlagEnablePartyQuickStartButton (ref), squadInviteFriendsContainerModule (ref), squadInviteFriendsModule (ref)
 	return reactModule.createElement(if fFlagEnablePartyQuickStartButton then squadInviteFriendsContainerModule else squadInviteFriendsModule, {
 		participants = p6.props.participants,
@@ -93,13 +93,13 @@ function squadInviteFriendsScreen.render(p6) --[[ line: 117 ]]
 	})
 end
 
-function squadInviteFriendsScreen.didMount(p7) --[[ line: 127 ]]
+function squadInviteFriendsScreen.didMount(p7)
 	if p7.wideMode then
 		p7.onSelectedFriendsChanged(false, nil)
 	end
 end
 
-local var15 = roactRoduxModule.connect(function(p8, p9) --[[ line: 133 ]]
+local var15 = roactRoduxModule.connect(function(p8, p9)
 	local conversationId = p8.ChatAppReducer.Conversations[p9.navigation.getParam("conversationId")]
 	
 	return {

@@ -16,12 +16,12 @@ local robux = images["icons/common/robux"]
 local imageunavailable = images["icons/status/imageunavailable"]
 local name = roactModule.Component:extend(script.Name)
 
-function name.init(p0) --[[ line: 39 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p0.changeContentSize(p1) --[[ line: 45 ]]
+	function p0.changeContentSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.contentSize ~= p1.AbsoluteSize then
 			p0:setState({ contentSize = p1.AbsoluteSize })
@@ -29,11 +29,11 @@ function name.init(p0) --[[ line: 39 ]]
 	end
 end
 
-function name.render(p2) --[[ line: 54 ]]
+function name.render(p2)
 	-- upvalues: withStyle (ref), constantsModule (ref), iconSize (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), imageSetLabel (ref), imageunavailable (ref), modelViewportModule (ref), fitFrameVertical (ref), fitTextLabel (ref), robux (ref)
 	local props = p2.props
 	
-	return withStyle(function(p3) --[[ line: 57 ]]
+	return withStyle(function(p3)
 		-- upvalues: props (ref), constantsModule (copy), iconSize (copy), getEnableCondenseRobuxUpsellModule (copy), roactModule (copy), imageSetLabel (copy), imageunavailable (copy), modelViewportModule (copy), fitFrameVertical (copy), p2 (ref), fitTextLabel (copy), robux (copy)
 		local theme = p3.Theme
 		local font = p3.Font

@@ -11,10 +11,10 @@ local correctASTNodes = mapSchemaModule.correctASTNodes
 local addTypes = require(script.Parent.addTypes).addTypes
 local map = luauPolyfillModule.Map
 
-function t.appendObjectFields(p0, p1, p2) --[[ line: 41 ]]
+function t.appendObjectFields(p0, p1, p2)
 	-- upvalues: addTypes (ref), graphQLObjectType (ref), mapSchema (ref), mapperKind (ref), map (ref), correctASTNodes (ref), object (ref)
 	return if p0:getType(p1) == nil then addTypes(p0, { graphQLObjectType.new({ name = p1, fields = p2 }) }) else mapSchema(p0, {
-		[mapperKind.OBJECT_TYPE] = function(p3) --[[ line: 54 ]]
+		[mapperKind.OBJECT_TYPE] = function(p3)
 			-- upvalues: p1 (ref), map (copy), p2 (ref), correctASTNodes (copy), graphQLObjectType (copy), object (copy)
 			if p3.name ~= p1 then
 				return nil
@@ -36,13 +36,13 @@ function t.appendObjectFields(p0, p1, p2) --[[ line: 41 ]]
 	})
 end
 
-function t.removeObjectFields(p4, p5, p6) --[[ line: 100 ]]
+function t.removeObjectFields(p4, p5, p6)
 	-- upvalues: map (ref), mapSchema (ref), mapperKind (ref), boolean (ref), correctASTNodes (ref), graphQLObjectType (ref), object (ref)
 	local var7 = map.new()
 	
 	return {
 		mapSchema(p4, {
-			[mapperKind.OBJECT_TYPE] = function(p7) --[[ line: 112 ]]
+			[mapperKind.OBJECT_TYPE] = function(p7)
 				-- upvalues: p5 (ref), map (copy), boolean (copy), p6 (ref), var7 (ref), correctASTNodes (copy), graphQLObjectType (copy), object (copy)
 				if p7.name ~= p5 then
 					return nil
@@ -68,11 +68,11 @@ function t.removeObjectFields(p4, p5, p6) --[[ line: 100 ]]
 	}
 end
 
-function t.selectObjectFields(p8, p9, p10) --[[ line: 160 ]]
+function t.selectObjectFields(p8, p9, p10)
 	-- upvalues: map (ref), mapSchema (ref), mapperKind (ref), boolean (ref)
 	local var12 = map.new()
 	mapSchema(p8, {
-		[tostring(mapperKind.OBJECT_TYPE)] = function(p11) --[[ line: 170 ]]
+		[tostring(mapperKind.OBJECT_TYPE)] = function(p11)
 			-- upvalues: p9 (ref), boolean (copy), p10 (ref), var12 (ref)
 			if p11.name == p9 then
 				local fields = p11:toConfig().fields
@@ -93,13 +93,13 @@ function t.selectObjectFields(p8, p9, p10) --[[ line: 160 ]]
 	return var12
 end
 
-function t.modifyObjectFields(p12, p13, p14, p15) --[[ line: 200 ]]
+function t.modifyObjectFields(p12, p13, p14, p15)
 	-- upvalues: map (ref), mapSchema (ref), mapperKind (ref), boolean (ref), correctASTNodes (ref), graphQLObjectType (ref), object (ref)
 	local var15 = map.new()
 	
 	return {
 		mapSchema(p12, {
-			[mapperKind.OBJECT_TYPE] = function(p16) --[[ line: 213 ]]
+			[mapperKind.OBJECT_TYPE] = function(p16)
 				-- upvalues: p13 (ref), map (copy), boolean (copy), p14 (ref), var15 (ref), p15 (ref), correctASTNodes (copy), graphQLObjectType (copy), object (copy)
 				if p16.name ~= p13 then
 					return nil

@@ -33,7 +33,7 @@ local t = {
 	variant = buttonVariantModule.Utility
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 79 | named "IconButton" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), isBuilderOrMigratedIcon (ref), getIconScaleModule (ref), useIconButtonVariantsModule (ref), useIconSizeModule (ref), isBuilderIconModule (ref), reactModule (ref), fillBehaviorModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), isMigrated (ref), uiblox (ref), builderIconsModule (ref), imageModule (ref)
 	local var26, var27
 	local var19 = withDefaultsModule(p0, t)
@@ -83,7 +83,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 79 | 
 		cornerRadius = new,
 		backgroundStyle = var28.container.style,
 		stroke = var28.container.stroke,
-		cursor = reactModule.useMemo(function() --[[ line: 111 ]]
+		cursor = reactModule.useMemo(function()
 			-- upvalues: new (ref), var20 (ref)
 			return {
 				radius = new,

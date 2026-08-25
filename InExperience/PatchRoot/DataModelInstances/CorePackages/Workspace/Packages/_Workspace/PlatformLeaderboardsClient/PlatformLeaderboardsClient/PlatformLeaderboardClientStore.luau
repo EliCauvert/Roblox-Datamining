@@ -14,9 +14,9 @@ local signalsModule = require(parent.Signals)
 local url = require(parent.CoreScriptsCommon).Url
 local createSignalMap = require(parent.CoreScriptsRoactCommon).Utilities.createSignalMap
 
-local function _() --[[ line: 79 | named "getPlayerPermissionsModule" ]]
+local function _()
 	-- upvalues: coreGuiService (ref)
-	local ok, status = pcall(function() --[[ line: 80 ]]
+	local ok, status = pcall(function()
 		-- upvalues: coreGuiService (copy)
 		return require(coreGuiService:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 	end)
@@ -24,21 +24,21 @@ local function _() --[[ line: 79 | named "getPlayerPermissionsModule" ]]
 	return if ok then status else nil
 end
 
-local _ = function() --[[ line: 87 | named "resolveIsLocalPlayerCreator" ]]
+local _ = function()
 	-- upvalues: playersService (ref), coreGuiService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	if not localPlayer then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 80 ]]
+	local ok, status = pcall(function()
 		-- upvalues: coreGuiService (copy)
 		return require(coreGuiService:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 	end)
 	local var13 = if ok then status else nil
 	
 	if var13 then
-		local ok_1, status_1 = pcall(function() --[[ line: 96 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: var13 (ref), localPlayer (ref)
 			return var13.CanPlayerManagePlaceAsync(localPlayer)
 		end)
@@ -51,7 +51,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 132 ]]
+function t.new()
 	-- upvalues: signalsModule (ref), createSignalMap (ref), t (ref), robloxReplicatedStorageService (ref), platformLeaderboardPushWaitTimeoutSeconds (ref)
 	local var14, var15 = signalsModule.createSignal(false)
 	local var16, var17 = signalsModule.createSignal(nil)
@@ -84,12 +84,12 @@ function t.new() --[[ line: 132 ]]
 		_globalEntrySetters = {},
 		_friendsEntrySetters = {}
 	}, t)
-	task.spawn(function() --[[ line: 166 ]]
+	task.spawn(function()
 		-- upvalues: robloxReplicatedStorageService (copy), platformLeaderboardPushWaitTimeoutSeconds (copy), tbl (ref)
 		local platformLeaderboardPush = robloxReplicatedStorageService:WaitForChild("PlatformLeaderboardPush", platformLeaderboardPushWaitTimeoutSeconds)
 		
 		if platformLeaderboardPush then
-			tbl._conn = platformLeaderboardPush.OnClientEvent:Connect(function(p0) --[[ line: 174 ]]
+			tbl._conn = platformLeaderboardPush.OnClientEvent:Connect(function(p0)
 				-- upvalues: tbl (copy)
 				tbl:_handleEvent(p0)
 			end)
@@ -101,7 +101,7 @@ function t.new() --[[ line: 132 ]]
 	return tbl
 end
 
-function t._updateEntries(_, p1, p2, p3) --[[ line: 182 ]]
+function t._updateEntries(_, p1, p2, p3)
 	-- upvalues: signalsModule (ref)
 	local t = {}
 	
@@ -141,7 +141,7 @@ function t._updateEntries(_, p1, p2, p3) --[[ line: 182 ]]
 	end
 end
 
-function t:_handleEvent(p4) --[[ line: 231 ]]
+function t:_handleEvent(p4)
 	-- upvalues: platformLeaderboardsExposure2EnabledV2 (ref), IXPService (ref), platformLeaderboardsExposure2Layer (ref), platformLeaderboardsIXPNoLeaderboardsShownV3 (ref), playersService (ref), coreGuiService (ref), platformLeaderboardLocalizedUnitEnabled (ref)
 	if platformLeaderboardsExposure2EnabledV2 and p4.config ~= nil then
 		IXPService:LogFlagLinkedUserLayerExposure(platformLeaderboardsExposure2Layer)
@@ -151,14 +151,14 @@ function t:_handleEvent(p4) --[[ line: 231 ]]
 		local localPlayer = playersService.LocalPlayer
 		
 		if localPlayer then
-			local ok, status = pcall(function() --[[ line: 80 ]]
+			local ok, status = pcall(function()
 				-- upvalues: coreGuiService (copy)
 				return require(coreGuiService:WaitForChild("RobloxGui").Modules.PlayerPermissionsModule)
 			end)
 			local var40 = if ok then status else nil
 			
 			if var40 then
-				local ok_1, status_1 = pcall(function() --[[ line: 96 ]]
+				local ok_1, status_1 = pcall(function()
 					-- upvalues: var40 (ref), localPlayer (ref)
 					return var40.CanPlayerManagePlaceAsync(localPlayer)
 				end)
@@ -210,7 +210,7 @@ function t:_handleEvent(p4) --[[ line: 231 ]]
 	end
 end
 
-function t:_updateUserFriendRankAndScore(p5) --[[ line: 269 ]]
+function t:_updateUserFriendRankAndScore(p5)
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -229,12 +229,12 @@ function t:_updateUserFriendRankAndScore(p5) --[[ line: 269 ]]
 	self._setUserFriendScore(nil)
 end
 
-function t._fetchLocalizedUnit(p6) --[[ line: 286 ]]
+function t._fetchLocalizedUnit(p6)
 	-- upvalues: url (ref), httpRbxApiService (ref), httpService (ref)
-	task.spawn(function() --[[ line: 287 ]]
+	task.spawn(function()
 		-- upvalues: url (copy), httpRbxApiService (copy), httpService (copy), p6 (ref)
 		local ok = `{url.APIS_URL}platform-leaderboards-api/v1/universes/{game.GameId}/leaderboard/localized`
-		ok, status = pcall(function() --[[ line: 291 ]]
+		ok, status = pcall(function()
 			-- upvalues: httpRbxApiService (copy), ok (ref)
 			return httpRbxApiService:GetAsyncFullUrl(ok)
 		end)
@@ -244,7 +244,7 @@ function t._fetchLocalizedUnit(p6) --[[ line: 286 ]]
 			
 			return
 		end
-		local ok_1, status_1 = pcall(function() --[[ line: 299 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: httpService (copy), status (ref)
 			return httpService:JSONDecode(status)
 		end)
@@ -262,7 +262,7 @@ function t._fetchLocalizedUnit(p6) --[[ line: 286 ]]
 	end)
 end
 
-function t.fireTabOpened(_, p7) --[[ line: 314 ]]
+function t.fireTabOpened(_, p7)
 	-- upvalues: robloxReplicatedStorageService (ref)
 	local platformLeaderboardTabOpened = robloxReplicatedStorageService:FindFirstChild("PlatformLeaderboardTabOpened")
 	
@@ -271,7 +271,7 @@ function t.fireTabOpened(_, p7) --[[ line: 314 ]]
 	end
 end
 
-function t.fireTabClosed(_, p8) --[[ line: 321 ]]
+function t.fireTabClosed(_, p8)
 	-- upvalues: robloxReplicatedStorageService (ref)
 	local platformLeaderboardTabClosed = robloxReplicatedStorageService:FindFirstChild("PlatformLeaderboardTabClosed")
 	
@@ -280,7 +280,7 @@ function t.fireTabClosed(_, p8) --[[ line: 321 ]]
 	end
 end
 
-function t:destroy() --[[ line: 328 ]]
+function t:destroy()
 	if self._conn then
 		self._conn:Disconnect()
 		self._conn = nil

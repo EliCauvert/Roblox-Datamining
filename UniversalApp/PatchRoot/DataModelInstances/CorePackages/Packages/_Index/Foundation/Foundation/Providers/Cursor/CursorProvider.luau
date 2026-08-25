@@ -15,22 +15,22 @@ local _ = require(foundation.Enums.ColorNamespace)
 local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0) --[[ line: 28 | named "CursorProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useRefCache (ref), useTokensModule (ref), keyUtilitiesModule (ref), dashModule (ref), cursorModule (ref), cursorComponentModule (ref), isPluginSecurityModule (ref), coreGui (ref), guiService (ref), cursorContextModule (ref)
 	local var9, var10 = reactModule.useState({})
 	local var11 = reactModule.useRef(nil)
 	local var12, var13 = reactModule.useState(nil)
 	local var14 = useRefCache()
 	local var15 = useTokensModule()
-	local var16 = reactModule.useMemo(function() --[[ line: 35 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), var10 (ref), keyUtilitiesModule (copy), var15 (ref), dashModule (copy)
 		return {
 			refCache = var14,
 			setMountedCursors = var10,
-			getCursor = function(p1) --[[ line: 39 ]]
+			getCursor = function(p1)
 				-- upvalues: keyUtilitiesModule (copy), var15 (copy), var10 (copy), dashModule (copy), var14 (copy)
 				local var18 = keyUtilitiesModule.mapCursorToKey(p1, var15)
-				var10(function(p2) --[[ line: 42 ]]
+				var10(function(p2)
 					-- upvalues: var18 (ref), dashModule (copy)
 					return if p2[var18] == nil then dashModule.union(p2, { [var18] = true }) else p2
 				end)
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 28 | named "CursorProvider" ]]
 		}
 	end, { var14, var10, var15 })
 	
-	local var17 = function() --[[ line: 56 ]]
+	local var17 = function()
 		-- upvalues: var9 (ref), var14 (ref), var12 (ref), keyUtilitiesModule (copy), reactModule (copy), cursorModule (copy), cursorComponentModule (copy)
 		local t = {}
 		
@@ -71,16 +71,16 @@ return function(p0) --[[ line: 28 | named "CursorProvider" ]]
 		return t
 	end
 	
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), isPluginSecurityModule (copy), coreGui (copy), guiService (copy), var13 (ref)
 		if var11.current == nil or not game:IsAncestorOf(var11.current) then
 			return
 		end
 		local var28 = isPluginSecurityModule() and var11.current:IsDescendantOf(coreGui)
 		
-		local function setUpSelectionImageObjectConnection() --[[ line: 100 ]]
+		local function setUpSelectionImageObjectConnection()
 			-- upvalues: var28 (ref), guiService (copy), var13 (copy)
-			return if var28 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 105 ]]
+			return if var28 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: guiService (copy), var13 (copy)
 				if guiService.SelectedCoreObject == nil then
 					var13(nil)
@@ -88,7 +88,7 @@ return function(p0) --[[ line: 28 | named "CursorProvider" ]]
 					return
 				end
 				var13(guiService.SelectedCoreObject.SelectionImageObject)
-			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ line: 113 ]]
+			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
 				-- upvalues: guiService (copy), var13 (copy)
 				if guiService.SelectedObject == nil then
 					var13(nil)
@@ -100,13 +100,13 @@ return function(p0) --[[ line: 28 | named "CursorProvider" ]]
 		end
 		
 		local var30 = setUpSelectionImageObjectConnection()
-		local ancestryChangedConnection = var11.current.AncestryChanged:Connect(function() --[[ line: 124 ]]
+		local ancestryChangedConnection = var11.current.AncestryChanged:Connect(function()
 			-- upvalues: var30 (write), setUpSelectionImageObjectConnection (ref)
 			var30:Disconnect()
 			var30 = setUpSelectionImageObjectConnection()
 		end)
 		
-		return function() --[[ line: 134 ]]
+		return function()
 			-- upvalues: var30 (write), ancestryChangedConnection (ref)
 			var30:Disconnect()
 			ancestryChangedConnection:Disconnect()

@@ -2,7 +2,7 @@
 local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 
-return function(p0) --[[ line: 10 | named "shouldValidateR15LegacyDuplicate" ]]
+return function(p0)
 	-- upvalues: constantsModule (ref)
 	if not p0 or not p0.consumerConfig or not p0.consumerConfig.enforceR15FolderStructure then
 		return false

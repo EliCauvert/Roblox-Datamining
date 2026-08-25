@@ -20,13 +20,13 @@ local t = {
 	LayoutOrder = 0,
 	BackgroundTransparency = nil,
 	showDivider = true,
-	onActivated = function() --[[ line: 54 ]]
+	onActivated = function()
 		print("FlexIconWithTextCell onActivated")
 	end,
 	style = require(appChat.SocialLibraries).Components.TestStyle
 }
 
-return memo(function(p0) --[[ line: 70 | named "FlexIconWithTextCell" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	local style = var5.style

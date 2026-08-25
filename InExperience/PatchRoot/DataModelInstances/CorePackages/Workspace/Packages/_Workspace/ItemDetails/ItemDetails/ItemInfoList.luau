@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local itemInfoRowModule = require(script.Parent.ItemInfoRow)
 local cryoModule = require(parent.Cryo)
 
-return function(a) --[[ line: 42 | named "ItemInfoList" ]]
+return function(a)
 	-- upvalues: reactModule (ref), cryoModule (ref), itemInfoRowModule (ref)
 	local t = {
 		layout = reactModule.createElement("UIListLayout", {

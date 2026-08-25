@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsImmersiveResizeViewport", false)
 
-return function() --[[ line: 11 ]]
+return function()
 	return game:GetFastFlag("MomentsImmersiveResizeViewport")
 end

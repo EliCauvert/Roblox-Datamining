@@ -6,14 +6,14 @@ local var2 = nil
 local var3 = nil
 
 if game:GetFastFlag("BatchVoiceParticipantsUpdates") then
-	local ok, status = pcall(function() --[[ line: 12 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPServiceWrapper (ref), throttleVoiceParticipantsUpdateLayerName (ref)
 		return IXPServiceWrapper:GetLayerData(throttleVoiceParticipantsUpdateLayerName)
 	end)
 	var2 = ok
 	var3 = status
 end
-return function() --[[ line: 17 ]]
+return function()
 	-- upvalues: var2 (write), var3 (write), throttleVoiceParticipantsUpdateLayerValue (ref)
 	return game:GetFastFlag("BatchVoiceParticipantsUpdates") and (var2 and (var3 and var3[throttleVoiceParticipantsUpdateLayerValue]))
 end

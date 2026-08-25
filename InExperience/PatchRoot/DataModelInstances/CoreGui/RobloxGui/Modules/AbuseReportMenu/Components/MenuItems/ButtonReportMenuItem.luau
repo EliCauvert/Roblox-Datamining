@@ -1,7 +1,7 @@
 ﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
 local reportMenuItemModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.MenuItems.ReportMenuItem)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reportMenuItemModule (ref)
 	return reactModule.createElement(reportMenuItemModule, {
 		label = p0.label,

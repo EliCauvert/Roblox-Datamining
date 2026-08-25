@@ -3,7 +3,7 @@ local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local constantsModule = require(script.Parent.Parent.Constants)
 local checkboxDropdown = roactModule.Component:extend("CheckboxDropdown")
 
-function checkboxDropdown.render(p0) --[[ line: 10 ]]
+function checkboxDropdown.render(p0)
 	-- upvalues: roactModule (ref), constantsModule (ref)
 	local children = p0.props[roactModule.Children] or {}
 	local absolutePosition = p0.props.absolutePosition

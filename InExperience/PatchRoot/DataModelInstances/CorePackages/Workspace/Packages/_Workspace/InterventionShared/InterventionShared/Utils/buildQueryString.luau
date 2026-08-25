@@ -1,6 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 10 | named "buildQueryString" ]]
+return function(p0)
 	-- upvalues: httpService (ref)
 	local t = {}
 	

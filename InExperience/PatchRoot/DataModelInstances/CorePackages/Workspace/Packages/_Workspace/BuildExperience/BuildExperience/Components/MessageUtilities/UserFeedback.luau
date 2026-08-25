@@ -8,7 +8,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 34 | named "UserFeedback" ]]
+return function(p0)
 	-- upvalues: iconVariant (ref), reactModule (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
 	local testId = p0.testId or "user-feedback"
 	local onActivated = p0.onActivated
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 34 | named "UserFeedback" ]]
 			LayoutOrder = i,
 			icon = if selectedAction == v.action then { name = v.iconName, variant = iconVariant.Filled } else v.iconName,
 			isDisabled = v.isDisabled,
-			onActivated = function() --[[ line: 52 ]]
+			onActivated = function()
 				-- upvalues: selectedAction (ref), v (ref), onActivated (ref)
 				if selectedAction == v.action and v.allowRepeatedActivation ~= true then
 					return

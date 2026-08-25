@@ -7,20 +7,20 @@ local _ = require(script.Parent.ServerManagementStoreTypes)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0) --[[ line: 20 | named "resolveBase" ]]
+local function _(p0)
 	-- upvalues: urlBase (ref)
 	p0 = p0 or {}
 	
 	return p0.network, p0.baseUrl or urlBase.APIS
 end
 
-local _ = function(p1) --[[ line: 25 | named "resolveMutatingNetwork" ]]
+local _ = function(p1)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
 	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
 return {
-	fetchListRestartStatuses = function(p2, p3) --[[ line: 32 ]]
+	fetchListRestartStatuses = function(p2, p3)
 		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
 		p3 = p3 or {}
 		
@@ -29,12 +29,12 @@ return {
 			analyticsKey = "server-management.list-restart-statuses",
 			network = p3.network,
 			url = ("%s%s/universes/%d/restarts"):format(p3.baseUrl or urlBase.APIS, "/server-management/v1", p2),
-			decode = function(p4) --[[ line: 42 ]]
+			decode = function(p4)
 				return p4
 			end
 		}))
 	end,
-	fetchForecastRestart = function(p5, p6) --[[ line: 49 ]]
+	fetchForecastRestart = function(p5, p6)
 		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
 		p6 = p6 or {}
 		
@@ -43,12 +43,12 @@ return {
 			analyticsKey = "server-management.forecast-restart",
 			network = p6.network,
 			url = ("%s%s/universes/%d/restarts:forecast"):format(p6.baseUrl or urlBase.APIS, "/server-management/v1", p5),
-			decode = function(p7) --[[ line: 59 ]]
+			decode = function(p7)
 				return p7
 			end
 		}))
 	end,
-	launchRestart = function(p8, p9, p10) --[[ line: 66 ]]
+	launchRestart = function(p8, p9, p10)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
 		p10 = p10 or {}
 		local _ = p10.network
@@ -59,7 +59,7 @@ return {
 			network = (p10 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
 			url = ("%s%s/universes/%d/restarts"):format(p10.baseUrl or urlBase.APIS, "/server-management/v1", p8),
 			body = p9 or {},
-			decode = function(p11) --[[ line: 78 ]]
+			decode = function(p11)
 				return p11
 			end
 		}))

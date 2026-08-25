@@ -13,7 +13,7 @@ local selectedMembersBarModule = require(script.Parent.SelectedMembersBar)
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 
-local function renderUserEntry(p0, p1, p2, p3, _) --[[ line: 32 ]]
+local function renderUserEntry(p0, p1, p2, p3, _)
 	-- upvalues: reactModule (ref), foundationModule (ref), userCellWithCheckboxModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full-0 auto-y",
@@ -27,7 +27,7 @@ local function renderUserEntry(p0, p1, p2, p3, _) --[[ line: 32 ]]
 	})
 end
 
-return reactModule.memo(function(p4) --[[ line: 58 | named "SelectChatMembers" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: useLocalization (ref), useStyle (ref), useTextSizeOffset (ref), useDebouncedUserSearchModule (ref), reactModule (ref), renderUserEntry (ref), foundationModule (ref), selectedMembersBarModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), paginatedChatMembersModule (ref)
 	local var11 = useLocalization({ suggested = "Feature.Friends.Label.Suggested" })
 	local var12 = useStyle()
@@ -53,7 +53,7 @@ return reactModule.memo(function(p4) --[[ line: 58 | named "SelectChatMembers" ]
 				onChanged = var15,
 				iconTrailing = if var18 then {
 					name = foundationModule.Enums.IconName.CircleX,
-					onActivated = reactModule.useCallback(function() --[[ line: 66 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var15 (ref), var17 (ref)
 						var15("")
 						
@@ -69,7 +69,7 @@ return reactModule.memo(function(p4) --[[ line: 58 | named "SelectChatMembers" ]
 		friendsList = reactModule.createElement(foundationModule.View, { LayoutOrder = 3, tag = "size-full-0 fill" }, {
 			paginatedFriendsList = reactModule.createElement(paginatedChatMembersModule, {
 				userIds = if var18 then var14 else p4.friendIds,
-				renderItem = reactModule.useCallback(function(p5) --[[ line: 76 ]]
+				renderItem = reactModule.useCallback(function(p5)
 					-- upvalues: renderUserEntry (copy), var18 (ref), p4 (ref), var12 (ref), var13 (ref)
 					return renderUserEntry(p5.item, var18, { isDebugEnabled = p4.isDebugEnabled }, var12, var13)
 				end, { p4.isDebugEnabled, var18, var12, var13 }),

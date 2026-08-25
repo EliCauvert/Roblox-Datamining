@@ -6,7 +6,7 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local t = { layoutOrder = 2, userText = "", contentText = "" }
 
-function ReplyComposeBarText(p0) --[[ line: 22 ]]
+function ReplyComposeBarText(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), view (ref), text (ref)
 	local var4 = cryoModule.Dictionary.union(t, p0)
 	

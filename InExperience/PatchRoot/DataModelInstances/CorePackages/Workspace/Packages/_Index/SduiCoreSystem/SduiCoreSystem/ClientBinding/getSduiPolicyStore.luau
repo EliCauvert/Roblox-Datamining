@@ -2,7 +2,7 @@
 local signalsModule = require(parent.Signals)
 local _ = require(parent.UniversalAppPolicy)
 
-local function _() --[[ line: 13 | named "createSduiPolicyStore" ]]
+local function _()
 	-- upvalues: signalsModule (ref)
 	local var2, var3 = signalsModule.createSignal(nil)
 	
@@ -11,7 +11,7 @@ end
 
 local var1 = nil
 
-return function() --[[ line: 24 | named "getSduiPolicyStore" ]]
+return function()
 	-- upvalues: var1 (write), signalsModule (ref)
 	if var1 == nil then
 		local var4, var5 = signalsModule.createSignal(nil)

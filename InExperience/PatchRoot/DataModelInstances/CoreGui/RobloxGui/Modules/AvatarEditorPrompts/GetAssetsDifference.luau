@@ -5,27 +5,27 @@ local getCurrentHumanoidDescriptionModule = require(script.Parent.GetCurrentHuma
 local getAssetIdsFromDescriptionModule = require(script.Parent.GetAssetIdsFromDescription)
 local getAssetNamesForIdsModule = require(script.Parent.GetAssetNamesForIds)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), getCurrentHumanoidDescriptionModule (ref), getAssetIdsFromDescriptionModule (ref), getAssetNamesForIdsModule (ref)
-	local function getAddedAndRemovedIds(p1, p2) --[[ line: 11 ]]
+	local function getAddedAndRemovedIds(p1, p2)
 		-- upvalues: cryoModule (copy)
 		local var6 = cryoModule.List.toSet(p1)
 		local var7 = cryoModule.List.toSet(p2)
 		
-		return cryoModule.List.filter(p2, function(p3) --[[ line: 15 ]]
+		return cryoModule.List.filter(p2, function(p3)
 			-- upvalues: var6 (ref)
 			return var6[p3] == nil
-		end), cryoModule.List.filter(p1, function(p4) --[[ line: 19 ]]
+		end), cryoModule.List.filter(p1, function(p4)
 			-- upvalues: var7 (ref)
 			return var7[p4] == nil
 		end)
 	end
 	
-	return getCurrentHumanoidDescriptionModule():andThen(function(p5) --[[ line: 26 ]]
+	return getCurrentHumanoidDescriptionModule():andThen(function(p5)
 		-- upvalues: getAssetIdsFromDescriptionModule (copy), p0 (ref), getAddedAndRemovedIds (ref), cryoModule (copy), getAssetNamesForIdsModule (copy)
 		local var8, var9 = getAddedAndRemovedIds(getAssetIdsFromDescriptionModule(p5), getAssetIdsFromDescriptionModule(p0))
 		
-		return getAssetNamesForIdsModule(cryoModule.List.join(var8, var9)):andThen(function(p6) --[[ line: 33 ]]
+		return getAssetNamesForIdsModule(cryoModule.List.join(var8, var9)):andThen(function(p6)
 			-- upvalues: var8 (ref), var9 (ref)
 			local t = {}
 			

@@ -4,7 +4,7 @@ local reactModule = require(songbird.Parent.React)
 local createNextOrder = require(songbird.Parent.ReactUtils).createNextOrder
 local getFFlagSongbirdMusicIconThumbnailModule = require(songbird.Flags.getFFlagSongbirdMusicIconThumbnail)
 
-return function(p0) --[[ line: 17 | named "MusicIcon" ]]
+return function(p0)
 	-- upvalues: createNextOrder (ref), foundationModule (ref), getFFlagSongbirdMusicIconThumbnailModule (ref), reactModule (ref)
 	local var4 = createNextOrder()
 	local var5 = foundationModule.Hooks.useTokens()

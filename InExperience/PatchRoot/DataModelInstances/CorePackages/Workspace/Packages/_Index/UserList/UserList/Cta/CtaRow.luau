@@ -9,7 +9,7 @@ local useJoinUserInExperience = socialExperienceJoinModule.useJoinUserInExperien
 local useCtaForRowModule = require(userList.Hooks.useCtaForRow)
 local useProfileCtaModule = require(userList.Hooks.useProfileCta)
 
-return reactModule.memo(function(p0) --[[ line: 32 | named "CtaRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useProfileCtaModule (ref), useGetPresenceByUserId (ref), useJoinUserInExperience (ref), useCtaForRowModule (ref)
 	local id = p0.entity.id
 	local var6, var7 = useProfileCtaModule(id)

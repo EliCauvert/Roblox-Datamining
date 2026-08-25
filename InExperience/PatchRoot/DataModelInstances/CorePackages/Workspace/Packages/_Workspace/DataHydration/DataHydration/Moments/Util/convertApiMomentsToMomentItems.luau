@@ -9,23 +9,23 @@ local color3 = Color3.new(0, 0, 0)
 local center = Enum.TextXAlignment.Center
 local uDim2 = UDim2.fromScale(0.5, 0.5)
 
-local function _(p0) --[[ line: 26 | named "toCaptureType" ]]
+local function _(p0)
 	return if p0 == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video
 end
 
-local _ = function(p1) --[[ line: 34 | named "toMomentStatus" ]]
+local _ = function(p1)
 	-- upvalues: momentStatus (ref)
 	return if p1 == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
 end
 
-local function toEnumItem(p2, p3, p4) --[[ line: 42 ]]
+local function toEnumItem(p2, p3, p4)
 	if typeof(p3) == "EnumItem" then
 		return p3
 	elseif type(p3) ~= "string" then
 		return p4
 	end
 	local var13 = string.match(p3, "([^%.]+)$") or p3
-	local ok, status = pcall(function() --[[ line: 51 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p2 (ref), var13 (ref)
 		return p2[var13]
 	end)
@@ -33,7 +33,7 @@ local function toEnumItem(p2, p3, p4) --[[ line: 42 ]]
 	return if ok and status ~= nil then status else p4
 end
 
-local function toColor3(p5) --[[ line: 60 ]]
+local function toColor3(p5)
 	-- upvalues: color3 (ref)
 	if typeof(p5) == "Color3" then
 		return p5
@@ -47,7 +47,7 @@ local function toColor3(p5) --[[ line: 60 ]]
 	return if not (type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number") then if r > 1 or g > 1 or b > 1 then Color3.fromRGB(r, g, b) else Color3.new(r, g, b) else color3
 end
 
-local function toUDim2(p6) --[[ line: 81 ]]
+local function toUDim2(p6)
 	-- upvalues: uDim2 (ref)
 	if typeof(p6) == "UDim2" then
 		return p6
@@ -62,7 +62,7 @@ local function toUDim2(p6) --[[ line: 81 ]]
 	return if type(x) == "table" and type(y) == "table" then UDim2.new(x.Scale or (x.scale or 0), x.Offset or (x.offset or 0), y.Scale or (y.scale or 0), y.Offset or (y.offset or 0)) else UDim2.new(p6.XScale or (p6.xScale or (p6.scaleX or (p6[1] or 0.5))), p6.XOffset or (p6.xOffset or (p6.offsetX or (p6[2] or 0))), p6.YScale or (p6.yScale or (p6.scaleY or (p6[3] or 0.5))), p6.YOffset or (p6.yOffset or (p6.offsetY or (p6[4] or 0))))
 end
 
-local function normalizeTextOverlayEdit(p7) --[[ line: 112 ]]
+local function normalizeTextOverlayEdit(p7)
 	-- upvalues: toUDim2 (ref), toEnumItem (ref), builderSansMedium (ref), toColor3 (ref), center (ref)
 	if type(p7) == "table" then
 		local textOverlayStyle = p7.textOverlayStyle or {}
@@ -84,7 +84,7 @@ local function normalizeTextOverlayEdit(p7) --[[ line: 112 ]]
 	return nil
 end
 
-local function normalizeStickerOverlayEdit(p8) --[[ line: 135 ]]
+local function normalizeStickerOverlayEdit(p8)
 	-- upvalues: toUDim2 (ref)
 	return if type(p8) == "table" then if type(p8.stickerURI) == "string" and p8.stickerURI ~= "" then {
 		position = toUDim2(p8.position),
@@ -96,7 +96,7 @@ local function normalizeStickerOverlayEdit(p8) --[[ line: 135 ]]
 	} else nil else nil
 end
 
-local function normalizeCaptureEdits(p9) --[[ line: 154 ]]
+local function normalizeCaptureEdits(p9)
 	-- upvalues: normalizeTextOverlayEdit (ref), fFlagMomentsStickerOverlayNormalizationModule (ref), normalizeStickerOverlayEdit (ref)
 	if p9 == nil then
 		return nil
@@ -141,7 +141,7 @@ local function normalizeCaptureEdits(p9) --[[ line: 154 ]]
 	}
 end
 
-local _ = function(p10) --[[ line: 195 | named "reactionTotal" ]]
+local _ = function(p10)
 	if p10 == nil or p10.counts == nil then
 		return nil
 	end
@@ -153,7 +153,7 @@ local _ = function(p10) --[[ line: 195 | named "reactionTotal" ]]
 	return var26
 end
 
-local function convertApiMomentToMomentItem(p11) --[[ line: 208 ]]
+local function convertApiMomentToMomentItem(p11)
 	-- upvalues: fFlagMomentsRequireApiFeedItemIdModule (ref), normalizeCaptureEdits (ref), momentStatus (ref)
 	local captionedAssetMoment = p11.captionedAssetMoment
 	local owner = p11.owner
@@ -205,7 +205,7 @@ local function convertApiMomentToMomentItem(p11) --[[ line: 208 ]]
 	return t
 end
 
-return function(p12) --[[ line: 261 | named "convertApiMomentsToMomentItems" ]]
+return function(p12)
 	-- upvalues: convertApiMomentToMomentItem (ref)
 	local t = {}
 	

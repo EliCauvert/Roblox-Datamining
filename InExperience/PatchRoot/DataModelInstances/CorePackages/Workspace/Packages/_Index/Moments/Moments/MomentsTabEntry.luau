@@ -45,16 +45,16 @@ local var25 = roactNavigationModule.createAppContainer(innerNavigatorModule)
 local getActiveRoutes = navigationModule.getActiveRoutes
 local var26 = getFFlagMomentsFixShareDeeplinkModule()
 
-local function _(p0) --[[ line: 97 | named "normalizeDeepLinkedMomentId" ]]
+local function _(p0)
 	return if type(p0) == "string" and p0 ~= "" then p0 elseif type(p0) == "number" then tostring(p0) else nil
 end
 
-local function getMomentIdFromLaunchData(p1) --[[ line: 106 ]]
+local function getMomentIdFromLaunchData(p1)
 	-- upvalues: httpService (ref)
 	if type(p1) ~= "string" or p1 == "" then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 111 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p1 (ref)
 		return httpService:JSONDecode(p1)
 	end)
@@ -67,17 +67,17 @@ local function getMomentIdFromLaunchData(p1) --[[ line: 106 ]]
 	return if type(postId) == "string" and postId ~= "" then postId elseif type(postId) == "number" then tostring(postId) else nil
 end
 
-local _ = function(p2) --[[ line: 121 | named "normalizeTargetIdType" ]]
+local _ = function(p2)
 	-- upvalues: shareLinkTargetIdType (ref)
 	return if p2 == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
 end
 
-local function getTargetIdTypeFromLaunchData(p3) --[[ line: 125 ]]
+local function getTargetIdTypeFromLaunchData(p3)
 	-- upvalues: httpService (ref), shareLinkTargetIdType (ref)
 	if type(p3) ~= "string" or p3 == "" then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 130 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p3 (ref)
 		return httpService:JSONDecode(p3)
 	end)
@@ -85,7 +85,7 @@ local function getTargetIdTypeFromLaunchData(p3) --[[ line: 125 ]]
 	return if not (not ok or type(status) ~= "table") then if status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil else nil
 end
 
-local function getDeepLinkedMomentIdFromParams(p4) --[[ line: 140 ]]
+local function getDeepLinkedMomentIdFromParams(p4)
 	-- upvalues: getMomentIdFromLaunchData (ref)
 	if type(p4) ~= "table" then
 		return nil
@@ -112,7 +112,7 @@ local function getDeepLinkedMomentIdFromParams(p4) --[[ line: 140 ]]
 	return if var39 == nil then getMomentIdFromLaunchData(p4.launchData) else var39
 end
 
-local function getDeepLinkedMomentTargetIdTypeFromParams(p5) --[[ line: 166 ]]
+local function getDeepLinkedMomentTargetIdTypeFromParams(p5)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), getMomentIdFromLaunchData (ref), getTargetIdTypeFromLaunchData (ref)
 	if not fFlagMomentsPassFeedItemIdToBackendApis or type(p5) ~= "table" then
 		return nil
@@ -136,7 +136,7 @@ local function getDeepLinkedMomentTargetIdTypeFromParams(p5) --[[ line: 166 ]]
 	return if (if type(postId) == "string" and postId ~= "" then postId elseif type(postId) == "number" then tostring(postId) else nil) == nil then getTargetIdTypeFromLaunchData(p5.launchData) elseif p5.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
 end
 
-local function getDeepLinkRequestFromNavigationParams(p6, p7) --[[ line: 195 ]]
+local function getDeepLinkRequestFromNavigationParams(p6, p7)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), getDeepLinkedMomentIdFromParams (ref), getDeepLinkedMomentTargetIdTypeFromParams (ref)
 	if not p6 or not p6.getParam then
 		return nil
@@ -161,7 +161,7 @@ local function getDeepLinkRequestFromNavigationParams(p6, p7) --[[ line: 195 ]]
 	}
 end
 
-local function getDeepLinkRequestFromNavigationState(p8, p9) --[[ line: 225 ]]
+local function getDeepLinkRequestFromNavigationState(p8, p9)
 	-- upvalues: getActiveRoutes (ref), getDeepLinkedMomentIdFromParams (ref), getDeepLinkedMomentTargetIdTypeFromParams (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref)
 	local var43 = getActiveRoutes(p8)
 	
@@ -183,7 +183,7 @@ local function getDeepLinkRequestFromNavigationState(p8, p9) --[[ line: 225 ]]
 	return nil
 end
 
-local function getDeepLinkRequest(p10) --[[ line: 247 ]]
+local function getDeepLinkRequest(p10)
 	-- upvalues: getDeepLinkRequestFromNavigationParams (ref), getDeepLinkRequestFromNavigationState (ref)
 	local var47 = p10
 	local var48 = 0
@@ -201,7 +201,7 @@ local function getDeepLinkRequest(p10) --[[ line: 247 ]]
 	return nil
 end
 
-local _ = function(p11) --[[ line: 268 | named "getEntrySource" ]]
+local _ = function(p11)
 	if not p11 or not p11.getParam then
 		return "watch_tab"
 	end
@@ -210,7 +210,7 @@ local _ = function(p11) --[[ line: 268 | named "getEntrySource" ]]
 	return if type(extraProps) == "table" and type(extraProps.source) == "string" then extraProps.source else p11.getParam("source", "watch_tab")
 end
 
-local _ = function(p12, p13, p14) --[[ line: 279 | named "seedDeepLinkedMoment" ]]
+local _ = function(p12, p13, p14)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref)
 	if fFlagMomentsPassFeedItemIdToBackendApis then
 		p12.setDeepLinkedMoment(p13, p14)
@@ -220,7 +220,7 @@ local _ = function(p12, p13, p14) --[[ line: 279 | named "seedDeepLinkedMoment" 
 	p12.setDeepLinkedMomentId(p13)
 end
 
-local function MomentsTabEntry(p15) --[[ line: 287 ]]
+local function MomentsTabEntry(p15)
 	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), useResetTeleportingOnGameLeaveModule (ref), var26 (ref), getFFlagMomentsShareDeeplinkReliableOpenModule (ref), getFFlagMomentsFixDeeplinkRefocusModule (ref), getDeepLinkRequest (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), robloxAppEventsModule (ref), appPage (ref), shareLinkTargetIdType (ref), consumeEntrySourceModule (ref), fFlagMomentsEmojiSetsApiModule (ref), momentsGetMomentsReactionsStoreModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), t (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), fFlagMomentsSurfaceLoadTTI (ref), momentsSurfaceLoadManager (ref), fFlagMomentsRealtimeObservability (ref), getExperienceDetailsSheetStoreModule (ref), getImmersiveChromeStoreModule (ref), roactNavigationModule (ref), useMomentsTabIsVisibleModule (ref), getFFlagMomentsFixPeekReturnChromeModule (ref), useMomentsGating (ref), canRenderNativeMoments (ref), innerNavigatorModule (ref), var25 (ref), momentsHostShellModule (ref)
 	local var52 = reactModule.useRef(p15)
 	var52.current = p15
@@ -255,7 +255,7 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 			end
 			var58.current = var62
 		end
-		reactModule.useEffect(function() --[[ line: 335 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var61 (ref), var54 (ref), robloxAppEventsModule (copy), appPage (copy)
 			if var61 ~= nil and var54.current then
 				robloxAppEventsModule.ReloadPage:fire(appPage.Moments)
@@ -263,7 +263,7 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 			var54.current = true
 		end, { var62, var61, p15.navigation })
 	else
-		reactModule.useEffect(function() --[[ line: 346 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p15 (ref), getDeepLinkStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), shareLinkTargetIdType (copy), var54 (ref), robloxAppEventsModule (copy), appPage (copy)
 			local navigation = p15.navigation
 			
@@ -287,7 +287,7 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 			var54.current = true
 		end, { p15.navigation })
 	end
-	local var65 = reactModule.useCallback(function() --[[ line: 369 ]]
+	local var65 = reactModule.useCallback(function()
 		-- upvalues: var53 (ref), var55 (ref), var57 (ref), var59 (write), consumeEntrySourceModule (copy), var52 (ref), fFlagMomentsEmojiSetsApiModule (copy), momentsGetMomentsReactionsStoreModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), fFlagMomentsSessionHeartbeat (copy), t (copy), sessionManager (copy), funnelEventNames (copy), fireFunnelAnalyticsEvent (copy)
 		if var53.current then return end
 		local navigation, var73
@@ -329,7 +329,7 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 		end
 		fireFunnelAnalyticsEvent(funnelEventNames.FunnelTypes.AppNavigation, funnelEventNames.AppNavigationSteps.AppLaunched, sessionManager.startSession(funnelEventNames.FunnelTypes.AppNavigation))
 	end, { var57 })
-	local var66 = reactModule.useCallback(function() --[[ line: 416 ]]
+	local var66 = reactModule.useCallback(function()
 		-- upvalues: var53 (ref), fFlagMomentsSurfaceLoadTTI (copy), momentsSurfaceLoadManager (copy), fFlagMomentsRealtimeObservability (copy), getExperienceDetailsSheetStoreModule (copy), var55 (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsSessionHeartbeat (copy), t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), sessionManager (copy), funnelEventNames (copy)
 		if not var53.current then return end
 		var53.current = false
@@ -359,7 +359,7 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 		end
 		sessionManager.endSession(funnelEventNames.FunnelTypes.AppNavigation)
 	end, {})
-	local var67 = reactModule.useCallback(function() --[[ line: 459 ]]
+	local var67 = reactModule.useCallback(function()
 		-- upvalues: getImmersiveChromeStoreModule (copy), var52 (ref)
 		getImmersiveChromeStoreModule(false).setOverlayCovering(false)
 		local onTabFocused = var52.current.onTabFocused
@@ -368,14 +368,14 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 			onTabFocused()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 472 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p15 (ref), var65 (ref), var67 (ref), var66 (ref), roactNavigationModule (copy), var26_1 (ref), getDeepLinkRequest (copy), var57 (ref), var58 (write), getDeepLinkStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), robloxAppEventsModule (copy), appPage (copy), shareLinkTargetIdType (copy)
 		local navigation = p15.navigation
 		
 		if navigation and navigation.addListener then
 			var65()
 			var67()
-			local var77 = navigation.addListener(roactNavigationModule.Events.DidFocus, function() --[[ line: 485 ]]
+			local var77 = navigation.addListener(roactNavigationModule.Events.DidFocus, function()
 				-- upvalues: var26_1 (copy), getDeepLinkRequest (copy), navigation (ref), var57 (copy), var58 (copy), getDeepLinkStoreModule (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), robloxAppEventsModule (copy), appPage (copy), shareLinkTargetIdType (copy), var65 (copy), var67 (copy)
 				if var26_1 then
 					local var79 = getDeepLinkRequest(navigation)
@@ -412,12 +412,12 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 				var65()
 				var67()
 			end)
-			local var78 = navigation.addListener(roactNavigationModule.Events.WillBlur, function() --[[ line: 519 ]]
+			local var78 = navigation.addListener(roactNavigationModule.Events.WillBlur, function()
 				-- upvalues: var66 (copy)
 				var66()
 			end)
 			
-			return function() --[[ line: 523 ]]
+			return function()
 				-- upvalues: var66 (copy), var77 (ref), var78 (ref)
 				var66()
 				var77.remove()
@@ -427,30 +427,30 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 		var65()
 		var67()
 		
-		return function() --[[ line: 477 ]]
+		return function()
 			-- upvalues: var66 (copy)
 			var66()
 		end
 	end, { var65, var66, var67 })
 	local var68 = useMomentsTabIsVisibleModule()
-	reactModule.useEffect(function() --[[ line: 538 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getFFlagMomentsFixPeekReturnChromeModule (copy), var68 (ref), var67 (ref)
 		if getFFlagMomentsFixPeekReturnChromeModule() and var68 then
 			var67()
 		end
 	end, { var68, var67 })
-	local var69 = reactModule.useMemo(function() --[[ line: 547 ]]
+	local var69 = reactModule.useMemo(function()
 		-- upvalues: p15 (ref), getImmersiveChromeStoreModule (copy)
 		local openProfile = p15.openProfile
 		local openOwnMoments = p15.openOwnMoments
 		
 		return {
-			openProfile = if openProfile then function(p16) --[[ line: 552 ]]
+			openProfile = if openProfile then function(p16)
 				-- upvalues: getImmersiveChromeStoreModule (copy), openProfile (ref)
 				getImmersiveChromeStoreModule(false).setOverlayCovering(true)
 				openProfile(p16)
 			end else nil,
-			openOwnMoments = if openOwnMoments then function() --[[ line: 558 ]]
+			openOwnMoments = if openOwnMoments then function()
 				-- upvalues: getImmersiveChromeStoreModule (copy), openOwnMoments (ref)
 				getImmersiveChromeStoreModule(false).setOverlayCovering(true)
 				openOwnMoments()
@@ -471,7 +471,7 @@ local function MomentsTabEntry(p15) --[[ line: 287 ]]
 	}, if p15.useRootOwnedNavigation then reactModule.createElement(innerNavigatorModule, { navigation = p15.navigation }) else reactModule.createElement(var25)) else nil
 end
 
-local function MomentsTabEntrySessionized(p17) --[[ line: 595 ]]
+local function MomentsTabEntrySessionized(p17)
 	-- upvalues: reactModule (ref), MomentsTabEntry (ref)
 	return reactModule.createElement(MomentsTabEntry, {
 		useRootOwnedNavigation = true,
@@ -485,7 +485,7 @@ end
 
 local momentsTabEntryScreen = reactModule.Component:extend("MomentsTabEntryScreen")
 
-function momentsTabEntryScreen.render(p18) --[[ line: 611 ]]
+function momentsTabEntryScreen.render(p18)
 	-- upvalues: reactModule (ref), MomentsTabEntrySessionized (ref)
 	return reactModule.createElement(MomentsTabEntrySessionized, p18.props)
 end

@@ -38,7 +38,7 @@ local useIsExperienceInviteRetryBlocked = hooksModule.useIsExperienceInviteRetry
 local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
-return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
 	local var7 = useTokens()
 	local var8 = useDispatch()
@@ -66,24 +66,24 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 	local universeId = var16 and var16.universeId
 	local rootPlaceId = var16 and var16.rootPlaceId
 	local var19 = if universeId ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(universeId), constants.RbxthumbTypes.GameIcon, 150, false)
-	local var20 = useSelector(react.useCallback(function(p1) --[[ line: 109 ]]
+	local var20 = useSelector(react.useCallback(function(p1)
 		return p1.Squad and (p1.Squad.Squad and (p1.Squad.Squad.currentSquad and p1.Squad.Squad.currentSquad.squadId))
 	end, {}))
-	local var21 = useSelector(react.useCallback(function(p2) --[[ line: 117 ]]
+	local var21 = useSelector(react.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {}))
 	local var22 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var20) else false
-	local var23 = react.useCallback(function() --[[ line: 125 ]]
+	local var23 = react.useCallback(function()
 		-- upvalues: var11 (ref), eventNamesModule (copy), phase (ref), p0 (ref)
 		var11.fire(eventNamesModule.LuckyRecommendationDismissed, { phaseAtDismiss = phase })
 		p0.onClose()
 	end, { var11, phase, p0.onClose })
-	local var24 = react.useCallback(function() --[[ line: 132 ]]
+	local var24 = react.useCallback(function()
 		-- upvalues: var11 (ref), eventNamesModule (copy), phase (ref), actions (ref), var20 (ref)
 		var11.fire(eventNamesModule.LuckyRecommendationRerolled, { phaseAtReroll = phase })
 		actions.startRoll(var20, false)
 	end, { actions.startRoll, var20, var11, phase })
-	local var25 = react.useCallback(function() --[[ line: 139 ]]
+	local var25 = react.useCallback(function()
 		-- upvalues: var11 (ref), eventNamesModule (copy), rootPlaceId (ref), var8 (ref), createExperienceInviteModule (copy), var9 (ref), squadExperienceInviteSource (copy)
 		local context = var11.getContext()
 		var11.fire(eventNamesModule.LuckyRecommendationJoinTapped, { rootPlaceId = rootPlaceId })
@@ -91,7 +91,7 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 		if rootPlaceId == nil then
 			return
 		end
-		var8(createExperienceInviteModule(tostring(rootPlaceId), var9, squadExperienceInviteSource.LuckyRecommendation)):andThen(function(p3) --[[ line: 149 ]]
+		var8(createExperienceInviteModule(tostring(rootPlaceId), var9, squadExperienceInviteSource.LuckyRecommendation)):andThen(function(p3)
 			-- upvalues: var11 (copy), eventNamesModule (copy), context (ref), rootPlaceId (copy)
 			if p3 then
 				var11.fire(eventNamesModule.LuckyRecommendationExperienceInviteCreated, {
@@ -103,29 +103,29 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 			end
 		end)
 	end, { var8, rootPlaceId, var9, var11 })
-	react.useLayoutEffect(function() --[[ line: 161 ]]
+	react.useLayoutEffect(function()
 		-- upvalues: actions (ref), var20 (ref)
 		actions.startRoll(var20, true)
 	end, { actions.startRoll, var20 })
-	react.useEffect(function() --[[ line: 165 ]]
+	react.useEffect(function()
 		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), setTimeout (copy), actions (ref), clearTimeout (copy)
 		if phase == squadLuckyRecommendationPhase.Rolling then
 			local var32 = setTimeout(actions.endRoll, 1000)
 			
-			return function() --[[ line: 170 ]]
+			return function()
 				-- upvalues: clearTimeout (copy), var32 (ref)
 				clearTimeout(var32)
 			end
 		end
 	end, { phase, actions.endRoll })
-	react.useEffect(function() --[[ line: 175 ]]
+	react.useEffect(function()
 		-- upvalues: actions (ref)
-		return function() --[[ line: 176 ]]
+		return function()
 			-- upvalues: actions (copy)
 			actions.cancelFetch()
 		end
 	end, { actions.cancelFetch })
-	react.useEffect(function() --[[ line: 181 ]]
+	react.useEffect(function()
 		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), var11 (ref), eventNamesModule (copy), universeId (ref), state (ref)
 		if phase == squadLuckyRecommendationPhase.Revealed then
 			var11.fire(eventNamesModule.LuckyRecommendationRevealShown, { universeId = universeId })
@@ -136,7 +136,7 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 		end
 	end, { phase, var11, state, universeId })
 	local var26, var27 = reactOtterModule.useAnimatedBinding(0)
-	react.useEffect(function() --[[ line: 195 ]]
+	react.useEffect(function()
 		-- upvalues: var13 (ref), var27 (ref), reactOtterModule (copy), var14_1 (ref)
 		if var13 then
 			var27(reactOtterModule.ease(100, {

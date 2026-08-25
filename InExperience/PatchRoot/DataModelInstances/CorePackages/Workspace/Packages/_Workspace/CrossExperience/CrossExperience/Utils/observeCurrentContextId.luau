@@ -1,10 +1,10 @@
 ﻿local var0 = nil
 local var1 = false
 
-local _ = function() --[[ line: 3 ]]
+local _ = function()
 	-- upvalues: var1 (write), var0 (write)
 	if not var1 then
-		local ok, status = pcall(function() --[[ line: 5 ]]
+		local ok, status = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -16,10 +16,10 @@ local _ = function() --[[ line: 3 ]]
 	return var0
 end
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: var1 (write), var0 (write)
 	if not var1 then
-		local ok, status = pcall(function() --[[ line: 5 ]]
+		local ok, status = pcall(function()
 			return game:GetService("AudioFocusService")
 		end)
 		
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 16 ]]
 		local focusedContextId = var2:GetFocusedContextId()
 		p0(focusedContextId)
 		
-		local var4 = function() --[[ line: 21 ]]
+		local var4 = function()
 			-- upvalues: var2 (ref), focusedContextId (write), p0 (ref)
 			local focusedContextId_1 = var2:GetFocusedContextId()
 			

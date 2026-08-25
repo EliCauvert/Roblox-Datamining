@@ -6,7 +6,7 @@ local var4 = reactModule.createContext(nil)
 local var5 = reactModule.createContext(nil)
 
 return {
-	ElevationProvider = function(p0) --[[ line: 24 ]]
+	ElevationProvider = function(p0)
 		-- upvalues: reactModule (ref), elevationLayerModule (ref), elevationModule (ref), var4 (ref)
 		local var6 = reactModule.useRef({
 			[elevationLayerModule.Popover] = 0,
@@ -17,10 +17,10 @@ return {
 		})
 		
 		return reactModule.createElement(var4.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 33 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: elevationModule (copy), var6 (ref)
 				return {
-					acquire = function(p1, p2) --[[ line: 35 ]]
+					acquire = function(p1, p2)
 						-- upvalues: elevationModule (copy), var6 (copy)
 						local var10
 						local var7 = elevationModule.ELEVATION_LAYERS[p1]
@@ -45,11 +45,11 @@ return {
 						end
 						return { layer = p1, index = var8, zIndex = var10 }
 					end,
-					peek = function(p3) --[[ line: 68 ]]
+					peek = function(p3)
 						-- upvalues: var6 (copy)
 						return var6.current[p3] or 0
 					end,
-					releaseIfTop = function(p4, p5) --[[ line: 71 ]]
+					releaseIfTop = function(p4, p5)
 						-- upvalues: var6 (copy)
 						local var12 = var6.current[p4] or 0
 						
@@ -61,11 +61,11 @@ return {
 			end, {})
 		}, p0.children)
 	end,
-	ElevationOwnerScope = function(p6) --[[ line: 86 ]]
+	ElevationOwnerScope = function(p6)
 		-- upvalues: reactModule (ref), var5 (ref)
 		return reactModule.createElement(var5.Provider, { value = p6.owner }, p6.children)
 	end,
-	useElevationManager = function() --[[ line: 90 ]]
+	useElevationManager = function()
 		-- upvalues: reactModule (ref), var4 (ref)
 		local var13 = reactModule.useContext(var4)
 		
@@ -74,7 +74,7 @@ return {
 		end
 		return var13
 	end,
-	useOwnerToken = function() --[[ line: 100 ]]
+	useOwnerToken = function()
 		-- upvalues: reactModule (ref), var5 (ref)
 		return reactModule.useContext(var5)
 	end

@@ -10,17 +10,17 @@ systemMessage.defaultProps = {
 	maxWidth = 250
 }
 
-function systemMessage.init(p0) --[[ line: 25 ]]
+function systemMessage.init(p0)
 	-- upvalues: memoize (ref), text (ref)
-	p0.calculateSize = memoize(function(p1, p2, p3, p4) --[[ line: 26 ]]
+	p0.calculateSize = memoize(function(p1, p2, p3, p4)
 		-- upvalues: text (copy)
 		return text.GetTextBounds(p1, p3, p4, Vector2.new(p2, 1000))
 	end)
 end
 
-function systemMessage.render(p5) --[[ line: 37 ]]
+function systemMessage.render(p5)
 	-- upvalues: withStyle (ref), roactModule (ref)
-	return withStyle(function(p6) --[[ line: 38 ]]
+	return withStyle(function(p6)
 		-- upvalues: p5 (ref), roactModule (copy)
 		local captionBody = p6.Font.CaptionBody
 		local var2 = p6.Font.BaseSize * captionBody.RelativeSize

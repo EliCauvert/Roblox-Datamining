@@ -6,7 +6,7 @@ local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 
-local function matrixLabel(p0) --[[ line: 37 ]]
+local function matrixLabel(p0)
 	-- upvalues: reactModule (ref), textModule (ref)
 	return reactModule.createElement(textModule, {
 		tag = "auto-xy text-caption-small text-align-x-left content-default",
@@ -14,7 +14,7 @@ local function matrixLabel(p0) --[[ line: 37 ]]
 	})
 end
 
-local function matrixInfoLabel(p1, p2) --[[ line: 44 ]]
+local function matrixInfoLabel(p1, p2)
 	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
 	return reactModule.createElement(viewModule, { tag = "col gap-xsmall size-full-0 auto-y" }, {
 		Title = reactModule.createElement(textModule, {
@@ -30,11 +30,11 @@ local function matrixInfoLabel(p1, p2) --[[ line: 44 ]]
 	})
 end
 
-local function _(p3, p4) --[[ line: 61 | named "getCellColumnWidth" ]]
+local function _(p3, p4)
 	return if p3.cellColumnWidths then p3.cellColumnWidths[p4] else p3.cellColumnWidth
 end
 
-local function renderCells(p5, p6, p7) --[[ line: 68 ]]
+local function renderCells(p5, p6, p7)
 	-- upvalues: reactModule (ref), viewModule (ref)
 	local t = {}
 	
@@ -50,7 +50,7 @@ local function renderCells(p5, p6, p7) --[[ line: 68 ]]
 end
 
 return {
-	MatrixGrid = function(p8) --[[ line: 88 ]]
+	MatrixGrid = function(p8)
 		-- upvalues: dashModule (ref), reactModule (ref), textModule (ref), viewModule (ref), renderCells (ref)
 		local var10 = p8.showLabelColumn == nil or p8.showLabelColumn
 		local var11 = p8.showHeader == nil or p8.showHeader
@@ -66,7 +66,7 @@ return {
 		local t = {}
 		
 		if var11 then
-			local var22 = dashModule.map(p8.columnHeaders, function(p9, p10) --[[ line: 104 ]]
+			local var22 = dashModule.map(p8.columnHeaders, function(p9, p10)
 				-- upvalues: p8 (ref), reactModule (copy), textModule (copy), var16 (ref)
 				local var25 = if p8.cellColumnWidths then p8.cellColumnWidths[p10] else p8.cellColumnWidth
 				

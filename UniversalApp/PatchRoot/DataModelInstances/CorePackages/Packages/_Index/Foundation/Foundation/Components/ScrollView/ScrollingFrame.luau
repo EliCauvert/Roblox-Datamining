@@ -13,21 +13,21 @@ local controlStateModule = require(foundation.Enums.ControlState)
 local t = { frequency = 2 }
 local t_1 = { scrollBarVisibility = "Auto" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | named "ScrollingFrame" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), withGuiObjectPropsModule (ref), useTokensModule (ref), useStyleTagsModule (ref), reactModule (ref), visibilityModule (ref), useCursorModule (ref), reactOtterModule (ref), t (ref), controlStateModule (ref)
 	local var12 = withDefaultsModule(p0, t_1)
 	local var13 = withGuiObjectPropsModule({ selection = var12.selection }, {})
 	local var14 = useTokensModule()
 	local var15 = useStyleTagsModule(p0.tag)
 	local shift400 = var14.Color.Shift.Shift_400
-	local var16 = reactModule.useMemo(function() --[[ line: 58 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref), visibilityModule (copy), var14 (ref)
 		return if var12.scrollBarVisibility == visibilityModule.None then 0 else var14.Size.Size_150
 	end, { var12.scrollBarVisibility })
 	local var17 = useCursorModule()
 	local var18 = reactModule.useRef(nil)
 	local var19, var20 = reactOtterModule.useAnimatedBinding(1)
-	local var21 = reactModule.useCallback(function(p2, p3) --[[ line: 69 ]]
+	local var21 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: var18 (ref), var20 (ref), reactOtterModule (copy), shift400 (ref), t (copy)
 		if var18.current then
 			task.cancel(var18.current)
@@ -36,13 +36,13 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | 
 			var20(reactOtterModule.spring(shift400.Transparency, t))
 		end
 		if p3 ~= nil then
-			var18.current = task.delay(p3, function() --[[ line: 79 ]]
+			var18.current = task.delay(p3, function()
 				-- upvalues: var20 (copy), reactOtterModule (copy), t (copy)
 				var20(reactOtterModule.spring(1, t))
 			end)
 		end
 	end, { shift400 })
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var21 (ref), controlStateModule (copy)
 		if var12.scrollBarVisibility == "None" then
 			var21(false, 0)
@@ -78,7 +78,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | 
 		NextSelectionRight = var13.NextSelectionRight,
 		SelectionImageObject = var13.SelectionImageObject or var17,
 		SelectionOrder = var13.SelectionOrder,
-		[reactModule.Change.CanvasPosition] = if var12.scrollBarVisibility == "Auto" then function(p4) --[[ line: 132 ]]
+		[reactModule.Change.CanvasPosition] = if var12.scrollBarVisibility == "Auto" then function(p4)
 			-- upvalues: var21 (ref), var12 (ref)
 			var21(true, 3)
 			

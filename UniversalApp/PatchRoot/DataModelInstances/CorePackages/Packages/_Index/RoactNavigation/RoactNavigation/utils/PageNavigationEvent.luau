@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 6 ]]
+function t.new(p0, p1)
 	-- upvalues: invariantModule (ref), t (ref)
 	invariantModule(type(p0) == "string", "pageName should be string")
 	invariantModule(typeof(p1) == "userdata", "event should be RoactNavigation.Event")
@@ -12,16 +12,16 @@ function t.new(p0, p1) --[[ line: 6 ]]
 	return t_1
 end
 
-function t.isPageNavigationEvent(p2) --[[ line: 19 ]]
+function t.isPageNavigationEvent(p2)
 	-- upvalues: t (ref)
 	return getmetatable(p2).__index == t
 end
 
-function t:__tostring() --[[ line: 23 ]]
+function t:__tostring()
 	return string.format("%-15s - %s", tostring(self.event), self.pageName)
 end
 
-function t:equalTo(p3) --[[ line: 27 ]]
+function t:equalTo(p3)
 	-- upvalues: invariantModule (ref), t (ref)
 	invariantModule(t.isPageNavigationEvent(p3), "should be PageNavigationEvent")
 	

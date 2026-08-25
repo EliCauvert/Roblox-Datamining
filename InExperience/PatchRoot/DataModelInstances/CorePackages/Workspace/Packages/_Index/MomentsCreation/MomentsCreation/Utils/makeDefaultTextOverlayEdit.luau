@@ -2,7 +2,7 @@
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Parent.MomentsTypes)
 
-return function() --[[ line: 23 | named "makeDefaultTextOverlayEdit" ]]
+return function()
 	-- upvalues: constantsModule (ref)
 	return {
 		rotation = 0,

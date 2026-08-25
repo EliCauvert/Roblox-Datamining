@@ -12,14 +12,14 @@ local _ = {
 	CharacterHumanoidAdded = "CharacterHumanoidAdded"
 }
 
-local function setName(value, p0, p1) --[[ line: 29 ]]
+local function setName(value, p0, p1)
 	-- upvalues: t (ref)
 	local inExperienceCombinedName = p1.names.inExperienceCombinedName
 	local displayName = p1.names.displayName
 	
 	if p1.names.displayName == value.DisplayName then
 		value.InternalDisplayName = inExperienceCombinedName
-		t[p0].HumanoidDisplayNameChanged = value:GetPropertyChangedSignal("DisplayName"):Connect(function() --[[ line: 36 ]]
+		t[p0].HumanoidDisplayNameChanged = value:GetPropertyChangedSignal("DisplayName"):Connect(function()
 			-- upvalues: displayName (ref), value (ref)
 			if displayName ~= value.DisplayName then
 				value.InternalDisplayName = ""
@@ -28,14 +28,14 @@ local function setName(value, p0, p1) --[[ line: 29 ]]
 	end
 end
 
-local function checkHumanoid(p2, p3, p4) --[[ line: 44 ]]
+local function checkHumanoid(p2, p3, p4)
 	-- upvalues: setName (ref), t (ref)
 	local humanoid = p3:FindFirstChildWhichIsA("Humanoid")
 	
 	if humanoid then
 		setName(humanoid, p2, p4)
 	end
-	t[p2].CharacterHumanoidAdded = p3.ChildAdded:Connect(function(p5) --[[ line: 49 ]]
+	t[p2].CharacterHumanoidAdded = p3.ChildAdded:Connect(function(p5)
 		-- upvalues: setName (copy), p2 (ref), p4 (ref)
 		if p5:IsA("Humanoid") then
 			setName(p5, p2, p4)
@@ -43,18 +43,18 @@ local function checkHumanoid(p2, p3, p4) --[[ line: 44 ]]
 	end)
 end
 
-local function setNameOnCharacterAdded(value, p6) --[[ line: 56 ]]
+local function setNameOnCharacterAdded(value, p6)
 	-- upvalues: t (ref), checkHumanoid (ref)
 	t[value] = {}
 	
 	if value.Character then
 		checkHumanoid(value, value.Character, p6)
 	end
-	t[value].CharacterAdded = value.CharacterAdded:Connect(function(p7) --[[ line: 62 ]]
+	t[value].CharacterAdded = value.CharacterAdded:Connect(function(p7)
 		-- upvalues: checkHumanoid (copy), value (ref), p6 (ref)
 		checkHumanoid(value, p7, p6)
 	end)
-	t[value].CharacterRemoving = value.CharacterRemoving:Connect(function() --[[ line: 65 ]]
+	t[value].CharacterRemoving = value.CharacterRemoving:Connect(function()
 		-- upvalues: t (copy), value (ref)
 		local humanoidDisplayNameChanged = t[value].HumanoidDisplayNameChanged
 		
@@ -67,7 +67,7 @@ local function setNameOnCharacterAdded(value, p6) --[[ line: 56 ]]
 	end)
 end
 
-local function setCurrentPlayersNames() --[[ line: 77 ]]
+local function setCurrentPlayersNames()
 	-- upvalues: playersService (ref), userProfileStore (ref), fixCharacterNameHandlerNilProfileCrash (ref), setNameOnCharacterAdded (ref)
 	local players = playersService:GetPlayers()
 	local t = {}
@@ -77,7 +77,7 @@ local function setCurrentPlayersNames() --[[ line: 77 ]]
 		table.insert(t, tostring(v.UserId))
 		t_1[tostring(v.UserId)] = v
 	end
-	userProfileStore.get().fetchNamesByUserIds(t, function(p8) --[[ line: 85 ]]
+	userProfileStore.get().fetchNamesByUserIds(t, function(p8)
 		-- upvalues: t_1 (ref), fixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy)
 		local data = p8.data
 		
@@ -98,9 +98,9 @@ local function setCurrentPlayersNames() --[[ line: 77 ]]
 	end)
 end
 
-local function onPlayerAdded(p9) --[[ line: 104 ]]
+local function onPlayerAdded(p9)
 	-- upvalues: userProfileStore (ref), fixCharacterNameHandlerNilProfileCrash (ref), setNameOnCharacterAdded (ref)
-	userProfileStore.get().fetchNamesByUserIds({ tostring(p9.UserId) }, function(p10) --[[ line: 105 ]]
+	userProfileStore.get().fetchNamesByUserIds({ tostring(p9.UserId) }, function(p10)
 		-- upvalues: fixCharacterNameHandlerNilProfileCrash (copy), setNameOnCharacterAdded (copy), p9 (ref)
 		local var14
 		local status = p10.status
@@ -127,7 +127,7 @@ local function onPlayerAdded(p9) --[[ line: 104 ]]
 	end)
 end
 
-local function onPlayerRemoving(p11) --[[ line: 122 ]]
+local function onPlayerRemoving(p11)
 	-- upvalues: t (ref), fFlagUserProfileStoreQueryRefetch (ref), userProfileStore (ref)
 	local var16 = t[p11]
 	

@@ -22,7 +22,7 @@ local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAddReportCharacterLimit = sharedFlagsModule.FFlagAddReportCharacterLimit
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
-return reactModule.memo(function(p0) --[[ line: 54 | named "CommentNode" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), fFlagAddReportCharacterLimit (ref), translateModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), fFlagAbuseReportMenuV2 (ref), getCodePointLengthModule (ref), telemetryEventType (ref), eyebrowModule (ref), textArea (ref), footerModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var11, var12 = reactModule.useBinding(p0.initialValue or "")
 	local var13, var14 = reactModule.useState(false)
@@ -35,7 +35,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "CommentNode" ]]
 	local actions = var17.Actions
 	local title = var17.Title
 	local var18 = if fFlagAbuseReportMenuV2 then var17.Layout else nil
-	local var19 = reactModule.useCallback(function(p1) --[[ line: 71 ]]
+	local var19 = reactModule.useCallback(function(p1)
 		-- upvalues: var12 (ref), fFlagAddReportCharacterLimit (copy), p0 (ref), getCodePointLengthModule (copy), var14 (ref), var16 (ref)
 		var12(p1)
 		
@@ -48,7 +48,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "CommentNode" ]]
 			end
 		end
 	end, { p0.maxLength })
-	local var20 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: sendEvent (ref), telemetryEventType (copy), getCodePointLengthModule (copy), var11 (ref), p0 (ref), var16 (ref)
 		sendEvent({
 			sub_event_type = telemetryEventType.CommentInput,
@@ -71,7 +71,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "CommentNode" ]]
 		p0.initialValue,
 		p0.maxLength
 	})
-	local var21 = reactModule.useCallback(function(p2) --[[ line: 112 ]]
+	local var21 = reactModule.useCallback(function(p2)
 		-- upvalues: p0 (ref), var15 (ref), translateIntoString (ref), getCodePointLengthModule (copy)
 		return if p0.helperText and p0.maxLength and var15 then translateIntoString(var15(p0.helperText, {
 			currentLength = tostring(getCodePointLengthModule(p2)),
@@ -90,7 +90,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "CommentNode" ]]
 			numLines = 6,
 			LayoutOrder = 2,
 			text = var11,
-			hint = if fFlagAddReportCharacterLimit and p0.helperText then var11:map(function(p3) --[[ line: 139 ]]
+			hint = if fFlagAddReportCharacterLimit and p0.helperText then var11:map(function(p3)
 				-- upvalues: var21 (ref)
 				return var21(p3)
 			end) else nil,

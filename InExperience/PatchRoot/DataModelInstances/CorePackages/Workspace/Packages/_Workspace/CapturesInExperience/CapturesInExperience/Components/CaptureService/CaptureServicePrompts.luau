@@ -18,9 +18,9 @@ local t = {
 if game:GetEngineFeature("CaptureServiceGalleryPermissionPrompt") then
 	t[promptTypeModule.CapturePermissions] = capturePermissionsPromptV2Module
 end
-return function(_) --[[ line: 30 ]]
+return function(_)
 	-- upvalues: useSelector (ref), constantsModule (ref), t (ref), reactModule (ref), promptConnectionsModule (ref)
-	local var9 = useSelector(function(p0) --[[ line: 31 ]]
+	local var9 = useSelector(function(p0)
 		-- upvalues: constantsModule (copy)
 		return p0[constantsModule.RoduxKey].Prompts[1]
 	end)

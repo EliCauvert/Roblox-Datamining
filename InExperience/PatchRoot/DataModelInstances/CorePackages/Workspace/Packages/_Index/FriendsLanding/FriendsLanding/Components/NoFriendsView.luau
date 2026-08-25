@@ -34,7 +34,7 @@ local t = {
 	noFriendsTextLabelKey = if fFlagConnectionsToFriendsRename then textKeysModule.NO_FRIENDS_TEXT else textKeysModule.NO_CONNECTIONS_TEXT
 }
 
-local function _(value) --[[ line: 67 | named "loadFoundationCloudAsset" ]]
+local function _(value)
 	-- upvalues: preloadAsset (ref), assets (ref)
 	preloadAsset(value)
 	local var8 = assets[value]
@@ -42,7 +42,7 @@ local function _(value) --[[ line: 67 | named "loadFoundationCloudAsset" ]]
 	return var8.assetId, var8.size
 end
 
-return function(p0) --[[ line: 73 | named "NoFriendsView" ]]
+return function(p0)
 	-- upvalues: dash (ref), t (ref), migrateNoFriendsViewToFoundation (ref), preloadAsset (ref), assets (ref), react (ref), useLocalization (ref), useStyle (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), useTokens (ref), image (ref), imageSetLabel (ref), images (ref), colors (ref), styledTextLabel (ref), appFonts (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var9 = dash.join(t, p0 or {})
 	local var10 = if migrateNoFriendsViewToFoundation then "pictograms/collaborators" else nil
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 73 | named "NoFriendsView" ]]
 		size = var11.size
 	end
 	local var12 = if migrateNoFriendsViewToFoundation then size / 3 else nil
-	react.useEffect(function() --[[ line: 86 ]]
+	react.useEffect(function()
 		-- upvalues: var9 (ref)
 		if var9.pageLoadingTimeReport then
 			var9.pageLoadingTimeReport()

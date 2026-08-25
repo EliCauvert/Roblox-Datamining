@@ -7,7 +7,7 @@ local images = UIBloxModule.App.ImageSet.Images
 local useStyle = UIBloxModule.Core.Style.useStyle
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), imageSetLabel (ref), iconSize (ref), images (ref), styledTextLabel (ref)
 	local var2 = useStyle()
 	local frameHeight = p0.frameHeight

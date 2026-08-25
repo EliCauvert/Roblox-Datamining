@@ -13,9 +13,9 @@ local name = roact.PureComponent:extend(script.Name)
 local getFFlagEnableVpcForInExperiencePremiumUpsellModule = require(purchasePrompt.Flags.GetFFlagEnableVpcForInExperiencePremiumUpsell)
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-function name.init(p0) --[[ line: 51 ]]
+function name.init(p0)
 	-- upvalues: promptStateModule (ref), getFFlagEnableVpcForInExperiencePremiumUpsellModule (ref)
-	function p0.confirmButtonPressed() --[[ line: 52 ]]
+	function p0.confirmButtonPressed()
 		-- upvalues: p0 (ref), promptStateModule (copy), getFFlagEnableVpcForInExperiencePremiumUpsellModule (copy)
 		local props = p0.props
 		local promptState = props.promptState
@@ -40,21 +40,21 @@ function name.init(p0) --[[ line: 51 ]]
 		end
 	end
 	
-	function p0.cancelButtonPressed() --[[ line: 72 ]]
+	function p0.cancelButtonPressed()
 		-- upvalues: p0 (ref)
 		p0.props.endPurchase()
 	end
 end
 
-function name.didMount(p1) --[[ line: 79 ]]
+function name.didMount(p1)
 	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("PremiumPurchaseConfirmButtonBind", function(_, p2, _) --[[ line: 80 ]]
+	contextActionService:BindCoreAction("PremiumPurchaseConfirmButtonBind", function(_, p2, _)
 		-- upvalues: p1 (ref)
 		if p2 == Enum.UserInputState.Begin then
 			p1.confirmButtonPressed()
 		end
 	end, false, Enum.KeyCode.ButtonA)
-	contextActionService:BindCoreAction("PremiumPurchaseCancelButtonBind", function(_, p3, _) --[[ line: 85 ]]
+	contextActionService:BindCoreAction("PremiumPurchaseCancelButtonBind", function(_, p3, _)
 		-- upvalues: p1 (ref)
 		if p3 == Enum.UserInputState.Begin then
 			p1.cancelButtonPressed()
@@ -62,32 +62,32 @@ function name.didMount(p1) --[[ line: 79 ]]
 	end, false, Enum.KeyCode.ButtonB)
 end
 
-function name.willUnmount(_) --[[ line: 92 ]]
+function name.willUnmount(_)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("PremiumPurchaseConfirmButtonBind")
 	contextActionService:UnbindCoreAction("PremiumPurchaseCancelButtonBind")
 end
 
-function name.getFlowState(p4) --[[ line: 97 ]]
+function name.getFlowState(p4)
 	-- upvalues: promptStateModule (ref), premiumUpsellFlowState (ref)
 	local promptState = p4.props.promptState
 	
 	return if promptState == promptStateModule.PremiumUpsell then premiumUpsellFlowState.PurchaseModal elseif promptState == promptStateModule.Error then premiumUpsellFlowState.Error elseif promptState == promptStateModule.EnablePurchaseVPCModal then premiumUpsellFlowState.PurchaseVPCModal else premiumUpsellFlowState.None
 end
 
-function name.getErrorType(p5) --[[ line: 113 ]]
+function name.getErrorType(p5)
 	-- upvalues: purchaseErrorModule (ref), purchaseErrorType (ref)
 	local props = p5.props
 	
 	return if props.purchaseError == purchaseErrorModule.AlreadyPremium then purchaseErrorType.AlreadyPremium elseif props.purchaseError == purchaseErrorModule.PremiumUnavailablePlatform then purchaseErrorType.PremiumPlatformUnavailable elseif props.purchaseError == purchaseErrorModule.EconomicRestriction then purchaseErrorType.EconomicRestriction else purchaseErrorType.Unknown
 end
 
-function name.getVPCModalType(p6) --[[ line: 127 ]]
+function name.getVPCModalType(p6)
 	-- upvalues: promptStateModule (ref), VPCModalTypeModule (ref)
 	return if p6.props.promptState == promptStateModule.EnablePurchaseVPCModal then VPCModalTypeModule.toRawValue(VPCModalTypeModule.EnablePurchase) else VPCModalTypeModule.toRawValue(VPCModalTypeModule.None)
 end
 
-function name.render(p7) --[[ line: 137 ]]
+function name.render(p7)
 	-- upvalues: roact (ref), premiumUpsellFlow (ref), getFFlagEnableVpcForInExperiencePremiumUpsellModule (ref)
 	local props = p7.props
 	

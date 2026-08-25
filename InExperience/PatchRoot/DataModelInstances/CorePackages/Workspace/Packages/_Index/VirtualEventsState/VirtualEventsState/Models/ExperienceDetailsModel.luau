@@ -1,5 +1,5 @@
 ﻿return {
-	mock = function(p0) --[[ line: 41 ]]
+	mock = function(p0)
 		return {
 			rootPlaceId = -2,
 			name = "Experience name",

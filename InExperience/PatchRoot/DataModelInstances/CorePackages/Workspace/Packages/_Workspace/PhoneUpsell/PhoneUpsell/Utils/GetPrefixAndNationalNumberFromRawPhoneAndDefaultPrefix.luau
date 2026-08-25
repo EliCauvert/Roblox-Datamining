@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 ]]
+﻿return function(p0, p1)
 	local var0 = p0:gsub("%D", "")
 	local var1 = p1:gsub("%D", "")
 	

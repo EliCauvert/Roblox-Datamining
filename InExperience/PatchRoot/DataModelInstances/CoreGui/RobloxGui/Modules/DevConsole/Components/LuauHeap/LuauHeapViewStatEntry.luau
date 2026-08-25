@@ -13,7 +13,7 @@ local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
 local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewStatEntry = roactModule.PureComponent:extend("LuauHeapViewStatEntry")
 
-local function BorderedCellLabel(p0) --[[ line: 31 ]]
+local function BorderedCellLabel(p0)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
 		Label = roactModule.createElement(cellLabelModule, {
@@ -32,7 +32,7 @@ local function BorderedCellLabel(p0) --[[ line: 31 ]]
 	})
 end
 
-function luauHeapViewStatEntry.renderValues(_, p1) --[[ line: 49 ]]
+function luauHeapViewStatEntry.renderValues(_, p1)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), statEntryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, statEntryFrameHeight)
@@ -48,7 +48,7 @@ function luauHeapViewStatEntry.renderValues(_, p1) --[[ line: 49 ]]
 	return t
 end
 
-function luauHeapViewStatEntry.render(p2) --[[ line: 64 ]]
+function luauHeapViewStatEntry.render(p2)
 	-- upvalues: statEntryFrameHeight (ref), valueCellWidth (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
 	local props = p2.props
 	local size = props.size or UDim2.new(1, 0, 0, statEntryFrameHeight)

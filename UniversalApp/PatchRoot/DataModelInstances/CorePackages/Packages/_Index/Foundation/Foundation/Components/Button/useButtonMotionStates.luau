@@ -3,7 +3,7 @@ local _ = require(parent.React)
 local motionModule = require(parent.Motion)
 local transitionPreset = motionModule.TransitionPreset
 
-return function(p0, p1) --[[ line: 27 | named "useButtonMotionStates" ]]
+return function(p0, p1)
 	-- upvalues: motionModule (ref), transitionPreset (ref)
 	return {
 		Default = motionModule.createState({

@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script.Parent.Parent.React)
 local focusControllerModule = require(script.Parent.FocusController)
 
-return function() --[[ line: 19 | named "useRootFocusController" ]]
+return function()
 	-- upvalues: reactModule (ref), focusControllerModule (ref)
 	local var2 = reactModule.useRef(nil)
 	

@@ -1,6 +1,6 @@
 ﻿local fFlagAXRemoveExpiredItemsFromInventory = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FFlagAXRemoveExpiredItemsFromInventory
 
-return function(p0) --[[ line: 11 | named "isDurableItemExpired" ]]
+return function(p0)
 	-- upvalues: fFlagAXRemoveExpiredItemsFromInventory (ref)
 	if not fFlagAXRemoveExpiredItemsFromInventory then
 		return false

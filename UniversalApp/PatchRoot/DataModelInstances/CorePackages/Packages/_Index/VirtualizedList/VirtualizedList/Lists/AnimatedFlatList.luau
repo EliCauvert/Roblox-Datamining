@@ -4,7 +4,7 @@ local object = require(parent.LuauPolyfill).Object
 local flatListModule = require(script.Parent.FlatList)
 local useFocusNavigationScrolling = require(script.Parent.Hooks).useFocusNavigationScrolling
 
-return function(p0) --[[ line: 38 | named "AnimatedFlatList" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useFocusNavigationScrolling (ref), object (ref), flatListModule (ref)
 	local var2 = reactModule.useRef(nil)
 	local var3, var4 = useFocusNavigationScrolling({

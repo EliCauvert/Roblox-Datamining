@@ -2,14 +2,14 @@
 local reactModule = require(parent.React)
 local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
 
-return function(p0) --[[ line: 24 | named "ContentThresholdImpressionsDetector" ]]
+return function(p0)
 	-- upvalues: useViewportBounds (ref), reactModule (ref)
 	local var1 = useViewportBounds()
 	local var2 = reactModule.useRef({})
 	local var3 = reactModule.useRef(0)
 	local var4 = reactModule.useRef(nil)
 	local var5 = reactModule.useRef(p0.impressionsTag)
-	local var6 = reactModule.useCallback(function() --[[ line: 32 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var1 (ref), var3 (ref), var2 (ref)
 		local current = p0.containerRef.current
 		
@@ -42,18 +42,18 @@ return function(p0) --[[ line: 24 | named "ContentThresholdImpressionsDetector" 
 		p0.containerRef, p0.fullContentHeight, p0.thresholds, p0.viewportBoundsOffset,
 		p0.sendImpressions, var1
 	})
-	local var7 = reactModule.useCallback(function() --[[ line: 89 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var6 (ref)
 		if var4.current then
 			task.cancel(var4.current)
 		end
-		var4.current = task.delay(0.2, function() --[[ line: 93 ]]
+		var4.current = task.delay(0.2, function()
 			-- upvalues: var4 (copy), var6 (copy)
 			var4.current = nil
 			var6()
 		end)
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 99 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), p0 (ref), var2 (ref), var3 (ref), var7 (ref)
 		if var5.current ~= p0.impressionsTag then
 			var5.current = p0.impressionsTag
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 24 | named "ContentThresholdImpressionsDetector" 
 			var7()
 		end
 	end, { p0.impressionsTag, var7 })
-	reactModule.useEffect(function() --[[ line: 108 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var7 (ref), var4 (ref)
 		local current = p0.containerRef.current
 		
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 24 | named "ContentThresholdImpressionsDetector" 
 			local var11 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(var7)
 			local var12 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(var7)
 			
-			return function() --[[ line: 118 ]]
+			return function()
 				-- upvalues: var4 (copy), var11 (ref), var12 (ref)
 				if var4.current then
 					task.cancel(var4.current)

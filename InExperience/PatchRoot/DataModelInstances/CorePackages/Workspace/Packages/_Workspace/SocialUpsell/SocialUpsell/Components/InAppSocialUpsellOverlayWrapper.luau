@@ -12,9 +12,9 @@ local t = {
 	upsellType = socialUpsellTypeModule.Unknown
 }
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref), t (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), socialUpsellTypeModule (ref), FAEUpsellOverlayModule (ref)
-	return reactModule.useMemo(function() --[[ line: 28 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), t (copy), p0 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), socialUpsellTypeModule (copy), reactModule (copy), FAEUpsellOverlayModule (copy)
 		local var7 = nil
 		local var8 = cryoModule.Dictionary.union(t, p0.data or {})

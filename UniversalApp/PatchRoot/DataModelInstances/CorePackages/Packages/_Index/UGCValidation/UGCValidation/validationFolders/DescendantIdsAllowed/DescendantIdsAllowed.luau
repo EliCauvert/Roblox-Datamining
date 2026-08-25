@@ -14,7 +14,7 @@ local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFF
 local t = { MODERATION_STATE_REVIEWING = true, Reviewing = true }
 local t_1 = { MODERATION_STATE_APPROVED = true, Approved = true }
 
-local function _(p0) --[[ line: 23 | named "collectContentIdsArray" ]]
+local function _(p0)
 	local t = {}
 	
 	for i, v in p0 do
@@ -23,7 +23,7 @@ local function _(p0) --[[ line: 23 | named "collectContentIdsArray" ]]
 	return t
 end
 
-local function runStudio(p1, p2, p3) --[[ line: 31 ]]
+local function runStudio(p1, p2, p3)
 	-- upvalues: getAssetCreationDetailsModule (ref), errorSourceStringsModule (ref), constantsModule (ref)
 	local t = {}
 	
@@ -49,7 +49,7 @@ local function runStudio(p1, p2, p3) --[[ line: 31 ]]
 	end
 end
 
-local _ = function(p4) --[[ line: 69 | named "buildOwnerLookup" ]]
+local _ = function(p4)
 	local t = {}
 	
 	for i, v in p4 do
@@ -58,7 +58,7 @@ local _ = function(p4) --[[ line: 69 | named "buildOwnerLookup" ]]
 	return t
 end
 
-local function runBackend(p5, p6, p7) --[[ line: 77 ]]
+local function runBackend(p5, p6, p7)
 	-- upvalues: getAssetCreationDetailsRCCModule (ref), errorSourceStringsModule (ref), t (ref), t_1 (ref)
 	local restrictedUserIds = p7.restrictedUserIds
 	
@@ -97,7 +97,7 @@ local function runBackend(p5, p6, p7) --[[ line: 77 ]]
 	end
 end
 
-local function runCanPublishOwnershipCheck(p8, p9, p10, p11) --[[ line: 135 ]]
+local function runCanPublishOwnershipCheck(p8, p9, p10, p11)
 	-- upvalues: getFFlagUGCValidateBackendInExperienceViaCanPublishModule (ref), getFFlagUGCValidateForwardIECRestrictedUserIdsModule (ref), runService (ref), canPublishAssetsModule (ref), errorSourceStringsModule (ref)
 	local var26 = getFFlagUGCValidateBackendInExperienceViaCanPublishModule() and (p11.token == nil and p11.universeId ~= nil)
 	
@@ -136,7 +136,7 @@ return {
 	},
 	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {},
-	run = function(p12, p13) --[[ line: 205 ]]
+	run = function(p12, p13)
 		-- upvalues: validationEnumsModule (ref), runStudio (ref), getFFlagUGCValidateBackendInExperienceViaCanPublishModule (ref), runCanPublishOwnershipCheck (ref), runBackend (ref)
 		local consumerConfig = p13.consumerConfig
 		

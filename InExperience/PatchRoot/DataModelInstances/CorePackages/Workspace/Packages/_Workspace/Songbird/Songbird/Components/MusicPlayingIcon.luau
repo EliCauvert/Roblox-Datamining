@@ -5,7 +5,7 @@ local animatedBarModule = require(songbird.Components.AnimatedBar)
 local t = { numAnimatedBars = 5, isMoving = true }
 local list = { 0.4, 0.3, 0.75, 0.55 }
 
-return function(p0) --[[ line: 27 | named "MusicPlayingIcon" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), animatedBarModule (ref), list (ref)
 	local var6 = cryoModule.Dictionary.join(t, p0)
 	local var7 = 8 / var6.numAnimatedBars

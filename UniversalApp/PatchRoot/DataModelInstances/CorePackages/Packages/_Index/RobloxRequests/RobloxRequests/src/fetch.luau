@@ -1,8 +1,8 @@
 ﻿local promiseModule = require(script.Parent.Parent.Parent.Promise)
 
-function createFetch(p0) --[[ line: 9 ]]
+function createFetch(p0)
 	-- upvalues: promiseModule (ref)
-	return function(p1, p2) --[[ line: 10 | named "fetch" ]]
+	return function(p1, p2)
 		-- upvalues: p0 (ref), promiseModule (copy)
 		if p2 == nil then
 			p2 = {}
@@ -12,11 +12,11 @@ function createFetch(p0) --[[ line: 9 ]]
 		p2.data = p2.body
 		p2.body = nil
 		
-		return p0(method, p1, p2):andThen(function(p3) --[[ line: 19 ]]
+		return p0(method, p1, p2):andThen(function(p3)
 			-- upvalues: promiseModule (copy)
 			local text = p3.text
 			
-			function p3.text() --[[ line: 21 ]]
+			function p3.text()
 				-- upvalues: promiseModule (copy), text (ref)
 				return promiseModule.resolve(text)
 			end

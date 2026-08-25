@@ -16,13 +16,13 @@ local var5 = if fFlagLuaAppShareEdpVideoBlockingConfig then videoBlockingHelpers
 }
 local var6 = nil
 
-local function getSystemInfoLazy() --[[ line: 40 ]]
+local function getSystemInfoLazy()
 	-- upvalues: var6 (write), systemInfoProtocol (ref), reportWarning (ref), loggingProtocolModule (ref)
 	if var6 then
 		return var6
 	end
 	local t = { manufacturer = nil, deviceName = nil, maxMemory = nil }
-	local ok, status = pcall(function() --[[ line: 51 ]]
+	local ok, status = pcall(function()
 		-- upvalues: systemInfoProtocol (copy)
 		local var9 = systemInfoProtocol.default:getSystemInfo({
 			systemInfoProtocol.InfoNames.MANUFACTURER,
@@ -47,13 +47,13 @@ local function getSystemInfoLazy() --[[ line: 40 ]]
 	return t
 end
 
-return function(p0, p1, p2) --[[ line: 93 | named "useCanDevicePlayVideoPreview" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), getSystemInfoLazy (ref), fFlagLuaAppShareEdpVideoBlockingConfig (ref), videoBlockingHelpersModule (ref), systemInfoProtocol (ref), reportWarning (ref), loggingProtocolModule (ref), telemetryService (ref), var5 (write)
-	local var10 = reactModule.useMemo(function() --[[ line: 99 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: getSystemInfoLazy (copy)
 		return getSystemInfoLazy()
 	end, {})
-	local var11 = reactModule.useMemo(function() --[[ line: 103 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), fFlagLuaAppShareEdpVideoBlockingConfig (copy), videoBlockingHelpersModule (copy), var10 (ref)
 		if not p0.enableManufacturerDeny or not p0.manufacturerDenyList then
 			return false
@@ -72,7 +72,7 @@ return function(p0, p1, p2) --[[ line: 93 | named "useCanDevicePlayVideoPreview"
 		p0.manufacturerDenyList,
 		var10.manufacturer
 	})
-	local var12 = reactModule.useMemo(function() --[[ line: 123 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), fFlagLuaAppShareEdpVideoBlockingConfig (copy), videoBlockingHelpersModule (copy), var10 (ref)
 		if not p0.enableDeviceDeny or not p0.deviceDenyList then
 			return false
@@ -87,7 +87,7 @@ return function(p0, p1, p2) --[[ line: 93 | named "useCanDevicePlayVideoPreview"
 		end
 		return false
 	end, { p0.enableDeviceDeny, p0.deviceDenyList, var10.deviceName })
-	local var13 = reactModule.useMemo(function() --[[ line: 143 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var10 (ref)
 		if not p0.enableMaxMemoryDeny then
 			return false
@@ -105,13 +105,13 @@ return function(p0, p1, p2) --[[ line: 93 | named "useCanDevicePlayVideoPreview"
 		var10.maxMemory
 	})
 	
-	return reactModule.useCallback(function() --[[ line: 160 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: p0 (ref), systemInfoProtocol (copy), reportWarning (copy), loggingProtocolModule (copy), telemetryService (copy), var5 (copy), p2 (ref), p1 (ref), var11 (ref), var12 (ref), var13 (ref)
 		local var16 = false
 		local var17 = nil
 		
 		if p0.enableAvailableRamDeny and p0.availableRamThresholdMb and p0.availableRamThresholdMb > 0 then
-			local ok, status = pcall(function() --[[ line: 169 ]]
+			local ok, status = pcall(function()
 				-- upvalues: systemInfoProtocol (copy), var17 (write), p0 (copy)
 				local var18 = systemInfoProtocol.default:getSystemInfo({ systemInfoProtocol.InfoNames.AVAIL_RAM })
 				

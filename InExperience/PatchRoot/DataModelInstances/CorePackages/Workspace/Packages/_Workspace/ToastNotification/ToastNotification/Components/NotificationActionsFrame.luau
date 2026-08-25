@@ -22,12 +22,12 @@ local useNotificationCardStateModule = require(context.useNotificationCardState)
 local useNotificationCardDataModule = require(context.useNotificationCardData)
 local useTimeRemainingMapModule = require(hooks.useTimeRemainingMap)
 
-local _ = function(p0) --[[ line: 32 ]]
+local _ = function(p0)
 	-- upvalues: typeModule (ref), buttonType (ref)
 	return if p0 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p0 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p0 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p0 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
 end
 
-local var8 = function(p1, p2, p3, p4) --[[ line: 46 ]]
+local var8 = function(p1, p2, p3, p4)
 	-- upvalues: useNotificationCardDataModule (ref), getTimerFromCardData (ref), useTimeRemainingMapModule (ref), typeModule (ref), buttonType (ref)
 	local var9 = useNotificationCardDataModule()
 	local _ = nil
@@ -54,7 +54,7 @@ local var8 = function(p1, p2, p3, p4) --[[ line: 46 ]]
 					buttonType = var14,
 					props = {
 						text = var13,
-						onActivated = function() --[[ line: 80 ]]
+						onActivated = function()
 							-- upvalues: p3 (ref), v_1 (ref)
 							if p3 then
 								p3(v_1)
@@ -77,7 +77,7 @@ local var8 = function(p1, p2, p3, p4) --[[ line: 46 ]]
 	return t_1
 end
 
-return function(p5) --[[ line: 98 ]]
+return function(p5)
 	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), useLocalization (ref), reactModule (ref), useFocusGuiObject (ref), var8 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonStack (ref), defaultButtonHeight (ref), defaultContentPadding (ref)
 	local var15 = useNotificationCardStateModule("button")
 	local handleActions = useNotificationCardDataModule().handleActions
@@ -87,7 +87,7 @@ return function(p5) --[[ line: 98 ]]
 	local shouldAutoFocus = p5.shouldAutoFocus
 	local var17 = reactModule.useRef(nil)
 	local var18 = useFocusGuiObject()
-	reactModule.useEffect(function() --[[ line: 111 ]]
+	reactModule.useEffect(function()
 		-- upvalues: shouldAutoFocus (ref), var17 (ref), var18 (ref)
 		if not shouldAutoFocus then return end
 		local current = var17.current
@@ -95,7 +95,7 @@ return function(p5) --[[ line: 98 ]]
 		if current then
 			var18(current)
 			
-			return function() --[[ line: 123 ]]
+			return function()
 				-- upvalues: var18 (copy)
 				var18(nil)
 			end

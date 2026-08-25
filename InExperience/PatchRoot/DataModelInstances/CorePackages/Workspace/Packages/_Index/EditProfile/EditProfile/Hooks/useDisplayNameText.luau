@@ -42,7 +42,7 @@ local t_1 = {
 	searchForFriendsPrompt = textKeysModule.AgedUpSearchForFriendsPrompt
 }
 
-return function() --[[ line: 55 ]]
+return function()
 	-- upvalues: useRealNamesInDisplayNamesEnabledModule (ref), realNamesInDisplayNamesIXPModule (ref), t_1 (ref), t (ref), fFlagEditProfileDisplayNameUseUnder17DescriptionModule (ref), useLocalization (ref)
 	local var7 = if realNamesInDisplayNamesIXPModule.useIsExperimentEnabled({ isExposureEnabled = true }) and useRealNamesInDisplayNamesEnabledModule() then t_1 else t
 	local var8 = var7

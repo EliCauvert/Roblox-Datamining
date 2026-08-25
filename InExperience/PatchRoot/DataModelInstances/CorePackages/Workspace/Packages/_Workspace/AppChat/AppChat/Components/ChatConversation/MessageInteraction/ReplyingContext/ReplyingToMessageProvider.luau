@@ -2,7 +2,7 @@
 local replyingToMessageContextModule = require(script.Parent.ReplyingToMessageContext)
 local replyingToMessageDispatchContextModule = require(script.Parent.ReplyingToMessageDispatchContext)
 
-return function(p0) --[[ line: 13 | named "ReplyingToMessageProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), replyingToMessageContextModule (ref), replyingToMessageDispatchContextModule (ref)
 	local var3, var4 = reactModule.useState(nil)
 	

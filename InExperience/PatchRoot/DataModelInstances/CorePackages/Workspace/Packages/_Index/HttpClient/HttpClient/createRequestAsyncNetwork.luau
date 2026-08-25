@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function toLowerKeyedHeaders(p0) --[[ line: 8 ]]
+local function toLowerKeyedHeaders(p0)
 	if typeof(p0) ~= "table" then
 		return nil
 	end
@@ -13,16 +13,16 @@ local function toLowerKeyedHeaders(p0) --[[ line: 8 ]]
 	return t
 end
 
-return function() --[[ line: 19 | named "createRequestAsyncNetwork" ]]
+return function()
 	-- upvalues: httpService (ref), toLowerKeyedHeaders (ref)
 	return {
-		request = function(p1, p2) --[[ line: 20 ]]
+		request = function(p1, p2)
 			-- upvalues: httpService (copy), toLowerKeyedHeaders (copy)
 			assert(p1.onMessage == nil, "createRequestAsyncNetwork does not support onMessage; use createRequestInternalNetwork")
 			local var3 = false
-			task.spawn(function() --[[ line: 31 ]]
+			task.spawn(function()
 				-- upvalues: httpService (copy), p1 (ref), var3 (write), p2 (ref), toLowerKeyedHeaders (copy)
-				local ok, status = pcall(function() --[[ line: 32 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p1 (copy)
 					return httpService:RequestAsync({
 						Url = p1.url,
@@ -47,7 +47,7 @@ return function() --[[ line: 19 | named "createRequestAsyncNetwork" ]]
 				p2(false, tostring(status))
 			end)
 			
-			return function() --[[ line: 58 ]]
+			return function()
 				-- upvalues: var3 (write)
 				var3 = true
 			end

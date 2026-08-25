@@ -7,12 +7,12 @@ local t = {
 		IN_GAME = "IN_GAME",
 		IN_STUDIO = "IN_STUDIO"
 	},
-	new = function() --[[ line: 17 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.fromData(p0, p1, p2, p3) --[[ line: 25 ]]
+function t.fromData(p0, p1, p2, p3)
 	-- upvalues: t (ref), playersService (ref)
 	local var2 = t.new()
 	var2.id = tostring(p0)
@@ -34,7 +34,7 @@ function t.fromData(p0, p1, p2, p3) --[[ line: 25 ]]
 	return var2
 end
 
-function t.fromDataTable(p4) --[[ line: 51 ]]
+function t.fromDataTable(p4)
 	-- upvalues: t (ref), playersService (ref), getFFlagInviteListRerank (ref)
 	local var3 = t.new()
 	var3.id = tostring(p4.id)
@@ -60,7 +60,7 @@ function t.fromDataTable(p4) --[[ line: 51 ]]
 	return var3
 end
 
-function t.compare(p5, p6) --[[ line: 80 ]]
+function t.compare(p5, p6)
 	assert(not (p5 == nil and p6 == nil), "user1 and user2 cannot both be nil")
 	assert(if p5 ~= nil then typeof(p5) == "table" else true, "user1 must be a table or nil")
 	assert(if p6 ~= nil then typeof(p6) == "table" else true, "user2 must be a table or nil")
@@ -81,7 +81,7 @@ function t.compare(p5, p6) --[[ line: 80 ]]
 	return true
 end
 
-function t.userPresenceToText(p7, p8) --[[ line: 105 ]]
+function t.userPresenceToText(p7, p8)
 	-- upvalues: t (ref)
 	local presence = p8.presence
 	local lastLocation = p8.lastLocation

@@ -7,7 +7,7 @@ local utilModule = require(commandModules:WaitForChild("Util"))
 local _ = script.Parent
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 
-function t_1.SetupCommandProcessors(value) --[[ line: 19 ]]
+function t_1.SetupCommandProcessors(value)
 	-- upvalues: commandModules (ref), utilModule (ref)
 	local children = commandModules:GetChildren()
 	
@@ -26,7 +26,7 @@ function t_1.SetupCommandProcessors(value) --[[ line: 19 ]]
 	end
 end
 
-function t_1.ProcessCompletedChatMessage(p0, p1, p2) --[[ line: 37 ]]
+function t_1.ProcessCompletedChatMessage(p0, p1, p2)
 	-- upvalues: chatSettingsModule (ref)
 	for i = 1, #p0.CompletedMessageProcessors do
 		if not p0.CompletedMessageProcessors[i](p1, p2, chatSettingsModule) then
@@ -37,7 +37,7 @@ function t_1.ProcessCompletedChatMessage(p0, p1, p2) --[[ line: 37 ]]
 	return false
 end
 
-function t_1.ProcessInProgressChatMessage(p3, p4, p5, p6) --[[ line: 47 ]]
+function t_1.ProcessInProgressChatMessage(p3, p4, p5, p6)
 	-- upvalues: chatSettingsModule (ref)
 	for i = 1, #p3.InProgressMessageProcessors do
 		local var8 = p3.InProgressMessageProcessors[i](p4, p5, p6, chatSettingsModule)
@@ -50,7 +50,7 @@ function t_1.ProcessInProgressChatMessage(p3, p4, p5, p6) --[[ line: 47 ]]
 	return nil
 end
 
-function t.new() --[[ line: 60 ]]
+function t.new()
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.CompletedMessageProcessors = {}

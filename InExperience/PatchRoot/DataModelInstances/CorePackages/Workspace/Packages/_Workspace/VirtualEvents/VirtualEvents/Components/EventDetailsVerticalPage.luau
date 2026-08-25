@@ -28,15 +28,15 @@ local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSu
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local closeSmall = images["icons/navigation/close_small"]
 
-local var14 = function() --[[ line: 45 ]] end
+local var14 = function() end
 
 local t = { onClose = var14, onJoinEvent = var14, onShare = var14 }
 
-return function(p0) --[[ line: 71 | named "EventDetailsVerticalPage" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), formFactor (ref), reactModule (ref), findFirstImageInMediaModule (ref), fetchEventThumbnailModule (ref), constantsModule (ref), useMutation (ref), requestsModule (ref), getEventTimerStatusModule (ref), useCTAPropsModule (ref), useAnimationModule (ref), withStyle (ref), utilityActionIcon (ref), imageSetLabel (ref), closeSmall (ref), loadableImage (ref), eventDetailsContainerModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var16 = cryoModule.Dictionary.join(t, p0)
 	local var17 = useRoactService(roactNetworking)
-	local var18 = useSelector(function(p1) --[[ line: 76 ]]
+	local var18 = useSelector(function(p1)
 		return p1.FormFactor
 	end) == formFactor.WIDE
 	local media = p0.virtualEvent.media
@@ -44,22 +44,22 @@ return function(p0) --[[ line: 71 | named "EventDetailsVerticalPage" ]]
 	local var21, var22 = reactModule.useState(0)
 	local var23, var24 = reactModule.useState(nil)
 	local var25 = if media then findFirstImageInMediaModule(media) else nil
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fetchEventThumbnailModule (copy), var17 (ref), p0 (ref), var25 (ref), var24 (ref)
 		local var32 = true
-		fetchEventThumbnailModule(var17, p0.virtualEvent.id, var25):andThen(function(p2) --[[ line: 90 ]]
+		fetchEventThumbnailModule(var17, p0.virtualEvent.id, var25):andThen(function(p2)
 			-- upvalues: var32 (write), var24 (copy)
 			if var32 then
 				var24(p2)
 			end
 		end)
 		
-		return function() --[[ line: 95 ]]
+		return function()
 			-- upvalues: var32 (write)
 			var32 = false
 		end
 	end, { p0.virtualEvent.id, var25 })
-	local var26 = reactModule.useCallback(function(p3) --[[ line: 100 ]]
+	local var26 = reactModule.useCallback(function(p3)
 		-- upvalues: constantsModule (copy), var19 (ref), var20 (ref), var21 (ref), var22 (ref)
 		local minValue = math.min(constantsModule.HORIZONTAL_ASPECT_RATIO * p3.AbsoluteSize.X, p3.AbsoluteSize.Y)
 		
@@ -74,13 +74,13 @@ return function(p0) --[[ line: 71 | named "EventDetailsVerticalPage" ]]
 	end, { var19, var21 })
 	local var27 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
 		variables = { virtualEventId = p0.virtualEvent.id },
-		update = function(_, p4, p5) --[[ line: 116 ]]
+		update = function(_, p4, p5)
 			-- upvalues: cryoModule (copy)
 			local virtualEvent = p5.data.virtualEventRsvp.virtualEvent
 			p4:modify({
 				id = p4:identify(virtualEvent),
 				fields = {
-					rsvpCounters = function(_, p6) --[[ line: 122 ]]
+					rsvpCounters = function(_, p6)
 						-- upvalues: virtualEvent (ref), cryoModule (copy)
 						return cryoModule.Dictionary.join(p6, {
 							going = p6.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
@@ -90,20 +90,20 @@ return function(p0) --[[ line: 71 | named "EventDetailsVerticalPage" ]]
 			})
 		end
 	})
-	local var28 = reactModule.useMemo(function() --[[ line: 133 ]]
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: getEventTimerStatusModule (copy), var16 (ref)
 		return getEventTimerStatusModule(var16.virtualEvent, var16.currentTime)
 	end, { var16.virtualEvent, var16.currentTime })
 	local var29 = useCTAPropsModule(var16.virtualEvent, var28, p0.notifyMeUseEmphasisVariant, {
 		onClose = var16.onClose,
 		onJoinEvent = var16.onJoinEvent,
-		onRsvpChanged = reactModule.useCallback(function() --[[ line: 137 ]]
+		onRsvpChanged = reactModule.useCallback(function()
 			-- upvalues: var16 (ref), var27 (ref)
 			var27[1]({
 				variables = {
 					rsvpStatus = if var16.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
 				}
-			}):andThen(function(p7) --[[ line: 151 ]]
+			}):andThen(function(p7)
 				-- upvalues: var16 (copy)
 				if var16.onRsvpChanged then
 					var16.onRsvpChanged(p7.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p7.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
@@ -121,7 +121,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsVerticalPage" ]]
 		setAnimationOffset = var31
 	})
 	
-	return withStyle(function(p8) --[[ line: 178 ]]
+	return withStyle(function(p8)
 		-- upvalues: reactModule (copy), var18 (ref), utilityActionIcon (copy), p0 (ref), imageSetLabel (copy), closeSmall (copy), var26 (ref), loadableImage (copy), var19 (ref), var23 (ref), eventDetailsContainerModule (copy), var28 (ref), var29 (ref), var21 (ref), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy), var30 (ref), constantsModule (copy)
 		return reactModule.createElement("ImageButton", {
 			ZIndex = 4,

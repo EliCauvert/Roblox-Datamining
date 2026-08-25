@@ -49,14 +49,14 @@ local t = {
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 }
 
-return reactModule.memo(function(p0) --[[ line: 70 | named "ExperienceDetailsFullPage" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: gameDetail (ref), experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), reactModule (ref), usePageScopeRef (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useTokens (ref), fFlagLuaAppSduiEdpRouteAwareSessionRemoval (ref), useGetCurrentLegacyRoute (ref), fFlagSduiPlayWithRewardGapFix (ref), filterPlayWithReward (ref), sduiEdpPageScopeIsTenFoot (ref), isTenFoot (ref), guiService (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), responsiveModule (ref), detailsPageLayout (ref), t (ref), edpFullBleedOverlapOffset (ref), edpBannerBottomVisiblePercent (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackBannerImageModule (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), fFlagSduiExperienceDetailsSupport (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref)
 	local useExperienceDetailsFocusNavigationModule = require(gameDetail.FocusNavigation.useExperienceDetailsFocusNavigation)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p0)
 	local var23 = getExperienceDetailsPageKeyModule(universeId)
 	local var24 = reactModule.useRef(nil)
 	usePageScopeRef(var23)
-	local var25 = reactModule.useMemo(function() --[[ line: 78 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: experienceDetailsPageUtilsModule (copy), p0 (ref), sduiSurfaceLoadTimeTracker (copy), var23 (ref), EDPTTIConstants (copy), getSduiClientPageScope (copy)
 		local var36 = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p0, "pageTimer") or sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(var23, {
 			manualSurfaceReady = true,
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 70 | named "ExperienceDetailsFul
 	local referralSource = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p0, "referralSource")
 	local experienceJoinData = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p0, "experienceJoinData")
 	local placeIdOverride = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p0, "placeIdOverride")
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getSduiClientPageScope (copy), var23 (ref), referralSource (ref), experienceJoinData (ref), placeIdOverride (ref), fFlagSduiPlayWithRewardGapFix (copy), filterPlayWithReward (copy), sduiEdpPageScopeIsTenFoot (copy), isTenFoot (copy), guiService (copy)
 		local var37 = getSduiClientPageScope(var23)
 		var37.set("referralSource", referralSource)
@@ -98,7 +98,7 @@ return reactModule.memo(function(p0) --[[ line: 70 | named "ExperienceDetailsFul
 		experienceJoinData,
 		placeIdOverride
 	})
-	local var33 = reactModule.useCallback(function() --[[ line: 122 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: fFlagLuaAppSduiEdpRouteAwareSessionRemoval (copy), var29 (write), var26 (ref), removeGameDetailSessionIfDepartedModule (copy), var27 (ref), sessionType (copy)
 		local var38 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var29() else nil
 		var26.goBack()
@@ -115,17 +115,17 @@ return reactModule.memo(function(p0) --[[ line: 70 | named "ExperienceDetailsFul
 		var27,
 		if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var29 else nil
 	})
-	reactModule.useEffect(function() --[[ line: 138 ]]
+	reactModule.useEffect(function()
 		-- upvalues: universeId (ref), var25 (ref), fetchExperienceDetailsPageModule (copy)
 		if universeId and var25 then
 			fetchExperienceDetailsPageModule(universeId, var25)
 		end
 	end, { universeId, var25 })
 	local var34 = useUiStatus(var23)
-	reactModule.useEffect(function() --[[ line: 145 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var34 (ref), uiStatus (copy), universeId (ref), dataHydrationModule (copy)
 		if var34 == uiStatus.Error and universeId then
-			dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId, function(p1) --[[ line: 149 ]]
+			dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId, function(p1)
 				return if p1 ~= nil then p1.creator == nil else true
 			end)
 			dataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(universeId)
@@ -190,7 +190,7 @@ return reactModule.memo(function(p0) --[[ line: 70 | named "ExperienceDetailsFul
 					launchSource = "ExperienceDetailsPage",
 					isSmallScreen = false,
 					universeId = universeId,
-					refresh = reactModule.useCallback(function() --[[ line: 156 ]]
+					refresh = reactModule.useCallback(function()
 						-- upvalues: universeId (ref), var25 (ref), fetchExperienceDetailsPageModule (copy)
 						if universeId and var25 then
 							fetchExperienceDetailsPageModule(universeId, var25, true)

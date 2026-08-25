@@ -2,11 +2,11 @@
 local promiseModule = require(authCommon.Parent.Promise)
 local postGetUserByUsernameModule = require(authCommon.Http.Requests.PostGetUserByUsername)
 
-return function(p0, p1) --[[ line: 7 ]]
+return function(p0, p1)
 	-- upvalues: postGetUserByUsernameModule (ref), promiseModule (ref)
-	return function() --[[ line: 8 ]]
+	return function()
 		-- upvalues: postGetUserByUsernameModule (copy), p0 (ref), p1 (ref), promiseModule (copy)
-		return postGetUserByUsernameModule(p0, p1):andThen(function(p2) --[[ line: 9 ]]
+		return postGetUserByUsernameModule(p0, p1):andThen(function(p2)
 			-- upvalues: promiseModule (copy)
 			if not p2 or not p2.responseBody then
 				return promiseModule.reject()

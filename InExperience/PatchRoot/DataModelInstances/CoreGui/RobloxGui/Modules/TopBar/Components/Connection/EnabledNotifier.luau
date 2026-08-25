@@ -16,7 +16,7 @@ local playerListManagerModule = require(robloxGui.Modules.PlayerList.PlayerListM
 local coreGuiCEnabledNotifieronnector = roactModule.PureComponent:extend("CoreGuiCEnabledNotifieronnector")
 coreGuiCEnabledNotifieronnector.validateProps = tModule.strictInterface({ topBarEnabled = tModule.boolean })
 
-function coreGuiCEnabledNotifieronnector.notifyEnabled(p0) --[[ line: 29 ]]
+function coreGuiCEnabledNotifieronnector.notifyEnabled(p0)
 	-- upvalues: playerListManagerModule (ref), chatSelectorModule (ref), fFlagEnableNewBackpack (ref), var7 (ref), emotesMenuMasterModule (ref)
 	playerListManagerModule:SetTopBarEnabled(p0.props.topBarEnabled)
 	chatSelectorModule:TopbarEnabledChanged(p0.props.topBarEnabled)
@@ -27,20 +27,20 @@ function coreGuiCEnabledNotifieronnector.notifyEnabled(p0) --[[ line: 29 ]]
 	emotesMenuMasterModule:setTopBarEnabled(p0.props.topBarEnabled)
 end
 
-function coreGuiCEnabledNotifieronnector.didMount(p1) --[[ line: 38 ]]
+function coreGuiCEnabledNotifieronnector.didMount(p1)
 	p1:notifyEnabled()
 end
 
-function coreGuiCEnabledNotifieronnector.render(_) --[[ line: 42 ]]
+function coreGuiCEnabledNotifieronnector.render(_)
 	return nil
 end
 
-function coreGuiCEnabledNotifieronnector.didUpdate(p2, p3, _) --[[ line: 46 ]]
+function coreGuiCEnabledNotifieronnector.didUpdate(p2, p3, _)
 	if p2.props.topBarEnabled ~= p3.topBarEnabled then
 		p2:notifyEnabled()
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4) --[[ line: 52 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p4)
 	return { topBarEnabled = p4.displayOptions.topbarEnabled }
 end, nil)(coreGuiCEnabledNotifieronnector)

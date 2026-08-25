@@ -11,7 +11,7 @@ t.INFO = "info"
 t.WARNING = "warning"
 t.ERROR = "error"
 
-function t.new(p0) --[[ line: 114 ]]
+function t.new(p0)
 	-- upvalues: rbxAnalyticsService (ref), t (ref)
 	if not p0 then
 		p0 = rbxAnalyticsService
@@ -21,9 +21,9 @@ function t.new(p0) --[[ line: 114 ]]
 	return setmetatable({ _impl = p0 }, t)
 end
 
-local function stub() --[[ line: 127 ]] end
+local function stub() end
 
-function t.stubService() --[[ line: 129 ]]
+function t.stubService()
 	-- upvalues: stub (ref)
 	return {
 		SetRBXEvent = stub,
@@ -35,11 +35,11 @@ function t.stubService() --[[ line: 129 ]]
 	}
 end
 
-function t:setImpl(p1) --[[ line: 140 ]]
+function t:setImpl(p1)
 	self._impl = p1
 end
 
-function t:_report(p2, p3, p4, p5) --[[ line: 144 ]]
+function t:_report(p2, p3, p4, p5)
 	local text = p2 .. "-" .. p3
 	
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUsePointsV2") then
@@ -63,18 +63,18 @@ function t:_report(p2, p3, p4, p5) --[[ line: 144 ]]
 	end
 end
 
-function t:reportVoiceChatJoinResult(p6, p7, p8) --[[ line: 166 ]]
+function t:reportVoiceChatJoinResult(p6, p7, p8)
 	-- upvalues: t (ref)
 	self:_report("voiceChat", "defaultChannelJoinResults", p7, { success = p6, result = p7, logLevel = p8 or t.INFO })
 end
 
-function t:reportBanMessageEvent(p9) --[[ line: 174 ]]
+function t:reportBanMessageEvent(p9)
 	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
 		self._impl:ReportCounter("voiceChat-reportBanMessage" .. p9, 1)
 	end
 end
 
-function t:reportBanMessageEventV2(p10, p11, p12, p13) --[[ line: 180 ]]
+function t:reportBanMessageEventV2(p10, p11, p12, p13)
 	self:_report("voiceChat", "reportBanEvent", nil, {
 		eventType = p10,
 		banReason = p11,
@@ -83,22 +83,22 @@ function t:reportBanMessageEventV2(p10, p11, p12, p13) --[[ line: 180 ]]
 	})
 end
 
-function t:reportReconnectDueToMissedSequence() --[[ line: 189 ]]
+function t:reportReconnectDueToMissedSequence()
 	if game:GetFastFlag("LuaVoiceChatReconnectMissedSequence") then
 		self._impl:ReportCounter("voiceChat-reconnectMissedSequence", 1)
 	end
 end
 
-function t:reportOutOfOrderSequence() --[[ line: 195 ]]
+function t:reportOutOfOrderSequence()
 	self._impl:ReportCounter("voiceChat-outOfOrderSequence", 1)
 end
 
-function t:reportClosedNudge(p14, p15) --[[ line: 199 ]]
+function t:reportClosedNudge(p14, p15)
 	self._impl:ReportCounter("voicechat-closednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p14, voiceSessionId = p15 })
 end
 
-function t:reportAcknowledgedNudge(p16, p17) --[[ line: 208 ]]
+function t:reportAcknowledgedNudge(p16, p17)
 	self._impl:ReportCounter("voicechat-acknowledgednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "ACKNOWLEDGED",
@@ -107,12 +107,12 @@ function t:reportAcknowledgedNudge(p16, p17) --[[ line: 208 ]]
 	})
 end
 
-function t:reportDeniedNudge(p18, p19) --[[ line: 217 ]]
+function t:reportDeniedNudge(p18, p19)
 	self._impl:ReportCounter("voicechat-deniednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p18, voiceSessionId = p19 })
 end
 
-function t:reportVoiceMuteIndividual(p20) --[[ line: 226 ]]
+function t:reportVoiceMuteIndividual(p20)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteIndividual", {
 		user_id = p20.userId,
 		client_session_id = p20.clientSessionId,
@@ -123,7 +123,7 @@ function t:reportVoiceMuteIndividual(p20) --[[ line: 226 ]]
 	})
 end
 
-function t:reportVoiceMuteGroup(p21) --[[ line: 237 ]]
+function t:reportVoiceMuteGroup(p21)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteGroup", {
 		user_id = p21.userId,
 		client_session_id = p21.clientSessionId,
@@ -134,7 +134,7 @@ function t:reportVoiceMuteGroup(p21) --[[ line: 237 ]]
 	})
 end
 
-function t:reportVoiceMuteSelf(p22) --[[ line: 248 ]]
+function t:reportVoiceMuteSelf(p22)
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteSelf", {
 		user_id = p22.userId,
 		client_session_id = p22.clientSessionId,
@@ -144,7 +144,7 @@ function t:reportVoiceMuteSelf(p22) --[[ line: 248 ]]
 	})
 end
 
-function t:reportJoinVoiceButtonEvent(p23, p24, p25, p26, p27, p28) --[[ line: 258 ]]
+function t:reportJoinVoiceButtonEvent(p23, p24, p25, p26, p27, p28)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
 		eventType = p23,
 		universeId = p24,
@@ -155,7 +155,7 @@ function t:reportJoinVoiceButtonEvent(p23, p24, p25, p26, p27, p28) --[[ line: 2
 	})
 end
 
-function t:reportJoinVoiceButtonEventWithVoiceSessionId(p29, p30, p31, p32, p33, p34, p35) --[[ line: 276 ]]
+function t:reportJoinVoiceButtonEventWithVoiceSessionId(p29, p30, p31, p32, p33, p34, p35)
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
 		eventType = p29,
 		universeId = p30,
@@ -167,7 +167,7 @@ function t:reportJoinVoiceButtonEventWithVoiceSessionId(p29, p30, p31, p32, p33,
 	})
 end
 
-function t:reportLeaveVoiceButtonEvent(p36, p37, p38, p39, p40) --[[ line: 296 ]]
+function t:reportLeaveVoiceButtonEvent(p36, p37, p38, p39, p40)
 	self._impl:SendEventDeferred("client", "voice", "leaveVoiceButtonEvent", {
 		eventType = p36,
 		universeId = p37,
@@ -177,7 +177,7 @@ function t:reportLeaveVoiceButtonEvent(p36, p37, p38, p39, p40) --[[ line: 296 ]
 	})
 end
 
-function t:reportInExpConsent(p41, p42, p43, p44, p45) --[[ line: 312 ]]
+function t:reportInExpConsent(p41, p42, p43, p44, p45)
 	self._impl:SendEventDeferred("client", "voiceChat", "inExpConsentModalEvent", {
 		eventType = p41,
 		entry = p42,
@@ -187,7 +187,7 @@ function t:reportInExpConsent(p41, p42, p43, p44, p45) --[[ line: 312 ]]
 	})
 end
 
-function t:reportDevicePermissionsModalEvent(p46, p47, p48, p49, p50) --[[ line: 328 ]]
+function t:reportDevicePermissionsModalEvent(p46, p47, p48, p49, p50)
 	self._impl:SendEventDeferred("client", "voiceChat", "devicePermissionsModalEvent", {
 		eventType = p46,
 		universeId = p48,
@@ -197,7 +197,7 @@ function t:reportDevicePermissionsModalEvent(p46, p47, p48, p49, p50) --[[ line:
 	})
 end
 
-function t:reportConnectDisconnectEvents(p51, p52) --[[ line: 347 ]]
+function t:reportConnectDisconnectEvents(p51, p52)
 	self._impl:SendEventDeferred("client", "voiceChat", p51, p52)
 end
 

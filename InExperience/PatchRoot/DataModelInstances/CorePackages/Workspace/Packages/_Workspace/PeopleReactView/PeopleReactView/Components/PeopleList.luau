@@ -13,9 +13,9 @@ local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local fFlagEnablePeopleListLazyRender = flags.FFlagEnablePeopleListLazyRender
 local fFlagPeoplePageRemoveUseMemoElements = flags.FFlagPeoplePageRemoveUseMemoElements
 
-local function MemoizedPersonRow(p0) --[[ line: 32 ]]
+local function MemoizedPersonRow(p0)
 	-- upvalues: reactModule (ref), fFlagEnablePeopleListLazyRender (ref), lazyPersonRowModule (ref), personRowModule (ref)
-	return reactModule.useMemo(function() --[[ line: 37 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: fFlagEnablePeopleListLazyRender (copy), reactModule (copy), lazyPersonRowModule (copy), p0 (ref), personRowModule (copy)
 		return if fFlagEnablePeopleListLazyRender then reactModule.createElement(lazyPersonRowModule, {
 			key = tostring(p0.person.UserId),
@@ -30,7 +30,7 @@ local function MemoizedPersonRow(p0) --[[ line: 32 ]]
 	end, { p0.person.UserId, p0.index, p0.scrollingFrameStore })
 end
 
-local function buildPersonRows(p1, p2, p3, p4) --[[ line: 57 ]]
+local function buildPersonRows(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref), MemoizedPersonRow (ref), fFlagEnablePeopleListLazyRender (ref)
 	local t = {}
 	local t_1 = {}
@@ -77,9 +77,9 @@ local function buildPersonRows(p1, p2, p3, p4) --[[ line: 57 ]]
 	return t, t_1
 end
 
-local function PeopleList(p5) --[[ line: 122 ]]
+local function PeopleList(p5)
 	-- upvalues: reactModule (ref), peopleServiceModule (ref), useSignalState (ref), buildPersonRows (ref), fFlagEnablePeopleListLazyRender (ref), view (ref), getFFlagAddPeoplePageCardLayout (ref)
-	local var16 = useSignalState(reactModule.useMemo(function() --[[ line: 123 ]]
+	local var16 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleListStore")
 	end, {}).people)

@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 1 | named "getDevStoreSeeAllPageKey" ]]
+﻿return function(p0)
 	return `DevStoreSeeAll_{p0}`
 end

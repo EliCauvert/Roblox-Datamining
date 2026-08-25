@@ -5,13 +5,13 @@ local tweenDuration = require(inExperienceSideSheet.Common.Constants).TweenDurat
 local getDrawerVisibleStore = require(parent.Drawer).Stores.GetDrawerVisibleStore
 local animateScrollViewToSelectionHelper = require(parent.AppBlox).AnimateScrollViewToSelectionHelper
 
-return function() --[[ line: 13 | named "useSideSheetFocusNavScrollViewAnimation" ]]
+return function()
 	-- upvalues: reactModule (ref), getDrawerVisibleStore (ref), animateScrollViewToSelectionHelper (ref), tweenDuration (ref)
 	local var2 = reactModule.useRef({})
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
 	local getDrawerAnimating = getDrawerVisibleStore(false).getDrawerAnimating
-	local var5 = reactModule.useCallback(function() --[[ line: 19 ]]
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref), var3 (ref)
 		if var2.current then
 			for i, v in var2.current do
@@ -24,7 +24,7 @@ return function() --[[ line: 13 | named "useSideSheetFocusNavScrollViewAnimation
 			var3.current = nil
 		end
 	end, {})
-	local var6 = reactModule.useCallback(function(p0) --[[ line: 32 ]]
+	local var6 = reactModule.useCallback(function(p0)
 		-- upvalues: var4 (ref), var5 (ref), var2 (ref), var3 (ref), animateScrollViewToSelectionHelper (copy), tweenDuration (copy), getDrawerAnimating (ref)
 		if var4.current == p0 then return end
 		if p0 then
@@ -39,7 +39,7 @@ return function() --[[ line: 13 | named "useSideSheetFocusNavScrollViewAnimation
 		var4.current = nil
 		var5()
 	end, { var2, var5, getDrawerAnimating })
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref)
 		return var5
 	end, { var5 })

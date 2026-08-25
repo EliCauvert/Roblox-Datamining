@@ -25,10 +25,10 @@ disconnectedDialog.validateProps = tModule.strictInterface({
 })
 disconnectedDialog.defaultProps = { guiService = guiService }
 
-function disconnectedDialog.init(p0) --[[ line: 50 ]]
+function disconnectedDialog.init(p0)
 	p0.guiService = p0.props.guiService
 	
-	function p0.onConfirmBindingAction(_, p1, _) --[[ line: 53 ]]
+	function p0.onConfirmBindingAction(_, p1, _)
 		-- upvalues: p0 (ref)
 		if p1 == Enum.UserInputState.Begin then
 			p0.props.onConfirm()
@@ -39,9 +39,9 @@ function disconnectedDialog.init(p0) --[[ line: 50 ]]
 	end
 end
 
-function disconnectedDialog.render(p2) --[[ line: 64 ]]
+function disconnectedDialog.render(p2)
 	-- upvalues: withStyle (ref), robloxTranslatorModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), imageSetLabel (ref), alert (ref), fitTextLabel (ref), buttonType (ref), coreGuiService (ref), inGameMenuConstantsModule (ref)
-	return withStyle(function(p3) --[[ line: 65 ]]
+	return withStyle(function(p3)
 		-- upvalues: robloxTranslatorModule (copy), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), imageSetLabel (copy), alert (copy), fitTextLabel (copy), buttonType (copy), p2 (ref), coreGuiService (copy), inGameMenuConstantsModule (copy)
 		local theme = p3.Theme
 		local font = p3.Font
@@ -64,7 +64,7 @@ function disconnectedDialog.render(p2) --[[ line: 64 ]]
 				}, {
 					Alert = roactModule.createElement(interactiveAlert, {
 						title = robloxTranslatorModule:FormatByKey("InGame.ConnectionError.Heading.VRDisconnected"),
-						middleContent = function() --[[ line: 75 ]]
+						middleContent = function()
 							-- upvalues: roactModule (copy), fitFrameVertical (copy), imageSetLabel (copy), alert (copy), fitTextLabel (copy), font (ref), var11 (ref), theme (ref)
 							return roactModule.createElement(fitFrameVertical, {
 								BackgroundTransparency = 1,
@@ -112,26 +112,26 @@ function disconnectedDialog.render(p2) --[[ line: 64 ]]
 	end)
 end
 
-function disconnectedDialog.bindActions(p4) --[[ line: 144 ]]
+function disconnectedDialog.bindActions(p4)
 	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function() --[[ line: 148 ]] end, false, Enum.KeyCode.ButtonStart, Enum.KeyCode.Escape)
+	contextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function() end, false, Enum.KeyCode.ButtonStart, Enum.KeyCode.Escape)
 	contextActionService:BindCoreAction("TopBarDialogConfirm", p4.onConfirmBindingAction, false, Enum.KeyCode.Return, Enum.KeyCode.ButtonA)
 end
 
-function disconnectedDialog.unbindActions(_) --[[ line: 163 ]]
+function disconnectedDialog.unbindActions(_)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
 	contextActionService:UnbindCoreAction("TopBarDialogConfirm")
 end
 
-function disconnectedDialog.didMount(p5) --[[ line: 168 ]]
+function disconnectedDialog.didMount(p5)
 	if p5.props.visible then
 		p5:bindActions()
 		p5.guiService:SetMenuIsOpen(true, "HeadsetDisconnectedDialog")
 	end
 end
 
-function disconnectedDialog.didUpdate(p6, p7, _) --[[ line: 175 ]]
+function disconnectedDialog.didUpdate(p6, p7, _)
 	if p6.props.visible ~= p7.visible then
 		if p6.props.visible then
 			p6:bindActions()
@@ -144,7 +144,7 @@ function disconnectedDialog.didUpdate(p6, p7, _) --[[ line: 175 ]]
 	end
 end
 
-function disconnectedDialog.willUnmount(p8) --[[ line: 187 ]]
+function disconnectedDialog.willUnmount(p8)
 	p8:unbindActions()
 	p8.guiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
 end

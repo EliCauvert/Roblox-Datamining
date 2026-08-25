@@ -12,7 +12,7 @@ local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadge
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local userProfileModelModule = require(script.Parent.UserProfileModel)
-local var8 = createComputed(function(_) --[[ line: 36 ]]
+local var8 = createComputed(function(_)
 	-- upvalues: parent (ref), lumberyakModule (ref), userProfileStoreMaxLoggingLevel (ref), userProfileStoreHttpTimeout (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref), userProfileModelModule (ref), userProfileStoreBatchSize (ref), createSignal (ref), userProfileStoreQueueProcessDelay (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local urlBuilderModule = require(parent.UrlBuilder)
 	local urlBuilder = urlBuilderModule.UrlBuilder
@@ -21,7 +21,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 	userProfileStore:setContext({ prefix = "[UserProfileStore] " })
 	userProfileStore:addSink({
 		maxLevel = userProfileStoreMaxLoggingLevel,
-		log = function(_, _, _) --[[ line: 54 ]] end
+		log = function(_, _, _) end
 	})
 	local httpService = game:GetService("HttpService")
 	local var12 = urlBuilder.new({
@@ -45,7 +45,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 	local t_3 = {}
 	local var17 = false
 	
-	local function _(p0) --[[ line: 85 | named "getOrCreateByUserId" ]]
+	local function _(p0)
 		-- upvalues: t_1 (ref), userProfileStore (ref), userProfileModelModule (copy)
 		local var22 = t_1[p0]
 		
@@ -61,7 +61,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 		return var22
 	end
 	
-	local function performBatchFetch(p1, p2, p3, p4) --[[ line: 98 ]]
+	local function performBatchFetch(p1, p2, p3, p4)
 		-- upvalues: userProfileStore (ref), t_2 (ref), userProfileStoreBatchSize (copy), httpService (ref), var12 (ref), userProfileStoreHttpTimeout (ref), t_1 (ref), userProfileModelModule (copy), performBatchFetch (ref)
 		if #p1 == 0 then
 			userProfileStore:trace("No more ids to fetch. Setting result.")
@@ -120,13 +120,13 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 					Accept = "application/json"
 				},
 				RequestType = Enum.HttpRequestType.Default
-			}):Start(function(p5, p6) --[[ line: 168 ]]
+			}):Start(function(p5, p6)
 				-- upvalues: httpService (copy), userProfileStore (copy), var30 (ref), t_2 (copy), p2 (ref), t_1 (copy), userProfileModelModule (copy), performBatchFetch (copy), t (ref), p3 (ref), p4 (ref)
 				if p5 == true then
 					local body = p6.Body
 					
 					if body ~= nil then
-						local _, status = pcall(function() --[[ line: 172 ]]
+						local _, status = pcall(function()
 							-- upvalues: httpService (copy), body (ref)
 							return httpService:JSONDecode(body)
 						end)
@@ -169,7 +169,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 		end
 	end
 	
-	local function processQueuedRequests() --[[ line: 200 ]]
+	local function processQueuedRequests()
 		-- upvalues: t_3 (write), userProfileStore (ref), t_2 (ref), performBatchFetch (ref)
 		for i, v in pairs(t_3) do
 			userProfileStore:trace("Processing requests ({}) for fields: {}", #v, i)
@@ -193,7 +193,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 		t_3 = {}
 	end
 	
-	local function fetchByUserIds(p7, p8, p9) --[[ line: 222 ]]
+	local function fetchByUserIds(p7, p8, p9)
 		-- upvalues: t_2 (ref), t_1 (ref), userProfileStore (ref), userProfileModelModule (copy), createSignal (copy), t_3 (write), var17 (write), fFlagEnableBlackbirdCheck (copy), processQueuedRequests (ref), userProfileStoreQueueProcessDelay (copy)
 		table.sort(p8)
 		local joined = table.concat(p8, ",")
@@ -258,13 +258,13 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 				var17 = true
 				
 				if fFlagEnableBlackbirdCheck then
-					task.defer(function() --[[ line: 285 ]]
+					task.defer(function()
 						-- upvalues: processQueuedRequests (copy), var17 (copy)
 						processQueuedRequests()
 						var17 = false
 					end)
 				else
-					task.delay(userProfileStoreQueueProcessDelay, function() --[[ line: 290 ]]
+					task.delay(userProfileStoreQueueProcessDelay, function()
 						-- upvalues: processQueuedRequests (copy), var17 (copy)
 						processQueuedRequests()
 						var17 = false
@@ -278,7 +278,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 		end
 	end
 	
-	local function invalidateCachedProfiles(p10, p11) --[[ line: 342 ]]
+	local function invalidateCachedProfiles(p10, p11)
 		-- upvalues: t_2 (ref)
 		table.sort(p10)
 		local var51 = t_2[table.concat(p10, ",")]
@@ -295,7 +295,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 	end
 	
 	return {
-		fetchNamesByUserIds = function(p12, p13) --[[ line: 302 ]]
+		fetchNamesByUserIds = function(p12, p13)
 			-- upvalues: t (ref), fFlagEnableVerifiedBadgeStore (copy), fFlagEnableBlackbirdCheck (copy), fetchByUserIds (ref)
 			local list = {
 				t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
@@ -310,7 +310,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 			end
 			return fetchByUserIds(p12, list, p13)
 		end,
-		updateFromHydration = if fFlagSduiExperienceDetailsSupport then function(p14) --[[ line: 328 | named "updateFromHydration" ]]
+		updateFromHydration = if fFlagSduiExperienceDetailsSupport then function(p14)
 			-- upvalues: t_1 (ref), userProfileStore (ref), userProfileModelModule (copy)
 			for i, v in p14 do
 				local var55
@@ -332,11 +332,11 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 				})
 			end
 		end else nil,
-		getProfileByUserId = if fFlagSduiExperienceDetailsSupport then function(p15) --[[ line: 374 | named "getProfileByUserId" ]]
+		getProfileByUserId = if fFlagSduiExperienceDetailsSupport then function(p15)
 			-- upvalues: t_1 (ref)
 			return t_1[p15]
 		end else nil,
-		invalidateCachedNamesForUserIds = function(p16) --[[ line: 360 ]]
+		invalidateCachedNamesForUserIds = function(p16)
 			-- upvalues: t (ref), invalidateCachedProfiles (ref)
 			invalidateCachedProfiles({
 				t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
@@ -347,7 +347,7 @@ local var8 = createComputed(function(_) --[[ line: 36 ]]
 end)
 
 return {
-	get = function() --[[ line: 387 ]]
+	get = function()
 		-- upvalues: var8 (ref)
 		return var8(false)
 	end

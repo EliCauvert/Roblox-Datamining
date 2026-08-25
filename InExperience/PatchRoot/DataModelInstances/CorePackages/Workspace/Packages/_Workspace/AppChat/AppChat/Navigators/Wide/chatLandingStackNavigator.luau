@@ -12,7 +12,7 @@ local getFFlagAppChatRemoveDynamicRequiresModule = require(appChat.Flags.getFFla
 local fFlagEnablePartyQuickStartButton = require(parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
-local function _(p0, p1) --[[ line: 23 | named "wrapScreenInOverlayNavigator" ]]
+local function _(p0, p1)
 	-- upvalues: createOverlayTopBarStackNavigatorWithFocusModule (ref)
 	return createOverlayTopBarStackNavigatorWithFocusModule({ { [p0] = p1 } })
 end
@@ -28,7 +28,7 @@ local list = {
 	{
 		[enumScreensModule.ChatLanding] = {
 			screen = chatLandingScreenWithSwitchNavigatorModule,
-			navigationOptions = if getFFlagAppChatRemoveDynamicRequiresModule() then function() --[[ line: 45 ]]
+			navigationOptions = if getFFlagAppChatRemoveDynamicRequiresModule() then function()
 				return { backButtonEnabled = false, tabBarVisible = true }
 			end else { backButtonEnabled = false, tabBarVisible = true }
 		}

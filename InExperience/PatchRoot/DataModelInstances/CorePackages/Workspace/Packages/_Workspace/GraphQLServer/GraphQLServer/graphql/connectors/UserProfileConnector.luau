@@ -18,11 +18,11 @@ local var6 = urlBuilder.new({
 })()
 
 return {
-	fetchProfilesByIds = function(p0, p1, p2) --[[ line: 33 ]]
+	fetchProfilesByIds = function(p0, p1, p2)
 		-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), httpService (ref), fFlagUserProfileBetterErrorsModule (ref), response (ref), graphQLError (ref)
 		local var7 = p2 or fetch
 		
-		return promiseModule.new(function(p3, p4) --[[ line: 39 ]]
+		return promiseModule.new(function(p3, p4)
 			-- upvalues: var7 (ref), var6 (copy), httpService (copy), p0 (ref), p1 (ref), fFlagUserProfileBetterErrorsModule (copy), response (copy), graphQLError (copy)
 			local var8 = var7(var6, {
 				method = "POST",
@@ -31,7 +31,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function(p5) --[[ line: 51 ]]
+			}):catch(function(p5)
 				-- upvalues: fFlagUserProfileBetterErrorsModule (copy), response (copy)
 				if fFlagUserProfileBetterErrorsModule then
 					local var10 = response.error()
@@ -43,7 +43,7 @@ return {
 			end):expect()
 			
 			if var8.ok then
-				local var9 = var8:json():catch(function() --[[ line: 82 ]]
+				local var9 = var8:json():catch(function()
 					return nil
 				end):expect()
 				

@@ -7,7 +7,7 @@ local _ = require(abuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics
 local abuseReportBuilderModule = require(abuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
 local fFlagAddPreselectedAbuseTypeAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAddPreselectedAbuseTypeAnalytics
 
-local var5 = function(p0, p1, p2) --[[ line: 15 ]]
+local var5 = function(p0, p1, p2)
 	-- upvalues: abuseReportBuilderModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref)
 	local var6 = if p0.menuOpenedUnixTimestampMilliseconds > 0 then math.floor(math.floor(workspace:GetServerTimeNow() * 1000) - p0.menuOpenedUnixTimestampMilliseconds) else 0
 	local var7, _ = abuseReportBuilderModule.interpretAnnotations(p1)
@@ -36,7 +36,7 @@ local var5 = function(p0, p1, p2) --[[ line: 15 ]]
 end
 
 return {
-	forPersonReport = function(p3, p4, p5) --[[ line: 64 ]]
+	forPersonReport = function(p3, p4, p5)
 		-- upvalues: var5 (ref), constantsModule (ref)
 		local var8 = var5(p3, p4, p5)
 		local var9 = nil
@@ -53,7 +53,7 @@ return {
 		
 		return var8
 	end,
-	forExperienceReport = function(p6, p7, p8) --[[ line: 86 ]]
+	forExperienceReport = function(p6, p7, p8)
 		-- upvalues: var5 (ref), constantsModule (ref)
 		local var10 = var5(p6, p7, p8)
 		var10.typeofabuseSelection = constantsModule.AnalyticsAbuseMethods.Game

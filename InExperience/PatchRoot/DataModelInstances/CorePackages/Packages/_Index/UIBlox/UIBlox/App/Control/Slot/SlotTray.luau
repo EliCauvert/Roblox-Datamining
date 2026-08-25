@@ -36,7 +36,7 @@ local var10 = tModule.strictInterface({
 	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
 })
 
-local function useScrollingFrameMotor(p0, p1) --[[ line: 117 ]]
+local function useScrollingFrameMotor(p0, p1)
 	-- upvalues: reactModule (ref), otterModule (ref)
 	local var12 = reactModule.useRef(nil)
 	
@@ -44,16 +44,16 @@ local function useScrollingFrameMotor(p0, p1) --[[ line: 117 ]]
 		var12.current = otterModule.createSingleMotor(p1 or 0)
 	end
 	local current = var12.current
-	reactModule.useEffect(function() --[[ line: 123 ]]
+	reactModule.useEffect(function()
 		-- upvalues: current (ref), p0 (ref)
-		current:onStep(function(p2) --[[ line: 124 ]]
+		current:onStep(function(p2)
 			-- upvalues: p0 (copy)
 			if p0.current ~= nil then
 				p0.current.CanvasPosition = Vector2.new(p2, 0)
 			end
 		end)
 		
-		return function() --[[ line: 130 ]]
+		return function()
 			-- upvalues: current (copy)
 			current:destroy()
 		end
@@ -62,7 +62,7 @@ local function useScrollingFrameMotor(p0, p1) --[[ line: 117 ]]
 	return current
 end
 
-return function(p3) --[[ line: 138 | named "SlotTray" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), roactGamepadModule (ref), useScrollingFrameMotor (ref), otterModule (ref), t (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), var10 (ref), cryoModule (ref), focusable (ref), tileSlotModule (ref)
 	local var13 = p3.isRoactGamepadEnabled ~= nil or p3.isRoactGamepadEnabled
 	local var14 = if var13 then roactGamepadModule.useRefCache() else reactModule.useRef({}).current
@@ -70,7 +70,7 @@ return function(p3) --[[ line: 138 | named "SlotTray" ]]
 	local width = p3.width or 360
 	local var17 = useScrollingFrameMotor(var15, 0)
 	local var18, var19 = reactModule.useState(p3.defaultSelectedSlotIndex or 1)
-	reactModule.useEffect(function() --[[ line: 155 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (write), var18 (ref), var14 (ref), width (ref), var17 (ref), otterModule (copy), t (copy)
 		local current = var15.current
 		
@@ -98,7 +98,7 @@ return function(p3) --[[ line: 138 | named "SlotTray" ]]
 		var15,
 		var17
 	})
-	local var20 = reactModule.useCallback(function(p4) --[[ line: 187 ]]
+	local var20 = reactModule.useCallback(function(p4)
 		-- upvalues: var19 (ref), p3 (ref)
 		var19(p4)
 		p3.onChange(p4)
@@ -108,7 +108,7 @@ return function(p3) --[[ line: 138 | named "SlotTray" ]]
 	local var23 = useSelectionCursorModule(cursorKindModule.RoundedSlot)
 	assert(var10(p3))
 	local theme = var22.Theme
-	local var24 = cryoModule.List.map(p3.slots, function(p5, p6) --[[ line: 200 ]]
+	local var24 = cryoModule.List.map(p3.slots, function(p5, p6)
 		-- upvalues: var13 (ref), var14 (ref), reactModule (copy), focusable (copy), p3 (ref), var20 (ref), var23 (ref), tileSlotModule (copy), var18 (ref)
 		if not var13 then
 			var14[p6] = var14[p6] or reactModule.createRef()
@@ -122,7 +122,7 @@ return function(p3) --[[ line: 138 | named "SlotTray" ]]
 			ref = var14[p6],
 			NextSelectionRight = if p6 < #p3.slots then var14[p6 + 1] else nil,
 			NextSelectionLeft = if p6 > 1 then var14[p6 - 1] else nil,
-			onFocusGained = if var13 then function() --[[ line: 215 ]]
+			onFocusGained = if var13 then function()
 				-- upvalues: var20 (copy), p6 (ref)
 				var20(p6)
 			end else nil,

@@ -18,7 +18,7 @@ local accept = images["icons/actions/accept"]
 local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention.InExperienceInterventionAnalytics)
 local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
 
-function getDynamicViewTagForTranslatedText(p0, p1, p2) --[[ line: 33 ]]
+function getDynamicViewTagForTranslatedText(p0, p1, p2)
 	-- upvalues: constants (ref)
 	local var6 = "align-x-center align-y-center row"
 	local var7 = string.len(p0) + string.len(p1)
@@ -29,7 +29,7 @@ function getDynamicViewTagForTranslatedText(p0, p1, p2) --[[ line: 33 ]]
 	return var6
 end
 
-function InterventionFeedbackFooter(p3) --[[ line: 45 ]]
+function InterventionFeedbackFooter(p3)
 	-- upvalues: useLocalization (ref), constants (ref), useLayerCollector (ref), useStyle (ref), notificationModalsManagerModule (ref), accept (ref), inExperienceInterventionAnalyticsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), buttonVariant (ref), buttonSize (ref), fillBehavior (ref)
 	local var8 = useLocalization(constants.localizationKeys)
 	local var9 = useStyle()
@@ -64,7 +64,7 @@ function InterventionFeedbackFooter(p3) --[[ line: 45 ]]
 			Button = reactModule.createElement(button, {
 				text = var8.LetUsKnowLinkText,
 				variant = buttonVariant.Text,
-				onActivated = function() --[[ line: 55 ]]
+				onActivated = function()
 					-- upvalues: p3 (ref), notificationModalsManagerModule (copy), accept (copy), var8 (ref), var9 (ref), inExperienceInterventionAnalyticsModule (copy)
 					p3.onDismiss()
 					notificationModalsManagerModule.SetUIBloxToast({

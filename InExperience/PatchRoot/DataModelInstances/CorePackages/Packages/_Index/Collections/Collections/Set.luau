@@ -7,10 +7,10 @@ local forEachModule = require(parent.Array.forEach)
 local fromStringModule = require(parent.Array.from.fromString)
 local _ = require(parent_1.ES7Types)
 local t = {
-	__iter = function(p0) --[[ line: 39 ]]
+	__iter = function(p0)
 		return next, p0._array
 	end,
-	__tostring = function(p1) --[[ line: 42 ]]
+	__tostring = function(p1)
 		-- upvalues: inspectModule (ref)
 		local var5 = "Set "
 		
@@ -22,7 +22,7 @@ local t = {
 }
 t.__index = t
 
-function t.new(p2) --[[ line: 54 ]]
+function t.new(p2)
 	-- upvalues: isArrayModule (ref), dEV (ref), fromStringModule (ref), t (ref)
 	local list
 	local _ = nil
@@ -66,7 +66,7 @@ function t.new(p2) --[[ line: 54 ]]
 	return setmetatable({ size = #list, _map = t_1, _array = list }, t)
 end
 
-function t:add(p3) --[[ line: 100 ]]
+function t:add(p3)
 	if not self._map[p3] then
 		self.size += 1
 		self._map[p3] = true
@@ -75,13 +75,13 @@ function t:add(p3) --[[ line: 100 ]]
 	return self
 end
 
-function t:clear() --[[ line: 110 ]]
+function t:clear()
 	self.size = 0
 	table.clear(self._map)
 	table.clear(self._array)
 end
 
-function t:delete(p4) --[[ line: 116 ]]
+function t:delete(p4)
 	if not self._map[p4] then
 		return false
 	end
@@ -95,12 +95,12 @@ function t:delete(p4) --[[ line: 116 ]]
 	return true
 end
 
-function t:forEach(p5, p6) --[[ line: 132 ]]
+function t:forEach(p5, p6)
 	-- upvalues: forEachModule (ref)
 	if typeof(p5) ~= "function" then
 		error("callback is not a function")
 	end
-	forEachModule(self._array, function(p7) --[[ line: 138 ]]
+	forEachModule(self._array, function(p7)
 		-- upvalues: p6 (ref), p5 (ref), self (ref)
 		if p6 == nil then
 			p5(p7, p7, self)
@@ -111,11 +111,11 @@ function t:forEach(p5, p6) --[[ line: 132 ]]
 	end)
 end
 
-function t:has(p8) --[[ line: 147 ]]
+function t:has(p8)
 	return self._map[p8] ~= nil
 end
 
-function t:ipairs() --[[ line: 151 ]]
+function t:ipairs()
 	-- upvalues: dEV (ref)
 	if dEV then
 		warn(debug.traceback("`for _,_ in mySet:ipairs() do` is deprecated and will be removed in a future release, please use `for _,_ in mySet do` instead\n", 2))

@@ -26,7 +26,7 @@ local _ = require(script.Parent.watchQueryOptions)
 local localState = require(script.Parent.LocalState).LocalState
 local _ = require(script.Parent.ApolloClient_types)
 
-local function mergeOptions(p0, p1) --[[ line: 133 ]]
+local function mergeOptions(p0, p1)
 	-- upvalues: compact (ref), boolean (ref), object (ref)
 	return compact(p0, p1, boolean.toJSBoolean(p1.variables) and ({
 		variables = object.assign({}, p0.variables, p1.variables)
@@ -37,7 +37,7 @@ t.mergeOptions = mergeOptions
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p2) --[[ line: 189 ]]
+function t_1.new(p2)
 	-- upvalues: t_1 (ref), boolean (ref), httpLink (ref), apolloLink (ref), invariantError (ref), setTimeout (ref), version (ref), localState (ref), queryManager (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.defaultOptions = {}
@@ -79,7 +79,7 @@ function t_1.new(p2) --[[ line: 189 ]]
 	tbl.typeDefs = typeDefs
 	
 	if boolean.toJSBoolean(var9) then
-		setTimeout(function() --[[ line: 271 ]]
+		setTimeout(function()
 			-- upvalues: tbl (ref)
 			tbl.disableNetworkFetches = false
 			
@@ -101,17 +101,17 @@ function t_1.new(p2) --[[ line: 189 ]]
 		clientAwareness = { name = name, version = version_1 },
 		localState = tbl.localState,
 		assumeImmutableResults = var12,
-		onBroadcast = if var10 then function() --[[ line: 425 ]] end else nil
+		onBroadcast = if var10 then function() end else nil
 	})
 	
 	return tbl
 end
 
-function t_1:stop() --[[ line: 438 ]]
+function t_1:stop()
 	self.queryManager:stop()
 end
 
-function t_1:watchQuery(p3) --[[ line: 461 ]]
+function t_1:watchQuery(p3)
 	-- upvalues: boolean (ref), mergeOptions (ref), object (ref)
 	if boolean.toJSBoolean(self.defaultOptions.watchQuery) then
 		p3 = mergeOptions(self.defaultOptions.watchQuery, p3)
@@ -122,7 +122,7 @@ function t_1:watchQuery(p3) --[[ line: 461 ]]
 	return self.queryManager:watchQuery(p3)
 end
 
-function t_1:query(p4) --[[ line: 486 ]]
+function t_1:query(p4)
 	-- upvalues: boolean (ref), mergeOptions (ref), invariant (ref), object (ref)
 	if boolean.toJSBoolean(self.defaultOptions.query) then
 		p4 = mergeOptions(self.defaultOptions.query, p4)
@@ -135,7 +135,7 @@ function t_1:query(p4) --[[ line: 486 ]]
 	return self.queryManager:query(p4)
 end
 
-function t_1:mutate(p5) --[[ line: 513 ]]
+function t_1:mutate(p5)
 	-- upvalues: boolean (ref), mergeOptions (ref)
 	if boolean.toJSBoolean(self.defaultOptions.mutate) then
 		p5 = mergeOptions(self.defaultOptions.mutate, p5)
@@ -143,108 +143,108 @@ function t_1:mutate(p5) --[[ line: 513 ]]
 	return self.queryManager:mutate(p5)
 end
 
-function t_1:subscribe(p6) --[[ line: 526 ]]
+function t_1:subscribe(p6)
 	return self.queryManager:startGraphQLSubscription(p6)
 end
 
-function t_1:readQuery(p7, p8) --[[ line: 539 ]]
+function t_1:readQuery(p7, p8)
 	if p8 == nil then
 		p8 = false
 	end
 	return self.cache:readQuery(p7, p8)
 end
 
-function t_1:readFragment(p9, p10) --[[ line: 560 ]]
+function t_1:readFragment(p9, p10)
 	if p10 == nil then
 		p10 = false
 	end
 	return self.cache:readFragment(p9, p10)
 end
 
-function t_1:writeQuery(p11) --[[ line: 572 ]]
+function t_1:writeQuery(p11)
 	self.cache:writeQuery(p11)
 	self.queryManager:broadcastQueries()
 end
 
-function t_1:writeFragment(p12) --[[ line: 588 ]]
+function t_1:writeFragment(p12)
 	self.cache:writeFragment(p12)
 	self.queryManager:broadcastQueries()
 end
 
-function t_1:__actionHookForDevTools(p13) --[[ line: 593 ]]
+function t_1:__actionHookForDevTools(p13)
 	self.devToolsHookCb = p13
 end
 
-function t_1:__requestRaw(p14) --[[ line: 597 ]]
+function t_1:__requestRaw(p14)
 	-- upvalues: execute (ref)
 	return execute(self.link, p14)
 end
 
-function t_1.resetStore(value) --[[ line: 617 ]]
+function t_1.resetStore(value)
 	-- upvalues: promiseModule (ref), array (ref)
-	return promiseModule.delay(0):andThen(function() --[[ line: 619 ]]
+	return promiseModule.delay(0):andThen(function()
 		-- upvalues: value (ref)
 		return value.queryManager:clearStore()
-	end):andThen(function() --[[ line: 622 ]]
+	end):andThen(function()
 		-- upvalues: promiseModule (copy), array (copy), value (ref)
-		return promiseModule.all(array.map(value.resetStoreCallbacks, function(p15) --[[ line: 623 ]]
+		return promiseModule.all(array.map(value.resetStoreCallbacks, function(p15)
 			return p15()
 		end))
-	end):andThen(function() --[[ line: 627 ]]
+	end):andThen(function()
 		-- upvalues: value (ref)
 		return value:reFetchObservableQueries()
 	end)
 end
 
-function t_1.clearStore(p16) --[[ line: 636 ]]
+function t_1.clearStore(p16)
 	-- upvalues: promiseModule (ref), array (ref)
-	return promiseModule.delay(0):andThen(function() --[[ line: 638 ]]
+	return promiseModule.delay(0):andThen(function()
 		-- upvalues: p16 (ref)
 		return p16.queryManager:clearStore()
-	end):andThen(function() --[[ line: 641 ]]
+	end):andThen(function()
 		-- upvalues: promiseModule (copy), array (copy), p16 (ref)
-		return promiseModule.all(array.map(p16.clearStoreCallbacks, function(p17) --[[ line: 642 ]]
+		return promiseModule.all(array.map(p16.clearStoreCallbacks, function(p17)
 			return p17()
 		end))
 	end)
 end
 
-function t_1:onResetStore(p18) --[[ line: 653 ]]
+function t_1:onResetStore(p18)
 	-- upvalues: array (ref)
 	table.insert(self.resetStoreCallbacks, p18)
 	
-	return function() --[[ line: 655 ]]
+	return function()
 		-- upvalues: self (ref), array (copy), p18 (ref)
-		self.resetStoreCallbacks = array.filter(self.resetStoreCallbacks, function(p19) --[[ line: 656 ]]
+		self.resetStoreCallbacks = array.filter(self.resetStoreCallbacks, function(p19)
 			-- upvalues: p18 (copy)
 			return p19 ~= p18
 		end)
 	end
 end
 
-function t_1:onClearStore(p20) --[[ line: 667 ]]
+function t_1:onClearStore(p20)
 	-- upvalues: array (ref)
 	table.insert(self.clearStoreCallbacks, p20)
 	
-	return function() --[[ line: 669 ]]
+	return function()
 		-- upvalues: self (ref), array (copy), p20 (ref)
-		self.clearStoreCallbacks = array.filter(self.clearStoreCallbacks, function(p21) --[[ line: 670 ]]
+		self.clearStoreCallbacks = array.filter(self.clearStoreCallbacks, function(p21)
 			-- upvalues: p20 (copy)
 			return p21 ~= p20
 		end)
 	end
 end
 
-function t_1:reFetchObservableQueries(p22) --[[ line: 688 ]]
+function t_1:reFetchObservableQueries(p22)
 	return self.queryManager:reFetchObservableQueries(p22)
 end
 
-function t_1:refetchQueries(p23) --[[ line: 703 ]]
+function t_1:refetchQueries(p23)
 	-- upvalues: promiseModule (ref), invariant (ref)
 	local var13 = self.queryManager:refetchQueries(p23)
 	local t = {}
 	local t_1 = {}
-	var13:forEach(function(p24, p25) --[[ line: 708 ]]
+	var13:forEach(function(p24, p25)
 		-- upvalues: t (ref), t_1 (ref)
 		table.insert(t, p25)
 		table.insert(t_1, p24)
@@ -252,7 +252,7 @@ function t_1:refetchQueries(p23) --[[ line: 703 ]]
 	local var16 = promiseModule.all(t_1)
 	var16.queries = t
 	var16.results = t_1
-	var16:catch(function(p26) --[[ line: 723 ]]
+	var16:catch(function(p26)
 		-- upvalues: invariant (copy)
 		invariant.debug(("In client.refetchQueries, Promise.all promise rejected with error %s"):format(p26.message))
 	end)
@@ -260,38 +260,38 @@ function t_1:refetchQueries(p23) --[[ line: 703 ]]
 	return var16
 end
 
-function t_1:getObservableQueries(p27) --[[ line: 738 ]]
+function t_1:getObservableQueries(p27)
 	if p27 == nil then
 		p27 = "active"
 	end
 	return self.queryManager:getObservableQueries(p27)
 end
 
-function t_1:extract(p28) --[[ line: 748 ]]
+function t_1:extract(p28)
 	return self.cache:extract(p28)
 end
 
-function t_1:restore(p29) --[[ line: 759 ]]
+function t_1:restore(p29)
 	return self.cache:restore(p29)
 end
 
-function t_1:addResolvers(p30) --[[ line: 766 ]]
+function t_1:addResolvers(p30)
 	self.localState:addResolvers(p30)
 end
 
-function t_1:setResolvers(p31) --[[ line: 773 ]]
+function t_1:setResolvers(p31)
 	self.localState:setResolvers(p31)
 end
 
-function t_1:getResolvers() --[[ line: 780 ]]
+function t_1:getResolvers()
 	return self.localState:getResolvers()
 end
 
-function t_1:setLocalStateFragmentMatcher(p32) --[[ line: 787 ]]
+function t_1:setLocalStateFragmentMatcher(p32)
 	self.localState:setFragmentMatcher(p32)
 end
 
-function t_1:setLink(p33) --[[ line: 794 ]]
+function t_1:setLink(p33)
 	self.queryManager.link = p33
 	self.link = self.queryManager.link
 end

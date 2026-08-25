@@ -9,7 +9,7 @@ local react = dependenciesModule.React
 local clearInterval = luauPolyfill.clearInterval
 local setInterval = luauPolyfill.setInterval
 
-return function(value, p0) --[[ line: 26 | named "useTimeRemainingMap" ]]
+return function(value, p0)
 	-- upvalues: react (ref), getNearestWholeNumber (ref), calculateTimeRemaining (ref), setInterval (ref), clearInterval (ref)
 	local _, var2 = react.useState(0)
 	local t = {}
@@ -23,14 +23,14 @@ return function(value, p0) --[[ line: 26 | named "useTimeRemainingMap" ]]
 		end
 		t[i] = math.max(0, var5)
 	end
-	react.useEffect(function() --[[ line: 43 ]]
+	react.useEffect(function()
 		-- upvalues: var4 (write), setInterval (copy), var2 (ref), clearInterval (copy)
-		local var6 = if not var4 then setInterval(function() --[[ line: 46 ]]
+		local var6 = if not var4 then setInterval(function()
 			-- upvalues: var2 (copy)
 			var2(os.clock())
 		end, 100) else nil
 		
-		return function() --[[ line: 51 ]]
+		return function()
 			-- upvalues: var6 (write), clearInterval (copy)
 			if var6 then
 				clearInterval(var6)

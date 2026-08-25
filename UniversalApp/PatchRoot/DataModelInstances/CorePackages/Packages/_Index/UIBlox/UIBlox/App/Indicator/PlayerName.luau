@@ -12,7 +12,7 @@ local useStyleModule = require(parent_1.Core.Style.useStyle)
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local openTypeSupportModule = require(parent_1.Utility.OpenTypeSupport)
 
-local function getStyleDefaults(p0) --[[ line: 81 ]]
+local function getStyleDefaults(p0)
 	-- upvalues: UIBloxConfigModule (ref)
 	return {
 		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p0.Size.Size_50 else p0.Global.Space_25,
@@ -23,7 +23,7 @@ local function getStyleDefaults(p0) --[[ line: 81 ]]
 	}
 end
 
-local function getDisplayNameStyleDefaults(p1) --[[ line: 101 ]]
+local function getDisplayNameStyleDefaults(p1)
 	-- upvalues: UIBloxConfigModule (ref)
 	return {
 		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Size.Size_50 else p1.Global.Space_25,
@@ -33,7 +33,7 @@ local function getDisplayNameStyleDefaults(p1) --[[ line: 101 ]]
 	}
 end
 
-local function getUserNameStyleDefaults(p2) --[[ line: 118 ]]
+local function getUserNameStyleDefaults(p2)
 	-- upvalues: UIBloxConfigModule (ref)
 	return {
 		iconLabelSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Size.Size_50 else p2.Global.Space_25,
@@ -44,7 +44,7 @@ local function getUserNameStyleDefaults(p2) --[[ line: 118 ]]
 	}
 end
 
-local function NameItem(p3) --[[ line: 138 ]]
+local function NameItem(p3)
 	-- upvalues: cryoModule (ref), reactModule (ref), label (ref), skeleton (ref), UIBloxConfigModule (ref)
 	local createElement_1
 	local layoutOrder = p3.layoutOrder
@@ -135,7 +135,7 @@ local function NameItem(p3) --[[ line: 138 ]]
 	return createElement(var17, t, t_1)
 end
 
-return function(p4) --[[ line: 243 | named "PlayerName" ]]
+return function(p4)
 	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), NameItem (ref), getDisplayNameStyleDefaults (ref), openTypeSupportModule (ref), getUserNameStyleDefaults (ref), getStyleDefaults (ref)
 	local var20 = useStyleModule()
 	local position = p4.position

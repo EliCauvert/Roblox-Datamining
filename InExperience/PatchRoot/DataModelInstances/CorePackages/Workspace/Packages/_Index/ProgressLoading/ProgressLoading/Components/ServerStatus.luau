@@ -15,21 +15,21 @@ local useTokens = foundationModule.Hooks.useTokens
 local queuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
 local fFlagEnableLuaAppsFollowUserId = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and require(parent.SharedFlags).FFlagEnableLuaAppsFollowUserId
 
-local function getStoreJoinState(p0) --[[ line: 29 ]]
+local function getStoreJoinState(p0)
 	-- upvalues: getLoadingScreenStoreModule (ref)
 	local var14 = getLoadingScreenStoreModule(p0)
 	
 	return if p0 and var14 and var14.getJoinState then var14.getJoinState(p0) else ""
 end
 
-local function getStoreServerStatusText(p1) --[[ line: 37 ]]
+local function getStoreServerStatusText(p1)
 	-- upvalues: getLoadingScreenStoreModule (ref)
 	local var15 = getLoadingScreenStoreModule(p1)
 	
 	return if p1 and var15 and var15.getServerStatusText then var15.getServerStatusText(p1) else ""
 end
 
-return reactModule.memo(function(p2) --[[ line: 54 ]]
+return reactModule.memo(function(p2)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), guiService (ref), signalsReactModule (ref), getStoreJoinState (ref), getStoreServerStatusText (ref), placeLauncherStateModule (ref), loadingScreenTelemetryModule (ref), fFlagEnableLuaAppsFollowUserId (ref), experienceService (ref), queuePositionEnabledEngineFeature (ref), foundationModule (ref), coreGuiService (ref)
 	local var16 = useTokens()
 	local var17 = useLocalization({
@@ -39,7 +39,7 @@ return reactModule.memo(function(p2) --[[ line: 54 ]]
 	})
 	local var18 = reactModule.useRef(0)
 	local var19 = reactModule.useRef(1e999)
-	local var20 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref), var19 (ref), guiService (copy)
 		if var18.current == 0 then
 			var18.current = 1
@@ -52,7 +52,7 @@ return reactModule.memo(function(p2) --[[ line: 54 ]]
 		var18.current = 0
 		var19.current = 1e999
 	end, {})
-	local var21 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), var20 (ref)
 		if not p2.isSubjectToChinaPolicies then
 			var20()
@@ -61,7 +61,7 @@ return reactModule.memo(function(p2) --[[ line: 54 ]]
 	local var22 = signalsReactModule.useSignalState(getStoreJoinState)
 	local var23 = signalsReactModule.useSignalBinding(getStoreServerStatusText)
 	local var24 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 89 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref), placeLauncherStateModule (copy), var24 (ref)
 		if var22 == placeLauncherStateModule.Queued then
 			var24.current = os.clock()
@@ -119,7 +119,7 @@ return reactModule.memo(function(p2) --[[ line: 54 ]]
 			}),
 			ActionButton = reactModule.createElement(foundationModule.Button, {
 				LayoutOrder = 2,
-				onActivated = reactModule.useCallback(function() --[[ line: 95 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var24 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId (copy), experienceService (copy), p2 (ref), queuePositionEnabledEngineFeature (copy)
 					loadingScreenTelemetryModule.logQueuedStateButtonClick({
 						buttonName = "JoinNewServer",

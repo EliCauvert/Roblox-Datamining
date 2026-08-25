@@ -14,7 +14,7 @@ return {
 		"Asset_EF_HeadWithExpandingFacs",
 		"Asset_EF_HeadWithShrinkingFacs"
 	},
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationService (ref), UGCValidationMinimumHeadSizePercentAcrossFacs (ref), errorSourceStringsModule (ref), UGCValidationMaximumHeadSizePercentAcrossFacs (ref)
 		local head = p1.renderMeshesData.Head
 		local var5, var6 = unpack(UGCValidationService:GetMinAndMaxMeshSizeAcrossAllFacs(head.editable))

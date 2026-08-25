@@ -4,13 +4,13 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local var3 = require(parent.UserProfiles).Stores.UserProfileStore.get()
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signalsModule (ref), var3 (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 12 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: p0 (ref), signalsModule (copy), var3 (copy)
-		return if p0 == "" then function() --[[ line: 14 ]]
+		return if p0 == "" then function()
 			return ""
-		end else signalsModule.createComputed(function(p1) --[[ line: 19 ]]
+		end else signalsModule.createComputed(function(p1)
 			-- upvalues: var3 (copy), p0 (copy)
 			local var4 = var3.fetchNamesByUserIds({ p0 })(p1)
 			local var5 = var4 and (var4.data and var4.data[1])

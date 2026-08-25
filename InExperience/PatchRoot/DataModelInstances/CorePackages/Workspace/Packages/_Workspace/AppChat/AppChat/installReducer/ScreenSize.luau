@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 3 ]]
+﻿return function(p0, p1)
 	p0 = p0 or Vector2.new(0, 0)
 	assert(p0, "")
 	

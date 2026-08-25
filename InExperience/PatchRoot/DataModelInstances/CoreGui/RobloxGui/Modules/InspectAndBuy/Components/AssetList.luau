@@ -12,7 +12,7 @@ local setAssetFromBundleInfoModule = require(parent.Actions.SetAssetFromBundleIn
 local fFlagAddNewPlayerListMobileFocusNav = playerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
 local assetList = roactModule.PureComponent:extend("AssetList")
 
-function assetList.calculateCanvasSize(p0, p1, p2, p3) --[[ line: 25 ]]
+function assetList.calculateCanvasSize(p0, p1, p2, p3)
 	local current = p0.gridFrameRef.current
 	local _ = nil
 	local view = p0.props.views[p0.props.view]
@@ -22,7 +22,7 @@ function assetList.calculateCanvasSize(p0, p1, p2, p3) --[[ line: 25 ]]
 	end
 end
 
-function assetList.init(p4) --[[ line: 38 ]]
+function assetList.init(p4)
 	-- upvalues: roactModule (ref), fFlagAddNewPlayerListMobileFocusNav (ref)
 	local _ = nil
 	local view = p4.props.views[p4.props.view]
@@ -34,7 +34,7 @@ function assetList.init(p4) --[[ line: 38 ]]
 	}
 end
 
-function assetList.render(p5) --[[ line: 52 ]]
+function assetList.render(p5)
 	-- upvalues: roactModule (ref), assetCardModule (ref), skeleton (ref), fFlagAddNewPlayerListMobileFocusNav (ref)
 	local _ = nil
 	local view = p5.props.views[p5.props.view]
@@ -73,9 +73,9 @@ function assetList.render(p5) --[[ line: 52 ]]
 		BorderSizePixel = 0,
 		LayoutOrder = 3,
 		[roactModule.Ref] = p5.gridFrameRef,
-		[roactModule.Change.AbsoluteSize] = function(_) --[[ line: 104 ]]
+		[roactModule.Change.AbsoluteSize] = function(_)
 			-- upvalues: p5 (ref)
-			spawn(function() --[[ line: 105 ]]
+			spawn(function()
 				-- upvalues: p5 (copy)
 				p5:resize()
 			end)
@@ -83,12 +83,12 @@ function assetList.render(p5) --[[ line: 52 ]]
 	}, t)
 end
 
-function assetList.didMount(p6) --[[ line: 112 ]]
+function assetList.didMount(p6)
 	p6:resize()
 	p6.mounted = true
 end
 
-function assetList.updateAssetsFromBundles(value) --[[ line: 126 ]]
+function assetList.updateAssetsFromBundles(value)
 	-- upvalues: cryoModule (ref)
 	local bundles = value.props.bundles
 	local assetBundles = value.props.assetBundles
@@ -116,7 +116,7 @@ function assetList.updateAssetsFromBundles(value) --[[ line: 126 ]]
 	end
 end
 
-function assetList.didUpdate(p7, p8) --[[ line: 166 ]]
+function assetList.didUpdate(p7, p8)
 	-- upvalues: fFlagAddNewPlayerListMobileFocusNav (ref), guiService (ref)
 	if p7.props.view ~= p8.view then
 		p7:resize()
@@ -129,11 +129,11 @@ function assetList.didUpdate(p7, p8) --[[ line: 166 ]]
 	end
 end
 
-function assetList.willUnmount(p9) --[[ line: 186 ]]
+function assetList.willUnmount(p9)
 	p9.mounted = false
 end
 
-function assetList.resize(p10) --[[ line: 190 ]]
+function assetList.resize(p10)
 	local current = p10.gridFrameRef.current
 	local _ = nil
 	local view = p10.props.views[p10.props.view]
@@ -150,7 +150,7 @@ function assetList.resize(p10) --[[ line: 190 ]]
 	end
 end
 
-return roactRoduxModule.connect(function(p12, _) --[[ line: 221 ]]
+return roactRoduxModule.connect(function(p12, _)
 	return {
 		view = p12.view,
 		visible = p12.visible,
@@ -160,18 +160,18 @@ return roactRoduxModule.connect(function(p12, _) --[[ line: 221 ]]
 		detailsInformation = p12.detailsInformation,
 		gamepadEnabled = p12.gamepadEnabled
 	}
-end, function(p13) --[[ line: 231 ]]
+end, function(p13)
 	-- upvalues: setAssetFromBundleInfoModule (ref)
 	return {
-		dispatchSetAssetFromBundleInfo = function(value, p14) --[[ line: 233 ]]
+		dispatchSetAssetFromBundleInfo = function(value, p14)
 			-- upvalues: p13 (ref), setAssetFromBundleInfoModule (copy)
 			p13(setAssetFromBundleInfoModule(value, p14))
 		end
 	}
-end)(function(value) --[[ line: 212 | named "AssetListWrapper" ]]
+end)(function(value)
 	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), cryoModule (ref), assetList (ref)
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p11) --[[ line: 214 ]]
+		render = function(p11)
 			-- upvalues: cryoModule (copy), value (ref), roactModule (copy), assetList (copy)
 			return roactModule.createElement(assetList, cryoModule.Dictionary.join(value, { views = p11 }))
 		end

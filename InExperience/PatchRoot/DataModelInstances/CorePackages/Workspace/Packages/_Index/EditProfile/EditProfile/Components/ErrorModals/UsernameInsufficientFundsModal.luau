@@ -13,7 +13,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local char = utf8.char(57346)
 
-return function(p0) --[[ line: 23 | named "EditDisplayNameErrorModal" ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), textKeysModule (ref), char (ref), appPage (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
 	local var8 = useScreenSize()
 	local var9 = useLocalization({
@@ -27,12 +27,12 @@ return function(p0) --[[ line: 23 | named "EditDisplayNameErrorModal" ]]
 		}
 	})
 	
-	local function onClose() --[[ line: 33 ]]
+	local function onClose()
 		-- upvalues: p0 (ref)
 		p0.navigation.goBack()
 	end
 	
-	local var11 = function() --[[ line: 37 ]]
+	local var11 = function()
 		-- upvalues: p0 (ref), appPage (copy)
 		p0.navigation.navigate(appPage.PurchaseRobux)
 	end

@@ -49,16 +49,16 @@ local var7 = urlBuilder.new({
 	} else { featureNames = "{featureNames}" }
 })
 
-local function _(p0, p1, p2, p3) --[[ line: 54 | named "getUpsellFeatureAccessFromFeatureName" ]]
+local function _(p0, p1, p2, p3)
 	-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), response (ref)
-	return promiseModule.new(function(p4, p5) --[[ line: 61 ]]
+	return promiseModule.new(function(p4, p5)
 		-- upvalues: p1 (ref), var6 (copy), p0 (ref), p2 (ref), p3 (ref), fetch (ref), response (copy)
 		local var8 = fetch(var6({
 			featureName = p0,
 			successfulActions = table.concat(p1, ","),
 			nameSpace = p2,
 			extraParameters = p3
-		}), { method = "GET" }):catch(function() --[[ line: 70 ]]
+		}), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -72,7 +72,7 @@ local function _(p0, p1, p2, p3) --[[ line: 54 | named "getUpsellFeatureAccessFr
 			
 			return
 		end
-		local var9 = var8:json():catch(function() --[[ line: 88 ]]
+		local var9 = var8:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -91,18 +91,18 @@ local function _(p0, p1, p2, p3) --[[ line: 54 | named "getUpsellFeatureAccessFr
 end
 
 return {
-	upsellFeatureAccess = function(p6, p7, p8, p9) --[[ line: 107 ]]
+	upsellFeatureAccess = function(p6, p7, p8, p9)
 		-- upvalues: base64 (ref), httpService (ref), fetch (ref), promiseModule (ref), var6 (ref), response (ref), accessResponseEnum (ref)
 		local var10 = if p9 then base64.Encode(httpService:JSONEncode(p9)) else nil
 		
-		return promiseModule.new(function(p10, p11) --[[ line: 61 ]]
+		return promiseModule.new(function(p10, p11)
 			-- upvalues: p7 (ref), var6 (copy), p6 (ref), p8 (ref), var10 (ref), fetch (ref), response (copy)
 			local var8 = fetch(var6({
 				featureName = p6,
 				successfulActions = table.concat(p7, ","),
 				nameSpace = p8,
 				extraParameters = var10
-			}), { method = "GET" }):catch(function() --[[ line: 70 ]]
+			}), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
@@ -116,7 +116,7 @@ return {
 				
 				return
 			end
-			local var9 = var8:json():catch(function() --[[ line: 88 ]]
+			local var9 = var8:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -131,12 +131,12 @@ return {
 				return
 			end
 			p11("Failed to decode HTTP response as JSON for AMP Upsell Feature Access API")
-		end):catch(function(_) --[[ line: 117 ]]
+		end):catch(function(_)
 			-- upvalues: accessResponseEnum (copy)
 			return { access = accessResponseEnum.Error }
 		end):expect()
 	end,
-	upsellFeatureAccessGql = function(p12, p13, p14, p15, p16) --[[ line: 189 ]]
+	upsellFeatureAccessGql = function(p12, p13, p14, p15, p16)
 		-- upvalues: gql (ref), base64 (ref), httpService (ref), getFFlagAmpGqlPassSuccessfulActionsModule (ref), accessResponseEnum (ref)
 		local var11 = p12:query({
 			fetchPolicy = "network-only",
@@ -147,19 +147,19 @@ return {
 				nameSpace = p15,
 				extraParameters = if p16 then base64.Encode(httpService:JSONEncode(p16)) else nil
 			}
-		}):catch(function(_) --[[ line: 211 ]]
+		}):catch(function(_)
 			-- upvalues: accessResponseEnum (copy)
 			return { access = accessResponseEnum.Error }
 		end):expect()
 		
 		return if var11.data and var11.data.getUpsellFeatureAccess.featureAccess then var11.data.getUpsellFeatureAccess.featureAccess else { access = accessResponseEnum.Error }
 	end,
-	getFeatureAccess = function(p17, p18) --[[ line: 126 ]]
+	getFeatureAccess = function(p17, p18)
 		-- upvalues: fetch (ref), promiseModule (ref), fFlagAllowAmpV2FeatureAccessCall (ref), var7 (ref), response (ref), accessResponseEnum (ref)
-		return promiseModule.new(function(p19, p20) --[[ line: 128 ]]
+		return promiseModule.new(function(p19, p20)
 			-- upvalues: p17 (ref), fFlagAllowAmpV2FeatureAccessCall (copy), var7 (copy), p18 (ref), fetch (ref), response (copy)
 			local joined = table.concat(p17, ",")
-			local var13 = fetch(if fFlagAllowAmpV2FeatureAccessCall then var7({ featureNames = joined, nameSpace = p18 or "" }) else var7({ featureNames = joined }), { method = "GET" }):catch(function() --[[ line: 140 ]]
+			local var13 = fetch(if fFlagAllowAmpV2FeatureAccessCall then var7({ featureNames = joined, nameSpace = p18 or "" }) else var7({ featureNames = joined }), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
@@ -173,7 +173,7 @@ return {
 				
 				return
 			end
-			local var14 = var13:json():catch(function() --[[ line: 158 ]]
+			local var14 = var13:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -188,7 +188,7 @@ return {
 				table.insert(t, { feature = v.featureName, access = v.access })
 			end
 			p19({ featureAccessList = t })
-		end):catch(function(_) --[[ line: 181 ]]
+		end):catch(function(_)
 			-- upvalues: accessResponseEnum (copy)
 			return { access = accessResponseEnum.Error }
 		end):expect()

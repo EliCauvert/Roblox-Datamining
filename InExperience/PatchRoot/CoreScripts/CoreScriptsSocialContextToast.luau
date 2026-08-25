@@ -10,7 +10,7 @@ local getFFlagEnableReferredPlayerJoinRemoteEvent = require(corePackagesService.
 local getFIntReferredPlayerJoinRemoteEventTimeout = require(corePackagesService.Workspace.Packages.SharedFlags).GetFIntReferredPlayerJoinRemoteEventTimeout
 local httpRequestModule = require(corePackagesService.Packages.HttpRequest)
 local var6 = httpRequestModule.config({
-	requestFunction = function(p0, p1, p2) --[[ line: 19 ]]
+	requestFunction = function(p0, p1, p2)
 		-- upvalues: httpRequestModule (ref)
 		return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
 	end,

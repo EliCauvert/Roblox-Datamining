@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnablePerformPurchaseGCSHandling", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnablePerformPurchaseGCSHandling")
 end

@@ -1,5 +1,5 @@
 ﻿local t = {
-	RgbFromHex = function(p0) --[[ line: 3 ]]
+	RgbFromHex = function(p0)
 		assert(p0 >= 0 and p0 <= 16777215, "RgbFromHex: Out of range")
 		local var1 = p0 % 256
 		p0 = (p0 - var1) / 256
@@ -9,7 +9,7 @@
 	end
 }
 
-function t.Color3FromHex(p1) --[[ line: 15 ]]
+function t.Color3FromHex(p1)
 	-- upvalues: t (ref)
 	return Color3.fromRGB(t.RgbFromHex(p1))
 end

@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3, p4) --[[ line: 1 ]]
+﻿return function(p0, p1, p2, p3, p4)
 	local var0 = p2
 	
 	if p1 then

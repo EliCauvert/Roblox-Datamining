@@ -5,11 +5,11 @@ local reactIsModule = require(parent.ReactIs)
 local contentProvider = require(foundation.Utility.Wrappers).Services.ContentProvider
 local _ = require(foundation.Components.Types)
 
-local function _(value) --[[ line: 21 | named "isFinalAssetFetchStatus" ]]
+local function _(value)
 	return if value ~= Enum.AssetFetchStatus.Success then if value ~= Enum.AssetFetchStatus.Failure then value == Enum.AssetFetchStatus.TimedOut else true else true
 end
 
-local function attachOnLoaded(p0, p1) --[[ line: 27 ]]
+local function attachOnLoaded(p0, p1)
 	-- upvalues: contentProvider (ref)
 	if p0 == nil then return end
 	local var4 = contentProvider:GetAssetFetchStatus(p0)
@@ -19,7 +19,7 @@ local function attachOnLoaded(p0, p1) --[[ line: 27 ]]
 		
 		return
 	end
-	return contentProvider:GetAssetFetchStatusChangedSignal(p0):Connect(function(p2) --[[ line: 41 ]]
+	return contentProvider:GetAssetFetchStatusChangedSignal(p0):Connect(function(p2)
 		-- upvalues: p1 (ref)
 		if if p2 ~= Enum.AssetFetchStatus.Success then if p2 ~= Enum.AssetFetchStatus.Failure then p2 == Enum.AssetFetchStatus.TimedOut else true else true then
 			p1(p2)
@@ -27,14 +27,14 @@ local function attachOnLoaded(p0, p1) --[[ line: 27 ]]
 	end)
 end
 
-return function(p3, p4) --[[ line: 48 | named "useOnLoaded" ]]
+return function(p3, p4)
 	-- upvalues: reactModule (ref), reactIsModule (ref), attachOnLoaded (ref)
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p4 (ref), reactIsModule (copy), p3 (ref), attachOnLoaded (copy), reactModule (copy)
 		if not p4 then return end
 		local var5 = nil
 		
-		local function _() --[[ line: 55 | named "disconnectConnection" ]]
+		local function _()
 			-- upvalues: var5 (write)
 			if var5 then
 				var5:Disconnect()
@@ -42,7 +42,7 @@ return function(p3, p4) --[[ line: 48 | named "useOnLoaded" ]]
 			end
 		end
 		
-		local function handleFinalStatus(p5) --[[ line: 62 ]]
+		local function handleFinalStatus(p5)
 			-- upvalues: var5 (write), p4 (copy)
 			if var5 then
 				var5:Disconnect()
@@ -54,7 +54,7 @@ return function(p3, p4) --[[ line: 48 | named "useOnLoaded" ]]
 		if reactIsModule.isBinding(p3) then
 			local var7 = p3
 			var5 = attachOnLoaded(var7:getValue(), handleFinalStatus)
-			local var8 = reactModule.__subscribeToBinding(var7, function(p6) --[[ line: 71 ]]
+			local var8 = reactModule.__subscribeToBinding(var7, function(p6)
 				-- upvalues: var5 (write), attachOnLoaded (copy), handleFinalStatus (ref)
 				if var5 then
 					var5:Disconnect()
@@ -63,7 +63,7 @@ return function(p3, p4) --[[ line: 48 | named "useOnLoaded" ]]
 				var5 = attachOnLoaded(p6, handleFinalStatus)
 			end)
 			
-			return function() --[[ line: 76 ]]
+			return function()
 				-- upvalues: var8 (ref), var5 (write)
 				var8()
 				
@@ -75,7 +75,7 @@ return function(p3, p4) --[[ line: 48 | named "useOnLoaded" ]]
 		end
 		var5 = attachOnLoaded(p3, handleFinalStatus)
 		
-		return function() --[[ line: 84 ]]
+		return function()
 			-- upvalues: var5 (write)
 			if var5 then
 				var5:Disconnect()

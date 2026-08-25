@@ -18,12 +18,12 @@ local useEffect = reactModule.useEffect
 local useRef = reactModule.useRef
 local useState = reactModule.useState
 
-local function _(p0) --[[ line: 28 | named "useUnfocusKeybind" ]]
+local function _(p0)
 	-- upvalues: useEffect (ref), guiService (ref), contextActionService (ref)
-	useEffect(function() --[[ line: 29 ]]
+	useEffect(function()
 		-- upvalues: p0 (ref), guiService (copy), contextActionService (copy)
 		if p0 then
-			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p1) --[[ line: 31 | named "unfocus" ]]
+			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p1)
 				-- upvalues: guiService (copy)
 				if p1 == Enum.UserInputState.End then
 					guiService.SelectedCoreObject = nil
@@ -33,7 +33,7 @@ local function _(p0) --[[ line: 28 | named "useUnfocusKeybind" ]]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ line: 42 ]]
+			return function()
 				-- upvalues: contextActionService (copy)
 				contextActionService:UnbindCoreAction("UnfocusMusicWindow")
 			end
@@ -46,10 +46,10 @@ local t = {
 	autoCollapseSeconds = 3,
 	isSubMenuOpen = false,
 	isFocused = false,
-	onToggleSubMenu = function() --[[ line: 70 ]] end
+	onToggleSubMenu = function() end
 }
 
-return function(p2) --[[ line: 75 | named "ChromeWindowFrame" ]]
+return function(p2)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useRef (ref), responsiveModule (ref), getFFlagChromeMusicWindowTopbarReappearsOnGamepad (ref), usePrevious (ref), getFFlagSongbirdPopoverSubmenuModule (ref), constantsModule (ref), createNextOrder (ref), useState (ref), useCallback (ref), useEffect (ref), runService (ref), guiService (ref), contextActionService (ref), reactModule (ref), collapsibleFrameModule (ref)
 	local var13 = cryoModule.Dictionary.join(t, p2)
 	local var14 = foundationModule.Hooks.useTokens()
@@ -61,13 +61,13 @@ return function(p2) --[[ line: 75 | named "ChromeWindowFrame" ]]
 	local var20 = createNextOrder()
 	local var21 = useRef(nil)
 	local var22, var23 = useState(true)
-	local var24 = useCallback(function() --[[ line: 101 ]]
+	local var24 = useCallback(function()
 		-- upvalues: var13 (ref)
 		if var13.onClose then
 			var13.onClose()
 		end
 	end, { var13.onClose })
-	local var25 = useCallback(function(p3) --[[ line: 108 ]]
+	local var25 = useCallback(function(p3)
 		-- upvalues: var21 (ref), var23 (ref), foundationModule (copy)
 		var21.current = nil
 		var23(true)
@@ -76,18 +76,18 @@ return function(p2) --[[ line: 75 | named "ChromeWindowFrame" ]]
 			var21.current = os.time()
 		end
 	end, {})
-	useEffect(function() --[[ line: 124 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), responsiveModule (copy), var13 (ref), runService (copy), var21 (ref), var23 (ref)
 		if var17 ~= responsiveModule.Input.Pointer then return end
 		if var13.autoCollapseSeconds and var13.autoCollapseSeconds > 0 then
-			local heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 132 ]]
+			local heartbeatConnection = runService.Heartbeat:Connect(function()
 				-- upvalues: var21 (copy), var13 (copy), var23 (copy)
 				if var21.current and var13.autoCollapseSeconds <= os.time() - var21.current then
 					var23(false)
 				end
 			end)
 			
-			return function() --[[ line: 140 ]]
+			return function()
 				-- upvalues: heartbeatConnection (ref)
 				heartbeatConnection:Disconnect()
 			end
@@ -95,40 +95,40 @@ return function(p2) --[[ line: 75 | named "ChromeWindowFrame" ]]
 		return nil
 	end, { var13.autoCollapseSeconds, var17 })
 	local var26, var27 = useState(Vector2.new(1e999, 1e999))
-	local var28 = useCallback(function(p4) --[[ line: 148 ]]
+	local var28 = useCallback(function(p4)
 		-- upvalues: var27 (ref)
 		var27(p4.AbsoluteSize)
 	end, {})
-	useEffect(function() --[[ line: 152 ]]
+	useEffect(function()
 		-- upvalues: var16 (ref), var13 (ref)
 		local current = var16.current
 		
 		if current then
-			local selectionChangedConnection = current.SelectionChanged:Connect(function(_, _, p5) --[[ line: 156 | named "onSelectionChanged" ]]
+			local selectionChangedConnection = current.SelectionChanged:Connect(function(_, _, p5)
 				-- upvalues: current (ref), var13 (copy)
 				if not current:IsAncestorOf(p5) and var13.onUnfocus then
 					var13.onUnfocus()
 				end
 			end)
 			
-			return function() --[[ line: 166 ]]
+			return function()
 				-- upvalues: selectionChangedConnection (ref)
 				selectionChangedConnection:Disconnect()
 			end
 		end
 		return nil
 	end, { var13.onUnfocus })
-	useEffect(function() --[[ line: 173 ]]
+	useEffect(function()
 		-- upvalues: var13 (ref), guiService (copy), var15 (ref)
 		if var13.isFocused then
 			guiService.SelectedCoreObject = var15.current
 		end
 	end, { var13.isFocused })
 	local isFocused = var13.isFocused
-	useEffect(function() --[[ line: 29 ]]
+	useEffect(function()
 		-- upvalues: isFocused (ref), guiService (copy), contextActionService (copy)
 		if isFocused then
-			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p6) --[[ line: 31 | named "unfocus" ]]
+			contextActionService:BindCoreAction("UnfocusMusicWindow", function(_, p6)
 				-- upvalues: guiService (copy)
 				if p6 == Enum.UserInputState.End then
 					guiService.SelectedCoreObject = nil
@@ -138,7 +138,7 @@ return function(p2) --[[ line: 75 | named "ChromeWindowFrame" ]]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ line: 42 ]]
+			return function()
 				-- upvalues: contextActionService (copy)
 				contextActionService:UnbindCoreAction("UnfocusMusicWindow")
 			end
@@ -147,7 +147,7 @@ return function(p2) --[[ line: 75 | named "ChromeWindowFrame" ]]
 	end, { isFocused })
 	
 	if getFFlagChromeMusicWindowTopbarReappearsOnGamepad() then
-		useEffect(function() --[[ line: 185 ]]
+		useEffect(function()
 			-- upvalues: var18 (ref), var17 (ref), responsiveModule (copy), var23 (ref)
 			if var18 and var17 ~= var18 and var17 ~= responsiveModule.Input.Pointer then
 				var23(true)

@@ -23,9 +23,9 @@ deleteOutfitPrompt.validateProps = tModule.strictInterface({
 	showCustomOutfitNames = tModule.boolean
 })
 
-function deleteOutfitPrompt.init(p0) --[[ line: 43 ]]
+function deleteOutfitPrompt.init(p0)
 	-- upvalues: roactModule (ref), loadableImage (ref)
-	function p0.renderAlertMiddleContent() --[[ line: 44 ]]
+	function p0.renderAlertMiddleContent()
 		-- upvalues: p0 (ref), roactModule (copy), loadableImage (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -44,7 +44,7 @@ function deleteOutfitPrompt.init(p0) --[[ line: 43 ]]
 	end
 end
 
-function deleteOutfitPrompt.render(p1) --[[ line: 64 ]]
+function deleteOutfitPrompt.render(p1)
 	-- upvalues: robloxTranslatorModule (ref), roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	return roactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
@@ -75,22 +75,22 @@ function deleteOutfitPrompt.render(p1) --[[ line: 64 ]]
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p4, _) --[[ line: 125 ]]
+return avatarEditorPromptsPolicyModule.connect(function(p4, _)
 	return { showCustomOutfitNames = p4.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p2) --[[ line: 103 | named "mapStateToProps" ]]
+end)(roactRoduxModule.connect(function(p2)
 	return {
 		screenSize = p2.screenSize,
 		outfitId = p2.promptInfo.outfitId,
 		outfitName = p2.promptInfo.outfitName
 	}
-end, function(p3) --[[ line: 111 | named "mapDispatchToProps" ]]
+end, function(p3)
 	-- upvalues: signalDeleteOutfitPermissionDeniedModule (ref), performDeleteOutfitModule (ref)
 	return {
-		signalDeleteOutfitPermissionDenied = function() --[[ line: 113 ]]
+		signalDeleteOutfitPermissionDenied = function()
 			-- upvalues: p3 (ref), signalDeleteOutfitPermissionDeniedModule (copy)
 			return p3(signalDeleteOutfitPermissionDeniedModule)
 		end,
-		performDeleteOutfit = function() --[[ line: 117 ]]
+		performDeleteOutfit = function()
 			-- upvalues: p3 (ref), performDeleteOutfitModule (copy)
 			return p3(performDeleteOutfitModule)
 		end

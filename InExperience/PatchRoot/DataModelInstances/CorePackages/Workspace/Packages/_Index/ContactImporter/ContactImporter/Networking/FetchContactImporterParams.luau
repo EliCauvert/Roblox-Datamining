@@ -11,25 +11,25 @@ local contactImporterOSPermissionsModule = require(parent.Utils.contactImporterO
 local constantsModule = require(parent.Common.Constants)
 local setContactImporterDisplayLogicModule = require(parent.Actions.SetContactImporterDisplayLogic)
 
-local var5 = function(_) --[[ line: 14 ]] end
+local var5 = function(_) end
 
-return function(p0, p1, p2) --[[ line: 18 ]]
+return function(p0, p1, p2)
 	-- upvalues: networkingUserSettings (ref), promise (ref), var5 (ref), networkingAccountInformation (ref), permissionsProtocol (ref), updateOptedInUsers (ref), llama (ref), contactImporterModalInfoModule (ref), constantsModule (ref), setContactImporterDisplayLogicModule (ref), contactImporterOSPermissionsModule (ref)
-	return function(p3) --[[ line: 19 ]]
+	return function(p3)
 		-- upvalues: networkingUserSettings (copy), promise (copy), var5 (copy), networkingAccountInformation (copy), p1 (ref), permissionsProtocol (copy), updateOptedInUsers (copy), p2 (ref), llama (copy), contactImporterModalInfoModule (copy), p0 (ref), constantsModule (copy), setContactImporterDisplayLogicModule (copy), contactImporterOSPermissionsModule (copy)
 		local _ = {}
 		promise.all({
-			p3:dispatch(networkingUserSettings.GetUserSettings.API({})):andThen(function(p5) --[[ line: 22 ]]
+			p3:dispatch(networkingUserSettings.GetUserSettings.API({})):andThen(function(p5)
 				-- upvalues: promise (copy), var5 (copy)
 				return promise.resolve({
 					phoneNumberDiscoverability = p5.responseBody.phoneNumberDiscoverability
 				}, var5)
 			end),
-			p3:dispatch(networkingAccountInformation.GetPhoneInformation.API()):andThen(function(p6) --[[ line: 27 ]]
+			p3:dispatch(networkingAccountInformation.GetPhoneInformation.API()):andThen(function(p6)
 				-- upvalues: promise (copy), var5 (copy)
 				return promise.resolve({ isPhoneVerified = p6.responseBody.isVerified }, var5)
 			end),
-			p1:hasPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p7) --[[ line: 32 ]]
+			p1:hasPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p7)
 				-- upvalues: permissionsProtocol (copy), updateOptedInUsers (copy), p2 (copy), promise (copy)
 				local var8 = p7 and p7.status == permissionsProtocol.Status.AUTHORIZED
 				
@@ -38,7 +38,7 @@ return function(p0, p1, p2) --[[ line: 18 ]]
 				end
 				return promise.resolve({ hasOSPermissions = var8 })
 			end, var5)
-		}):andThen(function(p4) --[[ line: 41 ]]
+		}):andThen(function(p4)
 			-- upvalues: llama (copy), contactImporterModalInfoModule (copy), p2 (copy), p0 (copy), constantsModule (copy), p3 (ref), setContactImporterDisplayLogicModule (copy), contactImporterOSPermissionsModule (copy)
 			local t = {}
 			
@@ -50,6 +50,6 @@ return function(p0, p1, p2) --[[ line: 18 ]]
 			t[constantsModule.IS_USER_OPTED_IN_LOCAL_STORAGE] = var7
 			p3:dispatch(setContactImporterDisplayLogicModule(t))
 			contactImporterOSPermissionsModule:updateOSPermissionSettings(p2, t.hasOSPermissions)
-		end):catch(function() --[[ line: 64 ]] end)
+		end):catch(function() end)
 	end
 end

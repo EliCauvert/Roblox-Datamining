@@ -4,12 +4,12 @@ local _ = require(parent.DiscoveryTypes)
 local fFlagLuaAppChartsActiveFilterChips = require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 local t = {
-	new = function() --[[ line: 12 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.mockFromExploreApi(p0, p1) --[[ line: 18 ]]
+function t.mockFromExploreApi(p0, p1)
 	-- upvalues: t (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), fFlagLuaAppChartsActiveFilterChips (ref)
 	local var2 = t.fromExploreJsonData({
 		filterType = "",
@@ -31,7 +31,7 @@ function t.mockFromExploreApi(p0, p1) --[[ line: 18 ]]
 	return var2
 end
 
-function t.fromExploreJsonData(p2) --[[ line: 40 ]]
+function t.fromExploreJsonData(p2)
 	-- upvalues: t (ref), fFlagLuaAppChartsActiveFilterChips (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), argCheckModule (ref)
 	local var3 = t.new()
 	var3.filterId = p2.filterId

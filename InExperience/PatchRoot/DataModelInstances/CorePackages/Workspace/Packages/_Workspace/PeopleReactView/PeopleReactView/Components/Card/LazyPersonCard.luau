@@ -17,7 +17,7 @@ local flags = peopleServiceModule.getService("Flags")
 local getFFlagPeoplePageEnablePersonSignalStore = flags.GetFFlagPeoplePageEnablePersonSignalStore
 local fFlagPeoplePageRemoveSkeletons = flags.FFlagPeoplePageRemoveSkeletons
 local fFlagPeoplePageRemoveUseMemoElements = flags.FFlagPeoplePageRemoveUseMemoElements
-local var10 = reactModule.memo(function(p0) --[[ line: 33 ]]
+local var10 = reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), fFlagPeoplePageRemoveSkeletons (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	local var11 = useTokens()
 	
@@ -46,14 +46,14 @@ local var10 = reactModule.memo(function(p0) --[[ line: 33 ]]
 	})
 end)
 
-return reactModule.memo(function(p1) --[[ line: 86 ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), getFFlagPeoplePageEnablePersonSignalStore (ref), signalsReactModule (ref), signalsModule (ref), reactIsModule (ref), fFlagPeoplePageRemoveUseMemoElements (ref), reactModule (ref), personCardModule (ref), var10 (ref), fFlagPeoplePageRemoveSkeletons (ref), view (ref), skeleton (ref), radius (ref), lazyScrollingComponentModule (ref)
 	local var12 = useTokens()
-	local var13 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p2) --[[ line: 90 ]]
+	local var13 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p2)
 		-- upvalues: p1 (ref)
 		return if type(p1.layoutOrder) == "function" then p1.layoutOrder(p2) else p1.layoutOrder or 0
 	end)) else nil
-	local var14 = if reactIsModule.isBinding(p1.width) then p1.width:map(function(p3) --[[ line: 100 ]]
+	local var14 = if reactIsModule.isBinding(p1.width) then p1.width:map(function(p3)
 		-- upvalues: var12 (ref)
 		return UDim2.new(0, p3, 0, p3 + var12.Size.Size_1400)
 	end) else UDim2.new(0, p1.width, 0, p1.width + var12.Size.Size_1400)
@@ -64,7 +64,7 @@ return reactModule.memo(function(p1) --[[ line: 86 ]]
 		onDismissTooltip = p1.onDismissTooltip,
 		shouldShowMenu = p1.shouldShowMenu,
 		layoutOrder = p1.layoutOrder
-	}) else reactModule.useMemo(function() --[[ line: 117 ]]
+	}) else reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), personCardModule (copy), p1 (ref)
 		return reactModule.createElement(personCardModule, {
 			width = p1.width,
@@ -83,7 +83,7 @@ return reactModule.memo(function(p1) --[[ line: 86 ]]
 		scrollingFrameAbsolutePositionY = p1.scrollingFrameStore.getAbsolutePositionY,
 		scrollingFrameAbsoluteSizeY = p1.scrollingFrameStore.getAbsoluteSizeY,
 		scrollingFrameCanvasPositionY = p1.scrollingFrameStore.getCanvasPositionY,
-		placeholder = if fFlagPeoplePageRemoveUseMemoElements then reactModule.createElement(var10, { size = var14 }) else reactModule.useMemo(function() --[[ line: 141 ]]
+		placeholder = if fFlagPeoplePageRemoveUseMemoElements then reactModule.createElement(var10, { size = var14 }) else reactModule.useMemo(function()
 			-- upvalues: fFlagPeoplePageRemoveSkeletons (copy), reactModule (copy), view (copy), var14 (write), skeleton (copy), radius (copy), var12 (ref)
 			return if fFlagPeoplePageRemoveSkeletons then reactModule.createElement(view, { tag = "bg-surface-100 radius-medium", Size = var14 }) else reactModule.createElement(view, { tag = "col bg-surface-100 radius-medium", Size = var14 }, {
 				ThumbnailContainer = reactModule.createElement(view, {

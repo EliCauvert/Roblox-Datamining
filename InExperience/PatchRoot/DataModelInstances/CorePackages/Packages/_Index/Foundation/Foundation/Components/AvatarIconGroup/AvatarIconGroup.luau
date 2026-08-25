@@ -10,7 +10,7 @@ local avatarIconSizeModule = require(foundation.Enums.AvatarIconSize)
 local avatarGroupTypeModule = require(foundation.Enums.AvatarGroupType)
 local useAvatarIconVariantsModule = require(foundation.Components.AvatarIcon.useAvatarIconVariants)
 
-local function renderAvatarIcon(p0, p1, p2) --[[ line: 28 ]]
+local function renderAvatarIcon(p0, p1, p2)
 	-- upvalues: reactModule (ref), avatarIconModule (ref)
 	return reactModule.createElement(avatarIconModule, {
 		userId = p0,
@@ -32,7 +32,7 @@ local t = {
 	size = avatarIconSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 53 | named "AvatarIconGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p3, p4)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useAvatarIconVariantsModule (ref), avatarGroupTypeModule (ref), avatarIconSizeModule (ref), reactModule (ref), internalAvatarGroupModule (ref), withCommonPropsModule (ref), renderAvatarIcon (ref)
 	local var12 = withDefaultsModule(p3, t)
 	local var13 = useTokensModule()
@@ -47,7 +47,7 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 53 | 
 		gap = if var12.type == avatarGroupTypeModule.Spread then var13.Size.Size_200 elseif size == avatarIconSizeModule.Large or size == avatarIconSizeModule.Medium then -var13.Size.Size_50 else -var13.Size.Size_0,
 		backplateStyle = var12.backplateStyle,
 		avatars = var12.avatars,
-		renderAvatar = function(p5, p6) --[[ line: 78 ]]
+		renderAvatar = function(p5, p6)
 			-- upvalues: renderAvatarIcon (copy), var12 (ref)
 			return renderAvatarIcon(p5, p6, var12.size)
 		end

@@ -11,9 +11,9 @@ local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext
 local useChatPlacementContext = chatPlacementContextModule.useChatPlacementContext
 local isPlacementInExperience = chatPlacementContextModule.isPlacementInExperience
 
-function generateNavigateToGroups(p0, p1) --[[ line: 23 ]]
+function generateNavigateToGroups(p0, p1)
 	-- upvalues: enumScreensModule (ref), name (ref)
-	return function() --[[ line: 24 ]]
+	return function()
 		-- upvalues: p1 (ref), p0 (ref), enumScreensModule (copy), name (copy)
 		if p1 then
 			p1()
@@ -31,9 +31,9 @@ function generateNavigateToGroups(p0, p1) --[[ line: 23 ]]
 	end
 end
 
-local function _(p2, p3) --[[ line: 43 | named "generateNavigateToUnfilteredThreadsLearnMore" ]]
+local function _(p2, p3)
 	-- upvalues: enumScreensModule (ref), openUnfilteredThreadsLearnMoreLinkModule (ref)
-	return function(p4) --[[ line: 44 ]]
+	return function(p4)
 		-- upvalues: p2 (ref), p3 (ref), enumScreensModule (copy), openUnfilteredThreadsLearnMoreLinkModule (copy)
 		if not p2 then return end
 		if not p3 then
@@ -46,14 +46,14 @@ local function _(p2, p3) --[[ line: 43 | named "generateNavigateToUnfilteredThre
 	end
 end
 
-function LuaAppNavigationContextProvider(p5) --[[ line: 58 ]]
+function LuaAppNavigationContextProvider(p5)
 	-- upvalues: reactModule (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), useAnalyticsModule (ref), eventNamesModule (ref), luaAppNavigationContextModule (ref), enumScreensModule (ref), openUnfilteredThreadsLearnMoreLinkModule (ref)
-	local var9 = reactModule.useRef(function() --[[ line: 59 ]] end)
+	local var9 = reactModule.useRef(function() end)
 	local var10 = isPlacementInExperience(useChatPlacementContext().chatPlacement)
 	local var11 = useAnalyticsModule()
 	
 	if var11 then
-		function var9.current() --[[ line: 66 ]]
+		function var9.current()
 			-- upvalues: var11 (ref), eventNamesModule (copy)
 			var11.fireAnalyticsEvent(eventNamesModule.ChatLandingGroupsBtnClicked)
 		end
@@ -66,7 +66,7 @@ function LuaAppNavigationContextProvider(p5) --[[ line: 58 ]]
 	}
 	local dispatch = p5.dispatch
 	
-	function t_1.navigateToUnfilteredThreadsLearnMore(p6) --[[ line: 44 ]]
+	function t_1.navigateToUnfilteredThreadsLearnMore(p6)
 		-- upvalues: dispatch (ref), var10 (ref), enumScreensModule (copy), openUnfilteredThreadsLearnMoreLinkModule (copy)
 		if not dispatch then return end
 		if not var10 then

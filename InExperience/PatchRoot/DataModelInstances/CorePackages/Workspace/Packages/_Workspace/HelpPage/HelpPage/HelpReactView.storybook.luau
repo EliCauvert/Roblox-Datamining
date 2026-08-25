@@ -15,9 +15,9 @@ return {
 	storyRoot = parent,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0) --[[ line: 19 ]]
+	mapStory = function(p0)
 		-- upvalues: reactModule (ref), localizationProvider (ref), var5 (ref), keybindContextProviderModule (ref), foundationProvider (ref), foundationModule (ref)
-		return function(p1) --[[ line: 20 ]]
+		return function(p1)
 			-- upvalues: reactModule (copy), localizationProvider (copy), var5 (copy), keybindContextProviderModule (copy), foundationProvider (copy), foundationModule (copy), p0 (ref)
 			return reactModule.createElement(localizationProvider, { localization = var5 }, {
 				KeybindContextProvider = reactModule.createElement(keybindContextProviderModule, nil, {

@@ -23,7 +23,7 @@ local loadingScreenModule = require(experienceLoadingScript.LoadingScreen)
 local loadingScreenReducerModule = require(experienceLoadingScript.Reducers.LoadingScreenReducer)
 local loggingProtocolModule = require(parent.LoggingProtocol)
 
-local function GenerateDevGUIBlackoutCurtain() --[[ line: 42 ]]
+local function GenerateDevGUIBlackoutCurtain()
 	-- upvalues: create (ref), coreGuiService (ref)
 	local var10 = create("ScreenGui")({
 		Name = "DevGUIBlackoutCurtain",
@@ -44,7 +44,7 @@ local function GenerateDevGUIBlackoutCurtain() --[[ line: 42 ]]
 	return var10
 end
 
-local function mountTiltLoadingScreen(p0, p1) --[[ line: 63 ]]
+local function mountTiltLoadingScreen(p0, p1)
 	-- upvalues: parent (ref), coreGuiService (ref), game (ref), loggingProtocolModule (ref)
 	local reactModule = require(parent.React)
 	local reactRobloxModule = require(parent.ReactRoblox)
@@ -55,7 +55,7 @@ local function mountTiltLoadingScreen(p0, p1) --[[ line: 63 ]]
 	local var14 = reactRobloxModule.createRoot(robloxLoadingGUI)
 	local var15 = false
 	
-	local function unmount() --[[ line: 74 ]]
+	local function unmount()
 		-- upvalues: var14 (ref), robloxLoadingGUI (ref)
 		var14:unmount()
 		robloxLoadingGUI:Destroy()
@@ -63,7 +63,7 @@ local function mountTiltLoadingScreen(p0, p1) --[[ line: 63 ]]
 	
 	var14:render(reactModule.createElement(tiltLoadingScreen, {
 		placeId = p0,
-		onCancel = function(p2, p3) --[[ line: 78 ]]
+		onCancel = function(p2, p3)
 			-- upvalues: var15 (write), game (copy), loggingProtocolModule (copy)
 			if var15 or p3 and game:IsLoaded() then return end
 			var15 = true
@@ -73,7 +73,7 @@ local function mountTiltLoadingScreen(p0, p1) --[[ line: 63 ]]
 			end
 			game:Shutdown()
 		end,
-		onDismissComplete = function() --[[ line: 92 ]]
+		onDismissComplete = function()
 			-- upvalues: var14 (ref), robloxLoadingGUI (ref), p1 (ref), loggingProtocolModule (copy)
 			var14:unmount()
 			robloxLoadingGUI:Destroy()
@@ -87,7 +87,7 @@ end
 
 local _ = nil
 
-local var9 = function(p4, p5) --[[ line: 106 ]]
+local var9 = function(p4, p5)
 	-- upvalues: GenerateDevGUIBlackoutCurtain (ref), parent (ref), loadingScreenReducerModule (ref), loadingScreenModule (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), experienceLoadingScreenFixStyleLink (ref), coreGuiService (ref), runService (ref), waitProxy (ref), splashScreenManager (ref), experienceLoadingScript (ref), players (ref), game (ref), VRService (ref), isVRAppBuild (ref), fFlagEnableTiltLoadingScreen (ref), replicatedFirst (ref), loggingProtocolModule (ref), mountTiltLoadingScreen (ref), var9 (write), settingsProxy (ref)
 	local var17 = true
 	local var18 = false
@@ -97,7 +97,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 	local var22 = GenerateDevGUIBlackoutCurtain()
 	local var23 = nil
 	
-	local _ = function() --[[ line: 119 ]]
+	local _ = function()
 		-- upvalues: var22 (write)
 		if var22 then
 			var22.Enabled = false
@@ -106,7 +106,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		end
 	end
 	
-	local var24 = function(p6) --[[ line: 127 ]]
+	local var24 = function(p6)
 		-- upvalues: var23 (write), parent (copy), loadingScreenReducerModule (copy), loadingScreenModule (copy), uiModeStyleProvider (copy), colorMode (copy), constants (copy), experienceLoadingScreenFixStyleLink (copy), coreGuiService (copy), runService (copy), var22 (write)
 		var23 = require(parent.Roact)
 		local roduxModule = require(parent.Rodux)
@@ -133,7 +133,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		return robloxLoadingGUI
 	end
 	
-	local _ = function() --[[ line: 158 ]]
+	local _ = function()
 		-- upvalues: var23 (write), waitProxy (copy), var21 (write)
 		if var23 then
 			waitProxy(0.6)
@@ -145,7 +145,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		end
 	end
 	
-	local var25 = function(p7) --[[ line: 169 ]]
+	local var25 = function(p7)
 		-- upvalues: var17 (write), var23 (write), waitProxy (copy), var21 (write), splashScreenManager (copy), var20 (write), var22 (write), experienceLoadingScript (copy)
 		var17 = false
 		
@@ -158,7 +158,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 			end
 		end
 		splashScreenManager.initialize(p7 / 2, game:GetFastInt("FPSAwareSplashScreenTimeout"), p7)
-		splashScreenManager.addStatusChangeListener(function(p8) --[[ line: 175 ]]
+		splashScreenManager.addStatusChangeListener(function(p8)
 			-- upvalues: var17 (copy), var20 (copy)
 			var17 = p8
 			
@@ -170,7 +170,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		require(experienceLoadingScript.LoadingScreen3D).Parent = var22
 	end
 	
-	local _ = function() --[[ line: 188 ]]
+	local _ = function()
 		-- upvalues: players (copy)
 		if players.CharacterAutoLoads then
 			local localPlayer = players.LocalPlayer
@@ -185,7 +185,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		end
 	end
 	
-	local var26 = function() --[[ line: 201 ]]
+	local var26 = function()
 		-- upvalues: game (copy), players (copy), var18 (write), var20 (write)
 		if game:IsLoaded() then
 			if players.CharacterAutoLoads then
@@ -208,7 +208,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 			end
 		else
 			local loadedConnection = nil
-			loadedConnection = game.Loaded:Connect(function() --[[ line: 210 ]]
+			loadedConnection = game.Loaded:Connect(function()
 				-- upvalues: loadedConnection (write), players (copy), var18 (copy), var20 (copy)
 				loadedConnection:Disconnect()
 				loadedConnection = nil
@@ -249,7 +249,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		else
 			local var27 = nil
 			local var28 = true
-			local var29 = mountTiltLoadingScreen(p4, function() --[[ line: 233 | named "cleanUpTilt" ]]
+			local var29 = mountTiltLoadingScreen(p4, function()
 				-- upvalues: var28 (write), var27 (write), var22 (write)
 				var28 = false
 				
@@ -264,7 +264,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 				end
 			end)
 			
-			local function _() --[[ line: 243 | named "transitionToVR" ]]
+			local function _()
 				-- upvalues: var28 (write), var27 (write), var22 (write), var29 (ref), var9 (copy), p4 (ref), p5 (ref)
 				if not var28 then return end
 				var28 = false
@@ -282,7 +282,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 				var9(p4, p5)
 			end
 			
-			var27 = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ line: 252 ]]
+			var27 = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 				-- upvalues: VRService (copy), var28 (write), var27 (write), var22 (write), var29 (ref), var9 (copy), p4 (ref), p5 (ref)
 				if VRService.VREnabled then
 					if not var28 then return end
@@ -327,7 +327,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 			return
 		end
 	else
-		VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ line: 272 ]]
+		VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 			-- upvalues: VRService (copy), var25 (ref), p5 (ref)
 			if VRService.VREnabled then
 				var25(p5)
@@ -335,7 +335,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 		end)
 		var21 = var24(p4)
 	end
-	var20 = function() --[[ line: 282 ]]
+	var20 = function()
 		-- upvalues: VRService (copy), var17 (write), settingsProxy (copy), var22 (write), replicatedFirst (copy), loggingProtocolModule (copy), var18 (write), var19 (write), var23 (write), waitProxy (copy), var21 (write)
 		if VRService.VREnabled then
 			if not var17 and settingsProxy().Rendering.QualityLevel == Enum.QualityLevel.Automatic then return end
@@ -372,7 +372,7 @@ local var9 = function(p4, p5) --[[ line: 106 ]]
 	if replicatedFirst:IsFinishedReplicating() then
 		var26()
 	end
-	replicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function() --[[ line: 312 ]]
+	replicatedFirst.RemoveDefaultLoadingGuiSignal:Connect(function()
 		-- upvalues: var19 (write), var20 (write)
 		var19 = true
 		

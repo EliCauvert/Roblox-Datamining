@@ -14,12 +14,12 @@ local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function t.isApolloError(p0) --[[ line: 43 ]]
+function t.isApolloError(p0)
 	-- upvalues: hasOwnPropertyModule (ref)
 	return hasOwnPropertyModule(p0, "graphQLErrors")
 end
 
-local function generateErrorMessage(p1) --[[ line: 49 ]]
+local function generateErrorMessage(p1)
 	-- upvalues: isNonEmptyArray (ref), array (ref), boolean (ref), toJSBoolean (ref)
 	local var5 = ""
 	
@@ -35,7 +35,7 @@ local function generateErrorMessage(p1) --[[ line: 49 ]]
 	return string.gsub(var5, "\n$", "")
 end
 
-function tbl.new(p2) --[[ line: 104 ]]
+function tbl.new(p2)
 	-- upvalues: error (ref), boolean (ref), generateErrorMessage (ref), tbl (ref)
 	local graphQLErrors = p2.graphQLErrors
 	local clientErrors = p2.clientErrors

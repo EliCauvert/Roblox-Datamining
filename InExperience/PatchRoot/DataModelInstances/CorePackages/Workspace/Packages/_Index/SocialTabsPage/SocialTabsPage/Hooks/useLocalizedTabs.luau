@@ -5,9 +5,9 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(socialTabsPage.Common.Types)
 
-return function(value) --[[ line: 11 | named "useLocalizedTabs" ]]
+return function(value)
 	-- upvalues: reactModule (ref), useLocalization (ref), cryoModule (ref)
-	local var3 = useLocalization(reactModule.useMemo(function() --[[ line: 12 ]]
+	local var3 = useLocalization(reactModule.useMemo(function()
 		-- upvalues: value (ref)
 		local t = {}
 		
@@ -17,9 +17,9 @@ return function(value) --[[ line: 11 | named "useLocalizedTabs" ]]
 		return t
 	end, { value }))
 	
-	return reactModule.useMemo(function() --[[ line: 22 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), value (ref), var3 (ref)
-		return cryoModule.List.map(value, function(p0) --[[ line: 23 ]]
+		return cryoModule.List.map(value, function(p0)
 			-- upvalues: var3 (copy)
 			return { id = p0.id, text = var3[p0.id] }
 		end)

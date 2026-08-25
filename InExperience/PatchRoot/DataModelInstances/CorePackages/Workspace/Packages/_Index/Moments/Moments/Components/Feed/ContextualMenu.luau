@@ -51,7 +51,7 @@ local t = {
 	reportSubmittedBody = "Feature.Moments.Label.ReportSubmittedBody"
 }
 
-return function(p0) --[[ line: 85 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), fFlagMomentsIPReporting (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), fFlagMomentsReportWithFeedId (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), momentsCommonModule (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), localPlayer (ref), foundationModule (ref), menu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
 	local var21 = useLocalization(t)
 	local var22 = useFeed()
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 85 ]]
 		var30 = var34
 		var31 = var35
 	end
-	local var36 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref)
 		if var23.enabled then
 			var23.disable()
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 85 ]]
 	local var40 = getToastStoreModule(false)
 	local var41 = signalsReactModule.useSignalState(var37.getHideDetails)
 	local var42 = signalsReactModule.useSignalState(var38.getMinimized)
-	local var43 = reactModule.useCallback(function() --[[ line: 126 ]]
+	local var43 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), var37 (ref), fireAnalyticsEvent (copy), eventNames (copy), p0 (ref)
 		var23.disable()
 		var37.toggleFeedDetailVisibility()
@@ -103,20 +103,20 @@ return function(p0) --[[ line: 85 ]]
 		var23.disable,
 		var37.toggleFeedDetailVisibility
 	})
-	local var44 = reactModule.useCallback(function() --[[ line: 134 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), var38 (ref), fireAnalyticsEvent (copy), eventNames (copy), p0 (ref)
 		var23.disable()
 		var38.toggleFeedScaleType()
 		fireAnalyticsEvent(eventNames.FeedMinimizeButtonPressed, { momentId = p0.moment.momentId })
 	end, { p0.moment, var23.disable, var38.toggleFeedScaleType })
-	local var45 = reactModule.useCallback(function() --[[ line: 142 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: checkDebugAccessModule (copy), var38 (ref), var23 (ref)
 		if checkDebugAccessModule() then
 			var38.toggleFeedDebugMode()
 		end
 		var23.disable()
 	end, { var23.disable, var38.toggleFeedDebugMode })
-	local var46 = reactModule.useCallback(function(p1, p2, p3) --[[ line: 150 ]]
+	local var46 = reactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: p0 (ref), fFlagMomentsIPReporting (copy), reportMomentModule (copy), fFlagMomentsReportWithFeedId (copy), makeRecommendationAttributionModule (copy), var22 (ref), signalActionTypeModule (copy), makeFeedActionFieldsModule (copy), momentsCommonModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var39 (ref), var40 (ref), var21 (ref)
 		if not p0.moment then
 			return nil
@@ -126,7 +126,7 @@ return function(p0) --[[ line: 85 ]]
 		local var57 = nil
 		
 		if not p3 then
-			local ok, status, var58 = pcall(function() --[[ line: 159 ]]
+			local ok, status, var58 = pcall(function()
 				-- upvalues: fFlagMomentsIPReporting (copy), reportMomentModule (copy), fFlagMomentsReportWithFeedId (copy), p0 (copy), p1 (ref)
 				return if fFlagMomentsIPReporting then reportMomentModule(if fFlagMomentsReportWithFeedId then p0.moment.recommendationMetadata.feedItemId else p0.moment.momentId, p1):await() else reportMomentModule(if fFlagMomentsReportWithFeedId then p0.moment.recommendationMetadata.feedItemId else p0.moment.momentId):await()
 			end)
@@ -138,7 +138,7 @@ return function(p0) --[[ line: 85 ]]
 		local var59 = makeRecommendationAttributionModule(recommendationMetadata)
 		
 		if var59 then
-			local ok, status = pcall(function() --[[ line: 185 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var22 (copy), signalActionTypeModule (copy), var59 (ref)
 				var22.logAction(signalActionTypeModule.Report, var59, {})
 			end)
@@ -165,7 +165,7 @@ return function(p0) --[[ line: 85 ]]
 		p0.moment, var22.logAction, var22.removeCurrentItem, var39.markReported,
 		var40.triggerToast, var21
 	})
-	local var47 = reactModule.useCallback(function() --[[ line: 232 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), getPostFeedItemIdModule (copy), p0 (ref), fFlagEnableReportingFlowForMomentsFeed (copy), openMomentsFeedReport (ref), reportModalCovering (copy), var46 (ref), var31 (write), var29 (write), fFlagMomentsIPReporting (copy), var25 (write)
 		var23.disable()
 		local var61 = getPostFeedItemIdModule(p0.moment)
@@ -175,15 +175,15 @@ return function(p0) --[[ line: 85 ]]
 			openMomentsFeedReport({
 				feedItemId = var61,
 				momentId = p0.moment.momentId,
-				onSubmit = function() --[[ line: 248 ]]
+				onSubmit = function()
 					-- upvalues: var46 (copy)
 					var46(nil, false, true)
 				end,
-				onClose = function() --[[ line: 251 ]]
+				onClose = function()
 					-- upvalues: reportModalCovering (copy)
 					reportModalCovering.setCovering(false)
 				end,
-				onIpReportCode = function(p4) --[[ line: 255 ]]
+				onIpReportCode = function(p4)
 					-- upvalues: var46 (copy), var31 (copy), var29 (copy)
 					var46(nil, true, true)
 					var31(if p4 and p4 ~= "" then p4 else "------")
@@ -197,22 +197,22 @@ return function(p0) --[[ line: 85 ]]
 			
 			return
 		end
-		task.spawn(function() --[[ line: 267 ]]
+		task.spawn(function()
 			-- upvalues: var46 (copy)
 			var46(nil, false)
 		end)
 	end, { var23.disable, var46, openMomentsFeedReport, p0.moment })
-	local var48 = if fFlagMomentsIPReporting then reactModule.useCallback(function() --[[ line: 274 ]]
+	local var48 = if fFlagMomentsIPReporting then reactModule.useCallback(function()
 		-- upvalues: var25 (write)
 		var25(false)
 	end, {}) else nil
-	local var49 = reactModule.useCallback(function() --[[ line: 279 ]]
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: var29 (write)
 		if var29 then
 			var29(false)
 		end
 	end, {})
-	local var50 = reactModule.useCallback(function() --[[ line: 285 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), fFlagMomentsPassFeedItemIdToBackendApis (copy), var37 (ref), p0 (ref)
 		var23.disable()
 		local var62 = getFFlagMomentsAnalyticsSchemaIdentity()
@@ -224,14 +224,14 @@ return function(p0) --[[ line: 85 ]]
 		end
 		var37.requestDeletion(p0.moment.momentId, p0.moment.recommendationMetadata and p0.moment.recommendationMetadata.feedItemId, if var62 and p0.moment.recommendationMetadata then p0.moment.recommendationMetadata.tracingId else nil)
 	end, { p0.moment, var23.disable, var37.requestDeletion })
-	local var51 = if p0.isFeedMuteButtonAnalyticsEnabled then reactModule.useCallback(function() --[[ line: 317 ]]
+	local var51 = if p0.isFeedMuteButtonAnalyticsEnabled then reactModule.useCallback(function()
 		-- upvalues: p0 (ref), fireAnalyticsEvent (copy), eventNames (copy)
 		if p0.isDisabled then
 			return
 		end
 		fireAnalyticsEvent(if p0.playbackVolume.isMuted then eventNames.FeedUnmuteButtonPressed else eventNames.FeedMuteButtonPressed, { momentId = p0.moment.momentId })
 		p0.playbackVolume.toggle()
-	end, { p0.isDisabled, p0.playbackVolume, p0.moment }) else reactModule.useCallback(function() --[[ line: 304 ]]
+	end, { p0.isDisabled, p0.playbackVolume, p0.moment }) else reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.isDisabled then
 			return
@@ -241,7 +241,7 @@ return function(p0) --[[ line: 85 ]]
 	local var52 = reactModule.createElement(menu, {
 		align = foundationModule.Enums.PopoverAlign.End,
 		isOpen = var23.enabled,
-		items = reactModule.useMemo(function() --[[ line: 343 ]]
+		items = reactModule.useMemo(function()
 			-- upvalues: var41 (ref), var21 (ref), var43 (ref), var42 (ref), var44 (ref), p0 (ref), localPlayer (copy), fFlagMomentsReportWithFeedId (copy), foundationModule (copy), var47 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), var50 (ref), checkDebugAccessModule (copy), var45 (ref)
 			local list = {
 				{

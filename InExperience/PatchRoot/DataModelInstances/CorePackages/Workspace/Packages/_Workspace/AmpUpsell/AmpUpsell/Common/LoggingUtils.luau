@@ -2,7 +2,7 @@
 local enableAmpUpsellLogging = game:DefineFastFlag("EnableAmpUpsellLogging", false)
 
 return {
-	logEventOnceIfEnabled = function(p0) --[[ line: 20 ]]
+	logEventOnceIfEnabled = function(p0)
 		-- upvalues: enableAmpUpsellLogging (ref), default (ref)
 		if enableAmpUpsellLogging then
 			default:logEventOnce(p0)

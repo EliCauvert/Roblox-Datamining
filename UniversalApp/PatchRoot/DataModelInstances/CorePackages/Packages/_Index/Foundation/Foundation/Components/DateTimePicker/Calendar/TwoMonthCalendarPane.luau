@@ -9,7 +9,7 @@ local viewModule = require(foundation.Components.View)
 local DAYS_PER_WEEK = dateTimeCalendarConstantsModule.DAYS_PER_WEEK
 local buildTwoMonthPaneCellConfigs = dateTimeCalendarDayConfigUtilitiesModule.buildTwoMonthPaneCellConfigs
 
-local function EmptyCell(p0) --[[ line: 37 ]]
+local function EmptyCell(p0)
 	-- upvalues: reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
 		LayoutOrder = p0.LayoutOrder,
@@ -17,9 +17,9 @@ local function EmptyCell(p0) --[[ line: 37 ]]
 	})
 end
 
-return function(p1) --[[ line: 44 | named "TwoMonthCalendarPane" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), buildTwoMonthPaneCellConfigs (ref), DAYS_PER_WEEK (ref), dateTimeUtilitiesModule (ref), textModule (ref), EmptyCell (ref), rangeCalendarDayCellModule (ref), viewModule (ref)
-	local var9 = reactModule.useMemo(function() --[[ line: 45 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: buildTwoMonthPaneCellConfigs (copy), p1 (ref)
 		return buildTwoMonthPaneCellConfigs(p1.month, p1.year)
 	end, { p1.month, p1.year })

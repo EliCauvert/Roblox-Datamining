@@ -46,7 +46,7 @@ verticalScrollView.defaultProps = {
 	canvasSizeY = UDim.new(2, 0)
 }
 
-function verticalScrollView.init(p0) --[[ line: 92 ]]
+function verticalScrollView.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref), userInputService (ref), runService (ref), getPageMarginModule (ref)
 	p0:setState({ scrollBarThickness = 0, scrollingWithTouch = false })
 	local var13, var14 = roactModule.createBinding(0)
@@ -57,7 +57,7 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 	p0.lastTimeCanvasPositionChanged = tick()
 	p0.waitToHideSidebarConnection = nil
 	
-	function p0.waitToHideSidebar() --[[ line: 105 ]]
+	function p0.waitToHideSidebar()
 		-- upvalues: p0 (ref), otterModule (copy), t (copy)
 		if tick() - p0.lastTimeCanvasPositionChanged > 0.7 then
 			p0.scrollBarImageTransparencyMotor:setGoal(otterModule.spring(1, t))
@@ -65,7 +65,7 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 		end
 	end
 	
-	function p0.disconnectWaitToHideSidebar() --[[ line: 113 ]]
+	function p0.disconnectWaitToHideSidebar()
 		-- upvalues: p0 (ref)
 		if p0.waitToHideSidebarConnection then
 			p0.waitToHideSidebarConnection:Disconnect()
@@ -73,7 +73,7 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 		end
 	end
 	
-	function p0.inputBegan(_, p1) --[[ line: 119 ]]
+	function p0.inputBegan(_, p1)
 		-- upvalues: p0 (ref), otterModule (copy)
 		if p1.UserInputType == Enum.UserInputType.MouseMovement then
 			p0.disconnectWaitToHideSidebar()
@@ -82,7 +82,7 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 		end
 	end
 	
-	function p0.inputEnded(_, p2) --[[ line: 128 ]]
+	function p0.inputEnded(_, p2)
 		-- upvalues: p0 (ref), otterModule (copy)
 		if p2.UserInputType == Enum.UserInputType.MouseMovement then
 			p0.disconnectWaitToHideSidebar()
@@ -90,7 +90,7 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 		end
 	end
 	
-	function p0.canvasPosition(p3) --[[ line: 134 ]]
+	function p0.canvasPosition(p3)
 		-- upvalues: p0 (ref), userInputService (copy), otterModule (copy), runService (copy), roactModule (copy)
 		p0.lastTimeCanvasPositionChanged = tick()
 		
@@ -104,13 +104,13 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 		end
 	end
 	
-	function p0.onGamepadFocused() --[[ line: 149 ]]
+	function p0.onGamepadFocused()
 		-- upvalues: p0 (ref), otterModule (copy)
 		p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
 		p0:setState({ scrollBarThickness = 2 })
 	end
 	
-	function p0.onGamepadFocusLost() --[[ line: 156 ]]
+	function p0.onGamepadFocusLost()
 		-- upvalues: p0 (ref), otterModule (copy)
 		p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(1))
 	end
@@ -120,18 +120,18 @@ function verticalScrollView.init(p0) --[[ line: 92 ]]
 	p0.paddingBinding = var15
 	p0.updatePaddingBinding = var16
 	
-	function p0.getPadding(p4) --[[ line: 163 ]]
+	function p0.getPadding(p4)
 		-- upvalues: p0 (ref), getPageMarginModule (copy)
 		p4 = p4 or 0
 		
-		return if p0.props.paddingHorizontal then UDim.new(0, math.max(0, p0.props.paddingHorizontal - p4)) else p0.paddingBinding:map(function(p5) --[[ line: 169 ]]
+		return if p0.props.paddingHorizontal then UDim.new(0, math.max(0, p0.props.paddingHorizontal - p4)) else p0.paddingBinding:map(function(p5)
 			-- upvalues: getPageMarginModule (copy), p4 (write)
 			return UDim.new(0, getPageMarginModule(p5) - p4)
 		end)
 	end
 end
 
-function verticalScrollView.renderWithProviders(p6, p7, _, p8) --[[ line: 176 ]]
+function verticalScrollView.renderWithProviders(p6, p7, _, p8)
 	-- upvalues: roactModule (ref), cryoModule (ref), focusable (ref), uDim (ref)
 	local isGamepadFocusable = p6.props.isGamepadFocusable
 	
@@ -139,7 +139,7 @@ function verticalScrollView.renderWithProviders(p6, p7, _, p8) --[[ line: 176 ]]
 		BackgroundTransparency = 1,
 		Position = p6.props.position,
 		Size = p6.props.size,
-		[roactModule.Change.AbsoluteSize] = function(p9) --[[ line: 200 ]]
+		[roactModule.Change.AbsoluteSize] = function(p9)
 			-- upvalues: p6 (ref)
 			p6.updatePaddingBinding(p9.AbsoluteSize.X)
 		end,
@@ -184,15 +184,15 @@ function verticalScrollView.renderWithProviders(p6, p7, _, p8) --[[ line: 176 ]]
 	})
 end
 
-function verticalScrollView.render(p10) --[[ line: 251 ]]
+function verticalScrollView.render(p10)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p11) --[[ line: 252 ]]
+	return withStyleModule(function(p11)
 		-- upvalues: p10 (ref)
 		return p10:renderWithProviders(p11, nil, p10.props.cursor)
 	end)
 end
 
-function verticalScrollView.didMount(p12) --[[ line: 257 ]]
+function verticalScrollView.didMount(p12)
 	local value = p12.parentFrameRef:getValue()
 	
 	if value then
@@ -200,11 +200,11 @@ function verticalScrollView.didMount(p12) --[[ line: 257 ]]
 	end
 end
 
-function verticalScrollView.willUnmount(p13) --[[ line: 264 ]]
+function verticalScrollView.willUnmount(p13)
 	p13.disconnectWaitToHideSidebar()
 end
 
-return roactModule.forwardRef(function(p14, p15) --[[ line: 268 ]]
+return roactModule.forwardRef(function(p14, p15)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), verticalScrollView (ref), cryoModule (ref)
 	return roactModule.createElement(verticalScrollView, cryoModule.Dictionary.join(p14, {
 		scrollingFrameRef = p15,

@@ -3,7 +3,7 @@ local reactModule = require(motion.Parent.React)
 local presenceContextModule = require(motion.AnimatePresence.PresenceContext)
 local useIdFallback = require(motion.AnimatePresence.utils).useIdFallback
 
-return function(p0) --[[ line: 30 | named "PresenceProvider" ]]
+return function(p0)
 	-- upvalues: useIdFallback (ref), reactModule (ref), presenceContextModule (ref)
 	if p0 == nil then
 		error("PresenceProvider: props cannot be nil")
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 30 | named "PresenceProvider" ]]
 	end
 	local passThroughData = p0.passThroughData
 	local text = nil
-	local ok, status = pcall(function() --[[ line: 53 ]]
+	local ok, status = pcall(function()
 		-- upvalues: text (write), useIdFallback (copy)
 		text = useIdFallback()
 	end)
@@ -26,7 +26,7 @@ return function(p0) --[[ line: 30 | named "PresenceProvider" ]]
 		text = "presence-" .. useIdFallback()
 	end
 	local t = nil
-	local ok_1, status_1 = pcall(function() --[[ line: 64 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: t (write), reactModule (copy)
 		t = reactModule.useRef({})
 	end)
@@ -38,16 +38,16 @@ return function(p0) --[[ line: 30 | named "PresenceProvider" ]]
 	local t_1 = {
 		id = text,
 		isPresent = isPresent,
-		register = function(p1) --[[ line: 95 ]]
+		register = function(p1)
 			-- upvalues: t (write)
 			t.current[p1] = false
 			
-			return function() --[[ line: 99 ]]
+			return function()
 				-- upvalues: t (copy), p1 (ref)
 				t.current[p1] = nil
 			end
 		end,
-		onExitComplete = function(p2) --[[ line: 74 ]]
+		onExitComplete = function(p2)
 			-- upvalues: t (write), p0 (ref)
 			if t.current then
 				t.current[p2] = true
@@ -67,7 +67,7 @@ return function(p0) --[[ line: 30 | named "PresenceProvider" ]]
 		passThroughData = passThroughData
 	}
 	local var6 = nil
-	local ok_2, status_2 = pcall(function() --[[ line: 114 ]]
+	local ok_2, status_2 = pcall(function()
 		-- upvalues: var6 (write), reactModule (copy), presenceContextModule (copy), t_1 (ref), children (ref)
 		var6 = reactModule.createElement(presenceContextModule.Provider, { value = t_1 }, children)
 	end)

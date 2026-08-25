@@ -5,11 +5,11 @@ local useTokens = foundationModule.Hooks.useTokens
 local colorMode = foundationModule.Enums.ColorMode
 local getSceneOverridesStoreModule = require(script.Parent.getSceneOverridesStore)
 
-return function(p0) --[[ line: 14 | named "SceneOverridesRegistry" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), colorMode (ref), getSceneOverridesStoreModule (ref)
 	local isActive = p0.isActive
 	local var3 = useTokens()
-	local var4 = reactModule.useMemo(function() --[[ line: 18 ]]
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: var3 (ref), colorMode (copy)
 		local color3 = var3.Color.Extended.Gray.Gray_300.Color3
 		local color3_1 = var3.Color.Extended.Gray.Gray_400.Color3
@@ -41,14 +41,14 @@ return function(p0) --[[ line: 14 | named "SceneOverridesRegistry" ]]
 			FogColor = var3.Color.Extended.Gray.Gray_1100.Color3:Lerp(color3_4, 0.3)
 		}
 	end, { var3 })
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getSceneOverridesStoreModule (copy), isActive (ref), var4 (ref)
 		local var5 = getSceneOverridesStoreModule()
 		
 		if isActive then
 			var5.setSceneOverrides(var4)
 			
-			return function() --[[ line: 66 ]]
+			return function()
 				-- upvalues: var5 (ref)
 				var5.setSceneOverrides(nil)
 			end

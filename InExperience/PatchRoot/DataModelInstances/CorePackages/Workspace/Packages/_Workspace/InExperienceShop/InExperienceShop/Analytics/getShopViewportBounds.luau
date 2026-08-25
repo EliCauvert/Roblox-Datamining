@@ -1,6 +1,6 @@
 ﻿local guiService = game:GetService("GuiService")
 
-local function getShopViewportBounds(p0) --[[ line: 8 ]]
+local function getShopViewportBounds(p0)
 	-- upvalues: guiService (ref)
 	local topbarInset = guiService.TopbarInset
 	local _, guiInset = guiService:GetGuiInset()
@@ -11,7 +11,7 @@ local function getShopViewportBounds(p0) --[[ line: 8 ]]
 	}
 end
 
-local function getScrollClipBounds(p1) --[[ line: 25 ]]
+local function getScrollClipBounds(p1)
 	local var4 = p1
 	while var4 do
 		if not var4:IsA("ScrollingFrame") then
@@ -30,7 +30,7 @@ end
 
 return {
 	getShopViewportBounds = getShopViewportBounds,
-	getShopImpressionsViewportBounds = function(p2, p3) --[[ line: 44 ]]
+	getShopImpressionsViewportBounds = function(p2, p3)
 		-- upvalues: getShopViewportBounds (ref), getScrollClipBounds (ref)
 		local var5 = getShopViewportBounds(p2)
 		
@@ -44,7 +44,7 @@ return {
 			max = var5.max:Min(var6.max)
 		}
 	end,
-	intersectViewPortBounds = function(p4, p5) --[[ line: 18 ]]
+	intersectViewPortBounds = function(p4, p5)
 		return { min = p4.min:Max(p5.min), max = p4.max:Min(p5.max) }
 	end,
 	getScrollClipBounds = getScrollClipBounds

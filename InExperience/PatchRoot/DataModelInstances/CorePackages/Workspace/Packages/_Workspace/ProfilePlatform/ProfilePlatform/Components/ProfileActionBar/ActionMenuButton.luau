@@ -9,16 +9,16 @@ local inputSize = foundationModule.Enums.InputSize
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 
-return function(p0) --[[ line: 23 | named "ActionMenuButton" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), inputSize (ref), menu (ref), popoverAlign (ref), popoverSide (ref)
 	local var2, var3 = reactModule.useState(false)
 	local buttonRef = p0.buttonRef or reactModule.useRef(nil)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		TriggerButton = reactModule.createElement(button, {
-			onActivated = reactModule.useCallback(function() --[[ line: 28 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var3 (ref), var2 (ref), p0 (ref)
-				var3(function(p1) --[[ line: 29 ]]
+				var3(function(p1)
 					return not p1
 				end)
 				
@@ -39,11 +39,11 @@ return function(p0) --[[ line: 23 | named "ActionMenuButton" ]]
 			align = popoverAlign.Start,
 			anchorRef = buttonRef,
 			items = p0.menuItems,
-			onActivated = reactModule.useCallback(function() --[[ line: 41 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var3 (ref)
 				var3(false)
 			end, {}),
-			onPressedOutside = reactModule.useCallback(function() --[[ line: 37 ]]
+			onPressedOutside = reactModule.useCallback(function()
 				-- upvalues: var3 (ref)
 				var3(false)
 			end, {}),

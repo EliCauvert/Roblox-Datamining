@@ -10,11 +10,11 @@ local text = foundationModule.Text
 local image = foundationModule.Image
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), thirdPartyUserService (ref), useLocalization (ref), view (ref), dividerWithTextModule (ref), image (ref), text (ref)
 	local var8, var9
 	local var5 = useTokens()
-	local var6 = reactModule.useCallback(function() --[[ line: 24 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: thirdPartyUserService (copy)
 		if thirdPartyUserService then
 			thirdPartyUserService:ShowAccountPicker()

@@ -20,7 +20,7 @@ local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFl
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
-return function(p0) --[[ line: 45 | named "TextOverlayControls" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), reactModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref)
 	local controller = p0.controller
 	local var9 = useDeviceInsets()
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 45 | named "TextOverlayControls" ]]
 			LayoutOrder = 1,
 			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
 			knobVisibility = foundationModule.Enums.Visibility.Always,
-			onValueChanged = useCallback(function(p1) --[[ line: 63 ]]
+			onValueChanged = useCallback(function(p1)
 				-- upvalues: controller (ref), dashModule (copy)
 				local activeSession = controller.getActiveSession(false)
 				
@@ -58,9 +58,9 @@ return function(p0) --[[ line: 45 | named "TextOverlayControls" ]]
 			end, { controller }),
 			size = foundationModule.Enums.InputSize.XSmall,
 			range = NumberRange.new(constantsModule.TextOverlay.MinFontSize, constantsModule.TextOverlay.MaxFontSize),
-			value = math.clamp(useSignalState(useMemo(function() --[[ line: 53 ]]
+			value = math.clamp(useSignalState(useMemo(function()
 				-- upvalues: signalsModule (copy), controller (ref), constantsModule (copy)
-				return signalsModule.createComputed(function(p2) --[[ line: 54 ]]
+				return signalsModule.createComputed(function(p2)
 					-- upvalues: controller (copy), constantsModule (copy)
 					local activeSession = controller.getActiveSession(p2)
 					local var16 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
@@ -80,7 +80,7 @@ return function(p0) --[[ line: 45 | named "TextOverlayControls" ]]
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
 				text = var11.GeneralCtaBack,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function() --[[ line: 76 ]]
+				onActivated = useCallback(function()
 					-- upvalues: controller (ref)
 					controller.discardActiveTool()
 				end, { controller }),
@@ -91,7 +91,7 @@ return function(p0) --[[ line: 45 | named "TextOverlayControls" ]]
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
 				text = var11.GeneralCtaDone,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function() --[[ line: 80 ]]
+				onActivated = useCallback(function()
 					-- upvalues: controller (ref)
 					controller.commitActiveTool()
 				end, { controller }),

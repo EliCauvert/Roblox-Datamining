@@ -2,14 +2,14 @@
 local getDeepValueModule = require(appChat.Utils.getDeepValue)
 local populateConversationWithStateModule = require(appChat.Conversations.populateConversationWithState)
 
-local function conversationSortPredicate(p0, p1) --[[ line: 7 ]]
+local function conversationSortPredicate(p0, p1)
 	return if p0.unixTime and p1.unixTime then p1.unixTime < p0.unixTime elseif p0.unixTime or p1.unixTime then (p0.unixTime or p1.unixTime) == p0.unixTime else string.lower(p0.title) < string.lower(p1.title)
 end
 
 local var4 = nil
 local var5 = nil
 
-return function(p2) --[[ line: 19 ]]
+return function(p2)
 	-- upvalues: getDeepValueModule (ref), var4 (write), var5 (write), populateConversationWithStateModule (ref), conversationSortPredicate (ref)
 	local var6 = getDeepValueModule(p2, "ChatAppReducer.Conversations")
 	

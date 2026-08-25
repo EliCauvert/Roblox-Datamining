@@ -17,17 +17,17 @@ local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAX
 local fFlagAXFixSelectedItemIndexBleed = avatarExperienceFlagsModule.FFlagAXFixSelectedItemIndexBleed
 local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 
-local function selectAnalyticsMetadata(p0) --[[ line: 21 ]]
+local function selectAnalyticsMetadata(p0)
 	return p0.AvatarExperience.AnalyticsMetadata
 end
 
-return function(p1) --[[ line: 25 | named "useUnifiedEventImpressionsReporter" ]]
+return function(p1)
 	-- upvalues: useAvatarRoute (ref), useSelectorSignal (ref), selectSearchKeyword (ref), selectAnalyticsMetadata (ref), reactModule (ref), avatarScreenProperties (ref), unifiedEventLoggingUtilsModule (ref), unifiedEventLogEnumsModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), unifiedEventLogConstantsModule (ref), unifiedLoggingSurface (ref), fFlagAXFixSelectedItemIndexBleed (ref), cryoModule (ref), sendUnifiedEventLogForInstanceModule (ref)
 	local var11 = useAvatarRoute()
 	local var12 = useSelectorSignal(selectSearchKeyword)
 	local var13 = useSelectorSignal(selectAnalyticsMetadata)
 	
-	return reactModule.useCallback(function(p2) --[[ line: 33 ]]
+	return reactModule.useCallback(function(p2)
 		-- upvalues: avatarScreenProperties (copy), var11 (ref), unifiedEventLoggingUtilsModule (copy), unifiedEventLogEnumsModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), p1 (ref), var12 (ref), unifiedEventLogConstantsModule (copy), unifiedLoggingSurface (copy), var13 (ref), fFlagAXFixSelectedItemIndexBleed (copy), cryoModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 		local v
 		local visibleInstance = p2.visibleInstance

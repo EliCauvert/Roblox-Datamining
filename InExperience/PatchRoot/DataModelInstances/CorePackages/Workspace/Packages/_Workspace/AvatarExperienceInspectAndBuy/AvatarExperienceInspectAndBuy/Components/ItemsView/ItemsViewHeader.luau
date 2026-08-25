@@ -9,7 +9,7 @@ local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local subheaderLabelPriceModule = require(avatarExperienceInspectAndBuy.Components.Common.SubheaderLabelPrice)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-return function(p0) --[[ line: 50 | named "ItemsViewHeader" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), foundationModule (ref), backButtonModule (ref), subheaderLabelPriceModule (ref)
 	local var6 = useTokens()
 	local var7 = p0.view == viewTypeModule.WideLandscape

@@ -6,9 +6,9 @@ local gamesGetIconsModule = require(gameIconRodux.GamesGetIcons)
 local setGameIconsModule = require(gameIconRodux.GameIcons.SetGameIcons)
 local gameIconReducerModule = require(gameIconRodux.GameIcons.GameIconReducer)
 
-return function(p0, p1, p2) --[[ line: 12 ]]
+return function(p0, p1, p2)
 	-- upvalues: gameIconReducerModule (ref), promiseModule (ref), apiFetchThumbnails (ref), gamesGetIconsModule (ref), setGameIconsModule (ref)
-	return function(p3) --[[ line: 13 ]]
+	return function(p3)
 		-- upvalues: gameIconReducerModule (copy), p1 (ref), promiseModule (copy), apiFetchThumbnails (copy), p0 (ref), p2 (ref), gamesGetIconsModule (copy), setGameIconsModule (copy)
 		local key = p3:getState()[gameIconReducerModule.key]
 		local t = {}

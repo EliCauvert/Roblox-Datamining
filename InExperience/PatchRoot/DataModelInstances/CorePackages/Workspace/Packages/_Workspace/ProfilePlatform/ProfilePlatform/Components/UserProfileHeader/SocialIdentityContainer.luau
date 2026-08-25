@@ -14,23 +14,23 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local var8 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
-return function(p0) --[[ line: 45 | named "SocialIdentityContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useLocalUserId (ref), appStorageService (ref), reactModule (ref), useEffectOnce (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), signalsModule (ref), var8 (ref), useSignalState (ref), socialIdentityModule (ref), cryoModule (ref)
 	local profileId = useProfileWrapperContextModule().profileId
 	local var9 = profileId == useLocalUserId()
 	local var10 = if var9 then "NamesDisplayNameTooltipImpressionCount" else "NamesProfileTooltip"
 	local var11 = reactModule.useRef(tonumber(appStorageService:GetItem(var10)) or 0)
-	local var12 = reactModule.useCallback(function(p1) --[[ line: 58 ]]
+	local var12 = reactModule.useCallback(function(p1)
 		-- upvalues: appStorageService (copy), var10 (ref)
 		appStorageService:SetItem(var10, tostring(p1 or 0))
 		appStorageService:Flush()
 	end)
-	local var13 = reactModule.useCallback(function() --[[ line: 63 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), var12 (ref)
 		var11.current = 3
 		var12(3)
 	end)
-	useEffectOnce(function() --[[ line: 68 ]]
+	useEffectOnce(function()
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11.current then
 			var12(var11.current + 1)
@@ -42,9 +42,9 @@ return function(p0) --[[ line: 45 | named "SocialIdentityContainer" ]]
 		isTooltipActive = false,
 		isLocalUser = var9,
 		dismissTooltip = var13,
-		isTrustedConnection = useSignalState(reactModule.useMemo(function() --[[ line: 80 ]]
+		isTrustedConnection = useSignalState(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), profileId (ref), var8 (copy)
-			return signalsModule.createComputed(function(p2) --[[ line: 81 ]]
+			return signalsModule.createComputed(function(p2)
 				-- upvalues: profileId (copy), var8 (copy)
 				return if profileId and profileId ~= "" then var8.getIsTrustedConnection(profileId).data(p2) else nil
 			end)

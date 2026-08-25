@@ -10,7 +10,7 @@ local localizationService = game:GetService("LocalizationService")
 local useLocalization = require(parent_1.Localization).Hooks.useLocalization
 local formatNumberModule = require(parent.Utility.formatNumber)
 
-return function(p0) --[[ line: 25 | named "RobuxUpsellModalTitle" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), iconButton (ref), iconSize (ref)
 	local var4 = useLocalization({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",

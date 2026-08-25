@@ -10,12 +10,12 @@ local var1 = -1
 local var2 = -1
 local var3 = -1
 
-function getCommitTime() --[[ line: 43 ]]
+function getCommitTime()
 	-- upvalues: var0 (write)
 	return var0
 end
 
-function recordCommitTime() --[[ line: 47 ]]
+function recordCommitTime()
 	-- upvalues: enableProfilerTimer (ref), var0 (write), unstableNow (ref)
 	if enableProfilerTimer then
 		var0 = unstableNow()
@@ -24,7 +24,7 @@ function recordCommitTime() --[[ line: 47 ]]
 	end
 end
 
-function startProfilerTimer(p0) --[[ line: 54 ]]
+function startProfilerTimer(p0)
 	-- upvalues: enableProfilerTimer (ref), var2 (write), unstableNow (ref)
 	if not enableProfilerTimer then return end
 	var2 = unstableNow()
@@ -34,7 +34,7 @@ function startProfilerTimer(p0) --[[ line: 54 ]]
 	end
 end
 
-function stopProfilerTimerIfRunning(_) --[[ line: 67 ]]
+function stopProfilerTimerIfRunning(_)
 	-- upvalues: enableProfilerTimer (ref), var2 (write)
 	if enableProfilerTimer then
 		var2 = -1
@@ -43,7 +43,7 @@ function stopProfilerTimerIfRunning(_) --[[ line: 67 ]]
 	end
 end
 
-function stopProfilerTimerIfRunningAndRecordDelta(p1, p2) --[[ line: 74 ]]
+function stopProfilerTimerIfRunningAndRecordDelta(p1, p2)
 	-- upvalues: enableProfilerTimer (ref), var2 (write), unstableNow (ref)
 	if not enableProfilerTimer then return end
 	if var2 >= 0 then
@@ -57,7 +57,7 @@ function stopProfilerTimerIfRunningAndRecordDelta(p1, p2) --[[ line: 74 ]]
 	end
 end
 
-function recordLayoutEffectDuration(p3) --[[ line: 92 ]]
+function recordLayoutEffectDuration(p3)
 	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var1 (write), unstableNow (ref), profiler (ref)
 	if not enableProfilerTimer or not enableProfilerCommitHooks then return end
 	if var1 >= 0 then
@@ -76,7 +76,7 @@ function recordLayoutEffectDuration(p3) --[[ line: 92 ]]
 	end
 end
 
-function recordPassiveEffectDuration(p4) --[[ line: 115 ]]
+function recordPassiveEffectDuration(p4)
 	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var3 (write), unstableNow (ref), profiler (ref)
 	if not enableProfilerTimer or not enableProfilerCommitHooks then return end
 	if var3 >= 0 then
@@ -98,7 +98,7 @@ function recordPassiveEffectDuration(p4) --[[ line: 115 ]]
 	end
 end
 
-function startLayoutEffectTimer() --[[ line: 143 ]]
+function startLayoutEffectTimer()
 	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var1 (write), unstableNow (ref)
 	if enableProfilerTimer and enableProfilerCommitHooks then
 		var1 = unstableNow()
@@ -107,7 +107,7 @@ function startLayoutEffectTimer() --[[ line: 143 ]]
 	end
 end
 
-function startPassiveEffectTimer() --[[ line: 150 ]]
+function startPassiveEffectTimer()
 	-- upvalues: enableProfilerTimer (ref), enableProfilerCommitHooks (ref), var3 (write), unstableNow (ref)
 	if enableProfilerTimer and enableProfilerCommitHooks then
 		var3 = unstableNow()
@@ -116,7 +116,7 @@ function startPassiveEffectTimer() --[[ line: 150 ]]
 	end
 end
 
-function transferActualDuration(p5) --[[ line: 157 ]]
+function transferActualDuration(p5)
 	local child = p5.child
 	while child do
 		p5.actualDuration += child.actualDuration

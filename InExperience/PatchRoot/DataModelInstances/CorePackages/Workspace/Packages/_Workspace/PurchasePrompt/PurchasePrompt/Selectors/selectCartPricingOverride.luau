@@ -2,7 +2,7 @@
 local deriveCartPricingView = require(purchasePrompt.Parent.IAPExperience).deriveCartPricingView
 local productTypeEnum = require(purchasePrompt.types).ProductTypeEnum
 
-local function _(p0) --[[ line: 38 | named "isCartPricingKind" ]]
+local function _(p0)
 	-- upvalues: productTypeEnum (ref)
 	if type(p0) ~= "table" then
 		return false
@@ -12,7 +12,7 @@ local function _(p0) --[[ line: 38 | named "isCartPricingKind" ]]
 	return if kind ~= productTypeEnum.Asset then if kind ~= productTypeEnum.Bundle then kind == productTypeEnum.Look else true else true
 end
 
-return function(p1) --[[ line: 46 | named "selectCartPricingOverride" ]]
+return function(p1)
 	-- upvalues: productTypeEnum (ref), deriveCartPricingView (ref)
 	if p1 == nil then
 		return nil

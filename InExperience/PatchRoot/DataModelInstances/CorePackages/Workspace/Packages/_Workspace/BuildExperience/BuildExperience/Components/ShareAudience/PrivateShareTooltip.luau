@@ -11,7 +11,7 @@ local educationalTooltip = foundationModule.EducationalTooltip
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 
-return function(p0) --[[ line: 26 | named "PrivateShareTooltip" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), educationalTooltip (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), popoverSide (ref)
 	local SHARE_AUDIENCE_PRIVATE_DESCRIPTION, SHARE_AUDIENCE_PRIVATE_TITLE
 	local var6 = if fFlagBuildLocalization then useLocalization({

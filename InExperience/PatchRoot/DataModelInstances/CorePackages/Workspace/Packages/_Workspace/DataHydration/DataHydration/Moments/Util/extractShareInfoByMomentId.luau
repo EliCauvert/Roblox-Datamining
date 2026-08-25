@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Moments.MomentsStoreTypes)
 
-local function _(p0) --[[ line: 13 | named "extractShareInfo" ]]
+local function _(p0)
 	local stats = p0.stats
 	
 	return if stats == nil or type(stats.shareCount) ~= "number" then nil else {
@@ -9,7 +9,7 @@ local function _(p0) --[[ line: 13 | named "extractShareInfo" ]]
 	}
 end
 
-return function(p1) --[[ line: 25 | named "extractShareInfoByMomentId" ]]
+return function(p1)
 	local t = {}
 	
 	if p1 == nil then

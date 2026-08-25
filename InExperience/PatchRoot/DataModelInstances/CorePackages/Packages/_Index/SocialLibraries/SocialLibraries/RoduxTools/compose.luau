@@ -1,9 +1,9 @@
-﻿return function(...) --[[ line: 4 ]]
+﻿return function(...)
 	local list = { ... }
 	local listCount = #list
 	
 	if listCount == 0 then
-		return function(p0) --[[ line: 9 ]]
+		return function(p0)
 			return p0
 		end
 	end
@@ -13,7 +13,7 @@
 		local var3 = list[i]
 		local var4 = var2
 		
-		var2 = function(...) --[[ line: 18 ]]
+		var2 = function(...)
 			-- upvalues: var4 (ref), var3 (ref)
 			return var4(var3(...))
 		end

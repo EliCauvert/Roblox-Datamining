@@ -15,16 +15,16 @@ return {
 		ImageBottomRight = "ImageBottomRight"
 	},
 	TileBadgePositionCalculators = {
-		ImageTopLeft = function(p0) --[[ line: 37 ]]
+		ImageTopLeft = function(p0)
 			return UDim2.new(0, p0, 0, p0), Vector2.new(0, 0)
 		end,
-		ImageBottomLeft = function(p1) --[[ line: 40 ]]
+		ImageBottomLeft = function(p1)
 			return UDim2.new(0, p1, 1, -p1), Vector2.new(0, 1)
 		end,
-		ImageTopRight = function(p2) --[[ line: 43 ]]
+		ImageTopRight = function(p2)
 			return UDim2.new(1, -p2, 0, p2), Vector2.new(1, 0)
 		end,
-		ImageBottomRight = function(p3) --[[ line: 46 ]]
+		ImageBottomRight = function(p3)
 			return UDim2.new(1, -p3, 1, -p3), Vector2.new(1, 1)
 		end
 	},

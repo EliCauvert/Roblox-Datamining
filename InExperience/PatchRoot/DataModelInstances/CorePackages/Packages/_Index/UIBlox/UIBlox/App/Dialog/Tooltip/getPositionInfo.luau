@@ -1,6 +1,6 @@
 ﻿local tooltipOrientationModule = require(script.Parent.Enum.TooltipOrientation)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 22 ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: tooltipOrientationModule (ref)
 	local clampedValue, var7, var8, x, x_1
 	local t = {}

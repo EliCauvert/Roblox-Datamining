@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0, p1) --[[ line: 14 | named "useRefs" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef({})
 	local var2 = reactModule.useRef(p0)
@@ -18,7 +18,7 @@ return function(p0, p1) --[[ line: 14 | named "useRefs" ]]
 	end
 	var2.current = p0
 	
-	return reactModule.useMemo(function() --[[ line: 33 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var1 (ref), p0 (ref)
 		return table.move(var1.current, 1, p0, 1, {})
 	end, { p0 })

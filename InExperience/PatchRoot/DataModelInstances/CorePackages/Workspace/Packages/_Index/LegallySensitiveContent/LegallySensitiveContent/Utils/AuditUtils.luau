@@ -5,7 +5,7 @@ local base64 = require(parent.dependencies).Base64
 local consentNameModule = require(parent.Enums.ConsentName)
 local _ = require(parent.Types.LegallySensitiveContentTypes)
 
-local function getAuditDataForConsent(p0, p1) --[[ line: 18 ]]
+local function getAuditDataForConsent(p0, p1)
 	-- upvalues: consentNameModule (ref), legallySensitiveContentConstantsModule (ref)
 	local var5 = ({
 		[consentNameModule.phoneNumberDiscoverabilityUpsell] = {
@@ -53,7 +53,7 @@ local function getAuditDataForConsent(p0, p1) --[[ line: 18 ]]
 	return var5 or {}
 end
 
-local function getAuditHeaderValue(p2, p3, p4) --[[ line: 98 ]]
+local function getAuditHeaderValue(p2, p3, p4)
 	-- upvalues: cryptoUtilsModule (ref)
 	local t = {}
 	
@@ -82,7 +82,7 @@ end
 return {
 	getAuditDataForConsent = getAuditDataForConsent,
 	getAuditHeaderValue = getAuditHeaderValue,
-	getEncodedAuditHeader = function(p5, p6, p7, p8) --[[ line: 138 ]]
+	getEncodedAuditHeader = function(p5, p6, p7, p8)
 		-- upvalues: getAuditDataForConsent (ref), getAuditHeaderValue (ref), base64 (ref)
 		return base64.EncodeUrl(getAuditHeaderValue(getAuditDataForConsent(p5, p6), p7, p8))
 	end

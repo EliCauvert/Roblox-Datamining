@@ -1,4 +1,4 @@
-﻿local function dumpInstanceTree(p0, p1) --[[ line: 1 ]]
+﻿local function dumpInstanceTree(p0, p1)
 	-- upvalues: dumpInstanceTree (ref)
 	p1 = p1 or ""
 	assert(p1 ~= nil, "indent must be a string")

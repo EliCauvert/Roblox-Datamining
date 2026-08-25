@@ -99,7 +99,7 @@ local t = {
 	}
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 140 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokensModule (ref), cursorTypeModule (ref), reactModule (ref), t (ref), images (ref), getScaledSliceModule (ref), cursorComponentModule (ref)
 	local var7 = useTokensModule()
 	local colorNamespace = p0.colorNamespace

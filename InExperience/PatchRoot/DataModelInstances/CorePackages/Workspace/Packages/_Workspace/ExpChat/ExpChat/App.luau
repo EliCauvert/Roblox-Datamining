@@ -20,7 +20,7 @@ local var15 = if fFlagExpChatEnableFriendsTab then require(script.Parent.Friends
 local focusHotKeyReceiverModule = require(script.Parent.FocusHotKey.FocusHotKeyReceiver)
 local getFFlagExpChatTelemetryEventTriggerModule = require(expChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
-local function computePresetBitmap(value) --[[ line: 41 ]]
+local function computePresetBitmap(value)
 	-- upvalues: getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), textChatService (ref)
 	local var20 = getPresetChatStoreModule(false)
 	
@@ -49,18 +49,18 @@ app.defaultProps = {
 	isSpatialUIEnabled = false,
 	store = createStoreModule(),
 	translator = {
-		FormatByKey = function(_, p0) --[[ line: 82 ]]
+		FormatByKey = function(_, p0)
 			return tostring(p0)
 		end
 	},
 	gameTranslator = {
-		TranslateGameText = function(_, _, p1) --[[ line: 87 ]]
+		TranslateGameText = function(_, _, p1)
 			return p1
 		end
 	}
 }
 
-function app.render(p2) --[[ line: 92 ]]
+function app.render(p2)
 	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var14 (ref), fFlagExpChatEnableFriendsTab (ref), var15 (ref), focusHotKeyReceiverModule (ref), appContainerModule (ref)
 	return p2.props.isDefaultChatEnabled and roactModule.createElement(roactRoduxModule.StoreProvider, { store = p2.props.store }, {
 		localization = roactModule.createElement(localizationModule.Provider, { value = p2.props.translator }, {
@@ -89,7 +89,7 @@ function app.render(p2) --[[ line: 92 ]]
 end
 
 if getFFlagExpChatTelemetryEventTriggerModule() then
-	function app.didMount(p3) --[[ line: 133 ]]
+	function app.didMount(p3)
 		-- upvalues: fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), expChatPresetChatLoadAnalyticsTimeoutMs (ref), textChatService (ref), computePresetBitmap (ref)
 		local expChatLoadStartTime = p3.props.expChatLoadStartTime
 		
@@ -97,7 +97,7 @@ if getFFlagExpChatTelemetryEventTriggerModule() then
 			if fFlagExpChatPresetChatEnabled then
 				local var22 = os.clock() - expChatLoadStartTime
 				local var23 = getPresetChatStoreModule(false)
-				task.spawn(function() --[[ line: 142 ]]
+				task.spawn(function()
 					-- upvalues: var23 (ref), expChatPresetChatLoadAnalyticsTimeoutMs (copy), p3 (ref), textChatService (copy), var22 (ref), computePresetBitmap (copy)
 					local processTime = os.clock()
 					while var23.getIsLoading() and os.clock() - processTime < expChatPresetChatLoadAnalyticsTimeoutMs / 1000 do

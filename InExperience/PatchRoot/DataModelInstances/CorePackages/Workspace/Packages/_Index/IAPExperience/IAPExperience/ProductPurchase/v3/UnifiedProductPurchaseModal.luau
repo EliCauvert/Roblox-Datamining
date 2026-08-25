@@ -34,7 +34,7 @@ local fFlagEnableOffersOnInExperienceSurface = require(parent.Parent.SharedFlags
 local _ = require(parent.ProductPurchase.PricingTypes)
 local blackbirdUpsellBanner = require(parent_1.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 
-local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
+local function UnifiedProductPurchaseModal(p0)
 	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), useInitialButtonDisableDelayModule (ref), fFlagEnableOffersOnInExperienceSurface (ref), useCartPricingModule (ref), useFocusNavigationRefsModule (ref), checkbox (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), text (ref), cartPricingProductDetailsModule (ref), productDetailsContainerModule (ref), sheet (ref), unifiedPurchaseModalHeaderModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), blackbirdUpsellBanner (ref)
 	local var15 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
@@ -75,7 +75,7 @@ local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
 		var25 = var24 or (priceWithoutOffersDiscounts ~= nil and p0.robuxBalanceAmount < priceWithoutOffersDiscounts)
 		var23 = if var22.showCartOfferUi then #var22.cartPricingOffers else 0
 	end
-	reactModule.useEffect(function() --[[ line: 164 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), unifiedPurchaseModalTypeEnumModule (copy), var20 (ref), var15 (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy)
 		local purchaseModalType = p0.purchaseModalType
 		
@@ -104,19 +104,19 @@ local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
 		var20(var15.BuyItem)
 	end, { p0.purchaseModalType })
 	local var26, var27 = useFocusNavigationRefsModule(p0.buttons.cancelActivated, p0.onBuyItemButtonMounted)
-	local var28 = reactModule.useCallback(function() --[[ line: 190 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), p0 (ref)
 		if var17 and p0.setPostPurchaseActions then
 			p0.setPostPurchaseActions(var17)
 		end
 		p0.buttons.buyItemActivated()
 	end, { p0.buttons.buyItemActivated, var17 })
-	reactModule.useEffect(function() --[[ line: 198 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), p0 (ref)
 		var18(p0.postPurchaseActions or {})
 	end, { p0.postPurchaseActions })
 	local var29 = if fFlagEnableUnifiedPurchaseFlowForDevSubs and p0.purchaseModalType == unifiedPurchaseModalTypeEnumModule.DeveloperSubscription then var15.Subscribe else var15.Buy
-	local var30 = reactModule.useMemo(function() --[[ line: 207 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), reactModule (copy), checkbox (copy), var21 (ref), var18 (ref)
 		local t = {}
 		
@@ -127,9 +127,9 @@ local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
 				label = v.label,
 				isChecked = not var21 and v.isActionSelected,
 				isDisabled = var21,
-				onActivated = function() --[[ line: 216 ]]
+				onActivated = function()
 					-- upvalues: var18 (copy), i (ref), v (ref)
-					var18(function(p1) --[[ line: 217 ]]
+					var18(function(p1)
 						-- upvalues: i (copy), v (copy)
 						local cloned = table.clone(p1)
 						cloned[i] = {
@@ -148,7 +148,7 @@ local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
 	local var31 = nil
 	
 	if fFlagEnableOffersOnInExperienceSurface then
-		var30 = reactModule.useMemo(function() --[[ line: 235 ]]
+		var30 = reactModule.useMemo(function()
 			-- upvalues: var17 (ref), reactModule (copy), checkbox (copy), var23 (write), var24 (write), var18 (ref)
 			local t = {}
 			
@@ -159,9 +159,9 @@ local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
 					label = v.label,
 					isChecked = v.isActionSelected,
 					isDisabled = var24,
-					onActivated = function() --[[ line: 244 ]]
+					onActivated = function()
 						-- upvalues: var18 (copy), i (ref), v (ref)
-						var18(function(p2) --[[ line: 245 ]]
+						var18(function(p2)
 							-- upvalues: i (copy), v (copy)
 							local cloned = table.clone(p2)
 							cloned[i] = {
@@ -274,7 +274,7 @@ local function UnifiedProductPurchaseModal(p0) --[[ line: 100 ]]
 	})
 end
 
-return function(p3) --[[ line: 415 | named "UnifiedProductPurchaseModalContainer" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedProductPurchaseModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

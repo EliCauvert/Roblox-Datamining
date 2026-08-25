@@ -3,7 +3,7 @@ local emptyConversationPageModule = require(script.Parent.EmptyConversationPage)
 local emptyConversationScreen = roactModule.PureComponent:extend("EmptyConversationScreen")
 emptyConversationScreen.defaultProps = { navigation = nil }
 
-function emptyConversationScreen.render(p0) --[[ line: 13 ]]
+function emptyConversationScreen.render(p0)
 	-- upvalues: roactModule (ref), emptyConversationPageModule (ref)
 	local navigation = p0.props.navigation
 	assert(type(navigation) ~= "nil", "ChatConversationScreen should be wrapped with Roact Navigation")

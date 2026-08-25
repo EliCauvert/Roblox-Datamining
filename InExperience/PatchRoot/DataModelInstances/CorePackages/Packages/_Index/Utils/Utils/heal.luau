@@ -20,14 +20,14 @@ local map = luauPolyfillModule.Map
 local string = luauPolyfillModule.String
 local var3 = nil
 
-function t.healSchema(p0) --[[ line: 96 ]]
+function t.healSchema(p0)
 	-- upvalues: var3 (write)
 	var3(p0:getTypeMap(), p0:getDirectives())
 	
 	return p0
 end
 
-function t.healTypes(p1, p2) --[[ line: 106 ]]
+function t.healTypes(p1, p2)
 	-- upvalues: boolean (ref), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isInputObjectType (ref), isLeafType (ref), error (ref), array (ref), isListType (ref), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), isNamedType (ref), map (ref), string (ref), console (ref)
 	local _ = nil
 	local healFields = nil
@@ -36,7 +36,7 @@ function t.healTypes(p1, p2) --[[ line: 106 ]]
 	local healUnderlyingTypes = nil
 	local healType = nil
 	
-	local function healNamedType(p3) --[[ line: 187 ]]
+	local function healNamedType(p3)
 		-- upvalues: boolean (copy), isObjectType (copy), healFields (write), healInterfaces (write), isInterfaceType (copy), isUnionType (copy), healUnderlyingTypes (write), isInputObjectType (copy), healInputFields (write), isLeafType (copy), error (copy)
 		if boolean.toJSBoolean(isObjectType(p3)) then
 			healFields(p3)
@@ -64,14 +64,14 @@ function t.healTypes(p1, p2) --[[ line: 106 ]]
 		error(error.new(("Unexpected schema type: %s"):format(tostring(p3))))
 	end
 	
-	healFields = function(p4) --[[ line: 234 | named "healFields" ]]
+	healFields = function(p4)
 		-- upvalues: array (copy), healType (write), boolean (copy)
 		local fields = p4:getFields()
 		
 		for i, v in fields:entries() do
 			local var18 = v[1]
 			local var19 = v[2]
-			array.filter(array.map(var19.args, function(p5) --[[ line: 250 ]]
+			array.filter(array.map(var19.args, function(p5)
 				-- upvalues: healType (copy)
 				p5.type = healType(p5.type)
 				
@@ -85,18 +85,18 @@ function t.healTypes(p1, p2) --[[ line: 106 ]]
 		end
 	end
 	
-	healInterfaces = function(p6) --[[ line: 267 | named "healInterfaces" ]]
+	healInterfaces = function(p6)
 		-- upvalues: array (copy), healType (write), boolean (copy)
 		if p6.getInterfaces ~= nil then
 			local interfaces = p6:getInterfaces()
-			interfaces = array.concat(interfaces, array.filter(array.map(array.splice(interfaces, 1), function(p7) --[[ line: 285 ]]
+			interfaces = array.concat(interfaces, array.filter(array.map(array.splice(interfaces, 1), function(p7)
 				-- upvalues: healType (copy)
 				return healType(p7)
 			end), boolean.toJSBoolean))
 		end
 	end
 	
-	healInputFields = function(p8) --[[ line: 296 | named "healInputFields" ]]
+	healInputFields = function(p8)
 		-- upvalues: healType (write)
 		local fields = p8:getFields()
 		
@@ -111,16 +111,16 @@ function t.healTypes(p1, p2) --[[ line: 106 ]]
 		end
 	end
 	
-	healUnderlyingTypes = function(p9) --[[ line: 316 | named "healUnderlyingTypes" ]]
+	healUnderlyingTypes = function(p9)
 		-- upvalues: array (copy), healType (write), boolean (copy)
 		local types = p9:getTypes()
-		local _ = array.concat(types, array.filter(array.map(array.splice(types, 1), function(p10) --[[ line: 327 ]]
+		local _ = array.concat(types, array.filter(array.map(array.splice(types, 1), function(p10)
 			-- upvalues: healType (copy)
 			return healType(p10)
 		end), boolean.toJSBoolean))
 	end
 	
-	healType = function(p11) --[[ line: 337 | named "healType" ]]
+	healType = function(p11)
 		-- upvalues: boolean (copy), isListType (copy), healType (write), graphQLList (copy), isNonNullType (copy), graphQLNonNull (copy), isNamedType (copy), p1 (ref)
 		if boolean.toJSBoolean(isListType(p11)) then
 			local var25 = healType(p11.ofType)
@@ -168,7 +168,7 @@ function t.healTypes(p1, p2) --[[ line: 106 ]]
 		p1:set(unpacked, var10:get(unpacked))
 	end
 	for i, v_2 in p2 do
-		v_2.args = array.filter(v_2.args, function(p12) --[[ line: 422 ]]
+		v_2.args = array.filter(v_2.args, function(p12)
 			-- upvalues: healType (write)
 			p12.type = healType(p12.type)
 			

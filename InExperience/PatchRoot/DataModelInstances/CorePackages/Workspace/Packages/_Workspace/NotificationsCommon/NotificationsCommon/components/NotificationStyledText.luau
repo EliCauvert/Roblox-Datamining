@@ -6,22 +6,22 @@ local _ = require(parent_1.type)
 local text = require(parent.AppCommonLib).Text
 local react = dependenciesModule.React
 local t = {
-	highlight = function(p0) --[[ line: 49 ]]
+	highlight = function(p0)
 		return "<b>" .. p0 .. "</b>"
 	end,
-	warning = function(p1) --[[ line: 52 ]]
+	warning = function(p1)
 		return "<b>" .. p1 .. "</b>"
 	end
 }
 
-function utf8Sub(p2, p3, p4) --[[ line: 57 ]]
+function utf8Sub(p2, p3, p4)
 	local byteOffset = utf8.offset(p2, p3)
 	local byteOffset_1 = utf8.offset(p2, p4 + 1)
 	
 	return if byteOffset == nil or byteOffset_1 == nil then string.sub(p2, p3, p4) else string.sub(p2, byteOffset, byteOffset_1 - 1)
 end
 
-local function formatString(p5) --[[ line: 66 ]]
+local function formatString(p5)
 	-- upvalues: t (ref), text (ref)
 	local text_1 = p5.text .. " "
 	local styledElements = p5.styledElements
@@ -48,7 +48,7 @@ local function formatString(p5) --[[ line: 66 ]]
 			})
 		end
 	end
-	table.sort(list, function(p6, p7) --[[ line: 101 ]]
+	table.sort(list, function(p6, p7)
 		return p6.Position < p7.Position
 	end)
 	local t_1 = {}
@@ -80,7 +80,7 @@ local function formatString(p5) --[[ line: 66 ]]
 	return text.Trim(var8)
 end
 
-return function(p8) --[[ line: 132 ]]
+return function(p8)
 	-- upvalues: useStyle (ref), formatString (ref), react (ref)
 	local var12 = useStyle()
 	

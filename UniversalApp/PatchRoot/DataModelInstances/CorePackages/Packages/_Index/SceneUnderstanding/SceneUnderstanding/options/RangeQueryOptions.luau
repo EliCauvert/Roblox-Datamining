@@ -1,7 +1,7 @@
 ﻿local t = { maxDistance = 100, limit = 1e999 }
 
 return {
-	new = function(p0) --[[ line: 30 ]]
+	new = function(p0)
 		-- upvalues: t (ref)
 		local cloned = table.clone(t)
 		

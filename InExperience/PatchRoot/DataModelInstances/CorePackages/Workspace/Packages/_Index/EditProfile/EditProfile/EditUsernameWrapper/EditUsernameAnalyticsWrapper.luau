@@ -7,7 +7,7 @@ local analyticsModule = require(editProfile.Analytics)
 local defaultAnalyticsService = require(parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
 local editUsernameWrapperModule = require(script.Parent.EditUsernameWrapper)
 
-return function(p0) --[[ line: 13 ]]
+return function(p0)
 	-- upvalues: useLocalUserId (ref), editProfileIXPModule (ref), reactModule (ref), analyticsModule (ref), defaultAnalyticsService (ref), editUsernameWrapperModule (ref)
 	return if editProfileIXPModule.useIsExperimentEnabled() then reactModule.createElement(analyticsModule.Context.Provider, {
 		value = {

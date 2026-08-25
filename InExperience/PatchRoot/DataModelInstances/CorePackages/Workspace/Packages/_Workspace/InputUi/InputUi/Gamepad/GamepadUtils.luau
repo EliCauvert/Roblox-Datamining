@@ -1,6 +1,6 @@
 ﻿local AXSetAngularVelocityIsOptional = game:DefineFastFlag("AXSetAngularVelocityIsOptional", false)
 local t = {
-	normalizeStickByDeadzone = function(p0, p1) --[[ line: 18 ]]
+	normalizeStickByDeadzone = function(p0, p1)
 		local magnitude = p0.Magnitude
 		p1 = p1 or 0.2
 		
@@ -8,7 +8,7 @@ local t = {
 	end
 }
 
-function t.rotateAndZoom(p2, p3, p4, p5, p6) --[[ line: 28 ]]
+function t.rotateAndZoom(p2, p3, p4, p5, p6)
 	-- upvalues: t (ref), AXSetAngularVelocityIsOptional (ref)
 	local var3 = t.normalizeStickByDeadzone(Vector2.new(p2.Position.X, p2.Position.Y))
 	
@@ -26,7 +26,7 @@ function t.rotateAndZoom(p2, p3, p4, p5, p6) --[[ line: 28 ]]
 	end
 end
 
-function t.mapPositionToDirection(p7) --[[ line: 56 ]]
+function t.mapPositionToDirection(p7)
 	-- upvalues: t (ref)
 	local var4 = t.normalizeStickByDeadzone(p7)
 	local x = var4.X

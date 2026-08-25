@@ -9,7 +9,7 @@ local useLastInputMethod = focusNavigationUtilsModule.useLastInputMethod
 local useAutoFocus = focusNavigationUtilsModule.useAutoFocus
 local useDescendantHasFocus = focusNavigationUtilsModule.useDescendantHasFocus
 
-return function(p0) --[[ line: 22 | named "useFocusNavigationSurface" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), useAutoFocus (ref), useDescendantHasFocus (ref), useLastInputMethod (ref), guiService (ref)
 	local var3, var4 = reactModule.useState(nil)
 	local var5 = useRegisterFocusNavigableSurface()
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 22 | named "useFocusNavigationSurface" ]]
 	local var8 = useDescendantHasFocus(var3)
 	local var9 = useLastInputMethod()
 	local var10 = if var9 ~= "Gamepad" then var9 == "Keyboard" else true
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var5 (ref), p0 (ref), guiService (copy), var6 (ref)
 		if var3 then
 			var5(p0.focusNavigableSurfaceIdentifier, var3)
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 22 | named "useFocusNavigationSurface" ]]
 			guiService:RemoveSelectionGroup(p0.selectionGroupName)
 			guiService.SelectedCoreObject = nil
 		end
-		return function() --[[ line: 42 ]]
+		return function()
 			-- upvalues: var6 (copy), p0 (copy), var3 (copy), guiService (copy)
 			var6(p0.focusNavigableSurfaceIdentifier, var3)
 			guiService:RemoveSelectionGroup(p0.selectionGroupName)
@@ -40,11 +40,11 @@ return function(p0) --[[ line: 22 | named "useFocusNavigationSurface" ]]
 		p0.selectionGroupName
 	})
 	local var11 = var10 and (var3 and not var8)
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var7 (ref)
 		local var12 = if var11 then var7() else nil
 		
-		return function() --[[ line: 57 ]]
+		return function()
 			-- upvalues: var12 (write)
 			if var12 then
 				var12.cancel()

@@ -1,6 +1,6 @@
 ﻿local var0 = nil
 
-function make_assets_1x() --[[ line: 11 ]]
+function make_assets_1x()
 	-- upvalues: var0 (write)
 	var0 = {
 		["LuaApp/9-slice/gr-badge"] = {
@@ -1928,7 +1928,7 @@ end
 
 local var1 = nil
 
-function make_assets_3x() --[[ line: 399 ]]
+function make_assets_3x()
 	-- upvalues: var1 (write)
 	var1 = {
 		["LuaApp/9-slice/gr-badge"] = {
@@ -3831,7 +3831,7 @@ end
 
 local var2 = nil
 
-function make_assets_2x() --[[ line: 782 ]]
+function make_assets_2x()
 	-- upvalues: var2 (write)
 	var2 = {
 		["LuaApp/9-slice/gr-badge"] = {
@@ -5742,7 +5742,7 @@ function make_assets_2x() --[[ line: 782 ]]
 	}
 end
 
-return function(p0) --[[ line: 1166 ]]
+return function(p0)
 	-- upvalues: var1 (write), var2 (write), var0 (write)
 	if p0 > 2.5 then
 		if not var1 then

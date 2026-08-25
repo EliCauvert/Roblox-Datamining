@@ -2,12 +2,12 @@
 local t = {}
 t.__index = t
 
-function t:__tostring() --[[ line: 29 ]]
+function t:__tostring()
 	-- upvalues: t (ref)
 	return getmetatable(t).__tostring(self)
 end
 
-local function _(p0) --[[ line: 35 | named "__createError" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({ name = "Error", message = p0 or "" }, t)
 	t.__captureStackTrace(tbl, 4)
@@ -15,7 +15,7 @@ local function _(p0) --[[ line: 35 | named "__createError" ]]
 	return tbl
 end
 
-function t.new(p1) --[[ line: 44 ]]
+function t.new(p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({ name = "Error", message = p1 or "" }, t)
 	t.__captureStackTrace(tbl, 4)
@@ -23,12 +23,12 @@ function t.new(p1) --[[ line: 44 ]]
 	return tbl
 end
 
-function t.captureStackTrace(p2, p3) --[[ line: 48 ]]
+function t.captureStackTrace(p2, p3)
 	-- upvalues: t (ref)
 	t.__captureStackTrace(p2, 3, p3)
 end
 
-function t:__captureStackTrace(p4, p5) --[[ line: 52 ]]
+function t:__captureStackTrace(p4, p5)
 	-- upvalues: t (ref)
 	if typeof(p5) == "function" then
 		local trac = debug.traceback(nil, p4)
@@ -50,20 +50,20 @@ function t:__captureStackTrace(p4, p5) --[[ line: 52 ]]
 	t.__recalculateStacktrace(self)
 end
 
-function t:__recalculateStacktrace() --[[ line: 76 ]]
+function t:__recalculateStacktrace()
 	local message = self.message
 	self.stack = ((self.name or "Error") .. (if message == nil or message == "" then "" else ": " .. message)) .. "\n" .. (if self.__stack then self.__stack else "")
 end
 
 return setmetatable(t, {
-	__call = function(_, ...) --[[ line: 88 ]]
+	__call = function(_, ...)
 		-- upvalues: t (ref)
 		local tbl = setmetatable({ name = "Error", message = ... or "" }, t)
 		t.__captureStackTrace(tbl, 4)
 		
 		return tbl
 	end,
-	__tostring = function(p6) --[[ line: 91 ]]
+	__tostring = function(p6)
 		return if p6.name == nil then tostring("Error") elseif p6.message and p6.message ~= "" then string.format("%s: %s", tostring(p6.name), tostring(p6.message)) else tostring(p6.name)
 	end
 })

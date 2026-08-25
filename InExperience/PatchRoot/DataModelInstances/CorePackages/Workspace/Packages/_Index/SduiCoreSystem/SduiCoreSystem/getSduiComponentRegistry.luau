@@ -3,11 +3,11 @@ local _ = require(sduiCoreSystem.Parent.React)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 
-local function createSduiComponentRegistry() --[[ line: 27 ]]
+local function createSduiComponentRegistry()
 	local t = {}
 	
 	return {
-		getComponent = function(p0) --[[ line: 42 ]]
+		getComponent = function(p0)
 			-- upvalues: t (ref)
 			local var5
 			local var4 = t[p0]
@@ -22,7 +22,7 @@ local function createSduiComponentRegistry() --[[ line: 27 ]]
 			end
 			return if var5 then var5.component else nil
 		end,
-		getComponentDefinition = function(p1) --[[ line: 30 ]]
+		getComponentDefinition = function(p1)
 			-- upvalues: t (ref)
 			local var6 = t[p1]
 			
@@ -33,11 +33,11 @@ local function createSduiComponentRegistry() --[[ line: 27 ]]
 			end
 			return var6
 		end,
-		registerComponentDefinition = function(p2, p3) --[[ line: 52 ]]
+		registerComponentDefinition = function(p2, p3)
 			-- upvalues: t (ref)
 			t[p2] = p3
 		end,
-		registerComponentDefinitions = function(p4) --[[ line: 59 ]]
+		registerComponentDefinitions = function(p4)
 			-- upvalues: t (ref)
 			for i, v in p4 do
 				t[i] = v
@@ -48,7 +48,7 @@ end
 
 local var2 = nil
 
-return function() --[[ line: 76 | named "getSduiComponentRegistry" ]]
+return function()
 	-- upvalues: var2 (write), createSduiComponentRegistry (ref)
 	if var2 == nil then
 		var2 = createSduiComponentRegistry()

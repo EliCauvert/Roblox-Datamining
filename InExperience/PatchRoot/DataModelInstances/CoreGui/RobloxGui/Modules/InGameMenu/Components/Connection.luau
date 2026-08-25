@@ -8,9 +8,9 @@ local focusHighlightManagerModule = require(script.FocusHighlightManager)
 local nativeCloseEventConnectorModule = require(script.NativeCloseEventConnector)
 local var6 = t.strictInterface({ isEducationalPopupEnabled = t.optional(t.boolean) })
 
-return require(script.Parent.Parent.InGameMenuPolicy).connect(function(p1, _) --[[ line: 32 ]]
+return require(script.Parent.Parent.InGameMenuPolicy).connect(function(p1, _)
 	return { isEducationalPopupEnabled = p1.enableEducationalPopup() }
-end)(function(p0) --[[ line: 20 | named "Connection" ]]
+end)(function(p0)
 	-- upvalues: var6 (ref), roact (ref), friendStatusConnectorModule (ref), lastInputTypeConnectorModule (ref), mouseOverrideManagerModule (ref), focusHighlightManagerModule (ref), nativeCloseEventConnectorModule (ref)
 	assert(var6)
 	

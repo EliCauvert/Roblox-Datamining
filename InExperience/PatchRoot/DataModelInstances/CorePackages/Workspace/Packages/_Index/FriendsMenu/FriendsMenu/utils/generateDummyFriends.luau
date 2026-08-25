@@ -4,7 +4,7 @@ local _ = require(friendsMenu.friendsMenuModalType)
 local constantsModule = require(friendsMenu.Constants)
 local getFFlagFriendsMenuDummyLoadingFriendsFix = require(parent.SharedFlags).GetFFlagFriendsMenuDummyLoadingFriendsFix
 
-local var2 = function(p0) --[[ line: 9 ]]
+local var2 = function(p0)
 	-- upvalues: getFFlagFriendsMenuDummyLoadingFriendsFix (ref), constantsModule (ref)
 	return {
 		displayName = "",
@@ -22,7 +22,7 @@ local var2 = function(p0) --[[ line: 9 ]]
 	}
 end
 
-return function(p1) --[[ line: 28 ]]
+return function(p1)
 	-- upvalues: var2 (ref)
 	local t = {}
 	

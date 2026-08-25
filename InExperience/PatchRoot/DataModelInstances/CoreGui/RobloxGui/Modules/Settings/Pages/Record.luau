@@ -16,7 +16,7 @@ local uiblox = builderIconsModule.Migration.uiblox
 local _ = nil
 local contexts = enums.Contexts
 local eventTypes = enums.EventTypes
-local var10 = (function() --[[ line: 37 | named "Initialize" ]]
+local var10 = (function()
 	-- upvalues: robloxGui (ref), uiblox (ref), builderIconsModule (ref), VRService (ref), themeModule (ref), create (ref), textService (ref), utilityModule (ref), rbxAnalyticsService (ref), contexts (ref), eventTypes (ref), eventNames (ref), coreGuiService (ref)
 	local record = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	local var12 = false
@@ -24,7 +24,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 	recordingEvent.Name = "RecordingEvent"
 	record.RecordingChanged = recordingEvent.Event
 	
-	function record.IsRecording(_) --[[ line: 45 ]]
+	function record.IsRecording(_)
 		-- upvalues: var12 (write)
 		return var12
 	end
@@ -35,7 +35,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 	record.TabHeader.Name = "RecordTab"
 	record.TabHeader.TabLabel.Title.Text = "Record"
 	
-	local function onVREnabled() --[[ line: 55 ]]
+	local function onVREnabled()
 		-- upvalues: record (ref), VRService (copy)
 		record.TabHeader.Visible = not VRService.VREnabled
 	end
@@ -44,7 +44,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 	VRService:GetPropertyChangedSignal("VREnabled"):connect(onVREnabled)
 	record.Page.Name = "Record"
 	
-	local function makeTextLabel(p0, p1, p2, p3, p4) --[[ line: 64 ]]
+	local function makeTextLabel(p0, p1, p2, p3, p4)
 		-- upvalues: themeModule (copy), create (copy), textService (copy)
 		local var16 = 10
 		local var17 = 0
@@ -82,7 +82,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 			Parent = var21
 		})
 		
-		local function onResized(p5) --[[ line: 96 ]]
+		local function onResized(p5)
 			-- upvalues: textService (copy), p1 (ref), var22 (ref), p3 (ref), var16 (write), var17 (write), var21 (ref), var18 (write)
 			if p5 == "AbsoluteSize" then
 				var21.Size = UDim2.new(1, 0, 0, textService:GetTextSize(p1, var22.TextSize, var22.Font, Vector2.new(p3.AbsoluteSize.X - var16 - var17, 10000)).Y + var18)
@@ -95,11 +95,11 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 		return var22, var21
 	end
 	
-	function record.SetHub(_, p6) --[[ line: 110 ]]
+	function record.SetHub(_, p6)
 		-- upvalues: record (ref), makeTextLabel (ref), utilityModule (copy), rbxAnalyticsService (copy), contexts (copy), eventTypes (copy), var12 (write), eventNames (copy), recordingEvent (ref), coreGuiService (copy)
 		record.HubRef = p6
 		
-		local var24 = function() --[[ line: 114 ]]
+		local var24 = function()
 			-- upvalues: record (copy)
 			record.HubRef:SetVisibility(false, true)
 		end
@@ -114,7 +114,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 		local _ = makeTextLabel("VideoBody", "By clicking the 'Record Video' button, the menu will close and start recording your screen.", false, record.Page, 5)
 		local var27, var28 = utilityModule:AddButtonRow(record, "RecordButton", "Record Video", UDim2.new(0, 300, 0, 44), var24)
 		var27.LayoutOrder = 6
-		var28.MouseButton1Click:connect(function() --[[ line: 130 ]]
+		var28.MouseButton1Click:connect(function()
 			-- upvalues: rbxAnalyticsService (copy), contexts (copy), eventTypes (copy), var12 (copy), eventNames (copy), recordingEvent (copy)
 			rbxAnalyticsService:SendEventDeferred("mobile", contexts.Captures, eventTypes.ButtonClick, {
 				btn = if not var12 then eventNames.CapturesLegacyVideoRecordActivated else eventNames.CapturesLegacyVideoRecordDeactivated
@@ -124,7 +124,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 		local var29 = settings():FindFirstChild("Game Options")
 		
 		if var29 then
-			var29.VideoRecordingChangeRequest:connect(function(p7) --[[ line: 142 ]]
+			var29.VideoRecordingChangeRequest:connect(function(p7)
 				-- upvalues: var12 (copy), var28 (ref)
 				var12 = p7
 				
@@ -136,11 +136,11 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 				var28.RecordButtonTextLabel.Text = "Record Video"
 			end)
 		end
-		var28.Activated:Connect(function() --[[ line: 152 ]]
+		var28.Activated:Connect(function()
 			-- upvalues: coreGuiService (copy)
 			coreGuiService:ToggleRecording()
 		end)
-		record.ScreenshotButton.Activated:Connect(function() --[[ line: 155 ]]
+		record.ScreenshotButton.Activated:Connect(function()
 			-- upvalues: coreGuiService (copy)
 			coreGuiService:TakeScreenshot()
 		end)
@@ -149,7 +149,7 @@ local var10 = (function() --[[ line: 37 | named "Initialize" ]]
 	
 	return record
 end)()
-var10.Displayed.Event:connect(function(p8) --[[ line: 169 ]]
+var10.Displayed.Event:connect(function(p8)
 	-- upvalues: guiService (ref), var10 (write)
 	if p8 then
 		guiService.SelectedCoreObject = var10.ScreenshotButton

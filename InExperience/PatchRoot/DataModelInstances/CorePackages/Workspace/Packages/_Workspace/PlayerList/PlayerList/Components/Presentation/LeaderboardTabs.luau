@@ -13,9 +13,9 @@ local usePlatformLeaderboardModule = require(parent.Hooks.usePlatformLeaderboard
 local fallbackSignalsModule = require(parent.Common.FallbackSignals)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 
-local function _(p0, p1) --[[ line: 21 | named "translateOrLegacy" ]]
+local function _(p0, p1)
 	-- upvalues: robloxTranslatorModule (ref)
-	local ok, status = pcall(function() --[[ line: 22 ]]
+	local ok, status = pcall(function()
 		-- upvalues: robloxTranslatorModule (copy), p0 (ref)
 		return robloxTranslatorModule:FormatByKey(p0)
 	end)
@@ -26,28 +26,28 @@ end
 local t = {}
 local t_1 = { id = "server" }
 local var9 = "CoreScripts.TextChat.ChannelTabs.Here"
-local ok, ok_1 = pcall(function() --[[ line: 22 ]]
+local ok, ok_1 = pcall(function()
 	-- upvalues: robloxTranslatorModule (ref), var9 (ref)
 	return robloxTranslatorModule:FormatByKey(var9)
 end)
 t_1.text = if ok and ok_1 and ok_1 ~= "" then ok_1 else "Here"
 local t_2 = { id = "friends", text = ok }
 local var11 = "CommonUI.Features.Label.Friends"
-ok_1, ok_2 = pcall(function() --[[ line: 22 ]]
+ok_1, ok_2 = pcall(function()
 	-- upvalues: robloxTranslatorModule (ref), var11 (ref)
 	return robloxTranslatorModule:FormatByKey(var11)
 end)
 ok = if ok_1 and ok_2 and ok_2 ~= "" then ok_2 else "Friends"
 ok = { id = "global", text = ok_1 }
 local var12 = "CoreScripts.TextChat.ChannelTabs.Global2"
-ok_2, status_2 = pcall(function() --[[ line: 22 ]]
+ok_2, status_2 = pcall(function()
 	-- upvalues: robloxTranslatorModule (ref), var12 (ref)
 	return robloxTranslatorModule:FormatByKey(var12)
 end)
 ok_1 = if ok_2 and status_2 and status_2 ~= "" then status_2 else "Global"
 -- Unknown statement at pc 28: <SetList>
 
-return reactModule.memo(function(value) --[[ line: 44 | named "LeaderboardTabs" ]]
+return reactModule.memo(function(value)
 	-- upvalues: usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), signalsReactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), t (ref), reactModule (ref), view (ref), tabs (ref), inputSize (ref), fillBehavior (ref)
 	local var15
 	local var13 = usePlatformLeaderboardModule()
@@ -68,7 +68,7 @@ return reactModule.memo(function(value) --[[ line: 44 | named "LeaderboardTabs" 
 	else
 		var15 = t
 	end
-	reactModule.useEffect(function() --[[ line: 69 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), value (ref)
 		if not var14 and value.onPlatformTabsUnavailable then
 			value.onPlatformTabsUnavailable()
@@ -84,7 +84,7 @@ return reactModule.memo(function(value) --[[ line: 44 | named "LeaderboardTabs" 
 			activeTabId = value.activeTabId,
 			size = inputSize.Small,
 			fillBehavior = fillBehavior.Fill,
-			onActivated = reactModule.useCallback(function(p2) --[[ line: 75 ]]
+			onActivated = reactModule.useCallback(function(p2)
 				-- upvalues: value (ref)
 				value.onActivated(tostring(p2))
 			end, { value.onActivated }),

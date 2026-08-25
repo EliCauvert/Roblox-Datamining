@@ -8,21 +8,21 @@ local _ = script:FindFirstAncestor("ReactUtils")
 local dEV = reactGlobalsModule.__DEV__
 local var3 = require(parent.SafeFlags).createGetFFlag("ReactInstanceMapDisableErrorChecking")()
 local t = {
-	remove = function(p0) --[[ line: 51 ]]
+	remove = function(p0)
 		p0._reactInternals = nil
 	end
 }
 
-local function _(p1) --[[ line: 44 | named "isValidFiber" ]]
+local function _(p1)
 	return p1.tag ~= nil and (p1.subtreeFlags ~= nil and (p1.lanes ~= nil and p1.childLanes ~= nil))
 end
 
 if var3 and not dEV then
-	function t.get(p2) --[[ line: 82 ]]
+	function t.get(p2)
 		return p2._reactInternals
 	end
 else
-	function t.get(p3) --[[ line: 56 ]]
+	function t.get(p3)
 		-- upvalues: error (ref), getComponentNameModule (ref), inspect (ref)
 		local reactInternals = p3._reactInternals
 		
@@ -40,18 +40,18 @@ else
 		return reactInternals
 	end
 end
-function t.has(p4) --[[ line: 87 ]]
+function t.has(p4)
 	return p4._reactInternals ~= nil
 end
 
 if var3 and not dEV then
-	function t.set(p5, p6) --[[ line: 129 ]]
+	function t.set(p5, p6)
 		p5._reactInternals = p6
 	end
 	
 	return t
 end
-function t.set(p7, p8) --[[ line: 92 ]]
+function t.set(p7, p8)
 	-- upvalues: getComponentNameModule (ref), inspect (ref), error (ref)
 	local var5 = p8
 	local _ = nil

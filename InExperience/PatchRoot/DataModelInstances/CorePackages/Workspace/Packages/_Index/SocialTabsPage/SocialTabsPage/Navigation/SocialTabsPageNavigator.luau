@@ -10,10 +10,10 @@ local var4 = roactNavigationModule.createRobloxSwitchNavigator(require(script.Pa
 	backBehavior = roactNavigationModule.BackBehavior.None
 })
 
-local function SocialTabsPageNavigatorComponent(value) --[[ line: 21 ]]
+local function SocialTabsPageNavigatorComponent(value)
 	-- upvalues: useNavigationProps (ref), reactModule (ref), var4 (ref), socialTabsPageModule (ref)
 	local navigation = value.navigation
-	local var7 = useNavigationProps(function(_, p0) --[[ line: 24 ]]
+	local var7 = useNavigationProps(function(_, p0)
 		return {
 			profileId = p0.profileId,
 			title = p0.title,
@@ -24,7 +24,7 @@ local function SocialTabsPageNavigatorComponent(value) --[[ line: 21 ]]
 	end)
 	
 	return reactModule.createElement(socialTabsPageModule, {
-		renderNavigator = reactModule.useCallback(function() --[[ line: 34 ]]
+		renderNavigator = reactModule.useCallback(function()
 			-- upvalues: reactModule (copy), var4 (copy), navigation (ref)
 			return reactModule.createElement(var4, { navigation = navigation })
 		end, { navigation }),
@@ -38,7 +38,7 @@ end
 
 local socialTabsPageNavigatorClassWrapper = reactModule.PureComponent:extend("SocialTabsPageNavigatorClassWrapper")
 
-function socialTabsPageNavigatorClassWrapper.render(p1) --[[ line: 52 ]]
+function socialTabsPageNavigatorClassWrapper.render(p1)
 	-- upvalues: reactModule (ref), SocialTabsPageNavigatorComponent (ref)
 	return reactModule.createElement(SocialTabsPageNavigatorComponent, p1.props)
 end

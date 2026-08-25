@@ -16,7 +16,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local useSegmentedControlVariantsModule = require(script.Parent.useSegmentedControlVariants)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 51 | named "Segment" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: flagsModule (ref), useTokensModule (ref), useSegmentedControlVariantsModule (ref), devAssertModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref)
 	local var10 = useSegmentedControlVariantsModule(useTokensModule(), p0.size, if flagsModule.FoundationSegmentedControlBeta then if flagsModule.FoundationSegmentedControlBeta then p0.variant else nil else nil, if flagsModule.FoundationSegmentedControlBeta then if flagsModule.FoundationSegmentedControlBeta then p0.fillBehavior else nil else nil, p0.isCircular, if flagsModule.FoundationSegmentedControlBeta then p0.isActive else nil)
 	devAssertModule(if p0.text ~= nil then p0.icon == nil else true, "Segment: `text` and `icon` are mutually exclusive. Only one can be provided.")
@@ -37,7 +37,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 51 | 
 	end
 	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
 		tag = var10.segment.tag,
-		onActivated = function() --[[ line: 94 ]]
+		onActivated = function()
 			-- upvalues: p0 (ref)
 			p0.onActivated(p0.id)
 		end,

@@ -8,7 +8,7 @@ local root = lumberyakModule.Logger.new(nil, "root")
 local currentTime = tick()
 local t = { ["*"] = root }
 root:setContext({
-	tostring = function(p0) --[[ line: 46 ]]
+	tostring = function(p0)
 		-- upvalues: dashModule (ref)
 		if typeof(p0) == "string" then
 			return p0
@@ -19,7 +19,7 @@ root:setContext({
 	end
 })
 
-local function _(p1, p2) --[[ line: 63 | named "newLogger" ]]
+local function _(p1, p2)
 	-- upvalues: lumberyakModule (ref), t (ref)
 	local var10 = lumberyakModule.Logger.new(p1, p2)
 	t[p2] = var10
@@ -27,7 +27,7 @@ local function _(p1, p2) --[[ line: 63 | named "newLogger" ]]
 	return var10
 end
 
-local function createLoggerTree(p3) --[[ line: 69 ]]
+local function createLoggerTree(p3)
 	-- upvalues: root (ref), t (ref), lumberyakModule (ref)
 	local var11 = p3:split(".")
 	local var12 = ""
@@ -51,12 +51,12 @@ local function createLoggerTree(p3) --[[ line: 69 ]]
 	return var13
 end
 
-local function logger(p4) --[[ line: 88 ]]
+local function logger(p4)
 	-- upvalues: t (ref), createLoggerTree (ref)
 	return t[p4] or createLoggerTree(p4)
 end
 
-local _ = function(value) --[[ line: 92 | named "parseTag" ]]
+local _ = function(value)
 	-- upvalues: dashModule (ref), levels (ref)
 	local var17 = value:split(":")
 	
@@ -70,16 +70,16 @@ local _ = function(value) --[[ line: 92 | named "parseTag" ]]
 	return nil, nil
 end
 
-local _ = function(p5) --[[ line: 123 | named "splitNonEmpty" ]]
+local _ = function(p5)
 	-- upvalues: dashModule (ref)
-	return dashModule.filter(dashModule.splitOn(p5, "%s+"), function(p6) --[[ line: 125 ]]
+	return dashModule.filter(dashModule.splitOn(p5, "%s+"), function(p6)
 		return #p6 > 0
 	end)
 end
 
 return {
 	logger = logger,
-	formatLog = function(p7, p8, p9) --[[ line: 103 ]]
+	formatLog = function(p7, p8, p9)
 		-- upvalues: currentTime (ref)
 		local formattedText = string.format("%s [%s] %s", p8.level:sub(1, 1), p8.loggerName, p7)
 		
@@ -88,7 +88,7 @@ return {
 		end
 		return formattedText
 	end,
-	logToConsole = function(_, p10, p11) --[[ line: 113 ]]
+	logToConsole = function(_, p10, p11)
 		-- upvalues: levels (ref)
 		local level = p11.level
 		local formattedText = string.format("%s [%s] %s", p11.level:sub(1, 1), p11.loggerName, p10)
@@ -100,11 +100,11 @@ return {
 		end
 		print(formattedText)
 	end,
-	setLogTags = function(value, p12) --[[ line: 130 ]]
+	setLogTags = function(value, p12)
 		-- upvalues: sharedSinkModule (ref), dashModule (ref), levels (ref), t (ref), createLoggerTree (ref)
 		local var22 = sharedSinkModule.new(p12)
 		
-		for i, v in dashModule.filter(dashModule.splitOn(value, "%s+"), function(p13) --[[ line: 125 ]]
+		for i, v in dashModule.filter(dashModule.splitOn(value, "%s+"), function(p13)
 			return #p13 > 0
 		end) do
 			local var24, var25

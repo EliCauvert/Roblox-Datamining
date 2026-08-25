@@ -1,6 +1,6 @@
 ﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 
-return function(p0, p1) --[[ line: 3 ]]
+return function(p0, p1)
 	-- upvalues: rbxAnalyticsService (ref)
 	if not p1 then
 		p1 = {}

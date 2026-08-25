@@ -14,7 +14,7 @@ local multiTextLocalizerModule = require(parent_1.Locale.MultiTextLocalizer)
 local bulletPointModule = require(parent.BulletPoint)
 local name = roactModule.Component:extend(script.Name)
 
-function name.init(p0) --[[ line: 47 ]]
+function name.init(p0)
 	p0.isCondensed = false
 	p0.contentSize = Vector2.new(0, 0)
 	p0.state = {
@@ -22,7 +22,7 @@ function name.init(p0) --[[ line: 47 ]]
 		iconSize = UDim2.new(1, 0, 0, 80)
 	}
 	
-	function p0.updateContentSizes(p1, p2) --[[ line: 56 ]]
+	function p0.updateContentSizes(p1, p2)
 		-- upvalues: p0 (ref)
 		if p2.X < 200 or p2.Y > 1000 then return end
 		local var5
@@ -46,13 +46,13 @@ function name.init(p0) --[[ line: 47 ]]
 	end
 end
 
-function name.willUpdate(p3, p4) --[[ line: 98 ]]
+function name.willUpdate(p3, p4)
 	if p3.props.screenSize ~= p4.screenSize then
 		p3.updateContentSizes(p4.screenSize, p3.contentSize)
 	end
 end
 
-function name.render(p5) --[[ line: 104 ]]
+function name.render(p5)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	local props = p5.props
 	
@@ -95,16 +95,16 @@ function name.render(p5) --[[ line: 104 ]]
 			headerLocalizedText = { key = "IAPExperience.PremiumUpsell.Label.RobloxPremium" },
 			policyLocalizedText = { key = "IAPExperience.PremiumUpsell.Label.PremiumPolicy" }
 		},
-		render = function(p6) --[[ line: 158 ]]
+		render = function(p6)
 			-- upvalues: p5 (ref)
 			return p5:renderPrompt(p6)
 		end
 	})
 end
 
-function name.renderCondensedPremiumInfo(_, b) --[[ line: 164 ]]
+function name.renderCondensedPremiumInfo(_, b)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref)
-	return withStyle(function(p7) --[[ line: 165 ]]
+	return withStyle(function(p7)
 		-- upvalues: roactModule (copy), imageSetLabel (copy), images (copy), b (ref)
 		local theme = p7.Theme
 		local font = p7.Font
@@ -197,9 +197,9 @@ function name.renderCondensedPremiumInfo(_, b) --[[ line: 164 ]]
 	end)
 end
 
-function name.renderBulletInfo(p8, p9) --[[ line: 261 ]]
+function name.renderBulletInfo(p8, p9)
 	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), fitFrameVertical (ref), bulletPointModule (ref)
-	return withStyle(function(p10) --[[ line: 262 ]]
+	return withStyle(function(p10)
 		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p8 (ref), roactModule (copy), p9 (ref), fitFrameVertical (copy), bulletPointModule (copy)
 		local theme = p10.Theme
 		local font = p10.Font
@@ -255,9 +255,9 @@ function name.renderBulletInfo(p8, p9) --[[ line: 261 ]]
 	end)
 end
 
-function name.renderDisclosure(_, p11) --[[ line: 321 ]]
+function name.renderDisclosure(_, p11)
 	-- upvalues: withStyle (ref), roactModule (ref)
-	return withStyle(function(p12) --[[ line: 322 ]]
+	return withStyle(function(p12)
 		-- upvalues: roactModule (copy), p11 (ref)
 		local theme = p12.Theme
 		local font = p12.Font
@@ -286,11 +286,11 @@ function name.renderDisclosure(_, p11) --[[ line: 321 ]]
 	end)
 end
 
-function name.renderLandscapePrompt(p13, p14) --[[ line: 352 ]]
+function name.renderLandscapePrompt(p13, p14)
 	-- upvalues: withStyle (ref), roactModule (ref), partialPageModal (ref), buttonType (ref)
 	local props = p13.props
 	
-	return withStyle(function(_) --[[ line: 355 ]]
+	return withStyle(function(_)
 		-- upvalues: roactModule (copy), partialPageModal (copy), p14 (ref), props (ref), buttonType (copy), p13 (ref)
 		return roactModule.createElement(partialPageModal, {
 			title = p14.titleLocalizedText,
@@ -334,11 +334,11 @@ function name.renderLandscapePrompt(p13, p14) --[[ line: 352 ]]
 	end)
 end
 
-function name.renderPortraitPrompt(p15, p16) --[[ line: 403 ]]
+function name.renderPortraitPrompt(p15, p16)
 	-- upvalues: withStyle (ref), roactModule (ref), partialPageModal (ref), buttonType (ref)
 	local props = p15.props
 	
-	return withStyle(function(_) --[[ line: 406 ]]
+	return withStyle(function(_)
 		-- upvalues: roactModule (copy), partialPageModal (copy), p16 (ref), props (ref), buttonType (copy), p15 (ref)
 		return roactModule.createElement(partialPageModal, {
 			title = p16.titleLocalizedText,
@@ -376,11 +376,11 @@ function name.renderPortraitPrompt(p15, p16) --[[ line: 403 ]]
 	end)
 end
 
-function name.renderUpdatedPrompt(p17, p18) --[[ line: 443 ]]
+function name.renderUpdatedPrompt(p17, p18)
 	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), partialPageModal (ref), buttonType (ref), fitFrameVertical (ref), imageSetLabel (ref), images (ref), bulletPointModule (ref)
 	local props = p17.props
 	
-	return withStyle(function(p19) --[[ line: 446 ]]
+	return withStyle(function(p19)
 		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p17 (ref), roactModule (copy), partialPageModal (copy), p18 (ref), props (ref), buttonType (copy), fitFrameVertical (copy), imageSetLabel (copy), images (copy), bulletPointModule (copy)
 		local theme = p19.Theme
 		local font = p19.Font
@@ -409,7 +409,7 @@ function name.renderUpdatedPrompt(p17, p18) --[[ line: 443 ]]
 				width = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 12),
 				margin = { top = 12, bottom = 12 },
-				[roactModule.Change.AbsoluteSize] = function(p20) --[[ line: 479 ]]
+				[roactModule.Change.AbsoluteSize] = function(p20)
 					-- upvalues: p17 (copy)
 					if p17.contentSize.X ~= p20.AbsoluteSize.X or p17.contentSize.Y ~= p20.AbsoluteSize.Y then
 						p17.updateContentSizes(p17.props.screenSize, p20.AbsoluteSize)
@@ -514,7 +514,7 @@ function name.renderUpdatedPrompt(p17, p18) --[[ line: 443 ]]
 	end)
 end
 
-function name.renderPrompt(p21, p22) --[[ line: 585 ]]
+function name.renderPrompt(p21, p22)
 	local props = p21.props
 	
 	return if props.screenSize.Y < 450 then p21:renderLandscapePrompt(p22) elseif props.screenSize.X < 450 then p21:renderPortraitPrompt(p22) else p21:renderUpdatedPrompt(p22)

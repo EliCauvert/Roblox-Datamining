@@ -27,7 +27,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateInMeshSpace(p0, p1, p2, p3, p4, p5) --[[ line: 36 ]]
+local function validateInMeshSpace(p0, p1, p2, p3, p4, p5)
 	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref), boundsDataUtilsModule (ref), errorSourceStringsModule (ref), meshSpaceUtilsModule (ref), getFFlagUGCValidateAttachmentBoundsErrorMessageModule (ref), prettyPrintVector3Module (ref), getFStringUGCValidationAttachmentErrorLinkModule (ref)
 	local var15 = p3.cframe * getAttachmentCFrameInPartSpaceModule(p0)
 	local var16 = boundsDataUtilsModule.calculateBoundsCenters(p3.boundsData)
@@ -77,7 +77,7 @@ local function validateInMeshSpace(p0, p1, p2, p3, p4, p5) --[[ line: 36 ]]
 	end
 end
 
-local function checkAll(p6, p7, p8, p9) --[[ line: 107 ]]
+local function checkAll(p6, p7, p8, p9)
 	-- upvalues: r15plusUtilsModule (ref), validateInMeshSpace (ref)
 	local name = p6:FindFirstChild(p7.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
@@ -93,7 +93,7 @@ local function checkAll(p6, p7, p8, p9) --[[ line: 107 ]]
 	end
 end
 
-function t.run(p10, p11) --[[ line: 143 ]]
+function t.run(p10, p11)
 	-- upvalues: constantsModule (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), checkAll (ref)
 	local rootInstance = p11.rootInstance
 	local assetType = p11.uploadEnum.assetType

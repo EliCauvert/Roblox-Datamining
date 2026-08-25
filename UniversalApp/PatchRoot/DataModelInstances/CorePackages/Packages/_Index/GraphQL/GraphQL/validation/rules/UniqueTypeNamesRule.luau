@@ -1,12 +1,12 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueTypeNamesRule = function(p0) --[[ line: 19 ]]
+	UniqueTypeNamesRule = function(p0)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		local schema = p0:getSchema()
 		
-		local function checkTypeName(_, p1) --[[ line: 25 ]]
+		local function checkTypeName(_, p1)
 			-- upvalues: schema (ref), p0 (ref), graphQLError (copy), t (ref)
 			local value = p1.name.value
 			

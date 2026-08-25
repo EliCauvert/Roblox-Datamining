@@ -2,7 +2,7 @@
 local kind = require(script.Parent.Parent.language.kinds).Kind
 
 return {
-	getOperationAST = function(p0, p1) --[[ line: 21 ]]
+	getOperationAST = function(p0, p1)
 		-- upvalues: kind (ref)
 		local var0 = nil
 		

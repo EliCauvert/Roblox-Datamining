@@ -8,17 +8,17 @@ local useTokens = foundationModule.Hooks.useTokens
 local useDeviceInsets = responsiveModule.useDeviceInsets
 local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 45 | named "DetailsPageLayoutHeader" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), useDeviceInsets (ref), reactModule (ref), detailsPageLayoutContextModule (ref), foundationModule (ref), responsiveModule (ref), iconButton (ref), view (ref)
 	local var4 = useTokens()
 	local var5 = useDeviceInsets()
 	local var6 = reactModule.useContext(detailsPageLayoutContextModule)
 	local setHasHeader = var6.setHasHeader
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: setHasHeader (ref)
 		setHasHeader(true)
 		
-		return function() --[[ line: 53 ]]
+		return function()
 			-- upvalues: setHasHeader (copy)
 			setHasHeader(false)
 		end
@@ -39,7 +39,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 45 | 
 	local var10 = if isFullscreenOverlay and onExitFullscreenOverlay then onExitFullscreenOverlay else onClose
 	local var11 = if isFullscreenOverlay then foundationModule.Enums.IconName.ChevronLargeLeft else closeIconName
 	local var12 = if isFullscreenOverlay then nil else headerOpacity
-	local var13 = if hasFullBleed and var12 then var12:map(function(p2) --[[ line: 85 ]]
+	local var13 = if hasFullBleed and var12 then var12:map(function(p2)
 		return p2 >= 0.5
 	end) else nil
 	local var14 = p0.children and (if hasFullBleed then var12 else not hasFullBleed or stickyHeaderActive)
@@ -55,7 +55,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 45 | 
 		ZIndex = 2,
 		tag = "col",
 		Size = UDim2.new(1, 0, 0, headerBarHeight),
-		backgroundStyle = if hasFullBleed and var12 then var12:map(function(p3) --[[ line: 179 ]]
+		backgroundStyle = if hasFullBleed and var12 then var12:map(function(p3)
 			-- upvalues: backgroundColor (ref)
 			return {
 				Color3 = backgroundColor.Color3,
@@ -112,7 +112,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 45 | 
 		}),
 		BottomBorder = reactModule.createElement(view, {
 			LayoutOrder = 2,
-			backgroundStyle = if var12 then var12:map(function(p4) --[[ line: 191 ]]
+			backgroundStyle = if var12 then var12:map(function(p4)
 				-- upvalues: var4 (ref)
 				return {
 					Color3 = var4.Color.Stroke.Muted.Color3,

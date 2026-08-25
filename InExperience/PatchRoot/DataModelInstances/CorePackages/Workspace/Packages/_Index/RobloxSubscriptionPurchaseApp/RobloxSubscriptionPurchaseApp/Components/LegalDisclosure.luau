@@ -10,19 +10,19 @@ local fFlagSupportFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local robloxSubscriptionTermsOfUseLink = game:DefineFastString("RobloxSubscriptionTermsOfUseLink", "https://en.help.roblox.com/hc/articles/46804865425300")
 
-local function _(p0) --[[ line: 18 | named "decodeLuauUnicodeEscapes" ]]
-	return p0:gsub("\\u{(%x+)}", function(p1) --[[ line: 20 ]]
+local function _(p0)
+	return p0:gsub("\\u{(%x+)}", function(p1)
 		local var9 = tonumber(p1, 16)
 		
 		return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
 	end)
 end
 
-local function decodeInlineRichTextEntities(p2) --[[ line: 32 ]]
+local function decodeInlineRichTextEntities(p2)
 	return p2:gsub("&amp;lt;", "<"):gsub("&amp;gt;", ">"):gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&amp;amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&amp;", "&")
 end
 
-local function replaceQuotesOutsideTags(p3) --[[ line: 48 ]]
+local function replaceQuotesOutsideTags(p3)
 	local var13
 	local t = {}
 	local var11 = false
@@ -49,20 +49,20 @@ local function replaceQuotesOutsideTags(p3) --[[ line: 48 ]]
 	return table.concat(t)
 end
 
-local _ = function(p4) --[[ line: 70 | named "prepareTermsAgreementRichText" ]]
+local _ = function(p4)
 	-- upvalues: fFlagSupportFreeTrialModule (ref), replaceQuotesOutsideTags (ref), decodeInlineRichTextEntities (ref)
-	return if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(p4:gsub("\\u{(%x+)}", function(p6) --[[ line: 20 ]]
+	return if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(p4:gsub("\\u{(%x+)}", function(p6)
 		local var9 = tonumber(p6, 16)
 		
 		return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
-	end))) else decodeInlineRichTextEntities(p4:gsub("\\u{(%x+)}", function(p5) --[[ line: 20 ]]
+	end))) else decodeInlineRichTextEntities(p4:gsub("\\u{(%x+)}", function(p5)
 		local var9 = tonumber(p5, 16)
 		
 		return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
 	end))
 end
 
-return function(p7) --[[ line: 85 | named "LegalDisclosure" ]]
+return function(p7)
 	-- upvalues: foundationModule (ref), useLocalization (ref), robloxSubscriptionTermsOfUseLink (ref), fFlagSupportFreeTrialModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), reactModule (ref), linkBehavior (ref), renderer (ref), replaceQuotesOutsideTags (ref), decodeInlineRichTextEntities (ref)
 	local var14 = foundationModule.Hooks.useTokens()
 	local var15 = useLocalization({
@@ -87,21 +87,21 @@ return function(p7) --[[ line: 85 | named "LegalDisclosure" ]]
 	local var16 = if fFlagRobloxPlusFAEFreeTrialModule and p7.shortenFreeTrialTerms then var15.shortFreeTrialTermsAgreement elseif fFlagSupportFreeTrialModule and p7.isFreeTrial then var15.freeTrialTermsAgreement else var15.termsAgreement
 	
 	return reactModule.createElement(renderer, {
-		text = if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(var16:gsub("\\u{(%x+)}", function(p9) --[[ line: 20 ]]
+		text = if fFlagSupportFreeTrialModule then replaceQuotesOutsideTags(decodeInlineRichTextEntities(var16:gsub("\\u{(%x+)}", function(p9)
 			local var9 = tonumber(p9, 16)
 			
 			return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
-		end))) else decodeInlineRichTextEntities(var16:gsub("\\u{(%x+)}", function(p8) --[[ line: 20 ]]
+		end))) else decodeInlineRichTextEntities(var16:gsub("\\u{(%x+)}", function(p8)
 			local var9 = tonumber(p8, 16)
 			
 			return if var9 == nil or var9 < 0 or var9 > 1114111 then "" else utf8.char(var9)
 		end)),
 		textStyle = var14.Color.Content.Default,
 		fontStyle = var14.Typography.BodySmall,
-		linkerOptions = reactModule.useMemo(function() --[[ line: 114 ]]
+		linkerOptions = reactModule.useMemo(function()
 			-- upvalues: linkBehavior (copy)
 			return {
-				evaluateLinkBehavior = function(_, _) --[[ line: 116 ]]
+				evaluateLinkBehavior = function(_, _)
 					-- upvalues: linkBehavior (copy)
 					return linkBehavior.Webview
 				end

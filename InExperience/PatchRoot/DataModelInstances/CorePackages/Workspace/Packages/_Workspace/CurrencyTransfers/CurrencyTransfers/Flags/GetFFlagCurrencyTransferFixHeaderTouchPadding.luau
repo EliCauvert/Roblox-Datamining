@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("CurrencyTransferFixHeaderTouchPadding", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("CurrencyTransferFixHeaderTouchPadding")
 end

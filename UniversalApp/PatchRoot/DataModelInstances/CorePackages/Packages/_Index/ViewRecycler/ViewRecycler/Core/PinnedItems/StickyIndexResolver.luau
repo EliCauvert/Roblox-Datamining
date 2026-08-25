@@ -2,14 +2,14 @@
 local _ = require(viewRecycler.Core.DataSource)
 local _ = require(viewRecycler.Core.Types)
 
-return function(p0, p1) --[[ line: 15 | named "createStickyIndexResolver" ]]
+return function(p0, p1)
 	local var1 = p0
 	local var2 = p1
 	local t = {}
 	local var4 = true
 	
 	return {
-		setPredicate = function(value) --[[ line: 40 ]]
+		setPredicate = function(value)
 			-- upvalues: var2 (write), var4 (write)
 			if var2 == value then
 				return false
@@ -19,18 +19,18 @@ return function(p0, p1) --[[ line: 15 | named "createStickyIndexResolver" ]]
 			
 			return true
 		end,
-		setDataSource = function(value) --[[ line: 48 ]]
+		setDataSource = function(value)
 			-- upvalues: var1 (write), var4 (write)
 			if var1 ~= value then
 				var1 = value
 				var4 = true
 			end
 		end,
-		applyDataSourceChange = function(_) --[[ line: 54 ]]
+		applyDataSourceChange = function(_)
 			-- upvalues: var4 (write)
 			var4 = true
 		end,
-		resolve = function() --[[ line: 24 ]]
+		resolve = function()
 			-- upvalues: var4 (write), t (ref), var2 (write), var1 (write)
 			if var4 then
 				table.clear(t)

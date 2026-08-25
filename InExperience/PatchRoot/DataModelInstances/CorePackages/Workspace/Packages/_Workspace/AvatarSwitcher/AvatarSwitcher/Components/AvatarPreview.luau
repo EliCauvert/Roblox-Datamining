@@ -18,10 +18,10 @@ local t = {
 	AVATAR_ISSUE = foundationCloudAssetsModule.Assets["pictograms/avatar_issue"]
 }
 
-return function(p0) --[[ line: 46 | named "AvatarPreview" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useLocalization (ref), useTokens (ref), foundationModule (ref), t (ref), avatarSwitcher3DPreview (ref), outfitViewportModule (ref), fFlagAvatarSwitcherCounters (ref), sendAXCounterV2 (ref), constantsModule (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref), fFlagAvatarSwitcherWarningLayoutFix (ref), fFlagAXBackgroundsInOutfitThumbnails (ref)
 	local var8, var9 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref)
 		var9(false)
 	end, { p0.outfitId })
@@ -86,7 +86,7 @@ return function(p0) --[[ line: 46 | named "AvatarPreview" ]]
 			OutfitViewport = reactModule.createElement(outfitViewportModule, {
 				outfitId = p0.outfitId,
 				rigType = p0.rigType,
-				onLoadingFailed = function() --[[ line: 131 ]]
+				onLoadingFailed = function()
 					-- upvalues: fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var9 (ref)
 					if fFlagAvatarSwitcherCounters then
 						sendAXCounterV2(constantsModule.Counters.AvatarPreviewLoadFailed)

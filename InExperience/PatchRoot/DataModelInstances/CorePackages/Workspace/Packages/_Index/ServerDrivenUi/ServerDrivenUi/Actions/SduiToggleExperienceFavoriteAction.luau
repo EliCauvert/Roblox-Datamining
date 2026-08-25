@@ -11,7 +11,7 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local gameFavorite = discoveryAnalyticsModule.Events.gameFavorite
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
-return function(p0, _, p1, _) --[[ line: 23 | named "SduiToggleExperienceFavoriteAction" ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFavorite (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	local var6 = if p0 then p0.actionParams else nil
 	
@@ -46,7 +46,7 @@ return function(p0, _, p1, _) --[[ line: 23 | named "SduiToggleExperienceFavorit
 	}, ctx)
 	local var11 = favoritesStore.updateFavorite(universeId, var10)
 	local t = {}
-	t.dispose = signalsModule.createEffect(function(p2) --[[ line: 67 ]]
+	t.dispose = signalsModule.createEffect(function(p2)
 		-- upvalues: var11 (ref), p1 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), t (ref)
 		local var13 = var11(p2)
 		

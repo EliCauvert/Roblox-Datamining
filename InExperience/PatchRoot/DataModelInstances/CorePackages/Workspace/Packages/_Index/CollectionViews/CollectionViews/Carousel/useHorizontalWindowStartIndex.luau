@@ -4,10 +4,10 @@ local reactModule = require(parent.React)
 local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
 local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 14 | named "useHorizontalWindowStartIndex" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), fFlagCollectionViewMathChanges (ref)
 	local var2, var3 = reactModule.useState(1)
-	local var4 = reactModule.useCallback(function() --[[ line: 26 ]]
+	local var4 = reactModule.useCallback(function()
 		-- upvalues: p3 (ref), p0 (ref), fFlagCollectionViewMathChanges (copy), p4 (ref), p5 (ref), p1 (ref), p2 (ref), var3 (ref)
 		if p3 then
 			if p0.current == nil or fFlagCollectionViewMathChanges and p4 <= 0 then return end
@@ -31,11 +31,11 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 14 | named "useHorizontalWind
 		if fFlagCollectionViewMathChanges then p5 else p1,
 		if fFlagCollectionViewMathChanges then p4 else p2
 	})
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref)
 		var4()
 	end, { var4 })
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p3 (ref), p0 (ref), var4 (ref)
 		if not p3 then
 			return nil
@@ -47,7 +47,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 14 | named "useHorizontalWind
 			table.insert(t, p0.current:GetPropertyChangedSignal("CanvasPosition"):Connect(var4))
 			table.insert(t, p0.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var4))
 		end
-		return function() --[[ line: 80 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

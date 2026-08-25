@@ -14,15 +14,15 @@ local getFFlagPassNavigationToContactsRevokedModule = require(parent.Flags.getFF
 local contactsRevokedAccessDialog = roact.PureComponent:extend("ContactsRevokedAccessDialog")
 contactsRevokedAccessDialog.validateProps = t.strictInterface({ navigation = t.table, screenSize = t.Vector2 })
 
-function contactsRevokedAccessDialog.render(p0) --[[ line: 31 ]]
+function contactsRevokedAccessDialog.render(p0)
 	-- upvalues: withLocalization (ref), textKeysModule (ref), withStyle (ref), constantsModule (ref), getFFlagPassNavigationToContactsRevokedModule (ref), roact (ref), interactiveAlert (ref), buttonType (ref)
 	return withLocalization({
 		titleText = textKeysModule.CONTACTS_LIST_TITLE,
 		revokedFlow = textKeysModule.CONTACTS_REVOKED_FLOW,
 		closeModalOk = textKeysModule.CLOSE_MODAL_OK
-	})(function(p1) --[[ line: 36 ]]
+	})(function(p1)
 		-- upvalues: withStyle (copy), p0 (ref), constantsModule (copy), getFFlagPassNavigationToContactsRevokedModule (copy), roact (copy), interactiveAlert (copy), buttonType (copy)
-		return withStyle(function(_) --[[ line: 37 ]]
+		return withStyle(function(_)
 			-- upvalues: p0 (copy), constantsModule (copy), getFFlagPassNavigationToContactsRevokedModule (copy), roact (copy), interactiveAlert (copy), p1 (ref), buttonType (copy)
 			local props = p0.props
 			local navigation = props.navigation
@@ -37,7 +37,7 @@ function contactsRevokedAccessDialog.render(p0) --[[ line: 31 ]]
 						{
 							buttonType = buttonType.Secondary,
 							props = {
-								onActivated = function() --[[ line: 51 ]]
+								onActivated = function()
 									-- upvalues: CLOSE_MODAL (ref)
 									CLOSE_MODAL()
 								end,
@@ -53,6 +53,6 @@ function contactsRevokedAccessDialog.render(p0) --[[ line: 31 ]]
 	end)
 end
 
-return roactRodux.connect(function(p2) --[[ line: 67 ]]
+return roactRodux.connect(function(p2)
 	return { screenSize = p2.ScreenSize }
 end, nil)(contactsRevokedAccessDialog)

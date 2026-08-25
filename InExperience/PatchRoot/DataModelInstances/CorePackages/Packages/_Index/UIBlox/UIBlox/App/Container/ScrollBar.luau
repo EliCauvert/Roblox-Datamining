@@ -6,7 +6,7 @@ local _ = require(parent.Style.StyleTypes)
 local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
 local _ = require(parent.ImageSet.ImagesTypes)
 
-return function(p0) --[[ line: 55 | named "ScrollBar" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), userInputService (ref), imageSetComponentModule (ref)
 	local userInteractionEnabled = p0.userInteractionEnabled
 	local width = p0.width
@@ -31,11 +31,11 @@ return function(p0) --[[ line: 55 | named "ScrollBar" ]]
 	local var7, var8 = reactModule.useState(false)
 	local var9 = reactModule.useRef(0)
 	local var10 = reactModule.useRef(0)
-	local var11 = reactModule.useCallback(function(p1) --[[ line: 83 ]]
+	local var11 = reactModule.useCallback(function(p1)
 		-- upvalues: var6 (ref)
 		var6(p1.AbsoluteSize.Y)
 	end, { var6 })
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 87 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref)
 		local parent = p2.Parent
 		
@@ -46,20 +46,20 @@ return function(p0) --[[ line: 55 | named "ScrollBar" ]]
 		end
 		var4(true)
 	end, { var4 })
-	local var13 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), viewSize (ref), canvasSize (ref), handleWidth (ref)
-		return reactModule.joinBindings({ viewSize = viewSize, canvasSize = canvasSize }):map(function(p3) --[[ line: 100 ]]
+		return reactModule.joinBindings({ viewSize = viewSize, canvasSize = canvasSize }):map(function(p3)
 			-- upvalues: handleWidth (copy)
 			return UDim2.new(0, handleWidth, math.clamp(p3.viewSize.Y / p3.canvasSize.Y, 0, 1), 0)
 		end)
 	end, { handleWidth, viewSize, canvasSize })
-	local var14 = reactModule.useMemo(function() --[[ line: 108 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), canvasPosition (ref), canvasSize (ref)
-		return reactModule.joinBindings({ canvasPosition = canvasPosition, canvasSize = canvasSize }):map(function(p4) --[[ line: 112 ]]
+		return reactModule.joinBindings({ canvasPosition = canvasPosition, canvasSize = canvasSize }):map(function(p4)
 			return UDim2.fromScale(0.5, p4.canvasPosition.Y / p4.canvasSize.Y)
 		end)
 	end, { canvasSize, canvasPosition })
-	local var15 = reactModule.useCallback(function(_, p5) --[[ line: 120 ]]
+	local var15 = reactModule.useCallback(function(_, p5)
 		-- upvalues: var3 (ref), userInteractionEnabled (ref), var7 (ref), var9 (ref), var10 (ref), canvasPosition (ref), var8 (ref)
 		if not var3 or not userInteractionEnabled or var7 then return end
 		if p5 and p5.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 55 | named "ScrollBar" ]]
 	end, {
 		var3, userInteractionEnabled, var7, var9, var10, canvasPosition, var8
 	})
-	local var16 = reactModule.useCallback(function(p6) --[[ line: 141 ]]
+	local var16 = reactModule.useCallback(function(p6)
 		-- upvalues: userInteractionEnabled (ref), var7 (ref), var9 (ref), var5 (ref), paddingStartEnd (ref), viewSize (ref), var10 (ref), canvasSize (ref), onDragging (ref)
 		if not userInteractionEnabled or not var7 then return end
 		if p6.UserInputType == Enum.UserInputType.MouseMovement then
@@ -83,7 +83,7 @@ return function(p0) --[[ line: 55 | named "ScrollBar" ]]
 		userInteractionEnabled, var7, var9, var5, paddingStartEnd, viewSize, var10,
 		canvasSize, onDragging
 	})
-	local var17 = reactModule.useCallback(function(p7) --[[ line: 172 ]]
+	local var17 = reactModule.useCallback(function(p7)
 		-- upvalues: userInteractionEnabled (ref), var7 (ref), var8 (ref)
 		if not userInteractionEnabled or not var7 then return end
 		if p7 and p7.UserInputType ~= Enum.UserInputType.MouseButton1 then
@@ -91,21 +91,21 @@ return function(p0) --[[ line: 55 | named "ScrollBar" ]]
 		end
 		var8(false)
 	end, { userInteractionEnabled, var7, var8 })
-	reactModule.useEffect(function() --[[ line: 184 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var7 (ref), userInputService (copy), var16 (ref), var17 (ref)
 		if var3 and var7 then
 			local inputChangedConnection = userInputService.InputChanged:Connect(var16)
 			local inputEndedConnection = userInputService.InputEnded:Connect(var17)
 			local windowFocusReleasedConnection = userInputService.WindowFocusReleased:Connect(var17)
 			
-			return function() --[[ line: 193 ]]
+			return function()
 				-- upvalues: inputChangedConnection (ref), inputEndedConnection (ref), windowFocusReleasedConnection (ref)
 				inputChangedConnection:Disconnect()
 				inputEndedConnection:Disconnect()
 				windowFocusReleasedConnection:Disconnect()
 			end
 		end
-		return function() --[[ line: 186 ]] end
+		return function() end
 	end, { var3, var7, var16, var17 })
 	local var18 = transparency
 	

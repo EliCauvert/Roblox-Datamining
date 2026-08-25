@@ -15,7 +15,7 @@ local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTr
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
+return function(p0)
 	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), handleReceiveErrorModule (ref), promptStateModule (ref), acceptTransferRequestModule (ref), handleReceiveSuccessModule (ref), failureReasonModule (ref), handleReceiveBlockModule (ref), transferRetryOriginModule (ref)
 	local networkImpl = p0.getNetworkImpl()
 	local setPromptState = p0.setPromptState
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
 			logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_attempted)
 		end
-		return acceptTransferRequestModule(t, nil, networkImpl):andThen(function(p2) --[[ line: 54 ]]
+		return acceptTransferRequestModule(t, nil, networkImpl):andThen(function(p2)
 			-- upvalues: setPromptState (ref), promptStateModule (copy), setRobuxTransfer (ref), setIsAlreadyAccepted (ref), logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), handleReceiveSuccessModule (copy), handleReceiveErrorModule (copy)
 			setPromptState(promptStateModule.ReceiveStarted)
 			
@@ -57,7 +57,7 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 				end
 				handleReceiveErrorModule(p0, nil)
 			end
-		end):catch(function(p1) --[[ line: 80 ]]
+		end):catch(function(p1)
 			-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleReceiveBlockModule (copy), transferRetryOriginModule (copy), handleReceiveErrorModule (copy)
 			logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 			

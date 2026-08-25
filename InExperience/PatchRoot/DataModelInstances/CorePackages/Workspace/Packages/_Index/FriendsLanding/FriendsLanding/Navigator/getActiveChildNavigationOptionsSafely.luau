@@ -1,6 +1,6 @@
 ﻿local roactNavigationModule = require(script:FindFirstAncestor("FriendsLanding").Parent.RoactNavigation)
 
-local function _(p0) --[[ line: 16 | named "getUpdatedNavigation" ]]
+local function _(p0)
 	local key
 	local var1 = p0._dangerouslyGetParent()
 	
@@ -10,7 +10,7 @@ local function _(p0) --[[ line: 16 | named "getUpdatedNavigation" ]]
 	return key
 end
 
-return function(p1) --[[ line: 31 ]]
+return function(p1)
 	-- upvalues: roactNavigationModule (ref)
 	local key
 	local var3 = p1._dangerouslyGetParent()

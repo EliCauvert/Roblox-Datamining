@@ -5,7 +5,7 @@ local _ = require(abuseReportMenu.Components.Types)
 local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
 local runScreenshotCaptureSequenceModule = require(script.Parent.runScreenshotCaptureSequence)
 
-local function _() --[[ line: 29 | named "emptySnapshot" ]]
+local function _()
 	-- upvalues: constantsModule (ref)
 	return {
 		screenshotId = "",
@@ -13,7 +13,7 @@ local function _() --[[ line: 29 | named "emptySnapshot" ]]
 	}
 end
 
-return function() --[[ line: 54 | named "useCaptureScreenshotV2" ]]
+return function()
 	-- upvalues: reactModule (ref), constantsModule (ref), tnSIXPWrapperModule (ref), runScreenshotCaptureSequenceModule (ref)
 	local var5 = reactModule.useRef({
 		screenshotId = "",
@@ -26,32 +26,32 @@ return function() --[[ line: 54 | named "useCaptureScreenshotV2" ]]
 	var10.current = var9
 	
 	return {
-		captureIfApplicable = reactModule.useCallback(function(p0) --[[ line: 81 ]]
+		captureIfApplicable = reactModule.useCallback(function(p0)
 			-- upvalues: var10 (ref), idle (ref), runScreenshotCaptureSequenceModule (copy), var7 (ref), var5 (ref)
 			if var10.current and idle.current == "idle" then
 				idle.current = "capturing"
 				runScreenshotCaptureSequenceModule({
 					hide = p0.hide,
 					show = p0.show,
-					onScreenshotTaken = function() --[[ line: 91 ]]
+					onScreenshotTaken = function()
 						-- upvalues: var7 (copy)
 						var7(true)
 					end,
-					onScreenshotUploaded = function(p1) --[[ line: 94 ]]
+					onScreenshotUploaded = function(p1)
 						-- upvalues: var5 (copy)
 						var5.current = {
 							screenshotId = p1,
 							identificationResults = var5.current.identificationResults
 						}
 					end,
-					onIdentificationCompleted = function(p2) --[[ line: 100 ]]
+					onIdentificationCompleted = function(p2)
 						-- upvalues: var5 (copy)
 						var5.current = {
 							screenshotId = var5.current.screenshotId,
 							identificationResults = p2
 						}
 					end,
-					onCaptureEnd = function() --[[ line: 106 ]]
+					onCaptureEnd = function()
 						-- upvalues: idle (copy)
 						idle.current = "done"
 					end
@@ -60,7 +60,7 @@ return function() --[[ line: 54 | named "useCaptureScreenshotV2" ]]
 				return
 			end
 		end, {}),
-		reset = reactModule.useCallback(function() --[[ line: 71 ]]
+		reset = reactModule.useCallback(function()
 			-- upvalues: var5 (ref), constantsModule (copy), idle (ref), var7 (ref)
 			var5.current = {
 				screenshotId = "",
@@ -69,7 +69,7 @@ return function() --[[ line: 54 | named "useCaptureScreenshotV2" ]]
 			idle.current = "idle"
 			var7(false)
 		end, {}),
-		getIsCapturing = reactModule.useCallback(function() --[[ line: 77 ]]
+		getIsCapturing = reactModule.useCallback(function()
 			-- upvalues: idle (ref)
 			return idle.current == "capturing"
 		end, {}),

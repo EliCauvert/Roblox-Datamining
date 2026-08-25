@@ -12,7 +12,7 @@ local compareSduiPropsModule = require(sduiCoreSystem.compareSduiProps)
 local compareSduiAnalyticsContextModule = require(sduiCoreSystem.compareSduiAnalyticsContext)
 local parsePropsModule = require(sduiCoreSystem.parseProps)
 
-local function SduiErrorComponent(_) --[[ line: 29 ]]
+local function SduiErrorComponent(_)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -22,7 +22,7 @@ end
 
 local t = {}
 
-return reactModule.memo(function(p0) --[[ line: 39 | named "SduiFastPathComponent" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), sduiBuilderModule (ref), compareSduiAnalyticsContextModule (ref), t (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref), cryoModule (ref), sduiErrorType (ref), SduiErrorComponent (ref)
 	local componentConfig = p0.componentConfig
 	local componentType = componentConfig.componentType

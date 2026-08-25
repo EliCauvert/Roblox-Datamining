@@ -17,7 +17,7 @@ local var8 = luaAppDiscoveryClientAppStorageEmptyCacheTelemetry and ({
 	lastUpdated = { 25, 11, 19 }
 } or nil)
 
-function getJsonStorageData(p0, p1) --[[ line: 54 ]]
+function getJsonStorageData(p0, p1)
 	-- upvalues: appStorageService (ref), luaAppDiscoveryClientAppStorageEmptyCacheTelemetry (ref), telemetryService (ref), var8 (ref), httpService (ref), discoveryEventErrorLoggerModule (ref), luaAppDiscoveryClientAppStorageCacheTtlDays (ref)
 	if not game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
 		return nil
@@ -33,7 +33,7 @@ function getJsonStorageData(p0, p1) --[[ line: 54 ]]
 		end
 		return nil
 	else
-		local ok, status = pcall(function() --[[ line: 74 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), var9 (ref)
 			return httpService:JSONDecode(var9)
 		end)
@@ -54,7 +54,7 @@ function getJsonStorageData(p0, p1) --[[ line: 54 ]]
 	end
 end
 
-function setJsonStorageData(value, p2, p3) --[[ line: 120 ]]
+function setJsonStorageData(value, p2, p3)
 	-- upvalues: httpService (ref), appStorageService (ref)
 	if game:GetEngineFeature("UniversalAppDiscoveryClientFallbackCacheStorageKey") then
 		appStorageService:SetItem(value, httpService:JSONEncode({ data = p2, lastUpdatedTime = os.time(), version = p3 }))

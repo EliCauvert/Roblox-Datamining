@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnforceMaxSizeOffsetForLC", true)
 
-return function() --[[ line: 2 ]]
+return function()
 	return game:GetFastFlag("EnforceMaxSizeOffsetForLC")
 end

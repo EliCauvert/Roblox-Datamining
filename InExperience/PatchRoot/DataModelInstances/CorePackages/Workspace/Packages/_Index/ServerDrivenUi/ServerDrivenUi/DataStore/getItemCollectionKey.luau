@@ -1,3 +1,3 @@
-﻿return function(p0, p1) --[[ line: 5 | named "getItemCollectionKey" ]]
+﻿return function(p0, p1)
 	return `{p0}_{p1}`
 end

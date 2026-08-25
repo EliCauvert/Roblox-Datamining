@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	if p0 then
 		local title = p0.title or p0.titleForViewer
 		

@@ -19,7 +19,7 @@ local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Optio
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0) --[[ line: 76 | named "CatalogRowItemCardFooter" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), reactModule (ref), cryoModule (ref), fFlagAXMISWithOffers (ref), iconSize (ref), foundationModule (ref), itemCardPriceLine (ref), fFlagAXMISSmallUIChanges (ref), fFlagAXDurables2Option (ref), itemCardTitle (ref), text (ref), icon (ref), verifiedBadgesModule (ref)
 	local var7 = useTokens()
 	local selectedTimedOptionPrice = nil
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 76 | named "CatalogRowItemCardFooter" ]]
 	end
 	local createElement_1
 	local useMemo = reactModule.useMemo
-	useMemo = useMemo(function() --[[ line: 87 ]]
+	useMemo = useMemo(function()
 		-- upvalues: p0 (ref), cryoModule (copy), fFlagAXDurablesForMIS (copy), fFlagAXEnableTimedOptionsForCatalogRowCard (copy), selectedTimedOptionPrice (write), fFlagAXMISWithOffers (copy), var7 (ref), iconSize (copy), reactModule (copy), foundationModule (copy), itemCardPriceLine (copy), fFlagAXMISSmallUIChanges (copy)
 		local t = {}
 		
@@ -281,7 +281,7 @@ return function(p0) --[[ line: 76 | named "CatalogRowItemCardFooter" ]]
 				WearTimeSelectedOptionInList = if p0.wearTimeSelectedOptionInList then reactModule.createElement(p0.wearTimeSelectedOptionInList, {
 					options = p0.timedOptions,
 					selectedTimedOptionIndexInReducer = if fFlagAXDurablesForMIS then p0.selectedTimedOptionIndexInReducer else nil,
-					onOptionActivated = function(p1) --[[ line: 415 ]]
+					onOptionActivated = function(p1)
 						-- upvalues: p0 (ref), setSelectedTimedOptionPrice (write)
 						local var24 = p0.timedOptions[p1]
 						

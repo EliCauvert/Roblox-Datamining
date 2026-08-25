@@ -11,7 +11,7 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local var4 = images["icons/status/games/people-playing_small"]
 local uDim = UDim.new(0, 6)
 
-return function(p0) --[[ line: 25 | named "AttendanceCount" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), uDim (ref), imageSetLabel (ref), var4 (ref), styledTextLabel (ref), formatNumberWithShortUnitsModule (ref)
 	local var6 = useStyle()
 	local var7 = useLocalization({

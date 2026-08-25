@@ -5,15 +5,15 @@ local luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache = game:DefineFastS
 
 return {
 	HOME_OMNI_FEED_CACHE_VERSION = 2,
-	cacheOmniRecommendationsData = function(p0) --[[ line: 20 ]]
+	cacheOmniRecommendationsData = function(p0)
 		-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (ref), discoveryClientAppStorageModule (ref), discoveryEventErrorLoggerModule (ref)
 		assert(p0.pageType, "pageType is required")
 		assert(p0.sorts, "sorts is required")
 		assert(p0.contentMetadata, "contentMetadata is required")
 		assert(p0.contentMetadata.Game, "contentMetadata.Game is required")
-		task.spawn(function() --[[ line: 26 ]]
+		task.spawn(function()
 			-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p0 (ref), discoveryClientAppStorageModule (copy), discoveryEventErrorLoggerModule (copy)
-			local ok, status = pcall(function() --[[ line: 27 ]]
+			local ok, status = pcall(function()
 				-- upvalues: luaAppOmniRecommendationsTopicIdAndNumberOfItemsToCache (copy), p0 (copy), discoveryClientAppStorageModule (copy)
 				local t = {}
 				

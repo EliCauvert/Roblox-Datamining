@@ -7,7 +7,7 @@ local onFormLoadedModule = require(genericAbuseReporting.Analytics.Actions.OnFor
 local useAnalyticsSubmitDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsSubmitDispatch)
 local useAnalyticsDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsDispatch)
 
-return function(p0) --[[ line: 34 | named "ReportWithReasonAndComment" ]]
+return function(p0)
 	-- upvalues: useAnalyticsSubmitDispatchModule (ref), useAnalyticsDispatchModule (ref), defaultLocalizationKeysModule (ref), reactModule (ref), onFormLoadedModule (ref), frameModule (ref), simpleSubmitDialogModule (ref)
 	local var8 = useAnalyticsSubmitDispatchModule()
 	local var9 = useAnalyticsDispatchModule()
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 34 | named "ReportWithReasonAndComment" ]]
 		p0.localizationKeys.formTitle = p0.localizationKeys.formTitle or defaultLocalizationKeysModule.formTitle
 		p0.localizationKeys.formSubmit = p0.localizationKeys.formSubmit or defaultLocalizationKeysModule.formSubmit
 	end
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), onFormLoadedModule (copy), p0 (ref)
 		var9(onFormLoadedModule({
 			context = p0.analyticsContext,
@@ -33,13 +33,13 @@ return function(p0) --[[ line: 34 | named "ReportWithReasonAndComment" ]]
 			localizationKeys = p0.localizationKeys,
 			reportCategories = p0.reportCategories,
 			reportCategoryDefaultKey = p0.reportCategoryDefaultKey,
-			onSubmit = reactModule.useCallback(function(p1, p2) --[[ line: 53 ]]
+			onSubmit = reactModule.useCallback(function(p1, p2)
 				-- upvalues: p0 (ref), var8 (ref)
 				if (if p0.onSubmitProps.hasNextSteps then p0.onSubmitProps.onProceedToNextStep(p1, p2) else p0.onSubmitProps.onSubmit(p1, p2)) and not p0.onSubmitProps.hasNextSteps then
 					var8("Submit")
 				end
 			end, { var8, p0.onSubmitProps }),
-			onAbandon = reactModule.useCallback(function() --[[ line: 63 ]]
+			onAbandon = reactModule.useCallback(function()
 				-- upvalues: p0 (ref), var8 (ref)
 				if not p0.onCloseProps then
 					var8("Abandon")

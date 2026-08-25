@@ -24,9 +24,9 @@ local t_2 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-local function _(p0, p1, p2) --[[ line: 48 | named "useWrappedFrameProps" ]]
+local function _(p0, p1, p2)
 	-- upvalues: reactModule (ref), cryoModule (ref), t_2 (ref), t (ref)
-	return reactModule.useMemo(function() --[[ line: 50 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p1 (ref), p0 (ref), cryoModule (copy), t_2 (copy), t (copy), p2 (ref)
 		local var10 = p1 or {}
 		
@@ -37,7 +37,7 @@ local function _(p0, p1, p2) --[[ line: 48 | named "useWrappedFrameProps" ]]
 	end, { p0, p1, p2 })
 end
 
-return function(p3) --[[ line: 72 | named "FocusNavigableSurfaceWrapper" ]]
+return function(p3)
 	-- upvalues: t_1 (ref), reactModule (ref), reactFocusNavigationModule (ref), useDefaultFocusNavigationBindingsModule (ref), navigationModule (ref), useFocusNavigableSurfaceRegistryConnectionModule (ref), cryoModule (ref), t_2 (ref), t (ref)
 	local customEventHandlers = p3.customEventHandlers or t_1
 	local var12 = if p3.frameProps and p3.frameProps.ref then p3.frameProps.ref.current else nil
@@ -59,7 +59,7 @@ return function(p3) --[[ line: 72 | named "FocusNavigableSurfaceWrapper" ]]
 	local isIsolated = p3.isIsolated
 	local frameProps = p3.frameProps
 	
-	return reactModule.createElement("Frame", reactModule.useMemo(function() --[[ line: 50 ]]
+	return reactModule.createElement("Frame", reactModule.useMemo(function()
 		-- upvalues: frameProps (ref), isIsolated (ref), cryoModule (copy), t_2 (copy), t (copy), var17 (ref)
 		local var10 = frameProps or {}
 		

@@ -7,7 +7,7 @@ local useMomentsTabIsVisibleModule = require(moments.Hooks.useMomentsTabIsVisibl
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local feedPlaybackSuspension = momentsCommonModule.Media.feedPlaybackSuspension
 
-return function() --[[ line: 45 | named "useFeedPlaybackActive" ]]
+return function()
 	-- upvalues: useNavigationFocus (ref), useMomentsTabIsVisibleModule (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref)
 	return useNavigationFocus() and (useMomentsTabIsVisibleModule() and (not useSignalState(feedPlaybackSuspension.getSuspended) and not useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)))
 end

@@ -3,7 +3,7 @@ local parent = script:FindFirstAncestor("CoreGuiCommon").Parent
 local cryoModule = require(parent.Cryo)
 local createSignal = require(parent.Signals).createSignal
 
-return function() --[[ line: 24 ]]
+return function()
 	-- upvalues: createSignal (ref), cryoModule (ref), playersService (ref)
 	local var2, var3 = createSignal(nil)
 	local var4, var5 = createSignal({}, cryoModule.Dictionary.equals)
@@ -15,7 +15,7 @@ return function() --[[ line: 24 ]]
 		playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
 		localPlayer = playersService.LocalPlayer
 	end
-	local function updateHealthValue() --[[ line: 41 ]]
+	local function updateHealthValue()
 		-- upvalues: var2 (ref), var5 (ref)
 		local var13 = var2(false)
 		var5(if var13 then {
@@ -25,7 +25,7 @@ return function() --[[ line: 24 ]]
 		} else {})
 	end
 	
-	local function _() --[[ line: 52 | named "unobserveHumanoid" ]]
+	local function _()
 		-- upvalues: var8 (write), var6 (write), var7 (write), var3 (ref)
 		if var8 then
 			var8:Disconnect()
@@ -42,7 +42,7 @@ return function() --[[ line: 24 ]]
 		var3(nil)
 	end
 	
-	local function observeHumanoid() --[[ line: 69 ]]
+	local function observeHumanoid()
 		-- upvalues: var8 (write), var6 (write), var7 (write), var3 (ref), localPlayer (ref), updateHealthValue (ref), observeHumanoid (ref)
 		if var8 then
 			var8:Disconnect()
@@ -67,7 +67,7 @@ return function() --[[ line: 24 ]]
 				var6 = humanoid.HealthChanged:Connect(updateHealthValue)
 				var7 = humanoid.Died:Connect(updateHealthValue)
 			else
-				var8 = character.ChildAdded:Connect(function(p0) --[[ line: 79 ]]
+				var8 = character.ChildAdded:Connect(function(p0)
 					-- upvalues: observeHumanoid (copy)
 					if p0:IsA("Humanoid") then
 						observeHumanoid()
@@ -85,7 +85,7 @@ return function() --[[ line: 24 ]]
 	return {
 		getLocalHumanoid = var2,
 		getHealthValue = var4,
-		cleanup = function() --[[ line: 93 ]]
+		cleanup = function()
 			-- upvalues: characterAddedConnection (ref), characterRemovingConnection (ref), var8 (write), var6 (write), var7 (write), var3 (ref)
 			characterAddedConnection:Disconnect()
 			characterRemovingConnection:Disconnect()

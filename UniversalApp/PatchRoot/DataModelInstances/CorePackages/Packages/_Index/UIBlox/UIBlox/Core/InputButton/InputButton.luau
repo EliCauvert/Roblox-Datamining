@@ -38,7 +38,7 @@ inputButton.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function inputButton.init(p0) --[[ line: 53 ]]
+function inputButton.init(p0)
 	-- upvalues: controlStateModule (ref), roactModule (ref)
 	p0.state = {
 		outerTransparency = 1,
@@ -49,7 +49,7 @@ function inputButton.init(p0) --[[ line: 53 ]]
 		innerImageColor = p0.props.fillImageColor
 	}
 	
-	function p0.changeSprite(p1) --[[ line: 63 ]]
+	function p0.changeSprite(p1)
 		-- upvalues: controlStateModule (copy), p0 (ref)
 		if p1 == controlStateModule.Hover then
 			if p0.props.isDisabled then
@@ -69,7 +69,7 @@ function inputButton.init(p0) --[[ line: 53 ]]
 		p0.sizeBinding = var9
 		p0.updateSizeBinding = var10
 		
-		function p0.textAbsoluteSizeChanged(p2) --[[ line: 81 ]]
+		function p0.textAbsoluteSizeChanged(p2)
 			-- upvalues: p0 (ref)
 			local var11 = 26
 			
@@ -81,9 +81,9 @@ function inputButton.init(p0) --[[ line: 53 ]]
 	end
 end
 
-function inputButton.render(p3) --[[ line: 91 ]]
+function inputButton.render(p3)
 	-- upvalues: withStyleModule (ref), cryoModule (ref), roactModule (ref), fitFrameHorizontal (ref), fitTextLabel (ref), roactGamepadModule (ref), controllableModule (ref), imageSetComponentModule (ref)
-	return withStyleModule(function(p4) --[[ line: 92 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: p3 (ref), cryoModule (copy), roactModule (copy), fitFrameHorizontal (copy), fitTextLabel (copy), roactGamepadModule (copy), controllableModule (copy), imageSetComponentModule (copy)
 		local var15
 		local font = p4.Font
@@ -181,7 +181,7 @@ function inputButton.render(p3) --[[ line: 91 ]]
 					}
 				},
 				isDisabled = p3.props.isDisabled,
-				onStateChanged = function(_, p5) --[[ line: 196 ]]
+				onStateChanged = function(_, p5)
 					-- upvalues: p3 (copy)
 					p3.changeSprite(p5)
 				end
@@ -189,7 +189,7 @@ function inputButton.render(p3) --[[ line: 91 ]]
 			InputButtonText = p3.props.text ~= "" and roactModule.createElement(controllableModule, {
 				controlComponent = { component = var15, props = t },
 				isDisabled = p3.props.isDisabled,
-				onStateChanged = function(_, p6) --[[ line: 207 ]]
+				onStateChanged = function(_, p6)
 					-- upvalues: p3 (copy)
 					p3.changeSprite(p6)
 				end
@@ -198,7 +198,7 @@ function inputButton.render(p3) --[[ line: 91 ]]
 	end)
 end
 
-return roactModule.forwardRef(function(p7, p8) --[[ line: 216 ]]
+return roactModule.forwardRef(function(p7, p8)
 	-- upvalues: roactModule (ref), inputButton (ref), cryoModule (ref)
 	return roactModule.createElement(inputButton, cryoModule.Dictionary.join(p7, { frameRef = p8 }))
 end)

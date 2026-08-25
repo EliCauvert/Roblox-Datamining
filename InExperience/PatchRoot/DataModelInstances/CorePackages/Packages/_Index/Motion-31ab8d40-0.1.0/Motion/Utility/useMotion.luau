@@ -6,7 +6,7 @@ local _ = require(parent_1.Types)
 local timingConfigsModule = require(parent.TimingConfigs)
 local transitionPresetModule = require(parent_1.Enums.TransitionPreset)
 
-return function(p0) --[[ line: 20 | named "useMotion" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useAnimatedValueModule (ref), transitionPresetModule (ref), timingConfigsModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 20 | named "useMotion" ]]
 			t_1[i] = var8
 		end
 	end
-	return t, function(p1, p2) --[[ line: 40 | named "animate" ]]
+	return t, function(p1, p2)
 		-- upvalues: t_1 (ref), var6 (ref), transitionPresetModule (copy), timingConfigsModule (copy)
 		if not p1 then return end
 		local var9 = 0
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 20 | named "useMotion" ]]
 		end
 		local var11 = 0
 		
-		local function _(p3) --[[ line: 57 | named "propertyOnComplete" ]]
+		local function _(p3)
 			-- upvalues: t (ref), p1 (ref), var11 (write), p2 (ref), var9 (write)
 			t[p3] = p1[p3]
 			var11 += 1
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 20 | named "useMotion" ]]
 				}
 				local cloned = table.clone(transition[i_1] or (transition[transitionPresetModule.Default] or timingConfigsModule.getDefaultTransition()))
 				
-				function cloned.onComplete() --[[ line: 94 ]]
+				function cloned.onComplete()
 					-- upvalues: i_1 (ref), t (ref), p1 (ref), var11 (write), p2 (ref), var9 (write)
 					t[i_1] = p1[i_1]
 					var11 += 1
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 20 | named "useMotion" ]]
 				local delay = cloned.delay or 0
 				
 				if delay > 0 then
-					var6.current[i_1] = task.delay(delay, function() --[[ line: 103 ]]
+					var6.current[i_1] = task.delay(delay, function()
 						-- upvalues: var6 (copy), i_1 (ref), v (ref), p1 (ref), cloned (ref)
 						var6.current[i_1] = nil
 						v(p1[i_1], cloned)

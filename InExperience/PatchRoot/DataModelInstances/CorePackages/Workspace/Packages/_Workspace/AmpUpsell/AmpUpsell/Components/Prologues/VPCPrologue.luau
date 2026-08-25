@@ -11,14 +11,14 @@ local vpcPrologueStrings = require(ampUpsell.Common.LocalizationStrings).vpcProl
 local _ = require(ampUpsell.Common.Types)
 local getFFlagEnableReusableVPCPrologueModule = require(ampUpsell.Flags.GetFFlagEnableReusableVPCPrologue)
 
-local function _(p0) --[[ line: 27 | named "getBodyLocalizationKey" ]]
+local function _(p0)
 	-- upvalues: vpcPrologueStrings (ref)
 	if p0 then
 		return if p0.enablePurchases == true then vpcPrologueStrings.bodyPurchases elseif p0.contentAgeRestriction == nil then if p0.friendManagementAction == "Unblock" then vpcPrologueStrings.bodyUnblock else vpcPrologueStrings.bodyGeneric else vpcPrologueStrings.bodyContentRestriction
 	end
 end
 
-local function ConfigurableVPCPrologue(p1) --[[ line: 40 ]]
+local function ConfigurableVPCPrologue(p1)
 	-- upvalues: useLocalization (ref), vpcPrologueStrings (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref), orientation (ref)
 	local var8
 	local config = p1.config or {}
@@ -69,7 +69,7 @@ local function ConfigurableVPCPrologue(p1) --[[ line: 40 ]]
 	var8 = if recourseData.enablePurchases == true then vpcPrologueStrings.bodyPurchases elseif recourseData.contentAgeRestriction ~= nil then if recourseData.friendManagementAction == "Unblock" then vpcPrologueStrings.bodyUnblock else vpcPrologueStrings.bodyGeneric else vpcPrologueStrings.bodyContentRestriction
 end
 
-local function LegacyVPCPrologue(p2) --[[ line: 94 ]]
+local function LegacyVPCPrologue(p2)
 	-- upvalues: vpcPrologueStrings (ref), useLocalization (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
 	local var12
 	local recourseData = p2.recourseData
@@ -107,7 +107,7 @@ local function LegacyVPCPrologue(p2) --[[ line: 94 ]]
 	})
 end
 
-return function(p3) --[[ line: 131 | named "VPCPrologue" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), getFFlagEnableReusableVPCPrologueModule (ref), ConfigurableVPCPrologue (ref), LegacyVPCPrologue (ref)
 	return reactModule.createElement(if getFFlagEnableReusableVPCPrologueModule() then ConfigurableVPCPrologue else LegacyVPCPrologue, p3)
 end

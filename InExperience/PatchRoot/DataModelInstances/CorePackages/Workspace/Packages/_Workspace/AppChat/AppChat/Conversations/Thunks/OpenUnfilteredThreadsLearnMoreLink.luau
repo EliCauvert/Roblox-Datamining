@@ -5,9 +5,9 @@ local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3D
 local var0 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local unfilteredThreadsLearnMoreUrl = game:DefineFastString("UnfilteredThreadsLearnMoreUrl", "https://en.help.roblox.com/")
 
-return function() --[[ line: 13 ]]
+return function()
 	-- upvalues: appPage (ref), unfilteredThreadsLearnMoreUrl (ref), fFlagSignalsNavP3Dispatch (ref), var0 (ref), navigateDown (ref)
-	return function(p0) --[[ line: 14 ]]
+	return function(p0)
 		-- upvalues: appPage (copy), unfilteredThreadsLearnMoreUrl (copy), fFlagSignalsNavP3Dispatch (copy), var0 (copy), navigateDown (copy)
 		local t = {
 			name = appPage.GenericWebPage,

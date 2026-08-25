@@ -9,13 +9,13 @@ local isInputObjectType = definitionModule.isInputObjectType
 local t = {}
 local hasField = nil
 
-function t.UniqueFieldDefinitionNamesRule(p0) --[[ line: 32 ]]
+function t.UniqueFieldDefinitionNamesRule(p0)
 	-- upvalues: map (ref), hasField (write), graphQLError (ref)
 	local schema = p0:getSchema()
 	local var4 = schema and schema:getTypeMap() or map.new()
 	local t = {}
 	
-	local function checkFieldUniqueness(_, p1) --[[ line: 40 ]]
+	local function checkFieldUniqueness(_, p1)
 		-- upvalues: t (ref), hasField (copy), var4 (ref), p0 (ref), graphQLError (copy)
 		local value = p1.name.value
 		
@@ -48,7 +48,7 @@ function t.UniqueFieldDefinitionNamesRule(p0) --[[ line: 32 ]]
 	}
 end
 
-hasField = function(p2, p3) --[[ line: 88 | named "hasField" ]]
+hasField = function(p2, p3)
 	-- upvalues: isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref), isNotNillish (ref)
 	return if isObjectType(p2) or isInterfaceType(p2) or isInputObjectType(p2) then isNotNillish(p2:getFields():get(p3)) else false
 end

@@ -12,7 +12,7 @@ local boundsDataUtilsModule = require(util.BoundsDataUtils)
 local boundsCalculatorModule = require(util.BoundsCalculator)
 local t = {}
 
-local function validateAttachmentPosition(p0, p1) --[[ line: 23 ]]
+local function validateAttachmentPosition(p0, p1)
 	-- upvalues: getFStringUGCValidateLegHipAttachmentRangeModule (ref)
 	if p1 == Enum.AssetType.RightLeg then
 		local var12 = p0.RightUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
@@ -34,7 +34,7 @@ local function validateAttachmentPosition(p0, p1) --[[ line: 23 ]]
 	return true
 end
 
-function t.validateAsset(value, p2) --[[ line: 54 ]]
+function t.validateAsset(value, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), validateAttachmentPosition (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local assetTypeEnum = p2.assetTypeEnum
@@ -54,7 +54,7 @@ function t.validateAsset(value, p2) --[[ line: 54 ]]
 	return var15:getFinalResults()
 end
 
-local function calculateBounds(p3, p4) --[[ line: 83 ]]
+local function calculateBounds(p3, p4)
 	-- upvalues: boundsDataUtilsModule (ref)
 	local t = {}
 	
@@ -64,7 +64,7 @@ local function calculateBounds(p3, p4) --[[ line: 83 ]]
 	return t
 end
 
-local function validateFullBodyInternal(p5, p6) --[[ line: 91 ]]
+local function validateFullBodyInternal(p5, p6)
 	-- upvalues: boundsCalculatorModule (ref), calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref)
 	local var17, var18, var19 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(p5, p6, nil, false)
 	
@@ -105,7 +105,7 @@ local function validateFullBodyInternal(p5, p6) --[[ line: 91 ]]
 	return true
 end
 
-function t.validateFullBody(p7, p8) --[[ line: 144 ]]
+function t.validateFullBody(p7, p8)
 	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), failureReasonsAccumulatorModule (ref), validateFullBodyInternal (ref), analyticsModule (ref)
 	if not getFFlagUGCValidateLegFullBodySeparationModule() then
 		return true

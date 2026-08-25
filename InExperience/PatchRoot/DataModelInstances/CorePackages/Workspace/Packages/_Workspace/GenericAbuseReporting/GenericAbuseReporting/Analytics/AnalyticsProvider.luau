@@ -5,12 +5,12 @@ local analyticsStateContextModule = require(script.Parent.AnalyticsStateContext)
 local analyticsDispatchContextModule = require(script.Parent.AnalyticsDispatchContext)
 local analyticsReducerModule = require(script.Parent.AnalyticsReducer)
 
-return function(p0) --[[ line: 22 | named "AnalyticsProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), analyticsReducerModule (ref), submitAnalyticsModule (ref), analyticsSubmitContextModule (ref), analyticsStateContextModule (ref), analyticsDispatchContextModule (ref)
 	local var6, var7 = reactModule.useReducer(analyticsReducerModule.reducer, analyticsReducerModule.initialState)
 	
 	return reactModule.createElement(analyticsSubmitContextModule.Provider, {
-		value = reactModule.useCallback(function(p1) --[[ line: 25 ]]
+		value = reactModule.useCallback(function(p1)
 			-- upvalues: p0 (ref), var6 (ref), submitAnalyticsModule (copy)
 			local var8 = if p0.onBeforeSubmitAnalytics then p0.onBeforeSubmitAnalytics(var6) else var6
 			

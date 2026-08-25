@@ -3,7 +3,7 @@ local _ = require(parent.App.Style.StyleTypes)
 local UIBloxConfigModule = require(parent.UIBloxConfig)
 
 return {
-	getBaseMenuDefaultTokens = function(p0) --[[ line: 28 ]]
+	getBaseMenuDefaultTokens = function(p0)
 		assert(p0.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
@@ -15,7 +15,7 @@ return {
 			}
 		}
 	end,
-	getCellDefaultTokens = function(p1) --[[ line: 8 ]]
+	getCellDefaultTokens = function(p1)
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
@@ -35,7 +35,7 @@ return {
 			selectedIconPaddingRight = p1.Tokens.Component.MenuCell.Base.Container.Spacing.Trailing
 		}
 	end,
-	getDropdownMenuCellDefaultTokens = function(p2) --[[ line: 40 ]]
+	getDropdownMenuCellDefaultTokens = function(p2)
 		-- upvalues: UIBloxConfigModule (ref)
 		return {
 			iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_900 else p2.Tokens.Global.Size_450,
@@ -51,7 +51,7 @@ return {
 			}
 		}
 	end,
-	getDropdownMenuDefaultTokens = function(p3) --[[ line: 70 ]]
+	getDropdownMenuDefaultTokens = function(p3)
 		-- upvalues: UIBloxConfigModule (ref)
 		return {
 			height = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Size.Size_1200 else p3.Tokens.Global.Size_600),

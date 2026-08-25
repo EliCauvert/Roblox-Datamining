@@ -72,18 +72,18 @@ local t = {
 }
 t.__index = t
 
-function t.new() --[[ line: 101 ]]
+function t.new()
 	-- upvalues: messageBus (ref), t (ref)
 	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
 end
 
-function t:supportsVerifySNA() --[[ line: 113 ]]
+function t:supportsVerifySNA()
 	-- upvalues: getFFlagLuaIdentityProtocolModule (ref), getFFlagLuaIdentityVerifySNA (ref), promiseModule (ref), messageBus (ref)
 	if getFFlagLuaIdentityProtocolModule() and getFFlagLuaIdentityVerifySNA() then
-		local var5 = promiseModule.new(function(p0, _) --[[ line: 118 ]]
+		local var5 = promiseModule.new(function(p0, _)
 			-- upvalues: self (ref)
 			local SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR, function(p1) --[[ line: 120 ]]
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR, function(p1)
 				-- upvalues: self (copy), SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR (ref), p0 (ref)
 				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR)
 				p0(p1.support)
@@ -96,13 +96,13 @@ function t:supportsVerifySNA() --[[ line: 113 ]]
 	return promiseModule.resolve(false)
 end
 
-function t:verifySNA(p2) --[[ line: 142 ]]
+function t:verifySNA(p2)
 	-- upvalues: getFFlagLuaIdentityProtocolModule (ref), getFFlagLuaIdentityVerifySNA (ref), promiseModule (ref), messageBus (ref)
 	if getFFlagLuaIdentityProtocolModule() and getFFlagLuaIdentityVerifySNA() then
-		local var6 = promiseModule.new(function(p3, _) --[[ line: 147 ]]
+		local var6 = promiseModule.new(function(p3, _)
 			-- upvalues: self (ref)
 			local VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR = self.VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR, function(p4) --[[ line: 149 ]]
+			self.subscriber:subscribeProtocolMethodResponse(VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR, function(p4)
 				-- upvalues: self (copy), VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR (ref), p3 (ref)
 				self.subscriber:unsubscribeToProtocolMethodResponse(VERIFY_SNA_METHOD_RESPONSE_DESCRIPTOR)
 				p3(p4.result)
@@ -115,13 +115,13 @@ function t:verifySNA(p2) --[[ line: 142 ]]
 	return promiseModule.resolve(false)
 end
 
-function t:getPhoneNumber() --[[ line: 168 ]]
+function t:getPhoneNumber()
 	-- upvalues: getFFlagLuaIdentityProtocolModule (ref), getFFlagLuaIdentityGetPhoneNumber (ref), promiseModule (ref), messageBus (ref)
 	if getFFlagLuaIdentityProtocolModule() and getFFlagLuaIdentityGetPhoneNumber() then
-		local var7 = promiseModule.new(function(p5, _) --[[ line: 172 ]]
+		local var7 = promiseModule.new(function(p5, _)
 			-- upvalues: self (ref)
 			local GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR = self.GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR, function(p6) --[[ line: 174 ]]
+			self.subscriber:subscribeProtocolMethodResponse(GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR, function(p6)
 				-- upvalues: self (copy), GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR (ref), p5 (ref)
 				self.subscriber:unsubscribeToProtocolMethodResponse(GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR)
 				p5(p6.result)
@@ -134,13 +134,13 @@ function t:getPhoneNumber() --[[ line: 168 ]]
 	return promiseModule.resolve()
 end
 
-function t:supportsGetPhoneNumber() --[[ line: 197 ]]
+function t:supportsGetPhoneNumber()
 	-- upvalues: getFFlagLuaIdentityProtocolModule (ref), getFFlagLuaIdentityGetPhoneNumber (ref), promiseModule (ref), messageBus (ref)
 	if getFFlagLuaIdentityProtocolModule() and getFFlagLuaIdentityGetPhoneNumber() then
-		local var8 = promiseModule.new(function(p7, _) --[[ line: 202 ]]
+		local var8 = promiseModule.new(function(p7, _)
 			-- upvalues: self (ref)
 			local SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR, function(p8) --[[ line: 204 ]]
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR, function(p8)
 				-- upvalues: self (copy), SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR (ref), p7 (ref)
 				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_GET_PHONE_NUMBER_METHOD_RESPONSE_DESCRIPTOR)
 				p7(p8.support)
@@ -153,13 +153,13 @@ function t:supportsGetPhoneNumber() --[[ line: 197 ]]
 	return promiseModule.resolve()
 end
 
-function t:getSMSOTP() --[[ line: 227 ]]
+function t:getSMSOTP()
 	-- upvalues: getFFlagLuaIdentityProtocolModule (ref), getFFlagLuaIdentityGetSMSOTP (ref), promiseModule (ref), messageBus (ref)
 	if getFFlagLuaIdentityProtocolModule() and getFFlagLuaIdentityGetSMSOTP() then
-		local var9 = promiseModule.new(function(p9, _) --[[ line: 231 ]]
+		local var9 = promiseModule.new(function(p9, _)
 			-- upvalues: self (ref)
 			local GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR = self.GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR, function(p10) --[[ line: 233 ]]
+			self.subscriber:subscribeProtocolMethodResponse(GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR, function(p10)
 				-- upvalues: self (copy), GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR (ref), p9 (ref)
 				self.subscriber:unsubscribeToProtocolMethodResponse(GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR)
 				p9(p10.result)
@@ -172,13 +172,13 @@ function t:getSMSOTP() --[[ line: 227 ]]
 	return promiseModule.resolve()
 end
 
-function t:supportsGetSMSOTP() --[[ line: 256 ]]
+function t:supportsGetSMSOTP()
 	-- upvalues: getFFlagLuaIdentityProtocolModule (ref), getFFlagLuaIdentityGetSMSOTP (ref), promiseModule (ref), messageBus (ref)
 	if getFFlagLuaIdentityProtocolModule() and getFFlagLuaIdentityGetSMSOTP() then
-		local var10 = promiseModule.new(function(p11, _) --[[ line: 261 ]]
+		local var10 = promiseModule.new(function(p11, _)
 			-- upvalues: self (ref)
 			local SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR
-			self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR, function(p12) --[[ line: 263 ]]
+			self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR, function(p12)
 				-- upvalues: self (copy), SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR (ref), p11 (ref)
 				self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_GET_SMS_OTP_METHOD_RESPONSE_DESCRIPTOR)
 				p11(p12.support)

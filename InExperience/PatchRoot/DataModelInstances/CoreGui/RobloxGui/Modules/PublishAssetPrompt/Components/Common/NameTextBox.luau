@@ -27,13 +27,13 @@ nameTextBox.defaultProps = {
 	invalidInputText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidName")
 }
 
-local function _(p0, p1) --[[ line: 47 | named "isNameTooLong" ]]
+local function _(p0, p1)
 	local charCount = utf8.len(utf8.nfcnormalize(p0))
 	
 	return charCount == nil or p1 < charCount
 end
 
-function nameTextBox.init(p2) --[[ line: 56 ]]
+function nameTextBox.init(p2)
 	p2:setState({
 		lastValidName = "",
 		isNameValid = true,
@@ -41,7 +41,7 @@ function nameTextBox.init(p2) --[[ line: 56 ]]
 	})
 	p2.wasInitiallyFocused = false
 	
-	function p2.tryFocusTextBox() --[[ line: 65 ]]
+	function p2.tryFocusTextBox()
 		-- upvalues: p2 (ref)
 		if p2.wasInitiallyFocused then return end
 		local var8 = p2.props.nameTextBoxRef and p2.props.nameTextBoxRef:getValue()
@@ -52,7 +52,7 @@ function nameTextBox.init(p2) --[[ line: 56 ]]
 		end
 	end
 	
-	function p2.onTextChanged(p3) --[[ line: 77 ]]
+	function p2.onTextChanged(p3)
 		-- upvalues: p2 (ref)
 		local text = p3.Text
 		local maxLength = p2.props.maxLength
@@ -72,14 +72,14 @@ function nameTextBox.init(p2) --[[ line: 56 ]]
 	end
 end
 
-function nameTextBox.checkIsNameValid(_, p4) --[[ line: 104 ]]
+function nameTextBox.checkIsNameValid(_, p4)
 	-- upvalues: removeNameRegex (ref)
 	if not removeNameRegex then
 		return if string.match(p4, "[0-9a-zA-Z_'%s]+$") then if string.sub(p4, 1, 1) == " " then false else string.match(p4, "^%s*$") else false
 	end
 end
 
-function nameTextBox.renderWithProviders(p5, p6, p7) --[[ line: 124 ]]
+function nameTextBox.renderWithProviders(p5, p6, p7)
 	-- upvalues: roactModule (ref), focusable (ref), cursorKind (ref)
 	local font = p6.Font
 	local theme = p6.Theme
@@ -148,18 +148,18 @@ function nameTextBox.renderWithProviders(p5, p6, p7) --[[ line: 124 ]]
 	})
 end
 
-function nameTextBox.render(p8) --[[ line: 200 ]]
+function nameTextBox.render(p8)
 	-- upvalues: withStyle (ref), withSelectionCursorProvider (ref)
-	return withStyle(function(p9) --[[ line: 201 ]]
+	return withStyle(function(p9)
 		-- upvalues: withSelectionCursorProvider (copy), p8 (ref)
-		return withSelectionCursorProvider(function(p10) --[[ line: 202 ]]
+		return withSelectionCursorProvider(function(p10)
 			-- upvalues: p8 (copy), p9 (ref)
 			return p8:renderWithProviders(p9, p10)
 		end)
 	end)
 end
 
-function nameTextBox.didMount(p11) --[[ line: 208 ]]
+function nameTextBox.didMount(p11)
 	p11.tryFocusTextBox()
 end
 

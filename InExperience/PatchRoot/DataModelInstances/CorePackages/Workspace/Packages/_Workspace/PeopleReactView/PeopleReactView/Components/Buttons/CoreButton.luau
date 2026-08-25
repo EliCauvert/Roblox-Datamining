@@ -10,12 +10,12 @@ local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local useSignalState = signalsReactModule.useSignalState
 
-return function(p0) --[[ line: 30 | named "CoreButton" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useSignalState (ref), signalsModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref)
 	local var4 = useTokens()
 	local var5 = useSignalState(p0.animatedIcon or signalsModule.createSignal(""))
 	local var6 = useSignalState(p0.buttonState or signalsModule.createSignal(false))
-	local var7 = reactModule.useMemo(function() --[[ line: 36 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var6 (ref)
 		return if p0.icon.off and p0.buttonState then if var6 then p0.icon.off else p0.icon.on else p0.icon.on
 	end, { var6, p0.icon })
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 30 | named "CoreButton" ]]
 			LayoutOrder = 1
 		}, {
 			Icon = reactModule.createElement(icon, {
-				name = reactModule.useMemo(function() --[[ line: 46 ]]
+				name = reactModule.useMemo(function()
 					-- upvalues: p0 (ref), var5 (ref), var7 (ref)
 					return if p0.animatedIcon then var5 else var7
 				end, { var5, var7 }),

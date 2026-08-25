@@ -1,9 +1,9 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("HttpRequest").Parent.Cryo)
 
-return function(p0, p1, p2) --[[ line: 4 ]]
+return function(p0, p1, p2)
 	-- upvalues: cryoModule (ref)
 	return {
-		Start = function(_, p3) --[[ line: 6 ]]
+		Start = function(_, p3)
 			-- upvalues: p2 (ref), cryoModule (copy), p0 (ref), p1 (ref)
 			local t = {}
 			
@@ -14,7 +14,7 @@ return function(p0, p1, p2) --[[ line: 4 ]]
 			end
 			p3(p2.success, cryoModule.Dictionary.join({ Url = p0, Method = p1 }, t))
 		end,
-		Cancel = function() --[[ line: 21 ]]
+		Cancel = function()
 			-- upvalues: p2 (ref)
 			if p2.cancel then
 				p2.cancel()

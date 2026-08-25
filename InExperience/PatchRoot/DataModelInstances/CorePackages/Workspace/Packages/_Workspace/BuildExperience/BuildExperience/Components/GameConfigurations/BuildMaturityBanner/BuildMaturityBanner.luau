@@ -7,7 +7,7 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0) --[[ line: 18 | named "BuildMaturityBanner" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	return reactModule.createElement(view, {
 		LayoutOrder = 2,

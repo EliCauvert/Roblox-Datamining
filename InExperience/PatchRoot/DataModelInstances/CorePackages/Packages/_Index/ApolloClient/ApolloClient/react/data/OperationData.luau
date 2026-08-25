@@ -13,7 +13,7 @@ local _ = require(script.Parent.Parent.types.types)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1) --[[ line: 39 ]]
+function t_1.new(p0, p1)
 	-- upvalues: boolean (ref), t_1 (ref)
 	return setmetatable({
 		options = if boolean.toJSBoolean(p0) then p0 else {},
@@ -21,11 +21,11 @@ function t_1.new(p0, p1) --[[ line: 39 ]]
 	}, t_1)
 end
 
-function t_1:getOptions() --[[ line: 46 ]]
+function t_1:getOptions()
 	return self.options
 end
 
-function t_1:setOptions(p2, p3) --[[ line: 50 ]]
+function t_1:setOptions(p2, p3)
 	-- upvalues: equalModule (ref)
 	if p3 == nil then
 		p3 = false
@@ -36,11 +36,11 @@ function t_1:setOptions(p2, p3) --[[ line: 50 ]]
 	self.options = p2
 end
 
-function t_1:unmount() --[[ line: 60 ]]
+function t_1:unmount()
 	self.isMounted = false
 end
 
-function t_1:refreshClient() --[[ line: 64 ]]
+function t_1:refreshClient()
 	-- upvalues: boolean (ref), invariant (ref)
 	local var4 = boolean.toJSBoolean(if boolean.toJSBoolean(self.options) then self.options.client else self.options) and (if boolean.toJSBoolean(self.options) then self.options.client else self.options) or (if boolean.toJSBoolean(self.context) then self.context.client else self.context)
 	invariant(boolean.toJSBoolean(var4), "Could not find \"client\" in the context or passed in as an option. Wrap the root component in an <ApolloProvider>, or pass an ApolloClient instance in via options.")
@@ -54,7 +54,7 @@ function t_1:refreshClient() --[[ line: 64 ]]
 	return { client = self.client, isNew = var5 }
 end
 
-function t_1.verifyDocumentType(_, p4, p5) --[[ line: 99 ]]
+function t_1.verifyDocumentType(_, p4, p5)
 	-- upvalues: parser (ref), operationName (ref), invariant (ref)
 	local var6 = parser(p4)
 	local var7 = operationName(p5)

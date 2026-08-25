@@ -1,10 +1,10 @@
 ﻿local playersService = game:GetService("Players")
 
-local function waitForFirst(...) --[[ line: 5 ]]
+local function waitForFirst(...)
 	local bindableEvent = Instance.new("BindableEvent")
 	local list = { ... }
 	
-	local function fire(...) --[[ line: 9 ]]
+	local function fire(...)
 		-- upvalues: list (ref), bindableEvent (ref)
 		for i = 1, #list do
 			list[i]:Disconnect()
@@ -19,9 +19,9 @@ local function waitForFirst(...) --[[ line: 5 ]]
 end
 
 return {
-	registerHumanoidReady = function(p0) --[[ line: 37 ]]
+	registerHumanoidReady = function(p0)
 		-- upvalues: waitForFirst (ref), playersService (ref)
-		local function characterAdded(p1, p2) --[[ line: 39 ]]
+		local function characterAdded(p1, p2)
 			-- upvalues: waitForFirst (copy), p0 (ref)
 			if not p2.Parent then
 				waitForFirst(p2.AncestryChanged, p1.CharacterAdded)
@@ -43,14 +43,14 @@ return {
 			end
 		end
 		
-		local function playerAdded(p3) --[[ line: 79 ]]
+		local function playerAdded(p3)
 			-- upvalues: characterAdded (ref)
-			local characterAddedConnection = p3.CharacterAdded:Connect(function(p4) --[[ line: 80 ]]
+			local characterAddedConnection = p3.CharacterAdded:Connect(function(p4)
 				-- upvalues: characterAdded (copy), p3 (ref)
 				characterAdded(p3, p4)
 			end)
 			local ancestryChangedConnection = nil
-			ancestryChangedConnection = p3.AncestryChanged:Connect(function(_, p5) --[[ line: 86 ]]
+			ancestryChangedConnection = p3.AncestryChanged:Connect(function(_, p5)
 				-- upvalues: ancestryChangedConnection (write), characterAddedConnection (ref)
 				if not game:IsAncestorOf(p5) then
 					ancestryChangedConnection:Disconnect()

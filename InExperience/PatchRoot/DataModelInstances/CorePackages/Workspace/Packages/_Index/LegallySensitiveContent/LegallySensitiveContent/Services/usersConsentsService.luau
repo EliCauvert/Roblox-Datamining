@@ -14,16 +14,16 @@ local var3 = urlBuilder.new({
 })
 
 return {
-	grantOneTimeUserConsent = function(p0, p1, p2) --[[ line: 18 ]]
+	grantOneTimeUserConsent = function(p0, p1, p2)
 		-- upvalues: consentNameModule (ref), promise (ref), var3 (ref), fetch_1 (ref), httpService (ref), response (ref)
 		local var4 = consentNameModule[p0]
 		
 		if var4 then
 			local var5 = var3()
 			
-			return promise.new(function(p3, p4) --[[ line: 25 ]]
+			return promise.new(function(p3, p4)
 				-- upvalues: fetch_1 (copy), var5 (ref), httpService (copy), var4 (ref), p1 (ref), p2 (ref), response (copy)
-				local ok, status = pcall(function() --[[ line: 26 ]]
+				local ok, status = pcall(function()
 					-- upvalues: fetch_1 (copy), var5 (copy), httpService (copy), var4 (copy), p1 (copy), p2 (copy), response (copy)
 					return fetch_1(var5, {
 						method = "POST",
@@ -33,7 +33,7 @@ return {
 							Accept = "application/json",
 							["rbx-audit-data"] = p2
 						}
-					}):catch(function(_) --[[ line: 39 ]]
+					}):catch(function(_)
 						-- upvalues: response (copy)
 						return response.error()
 					end):expect()

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("SocialUpsell").Types)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	local var0
 	if p0.buttons then
 		var0 = false

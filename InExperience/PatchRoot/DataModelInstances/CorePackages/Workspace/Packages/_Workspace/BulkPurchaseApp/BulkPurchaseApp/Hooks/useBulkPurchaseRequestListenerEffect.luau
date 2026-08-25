@@ -12,7 +12,7 @@ local fFlagBulkPurchaseEnablePurchaseOptionsModule = require(bulkPurchaseApp.Fla
 local convertToDiscountInformationOrNilModule = require(bulkPurchaseApp.Utils.convertToDiscountInformationOrNil)
 local _ = require(bulkPurchaseApp.Store.Types)
 
-local function transformItemDataToBulkPurchaseItemData(p0) --[[ line: 24 ]]
+local function transformItemDataToBulkPurchaseItemData(p0)
 	-- upvalues: purchasableStateEnumModule (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref)
 	local t = {}
 	
@@ -34,13 +34,13 @@ local function transformItemDataToBulkPurchaseItemData(p0) --[[ line: 24 ]]
 	return t
 end
 
-return function() --[[ line: 47 | named "useBulkPurchaseRequestListenerEffect" ]]
+return function()
 	-- upvalues: useDispatch (ref), useNetwork (ref), reactModule (ref), marketplaceService (ref), playersService (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), bulkPurchaseApp (ref), initiateBulkPurchaseFlowModule (ref), transformItemDataToBulkPurchaseItemData (ref), convertToDiscountInformationOrNilModule (ref)
 	local var10 = useDispatch()
 	local var11 = useNetwork()
-	reactModule.useEffect(function() --[[ line: 50 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var11 (ref), marketplaceService (copy), playersService (copy), fFlagBulkPurchaseEnablePurchaseOptionsModule (copy), bulkPurchaseApp (copy), initiateBulkPurchaseFlowModule (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
-		local var12 = if var10 and var11 then marketplaceService.PromptBulkPurchaseRequestedV2:Connect(function(p1, p2, p3, p4, p5, p6, p7) --[[ line: 54 ]]
+		local var12 = if var10 and var11 then marketplaceService.PromptBulkPurchaseRequestedV2:Connect(function(p1, p2, p3, p4, p5, p6, p7)
 			-- upvalues: playersService (copy), fFlagBulkPurchaseEnablePurchaseOptionsModule (copy), bulkPurchaseApp (copy), var10 (copy), initiateBulkPurchaseFlowModule (copy), var11 (copy), transformItemDataToBulkPurchaseItemData (copy), convertToDiscountInformationOrNilModule (copy)
 			if p1 == playersService.LocalPlayer then
 				if fFlagBulkPurchaseEnablePurchaseOptionsModule and require(bulkPurchaseApp.Flags.FFlagBulkPurchaseReportsMissingPurchaseOptions) then
@@ -50,7 +50,7 @@ return function() --[[ line: 47 | named "useBulkPurchaseRequestListenerEffect" ]
 			end
 		end) else nil
 		
-		return function() --[[ line: 88 ]]
+		return function()
 			-- upvalues: var12 (write)
 			if var12 then
 				var12:Disconnect()

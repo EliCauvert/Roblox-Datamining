@@ -2,9 +2,9 @@
 local default = require(parent.LinkingProtocol).LinkingProtocol.default
 local reactModule = require(parent.React)
 
-return function() --[[ line: 13 | named "useInExpOpenLink" ]]
+return function()
 	-- upvalues: reactModule (ref), default (ref)
-	return reactModule.useCallback(function(p0) --[[ line: 14 ]]
+	return reactModule.useCallback(function(p0)
 		-- upvalues: default (copy)
 		if p0 ~= nil and p0 ~= "" then
 			default:openURL(p0)

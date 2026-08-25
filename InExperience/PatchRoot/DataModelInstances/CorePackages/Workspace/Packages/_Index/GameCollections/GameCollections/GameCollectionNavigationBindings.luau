@@ -9,9 +9,9 @@ local t = {
 }
 local t_1 = {}
 
-local function useControllerBarFocusNavigationBindings(p0, p1) --[[ line: 23 ]]
+local function useControllerBarFocusNavigationBindings(p0, p1)
 	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), t (ref)
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 24 ]]
+	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), p0 (ref), inputHandlersModule (copy), p1 (ref)
 		return {
 			[focusNavigationEventNameEnum.SeeAll] = if p0 then { handler = inputHandlersModule.onRelease(p0) } else nil,
@@ -22,7 +22,7 @@ end
 
 t_1.useControllerBarFocusNavigationBindings = useControllerBarFocusNavigationBindings
 
-function t_1.OnSeeAllControllerBarNavigateWrapper(p2) --[[ line: 45 ]]
+function t_1.OnSeeAllControllerBarNavigateWrapper(p2)
 	-- upvalues: useControllerBarFocusNavigationBindings (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

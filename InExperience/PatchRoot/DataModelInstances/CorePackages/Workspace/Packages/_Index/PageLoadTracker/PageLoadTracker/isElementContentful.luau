@@ -8,7 +8,7 @@
 	ViewportFrame = true
 }
 
-function isElementContentful(p0) --[[ line: 11 ]]
+function isElementContentful(p0)
 	-- upvalues: t (ref)
 	return if p0.Visible and p0.BackgroundTransparency ~= 1 then t[p0.ClassName] else false
 end

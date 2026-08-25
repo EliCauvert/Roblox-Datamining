@@ -11,7 +11,7 @@ local _ = require(script.Parent.MomentsStoreTypes)
 local fetchUserMomentsModule = require(script.Parent.Requests.fetchUserMoments)
 local fFlagProfileMomentsOrderingAndReactions = require(parent.SharedFlags).FFlagProfileMomentsOrderingAndReactions
 
-local function _(p0, p1) --[[ line: 29 | named "paramsKey" ]]
+local function _(p0, p1)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
 		targetUserId = p0,
@@ -20,7 +20,7 @@ local function _(p0, p1) --[[ line: 29 | named "paramsKey" ]]
 	})
 end
 
-return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
+return function(p2)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), httpClientModule (ref), fetchUserMomentsModule (ref), httpService (ref), fFlagProfileMomentsOrderingAndReactions (ref), signalsModule (ref)
 	p2 = p2 or {}
 	local t = {}
@@ -30,7 +30,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
-		fetchFn = function(p3, _) --[[ line: 50 ]]
+		fetchFn = function(p3, _)
 			-- upvalues: t (write), promiseModule (copy), httpClientModule (copy), fetchUserMomentsModule (copy), p2 (ref)
 			local var19 = t[p3]
 			
@@ -38,7 +38,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		end
 	})
 	
-	local function _(value, p4) --[[ line: 59 | named "setParams" ]]
+	local function _(value, p4)
 		-- upvalues: httpService (copy), t (write)
 		local var20 = httpService:JSONEncode({
 			targetUserId = value,
@@ -50,7 +50,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		return var20
 	end
 	
-	local function getCachedUserMoments(p5, p6) --[[ line: 68 ]]
+	local function getCachedUserMoments(p5, p6)
 		-- upvalues: var12 (ref), httpService (copy), t (write)
 		local getCachedItem = var12.getCachedItem
 		local var21 = httpService:JSONEncode({
@@ -63,7 +63,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		return getCachedItem(var21)
 	end
 	
-	local function fetchUserMomentsItem(p7, p8) --[[ line: 75 ]]
+	local function fetchUserMomentsItem(p7, p8)
 		-- upvalues: var12 (ref), httpService (copy), t (write)
 		local fetchItem = var12.fetchItem
 		local var22 = httpService:JSONEncode({
@@ -76,7 +76,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		return fetchItem(var22)
 	end
 	
-	local function getAndFetchUserMoments(p9, p10) --[[ line: 82 ]]
+	local function getAndFetchUserMoments(p9, p10)
 		-- upvalues: var12 (ref), httpService (copy), t (write)
 		local getAndFetchItem = var12.getAndFetchItem
 		local var23 = httpService:JSONEncode({
@@ -89,7 +89,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		return getAndFetchItem(var23)
 	end
 	
-	local function getUserMoments(p11, p12) --[[ line: 89 ]]
+	local function getUserMoments(p11, p12)
 		-- upvalues: fFlagProfileMomentsOrderingAndReactions (copy), httpClientModule (copy), fetchUserMomentsModule (copy), p2 (ref), httpService (copy), t_1 (write), t_2 (write)
 		if not fFlagProfileMomentsOrderingAndReactions then
 			return httpClientModule.asPromise(fetchUserMomentsModule(p11, p12, p2.network))
@@ -105,7 +105,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 			local var26 = httpClientModule.asPromise(fetchUserMomentsModule(p11, p12, p2.network))
 			t_1[var24] = var26
 			t_2[var24] = p11
-			var26:catch(function() --[[ line: 101 ]]
+			var26:catch(function()
 				-- upvalues: t_1 (copy), var24 (ref), t_2 (copy)
 				t_1[var24] = nil
 				t_2[var24] = nil
@@ -123,7 +123,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 		getCachedUserMoments = getCachedUserMoments,
 		fetchUserMoments = fetchUserMomentsItem,
 		getAndFetchUserMoments = getAndFetchUserMoments,
-		invalidateUser = function(p13) --[[ line: 115 ]]
+		invalidateUser = function(p13)
 			-- upvalues: t_2 (write), t_1 (write), var18 (ref), var17 (ref)
 			for i, v in t_2 do
 				if v == p13 then
@@ -134,7 +134,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 			var18(var17(false) + 1)
 		end,
 		getUserMomentsVersion = var17,
-		clear = function() --[[ line: 125 ]]
+		clear = function()
 			-- upvalues: t (write), fFlagProfileMomentsOrderingAndReactions (copy), t_1 (write), t_2 (write), var12 (ref)
 			t = {}
 			
@@ -144,7 +144,7 @@ return function(p2) --[[ line: 37 | named "createMomentsUserStore" ]]
 			end
 			var12.clear()
 		end,
-		dispose = function() --[[ line: 134 ]]
+		dispose = function()
 			-- upvalues: t (write), fFlagProfileMomentsOrderingAndReactions (copy), t_1 (write), t_2 (write), var12 (ref)
 			t = {}
 			

@@ -1,7 +1,7 @@
 ﻿local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local var0 = nil
 
-return function() --[[ line: 4 | named "getClientReplicator" ]]
+return function()
 	-- upvalues: var0 (write)
 	if var0 == nil then
 		local networkClient = game:FindService("NetworkClient")

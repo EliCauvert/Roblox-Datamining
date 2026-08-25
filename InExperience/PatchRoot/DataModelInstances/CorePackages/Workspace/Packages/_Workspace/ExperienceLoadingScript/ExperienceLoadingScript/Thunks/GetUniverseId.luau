@@ -2,9 +2,9 @@
 local setUniverseIdModule = require(experienceLoadingScript.Actions.SetUniverseId)
 local url = require(experienceLoadingScript.Parent.Http).Url
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	-- upvalues: setUniverseIdModule (ref), url (ref)
-	local var2 = function(p2) --[[ line: 7 ]]
+	local var2 = function(p2)
 		-- upvalues: setUniverseIdModule (copy)
 		local placeId = game.PlaceId
 		local gameId = game.GameId
@@ -16,14 +16,14 @@ return function(p0, p1) --[[ line: 6 ]]
 		p2:dispatch(setUniverseIdModule({ universeId = gameId, placeId = placeId }))
 	end
 	
-	return function(p3) --[[ line: 23 ]]
+	return function(p3)
 		-- upvalues: p1 (ref), url (copy), p0 (ref), setUniverseIdModule (copy), var2 (ref)
-		coroutine.wrap(function() --[[ line: 24 ]]
+		coroutine.wrap(function()
 			-- upvalues: p1 (copy), url (copy), p0 (copy), p3 (ref), setUniverseIdModule (copy), var2 (copy)
 			local gameId = game.GameId
 			
 			if p1 > 0 and gameId <= 0 then
-				p0(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p1), "GET"):andThen(function(p4) --[[ line: 31 ]]
+				p0(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p1), "GET"):andThen(function(p4)
 					-- upvalues: gameId (write), p3 (copy), setUniverseIdModule (copy), p1 (ref), var2 (copy)
 					if p4 and p4.responseBody then
 						gameId = p4.responseBody.universeId
@@ -35,7 +35,7 @@ return function(p0, p1) --[[ line: 6 ]]
 						end
 					end
 					var2(p3)
-				end, function(_) --[[ line: 44 ]]
+				end, function(_)
 					-- upvalues: var2 (copy), p3 (copy)
 					var2(p3)
 				end)

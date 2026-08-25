@@ -7,13 +7,13 @@ local inlineSpanElementModule = require(inlineLayoutElements.InlineSpanElement)
 local hoverContextModule = require(inlineLayoutElements.HoverContext)
 local _ = require(inlineLayoutElements.RenderableInlineElement)
 local t = {
-	new = function(p0, p1) --[[ line: 45 ]]
+	new = function(p0, p1)
 		-- upvalues: inlineSpanElementModule (ref)
 		return inlineSpanElementModule.new(HoverContextWrapper, p1, p0)
 	end
 }
 
-function HoverContextWrapper(p2) --[[ line: 25 ]]
+function HoverContextWrapper(p2)
 	-- upvalues: hoverContextModule (ref), reactModule (ref), foundationModule (ref), useTokens (ref)
 	local var6, var7 = hoverContextModule.useHoverContext(p2.id)
 	
@@ -22,7 +22,7 @@ function HoverContextWrapper(p2) --[[ line: 25 ]]
 		LayoutOrder = p2.LayoutOrder,
 		onActivated = p2.onActivated,
 		backgroundStyle = if var6 then useTokens().Color.State.Hover else nil,
-		onStateChanged = reactModule.useCallback(function(p3) --[[ line: 27 ]]
+		onStateChanged = reactModule.useCallback(function(p3)
 			-- upvalues: var7 (ref), foundationModule (copy)
 			var7(p3 == foundationModule.Enums.ControlState.Hover)
 		end, { var7 }),

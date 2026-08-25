@@ -12,11 +12,11 @@ local sharePrivateExperienceModule = require(buildExperience.utils.sharePrivateE
 local _ = require(script.Parent.PrivateInvitesManagementView)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 32 | named "usePrivateInvitesManagementViewModel" ]]
+return function(p0)
 	-- upvalues: getPrivatePlaytestersStore (ref), reactModule (ref), signalsReactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), sendBuildExperienceEventModule (ref), sharePrivateExperienceModule (ref), logger (ref)
 	local var11, PRIVATE_INVITES_INVITE_BUTTON, PRIVATE_INVITES_SHARE_WITH_FRIENDS, PRIVATE_INVITES_SHARE_WITH_FRIENDS_BUTTON, var12, PRIVATE_INVITES_TITLE
 	local var7 = getPrivatePlaytestersStore(false)
-	local var8 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 34 ]]
+	local var8 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		return var7.getAndFetchInvitedPlayers(p0.universeId)
 	end, { var7, p0.universeId }).players)
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 32 | named "usePrivateInvitesManagementViewModel"
 	end
 	local universeId = p0.universeId
 	local var13 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
 		if var13.current then
 			return
@@ -78,31 +78,31 @@ return function(p0) --[[ line: 32 | named "usePrivateInvitesManagementViewModel"
 		inviteButtonText = PRIVATE_INVITES_INVITE_BUTTON,
 		shareWithFriendsTitle = PRIVATE_INVITES_SHARE_WITH_FRIENDS,
 		shareWithFriendsButtonText = PRIVATE_INVITES_SHARE_WITH_FRIENDS_BUTTON,
-		onShareLink = reactModule.useCallback(function() --[[ line: 115 ]]
+		onShareLink = reactModule.useCallback(function()
 			-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), sharePrivateExperienceModule (copy), logger (copy)
 			sendBuildExperienceEventModule("PLAYTEST_SHARE_CLICK", { universeId = universeId }, { source = "management_page" })
-			sharePrivateExperienceModule(universeId):catch(function(p1) --[[ line: 119 ]]
+			sharePrivateExperienceModule(universeId):catch(function(p1)
 				-- upvalues: logger (copy), universeId (copy)
 				logger:warning("PrivateInvitesManagement: share link failed for universe {}: {}", universeId, p1)
 			end)
 		end, { universeId }),
 		userIds = var8,
 		removingUserIds = var14,
-		onRemove = reactModule.useCallback(function(p2) --[[ line: 92 ]]
+		onRemove = reactModule.useCallback(function(p2)
 			-- upvalues: var15 (ref), var7 (ref), universeId (ref), sendBuildExperienceEventModule (copy)
-			var15(function(p3) --[[ line: 93 ]]
+			var15(function(p3)
 				-- upvalues: p2 (ref)
 				local cloned = table.clone(p3)
 				cloned[p2] = true
 				
 				return cloned
 			end)
-			var7.removeInvite(universeId, p2):andThen(function() --[[ line: 100 ]]
+			var7.removeInvite(universeId, p2):andThen(function()
 				-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy)
 				sendBuildExperienceEventModule("PLAYTESTER_REMOVED", { universeId = universeId })
-			end):finally(function() --[[ line: 103 ]]
+			end):finally(function()
 				-- upvalues: var15 (copy), p2 (ref)
-				var15(function(p4) --[[ line: 104 ]]
+				var15(function(p4)
 					-- upvalues: p2 (copy)
 					local cloned = table.clone(p4)
 					cloned[p2] = nil
@@ -112,7 +112,7 @@ return function(p0) --[[ line: 32 | named "usePrivateInvitesManagementViewModel"
 			end)
 		end, { var7, universeId }),
 		isInviteDisabled = MAX_INVITES <= var8Count,
-		onOpenInvitePicker = reactModule.useCallback(function() --[[ line: 124 ]]
+		onOpenInvitePicker = reactModule.useCallback(function()
 			-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p0 (ref)
 			sendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", { universeId = universeId }, { source = "management_page" })
 			p0.onOpenInvitePicker()

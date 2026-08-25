@@ -5,13 +5,13 @@ local reactModule = require(corePackagesService.Packages.React)
 local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local images = UIBloxModule.App.ImageSet.Images
 
-return function(p0) --[[ line: 25 | named "ScreenshotHighlighter" ]]
+return function(p0)
 	-- upvalues: robloxGui (ref), reactModule (ref), imageSetButton (ref), images (ref)
 	local absoluteSize = robloxGui.AbsoluteSize
 	local var4 = (if absoluteSize.X < absoluteSize.Y then absoluteSize.X else absoluteSize.Y) / 5
 	local var5, var6 = reactModule.useState(false)
 	
-	local var7 = function(p1, p2) --[[ line: 35 ]]
+	local var7 = function(p1, p2)
 		-- upvalues: p0 (ref), var4 (ref)
 		table.insert(p0.annotationPoints, (Vector2.new(p2.X, p2.Y) - p1.AbsolutePosition) / p1.AbsoluteSize)
 		p0.setAnnotationCircleRadius(var4 * 0.5 / (if p1.AbsoluteSize.Y < p1.AbsoluteSize.X then p1.AbsoluteSize.X else p1.AbsoluteSize.Y))
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 25 | named "ScreenshotHighlighter" ]]
 		p0.handleAnnotationPoints(p0.annotationPoints)
 	end
 	
-	local var8 = function(p3, p4) --[[ line: 47 ]]
+	local var8 = function(p3, p4)
 		-- upvalues: p0 (ref), var6 (ref), var7 (ref)
 		if p4.UserInputState == Enum.UserInputState.Begin and (p4.UserInputType == Enum.UserInputType.Touch or p4.UserInputType == Enum.UserInputType.MouseButton1) and #p0.annotationPoints < 25 then
 			var6(true)
@@ -27,9 +27,9 @@ return function(p0) --[[ line: 25 | named "ScreenshotHighlighter" ]]
 		end
 	end
 	
-	local var9 = function(_, _) --[[ line: 57 ]] end
+	local var9 = function(_, _) end
 	
-	local var10 = function(_, _) --[[ line: 69 ]]
+	local var10 = function(_, _)
 		-- upvalues: var5 (ref), var6 (ref)
 		if var5 then
 			var6(false)

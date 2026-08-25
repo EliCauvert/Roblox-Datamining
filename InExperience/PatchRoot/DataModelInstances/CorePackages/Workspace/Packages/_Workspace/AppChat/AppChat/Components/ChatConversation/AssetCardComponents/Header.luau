@@ -7,9 +7,9 @@ local skeleton = foundationModule.Skeleton
 local assetCardHeader = roactModule.PureComponent:extend("AssetCard_Header")
 assetCardHeader.defaultProps = { cardTitle = nil }
 
-function assetCardHeader.render(p0) --[[ line: 19 ]]
+function assetCardHeader.render(p0)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), skeleton (ref), radius (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 20 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: roactModule (copy), p0 (ref), skeleton (copy), radius (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

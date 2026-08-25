@@ -5,11 +5,11 @@ local t = {
 	BLOCK_REASON_INSUFFICIENT_ROBUX_BALANCE = "InsufficientRobuxBalance"
 }
 
-local function _(p0) --[[ line: 13 | named "decodeNumber" ]]
+local function _(p0)
 	return if typeof(p0) == "number" then p0 elseif typeof(p0) == "string" then tonumber(p0) or 0 else 0
 end
 
-local function decodeDailyLimitSettings(value) --[[ line: 23 ]]
+local function decodeDailyLimitSettings(value)
 	local var2 = if typeof(value) == "table" then value else {}
 	local var3 = if typeof(var2.limitSettings) == "table" then var2.limitSettings else var2
 	local t = {
@@ -22,14 +22,14 @@ local function decodeDailyLimitSettings(value) --[[ line: 23 ]]
 	return t
 end
 
-local _ = function(p1) --[[ line: 33 | named "decodeQuotaBlockReason" ]]
+local _ = function(p1)
 	-- upvalues: t (ref)
 	return if typeof(p1) == "string" then t[p1] else nil
 end
 
 return {
 	decodeDailyLimitSettings = decodeDailyLimitSettings,
-	decodeQuotaSummary = function(p2) --[[ line: 40 ]]
+	decodeQuotaSummary = function(p2)
 		-- upvalues: decodeDailyLimitSettings (ref), t (ref)
 		local var5 = if typeof(p2) == "table" then p2 else {}
 		local var6 = if typeof(var5.summary) == "table" then var5.summary else var5

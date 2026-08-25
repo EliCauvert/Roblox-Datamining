@@ -3,10 +3,10 @@ local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineF
 local getFIntContactImporterSyncMinHoursModule = require(script.Parent.Parent.Flags.getFIntContactImporterSyncMinHours)
 
 return {
-	updateSyncTimestamp = function(_, p0, p1, p2) --[[ line: 11 ]]
+	updateSyncTimestamp = function(_, p0, p1, p2)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function() --[[ line: 15 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p0 (ref), constantsModule (copy)
 			return p0:GetItem(constantsModule.LOCAL_STORAGE_KEY_CONTACTS_SYNC)
 		end)
@@ -35,19 +35,19 @@ return {
 					var3 ..= "," .. p1 .. ":" .. tostring(p2)
 				end
 			end
-			pcall(function() --[[ line: 46 ]]
+			pcall(function()
 				-- upvalues: p0 (ref), constantsModule (copy), var3 (write)
 				p0:SetItem(constantsModule.LOCAL_STORAGE_KEY_CONTACTS_SYNC, var3)
 				p0:Flush()
 			end)
 		end
 	end,
-	shouldSyncContacts = function(_, p3, p4, p5) --[[ line: 53 ]]
+	shouldSyncContacts = function(_, p3, p4, p5)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref), getFIntContactImporterSyncMinHoursModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then
 			return true
 		end
-		local ok, status = pcall(function() --[[ line: 57 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p3 (ref), constantsModule (copy)
 			return p3:GetItem(constantsModule.LOCAL_STORAGE_KEY_CONTACTS_SYNC)
 		end)

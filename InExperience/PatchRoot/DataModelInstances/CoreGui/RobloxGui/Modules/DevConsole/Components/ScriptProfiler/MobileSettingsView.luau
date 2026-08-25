@@ -22,7 +22,7 @@ local var8 = dropDownArrowHeight / 2
 local downArrow = constantsModule.Image.DownArrow
 local scriptProfilerShowPlugins2 = game:DefineFastFlag("ScriptProfilerShowPlugins2", false)
 
-local function _(p0, p1) --[[ line: 43 | named "makeFormattedStringTable" ]]
+local function _(p0, p1)
 	local list = table.create(#p0)
 	
 	for i, v in p0 do
@@ -31,7 +31,7 @@ local function _(p0, p1) --[[ line: 43 | named "makeFormattedStringTable" ]]
 	return list
 end
 
-local function formatTimeSelection(p2) --[[ line: 53 ]]
+local function formatTimeSelection(p2)
 	-- upvalues: profilerUtilModule (ref)
 	return if p2 == 0 then "Off" else profilerUtilModule.formatTimer(p2)
 end
@@ -64,23 +64,23 @@ for i_2, v_2 in list_5 do
 end
 local mobileSettingsView = roactModule.PureComponent:extend("MobileSettingsView")
 
-function mobileSettingsView.init(_) --[[ line: 74 ]] end
+function mobileSettingsView.init(_) end
 
-function mobileSettingsView.didMount(_) --[[ line: 76 ]] end
+function mobileSettingsView.didMount(_) end
 
-function mobileSettingsView.didUpdate(_) --[[ line: 78 ]] end
+function mobileSettingsView.didUpdate(_) end
 
-function mobileSettingsView.GetState(p3, p4) --[[ line: 80 ]]
+function mobileSettingsView.GetState(p3, p4)
 	return (if p3.props.isClientView then p3.props.client else p3.props.server)[p4]
 end
 
-function mobileSettingsView.UpdateState(p5, p6, p7) --[[ line: 86 ]]
+function mobileSettingsView.UpdateState(p5, p6, p7)
 	local cloned = table.clone(if p5.props.isClientView then p5.props.client else p5.props.server)
 	cloned[p6] = p7
 	p5.props.dispatchSetScriptProfilerState(p5.props.isClientView, cloned)
 end
 
-function mobileSettingsView.renderToggle(_, p8, p9, p10) --[[ line: 95 ]]
+function mobileSettingsView.renderToggle(_, p8, p9, p10)
 	-- upvalues: roactModule (ref), smallFrameHeight (ref), buttonWidth (ref), mainWindowHeader (ref), buttonTextSize (ref), constantsModule (ref), unselectedGray_1 (ref), unselectedGray (ref), selectedBlue (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -113,7 +113,7 @@ function mobileSettingsView.renderToggle(_, p8, p9, p10) --[[ line: 95 ]]
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				BackgroundColor3 = if p9 then unselectedGray else selectedBlue,
-				[roactModule.Event.Activated] = function() --[[ line: 129 ]]
+				[roactModule.Event.Activated] = function()
 					-- upvalues: p10 (ref)
 					p10(false)
 				end
@@ -128,7 +128,7 @@ function mobileSettingsView.renderToggle(_, p8, p9, p10) --[[ line: 95 ]]
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				BackgroundColor3 = if p9 then selectedBlue else unselectedGray,
-				[roactModule.Event.Activated] = function() --[[ line: 145 ]]
+				[roactModule.Event.Activated] = function()
 					-- upvalues: p10 (ref)
 					p10(true)
 				end
@@ -137,14 +137,14 @@ function mobileSettingsView.renderToggle(_, p8, p9, p10) --[[ line: 95 ]]
 	})
 end
 
-function mobileSettingsView.renderStateToggle(p11, p12, p13, _) --[[ line: 153 ]]
-	return p11:renderToggle(p12, p11:GetState(p13), function(p14) --[[ line: 156 ]]
+function mobileSettingsView.renderStateToggle(p11, p12, p13, _)
+	return p11:renderToggle(p12, p11:GetState(p13), function(p14)
 		-- upvalues: p11 (ref), p13 (ref)
 		p11:UpdateState(p13, p14)
 	end)
 end
 
-function mobileSettingsView.renderDropDown(p15, p16, p17, p18, p19, p20, p21) --[[ line: 161 ]]
+function mobileSettingsView.renderDropDown(p15, p16, p17, p18, p19, p20, p21)
 	-- upvalues: roactModule (ref), buttonWidth (ref), smallFrameHeight (ref), buttonTextSize (ref), text (ref), mainWindow (ref), constantsModule (ref), downArrow (ref), dropDownArrowHeight (ref), var8 (ref), dropDownModule (ref), mainWindowHeader (ref), unselectedGray_1 (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -187,7 +187,7 @@ function mobileSettingsView.renderDropDown(p15, p16, p17, p18, p19, p20, p21) --
 				buttonSize = UDim2.new(1, 0, 0, smallFrameHeight),
 				dropDownList = p18,
 				selectedIndex = p20,
-				onSelection = function(p22) --[[ line: 193 ]]
+				onSelection = function(p22)
 					-- upvalues: p15 (ref), p17 (ref), p19 (ref)
 					local var21 = p15:GetState(p17)
 					
@@ -204,7 +204,7 @@ function mobileSettingsView.renderDropDown(p15, p16, p17, p18, p19, p20, p21) --
 	})
 end
 
-function mobileSettingsView.render(p23) --[[ line: 229 ]]
+function mobileSettingsView.render(p23)
 	-- upvalues: roactModule (ref), constantsModule (ref), var7 (ref), scriptProfilerShowPlugins2 (ref), list_2 (ref), list_1 (ref), list_4 (ref), list_3 (ref), profilerUtilModule (ref), list_6 (ref), list_5 (ref), list (ref)
 	local isProfilingState = p23:GetState("isProfiling")
 	
@@ -219,7 +219,7 @@ function mobileSettingsView.render(p23) --[[ line: 229 ]]
 			Padding = UDim.new(0, var7),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Percentages = p23:renderToggle("Percentages", p23.props.usePercentages, function(p24) --[[ line: 245 ]]
+		Percentages = p23:renderToggle("Percentages", p23.props.usePercentages, function(p24)
 			-- upvalues: p23 (ref)
 			p23.props.dispatchSetScriptProfilerUsePercentages(p24)
 		end),
@@ -233,17 +233,17 @@ function mobileSettingsView.render(p23) --[[ line: 229 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p25, _) --[[ line: 296 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p25, _)
 	return {
 		usePercentages = p25.ScriptProfiler.usePercentages,
 		isClientView = p25.ScriptProfiler.isClientView,
 		client = p25.ScriptProfiler.client,
 		server = p25.ScriptProfiler.server
 	}
-end, function(p26) --[[ line: 305 | named "mapDispatchToProps" ]]
+end, function(p26)
 	-- upvalues: setScriptProfilerStateModule (ref)
 	return {
-		dispatchSetScriptProfilerState = function(value, p27) --[[ line: 307 ]]
+		dispatchSetScriptProfilerState = function(value, p27)
 			-- upvalues: p26 (ref), setScriptProfilerStateModule (copy)
 			if value then
 				p26(setScriptProfilerStateModule(value, nil, p27, nil))
@@ -252,7 +252,7 @@ end, function(p26) --[[ line: 305 | named "mapDispatchToProps" ]]
 			end
 			p26(setScriptProfilerStateModule(value, nil, nil, p27))
 		end,
-		dispatchSetScriptProfilerUsePercentages = function(value) --[[ line: 315 ]]
+		dispatchSetScriptProfilerUsePercentages = function(value)
 			-- upvalues: p26 (ref), setScriptProfilerStateModule (copy)
 			p26(setScriptProfilerStateModule(nil, value))
 		end

@@ -6,11 +6,11 @@ local iconButton = foundationModule.IconButton
 local text = foundationModule.Text
 local view = foundationModule.View
 
-local function _(p0) --[[ line: 29 | named "formatTime" ]]
+local function _(p0)
 	return string.format("%02d:%02d", math.floor(p0 / 60), math.floor(p0 % 60))
 end
 
-return function(p1) --[[ line: 35 | named "ProgressBar" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), view (ref), iconButton (ref), buttonSize (ref), text (ref)
 	local var2 = p1.timePosition / p1.timeLength
 	local timePosition = p1.timePosition
@@ -19,15 +19,15 @@ return function(p1) --[[ line: 35 | named "ProgressBar" ]]
 	local formattedText_1 = string.format("%02d:%02d", math.floor(timeLength / 60), math.floor(timeLength % 60))
 	local var5 = reactModule.useRef(nil)
 	local var6, var7 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 42 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var7 (ref)
 		if var5 and var5.current then
-			local inputBeganConnection = var5.current.InputBegan:Connect(function(p2) --[[ line: 49 ]]
+			local inputBeganConnection = var5.current.InputBegan:Connect(function(p2)
 				-- upvalues: var7 (copy)
 				var7(p2.Position.X)
 			end)
 			
-			return function() --[[ line: 53 ]]
+			return function()
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
@@ -44,7 +44,7 @@ return function(p1) --[[ line: 35 | named "ProgressBar" ]]
 		ProgressBarContainer = reactModule.createElement(view, {
 			LayoutOrder = 1,
 			tag = "radius-small bg-over-media-0 size-full-200",
-			onActivated = reactModule.useCallback(function() --[[ line: 58 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var5 (ref), p1 (ref), var6 (ref)
 				if var5 and var5.current then
 					p1.onProgressBarActivated((var6 - var5.current.AbsolutePosition.X) / var5.current.AbsoluteSize.X)

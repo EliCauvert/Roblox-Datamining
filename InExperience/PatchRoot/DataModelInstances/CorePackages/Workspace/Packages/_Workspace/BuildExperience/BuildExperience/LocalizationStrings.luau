@@ -109,7 +109,7 @@ if fFlagBuildExperienceClientDataModelTools then
 		running = "Searching client DataModel"
 	}
 end
-local function formatCampaignDate(p0) --[[ line: 279 ]]
+local function formatCampaignDate(p0)
 	-- upvalues: localizationService (ref)
 	local robloxLocaleId = localizationService.RobloxLocaleId
 	
@@ -349,90 +349,90 @@ local t_1 = {
 	VERSION_HISTORY_RESTORE = "Restore",
 	VERSION_HISTORY_RESTORE_FAILED = "Couldn't restore this version. Try again.",
 	VERSION_HISTORY_TITLE = "Version history",
-	formatBuildGreeting = function(p1) --[[ line: 127 ]]
+	formatBuildGreeting = function(p1)
 		return if p1 == "" then "Hi" else `Hi, {p1}`
 	end,
-	formatChatRevertConfirmationDescription = function(p2) --[[ line: 204 ]]
+	formatChatRevertConfirmationDescription = function(p2)
 		return `Confirm to revert the latest change and go back to {if p2 < 10 then `v0{p2}` else `v{p2}`}.`
 	end,
-	formatGameSharedWithTarget = function(p3) --[[ line: 135 ]]
+	formatGameSharedWithTarget = function(p3)
 		return if p3 == "" then "Game shared" else `Game shared with {p3}`
 	end,
-	formatShareExperience = function(p4) --[[ line: 131 ]]
+	formatShareExperience = function(p4)
 		return `Share {p4}`
 	end,
-	formatChatFailedTool = function(p5) --[[ line: 177 ]]
+	formatChatFailedTool = function(p5)
 		return `Failed {p5}`
 	end,
-	formatChatFinishedTool = function(p6) --[[ line: 173 ]]
+	formatChatFinishedTool = function(p6)
 		return `Finished {p6}`
 	end,
-	formatChatRunningTool = function(p7) --[[ line: 181 ]]
+	formatChatRunningTool = function(p7)
 		return `Running {p7}`
 	end,
-	formatChatTaskCount = function(p8) --[[ line: 154 ]]
+	formatChatTaskCount = function(p8)
 		return if p8 == 1 then "1 task completed" else `{p8} tasks completed`
 	end,
-	formatChatThinkingDuration = function(p9) --[[ line: 168 ]]
+	formatChatThinkingDuration = function(p9)
 		return `Thinking for {math.max(0, math.floor(p9))}s`
 	end,
-	formatChatTurnFailureMessage = function(p10, p11) --[[ line: 150 ]]
+	formatChatTurnFailureMessage = function(p10, p11)
 		return if p11 == nil then p10 else `({p11}) {p10}`
 	end,
-	formatChatWorkedDuration = function(p12) --[[ line: 158 ]]
+	formatChatWorkedDuration = function(p12)
 		local maxValue = math.max(0, math.floor(p12 + 0.5))
 		
 		return if maxValue < 60 then `Worked for {maxValue}s` else `Worked for {math.floor(maxValue / 60)}m{maxValue % 60}s`
 	end,
-	getChatToolActivityLabel = function(p13, p14) --[[ line: 185 ]]
+	getChatToolActivityLabel = function(p13, p14)
 		-- upvalues: t (ref)
 		local var7 = t[p13]
 		
 		return if var7 == nil then nil elseif p14 == "completed" then var7.completed elseif p14 == "failed" then var7.failed else var7.running
 	end,
-	formatMyCreationsUniverseName = function(p15) --[[ line: 142 ]]
+	formatMyCreationsUniverseName = function(p15)
 		return `Universe {p15}`
 	end,
-	formatPrivateInvitesCount = function(p16, p17) --[[ line: 232 ]]
+	formatPrivateInvitesCount = function(p16, p17)
 		return `{p16}/{p17}`
 	end,
-	formatPrivateInvitesSent = function(p18, p19) --[[ line: 228 ]]
+	formatPrivateInvitesSent = function(p18, p19)
 		return `{p18} of {p19} playtesters added`
 	end,
-	formatPrivateInvitesSubtitle = function(p20) --[[ line: 224 ]]
+	formatPrivateInvitesSubtitle = function(p20)
 		return `Choose up to {p20} friends, then share the link to the game.`
 	end,
-	formatSubagentStatusCompletedTasks = function(p21) --[[ line: 146 ]]
+	formatSubagentStatusCompletedTasks = function(p21)
 		return `{p21} completed tasks`
 	end,
-	formatUserPickerUsername = function(p22) --[[ line: 236 ]]
+	formatUserPickerUsername = function(p22)
 		return `@{p22}`
 	end,
-	formatVersionHistoryCreatedDate = function(p23, p24, p25) --[[ line: 212 ]]
+	formatVersionHistoryCreatedDate = function(p23, p24, p25)
 		return `{p23} {p24}, {p25}`
 	end,
-	formatVersionHistoryRestoredBadge = function(p26) --[[ line: 208 ]]
+	formatVersionHistoryRestoredBadge = function(p26)
 		return `Restored {if p26 < 10 then `v0{p26}` else `v{p26}`}`
 	end,
-	formatVersionHistoryVersionLabel = function(p27, p28) --[[ line: 220 ]]
+	formatVersionHistoryVersionLabel = function(p27, p28)
 		return `{if p27 < 10 then `v0{p27}` else `v{p27}`} \194\183 {p28}`
 	end,
-	formatVersionHistoryVersionNumber = function(p29) --[[ line: 197 ]]
+	formatVersionHistoryVersionNumber = function(p29)
 		return if p29 < 10 then `v0{p29}` else `v{p29}`
 	end,
-	formatVersionHistoryVersionTitle = function(p30) --[[ line: 216 ]]
+	formatVersionHistoryVersionTitle = function(p30)
 		return `Version {p30}`
 	end,
-	formatCreatorCreditAdditionalUsed = function(p31, p32) --[[ line: 266 ]]
+	formatCreatorCreditAdditionalUsed = function(p31, p32)
 		return `{p31} of {p32} used`
 	end,
-	formatCreatorCreditAdditionalUsedNoLimit = function(p33) --[[ line: 270 ]]
+	formatCreatorCreditAdditionalUsedNoLimit = function(p33)
 		return `{p33} used \226\128\162 No limit`
 	end,
-	formatCreatorCreditLimitBelowSpend = function(p34) --[[ line: 274 ]]
+	formatCreatorCreditLimitBelowSpend = function(p34)
 		return `Limit can't be below the {p34} Robux already spent today.`
 	end,
-	formatCreatorCreditPercentUsed = function(p35) --[[ line: 240 ]]
+	formatCreatorCreditPercentUsed = function(p35)
 		local floored = math.floor(p35 + 0.5)
 		
 		if floored < 0 then
@@ -443,13 +443,13 @@ local t_1 = {
 		end
 		return `{floored}% used`
 	end,
-	formatCreatorCreditRobuxUsage = function(p36, p37) --[[ line: 251 ]]
+	formatCreatorCreditRobuxUsage = function(p36, p37)
 		return `{p36}/{p37}`
 	end,
-	formatCreatorCreditRobuxUsageUnlimited = function(p38) --[[ line: 255 ]]
+	formatCreatorCreditRobuxUsageUnlimited = function(p38)
 		return `{p38} used`
 	end,
-	formatCreatorCreditResetHours = function(value) --[[ line: 259 ]]
+	formatCreatorCreditResetHours = function(value)
 		return if value == 1 then "Resets in 1 hour" else `Resets in {value} hours`
 	end,
 	formatCampaignDate = formatCampaignDate
@@ -827,7 +827,7 @@ if fFlagBuildLocalization then
 		AD_CAMPAIGN_CARD_DESC_FREE = "Feature.Build.Description.BoostAudienceForPlays",
 		AD_CAMPAIGN_CARD_ACTIVE_DESC = "Feature.Build.Description.CampaignRunDates",
 		AD_CAMPAIGN_CARD_VIEW = "Feature.Build.Action.View",
-		getChatToolActivityLocalizationKey = function(p39, p40) --[[ line: 697 ]]
+		getChatToolActivityLocalizationKey = function(p39, p40)
 			-- upvalues: t_2 (ref)
 			if p39 == nil then
 				return nil

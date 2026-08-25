@@ -8,9 +8,9 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0, _, _) --[[ line: 26 | named "renderHeaderBarLeft" ]]
+local function _(p0, _, _)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function() --[[ line: 27 ]]
+	return function()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p0 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -32,11 +32,11 @@ local function _(p0, _, _) --[[ line: 26 | named "renderHeaderBarLeft" ]]
 	end
 end
 
-local _ = function(p1) --[[ line: 48 | named "renderCenter" ]]
+local _ = function(p1)
 	-- upvalues: withStyle (ref), reactModule (ref)
-	return function() --[[ line: 49 ]]
+	return function()
 		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref)
-		return withStyle(function(p2) --[[ line: 50 ]]
+		return withStyle(function(p2)
 			-- upvalues: reactModule (copy), p1 (copy)
 			local currentCamera = game.Workspace.CurrentCamera
 			local theme = p2.Theme
@@ -57,9 +57,9 @@ local _ = function(p1) --[[ line: 48 | named "renderCenter" ]]
 	end
 end
 
-local _ = function(_, p3, p4, p5, p6) --[[ line: 77 | named "renderHeaderBarRight" ]]
+local _ = function(_, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function() --[[ line: 84 ]]
+	return function()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p5 (ref), p3 (ref), p6 (ref), p4 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -89,7 +89,7 @@ local _ = function(_, p3, p4, p5, p6) --[[ line: 77 | named "renderHeaderBarRigh
 	end
 end
 
-return function(p7) --[[ line: 112 | named "ScreenshotDialogPortraitModeHeader" ]]
+return function(p7)
 	-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), withStyle (ref)
 	local isRedoEnabled = p7.isRedoEnabled or p7.isUndoEnabled
 	local createElement = reactModule.createElement
@@ -113,7 +113,7 @@ return function(p7) --[[ line: 112 | named "ScreenshotDialogPortraitModeHeader" 
 	local _ = p7.isRedoEnabled
 	local _ = p7.isUndoEnabled
 	
-	function t_2.renderLeft() --[[ line: 27 ]]
+	function t_2.renderLeft()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -141,7 +141,7 @@ return function(p7) --[[ line: 112 | named "ScreenshotDialogPortraitModeHeader" 
 		local isUndoEnabled = p7.isUndoEnabled
 		local isRedoEnabled_1 = p7.isRedoEnabled
 		
-		local var9 = function() --[[ line: 84 ]]
+		local var9 = function()
 			-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), isUndoEnabled (ref), undoAnnotationPoints (ref), isRedoEnabled_1 (ref), redoAnnotationPoints (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -170,7 +170,7 @@ return function(p7) --[[ line: 112 | named "ScreenshotDialogPortraitModeHeader" 
 			})
 		end
 	else
-		local var9 = function() --[[ line: 135 ]] end
+		local var9 = function() end
 	end
 	t_2.renderRight = var9
 	t_2.title = if getFFlagReportAnythingLocalizationEnabledModule() then nil else p7.titleText
@@ -178,9 +178,9 @@ return function(p7) --[[ line: 112 | named "ScreenshotDialogPortraitModeHeader" 
 	if getFFlagReportAnythingLocalizationEnabledModule() then
 		local titleText = p7.titleText
 		
-		local var10 = function() --[[ line: 49 ]]
+		local var10 = function()
 			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-			return withStyle(function(p8) --[[ line: 50 ]]
+			return withStyle(function(p8)
 				-- upvalues: reactModule (copy), titleText (copy)
 				local currentCamera = game.Workspace.CurrentCamera
 				local theme = p8.Theme

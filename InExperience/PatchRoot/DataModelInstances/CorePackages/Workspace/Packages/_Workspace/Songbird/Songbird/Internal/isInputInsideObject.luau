@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "isInputInsideObject" ]]
+﻿return function(p0, p1)
 	if p1 then
 		local absolutePosition = p1.AbsolutePosition
 		local rect = Rect.new(absolutePosition, absolutePosition + p1.AbsoluteSize)

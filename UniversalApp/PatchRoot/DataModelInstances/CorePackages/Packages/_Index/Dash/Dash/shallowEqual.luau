@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 8 | named "shallowEqual" ]]
+﻿return function(p0, p1)
 	if p0 == p1 then
 		return true
 	elseif typeof(p0) ~= "table" or typeof(p1) ~= "table" or #p0 ~= #p1 then

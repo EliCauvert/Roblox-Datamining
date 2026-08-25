@@ -6,7 +6,7 @@ local useChatIsVisibleModule = require(script.Parent.useChatIsVisible)
 local setTimeout = require(parent.LuauPolyfill).setTimeout
 local var4 = game:DefineFastInt("AppChat.GuiVisibleBatchUpdateIntervalMs", 1000)
 
-local function getGuiObjectIsObscuredAtPosition(p0, p1, p2) --[[ line: 24 ]]
+local function getGuiObjectIsObscuredAtPosition(p0, p1, p2)
 	-- upvalues: coreGuiService (ref)
 	for i, v in coreGuiService:GetGuiObjectsAtPosition(p1, p2) do
 		if v:IsA("GuiObject") then
@@ -21,7 +21,7 @@ local function getGuiObjectIsObscuredAtPosition(p0, p1, p2) --[[ line: 24 ]]
 	return false
 end
 
-local function getGuiObjectIsObscured(p3) --[[ line: 42 ]]
+local function getGuiObjectIsObscured(p3)
 	-- upvalues: getGuiObjectIsObscuredAtPosition (ref)
 	local absolutePosition = p3.AbsolutePosition
 	local absoluteSize = p3.AbsoluteSize
@@ -42,14 +42,14 @@ local function getGuiObjectIsObscured(p3) --[[ line: 42 ]]
 	return getGuiObjectIsObscuredAtPosition(p3, var7.X, var7.Y) or (getGuiObjectIsObscuredAtPosition(p3, absolutePosition.X + var11, absolutePosition.Y + var11) or (getGuiObjectIsObscuredAtPosition(p3, var10.X + var11, var10.Y - var11) or (getGuiObjectIsObscuredAtPosition(p3, var9.X - var11, var9.Y + var11) or getGuiObjectIsObscuredAtPosition(p3, var8.X - var11, var8.Y - var11))))
 end
 
-return function(p4, p5) --[[ line: 82 | named "useIsGuiInChatVisible" ]]
+return function(p4, p5)
 	-- upvalues: useChatIsVisibleModule (ref), reactModule (ref), getGuiObjectIsObscured (ref), setTimeout (ref), var4 (ref), cryoModule (ref)
 	local var13 = useChatIsVisibleModule()
 	local var14, var15 = reactModule.useState(false)
 	local var16 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 92 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p4 (ref), getGuiObjectIsObscured (copy), var15 (ref), var16 (ref), setTimeout (copy), var4 (copy), var13 (ref)
-		local function _() --[[ line: 93 | named "updateIsGuiVisible" ]]
+		local function _()
 			-- upvalues: p4 (copy), getGuiObjectIsObscured (copy), var15 (copy)
 			if p4.current and p4.current:IsA("GuiObject") then
 				var15(p4.current.IsNotOccluded and not getGuiObjectIsObscured(p4.current))
@@ -59,12 +59,12 @@ return function(p4, p5) --[[ line: 82 | named "useIsGuiInChatVisible" ]]
 			var15(false)
 		end
 		
-		local function queueUpdateIsGuiVisible() --[[ line: 103 ]]
+		local function queueUpdateIsGuiVisible()
 			-- upvalues: var16 (copy), setTimeout (copy), p4 (copy), getGuiObjectIsObscured (copy), var15 (copy), var4 (copy)
 			if var16.current then
 				return
 			end
-			var16.current = setTimeout(function() --[[ line: 107 ]]
+			var16.current = setTimeout(function()
 				-- upvalues: var16 (copy), p4 (copy), getGuiObjectIsObscured (copy), var15 (copy)
 				var16.current = nil
 				
@@ -77,13 +77,13 @@ return function(p4, p5) --[[ line: 82 | named "useIsGuiInChatVisible" ]]
 			end, var4)
 		end
 		
-		local function onDescendantEvent(p6) --[[ line: 112 ]]
+		local function onDescendantEvent(p6)
 			-- upvalues: var16 (copy), setTimeout (copy), p4 (copy), getGuiObjectIsObscured (copy), var15 (copy), var4 (copy)
 			if not p6:IsA("GuiObject") then return end
 			if var16.current then
 				return
 			end
-			var16.current = setTimeout(function() --[[ line: 107 ]]
+			var16.current = setTimeout(function()
 				-- upvalues: var16 (copy), p4 (copy), getGuiObjectIsObscured (copy), var15 (copy)
 				var16.current = nil
 				
@@ -97,7 +97,7 @@ return function(p4, p5) --[[ line: 82 | named "useIsGuiInChatVisible" ]]
 		end
 		
 		if not var16.current then
-			var16.current = setTimeout(function() --[[ line: 107 ]]
+			var16.current = setTimeout(function()
 				-- upvalues: var16 (copy), p4 (copy), getGuiObjectIsObscured (copy), var15 (copy)
 				var16.current = nil
 				
@@ -120,7 +120,7 @@ return function(p4, p5) --[[ line: 82 | named "useIsGuiInChatVisible" ]]
 				table.insert(t, layerCollector.DescendantRemoving:Connect(onDescendantEvent))
 			end
 		end
-		return function() --[[ line: 133 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 36 ]]
+function t.new(p0)
 	-- upvalues: array (ref), t (ref)
 	local t_2
 	local t_1 = {}
@@ -24,14 +24,14 @@ function t.new(p0) --[[ line: 36 ]]
 	return t_1
 end
 
-function t:append(p1, p2) --[[ line: 56 ]]
+function t:append(p1, p2)
 	if self.guard == "immutable" then
 		error("TypeError: tried to append header to immutable Headers object")
 	end
 	self.headerList[p1] = p2
 end
 
-function t:delete(p3) --[[ line: 64 ]]
+function t:delete(p3)
 	if self.guard == "immutable" then
 		error("TypeError: tried to delete key on immutable Headers object")
 	end
@@ -42,22 +42,22 @@ function t:delete(p3) --[[ line: 64 ]]
 	end
 end
 
-function t:get(p4) --[[ line: 76 ]]
+function t:get(p4)
 	return self.headerList[p4]
 end
 
-function t:has(p5) --[[ line: 80 ]]
+function t:has(p5)
 	return self.headerList[p5] ~= nil
 end
 
-function t:set(p6, p7) --[[ line: 84 ]]
+function t:set(p6, p7)
 	if self.guard == "immutable" then
 		error("TypeError: tried to set key on immutable Headers object")
 	end
 	self.headerList[p6] = p7
 end
 
-function t:__iter() --[[ line: 91 ]]
+function t:__iter()
 	return next, self.headerList
 end
 

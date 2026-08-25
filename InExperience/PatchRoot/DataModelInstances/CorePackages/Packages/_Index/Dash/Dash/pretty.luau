@@ -12,25 +12,25 @@ local concat = table.concat
 local insert = table.insert
 local sort = table.sort
 
-local function indentLines(p0, p1) --[[ line: 38 ]]
+local function indentLines(p0, p1)
 	-- upvalues: mapModule (ref)
-	return mapModule(p0, function(p2) --[[ line: 39 ]]
+	return mapModule(p0, function(p2)
 		-- upvalues: p1 (ref)
 		return p1 .. p2
 	end)
 end
 
-local function _(p3) --[[ line: 44 | named "sortObjectKeys" ]]
+local function _(p3)
 	-- upvalues: keysModule (ref), sort (ref)
 	local var12 = keysModule(p3)
-	sort(var12, function(p4, p5) --[[ line: 46 ]]
+	sort(var12, function(p4, p5)
 		return if type(p4) == "number" and type(p5) == "number" then p4 < p5 else tostring(p4) < tostring(p5)
 	end)
 	
 	return var12
 end
 
-local function constructValueOptions(p6, p7) --[[ line: 56 ]]
+local function constructValueOptions(p6, p7)
 	-- upvalues: assignModule (ref), cyclesModule (ref)
 	return assignModule({ indent = "\t", depth = 2, visited = {} }, p6, {
 		depth = if p6.depth then p6.depth - 1 else nil,
@@ -44,7 +44,7 @@ local function constructValueOptions(p6, p7) --[[ line: 56 ]]
 	})
 end
 
-local _ = function(p8, p9, p10) --[[ line: 78 | named "insertClosedBracket" ]]
+local _ = function(p8, p9, p10)
 	-- upvalues: insert (ref)
 	if not p9 then
 		p8[#p8] = ("%s}"):format(p8[#p8])
@@ -60,7 +60,7 @@ end
 
 local var10 = nil
 
-local function prettyLines(p11, p12) --[[ line: 93 ]]
+local function prettyLines(p11, p12)
 	-- upvalues: constructValueOptions (ref), joinModule (ref), keysModule (ref), sort (ref), includesModule (ref), appendModule (ref), indentLines (ref), prettyLines (ref), mapModule (ref), sliceModule (ref), var10 (write), insert (ref)
 	p12 = p12 or {}
 	
@@ -81,7 +81,7 @@ local function prettyLines(p11, p12) --[[ line: 93 ]]
 		local var19 = 0
 		local var20 = true
 		local var21 = keysModule(p11)
-		sort(var21, function(p13, p14) --[[ line: 46 ]]
+		sort(var21, function(p13, p14)
 			return if type(p13) == "number" and type(p14) == "number" then p13 < p14 else tostring(p13) < tostring(p14)
 		end)
 		local var22 = var21
@@ -107,13 +107,13 @@ local function prettyLines(p11, p12) --[[ line: 93 ]]
 						appendModule(list, indentLines(prettyLines(var24, var14), var14.indent))
 					else
 						local indent = var14.indent
-						local var26 = mapModule(prettyLines(v, var18), function(p15) --[[ line: 39 ]]
+						local var26 = mapModule(prettyLines(v, var18), function(p15)
 							-- upvalues: indent (ref)
 							return indent .. p15
 						end)
 						local var27 = prettyLines(var24, var14)
 						local indent_1 = var14.indent
-						local var28 = mapModule(sliceModule(var27, 2), function(p16) --[[ line: 39 ]]
+						local var28 = mapModule(sliceModule(var27, 2), function(p16)
 							-- upvalues: indent_1 (ref)
 							return indent_1 .. p16
 						end)
@@ -147,7 +147,7 @@ local function prettyLines(p11, p12) --[[ line: 93 ]]
 	end
 end
 
-return function(p17, p18) --[[ line: 199 ]]
+return function(p17, p18)
 	-- upvalues: concat (ref), prettyLines (ref)
 	return concat(prettyLines(p17, p18), "\n")
 end

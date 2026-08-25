@@ -8,13 +8,13 @@ local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
 local _ = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRecord)
 local createElement = reactModule.createElement
 
-local function CommitReadyContent(p0) --[[ line: 21 ]]
+local function CommitReadyContent(p0)
 	-- upvalues: signalsReactModule (ref), reactModule (ref), createElement (ref)
 	local itemView = p0.itemView
 	local var7 = signalsReactModule.useSignalState(itemView.signal)
 	local var8 = if var7 == nil then nil else var7.generation
 	local var9 = signalsReactModule.useSignalState(itemView.contentRevision)
-	reactModule.useLayoutEffect(function() --[[ line: 30 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var8 (ref), itemView (ref), var9 (ref)
 		if var8 ~= nil then
 			itemView.commitContent(var8, var9)
@@ -27,27 +27,27 @@ local function CommitReadyContent(p0) --[[ line: 21 ]]
 	})
 end
 
-return reactModule.memo(function(p1) --[[ line: 41 | named "ListItemViewHost" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), reparentableHost (ref), recyclableViewRegistryModule (ref), createElement (ref), CommitReadyContent (ref), compositionPlacementContextModule (ref)
 	local itemView = p1.itemView
 	local signal = itemView.signal
 	local var10 = itemView.portalFrame(false)
 	assert(var10 ~= nil, "ListItemViewHost: record host was destroyed before unmount")
-	local var11 = reactModule.useState(function() --[[ line: 47 ]]
+	local var11 = reactModule.useState(function()
 		-- upvalues: itemView (ref), signal (ref)
 		return {
 			manager = itemView.compositionPlacementManager,
 			parentSignal = signal
 		}
 	end)
-	reactModule.useLayoutEffect(function() --[[ line: 54 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var10 (ref), reparentableHost (copy), itemView (ref)
 		local var13 = itemView.bindHost({
-			clearSelection = function() --[[ line: 61 ]]
+			clearSelection = function()
 				-- upvalues: reparentableHost (copy), var10 (copy)
 				reparentableHost.clearSelection(var10)
 			end,
-			detachFromPlaceholder = function(p2) --[[ line: 55 ]]
+			detachFromPlaceholder = function(p2)
 				-- upvalues: var10 (copy), reparentableHost (copy)
 				if var10.Parent == p2 then
 					reparentableHost.detach(var10)
@@ -55,7 +55,7 @@ return reactModule.memo(function(p1) --[[ line: 41 | named "ListItemViewHost" ]]
 			end
 		})
 		
-		return function() --[[ line: 66 ]]
+		return function()
 			-- upvalues: reparentableHost (copy), var10 (copy), var13 (ref)
 			reparentableHost.detach(var10)
 			var13()
@@ -65,7 +65,7 @@ return reactModule.memo(function(p1) --[[ line: 41 | named "ListItemViewHost" ]]
 	assert(metadata ~= nil, "ListItemViewHost: unknown Recyclable view type")
 	
 	return p1.createPortal(createElement(compositionPlacementContextModule.Provider, { value = var11 }, {
-		Content = reactModule.useMemo(function() --[[ line: 74 ]]
+		Content = reactModule.useMemo(function()
 			-- upvalues: metadata (ref), createElement (copy), CommitReadyContent (copy), itemView (ref), itemView (ref)
 			return if metadata.readiness == "ReadyOnCommit" then createElement(CommitReadyContent, {
 				itemView = itemView,

@@ -40,7 +40,7 @@ local var15 = if fFlagAXResetAvatarButton then {
 	toastType = toastType.SuccessConfirmation
 } else nil
 
-return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
+return function()
 	-- upvalues: useNavigation (ref), useDispatch (ref), fFlagAXMigrateBuilderIcons (ref), useTokens (ref), useAvatarSaveContext (ref), fFlagAXResetAvatarButton (ref), useSelectorSignal (ref), var13 (ref), tutilsModule (ref), fFlagAXExtendUndoRedoTracking (ref), useAvatarRoute (ref), signalsReactModule (ref), reactModule (ref), fFlagDynamicHeadsMigration (ref), constantsModule (ref), slotBasedEditorAnalytics (ref), characterHistoryStateChangeButtonActivated (ref), fFlagAXMISEnableMultiShopping (ref), avatarScreen (ref), clearScreens (ref), clearTryOns (ref), setCurrentToastMessage (ref), var15 (ref), menuItemEnumModule (ref), iconName (ref)
 	local var16 = useNavigation()
 	local var17 = useDispatch()
@@ -53,15 +53,15 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 	local var22 = signalsReactModule.useSignalState(getHistorySignal)
 	local var23 = signalsReactModule.useSignalState(getCurrentHistoryIndexSignal)
 	local var24 = if fFlagAXResetAvatarButton then signalsReactModule.useSignalState(var20) else nil
-	local var25 = reactModule.useMemo(function() --[[ line: 86 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var23 (ref), var22 (ref)
 		return if var23 and var22 then var23 == 1 else true
 	end, { var23, var22 })
-	local var26 = reactModule.useMemo(function() --[[ line: 94 ]]
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: var23 (ref), var22 (ref)
 		return if var23 and var22 then var23 == #var22 else true
 	end, { var23, var22 })
-	local var27 = if fFlagAXResetAvatarButton then reactModule.useMemo(function() --[[ line: 103 ]]
+	local var27 = if fFlagAXResetAvatarButton then reactModule.useMemo(function()
 		-- upvalues: fFlagDynamicHeadsMigration (copy), var24 (ref), constantsModule (copy)
 		if fFlagDynamicHeadsMigration then
 			if var24 and var24.tryOn and (var24.tryOn.OutfitTryOn and next(var24.tryOn.OutfitTryOn.TryOnItems) ~= nil) then
@@ -85,7 +85,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 		end
 		return true
 	end, { var24, var22 }) else nil
-	local var28 = reactModule.useCallback(function(p0) --[[ line: 142 ]]
+	local var28 = reactModule.useCallback(function(p0)
 		-- upvalues: var19 (ref), var23 (ref), slotBasedEditorAnalytics (copy), fFlagAXExtendUndoRedoTracking (copy), var21 (ref), var17 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagAXMISEnableMultiShopping (copy), var16 (ref), avatarScreen (copy), clearScreens (copy)
 		if var19 then
 			local var30 = var19.updateHistoryIndexAndGetCharacterData(var23 + (if p0 then -1 else 1))
@@ -109,7 +109,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 	end, {
 		var17, var19, var23, var16, var21, var22
 	})
-	local var29 = if fFlagAXResetAvatarButton then reactModule.useCallback(function() --[[ line: 179 ]]
+	local var29 = if fFlagAXResetAvatarButton then reactModule.useCallback(function()
 		-- upvalues: var20 (ref), slotBasedEditorAnalytics (copy), var21 (ref), constantsModule (copy), var17 (ref), characterHistoryStateChangeButtonActivated (copy), clearTryOns (copy), setCurrentToastMessage (copy), var15 (copy)
 		local var31 = var20(false)
 		
@@ -130,7 +130,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 	end, { var17 }) else nil
 	
 	if fFlagAXExtendUndoRedoTracking then
-		reactModule.useEffect(function() --[[ line: 209 ]]
+		reactModule.useEffect(function()
 			-- upvalues: slotBasedEditorAnalytics (copy), var21 (ref), var22 (ref)
 			if slotBasedEditorAnalytics.trackUndoHistoryCount and var21 and (var21.opaque and var22) and #var22 then
 				slotBasedEditorAnalytics.trackUndoHistoryCount(var21.opaque.name, #var22)
@@ -138,7 +138,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 		end, { var22, var21 })
 	end
 	return {
-		items = reactModule.useMemo(function() --[[ line: 224 ]]
+		items = reactModule.useMemo(function()
 			-- upvalues: fFlagAXResetAvatarButton (copy), menuItemEnumModule (copy), iconName (copy), var18 (ref), var29 (ref), var27 (ref), fFlagAXMigrateBuilderIcons (copy), var28 (ref), var25 (ref), var26 (ref)
 			return if fFlagAXResetAvatarButton then {
 				{
@@ -147,7 +147,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 					id = menuItemEnumModule.Reset.Reset,
 					icon = iconName.ArrowSpinClockwise,
 					iconSize = var18.Size.Size_500,
-					onActivated = function() --[[ line: 233 ]]
+					onActivated = function()
 						-- upvalues: var29 (copy)
 						var29()
 					end,
@@ -158,7 +158,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = menuItemEnumModule.Undo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToLeft else "icons/actions/edit/undo",
-					onActivated = function() --[[ line: 244 ]]
+					onActivated = function()
 						-- upvalues: var28 (copy)
 						var28(true)
 					end,
@@ -169,7 +169,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = menuItemEnumModule.Redo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToRight else "icons/actions/edit/redo",
-					onActivated = function() --[[ line: 256 ]]
+					onActivated = function()
 						-- upvalues: var28 (copy)
 						var28(false)
 					end,
@@ -181,7 +181,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = menuItemEnumModule.Undo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToLeft else "icons/actions/edit/undo",
-					onActivated = function() --[[ line: 271 ]]
+					onActivated = function()
 						-- upvalues: var28 (copy)
 						var28(true)
 					end,
@@ -192,7 +192,7 @@ return function() --[[ line: 61 | named "useUndoRedoBarViewModel" ]]
 					isActive = false,
 					id = menuItemEnumModule.Redo,
 					icon = if fFlagAXMigrateBuilderIcons then iconName.ArrowCurlToRight else "icons/actions/edit/redo",
-					onActivated = function() --[[ line: 283 ]]
+					onActivated = function()
 						-- upvalues: var28 (copy)
 						var28(false)
 					end,

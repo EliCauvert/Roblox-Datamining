@@ -49,7 +49,7 @@ local var8 = if fFlagLuaAppResponsiveEnginePreferredInput then {
 	[Enum.PreferredInput.KeyboardAndMouse] = t.Pointer
 } else nil
 
-function getPreferredInput() --[[ line: 70 ]]
+function getPreferredInput()
 	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), var8 (ref), t (ref), appCommonLibModule (ref), t_3 (ref), t_4 (ref)
 	if fFlagLuaAppResponsiveEnginePreferredInput then
 		return var8[userInputService.PreferredInput or Enum.PreferredInput.KeyboardAndMouse] or t.Pointer
@@ -59,7 +59,7 @@ function getPreferredInput() --[[ line: 70 ]]
 	return if appCommonLibModule.isSpatial() then t.Pointer elseif t_3[platform] or false then t.Directional elseif t_4[platform] or false then t.Touch else t.Pointer
 end
 
-function updatePreferredInput() --[[ line: 92 ]]
+function updatePreferredInput()
 	-- upvalues: t_2 (ref), var4 (ref)
 	local var10 = getPreferredInput()
 	
@@ -73,7 +73,7 @@ function updatePreferredInput() --[[ line: 92 ]]
 	end
 end
 
-function updateLastInput() --[[ line: 103 ]]
+function updateLastInput()
 	-- upvalues: t_1 (ref), userInputService (ref), t_2 (ref), var4 (ref)
 	local var11 = t_1[userInputService:GetLastInputType()]
 	
@@ -83,7 +83,7 @@ function updateLastInput() --[[ line: 103 ]]
 	end
 end
 
-function init() --[[ line: 111 ]]
+function init()
 	-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (ref), userInputService (ref), appCommonLibModule (ref)
 	if fFlagLuaAppResponsiveEnginePreferredInput then
 		userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(updatePreferredInput)
@@ -113,15 +113,15 @@ return {
 		{ Key = t.Pointer, lastInput = t.Pointer },
 		{ Key = t.Touch, lastInput = t.Touch }
 	},
-	connect = function(p0) --[[ line: 144 ]]
+	connect = function(p0)
 		-- upvalues: var4 (ref)
 		return var4:connect(p0)
 	end,
-	preferred = function() --[[ line: 147 ]]
+	preferred = function()
 		-- upvalues: t_2 (ref)
 		return t_2.preferred
 	end,
-	last = function() --[[ line: 150 ]]
+	last = function()
 		-- upvalues: t_2 (ref)
 		return t_2.last
 	end

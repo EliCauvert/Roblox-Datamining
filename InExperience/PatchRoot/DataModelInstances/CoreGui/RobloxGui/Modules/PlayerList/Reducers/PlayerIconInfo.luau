@@ -4,7 +4,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local actions = script.Parent.Parent.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p0, p1) --[[ line: 15 ]]
+	[require(actions.AddPlayer).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, {
 			[p1.userId] = {
@@ -14,11 +14,11 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.RemovePlayer).name] = function(p2, p3) --[[ line: 25 ]]
+	[require(actions.RemovePlayer).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p2, { [p3.userId] = cryoModule.None })
 	end,
-	[require(actions.SetPlayerAvatarIcon).name] = function(p4, p5) --[[ line: 31 ]]
+	[require(actions.SetPlayerAvatarIcon).name] = function(p4, p5)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p4, {
 			[p5.userId] = {
@@ -28,7 +28,7 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerIsCreator).name] = function(p6, p7) --[[ line: 41 ]]
+	[require(actions.SetPlayerIsCreator).name] = function(p6, p7)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p6, {
 			[p7.userId] = {
@@ -38,7 +38,7 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerSpecialGroupIcon).name] = function(p8, p9) --[[ line: 51 ]]
+	[require(actions.SetPlayerSpecialGroupIcon).name] = function(p8, p9)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p8, {
 			[p9.userId] = {

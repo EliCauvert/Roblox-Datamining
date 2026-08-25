@@ -13,7 +13,7 @@ while not localPlayer do
 end
 local text = "player_" .. tostring(if localPlayer then localPlayer.UserId else 0)
 
-local function initStore() --[[ line: 25 ]]
+local function initStore()
 	-- upvalues: var6 (write), text (ref)
 	if var6.LocalPlayer == nil then
 		var6.LocalPlayer = {}
@@ -26,19 +26,19 @@ local function initStore() --[[ line: 25 ]]
 	end
 end
 
-local function localPlayerSelector(p0) --[[ line: 37 ]]
+local function localPlayerSelector(p0)
 	-- upvalues: text (ref)
 	return if p0 and p0.LocalPlayer and p0.LocalPlayer[text] then p0.LocalPlayer[text] else p0
 end
 
-local function anyPlayerSelector(p1) --[[ line: 44 ]]
+local function anyPlayerSelector(p1)
 	return if p1 and p1.AnyPlayer then p1.AnyPlayer else p1
 end
 
-local function loadStore() --[[ line: 51 ]]
+local function loadStore()
 	-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref), appStorageService (ref), var7 (write), httpService (ref), var6 (write), initStore (ref)
 	if not inGameMenuStateStorageKeyEngineFeature then return end
-	local ok, status = pcall(function() --[[ line: 55 ]]
+	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy)
 		return appStorageService:GetItem("InGameMenuState")
 	end)
@@ -47,7 +47,7 @@ local function loadStore() --[[ line: 51 ]]
 		var7 = true
 		
 		if #status > 0 then
-			local ok_1, status_1 = pcall(function() --[[ line: 61 ]]
+			local ok_1, status_1 = pcall(function()
 				-- upvalues: httpService (copy), status (ref)
 				return httpService:JSONDecode(status)
 			end)
@@ -59,17 +59,17 @@ local function loadStore() --[[ line: 51 ]]
 	end
 end
 
-local function saveStore() --[[ line: 76 ]]
+local function saveStore()
 	-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref), var7 (write), httpService (ref), var6 (write), appStorageService (ref)
 	if not inGameMenuStateStorageKeyEngineFeature then return end
 	if var7 then
-		local ok, status = pcall(function() --[[ line: 81 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), var6 (copy)
 			return httpService:JSONEncode(var6)
 		end)
 		
 		if ok then
-			local ok_1, status_1 = pcall(function() --[[ line: 85 ]]
+			local ok_1, status_1 = pcall(function()
 				-- upvalues: appStorageService (copy), status (ref)
 				appStorageService:SetItem("InGameMenuState", status)
 				appStorageService:Flush()
@@ -89,7 +89,7 @@ local function saveStore() --[[ line: 76 ]]
 	end
 end
 
-local function deepCopy(p2) --[[ line: 99 ]]
+local function deepCopy(p2)
 	-- upvalues: deepCopy (ref)
 	if type(p2) ~= "table" then
 		return p2
@@ -102,7 +102,7 @@ local function deepCopy(p2) --[[ line: 99 ]]
 	return t
 end
 
-local function _(p3, p4, p5) --[[ line: 111 | named "store" ]]
+local function _(p3, p4, p5)
 	-- upvalues: var7 (write), loadStore (ref), var6 (write), deepCopy (ref), saveStore (ref)
 	if not var7 then
 		loadStore()
@@ -118,7 +118,7 @@ local function _(p3, p4, p5) --[[ line: 111 | named "store" ]]
 	end
 end
 
-local _ = function(p6, p7) --[[ line: 125 | named "load" ]]
+local _ = function(p6, p7)
 	-- upvalues: var7 (write), loadStore (ref), var6 (write), deepCopy (ref)
 	if not var7 then
 		loadStore()
@@ -131,11 +131,11 @@ local _ = function(p6, p7) --[[ line: 125 | named "load" ]]
 end
 
 return {
-	isEnabled = function() --[[ line: 166 ]]
+	isEnabled = function()
 		-- upvalues: inGameMenuStateStorageKeyEngineFeature (ref)
 		return inGameMenuStateStorageKeyEngineFeature
 	end,
-	storeForLocalPlayer = function(p8, p9) --[[ line: 169 ]]
+	storeForLocalPlayer = function(p8, p9)
 		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref), saveStore (ref)
 		if not var7 then
 			loadStore()
@@ -155,7 +155,7 @@ return {
 			end
 		end
 	end,
-	loadForLocalPlayer = function(p10) --[[ line: 172 ]]
+	loadForLocalPlayer = function(p10)
 		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
 		if not var7 then
 			loadStore()
@@ -170,7 +170,7 @@ return {
 			return if var22 then deepCopy(var22[p10]) else nil
 		end
 	end,
-	storeForAnyPlayer = function(p11, p12) --[[ line: 176 ]]
+	storeForAnyPlayer = function(p11, p12)
 		-- upvalues: anyPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), deepCopy (ref), saveStore (ref)
 		if not var7 then
 			loadStore()
@@ -190,7 +190,7 @@ return {
 			end
 		end
 	end,
-	loadForAnyPlayer = function(p13) --[[ line: 179 ]]
+	loadForAnyPlayer = function(p13)
 		-- upvalues: anyPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), deepCopy (ref)
 		if not var7 then
 			loadStore()
@@ -205,12 +205,12 @@ return {
 			return if var26 then deepCopy(var26[p13]) else nil
 		end
 	end,
-	clearCache = function() --[[ line: 183 ]]
+	clearCache = function()
 		-- upvalues: var7 (write), var6 (write)
 		var7 = false
 		var6 = nil
 	end,
-	getValue = function(p14) --[[ line: 138 ]]
+	getValue = function(p14)
 		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
 		if not var7 then
 			loadStore()
@@ -225,7 +225,7 @@ return {
 			return if var28 then deepCopy(var28[p14]) else nil
 		end
 	end,
-	getUniversesExposedTo = function(p15) --[[ line: 143 ]]
+	getUniversesExposedTo = function(p15)
 		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
 		local var32
 		local var29 = localPlayerSelector
@@ -244,7 +244,7 @@ return {
 		end
 		return var32 or {}
 	end,
-	getNumUniversesExposedTo = function(p16) --[[ line: 160 ]]
+	getNumUniversesExposedTo = function(p16)
 		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref)
 		local var35
 		if not var7 then
@@ -261,7 +261,7 @@ return {
 		end
 		return #(var35 or {})
 	end,
-	addUniverseToExposureList = function(value, p17) --[[ line: 151 ]]
+	addUniverseToExposureList = function(value, p17)
 		-- upvalues: localPlayerSelector (ref), var7 (write), loadStore (ref), var6 (write), text (ref), deepCopy (ref), constantsModule (ref), saveStore (ref)
 		local var38
 		if not var7 then

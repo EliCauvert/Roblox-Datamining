@@ -11,7 +11,7 @@ local var7 = getFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundre
 local var8 = getFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModule() / 100
 local var9 = getFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModule() / 100
 local t = {
-	getAvatarsForRegion = function(p0, p1, p2, p3, p4) --[[ line: 410 ]]
+	getAvatarsForRegion = function(p0, p1, p2, p3, p4)
 		local t = {}
 		local var15 = p4 < p3
 		local var16 = if var15 then p3 / p4 else p4 / p3
@@ -24,7 +24,7 @@ local t = {
 		end
 		return t
 	end,
-	getAvatarsForPoint = function(p5, p6) --[[ line: 457 ]]
+	getAvatarsForPoint = function(p5, p6)
 		local t = {}
 		
 		for i, v in pairs(p5) do
@@ -52,7 +52,7 @@ local t = {
 		end
 		return t
 	end,
-	getVisibleAvatars = function(p7, p8) --[[ line: 494 ]]
+	getVisibleAvatars = function(p7, p8)
 		-- upvalues: playersService (ref), identificationUtilsModule (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescriptionModule (ref)
 		local players = playersService:GetPlayers()
 		local t = { totalPlayers = 0, checkedPlayers = 0, duration = 0 }
@@ -88,20 +88,20 @@ local t = {
 		local processTime = os.clock()
 		t.totalPlayers = #players - 1
 		
-		local _ = function() --[[ line: 535 ]]
+		local _ = function()
 			-- upvalues: t (ref), processTime (ref)
 			t.duration = os.clock() - processTime
 			
 			return t
 		end
 		
-		local _ = function() --[[ line: 539 ]]
+		local _ = function()
 			-- upvalues: p8 (ref), processTime (ref)
 			return (p8 or 0.5) < os.clock() - processTime
 		end
 		
 		if var27 then
-			table.sort(players, function(p9, p10) --[[ line: 546 ]]
+			table.sort(players, function(p9, p10)
 				-- upvalues: var27 (write)
 				return p9:DistanceFromCharacter(var27) < p10:DistanceFromCharacter(var27)
 			end)
@@ -164,7 +164,7 @@ local t = {
 	end
 }
 
-function getBBCorners(p11, p12) --[[ line: 28 ]]
+function getBBCorners(p11, p12)
 	local list = table.create(8)
 	local xVector = p11.XVector
 	local yVector = p11.YVector
@@ -189,7 +189,7 @@ end
 local var11 = var8 + 1
 local var12 = -var8
 
-local _ = function(p13) --[[ line: 52 ]]
+local _ = function(p13)
 	-- upvalues: var11 (ref), var12 (ref)
 	return if var11 >= p13.Y then if p13.Y >= var12 then if var11 >= p13.X then p13.X < var12 else true else true else true
 end
@@ -201,7 +201,7 @@ local t_1 = {
 	wasSkipped = false
 }
 
-function getCoveringPolygon(p14, p15, p16) --[[ line: 73 ]]
+function getCoveringPolygon(p14, p15, p16)
 	-- upvalues: t_1 (ref), identificationUtilsModule (ref), var7 (ref), var11 (ref), var12 (ref), var9 (ref)
 	if #p14 == 0 then
 		return {}, t_1
@@ -248,13 +248,13 @@ function getCoveringPolygon(p14, p15, p16) --[[ line: 73 ]]
 	return getConvexHull(t_2), t_3
 end
 
-function getDistanceAlongCamLookVector(p17, p18) --[[ line: 128 ]]
+function getDistanceAlongCamLookVector(p17, p18)
 	local cFrame = p18.CFrame
 	
 	return (p17.Position - cFrame.Position):Dot(cFrame.LookVector)
 end
 
-function getVisibleParts(p19, p20, p21) --[[ line: 141 ]]
+function getVisibleParts(p19, p20, p21)
 	local position = p19.CFrame.Position
 	local character = p20.Character
 	
@@ -282,11 +282,11 @@ function getVisibleParts(p19, p20, p21) --[[ line: 141 ]]
 	return var59, t
 end
 
-local function _(p22, p23, p24) --[[ line: 182 | named "counterclockwise" ]]
+local function _(p22, p23, p24)
 	return (p23 - p22):Cross(p24 - p23)
 end
 
-function getConvexHull(p25) --[[ line: 186 ]]
+function getConvexHull(p25)
 	if #p25 <= 2 then
 		return {}
 	end
@@ -304,7 +304,7 @@ function getConvexHull(p25) --[[ line: 186 ]]
 	end
 	table.insert(t, var63)
 	
-	local function _(vectorA) --[[ line: 203 | named "angleFromLowest" ]]
+	local function _(vectorA)
 		-- upvalues: var63 (write)
 		local var71 = vectorA - var63
 		
@@ -317,7 +317,7 @@ function getConvexHull(p25) --[[ line: 186 ]]
 			table.insert(t_1, Vector3.new(v.X, v.Y, math.atan2(var70.Y, var70.X)))
 		end
 	end
-	table.sort(t_1, function(vectorA, vectorB) --[[ line: 215 | named "compareByAngle" ]]
+	table.sort(t_1, function(vectorA, vectorB)
 		-- upvalues: var63 (write)
 		return if vectorA.Z == vectorB.Z then (Vector2.new(vectorA.X, vectorA.Y) - var63).Magnitude < (Vector2.new(vectorB.X, vectorB.Y) - var63).Magnitude else vectorA.Z < vectorB.Z
 	end)
@@ -348,7 +348,7 @@ function getConvexHull(p25) --[[ line: 186 ]]
 	return t
 end
 
-function projectVertices(p26, p27, p28) --[[ line: 287 ]]
+function projectVertices(p26, p27, p28)
 	local var72 = 1e999
 	local var73 = -1e999
 	
@@ -365,7 +365,7 @@ function projectVertices(p26, p27, p28) --[[ line: 287 ]]
 	return var72, var73
 end
 
-function projectCircle(p29, p30, p31) --[[ line: 307 ]]
+function projectCircle(p29, p30, p31)
 	local var75 = p31.Unit * p30
 	local var76 = (p29 + var75):Dot(p31)
 	local var77 = (p29 - var75):Dot(p31)
@@ -378,7 +378,7 @@ function projectCircle(p29, p30, p31) --[[ line: 307 ]]
 	return var76, var77
 end
 
-function getClosestPoint(p32, p33, p34) --[[ line: 326 ]]
+function getClosestPoint(p32, p33, p34)
 	local var79 = -1
 	local var80 = 1e999
 	
@@ -394,7 +394,7 @@ function getClosestPoint(p32, p33, p34) --[[ line: 326 ]]
 	return var79
 end
 
-function intersectCirclePolygon(p35, p36, p37, p38) --[[ line: 340 ]]
+function intersectCirclePolygon(p35, p36, p37, p38)
 	for i, v in ipairs(p37) do
 		local var87 = p37[i % #p37 + 1] * p38 - p37[i] * p38
 		local unit = Vector2.new(var87.Y, -var87.X).Unit
@@ -417,7 +417,7 @@ function intersectCirclePolygon(p35, p36, p37, p38) --[[ line: 340 ]]
 	return var86 <= var83 or var84 <= var85
 end
 
-function intersectCircleBox(p39, p40, p41, p42, _) --[[ line: 371 ]]
+function intersectCircleBox(p39, p40, p41, p42, _)
 	local x = p39.X
 	local y = p39.Y
 	local var92 = x

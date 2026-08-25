@@ -15,7 +15,7 @@ local fFlagAvatarSwitcherAccurateAvatarWarning = require(parent.AvatarExperience
 local fFlagAvatarSwitcherWarningLayoutFix = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherWarningLayoutFix
 local fFlagAvatarSwitcherExpiredItemsWarning = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherExpiredItemsWarning
 
-return function(p0) --[[ line: 33 | named "PreviewPanel" ]]
+return function(p0)
 	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), useTokens (ref), reactModule (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref), outfitViewportUtilsModule (ref), fFlagAvatarSwitcherExpiredItemsWarning (ref), inventoryItemAvailability (ref), foundationModule (ref), fFlagAvatarSwitcherWarningLayoutFix (ref), avatarPreviewModule (ref), experienceAvatarSupportTypeModule (ref), switchAvatarButtonModule (ref), avatarCompatibilityWarningModule (ref)
 	local var10 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
 	local var11 = signalsReactModule.useSignalState(var10.getSelectedOutfitId)
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 33 | named "PreviewPanel" ]]
 	local var13 = signalsReactModule.useSignalState(var10.getExperienceAvatarSupportType)
 	local var14 = signalsReactModule.useSignalState(var10.getExperienceAvatarType)
 	local var15 = useTokens()
-	local var16 = reactModule.useCallback(function() --[[ line: 41 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
 		var10.toggleRespawnPrompt(true)
 	end, {})
@@ -35,11 +35,11 @@ return function(p0) --[[ line: 33 | named "PreviewPanel" ]]
 		local var19, var20 = reactModule.useState(false)
 		var17 = var19
 		local var21 = var20
-		var18 = reactModule.useCallback(function(p1, p2) --[[ line: 48 ]]
+		var18 = reactModule.useCallback(function(p1, p2)
 			-- upvalues: var12 (ref), outfitViewportUtilsModule (copy), var21 (write)
 			var21(outfitViewportUtilsModule.hasMissingAssetsInDescription(p2, if var12 and var12.assetIds then var12.assetIds else {}) or outfitViewportUtilsModule.hasMissingAccessoriesInHumanoid(p1, p2))
 		end, { var12 })
-		reactModule.useEffect(function() --[[ line: 60 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var21 (write)
 			var21(false)
 		end, { var11 })

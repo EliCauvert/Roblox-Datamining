@@ -40,14 +40,14 @@ local var10 = nil
 local var11 = graphQLObjectType.new({
 	name = "__Schema",
 	description = "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
-	fields = function() --[[ line: 74 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLString (ref), graphQLNonNull (ref), graphQLList (ref), var7 (write), var5 (write)
 		return map.new({
 			{
 				"description",
 				{
 					type = graphQLString,
-					resolve = function(p0) --[[ line: 80 ]]
+					resolve = function(p0)
 						return p0.description
 					end
 				}
@@ -57,7 +57,7 @@ local var11 = graphQLObjectType.new({
 				{
 					description = "A list of all types supported by this server.",
 					type = graphQLNonNull.new(graphQLList.new(graphQLNonNull.new(var7))),
-					resolve = function(p1) --[[ line: 90 ]]
+					resolve = function(p1)
 						return p1:getTypeMap():values()
 					end
 				}
@@ -67,7 +67,7 @@ local var11 = graphQLObjectType.new({
 				{
 					description = "The type that query operations will be rooted at.",
 					type = graphQLNonNull.new(var7),
-					resolve = function(p2) --[[ line: 101 ]]
+					resolve = function(p2)
 						return p2:getQueryType()
 					end
 				}
@@ -77,7 +77,7 @@ local var11 = graphQLObjectType.new({
 				{
 					description = "If this server supports mutation, the type that mutation operations will be rooted at.",
 					type = var7,
-					resolve = function(p3) --[[ line: 111 ]]
+					resolve = function(p3)
 						return p3:getMutationType()
 					end
 				}
@@ -87,7 +87,7 @@ local var11 = graphQLObjectType.new({
 				{
 					description = "If this server support subscription, the type that subscription operations will be rooted at.",
 					type = var7,
-					resolve = function(p4) --[[ line: 121 ]]
+					resolve = function(p4)
 						return p4:getSubscriptionType()
 					end
 				}
@@ -97,7 +97,7 @@ local var11 = graphQLObjectType.new({
 				{
 					description = "A list of all directives supported by this server.",
 					type = graphQLNonNull.new(graphQLList.new(graphQLNonNull.new(var5))),
-					resolve = function(p5) --[[ line: 131 ]]
+					resolve = function(p5)
 						return p5:getDirectives()
 					end
 				}
@@ -108,14 +108,14 @@ local var11 = graphQLObjectType.new({
 var5 = graphQLObjectType.new({
 	name = "__Directive",
 	description = "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
-	fields = function() --[[ line: 143 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLBoolean (ref), graphQLList (ref), var6 (write), var9 (write)
 		return map.new({
 			{
 				"name",
 				{
 					type = graphQLNonNull.new(graphQLString),
-					resolve = function(p6) --[[ line: 149 ]]
+					resolve = function(p6)
 						return p6.name
 					end
 				}
@@ -124,7 +124,7 @@ var5 = graphQLObjectType.new({
 				"description",
 				{
 					type = graphQLString,
-					resolve = function(p7) --[[ line: 158 ]]
+					resolve = function(p7)
 						return p7.description
 					end
 				}
@@ -133,7 +133,7 @@ var5 = graphQLObjectType.new({
 				"isRepeatable",
 				{
 					type = graphQLNonNull.new(graphQLBoolean),
-					resolve = function(p8) --[[ line: 167 ]]
+					resolve = function(p8)
 						return p8.isRepeatable
 					end
 				}
@@ -142,7 +142,7 @@ var5 = graphQLObjectType.new({
 				"locations",
 				{
 					type = graphQLNonNull.new(graphQLList.new(graphQLNonNull.new(var6))),
-					resolve = function(p9) --[[ line: 178 ]]
+					resolve = function(p9)
 						return p9.locations
 					end
 				}
@@ -151,7 +151,7 @@ var5 = graphQLObjectType.new({
 				"args",
 				{
 					type = graphQLNonNull.new(graphQLList.new(graphQLNonNull.new(var9))),
-					resolve = function(p10) --[[ line: 187 ]]
+					resolve = function(p10)
 						return p10.args
 					end
 				}
@@ -301,14 +301,14 @@ var6 = graphQLEnumType.new({
 var7 = graphQLObjectType.new({
 	name = "__Type",
 	description = "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByUrl`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
-	fields = function() --[[ line: 339 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), var4 (write), isScalarType (ref), var3 (write), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isInputObjectType (ref), isListType (ref), isNonNullType (ref), invariant (ref), inspect (ref), graphQLString (ref), graphQLList (ref), var8 (write), graphQLBoolean (ref), array (ref), var7 (write), isAbstractType (ref), var10 (write), var9 (write)
 		return map.new({
 			{
 				"kind",
 				{
 					type = graphQLNonNull.new(var4),
-					resolve = function(p11) --[[ line: 345 ]]
+					resolve = function(p11)
 						-- upvalues: isScalarType (copy), var3 (copy), isObjectType (copy), isInterfaceType (copy), isUnionType (copy), isEnumType (copy), isInputObjectType (copy), isListType (copy), isNonNullType (copy), invariant (copy), inspect (copy)
 						if isScalarType(p11) then
 							return var3.SCALAR
@@ -336,7 +336,7 @@ var7 = graphQLObjectType.new({
 				"name",
 				{
 					type = graphQLString,
-					resolve = function(p12) --[[ line: 382 ]]
+					resolve = function(p12)
 						return if p12.name == nil then nil else p12.name
 					end
 				}
@@ -345,7 +345,7 @@ var7 = graphQLObjectType.new({
 				"description",
 				{
 					type = graphQLString,
-					resolve = function(p13) --[[ line: 391 ]]
+					resolve = function(p13)
 						return if p13.description == nil then nil else p13.description
 					end
 				}
@@ -354,7 +354,7 @@ var7 = graphQLObjectType.new({
 				"specifiedByUrl",
 				{
 					type = graphQLString,
-					resolve = function(p14) --[[ line: 400 ]]
+					resolve = function(p14)
 						return if p14.specifiedByUrl == nil then nil else p14.specifiedByUrl
 					end
 				}
@@ -366,14 +366,14 @@ var7 = graphQLObjectType.new({
 					args = {
 						includeDeprecated = { defaultValue = false, type = graphQLBoolean }
 					},
-					resolve = function(p15, p16) --[[ line: 415 ]]
+					resolve = function(p15, p16)
 						-- upvalues: isObjectType (copy), isInterfaceType (copy), array (copy)
 						local includeDeprecated = p16.includeDeprecated
 						
 						if isObjectType(p15) or isInterfaceType(p15) then
 							local var13 = p15:getFields():values()
 							
-							return if includeDeprecated then var13 else array.filter(var13, function(p17) --[[ line: 421 ]]
+							return if includeDeprecated then var13 else array.filter(var13, function(p17)
 								return p17.deprecationReason == nil
 							end)
 						end
@@ -384,7 +384,7 @@ var7 = graphQLObjectType.new({
 				"interfaces",
 				{
 					type = graphQLList.new(graphQLNonNull.new(var7)),
-					resolve = function(p18) --[[ line: 433 ]]
+					resolve = function(p18)
 						-- upvalues: isObjectType (copy), isInterfaceType (copy)
 						if isObjectType(p18) or isInterfaceType(p18) then
 							return p18:getInterfaces()
@@ -396,7 +396,7 @@ var7 = graphQLObjectType.new({
 				"possibleTypes",
 				{
 					type = graphQLList.new(graphQLNonNull.new(var7)),
-					resolve = function(p19, _, _, p20) --[[ line: 445 ]]
+					resolve = function(p19, _, _, p20)
 						-- upvalues: isAbstractType (copy)
 						return if isAbstractType(p19) then p20.schema:getPossibleTypes(p19) else nil
 					end
@@ -409,14 +409,14 @@ var7 = graphQLObjectType.new({
 					args = {
 						includeDeprecated = { defaultValue = false, type = graphQLBoolean }
 					},
-					resolve = function(p21, p22) --[[ line: 465 ]]
+					resolve = function(p21, p22)
 						-- upvalues: isEnumType (copy), array (copy)
 						local includeDeprecated = p22.includeDeprecated
 						
 						if isEnumType(p21) then
 							local values = p21:getValues()
 							
-							return if includeDeprecated then values else array.filter(values, function(p23) --[[ line: 472 ]]
+							return if includeDeprecated then values else array.filter(values, function(p23)
 								return p23.deprecationReason == nil
 							end)
 						end
@@ -430,14 +430,14 @@ var7 = graphQLObjectType.new({
 					args = {
 						includeDeprecated = { defaultValue = false, type = graphQLBoolean }
 					},
-					resolve = function(p24, p25) --[[ line: 490 ]]
+					resolve = function(p24, p25)
 						-- upvalues: isInputObjectType (copy), array (copy)
 						local includeDeprecated = p25.includeDeprecated
 						
 						if isInputObjectType(p24) then
 							local var15 = p24:getFields():values()
 							
-							return if includeDeprecated then var15 else array.filter(var15, function(p26) --[[ line: 498 ]]
+							return if includeDeprecated then var15 else array.filter(var15, function(p26)
 								return p26.deprecationReason == nil
 							end)
 						end
@@ -448,7 +448,7 @@ var7 = graphQLObjectType.new({
 				"ofType",
 				{
 					type = var7,
-					resolve = function(p27) --[[ line: 510 ]]
+					resolve = function(p27)
 						return if p27.ofType == nil then nil else p27.ofType
 					end
 				}
@@ -459,14 +459,14 @@ var7 = graphQLObjectType.new({
 var8 = graphQLObjectType.new({
 	name = "__Field",
 	description = "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
-	fields = function() --[[ line: 522 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var9 (write), graphQLBoolean (ref), array (ref), var7 (write), isNotNillish (ref)
 		return map.new({
 			{
 				"name",
 				{
 					type = graphQLNonNull.new(graphQLString),
-					resolve = function(p28) --[[ line: 528 ]]
+					resolve = function(p28)
 						return p28.name
 					end
 				}
@@ -475,7 +475,7 @@ var8 = graphQLObjectType.new({
 				"description",
 				{
 					type = graphQLString,
-					resolve = function(p29) --[[ line: 537 ]]
+					resolve = function(p29)
 						return p29.description
 					end
 				}
@@ -487,9 +487,9 @@ var8 = graphQLObjectType.new({
 					args = {
 						includeDeprecated = { defaultValue = false, type = graphQLBoolean }
 					},
-					resolve = function(p30, p31) --[[ line: 552 ]]
+					resolve = function(p30, p31)
 						-- upvalues: array (copy)
-						return if p31.includeDeprecated then p30.args else array.filter(p30.args, function(p32) --[[ line: 557 ]]
+						return if p31.includeDeprecated then p30.args else array.filter(p30.args, function(p32)
 							return p32.deprecationReason == nil
 						end)
 					end
@@ -499,7 +499,7 @@ var8 = graphQLObjectType.new({
 				"type",
 				{
 					type = graphQLNonNull.new(var7),
-					resolve = function(p33) --[[ line: 567 ]]
+					resolve = function(p33)
 						return p33.type
 					end
 				}
@@ -508,7 +508,7 @@ var8 = graphQLObjectType.new({
 				"isDeprecated",
 				{
 					type = graphQLNonNull.new(graphQLBoolean),
-					resolve = function(p34) --[[ line: 576 ]]
+					resolve = function(p34)
 						-- upvalues: isNotNillish (copy)
 						return isNotNillish(p34.deprecationReason)
 					end
@@ -518,7 +518,7 @@ var8 = graphQLObjectType.new({
 				"deprecationReason",
 				{
 					type = graphQLString,
-					resolve = function(p35) --[[ line: 585 ]]
+					resolve = function(p35)
 						return p35.deprecationReason
 					end
 				}
@@ -529,14 +529,14 @@ var8 = graphQLObjectType.new({
 var9 = graphQLObjectType.new({
 	name = "__InputValue",
 	description = "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
-	fields = function() --[[ line: 597 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), var7 (write), astFromValue (ref), print (ref), graphQLBoolean (ref), isNotNillish (ref)
 		return map.new({
 			{
 				"name",
 				{
 					type = graphQLNonNull.new(graphQLString),
-					resolve = function(p36) --[[ line: 603 ]]
+					resolve = function(p36)
 						return p36.name
 					end
 				}
@@ -545,7 +545,7 @@ var9 = graphQLObjectType.new({
 				"description",
 				{
 					type = graphQLString,
-					resolve = function(p37) --[[ line: 612 ]]
+					resolve = function(p37)
 						return p37.description
 					end
 				}
@@ -554,7 +554,7 @@ var9 = graphQLObjectType.new({
 				"type",
 				{
 					type = graphQLNonNull.new(var7),
-					resolve = function(p38) --[[ line: 621 ]]
+					resolve = function(p38)
 						return p38.type
 					end
 				}
@@ -564,7 +564,7 @@ var9 = graphQLObjectType.new({
 				{
 					description = "A GraphQL-formatted string representing the default value for this input value.",
 					type = graphQLString,
-					resolve = function(p39) --[[ line: 631 ]]
+					resolve = function(p39)
 						-- upvalues: astFromValue (copy), print (copy)
 						local var16 = astFromValue(p39.defaultValue, p39.type)
 						
@@ -576,7 +576,7 @@ var9 = graphQLObjectType.new({
 				"isDeprecated",
 				{
 					type = graphQLNonNull.new(graphQLBoolean),
-					resolve = function(p40) --[[ line: 643 ]]
+					resolve = function(p40)
 						-- upvalues: isNotNillish (copy)
 						return isNotNillish(p40.deprecationReason)
 					end
@@ -586,7 +586,7 @@ var9 = graphQLObjectType.new({
 				"deprecationReason",
 				{
 					type = graphQLString,
-					resolve = function(p41) --[[ line: 652 ]]
+					resolve = function(p41)
 						return p41.deprecationReason
 					end
 				}
@@ -597,14 +597,14 @@ var9 = graphQLObjectType.new({
 var10 = graphQLObjectType.new({
 	name = "__EnumValue",
 	description = "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
-	fields = function() --[[ line: 664 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLBoolean (ref), isNotNillish (ref)
 		return map.new({
 			{
 				"name",
 				{
 					type = graphQLNonNull.new(graphQLString),
-					resolve = function(p42) --[[ line: 670 ]]
+					resolve = function(p42)
 						return p42.name
 					end
 				}
@@ -613,7 +613,7 @@ var10 = graphQLObjectType.new({
 				"description",
 				{
 					type = graphQLString,
-					resolve = function(p43) --[[ line: 679 ]]
+					resolve = function(p43)
 						return p43.description
 					end
 				}
@@ -622,7 +622,7 @@ var10 = graphQLObjectType.new({
 				"isDeprecated",
 				{
 					type = graphQLNonNull.new(graphQLBoolean),
-					resolve = function(p44) --[[ line: 688 ]]
+					resolve = function(p44)
 						-- upvalues: isNotNillish (copy)
 						return isNotNillish(p44.deprecationReason)
 					end
@@ -632,7 +632,7 @@ var10 = graphQLObjectType.new({
 				"deprecationReason",
 				{
 					type = graphQLString,
-					resolve = function(p45) --[[ line: 697 ]]
+					resolve = function(p45)
 						return p45.deprecationReason
 					end
 				}
@@ -718,9 +718,9 @@ local var12 = object.freeze({
 
 return {
 	introspectionTypes = var12,
-	isIntrospectionType = function(p46) --[[ line: 852 ]]
+	isIntrospectionType = function(p46)
 		-- upvalues: array (ref), var12 (ref)
-		return array.some(var12, function(p47) --[[ line: 853 ]]
+		return array.some(var12, function(p47)
 			-- upvalues: p46 (ref)
 			return p46.name == p47.name
 		end)
@@ -733,7 +733,7 @@ return {
 		astNode = nil,
 		type = graphQLNonNull.new(graphQLString),
 		args = {},
-		resolve = function(_, _, _, p48) --[[ line: 831 ]]
+		resolve = function(_, _, _, p48)
 			return p48.parentType.name
 		end
 	},
@@ -755,7 +755,7 @@ return {
 				type = graphQLNonNull.new(graphQLString)
 			}
 		},
-		resolve = function(_, p49, _, p50) --[[ line: 815 ]]
+		resolve = function(_, p49, _, p50)
 			return p50.schema:getType(p49.name)
 		end
 	},
@@ -767,7 +767,7 @@ return {
 		astNode = nil,
 		type = graphQLNonNull.new(var11),
 		args = {},
-		resolve = function(_, _, _, p51) --[[ line: 790 ]]
+		resolve = function(_, _, _, p51)
 			return p51.schema
 		end
 	},

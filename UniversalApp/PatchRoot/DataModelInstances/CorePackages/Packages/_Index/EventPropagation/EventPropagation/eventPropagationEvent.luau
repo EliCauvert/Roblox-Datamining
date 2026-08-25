@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2, p3, p4, p5) --[[ line: 18 ]]
+function t.new(p0, p1, p2, p3, p4, p5)
 	-- upvalues: t (ref)
 	local t_1 = {
 		cancelled = false,
@@ -17,7 +17,7 @@ function t.new(p0, p1, p2, p3, p4, p5) --[[ line: 18 ]]
 	return t_1
 end
 
-function t:cancel() --[[ line: 41 ]]
+function t:cancel()
 	self.cancelled = true
 end
 

@@ -16,12 +16,12 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
-local function _(p0, p1, p2, p3) --[[ line: 33 | named "localizeBadgeText" ]]
+local function _(p0, p1, p2, p3)
 	-- upvalues: localizationStringsModule (ref)
 	return if p0 == localizationStringsModule.VERSION_HISTORY_AUTOSAVED then p1 elseif p0 == localizationStringsModule.VERSION_HISTORY_PREVIOUSLY_PUBLISHED then p2 elseif p0 == localizationStringsModule.VERSION_HISTORY_PUBLISHED then p3 else p0
 end
 
-return function(p4) --[[ line: 49 | named "VersionHistoryCard" ]]
+return function(p4)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), badge (ref), badgeShape (ref), badgeVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local badgeText
 	local testId = p4.testId or "version-history-card"
@@ -91,7 +91,7 @@ return function(p4) --[[ line: 49 | named "VersionHistoryCard" ]]
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
 						isDisabled = p4.isRestoreDisabled,
-						onActivated = reactModule.useCallback(function() --[[ line: 68 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: p4 (ref)
 							p4.onRestore()
 						end, { p4.onRestore }),

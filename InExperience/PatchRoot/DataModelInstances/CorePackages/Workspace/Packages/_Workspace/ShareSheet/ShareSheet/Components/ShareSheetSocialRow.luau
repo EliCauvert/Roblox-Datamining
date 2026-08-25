@@ -10,7 +10,7 @@ local playersService = game:GetService("Players")
 local shareSheetNumAvatarSkeletons = game:DefineFastInt("ShareSheetNumAvatarSkeletons", 6)
 local _ = require(parent.AppChat.GetConversationListStore)
 
-local function _(p0, p1) --[[ line: 34 | named "getOtherParticipants" ]]
+local function _(p0, p1)
 	local t = {}
 	
 	for i, v in p0 do
@@ -21,7 +21,7 @@ local function _(p0, p1) --[[ line: 34 | named "getOtherParticipants" ]]
 	return t
 end
 
-local function createSkeletonItems() --[[ line: 44 ]]
+local function createSkeletonItems()
 	-- upvalues: shareSheetNumAvatarSkeletons (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	local t = {}
 	
@@ -55,11 +55,11 @@ local function createSkeletonItems() --[[ line: 44 ]]
 	return t
 end
 
-local function ShareSheetConversationItem(p2) --[[ line: 86 ]]
+local function ShareSheetConversationItem(p2)
 	-- upvalues: reactModule (ref), shareSheetItemContainerModule (ref)
 	local conversation = p2.conversation
 	local id = conversation.id
-	local var10 = reactModule.useCallback(function() --[[ line: 89 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), id (ref)
 		p2.onConversationActivated(id)
 	end, { id, p2.onConversationActivated })
@@ -86,7 +86,7 @@ local function ShareSheetConversationItem(p2) --[[ line: 86 ]]
 	})
 end
 
-return function(p3) --[[ line: 109 | named "ShareSheetSocialRow" ]]
+return function(p3)
 	-- upvalues: playersService (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetRowModule (ref)
 	local var15 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
 	local t = {}

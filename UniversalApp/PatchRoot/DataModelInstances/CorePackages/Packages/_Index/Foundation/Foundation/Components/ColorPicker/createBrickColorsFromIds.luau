@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 8 | named "createBrickColorsFromIds" ]]
+﻿return function(p0)
 	local t = {}
 	
 	for i, v in p0 do

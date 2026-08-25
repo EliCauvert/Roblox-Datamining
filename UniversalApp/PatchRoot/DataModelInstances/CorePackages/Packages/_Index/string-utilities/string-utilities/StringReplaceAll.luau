@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 9 ]]
+﻿return function(p0, p1)
 	if type(p0) ~= "string" then
 		return ""
 	elseif type(p1) ~= "table" then

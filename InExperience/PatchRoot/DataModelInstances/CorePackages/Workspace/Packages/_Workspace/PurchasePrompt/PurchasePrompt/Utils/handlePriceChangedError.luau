@@ -9,7 +9,7 @@ local clearProductInfoCachesOnPriceChanged = game:DefineFastFlag("ClearProductIn
 local enableConvertPriceChangedToUnknownFailure = game:DefineFastFlag("EnableConvertPriceChangedToUnknownFailure", false)
 local enableSignalCheckPlayerHasRobloxSubscriptionEngineFeature = game:GetEngineFeature("EnableSignalCheckPlayerHasRobloxSubscription")
 
-return function(p0, p1, p2) --[[ line: 20 | named "handlePriceChangedError" ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagEnablePriceChangedErrorHandlingModule (ref), purchaseErrorModule (ref), clearProductInfoCachesOnPriceChanged (ref), clearProductInfoCachesModule (ref), enableSignalCheckPlayerHasRobloxSubscriptionEngineFeature (ref), shouldCheckSubscriptionMembershipForProductTypeModule (ref), marketplaceService (ref), enableConvertPriceChangedToUnknownFailure (ref), errorOccurredModule (ref)
 	if not fFlagEnablePriceChangedErrorHandlingModule then
 		return false

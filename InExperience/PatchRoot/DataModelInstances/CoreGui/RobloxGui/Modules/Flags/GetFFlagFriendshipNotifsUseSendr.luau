@@ -7,10 +7,10 @@ local var4 = false
 local var5 = nil
 local var6 = nil
 
-return function() --[[ line: 12 ]]
+return function()
 	-- upvalues: friendshipNotifsUseSendrExperimentV2 (ref), var4 (write), var5 (write), var6 (write), IXPServiceWrapper (ref), friendshipNotifsUseSendrLayerName (ref), friendshipNotifsUseSendrEnabledForAll (ref), friendshipNotifsUseSendrLayerValue (ref)
 	if friendshipNotifsUseSendrExperimentV2 and not var4 then
-		local ok, status = pcall(function() --[[ line: 14 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var4 (copy), IXPServiceWrapper (copy), friendshipNotifsUseSendrLayerName (copy)
 			var4 = true
 			

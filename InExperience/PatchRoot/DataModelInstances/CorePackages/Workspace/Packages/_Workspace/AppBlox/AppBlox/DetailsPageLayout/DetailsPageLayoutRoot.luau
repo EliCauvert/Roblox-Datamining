@@ -24,7 +24,7 @@ local t = {
 	fullBleedOverlapOffset = 180
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "DetailsPageLayoutRoot" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), withDefaults (ref), t (ref), compositionTags (ref), reactModule (ref), responsiveModule (ref), fFlagDetailsPageLayoutSeedContainerSize (ref), useNavBarSize (ref), useNavBarPlacement (ref), displayModule (ref), appNavBarModule (ref), detailsPageLayoutUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local var9 = useDeviceInsets()
 	local var10 = useTokens()
@@ -51,7 +51,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 	if fFlagDetailsPageLayoutSeedContainerSize then
 		local var33 = useNavBarSize()
 		local var34 = useNavBarPlacement()
-		local var35 = reactModule.useMemo(function() --[[ line: 119 ]]
+		local var35 = reactModule.useMemo(function()
 			-- upvalues: displayModule (copy), var34 (ref), appNavBarModule (copy), var33 (ref), var14 (ref), detailsPageLayoutUtilsModule (copy), var13 (ref), var23 (ref), var21 (ref), p0 (ref)
 			local viewportSize = displayModule.GetDisplayStore(false).getViewportSize(false)
 			local vector2 = Vector2.new(if var34 == appNavBarModule.Placement.Left then math.max(0, viewportSize.X - var33) else viewportSize.X, viewportSize.Y)
@@ -76,22 +76,22 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 	local var42, var43 = reactModule.useState(if fFlagDetailsPageLayoutSeedContainerSize then var32 else 0)
 	local var44, var45 = reactModule.useState(if fFlagDetailsPageLayoutSeedContainerSize then true else false)
 	local var46 = reactModule.useRef(if fFlagDetailsPageLayoutSeedContainerSize then var14 else false)
-	local var47 = var36:map(function(p2) --[[ line: 157 ]]
+	local var47 = var36:map(function(p2)
 		return p2.Y
 	end)
-	local var48 = var36:map(function(p3) --[[ line: 161 ]]
+	local var48 = var36:map(function(p3)
 		-- upvalues: var13 (ref)
 		return UDim2.new(0, p3.X, 0, p3.X / var13)
 	end)
-	local var49 = var36:map(function(p4) --[[ line: 167 ]]
+	local var49 = var36:map(function(p4)
 		-- upvalues: var14 (ref), detailsPageLayoutUtilsModule (copy), var13 (ref), var23 (ref)
 		return if var14 then detailsPageLayoutUtilsModule.computeContentTopOffset(p4.X, var13, var23) else 0
 	end)
-	local var50 = reactModule.joinBindings({ var49, var38 }):map(function(p5) --[[ line: 176 ]]
+	local var50 = reactModule.joinBindings({ var49, var38 }):map(function(p5)
 		-- upvalues: var23 (ref)
 		return UDim2.new(0.5, 0, 0, math.max(0, p5[1] + var23 - p5[2]) / 2)
 	end)
-	local var51 = reactModule.joinBindings({ var38, var49, var40 }):map(function(p6) --[[ line: 186 ]]
+	local var51 = reactModule.joinBindings({ var38, var49, var40 }):map(function(p6)
 		-- upvalues: detailsPageLayoutUtilsModule (copy), var23 (ref), var21 (ref)
 		local var58 = p6[1]
 		local var59 = p6[2]
@@ -104,7 +104,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 		
 		return math.clamp((var58 - headerFadeParams) / headerFadeParams_1, 0, 1)
 	end)
-	local var52 = reactModule.useCallback(function(p7) --[[ line: 202 ]]
+	local var52 = reactModule.useCallback(function(p7)
 		-- upvalues: var37 (ref), var45 (ref), var14 (ref), var46 (ref), fFlagDetailsPageLayoutSeedContainerSize (copy), detailsPageLayoutUtilsModule (copy), var13 (ref), var23 (ref), var21 (ref), p0 (ref), fFlagLuaAppClampBannerPaddingToViewport (copy), var43 (ref), var39 (ref)
 		local absoluteSize = p7.AbsoluteSize
 		var37(absoluteSize)
@@ -144,14 +144,14 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 		if fFlagDetailsPageLayoutSeedContainerSize then containerSize else nil
 	})
 	local var53 = reactModule.useRef(0)
-	local var54 = reactModule.useCallback(function(p8) --[[ line: 264 ]]
+	local var54 = reactModule.useCallback(function(p8)
 		-- upvalues: var53 (ref), var41 (ref)
 		if math.abs(p8 - var53.current) > 0.5 then
 			var53.current = p8
 			var41(p8)
 		end
 	end, {})
-	local var55 = reactModule.useCallback(function(p9) --[[ line: 271 ]]
+	local var55 = reactModule.useCallback(function(p9)
 		-- upvalues: var39 (ref), var14 (ref), var49 (ref), var40 (ref), detailsPageLayoutUtilsModule (copy), var21 (ref), var30 (ref)
 		local y = p9.CanvasPosition.Y
 		var39(y)
@@ -164,7 +164,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 	end, { var14, var21 })
 	
 	return reactModule.createElement(detailsPageLayoutContextModule.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 293 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: var14 (ref), var15 (ref), var16 (ref), var17 (ref), var18 (ref), var11 (ref), var23 (ref), var19 (ref), var20 (ref), var55 (ref), var49 (ref), var21 (ref), var22 (ref), var42 (ref), var44 (ref), var47 (ref), var51 (ref), var31 (ref), var54 (ref), var26 (ref), var25 (ref), var27 (ref), var28 (ref)
 			return {
 				hasFullBleed = var14,
@@ -220,11 +220,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 		FullscreenOverlay = if var26 then reactModule.createElement(view, {
 			ZIndex = 10,
 			tag = "clip",
-			Size = if fFlagSduiExperienceDetailsSupport then var15:map(function(p10) --[[ line: 371 ]]
+			Size = if fFlagSduiExperienceDetailsSupport then var15:map(function(p10)
 				-- upvalues: var23 (ref)
 				return if p10 then UDim2.new(1, 0, 1, -var23) else UDim2.fromScale(1, 1)
 			end) else UDim2.new(1, 0, 1, -var23),
-			Position = if fFlagSduiExperienceDetailsSupport then var15:map(function(p11) --[[ line: 376 ]]
+			Position = if fFlagSduiExperienceDetailsSupport then var15:map(function(p11)
 				-- upvalues: var23 (ref)
 				return if p11 then UDim2.fromOffset(0, var23) else UDim2.fromOffset(0, 0)
 			end) else UDim2.fromOffset(0, var23),

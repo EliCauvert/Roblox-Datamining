@@ -19,14 +19,14 @@ local eventConnection = reactUtilsModule.EventConnection
 local useFocusGuiObject = require(parent_1.ReactFocusNavigation).useFocusGuiObject
 local constantsModule = require(parent.constants)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, _) --[[ line: 39 | named "ClientNotificationWrapper" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, _)
 	-- upvalues: reactModule (ref), useInputType (ref), useFocusGuiObject (ref), controlState (ref), httpService (ref), guiService (ref), view (ref), stateLayerAffordance (ref), cryoModule (ref), toast (ref), inputTypeConstants (ref), eventConnection (ref), userInputService (ref), keyLabel (ref), constantsModule (ref)
 	local var9 = reactModule.useRef(nil)
 	local var10, var11 = reactModule.useBinding(false)
 	local var12, var13 = reactModule.useBinding(Enum.SelectionBehavior.Escape)
 	local var14 = useInputType()
 	local var15 = useFocusGuiObject()
-	local var16 = if p0.onHover then reactModule.useCallback(function(p1) --[[ line: 48 ]]
+	local var16 = if p0.onHover then reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), controlState (copy)
 		p0.onHover(if p1 ~= controlState.Hover then if p1 ~= controlState.Pressed then p1 == controlState.SelectedPressed else true else true)
 	end, { p0.onHover }) else nil
@@ -38,7 +38,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, _) --[[ line: 39 | n
 			table.insert(t, {
 				text = v.Text,
 				variant = v.ButtonType,
-				onActivated = function() --[[ line: 64 ]]
+				onActivated = function()
 					-- upvalues: guiService (copy), p0 (ref), i (ref)
 					guiService:OnNotificationInteraction(p0.notificationId, i - 1)
 				end
@@ -69,7 +69,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, _) --[[ line: 39 | n
 		}, {
 			EventConnection = reactModule.createElement(eventConnection, {
 				event = userInputService.InputBegan,
-				callback = function(p2) --[[ line: 101 ]]
+				callback = function(p2)
 					-- upvalues: var15 (ref), p0 (ref)
 					if p2.KeyCode == Enum.KeyCode.ButtonB then
 						var15(nil)
@@ -83,11 +83,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, _) --[[ line: 39 | n
 				holdBehavior = {
 					holdTime = constantsModule.MenuButtonPressHoldTime,
 					resetTime = constantsModule.MenuButtonPressResetTime,
-					onBeginHold = function() --[[ line: 114 ]]
+					onBeginHold = function()
 						-- upvalues: p0 (ref)
 						p0.onPause(true)
 					end,
-					onEndHold = function(p3) --[[ line: 117 ]]
+					onEndHold = function(p3)
 						-- upvalues: t (ref), p0 (ref), var11 (ref), var13 (ref), var15 (ref), var9 (ref)
 						if not p3 then
 							p0.onPause(false)

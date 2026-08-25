@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MomentsTTSWaveformSamplesPerSecond", 200)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastInt("MomentsTTSWaveformSamplesPerSecond")
 end

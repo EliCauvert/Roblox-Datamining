@@ -5,7 +5,7 @@ local t = { Name = "FirstPersonToggleEvent" }
 local var3 = false
 local var4 = nil
 
-local function onJumpInput(p0, p1, _) --[[ line: 16 ]]
+local function onJumpInput(p0, p1, _)
 	-- upvalues: var3 (write)
 	if p0 == "JumpAction" and p1 == Enum.UserInputState.Begin then
 		var3 = true
@@ -13,20 +13,20 @@ local function onJumpInput(p0, p1, _) --[[ line: 16 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-function startJumpEventListener() --[[ line: 26 ]]
+function startJumpEventListener()
 	-- upvalues: contextActionService (ref), onJumpInput (ref)
 	contextActionService:BindCoreAction("JumpAction", onJumpInput, false, Enum.KeyCode.Space)
 end
 
-function stopJumpEventListener() --[[ line: 30 ]]
+function stopJumpEventListener()
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindAction("JumpAction")
 end
 
-function t.StartEvent(p2) --[[ line: 34 ]]
+function t.StartEvent(p2)
 	-- upvalues: var3 (write), var4 (write), runService (ref)
 	startJumpEventListener()
-	var4 = runService.RenderStepped:Connect(function(_) --[[ line: 39 | named "onRenderStepped" ]]
+	var4 = runService.RenderStepped:Connect(function(_)
 		-- upvalues: var3 (copy), p2 (ref), var4 (copy)
 		if var3 then
 			stopJumpEventListener()
@@ -40,7 +40,7 @@ function t.StartEvent(p2) --[[ line: 34 ]]
 	end)
 end
 
-function t.StopEvent() --[[ line: 58 ]]
+function t.StopEvent()
 	-- upvalues: var4 (write)
 	if var4 then
 		var4:Disconnect()

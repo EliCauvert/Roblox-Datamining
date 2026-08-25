@@ -2,7 +2,7 @@
 local setActiveTabModule = require(script.Parent.Parent.Actions.SetActiveTab)
 local setTabListModule = require(script.Parent.Parent.Actions.SetTabList)
 
-return function(p0, p1) --[[ line: 14 ]]
+return function(p0, p1)
 	-- upvalues: setActiveTabModule (ref), immutableModule (ref), setTabListModule (ref)
 	p0 = p0 or {
 		isDeveloperView = false,

@@ -1,7 +1,7 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local fFlagExpChatPresetChatVREnabledModule = require(script.Parent.FFlagExpChatPresetChatVREnabled)
 
-local function _() --[[ line: 5 | named "isSupportedPlatform" ]]
+local function _()
 	-- upvalues: userInputService (ref), fFlagExpChatPresetChatVREnabledModule (ref)
 	return if userInputService.VREnabled then fFlagExpChatPresetChatVREnabledModule else true
 end

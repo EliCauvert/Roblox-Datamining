@@ -1,6 +1,6 @@
 ﻿local unifiedEventLogConstantsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").UnifiedEventLogConstants)
 
-return function(p0, p1, p2, p3) --[[ line: 22 | named "getDeferredPurchaseSourceTile" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: unifiedEventLogConstantsModule (ref)
 	if p2 == nil then
 		return nil

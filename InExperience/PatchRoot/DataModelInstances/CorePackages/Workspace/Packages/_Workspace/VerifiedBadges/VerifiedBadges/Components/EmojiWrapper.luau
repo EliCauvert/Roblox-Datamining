@@ -12,7 +12,7 @@ local t = {
 	verticalAlignment = Enum.VerticalAlignment.Center
 }
 
-return function(p0) --[[ line: 88 | named "EmojiWrapper" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactRobloxModule (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 88 | named "EmojiWrapper" ]]
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			[reactRobloxModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1) --[[ line: 102 ]]
+			[reactRobloxModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
 				-- upvalues: var5 (ref), var8 (ref), var9 (ref), var6 (ref), var7 (ref)
 				local var10 = if var5.maximumEmojiSize then math.min(p1.AbsoluteSize.Y, var5.maximumEmojiSize) else p1.AbsoluteSize.Y
 				

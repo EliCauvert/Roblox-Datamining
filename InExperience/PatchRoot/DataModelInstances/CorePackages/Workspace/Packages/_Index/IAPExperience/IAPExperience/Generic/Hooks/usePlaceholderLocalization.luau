@@ -10,9 +10,9 @@ local t = {
 	["IAPExperience.PurchasePrompt.Label.Total"] = "Total"
 }
 
-return function(p0) --[[ line: 24 | named "usePlaceholderLocalization" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), t (ref)
-	return reactModule.useMemo(function() --[[ line: 25 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p0 (ref), t (copy)
 		local t_1 = {}
 		
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 24 | named "usePlaceholderLocalization" ]]
 			if typeof(v) == "table" then
 				for i_1, v_1 in pairs(v) do
 					if typeof(i_1) == "string" then
-						var4 = string.gsub(var4, "{" .. i_1 .. "}", function() --[[ line: 33 ]]
+						var4 = string.gsub(var4, "{" .. i_1 .. "}", function()
 							-- upvalues: v_1 (ref)
 							return tostring(v_1)
 						end)

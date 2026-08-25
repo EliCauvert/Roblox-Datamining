@@ -1,10 +1,10 @@
 ﻿local starterGuiService = game:GetService("StarterGui")
 local createSignal = require(script:FindFirstAncestor("InExperienceTopBar").Parent.Signals).createSignal
 
-return function() --[[ line: 12 ]]
+return function()
 	-- upvalues: createSignal (ref), starterGuiService (ref)
 	local var1, var2 = createSignal(true)
-	starterGuiService:RegisterSetCore("TopbarEnabled", function(p0) --[[ line: 15 ]]
+	starterGuiService:RegisterSetCore("TopbarEnabled", function(p0)
 		-- upvalues: var2 (ref)
 		if type(p0) == "boolean" then
 			var2(p0)
@@ -13,7 +13,7 @@ return function() --[[ line: 12 ]]
 		end
 		error("SetCore TopbarEnabled argument must be a boolean", 2)
 	end)
-	starterGuiService:RegisterGetCore("TopbarEnabled", function() --[[ line: 23 ]]
+	starterGuiService:RegisterGetCore("TopbarEnabled", function()
 		-- upvalues: var1 (ref)
 		return var1(false)
 	end)

@@ -5,7 +5,7 @@ local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 14 ]]
+function t.new()
 	-- upvalues: t (ref), signalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -19,19 +19,19 @@ function t.new() --[[ line: 14 ]]
 	return t_1
 end
 
-function t:avgPing() --[[ line: 27 ]]
+function t:avgPing()
 	return self._serverStatsPing
 end
 
-function t:Signal() --[[ line: 31 ]]
+function t:Signal()
 	return self._serverStatsUpdated
 end
 
-function t:getCurrentData() --[[ line: 35 ]]
+function t:getCurrentData()
 	return self._serverStatsData
 end
 
-function t:updateValue(p0, p1) --[[ line: 39 ]]
+function t:updateValue(p0, p1)
 	-- upvalues: circularBufferModule (ref), var2 (ref)
 	if not self._serverStatsData[p0] then
 		local var6 = circularBufferModule.new(var2)
@@ -68,16 +68,16 @@ function t:updateValue(p0, p1) --[[ line: 39 ]]
 	self._serverStatsData[p0].min = if min < p1 then min else p1
 end
 
-function t:isRunning() --[[ line: 87 ]]
+function t:isRunning()
 	return self._isRunning
 end
 
-function t:start() --[[ line: 91 ]]
+function t:start()
 	-- upvalues: getClientReplicatorModule (ref)
 	local var11 = getClientReplicatorModule()
 	
 	if var11 and not self._statsListenerConnection then
-		self._statsListenerConnection = var11.StatsReceived:connect(function(p2) --[[ line: 94 ]]
+		self._statsListenerConnection = var11.StatsReceived:connect(function(p2)
 			-- upvalues: self (ref)
 			if p2 then
 				self._lastUpdateTime = os.time()
@@ -102,7 +102,7 @@ function t:start() --[[ line: 91 ]]
 	end
 end
 
-function t:stop() --[[ line: 117 ]]
+function t:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

@@ -20,16 +20,16 @@ local t = {
 	[constantsModule.BACKGROUND_ASSET_IDS[8]] = Color3.fromRGB(238, 244, 255)
 }
 
-local function _(p0, p1) --[[ line: 38 | named "getButtonColor" ]]
+local function _(p0, p1)
 	-- upvalues: var3 (ref), color_3 (ref), color_4 (ref), t (ref)
 	return if p0 == var3 then if p1 == "dark" then color_3 else color_4 else t[p0]
 end
 
-return function(value) --[[ line: 53 | named "ProfileBackgroundButton" ]]
+return function(value)
 	-- upvalues: useSelectedTheme (ref), reactModule (ref), var3 (ref), color_3 (ref), color_4 (ref), t (ref), color (ref), color_1 (ref), color_2 (ref), image (ref)
 	local buttonSize = value.buttonSize
 	local var10 = useSelectedTheme()
-	local var11 = reactModule.useCallback(function() --[[ line: 57 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: value (ref)
 		if value.selected then return end
 		if value.onActivated then

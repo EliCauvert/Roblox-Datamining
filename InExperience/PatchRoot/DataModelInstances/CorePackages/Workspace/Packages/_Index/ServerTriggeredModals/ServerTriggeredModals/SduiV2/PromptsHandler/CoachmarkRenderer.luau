@@ -9,18 +9,18 @@ local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
 local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "CoachmarkRenderer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref)
 	local surfaceConfig = p0.surfaceConfig
 	local hasShownKey = p0.hasShownKey
 	local var7 = useModalSignalStoreModule()
 	local var8, var9 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var7 (ref), hasShownKey (ref), var9 (ref)
 		if not var8 and var7.tryClaimPrimaryHandler(hasShownKey) then
 			var9(true)
 		end
-		return function() --[[ line: 48 ]]
+		return function()
 			-- upvalues: var8 (copy), var7 (copy), hasShownKey (copy)
 			if var8 then
 				var7.releasePrimaryHandler(hasShownKey)
@@ -28,7 +28,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "CoachmarkRenderer" ]
 		end
 	end, { var8, hasShownKey, var7 })
 	local var10 = usePromptEntriesModule(surfaceConfig.configKey, promptStyleModule.Coachmark)
-	local var11 = reactModule.useMemo(function() --[[ line: 57 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), var10 (ref)
 		if not var8 then
 			return ""
@@ -42,12 +42,12 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "CoachmarkRenderer" ]
 		end
 		return table.concat(t, "|")
 	end, { var8, var10 })
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var10 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
 		if var11 == "" then return end
 		for i, v in var10 do
 			if v.identifier and v.title and v.config then
-				reportPromptImpressionModule(v.title, v.identifier):catch(function() --[[ line: 78 ]]
+				reportPromptImpressionModule(v.title, v.identifier):catch(function()
 					-- upvalues: loggerModule (copy)
 					loggerModule:warning("Failed to report coachmark prompt impression")
 				end)

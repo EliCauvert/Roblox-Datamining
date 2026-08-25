@@ -7,7 +7,7 @@ local list = {
 	reactionType.Wow, reactionType.Cry, reactionType.Fire, reactionType.Skull
 }
 
-local function isValidMomentsEmojiCatalog(p0) --[[ line: 32 ]]
+local function isValidMomentsEmojiCatalog(p0)
 	-- upvalues: list (ref), resolveEmoteIdModule (ref)
 	if #p0 == 0 then
 		return false
@@ -26,15 +26,15 @@ end
 
 return {
 	isValidMomentsEmojiCatalog = isValidMomentsEmojiCatalog,
-	isValidGetEmojiSetsResponseShape = function(value) --[[ line: 48 ]]
+	isValidGetEmojiSetsResponseShape = function(value)
 		-- upvalues: decodeEmojiSetsModule (ref), isValidMomentsEmojiCatalog (ref)
 		return type(value) == "table" and type(value.emoji_sets) == "table" and #value.emoji_sets ~= 0 and isValidMomentsEmojiCatalog(decodeEmojiSetsModule.flattenEmojis(decodeEmojiSetsModule.decodeGetEmojiSetsResponse(value)))
 	end,
-	isValidCachedGetEmojiSetsResponse = function(value) --[[ line: 57 ]]
+	isValidCachedGetEmojiSetsResponse = function(value)
 		-- upvalues: isValidMomentsEmojiCatalog (ref), decodeEmojiSetsModule (ref)
 		return if value == nil then false else isValidMomentsEmojiCatalog(decodeEmojiSetsModule.flattenEmojis(value))
 	end,
-	isUuidLikeEmoteId = function(p1) --[[ line: 27 ]]
+	isUuidLikeEmoteId = function(p1)
 		return string.find(p1, "-", 1, true) ~= nil
 	end
 }

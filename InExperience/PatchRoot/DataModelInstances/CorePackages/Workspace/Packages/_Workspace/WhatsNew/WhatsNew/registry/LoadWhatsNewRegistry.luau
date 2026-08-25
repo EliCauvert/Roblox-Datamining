@@ -8,11 +8,11 @@ local validateRegistryModule = require(script.Parent.validateRegistry)
 local buildTourTipsModule = require(script.Parent.buildTourTips)
 local localizationService = game:GetService("LocalizationService")
 
-local function makeRootTourKey(p0, p1) --[[ line: 22 ]]
+local function makeRootTourKey(p0, p1)
 	return `{p0}:{p1}`
 end
 
-local function collectScreenScopeIds(p2) --[[ line: 26 ]]
+local function collectScreenScopeIds(p2)
 	local t = {}
 	
 	for i, v in p2 do
@@ -25,22 +25,22 @@ local function collectScreenScopeIds(p2) --[[ line: 26 ]]
 	return t
 end
 
-local function _(p3, p4) --[[ line: 37 | named "getRegistryEntries" ]]
+local function _(p3, p4)
 	-- upvalues: enumsModule (ref)
 	return if p4 == enumsModule.TourType.WhatsNew then p3.whatsNew else p3.onboarding
 end
 
-local function assertValidationPassed(p5, p6) --[[ line: 44 ]]
+local function assertValidationPassed(p5, p6)
 	-- upvalues: validateRegistryModule (ref)
 	local var11 = validateRegistryModule(p5, { scopeActions = if p6 then p6.scopeActions else nil })
 	assert(#var11.errors == 0, `loadWhatsNewRegistry validation failed: {table.concat(var11.errors, "; ")}`)
 end
 
-local _ = function(p7, p8) --[[ line: 51 | named "localizeOptional" ]]
+local _ = function(p7, p8)
 	return if p8 == nil or p8 == "" then p8 else p7:Format(p8)
 end
 
-local function localizeRegistry(p9) --[[ line: 58 ]]
+local function localizeRegistry(p9)
 	-- upvalues: localization (ref), localizationService (ref)
 	local var12 = localization.new(localizationService.RobloxLocaleId)
 	local t = {}
@@ -57,7 +57,7 @@ local function localizeRegistry(p9) --[[ line: 58 ]]
 		cloned.updatesText = if onboardingTitle == nil or onboardingTitle == "" then onboardingTitle else var12:Format(onboardingTitle)
 		t[i] = cloned
 	end
-	local function localizeEntries(p10) --[[ line: 71 ]]
+	local function localizeEntries(p10)
 		-- upvalues: var12 (ref)
 		local t = {}
 		
@@ -78,7 +78,7 @@ local function localizeRegistry(p9) --[[ line: 58 ]]
 	}
 end
 
-local function loadWhatsNewRegistry(p11, p12, p13) --[[ line: 90 ]]
+local function loadWhatsNewRegistry(p11, p12, p13)
 	-- upvalues: assertValidationPassed (ref), collectScreenScopeIds (ref), enumsModule (ref), buildTourTipsModule (ref)
 	assertValidationPassed(p11, p13 or {})
 	local t = {}
@@ -100,7 +100,7 @@ end
 
 return {
 	loadWhatsNewRegistry = loadWhatsNewRegistry,
-	loadBundledRegistry = function(p14, p15) --[[ line: 118 ]]
+	loadBundledRegistry = function(p14, p15)
 		-- upvalues: loadWhatsNewRegistry (ref), localizeRegistry (ref)
 		return loadWhatsNewRegistry(localizeRegistry(require(script.Parent.Updates)), p14, p15)
 	end,

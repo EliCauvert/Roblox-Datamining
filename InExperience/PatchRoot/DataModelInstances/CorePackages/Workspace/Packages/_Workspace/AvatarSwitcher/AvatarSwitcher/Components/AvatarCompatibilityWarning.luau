@@ -5,7 +5,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagAvatarSwitcherExpiredItemsWarning = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherExpiredItemsWarning
 
-return function(p0) --[[ line: 21 | named "AvatarCompatibilityWarning" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), fFlagAvatarSwitcherExpiredItemsWarning (ref), reactModule (ref), foundationModule (ref)
 	local var2 = useTokens()
 	local var3 = useLocalization({

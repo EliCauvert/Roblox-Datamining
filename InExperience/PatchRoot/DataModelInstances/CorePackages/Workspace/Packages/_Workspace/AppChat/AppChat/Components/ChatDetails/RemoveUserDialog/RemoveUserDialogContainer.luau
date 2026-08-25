@@ -20,23 +20,23 @@ local t = {
 	confirmationTitleKey = "Feature.Chat.Action.Remove",
 	failureTitleKey = "Feature.Chat.Heading.FailedToRemoveUser",
 	failureButtonKey = "Feature.Chat.Action.Confirm",
-	onModalClose = function() --[[ line: 40 ]] end,
+	onModalClose = function() end,
 	messageKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.RemoveUser.V2" else "Feature.Chat.Message.RemoveUser",
 	failureBodyKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.FailedToRemoveUser.V2" else "Feature.Chat.Message.FailedToRemoveUser"
 }
 
-function RemoveUserDialogContainer(p0) --[[ line: 57 ]]
+function RemoveUserDialogContainer(p0)
 	-- upvalues: cryoModule (ref), t (ref), useState (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), populateUserWithStateModule (ref), useLocalization (ref), reactModule (ref), removeUserDialogLayoutModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local var8, var9 = useState(true)
 	local var10, var11 = useState(false)
 	local var12, var13 = useState(false)
 	local var14 = useDispatch()
-	local var15 = useCallback(function(p1, p2) --[[ line: 64 ]]
+	local var15 = useCallback(function(p1, p2)
 		-- upvalues: var14 (ref), appChatNetworkingModule (copy)
 		return var14(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p2, p1))
 	end, { var14 })
-	local var16 = useSelector(function(p3) --[[ line: 68 ]]
+	local var16 = useSelector(function(p3)
 		-- upvalues: var7 (ref), populateUserWithStateModule (copy)
 		return {
 			conversationTitle = (p3.ChatAppReducer.Conversations[var7.conversationId] or { title = nil }).title,
@@ -57,17 +57,17 @@ function RemoveUserDialogContainer(p0) --[[ line: 57 ]]
 			CONVERSATION_TITLE = var16.conversationTitle
 		}
 	}), var16, {
-		onActivated = useCallback(function() --[[ line: 80 ]]
+		onActivated = useCallback(function()
 			-- upvalues: var11 (ref), var9 (ref), var7 (ref), var15 (ref), var13 (ref)
 			var11(true)
 			var9(false)
 			local conversationId = var7.conversationId
 			
 			if conversationId then
-				var15(var7.participantId, conversationId):andThen(function() --[[ line: 87 ]]
+				var15(var7.participantId, conversationId):andThen(function()
 					-- upvalues: var7 (copy)
 					var7.onModalClose()
-				end):catch(function() --[[ line: 90 ]]
+				end):catch(function()
 					-- upvalues: var11 (copy), var9 (copy), var13 (copy)
 					var11(false)
 					var9(true)

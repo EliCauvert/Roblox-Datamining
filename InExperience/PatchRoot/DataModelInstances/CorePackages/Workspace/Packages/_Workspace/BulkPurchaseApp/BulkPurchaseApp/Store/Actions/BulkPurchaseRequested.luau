@@ -1,7 +1,7 @@
 ﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
 local _ = require(bulkPurchaseApp.Store.Types)
 
-return require(bulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseRequested", function(p0, p1, p2, p3, p4, p5) --[[ line: 24 ]]
+return require(bulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseRequested", function(p0, p1, p2, p3, p4, p5)
 	return {
 		itemData = p0,
 		balance = p2,

@@ -4,7 +4,7 @@ local dashModule = require(parent.Dash)
 local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
 local fFlagAXBackgroundsPersistence = require(parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
 
-return function(p0, p1) --[[ line: 25 | named "getSubstateToTrackForChanges" ]]
+return function(p0, p1)
 	-- upvalues: dashModule (ref), fFlagAXBackgroundsPersistence (ref)
 	local t = {}
 	

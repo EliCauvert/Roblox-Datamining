@@ -3,7 +3,7 @@ local _ = require(inExperienceShop.Parent.Promise)
 local mockShopDataModule = require(inExperienceShop.Mocks.MockShopData)
 local _ = require(inExperienceShop.Types)
 
-return function() --[[ line: 12 | named "fetchShopData" ]]
+return function()
 	-- upvalues: mockShopDataModule (ref)
 	return mockShopDataModule.getShopData()
 end

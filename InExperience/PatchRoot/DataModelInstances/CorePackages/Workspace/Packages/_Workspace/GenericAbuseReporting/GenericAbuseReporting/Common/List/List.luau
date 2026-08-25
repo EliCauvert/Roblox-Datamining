@@ -5,7 +5,7 @@ local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV
 local view = foundationModule.View
 local listContextModule = require(script.Parent.ListContext)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 22 | named "List" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), view (ref), fFlagAbuseReportMenuV2 (ref), listContextModule (ref)
 	return reactModule.createElement(view, {
 		tag = if fFlagAbuseReportMenuV2 and p0.tag then p0.tag else "size-full-0 auto-y col",
@@ -15,7 +15,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 22 | 
 		ListContext = reactModule.createElement(listContextModule.Provider, {
 			value = {
 				value = p0.value,
-				onValueChanged = reactModule.useCallback(function(p2) --[[ line: 23 ]]
+				onValueChanged = reactModule.useCallback(function(p2)
 					-- upvalues: p0 (ref)
 					p0.onValueChanged(p2)
 				end, { p0.onValueChanged })

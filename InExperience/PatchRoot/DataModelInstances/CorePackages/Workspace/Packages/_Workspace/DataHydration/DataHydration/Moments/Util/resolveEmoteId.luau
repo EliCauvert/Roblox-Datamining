@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
 
 return {
-	resolveEmoteIdForReaction = function(p0, p1) --[[ line: 22 ]]
+	resolveEmoteIdForReaction = function(p0, p1)
 		local replaced = string.gsub(string.lower(p1), "%-", "")
 		local var1 = if replaced == "crying" then "cry" else replaced
 		
@@ -17,7 +17,7 @@ return {
 		end
 		return p1
 	end,
-	reactionTypeForEmoteId = function(p2, p3) --[[ line: 36 ]]
+	reactionTypeForEmoteId = function(p2, p3)
 		for i, v in p2 do
 			if v.id == p3 then
 				local replaced = string.gsub(string.lower(v.name), "%-", "")
@@ -27,7 +27,7 @@ return {
 		end
 		return p3
 	end,
-	normalizeName = function(p4) --[[ line: 12 ]]
+	normalizeName = function(p4)
 		local replaced = string.gsub(string.lower(p4), "%-", "")
 		
 		return if replaced == "crying" then "cry" else replaced

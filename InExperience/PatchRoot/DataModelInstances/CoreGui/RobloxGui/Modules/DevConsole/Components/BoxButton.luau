@@ -8,7 +8,7 @@ local text = constantsModule.Color.Text
 local unselectedGray = constantsModule.Color.UnselectedGray
 local inactiveBox = constantsModule.Color.InactiveBox
 
-return function(p0) --[[ line: 20 | named "BoxButton" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), roactModule (ref), mainWindowHeader_1 (ref), text (ref), mainWindowHeader (ref), unselectedGray (ref), inactiveBox (ref)
 	local text_1 = p0.text
 	local size = p0.size
@@ -27,7 +27,7 @@ return function(p0) --[[ line: 20 | named "BoxButton" ]]
 		BackgroundColor3 = if var4 then unselectedGray else inactiveBox,
 		Active = var4,
 		BackgroundTransparency = 0,
-		[roactModule.Event.Activated] = reactModule.useCallback(function() --[[ line: 28 ]]
+		[roactModule.Event.Activated] = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			p0.onClicked(p0.text)
 		end, { p0.onClicked, p0.text })

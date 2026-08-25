@@ -6,7 +6,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 local getFriendsChatHeaderPropsModule = require(script.Parent.Parent.HeaderBar.getFriendsChatHeaderProps)
 
-local function areSelectedHeaderFieldsEqual(p0, p1) --[[ line: 38 ]]
+local function areSelectedHeaderFieldsEqual(p0, p1)
 	-- upvalues: cryoModule (ref)
 	if p0 == p1 then
 		return true
@@ -26,15 +26,15 @@ local function areSelectedHeaderFieldsEqual(p0, p1) --[[ line: 38 ]]
 	return var7
 end
 
-return function(p2) --[[ line: 50 | named "useConversationHeaderProps" ]]
+return function(p2)
 	-- upvalues: expChatConversationListAdapterModule (ref), reactModule (ref), signalsModule (ref), areSelectedHeaderFieldsEqual (ref), signalsReactModule (ref), getFriendsChatHeaderPropsModule (ref)
 	local conversationId = p2.conversationId
 	local hasConversationId = p2.hasConversationId
 	local localUserId = p2.localUserId
 	local conversationStore = expChatConversationListAdapterModule.getConversationStore()
-	local var9 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 56 ]]
+	local var9 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), hasConversationId (ref), conversationStore (ref), conversationId (ref), areSelectedHeaderFieldsEqual (copy)
-		return signalsModule.createComputed(function(p3) --[[ line: 57 ]]
+		return signalsModule.createComputed(function(p3)
 			-- upvalues: hasConversationId (copy), conversationStore (copy), conversationId (copy)
 			if not hasConversationId then
 				return nil
@@ -49,7 +49,7 @@ return function(p2) --[[ line: 50 | named "useConversationHeaderProps" ]]
 		end, areSelectedHeaderFieldsEqual)
 	end, { conversationStore, conversationId, hasConversationId }))
 	
-	return reactModule.useMemo(function() --[[ line: 74 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var9 (ref), getFriendsChatHeaderPropsModule (copy), localUserId (ref)
 		return if var9 == nil then nil else getFriendsChatHeaderPropsModule(var9, localUserId)
 	end, { var9, localUserId })

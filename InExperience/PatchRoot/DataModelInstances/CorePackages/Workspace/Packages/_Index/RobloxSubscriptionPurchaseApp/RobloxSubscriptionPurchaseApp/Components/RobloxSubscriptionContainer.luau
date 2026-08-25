@@ -21,7 +21,7 @@ local t_1 = {
 	[promptStateModule.Error] = true
 }
 
-return function() --[[ line: 46 | named "RobloxSubscriptionContainer" ]]
+return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), useNativePurchaseFinishedListenerModule (ref), useRobloxSubscriptionChangedListenerModule (ref), useSubscriptionPollingTimeoutGuardModule (ref), blackbirdSheetContentModule (ref), errorSheetContentModule (ref), t (ref), t_1 (ref), reactModule (ref), sheet (ref), completeRobloxSubscriptionUpsellFlowModule (ref), dialogSize (ref)
 	local var14 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
 	useNativePurchaseFinishedListenerModule()
@@ -31,7 +31,7 @@ return function() --[[ line: 46 | named "RobloxSubscriptionContainer" ]]
 	
 	return t_1[var14] == true and reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
-		onClose = function() --[[ line: 66 ]]
+		onClose = function()
 			-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
 			completeRobloxSubscriptionUpsellFlowModule()
 		end,

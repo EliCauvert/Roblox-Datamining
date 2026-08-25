@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local _ = require(foundation.Components.Types)
 
-return function(p0, p1) --[[ line: 9 | named "joinBindables" ]]
+return function(p0, p1)
 	-- upvalues: reactIsModule (ref), reactModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -18,7 +18,7 @@ return function(p0, p1) --[[ line: 9 | named "joinBindables" ]]
 			t_1[i] = v
 		end
 	end
-	return if var5 then reactModule.joinBindings(t):map(function(p2) --[[ line: 30 ]]
+	return if var5 then reactModule.joinBindings(t):map(function(p2)
 		-- upvalues: t_1 (ref), p1 (ref)
 		local cloned = table.clone(t_1)
 		

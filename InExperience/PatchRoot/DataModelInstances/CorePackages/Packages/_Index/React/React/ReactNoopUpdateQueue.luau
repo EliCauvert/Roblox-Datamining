@@ -3,7 +3,7 @@ local reactGlobalsModule = require(parent.ReactGlobals)
 local console = require(parent.Shared).console
 local t = {}
 
-local function _(p0, p1) --[[ line: 16 | named "warnNoop" ]]
+local function _(p0, p1)
 	-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
 	if reactGlobalsModule.__DEV__ then
 		local componentName = p0.__componentName or "ReactClass"
@@ -16,10 +16,10 @@ local function _(p0, p1) --[[ line: 16 | named "warnNoop" ]]
 end
 
 return {
-	isMounted = function(_) --[[ line: 51 ]]
+	isMounted = function(_)
 		return false
 	end,
-	enqueueForceUpdate = function(p2, _, _) --[[ line: 69 ]]
+	enqueueForceUpdate = function(p2, _, _)
 		-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
 		if reactGlobalsModule.__DEV__ then
 			local componentName = p2.__componentName or "ReactClass"
@@ -30,7 +30,7 @@ return {
 			t[text] = true
 		end
 	end,
-	enqueueReplaceState = function(p3, _, _, _) --[[ line: 85 ]]
+	enqueueReplaceState = function(p3, _, _, _)
 		-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
 		if reactGlobalsModule.__DEV__ then
 			local componentName = p3.__componentName or "ReactClass"
@@ -41,7 +41,7 @@ return {
 			t[text] = true
 		end
 	end,
-	enqueueSetState = function(value, _, _, _) --[[ line: 100 ]]
+	enqueueSetState = function(value, _, _, _)
 		-- upvalues: reactGlobalsModule (ref), t (ref), console (ref)
 		if reactGlobalsModule.__DEV__ then
 			local componentName = value.__componentName or "ReactClass"

@@ -6,7 +6,7 @@ local cryoModule = require(parent.Cryo)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 32 ]]
+function t.new(p0, p1)
 	-- upvalues: cryoModule (ref), urlMatcherModule (ref), t (ref)
 	local t_1 = {
 		_urlMatcher = urlMatcherModule.new(cryoModule.Dictionary.union(p0 or {}, { pathPatterns = cryoModule.Dictionary.keys(p1) })),
@@ -17,9 +17,9 @@ function t.new(p0, p1) --[[ line: 32 ]]
 	return t_1
 end
 
-function t:process(p2) --[[ line: 48 ]]
+function t:process(p2)
 	-- upvalues: cryoModule (ref), urlValidationModule (ref)
-	return cryoModule.List.filterMap(self._urlMatcher:match(p2), function(p3) --[[ line: 50 ]]
+	return cryoModule.List.filterMap(self._urlMatcher:match(p2), function(p3)
 		-- upvalues: urlValidationModule (copy), self (ref)
 		local var5, var6 = urlValidationModule.validateUrlMatch(p3, self._urlMap)
 		

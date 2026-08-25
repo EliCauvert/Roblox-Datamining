@@ -42,7 +42,7 @@ local t_2 = {
 	[4] = { textKey = "untilITurnItBackOn", durationMinutes = -1 }
 }
 
-return function() --[[ line: 81 ]]
+return function()
 	-- upvalues: useStyle (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), useTokens (ref), useLocalization (ref), cryo (ref), t_1 (ref), react (ref), showNotificationSnoozeMenuSignal (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), dismissNotificationSnoozeMenuSignal (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), notificationSnoozeMenuVisibleSignal (ref), useCursor (ref), t_2 (write), colors (ref), default (ref), interactable (ref), focusRoot (ref), t (ref), focusNavigableSurfaceIdentifierEnum (ref), snoozeMenuTextXAlignment (ref), roact (ref)
 	local var7 = useStyle()
 	local var8 = if fFlagEnableAppChatSnoozeMenuFocus then useTokens() else nil
@@ -56,24 +56,24 @@ return function() --[[ line: 81 ]]
 	}))
 	local var10, var11 = react.useState(false)
 	local var12, var13 = react.useState({})
-	local var14 = react.useCallback(function() --[[ line: 96 ]]
+	local var14 = react.useCallback(function()
 		-- upvalues: var11 (ref)
 		var11(false)
 	end, { var11 })
-	react.useEffect(function() --[[ line: 100 ]]
+	react.useEffect(function()
 		-- upvalues: showNotificationSnoozeMenuSignal (copy), var13 (ref), var11 (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (copy), dismissNotificationSnoozeMenuSignal (copy), var14 (ref)
 		local _ = nil
-		local var17 = showNotificationSnoozeMenuSignal:connect(function(p0) --[[ line: 102 ]]
+		local var17 = showNotificationSnoozeMenuSignal:connect(function(p0)
 			-- upvalues: var13 (copy), var11 (copy)
 			var13(p0)
 			var11(true)
 		end)
-		local var18 = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then dismissNotificationSnoozeMenuSignal:connect(function() --[[ line: 114 ]]
+		local var18 = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then dismissNotificationSnoozeMenuSignal:connect(function()
 			-- upvalues: var14 (copy)
 			var14()
 		end) else nil
 		
-		return function() --[[ line: 119 ]]
+		return function()
 			-- upvalues: var17 (write), getFFlagAppChatInExpToastSnoozeMenuDismissFix (copy), var18 (write)
 			var17:disconnect()
 			
@@ -85,11 +85,11 @@ return function() --[[ line: 81 ]]
 	local var15 = nil
 	
 	if fFlagEnableAppChatSnoozeMenuFocus then
-		var15 = react.useMemo(function() --[[ line: 129 ]]
+		var15 = react.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var14 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p1) --[[ line: 132 ]]
+					handler = inputHandlersModule.onRelease(function(p1)
 						-- upvalues: var14 (copy)
 						var14()
 						p1:cancel()
@@ -97,7 +97,7 @@ return function() --[[ line: 81 ]]
 				}
 			}
 		end, { var14 })
-		react.useEffect(function() --[[ line: 140 ]]
+		react.useEffect(function()
 			-- upvalues: notificationSnoozeMenuVisibleSignal (copy), var10 (ref)
 			notificationSnoozeMenuVisibleSignal:fire({ visible = var10 })
 		end, { var10 })
@@ -109,7 +109,7 @@ return function() --[[ line: 81 ]]
 		AutoButtonColor = false,
 		BackgroundColor3 = colors.Black,
 		BackgroundTransparency = 0.6,
-		onStateChanged = function() --[[ line: 218 ]] end,
+		onStateChanged = function() end,
 		[react.Event.Activated] = var14
 	}, {
 		SnoozeMenu = react.createElement(if fFlagEnableAppChatSnoozeMenuFocus then focusRoot else interactable, if fFlagEnableAppChatSnoozeMenuFocus then {
@@ -134,7 +134,7 @@ return function() --[[ line: 81 ]]
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundColor3 = var7.Theme.BackgroundDefault.Color,
 			BackgroundTransparency = var7.Theme.BackgroundDefault.Transparency,
-			onStateChanged = function() --[[ line: 247 ]] end
+			onStateChanged = function() end
 		}, {
 			UICorner = react.createElement("UICorner", { CornerRadius = UDim.new(0, var7.Tokens.Radius.Large) }),
 			UIListLayout = react.createElement("UIListLayout", {
@@ -194,7 +194,7 @@ return function() --[[ line: 81 ]]
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				SnoozeOptions = roact.createFragment(react.useMemo(function() --[[ line: 147 ]]
+				SnoozeOptions = roact.createFragment(react.useMemo(function()
 					-- upvalues: t_2 (copy), react (copy), fFlagEnableAppChatSnoozeMenuFocus (copy), var8 (ref), var7 (ref), var16 (ref), var9 (ref), colors (copy), var12 (ref), default (copy), var11 (ref)
 					local t = {}
 					
@@ -210,7 +210,7 @@ return function() --[[ line: 81 ]]
 							TextColor3 = colors.White,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Center,
-							[react.Event.Activated] = function() --[[ line: 169 ]]
+							[react.Event.Activated] = function()
 								-- upvalues: var12 (copy), default (copy), v (ref), var9 (copy), var11 (copy)
 								if var12.notificationType then
 									default:snoozeNotification({

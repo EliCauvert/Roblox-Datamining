@@ -2,9 +2,9 @@
 local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function() --[[ line: 7 ]]
+return function()
 	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p0) --[[ line: 8 ]]
+	return function(p0)
 		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy)
 		p0:dispatch(setCentralOverlay(centralOverlayType.LoginPasswordResetPrompt, {}))
 	end

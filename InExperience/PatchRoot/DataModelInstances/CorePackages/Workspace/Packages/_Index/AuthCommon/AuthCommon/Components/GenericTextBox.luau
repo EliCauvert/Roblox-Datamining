@@ -12,15 +12,15 @@ local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlag
 local enableAndroidPasswordSuggestionEngineFeature = game:GetEngineFeature("EnableAndroidPasswordSuggestion")
 genericTextBox.defaultProps = { PaddingX = 0, PaddingY = 0 }
 
-function genericTextBox.render(p0) --[[ line: 27 ]]
+function genericTextBox.render(p0)
 	-- upvalues: getFFlagLuaAppFixSelectionCursor (ref), withSelectionCursorProvider (ref)
-	return if getFFlagLuaAppFixSelectionCursor() then withSelectionCursorProvider(function(p1) --[[ line: 29 ]]
+	return if getFFlagLuaAppFixSelectionCursor() then withSelectionCursorProvider(function(p1)
 		-- upvalues: p0 (ref)
 		return p0:renderWithSelectionCursor(p1)
 	end) else p0:renderWithSelectionCursor(nil)
 end
 
-function genericTextBox.renderWithSelectionCursor(p2, p3) --[[ line: 38 ]]
+function genericTextBox.renderWithSelectionCursor(p2, p3)
 	-- upvalues: getFFlagLuaAppFixSelectionCursor (ref), cursorKind (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), enableAndroidPasswordSuggestionEngineFeature (ref), openTypeSupport (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref)
 	local size = p2.props.Size
 	local position = p2.props.Position
@@ -112,7 +112,7 @@ function genericTextBox.renderWithSelectionCursor(p2, p3) --[[ line: 38 ]]
 			OpenTypeFeatures = userNameStylisticAlternative or nil,
 			RichText = if userNameStylisticAlternative then true else nil,
 			[roactModule.Ref] = textBoxRef,
-			[roactModule.Change.Text] = function(p4) --[[ line: 102 ]]
+			[roactModule.Change.Text] = function(p4)
 				-- upvalues: maxLength (ref), onChangeText (ref)
 				if maxLength then
 					local substring = string.sub(p4.Text, 1, maxLength)

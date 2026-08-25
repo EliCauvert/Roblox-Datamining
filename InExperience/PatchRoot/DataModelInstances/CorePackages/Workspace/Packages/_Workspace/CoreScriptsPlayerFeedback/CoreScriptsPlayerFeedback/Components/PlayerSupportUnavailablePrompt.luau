@@ -35,8 +35,8 @@ local t = {
 }
 local t_1 = { titleKey = "DefaultTitle", bodyKey = "DefaultBody" }
 
-local function _() --[[ line: 99 | named "openAbuseReportPage" ]]
-	pcall(function() --[[ line: 100 ]]
+local function _()
+	pcall(function()
 		local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 		local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
 		local settings = modules and modules:FindFirstChild("Settings") or nil
@@ -51,7 +51,7 @@ local function _() --[[ line: 99 | named "openAbuseReportPage" ]]
 	end)
 end
 
-return reactModule.memo(function(p0) --[[ line: 114 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), useEscapeDismissModule (ref), dialog (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), buttonVariant (ref)
 	local var12 = useTokens()
 	local var13 = useLocalization({
@@ -76,7 +76,7 @@ return reactModule.memo(function(p0) --[[ line: 114 ]]
 		body = var13[var14.bodyKey],
 		hasReportLink = var14.hasReportLink
 	}
-	local var16 = reactModule.useCallback(function() --[[ line: 141 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.closePrompt()
 		
@@ -84,10 +84,10 @@ return reactModule.memo(function(p0) --[[ line: 114 ]]
 			p0.openPlayerSupportPrompt()
 		end
 	end, { p0.closePrompt, p0.openPlayerSupportPrompt })
-	local var17 = reactModule.useCallback(function() --[[ line: 148 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.closePrompt()
-		pcall(function() --[[ line: 100 ]]
+		pcall(function()
 			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 			local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
 			local settings = modules and modules:FindFirstChild("Settings") or nil

@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 6 | named "isShopInstanceVisible" ]]
+﻿return function(p0, p1)
 	local var0 = p1.max - p1.min
 	
 	if var0.X <= 0 or var0.Y <= 0 then

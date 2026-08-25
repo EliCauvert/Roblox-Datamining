@@ -19,7 +19,7 @@ local getFFlagDisableVerifyPhoneViewOnSuccessModule = require(phoneUpsell.Flags.
 local getFFlagFixIosOtpAutofillModule = require(phoneUpsell.Flags.GetFFlagFixIosOtpAutofill)
 local fFlagHomePhoneVerificationUpsellNewCopy = require(parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
 
-local var15 = function() --[[ line: 107 ]] end
+local var15 = function() end
 
 local t = {
 	origin = "",
@@ -37,10 +37,10 @@ local t = {
 	onCancelled = var15,
 	onExtraButtonClick = var15,
 	closeUpsell = var15,
-	showWebpage = function(_) --[[ line: 125 ]] end
+	showWebpage = function(_) end
 }
 
-return function(p0) --[[ line: 128 | named "UpsellContainer" ]]
+return function(p0)
 	-- upvalues: mergePropsModule (ref), t (ref), usePhoneVerificationUpsellPropsModule (ref), reactModule (ref), loading (ref), iconSize (ref), getFFlagPhoneUseParentSizeForScreenSizeModule (ref), roactModule (ref), phoneVerificationUpsellStateModule (ref), entryViewModule (ref), addPhoneViewModule (ref), getFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), verifyPhoneViewModule (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getFFlagFixIosOtpAutofillModule (ref), phoneVerificationStatusOverlayModule (ref)
 	local var17 = mergePropsModule(t, p0)
 	local var18 = usePhoneVerificationUpsellPropsModule(var17)
@@ -48,7 +48,7 @@ return function(p0) --[[ line: 128 | named "UpsellContainer" ]]
 	return reactModule.createElement(if getFFlagPhoneUseParentSizeForScreenSizeModule() then "Frame" else reactModule.Fragment, if getFFlagPhoneUseParentSizeForScreenSizeModule() then {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		[roactModule.Change.AbsoluteSize] = function(p1) --[[ line: 145 ]]
+		[roactModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: var18 (ref)
 			var18.setParentSize(p1.AbsoluteSize)
 		end

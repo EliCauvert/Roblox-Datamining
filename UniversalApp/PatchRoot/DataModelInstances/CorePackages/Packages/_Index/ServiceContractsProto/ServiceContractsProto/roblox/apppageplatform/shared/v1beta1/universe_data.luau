@@ -5,7 +5,7 @@ local _ = require(script.Parent.custom_options)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 95 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		id = if p0 == nil or p0.id == nil then nil else p0.id,
@@ -39,7 +39,7 @@ function t_1.new(p0) --[[ line: 95 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 138 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -218,7 +218,7 @@ function t_1:encode() --[[ line: 138 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 287 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var63 = t_1.new()
 	local var64 = 0
@@ -401,7 +401,7 @@ function t_1.decode(p1) --[[ line: 287 ]]
 	return var63
 end
 
-function t_1:jsonEncode() --[[ line: 465 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil then
@@ -491,7 +491,7 @@ function t_1:jsonEncode() --[[ line: 465 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 583 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var135 = t_1.new()
 	

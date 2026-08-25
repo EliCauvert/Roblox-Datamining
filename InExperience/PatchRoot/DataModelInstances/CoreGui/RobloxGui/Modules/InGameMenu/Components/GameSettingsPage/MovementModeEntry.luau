@@ -33,7 +33,7 @@ movementModeEntry.validateProps = t.strictInterface({
 })
 movementModeEntry.defaultProps = { canOpen = true }
 
-function movementModeEntry.init(p0) --[[ line: 55 ]]
+function movementModeEntry.init(p0)
 	-- upvalues: userGameSettingsService (ref), playerScripts (ref), localPlayer (ref)
 	p0:setState({
 		selectedComputerMode = userGameSettingsService.ComputerMovementMode,
@@ -42,12 +42,12 @@ function movementModeEntry.init(p0) --[[ line: 55 ]]
 	})
 end
 
-function movementModeEntry.render(p1) --[[ line: 63 ]]
+function movementModeEntry.render(p1)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), computerMovementModePropertyChangedSignal (ref), userGameSettingsService (ref), playerScripts (ref), devComputerMovementModePropertyChangedSignal (ref), localPlayer (ref), t_1 (ref), inputLabelModule (ref), withLocalizationModule (ref), t_2 (ref), dropDownSelectionModule (ref), sendAnalyticsModule (ref), constantsModule (ref), developerLockLabelModule (ref)
 	local t = {
 		ComputerMovementModeListener = roact.createElement(externalEventConnectionModule, {
 			event = computerMovementModePropertyChangedSignal,
-			callback = function() --[[ line: 69 ]]
+			callback = function()
 				-- upvalues: p1 (ref), userGameSettingsService (copy)
 				p1:setState({
 					selectedComputerMode = userGameSettingsService.ComputerMovementMode
@@ -56,7 +56,7 @@ function movementModeEntry.render(p1) --[[ line: 63 ]]
 		}),
 		ComputerMovementModeRegisteredListener = playerScripts and roact.createElement(externalEventConnectionModule, {
 			event = playerScripts.ComputerMovementModeRegistered,
-			callback = function() --[[ line: 77 ]]
+			callback = function()
 				-- upvalues: p1 (ref), playerScripts (copy)
 				p1:setState({
 					computerOptions = playerScripts:GetRegisteredComputerMovementModes()
@@ -65,7 +65,7 @@ function movementModeEntry.render(p1) --[[ line: 63 ]]
 		}),
 		DevComputerMovementMode = roact.createElement(externalEventConnectionModule, {
 			event = devComputerMovementModePropertyChangedSignal,
-			callback = function() --[[ line: 85 ]]
+			callback = function()
 				-- upvalues: p1 (ref), localPlayer (copy)
 				p1:setState({
 					developerComputerMode = localPlayer.DevComputerMovementMode
@@ -109,7 +109,7 @@ function movementModeEntry.render(p1) --[[ line: 63 ]]
 		}),
 		Dropdown = withLocalizationModule({
 			placeholder = if var18 then t_2[p1.state.developerComputerMode] else nil
-		})(function(p2) --[[ line: 130 ]]
+		})(function(p2)
 			-- upvalues: roact (copy), dropDownSelectionModule (copy), t_3 (ref), var20 (write), var18 (ref), p1 (ref), userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			return roact.createElement(dropDownSelectionModule, {
 				localize = true,
@@ -122,7 +122,7 @@ function movementModeEntry.render(p1) --[[ line: 63 ]]
 				enabled = not var18,
 				canOpen = p1.props.canOpen,
 				canCaptureFocus = p1.props.canCaptureFocus,
-				selectionChanged = function(p3) --[[ line: 142 ]]
+				selectionChanged = function(p3)
 					-- upvalues: userGameSettingsService (copy), p1 (copy), sendAnalyticsModule (copy), constantsModule (copy)
 					userGameSettingsService.ComputerMovementMode = p1.state.computerOptions[p3]
 					sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)

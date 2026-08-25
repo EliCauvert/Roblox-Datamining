@@ -12,7 +12,7 @@ local t = {
 	Right = UDim2.fromScale(1, 0.5)
 }
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), popover (ref), t (ref), popoverAlign (ref), radius (ref), foundationModule (ref)
 	return reactModule.createElement(popover.Root, { isOpen = p0.isOpen }, {
 		AXTooltipAnchor = reactModule.createElement(popover.Anchor, { Position = t[p0.popoverSide] }),

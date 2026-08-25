@@ -4,11 +4,11 @@ local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 
-local function formatTime(p0) --[[ line: 13 ]]
+local function formatTime(p0)
 	return string.format("%02d:%02d", math.floor(p0 / 60), math.floor(p0 % 60))
 end
 
-return function(p1) --[[ line: 19 | named "TimeDurationOverlay" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), formatTime (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "position-bottom-right anchor-bottom-right padding-bottom-medium padding-right-medium auto-xy",
@@ -20,7 +20,7 @@ return function(p1) --[[ line: 19 | named "TimeDurationOverlay" ]]
 		}, {
 			DurationText = reactModule.createElement(text, {
 				tag = "text-label-small anchor-center-center position-center-center color-content-emphasis",
-				Text = reactModule.useMemo(function() --[[ line: 20 ]]
+				Text = reactModule.useMemo(function()
 					-- upvalues: formatTime (copy), p1 (ref)
 					return formatTime(p1.timeLength)
 				end, { p1.timeLength })

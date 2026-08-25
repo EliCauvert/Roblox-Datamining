@@ -23,7 +23,7 @@ local t = {
 	fillBehavior = fillBehaviorModule.Fit
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | named "SegmentedControl" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), useTokensModule (ref), useSegmentedControlVariantsModule (ref), fillBehaviorModule (ref), reactModule (ref), useAnimatedHighlightModule (ref), viewModule (ref), withCommonPropsModule (ref), dashModule (ref), segmentModule (ref)
 	local var20
 	local var15 = withDefaultsModule(p0, t)
@@ -51,7 +51,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | 
 	local var21 = reactModule.useRef(nil)
 	local _ = nil
 	local var22 = reactModule.useRef({})
-	local var23 = reactModule.useMemo(function() --[[ line: 83 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var22 (ref), var15 (ref), reactModule (copy)
 		local current = var22.current
 		
@@ -70,11 +70,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | 
 	local highlightWidth = var24.highlightWidth
 	local var25, var26 = reactModule.useBinding(Vector2.new(0, 0))
 	local var27 = var26
-	local var28 = reactModule.useCallback(function(p2) --[[ line: 106 ]]
+	local var28 = reactModule.useCallback(function(p2)
 		-- upvalues: var27 (write)
 		var27(p2.AbsoluteSize)
 	end, { var19.container.tag })
-	local var29 = reactModule.useCallback(function(p3) --[[ line: 117 ]]
+	local var29 = reactModule.useCallback(function(p3)
 		-- upvalues: var23 (write), var15 (ref)
 		local var30 = 0
 		
@@ -90,9 +90,9 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | 
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var15, {
 		tag = if flagsModule.FoundationSegmentedControlBeta and var20 then "size-full-0 auto-y" else nil,
-		Size = if flagsModule.FoundationSegmentedControlBeta then if not var20 then var25:map(function(p5) --[[ line: 136 ]]
+		Size = if flagsModule.FoundationSegmentedControlBeta then if not var20 then var25:map(function(p5)
 			return UDim2.fromOffset(p5.X, p5.Y)
-		end) else nil else var25:map(function(p4) --[[ line: 140 ]]
+		end) else nil else var25:map(function(p4)
 			return UDim2.fromOffset(p4.X, p4.Y)
 		end)
 	}), {
@@ -102,14 +102,14 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | 
 			ref = p1 or var21,
 			testId = `{var15.testId}--segments-container`
 		}, {
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p6) --[[ line: 110 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p6)
 				-- upvalues: var15 (ref), var28 (write)
 				if var15.onAbsoluteSizeChanged then
 					var15.onAbsoluteSizeChanged(p6)
 				end
 				var28(p6)
 			end, { var15.onAbsoluteSizeChanged, var28 })
-		}), dashModule.map(var15.segments, function(p7, p8) --[[ line: 155 ]]
+		}), dashModule.map(var15.segments, function(p7, p8)
 			-- upvalues: reactModule (copy), segmentModule (copy), var15 (ref), flagsModule (copy), var16 (ref), var17 (ref), var23 (write)
 			return reactModule.createElement(reactModule.Fragment, { key = tostring(p7.id) }, {
 				Segment = reactModule.createElement(segmentModule, {
@@ -131,10 +131,10 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | 
 		Overlay = reactModule.createElement(viewModule, {
 			tag = var19.segment.tag,
 			backgroundStyle = if flagsModule.FoundationSegmentedControlBeta then var18.Color.Shift.Shift_300 else var18.Color.Shift.Shift_400,
-			Size = reactModule.joinBindings({ highlightWidth, activeItemHeight }):map(function(p9) --[[ line: 182 ]]
+			Size = reactModule.joinBindings({ highlightWidth, activeItemHeight }):map(function(p9)
 				return UDim2.fromOffset(p9[1], p9[2])
 			end),
-			Position = highlightPosition:map(function(p10) --[[ line: 185 ]]
+			Position = highlightPosition:map(function(p10)
 				-- upvalues: var29 (write), p1 (ref), var21 (write)
 				return UDim2.fromOffset(p10, var29(p1 or var21))
 			end),

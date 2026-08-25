@@ -9,12 +9,12 @@ local getConversationTitleModule = require(parent.AppChat.getConversationTitle)
 local getConversationStoreModule = require(parent.AppChat.GetConversationStore)
 local logger = appChatModule.Components.ChatConversation.logger
 
-local function getConversationStore() --[[ line: 29 ]]
+local function getConversationStore()
 	-- upvalues: getConversationStoreModule (ref)
 	return getConversationStoreModule(false)
 end
 
-local function isFriendPlaceholder(p0, p1) --[[ line: 33 ]]
+local function isFriendPlaceholder(p0, p1)
 	-- upvalues: getConversationStoreModule (ref), conversationChannelsModule (ref)
 	if p0 == nil or p0 == "" then
 		return false
@@ -24,7 +24,7 @@ local function isFriendPlaceholder(p0, p1) --[[ line: 33 ]]
 	return if conversation == nil then string.sub(p0, 1, 8) == "friends:" else conversation.source == conversationChannelsModule.Source.Friends
 end
 
-local function markConversationRead(p2, p3) --[[ line: 44 ]]
+local function markConversationRead(p2, p3)
 	-- upvalues: getConversationStoreModule (ref), appChatNetworkingModule (ref), logger (ref)
 	local var15 = getConversationStoreModule(false)
 	local conversation = var15.getConversation(p2, false)
@@ -39,21 +39,21 @@ local function markConversationRead(p2, p3) --[[ line: 44 ]]
 		var17 = true
 	end
 	if var17 then
-		return appChatNetworkingModule.http.MarkConversationRead(nil, p2):catch(function(p4) --[[ line: 63 ]]
+		return appChatNetworkingModule.http.MarkConversationRead(nil, p2):catch(function(p4)
 			-- upvalues: logger (copy), p2 (ref)
 			logger:warning(`Failed to mark conversation read for {p2}: {tostring(p4)}`)
 		end)
 	end
 end
 
-local function removeConversation(p5) --[[ line: 71 ]]
+local function removeConversation(p5)
 	-- upvalues: getConversationStoreModule (ref)
 	getConversationStoreModule(false).removeConversation(p5)
 end
 
-local function _(p6) --[[ line: 75 | named "getMessageTimestamp" ]]
+local function _(p6)
 	if type(p6.created_at) == "string" then
-		local ok, status = pcall(function() --[[ line: 77 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p6 (ref)
 			return DateTime.fromIsoDate(p6.created_at)
 		end)
@@ -62,18 +62,18 @@ local function _(p6) --[[ line: 75 | named "getMessageTimestamp" ]]
 	end
 end
 
-local _ = function(p7) --[[ line: 88 | named "getUnixTime" ]]
+local _ = function(p7)
 	return if p7 == nil then nil elseif typeof(p7) == "DateTime" then p7.UnixTimestamp elseif type(p7) == "table" and p7.GetUnixTimestamp ~= nil then p7:GetUnixTimestamp() else nil
 end
 
-local _ = function(p8) --[[ line: 101 | named "getPreviewContent" ]]
+local _ = function(p8)
 	return p8.preview_content or p8.content
 end
 
-local _ = function(p9) --[[ line: 105 | named "getMessageUnixTime" ]]
+local _ = function(p9)
 	local var19
 	if type(p9.created_at) == "string" then
-		local ok, status = pcall(function() --[[ line: 77 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p9 (ref)
 			return DateTime.fromIsoDate(p9.created_at)
 		end)
@@ -82,7 +82,7 @@ local _ = function(p9) --[[ line: 105 | named "getMessageUnixTime" ]]
 	return if var19 == nil then nil else var19.UnixTimestamp
 end
 
-local _ = function(p10) --[[ line: 110 | named "isPreviewableMessage" ]]
+local _ = function(p10)
 	local var20 = false
 	
 	if p10 ~= nil then
@@ -99,7 +99,7 @@ local _ = function(p10) --[[ line: 110 | named "isPreviewableMessage" ]]
 	return var20
 end
 
-local function getNewestPreviewableMessage(p11) --[[ line: 119 ]]
+local function getNewestPreviewableMessage(p11)
 	local var21 = nil
 	local var22 = nil
 	
@@ -120,7 +120,7 @@ local function getNewestPreviewableMessage(p11) --[[ line: 119 ]]
 		if var23 then
 			local var24
 			if type(v.created_at) == "string" then
-				local ok, status = pcall(function() --[[ line: 77 ]]
+				local ok, status = pcall(function()
 					-- upvalues: v (ref)
 					return DateTime.fromIsoDate(v.created_at)
 				end)
@@ -140,7 +140,7 @@ local function getNewestPreviewableMessage(p11) --[[ line: 119 ]]
 	return var21
 end
 
-local _ = function(p12, p13) --[[ line: 138 | named "shouldUpdatePreview" ]]
+local _ = function(p12, p13)
 	if p13 == nil then
 		return true
 	end
@@ -150,7 +150,7 @@ local _ = function(p12, p13) --[[ line: 138 | named "shouldUpdatePreview" ]]
 	return var26 == nil or var26 <= p13.UnixTimestamp
 end
 
-local _ = function(p14, p15) --[[ line: 151 | named "isUnreadCandidateMessage" ]]
+local _ = function(p14, p15)
 	if p14 == nil or p14.is_badgeable ~= true then
 		return false
 	end
@@ -159,7 +159,7 @@ local _ = function(p14, p15) --[[ line: 151 | named "isUnreadCandidateMessage" ]
 	return if senderUserId == nil then false else p15 == nil or p15.localUserId == nil or tostring(senderUserId) ~= tostring(p15.localUserId)
 end
 
-local function hasNewerUnreadMessage(p16, p17) --[[ line: 172 ]]
+local function hasNewerUnreadMessage(p16, p17)
 	if p17 == nil or p17.hasUnreadMessages ~= true then
 		return false
 	end
@@ -182,7 +182,7 @@ local function hasNewerUnreadMessage(p16, p17) --[[ line: 172 ]]
 		if var28 then
 			local var29
 			if type(v.created_at) == "string" then
-				local ok, status = pcall(function() --[[ line: 77 ]]
+				local ok, status = pcall(function()
 					-- upvalues: v (ref)
 					return DateTime.fromIsoDate(v.created_at)
 				end)
@@ -208,14 +208,14 @@ return {
 	isFriendPlaceholder = isFriendPlaceholder,
 	markConversationRead = markConversationRead,
 	removeConversation = removeConversation,
-	updateConversationPreviewFromMessages = function(p18, p19, p20) --[[ line: 197 ]]
+	updateConversationPreviewFromMessages = function(p18, p19, p20)
 		-- upvalues: getConversationStoreModule (ref), fetchConversationListPageToSignalsModule (ref), logger (ref), hasNewerUnreadMessage (ref), getNewestPreviewableMessage (ref)
 		local var30 = getConversationStoreModule(false)
 		local conversation = var30.getConversation(p18, false)
 		
 		if conversation == nil then
 			if p20 ~= nil and p20.refreshListOnMissingConversation == true then
-				fetchConversationListPageToSignalsModule():catch(function(p21) --[[ line: 206 ]]
+				fetchConversationListPageToSignalsModule():catch(function(p21)
 					-- upvalues: logger (copy)
 					logger:warning(`Failed to refresh conversation list after realtime update: {tostring(p21)}`)
 				end)
@@ -228,7 +228,7 @@ return {
 			if var33 ~= nil then
 				local var34, var35
 				if type(var33.created_at) == "string" then
-					local ok, status = pcall(function() --[[ line: 77 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var33 (ref)
 						return DateTime.fromIsoDate(var33.created_at)
 					end)

@@ -6,19 +6,19 @@ local avatarUtil = require(corePackagesService.Workspace.Packages.CoreScriptsCom
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 13 ]]
+function t.new()
 	-- upvalues: t (ref), avatarUtil (ref), VRService (ref), userGameSettingsService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.avatarUtil = avatarUtil.new()
-	VRService:GetPropertyChangedSignal("AutomaticScaling"):Connect(function() --[[ line: 17 ]]
+	VRService:GetPropertyChangedSignal("AutomaticScaling"):Connect(function()
 		-- upvalues: tbl (ref)
 		tbl:onScalingChanged()
 	end)
-	userGameSettingsService:GetPropertyChangedSignal("PlayerHeight"):Connect(function() --[[ line: 20 ]]
+	userGameSettingsService:GetPropertyChangedSignal("PlayerHeight"):Connect(function()
 		-- upvalues: tbl (ref)
 		tbl:onPlayerHeightChanged()
 	end)
-	VRService.UserCFrameChanged:Connect(function(p0, _) --[[ line: 23 ]]
+	VRService.UserCFrameChanged:Connect(function(p0, _)
 		-- upvalues: tbl (ref)
 		if p0 == Enum.UserCFrame.Floor then
 			tbl:onPlayerHeightChanged()
@@ -29,7 +29,7 @@ function t.new() --[[ line: 13 ]]
 	return tbl
 end
 
-function t:setHeadScale(p1) --[[ line: 35 ]]
+function t:setHeadScale(p1)
 	-- upvalues: VRService (ref), userGameSettingsService (ref)
 	if VRService.AutomaticScaling ~= Enum.VRScaling.World then return end
 	local var6 = self:GetSubjectHeight(p1)
@@ -46,7 +46,7 @@ function t:setHeadScale(p1) --[[ line: 35 ]]
 	end
 end
 
-function t.GetSubjectHeight(_, p2) --[[ line: 64 ]]
+function t.GetSubjectHeight(_, p2)
 	local humanoid = p2:FindFirstChild("Humanoid")
 	
 	if humanoid and humanoid:GetState() == Enum.HumanoidStateType.Dead then return end
@@ -60,20 +60,20 @@ function t.GetSubjectHeight(_, p2) --[[ line: 64 ]]
 	return if humanoid.AutomaticScalingEnabled then var10.Size.Y / 2 + var11 + (var10.Size.Y / 2 + 0.5) + humanoid.CameraOffset.Y else var10.Size.Y / 2 + var11 + 2 + humanoid.CameraOffset.Y
 end
 
-function t:onPlayerHeightChanged() --[[ line: 93 ]]
+function t:onPlayerHeightChanged()
 	-- upvalues: playersService (ref)
 	if playersService.LocalPlayer and playersService.LocalPlayer.Character then
 		self:setHeadScale(playersService.LocalPlayer.Character)
 	end
 end
 
-function t:onScalingChanged() --[[ line: 100 ]]
+function t:onScalingChanged()
 	-- upvalues: VRService (ref)
 	if VRService.AutomaticScaling == Enum.VRScaling.World then
 		if self.characterChangedConnection then
 			return
 		else
-			self.characterChangedConnection = self.avatarUtil:connectLocalCharacterChanges(function(p3) --[[ line: 104 ]]
+			self.characterChangedConnection = self.avatarUtil:connectLocalCharacterChanges(function(p3)
 				-- upvalues: self (ref)
 				self:setHeadScale(p3)
 			end)

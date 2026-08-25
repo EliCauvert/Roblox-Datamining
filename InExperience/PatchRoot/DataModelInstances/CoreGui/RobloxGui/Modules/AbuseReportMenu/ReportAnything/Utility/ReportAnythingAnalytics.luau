@@ -8,7 +8,7 @@ local t = {
 	Context = { LegacyMenu = "ReportAbuseLegacyMenu" }
 }
 
-local _ = function() --[[ line: 33 ]]
+local _ = function()
 	return {
 		previewBackCount = 0,
 		previewAttachCount = 0,
@@ -37,7 +37,7 @@ local t_1 = {
 }
 local var5 = nil
 
-local _ = function() --[[ line: 51 ]]
+local _ = function()
 	-- upvalues: var5 (write), eventIngest (ref), eventIngestService (ref)
 	if not var5 then
 		var5 = eventIngest.new(eventIngestService)
@@ -46,51 +46,51 @@ local _ = function() --[[ line: 51 ]]
 end
 
 return {
-	incrementPreviewBack = function() --[[ line: 59 ]]
+	incrementPreviewBack = function()
 		-- upvalues: t_1 (write)
 		t_1.previewBackCount += 1
 	end,
-	incrementPreviewAttach = function() --[[ line: 62 ]]
+	incrementPreviewAttach = function()
 		-- upvalues: t_1 (write)
 		t_1.previewAttachCount += 1
 	end,
-	incrementRetake = function() --[[ line: 65 ]]
+	incrementRetake = function()
 		-- upvalues: t_1 (write)
 		t_1.retakeCount += 1
 	end,
-	setRetakeAbandon = function() --[[ line: 68 ]]
+	setRetakeAbandon = function()
 		-- upvalues: t_1 (write)
 		t_1.retakeAbandon = true
 	end,
-	incrementHighlightScene = function() --[[ line: 71 ]]
+	incrementHighlightScene = function()
 		-- upvalues: t_1 (write)
 		t_1.highlightSceneCount += 1
 	end,
-	incrementAnnotationBack = function() --[[ line: 74 ]]
+	incrementAnnotationBack = function()
 		-- upvalues: t_1 (write)
 		t_1.annotationBackCount += 1
 	end,
-	incrementAnnotationPlace = function() --[[ line: 77 ]]
+	incrementAnnotationPlace = function()
 		-- upvalues: t_1 (write)
 		t_1.annotationPlaceCount += 1
 	end,
-	incrementAnnotationUndo = function() --[[ line: 80 ]]
+	incrementAnnotationUndo = function()
 		-- upvalues: t_1 (write)
 		t_1.annotationUndoCount += 1
 	end,
-	incrementAnnotationRedo = function() --[[ line: 83 ]]
+	incrementAnnotationRedo = function()
 		-- upvalues: t_1 (write)
 		t_1.annotationRedoCount += 1
 	end,
-	setAnnotationNext = function() --[[ line: 86 ]]
+	setAnnotationNext = function()
 		-- upvalues: t_1 (write)
 		t_1.annotationNext = true
 	end,
-	getAccumulatedParameters = function() --[[ line: 90 ]]
+	getAccumulatedParameters = function()
 		-- upvalues: t_1 (write)
 		return t_1
 	end,
-	emitAvatarsIdentifiedStats = function(p0) --[[ line: 93 ]]
+	emitAvatarsIdentifiedStats = function(p0)
 		-- upvalues: cryoModule (ref), var5 (write), eventIngest (ref), eventIngestService (ref), t (ref)
 		local var6 = cryoModule.Dictionary.join(p0, { duration = p0.duration * 1000000 })
 		
@@ -99,7 +99,7 @@ return {
 		end
 		var5:sendEventDeferred(t.Context.LegacyMenu, t.EventType.AvatarsIdentified, var6)
 	end,
-	clear = function() --[[ line: 103 ]]
+	clear = function()
 		-- upvalues: t_1 (write)
 		t_1 = {
 			previewBackCount = 0,

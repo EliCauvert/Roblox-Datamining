@@ -21,7 +21,7 @@ local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
 local formatNumberModule = require(parent.Utility.formatNumber)
 local robux = images["icons/common/robux"]
 
-local function renderWithProviders(p0, p1, p2, p3, _, p4) --[[ line: 59 ]]
+local function renderWithProviders(p0, p1, p2, p3, _, p4)
 	-- upvalues: roactModule (ref), skeleton (ref), roactGamepadModule (ref), imageSetButton (ref), imageSetLabel (ref), fitFrameHorizontal (ref), robux (ref), fitTextLabel (ref), formatNumberModule (ref), localizationService (ref)
 	if p0.robuxAmount == nil then
 		return roactModule.createElement("Frame", {
@@ -52,28 +52,28 @@ local function renderWithProviders(p0, p1, p2, p3, _, p4) --[[ line: 59 ]]
 		NextSelectionLeft = p0.nextSelectionLeft,
 		NextSelectionRight = p0.nextSelectionRight,
 		inputBindings = {
-			Activated = if p0.onActivated ~= nil then nil else roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ line: 99 ]]
+			Activated = if p0.onActivated ~= nil then nil else roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
 				-- upvalues: p0 (ref)
 				p0.onActivated(p0.packageId)
 			end)
 		},
-		[roactModule.Event.Activated] = function() --[[ line: 104 ]]
+		[roactModule.Event.Activated] = function()
 			-- upvalues: p0 (ref)
 			p0.onActivated(p0.packageId)
 		end,
-		[roactModule.Event.MouseMoved] = function() --[[ line: 107 ]]
+		[roactModule.Event.MouseMoved] = function()
 			-- upvalues: p0 (ref)
 			p0.onHover(p0.forwardRef, true)
 		end,
-		[roactModule.Event.MouseEnter] = function() --[[ line: 110 ]]
+		[roactModule.Event.MouseEnter] = function()
 			-- upvalues: p0 (ref)
 			p0.onHover(p0.forwardRef, true)
 		end,
-		[roactModule.Event.MouseLeave] = function() --[[ line: 113 ]]
+		[roactModule.Event.MouseLeave] = function()
 			-- upvalues: p0 (ref)
 			p0.onHover(p0.forwardRef, false)
 		end,
-		[roactModule.Event.SelectionGained] = function() --[[ line: 116 ]]
+		[roactModule.Event.SelectionGained] = function()
 			-- upvalues: p0 (ref)
 			p0.onSelect(p0.forwardRef)
 		end
@@ -178,7 +178,7 @@ local function renderWithProviders(p0, p1, p2, p3, _, p4) --[[ line: 59 ]]
 	})
 end
 
-return function(p5) --[[ line: 242 ]]
+return function(p5)
 	-- upvalues: useCursor (ref), useTokens (ref), useStyleMetadata (ref), roactModule (ref), multiTextLocalizerModule (ref), formatNumberModule (ref), localizationService (ref), withStyle (ref), renderWithProviders (ref)
 	local var10 = useCursor(UDim.new(0, 8))
 	local var11 = useTokens()
@@ -193,9 +193,9 @@ return function(p5) --[[ line: 242 ]]
 				}
 			}
 		},
-		render = function(p6) --[[ line: 258 ]]
+		render = function(p6)
 			-- upvalues: withStyle (copy), p5 (ref), renderWithProviders (copy), var10 (ref), themeName (ref), var11 (ref)
-			return withStyle(function(p7) --[[ line: 259 ]]
+			return withStyle(function(p7)
 				-- upvalues: p5 (copy), renderWithProviders (copy), p6 (ref), var10 (copy), themeName (copy), var11 (copy)
 				if p5.scale == nil then
 					p5.scale = 0.65

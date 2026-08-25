@@ -10,11 +10,11 @@ local interactable = UIBloxModule.Core.Control.Interactable
 local t = {
 	bodyText = "Chat Disabled",
 	defaultCountdownString = "",
-	onActivated = function() --[[ line: 27 ]] end,
+	onActivated = function() end,
 	contentVerticalAlignment = Enum.VerticalAlignment.Top
 }
 
-return function(p0) --[[ line: 31 | named "ChatInputBoxDisabled" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useCountdownBinding (ref), reactModule (ref), interactable (ref), imageSetLabel (ref), images (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	local var6 = foundationModule.Hooks.useTokens()

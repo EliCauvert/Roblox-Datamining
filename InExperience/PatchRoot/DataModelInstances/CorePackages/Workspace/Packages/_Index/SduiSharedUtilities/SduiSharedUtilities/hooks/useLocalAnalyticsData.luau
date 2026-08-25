@@ -1,8 +1,8 @@
 ﻿local reactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
 
-return function(p0, p1, p2) --[[ line: 5 | named "useLocalAnalyticsData" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function() --[[ line: 6 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p2 (ref), p0 (ref), p1 (ref)
 		local var1 = p2 or {}
 		var1.configKey = p0

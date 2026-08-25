@@ -2,10 +2,10 @@
 local constantsModule = require(crossExperience.Constants)
 local observeCurrentContextIdModule = require(crossExperience.Utils.observeCurrentContextId)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: observeCurrentContextIdModule (ref), constantsModule (ref)
 	local var3 = nil
-	observeCurrentContextIdModule(function(p1) --[[ line: 8 ]]
+	observeCurrentContextIdModule(function(p1)
 		-- upvalues: constantsModule (copy), var3 (write), p0 (ref)
 		local var4 = p1 == constantsModule.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 		

@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-return function(p0, p1) --[[ line: 3 ]]
+return function(p0, p1)
 	-- upvalues: t (ref)
 	if t[p0] then
 		return

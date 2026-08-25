@@ -19,9 +19,9 @@ local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 
-local function noop() --[[ line: 47 ]] end
+local function noop() end
 
-local function _() --[[ line: 49 | named "getAnalyticsFields" ]]
+local function _()
 	-- upvalues: playersService (ref)
 	return {
 		userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
@@ -29,7 +29,7 @@ local function _() --[[ line: 49 | named "getAnalyticsFields" ]]
 	}
 end
 
-return function(p0, p1, p2) --[[ line: 56 | named "useMomentsHeaderViewModel" ]]
+return function(p0, p1, p2)
 	-- upvalues: useTokens (ref), useDeviceInsets (ref), useSetDrawerVisible (ref), useIsTvRemoteDevice (ref), fFlagMomentsUseCompositionLibraryModule (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useCompositionLayout (ref), useStatusBarHeight (ref), noop (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), playersService (ref), getFFlagMomentsAndroidTvEnabledModule (ref)
 	local var10 = useTokens()
 	local var11 = useDeviceInsets()
@@ -48,7 +48,7 @@ return function(p0, p1, p2) --[[ line: 56 | named "useMomentsHeaderViewModel" ]]
 	local var18 = p0.showFtuxTooltip == true
 	local onFtuxTooltipDismissed = p0.onFtuxTooltipDismissed or noop
 	local onCreatePressed = p0.onCreatePressed or noop
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), fireAnalyticsEvent (copy), eventNames (copy), playersService (copy)
 		if var18 then
 			fireAnalyticsEvent(eventNames.FTUXTooltipImpression, {
@@ -57,7 +57,7 @@ return function(p0, p1, p2) --[[ line: 56 | named "useMomentsHeaderViewModel" ]]
 			})
 		end
 	end, { var18 })
-	local var21 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), playersService (copy), onFtuxTooltipDismissed (ref)
 		fireAnalyticsEvent(eventNames.FTUXTooltipDismissed, {
 			userId = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0),
@@ -71,7 +71,7 @@ return function(p0, p1, p2) --[[ line: 56 | named "useMomentsHeaderViewModel" ]]
 		layoutOrder = if p1 then nil else p0.layoutOrder,
 		variant = p0.variant,
 		showFtuxTooltip = var18,
-		onCreateMomentButtonPressed = reactModule.useCallback(function() --[[ line: 90 ]]
+		onCreateMomentButtonPressed = reactModule.useCallback(function()
 			-- upvalues: var18 (ref), var21 (ref), onCreatePressed (ref)
 			if var18 then
 				var21()
@@ -79,7 +79,7 @@ return function(p0, p1, p2) --[[ line: 56 | named "useMomentsHeaderViewModel" ]]
 			onCreatePressed()
 		end, { var18, var21, onCreatePressed }),
 		onFtuxTooltipClosed = var21,
-		onHamburgerPressed = reactModule.useCallback(function() --[[ line: 97 ]]
+		onHamburgerPressed = reactModule.useCallback(function()
 			-- upvalues: var12 (ref)
 			var12(true)
 		end, { var12 }),

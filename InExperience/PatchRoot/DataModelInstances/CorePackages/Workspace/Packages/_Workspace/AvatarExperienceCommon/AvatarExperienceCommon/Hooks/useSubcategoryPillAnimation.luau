@@ -2,21 +2,21 @@
 local reactModule = require(avatarExperienceCommon.Parent.React)
 local animationConstantsModule = require(avatarExperienceCommon.AnimationConstants)
 
-return function(p0) --[[ line: 15 | named "useSubcategoryPillAnimation" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), animationConstantsModule (ref)
 	local var3, var4 = reactModule.useState({})
 	local var5 = reactModule.useRef(nil)
 	local var6, var7 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 22 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref)
-		return function() --[[ line: 23 ]]
+		return function()
 			-- upvalues: var5 (copy)
 			if var5.current then
 				task.cancel(var5.current)
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var5 (ref), var4 (ref), var7 (ref), animationConstantsModule (copy)
 		local var8 = if p0 and p0.Subcategories then p0.Subcategories else {}
 		
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 15 | named "useSubcategoryPillAnimation" ]]
 		else
 			var7(true)
 		end
-		var5.current = task.delay(animationConstantsModule.FIntAXSubcategoryPillFadeAnimationDurationMs / 1000, function() --[[ line: 54 ]]
+		var5.current = task.delay(animationConstantsModule.FIntAXSubcategoryPillFadeAnimationDurationMs / 1000, function()
 			-- upvalues: var8 (ref), var4 (copy), var7 (copy), var5 (copy)
 			if not next(var8) then
 				var4({})

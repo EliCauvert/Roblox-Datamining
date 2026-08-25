@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function() --[[ line: 26 | named "createProximityStore" ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local t = {}
 	local t_1 = {
@@ -8,12 +8,12 @@ return function() --[[ line: 26 | named "createProximityStore" ]]
 		isInsideMaximizeDistance = false
 	}
 	
-	local function _(p0) --[[ line: 38 | named "getKey" ]]
+	local function _(p0)
 		return tostring(p0)
 	end
 	
 	return {
-		getUserProximityState = function(p1) --[[ line: 42 ]]
+		getUserProximityState = function(p1)
 			-- upvalues: t (ref), createSignal (copy), t_1 (ref)
 			local var2 = tostring(p1)
 			
@@ -23,7 +23,7 @@ return function() --[[ line: 26 | named "createProximityStore" ]]
 			end
 			return t[var2].getter
 		end,
-		updateProximity = function(p2, p3, p4) --[[ line: 51 ]]
+		updateProximity = function(p2, p3, p4)
 			-- upvalues: t (ref), createSignal (copy), t_1 (ref)
 			local var5 = tostring(p2)
 			
@@ -41,7 +41,7 @@ return function() --[[ line: 26 | named "createProximityStore" ]]
 				isInsideMaximizeDistance = p4
 			})
 		end,
-		removeUser = function(p5) --[[ line: 67 ]]
+		removeUser = function(p5)
 			-- upvalues: t (ref), t_1 (ref)
 			local var9 = tostring(p5)
 			

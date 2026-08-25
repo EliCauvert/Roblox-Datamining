@@ -13,11 +13,11 @@ local galleryItemModule = require(parent.Components.CapturesGallery.GalleryItem)
 local showMoreButtonModule = require(parent.Components.Common.ShowMoreButton)
 local _ = require(parent.Types)
 
-local function _(p0) --[[ line: 40 | named "getItemsPerRow" ]]
+local function _(p0)
 	return math.clamp(math.floor(p0 / 120), 1, 4)
 end
 
-local _ = function(p1, p2) --[[ line: 44 | named "getGalleryItemSize" ]]
+local _ = function(p1, p2)
 	local clampedValue = math.clamp(math.floor(p2 / 120), 1, 4)
 	p2 -= 4 * (clampedValue - 1)
 	local minValue = math.min(p2 / clampedValue, p2)
@@ -25,7 +25,7 @@ local _ = function(p1, p2) --[[ line: 44 | named "getGalleryItemSize" ]]
 	return Vector2.new(math.floor(minValue), math.floor(minValue * p1))
 end
 
-local _ = function(p3, p4, p5) --[[ line: 54 | named "getItemsPerPage" ]]
+local _ = function(p3, p4, p5)
 	if p3 <= 0 then
 		return 0
 	end
@@ -37,12 +37,12 @@ local _ = function(p3, p4, p5) --[[ line: 54 | named "getItemsPerPage" ]]
 	return math.max(floored * math.clamp(math.floor(p4 / 120), 1, 4), 8)
 end
 
-local function renderGalleryItem(p6, p7) --[[ line: 69 ]]
+local function renderGalleryItem(p6, p7)
 	-- upvalues: reactModule (ref), galleryItemModule (ref)
 	return reactModule.createElement(galleryItemModule, { capture = p6, captureIndex = p7 })
 end
 
-return function(p8) --[[ line: 76 ]]
+return function(p8)
 	-- upvalues: reactModule (ref), useScreenSize (ref), useEffectOnce (ref), dashModule (ref), galleryActionContainerModule (ref), gridView (ref), renderGalleryItem (ref), showMoreButtonModule (ref)
 	local var28
 	local var12, var13 = reactModule.useState(Vector2.new(0, 0))
@@ -50,7 +50,7 @@ return function(p8) --[[ line: 76 ]]
 	local var16 = useScreenSize()
 	local var17 = var14 < #p8.captures
 	local var18 = var12.X > 0 and var12.Y > 0
-	local var19 = reactModule.useCallback(function(p9) --[[ line: 84 ]]
+	local var19 = reactModule.useCallback(function(p9)
 		-- upvalues: var13 (ref)
 		var13(p9.AbsoluteSize)
 	end, {})
@@ -94,11 +94,11 @@ return function(p8) --[[ line: 76 ]]
 			var28 = math.max(floored * math.clamp(math.floor(var33 / 120), 1, 4), 8)
 		end
 	end
-	useEffectOnce(function() --[[ line: 106 ]]
+	useEffectOnce(function()
 		-- upvalues: var15 (ref), var28 (write)
 		var15(var28)
 	end, var28 ~= 0)
-	reactModule.useEffect(function() --[[ line: 110 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), var28 (write), var15 (ref)
 		if var14 < var28 then
 			var15(var28)
@@ -142,7 +142,7 @@ return function(p8) --[[ line: 76 ]]
 			GridView = var18 and reactModule.createElement(gridView, {
 				LayoutOrder = 1,
 				itemPadding = Vector2.new(4, 4),
-				items = reactModule.useMemo(function() --[[ line: 120 ]]
+				items = reactModule.useMemo(function()
 					-- upvalues: p8 (ref), var14 (ref), dashModule (copy)
 					return dashModule.slice(p8.captures, 1, math.min(#p8.captures, var14))
 				end, { p8.captures, var14 }),
@@ -152,7 +152,7 @@ return function(p8) --[[ line: 76 ]]
 			ShowMoreButton = var17 and reactModule.createElement(showMoreButtonModule, {
 				LayoutOrder = 2,
 				buttonHeight = 40,
-				onActivated = reactModule.useCallback(function() --[[ line: 116 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var15 (ref), var14 (ref), var28 (write)
 					var15(var14 + var28)
 				end, { var14, var28 })

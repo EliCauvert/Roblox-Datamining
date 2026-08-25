@@ -5,66 +5,66 @@ local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceD
 local fFlagLuaAppSduiOpenSearchResultsWithQueryAction = sharedFlagsModule.FFlagLuaAppSduiOpenSearchResultsWithQueryAction
 local fFlagLuaAppSduiQuerySuggestionClickedTelemetry = sharedFlagsModule.FFlagLuaAppSduiQuerySuggestionClickedTelemetry
 
-return function() --[[ line: 12 | named "registerDiscoveryActionTelemetryHandlers" ]]
+return function()
 	-- upvalues: getSduiTelemetryHandlerNameRegistry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppSduiQuerySuggestionClickedTelemetry (ref)
 	getSduiTelemetryHandlerNameRegistry().registerTelemetryHandlers({
 		LeavingRoblox = {
-			lazyHandler = function() --[[ line: 15 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiLeavingRobloxTelemetryHandler)
 			end
 		},
 		SocialLinkClick = {
-			lazyHandler = function() --[[ line: 20 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiOpenSocialLinkProfileTelemetryHandler)
 			end
 		},
 		EventJoined = {
-			lazyHandler = function() --[[ line: 25 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiEventJoinedTelemetryHandler)
 			end
 		},
 		ShareEventIconClicked = {
-			lazyHandler = function() --[[ line: 30 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiShareEventTelemetryHandler)
 			end
 		},
 		RequestRefundClick = if fFlagSduiExperienceDetailsSupport then {
-			lazyHandler = function() --[[ line: 36 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiRequestRefundClickTelemetryHandler)
 			end
 		} else nil,
 		EdpStoreItemClick = if fFlagSduiExperienceDetailsSupport then {
-			lazyHandler = function() --[[ line: 43 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiEdpStoreItemClickTelemetryHandler)
 			end
 		} else nil,
 		ExperienceDetailsJoinFriends = if fFlagSduiExperienceDetailsSupport then {
-			lazyHandler = function() --[[ line: 50 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiExperienceDetailsJoinFriendsTelemetryHandler)
 			end
 		} else nil,
 		ExperienceDetailsCreatePrivateServer = if fFlagSduiExperienceDetailsSupport then {
-			lazyHandler = function() --[[ line: 57 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiExperienceDetailsCreatePrivateServerTelemetryHandler)
 			end
 		} else nil,
 		EdpStorePurchaseAttempt = {
-			lazyHandler = function() --[[ line: 63 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiEdpStorePurchaseAttemptTelemetryHandler)
 			end
 		},
 		GameDetailsSubpage = if fFlagSduiExperienceDetailsSupport then {
-			lazyHandler = function() --[[ line: 69 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiGameDetailsSubpageTelemetryHandler)
 			end
 		} else nil,
 		OpenSearchResultsWithQueryEdp = if fFlagLuaAppSduiOpenSearchResultsWithQueryAction then {
-			lazyHandler = function() --[[ line: 76 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiOpenSearchResultsWithQueryEdpTelemetryHandler)
 			end
 		} else nil,
 		QuerySuggestionClicked = if fFlagLuaAppSduiQuerySuggestionClickedTelemetry then {
-			lazyHandler = function() --[[ line: 83 ]]
+			lazyHandler = function()
 				return require(script.Parent.SduiQuerySuggestionClickedTelemetryHandler)
 			end
 		} else nil

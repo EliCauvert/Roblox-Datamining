@@ -15,7 +15,7 @@ local t = {
 	size = require(foundation.Enums.InputSize).Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | named "Composer" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), composerTextInputModule (ref)
 	local var8 = withDefaultsModule(p0, t)
 	local var9 = useTokensModule()
@@ -28,7 +28,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 		hasError = var8.hasError,
 		isDisabled = var8.trailingElement ~= nil and var8.isDisabled,
 		isRequired = var8.isRequired,
-		input = function(p2) --[[ line: 54 ]]
+		input = function(p2)
 			-- upvalues: reactModule (copy), composerTextInputModule (copy), var8 (ref), var9 (ref), var10 (ref)
 			return reactModule.createElement(composerTextInputModule, {
 				alwaysMultiLine = true,

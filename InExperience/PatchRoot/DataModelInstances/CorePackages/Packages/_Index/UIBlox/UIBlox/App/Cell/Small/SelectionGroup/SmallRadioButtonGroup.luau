@@ -29,12 +29,12 @@ smallRadioButtonGroup.validateProps = tModule.strictInterface({
 })
 smallRadioButtonGroup.defaultProps = { selectedValue = nil, isRoactGamepadEnabled = true }
 
-function smallRadioButtonGroup.init(p0) --[[ line: 65 ]]
+function smallRadioButtonGroup.init(p0)
 	-- upvalues: roactGamepadModule (ref)
 	p0.gamepadRefs = p0.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
 end
 
-function smallRadioButtonGroup.renderButtonCell(p1, p2, p3, p4) --[[ line: 69 ]]
+function smallRadioButtonGroup.renderButtonCell(p1, p2, p3, p4)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref), smallRadioButtonCellModule (ref)
 	return roactModule.createElement(if p4 then roactGamepadModule.Focusable[smallRadioButtonCellModule] else smallRadioButtonCellModule, {
 		id = p2.id,
@@ -51,7 +51,7 @@ function smallRadioButtonGroup.renderButtonCell(p1, p2, p3, p4) --[[ line: 69 ]]
 	})
 end
 
-function smallRadioButtonGroup.render(p5) --[[ line: 89 ]]
+function smallRadioButtonGroup.render(p5)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref)
 	assert(p5.validateProps(p5.props))
 	local t = {
@@ -83,7 +83,7 @@ function smallRadioButtonGroup.render(p5) --[[ line: 89 ]]
 	}, t)
 end
 
-return roactModule.forwardRef(function(p6, p7) --[[ line: 121 ]]
+return roactModule.forwardRef(function(p6, p7)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), smallRadioButtonGroup (ref), cryoModule (ref)
 	return roactModule.createElement(smallRadioButtonGroup, cryoModule.Dictionary.join(p6, {
 		frameRef = p7,

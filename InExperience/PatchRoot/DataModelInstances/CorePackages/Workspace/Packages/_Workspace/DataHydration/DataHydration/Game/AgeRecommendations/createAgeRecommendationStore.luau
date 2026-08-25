@@ -12,13 +12,13 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 
-return function() --[[ line: 20 | named "createAgeRecommendationStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchAgeRecommendationModule (ref), ageRecommendationStoreTypesModule (ref), fFlagShowGameAgeRating (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local var7 = createDataCacheModule()
 	local var8 = createDataResolverModule({
 		requestBatchSize = 1,
 		cache = var7,
-		logError = function(p0) --[[ line: 27 ]]
+		logError = function(p0)
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
 			if type(p0) == "table" then
 				if p0.responseCode then
@@ -33,7 +33,7 @@ return function() --[[ line: 20 | named "createAgeRecommendationStore" ]]
 				discoveryEventErrorLogger.reportError("FetchAgeRecommendationError", tostring(p0))
 			end
 		end,
-		fetchFn = function(p1) --[[ line: 47 ]]
+		fetchFn = function(p1)
 			-- upvalues: fetchAgeRecommendationModule (copy), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
 			local var9 = next(p1)
 			
@@ -44,7 +44,7 @@ return function() --[[ line: 20 | named "createAgeRecommendationStore" ]]
 					customFields = { universeId = var9 }
 				})
 			end
-			return fetchAgeRecommendationModule(var9):andThen(function(p3) --[[ line: 59 ]]
+			return fetchAgeRecommendationModule(var9):andThen(function(p3)
 				-- upvalues: var9 (ref), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
 				if not p3 or not p3.responseBody then
 					error({
@@ -81,7 +81,7 @@ return function() --[[ line: 20 | named "createAgeRecommendationStore" ]]
 				}
 				
 				return t
-			end):catch(function(p2) --[[ line: 104 ]]
+			end):catch(function(p2)
 				error(p2)
 			end)
 		end

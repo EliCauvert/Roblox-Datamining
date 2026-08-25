@@ -1,5 +1,5 @@
 ﻿return {
-	getCenterOffsetX = function(value) --[[ line: 42 ]]
+	getCenterOffsetX = function(value)
 		local var0 = value.containerPosition + value.ratio * value.containerWidth
 		local var1 = value.insetLeft + value.margin
 		local var2 = value.screenWidth - value.insetRight - value.margin

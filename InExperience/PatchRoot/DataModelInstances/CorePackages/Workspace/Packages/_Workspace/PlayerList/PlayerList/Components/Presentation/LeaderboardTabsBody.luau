@@ -7,7 +7,7 @@ local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibili
 local leaderboardTabsModule = require(parent.Components.Presentation.LeaderboardTabs)
 local platformLeaderboardViewModule = require(parent.Components.Presentation.PlatformLeaderboardView)
 
-return reactModule.memo(function(value) --[[ line: 32 | named "LeaderboardTabsBody" ]]
+return reactModule.memo(function(value)
 	-- upvalues: playerListVisibilityStoreModule (ref), signalsReactModule (ref), reactModule (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		LeaderboardTabs = reactModule.createElement(leaderboardTabsModule, {

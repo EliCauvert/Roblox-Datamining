@@ -17,11 +17,11 @@ local streamNotificationSettingsExperimentationModule = require(streamNotificati
 local streamNotificationSettingsActivationModule = require(streamNotifications.StreamNotificationSettingsActivation)
 local fFlagStreamNotificationUXSettingsHeader = require(parent.SharedFlags).FFlagStreamNotificationUXSettingsHeader
 
-local function _(value, p0) --[[ line: 30 | named "getSettingsButtonSize" ]]
+local function _(value, p0)
 	return value - p0 * 2
 end
 
-return function(p1) --[[ line: 34 ]]
+return function(p1)
 	-- upvalues: useStyle (ref), userInputService (ref), useLocalization (ref), constantsModule (ref), streamNotificationDropdownExperimentationModule (ref), fFlagStreamNotificationUXSettingsHeader (ref), useDispatch (ref), streamNotificationSettingsExperimentationModule (ref), streamNotificationSettingsActivationModule (ref), reactModule (ref), iconButton (ref), iconSize (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref)
 	local var9 = useStyle()
 	local font = var9.Font
@@ -33,7 +33,7 @@ return function(p1) --[[ line: 34 ]]
 	local _ = nil
 	local settingsGearEnabled = false
 	
-	local var15 = function() --[[ line: 51 ]] end
+	local var15 = function() end
 	
 	if fFlagStreamNotificationUXSettingsHeader then
 		settingsGearEnabled = streamNotificationSettingsExperimentationModule.getSettingsGearEnabled()
@@ -85,7 +85,7 @@ return function(p1) --[[ line: 34 ]]
 				icon = if p1.isSmallScreen then constantsModule.Modal.BackIcon else constantsModule.Modal.CloseIcon,
 				size = UDim2.new(0, constantsModule.Modal.HeaderHeight - constantsModule.Modal.Padding * 2, 0, constantsModule.Modal.HeaderHeight - constantsModule.Modal.Padding * 2),
 				position = UDim2.fromOffset(constantsModule.Modal.Padding, constantsModule.Modal.Padding),
-				onActivated = function() --[[ line: 121 ]]
+				onActivated = function()
 					-- upvalues: p1 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy)
 					p1.displayStream(false)
 					notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.closeContent, {

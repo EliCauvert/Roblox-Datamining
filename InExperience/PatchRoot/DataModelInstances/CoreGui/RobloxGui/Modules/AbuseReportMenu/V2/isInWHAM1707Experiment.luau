@@ -5,12 +5,12 @@ local getFFlagWHAM1707ExperimentForceEnabledModule = require(abuseReportMenu.Fla
 local fStringWHAM1707IXPFieldModule = require(abuseReportMenu.Flags.FStringWHAM1707IXPField)
 local fStringEARReportMenuIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringEARReportMenuIXPLayer
 
-return function() --[[ line: 13 ]]
+return function()
 	-- upvalues: getFFlagWHAM1707ExperimentForceEnabledModule (ref), IXPService (ref), fStringEARReportMenuIXPLayer (ref), fStringWHAM1707IXPFieldModule (ref)
 	if getFFlagWHAM1707ExperimentForceEnabledModule() then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 18 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringEARReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringEARReportMenuIXPLayer)
 	end)

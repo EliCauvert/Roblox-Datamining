@@ -9,13 +9,13 @@ local useTokens = foundationModule.Hooks.useTokens
 local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 local cryoModule = require(parent.Cryo)
 
-return function(p0) --[[ line: 21 | named "ItemDetailsLayout" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), cryoModule (ref), viewTypeModule (ref), foundationModule (ref), itemDetailsViewModule (ref), buyActionBarLayoutModule (ref)
 	local var7 = useTokens()
 	local size2700 = var7.Size.Size_2700
 	
 	return reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
-		ItemDetailsView = reactModule.createElement(itemDetailsViewModule, reactModule.useMemo(function() --[[ line: 27 ]]
+		ItemDetailsView = reactModule.createElement(itemDetailsViewModule, reactModule.useMemo(function()
 			-- upvalues: cryoModule (copy), p0 (ref), size2700 (ref)
 			return cryoModule.Dictionary.join(p0.itemDetailsViewProps, { buyActionBarOffset = size2700 })
 		end, { p0.itemDetailsViewProps, size2700 })),

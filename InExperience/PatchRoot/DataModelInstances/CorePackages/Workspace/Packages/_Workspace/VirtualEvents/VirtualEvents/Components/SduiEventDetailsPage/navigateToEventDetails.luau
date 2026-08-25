@@ -3,7 +3,7 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
 local fetchEventDetailsPageModule = require(script.Parent.fetchEventDetailsPage)
 
-return function(p0, p1, p2) --[[ line: 15 | named "navigateToEventDetails" ]]
+return function(p0, p1, p2)
 	-- upvalues: sduiLoadTimer (ref), appPage (ref), fetchEventDetailsPageModule (ref)
 	local var1 = sduiLoadTimer.createLoadTimer(appPage.EventDetails)
 	var1.start("navigate")

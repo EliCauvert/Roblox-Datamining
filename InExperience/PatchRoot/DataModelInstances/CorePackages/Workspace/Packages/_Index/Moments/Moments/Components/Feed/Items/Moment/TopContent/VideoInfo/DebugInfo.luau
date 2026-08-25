@@ -10,9 +10,9 @@ local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local useSignalState = signalsReactModule.useSignalState
 
-local function noop() --[[ line: 26 ]] end
+local function noop() end
 
-return reactModule.memo(function(p0) --[[ line: 32 | named "DebugInfo" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getMomentsPreferencesStoreModule (ref), useSignalState (ref), momentContextModule (ref), reactModule (ref), view (ref), textInput (ref), noop (ref), inputSize (ref)
 	local var7 = momentContextModule.useMoment()
 	

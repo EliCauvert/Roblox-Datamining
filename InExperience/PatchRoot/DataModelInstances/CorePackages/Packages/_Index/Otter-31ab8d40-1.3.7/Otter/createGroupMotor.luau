@@ -6,7 +6,7 @@ local _ = require(script.Parent.types)
 local t = {}
 t.__index = t
 
-local function createGroupMotor(p0) --[[ line: 53 ]]
+local function createGroupMotor(p0)
 	-- upvalues: createSignal (ref), t (ref)
 	local t_1 = {}
 	
@@ -30,10 +30,10 @@ local function createGroupMotor(p0) --[[ line: 53 ]]
 	return t_2
 end
 
-function t.start(p1, p2) --[[ line: 82 ]]
+function t.start(p1, p2)
 	-- upvalues: animationStepSignalModule (ref)
 	if p1.__running then return end
-	p1.__connection = animationStepSignalModule:Connect(function(p3) --[[ line: 87 ]]
+	p1.__connection = animationStepSignalModule:Connect(function(p3)
 		-- upvalues: p1 (ref)
 		p1:step(p3)
 	end)
@@ -44,14 +44,14 @@ function t.start(p1, p2) --[[ line: 82 ]]
 	end
 end
 
-function t.stop(p4) --[[ line: 98 ]]
+function t.stop(p4)
 	if p4.__connection ~= nil then
 		p4.__connection:Disconnect()
 		p4.__running = false
 	end
 end
 
-function t.step(p5, p6) --[[ line: 105 ]]
+function t.step(p5, p6)
 	if p5.__allComplete then return end
 	local var9 = true
 	local t = {}
@@ -88,7 +88,7 @@ function t.step(p5, p6) --[[ line: 105 ]]
 	end
 end
 
-function t.setGoal(value, p7) --[[ line: 150 ]]
+function t.setGoal(value, p7)
 	-- upvalues: object (ref)
 	value.__goals = object.assign({}, value.__goals, p7)
 	local var13 = false
@@ -116,25 +116,25 @@ function t.setGoal(value, p7) --[[ line: 150 ]]
 	value:start(var13)
 end
 
-function t.onStep(p8, p9) --[[ line: 177 ]]
+function t.onStep(p8, p9)
 	local var16 = p8.__onStep:subscribe(p9)
 	
-	return function() --[[ line: 180 ]]
+	return function()
 		-- upvalues: var16 (ref)
 		var16:unsubscribe()
 	end
 end
 
-function t.onComplete(p10, p11) --[[ line: 185 ]]
+function t.onComplete(p10, p11)
 	local var17 = p10.__onComplete:subscribe(p11)
 	
-	return function() --[[ line: 188 ]]
+	return function()
 		-- upvalues: var17 (ref)
 		var17:unsubscribe()
 	end
 end
 
-function t.destroy(p12) --[[ line: 193 ]]
+function t.destroy(p12)
 	p12:stop()
 end
 

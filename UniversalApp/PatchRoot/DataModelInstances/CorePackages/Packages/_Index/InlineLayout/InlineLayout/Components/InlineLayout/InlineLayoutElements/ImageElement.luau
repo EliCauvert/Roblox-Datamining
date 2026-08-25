@@ -6,12 +6,12 @@ local renderableInlineElementModule = require(inlineLayoutElements.RenderableInl
 local image = foundationModule.Image
 local t = {}
 
-local function mapProps(p0) --[[ line: 13 ]]
+local function mapProps(p0)
 	-- upvalues: dashModule (ref)
 	return dashModule.omit(p0, { "id" })
 end
 
-function t.new(p1) --[[ line: 17 ]]
+function t.new(p1)
 	-- upvalues: renderableInlineElementModule (ref), image (ref), mapProps (ref)
 	return renderableInlineElementModule.new(image, p1, mapProps)
 end

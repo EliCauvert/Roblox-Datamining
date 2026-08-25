@@ -6,7 +6,7 @@ local t = {
 	[roundedVariantModule.TopRight] = { topRight = true }
 }
 
-return function(p0, p1) --[[ line: 14 | named "getGameCardThumbnailCornerRadii" ]]
+return function(p0, p1)
 	-- upvalues: t (ref), roundedVariantModule (ref), getCornerRadiiModule (ref)
 	return getCornerRadiiModule(t[p0 or roundedVariantModule.Top] or t[roundedVariantModule.Top], p1)
 end

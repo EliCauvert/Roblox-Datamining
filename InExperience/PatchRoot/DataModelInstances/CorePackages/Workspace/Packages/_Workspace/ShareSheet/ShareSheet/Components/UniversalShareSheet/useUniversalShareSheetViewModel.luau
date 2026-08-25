@@ -3,7 +3,7 @@ local signalsReactModule = require(shareSheet.Parent.SignalsReact)
 local _ = require(script.Parent.Parent.useShareSheetViewModel)
 local getUniversalShareSheetStoreModule = require(shareSheet.Stores.GetUniversalShareSheetStore)
 
-return function() --[[ line: 13 | named "useUniversalShareSheetViewModel" ]]
+return function()
 	-- upvalues: getUniversalShareSheetStoreModule (ref), signalsReactModule (ref)
 	local var3 = getUniversalShareSheetStoreModule()
 	local var4 = signalsReactModule.useSignalState(var3.getRequest)

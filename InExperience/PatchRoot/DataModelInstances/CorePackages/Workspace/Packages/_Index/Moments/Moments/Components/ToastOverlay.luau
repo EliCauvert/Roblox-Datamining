@@ -12,18 +12,18 @@ local useTokens = foundationModule.Hooks.useTokens
 local getToastStoreModule = require(moments.Stores.GetToastStore)
 local constantsModule = require(moments.Constants)
 
-local function ToastItem(p0) --[[ line: 35 ]]
+local function ToastItem(p0)
 	-- upvalues: reactModule (ref), toast (ref)
 	local entry = p0.entry
 	local onDismiss = p0.onDismiss
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: onDismiss (ref), entry (ref)
-		local delayedThread = task.delay(3, function() --[[ line: 42 ]]
+		local delayedThread = task.delay(3, function()
 			-- upvalues: onDismiss (copy), entry (copy)
 			onDismiss(entry.id)
 		end)
 		
-		return function() --[[ line: 45 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
@@ -37,14 +37,14 @@ local function ToastItem(p0) --[[ line: 35 ]]
 	})
 end
 
-return function() --[[ line: 58 | named "ToastOverlay" ]]
+return function()
 	-- upvalues: getToastStoreModule (ref), signalsReactModule (ref), useDeviceInsets (ref), useScreenSize (ref), useTokens (ref), reactModule (ref), ToastItem (ref), view (ref), constantsModule (ref)
 	local var9 = getToastStoreModule(false)
 	local var10 = signalsReactModule.useSignalState(var9.getToasts)
 	local var11 = useDeviceInsets()
 	local var12 = useScreenSize()
 	local var13 = useTokens()
-	local var14 = reactModule.useCallback(function(p1) --[[ line: 65 ]]
+	local var14 = reactModule.useCallback(function(p1)
 		-- upvalues: var9 (ref)
 		var9.dismissToast(p1)
 	end, { var9.dismissToast })

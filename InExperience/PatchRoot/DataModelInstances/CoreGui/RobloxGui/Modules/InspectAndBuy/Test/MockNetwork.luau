@@ -84,12 +84,12 @@ local t_6 = {
 }
 local t_7 = { name = "fakename", id = 13, rootPlaceId = 17 }
 
-local function getRobloxProductInfo(p0) --[[ line: 145 ]]
+local function getRobloxProductInfo(p0)
 	-- upvalues: cryoModule (ref), t_3 (ref), promiseModule (ref)
 	return promiseModule.resolve(cryoModule.Dictionary.join(t_3, { AssetId = p0 }))
 end
 
-local function getProductInfo(p1) --[[ line: 150 ]]
+local function getProductInfo(p1)
 	-- upvalues: cryoModule (ref), t_3 (ref), promiseModule (ref)
 	local var36 = cryoModule.Dictionary.join(t_3, { AssetId = p1 })
 	var36.Creator.Id = 2
@@ -97,12 +97,12 @@ local function getProductInfo(p1) --[[ line: 150 ]]
 	return promiseModule.resolve(var36)
 end
 
-local function getItemDetails(p2, p3) --[[ line: 156 ]]
+local function getItemDetails(p2, p3)
 	-- upvalues: cryoModule (ref), t_4 (ref), promiseModule (ref)
 	return promiseModule.resolve(cryoModule.Dictionary.join(t_4, { Id = p2, ItemType = p3 }))
 end
 
-local function getBatchItemDetails(p4) --[[ line: 161 ]]
+local function getBatchItemDetails(p4)
 	-- upvalues: cryoModule (ref), t_4 (ref), promiseModule (ref)
 	local t = {}
 	
@@ -114,82 +114,82 @@ end
 
 local t_8 = { data = { { assetId = 17, creatingUniverseId = 13 } } }
 
-local function getVersionInfo(p5) --[[ line: 183 ]]
+local function getVersionInfo(p5)
 	-- upvalues: cryoModule (ref), t_8 (ref), promiseModule (ref)
 	return promiseModule.resolve(cryoModule.Dictionary.join(t_8, { AssetId = p5 }))
 end
 
-local function getExperiencePlayability(p6) --[[ line: 188 ]]
+local function getExperiencePlayability(p6)
 	-- upvalues: cryoModule (ref), t_6 (ref), promiseModule (ref)
 	return promiseModule.resolve({ cryoModule.Dictionary.join(t_6, { universeId = p6 }) })
 end
 
-local function getExperienceInfo(p7) --[[ line: 193 ]]
+local function getExperienceInfo(p7)
 	-- upvalues: cryoModule (ref), t_7 (ref), promiseModule (ref)
 	return promiseModule.resolve({ data = { cryoModule.Dictionary.join(t_7, { id = p7 }) } })
 end
 
-local function getAssetBundles(_) --[[ line: 198 ]]
+local function getAssetBundles(_)
 	-- upvalues: promiseModule (ref), t_1 (ref)
 	return promiseModule.resolve(t_1)
 end
 
-local function getPlayerName(_) --[[ line: 202 ]]
+local function getPlayerName(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve("TEST")
 end
 
-local function createFavoriteForAsset(_) --[[ line: 206 ]]
+local function createFavoriteForAsset(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function createFavoriteForBundle(_) --[[ line: 210 ]]
+local function createFavoriteForBundle(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function deleteFavoriteForAsset(_) --[[ line: 214 ]]
+local function deleteFavoriteForAsset(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function deleteFavoriteForBundle(_) --[[ line: 218 ]]
+local function deleteFavoriteForBundle(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function getAssetFavoriteCount(_) --[[ line: 222 ]]
+local function getAssetFavoriteCount(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(120)
 end
 
-local function getBundleFavoriteCount(_) --[[ line: 226 ]]
+local function getBundleFavoriteCount(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(120)
 end
 
-local function getFavoriteForAsset(value) --[[ line: 230 ]]
+local function getFavoriteForAsset(value)
 	-- upvalues: promiseModule (ref), t_2 (ref)
 	return if value == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
 end
 
-local function getFavoriteForBundle(p8) --[[ line: 238 ]]
+local function getFavoriteForBundle(p8)
 	-- upvalues: promiseModule (ref), t_2 (ref)
 	return if p8 == "GetFavoriteModel" then promiseModule.resolve(t_2) else promiseModule.resolve("null")
 end
 
-local function getEconomyProductInfo(_) --[[ line: 246 ]]
+local function getEconomyProductInfo(_)
 	-- upvalues: promiseModule (ref), t_5 (ref)
 	return promiseModule.resolve(t_5)
 end
 
-local function getModelFromUserId(_) --[[ line: 250 ]]
+local function getModelFromUserId(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function networkFailure(_, _) --[[ line: 254 ]]
+local function networkFailure(_, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.reject("Failed to access network service")
 end
@@ -197,7 +197,7 @@ end
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p9, p10) --[[ line: 261 ]]
+function t_9.new(p9, p10)
 	-- upvalues: networkFailure (ref), getProductInfo (ref), getRobloxProductInfo (ref), getPlayerName (ref), getAssetBundles (ref), createFavoriteForAsset (ref), createFavoriteForBundle (ref), deleteFavoriteForAsset (ref), deleteFavoriteForBundle (ref), getAssetFavoriteCount (ref), getBundleFavoriteCount (ref), getFavoriteForAsset (ref), getFavoriteForBundle (ref), getEconomyProductInfo (ref), getModelFromUserId (ref), getVersionInfo (ref), getExperiencePlayability (ref), getExperienceInfo (ref), getItemDetails (ref), getBatchItemDetails (ref)
 	local var38 = if p9 then {
 		getProductInfo = networkFailure,
@@ -239,7 +239,7 @@ function t_9.new(p9, p10) --[[ line: 261 ]]
 		getBatchItemDetails = getBatchItemDetails
 	}
 	setmetatable(var38, {
-		__tostring = function() --[[ line: 309 ]]
+		__tostring = function()
 			return "MockService(Network)"
 		end
 	})
@@ -247,64 +247,64 @@ function t_9.new(p9, p10) --[[ line: 261 ]]
 	return var38
 end
 
-function t_9.GetMockAssetData() --[[ line: 317 ]]
+function t_9.GetMockAssetData()
 	-- upvalues: t (ref)
 	return t
 end
 
-function t_9.GetMockHumanoidDescription() --[[ line: 321 ]]
+function t_9.GetMockHumanoidDescription()
 	-- upvalues: humanoidDescription (ref)
 	return humanoidDescription
 end
 
-function t_9.GetMockHumanoidDescriptionEmpty() --[[ line: 325 ]]
+function t_9.GetMockHumanoidDescriptionEmpty()
 	-- upvalues: humanoidDescription_2 (ref)
 	return humanoidDescription_2
 end
 
-function t_9.GetMockPlayerName() --[[ line: 329 ]]
+function t_9.GetMockPlayerName()
 	return "TEST"
 end
 
-function t_9.GetMockAssetBundlesData() --[[ line: 333 ]]
+function t_9.GetMockAssetBundlesData()
 	-- upvalues: t_1 (ref)
 	return t_1
 end
 
-function t_9.GetMockFavoriteCount() --[[ line: 337 ]]
+function t_9.GetMockFavoriteCount()
 	return 120
 end
 
-function t_9.GetFavoriteModelId() --[[ line: 341 ]]
+function t_9.GetFavoriteModelId()
 	return "GetFavoriteModel"
 end
 
-function t_9.GetProductInfo() --[[ line: 345 ]]
+function t_9.GetProductInfo()
 	-- upvalues: t_3 (ref)
 	return t_3
 end
 
-function t_9.GetEconomyProductInfo() --[[ line: 349 ]]
+function t_9.GetEconomyProductInfo()
 	-- upvalues: t_5 (ref)
 	return t_5
 end
 
-function t_9.GetMockHumanoidDescriptionEmotes() --[[ line: 353 ]]
+function t_9.GetMockHumanoidDescriptionEmotes()
 	-- upvalues: humanoidDescription_1 (ref)
 	return humanoidDescription_1
 end
 
-function t_9.GetVersionInfo() --[[ line: 357 ]]
+function t_9.GetVersionInfo()
 	-- upvalues: t_8 (ref)
 	return t_8
 end
 
-function t_9.GetExperiencePlayability() --[[ line: 361 ]]
+function t_9.GetExperiencePlayability()
 	-- upvalues: t_6 (ref)
 	return { t_6 }
 end
 
-function t_9.GetExperienceInfo() --[[ line: 365 ]]
+function t_9.GetExperienceInfo()
 	-- upvalues: t_7 (ref)
 	return { data = { t_7 } }
 end

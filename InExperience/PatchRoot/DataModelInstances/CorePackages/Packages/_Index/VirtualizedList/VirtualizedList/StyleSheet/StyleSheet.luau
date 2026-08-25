@@ -3,13 +3,13 @@ local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 
 return {
-	compose = function(p0, p1) --[[ line: 22 ]]
+	compose = function(p0, p1)
 		return if not (p0 ~= nil and p1 ~= nil) then if p0 == nil then p1 else p0 else { p0, p1 }
 	end,
-	create = function(p2) --[[ line: 31 ]]
+	create = function(p2)
 		-- upvalues: array (ref), object (ref)
 		if _G.__DEV__ then
-			array.forEach(object.keys(p2), function(p3) --[[ line: 36 ]]
+			array.forEach(object.keys(p2), function(p3)
 				-- upvalues: p2 (ref), object (copy)
 				if p2[p3] then
 					object.freeze(p2[p3])

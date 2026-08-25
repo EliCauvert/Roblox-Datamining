@@ -12,7 +12,7 @@ local localStoreModule = require(chromeShared.Service.LocalStore)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
 local t = {}
 
-local function _(p0, p1) --[[ line: 56 | named "hasBeenDismissed" ]]
+local function _(p0, p1)
 	-- upvalues: t (ref), localStoreModule (ref)
 	if t[p0] then
 		return true
@@ -27,7 +27,7 @@ local function _(p0, p1) --[[ line: 56 | named "hasBeenDismissed" ]]
 	return maxViewCount <= (if type(value) == "number" then value else 0)
 end
 
-local _ = function(p2) --[[ line: 74 | named "recordView" ]]
+local _ = function(p2)
 	-- upvalues: localStoreModule (ref)
 	if p2.maxViewCount <= 0 then
 		return
@@ -36,11 +36,11 @@ local _ = function(p2) --[[ line: 74 | named "recordView" ]]
 	localStoreModule.storeForLocalPlayer(p2.localStorageKey, (if type(value) == "number" then value else 0) + 1)
 end
 
-return function(p3) --[[ line: 83 | named "MenuTrailingBadge" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), t (ref), localStoreModule (ref), useLocalization (ref), serviceModule (ref), view (ref), badge (ref), badgeVariant (ref), badgeShape (ref)
 	local integrationId = p3.integrationId
 	local config = p3.config
-	local var9, var10 = reactModule.useState(function() --[[ line: 87 ]]
+	local var9, var10 = reactModule.useState(function()
 		-- upvalues: integrationId (ref), config (ref), t (copy), localStoreModule (copy)
 		local var13
 		local var12 = config
@@ -71,10 +71,10 @@ return function(p3) --[[ line: 83 | named "MenuTrailingBadge" ]]
 		return var15
 	end)
 	local var11 = useLocalization({ text = "Feature.Catalog.Label.New" })
-	reactModule.useEffect(function() --[[ line: 101 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), serviceModule (copy), integrationId (ref), t (copy), localStoreModule (copy), config (ref), var10 (ref)
 		if var9 then
-			local var18 = serviceModule:onIntegrationActivated():connect(function(p4) --[[ line: 106 ]]
+			local var18 = serviceModule:onIntegrationActivated():connect(function(p4)
 				-- upvalues: integrationId (copy), t (copy), localStoreModule (copy), config (copy), var10 (copy)
 				if p4 == integrationId then
 					t[integrationId] = true
@@ -85,7 +85,7 @@ return function(p3) --[[ line: 83 | named "MenuTrailingBadge" ]]
 				end
 			end)
 			
-			return function() --[[ line: 115 ]]
+			return function()
 				-- upvalues: var18 (ref)
 				var18:disconnect()
 			end

@@ -1,5 +1,5 @@
-﻿return function(value, p0, p1) --[[ line: 14 | named "signalWith" ]]
-	value.defer(function() --[[ line: 17 ]]
+﻿return function(value, p0, p1)
+	value.defer(function()
 		-- upvalues: value (ref), p0 (ref), p1 (ref)
 		if not value.isEnabled() then return end
 		local ok, status = pcall(value.getService)

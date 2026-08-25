@@ -2,20 +2,20 @@
 local exhaustiveMatchModule = require(script:FindFirstAncestor("ultimate-list").Util.exhaustiveMatch)
 
 return {
-	get = function(p0, p1) --[[ line: 8 ]]
+	get = function(p0, p1)
 		-- upvalues: exhaustiveMatchModule (ref)
 		assert(p1 >= 1, "index < 1")
 		
 		if p0.type == "array" then
-			local function get(p2) --[[ line: 15 ]]
+			local function get(p2)
 				-- upvalues: p0 (ref), get (ref)
 				return if p2 < 1 or #p0.array < p2 then nil else {
-					before = function() --[[ line: 21 ]]
+					before = function()
 						-- upvalues: get (copy), p2 (ref)
 						return get(p2 - 1)
 					end,
 					value = p0.array[p2],
-					after = function() --[[ line: 27 ]]
+					after = function()
 						-- upvalues: get (copy), p2 (ref)
 						return get(p2 + 1)
 					end
@@ -26,7 +26,7 @@ return {
 		end
 		return if p0.type == "mutableSource" then p0.methods.get(p1) else exhaustiveMatchModule(p0.type)
 	end,
-	getByRange = function(p3, p4) --[[ line: 41 ]]
+	getByRange = function(p3, p4)
 		-- upvalues: exhaustiveMatchModule (ref)
 		if p3.type == "array" then
 			return table.move(p3.array, p4.X, p4.Y, 1, {})
@@ -45,7 +45,7 @@ return {
 		end
 		return t
 	end,
-	back = function(p5) --[[ line: 67 ]]
+	back = function(p5)
 		-- upvalues: exhaustiveMatchModule (ref)
 		if p5.type == "array" then
 			return p5.array[#p5.array]
@@ -58,11 +58,11 @@ return {
 		end
 		return p5.methods.back()
 	end,
-	length = function(p6) --[[ line: 82 ]]
+	length = function(p6)
 		-- upvalues: exhaustiveMatchModule (ref)
 		return if p6.type == "array" then #p6.array elseif p6.type == "mutableSource" then p6.methods.length() else exhaustiveMatchModule(p6.type)
 	end,
-	equals = function(p7, p8) --[[ line: 93 ]]
+	equals = function(p7, p8)
 		-- upvalues: exhaustiveMatchModule (ref)
 		if p7.type ~= p8.type then
 			return false

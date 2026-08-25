@@ -5,7 +5,7 @@ local avatarScreenModule = require(avatarExperienceNavigation.Enums.AvatarScreen
 local avatarRouteContextModule = require(avatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
 local avatarRouteModule = require(avatarExperienceNavigation.AvatarRoute.AvatarRoute)
 
-local function avatarRouteFromString(p0) --[[ line: 17 ]]
+local function avatarRouteFromString(p0)
 	-- upvalues: avatarRouteModule (ref)
 	local t = { name = p0, key = p0, params = {} }
 	
@@ -18,7 +18,7 @@ local function avatarRouteFromString(p0) --[[ line: 17 ]]
 	})
 end
 
-local function avatarRouteFromTable(p1) --[[ line: 32 ]]
+local function avatarRouteFromTable(p1)
 	-- upvalues: avatarScreenModule (ref), avatarRouteModule (ref)
 	p1 = p1 or {}
 	p1 = p1.current or {}
@@ -51,11 +51,11 @@ local function avatarRouteFromTable(p1) --[[ line: 32 ]]
 	})
 end
 
-return function(p2, p3) --[[ line: 72 ]]
+return function(p2, p3)
 	-- upvalues: avatarRouteFromString (ref), avatarRouteFromTable (ref), reactModule (ref), avatarRouteContextModule (ref)
 	local var14 = if type(p3) == "string" then avatarRouteFromString(p3) else avatarRouteFromTable(p3)
 	
-	return reactModule.forwardRef(function(p4, p5) --[[ line: 77 ]]
+	return reactModule.forwardRef(function(p4, p5)
 		-- upvalues: reactModule (copy), avatarRouteContextModule (copy), var14 (ref), p2 (ref)
 		local cloned = table.clone(p4)
 		cloned.ref = p5

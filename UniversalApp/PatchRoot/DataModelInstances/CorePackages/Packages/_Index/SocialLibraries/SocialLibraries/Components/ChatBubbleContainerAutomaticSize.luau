@@ -9,16 +9,16 @@ local t = {
 	padding = 12,
 	LayoutOrder = 0,
 	isPending = false,
-	[react.Change.AbsoluteSize] = function(_) --[[ line: 21 ]] end,
+	[react.Change.AbsoluteSize] = function(_) end,
 	overrideImageColor = false
 }
 
-return function(p0) --[[ line: 26 | named "ChatBubbleContainer" ]]
+return function(p0)
 	-- upvalues: react (ref), t (ref), UIBlox (ref), rect (ref), object (ref)
 	local var3, var4 = react.useState(0)
 	local absoluteSize = p0[react.Change.AbsoluteSize] or t[react.Change.AbsoluteSize]
 	
-	return UIBlox.Style.withStyle(function(p1) --[[ line: 30 ]]
+	return UIBlox.Style.withStyle(function(p1)
 		-- upvalues: p0 (ref), t (copy), react (copy), var3 (ref), rect (copy), absoluteSize (ref), object (copy), var4 (ref)
 		local children = p0.children or {}
 		local hasTail = p0.hasTail or t.hasTail
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 26 | named "ChatBubbleContainer" ]]
 				SliceCenter = rect,
 				ImageTransparency = transparency,
 				Position = isIncoming and UDim2.new(0, 6, 0, 0) or UDim2.new(1, -6, 0, 0),
-				[react.Change.AbsoluteSize] = function(p2) --[[ line: 82 ]]
+				[react.Change.AbsoluteSize] = function(p2)
 					-- upvalues: absoluteSize (copy)
 					absoluteSize(p2)
 				end
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 26 | named "ChatBubbleContainer" ]]
 					PaddingLeft = uDim
 				}),
 				["$layout"] = react.createElement("UIListLayout", {
-					[react.Change.AbsoluteContentSize] = function(p3) --[[ line: 93 ]]
+					[react.Change.AbsoluteContentSize] = function(p3)
 						-- upvalues: var4 (copy), uDim (ref)
 						var4(p3.AbsoluteContentSize.X + uDim.Offset * 2)
 					end

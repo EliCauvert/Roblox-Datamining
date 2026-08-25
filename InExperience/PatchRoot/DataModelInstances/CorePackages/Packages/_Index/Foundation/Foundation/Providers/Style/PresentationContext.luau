@@ -7,7 +7,7 @@ local var2 = reactModule.createContext({
 
 return {
 	Provider = var2.Provider,
-	usePresentationContext = function() --[[ line: 19 ]]
+	usePresentationContext = function()
 		-- upvalues: reactModule (ref), var2 (ref)
 		return reactModule.useContext(var2)
 	end

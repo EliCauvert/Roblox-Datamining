@@ -23,15 +23,15 @@ return {
 		cancelAnalyticsEvent = eventNames.EditingFlowMusicBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video, Enum.CaptureType.Screenshot },
-	createSession = function() --[[ line: 39 ]]
+	createSession = function()
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()
 	end,
-	renderEditor = function(p0) --[[ line: 42 ]]
+	renderEditor = function(p0)
 		-- upvalues: reactModule (ref), musicOverlayModule (ref)
 		return reactModule.createElement(musicOverlayModule, { controller = p0 })
 	end,
-	toEdits = function(p1) --[[ line: 45 ]]
+	toEdits = function(p1)
 		return { music = p1 }
 	end
 }

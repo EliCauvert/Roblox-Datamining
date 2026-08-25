@@ -1,7 +1,7 @@
 ﻿local toRectModule = require(script.Parent.toRect)
 local returnValueModule = require(script.Parent.returnValue)
 
-return function(p0, p1, p2) --[[ line: 29 | named "insideBelow" ]]
+return function(p0, p1, p2)
 	-- upvalues: toRectModule (ref), returnValueModule (ref)
 	local var2 = toRectModule(p0).Min - toRectModule(p1).Min
 	

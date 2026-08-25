@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableNativeToWebviewMiddleware", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableNativeToWebviewMiddleware")
 end

@@ -13,7 +13,7 @@ local t = {
 }
 
 return {
-	countPlayerLocalizationChoiceNotReady = function() --[[ line: 16 ]]
+	countPlayerLocalizationChoiceNotReady = function()
 		-- upvalues: telemetryService (ref), list (ref)
 		telemetryService:LogCounter({
 			eventName = "PlayerLocalizationChoiceNotReady",
@@ -23,7 +23,7 @@ return {
 			lastUpdated = { 2026, 2, 24 }
 		}, { standardizedFields = list }, 1)
 	end,
-	countPlayerLocalizationChoiceFailed = function(p0) --[[ line: 27 ]]
+	countPlayerLocalizationChoiceFailed = function(p0)
 		-- upvalues: telemetryService (ref), list (ref)
 		telemetryService:LogCounter({
 			eventName = "PlayerLocalizationChoiceFailed",
@@ -36,7 +36,7 @@ return {
 			customFields = { responseCode = p0.responseCode, errorType = p0.errorType }
 		}, 1)
 	end,
-	countAutoTranslateZeroUniverseId = function() --[[ line: 44 ]]
+	countAutoTranslateZeroUniverseId = function()
 		-- upvalues: telemetryService (ref), list (ref)
 		telemetryService:LogCounter({
 			eventName = "AutoTranslateZeroUniverseId",
@@ -46,7 +46,7 @@ return {
 			lastUpdated = { 2026, 3, 11 }
 		}, { standardizedFields = list }, 1)
 	end,
-	logQueuedStateButtonClick = function(p1) --[[ line: 64 ]]
+	logQueuedStateButtonClick = function(p1)
 		-- upvalues: var1 (ref), telemetryService (ref), t (ref)
 		if var1 then
 			telemetryService:LogEvent(t, { customFields = p1 or {} })

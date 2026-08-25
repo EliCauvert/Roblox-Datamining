@@ -5,11 +5,11 @@ local signalsModule = require(parent.Signals)
 local _ = require(collectionViews.CollectionViewTypes)
 local createCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
 
-return function() --[[ line: 17 | named "createMainCollectionLayoutStore" ]]
+return function()
 	-- upvalues: displayModule (ref), signalsModule (ref), createCollectionLayoutStoreModule (ref)
 	local displayStore = displayModule.GetDisplayStore(false)
 	local var5, var6 = signalsModule.createSignal(nil)
-	local var7 = createCollectionLayoutStoreModule(signalsModule.createComputed(function(p0) --[[ line: 22 ]]
+	local var7 = createCollectionLayoutStoreModule(signalsModule.createComputed(function(p0)
 		-- upvalues: var5 (ref), displayStore (ref)
 		local var8 = var5(p0)
 		

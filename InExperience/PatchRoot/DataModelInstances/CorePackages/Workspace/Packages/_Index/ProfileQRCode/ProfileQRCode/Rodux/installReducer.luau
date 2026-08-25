@@ -5,7 +5,7 @@ local configuredRoduxNetworkingModule = require(profileQRCode.Networking.configu
 local shareUrlReducerModule = require(script.Parent.ShareUrlReducer)
 local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function() --[[ line: 16 ]]
+return function()
 	-- upvalues: roduxModule (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), configuredUsersModule (ref), configuredRoduxNetworkingModule (ref), shareUrlReducerModule (ref)
 	return roduxModule.combineReducers({
 		Users = if fFlagProfileQrCodeDeprecateUserReduxModule then nil else configuredUsersModule(),

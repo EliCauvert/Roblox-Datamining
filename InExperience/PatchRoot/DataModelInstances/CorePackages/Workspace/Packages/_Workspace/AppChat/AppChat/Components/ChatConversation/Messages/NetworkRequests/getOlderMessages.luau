@@ -4,9 +4,9 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 
-return function(p0, _, p1) --[[ line: 9 ]]
+return function(p0, _, p1)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), appChatNetworkingModule (ref)
-	return function(p2) --[[ line: 10 ]]
+	return function(p2)
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p1 (ref), p0 (ref), appChatPerfTrackerModule (copy), appChatNetworkingModule (copy)
 		local var5 = fFlagAppChatPerfTrackingModule and (fFlagAppChatMessageTTIMilestonesModule and p1 == nil)
 		
@@ -19,14 +19,14 @@ return function(p0, _, p1) --[[ line: 9 ]]
 		local var7 = p2:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p0, p1))
 		
 		if var5 then
-			var7 = var7:tap(function() --[[ line: 39 ]]
+			var7 = var7:tap(function()
 				-- upvalues: p0 (copy), appChatPerfTrackerModule (copy)
 				local t = { conversationId = p0 }
 				appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, t)
 				appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.ChatConversationTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, t)
 			end)
 		end
-		return var7:catch(function(p3) --[[ line: 55 ]]
+		return var7:catch(function(p3)
 			warn("AppChatNetworking failure in getOlderMessages, Status: " .. tostring(p3))
 		end)
 	end

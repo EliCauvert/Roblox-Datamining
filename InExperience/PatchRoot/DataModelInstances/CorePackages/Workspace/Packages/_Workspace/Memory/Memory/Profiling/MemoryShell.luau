@@ -5,27 +5,27 @@ local memoryShellHost = game:DefineFastString("MemoryShellHost", "ws://localhost
 local t = {}
 t.__index = t
 
-local function _() --[[ line: 23 | named "getMemoryTracker" ]]
+local function _()
 	-- upvalues: memoryTrackerModule (ref)
 	return memoryTrackerModule()
 end
 
 local t_1 = {
-	getLuaHeap = function() --[[ line: 28 ]]
+	getLuaHeap = function()
 		-- upvalues: garbageCollectorModule (ref), memoryTrackerModule (ref)
 		garbageCollectorModule.collect()
 		local var8 = memoryTrackerModule()
 		
 		return if var8 then var8.getLuaHeapOnly() else { luaHeapMb = "-1" }
 	end,
-	getSnapshot = function() --[[ line: 36 ]]
+	getSnapshot = function()
 		-- upvalues: garbageCollectorModule (ref), memoryTrackerModule (ref)
 		garbageCollectorModule.collect()
 		local var9 = memoryTrackerModule()
 		
 		return if var9 then var9.getSnapshot() else { luaHeapMb = "-1" }
 	end,
-	forceGC = function() --[[ line: 44 ]]
+	forceGC = function()
 		-- upvalues: garbageCollectorModule (ref)
 		garbageCollectorModule.collect()
 		
@@ -33,7 +33,7 @@ local t_1 = {
 	end
 }
 
-local function handleRequest(p0) --[[ line: 50 ]]
+local function handleRequest(p0)
 	-- upvalues: t_1 (ref)
 	local t = {
 		result = nil,
@@ -50,7 +50,7 @@ local function handleRequest(p0) --[[ line: 50 ]]
 		
 		return t
 	end
-	local ok, status = xpcall(method, function(p1) --[[ line: 62 ]]
+	local ok, status = xpcall(method, function(p1)
 		return debug.traceback(p1)
 	end)
 	
@@ -64,7 +64,7 @@ local function handleRequest(p0) --[[ line: 50 ]]
 	return t
 end
 
-local function tryConnect(p2) --[[ line: 75 ]]
+local function tryConnect(p2)
 	-- upvalues: memoryShellHost (ref), httpService (ref), handleRequest (ref)
 	if not p2._WebSocketService then
 		return false
@@ -76,12 +76,12 @@ local function tryConnect(p2) --[[ line: 75 ]]
 	return false
 end
 
-function t:_connectWithRetry() --[[ line: 111 ]]
+function t:_connectWithRetry()
 	-- upvalues: tryConnect (ref)
 	if self._retrying then
 		return
 	end
-	task.spawn(function() --[[ line: 115 ]]
+	task.spawn(function()
 		-- upvalues: self (ref), tryConnect (copy)
 		self._retrying = true
 		while not self._connected and not tryConnect(self) do
@@ -91,7 +91,7 @@ function t:_connectWithRetry() --[[ line: 111 ]]
 	end)
 end
 
-function t.new() --[[ line: 127 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({
 		_connected = false,
@@ -100,7 +100,7 @@ function t.new() --[[ line: 127 ]]
 	}, t)
 end
 
-function t:start() --[[ line: 136 ]]
+function t:start()
 	if not self._WebSocketService then
 		local var12 = nil
 		
@@ -109,7 +109,7 @@ function t:start() --[[ line: 136 ]]
 	self:_connectWithRetry()
 end
 
-function t:reconnect() --[[ line: 151 ]]
+function t:reconnect()
 	self._connected = false
 	self._retrying = false
 	self:_connectWithRetry()

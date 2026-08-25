@@ -8,7 +8,7 @@ local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFla
 local text = httpModule.Url.APIS_URL .. "content-captures-api/v2/moments/"
 local text_1 = httpModule.Url.APIS_URL .. "/posts-api/v1/content-posts/delete/"
 
-return function(p0, p1, p2) --[[ line: 29 | named "deleteMoment" ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), promiseModule (ref), getFFlagMomentsFixDeleteModule (ref), httpClientModule (ref), text_1 (ref), text (ref)
 	local var7 = p0
 	
@@ -22,7 +22,7 @@ return function(p0, p1, p2) --[[ line: 29 | named "deleteMoment" ]]
 			analyticsKey = "moments.delete-moment",
 			url = text .. var7,
 			network = p1,
-			decode = function(_) --[[ line: 55 ]]
+			decode = function(_)
 				return { ok = true }
 			end
 		})) else httpClientModule.asPromise(httpClientModule.fetch({
@@ -31,7 +31,7 @@ return function(p0, p1, p2) --[[ line: 29 | named "deleteMoment" ]]
 			url = text_1 .. p0,
 			body = {},
 			network = p1,
-			decode = function(_) --[[ line: 44 ]]
+			decode = function(_)
 				return { ok = true }
 			end
 		}))

@@ -29,17 +29,17 @@ local fFlagLuaAppSduiEventDetailsActionBarInFeed = require(parent.SharedFlags).F
 local fStringLuaAppSduiEventDetailsIxpLayer = require(parent.SharedFlags).FStringLuaAppSduiEventDetailsIxpLayer
 local fFlagSduiPageEntryUseSharedHooks = require(parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
 
-local function _(p0, p1) --[[ line: 48 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1)
 	local extraProps = p0.navigation and p0.navigation.getParam("extraProps")
 	
 	return p0[p1] or extraProps and extraProps[p1]
 end
 
-local _ = function(p2, p3) --[[ line: 58 ]]
+local _ = function(p2, p3)
 	return p2 .. "_" .. p3
 end
 
-return reactModule.memo(function(p4) --[[ line: 65 | named "SduiEventDetailsPage" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: useTokens (ref), getEventDetailsPageKeyModule (ref), reactModule (ref), sduiLoadTimer (ref), appPage (ref), useNavigation (ref), useRouteName (ref), useNavigationFocus (ref), fFlagLuaAppSduiEventDetailsCenterSheet (ref), useDeviceType (ref), deviceType (ref), fetchEventDetailsPageModule (ref), fFlagLuaAppSduiEventDetailsLogExposure (ref), IXPService (ref), fStringLuaAppSduiEventDetailsIxpLayer (ref), fireEventDetailsPageVisitModule (ref), foundationModule (ref), sduiFeatureEntryPoint (ref), fFlagLuaAppSduiEventDetailsLoadingSlot (ref), eventDetailsFullBleedSkeletonModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), eventDetailsFeedSkeletonModule (ref), fFlagLuaAppSduiEventDetailsActionBarInFeed (ref), eventDetailsActionBarSkeletonModule (ref)
 	local var13 = useTokens()
 	local extraProps = p4.navigation and p4.navigation.getParam("extraProps")
@@ -49,7 +49,7 @@ return reactModule.memo(function(p4) --[[ line: 65 | named "SduiEventDetailsPage
 	local extraProps_2 = p4.navigation and p4.navigation.getParam("extraProps")
 	local referralSource = p4.referralSource or extraProps_2 and extraProps_2.referralSource
 	local var20 = getEventDetailsPageKeyModule(eventId)
-	local var21 = reactModule.useMemo(function() --[[ line: 75 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: p4 (ref), sduiLoadTimer (copy), appPage (copy)
 		local var29 = p4
 		local extraProps = var29.navigation and var29.navigation.getParam("extraProps")
@@ -65,25 +65,25 @@ return reactModule.memo(function(p4) --[[ line: 65 | named "SduiEventDetailsPage
 		local var26 = useDeviceType()
 		var25 = if var26 ~= deviceType.Desktop then var26 == deviceType.Tablet else true
 	end
-	local var27 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), appPage (copy), var24 (ref), var22 (ref)
 		if var23 == appPage.EventDetails and var24 then
 			var22.goBack()
 		end
 	end, { var22, var23, var24 })
-	reactModule.useEffect(function() --[[ line: 94 ]]
+	reactModule.useEffect(function()
 		-- upvalues: eventId (ref), fetchEventDetailsPageModule (copy), var21 (ref)
 		if eventId then
 			fetchEventDetailsPageModule(eventId, var21)
 		end
 	end, { eventId, var21 })
-	reactModule.useEffect(function() --[[ line: 100 ]]
+	reactModule.useEffect(function()
 		-- upvalues: eventId (ref), fFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), fStringLuaAppSduiEventDetailsIxpLayer (copy)
 		if eventId and fFlagLuaAppSduiEventDetailsLogExposure then
 			IXPService:LogFlagLinkedUserLayerExposure(fStringLuaAppSduiEventDetailsIxpLayer)
 		end
 	end, { eventId })
-	reactModule.useEffect(function() --[[ line: 106 ]]
+	reactModule.useEffect(function()
 		-- upvalues: eventId (ref), fireEventDetailsPageVisitModule (copy), universeId (ref), referralSource (ref)
 		if eventId then
 			fireEventDetailsPageVisitModule({

@@ -1,17 +1,17 @@
-﻿local var0 = function() --[[ line: 11 ]] end
+﻿local var0 = function() end
 
-local function noopRegister(_) --[[ line: 12 ]]
+local function noopRegister(_)
 	-- upvalues: var0 (ref)
 	return var0
 end
 
-local function noopNotify(_) --[[ line: 15 ]] end
+local function noopNotify(_) end
 
-local function noopRule(_) --[[ line: 17 ]]
+local function noopRule(_)
 	return nil
 end
 
-local function noopRuleFactory(...) --[[ line: 20 ]]
+local function noopRuleFactory(...)
 	-- upvalues: noopRule (ref)
 	return noopRule
 end
@@ -23,30 +23,30 @@ local t = {
 	fromEnum = noopRuleFactory,
 	eventNameAsLabel = noopRuleFactory,
 	fixed = noopRuleFactory,
-	walk = function(_, _) --[[ line: 31 ]]
+	walk = function(_, _)
 		return nil
 	end
 }
 
-local function noopFormatter(_, _, _) --[[ line: 36 ]]
+local function noopFormatter(_, _, _)
 	return nil
 end
 
 local t_1 = {
-	enumLabel = function(_) --[[ line: 39 ]]
+	enumLabel = function(_)
 		-- upvalues: noopFormatter (ref)
 		return noopFormatter
 	end,
-	invertEnum = function(_) --[[ line: 45 ]]
+	invertEnum = function(_)
 		return {}
 	end
 }
 
-local function noopPreview(_) --[[ line: 50 ]]
+local function noopPreview(_)
 	return nil
 end
 
-local function noopPreviewFactory(_) --[[ line: 53 ]]
+local function noopPreviewFactory(_)
 	-- upvalues: noopPreview (ref)
 	return noopPreview
 end
@@ -60,7 +60,7 @@ return {
 		rbxthumb = noopPreviewFactory,
 		fromInstance = noopPreviewFactory,
 		chain = noopPreviewFactory,
-		isPlausibleId = function(_) --[[ line: 61 ]]
+		isPlausibleId = function(_)
 			return false
 		end
 	}

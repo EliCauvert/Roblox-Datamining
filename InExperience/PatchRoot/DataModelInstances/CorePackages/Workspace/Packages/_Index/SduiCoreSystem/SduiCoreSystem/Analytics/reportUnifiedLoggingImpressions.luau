@@ -9,7 +9,7 @@ local getSduiImpressionHandlerRegistryModule = require(sduiCoreSystem.getSduiImp
 local _ = require(sduiCoreSystem.SduiImpressionEventType)
 local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 28 | named "reportUnifiedLoggingImpressions" ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: sduiErrorsModule (ref), sduiCollectionAnalyticsBuilderModule (ref), getSduiImpressionHandlerRegistryModule (ref), fFlagSduiEdpStoreImpressionsLogging (ref), unifiedLoggingModule (ref)
 	if not p3 then
 		p0.dependencies.logger.reportError(sduiErrorsModule.SduiErrorType.LogImpressionsMissingCollectionData, {}, p0.appPage)

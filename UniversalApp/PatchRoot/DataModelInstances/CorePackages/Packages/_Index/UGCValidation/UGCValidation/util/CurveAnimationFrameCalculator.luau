@@ -10,7 +10,7 @@ local getFFlagUGCValidateCurveAnimFinalFrameBugModule = require(flags.getFFlagUG
 local t = {}
 local faceControlsName = curveAnimationHierarchyUtilsModule.FaceControlsName
 
-local function hasFloatCurveKeys(p0) --[[ line: 22 ]]
+local function hasFloatCurveKeys(p0)
 	local floatCurve
 	local x = p0:FindFirstChild("X")
 	local y = p0:FindFirstChild("Y")
@@ -48,21 +48,21 @@ local function hasFloatCurveKeys(p0) --[[ line: 22 ]]
 	end
 end
 
-local function _(p1) --[[ line: 32 | named "hasPositionKeys" ]]
+local function _(p1)
 	-- upvalues: hasFloatCurveKeys (ref)
 	return if p1 then if p1:IsA("Vector3Curve") then hasFloatCurveKeys(p1) else false else false
 end
 
-local _ = function(p2) --[[ line: 43 | named "hasRotationKeys" ]]
+local _ = function(p2)
 	-- upvalues: hasFloatCurveKeys (ref)
 	return if p2 then if p2:IsA("EulerRotationCurve") then hasFloatCurveKeys(p2) else false else false
 end
 
-function t.calculateAnimFramesAtOrigin(p3) --[[ line: 54 ]]
+function t.calculateAnimFramesAtOrigin(p3)
 	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), hasFloatCurveKeys (ref), constantsModule (ref), faceControlsName (ref), rigBuilderModule (ref), assetCalculatorModule (ref), getFFlagUGCValidateCurveAnimFinalFrameBugModule (ref)
 	local var13 = 1 / getFIntUGCValidateMaxAnimationFPSModule()
 	
-	local function getCurveTracks() --[[ line: 61 ]]
+	local function getCurveTracks()
 		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), curveAnimationHierarchyUtilsModule (copy), p3 (ref), hasFloatCurveKeys (copy), constantsModule (copy), faceControlsName (copy)
 		local descendants
 		local t = {}
@@ -90,10 +90,10 @@ function t.calculateAnimFramesAtOrigin(p3) --[[ line: 54 ]]
 		return t
 	end
 	
-	local function calculateCurveAnimLength(p4) --[[ line: 94 ]]
+	local function calculateCurveAnimLength(p4)
 		local var31 = -1
 		
-		local function getMaxTimeFromFloatCurveChildren(a) --[[ line: 97 ]]
+		local function getMaxTimeFromFloatCurveChildren(a)
 			-- upvalues: var31 (write)
 			if not a then return end
 			for i, v in a:GetChildren() do
@@ -113,7 +113,7 @@ function t.calculateAnimFramesAtOrigin(p3) --[[ line: 54 ]]
 		return var31
 	end
 	
-	local function calculateTransformsAtTime(p5, p6) --[[ line: 120 ]]
+	local function calculateTransformsAtTime(p5, p6)
 		local t = {}
 		
 		for i, v in p6 do
@@ -122,7 +122,7 @@ function t.calculateAnimFramesAtOrigin(p3) --[[ line: 54 ]]
 		return t
 	end
 	
-	local function calculatePositionMagnitudeResultsAtTime(p7, p8) --[[ line: 130 ]]
+	local function calculatePositionMagnitudeResultsAtTime(p7, p8)
 		local t = {}
 		
 		for i, v in p8 do
@@ -146,7 +146,7 @@ function t.calculateAnimFramesAtOrigin(p3) --[[ line: 54 ]]
 	local t_1 = {}
 	local t_2 = {}
 	
-	local function _(p9) --[[ line: 156 | named "addData" ]]
+	local function _(p9)
 		-- upvalues: calculateTransformsAtTime (ref), var20 (ref), assetCalculatorModule (copy), t (ref), t_1 (ref), t_2 (ref), calculatePositionMagnitudeResultsAtTime (ref)
 		table.insert(t_1, assetCalculatorModule.calculateAllTransformsForFullBody(t, calculateTransformsAtTime(p9, var20)))
 		table.insert(t_2, calculatePositionMagnitudeResultsAtTime(p9, var20))

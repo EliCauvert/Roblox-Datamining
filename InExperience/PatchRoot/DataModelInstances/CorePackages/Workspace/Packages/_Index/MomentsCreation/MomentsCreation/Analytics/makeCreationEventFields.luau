@@ -20,7 +20,7 @@ local t_1 = {
 }
 
 return {
-	makeStepField = function(p0) --[[ line: 80 ]]
+	makeStepField = function(p0)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref), t (ref)
 		if not getFFlagMomentsAnalyticsProducerPrereqs() then
 			return {}
@@ -29,7 +29,7 @@ return {
 		
 		return if var3 == nil then {} else { step = var3 }
 	end,
-	makeStepFieldFromState = function(p1) --[[ line: 93 ]]
+	makeStepFieldFromState = function(p1)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref), t_1 (ref)
 		if not getFFlagMomentsAnalyticsProducerPrereqs() then
 			return {}
@@ -38,19 +38,19 @@ return {
 		
 		return if var4 == nil then {} else { step = var4 }
 	end,
-	makeToolField = function(p2) --[[ line: 105 ]]
+	makeToolField = function(p2)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
 		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p2 == nil or p2.kind == nil then {} else { tool = p2.kind } else {}
 	end,
-	makeToolFieldFromKind = function(p3) --[[ line: 117 ]]
+	makeToolFieldFromKind = function(p3)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
 		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p3 == nil then {} else { tool = p3 } else {}
 	end,
-	makeCreationBaseFields = function(p4) --[[ line: 134 ]]
+	makeCreationBaseFields = function(p4)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
 		return if getFFlagMomentsAnalyticsProducerPrereqs() then if p4 == nil then {} else { creationSessionId = p4 } else {}
 	end,
-	makeCaptureDescriptorFields = function(p5) --[[ line: 168 ]]
+	makeCaptureDescriptorFields = function(p5)
 		-- upvalues: getFFlagMomentsAnalyticsProducerPrereqs (ref)
 		local t = {
 			sourcePlaceId = tostring(p5.SourcePlaceId),
@@ -64,17 +64,17 @@ return {
 		end
 		return t
 	end,
-	makeGeneratedTextOutcomeFields = function(p6, p7, p8, p9) --[[ line: 200 ]]
+	makeGeneratedTextOutcomeFields = function(p6, p7, p8, p9)
 		-- upvalues: getFFlagEnableMomentTextGeneration (ref)
 		return if getFFlagEnableMomentTextGeneration() then {
 			generatedDescriptionOutcome = if p6 == nil then "none" elseif p7 == p6 then "verbatim" elseif p7 == nil or p7 == "" then "discarded" else "edited",
 			generatedSummaryOutcome = if p8 == nil then "none" elseif p9 == p8 then "verbatim" elseif p9 == nil or p9 == "" then "discarded" else "edited"
 		} else {}
 	end,
-	classifyGeneratedTextOutcome = function(p10, p11) --[[ line: 183 ]]
+	classifyGeneratedTextOutcome = function(p10, p11)
 		return if p10 == nil then "none" elseif p11 == p10 then "verbatim" elseif p11 == nil or p11 == "" then "discarded" else "edited"
 	end,
-	enumName = function(p12) --[[ line: 149 ]]
+	enumName = function(p12)
 		return if typeof(p12) == "EnumItem" then p12.Name elseif p12 == nil then nil else tostring(p12)
 	end
 }

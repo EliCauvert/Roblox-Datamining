@@ -13,7 +13,7 @@ local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 28 | named "BuildEmptyState" ]]
+return function(p0)
 	-- upvalues: playersService (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref)
 	local BUILD_SUBLINE, var10
 	local localPlayer = playersService.LocalPlayer
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 28 | named "BuildEmptyState" ]]
 		var10 = var8.title
 	else
 		BUILD_SUBLINE = localizationStringsModule.BUILD_SUBLINE
-		var10 = reactModule.useMemo(function() --[[ line: 53 ]]
+		var10 = reactModule.useMemo(function()
 			-- upvalues: localizationStringsModule (copy), var7 (ref)
 			return localizationStringsModule.formatBuildGreeting(var7)
 		end, { var7 })

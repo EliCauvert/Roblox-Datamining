@@ -17,17 +17,17 @@ local block = images["icons/logo/block"]
 local safety = images["icons/common/safety"]
 local useNotificationCardStateModule = require(context.useNotificationCardState)
 
-local var6 = function(p0) --[[ line: 24 ]]
+local var6 = function(p0)
 	-- upvalues: typeModule (ref), userLibConstants (ref), enableStreamAvatarImageUrlThumbnail (ref)
 	return if p0 == typeModule.SENDERThumbnailTypeEnum.Game then userLibConstants.RbxthumbTypes.GameIcon elseif p0 == typeModule.SENDERThumbnailTypeEnum.User then userLibConstants.RbxthumbTypes.AvatarHeadShot elseif p0 == typeModule.SENDERThumbnailTypeEnum.Group then userLibConstants.RbxthumbTypes.GroupIcon elseif p0 == typeModule.SENDERThumbnailTypeEnum.Asset then userLibConstants.RbxthumbTypes.Asset elseif p0 == typeModule.SENDERThumbnailTypeEnum.Bundle then userLibConstants.RbxthumbTypes.BundleThumbnail elseif p0 == typeModule.SENDERThumbnailTypeEnum.GamePass then userLibConstants.RbxthumbTypes.GamePass elseif enableStreamAvatarImageUrlThumbnail and p0 == typeModule.SENDERThumbnailTypeEnum.AvatarImageUrl then userLibConstants.RbxthumbTypes.AvatarImageUrl else userLibConstants.RbxthumbTypes.GameIcon
 end
 
-local _ = function(p1) --[[ line: 47 ]]
+local _ = function(p1)
 	-- upvalues: typeModule (ref), enableStreamAvatarImageUrlThumbnail (ref)
 	return if p1.idType ~= typeModule.SENDERThumbnailTypeEnum.User then enableStreamAvatarImageUrlThumbnail and p1.idType == typeModule.SENDERThumbnailTypeEnum.AvatarImageUrl else true
 end
 
-return function() --[[ line: 55 ]]
+return function()
 	-- upvalues: useNotificationCardStateModule (ref), enableStreamAvatarImageUrlThumbnail (ref), typeModule (ref), useStyle (ref), constantsModule (ref), react (ref), imageSetLabel (ref), safety (ref), block (ref), var6 (ref), userLibConstants (ref), fFlagNotificationThumbnailUseProfileFrameThumbnailModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), loadableImage (ref)
 	local var7 = useNotificationCardStateModule("thumbnail")
 	

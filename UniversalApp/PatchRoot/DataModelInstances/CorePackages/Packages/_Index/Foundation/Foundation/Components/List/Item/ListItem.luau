@@ -30,7 +30,7 @@ local t = {
 }
 local t_1 = {}
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 91 | named "ListItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), flagsModule (ref), devAssertModule (ref), useListModule (ref), inputSizeModule (ref), useTokensModule (ref), useListItemVariantsModule (ref), useListAccessoryVariantsModule (ref), t (ref), reactModule (ref), listItemInputTypeModule (ref), viewModule (ref), listAccessoryModule (ref), textModule (ref), escapeRichTextModule (ref), iconModule (ref), builderIconsModule (ref), radioGroupModule (ref), checkboxModule (ref), toggleModule (ref), dividerModule (ref)
 	local var23 = withDefaultsModule(p0, t_1)
 	
@@ -45,11 +45,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 91 | 
 	local var28 = useListAccessoryVariantsModule(var26, size, "Icon")
 	local var29 = if flagsModule.FoundationListItemTypographySpacing then t[size] else "gap-small"
 	local var30 = typeof(var23.onActivated) == "table" and var23.onActivated.onActivated ~= nil
-	local var31 = reactModule.useMemo(function() --[[ line: 118 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: var30 (ref), var23 (ref)
 		return if var30 then var23.onActivated.onActivated elseif var23.onActivated == nil then nil else var23.onActivated
 	end, { var23.onActivated, var30 })
-	local var32 = reactModule.useMemo(function() --[[ line: 132 ]]
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: flagsModule (copy), var23 (ref), var30 (ref), listItemInputTypeModule (copy)
 		if not flagsModule.FoundationListItemDecoupledInput then
 			return nil
@@ -74,23 +74,23 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 91 | 
 		end
 		return { type = var23.input }
 	end, { var23.onActivated, var23.input, var30 })
-	local var33 = reactModule.useMemo(function() --[[ line: 151 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: var30 (ref), var23 (ref)
 		return if var30 then var23.onActivated.inputType else nil
 	end, { var23.onActivated, var30 })
-	local var34 = reactModule.useMemo(function() --[[ line: 158 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: var30 (ref), var23 (ref)
 		return if var30 then var23.onActivated.isChecked else nil
 	end, { var23.onActivated, var30 })
-	local var35 = reactModule.useMemo(function() --[[ line: 165 ]]
+	local var35 = reactModule.useMemo(function()
 		-- upvalues: var23 (ref)
 		return if typeof(var23.title) == "string" then var23.title elseif typeof(var23.title) == "table" then var23.title.title else nil
 	end, { var23.title })
-	local var36 = reactModule.useMemo(function() --[[ line: 174 ]]
+	local var36 = reactModule.useMemo(function()
 		-- upvalues: var23 (ref)
 		return if typeof(var23.title) == "table" then if var23.title.title == nil then nil else var23.title.metadata else nil
 	end, { var23.title })
-	var23.testId = if var23.testId then var23.testId else `{var24.testId}--item-{reactModule.useMemo(function() --[[ line: 182 ]]
+	var23.testId = if var23.testId then var23.testId else `{var24.testId}--item-{reactModule.useMemo(function()
 		-- upvalues: var35 (ref)
 		return var35 and string.gsub(var35, "%s+", "-") or ""
 	end, { var35 })}`
@@ -107,7 +107,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 91 | 
 	local var54
 	local var38 = if flagsModule.FoundationListItemDecoupledInput then if var32 then var32.type else nil else var33
 	local var39 = if flagsModule.FoundationListItemDecoupledInput then if var32 then var32.isChecked else nil else var34
-	local var40 = reactModule.useCallback(function(p2) --[[ line: 199 ]]
+	local var40 = reactModule.useCallback(function(p2)
 		-- upvalues: flagsModule (copy), var32 (ref), var31 (ref)
 		if flagsModule.FoundationListItemDecoupledInput and var32 and var32.onActivated then
 			var32.onActivated(p2)
@@ -117,7 +117,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 91 | 
 			var31()
 		end
 	end, { var32, var31 })
-	local var41 = reactModule.useCallback(function(p3) --[[ line: 207 ]]
+	local var41 = reactModule.useCallback(function(p3)
 		-- upvalues: var40 (ref)
 		var40(p3 == "radio")
 	end, { var40 })

@@ -22,7 +22,7 @@ local _ = require(parent.SduiCoreSystem)
 local sduiFocusNavActionsModule = require(serverDrivenUi.FocusNavigation.SduiFocusNavActions)
 local useSduiReportExperienceLaunched = require(parent.SduiSharedContent).useSduiReportExperienceLaunched
 
-return reactModule.memo(function(p0) --[[ line: 50 | named "SduiHoldToPlay" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useButtonHold (ref), constants (ref), buttonHoldStateEnum (ref), appShortcutBarContext (ref), guiService (ref), getInputModeStore (ref), responsiveModule (ref), focusNavigationEventNameEnum (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), holdToPlayLauncher (ref), useSduiReportExperienceLaunched (ref), setGamePlaySession (ref), sessionType (ref), playButtonStates (ref), sduiFocusNavActionsModule (ref)
 	local dependencies = p0.sduiContext.dependencies
 	local networking = dependencies.networking
@@ -33,26 +33,26 @@ return reactModule.memo(function(p0) --[[ line: 50 | named "SduiHoldToPlay" ]]
 	local var11 = var9.holdState == buttonHoldStateEnum.COMPLETED
 	local var12 = appShortcutBarContext.useDispatchButtonHoldStarted()
 	local var13 = appShortcutBarContext.useDispatchButtonHoldEnded()
-	local var14 = reactModule.useMemo(function() --[[ line: 65 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), guiService (copy)
 		return if p0.guiObject then p0.guiObject else guiService.SelectedCoreObject
 	end, { p0.guiObject })
 	local var15 = if var9.holdState ~= buttonHoldStateEnum.HOLDING then var9.holdState == buttonHoldStateEnum.COMPLETED else true
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), getInputModeStore (copy), p0 (ref), responsiveModule (copy)
 		if var15 then
 			if p0.setDisabledForHold and getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
 				p0.setDisabledForHold(true)
 			end
 		end
-		return function() --[[ line: 84 ]]
+		return function()
 			-- upvalues: p0 (copy)
 			if p0.setDisabledForHold then
 				p0.setDisabledForHold(false)
 			end
 		end
 	end, { var15, p0.setDisabledForHold })
-	reactModule.useEffect(function() --[[ line: 96 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var10 (ref), var12 (ref), focusNavigationEventNameEnum (copy), var9 (ref), var13 (ref)
 		if not var8.current and var10 then
 			var8.current = true
@@ -67,7 +67,7 @@ return reactModule.memo(function(p0) --[[ line: 50 | named "SduiHoldToPlay" ]]
 	local var16 = usePlayButtonState(networking, p0.universeId)
 	local var17 = useOnPlayButtonCallback(p0.universeId, nil, holdToPlayLauncher, nil, nil)
 	local var18 = useSduiReportExperienceLaunched(p0.sduiContext, p0.analyticsContext, p0.universeId, p0.placeId)
-	reactModule.useEffect(function() --[[ line: 112 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var16 (ref), setGamePlaySession (copy), sessionService (ref), sessionType (copy), var17 (ref), var18 (ref), var9 (ref), playButtonStates (copy)
 		if var11 then
 			local playButtonState = var16.playButtonState
@@ -83,7 +83,7 @@ return reactModule.memo(function(p0) --[[ line: 50 | named "SduiHoldToPlay" ]]
 	})
 	
 	return reactModule.createElement(sduiFocusNavActionsModule, {
-		focusNavActions = reactModule.useMemo(function() --[[ line: 132 ]]
+		focusNavActions = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), var9 (ref)
 			return {
 				keys = {

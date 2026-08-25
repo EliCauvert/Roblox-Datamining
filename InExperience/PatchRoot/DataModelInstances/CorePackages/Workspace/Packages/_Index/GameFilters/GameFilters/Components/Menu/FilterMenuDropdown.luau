@@ -14,11 +14,11 @@ local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppChartsActiveFilterChips = require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips
 local var8 = if fFlagLuaAppChartsFilterOptionTextTag then nil else 10000
 
-local function _(p0, p1) --[[ line: 39 | named "applyTokenScaling" ]]
+local function _(p0, p1)
 	return p0 * p1.Config.UI.Scale
 end
 
-return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
+return function(p2)
 	-- upvalues: useTokens (ref), useDispatch (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), var8 (ref), filterClickButtonNameModule (ref), getOptionContextTagModule (ref), fFlagLuaAppChartsActiveFilterChips (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref), filterMenuActionBarModule (ref)
 	local uDim2, vector2
 	local var9 = useTokens()
@@ -51,7 +51,7 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 		local var25, var26 = reactModule.useBinding(0)
 		var23 = var25
 		local var27 = var26
-		var24 = reactModule.useCallback(function(p3) --[[ line: 74 ]]
+		var24 = reactModule.useCallback(function(p3)
 			-- upvalues: var27 (write)
 			var27(p3.AbsoluteCanvasSize.Y)
 		end, {})
@@ -60,7 +60,7 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 		var21 = var28
 		var22 = var29
 	end
-	local var30 = var17:map(function(p4) --[[ line: 81 ]]
+	local var30 = var17:map(function(p4)
 		-- upvalues: p2 (ref), var11 (ref)
 		local maxValue, maxValue_1
 		local _ = nil
@@ -75,7 +75,7 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 		end
 		return Vector2.new(maxValue, maxValue_1)
 	end)
-	local var31 = reactModule.useCallback(function() --[[ line: 122 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), p2 (ref), filterClickButtonNameModule (copy), var13 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
 		var10(p2.closeCentralOverlayThunk())
 		p2.onFilterMenuClosed()
@@ -96,7 +96,7 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 		Text = "",
 		AutoButtonColor = false,
 		[reactModule.Event.Activated] = var31,
-		[reactModule.Change.AbsoluteSize] = function(p5) --[[ line: 179 ]]
+		[reactModule.Change.AbsoluteSize] = function(p5)
 			-- upvalues: var18 (ref)
 			var18(p5.AbsoluteSize)
 		end,
@@ -115,7 +115,7 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 			Size = reactModule.joinBindings({
 				var19,
 				if fFlagLuaAppChartsFilterOptionTextTag then var23 else var21
-			}):map(function(p6) --[[ line: 105 ]]
+			}):map(function(p6)
 				-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (copy), var12 (ref)
 				local var34 = p6[1]
 				
@@ -144,11 +144,11 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 			}),
 			Options = reactModule.createElement(filterMenuOptionsModule, {
 				LayoutOrder = 2,
-				Size = var19:map(function(p7) --[[ line: 118 ]]
+				Size = var19:map(function(p7)
 					-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (copy), var12 (ref)
 					return UDim2.new(if fFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 1, (-p7) - var12)
 				end),
-				containerMaxWidthBinding = if fFlagLuaAppChartsFilterOptionTextTag then nil elseif fFlagLuaAppChartsFilterOptionTextTag then nil else var30:map(function(p8) --[[ line: 98 ]]
+				containerMaxWidthBinding = if fFlagLuaAppChartsFilterOptionTextTag then nil elseif fFlagLuaAppChartsFilterOptionTextTag then nil else var30:map(function(p8)
 					return p8.X
 				end),
 				options = p2.filter.filterOptions,
@@ -160,7 +160,7 @@ return function(p2) --[[ line: 44 | named "FilterMenuDropdown" ]]
 				LayoutOrder = 3,
 				Size = UDim2.new(if fFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 0, var12),
 				applyEnabled = var13 ~= p2.filter.selectedOptionId,
-				onApply = reactModule.useCallback(function() --[[ line: 146 ]]
+				onApply = reactModule.useCallback(function()
 					-- upvalues: p2 (ref), var13 (ref), var10 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
 					p2.onFilterApplied(p2.filter.filterType, var13)
 					var10(p2.closeCentralOverlayThunk())

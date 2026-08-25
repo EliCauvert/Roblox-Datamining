@@ -10,9 +10,9 @@ local getCreatorAgentResumeStoreModule = require(buildExperience.Stores.GetCreat
 local getCurrentExperienceProjectModule = require(buildExperience.utils.getCurrentExperienceProject)
 local _ = require(script.Parent.ChatSheetView)
 
-local function noop() --[[ line: 29 ]] end
+local function noop() end
 
-return function(p0) --[[ line: 31 | named "useChatSheetViewModel" ]]
+return function(p0)
 	-- upvalues: noop (ref), getAssistantBuildStoreModule (ref), signalsReactModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), useChatPlaytestFooterModule (ref), reactModule (ref)
 	local onClose = p0.onClose or noop
 	local var10 = p0.isOpen == nil or p0.isOpen
@@ -28,18 +28,18 @@ return function(p0) --[[ line: 31 | named "useChatSheetViewModel" ]]
 		hydrateHistoryWhen = var10
 	})
 	local var16 = useChatPlaytestFooterModule(var15, "ChatSheetPlaytestCta")
-	reactModule.useEffect(function() --[[ line: 50 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var11 (ref), onClose (ref)
 		if var10 and var11 then
 			onClose()
 		end
 	end, { var10, var11, onClose })
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var12 (ref), universeId (ref), p0 (ref)
 		if var10 then
 			var12.setActiveTarget({ universeId = universeId, sessionId = p0.sessionId })
 			
-			return function() --[[ line: 65 ]]
+			return function()
 				-- upvalues: var12 (copy)
 				var12.setActiveTarget(nil)
 			end

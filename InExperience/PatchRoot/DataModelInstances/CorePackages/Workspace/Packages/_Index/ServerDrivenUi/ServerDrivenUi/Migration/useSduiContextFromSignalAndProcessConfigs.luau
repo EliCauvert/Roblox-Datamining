@@ -9,11 +9,11 @@ local getItemCollectionKeyModule = require(serverDrivenUi.DataStore.getItemColle
 local _ = require(parent.SduiCoreSystem)
 local fFlagSduiGetItemCollectionKeys = require(serverDrivenUi.Flags).FFlagSduiGetItemCollectionKeys
 
-return function(value, p0, p1) --[[ line: 23 | named "useSduiContextFromSignalAndProcessConfigs" ]]
+return function(value, p0, p1)
 	-- upvalues: reactModule (ref), getSduiFeedStoreModule (ref), fFlagSduiGetItemCollectionKeys (ref), signalsReactModule (ref), useSduiContextModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
-	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 28 ]]
+	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy), value (ref), fFlagSduiGetItemCollectionKeys (copy)
-		return function(p2) --[[ line: 29 ]]
+		return function(p2)
 			-- upvalues: p1 (copy), getSduiFeedStoreModule (copy), value (copy), fFlagSduiGetItemCollectionKeys (copy)
 			if not p1 then
 				return {}
@@ -42,7 +42,7 @@ return function(value, p0, p1) --[[ line: 23 | named "useSduiContextFromSignalAn
 		templates = var7.templates,
 		dataUpdatedTimestamp = var7.dataUpdatedTimestamp
 	})
-	reactModule.useEffect(function() --[[ line: 66 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), getSduiFeedStoreModule (copy), p0 (ref), var7 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var8 (ref)
 		if not p1 then return end
 		local var14 = getSduiFeedStoreModule(p0)

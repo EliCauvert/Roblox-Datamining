@@ -6,9 +6,9 @@ local reactModule = require(parent.React)
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
 local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 
-return function(value) --[[ line: 20 | named "useSignalProfileInsightsByUserId" ]]
+return function(value)
 	-- upvalues: fFlagTFProfileInsightsBypassCache (ref), reactModule (ref), profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref)
-	local var4 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function() --[[ line: 23 ]]
+	local var4 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function()
 		-- upvalues: profileInsightsStoreModule (copy), value (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
 		return profileInsightsStoreModule(false).getProfileInsightsByUserId({
 			userIds = { value.userId },
@@ -28,7 +28,7 @@ return function(value) --[[ line: 20 | named "useSignalProfileInsightsByUserId" 
 	})
 	local var5 = signalsReactModule.useSignalState(var4(false).data.getProfileInsights)
 	
-	return reactModule.useMemo(function() --[[ line: 41 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var5 (ref), value (ref)
 		for i, v in var5 do
 			if v.targetUserId == value.userId then

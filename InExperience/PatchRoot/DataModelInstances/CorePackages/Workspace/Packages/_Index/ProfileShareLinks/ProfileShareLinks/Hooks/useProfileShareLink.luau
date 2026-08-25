@@ -15,7 +15,7 @@ local useAnalyticsModule = require(profileShareLinks.Analytics.useAnalytics)
 local eventNamesModule = require(profileShareLinks.Analytics.EventNames)
 local textKeysModule = require(profileShareLinks.Common.TextKeys)
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useProfileSharePolicyModule (ref), useGetOrGenerateLinkUrlModule (ref), useShortUrlModule (ref), useEffectOnce (ref), profileSharePolicyEnumModule (ref), reactModule (ref), eventNamesModule (ref), default (ref), setCurrentToastMessage (ref), textKeysModule (ref)
 	local var10 = p0.enableFetch == nil or p0.enableFetch
 	local var11 = useAnalyticsModule()
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 31 ]]
 	return {
 		hasLoaded = var16,
 		policy = var13,
-		onActivated = reactModule.useCallback(function() --[[ line: 45 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: var13 (ref), profileSharePolicyEnumModule (copy), var15 (ref), var11 (ref), eventNamesModule (copy), p0 (ref), default (copy), var12 (ref), setCurrentToastMessage (copy), textKeysModule (copy)
 			if var13 == profileSharePolicyEnumModule.Disabled or var15 == nil then return end
 			local var17 = tostring(DateTime.now().UnixTimestampMillis)

@@ -22,11 +22,11 @@ local fFlagFriendsCallingClientGateDEV = sharedFlagsModule.FFlagFriendsCallingCl
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
 local useSignalState = signalsReactModule.useSignalState
 
-local function noOp() --[[ line: 40 ]]
+local function noOp()
 	return nil
 end
 
-return function(p0) --[[ line: 49 | named "ChatConversationTopBar" ]]
+return function(p0)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useChatPlacementContext (ref), useLocalization (ref), appHeaderBarModule (ref), createBackFuncModule (ref), fFlagFriendsCallingClientGateDEV (ref), reactModule (ref), foundationModule (ref), noOp (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), getFFlagIsSquadEnabled (ref), enumScreensModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), headerBarTitleLeftAlignedModule (ref), chatTopBarBaseModule (ref)
 	if not fFlagAppChatTopBarConfigDrivenModule() then
 		return nil
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 49 | named "ChatConversationTopBar" ]]
 	local var22 = nil
 	
 	if fFlagFriendsCallingClientGateDEV and conversationId then
-		var22 = function() --[[ line: 85 ]]
+		var22 = function()
 			-- upvalues: reactModule (copy), foundationModule (copy), noOp (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
 			return reactModule.createElement(foundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
 				CallButton = reactModule.createElement(foundationModule.IconButton, {
@@ -65,12 +65,12 @@ return function(p0) --[[ line: 49 | named "ChatConversationTopBar" ]]
 			})
 		end
 	elseif getFFlagIsSquadEnabled() and conversationId then
-		local var23 = function() --[[ line: 101 ]]
+		local var23 = function()
 			-- upvalues: navigation (ref), enumScreensModule (copy), conversationId (ref)
 			navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
 		end
 		
-		var22 = function() --[[ line: 104 ]]
+		var22 = function()
 			-- upvalues: reactModule (copy), foundationModule (copy), squadComponentAccessWrapperModule (copy), conversationId (ref), squadJoinButtonModule (copy), var23 (ref), squadButtonSourceEnum (copy), var19 (ref)
 			return reactModule.createElement(foundationModule.View, { tag = "row align-x-right auto-xy" }, {
 				GroupUpButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = conversationId }, reactModule.createElement(squadJoinButtonModule, {
@@ -91,14 +91,14 @@ return function(p0) --[[ line: 49 | named "ChatConversationTopBar" ]]
 		screenName = screenName,
 		navigation = navigation,
 		renderLeft = noOp,
-		renderCenter = function() --[[ line: 129 ]]
+		renderCenter = function()
 			-- upvalues: headerText (ref), var20 (ref), reactModule (copy), headerBarTitleLeftAlignedModule (copy), var21 (ref), var22 (write), conversationId (ref), navigateToChatDetails (ref), rightPaddingOverride (ref)
 			return reactModule.createElement(headerBarTitleLeftAlignedModule, {
 				renderLeft = var21,
 				renderRight = var22,
 				titleText = if headerText.shouldLocalize then var20.headerText else headerText.raw or "",
 				conversationId = conversationId or "",
-				navigateToChatDetails = navigateToChatDetails or function() --[[ line: 136 ]] end,
+				navigateToChatDetails = navigateToChatDetails or function() end,
 				ignoreRightMargin = rightPaddingOverride ~= nil
 			})
 		end

@@ -2,7 +2,7 @@
 local sduiPolicyFieldKeyModule = require(sduiCoreSystem.ClientBinding.SduiPolicyFieldKey)
 local _ = require(sduiCoreSystem.Parent.UniversalAppPolicy)
 
-return function(p0, p1) --[[ line: 16 | named "resolveSduiPolicyField" ]]
+return function(p0, p1)
 	-- upvalues: sduiPolicyFieldKeyModule (ref)
 	if p1 == sduiPolicyFieldKeyModule.SearchBar then
 		return true, p0.getSearchBar()

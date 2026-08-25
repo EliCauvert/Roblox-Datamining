@@ -26,7 +26,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function calculateMeshSizeForPart(p0, p1) --[[ line: 33 ]]
+local function calculateMeshSizeForPart(p0, p1)
 	-- upvalues: getEditableMeshFromContextModule (ref), getMeshSizeModule (ref)
 	local t = {
 		fieldName = "MeshId",
@@ -44,7 +44,7 @@ local function calculateMeshSizeForPart(p0, p1) --[[ line: 33 ]]
 	return false, nil
 end
 
-local function validateWrapTargetComparison(p2, p3, p4, p5) --[[ line: 52 ]]
+local function validateWrapTargetComparison(p2, p3, p4, p5)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), errorSourceStringsModule (ref), getMeshMinMaxModule (ref)
 	local var14, _, var15 = getMeshInfoModule(p3, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p4)
 	
@@ -88,7 +88,7 @@ local function validateWrapTargetComparison(p2, p3, p4, p5) --[[ line: 52 ]]
 	end
 end
 
-function t.run(p6, p7) --[[ line: 112 ]]
+function t.run(p6, p7)
 	-- upvalues: validationEnumsModule (ref), calculateMeshSizeForPart (ref), errorSourceStringsModule (ref), getExpectedPartSizeModule (ref), validateWrapTargetComparison (ref), constantsModule (ref)
 	local rootInstance = p7.rootInstance
 	local assetType = p7.uploadEnum.assetType
@@ -138,7 +138,7 @@ function t.run(p6, p7) --[[ line: 112 ]]
 		bypassFlags = { skipPhysicsDataReset = true }
 	}
 	
-	local function validateSingleMeshPart(p8) --[[ line: 156 ]]
+	local function validateSingleMeshPart(p8)
 		-- upvalues: calculateMeshSizeForPart (copy), t_1 (ref), p6 (ref), errorSourceStringsModule (copy), getExpectedPartSizeModule (copy), validateWrapTargetComparison (copy)
 		local var33, var34 = calculateMeshSizeForPart(p8, t_1)
 		

@@ -10,7 +10,7 @@ local _ = require(parent.Resources.Constants)
 local getFFlagReportAnythingDebugCanvasModule = require(parent.Flags.GetFFlagReportAnythingDebugCanvas)
 local debugCanvas = reactModule.PureComponent:extend("DebugCanvas")
 
-function debugCanvas.render(p0) --[[ line: 23 ]]
+function debugCanvas.render(p0)
 	-- upvalues: getFFlagReportAnythingDebugCanvasModule (ref), reactModule (ref)
 	if not getFFlagReportAnythingDebugCanvasModule() or not p0.props.identifiedAvatars then
 		return reactModule.createElement("Frame", { Size = UDim2.fromScale(0, 0) })

@@ -56,12 +56,12 @@ local t = {
 	isInExperience = false,
 	parentChannelId = "",
 	userId = "",
-	onDismiss = function() --[[ line: 110 ]] end,
-	openViewProfile = function() --[[ line: 111 ]] end,
-	openVoiceAbuseReport = function() --[[ line: 112 ]] end
+	onDismiss = function() end,
+	openViewProfile = function() end,
+	openVoiceAbuseReport = function() end
 }
 
-return function(p0) --[[ line: 117 ]]
+return function(p0)
 	-- upvalues: cryo (ref), t (ref), react (ref), squadExternalContractContext (ref), useDispatch (ref), useLocalUserId (ref), useStore (ref), useVoiceStatus (ref), fFlagEnableSquadUserCardHoverFix (ref), useSquadUserDropdownMenuButtonsModule (ref), useIsParticipantMutedLocally (ref), useLocalization (ref), constantsModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadPromptType (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), useParticipants (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), fFlagSquadsPresenceStoreMigration (ref), var8 (ref), useSelector (ref), var9 (ref), presenceType (ref), gameParams (ref), fFlagSquadLaunchExperienceMobileFix (ref), squadLocationEnum (ref), experienceService (ref), headphoneDeafenSmall (ref), play (ref), leave (ref), profile (ref), feedback (ref), microphoneMute (ref), microphone (ref), default (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref), focusNavigableSurfaceWrapper (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusNavigableSurfaceIdentifierEnum (ref), modalBottomSheet (ref)
 	local var14 = cryo.Dictionary.union(t, p0)
 	local var15 = react.useContext(squadExternalContractContext)
@@ -81,11 +81,11 @@ return function(p0) --[[ line: 117 ]]
 		unmuteVoiceButtonText = "Feature.Chat.Action.UnmuteVoice"
 	})
 	local var23 = var15.useGetConversationFromId(var14.parentChannelId)
-	local var24 = react.useMemo(function() --[[ line: 142 ]]
+	local var24 = react.useMemo(function()
 		-- upvalues: var23 (ref), constantsModule (copy), var17 (ref)
 		return var23 and (var23.type == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and var23.initiator == var17)
 	end, { var23, var17 })
-	local var25 = react.useCallback(function() --[[ line: 148 ]]
+	local var25 = react.useCallback(function()
 		-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), squadPartySheetActionEnumModule (copy), var19 (ref)
 		var15.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
 			parentChannelId = var14.parentChannelId,
@@ -99,7 +99,7 @@ return function(p0) --[[ line: 117 ]]
 		var15.fireSquadAnalytics,
 		var19
 	})
-	local var26 = react.useCallback(function() --[[ line: 163 ]]
+	local var26 = react.useCallback(function()
 		-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), squadPartySheetActionEnumModule (copy), var19 (ref), var18 (ref), squadPromptType (copy), var16 (ref)
 		var15.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
 			parentChannelId = var14.parentChannelId,
@@ -108,7 +108,7 @@ return function(p0) --[[ line: 117 ]]
 		})
 		var15.setSquadPrompt(var18, {
 			promptType = squadPromptType.RemoveFromChat,
-			onConfirm = function() --[[ line: 172 ]]
+			onConfirm = function()
 				-- upvalues: var14 (copy), var15 (copy), eventNamesModule (copy), squadPartySheetActionEnumModule (copy), var19 (copy), var16 (copy)
 				if var14.userId == "" or var14.parentChannelId == "" then
 					return nil
@@ -136,7 +136,7 @@ return function(p0) --[[ line: 117 ]]
 	if getFFlagEnableCrossExpVoice() then
 		local var31 = useBackgroundExperience()
 		local var32 = useParticipants() or {}
-		t_1 = react.useMemo(function() --[[ line: 207 ]]
+		t_1 = react.useMemo(function()
 			-- upvalues: var32 (write)
 			local t = {}
 			
@@ -145,11 +145,11 @@ return function(p0) --[[ line: 117 ]]
 			end
 			return t
 		end, { var32 })
-		var29 = react.useMemo(function() --[[ line: 214 ]]
+		var29 = react.useMemo(function()
 			-- upvalues: var31 (write)
 			return if var31 then var31.voiceChannelId else nil
 		end, { var31 })
-		var30 = react.useMemo(function() --[[ line: 217 ]]
+		var30 = react.useMemo(function()
 			-- upvalues: var31 (write)
 			return if var31 then var31.voiceSessionId else nil
 		end, { var31 })
@@ -163,11 +163,11 @@ return function(p0) --[[ line: 117 ]]
 			end
 		end
 	end
-	local var35 = if fFlagSquadsPresenceStoreMigration then var8(tostring(var14.userId)) else useSelector(react.useCallback(function(p1) --[[ line: 234 ]]
+	local var35 = if fFlagSquadsPresenceStoreMigration then var8(tostring(var14.userId)) else useSelector(react.useCallback(function(p1)
 		-- upvalues: var14 (ref)
 		return p1.Squad.Presence.byUserId[var14.userId]
 	end, { var14.userId }))
-	local var36 = react.useMemo(function() --[[ line: 242 ]]
+	local var36 = react.useMemo(function()
 		-- upvalues: fFlagEnableSquadUserCardHoverFix (copy), var20 (ref), var35 (ref), fFlagSquadsPresenceStoreMigration (copy), var9 (copy), presenceType (copy)
 		if fFlagEnableSquadUserCardHoverFix then
 			local placeId = false
@@ -203,7 +203,7 @@ return function(p0) --[[ line: 117 ]]
 			return var40
 		end
 	end, { var35, var20 })
-	local var37 = react.useCallback(function() --[[ line: 259 ]]
+	local var37 = react.useCallback(function()
 		-- upvalues: var36 (ref), gameParams (copy), var14 (ref), fFlagSquadsPresenceStoreMigration (copy), var35 (ref), fFlagSquadLaunchExperienceMobileFix (copy), var15 (ref), squadLocationEnum (copy), experienceService (copy)
 		if var36 then
 			local var41 = gameParams.fromUserId(var14.userId, if fFlagSquadsPresenceStoreMigration then var35 and var35.placeId else var35.placeId)
@@ -227,7 +227,7 @@ return function(p0) --[[ line: 117 ]]
 		var14.userId,
 		var35
 	})
-	local var38 = if fFlagEnableSquadUserCardHoverFix then react.useMemo(function() --[[ line: 289 ]]
+	local var38 = if fFlagEnableSquadUserCardHoverFix then react.useMemo(function()
 		-- upvalues: headphoneDeafenSmall (copy), var22 (ref), play (copy), var37 (ref), leave (copy), var26 (ref), profile (copy), var25 (ref), feedback (copy), var17 (ref), var14 (ref), var29 (write), var30 (write), t_1 (write), var21 (ref), microphoneMute (copy), microphone (copy), default (copy), var20 (ref)
 		local t = {
 			VoiceIneligibleButton = {
@@ -253,7 +253,7 @@ return function(p0) --[[ line: 117 ]]
 			ReportButton = {
 				icon = feedback,
 				text = var22.reportUserText,
-				onActivated = function() --[[ line: 314 ]]
+				onActivated = function()
 					-- upvalues: var17 (copy), var14 (copy), var29 (copy), var30 (copy), t_1 (copy)
 					var14.openSquadVoiceAbuseReport({
 						submitterUserId = tostring(var17),
@@ -269,7 +269,7 @@ return function(p0) --[[ line: 117 ]]
 			MuteVoiceButton = {
 				icon = if var21 then microphoneMute else microphone,
 				text = if var21 then var22.unmuteVoiceButtonText else var22.muteVoiceButtonText,
-				onActivated = function() --[[ line: 332 ]]
+				onActivated = function()
 					-- upvalues: var14 (copy), var21 (copy), default (copy)
 					local var49 = tonumber(var14.userId)
 					
@@ -302,7 +302,7 @@ return function(p0) --[[ line: 117 ]]
 		var22.voiceIneligibleText, var22.muteVoiceButtonText,
 		var22.unmuteVoiceButtonText, var17, var29, var30, t_1, var26, var20, var37,
 		var25, var21
-	}) else react.useMemo(function() --[[ line: 379 ]]
+	}) else react.useMemo(function()
 		-- upvalues: var17 (ref), var14 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var29 (write), var27 (write), headphoneDeafenSmall (copy), var22 (ref), var36 (ref), play (copy), var37 (ref), profile (copy), var25 (ref), feedback (copy), var30 (write), t_1 (write), var24 (ref), leave (copy), var26 (ref)
 		local var43 = not var14.isInExperience
 		local var44 = getFFlagEnableCrossExpVoiceAbuseReport() and (not not var29 and not (tostring(var17) == var14.userId))
@@ -333,7 +333,7 @@ return function(p0) --[[ line: 117 ]]
 			table.insert(t, {
 				icon = feedback,
 				text = var22.reportUserText,
-				onActivated = function() --[[ line: 416 ]]
+				onActivated = function()
 					-- upvalues: var17 (copy), var14 (copy), var29 (copy), var30 (copy), t_1 (copy)
 					var14.openSquadVoiceAbuseReport({
 						submitterUserId = tostring(var17),
@@ -369,7 +369,7 @@ return function(p0) --[[ line: 117 ]]
 			isIsolated = true,
 			customEventHandlers = {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2) --[[ line: 465 ]]
+					handler = inputHandlersModule.onRelease(function(p2)
 						-- upvalues: var14 (ref)
 						var14.onDismiss()
 						p2:cancel()
@@ -383,7 +383,7 @@ return function(p0) --[[ line: 117 ]]
 				screenWidth = 400,
 				showImages = true,
 				buttonModels = var38,
-				onDismiss = function() --[[ line: 479 ]]
+				onDismiss = function()
 					-- upvalues: var14 (ref)
 					var14.onDismiss()
 				end

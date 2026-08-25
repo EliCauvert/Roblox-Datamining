@@ -12,9 +12,9 @@ local reportAbuseAnalyticsModule = require(abuseReportMenu.Analytics.ReportAbuse
 local collectAnalyticsParametersModule = require(abuseReportMenu.Analytics.collectAnalyticsParameters)
 local var9 = reportAbuseAnalyticsModule.new(eventIngest.new(eventIngestService), var6.Diag, reportAbuseAnalyticsModule.MenuContexts.NewMenu)
 
-return function(p0, p1, p2, p3) --[[ line: 22 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: reportTypes (ref), collectAnalyticsParametersModule (ref), reportAnythingAnalyticsModule (ref), var9 (ref), constantsModule (ref)
-	return function(p4, p5) --[[ line: 28 ]]
+	return function(p4, p5)
 		-- upvalues: p0 (ref), p3 (ref), reportTypes (copy), collectAnalyticsParametersModule (copy), reportAnythingAnalyticsModule (copy), var9 (copy), constantsModule (copy), p1 (ref), p2 (ref)
 		if p0.menuEverShown then
 			var9:reportInGameAbuseReportInteraction(if p3 == reportTypes.Person then collectAnalyticsParametersModule.forPersonReport(p0, p4, reportAnythingAnalyticsModule.getAccumulatedParameters()) else collectAnalyticsParametersModule.forExperienceReport(p0, p4, reportAnythingAnalyticsModule.getAccumulatedParameters()))

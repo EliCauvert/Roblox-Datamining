@@ -6,7 +6,7 @@ local iconSize = foundationModule.Enums.IconSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 
-return function(p0) --[[ line: 20 | named "ProfileMoreButton" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref)
 	return reactModule.createElement(iconButton, {
 		LayoutOrder = p0.layoutOrder,

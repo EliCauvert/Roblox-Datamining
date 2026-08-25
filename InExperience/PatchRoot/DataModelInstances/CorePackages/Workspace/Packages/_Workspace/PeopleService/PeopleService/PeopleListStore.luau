@@ -7,7 +7,7 @@ local createPersonStoreModule = require(parent.createPersonStore)
 local peopleUtilityModule = require(parent.PeopleUtility)
 local getFFlagPeoplePageEnablePersonSignalStore = require(parent.Flags).GetFFlagPeoplePageEnablePersonSignalStore
 
-local function createPeopleListStore(p0) --[[ line: 36 ]]
+local function createPeopleListStore(p0)
 	-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (ref), createSignalMap (ref), peopleUtilityModule (ref), signalsModule (ref), cryoModule (ref), createPersonStoreModule (ref)
 	p0 = p0 or game:GetService("Players")
 	local players = p0:GetPlayers()
@@ -18,11 +18,11 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 	local var11, var12 = signalsModule.createSignal({})
 	local t = {}
 	local t_1 = {}
-	local var15 = cryoModule.List.map(players, function(p1) --[[ line: 62 ]]
+	local var15 = cryoModule.List.map(players, function(p1)
 		return p1.UserId
 	end)
 	
-	local function fetchProfiles(p2) --[[ line: 67 ]]
+	local function fetchProfiles(p2)
 		-- upvalues: t (write), peopleUtilityModule (copy), cryoModule (copy), var12 (ref)
 		local t_1 = {}
 		
@@ -39,7 +39,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		end
 	end
 	
-	local function fetchPlatformData(p3) --[[ line: 90 ]]
+	local function fetchPlatformData(p3)
 		-- upvalues: t_1 (write), peopleUtilityModule (copy), cryoModule (copy)
 		local t = {}
 		
@@ -55,7 +55,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		end
 	end
 	
-	local var18 = if getFFlagPeoplePageEnablePersonSignalStore() then function(p4) --[[ line: 112 ]]
+	local var18 = if getFFlagPeoplePageEnablePersonSignalStore() then function(p4)
 		-- upvalues: var7 (ref), createPersonStoreModule (copy), var8 (ref), peopleUtilityModule (copy)
 		if var7[p4.UserId] then
 			return
@@ -66,7 +66,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		peopleUtilityModule.sortPersonStores(var7)
 	end else nil
 	
-	local function addPerson(p5) --[[ line: 130 ]]
+	local function addPerson(p5)
 		-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (copy), var18 (ref), players (write), peopleUtilityModule (copy), cryoModule (copy), var10 (ref), var15 (write), fetchProfiles (ref), fetchPlatformData (ref)
 		if getFFlagPeoplePageEnablePersonSignalStore() then
 			var18(p5)
@@ -88,13 +88,13 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		fetchPlatformData({ p5.UserId })
 	end
 	
-	local function removePerson(p6) --[[ line: 171 ]]
+	local function removePerson(p6)
 		-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (copy), var7 (ref), var8 (ref), cryoModule (copy), players (write), var10 (ref), var15 (write), t (write), t_1 (write), var12 (ref)
 		if getFFlagPeoplePageEnablePersonSignalStore() and var7[p6.UserId] then
 			var7[p6.UserId] = nil
 			var8.removeData(p6.UserId, false)
 		end
-		local var30 = cryoModule.List.filter(players, function(p7) --[[ line: 180 ]]
+		local var30 = cryoModule.List.filter(players, function(p7)
 			-- upvalues: p6 (ref)
 			return p7 ~= p6
 		end)
@@ -105,7 +105,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		players = var30
 		var10(players)
 		local userId = p6.UserId
-		var15 = cryoModule.List.filter(var15, function(p8) --[[ line: 195 ]]
+		var15 = cryoModule.List.filter(var15, function(p8)
 			-- upvalues: userId (ref)
 			return p8 ~= userId
 		end)
@@ -115,7 +115,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		var12(t)
 	end
 	
-	local function getProfile(p9) --[[ line: 207 ]]
+	local function getProfile(p9)
 		-- upvalues: t (write), fetchProfiles (ref)
 		local var32 = tostring(p9)
 		
@@ -125,7 +125,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		return t[var32]
 	end
 	
-	local function getPlatformName(p10) --[[ line: 219 ]]
+	local function getPlatformName(p10)
 		-- upvalues: t_1 (write), fetchPlatformData (ref)
 		local var33 = tostring(p10)
 		
@@ -135,7 +135,7 @@ local function createPeopleListStore(p0) --[[ line: 36 ]]
 		return t_1[var33].platformName
 	end
 	
-	local function getPlatformProfileId(p11) --[[ line: 231 ]]
+	local function getPlatformProfileId(p11)
 		-- upvalues: t_1 (write), fetchPlatformData (ref)
 		local var34 = tostring(p11)
 		

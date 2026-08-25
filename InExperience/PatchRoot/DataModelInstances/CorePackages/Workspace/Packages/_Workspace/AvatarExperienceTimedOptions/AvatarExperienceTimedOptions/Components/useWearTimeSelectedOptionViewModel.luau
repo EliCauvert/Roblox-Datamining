@@ -9,7 +9,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local _ = require(parent.AvatarExperienceCommon)
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 
-local function _(p0) --[[ line: 52 | named "getPermanentPrice" ]]
+local function _(p0)
 	for i, v in p0 do
 		if v.days == 0 then
 			return v.price
@@ -18,16 +18,16 @@ local function _(p0) --[[ line: 52 | named "getPermanentPrice" ]]
 	return 0
 end
 
-return function(p1) --[[ line: 62 | named "useWearTimeSelectedOptionViewModel" ]]
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), localization (ref), localizationService (ref), fFlagAXDurablesForMIS (ref), useLocalization (ref)
 	local var14
 	local var4 = useTokens()
-	local var5 = reactModule.useMemo(function() --[[ line: 65 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: localization (copy), localizationService (copy)
 		return localization.new(localizationService.RobloxLocaleId)
 	end, {})
 	local var6, var7 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagAXDurablesForMIS (copy), p1 (ref), var7 (ref)
 		if fFlagAXDurablesForMIS and p1.selectedTimedOptionIndexInReducer ~= nil then
 			var7(p1.selectedTimedOptionIndexInReducer)
@@ -104,7 +104,7 @@ return function(p1) --[[ line: 62 | named "useWearTimeSelectedOptionViewModel" ]
 		price = var14,
 		subLabelText = infinite,
 		listLabelText = infinite_1,
-		handleOptionActivated = reactModule.useCallback(function(p2) --[[ line: 113 ]]
+		handleOptionActivated = reactModule.useCallback(function(p2)
 			-- upvalues: var7 (ref), p1 (ref), var12 (ref)
 			var7(p2)
 			
@@ -113,7 +113,7 @@ return function(p1) --[[ line: 62 | named "useWearTimeSelectedOptionViewModel" ]
 			end
 			var12(false)
 		end, { p1.onOptionActivated }),
-		updatedOptions = reactModule.useMemo(function() --[[ line: 121 ]]
+		updatedOptions = reactModule.useMemo(function()
 			-- upvalues: p1 (ref), var6 (ref)
 			local t = {}
 			

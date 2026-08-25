@@ -8,24 +8,24 @@ local bulkPurchaseStartedModule = require(bulkPurchaseApp.Store.Actions.BulkPurc
 local bulkPurchaseRequestedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRequested)
 local _ = require(bulkPurchaseApp.Store.Types)
 
-local function _() --[[ line: 21 | named "createInitialState" ]]
+local function _()
 	-- upvalues: bulkPurchasePromptStateEnumModule (ref)
 	return { promptState = bulkPurchasePromptStateEnumModule.None }
 end
 
 return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModule.None }, {
-	[bulkPurchaseEndedModule.name] = function(_, _) --[[ line: 28 ]]
+	[bulkPurchaseEndedModule.name] = function(_, _)
 		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
 		return { promptState = bulkPurchasePromptStateEnumModule.None }
 	end,
-	[bulkPurchaseSucceededModule.name] = function(p0, p1) --[[ line: 31 ]]
+	[bulkPurchaseSucceededModule.name] = function(p0, p1)
 		local cloned = table.clone(p0)
 		cloned.itemStatuses = p1.itemStatuses
 		cloned.promptState = p1.promptState
 		
 		return cloned
 	end,
-	[bulkPurchaseFailedModule.name] = function(p2, p3) --[[ line: 37 ]]
+	[bulkPurchaseFailedModule.name] = function(p2, p3)
 		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
 		local cloned = table.clone(p2)
 		cloned.errorCode = p3.errorCode
@@ -34,7 +34,7 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		
 		return cloned
 	end,
-	[bulkPurchaseRequestedModule.name] = function(p4, p5) --[[ line: 44 ]]
+	[bulkPurchaseRequestedModule.name] = function(p4, p5)
 		local cloned = table.clone(p4)
 		cloned.itemData = p5.itemData
 		cloned.options = p5.options
@@ -45,7 +45,7 @@ return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModu
 		
 		return cloned
 	end,
-	[bulkPurchaseStartedModule.name] = function(p6, p7) --[[ line: 54 ]]
+	[bulkPurchaseStartedModule.name] = function(p6, p7)
 		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
 		local cloned = table.clone(p6)
 		cloned.promptState = bulkPurchasePromptStateEnumModule.Request

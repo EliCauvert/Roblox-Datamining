@@ -4,8 +4,8 @@ local roactModule = require(parent.Roact)
 local onRootedListener = roactModule.Component:extend("OnRootedListener")
 onRootedListener.validateProps = tModule.strictInterface({ onRooted = tModule.callback })
 
-function onRootedListener.init(p0) --[[ line: 16 ]]
-	function p0.onAncestryChanged(p1) --[[ line: 17 ]]
+function onRootedListener.init(p0)
+	function p0.onAncestryChanged(p1)
 		-- upvalues: p0 (ref)
 		if p1:IsDescendantOf(game) then
 			p0.props.onRooted(p1)
@@ -13,7 +13,7 @@ function onRootedListener.init(p0) --[[ line: 16 ]]
 	end
 end
 
-function onRootedListener.render(p2) --[[ line: 24 ]]
+function onRootedListener.render(p2)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Folder", {
 		[roactModule.Event.AncestryChanged] = p2.onAncestryChanged

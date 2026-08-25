@@ -8,13 +8,13 @@ local t = {
 	ButtonHoldEnded = "ButtonHoldEnded"
 }
 local t_1 = {
-	[t.ButtonHoldStarted] = function(p0, p1) --[[ line: 38 ]]
+	[t.ButtonHoldStarted] = function(p0, p1)
 		local cloned = table.clone(p0)
 		cloned.heldProgress[p1.eventName] = p1.progress
 		
 		return cloned
 	end,
-	[t.ButtonHoldEnded] = function(p2, p3) --[[ line: 43 ]]
+	[t.ButtonHoldEnded] = function(p2, p3)
 		local cloned = table.clone(p2)
 		cloned.heldProgress[p3.eventName] = nil
 		
@@ -22,7 +22,7 @@ local t_1 = {
 	end
 }
 
-local function registryReducer(p4, p5) --[[ line: 50 ]]
+local function registryReducer(p4, p5)
 	-- upvalues: t_1 (ref)
 	local type = t_1[p5.type]
 	
@@ -36,7 +36,7 @@ local var6 = reactModule.createContext(nil)
 
 return {
 	Context = var6,
-	Provider = function(p6) --[[ line: 60 ]]
+	Provider = function(p6)
 		-- upvalues: reactModule (ref), registryReducer (ref), var6 (ref)
 		local var9, var10 = reactModule.useReducer(registryReducer, { heldProgress = {} })
 		

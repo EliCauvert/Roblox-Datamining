@@ -26,7 +26,7 @@ local t = {
 	}
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 49 | named "Empty" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), buttonModule (ref)
 	local var12 = withDefaultsModule(p0, t)
 	

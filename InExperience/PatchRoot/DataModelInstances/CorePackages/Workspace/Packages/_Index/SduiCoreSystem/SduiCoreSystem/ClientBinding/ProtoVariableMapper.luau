@@ -11,13 +11,13 @@ local t = {
 	SIZE_CONSTRAINT_RELATIVE_YY = "RelativeYY"
 }
 
-local function convertToLuaEnum(p0, p1, p2) --[[ line: 48 ]]
+local function convertToLuaEnum(p0, p1, p2)
 	local match = string.match(p0, "^" .. p1 .. "(.*)")
 	
 	if not match then
 		return p0
 	end
-	local var7 = match:lower():gsub("_(%l)", function(p3) --[[ line: 62 ]]
+	local var7 = match:lower():gsub("_(%l)", function(p3)
 		return p3:upper()
 	end)
 	
@@ -25,7 +25,7 @@ local function convertToLuaEnum(p0, p1, p2) --[[ line: 48 ]]
 end
 
 return {
-	mapProtoEnumFormatToLua = function(p4, p5, p6) --[[ line: 80 ]]
+	mapProtoEnumFormatToLua = function(p4, p5, p6)
 		-- upvalues: t (ref), convertToLuaEnum (ref)
 		local var8 = t[p4]
 		
@@ -35,7 +35,7 @@ return {
 		end
 		return var8
 	end,
-	mapUiComponentTypeToLua = function(p7) --[[ line: 114 ]]
+	mapUiComponentTypeToLua = function(p7)
 		-- upvalues: t (ref), convertToLuaEnum (ref), sduiComponentTypeModule (ref)
 		if p7 == nil then
 			return nil
@@ -48,7 +48,7 @@ return {
 		end
 		return if sduiComponentTypeModule[var9] then sduiComponentTypeModule[var9] else nil
 	end,
-	mapHydrationContentTypeToLua = function(p8) --[[ line: 148 ]]
+	mapHydrationContentTypeToLua = function(p8)
 		-- upvalues: t (ref), sduiDataBindingContentTypeModule (ref)
 		if p8 == nil then
 			return nil
@@ -57,14 +57,14 @@ return {
 		
 		if not var10 then
 			local match = string.match(p8, "^HYDRATION_CONTENT_TYPE_(.*)")
-			var10 = if not match then p8 else match:lower():gsub("_(%l)", function(p9) --[[ line: 62 ]]
+			var10 = if not match then p8 else match:lower():gsub("_(%l)", function(p9)
 				return p9:upper()
 			end)
 			t[p8] = var10
 		end
 		return if sduiDataBindingContentTypeModule[var10] then sduiDataBindingContentTypeModule[var10] else nil
 	end,
-	mapActionTypeToLua = function(p10) --[[ line: 131 ]]
+	mapActionTypeToLua = function(p10)
 		-- upvalues: t (ref), convertToLuaEnum (ref), sduiActionTypeModule (ref)
 		if p10 == nil then
 			return nil
@@ -77,7 +77,7 @@ return {
 		end
 		return if sduiActionTypeModule[var12] then sduiActionTypeModule[var12] else nil
 	end,
-	mapPropName = function(p11) --[[ line: 168 ]]
+	mapPropName = function(p11)
 		-- upvalues: t (ref), snakeToCamel (ref)
 		if p11 == nil then
 			return nil
@@ -92,7 +92,7 @@ return {
 		end
 		return var13
 	end,
-	camelCaseKeys = function(p12) --[[ line: 189 ]]
+	camelCaseKeys = function(p12)
 		-- upvalues: t (ref), snakeToCamel (ref)
 		if type(p12) ~= "table" then
 			return p12
@@ -120,7 +120,7 @@ return {
 		end
 		return t_1
 	end,
-	mapProtoEngineEnumToLua = function(p13, p14, p15) --[[ line: 93 ]]
+	mapProtoEngineEnumToLua = function(p13, p14, p15)
 		-- upvalues: t (ref), convertToLuaEnum (ref)
 		if p13 == nil then
 			return nil

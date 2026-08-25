@@ -7,17 +7,17 @@ local _ = require(appChat.Stores.GetChatModerationStatusDataHydration)
 local _ = require(appChat.Stores.GetConversationStore)
 local useIsUserPendingModule = require(appChat.Hooks.useIsUserPending)
 
-local function _(p0, p1, p2) --[[ line: 31 | named "isActiveTimeout" ]]
+local function _(p0, p1, p2)
 	-- upvalues: conversationChannelsModule (ref)
 	return p0 ~= nil and (p0.status == "active" and (p2 < p0.endTimestamp and p1 ~= conversationChannelsModule.ModerationType.TrustedComms))
 end
 
-local _ = function(p3) --[[ line: 42 | named "isConversationPending" ]]
+local _ = function(p3)
 	-- upvalues: conversationChannelsModule (ref), useIsUserPendingModule (ref)
 	return p3.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending or useIsUserPendingModule(p3)
 end
 
-return function(p4) --[[ line: 47 | named "getConversationSendEligibilityStatus" ]]
+return function(p4)
 	-- upvalues: conversationChannelsModule (ref), useIsUserPendingModule (ref), dataHydrationModule (ref)
 	local conversation = p4.conversation
 	

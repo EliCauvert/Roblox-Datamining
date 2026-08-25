@@ -11,7 +11,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Providers.Style.Tokens)
 local t = { testId = "--foundation-progress" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 31 | named "Progress" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), progressShapeModule (ref), reactModule (ref), progressCircleModule (ref), dashModule (ref), progressBarModule (ref)
 	local var9 = withDefaultsModule(p0, t)
 	

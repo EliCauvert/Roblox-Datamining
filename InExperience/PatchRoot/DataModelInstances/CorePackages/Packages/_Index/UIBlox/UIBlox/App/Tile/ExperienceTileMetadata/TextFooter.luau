@@ -7,7 +7,7 @@ local _ = require(parent_1.Style.StyleTypes)
 local _ = require(parent_1.Style.Fonts)
 local footerFrameModule = require(parent.FooterFrame)
 
-local function getStyleProps(p0, p1) --[[ line: 34 ]]
+local function getStyleProps(p0, p1)
 	p0 = p0 or {}
 	
 	return {
@@ -19,7 +19,7 @@ local function getStyleProps(p0, p1) --[[ line: 34 ]]
 	}
 end
 
-return function(p2) --[[ line: 45 | named "TextFooter" ]]
+return function(p2)
 	-- upvalues: useStyleModule (ref), getStyleProps (ref), reactModule (ref), footerFrameModule (ref)
 	local var5 = useStyleModule()
 	local font = var5.Font

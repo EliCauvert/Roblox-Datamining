@@ -12,16 +12,16 @@ local parent = script.Parent.Parent
 local colorsModule = require(parent.Colors)
 local overlayComponentsModule = require(parent.Components.OverlayComponents)
 
-local function selectOverlayComponent(p0) --[[ line: 31 ]]
+local function selectOverlayComponent(p0)
 	-- upvalues: overlayComponentsModule (ref)
 	return overlayComponentsModule[p0.overlay.overlay]
 end
 
-local function selectOverlayProps(p1) --[[ line: 35 ]]
+local function selectOverlayProps(p1)
 	return p1.overlay.overlayProps
 end
 
-return function(_) --[[ line: 39 | named "Overlay" ]]
+return function(_)
 	-- upvalues: useSelector (ref), selectOverlayComponent (ref), selectOverlayProps (ref), useStyle (ref), reactModule (ref), reactFocusNavigationModule (ref), var3 (ref), provider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), colorsModule (ref)
 	local var9 = useSelector(selectOverlayComponent)
 	

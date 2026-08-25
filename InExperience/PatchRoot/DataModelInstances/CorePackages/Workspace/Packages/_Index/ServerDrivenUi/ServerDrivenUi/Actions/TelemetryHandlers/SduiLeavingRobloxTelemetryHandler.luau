@@ -10,7 +10,7 @@ local list = {
 	"socialLinkDisplayType"
 }
 
-return function(p0, p1, p2) --[[ line: 17 ]]
+return function(p0, p1, p2)
 	-- upvalues: list (ref), getActionTelemetryFieldValue (ref), sduiErrorType (ref), sendOpenLeavingRobloxModalEvent (ref)
 	local t = {}
 	

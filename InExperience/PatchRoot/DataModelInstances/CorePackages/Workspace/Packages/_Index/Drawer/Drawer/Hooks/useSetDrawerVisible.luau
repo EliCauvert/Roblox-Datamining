@@ -1,6 +1,6 @@
 ﻿local getDrawerVisibleStoreModule = require(script.Parent.Parent.Stores.GetDrawerVisibleStore)
 
-return function() --[[ line: 3 | named "useSetDrawerVisible" ]]
+return function()
 	-- upvalues: getDrawerVisibleStoreModule (ref)
 	return getDrawerVisibleStoreModule(false).setDrawerVisible
 end

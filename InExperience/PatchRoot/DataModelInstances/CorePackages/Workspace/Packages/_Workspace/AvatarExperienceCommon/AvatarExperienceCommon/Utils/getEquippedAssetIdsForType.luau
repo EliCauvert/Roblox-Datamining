@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 ]]
+﻿return function(p0, p1)
 	local t = {}
 	
 	if not p0 then

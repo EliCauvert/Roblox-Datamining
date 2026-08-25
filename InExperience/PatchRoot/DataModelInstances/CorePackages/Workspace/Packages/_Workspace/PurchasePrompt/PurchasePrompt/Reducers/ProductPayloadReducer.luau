@@ -8,10 +8,10 @@ local fFlagPromptPurchaseClearStateOnCompletionModule = require(purchasePrompt.F
 local t = {}
 
 return rodux.createReducer(t, {
-	[setProductPayloadModule.name] = function(_, p0) --[[ line: 15 ]]
+	[setProductPayloadModule.name] = function(_, p0)
 		return p0.productPayload
 	end,
-	[completeRequestModule.name] = function(p1, _) --[[ line: 18 ]]
+	[completeRequestModule.name] = function(p1, _)
 		-- upvalues: fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), t (ref), fFlagPromptPurchaseClearStateOnCompletionModule (ref)
 		return if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.kind == "DeveloperSubscription" then t elseif fFlagPromptPurchaseClearStateOnCompletionModule then t else p1
 	end

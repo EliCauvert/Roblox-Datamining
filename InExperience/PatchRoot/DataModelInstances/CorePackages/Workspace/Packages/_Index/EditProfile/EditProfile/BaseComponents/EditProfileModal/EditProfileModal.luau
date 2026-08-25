@@ -5,7 +5,7 @@ local dialog = foundationModule.Dialog
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), dialog (ref), buttonVariant (ref)
 	local var2 = useLocalization({ title = p0.titleKey, saveButtonText = p0.saveKey })
 	

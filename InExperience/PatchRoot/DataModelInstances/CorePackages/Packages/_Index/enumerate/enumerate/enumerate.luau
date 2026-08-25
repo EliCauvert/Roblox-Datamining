@@ -1,19 +1,19 @@
-﻿local function strict(p0, p1) --[[ line: 2 ]]
+﻿local function strict(p0, p1)
 	p1 = p1 or tostring(p0)
 	
 	return setmetatable(p0, {
-		__index = function(_, p2) --[[ line: 6 ]]
+		__index = function(_, p2)
 			-- upvalues: p1 (ref)
 			error(("%q (%s) is not a valid member of %s"):format(tostring(p2), typeof(p2), p1), 2)
 		end,
-		__newindex = function(_, p3, _) --[[ line: 12 ]]
+		__newindex = function(_, p3, _)
 			-- upvalues: p1 (ref)
 			error(("%q (%s) is not a valid member of %s"):format(tostring(p3), typeof(p3), p1), 2)
 		end
 	})
 end
 
-local function addEnumValue(p4, p5, p6, p7, p8) --[[ line: 20 ]]
+local function addEnumValue(p4, p5, p6, p7, p8)
 	-- upvalues: strict (ref)
 	local isString = typeof(p7) == "string"
 	assert(isString, "Only string names are supported for enums!")
@@ -28,13 +28,13 @@ local function addEnumValue(p4, p5, p6, p7, p8) --[[ line: 20 ]]
 	local var4 = newproxy(true)
 	local var5 = getmetatable(var4)
 	
-	function var5.__tostring() --[[ line: 34 ]]
+	function var5.__tostring()
 		-- upvalues: p6 (ref), p7 (ref)
 		return ("%s.%s"):format(p6, p7)
 	end
 	
 	var5.__index = strict({
-		rawValue = function() --[[ line: 39 ]]
+		rawValue = function()
 			-- upvalues: p8 (ref)
 			return p8
 		end
@@ -43,7 +43,7 @@ local function addEnumValue(p4, p5, p6, p7, p8) --[[ line: 20 ]]
 	p5[p8] = var4
 end
 
-return function(p9, p10) --[[ line: 51 | named "enumerate" ]]
+return function(p9, p10)
 	-- upvalues: addEnumValue (ref), strict (ref)
 	assert(typeof(p9) == "string", "Bad argument #1 - enums must be created using a string name!")
 	assert(typeof(p10) == "table", "Bad argument #2 - enums must be created using a table!")
@@ -59,12 +59,12 @@ return function(p9, p10) --[[ line: 51 | named "enumerate" ]]
 			addEnumValue(t, t_1, p9, v, v)
 		end
 	end
-	function t.fromRawValue(p11) --[[ line: 69 ]]
+	function t.fromRawValue(p11)
 		-- upvalues: t_1 (ref)
 		return t_1[p11]
 	end
 	
-	function t.isEnumValue(p12) --[[ line: 73 ]]
+	function t.isEnumValue(p12)
 		-- upvalues: t (ref)
 		if typeof(p12) ~= "userdata" then
 			return false
@@ -77,7 +77,7 @@ return function(p9, p10) --[[ line: 51 | named "enumerate" ]]
 		return false
 	end
 	
-	function t.allValues() --[[ line: 87 ]]
+	function t.allValues()
 		-- upvalues: t_1 (ref)
 		local t = {}
 		
@@ -91,7 +91,7 @@ return function(p9, p10) --[[ line: 51 | named "enumerate" ]]
 	local var9 = getmetatable(var8)
 	var9.__index = strict(t, p9)
 	
-	function var9.__tostring() --[[ line: 100 ]]
+	function var9.__tostring()
 		-- upvalues: p9 (ref)
 		return p9
 	end

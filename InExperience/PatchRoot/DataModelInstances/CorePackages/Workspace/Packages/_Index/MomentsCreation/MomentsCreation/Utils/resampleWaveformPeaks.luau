@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3) --[[ line: 9 | named "resampleWaveformPeaks" ]]
+﻿return function(p0, p1, p2, p3)
 	local t = {}
 	local p0Count = #p0
 	

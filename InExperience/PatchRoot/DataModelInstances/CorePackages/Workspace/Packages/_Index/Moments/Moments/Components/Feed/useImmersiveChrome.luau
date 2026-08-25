@@ -15,12 +15,12 @@ local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 
-local function defaultFireEvent(p0, p1, p2) --[[ line: 73 ]]
+local function defaultFireEvent(p0, p1, p2)
 	-- upvalues: eventNames (ref), fireAnalyticsEvent (ref)
 	fireAnalyticsEvent(if p0 then eventNames.MomentsChromeRestored else eventNames.MomentsChromeAutoHidden, { trigger = p1, index = tostring(p2) })
 end
 
-return function(p3) --[[ line: 81 | named "useImmersiveChrome" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), getImmersiveChromeStoreModule (ref), fFlagMomentsImmersiveChromeModule (ref), defaultFireEvent (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (ref), getFIntMomentsImmersiveShownDwellMsModule (ref), getFIntMomentsImmersiveHiddenCooldownMsModule (ref), immersiveChromeMachineModule (ref), signalsModule (ref), useSignalState (ref)
 	local pager = p3.pager
 	local active = p3.active
@@ -28,7 +28,7 @@ return function(p3) --[[ line: 81 | named "useImmersiveChrome" ]]
 	local getIsScrolling = p3.getIsScrolling
 	local inputAllowed = p3.inputAllowed
 	local reducedMotion = p3.reducedMotion
-	local var11 = reactModule.useMemo(function() --[[ line: 91 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: p3 (ref), getImmersiveChromeStoreModule (copy)
 		return p3.store or getImmersiveChromeStoreModule(false)
 	end, {})
@@ -38,17 +38,17 @@ return function(p3) --[[ line: 81 | named "useImmersiveChrome" ]]
 	var14.current = var12
 	local var15 = reactModule.useRef(p3.fireEvent or defaultFireEvent)
 	var15.current = p3.fireEvent or defaultFireEvent
-	local var16 = reactModule.useMemo(function() --[[ line: 110 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: p3 (ref), getFIntMomentsImmersiveHideAfterAdvancesModule (copy), getFIntMomentsImmersiveShownDwellMsModule (copy), getFIntMomentsImmersiveHiddenCooldownMsModule (copy), immersiveChromeMachineModule (copy), var11 (ref), var14 (ref), var15 (ref), var13 (ref)
 		return immersiveChromeMachineModule(p3.config or {
 			hideAfterAdvances = getFIntMomentsImmersiveHideAfterAdvancesModule(),
 			shownDwellMs = getFIntMomentsImmersiveShownDwellMsModule(),
 			hiddenCooldownMs = getFIntMomentsImmersiveHiddenCooldownMsModule()
 		}, {
-			now = p3.now or function() --[[ line: 117 ]]
+			now = p3.now or function()
 				return os.clock() * 1000
 			end,
-			setChromeVisible = function(value, p4) --[[ line: 122 ]]
+			setChromeVisible = function(value, p4)
 				-- upvalues: var11 (copy), var14 (copy), var15 (copy), var13 (copy)
 				var11.setChromeVisible(value)
 				
@@ -58,9 +58,9 @@ return function(p3) --[[ line: 81 | named "useImmersiveChrome" ]]
 			end
 		})
 	end, {})
-	reactModule.useEffect(function() --[[ line: 133 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), pager (ref), getActiveIsPlaying (ref), getIsScrolling (ref), var13 (ref), var16 (ref)
-		return signalsModule.createEffect(function(p5) --[[ line: 134 ]]
+		return signalsModule.createEffect(function(p5)
 			-- upvalues: pager (copy), getActiveIsPlaying (copy), getIsScrolling (copy), var13 (copy), var16 (copy)
 			local count = pager.getCount(p5)
 			local currentIndex = pager.getCurrentIndex(p5)
@@ -72,25 +72,25 @@ return function(p3) --[[ line: 81 | named "useImmersiveChrome" ]]
 		end)
 	end, { pager, getActiveIsPlaying, getIsScrolling, var16 })
 	local var17 = useSignalState(var11.getOverlayCovering)
-	reactModule.useEffect(function() --[[ line: 158 ]]
+	reactModule.useEffect(function()
 		-- upvalues: active (ref), inputAllowed (ref), reducedMotion (ref), var12 (ref), var16 (ref), var17 (ref)
 		var16.setForceShow((not active or (not inputAllowed or (reducedMotion or not var12))) and not var17)
 		var16.setForceHide(var17)
 	end, {
 		active, inputAllowed, reducedMotion, var12, var17, var16
 	})
-	reactModule.useEffect(function() --[[ line: 167 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var16 (ref)
 		var11.setRevealHandler(var16.reveal)
 		
-		return function() --[[ line: 169 ]]
+		return function()
 			-- upvalues: var11 (copy)
 			var11.setRevealHandler(nil)
 		end
 	end, { var11, var16 })
-	reactModule.useEffect(function() --[[ line: 175 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref)
-		return function() --[[ line: 176 ]]
+		return function()
 			-- upvalues: var11 (copy)
 			var11.setChromeVisible(true)
 		end

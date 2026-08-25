@@ -1,16 +1,16 @@
 ﻿local appStorageService = game:GetService("AppStorageService")
 local t = {
-	canUseAppStorage = function() --[[ line: 16 ]]
+	canUseAppStorage = function()
 		return game:GetEngineFeature("RobloxPlusImpressionStorageKey")
 	end
 }
 
-function t.getImpressionCount() --[[ line: 20 ]]
+function t.getImpressionCount()
 	-- upvalues: t (ref), appStorageService (ref)
 	if not t.canUseAppStorage() then
 		return 1e999
 	end
-	local ok, status = pcall(function() --[[ line: 24 ]]
+	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy)
 		return appStorageService:GetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount")
 	end)
@@ -18,10 +18,10 @@ function t.getImpressionCount() --[[ line: 20 ]]
 	return if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0
 end
 
-function t.incrementImpressionCount() --[[ line: 33 ]]
+function t.incrementImpressionCount()
 	-- upvalues: t (ref), appStorageService (ref)
 	if t.canUseAppStorage() then
-		pcall(function() --[[ line: 37 ]]
+		pcall(function()
 			-- upvalues: t (copy), appStorageService (copy)
 			appStorageService:SetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount", tostring(t.getImpressionCount() + 1))
 			appStorageService:Flush()

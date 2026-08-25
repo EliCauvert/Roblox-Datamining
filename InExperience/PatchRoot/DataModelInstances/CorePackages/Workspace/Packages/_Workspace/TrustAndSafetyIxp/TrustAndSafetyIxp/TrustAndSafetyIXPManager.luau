@@ -8,7 +8,7 @@ local name = require(parent.CoreScriptsInitializer).CoreLogger:new(script.Name)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 19 ]]
+function t.new(p0)
 	-- upvalues: IXPServiceWrapper (ref), t (ref)
 	local t_1 = {
 		_initialized = false,
@@ -24,17 +24,17 @@ function t.new(p0) --[[ line: 19 ]]
 	return t_1
 end
 
-function t:getReportAnythingExperienceEnabled() --[[ line: 33 ]]
+function t:getReportAnythingExperienceEnabled()
 	-- upvalues: getFFlagForceReportAnythingAnnotationEnabledModule (ref)
 	return if getFFlagForceReportAnythingAnnotationEnabledModule() then true else self._reportAnythingExperienceEnabled or self._optionalScreenshotEnabled
 end
 
-function t:getReportAnythingAvatarEnabled() --[[ line: 40 ]]
+function t:getReportAnythingAvatarEnabled()
 	-- upvalues: getFFlagForceReportAnythingAnnotationEnabledModule (ref)
 	return if getFFlagForceReportAnythingAnnotationEnabledModule() then true else self._reportAnythingAvatarEnabled or self._optionalScreenshotEnabled
 end
 
-function t:waitForInitialization(p1) --[[ line: 47 ]]
+function t:waitForInitialization(p1)
 	if self._ixpInitialized then
 		p1()
 		
@@ -43,12 +43,12 @@ function t:waitForInitialization(p1) --[[ line: 47 ]]
 	table.insert(self._callbacks, p1)
 end
 
-function t:initialize() --[[ line: 55 ]]
+function t:initialize()
 	-- upvalues: getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), name (ref)
 	if self._initialized then return end
 	self._initialized = true
 	
-	local function invokeCallbacks() --[[ line: 61 ]]
+	local function invokeCallbacks()
 		-- upvalues: self (ref)
 		for i, v in ipairs(self._callbacks) do
 			v()
@@ -57,7 +57,7 @@ function t:initialize() --[[ line: 55 ]]
 	end
 	
 	if getFFlagReportAnythingAnnotationIXP() then
-		task.spawn(function() --[[ line: 74 ]]
+		task.spawn(function()
 			-- upvalues: self (ref), getFStringReportAnythingAnnotationIXPLayerName (copy), name (copy), invokeCallbacks (ref)
 			self._ixpServiceWrapper:WaitForInitialization()
 			local var6 = self._ixpServiceWrapper:GetLayerData(getFStringReportAnythingAnnotationIXPLayerName())

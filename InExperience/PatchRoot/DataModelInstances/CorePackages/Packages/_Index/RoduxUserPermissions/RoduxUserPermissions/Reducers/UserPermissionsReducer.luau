@@ -10,9 +10,9 @@ local t = {
 	userSettingsMetadata = {}
 }
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: t (ref), isPhoneVerifiedModule (ref), userSettingsModule (ref), userSettingsMetadataModule (ref)
-	return function(p1, p2) --[[ line: 16 ]]
+	return function(p1, p2)
 		-- upvalues: t (copy), isPhoneVerifiedModule (copy), p0 (ref), userSettingsModule (copy), userSettingsMetadataModule (copy)
 		p1 = p1 or t
 		

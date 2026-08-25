@@ -12,7 +12,7 @@ local var5 = tModule.strictInterface({
 	universeIds = tModule.optional(tModule.string)
 })
 
-return function(p0, p1) --[[ line: 26 ]]
+return function(p0, p1)
 	-- upvalues: var5 (ref), discoveryEventErrorLogger (ref), aiOverviewSentimentThrottleHundrethsPercent (ref), telemetryService (ref)
 	local var6, var7 = var5(p0)
 	

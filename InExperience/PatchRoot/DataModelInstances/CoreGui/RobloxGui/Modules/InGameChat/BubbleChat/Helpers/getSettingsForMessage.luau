@@ -3,7 +3,7 @@ local typesModule = require(script.Parent.Parent.Types)
 local maybeAssertModule = require(script.Parent.maybeAssert)
 local _ = script.Parent.Parent.Parent.Parent.Flags
 
-return function(value, p0) --[[ line: 12 | named "getSettingsForMessage" ]]
+return function(value, p0)
 	-- upvalues: maybeAssertModule (ref), typesModule (ref), tModule (ref)
 	maybeAssertModule(typesModule.IChatSettings(value))
 	maybeAssertModule(tModule.optional(typesModule.IMessage)(p0))

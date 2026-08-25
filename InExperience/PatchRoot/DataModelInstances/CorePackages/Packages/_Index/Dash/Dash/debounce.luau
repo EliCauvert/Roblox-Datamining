@@ -1,16 +1,16 @@
 ﻿local assignModule = require(script.Parent.assign)
 
-return function(p0, p1, p2) --[[ line: 30 | named "debounce" ]]
+return function(p0, p1, p2)
 	-- upvalues: assignModule (ref)
 	local var1 = assignModule({ leading = false, trailing = true }, p2)
 	local var2 = 0
 	local var3 = nil
 	local var4 = false
 	
-	local var5 = function() --[[ line: 41 ]] end
+	local var5 = function() end
 	
 	if var1.trailing then
-		var5 = function(p3, p4, ...) --[[ line: 44 ]]
+		var5 = function(p3, p4, ...)
 			-- upvalues: var2 (write), var4 (write), p0 (ref)
 			if var2 == p3 then
 				var4 = false
@@ -21,14 +21,14 @@ return function(p0, p1, p2) --[[ line: 30 | named "debounce" ]]
 			end
 		end
 	elseif var1.leading then
-		var5 = function(p5) --[[ line: 56 ]]
+		var5 = function(p5)
 			-- upvalues: var2 (write), var4 (write)
 			if var2 == p5 then
 				var4 = false
 			end
 		end
 	end
-	return function(...) --[[ line: 63 ]]
+	return function(...)
 		-- upvalues: var2 (write), var1 (ref), var4 (write), var3 (write), p0 (ref), p1 (ref), var5 (write)
 		var2 += 1
 		local var6 = var2

@@ -24,7 +24,7 @@ mediaGalleryFullScreen.validateProps = tModule.strictInterface({
 })
 mediaGalleryFullScreen.defaultProps = { showIndex = 1, size = UDim2.fromScale(1, 1) }
 
-function mediaGalleryFullScreen.getDerivedStateFromProps(p0, p1) --[[ line: 53 ]]
+function mediaGalleryFullScreen.getDerivedStateFromProps(p0, p1)
 	-- upvalues: getShowItemsModule (ref)
 	local var8 = nil
 	
@@ -45,7 +45,7 @@ function mediaGalleryFullScreen.getDerivedStateFromProps(p0, p1) --[[ line: 53 ]
 	return var8
 end
 
-function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
+function mediaGalleryFullScreen.init(p2)
 	-- upvalues: roactModule (ref)
 	p2.state = {
 		items = nil,
@@ -67,7 +67,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 	p2.rightArrowPosition = var16
 	p2.updateRightArrowPosition = var17
 	
-	function p2.onResize(p3) --[[ line: 90 ]]
+	function p2.onResize(p3)
 		-- upvalues: p2 (ref)
 		local x = p3.AbsoluteSize.X
 		local y = p3.AbsoluteSize.Y
@@ -80,7 +80,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 		p2.updateItemFrameSize(UDim2.new(0, floored, 0, y))
 	end
 	
-	function p2.onImageResize(p4) --[[ line: 104 ]]
+	function p2.onImageResize(p4)
 		-- upvalues: p2 (ref)
 		local x = p4.AbsoluteSize.X
 		local y = p4.AbsoluteSize.Y
@@ -89,7 +89,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 		p2.updateArrowButtonSize(UDim2.new(0, 96, 0, y))
 	end
 	
-	function p2.onUserInputBegan(p5) --[[ line: 113 ]]
+	function p2.onUserInputBegan(p5)
 		-- upvalues: p2 (ref)
 		if p5.UserInputType ~= Enum.UserInputType.Keyboard then return end
 		local focusIndex = p2.state.focusIndex
@@ -104,7 +104,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 		end
 	end
 	
-	function p2.showPreviousItem() --[[ line: 128 ]]
+	function p2.showPreviousItem()
 		-- upvalues: p2 (ref)
 		local var20 = p2.state.focusIndex - 1
 		
@@ -114,7 +114,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 		p2:setState({ focusIndex = var20 })
 	end
 	
-	function p2.showNextItem() --[[ line: 139 ]]
+	function p2.showNextItem()
 		-- upvalues: p2 (ref)
 		local itemsCount = #p2.props.items
 		local var22 = p2.state.focusIndex + 1
@@ -125,7 +125,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 		p2:setState({ focusIndex = var22 })
 	end
 	
-	function p2.cycleNext() --[[ line: 151 ]]
+	function p2.cycleNext()
 		-- upvalues: p2 (ref)
 		local var23 = p2.state.focusIndex + 1
 		
@@ -135,7 +135,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 		p2:setState({ focusIndex = var23 })
 	end
 	
-	function p2.onVideoPlayActivated(p6) --[[ line: 163 ]]
+	function p2.onVideoPlayActivated(p6)
 		-- upvalues: p2 (ref)
 		if p2.props.onVideoPlayActivated then
 			p2.props.onVideoPlayActivated(p2.state.itemsToShow[p6].originalIndex)
@@ -143,7 +143,7 @@ function mediaGalleryFullScreen.init(p2) --[[ line: 76 ]]
 	end
 end
 
-local function renderArrowButton(_, p7, p8, p9, p10, p11, p12) --[[ line: 172 ]]
+local function renderArrowButton(_, p7, p8, p9, p10, p11, p12)
 	-- upvalues: roactModule (ref), iconButton (ref), images (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -164,15 +164,15 @@ local function renderArrowButton(_, p7, p8, p9, p10, p11, p12) --[[ line: 172 ]]
 	})
 end
 
-function mediaGalleryFullScreen.render(p13) --[[ line: 192 ]]
+function mediaGalleryFullScreen.render(p13)
 	-- upvalues: withStyle (ref)
-	return withStyle(function(p14) --[[ line: 193 ]]
+	return withStyle(function(p14)
 		-- upvalues: p13 (ref)
 		return p13:renderWithProvider(p14)
 	end)
 end
 
-function mediaGalleryFullScreen.renderWithProvider(p15, p16) --[[ line: 198 ]]
+function mediaGalleryFullScreen.renderWithProvider(p15, p16)
 	-- upvalues: roactModule (ref), renderArrowButton (ref), thumbnailButtonModule (ref), eventConnection (ref), userInputService (ref)
 	local layoutOrder = p15.props.layoutOrder
 	local anchorPoint = p15.props.anchorPoint

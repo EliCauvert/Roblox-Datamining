@@ -11,19 +11,19 @@ local fetchUserVoteFeedbackMetadataModule = require(script.Parent.fetchUserVoteF
 local userVoteFeedbackMetdataUrlBuilderModule = require(script.Parent.UserVoteFeedbackMetdataUrlBuilder)
 local userVoteFeedbackMetadataDerivedFieldsModule = require(script.Parent.UserVoteFeedbackMetadataDerivedFields)
 
-return function() --[[ line: 17 | named "createUserVoteFeedbackMetadataStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), userVoteFeedbackMetdataUrlBuilderModule (ref), fetchUserVoteFeedbackMetadataModule (ref), userVoteFeedbackMetadataStoreTypesModule (ref), discoveryEventErrorLogger (ref), userVoteFeedbackMetadataDerivedFieldsModule (ref)
 	local var8 = createDataCacheModule()
 	local var9 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var8,
-		logError = function(p0) --[[ line: 24 ]]
+		logError = function(p0)
 			-- upvalues: logResponseError (copy), userVoteFeedbackMetdataUrlBuilderModule (copy)
 			logResponseError(userVoteFeedbackMetdataUrlBuilderModule.USER_VOTE_FEEDBACK_METADATA_URL, p0)
 		end,
-		fetchFn = function(p1, _) --[[ line: 27 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: fetchUserVoteFeedbackMetadataModule (copy), userVoteFeedbackMetadataStoreTypesModule (copy), discoveryEventErrorLogger (copy)
-			return fetchUserVoteFeedbackMetadataModule(p1):andThen(function(p2) --[[ line: 33 ]]
+			return fetchUserVoteFeedbackMetadataModule(p1):andThen(function(p2)
 				-- upvalues: userVoteFeedbackMetadataStoreTypesModule (copy), discoveryEventErrorLogger (copy), p1 (ref)
 				local responseBody = p2.responseBody
 				
@@ -50,17 +50,17 @@ return function() --[[ line: 17 | named "createUserVoteFeedbackMetadataStore" ]]
 		getUserVoteFeedbackMetadatas = var9.getCachedItems,
 		getAndFetchUserVoteFeedbackMetadata = var9.getAndFetchItem,
 		getAndFetchUserVoteFeedbackMetadatas = var9.getAndFetchItems,
-		clearItem = function(p3) --[[ line: 80 ]]
+		clearItem = function(p3)
 			-- upvalues: var8 (ref)
 			var8.replaceItem(p3, nil)
 		end,
 		calculateDerivedField = userVoteFeedbackMetadataDerivedFieldsModule.calculateDerivedField,
-		clear = function() --[[ line: 63 ]]
+		clear = function()
 			-- upvalues: var8 (ref), var9 (ref)
 			var8.clear()
 			var9.clear()
 		end,
-		dispose = function() --[[ line: 68 ]]
+		dispose = function()
 			-- upvalues: var9 (ref)
 			var9.dispose()
 		end

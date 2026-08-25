@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("VoiceExposureIXPLayerName", "Voice.Exposure")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("VoiceExposureIXPLayerName")
 end

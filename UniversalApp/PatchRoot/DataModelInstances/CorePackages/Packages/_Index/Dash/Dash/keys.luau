@@ -1,6 +1,6 @@
 ﻿local insert = table.insert
 
-return function(p0) --[[ line: 12 | named "keys" ]]
+return function(p0)
 	-- upvalues: insert (ref)
 	local t = {}
 	

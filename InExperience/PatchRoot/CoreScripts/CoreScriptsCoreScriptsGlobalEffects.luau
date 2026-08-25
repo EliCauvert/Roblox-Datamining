@@ -18,7 +18,7 @@ local useExternalEvent = require(corePackagesService.Workspace.Packages.RoactUti
 local removeLoggingHookForCorescriptGlobalEffects2 = game:DefineFastFlag("RemoveLoggingHookForCorescriptGlobalEffects2", false)
 local var12 = nil
 
-local function sendInputTypeLogging(p0) --[[ line: 28 ]]
+local function sendInputTypeLogging(p0)
 	-- upvalues: var12 (write), userInputService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), var8 (ref)
 	if var12 == p0 then return end
 	var12 = p0
@@ -34,10 +34,10 @@ local function sendInputTypeLogging(p0) --[[ line: 28 ]]
 	end
 end
 
-roactModule.mount(reactModule.createElement(function(_) --[[ line: 47 | named "CoreScriptsGlobalEffects" ]]
+roactModule.mount(reactModule.createElement(function(_)
 	-- upvalues: removeLoggingHookForCorescriptGlobalEffects2 (ref), reactModule (ref), sendInputTypeLogging (ref), getInputGroup (ref), useExternalEvent (ref), userInputService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), useLogInputTypeChanged (ref), var8 (ref), rbxAnalyticsService (ref), usePlayerCurrentScreenOrientationModule (ref), useLogOrientationChanged (ref), deviceType (ref), coreScriptsRootProvider (ref), coreScriptsGamepadDisconnectListenerModule (ref)
 	if removeLoggingHookForCorescriptGlobalEffects2 then
-		useExternalEvent(userInputService.LastInputTypeChanged, reactModule.useCallback(function(p1) --[[ line: 49 ]]
+		useExternalEvent(userInputService.LastInputTypeChanged, reactModule.useCallback(function(p1)
 			-- upvalues: sendInputTypeLogging (copy), getInputGroup (copy)
 			sendInputTypeLogging(getInputGroup(p1))
 		end, {}))

@@ -11,11 +11,11 @@ local fFlagContactImporterIXPCleanup = require(parent_1.SharedFlags).FFlagContac
 local fFlagUseSignalsForIsLocalUserSoothsayer = require(parent_1.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
 local var3 = if fFlagUseSignalsForIsLocalUserSoothsayer then require(parent_1.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: fFlagUseSignalsForIsLocalUserSoothsayer (ref), useSignalState (ref), var3 (ref), useSelector (ref), getContactImporterParamsModule (ref), fFlagContactImporterIXPCleanup (ref), offPlatformFriendRequestsIXPModule (ref), useUiModeInfo (ref), uiMode (ref)
 	local var7, shouldShowContactImporterFeature
 	local var4 = useSelector(getContactImporterParamsModule)
-	local var5 = not (useUiModeInfo().uiMode == uiMode.TenFoot) and (if fFlagUseSignalsForIsLocalUserSoothsayer then useSignalState(var3(false).getIsLocalUserSoothsayer) else useSelector(function(p1) --[[ line: 21 ]]
+	local var5 = not (useUiModeInfo().uiMode == uiMode.TenFoot) and (if fFlagUseSignalsForIsLocalUserSoothsayer then useSignalState(var3(false).getIsLocalUserSoothsayer) else useSelector(function(p1)
 		return p1.IsLocalUserSoothsayer
 	end))
 	local var6 = if fFlagContactImporterIXPCleanup then nil elseif fFlagContactImporterIXPCleanup then nil else offPlatformFriendRequestsIXPModule.useOffPlatformFriendRequestsEnabled()

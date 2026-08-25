@@ -14,7 +14,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local permissionPromptFinishedModule = require(parent.Thunks.PermissionPromptFinished)
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useLocalization (ref), useScreenSize (ref), reactModule (ref), permissionPromptFinishedModule (ref), buttonType (ref), text (ref), interactiveAlert (ref)
 	local var7 = useDispatch()
 	local var8 = useLocalization({
@@ -24,18 +24,18 @@ return function(p0) --[[ line: 26 ]]
 		dontAllow = "Feature.Captures.Action.DontAllow"
 	})
 	local var9 = useScreenSize()
-	local var10 = reactModule.useCallback(function() --[[ line: 37 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), permissionPromptFinishedModule (copy), p0 (ref)
 		var7(permissionPromptFinishedModule(p0.promptId, true))
 	end, { p0.promptId })
-	local var11 = reactModule.useCallback(function() --[[ line: 43 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), permissionPromptFinishedModule (copy), p0 (ref)
 		var7(permissionPromptFinishedModule(p0.promptId, false))
 	end, { p0.promptId })
 	
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
-		buttonStackInfo = reactModule.useMemo(function() --[[ line: 49 ]]
+		buttonStackInfo = reactModule.useMemo(function()
 			-- upvalues: buttonType (copy), var10 (ref), var8 (ref), var11 (ref)
 			return {
 				buttons = {
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 26 ]]
 				}
 			}
 		end, { var10, var11 }),
-		middleContent = reactModule.useCallback(function() --[[ line: 71 ]]
+		middleContent = reactModule.useCallback(function()
 			-- upvalues: reactModule (copy), text (copy), var8 (ref)
 			return reactModule.createElement(text, {
 				tag = "size-full-1200 text-align-x-center text-body-large text-wrap",

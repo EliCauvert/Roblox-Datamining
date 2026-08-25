@@ -18,7 +18,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useAppPolicy = universalAppPolicyModule.useAppPolicy
 local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "ExperienceDetailsNotifyChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFollow (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), useAppPolicy (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId
@@ -40,13 +40,13 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "ExperienceDetailsNot
 	})
 	local var16 = if var13 then var13.rootPlaceId else nil
 	
-	return if useAppPolicy(function(p1) --[[ line: 112 ]]
+	return if useAppPolicy(function(p1)
 		return p1.getNotificationsCanReceiveExperience()
 	end) then reactModule.createElement(sduiChip, {
 		text = var15.notifications,
 		leadingIconName = foundationModule.Enums.IconName.Bell,
 		leadingIconVariant = if var12 then foundationModule.Enums.IconVariant.Filled else nil,
-		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function() --[[ line: 58 ]]
+		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function()
 			-- upvalues: var12 (ref), var16 (ref), playersService (copy), gameFollow (copy), game (copy), universeId (ref)
 			local var17 = not var12
 			
@@ -59,7 +59,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "ExperienceDetailsNot
 				}, "ExperienceDetailsNotifyChip")
 			end
 			return game.getFollowingsStore(false).updateFollowing(universeId, var17)
-		end, { universeId, var16, var12 }), reactModule.useCallback(function(p2) --[[ line: 74 ]]
+		end, { universeId, var16, var12 }), reactModule.useCallback(function(p2)
 			-- upvalues: var10 (ref), setCurrentToastMessage (copy), toastType (copy), var15 (ref)
 			if not p2 then return end
 			if p2.type == "error" then

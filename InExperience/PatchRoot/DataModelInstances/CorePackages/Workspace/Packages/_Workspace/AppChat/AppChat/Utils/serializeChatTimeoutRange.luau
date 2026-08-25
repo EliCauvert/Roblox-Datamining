@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AppChat").Parent.AppChatNetworking)
 
-return function(p0, p1) --[[ line: 15 | named "serializeChatTimeoutRange" ]]
+return function(p0, p1)
 	local currentDateTime = DateTime.now()
 	
 	return {

@@ -10,16 +10,16 @@ assetCard.defaultProps = {
 	cardIcon = nil,
 	cardBodyText = nil,
 	contentLoadedCallback = nil,
-	bodyActivated = function() --[[ line: 25 ]]
+	bodyActivated = function()
 		print("Card body was activated!")
 	end
 }
 
-function assetCard.render(p0) --[[ line: 30 ]]
+function assetCard.render(p0)
 	-- upvalues: roactModule (ref), UIBloxModule (ref), fitFrameVerticalModule (ref), headerModule (ref), bodyModule (ref)
 	local children = p0.props[roactModule.Children]
 	
-	return UIBloxModule.Style.withStyle(function(_) --[[ line: 33 ]]
+	return UIBloxModule.Style.withStyle(function(_)
 		-- upvalues: roactModule (copy), fitFrameVerticalModule (copy), headerModule (copy), p0 (ref), bodyModule (copy), children (ref)
 		return roactModule.createElement(fitFrameVerticalModule, {
 			BackgroundTransparency = 1,

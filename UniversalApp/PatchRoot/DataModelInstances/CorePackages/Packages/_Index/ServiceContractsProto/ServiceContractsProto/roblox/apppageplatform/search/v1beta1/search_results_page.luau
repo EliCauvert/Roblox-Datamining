@@ -7,7 +7,7 @@ local pageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 165 ]]
+function t_1.new(p0)
 	-- upvalues: t (ref), t_1 (ref)
 	return setmetatable({
 		search_query = if p0 == nil or p0.search_query == nil then "" else p0.search_query,
@@ -17,7 +17,7 @@ function t_1.new(p0) --[[ line: 165 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 178 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var11 = 0
@@ -52,7 +52,7 @@ function t_1:encode() --[[ line: 178 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 217 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var21 = t_1.new()
 	local var22 = 0
@@ -116,7 +116,7 @@ function t_1.decode(p1) --[[ line: 217 ]]
 	return var21
 end
 
-function t_1:jsonEncode() --[[ line: 275 ]]
+function t_1:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -135,7 +135,7 @@ function t_1:jsonEncode() --[[ line: 275 ]]
 	return t_1
 end
 
-function t_1:jsonDecode() --[[ line: 305 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var46 = t_1.new()
 	
@@ -175,7 +175,7 @@ typeRegistryModule.default:register(t.GetSearchResultsPageRequest)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 361 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		page_entries = if p2 == nil or p2.page_entries == nil then {} else p2.page_entries,
@@ -185,7 +185,7 @@ function t_2.new(p2) --[[ line: 361 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 372 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var48 = 0
@@ -241,7 +241,7 @@ function t_2:encode() --[[ line: 372 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 422 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var70 = t_2.new()
 	local var71 = 0
@@ -305,7 +305,7 @@ function t_2.decode(p3) --[[ line: 422 ]]
 	return var70
 end
 
-function t_2:jsonEncode() --[[ line: 498 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -338,7 +338,7 @@ function t_2:jsonEncode() --[[ line: 498 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 532 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var97 = t_2.new()
 	
@@ -400,7 +400,7 @@ typeRegistryModule.default:register(t.GetSearchResultsPageResponse)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 615 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		key = if p4 == nil or p4.key == nil then "" else p4.key,
@@ -408,7 +408,7 @@ function t_3.new(p4) --[[ line: 615 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 624 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var104 = 0
@@ -432,7 +432,7 @@ function t_3:encode() --[[ line: 624 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 646 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), templateEntryModule (ref)
 	local var111 = t_3.new()
 	local var112 = 0
@@ -484,7 +484,7 @@ function t_3.decode(p5) --[[ line: 646 ]]
 	return var111
 end
 
-function t_3:jsonEncode() --[[ line: 696 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -496,7 +496,7 @@ function t_3:jsonEncode() --[[ line: 696 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 712 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), templateEntryModule (ref)
 	local var131 = t_3.new()
 	
@@ -518,7 +518,7 @@ typeRegistryModule.default:register(t.GetSearchResultsPageResponse_TemplatesEntr
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 743 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		key = if p6 == nil or p6.key == nil then "" else p6.key,
@@ -526,7 +526,7 @@ function t_4.new(p6) --[[ line: 743 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 755 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var133 = 0
@@ -549,7 +549,7 @@ function t_4:encode() --[[ line: 755 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 776 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref)
 	local var139 = t_4.new()
 	local var140 = 0
@@ -601,7 +601,7 @@ function t_4.decode(p7) --[[ line: 776 ]]
 	return var139
 end
 
-function t_4:jsonEncode() --[[ line: 826 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -613,7 +613,7 @@ function t_4:jsonEncode() --[[ line: 826 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 842 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref)
 	local var159 = t_4.new()
 	
@@ -633,13 +633,13 @@ t_4.descriptor = {
 t.GetSearchResultsPageResponse_LocalizedLiteralsEntry = t_4
 typeRegistryModule.default:register(t.GetSearchResultsPageResponse_LocalizedLiteralsEntry)
 t.SearchResultsPageVerticalType = {
-	fromNumber = function(p8) --[[ line: 870 ]]
+	fromNumber = function(p8)
 		return if p8 == 0 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" elseif p8 == 1 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" elseif p8 == 2 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" elseif p8 == 3 then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" else nil
 	end,
-	toNumber = function(p9) --[[ line: 884 ]]
+	toNumber = function(p9)
 		return if p9 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" then 0 elseif p9 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" then 1 elseif p9 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" then 2 elseif p9 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" then 3 else p9
 	end,
-	fromName = function(p10) --[[ line: 898 ]]
+	fromName = function(p10)
 		return if p10 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_INVALID" elseif p10 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_BLENDED" elseif p10 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_GAME" elseif p10 == "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" then "SEARCH_RESULTS_PAGE_VERTICAL_TYPE_USER" else nil
 	end
 }

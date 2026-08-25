@@ -17,18 +17,18 @@ local t = {
 	[Enum.ScreenOrientation.Sensor] = "Sensor"
 }
 
-local function _(value) --[[ line: 25 | named "round" ]]
+local function _(value)
 	return math.floor(value or 0.5)
 end
 
-return function(p0, p1, p2) --[[ line: 29 | named "useLogOrientationChanged" ]]
+return function(p0, p1, p2)
 	-- upvalues: useNavigation (ref), useCurrentCamera (ref), useDeviceOrientation (ref), getCurrentRouteState (ref), t (ref), reactModule (ref), logSessionOnOrientationChange (ref), var4 (ref), orientationChangedEventModule (ref)
 	local var6 = useNavigation()
 	local var7 = useCurrentCamera()
 	local var8 = useDeviceOrientation()
 	p2 = p2 or (getCurrentRouteState(var6) or {}).name
 	local var10 = t[p1]
-	reactModule.useEffect(function() --[[ line: 42 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var10 (ref), logSessionOnOrientationChange (copy), var4 (copy), orientationChangedEventModule (copy), p0 (ref), p2 (ref), var7 (ref)
 		local var11 = tostring(game.GameId)
 		local var12 = if var11 == "0" then "app" else "experience"

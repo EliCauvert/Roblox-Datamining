@@ -25,17 +25,17 @@ local t = {
 	expectedFailures = {}
 }
 
-local function pointInBounds(p0, p1, p2) --[[ line: 39 ]]
+local function pointInBounds(p0, p1, p2)
 	local var17 = p1:PointToObjectSpace(p0)
 	
 	return -p2.X / 2 <= var17.X and (var17.X <= p2.X / 2 and (-p2.Y / 2 <= var17.Y and (var17.Y <= p2.Y / 2 and (-p2.Z / 2 <= var17.Z and var17.Z <= p2.Z / 2))))
 end
 
-local function _(p3) --[[ line: 49 | named "truncate" ]]
+local function _(p3)
 	return math.floor(p3 * 100) / 100
 end
 
-function t.run(p4, p5) --[[ line: 53 ]]
+function t.run(p4, p5)
 	-- upvalues: validationEnumsModule (ref), constantsModule (ref), getAttachmentModule (ref), isMeshPartAccessoryModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), legacyAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), errorSourceStringsModule (ref), UGCValidationScaleMinimumThousandths (ref), getFFlagUGCValidateMeshMaxScaleModule (ref), fIntUGCValidationScaleMaximumThousandths (ref), UGCValidationService (ref), pointInBounds (ref), getMeshMinMaxModule (ref), getFIntUGCValidateMeshCenteringHundredsThresholdModule (ref)
 	local rootInstance = p5.rootInstance
 	local assetType = p5.uploadEnum.assetType

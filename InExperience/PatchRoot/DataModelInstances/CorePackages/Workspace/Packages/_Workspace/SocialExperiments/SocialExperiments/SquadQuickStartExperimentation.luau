@@ -4,7 +4,7 @@ local squadEnablePartyQuickStartVariant = game:DefineFastString("SquadEnablePart
 local enablePartyQuickStartChanges2 = game:DefineFastFlag("EnablePartyQuickStartChanges2", false)
 local partyFormationCreateUserExposureEnabled = game:DefineFastFlag("PartyFormationCreateUserExposureEnabled", false)
 
-local function _(p0) --[[ line: 15 | named "getIsUserInTreatment" ]]
+local function _(p0)
 	-- upvalues: experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
 	local var4 = experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer)
 	
@@ -12,7 +12,7 @@ local function _(p0) --[[ line: 15 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getPartyQuickStartChangesEnabled = function() --[[ line: 25 ]]
+	getPartyQuickStartChangesEnabled = function()
 		-- upvalues: enablePartyQuickStartChanges2 (ref), squadEnablePartyQuickStartVariant (ref), experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
 		local var5 = enablePartyQuickStartChanges2
 		
@@ -27,7 +27,7 @@ return {
 		end
 		return var5
 	end,
-	logExposure = function() --[[ line: 29 ]]
+	logExposure = function()
 		-- upvalues: partyFormationCreateUserExposureEnabled (ref), experimentCacheManager (ref), squadQuickStartExperimentLayer (ref)
 		if partyFormationCreateUserExposureEnabled and experimentCacheManager.default:getLayerVariables(squadQuickStartExperimentLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(squadQuickStartExperimentLayer)

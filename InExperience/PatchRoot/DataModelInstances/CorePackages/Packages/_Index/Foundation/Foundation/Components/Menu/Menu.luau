@@ -14,7 +14,7 @@ local t = {
 	align = require(foundation.Enums.PopoverAlign).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 66 | named "Menu" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), popoverModule (ref), withCommonPropsModule (ref), radiusModule (ref), baseMenuModule (ref)
 	local var9 = withDefaultsModule(p0, t)
 	local var10 = useTokensModule()

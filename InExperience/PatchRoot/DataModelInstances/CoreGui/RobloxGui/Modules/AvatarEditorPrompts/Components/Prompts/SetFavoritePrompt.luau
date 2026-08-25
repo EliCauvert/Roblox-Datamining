@@ -26,9 +26,9 @@ setFavoritePrompt.validateProps = tModule.strictInterface({
 	signalSetFavoritePermissionDenied = tModule.callback
 })
 
-function setFavoritePrompt.init(p0) --[[ line: 42 ]]
+function setFavoritePrompt.init(p0)
 	-- upvalues: roactModule (ref), loadableImage (ref), closeFavoritePromptWithB (ref), guiService (ref), contextActionService (ref)
-	function p0.renderAlertMiddleContent() --[[ line: 43 ]]
+	function p0.renderAlertMiddleContent()
 		-- upvalues: p0 (ref), roactModule (copy), loadableImage (copy)
 		local var13 = nil
 		
@@ -56,7 +56,7 @@ function setFavoritePrompt.init(p0) --[[ line: 42 ]]
 	if closeFavoritePromptWithB then
 		p0.menuKey = "favorite_prompt_" .. p0.props.itemId
 		guiService:SetMenuIsOpen(true, p0.menuKey)
-		contextActionService:BindCoreAction(p0.menuKey, function(_, p1, _) --[[ line: 73 ]]
+		contextActionService:BindCoreAction(p0.menuKey, function(_, p1, _)
 			-- upvalues: p0 (ref)
 			if p1 == Enum.UserInputState.End then
 				p0.props.signalSetFavoritePermissionDenied()
@@ -68,7 +68,7 @@ function setFavoritePrompt.init(p0) --[[ line: 42 ]]
 	end
 end
 
-function setFavoritePrompt.willUnmount(p2) --[[ line: 83 ]]
+function setFavoritePrompt.willUnmount(p2)
 	-- upvalues: closeFavoritePromptWithB (ref), guiService (ref), contextActionService (ref)
 	if closeFavoritePromptWithB then
 		guiService:SetMenuIsOpen(false, p2.menuKey)
@@ -76,7 +76,7 @@ function setFavoritePrompt.willUnmount(p2) --[[ line: 83 ]]
 	end
 end
 
-function setFavoritePrompt.render(p3) --[[ line: 90 ]]
+function setFavoritePrompt.render(p3)
 	-- upvalues: robloxTranslatorModule (ref), roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	local var14, var15
 	local _ = nil
@@ -121,7 +121,7 @@ function setFavoritePrompt.render(p3) --[[ line: 90 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p4) --[[ line: 137 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p4)
 	return {
 		itemId = p4.promptInfo.itemId,
 		itemType = p4.promptInfo.itemType,
@@ -129,14 +129,14 @@ return roactRoduxModule.connect(function(p4) --[[ line: 137 | named "mapStateToP
 		shouldFavorite = p4.promptInfo.shouldFavorite,
 		screenSize = p4.screenSize
 	}
-end, function(p5) --[[ line: 147 | named "mapDispatchToProps" ]]
+end, function(p5)
 	-- upvalues: performSetFavoriteModule (ref), signalSetFavoritePermissionDeniedModule (ref)
 	return {
-		performSetFavorite = function() --[[ line: 149 ]]
+		performSetFavorite = function()
 			-- upvalues: p5 (ref), performSetFavoriteModule (copy)
 			return p5(performSetFavoriteModule)
 		end,
-		signalSetFavoritePermissionDenied = function() --[[ line: 153 ]]
+		signalSetFavoritePermissionDenied = function()
 			-- upvalues: p5 (ref), signalSetFavoritePermissionDeniedModule (copy)
 			return p5(signalSetFavoritePermissionDeniedModule)
 		end

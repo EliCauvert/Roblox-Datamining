@@ -8,12 +8,12 @@ local isPrimaryRenderer = require(script.Parent.ReactFiberHostConfig).isPrimaryR
 local t_1 = {}
 local var3 = if reactGlobalsModule.__DEV__ then {} else nil
 
-function t.markSourceAsDirty(p0) --[[ line: 39 ]]
+function t.markSourceAsDirty(p0)
 	-- upvalues: t_1 (ref)
 	table.insert(t_1, p0)
 end
 
-function t.resetWorkInProgressVersions() --[[ line: 43 ]]
+function t.resetWorkInProgressVersions()
 	-- upvalues: t_1 (ref), isPrimaryRenderer (ref)
 	for i, v in t_1 do
 		if isPrimaryRenderer then
@@ -25,12 +25,12 @@ function t.resetWorkInProgressVersions() --[[ line: 43 ]]
 	table.clear(t_1)
 end
 
-function t.getWorkInProgressVersion(p1) --[[ line: 54 ]]
+function t.getWorkInProgressVersion(p1)
 	-- upvalues: isPrimaryRenderer (ref)
 	return if isPrimaryRenderer then p1._workInProgressVersionPrimary else p1._workInProgressVersionSecondary
 end
 
-function t.setWorkInProgressVersion(p2, p3) --[[ line: 64 ]]
+function t.setWorkInProgressVersion(p2, p3)
 	-- upvalues: isPrimaryRenderer (ref), t_1 (ref)
 	if isPrimaryRenderer then
 		p2._workInProgressVersionPrimary = p3
@@ -40,7 +40,7 @@ function t.setWorkInProgressVersion(p2, p3) --[[ line: 64 ]]
 	table.insert(t_1, p2)
 end
 
-function t.warnAboutMultipleRenderersDEV(p4) --[[ line: 76 ]]
+function t.warnAboutMultipleRenderersDEV(p4)
 	-- upvalues: reactGlobalsModule (ref), isPrimaryRenderer (ref), var3 (write), console (ref)
 	if reactGlobalsModule.__DEV__ then
 		if isPrimaryRenderer then
@@ -65,7 +65,7 @@ function t.warnAboutMultipleRenderersDEV(p4) --[[ line: 76 ]]
 	end
 end
 
-function t.registerMutableSourceForHydration(p5, p6) --[[ line: 104 ]]
+function t.registerMutableSourceForHydration(p5, p6)
 	local version = p6._getVersion(p6._source)
 	
 	if p5.mutableSourceEagerHydrationData == nil then

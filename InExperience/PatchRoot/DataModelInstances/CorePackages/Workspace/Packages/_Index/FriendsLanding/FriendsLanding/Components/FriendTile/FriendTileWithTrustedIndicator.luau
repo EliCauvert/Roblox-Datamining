@@ -30,7 +30,7 @@ local t = {
 	isVerified = false
 }
 
-return function(p0) --[[ line: 89 | named "FriendTileWithTrustedIndicator" ]]
+return function(p0)
 	-- upvalues: llama (ref), t (ref), useStyle (ref), useTokens (ref), useLocalization (ref), react (ref), view (ref), stateLayerAffordance (ref), playerTile (ref), fixFriendsLandingTileGamepadSelection (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), skeleton (ref), text (ref), verifiedBadgesModule (ref), fFlagEnableBlackbirdCheck (ref), foundationModule (ref), enums (ref), playerContext (ref)
 	local var6 = llama.Dictionary.join(t, p0 or {})
 	local var7 = useStyle()

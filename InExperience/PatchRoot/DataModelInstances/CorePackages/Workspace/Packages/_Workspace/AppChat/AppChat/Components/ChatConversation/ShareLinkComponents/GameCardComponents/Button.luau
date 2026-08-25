@@ -8,12 +8,12 @@ button.defaultProps = {
 	color = Color3.new(0.9, 0.9, 0.9),
 	textColor = Color3.new(0.1, 0.1, 0.1),
 	font = Enum.Font.Gotham,
-	onActivated = function() --[[ line: 17 ]]
+	onActivated = function()
 		print("Game card button activated!")
 	end
 }
 
-function button.render(p0) --[[ line: 22 ]]
+function button.render(p0)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

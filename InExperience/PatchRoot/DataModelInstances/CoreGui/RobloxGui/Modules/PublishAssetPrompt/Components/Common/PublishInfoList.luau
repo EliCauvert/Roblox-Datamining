@@ -6,7 +6,7 @@ local var2 = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Module
 local getGameNameAndDescription = require(corePackagesService.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
 local localPlayer = game:GetService("Players").LocalPlayer
 
-return function(p0) --[[ line: 27 | named "PublishInfoList" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), localPlayer (ref), useLocalization (ref), getGameNameAndDescription (ref), var2 (ref), itemInfoList (ref)
 	local var3 = reactModule.useRef(false)
 	assert(localPlayer, "LocalPlayer must not be nil")
@@ -19,17 +19,17 @@ return function(p0) --[[ line: 27 | named "PublishInfoList" ]]
 		attributionText = "Feature.Catalog.Label.Attribution",
 		typeText = "Feature.Catalog.Label.CategoryType"
 	})
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), getGameNameAndDescription (copy), var2 (copy), var5 (ref)
 		var3.current = true
-		getGameNameAndDescription(var2, game.GameId):andThen(function(p1) --[[ line: 45 ]]
+		getGameNameAndDescription(var2, game.GameId):andThen(function(p1)
 			-- upvalues: var3 (copy), var5 (copy)
 			if var3.current and p1.Name then
 				var5(p1.Name)
 			end
 		end)
 		
-		return function() --[[ line: 50 ]]
+		return function()
 			-- upvalues: var3 (copy)
 			var3.current = false
 		end

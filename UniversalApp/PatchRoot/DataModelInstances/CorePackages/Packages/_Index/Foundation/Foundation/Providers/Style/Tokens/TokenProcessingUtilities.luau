@@ -2,15 +2,15 @@
 local loggerModule = require(foundation.Utility.Logger)
 local _ = require(foundation.Components.Types)
 
-local function isColorStyle(p0) --[[ line: 19 ]]
+local function isColorStyle(p0)
 	return type(p0) == "table" and (p0.Color3 ~= nil and (typeof(p0.Color3) == "Color3" and (p0.Transparency ~= nil and typeof(p0.Transparency) == "number")))
 end
 
-local function _(value) --[[ line: 27 | named "getRoundedNumber" ]]
+local function _(value)
 	return math.round(value * 1000) / 1000
 end
 
-local _ = function(p1, p2) --[[ line: 31 | named "getRGBAValues" ]]
+local _ = function(p1, p2)
 	local rounded = math.round(p1.R * 255)
 	local rounded_1 = math.round(p1.G * 255)
 	local rounded_2 = math.round(p1.B * 255)
@@ -21,7 +21,7 @@ local _ = function(p1, p2) --[[ line: 31 | named "getRGBAValues" ]]
 	return rounded, rounded_1, rounded_2
 end
 
-local function formatColorPreviewHTML(p3, p4) --[[ line: 39 ]]
+local function formatColorPreviewHTML(p3, p4)
 	local var19, var20, var21, var22
 	local rounded = math.round(p3.R * 255)
 	local rounded_1 = math.round(p3.G * 255)
@@ -41,7 +41,7 @@ local function formatColorPreviewHTML(p3, p4) --[[ line: 39 ]]
 	return `<span class="color-preview" style="background-color: rgba({var19},{var20},{var21},{var22 or 1});"></span>`
 end
 
-local function formatTokenValue(p5) --[[ line: 45 ]]
+local function formatTokenValue(p5)
 	if typeof(p5) == "Color3" then
 		return `rgb({math.round(p5.R * 255)}, {math.round(p5.G * 255)}, {math.round(p5.B * 255)})`
 	elseif typeof(p5) == "number" then
@@ -70,7 +70,7 @@ local function formatTokenValue(p5) --[[ line: 45 ]]
 	return `rgba({var26}, {var27}, {var28}, {var29})`
 end
 
-local function formatTokenValueHTML(p6) --[[ line: 60 ]]
+local function formatTokenValueHTML(p6)
 	if typeof(p6) == "Color3" then
 		return `<span class="color">{`<span class="color-preview" style="background-color: rgba({math.round(p6.R * 255)},{math.round(p6.G * 255)},{math.round(p6.B * 255)},{nil or 1});"></span>`} rgb({math.round(p6.R * 255)}, {math.round(p6.G * 255)}, {math.round(p6.B * 255)})</span>`
 	elseif typeof(p6) == "number" then
@@ -117,7 +117,7 @@ local function formatTokenValueHTML(p6) --[[ line: 60 ]]
 	return `<span class="color">{`<span class="color-preview" style="background-color: rgba({var40},{var41},{var42},{var43 or 1});"></span>`} rgba({var33}, {var34}, {var35}, {var36})</span>`
 end
 
-local function collectTokens(p7, p8, p9, p10) --[[ line: 77 ]]
+local function collectTokens(p7, p8, p9, p10)
 	-- upvalues: collectTokens (ref)
 	local t = {}
 	
@@ -139,7 +139,7 @@ local function collectTokens(p7, p8, p9, p10) --[[ line: 77 ]]
 	return t
 end
 
-local function collectTokensWithSubcategories(p11, p12, p13, p14) --[[ line: 104 ]]
+local function collectTokensWithSubcategories(p11, p12, p13, p14)
 	-- upvalues: collectTokens (ref)
 	local t = {}
 	
@@ -187,7 +187,7 @@ local function collectTokensWithSubcategories(p11, p12, p13, p14) --[[ line: 104
 	return t
 end
 
-local function hasSubcategories(p15) --[[ line: 168 ]]
+local function hasSubcategories(p15)
 	local var51
 	for i, v in p15 do
 		if type(v) == "table" then
@@ -207,7 +207,7 @@ local function hasSubcategories(p15) --[[ line: 168 ]]
 	return false
 end
 
-local function sortTokens(p16, p17, p18) --[[ line: 196 ]]
+local function sortTokens(p16, p17, p18)
 	if p16:find("(%u%a+)_(%d+)%.?(%u?%w*)") and p17:find("(%u%a+)_(%d+)%.?(%u?%w*)") then
 		local var52, var53, var54 = p16:match("(%u%a+)_(%d+)%.?(%u?%w*)")
 		local var55, var56, var57 = p17:match("(%u%a+)_(%d+)%.?(%u?%w*)")
@@ -223,7 +223,7 @@ local list = {
 	"LightMode", "Config"
 }
 
-local function getTokenValue(p19, p20) --[[ line: 243 ]]
+local function getTokenValue(p19, p20)
 	local var58 = p19
 	
 	for i, v in string.split(p20, ".") do
@@ -236,7 +236,7 @@ local function getTokenValue(p19, p20) --[[ line: 243 ]]
 	return var58
 end
 
-local function tokenOverrideValuesCompatible(p21, p22) --[[ line: 273 ]]
+local function tokenOverrideValuesCompatible(p21, p22)
 	-- upvalues: tokenOverrideValuesCompatible (ref)
 	if p21 == nil or p22 == nil then
 		return false
@@ -267,7 +267,7 @@ return {
 	sortTokens = sortTokens,
 	orderedTokenCategories = list,
 	getTokenValue = getTokenValue,
-	setTokenValue = function(value, p23, p24) --[[ line: 256 ]]
+	setTokenValue = function(value, p23, p24)
 		local parts = string.split(p23, ".")
 		local var60 = value
 		
@@ -286,7 +286,7 @@ return {
 			var60[var62] = p24
 		end
 	end,
-	resolveTokenOverride = function(p25, p26, p27) --[[ line: 307 ]]
+	resolveTokenOverride = function(p25, p26, p27)
 		-- upvalues: getTokenValue (ref), loggerModule (ref), tokenOverrideValuesCompatible (ref)
 		local var64
 		if type(p27) == "string" then
@@ -317,7 +317,7 @@ return {
 		
 		return nil
 	end,
-	_resolveTokenOverrideSource = function(p28, p29) --[[ line: 294 ]]
+	_resolveTokenOverrideSource = function(p28, p29)
 		-- upvalues: getTokenValue (ref), loggerModule (ref)
 		if type(p29) ~= "string" then
 			return p29

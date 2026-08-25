@@ -10,7 +10,7 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local fFlagSduiAllowNoConfigsBuilt = require(parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local fFlagEdpGameLeavePromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
 
-local function getPromptsUrl(p0, p1) --[[ line: 29 ]]
+local function getPromptsUrl(p0, p1)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref)
 	local var3 = urlBuilder.new({
 		path = "modals-api/v1/prompts",
@@ -21,7 +21,7 @@ local function getPromptsUrl(p0, p1) --[[ line: 29 ]]
 	return if p1 == nil then var3 else `{var3}&clientAttributes={httpService:UrlEncode(httpService:JSONEncode(p1))}`
 end
 
-return function(p2, p3) --[[ line: 46 | named "fetchPrompts" ]]
+return function(p2, p3)
 	-- upvalues: parent (ref), getSduiApiStore (ref), sduiResponseType (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), getPromptsUrl (ref), urlBuilder (ref), urlBase (ref), fFlagSduiAllowNoConfigsBuilt (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.ProtobufJson,

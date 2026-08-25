@@ -23,7 +23,7 @@ local _ = require(friendsMenu.friendsMenuModalType)
 local uDim2 = UDim2.new(1, 0, 0.5, 0)
 local vector2 = Vector2.new(1, 0.5)
 
-local var15 = function() --[[ line: 42 ]] end
+local var15 = function() end
 
 local t = {
 	sidePadding = 24,
@@ -31,7 +31,7 @@ local t = {
 	backgroundTransparency = nil
 }
 
-return function(p0) --[[ line: 62 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), useStyle (ref), var10 (ref), selectedUsersContextModule (ref), useCursor (ref), foundationModule (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (ref), friendMenuTypeModule (ref), var15 (ref), friendThumbnailModule (ref), friendInfoModule (ref), friendsMenuCheckboxModule (ref), uDim2 (ref), vector2 (ref), friendsMenuButtonModule (ref)
 	local var17 = cryoModule.Dictionary.join(t, p0)
 	local var18, var19 = reactModule.useState(false)
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 62 ]]
 	local sidePadding = var17.sidePadding
 	local var22 = useCursor(foundationModule.Enums.CursorType.RoundedSlot)
 	local var23 = var17.isFullRowActivatable and not var17.isFetchingFriends
-	local var24 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), friend (ref), var17 (ref)
 		if var20 and var20.inviteSingleFriend and not friend.isLoadingPlaceholder then
 			var20.inviteSingleFriend(friend.id, var17.layoutOrder)
@@ -55,7 +55,7 @@ return function(p0) --[[ line: 62 ]]
 		friend.isLoadingPlaceholder,
 		var17.layoutOrder
 	})
-	local var25 = reactModule.useCallback(function() --[[ line: 93 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref), var17 (ref)
 		if var21.isFriendSelected(var17.friend.id) then
 			var21.removeFriend(var17.friend.id, var17.friend.displayName)
@@ -78,17 +78,17 @@ return function(p0) --[[ line: 62 ]]
 		BorderSizePixel = 0,
 		LayoutOrder = var17.layoutOrder,
 		SelectionImageObject = if var17.isFullRowActivatable then var22 else nil,
-		[reactModule.Event.MouseEnter] = function() --[[ line: 144 ]]
+		[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var17 (ref), var19 (ref)
 			if not var17.isFetchingFriends then
 				var19(true)
 			end
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 149 ]]
+		[reactModule.Event.MouseLeave] = function()
 			-- upvalues: var19 (ref)
 			var19(false)
 		end,
-		[reactModule.Event.Activated] = if getFFlagFriendsMenuDummyLoadingFriendsFix() and friend.isLoadingPlaceholder or not var23 then var15 else reactModule.useCallback(function() --[[ line: 109 ]]
+		[reactModule.Event.Activated] = if getFFlagFriendsMenuDummyLoadingFriendsFix() and friend.isLoadingPlaceholder or not var23 then var15 else reactModule.useCallback(function()
 			-- upvalues: var23 (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (copy), friend (ref), var17 (ref), friendMenuTypeModule (copy), var24 (ref), var25 (ref)
 			if not var23 or getFFlagFriendsMenuDummyLoadingFriendsFix() and friend.isLoadingPlaceholder then return end
 			if var17.menuType == friendMenuTypeModule.MultiSelect then

@@ -12,7 +12,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local buildCalendarDayConfigs = dateTimeCalendarDayConfigUtilitiesModule.buildCalendarDayConfigs
 local DAYS_PER_WEEK = dateTimeCalendarConstantsModule.DAYS_PER_WEEK
 local getDayCellAppearance = dateTimeCalendarDayAppearanceUtilitiesModule.getDayCellAppearance
-local var10 = reactModule.memo(function(p0) --[[ line: 59 | named "CalendarGridDayCell" ]]
+local var10 = reactModule.memo(function(p0)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref), calendarGridDayLabelModule (ref)
 	return reactModule.createElement(viewModule, { tag = "size-full", LayoutOrder = p0.LayoutOrder }, {
 		RangeFill = if p0.isHighlighted and not p0.isSelected then reactModule.createElement(viewModule, {
@@ -32,13 +32,13 @@ local var10 = reactModule.memo(function(p0) --[[ line: 59 | named "CalendarGridD
 			emphasizeText = if p0.applyEmphasis then p0.isSelectable and not p0.isSelected else nil,
 			isSelectable = p0.isSelectable,
 			isSelected = p0.isSelected,
-			onActivated = reactModule.useCallback(function() --[[ line: 71 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: p0 (ref)
 				p0.handleDateActivated(p0.day, p0.month, p0.year)
 			end, { p0.handleDateActivated, p0.day, p0.month, p0.year }),
-			onHoverEnter = reactModule.useMemo(function() --[[ line: 62 ]]
+			onHoverEnter = reactModule.useMemo(function()
 				-- upvalues: p0 (ref)
-				return if p0.onHoverEnter == nil then nil else function() --[[ line: 66 ]]
+				return if p0.onHoverEnter == nil then nil else function()
 					-- upvalues: p0 (copy)
 					p0.onHoverEnter(DateTime.fromLocalTime(p0.year, p0.month, p0.day))
 				end
@@ -50,11 +50,11 @@ local var10 = reactModule.memo(function(p0) --[[ line: 59 | named "CalendarGridD
 end)
 
 return {
-	CalendarGrid = function(p1) --[[ line: 112 ]]
+	CalendarGrid = function(p1)
 		-- upvalues: useTokensModule (ref), reactModule (ref), buildCalendarDayConfigs (ref), getDayCellAppearance (ref), DAYS_PER_WEEK (ref), dateTimeUtilitiesModule (ref), textModule (ref), var10 (ref), viewModule (ref)
 		local none = useTokensModule().Padding.None
 		local var11 = reactModule.useRef(nil)
-		reactModule.useEffect(function() --[[ line: 118 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var11 (ref), p1 (ref)
 			local current = var11.current
 			local onHoverLeave = p1.onHoverLeave
@@ -64,16 +64,16 @@ return {
 			end
 			local mouseLeaveConnection = current.MouseLeave:Connect(onHoverLeave)
 			
-			return function() --[[ line: 125 ]]
+			return function()
 				-- upvalues: mouseLeaveConnection (ref)
 				mouseLeaveConnection:Disconnect()
 			end
 		end, { p1.onHoverLeave })
-		local var12 = reactModule.useMemo(function() --[[ line: 130 ]]
+		local var12 = reactModule.useMemo(function()
 			-- upvalues: buildCalendarDayConfigs (copy), p1 (ref)
 			return buildCalendarDayConfigs(p1.currViewDate)
 		end, { p1.currViewDate })
-		local var13 = reactModule.useMemo(function() --[[ line: 135 ]]
+		local var13 = reactModule.useMemo(function()
 			-- upvalues: var12 (ref), getDayCellAppearance (copy), p1 (ref)
 			local t = {}
 			

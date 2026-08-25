@@ -7,13 +7,13 @@ local _ = require(moments.Components.Feed.FeedTypes)
 local getRbxThumb = foundationModule.Utility.getRbxThumb
 local thumbnailType = foundationModule.Enums.ThumbnailType
 
-local function _(p0, p1, p2) --[[ line: 35 | named "getMediaContentUri" ]]
+local function _(p0, p1, p2)
 	local var3 = `rbxassetid://{p0}`
 	
 	return if p1 == Enum.CaptureType.Video and p2 ~= nil then `{var3}&accessContext={p2}&permissionContext=ignoreUniverse` else var3
 end
 
-return function(p3) --[[ line: 44 | named "toMediaItem" ]]
+return function(p3)
 	-- upvalues: httpService (ref), getRbxThumb (ref), thumbnailType (ref)
 	if p3.kind ~= "moment" then
 		return nil

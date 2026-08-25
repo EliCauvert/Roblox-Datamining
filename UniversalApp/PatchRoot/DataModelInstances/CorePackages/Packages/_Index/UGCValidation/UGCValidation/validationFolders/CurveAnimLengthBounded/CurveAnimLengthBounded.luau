@@ -20,7 +20,7 @@ t.requiredData = {
 	validationEnumsModule.SharedDataMember.curveAnimComputedFrames
 }
 
-function t.fflag() --[[ line: 35 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateMigrateCurveAnimModule (ref)
 	return getFFlagUGCValidateMigrateCurveAnimModule()
 end
@@ -30,7 +30,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 41 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidateCurveAnimMinTimeFixModule (ref), getFStringUGCValidateCurveAnimationMinLengthModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), errorSourceStringsModule (ref)
 	local animLength = p1.curveAnimComputedFrames.animLength
 	local var8 = if getFFlagUGCValidateCurveAnimMinTimeFixModule() then getFStringUGCValidateCurveAnimationMinLengthModule.asNumber() else 0

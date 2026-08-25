@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script.Parent.Parent.React)
 local focusContextModule = require(script.Parent.FocusContext)
 
-return function() --[[ line: 10 | named "useFocusController" ]]
+return function()
 	-- upvalues: reactModule (ref), focusContextModule (ref)
 	local var2 = reactModule.useContext(focusContextModule)
 	

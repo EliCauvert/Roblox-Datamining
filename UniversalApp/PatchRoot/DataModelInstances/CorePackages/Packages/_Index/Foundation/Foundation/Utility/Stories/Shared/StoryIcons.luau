@@ -6,7 +6,7 @@ local matrixGridModule = require(foundation.Utility.Stories.Shared.MatrixGrid)
 local icon = builderIconsModule.Icon
 local uiblox = builderIconsModule.Migration.uiblox
 
-local function _(p0) --[[ line: 16 | named "formatMigratedLegacySubtitle" ]]
+local function _(p0)
 	-- upvalues: uiblox (ref)
 	local var6 = uiblox[p0]
 	
@@ -29,7 +29,7 @@ t_2.subtitle = `icons/placeholder/placeholderOn_small \226\134\146 {placeholderO
 
 return {
 	ICON_TYPE_EXAMPLES = t,
-	buildIconControlOptions = function(p1) --[[ line: 51 ]]
+	buildIconControlOptions = function(p1)
 		-- upvalues: t (ref)
 		local list = { "" }
 		
@@ -45,7 +45,7 @@ return {
 		end
 		return list
 	end,
-	buildIconTypeMatrixRows = function(p2) --[[ line: 72 ]]
+	buildIconTypeMatrixRows = function(p2)
 		-- upvalues: t (ref), matrixGridModule (ref)
 		local t_1 = {}
 		
@@ -57,7 +57,7 @@ return {
 		end
 		return t_1
 	end,
-	parseIconControl = function(p3) --[[ line: 65 ]]
+	parseIconControl = function(p3)
 		return if p3 == "" then nil else p3
 	end
 }

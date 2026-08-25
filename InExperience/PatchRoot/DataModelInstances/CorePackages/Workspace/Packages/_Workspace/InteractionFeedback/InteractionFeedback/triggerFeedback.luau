@@ -8,7 +8,7 @@ local triggerHapticModule = require(script.Parent.triggerHaptic)
 soundManager.init()
 local fFlagLuaAppHapticTriggeredTelemetry = require(parent.SharedFlags).FFlagLuaAppHapticTriggeredTelemetry
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 19 | named "triggerFeedback" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: sounds (ref), soundManager (ref), soundGroups (ref), triggerHapticModule (ref), fFlagLuaAppHapticTriggeredTelemetry (ref)
 	if not p2 then
 		error("No config table was provided to InteractionFeedbackManager. Something is wrong.")

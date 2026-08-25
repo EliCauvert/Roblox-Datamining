@@ -7,10 +7,10 @@ local _ = require(sduiCoreSystem.SduiConfigTypes)
 local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local fFlagSduiErrorCleanup = require(parent.SharedFlags).FFlagSduiErrorCleanup
 
-return function(p0, p1, p2) --[[ line: 18 | named "reportUnifiedLoggingAction" ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagSduiErrorCleanup (ref), sduiCollectionAnalyticsBuilderModule (ref), sduiErrorsModule (ref), unifiedLoggingModule (ref)
 	local var4 = if fFlagSduiErrorCleanup then p2.getCollectionData and p2.getCollectionData() or nil else nil
-	local var5 = sduiCollectionAnalyticsBuilderModule.buildAndValidateItemAnalyticsData(p0, p2.analyticsData, p2.ancestorAnalyticsData, nil, p1.actionType, function(_) --[[ line: 34 ]]
+	local var5 = sduiCollectionAnalyticsBuilderModule.buildAndValidateItemAnalyticsData(p0, p2.analyticsData, p2.ancestorAnalyticsData, nil, p1.actionType, function(_)
 		-- upvalues: fFlagSduiErrorCleanup (copy), var4 (write), p0 (ref), sduiErrorsModule (copy), p1 (ref)
 		if not fFlagSduiErrorCleanup or var4 ~= nil then
 			p0.dependencies.logger.reportCounter(sduiErrorsModule.SduiCounterName.LogActionInvalidItemData, { name = p1.actionType })

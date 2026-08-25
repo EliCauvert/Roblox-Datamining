@@ -18,7 +18,7 @@ fitFrameOnAxis.defaultProps = {
 	contentPadding = UDim.new(0, 0)
 }
 
-function fitFrameOnAxis.init(p0) --[[ line: 31 ]]
+function fitFrameOnAxis.init(p0)
 	-- upvalues: roactModule (ref), isRoact17Module (ref)
 	p0.layoutRef = roactModule.createRef()
 	
@@ -27,7 +27,7 @@ function fitFrameOnAxis.init(p0) --[[ line: 31 ]]
 	else
 		p0.frameRef = p0.props[roactModule.Ref] or roactModule.createRef()
 	end
-	function p0.onResize() --[[ line: 39 ]]
+	function p0.onResize()
 		-- upvalues: p0 (ref)
 		local current = p0.layoutRef.current
 		local current_1 = p0.frameRef.current
@@ -40,7 +40,7 @@ function fitFrameOnAxis.init(p0) --[[ line: 31 ]]
 	end
 end
 
-function fitFrameOnAxis.render(p1) --[[ line: 50 ]]
+function fitFrameOnAxis.render(p1)
 	-- upvalues: roactModule (ref), cryoModule (ref)
 	assert(p1.props.Size == nil, "Size is not a valid property of FitFrameOnAxis. Did you mean `minimumSize`?")
 	local children = p1.props[roactModule.Children] or {}
@@ -70,15 +70,15 @@ function fitFrameOnAxis.render(p1) --[[ line: 50 ]]
 	}) else roactModule.createElement(var9, filteredProps, var10)
 end
 
-function fitFrameOnAxis.didMount(p2) --[[ line: 93 ]]
+function fitFrameOnAxis.didMount(p2)
 	p2.onResize()
 end
 
-function fitFrameOnAxis.didUpdate(p3) --[[ line: 97 ]]
+function fitFrameOnAxis.didUpdate(p3)
 	p3.onResize()
 end
 
-function fitFrameOnAxis.__getFilteredProps(p4) --[[ line: 101 ]]
+function fitFrameOnAxis.__getFilteredProps(p4)
 	-- upvalues: cryoModule (ref), roactModule (ref), fitFrameOnAxis (ref)
 	local var11 = cryoModule.Dictionary.join(p4.props.ImageSet, {
 		[roactModule.Ref] = p4.frameRef,
@@ -97,7 +97,7 @@ function fitFrameOnAxis.__getFilteredProps(p4) --[[ line: 101 ]]
 	})
 end
 
-function fitFrameOnAxis.__getSize(p5, p6) --[[ line: 124 ]]
+function fitFrameOnAxis.__getSize(p5, p6)
 	-- upvalues: t (ref)
 	if p5.props.axis == t.Both then
 		return p5:__getBothAxisSize(p6)
@@ -112,14 +112,14 @@ function fitFrameOnAxis.__getSize(p5, p6) --[[ line: 124 ]]
 	end
 end
 
-function fitFrameOnAxis.__getBothAxisSize(p7, p8) --[[ line: 141 ]]
+function fitFrameOnAxis.__getBothAxisSize(p7, p8)
 	local minimumSize = p7.props.minimumSize
 	local absoluteContentSize = p8.AbsoluteContentSize
 	
 	return UDim2.new(UDim.new(minimumSize.X.Scale, absoluteContentSize.X + p7:__getHorizontalMargin()), UDim.new(minimumSize.Y.Scale, absoluteContentSize.Y + p7:__getVerticalMargin()))
 end
 
-function fitFrameOnAxis.__getAxisUDim(p9, p10) --[[ line: 151 ]]
+function fitFrameOnAxis.__getAxisUDim(p9, p10)
 	-- upvalues: t (ref)
 	local minimumSize = p9.props.minimumSize
 	local x = nil
@@ -135,15 +135,15 @@ function fitFrameOnAxis.__getAxisUDim(p9, p10) --[[ line: 151 ]]
 	return UDim.new(x.Scale, math.max(var14, x.Offset))
 end
 
-function fitFrameOnAxis.__getVerticalMargin(p11) --[[ line: 169 ]]
+function fitFrameOnAxis.__getVerticalMargin(p11)
 	return p11.props.margin.top + p11.props.margin.bottom
 end
 
-function fitFrameOnAxis.__getHorizontalMargin(p12) --[[ line: 173 ]]
+function fitFrameOnAxis.__getHorizontalMargin(p12)
 	return p12.props.margin.left + p12.props.margin.right
 end
 
-function fitFrameOnAxis.__getOtherUDim(p13) --[[ line: 177 ]]
+function fitFrameOnAxis.__getOtherUDim(p13)
 	-- upvalues: t (ref)
 	local minimumSize = p13.props.minimumSize
 	
@@ -154,7 +154,7 @@ function fitFrameOnAxis.__getOtherUDim(p13) --[[ line: 177 ]]
 	end
 end
 
-local var6 = if isRoact17Module() then roactModule.forwardRef(function(p14, p15) --[[ line: 191 ]]
+local var6 = if isRoact17Module() then roactModule.forwardRef(function(p14, p15)
 	-- upvalues: roactModule (ref), fitFrameOnAxis (ref), cryoModule (ref)
 	return roactModule.createElement(fitFrameOnAxis, cryoModule.Dictionary.join(p14, { forwardedRef = p15 }))
 end) else fitFrameOnAxis

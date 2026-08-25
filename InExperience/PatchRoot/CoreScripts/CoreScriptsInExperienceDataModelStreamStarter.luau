@@ -1,5 +1,5 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
-local ok, status = pcall(function() --[[ line: 3 ]]
+local ok, status = pcall(function()
 	-- upvalues: corePackagesService (ref)
 	return require(corePackagesService.Workspace.Packages.DataModelStreaming)
 end)

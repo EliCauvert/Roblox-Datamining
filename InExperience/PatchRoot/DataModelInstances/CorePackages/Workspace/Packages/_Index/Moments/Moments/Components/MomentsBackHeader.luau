@@ -2,7 +2,7 @@
 local reactModule = require(moments.Parent.React)
 local momentsHeaderContainerModule = require(moments.Components.MomentsHeader.MomentsHeaderContainer)
 
-return function(p0) --[[ line: 13 | named "MomentsBackHeader" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), momentsHeaderContainerModule (ref)
 	return reactModule.createElement(momentsHeaderContainerModule, {
 		variant = "back",

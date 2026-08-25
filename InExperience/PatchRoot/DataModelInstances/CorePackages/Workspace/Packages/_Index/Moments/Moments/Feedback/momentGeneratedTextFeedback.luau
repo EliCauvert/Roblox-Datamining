@@ -2,7 +2,7 @@
 local httpClientModule = require(parent.HttpClient)
 local text = require(parent.Http).Url.APIS_URL .. "content-captures-api/v1/moment-generated-text-feedback"
 
-return function(p0, p1, p2) --[[ line: 22 | named "momentGeneratedTextFeedback" ]]
+return function(p0, p1, p2)
 	-- upvalues: httpClientModule (ref), text (ref)
 	return httpClientModule.asPromise(httpClientModule.fetch({
 		method = "POST",
@@ -10,7 +10,7 @@ return function(p0, p1, p2) --[[ line: 22 | named "momentGeneratedTextFeedback" 
 		url = text,
 		body = { generationToken = p0, reason = p1 },
 		network = p2,
-		decode = function(_) --[[ line: 32 ]]
+		decode = function(_)
 			return { ok = true }
 		end
 	}))

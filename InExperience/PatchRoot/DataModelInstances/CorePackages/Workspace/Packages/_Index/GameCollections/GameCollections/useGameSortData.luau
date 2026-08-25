@@ -15,7 +15,7 @@ local topicContentsReducer = require(parent.TopicContentsRodux).TopicContentsRed
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local reportWarning = require(parent.DiscoveryAnalytics).Points.reportWarning
 local getTopSearchResultsFetchName = require(parent.DiscoveryUtils).getTopSearchResultsFetchName
-local var4 = memoize(function(p0) --[[ line: 37 ]]
+local var4 = memoize(function(p0)
 	local t = {}
 	
 	if p0 and p0.sorts then
@@ -28,9 +28,9 @@ local var4 = memoize(function(p0) --[[ line: 37 ]]
 	return t
 end)
 
-return function(p1, p2, p3) --[[ line: 52 | named "useGameSortData" ]]
+return function(p1, p2, p3)
 	-- upvalues: useSelector (ref), topicInfosReducer (ref), appPage (ref), var4 (ref), gameSortGroups (ref), topicContentsReducer (ref), topicInfoModel (ref), retrievalStatus (ref), getTopSearchResultsFetchName (ref), reportWarning (ref), loggingProtocolModule (ref), fetchStatusNamespace (ref), fetchStatusReducer (ref), tutilsModule (ref)
-	return useSelector(function(p4) --[[ line: 53 ]]
+	return useSelector(function(p4)
 		-- upvalues: topicInfosReducer (copy), p1 (ref), p2 (ref), appPage (copy), var4 (copy), gameSortGroups (copy), p3 (ref), topicContentsReducer (copy), topicInfoModel (copy), retrievalStatus (copy), getTopSearchResultsFetchName (copy), reportWarning (copy), loggingProtocolModule (copy), fetchStatusNamespace (copy), fetchStatusReducer (copy)
 		local var6 = false
 		local var7 = false

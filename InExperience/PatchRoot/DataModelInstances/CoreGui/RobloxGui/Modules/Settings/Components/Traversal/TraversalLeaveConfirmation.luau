@@ -19,7 +19,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local getInputModeStore = responsiveModule.GetInputModeStore
 local input = responsiveModule.Input
 
-return reactModule.memo(function(p0) --[[ line: 36 | named "TraversalLeaveConfirmation" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useLocalization (ref), signalsReactModule (ref), getGameInfoStore (ref), signalsModule (ref), userInputService (ref), getInputModeStore (ref), input (ref), constants (ref), contextActionService (ref), guiService (ref), view (ref), teleportLeaveConfirmation (ref)
 	local name
 	local var12 = reactModule.useRef(nil)
@@ -36,7 +36,7 @@ return reactModule.memo(function(p0) --[[ line: 36 | named "TraversalLeaveConfir
 	else
 		name = var13.previous
 	end
-	local var16 = reactModule.useCallback(function(_, p1) --[[ line: 53 ]]
+	local var16 = reactModule.useCallback(function(_, p1)
 		-- upvalues: p0 (ref)
 		if p1 == Enum.UserInputState.End then
 			p0.onCancel()
@@ -45,16 +45,16 @@ return reactModule.memo(function(p0) --[[ line: 36 | named "TraversalLeaveConfir
 		end
 		return Enum.ContextActionResult.Pass
 	end, { p0.onCancel })
-	reactModule.useEffect(function() --[[ line: 61 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), userInputService (copy), getInputModeStore (copy), input (copy), var15 (write), constants (copy), contextActionService (copy), var16 (ref), guiService (copy), var12 (ref)
-		local var17 = signalsModule.createEffect(function(p2) --[[ line: 62 ]]
+		local var17 = signalsModule.createEffect(function(p2)
 			-- upvalues: userInputService (copy), getInputModeStore (copy), input (copy), var15 (copy), constants (copy), contextActionService (copy), var16 (copy), guiService (copy), var12 (copy)
 			local lastInputType = getInputModeStore(p2).getLastInputType(p2)
 			local var19 = if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true
 			
 			if var15 ~= nil and constants.NO_PLACE_ID < var15 then
 				if var19 then
-					contextActionService:BindCoreAction("FREEZE_CONTROLLER", function() --[[ line: 68 ]] end, false, Enum.UserInputType.Gamepad1)
+					contextActionService:BindCoreAction("FREEZE_CONTROLLER", function() end, false, Enum.UserInputType.Gamepad1)
 					contextActionService:BindCoreAction("EXIT_DIALOG", var16, false, Enum.KeyCode.ButtonB)
 					guiService.SelectedCoreObject = var12.current
 					
@@ -66,7 +66,7 @@ return reactModule.memo(function(p0) --[[ line: 36 | named "TraversalLeaveConfir
 			end
 		end)
 		
-		return function() --[[ line: 79 ]]
+		return function()
 			-- upvalues: var17 (ref)
 			var17()
 		end

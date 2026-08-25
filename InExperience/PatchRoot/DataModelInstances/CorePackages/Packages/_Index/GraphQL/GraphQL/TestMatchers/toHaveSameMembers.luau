@@ -1,7 +1,7 @@
 ﻿local inspect = require(script.Parent.Parent.Parent.LuauPolyfill).util.inspect
 local arrayContainsModule = require(script.Parent.Parent.luaUtils.arrayContains)
 
-return function(p0, p1, p2) --[[ line: 20 | named "toHaveSameMembers" ]]
+return function(p0, p1, p2)
 	-- upvalues: arrayContainsModule (ref), inspect (ref)
 	if #p0 ~= #p1 then
 		return {

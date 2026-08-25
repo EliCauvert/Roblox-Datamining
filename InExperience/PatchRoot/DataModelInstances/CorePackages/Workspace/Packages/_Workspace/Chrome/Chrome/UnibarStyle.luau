@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local var1 = reactModule.createContext({})
 
-local function UnibarStyleConstants() --[[ line: 10 ]]
+local function UnibarStyleConstants()
 	-- upvalues: useTokens (ref)
 	local var3 = useTokens()
 	
@@ -34,11 +34,11 @@ end
 
 return {
 	Context = var1,
-	Provider = function(p0) --[[ line: 38 ]]
+	Provider = function(p0)
 		-- upvalues: reactModule (ref), var1 (ref), UnibarStyleConstants (ref)
 		return reactModule.createElement(var1.Provider, { value = UnibarStyleConstants() }, p0.children)
 	end,
-	use = function() --[[ line: 44 ]]
+	use = function()
 		-- upvalues: reactModule (ref), var1 (ref)
 		local var4 = reactModule.useContext(var1)
 		

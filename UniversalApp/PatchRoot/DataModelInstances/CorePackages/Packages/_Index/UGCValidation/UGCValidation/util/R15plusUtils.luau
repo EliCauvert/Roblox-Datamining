@@ -15,7 +15,7 @@ local list = {
 	"Thumb"
 }
 
-local function buildDrdSchema(p0) --[[ line: 16 ]]
+local function buildDrdSchema(p0)
 	-- upvalues: list (ref)
 	local t = {}
 	
@@ -81,12 +81,12 @@ local var12 = buildDrdSchema("Left")
 local var13 = buildDrdSchema("Right")
 local var14 = false
 
-function t.setIsBackendBundleUpload(value) --[[ line: 128 ]]
+function t.setIsBackendBundleUpload(value)
 	-- upvalues: var14 (write)
 	var14 = value
 end
 
-function t.checkFlagEnabledForAllowHrd() --[[ line: 132 ]]
+function t.checkFlagEnabledForAllowHrd()
 	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), getFFlagUGCValidationAllowHRDUploadModule (ref), getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), var14 (write)
 	return if getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule() then if getFFlagUGCValidationAllowHRDUploadModule() then true else getFFlagDebugAllowHRDUploadOnBundleBackendModule() and var14 else false
 end
@@ -94,7 +94,7 @@ end
 local var15 = nil
 local var16 = nil
 
-function t.getHrdJointLabels() --[[ line: 155 ]]
+function t.getHrdJointLabels()
 	-- upvalues: var15 (write)
 	if var15 == nil then
 		var15 = Instance.new("HumanoidRigDescription"):GetJointLabels()
@@ -102,7 +102,7 @@ function t.getHrdJointLabels() --[[ line: 155 ]]
 	return var15
 end
 
-function t.getDrdJointLabels() --[[ line: 162 ]]
+function t.getDrdJointLabels()
 	-- upvalues: var16 (write)
 	if var16 == nil then
 		var16 = Instance.new("DigitsRigDescription"):GetJointLabels()
@@ -110,7 +110,7 @@ function t.getDrdJointLabels() --[[ line: 162 ]]
 	return var16
 end
 
-function t.getJointNameWhitelist() --[[ line: 169 ]]
+function t.getJointNameWhitelist()
 	-- upvalues: var2 (write), constantsModule (ref), t (ref)
 	if var2 ~= nil then
 		return var2
@@ -130,7 +130,7 @@ function t.getJointNameWhitelist() --[[ line: 169 ]]
 	return var2
 end
 
-function t.getNameWhitelistOfClassInSchema(p1, p2) --[[ line: 191 ]]
+function t.getNameWhitelistOfClassInSchema(p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -147,7 +147,7 @@ function t.getNameWhitelistOfClassInSchema(p1, p2) --[[ line: 191 ]]
 	return t_1
 end
 
-function t.getSchemaFlatHierarchyList(p3, p4) --[[ line: 211 ]]
+function t.getSchemaFlatHierarchyList(p3, p4)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -165,12 +165,12 @@ function t.getSchemaFlatHierarchyList(p3, p4) --[[ line: 211 ]]
 	return t_1
 end
 
-function t.getFingerFlatSuffixes() --[[ line: 235 ]]
+function t.getFingerFlatSuffixes()
 	-- upvalues: list (ref)
 	return list
 end
 
-function t.getDrdSchema(p5) --[[ line: 239 ]]
+function t.getDrdSchema(p5)
 	-- upvalues: var12 (ref), var13 (ref)
 	if p5 == "Left" then
 		return var12
@@ -180,7 +180,7 @@ function t.getDrdSchema(p5) --[[ line: 239 ]]
 	error("Invalid side: " .. p5)
 end
 
-function t.getAvatarBoneSchema(p6) --[[ line: 249 ]]
+function t.getAvatarBoneSchema(p6)
 	-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), var12 (ref), var13 (ref)
 	return if p6 == "Head" then t_1 elseif p6 == "UpperTorso" then t_2 elseif p6 == "LeftFoot" then t_3 elseif p6 == "RightFoot" then t_4 elseif p6 == "LeftHand" then var12 elseif p6 == "RightHand" then var13 else {}
 end

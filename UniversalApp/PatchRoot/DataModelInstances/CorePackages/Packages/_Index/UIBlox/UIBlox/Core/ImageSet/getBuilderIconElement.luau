@@ -18,7 +18,7 @@ local t_1 = {
 	})
 }
 
-local _ = function(p0) --[[ line: 28 ]]
+local _ = function(p0)
 	local var7
 	if not p0 then
 		return true
@@ -32,7 +32,7 @@ local _ = function(p0) --[[ line: 28 ]]
 	end
 end
 
-local var5 = function(p1) --[[ line: 35 ]]
+local var5 = function(p1)
 	local var9
 	local var8 = p1
 	
@@ -60,7 +60,7 @@ local var5 = function(p1) --[[ line: 35 ]]
 	return p1
 end
 
-local var6 = function(p2) --[[ line: 48 ]]
+local var6 = function(p2)
 	local var10
 	if p2 then
 		if p2.X.Offset ~= 0 then
@@ -79,7 +79,7 @@ local var6 = function(p2) --[[ line: 48 ]]
 	return var10
 end
 
-local _ = function(p3, p4, p5, p6, p7) --[[ line: 58 ]]
+local _ = function(p3, p4, p5, p6, p7)
 	-- upvalues: migrationSizeExceptionsModule (ref)
 	local offset = p3.Y.Offset
 	
@@ -97,7 +97,7 @@ local _ = function(p3, p4, p5, p6, p7) --[[ line: 58 ]]
 	return offset
 end
 
-return function(p8, p9, p10, p11, p12, p13, p14) --[[ line: 74 | named "getBuilderIconElement" ]]
+return function(p8, p9, p10, p11, p12, p13, p14)
 	-- upvalues: var5 (ref), var6 (ref), migrationSizeExceptionsModule (ref), builderIconsModule (ref), t (ref), roactModule (ref), t_1 (ref)
 	local size
 	assert(p8.ImageRectOffset == nil and p8.ImageRectSize == nil, "ImageRect props not supported for migration icons")
@@ -108,7 +108,7 @@ return function(p8, p9, p10, p11, p12, p13, p14) --[[ line: 74 | named "getBuild
 		local size = cloned.Size
 		cloned.Size = size:map(var5)
 		cloned.TextScaled = size:map(var6)
-		cloned.TextSize = size:map(function(p15) --[[ line: 97 ]]
+		cloned.TextSize = size:map(function(p15)
 			-- upvalues: p12 (ref), p10 (ref), p14 (ref), migrationSizeExceptionsModule (copy)
 			local var17
 			if p15 then

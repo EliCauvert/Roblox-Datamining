@@ -15,11 +15,11 @@ local var2 = urlBuilder.new({
 })
 
 return {
-	findProfileInsightsByUserIds = function(p0, p1, p2, p3) --[[ line: 113 ]]
+	findProfileInsightsByUserIds = function(p0, p1, p2, p3)
 		-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref), graphQLError (ref)
 		local var3 = p3 or fetch
 		
-		return promiseModule.new(function(p4, p5) --[[ line: 121 ]]
+		return promiseModule.new(function(p4, p5)
 			-- upvalues: var3 (ref), var2 (copy), httpService (copy), p0 (ref), p2 (ref), p1 (ref), response (copy), graphQLError (copy)
 			local var4 = var3(var2(), {
 				method = "POST",
@@ -32,7 +32,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ line: 135 ]]
+			}):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
@@ -42,7 +42,7 @@ return {
 				
 				return
 			end
-			local var5 = var4:json():catch(function() --[[ line: 151 ]]
+			local var5 = var4:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -54,12 +54,12 @@ return {
 			p5(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p0))))
 		end)
 	end,
-	findProfileInsightsByUserIdsFeed = function(p6, p7, p8, p9, p10) --[[ line: 173 ]]
+	findProfileInsightsByUserIdsFeed = function(p6, p7, p8, p9, p10)
 		-- upvalues: fFlagPlayerSearchEnableOnlineFrequents (ref), fetch (ref), promiseModule (ref), var2 (ref), httpService (ref), response (ref), graphQLError (ref)
 		local var6 = if fFlagPlayerSearchEnableOnlineFrequents then p9 else nil
 		local var7 = p10 or fetch
 		
-		return promiseModule.new(function(p12, p13) --[[ line: 121 ]]
+		return promiseModule.new(function(p12, p13)
 			-- upvalues: var7 (ref), var2 (copy), httpService (copy), p6 (ref), var6 (ref), p7 (ref), response (copy), graphQLError (copy)
 			local var4 = var7(var2(), {
 				method = "POST",
@@ -72,7 +72,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ line: 135 ]]
+			}):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
@@ -82,7 +82,7 @@ return {
 				
 				return
 			end
-			local var5 = var4:json():catch(function() --[[ line: 151 ]]
+			local var5 = var4:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -92,7 +92,7 @@ return {
 				return
 			end
 			p13(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p6))))
-		end):andThen(function(p11) --[[ line: 185 ]]
+		end):andThen(function(p11)
 			-- upvalues: p8 (ref)
 			return { pageId = p8, profileInsights = p11 }
 		end)

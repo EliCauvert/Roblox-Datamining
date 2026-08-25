@@ -33,9 +33,9 @@ playerNameTag.validateProps = tModule.strictInterface({
 	})
 })
 
-function playerNameTag.render(p0) --[[ line: 64 ]]
+function playerNameTag.render(p0)
 	-- upvalues: withLayoutValues (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), reactModule (ref), verifiedBadgesModule (ref)
-	return withLayoutValues(function(p1) --[[ line: 65 ]]
+	return withLayoutValues(function(p1)
 		-- upvalues: p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), reactModule (copy), verifiedBadgesModule (copy)
 		local var12 = if p0.props.isHovered then p1.IconSelectedColor else p1.IconUnSelectedColor
 		local font = p0.props.textFont.Font
@@ -144,7 +144,7 @@ function playerNameTag.render(p0) --[[ line: 64 ]]
 	end)
 end
 
-local function PlayerNameTagContainer(p2) --[[ line: 183 ]]
+local function PlayerNameTagContainer(p2)
 	-- upvalues: usePlayerCombinedNameModule (ref), fFlagEnableVerifiedBadgeStore (ref), useVerifiedBadge (ref), reactModule (ref), playerNameTag (ref), cryoModule (ref)
 	return reactModule.createElement(playerNameTag, cryoModule.Dictionary.join(p2, {
 		name = usePlayerCombinedNameModule(tostring(p2.player.UserId), p2.player.DisplayName),

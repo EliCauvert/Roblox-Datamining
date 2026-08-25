@@ -6,7 +6,7 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXBackgroundsPersistence = avatarExperienceFlagsModule.FFlagAXBackgroundsPersistence
 local AXFixEmptyDictionaryKeysForSaveDict2 = avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag and game:DefineFastFlag("AXFixEmptyDictionaryKeysForSaveDict2", false)
 
-local function filterEmptyDicts(p0) --[[ line: 23 ]]
+local function filterEmptyDicts(p0)
 	local cloned = table.clone(p0)
 	
 	for i, v in cloned do
@@ -17,12 +17,12 @@ local function filterEmptyDicts(p0) --[[ line: 23 ]]
 	return cloned
 end
 
-local function _(p1, p2) --[[ line: 33 | named "deepEqualWithoutEmptyDicts" ]]
+local function _(p1, p2)
 	-- upvalues: filterEmptyDicts (ref), tutilsModule (ref)
 	return tutilsModule.deepEqual(filterEmptyDicts(p1), filterEmptyDicts(p2))
 end
 
-return function(p3, p4) --[[ line: 43 | named "getSaveDict" ]]
+return function(p3, p4)
 	-- upvalues: fFlagAXBackgroundsPersistence (ref), AXFixEmptyDictionaryKeysForSaveDict2 (ref), filterEmptyDicts (ref), tutilsModule (ref)
 	local var6
 	local equipped = p3.equipped

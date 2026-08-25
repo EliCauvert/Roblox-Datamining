@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsFixPeekReturnChrome", false)
 
-return function() --[[ line: 15 ]]
+return function()
 	return game:GetFastFlag("MomentsFixPeekReturnChrome")
 end

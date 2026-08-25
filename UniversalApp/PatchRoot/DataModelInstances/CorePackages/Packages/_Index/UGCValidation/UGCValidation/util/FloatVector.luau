@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-function t.new(...) --[[ line: 12 ]]
+function t.new(...)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.data = {}
@@ -19,11 +19,11 @@ function t.new(...) --[[ line: 12 ]]
 	return tbl
 end
 
-function t:getSize() --[[ line: 37 ]]
+function t:getSize()
 	return #self.data
 end
 
-function t:checkCompatible(p0) --[[ line: 41 ]]
+function t:checkCompatible(p0)
 	-- upvalues: t (ref)
 	if typeof(self) ~= typeof(t) or typeof(p0) ~= typeof(t) then
 		error("vector operation on non-vector type")
@@ -37,12 +37,12 @@ function t:checkCompatible(p0) --[[ line: 41 ]]
 	return false
 end
 
-function t:__index(p1) --[[ line: 54 ]]
+function t:__index(p1)
 	-- upvalues: t (ref)
 	return if typeof(p1) == "number" then self.data[p1] else t[p1]
 end
 
-function t:__newindex(p2, p3) --[[ line: 62 ]]
+function t:__newindex(p2, p3)
 	if typeof(p2) == "number" then
 		self.data[p2] = p3
 		
@@ -51,7 +51,7 @@ function t:__newindex(p2, p3) --[[ line: 62 ]]
 	rawset(self, p2, p3)
 end
 
-function t:__add(p4) --[[ line: 71 ]]
+function t:__add(p4)
 	-- upvalues: t (ref)
 	t.checkCompatible(self, p4)
 	local t_1 = {}
@@ -62,7 +62,7 @@ function t:__add(p4) --[[ line: 71 ]]
 	return t.new(t_1)
 end
 
-function t:__sub(p5) --[[ line: 80 ]]
+function t:__sub(p5)
 	-- upvalues: t (ref)
 	t.checkCompatible(self, p5)
 	local t_1 = {}
@@ -73,7 +73,7 @@ function t:__sub(p5) --[[ line: 80 ]]
 	return t.new(t_1)
 end
 
-function t:__mul(p6) --[[ line: 89 ]]
+function t:__mul(p6)
 	-- upvalues: t (ref)
 	if typeof(self) == typeof(t) and typeof(p6) == "number" then
 		local t_1 = {}
@@ -93,7 +93,7 @@ function t:__mul(p6) --[[ line: 89 ]]
 	end
 end
 
-function t:__div(p7) --[[ line: 106 ]]
+function t:__div(p7)
 	-- upvalues: t (ref)
 	if typeof(self) == typeof(t) and typeof(p7) == "number" then
 		local t_1 = {}
@@ -113,7 +113,7 @@ function t:__div(p7) --[[ line: 106 ]]
 	end
 end
 
-function t:dot(vectorB) --[[ line: 123 ]]
+function t:dot(vectorB)
 	-- upvalues: t (ref)
 	t.checkCompatible(self, vectorB)
 	local var9 = 0
@@ -124,7 +124,7 @@ function t:dot(vectorB) --[[ line: 123 ]]
 	return var9
 end
 
-function t:cross(vectorB) --[[ line: 133 ]]
+function t:cross(vectorB)
 	-- upvalues: t (ref)
 	t.checkCompatible(self, vectorB)
 	
@@ -136,7 +136,7 @@ function t:cross(vectorB) --[[ line: 133 ]]
 	return nil
 end
 
-function t:magnitude() --[[ line: 146 ]]
+function t:magnitude()
 	local var10 = 0
 	
 	for i, v in self.data do
@@ -145,7 +145,7 @@ function t:magnitude() --[[ line: 146 ]]
 	return math.sqrt(var10)
 end
 
-function t:fuzzyEq(p8, p9) --[[ line: 154 ]]
+function t:fuzzyEq(p8, p9)
 	-- upvalues: t (ref)
 	if not t.checkCompatible(self, p8) then
 		return false

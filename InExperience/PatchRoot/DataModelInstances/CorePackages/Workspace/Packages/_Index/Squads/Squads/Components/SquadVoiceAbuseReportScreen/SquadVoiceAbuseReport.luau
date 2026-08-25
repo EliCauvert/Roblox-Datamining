@@ -35,7 +35,7 @@ local list = {
 	}
 }
 
-return function(p0) --[[ line: 33 | named "SquadVoiceAbuseReport" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), react (ref), loggerModule (ref), httpService (ref), networkingSquads (ref), defaultTwoStepReportFlow (ref), list (ref)
 	local var6 = useDispatch()
 	
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 33 | named "SquadVoiceAbuseReport" ]]
 		analyticsContext = "Squad",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = react.useCallback(function(p1, p2) --[[ line: 35 ]]
+			onSubmit = react.useCallback(function(p1, p2)
 				-- upvalues: loggerModule (copy), httpService (copy), p0 (ref), var6 (ref), networkingSquads (copy)
 				loggerModule:info("Submitting abuse report. Reason: {}, Comment: {}, Data: {}", p1, p2, httpService:JSONEncode(p0.reportData))
 				local var7, var8 = var6(networkingSquads.SendSquadVoiceAbuseReport.API({

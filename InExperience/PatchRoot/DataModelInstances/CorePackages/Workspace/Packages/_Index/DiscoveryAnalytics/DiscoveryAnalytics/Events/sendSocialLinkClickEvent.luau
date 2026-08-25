@@ -18,7 +18,7 @@ local t = {
 	lastUpdated = { 25, 12, 9 }
 }
 
-return function(p0) --[[ line: 32 ]]
+return function(p0)
 	-- upvalues: var2 (ref), flaggedMutedError (ref), telemetryService (ref), t (ref)
 	local var4, var5 = var2(p0)
 	

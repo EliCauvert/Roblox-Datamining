@@ -5,7 +5,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local footerCornerButtonStyle = require(parent.GameTile).FooterCornerButtonStyle
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), useTokens (ref), useLocalization (ref), footerCornerButtonStyle (ref), reactModule (ref)
 	local var1 = useDesignTokens()
 	local var2 = useTokens()

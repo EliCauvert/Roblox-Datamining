@@ -29,7 +29,7 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-local function AmountLine(p0) --[[ line: 44 ]]
+local function AmountLine(p0)
 	-- upvalues: numberLocalization (ref), localizationService (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref)
 	local var16 = if p0.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
 	
@@ -53,7 +53,7 @@ local function AmountLine(p0) --[[ line: 44 ]]
 	})
 end
 
-return function(p1) --[[ line: 83 | named "InsufficientRobuxDialog" ]]
+return function(p1)
 	-- upvalues: useNavigation (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (ref), useProfileAnalyticsContextModule (ref), fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (ref), robloxAppHooksModule (ref), reactModule (ref), eventNamesModule (ref), useLocalization (ref), useOpenRobuxUpsellModule (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (ref), fFlagProfileInspectAndBuyAutoFocusModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), dialog (ref), dialogSize (ref), view (ref), AmountLine (ref), orientation (ref), buttonVariant (ref)
 	local var17 = useNavigation()
 	local var18 = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then useProfileAnalyticsContextModule() else nil
@@ -64,7 +64,7 @@ return function(p1) --[[ line: 83 | named "InsufficientRobuxDialog" ]]
 	local maxValue = math.max(totalPrice - var22, 0)
 	
 	if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then
-		reactModule.useEffect(function() --[[ line: 99 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var18 (ref), eventNamesModule (copy), totalPrice (ref)
 			var18.fireAnalyticsEvent(eventNamesModule.InspectAvatarInsufficientRobuxShown, { totalPrice = totalPrice })
 		end, { var18, totalPrice })
@@ -76,19 +76,19 @@ return function(p1) --[[ line: 83 | named "InsufficientRobuxDialog" ]]
 		orderTotal = "IAPExperience.PurchasePrompt.Label.TotalPriceV2",
 		buyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
-	local var25 = reactModule.useCallback(function() --[[ line: 114 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref)
 		var17.goBack()
 	end, { var17 })
 	local var26 = useOpenRobuxUpsellModule(totalPrice)
-	local var27 = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then reactModule.useCallback(function() --[[ line: 120 ]]
+	local var27 = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then reactModule.useCallback(function()
 		-- upvalues: var18 (ref), eventNamesModule (copy), totalPrice (ref), var26 (ref)
 		var18.fireAnalyticsEvent(eventNamesModule.InspectAvatarBuyRobuxClicked, { totalPrice = totalPrice })
 		var26()
 	end, { var26, var18, totalPrice }) else nil
 	
 	if fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
-		reactModule.useEffect(function() --[[ line: 129 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var22 (ref), totalPrice (ref), var25 (ref)
 			if totalPrice <= var22 then
 				var25()
@@ -107,11 +107,11 @@ return function(p1) --[[ line: 83 | named "InsufficientRobuxDialog" ]]
 		isAutoFocusRoot = true,
 		isIsolated = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
-		customEventHandlers = reactModule.useMemo(function() --[[ line: 141 ]]
+		customEventHandlers = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var25 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2) --[[ line: 144 ]]
+					handler = inputHandlersModule.onRelease(function(p2)
 						-- upvalues: var25 (copy)
 						p2:cancel()
 						var25()

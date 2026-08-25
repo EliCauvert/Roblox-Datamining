@@ -1,11 +1,11 @@
 ﻿local childAddedConnection
 local _ = nil
-local ok, status = pcall(function() --[[ line: 7 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFlagRemoveMessageFromMessageLog")
 end)
 local status_1 = ok and status
 local _ = false
-local ok_1, status_2 = pcall(function() --[[ line: 15 ]]
+local ok_1, status_2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 local status_2_1 = ok_1 and status_2
@@ -19,7 +19,7 @@ if status_2_1 then
 	
 	if chatTranslationEnabled == nil then
 		childAddedConnection = nil
-		childAddedConnection = parent.ChildAdded:Connect(function(p0) --[[ line: 35 ]]
+		childAddedConnection = parent.ChildAdded:Connect(function(p0)
 			-- upvalues: chatTranslationEnabled (write), childAddedConnection (write)
 			if p0.Name == "ChatTranslationEnabled" then
 				chatTranslationEnabled = p0
@@ -31,11 +31,11 @@ end
 childAddedConnection = {}
 childAddedConnection.__index = childAddedConnection
 
-function childAddedConnection.Destroy(p1) --[[ line: 50 ]]
+function childAddedConnection.Destroy(p1)
 	p1.Destroyed = true
 end
 
-function childAddedConnection.SetActive(value, p2) --[[ line: 54 ]]
+function childAddedConnection.SetActive(value, p2)
 	if p2 == value.Active then return end
 	if p2 == false then
 		value.MessageLogDisplay:Clear()
@@ -49,7 +49,7 @@ function childAddedConnection.SetActive(value, p2) --[[ line: 54 ]]
 	value.Active = p2
 end
 
-function childAddedConnection.UpdateMessageFiltered(p3, p4) --[[ line: 69 ]]
+function childAddedConnection.UpdateMessageFiltered(p3, p4)
 	-- upvalues: status_2_1 (write), chatTranslationEnabled (write), status_1 (write)
 	local var8
 	local var6 = 1
@@ -85,7 +85,7 @@ function childAddedConnection.UpdateMessageFiltered(p3, p4) --[[ line: 69 ]]
 	end
 end
 
-function childAddedConnection.AddMessageToChannel(p5, p6) --[[ line: 105 ]]
+function childAddedConnection.AddMessageToChannel(p5, p6)
 	-- upvalues: chatSettingsModule (ref)
 	table.insert(p5.MessageLog, p6)
 	
@@ -97,7 +97,7 @@ function childAddedConnection.AddMessageToChannel(p5, p6) --[[ line: 105 ]]
 	end
 end
 
-function childAddedConnection.InternalAddMessageAtTimeStamp(p7, p8) --[[ line: 115 ]]
+function childAddedConnection.InternalAddMessageAtTimeStamp(p7, p8)
 	for i = 1, #p7.MessageLog do
 		if p8.Time >= p7.MessageLog[i].Time then
 			continue
@@ -109,7 +109,7 @@ function childAddedConnection.InternalAddMessageAtTimeStamp(p7, p8) --[[ line: 1
 	table.insert(p7.MessageLog, p8)
 end
 
-function childAddedConnection.AddMessagesToChannelByTimeStamp(p9, p10, p11) --[[ line: 125 ]]
+function childAddedConnection.AddMessagesToChannelByTimeStamp(p9, p10, p11)
 	-- upvalues: chatSettingsModule (ref)
 	for i = p11, #p10 do
 		p9:InternalAddMessageAtTimeStamp(p10[i])
@@ -126,7 +126,7 @@ function childAddedConnection.AddMessagesToChannelByTimeStamp(p9, p10, p11) --[[
 	end
 end
 
-function childAddedConnection.AddMessageToChannelByTimeStamp(p12, p13) --[[ line: 140 ]]
+function childAddedConnection.AddMessageToChannelByTimeStamp(p12, p13)
 	-- upvalues: chatSettingsModule (ref)
 	if #p12.MessageLog < 1 then
 		p12:AddMessageToChannel(p13)
@@ -154,7 +154,7 @@ function childAddedConnection.AddMessageToChannelByTimeStamp(p12, p13) --[[ line
 	end
 end
 
-function childAddedConnection.RemoveLastMessageFromChannel(p14) --[[ line: 170 ]]
+function childAddedConnection.RemoveLastMessageFromChannel(p14)
 	table.remove(p14.MessageLog, 1)
 	
 	if p14.Active then
@@ -162,7 +162,7 @@ function childAddedConnection.RemoveLastMessageFromChannel(p14) --[[ line: 170 ]
 	end
 end
 
-function childAddedConnection.ClearMessageLog(p15) --[[ line: 178 ]]
+function childAddedConnection.ClearMessageLog(p15)
 	p15.MessageLog = {}
 	
 	if p15.Active then
@@ -170,11 +170,11 @@ function childAddedConnection.ClearMessageLog(p15) --[[ line: 178 ]]
 	end
 end
 
-function childAddedConnection.RegisterChannelTab(p16, p17) --[[ line: 186 ]]
+function childAddedConnection.RegisterChannelTab(p16, p17)
 	p16.ChannelTab = p17
 end
 
-function t.new(p18, p19) --[[ line: 193 ]]
+function t.new(p18, p19)
 	-- upvalues: childAddedConnection (ref)
 	local tbl = setmetatable({}, childAddedConnection)
 	tbl.Destroyed = false

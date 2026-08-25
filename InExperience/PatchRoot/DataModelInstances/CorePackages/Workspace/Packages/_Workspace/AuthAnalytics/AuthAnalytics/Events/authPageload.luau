@@ -2,7 +2,7 @@
 local logging = require(parent.Parent.AppCommonLib).Logging
 local checkAndSendEventModule = require(parent.Utils.checkAndSendEvent)
 
-return function(p0, p1, p2, p3) --[[ line: 6 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: logging (ref), checkAndSendEventModule (ref)
 	local t = {}
 	

@@ -47,17 +47,17 @@ local t_1 = {
 local conversationList = roactModule.PureComponent:extend("ConversationList")
 conversationList.defaultProps = { entryHeight = 62, entryPadding = 16 }
 
-function conversationList.init(p0) --[[ line: 76 ]]
+function conversationList.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.scrollingRef = roactModule.createRef()
 	
-	function p0.inviteUser(p1) --[[ line: 78 ]]
+	function p0.inviteUser(p1)
 		-- upvalues: p0 (ref)
 		return p0.props.inviteUser(p1, p0.props.analytics, p0.props.trigger, p0.props.inviteMessageId, p0.props.launchData)
 	end
 end
 
-function conversationList.render(p2) --[[ line: 89 ]]
+function conversationList.render(p2)
 	-- upvalues: roactModule (ref), getFFlagEnableNewInviteSendEndpointModule (ref), getFFlagEnableNewInviteMenuModule (ref), playerSearchPredicateModule (ref), inviteListEntryModule (ref), userInputService (ref), conversationEntryModule (ref), retrievalStatus (ref), loadingFriendsPageModule (ref), noFriendsPageModule (ref), friendsErrorPageModule (ref), var25 (ref), var24 (ref), GRAY3 (ref), var26 (ref)
 	local analytics = p2.props.analytics
 	local children = p2.props[roactModule.Children] or {}
@@ -163,7 +163,7 @@ function conversationList.render(p2) --[[ line: 89 ]]
 	end
 end
 
-local function handleBinding(p3) --[[ line: 211 ]]
+local function handleBinding(p3)
 	-- upvalues: getFFlagEnableNewInviteMenuModule (ref), userInputService (ref), guiService (ref)
 	if getFFlagEnableNewInviteMenuModule() and not userInputService.GamepadEnabled then return end
 	local value = p3.scrollingRef:getValue()
@@ -184,7 +184,7 @@ end
 conversationList.didUpdate = handleBinding
 
 if getFFlagEnableNewInviteSendEndpointModule() then
-	function conversationList.didMount(p4) --[[ line: 237 ]]
+	function conversationList.didMount(p4)
 		-- upvalues: constantsModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), handleBinding (ref)
 		if p4.props.analytics and p4.props.trigger == constantsModule.Triggers.GameMenu then
 			p4.props.analytics:sendEvent(p4.props.trigger, gameInviteEvents.ModalOpened, if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then {
@@ -196,11 +196,11 @@ if getFFlagEnableNewInviteSendEndpointModule() then
 else
 	conversationList.didMount = handleBinding
 end
-local var31 = memoize(function(p5) --[[ line: 256 ]]
+local var31 = memoize(function(p5)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	local function friendPreference(p6, p7) --[[ line: 258 ]]
+	local function friendPreference(p6, p7)
 		-- upvalues: t (copy)
 		local presence = t[p6.presence]
 		local presence_1 = t[p7.presence]
@@ -217,7 +217,7 @@ local var31 = memoize(function(p5) --[[ line: 256 ]]
 	
 	return t_1
 end)
-local var32 = memoize(function(p8) --[[ line: 280 ]]
+local var32 = memoize(function(p8)
 	-- upvalues: sortFriendsByCorrectedPresenceAndRank (ref)
 	local t = {}
 	
@@ -230,10 +230,10 @@ local var32 = memoize(function(p8) --[[ line: 280 ]]
 	
 	return t
 end)
-local var33 = memoize(function(p9) --[[ line: 293 ]]
+local var33 = memoize(function(p9)
 	local t = {}
 	
-	local function friendPreference(p10, p11) --[[ line: 295 ]]
+	local function friendPreference(p10, p11)
 		local friendFrequentRank = tonumber(p10.friendFrequentRank) or 0
 		local friendFrequentRank_1 = tonumber(p11.friendFrequentRank) or 0
 		
@@ -250,14 +250,14 @@ local var33 = memoize(function(p9) --[[ line: 293 ]]
 	return t
 end)
 
-local _ = function() --[[ line: 317 ]]
+local _ = function()
 	-- upvalues: newInviteMenuExperimentManagerModule (ref), var33 (ref), var32 (ref), var31 (ref)
 	local var47 = newInviteMenuExperimentManagerModule.default:getInviteListSortOrder() or 0
 	
 	return if var47 == 1 then var33 elseif var47 == 2 then var32 else var31
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p12, _) --[[ line: 329 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p12, _)
 	-- upvalues: var31 (ref), getFFlagInviteListRerank (ref), newInviteMenuExperimentManagerModule (ref), t_1 (ref), var33 (ref), var32 (ref), playersService (ref)
 	local var48 = var31
 	
@@ -270,10 +270,10 @@ return roactRoduxModule.UNSTABLE_connect2(function(p12, _) --[[ line: 329 ]]
 		friendsRetrievalStatus = p12.Friends.retrievalStatus[tostring(playersService.LocalPlayer.UserId)],
 		invites = p12.Invites
 	}
-end, function(p13) --[[ line: 341 ]]
+end, function(p13)
 	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), inviteUserIdToPlaceIdCustomizedModule (ref), inviteUserIdToPlaceIdModule (ref)
 	return {
-		inviteUser = function(p14, p15, p16, p17, p18) --[[ line: 343 ]]
+		inviteUser = function(p14, p15, p16, p17, p18)
 			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), p13 (ref), inviteUserIdToPlaceIdCustomizedModule (copy), inviteUserIdToPlaceIdModule (copy)
 			local var50 = httpRequestModule(httpRbxApiService)
 			local var51 = tostring(game.PlaceId)

@@ -16,7 +16,7 @@ local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdate
 local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
 local _ = require(trustedContacts.Common.Types)
 
-return function(p0) --[[ line: 33 | named "TrustedFriendsCardWithActionsCheck" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useTrustedFriendActionModule (ref), fFlagTFPassQRCodeSourceModule (ref), fFlagTFUpdateAnalyticsModule (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), appPage (ref), TFActionsEnumModule (ref), roactUtilsModule (ref), foundationModule (ref), iconSize (ref), trustedContactsModalContainerModule (ref)
 	local var10 = useNavigation()
 	local userId = p0.userId
@@ -32,20 +32,20 @@ return function(p0) --[[ line: 33 | named "TrustedFriendsCardWithActionsCheck" ]
 		source = p0.source,
 		tfActionsEnum = enum
 	}).fireAnalyticsEvent else nil
-	local var13 = reactModule.useCallback(function() --[[ line: 54 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (ref), eventNames (copy), p0 (ref), var10 (ref), appPage (copy)
 		if fFlagTFUpdateAnalyticsModule then
 			var12(eventNames.TCUpsellAgePrecheckTriggered)
 		end
 		p0.externalNavigation.openFacialAgeEstimationUpsell({
-			onSuccess = function() --[[ line: 60 ]]
+			onSuccess = function()
 				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (copy), eventNames (copy), var10 (copy), appPage (copy)
 				if fFlagTFUpdateAnalyticsModule then
 					var12(eventNames.TCUpsellAgePrecheckSucceeded)
 				end
 				var10.replace(appPage.TrustedFriendsUserModal, {})
 			end,
-			onFailure = function() --[[ line: 66 ]]
+			onFailure = function()
 				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (copy), eventNames (copy), p0 (copy)
 				if fFlagTFUpdateAnalyticsModule then
 					var12(eventNames.TCUpsellAgePrecheckFailed)
@@ -55,7 +55,7 @@ return function(p0) --[[ line: 33 | named "TrustedFriendsCardWithActionsCheck" ]
 		})
 	end, { var10, p0.externalNavigation, var12 })
 	local var14 = enum == TFActionsEnumModule.UnlockTrustedFriendByFAE
-	roactUtilsModule.Hooks.useEffectOnce(function() --[[ line: 77 ]]
+	roactUtilsModule.Hooks.useEffectOnce(function()
 		-- upvalues: var13 (ref)
 		var13()
 	end, var14)

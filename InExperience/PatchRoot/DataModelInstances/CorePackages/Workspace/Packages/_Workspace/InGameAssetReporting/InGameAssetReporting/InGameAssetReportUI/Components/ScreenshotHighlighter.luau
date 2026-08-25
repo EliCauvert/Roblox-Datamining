@@ -5,18 +5,18 @@ local UIBloxModule = require(parent.UIBlox)
 local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local images = UIBloxModule.App.ImageSet.Images
 
-return function(p0) --[[ line: 25 | named "ScreenshotHighlighter" ]]
+return function(p0)
 	-- upvalues: robloxGui (ref), reactModule (ref), imageSetButton (ref), images (ref)
 	local absoluteSize = robloxGui.AbsoluteSize
 	local var3 = (if absoluteSize.X < absoluteSize.Y then absoluteSize.X else absoluteSize.Y) / 5
 	local var4, var5 = reactModule.useState(false)
 	
-	local var6 = function(p1, p2) --[[ line: 35 ]]
+	local var6 = function(p1, p2)
 		-- upvalues: var3 (ref), p0 (ref)
 		p0.handleNewAnnotationPoint((Vector2.new(p2.X, p2.Y) - p1.AbsolutePosition) / p1.AbsoluteSize, var3 * 0.5 / (if p1.AbsoluteSize.Y < p1.AbsoluteSize.X then p1.AbsoluteSize.X else p1.AbsoluteSize.Y))
 	end
 	
-	local var7 = function(p3, p4) --[[ line: 45 ]]
+	local var7 = function(p3, p4)
 		-- upvalues: p0 (ref), var5 (ref), var6 (ref)
 		if p4.UserInputState == Enum.UserInputState.Begin and (p4.UserInputType == Enum.UserInputType.Touch or p4.UserInputType == Enum.UserInputType.MouseButton1) then
 			if #p0.annotationPoints < 5 then
@@ -29,9 +29,9 @@ return function(p0) --[[ line: 25 | named "ScreenshotHighlighter" ]]
 		end
 	end
 	
-	local var8 = function(_, _) --[[ line: 59 ]] end
+	local var8 = function(_, _) end
 	
-	local var9 = function(_, _) --[[ line: 71 ]]
+	local var9 = function(_, _)
 		-- upvalues: var4 (ref), var5 (ref)
 		if var4 then
 			var5(false)

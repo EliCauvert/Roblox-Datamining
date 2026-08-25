@@ -21,14 +21,14 @@ sliderTextInput.validateProps = tModule.strictInterface({
 })
 sliderTextInput.defaultProps = { disabled = false }
 
-function sliderTextInput.init(p0) --[[ line: 37 ]]
+function sliderTextInput.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.textBoxRef = roactModule.createRef()
 end
 
-function sliderTextInput.render(p1) --[[ line: 41 ]]
+function sliderTextInput.render(p1)
 	-- upvalues: withStyleModule (ref), divideTransparencyModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), eventConnection (ref), userInputService (ref)
-	return withStyleModule(function(p2) --[[ line: 42 ]]
+	return withStyleModule(function(p2)
 		-- upvalues: p1 (ref), divideTransparencyModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), eventConnection (copy), userInputService (copy)
 		local var8 = if p1.props.disabled then 2 else 1
 		
@@ -66,10 +66,10 @@ function sliderTextInput.render(p1) --[[ line: 41 ]]
 				TextScaled = true,
 				TextEditable = not p1.props.disabled,
 				ZIndex = 2,
-				[roactModule.Event.Focused] = if p1.props.disabled then function(p3) --[[ line: 86 ]]
+				[roactModule.Event.Focused] = if p1.props.disabled then function(p3)
 					p3:ReleaseFocus()
 				end else nil,
-				[roactModule.Event.FocusLost] = function(p4, _) --[[ line: 89 ]]
+				[roactModule.Event.FocusLost] = function(p4, _)
 					-- upvalues: p1 (copy)
 					local var9 = tonumber(p4.Text)
 					
@@ -88,7 +88,7 @@ function sliderTextInput.render(p1) --[[ line: 41 ]]
 			}),
 			UserInputConnection = not p1.props.disabled and roactModule.createElement(eventConnection, {
 				event = userInputService.InputBegan,
-				callback = function(p5, _) --[[ line: 113 ]]
+				callback = function(p5, _)
 					-- upvalues: userInputService (copy), p1 (copy)
 					if p5.UserInputType ~= Enum.UserInputType.Keyboard then return end
 					if userInputService:GetFocusedTextBox() ~= p1.textBoxRef.current then return end
@@ -115,8 +115,8 @@ function sliderTextInput.render(p1) --[[ line: 41 ]]
 	end)
 end
 
-function sliderTextInput.didMount(p6) --[[ line: 154 ]]
-	pcall(function() --[[ line: 157 ]]
+function sliderTextInput.didMount(p6)
+	pcall(function()
 		-- upvalues: p6 (ref)
 		p6.textBoxRef.current.TextInputType = Enum.TextInputType.Number
 	end)

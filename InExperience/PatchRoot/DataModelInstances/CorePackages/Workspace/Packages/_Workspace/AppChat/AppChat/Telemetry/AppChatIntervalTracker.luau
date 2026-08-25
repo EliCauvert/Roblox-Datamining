@@ -13,7 +13,7 @@ local list_1 = {
 }
 local t = {}
 
-local function canStartInterval(p0) --[[ line: 53 ]]
+local function canStartInterval(p0)
 	-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref)
 	local parentTTI = appChatPerfEventInfoModule.getParentTTI(p0)
 	local TTIPage = appChatPerfEventInfoModule.getTTIPage(parentTTI)
@@ -29,13 +29,13 @@ local function canStartInterval(p0) --[[ line: 53 ]]
 	return true, nil
 end
 
-local function _(p1) --[[ line: 73 | named "getMetricsToTrack" ]]
+local function _(p1)
 	-- upvalues: fFlagAppChatScrollFrameTimeTrackingModule (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref)
 	return if fFlagAppChatScrollFrameTimeTrackingModule and (p1 == appChatPerfEventModule.ScrollConversationList or p1 == appChatPerfEventModule.ScrollMessageList) then list_1 else list
 end
 
 local t_1 = {
-	start = function(p2, _) --[[ line: 89 ]]
+	start = function(p2, _)
 		-- upvalues: appChatPerfEventInfoModule (ref), canStartInterval (ref), appChatPerf (ref), intervalPerformanceTracker (ref), fFlagAppChatScrollFrameTimeTrackingModule (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref), t (ref)
 		local intervalName = appChatPerfEventInfoModule.getIntervalName(p2)
 		local var15, var16 = canStartInterval(p2)
@@ -51,7 +51,7 @@ local t_1 = {
 		
 		return true
 	end,
-	finish = function(p3) --[[ line: 110 ]]
+	finish = function(p3)
 		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
 		local intervalName = appChatPerfEventInfoModule.getIntervalName(p3)
 		
@@ -64,7 +64,7 @@ local t_1 = {
 		end
 		return false
 	end,
-	cancel = function(p4) --[[ line: 121 ]]
+	cancel = function(p4)
 		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
 		local intervalName = appChatPerfEventInfoModule.getIntervalName(p4)
 		
@@ -77,11 +77,11 @@ local t_1 = {
 		end
 		return false
 	end,
-	isActive = function(p5) --[[ line: 132 ]]
+	isActive = function(p5)
 		-- upvalues: t (ref)
 		return t[p5] == true
 	end,
-	cancelIntervalsForTTI = function(p6, p7) --[[ line: 138 ]]
+	cancelIntervalsForTTI = function(p6, p7)
 		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
 		for i, v in appChatPerfEventInfoModule.getIntervalsForTTI(p6) do
 			if t[v] then
@@ -93,7 +93,7 @@ local t_1 = {
 		end
 	end
 }
-appChatTTITrackerModule.setOnConversationSwitch(function(p8) --[[ line: 151 ]]
+appChatTTITrackerModule.setOnConversationSwitch(function(p8)
 	-- upvalues: t_1 (ref)
 	t_1.cancelIntervalsForTTI(p8, "conversation_switch")
 end)

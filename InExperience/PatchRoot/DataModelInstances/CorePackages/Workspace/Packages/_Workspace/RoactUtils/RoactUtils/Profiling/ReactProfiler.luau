@@ -3,7 +3,7 @@ local reactProfilerContextModule = require(script.Parent.ReactProfilerContext)
 local isReactProfilingEnabledModule = require(script.Parent.isReactProfilingEnabled)
 local var3 = reactModule.createContext(nil)
 
-local function ReactProfiler(p0) --[[ line: 20 ]]
+local function ReactProfiler(p0)
 	-- upvalues: reactModule (ref), var3 (ref), reactProfilerContextModule (ref)
 	local var5 = reactModule.useRef(0)
 	local var6 = reactModule.useRef(0)
@@ -12,7 +12,7 @@ local function ReactProfiler(p0) --[[ line: 20 ]]
 	
 	return reactModule.createElement(reactModule.Profiler, {
 		id = p0.id,
-		onRender = reactModule.useCallback(function(p1, _, p2, _, p3, p4) --[[ line: 30 ]]
+		onRender = reactModule.useCallback(function(p1, _, p2, _, p3, p4)
 			-- upvalues: var7 (ref), var5 (ref), var8 (ref)
 			if var7 ~= nil then
 				var7.exclusiveRenderDurationRef.current -= p2
@@ -30,7 +30,7 @@ local function ReactProfiler(p0) --[[ line: 20 ]]
 			end
 			var5.current = 0
 		end, {}),
-		onCommit = reactModule.useCallback(function(p5, _, p6, p7) --[[ line: 61 ]]
+		onCommit = reactModule.useCallback(function(p5, _, p6, p7)
 			-- upvalues: var7 (ref), var6 (ref), var8 (ref)
 			if var7 ~= nil then
 				var7.exclusiveEffectDurationRef.current -= p6
@@ -49,7 +49,7 @@ local function ReactProfiler(p0) --[[ line: 20 ]]
 		end, {})
 	}, reactModule.createElement(var3.Provider, {
 		key = "ExclusiveDurationsContext",
-		value = reactModule.useMemo(function() --[[ line: 83 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: var5 (ref), var6 (ref)
 			return {
 				exclusiveRenderDurationRef = var5,
@@ -59,7 +59,7 @@ local function ReactProfiler(p0) --[[ line: 20 ]]
 	}, p0.children))
 end
 
-return function(p8) --[[ line: 104 ]]
+return function(p8)
 	-- upvalues: isReactProfilingEnabledModule (ref), reactModule (ref), ReactProfiler (ref)
 	return if isReactProfilingEnabledModule then reactModule.createElement(ReactProfiler, { id = p8.id }, p8.children) else reactModule.createElement(reactModule.Fragment, nil, p8.children)
 end

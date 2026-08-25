@@ -1,4 +1,4 @@
-﻿return function(p0, ...) --[[ line: 6 | named "omit" ]]
+﻿return function(p0, ...)
 	local cloned = table.clone(p0)
 	
 	for i, v in { ... } do

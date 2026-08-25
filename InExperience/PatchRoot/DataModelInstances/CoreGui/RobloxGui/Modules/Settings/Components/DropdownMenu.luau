@@ -17,7 +17,7 @@ local var6 = argCheckModule.wrap(tModule.strictInterface({
 	layoutOrder = tModule.number
 }))
 
-return function(p0) --[[ line: 45 | named "DropdownMenu" ]]
+return function(p0)
 	-- upvalues: var6 (ref), useStyle (ref), reactModule (ref), roactModule (ref), imageSetLabel (ref), truncationExpandSmall (ref), baseMenu (ref)
 	assert(var6(p0))
 	local var7 = useStyle()
@@ -26,11 +26,11 @@ return function(p0) --[[ line: 45 | named "DropdownMenu" ]]
 	local var9 = if var7.UIBloxThemeEnabled then var7.color("ControlInputBackground") else Color3.fromRGB(79, 84, 95)
 	local var10, var11 = reactModule.useState(false)
 	local var12, var13 = reactModule.useState({})
-	local var14 = reactModule.useCallback(function() --[[ line: 58 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), var10 (ref)
 		var11(not var10)
 	end)
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), captionHeader (ref), var11 (ref), var13 (ref)
 		local t = {}
 		
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 45 | named "DropdownMenu" ]]
 					Font = captionHeader.Font,
 					RelativeSize = captionHeader.RelativeSize
 				},
-				onActivated = function() --[[ line: 71 ]]
+				onActivated = function()
 					-- upvalues: p0 (copy), i (ref), var11 (copy)
 					p0.onSelection(i)
 					var11(false)

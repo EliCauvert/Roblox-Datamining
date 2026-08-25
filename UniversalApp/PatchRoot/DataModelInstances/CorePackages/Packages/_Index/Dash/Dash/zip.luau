@@ -1,10 +1,10 @@
-﻿return function(p0, p1) --[[ line: 10 | named "zip" ]]
+﻿return function(p0, p1)
 	local var0 = nil
 	local var1 = nil
 	local var2 = nil
 	local var3 = nil
 	
-	return function() --[[ line: 12 ]]
+	return function()
 		-- upvalues: var0 (write), var2 (write), p0 (ref), var1 (write), var3 (write), p1 (ref)
 		local var4, var5 = next(p0, var0)
 		var0 = var4

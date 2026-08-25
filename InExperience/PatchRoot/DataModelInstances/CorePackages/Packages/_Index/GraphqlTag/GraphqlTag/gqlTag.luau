@@ -12,17 +12,17 @@ local var2 = map.new(nil)
 local var3 = true
 local var4 = false
 
-local function normalize(p0) --[[ line: 30 ]]
+local function normalize(p0)
 	-- upvalues: string (ref)
 	return string.trim(p0:gsub(",+%s+", " "))
 end
 
-local function _(p1) --[[ line: 35 | named "cacheKeyFromLoc" ]]
+local function _(p1)
 	-- upvalues: normalize (ref)
 	return normalize(p1.source.body:sub(p1.start, p1._end))
 end
 
-local function processFragments(p2) --[[ line: 39 ]]
+local function processFragments(p2)
 	-- upvalues: set (ref), string (ref), var2 (ref), var3 (write), console (ref), object (ref)
 	local var13
 	local var11 = set.new(nil)
@@ -58,7 +58,7 @@ local function processFragments(p2) --[[ line: 39 ]]
 	return object.assign({}, p2, { definitions = t })
 end
 
-local function stripLoc(p3) --[[ line: 83 ]]
+local function stripLoc(p3)
 	-- upvalues: set (ref), object (ref), array (ref)
 	local var15 = set.new(nil)
 	
@@ -85,7 +85,7 @@ local function stripLoc(p3) --[[ line: 83 ]]
 	return p3
 end
 
-local function parseDocument(p4) --[[ line: 107 ]]
+local function parseDocument(p4)
 	-- upvalues: string (ref), var1 (ref), parse (ref), var4 (write), stripLoc (ref), processFragments (ref)
 	local var18 = string.trim(p4:gsub(",+%s+", " "))
 	
@@ -100,7 +100,7 @@ local function parseDocument(p4) --[[ line: 107 ]]
 	return var1:get(var18)
 end
 
-local function gql(p5) --[[ line: 130 ]]
+local function gql(p5)
 	-- upvalues: parseDocument (ref)
 	if typeof(p5) == "string" then
 		return parseDocument(p5)
@@ -110,23 +110,23 @@ local function gql(p5) --[[ line: 130 ]]
 	error("graphql-tag-lua does not currently support non-strings or Fragments. Please file an issue or PR if you need this feature added.")
 end
 
-function resetCaches() --[[ line: 159 ]]
+function resetCaches()
 	-- upvalues: var1 (ref), var2 (ref)
 	var1:clear()
 	var2:clear()
 end
 
-function disableFragmentWarnings() --[[ line: 164 ]]
+function disableFragmentWarnings()
 	-- upvalues: var3 (write)
 	var3 = false
 end
 
-function enableExperimentalFragmentVariables() --[[ line: 168 ]]
+function enableExperimentalFragmentVariables()
 	-- upvalues: var4 (write)
 	var4 = true
 end
 
-function disableExperimentalFragmentVariables() --[[ line: 172 ]]
+function disableExperimentalFragmentVariables()
 	-- upvalues: var4 (write)
 	var4 = false
 end

@@ -13,7 +13,7 @@ local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profil
 local fFlagEnablePressingCommunityOwnerInPeekViewModule = require(profilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
 local communityProfileHeaderModule = require(profilePlatform.Components.CommunityProfileHeader.CommunityProfileHeader)
 
-return function(p0) --[[ line: 38 | named "CommunityProfileHeaderContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), verifiedBadgesModule (ref), getDeepValueModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), fFlagEnablePressingCommunityOwnerInPeekViewModule (ref), reactModule (ref), communityProfileHeaderModule (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref)
 	local var11 = useProfileJsonComponentModule(enumsModule.Components.CommunityProfileHeader)
 	

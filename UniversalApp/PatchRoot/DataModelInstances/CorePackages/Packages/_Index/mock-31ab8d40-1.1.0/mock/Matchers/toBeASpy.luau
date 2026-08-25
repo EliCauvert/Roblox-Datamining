@@ -1,6 +1,6 @@
 ﻿local spyModule = require(script.Parent.Parent.Spy)
 
-return function(p0) --[[ line: 4 ]]
+return function(p0)
 	-- upvalues: spyModule (ref)
 	local var1 = spyModule.is(p0)
 	

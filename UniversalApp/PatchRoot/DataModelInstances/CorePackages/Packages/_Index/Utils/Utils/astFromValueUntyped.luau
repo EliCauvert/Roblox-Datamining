@@ -10,9 +10,9 @@ local object = luauPolyfillModule.Object
 local luauRegExpModule = require(parent.LuauRegExp)
 local var3 = nil
 
-local function _(p0) --[[ line: 31 | named "isFinite" ]]
+local function _(p0)
 	-- upvalues: number (ref)
-	local ok, status = pcall(function() --[[ line: 32 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p0 (ref), number (copy)
 		local var5 = tonumber(p0)
 		
@@ -22,7 +22,7 @@ local function _(p0) --[[ line: 31 | named "isFinite" ]]
 	return if ok then status else false
 end
 
-local function astFromValueUntyped(p1) --[[ line: 61 ]]
+local function astFromValueUntyped(p1)
 	-- upvalues: object (ref), kind (ref), boolean (ref), array (ref), astFromValueUntyped (ref), number (ref), var3 (write), error (ref)
 	if p1 == object.None then
 		return { kind = kind.NULL }
@@ -61,7 +61,7 @@ local function astFromValueUntyped(p1) --[[ line: 61 ]]
 	local var10 = false
 	
 	if typeof(p1) == "number" then
-		local ok, status = pcall(function() --[[ line: 32 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (ref), number (copy)
 			local var5 = tonumber(p1)
 			

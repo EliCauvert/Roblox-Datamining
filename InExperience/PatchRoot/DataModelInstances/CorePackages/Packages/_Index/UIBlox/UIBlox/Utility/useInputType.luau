@@ -23,17 +23,17 @@ local t = {
 	[Enum.UserInputType.Touch] = inputTypeModule.Touch
 }
 
-return function(p0) --[[ line: 47 | named "useInputType" ]]
+return function(p0)
 	-- upvalues: userInputService (ref), t (ref), reactModule (ref), useEventConnection (ref)
 	p0 = p0 or userInputService
 	
-	local function _() --[[ line: 50 | named "getLastInputType" ]]
+	local function _()
 		-- upvalues: p0 (ref), t (copy)
 		return t[p0:GetLastInputType()]
 	end
 	
 	local var5, var6 = reactModule.useState(t[p0:GetLastInputType()])
-	useEventConnection(p0.LastInputTypeChanged, reactModule.useCallback(function(p1) --[[ line: 58 ]]
+	useEventConnection(p0.LastInputTypeChanged, reactModule.useCallback(function(p1)
 		-- upvalues: t (copy), var6 (ref)
 		local var7 = t[p1]
 		
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 47 | named "useInputType" ]]
 			var6(var7)
 		end
 	end))
-	reactModule.useEffect(function() --[[ line: 69 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), p0 (ref), t (copy)
 		var6(t[p0:GetLastInputType()])
 	end, {})

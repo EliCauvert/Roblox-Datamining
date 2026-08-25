@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 7 ]]
+﻿return function(p0)
 	local var0 = false
 	local var1 = false
 	local var2 = true

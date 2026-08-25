@@ -97,7 +97,7 @@ local t = {
 }
 local conversationThumbnail = roactModule.PureComponent:extend("ConversationThumbnail")
 
-function conversationThumbnail.render(p0) --[[ line: 113 ]]
+function conversationThumbnail.render(p0)
 	-- upvalues: t (ref), constants (ref), inviteAvatarThumbnailSize (ref), getRbxthumbWithTypeSizeAndOptions (ref), constantsModule (ref), roactModule (ref), GRAY3 (ref)
 	local size = p0.props.size
 	local layoutOrder = p0.props.layoutOrder

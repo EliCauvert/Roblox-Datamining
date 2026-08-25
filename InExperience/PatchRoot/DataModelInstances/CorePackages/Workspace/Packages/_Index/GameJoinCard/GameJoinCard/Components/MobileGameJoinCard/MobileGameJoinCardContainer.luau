@@ -63,7 +63,7 @@ local t = {
 	gameId = ""
 }
 
-return function() --[[ line: 85 | named "MobileGameJoinCardContainer" ]]
+return function()
 	-- upvalues: fFlagMobileGameJoinCardEDPFromTitleModule (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), useDispatch (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appGuiService (ref), appSessionService (ref), useAppPolicy (ref), reactModule (ref), signalsModule (ref), var25 (ref), signalsReactModule (ref), useGameJoinCardAnalyticsModule (ref), fFlagSocialCarouselUseProfileStore (ref), var19 (ref), userProfilesModule (ref), useExperienceBannerImage (ref), fFlagMobileGameJoinCardThumbnailModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), gameJoinCardTelemetryModule (ref), fFlagJoinCardAgeCheckUpsell (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), t (ref), useAgeCheckPressLogger (ref), gameJoinCardButtonAction (ref), gamePlayIntent (ref), peopleListInHomePage (ref), httpService (ref), dependencyArray (ref), fFlagEnableSplitPane (ref), appPage (ref), viewProfileSourceValues (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), notificationType (ref), mobileGameJoinCardModule (ref)
 -- FATAL: Failed to generate AST for `MobileGameJoinCardContainer` function:
 runtime : [KeyError] :11990: 165

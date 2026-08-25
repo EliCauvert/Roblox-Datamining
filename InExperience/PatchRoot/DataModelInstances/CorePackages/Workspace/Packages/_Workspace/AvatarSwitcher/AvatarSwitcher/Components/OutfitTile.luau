@@ -15,15 +15,15 @@ local _ = require(avatarSwitcher.types)
 local fFlagAvatarSwitcherUseAvatarInventoryEndpoint = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUseAvatarInventoryEndpoint
 local fFlagAXBackgroundsInOutfitThumbnails = require(parent.SharedFlags).FFlagAXBackgroundsInOutfitThumbnails
 
-return reactModule.memo(function(p0) --[[ line: 39 | named "OutfitTile" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), reactModule (ref), useTokens (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), signalsModule (ref), foundationModule (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (ref), fFlagAXBackgroundsInOutfitThumbnails (ref)
 	local var8 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
 	local var9 = reactModule.useRef(nil)
 	local var10 = useTokens()
 	local id = p0.outfitInfo.id
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: addUnifiedEventLogging (copy), var9 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), p0 (ref), id (ref), sessionService (copy)
-		task.delay(0, function() --[[ line: 49 ]]
+		task.delay(0, function()
 			-- upvalues: addUnifiedEventLogging (copy), var9 (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), p0 (copy), id (copy), sessionService (copy)
 			addUnifiedEventLogging(var9, {
 				elementName = "OUTFIT_TILE",
@@ -35,9 +35,9 @@ return reactModule.memo(function(p0) --[[ line: 39 | named "OutfitTile" ]]
 			}, { sessionTagName = sessionService:GetSessionTag("level2a") })
 		end)
 	end, { p0.gridPosition, id })
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 63 ]]
+	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), id (ref), var8 (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 64 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: id (copy), var8 (copy)
 			return id ~= nil and var8.getSelectedOutfitId(p1) == id
 		end)
@@ -58,7 +58,7 @@ return reactModule.memo(function(p0) --[[ line: 39 | named "OutfitTile" ]]
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
 			Image = if fFlagAXBackgroundsInOutfitThumbnails then `rbxthumb://type=Outfit&id={id}&w=150&h=150&includeBackground=true` else `rbxthumb://type=Outfit&id={id}&w=150&h=150`,
 			ScaleType = Enum.ScaleType.Crop,
-			onActivated = if p0.disabled then nil else reactModule.useCallback(function() --[[ line: 70 ]]
+			onActivated = if p0.disabled then nil else reactModule.useCallback(function()
 				-- upvalues: var8 (ref), id (ref)
 				var8.selectOutfit(id)
 			end, { var8, id }),

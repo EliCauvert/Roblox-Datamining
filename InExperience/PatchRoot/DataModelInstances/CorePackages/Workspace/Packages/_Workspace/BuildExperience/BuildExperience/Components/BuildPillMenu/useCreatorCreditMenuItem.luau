@@ -13,24 +13,24 @@ local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local iconName = foundationModule.Enums.IconName
 
-local function formatNumber(p0) --[[ line: 36 ]]
+local function formatNumber(p0)
 	-- upvalues: numberLocalization (ref), localizationService (ref)
 	return numberLocalization.localize(string.format("%.0f", math.floor(p0)), localizationService.RobloxLocaleId)
 end
 
 return {
 	ITEM_ID = "creator-credit-ai-usage",
-	useCreatorCreditMenuItem = function(p1) --[[ line: 44 ]]
+	useCreatorCreditMenuItem = function(p1)
 		-- upvalues: reactModule (ref), getCreatorCreditStore (ref), signalsReactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceCreatorCreditUsageBadgeModule (ref), numberLocalization (ref), localizationService (ref), iconName (ref), formatNumber (ref)
 		local var9 = if p1 ~= nil then nil else p1.onOpenCreatorCreditPage
-		local var10 = reactModule.useCallback(function() --[[ line: 47 ]]
+		local var10 = reactModule.useCallback(function()
 			-- upvalues: var9 (ref)
 			if var9 then
 				var9()
 			end
 		end, { var9 })
 		local var11 = getCreatorCreditStore(false)
-		local var12 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 58 ]]
+		local var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: var11 (ref)
 			return var11.getQuotaSummary()
 		end, { var11 }).data)
@@ -51,7 +51,7 @@ return {
 		local var14 = if fFlagBuildLocalization then var13.menuItem else localizationStringsModule.CREATOR_CREDIT_MENU_ITEM
 		
 		return {
-			item = reactModule.useMemo(function() --[[ line: 90 ]]
+			item = reactModule.useMemo(function()
 				-- upvalues: var12 (ref), fFlagBuildExperienceCreatorCreditUsageBadgeModule (copy), iconName (copy), fFlagBuildLocalization (copy), var13 (ref), localizationStringsModule (copy), numberLocalization (copy), localizationService (copy), formatNumber (copy), var14 (ref)
 -- FATAL: Failed to generate AST for `unnamed` function:
 runtime : [KeyError] :11990: 15

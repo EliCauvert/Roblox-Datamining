@@ -1,6 +1,6 @@
 ﻿local useTrackerModeModule = require(script.Parent.useTrackerMode)
 
-return function() --[[ line: 5 | named "useCameraOn" ]]
+return function()
 	-- upvalues: useTrackerModeModule (ref)
 	local var1 = useTrackerModeModule()
 	

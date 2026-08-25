@@ -15,7 +15,7 @@ local openValidationErrorModalModule = require(parent.Actions.OpenValidationErro
 local getFFlagUploadMakeupSupportModule = require(parent.Flags.GetFFlagUploadMakeupSupport)
 local promptImportAnimationClipFromVideoAsyncEnabledEngineFeature = game:GetEngineFeature("PromptImportAnimationClipFromVideoAsyncEnabled")
 
-local function updateModelAttachmentsWithWrapDeformers(p0) --[[ line: 28 ]]
+local function updateModelAttachmentsWithWrapDeformers(p0)
 	-- upvalues: robloxReplicatedStorageService (ref)
 	p0.Parent = robloxReplicatedStorageService
 	
@@ -34,10 +34,10 @@ local function updateModelAttachmentsWithWrapDeformers(p0) --[[ line: 28 ]]
 	end
 end
 
-return function(value) --[[ line: 52 | named "ConnectAssetServiceEvents" ]]
+return function(value)
 	-- upvalues: experienceAuthService (ref), promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (ref), openPublishAssetPromptModule (ref), assetService (ref), openPublishAvatarPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), openPublishMakeupLookPromptModule (ref), openPublishAvatarAssetPromptModule (ref), openResultModalModule (ref), avatarCreationService (ref), setAccessoryInstanceModule (ref), setPriceInRobuxModule (ref), updateModelAttachmentsWithWrapDeformers (ref), setHumanoidModelModule (ref), openValidationErrorModalModule (ref)
 	local t = {}
-	table.insert(t, experienceAuthService.OpenAuthPrompt:Connect(function(p1, p2, p3) --[[ line: 58 ]]
+	table.insert(t, experienceAuthService.OpenAuthPrompt:Connect(function(p1, p2, p3)
 		-- upvalues: promptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), value (ref), openPublishAssetPromptModule (copy), assetService (copy), openPublishAvatarPromptModule (copy), getFFlagUploadMakeupSupportModule (copy), openPublishMakeupLookPromptModule (copy), openPublishAvatarAssetPromptModule (copy)
 		if #p2 == 1 and p2[1] == Enum.ExperienceAuthScope.CreatorAssetsCreate and not (promptImportAnimationClipFromVideoAsyncEnabledEngineFeature and p3.isVideoToAnimationFlow) then
 			if p3.instanceToPublish then
@@ -61,18 +61,18 @@ return function(value) --[[ line: 52 | named "ConnectAssetServiceEvents" ]]
 			end
 		end
 	end))
-	table.insert(t, assetService.OpenPublishResultModal:Connect(function(p4) --[[ line: 91 ]]
+	table.insert(t, assetService.OpenPublishResultModal:Connect(function(p4)
 		-- upvalues: value (ref), openResultModalModule (copy)
 		value:dispatch(openResultModalModule(p4))
 	end))
 	
-	local function checkNewEventsExist() --[[ line: 95 ]]
+	local function checkNewEventsExist()
 		-- upvalues: avatarCreationService (copy)
 		return avatarCreationService.UgcValidationSuccess and avatarCreationService.UgcValidationFailure
 	end
 	
 	if pcall(checkNewEventsExist) then
-		table.insert(t, avatarCreationService.UgcValidationSuccess:Connect(function(p5, p6, p7) --[[ line: 103 ]]
+		table.insert(t, avatarCreationService.UgcValidationSuccess:Connect(function(p5, p6, p7)
 			-- upvalues: value (ref), getFFlagUploadMakeupSupportModule (copy), avatarCreationService (copy), setAccessoryInstanceModule (copy), setPriceInRobuxModule (copy), updateModelAttachmentsWithWrapDeformers (copy), setHumanoidModelModule (copy)
 			local state = value:getState()
 			
@@ -92,7 +92,7 @@ return function(value) --[[ line: 52 | named "ConnectAssetServiceEvents" ]]
 		end))
 	end
 	if pcall(checkNewEventsExist) then
-		table.insert(t, avatarCreationService.UgcValidationFailure:Connect(function(p8, p9) --[[ line: 142 ]]
+		table.insert(t, avatarCreationService.UgcValidationFailure:Connect(function(p8, p9)
 			-- upvalues: value (ref), openValidationErrorModalModule (copy)
 			local state = value:getState()
 			

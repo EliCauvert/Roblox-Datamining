@@ -12,7 +12,7 @@
 	PURCHASE_PLACE_INVALID = Enum.MarketplaceItemPurchaseStatus.PlaceInvalid
 }
 
-return function(p0) --[[ line: 20 | named "lineItemToStatus" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	local errorReason = t[p0.errorReason]
 	

@@ -12,7 +12,7 @@ local userProfilesModule = require(parent.UserProfiles)
 local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 
-local function _(p0, p1) --[[ line: 51 | named "getUserIdsForFacePile" ]]
+local function _(p0, p1)
 	local t = {}
 	
 	for i = 1, p1 do
@@ -21,7 +21,7 @@ local function _(p0, p1) --[[ line: 51 | named "getUserIdsForFacePile" ]]
 	return t
 end
 
-local function getDisplayText(p2, p3, p4) --[[ line: 60 ]]
+local function getDisplayText(p2, p3, p4)
 	local t = {}
 	
 	for i = 1, p4 do
@@ -30,11 +30,11 @@ local function getDisplayText(p2, p3, p4) --[[ line: 60 ]]
 	return table.concat(t, p3)
 end
 
-local function alphabeticalSort(x, p5) --[[ line: 69 ]]
+local function alphabeticalSort(x, p5)
 	return if x.displayName then if p5.displayName then x.displayName:lower() < p5.displayName:lower() else true else false
 end
 
-local function getSortedFriendDisplayNames(p6, p7) --[[ line: 79 ]]
+local function getSortedFriendDisplayNames(p6, p7)
 	-- upvalues: userProfilesModule (ref), alphabeticalSort (ref)
 	if not p6 or not p7 or not p7.data then
 		return {}
@@ -52,7 +52,7 @@ local function getSortedFriendDisplayNames(p6, p7) --[[ line: 79 ]]
 	return t
 end
 
-return reactModule.memo(function(p8) --[[ line: 98 | named "SduiGameTileActiveFriendsFooter" ]]
+return reactModule.memo(function(p8)
 	-- upvalues: useTokens (ref), reactModule (ref), sduiParsers (ref), sduiActionType (ref), useLocalization (ref), sduiInGameFriendsDataModule (ref), signalsReactModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), getSortedFriendDisplayNames (ref), getDisplayText (ref), sduiTileFooterModule (ref)
 	local layoutOrder = p8.layoutOrder
 	local anchorPoint = p8.anchorPoint
@@ -62,7 +62,7 @@ return reactModule.memo(function(p8) --[[ line: 98 | named "SduiGameTileActiveFr
 	local position = p8.position
 	local var13 = useTokens()
 	local iconWidth = p8.iconWidth or var13.Size.Size_500
-	local var15 = reactModule.useCallback(function(p9) --[[ line: 110 ]]
+	local var15 = reactModule.useCallback(function(p9)
 		-- upvalues: p8 (ref), sduiParsers (copy), sduiActionType (copy)
 		if p8.onActivated then
 			p8.onActivated(p9)
@@ -86,7 +86,7 @@ return reactModule.memo(function(p8) --[[ line: 98 | named "SduiGameTileActiveFr
 	})
 	local var16 = useLocalization({ separator = "Feature.GameDetails.Label.FriendsSeparator" })
 	local var17 = signalsReactModule.useSignalState(sduiInGameFriendsDataModule.getInGameFriendsByGame)
-	local var18 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), p8 (ref)
 		local t = {}
 		
@@ -100,7 +100,7 @@ return reactModule.memo(function(p8) --[[ line: 98 | named "SduiGameTileActiveFr
 		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds,
 		skip = #var18 == 0
 	})
-	local var20 = reactModule.useMemo(function() --[[ line: 148 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: getSortedFriendDisplayNames (copy), var18 (ref), var19 (ref)
 		return getSortedFriendDisplayNames(var18, var19)
 	end, { var18, var19 })

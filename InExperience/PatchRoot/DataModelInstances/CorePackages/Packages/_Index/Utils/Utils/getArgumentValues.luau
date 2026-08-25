@@ -12,17 +12,17 @@ local print = graphQLModule.print
 local createGraphQLError = require(script.Parent.errors).createGraphQLError
 local inspect = require(script.Parent.inspect).inspect
 
-function t.getArgumentValues(p0, p1, p2) --[[ line: 48 ]]
+function t.getArgumentValues(p0, p1, p2)
 	-- upvalues: array (ref), object (ref), boolean (ref), isNonNullType (ref), createGraphQLError (ref), inspect (ref), kind (ref), valueFromAST (ref), print (ref)
 	local var3 = if p2 ~= nil then {} else p2
-	local var4 = array.reduce(object.entries(var3), function(p3, p4) --[[ line: 58 ]]
+	local var4 = array.reduce(object.entries(var3), function(p3, p4)
 		-- upvalues: object (copy)
 		local unpacked, unpacked_1 = table.unpack(p4, 1, 2)
 		
 		return object.assign({}, p3, { [tostring(unpacked)] = unpacked_1 })
 	end, {})
 	local t = {}
-	local var6 = array.reduce(if p1.arguments ~= nil then {} else p1.arguments, function(p5, p6) --[[ line: 71 ]]
+	local var6 = array.reduce(if p1.arguments ~= nil then {} else p1.arguments, function(p5, p6)
 		-- upvalues: object (copy)
 		return object.assign({}, p5, { [tostring(p6.name.value)] = p6 })
 	end, {})

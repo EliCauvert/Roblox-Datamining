@@ -24,7 +24,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local captureTriggerTypeModule = require(parent.Enums.CaptureTriggerType)
 local maxVideoCaptureDurationSeconds = game:DefineFastInt("MaxVideoCaptureDurationSeconds", 30)
 
-return function(p0) --[[ line: 44 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useSelector (ref), constantsModule (ref), useCallback (ref), eventNamesModule (ref), stopVideoCaptureModule (ref), reactOtterModule (ref), useEffect (ref), maxVideoCaptureDurationSeconds (ref), startVideoCaptureModule (ref), reactModule (ref), view (ref), tooltip (ref), popoverAlign (ref), icon (ref), captureTriggerTypeModule (ref), foundationModule (ref), radialProgressBarModule (ref)
 	local var13 = useAnalyticsModule()
 	local var14 = useDispatch()
@@ -33,15 +33,15 @@ return function(p0) --[[ line: 44 ]]
 		videoCaptureInProgressTitle = "Feature.Captures.Title.VideoCaptureInProgressTooltip"
 	})
 	local var16 = useTokens()
-	local var17 = useSelector(function(p1) --[[ line: 53 ]]
+	local var17 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
-	local var18 = useSelector(function(p2) --[[ line: 57 ]]
+	local var18 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
-	local var19, var20 = reactOtterModule.useAnimatedBinding(0, useCallback(function() --[[ line: 61 ]]
+	local var19, var20 = reactOtterModule.useAnimatedBinding(0, useCallback(function()
 		-- upvalues: var17 (ref), var13 (ref), eventNamesModule (copy), var14 (ref), stopVideoCaptureModule (copy)
 		if var17 then
 			var13.fireEvent(eventNamesModule.CapturesEntrypointVideoDeactivatedAutomatically)
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 44 ]]
 			return
 		end
 	end, { var17 }))
-	useEffect(function() --[[ line: 73 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), var20 (ref), reactOtterModule (copy), maxVideoCaptureDurationSeconds (copy)
 		if var17 then
 			var20(reactOtterModule.ease(1, {
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 44 ]]
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		VideoCaptureStartCTA = if not var17 then reactModule.createElement(view, {
 			LayoutOrder = p0.layoutOrder,
-			onActivated = useCallback(function() --[[ line: 84 ]]
+			onActivated = useCallback(function()
 				-- upvalues: var17 (ref), var13 (ref), eventNamesModule (copy), var14 (ref), startVideoCaptureModule (copy)
 				if var17 then
 					return
@@ -111,7 +111,7 @@ return function(p0) --[[ line: 44 ]]
 		}, {
 			VideoCaptureStopCTA = if var18 == captureTriggerTypeModule.UserCapture then reactModule.createElement(view, {
 				tag = "anchor-center-center bg-over-media-300 col flex-evenly position-center-center size-700-700 radius-circle",
-				onActivated = useCallback(function() --[[ line: 94 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var17 (ref), var13 (ref), eventNamesModule (copy), var14 (ref), stopVideoCaptureModule (copy)
 					if var17 then
 						var13.fireEvent(eventNamesModule.CapturesEntrypointVideoDeactivated)

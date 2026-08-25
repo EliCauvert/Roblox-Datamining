@@ -7,7 +7,7 @@ local argCheckModule = require(parent.ArgCheck)
 local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
 local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 16 | named "useScrollButtonHandlers" ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), userGameSettingsService (ref), tweenService (ref)
 	argCheckModule.assert(p3 >= 1)
 	argCheckModule.assert(p1 >= 0)
@@ -16,13 +16,13 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 16 | named "useScroll
 	local var9 = reactModule.useRef(0)
 	local maxValue = math.max(0, p1 - p3)
 	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useCallback(function(p8) --[[ line: 38 ]]
+	local var12 = reactModule.useCallback(function(p8)
 		-- upvalues: var9 (ref), maxValue (ref)
 		var9.current = math.max(0, math.min(maxValue, p8))
 		
 		return var9.current
 	end, { maxValue, var9 })
-	local var13 = reactModule.useCallback(function() --[[ line: 45 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), var6 (ref), var8 (ref), var9 (ref), maxValue (ref)
 		if p2 then
 			var6(var9.current > 0)
@@ -33,7 +33,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 16 | named "useScroll
 		var6(false)
 		var8(false)
 	end, { p2, maxValue, var9 })
-	local var14 = reactModule.useCallback(function(p9, p10) --[[ line: 63 ]]
+	local var14 = reactModule.useCallback(function(p9, p10)
 		-- upvalues: p0 (ref), fFlagCollectionViewMathChanges (copy), p3 (ref), p7 (ref), p4 (ref), p5 (ref), userGameSettingsService (copy), var11 (ref), tweenService (copy), p6 (ref), var13 (ref)
 		local current = p0.current
 		
@@ -69,15 +69,15 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 16 | named "useScroll
 		var13, if fFlagCollectionViewMathChanges then p7 else p4,
 		if fFlagCollectionViewMathChanges then p3 else p5, var11, p6, p0
 	})
-	local var15 = reactModule.useCallback(function() --[[ line: 113 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var9 (ref), p3 (ref), var14 (ref)
 		var14(var12(var9.current - p3), true)
 	end, { var14, var12, p3, var9 })
-	local var16 = reactModule.useCallback(function() --[[ line: 118 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var9 (ref), p3 (ref), var14 (ref)
 		var14(var12(var9.current + p3), true)
 	end, { var14, var12, p3, var9 })
-	reactModule.useEffect(function() --[[ line: 126 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var9 (ref), p2 (ref), var14 (ref), var13 (ref)
 		var12(var9.current)
 		
@@ -86,7 +86,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 16 | named "useScroll
 		end
 		var13()
 	end, { var12, var14, p2 })
-	reactModule.useEffect(function() --[[ line: 142 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p2 (ref), p0 (ref), var12 (ref), var9 (ref), var14 (ref), var13 (ref)
 		if not p2 then
 			return nil
@@ -95,19 +95,19 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 16 | named "useScroll
 		
 		if p0.current ~= nil then
 			local current = p0.current
-			table.insert(t, current:GetPropertyChangedSignal("CanvasSize"):Connect(function() --[[ line: 152 ]]
+			table.insert(t, current:GetPropertyChangedSignal("CanvasSize"):Connect(function()
 				-- upvalues: var12 (copy), var9 (copy), var14 (copy), var13 (copy)
 				var12(var9.current)
 				var14(var9.current)
 				var13()
 			end))
-			table.insert(t, current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 161 ]]
+			table.insert(t, current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: var12 (copy), var9 (copy), var13 (copy)
 				var12(var9.current)
 				var13()
 			end))
 		end
-		return function() --[[ line: 168 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

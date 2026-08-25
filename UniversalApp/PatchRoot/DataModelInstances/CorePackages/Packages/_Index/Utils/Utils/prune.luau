@@ -25,7 +25,7 @@ local visitSchema = nil
 local visitQueue = nil
 local getDirectivesArgumentsTypeNames = nil
 
-function t.pruneSchema(p0, p1) --[[ line: 69 ]]
+function t.pruneSchema(p0, p1)
 	-- upvalues: visitSchema (write), string (ref), visitQueue (write), mapSchema (ref), mapperKind (ref), boolean (ref), isSpecifiedScalarType (ref), isUnionType (ref), isInputObjectType (ref), isInterfaceType (ref), isObjectType (ref), isScalarType (ref), object (ref)
 	local var6 = if p1 ~= nil then {} else p1
 	local skipEmptyCompositeTypePruning = var6.skipEmptyCompositeTypePruning
@@ -41,7 +41,7 @@ function t.pruneSchema(p0, p1) --[[ line: 69 ]]
 		if not skipPruning then
 			t = {}
 			var7 = mapSchema(var7, {
-				[mapperKind.TYPE] = function(p2) --[[ line: 111 ]]
+				[mapperKind.TYPE] = function(p2)
 					-- upvalues: boolean (copy), var8 (write), isSpecifiedScalarType (copy), isUnionType (copy), isInputObjectType (copy), isInterfaceType (copy), isObjectType (copy), isScalarType (copy), skipUnusedTypesPruning (ref), skipEmptyUnionPruning (ref), skipEmptyCompositeTypePruning (ref), skipUnimplementedInterfacesPruning (ref), t (write), object (copy)
 					if boolean.toJSBoolean(var8:has(p2.name)) or boolean.toJSBoolean(isSpecifiedScalarType(p2)) then
 						return p2
@@ -82,7 +82,7 @@ function t.pruneSchema(p0, p1) --[[ line: 69 ]]
 	return var7
 end
 
-visitSchema = function(p3) --[[ line: 216 | named "visitSchema" ]]
+visitSchema = function(p3)
 	-- upvalues: getRootTypes (ref), visitQueue (write)
 	local t = {}
 	
@@ -92,7 +92,7 @@ visitSchema = function(p3) --[[ line: 216 | named "visitSchema" ]]
 	return visitQueue(t, p3)
 end
 
-visitQueue = function(p4, p5, p6) --[[ line: 227 | named "visitQueue" ]]
+visitQueue = function(p4, p5, p6)
 	-- upvalues: set (ref), map (ref), boolean (ref), isUnionType (ref), array (ref), isInterfaceType (ref), getImplementingTypes (ref), isEnumType (ref), getDirectivesArgumentsTypeNames (write), isObjectType (ref), getNamedType (ref)
 	local var14 = if p6 ~= nil then set.new() else p6
 	local var15 = map.new()
@@ -104,7 +104,7 @@ visitQueue = function(p4, p5, p6) --[[ line: 227 | named "visitQueue" ]]
 		
 		if not boolean.toJSBoolean(var17) or not var17 then continue end
 		if boolean.toJSBoolean(isUnionType(var17)) then
-			p4 = array.concat(p4, array.map(var17:getTypes(), function(p7) --[[ line: 262 ]]
+			p4 = array.concat(p4, array.map(var17:getTypes(), function(p7)
 				return p7.name
 			end))
 		end
@@ -113,13 +113,13 @@ visitQueue = function(p4, p5, p6) --[[ line: 227 | named "visitQueue" ]]
 			var15[tostring(removed)] = false
 		end
 		if boolean.toJSBoolean(isEnumType(var17)) then
-			p4 = array.concat(p4, array.flatMap(var17:getValues(), function(p8) --[[ line: 301 ]]
+			p4 = array.concat(p4, array.flatMap(var17:getValues(), function(p8)
 				-- upvalues: getDirectivesArgumentsTypeNames (copy), p5 (ref)
 				return if p8.astNode then getDirectivesArgumentsTypeNames(p5, p8.astNode) else {}
 			end))
 		end
 		if var17.getInterfaces ~= nil then
-			p4 = array.concat(p4, array.map(var17:getInterfaces(), function(p9) --[[ line: 322 ]]
+			p4 = array.concat(p4, array.map(var17:getInterfaces(), function(p9)
 				return p9.name
 			end))
 		end
@@ -136,7 +136,7 @@ visitQueue = function(p4, p5, p6) --[[ line: 227 | named "visitQueue" ]]
 				local var19 = v[2]
 				
 				if boolean.toJSBoolean(isObjectType(var17)) then
-					p4 = array.concat(p4, array.flatMap(var19.args, function(p10) --[[ line: 368 ]]
+					p4 = array.concat(p4, array.flatMap(var19.args, function(p10)
 						-- upvalues: getNamedType (copy), array (copy), getDirectivesArgumentsTypeNames (copy), p5 (ref)
 						local list = { getNamedType(p10.type).name }
 						
@@ -161,13 +161,13 @@ visitQueue = function(p4, p5, p6) --[[ line: 227 | named "visitQueue" ]]
 	return var14
 end
 
-getDirectivesArgumentsTypeNames = function(p11, p12) --[[ line: 421 | named "getDirectivesArgumentsTypeNames" ]]
+getDirectivesArgumentsTypeNames = function(p11, p12)
 	-- upvalues: array (ref), getNamedType (ref)
-	return array.flatMap(p12.directives or {}, function(p13) --[[ line: 432 ]]
+	return array.flatMap(p12.directives or {}, function(p13)
 		-- upvalues: p11 (ref), array (copy), getNamedType (copy)
 		local valueDirective = p11:getDirective(p13.name.value)
 		local var23 = if typeof(valueDirective) == "table" then valueDirective.args else nil
-		local var24 = if var23 ~= nil then nil else array.map(var23, function(p14) --[[ line: 436 ]]
+		local var24 = if var23 ~= nil then nil else array.map(var23, function(p14)
 			-- upvalues: getNamedType (copy)
 			return getNamedType(p14.type).name
 		end)

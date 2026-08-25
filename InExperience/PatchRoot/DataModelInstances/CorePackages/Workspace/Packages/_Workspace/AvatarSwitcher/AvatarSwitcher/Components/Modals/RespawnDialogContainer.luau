@@ -11,18 +11,18 @@ local respawnAvatarModule = require(avatarSwitcher.Utils.respawnAvatar)
 local constantsModule = require(avatarSwitcher.Constants)
 local fFlagAvatarSwitcherCounters = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherCounters
 
-return function(p0) --[[ line: 31 | named "RespawnDialogContainer" ]]
+return function(p0)
 	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), reactModule (ref), useEventConnection (ref), fFlagAvatarSwitcherCounters (ref), sendAXCounterV2 (ref), constantsModule (ref), respawnAvatarModule (ref), respawnChoiceDialogModule (ref), respawnLaterDialogModule (ref)
 	local var8 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
 	local var9 = signalsReactModule.useSignalState(var8.getRespawnPromptShown)
-	local var10, var11 = reactModule.useState(function() --[[ line: 35 ]]
+	local var10, var11 = reactModule.useState(function()
 		-- upvalues: p0 (ref)
 		local respawnBehaviour, _ = p0.getRespawnBehaviour()
 		
 		return respawnBehaviour
 	end)
 	useEventConnection(p0.respawnBehaviorChangedEvent.Event, var11, {})
-	local var12 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref), p0 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), respawnAvatarModule (copy)
 		var8.toggleRespawnPrompt(false)
 		p0.toggleWindow()
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 31 | named "RespawnDialogContainer" ]]
 		var8.switchAvatar()
 		respawnAvatarModule(p0.getRespawnBehaviour)
 	end, { p0.getRespawnBehaviour, p0.toggleWindow })
-	local var13 = reactModule.useCallback(function() --[[ line: 53 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref), p0 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var10 (ref)
 		var8.toggleRespawnPrompt(false)
 		p0.toggleWindow()
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 31 | named "RespawnDialogContainer" ]]
 		end
 		var8.switchAvatar()
 	end, { p0.toggleWindow })
-	local var14 = reactModule.useCallback(function() --[[ line: 63 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var8 (ref)
 		if fFlagAvatarSwitcherCounters then
 			sendAXCounterV2(constantsModule.Counters.CancelSwitchAvatar)

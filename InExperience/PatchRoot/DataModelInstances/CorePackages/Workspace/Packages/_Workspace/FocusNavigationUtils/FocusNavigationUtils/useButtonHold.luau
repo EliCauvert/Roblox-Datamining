@@ -5,28 +5,28 @@ local buttonHoldStateEnumModule = require(focusNavigationUtils.ButtonHoldStateEn
 local inputHandlersModule = require(parent.InputHandlers)
 local reactModule = require(parent.React)
 
-local function useFakeCancelHoldAfterBlur(p0, p1, p2) --[[ line: 18 ]]
+local function useFakeCancelHoldAfterBlur(p0, p1, p2)
 	-- upvalues: reactModule (ref)
-	local var6 = reactModule.useCallback(function() --[[ line: 19 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), p2 (ref)
 		p1({ eventData = { UserInputState = Enum.UserInputState.End } })
 		p2()
 	end, { p1, p2 })
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var6 (ref)
 		if p0 and p0:IsA("GuiObject") then
 			local selectionLostConnection = p0.SelectionLost:Connect(var6)
 			
-			return function() --[[ line: 34 ]]
+			return function()
 				-- upvalues: selectionLostConnection (ref)
 				selectionLostConnection:Disconnect()
 			end
 		end
-		return function() --[[ line: 38 ]] end
+		return function() end
 	end, { p0, var6 })
 end
 
-return function(p3, p4, p5) --[[ line: 42 | named "useButtonHold" ]]
+return function(p3, p4, p5)
 	-- upvalues: argCheckModule (ref), reactModule (ref), buttonHoldStateEnumModule (ref), inputHandlersModule (ref), useFakeCancelHoldAfterBlur (ref)
 	argCheckModule.assert(p3 >= 0, "signalHoldIntentSeconds must be greater than or equal to 0")
 	argCheckModule.assert(p4 > 0, "signalHoldCompleteSeconds must be greater than 0")
@@ -35,12 +35,12 @@ return function(p3, p4, p5) --[[ line: 42 | named "useButtonHold" ]]
 	local var10 = reactModule.useRef(nil)
 	local var11, var12 = reactModule.useBinding(0)
 	local var13, var14 = reactModule.useState(nil)
-	local var15 = reactModule.useCallback(function() --[[ line: 59 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
 		var10.current = tick()
 		var9(buttonHoldStateEnumModule.JUST_PRESSED)
 	end, {})
-	local var16 = reactModule.useCallback(function(_) --[[ line: 64 ]]
+	local var16 = reactModule.useCallback(function(_)
 		-- upvalues: argCheckModule (copy), var10 (ref), var12 (ref), var11 (ref), p3 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
 		local currentTime = tick()
 		argCheckModule.assert(var10.current ~= nil, "startTime.current should not be nil")
@@ -53,13 +53,13 @@ return function(p3, p4, p5) --[[ line: 42 | named "useButtonHold" ]]
 			var9(buttonHoldStateEnumModule.HOLDING)
 		end
 	end, { var11, p3 })
-	local var17 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), p4 (ref), var10 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
 		var12(p4)
 		var10.current = nil
 		var9(buttonHoldStateEnumModule.COMPLETED)
 	end, { p4 })
-	local var18 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var10 (ref), var9 (ref), buttonHoldStateEnumModule (copy)
 		var12(0)
 		var10.current = nil
@@ -81,7 +81,7 @@ return function(p3, p4, p5) --[[ line: 42 | named "useButtonHold" ]]
 		p4,
 		p5
 	})
-	local var20 = reactModule.useCallback(function(p6) --[[ line: 111 ]]
+	local var20 = reactModule.useCallback(function(p6)
 		-- upvalues: var14 (ref), var19 (ref)
 		var14(p6.targetInstance)
 		var19(p6)
@@ -92,7 +92,7 @@ return function(p3, p4, p5) --[[ line: 42 | named "useButtonHold" ]]
 		eventHandler = var20,
 		holdState = var8,
 		holdTime = var11,
-		holdProgress = var11:map(function(p7) --[[ line: 122 ]]
+		holdProgress = var11:map(function(p7)
 			-- upvalues: p4 (ref)
 			return p7 / p4
 		end),

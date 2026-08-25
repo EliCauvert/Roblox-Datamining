@@ -44,7 +44,7 @@ local var7 = t.strictInterface({
 	ZIndex = t.optional(t.integer)
 })
 
-local function getLabelWidthAndContent(p0, p1, p2) --[[ line: 71 ]]
+local function getLabelWidthAndContent(p0, p1, p2)
 	-- upvalues: t_1 (ref), roact (ref), imageSetLabel (ref), userInputService (ref), textService (ref), themedTextLabelModule (ref)
 	local var9 = t_1[p0]
 	
@@ -90,12 +90,12 @@ local function getLabelWidthAndContent(p0, p1, p2) --[[ line: 71 ]]
 	}), alignment
 end
 
-return function(p3) --[[ line: 142 | named "KeyLabel" ]]
+return function(p3)
 	-- upvalues: globalConfigModule (ref), var7 (ref), withStyle (ref), getLabelWidthAndContent (ref), roact (ref), imageSetLabel (ref), assetsModule (ref)
 	if globalConfigModule.propValidation then
 		assert(var7(p3))
 	end
-	return withStyle(function(p4) --[[ line: 147 ]]
+	return withStyle(function(p4)
 		-- upvalues: p3 (ref), getLabelWidthAndContent (copy), roact (copy), imageSetLabel (copy), assetsModule (copy)
 		local var16 = p4.Theme[p3.borderThemeKey or "UIEmphasis"]
 		local var17, var18, var19 = getLabelWidthAndContent(p3.input, p4, p3.textThemeKey)

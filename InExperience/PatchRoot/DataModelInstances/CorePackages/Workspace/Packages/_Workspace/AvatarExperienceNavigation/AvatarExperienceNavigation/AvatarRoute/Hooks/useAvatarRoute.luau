@@ -5,7 +5,7 @@ local argCheckModule = require(parent.ArgCheck)
 local avatarRouteContextModule = require(avatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
 local _ = require(avatarExperienceNavigation.AvatarRoute.Types)
 
-return function() --[[ line: 16 | named "useAvatarRoute" ]]
+return function()
 	-- upvalues: reactModule (ref), avatarRouteContextModule (ref), argCheckModule (ref)
 	return argCheckModule.isNotNil(reactModule.useContext(avatarRouteContextModule), "AvatarRouteContext")
 end

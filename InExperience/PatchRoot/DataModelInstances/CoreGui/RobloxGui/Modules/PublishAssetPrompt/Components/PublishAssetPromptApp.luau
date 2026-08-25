@@ -28,15 +28,15 @@ publishAssetPromptApp.validateProps = tModule.strictInterface({
 	assetInstance = tModule.optional(tModule.Instance)
 })
 
-local function _(p0) --[[ line: 50 | named "isGamepadInput" ]]
+local function _(p0)
 	-- upvalues: getInputGroup (ref), inputTypeModule (ref)
 	return getInputGroup(p0) == inputTypeModule.InputTypeConstants.Gamepad
 end
 
-function publishAssetPromptApp.init(p1) --[[ line: 55 ]]
+function publishAssetPromptApp.init(p1)
 	p1:setState({ screenSize = Vector2.new(0, 0) })
 	
-	function p1.absoluteSizeChanged(p2) --[[ line: 60 ]]
+	function p1.absoluteSizeChanged(p2)
 		-- upvalues: p1 (ref)
 		if p1.state.screenSize ~= p2.AbsoluteSize then
 			p1:setState({ screenSize = p2.AbsoluteSize })
@@ -47,7 +47,7 @@ function publishAssetPromptApp.init(p1) --[[ line: 55 ]]
 	p1.selectedGuiObject = nil
 end
 
-function publishAssetPromptApp.render(p3) --[[ line: 72 ]]
+function publishAssetPromptApp.render(p3)
 	-- upvalues: roactModule (ref), resultModalModule (ref), promptTypeModule (ref), publishAssetPromptSingleStepModule (ref), publishAvatarPromptModule (ref), publishAvatarAssetPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), publishMakeupLookPromptModule (ref), externalEventConnection (ref), userInputService (ref), getInputGroup (ref), inputTypeModule (ref), roactGamepadModule (ref), selectionCursorProvider (ref), reactFocusNavigationModule (ref), var14 (ref), provider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var18 = nil
 	
@@ -73,7 +73,7 @@ function publishAssetPromptApp.render(p3) --[[ line: 72 ]]
 	}, {
 		LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService.LastInputTypeChanged,
-			callback = function(p4) --[[ line: 112 ]]
+			callback = function(p4)
 				-- upvalues: p3 (ref), getInputGroup (copy), inputTypeModule (copy)
 				p3:setState({
 					isGamepad = getInputGroup(p4) == inputTypeModule.InputTypeConstants.Gamepad
@@ -96,7 +96,7 @@ function publishAssetPromptApp.render(p3) --[[ line: 72 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p5) --[[ line: 150 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p5)
 	return {
 		resultModalType = p5.promptRequest.resultModalType,
 		promptType = p5.promptRequest.promptInfo.promptType,

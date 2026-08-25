@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return function(p0) --[[ line: 18 | named "AgentCard" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), text (ref)
 	local testId = p0.testId or "agent-card"
 	

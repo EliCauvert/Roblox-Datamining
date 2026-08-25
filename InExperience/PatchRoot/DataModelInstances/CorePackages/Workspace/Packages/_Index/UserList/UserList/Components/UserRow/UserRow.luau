@@ -14,7 +14,7 @@ local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUser
 local fFlagUserListUsernameFallbackConfig = require(parent.SharedFlags).FFlagUserListUsernameFallbackConfig
 local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 
-return reactModule.memo(function(p0) --[[ line: 47 | named "UserRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useUserDataValuesModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagFixUserRowCombinedName (ref), fFlagUserListUsernameFallbackConfig (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), baseRowModule (ref), fFlagAddStatusIndicatorToBaseRow (ref), fFlagUserListCtaIntegrationEnabled (ref), enumsModule (ref)
 	local var6 = useUserDataValuesModule(p0.entityId)
 	local var7 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(if p0.entityId then p0.entityId else nil) else nil

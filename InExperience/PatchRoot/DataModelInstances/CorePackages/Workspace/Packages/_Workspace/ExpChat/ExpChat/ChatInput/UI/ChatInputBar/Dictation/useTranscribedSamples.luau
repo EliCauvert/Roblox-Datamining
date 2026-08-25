@@ -1,17 +1,17 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function() --[[ line: 26 | named "useTranscribedSamples" ]]
+return function()
 	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useBinding({})
 	local var3 = reactModule.useRef(nil)
 	
 	return {
 		binding = var1,
-		begin = function(p0) --[[ line: 32 ]]
+		begin = function(p0)
 			-- upvalues: var3 (ref)
 			var3.current = var3.current or p0
 		end,
-		commit = function(p1) --[[ line: 38 ]]
+		commit = function(p1)
 			-- upvalues: var3 (ref), var1 (ref), var2 (ref)
 			local current = var3.current
 			var3.current = nil
@@ -23,7 +23,7 @@ return function() --[[ line: 26 | named "useTranscribedSamples" ]]
 			table.insert(cloned, { startIdx = current, endIdx = p1 })
 			var2(cloned)
 		end,
-		reset = function() --[[ line: 49 ]]
+		reset = function()
 			-- upvalues: var3 (ref), var2 (ref)
 			var3.current = nil
 			var2({})

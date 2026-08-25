@@ -6,20 +6,20 @@ local reactModule = require(parent.React)
 local positioningModule = require(script.Parent.positioning)
 local _ = require(foundation.Components.Types)
 
-local function useConnectSignals(value, p0, p1) --[[ line: 26 ]]
+local function useConnectSignals(value, p0, p1)
 	-- upvalues: reactModule (ref)
 	local var4 = reactModule.useRef({})
-	reactModule.useLayoutEffect(function() --[[ line: 33 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: value (ref), p0 (ref), var4 (ref), p1 (ref)
 		if value ~= nil then
 			for i, v in p0 do
-				var4.current[v] = (if typeof(value) == "Instance" then value:GetPropertyChangedSignal(v) else value:GetPropertyChangedSignal(v)):Connect(if type(p1) == "table" then function() --[[ line: 42 ]]
+				var4.current[v] = (if typeof(value) == "Instance" then value:GetPropertyChangedSignal(v) else value:GetPropertyChangedSignal(v)):Connect(if type(p1) == "table" then function()
 					-- upvalues: p1 (copy)
 					p1.current()
 				end else p1)
 			end
 		end
-		return function() --[[ line: 50 ]]
+		return function()
 			-- upvalues: var4 (copy)
 			for i, v in var4.current do
 				v:Disconnect()
@@ -28,7 +28,7 @@ local function useConnectSignals(value, p0, p1) --[[ line: 26 ]]
 	end, { value, p1 })
 end
 
-return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" ]]
+return function(p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: reactModule (ref), positioningModule (ref), useConnectSignals (ref)
 	local var5, var6 = reactModule.useBinding(Vector2.new())
 	local var7, var8 = reactModule.useBinding(true)
@@ -36,10 +36,10 @@ return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" 
 	local var11, var12 = reactModule.useBinding(Vector2.new())
 	local var13, var14 = reactModule.useBinding(Vector2.new())
 	local var15, var16 = reactModule.useBinding(Vector2.new(0, 0))
-	local var17 = reactModule.useRef(function() --[[ line: 73 ]] end)
+	local var17 = reactModule.useRef(function() end)
 	local var18 = reactModule.useRef({})
 	local var19 = reactModule.useRef(false)
-	local var20 = reactModule.useCallback(function() --[[ line: 77 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), p3 (ref), p4 (ref), p5 (ref), var8 (ref), positioningModule (copy), var18 (ref), p6 (ref), p7 (ref), p8 (ref), var10 (ref), var12 (ref), var14 (ref), var6 (ref), var16 (ref)
 		if not p2 or not p3 or (not p4 or not p5) then
 			var8(false)
@@ -92,13 +92,13 @@ return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" 
 		p2, p3, p4, p5, p6, p7, p8
 	})
 	
-	function var17.current() --[[ line: 165 ]]
+	function var17.current()
 		-- upvalues: var19 (ref), var20 (ref)
 		if var19.current then
 			return
 		end
 		var19.current = true
-		task.defer(function() --[[ line: 170 ]]
+		task.defer(function()
 			-- upvalues: var19 (copy), var20 (copy)
 			var19.current = false
 			var20()
@@ -108,13 +108,13 @@ return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" 
 	useConnectSignals(p3, { "AbsolutePosition", "AbsoluteSize" }, var17)
 	useConnectSignals(p4, { "AbsoluteSize" }, var17)
 	useConnectSignals(p5, { "AbsoluteSize" }, var17)
-	reactModule.useLayoutEffect(function() --[[ line: 178 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: p2 (ref), p3 (ref), var18 (ref), var17 (ref)
 		if not p2 then return end
 		if typeof(p3) == "Instance" and p3:IsA("GuiObject") then
 			local t = {}
 			
-			local function rebuild() --[[ line: 189 ]]
+			local function rebuild()
 				-- upvalues: t (ref), p3 (ref), var17 (copy), var18 (ref)
 				for i, v in t do
 					v:Disconnect()
@@ -125,11 +125,11 @@ return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" 
 				while parent and parent:IsA("GuiObject") do
 					if parent.ClipsDescendants then
 						table.insert(t_1, parent)
-						table.insert(t, parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 203 ]]
+						table.insert(t, parent:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 							-- upvalues: var17 (copy)
 							var17.current()
 						end))
-						table.insert(t, parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 209 ]]
+						table.insert(t, parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 							-- upvalues: var17 (copy)
 							var17.current()
 						end))
@@ -146,7 +146,7 @@ return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" 
 			rebuild()
 			local ancestryChangedConnection = p3.AncestryChanged:Connect(rebuild)
 			
-			return function() --[[ line: 227 ]]
+			return function()
 				-- upvalues: ancestryChangedConnection (ref), t (ref), var18 (ref)
 				ancestryChangedConnection:Disconnect()
 				
@@ -157,7 +157,7 @@ return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 | named "useFloating" 
 			end
 		end
 	end, { p3, p2 })
-	reactModule.useLayoutEffect(function() --[[ line: 236 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var20 (ref)
 		var20()
 	end, { var20 })

@@ -1,6 +1,6 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("DsaIllegalContentReporting").Utility.Constants)
 
-return function(p0) --[[ line: 6 | named "isSelectedDataDSAIllegalContent" ]]
+return function(p0)
 	-- upvalues: constantsModule (ref)
 	if p0 == nil then
 		return false

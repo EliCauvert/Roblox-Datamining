@@ -2,7 +2,7 @@
 local _ = require(appChat.Models.ConversationChannels)
 local conversationModule = require(appChat.Models.Conversation)
 
-local function _(value, p0, p1) --[[ line: 10 | named "set" ]]
+local function _(value, p0, p1)
 	if value[p0] == p1 then
 		return value
 	end
@@ -12,7 +12,7 @@ local function _(value, p0, p1) --[[ line: 10 | named "set" ]]
 	return cloned
 end
 
-local function updateConversationMessages(p2, p3, p4) --[[ line: 22 ]]
+local function updateConversationMessages(p2, p3, p4)
 	local t = {}
 	
 	for i, v in p2[p4]:CreateIterator() do
@@ -25,13 +25,13 @@ local function updateConversationMessages(p2, p3, p4) --[[ line: 22 ]]
 	end
 end
 
-local _ = function(p5, p6, p7) --[[ line: 40 | named "updateConversationField" ]]
+local _ = function(p5, p6, p7)
 	if p6[p7] == nil then
 		p6[p7] = p5[p7]
 	end
 end
 
-return function(p8, p9) --[[ line: 50 | named "updateConversationToState" ]]
+return function(p8, p9)
 	-- upvalues: conversationModule (ref), updateConversationMessages (ref)
 	if p9.conversationType == conversationModule.Type.ONE_TO_ONE_CONVERSATION then
 		local var5 = conversationModule.IdForFakeOneOnOne(p9.participants)

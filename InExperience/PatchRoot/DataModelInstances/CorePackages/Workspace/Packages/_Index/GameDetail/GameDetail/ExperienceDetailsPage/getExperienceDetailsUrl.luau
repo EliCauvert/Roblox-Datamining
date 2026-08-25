@@ -5,7 +5,7 @@ local sduiCapabilities = require(parent.SduiSharedUtilities).SduiCapabilities
 local fFlagSduiCapabilityBindings = require(parent.SharedFlags).FFlagSduiCapabilityBindings
 local fFlagSduiEdpClientTemplateCache = require(parent.SharedFlags).FFlagSduiEdpClientTemplateCache
 
-return function(p0) --[[ line: 10 | named "getExperienceDetailsUrl" ]]
+return function(p0)
 	-- upvalues: urlBuilder (ref), url (ref), fFlagSduiCapabilityBindings (ref), fFlagSduiEdpClientTemplateCache (ref), parent (ref), sduiCapabilities (ref)
 	local var0 = urlBuilder.new({
 		path = "experience-details-api/v2/universes/{universeId}/experience-details",

@@ -23,7 +23,7 @@ menuBackButton.defaultProps = {
 	backEnabled = backButtonControllerModule.hasReturnUniverse()
 }
 
-function menuBackButton.init(p0) --[[ line: 38 ]]
+function menuBackButton.init(p0)
 	-- upvalues: backButtonControllerModule (ref), roactModule (ref)
 	p0:setState({ text = backButtonControllerModule.getMenuText() })
 	local var11, var12 = roactModule.createBinding(nil)
@@ -47,20 +47,20 @@ function menuBackButton.init(p0) --[[ line: 38 ]]
 	p0.textLabelRef = roactModule.createRef()
 end
 
-function menuBackButton.didMount(p1) --[[ line: 52 ]]
+function menuBackButton.didMount(p1)
 	p1.updateSizeBinding(p1.props.HubBar.Size)
 	p1.updateVisibleBinding(p1.props.HubBar.Visible)
 	p1:updateViewport()
 end
 
-function menuBackButton.didUpdate(p2, p3) --[[ line: 58 ]]
+function menuBackButton.didUpdate(p2, p3)
 	if p2.props.HubBar ~= p3.HubBar then
 		p2.updateSizeBinding(p2.props.HubBar.Size)
 		p2.updateVisibleBinding(p2.props.HubBar.Visible)
 	end
 end
 
-function menuBackButton.updateViewport(p4) --[[ line: 65 ]]
+function menuBackButton.updateViewport(p4)
 	-- upvalues: themeModule (ref), utilityModule (ref), var9 (ref)
 	local var23 = themeModule.textSize(24)
 	
@@ -85,7 +85,7 @@ function menuBackButton.updateViewport(p4) --[[ line: 65 ]]
 	end
 end
 
-function menuBackButton.render(p5) --[[ line: 93 ]]
+function menuBackButton.render(p5)
 	-- upvalues: roactModule (ref), externalEventConnection (ref), themeModule (ref), backButtonControllerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), foundationModule (ref), imageSetLabel (ref), images (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -93,11 +93,11 @@ function menuBackButton.render(p5) --[[ line: 93 ]]
 		AnchorPoint = Vector2.new(0, 0),
 		Position = UDim2.new(0, 0, 0, 0),
 		LayoutOrder = p5.props.LayoutOrder,
-		Visible = roactModule.joinBindings({ p5.state.text, p5.visibleBinding }):map(function(p6) --[[ line: 103 ]]
+		Visible = roactModule.joinBindings({ p5.state.text, p5.visibleBinding }):map(function(p6)
 			-- upvalues: p5 (ref)
 			return p5.props.backEnabled and (p6[1] ~= nil and p6[2])
 		end),
-		Size = roactModule.joinBindings({ p5.sizeBinding, p5.buttonHeightBinding }):map(function(p7) --[[ line: 106 ]]
+		Size = roactModule.joinBindings({ p5.sizeBinding, p5.buttonHeightBinding }):map(function(p7)
 			local var26 = p7[1]
 			local var27 = p7[2]
 			
@@ -107,21 +107,21 @@ function menuBackButton.render(p5) --[[ line: 93 ]]
 	}, {
 		SizeConnection = roactModule.createElement(externalEventConnection, {
 			event = p5.props.HubBar:GetPropertyChangedSignal("Size"),
-			callback = function() --[[ line: 122 ]]
+			callback = function()
 				-- upvalues: p5 (ref)
 				p5.updateSizeBinding(p5.props.HubBar.Size)
 			end
 		}),
 		VisibleConnection = roactModule.createElement(externalEventConnection, {
 			event = p5.props.HubBar:GetPropertyChangedSignal("Visible"),
-			callback = function() --[[ line: 128 ]]
+			callback = function()
 				-- upvalues: p5 (ref)
 				p5.updateVisibleBinding(p5.props.HubBar.Visible)
 			end
 		}),
 		ViewportSizeChangedConnection = roactModule.createElement(externalEventConnection, {
 			event = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"),
-			callback = function() --[[ line: 134 ]]
+			callback = function()
 				-- upvalues: p5 (ref)
 				p5:updateViewport()
 			end
@@ -136,23 +136,23 @@ function menuBackButton.render(p5) --[[ line: 93 ]]
 			BackgroundColor3 = themeModule.color("DefaultButton"),
 			BackgroundTransparency = themeModule.transparency("DefaultButton", 1),
 			Position = UDim2.new(0, 0, 0, 0),
-			Size = p5.buttonHeightBinding:map(function(p8) --[[ line: 148 ]]
+			Size = p5.buttonHeightBinding:map(function(p8)
 				return if p8 then UDim2.new(0, 0, 0, p8) else UDim2.new()
 			end),
 			AutomaticSize = Enum.AutomaticSize.X,
 			ScaleType = Enum.ScaleType.Stretch,
 			SliceCenter = Rect.new(8, 6, 46, 44),
-			[roactModule.Event.MouseEnter] = function(p9) --[[ line: 158 ]]
+			[roactModule.Event.MouseEnter] = function(p9)
 				-- upvalues: themeModule (copy)
 				p9.BackgroundColor3 = themeModule.color("DefaultButtonHover")
 				p9.BackgroundTransparency = themeModule.transparency("DefaultButtonHover")
 			end,
-			[roactModule.Event.MouseLeave] = function(p10) --[[ line: 162 ]]
+			[roactModule.Event.MouseLeave] = function(p10)
 				-- upvalues: themeModule (copy)
 				p10.BackgroundColor3 = themeModule.color("DefaultButton")
 				p10.BackgroundTransparency = themeModule.transparency("DefaultButton")
 			end,
-			[roactModule.Event.Activated] = function(_) --[[ line: 166 ]]
+			[roactModule.Event.Activated] = function(_)
 				-- upvalues: backButtonControllerModule (copy)
 				backButtonControllerModule.initiateBackButtonTeleport(Enum.AdTeleportMethod.InGameMenuBackButton)
 			end

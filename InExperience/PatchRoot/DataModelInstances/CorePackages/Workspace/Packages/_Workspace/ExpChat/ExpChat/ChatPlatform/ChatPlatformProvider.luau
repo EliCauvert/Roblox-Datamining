@@ -21,33 +21,33 @@ local t = {
 	ChatWindowMaxHeight = configModule.ChatWindowMaxHeight
 }
 
-local function makeInterpolators(p0) --[[ line: 60 ]]
+local function makeInterpolators(p0)
 	-- upvalues: clientSettingsUtilityModule (ref)
 	return {
-		getBackgroundColor = function(value) --[[ line: 62 ]]
+		getBackgroundColor = function(value)
 			-- upvalues: clientSettingsUtilityModule (copy), p0 (ref)
 			return clientSettingsUtilityModule.getBackgroundColor(value, p0)
 		end,
-		getBackgroundTransparency = function(value) --[[ line: 65 ]]
+		getBackgroundTransparency = function(value)
 			-- upvalues: clientSettingsUtilityModule (copy), p0 (ref)
 			return clientSettingsUtilityModule.getBackgroundTransparency(value, p0)
 		end
 	}
 end
 
-return function(p1) --[[ line: 71 | named "ChatPlatformProvider" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), clientSettingsModule (ref), fFlagExpChatUseChatConfigStore (ref), signalsReactModule (ref), getChatConfigurationStoreModule (ref), useSelector (ref), makeInterpolators (ref), usePropSignal (ref), t (ref), getTransparencyStoreModule (ref), provider (ref)
 	local var13 = reactModule.useContext(clientSettingsModule)
-	local var14 = usePropSignal(if fFlagExpChatUseChatConfigStore then signalsReactModule.useSignalState(getChatConfigurationStoreModule(false).getChatInputBarSettings) else useSelector(function(p2) --[[ line: 78 ]]
+	local var14 = usePropSignal(if fFlagExpChatUseChatConfigStore then signalsReactModule.useSignalState(getChatConfigurationStoreModule(false).getChatInputBarSettings) else useSelector(function(p2)
 		return p2.ChatLayout.ChatInputBarSettings
 	end))
-	local var15 = usePropSignal(reactModule.useMemo(function() --[[ line: 85 ]]
+	local var15 = usePropSignal(reactModule.useMemo(function()
 		-- upvalues: makeInterpolators (copy), var13 (ref)
 		return makeInterpolators(var13)
 	end, { var13 }))
 	
 	return reactModule.createElement(provider, {
-		value = reactModule.useMemo(function() --[[ line: 92 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: var14 (ref), t (copy), var15 (ref), getTransparencyStoreModule (copy)
 			return {
 				getChatInputBarSettings = var14,

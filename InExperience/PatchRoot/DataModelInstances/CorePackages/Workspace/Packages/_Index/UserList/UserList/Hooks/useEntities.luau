@@ -3,9 +3,9 @@ local reactModule = require(userList.Parent.React)
 local _ = require(userList.Common.Enums)
 local _ = require(userList.Common.Types)
 
-return function(p0) --[[ line: 19 | named "useEntities" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function() --[[ line: 20 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		local t = {}
 		

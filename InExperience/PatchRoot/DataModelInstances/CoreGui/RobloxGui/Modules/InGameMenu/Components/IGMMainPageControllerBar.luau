@@ -10,7 +10,7 @@ IGMMainPageControllerBar.validateProps = t.strictInterface({
 	isMainPageMoreMenuOpen = t.boolean
 })
 
-function IGMMainPageControllerBar.render(p0) --[[ line: 19 ]]
+function IGMMainPageControllerBar.render(p0)
 	-- upvalues: withLocalizationModule (ref), VRService (ref), roact (ref), IGMControllerBar2Module (ref)
 	return if p0.props.canCaptureFocus then withLocalizationModule({
 		openMoreMenu = "CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu",
@@ -18,7 +18,7 @@ function IGMMainPageControllerBar.render(p0) --[[ line: 19 ]]
 		back = "CoreScripts.InGameMenu.ControllerBar.Back",
 		respawnCharacter = "CoreScripts.InGameMenu.ControllerBar.RespawnCharacter",
 		leave = "CoreScripts.InGameMenu.ControllerBar.Leave"
-	})(function(p1) --[[ line: 27 ]]
+	})(function(p1)
 		-- upvalues: VRService (copy), p0 (ref), roact (copy), IGMControllerBar2Module (copy)
 		return roact.createElement(IGMControllerBar2Module, {
 			leftHint = { text = p1.back, keyCode = Enum.KeyCode.ButtonB },

@@ -8,7 +8,7 @@ local profileActionBarModule = require(profilePlatform.Components.ProfileActionB
 local getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule = require(profilePlatform.Flags.GetFIntProfilePlatformCurrencyTransferTooltipMaxImpressions)
 local _ = require(profilePlatform.Types.UpsellTooltipProps)
 
-return function(p0) --[[ line: 26 | named "ProfileActionBarWithTransferTooltip" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (ref), appStorageService (ref), profileActionBarModule (ref)
 	local var6 = useLocalization({
 		plusMoreMenuTooltipBody = textKeysModule.CurrencyTransferTooltipBody
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 26 | named "ProfileActionBarWithTransferTooltip" 
 	local var7, var8 = reactModule.useState(false)
 	local var9 = reactModule.useRef(false)
 	local currencyTransferProfileActionTooltipStorageKeyEngineFeature = game:GetEngineFeature("CurrencyTransferProfileActionTooltipStorageKey")
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), currencyTransferProfileActionTooltipStorageKeyEngineFeature (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (copy), appStorageService (copy), var8 (ref)
 		if var9.current then return end
 		if currencyTransferProfileActionTooltipStorageKeyEngineFeature then
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 26 | named "ProfileActionBarWithTransferTooltip" 
 	end, {
 		currencyTransferProfileActionTooltipStorageKeyEngineFeature
 	})
-	local var11 = reactModule.useCallback(function() --[[ line: 54 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: currencyTransferProfileActionTooltipStorageKeyEngineFeature (ref), getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule (copy), appStorageService (copy), var8 (ref)
 		if currencyTransferProfileActionTooltipStorageKeyEngineFeature then
 			appStorageService:SetItem("CurrencyTransferProfileActionTooltipImpressionsCount", tostring(getFIntProfilePlatformCurrencyTransferTooltipMaxImpressionsModule()))
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 26 | named "ProfileActionBarWithTransferTooltip" 
 	end, {
 		currencyTransferProfileActionTooltipStorageKeyEngineFeature
 	})
-	local var12 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref)
 		var8(false)
 	end, {})
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 26 | named "ProfileActionBarWithTransferTooltip" 
 		primaryButtonRef = p0.primaryButtonRef,
 		moreButtonRef = p0.moreButtonRef,
 		showPlusMoreMenuTooltip = var7,
-		upsellTooltipProps = if var7 then reactModule.useMemo(function() --[[ line: 69 ]]
+		upsellTooltipProps = if var7 then reactModule.useMemo(function()
 			-- upvalues: var6 (ref), var11 (ref), var12 (ref)
 			return {
 				plusMoreMenuTooltipTitle = nil,

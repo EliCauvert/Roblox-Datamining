@@ -1,12 +1,12 @@
 ﻿local t = {
-	collect = function() --[[ line: 8 ]]
+	collect = function()
 		pcall(trigger)
 		pcall(trigger)
 		task.wait()
 	end
 }
 
-function trigger() --[[ line: 3 ]]
+function trigger()
 	return collectgarbage("collect")
 end
 

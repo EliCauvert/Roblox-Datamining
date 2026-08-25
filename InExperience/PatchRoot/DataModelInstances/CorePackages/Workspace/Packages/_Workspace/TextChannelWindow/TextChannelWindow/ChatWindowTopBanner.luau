@@ -17,7 +17,7 @@ local inputSize = foundationModule.Enums.InputSize
 local popoverSide = foundationModule.Enums.PopoverSide
 local popoverAlign = foundationModule.Enums.PopoverAlign
 
-local function mapMessagesForReport(p0, p1) --[[ line: 35 ]]
+local function mapMessagesForReport(p0, p1)
 	local list = table.create(#p0)
 	
 	for i, v in p0 do
@@ -34,18 +34,18 @@ local function mapMessagesForReport(p0, p1) --[[ line: 35 ]]
 	return list
 end
 
-return function(p2) --[[ line: 51 | named "ChatWindowTopBanner" ]]
+return function(p2)
 	-- upvalues: useInExperienceLocalization (ref), reactModule (ref), useEventConnection (ref), guiService (ref), chatLineReportRoot (ref), mapMessagesForReport (ref), iconName (ref), constants (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), view (ref), icon (ref), iconSize (ref)
 	local var6 = useInExperienceLocalization()
 	local var7, var8 = reactModule.useState(false)
-	useEventConnection(guiService:GetPropertyChangedSignal("MenuIsOpen"), function() --[[ line: 55 ]]
+	useEventConnection(guiService:GetPropertyChangedSignal("MenuIsOpen"), function()
 		-- upvalues: guiService (copy), var8 (ref)
 		if guiService.MenuIsOpen then
 			var8(false)
 		end
 	end)
 	local var9 = var6("Feature.ReportAbuse.Action.EnterChatLineReporting")
-	local var10 = reactModule.useCallback(function() --[[ line: 71 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), chatLineReportRoot (copy), mapMessagesForReport (copy), var8 (ref)
 		chatLineReportRoot.initialize(mapMessagesForReport(if p2.messagesSignal then p2.messagesSignal(false) else {}, p2.targetChannel))
 		var8(false)
@@ -58,7 +58,7 @@ return function(p2) --[[ line: 51 | named "ChatWindowTopBanner" ]]
 	}, {
 		Menu = reactModule.createElement(menu, {
 			isOpen = var7,
-			items = reactModule.useMemo(function() --[[ line: 77 ]]
+			items = reactModule.useMemo(function()
 				-- upvalues: iconName (copy), var9 (ref), var10 (ref)
 				return {
 					{
@@ -72,7 +72,7 @@ return function(p2) --[[ line: 51 | named "ChatWindowTopBanner" ]]
 			size = inputSize.Medium,
 			side = popoverSide.Right,
 			align = popoverAlign.Start,
-			onPressedOutside = reactModule.useCallback(function() --[[ line: 67 ]]
+			onPressedOutside = reactModule.useCallback(function()
 				-- upvalues: var8 (ref)
 				var8(false)
 			end, {}),
@@ -81,7 +81,7 @@ return function(p2) --[[ line: 51 | named "ChatWindowTopBanner" ]]
 			Button = reactModule.createElement(view, {
 				tag = "align-x-center align-y-center radius-medium",
 				Size = UDim2.fromOffset(constants.IconButtonSize, constants.IconButtonSize),
-				onActivated = reactModule.useCallback(function() --[[ line: 63 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var8 (ref), var7 (ref)
 					var8(not var7)
 				end, { var7 })

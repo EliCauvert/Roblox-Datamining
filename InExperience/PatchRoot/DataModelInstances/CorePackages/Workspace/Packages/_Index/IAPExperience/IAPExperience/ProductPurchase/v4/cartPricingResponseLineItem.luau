@@ -5,13 +5,13 @@ local t = {
 	MarketplaceOffer = "MARKETPLACE_OFFER"
 }
 
-local function _(p0) --[[ line: 132 | named "mapCartPricingDiscountType" ]]
+local function _(p0)
 	-- upvalues: discountType (ref)
 	return if p0 == "ROBLOX_PLUS" then discountType.RobloxPlusSubscription else discountType.Uncategorized
 end
 
 return {
-	getCartLineSalePriceInRobux = function(p1) --[[ line: 81 ]]
+	getCartLineSalePriceInRobux = function(p1)
 		if type(p1) ~= "table" then
 			return nil
 		end
@@ -19,14 +19,14 @@ return {
 		
 		return if type(priceInRobux) == "number" and priceInRobux >= 0 then priceInRobux else nil
 	end,
-	getCartLineRegularPriceInRobux = function(p2, p3) --[[ line: 92 ]]
+	getCartLineRegularPriceInRobux = function(p2, p3)
 		if type(p2) == "table" then
 			local regularPriceInRobux = p2.regularPriceInRobux
 			
 			return if type(regularPriceInRobux) == "number" and p3 <= regularPriceInRobux then regularPriceInRobux else p3
 		end
 	end,
-	extractCartPricingMarketingOffers = function(p4) --[[ line: 102 ]]
+	extractCartPricingMarketingOffers = function(p4)
 		-- upvalues: decodeLuauUnicodeEscapesModule (ref)
 		local t = {}
 		
@@ -54,7 +54,7 @@ return {
 		end
 		return t
 	end,
-	extractDiscountRowsFromLineItems = function(p5) --[[ line: 146 ]]
+	extractDiscountRowsFromLineItems = function(p5)
 		-- upvalues: t (ref), discountType (ref), decodeLuauUnicodeEscapesModule (ref)
 		local t_1 = {}
 		
@@ -90,7 +90,7 @@ return {
 		end
 		return t_1
 	end,
-	computePriceWithoutOffersDiscounts = function(p6, p7) --[[ line: 195 ]]
+	computePriceWithoutOffersDiscounts = function(p6, p7)
 		local var4 = p7
 		
 		if type(p6) ~= "table" then
@@ -119,7 +119,7 @@ return {
 		end
 		return var4
 	end,
-	extractCartPricingSavingsSummary = function(p8) --[[ line: 228 ]]
+	extractCartPricingSavingsSummary = function(p8)
 		-- upvalues: decodeLuauUnicodeEscapesModule (ref)
 		if type(p8) ~= "table" then
 			return nil

@@ -8,7 +8,7 @@ local setCountryCodeListModule = require(authCommon.Actions.SetCountryCodeList)
 local fFlagUseSignalsForCountryCodeList = require(parent.SharedFlags).FFlagUseSignalsForCountryCodeList
 local getCountryCodeListStoreModule = require(authCommon.Stores.GetCountryCodeListStore)
 local t = {
-	_updateStoreWithCountryCodes = function(p0, p1) --[[ line: 15 ]]
+	_updateStoreWithCountryCodes = function(p0, p1)
 		-- upvalues: countryCodeModule (ref), fFlagUseSignalsForCountryCodeList (ref), getCountryCodeListStoreModule (ref), setCountryCodeListModule (ref), promiseModule (ref)
 		local t = {}
 		
@@ -24,18 +24,18 @@ local t = {
 	end
 }
 
-function t.Fetch(p2) --[[ line: 28 ]]
+function t.Fetch(p2)
 	-- upvalues: performFetch (ref), getCountryCodesModule (ref), t (ref), promiseModule (ref)
-	return performFetch.Single("luaapp.countriesapi.countrycodes", function(p3) --[[ line: 29 ]]
+	return performFetch.Single("luaapp.countriesapi.countrycodes", function(p3)
 		-- upvalues: getCountryCodesModule (copy), p2 (ref), t (copy), promiseModule (copy)
-		return getCountryCodesModule(p2):andThen(function(p4) --[[ line: 30 ]]
+		return getCountryCodesModule(p2):andThen(function(p4)
 			-- upvalues: t (copy), p3 (ref), promiseModule (copy)
 			return if p4 and p4.responseBody then t._updateStoreWithCountryCodes(p3, p4) else promiseModule.reject()
 		end)
 	end)
 end
 
-function t.GetFetchingStatus(p5) --[[ line: 40 ]]
+function t.GetFetchingStatus(p5)
 	-- upvalues: performFetch (ref)
 	return performFetch.GetStatus(p5, "luaapp.countriesapi.countrycodes")
 end

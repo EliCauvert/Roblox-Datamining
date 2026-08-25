@@ -11,7 +11,7 @@ local t = {
 	ABUSE_TYPE_OTHER = "ABUSE_CATEGORY_OTHER"
 }
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p0, p1) --[[ line: 22 ]]
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(p0, p1)
 	-- upvalues: httpModule (ref), t (ref)
 	return p0(httpModule.Url.APIS_URL):path("abuse-reporting"):path("v1"):path("abuse-report"):body({
 		abuseVector = "web_chat",

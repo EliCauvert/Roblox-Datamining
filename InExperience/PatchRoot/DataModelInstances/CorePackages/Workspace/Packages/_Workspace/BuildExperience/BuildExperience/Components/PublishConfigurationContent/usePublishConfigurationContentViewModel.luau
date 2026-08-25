@@ -18,7 +18,7 @@ local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEnableProvisionalRating)
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 
-return function(p0) --[[ line: 36 | named "usePublishConfigurationContentViewModel" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), experienceGuidelinesModule (ref), reactModule (ref), signalsReactModule (ref), fFlagEnableProvisionalRatingModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationLabelsModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), fFlagMyStatsMediaSelector (ref)
 	local GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_LOADING, GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER
 	local var13 = if fFlagBuildLocalization then useLocalization({
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 36 | named "usePublishConfigurationContentViewMod
 	end
 	local var14 = useOpenWebView()
 	local experienceGuidelinesStore = experienceGuidelinesModule.getExperienceGuidelinesStore()
-	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 58 ]]
+	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: experienceGuidelinesStore (ref), p0 (ref)
 		return experienceGuidelinesStore.getAndFetchDetailedGuidelines(p0.universeId)
 	end, { experienceGuidelinesStore, p0.universeId }).data)
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 36 | named "usePublishConfigurationContentViewMod
 	
 	if fFlagEnableProvisionalRatingModule then
 		local universeActivationStore = universeActivationModule.getUniverseActivationStore()
-		local var21 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 69 ]]
+		local var21 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: universeActivationStore (ref), p0 (ref)
 			return universeActivationStore.getAndFetchEligibility(p0.universeId)
 		end, { universeActivationStore, p0.universeId }).data)
@@ -67,14 +67,14 @@ return function(p0) --[[ line: 36 | named "usePublishConfigurationContentViewMod
 	return {
 		buildMaturityBannerText = var17,
 		contentMaturityText = gameConfigurationLabelsModule.getContentMaturityText(var16, var18, var19) or GAME_CONFIGURATION_LOADING,
-		onOpenIconAndThumbnails = if fFlagMyStatsMediaSelector then p0.onOpenMediaSelectionPage else reactModule.useCallback(function() --[[ line: 90 ]]
+		onOpenIconAndThumbnails = if fFlagMyStatsMediaSelector then p0.onOpenMediaSelectionPage else reactModule.useCallback(function()
 			-- upvalues: var14 (ref), gameConfigurationActionsModule (copy), p0 (ref), GAME_CONFIGURATION_CREATOR_HUB (write)
 			var14(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB)
 		end, { GAME_CONFIGURATION_CREATOR_HUB, var14, p0.universeId }),
 		onOpenTitleDescriptionPage = p0.onOpenTitleDescriptionPage,
-		onOpenContentMaturity = reactModule.useCallback(function() --[[ line: 94 ]]
+		onOpenContentMaturity = reactModule.useCallback(function()
 			-- upvalues: var14 (ref), gameConfigurationActionsModule (copy), p0 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
-			var14(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB, function() --[[ line: 95 ]]
+			var14(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
 				-- upvalues: refreshPublishEligibilityModule (copy), p0 (copy)
 				refreshPublishEligibilityModule(p0.universeId)
 			end)

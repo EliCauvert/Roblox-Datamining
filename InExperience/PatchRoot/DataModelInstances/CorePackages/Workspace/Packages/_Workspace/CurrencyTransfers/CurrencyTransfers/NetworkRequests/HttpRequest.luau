@@ -5,7 +5,7 @@ local errorTransferModelModule = require(currencyTransfers.Models.ErrorTransferM
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 26 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.http = p0 or game:GetService("HttpService")
@@ -14,7 +14,7 @@ function t.new(p0) --[[ line: 26 ]]
 	return tbl
 end
 
-function t.fromNetworkImpl(p1) --[[ line: 39 ]]
+function t.fromNetworkImpl(p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.http = nil
@@ -23,7 +23,7 @@ function t.fromNetworkImpl(p1) --[[ line: 39 ]]
 	return tbl
 end
 
-local function rejectFromNetworkImpl(p2, p3) --[[ line: 50 ]]
+local function rejectFromNetworkImpl(p2, p3)
 	-- upvalues: httpService (ref), errorTransferModelModule (ref)
 	local var8 = if p3 then p3.StatusCode else 0
 	local body = p3 and p3.Body
@@ -46,24 +46,24 @@ local function rejectFromNetworkImpl(p2, p3) --[[ line: 50 ]]
 	p2({ status = var8, body = body })
 end
 
-function t:get(p4) --[[ line: 79 ]]
+function t:get(p4)
 	-- upvalues: promiseModule (ref), rejectFromNetworkImpl (ref), errorTransferModelModule (ref)
-	return if self.networkImpl then promiseModule.new(function(p8, p9) --[[ line: 81 ]]
+	return if self.networkImpl then promiseModule.new(function(p8, p9)
 		-- upvalues: self (ref), p4 (ref), rejectFromNetworkImpl (copy)
-		self.networkImpl(p4, "GET", { headers = { Accept = "application/json" } }):andThen(function(p10) --[[ line: 87 ]]
+		self.networkImpl(p4, "GET", { headers = { Accept = "application/json" } }):andThen(function(p10)
 			-- upvalues: p8 (ref)
 			p8(p10.responseBody)
-		end, function(p11) --[[ line: 89 ]]
+		end, function(p11)
 			-- upvalues: rejectFromNetworkImpl (copy), p9 (ref)
 			rejectFromNetworkImpl(p9, p11)
 		end)
-	end) else promiseModule.new(function(p5, p6) --[[ line: 95 ]]
+	end) else promiseModule.new(function(p5, p6)
 		-- upvalues: self (ref), p4 (ref), errorTransferModelModule (copy)
 		self.http:RequestInternal({
 			Method = "GET",
 			Url = p4,
 			Headers = { Accept = "application/json" }
-		}):Start(function(_, p7) --[[ line: 104 ]]
+		}):Start(function(_, p7)
 			-- upvalues: p5 (ref), self (copy), errorTransferModelModule (copy), p6 (ref)
 			if p7.StatusCode == 200 then
 				p5(self.http:JSONDecode(p7.Body))
@@ -86,9 +86,9 @@ function t:get(p4) --[[ line: 79 ]]
 	end)
 end
 
-function t:post(p12, p13) --[[ line: 131 ]]
+function t:post(p12, p13)
 	-- upvalues: promiseModule (ref), httpService (ref), rejectFromNetworkImpl (ref), errorTransferModelModule (ref)
-	return if self.networkImpl then promiseModule.new(function(p17, p18) --[[ line: 133 ]]
+	return if self.networkImpl then promiseModule.new(function(p17, p18)
 		-- upvalues: self (ref), p12 (ref), httpService (copy), p13 (ref), rejectFromNetworkImpl (copy)
 		self.networkImpl(p12, "POST", {
 			headers = {
@@ -96,14 +96,14 @@ function t:post(p12, p13) --[[ line: 131 ]]
 				Accept = "application/json"
 			},
 			postBody = httpService:JSONEncode(p13)
-		}):andThen(function(p19) --[[ line: 141 ]]
+		}):andThen(function(p19)
 			-- upvalues: p17 (ref)
 			p17(p19.responseBody)
-		end, function(p20) --[[ line: 143 ]]
+		end, function(p20)
 			-- upvalues: rejectFromNetworkImpl (copy), p18 (ref)
 			rejectFromNetworkImpl(p18, p20)
 		end)
-	end) else promiseModule.new(function(p14, p15) --[[ line: 149 ]]
+	end) else promiseModule.new(function(p14, p15)
 		-- upvalues: self (ref), p12 (ref), p13 (ref), errorTransferModelModule (copy)
 		self.http:RequestInternal({
 			Method = "POST",
@@ -113,7 +113,7 @@ function t:post(p12, p13) --[[ line: 131 ]]
 				Accept = "application/json"
 			},
 			Body = self.http:JSONEncode(p13)
-		}):Start(function(_, p16) --[[ line: 160 ]]
+		}):Start(function(_, p16)
 			-- upvalues: p14 (ref), self (copy), errorTransferModelModule (copy), p15 (ref)
 			if p16.StatusCode == 200 then
 				p14(self.http:JSONDecode(p16.Body))

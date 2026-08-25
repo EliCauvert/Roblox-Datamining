@@ -20,9 +20,9 @@ local list = {
 	externalSettingsModule
 }
 
-return function() --[[ line: 25 | named "launchPremiumUpsell" ]]
+return function()
 	-- upvalues: thunkModule (ref), list (ref), platformInterfaceModule (ref), externalSettingsModule (ref), analyticsModule (ref), purchaseCompleteRecievedModule (ref), setWindowStateModule (ref), windowStateModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), setPromptStateModule (ref), promptStateModule (ref), hideWindowModule (ref), playersService (ref), errorOccurredModule (ref), purchaseErrorModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1) --[[ line: 26 ]]
+	return thunkModule.new(script.Name, list, function(p0, p1)
 		-- upvalues: platformInterfaceModule (copy), externalSettingsModule (copy), analyticsModule (copy), purchaseCompleteRecievedModule (copy), setWindowStateModule (copy), windowStateModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), setPromptStateModule (copy), promptStateModule (copy), hideWindowModule (copy), playersService (copy), errorOccurredModule (copy), purchaseErrorModule (copy)
 		local var16 = p1[platformInterfaceModule]
 		local var17 = p1[externalSettingsModule]

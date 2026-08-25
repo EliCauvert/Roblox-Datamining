@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 19 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -12,32 +12,32 @@ function t.new(p0, p1) --[[ line: 19 ]]
 	return t_1
 end
 
-function t:getValue() --[[ line: 29 ]]
+function t:getValue()
 	return self._value
 end
 
-function t:getLabel() --[[ line: 33 ]]
+function t:getLabel()
 	return self._label
 end
 
-function t:getChildren() --[[ line: 37 ]]
+function t:getChildren()
 	return self._children
 end
 
-function t:getId() --[[ line: 41 ]]
+function t:getId()
 	return self._id
 end
 
-function t:getStackDepth() --[[ line: 45 ]]
+function t:getStackDepth()
 	return if self._parent == nil then 0 else 1 + self._parent:getStackDepth()
 end
 
-function t:setLabelAndValue(p2, p3) --[[ line: 53 ]]
+function t:setLabelAndValue(p2, p3)
 	self._label = p2
 	self._value = p3
 end
 
-function t:getOrMakeChildById(p4) --[[ line: 58 ]]
+function t:getOrMakeChildById(p4)
 	-- upvalues: t (ref)
 	for i, v in ipairs(self._children) do
 		if v:getId() == p4 then
@@ -50,7 +50,7 @@ function t:getOrMakeChildById(p4) --[[ line: 58 ]]
 	return var2
 end
 
-function t:removeChildren() --[[ line: 70 ]]
+function t:removeChildren()
 	if not self._children then return end
 	for i, v in ipairs(self._children) do
 		v:removeChildren()
@@ -61,7 +61,7 @@ function t:removeChildren() --[[ line: 70 ]]
 	self._children = nil
 end
 
-function t:removeChild(p5) --[[ line: 82 ]]
+function t:removeChild(p5)
 	for i, v in ipairs(self._children) do
 		if v:getId() == p5 then
 			v:removeChildren()

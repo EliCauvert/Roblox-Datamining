@@ -31,8 +31,8 @@ radioButton.defaultProps = {
 	isRoactGamepadEnabled = true
 }
 
-function radioButton.init(p0) --[[ line: 52 ]]
-	function p0.onSetValue() --[[ line: 53 ]]
+function radioButton.init(p0)
+	function p0.onSetValue()
 		-- upvalues: p0 (ref)
 		if not p0.props.isDisabled then
 			p0.props.onActivated(p0.props.id)
@@ -40,9 +40,9 @@ function radioButton.init(p0) --[[ line: 52 ]]
 	end
 end
 
-function radioButton.render(p1) --[[ line: 60 ]]
+function radioButton.render(p1)
 	-- upvalues: withStyleModule (ref), imagesModule (ref), roactGamepadModule (ref), inputButtonModule (ref), roactModule (ref)
-	return withStyleModule(function(p2) --[[ line: 61 ]]
+	return withStyleModule(function(p2)
 		-- upvalues: imagesModule (copy), p1 (ref), roactGamepadModule (copy), inputButtonModule (copy), roactModule (copy)
 		local uDim2
 		local theme = p2.Theme
@@ -87,7 +87,7 @@ function radioButton.render(p1) --[[ line: 60 ]]
 	end)
 end
 
-return roactModule.forwardRef(function(p3, p4) --[[ line: 117 ]]
+return roactModule.forwardRef(function(p3, p4)
 	-- upvalues: roactModule (ref), radioButton (ref), cryoModule (ref)
 	return roactModule.createElement(radioButton, cryoModule.Dictionary.join(p3, { forwardRef = p4 }))
 end)

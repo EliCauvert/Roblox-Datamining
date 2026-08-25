@@ -21,12 +21,12 @@ local t = {
 	expectedFailures = {}
 }
 
-local function _(p0, p1) --[[ line: 30 | named "vector3Equals" ]]
+local function _(p0, p1)
 	-- upvalues: floatEqualsModule (ref)
 	return floatEqualsModule(p0.X, p1.X, 0.00001) and (floatEqualsModule(p0.Y, p1.Y, 0.00001) and floatEqualsModule(p0.Z, p1.Z, 0.00001))
 end
 
-local function validateSingleMeshPart(p2, p3, p4) --[[ line: 35 ]]
+local function validateSingleMeshPart(p2, p3, p4)
 	-- upvalues: getEditableMeshFromContextModule (ref), errorSourceStringsModule (ref), getMeshSizeModule (ref), floatEqualsModule (ref)
 	local t = {
 		fieldName = "MeshId",
@@ -50,7 +50,7 @@ local function validateSingleMeshPart(p2, p3, p4) --[[ line: 35 ]]
 	end
 end
 
-function t.run(p5, p6) --[[ line: 58 ]]
+function t.run(p5, p6)
 	-- upvalues: validationEnumsModule (ref), validateSingleMeshPart (ref), constantsModule (ref)
 	local rootInstance = p6.rootInstance
 	local assetType = p6.uploadEnum.assetType

@@ -11,7 +11,7 @@ local memoize1 = require(script.Parent.memoize).memoize1
 local var2 = nil
 local var3 = nil
 
-function t.getDefinedRootType(p0, p1) --[[ line: 32 ]]
+function t.getDefinedRootType(p0, p1)
 	-- upvalues: var2 (write), error (ref)
 	local var4 = var2(p0):get(p1)
 	
@@ -21,9 +21,9 @@ function t.getDefinedRootType(p0, p1) --[[ line: 32 ]]
 	return var4
 end
 
-local function _(value) --[[ line: 47 | named "setToArray" ]]
+local function _(value)
 	local t = {}
-	value:forEach(function(p2) --[[ line: 49 ]]
+	value:forEach(function(p2)
 		-- upvalues: t (ref)
 		table.insert(t, p2)
 	end)
@@ -31,7 +31,7 @@ local function _(value) --[[ line: 47 | named "setToArray" ]]
 	return t
 end
 
-t.getRootTypeNames = memoize1(function(p3) --[[ line: 55 ]]
+t.getRootTypeNames = memoize1(function(p3)
 	-- upvalues: var3 (write), set (ref), array (ref)
 	local var6 = var3(p3)
 	local new = set.new
@@ -39,20 +39,20 @@ t.getRootTypeNames = memoize1(function(p3) --[[ line: 55 ]]
 	local concat = array.concat
 	local t = {}
 	local t_1 = {}
-	var6:forEach(function(p4) --[[ line: 49 ]]
+	var6:forEach(function(p4)
 		-- upvalues: t_1 (ref)
 		table.insert(t_1, p4)
 	end)
 	
-	return new(map(concat(t, t_1), function(p5) --[[ line: 59 ]]
+	return new(map(concat(t, t_1), function(p5)
 		return p5.name
 	end))
 end)
-t.getRootTypes = memoize1(function(p6) --[[ line: 67 ]]
+t.getRootTypes = memoize1(function(p6)
 	-- upvalues: var2 (write), set (ref)
 	return set.new(var2(p6):values())
 end)
-t.getRootTypeMap = memoize1(function(p7) --[[ line: 75 ]]
+t.getRootTypeMap = memoize1(function(p7)
 	-- upvalues: map (ref), boolean (ref)
 	local var9 = map.new()
 	local queryType = p7:getQueryType()

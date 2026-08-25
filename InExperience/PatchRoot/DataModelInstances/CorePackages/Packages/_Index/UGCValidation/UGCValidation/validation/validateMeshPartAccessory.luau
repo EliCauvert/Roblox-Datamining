@@ -46,7 +46,7 @@ local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(par
 local getFFlagUGCValidateMigrateMeshGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry)
 local meshpartAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("MeshpartAccessoryCheckAvatarPartScaleType", false)
 
-return function(p0) --[[ line: 58 | named "validateMeshPartAccessory" ]]
+return function(p0)
 	-- upvalues: rigidOrLayeredAllowedModule (ref), analyticsModule (ref), constantsModule (ref), validateSingleInstanceModule (ref), createMeshPartAccessorySchemaModule (ref), validateInstanceTreeModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), getEditableMeshFromContextModule (ref), getEditableImageFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), getExpectedPartSizeModule (ref), getAttachmentModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateTagsModule (ref), validateAttributesModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), getFFlagUGCValidateAccessoryAssetTextureLimitModule (ref), constantsInterfaceModule (ref), validateTextureSizeModule (ref), validateThumbnailConfigurationModule (ref), validateModerationModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), getFFlagUGCValidateMigrateMeshGeometryModule (ref), validateTotalSurfaceAreaModule (ref), validateMeshSizePropertyModule (ref), validateMeshBoundsModule (ref), validateMeshTrianglesModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), validateMeshVertColorsModule (ref), validateCoplanarIntersectionModule (ref), validateSurfaceAppearancesModule (ref), validateSurfaceAppearanceTextureSizeModule (ref), validateSurfaceAppearanceTransparencyModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), getEngineFeatureEngineUGCValidateRigidNonSkinnedModule (ref), validateRigidMeshNotSkinnedModule (ref), validateScaleTypeModule (ref)
 	assert(p0.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateMeshPartAccessory")
 	local instances = p0.instances
@@ -132,7 +132,7 @@ return function(p0) --[[ line: 58 | named "validateMeshPartAccessory" ]]
 	}
 	local _, var64 = getEditableImageFromContextModule(handle, "TextureID", p0)
 	t_1.editableImage = var64
-	local var65, var66 = pcallDeferredModule(function() --[[ line: 180 ]]
+	local var65, var66 = pcallDeferredModule(function()
 		-- upvalues: getMeshSizeModule (copy), t (ref)
 		return getMeshSizeModule(t)
 	end, p0)

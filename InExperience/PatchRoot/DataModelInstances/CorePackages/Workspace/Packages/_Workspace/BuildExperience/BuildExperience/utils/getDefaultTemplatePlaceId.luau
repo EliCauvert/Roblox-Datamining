@@ -5,9 +5,9 @@ local t = {
 	production = if game:DefineFastFlag("BuildExperienceConfigurableProductionTemplatePlaceId", false) then tonumber(game:DefineFastString("BuildExperienceProductionTemplatePlaceId", "95206881")) or 95206881 else 95206881
 }
 
-return function() --[[ line: 21 | named "getDefaultTemplatePlaceId" ]]
+return function()
 	-- upvalues: contentProviderService (ref), t (ref)
-	local ok, status = pcall(function() --[[ line: 22 ]]
+	local ok, status = pcall(function()
 		-- upvalues: contentProviderService (copy)
 		return contentProviderService.BaseUrl
 	end)

@@ -5,7 +5,7 @@ local recyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistr
 local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewRecord" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: recyclableViewRegistryModule (ref), signalsModule (ref), reactModule (ref), viewRecyclerModule (ref), signalsExperimentalModule (ref)
 	local metadata = recyclableViewRegistryModule.getMetadata(p1)
 	assert(metadata ~= nil, "RecyclableViewRecord: unknown Recyclable view type")
@@ -35,14 +35,14 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 	local var31 = true
 	local var32 = false
 	
-	local function bindHost(p5) --[[ line: 99 ]]
+	local function bindHost(p5)
 		-- upvalues: var32 (write), var22 (write)
 		assert(not var32, "RecyclableViewRecord: cannot bind a destroyed host")
 		assert(var22 == nil, "RecyclableViewRecord: host is already bound")
 		var22 = p5
 		local var38 = true
 		
-		return function() --[[ line: 104 ]]
+		return function()
 			-- upvalues: var38 (write), var22 (copy), p5 (ref)
 			if var38 and var22 == p5 then
 				var38 = false
@@ -51,7 +51,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		end
 	end
 	
-	local function valueSignal(value) --[[ line: 112 ]]
+	local function valueSignal(value)
 		-- upvalues: var11 (ref), var25 (write)
 		local var39 = var11(value)
 		assert(var39 ~= nil, "RecyclableViewRecord: value read before first Assignment")
@@ -59,7 +59,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		return if var25 == "composition" then var39.value.props else var39.value
 	end
 	
-	local function itemSignal(value) --[[ line: 120 ]]
+	local function itemSignal(value)
 		-- upvalues: var11 (ref)
 		local var40 = var11(value)
 		assert(var40 ~= nil, "RecyclableViewRecord: item read before first Assignment")
@@ -67,7 +67,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		return var40.value
 	end
 	
-	local function itemKeySignal(value) --[[ line: 126 ]]
+	local function itemKeySignal(value)
 		-- upvalues: var11 (ref)
 		local var41 = var11(value)
 		assert(var41 ~= nil, "RecyclableViewRecord: item key read before first Assignment")
@@ -75,7 +75,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		return var41.key
 	end
 	
-	local function _(p6) --[[ line: 132 | named "writeHostState" ]]
+	local function _(p6)
 		-- upvalues: var28 (write), p3 (ref), var31 (write), var8 (ref), var32 (write), frame (ref)
 		local var42 = "hidden"
 		
@@ -94,7 +94,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		return p6
 	end
 	
-	local function bindPlacement(p7, p8) --[[ line: 149 ]]
+	local function bindPlacement(p7, p8)
 		-- upvalues: var32 (write), var23 (write), var24 (write), var26 (write), var28 (write)
 		assert(not var32, "RecyclableViewRecord: cannot bind placement after destroy")
 		assert(p7 == nil == (p8 == nil), "RecyclableViewRecord: placement kind and port must be bound together")
@@ -111,7 +111,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		var24 = p7
 	end
 	
-	local _ = function(p9) --[[ line: 164 | named "preparePlacement" ]]
+	local _ = function(p9)
 		-- upvalues: var32 (write), var28 (write), var22 (write), var23 (write), var26 (write)
 		assert(not var32, "RecyclableViewRecord: cannot publish after destroy")
 		
@@ -127,7 +127,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		return var28
 	end
 	
-	local _ = function() --[[ line: 177 | named "publishHostState" ]]
+	local _ = function()
 		-- upvalues: var23 (write), t (ref), var28 (write), p3 (ref), var31 (write), var8 (ref), var32 (write), frame (ref)
 		if var23 == nil then return end
 		local var44 = "hidden"
@@ -153,7 +153,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		signal = var9,
 		itemSignal = itemSignal,
 		itemKeySignal = itemKeySignal,
-		set = if p3 == "ReadyOnAssignment" then function(value) --[[ line: 186 | named "setImmediate" ]]
+		set = if p3 == "ReadyOnAssignment" then function(value)
 			-- upvalues: var32 (write), var28 (write), var22 (write), var23 (write), var26 (write), var10 (ref), var31 (write), var25 (write), var24 (write), var12 (ref), t (ref), p3 (ref), var8 (ref), frame (ref)
 			assert(not var32, "RecyclableViewRecord: cannot publish after destroy")
 			local var50 = var28
@@ -191,7 +191,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 			t.phase = var53
 			t.visible = var52 ~= nil and var53 ~= "hidden"
 			var23.apply(t)
-		end else function(value) --[[ line: 201 | named "setCommitGated" ]]
+		end else function(value)
 			-- upvalues: var32 (write), var28 (write), var22 (write), var23 (write), var26 (write), var31 (write), var30 (write), signalsExperimentalModule (copy), var25 (write), var24 (write), var12 (ref), var16 (ref), var10 (ref), var14 (ref), t (ref), p3 (ref), var8 (ref), frame (ref)
 			assert(not var32, "RecyclableViewRecord: cannot publish after destroy")
 			
@@ -213,7 +213,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 			if value == nil or var46 then
 				var31 = false
 			end
-			signalsExperimentalModule.batch(function() --[[ line: 212 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: value (ref), var25 (copy), var24 (copy), var12 (copy), var46 (ref), var16 (copy), var30 (copy), var10 (copy), var14 (copy)
 				if value ~= nil then
 					var25 = var24
@@ -253,7 +253,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		valueSignal = valueSignal,
 		pending = var13,
 		contentRevision = var15,
-		commitContent = function(p10, p11) --[[ line: 231 ]]
+		commitContent = function(p10, p11)
 			-- upvalues: var28 (write), var32 (write), p3 (ref), var30 (write), var31 (write), var14 (ref), var23 (write), t (ref), var8 (ref), frame (ref)
 			if var32 or p3 ~= "ReadyOnCommit" or (var28 == nil or var28.generation ~= p10) or p11 ~= var30 then
 				return false
@@ -280,7 +280,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 		hideWhilePending = var8,
 		structuralPlacement = var17,
 		compositionPlacementManager = var19,
-		setStructuralPlacement = function(value, p12) --[[ line: 265 ]]
+		setStructuralPlacement = function(value, p12)
 			-- upvalues: var29 (write), var18 (ref)
 			if var29.axis == value and var29.selfSizing == p12 then
 				return
@@ -289,24 +289,24 @@ return function(p0, p1, p2, p3, p4) --[[ line: 59 | named "createRecyclableViewR
 			var18(var29)
 		end,
 		setCompositionPlacementManager = var20,
-		portalFrame = function(_) --[[ line: 276 ]]
+		portalFrame = function(_)
 			-- upvalues: var32 (write), frame (ref)
 			return if var32 then nil else frame
 		end,
 		bindHost = bindHost,
-		clearSelection = function() --[[ line: 280 ]]
+		clearSelection = function()
 			-- upvalues: var22 (write)
 			if var22 ~= nil then
 				var22.clearSelection()
 			end
 		end,
-		detachFromPlaceholder = function(p13) --[[ line: 286 ]]
+		detachFromPlaceholder = function(p13)
 			-- upvalues: var22 (write)
 			if var22 ~= nil then
 				var22.detachFromPlaceholder(p13)
 			end
 		end,
-		destroy = function() --[[ line: 292 ]]
+		destroy = function()
 			-- upvalues: var32 (write), var23 (write), var24 (write), var22 (write), var14 (ref), frame (ref)
 			if var32 then return end
 			if var23 ~= nil then

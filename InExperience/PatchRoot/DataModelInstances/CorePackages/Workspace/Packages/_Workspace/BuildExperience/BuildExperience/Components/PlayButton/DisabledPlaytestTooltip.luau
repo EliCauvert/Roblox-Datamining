@@ -11,7 +11,7 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 25 | named "DisabledPlaytestTooltip" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), educationalTooltip (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), popoverSide (ref)
 	local PLAYTEST_DISABLED_TOOLTIP, PLAYTEST_TITLE
 	local var6 = if fFlagBuildLocalization then useLocalization({

@@ -2,7 +2,7 @@
 local tooltipContextModule = require(script.Parent.TooltipContext)
 local _ = require(script.Parent.TooltipProvider)
 
-function useIsTooltipTurn(p0) --[[ line: 9 ]]
+function useIsTooltipTurn(p0)
 	-- upvalues: reactModule (ref), tooltipContextModule (ref)
 	local var2 = reactModule.useContext(tooltipContextModule)
 	

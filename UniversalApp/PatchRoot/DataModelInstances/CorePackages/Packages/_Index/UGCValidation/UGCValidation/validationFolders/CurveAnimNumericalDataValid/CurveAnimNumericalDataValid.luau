@@ -23,12 +23,12 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function areNumbersGood(...) --[[ line: 30 ]]
-	local function _(p0) --[[ line: 31 | named "isNaN" ]]
+local function areNumbersGood(...)
+	local function _(p0)
 		return p0 ~= p0
 	end
 	
-	local _ = function(p1) --[[ line: 35 | named "isInfinite" ]]
+	local _ = function(p1)
 		return if p1 ~= 1e999 then p1 == -1e999 else true
 	end
 	
@@ -43,7 +43,7 @@ local function areNumbersGood(...) --[[ line: 30 ]]
 	return true
 end
 
-function t.run(p2, p3) --[[ line: 50 ]]
+function t.run(p2, p3)
 	-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFStringUGCValidateFrameDeltaKeyTimeTolModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), getFFlagUGCValidateRestrictNumMarkersInsideMarkerCurvesModule (ref), getFIntUGCValidateMaxTotalInternalMarkersModule (ref), errorSourceStringsModule (ref), areNumbersGood (ref), getFIntUGCValidateMaxMarkerCurveValueLengthModule (ref)
 	local markers, minValue
 	local var11 = 1 / getFIntUGCValidateMaxAnimationFPSModule() * getFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber()

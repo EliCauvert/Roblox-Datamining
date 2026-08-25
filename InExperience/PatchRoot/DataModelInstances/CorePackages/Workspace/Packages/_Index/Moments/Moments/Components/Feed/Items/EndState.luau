@@ -6,13 +6,13 @@ local momentsEndStateItemModule = require(script.MomentsEndStateItem)
 return {
 	{
 		kind = "endState",
-		getKey = function(_) --[[ line: 29 ]]
+		getKey = function(_)
 			return "__feed_end_state__"
 		end,
-		getAttribution = function(_) --[[ line: 34 ]]
+		getAttribution = function(_)
 			return nil
 		end,
-		render = function(_, _) --[[ line: 38 ]]
+		render = function(_, _)
 			-- upvalues: reactModule (ref), momentsEndStateItemModule (ref)
 			return reactModule.createElement(momentsEndStateItemModule)
 		end

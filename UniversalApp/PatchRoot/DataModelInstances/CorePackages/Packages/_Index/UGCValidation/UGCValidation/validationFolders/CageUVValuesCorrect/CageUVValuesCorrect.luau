@@ -14,7 +14,7 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 38 ]]
+	run = function(p0, p1)
 		-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
 		for i, v in p1.outerCagesData do
 			local var4 = wrapTargetCageUVReferenceValuesModule[i]

@@ -2,11 +2,11 @@
 local fireTelemetryModule = require(script:FindFirstAncestor("SocialLuaAnalytics").Analytics.FireEvent.fireTelemetry)
 local socialLuaAnalyticsUseTelemetryServiceAsDefault = game:DefineFastFlag("SocialLuaAnalyticsUseTelemetryServiceAsDefault", false)
 
-return function(value) --[[ line: 34 | named "telemetrySetup" ]]
+return function(value)
 	-- upvalues: socialLuaAnalyticsUseTelemetryServiceAsDefault (ref), fireTelemetryModule (ref)
 	local var2 = if value.shouldUseTelemetryService ~= nil then socialLuaAnalyticsUseTelemetryServiceAsDefault else value.shouldUseTelemetryService
 	
-	local function emitTelemetry(p0, p1) --[[ line: 39 ]]
+	local function emitTelemetry(p0, p1)
 		-- upvalues: fireTelemetryModule (copy), value (ref), var2 (ref)
 		return fireTelemetryModule({
 			telemetryImpl = value.telemetryImpl,

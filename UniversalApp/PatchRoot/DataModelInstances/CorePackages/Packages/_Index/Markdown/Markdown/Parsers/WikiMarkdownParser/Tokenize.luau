@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 local insert = table.insert
 
-return function(p0) --[[ line: 11 | named "tokenize" ]]
+return function(p0)
 	-- upvalues: insert (ref)
 	local var4, var6, var7, var8, var9
 	local t = {

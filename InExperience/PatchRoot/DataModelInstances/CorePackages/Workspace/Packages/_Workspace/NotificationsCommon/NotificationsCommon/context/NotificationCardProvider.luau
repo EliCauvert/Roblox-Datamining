@@ -5,7 +5,7 @@ local reactModule = require(parent_1.Parent.React)
 local _ = require(parent_1.type)
 local constantsModule = require(parent_1.constants)
 
-return function(p0) --[[ line: 24 | named "NotificationCardProvider" ]]
+return function(p0)
 	-- upvalues: constantsModule (ref), reactModule (ref), notificationCardContextModule (ref)
 	local t = {
 		thumbnail = constantsModule.CardSizeDefault.thumbnail,

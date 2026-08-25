@@ -19,7 +19,7 @@ local t = {
 	[socialMediaTypes.X] = images["icons/brands/x"]
 }
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), t (ref), reactModule (ref), socialLinksCarouselModule (ref)
 	local var8 = useProfileJsonComponentModule(enumsModule.Components.SocialLinks)
 	local var9 = useLocalization({
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 31 ]]
 		x = textKeysModule.X
 	})
 	
-	local var10 = function(p1) --[[ line: 43 ]]
+	local var10 = function(p1)
 		-- upvalues: var9 (ref), t (copy)
 		local t_1 = {}
 		
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 31 ]]
 		return t_1
 	end
 	
-	local var11 = reactModule.useMemo(function() --[[ line: 60 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var10 (ref), var8 (ref)
 		return var10(var8)
 	end, { var8, var9 })

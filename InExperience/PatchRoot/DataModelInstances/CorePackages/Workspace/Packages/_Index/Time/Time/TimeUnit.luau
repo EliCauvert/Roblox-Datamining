@@ -1,5 +1,5 @@
 ﻿local tbl = setmetatable({}, {
-	__index = function(_, p0) --[[ line: 2 ]]
+	__index = function(_, p0)
 		error(("Invalid TimeUnit \"%s\""):format(tostring(p0)), 2)
 	end
 })

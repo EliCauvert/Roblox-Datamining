@@ -19,9 +19,9 @@ local localizeErrorCodeStringFFlag = settings():GetFFlag("LocalizeErrorCodeStrin
 local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut, 0, false, 0)
 local var15 = localization.new(localizationService.RobloxLocaleId)
 
-local function _(p0, p1, p2) --[[ line: 34 | named "attemptTranslate" ]]
+local function _(p0, p1, p2)
 	-- upvalues: var15 (ref)
-	local ok, status = pcall(function() --[[ line: 35 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var15 (copy), p0 (ref), p2 (ref)
 		return var15:Format(p0, p2)
 	end)
@@ -30,7 +30,7 @@ local function _(p0, p1, p2) --[[ line: 34 | named "attemptTranslate" ]]
 end
 
 local t = {
-	Default = function() --[[ line: 43 ]]
+	Default = function()
 		-- upvalues: create (ref), constants (ref)
 		return create("Frame")({
 			Name = "ErrorPrompt",
@@ -143,7 +143,7 @@ local t = {
 	end
 }
 local t_1 = {
-	Default = function(p3, p4, p5) --[[ line: 159 ]]
+	Default = function(p3, p4, p5)
 		-- upvalues: create (ref), constants (ref)
 		return create("ImageButton")({
 			Name = p3 .. "Button",
@@ -174,7 +174,7 @@ local t_1 = {
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p6, p7) --[[ line: 197 ]]
+function t_2.new(p6, p7)
 	-- upvalues: t_2 (ref), t (ref), tweenService (ref), tweenInfo (ref), VRService (ref), userInputService (ref), guiService (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl._frame = p6 and t[p6]() or t.Default()
@@ -199,7 +199,7 @@ function t_2.new(p6, p7) --[[ line: 197 ]]
 		tbl._frame.MessageArea.ErrorFrame.ErrorMessage.TextScaled = p7.MessageTextScaled or false
 	end
 	if not VRService.VREnabled and userInputService.GamepadEnabled then
-		guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 230 ]]
+		guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 			-- upvalues: tbl (ref), guiService (copy)
 			if tbl._isOpen and guiService.SelectedCoreObject == nil then
 				guiService:Select(tbl._frame.MessageArea.ErrorFrame.ButtonArea)
@@ -209,11 +209,11 @@ function t_2.new(p6, p7) --[[ line: 197 ]]
 	return tbl
 end
 
-local function sinkInput(_, _, _) --[[ line: 240 ]]
+local function sinkInput(_, _, _)
 	return Enum.ContextActionResult.Sink
 end
 
-function t_2:_open(p8, p9, p10) --[[ line: 244 ]]
+function t_2:_open(p8, p9, p10)
 	-- upvalues: robloxGui (ref), mouseIconOverrideService (ref), guiService (ref), VRService (ref), userInputService (ref), contextActionService (ref), sinkInput (ref)
 	self:setErrorText(p8, p9, p10)
 	self:_resizeHeight(robloxGui.AbsoluteSize.Y)
@@ -238,7 +238,7 @@ function t_2:_open(p8, p9, p10) --[[ line: 244 ]]
 	contextActionService:BindCoreAction("ErrorPromptAction", sinkInput, false, Enum.KeyCode.ButtonSelect, Enum.KeyCode.ButtonStart)
 end
 
-function t_2:_close() --[[ line: 266 ]]
+function t_2:_close()
 	-- upvalues: mouseIconOverrideService (ref), guiService (ref), contextActionService (ref)
 	if self._isOpen then
 		mouseIconOverrideService.pop("ErrorPromptOverride")
@@ -256,11 +256,11 @@ function t_2:_close() --[[ line: 266 ]]
 	end
 end
 
-function t_2:setParent(p11) --[[ line: 282 ]]
+function t_2:setParent(p11)
 	self._frame.Parent = p11
 end
 
-function t_2:setErrorText(p12, p13, p14) --[[ line: 286 ]]
+function t_2:setErrorText(p12, p13, p14)
 	-- upvalues: runService (ref), localizeErrorCodeStringFFlag (ref), var15 (ref), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
 	local errorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
 	local robloxClientChannel = runService:GetRobloxClientChannel()
@@ -274,7 +274,7 @@ function t_2:setErrorText(p12, p13, p14) --[[ line: 286 ]]
 		local var23 = ("Error Code: %d"):format(var22)
 		local t = { ERROR_CODE = tostring(var22) }
 		local var25 = "InGame.ConnectionError.Message.ErrorCode"
-		local ok, status = pcall(function() --[[ line: 35 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var15 (copy), var25 (ref), t (ref)
 			return var15:Format(var25, t)
 		end)
@@ -295,14 +295,14 @@ function t_2:setErrorText(p12, p13, p14) --[[ line: 286 ]]
 	errorMessage.Text = ("%s\n(Error Code: -1)"):format(p12)
 end
 
-function t_2:setErrorTitle(p15, p16) --[[ line: 325 ]]
+function t_2:setErrorTitle(p15, p16)
 	-- upvalues: var15 (ref)
 	if not p15 then return end
 	local errorTitle = self._frame.TitleFrame.ErrorTitle
 	
 	if p16 then
 		local var28 = nil
-		local ok, status = pcall(function() --[[ line: 35 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var15 (copy), p16 (ref), var28 (ref)
 			return var15:Format(p16, var28)
 		end)
@@ -313,7 +313,7 @@ function t_2:setErrorTitle(p15, p16) --[[ line: 325 ]]
 	errorTitle.Text = p15
 end
 
-function t_2:onErrorChanged(p17, p18, p19) --[[ line: 337 ]]
+function t_2:onErrorChanged(p17, p18, p19)
 	if p17 == "" then
 		self:_close()
 		
@@ -323,7 +323,7 @@ function t_2:onErrorChanged(p17, p18, p19) --[[ line: 337 ]]
 	end
 end
 
-function t_2:_relayout() --[[ line: 346 ]]
+function t_2:_relayout()
 	-- upvalues: constants (ref)
 	local buttonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
 	
@@ -337,7 +337,7 @@ function t_2:_relayout() --[[ line: 346 ]]
 	buttonArea.ButtonLayout.CellSize = UDim2.new(0, var29, 0, constants.BUTTON_HEIGHT)
 end
 
-function t_2:clearButtons() --[[ line: 358 ]]
+function t_2:clearButtons()
 	local buttonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
 	
 	if self._primaryShimmer then
@@ -350,7 +350,7 @@ function t_2:clearButtons() --[[ line: 358 ]]
 	end
 end
 
-function t_2:updateButtons(p20, p21) --[[ line: 391 ]]
+function t_2:updateButtons(p20, p21)
 	-- upvalues: var15 (ref), t_1 (ref), shimmerModule (ref)
 	if not p20 then
 		p20 = {}
@@ -369,7 +369,7 @@ function t_2:updateButtons(p20, p21) --[[ line: 391 ]]
 			local localizationKey = v.LocalizationKey
 			local text_1 = v.Text
 			local var31 = nil
-			local ok, status = pcall(function() --[[ line: 35 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var15 (copy), localizationKey (ref), var31 (ref)
 				return var15:Format(localizationKey, var31)
 			end)
@@ -390,25 +390,25 @@ function t_2:updateButtons(p20, p21) --[[ line: 391 ]]
 	end
 end
 
-function t_2:primaryShimmerPlay() --[[ line: 425 ]]
+function t_2:primaryShimmerPlay()
 	if self._primaryShimmer then
 		self._primaryShimmer:play()
 	end
 end
 
-function t_2:primaryShimmerStop() --[[ line: 431 ]]
+function t_2:primaryShimmerStop()
 	if self._primaryShimmer then
 		self._primaryShimmer:stop()
 	end
 end
 
-function t_2:resizeWidthAndHeight(p22, p23) --[[ line: 437 ]]
+function t_2:resizeWidthAndHeight(p22, p23)
 	self:_resizeWidth(p22)
 	self:_resizeHeight(p23)
 	self:_relayout()
 end
 
-function t_2:_resizeWidth(p24) --[[ line: 443 ]]
+function t_2:_resizeWidth(p24)
 	-- upvalues: constants (ref)
 	local offset = self._frame.Size.X.Offset
 	local var33 = p24 - 2 * constants.SIDE_MARGIN
@@ -424,7 +424,7 @@ function t_2:_resizeWidth(p24) --[[ line: 443 ]]
 	self._frame.Size = UDim2.new(0, var33, 0, self._frame.Size.Y.Offset)
 end
 
-function t_2:_resizeHeight(p25) --[[ line: 466 ]]
+function t_2:_resizeHeight(p25)
 	-- upvalues: constants (ref), textService (ref)
 	local errorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
 	self._frame.Size = UDim2.new(0, self._frame.Size.X.Offset, 0, math.max(math.min(constants.ERROR_TITLE_FRAME_HEIGHT.Default + textService:GetTextSize(errorMessage.Text, errorMessage.TextSize, errorMessage.Font, Vector2.new(self._frame.Size.X.Offset - 2 * constants.SIDE_PADDING, 1000)).Y + constants.SPLIT_LINE_THICKNESS + constants.BUTTON_HEIGHT + constants.LAYOUT_PADDING + 2 * constants.SIDE_PADDING + 1, p25 - 2 * constants.VERTICAL_MARGIN), constants.ERROR_PROMPT_MIN_HEIGHT.Default))

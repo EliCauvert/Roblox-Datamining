@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0) --[[ line: 10 | named "Divider" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref)
 	local var1 = useDesignTokens()
 	

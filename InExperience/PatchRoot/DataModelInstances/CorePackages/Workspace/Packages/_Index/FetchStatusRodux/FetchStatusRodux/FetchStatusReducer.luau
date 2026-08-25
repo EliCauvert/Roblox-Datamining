@@ -6,7 +6,7 @@ local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
 local _ = require(parent.DiscoveryTypes)
 local fFlagLuaAppSortDeeplinkFix = require(parent.SharedFlags).FFlagLuaAppSortDeeplinkFix
 
-local function initializeFetchStatus() --[[ line: 11 ]]
+local function initializeFetchStatus()
 	-- upvalues: fetchStatusNamespaceModule (ref), retrievalStatus (ref), fFlagLuaAppSortDeeplinkFix (ref)
 	return {
 		[fetchStatusNamespaceModule.GameSortToken] = {
@@ -23,7 +23,7 @@ end
 
 return {
 	key = "FetchStatusKey",
-	reducer = function(p0, p1) --[[ line: 25 ]]
+	reducer = function(p0, p1)
 		-- upvalues: initializeFetchStatus (ref), setFetchStatusModule (ref)
 		p0 = p0 or initializeFetchStatus()
 		

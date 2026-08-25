@@ -12,14 +12,14 @@ local screenSizeImpressionsDetector = require(parent.Impressions).ScreenSizeImpr
 local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 local var7 = if not fFlagSduiEdpStoreImpressionsLogging then game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0) else nil
 
-return function(p0) --[[ line: 33 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signal (ref), fFlagSduiEdpStoreImpressionsLogging (ref), constantsModule (ref), edpStoreAnalyticsLoggerModule (ref), var7 (write), telemetryService (ref), IXPService (ref), appUserLayers (ref), screenSizeImpressionsDetector (ref)
 	local var8 = reactModule.useRef(signal.new())
 	local var9 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var8 (ref)
 		if p0.scrollViewPositionChangedSignal.current then
-			p0.scrollViewPositionChangedSignal.current:connect(function() --[[ line: 39 ]]
+			p0.scrollViewPositionChangedSignal.current:connect(function()
 				-- upvalues: var8 (copy)
 				var8.current:fire()
 			end)
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 33 ]]
 	return reactModule.createElement(screenSizeImpressionsDetector, {
 		parentRef = p0.parentRef,
 		onRequestImpressionsSignal = var8.current,
-		onImpressionsDetected = reactModule.useCallback(function(p1) --[[ line: 45 ]]
+		onImpressionsDetected = reactModule.useCallback(function(p1)
 			-- upvalues: var9 (ref), p0 (ref), fFlagSduiEdpStoreImpressionsLogging (copy), constantsModule (copy), edpStoreAnalyticsLoggerModule (copy), var7 (copy), telemetryService (copy), IXPService (copy), appUserLayers (copy)
 			if #p1 == 0 or var9.current then return end
 			if p0.parameters == nil then return end

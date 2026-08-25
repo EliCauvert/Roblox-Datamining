@@ -11,7 +11,7 @@ local extractReactionsByMomentIdModule = require(dataHydration.Moments.Util.extr
 local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extractShareInfoByMomentId)
 local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
 local var10 = httpClientModule.createMockNetwork({
-	fallback = function() --[[ line: 25 ]]
+	fallback = function()
 		-- upvalues: httpService (ref)
 		return {
 			statusCode = 200,
@@ -20,7 +20,7 @@ local var10 = httpClientModule.createMockNetwork({
 	end
 })
 
-return function(p0, p1, p2, p3) --[[ line: 32 | named "fetchTrendingMoments" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: constructApiUrlModule (ref), httpModule (ref), httpService (ref), fFlagArgusUseMockFeedItemsModule (ref), httpClientModule (ref), var10 (ref), mockTrendingMomentsModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
 	local var11, var12 = constructApiUrlModule("content-captures-api/v2/moments/get-moment-recommendations")
 	local var13 = fFlagArgusUseMockFeedItemsModule()
@@ -35,7 +35,7 @@ return function(p0, p1, p2, p3) --[[ line: 32 | named "fetchTrendingMoments" ]]
 		})}`,
 		headers = var12,
 		network = if var13 then var10 else p2,
-		decode = function(p4) --[[ line: 53 ]]
+		decode = function(p4)
 			-- upvalues: var13 (ref), mockTrendingMomentsModule (copy), convertApiMomentsToMomentItemsModule (copy), p1 (ref), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
 			return if var13 then {
 				nextCursor = nil,

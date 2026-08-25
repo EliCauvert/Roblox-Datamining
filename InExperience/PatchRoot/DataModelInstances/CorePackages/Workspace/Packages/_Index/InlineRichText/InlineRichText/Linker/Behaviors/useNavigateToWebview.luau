@@ -10,17 +10,17 @@ local _ = require(inlineRichText.Types)
 local fFlagInlineRichTextUseWebViewService = require(parent.SharedFlags).FFlagInlineRichTextUseWebViewService
 local openWebViewModule = require(inlineRichText.Utils.openWebView)
 
-return function(_) --[[ line: 20 ]]
+return function(_)
 	-- upvalues: fFlagInlineRichTextUseWebViewService (ref), reactModule (ref), openWebViewModule (ref), useDispatch (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
 	if fFlagInlineRichTextUseWebViewService then
-		return reactModule.useCallback(function(p0) --[[ line: 22 ]]
+		return reactModule.useCallback(function(p0)
 			-- upvalues: openWebViewModule (copy)
 			openWebViewModule(p0)
 		end, {})
 	end
 	local var4 = useDispatch()
 	
-	return reactModule.useCallback(function(p1) --[[ line: 27 ]]
+	return reactModule.useCallback(function(p1)
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), var4 (ref), navigateDown (copy)
 		local t = { name = appPage.GenericWebPage, detail = p1 }
 		

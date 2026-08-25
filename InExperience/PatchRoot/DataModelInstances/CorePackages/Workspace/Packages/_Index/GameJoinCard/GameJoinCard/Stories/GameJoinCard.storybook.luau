@@ -11,9 +11,9 @@ local roduxModule = require(parent.Dev.Rodux)
 local roactRoduxModule = require(parent.Dev.RoactRodux)
 local t = {}
 
-local function createStore(_) --[[ line: 15 ]]
+local function createStore(_)
 	-- upvalues: roduxModule (ref)
-	return roduxModule.Store.new(function() --[[ line: 16 ]]
+	return roduxModule.Store.new(function()
 		return {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 0 },
@@ -27,15 +27,15 @@ return {
 	storyRoot = gameJoinCard.Stories,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapDefinition = function(p0) --[[ line: 37 ]]
+	mapDefinition = function(p0)
 		-- upvalues: cryoModule (ref), t (ref)
 		return cryoModule.Dictionary.join(p0, {
 			controls = cryoModule.Dictionary.join(t, p0.controls or {})
 		})
 	end,
-	mapStory = function(p1) --[[ line: 41 ]]
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref), mockLocale (ref)
-		return function(p2) --[[ line: 42 ]]
+		return function(p2)
 			-- upvalues: reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), mockLocale (copy), p1 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, {
 				withUiModeSupport = false,

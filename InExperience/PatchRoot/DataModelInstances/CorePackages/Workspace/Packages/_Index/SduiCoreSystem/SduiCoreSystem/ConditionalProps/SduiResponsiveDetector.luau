@@ -8,7 +8,7 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
 local checkResponsiveConditions = require(sduiCoreSystem.SduiResponsiveHelpers).checkResponsiveConditions
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "SduiResponsiveDetector" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getDisplayStore (ref), getInputModeStore (ref), reactModule (ref), checkResponsiveConditions (ref), signalsModule (ref)
 	local allConditionalProps = p0.allConditionalProps
 	local setFailedResponsivePropIndexes = p0.setFailedResponsivePropIndexes
@@ -17,11 +17,11 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "SduiResponsiveDetect
 	local getLastInputType = getInputModeStore(false).getLastInputType
 	local getPreferredInputType = getInputModeStore(false).getPreferredInputType
 	local getIsSpatial = getDisplayStore(false).getIsSpatial
-	reactModule.useLayoutEffect(function() --[[ line: 35 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: checkResponsiveConditions (copy), allConditionalProps (ref), sduiContext (ref), setFailedResponsivePropIndexes (ref), getViewportSize (ref), getLastInputType (ref), getPreferredInputType (ref), getIsSpatial (ref), signalsModule (copy)
 		local t = {}
 		
-		local function checkConditions(p1, p2, p3, p4) --[[ line: 38 ]]
+		local function checkConditions(p1, p2, p3, p4)
 			-- upvalues: checkResponsiveConditions (copy), allConditionalProps (copy), sduiContext (copy), t (write), setFailedResponsivePropIndexes (copy)
 			local var5 = checkResponsiveConditions(allConditionalProps, p1, p2, p3, p4, sduiContext)
 			local var6 = nil
@@ -48,7 +48,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "SduiResponsiveDetect
 		
 		checkConditions(getViewportSize(false), getLastInputType(false), getPreferredInputType(false), getIsSpatial(false))
 		
-		return signalsModule.createEffect(function(p5) --[[ line: 77 ]]
+		return signalsModule.createEffect(function(p5)
 			-- upvalues: checkConditions (ref), getViewportSize (copy), getLastInputType (copy), getPreferredInputType (copy), getIsSpatial (copy)
 			checkConditions(getViewportSize(p5), getLastInputType(p5), getPreferredInputType(p5), getIsSpatial(p5))
 		end)

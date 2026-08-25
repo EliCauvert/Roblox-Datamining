@@ -47,7 +47,7 @@ local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExp
 local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
 
 if var21 then
-	(function() --[[ line: 64 | named "SetGlobalGuiInset" ]]
+	(function()
 		-- upvalues: guiService (ref), constantsModule (ref), displayModule (ref)
 		local guiInset, guiInset_1 = guiService:GetGuiInset()
 		guiService:SetGlobalGuiInset(guiInset.X, constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight), guiInset_1.X, guiInset_1.Y)
@@ -87,7 +87,7 @@ local isRunningInStudio = require(corePackagesService.Workspace.Packages.AppComm
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 123 ]]
+function t.new()
 	-- upvalues: t (ref), globalConfigModule (ref), roactModule (ref), tenFootInterfaceModule (ref), var21 (ref), guiService (ref), constantsModule (ref), fFlagEnablePlaytestModeUnibar (ref), roduxModule (ref), reducerModule (ref), fFlagTopBarSignalizeSetCores (ref), registerSetCoresModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), getCanChatModule (ref), fFlagTopBarDeprecateGameInfoRoduxModule (ref), getGameNameModule (ref), getFFlagDebugEnableVRFTUXExperienceInStudioModule (ref), isRunningInStudio (ref), FTUXModule (ref), platformEnumModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setSmallTouchDeviceModule (ref), utilityModule (ref), colorMode (ref), constants (ref), uiModeStyleProvider (ref), var30 (ref), fFlagAddMenuNavigationToggleDialog (ref), fFlagGamepadNavigationDialogABTestModule (ref), designTokenProvider (ref), menuNavigationPromptTokenMapperModule (ref), serviceModule (write), fFlagAddTopBarScrimModule (ref), reactModule (ref), topBarScrimModule (write), roactRoduxModule (ref), fFlagTopBarRefactor (ref), fFlagShowGameAgeRating (ref), roactAppPolicy (ref), topBarAppPolicyModule (ref), appFeaturePolicies (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), getFFlagEnableCrossExpVoice (ref), component (ref), reactSceneUnderstandingModule (ref), voiceStateContextModule (ref), coreGuiService (ref), updateUnreadMessagesBadgeModule (ref), fFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (ref)
 	local tbl = setmetatable({}, t)
 	
@@ -124,7 +124,7 @@ function t.new() --[[ line: 123 ]]
 		require(robloxGui.Modules.InGameMenuInit).mountInGameMenu()
 	end
 	if not fFlagTopBarDeprecateDisplayOptionsRoduxModule then
-		coroutine.wrap(function() --[[ line: 180 ]]
+		coroutine.wrap(function()
 			-- upvalues: tbl (ref), setSmallTouchDeviceModule (copy), utilityModule (copy)
 			tbl.store:dispatch(setSmallTouchDeviceModule(utilityModule:IsSmallTouchScreen()))
 		end)()
@@ -134,7 +134,7 @@ function t.new() --[[ line: 123 ]]
 		fontName = constants.FontName.Gotham
 	}
 	
-	local function wrapWithUiModeStyleProvider(p0) --[[ line: 190 ]]
+	local function wrapWithUiModeStyleProvider(p0)
 		-- upvalues: roactModule (copy), uiModeStyleProvider (copy), t_1 (ref)
 		return {
 			UiModeStyleProvider = roactModule.createElement(uiModeStyleProvider, { style = t_1 }, p0)
@@ -179,7 +179,7 @@ function t.new() --[[ line: 123 ]]
 	tbl.element = roactModule.mount(tbl.root, coreGuiService, "TopBar")
 	
 	if not fFlagTopBarDeprecateChatRoduxModule then
-		game:GetService("TextChatService").MessageReceived:Connect(function() --[[ line: 269 ]]
+		game:GetService("TextChatService").MessageReceived:Connect(function()
 			-- upvalues: tbl (ref), updateUnreadMessagesBadgeModule (copy)
 			tbl.store:dispatch(updateUnreadMessagesBadgeModule(1))
 		end)
@@ -188,7 +188,7 @@ function t.new() --[[ line: 123 ]]
 		local userInputService = game:GetService("UserInputService")
 		local gamepadConnectedConnection = nil
 		
-		local function disconnectGamepadConnected() --[[ line: 277 ]]
+		local function disconnectGamepadConnected()
 			-- upvalues: gamepadConnectedConnection (write)
 			if gamepadConnectedConnection then
 				gamepadConnectedConnection:Disconnect()
@@ -199,7 +199,7 @@ function t.new() --[[ line: 123 ]]
 		if userInputService:GetGamepadConnected(Enum.UserInputType.Gamepad1) then
 			tbl:setGamepadNavigationDialogOpen(true)
 		else
-			gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function() --[[ line: 286 ]]
+			gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function()
 				-- upvalues: tbl (ref), gamepadConnectedConnection (write)
 				tbl:setGamepadNavigationDialogOpen(true)
 				
@@ -214,7 +214,7 @@ function t.new() --[[ line: 123 ]]
 	return tbl
 end
 
-function t:setInspectMenuOpen(p1) --[[ line: 298 ]]
+function t:setInspectMenuOpen(p1)
 	-- upvalues: fFlagTopBarSignalizeMenuOpen (ref), setInspectMenuOpenModule (ref)
 	if fFlagTopBarSignalizeMenuOpen then
 		return
@@ -222,12 +222,12 @@ function t:setInspectMenuOpen(p1) --[[ line: 298 ]]
 	self.store:dispatch(setInspectMenuOpenModule(p1))
 end
 
-function t:setGamepadMenuOpen(p2) --[[ line: 305 ]]
+function t:setGamepadMenuOpen(p2)
 	-- upvalues: setGamepadMenuOpenModule (ref)
 	self.store:dispatch(setGamepadMenuOpenModule(p2))
 end
 
-function t:setGamepadNavigationDialogOpen(p3) --[[ line: 309 ]]
+function t:setGamepadNavigationDialogOpen(p3)
 	-- upvalues: fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setGamepadNavigationDialogOpenModule (ref)
 	if not fFlagTopBarDeprecateDisplayOptionsRoduxModule then
 		self.store:dispatch(setGamepadNavigationDialogOpenModule(p3))

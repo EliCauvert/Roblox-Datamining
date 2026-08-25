@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("VoiceChatLocalMutedNilFix", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("VoiceChatLocalMutedNilFix")
 end

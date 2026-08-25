@@ -27,7 +27,7 @@ local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 
-function InterventionDialog(p0) --[[ line: 50 ]]
+function InterventionDialog(p0)
 	-- upvalues: useLayerCollector (ref), reactModule (ref), useTokens (ref), useStyle (ref), useInterventionPlacementModule (ref), useLocalization (ref), constantsModule (ref), interventionAnalyticsModule (ref), notificationModalsManagerModule (ref), accept (ref), useScrollFrameHeightCalculationModule (ref), useCursor (ref), modalWindow (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), icon (ref), text (ref), fFlagExpChatEnableFriendsTab (ref), buttonStack (ref), buttonType (ref)
 	local absoluteSize = useLayerCollector().absoluteSize
 	local var10 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
@@ -35,7 +35,7 @@ function InterventionDialog(p0) --[[ line: 50 ]]
 	local var12 = useStyle()
 	local var13 = useInterventionPlacementModule()
 	local var14 = useLocalization(constantsModule.localizationKeys)
-	local var15 = reactModule.useCallback(function() --[[ line: 61 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: interventionAnalyticsModule (copy), p0 (ref), var13 (ref), var10 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.CtaClicked,
@@ -52,7 +52,7 @@ function InterventionDialog(p0) --[[ line: 50 ]]
 		var10, p0.interventionTypeForAnalytics, p0.eventId, p0.evidence,
 		p0.durationForAnalytics, p0.onDismiss
 	})
-	local var16 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), notificationModalsManagerModule (copy), accept (copy), var14 (ref), var12 (ref), interventionAnalyticsModule (copy), var13 (ref), var10 (ref)
 		p0.onDismiss()
 		notificationModalsManagerModule.SetUIBloxToast({
@@ -82,7 +82,7 @@ function InterventionDialog(p0) --[[ line: 50 ]]
 		p0.evidence,
 		p0.durationForAnalytics
 	})
-	reactModule.useEffect(function() --[[ line: 120 ]]
+	reactModule.useEffect(function()
 		-- upvalues: interventionAnalyticsModule (copy), p0 (ref), var13 (ref), var10 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogRendered, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.ModalAppeared,

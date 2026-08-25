@@ -13,7 +13,7 @@ local isValidElementType = sharedModule.isValidElementType
 local getComponentName = sharedModule.getComponentName
 
 return {
-	memo = function(p0, p1) --[[ line: 47 ]]
+	memo = function(p0, p1)
 		-- upvalues: reactGlobalsModule (ref), isValidElementType (ref), object (ref), array (ref), REACT_ELEMENT_TYPE (ref), getComponentName (ref), inspect (ref), console (ref), REACT_MEMO_TYPE (ref)
 		if reactGlobalsModule.__DEV__ and not isValidElementType(p0) then
 			local var3 = ""
@@ -49,11 +49,11 @@ return {
 		if reactGlobalsModule.__DEV__ then
 			local var6 = nil
 			setmetatable(t, {
-				__index = function(p2, p3) --[[ line: 113 ]]
+				__index = function(p2, p3)
 					-- upvalues: var6 (write)
 					return if p3 == "displayName" then var6 else rawget(p2, p3)
 				end,
-				__newindex = function(p4, p5, p6) --[[ line: 119 ]]
+				__newindex = function(p4, p5, p6)
 					-- upvalues: var6 (write), p0 (ref)
 					if p5 == "displayName" then
 						var6 = p6

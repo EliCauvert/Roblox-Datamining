@@ -4,9 +4,9 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local fFlagUseSignalsForIsLocalUserSoothsayer = require(parent.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
 local var0 = if fFlagUseSignalsForIsLocalUserSoothsayer then require(parent.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: fFlagUseSignalsForIsLocalUserSoothsayer (ref), useSignalState (ref), var0 (ref), useSelector (ref)
-	return if fFlagUseSignalsForIsLocalUserSoothsayer then useSignalState(var0(false).getIsLocalUserSoothsayer) else useSelector(function(p0) --[[ line: 15 ]]
+	return if fFlagUseSignalsForIsLocalUserSoothsayer then useSignalState(var0(false).getIsLocalUserSoothsayer) else useSelector(function(p0)
 		return p0.IsLocalUserSoothsayer
 	end)
 end

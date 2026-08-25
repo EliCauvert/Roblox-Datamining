@@ -14,7 +14,7 @@ local useScaledValue = foundationModule.Hooks.useScaledValue
 local inExperienceDetailsPromptSubtitleModule = require(inExperienceDetailsPrompt.Features.InExperienceDetailsPromptSubtitle)
 local useImageLoadingStateModule = require(inExperienceDetailsPrompt.Hooks.useImageLoadingState)
 
-return function(p0) --[[ line: 30 | named "InExperienceDetailsPromptHeader" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useScaledValue (ref), useImageLoadingStateModule (ref), reactModule (ref), sheet (ref), view (ref), image (ref), skeleton (ref), radius (ref), text (ref), inExperienceDetailsPromptSubtitleModule (ref)
 	local var5 = useTokens()
 	

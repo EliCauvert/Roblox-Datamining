@@ -36,7 +36,7 @@ local t_1 = {
 	}
 }
 
-local var6 = function(p0) --[[ line: 121 ]]
+local var6 = function(p0)
 	local t = {}
 	
 	for i, v in ipairs(p0) do
@@ -45,7 +45,7 @@ local var6 = function(p0) --[[ line: 121 ]]
 	return t
 end
 
-local var7 = function(p1) --[[ line: 129 ]]
+local var7 = function(p1)
 	local t = {}
 	
 	for i, v in pairs(p1) do
@@ -66,7 +66,7 @@ local var7 = function(p1) --[[ line: 129 ]]
 	return t
 end
 
-local var8 = function(p2) --[[ line: 150 ]]
+local var8 = function(p2)
 	-- upvalues: var6 (ref)
 	local t = {}
 	
@@ -96,7 +96,7 @@ local var8 = function(p2) --[[ line: 150 ]]
 	return t
 end
 
-local var9 = function(p3) --[[ line: 181 ]]
+local var9 = function(p3)
 	-- upvalues: t (write), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var8 (ref), var7 (ref), var6 (ref)
 	local var14 = false
 	
@@ -152,7 +152,7 @@ local var9 = function(p3) --[[ line: 181 ]]
 	}
 end
 
-local var10 = function() --[[ line: 470 ]]
+local var10 = function()
 	-- upvalues: t (write), getFFlagRAEnableCircleRegion (ref), getAvatarsForRegion (ref), getAvatarsForPoint (ref), getFFlagReportAnythingEnableAdReport (ref), getAdsForPoint (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -199,73 +199,73 @@ local var10 = function() --[[ line: 470 ]]
 end
 
 return {
-	setAnnotationCircleRadius = function(value) --[[ line: 537 ]]
+	setAnnotationCircleRadius = function(value)
 		-- upvalues: t (write)
 		t.annotationCircleRadius = value
 	end,
-	getAnnotationCircleRadius = function() --[[ line: 540 ]]
+	getAnnotationCircleRadius = function()
 		-- upvalues: t (write)
 		return t.annotationCircleRadius
 	end,
-	setAspectRatioDimensions = function(value, p4) --[[ line: 543 ]]
+	setAspectRatioDimensions = function(value, p4)
 		-- upvalues: t (write)
 		t.screenSizeWidth = value
 		t.screenSizeHeight = p4
 	end,
-	setScreenshotId = function(value) --[[ line: 547 ]]
+	setScreenshotId = function(value)
 		-- upvalues: t (write)
 		t.screenshotId = value
 	end,
-	setIdentifiedAds = function(value) --[[ line: 550 ]]
+	setIdentifiedAds = function(value)
 		-- upvalues: t (write)
 		t.identifiedAds = value
 	end,
-	getIdentifiedAds = function() --[[ line: 553 ]]
+	getIdentifiedAds = function()
 		-- upvalues: t (write)
 		return t.identifiedAds
 	end,
-	setIdentifiedAvatars = function(value) --[[ line: 556 ]]
+	setIdentifiedAvatars = function(value)
 		-- upvalues: t (write)
 		t.identifiedAvatars = value
 	end,
-	getIdentifiedAvatars = function() --[[ line: 559 ]]
+	getIdentifiedAvatars = function()
 		-- upvalues: t (write)
 		return t.identifiedAvatars
 	end,
-	setAvatarIDStats = function(value) --[[ line: 562 ]]
+	setAvatarIDStats = function(value)
 		-- upvalues: t (write)
 		t.avatarIDStats = value
 	end,
-	setAdIDStats = function(value) --[[ line: 565 ]]
+	setAdIDStats = function(value)
 		-- upvalues: t (write)
 		t.adIDStats = value
 	end,
-	setScreenshotContentId = function(value) --[[ line: 568 ]]
+	setScreenshotContentId = function(value)
 		-- upvalues: t (write)
 		t.screenshotContentId = value
 		t.annotationPoints = {}
 		t.selectedAbusers = {}
 	end,
-	getScreenshotContentId = function() --[[ line: 575 ]]
+	getScreenshotContentId = function()
 		-- upvalues: t (write)
 		return t.screenshotContentId
 	end,
-	setAnnotationPoints = function(value) --[[ line: 578 ]]
+	setAnnotationPoints = function(value)
 		-- upvalues: t (write), var10 (ref)
 		t.annotationPoints = value
 		t.annotationOptionSeen = true
 		t.annotationPageSeen = true
 		var10()
 	end,
-	getSelectedAbusers = function() --[[ line: 584 ]]
+	getSelectedAbusers = function()
 		-- upvalues: t (write)
 		return t.selectedAbusers
 	end,
-	getSelectedAds = function() --[[ line: 587 ]]
+	getSelectedAds = function()
 		-- upvalues: t (write)
 		return t.selectedAds
 	end,
-	clearAnnotationPoints = function() --[[ line: 590 ]]
+	clearAnnotationPoints = function()
 		-- upvalues: t (write), getFFlagReportAnythingEnableAdReport (ref)
 		t.annotationPoints = {}
 		t.selectedAbusers = {}
@@ -276,27 +276,27 @@ return {
 		t.annotationOptionSeen = false
 		t.annotationPageSeen = false
 	end,
-	getAnnotationPoints = function() --[[ line: 600 ]]
+	getAnnotationPoints = function()
 		-- upvalues: t (write)
 		return t.annotationPoints
 	end,
-	setAnnotationOptionSeen = function(value) --[[ line: 603 ]]
+	setAnnotationOptionSeen = function(value)
 		-- upvalues: t (write)
 		t.annotationOptionSeen = value
 	end,
-	getAnnotationOptionSeen = function() --[[ line: 606 ]]
+	getAnnotationOptionSeen = function()
 		-- upvalues: t (write)
 		return t.annotationOptionSeen
 	end,
-	setAnnotationPageSeen = function(value) --[[ line: 609 ]]
+	setAnnotationPageSeen = function(value)
 		-- upvalues: t (write)
 		t.annotationPageSeen = value
 	end,
-	getAnnotationPageSeen = function() --[[ line: 612 ]]
+	getAnnotationPageSeen = function()
 		-- upvalues: t (write)
 		return t.annotationPageSeen
 	end,
-	buildExperienceReportRequest = function(p5) --[[ line: 270 ]]
+	buildExperienceReportRequest = function(p5)
 		-- upvalues: t_1 (ref), var9 (ref), t (write), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var7 (ref)
 		local t_2 = {
 			tags = {
@@ -319,7 +319,7 @@ return {
 		end
 		return httpService:JSONEncode(t_2)
 	end,
-	buildOtherReportRequest = function(p6) --[[ line: 343 ]]
+	buildOtherReportRequest = function(p6)
 		-- upvalues: t_1 (ref), var9 (ref), t (write), getFFlagGetHumanoidDescription (ref), getHumanoidDescription (ref), httpService (ref)
 		local t_2 = {
 			tags = {
@@ -369,7 +369,7 @@ return {
 		end
 		return httpService:JSONEncode(t_2)
 	end,
-	clear = function() --[[ line: 617 ]]
+	clear = function()
 		-- upvalues: t (write)
 		t = {
 			annotationCircleRadius = 0,
@@ -388,7 +388,7 @@ return {
 			selectedAds = {}
 		}
 	end,
-	getAnalyticsParameters = function() --[[ line: 635 ]]
+	getAnalyticsParameters = function()
 		-- upvalues: t (write)
 		return {
 			finalAnnotationOptionSeen = t.annotationOptionSeen,

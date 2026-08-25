@@ -17,7 +17,7 @@ local t_1 = {
 	[statusCodes.INTERNAL_SERVER_ERROR] = "serverError"
 }
 
-return function(p0) --[[ line: 25 | named "coarseLoginErrorBucket" ]]
+return function(p0)
 	-- upvalues: t (ref), t_1 (ref)
 	if typeof(p0) ~= "table" then
 		return "unknown"

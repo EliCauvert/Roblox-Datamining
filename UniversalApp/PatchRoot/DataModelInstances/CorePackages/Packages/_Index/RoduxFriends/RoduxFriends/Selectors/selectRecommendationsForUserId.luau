@@ -3,13 +3,13 @@ local getDeepValueModule = require(parent.getDeepValue)
 local _ = require(parent.roduxFriendsTypes)
 local filterByKeysModule = require(script.Parent.filterByKeys)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: getDeepValueModule (ref), filterByKeysModule (ref)
 	local keyPath = p0.keyPath
 	
-	return function(p1) --[[ line: 12 ]]
+	return function(p1)
 		-- upvalues: getDeepValueModule (copy), keyPath (ref), filterByKeysModule (copy)
-		return function(p2, p3) --[[ line: 13 ]]
+		return function(p2, p3)
 			-- upvalues: getDeepValueModule (copy), p1 (ref), keyPath (copy), filterByKeysModule (copy)
 			local var2 = getDeepValueModule(p1, string.format("%s.recommendations.byUserId.%s", keyPath, p2 or "")) or {}
 			

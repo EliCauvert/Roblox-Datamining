@@ -12,9 +12,9 @@ local t = {
 
 return {
 	roact = roactModule,
-	mapStory = function(p0) --[[ line: 35 ]]
+	mapStory = function(p0)
 		-- upvalues: t (ref), roactModule (ref), mockProvidersModule (ref), cryoModule (ref)
-		return function(p1) --[[ line: 36 ]]
+		return function(p1)
 			-- upvalues: t (copy), roactModule (copy), mockProvidersModule (copy), p0 (ref), cryoModule (copy)
 			local props
 			if p1 then

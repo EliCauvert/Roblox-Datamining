@@ -19,10 +19,10 @@ local getNamedType = definitionModule.getNamedType
 local t = {}
 local isValidValueNode = nil
 
-function t.ValuesOfCorrectTypeRule(p0) --[[ line: 41 ]]
+function t.ValuesOfCorrectTypeRule(p0)
 	-- upvalues: getNullableType (ref), isListType (ref), isValidValueNode (write), getNamedType (ref), isInputObjectType (ref), keyMap (ref), isRequiredInputField (ref), inspect (ref), graphQLError (ref), suggestionList (ref), didYouMean (ref), isNonNullType (ref), print (ref)
 	return {
-		ListValue = function(_, p1) --[[ line: 43 ]]
+		ListValue = function(_, p1)
 			-- upvalues: getNullableType (copy), p0 (ref), isListType (copy), isValidValueNode (copy)
 			if isListType(getNullableType(p0:getParentInputType())) then
 				return
@@ -31,7 +31,7 @@ function t.ValuesOfCorrectTypeRule(p0) --[[ line: 41 ]]
 			
 			return false
 		end,
-		ObjectValue = function(_, p2) --[[ line: 53 ]]
+		ObjectValue = function(_, p2)
 			-- upvalues: getNamedType (copy), p0 (ref), isInputObjectType (copy), isValidValueNode (copy), keyMap (copy), isRequiredInputField (copy), inspect (copy), graphQLError (copy)
 			local var4 = getNamedType(p0:getInputType())
 			
@@ -40,7 +40,7 @@ function t.ValuesOfCorrectTypeRule(p0) --[[ line: 41 ]]
 				
 				return false
 			end
-			local var5 = keyMap(p2.fields, function(p3) --[[ line: 60 ]]
+			local var5 = keyMap(p2.fields, function(p3)
 				return p3.name.value
 			end)
 			
@@ -50,7 +50,7 @@ function t.ValuesOfCorrectTypeRule(p0) --[[ line: 41 ]]
 				end
 			end
 		end,
-		ObjectField = function(_, p4) --[[ line: 82 ]]
+		ObjectField = function(_, p4)
 			-- upvalues: getNamedType (copy), p0 (ref), isInputObjectType (copy), suggestionList (copy), graphQLError (copy), didYouMean (copy)
 			local var6 = getNamedType(p0:getParentInputType())
 			
@@ -58,7 +58,7 @@ function t.ValuesOfCorrectTypeRule(p0) --[[ line: 41 ]]
 				p0:reportError(graphQLError.new(("Field \"%s\" is not defined by type \"%s\"."):format(p4.name.value, var6.name) .. didYouMean(suggestionList(p4.name.value, var6:getFields():keys())), p4))
 			end
 		end,
-		NullValue = function(_, p5) --[[ line: 102 ]]
+		NullValue = function(_, p5)
 			-- upvalues: p0 (ref), isNonNullType (copy), graphQLError (copy), inspect (copy), print (copy)
 			local inputType = p0:getInputType()
 			
@@ -66,30 +66,30 @@ function t.ValuesOfCorrectTypeRule(p0) --[[ line: 41 ]]
 				p0:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p5)), p5))
 			end
 		end,
-		EnumValue = function(_, p6) --[[ line: 116 ]]
+		EnumValue = function(_, p6)
 			-- upvalues: isValidValueNode (copy), p0 (ref)
 			return isValidValueNode(p0, p6)
 		end,
-		IntValue = function(_, p7) --[[ line: 119 ]]
+		IntValue = function(_, p7)
 			-- upvalues: isValidValueNode (copy), p0 (ref)
 			return isValidValueNode(p0, p7)
 		end,
-		FloatValue = function(_, p8) --[[ line: 122 ]]
+		FloatValue = function(_, p8)
 			-- upvalues: isValidValueNode (copy), p0 (ref)
 			return isValidValueNode(p0, p8)
 		end,
-		StringValue = function(_, p9) --[[ line: 125 ]]
+		StringValue = function(_, p9)
 			-- upvalues: isValidValueNode (copy), p0 (ref)
 			return isValidValueNode(p0, p9)
 		end,
-		BooleanValue = function(_, p10) --[[ line: 128 ]]
+		BooleanValue = function(_, p10)
 			-- upvalues: isValidValueNode (copy), p0 (ref)
 			return isValidValueNode(p0, p10)
 		end
 	}
 end
 
-isValidValueNode = function(p11, p12) --[[ line: 138 | named "isValidValueNode" ]]
+isValidValueNode = function(p11, p12)
 	-- upvalues: getNamedType (ref), isLeafType (ref), inspect (ref), graphQLError (ref), print (ref), instanceOfModule (ref)
 	local inputType = p11:getInputType()
 	
@@ -97,12 +97,12 @@ isValidValueNode = function(p11, p12) --[[ line: 138 | named "isValidValueNode" 
 	local var9 = getNamedType(inputType)
 	
 	if isLeafType(var9) then
-		xpcall(function() --[[ line: 160 ]]
+		xpcall(function()
 			-- upvalues: var9 (ref), p12 (ref), inspect (copy), inputType (ref), p11 (ref), graphQLError (copy), print (copy)
 			if var9:parseLiteral(p12, nil) == nil then
 				p11:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p12)), p12))
 			end
-		end, function(p13) --[[ line: 173 ]]
+		end, function(p13)
 			-- upvalues: inspect (copy), inputType (ref), instanceOfModule (copy), graphQLError (copy), p11 (ref), print (copy), p12 (ref)
 			local var10 = inspect(inputType)
 			

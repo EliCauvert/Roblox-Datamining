@@ -2,7 +2,7 @@
 local _ = require(virtualEvents.Parent.GraphQLServer)
 local getVirtualEventDatesModule = require(virtualEvents.Common.getVirtualEventDates)
 
-return function(p0, p1) --[[ line: 6 | named "getSecondsLeftInEvent" ]]
+return function(p0, p1)
 	-- upvalues: getVirtualEventDatesModule (ref)
 	local var2 = getVirtualEventDatesModule(p0)
 	

@@ -10,7 +10,7 @@ local assets = foundationCloudAssetsModule.Assets
 foundationCloudAssetsModule.preloadAsset("pictograms/collaborators")
 local collaborators = assets["pictograms/collaborators"] or {}
 
-return function(value) --[[ line: 24 | named "SocialTabsEmptyState" ]]
+return function(value)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref), collaborators (ref), text (ref)
 	local var4 = useTokens()
 	

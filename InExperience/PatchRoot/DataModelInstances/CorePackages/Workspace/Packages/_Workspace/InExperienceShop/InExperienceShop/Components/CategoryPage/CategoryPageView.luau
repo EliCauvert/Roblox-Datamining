@@ -12,7 +12,7 @@ local var6 = if var5 then var5.Constants.ShopPageType else nil
 local useShopImpressionsDetectorModule = require(inExperienceShop.Hooks.useShopImpressionsDetector)
 local _ = require(inExperienceShop.Types)
 
-return function(p0) --[[ line: 34 | named "CategoryPageView" ]]
+return function(p0)
 	-- upvalues: useShopImpressionsDetectorModule (ref), var6 (ref), reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), view (ref), scrollView (ref), foundationModule (ref), itemGridModule (ref)
 	local var8 = useShopImpressionsDetectorModule({
 		isPageActive = true,
@@ -27,7 +27,7 @@ return function(p0) --[[ line: 34 | named "CategoryPageView" ]]
 	}, {
 		Scroll = reactModule.createElement(scrollView, {
 			Size = UDim2.fromScale(1, 1),
-			onCanvasPositionChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_) --[[ line: 41 ]]
+			onCanvasPositionChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_)
 				-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var8 (ref)
 				if fFlagEnableInExperienceShopUnifiedLoggingModule then
 					var8.onLayoutChange()
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 34 | named "CategoryPageView" ]]
 			Content = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
 				ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var8.gridRef else nil,
-				onAbsoluteSizeChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then function(_) --[[ line: 72 ]]
+				onAbsoluteSizeChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
 					-- upvalues: var8 (ref)
 					var8.onLayoutChange()
 				end else nil

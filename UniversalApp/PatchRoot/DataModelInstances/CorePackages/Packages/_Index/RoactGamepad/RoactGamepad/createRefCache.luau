@@ -1,17 +1,17 @@
 ﻿local roactModule = require(script.Parent.Parent.Roact)
 
-return function() --[[ line: 10 | named "createRefCache" ]]
+return function()
 	-- upvalues: roactModule (ref)
 	local t = {}
 	setmetatable(t, {
-		__index = function(_, p0) --[[ line: 14 ]]
+		__index = function(_, p0)
 			-- upvalues: roactModule (copy), t (ref)
 			local var2 = roactModule.createRef()
 			t[p0] = var2
 			
 			return var2
 		end,
-		__tostring = function(p1) --[[ line: 20 ]]
+		__tostring = function(p1)
 			local var3 = "{"
 			
 			for i, v in pairs(p1) do

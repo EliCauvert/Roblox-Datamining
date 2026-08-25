@@ -6,7 +6,7 @@ local runService = game:GetService("RunService")
 local userInputService = game:GetService("UserInputService")
 local webViewService = game:GetService("WebViewService")
 local var7 = nil
-pcall(function() --[[ line: 52 ]]
+pcall(function()
 	-- upvalues: var7 (write)
 	var7 = game:GetService("PlatformService")
 end)
@@ -14,15 +14,15 @@ local upsellFlowModule = require(purchasePrompt.Enums.UpsellFlow)
 local getUpsellFlowModule = require(purchasePrompt.NativeUpsell.getUpsellFlow)
 local getFFlagEnablePaymentSessionIdInRobuxPurchaseModule = require(purchasePrompt.Flags.GetFFlagEnablePaymentSessionIdInRobuxPurchase)
 
-local function _() --[[ line: 83 | named "getWebBaseUrl" ]]
+local function _()
 	-- upvalues: contentProviderService (ref)
 	return string.gsub(contentProviderService.BaseUrl:lower(), "/m%.", "/www.")
 end
 
-local _ = function(p0, p1) --[[ line: 105 | named "openRobuxPackageWebView" ]]
+local _ = function(p0, p1)
 	-- upvalues: webViewService (ref)
 	local onWindowClosedConnection = nil
-	onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function() --[[ line: 107 ]]
+	onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
 		-- upvalues: webViewService (copy), onWindowClosedConnection (write), p1 (ref)
 		webViewService:CloseWindow()
 		
@@ -37,7 +37,7 @@ local _ = function(p0, p1) --[[ line: 105 | named "openRobuxPackageWebView" ]]
 	webViewService:OpenWindow(p0, "", true)
 end
 
-return function(p2) --[[ line: 120 | named "launchRobuxPackagePurchase" ]]
+return function(p2)
 	-- upvalues: getFFlagEnablePaymentSessionIdInRobuxPurchaseModule (ref), runService (ref), userInputService (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), playersService (ref), marketplaceService (ref), var7 (write), contentProviderService (ref), webViewService (ref)
 	local mobileProductId = p2.mobileProductId
 	local productId = p2.productId
@@ -50,7 +50,7 @@ return function(p2) --[[ line: 120 | named "launchRobuxPackagePurchase" ]]
 		local localPlayer = playersService.LocalPlayer
 		local nativePurchaseWithLocalPlayerEngineFeature = game:GetEngineFeature("NativePurchaseWithLocalPlayer")
 		local promptNativePurchaseWithPaymentSessionIdEngineFeature = game:GetEngineFeature("PromptNativePurchaseWithPaymentSessionId")
-		pcall(function() --[[ line: 157 ]]
+		pcall(function()
 			-- upvalues: marketplaceService (copy), nativePurchaseWithLocalPlayerEngineFeature (ref), promptNativePurchaseWithPaymentSessionIdEngineFeature (ref), mobileProductId (ref), var12 (ref), localPlayer (ref)
 			local promptNativePurchaseWithLocalPlayerWithPaymentSessionId = marketplaceService.PromptNativePurchaseWithLocalPlayerWithPaymentSessionId
 			local promptNativePurchaseWithLocalPlayer = marketplaceService.PromptNativePurchaseWithLocalPlayer
@@ -82,7 +82,7 @@ return function(p2) --[[ line: 120 | named "launchRobuxPackagePurchase" ]]
 		if var7 == nil then
 			return
 		end
-		pcall(function() --[[ line: 196 ]]
+		pcall(function()
 			-- upvalues: var7 (copy), mobileProductId (ref)
 			var7:BeginPlatformStorePurchase(mobileProductId)
 		end)
@@ -95,11 +95,11 @@ return function(p2) --[[ line: 120 | named "launchRobuxPackagePurchase" ]]
 		if var12 ~= "" then
 			var16 = ("%s&paymentSessionId=%s"):format(var16, var12)
 		end
-		pcall(function() --[[ line: 210 ]]
+		pcall(function()
 			-- upvalues: var16 (write), p2 (ref), webViewService (copy)
 			local onWebViewClosed = p2.onWebViewClosed
 			local onWindowClosedConnection = nil
-			onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function() --[[ line: 107 ]]
+			onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
 				-- upvalues: webViewService (copy), onWindowClosedConnection (write), onWebViewClosed (ref)
 				webViewService:CloseWindow()
 				

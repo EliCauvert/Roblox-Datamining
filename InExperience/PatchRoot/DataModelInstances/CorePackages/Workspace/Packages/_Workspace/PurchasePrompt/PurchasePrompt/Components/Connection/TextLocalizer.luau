@@ -1,7 +1,7 @@
 ﻿local roact = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Roact
 local localizationContextConsumerModule = require(script.Parent.LocalizationContextConsumer)
 
-return function(p0) --[[ line: 8 | named "TextLocalizer" ]]
+return function(p0)
 	-- upvalues: roact (ref), localizationContextConsumerModule (ref)
 	local locKey = p0.locKey
 	local params = p0.params
@@ -10,7 +10,7 @@ return function(p0) --[[ line: 8 | named "TextLocalizer" ]]
 	assert(typeof(render) == "function", "Render prop must be a function")
 	
 	return roact.createElement(localizationContextConsumerModule, {
-		render = function(p1) --[[ line: 17 ]]
+		render = function(p1)
 			-- upvalues: render (ref), locKey (ref), params (ref)
 			return render(p1:Format(locKey, params))
 		end

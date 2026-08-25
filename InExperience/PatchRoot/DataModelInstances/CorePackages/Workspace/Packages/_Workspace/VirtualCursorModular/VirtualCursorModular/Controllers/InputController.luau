@@ -11,7 +11,7 @@ local enumsModule = require(parent.Enums)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 37 ]]
+function t.new(p0)
 	-- upvalues: enumsModule (ref), t (ref)
 	return setmetatable({
 		_enabled = false,
@@ -29,7 +29,7 @@ function t.new(p0) --[[ line: 37 ]]
 	}, t)
 end
 
-function t:Destroy() --[[ line: 56 ]]
+function t:Destroy()
 	if self._selectedObjectChangedConnection then
 		self._selectedObjectChangedConnection:Disconnect()
 	end
@@ -47,7 +47,7 @@ function t:Destroy() --[[ line: 56 ]]
 	end
 end
 
-function t:OnMove(_, p1) --[[ line: 78 ]]
+function t:OnMove(_, p1)
 	-- upvalues: enumsModule (ref), guiService (ref), processThumbstickInput (ref), getRectCenter (ref)
 	if self._behavior ~= enumsModule.Behavior.SelectionPreview then
 		return Enum.ContextActionResult.Pass
@@ -75,7 +75,7 @@ function t:OnMove(_, p1) --[[ line: 78 ]]
 	end
 	if var7 and guiService.SelectedObject then
 		local selectedObject = guiService.SelectedObject
-		self._selectedRectChangedConnection = selectedObject:GetPropertyChangedSignal("SelectionRect2D"):Connect(function() --[[ line: 119 ]]
+		self._selectedRectChangedConnection = selectedObject:GetPropertyChangedSignal("SelectionRect2D"):Connect(function()
 			-- upvalues: selectedObject (ref), self (ref), enumsModule (copy), getRectCenter (copy)
 			if selectedObject and self._behavior == enumsModule.Behavior.SelectionPreview then
 				self._cursorController:TweenPosition(getRectCenter(selectedObject.SelectionRect2D))
@@ -86,7 +86,7 @@ function t:OnMove(_, p1) --[[ line: 78 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-function t:OnScroll(p2, p3) --[[ line: 132 ]]
+function t:OnScroll(p2, p3)
 	-- upvalues: enumsModule (ref)
 	if self._behavior == enumsModule.Behavior.VirtualCursor then
 		if p2 == Enum.UserInputState.Change and p3 then
@@ -99,7 +99,7 @@ function t:OnScroll(p2, p3) --[[ line: 132 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-function t:OnActivate(p4, _) --[[ line: 145 ]]
+function t:OnActivate(p4, _)
 	-- upvalues: guiService (ref)
 	if p4 == Enum.UserInputState.Begin then
 		if guiService.SelectedObject or guiService.SelectedCoreObject then
@@ -111,7 +111,7 @@ function t:OnActivate(p4, _) --[[ line: 145 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-function t:OnDirectionalButtons(p5, p6) --[[ line: 159 ]]
+function t:OnDirectionalButtons(p5, p6)
 	-- upvalues: enumsModule (ref), getThumbstickInputFromDirectionalInput (ref), processThumbstickInput (ref)
 	if self._behavior ~= enumsModule.Behavior.VirtualCursor or not p6 then
 		return Enum.ContextActionResult.Pass
@@ -137,15 +137,15 @@ function t:OnDirectionalButtons(p5, p6) --[[ line: 159 ]]
 	return pass
 end
 
-function t:GetMoveVector() --[[ line: 193 ]]
+function t:GetMoveVector()
 	return self._moveVector
 end
 
-function t:GetScrollVector() --[[ line: 197 ]]
+function t:GetScrollVector()
 	return self._scrollVector
 end
 
-function t:SetBehavior(p7) --[[ line: 201 ]]
+function t:SetBehavior(p7)
 	-- upvalues: enumsModule (ref), contextActionService (ref), gamepadService (ref), processThumbstickInput (ref), userInputService (ref), guiService (ref)
 	local behavior = self._behavior
 	self._behavior = p7
@@ -191,25 +191,25 @@ function t:SetBehavior(p7) --[[ line: 201 ]]
 		end
 	end
 	if self._behavior == enumsModule.Behavior.VirtualCursor then
-		contextActionService:BindCoreActionAtPriority(enumsModule.Action.Scroll, function(_, p8, p9) --[[ line: 251 ]]
+		contextActionService:BindCoreActionAtPriority(enumsModule.Action.Scroll, function(_, p8, p9)
 			-- upvalues: self (ref)
 			return self:OnScroll(p8, p9)
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick2)
-		contextActionService:BindCoreActionAtPriority(enumsModule.Action.DirectionalMove, function(_, p10, p11) --[[ line: 261 ]]
+		contextActionService:BindCoreActionAtPriority(enumsModule.Action.DirectionalMove, function(_, p10, p11)
 			-- upvalues: self (ref)
 			return self:OnDirectionalButtons(p10, p11)
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.ButtonUp, Enum.KeyCode.ButtonDown, Enum.KeyCode.ButtonLeft, Enum.KeyCode.ButtonRight)
-		self._gamepadThumbstick1ChangedConnection = gamepadService.GamepadThumbstick1Changed:Connect(function(p12) --[[ line: 272 ]]
+		self._gamepadThumbstick1ChangedConnection = gamepadService.GamepadThumbstick1Changed:Connect(function(p12)
 			-- upvalues: self (ref), processThumbstickInput (copy)
 			self._moveVector = processThumbstickInput(p12)
 		end)
-		self._inputBeganConnection = userInputService.InputBegan:Connect(function(p13, _) --[[ line: 277 ]]
+		self._inputBeganConnection = userInputService.InputBegan:Connect(function(p13, _)
 			-- upvalues: self (ref)
 			if p13.KeyCode == Enum.KeyCode.ButtonA or p13.KeyCode == Enum.KeyCode.ButtonCenter then
 				self:OnActivate(Enum.UserInputState.Begin, p13)
 			end
 		end)
-		self._inputEndedConnection = userInputService.InputEnded:Connect(function(p14, _) --[[ line: 283 ]]
+		self._inputEndedConnection = userInputService.InputEnded:Connect(function(p14, _)
 			-- upvalues: self (ref)
 			if p14.KeyCode == Enum.KeyCode.ButtonA or p14.KeyCode == Enum.KeyCode.ButtonCenter then
 				self:OnActivate(Enum.UserInputState.End, p14)
@@ -218,12 +218,12 @@ function t:SetBehavior(p7) --[[ line: 201 ]]
 		
 		return
 	elseif self._behavior == enumsModule.Behavior.SelectionPreview then
-		self._selectedObjectChangedConnection = guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ line: 289 ]]
+		self._selectedObjectChangedConnection = guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
 			-- upvalues: self (ref), guiService (copy)
 			self:OnMove(Enum.UserInputState.Change, nil)
 			self._previousSelection = guiService.SelectedObject
 		end)
-		contextActionService:BindCoreActionAtPriority(enumsModule.Action.Move, function(_, p15, p16) --[[ line: 296 ]]
+		contextActionService:BindCoreActionAtPriority(enumsModule.Action.Move, function(_, p15, p16)
 			-- upvalues: self (ref)
 			return self:OnMove(p15, p16)
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick1)

@@ -5,7 +5,7 @@ local _ = require(parent.MomentsTypes)
 local fFlagMomentsImpressionDestinationUniverseIdModule = require(moments.Flags.FFlagMomentsImpressionDestinationUniverseId)
 local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 
-return function(p0, p1) --[[ line: 32 | named "makeMomentViewBeganFields" ]]
+return function(p0, p1)
 	-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (ref), momentsCommonModule (ref), fFlagMomentsImpressionDestinationUniverseIdModule (ref)
 	local recommendationMetadata = p0.recommendationMetadata
 	

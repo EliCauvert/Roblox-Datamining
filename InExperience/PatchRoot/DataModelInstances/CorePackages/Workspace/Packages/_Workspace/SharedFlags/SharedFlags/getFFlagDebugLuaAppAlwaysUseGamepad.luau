@@ -3,7 +3,7 @@ local guiService = game:GetService("GuiService")
 game:DefineFastFlag("DebugLuaAppAlwaysUseGamepad", false)
 game:DefineFastInt("DebugLuaAppForceGamepad", 0)
 
-return function() --[[ line: 9 ]]
+return function()
 	-- upvalues: runService (ref), guiService (ref)
 	return game:GetFastFlag("DebugLuaAppAlwaysUseGamepad") and (runService:IsStudio() and (guiService:IsTenFootInterface() or game:GetFastInt("DebugLuaAppForceGamepad") > 0))
 end

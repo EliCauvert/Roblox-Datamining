@@ -2,21 +2,21 @@
 local _ = require(viewRecycler.Core.Types)
 local createEventModule = require(viewRecycler.Internal.createEvent)
 
-return function(p0, p1, p2) --[[ line: 15 | named "createMutationController" ]]
+return function(p0, p1, p2)
 	-- upvalues: createEventModule (ref)
 	local var2 = createEventModule()
 	local var3 = 0
 	local t = {}
 	local var5 = nil
 	
-	local function flush() --[[ line: 25 ]]
+	local function flush()
 		-- upvalues: var5 (write), t (write), var2 (ref), p0 (ref)
 		t = {}
 		var5 = nil
 		var2.fire({ changes = t, previousItemCount = var5, itemCount = p0() })
 	end
 	
-	local function _(p3, p4) --[[ line: 37 | named "queueChanges" ]]
+	local function _(p3, p4)
 		-- upvalues: t (write), var5 (write)
 		if #t == 0 then
 			var5 = p4
@@ -28,7 +28,7 @@ return function(p0, p1, p2) --[[ line: 15 | named "createMutationController" ]]
 	
 	return {
 		subscribe = var2.connect,
-		emit = function(p5, p6) --[[ line: 53 ]]
+		emit = function(p5, p6)
 			-- upvalues: t (write), var5 (write), var3 (write), flush (ref)
 			local list = { p5 }
 			
@@ -42,7 +42,7 @@ return function(p0, p1, p2) --[[ line: 15 | named "createMutationController" ]]
 				flush()
 			end
 		end,
-		emitMany = function(p7, p8) --[[ line: 46 ]]
+		emitMany = function(p7, p8)
 			-- upvalues: t (write), var5 (write), var3 (write), flush (ref)
 			if #t == 0 then
 				var5 = p8
@@ -54,12 +54,12 @@ return function(p0, p1, p2) --[[ line: 15 | named "createMutationController" ]]
 				flush()
 			end
 		end,
-		transaction = function(p9) --[[ line: 60 ]]
+		transaction = function(p9)
 			-- upvalues: p1 (ref), t (write), var5 (write), var3 (write), p2 (ref), flush (ref)
 			local var8 = p1()
 			local cloned = table.clone(t)
 			var3 += 1
-			local packed = table.pack(pcall(function() --[[ line: 65 ]]
+			local packed = table.pack(pcall(function()
 				-- upvalues: p9 (ref)
 				p9()
 				

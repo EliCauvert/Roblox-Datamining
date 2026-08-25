@@ -8,18 +8,18 @@ local reactToFeedItemV2Module = require(script.Parent.Requests.reactToFeedItemV2
 local createMomentsEmojiSetsStoreModule = require(script.Parent.createMomentsEmojiSetsStore)
 local fFlagMomentsEmojiSetsApiModule = require(script.Parent.FFlagMomentsEmojiSetsApi)
 
-return function(p0) --[[ line: 19 | named "createMomentsReactionsStore" ]]
+return function(p0)
 	-- upvalues: httpClientModule (ref), reactToFeedItemModule (ref), reactToFeedItemV2Module (ref), promiseModule (ref), fFlagMomentsEmojiSetsApiModule (ref), createMomentsEmojiSetsStoreModule (ref)
 	p0 = p0 or {}
 	
-	local function reactToFeedItem(p1) --[[ line: 22 ]]
+	local function reactToFeedItem(p1)
 		-- upvalues: httpClientModule (copy), reactToFeedItemModule (copy), p0 (ref)
 		return httpClientModule.asPromise(reactToFeedItemModule(p1, p0.network))
 	end
 	
-	local function reactToFeedItemV2(p2) --[[ line: 26 ]]
+	local function reactToFeedItemV2(p2)
 		-- upvalues: httpClientModule (copy), reactToFeedItemV2Module (copy), p0 (ref), promiseModule (copy)
-		return httpClientModule.asPromise(reactToFeedItemV2Module(p2, p0.network)):catch(function(p3) --[[ line: 27 ]]
+		return httpClientModule.asPromise(reactToFeedItemV2Module(p2, p0.network)):catch(function(p3)
 			-- upvalues: promiseModule (copy)
 			warn(`[Moments] Failed to react to feed item (v2): {tostring(p3)}`)
 			

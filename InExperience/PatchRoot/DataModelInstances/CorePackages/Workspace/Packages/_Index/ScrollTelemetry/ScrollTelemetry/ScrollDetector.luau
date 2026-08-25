@@ -5,15 +5,15 @@ local fFlagLuaAppScrollDetectorLifecycleHardening = require(parent.SharedFlags).
 game:DefineFastInt("ScrollDetectorTimeThresholdMillis", 300000)
 game:DefineFastInt("ScrollDetectorDelayMillis", 250)
 
-local function _() --[[ line: 12 | named "getDelaySeconds" ]]
+local function _()
 	return game:GetFastInt("ScrollDetectorDelayMillis") / 1000
 end
 
-local _ = function() --[[ line: 16 | named "getThresholdSeconds" ]]
+local _ = function()
 	return game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000
 end
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagLuaAppScrollDetectorLifecycleHardening (ref), runService (ref)
 	local var2 = reactModule.useRef(0)
 	local var3 = reactModule.useRef(0)
@@ -30,9 +30,9 @@ return function(p0) --[[ line: 27 ]]
 	if fFlagLuaAppScrollDetectorLifecycleHardening then
 		local var11 = reactModule.useRef(p0.sendScrollEvent)
 		var11.current = p0.sendScrollEvent
-		reactModule.useEffect(function() --[[ line: 51 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var2 (ref), var3 (ref), var11 (ref), var6 (ref), p0 (ref), var7 (ref), var4 (ref), var8 (ref), var10 (ref), var9 (ref), runService (copy), var5 (ref)
-			local _ = function(p1) --[[ line: 52 ]]
+			local _ = function(p1)
 				-- upvalues: var2 (copy), var3 (copy), var11 (copy), var6 (copy)
 				local var17 = var2.current - var3.current
 				
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 27 ]]
 				end
 			end
 			
-			local var14 = function() --[[ line: 67 ]]
+			local var14 = function()
 				-- upvalues: p0 (copy), var7 (copy), var2 (copy), var3 (copy), var11 (copy), var6 (copy), var4 (copy), var8 (copy), var10 (copy)
 				if p0.scrollingFrameRef and p0.scrollingFrameRef.current then
 					local var19 = nil
@@ -117,7 +117,7 @@ return function(p0) --[[ line: 27 ]]
 				end
 			end
 			
-			local var15 = function() --[[ line: 139 ]]
+			local var15 = function()
 				-- upvalues: var4 (copy), var6 (copy), var7 (copy), var3 (copy), var2 (copy), var8 (copy), var9 (copy), runService (copy), var14 (ref)
 				if not var4.current then
 					var6.current = time()
@@ -128,7 +128,7 @@ return function(p0) --[[ line: 27 ]]
 					if var9.current then
 						var9.current()
 					end
-					var4.current = runService.Stepped:Connect(function() --[[ line: 152 ]]
+					var4.current = runService.Stepped:Connect(function()
 						-- upvalues: var14 (copy)
 						var14()
 					end)
@@ -139,13 +139,13 @@ return function(p0) --[[ line: 27 ]]
 			
 			if p0.scrollingFrameRef and p0.scrollingFrameRef.current and var5.current ~= p0.scrollingFrameRef.current then
 				var2.current = if p0.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p0.scrollingFrameRef.current.CanvasPosition.Y else p0.scrollingFrameRef.current.CanvasPosition.X
-				var16 = p0.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 170 ]]
+				var16 = p0.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 					-- upvalues: var15 (ref)
 					var15()
 				end)
 				var5.current = p0.scrollingFrameRef.current
 			end
-			return function() --[[ line: 177 ]]
+			return function()
 				-- upvalues: var4 (copy), var7 (copy), var2 (copy), var3 (copy), var11 (copy), var6 (copy), var10 (copy), var16 (write), p0 (copy), var5 (copy)
 				if var4.current then
 					local current = var7.current
@@ -173,7 +173,7 @@ return function(p0) --[[ line: 27 ]]
 			end
 		end, { p0.scrollingFrameRef })
 	else
-		local _ = function(p2) --[[ line: 201 ]]
+		local _ = function(p2)
 			-- upvalues: var2 (ref), var3 (ref), p0 (ref), var6 (ref)
 			local var28 = var2.current - var3.current
 			
@@ -183,7 +183,7 @@ return function(p0) --[[ line: 27 ]]
 			end
 		end
 		
-		local var12 = function() --[[ line: 212 ]]
+		local var12 = function()
 			-- upvalues: p0 (ref), var7 (ref), var2 (ref), var3 (ref), var6 (ref), var4 (ref), var8 (ref), var10 (ref)
 			if p0.scrollingFrameRef and p0.scrollingFrameRef.current then
 				local var30 = nil
@@ -258,7 +258,7 @@ return function(p0) --[[ line: 27 ]]
 			end
 		end
 		
-		local var13 = function() --[[ line: 284 ]]
+		local var13 = function()
 			-- upvalues: var4 (ref), var6 (ref), var7 (ref), var3 (ref), var2 (ref), var8 (ref), var9 (ref), runService (copy), var12 (ref)
 			if not var4.current then
 				var6.current = time()
@@ -269,26 +269,26 @@ return function(p0) --[[ line: 27 ]]
 				if var9.current then
 					var9.current()
 				end
-				var4.current = runService.Stepped:Connect(function() --[[ line: 297 ]]
+				var4.current = runService.Stepped:Connect(function()
 					-- upvalues: var12 (copy)
 					var12()
 				end)
 			end
 		end
 		
-		reactModule.useEffect(function() --[[ line: 303 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), var5 (ref), var2 (ref), var13 (ref), var4 (ref), var7 (ref), var3 (ref), var6 (ref), var10 (ref)
 			local var38 = nil
 			
 			if p0.scrollingFrameRef and p0.scrollingFrameRef.current and var5.current ~= p0.scrollingFrameRef.current then
 				var2.current = if p0.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p0.scrollingFrameRef.current.CanvasPosition.Y else p0.scrollingFrameRef.current.CanvasPosition.X
-				var38 = p0.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 316 ]]
+				var38 = p0.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 					-- upvalues: var13 (copy)
 					var13()
 				end)
 				var5.current = p0.scrollingFrameRef.current
 			end
-			return function() --[[ line: 323 ]]
+			return function()
 				-- upvalues: var4 (copy), var7 (copy), var2 (copy), var3 (copy), p0 (copy), var6 (copy), var10 (copy), var38 (write), var5 (copy)
 				if var4.current then
 					local current = var7.current

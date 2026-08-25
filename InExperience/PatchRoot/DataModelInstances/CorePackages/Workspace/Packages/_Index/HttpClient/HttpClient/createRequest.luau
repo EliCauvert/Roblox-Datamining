@@ -7,7 +7,7 @@ local analyticsModule = require(script.Parent.analytics)
 local createSignal = signalsModule.createSignal
 local createResource = resourcesModule.createResource
 
-local function _(p0, p1) --[[ line: 18 | named "safeDecode" ]]
+local function _(p0, p1)
 	local ok, status, var4, var5 = pcall(p0, p1)
 	
 	if ok then
@@ -16,7 +16,7 @@ local function _(p0, p1) --[[ line: 18 | named "safeDecode" ]]
 	return nil, `decode error: {tostring(status)}`, nil
 end
 
-return function(p2) --[[ line: 26 | named "createRequest" ]]
+return function(p2)
 	-- upvalues: analyticsModule (ref), encodersModule (ref), createSignal (ref), createResource (ref)
 	local analytics = p2.analytics or analyticsModule.defaultAnalytics
 	local encode = p2.encode or encodersModule.encodeJson
@@ -37,12 +37,12 @@ return function(p2) --[[ line: 26 | named "createRequest" ]]
 	end
 	return {
 		state = var8,
-		dispose = createResource(function(p3) --[[ line: 47 ]]
+		dispose = createResource(function(p3)
 			-- upvalues: var9 (ref), analytics (ref), p2 (ref), t (ref), var11 (write)
 			local var14 = false
 			local processTime = os.clock()
 			
-			local function settleFailed(value) --[[ line: 51 ]]
+			local function settleFailed(value)
 				-- upvalues: var14 (write), processTime (ref), var9 (copy), analytics (copy), p2 (copy)
 				if var14 then
 					return
@@ -53,7 +53,7 @@ return function(p2) --[[ line: 26 | named "createRequest" ]]
 				analytics(p2.analyticsKey, p2.method, p2.url, nil, var18, "failed")
 			end
 			
-			local function settleResponse(value) --[[ line: 61 ]]
+			local function settleResponse(value)
 				-- upvalues: var14 (write), processTime (ref), p2 (copy), var9 (copy), analytics (copy)
 				if var14 then return end
 				var14 = true
@@ -94,14 +94,14 @@ return function(p2) --[[ line: 26 | named "createRequest" ]]
 				analytics(p2.analyticsKey, p2.method, p2.url, value, var19, var25)
 			end
 			
-			local ok, status = pcall(function() --[[ line: 92 ]]
+			local ok, status = pcall(function()
 				-- upvalues: p2 (copy), t (copy), var11 (copy), settleResponse (ref), settleFailed (ref), p3 (ref), var14 (write)
 				local var26 = p2.networkImpl.request({
 					url = p2.url,
 					method = p2.method,
 					headers = t,
 					body = var11
-				}, function(p4, p5) --[[ line: 98 ]]
+				}, function(p4, p5)
 					-- upvalues: settleResponse (copy), settleFailed (copy)
 					if p4 then
 						settleResponse(p5)
@@ -110,7 +110,7 @@ return function(p2) --[[ line: 26 | named "createRequest" ]]
 					end
 					settleFailed(tostring(p5))
 				end)
-				p3(function() --[[ line: 105 ]]
+				p3(function()
 					-- upvalues: var14 (copy), var26 (ref)
 					if var14 then
 						return

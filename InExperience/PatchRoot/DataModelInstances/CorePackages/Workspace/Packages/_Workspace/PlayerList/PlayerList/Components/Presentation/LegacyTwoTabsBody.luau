@@ -14,14 +14,14 @@ local leaderboardTabsModule = require(parent.Components.Presentation.Leaderboard
 local platformLeaderboardViewModule = require(parent.Components.Presentation.PlatformLeaderboardView)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return reactModule.memo(function(value) --[[ line: 37 | named "LegacyTwoTabsBody" ]]
+return reactModule.memo(function(value)
 	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
 	local server, server_1 = reactModule.useState("server")
-	local var11 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function() --[[ line: 42 ]]
+	local var11 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
 		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {}) else nil
-	local var12 = reactModule.useCallback(function() --[[ line: 47 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: server_1 (ref)
 		server_1("server")
 	end, {})

@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t:ReadPixel(p0, p1) --[[ line: 21 ]]
+function t:ReadPixel(p0, p1)
 	if self.size.X <= p0 or self.size.Y <= p1 or (p0 < 0 or p1 < 0) then
 		return Color3.fromRGB(0, 0, 0)
 	end
@@ -10,7 +10,7 @@ function t:ReadPixel(p0, p1) --[[ line: 21 ]]
 	return Color3.fromRGB(buffer.readu8(self.buffer, var2), buffer.readu8(self.buffer, var2 + 1), buffer.readu8(self.buffer, var2 + 2))
 end
 
-function t.new(p2) --[[ line: 35 ]]
+function t.new(p2)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.buffer = p2:ReadPixelsBuffer(Vector2.new(0, 0), p2.Size)
@@ -22,7 +22,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p3, p4) --[[ line: 51 ]]
+function t_1.new(p3, p4)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.size = p3
@@ -32,16 +32,16 @@ function t_1.new(p3, p4) --[[ line: 51 ]]
 	return tbl
 end
 
-function t_1:ReadValue(p5, p6) --[[ line: 60 ]]
+function t_1:ReadValue(p5, p6)
 	return if p5 < 0 or p6 < 0 then 0 else buffer.readu32(self.buffer, (math.min(p5, self.size.X - 1) + math.min(p6, self.size.Y - 1) * self.size.X) * 4)
 end
 
-function t_1:WriteValue(p7, p8, p9) --[[ line: 71 ]]
+function t_1:WriteValue(p7, p8, p9)
 	assert(p7 < self.size.X and (p8 < self.size.Y and (p7 >= 0 and p8 >= 0)))
 	buffer.writeu32(self.buffer, (p7 + p8 * self.size.X) * 4, p9)
 end
 
-function t_1:BuildSummedAreaTable(p10) --[[ line: 78 ]]
+function t_1:BuildSummedAreaTable(p10)
 	-- upvalues: t (ref)
 	local var5 = t.new(p10)
 	assert(var5.size == self.size)
@@ -53,7 +53,7 @@ function t_1:BuildSummedAreaTable(p10) --[[ line: 78 ]]
 	end
 end
 
-function t_1:GetAreaDensity(p11, p12) --[[ line: 96 ]]
+function t_1:GetAreaDensity(p11, p12)
 	local var6 = p11 - Vector2.one
 	local var7 = p11 + p12 - Vector2.one
 	local vector2 = Vector2.new(var7.X, var6.Y)
@@ -62,7 +62,7 @@ function t_1:GetAreaDensity(p11, p12) --[[ line: 96 ]]
 	return self:ReadValue(var7.X, var7.Y) - self:ReadValue(vector2.X, vector2.Y) - self:ReadValue(vector2_1.X, vector2_1.Y) + self:ReadValue(var6.X, var6.Y)
 end
 
-function t_1:GetAreaDensityContinuous(p13, p14) --[[ line: 115 ]]
+function t_1:GetAreaDensityContinuous(p13, p14)
 	local var10 = 0
 	local var11 = p13 + p14
 	local var12 = p13:Ceil()

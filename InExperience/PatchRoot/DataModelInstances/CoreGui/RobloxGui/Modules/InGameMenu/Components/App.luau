@@ -18,14 +18,14 @@ local fullscreenTitleBarModule = require(script.Parent.FullscreenTitleBar)
 local fFlagLuaMenuPerfImprovementsModule = require(parent.Flags.FFlagLuaMenuPerfImprovements)
 local constantsModule = require(parent.Resources.Constants)
 
-return roactRodux.connect(function(p2, _) --[[ line: 82 | named "mapStateToProps" ]]
+return roactRodux.connect(function(p2, _)
 	return { isMenuOpen = p2.isMenuOpen }
-end, nil)(inGameMenuPolicyModule.connect(function(p1, _) --[[ line: 75 ]]
+end, nil)(inGameMenuPolicyModule.connect(function(p1, _)
 	return {
 		enableFullscreenTitleBar = p1.enableFullscreenTitleBar(),
 		isEducationalPopupEnabled = p1.enableEducationalPopup()
 	}
-end)(function(p0) --[[ line: 32 | named "App" ]]
+end)(function(p0)
 	-- upvalues: roact (ref), fullscreenTitleBarModule (ref), constantsModule (ref), fFlagLuaMenuPerfImprovementsModule (ref), viewportOverlayModule (ref), sideNavigationModule (ref), leaveGameDialogModule (ref), pageContainerModule (ref), respawnDialogModule (ref), reportDialogModule (ref), reportSentDialogModule (ref), controlLayoutSetterModule (ref), connectionModule (ref), educationalPopupModule (ref), menuIconTooltipModule (ref)
 	local var16 = if p0.enableFullscreenTitleBar then roact.createElement(fullscreenTitleBarModule, {
 		displayOrder = constantsModule.DisplayOrder.FullscreenTitleBar

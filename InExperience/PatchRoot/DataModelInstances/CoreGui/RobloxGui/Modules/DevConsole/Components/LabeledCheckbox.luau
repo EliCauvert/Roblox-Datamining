@@ -5,7 +5,7 @@ local checkboxModule = require(script.Parent.Checkbox)
 local checkboxInnerPadding = constantsModule.UtilityBarFormatting.CheckboxInnerPadding
 local labeledCheckbox = roactModule.Component:extend("LabeledCheckbox")
 
-function labeledCheckbox.render(p0) --[[ line: 11 ]]
+function labeledCheckbox.render(p0)
 	-- upvalues: textService (ref), roactModule (ref), checkboxInnerPadding (ref), checkboxModule (ref), constantsModule (ref)
 	local checkboxHeight = p0.props.checkboxHeight
 	local frameHeight = p0.props.frameHeight

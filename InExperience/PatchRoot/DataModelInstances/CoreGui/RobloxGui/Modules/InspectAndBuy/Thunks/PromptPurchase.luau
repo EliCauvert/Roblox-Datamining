@@ -8,9 +8,9 @@ local setItemBeingPurchasedModule = require(parent.Actions.SetItemBeingPurchased
 local sendCounterModule = require(parent.Thunks.SendCounter)
 local list = { analyticsModule }
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 18 | named "PromptPurchase" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), setItemBeingPurchasedModule (ref), constantsModule (ref), marketplaceService (ref), playersService (ref), sendCounterModule (ref)
-	return thunkModule.new(script.Name, list, function(p7, p8) --[[ line: 27 ]]
+	return thunkModule.new(script.Name, list, function(p7, p8)
 		-- upvalues: analyticsModule (copy), setItemBeingPurchasedModule (copy), p0 (ref), p1 (ref), p3 (ref), constantsModule (copy), marketplaceService (copy), playersService (copy), p2 (ref), p4 (ref), p5 (ref), sendCounterModule (copy), p6 (ref)
 		local var8 = p8[analyticsModule]
 		p7:dispatch(setItemBeingPurchasedModule(p0, p1))

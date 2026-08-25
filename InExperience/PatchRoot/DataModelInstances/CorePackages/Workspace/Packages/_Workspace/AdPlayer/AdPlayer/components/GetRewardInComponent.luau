@@ -16,11 +16,11 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		rewardEarned = "Features.OnDemandAds.Reward_Earned"
 	}
 	
-	local function _(p0) --[[ line: 37 | named "linearEaseOptions" ]]
+	local function _(p0)
 		return { duration = p0, easingStyle = Enum.EasingStyle.Linear }
 	end
 	
-	return function(p1) --[[ line: 44 ]]
+	return function(p1)
 		-- upvalues: reactModule (ref), reactOtterModule (ref), useTokens (ref), useLocalization (ref), t (ref), view (ref), image (ref), text (ref), radialProgressComponentModule (ref)
 		local var6 = reactModule.useRef(nil)
 		local var7, var8 = reactModule.useState(0)
@@ -38,7 +38,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		local var28, var29 = reactOtterModule.useAnimatedBinding(0)
 		local var30, var31 = reactModule.useState(true)
 		local var32, _ = reactModule.useBinding(1)
-		reactModule.useEffect(function() --[[ line: 64 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var30 (ref), var29 (ref), reactOtterModule (copy)
 			if var30 then
 				var29(reactOtterModule.instant(0))
@@ -46,19 +46,19 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				return
 			end
 			local var33 = false
-			task.delay(3, function() --[[ line: 71 ]]
+			task.delay(3, function()
 				-- upvalues: var33 (write), var29 (copy), reactOtterModule (copy)
 				if not var33 then
 					var29(reactOtterModule.ease(1))
 				end
 			end)
 			
-			return function() --[[ line: 77 ]]
+			return function()
 				-- upvalues: var33 (write)
 				var33 = true
 			end
 		end, { var30 })
-		reactModule.useEffect(function() --[[ line: 82 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var6 (ref), var8 (ref), var13 (ref), var15 (ref)
 			local current = var6.current
 			
@@ -71,7 +71,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				var15(current_1.TextBounds.X)
 			end
 		end, {})
-		reactModule.useEffect(function() --[[ line: 94 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var30 (ref), var23 (ref), reactOtterModule (copy), var7 (ref), var14 (ref)
 			if var30 then
 				var23(reactOtterModule.instant(24 + var7 + 8 + 20))
@@ -80,7 +80,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 			end
 			var23(reactOtterModule.ease(24 + var14 + 8 + 20 - 4, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
 		end, { var30, var7, var14 })
-		reactModule.useEffect(function() --[[ line: 114 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var30 (ref), var10 (ref), reactOtterModule (copy), var12 (ref), var17 (ref), var19 (ref), var27 (ref), var25 (ref)
 			local var34 = false
 			
@@ -95,21 +95,21 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				var12(reactOtterModule.ease(24, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
 				var19(reactOtterModule.ease(0, { duration = 0.4, easingStyle = Enum.EasingStyle.Linear }))
 				var27(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
-				task.delay(0.1, function() --[[ line: 130 ]]
+				task.delay(0.1, function()
 					-- upvalues: var34 (write), var10 (copy), reactOtterModule (copy), var17 (copy)
 					if not var34 then
 						var10(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 						var17(reactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 					end
 				end)
-				task.delay(0.4, function() --[[ line: 137 ]]
+				task.delay(0.4, function()
 					-- upvalues: var34 (write), var25 (copy), reactOtterModule (copy)
 					if not var34 then
 						var25(reactOtterModule.ease(0, { duration = 0.1, easingStyle = Enum.EasingStyle.Linear }))
 					end
 				end)
 			end
-			return function() --[[ line: 144 ]]
+			return function()
 				-- upvalues: var34 (write)
 				var34 = true
 			end
@@ -117,7 +117,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 		
 		return reactModule.createElement(view, {
 			tag = "padding-y-xsmall padding-x-medium bg-over-media-300 radius-small clip",
-			Size = var22:map(function(p2) --[[ line: 151 ]]
+			Size = var22:map(function(p2)
 				return UDim2.fromOffset(p2, 32)
 			end),
 			GroupTransparency = var28,
@@ -129,7 +129,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				LayoutOrder = 1,
 				imageStyle = { Transparency = var24 },
 				Position = UDim2.new(0, -4, 0.5, 0),
-				Visible = p1.rewardWaitAlpha:map(function(p3) --[[ line: 165 ]]
+				Visible = p1.rewardWaitAlpha:map(function(p3)
 					-- upvalues: var31 (ref)
 					var31(p3 < 1)
 					
@@ -140,7 +140,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				tag = "text-label-medium text-align-x-left text-align-y-center",
 				Text = var21.getRewardIn,
 				Size = UDim2.new(0, var7, 1, 0),
-				Position = var11:map(function(p4) --[[ line: 174 ]]
+				Position = var11:map(function(p4)
 					return UDim2.new(0, p4, 0, 0)
 				end),
 				textStyle = {
@@ -153,7 +153,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 				tag = "text-label-medium text-align-x-right text-align-y-center anchor-top-right",
 				Text = var21.rewardEarned,
 				Size = UDim2.new(0, var14, 1, 0),
-				Position = var18:map(function(p5) --[[ line: 187 ]]
+				Position = var18:map(function(p5)
 					return UDim2.new(1, -p5, 0, 0)
 				end),
 				textStyle = {
@@ -174,7 +174,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 					Size = UDim2.fromScale(1, 1),
 					SizeConstraint = Enum.SizeConstraint.RelativeYY,
 					ImageColor3 = var20.Color.Content.Muted.Color3,
-					Visible = p1.rewardWaitAlpha:map(function(p6) --[[ line: 208 ]]
+					Visible = p1.rewardWaitAlpha:map(function(p6)
 						return p6 < 1
 					end)
 				}, {
@@ -188,7 +188,7 @@ if require(adPlayer.Flags).GetEnableLuaRewardTimerUI() then
 						timerLabel = reactModule.createElement(text, {
 							tag = "size-full-300 anchor-center-center position-center-center content-emphasis text-caption-small text-align-x-center text-align-y-center",
 							TextScaled = true,
-							Text = p1.rewardWaitAlpha:map(function(p7) --[[ line: 221 ]]
+							Text = p1.rewardWaitAlpha:map(function(p7)
 								-- upvalues: p1 (ref)
 								return tostring(math.ceil(p1.rewardWaitTime - p1.rewardWaitTime * p7))
 							end)

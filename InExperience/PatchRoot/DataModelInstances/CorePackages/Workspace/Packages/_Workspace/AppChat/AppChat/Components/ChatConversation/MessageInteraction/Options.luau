@@ -9,14 +9,14 @@ local fFlagAppChatEnableMessageContextMenuModule = require(appChat.Flags.FFlagAp
 local t = {
 	LayoutOrder = 1,
 	isIncoming = false,
-	handleEvent = function(_, _, _) --[[ line: 22 ]] end,
-	emitImpressionTelemetryEvent = function() --[[ line: 23 ]] end
+	handleEvent = function(_, _, _) end,
+	emitImpressionTelemetryEvent = function() end
 }
 
-function Options(p0) --[[ line: 35 ]]
+function Options(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), optionsEnumModule (ref), foundationModule (ref), builderIconsModule (ref), fFlagAppChatEnableMessageContextMenuModule (ref)
 	local var8 = cryoModule.Dictionary.union(t, p0)
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref)
 		var8.emitImpressionTelemetryEvent()
 	end, {})
@@ -27,7 +27,7 @@ function Options(p0) --[[ line: 35 ]]
 	}, {
 		Reply = reactModule.createElement(foundationModule.IconButton, {
 			isCircular = true,
-			onActivated = reactModule.useCallback(function() --[[ line: 42 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var8 (ref), reactModule (copy), optionsEnumModule (copy)
 				var8.handleEvent(reactModule.Event.Activated, nil, optionsEnumModule.Reply)
 			end, { var8.handleEvent }),
@@ -38,7 +38,7 @@ function Options(p0) --[[ line: 35 ]]
 		}),
 		MessageContextMenu = if fFlagAppChatEnableMessageContextMenuModule then reactModule.createElement(foundationModule.IconButton, {
 			isCircular = true,
-			onActivated = reactModule.useCallback(function() --[[ line: 46 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var8 (ref), reactModule (copy), optionsEnumModule (copy)
 				var8.handleEvent(reactModule.Event.Activated, nil, optionsEnumModule.MessageContextMenu)
 			end, { var8.handleEvent }),

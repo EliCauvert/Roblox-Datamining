@@ -14,10 +14,10 @@ local fFlagScopeBadUtterancePlayerNameToChatDialogsModule = require(parent.Inter
 local constants = require(parent.InterventionShared).Utils.Constants
 local _ = require(inExperienceIntervention.Utils.Types)
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "ChatNudgeCustomDialogV2" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), constants (ref), reactModule (ref), fFlagNotApprovedPageIXPExposure (ref), IXPService (ref), appUserLayers (ref), useParsedBadUtterances (ref), fFlagScopeBadUtterancePlayerNameToChatDialogsModule (ref), var4 (ref), genericInterventionDialog (ref), interventionAnalytics (ref)
 	local var6 = useLocalization(constants.localizationKeys)
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagNotApprovedPageIXPExposure (copy), IXPService (copy), appUserLayers (copy)
 		if fFlagNotApprovedPageIXPExposure and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
 			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.NotApprovedPageUserIDLayer)

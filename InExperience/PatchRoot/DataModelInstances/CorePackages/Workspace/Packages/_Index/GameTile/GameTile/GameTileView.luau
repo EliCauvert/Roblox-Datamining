@@ -17,7 +17,7 @@ local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFl
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function(p0) --[[ line: 97 | named "GameTileView" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), useTokens (ref), gameTileViewConfigModule (ref), useCursor (ref), fFlagLuaAppMigrateGameTileHoverFixes (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), reactModule (ref), fFlagLuaAppGameTileInteractionFeedback (ref), zoomAnimatedFrameModule (ref), imageSetLabel (ref), images (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), rightAlignedButtonWrapperModule (ref)
 	local var6 = useDesignTokens()
 	local var7 = if p0.isUnifiedGameTile then p0.numLinesForTitle or 1 else nil
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 97 | named "GameTileView" ]]
 	local _ = nil
 	local _ = nil
 	local var29 = reactModule.useRef(false)
-	local var30 = reactModule.useCallback(function(...) --[[ line: 198 ]]
+	local var30 = reactModule.useCallback(function(...)
 		-- upvalues: var29 (write), fFlagLuaAppGameTileInteractionFeedback (copy), p0 (ref)
 		var29.current = false
 		
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 97 | named "GameTileView" ]]
 			p0.onGuiStateChanged(...)
 		end
 	end, { p0.onGuiStateChanged })
-	local var31 = reactModule.useCallback(function() --[[ line: 205 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var29 (write)
 		if p0.onTouchLongPress and not p0.isDisabled then
 			local current = var29.current
@@ -80,7 +80,7 @@ return function(p0) --[[ line: 97 | named "GameTileView" ]]
 			end
 		end
 	end, { p0.onTouchLongPress, p0.isDisabled })
-	local var32 = reactModule.useCallback(function() --[[ line: 215 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: var29 (write), p0 (ref)
 		if var29.current then
 			var29.current = false

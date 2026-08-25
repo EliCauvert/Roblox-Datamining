@@ -4,7 +4,7 @@ local dashModule = require(parent.Dash)
 local reactModule = require(parent.React)
 local designTokenContextModule = require(script.Parent.DesignTokenContext)
 
-return function(value) --[[ line: 11 | named "useDesignTokens" ]]
+return function(value)
 	-- upvalues: reactModule (ref), designTokenContextModule (ref), dashModule (ref), argCheckModule (ref)
 	local var4 = reactModule.useContext(designTokenContextModule)
 	local value_1 = value or dashModule.identity

@@ -23,15 +23,15 @@ local t_1 = {
 local t_2 = { Transparency = 1 }
 local t_3 = { dampingRatio = 1, frequency = 5 }
 
-local function getActiveTabPosition(p0) --[[ line: 70 ]]
+local function getActiveTabPosition(p0)
 	return UDim2.new(0, p0, 1, 0)
 end
 
-local function getActiveTabSize(value) --[[ line: 74 ]]
+local function getActiveTabSize(value)
 	return UDim2.new(0, value, 0, 3)
 end
 
-return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" ]]
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useTokens (ref), useAnimatedBinding (ref), reactModule (ref), fFlagAXCategoryMenuVisualFixes (ref), makeOtterSpringValueModule (ref), t_3 (ref), reactOtterModule (ref), fFlagAXScrollHighlightedTabIntoView (ref), getCenterScrollOffsetModule (ref), gamepadService (ref), tabGroupTabModule (ref), getActiveTabPosition (ref), getActiveTabSize (ref), view (ref), t_2 (ref), t_1 (ref), scrollingFrameWithIndicatorsModule (ref), t (ref)
 	local var16 = useTokens()
 	local var17, var18 = useAnimatedBinding(0)
@@ -39,7 +39,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 	local var21 = reactModule.useRef(nil)
 	local var22 = reactModule.useRef(nil)
 	local var23 = reactModule.useRef(nil)
-	local var24 = reactModule.useCallback(function(p3, p4, p5) --[[ line: 87 ]]
+	local var24 = reactModule.useCallback(function(p3, p4, p5)
 		-- upvalues: fFlagAXCategoryMenuVisualFixes (copy), var19 (ref), var18 (ref), makeOtterSpringValueModule (copy), t_3 (copy), var20 (ref), reactOtterModule (copy)
 		if not p5 and (not fFlagAXCategoryMenuVisualFixes or var19:getValue() > 0) then
 			var18(makeOtterSpringValueModule(p3, t_3))
@@ -50,7 +50,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 		var18(reactOtterModule.instant(p3))
 		var20(reactOtterModule.instant(p4))
 	end, {})
-	local var25 = reactModule.useCallback(function() --[[ line: 100 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), var21 (ref), var22 (ref)
 		local current = var23.current
 		local current_1 = var21.current
@@ -75,7 +75,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 			current.scrollToOffset(var34 - x)
 		end
 	end, {})
-	local var26 = if fFlagAXScrollHighlightedTabIntoView then reactModule.useCallback(function(p6) --[[ line: 137 ]]
+	local var26 = if fFlagAXScrollHighlightedTabIntoView then reactModule.useCallback(function(p6)
 		-- upvalues: var23 (ref), getCenterScrollOffsetModule (copy)
 		local current = var23.current
 		
@@ -92,7 +92,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 		end
 		current.scrollToOffset(var36)
 	end, {}) else nil
-	local var27 = reactModule.useCallback(function(p7) --[[ line: 167 ]]
+	local var27 = reactModule.useCallback(function(p7)
 		-- upvalues: var21 (ref), var22 (ref), p1 (ref), var24 (ref), fFlagAXScrollHighlightedTabIntoView (copy), var26 (write), var25 (ref)
 		local current = var21.current
 		var22.current = p7
@@ -119,7 +119,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 		var26,
 		var24
 	})
-	reactModule.useEffect(function() --[[ line: 198 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var21 (ref), var22 (ref), var24 (ref), fFlagAXCategoryMenuVisualFixes (copy), fFlagAXScrollHighlightedTabIntoView (copy), var26 (write), var25 (ref)
 		local current = var21.current
 		local current_1 = var22.current
@@ -137,7 +137,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 	end, { var25, var26, var24 })
 	
 	if fFlagAXScrollHighlightedTabIntoView then
-		reactModule.useEffect(function() --[[ line: 220 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var23 (ref), gamepadService (copy), var26 (write)
 			local current = var23.current
 			
@@ -145,7 +145,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 			local scrollingFrame = current.getScrollingFrame()
 			
 			if scrollingFrame then
-				local selectionChangedConnection = scrollingFrame.SelectionChanged:Connect(function(_, _, p8) --[[ line: 232 ]]
+				local selectionChangedConnection = scrollingFrame.SelectionChanged:Connect(function(_, _, p8)
 					-- upvalues: gamepadService (copy), var26 (copy)
 					if gamepadService.GamepadCursorEnabled then return end
 					if var26 then
@@ -153,7 +153,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 					end
 				end)
 				
-				return function() --[[ line: 244 ]]
+				return function()
 					-- upvalues: selectionChangedConnection (ref)
 					selectionChangedConnection:Disconnect()
 				end
@@ -161,7 +161,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 		end, {})
 	end
 	if fFlagAXCategoryMenuVisualFixes then
-		reactModule.useEffect(function() --[[ line: 257 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p1 (ref), var22 (ref), var18 (ref), reactOtterModule (copy), var20 (ref)
 			local var39 = false
 			
@@ -179,10 +179,10 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 				var20(reactOtterModule.instant(0))
 			end
 		end, { p1.activeTabId, p1.items })
-		reactModule.useImperativeHandle(p1.controllerRef, function() --[[ line: 276 ]]
+		reactModule.useImperativeHandle(p1.controllerRef, function()
 			-- upvalues: var23 (ref)
 			return {
-				scrollToOffset = function(value) --[[ line: 278 ]]
+				scrollToOffset = function(value)
 					-- upvalues: var23 (copy)
 					local current = var23.current
 					
@@ -190,7 +190,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 						current.scrollToOffset(value)
 					end
 				end,
-				setOffset = function(value) --[[ line: 284 ]]
+				setOffset = function(value)
 					-- upvalues: var23 (copy)
 					local current = var23.current
 					
@@ -198,7 +198,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 						current.setOffset(value)
 					end
 				end,
-				getScrollingFrame = function() --[[ line: 290 ]]
+				getScrollingFrame = function()
 					-- upvalues: var23 (copy)
 					local current = var23.current
 					
@@ -214,7 +214,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 		t_4[v.id] = reactModule.createElement(tabGroupTabModule, {
 			ref = if var31 then var27 else v.ref,
 			text = v.text,
-			onActivated = if p1.onTabActivated then function() --[[ line: 305 ]]
+			onActivated = if p1.onTabActivated then function()
 				-- upvalues: p1 (ref), v (ref)
 				p1.onTabActivated(v.id)
 			end else nil,
@@ -236,11 +236,11 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 78 | named "TabGroup" 
 	}, t_4)
 	local frame = reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Position = reactModule.useMemo(function() --[[ line: 318 ]]
+		Position = reactModule.useMemo(function()
 			-- upvalues: var17 (ref), getActiveTabPosition (copy)
 			return var17:map(getActiveTabPosition)
 		end, {}),
-		Size = reactModule.useMemo(function() --[[ line: 322 ]]
+		Size = reactModule.useMemo(function()
 			-- upvalues: var19 (ref), getActiveTabSize (copy)
 			return var19:map(getActiveTabSize)
 		end, {}),

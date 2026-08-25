@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("InExperienceNotificationsLayer", "Experience.Menu")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("InExperienceNotificationsLayer")
 end

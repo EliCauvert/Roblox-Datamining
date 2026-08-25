@@ -7,7 +7,7 @@ local valueToStringModule = require(parent.util.valueToString)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 
-local function comparitorMethodImpl(p0, p1, p2) --[[ line: 45 ]]
+local function comparitorMethodImpl(p0, p1, p2)
 	-- upvalues: constantsModule (ref)
 	if p2 == constantsModule.COMPARISON_METHODS.SMALLER then
 		return p0 < p1
@@ -25,7 +25,7 @@ local function comparitorMethodImpl(p0, p1, p2) --[[ line: 45 ]]
 	error("Invalid comparitor method: " .. p2)
 end
 
-local function doesPropertyMatchExpectations(p3, p4, p5) --[[ line: 63 ]]
+local function doesPropertyMatchExpectations(p3, p4, p5)
 	-- upvalues: cryoModule (ref), getFFlagUGCValidationEyebrowEyelashSupportModule (ref), constantsModule (ref), doesPropertyMatchExpectations (ref), comparitorMethodImpl (ref)
 	if p4 == cryoModule.None then
 		return p3 == nil
@@ -41,7 +41,7 @@ local function doesPropertyMatchExpectations(p3, p4, p5) --[[ line: 63 ]]
 	end
 end
 
-local function validatePropertyValue(p6, p7, p8, p9, p10, p11) --[[ line: 98 ]]
+local function validatePropertyValue(p6, p7, p8, p9, p10, p11)
 	-- upvalues: doesPropertyMatchExpectations (ref), analyticsModule (ref), valueToStringModule (ref)
 	if doesPropertyMatchExpectations(p9, p10, p11) then
 		return true
@@ -53,7 +53,7 @@ local function validatePropertyValue(p6, p7, p8, p9, p10, p11) --[[ line: 98 ]]
 	}
 end
 
-local function _(p12, p13) --[[ line: 123 | named "extractSubProperty" ]]
+local function _(p12, p13)
 	if typeof(p13) == "CFrame" and p12 == "PositionMagnitude" then
 		return true, p13.Position.Magnitude
 	elseif typeof(p13) == "CFrame" and p12 == "Orientation" then
@@ -64,7 +64,7 @@ local function _(p12, p13) --[[ line: 123 | named "extractSubProperty" ]]
 	return false
 end
 
-local function getAllActiveTestsOnProperty(p14, p15, p16, p17) --[[ line: 135 ]]
+local function getAllActiveTestsOnProperty(p14, p15, p16, p17)
 	-- upvalues: constantsModule (ref), getAllActiveTestsOnProperty (ref)
 	if typeof(p17) ~= "table" then
 		return {
@@ -123,7 +123,7 @@ local function getAllActiveTestsOnProperty(p14, p15, p16, p17) --[[ line: 135 ]]
 	return t
 end
 
-return function(p18, p19, p20) --[[ line: 195 | named "validatePropertyRequirements" ]]
+return function(p18, p19, p20)
 	-- upvalues: failureReasonsAccumulatorModule (ref), constantsModule (ref), analyticsModule (ref), getAllActiveTestsOnProperty (ref), validatePropertyValue (ref)
 	if p19 == nil then
 		p19 = p20.assetTypeEnum
@@ -136,7 +136,7 @@ return function(p18, p19, p20) --[[ line: 195 | named "validatePropertyRequireme
 		for i_1, v_1 in constantsModule.PROPERTIES do
 			if v:IsA(i_1) then
 				for i_2, v_2 in v_1 do
-					local ok, status = pcall(function() --[[ line: 215 ]]
+					local ok, status = pcall(function()
 						-- upvalues: v (ref), i_2 (ref)
 						return v[i_2]
 					end)

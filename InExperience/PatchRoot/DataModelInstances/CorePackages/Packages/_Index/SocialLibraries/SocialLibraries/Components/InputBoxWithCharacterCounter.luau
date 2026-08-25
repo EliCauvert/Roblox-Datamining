@@ -17,16 +17,16 @@ inputBoxWithCharacterCounter.defaultProps = {
 	style = testStyleModule
 }
 
-function inputBoxWithCharacterCounter.init(p0) --[[ line: 26 ]]
+function inputBoxWithCharacterCounter.init(p0)
 	p0.state = { inputText = p0.props.initialInputText }
 	
-	function p0.textChangedCallback(p1) --[[ line: 31 ]]
+	function p0.textChangedCallback(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ inputText = p1 })
 	end
 end
 
-function inputBoxWithCharacterCounter.render(p2) --[[ line: 38 ]]
+function inputBoxWithCharacterCounter.render(p2)
 	-- upvalues: text (ref), cryo (ref), roact (ref), callbackInputBoxModule (ref)
 	local validInputTextColor3, validInputTextTransparency
 	local style = p2.props.style

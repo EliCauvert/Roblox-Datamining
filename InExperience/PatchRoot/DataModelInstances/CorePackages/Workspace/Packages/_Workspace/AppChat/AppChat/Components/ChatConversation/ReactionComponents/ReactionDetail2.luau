@@ -10,7 +10,7 @@ local white = colors.White
 local flint = colors.Flint
 local arialBold = Enum.Font.ArialBold
 
-local function Navigator(p0) --[[ line: 25 ]]
+local function Navigator(p0)
 	-- upvalues: reactionListModule (ref), reactModule (ref), cryoModule (ref), roactModule (ref), flint (ref), reactionMapModule (ref), arialBold (ref), white (ref)
 	local t = {}
 	local var8 = 0
@@ -72,16 +72,16 @@ local function Navigator(p0) --[[ line: 25 ]]
 				TextSize = 15,
 				TextWrapped = true,
 				LayoutOrder = 2,
-				[reactModule.Event.Activated] = function() --[[ line: 122 ]]
+				[reactModule.Event.Activated] = function()
 					-- upvalues: p0 (ref)
 					p0.setEmoji("All")
 				end
 			}, {
 				corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0.4, 0) })
 			})
-		}, reactModule.useMemo(function() --[[ line: 38 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: cryoModule (copy), t (ref), roactModule (copy), flint (copy), reactModule (copy), p0 (ref), reactionMapModule (copy), arialBold (copy), white (copy)
-			return cryoModule.List.map(t, function(p1, p2) --[[ line: 39 ]]
+			return cryoModule.List.map(t, function(p1, p2)
 				-- upvalues: roactModule (copy), flint (copy), reactModule (copy), p0 (copy), reactionMapModule (copy), arialBold (copy), white (copy)
 				return roactModule.createElement("TextButton", {
 					Size = UDim2.new(0, 54, 0, 28),
@@ -89,7 +89,7 @@ local function Navigator(p0) --[[ line: 25 ]]
 					BorderSizePixel = 0,
 					Text = "",
 					LayoutOrder = p2 + 2,
-					[reactModule.Event.Activated] = function() --[[ line: 46 ]]
+					[reactModule.Event.Activated] = function()
 						-- upvalues: p0 (copy), p1 (ref)
 						p0.setEmoji(p1)
 					end
@@ -118,7 +118,7 @@ local function Navigator(p0) --[[ line: 25 ]]
 	})
 end
 
-return function(p3) --[[ line: 134 | named "ReactionDetail" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), roactModule (ref), flint (ref), Navigator (ref), colors (ref), detailListModule (ref)
 	local all, all_1 = reactModule.useState("All")
 	

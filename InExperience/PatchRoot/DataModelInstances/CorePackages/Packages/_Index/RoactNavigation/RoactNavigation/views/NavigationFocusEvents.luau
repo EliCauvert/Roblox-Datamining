@@ -4,36 +4,36 @@ local array = require(parent_1.LuauPolyfill).Array
 local eventsModule = require(parent.Events)
 local navigationEventManager = require(parent_1.React).Component:extend("NavigationEventManager")
 
-function navigationEventManager.didMount(p0) --[[ line: 13 ]]
+function navigationEventManager.didMount(p0)
 	-- upvalues: eventsModule (ref)
 	local navigation = p0.props.navigation
-	p0._actionSubscription = navigation.addListener(eventsModule.Action, function(...) --[[ line: 16 ]]
+	p0._actionSubscription = navigation.addListener(eventsModule.Action, function(...)
 		-- upvalues: p0 (ref)
 		return p0:_handleAction(...)
 	end)
-	p0._willFocusSubscription = navigation.addListener(eventsModule.WillFocus, function(...) --[[ line: 20 ]]
+	p0._willFocusSubscription = navigation.addListener(eventsModule.WillFocus, function(...)
 		-- upvalues: p0 (ref)
 		return p0:_handleWillFocus(...)
 	end)
-	p0._willBlurSubscription = navigation.addListener(eventsModule.WillBlur, function(...) --[[ line: 24 ]]
+	p0._willBlurSubscription = navigation.addListener(eventsModule.WillBlur, function(...)
 		-- upvalues: p0 (ref)
 		return p0:_handleWillBlur(...)
 	end)
-	p0._didFocusSubscription = navigation.addListener(eventsModule.DidFocus, function(...) --[[ line: 28 ]]
+	p0._didFocusSubscription = navigation.addListener(eventsModule.DidFocus, function(...)
 		-- upvalues: p0 (ref)
 		return p0:_handleDidFocus(...)
 	end)
-	p0._didBlurSubscription = navigation.addListener(eventsModule.DidBlur, function(...) --[[ line: 32 ]]
+	p0._didBlurSubscription = navigation.addListener(eventsModule.DidBlur, function(...)
 		-- upvalues: p0 (ref)
 		return p0:_handleDidBlur(...)
 	end)
-	p0._refocusSubscription = navigation.addListener(eventsModule.Refocus, function(...) --[[ line: 36 ]]
+	p0._refocusSubscription = navigation.addListener(eventsModule.Refocus, function(...)
 		-- upvalues: p0 (ref)
 		return p0:_handleRefocus(...)
 	end)
 end
 
-function navigationEventManager.willUnmount(p1) --[[ line: 41 ]]
+function navigationEventManager.willUnmount(p1)
 	if p1._actionSubscription then
 		p1._actionSubscription.remove()
 	end
@@ -54,7 +54,7 @@ function navigationEventManager.willUnmount(p1) --[[ line: 41 ]]
 	end
 end
 
-function navigationEventManager._handleAction(p2, p3) --[[ line: 62 ]]
+function navigationEventManager._handleAction(p2, p3)
 	-- upvalues: eventsModule (ref)
 	local state = p3.state
 	local lastState = p3.lastState
@@ -92,7 +92,7 @@ function navigationEventManager._handleAction(p2, p3) --[[ line: 62 ]]
 	onEvent(index.key, eventsModule.Action, t)
 end
 
-function navigationEventManager._handleWillFocus(p4, p5) --[[ line: 113 ]]
+function navigationEventManager._handleWillFocus(p4, p5)
 	-- upvalues: array (ref)
 	local lastState = p5.lastState
 	local action = p5.action
@@ -103,7 +103,7 @@ function navigationEventManager._handleWillFocus(p4, p5) --[[ line: 113 ]]
 	local var4 = nil
 	
 	if lastState and lastState.routes then
-		local var5 = if lastState then array.findIndex(lastState.routes, function(p6) --[[ line: 125 ]]
+		local var5 = if lastState then array.findIndex(lastState.routes, function(p6)
 			-- upvalues: index (ref)
 			return p6.key == index.key
 		end) else -1
@@ -121,7 +121,7 @@ function navigationEventManager._handleWillFocus(p4, p5) --[[ line: 113 ]]
 	})
 end
 
-function navigationEventManager._handleWillBlur(p7, p8) --[[ line: 143 ]]
+function navigationEventManager._handleWillBlur(p7, p8)
 	-- upvalues: array (ref)
 	local lastState = p8.lastState
 	local action = p8.action
@@ -132,7 +132,7 @@ function navigationEventManager._handleWillBlur(p7, p8) --[[ line: 143 ]]
 	local var6 = nil
 	
 	if lastState and lastState.routes then
-		local var7 = if lastState then array.findIndex(lastState.routes, function(p9) --[[ line: 155 ]]
+		local var7 = if lastState then array.findIndex(lastState.routes, function(p9)
 			-- upvalues: index (ref)
 			return p9.key == index.key
 		end) else -1
@@ -150,7 +150,7 @@ function navigationEventManager._handleWillBlur(p7, p8) --[[ line: 143 ]]
 	})
 end
 
-function navigationEventManager._handleDidFocus(p10, p11) --[[ line: 173 ]]
+function navigationEventManager._handleDidFocus(p10, p11)
 	-- upvalues: array (ref)
 	local lastState = p11.lastState
 	local action = p11.action
@@ -159,7 +159,7 @@ function navigationEventManager._handleDidFocus(p10, p11) --[[ line: 173 ]]
 	local navigation = p10.props.navigation
 	
 	if p10._lastWillFocusKey then
-		local var8 = array.findIndex(navigation.state.routes, function(p12) --[[ line: 182 ]]
+		local var8 = array.findIndex(navigation.state.routes, function(p12)
 			-- upvalues: p10 (ref)
 			return p12.key == p10._lastWillFocusKey
 		end)
@@ -169,7 +169,7 @@ function navigationEventManager._handleDidFocus(p10, p11) --[[ line: 173 ]]
 			local var10 = nil
 			
 			if lastState and lastState.routes then
-				local var11 = if lastState then array.findIndex(lastState.routes, function(p13) --[[ line: 192 ]]
+				local var11 = if lastState then array.findIndex(lastState.routes, function(p13)
 					-- upvalues: var9 (ref)
 					return p13.key == var9.key
 				end) else -1
@@ -189,7 +189,7 @@ function navigationEventManager._handleDidFocus(p10, p11) --[[ line: 173 ]]
 	end
 end
 
-function navigationEventManager._handleDidBlur(p14, p15) --[[ line: 212 ]]
+function navigationEventManager._handleDidBlur(p14, p15)
 	-- upvalues: array (ref)
 	local lastState = p15.lastState
 	local action = p15.action
@@ -198,7 +198,7 @@ function navigationEventManager._handleDidBlur(p14, p15) --[[ line: 212 ]]
 	local navigation = p14.props.navigation
 	
 	if p14._lastWillBlurKey then
-		local var12 = array.findIndex(navigation.state.routes, function(p16) --[[ line: 221 ]]
+		local var12 = array.findIndex(navigation.state.routes, function(p16)
 			-- upvalues: p14 (ref)
 			return p16.key == p14._lastWillBlurKey
 		end)
@@ -208,7 +208,7 @@ function navigationEventManager._handleDidBlur(p14, p15) --[[ line: 212 ]]
 			local var14 = nil
 			
 			if lastState and lastState.routes then
-				local var15 = if lastState then array.findIndex(lastState.routes, function(p17) --[[ line: 231 ]]
+				local var15 = if lastState then array.findIndex(lastState.routes, function(p17)
 					-- upvalues: var13 (ref)
 					return p17.key == var13.key
 				end) else -1
@@ -228,13 +228,13 @@ function navigationEventManager._handleDidBlur(p14, p15) --[[ line: 212 ]]
 	end
 end
 
-function navigationEventManager._handleRefocus(p18) --[[ line: 251 ]]
+function navigationEventManager._handleRefocus(p18)
 	-- upvalues: eventsModule (ref)
 	local navigation = p18.props.navigation
 	p18.props.onEvent(navigation.state.routes[navigation.state.index].key, eventsModule.Refocus)
 end
 
-function navigationEventManager._emitWillFocus(p19, p20, p21) --[[ line: 259 ]]
+function navigationEventManager._emitWillFocus(p19, p20, p21)
 	-- upvalues: eventsModule (ref)
 	if p19._lastWillBlurKey == p20 then
 		p19._lastWillBlurKey = nil
@@ -250,7 +250,7 @@ function navigationEventManager._emitWillFocus(p19, p20, p21) --[[ line: 259 ]]
 	end
 end
 
-function navigationEventManager._emitWillBlur(p22, p23, p24) --[[ line: 284 ]]
+function navigationEventManager._emitWillBlur(p22, p23, p24)
 	-- upvalues: eventsModule (ref)
 	if p22._lastWillFocusKey == p23 then
 		p22._lastWillFocusKey = nil
@@ -266,7 +266,7 @@ function navigationEventManager._emitWillBlur(p22, p23, p24) --[[ line: 284 ]]
 	end
 end
 
-function navigationEventManager._emitDidFocus(p25, p26, p27) --[[ line: 309 ]]
+function navigationEventManager._emitDidFocus(p25, p26, p27)
 	-- upvalues: eventsModule (ref)
 	if p25._lastWillFocusKey == p26 and p25._lastDidFocusKey ~= p26 then
 		p25._lastDidFocusKey = p26
@@ -276,7 +276,7 @@ function navigationEventManager._emitDidFocus(p25, p26, p27) --[[ line: 309 ]]
 	end
 end
 
-function navigationEventManager._emitDidBlur(p28, p29, p30) --[[ line: 321 ]]
+function navigationEventManager._emitDidBlur(p28, p29, p30)
 	-- upvalues: eventsModule (ref)
 	if p28._lastWillBlurKey == p29 and p28._lastDidBlurKey ~= p29 then
 		p28._lastDidBlurKey = p29
@@ -286,7 +286,7 @@ function navigationEventManager._emitDidBlur(p28, p29, p30) --[[ line: 321 ]]
 	end
 end
 
-function navigationEventManager.render(_) --[[ line: 333 ]]
+function navigationEventManager.render(_)
 	return nil
 end
 

@@ -14,15 +14,15 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 
-local function withCreationSession(p0) --[[ line: 35 ]]
+local function withCreationSession(p0)
 	-- upvalues: sessionManager (ref), funnelEventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref)
 	return cryoModule.Dictionary.join(p0, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 end
 
-return function(p1) --[[ line: 40 | named "useDraftRestoreEffect" ]]
+return function(p1)
 	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), failureReasonModule (ref), creationFlowStateModule (ref), withCreationSession (ref)
 	local var11 = getCreationFlowStoreModule(false)
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), p1 (ref), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), failureReasonModule (copy), creationFlowStateModule (copy), withCreationSession (copy)
 		if var11.getSelectedCapture(false) ~= nil or next(var11.getEditsMap(false)) ~= nil then return end
 		if p1 == nil then return end

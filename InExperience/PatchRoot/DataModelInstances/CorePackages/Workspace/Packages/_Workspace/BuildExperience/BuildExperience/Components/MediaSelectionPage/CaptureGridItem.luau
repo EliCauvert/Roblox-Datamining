@@ -5,10 +5,10 @@ local checkbox = foundationModule.Checkbox
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 18 | named "CaptureGridItem" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), foundationModule (ref), checkbox (ref)
 	local var2 = useTokens()
-	local var3 = reactModule.useCallback(function() --[[ line: 21 ]]
+	local var3 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onActivated(p0.capture)
 	end, { p0.capture, p0.onActivated })
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 18 | named "CaptureGridItem" ]]
 				isChecked = true,
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
-				onActivated = function() --[[ line: 57 ]]
+				onActivated = function()
 					-- upvalues: var3 (ref)
 					var3()
 				end,

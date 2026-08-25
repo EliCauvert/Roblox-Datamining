@@ -14,7 +14,7 @@ local localizationModule = require(expChat.Localization)
 local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
 local useChatTooltipLifecycleModule = require(expChat.ChatWindow.UI.useChatTooltipLifecycle)
 
-return reactModule.memo(function(value) --[[ line: 37 | named "PresetChatTooltip" ]]
+return reactModule.memo(function(value)
 	-- upvalues: fFlagExpChatPresetChatEnabled (ref), fFlagExpChatUseUnifiedTooltipStore (ref), reactModule (ref), getChatTooltipStoreModule (ref), signalsReactModule (ref), useChatTooltipLifecycleModule (ref), localizationModule (ref), expChatSharedModule (ref), constantsModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref)
 	if not fFlagExpChatPresetChatEnabled or not fFlagExpChatUseUnifiedTooltipStore then
 		return reactModule.createElement(reactModule.Fragment, nil, value.children)
@@ -28,7 +28,7 @@ return reactModule.memo(function(value) --[[ line: 37 | named "PresetChatTooltip
 		headerText = "CoreScripts.TextChat.Tooltip.QuickWords.Header",
 		bodyText = "CoreScripts.TextChat.Tooltip.QuickWords.Body"
 	})
-	local var12 = reactModule.useCallback(function() --[[ line: 55 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), expChatSharedModule (copy), constantsModule (copy)
 		var10.onDismiss()
 		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
@@ -36,7 +36,7 @@ return reactModule.memo(function(value) --[[ line: 37 | named "PresetChatTooltip
 			component = constantsModule.Analytics.Components.PresetTooltip
 		}, expChatSharedModule.Analytics.DefaultStandardizedFields)
 	end, { var10.onDismiss })
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), expChatSharedModule (copy), constantsModule (copy)
 		if var9 then
 			expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {

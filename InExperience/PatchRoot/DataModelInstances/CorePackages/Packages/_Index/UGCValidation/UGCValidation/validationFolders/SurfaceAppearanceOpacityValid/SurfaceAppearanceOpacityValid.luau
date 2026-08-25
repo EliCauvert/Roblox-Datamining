@@ -12,7 +12,7 @@ local t_1 = {
 	expectedFailures = {}
 }
 
-local function getIsOpaque(p0) --[[ line: 30 ]]
+local function getIsOpaque(p0)
 	local var6 = p0:ReadPixelsBuffer(Vector2.new(0, 0), p0.Size)
 	
 	for i = 0, buffer.len(var6) - 1, 4 do
@@ -24,7 +24,7 @@ local function getIsOpaque(p0) --[[ line: 30 ]]
 	return true
 end
 
-function t_1.run(p1, p2) --[[ line: 41 ]]
+function t_1.run(p1, p2)
 	-- upvalues: fetchAllDesiredDataModule (ref), errorSourceStringsModule (ref), t (ref), getIsOpaque (ref)
 	local rootInstance = p2.rootInstance
 	local meshTextures = p2.meshTextures

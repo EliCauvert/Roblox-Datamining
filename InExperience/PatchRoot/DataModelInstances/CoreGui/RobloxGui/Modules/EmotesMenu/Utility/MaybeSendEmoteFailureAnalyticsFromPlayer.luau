@@ -1,6 +1,6 @@
 ﻿local constantsModule = require(script.Parent.Parent.Constants)
 
-return function(p0, p1) --[[ line: 16 | named "MaybeSendEmoteFailureAnalyticsFromPlayer" ]]
+return function(p0, p1)
 	-- upvalues: constantsModule (ref)
 	local character = p0.Character
 	

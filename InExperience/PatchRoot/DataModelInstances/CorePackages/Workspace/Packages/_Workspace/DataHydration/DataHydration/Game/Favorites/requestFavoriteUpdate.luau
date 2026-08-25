@@ -2,10 +2,10 @@
 local httpService = game:GetService("HttpService")
 local favoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
 
-return function(p0, p1) --[[ line: 10 | named "requestUpdateFavorite" ]]
+return function(p0, p1)
 	-- upvalues: favoritesUrlBuilderModule (ref), httpService (ref), httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ line: 18 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end

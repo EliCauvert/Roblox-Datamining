@@ -8,12 +8,12 @@ local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
 local var4 = false
 local var5 = nil
 
-local function _() --[[ line: 14 | named "getPlayerGui" ]]
+local function _()
 	-- upvalues: runService (ref), players (ref)
 	return if runService:IsClient() and players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
 end
 
-return function() --[[ line: 22 | named "getMainGui" ]]
+return function()
 	-- upvalues: isPluginSecurityModule (ref), coreGui (ref), flagsModule (ref), var5 (write), runService (ref), players (ref), var4 (write)
 	if isPluginSecurityModule() then
 		return coreGui

@@ -17,7 +17,7 @@ return {
 		swipe = "swipe",
 		handleTap = "handleTap"
 	},
-	logEvent = function(p0, p1, p2) --[[ line: 31 ]]
+	logEvent = function(p0, p1, p2)
 		-- upvalues: var1 (ref), mutedError (ref)
 		local var2, var3 = var1(p2)
 		

@@ -21,39 +21,39 @@ local t = {
 	reportUserText = "localizedText.ReportUser",
 	removeFromGroupText = "localizedText.RemoveFromGroup",
 	cancelText = "localizedText.Cancel",
-	openViewProfile = function(_) --[[ line: 61 ]]
+	openViewProfile = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("openViewProfile was not passed to ParticipantDialogDeprecated")
 	end,
-	openChat = function(...) --[[ line: 64 ]]
+	openChat = function(...)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("openChat was not passed to ParticipantDialogDeprecated")
 	end,
-	openReportUser = function(...) --[[ line: 67 ]]
+	openReportUser = function(...)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("openReportUser was not passed to ParticipantDialogDeprecated")
 	end,
-	openRemoveUserDialog = function(...) --[[ line: 70 ]]
+	openRemoveUserDialog = function(...)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("openRemoveUserDialog was not passed to ParticipantDialogDeprecated")
 	end,
-	onDismiss = function(_) --[[ line: 73 ]]
+	onDismiss = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onDismiss was not passed to ParticipantDialogDeprecated")
 	end
 }
 
-function ParticipantDialogDeprecated(p0) --[[ line: 80 ]]
+function ParticipantDialogDeprecated(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTelemetryModule (ref), chatDialogTelemetryLayerModule (ref), loggerModule (ref), chatDetailsTelemetryEventsModule (ref), reactModule (ref), modalBottomSheet (ref)
 	local var9 = cryoModule.Dictionary.join(t, p0)
 	local var10 = useTelemetryModule(chatDialogTelemetryLayerModule.Context)
 	local conversationId = var9.conversationId
 	local participantId = var9.participantId
 	local showRemoveUserButton = var9.showRemoveUserButton
-	local onDismiss = var9.onDismiss or function() --[[ line: 86 ]] end
+	local onDismiss = var9.onDismiss or function() end
 	local t_1 = {}
 	
-	local function _(p1, p2, p3) --[[ line: 90 | named "insertAction" ]]
+	local function _(p1, p2, p3)
 		-- upvalues: t_1 (ref)
 		table.insert(t_1, {
 			text = p1,
@@ -66,7 +66,7 @@ function ParticipantDialogDeprecated(p0) --[[ line: 80 ]]
 		table.insert(t_1, {
 			stayOnActivated = nil,
 			text = var9.viewProfileText,
-			onActivated = function() --[[ line: 102 ]]
+			onActivated = function()
 				-- upvalues: loggerModule (copy), participantId (ref), var9 (ref)
 				loggerModule:info("User activated viewProfile | userId: {}", participantId)
 				var9.openViewProfile(participantId)
@@ -77,7 +77,7 @@ function ParticipantDialogDeprecated(p0) --[[ line: 80 ]]
 		table.insert(t_1, {
 			stayOnActivated = nil,
 			text = var9.chatText,
-			onActivated = function() --[[ line: 109 ]]
+			onActivated = function()
 				-- upvalues: loggerModule (copy), participantId (ref), var10 (ref), chatDetailsTelemetryEventsModule (copy), var9 (ref)
 				loggerModule:info("User activated openChat | userId: {}", participantId)
 				var10.emit(chatDetailsTelemetryEventsModule.ParticipantDialogChatClicked, {})
@@ -88,7 +88,7 @@ function ParticipantDialogDeprecated(p0) --[[ line: 80 ]]
 	table.insert(t_1, {
 		stayOnActivated = nil,
 		text = var9.reportUserText,
-		onActivated = function() --[[ line: 116 ]]
+		onActivated = function()
 			-- upvalues: loggerModule (copy), participantId (ref), conversationId (ref), var10 (ref), chatDetailsTelemetryEventsModule (copy), var9 (ref)
 			loggerModule:info("User activated reportUser | userId: {}, conversationId: {}", participantId, conversationId)
 			var10.emit(chatDetailsTelemetryEventsModule.ParticipantDialogReportUserClicked, {})
@@ -100,7 +100,7 @@ function ParticipantDialogDeprecated(p0) --[[ line: 80 ]]
 		table.insert(t_1, {
 			stayOnActivated = nil,
 			text = var9.removeFromGroupText,
-			onActivated = function() --[[ line: 123 ]]
+			onActivated = function()
 				-- upvalues: var9 (ref), participantId (ref), conversationId (ref)
 				var9.openRemoveUserDialog(participantId, conversationId)
 			end

@@ -2,9 +2,9 @@
 local getUserSettingsAndOptionsModule = require(gameDetailRodux.GameDetails.GetUserSettingsAndOptions)
 local promiseModule = require(gameDetailRodux.Parent.Promise)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: getUserSettingsAndOptionsModule (ref), promiseModule (ref)
-	return getUserSettingsAndOptionsModule(p0):andThen(function(p1) --[[ line: 8 ]]
+	return getUserSettingsAndOptionsModule(p0):andThen(function(p1)
 		-- upvalues: promiseModule (copy)
 		local responseBody = p1.responseBody
 		
@@ -12,7 +12,7 @@ return function(p0) --[[ line: 7 ]]
 			promiseModule.reject("Unexpected response when fetching user settings and options")
 		end
 		return promiseModule.resolve(responseBody)
-	end, function(p2) --[[ line: 16 ]]
+	end, function(p2)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p2)
 	end)

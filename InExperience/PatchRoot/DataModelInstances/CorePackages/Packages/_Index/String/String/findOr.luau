@@ -1,6 +1,6 @@
 ﻿local text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(p0, p1, p2) --[[ line: 24 | named "findOr" ]]
+return function(p0, p1, p2)
 	-- upvalues: text (ref)
 	local byteOffset = utf8.offset(p0, p2 or 1)
 	local t = {}

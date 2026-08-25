@@ -18,11 +18,11 @@ local menuButtonsIncreaseIconSize = game:DefineFastFlag("MenuButtonsIncreaseIcon
 local fFlagIEMFocusNavSupportNewButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
 local fFlagGamepadIconSupportCheck = sharedFlagsModule.FFlagGamepadIconSupportCheck
 
-local _ = function(p0) --[[ line: 47 ]]
+local _ = function(p0)
 	return p0 + (1 - p0) * 0.5
 end
 
-local function KeyLabelIcon(p1, p2) --[[ line: 51 ]]
+local function KeyLabelIcon(p1, p2)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref)
 	local var20
 	local var17 = useTokens()
@@ -60,7 +60,7 @@ local function KeyLabelIcon(p1, p2) --[[ line: 51 ]]
 	return createElement(view, t, t_2)
 end
 
-local function Hint(p3) --[[ line: 73 ]]
+local function Hint(p3)
 	-- upvalues: fIntRelocateMobileMenuButtonsVariantModule (ref), utilityModule (ref), responsiveModule (ref), menuButtonsIncreaseIconSize (ref), reactModule (ref), image (ref), KeyLabelIcon (ref)
 	if fIntRelocateMobileMenuButtonsVariantModule == 2 and utilityModule:IsSmallTouchScreen() then
 		return nil
@@ -91,7 +91,7 @@ local function Hint(p3) --[[ line: 73 ]]
 	}) else nil
 end
 
-local function ButtonText(p4) --[[ line: 111 ]]
+local function ButtonText(p4)
 	-- upvalues: reactModule (ref), text (ref)
 	return reactModule.createElement(text, {
 		LayoutOrder = 2,
@@ -110,12 +110,12 @@ local function ButtonText(p4) --[[ line: 111 ]]
 	})
 end
 
-local function supportsButton(p5, p6) --[[ line: 146 ]]
+local function supportsButton(p5, p6)
 	-- upvalues: fFlagGamepadIconSupportCheck (ref), responsiveModule (ref), userInputService (ref)
 	return if fFlagGamepadIconSupportCheck and p6 and p5 == responsiveModule.Input.Directional then userInputService:GamepadSupports(userInputService:GetLastInputType(), p6) else true
 end
 
-return reactModule.memo(function(p7) --[[ line: 153 | named "MenuButton" ]]
+return reactModule.memo(function(p7)
 	-- upvalues: useTokens (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), fFlagAddTraversalHistoryReactMenuButtonsModule (ref), reactModule (ref), supportsButton (ref), fFlagGamepadIconSupportCheck (ref), userInputService (ref), menuButtonsIncreaseIconSize (ref), responsiveModule (ref), view (ref), Hint (ref), ButtonText (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), utilityModule (ref), image (ref), KeyLabelIcon (ref), text (ref), traversalHistoryMenuModule (ref), popoverSide (ref)
 	local transparency
 	local var26 = useTokens()
@@ -123,14 +123,14 @@ return reactModule.memo(function(p7) --[[ line: 153 | named "MenuButton" ]]
 	local var28 = if p7.isEmphasized then var26.Color.ActionSoftEmphasis.Background else var26.Color.ActionStandard.Background
 	local var29 = if p7.isEmphasized then var26.Color.ActionSoftEmphasis.Foreground else var26.Color.ActionStandard.Foreground
 	local var30, var31 = reactModule.useState(supportsButton(p7.lastInput, p7.gamepadButton))
-	reactModule.useEffect(function() --[[ line: 163 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagGamepadIconSupportCheck (copy), p7 (ref), userInputService (copy), var31 (ref), supportsButton (copy)
-		local var37 = if fFlagGamepadIconSupportCheck and p7.gamepadButton then userInputService.LastInputTypeChanged:Connect(function() --[[ line: 166 ]]
+		local var37 = if fFlagGamepadIconSupportCheck and p7.gamepadButton then userInputService.LastInputTypeChanged:Connect(function()
 			-- upvalues: var31 (copy), supportsButton (copy), p7 (copy)
 			var31(supportsButton(p7.lastInput, p7.gamepadButton))
 		end) else nil
 		
-		return function() --[[ line: 171 ]]
+		return function()
 			-- upvalues: var37 (write)
 			if var37 then
 				var37:Disconnect()

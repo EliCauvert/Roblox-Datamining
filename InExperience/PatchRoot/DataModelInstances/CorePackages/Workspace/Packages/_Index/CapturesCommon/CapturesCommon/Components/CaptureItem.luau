@@ -7,20 +7,20 @@ local getCropSizeModule = require(parent.Utils.getCropSize)
 local getFitSizeModule = require(parent.Utils.getFitSize)
 local fFlagUseRbxStorageInCapturesCommonModule = require(parent.Flags.FFlagUseRbxStorageInCapturesCommon)
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), getFitSizeModule (ref), getCropSizeModule (ref), captureTypeModule (ref), fFlagUseRbxStorageInCapturesCommonModule (ref), mediaPlayerModule (ref)
 	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
 	local var8, var9 = reactModule.useState(Vector2.new(0, 0))
 	local var10, var11 = reactModule.useState(UDim2.fromScale(1, 1))
-	local var12 = reactModule.useCallback(function(p1) --[[ line: 30 ]]
+	local var12 = reactModule.useCallback(function(p1)
 		-- upvalues: var9 (ref)
 		var9(p1.Resolution)
 	end, {})
-	local var13 = reactModule.useCallback(function(p2) --[[ line: 35 ]]
+	local var13 = reactModule.useCallback(function(p2)
 		-- upvalues: var7 (ref)
 		var7(p2.AbsoluteSize)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var11 (ref), getFitSizeModule (copy), var6 (ref), var8 (ref), getCropSizeModule (copy)
 		if p0.scaleType == Enum.ScaleType.Fit then
 			var11(getFitSizeModule(var6, var8))

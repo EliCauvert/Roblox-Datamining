@@ -14,11 +14,11 @@ local _ = require(script.Parent.GameDeveloperProductStoreTypes)
 local fetchGameDeveloperProductStatusesModule = require(script.Parent.fetchGameDeveloperProductStatuses)
 local fFlagLuaAppUseGameTransactionsApiForReceipts = sharedFlagsModule.FFlagLuaAppUseGameTransactionsApiForReceipts
 
-local function _(p0, p1) --[[ line: 30 | named "buildStatusesKey" ]]
+local function _(p0, p1)
 	return p0 .. "|" .. p1
 end
 
-return function() --[[ line: 34 | named "createGameDeveloperProductStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), createDataResolverModule (ref), logResponseError (ref), fFlagLuaAppUseGameTransactionsApiForReceipts (ref), discoveryEventErrorLogger (ref), promiseModule (ref), fetchGameDeveloperProductStatusesModule (ref)
 	local var7 = createDataCacheModule()
 	local var8 = nil
@@ -29,18 +29,18 @@ return function() --[[ line: 34 | named "createGameDeveloperProductStore" ]]
 		var9 = createDataResolverModule({
 			supportsMultiGet = false,
 			cache = var8,
-			logError = function(p2) --[[ line: 44 ]]
+			logError = function(p2)
 				-- upvalues: logResponseError (copy), fFlagLuaAppUseGameTransactionsApiForReceipts (copy), discoveryEventErrorLogger (copy)
 				logResponseError(if fFlagLuaAppUseGameTransactionsApiForReceipts then "game-transactions/v1/receipts" else "developer-products/v1/game-transactions", {
 					StatusCode = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
 				})
 				discoveryEventErrorLogger.reportError("GameDeveloperProductStore", "Failed to fetch developer product statuses", { err = tostring(p2) })
 			end,
-			fetchFn = function(p3, p4) --[[ line: 58 ]]
+			fetchFn = function(p3, p4)
 				-- upvalues: promiseModule (copy), fetchGameDeveloperProductStatusesModule (copy), var7 (ref)
 				local match, match_1 = string.match(p3, "^(.-)|(.+)$")
 				
-				return if match == nil or match_1 == nil then promiseModule.reject("Invalid developer product statuses key: " .. tostring(p3)) else fetchGameDeveloperProductStatusesModule.fetch(match, match_1):andThen(function(p5) --[[ line: 65 ]]
+				return if match == nil or match_1 == nil then promiseModule.reject("Invalid developer product statuses key: " .. tostring(p3)) else fetchGameDeveloperProductStatusesModule.fetch(match, match_1):andThen(function(p5)
 					-- upvalues: p4 (ref), var7 (copy)
 					local t = {}
 					
@@ -67,13 +67,13 @@ return function() --[[ line: 34 | named "createGameDeveloperProductStore" ]]
 	return {
 		getGameDeveloperProductInfo = var7.getItem,
 		updateGameDeveloperProductInfos = var7.updateItems,
-		fetchStatuses = function(p6, p7) --[[ line: 110 ]]
+		fetchStatuses = function(p6, p7)
 			-- upvalues: var9 (write)
 			if var9 then
 				var9.fetchItem(p6 .. "|" .. p7)
 			end
 		end,
-		clear = function() --[[ line: 90 ]]
+		clear = function()
 			-- upvalues: var8 (write), var9 (write), var7 (ref)
 			if var8 then
 				var8.clear()
@@ -83,7 +83,7 @@ return function() --[[ line: 34 | named "createGameDeveloperProductStore" ]]
 			end
 			var7.clear()
 		end,
-		dispose = function() --[[ line: 100 ]]
+		dispose = function()
 			-- upvalues: var9 (write), var7 (ref)
 			if var9 then
 				var9.dispose()

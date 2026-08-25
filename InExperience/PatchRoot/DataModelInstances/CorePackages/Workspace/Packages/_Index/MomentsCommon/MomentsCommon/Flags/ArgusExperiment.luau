@@ -10,7 +10,7 @@ game:DefineFastString("ArgusInfluencerUploadsKey", "influencerUploads")
 local argusInfluencerUploadsKeyFastString = game:GetFastString("ArgusInfluencerUploadsKey")
 local t = { platformIntegration = false, influencerUploads = false }
 
-local function getExperimentConfig(p0) --[[ line: 39 ]]
+local function getExperimentConfig(p0)
 	-- upvalues: argusExperimentLayerFastString (ref), argusEntryTypeKeyFastString (ref), t (ref), argusPlatformIntegrationKeyFastString (ref), argusInfluencerUploadsKeyFastString (ref)
 	local var7 = (p0 or {})[argusExperimentLayerFastString] or {}
 	local var8 = var7[argusEntryTypeKeyFastString]
@@ -25,20 +25,20 @@ end
 return {
 	ExperimentLayer = argusExperimentLayerFastString,
 	getExperimentConfig = getExperimentConfig,
-	getCurrentExperimentConfig = function() --[[ line: 53 ]]
+	getCurrentExperimentConfig = function()
 		-- upvalues: IXPService (ref), argusExperimentLayerFastString (ref), t (ref), getExperimentConfig (ref)
-		local ok, status = pcall(function() --[[ line: 54 ]]
+		local ok, status = pcall(function()
 			-- upvalues: IXPService (copy), argusExperimentLayerFastString (copy)
 			return IXPService:GetUserLayerVariables(argusExperimentLayerFastString)
 		end)
 		
 		return if ok then getExperimentConfig({ [argusExperimentLayerFastString] = status }) else t
 	end,
-	useExperimentConfig = function(p1) --[[ line: 72 ]]
+	useExperimentConfig = function(p1)
 		-- upvalues: useUserExperiment (ref), argusExperimentLayerFastString (ref), getExperimentConfig (ref)
 		return useUserExperiment({ argusExperimentLayerFastString }, getExperimentConfig, if p1 then p1.isExposureEnabled else nil)
 	end,
-	logExposure = function() --[[ line: 80 ]]
+	logExposure = function()
 		-- upvalues: IXPService (ref), argusExperimentLayerFastString (ref)
 		IXPService:LogUserLayerExposure(argusExperimentLayerFastString)
 	end

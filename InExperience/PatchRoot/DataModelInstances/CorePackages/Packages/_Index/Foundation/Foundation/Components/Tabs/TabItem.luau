@@ -22,13 +22,13 @@ local constantsModule = require(foundation.Constants)
 local useTabItemVariantsModule = require(script.Parent.useTabItemVariants)
 local flagsModule = require(foundation.Utility.Flags)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "TabItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokensModule (ref), fillBehaviorModule (ref), useTabItemVariantsModule (ref), reactModule (ref), builderIconsModule (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), getIconScaleModule (ref), imageModule (ref), flagsModule (ref), viewModule (ref), constantsModule (ref), textModule (ref), statusIndicatorModule (ref)
 	local var15 = useTokensModule()
 	local var16 = if p0.isActive then var15.Color.Content.Default else var15.Color.Content.Emphasis
 	local var17 = p0.fillBehavior == fillBehaviorModule.Fill
 	local var18 = useTabItemVariantsModule(var15, p0.size, var17)
-	local var19 = reactModule.useMemo(function() --[[ line: 77 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: var15 (ref)
 		return {
 			offset = 0,
@@ -36,7 +36,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 			borderWidth = var15.Stroke.Thicker
 		}
 	end, { var15 })
-	local var20 = reactModule.useMemo(function() --[[ line: 85 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), builderIconsModule (copy)
 		return if p0.icon == nil then nil elseif typeof(p0.icon) == "string" then {
 			name = p0.icon,
@@ -87,7 +87,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 68 | 
 			LayoutOrder = 1,
 			Size = uDim2,
 			Position = uDim2_1,
-			onActivated = function() --[[ line: 140 ]]
+			onActivated = function()
 				-- upvalues: p0 (ref)
 				p0.onActivated(p0.id)
 			end,

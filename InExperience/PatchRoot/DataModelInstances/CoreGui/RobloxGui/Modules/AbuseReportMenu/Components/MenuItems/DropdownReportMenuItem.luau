@@ -10,7 +10,7 @@ local getMenuItemSizingsModule = require(abuseReportMenu.Utility.getMenuItemSizi
 local fFlagHideShortcutsOnReportDropdownModule = require(abuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 
-return function(p0) --[[ line: 29 | named "DropdownReportMenuItem" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), getMenuItemSizingsModule (ref), reactModule (ref), appFonts (ref), dropdownMenu (ref), cryoModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportMenuItemModule (ref)
 	local theme = useStyle().Theme
 	
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 29 | named "DropdownReportMenuItem" ]]
 			onChange = p0.onSelect,
 			height = UDim.new(0, 48),
 			screenSize = Vector2.new(2400, 1800),
-			cellDatas = cryoModule.List.map(p0.selections, function(p1) --[[ line: 58 ]]
+			cellDatas = cryoModule.List.map(p0.selections, function(p1)
 				return { text = p1 }
 			end),
 			onMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule then p0.onMenuOpenChange else nil

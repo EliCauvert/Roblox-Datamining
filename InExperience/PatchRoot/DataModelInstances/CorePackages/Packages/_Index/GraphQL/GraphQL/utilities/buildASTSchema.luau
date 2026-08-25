@@ -9,7 +9,7 @@ local graphQLSchema = require(script.Parent.Parent.type.schema).GraphQLSchema
 local specifiedDirectives = require(script.Parent.Parent.type.directives).specifiedDirectives
 local extendSchemaImpl = require(script.Parent.extendSchema).extendSchemaImpl
 
-local var0 = function(p0, p1) --[[ line: 44 ]]
+local var0 = function(p0, p1)
 	-- upvalues: devAssert (ref), kind (ref), assertValidSDL (ref), extendSchemaImpl (ref), specifiedDirectives (ref), array (ref), graphQLSchema (ref)
 	devAssert(p0 ~= nil and p0.kind == kind.DOCUMENT, "Must provide valid Document AST.")
 	
@@ -39,7 +39,7 @@ local var0 = function(p0, p1) --[[ line: 44 ]]
 	local directives = var1.directives
 	
 	for i, v in ipairs(specifiedDirectives) do
-		if array.every(directives, function(p2) --[[ line: 86 ]]
+		if array.every(directives, function(p2)
 			-- upvalues: v (ref)
 			return p2.name ~= v.name
 		end) then
@@ -51,7 +51,7 @@ end
 
 return {
 	buildASTSchema = var0,
-	buildSchema = function(p3, p4) --[[ line: 97 ]]
+	buildSchema = function(p3, p4)
 		-- upvalues: parse (ref), var0 (ref)
 		return var0(parse(p3, {
 			noLocation = if p4 then p4.noLocation else nil,

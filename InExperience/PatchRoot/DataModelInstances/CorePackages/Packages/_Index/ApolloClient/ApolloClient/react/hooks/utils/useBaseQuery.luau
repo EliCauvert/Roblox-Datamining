@@ -20,31 +20,31 @@ local getApolloContext = require(script.Parent.Parent.Parent.context).getApolloC
 local useAfterFastRefresh = require(script.Parent.useAfterFastRefresh).useAfterFastRefresh
 local t_1 = { __value = "nil placeholder" }
 
-function t.useBaseQuery(p0, p1, p2) --[[ line: 48 ]]
+function t.useBaseQuery(p0, p1, p2)
 	-- upvalues: useContext (ref), getApolloContext (ref), useReducer (ref), boolean (ref), object (ref), useRef (ref), queryData (ref), promiseModule (ref), useDeepMemo (ref), useAfterFastRefresh (ref), useEffect (ref), t_1 (ref)
 	if p2 == nil then
 		p2 = false
 	end
 	local var5 = useContext(getApolloContext())
-	local var6, var7 = useReducer(function(p3) --[[ line: 58 ]]
+	local var6, var7 = useReducer(function(p3)
 		return p3 + 1
 	end, 0)
 	local var8 = boolean.toJSBoolean(p1) and object.assign({}, p1, { query = p0 }) or { query = p0 }
 	local var9 = useRef(nil)
 	local current = nil
-	current = var9.current or (function() --[[ line: 66 ]]
+	current = var9.current or (function()
 		-- upvalues: var9 (ref), queryData (copy), var8 (ref), var5 (ref), boolean (copy), current (write), promiseModule (copy), var7 (ref)
 		var9.current = queryData.new({
 			options = var8,
 			context = var5,
-			onNewData = function(_) --[[ line: 70 ]]
+			onNewData = function(_)
 				-- upvalues: boolean (copy), current (copy), promiseModule (copy), var9 (copy), var7 (copy)
 				if boolean.toJSBoolean(current:ssrInitiated()) then
 					var7(nil)
 					
 					return
 				end
-				promiseModule.delay(0):andThen(function() --[[ line: 78 ]]
+				promiseModule.delay(0):andThen(function()
 					-- upvalues: var9 (copy), var7 (copy)
 					if var9.current == nil or not var9.current.isMounted then
 						return
@@ -58,7 +58,7 @@ function t.useBaseQuery(p0, p1, p2) --[[ line: 48 ]]
 	end)()
 	current:setOptions(var8)
 	current.context = var5
-	local var11 = useDeepMemo(function() --[[ line: 114 ]]
+	local var11 = useDeepMemo(function()
 		-- upvalues: p2 (write), current (write)
 		return if p2 then current:executeLazy() else current:execute()
 	end, {
@@ -71,15 +71,15 @@ function t.useBaseQuery(p0, p1, p2) --[[ line: 48 ]]
 	if _G.__DEV__ then
 		useAfterFastRefresh(var7)
 	end
-	useEffect(function() --[[ line: 131 ]]
+	useEffect(function()
 		-- upvalues: current (write), var9 (ref)
-		return function() --[[ line: 132 ]]
+		return function()
 			-- upvalues: current (copy), var9 (copy)
 			current:cleanup()
 			var9.current = nil
 		end
 	end, {})
-	useEffect(function() --[[ line: 140 ]]
+	useEffect(function()
 		-- upvalues: current (write), p2 (write)
 		return current:afterExecute({ lazy = p2 })
 	end, {

@@ -8,7 +8,7 @@ local var0 = urlBuilder.new({
 	base = url.APIS_URL
 })
 
-return function(p0) --[[ line: 14 | named "getEventDetailsUrl" ]]
+return function(p0)
 	-- upvalues: fFlagSduiCapabilityBindings (ref), parent (ref), sduiCapabilities (ref), urlBuilder (ref), var0 (ref)
 	local t = { eventId = p0 }
 	

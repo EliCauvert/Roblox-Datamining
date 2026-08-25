@@ -10,7 +10,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local useTokens = foundationModule.Hooks.useTokens
 local editProfileIncreaseTopPadding = game:DefineFastFlag("EditProfileIncreaseTopPadding", false)
 
-return function(p0) --[[ line: 25 | named "EditProfileHeaderBar" ]]
+return function(p0)
 	-- upvalues: editProfileIncreaseTopPadding (ref), useTokens (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = if editProfileIncreaseTopPadding then "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-xxlarge",

@@ -22,7 +22,7 @@ local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCh
 local fFlagEnableTrustedFriendsWizardVPCPrologueModule = require(trustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue)
 local _ = require(trustedContacts.Common.Types)
 
-return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
+return function(value)
 	-- upvalues: useDispatch (ref), fFlagTFWithActionsCheck (ref), useSocialUpsellOverlayController (ref), reactModule (ref), notificationModalsManagerModule (ref), useOpenWebView (ref), TCOpenAmpInGame (ref), getFFlagEnableAmpWizardVPCNavigationFix (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateBack (ref), fFlagEnableTrustedFriendsWizardVPCPrologueModule (ref), inExpAmpWizardController (ref), openAmpWizardContainer (ref), default (ref), upsellEntrySurfaceType (ref), socialUpsellType (ref), upsellComponent (ref)
 	local var8 = useDispatch()
 	local var9 = nil
@@ -32,7 +32,7 @@ return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
 		var9 = game.GameId ~= 0
 		var10 = useSocialUpsellOverlayController(var9)
 	end
-	local var11 = reactModule.useCallback(function() --[[ line: 130 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: value (ref)
 		if value.onClosed then
 			value.onClosed()
@@ -45,9 +45,9 @@ return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
 	
 	return {
 		closeModal = var11,
-		openAmpWizard = reactModule.useCallback(function(p0) --[[ line: 64 ]]
+		openAmpWizard = reactModule.useCallback(function(p0)
 			-- upvalues: TCOpenAmpInGame (copy), getFFlagEnableAmpWizardVPCNavigationFix (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var8 (ref), navigateBack (copy), fFlagEnableTrustedFriendsWizardVPCPrologueModule (copy), inExpAmpWizardController (copy), openAmpWizardContainer (copy)
-			local var12 = function(p1, p2) --[[ line: 65 ]]
+			local var12 = function(p1, p2)
 				-- upvalues: TCOpenAmpInGame (copy), getFFlagEnableAmpWizardVPCNavigationFix (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var8 (copy), navigateBack (copy), p0 (ref)
 				if not TCOpenAmpInGame and not getFFlagEnableAmpWizardVPCNavigationFix() then
 					if fFlagSignalsNavP3Dispatch then
@@ -75,7 +75,7 @@ return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
 			end
 			var8(openAmpWizardContainer(p0.featureName, var12, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace))
 		end, { var8 }),
-		openFacialAgeEstimationUpsell = if fFlagTFWithActionsCheck then if fFlagTFWithActionsCheck then reactModule.useCallback(function(p3) --[[ line: 143 ]]
+		openFacialAgeEstimationUpsell = if fFlagTFWithActionsCheck then if fFlagTFWithActionsCheck then reactModule.useCallback(function(p3)
 			-- upvalues: var9 (write), upsellEntrySurfaceType (copy), var10 (write), socialUpsellType (copy), upsellComponent (copy), var11 (ref)
 			local var13 = if var9 then upsellEntrySurfaceType.TrustedFriendsInExperience else upsellEntrySurfaceType.TrustedFriends
 			var10.openSocialOverlay(socialUpsellType.FacialAgeEstimation, {
@@ -89,7 +89,7 @@ return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
 				onDismiss = var11
 			})
 		end, { var11, var9, var10.openSocialOverlay }) else nil else nil,
-		showToast = reactModule.useCallback(function(p4) --[[ line: 55 ]]
+		showToast = reactModule.useCallback(function(p4)
 			-- upvalues: notificationModalsManagerModule (copy)
 			notificationModalsManagerModule.SetUIBloxToast({
 				sequenceNumber = DateTime.now().UnixTimestamp,
@@ -97,7 +97,7 @@ return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
 			})
 		end, {}),
 		openWebView = useOpenWebView(),
-		shareUrl = reactModule.useCallback(function(p5) --[[ line: 138 ]]
+		shareUrl = reactModule.useCallback(function(p5)
 			-- upvalues: default (copy)
 			default:shareUrl(p5)
 		end, {})

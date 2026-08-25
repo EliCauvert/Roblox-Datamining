@@ -4,13 +4,13 @@ local var2 = require(appChat.Logger):new("AppChat.paginateForNewerMessages")
 local _ = require(appChat.Models.ConversationChannels)
 local appChatNewMessageFetchMaxDepth = game:DefineFastInt("AppChatNewMessageFetchMaxDepth", 10)
 
-local function _(p0, p1) --[[ line: 18 | named "isMessageAlreadyInConversation" ]]
+local function _(p0, p1)
 	return p0.messages:Get(p1) ~= nil
 end
 
-local function fetchOlderMessages(p2, p3, p4) --[[ line: 23 ]]
+local function fetchOlderMessages(p2, p3, p4)
 	-- upvalues: appChatNewMessageFetchMaxDepth (ref), var2 (ref), appChatNetworkingModule (ref), fetchOlderMessages (ref)
-	return function(p5) --[[ line: 30 ]]
+	return function(p5)
 		-- upvalues: p4 (ref), appChatNewMessageFetchMaxDepth (copy), var2 (copy), p3 (ref), p2 (ref), appChatNetworkingModule (copy), fetchOlderMessages (copy)
 		if appChatNewMessageFetchMaxDepth <= p4 then
 			var2:warning("Reached max depth {} of fetching new messages", appChatNewMessageFetchMaxDepth)
@@ -45,27 +45,27 @@ local function fetchOlderMessages(p2, p3, p4) --[[ line: 23 ]]
 		end
 		var2:trace("Fetching for the next page of messages using cursor: {}", nextCursor)
 		
-		return p5:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p2.id, nextCursor)):andThen(function(p7) --[[ line: 66 ]]
+		return p5:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p2.id, nextCursor)):andThen(function(p7)
 			-- upvalues: p5 (ref), fetchOlderMessages (copy), p2 (copy), p4 (copy)
 			return p5:dispatch(fetchOlderMessages(p2, p7, p4 + 1))
-		end):catch(function(p6) --[[ line: 69 ]]
+		end):catch(function(p6)
 			-- upvalues: var2 (copy)
 			var2:warning("AppChatNetworking failure in fetchOlderMessages of refreshing new messages: {}", p6)
 		end)
 	end
 end
 
-return function(p8) --[[ line: 75 ]]
+return function(p8)
 	-- upvalues: var2 (ref), appChatNetworkingModule (ref), appChatNewMessageFetchMaxDepth (ref), fetchOlderMessages (ref)
-	return function(p9) --[[ line: 76 ]]
+	return function(p9)
 		-- upvalues: var2 (copy), p8 (ref), appChatNetworkingModule (copy), appChatNewMessageFetchMaxDepth (copy), fetchOlderMessages (copy)
 		var2:info("Starting to fetch newest messages for conversation: {}", p8.id)
 		
-		return p9:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p8.id, nil)):andThen(function(p11) --[[ line: 82 ]]
+		return p9:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p8.id, nil)):andThen(function(p11)
 			-- upvalues: p9 (ref), p8 (copy), appChatNewMessageFetchMaxDepth (copy), var2 (copy), appChatNetworkingModule (copy), fetchOlderMessages (copy)
 			local var7 = 0
 			
-			return p9:dispatch(function(p12) --[[ line: 30 ]]
+			return p9:dispatch(function(p12)
 				-- upvalues: var7 (ref), appChatNewMessageFetchMaxDepth (copy), var2 (copy), p11 (ref), p8 (ref), appChatNetworkingModule (copy), fetchOlderMessages (copy)
 				if appChatNewMessageFetchMaxDepth <= var7 then
 					var2:warning("Reached max depth {} of fetching new messages", appChatNewMessageFetchMaxDepth)
@@ -100,15 +100,15 @@ return function(p8) --[[ line: 75 ]]
 				end
 				var2:trace("Fetching for the next page of messages using cursor: {}", nextCursor)
 				
-				return p12:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p8.id, nextCursor)):andThen(function(p14) --[[ line: 66 ]]
+				return p12:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p8.id, nextCursor)):andThen(function(p14)
 					-- upvalues: p12 (ref), fetchOlderMessages (copy), p8 (copy), var7 (copy)
 					return p12:dispatch(fetchOlderMessages(p8, p14, var7 + 1))
-				end):catch(function(p13) --[[ line: 69 ]]
+				end):catch(function(p13)
 					-- upvalues: var2 (copy)
 					var2:warning("AppChatNetworking failure in fetchOlderMessages of refreshing new messages: {}", p13)
 				end)
 			end)
-		end):catch(function(p10) --[[ line: 85 ]]
+		end):catch(function(p10)
 			-- upvalues: var2 (copy)
 			var2:warning("AppChatNetworking failure in refreshing first batch of new messages: {}", p10)
 		end)

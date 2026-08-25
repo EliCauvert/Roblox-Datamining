@@ -5,13 +5,13 @@ local hooksModule = require(appShortcutBar.Hooks)
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local fFlagGuacStickyShortcutBarEnabled = require(parent.SharedFlags).FFlagGuacStickyShortcutBarEnabled
 
-return function(p0) --[[ line: 14 | named "AppShortcutBarStatusListener" ]]
+return function(p0)
 	-- upvalues: hooksModule (ref), fFlagGuacStickyShortcutBarEnabled (ref), useAppPolicy (ref), reactModule (ref)
 	local var3 = hooksModule.useAppShortcutBarHeight()
-	local var4 = (if fFlagGuacStickyShortcutBarEnabled then useAppPolicy(function(p1) --[[ line: 19 ]]
+	local var4 = (if fFlagGuacStickyShortcutBarEnabled then useAppPolicy(function(p1)
 		return p1.getStickyShortcutBarEnabled()
 	end) else hooksModule.useIsStickyShortcutBarEnabled()) and hooksModule.useShortcutBarVisible()
-	reactModule.useEffect(function() --[[ line: 29 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var4 (ref), var3 (ref)
 		if p0.onHeightChanged then
 			p0.onHeightChanged(if var4 then var3 else 0)

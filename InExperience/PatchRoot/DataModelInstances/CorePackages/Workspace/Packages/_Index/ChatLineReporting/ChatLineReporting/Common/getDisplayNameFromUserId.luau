@@ -1,8 +1,8 @@
 ﻿local userService = game:GetService("UserService")
 
-function getDisplayNameFromUserId(p0) --[[ line: 3 ]]
+function getDisplayNameFromUserId(p0)
 	-- upvalues: userService (ref)
-	local ok, status = pcall(function() --[[ line: 4 ]]
+	local ok, status = pcall(function()
 		-- upvalues: userService (copy), p0 (ref)
 		return userService:GetUserInfosByUserIdsAsync({ tonumber(p0) })[1]
 	end)

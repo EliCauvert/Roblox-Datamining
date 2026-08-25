@@ -21,7 +21,7 @@ local fFlagPlayerListPersistVisibilityModule = require(parent.Flags.FFlagPlayerL
 local fFlagAddNewPlayerListMobileFocusNav = playerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
 local var18 = if fFlagPlayerListPersistVisibilityModule then UserSettings().GameSettings else nil
 
-local function _(p0) --[[ line: 48 | named "updateIsVisible" ]]
+local function _(p0)
 	-- upvalues: cryoModule (ref)
 	p0.isVisible = p0.setVisible
 	
@@ -48,7 +48,7 @@ return roduxModule.createReducer({
 	inspectMenuEnabled = guiService:GetInspectMenuEnabled(),
 	tempHideKeys = {}
 }, {
-	[setPlayerListVisibilityModule.name] = function(p1, p2) --[[ line: 61 ]]
+	[setPlayerListVisibilityModule.name] = function(p1, p2)
 		-- upvalues: fFlagPlayerListPersistVisibilityModule (ref), var18 (ref), cryoModule (ref)
 		if fFlagPlayerListPersistVisibilityModule and not p1.isSmallTouchDevice and not p1.isTenFootInterface then
 			var18.PlayerListVisible = p2.isVisible
@@ -63,7 +63,7 @@ return roduxModule.createReducer({
 		
 		return var19
 	end,
-	[setPlayerListEnabledModule.name] = function(p3, p4) --[[ line: 73 ]]
+	[setPlayerListEnabledModule.name] = function(p3, p4)
 		-- upvalues: fFlagAddNewPlayerListMobileFocusNav (ref), cryoModule (ref)
 		local var20 = cryoModule.Dictionary.join(p3, {
 			playerlistCoreGuiEnabled = p4.isEnabled,
@@ -78,7 +78,7 @@ return roduxModule.createReducer({
 		
 		return var20
 	end,
-	[setTempHideKeyModule.name] = function(p5, p6) --[[ line: 87 ]]
+	[setTempHideKeyModule.name] = function(p5, p6)
 		-- upvalues: cryoModule (ref)
 		local tempHideValue = p6.tempHideValue
 		
@@ -97,11 +97,11 @@ return roduxModule.createReducer({
 		
 		return var21
 	end,
-	[setPerformanceStatsVisibleModule.name] = function(p7, p8) --[[ line: 99 ]]
+	[setPerformanceStatsVisibleModule.name] = function(p7, p8)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p7, { performanceStatsVisible = p8.isVisible })
 	end,
-	[setSmallTouchDeviceModule.name] = function(p9, p10) --[[ line: 105 ]]
+	[setSmallTouchDeviceModule.name] = function(p9, p10)
 		-- upvalues: cryoModule (ref)
 		local var22 = cryoModule.Dictionary.join(p9, { isSmallTouchDevice = p10.isSmallTouchDevice })
 		var22.isVisible = var22.setVisible
@@ -113,7 +113,7 @@ return roduxModule.createReducer({
 		
 		return var22
 	end,
-	[setTenFootInterfaceModule.name] = function(p11, p12) --[[ line: 111 ]]
+	[setTenFootInterfaceModule.name] = function(p11, p12)
 		-- upvalues: cryoModule (ref)
 		local var23 = cryoModule.Dictionary.join(p11, {
 			isTenFootInterface = p12.isTenFootInterface,
@@ -128,23 +128,23 @@ return roduxModule.createReducer({
 		
 		return var23
 	end,
-	[setInspectMenuEnabledModule.name] = function(p13, p14) --[[ line: 122 ]]
+	[setInspectMenuEnabledModule.name] = function(p13, p14)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p13, { inspectMenuEnabled = p14.enabled })
 	end,
-	[setIsUsingGamepadModule.name] = function(p15, p16) --[[ line: 128 ]]
+	[setIsUsingGamepadModule.name] = function(p15, p16)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p15, { isUsingGamepad = p16.isUsingGamepad })
 	end,
-	[setHasPermissionToVoiceChatModule.name] = function(p17, p18) --[[ line: 134 ]]
+	[setHasPermissionToVoiceChatModule.name] = function(p17, p18)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p17, { hasPermissionToVoiceChat = p18.hasPermissionToVoiceChat })
 	end,
-	[setMinimizedModule.name] = function(p19, p20) --[[ line: 140 ]]
+	[setMinimizedModule.name] = function(p19, p20)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p19, { isMinimized = p20.isMinimized })
 	end,
-	[setSubjectToChinaPoliciesModule.name] = function(p21, p22) --[[ line: 146 ]]
+	[setSubjectToChinaPoliciesModule.name] = function(p21, p22)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p21, { subjectToChinaPolicies = p22.subjectToChinaPolicies })
 	end

@@ -3,11 +3,11 @@ local responsiveModule = require(script.Parent.Parent.Responsive)
 local containerRefModule = require(script.Parent.Parent.Context.ContainerRef)
 local luaAppResponsiveFixHookDeps = game:DefineFastFlag("LuaAppResponsiveFixHookDeps", false)
 
-function id(p0) --[[ line: 9 ]]
+function id(p0)
 	return p0
 end
 
-function useResponsiveImpl(p1, p2, p3) --[[ line: 17 ]]
+function useResponsiveImpl(p1, p2, p3)
 	-- upvalues: reactModule (ref), containerRefModule (ref), responsiveModule (ref), luaAppResponsiveFixHookDeps (ref)
 	local var4 = if typeof(p1) == "function" then p1 else id
 	local var5 = reactModule.useContext(containerRefModule)
@@ -23,11 +23,11 @@ function useResponsiveImpl(p1, p2, p3) --[[ line: 17 ]]
 			t[v] = true
 		end
 	end
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), responsiveModule (copy), p2 (ref), p3 (ref), t (write), var8 (ref), var9 (ref), var7 (ref), var4 (ref)
 		if var5 and var5.current then
 			local var11 = responsiveModule.bindContainer(var5.current, p2)
-			local var12 = var11:connect(function() --[[ line: 37 ]]
+			local var12 = var11:connect(function()
 				-- upvalues: var11 (ref), p3 (copy), t (copy), var8 (copy), var9 (copy), var7 (copy), var4 (copy)
 				local var14 = var11:currentKey(p3)
 				
@@ -45,13 +45,13 @@ function useResponsiveImpl(p1, p2, p3) --[[ line: 17 ]]
 			var7(var4(var13))
 			var8.current = var13
 			
-			return function() --[[ line: 56 ]]
+			return function()
 				-- upvalues: var12 (ref), var11 (ref)
 				var12:disconnect()
 				var11:destroy()
 			end
 		end
-		return function() --[[ line: 61 ]] end
+		return function() end
 	end, {
 		var5,
 		if var5 then var5.current else false,

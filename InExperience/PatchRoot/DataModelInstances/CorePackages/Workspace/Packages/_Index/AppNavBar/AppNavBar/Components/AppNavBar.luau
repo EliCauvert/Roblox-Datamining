@@ -24,7 +24,7 @@ local fFlagEnableFlyoutOnNavRail = require(parent_1.SharedFlags).FFlagEnableFlyo
 local appNavBarGateFooterVisibleOnPlacement = game:DefineFastFlag("AppNavBarGateFooterVisibleOnPlacement", false)
 local appNavBarFooterVisibleWithoutScrollAway = game:DefineFastFlag("AppNavBarFooterVisibleWithoutScrollAway", false)
 
-local function _(p0, p1, p2, p3) --[[ line: 56 | named "addItems" ]]
+local function _(p0, p1, p2, p3)
 	-- upvalues: cryoModule (ref)
 	return cryoModule.List.join(p0, p2, p1), p3 + #p0
 end
@@ -35,16 +35,16 @@ local t = {
 	clipsDescendants = true
 }
 
-return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: cryoModule (ref), t (ref), useAppPolicy (ref), useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), studioCTAIconModule (ref), webViewRedesignEnabledEngineFeature (ref), constantsModule (ref), fFlagEnableFlyoutOnNavRail (ref), appNavItemModule (ref), fFlagShrinkAppNavBar (ref), getScrollAwayEnabledModule (ref), appNavBarFooterVisibleWithoutScrollAway (ref), visibilityControlModule (ref), appNavBarGateFooterVisibleOnPlacement (ref), placementModule (ref), appNavTelemetryModule (ref), navigationBar (ref), navigationBarAlignment (ref), navigationRailV2 (ref), navigationRailAlignment (ref), fFlagAddGamepadBumperNavigation (ref)
 	local items, selectedIndex
 	local var15 = cryoModule.Dictionary.join(t, p4)
-	local var16 = useAppPolicy(function(p5) --[[ line: 77 ]]
+	local var16 = useAppPolicy(function(p5)
 		return p5.getShowStudioCTA()
 	end)
 	local var17 = useRoactService(roactServiceTagsModule.AppEventIngestService)
 	local var18 = useRoactService(roactServiceTagsModule.AppLinking)
-	local var19 = reactModule.useCallback(function(_, p6) --[[ line: 82 ]]
+	local var19 = reactModule.useCallback(function(_, p6)
 		-- upvalues: reactModule (copy), studioCTAIconModule (copy), webViewRedesignEnabledEngineFeature (copy), p4 (ref)
 		return reactModule.createElement(studioCTAIconModule, {
 			controlState = p6,
@@ -53,7 +53,7 @@ return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
 	end, {
 		if webViewRedesignEnabledEngineFeature then p4.showTooltip else nil
 	})
-	local var20 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), constantsModule (copy), var15 (ref), var18 (ref)
 		var17:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_OPEN)
 		var18:openURL(var15.buildCreatorWebNavUrl({ utm_content = "side_bar_blue_icon" }))
@@ -91,7 +91,7 @@ return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
 		end
 	end
 	local var23 = nil
-	local var24 = reactModule.useCallback(function(p7, p8) --[[ line: 130 ]]
+	local var24 = reactModule.useCallback(function(p7, p8)
 		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var15 (ref)
 		return reactModule.createElement(appNavItemModule, {
 			isCenterPositioned = true,
@@ -101,7 +101,7 @@ return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
 			systemBarLabelTextSizeBinding = if fFlagShrinkAppNavBar then nil else var15.systemBarLabelTextSizeBinding
 		})
 	end, { var15.systemBarLabelTextSizeBinding })
-	local var25 = reactModule.useCallback(function(p9, p10) --[[ line: 140 ]]
+	local var25 = reactModule.useCallback(function(p9, p10)
 		-- upvalues: reactModule (copy), appNavItemModule (copy), fFlagShrinkAppNavBar (copy), var15 (ref)
 		return reactModule.createElement(appNavItemModule, {
 			isCenterPositioned = false,
@@ -115,7 +115,7 @@ return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
 	
 	if getScrollAwayEnabledModule() or appNavBarFooterVisibleWithoutScrollAway then
 		footerBinding = visibilityControlModule.getFooterBinding()
-		reactModule.useEffect(function() --[[ line: 154 ]]
+		reactModule.useEffect(function()
 			-- upvalues: appNavBarGateFooterVisibleOnPlacement (copy), var15 (ref), placementModule (copy), visibilityControlModule (copy)
 			local isVisible
 			if appNavBarGateFooterVisibleOnPlacement then
@@ -134,7 +134,7 @@ return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
 			if appNavBarGateFooterVisibleOnPlacement then var15.placement else nil
 		})
 	end
-	reactModule.useEffect(function() --[[ line: 164 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableFlyoutOnNavRail (copy), items (write), selectedIndex (write), var15 (ref), appNavTelemetryModule (copy)
 		local var27 = if fFlagEnableFlyoutOnNavRail then items[selectedIndex] else var15.items[var15.selectedIndex]
 		
@@ -142,11 +142,11 @@ return reactModule.memo(function(p4) --[[ line: 73 | named "AppNavBar" ]]
 			appNavTelemetryModule.logSwitchTabEnd(var27.page)
 		end
 	end, if fFlagEnableFlyoutOnNavRail then { items, selectedIndex } else { var15.items, var15.selectedIndex })
-	reactModule.useEffect(function() --[[ line: 185 ]]
+	reactModule.useEffect(function()
 		-- upvalues: appNavTelemetryModule (copy), var15 (ref)
 		appNavTelemetryModule.logVisibilityEnd(var15.isVisible)
 	end, { var15.isVisible })
-	reactModule.useEffect(function() --[[ line: 188 ]]
+	reactModule.useEffect(function()
 		-- upvalues: appNavTelemetryModule (copy), var15 (ref)
 		appNavTelemetryModule.logPlacement(var15.placement)
 	end, { var15.placement })

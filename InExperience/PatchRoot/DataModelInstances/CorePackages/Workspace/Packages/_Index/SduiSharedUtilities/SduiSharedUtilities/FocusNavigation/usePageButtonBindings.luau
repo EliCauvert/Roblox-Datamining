@@ -4,12 +4,12 @@ local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local sduiFocusTagsModule = require(script.Parent.SduiFocusTags)
 
-return function(p0, p1, p2) --[[ line: 16 | named "usePageButtonBindings" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), collectionService (ref), sduiFocusTagsModule (ref), reactFocusNavigationModule (ref)
 	local var4, var5 = reactModule.useState(true)
-	reactModule.useEffect(function() --[[ line: 23 ]]
+	reactModule.useEffect(function()
 		-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p0 (ref), var5 (ref)
-		local function updateSuppression() --[[ line: 24 ]]
+		local function updateSuppression()
 			-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p0 (copy), var5 (copy)
 			local var9 = false
 			
@@ -26,7 +26,7 @@ return function(p0, p1, p2) --[[ line: 16 | named "usePageButtonBindings" ]]
 		local var7 = collectionService:GetInstanceAddedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
 		local var8 = collectionService:GetInstanceRemovedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
 		
-		return function() --[[ line: 42 ]]
+		return function()
 			-- upvalues: var7 (ref), var8 (ref)
 			var7:Disconnect()
 			var8:Disconnect()

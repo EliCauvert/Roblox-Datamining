@@ -15,13 +15,13 @@ local luaAppExpandableTextNewLineStrip = game:DefineFastFlag("LuaAppExpandableTe
 local luaAppExpandableTextAdjustClipToContent = game:DefineFastFlag("LuaAppExpandableTextAdjustClipToContent", false)
 local t = { Selectable = true }
 
-local var8 = function() --[[ line: 24 ]] end
+local var8 = function() end
 
 local t_1 = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getCompactLineMeasureText(p0) --[[ line: 52 ]]
+local function getCompactLineMeasureText(p0)
 	if p0 <= 0 then
 		return ""
 	end
@@ -33,7 +33,7 @@ local function getCompactLineMeasureText(p0) --[[ line: 52 ]]
 	return table.concat(t, "\n")
 end
 
-local function _(p1, p2, p3, p4) --[[ line: 67 | named "calculateBlankLineAdjustedHeight" ]]
+local function _(p1, p2, p3, p4)
 	local var12 = if p2 > 0 and p1 > 0 then p1 / p2 else 0
 	
 	if var12 > 0 and p3 > 0 and math.floor(p3 / var12 + 0.5) + 1 == p2 then
@@ -43,11 +43,11 @@ local function _(p1, p2, p3, p4) --[[ line: 67 | named "calculateBlankLineAdjust
 	end
 end
 
-return reactModule.memo(function(p5) --[[ line: 87 | named "ExpandableText" ]]
+return reactModule.memo(function(p5)
 	-- upvalues: luaAppExpandableTextNewLineStrip (ref), signalsReactModule (ref), textSizeModule (ref), useTokens (ref), cryoModule (ref), reactModule (ref), controlState (ref), useLocalization (ref), useProperty (ref), luaAppExpandableTextAdjustClipToContent (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref), var8 (ref), t_1 (ref), text (ref), getCompactLineMeasureText (ref)
 	local var41, var42
 	local var14 = if luaAppExpandableTextNewLineStrip then (p5.text or ""):gsub("[\r\n]+$", "") else p5.text
-	local var15 = signalsReactModule.useSignalState(function(p6) --[[ line: 91 ]]
+	local var15 = signalsReactModule.useSignalState(function(p6)
 		-- upvalues: textSizeModule (copy)
 		return textSizeModule.getTextSizeStore(p6).getTextSizeOffset(p6)
 	end)
@@ -61,14 +61,14 @@ return reactModule.memo(function(p5) --[[ line: 87 | named "ExpandableText" ]]
 	local _ = nil
 	local pressedTextStyle = p5.pressedTextStyle or var16.Color.Content.Muted
 	local var22, var23 = reactModule.useBinding(controlState.Default)
-	var22 = var22:map(function(p7) --[[ line: 108 ]]
+	var22 = var22:map(function(p7)
 		-- upvalues: controlState (copy), pressedTextStyle (ref), textStyle (ref)
 		return if p7 == controlState.Pressed or p7 == controlState.SelectedPressed then pressedTextStyle else textStyle
 	end)
 	local var24, var25 = reactModule.useState(p5.expandedInitially or false)
-	local var26 = reactModule.useCallback(function() --[[ line: 117 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref), p5 (ref)
-		var25(function(p8) --[[ line: 118 ]]
+		var25(function(p8)
 			-- upvalues: p5 (copy)
 			local var45 = not p8
 			
@@ -98,7 +98,7 @@ return reactModule.memo(function(p5) --[[ line: 87 | named "ExpandableText" ]]
 	if luaAppExpandableTextAdjustClipToContent then
 		var38 = reactModule.useRef(nil)
 		local var40 = useProperty(var38, "AbsoluteSize")
-		var39 = reactModule.useMemo(function() --[[ line: 155 ]]
+		var39 = reactModule.useMemo(function()
 			-- upvalues: p5 (ref), var14 (ref)
 			if not p5.avoidBlankLineClip then
 				return nil

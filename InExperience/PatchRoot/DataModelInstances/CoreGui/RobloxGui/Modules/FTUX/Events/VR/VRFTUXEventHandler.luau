@@ -13,7 +13,7 @@ local questVR = require(parent.Resources.FTUXEventTypes)[require(parent.Enums.Pl
 
 return {
 	Name = "VRFTUXEventHandler",
-	StartEvent = function(p0, p1) --[[ line: 25 ]]
+	StartEvent = function(p0, p1)
 		-- upvalues: questVR (ref), firstPersonToggleEventModule (ref), moveToGoalEventModule (ref), jumpEventModule (ref), perspectiveTooltipEventModule (ref), movementTooltipEventModule (ref), hapticFeedbackEventModule (ref), soundFeedbackEventModule (ref), hapticFeedbackTwiceEventModule (ref), leaveGameIconHighlightEventModule (ref)
 		if p0 == questVR.FirstPersonToggleEvent then
 			task.spawn(firstPersonToggleEventModule.StartEvent, p1)
@@ -54,7 +54,7 @@ return {
 		end
 		warn("Unmapped VRFTUX event type: " .. tostring(p0))
 	end,
-	StopEvent = function(p2) --[[ line: 49 ]]
+	StopEvent = function(p2)
 		-- upvalues: questVR (ref), firstPersonToggleEventModule (ref), moveToGoalEventModule (ref), jumpEventModule (ref), perspectiveTooltipEventModule (ref), movementTooltipEventModule (ref), leaveGameIconHighlightEventModule (ref)
 		if p2 == questVR.FirstPersonToggleEvent then
 			task.spawn(firstPersonToggleEventModule.StopEvent)

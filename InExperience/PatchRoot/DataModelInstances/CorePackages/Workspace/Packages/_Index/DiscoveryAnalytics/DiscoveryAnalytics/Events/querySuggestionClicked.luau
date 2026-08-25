@@ -17,7 +17,7 @@ local var3 = tModule.strictInterface({
 	componentType = tModule.string
 })
 
-return function(p0, p1) --[[ line: 35 ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
 	local var4, var5 = var3(p1)
 	

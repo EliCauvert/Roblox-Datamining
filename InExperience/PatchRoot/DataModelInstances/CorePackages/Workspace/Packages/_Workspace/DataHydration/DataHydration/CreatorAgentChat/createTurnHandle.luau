@@ -3,7 +3,7 @@ local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
 local turnStateModule = require(script.Parent.turnState)
 local _ = require(script.Parent.types)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: createSignal (ref), turnStateModule (ref), acpProtocolModule (ref)
 	local var2, var3 = createSignal(p3 or turnStateModule.createEmptyTurnState(p0, p1))
 	local var4 = nil
@@ -14,7 +14,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 	local var9 = nil
 	local var10 = 0
 	
-	local function noteProcessedSequenceNumber(p5) --[[ line: 50 ]]
+	local function noteProcessedSequenceNumber(p5)
 		-- upvalues: t_1 (ref), var8 (write), var9 (write), var10 (write)
 		if t_1[p5] == true then
 			return false
@@ -36,7 +36,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		return true
 	end
 	
-	local function hasSequenceGap() --[[ line: 71 ]]
+	local function hasSequenceGap()
 		-- upvalues: var10 (write)
 		return var10 > 0
 	end
@@ -61,20 +61,20 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 			end
 		end
 	end
-	local function onNotification(p6) --[[ line: 84 ]]
+	local function onNotification(p6)
 		-- upvalues: var6 (write), t (ref)
 		var6 += 1
 		t[var6] = p6
 		
-		return function() --[[ line: 88 ]]
+		return function()
 			-- upvalues: t (copy), var6 (ref)
 			t[var6] = nil
 		end
 	end
 	
-	local function _(p7) --[[ line: 94 | named "mutate" ]]
+	local function _(p7)
 		-- upvalues: var3 (ref)
-		var3(function(p8) --[[ line: 95 ]]
+		var3(function(p8)
 			-- upvalues: p7 (ref)
 			if p8.isDone then
 				return p8
@@ -86,10 +86,10 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		end)
 	end
 	
-	local function fireHandlers(p9) --[[ line: 105 ]]
+	local function fireHandlers(p9)
 		-- upvalues: t (ref)
 		for i, v in t do
-			local ok, status = pcall(function() --[[ line: 108 ]]
+			local ok, status = pcall(function()
 				-- upvalues: v (ref), p9 (ref)
 				v(p9)
 			end)
@@ -100,12 +100,12 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		end
 	end
 	
-	local function i(p10) --[[ line: 117 | named "completeFromResponse" ]]
+	local function i(p10)
 		-- upvalues: var3 (ref)
 		if p10.error then
 			local error = p10.error
 			
-			local var16 = function(p11) --[[ line: 120 ]]
+			local var16 = function(p11)
 				-- upvalues: error (ref)
 				p11.error = tostring(error.message or "JSON-RPC error")
 				p11.errorCode = tonumber(error.code)
@@ -113,7 +113,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				p11.isDone = true
 			end
 			
-			var3(function(p12) --[[ line: 95 ]]
+			var3(function(p12)
 				-- upvalues: var16 (ref)
 				if p12.isDone then
 					return p12
@@ -126,7 +126,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		end
 	end
 	
-	local _ = function(p13, p14) --[[ line: 129 | named "getEventSequenceId" ]]
+	local _ = function(p13, p14)
 		local sequenceId = p13.sequenceId
 		
 		if typeof(sequenceId) == "number" then
@@ -137,12 +137,12 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		return if typeof(var17) == "number" then var17 else nil
 	end
 	
-	local _ = function(a) --[[ line: 143 | named "applyTerminalUpdate" ]]
+	local _ = function(a)
 		-- upvalues: var2 (ref), var3 (ref)
 		local var18 = a.sessionUpdate == "state_change" and a.state == "idle"
 		
 		if var18 or var2(false).status == "queued" then
-			local var19 = function(p15) --[[ line: 148 ]]
+			local var19 = function(p15)
 				-- upvalues: var18 (ref), a (ref)
 				if p15.status == "queued" then
 					p15.status = "streaming"
@@ -155,7 +155,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				end
 			end
 			
-			var3(function(p16) --[[ line: 95 ]]
+			var3(function(p16)
 				-- upvalues: var19 (ref)
 				if p16.isDone then
 					return p16
@@ -172,17 +172,17 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 	
 	return {
 		state = var2,
-		getTurnId = function() --[[ line: 216 ]]
+		getTurnId = function()
 			-- upvalues: var4 (write)
 			return var4
 		end,
 		onNotification = onNotification,
-		getLatestProcessedSequenceNumber = function() --[[ line: 220 ]]
+		getLatestProcessedSequenceNumber = function()
 			-- upvalues: var8 (write)
 			return var8
 		end,
 		hasSequenceGap = hasSequenceGap,
-		noteProcessedSequenceNumber = function(p17) --[[ line: 224 ]]
+		noteProcessedSequenceNumber = function(p17)
 			-- upvalues: t_1 (ref), var8 (write), var9 (write), var10 (write)
 			if t_1[p17] == true then return end
 			t_1[p17] = true
@@ -207,7 +207,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		end,
 		cancel = p2
 	}, {
-		dispatchFrame = function(p18, p19, p20) --[[ line: 161 ]]
+		dispatchFrame = function(p18, p19, p20)
 			-- upvalues: var2 (ref), acpProtocolModule (copy), t_1 (ref), var8 (write), var9 (write), var10 (write), var4 (write), turnStateModule (copy), var3 (ref), fireHandlers (ref)
 			if var2(false).isDone then
 				return false
@@ -257,7 +257,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 						local var26 = update.sessionUpdate == "state_change" and update.state == "idle"
 						
 						if var26 or var2(false).status == "queued" then
-							local var27 = function(p21) --[[ line: 148 ]]
+							local var27 = function(p21)
 								-- upvalues: var26 (ref), update (ref)
 								if p21.status == "queued" then
 									p21.status = "streaming"
@@ -270,7 +270,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 								end
 							end
 							
-							var3(function(p22) --[[ line: 95 ]]
+							var3(function(p22)
 								-- upvalues: var27 (ref)
 								if p22.isDone then
 									return p22
@@ -297,7 +297,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				if response.error then
 					local error = response.error
 					
-					local var28 = function(p23) --[[ line: 120 ]]
+					local var28 = function(p23)
 						-- upvalues: error (ref)
 						p23.error = tostring(error.message or "JSON-RPC error")
 						p23.errorCode = tonumber(error.code)
@@ -305,7 +305,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 						p23.isDone = true
 					end
 					
-					var3(function(p24) --[[ line: 95 ]]
+					var3(function(p24)
 						-- upvalues: var28 (ref)
 						if p24.isDone then
 							return p24
@@ -320,9 +320,9 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 			end
 		end,
 		noteProcessedSequenceNumber = noteProcessedSequenceNumber,
-		fail = function(p25, p26) --[[ line: 197 ]]
+		fail = function(p25, p26)
 			-- upvalues: var3 (ref)
-			local var29 = function(p27) --[[ line: 198 ]]
+			local var29 = function(p27)
 				-- upvalues: p25 (ref), p26 (ref)
 				p27.error = p25
 				p27.errorCode = p26
@@ -330,7 +330,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				p27.isDone = true
 			end
 			
-			var3(function(p28) --[[ line: 95 ]]
+			var3(function(p28)
 				-- upvalues: var29 (ref)
 				if p28.isDone then
 					return p28
@@ -341,15 +341,15 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				return cloned
 			end)
 		end,
-		markCancelled = function() --[[ line: 206 ]]
+		markCancelled = function()
 			-- upvalues: var3 (ref)
-			local var30 = function(p29) --[[ line: 207 ]]
+			local var30 = function(p29)
 				p29.status = "cancelled"
 				p29.stopReason = "cancelled"
 				p29.isDone = true
 			end
 			
-			var3(function(p30) --[[ line: 95 ]]
+			var3(function(p30)
 				-- upvalues: var30 (ref)
 				if p30.isDone then
 					return p30
@@ -360,7 +360,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				return cloned
 			end)
 		end,
-		isDone = function() --[[ line: 235 ]]
+		isDone = function()
 			-- upvalues: var2 (ref)
 			return var2(false).isDone
 		end,

@@ -20,7 +20,7 @@ local fFlagPlayerListReduceRerendersModule = require(parent.Parent.Flags.FFlagPl
 local fFlagPlayerListFoundationSubscriptionIcon = playerListModule.Flags.FFlagPlayerListFoundationSubscriptionIcon
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-local function _(p0) --[[ line: 34 | named "isFoundationImage" ]]
+local function _(p0)
 	return p0 ~= nil and (p0 ~= "" and p0:match("^%w+://.*$") == nil)
 end
 
@@ -43,13 +43,13 @@ playerIcon.validateProps = tModule.strictInterface({
 	layoutValues = tModule.optional(tModule.table)
 })
 
-local _ = function(p1, p2) --[[ line: 61 | named "getSocialIconImage" ]]
+local _ = function(p1, p2)
 	local friendStatus = p1.FriendIcons[p2.friendStatus]
 	
 	return if p2.isBlocked then p1.BlockedIcon else friendStatus or nil
 end
 
-local function getIconImage(p3, p4, p5, p6) --[[ line: 73 ]]
+local function getIconImage(p3, p4, p5, p6)
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref)
 	local friendStatus = p3.FriendIcons[p6.friendStatus]
 	local var17 = if p6.isBlocked then p3.BlockedIcon else friendStatus or nil
@@ -84,9 +84,9 @@ local function getIconImage(p3, p4, p5, p6) --[[ line: 73 ]]
 	end
 end
 
-function playerIcon.render(p7) --[[ line: 115 ]]
+function playerIcon.render(p7)
 	-- upvalues: withLayoutValues (ref), roactModule (ref), getIconImage (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), fFlagPlayerListFoundationSubscriptionIcon (ref), foundationModule (ref), imageSetLabel (ref)
-	return withLayoutValues(function(_) --[[ line: 116 ]]
+	return withLayoutValues(function(_)
 		-- upvalues: p7 (ref), roactModule (copy), getIconImage (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), fFlagPlayerListFoundationSubscriptionIcon (copy), foundationModule (copy), imageSetLabel (copy)
 		layoutValues = p7.props.layoutValues
 		local avatarIcon = p7.props.playerIconInfo and p7.props.playerIconInfo.avatarIcon
@@ -186,13 +186,13 @@ function playerIcon.render(p7) --[[ line: 115 ]]
 	end)
 end
 
-local function mapStateToProps(p8) --[[ line: 239 ]]
+local function mapStateToProps(p8)
 	return {
 		isSmallTouchDevice = p8.displayOptions.isSmallTouchDevice
 	}
 end
 
-local var16 = function(p9) --[[ line: 245 ]]
+local var16 = function(p9)
 	-- upvalues: useLayoutValues (ref), reactModule (ref), playerIcon (ref), cryoModule (ref)
 	return reactModule.createElement(playerIcon, cryoModule.Dictionary.join(p9, { layoutValues = useLayoutValues() }))
 end

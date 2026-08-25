@@ -18,14 +18,14 @@ local priceLineItemModule = require(IAPExperience.Generic.PriceLineItem)
 local fFlagPurchasePromptFetchCartPricing = sharedFlagsModule.FFlagPurchasePromptFetchCartPricing
 local char = utf8.char(57346)
 
-return function(p0) --[[ line: 37 | named "DiscountSummary" ]]
+return function(p0)
 	-- upvalues: localizationService (ref), useRobuxTextModule (ref), reactModule (ref), discountRowModule (ref), fFlagPurchasePromptFetchCartPricing (ref), useLocalization (ref), char (ref), formatNumberModule (ref), discountType (ref), useDiscountAccordionConfigModule (ref), priceLineItemModule (ref), view (ref), accordion (ref), iconName (ref), divider (ref)
 	local itemPrice = p0.itemPrice
 	local robloxLocaleId = localizationService.RobloxLocaleId
 	local discounts = itemPrice.discounts
 	local var11 = useRobuxTextModule(itemPrice.basePriceInRobux)
 	local var12 = useRobuxTextModule(itemPrice.priceInRobux)
-	local var13, var14 = reactModule.useMemo(function() --[[ line: 45 ]]
+	local var13, var14 = reactModule.useMemo(function()
 		-- upvalues: discounts (ref), reactModule (copy), discountRowModule (copy), fFlagPurchasePromptFetchCartPricing (copy)
 		local var18 = 0
 		local t = {}
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 37 | named "DiscountSummary" ]]
 			savingsAmount = formatNumberModule(robloxLocaleId, var13)
 		}
 	})
-	local var16 = reactModule.useMemo(function() --[[ line: 72 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: discounts (ref), discountType (copy)
 		for i, v in ipairs(discounts) do
 			if v.type == discountType.BlackbirdSubscription or v.type == discountType.RobloxPlusSubscription then
@@ -102,7 +102,7 @@ return function(p0) --[[ line: 37 | named "DiscountSummary" ]]
 						["col gap-xsmall size-full-0 auto-y padding-y-xsmall"] = fFlagPurchasePromptFetchCartPricing,
 						["col size-full-0 auto-y gap-xsmall padding-y-xsmall"] = not fFlagPurchasePromptFetchCartPricing
 					}
-				}, reactModule.useMemo(function() --[[ line: 98 ]]
+				}, reactModule.useMemo(function()
 					-- upvalues: reactModule (copy), priceLineItemModule (copy), var15 (ref), var11 (ref), var14 (ref)
 					local t = {
 						SubtotalRow = reactModule.createElement(priceLineItemModule, { LayoutOrder = 1, label = var15.Subtotal, amount = var11 })

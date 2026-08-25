@@ -8,7 +8,7 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
 local t = { messageId = "", conversationId = "", inputBoxRef = nil }
 
-function MessageContextMenuContainer(p0) --[[ line: 32 ]]
+function MessageContextMenuContainer(p0)
 	-- upvalues: cryoModule (ref), t (ref), useGetConversationFromIdModule (ref), useLocalUserId (ref), reactModule (ref), messageContextMenuModule (ref)
 	local var6 = cryoModule.Dictionary.union(t, p0)
 	local var7 = useGetConversationFromIdModule(var6.conversationId)

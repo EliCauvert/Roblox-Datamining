@@ -4,11 +4,11 @@ local openPromptModule = require(parent.Actions.OpenPrompt)
 local getOutfitNameModule = require(parent.Network.GetOutfitName)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0, p1, p2) --[[ line: 10 ]]
+return function(p0, p1, p2)
 	-- upvalues: getOutfitNameModule (ref), openPromptModule (ref), promptTypeModule (ref), avatarEditorService (ref)
-	return function(p3) --[[ line: 11 ]]
+	return function(p3)
 		-- upvalues: getOutfitNameModule (copy), p0 (ref), openPromptModule (copy), promptTypeModule (copy), p1 (ref), p2 (ref), avatarEditorService (copy)
-		getOutfitNameModule(p0):andThen(function(p4) --[[ line: 12 ]]
+		getOutfitNameModule(p0):andThen(function(p4)
 			-- upvalues: p3 (ref), openPromptModule (copy), promptTypeModule (copy), p0 (copy), p1 (copy), p2 (copy)
 			p3:dispatch(openPromptModule(promptTypeModule.UpdateOutfit, {
 				outfitId = p0,
@@ -16,7 +16,7 @@ return function(p0, p1, p2) --[[ line: 10 ]]
 				humanoidDescription = p1,
 				rigType = p2
 			}))
-		end, function(_) --[[ line: 19 ]]
+		end, function(_)
 			-- upvalues: avatarEditorService (copy)
 			avatarEditorService:SignalUpdateOutfitFailed()
 		end)

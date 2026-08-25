@@ -11,7 +11,7 @@ local defaultCardPadding = constantsModule.Padding.DefaultCardPadding
 local defaultContentPadding = constantsModule.DefaultContentPadding
 local defaultCardCornerRadius = constantsModule.DefaultCardCornerRadius
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: useNotificationCardDataModule (ref), constantsModule (ref), defaultCardPadding (ref), useStyle (ref), react (ref), defaultCardCornerRadius (ref), defaultContentPadding (ref), notificationContentFrameModule (ref)
 	local var4 = useNotificationCardDataModule()
 	local cardSize = var4.cardSize

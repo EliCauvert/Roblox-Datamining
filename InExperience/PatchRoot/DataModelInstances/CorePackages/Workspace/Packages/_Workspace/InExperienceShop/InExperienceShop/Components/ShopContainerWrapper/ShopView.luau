@@ -21,7 +21,7 @@ local fFlagRemoveBottomPaddingInExperienceShopModule = require(inExperienceShop.
 local fFlagShopBlockClickPassThroughModule = require(inExperienceShop.Flags.FFlagShopBlockClickPassThrough)
 local _ = require(inExperienceShop.Hooks.useShopReportOverflow)
 
-return function(p0) --[[ line: 103 | named "ShopView" ]]
+return function(p0)
 	-- upvalues: findSectionModule (ref), reactModule (ref), view (ref), searchInputContainerModule (ref), topBarModule (ref), fFlagRemoveBottomPaddingInExperienceShopModule (ref), fFlagShopBlockClickPassThroughModule (ref), useTokens (ref), fFlagEnableCreatorEarlyAccessBannerInShopModule (ref), creatorEarlyAccessBannerModule (ref), tabs (ref), fillBehavior (ref), searchResultsContainerModule (ref), shopHomePageContainerModule (ref), categoryPageContainerModule (ref), itemDetailsContainerModule (ref), var4 (ref)
 	local isSearchOpen = p0.isSearchOpen
 	local var15 = not isSearchOpen and #p0.tabs > 0

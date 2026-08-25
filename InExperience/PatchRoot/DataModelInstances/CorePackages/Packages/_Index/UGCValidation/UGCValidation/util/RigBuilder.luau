@@ -1,7 +1,7 @@
 ﻿local playersService = game:GetService("Players")
 
 return {
-	createDefaultCharacter = function(p0) --[[ line: 5 ]]
+	createDefaultCharacter = function(p0)
 		-- upvalues: playersService (ref)
 		local var1 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else game.Players:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
 		

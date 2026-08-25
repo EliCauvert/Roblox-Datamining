@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidationFixConstantsTypoLeg", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidationFixConstantsTypoLeg")
 end

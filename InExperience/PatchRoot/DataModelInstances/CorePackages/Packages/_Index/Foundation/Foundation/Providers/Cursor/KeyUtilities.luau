@@ -5,35 +5,35 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 
 return {
-	encodeKey = function(p0, p1, p2, p3, p4) --[[ line: 11 ]]
+	encodeKey = function(p0, p1, p2, p3, p4)
 		-- upvalues: colorNamespaceModule (ref)
 		p1 = p1 or UDim.new(0, 0)
 		p3 = p3 or p0.Stroke.Thicker
 		
 		return p1.Scale .. " " .. p1.Offset .. " " .. (p2 or p0.Size.Size_150) - p3 .. " " .. p3 .. " " .. (p4 or colorNamespaceModule.Color)
 	end,
-	decodeKey = function(p5) --[[ line: 27 ]]
+	decodeKey = function(p5)
 		local var5 = if typeof(p5) == "string" then string.split(p5, " ") else p5
 		local var6 = tonumber(var5[3])
 		
 		return UDim.new(tonumber(var5[1]), math.max(0, tonumber(var5[2]) + var6)), var6, tonumber(var5[4]), var5[5]
 	end,
-	encodeCursorTypeKey = function(p6, p7) --[[ line: 40 ]]
+	encodeCursorTypeKey = function(p6, p7)
 		-- upvalues: colorNamespaceModule (ref)
 		return p6 .. " " .. (p7 or colorNamespaceModule.Color)
 	end,
-	decodeCursorTypeKey = function(p8) --[[ line: 45 ]]
+	decodeCursorTypeKey = function(p8)
 		local var7 = if typeof(p8) == "string" then string.split(p8, " ") else p8
 		
 		return var7[1], var7[2]
 	end,
-	migrateCursorType = function(p9) --[[ line: 52 ]]
+	migrateCursorType = function(p9)
 		-- upvalues: cursorTypeModule (ref)
 		local var8 = tostring(p9)
 		
 		return cursorTypeModule[string.gsub(var8, if var8:find("Kind") then "CursorKind%." else "CursorType%.", "")]
 	end,
-	mapCursorToKey = function(p10, p11) --[[ line: 58 ]]
+	mapCursorToKey = function(p10, p11)
 		-- upvalues: colorNamespaceModule (ref), cursorTypeModule (ref)
 		local _ = nil
 		

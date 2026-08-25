@@ -99,7 +99,7 @@ local var4 = nil
 return {
 	BREAK = var2,
 	REMOVE = nullModule,
-	visit = function(p0, p1, p2) --[[ line: 249 ]]
+	visit = function(p0, p1, p2)
 		-- upvalues: t (ref), array (ref), nullModule (ref), isNode (ref), inspect (ref), var4 (write), var2 (ref)
 		p2 = p2 or t
 		local t_1 = nil
@@ -227,12 +227,12 @@ return {
 		end
 		return var14
 	end,
-	visitInParallel = function(p3) --[[ line: 412 ]]
+	visitInParallel = function(p3)
 		-- upvalues: var4 (write), var2 (ref)
 		local t = {}
 		
 		return {
-			enter = function(_, p4, ...) --[[ line: 417 ]]
+			enter = function(_, p4, ...)
 				-- upvalues: p3 (ref), t (ref), var4 (copy), var2 (copy)
 				for i = 1, #p3 do
 					if t[i] == nil then
@@ -253,7 +253,7 @@ return {
 					end
 				end
 			end,
-			leave = function(_, ...) --[[ line: 439 ]]
+			leave = function(_, ...)
 				-- upvalues: p3 (ref), t (ref), var4 (copy), var2 (copy)
 				local var27
 				local var25 = ...
@@ -279,7 +279,7 @@ return {
 			end
 		}
 	end,
-	getVisitFn = function(p5, p6, p7) --[[ line: 465 ]]
+	getVisitFn = function(p5, p6, p7)
 		local var28 = p5[p6]
 		
 		if var28 then

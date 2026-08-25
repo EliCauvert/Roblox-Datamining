@@ -6,7 +6,7 @@ local shouldSaveScreenshotToAlbumModule = require(robloxGui.Modules.shouldSaveSc
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 21 ]]
+function t.new()
 	-- upvalues: t (ref), shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), captureNotificationModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -20,7 +20,7 @@ function t.new() --[[ line: 21 ]]
 	return t_1
 end
 
-function t:Start() --[[ line: 36 ]]
+function t:Start()
 	-- upvalues: shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), coreGuiService (ref)
 	if self.init then return end
 	self.init = true
@@ -32,7 +32,7 @@ end
 
 local var6 = t.new()
 
-function t:DismissNotification() --[[ line: 50 ]]
+function t:DismissNotification()
 	-- upvalues: var6 (ref), shouldSaveScreenshotToAlbumModule (ref), roactModule (ref), captureNotificationModule (ref)
 	if not self.init then
 		var6:Start()
@@ -42,7 +42,7 @@ function t:DismissNotification() --[[ line: 50 ]]
 		roactModule.update(self.captureNotificationInstance, roactModule.createElement(captureNotificationModule, {
 			permissionEvent = self.permissionEvent,
 			forceDismissToast = {
-				onDismissed = function() --[[ line: 59 ]]
+				onDismissed = function()
 					-- upvalues: roactModule (copy), self (ref), captureNotificationModule (copy)
 					roactModule.update(self.captureNotificationInstance, roactModule.createElement(captureNotificationModule, {
 						forceDismissToast = nil,
@@ -54,7 +54,7 @@ function t:DismissNotification() --[[ line: 50 ]]
 	end
 end
 
-function t:ShowPermissionToast() --[[ line: 74 ]]
+function t:ShowPermissionToast()
 	-- upvalues: var6 (ref)
 	if not self.init then
 		var6:Start()
@@ -62,7 +62,7 @@ function t:ShowPermissionToast() --[[ line: 74 ]]
 	self.permissionEvent:Fire()
 end
 
-function t:Capture() --[[ line: 81 ]]
+function t:Capture()
 	self:DismissNotification()
 	self.captureEvent:Fire()
 end

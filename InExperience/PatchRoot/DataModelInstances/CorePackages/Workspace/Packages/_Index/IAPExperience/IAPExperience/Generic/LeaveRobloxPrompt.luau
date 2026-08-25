@@ -11,7 +11,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.render(p0) --[[ line: 27 ]]
+function name.render(p0)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -22,14 +22,14 @@ function name.render(p0) --[[ line: 27 ]]
 			ButtonCancel = { key = "IAPExperience.LeaveRoblox.Action.Cancel" },
 			ButtonContinue = { key = "IAPExperience.LeaveRoblox.Action.Continue" }
 		},
-		render = function(p1) --[[ line: 43 ]]
+		render = function(p1)
 			-- upvalues: p0 (ref)
 			return p0:renderAlert(p1)
 		end
 	})
 end
 
-function name.renderAlert(p2, p3) --[[ line: 49 ]]
+function name.renderAlert(p2, p3)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

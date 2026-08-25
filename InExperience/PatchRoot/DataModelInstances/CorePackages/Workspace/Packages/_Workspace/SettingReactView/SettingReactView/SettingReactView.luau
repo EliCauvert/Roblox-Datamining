@@ -5,13 +5,13 @@ local fieldRowModule = require(parent.FieldRow)
 local reactModule = require(parent_1.React)
 local view = require(parent_1.Foundation).View
 
-return function(p0) --[[ line: 17 | named "_createPageView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fieldRowModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "padding-x-medium align-x-center align-y-top padding-small col size-full auto-y gui-object-defaults",
 		Visible = p0.visible
 	}, {
-		(function() --[[ line: 18 | named "getFields" ]]
+		(function()
 			-- upvalues: p0 (ref), reactModule (copy), fieldRowModule (copy)
 			local t = {}
 			

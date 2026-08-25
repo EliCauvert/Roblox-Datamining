@@ -8,7 +8,7 @@ local imagesModule = require(parent_2.UIBlox.App.ImageSet.Images)
 local _ = require(parent.ImageSet.ImagesTypes)
 local _ = require(parent_1.App.Style.StyleTypes)
 
-local function renderHalfCircle(p0, p1) --[[ line: 38 ]]
+local function renderHalfCircle(p0, p1)
 	-- upvalues: reactModule (ref), imageSetComponentModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local isLeft = p0.isLeft
@@ -49,7 +49,7 @@ local function renderHalfCircle(p0, p1) --[[ line: 38 ]]
 	})
 end
 
-return function(p2) --[[ line: 79 | named "ProgressIcon" ]]
+return function(p2)
 	-- upvalues: imagesModule (ref), useStyleModule (ref), reactModule (ref), renderHalfCircle (ref), imageSetComponentModule (ref)
 	local progress = p2.progress
 	local isHolding = p2.isHolding
@@ -77,9 +77,9 @@ return function(p2) --[[ line: 79 | named "ProgressIcon" ]]
 				layoutOrder = 1,
 				isLeft = true,
 				progressImage = var6,
-				rotation = reactModule.useMemo(function() --[[ line: 87 ]]
+				rotation = reactModule.useMemo(function()
 					-- upvalues: progress (ref)
-					return progress:map(function(p3) --[[ line: 88 ]]
+					return progress:map(function(p3)
 						return math.clamp((p3 or 0) * 314 + 23, 180, 337)
 					end)
 				end, { progress })
@@ -87,9 +87,9 @@ return function(p2) --[[ line: 79 | named "ProgressIcon" ]]
 			Right = renderHalfCircle({
 				layoutOrder = 2,
 				progressImage = var6,
-				rotation = reactModule.useMemo(function() --[[ line: 94 ]]
+				rotation = reactModule.useMemo(function()
 					-- upvalues: progress (ref)
-					return progress:map(function(p4) --[[ line: 95 ]]
+					return progress:map(function(p4)
 						return math.clamp((p4 or 0) * 314 + 23, 23, 180)
 					end)
 				end, { progress })
@@ -103,9 +103,9 @@ return function(p2) --[[ line: 79 | named "ProgressIcon" ]]
 			Position = UDim2.fromScale(0.5, 0.5),
 			Image = var5,
 			ImageColor3 = var7.Theme.IconEmphasis.Color,
-			ImageTransparency = reactModule.useMemo(function() --[[ line: 101 ]]
+			ImageTransparency = reactModule.useMemo(function()
 				-- upvalues: progress (ref)
-				return progress:map(function(p5) --[[ line: 102 ]]
+				return progress:map(function(p5)
 					return if p5 then math.clamp(0.8 - p5 * 0.8, 0, 0.8) else 0
 				end)
 			end, { progress })

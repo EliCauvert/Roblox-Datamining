@@ -16,7 +16,7 @@ local t_1 = {
 	ChannelMarkedRead = "fetchConversationDetails"
 }
 
-return function(p0) --[[ line: 66 | named "classifyCommunicationChannelsEvent" ]]
+return function(p0)
 	-- upvalues: t (ref), communicationChannelsTypesModule (ref), t_1 (ref)
 	if p0 == nil then
 		return t

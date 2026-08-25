@@ -20,14 +20,14 @@ local fFlagSduiRequestFriendshipActionHandler = sharedFlagsModule.FFlagSduiReque
 local small = enums_1.InputSize.Small
 local var9 = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
-return reactModule.memo(function(p0) --[[ line: 60 | named "SduiFriendRequestButton" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), signalsReactModule (ref), friendsStore (ref), reactModule (ref), fFlagSduiRequestFriendshipActionHandler (ref), sduiRequestFriendshipActionModule (ref), sduiActionType (ref), var9 (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref), iconButton (ref), enums_1 (ref), small (ref)
 	local userId = p0.userId
 	local var10 = useDispatch()
 	local var11 = signalsReactModule.useSignalState(friendsStore.get().GetFriendshipStatus(userId or "").data)
 	local var12 = if var11 ~= Enum.FriendStatus.FriendRequestSent then var11 == Enum.FriendStatus.FriendRequestReceived else true
 	local useCallback = reactModule.useCallback
-	useCallback = useCallback(function() --[[ line: 75 ]]
+	useCallback = useCallback(function()
 		-- upvalues: var12 (ref), userId (ref), fFlagSduiRequestFriendshipActionHandler (copy), p0 (ref), sduiRequestFriendshipActionModule (copy), sduiActionType (copy), var9 (copy), friendsStore (copy), var10 (ref), setCurrentToastMessage (copy), fFlagSduiSearchPeoplePlayerTileTelemetry (copy), firePlayerFriendAddTelemetryModule (copy)
 		if var12 or userId == nil then return end
 		if fFlagSduiRequestFriendshipActionHandler and p0.sduiContext then
@@ -38,13 +38,13 @@ return reactModule.memo(function(p0) --[[ line: 60 | named "SduiFriendRequestBut
 			
 			return
 		end
-		friendsStore.get().RequestFriendship(userId, if typeof(p0.source) == "string" and p0.source ~= "" then p0.source else var9):andThen(function() --[[ line: 94 ]]
+		friendsStore.get().RequestFriendship(userId, if typeof(p0.source) == "string" and p0.source ~= "" then p0.source else var9):andThen(function()
 			-- upvalues: var10 (copy), setCurrentToastMessage (copy)
 			var10(setCurrentToastMessage({
 				toastMessage = "Feature.Friends.Action.FriendRequestSent",
 				isLocalized = false
 			}))
-		end):catch(function(_) --[[ line: 100 ]]
+		end):catch(function(_)
 			-- upvalues: var10 (copy), setCurrentToastMessage (copy)
 			var10(setCurrentToastMessage({
 				toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",

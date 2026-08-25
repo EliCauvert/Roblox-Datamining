@@ -1,6 +1,6 @@
 ﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.MomentsCommon)
 
-return function(p0, p1, p2) --[[ line: 9 | named "makeMomentMetadata" ]]
+return function(p0, p1, p2)
 	-- upvalues: momentsCommonModule (ref)
 	return {
 		assetTotalDuration = if p0.CaptureType == Enum.CaptureType.Screenshot then momentsCommonModule.Constants.ScreenshotMusicDuration else p0.TimeLength,

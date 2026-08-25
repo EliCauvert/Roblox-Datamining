@@ -15,7 +15,7 @@ local fFlagEnableVerifiedBadgeStore = require(corePackagesService.Workspace.Pack
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 27 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.player = p0
@@ -29,7 +29,7 @@ function t_1.new(p0) --[[ line: 27 ]]
 	return tbl
 end
 
-function t_1:getGroupDataAsync() --[[ line: 39 ]]
+function t_1:getGroupDataAsync()
 	if self.groupData then
 		return self.groupData
 	end
@@ -39,7 +39,7 @@ function t_1:getGroupDataAsync() --[[ line: 39 ]]
 	return self.groupData
 end
 
-function t_1:getCanManageAsync() --[[ line: 50 ]]
+function t_1:getCanManageAsync()
 	if self.canManage == nil then
 		table.insert(self.pendingCanManage, coroutine.running())
 		coroutine.yield()
@@ -49,7 +49,7 @@ function t_1:getCanManageAsync() --[[ line: 50 ]]
 	return self.canManage
 end
 
-function t_1:getProfileSettingsAsync() --[[ line: 61 ]]
+function t_1:getProfileSettingsAsync()
 	if self.profileSettings == nil then
 		table.insert(self.pendingProfileSettings, coroutine.running())
 		coroutine.yield()
@@ -59,7 +59,7 @@ function t_1:getProfileSettingsAsync() --[[ line: 61 ]]
 	return self.profileSettings
 end
 
-function t_1:setGroupData(p1) --[[ line: 72 ]]
+function t_1:setGroupData(p1)
 	self.groupData = p1
 	local pendingGroupData = self.pendingGroupData
 	self.pendingGroupData = {}
@@ -69,7 +69,7 @@ function t_1:setGroupData(p1) --[[ line: 72 ]]
 	end
 end
 
-function t_1:setCanManage(p2) --[[ line: 81 ]]
+function t_1:setCanManage(p2)
 	self.canManage = if p2 then true else false
 	local pendingCanManage = self.pendingCanManage
 	self.pendingCanManage = {}
@@ -79,7 +79,7 @@ function t_1:setCanManage(p2) --[[ line: 81 ]]
 	end
 end
 
-function t_1:setProfileSettings(p3) --[[ line: 91 ]]
+function t_1:setProfileSettings(p3)
 	self.profileSettings = p3
 	local pendingProfileSettings = self.pendingProfileSettings
 	self.pendingProfileSettings = {}
@@ -89,7 +89,7 @@ function t_1:setProfileSettings(p3) --[[ line: 91 ]]
 	end
 end
 
-function t_1:destroy() --[[ line: 100 ]]
+function t_1:destroy()
 	-- upvalues: fFlagInExperienceUserProfileSettingsEnabledModule (ref)
 	for i, v in pairs(self.pendingGroupData) do
 		coroutine.resume(v)
@@ -106,7 +106,7 @@ end
 
 local t_2 = {}
 
-local function _(p4) --[[ line: 118 | named "getPlayerInfo" ]]
+local function _(p4)
 	-- upvalues: t_2 (ref), t_1 (ref)
 	local var26 = t_2[p4]
 	
@@ -117,9 +117,9 @@ local function _(p4) --[[ line: 118 | named "getPlayerInfo" ]]
 	return var26
 end
 
-spawn(function() --[[ line: 127 ]]
+spawn(function()
 	-- upvalues: playersService (ref), t_2 (ref), t_1 (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerGroupDetails", 1e999).OnClientEvent:Connect(function(...) --[[ line: 131 ]]
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerGroupDetails", 1e999).OnClientEvent:Connect(function(...)
 		-- upvalues: playersService (copy), t_2 (copy), t_1 (copy)
 		local list = { ... }
 		
@@ -162,9 +162,9 @@ spawn(function() --[[ line: 127 ]]
 		end
 	end)
 end)
-coroutine.wrap(function() --[[ line: 162 ]]
+coroutine.wrap(function()
 	-- upvalues: playersService (ref), t_2 (ref), t_1 (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p5, p6) --[[ line: 168 ]]
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p5, p6)
 		-- upvalues: playersService (copy), t_2 (copy), t_1 (copy)
 		local var35 = playersService:GetPlayerByUserId(tonumber(p5))
 		
@@ -185,10 +185,10 @@ coroutine.wrap(function() --[[ line: 162 ]]
 end)()
 
 if fFlagInExperienceUserProfileSettingsEnabledModule then
-	coroutine.wrap(function() --[[ line: 180 ]]
+	coroutine.wrap(function()
 		-- upvalues: playersService (ref), t_2 (ref), t_1 (ref), fFlagEnableVerifiedBadgeStore (ref), verifiedBadgeDisplayStore (ref), fFlagInExperienceRequestProfileSettingsModule (ref)
 		local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-		robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p7, p8) --[[ line: 186 ]]
+		robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p7, p8)
 			-- upvalues: playersService (copy), t_2 (copy), t_1 (copy), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy)
 			local var39 = playersService:GetPlayerByUserId(tonumber(p7))
 			
@@ -215,7 +215,7 @@ if fFlagInExperienceUserProfileSettingsEnabledModule then
 		end
 	end)()
 end
-playersService.PlayerRemoving:Connect(function(p9) --[[ line: 212 ]]
+playersService.PlayerRemoving:Connect(function(p9)
 	-- upvalues: t_2 (ref)
 	if t_2[p9] then
 		local var42 = t_2[p9]
@@ -224,9 +224,9 @@ playersService.PlayerRemoving:Connect(function(p9) --[[ line: 212 ]]
 	end
 end)
 
-local _ = function(p10) --[[ line: 220 | named "NewInGroupFunctionFactory" ]]
+local _ = function(p10)
 	-- upvalues: t_2 (ref), t_1 (ref)
-	return function(p11) --[[ line: 221 ]]
+	return function(p11)
 		-- upvalues: t_2 (copy), t_1 (copy), p10 (ref)
 		local var43 = t_2[p11]
 		
@@ -245,7 +245,7 @@ end
 local t_3 = {}
 local var11 = "SpanishLocalizationExpert"
 
-local var12 = function(p12) --[[ line: 221 ]]
+local var12 = function(p12)
 	-- upvalues: t_2 (ref), t_1 (ref), var11 (ref)
 	local var43 = t_2[p12]
 	
@@ -262,7 +262,7 @@ end
 
 local var13 = "BrazilianLocalizationExpert"
 
-local var14 = function(p13) --[[ line: 221 ]]
+local var14 = function(p13)
 	-- upvalues: t_2 (ref), t_1 (ref), var13 (ref)
 	local var43 = t_2[p13]
 	
@@ -281,9 +281,9 @@ local var15 = "FrenchLocalizationExpert"
 local var16 = "GermanLocalizationExpert"
 -- Unknown statement at pc 9: <SetList>
 
-local _ = function() --[[ line: 240 | named "NewIsLocalizationExpertFunctionFactory" ]]
+local _ = function()
 	-- upvalues: t_3 (ref)
-	return function(p14) --[[ line: 241 ]]
+	return function(p14)
 		-- upvalues: t_3 (copy)
 		for i = 1, #t_3 do
 			if not t_3[i](p14) then
@@ -295,12 +295,12 @@ local _ = function() --[[ line: 240 | named "NewIsLocalizationExpertFunctionFact
 	end
 end
 
-local _ = function() --[[ line: 251 | named "IsPlaceOwnerFunctionFactory" ]]
+local _ = function()
 	-- upvalues: t_2 (ref), t_1 (ref)
 	if game.CreatorType == Enum.CreatorType.Group then
 		local var44 = "PlaceCreator"
 		
-		return function(p15) --[[ line: 221 ]]
+		return function(p15)
 			-- upvalues: t_2 (copy), t_1 (copy), var44 (ref)
 			local var43 = t_2[p15]
 			
@@ -315,12 +315,12 @@ local _ = function() --[[ line: 251 | named "IsPlaceOwnerFunctionFactory" ]]
 			end
 		end
 	end
-	return function(p16) --[[ line: 255 ]]
+	return function(p16)
 		return p16.UserId == game.CreatorId
 	end
 end
 
-local function CanPlayerManagePlace(p17) --[[ line: 260 ]]
+local function CanPlayerManagePlace(p17)
 	-- upvalues: t_2 (ref), t_1 (ref)
 	local var45 = t_2[p17]
 	
@@ -331,7 +331,7 @@ local function CanPlayerManagePlace(p17) --[[ line: 260 ]]
 	return if var45 then var45:getCanManageAsync() or false else false
 end
 
-local function IsPlayerInExperienceNameEnabled(p18) --[[ line: 269 ]]
+local function IsPlayerInExperienceNameEnabled(p18)
 	-- upvalues: t_2 (ref), t_1 (ref)
 	local var46 = t_2[p18]
 	
@@ -346,9 +346,9 @@ local function IsPlayerInExperienceNameEnabled(p18) --[[ line: 269 ]]
 	end
 end
 
-local function SetPlayerInExperienceNameEnabled(_, p19) --[[ line: 280 ]]
+local function SetPlayerInExperienceNameEnabled(_, p19)
 	-- upvalues: url (ref), httpService (ref), httpRbxApiService (ref)
-	pcall(function() --[[ line: 281 ]]
+	pcall(function()
 		-- upvalues: url (copy), httpService (copy), p19 (ref), httpRbxApiService (copy)
 		local updatePlayerProfileSettings = game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdatePlayerProfileSettings", 1e999)
 		httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "user-profile-api/v1/user/profiles/settings", httpService:JSONEncode({
@@ -360,7 +360,7 @@ end
 
 local var20 = "Admin"
 
-function t.IsPlayerAdminAsync(p20) --[[ line: 221 ]]
+function t.IsPlayerAdminAsync(p20)
 	-- upvalues: t_2 (ref), t_1 (ref), var20 (ref)
 	local var43 = t_2[p20]
 	
@@ -377,7 +377,7 @@ end
 
 local var21 = "Intern"
 
-function t.IsPlayerInternAsync(p21) --[[ line: 221 ]]
+function t.IsPlayerInternAsync(p21)
 	-- upvalues: t_2 (ref), t_1 (ref), var21 (ref)
 	local var43 = t_2[p21]
 	
@@ -394,7 +394,7 @@ end
 
 local var22 = "Star"
 
-function t.IsPlayerStarAsync(p22) --[[ line: 221 ]]
+function t.IsPlayerStarAsync(p22)
 	-- upvalues: t_2 (ref), t_1 (ref), var22 (ref)
 	local var43 = t_2[p22]
 	
@@ -409,7 +409,7 @@ function t.IsPlayerStarAsync(p22) --[[ line: 221 ]]
 	end
 end
 
-function t.IsPlayerLocalizationExpertAsync(p23) --[[ line: 241 ]]
+function t.IsPlayerLocalizationExpertAsync(p23)
 	-- upvalues: t_3 (ref)
 	for i = 1, #t_3 do
 		if not t_3[i](p23) then
@@ -424,7 +424,7 @@ end
 if game.CreatorType == Enum.CreatorType.Group then
 	local var23 = "PlaceCreator"
 	
-	local var24 = function(p24) --[[ line: 221 ]]
+	local var24 = function(p24)
 		-- upvalues: t_2 (ref), t_1 (ref), var23 (ref)
 		local var43 = t_2[p24]
 		
@@ -439,7 +439,7 @@ if game.CreatorType == Enum.CreatorType.Group then
 		end
 	end
 else
-	local var24 = function(p25) --[[ line: 255 ]]
+	local var24 = function(p25)
 		return p25.UserId == game.CreatorId
 	end
 end

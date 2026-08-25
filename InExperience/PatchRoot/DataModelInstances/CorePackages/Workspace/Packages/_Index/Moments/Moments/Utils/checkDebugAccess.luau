@@ -3,7 +3,7 @@ local moments = script:FindFirstAncestor("Moments")
 local getFStringMomentsDebugModeAllowListModule = require(moments.Flags.GetFStringMomentsDebugModeAllowList)
 local parseUserAllowListModule = require(moments.Utils.parseUserAllowList)
 
-return function() --[[ line: 15 | named "checkDebugAccess" ]]
+return function()
 	-- upvalues: playersService (ref), parseUserAllowListModule (ref), getFStringMomentsDebugModeAllowListModule (ref)
 	local localPlayer = playersService.LocalPlayer
 	

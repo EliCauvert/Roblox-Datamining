@@ -11,7 +11,7 @@ local getFStringUGCValidationAttachmentErrorLinkModule = require(parent.flags.ge
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 
-local function validateInMeshSpace(p0, p1, p2, p3, p4) --[[ line: 21 ]]
+local function validateInMeshSpace(p0, p1, p2, p3, p4)
 	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref), boundsDataUtilsModule (ref), analyticsModule (ref), meshSpaceUtilsModule (ref), prettyPrintVector3Module (ref), getFStringUGCValidationAttachmentErrorLinkModule (ref)
 	local var12 = p4.cframe * getAttachmentCFrameInPartSpaceModule(p0)
 	local var13 = boundsDataUtilsModule.calculateBoundsCenters(p4.boundsData)
@@ -41,7 +41,7 @@ local function validateInMeshSpace(p0, p1, p2, p3, p4) --[[ line: 21 ]]
 	return true
 end
 
-local function checkAll(p5, _, p6, p7, p8) --[[ line: 88 ]]
+local function checkAll(p5, _, p6, p7, p8)
 	-- upvalues: failureReasonsAccumulatorModule (ref), r15plusUtilsModule (ref), validateInMeshSpace (ref)
 	local var22 = failureReasonsAccumulatorModule.new()
 	local name = p5:FindFirstChild(p6.rigAttachmentToParent.name, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
@@ -56,7 +56,7 @@ local function checkAll(p5, _, p6, p7, p8) --[[ line: 88 ]]
 	return var22:getFinalResults()
 end
 
-return function(p9, p10) --[[ line: 131 | named "validateBodyPartChildAttachmentBounds" ]]
+return function(p9, p10)
 	-- upvalues: constantsModule (ref), failureReasonsAccumulatorModule (ref), boundsCalculatorModule (ref), checkAll (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local assetTypeEnum = p10.assetTypeEnum

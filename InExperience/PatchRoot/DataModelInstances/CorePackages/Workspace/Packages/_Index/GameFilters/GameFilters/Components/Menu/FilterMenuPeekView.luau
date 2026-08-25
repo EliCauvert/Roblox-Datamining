@@ -18,9 +18,9 @@ local getOptionContextTagModule = require(gameFilters.Analytics.getOptionContext
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 local fFlagLuaAppChartsActiveFilterChips = require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips
 
-return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
+return function()
 	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), peekViewState (ref), filterClickButtonNameModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), getOptionContextTagModule (ref), fFlagLuaAppChartsActiveFilterChips (ref), useTopBarHeightSelectorModule (ref), signal (ref), peekView (ref), filterMenuActionBarModule (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref)
-	local var10 = useNavigationProps(function(_, p0) --[[ line: 36 ]]
+	local var10 = useNavigationProps(function(_, p0)
 		return {
 			filter = p0.filter,
 			onFilterApplied = p0.onFilterApplied,
@@ -32,7 +32,7 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 	local var11, var12 = reactModule.useState(filter.selectedOptionId)
 	local var13 = reactModule.useRef(false)
 	local var14 = useNavigation()
-	local var15 = reactModule.useCallback(function(p1, _) --[[ line: 54 ]]
+	local var15 = reactModule.useCallback(function(p1, _)
 		-- upvalues: peekViewState (copy), var14 (ref), var10 (ref), var13 (ref), filterClickButtonNameModule (copy), filter (ref), var11 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
 		if p1 == peekViewState.Closed or p1 == peekViewState.Hidden then
 			var14.goBack()
@@ -60,7 +60,7 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 		local var27, var28 = reactModule.useBinding(0)
 		var23 = var27
 		local var29 = var28
-		var24 = reactModule.useCallback(function(p2) --[[ line: 92 ]]
+		var24 = reactModule.useCallback(function(p2)
 			-- upvalues: var29 (write)
 			var29(p2.AbsoluteCanvasSize.Y)
 		end, {})
@@ -69,22 +69,22 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 		var21 = var25
 		var22 = var26
 	end
-	local var30 = if fFlagLuaAppChartsFilterOptionTextTag then nil else var17:map(function(p3) --[[ line: 101 ]]
+	local var30 = if fFlagLuaAppChartsFilterOptionTextTag then nil else var17:map(function(p3)
 		return p3.X
 	end)
 	local var31 = reactModule.joinBindings({
 		var17,
 		var19,
 		if fFlagLuaAppChartsFilterOptionTextTag then var23 else var21
-	}):map(function(p4) --[[ line: 109 ]]
+	}):map(function(p4)
 		-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (copy), var16 (ref)
 		return UDim2.new(1, 0, 0, math.min(p4[2] + (if fFlagLuaAppChartsFilterOptionTextTag then p4[3] else p4[3].Y), p4[1].Y - 84 - 25 - var16))
 	end)
-	local var32 = var19:map(function(p5) --[[ line: 121 ]]
+	local var32 = var19:map(function(p5)
 		return UDim2.new(1, 0, 1, -p5)
 	end)
 	local var33 = reactModule.useRef(nil)
-	local var34 = reactModule.useCallback(function(p6) --[[ line: 127 ]]
+	local var34 = reactModule.useCallback(function(p6)
 		-- upvalues: var33 (ref)
 		local current = var33.current
 		
@@ -95,7 +95,7 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 		end
 	end, {})
 	local var35 = reactModule.useRef(signal.new())
-	local var36 = reactModule.useCallback(function() --[[ line: 140 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: var35 (ref)
 		var35.current:fire()
 	end, {})
@@ -104,7 +104,7 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		ClipsDescendants = false,
-		[reactModule.Change.AbsoluteSize] = function(p7) --[[ line: 179 ]]
+		[reactModule.Change.AbsoluteSize] = function(p7)
 			-- upvalues: var18 (ref)
 			var18(p7.AbsoluteSize)
 		end
@@ -123,7 +123,7 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 			bottomDockedContainerContent = reactModule.createElement(filterMenuActionBarModule, {
 				Size = UDim2.new(1, 0, 0, 84),
 				applyEnabled = var11 ~= filter.selectedOptionId,
-				onApply = reactModule.useCallback(function() --[[ line: 152 ]]
+				onApply = reactModule.useCallback(function()
 					-- upvalues: var10 (ref), filter (ref), var11 (ref), var13 (ref), var36 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
 					var10.onFilterApplied(filter.filterType, var11)
 					var13.current = true
@@ -161,7 +161,7 @@ return function() --[[ line: 35 | named "FilterMenuPeekView" ]]
 					containerMaxWidthBinding = if fFlagLuaAppChartsFilterOptionTextTag then nil else var30,
 					options = filter.filterOptions,
 					selectedOptionId = var11,
-					onSelectedOptionChanged = reactModule.useCallback(function(p8) --[[ line: 145 ]]
+					onSelectedOptionChanged = reactModule.useCallback(function(p8)
 						-- upvalues: var12 (ref)
 						var12(p8)
 					end, {}),

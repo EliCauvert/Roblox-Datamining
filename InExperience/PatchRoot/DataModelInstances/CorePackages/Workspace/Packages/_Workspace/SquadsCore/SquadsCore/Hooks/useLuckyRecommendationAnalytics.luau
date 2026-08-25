@@ -6,16 +6,16 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
 local getLuckyRecommendationStoreModule = require(squadsCore.Stores.GetLuckyRecommendationStore)
 
-return function(p0) --[[ line: 12 | named "useLuckyRecommendationAnalytics" ]]
+return function(p0)
 	-- upvalues: getLuckyRecommendationStoreModule (ref), reactModule (ref), squadExternalContractContextModule (ref), useLocalUserId (ref), cryoModule (ref)
 	local var5 = getLuckyRecommendationStoreModule(false)
 	local var6 = reactModule.useContext(squadExternalContractContextModule)
 	local var7 = tonumber(useLocalUserId()) or 0
 	
-	return reactModule.useMemo(function() --[[ line: 18 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var5 (ref), p0 (ref), var7 (ref), cryoModule (copy), var6 (ref)
 		return {
-			fire = function(p1, p2) --[[ line: 20 ]]
+			fire = function(p1, p2)
 				-- upvalues: var5 (copy), p0 (copy), var7 (copy), cryoModule (copy), var6 (copy)
 				local analyticsContext = var5.getAnalyticsContext()
 				local t = {
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 12 | named "useLuckyRecommendationAnalytics" ]]
 				end
 				var6.fireSquadAnalytics(p1, t)
 			end,
-			getContext = function() --[[ line: 34 ]]
+			getContext = function()
 				-- upvalues: var5 (copy)
 				return var5.getAnalyticsContext()
 			end

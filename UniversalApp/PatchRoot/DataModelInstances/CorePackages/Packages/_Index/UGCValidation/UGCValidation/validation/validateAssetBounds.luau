@@ -6,7 +6,7 @@ local boundsCalculatorModule = require(parent.util.BoundsCalculator)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local validateScaleTypeModule = require(parent.validation.validateScaleType)
 
-local function forEachMeshPart(p0, p1, p2, p3) --[[ line: 16 ]]
+local function forEachMeshPart(p0, p1, p2, p3)
 	-- upvalues: constantsModule (ref)
 	assert(p0 ~= nil ~= ((p1 and p2) ~= nil))
 	
@@ -35,12 +35,12 @@ local function forEachMeshPart(p0, p1, p2, p3) --[[ line: 16 ]]
 	return true
 end
 
-local function getScaleType(p4, p5, p6, p7) --[[ line: 50 ]]
+local function getScaleType(p4, p5, p6, p7)
 	-- upvalues: forEachMeshPart (ref), analyticsModule (ref), validateScaleTypeModule (ref)
 	assert(p4 ~= nil ~= ((p5 and p6) ~= nil))
 	local var11 = nil
 	
-	if forEachMeshPart(p4, p5, p6, function(p8) --[[ line: 60 ]]
+	if forEachMeshPart(p4, p5, p6, function(p8)
 		-- upvalues: var11 (write)
 		local avatarPartScaleType = p8:FindFirstChild("AvatarPartScaleType")
 		assert(avatarPartScaleType)
@@ -62,7 +62,7 @@ local function getScaleType(p4, p5, p6, p7) --[[ line: 50 ]]
 	}, nil
 end
 
-local function validateMinBoundsInternal(a, b, p9, p10) --[[ line: 88 ]]
+local function validateMinBoundsInternal(a, b, p9, p10)
 	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref)
 	local var15 = failureReasonsAccumulatorModule.new()
 	local var16 = false
@@ -84,7 +84,7 @@ local function validateMinBoundsInternal(a, b, p9, p10) --[[ line: 88 ]]
 	return var15:getFinalResults()
 end
 
-local function validateMaxBoundsInternal(a, b, p11, p12) --[[ line: 126 ]]
+local function validateMaxBoundsInternal(a, b, p11, p12)
 	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref)
 	local var21 = failureReasonsAccumulatorModule.new()
 	local var22 = false
@@ -106,7 +106,7 @@ local function validateMaxBoundsInternal(a, b, p11, p12) --[[ line: 126 ]]
 	return var21:getFinalResults()
 end
 
-return function(value, p13, p14) --[[ line: 164 | named "validateAssetBounds" ]]
+return function(value, p13, p14)
 	-- upvalues: boundsCalculatorModule (ref), getScaleType (ref), failureReasonsAccumulatorModule (ref), constantsModule (ref), validateMinBoundsInternal (ref), validateMaxBoundsInternal (ref), analyticsModule (ref)
 	local var31, var32, var33
 	local currentTime = tick()

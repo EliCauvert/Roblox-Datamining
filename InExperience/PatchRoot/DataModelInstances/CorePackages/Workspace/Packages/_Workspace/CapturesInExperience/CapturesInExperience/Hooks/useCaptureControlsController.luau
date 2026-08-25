@@ -20,7 +20,7 @@ local vector2 = Vector2.new(1, 0.5)
 local right = snapDirectionModule.Right
 local t_2 = { duration = 0.4, easingStyle = { 0.19, 1, 0.22, 1 } }
 
-local function validateRefs(p0) --[[ line: 33 ]]
+local function validateRefs(p0)
 	for i, v in p0 do
 		if v.current ~= nil then
 			if v.current.AbsoluteSize.X <= 0 or v.current.AbsoluteSize.Y <= 0 then
@@ -32,7 +32,7 @@ local function validateRefs(p0) --[[ line: 33 ]]
 	return true
 end
 
-local function clampItemPosition(value, minValue, maxValue, p1, p2) --[[ line: 47 ]]
+local function clampItemPosition(value, minValue, maxValue, p1, p2)
 	-- upvalues: fFlagCapturesDragEdgeOffsetEnabledModule (ref)
 	local var15 = value - maxValue
 	local var16 = if fFlagCapturesDragEdgeOffsetEnabledModule then 50 else 0
@@ -55,12 +55,12 @@ local function clampItemPosition(value, minValue, maxValue, p1, p2) --[[ line: 4
 	return Vector2.new(var18, var19)
 end
 
-local function getSnapPosition(p3, p4, p5, p6, p7, p8) --[[ line: 87 ]]
+local function getSnapPosition(p3, p4, p5, p6, p7, p8)
 	-- upvalues: clampItemPosition (ref)
 	return clampItemPosition(Vector2.new(p6.X * p7.X, p6.Y * p7.Y) - Vector2.new(p3.X * p4.X, p3.Y * p4.Y) + p5, p3, p5, p6, p8)
 end
 
-local function getSnapAnchorPoint(p9, p10, p11, p12) --[[ line: 114 ]]
+local function getSnapAnchorPoint(p9, p10, p11, p12)
 	local var20 = p9 - p10
 	local list = {
 		Vector2.new(0, math.max(var20.Y, p12.Y)),
@@ -68,7 +68,7 @@ local function getSnapAnchorPoint(p9, p10, p11, p12) --[[ line: 114 ]]
 		Vector2.new(math.max(var20.X, p12.X), 0),
 		Vector2.new(var20.X, p11.Y)
 	}
-	table.sort(list, function(p13, p14) --[[ line: 129 ]]
+	table.sort(list, function(p13, p14)
 		-- upvalues: var20 (ref)
 		return (p13 - var20).Magnitude < (p14 - var20).Magnitude
 	end)
@@ -77,12 +77,12 @@ local function getSnapAnchorPoint(p9, p10, p11, p12) --[[ line: 114 ]]
 	return var22 / p11, (var22 - var20).Magnitude
 end
 
-local function _(p15) --[[ line: 138 | named "getSnapDirectionFromAnchorPoint" ]]
+local function _(p15)
 	-- upvalues: snapDirectionModule (ref)
 	return if p15.X == 0 then snapDirectionModule.Left elseif p15.X == 1 then snapDirectionModule.Right elseif p15.Y == 0 then snapDirectionModule.Top else snapDirectionModule.Bottom
 end
 
-local _ = function(p16, p17) --[[ line: 150 | named "getShouldRotate" ]]
+local _ = function(p16, p17)
 	local var23 = if p17.X ~= 0 then p17.X == 1 else true
 	local var24 = if p17.Y ~= 0 then p17.Y == 1 else true
 	local var25 = false
@@ -101,7 +101,7 @@ local _ = function(p16, p17) --[[ line: 150 | named "getShouldRotate" ]]
 	return var25
 end
 
-return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" ]]
+return function(p18, p19)
 	-- upvalues: useRef (ref), captureControlsConfigurationModule (ref), useState (ref), vector2 (ref), right (ref), useGuiInset (ref), useDeviceInsets (ref), useCallback (ref), useAnimatedBinding (ref), t (ref), t_1 (ref), useEffect (ref), validateRefs (ref), snapDirectionModule (ref), reactOtterModule (ref), t_2 (ref), getSnapPosition (ref), clampItemPosition (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), getSnapAnchorPoint (ref)
 	local var26 = useRef(p19)
 	local var27 = useRef(nil)
@@ -116,13 +116,13 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 	local var39, var40 = useState(right)
 	local var41 = useGuiInset()
 	local var42 = useDeviceInsets()
-	local var43 = useCallback(function() --[[ line: 183 ]]
+	local var43 = useCallback(function()
 		-- upvalues: var30 (ref)
 		var30.current = false
 	end, {})
 	local var44, var45 = useAnimatedBinding(t)
 	local var46, var47 = useAnimatedBinding(t_1, var43)
-	useEffect(function() --[[ line: 194 ]]
+	useEffect(function()
 		-- upvalues: p18 (ref), validateRefs (copy), var29 (ref), var27 (ref), var26 (ref), p19 (ref), var32 (ref), var34 (ref), var40 (ref), snapDirectionModule (copy), var37 (ref), var45 (ref), reactOtterModule (copy), t_2 (copy), var38 (ref), getSnapPosition (copy), var47 (ref)
 		if not p18 or not validateRefs({ var29, var27 }) then return end
 		assert(var29.current ~= nil, "dragItemRef is nil")
@@ -161,7 +161,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 			yOffset = reactOtterModule.instant(var57.Y + var54.Y)
 		})
 	end, { p18, p19, var45, var47 })
-	local var48 = useCallback(function() --[[ line: 250 ]]
+	local var48 = useCallback(function()
 		-- upvalues: p18 (ref), var30 (ref), validateRefs (copy), var29 (ref), var27 (ref), getSnapPosition (copy), var33 (ref), p19 (ref), var47 (ref), reactOtterModule (copy)
 		if p18 and not var30.current and validateRefs({ var29, var27 }) then
 			assert(var29.current ~= nil, "dragItemRef is nil")
@@ -184,7 +184,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 		var35,
 		var47
 	})
-	local var49 = useCallback(function(p20) --[[ line: 288 ]]
+	local var49 = useCallback(function(p20)
 		-- upvalues: p18 (ref), var35 (ref), validateRefs (copy), var27 (ref), var29 (ref), var41 (ref), var42 (ref), var36 (ref), clampItemPosition (copy), p19 (ref), var37 (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), var45 (ref), reactOtterModule (copy), var47 (ref)
 		if p18 and not var35 and validateRefs({ var27, var29 }) then
 			assert(var29.current ~= nil, "dragItemRef is nil")
@@ -214,7 +214,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else var41,
 		var35, var37, var47, var45
 	})
-	local var50 = useCallback(function(p21, p22) --[[ line: 354 ]]
+	local var50 = useCallback(function(p21, p22)
 		-- upvalues: validateRefs (copy), var29 (ref), var27 (ref), var41 (ref), var42 (ref), getSnapAnchorPoint (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), p19 (ref), var37 (ref), var45 (ref), reactOtterModule (copy), var38 (ref), getSnapPosition (copy), clampItemPosition (copy), var47 (ref), var30 (ref), t_2 (copy), var34 (ref), var40 (ref), snapDirectionModule (copy), captureControlsConfigurationModule (copy), var32 (ref)
 		if not validateRefs({ var29, var27 }) then return end
 		assert(var29.current ~= nil, "dragItemRef is nil")
@@ -272,7 +272,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else var41,
 		var37, var47, var45
 	})
-	local var51 = useCallback(function(p23) --[[ line: 445 ]]
+	local var51 = useCallback(function(p23)
 		-- upvalues: p18 (ref), var35 (ref), var50 (ref)
 		if p18 and var35 then
 			var50(p23, true)
@@ -280,7 +280,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 			return
 		end
 	end, { p18, var50, var35 })
-	local var52 = useCallback(function(p24) --[[ line: 453 ]]
+	local var52 = useCallback(function(p24)
 		-- upvalues: p18 (ref), var35 (ref), var50 (ref), var36 (ref)
 		if p18 and var35 then
 			var50(p24, false)
@@ -289,7 +289,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 			return
 		end
 	end, { p18, var50, var35 })
-	useEffect(function() --[[ line: 462 ]]
+	useEffect(function()
 		-- upvalues: p18 (ref), var26 (ref), p19 (ref), var48 (ref)
 		if not p18 then return end
 		if var26.current ~= p19 then
@@ -297,7 +297,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 			var48()
 		end
 	end, { p18, p19, var48 })
-	useEffect(function() --[[ line: 473 ]]
+	useEffect(function()
 		-- upvalues: p18 (ref), var28 (ref), var49 (ref), var51 (ref), var52 (ref), var27 (ref), var48 (ref), var29 (ref)
 		if not p18 then return end
 		local t = {}
@@ -313,7 +313,7 @@ return function(p18, p19) --[[ line: 166 | named "useCaptureControlsController" 
 		if var29.current ~= nil then
 			table.insert(t, var29.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(var48))
 		end
-		return function() --[[ line: 499 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

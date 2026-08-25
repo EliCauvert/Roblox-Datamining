@@ -10,7 +10,7 @@ local view = foundationModule.View
 local loadableVideo = momentsCommonModule.LoadableVideo
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), image (ref), loadableVideo (ref), dashModule (ref)
 	local var5 = useTokens()
 	

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableVRChartsTab", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableVRChartsTab")
 end

@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 2 | named "slice" ]]
+﻿return function(p0, p1, p2)
 	local var0 = type(p0)
 	assert(var0 == "table", "expected a table for first argument, got " .. var0)
 	local p0Count = #p0

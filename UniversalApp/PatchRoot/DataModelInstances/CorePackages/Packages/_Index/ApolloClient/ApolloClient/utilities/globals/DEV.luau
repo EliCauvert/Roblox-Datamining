@@ -2,12 +2,12 @@
 local boolean = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Boolean
 local default = require(script.Parent.Parent.common.global).default
 
-local function _() --[[ line: 23 | named "getDEV" ]]
+local function _()
 	-- upvalues: boolean (ref), default (ref)
-	local _, status = xpcall(function() --[[ line: 25 ]]
+	local _, status = xpcall(function()
 		-- upvalues: boolean (copy)
 		return boolean.toJSBoolean(_G.__DEV__)
-	end, function() --[[ line: 27 ]]
+	end, function()
 		-- upvalues: default (copy)
 		default.__DEV__ = true
 		
@@ -17,10 +17,10 @@ local function _() --[[ line: 23 | named "getDEV" ]]
 	return status
 end
 
-local _, status = xpcall(function() --[[ line: 25 ]]
+local _, status = xpcall(function()
 	-- upvalues: boolean (ref)
 	return boolean.toJSBoolean(_G.__DEV__)
-end, function() --[[ line: 27 ]]
+end, function()
 	-- upvalues: default (ref)
 	default.__DEV__ = true
 	

@@ -22,7 +22,7 @@ local t = {
 	Size = UDim2.new(1, 0, 0, 0)
 }
 
-local function HeaderButton(p0) --[[ line: 86 ]]
+local function HeaderButton(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), imageSetLabel (ref)
 	local var8 = useDesignTokens()
 	local size400 = var8.Size.Size_400
@@ -41,11 +41,11 @@ local function HeaderButton(p0) --[[ line: 86 ]]
 	})
 end
 
-return reactModule.memo(function(p1) --[[ line: 113 | named "CollectionHeader" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), usePreferredInput (ref), useDesignTokens (ref), responsiveModule (ref), checkAndFormatPossibleLinkModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), HeaderButton (ref), cycleRight (ref), truncationCollapseSmall (ref), iconWithTooltip (ref), tooltipOrientation (ref)
 	local var9 = cryoModule.Dictionary.join(t, p1)
 	local var10, var11 = reactModule.useBinding(0)
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 117 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var11 (ref)
 		var11(p2.AbsoluteSize.X)
 	end, {})
@@ -136,7 +136,7 @@ return reactModule.memo(function(p1) --[[ line: 113 | named "CollectionHeader" ]
 					TextXAlignment = Enum.TextXAlignment.Left
 				}, {
 					UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-						MaxSize = var10:map(function(p3) --[[ line: 237 ]]
+						MaxSize = var10:map(function(p3)
 							-- upvalues: var22 (ref), var23 (ref)
 							local var32 = p3 - var22 - var23
 							
@@ -185,7 +185,7 @@ return reactModule.memo(function(p1) --[[ line: 113 | named "CollectionHeader" ]
 					RichText = var26
 				}, {
 					UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-						MaxSize = var10:map(function(p4) --[[ line: 291 ]]
+						MaxSize = var10:map(function(p4)
 							-- upvalues: var30 (ref)
 							local var33 = p4 - var30
 							

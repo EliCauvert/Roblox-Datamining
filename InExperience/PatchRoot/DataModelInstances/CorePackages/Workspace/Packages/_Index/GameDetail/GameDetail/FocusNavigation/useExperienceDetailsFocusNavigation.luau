@@ -19,7 +19,7 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-local function findTaggedDescendant(p0, p1) --[[ line: 29 ]]
+local function findTaggedDescendant(p0, p1)
 	-- upvalues: collectionService (ref)
 	local current = p1.current
 	
@@ -34,17 +34,17 @@ local function findTaggedDescendant(p0, p1) --[[ line: 29 ]]
 	return nil
 end
 
-return function(p2) --[[ line: 52 | named "useExperienceDetailsFocusNavigation" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), useInitialFocusOnTag (ref), sduiFocusTags (ref), useSelectionOrderTracking (ref), reactFocusNavigationModule (ref), getSduiFocusActivationStore (ref), findTaggedDescendant (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), usePageButtonBindings (ref), t (ref), useOnNavigateBack (ref)
 	local var8 = reactModule.useRef(nil)
 	useInitialFocusOnTag(sduiFocusTags.PrimaryAction, var8)
 	useSelectionOrderTracking(var8)
 	local var9 = reactFocusNavigationModule.useFocusGuiObject()
-	local var10 = reactModule.useCallback(function() --[[ line: 59 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: getSduiFocusActivationStore (copy), sduiFocusTags (copy)
 		getSduiFocusActivationStore().activate(sduiFocusTags.PrimaryAction)
 	end, {})
-	local var11 = reactModule.useCallback(function() --[[ line: 63 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: findTaggedDescendant (copy), sduiFocusTags (copy), var8 (ref), var9 (ref)
 		local var13 = findTaggedDescendant(sduiFocusTags.StatsSection, var8)
 		
@@ -52,7 +52,7 @@ return function(p2) --[[ line: 52 | named "useExperienceDetailsFocusNavigation" 
 			var9(var13)
 		end
 	end, { var9, var8 })
-	local var12 = useOnNavigateBack(p2, usePageButtonBindings(var8, t, reactModule.useMemo(function() --[[ line: 70 ]]
+	local var12 = useOnNavigateBack(p2, usePageButtonBindings(var8, t, reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var10 (ref), var11 (ref)
 		return {
 			[focusNavigationEventNameEnum.Play] = { handler = inputHandlersModule.onRelease(var10) },
@@ -60,7 +60,7 @@ return function(p2) --[[ line: 52 | named "useExperienceDetailsFocusNavigation" 
 		}
 	end, { var10, var11 })))
 	
-	return reactModule.useCallback(function(p3) --[[ line: 84 ]]
+	return reactModule.useCallback(function(p3)
 		-- upvalues: var8 (ref), var12 (ref)
 		var8.current = p3
 		

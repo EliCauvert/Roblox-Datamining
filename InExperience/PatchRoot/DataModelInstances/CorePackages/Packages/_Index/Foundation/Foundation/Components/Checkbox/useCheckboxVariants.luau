@@ -8,7 +8,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0) --[[ line: 31 ]]
+local function variantsFactory(p0)
 	-- upvalues: inputSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
@@ -52,7 +52,7 @@ local function variantsFactory(p0) --[[ line: 31 ]]
 	}
 end
 
-return function(p1, p2) --[[ line: 71 ]]
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local checkbox = variantsContextModule.useVariants("Checkbox", variantsFactory, p1)
 	

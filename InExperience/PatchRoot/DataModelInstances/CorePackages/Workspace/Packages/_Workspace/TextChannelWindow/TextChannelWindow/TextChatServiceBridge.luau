@@ -11,21 +11,21 @@ local fFlagExpChatRemoveOrphanedChannelsModule = require(script.Parent.Flags.FFl
 local fFlagExpChatDedupChannelConnectionsModule = require(script.Parent.Flags.FFlagExpChatDedupChannelConnections)
 local fFlagExpChatClearMessagesOnLeaveModule = require(script.Parent.Flags.FFlagExpChatClearMessagesOnLeave)
 
-local function getMessageStatus(p0) --[[ line: 29 ]]
+local function getMessageStatus(p0)
 	local status = p0.Status
 	
 	return if status == Enum.TextChatMessageStatus.Success then "success" elseif status == Enum.TextChatMessageStatus.TextFilterFailed then "filter_failed" elseif status == Enum.TextChatMessageStatus.Floodchecked then "floodchecked" elseif status == Enum.TextChatMessageStatus.InvalidPrivacySettings then "invalid_privacy_settings" elseif status == Enum.TextChatMessageStatus.InvalidTextChannelPermissions then "invalid_permissions" elseif status == Enum.TextChatMessageStatus.MessageTooLong then "message_too_long" elseif status == Enum.TextChatMessageStatus.ModerationTimeout then "moderation_timeout" else "unknown"
 end
 
-return function(p1, p2, p3) --[[ line: 50 | named "createTextChatServiceBridge" ]]
+return function(p1, p2, p3)
 	-- upvalues: fFlagExpChatDedupChannelConnectionsModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), isTextSourceMutedModule (ref), textChatServiceIntegrationModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), getMessageStatus (ref), fFlagExpChatClearMessagesOnLeaveModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatRemoveOrphanedChannelsModule (ref)
 	local t = {}
 	
-	local function connectChannel(p4) --[[ line: 57 ]]
+	local function connectChannel(p4)
 		-- upvalues: fFlagExpChatDedupChannelConnectionsModule (copy), t (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy), fFlagExpChatClearMessagesOnLeaveModule (copy)
 		if fFlagExpChatDedupChannelConnectionsModule and t[p4] then return end
 		local isRBXSystem = p4.Name == "RBXSystem"
-		local messageReceivedConnection = p4.MessageReceived:Connect(function(p5) --[[ line: 63 ]]
+		local messageReceivedConnection = p4.MessageReceived:Connect(function(p5)
 			-- upvalues: isRBXSystem (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (copy), p3 (copy), p4 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
 			if not p5.TextSource and not isRBXSystem then return end
 			if getFFlagExpChatUseChatMuteStoreModule() and p5.TextSource and isTextSourceMutedModule(p5.TextSource) then return end
@@ -48,7 +48,7 @@ return function(p1, p2, p3) --[[ line: 50 | named "createTextChatServiceBridge" 
 		if fFlagExpChatDedupChannelConnectionsModule then
 			local list = { messageReceivedConnection }
 			t[p4] = list
-			table.insert(list, p4.Destroying:Connect(function() --[[ line: 94 ]]
+			table.insert(list, p4.Destroying:Connect(function()
 				-- upvalues: list (ref), t (copy), p4 (ref)
 				for i, v in list do
 					v:Disconnect()
@@ -57,7 +57,7 @@ return function(p1, p2, p3) --[[ line: 50 | named "createTextChatServiceBridge" 
 			end))
 		end
 		if fFlagExpChatClearMessagesOnLeaveModule then
-			p4.ChildRemoved:Connect(function(p6) --[[ line: 104 ]]
+			p4.ChildRemoved:Connect(function(p6)
 				-- upvalues: p2 (copy), p3 (copy), p4 (ref)
 				if p6:IsA("TextSource") and tostring(p6.UserId) == p2 then
 					p3.clearChannel(p4)
@@ -66,7 +66,7 @@ return function(p1, p2, p3) --[[ line: 50 | named "createTextChatServiceBridge" 
 		end
 	end
 	
-	p1.SendingMessage:Connect(function(p7) --[[ line: 112 ]]
+	p1.SendingMessage:Connect(function(p7)
 		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowPerfTracker (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref)
 		if not p7.TextSource then return end
 		if (if getFFlagExpChatProtectedChatInternalAPIs() then p7.TextInternal else p7.Text) == "" then return end
@@ -85,7 +85,7 @@ return function(p1, p2, p3) --[[ line: 50 | named "createTextChatServiceBridge" 
 			connectChannel(v)
 		end
 	end
-	p1.DescendantAdded:Connect(function(p8) --[[ line: 137 ]]
+	p1.DescendantAdded:Connect(function(p8)
 		-- upvalues: connectChannel (ref)
 		if p8:IsA("TextChannel") then
 			connectChannel(p8)
@@ -93,7 +93,7 @@ return function(p1, p2, p3) --[[ line: 50 | named "createTextChatServiceBridge" 
 	end)
 	
 	if fFlagExpChatRemoveOrphanedChannelsModule then
-		p1.DescendantRemoving:Connect(function(p9) --[[ line: 144 ]]
+		p1.DescendantRemoving:Connect(function(p9)
 			-- upvalues: p3 (ref)
 			if p9:IsA("TextChannel") then
 				p3.removeChannelEntry(p9)

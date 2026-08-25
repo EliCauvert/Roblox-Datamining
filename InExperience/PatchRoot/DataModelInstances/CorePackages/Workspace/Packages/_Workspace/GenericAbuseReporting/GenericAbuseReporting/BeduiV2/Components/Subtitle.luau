@@ -8,12 +8,12 @@ local text = foundationModule.Text
 local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "Subtitle" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useArTranslation (ref), reactModule (ref), iconName (ref), getIconRichText (ref), text (ref)
 	return if p0.subtitle then reactModule.createElement(text, {
 		RichText = true,
 		tag = "auto-xy text-body-medium content-default",
-		Text = `{reactModule.useMemo(function() --[[ line: 28 ]]
+		Text = `{reactModule.useMemo(function()
 			-- upvalues: p0 (ref), iconName (copy), getIconRichText (copy)
 			if p0.subtitle and p0.subtitle.leading then
 				local leading = iconName[p0.subtitle.leading]

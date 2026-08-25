@@ -34,10 +34,10 @@ shareInviteLink.defaultProps = {
 	isDesktopClient = if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true
 }
 
-function shareInviteLink.init(p0) --[[ line: 66 ]]
+function shareInviteLink.init(p0)
 	p0.state = { showCopiedText = false }
 	
-	function p0.displayShareSheet(p1) --[[ line: 71 ]]
+	function p0.displayShareSheet(p1)
 		-- upvalues: p0 (ref)
 		local props = p0.props
 		
@@ -46,7 +46,7 @@ function shareInviteLink.init(p0) --[[ line: 66 ]]
 			
 			if props.isDesktopClient then
 				p0:setState({ showCopiedText = true })
-				task.delay(1, function() --[[ line: 82 ]]
+				task.delay(1, function()
 					-- upvalues: p0 (copy)
 					p0:setState({ showCopiedText = false })
 				end)
@@ -55,7 +55,7 @@ function shareInviteLink.init(p0) --[[ line: 66 ]]
 	end
 end
 
-function shareInviteLink.didUpdate(p2, p3) --[[ line: 90 ]]
+function shareInviteLink.didUpdate(p2, p3)
 	-- upvalues: shareLinksRodux (ref)
 	local props = p2.props
 	
@@ -68,7 +68,7 @@ function shareInviteLink.didUpdate(p2, p3) --[[ line: 90 ]]
 	end
 end
 
-function shareInviteLink.render(p4) --[[ line: 103 ]]
+function shareInviteLink.render(p4)
 	-- upvalues: constantsModule (ref), roactModule (ref), themeModule (ref), color (ref), var13 (write), var14 (write), var7 (ref), var15 (write), shareButtonModule (ref), var18 (ref), var17 (ref), networkStatus (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -105,7 +105,7 @@ function shareInviteLink.render(p4) --[[ line: 103 ]]
 		ShareButton = roactModule.createElement(shareButtonModule, {
 			layoutOrder = 1,
 			size = UDim2.new(0, var15, 1, 0),
-			onShare = function() --[[ line: 110 ]]
+			onShare = function()
 				-- upvalues: p4 (ref)
 				local props = p4.props
 				p4.props.analytics:onShareButtonClick()

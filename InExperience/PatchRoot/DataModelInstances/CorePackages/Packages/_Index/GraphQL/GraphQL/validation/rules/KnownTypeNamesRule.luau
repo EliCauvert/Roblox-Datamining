@@ -19,7 +19,7 @@ local var3 = nil
 local isStandardTypeName = nil
 local isSDLNode = nil
 
-function t.KnownTypeNamesRule(p0) --[[ line: 43 ]]
+function t.KnownTypeNamesRule(p0)
 	-- upvalues: map (ref), isTypeDefinitionNode (ref), array (ref), object (ref), isSDLNode (write), isStandardTypeName (write), suggestionList (ref), var3 (write), graphQLError (ref), didYouMean (ref)
 	local schema = p0:getSchema()
 	local var7 = if schema then schema:getTypeMap() else map.new()
@@ -33,7 +33,7 @@ function t.KnownTypeNamesRule(p0) --[[ line: 43 ]]
 	local var9 = array.concat(var7:keys(), object.keys(t))
 	
 	return {
-		NamedType = function(_, p1, _, p2, _, p3) --[[ line: 65 ]]
+		NamedType = function(_, p1, _, p2, _, p3)
 			-- upvalues: var7 (write), t (ref), isSDLNode (copy), isStandardTypeName (copy), suggestionList (copy), array (copy), var3 (copy), var9 (ref), p0 (ref), graphQLError (copy), didYouMean (copy)
 			local value = p1.name.value
 			
@@ -48,16 +48,16 @@ function t.KnownTypeNamesRule(p0) --[[ line: 43 ]]
 	}
 end
 
-var3 = array.map(array.concat(specifiedScalarTypes, introspectionTypes), function(p4) --[[ line: 93 ]]
+var3 = array.map(array.concat(specifiedScalarTypes, introspectionTypes), function(p4)
 	return p4.name
 end)
 
-isStandardTypeName = function(p5) --[[ line: 98 | named "isStandardTypeName" ]]
+isStandardTypeName = function(p5)
 	-- upvalues: array (ref), var3 (write)
 	return array.indexOf(var3, p5) ~= -1
 end
 
-isSDLNode = function(p6) --[[ line: 102 | named "isSDLNode" ]]
+isSDLNode = function(p6)
 	-- upvalues: array (ref), isTypeSystemDefinitionNode (ref), isTypeSystemExtensionNode (ref)
 	return not array.isArray(p6) and (isTypeSystemDefinitionNode(p6) or isTypeSystemExtensionNode(p6))
 end

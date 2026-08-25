@@ -11,7 +11,7 @@ local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-function variantsFactory(p0) --[[ line: 35 ]]
+function variantsFactory(p0)
 	-- upvalues: flagsModule (ref), badgeVariantModule (ref), badgeSizeModule (ref), iconSizeModule (ref), badgeShapeModule (ref), iconPositionModule (ref), dashModule (ref)
 	return {
 		common = {
@@ -128,7 +128,7 @@ function variantsFactory(p0) --[[ line: 35 ]]
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6) --[[ line: 218 ]]
+return function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: variantsContextModule (ref), composeStyleVariantModule (ref), flagsModule (ref), dashModule (ref)
 	local badge = variantsContextModule.useVariants("Badge", variantsFactory, p1)
 	

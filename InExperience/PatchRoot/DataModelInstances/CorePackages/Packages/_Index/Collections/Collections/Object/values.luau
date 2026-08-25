@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	if p0 == nil then
 		error("cannot extract values from a nil value")
 	end

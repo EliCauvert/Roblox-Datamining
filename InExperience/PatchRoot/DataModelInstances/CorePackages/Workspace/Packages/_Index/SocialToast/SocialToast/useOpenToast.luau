@@ -7,11 +7,11 @@ local navigateDown = navigationRoduxModule.Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var2 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function() --[[ line: 15 ]]
+return function()
 	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
 	local var3 = useDispatch()
 	
-	return reactModule.useCallback(function(p0) --[[ line: 18 ]]
+	return reactModule.useCallback(function(p0)
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), var3 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.SocialToast,

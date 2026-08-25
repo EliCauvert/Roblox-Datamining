@@ -29,17 +29,17 @@ modalBottomSheetButton.validateProps = tModule.strictInterface({
 modalBottomSheetButton.defaultProps = {
 	text = "",
 	icon = {},
-	onActivated = function() --[[ line: 45 ]] end
+	onActivated = function() end
 }
 
-function modalBottomSheetButton.init(p0) --[[ line: 48 ]]
+function modalBottomSheetButton.init(p0)
 	-- upvalues: roactModule (ref)
 	local var11, var12 = roactModule.createBinding(false)
 	p0.pressed = var11
 	p0.updatePressed = var12
 	p0.ref = roactModule.createRef()
 	
-	function p0.onColorChange(p1) --[[ line: 51 ]]
+	function p0.onColorChange(p1)
 		-- upvalues: p0 (ref)
 		if p0.ref.current then
 			p0.ref.current.ImageColor3 = p1
@@ -48,16 +48,16 @@ function modalBottomSheetButton.init(p0) --[[ line: 48 ]]
 		end
 	end
 	
-	function p0.onInputBegan(p2) --[[ line: 58 ]]
+	function p0.onInputBegan(p2)
 		return if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true
 	end
 	
-	function p0.onInputEnd(p3) --[[ line: 62 ]]
+	function p0.onInputEnd(p3)
 		return if p3.UserInputType ~= Enum.UserInputType.MouseButton1 then p3.UserInputType == Enum.UserInputType.Touch else true
 	end
 end
 
-function modalBottomSheetButton.render(p4) --[[ line: 68 ]]
+function modalBottomSheetButton.render(p4)
 	-- upvalues: imageRectSize (ref), imageRectOffset (ref), rect (ref), withStyleModule (ref), roactModule (ref), imagesModule (ref), imageSetComponentModule (ref), roundedFrameModule (ref), var10 (ref)
 	local vector2, var16
 	local hasRoundTop = p4.props.hasRoundTop
@@ -96,7 +96,7 @@ function modalBottomSheetButton.render(p4) --[[ line: 68 ]]
 	if p4.props.renderRightElement then
 		var19 = var19 + var20 + var18
 	end
-	return withStyleModule(function(p5) --[[ line: 120 ]]
+	return withStyleModule(function(p5)
 		-- upvalues: p4 (ref), roactModule (copy), rect_1 (write), imagesModule (copy), vector2 (write), var16 (write), var18 (write), imageSetComponentModule (copy), var20 (ref), var19 (write), hasRoundBottom (ref), var17 (write), roundedFrameModule (copy), hasRoundTop (ref), var10 (copy)
 		local theme = p5.Theme
 		local font = p5.Font
@@ -104,11 +104,11 @@ function modalBottomSheetButton.render(p4) --[[ line: 68 ]]
 		local _ = nil
 		local _ = nil
 		local _ = nil
-		local var21 = p4.pressed:map(function(p6) --[[ line: 128 ]]
+		local var21 = p4.pressed:map(function(p6)
 			-- upvalues: theme (ref)
 			return if p6 then theme.BackgroundOnPress.Color else theme.BackgroundUIDefault.Color
 		end)
-		local var22 = p4.pressed:map(function(p7) --[[ line: 131 ]]
+		local var22 = p4.pressed:map(function(p7)
 			-- upvalues: theme (ref)
 			return if p7 then theme.BackgroundOnPress.Transparency else theme.BackgroundUIDefault.Transparency
 		end)
@@ -142,13 +142,13 @@ function modalBottomSheetButton.render(p4) --[[ line: 68 ]]
 				LayoutOrder = p4.props.LayoutOrder,
 				[roactModule.Ref] = p4.ref,
 				[roactModule.Event.Activated] = p4.props.onActivatedAndDismissed,
-				[roactModule.Event.InputBegan] = function(_, p8) --[[ line: 152 ]]
+				[roactModule.Event.InputBegan] = function(_, p8)
 					-- upvalues: p4 (copy)
 					if p4.onInputBegan(p8) then
 						p4.updatePressed(true)
 					end
 				end,
-				[roactModule.Event.InputEnded] = function(_, p9) --[[ line: 157 ]]
+				[roactModule.Event.InputEnded] = function(_, p9)
 					-- upvalues: p4 (copy)
 					if p4.onInputEnd(p9) then
 						p4.updatePressed(false)

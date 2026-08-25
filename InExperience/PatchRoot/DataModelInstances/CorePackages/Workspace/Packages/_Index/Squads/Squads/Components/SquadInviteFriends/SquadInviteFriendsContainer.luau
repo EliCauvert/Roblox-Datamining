@@ -23,7 +23,7 @@ local useStore = dependenciesModule.Hooks.useStore
 local images = UIBloxModule.App.ImageSet.Images
 local squadInviteFriendsModule = require(script.Parent.SquadInviteFriends)
 
-return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
+return function(p0)
 	-- upvalues: react (ref), squadExternalContractContext (ref), useNavigation (ref), useDispatch (ref), useStore (ref), useLocalization (ref), useCurrentSquadSelector (ref), useLocalUserId (ref), useAppPolicy (ref), cryo (ref), notificationModalsManagerModule (ref), images (ref), squadInviteSourceEnumModule (ref), eventNamesModule (ref), promiseModule (ref), inviteToParentChannelModule (ref), inviteToSquadModule (ref), constantsModule (ref), squadPromptType (ref), squadInviteFriendsModule (ref)
 	local var25
 	local var11 = react.useContext(squadExternalContractContext)
@@ -42,10 +42,10 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 	local var18 = if var17 and var17.parentChannelId then var17.parentChannelId else ""
 	local var19 = var11.useGetConversationFromId(var18)
 	local var20 = useLocalUserId()
-	local var21 = useAppPolicy(react.useCallback(function(p1) --[[ line: 57 ]]
+	local var21 = useAppPolicy(react.useCallback(function(p1)
 		return p1.getCanUsePlatformChat()
 	end, {}))
-	local var22 = react.useCallback(function(p2) --[[ line: 65 ]]
+	local var22 = react.useCallback(function(p2)
 		-- upvalues: cryo (copy), var15 (ref), notificationModalsManagerModule (copy), images (copy)
 		local var26 = cryo.Dictionary.keys(p2)
 		local displayName = p2[var26[1]].displayName
@@ -64,7 +64,7 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 		var15.youAddedToChat,
 		var15.youAddedTwoToChat
 	})
-	local var23 = react.useCallback(function(p3) --[[ line: 92 ]]
+	local var23 = react.useCallback(function(p3)
 		-- upvalues: cryo (copy), var18 (ref), squadInviteSourceEnumModule (copy), var11 (ref), eventNamesModule (copy)
 		var11.fireSquadAnalytics(eventNamesModule.SquadInvite, cryo.Dictionary.union({
 			parentChannelId = var18,
@@ -74,19 +74,19 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 	local createElement = react.createElement
 	local t = {
 		participants = p0.participants,
-		onMultiInvite = react.useCallback(function(p4) --[[ line: 101 ]]
+		onMultiInvite = react.useCallback(function(p4)
 			-- upvalues: var17 (ref), var19 (ref), cryo (copy), var20 (ref), var11 (ref), var13 (ref), promiseModule (copy), inviteToParentChannelModule (copy), var12 (ref), inviteToSquadModule (copy), var23 (ref), var22 (ref), constantsModule (copy), var14 (ref), squadPromptType (copy), var21 (ref)
 			if not var17 or not var19 then return end
 			local var27 = cryo.Dictionary.keys(p4)
 			local var28 = cryo.List.toSet(var19.participants)
-			local var29 = cryo.List.filter(var27, function(p5) --[[ line: 112 ]]
+			local var29 = cryo.List.filter(var27, function(p5)
 				-- upvalues: var28 (ref)
 				return var28[p5] == nil
 			end)
 			
-			local var30 = function() --[[ line: 116 ]]
+			local var30 = function()
 				-- upvalues: cryo (copy), var19 (copy), var27 (ref), var20 (copy), var11 (copy), var13 (copy), promiseModule (copy), var29 (ref), inviteToParentChannelModule (copy), var12 (copy), inviteToSquadModule (copy), var17 (copy), var23 (copy), var22 (copy), p4 (ref)
-				local var31 = cryo.List.filter(var19.participants, function(p6) --[[ line: 119 ]]
+				local var31 = cryo.List.filter(var19.participants, function(p6)
 					-- upvalues: cryo (copy), var27 (copy), var20 (copy)
 					return cryo.List.find(var27, tostring(p6)) == nil and p6 ~= var20
 				end)
@@ -97,18 +97,18 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 						table.insert(t, var11.removeUserFromParentChannel(var13, var19.id, v))
 					end
 				end
-				promiseModule.all(t):andThen(function() --[[ line: 136 ]]
+				promiseModule.all(t):andThen(function()
 					-- upvalues: var29 (copy), var13 (copy), inviteToParentChannelModule (copy), var31 (ref), var12 (copy), var19 (copy), inviteToSquadModule (copy), var17 (copy), var20 (copy), var23 (copy), var22 (copy), p4 (copy), var11 (copy)
 					if #var29 > 0 then
 						var13(inviteToParentChannelModule({
 							dispatch = var13,
-							onErrorCallback = function() --[[ line: 140 ]]
+							onErrorCallback = function()
 								-- upvalues: var31 (copy), var12 (copy)
 								if #var31 > 0 then
 									var12.pop()
 								end
 							end,
-							onSuccessCallback = function(p7) --[[ line: 145 ]]
+							onSuccessCallback = function(p7)
 								-- upvalues: var19 (copy), var13 (copy), inviteToSquadModule (copy), var17 (copy), var20 (copy), var29 (copy), var23 (copy), var22 (copy), p4 (copy), var12 (copy)
 								var13(inviteToSquadModule(var17.squadId, p7, var20, var29, var23, p7 ~= var19.id))
 								var22(p4)
@@ -129,7 +129,7 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 				var11.setSquadPrompt(var14, {
 					hideCancelButton = true,
 					promptType = squadPromptType.CannotExpandToGroupChatActiveParty,
-					onConfirm = function() --[[ line: 177 ]]
+					onConfirm = function()
 						-- upvalues: var12 (copy)
 						var12.pop()
 					end
@@ -140,7 +140,7 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 				var11.setSquadPrompt(var14, {
 					hideCancelButton = false,
 					promptType = squadPromptType.ConfirmInviteToSquad,
-					onConfirm = function() --[[ line: 189 ]]
+					onConfirm = function()
 						-- upvalues: var30 (ref)
 						var30()
 					end
@@ -156,7 +156,7 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 		buttonText = var15.addText,
 		analyticsInfo = { selectionPageType = "SquadInvite" },
 		partyStartedRef = var16,
-		onRemoveCallback = if var19 then function(p8, p9) --[[ line: 220 ]]
+		onRemoveCallback = if var19 then function(p8, p9)
 			-- upvalues: cryo (copy), var19 (ref), var11 (ref), var14 (ref), var15 (ref), squadPromptType (copy)
 			if cryo.List.find(var19.participants, p8) then
 				var11.setSquadPrompt(var14, {
@@ -166,7 +166,7 @@ return function(p0) --[[ line: 33 | named "SquadInviteFriendsContainer" ]]
 				})
 			end
 		end else nil,
-		preselectedUsers = var19 and (var19.participants and cryo.List.filter(var19.participants, function(p10) --[[ line: 235 ]]
+		preselectedUsers = var19 and (var19.participants and cryo.List.filter(var19.participants, function(p10)
 			-- upvalues: var20 (ref)
 			return p10 ~= var20
 		end))

@@ -1,7 +1,7 @@
 ﻿local _ = game:GetService("GuiService")
 local _ = require(script.Parent.Parent.Properties)
 
-return function(p0, p1) --[[ line: 8 | named "getThumbstickInputFromDirectionalInput" ]]
+return function(p0, p1)
 	local zero = Vector2.zero
 	
 	if p0 == Enum.KeyCode.ButtonUp then

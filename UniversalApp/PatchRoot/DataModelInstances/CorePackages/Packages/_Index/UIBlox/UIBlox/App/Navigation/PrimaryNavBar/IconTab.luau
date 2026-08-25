@@ -23,7 +23,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 46 | named "IconTab" ]]
+return function(p0)
 	-- upvalues: object (ref), t (ref), controlStateModule (ref), useStyleModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), constantsModule (ref), horizontalContainerModule (ref), reactModule (ref), label (ref), placementModule (ref), genericTextLabelModule (ref)
 	local var11 = object.assign({}, t, p0)
 	local item = var11.item

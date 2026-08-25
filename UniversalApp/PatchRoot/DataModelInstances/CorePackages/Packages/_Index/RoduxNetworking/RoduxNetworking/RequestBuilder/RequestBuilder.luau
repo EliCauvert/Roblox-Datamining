@@ -2,28 +2,28 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 7 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref)
 	return setmetatable({ ids = t.makeArray(p1), delimiter = p2 }, p0)
 end
 
-function t:setIds(p3) --[[ line: 14 ]]
+function t:setIds(p3)
 	-- upvalues: t (ref)
 	self.ids = t.makeArray(p3)
 end
 
-function t.makeArray(p4) --[[ line: 18 ]]
+function t.makeArray(p4)
 	return if type(p4) == "table" then p4 else { p4 }
 end
 
-function t:__tostring() --[[ line: 25 ]]
+function t:__tostring()
 	return table.concat(self.ids, self.delimiter)
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p5, p6) --[[ line: 54 ]]
+function t_1.new(p5, p6)
 	-- upvalues: t_1 (ref)
 	local t = {
 		configurableIds = nil,
@@ -42,13 +42,13 @@ function t_1.new(p5, p6) --[[ line: 54 ]]
 	return t
 end
 
-function t_1:path(p7) --[[ line: 80 ]]
+function t_1:path(p7)
 	table.insert(self.pathElements, p7:gsub("^/", ""):gsub("/$", ""))
 	
 	return self
 end
 
-function t_1:id(p8, p9) --[[ line: 87 ]]
+function t_1:id(p8, p9)
 	-- upvalues: t (ref)
 	if not p9 and #self.pathElements < 1 then
 		warn("Cannot name id or ids because there is no leading path segment and no name is provided")
@@ -60,7 +60,7 @@ function t_1:id(p8, p9) --[[ line: 87 ]]
 	return self
 end
 
-function t_1:queryArgWithIds(p10, p11) --[[ line: 99 ]]
+function t_1:queryArgWithIds(p10, p11)
 	-- upvalues: cryoModule (ref), t (ref)
 	local var5 = cryoModule.List.join(p11, self.namedIds[p10] or {})
 	self.namedIds[p10] = var5
@@ -70,14 +70,14 @@ function t_1:queryArgWithIds(p10, p11) --[[ line: 99 ]]
 	return self
 end
 
-function t_1:expandedQueryArgsWithIds(p12, p13) --[[ line: 109 ]]
+function t_1:expandedQueryArgsWithIds(p12, p13)
 	self.useExpandedForm[p12] = true
 	self:queryArgWithIds(p12, p13)
 	
 	return self
 end
 
-function t_1:queryArgs(p14) --[[ line: 115 ]]
+function t_1:queryArgs(p14)
 	-- upvalues: cryoModule (ref)
 	self.args = cryoModule.Dictionary.join(self.args, p14)
 	self.options.queryArgs = cryoModule.Dictionary.join(p14, self.options.queryArgs or {})
@@ -85,30 +85,30 @@ function t_1:queryArgs(p14) --[[ line: 115 ]]
 	return self
 end
 
-function t_1:body(p15) --[[ line: 121 ]]
+function t_1:body(p15)
 	self.options.postBody = p15
 	
 	return self
 end
 
-function t_1:headers(p16) --[[ line: 126 ]]
+function t_1:headers(p16)
 	self.options.headers = p16
 	
 	return self
 end
 
-function t_1.makeKeyMapper(p17) --[[ line: 131 ]]
-	return function(p18) --[[ line: 132 ]]
+function t_1.makeKeyMapper(p17)
+	return function(p18)
 		-- upvalues: p17 (ref)
 		return p17:getStatusIds() and p17:makeStatusUrl(p18) or p17:makeNamedIdsUrl(p18)
 	end
 end
 
-function t_1._normalize(_, p19) --[[ line: 139 ]]
+function t_1._normalize(_, p19)
 	return p19:gsub("/+", "/")
 end
 
-function t_1:makeUri() --[[ line: 143 ]]
+function t_1:makeUri()
 	local var6 = ""
 	
 	for i, v in ipairs(self.pathElements) do
@@ -117,7 +117,7 @@ function t_1:makeUri() --[[ line: 143 ]]
 	return self:_normalize(var6)
 end
 
-local function concatArguments(p20, p21, p22, p23) --[[ line: 151 ]]
+local function concatArguments(p20, p21, p22, p23)
 	-- upvalues: concatArguments (ref)
 	if p23 then
 		for i, v in pairs(p22.ids) do
@@ -131,7 +131,7 @@ local function concatArguments(p20, p21, p22, p23) --[[ line: 151 ]]
 	end
 end
 
-function t_1:makeQueryArgs(p24, p25) --[[ line: 168 ]]
+function t_1:makeQueryArgs(p24, p25)
 	-- upvalues: concatArguments (ref)
 	self:_plugInConfigurableIds(p24)
 	local var8 = ""
@@ -144,13 +144,13 @@ function t_1:makeQueryArgs(p24, p25) --[[ line: 168 ]]
 	return if var8:len() > 1 then "?" .. var8 else ""
 end
 
-function t_1:makeUrl(p26, p27) --[[ line: 184 ]]
+function t_1:makeUrl(p26, p27)
 	self:_plugInConfigurableIds(p26)
 	
 	return self.baseUrl .. self:makeUri() .. self:makeQueryArgs(p26, p27)
 end
 
-function t_1:makeStatusUrl(p28) --[[ line: 190 ]]
+function t_1:makeStatusUrl(p28)
 	local text = self.baseUrl .. self:makeUri()
 	
 	if not p28 then
@@ -164,29 +164,29 @@ function t_1:makeStatusUrl(p28) --[[ line: 190 ]]
 	return text .. "?" .. var10
 end
 
-function t_1:makeNamedIdsUrl(p29) --[[ line: 205 ]]
+function t_1:makeNamedIdsUrl(p29)
 	return self:makeUrl(p29, true)
 end
 
-function t_1:makeOptions() --[[ line: 209 ]]
+function t_1:makeOptions()
 	return self.options
 end
 
-function t_1:_plugInConfigurableIds(p30) --[[ line: 213 ]]
+function t_1:_plugInConfigurableIds(p30)
 	if p30 ~= nil and self.configurableIds then
 		self.configurableIds:setIds(p30)
 	end
 end
 
-function t_1:getIds() --[[ line: 219 ]]
+function t_1:getIds()
 	return if self.configurableIds and self.configurableIds.ids then self.configurableIds.ids elseif self.statusIds then self.statusIds else {}
 end
 
-function t_1:getNamedIds() --[[ line: 229 ]]
+function t_1:getNamedIds()
 	return self.namedIds
 end
 
-function t_1:setStatusIds(p31) --[[ line: 233 ]]
+function t_1:setStatusIds(p31)
 	-- upvalues: cryoModule (ref)
 	if self.configurableIds then
 		warn("Cannot set statusIds because ids already provided in URl")
@@ -198,11 +198,11 @@ function t_1:setStatusIds(p31) --[[ line: 233 ]]
 	return self
 end
 
-function t_1:getStatusIds() --[[ line: 242 ]]
+function t_1:getStatusIds()
 	return if self.configurableIds then nil else self.statusIds
 end
 
-function t_1:getAdditionalData() --[[ line: 250 ]]
+function t_1:getAdditionalData()
 	return self.additionalData or {}
 end
 

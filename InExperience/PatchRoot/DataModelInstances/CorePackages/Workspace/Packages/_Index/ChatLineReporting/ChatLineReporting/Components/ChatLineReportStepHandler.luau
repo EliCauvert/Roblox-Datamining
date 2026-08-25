@@ -35,7 +35,7 @@ local t_1 = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0) --[[ line: 56 | named "ChatLineReportStepHandler" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), constantsModule (ref), analyticsReducerModule (ref), guiService (ref), useLocalization (ref), useTokens (ref), isSystemMessageModule (ref), fFlagEnableGlobalChatAbuseReporting (ref), SSUIMetaLuaEngineFeature (ref), reactOtterModule (ref), notificationModalsManagerModule (ref), images (ref), t (ref), chatLineReportAnalyticsModule (ref), fFlagEnableChatReportingTextChannelTag (ref), buildReportModule (ref), playersService (ref), cryoModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), chatLineReportSelectionModalOldModule (ref), defaultReportDialogModule (ref), chatLineReportVerbatimModule (ref), fFlagGenericAbuseReportingGranularExports (ref), reportCategoriesModule (ref), chatLineReportCompleteModalModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusRoot (ref), t_1 (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var22, var23 = reactModule.useState(constantsModule.ReportSteps.SELECT)
 	local var24, var25 = reactModule.useState(nil)
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 56 | named "ChatLineReportStepHandler" ]]
 		}
 	})
 	local var40 = useTokens()
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref), constantsModule (copy), p0 (ref), isSystemMessageModule (copy), fFlagEnableGlobalChatAbuseReporting (copy), guiService (copy), var31 (ref), var29 (ref)
 -- FATAL: Failed to generate AST for `unnamed` function:
 runtime : [KeyError] :11990: 15
@@ -67,10 +67,10 @@ Traceback:
 	runtime : [lunaux]:1933 function normalize_cfg
 	runtime : [lunaux]:1320 function match_weird_patterns
 	end, {})
-	reactModule.useEffect(function() --[[ line: 137 ]]
+	reactModule.useEffect(function()
 		-- upvalues: SSUIMetaLuaEngineFeature (copy), var28 (ref)
 		if SSUIMetaLuaEngineFeature then
-			pcall(function() --[[ line: 139 ]]
+			pcall(function()
 				-- upvalues: var28 (copy)
 				local safetyService = game:GetService("SafetyService")
 				
@@ -83,7 +83,7 @@ Traceback:
 			end)
 		end
 	end, { var28 })
-	local var41, var42 = reactOtterModule.useAnimatedBinding(1, function() --[[ line: 150 ]]
+	local var41, var42 = reactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: var28 (ref), var32 (ref), var34 (ref), constantsModule (copy), notificationModalsManagerModule (copy), images (copy), var39 (ref), var38 (ref), var40 (ref), p0 (ref)
 		if not var28 then
 			if var32 then
@@ -114,37 +114,37 @@ Traceback:
 			p0.unmount()
 		end
 	end)
-	local var43 = reactModule.useMemo(function() --[[ line: 186 ]]
+	local var43 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref)
 		return if var28 then 0 else 1
 	end, { var28 })
-	reactModule.useEffect(function() --[[ line: 190 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var42 (ref), reactOtterModule (copy), var43 (ref), t (copy)
 		var42(reactOtterModule.spring(var43, t))
 	end, { var43 })
-	local var44 = reactModule.useCallback(function() --[[ line: 195 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), var23 (ref), constantsModule (copy)
 		if var24 ~= nil then
 			var23(constantsModule.ReportSteps.SUBMIT)
 		end
 	end)
-	local var45 = reactModule.useCallback(function() --[[ line: 201 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: chatLineReportAnalyticsModule (copy), var26 (ref), var29 (ref)
 		chatLineReportAnalyticsModule(var26, 2, false)
 		var29(false)
 	end, { var26 })
-	local var46 = if var22 == constantsModule.ReportSteps.COMPLETE then reactModule.useCallback(function() --[[ line: 286 ]]
+	local var46 = if var22 == constantsModule.ReportSteps.COMPLETE then reactModule.useCallback(function()
 		-- upvalues: chatLineReportAnalyticsModule (copy), var26 (ref), var29 (ref)
 		chatLineReportAnalyticsModule(var26, 1, false)
 		var29(false)
 	end, { var26 }) else var45
 	local textButton = reactModule.createElement("TextButton", {
-		Active = var41:map(function(p1) --[[ line: 296 ]]
+		Active = var41:map(function(p1)
 			return p1 == 0
 		end),
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		BackgroundTransparency = var41:map(function(p2) --[[ line: 301 ]]
+		BackgroundTransparency = var41:map(function(p2)
 			return p2 + 0.3
 		end),
 		BackgroundColor3 = Color3.fromHex("#000000"),
@@ -159,7 +159,7 @@ Traceback:
 		Frame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			Position = var41:map(function(p3) --[[ line: 316 ]]
+			Position = var41:map(function(p3)
 				-- upvalues: var30 (ref)
 				return if var30 then UDim2.new(0, 0, -p3, 0) else UDim2.new(0, 0, p3, 0)
 			end)
@@ -176,11 +176,11 @@ Traceback:
 				topCustomComponent = reactModule.createElement(chatLineReportVerbatimModule, { selectedMessage = var24 }),
 				onSubmitProps = {
 					hasNextSteps = true,
-					onProceedToNextStep = reactModule.useCallback(function(p5, p6) --[[ line: 213 ]]
+					onProceedToNextStep = reactModule.useCallback(function(p5, p6)
 						-- upvalues: fFlagEnableChatReportingTextChannelTag (copy), buildReportModule (copy), playersService (copy), var24 (ref), cryoModule (copy), p0 (ref), isSystemMessageModule (copy), var27 (ref), constantsModule (copy), var23 (ref)
 						local t = {}
 						local var50 = if fFlagEnableChatReportingTextChannelTag then buildReportModule(playersService.LocalPlayer.UserId, var24.userId, p5, p6, var24.messageId, var24.presetId, var24.presetChatVersion, if var24.textChannel then var24.textChannel.Name else nil) else buildReportModule(playersService.LocalPlayer.UserId, var24.userId, p5, p6, var24.messageId, var24.presetId, var24.presetChatVersion)
-						cryoModule.Dictionary.map(p0.messages, function(p7) --[[ line: 240 ]]
+						cryoModule.Dictionary.map(p0.messages, function(p7)
 							-- upvalues: isSystemMessageModule (copy), t (ref)
 							if not isSystemMessageModule(p7) then
 								t[#t + 1] = { channel = p7.textChannel, messageId = p7.messageId }
@@ -206,19 +206,19 @@ Traceback:
 				localizationKeys = if fFlagGenericAbuseReportingGranularExports then constantsModule.SubmitDialogLocalizationKeys else constantsModule.GenericAbuseReportingLocalizationKeys,
 				onCloseProps = {
 					hasPreviousSteps = true,
-					onBackToPreviousStep = reactModule.useCallback(function() --[[ line: 208 ]]
+					onBackToPreviousStep = reactModule.useCallback(function()
 						-- upvalues: var23 (ref), constantsModule (copy), var25 (ref)
 						var23(constantsModule.ReportSteps.SELECT)
 						var25(nil)
 					end)
 				},
 				reportCategories = reportCategoriesModule,
-				onBeforeSubmitAnalytics = function(p8) --[[ line: 350 ]]
+				onBeforeSubmitAnalytics = function(p8)
 					return p8
 				end
 			}) elseif var22 == constantsModule.ReportSteps.COMPLETE then reactModule.createElement(chatLineReportCompleteModalModule, {
 				localizationKeys = if fFlagGenericAbuseReportingGranularExports then constantsModule.CompleteDialogLocalizationKeys else constantsModule.GenericAbuseReportingLocalizationKeys,
-				onDismiss = reactModule.useCallback(function(p4) --[[ line: 272 ]]
+				onDismiss = reactModule.useCallback(function(p4)
 					-- upvalues: chatLineReportAnalyticsModule (copy), var26 (ref), var35 (ref), var37 (ref), var33 (ref), var29 (ref)
 					if p4 then
 						chatLineReportAnalyticsModule(var26, 1, true)
@@ -240,11 +240,11 @@ Traceback:
 	return if fFlagChatLineReportingFocusFixesEnabled then reactModule.createElement(focusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
-		eventHandlers = reactModule.useMemo(function() --[[ line: 369 ]]
+		eventHandlers = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var46 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p9) --[[ line: 372 ]]
+					handler = inputHandlersModule.onRelease(function(p9)
 						-- upvalues: var46 (copy)
 						var46()
 						p9:cancel()

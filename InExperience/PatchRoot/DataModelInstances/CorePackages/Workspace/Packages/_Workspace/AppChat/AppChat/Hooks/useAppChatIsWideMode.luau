@@ -5,7 +5,7 @@ local useIsWideMode = require(parent.SocialCommon).Hooks.useIsWideMode
 local fIntAppChatWideBreakpointMinHeightModule = require(appChat.Flags.FIntAppChatWideBreakpointMinHeight)
 local fIntAppChatWideBreakpointMinWidthModule = require(appChat.Flags.FIntAppChatWideBreakpointMinWidth)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: useIsWideMode (ref), responsiveModule (ref), fIntAppChatWideBreakpointMinWidthModule (ref), fIntAppChatWideBreakpointMinHeightModule (ref)
 	return if p0 then if responsiveModule.useOrientation() == responsiveModule.Keys.Portrait or not (responsiveModule.useResponsive({
 		{

@@ -68,7 +68,7 @@ var11 = {
 	[contentTypeModule.Badge] = var10
 }
 
-return function(p0, p1, p2, p3) --[[ line: 117 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: var11 (ref), var10 (write), discoveryEventErrorLogger (ref), fFlagLuaAppMigrateItemEventsTelemetryService (ref), telemetryService (ref), var5 (write), getPlatformTarget (ref), fFlagLuaAppItemEventsTelemetryServiceShadowTraffic (ref), var6 (write)
 	local var12 = var11[p2] or var10
 	

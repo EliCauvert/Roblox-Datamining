@@ -21,15 +21,15 @@ local t = {
 	}
 }
 
-local function _(p0, p1) --[[ line: 29 | named "checkName" ]]
+local function _(p0, p1)
 	return if type(p0) == "table" then table.find(p0, p1) ~= nil else p0 == p1
 end
 
-local _ = function(p2) --[[ line: 36 | named "getReadableName" ]]
+local _ = function(p2)
 	return if type(p2) == "table" then table.concat(p2, " or ") elseif type(p2) == "string" then p2 else "*"
 end
 
-local function validateInstancesFromSchema(p3, p4, p5, p6) --[[ line: 45 ]]
+local function validateInstancesFromSchema(p3, p4, p5, p6)
 	-- upvalues: getFFlagUGCValidationExtendSchemaToIgnoreDescendantsModule (ref), validateInstancesFromSchema (ref), errorSourceStringsModule (ref)
 	p5[p3] = true
 	
@@ -80,7 +80,7 @@ local function validateInstancesFromSchema(p3, p4, p5, p6) --[[ line: 45 ]]
 	end
 end
 
-local function validateNoInstancesOutsideSchema(p7, p8, p9) --[[ line: 90 ]]
+local function validateNoInstancesOutsideSchema(p7, p8, p9)
 	-- upvalues: errorSourceStringsModule (ref)
 	local t = {}
 	
@@ -94,7 +94,7 @@ local function validateNoInstancesOutsideSchema(p7, p8, p9) --[[ line: 90 ]]
 	end
 end
 
-local function validateRootAgainstSchema(p10, p11, p12) --[[ line: 111 ]]
+local function validateRootAgainstSchema(p10, p11, p12)
 	-- upvalues: errorSourceStringsModule (ref), validateInstancesFromSchema (ref), validateNoInstancesOutsideSchema (ref)
 	local t = {}
 	
@@ -124,7 +124,7 @@ local function validateRootAgainstSchema(p10, p11, p12) --[[ line: 111 ]]
 	end
 end
 
-function t.run(p13, p14) --[[ line: 131 ]]
+function t.run(p13, p14)
 	-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), createExpectedSchemaModule (ref), validateRootAgainstSchema (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), shouldValidateR15LegacyDuplicateModule (ref)
 	local rootInstance = p14.rootInstance
 	local uploadCategory = p14.uploadCategory

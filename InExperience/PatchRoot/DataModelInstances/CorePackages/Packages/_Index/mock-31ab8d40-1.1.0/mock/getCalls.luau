@@ -1,7 +1,7 @@
 ﻿local symbolsModule = require(script.Parent.symbols)
 local spyModule = require(script.Parent.Spy)
 
-return function(p0) --[[ line: 4 ]]
+return function(p0)
 	-- upvalues: spyModule (ref), symbolsModule (ref)
 	if type(p0) == "function" then
 		local var2 = spyModule.lookup(p0)

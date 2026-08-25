@@ -3,11 +3,11 @@ local _ = require(foundation.Components.Types)
 local iconSizeModule = require(foundation.Enums.IconSize)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-local function _(p0) --[[ line: 11 | named "isNumber" ]]
+local function _(p0)
 	return if typeof(p0) ~= "number" then typeof(p0) == "table" and typeof(p0:getValue()) == "number" else true
 end
 
-return function(p1, p2, p3) --[[ line: 15 | named "useIconSize" ]]
+return function(p1, p2, p3)
 	-- upvalues: useTokensModule (ref), iconSizeModule (ref)
 	local var6
 	local var3 = useTokensModule()
@@ -43,7 +43,7 @@ return function(p1, p2, p3) --[[ line: 15 | named "useIconSize" ]]
 		if var5 == nil then
 			error("Invalid icon size: " .. tostring(p1))
 		end
-		return if typeof(var5) == "table" then var5:map(function(p4) --[[ line: 52 ]]
+		return if typeof(var5) == "table" then var5:map(function(p4)
 			return UDim2.fromOffset(p4, p4)
 		end) else UDim2.fromOffset(var5, var5)
 	end

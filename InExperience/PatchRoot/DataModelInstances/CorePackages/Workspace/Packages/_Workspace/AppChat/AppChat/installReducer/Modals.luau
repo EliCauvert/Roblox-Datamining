@@ -26,11 +26,11 @@ return roduxModule.createReducer({
 	pendingStateModals = {},
 	conversationBottomModals = {}
 }, {
-	[appChatNetworkingModule.rodux.GetChatLandingModal.Succeeded.name] = function(p0, p1) --[[ line: 45 ]]
+	[appChatNetworkingModule.rodux.GetChatLandingModal.Succeeded.name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, { chatLandingModal = p1.responseBody })
 	end,
-	[appChatNetworkingModule.rodux.GetConversationTopModal.Succeeded.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p2, p3) --[[ line: 59 ]]
+	[appChatNetworkingModule.rodux.GetConversationTopModal.Succeeded.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p2, p3)
 		-- upvalues: conversationChannelsModule (ref), cryoModule (ref)
 		local friendId = p3.postBody and p3.postBody.friend_id
 		local conversationId = friendId and (p3.postBody and p3.postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ friendId }))
@@ -39,7 +39,7 @@ return roduxModule.createReducer({
 			conversationTopModals = cryoModule.Dictionary.join(p2.conversationTopModals, { [conversationId] = p3.responseBody })
 		}) else p2
 	end,
-	[appChatNetworkingModule.rodux.GetModalSequence.Succeeded.name] = function(p4, p5) --[[ line: 83 ]]
+	[appChatNetworkingModule.rodux.GetModalSequence.Succeeded.name] = function(p4, p5)
 		-- upvalues: conversationChannelsModule (ref), modalSequence (ref), cryoModule (ref), fFlagAppChatEnableDoubleOptIn (ref), loggerModule (ref)
 		local friendId = p5.postBody and p5.postBody.friend_id
 		local conversationId = friendId and (p5.postBody and p5.postBody.conversation_id or conversationChannelsModule.getFriendConversationId({ friendId }))
@@ -61,7 +61,7 @@ return roduxModule.createReducer({
 			conversationBottomModals = cryoModule.Dictionary.join(p4.conversationBottomModals, { [conversationId] = p5.responseBody })
 		}) else p4
 	end,
-	[dismissedConversationTopModalModule.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p6, p7) --[[ line: 138 ]]
+	[dismissedConversationTopModalModule.name] = if fFlagAppChatEnableDoubleOptIn then nil else function(p6, p7)
 		-- upvalues: cryoModule (ref)
 		local conversationId = p7.conversationId
 		local modalVariant = p7.modalVariant
@@ -72,7 +72,7 @@ return roduxModule.createReducer({
 			})
 		}) else p6
 	end,
-	[dismissedChatModalModule.name] = function(p8, p9) --[[ line: 156 ]]
+	[dismissedChatModalModule.name] = function(p8, p9)
 		-- upvalues: modalSequence (ref), cryoModule (ref), fFlagAppChatEnableDoubleOptIn (ref)
 		local key = p9.key
 		local modalSequence_1 = p9.modalSequence
@@ -83,7 +83,7 @@ return roduxModule.createReducer({
 			conversationTopModals = cryoModule.Dictionary.join(p8.conversationTopModals, { [key] = cryoModule.None })
 		}) else p8 else p8
 	end,
-	[dismissedAllConversationModalsForSequenceModule.name] = function(p10, p11) --[[ line: 181 ]]
+	[dismissedAllConversationModalsForSequenceModule.name] = function(p10, p11)
 		-- upvalues: fFlagEnableAEGIS2AppChatConversationBanner (ref), modalSequence (ref), loggerModule (ref), cryoModule (ref)
 		local modalSequence_1 = p11.modalSequence
 		
@@ -102,7 +102,7 @@ return roduxModule.createReducer({
 			conversationBottomModals = cryoModule.Dictionary.join(p10.conversationBottomModals, t)
 		})
 	end,
-	[appChatNetworkingModule.rodux.GetPendingStateModal.Succeeded.name] = function(p12, p13) --[[ line: 202 ]]
+	[appChatNetworkingModule.rodux.GetPendingStateModal.Succeeded.name] = function(p12, p13)
 		-- upvalues: cryoModule (ref)
 		local conversationId = p13.postBody and p13.postBody.conversation_id
 		
@@ -110,7 +110,7 @@ return roduxModule.createReducer({
 			pendingStateModals = cryoModule.Dictionary.join(p12.pendingStateModals, { [conversationId] = p13.responseBody })
 		}) else p12
 	end,
-	[removedConversationModule.name] = function(p14, p15) --[[ line: 221 ]]
+	[removedConversationModule.name] = function(p14, p15)
 		-- upvalues: cryoModule (ref)
 		local conversationId = p15.conversationId
 		
@@ -120,7 +120,7 @@ return roduxModule.createReducer({
 			conversationBottomModals = cryoModule.Dictionary.join(p14.conversationBottomModals, { [conversationId] = cryoModule.None })
 		}) else p14
 	end,
-	[friendConversationCreatedModule.name] = function(p16, p17) --[[ line: 239 ]]
+	[friendConversationCreatedModule.name] = function(p16, p17)
 		-- upvalues: cryoModule (ref), fFlagAppChatEnableDoubleOptIn (ref)
 		local oldFriendConversationId = p17.oldFriendConversationId
 		local newConversationId = p17.newConversationId
@@ -164,7 +164,7 @@ return roduxModule.createReducer({
 		end
 		return var19
 	end,
-	DEBUG_ShowChatLandingAgeVerifiedTimedModal = if fFlagDebugAEGIS1AppChatBannerModule then function(p18) --[[ line: 288 ]]
+	DEBUG_ShowChatLandingAgeVerifiedTimedModal = if fFlagDebugAEGIS1AppChatBannerModule then function(p18)
 		-- upvalues: cryoModule (ref), appChatNetworkingModule (ref)
 		return cryoModule.Dictionary.union(p18, {
 			chatLandingModal = {
@@ -203,7 +203,7 @@ return roduxModule.createReducer({
 			}
 		})
 	end else nil,
-	DEBUG_ShowAppChatFaeUpsell = if fFlagDebugAppChatFaeModule then function(p19) --[[ line: 336 ]]
+	DEBUG_ShowAppChatFaeUpsell = if fFlagDebugAppChatFaeModule then function(p19)
 		-- upvalues: cryoModule (ref), appChatNetworkingModule (ref)
 		return cryoModule.Dictionary.union(p19, {
 			chatLandingModal = {
@@ -228,7 +228,7 @@ return roduxModule.createReducer({
 			}
 		})
 	end else nil,
-	DEBUG_ShowNewTCOverlay = if fFlagTCUpsellModalEnabledDEV or fFlagDebugEnableTCDoubleOptInDEV then function(p20, p21) --[[ line: 370 ]]
+	DEBUG_ShowNewTCOverlay = if fFlagTCUpsellModalEnabledDEV or fFlagDebugEnableTCDoubleOptInDEV then function(p20, p21)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p20, {
 			conversationOverlays = cryoModule.Dictionary.join(p20.conversationOverlays, {
@@ -243,7 +243,7 @@ return roduxModule.createReducer({
 			})
 		})
 	end else nil,
-	DEBUG_ShowNewTopModal = if fFlagDebugEnableTCDoubleOptInDEV then function(p22, p23) --[[ line: 386 ]]
+	DEBUG_ShowNewTopModal = if fFlagDebugEnableTCDoubleOptInDEV then function(p22, p23)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p22, {
 			conversationTopModals = cryoModule.Dictionary.join(p22.conversationTopModals, {
@@ -260,7 +260,7 @@ return roduxModule.createReducer({
 			})
 		})
 	end else nil,
-	DEBUG_DismissChatLandingModal = if fFlagDebugAppChatFaeModule or fFlagDebugAEGIS1AppChatBannerModule then function(p24) --[[ line: 410 ]]
+	DEBUG_DismissChatLandingModal = if fFlagDebugAppChatFaeModule or fFlagDebugAEGIS1AppChatBannerModule then function(p24)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p24, { chatLandingModal = cryoModule.None })
 	end else nil

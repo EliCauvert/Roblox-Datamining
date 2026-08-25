@@ -4,9 +4,9 @@ local signalsModule = require(parent_1.Signals)
 local createSignalMap = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap
 local _ = require(parent.LeaderboardStoreTypes)
 
-return function() --[[ line: 19 | named "createMockLeaderboardStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), createSignalMap (ref)
-	return function() --[[ line: 20 ]]
+	return function()
 		-- upvalues: signalsModule (copy), createSignalMap (copy)
 		Instance.new("Team").Name = "Neutral"
 		local team = Instance.new("Team")
@@ -121,23 +121,23 @@ return function() --[[ line: 19 | named "createMockLeaderboardStore" ]]
 		var19.setData(team_1, var15.getData(team_1, false), false)
 		
 		return {
-			getGameStatsList = function() --[[ line: 207 ]]
+			getGameStatsList = function()
 				-- upvalues: var14 (write)
 				return var14
 			end,
-			getTeamList = function() --[[ line: 210 ]]
+			getTeamList = function()
 				-- upvalues: var19 (write)
 				return var19
 			end,
-			getTeamPlayerList = function(p0, _) --[[ line: 213 ]]
+			getTeamPlayerList = function(p0, _)
 				-- upvalues: var15 (write)
 				return var15.getData(p0, false).players
 			end,
-			getPlayerEntry = function(p1) --[[ line: 217 ]]
+			getPlayerEntry = function(p1)
 				-- upvalues: var13 (write)
 				return var13.getData(p1, false)
 			end,
-			cleanUp = function() --[[ line: 220 ]]
+			cleanUp = function()
 				-- upvalues: var14 (write), var19 (write), var15 (write), var13 (write)
 				var14 = nil
 				var19 = nil

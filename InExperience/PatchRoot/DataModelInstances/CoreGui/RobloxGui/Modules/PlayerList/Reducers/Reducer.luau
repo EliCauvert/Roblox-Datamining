@@ -15,7 +15,7 @@ local var1 = require(game:GetService("CorePackages").Packages.Rodux).combineRedu
 	playerDropDown = require(script.Parent.PlayerDropDown)
 })
 
-return function(p0, p1) --[[ line: 42 ]]
+return function(p0, p1)
 	-- upvalues: var1 (ref), playerKeysModule (ref)
 	local var2 = var1(p0, p1)
 	var2.playerKeys = playerKeysModule(if p0 then p0.playerKeys else nil, p1, var2)

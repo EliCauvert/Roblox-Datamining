@@ -28,7 +28,7 @@ local gameShareExperienceLink = discoveryAnalyticsModule.Events.gameShareExperie
 local logResponseError = discoveryUtilsModule.logResponseError
 local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 
-local function fetchShareLinkId(p0) --[[ line: 44 ]]
+local function fetchShareLinkId(p0)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), httpRequestModule (ref), discoveryEventErrorLogger (ref), logResponseError (ref)
 	local t = {
 		linkType = "ExperienceDetails",
@@ -36,7 +36,7 @@ local function fetchShareLinkId(p0) --[[ line: 44 ]]
 	}
 	
 	return httpRequestModule.config({
-		requestFunction = function(p3, p4, p5) --[[ line: 63 ]]
+		requestFunction = function(p3, p4, p5)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.RequestInternal(p3, p4, p5)
 		end
@@ -48,7 +48,7 @@ local function fetchShareLinkId(p0) --[[ line: 44 ]]
 			linkType = t.linkType,
 			data = httpService:JSONEncode(t.data)
 		})
-	}):andThen(function(p2) --[[ line: 71 ]]
+	}):andThen(function(p2)
 		-- upvalues: discoveryEventErrorLogger (copy), p0 (ref)
 		local responseBody = p2.responseBody or p2.result
 		
@@ -60,7 +60,7 @@ local function fetchShareLinkId(p0) --[[ line: 44 ]]
 			responseBody = p2.responseBody or p2.result
 		})
 		error("Failed to fetch share link id")
-	end):catch(function(p1) --[[ line: 87 ]]
+	end):catch(function(p1)
 		-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy), p0 (ref)
 		local var17 = if type(p1) == "table" and p1.StatusCode then p1.StatusCode else nil
 		logResponseError("sharelinks/v1/get-or-create-link", { StatusCode = var17 })
@@ -73,7 +73,7 @@ local function fetchShareLinkId(p0) --[[ line: 44 ]]
 	end)
 end
 
-local function generateExperienceDetailsShareLinkUrl(p6, p7, p8) --[[ line: 99 ]]
+local function generateExperienceDetailsShareLinkUrl(p6, p7, p8)
 	-- upvalues: urlBuilder (ref)
 	local _ = nil
 	local var19 = nil
@@ -86,9 +86,9 @@ local function generateExperienceDetailsShareLinkUrl(p6, p7, p8) --[[ line: 99 ]
 	return urlBuilder.game.info.appsflyer({ universeId = p7, placeId = p8 }), var19
 end
 
-local function handleCopyLink(p9, p10, p11, p12) --[[ line: 117 ]]
+local function handleCopyLink(p9, p10, p11, p12)
 	-- upvalues: fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameCopyExperienceLink (ref), default (ref), setCurrentToastMessage (ref), toastType (ref)
-	fetchShareLinkId(p9):andThen(function(p13) --[[ line: 119 ]]
+	fetchShareLinkId(p9):andThen(function(p13)
 		-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p9 (ref), p10 (ref), playersService (copy), gameCopyExperienceLink (copy), p11 (ref), default (copy), p12 (ref), setCurrentToastMessage (copy), toastType (copy)
 		local var20, var21 = generateExperienceDetailsShareLinkUrl(p13, p9, p10)
 		gameCopyExperienceLink({
@@ -102,7 +102,7 @@ local function handleCopyLink(p9, p10, p11, p12) --[[ line: 117 ]]
 			toastMessage = "Feature.GameDetails.Toast.LinkCopied",
 			toastType = toastType.SuccessConfirmation
 		}))
-	end):catch(function(_) --[[ line: 140 ]]
+	end):catch(function(_)
 		-- upvalues: p12 (ref), setCurrentToastMessage (copy), toastType (copy)
 		p12(setCurrentToastMessage({
 			toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
@@ -111,14 +111,14 @@ local function handleCopyLink(p9, p10, p11, p12) --[[ line: 117 ]]
 	end)
 end
 
-return function(p14, p15, p16) --[[ line: 153 | named "useExperienceDetailsShare" ]]
+return function(p14, p15, p16)
 	-- upvalues: useDispatch (ref), useAppPolicy (ref), reactModule (ref), handleCopyLink (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var12 (ref), navigateDown (ref), fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameShareExperienceLink (ref), default (ref), urlBuilder (ref)
 	local var22 = useDispatch()
-	local var23 = useAppPolicy(function(p17) --[[ line: 159 ]]
+	local var23 = useAppPolicy(function(p17)
 		return p17.shouldShareToAccountProvider()
 	end)
 	
-	return reactModule.useCallback(function() --[[ line: 163 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: p15 (ref), var23 (ref), handleCopyLink (copy), p14 (ref), p16 (ref), var22 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var12 (copy), navigateDown (copy), fetchShareLinkId (copy), generateExperienceDetailsShareLinkUrl (copy), playersService (copy), gameShareExperienceLink (copy), default (copy), urlBuilder (copy)
 		if not p15 then return end
 		if not var23 then
@@ -126,7 +126,7 @@ return function(p14, p15, p16) --[[ line: 153 | named "useExperienceDetailsShare
 			
 			return
 		elseif not var23 then
-			fetchShareLinkId(p14):andThen(function(p18) --[[ line: 191 ]]
+			fetchShareLinkId(p14):andThen(function(p18)
 				-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p14 (copy), p15 (copy), playersService (copy), gameShareExperienceLink (copy), p16 (copy), default (copy)
 				local var26, var27 = generateExperienceDetailsShareLinkUrl(p18, p14, p15)
 				gameShareExperienceLink({
@@ -139,7 +139,7 @@ return function(p14, p15, p16) --[[ line: 153 | named "useExperienceDetailsShare
 					linkId = p18
 				}, p16)
 				default:shareUrl({ context = "GameDetailsMoreWebURL", url = var26 })
-			end):catch(function(_) --[[ line: 213 ]]
+			end):catch(function(_)
 				-- upvalues: p14 (copy), p15 (copy), urlBuilder (copy), playersService (copy), gameShareExperienceLink (copy), p16 (copy), default (copy)
 				local _ = nil
 				local var25 = urlBuilder.game.info.appsflyer({ universeId = p14, placeId = p15 })

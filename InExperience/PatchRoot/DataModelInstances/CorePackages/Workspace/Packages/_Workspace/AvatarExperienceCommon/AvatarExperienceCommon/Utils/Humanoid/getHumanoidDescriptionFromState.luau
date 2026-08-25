@@ -14,7 +14,7 @@ local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquippin
 local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
 local getHumanoidDescriptionFromStateForOutfitTypeModule = require(avatarExperienceCommon.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: fFlagAXOutfitPageRevamp (ref), getHumanoidDescriptionFromStateForOutfitTypeModule (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), createHumanoidDescriptionAccessoryInfoModule (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), fFlagAXMakeupEquipping (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref), HUMANOID_DESCRIPTION_SCALE_TO_NAME (ref), setHumanoidDescriptionColorsFromBodyColor3sModule (ref)
 	local var7
 	local _ = nil

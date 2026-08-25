@@ -10,7 +10,7 @@ local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsU
 local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 
-local function createBulkPurchaseRequestItem(p0) --[[ line: 64 ]]
+local function createBulkPurchaseRequestItem(p0)
 	-- upvalues: itemTypeEnum (ref)
 	return {
 		id = p0.id and tonumber(p0.id) or 0,
@@ -19,7 +19,7 @@ local function createBulkPurchaseRequestItem(p0) --[[ line: 64 ]]
 end
 
 return {
-	convertAvatarItemToItemData = function(p1, p2) --[[ line: 33 ]]
+	convertAvatarItemToItemData = function(p1, p2)
 		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref)
 		if p1.itemType == itemTypeEnum.Asset then
 			local id = p2.assets[p1.id]
@@ -32,12 +32,12 @@ return {
 		
 		return if id then convertBundleInfoToItemDataModule(id) else nil
 	end,
-	isPurchasableItem = function(p3) --[[ line: 54 ]]
+	isPurchasableItem = function(p3)
 		-- upvalues: priceStatusModule (ref)
 		return if p3 ~= priceStatusModule.Free then if p3 ~= priceStatusModule.PurchaseFromRoblox then p3 == priceStatusModule.PurchaseFromResale else true else true
 	end,
 	createBulkPurchaseRequestItem = createBulkPurchaseRequestItem,
-	getBulkPurchaseEligibleItems = function(p4, p5, p6) --[[ line: 78 ]]
+	getBulkPurchaseEligibleItems = function(p4, p5, p6)
 		-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), convertBundleInfoToItemDataModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), getPriceInRobux (ref), createBulkPurchaseRequestItem (ref)
 		if not p4 then
 			return { totalPrice = 0, requestedItems = {} }

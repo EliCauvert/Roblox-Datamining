@@ -10,7 +10,7 @@ local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local usePresentationContext = presentationContextModule.usePresentationContext
 
-return function(p0) --[[ line: 17 | named "useCursor" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), usePresentationContext (ref), colorNamespaceModule (ref), reactModule (ref), cursorContextModule (ref), keyUtilitiesModule (ref), dashModule (ref)
 	local var8 = useTokensModule()
 	local var9 = usePresentationContext()
@@ -18,13 +18,13 @@ return function(p0) --[[ line: 17 | named "useCursor" ]]
 	local var11 = reactModule.useContext(cursorContextModule)
 	local refCache = var11.refCache
 	local setMountedCursors = var11.setMountedCursors
-	local var12 = reactModule.useMemo(function() --[[ line: 28 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), keyUtilitiesModule (copy), var8 (ref), var10 (ref)
 		return if typeof(p0) == "table" then keyUtilitiesModule.encodeKey(var8, p0.radius, p0.offset, p0.borderWidth, var10) elseif p0 == nil then keyUtilitiesModule.encodeKey(var8, nil, nil, nil, var10) else keyUtilitiesModule.encodeCursorTypeKey(p0, var10)
 	end, { p0, var8, var10 })
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: setMountedCursors (ref), var12 (ref), dashModule (copy)
-		setMountedCursors(function(p1) --[[ line: 44 ]]
+		setMountedCursors(function(p1)
 			-- upvalues: var12 (copy), dashModule (copy)
 			return if p1[var12] == nil then dashModule.join(p1, { [var12] = true }) else p1
 		end)

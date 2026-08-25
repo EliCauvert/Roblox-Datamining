@@ -47,7 +47,7 @@ local mergeTreeIsEmpty = nil
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1) --[[ line: 138 ]]
+function t_1.new(p0, p1)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.cache = p0
@@ -56,7 +56,7 @@ function t_1.new(p0, p1) --[[ line: 138 ]]
 	return tbl
 end
 
-function t_1:writeToStore(p2, p3) --[[ line: 145 ]]
+function t_1:writeToStore(p2, p3)
 	-- upvalues: getOperationDefinition (ref), makeProcessedFieldsMerger (ref), object (ref), getDefaultValues (ref), canonicalStringify (ref), createFragmentMap (ref), getFragmentDefinitions (ref), map (ref), isReference (ref), invariantError (ref), httpService (ref), makeReference (ref), dEV (ref), fieldNameFromStoreName (ref), set (ref), isField (ref), objectKeysForEachModule (ref), warnAboutDataLoss (write)
 	local query = p3.query
 	local result = p3.result
@@ -70,7 +70,7 @@ function t_1:writeToStore(p2, p3) --[[ line: 145 ]]
 		clientOnly = false,
 		store = p2,
 		written = {},
-		merge = function(p4, p5) --[[ line: 159 ]]
+		merge = function(p4, p5)
 			-- upvalues: var18 (ref)
 			return var18:merge(p4, p5)
 		end,
@@ -91,7 +91,7 @@ function t_1:writeToStore(p2, p3) --[[ line: 145 ]]
 	if not isReference(var20) then
 		error(invariantError.new(("Could not identify object %s"):format(httpService:JSONEncode(result))))
 	end
-	var19.incomingById:forEach(function(p6, p7) --[[ line: 192 ]]
+	var19.incomingById:forEach(function(p6, p7)
 		-- upvalues: makeReference (copy), self (ref), var19 (ref), isReference (copy), dEV (copy), fieldNameFromStoreName (copy), set (copy), isField (copy), objectKeysForEachModule (copy), warnAboutDataLoss (copy), p2 (ref)
 		local fields = p6.fields
 		local mergeTree = p6.mergeTree
@@ -107,27 +107,27 @@ function t_1:writeToStore(p2, p3) --[[ line: 145 ]]
 		if dEV and not var19.overwrite then
 			local var23 = nil
 			
-			local function _(value) --[[ line: 215 | named "hasSelectionSet" ]]
+			local function _(value)
 				-- upvalues: var23 (write), fieldNameFromStoreName (copy)
 				return var23:has(fieldNameFromStoreName(value))
 			end
 			
 			var23 = set.new()
-			selections:forEach(function(p8) --[[ line: 219 ]]
+			selections:forEach(function(p8)
 				-- upvalues: isField (copy), var23 (write)
 				if isField(p8) and p8.selectionSet then
 					var23:add(p8.name.value)
 				end
 			end)
 			
-			local _ = function(p9) --[[ line: 227 | named "hasMergeFunction" ]]
+			local _ = function(p9)
 				-- upvalues: mergeTree (ref)
 				local var24 = mergeTree.map:get(p9)
 				
 				return var24 ~= nil and (var24.info ~= nil and var24.info.merge ~= nil)
 			end
 			
-			objectKeysForEachModule(fields, function(p10) --[[ line: 233 ]]
+			objectKeysForEachModule(fields, function(p10)
 				-- upvalues: var23 (write), fieldNameFromStoreName (copy), mergeTree (ref), warnAboutDataLoss (copy), var21 (ref), fields (write), var19 (copy)
 				if var23:has(fieldNameFromStoreName(p10)) then
 					local var25 = mergeTree.map:get(p10)
@@ -145,7 +145,7 @@ function t_1:writeToStore(p2, p3) --[[ line: 145 ]]
 	return var20
 end
 
-function t_1:processSelectionSet(p11) --[[ line: 258 ]]
+function t_1:processSelectionSet(p11)
 	-- upvalues: makeReference (ref), array (ref), getTypenameFromResult (ref), set (ref), shouldInclude (ref), isField (ref), resultKeyNameFromField (ref), getChildMergeTree (write), isReference (ref), maybeRecycleChildMergeTree (write), addTypenameToDocument (ref), invariant (ref), httpService (ref), getFragmentFromSelection (ref), mergeMergeTrees (write)
 	local dataId = p11.dataId
 	local result = p11.result
@@ -194,7 +194,7 @@ function t_1:processSelectionSet(p11) --[[ line: 258 ]]
 			if isField(v) then
 				local var34 = result[resultKeyNameFromField(v)]
 				local clientOnly = context.clientOnly
-				context.clientOnly = clientOnly or v.directives and array.some(v.directives, function(p12) --[[ line: 351 ]]
+				context.clientOnly = clientOnly or v.directives and array.some(v.directives, function(p12)
 					return p12.name.value == "client"
 				end)
 				
@@ -254,9 +254,9 @@ function t_1:processSelectionSet(p11) --[[ line: 258 ]]
 	return makeReference(dataId)
 end
 
-function t_1:processFieldValue(p13, p14, p15, p16) --[[ line: 497 ]]
+function t_1:processFieldValue(p13, p14, p15, p16)
 	-- upvalues: NULL (ref), dEV (ref), cloneDeep (ref), array (ref), getChildMergeTree (write), maybeRecycleChildMergeTree (write)
-	return if p14.selectionSet and p13 ~= NULL then if array.isArray(p13) then array.map(p13, function(p17, p18) --[[ line: 517 ]]
+	return if p14.selectionSet and p13 ~= NULL then if array.isArray(p13) then array.map(p13, function(p17, p18)
 		-- upvalues: self (ref), p14 (ref), p15 (ref), getChildMergeTree (copy), p16 (ref), maybeRecycleChildMergeTree (copy)
 		local var42 = self:processFieldValue(p17, p14, p15, getChildMergeTree(p16, p18))
 		maybeRecycleChildMergeTree(p16, p18)
@@ -270,7 +270,7 @@ function t_1:processFieldValue(p13, p14, p15, p16) --[[ line: 497 ]]
 	}) elseif dEV then cloneDeep(p13) else p13
 end
 
-function t_1:applyMerges(p19, p20, p21, p22, p23) --[[ line: 532 ]]
+function t_1:applyMerges(p19, p20, p21, p22, p23)
 	-- upvalues: isReference (ref), array (ref), storeValueIsStoreObject (ref), map (ref), invariant (ref), boolean (ref)
 	if p19.map.size > 0 and not isReference(p21) then
 		local var43 = if not array.isArray(p21) and (isReference(p20) or storeValueIsStoreObject(p20)) then p20 else nil
@@ -281,12 +281,12 @@ function t_1:applyMerges(p19, p20, p21, p22, p23) --[[ line: 532 ]]
 		end
 		local var45 = nil
 		
-		local function _(p24, p25) --[[ line: 590 | named "getValue" ]]
+		local function _(p24, p25)
 			-- upvalues: array (copy), p22 (ref)
 			return if array.isArray(p24) then if typeof(p25) == "number" then p24[p25] else nil else p22.store:getFieldValue(p24, tostring(p25))
 		end
 		
-		p19.map:forEach(function(p26, p27) --[[ line: 602 ]]
+		p19.map:forEach(function(p26, p27)
 			-- upvalues: var43 (ref), array (copy), p22 (ref), var44 (ref), p23 (write), self (ref), var45 (write), map (copy), invariant (copy)
 			local var46 = if array.isArray(var43) then if typeof(p27) == "number" then var43[p27] else nil else p22.store:getFieldValue(var43, tostring(p27))
 			local var47 = if array.isArray(var44) then if typeof(p27) == "number" then var44[p27] else nil else p22.store:getFieldValue(var44, tostring(p27))
@@ -308,7 +308,7 @@ function t_1:applyMerges(p19, p20, p21, p22, p23) --[[ line: 532 ]]
 		
 		if var45 ~= nil then
 			p21 = table.clone(var44)
-			var45:forEach(function(p28, p29) --[[ line: 631 ]]
+			var45:forEach(function(p28, p29)
 				-- upvalues: p21 (write)
 				p21[p29] = p28
 			end)
@@ -320,7 +320,7 @@ end
 t.StoreWriter = t_1
 local t_2 = {}
 
-getChildMergeTree = function(p30, p31) --[[ line: 656 | named "getChildMergeTree" ]]
+getChildMergeTree = function(p30, p31)
 	-- upvalues: t_2 (ref), map (ref)
 	local map_1 = p30.map
 	
@@ -330,7 +330,7 @@ getChildMergeTree = function(p30, p31) --[[ line: 656 | named "getChildMergeTree
 	return map_1:get(p31)
 end
 
-mergeMergeTrees = function(p32, p33) --[[ line: 666 | named "mergeMergeTrees" ]]
+mergeMergeTrees = function(p32, p33)
 	-- upvalues: mergeTreeIsEmpty (write), object (ref), map (ref), set (ref), mergeMergeTrees (write)
 	if p32 == p33 or p33 == nil or mergeTreeIsEmpty(p33) then
 		return p32
@@ -345,12 +345,12 @@ mergeMergeTrees = function(p32, p33) --[[ line: 666 | named "mergeMergeTrees" ]]
 	
 	if var49 > 0 then
 		local var51 = set.new(p33.map:keys())
-		p32.map:forEach(function(p34, p35) --[[ line: 696 ]]
+		p32.map:forEach(function(p34, p35)
 			-- upvalues: t (ref), mergeMergeTrees (copy), p33 (ref), var51 (ref)
 			t.map:set(p35, mergeMergeTrees(p34, p33.map:get(p35)))
 			var51:delete(p35)
 		end)
-		var51:forEach(function(p36) --[[ line: 701 ]]
+		var51:forEach(function(p36)
 			-- upvalues: t (ref), mergeMergeTrees (copy), p33 (ref), p32 (ref)
 			t.map:set(p36, mergeMergeTrees(p33.map:get(p36), p32.map:get(p36)))
 		end)
@@ -358,7 +358,7 @@ mergeMergeTrees = function(p32, p33) --[[ line: 666 | named "mergeMergeTrees" ]]
 	return t
 end
 
-mergeTreeIsEmpty = function(p37) --[[ line: 712 | named "mergeTreeIsEmpty" ]]
+mergeTreeIsEmpty = function(p37)
 	local var52 = not p37
 	
 	if not var52 then
@@ -367,7 +367,7 @@ mergeTreeIsEmpty = function(p37) --[[ line: 712 | named "mergeTreeIsEmpty" ]]
 	return var52
 end
 
-maybeRecycleChildMergeTree = function(p38, p39) --[[ line: 718 | named "maybeRecycleChildMergeTree" ]]
+maybeRecycleChildMergeTree = function(p38, p39)
 	-- upvalues: mergeTreeIsEmpty (write), t_2 (ref)
 	local map = p38.map
 	local var53 = map:get(p39)
@@ -380,9 +380,9 @@ end
 
 local var15 = set.new()
 
-warnAboutDataLoss = function(p40, p41, p42, p43) --[[ line: 733 | named "warnAboutDataLoss" ]]
+warnAboutDataLoss = function(p40, p41, p42, p43)
 	-- upvalues: isReference (ref), equalModule (ref), array (ref), object (ref), boolean (ref), fieldNameFromStoreName (ref), var15 (ref), invariant (ref), httpService (ref)
-	local function _(p44) --[[ line: 740 | named "getChild" ]]
+	local function _(p44)
 		-- upvalues: p43 (ref), p42 (ref)
 		local var63 = p43:getFieldValue(p44, p42)
 		
@@ -399,7 +399,7 @@ warnAboutDataLoss = function(p40, p41, p42, p43) --[[ line: 733 | named "warnAbo
 	if not var57 then return end
 	if isReference(var55) then return end
 	if equalModule(var55, var57) then return end
-	if array.every(object.keys(var55), function(p45) --[[ line: 771 ]]
+	if array.every(object.keys(var55), function(p45)
 		-- upvalues: p43 (ref), var57 (ref)
 		return p43:getFieldValue(var57, p45) ~= nil
 	end) then return end
@@ -413,7 +413,7 @@ warnAboutDataLoss = function(p40, p41, p42, p43) --[[ line: 733 | named "warnAbo
 	local t = {}
 	
 	if not array.isArray(var55) and not array.isArray(var57) then
-		array.forEach({ var55, var57 }, function(p46) --[[ line: 794 ]]
+		array.forEach({ var55, var57 }, function(p46)
 			-- upvalues: p43 (ref), array (copy), t (ref)
 			local var64 = p43:getFieldValue(p46, "__typename")
 			

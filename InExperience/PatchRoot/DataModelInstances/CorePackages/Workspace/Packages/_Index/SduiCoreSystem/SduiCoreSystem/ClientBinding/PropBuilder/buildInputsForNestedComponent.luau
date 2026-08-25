@@ -8,7 +8,7 @@ local fFlagSduiFormatArgFormatters = require(parent.SharedFlags).FFlagSduiFormat
 local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
 local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 28 | named "buildInputsForNestedComponent" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiFormatArgFormatters (ref)
 	if p1 then
 		for i, v in p1 do

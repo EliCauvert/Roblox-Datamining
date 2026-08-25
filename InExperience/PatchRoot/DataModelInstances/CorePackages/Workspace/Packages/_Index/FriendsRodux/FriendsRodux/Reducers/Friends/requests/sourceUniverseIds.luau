@@ -9,20 +9,20 @@ local removeIdsFromRequestsStoreModule = require(parent.Reducers.Friends.utils.r
 local llamaModule = require(parent_1.llama)
 local t = {}
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), t (ref), removeIdsFromRequestsStoreModule (ref), llamaModule (ref), friendRequestCreatedModule (ref), friendRequestDeclinedModule (ref)
 	local friendsNetworking = p0.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p1, p2) --[[ line: 21 ]]
+		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p1, p2)
 			-- upvalues: removeIdsFromRequestsStoreModule (copy)
 			return removeIdsFromRequestsStoreModule(p1, p2.ids)
 		end,
-		[friendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p3, p4) --[[ line: 29 ]]
+		[friendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p3, p4)
 			-- upvalues: removeIdsFromRequestsStoreModule (copy)
 			return removeIdsFromRequestsStoreModule(p3, p4.ids)
 		end,
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p5, p6) --[[ line: 37 ]]
+		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p5, p6)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
@@ -31,15 +31,15 @@ return function(p0) --[[ line: 17 ]]
 			end
 			return llamaModule.Dictionary.join(p5, t)
 		end,
-		[friendRequestCreatedModule.name] = function(p7, p8) --[[ line: 52 ]]
+		[friendRequestCreatedModule.name] = function(p7, p8)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p7, { [tostring(p8.requesteeId)] = p8.sourceUniverseId })
 		end,
-		[friendRequestDeclinedModule.name] = function(p9, p10) --[[ line: 60 ]]
+		[friendRequestDeclinedModule.name] = function(p9, p10)
 			-- upvalues: removeIdsFromRequestsStoreModule (copy)
 			return removeIdsFromRequestsStoreModule(p9, p10.ids)
 		end,
-		[friendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function() --[[ line: 65 ]]
+		[friendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function()
 			return {}
 		end
 	})

@@ -7,7 +7,7 @@ local buildRowDisplayModule = require(script.Parent.Parent.Message.MessageDispla
 local friendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsaAcknowledgement)
 local userProfileStore = userProfilesModule.Stores.UserProfileStore
 
-local function getProfileDisplayName(p0, p1) --[[ line: 23 ]]
+local function getProfileDisplayName(p0, p1)
 	if p0 == nil then
 		return nil, false
 	elseif p0.status == "failed" then
@@ -32,7 +32,7 @@ local function getProfileDisplayName(p0, p1) --[[ line: 23 ]]
 	return var11, false
 end
 
-local function buildDisplay(p2, p3, p4, p5) --[[ line: 49 ]]
+local function buildDisplay(p2, p3, p4, p5)
 	-- upvalues: universalAppPolicyModule (ref), buildRowDisplayModule (ref)
 	local canSeeChatTerminology = universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology()
 	p3 = p3 or p2 == nil
@@ -50,7 +50,7 @@ local function buildDisplay(p2, p3, p4, p5) --[[ line: 49 ]]
 	}, {}, { systemTextSize = p5 })
 end
 
-return function(p6) --[[ line: 76 | named "FriendsChatOsaSystemMessage" ]]
+return function(p6)
 	-- upvalues: reactModule (ref), friendsChatOsaAcknowledgementModule (ref), userProfileStore (ref), getProfileDisplayName (ref), buildDisplay (ref), friendsChatTextMessageModule (ref)
 	local var14 = reactModule.useRef(nil)
 	friendsChatOsaAcknowledgementModule.useAcknowledgement({
@@ -58,23 +58,23 @@ return function(p6) --[[ line: 76 | named "FriendsChatOsaSystemMessage" ]]
 		userId = p6.userId,
 		guiObjectRef = var14
 	})
-	local var15 = reactModule.useMemo(function() --[[ line: 84 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: userProfileStore (copy), p6 (ref)
 		return userProfileStore.get().fetchNamesByUserIds({ p6.userId })
 	end, { p6.userId })
 	
 	return reactModule.createElement(friendsChatTextMessageModule, {
-		getDisplayId = reactModule.useCallback(function() --[[ line: 87 ]]
+		getDisplayId = reactModule.useCallback(function()
 			-- upvalues: p6 (ref)
 			return `osa-system-message-{p6.conversationId}`
 		end, { p6.conversationId }),
-		getDisplayFromId = reactModule.useCallback(function(_, p7, p8) --[[ line: 93 ]]
+		getDisplayFromId = reactModule.useCallback(function(_, p7, p8)
 			-- upvalues: getProfileDisplayName (copy), var15 (ref), buildDisplay (copy), p6 (ref)
 			local var16, var17 = getProfileDisplayName(var15(p7), p7)
 			
 			return buildDisplay(var16, var17, if p8 and p8.localize then p8.localize else p6.localize, if p8 then p8.systemTextSize else nil)
 		end, { var15, p6.localize }),
-		getLayoutOrder = reactModule.useCallback(function() --[[ line: 90 ]]
+		getLayoutOrder = reactModule.useCallback(function()
 			return 0
 		end, {}),
 		chatWindowSettings = p6.chatWindowSettings,

@@ -24,11 +24,11 @@ local ITEM_PLACEMENT_KEYS = placementTypesModule.ITEM_PLACEMENT_KEYS
 local frozen_4 = table.freeze({ "key" })
 local frozen_5 = table.freeze({ "revision" })
 
-local function _(p0, p1) --[[ line: 74 | named "sameRange" ]]
+local function _(p0, p1)
 	return p0.firstIndex == p1.firstIndex and p0.lastIndex == p1.lastIndex
 end
 
-return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" ]]
+return function(p2)
 	-- upvalues: frozen (ref), cloneFrozen (ref), frozen_1 (ref), containsEqual (ref), ITEM_PLACEMENT_KEYS (ref), optionalContainsEqual (ref), ITEM_LAYOUT_KEYS (ref), placementTypesModule (ref), frozen_2 (ref), typesModule (ref), frozen_4 (ref), frozen_5 (ref), frozen_3 (ref)
 	local planner = p2.planner
 	local itemRevisions = p2.itemRevisions
@@ -54,7 +54,7 @@ return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" 
 		requiresItemMeasurement = p2.initialRequiresItemMeasurement
 	})
 	
-	local function _(p3) --[[ line: 108 | named "recordEntryMaterialization" ]]
+	local function _(p3)
 		-- upvalues: t (ref)
 		t.entryIdentity = p3.identity
 		t.entryLayoutGeometry = p3.layoutGeometry
@@ -63,7 +63,7 @@ return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" 
 		t.entryScroll = p3.scroll
 	end
 	
-	local function resolvePlacement(p4, p5, p6) --[[ line: 116 ]]
+	local function resolvePlacement(p4, p5, p6)
 		-- upvalues: frozen_1 (copy)
 		local var15 = p5.placements[p4]
 		
@@ -88,7 +88,7 @@ return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" 
 		}), nil
 	end
 	
-	local function makeEntry(p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ line: 145 ]]
+	local function makeEntry(p7, p8, p9, p10, p11, p12, p13, p14, p15, p16)
 		-- upvalues: frozen_1 (copy), resolvePlacement (ref), containsEqual (copy), ITEM_PLACEMENT_KEYS (copy), optionalContainsEqual (copy), ITEM_LAYOUT_KEYS (copy), placementTypesModule (copy), cloneFrozen (copy)
 		local var16 = if p9 == nil then {
 			startOffset = 0,
@@ -142,7 +142,7 @@ return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" 
 		})
 	end
 	
-	local function materializeEntries(p17) --[[ line: 232 ]]
+	local function materializeEntries(p17)
 		-- upvalues: t (ref), frozen_6 (write), planner (ref), frozen_2 (copy), typesModule (copy), makeEntry (ref), getRecyclableViewType (ref), itemRevisions (ref), containsEqual (copy), frozen_4 (copy), frozen_5 (copy)
 		local revisions = p17.revisions
 		local mountedRange = p17.mountedRange
@@ -318,7 +318,7 @@ return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" 
 	end
 	
 	return {
-		commit = function(p18) --[[ line: 497 ]]
+		commit = function(p18)
 			-- upvalues: materializeEntries (ref), t (ref), frozen_6 (write), cloneFrozen (copy), frozen_3 (copy)
 			local revisions = p18.revisions
 			local var44, var45 = materializeEntries(p18)
@@ -360,7 +360,7 @@ return function(p2) --[[ line: 78 | named "createVirtualizerSnapshotProjection" 
 				presentation = if var44 or var45 then table.freeze({ assignmentsChanged = var44, placementChanged = var45 }) else frozen_3
 			}
 		end,
-		getSnapshot = function() --[[ line: 546 ]]
+		getSnapshot = function()
 			-- upvalues: frozen_6 (write)
 			return frozen_6
 		end

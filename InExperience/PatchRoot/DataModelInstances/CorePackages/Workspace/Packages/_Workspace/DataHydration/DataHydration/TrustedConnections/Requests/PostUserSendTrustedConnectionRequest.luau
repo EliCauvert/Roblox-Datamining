@@ -4,7 +4,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local url = require(parent.Http).Url
 local myHttpRequestModule = require(dataHydration.TrustedConnections.Networking.myHttpRequest)
 
-return function(p0, p1) --[[ line: 10 ]]
+return function(p0, p1)
 	-- upvalues: url (ref), sharedFlagsModule (ref), myHttpRequestModule (ref)
 	local formattedText = string.format("%s/users/%s/send-trusted-friend-request", url.FRIEND_URL, tostring(p0))
 	

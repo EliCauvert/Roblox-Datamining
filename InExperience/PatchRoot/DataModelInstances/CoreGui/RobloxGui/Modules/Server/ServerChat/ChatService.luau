@@ -13,30 +13,30 @@ local chatChannelModule = require(parent:WaitForChild("ChatChannel"))
 local speakerModule = require(parent:WaitForChild("Speaker"))
 local utilModule = require(parent:WaitForChild("Util"))
 local var10 = nil
-pcall(function() --[[ line: 38 ]]
+pcall(function()
 	-- upvalues: var10 (write)
 	var10 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 var10 = var10 or {}
 
 if not var10.FormatMessageToSend or not var10.LocalizeFormattedMessage then
-	function var10.FormatMessageToSend(_, _, p0) --[[ line: 42 ]]
+	function var10.FormatMessageToSend(_, _, p0)
 		return p0
 	end
 end
-local function _(p1) --[[ line: 45 | named "allSpaces" ]]
+local function _(p1)
 	return string.len(string.gsub(p1, " ", "")) == 0
 end
 
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.AddChannel(p2, p3, p4) --[[ line: 55 ]]
+function t_2.AddChannel(p2, p3, p4)
 	-- upvalues: var10 (write), chatChannelModule (ref), chatConstantsModule (ref)
 	if p2.ChatChannels[p3:lower()] then
 		error(string.format("Channel %q alrady exists.", p3))
 	end
-	local function DefaultChannelCommands(p5, p6) --[[ line: 60 ]]
+	local function DefaultChannelCommands(p5, p6)
 		-- upvalues: p2 (ref), p3 (ref), var10 (copy)
 		if p6:lower() ~= "/leave" then
 			return false
@@ -58,7 +58,7 @@ function t_2.AddChannel(p2, p3, p4) --[[ line: 55 ]]
 	local var17 = chatChannelModule.new(p2, p3)
 	p2.ChatChannels[p3:lower()] = var17
 	var17:RegisterProcessCommandsFunction("default_commands", DefaultChannelCommands, chatConstantsModule.HighPriority)
-	local ok, status = pcall(function() --[[ line: 89 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p2 (ref), p3 (ref)
 		p2.eChannelAdded:Fire(p3)
 	end)
@@ -78,12 +78,12 @@ function t_2.AddChannel(p2, p3, p4) --[[ line: 55 ]]
 	return var17
 end
 
-function t_2.RemoveChannel(p7, p8) --[[ line: 106 ]]
+function t_2.RemoveChannel(p7, p8)
 	if p7.ChatChannels[p8:lower()] then
 		local name = p7.ChatChannels[p8:lower()].Name
 		p7.ChatChannels[p8:lower()]:InternalDestroy()
 		p7.ChatChannels[p8:lower()] = nil
-		local ok, status = pcall(function() --[[ line: 113 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p7 (ref), name (ref)
 			p7.eChannelRemoved:Fire(name)
 		end)
@@ -100,18 +100,18 @@ function t_2.RemoveChannel(p7, p8) --[[ line: 106 ]]
 	end
 end
 
-function t_2.GetChannel(p9, p10) --[[ line: 122 ]]
+function t_2.GetChannel(p9, p10)
 	return p9.ChatChannels[p10:lower()]
 end
 
-function t_2.AddSpeaker(p11, p12) --[[ line: 127 ]]
+function t_2.AddSpeaker(p11, p12)
 	-- upvalues: speakerModule (ref)
 	if p11.Speakers[p12:lower()] then
 		error("Speaker \"" .. p12 .. "\" already exists!")
 	end
 	local var20 = speakerModule.new(p11, p12)
 	p11.Speakers[p12:lower()] = var20
-	local ok, status = pcall(function() --[[ line: 135 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p11 (ref), p12 (ref)
 		p11.eSpeakerAdded:Fire(p12)
 	end)
@@ -122,7 +122,7 @@ function t_2.AddSpeaker(p11, p12) --[[ line: 127 ]]
 	return var20
 end
 
-function t_2.InternalUnmuteSpeaker(p13, p14) --[[ line: 143 ]]
+function t_2.InternalUnmuteSpeaker(p13, p14)
 	for i, v in pairs(p13.ChatChannels) do
 		if v:IsSpeakerMuted(p14) then
 			v:UnmuteSpeaker(p14)
@@ -130,13 +130,13 @@ function t_2.InternalUnmuteSpeaker(p13, p14) --[[ line: 143 ]]
 	end
 end
 
-function t_2.RemoveSpeaker(p15, p16) --[[ line: 151 ]]
+function t_2.RemoveSpeaker(p15, p16)
 	if p15.Speakers[p16:lower()] then
 		local name = p15.Speakers[p16:lower()].Name
 		p15:InternalUnmuteSpeaker(name)
 		p15.Speakers[p16:lower()]:InternalDestroy()
 		p15.Speakers[p16:lower()] = nil
-		local ok, status = pcall(function() --[[ line: 160 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p15 (ref), name (ref)
 			p15.eSpeakerRemoved:Fire(name)
 		end)
@@ -153,11 +153,11 @@ function t_2.RemoveSpeaker(p15, p16) --[[ line: 151 ]]
 	end
 end
 
-function t_2.GetSpeaker(p17, p18) --[[ line: 170 ]]
+function t_2.GetSpeaker(p17, p18)
 	return p17.Speakers[p18:lower()]
 end
 
-function t_2.GetSpeakerByUserOrDisplayName(p19, p20) --[[ line: 174 ]]
+function t_2.GetSpeakerByUserOrDisplayName(p19, p20)
 	local var21 = p19.Speakers[p20:lower()]
 	
 	if var21 then
@@ -172,7 +172,7 @@ function t_2.GetSpeakerByUserOrDisplayName(p19, p20) --[[ line: 174 ]]
 	end
 end
 
-function t_2.GetChannelList(p21) --[[ line: 190 ]]
+function t_2.GetChannelList(p21)
 	local t = {}
 	
 	for i, v in pairs(p21.ChatChannels) do
@@ -183,7 +183,7 @@ function t_2.GetChannelList(p21) --[[ line: 190 ]]
 	return t
 end
 
-function t_2.GetAutoJoinChannelList(p22) --[[ line: 200 ]]
+function t_2.GetAutoJoinChannelList(p22)
 	local t = {}
 	
 	for i, v in pairs(p22.ChatChannels) do
@@ -194,7 +194,7 @@ function t_2.GetAutoJoinChannelList(p22) --[[ line: 200 ]]
 	return t
 end
 
-function t_2.GetSpeakerList(p23) --[[ line: 210 ]]
+function t_2.GetSpeakerList(p23)
 	local t = {}
 	
 	for i, v in pairs(p23.Speakers) do
@@ -203,42 +203,42 @@ function t_2.GetSpeakerList(p23) --[[ line: 210 ]]
 	return t
 end
 
-function t_2.SendGlobalSystemMessage(p24, p25) --[[ line: 218 ]]
+function t_2.SendGlobalSystemMessage(p24, p25)
 	for i, v in pairs(p24.Speakers) do
 		v:SendSystemMessage(p25, nil)
 	end
 end
 
-function t_2.RegisterFilterMessageFunction(p26, p27, p28, p29) --[[ line: 224 ]]
+function t_2.RegisterFilterMessageFunction(p26, p27, p28, p29)
 	if p26.FilterMessageFunctions:HasFunction(p27) then
 		error(string.format("FilterMessageFunction '%s' already exists", p27))
 	end
 	p26.FilterMessageFunctions:AddFunction(p27, p28, p29)
 end
 
-function t_2.FilterMessageFunctionExists(p30, p31) --[[ line: 231 ]]
+function t_2.FilterMessageFunctionExists(p30, p31)
 	return p30.FilterMessageFunctions:HasFunction(p31)
 end
 
-function t_2.UnregisterFilterMessageFunction(p32, p33) --[[ line: 235 ]]
+function t_2.UnregisterFilterMessageFunction(p32, p33)
 	if not p32.FilterMessageFunctions:HasFunction(p33) then
 		error(string.format("FilterMessageFunction '%s' does not exists", p33))
 	end
 	p32.FilterMessageFunctions:RemoveFunction(p33)
 end
 
-function t_2.RegisterProcessCommandsFunction(p34, p35, p36, p37) --[[ line: 242 ]]
+function t_2.RegisterProcessCommandsFunction(p34, p35, p36, p37)
 	if p34.ProcessCommandsFunctions:HasFunction(p35) then
 		error(string.format("ProcessCommandsFunction '%s' already exists", p35))
 	end
 	p34.ProcessCommandsFunctions:AddFunction(p35, p36, p37)
 end
 
-function t_2.ProcessCommandsFunctionExists(p38, p39) --[[ line: 249 ]]
+function t_2.ProcessCommandsFunctionExists(p38, p39)
 	return p38.ProcessCommandsFunctions:HasFunction(p39)
 end
 
-function t_2.UnregisterProcessCommandsFunction(p40, p41) --[[ line: 253 ]]
+function t_2.UnregisterProcessCommandsFunction(p40, p41)
 	if not p40.ProcessCommandsFunctions:HasFunction(p41) then
 		error(string.format("ProcessCommandsFunction '%s' does not exist", p41))
 	end
@@ -249,7 +249,7 @@ local var12 = 0
 local var13 = 0
 local var14 = 0
 
-function t_2.InternalNotifyFilterIssue(p42) --[[ line: 263 ]]
+function t_2.InternalNotifyFilterIssue(p42)
 	-- upvalues: var13 (write), var14 (write), var12 (write), var10 (write), t_1 (ref)
 	if tick() - var13 > 60 then
 		var14 = 0
@@ -269,7 +269,7 @@ end
 
 local t_3 = {}
 
-function t_2.InternalApplyRobloxFilter(p43, p44, p45, p46) --[[ line: 292 ]]
+function t_2.InternalApplyRobloxFilter(p43, p44, p45, p46)
 	-- upvalues: runService (ref), chatService (ref), list (ref), t_3 (ref)
 	if runService:IsServer() and not runService:IsStudio() then
 		local var27 = p43:GetSpeaker(p44)
@@ -289,7 +289,7 @@ function t_2.InternalApplyRobloxFilter(p43, p44, p45, p46) --[[ line: 292 ]]
 		local currentTime = tick()
 		local var32 = 0
 		while true do
-			local ok, status = pcall(function() --[[ line: 315 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var30 (ref), chatService (copy), p45 (ref), player (ref)
 				return if var30 then chatService:FilterStringAsync(p45, player, var30) else chatService:FilterStringForBroadcast(p45, player)
 			end)
@@ -316,7 +316,7 @@ function t_2.InternalApplyRobloxFilter(p43, p44, p45, p46) --[[ line: 292 ]]
 	return p45
 end
 
-function t_2.InternalApplyRobloxFilterAndTranslate(p47, p48, p49, p50, p51) --[[ line: 351 ]]
+function t_2.InternalApplyRobloxFilterAndTranslate(p47, p48, p49, p50, p51)
 	-- upvalues: runService (ref)
 	if not runService:IsServer() or runService:IsStudio() then
 		wait()
@@ -335,7 +335,7 @@ function t_2.InternalApplyRobloxFilterAndTranslate(p47, p48, p49, p50, p51) --[[
 	elseif string.len(string.gsub(p50, " ", "")) == 0 then
 		return true, false, p50
 	end
-	local ok, status = pcall(function() --[[ line: 369 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p50 (ref), player (ref), p49 (ref), p51 (ref)
 		return game:GetService("TextService"):FilterAndTranslateStringAsync(p50, player.UserId, p49, p51)
 	end)
@@ -349,7 +349,7 @@ function t_2.InternalApplyRobloxFilterAndTranslate(p47, p48, p49, p50, p51) --[[
 	return false, nil, nil
 end
 
-function t_2.InternalApplyRobloxFilterNewAPI(p52, p53, p54, p55) --[[ line: 388 ]]
+function t_2.InternalApplyRobloxFilterNewAPI(p52, p53, p54, p55)
 	-- upvalues: runService (ref)
 	if not runService:IsServer() or runService:IsStudio() then
 		wait()
@@ -368,7 +368,7 @@ function t_2.InternalApplyRobloxFilterNewAPI(p52, p53, p54, p55) --[[ line: 388 
 	elseif string.len(string.gsub(p54, " ", "")) == 0 then
 		return true, false, p54
 	end
-	local ok, status = pcall(function() --[[ line: 407 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p54 (ref), player (ref), p55 (ref)
 		return game:GetService("TextService"):FilterStringAsync(p54, player.UserId, p55)
 	end)
@@ -382,9 +382,9 @@ function t_2.InternalApplyRobloxFilterNewAPI(p52, p53, p54, p55) --[[ line: 388 
 	return false, nil, nil
 end
 
-function t_2.InternalDoMessageFilter(p56, p57, p58, p59) --[[ line: 426 ]]
+function t_2.InternalDoMessageFilter(p56, p57, p58, p59)
 	for i, v, var38 in p56.FilterMessageFunctions:GetIterator() do
-		local ok, status = pcall(function() --[[ line: 430 ]]
+		local ok, status = pcall(function()
 			-- upvalues: v (ref), p57 (ref), p58 (ref), p59 (ref)
 			v(p57, p58, p59)
 		end)
@@ -395,9 +395,9 @@ function t_2.InternalDoMessageFilter(p56, p57, p58, p59) --[[ line: 426 ]]
 	end
 end
 
-function t_2.InternalDoProcessCommands(p60, p61, p62, p63) --[[ line: 440 ]]
+function t_2.InternalDoProcessCommands(p60, p61, p62, p63)
 	for i, v, var39 in p60.ProcessCommandsFunctions:GetIterator() do
-		local ok, status = pcall(function() --[[ line: 444 ]]
+		local ok, status = pcall(function()
 			-- upvalues: v (ref), p61 (ref), p62 (ref), p63 (ref)
 			local var40 = v(p61, p62, p63)
 			
@@ -418,14 +418,14 @@ function t_2.InternalDoProcessCommands(p60, p61, p62, p63) --[[ line: 440 ]]
 	return false
 end
 
-function t_2.InternalGetUniqueMessageId(p64) --[[ line: 462 ]]
+function t_2.InternalGetUniqueMessageId(p64)
 	local messageIdCounter = p64.MessageIdCounter
 	p64.MessageIdCounter = messageIdCounter + 1
 	
 	return messageIdCounter
 end
 
-function t_2.InternalAddSpeakerWithPlayerObject(p65, p66, p67, p68) --[[ line: 468 ]]
+function t_2.InternalAddSpeakerWithPlayerObject(p65, p66, p67, p68)
 	-- upvalues: speakerModule (ref)
 	if p65.Speakers[p66:lower()] then
 		error("Speaker \"" .. p66 .. "\" already exists!")
@@ -435,7 +435,7 @@ function t_2.InternalAddSpeakerWithPlayerObject(p65, p66, p67, p68) --[[ line: 4
 	p65.Speakers[p66:lower()] = var41
 	
 	if p68 then
-		local ok, status = pcall(function() --[[ line: 478 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p65 (ref), p66 (ref)
 			p65.eSpeakerAdded:Fire(p66)
 		end)
@@ -447,8 +447,8 @@ function t_2.InternalAddSpeakerWithPlayerObject(p65, p66, p67, p68) --[[ line: 4
 	return var41
 end
 
-function t_2.InternalFireSpeakerAdded(p69, p70) --[[ line: 487 ]]
-	local ok, status = pcall(function() --[[ line: 488 ]]
+function t_2.InternalFireSpeakerAdded(p69, p70)
+	local ok, status = pcall(function()
 		-- upvalues: p69 (ref), p70 (ref)
 		p69.eSpeakerAdded:Fire(p70)
 	end)
@@ -458,7 +458,7 @@ function t_2.InternalFireSpeakerAdded(p69, p70) --[[ line: 487 ]]
 	end
 end
 
-function t.new() --[[ line: 497 ]]
+function t.new()
 	-- upvalues: t_2 (ref), utilModule (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.MessageIdCounter = 0

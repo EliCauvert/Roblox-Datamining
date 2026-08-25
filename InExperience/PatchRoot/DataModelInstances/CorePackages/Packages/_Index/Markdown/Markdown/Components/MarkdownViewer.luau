@@ -11,7 +11,7 @@ local commonMarkComplianceParserModule = require(parent.Parsers.CommonMarkCompli
 local _ = require(parent.Types)
 local markdownRendererModule = require(script.MarkdownRenderer)
 
-return function(p0) --[[ line: 46 | named "MarkdownViewer" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), dashModule (ref), markdownRendererModule (ref), commonMarkComplianceParserModule (ref), view (ref), text (ref)
 	local var5 = useTokens()
 	
@@ -20,11 +20,11 @@ return function(p0) --[[ line: 46 | named "MarkdownViewer" ]]
 		
 		return nil
 	end
-	local var6 = reactModule.useMemo(function() --[[ line: 53 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), markdownRendererModule (copy), p0 (ref)
 		return dashModule.join(markdownRendererModule.defaultRenderers, p0.Renderers or {}, p0.AdditionalFeatureRenderers or {})
 	end, { p0.Renderers })
-	local var7, var8 = reactModule.useMemo(function() --[[ line: 62 ]]
+	local var7, var8 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), commonMarkComplianceParserModule (copy)
 		if p0.Ast then
 			return true, p0.Ast
@@ -48,7 +48,7 @@ return function(p0) --[[ line: 46 | named "MarkdownViewer" ]]
 		tag = "col size-full-0 auto-y",
 		BorderSizePixel = 0,
 		backgroundStyle = { Transparency = 1 }
-	}, p0.WrapperProps or {}), reactModule.useMemo(function() --[[ line: 82 ]]
+	}, p0.WrapperProps or {}), reactModule.useMemo(function()
 		-- upvalues: var7 (ref), markdownRendererModule (copy), var8 (ref), var6 (ref), p0 (ref), var5 (ref)
 		return if var7 then markdownRendererModule.render(var8, {
 			userRenderers = var6,

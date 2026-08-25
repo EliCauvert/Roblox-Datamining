@@ -12,15 +12,15 @@ local thumbnailSize = foundationModule.Enums.ThumbnailSize
 local bannerImageConstantsModule = require(script.Parent.BannerImageConstants)
 local fFlagMobileGameJoinCardThumbnailModule = require(script.Parent.Flags.FFlagMobileGameJoinCardThumbnail)
 
-local function preloadFirstImage(p0) --[[ line: 36 ]]
+local function preloadFirstImage(p0)
 	-- upvalues: gameMediaImageType (ref), bannerImageConstantsModule (ref), contentProviderService (ref)
 	if not p0 then return end
 	for i, v in p0 do
 		if v.assetTypeId == gameMediaImageType.Image and v.imageId then
 			local formattedText = string.format("rbxthumb://type=Asset&id=%s&w=%d&h=%d", tostring(v.imageId), bannerImageConstantsModule.DEFAULT_BANNER_WIDTH, bannerImageConstantsModule.DEFAULT_BANNER_HEIGHT)
-			task.spawn(function() --[[ line: 48 ]]
+			task.spawn(function()
 				-- upvalues: contentProviderService (copy), formattedText (ref)
-				pcall(function() --[[ line: 49 ]]
+				pcall(function()
 					-- upvalues: contentProviderService (copy), formattedText (copy)
 					contentProviderService:PreloadAsync({ formattedText })
 				end)
@@ -31,14 +31,14 @@ local function preloadFirstImage(p0) --[[ line: 36 ]]
 	end
 end
 
-local function prefetchUniverseMedia(p1) --[[ line: 58 ]]
+local function prefetchUniverseMedia(p1)
 	-- upvalues: getGameMediaStore (ref), dataStatus (ref), preloadFirstImage (ref), signalsModule (ref)
 	local andFetchGameMedia = getGameMediaStore(false).getAndFetchGameMedia(p1)
 	local var10 = andFetchGameMedia.status(false)
 	
 	if var10 == dataStatus.NotReady then
 		local var11 = nil
-		var11 = signalsModule.createEffect(function(p2) --[[ line: 72 ]]
+		var11 = signalsModule.createEffect(function(p2)
 			-- upvalues: andFetchGameMedia (ref), dataStatus (copy), var11 (write), preloadFirstImage (copy)
 			local var12 = andFetchGameMedia.status(p2)
 			
@@ -58,20 +58,20 @@ local function prefetchUniverseMedia(p1) --[[ line: 58 ]]
 	end
 end
 
-local function _(p3, p4) --[[ line: 89 | named "preloadGameThumbnail" ]]
+local function _(p3, p4)
 	-- upvalues: contentProviderService (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref)
 	p4 = p4 or contentProviderService
 	local var14 = getRbxThumb(thumbnailType.GameIcon, p3, thumbnailSize.Medium)
-	task.spawn(function() --[[ line: 92 ]]
+	task.spawn(function()
 		-- upvalues: p4 (ref), var14 (ref)
-		pcall(function() --[[ line: 93 ]]
+		pcall(function()
 			-- upvalues: p4 (copy), var14 (copy)
 			p4:PreloadAsync({ var14 })
 		end)
 	end)
 end
 
-return function(p5, p6) --[[ line: 99 | named "prefetchGameJoinCardMedia" ]]
+return function(p5, p6)
 	-- upvalues: fFlagMobileGameJoinCardThumbnailModule (ref), contentProviderService (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), prefetchUniverseMedia (ref)
 	if not p5 then return end
 	for i, v in p5 do
@@ -79,9 +79,9 @@ return function(p5, p6) --[[ line: 99 | named "prefetchGameJoinCardMedia" ]]
 			if fFlagMobileGameJoinCardThumbnailModule then
 				p6 = p6 or contentProviderService
 				local var16 = getRbxThumb(thumbnailType.GameIcon, tostring(v.universeId), thumbnailSize.Medium)
-				task.spawn(function() --[[ line: 92 ]]
+				task.spawn(function()
 					-- upvalues: p6 (ref), var16 (ref)
-					pcall(function() --[[ line: 93 ]]
+					pcall(function()
 						-- upvalues: p6 (copy), var16 (copy)
 						p6:PreloadAsync({ var16 })
 					end)

@@ -24,7 +24,7 @@ local numberSequence_1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function OverflowButton(p0) --[[ line: 36 ]]
+local function OverflowButton(p0)
 	-- upvalues: reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconButtonModule (ref), inputSizeModule (ref)
 	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
 		tag = `col align-y-center size-0-full auto-x bg-surface-0 {p0.tag}`
@@ -38,12 +38,12 @@ local function OverflowButton(p0) --[[ line: 36 ]]
 	})
 end
 
-return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), dashModule (ref), otterModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), visibilityModule (ref), OverflowButton (ref), numberSequence (ref), icon (ref), numberSequence_1 (ref)
 	local var15, var16 = reactModule.useBinding(false)
 	local var17, var18 = reactModule.useBinding(false)
 	local var19 = reactModule.useRef(nil)
-	local var20 = reactOtterModule.useMotor(0, function(p2) --[[ line: 77 ]]
+	local var20 = reactOtterModule.useMotor(0, function(p2)
 		-- upvalues: var19 (ref)
 		local current = var19.current
 		
@@ -53,7 +53,7 @@ return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
 			return
 		end
 	end)
-	local var21 = reactModule.useCallback(dashModule.throttle(function(p3) --[[ line: 86 ]]
+	local var21 = reactModule.useCallback(dashModule.throttle(function(p3)
 		-- upvalues: var16 (ref), var18 (ref)
 		if p3.AbsoluteWindowSize.X == 0 then
 			return
@@ -61,7 +61,7 @@ return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
 		var16(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
 		var18(p3.CanvasPosition.X ~= 0)
 	end, 0.2), {})
-	local var22 = reactModule.useCallback(function(p4) --[[ line: 99 ]]
+	local var22 = reactModule.useCallback(function(p4)
 		-- upvalues: var19 (ref), var20 (ref), otterModule (copy)
 		local current = var19.current
 		
@@ -71,7 +71,7 @@ return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
 			return
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 113 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var21 (ref)
 		if var19.current then
 			var21(var19.current)
@@ -101,7 +101,7 @@ return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
 			Position = UDim2.fromScale(0, 0),
 			size = p1.size,
 			Visible = var17,
-			onActivated = reactModule.useCallback(function() --[[ line: 119 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var22 (ref)
 				var22(-90)
 			end, { var22 }),
@@ -116,7 +116,7 @@ return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
 			Position = UDim2.fromScale(1, 0),
 			size = p1.size,
 			Visible = var15,
-			onActivated = reactModule.useCallback(function() --[[ line: 123 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var22 (ref)
 				var22(90)
 			end, { var22 }),

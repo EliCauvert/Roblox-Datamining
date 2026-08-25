@@ -34,7 +34,7 @@ local cacheSlot = require(script.Parent.Parent.cache).cacheSlot
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 185 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	local cache = p0.cache
@@ -55,12 +55,12 @@ function t_1.new(p0) --[[ line: 185 ]]
 	return tbl
 end
 
-function t_1:addResolvers(p1) --[[ line: 206 ]]
+function t_1:addResolvers(p1)
 	-- upvalues: boolean (ref), array (ref), mergeDeep (ref)
 	self.resolvers = if boolean.toJSBoolean(self.resolvers) then self.resolvers else {}
 	
 	if array.isArray(p1) then
-		array.forEach(p1, function(p2) --[[ line: 209 ]]
+		array.forEach(p1, function(p2)
 			-- upvalues: self (ref), mergeDeep (copy)
 			self.resolvers = mergeDeep(self.resolvers, p2)
 		end)
@@ -70,59 +70,59 @@ function t_1:addResolvers(p1) --[[ line: 206 ]]
 	self.resolvers = mergeDeep(self.resolvers, p1)
 end
 
-function t_1:setResolvers(p3) --[[ line: 217 ]]
+function t_1:setResolvers(p3)
 	self.resolvers = {}
 	self:addResolvers(p3)
 end
 
-function t_1:getResolvers() --[[ line: 222 ]]
+function t_1:getResolvers()
 	-- upvalues: boolean (ref)
 	return if boolean.toJSBoolean(self.resolvers) then self.resolvers else {}
 end
 
-function t_1:runResolvers(p4) --[[ line: 230 ]]
+function t_1:runResolvers(p4)
 	-- upvalues: boolean (ref), object (ref), promiseModule (ref)
 	local document = p4.document
 	local remoteResult = p4.remoteResult
 	
-	return if boolean.toJSBoolean(document) then self:resolveDocument(document, remoteResult.data, p4.context, p4.variables, self.fragmentMatcher, if p4.onlyRunForcedResolvers == nil then false else p4.onlyRunForcedResolvers):andThen(function(p5) --[[ line: 251 ]]
+	return if boolean.toJSBoolean(document) then self:resolveDocument(document, remoteResult.data, p4.context, p4.variables, self.fragmentMatcher, if p4.onlyRunForcedResolvers == nil then false else p4.onlyRunForcedResolvers):andThen(function(p5)
 		-- upvalues: object (copy), remoteResult (ref)
 		return object.assign({}, remoteResult, { data = p5.result })
 	end) else promiseModule.resolve(remoteResult)
 end
 
-function t_1:setFragmentMatcher(p6) --[[ line: 259 ]]
+function t_1:setFragmentMatcher(p6)
 	self.fragmentMatcher = p6
 end
 
-function t_1:getFragmentMatcher() --[[ line: 263 ]]
+function t_1:getFragmentMatcher()
 	return self.fragmentMatcher
 end
 
-function t_1:clientQuery(p7) --[[ line: 269 ]]
+function t_1:clientQuery(p7)
 	-- upvalues: hasDirectives (ref), boolean (ref), NULL (ref)
 	return if hasDirectives({ "client" }, p7) and boolean.toJSBoolean(self.resolvers) then p7 else NULL
 end
 
-function t_1.serverQuery(_, p8) --[[ line: 279 ]]
+function t_1.serverQuery(_, p8)
 	-- upvalues: removeClientSetsFromDocument (ref)
 	return removeClientSetsFromDocument(p8)
 end
 
-function t_1:prepareContext(p9) --[[ line: 283 ]]
+function t_1:prepareContext(p9)
 	-- upvalues: object (ref)
 	local cache = self.cache
 	
 	return object.assign({}, p9, {
 		cache = cache,
-		getCacheKey = function(_, p10) --[[ line: 291 ]]
+		getCacheKey = function(_, p10)
 			-- upvalues: cache (ref)
 			return cache:identify(p10)
 		end
 	})
 end
 
-function t_1:addExportedVariables(p11, p12, p13) --[[ line: 300 ]]
+function t_1:addExportedVariables(p11, p12, p13)
 	-- upvalues: boolean (ref), object (ref), promiseModule (ref)
 	if p12 == nil then
 		p12 = {}
@@ -133,7 +133,7 @@ function t_1:addExportedVariables(p11, p12, p13) --[[ line: 300 ]]
 	if boolean.toJSBoolean(p11) then
 		local var7 = self:buildRootValueFromCache(p11, p12)
 		
-		return self:resolveDocument(p11, if boolean.toJSBoolean(var7) then var7 else {}, self:prepareContext(p13), p12):andThen(function(p14) --[[ line: 319 ]]
+		return self:resolveDocument(p11, if boolean.toJSBoolean(var7) then var7 else {}, self:prepareContext(p13), p12):andThen(function(p14)
 			-- upvalues: object (copy), p12 (write)
 			return object.assign({}, p12, p14.exportedVariables)
 		end)
@@ -141,15 +141,15 @@ function t_1:addExportedVariables(p11, p12, p13) --[[ line: 300 ]]
 	return promiseModule.resolve(object.assign({}, p12))
 end
 
-function t_1.shouldForceResolvers(_, p15) --[[ line: 327 ]]
+function t_1.shouldForceResolvers(_, p15)
 	-- upvalues: visit (ref), boolean (ref), array (ref), BREAK (ref)
 	local var8 = false
 	visit(p15, {
 		Directive = {
-			enter = function(_, p16) --[[ line: 331 ]]
+			enter = function(_, p16)
 				-- upvalues: boolean (copy), var8 (write), array (copy), BREAK (copy)
 				if p16.name.value == "client" and boolean.toJSBoolean(p16.arguments) then
-					var8 = array.some(p16.arguments, function(p17) --[[ line: 333 ]]
+					var8 = array.some(p16.arguments, function(p17)
 						return p17.name.value == "always" and (p17.value.kind == "BooleanValue" and p17.value.value == true)
 					end)
 					
@@ -162,7 +162,7 @@ function t_1.shouldForceResolvers(_, p15) --[[ line: 327 ]]
 	return var8
 end
 
-function t_1:buildRootValueFromCache(p18, p19) --[[ line: 350 ]]
+function t_1:buildRootValueFromCache(p18, p19)
 	-- upvalues: buildQueryFromSelectionSet (ref)
 	return self.cache:diff({
 		returnPartialData = true,
@@ -172,7 +172,7 @@ function t_1:buildRootValueFromCache(p18, p19) --[[ line: 350 ]]
 	}).result
 end
 
-function t_1:resolveDocument(p20, p21, p22, p23, p24, p25) --[[ line: 359 ]]
+function t_1:resolveDocument(p20, p21, p22, p23, p24, p25)
 	-- upvalues: getMainDefinition (ref), getFragmentDefinitions (ref), createFragmentMap (ref), boolean (ref), string (ref), object (ref)
 	if p22 == nil then
 		p22 = {}
@@ -181,7 +181,7 @@ function t_1:resolveDocument(p20, p21, p22, p23, p24, p25) --[[ line: 359 ]]
 		p23 = {}
 	end
 	if p24 == nil then
-		p24 = function() --[[ line: 377 ]]
+		p24 = function()
 			return true
 		end
 	end
@@ -200,25 +200,25 @@ function t_1:resolveDocument(p20, p21, p22, p23, p24, p25) --[[ line: 359 ]]
 		onlyRunForcedResolvers = p25
 	}
 	
-	return self:resolveSelectionSet(var9.selectionSet, p21, t):andThen(function(p26) --[[ line: 413 ]]
+	return self:resolveSelectionSet(var9.selectionSet, p21, t):andThen(function(p26)
 		-- upvalues: t (ref)
 		return { result = p26, exportedVariables = t.exportedVariables }
 	end)
 end
 
-function t_1.resolveSelectionSet(value, p27, p28, p29) --[[ line: 418 ]]
+function t_1.resolveSelectionSet(value, p27, p28, p29)
 	-- upvalues: boolean (ref), shouldInclude (ref), promiseModule (ref), isField (ref), resultKeyNameFromField (ref), isInlineFragment (ref), invariant (ref), array (ref), mergeDeepArray (ref)
 	local fragmentMap = p29.fragmentMap
 	local context = p29.context
 	local variables = p29.variables
 	local list = { p28 }
 	
-	return promiseModule.all(array.map(p27.selections, function(p30) --[[ line: 426 | named "execute" ]]
+	return promiseModule.all(array.map(p27.selections, function(p30)
 		-- upvalues: boolean (copy), shouldInclude (copy), variables (ref), promiseModule (copy), isField (copy), value (ref), p28 (ref), p29 (ref), list (ref), resultKeyNameFromField (copy), isInlineFragment (copy), fragmentMap (ref), invariant (copy), context (ref)
 		if not boolean.toJSBoolean(shouldInclude(p30, variables)) then
 			return promiseModule.resolve(nil)
 		elseif isField(p30) then
-			return value:resolveField(p30, p28, p29):andThen(function(p31) --[[ line: 433 ]]
+			return value:resolveField(p30, p28, p29):andThen(function(p31)
 				-- upvalues: list (copy), resultKeyNameFromField (copy), p30 (ref)
 				if typeof(p31) ~= "nil" then
 					table.insert(list, { [resultKeyNameFromField(p30)] = p31 })
@@ -234,17 +234,17 @@ function t_1.resolveSelectionSet(value, p27, p28, p29) --[[ line: 418 ]]
 			var12 = fragmentMap[p30.name.value]
 			invariant(var12, ("No fragment named %s"):format(p30.name.value))
 		end
-		return if var12 and var12.typeCondition ~= nil and boolean.toJSBoolean(p29:fragmentMatcher(p28, var12.typeCondition.name.value, context)) then value:resolveSelectionSet(var12.selectionSet, p28, p29):andThen(function(p32) --[[ line: 454 ]]
+		return if var12 and var12.typeCondition ~= nil and boolean.toJSBoolean(p29:fragmentMatcher(p28, var12.typeCondition.name.value, context)) then value:resolveSelectionSet(var12.selectionSet, p28, p29):andThen(function(p32)
 			-- upvalues: list (copy)
 			table.insert(list, p32)
 		end) else promiseModule.resolve(nil)
-	end)):andThen(function() --[[ line: 462 ]]
+	end)):andThen(function()
 		-- upvalues: mergeDeepArray (copy), list (ref)
 		return mergeDeepArray(list)
 	end)
 end
 
-function t_1:resolveField(p33, p34, p35) --[[ line: 467 ]]
+function t_1:resolveField(p33, p34, p35)
 	-- upvalues: resultKeyNameFromField (ref), boolean (ref), promiseModule (ref), cacheSlot (ref), argumentsObjectFromField (ref), array (ref), NULL (ref)
 	local variables = p35.variables
 	local value = p33.name.value
@@ -269,16 +269,16 @@ function t_1:resolveField(p33, p34, p35) --[[ line: 467 ]]
 			end
 		end
 	end
-	return var16:andThen(function(p36) --[[ line: 512 ]]
+	return var16:andThen(function(p36)
 		-- upvalues: var15 (ref), p33 (ref), array (copy), boolean (copy), p35 (ref), NULL (copy), self (ref)
 		if p36 == nil then
 			p36 = var15
 		end
 		if p33.directives ~= nil then
-			array.forEach(p33.directives, function(p37) --[[ line: 519 ]]
+			array.forEach(p33.directives, function(p37)
 				-- upvalues: boolean (copy), array (copy), p35 (copy), p36 (write)
 				if p37.name.value == "export" and boolean.toJSBoolean(p37.arguments) then
-					array.forEach(p37.arguments, function(p38) --[[ line: 521 ]]
+					array.forEach(p37.arguments, function(p38)
 						-- upvalues: p35 (copy), p36 (copy)
 						if p38.name.value == "as" and p38.value.kind == "StringValue" then
 							p35.exportedVariables[p38.value.value] = p36
@@ -291,9 +291,9 @@ function t_1:resolveField(p33, p34, p35) --[[ line: 467 ]]
 	end)
 end
 
-function t_1.resolveSubSelectedArray(p39, p40, p41, p42) --[[ line: 554 ]]
+function t_1.resolveSubSelectedArray(p39, p40, p41, p42)
 	-- upvalues: promiseModule (ref), array (ref), NULL (ref), boolean (ref)
-	return promiseModule.all(array.map(p41, function(p43) --[[ line: 555 ]]
+	return promiseModule.all(array.map(p41, function(p43)
 		-- upvalues: NULL (copy), array (copy), p39 (ref), p40 (ref), p42 (ref), boolean (copy)
 		return if p43 == NULL then NULL elseif array.isArray(p43) then p39:resolveSubSelectedArray(p40, p43, p42) elseif boolean.toJSBoolean(p40.selectionSet) then p39:resolveSelectionSet(p40.selectionSet, p43, p42) else nil
 	end))

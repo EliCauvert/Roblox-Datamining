@@ -3,7 +3,7 @@ local popoverAlignModule = require(foundation.Enums.PopoverAlign)
 local popoverSideModule = require(foundation.Enums.PopoverSide)
 local _ = require(foundation.Providers.StudioPanels.Types)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 24 | named "getPanelPosition" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: popoverAlignModule (ref), popoverSideModule (ref)
 	local var3 = 0
 	local var4 = 0

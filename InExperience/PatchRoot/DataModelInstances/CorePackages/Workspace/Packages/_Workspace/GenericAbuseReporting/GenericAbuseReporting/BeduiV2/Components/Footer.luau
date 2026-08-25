@@ -13,7 +13,7 @@ local fFlagAbuseReportDensifyResolvedArraysModule = require(genericAbuseReportin
 local fFlagAbuseReportLinkOpenedAnalytics = sharedFlagsModule.FFlagAbuseReportLinkOpenedAnalytics
 local linkOpenedSource = analyticsServiceModule.LinkOpenedSource
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "Footer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDefaultTags (ref), fFlagAbuseReportDensifyResolvedArraysModule (ref), reactModule (ref), textWithTranslationModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), linkOpenedSource (ref), view (ref)
 	local var7 = useDefaultTags(p0.additionalTag, "col gap-small size-full-0 auto-y")
 	

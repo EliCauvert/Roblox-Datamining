@@ -8,9 +8,9 @@ local sendNotificationInfo = coreGuiService:WaitForChild("RobloxGui"):WaitForChi
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local var7 = nil
 
-local function _(p0, p1) --[[ line: 18 | named "LocalizedGetString" ]]
+local function _(p0, p1)
 	-- upvalues: robloxTranslatorModule (ref)
-	pcall(function() --[[ line: 19 ]]
+	pcall(function()
 		-- upvalues: p1 (write), robloxTranslatorModule (copy), p0 (ref)
 		p1 = robloxTranslatorModule:FormatByKey(p0)
 	end)
@@ -18,7 +18,7 @@ local function _(p0, p1) --[[ line: 18 | named "LocalizedGetString" ]]
 	return p1
 end
 
-local function ScrollSelectedElement(_, p2, p3) --[[ line: 25 ]]
+local function ScrollSelectedElement(_, p2, p3)
 	-- upvalues: guiService (ref)
 	if p2 ~= Enum.UserInputState.Begin then
 		return Enum.ContextActionResult.Pass
@@ -62,7 +62,7 @@ local function ScrollSelectedElement(_, p2, p3) --[[ line: 25 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-local function EnableKeyboardNavigation(_, p4, _) --[[ line: 73 ]]
+local function EnableKeyboardNavigation(_, p4, _)
 	-- upvalues: gameSettings (ref), guiService (ref), var7 (write), playersService (ref), robloxTranslatorModule (ref), sendNotificationInfo (ref)
 	if not gameSettings.UiNavigationKeyBindEnabled then
 		return Enum.ContextActionResult.Pass
@@ -82,14 +82,14 @@ local function EnableKeyboardNavigation(_, p4, _) --[[ line: 73 ]]
 	if guiService.SelectedObject then
 		local var14 = nil
 		local var15 = "InGame.NotificationScript2.UINavigation.Title"
-		pcall(function() --[[ line: 19 ]]
+		pcall(function()
 			-- upvalues: var14 (write), robloxTranslatorModule (copy), var15 (ref)
 			p1 = robloxTranslatorModule:FormatByKey(var15)
 		end)
 		local var16 = var14
 		local var17 = nil
 		local var18 = "InGame.NotificationScript2.UINavigation.Text"
-		pcall(function() --[[ line: 19 ]]
+		pcall(function()
 			-- upvalues: var17 (write), robloxTranslatorModule (copy), var18 (ref)
 			p1 = robloxTranslatorModule:FormatByKey(var18)
 		end)
@@ -101,12 +101,12 @@ end
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 116 ]]
+function t.new()
 	-- upvalues: t (ref), contextActionService (ref), EnableKeyboardNavigation (ref), ScrollSelectedElement (ref), gameSettings (ref), guiService (ref)
 	local tbl = setmetatable({}, t)
 	contextActionService:BindAction("EnableKeyboardUINavigation", EnableKeyboardNavigation, false, Enum.KeyCode.BackSlash)
 	contextActionService:BindAction("ScrollSelectedElement", ScrollSelectedElement, false, Enum.KeyCode.PageUp, Enum.KeyCode.PageDown, Enum.KeyCode.Home, Enum.KeyCode.End)
-	gameSettings:GetPropertyChangedSignal("UiNavigationKeyBindEnabled"):Connect(function() --[[ line: 121 ]]
+	gameSettings:GetPropertyChangedSignal("UiNavigationKeyBindEnabled"):Connect(function()
 		-- upvalues: gameSettings (copy), guiService (copy)
 		if not gameSettings.UiNavigationKeyBindEnabled then
 			guiService.SelectedObject = nil

@@ -3,26 +3,26 @@ local players = dependenciesModule.Players
 local llama = dependenciesModule.llama
 local roduxFriends = dependenciesModule.RoduxFriends
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: roduxFriends (ref), players (ref), llama (ref)
-	local function friendshipCreatedWithUser(p1) --[[ line: 10 ]]
+	local function friendshipCreatedWithUser(p1)
 		-- upvalues: roduxFriends (copy), p0 (ref), players (copy)
 		return roduxFriends.Actions.FriendshipCreated(p1.id, p0 or tostring(players.LocalPlayer.UserId))
 	end
 	
 	return {
-		AddUser = function(p2) --[[ line: 15 ]]
+		AddUser = function(p2)
 			-- upvalues: friendshipCreatedWithUser (ref)
 			return if p2.user.isFriend then { friendshipCreatedWithUser(p2.user) } else { p2 }
 		end,
-		AddUsers = function(p3) --[[ line: 23 ]]
+		AddUsers = function(p3)
 			-- upvalues: llama (copy), friendshipCreatedWithUser (ref)
-			return llama.Dictionary.values(llama.Dictionary.map(p3.users, function(p4, _) --[[ line: 24 ]]
+			return llama.Dictionary.values(llama.Dictionary.map(p3.users, function(p4, _)
 				-- upvalues: friendshipCreatedWithUser (copy)
 				return if p4.isFriend then friendshipCreatedWithUser(p4) else nil
 			end))
 		end,
-		SetFriendRequestsCount = function(value) --[[ line: 33 ]]
+		SetFriendRequestsCount = function(value)
 			-- upvalues: roduxFriends (copy)
 			return {
 				roduxFriends.Actions.RequestReceivedCountUpdated(value.count)

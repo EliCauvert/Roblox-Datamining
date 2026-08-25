@@ -26,19 +26,19 @@ local t_3 = {
 }
 
 return {
-	logTwoByOneTileActivated = function() --[[ line: 43 ]]
+	logTwoByOneTileActivated = function()
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogCounter(t, { standardizedFields = list, customFields = {} }, 1)
 	end,
-	logTwoByOneTileCtaActivated = function() --[[ line: 51 ]]
+	logTwoByOneTileCtaActivated = function()
 		-- upvalues: telemetryService (ref), t_1 (ref), list (ref)
 		telemetryService:LogCounter(t_1, { standardizedFields = list, customFields = {} }, 1)
 	end,
-	logTwoByOneTileGameJoinInitiated = function() --[[ line: 59 ]]
+	logTwoByOneTileGameJoinInitiated = function()
 		-- upvalues: telemetryService (ref), t_2 (ref), list (ref)
 		telemetryService:LogCounter(t_2, { standardizedFields = list, customFields = {} }, 1)
 	end,
-	logTwoByOneTileViewGameDetailsActivated = function() --[[ line: 67 ]]
+	logTwoByOneTileViewGameDetailsActivated = function()
 		-- upvalues: telemetryService (ref), t_3 (ref), list (ref)
 		telemetryService:LogCounter(t_3, { standardizedFields = list, customFields = {} }, 1)
 	end

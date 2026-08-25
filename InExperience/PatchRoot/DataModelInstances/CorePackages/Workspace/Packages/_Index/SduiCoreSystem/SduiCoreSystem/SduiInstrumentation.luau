@@ -6,7 +6,7 @@ local var2 = math.random(10000) <= game:DefineFastInt("DiscoverySduiInstrumentat
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 43 ]]
+function t.new(p0, p1)
 	-- upvalues: var2 (ref), t (ref)
 	local t_1 = {
 		startTime = 0,
@@ -22,7 +22,7 @@ function t.new(p0, p1) --[[ line: 43 ]]
 	return t_1
 end
 
-function t:startTimerFlow(p2) --[[ line: 57 ]]
+function t:startTimerFlow(p2)
 	if not self.enabled then return end
 	local var5 = 1000 * os.clock()
 	
@@ -43,7 +43,7 @@ function t:startTimerFlow(p2) --[[ line: 57 ]]
 	var6.openCount += 1
 end
 
-function t:stopTimerFlow(p3, p4, p5) --[[ line: 90 ]]
+function t:stopTimerFlow(p3, p4, p5)
 	-- upvalues: sduiErrorsModule (ref), discoveryAppLaunchTracker (ref)
 	if not self.enabled then return end
 	self.openTimerCount -= 1
@@ -84,7 +84,7 @@ function t:stopTimerFlow(p3, p4, p5) --[[ line: 90 ]]
 	end
 end
 
-function t:aggregateClosedTimer(p6, p7, p8, p9) --[[ line: 137 ]]
+function t:aggregateClosedTimer(p6, p7, p8, p9)
 	local var10 = self.closedTimers[p6]
 	
 	if var10 then
@@ -97,9 +97,9 @@ function t:aggregateClosedTimer(p6, p7, p8, p9) --[[ line: 137 ]]
 	self.closedTimers[p6] = { failed = p8, count = p7, durationMs = p9 }
 end
 
-function t:scheduleFlush(p10) --[[ line: 158 ]]
+function t:scheduleFlush(p10)
 	if self.enabled and not self.isFlushScheduled then
-		task.delay(self.flushDelay, function() --[[ line: 160 ]]
+		task.delay(self.flushDelay, function()
 			-- upvalues: self (ref), p10 (ref)
 			self.isFlushScheduled = false
 			self:reportTimers(p10)
@@ -108,7 +108,7 @@ function t:scheduleFlush(p10) --[[ line: 158 ]]
 	end
 end
 
-function t:reportTimers(p11) --[[ line: 168 ]]
+function t:reportTimers(p11)
 	if self.enabled then
 		p11.dependencies.logger.reportTimers(self.closedTimers, p11.appPage)
 		self.closedTimers = {}

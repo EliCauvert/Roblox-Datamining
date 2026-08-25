@@ -10,14 +10,14 @@ local recommendationDestroyedModule = require(actions.RecommendationDestroyed)
 local _ = require(parent.roduxFriendsTypes)
 local t = {}
 
-local _ = function(p0, p1) --[[ line: 18 ]]
+local _ = function(p0, p1)
 	-- upvalues: llamaModule (ref)
 	local baseUserId = p1[p0.baseUserId]
 	
 	return if baseUserId then llamaModule.Dictionary.removeKey(baseUserId, p0.recommendedUserId) else nil
 end
 
-local var7 = function(p2, p3) --[[ line: 27 ]]
+local var7 = function(p2, p3)
 	-- upvalues: llamaModule (ref)
 	local join = llamaModule.Dictionary.join
 	local t = {}
@@ -33,10 +33,10 @@ local var7 = function(p2, p3) --[[ line: 27 ]]
 	return join(p3, t)
 end
 
-local _ = function(p4, p5) --[[ line: 40 ]]
+local _ = function(p4, p5)
 	-- upvalues: llamaModule (ref), var7 (ref)
 	local var11 = p5
-	llamaModule.Dictionary.map(p4.users, function(p6) --[[ line: 43 ]]
+	llamaModule.Dictionary.map(p4.users, function(p6)
 		-- upvalues: var11 (write), var7 (copy), p4 (ref)
 		var11 = var7({ userId1 = p4.baseFriendId, userId2 = tostring(p6.id) }, var11)
 	end)
@@ -44,12 +44,12 @@ local _ = function(p4, p5) --[[ line: 40 ]]
 	return var11
 end
 
-return function(p7) --[[ line: 53 ]]
+return function(p7)
 	-- upvalues: roduxModule (ref), t (ref), recommendationCreatedModule (ref), llamaModule (ref), recommendationModule (ref), recommendationDestroyedModule (ref), friendshipCreatedModule (ref), var7 (ref)
 	local friendsNetworking = p7.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[recommendationCreatedModule.name] = function(p8, p9) --[[ line: 58 ]]
+		[recommendationCreatedModule.name] = function(p8, p9)
 			-- upvalues: llamaModule (copy), recommendationModule (copy)
 			local var12 = tostring(p9.payload.baseUserId)
 			
@@ -59,7 +59,7 @@ return function(p7) --[[ line: 53 ]]
 				})
 			})
 		end,
-		[recommendationDestroyedModule.name] = function(p10, p11) --[[ line: 75 ]]
+		[recommendationDestroyedModule.name] = function(p10, p11)
 			-- upvalues: llamaModule (copy)
 			local join = llamaModule.Dictionary.join
 			local t = {}
@@ -70,12 +70,12 @@ return function(p7) --[[ line: 53 ]]
 			
 			return join(p10, t)
 		end,
-		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p12, p13) --[[ line: 84 ]]
+		[friendsNetworking.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p12, p13)
 			-- upvalues: llamaModule (copy), recommendationModule (copy)
 			local var14 = tostring(p13.namedIds.users)
 			
 			return llamaModule.Dictionary.join(p12, {
-				[var14] = llamaModule.Dictionary.join(p12[var14] or {}, llamaModule.Dictionary.map(p13.responseBody.data, function(p14, _) --[[ line: 91 ]]
+				[var14] = llamaModule.Dictionary.join(p12[var14] or {}, llamaModule.Dictionary.map(p13.responseBody.data, function(p14, _)
 					-- upvalues: recommendationModule (copy)
 					local var15 = if p14.contextType == "Contacts" then p14.contactId else tostring(p14.id)
 					
@@ -91,32 +91,32 @@ return function(p7) --[[ line: 53 ]]
 				end))
 			})
 		end,
-		[friendshipCreatedModule.name] = function(p15, p16) --[[ line: 113 ]]
+		[friendshipCreatedModule.name] = function(p15, p16)
 			-- upvalues: var7 (copy)
 			return var7(p16.payload, p15)
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p17, p18) --[[ line: 120 ]]
+		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p17, p18)
 			-- upvalues: llamaModule (copy), var7 (copy)
 			local t = {
 				baseFriendId = tostring(p18.namedIds.users),
 				users = p18.responseBody.data
 			}
 			local var17 = p17
-			llamaModule.Dictionary.map(t.users, function(p19) --[[ line: 43 ]]
+			llamaModule.Dictionary.map(t.users, function(p19)
 				-- upvalues: var17 (write), var7 (copy), t (ref)
 				var17 = var7({ userId1 = t.baseFriendId, userId2 = tostring(p19.id) }, var17)
 			end)
 			
 			return var17
 		end,
-		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p20, p21) --[[ line: 130 ]]
+		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p20, p21)
 			-- upvalues: var7 (copy)
 			return var7({
 				userId1 = tostring(p21.additionalData.currentUserId),
 				userId2 = tostring(p21.ids[1])
 			}, p20)
 		end,
-		[p7.networkingBlocking.BlockUserById.Succeeded.name] = function(p22, p23) --[[ line: 143 ]]
+		[p7.networkingBlocking.BlockUserById.Succeeded.name] = function(p22, p23)
 			-- upvalues: var7 (copy)
 			return var7({
 				userId1 = tostring(p23.additionalData.currentUserId),

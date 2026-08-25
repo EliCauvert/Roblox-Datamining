@@ -31,8 +31,8 @@ local conversationModalModule = require(script.Parent.ConversationModal.Conversa
 local conversationBannerDeprecatedModule = require(script.Parent.ConversationBanner.ConversationBannerDeprecated)
 local t = {
 	conversation = {},
-	navigateToScreen = function(...) --[[ line: 50 ]] end,
-	setModalHeight = function(_) --[[ line: 51 ]] end
+	navigateToScreen = function(...) end,
+	setModalHeight = function(_) end
 }
 local t_1 = {
 	conversation_banner_group_phone_verification = true,
@@ -49,7 +49,7 @@ local t_2 = {
 	conversation_banner_learn_more = "ConversationLearnMoreBanner"
 }
 
-return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useAnalyticsModule (ref), useDispatch (ref), useRef (ref), useEffect (ref), useSelector (ref), getDeepValue2Module (ref), useConversationTopModalModule (ref), t_2 (ref), t_1 (ref), useCallback (ref), eventNamesModule (ref), appChatNetworkingModule (ref), dismissedConversationTopModalModule (ref), appPage (ref), unfilteredThreadsAMPFeatureNameModule (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateBack (ref), accessResponseEnum (ref), refreshAllUnfilteredThreadsDetailsModule (ref), navigateDown (ref), createUnfilteredChatPartialModal (ref), learnMorePartialModal (ref), reactModule (ref), conversationBannerDeprecatedModule (ref), conversationModalModule (ref), foundationModule (ref)
 	local var19 = cryoModule.Dictionary.union(t, p0)
 	local var20 = useStyle()
@@ -57,20 +57,20 @@ return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]
 	local var22 = useDispatch()
 	local size1000 = var20.Tokens.Size.Size_1000
 	local var23 = useRef(var19.setModalHeight)
-	useEffect(function() --[[ line: 80 ]]
+	useEffect(function()
 		-- upvalues: var23 (ref), var19 (ref)
 		var23.current = var19.setModalHeight
 	end, { var19.setModalHeight })
-	useEffect(function() --[[ line: 83 ]]
+	useEffect(function()
 		-- upvalues: var23 (ref)
-		return function() --[[ line: 84 ]]
+		return function()
 			-- upvalues: var23 (copy)
 			if var23.current then
 				var23.current(0)
 			end
 		end
 	end, {})
-	local var24 = useSelector(function(p1) --[[ line: 91 ]]
+	local var24 = useSelector(function(p1)
 		-- upvalues: getDeepValue2Module (copy), var19 (ref)
 		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationTopModalsDismissed.{var19.conversation.id}`) or {}
 	end)
@@ -84,15 +84,15 @@ return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]
 	local var31 = getDeepValue2Module(id, "modal_layout.buttons")
 	local var32 = var31 and var31[1]
 	local var33 = var31 and var31[2]
-	local var34 = useCallback(function() --[[ line: 107 ]]
+	local var34 = useCallback(function()
 		-- upvalues: var21 (ref), var29 (ref), eventNamesModule (copy), var19 (ref)
 		if var21 and var29 then
 			var21.fireAnalyticsEvent(eventNamesModule[`{var29}ActionClicked`], { conversationId = var19.conversation.id })
 		end
 	end, { var21, var29, var19.conversation.id })
-	local var35 = useCallback(function() --[[ line: 115 ]]
+	local var35 = useCallback(function()
 		-- upvalues: var22 (ref), appChatNetworkingModule (copy), var28 (ref), var26 (ref), dismissedConversationTopModalModule (copy), var19 (ref), modalVariant (ref)
-		var22(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var28, "conversation_top_modal", var26)):catch(function(p2) --[[ line: 122 ]]
+		var22(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var28, "conversation_top_modal", var26)):catch(function(p2)
 			warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse dismissed: " .. tostring(p2))
 		end)
 		var22(dismissedConversationTopModalModule(var19.conversation.id, modalVariant))
@@ -103,14 +103,14 @@ return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]
 		var26,
 		var19.conversation.id
 	})
-	local var36 = useCallback(function() --[[ line: 127 ]]
+	local var36 = useCallback(function()
 		-- upvalues: var34 (ref), appPage (copy), unfilteredThreadsAMPFeatureNameModule (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var22 (ref), navigateBack (copy), accessResponseEnum (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var19 (ref), navigateDown (copy)
 		var34()
 		local t = {
 			name = appPage.AmpWizardContainer,
 			extraProps = {
 				featureName = unfilteredThreadsAMPFeatureNameModule,
-				completionCallback = function(p3, _) --[[ line: 133 ]]
+				completionCallback = function(p3, _)
 					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var11 (copy), var22 (copy), navigateBack (copy), accessResponseEnum (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var19 (copy)
 					if fFlagSignalsNavP3Dispatch then
 						var11.back(true)
@@ -131,20 +131,20 @@ return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]
 		end
 		var22(navigateDown(t))
 	end, { var34, var22, var19.conversation.id })
-	local var37 = useCallback(function() --[[ line: 153 ]]
+	local var37 = useCallback(function()
 		-- upvalues: var34 (ref), var19 (ref), createUnfilteredChatPartialModal (copy)
 		var34()
 		var19.navigateToScreen(createUnfilteredChatPartialModal, {}, true)
 	end, { var19.navigateToScreen, var34 })
-	local var38 = useCallback(function() --[[ line: 157 ]]
+	local var38 = useCallback(function()
 		-- upvalues: var34 (ref), var19 (ref), learnMorePartialModal (copy)
 		var34()
 		var19.navigateToScreen(learnMorePartialModal, {}, true)
 	end, { var19.navigateToScreen, var34 })
-	useEffect(function() --[[ line: 163 ]]
+	useEffect(function()
 		-- upvalues: var30 (ref), var22 (ref), appChatNetworkingModule (copy), var27 (ref), var26 (ref)
 		if var30 then
-			var22(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var27, "conversation_top_modal", var26)):catch(function(p4) --[[ line: 171 ]]
+			var22(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var27, "conversation_top_modal", var26)):catch(function(p4)
 				warn("Error in ConversationTopModalContainer -> RecordModalSequenceResponse seen: " .. tostring(p4))
 			end)
 		end
@@ -155,7 +155,7 @@ return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]
 		var26,
 		var19.conversation.id
 	})
-	useEffect(function() --[[ line: 188 ]]
+	useEffect(function()
 		-- upvalues: var30 (ref), var21 (ref), var29 (ref), eventNamesModule (copy), var19 (ref)
 		if var30 and var21 and var29 then
 			var21.fireAnalyticsEvent(eventNamesModule[`{var29}Rendered`], { conversationId = var19.conversation.id })
@@ -194,7 +194,7 @@ return memo(function(p0) --[[ line: 71 | named "ConversationTopModalContainer" ]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		LayoutOrder = var19.layoutOrder,
-		onAbsoluteSizeChanged = function(value) --[[ line: 242 ]]
+		onAbsoluteSizeChanged = function(value)
 			-- upvalues: var19 (ref)
 			var19.setModalHeight(value.AbsoluteSize.Y)
 		end

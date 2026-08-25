@@ -12,7 +12,7 @@ local sduiMarketplaceItemImpressionsHandlerModule = require(serverDrivenUi.Impre
 local marketplaceUnifiedItemType = unifiedEventLogEnums.MarketplaceUnifiedItemType
 local tbl = setmetatable({}, { __mode = "k" })
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 46 | named "SduiDevStoreSeeAllImpressionsHandler" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: findAnalyticsFieldInAncestors (ref), marketplaceUnifiedItemType (ref), sduiMarketplaceItemImpressionsHandlerModule (ref), sduiLogger (ref), sduiErrors (ref), tbl (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
 	if #p1 == 0 then return end
 	local t = { analyticsData = p3 }

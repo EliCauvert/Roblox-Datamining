@@ -5,12 +5,12 @@ sortedList.defaultProps = {
 	entryHeight = 48,
 	LayoutOrder = 0,
 	entries = {},
-	sortComparator = function(_, _) --[[ line: 12 ]]
+	sortComparator = function(_, _)
 		return true
 	end
 }
 
-function sortedList.sortEntries(p0) --[[ line: 19 ]]
+function sortedList.sortEntries(p0)
 	local t = {}
 	
 	for i, v in pairs(p0.props.entries) do
@@ -21,7 +21,7 @@ function sortedList.sortEntries(p0) --[[ line: 19 ]]
 	return t
 end
 
-function sortedList.render(p1) --[[ line: 31 ]]
+function sortedList.render(p1)
 	-- upvalues: roact (ref)
 	local var2 = p1:sortEntries()
 	local t = {

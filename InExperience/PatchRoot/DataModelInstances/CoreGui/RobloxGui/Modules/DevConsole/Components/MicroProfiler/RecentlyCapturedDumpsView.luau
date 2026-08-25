@@ -5,7 +5,7 @@ local roactModule = require(corePackagesService.Packages.Roact)
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local recentlyCapturedDumpsView = roactModule.Component:extend("RecentlyCapturedDumpsView")
 
-function recentlyCapturedDumpsView.render(p0) --[[ line: 11 ]]
+function recentlyCapturedDumpsView.render(p0)
 	-- upvalues: roactModule (ref), constantsModule (ref), microProfilerPanelModule (ref)
 	local _ = p0.props.RecentDumpPaths or {}
 	local t = {}
@@ -55,6 +55,6 @@ function recentlyCapturedDumpsView.render(p0) --[[ line: 11 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p1, _) --[[ line: 67 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p1, _)
 	return { RecentDumpPaths = p1.MicroProfiler.recentDumpPaths }
 end, nil)(recentlyCapturedDumpsView)

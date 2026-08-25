@@ -15,7 +15,7 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-local function AmountLine(p0) --[[ line: 23 ]]
+local function AmountLine(p0)
 	-- upvalues: numberLocalization (ref), localizationService (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref)
 	local var6 = if p0.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
 	
@@ -39,7 +39,7 @@ local function AmountLine(p0) --[[ line: 23 ]]
 	})
 end
 
-return function(p1) --[[ line: 64 | named "RecentActivityInsufficientRobuxDialog" ]]
+return function(p1)
 	-- upvalues: useLocalization (ref), useOpenRobuxUpsellModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), AmountLine (ref), orientation (ref), buttonVariant (ref)
 	local totalPrice = p1.totalPrice
 	local robuxBalance = p1.robuxBalance

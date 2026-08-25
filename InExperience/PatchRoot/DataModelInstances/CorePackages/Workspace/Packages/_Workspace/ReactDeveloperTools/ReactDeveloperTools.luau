@@ -5,7 +5,7 @@ local debugLuaAppReactDevToolsHost = game:DefineFastString("DebugLuaAppReactDevT
 local debugLuaAppReactDevToolsPort = game:DefineFastInt("DebugLuaAppReactDevToolsPort", 8097)
 
 return {
-	startup = function(p0) --[[ line: 9 ]]
+	startup = function(p0)
 		-- upvalues: debugLuaAppEnableReactDevTools (ref), parent (ref), debugLuaAppReactDevToolsHost (ref), debugLuaAppReactDevToolsPort (ref), debugLuaAppsReactDevToolsProfileOnStart (ref)
 		if debugLuaAppEnableReactDevTools or p0 then
 			_G.__PROFILE__ = true

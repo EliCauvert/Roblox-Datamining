@@ -5,13 +5,13 @@ local guiService = wrappersModule.Services.GuiService
 local userInputService = wrappersModule.Services.UserInputService
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 11 | named "useKeyboardAwareSize" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), userInputService (ref), guiService (ref)
 	local var3, var4 = reactModule.useBinding(UDim2.fromScale(1, 1))
-	reactModule.useLayoutEffect(function() --[[ line: 14 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: p0 (ref), userInputService (copy), var4 (ref), guiService (copy), var3 (ref)
 		if p0 then
-			local function updateSafeAreaSize() --[[ line: 19 ]]
+			local function updateSafeAreaSize()
 				-- upvalues: userInputService (copy), var4 (copy), guiService (copy), p0 (copy), var3 (copy)
 				if not userInputService.OnScreenKeyboardVisible then
 					var4(UDim2.fromScale(1, 1))
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 11 | named "useKeyboardAwareSize" ]]
 			local var7 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardPosition"):Connect(updateSafeAreaSize)
 			local var8 = p0:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSafeAreaSize)
 			
-			return function() --[[ line: 48 ]]
+			return function()
 				-- upvalues: var6 (ref), var7 (ref), var8 (ref)
 				var6:Disconnect()
 				var7:Disconnect()

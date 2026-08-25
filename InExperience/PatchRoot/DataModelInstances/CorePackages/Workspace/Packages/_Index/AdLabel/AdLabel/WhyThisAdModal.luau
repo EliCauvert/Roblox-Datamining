@@ -15,7 +15,7 @@ local fStringLuaAppAdPreferencesUrl = require(parent_1.SharedFlags).FStringLuaAp
 local getFFlagEnableUnifiedWebViews = require(parent_1.SharedFlags).GetFFlagEnableUnifiedWebViews
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "WhyThisAdModal" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), dialog (ref), view (ref), text (ref), adDisclosureTelemetryModule (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), fStringLuaAppAdPreferencesUrl (ref), httpService (ref), browserService (ref)
 	local var7 = useLocalization({
 		whyThisAd = "Feature.GameDetails.Label.WhyThisAd",
@@ -38,13 +38,13 @@ return reactModule.memo(function(p0) --[[ line: 26 | named "WhyThisAdModal" ]]
 					Text = var7.adPreferences,
 					textStyle = var8.Color.Content.Link,
 					fontStyle = var8.Typography.BodyMedium,
-					onActivated = function() --[[ line: 57 ]]
+					onActivated = function()
 						-- upvalues: adDisclosureTelemetryModule (copy), getFFlagEnableUnifiedWebViews (copy), webViewService (copy), fStringLuaAppAdPreferencesUrl (copy), var7 (ref), httpService (copy), browserService (copy)
 						adDisclosureTelemetryModule.logAdPreferencesLinkClicked()
 						
 						if getFFlagEnableUnifiedWebViews() then
 							local onWindowClosedConnection = nil
-							onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function() --[[ line: 62 ]]
+							onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
 								-- upvalues: webViewService (copy), onWindowClosedConnection (write)
 								webViewService:CloseWindow()
 								

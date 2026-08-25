@@ -5,7 +5,7 @@ local roduxUsersModule = require(script.Parent.RoduxUsers)
 local t = { byUserId = {}, byUsername = {} }
 local var2 = roduxUsersModule.installReducer()
 
-return function() --[[ line: 14 ]]
+return function()
 	-- upvalues: convertActions (ref), var2 (ref), usersActionAdaptor (ref), roduxUsersModule (ref), t (ref)
 	return convertActions(var2, usersActionAdaptor(roduxUsersModule), t)
 end

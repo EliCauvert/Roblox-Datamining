@@ -6,7 +6,7 @@ local subPages = enumsModule.SubPages
 local pages = enumsModule.Pages
 local btnValuesModule = require(script.Parent.BtnValues)
 
-local var3 = function(p0) --[[ line: 10 ]]
+local var3 = function(p0)
 	return tostring(p0)
 end
 

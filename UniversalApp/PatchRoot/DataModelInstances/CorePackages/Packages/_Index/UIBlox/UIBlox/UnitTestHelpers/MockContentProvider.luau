@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 38 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, { __index = t })
@@ -13,20 +13,20 @@ function t.new(p0) --[[ line: 38 ]]
 	return t_1
 end
 
-function t:Fire(p1) --[[ line: 50 ]]
+function t:Fire(p1)
 	if self.connected then
 		self.callback(p1)
 	end
 end
 
-function t:Disconnect() --[[ line: 56 ]]
+function t:Disconnect()
 	self.connected = false
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 65 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref)
 	local t = {}
 	setmetatable(t, { __index = t_1 })
@@ -35,7 +35,7 @@ function t_1.new() --[[ line: 65 ]]
 	return t
 end
 
-function t_1:Connect(p2) --[[ line: 75 ]]
+function t_1:Connect(p2)
 	-- upvalues: t (ref)
 	local var6 = t.new(p2)
 	table.insert(self.connections, var6)
@@ -43,7 +43,7 @@ function t_1:Connect(p2) --[[ line: 75 ]]
 	return var6
 end
 
-function t_1:Fire(p3) --[[ line: 81 ]]
+function t_1:Fire(p3)
 	for i, v in self.connections do
 		v:Fire(p3)
 	end
@@ -52,7 +52,7 @@ end
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p4, p5, p6) --[[ line: 92 ]]
+function t_2.new(p4, p5, p6)
 	-- upvalues: t_2 (ref)
 	local t = {}
 	setmetatable(t, { __index = t_2 })
@@ -69,20 +69,20 @@ function t_2.new(p4, p5, p6) --[[ line: 92 ]]
 	return t
 end
 
-function t_2:mockReload(p7, p8) --[[ line: 114 ]]
+function t_2:mockReload(p7, p8)
 	self.mockContentProviderProceedWithLoad = false
 	self:_staggeredProgress(nil, p7, p8 or Enum.AssetFetchStatus.Success)
 end
 
-function t_2:proceedWithLoad() --[[ line: 120 ]]
+function t_2:proceedWithLoad()
 	-- upvalues: roactModule (ref)
 	self.mockContentProviderProceedWithLoad = true
-	roactModule.act(function() --[[ line: 122 ]]
+	roactModule.act(function()
 		task.wait(0.1)
 	end)
 end
 
-function t_2:_setAssetFetchStatus(p9, p10) --[[ line: 127 ]]
+function t_2:_setAssetFetchStatus(p9, p10)
 	self.assetFetchStatuses[p9] = p10
 	
 	if self.signals[p9] then
@@ -90,9 +90,9 @@ function t_2:_setAssetFetchStatus(p9, p10) --[[ line: 127 ]]
 	end
 end
 
-function t_2:_staggeredProgress(p11, p12, p13) --[[ line: 134 ]]
+function t_2:_staggeredProgress(p11, p12, p13)
 	self.contentResolved = false
-	task.spawn(function() --[[ line: 137 ]]
+	task.spawn(function()
 		-- upvalues: self (ref), p12 (ref), p11 (ref), p13 (ref)
 		while true do
 			if not self.mockContentProviderProceedWithLoad then
@@ -118,23 +118,23 @@ function t_2:_staggeredProgress(p11, p12, p13) --[[ line: 134 ]]
 	end)
 end
 
-function t_2._makeMockSignal(_) --[[ line: 161 ]]
+function t_2._makeMockSignal(_)
 	-- upvalues: t_1 (ref)
 	return t_1.new()
 end
 
-function t_2:GetAssetFetchStatusChangedSignal(p14) --[[ line: 166 ]]
+function t_2:GetAssetFetchStatusChangedSignal(p14)
 	if self.signals[p14] == nil then
 		self.signals[p14] = self:_makeMockSignal()
 	end
 	return self.signals[p14]
 end
 
-function t_2:GetAssetFetchStatus(p15) --[[ line: 173 ]]
+function t_2:GetAssetFetchStatus(p15)
 	return if self.assetFetchStatuses[p15] == nil then Enum.AssetFetchStatus.None else self.assetFetchStatuses[p15]
 end
 
-function t_2:PreloadAsync(p16, p17) --[[ line: 181 ]]
+function t_2:PreloadAsync(p16, p17)
 	self.preloadAsyncCalled = true
 	
 	for i, v in ipairs(p16) do
@@ -145,7 +145,7 @@ function t_2:PreloadAsync(p16, p17) --[[ line: 181 ]]
 		elseif self.ultimatelyFailedContentIds[v] then
 			self:_staggeredProgress(p17, v, Enum.AssetFetchStatus.Failure)
 		else
-			task.delay(0, function() --[[ line: 191 ]]
+			task.delay(0, function()
 				-- upvalues: self (ref), v (ref), p17 (ref)
 				self:_setAssetFetchStatus(v, Enum.AssetFetchStatus.Success)
 				

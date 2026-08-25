@@ -14,12 +14,12 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local useTokens = foundationModule.Hooks.useTokens
 local name = expChatSharedModule.Logger:new(script.Name)
 
-return function(p0) --[[ line: 73 | named "FriendsChatConversationHeaderBar" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), name (ref), resolveFadeModule (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), friendsChatFacePileModule (ref)
 	local var8 = useTokens()
 	local var9 = useChatWindowSettingsModule()
 	local chatWindowSettings = p0.chatWindowSettings
-	local var10 = useInterpolatedClientSettingsModule(chatWindowSettings or reactModule.useMemo(function() --[[ line: 76 ]]
+	local var10 = useInterpolatedClientSettingsModule(chatWindowSettings or reactModule.useMemo(function()
 		-- upvalues: var9 (ref)
 		return {
 			BackgroundColor3 = var9.ChatWindowBackgroundColor3,
@@ -27,7 +27,7 @@ return function(p0) --[[ line: 73 | named "FriendsChatConversationHeaderBar" ]]
 		}
 	end, { var9 }))
 	local var11 = if chatWindowSettings then chatWindowSettings.FontFace else nil
-	local var12 = reactModule.useMemo(function() --[[ line: 94 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref), var8 (ref)
 		if var11 == nil then
 			return nil
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 73 | named "FriendsChatConversationHeaderBar" ]]
 		return { title = cloned }
 	end, { var8, var11 })
 	local onBack = p0.onBack
-	local var13 = reactModule.useCallback(function() --[[ line: 112 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: name (copy), onBack (ref)
 		name:info("Back button activated")
 		
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 73 | named "FriendsChatConversationHeaderBar" ]]
 		end
 	end, { onBack })
 	local var14 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 120 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), p0 (ref)
 		local current = var14.current
 		

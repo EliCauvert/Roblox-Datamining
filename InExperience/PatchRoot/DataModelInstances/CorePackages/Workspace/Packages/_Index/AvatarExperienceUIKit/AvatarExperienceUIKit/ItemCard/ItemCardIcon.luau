@@ -5,7 +5,7 @@ local icon = foundationModule.Icon
 local useTokens = foundationModule.Hooks.useTokens
 local iconSize = foundationModule.Enums.IconSize
 
-local function ItemCardIcon(p0) --[[ line: 11 ]]
+local function ItemCardIcon(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), icon (ref), iconSize (ref)
 	return reactModule.createElement(icon, {
 		name = p0.icon,

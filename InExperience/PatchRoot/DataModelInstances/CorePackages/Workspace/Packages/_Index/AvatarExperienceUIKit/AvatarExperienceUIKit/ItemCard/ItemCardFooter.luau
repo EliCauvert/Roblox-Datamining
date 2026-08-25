@@ -6,7 +6,7 @@ local itemCardCreatorNameModule = require(script.Parent.ItemCardCreatorName)
 local itemCardTitleModule = require(script.Parent.ItemCardTitle)
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-local function ItemCardFooter(p0) --[[ line: 27 ]]
+local function ItemCardFooter(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), itemCardTitleModule (ref), fFlagAXAddTextXAlignmentProp (ref), itemCardCreatorNameModule (ref), itemCardPriceLineModule (ref)
 	local var5 = useTokens()
 	

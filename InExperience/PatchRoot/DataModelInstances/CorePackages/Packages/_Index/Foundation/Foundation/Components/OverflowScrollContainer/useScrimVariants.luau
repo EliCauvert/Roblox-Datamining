@@ -24,7 +24,7 @@ local numberSequence_3 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function variantsFactory(p0) --[[ line: 46 ]]
+local function variantsFactory(p0)
 	-- upvalues: numberSequence_3 (ref), numberSequence_2 (ref), numberSequence_1 (ref), numberSequence (ref), getBuilderIconForKeycodeModule (ref), icon (ref)
 	return {
 		fade = p0.Size.Size_1000,
@@ -51,7 +51,7 @@ local function variantsFactory(p0) --[[ line: 46 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ line: 90 ]]
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref)
 	local overflowScrollContainerScrim = variantsContextModule.useVariants("OverflowScrollContainerScrim", variantsFactory, p1)
 	

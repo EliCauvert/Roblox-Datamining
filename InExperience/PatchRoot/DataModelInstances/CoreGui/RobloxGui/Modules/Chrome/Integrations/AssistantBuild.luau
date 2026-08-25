@@ -7,7 +7,7 @@ local buildExperienceModule = require(corePackagesService.Workspace.Packages.Bui
 local serviceModule = require(chrome.Service)
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function _() --[[ line: 14 | named "canShowAssistantBuild" ]]
+local function _()
 	-- upvalues: buildExperienceModule (ref), VRService (ref)
 	return buildExperienceModule.BuildModeLaunch:hasBuildMode() and not VRService.VREnabled
 end
@@ -16,7 +16,7 @@ return serviceModule:register({
 	id = "assistant_build",
 	label = "CommonUI.Features.NavBar.Build",
 	initialAvailability = if buildExperienceModule.BuildModeLaunch:hasBuildMode() and not VRService.VREnabled then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
-	activated = function(_) --[[ line: 24 ]]
+	activated = function(_)
 		-- upvalues: buildExperienceModule (ref)
 		local assistantBuildStore = buildExperienceModule.GetAssistantBuildStore()
 		local playButtonStore = buildExperienceModule.GetPlayButtonStore()
@@ -30,7 +30,7 @@ return serviceModule:register({
 		playButtonStore.setIsActive(true)
 	end,
 	components = {
-		Icon = function(_) --[[ line: 35 ]]
+		Icon = function(_)
 			-- upvalues: reactModule (ref), buildExperienceModule (ref), buttonVariant (ref)
 			return reactModule.createElement(buildExperienceModule.AssistantBuild, { variant = buttonVariant.Utility })
 		end

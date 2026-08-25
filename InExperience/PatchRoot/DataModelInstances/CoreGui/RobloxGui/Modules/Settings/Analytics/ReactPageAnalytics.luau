@@ -23,12 +23,12 @@ t.configs = {
 	}
 }
 
-function t.new() --[[ line: 52 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({}, t)
 end
 
-function t._logEventWithStandardizedFields(_, p0, p1, p2) --[[ line: 57 ]]
+function t._logEventWithStandardizedFields(_, p0, p1, p2)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 	local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 	p2 = p2 or {}
@@ -45,11 +45,11 @@ function t._logEventWithStandardizedFields(_, p0, p1, p2) --[[ line: 57 ]]
 	})
 end
 
-function t:openPage(p3) --[[ line: 74 ]]
+function t:openPage(p3)
 	self:_logEventWithStandardizedFields(self.configs.openPage, `open_{p3}_page`)
 end
 
-function t:closePage(p4) --[[ line: 79 ]]
+function t:closePage(p4)
 	self:_logEventWithStandardizedFields(self.configs.closePage, `close_{p4}_page`)
 end
 

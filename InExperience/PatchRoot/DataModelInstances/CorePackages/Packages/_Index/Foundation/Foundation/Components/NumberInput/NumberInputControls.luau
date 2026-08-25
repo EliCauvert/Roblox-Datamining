@@ -22,7 +22,7 @@ local _ = require(foundation.Enums.InputVariant)
 local numberInputControlsVariantModule = require(foundation.Enums.NumberInputControlsVariant)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 
-local var17 = function(p0) --[[ line: 69 ]]
+local var17 = function(p0)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), reactIsModule (ref), mapBindableModule (ref)
 	local var22 = useTokensModule()
 	local uDim = UDim.new(0, var22.Radius.Medium)
@@ -31,11 +31,11 @@ local var17 = function(p0) --[[ line: 69 ]]
 		onActivated = p0.onActivated,
 		isDisabled = if reactIsModule.isBinding(p0.isDisabled) then false else p0.isDisabled,
 		selection = {
-			Selectable = mapBindableModule(p0.isDisabled, function(p1) --[[ line: 87 ]]
+			Selectable = mapBindableModule(p0.isDisabled, function(p1)
 				return not p1
 			end)
 		},
-		cursor = reactModule.useMemo(function() --[[ line: 73 ]]
+		cursor = reactModule.useMemo(function()
 			-- upvalues: uDim (ref), var22 (ref)
 			return {
 				radius = uDim,
@@ -49,18 +49,18 @@ local var17 = function(p0) --[[ line: 69 ]]
 	}), p0.children)
 end
 
-local function SplitControls(p2) --[[ line: 101 ]]
+local function SplitControls(p2)
 	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), useTextInputVariantsModule (ref), reactModule (ref), mapBindableModule (ref), blendTransparenciesModule (ref), constantsModule (ref), viewModule (ref), reactIsModule (ref), stateLayerAffordanceModule (ref), iconModule (ref), builderIconsModule (ref)
 	local var24 = useTokensModule()
 	local var25 = useNumberInputVariantsModule(var24, p2.size, p2.controlsVariant)
 	local container = useTextInputVariantsModule(var24, p2.size, p2.variant).container
 	local var26 = math.ceil(var24.Stroke.Standard) * 2
 	local uDim2 = UDim2.fromOffset(var25.splitButton.size - var26, var25.splitButton.size - var26)
-	local var28 = reactModule.useCallback(function(p3) --[[ line: 114 ]]
+	local var28 = reactModule.useCallback(function(p3)
 		-- upvalues: container (ref), mapBindableModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
 		return if container.strokeStyle and container.strokeThickness then {
 			Color = container.strokeStyle.Color3,
-			Transparency = mapBindableModule(p3, function(p4) --[[ line: 118 ]]
+			Transparency = mapBindableModule(p3, function(p4)
 				-- upvalues: blendTransparenciesModule (copy), container (copy), constantsModule (copy)
 				return if p4 then blendTransparenciesModule(container.strokeStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else container.strokeStyle.Transparency
 			end),
@@ -75,7 +75,7 @@ local function SplitControls(p2) --[[ line: 101 ]]
 			onActivated = p2.increment.onClick,
 			isDisabled = if reactIsModule.isBinding(p2.increment.isDisabled) then false else p2.increment.isDisabled,
 			stateLayer = {
-				affordance = mapBindableModule(p2.increment.isDisabled, function(p5) --[[ line: 139 ]]
+				affordance = mapBindableModule(p2.increment.isDisabled, function(p5)
 					-- upvalues: stateLayerAffordanceModule (copy)
 					return if p5 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
 				end)
@@ -89,7 +89,7 @@ local function SplitControls(p2) --[[ line: 101 ]]
 			Icon = reactModule.createElement(iconModule, {
 				name = builderIconsModule.Icon.PlusSmall,
 				size = p2.size,
-				style = mapBindableModule(p2.increment.isDisabled, function(p6) --[[ line: 153 ]]
+				style = mapBindableModule(p2.increment.isDisabled, function(p6)
 					-- upvalues: constantsModule (copy)
 					return {
 						Color3 = nil,
@@ -106,7 +106,7 @@ local function SplitControls(p2) --[[ line: 101 ]]
 			onActivated = p2.decrement.onClick,
 			isDisabled = if reactIsModule.isBinding(p2.decrement.isDisabled) then false else p2.decrement.isDisabled,
 			stateLayer = {
-				affordance = mapBindableModule(p2.decrement.isDisabled, function(p7) --[[ line: 170 ]]
+				affordance = mapBindableModule(p2.decrement.isDisabled, function(p7)
 					-- upvalues: stateLayerAffordanceModule (copy)
 					return if p7 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
 				end)
@@ -120,7 +120,7 @@ local function SplitControls(p2) --[[ line: 101 ]]
 			Icon = reactModule.createElement(iconModule, {
 				name = builderIconsModule.Icon.MinusSmall,
 				size = p2.size,
-				style = mapBindableModule(p2.decrement.isDisabled, function(p8) --[[ line: 184 ]]
+				style = mapBindableModule(p2.decrement.isDisabled, function(p8)
 					-- upvalues: constantsModule (copy)
 					return {
 						Color3 = nil,
@@ -135,7 +135,7 @@ local function SplitControls(p2) --[[ line: 101 ]]
 	})
 end
 
-local function StackedControls(p9) --[[ line: 199 ]]
+local function StackedControls(p9)
 	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), reactModule (ref), mapBindableModule (ref), constantsModule (ref), viewModule (ref), var17 (ref), reactIsModule (ref), imageModule (ref)
 	local var29 = useTokensModule()
 	local var30 = useNumberInputVariantsModule(var29, p9.size, p9.controlsVariant)
@@ -154,9 +154,9 @@ local function StackedControls(p9) --[[ line: 199 ]]
 		}, {
 			Icon = reactModule.createElement(imageModule, {
 				Image = "component_assets/triangleUp_16",
-				imageStyle = reactModule.useMemo(function() --[[ line: 203 ]]
+				imageStyle = reactModule.useMemo(function()
 					-- upvalues: mapBindableModule (copy), p9 (ref), var29 (ref), constantsModule (copy)
-					return mapBindableModule(p9.increment.isDisabled, function(p10) --[[ line: 204 ]]
+					return mapBindableModule(p9.increment.isDisabled, function(p10)
 						-- upvalues: var29 (copy), constantsModule (copy)
 						return {
 							Color3 = var29.Color.Stroke.Emphasis.Color3,
@@ -177,9 +177,9 @@ local function StackedControls(p9) --[[ line: 199 ]]
 		}, {
 			Icon = reactModule.createElement(imageModule, {
 				Image = "component_assets/triangleDown_16",
-				imageStyle = reactModule.useMemo(function() --[[ line: 212 ]]
+				imageStyle = reactModule.useMemo(function()
 					-- upvalues: mapBindableModule (copy), p9 (ref), var29 (ref), constantsModule (copy)
-					return mapBindableModule(p9.decrement.isDisabled, function(p11) --[[ line: 213 ]]
+					return mapBindableModule(p9.decrement.isDisabled, function(p11)
 						-- upvalues: var29 (copy), constantsModule (copy)
 						return {
 							Color3 = var29.Color.Stroke.Emphasis.Color3,
@@ -194,7 +194,7 @@ local function StackedControls(p9) --[[ line: 199 ]]
 	})
 end
 
-local function IncrementButton(p12) --[[ line: 261 ]]
+local function IncrementButton(p12)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref), reactIsModule (ref), mapBindableModule (ref), stateLayerAffordanceModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref)
 	local var31 = useTokensModule()
 	
@@ -202,17 +202,17 @@ local function IncrementButton(p12) --[[ line: 261 ]]
 		onActivated = p12.onActivated,
 		isDisabled = if reactIsModule.isBinding(p12.isDisabled) then false else p12.isDisabled,
 		selection = {
-			Selectable = mapBindableModule(p12.isDisabled, function(p13) --[[ line: 282 ]]
+			Selectable = mapBindableModule(p12.isDisabled, function(p13)
 				return not p13
 			end)
 		},
 		stateLayer = {
-			affordance = mapBindableModule(p12.isDisabled, function(p14) --[[ line: 287 ]]
+			affordance = mapBindableModule(p12.isDisabled, function(p14)
 				-- upvalues: stateLayerAffordanceModule (copy)
 				return if p14 then stateLayerAffordanceModule.None else stateLayerAffordanceModule.Background
 			end)
 		},
-		cursor = reactModule.useMemo(function() --[[ line: 274 ]]
+		cursor = reactModule.useMemo(function()
 			-- upvalues: p12 (ref), var31 (ref)
 			return {
 				radius = UDim.new(0, p12.radius),
@@ -235,7 +235,7 @@ local function IncrementButton(p12) --[[ line: 261 ]]
 		Icon = reactModule.createElement(iconModule, {
 			name = p12.icon,
 			size = p12.iconSize,
-			style = mapBindableModule(p12.isDisabled, function(p15) --[[ line: 309 ]]
+			style = mapBindableModule(p12.isDisabled, function(p15)
 				-- upvalues: var31 (ref), blendTransparenciesModule (copy), constantsModule (copy)
 				return {
 					Color3 = var31.Color.ActionUtility.Foreground.Color3,
@@ -249,7 +249,7 @@ local function IncrementButton(p12) --[[ line: 261 ]]
 	})
 end
 
-local function IncrementControls(p16) --[[ line: 327 ]]
+local function IncrementControls(p16)
 	-- upvalues: useTokensModule (ref), useNumberInputVariantsModule (ref), reactModule (ref), viewModule (ref), IncrementButton (ref), builderIconsModule (ref)
 	local controls = useNumberInputVariantsModule(useTokensModule(), p16.size, nil).controls
 	
@@ -283,7 +283,7 @@ local function IncrementControls(p16) --[[ line: 327 ]]
 	})
 end
 
-return function(p17) --[[ line: 362 | named "NumberInputControls" ]]
+return function(p17)
 	-- upvalues: flagsModule (ref), reactModule (ref), IncrementControls (ref), numberInputControlsVariantModule (ref), StackedControls (ref), SplitControls (ref)
 	return if flagsModule.FoundationNumberInputBeta then reactModule.createElement(IncrementControls, p17) elseif p17.controlsVariant == numberInputControlsVariantModule.Stacked then reactModule.createElement(StackedControls, p17) else reactModule.createElement(SplitControls, p17)
 end

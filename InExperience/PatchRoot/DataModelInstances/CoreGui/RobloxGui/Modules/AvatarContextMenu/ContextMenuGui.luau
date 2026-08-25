@@ -10,7 +10,7 @@ local _ = require(settings:WaitForChild("Utility"))
 local t = {}
 t.__index = t
 
-function t.CreateContextMenuHolder(_, _) --[[ line: 33 ]]
+function t.CreateContextMenuHolder(_, _)
 	-- upvalues: robloxGui (ref)
 	local avatarContextMenu = Instance.new("Frame")
 	avatarContextMenu.Name = "AvatarContextMenu"
@@ -23,8 +23,8 @@ function t.CreateContextMenuHolder(_, _) --[[ line: 33 ]]
 	return avatarContextMenu
 end
 
-function t.CreateLeaveMenuButton(p0, p1, p2) --[[ line: 44 ]]
-	local function closeMenu() --[[ line: 45 ]]
+function t.CreateLeaveMenuButton(p0, p1, p2)
+	local function closeMenu()
 		-- upvalues: p0 (ref)
 		p0.CloseMenuFunc()
 	end
@@ -48,10 +48,10 @@ function t.CreateLeaveMenuButton(p0, p1, p2) --[[ line: 44 ]]
 	return closeMenuButton
 end
 
-local function _(p3) --[[ line: 71 | named "listenToViewportChange" ]]
+local function _(p3)
 	if p3 == nil then return end
 	local var12 = nil
-	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 76 | named "updateCamera" ]]
+	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		-- upvalues: var12 (write), p3 (ref)
 		local currentCamera = workspace.CurrentCamera
 		
@@ -66,7 +66,7 @@ local function _(p3) --[[ line: 71 | named "listenToViewportChange" ]]
 	p3()
 end
 
-function t:CreateMenuFrame(p4) --[[ line: 89 ]]
+function t:CreateMenuFrame(p4)
 	-- upvalues: guiService (ref)
 	local menuSizeConstraint
 	local var13 = self:CreateContextMenuHolder()
@@ -95,7 +95,7 @@ function t:CreateMenuFrame(p4) --[[ line: 89 ]]
 	menuAspectRatio.AspectRatio = p4.AspectRatio
 	menuAspectRatio.Parent = menu
 	
-	local function updateAspectRatioForViewport() --[[ line: 120 ]]
+	local function updateAspectRatioForViewport()
 		-- upvalues: menuAspectRatio (ref)
 		local viewportSize = workspace.CurrentCamera.ViewportSize
 		
@@ -109,7 +109,7 @@ function t:CreateMenuFrame(p4) --[[ line: 89 ]]
 	
 	if updateAspectRatioForViewport ~= nil then
 		menuSizeConstraint = nil
-		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 76 | named "updateCamera" ]]
+		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 			-- upvalues: menuSizeConstraint (write), updateAspectRatioForViewport (ref)
 			local currentCamera = workspace.CurrentCamera
 			
@@ -160,7 +160,7 @@ function t:CreateMenuFrame(p4) --[[ line: 89 ]]
 	UIListLayout_1.HorizontalAlignment = Enum.HorizontalAlignment.Center
 	UIListLayout_1.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout_1.VerticalAlignment = Enum.VerticalAlignment.Top
-	UIListLayout_1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ line: 166 ]]
+	UIListLayout_1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 		-- upvalues: contextActionList (ref), UIListLayout_1 (ref)
 		contextActionList.CanvasSize = UDim2.new(0, 0, 0, UIListLayout_1.AbsoluteContentSize.Y)
 	end)
@@ -196,7 +196,7 @@ function t:CreateMenuFrame(p4) --[[ line: 89 ]]
 	return menu
 end
 
-function t:UpdateGuiTheme(p5) --[[ line: 206 ]]
+function t:UpdateGuiTheme(p5)
 	-- upvalues: var5 (write)
 	self.ContextMenuFrame.Size = p5.Size
 	self.ContextMenuFrame.AnchorPoint = p5.AnchorPoint
@@ -223,7 +223,7 @@ function t:UpdateGuiTheme(p5) --[[ line: 206 ]]
 	end
 end
 
-function t:BuildPlayerCarousel(p6, p7) --[[ line: 239 ]]
+function t:BuildPlayerCarousel(p6, p7)
 	-- upvalues: var5 (write), avatarContextMenu (ref), bindableEvent (ref)
 	if not var5 then
 		var5 = require(avatarContextMenu.PlayerCarousel).new(p7)
@@ -234,7 +234,7 @@ function t:BuildPlayerCarousel(p6, p7) --[[ line: 239 ]]
 	if self.PlayerChangedConnection then
 		self.PlayerChangedConnection:Disconnect()
 	end
-	self.PlayerChangedConnection = var5.PlayerChanged:Connect(function(p8) --[[ line: 251 ]]
+	self.PlayerChangedConnection = var5.PlayerChanged:Connect(function(p8)
 		-- upvalues: self (ref), bindableEvent (copy)
 		if p8 then
 			self.ContextMenuFrame.Content.NameTag.Text = p8.Name
@@ -251,7 +251,7 @@ function t:BuildPlayerCarousel(p6, p7) --[[ line: 239 ]]
 	var5:AddCarouselDivider()
 end
 
-function t.RemovePlayerEntry(_, p9) --[[ line: 267 ]]
+function t.RemovePlayerEntry(_, p9)
 	-- upvalues: var5 (write)
 	if var5 then
 		var5:RemovePlayerEntry(p9)
@@ -260,15 +260,15 @@ function t.RemovePlayerEntry(_, p9) --[[ line: 267 ]]
 	end
 end
 
-function t.GetBottomScreenPaddingConstant(_) --[[ line: 273 ]]
+function t.GetBottomScreenPaddingConstant(_)
 	return 0.02
 end
 
-function t:SetCloseMenuFunc(p10) --[[ line: 277 ]]
+function t:SetCloseMenuFunc(p10)
 	self.CloseMenuFunc = p10
 end
 
-function t.SwitchToPlayerEntry(_, p11, p12) --[[ line: 281 ]]
+function t.SwitchToPlayerEntry(_, p11, p12)
 	-- upvalues: var5 (write)
 	if var5 then
 		var5:SwitchToPlayerEntry(p11, p12)
@@ -277,7 +277,7 @@ function t.SwitchToPlayerEntry(_, p11, p12) --[[ line: 281 ]]
 	end
 end
 
-function t.OffsetPlayerEntry(_, p13) --[[ line: 286 ]]
+function t.OffsetPlayerEntry(_, p13)
 	-- upvalues: var5 (write)
 	if var5 then
 		var5:OffsetPlayerEntry(p13)
@@ -286,12 +286,12 @@ function t.OffsetPlayerEntry(_, p13) --[[ line: 286 ]]
 	end
 end
 
-function t.GetSelectedPlayer(_) --[[ line: 291 ]]
+function t.GetSelectedPlayer(_)
 	-- upvalues: var5 (write)
 	return if var5 then var5:GetSelectedPlayer() else nil
 end
 
-function t.new() --[[ line: 296 ]]
+function t.new()
 	-- upvalues: t (ref), bindableEvent (ref)
 	local tbl = setmetatable({}, t)
 	tbl.CloseMenuFunc = nil

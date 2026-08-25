@@ -14,22 +14,22 @@ local useNavigation = navigationModule.useNavigation
 local useLocalization = localizationModule.Hooks.useLocalization
 local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
 
-return function(p0) --[[ line: 24 | named "useSchoolChip" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), appPage (ref), contexts (ref)
 	local var9 = useNavigation()
 	local school = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader).school
 	local var10 = useLocalization({ classmates = textKeysModule.Classmates })
-	local var11 = reactModule.useMemo(function() --[[ line: 32 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: school (ref), var10 (ref)
 		return if if school then school.isSameSchool else nil then var10.classmates else nil
 	end, { school, var10 })
-	local var12 = reactModule.useCallback(function() --[[ line: 40 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), eventNamesModule (copy), var9 (ref), appPage (copy), contexts (copy)
 		p0.fireAnalyticsEvent(eventNamesModule.SchoolButton)
 		var9.navigate(appPage.Schools, { extraProps = { source = contexts.PlayerProfile } })
 	end, { p0, var9 })
 	
-	return reactModule.useMemo(function() --[[ line: 49 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var11 (ref), var12 (ref)
 		return if var11 == nil then nil else {
 			layoutOrder = 0,

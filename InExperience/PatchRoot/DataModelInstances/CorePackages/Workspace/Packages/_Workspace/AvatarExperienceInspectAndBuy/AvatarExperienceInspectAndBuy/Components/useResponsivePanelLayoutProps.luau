@@ -24,15 +24,15 @@ local useInspectPlayerModule = require(avatarExperienceInspectAndBuy.Hooks.useIn
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local formatNumberModule = require(avatarExperienceInspectAndBuy.Utils.formatNumber)
 
-local function selectView(p0) --[[ line: 54 ]]
+local function selectView(p0)
 	return p0.view
 end
 
-local function selectInspectPreviewDetails(p1) --[[ line: 58 ]]
+local function selectInspectPreviewDetails(p1)
 	return p1.avatarPreviewDetails
 end
 
-local function _(p2, p3) --[[ line: 69 | named "shouldRenderSecondPanel" ]]
+local function _(p2, p3)
 	-- upvalues: viewTypeModule (ref)
 	return p2 == viewTypeModule.WideLandscape or ((p2 == viewTypeModule.Wide or p2 == viewTypeModule.Compact) and not p3)
 end
@@ -67,7 +67,7 @@ local t = {
 	}
 }
 
-return function(p4) --[[ line: 131 ]]
+return function(p4)
 	-- upvalues: useSelector (ref), selectView (ref), tutilsModule (ref), viewTypeModule (ref), reactModule (ref), selectInspectPreviewDetails (ref), useRemoteBulkPurchaseEventModule (ref), useInspectPlayerModule (ref), formatNumberModule (ref), useTokens (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), useItemSelectionStore (ref), useLocalization (ref), verifiedBadgesModule (ref), usePurchaseButtonPropsModule (ref), useEventConnection (ref), marketplaceService (ref), itemDetailsLayoutModule (ref), avatarItemsViewLayoutModule (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), t (ref)
 	local var17 = useSelector(selectView, tutilsModule.deepEqual)
 	local var18 = var17 == viewTypeModule.WideLandscape
@@ -97,9 +97,9 @@ return function(p4) --[[ line: 131 ]]
 			itemCount = #items
 		} else nil
 	})
-	local var33 = reactModule.useCallback(function(p5) --[[ line: 177 ]]
+	local var33 = reactModule.useCallback(function(p5)
 		-- upvalues: var22 (ref), p4 (ref)
-		var22(function(p6) --[[ line: 178 ]]
+		var22(function(p6)
 			-- upvalues: p5 (ref), p4 (copy)
 			local var36 = p5
 			local var37 = not p6.isTryOnEnabled
@@ -123,19 +123,19 @@ return function(p4) --[[ line: 131 ]]
 		onPromptPurchase = p4.onPromptPurchase
 	})
 	useEventConnection(marketplaceService.PromptBulkPurchaseFinished, p4.onBulkPurchaseFinished)
-	reactModule.useEffect(function() --[[ line: 217 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), var31 (ref)
 		if var30.current then
 			var30.current.CanvasPosition = Vector2.new(0, var31.current)
 		end
 	end, { var19 })
-	reactModule.useEffect(function() --[[ line: 224 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), p4 (ref)
 		if var19 then
 			p4.onItemDetailsOpened(var19)
 		end
 	end, { var19, p4.onItemDetailsOpened })
-	local var35 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function() --[[ line: 231 ]]
+	local var35 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function()
 		-- upvalues: var29 (ref), p4 (ref)
 		var29.clearAll()
 		p4.onInspectMenuClosed()
@@ -143,13 +143,13 @@ return function(p4) --[[ line: 131 ]]
 	
 	return {
 		view = var17,
-		renderFirstPanel = function() --[[ line: 238 ]]
+		renderFirstPanel = function()
 			-- upvalues: var19 (ref), reactModule (copy), itemDetailsLayoutModule (copy), var17 (ref), var20 (ref), var22 (ref), p4 (ref), viewTypeModule (copy), var34 (ref), var33 (ref), var21 (ref), formatNumberModule (copy), avatarItemsViewLayoutModule (copy), items (ref), var32 (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (copy), var35 (ref), var30 (ref), var31 (ref), var27 (ref)
 			return if var19 then reactModule.createElement(itemDetailsLayoutModule, {
 				itemDetailsViewProps = {
 					view = var17,
 					item = var19,
-					onItemDetailsClosed = function() --[[ line: 244 ]]
+					onItemDetailsClosed = function()
 						-- upvalues: var20 (copy), var22 (copy)
 						var20(nil)
 						var22({ isTryOnEnabled = false, tryOnItem = {} })
@@ -170,7 +170,7 @@ return function(p4) --[[ line: 131 ]]
 				items = items,
 				headerText = var32.headerText,
 				onInspectMenuClosed = if fFlagAXEnableIaBTimedOptionsBulkPurchase and var35 then var35 else p4.onInspectMenuClosed,
-				onItemCardActivated = function(p7) --[[ line: 272 ]]
+				onItemCardActivated = function(p7)
 					-- upvalues: var30 (copy), var31 (copy), var20 (copy)
 					if var30.current then
 						var31.current = var30.current.CanvasPosition.Y
@@ -185,13 +185,13 @@ return function(p4) --[[ line: 131 ]]
 				ref = var30
 			})
 		end,
-		renderSecondPanel = if var17 == viewTypeModule.WideLandscape or ((var17 == viewTypeModule.Wide or var17 == viewTypeModule.Compact) and not var19) then function() --[[ line: 288 ]]
+		renderSecondPanel = if var17 == viewTypeModule.WideLandscape or ((var17 == viewTypeModule.Wide or var17 == viewTypeModule.Compact) and not var19) then function()
 			-- upvalues: reactModule (copy), viewportLayoutModule (copy), var17 (ref), var19 (ref), getItemThumbnailUrlModule (copy), var26 (ref), var20 (ref), p4 (ref), var18 (ref), var34 (ref), var21 (ref), var28 (ref)
 			return reactModule.createElement(viewportLayoutModule, {
 				view = var17,
 				thumbnailUrl = if var19 then getItemThumbnailUrlModule(var19) or "" else "rbxthumb://type=Avatar&id=" .. tostring(var26.playerId) .. "&w=420&h=420",
 				backButtonProps = {
-					onBackButtonClick = if var19 then function() --[[ line: 296 ]]
+					onBackButtonClick = if var19 then function()
 						-- upvalues: var20 (copy)
 						var20(nil)
 					end else p4.onInspectMenuClosed

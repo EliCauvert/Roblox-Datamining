@@ -20,7 +20,7 @@ local list = {
 local t = { InExpServer = true, InExpClient = true }
 local t_1 = { DATA_FETCH_FAILURE = {} }
 
-function t_1.storeDesiredData(p0, p1) --[[ line: 36 ]]
+function t_1.storeDesiredData(p0, p1)
 	-- upvalues: getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validationEnumsModule (ref), resetPhysicsDataModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t (ref), list (ref), fetchEditablesModule (ref), t_1 (ref), sharedDataMember (ref), fetchCurveAnimationsModule (ref), fetchCurveAnimComputedFramesModule (ref), fetchContentIdsModule (ref), fetchHSRAssetsModule (ref), fetchCurveAnimBoneDataModule (ref)
 	local rootInstance = p0.rootInstance
 	local preloadedEditableMeshes = p0.consumerConfig.preloadedEditableMeshes or {}
@@ -43,7 +43,7 @@ function t_1.storeDesiredData(p0, p1) --[[ line: 36 ]]
 	end
 	for i, v in list do
 		if p1[v] then
-			local ok, status = pcall(function() --[[ line: 57 ]]
+			local ok, status = pcall(function()
 				-- upvalues: fetchEditablesModule (copy), rootInstance (ref), v (ref), var15 (write), preloadedEditableMeshes (ref), preloadedEditableImages (ref)
 				return fetchEditablesModule.getDatas(rootInstance, v, var15, preloadedEditableMeshes, preloadedEditableImages)
 			end)

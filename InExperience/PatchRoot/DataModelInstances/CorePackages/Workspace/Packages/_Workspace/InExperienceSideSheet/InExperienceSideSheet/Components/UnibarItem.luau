@@ -8,7 +8,7 @@ local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.Sideshe
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 30 | named "UnibarItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), view (ref), iconHostModule (ref)
 	local var6 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
 	
@@ -17,7 +17,7 @@ return reactModule.memo(function(p0) --[[ line: 30 | named "UnibarItem" ]]
 		ActivationOverlay = reactModule.createElement(view, {
 			tag = "size-full radius-circle",
 			ZIndex = 10,
-			onActivated = reactModule.useCallback(function() --[[ line: 31 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: p0 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 				p0.onActivated()
 				toggleSideSheetModule(false)

@@ -5,7 +5,7 @@ local tutilsModule = require(parent.tutils)
 local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AXCommon).Enums.ItemTypeEnum
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 
-return function(p0, p1) --[[ line: 22 ]]
+return function(p0, p1)
 	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref)
 	local t = {
 		id = p0.assetId,

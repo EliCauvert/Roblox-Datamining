@@ -5,7 +5,7 @@ local _ = require(parent.util.Types)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 
 return {
-	getData = function(p0) --[[ line: 11 ]]
+	getData = function(p0)
 		-- upvalues: constantsModule (ref), parseContentIdsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref)
 		local rootInstance = p0.rootInstance
 		local t = {}

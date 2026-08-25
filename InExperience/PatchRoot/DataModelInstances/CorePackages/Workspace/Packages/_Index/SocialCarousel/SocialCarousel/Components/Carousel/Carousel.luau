@@ -31,7 +31,7 @@ local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppComp
 local fFlagLuaAppFriendsSortHeaderByPosition = sharedFlagsModule.FFlagLuaAppFriendsSortHeaderByPosition
 local t = {}
 
-return function(p0) --[[ line: 46 | named "Carousel" ]]
+return function(p0)
 	-- upvalues: fFlagLuaAppCompositionAlways (ref), fixCarouselTileSizeScaling (ref), useTokens (ref), useSocialCarouselContextModule (ref), useTilesSeenCollectionModule (ref), reactModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), useLocalization (ref), usePageSideMargin (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), useCollectionLayout (ref), fFlagSocialCarouselFixColdStartJitterModule (ref), robloxAppHooksModule (ref), useColdStartLayoutReadyModule (ref), tileComponentsModule (ref), socialCarouselFixLoadingSkeletonSizing (ref), tile (ref), t (ref), collectionCarousel (ref), fFlagLuaAppFriendsSortHeaderByPosition (ref), fFlagFlyoutHideFriendsHeaderModule (ref), fFlagEnableFlyoutFriendsHeaderFix (ref), flyoutSidePanelIXP (ref)
 	local var29
 	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p0.appCompositionEnabled
@@ -74,12 +74,12 @@ return function(p0) --[[ line: 46 | named "Carousel" ]]
 	if fFlagSocialCarouselFixColdStartJitterModule then
 		local var35, var36 = reactModule.useState(Vector2.zero)
 		var33 = useColdStartLayoutReadyModule(robloxAppHooksModule.useDeviceOrientation() ~= nil, robloxAppHooksModule.useScreenSize(), var35.X, var32)
-		var34 = reactModule.useCallback(function(p1) --[[ line: 98 ]]
+		var34 = reactModule.useCallback(function(p1)
 			-- upvalues: var36 (ref)
 			var36(p1)
 		end, {})
 	end
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), var27 (ref), var26 (ref), var28 (ref)
 		if var32 ~= var27.current then
 			var27.current = var32
@@ -88,23 +88,23 @@ return function(p0) --[[ line: 46 | named "Carousel" ]]
 			if var28.current then
 				pcall(task.cancel, var28.current)
 			end
-			var28.current = task.delay(0.2, function() --[[ line: 112 ]]
+			var28.current = task.delay(0.2, function()
 				-- upvalues: var26 (copy), var28 (copy)
 				var26.current = true
 				var28.current = nil
 			end)
 		end
 	end, { var32 })
-	reactModule.useEffect(function() --[[ line: 119 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref)
-		return function() --[[ line: 120 ]]
+		return function()
 			-- upvalues: var28 (copy)
 			if var28.current then
 				pcall(task.cancel, var28.current)
 			end
 		end
 	end, {})
-	local var37 = reactModule.useCallback(function(p2) --[[ line: 127 ]]
+	local var37 = reactModule.useCallback(function(p2)
 		-- upvalues: fixCarouselTileSizeScaling (copy), constantsModule (copy), var19 (ref)
 		return p2 + (if fixCarouselTileSizeScaling then constantsModule.TILE_TEXT_HEIGHT * var19.Config.UI.Scale else constantsModule.TILE_TEXT_HEIGHT)
 	end, {})
@@ -122,7 +122,7 @@ return function(p0) --[[ line: 46 | named "Carousel" ]]
 			scrollingFrameRef = var24,
 			onContainerSizeChanged = if fFlagSocialCarouselFixColdStartJitterModule then var34 else nil,
 			title = var30.friendsLabel,
-			items = if fFlagSocialCarouselFixColdStartJitterModule and not var33 then t elseif isLoading then reactModule.useMemo(function() --[[ line: 199 ]]
+			items = if fFlagSocialCarouselFixColdStartJitterModule and not var33 then t elseif isLoading then reactModule.useMemo(function()
 				-- upvalues: fFlagSocialCarouselShowLoadingSkeletonModule (copy), var32 (ref), socialCarouselFixLoadingSkeletonSizing (copy), tile (copy)
 				local t = {}
 				
@@ -134,9 +134,9 @@ return function(p0) --[[ line: 46 | named "Carousel" ]]
 				end
 				return t
 			end, { var32 }) else var20.tiles,
-			renderItem = reactModule.useCallback(function(p3, p4, p5) --[[ line: 137 ]]
+			renderItem = reactModule.useCallback(function(p3, p4, p5)
 				-- upvalues: selectionOrderBase (ref), tileComponentsModule (copy), p0 (ref)
-				return tileComponentsModule[p3.tileType](p3, p4, p5, if selectionOrderBase then selectionOrderBase + p4 else nil, function(p6, p7) --[[ line: 144 ]]
+				return tileComponentsModule[p3.tileType](p3, p4, p5, if selectionOrderBase then selectionOrderBase + p4 else nil, function(p6, p7)
 					-- upvalues: p0 (copy), p3 (ref)
 					if p0.onTileContentChanged then
 						p0.onTileContentChanged(p6, p7, p3)
@@ -151,7 +151,7 @@ return function(p0) --[[ line: 46 | named "Carousel" ]]
 			sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var31.sideMargin,
 			maxItemsToShow = var31.maxTilesToShow,
 			thresholdFromEnd = var31.loadMoreThreshold,
-			onViewableItemsChanged = if isLoading or fFlagSocialCarouselFixColdStartJitterModule and not var33 then nil else reactModule.useCallback(function(p8, p9) --[[ line: 159 ]]
+			onViewableItemsChanged = if isLoading or fFlagSocialCarouselFixColdStartJitterModule and not var33 then nil else reactModule.useCallback(function(p8, p9)
 				-- upvalues: var20 (ref), var22 (ref), var24 (ref), var26 (ref), var32 (ref), var25 (ref), var21 (ref)
 				if var20.unifiedLogging then
 					var20.unifiedLogging.onCollectionViewabilityChanged(p8, p9)

@@ -15,17 +15,17 @@ while not localPlayer do
 	playersService.Changed:wait()
 	localPlayer = playersService.LocalPlayer
 end
-local function _(p0) --[[ line: 32 | named "fromLinearRGB" ]]
+local function _(p0)
 	return Color3.new(p0.r ^ 2.2, p0.g ^ 2.2, p0.b ^ 2.2)
 end
 
-local function addPartsToGame(...) --[[ line: 36 ]]
+local function addPartsToGame(...)
 	-- upvalues: guiService (ref)
 	local list = { ... }
 	local coreEffectFolder = guiService.CoreEffectFolder
 	
 	if not coreEffectFolder then
-		coroutine.wrap(function() --[[ line: 42 ]]
+		coroutine.wrap(function()
 			-- upvalues: guiService (copy), list (ref), coreEffectFolder (ref)
 			repeat
 			until guiService.Changed:wait() == "CoreEffectFolder" or guiService.CoreEffectFolder ~= nil
@@ -47,13 +47,13 @@ local function addPartsToGame(...) --[[ line: 36 ]]
 	end
 end
 
-local function removePartsFromGame(...) --[[ line: 64 ]]
+local function removePartsFromGame(...)
 	for i, v in pairs({ ... }) do
 		v.Parent = nil
 	end
 end
 
-local function getLocalHumanoid() --[[ line: 71 ]]
+local function getLocalHumanoid()
 	-- upvalues: localPlayer (write)
 	local character = localPlayer.Character
 	
@@ -65,7 +65,7 @@ local function getLocalHumanoid() --[[ line: 71 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ line: 85 | named "applyExpCurve" ]]
+local _ = function(p1, p2)
 	local var22 = p1 ^ p2
 	
 	if var22 ~= var22 then
@@ -135,7 +135,7 @@ local t_3 = {}
 t_3.__index = t_3
 t_3.Mode = t
 
-function t_3.new(_) --[[ line: 184 ]]
+function t_3.new(_)
 	-- upvalues: t_3 (ref), VRService (ref), create (ref), coreGuiService (ref), t_1 (ref), vector2_1 (ref), vector2 (ref), guiService (ref)
 	local tbl = setmetatable({}, t_3)
 	tbl.laserMaxDistance = VRService.LaserDistance
@@ -256,21 +256,21 @@ function t_3.new(_) --[[ line: 184 ]]
 		Size = UDim2.new(1, 0, 1, 0)
 	})
 	tbl.connections = {}
-	table.insert(tbl.connections, VRService:GetPropertyChangedSignal("LaserPointer"):Connect(function() --[[ line: 322 ]]
+	table.insert(tbl.connections, VRService:GetPropertyChangedSignal("LaserPointer"):Connect(function()
 		-- upvalues: tbl (ref)
 		tbl:onModeChanged()
 	end))
 	tbl:onModeChanged()
-	guiService.MenuOpened:connect(function() --[[ line: 329 ]]
+	guiService.MenuOpened:connect(function()
 		-- upvalues: tbl (ref)
 		tbl.guiMenuIsOpen = true
 	end)
-	guiService.MenuClosed:connect(function() --[[ line: 332 ]]
+	guiService.MenuClosed:connect(function()
 		-- upvalues: tbl (ref)
 		tbl.guiMenuIsOpen = false
 	end)
 	tbl.inputUserCFrame = VRService.GuiInputUserCFrame
-	VRService.Changed:connect(function(p3) --[[ line: 337 ]]
+	VRService.Changed:connect(function(p3)
 		-- upvalues: tbl (ref), VRService (copy)
 		if p3 == "GuiInputUserCFrame" then
 			tbl.inputUserCFrame = VRService.GuiInputUserCFrame
@@ -284,7 +284,7 @@ function t_3.new(_) --[[ line: 184 ]]
 			tbl:updateInputUserCFrame()
 		end
 	end)
-	VRService.LaserPointerTriggered:connect(function(p4) --[[ line: 347 ]]
+	VRService.LaserPointerTriggered:connect(function(p4)
 		-- upvalues: tbl (ref)
 		if game:GetEngineFeature("ImprovedTriggerFire") and p4.UserInputState ~= Enum.UserInputState.End then return end
 		if (p4.KeyCode == Enum.KeyCode.ButtonR1 or p4.KeyCode == Enum.KeyCode.ButtonR2 or (p4.KeyCode == Enum.KeyCode.ButtonR3 or p4.KeyCode == Enum.KeyCode.ButtonA) or p4.KeyCode == Enum.KeyCode.ButtonB) and tbl.laserHand ~= 0 then
@@ -297,7 +297,7 @@ function t_3.new(_) --[[ line: 184 ]]
 			tbl:updateInputUserCFrame()
 		end
 	end)
-	VRService.UserCFrameEnabled:Connect(function(_, _) --[[ line: 376 ]]
+	VRService.UserCFrameEnabled:Connect(function(_, _)
 		-- upvalues: tbl (ref)
 		tbl:updateInputUserCFrame()
 	end)
@@ -306,12 +306,12 @@ function t_3.new(_) --[[ line: 184 ]]
 	return tbl
 end
 
-function t_3.hasAnyHandController() --[[ line: 385 ]]
+function t_3.hasAnyHandController()
 	-- upvalues: VRService (ref)
 	return VRService:GetUserCFrameEnabled(Enum.UserCFrame.RightHand) or VRService:GetUserCFrameEnabled(Enum.UserCFrame.LeftHand)
 end
 
-function t_3.getModeName(p5) --[[ line: 390 ]]
+function t_3.getModeName(p5)
 	-- upvalues: t (ref)
 	for i, v in pairs(t) do
 		if p5 == v then
@@ -321,7 +321,7 @@ function t_3.getModeName(p5) --[[ line: 390 ]]
 	return "unknown"
 end
 
-function t_3:updateInputUserCFrame() --[[ line: 400 ]]
+function t_3:updateInputUserCFrame()
 	-- upvalues: enableUserInputCFrameLogging (ref), VRService (ref)
 	local var24 = if enableUserInputCFrameLogging then VRService.GuiInputUserCFrame else nil
 	
@@ -341,7 +341,7 @@ function t_3:updateInputUserCFrame() --[[ line: 400 ]]
 	end
 end
 
-function t_3:onModeChanged(_) --[[ line: 421 ]]
+function t_3:onModeChanged(_)
 	-- upvalues: VRService (ref), addPartsToGame (ref), removePartsFromGame (ref)
 	self:updateInputUserCFrame()
 	
@@ -373,7 +373,7 @@ function t_3:onModeChanged(_) --[[ line: 421 ]]
 	end
 end
 
-function t_3.setMode(_, p6) --[[ line: 455 ]]
+function t_3.setMode(_, p6)
 	-- upvalues: t (ref), VRService (ref)
 	if p6 == t.Disabled or p6 == t.Hidden then
 		VRService.LaserPointer = Enum.VRLaserPointerMode.Disabled
@@ -388,26 +388,26 @@ function t_3.setMode(_, p6) --[[ line: 455 ]]
 	end
 end
 
-function t_3.setEnableAmbidexterousPointer(_, _) --[[ line: 465 ]] end
+function t_3.setEnableAmbidexterousPointer(_, _) end
 
-function t_3.calculateLaunchVelocity(_, p7, p8, p9) --[[ line: 469 ]]
+function t_3.calculateLaunchVelocity(_, p7, p8, p9)
 	return -(math.sqrt(p7 / 0.707106781187) * p8) / math.sqrt(2 * p9 * 0.707106781187 + 2 * p8 * 0.707106781187)
 end
 
-function t_3.isHeadMounted(_) --[[ line: 478 ]]
+function t_3.isHeadMounted(_)
 	-- upvalues: VRService (ref)
 	return VRService.GuiInputUserCFrame == Enum.UserCFrame.Head
 end
 
-function t_3:shouldForcePointer() --[[ line: 482 ]]
+function t_3:shouldForcePointer()
 	return self.externalForcePointer or self.guiMenuIsOpen
 end
 
-function t_3:setForcePointer(p10) --[[ line: 486 ]]
+function t_3:setForcePointer(p10)
 	self.externalForcePointer = p10
 end
 
-function t_3.getNavigationOrigin(_) --[[ line: 490 ]]
+function t_3.getNavigationOrigin(_)
 	-- upvalues: getLocalHumanoid (ref)
 	local var25 = getLocalHumanoid()
 	
@@ -419,7 +419,7 @@ function t_3.getNavigationOrigin(_) --[[ line: 490 ]]
 	end
 end
 
-function t_3.horzDistanceFromCharacter(_, p11) --[[ line: 509 ]]
+function t_3.horzDistanceFromCharacter(_, p11)
 	-- upvalues: localPlayer (write)
 	local character = localPlayer.Character
 	
@@ -431,17 +431,17 @@ function t_3.horzDistanceFromCharacter(_, p11) --[[ line: 509 ]]
 	return if humanoidRootPart then ((humanoidRootPart:GetRenderCFrame().p - p11) * Vector3.new(1, 0, 1)).magnitude else 1e999
 end
 
-function t_3:onNavigateAction(_, p12, _) --[[ line: 522 ]]
+function t_3:onNavigateAction(_, p12, _)
 	-- upvalues: VRService (ref)
 	if p12 == Enum.UserInputState.Begin then
 		VRService:RequestNavigation(CFrame.new(self.navHitPoint, self.navHitPoint + self.navHitNormal) * CFrame.Angles(1.570796326795, 0, 0), self.inputUserCFrame)
 	end
 end
 
-function t_3.setNavigationActionEnabled(value, p13) --[[ line: 531 ]]
+function t_3.setNavigationActionEnabled(value, p13)
 	-- upvalues: contextActionService (ref)
 	if p13 then
-		contextActionService:BindCoreAction("LaserPointerNavigate", function(...) --[[ line: 533 ]]
+		contextActionService:BindCoreAction("LaserPointerNavigate", function(...)
 			-- upvalues: value (ref)
 			value:onNavigateAction(...)
 		end, false, Enum.KeyCode.ButtonA)
@@ -451,7 +451,7 @@ function t_3.setNavigationActionEnabled(value, p13) --[[ line: 531 ]]
 	contextActionService:UnbindCoreAction("LaserPointerNavigate")
 end
 
-function t_3:setArcLaunchParams(p14, p15, p16, p17) --[[ line: 541 ]]
+function t_3:setArcLaunchParams(p14, p15, p16, p17)
 	local var27 = math.cos(p14) * p15
 	local var28 = math.sin(p14) * p15
 	
@@ -464,11 +464,11 @@ function t_3:setArcLaunchParams(p14, p15, p16, p17) --[[ line: 541 ]]
 	self.parabola.Range = p17 * 1.5
 end
 
-function t_3:renderAsParabola(p18, p19) --[[ line: 556 ]]
+function t_3:renderAsParabola(p18, p19)
 	self.originPart.CFrame = CFrame.new(p18, p18 + p19 * Vector3.new(1, 0, 1)) * CFrame.Angles(0, 1.570796326795, 0)
 end
 
-function t_3:renderAsLaser(p20, p21) --[[ line: 561 ]]
+function t_3:renderAsLaser(p20, p21)
 	self.originPart.CFrame = CFrame.new(p20, p21) * CFrame.Angles(0, 1.570796326795, 0)
 	self.parabola.A = 0
 	self.parabola.B = 0.000001
@@ -476,26 +476,26 @@ function t_3:renderAsLaser(p20, p21) --[[ line: 561 ]]
 	self.parabola.Range = (p21 - p20).magnitude
 end
 
-function t_3:renderOffhandLaser(p22, p23) --[[ line: 569 ]]
+function t_3:renderOffhandLaser(p22, p23)
 	self.originPartOffhand.CFrame = CFrame.new(p22, p23) * CFrame.Angles(0, 1.570796326795, 0)
 	self.parabolaOffhand.Range = (p23 - p22).magnitude
 end
 
 if not VRLaserPointerRaycastChange then
-	function t_3:getLaserHit(p24, p25, p26) --[[ line: 575 ]]
+	function t_3:getLaserHit(p24, p25, p26)
 		local var29, var30, var31, _ = workspace:FindPartOnRayWithIgnoreList(Ray.new(p24, p25 * self.laserMaxDistance), p26)
 		
 		return var29, var30, var31, (var30 - p24).magnitude / math.max(self.laserMaxDistance, 0.1)
 	end
 end
-function t_3.canNavigateTo(_, p27, _, p28) --[[ line: 584 ]]
+function t_3.canNavigateTo(_, p27, _, p28)
 	-- upvalues: localPlayer (write)
 	local character = localPlayer.Character
 	
 	return if character then if character:FindFirstChild("HumanoidRootPart") then if p27 then p28.Y >= -0.000001 else false else false else false
 end
 
-function t_3:checkHeadMountedMode(p29) --[[ line: 607 ]]
+function t_3:checkHeadMountedMode(p29)
 	-- upvalues: t (ref), guiService (ref)
 	if self:shouldForcePointer() then
 		self:setMode(t.Pointer)
@@ -509,7 +509,7 @@ function t_3:checkHeadMountedMode(p29) --[[ line: 607 ]]
 	self:setMode(t.Navigation)
 end
 
-function t_3:setNavigationValidState(p30) --[[ line: 621 ]]
+function t_3:setNavigationValidState(p30)
 	-- upvalues: t_1 (ref)
 	if p30 == self.navigationIsValid then return end
 	self.navigationIsValid = p30
@@ -534,7 +534,7 @@ function t_3:setNavigationValidState(p30) --[[ line: 621 ]]
 	self.plopBall.BrickColor = t_1.PLOP_BALL_COLOR_BAD
 end
 
-function t_3:updateNavPlop(p31, p32) --[[ line: 646 ]]
+function t_3:updateNavPlop(p31, p32)
 	-- upvalues: t_1 (ref), vector2_1 (ref), vector2 (ref)
 	local var32 = tick() - self.plopBallBounceStart
 	local cFrame = CFrame.new(p31, p31 + p32)
@@ -579,7 +579,7 @@ function t_3:updateNavPlop(p31, p32) --[[ line: 646 ]]
 	end
 end
 
-function t_3:updateNavigationMode(p33, p34, p35) --[[ line: 684 ]]
+function t_3:updateNavigationMode(p33, p34, p35)
 	self.navHitPoint = p33
 	self.navHitNormal = p34
 	self.navHitPart = p35
@@ -587,7 +587,7 @@ function t_3:updateNavigationMode(p33, p34, p35) --[[ line: 684 ]]
 	self:setNavigationValidState(self:canNavigateTo(self.navHitPart, self.navHitPoint, self.navHitNormal))
 end
 
-function t_3:showHitBallOnLaserPointer(p36) --[[ line: 693 ]]
+function t_3:showHitBallOnLaserPointer(p36)
 	-- upvalues: addPartsToGame (ref), removePartsFromGame (ref)
 	if p36 then
 		if self.showPlopBallOnPointer then
@@ -604,7 +604,7 @@ function t_3:showHitBallOnLaserPointer(p36) --[[ line: 693 ]]
 	end
 end
 
-function t_3:cursorInputsChanged() --[[ line: 707 ]]
+function t_3:cursorInputsChanged()
 	-- upvalues: VRService (ref), VRUtilModule (ref)
 	local didPointerHit = VRService.DidPointerHit
 	self.cursorSurfaceGui.Enabled = didPointerHit
@@ -624,7 +624,7 @@ function t_3:cursorInputsChanged() --[[ line: 707 ]]
 	end
 end
 
-function t_3:updateCursor_DEPRECATED() --[[ line: 732 ]]
+function t_3:updateCursor_DEPRECATED()
 	-- upvalues: VRService (ref), VRUtilModule (ref)
 	if VRService.DidPointerHit then
 		local pointerHitCFrame = VRService.PointerHitCFrame
@@ -652,7 +652,7 @@ function t_3:updateCursor_DEPRECATED() --[[ line: 732 ]]
 	self.cursorSurfaceGui.Enabled = VRService.DidPointerHit
 end
 
-function t_3:disableComponent() --[[ line: 774 ]]
+function t_3:disableComponent()
 	-- upvalues: removePartsFromGame (ref)
 	removePartsFromGame(self.parabola, self.parabolaOffhand, self.originPart, self.originPartOffhand, self.plopPart, self.plopBall, self.cursorPart)
 	self:setNavigationActionEnabled(false)
@@ -663,7 +663,7 @@ function t_3:disableComponent() --[[ line: 774 ]]
 	self.connections = {}
 end
 
-function t_3:update(_) --[[ line: 791 ]]
+function t_3:update(_)
 	-- upvalues: VRService (ref), t_2 (ref), localPlayer (write), VRUtilModule (ref)
 	if VRService.LaserPointer == Enum.VRLaserPointerMode.Disabled then return end
 	self.parabola.Thickness = t_2.ARC_THICKNESS * workspace.CurrentCamera.HeadScale

@@ -3,7 +3,7 @@ local promiseModule = require(expChatShared.Parent.Promise)
 local contextModule = require(expChatShared.context)
 local _ = require(script:FindFirstAncestor("Commands").types)
 
-local function matchesAlias(p0, p1) --[[ line: 10 ]]
+local function matchesAlias(p0, p1)
 	for i, v in pairs(p0) do
 		if string.find(p1, "^" .. v .. " ") then
 			return true
@@ -12,9 +12,9 @@ local function matchesAlias(p0, p1) --[[ line: 10 ]]
 	return false
 end
 
-return function(p2, p3, p4) --[[ line: 20 ]]
+return function(p2, p3, p4)
 	-- upvalues: promiseModule (ref), contextModule (ref), matchesAlias (ref)
-	return promiseModule.try(function() --[[ line: 21 ]]
+	return promiseModule.try(function()
 		-- upvalues: contextModule (copy), p2 (ref), matchesAlias (copy), p4 (ref), p3 (ref), promiseModule (copy)
 		assert(contextModule.store, "Store should exist")
 		

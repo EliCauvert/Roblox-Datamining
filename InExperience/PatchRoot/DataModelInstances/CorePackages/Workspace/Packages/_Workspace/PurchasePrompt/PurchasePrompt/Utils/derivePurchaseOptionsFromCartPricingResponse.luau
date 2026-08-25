@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").Parent.IAPExperience)
 local deriveSelectedOfferIdsFromCartPricingModule = require(script.Parent.deriveSelectedOfferIdsFromCartPricing)
 
-return function(p0) --[[ line: 18 | named "derivePurchaseOptionsFromCartPricingResponse" ]]
+return function(p0)
 	-- upvalues: deriveSelectedOfferIdsFromCartPricingModule (ref)
 	if p0 == nil then
 		return nil

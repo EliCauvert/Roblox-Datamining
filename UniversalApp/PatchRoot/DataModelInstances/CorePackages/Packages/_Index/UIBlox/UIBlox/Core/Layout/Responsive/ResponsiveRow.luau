@@ -37,24 +37,24 @@ responsiveRow.defaultProps = {
 	kind = "default",
 	multiLine = false,
 	data = {},
-	getItem = function(p0, p1, _) --[[ line: 78 ]]
+	getItem = function(p0, p1, _)
 		return if type(p0) == "table" then p0[p1] else nil
 	end,
-	renderItem = function(p2, _) --[[ line: 85 ]]
+	renderItem = function(p2, _)
 		return p2
 	end,
-	getCellColspan = function(_, _) --[[ line: 88 ]]
+	getCellColspan = function(_, _)
 		return nil
 	end,
-	getCellRowspan = function(_, _) --[[ line: 91 ]]
+	getCellRowspan = function(_, _)
 		return nil
 	end,
-	getCellOrder = function(_, _) --[[ line: 94 ]]
+	getCellOrder = function(_, _)
 		return nil
 	end
 }
 
-local function countItems(p3, p4) --[[ line: 99 ]]
+local function countItems(p3, p4)
 	-- upvalues: responsiveRow (ref)
 	if p3.getItemCount then
 		return p3.getItemCount(p3.data, p4)
@@ -70,7 +70,7 @@ local function countItems(p3, p4) --[[ line: 99 ]]
 	return p4.columns
 end
 
-local function _(p5, p6, p7, p8) --[[ line: 114 | named "resolveCellProp" ]]
+local function _(p5, p6, p7, p8)
 	if p5 then
 		local var11 = p5(p6, p7)
 		
@@ -85,18 +85,18 @@ local function _(p5, p6, p7, p8) --[[ line: 114 | named "resolveCellProp" ]]
 	end
 end
 
-local function addPaddingCells(p9, p10) --[[ line: 133 ]]
+local function addPaddingCells(p9, p10)
 	-- upvalues: array (ref), object (ref)
 	local t = {}
 	
-	local function _(p11) --[[ line: 135 | named "shouldSkip" ]]
+	local function _(p11)
 		-- upvalues: p10 (ref), t (ref)
 		local floored = math.floor(p11 / p10.columns)
 		
 		return t[string.format("%d,%d", p11 - floored * p10.columns, floored)]
 	end
 	
-	local function setSkip(value, p12, p13) --[[ line: 140 ]]
+	local function setSkip(value, p12, p13)
 		-- upvalues: p10 (ref), t (ref)
 		local floored = math.floor(value / p10.columns)
 		local var17 = value - floored * p10.columns
@@ -108,7 +108,7 @@ local function addPaddingCells(p9, p10) --[[ line: 133 ]]
 		end
 	end
 	
-	return array.reduce(p9, function(p14, p15) --[[ line: 149 ]]
+	return array.reduce(p9, function(p14, p15)
 		-- upvalues: p10 (ref), t (ref), setSkip (ref), object (copy)
 		while true do
 			local p14Count = #p14
@@ -125,20 +125,20 @@ local function addPaddingCells(p9, p10) --[[ line: 133 ]]
 	end, {})
 end
 
-local _ = function(p16, p17) --[[ line: 169 | named "formatCellKey" ]]
+local _ = function(p16, p17)
 	return string.format("ResponsiveRowCell%0" .. math.floor(math.log10(p17) + 1) .. "d", p16)
 end
 
-function filterDisplayedCells(p18, p19, p20) --[[ line: 175 ]]
+function filterDisplayedCells(p18, p19, p20)
 	-- upvalues: array (ref), object (ref)
 	local var20 = (p20.Min - 1) * p19.columns + 1
 	local var21 = p20.Max * p19.columns
 	local var22 = (p20.Max - p20.Min + 1) * p19.columns
 	
-	return array.map(array.filter(p18, function(_, p21) --[[ line: 179 ]]
+	return array.map(array.filter(p18, function(_, p21)
 		-- upvalues: var20 (ref), var21 (ref)
 		return var20 <= p21 and p21 <= var21
-	end), function(p22, _) --[[ line: 184 ]]
+	end), function(p22, _)
 		-- upvalues: object (copy), var22 (ref)
 		return object.assign({}, p22, {
 			key = string.format("ResponsiveRowCell%0" .. math.floor(math.log10(var22) + 1) .. "d", (p22.order - 1) % var22 + 1)
@@ -146,11 +146,11 @@ function filterDisplayedCells(p18, p19, p20) --[[ line: 175 ]]
 	end)
 end
 
-function responsiveRow.init(p23) --[[ line: 193 ]]
+function responsiveRow.init(p23)
 	p23.itemCache = {}
 end
 
-function responsiveRow.renderChildren(p24, p25) --[[ line: 197 ]]
+function responsiveRow.renderChildren(p24, p25)
 	-- upvalues: countItems (ref), array (ref), addPaddingCells (ref), UIBloxConfigModule (ref), roactModule (ref), responsiveCellModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -228,7 +228,7 @@ function responsiveRow.renderChildren(p24, p25) --[[ line: 197 ]]
 	p24.itemCache = t_1
 	
 	if p24.props.multiLine then
-		array.sort(t, function(p26, p27) --[[ line: 227 ]]
+		array.sort(t, function(p26, p27)
 			return p26.order - p27.order
 		end)
 		t = addPaddingCells(t, p25)
@@ -238,7 +238,7 @@ function responsiveRow.renderChildren(p24, p25) --[[ line: 197 ]]
 			t = filterDisplayedCells(t, p25, p24.props.displayLines)
 		end
 	elseif p24.props.scrollable then
-		var26 = array.reduce(t, function(p28, p29) --[[ line: 237 ]]
+		var26 = array.reduce(t, function(p28, p29)
 			return p28 + p29.colspan
 		end, 0) / p25.columns
 	end
@@ -247,7 +247,7 @@ function responsiveRow.renderChildren(p24, p25) --[[ line: 197 ]]
 			t[i_1].zIndex = #t + 2 - i_1
 		end
 	end
-	return array.map(t, function(p30, p31) --[[ line: 250 ]]
+	return array.map(t, function(p30, p31)
 		-- upvalues: roactModule (copy), responsiveCellModule (copy), t (write)
 		return roactModule.createElement(responsiveCellModule, {
 			key = p30.key or string.format("ResponsiveRowCell%0" .. math.floor(math.log10(#t) + 1) .. "d", p31),
@@ -259,10 +259,10 @@ function responsiveRow.renderChildren(p24, p25) --[[ line: 197 ]]
 	end), var26, var25
 end
 
-function responsiveRow.render(p32) --[[ line: 265 ]]
+function responsiveRow.render(p32)
 	-- upvalues: roactModule (ref), responsiveLayoutContextModule (ref), object (ref), responsiveLayoutConfigReaderModule (ref), responsiveBaseRowModule (ref)
 	return roactModule.createElement(responsiveLayoutContextModule.Consumer, {
-		render = function(p33) --[[ line: 267 ]]
+		render = function(p33)
 			-- upvalues: object (copy), p32 (ref), responsiveLayoutConfigReaderModule (copy), roactModule (copy), responsiveBaseRowModule (copy)
 			local var38 = object.assign({}, p33, { kind = p32.props.kind or object.None })
 			local var39, var40, var41 = p32:renderChildren({
@@ -294,7 +294,7 @@ function responsiveRow.render(p32) --[[ line: 265 ]]
 	})
 end
 
-return roactModule.forwardRef(function(p34, p35) --[[ line: 302 ]]
+return roactModule.forwardRef(function(p34, p35)
 	-- upvalues: roactModule (ref), responsiveRow (ref), object (ref)
 	return roactModule.createElement(responsiveRow, object.assign({}, p34, { forwardedRef = p35 }))
 end)

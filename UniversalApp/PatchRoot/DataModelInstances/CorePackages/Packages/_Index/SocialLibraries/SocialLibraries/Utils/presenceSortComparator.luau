@@ -6,7 +6,7 @@ local t = {
 	[userModel.PresenceType.OFFLINE] = 0
 }
 
-return function(p0, p1) --[[ line: 13 ]]
+return function(p0, p1)
 	-- upvalues: t (ref)
 	p0 = p0 or {}
 	p1 = p1 or {}

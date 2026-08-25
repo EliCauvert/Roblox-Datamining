@@ -12,11 +12,11 @@ local useStatusBarHeight = robloxAppHooksModule.useStatusBarHeight
 local useTopBarHeight = robloxAppHooksModule.useTopBarHeight
 local visibilityControl = appNavBarModule.VisibilityControl
 
-local function noopGetter() --[[ line: 30 ]]
+local function noopGetter()
 	return nil
 end
 
-return reactModule.memo(function(p0) --[[ line: 34 | named "SurfaceBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useStatusBarHeight (ref), useTopBarHeight (ref), reactModule (ref), visibilityControl (ref), useComponentConfig (ref), noopGetter (ref), signalsReactModule (ref), view (ref), sduiFeatureEntryPoint (ref)
 	local var7 = useStatusBarHeight()
 	local var8 = useTopBarHeight()
@@ -27,7 +27,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SurfaceBanner" ]]
 	local var14 = if var13 and var13.props then var13.props.backgroundStyle else nil
 	local var15 = signalsReactModule.useSignalState(if var13 and var13.propSignals and var13.propSignals.backgroundStyle then var13.propSignals.backgroundStyle else noopGetter)
 	local var16 = if var14 ~= nil then if var15 ~= nil then nil else var15.data else var14
-	local var17 = headerBinding:map(function(p1) --[[ line: 70 ]]
+	local var17 = headerBinding:map(function(p1)
 		-- upvalues: var7 (ref), var8 (ref)
 		return UDim2.new(0, 0, 0, math.max(var7, p1 * var8))
 	end)
@@ -42,7 +42,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SurfaceBanner" ]]
 			backgroundStyle = var16,
 			AnchorPoint = Vector2.new(0, 1),
 			Position = var17,
-			Size = headerBinding:map(function(p2) --[[ line: 80 ]]
+			Size = headerBinding:map(function(p2)
 				-- upvalues: var7 (ref), var8 (ref)
 				return UDim2.new(1, 0, 0, math.max(0, var7 - p2 * var8))
 			end)
@@ -52,7 +52,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SurfaceBanner" ]]
 			Position = var17,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			onAbsoluteSizeChanged = function(value) --[[ line: 110 ]]
+			onAbsoluteSizeChanged = function(value)
 				-- upvalues: var10 (ref)
 				var10(value.AbsoluteSize.Y)
 			end

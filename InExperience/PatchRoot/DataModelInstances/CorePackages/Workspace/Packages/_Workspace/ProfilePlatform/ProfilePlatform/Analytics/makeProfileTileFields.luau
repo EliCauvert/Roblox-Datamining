@@ -3,7 +3,7 @@ local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
 local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 
-local function buildTileFields(p0, p1, p2, p3, p4) --[[ line: 65 ]]
+local function buildTileFields(p0, p1, p2, p3, p4)
 	-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (ref), momentsCommonModule (ref)
 	if not getFFlagMomentsAnalyticsSchemaIdentity() then
 		local t = { userId = p1 }
@@ -37,16 +37,16 @@ end
 
 return {
 	INTERACTION_OPEN = "open",
-	getTileMomentId = function(p5) --[[ line: 43 ]]
+	getTileMomentId = function(p5)
 		local recommendationMetadata = p5.recommendationMetadata
 		
 		return if recommendationMetadata == nil then "" else recommendationMetadata.feedItemId or ""
 	end,
-	makeProfileTileImpressionFields = function(p6, p7, p8, p9) --[[ line: 108 ]]
+	makeProfileTileImpressionFields = function(p6, p7, p8, p9)
 		-- upvalues: buildTileFields (ref)
 		return buildTileFields(p6, p7, p8, p9, nil)
 	end,
-	makeProfileTileInteractionFields = function(p10, p11, p12, p13) --[[ line: 119 ]]
+	makeProfileTileInteractionFields = function(p10, p11, p12, p13)
 		-- upvalues: buildTileFields (ref)
 		return buildTileFields(p10, p11, p12, p13, "open")
 	end

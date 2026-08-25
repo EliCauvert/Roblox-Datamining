@@ -6,7 +6,7 @@ local t = {
 	Size48x48 = "rbxasset://textures/ui/LuaChat/graphic/gr-profile-border-48x48.png"
 }
 
-return function(p0) --[[ line: 28 | named "CircleMask" ]]
+return function(p0)
 	-- upvalues: t (ref), useCursor (ref), reactModule (ref)
 	return reactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 1, 0),

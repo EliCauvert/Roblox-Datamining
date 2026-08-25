@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 
-return function(p0) --[[ line: 13 | named "AvatarThumbnail" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), loadableImage (ref)
 	return reactModule.createElement(loadableImage, {
 		useShimmerAnimationWhileLoading = true,

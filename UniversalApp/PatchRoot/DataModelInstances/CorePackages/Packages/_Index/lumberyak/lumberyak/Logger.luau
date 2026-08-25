@@ -20,7 +20,7 @@ local t_1 = {}
 for i, v in pairs(list) do
 	t_1[v] = i
 end
-function t.Levels.fromString(p0) --[[ line: 28 ]]
+function t.Levels.fromString(p0)
 	-- upvalues: list (ref)
 	if type(p0) ~= "string" then
 		return nil
@@ -33,7 +33,7 @@ function t.Levels.fromString(p0) --[[ line: 28 ]]
 	return nil
 end
 
-function t.new(p1, p2) --[[ line: 40 ]]
+function t.new(p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = {
 		dirty = true,
@@ -61,7 +61,7 @@ function t.new(p1, p2) --[[ line: 40 ]]
 	return t_1
 end
 
-local function setActive(value, p3) --[[ line: 72 ]]
+local function setActive(value, p3)
 	-- upvalues: t_1 (ref), list (ref), setActive (ref)
 	local var9 = t_1[value]
 	
@@ -75,7 +75,7 @@ local function setActive(value, p3) --[[ line: 72 ]]
 	end
 end
 
-local function setDirty(value) --[[ line: 85 ]]
+local function setDirty(value)
 	-- upvalues: setDirty (ref)
 	value.dirty = true
 	
@@ -84,7 +84,7 @@ local function setDirty(value) --[[ line: 85 ]]
 	end
 end
 
-local function updateCache(p4) --[[ line: 93 ]]
+local function updateCache(p4)
 	-- upvalues: updateCache (ref), cryoModule (ref)
 	if not p4.dirty then return end
 	if not p4.parent then
@@ -104,7 +104,7 @@ local function updateCache(p4) --[[ line: 93 ]]
 	p4.dirty = false
 end
 
-function t:setParent(p5) --[[ line: 117 ]]
+function t:setParent(p5)
 	-- upvalues: updateCache (ref), t_1 (ref), setActive (ref), list (ref), setDirty (ref)
 	if self.parent then
 		self.parent.children[self] = nil
@@ -129,7 +129,7 @@ function t:setParent(p5) --[[ line: 117 ]]
 	end
 end
 
-function t:addSink(p6) --[[ line: 141 ]]
+function t:addSink(p6)
 	-- upvalues: setActive (ref), setDirty (ref)
 	setActive(p6.maxLevel, self)
 	table.insert(self.sinks, p6)
@@ -140,7 +140,7 @@ function t:addSink(p6) --[[ line: 141 ]]
 	end
 end
 
-function t:setContext(p7) --[[ line: 147 ]]
+function t:setContext(p7)
 	-- upvalues: setDirty (ref)
 	self.context = p7
 	self.dirty = true
@@ -150,7 +150,7 @@ function t:setContext(p7) --[[ line: 147 ]]
 	end
 end
 
-local function log(p8, p9, p10) --[[ line: 152 ]]
+local function log(p8, p9, p10)
 	-- upvalues: updateCache (ref), t_1 (ref)
 	if p9.dirty then
 		updateCache(p9)
@@ -172,7 +172,7 @@ local function log(p8, p9, p10) --[[ line: 152 ]]
 	end
 	if var12:find("{") then
 		var13 = 1
-		var12 = var12:gsub("{(.-)}", function(p11) --[[ line: 186 ]]
+		var12 = var12:gsub("{(.-)}", function(p11)
 			-- upvalues: var13 (write), p10 (ref), t (ref)
 			if p11 == "" then
 				var13 += 1
@@ -201,7 +201,7 @@ local function log(p8, p9, p10) --[[ line: 152 ]]
 	end
 end
 
-function t:error(...) --[[ line: 213 ]]
+function t:error(...)
 	-- upvalues: t (ref), log (ref)
 	if self.active[t.Levels.Error] then
 		log(t.Levels.Error, self, table.pack(...))
@@ -210,7 +210,7 @@ function t:error(...) --[[ line: 213 ]]
 	end
 end
 
-function t:warning(...) --[[ line: 220 ]]
+function t:warning(...)
 	-- upvalues: t (ref), log (ref)
 	if self.active[t.Levels.Warning] then
 		log(t.Levels.Warning, self, table.pack(...))
@@ -219,7 +219,7 @@ function t:warning(...) --[[ line: 220 ]]
 	end
 end
 
-function t:info(...) --[[ line: 227 ]]
+function t:info(...)
 	-- upvalues: t (ref), log (ref)
 	if self.active[t.Levels.Info] then
 		log(t.Levels.Info, self, table.pack(...))
@@ -228,7 +228,7 @@ function t:info(...) --[[ line: 227 ]]
 	end
 end
 
-function t:debug(...) --[[ line: 234 ]]
+function t:debug(...)
 	-- upvalues: t (ref), log (ref)
 	if self.active[t.Levels.Debug] then
 		log(t.Levels.Debug, self, table.pack(...))
@@ -237,7 +237,7 @@ function t:debug(...) --[[ line: 234 ]]
 	end
 end
 
-function t:trace(...) --[[ line: 241 ]]
+function t:trace(...)
 	-- upvalues: t (ref), log (ref)
 	if self.active[t.Levels.Trace] then
 		log(t.Levels.Trace, self, table.pack(...))

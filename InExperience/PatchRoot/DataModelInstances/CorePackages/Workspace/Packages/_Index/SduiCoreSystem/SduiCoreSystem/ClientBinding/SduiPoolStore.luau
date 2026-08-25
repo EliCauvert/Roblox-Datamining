@@ -13,11 +13,11 @@ local cellsEqual = sduiPoolStoreLayoutModule.cellsEqual
 local EMPTY_CELLS = sduiPoolStoreLayoutModule.EMPTY_CELLS
 local frozen = table.freeze({})
 
-local function sectionConfigsEqual(p0, p1) --[[ line: 69 ]]
+local function sectionConfigsEqual(p0, p1)
 	return p0 == p1 or (if p0 == nil or p1 == nil then false else p0.poolId == p1.poolId and (p0.numberOfRows == p1.numberOfRows and (p0.prevSectionInPoolId == p1.prevSectionInPoolId and p0.prevSectionId == p1.prevSectionId)))
 end
 
-local function createSduiPoolStore() --[[ line: 82 ]]
+local function createSduiPoolStore()
 	-- upvalues: signalsModule (ref), sectionConfigsEqual (ref), getMainCollectionLayoutStore (ref), frozen (ref), EMPTY_CELLS (ref), makePoolGetSpanConfig (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), layoutToCells (ref), cellsEqual (ref)
 	local t = {}
 	local t_1 = {}
@@ -27,7 +27,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 	local t_5 = {}
 	local var14, var15 = signalsModule.createSignal(nil)
 	
-	local function _(value) --[[ line: 96 | named "getOrCreatePoolSignal" ]]
+	local function _(value)
 		-- upvalues: t (ref), signalsModule (copy)
 		local var18 = t[value]
 		
@@ -39,7 +39,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 		return var18
 	end
 	
-	local _ = function(value) --[[ line: 106 | named "getOrCreateSectionConfigSignal" ]]
+	local _ = function(value)
 		-- upvalues: t_1 (ref), signalsModule (copy), sectionConfigsEqual (copy)
 		local var21 = t_1[value]
 		
@@ -53,12 +53,12 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 	
 	local _ = nil
 	
-	local var16 = function(p2) --[[ line: 119 ]]
+	local var16 = function(p2)
 		-- upvalues: t_2 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), t (ref), var14 (ref), getMainCollectionLayoutStore (copy), frozen (copy), var16 (write), EMPTY_CELLS (copy), makePoolGetSpanConfig (copy), processOneGrid (copy), fFlagLuaAppEnableNxMRoduxApportioning (copy), layoutToCells (copy)
 		local var24 = t_2[p2]
 		
 		if var24 == nil then
-			local var25 = signalsModule.createComputed(function(p3) --[[ line: 124 ]]
+			local var25 = signalsModule.createComputed(function(p3)
 				-- upvalues: p2 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t (copy), var14 (copy), getMainCollectionLayoutStore (copy), frozen (copy), var16 (copy), EMPTY_CELLS (copy), makePoolGetSpanConfig (copy), processOneGrid (copy), fFlagLuaAppEnableNxMRoduxApportioning (copy), layoutToCells (copy)
 				local var26 = t_1[p2]
 				
@@ -154,12 +154,12 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 		return var24
 	end
 	
-	local _ = function(p4) --[[ line: 217 | named "getRowCountComputed" ]]
+	local _ = function(p4)
 		-- upvalues: t_3 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var16 (write)
 		local var47 = t_3[p4]
 		
 		if var47 == nil then
-			local var48 = signalsModule.createComputed(function(p5) --[[ line: 222 ]]
+			local var48 = signalsModule.createComputed(function(p5)
 				-- upvalues: p4 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var16 (copy)
 				local var49 = t_1[p4]
 				
@@ -188,12 +188,12 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 	
 	local _ = nil
 	
-	local var17 = function(p6) --[[ line: 241 ]]
+	local var17 = function(p6)
 		-- upvalues: t_4 (ref), signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), var17 (write), t_3 (ref), var16 (write)
 		local var54 = t_4[p6]
 		
 		if var54 == nil then
-			local var55 = signalsModule.createComputed(function(p7) --[[ line: 246 ]]
+			local var55 = signalsModule.createComputed(function(p7)
 				-- upvalues: p6 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var17 (copy), t_3 (copy), var16 (copy)
 				local var56 = t_1[p6]
 				
@@ -213,7 +213,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 				local var61 = t_3[prevSectionId]
 				
 				if var61 == nil then
-					local var63 = signalsModule.createComputed(function(p8) --[[ line: 222 ]]
+					local var63 = signalsModule.createComputed(function(p8)
 						-- upvalues: prevSectionId (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var16 (copy)
 						local var49 = t_1[prevSectionId]
 						
@@ -248,9 +248,9 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 	end
 	
 	return {
-		getSectionInfo = function(p9) --[[ line: 279 ]]
+		getSectionInfo = function(p9)
 			-- upvalues: signalsModule (copy), t_1 (ref), sectionConfigsEqual (copy), t_5 (ref), var16 (write), EMPTY_CELLS (copy), cellsEqual (copy), var17 (write), t_3 (ref)
-			return signalsModule.createComputed(function(p10) --[[ line: 280 ]]
+			return signalsModule.createComputed(function(p10)
 				-- upvalues: p9 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), t_5 (copy), var16 (copy), EMPTY_CELLS (copy), cellsEqual (copy), var17 (copy), t_3 (copy)
 				local var64 = t_1[p9]
 				
@@ -267,7 +267,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 				local var68 = t_5[p9]
 				
 				if var68 == nil then
-					local var70 = signalsModule.createComputed(function(p11) --[[ line: 267 ]]
+					local var70 = signalsModule.createComputed(function(p11)
 						-- upvalues: var16 (copy), p9 (ref), EMPTY_CELLS (copy)
 						local var74 = var16(p9)(p11)
 						
@@ -284,7 +284,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 				local var71 = t_3[p9]
 				
 				if var71 == nil then
-					local var73 = signalsModule.createComputed(function(p12) --[[ line: 222 ]]
+					local var73 = signalsModule.createComputed(function(p12)
 						-- upvalues: p9 (ref), t_1 (copy), signalsModule (copy), sectionConfigsEqual (copy), var16 (copy)
 						local var49 = t_1[p9]
 						
@@ -315,12 +315,12 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 			end)
 		end,
 		getSectionStartRow = var17,
-		getSectionCells = function(p13) --[[ line: 262 ]]
+		getSectionCells = function(p13)
 			-- upvalues: t_5 (ref), signalsModule (copy), var16 (write), EMPTY_CELLS (copy), cellsEqual (copy)
 			local var75 = t_5[p13]
 			
 			if var75 == nil then
-				local var76 = signalsModule.createComputed(function(p14) --[[ line: 267 ]]
+				local var76 = signalsModule.createComputed(function(p14)
 					-- upvalues: var16 (copy), p13 (ref), EMPTY_CELLS (copy)
 					local var74 = var16(p13)(p14)
 					
@@ -332,7 +332,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 			end
 			return var75
 		end,
-		setPools = function(value) --[[ line: 297 ]]
+		setPools = function(value)
 			-- upvalues: t (ref), signalsModule (copy)
 			for i, v in value do
 				local var77 = t[i]
@@ -345,7 +345,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 				var77.set(v)
 			end
 		end,
-		setSections = function(value) --[[ line: 304 ]]
+		setSections = function(value)
 			-- upvalues: t_1 (ref), signalsModule (copy), sectionConfigsEqual (copy)
 			local t = {}
 			local var81 = nil
@@ -375,7 +375,7 @@ local function createSduiPoolStore() --[[ line: 82 ]]
 				var81 = sectionId
 			end
 		end,
-		setLayoutStore = function(value) --[[ line: 332 ]]
+		setLayoutStore = function(value)
 			-- upvalues: var15 (ref)
 			var15(value)
 		end
@@ -385,7 +385,7 @@ end
 local tbl = setmetatable({}, { __mode = "v" })
 
 return {
-	getSduiPoolStore = function(p15) --[[ line: 341 ]]
+	getSduiPoolStore = function(p15)
 		-- upvalues: tbl (ref), createSduiPoolStore (ref)
 		local var86 = tbl[p15]
 		

@@ -4,11 +4,11 @@ local parseLegacyErrorModule = require(script.Parent.parseLegacyError)
 local _ = require(script.Parent.types)
 local isSuccess = require(script.Parent.httpStatus).isSuccess
 
-local function _(p0) --[[ line: 11 | named "bodyToString" ]]
+local function _(p0)
 	return if p0 == nil then nil elseif typeof(p0) == "buffer" then buffer.tostring(p0) else p0
 end
 
-local _ = function(p1) --[[ line: 21 | named "tryJsonDecode" ]]
+local _ = function(p1)
 	-- upvalues: httpService (ref)
 	local var3 = if p1 == nil then nil elseif typeof(p1) == "buffer" then buffer.tostring(p1) else p1
 	
@@ -21,9 +21,9 @@ local _ = function(p1) --[[ line: 21 | named "tryJsonDecode" ]]
 end
 
 return {
-	decodeJson = function(p2) --[[ line: 30 ]]
+	decodeJson = function(p2)
 		-- upvalues: httpService (ref), parseApiErrorModule (ref), isSuccess (ref)
-		return function(p3) --[[ line: 31 ]]
+		return function(p3)
 			-- upvalues: httpService (copy), parseApiErrorModule (copy), isSuccess (copy), p2 (ref)
 			local var5
 			local responseBody = p3.responseBody
@@ -47,9 +47,9 @@ return {
 			return nil, `http {p3.statusCode}: {(if responseBody_1 == nil then nil elseif typeof(responseBody_1) == "buffer" then buffer.tostring(responseBody_1) else responseBody_1) or ""}`, p3.statusCode
 		end
 	end,
-	decodeLegacyJson = function(p4) --[[ line: 44 ]]
+	decodeLegacyJson = function(p4)
 		-- upvalues: httpService (ref), parseLegacyErrorModule (ref), isSuccess (ref)
-		return function(p5) --[[ line: 45 ]]
+		return function(p5)
 			-- upvalues: httpService (copy), parseLegacyErrorModule (copy), isSuccess (copy), p4 (ref)
 			local var8
 			local responseBody = p5.responseBody

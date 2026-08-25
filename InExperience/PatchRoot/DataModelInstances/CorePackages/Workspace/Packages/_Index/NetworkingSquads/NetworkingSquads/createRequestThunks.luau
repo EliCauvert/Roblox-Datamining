@@ -14,7 +14,7 @@ local createSendSquadVoiceAbuseReportModule = require(networkRequests.createSend
 local createReinviteToSquadModule = require(networkRequests.createReinviteToSquad)
 local createSetRegroupPromptShownModule = require(networkRequests.createSetRegroupPromptShown)
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: createCreateOrJoinSquadModule (ref), createGetSquadActiveModule (ref), createGetSquadFromSquadIdModule (ref), createJoinSquadModule (ref), createActOnPartyNudgeModule (ref), createLeaveSquadModule (ref), createSquadInviteModule (ref), createCreateExperienceInviteModule (ref), createGetExperienceInviteModule (ref), createVoteForExperienceInviteModule (ref), createReinviteToSquadModule (ref), createSendSquadVoiceAbuseReportModule (ref), createSetRegroupPromptShownModule (ref)
 	return {
 		CreateOrJoinSquad = createCreateOrJoinSquadModule(p0),

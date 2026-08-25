@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("LuaAppSocialFriendsLayer", "Social.Friends")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("LuaAppSocialFriendsLayer")
 end

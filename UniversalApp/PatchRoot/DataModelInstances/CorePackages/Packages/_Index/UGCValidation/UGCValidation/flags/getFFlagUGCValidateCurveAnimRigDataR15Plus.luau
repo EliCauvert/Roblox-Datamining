@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateCurveAnimRigDataR15Plus", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateCurveAnimRigDataR15Plus")
 end

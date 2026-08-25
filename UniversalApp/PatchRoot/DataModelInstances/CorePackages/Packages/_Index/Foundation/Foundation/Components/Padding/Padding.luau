@@ -5,7 +5,7 @@ local reactIsModule = require(parent.ReactIs)
 local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
 local _ = require(foundation.Components.Types)
 
-local function getPadding(p0) --[[ line: 14 ]]
+local function getPadding(p0)
 	-- upvalues: reactIsModule (ref)
 	return if reactIsModule.isBinding(p0) then {
 		PaddingTop = p0,
@@ -40,7 +40,7 @@ local function getPadding(p0) --[[ line: 14 ]]
 	} else {}
 end
 
-return reactModule.memo(function(p1) --[[ line: 73 | named "Padding" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: getPadding (ref), reactModule (ref), getTestIdTagModule (ref)
 	local var5 = getPadding(p1.value)
 	

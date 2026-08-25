@@ -5,7 +5,7 @@ local constantsInterfaceModule = require(parent.ConstantsInterface)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 15 ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: assetTraversalUtilsModule (ref), constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
 	local t = {}
 	
@@ -18,7 +18,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 15 ]]
 		local var5 = assetTraversalUtilsModule.assetHierarchy[p3]
 		assetTraversalUtilsModule.traverseHierarchy(nil, p2, p3, nil, CFrame.new(), var5.root, var5, t, p4)
 		
-		local function moveParts(p5, p6, p7, p8, p9) --[[ line: 48 ]]
+		local function moveParts(p5, p6, p7, p8, p9)
 			-- upvalues: constantsInterfaceModule (copy), p3 (ref), r15plusUtilsModule (copy), getAttachmentCFrameInPartSpaceModule (copy), moveParts (ref)
 			local var10 = p5:FindFirstChild(p8)
 			local var11 = p7

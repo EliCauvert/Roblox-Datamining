@@ -2,7 +2,7 @@
 local sduiErrors = require(script:FindFirstAncestor("ServerDrivenUi").Parent.SduiCoreSystem).SduiErrors
 local sduiQueryImpressionsThrottlingHundredthsPercent = game:DefineFastInt("SduiQueryImpressionsThrottlingHundredthsPercent", 10000)
 
-return function(p0, p1, p2, p3, _) --[[ line: 26 | named "SduiQueryImpressionsHandler" ]]
+return function(p0, p1, p2, p3, _)
 	-- upvalues: sduiErrors (ref), sduiQueryImpressionsThrottlingHundredthsPercent (ref), telemetryService (ref)
 	if not p3 then
 		p0.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogQueryImpressions, {

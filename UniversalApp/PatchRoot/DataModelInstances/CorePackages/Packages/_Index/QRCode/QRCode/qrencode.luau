@@ -769,7 +769,7 @@
 	}
 }
 
-local function _(p0) --[[ line: 116 | named "tbl_to_number" ]]
+local function _(p0)
 	local p0Count = #p0
 	local var36 = 0
 	local var37 = 1
@@ -781,7 +781,7 @@ local function _(p0) --[[ line: 116 | named "tbl_to_number" ]]
 	return var36
 end
 
-local function bit_xor(p1, p2) --[[ line: 128 ]]
+local function bit_xor(p1, p2)
 	-- upvalues: t (ref)
 	local var38 = t[p1]
 	local var39 = t[p2]
@@ -805,7 +805,7 @@ local function bit_xor(p1, p2) --[[ line: 128 ]]
 	return var42
 end
 
-local function binary(p3, p4) --[[ line: 143 ]]
+local function binary(p3, p4)
 	local t = {
 		["0"] = "000",
 		["1"] = "001",
@@ -817,13 +817,13 @@ local function binary(p3, p4) --[[ line: 143 ]]
 		["7"] = "111"
 	}
 	
-	return string.gsub(string.format(string.format("%%%ds", p4), string.gsub(string.gsub(string.format("%o", p3), "(.)", function(p5) --[[ line: 147 ]]
+	return string.gsub(string.format(string.format("%%%ds", p4), string.gsub(string.gsub(string.format("%o", p3), "(.)", function(p5)
 		-- upvalues: t (ref)
 		return t[p5]
 	end), "^0*(.*)$", "%1")), " ", "0")
 end
 
-local _ = function(p6, p7, p8, p9) --[[ line: 158 | named "fill_matrix_position" ]]
+local _ = function(p6, p7, p8, p9)
 	if p7 == "1" then
 		p6[p8][p9] = 2
 		
@@ -832,7 +832,7 @@ local _ = function(p6, p7, p8, p9) --[[ line: 158 | named "fill_matrix_position"
 	p6[p8][p9] = -2
 end
 
-local function get_mode(p10) --[[ line: 177 ]]
+local function get_mode(p10)
 	return if string.match(p10, "^[0-9]+$") then 1 elseif string.match(p10, "^[0-9A-Z $%%*./:+-]+$") then 2 else 4
 end
 
@@ -854,7 +854,7 @@ local list = {
 	{ 2956, 2334, 1666, 1276 }
 }
 
-local function get_version_eclevel(p11, p12, p13) --[[ line: 224 ]]
+local function get_version_eclevel(p11, p12, p13)
 	-- upvalues: list (ref)
 	local var45 = p12
 	
@@ -905,7 +905,7 @@ local function get_version_eclevel(p11, p12, p13) --[[ line: 224 ]]
 	return var48, p13
 end
 
-local function get_length(p14, p15, p16) --[[ line: 277 ]]
+local function get_length(p14, p15, p16)
 	-- upvalues: binary (ref)
 	local var54 = p16
 	
@@ -930,7 +930,7 @@ local function get_length(p14, p15, p16) --[[ line: 277 ]]
 	return binary(#p14, var56)
 end
 
-local function get_version_eclevel_mode_bistringlength(p17, p18, p19) --[[ line: 303 ]]
+local function get_version_eclevel_mode_bistringlength(p17, p18, p19)
 	-- upvalues: get_version_eclevel (ref), get_length (ref), binary (ref)
 	local var57
 	local _ = nil
@@ -956,11 +956,11 @@ local list_1 = {
 	28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1
 }
 
-local function encode_string_numeric(p20) --[[ line: 339 ]]
+local function encode_string_numeric(p20)
 	-- upvalues: binary (ref)
 	local var60 = ""
 	local var61 = nil
-	string.gsub(p20, "..?.?", function(p21) --[[ line: 342 ]]
+	string.gsub(p20, "..?.?", function(p21)
 		-- upvalues: var61 (write), var60 (write), binary (copy)
 		var61 = tonumber(p21)
 		
@@ -979,13 +979,13 @@ local function encode_string_numeric(p20) --[[ line: 339 ]]
 	return var60
 end
 
-local function encode_string_ascii(p22) --[[ line: 357 ]]
+local function encode_string_ascii(p22)
 	-- upvalues: list_1 (ref), binary (ref)
 	local var62 = ""
 	local var63 = nil
 	local var64 = nil
 	local var65 = nil
-	string.gsub(p22, "..?", function(p23) --[[ line: 361 ]]
+	string.gsub(p22, "..?", function(p23)
 		-- upvalues: var64 (write), list_1 (copy), var65 (write), var63 (write), var62 (write), binary (copy)
 		if #p23 == 2 then
 			var64 = list_1[string.byte(string.sub(p23, 1, 1))]
@@ -1002,10 +1002,10 @@ local function encode_string_ascii(p22) --[[ line: 357 ]]
 	return var62
 end
 
-local function encode_string_binary(p24) --[[ line: 378 ]]
+local function encode_string_binary(p24)
 	-- upvalues: binary (ref)
 	local t = {}
-	string.gsub(p24, ".", function(p25) --[[ line: 380 ]]
+	string.gsub(p24, ".", function(p25)
 		-- upvalues: t (ref), binary (copy)
 		t[#t + 1] = binary(string.byte(p25), 8)
 	end)
@@ -1013,13 +1013,13 @@ local function encode_string_binary(p24) --[[ line: 378 ]]
 	return table.concat(t)
 end
 
-local _ = function(p26, p27) --[[ line: 387 | named "encode_data" ]]
+local _ = function(p26, p27)
 	-- upvalues: binary (ref), list_1 (ref), encode_string_binary (ref)
 	local var67, var68
 	if p27 == 1 then
 		var67 = ""
 		var68 = nil
-		string.gsub(p26, "..?.?", function(p28) --[[ line: 342 ]]
+		string.gsub(p26, "..?.?", function(p28)
 			-- upvalues: var68 (write), var67 (write), binary (copy)
 			var61 = tonumber(p28)
 			
@@ -1041,7 +1041,7 @@ local _ = function(p26, p27) --[[ line: 387 | named "encode_data" ]]
 		var68 = nil
 		local var69 = nil
 		local var70 = nil
-		string.gsub(p26, "..?", function(p29) --[[ line: 361 ]]
+		string.gsub(p26, "..?", function(p29)
 			-- upvalues: var69 (write), list_1 (copy), var70 (write), var68 (write), var67 (write), binary (copy)
 			if #p29 == 2 then
 				var64 = list_1[string.byte(string.sub(p29, 1, 1))]
@@ -1062,7 +1062,7 @@ local _ = function(p26, p27) --[[ line: 387 | named "encode_data" ]]
 	assert(false, "not implemented yet")
 end
 
-local function add_pad_data(p30, p31, p32) --[[ line: 401 ]]
+local function add_pad_data(p30, p31, p32)
 	-- upvalues: list (ref)
 	local _ = nil
 	local _ = nil
@@ -1653,9 +1653,9 @@ local t_3 = {
 	}
 }
 
-local function convert_bitstring_to_bytes(p33) --[[ line: 496 ]]
+local function convert_bitstring_to_bytes(p33)
 	local t = {}
-	local _ = string.gsub(p33, "(........)", function(p34) --[[ line: 498 ]]
+	local _ = string.gsub(p33, "(........)", function(p34)
 		-- upvalues: t (ref)
 		t[#t + 1] = tonumber(p34, 2)
 	end)
@@ -1663,7 +1663,7 @@ local function convert_bitstring_to_bytes(p33) --[[ line: 496 ]]
 	return t
 end
 
-local function get_generator_polynominal_adjusted(a, b) --[[ line: 506 ]]
+local function get_generator_polynominal_adjusted(a, b)
 	-- upvalues: t_3 (ref)
 	local t = { [0] = 0 }
 	
@@ -1678,7 +1678,7 @@ local function get_generator_polynominal_adjusted(a, b) --[[ line: 506 ]]
 	return t
 end
 
-local _ = function(x) --[[ line: 521 | named "convert_to_alpha" ]]
+local _ = function(x)
 	-- upvalues: t_2 (ref)
 	local t = {}
 	
@@ -1688,7 +1688,7 @@ local _ = function(x) --[[ line: 521 | named "convert_to_alpha" ]]
 	return t
 end
 
-local _ = function(p35, _) --[[ line: 530 | named "convert_to_int" ]]
+local _ = function(p35, _)
 	-- upvalues: t_1 (ref)
 	local t = {}
 	
@@ -1698,13 +1698,13 @@ local _ = function(p35, _) --[[ line: 530 | named "convert_to_int" ]]
 	return t
 end
 
-local function calculate_error_correction(p36, p37) --[[ line: 539 ]]
+local function calculate_error_correction(p36, p37)
 	-- upvalues: t_2 (ref), get_generator_polynominal_adjusted (ref), t_1 (ref), bit_xor (ref)
 	local var78 = nil
 	
 	if type(p36) == "string" then
 		local t = {}
-		local _ = string.gsub(p36, "(........)", function(p38) --[[ line: 498 ]]
+		local _ = string.gsub(p36, "(........)", function(p38)
 			-- upvalues: t (ref)
 			t[#t + 1] = tonumber(p38, 2)
 		end)
@@ -2041,7 +2041,7 @@ local list_3 = {
 	4, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0
 }
 
-local function arrange_codewords_and_calculate_ec(p39, p40, p41) --[[ line: 710 ]]
+local function arrange_codewords_and_calculate_ec(p39, p40, p41)
 	-- upvalues: binary (ref), list_2 (ref), calculate_error_correction (ref)
 	if type(p41) == "table" then
 		local var94 = ""
@@ -2100,7 +2100,7 @@ local function arrange_codewords_and_calculate_ec(p39, p40, p41) --[[ line: 710 
 	return var103 .. var105
 end
 
-local function add_position_detection_patterns(p42) --[[ line: 786 ]]
+local function add_position_detection_patterns(p42)
 	local p42Count = #p42
 	
 	for i_1 = 1, 8 do
@@ -2133,7 +2133,7 @@ local function add_position_detection_patterns(p42) --[[ line: 786 ]]
 	end
 end
 
-local function add_timing_pattern(a) --[[ line: 831 ]]
+local function add_timing_pattern(a)
 	local _ = nil
 	local _ = nil
 	local var108 = 7
@@ -2266,7 +2266,7 @@ local list_4 = {
 	}
 }
 
-local function add_alignment_pattern(p43) --[[ line: 873 ]]
+local function add_alignment_pattern(p43)
 	-- upvalues: list_4 (ref)
 	local var110 = list_4[(#p43 - 17) / 4]
 	local _ = nil
@@ -2354,7 +2354,7 @@ local list_5 = {
 	}
 }
 
-local function add_typeinfo_to_matrix(p44, p45, p46) --[[ line: 929 ]]
+local function add_typeinfo_to_matrix(p44, p45, p46)
 	-- upvalues: list_5 (ref)
 	local var113 = list_5[p45][p46]
 	local _ = nil
@@ -2425,7 +2425,7 @@ local list_6 = {
 	"100101100011000101"
 }
 
-local function add_version_information(p47, p48) --[[ line: 970 ]]
+local function add_version_information(p47, p48)
 	-- upvalues: list_6 (ref)
 	if p48 < 7 then return end
 	local _ = #p47
@@ -2471,7 +2471,7 @@ local function add_version_information(p47, p48) --[[ line: 970 ]]
 	end
 end
 
-local function prepare_matrix_with_mask(p49, p50, p51) --[[ line: 998 ]]
+local function prepare_matrix_with_mask(p49, p50, p51)
 	-- upvalues: add_position_detection_patterns (ref), add_timing_pattern (ref), add_version_information (ref), add_alignment_pattern (ref), add_typeinfo_to_matrix (ref)
 	local _ = nil
 	local t = {}
@@ -2494,7 +2494,7 @@ local function prepare_matrix_with_mask(p49, p50, p51) --[[ line: 998 ]]
 	return t
 end
 
-local function get_pixel_with_mask(p52, p53, p54, p55) --[[ line: 1035 ]]
+local function get_pixel_with_mask(p52, p53, p54, p55)
 	p53 -= 1
 	p54 -= 1
 	local var136 = false
@@ -2537,7 +2537,7 @@ local function get_pixel_with_mask(p52, p53, p54, p55) --[[ line: 1035 ]]
 	return if var136 then 1 - tonumber(p55) * 2 else tonumber(p55) * 2 + -1
 end
 
-local function get_next_free_positions(p56, p57, p58, p59, p60) --[[ line: 1074 ]]
+local function get_next_free_positions(p56, p57, p58, p59, p60)
 	local t = {}
 	local var138 = 1
 	local var139 = "right"
@@ -2575,7 +2575,7 @@ local function get_next_free_positions(p56, p57, p58, p59, p60) --[[ line: 1074 
 	return t, p57, p58, p59
 end
 
-local _ = function(p61, p62, p63) --[[ line: 1124 | named "add_data_to_matrix" ]]
+local _ = function(p61, p62, p63)
 	-- upvalues: get_next_free_positions (ref), get_pixel_with_mask (ref)
 	size = #p61
 	local _ = nil
@@ -2588,7 +2588,7 @@ local _ = function(p61, p62, p63) --[[ line: 1124 | named "add_data_to_matrix" ]
 	local var145 = 0
 	local _size = size
 	local _size_1 = size
-	string.gsub(p62, ".?.?.?.?.?.?.?.?", function(p64) --[[ line: 1131 ]]
+	string.gsub(p62, ".?.?.?.?.?.?.?.?", function(p64)
 		-- upvalues: var145 (write), var140 (write), _size (write), _size_1 (write), var144 (write), get_next_free_positions (copy), p61 (ref), p63 (ref), var141 (write), var142 (write), var143 (write), get_pixel_with_mask (copy)
 		var145 += 1
 		local var148, var149, var150, var151 = get_next_free_positions(p61, _size, _size_1, var144, p64, p63)
@@ -2611,7 +2611,7 @@ local _ = function(p61, p62, p63) --[[ line: 1124 | named "add_data_to_matrix" ]
 	end)
 end
 
-local function calculate_penalty(p65) --[[ line: 1158 ]]
+local function calculate_penalty(p65)
 	local var152 = 0
 	local var153 = 0
 	local var154 = 0
@@ -2682,7 +2682,7 @@ local function calculate_penalty(p65) --[[ line: 1158 ]]
 	return var152 + var153 + var154 + math.floor(math.abs(var156 / (p65Count * p65Count) * 100 - 50)) * 2
 end
 
-local _ = function(p66, p67, p68, p69) --[[ line: 1280 | named "get_matrix_and_penalty" ]]
+local _ = function(p66, p67, p68, p69)
 	-- upvalues: prepare_matrix_with_mask (ref), get_next_free_positions (ref), get_pixel_with_mask (ref), calculate_penalty (ref)
 	local var163 = prepare_matrix_with_mask(p66, p67, p69)
 	size = #var163
@@ -2696,7 +2696,7 @@ local _ = function(p66, p67, p68, p69) --[[ line: 1280 | named "get_matrix_and_p
 	local var169 = 0
 	local _size = size
 	local _size_1 = size
-	string.gsub(p68, ".?.?.?.?.?.?.?.?", function(p70) --[[ line: 1131 ]]
+	string.gsub(p68, ".?.?.?.?.?.?.?.?", function(p70)
 		-- upvalues: var169 (write), var164 (write), _size (write), _size_1 (write), var168 (write), get_next_free_positions (copy), var163 (ref), p69 (ref), var165 (write), var166 (write), var167 (write), get_pixel_with_mask (copy)
 		var169 += 1
 		local var148, var149, var150, var151 = get_next_free_positions(var163, _size, _size_1, var168, p70, p69)
@@ -2717,7 +2717,7 @@ local _ = function(p66, p67, p68, p69) --[[ line: 1280 | named "get_matrix_and_p
 	return var163, calculate_penalty(var163)
 end
 
-local function get_matrix_with_lowest_penalty(p71, p72, p73) --[[ line: 1290 ]]
+local function get_matrix_with_lowest_penalty(p71, p72, p73)
 	-- upvalues: prepare_matrix_with_mask (ref), get_next_free_positions (ref), get_pixel_with_mask (ref), calculate_penalty (ref)
 	local _ = nil
 	local _ = nil
@@ -2736,7 +2736,7 @@ local function get_matrix_with_lowest_penalty(p71, p72, p73) --[[ line: 1290 ]]
 	local _size_2 = size
 	local _size_3 = size
 	local var181 = 0
-	string.gsub(p73, ".?.?.?.?.?.?.?.?", function(p74) --[[ line: 1131 ]]
+	string.gsub(p73, ".?.?.?.?.?.?.?.?", function(p74)
 		-- upvalues: var178 (write), var173 (write), _size_2 (write), _size_3 (write), var177 (write), get_next_free_positions (copy), var172 (ref), var181 (ref), _size (write), _size_1 (write), var176 (write), get_pixel_with_mask (copy)
 		var169 += 1
 		local var148, var149, var150, var151 = get_next_free_positions(var172, _size_2, _size_3, var177, p74, var181)
@@ -2769,7 +2769,7 @@ local function get_matrix_with_lowest_penalty(p71, p72, p73) --[[ line: 1290 ]]
 		local var186 = 0
 		_size = size
 		_size_1 = size
-		string.gsub(p73, ".?.?.?.?.?.?.?.?", function(p75) --[[ line: 1131 ]]
+		string.gsub(p73, ".?.?.?.?.?.?.?.?", function(p75)
 			-- upvalues: var186 (write), var176 (write), _size (write), _size_1 (write), var185 (write), get_next_free_positions (copy), var173 (ref), i (ref), var177 (write), var178 (write), var184 (write), get_pixel_with_mask (copy)
 			var169 += 1
 			local var148, var149, var150, var151 = get_next_free_positions(var173, _size, _size_1, var185, p75, i)
@@ -2800,7 +2800,7 @@ end
 return {
 	encode_string_numeric = encode_string_numeric,
 	encode_string_ascii = encode_string_ascii,
-	qrcode = function(p76, p77, _) --[[ line: 1314 ]]
+	qrcode = function(p76, p77, _)
 		-- upvalues: get_version_eclevel (ref), get_length (ref), binary (ref), list_1 (ref), encode_string_binary (ref), add_pad_data (ref), arrange_codewords_and_calculate_ec (ref), list_3 (ref), get_matrix_with_lowest_penalty (ref)
 		local var197, var198, var199
 		local _ = nil
@@ -2821,7 +2821,7 @@ return {
 		if var195 == 1 then
 			var197 = ""
 			var198 = nil
-			string.gsub(p76, "..?.?", function(p78) --[[ line: 342 ]]
+			string.gsub(p76, "..?.?", function(p78)
 				-- upvalues: var198 (write), var197 (write), binary (copy)
 				var61 = tonumber(p78)
 				
@@ -2842,7 +2842,7 @@ return {
 			var198 = nil
 			local var200 = nil
 			local var201 = nil
-			string.gsub(p76, "..?", function(p79) --[[ line: 361 ]]
+			string.gsub(p76, "..?", function(p79)
 				-- upvalues: var200 (write), list_1 (copy), var201 (write), var198 (write), var197 (write), binary (copy)
 				if #p79 == 2 then
 					var64 = list_1[string.byte(string.sub(p79, 1, 1))]

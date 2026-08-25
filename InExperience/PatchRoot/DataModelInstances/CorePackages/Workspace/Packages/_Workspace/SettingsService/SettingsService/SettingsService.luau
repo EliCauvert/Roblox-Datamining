@@ -9,7 +9,7 @@ local localization = require(parent_1.InExperienceLocales).Localization
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 72 ]]
+function t.new()
 	-- upvalues: localizationService (ref), localization (ref), t (ref)
 	return setmetatable({
 		_localization = localization.new(localizationService.RobloxLocaleId),
@@ -19,7 +19,7 @@ function t.new() --[[ line: 72 ]]
 	}, t)
 end
 
-function t:registerSetting(p0) --[[ line: 82 ]]
+function t:registerSetting(p0)
 	-- upvalues: signalsModule (ref), settingEnumModule (ref)
 	self._disposables[p0.id] = {}
 	
@@ -29,7 +29,7 @@ function t:registerSetting(p0) --[[ line: 82 ]]
 	local var5, var6 = signalsModule.createSignal(true)
 	
 	if p0.onAvailabilityChanged then
-		table.insert(self._disposables[p0.id], signalsModule.createEffect(function(p1) --[[ line: 93 ]]
+		table.insert(self._disposables[p0.id], signalsModule.createEffect(function(p1)
 			-- upvalues: var5 (ref), p0 (ref)
 			p0.onAvailabilityChanged(var5(p1))
 		end))
@@ -40,7 +40,7 @@ function t:registerSetting(p0) --[[ line: 82 ]]
 	local var7, var8 = signalsModule.createSignal(true)
 	
 	if p0.onVisibilityChanged then
-		table.insert(self._disposables[p0.id], signalsModule.createEffect(function(p2) --[[ line: 106 ]]
+		table.insert(self._disposables[p0.id], signalsModule.createEffect(function(p2)
 			-- upvalues: var7 (ref), p0 (ref)
 			p0.onVisibilityChanged(var7(p2))
 		end))
@@ -81,14 +81,14 @@ function t:registerSetting(p0) --[[ line: 82 ]]
 	return var9
 end
 
-function t:setting(p3) --[[ line: 147 ]]
+function t:setting(p3)
 	if not self._settings[p3] then
 		error("No setting registered with id: " .. p3)
 	end
 	return self._settings[p3]
 end
 
-function t:updateSetting(p4, p5) --[[ line: 154 ]]
+function t:updateSetting(p4, p5)
 	assert(typeof(self:setting(p4)) == "table", "No setting registered with id: " .. p4)
 	
 	if p5.available ~= nil then
@@ -99,7 +99,7 @@ function t:updateSetting(p4, p5) --[[ line: 154 ]]
 	end
 end
 
-function t:disconnect() --[[ line: 164 ]]
+function t:disconnect()
 	for i, v in self._disposables do
 		for i_1, v_1 in v do
 			v_1()
@@ -110,7 +110,7 @@ function t:disconnect() --[[ line: 164 ]]
 	self._settings = {}
 end
 
-function t:_updateLocalization(p6) --[[ line: 176 ]]
+function t:_updateLocalization(p6)
 	if p6 == nil then
 		return nil
 	end
@@ -119,11 +119,11 @@ function t:_updateLocalization(p6) --[[ line: 176 ]]
 	return if typeof(p6) == "string" then localization:Format(p6) else localization:Format(p6.key, p6.args)
 end
 
-function t._registerToggle(_, p7) --[[ line: 188 ]]
+function t._registerToggle(_, p7)
 	return p7
 end
 
-function t:_registerOptions(p8, p9) --[[ line: 193 ]]
+function t:_registerOptions(p8, p9)
 	for i, v in ipairs(p9) do
 		if not p8 then
 			v.text = self:_updateLocalization(v.text)
@@ -137,7 +137,7 @@ function t:_registerOptions(p8, p9) --[[ line: 193 ]]
 	return p9
 end
 
-function t:_registerSlider(p10) --[[ line: 212 ]]
+function t:_registerSlider(p10)
 	if not p10.alreadyLocalized then
 		p10.sliderLeftLabel = self:_updateLocalization(p10.sliderLeftLabel)
 		p10.sliderRightLabel = self:_updateLocalization(p10.sliderRightLabel)
@@ -145,14 +145,14 @@ function t:_registerSlider(p10) --[[ line: 212 ]]
 	return p10
 end
 
-function t:_registerTextButton(p11) --[[ line: 221 ]]
+function t:_registerTextButton(p11)
 	if not p11.alreadyLocalized then
 		p11.text = self:_updateLocalization(p11.text)
 	end
 	return p11
 end
 
-function t:_registerDropdown(p12) --[[ line: 233 ]]
+function t:_registerDropdown(p12)
 	-- upvalues: valueChangedSignalModule (ref)
 	if not p12.alreadyLocalized then
 		p12.placeholder = self:_updateLocalization(p12.placeholder)
@@ -163,7 +163,7 @@ function t:_registerDropdown(p12) --[[ line: 233 ]]
 	return p12
 end
 
-function t:_registerSelector(p13) --[[ line: 243 ]]
+function t:_registerSelector(p13)
 	if not p13.alreadyLocalized then
 		p13.placeholder = self:_updateLocalization(p13.placeholder)
 	end

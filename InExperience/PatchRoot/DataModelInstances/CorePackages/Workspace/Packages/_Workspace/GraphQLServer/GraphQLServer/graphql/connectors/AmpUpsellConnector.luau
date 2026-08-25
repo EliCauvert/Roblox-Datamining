@@ -15,13 +15,13 @@ local var4 = urlBuilder.new({
 	query = { featureNames = "{featureNames}" }
 })
 
-function t.getFeatureAccessFromFeatureNamesList(p0, p1) --[[ line: 27 ]]
+function t.getFeatureAccessFromFeatureNamesList(p0, p1)
 	-- upvalues: fetch (ref), promiseModule (ref), var4 (ref), response (ref), graphQLError (ref)
 	local var6 = p1 or fetch
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 33 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: p0 (ref), var4 (copy), var6 (ref), response (copy), graphQLError (copy)
-		local var7 = var6(var4({ featureNames = table.concat(p0, ",") }), { method = "GET" }):catch(function() --[[ line: 37 ]]
+		local var7 = var6(var4({ featureNames = table.concat(p0, ",") }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -35,7 +35,7 @@ function t.getFeatureAccessFromFeatureNamesList(p0, p1) --[[ line: 27 ]]
 			
 			return
 		end
-		local var8 = var7:json():catch(function() --[[ line: 55 ]]
+		local var8 = var7:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -80,18 +80,18 @@ local var5 = urlBuilder.new({
 	}
 })
 
-function t.getUpsellFeatureAccessFromFeatureName(p4, p5, p6, p7, p8) --[[ line: 93 ]]
+function t.getUpsellFeatureAccessFromFeatureName(p4, p5, p6, p7, p8)
 	-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), response (ref), graphQLError (ref)
 	local var10 = p6 or fetch
 	
-	return promiseModule.new(function(p9, p10) --[[ line: 102 ]]
+	return promiseModule.new(function(p9, p10)
 		-- upvalues: p5 (ref), var5 (copy), p4 (ref), p7 (ref), p8 (ref), var10 (ref), response (copy), graphQLError (copy)
 		local var11 = var10(var5({
 			featureName = p4,
 			successfulActions = table.concat(p5, ","),
 			nameSpace = p7,
 			extraParameters = p8
-		}), { method = "GET" }):catch(function() --[[ line: 111 ]]
+		}), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -105,7 +105,7 @@ function t.getUpsellFeatureAccessFromFeatureName(p4, p5, p6, p7, p8) --[[ line: 
 			
 			return
 		end
-		local var12 = var11:json():catch(function() --[[ line: 129 ]]
+		local var12 = var11:json():catch(function()
 			return nil
 		end):expect()
 		

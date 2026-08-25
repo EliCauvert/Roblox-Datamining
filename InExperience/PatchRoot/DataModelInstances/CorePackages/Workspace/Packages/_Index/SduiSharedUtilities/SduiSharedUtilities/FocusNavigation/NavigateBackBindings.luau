@@ -5,9 +5,9 @@ local inputHandlersModule = require(parent.InputHandlers)
 local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
 local t = {}
 
-local function useOnNavigateBack(p0, p1) --[[ line: 21 ]]
+local function useOnNavigateBack(p0, p1)
 	-- upvalues: reactModule (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref)
-	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p2) --[[ line: 23 ]]
+	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p2)
 		-- upvalues: p0 (ref)
 		p2:cancel()
 		p0()
@@ -16,7 +16,7 @@ end
 
 t.useOnNavigateBack = useOnNavigateBack
 
-function t.OnNavigateBackWrapper(p3) --[[ line: 40 ]]
+function t.OnNavigateBackWrapper(p3)
 	-- upvalues: useOnNavigateBack (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

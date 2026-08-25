@@ -44,7 +44,7 @@ local fFlagAboutBeforeActionClientModule = require(profilePlatform.Flags.FFlagAb
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
 
-local function orderWithAboutBeforeActions(p0) --[[ line: 54 ]]
+local function orderWithAboutBeforeActions(p0)
 	-- upvalues: fFlagAboutBeforeActionClientModule (ref), enumsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), cryoModule (ref)
 	if not fFlagAboutBeforeActionClientModule then
 		return p0
@@ -84,7 +84,7 @@ local function orderWithAboutBeforeActions(p0) --[[ line: 54 ]]
 	return var45
 end
 
-local function moveMomentsToTop(p1) --[[ line: 82 ]]
+local function moveMomentsToTop(p1)
 	-- upvalues: enumsModule (ref), cryoModule (ref)
 	local var50 = nil
 	
@@ -149,7 +149,7 @@ local var41 = if fFlagAXEnableProfileTab then cryoModule.Dictionary.join(t, {
 	[enumsModule.Components.Actions] = cryoModule.None
 }) else nil
 
-return function(p2, p3, p4, p5, p6) --[[ line: 158 ]]
+return function(p2, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), constantsModule (ref), cryoModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), var41 (ref), t (ref), t_1 (ref), t_2 (ref), fFlagAboutBeforeActionClientModule (ref), orderWithAboutBeforeActions (ref), fFlagProfilePlatformEnableMomentsModule (ref), moveMomentsToTop (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref)
 	p3 = p3 or {}
 	local t_3 = {

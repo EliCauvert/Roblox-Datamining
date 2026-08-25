@@ -1,27 +1,27 @@
 ﻿local _ = require(script.Parent.ISizeTree)
 local t = {}
 
-local function _(p0) --[[ line: 24 | named "nodeHeight" ]]
+local function _(p0)
 	return if p0 == nil then 0 else p0.height
 end
 
-local _ = function(p1) --[[ line: 28 | named "nodeCount" ]]
+local _ = function(p1)
 	return if p1 == nil then 0 else p1.subtreeCount
 end
 
-local _ = function(p2) --[[ line: 32 | named "nodeMeasuredSum" ]]
+local _ = function(p2)
 	return if p2 == nil then 0 else p2.subtreeMeasuredSum
 end
 
-local _ = function(p3) --[[ line: 36 | named "nodeMeasuredCount" ]]
+local _ = function(p3)
 	return if p3 == nil then 0 else p3.subtreeMeasuredCount
 end
 
-local _ = function(p4, p5) --[[ line: 40 | named "nodeEffectiveSum" ]]
+local _ = function(p4, p5)
 	return if p4 == nil then 0 else p4.subtreeMeasuredSum + (p4.subtreeCount - p4.subtreeMeasuredCount) * p5
 end
 
-local function fillRangeFromNode(p6, p7, p8, p9, p10, p11, p12) --[[ line: 47 ]]
+local function fillRangeFromNode(p6, p7, p8, p9, p10, p11, p12)
 	-- upvalues: fillRangeFromNode (ref)
 	if p6 == nil then return end
 	local left = p6.left
@@ -50,7 +50,7 @@ local function fillRangeFromNode(p6, p7, p8, p9, p10, p11, p12) --[[ line: 47 ]]
 	end
 end
 
-local function refresh(p13) --[[ line: 89 ]]
+local function refresh(p13)
 	local left = p13.left
 	local var19 = (if left ~= nil then 0 else left.subtreeCount) + 1
 	local right = p13.right
@@ -68,7 +68,7 @@ local function refresh(p13) --[[ line: 89 ]]
 	p13.height = math.max(if left_3 ~= nil then 0 else left_3.height, if right_3 ~= nil then 0 else right_3.height) + 1
 end
 
-local _ = function(p14) --[[ line: 98 | named "newNode" ]]
+local _ = function(p14)
 	return {
 		subtreeCount = 1,
 		height = 1,
@@ -80,7 +80,7 @@ local _ = function(p14) --[[ line: 98 | named "newNode" ]]
 	}
 end
 
-local _ = function(p15) --[[ line: 110 | named "rotateRight" ]]
+local _ = function(p15)
 	-- upvalues: refresh (ref)
 	local left = p15.left
 	local right = left.right
@@ -92,7 +92,7 @@ local _ = function(p15) --[[ line: 110 | named "rotateRight" ]]
 	return left
 end
 
-local _ = function(p16) --[[ line: 120 | named "rotateLeft" ]]
+local _ = function(p16)
 	-- upvalues: refresh (ref)
 	local right = p16.right
 	local left = right.left
@@ -104,7 +104,7 @@ local _ = function(p16) --[[ line: 120 | named "rotateLeft" ]]
 	return right
 end
 
-local function balance(p17) --[[ line: 130 ]]
+local function balance(p17)
 	-- upvalues: refresh (ref)
 	refresh(p17)
 	local left = p17.left
@@ -159,7 +159,7 @@ local function balance(p17) --[[ line: 130 ]]
 	return right_3
 end
 
-local function insertAt(p18, p19, p20) --[[ line: 156 ]]
+local function insertAt(p18, p19, p20)
 	-- upvalues: insertAt (ref), balance (ref)
 	if p18 == nil then
 		return {
@@ -183,12 +183,12 @@ local function insertAt(p18, p19, p20) --[[ line: 156 ]]
 	return balance(p18)
 end
 
-local function findMin(a) --[[ line: 173 ]]
+local function findMin(a)
 	-- upvalues: findMin (ref)
 	return if a.left == nil then a else findMin(a.left)
 end
 
-local function removeAt(p21, p22) --[[ line: 177 ]]
+local function removeAt(p21, p22)
 	-- upvalues: removeAt (ref), findMin (ref), balance (ref)
 	if p21 == nil then
 		return nil
@@ -211,7 +211,7 @@ local function removeAt(p21, p22) --[[ line: 177 ]]
 	return balance(p21)
 end
 
-local function getMeasuredAt(p23, p24) --[[ line: 206 ]]
+local function getMeasuredAt(p23, p24)
 	-- upvalues: getMeasuredAt (ref)
 	if p23 == nil then
 		return nil
@@ -222,7 +222,7 @@ local function getMeasuredAt(p23, p24) --[[ line: 206 ]]
 	return if p24 < var25 then getMeasuredAt(p23.left, p24) elseif var25 < p24 then getMeasuredAt(p23.right, p24 - var25) else p23.measuredSize
 end
 
-local function updateAt(p25, p26, p27) --[[ line: 223 ]]
+local function updateAt(p25, p26, p27)
 	-- upvalues: updateAt (ref), refresh (ref)
 	if p25 == nil then return end
 	local left = p25.left
@@ -238,7 +238,7 @@ local function updateAt(p25, p26, p27) --[[ line: 223 ]]
 	refresh(p25)
 end
 
-local function prefixSumUpTo(p28, p29, p30) --[[ line: 243 ]]
+local function prefixSumUpTo(p28, p29, p30)
 	-- upvalues: prefixSumUpTo (ref)
 	if p28 == nil or p29 <= 0 then
 		return 0
@@ -258,7 +258,7 @@ local function prefixSumUpTo(p28, p29, p30) --[[ line: 243 ]]
 	return (if left_1 == nil then 0 else left_1.subtreeMeasuredSum + (left_1.subtreeCount - left_1.subtreeMeasuredCount) * p30) + (p28.measuredSize or p30)
 end
 
-local function rankAtPrefixSum(p31, p32, p33) --[[ line: 266 ]]
+local function rankAtPrefixSum(p31, p32, p33)
 	-- upvalues: rankAtPrefixSum (ref)
 	if p31 == nil then
 		return 0
@@ -281,7 +281,7 @@ local function rankAtPrefixSum(p31, p32, p33) --[[ line: 266 ]]
 	return if var31 == 0 then 0 else var29 + 1 + var31
 end
 
-local function entryAtPrefixSum(p34, p35, p36) --[[ line: 291 ]]
+local function entryAtPrefixSum(p34, p35, p36)
 	-- upvalues: entryAtPrefixSum (ref)
 	if p34 == nil then
 		return 0, 0, 0
@@ -308,7 +308,7 @@ local function entryAtPrefixSum(p34, p35, p36) --[[ line: 291 ]]
 	return var33 + 1 + var36, var35 + var37, var38
 end
 
-local function buildBalanced(p37, p38, p39) --[[ line: 316 ]]
+local function buildBalanced(p37, p38, p39)
 	-- upvalues: buildBalanced (ref), refresh (ref)
 	if p39 < p38 then
 		return nil
@@ -331,7 +331,7 @@ local function buildBalanced(p37, p38, p39) --[[ line: 316 ]]
 	return t
 end
 
-local function buildBalancedMeasurements(p40, p41, p42) --[[ line: 328 ]]
+local function buildBalancedMeasurements(p40, p41, p42)
 	-- upvalues: buildBalancedMeasurements (ref), refresh (ref)
 	if p42 < p41 then
 		return nil
@@ -354,7 +354,7 @@ local function buildBalancedMeasurements(p40, p41, p42) --[[ line: 328 ]]
 	return t
 end
 
-local function appendInOrder(p43, p44, p45) --[[ line: 340 ]]
+local function appendInOrder(p43, p44, p45)
 	-- upvalues: appendInOrder (ref)
 	if p43 == nil then
 		return
@@ -364,18 +364,18 @@ local function appendInOrder(p43, p44, p45) --[[ line: 340 ]]
 	appendInOrder(p43.right, p44, p45)
 end
 
-function t.new(p46) --[[ line: 349 ]]
+function t.new(p46)
 	-- upvalues: prefixSumUpTo (ref), rankAtPrefixSum (ref), getMeasuredAt (ref), entryAtPrefixSum (ref), fillRangeFromNode (ref), updateAt (ref), insertAt (ref), removeAt (ref), buildBalanced (ref), refresh (ref), buildBalancedMeasurements (ref), appendInOrder (ref)
 	local var45 = nil
 	local var46 = 0
 	p46 = p46 or 0
 	
 	return {
-		prefixSum = function(p47) --[[ line: 354 ]]
+		prefixSum = function(p47)
 			-- upvalues: prefixSumUpTo (copy), var45 (write), p46 (write)
 			return if p47 <= 1 then 0 else prefixSumUpTo(var45, p47 - 1, p46)
 		end,
-		indexAtPrefixSum = function(p48) --[[ line: 362 ]]
+		indexAtPrefixSum = function(p48)
 			-- upvalues: var46 (write), var45 (write), p46 (write), rankAtPrefixSum (copy)
 			if var46 == 0 or p48 <= 0 then
 				return 1
@@ -384,7 +384,7 @@ function t.new(p46) --[[ line: 349 ]]
 			
 			return if (if var48 == nil then 0 else var48.subtreeMeasuredSum + (var48.subtreeCount - var48.subtreeMeasuredCount) * p46) <= p48 then var46 + 1 else rankAtPrefixSum(var45, p48, p46)
 		end,
-		entryAtPrefixSum = function(p49) --[[ line: 372 ]]
+		entryAtPrefixSum = function(p49)
 			-- upvalues: var46 (write), var45 (write), getMeasuredAt (copy), p46 (write), entryAtPrefixSum (copy)
 			if var46 == 0 then
 				return 1, 0, 0
@@ -412,7 +412,7 @@ function t.new(p46) --[[ line: 349 ]]
 				return entryAtPrefixSum(var45, p49, p46)
 			end
 		end,
-		getSize = function(p50) --[[ line: 385 ]]
+		getSize = function(p50)
 			-- upvalues: var46 (write), var45 (write), getMeasuredAt (copy), p46 (write)
 			local var56
 			if p50 < 1 or var46 < p50 then
@@ -426,7 +426,7 @@ function t.new(p46) --[[ line: 349 ]]
 			end
 			return var56 or p46
 		end,
-		fillRange = function(p51, p52, p53) --[[ line: 392 ]]
+		fillRange = function(p51, p52, p53)
 			-- upvalues: fillRangeFromNode (copy), var45 (write), p46 (write)
 			fillRangeFromNode(var45, 0, 0, p51, p52, p46, p53)
 			
@@ -434,21 +434,21 @@ function t.new(p46) --[[ line: 349 ]]
 				p53[i] = nil
 			end
 		end,
-		update = function(p54, p55) --[[ line: 399 ]]
+		update = function(p54, p55)
 			-- upvalues: updateAt (copy), var45 (write)
 			updateAt(var45, p54, p55)
 		end,
-		insert = function(p56, p57) --[[ line: 403 ]]
+		insert = function(p56, p57)
 			-- upvalues: var45 (write), insertAt (copy), var46 (write)
 			var45 = insertAt(var45, p56, p57)
 			var46 += 1
 		end,
-		remove = function(p58) --[[ line: 408 ]]
+		remove = function(p58)
 			-- upvalues: var45 (write), removeAt (copy), var46 (write)
 			var45 = removeAt(var45, p58)
 			var46 -= 1
 		end,
-		buildFromArray = function(p59) --[[ line: 413 ]]
+		buildFromArray = function(p59)
 			-- upvalues: var45 (write), buildBalanced (copy), refresh (copy), var46 (write)
 			local var59
 			local p59Count = #p59
@@ -475,12 +475,12 @@ function t.new(p46) --[[ line: 349 ]]
 			var45 = var59
 			var46 = p59Count
 		end,
-		buildFromMeasurements = function(p60, p61) --[[ line: 419 ]]
+		buildFromMeasurements = function(p60, p61)
 			-- upvalues: var45 (write), buildBalancedMeasurements (copy), var46 (write)
 			var45 = buildBalancedMeasurements(p61, 1, p60)
 			var46 = p60
 		end,
-		toArray = function() --[[ line: 424 ]]
+		toArray = function()
 			-- upvalues: var46 (write), var45 (write), p46 (write), appendInOrder (copy)
 			local list = table.create(var46)
 			
@@ -493,30 +493,30 @@ function t.new(p46) --[[ line: 349 ]]
 			
 			return list
 		end,
-		setEstimatedItemLength = function(value) --[[ line: 430 ]]
+		setEstimatedItemLength = function(value)
 			-- upvalues: p46 (write), var45 (write), var46 (write)
 			local var64 = p46 ~= value and (if var45 ~= nil then 0 else var45.subtreeMeasuredCount) < var46
 			p46 = value
 			
 			return var64
 		end,
-		getEstimatedItemLength = function() --[[ line: 436 ]]
+		getEstimatedItemLength = function()
 			-- upvalues: p46 (write)
 			return p46
 		end,
-		getMeasuredItemCount = function() --[[ line: 440 ]]
+		getMeasuredItemCount = function()
 			-- upvalues: var45 (write)
 			return if var45 == nil then 0 else var45.subtreeMeasuredCount
 		end,
-		prefersIncremental = function(p62) --[[ line: 454 ]]
+		prefersIncremental = function(p62)
 			-- upvalues: var46 (write)
 			return if var46 == 0 then false else p62 < var46 / math.log(var46, 2)
 		end,
-		length = function() --[[ line: 444 ]]
+		length = function()
 			-- upvalues: var46 (write)
 			return var46
 		end,
-		totalSum = function() --[[ line: 448 ]]
+		totalSum = function()
 			-- upvalues: var45 (write), p46 (write)
 			return if var45 == nil then 0 else var45.subtreeMeasuredSum + (var45.subtreeCount - var45.subtreeMeasuredCount) * p46
 		end

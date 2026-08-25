@@ -1,6 +1,6 @@
 ﻿local addSystemInfoToArgs = require(script:FindFirstAncestor("Charts").Parent.DiscoveryUtils).AddSystemInfoToArgs
 
-return function(p0, p1) --[[ line: 21 | named "buildChartsSortDetailRequest" ]]
+return function(p0, p1)
 	-- upvalues: addSystemInfoToArgs (ref)
 	local t = { sort_id = p1.sortId }
 	local t_1 = {}

@@ -9,7 +9,7 @@ local var4 = nil
 local var5 = nil
 local var6 = 1
 
-local function logEvent(p0) --[[ line: 46 ]]
+local function logEvent(p0)
 	-- upvalues: var5 (write), var6 (write), var3 (write), console (ref), t (ref), var4 (write)
 	if var5 ~= nil then
 		var6 += #p0
@@ -32,7 +32,7 @@ local function logEvent(p0) --[[ line: 46 ]]
 	end
 end
 
-function t.startLoggingProfilingEvents() --[[ line: 70 ]]
+function t.startLoggingProfilingEvents()
 	-- upvalues: var3 (write), var4 (write), var5 (write), var6 (write)
 	var3 = 131072
 	var4 = {}
@@ -40,7 +40,7 @@ function t.startLoggingProfilingEvents() --[[ line: 70 ]]
 	var6 = 1
 end
 
-function t.stopLoggingProfilingEvents() --[[ line: 77 ]]
+function t.stopLoggingProfilingEvents()
 	-- upvalues: var4 (write), var3 (write), var5 (write), var6 (write)
 	var3 = 0
 	var4 = nil
@@ -50,35 +50,35 @@ function t.stopLoggingProfilingEvents() --[[ line: 77 ]]
 	return var4
 end
 
-function t.markTaskStart(p1, p2) --[[ line: 87 ]]
+function t.markTaskStart(p1, p2)
 	-- upvalues: enableProfiling (ref), var5 (write), logEvent (ref)
 	if enableProfiling and var5 ~= nil then
 		logEvent({ 1, p2 * 1000, p1.id, p1.priorityLevel })
 	end
 end
 
-function t.markTaskCompleted(p3, p4) --[[ line: 98 ]]
+function t.markTaskCompleted(p3, p4)
 	-- upvalues: enableProfiling (ref), var5 (write), logEvent (ref)
 	if enableProfiling and var5 ~= nil then
 		logEvent({ 2, p4 * 1000, p3.id })
 	end
 end
 
-function t.markTaskCanceled(p5, p6) --[[ line: 109 ]]
+function t.markTaskCanceled(p5, p6)
 	-- upvalues: enableProfiling (ref), var5 (write), logEvent (ref)
 	if enableProfiling and var5 ~= nil then
 		logEvent({ 4, p6 * 1000, p5.id })
 	end
 end
 
-function t.markTaskErrored(p7, p8) --[[ line: 117 ]]
+function t.markTaskErrored(p7, p8)
 	-- upvalues: enableProfiling (ref), var5 (write), logEvent (ref)
 	if enableProfiling and var5 ~= nil then
 		logEvent({ 3, p8 * 1000, p7.id })
 	end
 end
 
-function t.markTaskRun(p9, p10) --[[ line: 125 ]]
+function t.markTaskRun(p9, p10)
 	-- upvalues: enableProfiling (ref), var1 (write), var5 (write), logEvent (ref)
 	if enableProfiling then
 		var1 += 1
@@ -89,14 +89,14 @@ function t.markTaskRun(p9, p10) --[[ line: 125 ]]
 	end
 end
 
-function t.markTaskYield(p11, p12) --[[ line: 135 ]]
+function t.markTaskYield(p11, p12)
 	-- upvalues: enableProfiling (ref), var5 (write), logEvent (ref), var1 (write)
 	if enableProfiling and var5 ~= nil then
 		logEvent({ 6, p12 * 1000, p11.id, var1 })
 	end
 end
 
-function t.markSchedulerSuspended(p13) --[[ line: 143 ]]
+function t.markSchedulerSuspended(p13)
 	-- upvalues: enableProfiling (ref), var2 (write), var5 (write), logEvent (ref)
 	if enableProfiling then
 		var2 += 1
@@ -107,7 +107,7 @@ function t.markSchedulerSuspended(p13) --[[ line: 143 ]]
 	end
 end
 
-function t.markSchedulerUnsuspended(p14) --[[ line: 153 ]]
+function t.markSchedulerUnsuspended(p14)
 	-- upvalues: enableProfiling (ref), var5 (write), logEvent (ref), var2 (write)
 	if enableProfiling and var5 ~= nil then
 		logEvent({ 8, p14 * 1000, var2 })

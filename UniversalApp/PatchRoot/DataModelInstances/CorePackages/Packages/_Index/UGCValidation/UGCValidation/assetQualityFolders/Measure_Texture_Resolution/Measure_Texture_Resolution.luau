@@ -11,7 +11,7 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQTextureQuality),
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: errorSourceStringsModule (ref)
 		local measureTextureResolution = p1.aqsSummaryData.Measure_Texture_Resolution
 		

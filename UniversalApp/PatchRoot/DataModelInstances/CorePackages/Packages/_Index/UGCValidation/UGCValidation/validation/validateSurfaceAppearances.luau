@@ -3,7 +3,7 @@ local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 
-return function(p0, p1) --[[ line: 13 | named "validateSurfaceAppearances" ]]
+return function(p0, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref)
 	local allowEditableInstances = p1.allowEditableInstances
 	local descendants = p0:GetDescendants()

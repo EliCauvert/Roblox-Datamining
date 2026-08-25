@@ -6,14 +6,14 @@ local viewDetailsButton = roactModule.PureComponent:extend("ViewDetailsButton")
 viewDetailsButton.defaultProps = {
 	text = nil,
 	LayoutOrder = nil,
-	onActivated = function() --[[ line: 14 ]]
+	onActivated = function()
 		print("View details button pressed!")
 	end
 }
 
-function viewDetailsButton.render(p0) --[[ line: 19 ]]
+function viewDetailsButton.render(p0)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), buttonModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 20 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: roactModule (copy), buttonModule (copy), p0 (ref)
 		return roactModule.createElement(buttonModule, {
 			text = p0.props.text,

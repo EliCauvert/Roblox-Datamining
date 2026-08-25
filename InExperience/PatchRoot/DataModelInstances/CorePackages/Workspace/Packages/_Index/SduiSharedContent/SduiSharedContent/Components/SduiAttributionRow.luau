@@ -8,7 +8,7 @@ local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagSduiAttributionRowV2 = require(parent.SharedFlags).FFlagSduiAttributionRowV2
 
-return reactModule.memo(function(p0) --[[ line: 58 | named "SduiAttributionRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), fFlagSduiAttributionRowV2 (ref), reactModule (ref), view (ref), foundationModule (ref), image (ref), text (ref), icon (ref)
 	local layoutOrder = p0.layoutOrder
 	local zIndex = p0.zIndex

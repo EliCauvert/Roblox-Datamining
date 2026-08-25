@@ -6,7 +6,7 @@ local t = {}
 local kind = require(parent.GraphQL).Kind
 local astFromType = require(script.Parent.astFromType).astFromType
 
-function t.updateArgument(p0, p1, p2, p3, p4, p5, p6) --[[ line: 22 ]]
+function t.updateArgument(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: kind (ref), astFromType (ref), array (ref), object (ref)
 	p0[tostring(p3)] = {
 		kind = kind.ARGUMENT,
@@ -34,11 +34,11 @@ function t.updateArgument(p0, p1, p2, p3, p4, p5, p6) --[[ line: 22 ]]
 	end
 end
 
-function t.createVariableNameGenerator(p7) --[[ line: 55 ]]
+function t.createVariableNameGenerator(p7)
 	-- upvalues: array (ref), object (ref)
 	local var2 = 0
 	
-	return function(p8) --[[ line: 59 ]]
+	return function(p8)
 		-- upvalues: var2 (write), array (copy), object (copy), p7 (ref)
 		local var3
 		local _ = nil

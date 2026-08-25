@@ -24,11 +24,11 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local getCaptureStorageUsageModule = require(parent.Utils.getCaptureStorageUsage)
 local usePingLazyRenderResizingModule = require(parent.Hooks.usePingLazyRenderResizing)
 
-return capturesPolicyModule.connect(function(p5) --[[ line: 200 ]]
+return capturesPolicyModule.connect(function(p5)
 	return {
 		enableCapturesBulkManagement = p5.enableCapturesBulkManagement()
 	}
-end)(function(p0) --[[ line: 44 ]]
+end)(function(p0)
 	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), captureManagerOpenedModule (ref), getCaptureStorageUsageModule (ref), usePingLazyRenderResizingModule (ref), iconButton (ref), images (ref), iconSize (ref), withTooltip (ref), tooltipOrientation (ref), coreGuiService (ref), interactable (ref), imageSetLabel (ref)
 	local var12 = useAnalyticsModule()
 	local var13 = useStyle()
@@ -46,31 +46,31 @@ end)(function(p0) --[[ line: 44 ]]
 			numberOfCaptures = p0.itemCount
 		}
 	})
-	local var19 = useSelector(function(p1) --[[ line: 65 ]]
+	local var19 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].Captures
 	end)
-	local var20 = useSelector(function(p2) --[[ line: 69 ]]
+	local var20 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), var17 (ref)
 		if var20 then
 			var17(false)
 		end
 	end, { var20 })
-	local var21 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), var12 (ref), eventNamesModule (copy), var14 (ref), captureManagerOpenedModule (copy)
 		var17(false)
 		var12.fireEvent(eventNamesModule.CapturesManagerOpened)
 		var14(captureManagerOpenedModule())
 	end, {})
-	local var22 = reactModule.useCallback(function(_) --[[ line: 85 ]]
+	local var22 = reactModule.useCallback(function(_)
 		-- upvalues: var17 (ref), var16 (ref)
 		var17(not var16)
 	end, { var16 })
-	local var23 = reactModule.useMemo(function() --[[ line: 89 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: getCaptureStorageUsageModule (copy), var19 (ref)
 		return getCaptureStorageUsageModule(var19)
 	end, { var19 })
@@ -140,9 +140,9 @@ end)(function(p0) --[[ line: 44 ]]
 					preferredOrientation = tooltipOrientation.Bottom,
 					guiTarget = coreGuiService,
 					active = var16
-				}, function(p3) --[[ line: 174 ]]
+				}, function(p3)
 					-- upvalues: var17 (ref), reactModule (copy), interactable (copy), var22 (ref), imageSetLabel (copy), images (copy)
-					local var27 = function(p4) --[[ line: 175 ]]
+					local var27 = function(p4)
 						-- upvalues: var17 (copy), p3 (ref)
 						var17(false)
 						p3(p4)

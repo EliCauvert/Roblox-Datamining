@@ -53,9 +53,9 @@ local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 local fireFunnelAnalyticsEvent = analytics.fireFunnelAnalyticsEvent
 local useMomentsGating = momentsCommonModule.Hooks.useMomentsGating
 
-return function(_) --[[ line: 99 | named "TrendingScreen" ]]
+return function(_)
 	-- upvalues: reactModule (ref), momentsLocalStorageModule (ref), momentsLocalStorageKeysModule (ref), useScreenBottomInsetModule (ref), useFeedPlaybackActiveModule (ref), useMomentsSession (ref), useMomentsHost (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useMomentsGating (ref), useCreationEntryModule (ref), useUploadHostModule (ref), sessionManager (ref), funnelEventNames (ref), fireFunnelAnalyticsEvent (ref), var32 (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), var31 (ref), fFlagEnableArgus (ref), createRecommendationTelemetry (ref), fFlagMomentsImmersiveChromeModule (ref), signalsReactModule (ref), getImmersiveChromeStoreModule (ref), getFFlagMomentsFixBackgroundFeedInputModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), robloxAppEventsModule (ref), appPage (ref), getUploadStoreModule (ref), getFFlagMomentsRefreshFromTopAfterUploadModule (ref), logCreateIntentModule (ref), fireAnalyticsEvent (ref), eventNames (ref), topBarModule (ref), momentOverlayInsetContextModule (ref), view (ref), constantsModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), momentsFeedSurfaceModule (ref), var33 (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref)
-	local var35, var36 = reactModule.useState(function() --[[ line: 100 ]]
+	local var35, var36 = reactModule.useState(function()
 		-- upvalues: momentsLocalStorageModule (copy), momentsLocalStorageKeysModule (copy)
 		return not momentsLocalStorageModule.getField(momentsLocalStorageKeysModule.CreateTooltipSeen)
 	end)
@@ -73,24 +73,24 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 		onExit = var46.onExitCreation,
 		captureSource = var46.captureSource
 	})
-	reactModule.useEffect(function() --[[ line: 137 ]]
+	reactModule.useEffect(function()
 		-- upvalues: sessionManager (copy), funnelEventNames (copy), fireFunnelAnalyticsEvent (copy)
 		fireFunnelAnalyticsEvent(funnelEventNames.FunnelTypes.AppNavigation, funnelEventNames.AppNavigationSteps.TrendingScreenView, sessionManager.getSessionId(funnelEventNames.FunnelTypes.AppNavigation) or sessionManager.startSession(funnelEventNames.FunnelTypes.AppNavigation))
 	end, {})
-	local var48 = reactModule.useCallback(function() --[[ line: 147 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var32 (copy), var38 (ref)
 		if var32 then
 			var38(true)
 		end
 	end, {})
-	local var49 = reactModule.useMemo(function() --[[ line: 153 ]]
+	local var49 = reactModule.useMemo(function()
 		-- upvalues: isStudioModule (copy), getFFlagArgusStudioMockFeedModule (copy), createMockFeedSource (copy), createMomentsFeedSourceModule (copy), var43 (ref), var31 (copy), var32 (copy), var48 (ref)
 		return if isStudioModule() and getFFlagArgusStudioMockFeedModule() then createMockFeedSource() else createMomentsFeedSourceModule(var43.getMomentsSessionId, {
 			signalTracker = var31,
 			onDeepLinkedMomentUnavailable = if var32 then var48 else nil
 		})
 	end, { var43, var48 })
-	local var50 = reactModule.useMemo(function() --[[ line: 165 ]]
+	local var50 = reactModule.useMemo(function()
 		-- upvalues: fFlagEnableArgus (copy), createRecommendationTelemetry (copy), var43 (ref), var31 (copy)
 		return if fFlagEnableArgus then createRecommendationTelemetry({
 			getMomentsSessionId = var43.getMomentsSessionId,
@@ -106,7 +106,7 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 		var54 = var54 and var42
 	end
 	local var55 = var42 and (not var46.isCreating and (not var37_1 and not getCovering))
-	local var56 = reactModule.useCallback(function() --[[ line: 208 ]]
+	local var56 = reactModule.useCallback(function()
 		-- upvalues: var39 (ref)
 		local current = var39.current
 		
@@ -114,16 +114,16 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 			current.refresh()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 215 ]]
+	reactModule.useEffect(function()
 		-- upvalues: robloxAppEventsModule (copy), appPage (copy), var56 (ref)
-		local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p0) --[[ line: 216 ]]
+		local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p0)
 			-- upvalues: appPage (copy), var56 (copy)
 			if p0 == appPage.Moments then
 				var56()
 			end
 		end)
 		
-		return function() --[[ line: 222 ]]
+		return function()
 			-- upvalues: reloadPageConnection (ref)
 			reloadPageConnection:disconnect()
 		end
@@ -131,7 +131,7 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 	local var57 = getUploadStoreModule(false)
 	local var58 = signalsReactModule.useSignalState(var57.getState)
 	local var59 = signalsReactModule.useSignalState(var57.getUploadedMoment)
-	reactModule.useEffect(function() --[[ line: 231 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getFFlagMomentsRefreshFromTopAfterUploadModule (copy), var58 (ref), var40 (ref), var39 (ref), var59 (ref), var56 (ref)
 		if getFFlagMomentsRefreshFromTopAfterUploadModule() then
 			if var58 ~= "Success" then
@@ -154,22 +154,22 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 			var56()
 		end
 	end, { var58, var59, var56 })
-	local var60 = reactModule.useCallback(function() --[[ line: 254 ]]
+	local var60 = reactModule.useCallback(function()
 		-- upvalues: var36 (ref), momentsLocalStorageModule (copy), momentsLocalStorageKeysModule (copy)
 		var36(false)
 		momentsLocalStorageModule.setField(momentsLocalStorageKeysModule.CreateTooltipSeen, true)
 	end, {})
-	local var61 = reactModule.useCallback(function() --[[ line: 259 ]]
+	local var61 = reactModule.useCallback(function()
 		-- upvalues: logCreateIntentModule (copy), funnelEventNames (copy), var46 (ref)
 		logCreateIntentModule(funnelEventNames.CreationIntentSource.TopBar)
 		var46.onCreatePressed()
 	end, { var46.onCreatePressed })
-	local var62 = reactModule.useCallback(function() --[[ line: 267 ]]
+	local var62 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var56 (ref)
 		fireAnalyticsEvent(eventNames.FeedHomeButtonPressed)
 		var56()
 	end, { var56 })
-	local var63 = reactModule.useCallback(function() --[[ line: 272 ]]
+	local var63 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), openOwnMoments (ref)
 		fireAnalyticsEvent(eventNames.MyCreationButtonPressed)
 		
@@ -186,7 +186,7 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 			playbackActive = var55,
 			telemetry = var50,
 			controllerRef = var39,
-			header = reactModule.useMemo(function() --[[ line: 280 ]]
+			header = reactModule.useMemo(function()
 				-- upvalues: reactModule (copy), topBarModule (copy), var35 (ref), var42 (ref), var45 (ref), var60 (ref), var61 (ref), var62 (ref), var63 (ref)
 				return reactModule.createElement(topBarModule, {
 					isBaseScreen = true,
@@ -201,7 +201,7 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 			end, {
 				var35, var42, var45, var60, var61, var62, var63
 			}),
-			renderFeedContainer = reactModule.useCallback(function(p1) --[[ line: 307 ]]
+			renderFeedContainer = reactModule.useCallback(function(p1)
 				-- upvalues: fFlagMomentsImmersiveChromeModule (ref), reactModule (copy), momentOverlayInsetContextModule (copy), var41 (ref), view (copy), constantsModule (copy)
 				return reactModule.createElement(view, {
 					tag = "size-full",
@@ -220,7 +220,7 @@ return function(_) --[[ line: 99 | named "TrendingScreen" ]]
 			ZIndex = constantsModule.DisplayOrder.FeedTopBar
 		}) else nil,
 		MomentUnavailableDialog = if var32 and var42 and var37 then reactModule.createElement(var33, {
-			onDismiss = function() --[[ line: 370 ]]
+			onDismiss = function()
 				-- upvalues: var38 (ref)
 				var38(false)
 			end

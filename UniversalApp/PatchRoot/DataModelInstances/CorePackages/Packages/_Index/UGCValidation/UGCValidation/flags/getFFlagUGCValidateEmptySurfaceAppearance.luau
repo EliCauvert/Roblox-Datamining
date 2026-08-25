@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateEmptySurfaceAppearance", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateEmptySurfaceAppearance")
 end

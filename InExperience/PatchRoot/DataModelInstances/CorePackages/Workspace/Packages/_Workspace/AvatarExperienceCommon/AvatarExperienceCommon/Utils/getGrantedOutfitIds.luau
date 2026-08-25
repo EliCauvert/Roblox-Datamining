@@ -3,7 +3,7 @@ local outfitTypesModule = require(avatarExperienceCommon.Enums.OutfitTypes)
 local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 local NON_EDITABLE_MAKEUP_GRANT_KEY = require(avatarExperienceCommon.Constants).NON_EDITABLE_MAKEUP_GRANT_KEY
 
-return function(p0, p1, p2) --[[ line: 33 | named "getGrantedOutfitIds" ]]
+return function(p0, p1, p2)
 	-- upvalues: outfitTypesModule (ref), NON_EDITABLE_MAKEUP_GRANT_KEY (ref)
 	if not p0 then
 		return {}

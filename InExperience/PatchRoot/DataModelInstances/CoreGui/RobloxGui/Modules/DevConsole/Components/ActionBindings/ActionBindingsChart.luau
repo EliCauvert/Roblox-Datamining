@@ -44,7 +44,7 @@ for i_2, v_2 in ipairs(t) do
 end
 local actionBindingsChart = roactModule.Component:extend("ActionBindingsChart")
 
-local function constructHeader(p0, p1) --[[ line: 61 ]]
+local function constructHeader(p0, p1)
 	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref)
 	local t_2 = {}
 	
@@ -78,7 +78,7 @@ local function constructHeader(p0, p1) --[[ line: 61 ]]
 	}, t_2)
 end
 
-local function constructEntry(p2, p3, p4) --[[ line: 103 ]]
+local function constructEntry(p2, p3, p4)
 	-- upvalues: t_3 (ref), roactModule (ref), lineWidth (ref), lineColor (ref), cellLabelModule (ref), t_2 (ref), t (ref), entryFrameHeight (ref)
 	local name = p2.name
 	local actionInfo = p2.actionInfo
@@ -117,11 +117,11 @@ local function constructEntry(p2, p3, p4) --[[ line: 103 ]]
 	}, t_1)
 end
 
-function actionBindingsChart.init(p5, p6) --[[ line: 172 ]]
+function actionBindingsChart.init(p5, p6)
 	-- upvalues: roactModule (ref)
 	local currentData = p6.ActionBindingsData:getCurrentData()
 	
-	function p5.onSortChanged(p7) --[[ line: 175 ]]
+	function p5.onSortChanged(p7)
 		-- upvalues: p6 (ref), p5 (ref)
 		if p7 == p6.ActionBindingsData:getSortType() then
 			p5:setState({ reverseSort = not p5.state.reverseSort })
@@ -132,7 +132,7 @@ function actionBindingsChart.init(p5, p6) --[[ line: 172 ]]
 		p5:setState({ reverseSort = false })
 	end
 	
-	function p5.onCanvasPosChanged() --[[ line: 189 ]]
+	function p5.onCanvasPosChanged()
 		-- upvalues: p5 (ref)
 		local canvasPosition = p5.scrollingRef.current.CanvasPosition
 		
@@ -145,13 +145,13 @@ function actionBindingsChart.init(p5, p6) --[[ line: 172 ]]
 	p5.state = { reverseSort = false, actionBindingEntries = currentData }
 end
 
-function actionBindingsChart.willUpdate(p8) --[[ line: 206 ]]
+function actionBindingsChart.willUpdate(p8)
 	if p8.canvasPosConnector then
 		p8.canvasPosConnector:Disconnect()
 	end
 end
 
-function actionBindingsChart.didUpdate(p9) --[[ line: 212 ]]
+function actionBindingsChart.didUpdate(p9)
 	if p9.scrollingRef.current then
 		p9.canvasPosConnector = p9.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p9.onCanvasPosChanged)
 		local absoluteSize = p9.scrollingRef.current.AbsoluteSize
@@ -163,8 +163,8 @@ function actionBindingsChart.didUpdate(p9) --[[ line: 212 ]]
 	end
 end
 
-function actionBindingsChart.didMount(p10) --[[ line: 227 ]]
-	p10.bindingsUpdated = p10.props.ActionBindingsData:Signal():Connect(function(p11) --[[ line: 228 ]]
+function actionBindingsChart.didMount(p10)
+	p10.bindingsUpdated = p10.props.ActionBindingsData:Signal():Connect(function(p11)
 		-- upvalues: p10 (ref)
 		p10:setState({ actionBindingEntries = p11 })
 	end)
@@ -178,14 +178,14 @@ function actionBindingsChart.didMount(p10) --[[ line: 227 ]]
 	end
 end
 
-function actionBindingsChart.willUnmount(p12) --[[ line: 245 ]]
+function actionBindingsChart.willUnmount(p12)
 	p12.bindingsUpdated:Disconnect()
 	p12.bindingsUpdated = nil
 	p12.canvasPosConnector:Disconnect()
 	p12.canvasPosConnector = nil
 end
 
-function actionBindingsChart.render(p13) --[[ line: 252 ]]
+function actionBindingsChart.render(p13)
 	-- upvalues: minFrameWidth (ref), roactModule (ref), entryFrameHeight (ref), constructEntry (ref), lineColor (ref), constructHeader (ref), headerFrameHeight (ref), constantsModule (ref)
 	local t = {
 		UIListLayout = roactModule.createElement("UIListLayout", {

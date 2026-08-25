@@ -9,15 +9,15 @@ local receivedPlacesInfos = require(parent.PlaceInfoRodux).Actions.ReceivedPlace
 local convertUniverseIdToString = require(parent.SharedFlags).ConvertUniverseIdToString
 local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
 
-return function(p0, p1) --[[ line: 15 ]]
+return function(p0, p1)
 	-- upvalues: gamesMultigetPlaceDetailsModule (ref), functional (ref), placeInfoModel (ref), convertUniverseIdToString (ref), receivedPlacesInfos (ref), fFlagMigrateGameIconsToStore (ref), dataHydrationModule (ref), apiFetchGameIcons (ref)
-	return function(p2) --[[ line: 16 ]]
+	return function(p2)
 		-- upvalues: p1 (ref), gamesMultigetPlaceDetailsModule (copy), p0 (ref), functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy)
 		if p1 and #p1 ~= 0 then
-			return gamesMultigetPlaceDetailsModule(p0, p1):andThen(function(p3) --[[ line: 21 ]]
+			return gamesMultigetPlaceDetailsModule(p0, p1):andThen(function(p3)
 				-- upvalues: functional (copy), placeInfoModel (copy), convertUniverseIdToString (copy), p2 (ref), receivedPlacesInfos (copy), fFlagMigrateGameIconsToStore (copy), dataHydrationModule (copy), apiFetchGameIcons (copy), p0 (copy)
 				local t = {}
-				local var4 = functional.Map(p3.responseBody, function(p4) --[[ line: 25 ]]
+				local var4 = functional.Map(p3.responseBody, function(p4)
 					-- upvalues: placeInfoModel (copy), convertUniverseIdToString (copy), t (ref)
 					local var5 = placeInfoModel.fromWeb(p4)
 					table.insert(t, convertUniverseIdToString(var5.universeId))

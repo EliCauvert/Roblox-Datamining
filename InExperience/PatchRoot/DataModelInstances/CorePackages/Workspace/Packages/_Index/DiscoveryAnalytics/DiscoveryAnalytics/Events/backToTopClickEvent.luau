@@ -7,7 +7,7 @@ local t = {
 	lastUpdated = { 26, 7, 22 }
 }
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		eventContext = p0,

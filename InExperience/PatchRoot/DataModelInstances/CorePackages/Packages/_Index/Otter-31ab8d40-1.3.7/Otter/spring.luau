@@ -6,12 +6,12 @@ local sin = math.sin
 local cos = math.cos
 local sqrt = math.sqrt
 
-local function _(p0, p1, p2) --[[ line: 54 | named "translateParameters" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sqrt (ref)
 	return p0 / (sqrt(p2 * p1) * 2), sqrt(p1 / p2) / 2 / 3.14159265359
 end
 
-return function(p3, p4) --[[ line: 60 | named "spring" ]]
+return function(p3, p4)
 	-- upvalues: assign (ref), sqrt (ref), exp (ref), cos (ref), sin (ref), abs (ref)
 	local t = {
 		dampingRatio = 1,
@@ -44,7 +44,7 @@ return function(p3, p4) --[[ line: 60 | named "spring" ]]
 	assert(restingPositionLimit >= 0, "Expected restingPositionLimit >= 0")
 	
 	return {
-		step = function(p5, p6) --[[ line: 97 ]]
+		step = function(p5, p6)
 			-- upvalues: p3 (ref), dampingRatio (ref), var1 (ref), exp (copy), sqrt (copy), cos (copy), sin (copy), p3 (ref), abs (copy), restingVelocityLimit (ref), restingPositionLimit (ref)
 			local var5, var6
 			local velocity = p5.velocity or 0

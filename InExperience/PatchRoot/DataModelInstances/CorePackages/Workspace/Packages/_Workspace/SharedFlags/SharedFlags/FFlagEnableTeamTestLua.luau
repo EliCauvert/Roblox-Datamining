@@ -5,7 +5,7 @@ local enableTeamTestLua = game:DefineFastFlag("EnableTeamTestLua", false)
 local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
 local enableClientTeamTestTeleportEngineFeature = game:GetEngineFeature("EnableClientTeamTestTeleport")
 
-local function _() --[[ line: 13 | named "isTeamTestEnabled" ]]
+local function _()
 	-- upvalues: userInputService (ref), runService (ref)
 	local var9 = tonumber(string.match(runService:GetRobloxVersion(), "^%d+%.(%d+)%."))
 	

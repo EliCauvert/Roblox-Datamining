@@ -9,9 +9,9 @@ alertViewLabel.defaultProps = {
 	TextXAlignment = Enum.TextXAlignment.Center
 }
 
-function alertViewLabel.render(p0) --[[ line: 14 ]]
+function alertViewLabel.render(p0)
 	-- upvalues: UIBlox (ref), roact (ref)
-	return UIBlox.Style.withStyle(function(p1) --[[ line: 15 ]]
+	return UIBlox.Style.withStyle(function(p1)
 		-- upvalues: p0 (ref), roact (copy)
 		return roact.createElement("TextLabel", {
 			TextWrapped = true,

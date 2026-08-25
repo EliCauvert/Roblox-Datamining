@@ -4,7 +4,7 @@ local roactModule = require(parent.Roact)
 local fitFrameOnAxisModule = require(script.Parent.FitFrameOnAxis)
 local isRoact17Module = require(script.Parent.isRoact17)
 
-return roactModule.forwardRef(function(p0, p1) --[[ line: 10 ]]
+return roactModule.forwardRef(function(p0, p1)
 	-- upvalues: isRoact17Module (ref), roactModule (ref), cryoModule (ref), fitFrameOnAxisModule (ref)
 	p0 = p0 or {}
 	

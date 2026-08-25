@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local _ = require(script.Parent.PolicyTypes)
 
-local function mergePolicies(p0, p1) --[[ line: 15 ]]
+local function mergePolicies(p0, p1)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
@@ -15,15 +15,15 @@ local function mergePolicies(p0, p1) --[[ line: 15 ]]
 	return t
 end
 
-return function(p2) --[[ line: 25 ]]
+return function(p2)
 	-- upvalues: reactModule (ref), policyProviderModule (ref), mergePolicies (ref), logger (ref)
 	assert(p2, "expected getPolicyImpl")
 	
-	return function(p3) --[[ line: 28 | named "useAppPolicy" ]]
+	return function(p3)
 		-- upvalues: reactModule (copy), policyProviderModule (copy), mergePolicies (copy), p2 (ref), logger (copy)
 		local var5 = reactModule.useContext(policyProviderModule.AppPolicyContext)
 		assert(var5, "Not a descendent of PolicyProvider")
-		local var6, var7 = reactModule.useState(function() --[[ line: 32 | named "getInitialPolicy" ]]
+		local var6, var7 = reactModule.useState(function()
 			-- upvalues: var5 (ref), mergePolicies (copy), p2 (copy), logger (copy)
 			if var5.staticExternalPolicy then
 				return mergePolicies(var5.staticExternalPolicy, var5.presentationPolicy)
@@ -37,15 +37,15 @@ return function(p2) --[[ line: 25 ]]
 			
 			return mergePolicies({}, var5.presentationPolicy)
 		end)
-		reactModule.useEffect(function() --[[ line: 50 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var5 (ref), p2 (copy), logger (copy), var7 (ref), mergePolicies (copy)
-			local var9 = if not var5.staticExternalPolicy then p2.onPolicyChanged(function(p4) --[[ line: 53 ]]
+			local var9 = if not var5.staticExternalPolicy then p2.onPolicyChanged(function(p4)
 				-- upvalues: logger (copy), var7 (copy), mergePolicies (copy), var5 (copy)
 				logger:trace("Received policy update")
 				var7(mergePolicies(p4, var5.presentationPolicy))
 			end) else nil
 			
-			return function() --[[ line: 59 ]]
+			return function()
 				-- upvalues: var9 (write)
 				if var9 then
 					var9:Disconnect()

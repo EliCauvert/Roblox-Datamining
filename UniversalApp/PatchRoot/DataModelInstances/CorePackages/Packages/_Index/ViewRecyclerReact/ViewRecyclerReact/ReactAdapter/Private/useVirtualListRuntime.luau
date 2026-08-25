@@ -9,7 +9,7 @@ local signalsModule = require(viewRecyclerReact.Parent.Signals)
 local useCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
 local scrollListHostRuntime = viewRecyclerRobloxModule.Internal.ScrollListHostRuntime
 
-local function _(value, p0) --[[ line: 24 | named "assignRef" ]]
+local function _(value, p0)
 	if value == nil then return end
 	if type(value) == "function" then
 		value(p0)
@@ -19,7 +19,7 @@ local function _(value, p0) --[[ line: 24 | named "assignRef" ]]
 	value.current = p0
 end
 
-local _ = function(p1) --[[ line: 35 | named "toCorePinnedItem" ]]
+local _ = function(p1)
 	return if p1 == nil then nil else {
 		key = p1.key,
 		value = p1.value,
@@ -27,7 +27,7 @@ local _ = function(p1) --[[ line: 35 | named "toCorePinnedItem" ]]
 	}
 end
 
-local function listHostConfiguration(p2) --[[ line: 46 ]]
+local function listHostConfiguration(p2)
 	return {
 		axis = p2.axis,
 		dataSource = p2.dataSource,
@@ -46,14 +46,14 @@ local function listHostConfiguration(p2) --[[ line: 46 ]]
 	}
 end
 
-local _ = function(p3, p4) --[[ line: 65 | named "hostTarget" ]]
+local _ = function(p3, p4)
 	return {
 		scrollingFrame = p3.current,
 		viewportOverlay = p4.current
 	}
 end
 
-local function corePolicy(p5) --[[ line: 72 ]]
+local function corePolicy(p5)
 	local t = {
 		overscan = p5.overscan,
 		overscanPolicy = p5.overscanPolicy,
@@ -80,7 +80,7 @@ local function corePolicy(p5) --[[ line: 72 ]]
 	return t
 end
 
-local _ = function(p6, p7) --[[ line: 88 | named "committedUpdate" ]]
+local _ = function(p6, p7)
 	-- upvalues: listHostConfiguration (ref), corePolicy (ref)
 	return {
 		hostConfiguration = listHostConfiguration(p6),
@@ -89,14 +89,14 @@ local _ = function(p6, p7) --[[ line: 88 | named "committedUpdate" ]]
 	}
 end
 
-return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
+return function(p8)
 	-- upvalues: reactModule (ref), recyclingScopeContextModule (ref), recyclingViewportContextModule (ref), signalsModule (ref), useCompositionPlacementModule (ref), scrollListHostRuntime (ref), listHostConfiguration (ref), corePolicy (ref), recyclableViewRegistryModule (ref), viewRecyclerModule (ref)
 	local var13 = reactModule.useRef(p8)
 	var13.current = p8
 	local var14 = reactModule.useContext(recyclingScopeContextModule)
 	assert(var14 ~= nil, "VirtualListRenderer requires a RecyclingScope")
 	local var15 = reactModule.useContext(recyclingViewportContextModule)
-	local var16 = reactModule.useState(function() --[[ line: 103 ]]
+	local var16 = reactModule.useState(function()
 		-- upvalues: signalsModule (copy)
 		local var27, var28 = signalsModule.createSignal(false)
 		
@@ -105,11 +105,11 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 	local var17 = reactModule.useRef(nil)
 	local var18 = reactModule.useRef(nil)
 	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useState(function() --[[ line: 114 ]]
+	local var20 = reactModule.useState(function()
 		-- upvalues: var14 (ref)
 		return var14.runtime.getRecyclingScope(var14.listOptions)
 	end)
-	reactModule.useEffect(function() --[[ line: 117 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), var14 (ref)
 		var20.setMaxPoolSize(var14.listOptions.maxPoolSize)
 	end, { var20, var14.listOptions.maxPoolSize })
@@ -124,19 +124,19 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 		layout = p8.layout,
 		compositionPlacementManager = var21.manager
 	}
-	local var23 = reactModule.useCallback(function(p9) --[[ line: 136 ]]
+	local var23 = reactModule.useCallback(function(p9)
 		-- upvalues: var22 (ref)
 		local current = var22.current
 		p9.setStructuralPlacement(current.axis, current.layout.requiresItemMeasurement())
 		p9.setCompositionPlacementManager(current.compositionPlacementManager)
 	end, {})
-	local var24 = reactModule.useCallback(function(p10, p11) --[[ line: 141 ]]
+	local var24 = reactModule.useCallback(function(p10, p11)
 		-- upvalues: var23 (ref)
 		if p11 ~= nil then
 			var23(p10)
 		end
 	end, { var23 })
-	local var25 = reactModule.useState(function() --[[ line: 146 ]]
+	local var25 = reactModule.useState(function()
 		-- upvalues: scrollListHostRuntime (copy), listHostConfiguration (copy), var13 (ref), var18 (ref), var19 (ref), corePolicy (copy), var20 (ref), recyclableViewRegistryModule (copy), p8 (ref), var15 (ref), var16 (ref), var24 (ref)
 		return scrollListHostRuntime.newForRecyclableViewRecords({
 			initialHostConfiguration = listHostConfiguration(var13.current),
@@ -147,7 +147,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 			initialCorePolicy = corePolicy(var13.current),
 			core = {
 				recyclingScope = var20,
-				getItemViewType = function(p12, p13) --[[ line: 155 ]]
+				getItemViewType = function(p12, p13)
 					-- upvalues: var13 (copy), recyclableViewRegistryModule (copy)
 					local itemType = var13.current.itemType
 					assert(recyclableViewRegistryModule.isRegistered(itemType) or type(itemType) == "function", "VirtualList: `itemType` must be a Recyclable view type or selector")
@@ -160,7 +160,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 				active = if var15 == nil then nil else var16.active
 			},
 			prepareItemViewAssignment = var24,
-			onItemViewAssignmentChanged = function(value, p14) --[[ line: 174 ]]
+			onItemViewAssignmentChanged = function(value, p14)
 				-- upvalues: var13 (copy)
 				if p14 == nil then
 					value.setCompositionPlacementManager(nil)
@@ -171,7 +171,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 					instrumentation.assignmentChanged(value, p14)
 				end
 			end,
-			onItemViewPresentationChanged = function(p15, p16) --[[ line: 183 ]]
+			onItemViewPresentationChanged = function(p15, p16)
 				-- upvalues: var13 (copy)
 				local instrumentation = var13.current._instrumentation
 				
@@ -181,7 +181,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 			end
 		})
 	end)
-	local var26 = reactModule.useState(function() --[[ line: 192 ]]
+	local var26 = reactModule.useState(function()
 		-- upvalues: var13 (ref), var18 (ref), var19 (ref), var25 (ref), listHostConfiguration (copy), corePolicy (copy)
 		local current = var13.current
 		local t = {
@@ -190,7 +190,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 		}
 		
 		return {
-			synchronize = function(p17) --[[ line: 196 ]]
+			synchronize = function(p17)
 				-- upvalues: current (write), var25 (copy), t (write), listHostConfiguration (copy), corePolicy (copy)
 				current = p17
 				var25.update({
@@ -199,7 +199,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 					corePolicy = corePolicy(p17)
 				})
 			end,
-			refreshHost = function() --[[ line: 200 ]]
+			refreshHost = function()
 				-- upvalues: t (write), var18 (copy), var19 (copy), var25 (copy), current (write), listHostConfiguration (copy), corePolicy (copy)
 				t = {
 					scrollingFrame = var18.current,
@@ -213,17 +213,17 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 			end
 		}
 	end)
-	reactModule.useLayoutEffect(function() --[[ line: 207 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var25 (ref)
 		return var25.connect()
 	end, { var25 })
-	reactModule.useEffect(function() --[[ line: 211 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref)
 		return var14.registerConsumer()
 	end, { var14 })
-	reactModule.useEffect(function() --[[ line: 215 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref)
-		return function() --[[ line: 216 ]]
+		return function()
 			-- upvalues: var17 (copy)
 			local current = var17.current
 			
@@ -233,7 +233,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 			end
 		end
 	end, {})
-	reactModule.useLayoutEffect(function() --[[ line: 226 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var25 (ref), viewRecyclerModule (copy), var23 (ref)
 		for i, v in var25.query({
 			type = viewRecyclerModule.VirtualizerQueryType.GetItemViews
@@ -247,22 +247,22 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 		p8.layout,
 		var25
 	})
-	reactModule.useEffect(function() --[[ line: 240 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), viewRecyclerModule (copy), var25 (ref)
 		var25.dispatch({
 			type = viewRecyclerModule.VirtualizerCommandType.Activate
 		})
 		
-		return function() --[[ line: 242 ]]
+		return function()
 			-- upvalues: var25 (copy)
 			var25.destroy()
 		end
 	end, { var25, var25 })
-	reactModule.useLayoutEffect(function() --[[ line: 247 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var26 (ref), p8 (ref)
 		var26.synchronize(p8)
 	end)
-	reactModule.useEffect(function() --[[ line: 251 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p8 (ref), var25 (ref)
 		local onVisibleRangeChanged = p8.onVisibleRangeChanged
 		
@@ -271,7 +271,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 		end
 		onVisibleRangeChanged(var25.getSnapshot().visibleRange)
 	end, { var25, p8.onVisibleRangeChanged })
-	reactModule.useEffect(function() --[[ line: 259 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p8 (ref), var25 (ref)
 		local onMountedRangeChanged = p8.onMountedRangeChanged
 		
@@ -280,20 +280,20 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 		end
 		onMountedRangeChanged(var25.getSnapshot().mountedRange)
 	end, { var25, p8.onMountedRangeChanged })
-	reactModule.useEffect(function() --[[ line: 267 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p8 (ref)
 		if p8.onDataPrefetchRequested == nil then
 			return
 		end
 	end, { var25, p8.onDataPrefetchRequested })
-	reactModule.useEffect(function() --[[ line: 275 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), viewRecyclerModule (copy)
 		var25.dispatch({ type = viewRecyclerModule.VirtualizerCommandType.Refresh })
 	end, { var25, p8.itemType })
-	reactModule.useEffect(function() --[[ line: 279 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), var25 (ref), viewRecyclerModule (copy), p8 (ref)
 		local t = {
-			scrollToIndex = function(p18, p19) --[[ line: 281 ]]
+			scrollToIndex = function(p18, p19)
 				-- upvalues: var25 (copy), var25 (copy), viewRecyclerModule (copy)
 				if var25.isHostReady() then
 					var25.dispatch({
@@ -303,33 +303,33 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 					})
 				end
 			end,
-			scrollToOffset = function(value) --[[ line: 290 ]]
+			scrollToOffset = function(value)
 				-- upvalues: var25 (copy), viewRecyclerModule (copy)
 				return var25.dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.ScrollToOffset,
 					offset = value
 				}).result
 			end,
-			scrollBy = function(p20) --[[ line: 293 ]]
+			scrollBy = function(p20)
 				-- upvalues: var25 (copy), viewRecyclerModule (copy)
 				return var25.dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.ScrollBy,
 					delta = p20
 				}).result
 			end,
-			getScrollState = function() --[[ line: 296 ]]
+			getScrollState = function()
 				-- upvalues: var25 (copy), viewRecyclerModule (copy)
 				return var25.query({
 					type = viewRecyclerModule.VirtualizerQueryType.GetScrollState
 				})
 			end,
-			captureScrollSnapshot = function() --[[ line: 299 ]]
+			captureScrollSnapshot = function()
 				-- upvalues: var25 (copy), viewRecyclerModule (copy)
 				return var25.query({
 					type = viewRecyclerModule.VirtualizerQueryType.CaptureScrollSnapshot
 				})
 			end,
-			restoreScrollSnapshot = function(p21) --[[ line: 302 ]]
+			restoreScrollSnapshot = function(p21)
 				-- upvalues: var25 (copy), viewRecyclerModule (copy)
 				return var25.dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.RestoreScrollSnapshot,
@@ -346,7 +346,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 				listRef.current = t
 			end
 		end
-		return function() --[[ line: 310 ]]
+		return function()
 			-- upvalues: p8 (copy)
 			local listRef = p8.listRef
 			
@@ -359,7 +359,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 			listRef.current = nil
 		end
 	end, { p8.listRef, var25.isHostReady, var25 })
-	reactModule.useEffect(function() --[[ line: 315 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p8 (ref), var18 (ref)
 		local scrollingFrameRef = p8.scrollingFrameRef
 		local current = var18.current
@@ -371,7 +371,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 				scrollingFrameRef.current = current
 			end
 		end
-		return function() --[[ line: 317 ]]
+		return function()
 			-- upvalues: p8 (copy)
 			local scrollingFrameRef = p8.scrollingFrameRef
 			
@@ -387,7 +387,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 	
 	return {
 		axis = p8.axis,
-		onScrollingFrameChanged = reactModule.useCallback(function(p22) --[[ line: 323 ]]
+		onScrollingFrameChanged = reactModule.useCallback(function(p22)
 			-- upvalues: var17 (ref), var15 (ref), var16 (ref), var26 (ref)
 			local current = var17.current
 			
@@ -400,7 +400,7 @@ return function(p8) --[[ line: 96 | named "useVirtualListRuntime" ]]
 			end
 			var26.refreshHost()
 		end, { var16, var26.refreshHost, var15 }),
-		onViewportOverlayChanged = reactModule.useCallback(function(_) --[[ line: 341 ]]
+		onViewportOverlayChanged = reactModule.useCallback(function(_)
 			-- upvalues: var26 (ref)
 			var26.refreshHost()
 		end, { var26.refreshHost }),

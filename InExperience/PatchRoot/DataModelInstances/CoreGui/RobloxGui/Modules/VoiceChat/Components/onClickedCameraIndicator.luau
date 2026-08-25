@@ -4,7 +4,7 @@ local var1 = require(modules.SelfView.Analytics).new()
 local publicApiModule = require(modules.SelfView.publicApi)
 local toggleSelfViewSignalModule = require(modules.SelfView.toggleSelfViewSignal)
 
-return function() --[[ line: 9 ]]
+return function()
 	-- upvalues: faceAnimatorService (ref), var1 (ref), publicApiModule (ref), toggleSelfViewSignalModule (ref)
 	if faceAnimatorService and faceAnimatorService:IsStarted() then
 		faceAnimatorService.VideoAnimationEnabled = not faceAnimatorService.VideoAnimationEnabled

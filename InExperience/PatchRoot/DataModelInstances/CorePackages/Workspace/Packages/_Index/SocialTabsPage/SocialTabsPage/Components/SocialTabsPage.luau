@@ -13,7 +13,7 @@ local socialTabsContextModule = require(socialTabsPage.Contexts.SocialTabsContex
 local useLocalizedTabsModule = require(socialTabsPage.Hooks.useLocalizedTabs)
 local _ = require(socialTabsPage.Common.Types)
 
-return function(value) --[[ line: 21 | named "SocialTabsPageComponent" ]]
+return function(value)
 	-- upvalues: reactModule (ref), useLocalizedTabsModule (ref), useTokens (ref), useNavigation (ref), view (ref), socialTabsHeaderModule (ref), socialTabBarModule (ref), stateLayerAffordance (ref), socialTabsContextModule (ref), fullscreenPageWithSafeArea (ref)
 	local color3, var15, t_1
 	local renderNavigator = value.renderNavigator
@@ -23,7 +23,7 @@ return function(value) --[[ line: 21 | named "SocialTabsPageComponent" ]]
 	local title = value.title
 	local initialTabId = value.initialTabId
 	local pageWidth = value.pageWidth
-	local var7 = reactModule.useMemo(function() --[[ line: 30 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: profileId (ref), title (ref)
 		return { profileId = profileId, title = title }
 	end, { profileId, title })
@@ -31,11 +31,11 @@ return function(value) --[[ line: 21 | named "SocialTabsPageComponent" ]]
 	local var9 = useTokens()
 	local var10 = useNavigation()
 	local var11 = reactModule.useRef(false)
-	local var12 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
 		var10.goBack()
 	end, { var10 })
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), initialTabId (ref), tabConfig (ref), var10 (ref)
 		if var11.current then return end
 		if not initialTabId or #tabConfig == 0 then return end
@@ -82,7 +82,7 @@ return function(value) --[[ line: 21 | named "SocialTabsPageComponent" ]]
 					tag = "col position-top-right anchor-top-right padding-top-xxlarge bg-surface-0",
 					Size = UDim2.new(0, pageWidth, 1, 0),
 					stateLayer = t,
-					onActivated = function() --[[ line: 117 ]] end
+					onActivated = function() end
 				}, { Content = var13 })
 			})
 		}

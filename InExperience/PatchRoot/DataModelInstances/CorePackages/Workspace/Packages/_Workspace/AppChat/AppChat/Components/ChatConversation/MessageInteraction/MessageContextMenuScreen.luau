@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useNavigation = require(parent.Navigation).useNavigation
 local messageContextMenuContainerModule = require(script.Parent.MessageContextMenuContainer)
 
-function MessageContextMenuScreen() --[[ line: 12 ]]
+function MessageContextMenuScreen()
 	-- upvalues: useNavigation (ref), reactModule (ref), messageContextMenuContainerModule (ref)
 	local var2 = useNavigation()
 	

@@ -25,7 +25,7 @@ local t_1 = {
 local var9 = nil
 local var10 = nil
 
-local function _() --[[ line: 48 | named "getDevicePerformanceValue" ]]
+local function _()
 	-- upvalues: var9 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref)
 	if var9 == nil then
 		var9 = if sduiForcePerfLevel ~= "" then t_1[userInputService:GetDeviceLevel()] or 3 else t[sduiForcePerfLevel] or 3
@@ -33,7 +33,7 @@ local function _() --[[ line: 48 | named "getDevicePerformanceValue" ]]
 	return var9
 end
 
-local function getImageQualityValue() --[[ line: 60 ]]
+local function getImageQualityValue()
 	-- upvalues: sduiForceImageQualityLevel (ref), t (ref), var9 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref), var10 (write), guiService (ref), argCheckModule (ref)
 	if sduiForceImageQualityLevel ~= "" then
 		return t[sduiForceImageQualityLevel] or 3
@@ -59,10 +59,10 @@ end
 return {
 	PERF_KEY = "performanceLevel",
 	IMAGE_QUALITY_KEY = "imageQualityLevel",
-	shouldIncludeKey = function(p0) --[[ line: 117 ]]
+	shouldIncludeKey = function(p0)
 		return p0 == "imageQualityLevel" or p0 == "performanceLevel"
 	end,
-	shouldFailConditionEarly = function(p1, p2, p3) --[[ line: 87 ]]
+	shouldFailConditionEarly = function(p1, p2, p3)
 		-- upvalues: var9 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref), sduiErrorsModule (ref), getImageQualityValue (ref)
 		if p1 == "performanceLevel" then
 			if var9 == nil then
@@ -90,15 +90,15 @@ return {
 		
 		return false
 	end,
-	setDeviceLevelValueForTests = function(value) --[[ line: 286 ]]
+	setDeviceLevelValueForTests = function(value)
 		-- upvalues: var9 (write)
 		var9 = value
 	end,
-	setResolutionScaleForTests = function(value) --[[ line: 291 ]]
+	setResolutionScaleForTests = function(value)
 		-- upvalues: var10 (write)
 		var10 = value
 	end,
-	adaptThumbnailDimensions = function(p4, p5, p6, p7, p8) --[[ line: 125 ]]
+	adaptThumbnailDimensions = function(p4, p5, p6, p7, p8)
 		-- upvalues: getImageQualityValue (ref), argCheckModule (ref)
 		local var17 = getImageQualityValue()
 		
@@ -129,7 +129,7 @@ return {
 		end
 		return p4, p5
 	end,
-	checkResponsiveConditions = function(p9, p10, p11, p12, p13, p14) --[[ line: 174 ]]
+	checkResponsiveConditions = function(p9, p10, p11, p12, p13, p14)
 		-- upvalues: sduiConditionKey (ref), getImageQualityValue (ref), t (ref), sduiErrorsModule (ref), var9 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref)
 		local t_2 = {}
 		
@@ -217,7 +217,7 @@ return {
 		end
 		return t_2
 	end,
-	isPortraitOrientation = function() --[[ line: 273 ]]
+	isPortraitOrientation = function()
 		-- upvalues: getDisplayStore (ref)
 		local viewportSize = getDisplayStore(false).getViewportSize(false)
 		

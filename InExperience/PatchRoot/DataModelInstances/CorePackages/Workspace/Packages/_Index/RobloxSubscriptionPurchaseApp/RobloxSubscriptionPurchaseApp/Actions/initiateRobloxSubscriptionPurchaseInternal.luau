@@ -19,7 +19,7 @@ local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReaso
 local ampAccessResponseModule = require(robloxSubscriptionPurchaseApp.Enums.AmpAccessResponse)
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 
-function initiateRobloxSubscriptionPurchaseInternal(p0) --[[ line: 34 ]]
+function initiateRobloxSubscriptionPurchaseInternal(p0)
 	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
 	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
 	local var16 = robloxSubscriptionStoreModule.get()
@@ -43,7 +43,7 @@ function initiateRobloxSubscriptionPurchaseInternal(p0) --[[ line: 34 ]]
 	if fFlagRobloxPlusAmpSubscriptionCheckModule then
 		table.insert(list, getAmpFeatureAccessModule())
 	end
-	promiseModule.all(list):andThen(function(p1) --[[ line: 69 ]]
+	promiseModule.all(list):andThen(function(p1)
 		-- upvalues: fFlagRobloxPlusAmpSubscriptionCheckModule (copy), ampAccessResponseModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), var16 (ref), promptStateModule (copy)
 		local var19 = p1[1]
 		local var20 = p1[2]
@@ -63,7 +63,7 @@ function initiateRobloxSubscriptionPurchaseInternal(p0) --[[ line: 34 ]]
 			return
 		end
 		var16.setPromptState(promptStateModule.SubscriptionPurchaseUIReady)
-	end, function(_) --[[ line: 95 ]]
+	end, function(_)
 		-- upvalues: transitionToErrorModule (copy), errorReasonModule (copy)
 		transitionToErrorModule(errorReasonModule.GenericError, "initiateRobloxSubscriptionPurchaseInternal")
 	end)

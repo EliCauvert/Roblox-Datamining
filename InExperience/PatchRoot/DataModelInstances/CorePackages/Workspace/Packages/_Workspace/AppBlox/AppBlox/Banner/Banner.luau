@@ -15,7 +15,7 @@ local t = {
 	tags = { container = "col auto-y" }
 }
 
-return reactModule.memo(function(p0) --[[ line: 48 | named "Banner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), button (ref), foundationModule (ref), bannerBadgeModule (ref), iconButton (ref), view (ref), icon (ref), image (ref), text (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local var6 = "col auto-y"
@@ -25,7 +25,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "Banner" ]]
 	end
 	local var7 = var5.badges and #var5.badges > 0
 	local var8 = var5.buttons and (#var5.buttons < 2 and (not var5.image and (not var5.body and (not var7 and not var5.onDismiss))))
-	local var9 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref), reactModule (copy), iconButton (copy), var7 (ref), foundationModule (copy)
 		return if var5.onDismiss then reactModule.createElement(iconButton, {
 			isCircular = true,
@@ -51,7 +51,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "Banner" ]]
 				LayoutOrder = 1,
 				testId = "--banner-badges",
 				tag = "row auto-xy gap-small fill"
-			}, reactModule.useMemo(function() --[[ line: 80 ]]
+			}, reactModule.useMemo(function()
 				-- upvalues: var5 (ref), reactModule (copy), bannerBadgeModule (copy), cryoModule (copy)
 				local t = {}
 				
@@ -118,7 +118,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "Banner" ]]
 						tag = "row auto-xy grow gap-small wrap",
 						LayoutOrder = 2,
 						testId = "--banner-buttons"
-					}, reactModule.useMemo(function() --[[ line: 63 ]]
+					}, reactModule.useMemo(function()
 						-- upvalues: var5 (ref), reactModule (copy), button (copy), cryoModule (copy), foundationModule (copy)
 						local t = {}
 						

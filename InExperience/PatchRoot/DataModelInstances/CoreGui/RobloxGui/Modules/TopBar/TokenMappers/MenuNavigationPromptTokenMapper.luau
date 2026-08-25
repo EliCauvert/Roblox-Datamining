@@ -1,6 +1,6 @@
 ﻿local _ = require(game:GetService("CorePackages").Workspace.Packages.Style)
 
-return function(_, p0) --[[ line: 48 ]]
+return function(_, p0)
 	return {
 		Color = {
 			backgroundUiColor = p0.Color.Surface.Surface_300,

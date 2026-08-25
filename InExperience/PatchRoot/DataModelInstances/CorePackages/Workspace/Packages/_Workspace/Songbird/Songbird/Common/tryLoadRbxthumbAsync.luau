@@ -1,6 +1,6 @@
 ﻿local contentProviderService = game:GetService("ContentProvider")
 
-return function(p0, p1) --[[ line: 3 | named "tryLoadRbxthumbAsync" ]]
+return function(p0, p1)
 	-- upvalues: contentProviderService (ref)
 	p1 = p1 or 5
 	

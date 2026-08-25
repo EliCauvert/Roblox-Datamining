@@ -18,16 +18,16 @@ local dismissedChatModalModule = require(appChat.Conversations.Actions.Dismissed
 local useIsGuiInChatVisibleModule = require(appChat.Hooks.useIsGuiInChatVisible)
 local conversationBannerContainerModule = require(script.Parent.ConversationBanner.ConversationBannerContainer)
 local fIntAppChatModalSeenImpressionDelayMsModule = require(appChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
-local t = { setModalHeight = function(_) --[[ line: 34 ]] end }
+local t = { setModalHeight = function(_) end }
 local t_1 = {
 	[conversationTopModal.AddTrustedConnection] = conversationBannerContainerModule,
 	[conversationTopModal.TrustedConnectionRequest] = conversationBannerContainerModule
 }
 
-return reactModule.memo(function(p0) --[[ line: 43 | named "ConversationTopModalContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), t_1 (ref), useDispatch (ref), useRecordModalSequenceResponseForConversationModule (ref), reactModule (ref), useIsGuiInChatVisibleModule (ref), useRecordModalSeenWithDelayModule (ref), modalSequence (ref), fIntAppChatModalSeenImpressionDelayMsModule (ref), name (ref), dismissedChatModalModule (ref), appChatNetworkingModule (ref), conversationTopModal (ref), foundationModule (ref)
 	local var16 = cryoModule.Dictionary.union(t, p0)
-	local var17 = useSelector(function(p1) --[[ line: 46 ]]
+	local var17 = useSelector(function(p1)
 		-- upvalues: getDeepValue2Module (copy), var16 (ref), modalConfigurationModule (copy)
 		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationTopModals.{var16.conversationId}`) or modalConfigurationModule.default
 	end)
@@ -44,9 +44,9 @@ return reactModule.memo(function(p0) --[[ line: 43 | named "ConversationTopModal
 		canRecordAction = useIsGuiInChatVisibleModule(var20, { var20.current, modalVariant }) and modalVariant ~= nil,
 		conversationId = var16.conversationId
 	})
-	local var21 = reactModule.useCallback(function() --[[ line: 68 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var19 (ref), var17 (ref), modalSequence (copy), name (copy), var18 (ref), dismissedChatModalModule (copy), appChatNetworkingModule (copy), var16 (ref)
-		var19(var17.modal_layout.dismissed_record_action, modalSequence.ConversationTopModal, nil, var17.modal_variant):catch(function(p2) --[[ line: 74 ]]
+		var19(var17.modal_layout.dismissed_record_action, modalSequence.ConversationTopModal, nil, var17.modal_variant):catch(function(p2)
 			-- upvalues: name (copy), var17 (copy)
 			name:warning(`Error in ConversationOverlayContainer {var17.modal_layout.id} -> RecordModalSequenceResponse: {tostring(p2)}`)
 		end)
@@ -58,7 +58,7 @@ return reactModule.memo(function(p0) --[[ line: 43 | named "ConversationTopModal
 		var19,
 		var18
 	})
-	local var22 = reactModule.useCallback(function(p3) --[[ line: 94 ]]
+	local var22 = reactModule.useCallback(function(p3)
 		-- upvalues: var16 (ref)
 		var16.setModalHeight(p3.AbsoluteSize.Y)
 	end, { var16.setModalHeight })

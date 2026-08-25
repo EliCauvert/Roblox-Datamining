@@ -8,7 +8,7 @@ local productTypeEnum = require(parent.types).ProductTypeEnum
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent_1.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local getFFlagEnableCreatorStorePurchasingCutoverModule = require(parent.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 20 | named "meetsPrerequisites" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: constantsModule (ref), purchaseErrorModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), playersService (ref), workspaceService (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
 	local var5 = p0.ProductType == constantsModule.ProductType.CollectibleItem
 	local var6 = if p0.CollectiblesItemDetails then p0.CollectiblesItemDetails.IsLimited else nil

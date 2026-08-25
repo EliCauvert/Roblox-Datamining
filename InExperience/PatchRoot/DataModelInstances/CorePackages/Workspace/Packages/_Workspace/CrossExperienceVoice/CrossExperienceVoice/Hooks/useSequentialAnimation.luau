@@ -4,10 +4,10 @@ local react = dependenciesModule.React
 local reactOtter = dependenciesModule.ReactOtter
 local _ = require(crossExperienceVoice.Common.Types)
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: react (ref), reactOtter (ref)
 	local var2 = react.useRef(nil)
-	local var3, var4 = reactOtter.useAnimatedBinding(p0, function() --[[ line: 13 ]]
+	local var3, var4 = reactOtter.useAnimatedBinding(p0, function()
 		-- upvalues: var2 (ref)
 		if var2.current then
 			var2.current()
@@ -15,9 +15,9 @@ return function(p0) --[[ line: 11 ]]
 		end
 	end)
 	
-	return var3, react.useCallback(function(p1, p2) --[[ line: 20 ]]
+	return var3, react.useCallback(function(p1, p2)
 		-- upvalues: var2 (ref), var4 (ref), reactOtter (copy)
-		local function _(p3, p4) --[[ line: 21 | named "animateStep" ]]
+		local function _(p3, p4)
 			-- upvalues: var2 (copy), var4 (copy), reactOtter (copy)
 			var2.current = p4
 			var4(reactOtter.ease(p3.value, {
@@ -26,12 +26,12 @@ return function(p0) --[[ line: 11 ]]
 			}))
 		end
 		
-		local function animateImpl(p5, p6, p7) --[[ line: 29 ]]
+		local function animateImpl(p5, p6, p7)
 			-- upvalues: animateImpl (ref), var2 (copy), var4 (copy), reactOtter (copy)
 			local var6 = p5[p6]
 			
 			if var6 ~= nil then
-				function var2.current() --[[ line: 32 ]]
+				function var2.current()
 					-- upvalues: p7 (ref), p6 (ref), animateImpl (copy), p5 (ref)
 					if p7 then
 						p7(p6)

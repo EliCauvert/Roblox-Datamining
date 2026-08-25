@@ -16,9 +16,9 @@ local _ = require(parent.Actions.SetPromptState)
 local _ = require(parent.Enums.PromptState)
 local list = { analyticsModule, networkModule, externalSettingsModule }
 
-return function() --[[ line: 28 | named "initiatePurchasePrecheck" ]]
+return function()
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), networkModule (ref), externalSettingsModule (ref), resolvePurchasePrecheckModule (ref), purchaseWarningModule (ref), getUpsellFlowModule (ref), selectedRobuxPackageModule (ref), upsellFlowModule (ref), setButtonStateModule (ref), buttonStateModule (ref), getPurchaseWarningModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1) --[[ line: 29 ]]
+	return thunkModule.new(script.Name, list, function(p0, p1)
 		-- upvalues: analyticsModule (copy), networkModule (copy), externalSettingsModule (copy), resolvePurchasePrecheckModule (copy), purchaseWarningModule (copy), getUpsellFlowModule (copy), selectedRobuxPackageModule (copy), upsellFlowModule (copy), setButtonStateModule (copy), buttonStateModule (copy), getPurchaseWarningModule (copy)
 		local state = p0:getState()
 		local var14 = p1[analyticsModule]
@@ -43,7 +43,7 @@ return function() --[[ line: 28 | named "initiatePurchasePrecheck" ]]
 		end
 		p0:dispatch(setButtonStateModule(buttonStateModule.Disabled))
 		
-		return getPurchaseWarningModule(var15, robuxProductId, productId_1, var19):andThen(function(p2) --[[ line: 57 ]]
+		return getPurchaseWarningModule(var15, robuxProductId, productId_1, var19):andThen(function(p2)
 			-- upvalues: p0 (ref), setButtonStateModule (copy), buttonStateModule (copy), var14 (ref), productId (ref), robuxProductId (write), productId_1 (write), resolvePurchasePrecheckModule (copy), purchaseWarningModule (copy)
 			p0:dispatch(setButtonStateModule(buttonStateModule.Enabled))
 			
@@ -67,7 +67,7 @@ return function() --[[ line: 28 | named "initiatePurchasePrecheck" ]]
 				end
 			end
 			p0:dispatch(resolvePurchasePrecheckModule(purchaseWarningModule.NoAction))
-		end):catch(function(_) --[[ line: 95 ]]
+		end):catch(function(_)
 			-- upvalues: p0 (ref), setButtonStateModule (copy), buttonStateModule (copy), resolvePurchasePrecheckModule (copy), purchaseWarningModule (copy)
 			p0:dispatch(setButtonStateModule(buttonStateModule.Enabled))
 			p0:dispatch(resolvePurchasePrecheckModule(purchaseWarningModule.NoAction))

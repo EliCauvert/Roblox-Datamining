@@ -11,7 +11,7 @@ local _ = require(parent.Common.computeStatColumns)
 local var5 = signalsModule.createSignal({})
 local var6 = signalsModule.createSignal(0)
 
-return reactModule.memo(function(p0) --[[ line: 27 | named "TeamListView" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: signalsReactModule (ref), var5 (ref), var6 (ref), reactModule (ref), teamEntryViewModule (ref), entryViewModule (ref), view (ref)
 	local teamEntry = p0.teamEntry
 	local players = teamEntry.players

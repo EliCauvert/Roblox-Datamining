@@ -1,7 +1,7 @@
 ﻿local t = { instanceProcessingLimit = 1000 }
 
 return {
-	new = function(p0) --[[ line: 24 ]]
+	new = function(p0)
 		-- upvalues: t (ref)
 		local cloned = table.clone(t)
 		

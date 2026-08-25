@@ -9,14 +9,14 @@ local shareLinksNetworkingModule = require(parent.ShareLinksNetworking)
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p0) --[[ line: 13 ]]
+	config = function(p0)
 		-- upvalues: cryoModule (ref), shareLinksNetworkingModule (ref), roduxNetworkingModule (ref), reducersModule (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
 		p0 = cryoModule.Dictionary.join(p0, {
 			shareLinksNetworking = shareLinksNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function() --[[ line: 21 ]]
+			installReducer = function()
 				-- upvalues: reducersModule (copy), p0 (write)
 				return reducersModule(p0)
 			end,

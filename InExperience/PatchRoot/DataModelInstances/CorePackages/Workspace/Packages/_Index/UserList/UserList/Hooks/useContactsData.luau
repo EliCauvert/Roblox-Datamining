@@ -3,11 +3,11 @@ local reactModule = require(userList.Parent.React)
 local contactsContextModule = require(userList.Context.ContactsContext)
 local _ = require(userList.Common.Types)
 
-return function(p0) --[[ line: 16 | named "useContactsData" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), contactsContextModule (ref)
 	local var3 = reactModule.useContext(contactsContextModule).contacts[p0]
 	
-	return reactModule.useMemo(function() --[[ line: 20 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var3 (ref)
 		return if var3 == nil then nil else {
 			isLoading = var3.isLoading or false,

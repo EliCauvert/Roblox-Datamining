@@ -10,7 +10,7 @@ local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLu
 local luaAppWrapChartsFilterOptionLabels = game:DefineFastFlag("LuaAppWrapChartsFilterOptionLabels", false)
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 28 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), radioGroup (ref), view (ref), text (ref), luaAppWrapChartsFilterOptionLabels (ref), badge (ref), foundationModule (ref)
 	local var3 = useTokens()
 	local XXLarge = var3.Padding.XXLarge
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 28 ]]
 			PaddingBottom = UDim.new(0, var3.Padding.Medium)
 		}),
 		SizeConstraint = if fFlagLuaAppChartsFilterOptionTextTag then nil else reactModule.createElement("UISizeConstraint", {
-			MaxSize = p0.containerMaxWidthBinding:map(function(p1) --[[ line: 42 ]]
+			MaxSize = p0.containerMaxWidthBinding:map(function(p1)
 				-- upvalues: XXLarge (ref)
 				return Vector2.new(p1 - 3 * XXLarge, 1e999)
 			end)
@@ -118,7 +118,7 @@ return function(p0) --[[ line: 28 ]]
 		MenuFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 163 ]]
+			[reactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: p0 (ref)
 				p0.onCanvasSizeChanged(p2.AbsoluteSize)
 			end

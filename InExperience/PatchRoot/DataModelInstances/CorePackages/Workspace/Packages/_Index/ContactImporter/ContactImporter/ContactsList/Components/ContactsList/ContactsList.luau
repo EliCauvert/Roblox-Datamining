@@ -49,9 +49,9 @@ local ampApiProvider = require(parent.AmpUpsell).AmpApiProvider
 local ampEnums = require(parent.AmpUpsell).AmpEnums
 local userInputService = dependenciesModule.UserInputService
 
-return function(p0) --[[ line: 98 | named "ContactsList" ]]
+return function(p0)
 	-- upvalues: useAppPolicy (ref), useStyle (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), fFlagQRCodeCopyUpdates (ref), fFlagConnectionsToFriendsRename (ref), contactImportButtonsExperimentEnabled (ref), contactImportButtonsIXPModule (ref), dash (ref), eventNames (ref), react (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateDown (ref), fFlagContactsListEmojiSortingModule (ref), uprankContactsWithEmoji (ref), contactsListEmojiSortingIxpEnabled (ref), IXPService (ref), contactsListEmojiSortingIxpLayer (ref), fFlagTCPolicyCheckRedirect (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpFeature (ref), ampApiProvider (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), ampEnums (ref), roact (ref), contactsListEntryModule (ref), contactsListInviteEntryModule (ref), styledTextLabel (ref), buttonType (ref), userInputService (ref), fFlagAddFriendsBannersNewUIIXP (ref), contactsSyncWarningMessageModule (ref), sectionList (ref), contactsEmptyListModule (ref), inputLabel (ref), inputLabelSize (ref), contactsListSearchBarModule (ref), contactsGlimmerModule (ref), contactsUploadErrorModalModule (ref), fullPageModal (ref), horizontalPageMargin (ref)
-	local var18 = useAppPolicy(function(p1) --[[ line: 99 ]]
+	local var18 = useAppPolicy(function(p1)
 		return p1.getWebViewSupport()
 	end)
 	local var19 = useStyle()
@@ -70,22 +70,22 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 	})
 	local var22 = if contactImportButtonsExperimentEnabled then contactImportButtonsIXPModule.useIsRemoveCloseButtonExperimentEnabled({ isExposureEnabled = true }) else false
 	
-	local var23 = function(p2, p3, p4) --[[ line: 126 ]]
+	local var23 = function(p2, p3, p4)
 		-- upvalues: dash (copy)
 		dash.append(p2, p3, if #p3 ~= 0 then nil else { { isSectionDivider = true } }, p4)
 	end
 	
-	local var24 = function() --[[ line: 131 ]]
+	local var24 = function()
 		-- upvalues: p0 (ref), eventNames (copy)
 		p0.closeModal(eventNames.CloseContactListButton)
 	end
 	
-	local var25 = function() --[[ line: 135 ]]
+	local var25 = function()
 		-- upvalues: p0 (ref), eventNames (copy)
 		p0.closeModal(eventNames.CloseContactListCross)
 	end
 	
-	local var26 = react.useCallback(function() --[[ line: 139 ]]
+	local var26 = react.useCallback(function()
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var20 (ref), navigateDown (copy)
 		local t = {
 			detail = "https://en.help.roblox.com/hc/en-us/articles/37725513985812",
@@ -102,41 +102,41 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 	end, { var20 })
 	local var27, var28 = react.useState("")
 	
-	local _ = function(p5) --[[ line: 156 ]]
+	local _ = function(p5)
 		-- upvalues: dash (copy), var27 (ref)
-		return dash.filter(p5, function(p6) --[[ line: 157 ]]
+		return dash.filter(p5, function(p6)
 			-- upvalues: var27 (copy)
 			return if p6.contactName == nil then string.find(string.lower(p6.contactName or ""), string.lower(var27)) ~= nil elseif p6.contactName:match("^%s*$") then false else string.find(string.lower(p6.contactName or ""), string.lower(var27)) ~= nil
 		end)
 	end
 	
-	local var29 = if fFlagContactsListEmojiSortingModule then react.useMemo(function() --[[ line: 171 ]]
+	local var29 = if fFlagContactsListEmojiSortingModule then react.useMemo(function()
 		-- upvalues: uprankContactsWithEmoji (copy), p0 (ref)
 		return uprankContactsWithEmoji(p0.matchedContacts)
 	end, { p0.matchedContacts }) else nil
-	local var30 = if fFlagContactsListEmojiSortingModule then react.useMemo(function() --[[ line: 176 ]]
+	local var30 = if fFlagContactsListEmojiSortingModule then react.useMemo(function()
 		-- upvalues: uprankContactsWithEmoji (copy), p0 (ref)
 		return uprankContactsWithEmoji(p0.deviceContacts)
 	end, { p0.deviceContacts }) else nil
 	local _ = {}
 	local _ = {}
-	local var31 = if fFlagContactsListEmojiSortingModule then dash.filter(var29, function(p8) --[[ line: 157 ]]
+	local var31 = if fFlagContactsListEmojiSortingModule then dash.filter(var29, function(p8)
 		-- upvalues: var27 (ref)
 		return if p8.contactName == nil then string.find(string.lower(p8.contactName or ""), string.lower(var27)) ~= nil elseif p8.contactName:match("^%s*$") then false else string.find(string.lower(p8.contactName or ""), string.lower(var27)) ~= nil
-	end) else dash.filter(p0.matchedContacts, function(p7) --[[ line: 157 ]]
+	end) else dash.filter(p0.matchedContacts, function(p7)
 		-- upvalues: var27 (ref)
 		return if p7.contactName == nil then string.find(string.lower(p7.contactName or ""), string.lower(var27)) ~= nil elseif p7.contactName:match("^%s*$") then false else string.find(string.lower(p7.contactName or ""), string.lower(var27)) ~= nil
 	end)
-	local var32 = if fFlagContactsListEmojiSortingModule then dash.filter(var30, function(p10) --[[ line: 157 ]]
+	local var32 = if fFlagContactsListEmojiSortingModule then dash.filter(var30, function(p10)
 		-- upvalues: var27 (ref)
 		return if p10.contactName == nil then string.find(string.lower(p10.contactName or ""), string.lower(var27)) ~= nil elseif p10.contactName:match("^%s*$") then false else string.find(string.lower(p10.contactName or ""), string.lower(var27)) ~= nil
-	end) else dash.filter(p0.deviceContacts, function(p9) --[[ line: 157 ]]
+	end) else dash.filter(p0.deviceContacts, function(p9)
 		-- upvalues: var27 (ref)
 		return if p9.contactName == nil then string.find(string.lower(p9.contactName or ""), string.lower(var27)) ~= nil elseif p9.contactName:match("^%s*$") then false else string.find(string.lower(p9.contactName or ""), string.lower(var27)) ~= nil
 	end)
 	
 	if contactsListEmojiSortingIxpEnabled then
-		react.useEffect(function() --[[ line: 191 ]]
+		react.useEffect(function()
 			-- upvalues: IXPService (copy), contactsListEmojiSortingIxpLayer (copy)
 			IXPService:LogFlagLinkedUserLayerExposure(contactsListEmojiSortingIxpLayer)
 		end, {})
@@ -144,7 +144,7 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 	local var33, var34 = react.useState(false)
 	
 	if fFlagQRCodeCopyUpdates then
-		react.useEffect(function() --[[ line: 199 ]]
+		react.useEffect(function()
 			-- upvalues: fFlagTCPolicyCheckRedirect (copy), fStringIsUserInTcEligibleCountryAmpFeature (copy), fStringCanAccessTrustedContactsAmpFeature (copy), ampApiProvider (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), ampEnums (copy), var34 (ref)
 			if ampApiProvider.upsellFeatureAccess(if fFlagTCPolicyCheckRedirect then fStringIsUserInTcEligibleCountryAmpFeature else fStringCanAccessTrustedContactsAmpFeature, {}, fStringCanAccessTrustedContactsAmpNameSpace).access == ampEnums.AccessResponseEnum.Granted then
 				var34(true)
@@ -170,12 +170,12 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 		})
 	end
 	local createElement
-	local _ = function() --[[ line: 229 ]]
+	local _ = function()
 		-- upvalues: p0 (ref)
 		return #p0.matchedContacts + #p0.deviceContacts == 0
 	end
 	
-	local var37 = function(p11) --[[ line: 233 ]]
+	local var37 = function(p11)
 		-- upvalues: roact (copy), var19 (ref), contactsListEntryModule (copy), var21 (ref), p0 (ref), contactsListInviteEntryModule (copy)
 		local item = p11.item
 		
@@ -209,7 +209,7 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 		})
 	end
 	
-	local var38 = function(p12) --[[ line: 272 ]]
+	local var38 = function(p12)
 		-- upvalues: roact (copy), styledTextLabel (copy), var19 (ref)
 		return if p12.section then roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 0, 0) }, {
 			layout = roact.createElement("UIListLayout", {
@@ -246,7 +246,7 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 		})
 	end
 	
-	local var39 = function(p13) --[[ line: 317 ]]
+	local var39 = function(p13)
 		-- upvalues: p0 (ref), buttonType (copy), dash (copy), var22 (ref), var24 (ref)
 		return if p0.isFetching then {
 			{
@@ -292,7 +292,7 @@ return function(p0) --[[ line: 98 | named "ContactsList" ]]
 		contactsSyncWarning = if fFlagAddFriendsBannersNewUIIXP and var40 then react.createElement(contactsSyncWarningMessageModule.Component, { layoutOrder = -1 }) else nil
 	}
 	
-	local var42 = function(p14) --[[ line: 393 ]]
+	local var42 = function(p14)
 		-- upvalues: var28 (ref)
 		var28(p14)
 	end

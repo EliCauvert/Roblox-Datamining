@@ -9,19 +9,19 @@ local var3 = reactModule.createContext(nil)
 
 return {
 	ArTranslationContext = var3,
-	ArTranslationProvider = function(p0) --[[ line: 27 ]]
+	ArTranslationProvider = function(p0)
 		-- upvalues: useTokens (ref), reactModule (ref), translateIntoString (ref), translateIntoRichTextString (ref), var3 (ref)
 		local color3 = useTokens().Color.Content.Link.Color3
 		
 		return reactModule.createElement(var3.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 31 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: translateIntoString (copy), p0 (ref), translateIntoRichTextString (copy), color3 (ref)
 				return {
-					translateIntoString = function(p1) --[[ line: 32 ]]
+					translateIntoString = function(p1)
 						-- upvalues: translateIntoString (copy), p0 (copy)
 						return translateIntoString(p0.translations, p1)
 					end,
-					translateIntoRichTextString = function(p2) --[[ line: 36 ]]
+					translateIntoRichTextString = function(p2)
 						-- upvalues: translateIntoRichTextString (copy), p0 (copy), color3 (copy)
 						return translateIntoRichTextString(p0.translations, p2, color3)
 					end
@@ -29,7 +29,7 @@ return {
 			end, { p0.translations, color3 })
 		}, p0.children)
 	end,
-	useArTranslation = function() --[[ line: 51 ]]
+	useArTranslation = function()
 		-- upvalues: reactModule (ref), var3 (ref)
 		local var4 = reactModule.useContext(var3)
 		

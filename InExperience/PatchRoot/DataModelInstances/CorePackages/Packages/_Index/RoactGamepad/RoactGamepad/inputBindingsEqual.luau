@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "inputBindingsEqual" ]]
+﻿return function(p0, p1)
 	if p0 == p1 then
 		return true
 	end

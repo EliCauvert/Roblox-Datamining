@@ -12,20 +12,20 @@ textBoxStateWrapper.defaultProps = {
 	IconSize = UDim2.new(1, 0, 1, 0)
 }
 
-function textBoxStateWrapper.init(p0) --[[ line: 24 ]]
+function textBoxStateWrapper.init(p0)
 	p0:setState({ Focused = false, Hover = false })
 	
-	function p0.onMouseEnter() --[[ line: 30 ]]
+	function p0.onMouseEnter()
 		-- upvalues: p0 (ref)
 		p0:setState({ Hover = true })
 	end
 	
-	function p0.onMouseLeave() --[[ line: 36 ]]
+	function p0.onMouseLeave()
 		-- upvalues: p0 (ref)
 		p0:setState({ Hover = false })
 	end
 	
-	function p0.onFocused(...) --[[ line: 42 ]]
+	function p0.onFocused(...)
 		-- upvalues: p0 (ref)
 		p0:setState({ Focused = true })
 		
@@ -34,7 +34,7 @@ function textBoxStateWrapper.init(p0) --[[ line: 24 ]]
 		end
 	end
 	
-	function p0.onFocusLost(...) --[[ line: 51 ]]
+	function p0.onFocusLost(...)
 		-- upvalues: p0 (ref)
 		p0:setState({ Focused = false })
 		
@@ -44,13 +44,13 @@ function textBoxStateWrapper.init(p0) --[[ line: 24 ]]
 	end
 end
 
-function textBoxStateWrapper.render(p1) --[[ line: 61 ]]
+function textBoxStateWrapper.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), cryoModule (ref)
 	local helpComponent = p1.props.HelpComponent
 	local errorText = p1.props.ErrorText
 	local labelText = p1.props.LabelText
 	
-	return withStyle(function(p2) --[[ line: 66 ]]
+	return withStyle(function(p2)
 		-- upvalues: p1 (ref), roactModule (copy), labelText (ref), imageSetLabel (copy), getImageData (copy), cryoModule (copy), errorText (ref), helpComponent (ref)
 		local color = p2.Theme.UIDefault.Color
 		local transparency = p2.Theme.UIDefault.Transparency

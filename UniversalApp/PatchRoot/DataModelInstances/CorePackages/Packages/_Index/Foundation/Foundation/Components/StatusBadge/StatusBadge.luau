@@ -18,7 +18,7 @@ local t = {
 	size = statusBadgeSizeModule.Small
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 38 | named "StatusBadge" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useStatusBadgeVariantsModule (ref), useScaledValueModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref)
 	local var13 = withDefaultsModule(p0, t)
 	local var14 = useStatusBadgeVariantsModule(useTokensModule(), var13.variant, var13.shape, var13.size)

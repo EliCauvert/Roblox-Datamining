@@ -5,11 +5,11 @@ local set = require(parent.llama).Set
 local actions = expChatShared.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.UserMuted).name] = function(p0, p1) --[[ line: 16 ]]
+	[require(actions.UserMuted).name] = function(p0, p1)
 		-- upvalues: set (ref)
 		return set.add(p0, p1.userId)
 	end,
-	[require(actions.UserUnmuted).name] = function(p2, p3) --[[ line: 20 ]]
+	[require(actions.UserUnmuted).name] = function(p2, p3)
 		-- upvalues: set (ref)
 		return set.subtract(p2, p3.userId)
 	end

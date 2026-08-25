@@ -5,7 +5,7 @@ local cryoModule = require(parent.Cryo)
 local assetInfoModule = require(profilePlatform.Common.AssetInfo)
 
 return roduxModule.createReducer({}, {
-	[require(profilePlatform.Networking.NetworkingCurrentlyWearing).GetItemDetails.Succeeded.name] = function(p0, p1) --[[ line: 23 ]]
+	[require(profilePlatform.Networking.NetworkingCurrentlyWearing).GetItemDetails.Succeeded.name] = function(p0, p1)
 		-- upvalues: assetInfoModule (ref), cryoModule (ref)
 		local t = {}
 		

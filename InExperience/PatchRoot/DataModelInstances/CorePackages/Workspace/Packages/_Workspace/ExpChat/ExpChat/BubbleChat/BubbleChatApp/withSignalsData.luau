@@ -14,9 +14,9 @@ local _ = require(expChat.Stores.GetVoiceStore.createVoiceStore)
 local var6 = if getFFlagUseCharacterStore() then getCharacterStoreModule(false) else nil
 local var7 = if getFFlagExpChatUseVoiceParticipantsStore() then getVoiceStoreModule(false) else nil
 
-return function(value) --[[ line: 29 | named "withSignalsData" ]]
+return function(value)
 	-- upvalues: getFFlagUseCharacterStore (ref), var6 (ref), useSignalState (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), var7 (ref), fFlagExpChatUseMessagesStore (ref), expChatSharedModule (ref), reactModule (ref)
-	return function(p0) --[[ line: 30 ]]
+	return function(p0)
 		-- upvalues: getFFlagUseCharacterStore (copy), var6 (copy), useSignalState (copy), getFFlagExpChatUseVoiceParticipantsStore (copy), var7 (copy), fFlagExpChatUseMessagesStore (copy), expChatSharedModule (copy), reactModule (copy), value (ref)
 		local _ = nil
 		local var8 = if getFFlagUseCharacterStore() and var6 then useSignalState(var6.getCharacters) else nil

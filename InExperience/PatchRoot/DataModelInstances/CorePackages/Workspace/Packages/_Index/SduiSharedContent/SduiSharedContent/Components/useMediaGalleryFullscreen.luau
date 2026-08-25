@@ -17,7 +17,7 @@ local isValidIdentifier = mediaGalleryModule.isValidIdentifier
 local isYouTubeVideo = mediaGalleryModule.isYouTubeVideo
 local ITEM_ASPECT_RATIO = mediaGalleryConstants.ITEM_ASPECT_RATIO
 
-return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), detailsPageLayoutContext (ref), useOnNavigateBack (ref), isValidIdentifier (ref), isYouTubeVideo (ref), sendMediaGalleryFullscreenEvent (ref), view (ref), ITEM_ASPECT_RATIO (ref), mediaGalleryCarousel (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), sduiFocusTags (ref)
 	local var4 = reactModule.useContext(detailsPageLayoutContext)
 	local setFullscreenContent = var4.setFullscreenContent
@@ -26,13 +26,13 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 	local var7, var8 = reactModule.useState(1)
 	local var9 = reactModule.useRef(1)
 	local var10 = reactModule.useRef(nil)
-	local var11 = useOnNavigateBack(reactModule.useCallback(function() --[[ line: 68 ]]
+	local var11 = useOnNavigateBack(reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var9 (ref)
 		if var10.current then
 			var10.current(var9.current)
 		end
 	end, {}))
-	local var12 = reactModule.useCallback(function(p1, p2) --[[ line: 75 ]]
+	local var12 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var9 (ref), p0 (ref)
 		var9.current = p1
 		
@@ -44,9 +44,9 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 	var13.current = setFullscreenContent
 	local var14 = reactModule.useRef(setOnExitFullscreenOverlay)
 	var14.current = setOnExitFullscreenOverlay
-	reactModule.useEffect(function() --[[ line: 87 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var14 (ref)
-		return function() --[[ line: 88 ]]
+		return function()
 			-- upvalues: var13 (copy), var14 (copy)
 			if var13.current then
 				var13.current(nil)
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 			end
 		end
 	end, {})
-	local var15 = reactModule.useCallback(function(p3) --[[ line: 99 ]]
+	local var15 = reactModule.useCallback(function(p3)
 		-- upvalues: var10 (ref), var8 (ref), setFullscreenContent (ref), setOnExitFullscreenOverlay (ref), var6 (ref), p0 (ref), isValidIdentifier (copy), isYouTubeVideo (copy), sendMediaGalleryFullscreenEvent (copy)
 		var10.current = nil
 		var8(p3)
@@ -74,7 +74,7 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 		setFullscreenContent, setOnExitFullscreenOverlay, p0.filteredItems,
 		p0.eventIngest, p0.placeId, p0.universeId, p0.mediaGalleryAnalyticsContext
 	})
-	local var16 = reactModule.useCallback(function() --[[ line: 132 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var9 (ref)
 		if var10.current then
 			var10.current(var9.current)
@@ -83,7 +83,7 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 	
 	return {
 		isFullscreen = var5,
-		onFullscreenToggle = reactModule.useCallback(function(p4) --[[ line: 139 ]]
+		onFullscreenToggle = reactModule.useCallback(function(p4)
 			-- upvalues: p0 (ref), setFullscreenContent (ref), var10 (ref), var15 (ref), var8 (ref), var9 (ref), var6 (ref), setOnExitFullscreenOverlay (ref), var16 (ref), reactModule (copy), view (copy), ITEM_ASPECT_RATIO (copy), mediaGalleryCarousel (copy), var12 (ref), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy), var11 (ref), sduiFocusTags (copy), isValidIdentifier (copy), isYouTubeVideo (copy), sendMediaGalleryFullscreenEvent (copy)
 			if p0.fullscreenEnabled == false or not setFullscreenContent then return end
 			var10.current = var15
@@ -92,7 +92,7 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 			var6(true)
 			
 			if setOnExitFullscreenOverlay then
-				setOnExitFullscreenOverlay(function() --[[ line: 148 ]]
+				setOnExitFullscreenOverlay(function()
 					-- upvalues: var16 (copy)
 					return var16
 				end)
@@ -110,7 +110,7 @@ return function(p0) --[[ line: 56 | named "useMediaGalleryFullscreen" ]]
 				}, {
 					Content = reactModule.createElement(view, {
 						tag = "size-full bg-surface-0",
-						onAbsoluteSizeChanged = function(value) --[[ line: 157 ]]
+						onAbsoluteSizeChanged = function(value)
 							-- upvalues: ITEM_ASPECT_RATIO (copy), var19 (ref)
 							local x = value.AbsoluteSize.X
 							local y = value.AbsoluteSize.Y

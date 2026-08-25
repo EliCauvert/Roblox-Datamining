@@ -1,4 +1,4 @@
-﻿local function deepCopy(p0, p1) --[[ line: 9 ]]
+﻿local function deepCopy(p0, p1)
 	-- upvalues: deepCopy (ref)
 	if type(p0) ~= "table" then
 		return p0

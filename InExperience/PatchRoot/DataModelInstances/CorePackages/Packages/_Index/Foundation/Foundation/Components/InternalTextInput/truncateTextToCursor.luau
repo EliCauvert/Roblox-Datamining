@@ -1,8 +1,8 @@
-﻿local function _(p0, p1) --[[ line: 10 | named "charAt" ]]
+﻿local function _(p0, p1)
 	return p0:sub(p1, p1)
 end
 
-return function(p2) --[[ line: 27 | named "truncateTextToCursor" ]]
+return function(p2)
 	local cursorPosition = p2.CursorPosition
 	
 	if cursorPosition == -1 then

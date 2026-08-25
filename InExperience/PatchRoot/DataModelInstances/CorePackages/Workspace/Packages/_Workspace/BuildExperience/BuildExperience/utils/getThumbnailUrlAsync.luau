@@ -5,16 +5,16 @@ local debug = require(parent.DataHydration.CreatorAgentChat).debug
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-return function(p0, p1) --[[ line: 26 | named "getThumbnailUrlAsync" ]]
+return function(p0, p1)
 	-- upvalues: debug (ref), promiseModule (ref), fetch (ref), asPromise (ref)
 	p1 = p1 or "420x420"
 	debug.log("info", "thumbnail_url polling", { assetId = p0 })
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 31 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: fetch (copy), p0 (ref), p1 (ref), asPromise (copy), debug (copy)
 		local var3 = 0
 		
-		local function poll(p4) --[[ line: 34 ]]
+		local function poll(p4)
 			-- upvalues: fetch (copy), p0 (copy), p1 (copy), asPromise (copy), p3 (ref), debug (copy), p2 (ref), var3 (write), poll (ref)
 			asPromise(fetch({
 				method = "POST",
@@ -23,10 +23,10 @@ return function(p0, p1) --[[ line: 26 | named "getThumbnailUrlAsync" ]]
 				body = {
 					{ type = "Asset", format = "Png", targetId = p0, size = p1 }
 				},
-				decode = function(p7) --[[ line: 47 ]]
+				decode = function(p7)
 					return p7
 				end
-			})):andThen(function(p6) --[[ line: 53 ]]
+			})):andThen(function(p6)
 				-- upvalues: p3 (copy), debug (copy), p0 (copy), p2 (copy), var3 (copy), poll (copy), p4 (ref)
 				local data = p6 and p6.data
 				
@@ -51,7 +51,7 @@ return function(p0, p1) --[[ line: 26 | named "getThumbnailUrlAsync" ]]
 						
 						return
 					end
-					task.delay(2, function() --[[ line: 70 ]]
+					task.delay(2, function()
 						-- upvalues: poll (copy), p4 (copy)
 						poll(p4 + 1)
 					end)
@@ -67,11 +67,11 @@ return function(p0, p1) --[[ line: 26 | named "getThumbnailUrlAsync" ]]
 					
 					return
 				end
-				task.delay(2, function() --[[ line: 79 ]]
+				task.delay(2, function()
 					-- upvalues: poll (copy), p4 (copy)
 					poll(p4 + 1)
 				end)
-			end):catch(function(p5) --[[ line: 87 ]]
+			end):catch(function(p5)
 				-- upvalues: p3 (copy)
 				p3(p5)
 			end)

@@ -7,7 +7,7 @@ local isFromConnectionsHubModule = require(friendsLanding.Navigator.isFromConnec
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
 local mainStackNavigatorConnector = roact.PureComponent:extend("MainStackNavigatorConnector")
 
-function mainStackNavigatorConnector.render(p0) --[[ line: 13 ]]
+function mainStackNavigatorConnector.render(p0)
 	-- upvalues: fFlagCreateConnectionsHub (ref), isFromConnectionsHubModule (ref), roact (ref), friendsLandingHeaderBarModule (ref), mainStackNavigatorModule (ref)
 	return roact.createFragment({
 		layout = roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),

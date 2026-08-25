@@ -9,7 +9,7 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local fetchTrendingMomentsModule = require(script.Parent.Requests.fetchTrendingMoments)
 
-local function _(p0, p1) --[[ line: 26 | named "paramsKey" ]]
+local function _(p0, p1)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
 		momentsSessionId = p0,
@@ -18,7 +18,7 @@ local function _(p0, p1) --[[ line: 26 | named "paramsKey" ]]
 	})
 end
 
-return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
+return function(p2)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), httpClientModule (ref), fetchTrendingMomentsModule (ref), httpService (ref)
 	p2 = p2 or {}
 	local t = {}
@@ -26,7 +26,7 @@ return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
-		fetchFn = function(p3, _) --[[ line: 42 ]]
+		fetchFn = function(p3, _)
 			-- upvalues: t (write), promiseModule (copy), httpClientModule (copy), fetchTrendingMomentsModule (copy), p2 (ref)
 			local var10 = t[p3]
 			
@@ -34,7 +34,7 @@ return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
 		end
 	})
 	
-	local function _(value, p4) --[[ line: 56 | named "setParams" ]]
+	local function _(value, p4)
 		-- upvalues: httpService (copy), t (write)
 		local var11 = httpService:JSONEncode({
 			momentsSessionId = value,
@@ -47,11 +47,11 @@ return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
 	end
 	
 	return {
-		getTrending = function(p5, p6, p7) --[[ line: 86 ]]
+		getTrending = function(p5, p6, p7)
 			-- upvalues: httpClientModule (copy), fetchTrendingMomentsModule (copy), p2 (ref)
 			return httpClientModule.asPromise(fetchTrendingMomentsModule(p5, p6, p2.network, p7))
 		end,
-		getCachedTrending = function(p8, p9) --[[ line: 65 ]]
+		getCachedTrending = function(p8, p9)
 			-- upvalues: var9 (ref), httpService (copy), t (write)
 			local getCachedItem = var9.getCachedItem
 			local var12 = httpService:JSONEncode({
@@ -63,7 +63,7 @@ return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
 			
 			return getCachedItem(var12)
 		end,
-		fetchTrending = function(p10, p11) --[[ line: 72 ]]
+		fetchTrending = function(p10, p11)
 			-- upvalues: var9 (ref), httpService (copy), t (write)
 			local fetchItem = var9.fetchItem
 			local var13 = httpService:JSONEncode({
@@ -75,7 +75,7 @@ return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
 			
 			return fetchItem(var13)
 		end,
-		getAndFetchTrending = function(p12, p13) --[[ line: 79 ]]
+		getAndFetchTrending = function(p12, p13)
 			-- upvalues: var9 (ref), httpService (copy), t (write)
 			local getAndFetchItem = var9.getAndFetchItem
 			local var14 = httpService:JSONEncode({
@@ -87,12 +87,12 @@ return function(p2) --[[ line: 34 | named "createMomentsTrendingStore" ]]
 			
 			return getAndFetchItem(var14)
 		end,
-		clear = function() --[[ line: 90 ]]
+		clear = function()
 			-- upvalues: t (write), var9 (ref)
 			t = {}
 			var9.clear()
 		end,
-		dispose = function() --[[ line: 95 ]]
+		dispose = function()
 			-- upvalues: t (write), var9 (ref)
 			t = {}
 			var9.dispose()

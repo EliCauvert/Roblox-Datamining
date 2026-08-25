@@ -13,25 +13,25 @@ local reactModule = require(parent_1.React)
 local ItemWithSeparator = nil
 local virtualizedSectionList = reactModule.PureComponent:extend("VirtualizedSectionList")
 
-function virtualizedSectionList.init(p0) --[[ line: 206 ]]
+function virtualizedSectionList.init(p0)
 	-- upvalues: invariantModule (ref), keyExtractor (ref), object (ref), array (ref), boolean (ref), reactModule (ref), ItemWithSeparator (write)
 	p0._updateHighlightMap = {}
 	p0._updatePropsMap = {}
 	p0._listRef = nil
 	
-	function p0._captureRef(p1) --[[ line: 210 ]]
+	function p0._captureRef(p1)
 		-- upvalues: p0 (ref)
 		p0._listRef = p1
 	end
 	
-	function p0._keyExtractor(_, p2) --[[ line: 214 ]]
+	function p0._keyExtractor(_, p2)
 		-- upvalues: p0 (ref)
 		local var7 = p0:_subExtractor(p2)
 		
 		return if var7 then var7.key else tostring(p2)
 	end
 	
-	function p0._convertViewable(p3) --[[ line: 219 ]]
+	function p0._convertViewable(p3)
 		-- upvalues: invariantModule (copy), p0 (ref), keyExtractor (copy), object (copy)
 		invariantModule(p3.index ~= nil, "Received a broken ViewToken")
 		local index = p0:_subExtractor(p3.index)
@@ -48,7 +48,7 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 		return nil
 	end
 	
-	function p0._onViewableItemsChanged(p4) --[[ line: 242 ]]
+	function p0._onViewableItemsChanged(p4)
 		-- upvalues: p0 (ref), array (copy), boolean (copy)
 		local viewableItems = p4.viewableItems
 		local changed = p4.changed
@@ -62,9 +62,9 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 		end
 	end
 	
-	function p0._renderItem(p5) --[[ line: 259 ]]
+	function p0._renderItem(p5)
 		-- upvalues: p0 (ref), boolean (copy), invariantModule (copy), reactModule (copy), ItemWithSeparator (copy)
-		return function(p6) --[[ line: 260 ]]
+		return function(p6)
 			-- upvalues: p0 (copy), boolean (copy), p5 (ref), invariantModule (copy), reactModule (copy), ItemWithSeparator (copy)
 			local item = p6.item
 			local index = p6.index
@@ -114,7 +114,7 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 		end
 	end
 	
-	function p0._updatePropsFor(p7, p8) --[[ line: 312 ]]
+	function p0._updatePropsFor(p7, p8)
 		-- upvalues: p0 (ref)
 		local var12 = p0._updatePropsMap[p7]
 		
@@ -123,7 +123,7 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 		end
 	end
 	
-	function p0._updateHighlightFor(p9, p10) --[[ line: 319 ]]
+	function p0._updateHighlightFor(p9, p10)
 		-- upvalues: p0 (ref)
 		local var13 = p0._updateHighlightMap[p9]
 		
@@ -132,7 +132,7 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 		end
 	end
 	
-	function p0._setUpdateHighlightFor(p11, p12) --[[ line: 326 ]]
+	function p0._setUpdateHighlightFor(p11, p12)
 		-- upvalues: p0 (ref)
 		if p12 == nil then
 			p0._updateHighlightMap[p11] = nil
@@ -142,7 +142,7 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 		p0._updateHighlightMap[p11] = p12
 	end
 	
-	function p0._setUpdatePropsFor(p13, p14) --[[ line: 334 ]]
+	function p0._setUpdatePropsFor(p13, p14)
 		-- upvalues: p0 (ref)
 		if p14 == nil then
 			p0._updatePropsMap[p13] = nil
@@ -153,7 +153,7 @@ function virtualizedSectionList.init(p0) --[[ line: 206 ]]
 	end
 end
 
-function virtualizedSectionList.scrollToLocation(p15, p16) --[[ line: 343 ]]
+function virtualizedSectionList.scrollToLocation(p15, p16)
 	-- upvalues: object (ref)
 	local itemIndex = p16.itemIndex
 	local var14 = 1
@@ -170,11 +170,11 @@ function virtualizedSectionList.scrollToLocation(p15, p16) --[[ line: 343 ]]
 	p15._listRef:scrollToIndex(object.assign({}, p16, { viewOffset = viewOffset, index = itemIndex }))
 end
 
-function virtualizedSectionList.getListRef(p17) --[[ line: 365 ]]
+function virtualizedSectionList.getListRef(p17)
 	return p17._listRef
 end
 
-function virtualizedSectionList.render(p18) --[[ line: 369 ]]
+function virtualizedSectionList.render(p18)
 	-- upvalues: object (ref), reactModule (ref), virtualizedListModule (ref)
 	local _ = p18.props.renderItem
 	local _ = p18.props.sections
@@ -202,11 +202,11 @@ function virtualizedSectionList.render(p18) --[[ line: 369 ]]
 		stickyHeaderIndices = var18,
 		renderItem = p18._renderItem(var19),
 		data = p18.props.sections,
-		getItem = function(p19, p20) --[[ line: 406 ]]
+		getItem = function(p19, p20)
 			-- upvalues: p18 (ref)
 			return p18:_getItem(p18.props, p19, p20)
 		end,
-		getItemCount = function() --[[ line: 409 ]]
+		getItemCount = function()
 			-- upvalues: var19 (write)
 			return var19
 		end,
@@ -215,7 +215,7 @@ function virtualizedSectionList.render(p18) --[[ line: 369 ]]
 	}))
 end
 
-function virtualizedSectionList._getItem(_, p21, p22, p23) --[[ line: 418 ]]
+function virtualizedSectionList._getItem(_, p21, p22, p23)
 	if not p22 then
 		return nil
 	end
@@ -239,7 +239,7 @@ function virtualizedSectionList._getItem(_, p21, p22, p23) --[[ line: 418 ]]
 	return nil
 end
 
-function virtualizedSectionList._subExtractor(p24, p25) --[[ line: 449 ]]
+function virtualizedSectionList._subExtractor(p24, p25)
 	-- upvalues: boolean (ref), keyExtractor (ref)
 	local var24 = p25
 	local _ = nil
@@ -287,7 +287,7 @@ function virtualizedSectionList._subExtractor(p24, p25) --[[ line: 449 ]]
 	return nil
 end
 
-function virtualizedSectionList._getSeparatorComponent(p26, p27, p28, p29) --[[ line: 511 ]]
+function virtualizedSectionList._getSeparatorComponent(p26, p27, p28, p29)
 	-- upvalues: boolean (ref)
 	if not p28 then
 		p28 = p26:_subExtractor(p27)
@@ -302,7 +302,7 @@ function virtualizedSectionList._getSeparatorComponent(p26, p27, p28, p29) --[[ 
 	return if sectionSeparatorComponent and var29 then sectionSeparatorComponent elseif var28 and not var29 and not (p27 == p29) then var28 else nil
 end
 
-ItemWithSeparator = function(p30) --[[ line: 563 | named "ItemWithSeparator" ]]
+ItemWithSeparator = function(p30)
 	-- upvalues: reactModule (ref), object (ref), viewModule (ref)
 	local leadingSeparatorComponent = p30.LeadingSeparatorComponent
 	local separatorComponent = p30.SeparatorComponent
@@ -334,12 +334,12 @@ ItemWithSeparator = function(p30) --[[ line: 563 | named "ItemWithSeparator" ]]
 		trailingItem = p30.trailingItem,
 		trailingSection = p30.trailingSection
 	})
-	reactModule.useEffect(function() --[[ line: 601 ]]
+	reactModule.useEffect(function()
 		-- upvalues: setSelfHighlightCallback (ref), cellKey (ref), var33 (ref), setSelfUpdatePropsCallback (ref), var37 (ref)
 		setSelfHighlightCallback(cellKey, var33)
 		setSelfUpdatePropsCallback(cellKey, var37)
 		
-		return function() --[[ line: 604 ]]
+		return function()
 			-- upvalues: setSelfUpdatePropsCallback (copy), cellKey (copy), setSelfHighlightCallback (copy)
 			setSelfUpdatePropsCallback(cellKey, nil)
 			setSelfHighlightCallback(cellKey, nil)
@@ -355,7 +355,7 @@ ItemWithSeparator = function(p30) --[[ line: 563 | named "ItemWithSeparator" ]]
 		index = index,
 		section = section,
 		separators = {
-			highlight = function() --[[ line: 611 ]]
+			highlight = function()
 				-- upvalues: var31 (ref), var33 (ref), prevCellKey (ref), updateHighlightFor (ref)
 				var31(true)
 				var33(true)
@@ -364,7 +364,7 @@ ItemWithSeparator = function(p30) --[[ line: 563 | named "ItemWithSeparator" ]]
 					updateHighlightFor(prevCellKey, true)
 				end
 			end,
-			unhighlight = function() --[[ line: 618 ]]
+			unhighlight = function()
 				-- upvalues: var31 (ref), var33 (ref), prevCellKey (ref), updateHighlightFor (ref)
 				var31(false)
 				var33(false)
@@ -373,7 +373,7 @@ ItemWithSeparator = function(p30) --[[ line: 563 | named "ItemWithSeparator" ]]
 					updateHighlightFor(prevCellKey, false)
 				end
 			end,
-			updateProps = function(p31, p32) --[[ line: 625 ]]
+			updateProps = function(p31, p32)
 				-- upvalues: leadingSeparatorComponent (ref), var35 (ref), object (copy), var34 (ref), prevCellKey (ref), updatePropsFor (ref), separatorComponent (ref), var37 (ref), var36 (ref)
 				if p31 == "leading" then
 					if leadingSeparatorComponent ~= nil then

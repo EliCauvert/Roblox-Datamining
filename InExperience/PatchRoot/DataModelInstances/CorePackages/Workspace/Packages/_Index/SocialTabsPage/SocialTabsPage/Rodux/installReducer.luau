@@ -4,7 +4,7 @@ local myRoduxNetworkingModule = require(socialTabsPage.Networking.myRoduxNetwork
 local presenceModule = require(socialTabsPage.Rodux.Presence)
 local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: roduxModule (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), presenceModule (ref), myRoduxNetworkingModule (ref)
 	return roduxModule.combineReducers({
 		Presence = if not fFlagSocialTabsPagePresenceSignalsMigrationModule then presenceModule else nil,

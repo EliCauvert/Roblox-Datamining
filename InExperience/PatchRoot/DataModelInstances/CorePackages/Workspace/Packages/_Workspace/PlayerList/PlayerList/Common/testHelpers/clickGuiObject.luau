@@ -1,6 +1,6 @@
 ﻿local virtualInputManagerService = game:GetService("VirtualInputManager")
 
-return function(p0) --[[ line: 7 | named "clickGuiObject" ]]
+return function(p0)
 	-- upvalues: virtualInputManagerService (ref)
 	local screenGui = p0:FindFirstAncestorOfClass("ScreenGui")
 	local var2 = screenGui or Instance.new("ScreenGui")
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 7 | named "clickGuiObject" ]]
 	local var6 = absolutePosition.X + absoluteSize.X / 2
 	local var7 = absolutePosition.Y + absoluteSize.Y / 2
 	local var8 = false
-	local activatedConnection = p0.Activated:Connect(function() --[[ line: 30 ]]
+	local activatedConnection = p0.Activated:Connect(function()
 		-- upvalues: var8 (write)
 		var8 = true
 	end)

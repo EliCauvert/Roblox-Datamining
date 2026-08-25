@@ -4,7 +4,7 @@ local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAss
 local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
 local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquipping
 
-return function(p0) --[[ line: 14 | named "selectHasMakeupTryOn" ]]
+return function(p0)
 	-- upvalues: fFlagAXMakeupEquipping (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
 	if not fFlagAXMakeupEquipping then
 		return false

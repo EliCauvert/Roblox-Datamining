@@ -5,7 +5,7 @@ local intersectBoundsModule = require(script.Parent.intersectBounds)
 local fIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold = sharedFlagsModule.FIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold
 local fIntLuaAppViewportBoundsScreenSizeThreshold = sharedFlagsModule.FIntLuaAppViewportBoundsScreenSizeThreshold
 
-local function getGuiAncestors(p0) --[[ line: 17 ]]
+local function getGuiAncestors(p0)
 	local t = {}
 	local parent = p0.Parent
 	while parent and (parent ~= game and parent:IsA("GuiObject")) do
@@ -15,7 +15,7 @@ local function getGuiAncestors(p0) --[[ line: 17 ]]
 	return t
 end
 
-local function _(p1) --[[ line: 30 | named "computeBounds" ]]
+local function _(p1)
 	local absolutePosition = p1.AbsolutePosition
 	
 	return {
@@ -24,7 +24,7 @@ local function _(p1) --[[ line: 30 | named "computeBounds" ]]
 	}
 end
 
-local function computeClipBounds(p2) --[[ line: 39 ]]
+local function computeClipBounds(p2)
 	-- upvalues: intersectBoundsModule (ref)
 	local var6 = nil
 	
@@ -41,10 +41,10 @@ local function computeClipBounds(p2) --[[ line: 39 ]]
 	return var6
 end
 
-return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), computeClipBounds (ref), getGuiAncestors (ref), fIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (ref), fIntLuaAppViewportBoundsScreenSizeThreshold (ref)
 	local var8, var9 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p3 (ref), var9 (ref), computeClipBounds (copy), getGuiAncestors (copy), fIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (copy), fIntLuaAppViewportBoundsScreenSizeThreshold (copy)
 		local var10 = if p3 then p3.current else nil
 		
@@ -53,7 +53,7 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 			local t_1 = {}
 			local var13 = nil
 			
-			local function _() --[[ line: 64 | named "cancelPendingUpdate" ]]
+			local function _()
 				-- upvalues: var13 (write)
 				if var13 then
 					task.cancel(var13)
@@ -61,19 +61,19 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 				end
 			end
 			
-			local _ = function() --[[ line: 72 | named "scheduleUpdateBounds" ]]
+			local _ = function()
 				-- upvalues: var13 (write), var9 (copy), computeClipBounds (copy), t_1 (write)
 				if var13 then
 					return
 				end
-				var13 = task.defer(function() --[[ line: 76 ]]
+				var13 = task.defer(function()
 					-- upvalues: var13 (copy), var9 (copy), computeClipBounds (copy), t_1 (copy)
 					var13 = nil
 					var9(computeClipBounds(t_1))
 				end)
 			end
 			
-			local function disconnectAncestorConnections() --[[ line: 82 ]]
+			local function disconnectAncestorConnections()
 				-- upvalues: t (write)
 				for i, v in t do
 					if v.Connected then
@@ -83,7 +83,7 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 				t = {}
 			end
 			
-			local function connectToAncestors() --[[ line: 91 ]]
+			local function connectToAncestors()
 				-- upvalues: var13 (write), disconnectAncestorConnections (ref), t_1 (write), getGuiAncestors (copy), var10 (ref), var9 (copy), computeClipBounds (copy), t (write), connectToAncestors (ref), fIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (copy), fIntLuaAppViewportBoundsScreenSizeThreshold (copy)
 				if var13 then
 					task.cancel(var13)
@@ -99,7 +99,7 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 					
 					if v.ClipsDescendants or v:GetStyled("ClipsDescendants") == true then
 						local absolutePosition = v.AbsolutePosition
-						table.insert(t, v:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 115 ]]
+						table.insert(t, v:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 							-- upvalues: v (ref), fIntLuaAppUpdateImpressionsViewportBoundsPositionThreshold (copy), absolutePosition (write), var13 (copy), var9 (copy), computeClipBounds (copy), t_1 (copy)
 							local absolutePosition_1 = v.AbsolutePosition
 							local var17 = absolutePosition_1 - absolutePosition
@@ -110,14 +110,14 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 							if var13 then
 								return
 							end
-							var13 = task.defer(function() --[[ line: 76 ]]
+							var13 = task.defer(function()
 								-- upvalues: var13 (copy), var9 (copy), computeClipBounds (copy), t_1 (copy)
 								var13 = nil
 								var9(computeClipBounds(t_1))
 							end)
 						end))
 						local absoluteSize = v.AbsoluteSize
-						table.insert(t, v:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 130 ]]
+						table.insert(t, v:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 							-- upvalues: v (ref), fIntLuaAppViewportBoundsScreenSizeThreshold (copy), absoluteSize (write), var13 (copy), var9 (copy), computeClipBounds (copy), t_1 (copy)
 							local absoluteSize_1 = v.AbsoluteSize
 							local var18 = absoluteSize_1 - absoluteSize
@@ -128,7 +128,7 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 							if var13 then
 								return
 							end
-							var13 = task.defer(function() --[[ line: 76 ]]
+							var13 = task.defer(function()
 								-- upvalues: var13 (copy), var9 (copy), computeClipBounds (copy), t_1 (copy)
 								var13 = nil
 								var9(computeClipBounds(t_1))
@@ -139,12 +139,12 @@ return function(p3) --[[ line: 50 | named "useClipAncestorBounds" ]]
 			end
 			
 			connectToAncestors()
-			local ancestryChangedConnection = var10.AncestryChanged:Connect(function() --[[ line: 149 ]]
+			local ancestryChangedConnection = var10.AncestryChanged:Connect(function()
 				-- upvalues: connectToAncestors (ref)
 				connectToAncestors()
 			end)
 			
-			return function() --[[ line: 153 ]]
+			return function()
 				-- upvalues: var13 (write), ancestryChangedConnection (ref), disconnectAncestorConnections (ref)
 				if var13 then
 					task.cancel(var13)

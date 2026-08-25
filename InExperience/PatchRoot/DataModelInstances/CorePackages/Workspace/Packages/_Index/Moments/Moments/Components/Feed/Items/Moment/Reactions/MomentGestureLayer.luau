@@ -6,7 +6,7 @@ local momentContextModule = require(script.Parent.Parent.MomentContext)
 local useMomentGesturesModule = require(script.Parent.useMomentGestures)
 local useReactionCommitModule = require(script.Parent.useReactionCommit)
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "MomentGestureLayer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: momentContextModule (ref), useReactionCommitModule (ref), useSignalState (ref), reactModule (ref), useMomentGesturesModule (ref), view (ref)
 	local var4 = momentContextModule.useMoment()
 	local controller = var4.controller
@@ -18,13 +18,13 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "MomentGestureLayer" 
 		Active = true,
 		BackgroundTransparency = 1,
 		ref = useMomentGesturesModule(not useSignalState(store.getIsModerated) and not useSignalState(store.getIsScrubbing), {
-			onSingleTapConfirmed = reactModule.useCallback(function() --[[ line: 49 ]]
+			onSingleTapConfirmed = reactModule.useCallback(function()
 				-- upvalues: controller (ref)
 				if controller ~= nil then
 					controller.toggle()
 				end
 			end, { controller }),
-			onDoubleTap = reactModule.useCallback(function(p1) --[[ line: 55 ]]
+			onDoubleTap = reactModule.useCallback(function(p1)
 				-- upvalues: var5 (ref)
 				var5("doubleTap", p1, nil)
 			end, { var5 })

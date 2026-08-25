@@ -1,8 +1,8 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 3 | named "getDecodedJSON" ]]
+return function(p0)
 	-- upvalues: httpService (ref)
-	local ok, status = pcall(function() --[[ line: 4 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p0 (ref)
 		return httpService:JSONDecode(p0)
 	end)

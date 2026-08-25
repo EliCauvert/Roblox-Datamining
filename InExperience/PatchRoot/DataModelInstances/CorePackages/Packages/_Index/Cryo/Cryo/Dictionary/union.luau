@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 2 | named "union" ]]
+﻿return function(p0, p1)
 	local cloned = table.clone(p0)
 	
 	for i, v in p1 do

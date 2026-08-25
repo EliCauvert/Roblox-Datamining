@@ -1,7 +1,7 @@
 ﻿local createGameTileHiddenStoreModule = require(script:FindFirstAncestor("GameTile").HiddenGameTile.createGameTileHiddenStore)
 local t = {}
 
-return function(p0) --[[ line: 8 | named "getGameTileHiddenStore" ]]
+return function(p0)
 	-- upvalues: t (ref), createGameTileHiddenStoreModule (ref)
 	local var2 = t[p0]
 	

@@ -24,7 +24,7 @@ local enableFundamentalAPI = require(parent.Shared).ReactFeatureFlags.enableFund
 local reactCurrentOwner = reactSharedInternals.ReactCurrentOwner
 local t = {}
 
-local function getNearestMountedFiber(p0) --[[ line: 50 ]]
+local function getNearestMountedFiber(p0)
 	-- upvalues: placement (ref), hydrating (ref), noFlags (ref), hostRoot (ref)
 	local var6 = p0
 	local var7 = p0
@@ -46,7 +46,7 @@ end
 
 t.getNearestMountedFiber = getNearestMountedFiber
 
-function t.getSuspenseInstanceFromFiber(p1) --[[ line: 84 ]]
+function t.getSuspenseInstanceFromFiber(p1)
 	-- upvalues: suspenseComponent (ref)
 	if p1.tag == suspenseComponent then
 		local memoizedState = p1.memoizedState
@@ -62,17 +62,17 @@ function t.getSuspenseInstanceFromFiber(p1) --[[ line: 84 ]]
 	end
 end
 
-function t.getContainerFromFiber(p2) --[[ line: 100 ]]
+function t.getContainerFromFiber(p2)
 	-- upvalues: hostRoot (ref)
 	return if p2.tag == hostRoot then p2.stateNode.containerInfo else nil
 end
 
-function t.isFiberMounted(p3) --[[ line: 104 ]]
+function t.isFiberMounted(p3)
 	-- upvalues: getNearestMountedFiber (ref)
 	return getNearestMountedFiber(p3) == p3
 end
 
-function t.isMounted(p4) --[[ line: 110 ]]
+function t.isMounted(p4)
 	-- upvalues: reactGlobalsModule (ref), reactCurrentOwner (ref), classComponent (ref), console (ref), getComponentName (ref), get (ref), getNearestMountedFiber (ref)
 	if reactGlobalsModule.__DEV__ then
 		local current = reactCurrentOwner.current
@@ -91,12 +91,12 @@ function t.isMounted(p4) --[[ line: 110 ]]
 	return if var9 then getNearestMountedFiber(var9) == var9 else false
 end
 
-local function _(p5) --[[ line: 140 | named "assertIsMounted" ]]
+local function _(p5)
 	-- upvalues: invariant (ref), getNearestMountedFiber (ref)
 	invariant(getNearestMountedFiber(p5) == p5, "Unable to find node on an unmounted component.")
 end
 
-local function findCurrentFiberUsingSlowPath(p6) --[[ line: 147 ]]
+local function findCurrentFiberUsingSlowPath(p6)
 	-- upvalues: getNearestMountedFiber (ref), invariant (ref), hostRoot (ref)
 	local alternate = p6.alternate
 	
@@ -190,7 +190,7 @@ end
 
 t.findCurrentFiberUsingSlowPath = findCurrentFiberUsingSlowPath
 
-function t.findCurrentHostFiber(p7) --[[ line: 282 ]]
+function t.findCurrentHostFiber(p7)
 	-- upvalues: findCurrentFiberUsingSlowPath (ref), hostComponent (ref), hostText (ref)
 	local var13 = findCurrentFiberUsingSlowPath(p7)
 	
@@ -227,7 +227,7 @@ function t.findCurrentHostFiber(p7) --[[ line: 282 ]]
 	return nil
 end
 
-function t.findCurrentHostFiberWithNoPortals(p8) --[[ line: 321 ]]
+function t.findCurrentHostFiberWithNoPortals(p8)
 	-- upvalues: findCurrentFiberUsingSlowPath (ref), hostComponent (ref), hostText (ref), enableFundamentalAPI (ref), fundamentalComponent (ref), hostPortal (ref)
 	local var15 = findCurrentFiberUsingSlowPath(p8)
 	
@@ -264,14 +264,14 @@ function t.findCurrentHostFiberWithNoPortals(p8) --[[ line: 321 ]]
 	return nil
 end
 
-function t.isFiberSuspenseAndTimedOut(p9) --[[ line: 363 ]]
+function t.isFiberSuspenseAndTimedOut(p9)
 	-- upvalues: suspenseComponent (ref)
 	local memoizedState = p9.memoizedState
 	
 	return p9.tag == suspenseComponent and (memoizedState ~= nil and memoizedState.dehydrated == nil)
 end
 
-function t.doesFiberContain(p10, p11) --[[ line: 370 ]]
+function t.doesFiberContain(p10, p11)
 	local var17 = p11
 	local alternate = p10.alternate
 	while var17 ~= nil do

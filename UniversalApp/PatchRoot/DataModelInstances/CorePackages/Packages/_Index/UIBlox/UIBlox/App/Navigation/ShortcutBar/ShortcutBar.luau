@@ -28,7 +28,7 @@ local t_1 = {
 	items = {}
 }
 
-return function(p0) --[[ line: 71 | named "ShortcutBar" ]]
+return function(p0)
 	-- upvalues: object (ref), t_1 (ref), useStyleModule (ref), foundationModule (ref), UIBloxConfigModule (ref), reactModule (ref), useInputTypeModule (ref), reactOtterModule (ref), useDelayedActionHandler (ref), t (ref), utilitiesModule (ref), useEventConnection (ref), userInputService (ref), shortcutModule (ref)
 	local var12 = object.assign({}, t_1, p0)
 	local var13 = useStyleModule()
@@ -67,12 +67,12 @@ return function(p0) --[[ line: 71 | named "ShortcutBar" ]]
 	}
 	local var23 = useInputTypeModule()
 	local var24, var25 = reactOtterModule.useAnimatedBinding(0)
-	local var26 = useDelayedActionHandler(if var12.transitionDelaySeconds then var12.transitionDelaySeconds else 0, 0.1, function() --[[ line: 114 ]]
+	local var26 = useDelayedActionHandler(if var12.transitionDelaySeconds then var12.transitionDelaySeconds else 0, 0.1, function()
 		-- upvalues: var25 (ref), reactOtterModule (copy), t (copy)
 		var25(reactOtterModule.spring(0, t))
 	end)
 	
-	local function onInputChanged() --[[ line: 119 ]]
+	local function onInputChanged()
 		-- upvalues: var12 (ref), var25 (ref), reactOtterModule (copy), t (copy), var26 (ref)
 		if var12.transitionDelaySeconds then
 			var25(reactOtterModule.spring(1, t))
@@ -82,7 +82,7 @@ return function(p0) --[[ line: 71 | named "ShortcutBar" ]]
 	
 	local var28, var29 = reactModule.useState(utilitiesModule.filterItems(var12.items, var23))
 	useEventConnection(userInputService.InputChanged, onInputChanged)
-	reactModule.useEffect(function() --[[ line: 129 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (ref), utilitiesModule (copy), var12 (ref), var23 (ref)
 		var29(utilitiesModule.filterItems(var12.items, var23))
 	end, { var23, var12.items })

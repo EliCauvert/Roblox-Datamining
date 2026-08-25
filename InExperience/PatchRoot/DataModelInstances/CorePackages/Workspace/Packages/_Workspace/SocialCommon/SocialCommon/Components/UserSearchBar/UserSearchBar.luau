@@ -26,13 +26,13 @@ local t = {
 	captureFocusOnMount = false,
 	cancelCallback = nil,
 	textChangedCallback = nil,
-	focusChangedCallback = function() --[[ line: 72 ]] end
+	focusChangedCallback = function() end
 }
 
-return function(p0) --[[ line: 75 ]]
+return function(p0)
 	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref), fFlagEnableLeftNavOnConsole (ref)
 	local createElement_3
-	local var7 = if fFlagDisableAutocorrectSocialUserSearch then roactAppExperimentModule.useUserExperiment({ disableAutocorrectExperimentLayer }, function(p1) --[[ line: 77 ]]
+	local var7 = if fFlagDisableAutocorrectSocialUserSearch then roactAppExperimentModule.useUserExperiment({ disableAutocorrectExperimentLayer }, function(p1)
 		-- upvalues: disableAutocorrectExperimentLayer (copy)
 		return (p1[disableAutocorrectExperimentLayer] or {}).disableAutocorrectSocialUserSearch
 	end) else nil
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 75 ]]
 	local var10 = reactModule.useRef(nil)
 	local var11, var12 = reactModule.useState(nil)
 	local var13, var14 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref)
 		if var8.onSelectCallback then
 			var8.onSelectCallback()
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 75 ]]
 	local body = var9.Font.Body
 	local var17 = var9.Font.BaseSize * body.RelativeSize
 	
-	local var18 = function(p2, p3) --[[ line: 114 ]]
+	local var18 = function(p2, p3)
 		-- upvalues: var8 (ref), var12 (ref), var9 (ref), var14 (ref)
 		if var8.focusChangedCallback then
 			var8.focusChangedCallback(p2, p3)

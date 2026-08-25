@@ -8,7 +8,7 @@ local getTileBadgeByPositionConfigFromEntry = gameTileModule.getTileBadgeByPosit
 local resolveWideAssetId = gameTileModule.resolveWideAssetId
 local _ = require(parent.VideoUtils)
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
-local var4 = reactModule.memo(function(p0) --[[ line: 41 ]]
+local var4 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref), fFlagMigrateGameInfoToStore (ref), resolveWideAssetId (ref)
 	local var5 = -((p0.maxItemIndex or 0) + 1)
 	
@@ -43,7 +43,7 @@ local var4 = reactModule.memo(function(p0) --[[ line: 41 ]]
 		enableExplicitFeedback = p0.enableExplicitFeedback,
 		placeIdOverride = p0.item.placeIdOverride,
 		launchDataOverride = p0.item.launchDataOverride,
-		onSelectionGained = reactModule.useCallback(function() --[[ line: 46 ]]
+		onSelectionGained = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.onSelectionGained then
 				p0.onSelectionGained(p0.item, p0.index, p0.item.universeId)
@@ -58,7 +58,7 @@ local var4 = reactModule.memo(function(p0) --[[ line: 41 ]]
 	})
 end)
 
-return function(p1) --[[ line: 102 ]]
+return function(p1)
 	-- upvalues: reactModule (ref), var4 (ref), gameCollectionItemTypes (ref)
 	return reactModule.createElement(var4, p1), gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
 end

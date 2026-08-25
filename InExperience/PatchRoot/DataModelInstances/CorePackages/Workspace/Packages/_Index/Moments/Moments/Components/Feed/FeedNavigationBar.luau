@@ -4,7 +4,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local _ = require(script.Parent.FeedTypes)
 local navigationBarModule = require(script.Parent.NavigationBar)
 
-return function(p0) --[[ line: 35 | named "FeedNavigationBar" ]]
+return function(p0)
 	-- upvalues: signalsReactModule (ref), reactModule (ref), navigationBarModule (ref)
 	local var3 = signalsReactModule.useSignalState(p0.pager.getItems)
 	local var4 = signalsReactModule.useSignalState(p0.pager.getCurrentIndex)

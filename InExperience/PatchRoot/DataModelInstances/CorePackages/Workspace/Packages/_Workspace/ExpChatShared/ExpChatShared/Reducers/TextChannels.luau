@@ -9,7 +9,7 @@ local fFlagExpChatFixBackspaceNilTargetChannelModule = require(expChatShared.Fla
 local fFlagExpChatFixTeamChangeOverwriteChannelModule = require(expChatShared.Flags.FFlagExpChatFixTeamChangeOverwriteChannel)
 local actions = expChatShared.Actions
 
-local function _(p0, p1) --[[ line: 41 | named "getTeamTextChannelFromTeam" ]]
+local function _(p0, p1)
 	local text = "RBXTeam" .. p1.TeamColor.Name
 	
 	for i, v in pairs(p0) do
@@ -26,11 +26,11 @@ return roduxModule.createReducer({
 	currentTeam = nil,
 	allTextChannels = {}
 }, {
-	[require(actions.ClientAppLoaded).name] = function(p2, p3) --[[ line: 53 ]]
+	[require(actions.ClientAppLoaded).name] = function(p2, p3)
 		-- upvalues: dictionary (ref), none (ref)
 		return dictionary.join(p2, { currentTeam = if p3.team == nil then none else p3.team })
 	end,
-	[require(actions.TextChannelCreated).name] = function(p4, p5) --[[ line: 59 ]]
+	[require(actions.TextChannelCreated).name] = function(p4, p5)
 		-- upvalues: var2 (ref), dictionary (ref)
 		var2:trace("TextChannelCreated: {}", p5.textChannel.Name)
 		
@@ -38,7 +38,7 @@ return roduxModule.createReducer({
 			allTextChannels = dictionary.join(p4.allTextChannels, { [p5.textChannel.Name] = p5.textChannel })
 		})
 	end,
-	[require(actions.TextChannelRemoved).name] = function(p6, p7) --[[ line: 68 ]]
+	[require(actions.TextChannelRemoved).name] = function(p6, p7)
 		-- upvalues: dictionary (ref), none (ref)
 		local var7 = dictionary.removeKey(p6.allTextChannels, p7.textChannel.Name)
 		
@@ -47,13 +47,13 @@ return roduxModule.createReducer({
 			targetTextChannel = if p7.textChannel == p6.targetTextChannel then var7.RBXGeneral or none else p6.targetTextChannel
 		})
 	end,
-	[require(actions.LocalTextChannelParticipantRemoved).name] = function(p8, p9) --[[ line: 80 ]]
+	[require(actions.LocalTextChannelParticipantRemoved).name] = function(p8, p9)
 		-- upvalues: dictionary (ref), none (ref)
 		return dictionary.join(p8, {
 			targetTextChannel = if p9.textChannel == p8.targetTextChannel then if p9.textChannel == p8.allTextChannels.RBXGeneral then none else p8.allTextChannels.RBXGeneral or none else p8.targetTextChannel
 		})
 	end,
-	[require(actions.TargetTextChannelPropertyChanged).name] = function(p10, p11) --[[ line: 93 ]]
+	[require(actions.TargetTextChannelPropertyChanged).name] = function(p10, p11)
 		-- upvalues: var2 (ref), getFFlagTextChatEnableUniverseChatTabsModule (ref), dictionary (ref), none (ref)
 		var2:trace("TargetTextChannelPropertyChanged dispatched")
 		
@@ -64,7 +64,7 @@ return roduxModule.createReducer({
 			targetTextChannel = if p11.textChannel == nil then none else p11.textChannel
 		})
 	end,
-	[require(actions.TextChatChannelSelected).name] = function(p12, p13) --[[ line: 116 ]]
+	[require(actions.TextChatChannelSelected).name] = function(p12, p13)
 		-- upvalues: var2 (ref), dictionary (ref)
 		var2:trace("TextChatChannelSelected dispatched: {}", p13.channelName)
 		local channelName = p12.allTextChannels[p13.channelName]
@@ -74,7 +74,7 @@ return roduxModule.createReducer({
 			selectedChannelName = p13.channelName
 		})
 	end,
-	[require(actions.LocalTeamChanged).name] = function(p14, p15) --[[ line: 130 ]]
+	[require(actions.LocalTeamChanged).name] = function(p14, p15)
 		-- upvalues: var2 (ref), dictionary (ref), fFlagExpChatFixTeamChangeOverwriteChannelModule (ref), none (ref)
 		if p15.team then
 			var2:trace("LocalTeamChanged dispatched with team: {}", p15.team.Name)
@@ -107,7 +107,7 @@ return roduxModule.createReducer({
 			})
 		end
 	end,
-	[require(actions.ChatInputBarActivatedTeamMode).name] = function(p16, _) --[[ line: 167 ]]
+	[require(actions.ChatInputBarActivatedTeamMode).name] = function(p16, _)
 		-- upvalues: var2 (ref), dictionary (ref), none (ref)
 		if p16.currentTeam == nil then
 			var2:trace("ChatInputBarActivatedTeamMode but not on a team")
@@ -128,13 +128,13 @@ return roduxModule.createReducer({
 		end
 		var11 = nil
 	end,
-	[require(actions.ChatInputBarResetTargetChannel).name] = function(p17, p18) --[[ line: 190 ]]
+	[require(actions.ChatInputBarResetTargetChannel).name] = function(p17, p18)
 		-- upvalues: fFlagExpChatFixBackspaceNilTargetChannelModule (ref), dictionary (ref), none (ref)
 		return if fFlagExpChatFixBackspaceNilTargetChannelModule and p18.isGlobalTabActive then dictionary.join(p17, { targetTextChannel = none }) else dictionary.join(p17, {
 			targetTextChannel = p17.allTextChannels.RBXGeneral or p17.targetTextChannel
 		})
 	end,
-	[require(actions.ChatInputBarActivatedWhisperMode).name] = function(p19, p20) --[[ line: 201 ]]
+	[require(actions.ChatInputBarActivatedWhisperMode).name] = function(p19, p20)
 		-- upvalues: var2 (ref), dictionary (ref)
 		var2:trace("ChatInputBarActivatedTeamMode - set targetTextChannel to {}", if p20.textChannel then p20.textChannel.Name else "nil")
 		
@@ -143,9 +143,9 @@ return roduxModule.createReducer({
 			targetTextChannel = p20.textChannel
 		})
 	end,
-	[require(actions.PlayerRemoved).name] = function(p21, p22) --[[ line: 219 ]]
+	[require(actions.PlayerRemoved).name] = function(p21, p22)
 		-- upvalues: dictionary (ref)
-		local function _(p23) --[[ line: 220 | named "isRemovedPlayerInWhisperChannel" ]]
+		local function _(p23)
 			-- upvalues: p22 (ref)
 			return string.find(p23, "RBXWhisper:") and string.find(p23, p22.userId)
 		end
@@ -161,13 +161,13 @@ return roduxModule.createReducer({
 		end
 		return dictionary.join(p21, {
 			targetTextChannel = targetTextChannel,
-			allTextChannels = dictionary.filter(p21.allTextChannels, function(_, p24) --[[ line: 229 ]]
+			allTextChannels = dictionary.filter(p21.allTextChannels, function(_, p24)
 				-- upvalues: p22 (ref)
 				return not (string.find(p24, "RBXWhisper:") and string.find(p24, p22.userId))
 			end)
 		})
 	end,
-	[require(actions.UniverseChatChannelSelected).name] = function(p25, p26) --[[ line: 242 ]]
+	[require(actions.UniverseChatChannelSelected).name] = function(p25, p26)
 		-- upvalues: var2 (ref), dictionary (ref), none (ref)
 		var2:trace("UniverseChatChannelSelected dispatched: {}", p26.channelName)
 		

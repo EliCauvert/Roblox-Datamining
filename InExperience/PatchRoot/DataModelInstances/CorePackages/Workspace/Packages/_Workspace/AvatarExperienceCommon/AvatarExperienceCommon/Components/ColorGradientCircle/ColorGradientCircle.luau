@@ -5,7 +5,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local generateColorSequenceModule = require(script.Parent.Utils.generateColorSequence)
 local AXColorGradientRenderFlatWithJustOneColor = game:DefineFastFlag("AXColorGradientRenderFlatWithJustOneColor", false)
 
-return function(p0) --[[ line: 28 | named "ColorGradientCircle" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), AXColorGradientRenderFlatWithJustOneColor (ref), foundationModule (ref), generateColorSequenceModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0,

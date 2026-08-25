@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AuthCommon").Parent.React)
 local textService = game:GetService("TextService")
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: textService (ref), reactModule (ref)
 	local x = textService:GetTextSize(p0.text, p0.fontSize, p0.font, Vector2.new(1e999, p0.fontSize)).X
 	

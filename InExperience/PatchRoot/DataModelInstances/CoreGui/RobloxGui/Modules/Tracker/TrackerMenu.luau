@@ -4,7 +4,7 @@ local trackerPromptModule = require(coreGuiService:WaitForChild("RobloxGui").Mod
 local t = {}
 t.__index = t
 
-function t:showPrompt(p0) --[[ line: 20 ]]
+function t:showPrompt(p0)
 	-- upvalues: roactModule (ref), trackerPromptModule (ref), coreGuiService (ref)
 	if self.trackerPrompt then
 		roactModule.update(self.trackerPrompt, roactModule.createElement(trackerPromptModule, { promptType = p0 }))
@@ -14,7 +14,7 @@ function t:showPrompt(p0) --[[ line: 20 ]]
 	self.trackerPrompt = roactModule.mount(roactModule.createElement(trackerPromptModule, { promptType = p0 }), coreGuiService, "RobloxTrackerPromptGui")
 end
 
-function t.new() --[[ line: 39 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { trackerPrompt = nil }
 	setmetatable(t_1, t)

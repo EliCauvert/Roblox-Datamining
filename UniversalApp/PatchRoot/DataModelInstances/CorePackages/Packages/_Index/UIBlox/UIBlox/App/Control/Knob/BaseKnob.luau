@@ -59,11 +59,11 @@ baseKnob.defaultProps = {
 	anchorPoint = Vector2.new(0.5, 0.5)
 }
 
-function baseKnob.init(p0) --[[ line: 99 ]]
+function baseKnob.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.onStateChanged(p1, p2) --[[ line: 104 ]]
+	function p0.onStateChanged(p1, p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p2 })
 		
@@ -73,9 +73,9 @@ function baseKnob.init(p0) --[[ line: 99 ]]
 	end
 end
 
-function baseKnob.render(p3) --[[ line: 114 ]]
+function baseKnob.render(p3)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), t_1 (ref), t_2 (ref), t (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), roactGamepadModule (ref), interactableModule (ref)
-	return withStyleModule(function(p4) --[[ line: 115 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: p3 (ref), controlStateModule (copy), t_1 (copy), t_2 (copy), t (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), roactGamepadModule (copy), interactableModule (copy)
 		local controlState = p3.props.colorMap[p3.state.controlState] or p3.props.colorMap[controlStateModule.Default]
 		local controlState_1 = t_1[p3.state.controlState] or t_1[controlStateModule.Default]

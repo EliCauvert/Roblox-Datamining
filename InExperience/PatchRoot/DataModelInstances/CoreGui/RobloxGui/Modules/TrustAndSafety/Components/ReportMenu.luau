@@ -43,7 +43,7 @@ local t = {
 }
 local reportMenu = roactModule.PureComponent:extend("ReportMenu")
 
-local var29 = function(p0) --[[ line: 63 ]]
+local var29 = function(p0)
 	-- upvalues: reactModule (ref), voiceStateContextModule (ref), voiceIndicatorFuncModule (ref), cryoModule (ref)
 	return if reactModule.useContext(voiceStateContextModule.Context).voiceEnabled then reactModule.createElement(voiceIndicatorFuncModule, cryoModule.Dictionary.join(p0, {})) else nil
 end
@@ -58,27 +58,27 @@ reportMenu.validateProps = tModule.strictInterface({
 	navigateBack = tModule.optional(tModule.callback)
 })
 
-function reportMenu.init(p1) --[[ line: 81 ]]
+function reportMenu.init(p1)
 	-- upvalues: roactModule (ref), default (ref)
 	p1.scrollingFrameRef = roactModule.createRef()
 	p1.state = { isFilterMode = false, filterText = nil }
 	
-	function p1.onSearch() --[[ line: 89 ]]
+	function p1.onSearch()
 		-- upvalues: p1 (ref)
 		p1:setState({ isFilterMode = true, filterText = "" })
 	end
 	
-	function p1.onTextChanged(p2) --[[ line: 96 ]]
+	function p1.onTextChanged(p2)
 		-- upvalues: p1 (ref)
 		p1:setState({ filterText = p2 })
 	end
 	
-	function p1.onCancel() --[[ line: 102 ]]
+	function p1.onCancel()
 		-- upvalues: p1 (ref), roactModule (copy)
 		p1:setState({ isFilterMode = false, filterText = roactModule.None })
 	end
 	
-	function p1.scrollToTop() --[[ line: 109 ]]
+	function p1.scrollToTop()
 		-- upvalues: p1 (ref)
 		local value = p1.scrollingFrameRef:getValue()
 		
@@ -87,19 +87,19 @@ function reportMenu.init(p1) --[[ line: 81 ]]
 		end
 	end
 	
-	function p1.navigateBack() --[[ line: 116 ]]
+	function p1.navigateBack()
 		-- upvalues: p1 (ref)
 		p1.props.navigateBack(p1.state.filterText ~= nil)
 	end
 	
-	function p1.closeDialog() --[[ line: 120 ]]
+	function p1.closeDialog()
 		-- upvalues: p1 (ref)
 		p1.props.closeDialog(p1.state.filterText ~= nil)
 	end
 	
 	p1.layoutBindings = {}
 	
-	function p1.getLayoutBinding(p3, p4) --[[ line: 125 ]]
+	function p1.getLayoutBinding(p3, p4)
 		-- upvalues: p1 (ref), roactModule (copy)
 		local var33 = p1.layoutBindings[p3]
 		
@@ -115,7 +115,7 @@ function reportMenu.init(p1) --[[ line: 81 ]]
 		return var33.valueBinding
 	end
 	
-	function p1.playerIsVoiceActive(p5) --[[ line: 145 ]]
+	function p1.playerIsVoiceActive(p5)
 		-- upvalues: default (copy)
 		return default.participants[tostring(p5)] ~= nil
 	end
@@ -123,11 +123,11 @@ function reportMenu.init(p1) --[[ line: 81 ]]
 	p1.sortedUserIds = {}
 end
 
-local function sortPlayers(p6, p7) --[[ line: 152 ]]
+local function sortPlayers(p6, p7)
 	return p6.DisplayName:lower() < p7.DisplayName:lower()
 end
 
-function reportMenu.getPlayerList(p8) --[[ line: 156 ]]
+function reportMenu.getPlayerList(p8)
 	-- upvalues: cryoModule (ref), playersService (ref), sortPlayers (ref), playerSearchPredicateModule (ref)
 	local t = {}
 	
@@ -140,7 +140,7 @@ function reportMenu.getPlayerList(p8) --[[ line: 156 ]]
 			end
 		end
 	end
-	return cryoModule.List.sort(t, function(p9, p10) --[[ line: 172 ]]
+	return cryoModule.List.sort(t, function(p9, p10)
 		return p9.DisplayName:lower() < p10.DisplayName:lower()
 	end)
 end
@@ -151,14 +151,14 @@ local t_1 = {
 	[constantsModule.Category.Other] = "CoreScripts.InGameMenu.Report.Title.Other"
 }
 
-function reportMenu.categoryTitle(p11) --[[ line: 184 ]]
+function reportMenu.categoryTitle(p11)
 	-- upvalues: t_1 (ref)
 	return t_1[p11.props.reportCategory] or "CoreScripts.InGameMenu.Report.MenuTitle"
 end
 
-function reportMenu.renderHeaderBar(p12) --[[ line: 188 ]]
+function reportMenu.renderHeaderBar(p12)
 	-- upvalues: makeBackButton (ref), roactModule (ref), iconButton (ref), iconSize (ref), images (ref), withLocalizationModule (ref), headerBar (ref), searchBarModule (ref)
-	local var37 = if p12.props.canNavigateBack then makeBackButton(p12.navigateBack) else function() --[[ line: 193 ]]
+	local var37 = if p12.props.canNavigateBack then makeBackButton(p12.navigateBack) else function()
 		-- upvalues: roactModule (copy), iconButton (copy), iconSize (copy), images (copy), p12 (ref)
 		return roactModule.createElement(iconButton, {
 			iconSize = iconSize.Medium,
@@ -179,13 +179,13 @@ function reportMenu.renderHeaderBar(p12) --[[ line: 188 ]]
 			onTextChanged = p12.onTextChanged,
 			onCancelled = p12.onCancel
 		})
-	}) else withLocalizationModule({ titleText = p12:categoryTitle() })(function(p13) --[[ line: 205 ]]
+	}) else withLocalizationModule({ titleText = p12:categoryTitle() })(function(p13)
 		-- upvalues: roactModule (copy), headerBar (copy), var37 (write), iconButton (copy), iconSize (copy), images (copy), p12 (ref)
 		return roactModule.createElement(headerBar, {
 			backgroundTransparency = 1,
 			barHeight = 48,
 			renderLeft = var37,
-			renderRight = function() --[[ line: 210 ]]
+			renderRight = function()
 				-- upvalues: roactModule (copy), iconButton (copy), iconSize (copy), images (copy), p12 (copy)
 				return roactModule.createElement(iconButton, {
 					iconSize = iconSize.Medium,
@@ -199,7 +199,7 @@ function reportMenu.renderHeaderBar(p12) --[[ line: 188 ]]
 	end)
 end
 
-function reportMenu.renderContents(p14) --[[ line: 238 ]]
+function reportMenu.renderContents(p14)
 	-- upvalues: constantsModule (ref), roactModule (ref), gameCellModule (ref), default (ref), dividerModule (ref), playerCellModule (ref), isPlayerVerified (ref), var29 (ref), constantsModule_1 (ref), withStyle (ref), cryoModule (ref), t (ref), provider (ref), barOnTopScrollingFrameModule (ref)
 	local props = p14.props
 	local var38 = p14.props.reportCategory == constantsModule.Category.Voice
@@ -215,7 +215,7 @@ function reportMenu.renderContents(p14) --[[ line: 238 ]]
 		t_1.GameCell = roactModule.createElement(gameCellModule, {
 			gameId = game.GameId,
 			layoutOrder = p14.getLayoutBinding("GameCell", var39),
-			onActivated = function() --[[ line: 255 ]]
+			onActivated = function()
 				-- upvalues: props (ref), constantsModule (copy)
 				props.openReportDialog(constantsModule.ReportType.Place, nil)
 			end
@@ -253,7 +253,7 @@ function reportMenu.renderContents(p14) --[[ line: 238 ]]
 				displayName = v.DisplayName,
 				hasVerifiedBadge = isPlayerVerified(v),
 				LayoutOrder = p14.getLayoutBinding("PlayerCell" .. var44, var39),
-				onActivated = function() --[[ line: 300 ]]
+				onActivated = function()
 					-- upvalues: props (ref), constantsModule (copy), v (ref)
 					props.openReportDialog(constantsModule.ReportType.Player, v)
 				end,
@@ -264,7 +264,7 @@ function reportMenu.renderContents(p14) --[[ line: 238 ]]
 					iconStyle = "SpeakerLight",
 					userId = tostring(v.UserId),
 					size = UDim2.fromOffset(36, 36),
-					onClicked = function() --[[ line: 312 ]]
+					onClicked = function()
 						-- upvalues: default (copy), v (ref), constantsModule_1 (copy)
 						default:ToggleMutePlayer(v.UserId, constantsModule_1.VOICE_CONTEXT_TYPE.REPORT_MENU)
 					end
@@ -280,7 +280,7 @@ function reportMenu.renderContents(p14) --[[ line: 238 ]]
 	})
 	var39 += 1
 	
-	return withStyle(function(p15) --[[ line: 332 ]]
+	return withStyle(function(p15)
 		-- upvalues: cryoModule (copy), t (copy), roactModule (copy), provider (copy), barOnTopScrollingFrameModule (copy), var41 (write), p14 (ref), t_1 (ref)
 		return roactModule.createElement(provider, {
 			style = cryoModule.Dictionary.join(p15, { Theme = cryoModule.Dictionary.join(p15.Theme, t) })
@@ -294,7 +294,7 @@ function reportMenu.renderContents(p14) --[[ line: 238 ]]
 	end)
 end
 
-function reportMenu.render(p16) --[[ line: 349 ]]
+function reportMenu.render(p16)
 	-- upvalues: roactModule (ref), modalDialogModule (ref)
 	return roactModule.createFragment({
 		ModalDialog = roactModule.createElement(modalDialogModule, {
@@ -308,7 +308,7 @@ function reportMenu.render(p16) --[[ line: 349 ]]
 	})
 end
 
-function reportMenu.didUpdate(p17, p18) --[[ line: 365 ]]
+function reportMenu.didUpdate(p17, p18)
 	-- upvalues: roactModule (ref)
 	if p18.isReportMenuOpen and not p17.props.isReportMenuOpen then
 		p17:setState({ isFilterMode = false, filterText = roactModule.None })
@@ -320,7 +320,7 @@ function reportMenu.didUpdate(p17, p18) --[[ line: 365 ]]
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p19, _) --[[ line: 379 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p19, _)
 	-- upvalues: constantsModule (ref)
 	return {
 		isReportMenuOpen = p19.report.currentPage == constantsModule.Page.Listing,
@@ -328,10 +328,10 @@ return roactRoduxModule.UNSTABLE_connect2(function(p19, _) --[[ line: 379 ]]
 		reportCategory = p19.report.reportCategory,
 		canNavigateBack = #p19.report.history > 1
 	}
-end, function(p20) --[[ line: 387 ]]
+end, function(p20)
 	-- upvalues: navigateBackModule (ref), sendAnalyticsModule (ref), constantsModule (ref), endReportFlowModule (ref), sessionUtilityModule (ref), selectReportListingModule (ref)
 	return {
-		navigateBack = function(p21) --[[ line: 389 ]]
+		navigateBack = function(p21)
 			-- upvalues: p20 (ref), navigateBackModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			p20(navigateBackModule())
 			sendAnalyticsModule(constantsModule.Page.Listing, constantsModule.Analytics.ReportFlowBack, {
@@ -339,7 +339,7 @@ end, function(p20) --[[ line: 387 ]]
 				filterTextChanged = p21
 			})
 		end,
-		closeDialog = function(p22) --[[ line: 396 ]]
+		closeDialog = function(p22)
 			-- upvalues: p20 (ref), endReportFlowModule (copy), sendAnalyticsModule (copy), constantsModule (copy), sessionUtilityModule (copy)
 			p20(endReportFlowModule())
 			sendAnalyticsModule(constantsModule.Page.Listing, constantsModule.Analytics.ReportFlowAbandoned, {
@@ -348,7 +348,7 @@ end, function(p20) --[[ line: 387 ]]
 			})
 			sessionUtilityModule.endAbuseReportSession()
 		end,
-		openReportDialog = function(p23, p24, p25) --[[ line: 404 ]]
+		openReportDialog = function(p23, p24, p25)
 			-- upvalues: p20 (ref), selectReportListingModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			p20(selectReportListingModule(p23, p24, p25))
 			sendAnalyticsModule(constantsModule.Page.Listing, constantsModule.Analytics.ReportFlowAdvance, { source = constantsModule.Page.Listing, reportType = p23 })

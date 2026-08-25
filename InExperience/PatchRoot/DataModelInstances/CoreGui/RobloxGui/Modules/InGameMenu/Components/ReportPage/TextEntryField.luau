@@ -32,7 +32,7 @@ textEntryField.validateProps = t.strictInterface({
 	textBoxRef = t.optional(t.table)
 })
 
-function textEntryField.init(p0) --[[ line: 63 ]]
+function textEntryField.init(p0)
 	-- upvalues: roact (ref)
 	p0.textBoxRef = p0.props.textBoxRef or roact.createRef()
 	p0.state = {
@@ -43,9 +43,9 @@ function textEntryField.init(p0) --[[ line: 63 ]]
 	}
 end
 
-function textEntryField.calculateNeedsRescroll(p1, p2, p3) --[[ line: 74 ]]
+function textEntryField.calculateNeedsRescroll(p1, p2, p3)
 	-- upvalues: textService (ref)
-	p1:setState(function(p4, p5) --[[ line: 75 ]]
+	p1:setState(function(p4, p5)
 		-- upvalues: p3 (ref), p2 (ref), textService (copy)
 		if p4.cursorPosition == -1 then
 			return nil
@@ -57,9 +57,9 @@ function textEntryField.calculateNeedsRescroll(p1, p2, p3) --[[ line: 74 ]]
 	end)
 end
 
-function textEntryField.renderWithSelectionCursor(p6, p7) --[[ line: 97 ]]
+function textEntryField.renderWithSelectionCursor(p6, p7)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), circle17 (ref), roact (ref), var5 (ref), themedTextLabelModule (ref), images (ref), fillCircleModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
-	return withFoundationOrUIBloxStyle(function(p8) --[[ line: 98 ]]
+	return withFoundationOrUIBloxStyle(function(p8)
 		return {
 			Theme = {
 				TextDefault = {
@@ -79,7 +79,7 @@ function textEntryField.renderWithSelectionCursor(p6, p7) --[[ line: 97 ]]
 				}
 			}
 		}
-	end, function(p9) --[[ line: 109 ]]
+	end, function(p9)
 		-- upvalues: textService (copy), p6 (ref), circle17 (copy), roact (copy), p7 (ref), var5 (copy), themedTextLabelModule (copy), images (copy), fillCircleModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy)
 		local textDefault = p9.Theme.TextDefault
 		local body = p9.Font.Body
@@ -99,13 +99,13 @@ function textEntryField.renderWithSelectionCursor(p6, p7) --[[ line: 97 ]]
 				VerticalScrollBarInset = Enum.ScrollBarInset.Always,
 				CanvasPosition = Vector2.new(0, p6.state.canvasPosition),
 				Selectable = false,
-				[roact.Change.CanvasPosition] = function(p10) --[[ line: 138 ]]
+				[roact.Change.CanvasPosition] = function(p10)
 					-- upvalues: p6 (copy)
 					p6:setState({ canvasPosition = p10.CanvasPosition.Y })
 				end,
-				[roact.Change.AbsoluteSize] = function(p11) --[[ line: 144 ]]
+				[roact.Change.AbsoluteSize] = function(p11)
 					-- upvalues: p6 (copy), p9 (ref), body (ref)
-					p6:setState({ scrollingFrameHeight = p11.AbsoluteSize.Y }, function() --[[ line: 145 ]]
+					p6:setState({ scrollingFrameHeight = p11.AbsoluteSize.Y }, function()
 						-- upvalues: p6 (copy), p9 (copy), body (copy)
 						p6:calculateNeedsRescroll(p9, body)
 					end)
@@ -128,7 +128,7 @@ function textEntryField.renderWithSelectionCursor(p6, p7) --[[ line: 97 ]]
 					TextWrapped = true,
 					SelectionImageObject = p7(var5.InputFields),
 					[roact.Ref] = p6.textBoxRef,
-					[roact.Change.Text] = function(p12) --[[ line: 170 ]]
+					[roact.Change.Text] = function(p12)
 						-- upvalues: p6 (copy), p9 (ref), body (ref)
 						if p6.props.maxTextLength < utf8.len(utf8.nfcnormalize(p12.Text)) then
 							p12.Text = string.sub(p12.Text, 1, utf8.offset(p12.Text, p6.props.maxTextLength + 1) - 1)
@@ -136,21 +136,21 @@ function textEntryField.renderWithSelectionCursor(p6, p7) --[[ line: 97 ]]
 							return
 						end
 						p6.props.textChanged(p12.Text)
-						p6:setState({ cursorPosition = p12.CursorPosition }, function() --[[ line: 177 ]]
+						p6:setState({ cursorPosition = p12.CursorPosition }, function()
 							-- upvalues: p6 (copy), p9 (copy), body (copy)
 							p6:calculateNeedsRescroll(p9, body)
 						end)
 					end,
-					[roact.Change.AbsoluteSize] = function(p13) --[[ line: 182 ]]
+					[roact.Change.AbsoluteSize] = function(p13)
 						-- upvalues: p6 (copy), p9 (ref), body (ref)
-						p6:setState({ textBoxWidth = p13.AbsoluteSize.X }, function() --[[ line: 183 ]]
+						p6:setState({ textBoxWidth = p13.AbsoluteSize.X }, function()
 							-- upvalues: p6 (copy), p9 (copy), body (copy)
 							p6:calculateNeedsRescroll(p9, body)
 						end)
 					end,
-					[roact.Change.CursorPosition] = function(p14) --[[ line: 188 ]]
+					[roact.Change.CursorPosition] = function(p14)
 						-- upvalues: p6 (copy), p9 (ref), body (ref)
-						p6:setState({ cursorPosition = p14.CursorPosition }, function() --[[ line: 189 ]]
+						p6:setState({ cursorPosition = p14.CursorPosition }, function()
 							-- upvalues: p6 (copy), p9 (copy), body (copy)
 							p6:calculateNeedsRescroll(p9, body)
 						end)
@@ -226,15 +226,15 @@ function textEntryField.renderWithSelectionCursor(p6, p7) --[[ line: 97 ]]
 	end)
 end
 
-function textEntryField.render(p15) --[[ line: 273 ]]
+function textEntryField.render(p15)
 	-- upvalues: var4 (ref)
-	return var4(function(p16) --[[ line: 274 ]]
+	return var4(function(p16)
 		-- upvalues: p15 (ref)
 		return p15:renderWithSelectionCursor(p16)
 	end)
 end
 
-function textEntryField.didUpdate(p17, p18, _) --[[ line: 279 ]]
+function textEntryField.didUpdate(p17, p18, _)
 	if not p17.props.enabled and p18.enabled then
 		if p17.textBoxRef.current and p17.textBoxRef.current:IsFocused() then
 			p17.textBoxRef.current:ReleaseFocus()
@@ -246,7 +246,7 @@ function textEntryField.didUpdate(p17, p18, _) --[[ line: 279 ]]
 	end
 end
 
-return roact.forwardRef(function(p19, p20) --[[ line: 292 ]]
+return roact.forwardRef(function(p19, p20)
 	-- upvalues: roact (ref), textEntryField (ref), cryo (ref)
 	return roact.createElement(textEntryField, cryo.Dictionary.join(p19, { textBoxRef = p20 }))
 end)

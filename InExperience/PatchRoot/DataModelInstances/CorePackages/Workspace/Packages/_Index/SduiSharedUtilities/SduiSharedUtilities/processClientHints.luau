@@ -10,7 +10,7 @@ local t = {
 	prewarm_large_icon = sduiGameIconPrewarmModule.prewarmLargeIcons
 }
 
-local function collectHintsInTemplateTree(p0, p1, p2, p3) --[[ line: 43 ]]
+local function collectHintsInTemplateTree(p0, p1, p2, p3)
 	-- upvalues: collectHintsInTemplateTree (ref)
 	if type(p0) ~= "table" then return end
 	for i, v in p0 do
@@ -38,7 +38,7 @@ end
 
 local tbl = setmetatable({}, { __mode = "k" })
 
-local function getHintsDeclaredBy(p4, p5) --[[ line: 83 ]]
+local function getHintsDeclaredBy(p4, p5)
 	-- upvalues: tbl (ref), collectHintsInTemplateTree (ref)
 	if p4 == nil then
 		return {}
@@ -55,7 +55,7 @@ local function getHintsDeclaredBy(p4, p5) --[[ line: 83 ]]
 	return var8
 end
 
-local function _(p6, p7) --[[ line: 100 | named "declaresHintWithHandler" ]]
+local function _(p6, p7)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref)
 	for i in getHintsDeclaredBy(p6, p7) do
 		if t[i] then
@@ -65,7 +65,7 @@ local function _(p6, p7) --[[ line: 100 | named "declaresHintWithHandler" ]]
 	return false
 end
 
-local _ = function(p8, p9) --[[ line: 112 | named "anyTemplateDeclaresHintWithHandler" ]]
+local _ = function(p8, p9)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref)
 	for i, v in p8.getKnownTemplates() do
 		local var10
@@ -82,7 +82,7 @@ local _ = function(p8, p9) --[[ line: 112 | named "anyTemplateDeclaresHintWithHa
 	return false
 end
 
-local _ = function(p10, p11, p12) --[[ line: 124 | named "attributeHintTo" ]]
+local _ = function(p10, p11, p12)
 	local var11 = p10[p11]
 	
 	if var11 == nil then
@@ -92,7 +92,7 @@ local _ = function(p10, p11, p12) --[[ line: 124 | named "attributeHintTo" ]]
 	table.insert(var11, p12)
 end
 
-local function attributeHintsInInputData(p13, p14, p15, p16) --[[ line: 147 ]]
+local function attributeHintsInInputData(p13, p14, p15, p16)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref), attributeHintsInInputData (ref)
 	if type(p13) ~= "table" then return end
 	local var12 = p15
@@ -123,7 +123,7 @@ local function attributeHintsInInputData(p13, p14, p15, p16) --[[ line: 147 ]]
 	end
 end
 
-return function(p17) --[[ line: 194 | named "processClientHints" ]]
+return function(p17)
 	-- upvalues: getHintsDeclaredBy (ref), t (ref), attributeHintsInInputData (ref)
 	local getTemplateForRobloxComponent = p17.getTemplateForRobloxComponent
 	

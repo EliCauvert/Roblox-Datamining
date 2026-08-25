@@ -7,7 +7,7 @@ t.__index = t
 local userProfilesDataLoaderClearTimeV1 = game:DefineFastInt("UserProfilesDataLoaderClearTime_v1", 15)
 local getFFlagRemoveDataLoaderTimer = require(parent.SharedFlags).getFFlagRemoveDataLoaderTimer
 
-function t.new() --[[ line: 22 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {
 		loader = nil,
@@ -20,7 +20,7 @@ function t.new() --[[ line: 22 ]]
 	return t_1
 end
 
-function convertToSet(value) --[[ line: 37 ]]
+function convertToSet(value)
 	local t = {}
 	
 	for i, v in value do
@@ -29,7 +29,7 @@ function convertToSet(value) --[[ line: 37 ]]
 	return t
 end
 
-function t:getFields() --[[ line: 45 ]]
+function t:getFields()
 	local t = {}
 	
 	for i, v in self.fieldsSet do
@@ -38,25 +38,25 @@ function t:getFields() --[[ line: 45 ]]
 	return t
 end
 
-function t:makeDataLoader(p0, p1, p2) --[[ line: 53 ]]
+function t:makeDataLoader(p0, p1, p2)
 	-- upvalues: cryoModule (ref), dataLoader (ref), fetchProfilesByIds (ref)
 	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p1))
 	p2 = p2 or self.dataLoaderOptions
 	
-	return dataLoader.new(function(p3) --[[ line: 56 ]]
+	return dataLoader.new(function(p3)
 		-- upvalues: fetchProfilesByIds (copy), self (ref), p0 (ref)
 		return fetchProfilesByIds(p3, self:getFields(), p0)
 	end, {
 		cache = true,
 		maxBatchSize = p2.batchSize,
-		batchScheduleFn = function(p4) --[[ line: 61 ]]
+		batchScheduleFn = function(p4)
 			-- upvalues: p2 (ref)
 			task.delay(p2.batchDelay, p4)
 		end
 	})
 end
 
-function t:getLoader(p5, p6, p7) --[[ line: 68 ]]
+function t:getLoader(p5, p6, p7)
 	-- upvalues: cryoModule (ref), getFFlagRemoveDataLoaderTimer (ref), userProfilesDataLoaderClearTimeV1 (ref)
 	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p6))
 	local processTime = os.clock()

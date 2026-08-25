@@ -15,11 +15,11 @@ local t = {
 }
 local inputTypeManager = roact.Component:extend("InputTypeManager")
 
-function inputTypeManager.init(p0) --[[ line: 31 ]]
+function inputTypeManager.init(p0)
 	-- upvalues: t (ref)
 	local setGamepadEnabled = p0.props.setGamepadEnabled
 	
-	function p0.dispatchOnChange(p1) --[[ line: 34 ]]
+	function p0.dispatchOnChange(p1)
 		-- upvalues: t (copy), p0 (ref), setGamepadEnabled (ref)
 		local var8 = if t[p1] then true else false
 		
@@ -32,7 +32,7 @@ function inputTypeManager.init(p0) --[[ line: 31 ]]
 	p0.cursorOverridden = false
 end
 
-function inputTypeManager.render(p2) --[[ line: 50 ]]
+function inputTypeManager.render(p2)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), userInputService (ref)
 	return roact.createElement(externalEventConnectionModule, {
 		event = userInputService.LastInputTypeChanged,
@@ -40,7 +40,7 @@ function inputTypeManager.render(p2) --[[ line: 50 ]]
 	})
 end
 
-function inputTypeManager.didUpdate(p3, p4, _) --[[ line: 57 ]]
+function inputTypeManager.didUpdate(p3, p4, _)
 	-- upvalues: promptStateModule (ref), mouseIconOverrideService (ref)
 	local var9 = p4.promptState == promptStateModule.None and p3.props.promptState ~= promptStateModule.None
 	local var10 = p4.promptState ~= promptStateModule.None and p3.props.promptState == promptStateModule.None
@@ -65,15 +65,15 @@ function inputTypeManager.didUpdate(p3, p4, _) --[[ line: 57 ]]
 	end
 end
 
-return connectToStoreModule(function(p5) --[[ line: 84 | named "mapStateToProps" ]]
+return connectToStoreModule(function(p5)
 	return {
 		promptState = p5.promptState,
 		gamepadEnabled = p5.gamepadEnabled
 	}
-end, function(p6) --[[ line: 91 | named "mapDispatchToProps" ]]
+end, function(p6)
 	-- upvalues: setGamepadEnabledModule (ref)
 	return {
-		setGamepadEnabled = function(value) --[[ line: 93 ]]
+		setGamepadEnabled = function(value)
 			-- upvalues: p6 (ref), setGamepadEnabledModule (copy)
 			p6(setGamepadEnabledModule(value))
 		end

@@ -6,15 +6,15 @@ local t = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getHoverTransparency(p0) --[[ line: 13 ]]
+local function getHoverTransparency(p0)
 	return if p0 then 0 else 0.2
 end
 
-local function useHoverBinding() --[[ line: 17 ]]
+local function useHoverBinding()
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	local var5, var6 = reactModule.useBinding(false)
 	
-	return var5, reactModule.useCallback(function(p1) --[[ line: 21 ]]
+	return var5, reactModule.useCallback(function(p1)
 		-- upvalues: foundationModule (copy), var6 (ref)
 		if p1 == foundationModule.Enums.ControlState.Default then
 			var6(false)
@@ -26,7 +26,7 @@ local function useHoverBinding() --[[ line: 17 ]]
 	end, {})
 end
 
-return reactModule.forwardRef(function(p2, p3) --[[ line: 45 | named "ContextualActionButton" ]]
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: useTokens (ref), useHoverBinding (ref), reactModule (ref), foundationModule (ref), t (ref), getHoverTransparency (ref)
 	local var7 = useTokens()
 	local var8, var9 = useHoverBinding()
@@ -46,7 +46,7 @@ return reactModule.forwardRef(function(p2, p3) --[[ line: 45 | named "Contextual
 			tag = "padding-small radius-circle clip auto-xy",
 			Size = if p2.size then UDim2.new(p2.size, p2.size) else UDim2.fromScale(1, 1),
 			GroupTransparency = p2.GroupTransparencyOverwrite or var8:map(getHoverTransparency),
-			backgroundStyle = var8:map(reactModule.useCallback(function(p4) --[[ line: 50 ]]
+			backgroundStyle = var8:map(reactModule.useCallback(function(p4)
 				-- upvalues: var7 (ref), p2 (ref)
 				return if p4 then var7.Color.Shift.Shift_200 elseif p2.isActive then var7.Color.Shift.Shift_400 else {
 					Transparency = 1,

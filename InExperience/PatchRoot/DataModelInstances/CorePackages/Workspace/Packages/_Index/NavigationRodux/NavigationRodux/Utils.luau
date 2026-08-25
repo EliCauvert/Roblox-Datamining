@@ -6,17 +6,17 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local _ = require(navigationRodux.types)
 local constantsModule = require(navigationRodux.Constants)
 
-local function legacyRouteFilter(p0) --[[ line: 18 ]]
+local function legacyRouteFilter(p0)
 	-- upvalues: constantsModule (ref)
 	return p0.routeName ~= constantsModule.TempRnSwitchNavigatorName and p0.key ~= "StackRouterRoot"
 end
 
-local function getLegacyPageFromRoactNavigationRoute(p1) --[[ line: 22 ]]
+local function getLegacyPageFromRoactNavigationRoute(p1)
 	-- upvalues: cryoModule (ref)
 	return cryoModule.Dictionary.join(p1.params or {}, { name = p1.routeName, rnKey = p1.key })
 end
 
-local function getTabNavigatorState(p2) --[[ line: 36 ]]
+local function getTabNavigatorState(p2)
 	-- upvalues: constantsModule (ref), getTabNavigatorState (ref)
 	if p2.routeName == constantsModule.TempRnSwitchNavigatorName then
 		return p2
@@ -28,11 +28,11 @@ end
 
 return {
 	getLegacyPageFromRoactNavigationRoute = getLegacyPageFromRoactNavigationRoute,
-	getLegacyRouteFromRoactNavigationState = function(p3) --[[ line: 29 ]]
+	getLegacyRouteFromRoactNavigationState = function(p3)
 		-- upvalues: cryoModule (ref), getActiveRoutes (ref), legacyRouteFilter (ref), getLegacyPageFromRoactNavigationRoute (ref)
 		return cryoModule.List.map(cryoModule.List.filter(getActiveRoutes(p3), legacyRouteFilter), getLegacyPageFromRoactNavigationRoute)
 	end,
-	getCurrentTabName = function(p4) --[[ line: 49 ]]
+	getCurrentTabName = function(p4)
 		-- upvalues: constantsModule (ref), getTabNavigatorState (ref), appPage (ref)
 		local var6
 		if p4.routeName == constantsModule.TempRnSwitchNavigatorName then

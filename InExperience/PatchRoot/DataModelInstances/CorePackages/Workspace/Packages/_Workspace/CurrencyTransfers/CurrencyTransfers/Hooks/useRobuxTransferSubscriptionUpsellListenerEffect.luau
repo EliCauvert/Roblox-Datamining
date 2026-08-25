@@ -7,12 +7,12 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
 local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
 
-return function(p0) --[[ line: 14 | named "useRobuxTransferSubscriptionUpsellListenerEffect" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), sharedFlagsModule (ref), marketplaceService (ref), loggingProtocolModule (ref), currencyTransferTelemetryModule (ref), transferOriginationModule (ref)
-	reactModule.useEffect(function() --[[ line: 15 ]]
+	reactModule.useEffect(function()
 		-- upvalues: sharedFlagsModule (copy), marketplaceService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p0 (ref)
 		if sharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then
-			local promptRobuxTransferSubscriptionUpsellRequestedConnection = marketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function() --[[ line: 22 ]]
+			local promptRobuxTransferSubscriptionUpsellRequestedConnection = marketplaceService.PromptRobuxTransferSubscriptionUpsellRequested:Connect(function()
 				-- upvalues: loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferOriginationModule (copy), p0 (copy)
 				loggingProtocolModule.default:logRobloxTelemetryCounter(currencyTransferTelemetryModule.CurrencyTransferEngineUpsellSignalReceivedCounter, 1, {
 					transferOrigination = tostring(transferOriginationModule.InExperience)
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 14 | named "useRobuxTransferSubscriptionUpsellLis
 				p0()
 			end)
 			
-			return function() --[[ line: 33 ]]
+			return function()
 				-- upvalues: promptRobuxTransferSubscriptionUpsellRequestedConnection (write)
 				if promptRobuxTransferSubscriptionUpsellRequestedConnection then
 					promptRobuxTransferSubscriptionUpsellRequestedConnection:Disconnect()
@@ -28,6 +28,6 @@ return function(p0) --[[ line: 14 | named "useRobuxTransferSubscriptionUpsellLis
 				end
 			end
 		end
-		return function() --[[ line: 19 ]] end
+		return function() end
 	end, { p0 })
 end

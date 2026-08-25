@@ -23,7 +23,7 @@ local t_1 = {
 	is_sad = errorSourceStringsModule.Keys.DynamicHeadSadNotShown
 }
 
-function t.run(p0, p1) --[[ line: 31 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidationAddGeometryToExportsModule (ref), t_1 (ref), getFIntUGCValidationDynamicHeadMinimumQualityPercentModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref), errorSourceStringsModule (ref)
 	local _ = nil
 	local var7 = if getFFlagUGCValidationAddGeometryToExportsModule() then p1.aqsSummaryData.Measure_Dynamic_Head.Head or p1.aqsSummaryData.Measure_Dynamic_Head.Head_Geo else p1.aqsSummaryData.Measure_Dynamic_Head.Head

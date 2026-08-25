@@ -24,7 +24,7 @@ if getFFlagUGCValidateAnimPartsRotationOnlyModule() then
 else
 	t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 end
-function t.fflag() --[[ line: 31 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimPartsRotationOnlyModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimPartsRotationOnlyModule()
 end
@@ -34,7 +34,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 37 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidateAnimPartsRotationOnlyModule (ref), validationEnumsModule (ref), UGCValidateBodyPartTranslationMaxDistanceHundredths (ref), curveAnimBoneHierarchyUtilsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateAnimTranslationThresholdModule (ref), curveAnimTranslationUtilsModule (ref), errorSourceStringsModule (ref)
 	local var13
 	local var11 = getFFlagUGCValidateAnimPartsRotationOnlyModule() and p1.uploadCategory == validationEnumsModule.UploadCategory.ANIMATION

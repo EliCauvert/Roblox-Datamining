@@ -9,16 +9,16 @@ local IXPVariantsModule = require(contactImporter.Common.IXPVariants)
 local var3 = require(script.Parent.getFStringOffPlatformIXPName)()
 local fFlagContactImporterIXPCleanup = require(parent.SharedFlags).FFlagContactImporterIXPCleanup
 
-local var4 = function() --[[ line: 21 ]]
+local var4 = function()
 	return game:GetFastInt("OffPlatformFriendRequestsRolloutEnabled")
 end
 
-local _ = function(p0) --[[ line: 25 ]]
+local _ = function(p0)
 	-- upvalues: var3 (ref)
 	return if p0 then p0[var3] else nil
 end
 
-local var5 = function(p1) --[[ line: 34 ]]
+local var5 = function(p1)
 	-- upvalues: getFStringSocialFriendsLayer (ref), var3 (ref)
 	local var8 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
 	
@@ -27,7 +27,7 @@ end
 
 local var6 = setupIsRolloutEnabledForUser(var4)
 
-local var7 = function(p2) --[[ line: 40 ]]
+local var7 = function(p2)
 	-- upvalues: getFStringSocialFriendsLayer (ref), var3 (ref), IXPVariantsModule (ref), var6 (ref)
 	local var9 = if p2 then p2[getFStringSocialFriendsLayer()] else nil
 	local var10 = if var9 then var9[var3] else nil
@@ -47,16 +47,16 @@ end
 return if fFlagContactImporterIXPCleanup then nil else {
 	experimentOrRolloutEnabled = var7,
 	IXPVariants = IXPVariantsModule,
-	useOffPlatformFriendRequestsVariant = function() --[[ line: 51 ]]
+	useOffPlatformFriendRequestsVariant = function()
 		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var5 (ref)
 		return useUserExperiment({ getFStringSocialFriendsLayer() }, var5)
 	end,
-	useOffPlatformFriendRequestsEnabled = function() --[[ line: 57 ]]
+	useOffPlatformFriendRequestsEnabled = function()
 		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var7 (ref)
 		return useUserExperiment({ getFStringSocialFriendsLayer() }, var7)
 	end,
 	getExperimentVariant = var5,
-	isRolloutEnabled = function(p3) --[[ line: 72 ]]
+	isRolloutEnabled = function(p3)
 		-- upvalues: getFStringSocialFriendsLayer (ref), var3 (ref), IXPVariantsModule (ref), var6 (ref)
 		local var12 = if p3 then p3[getFStringSocialFriendsLayer()] else nil
 		local var13 = if var12 then var12[var3] else nil

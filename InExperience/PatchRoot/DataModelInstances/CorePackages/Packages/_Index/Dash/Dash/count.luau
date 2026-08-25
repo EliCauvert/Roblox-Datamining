@@ -1,8 +1,8 @@
-﻿local var0 = function() --[[ line: 3 ]]
+﻿local var0 = function()
 	return true
 end
 
-return function(p0, p1) --[[ line: 39 | named "count" ]]
+return function(p0, p1)
 	-- upvalues: var0 (ref)
 	local var1 = 0
 	p1 = p1 or var0

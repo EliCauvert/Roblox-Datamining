@@ -9,7 +9,7 @@ local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local fFlagLuaAppVideoTileHideCenterPlayButton = require(parent.SharedFlags).FFlagLuaAppVideoTileHideCenterPlayButton
 
-return function(p0) --[[ line: 37 | named "GameTileVideoThumbnail" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), videoPlayer (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref)
 	return reactModule.createElement(videoPlayer, {
 		muted = true,
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 37 | named "GameTileVideoThumbnail" ]]
 		cornerRadius = p0.cornerRadius,
 		hideCenterPlayButton = if fFlagLuaAppVideoTileHideCenterPlayButton then true else nil,
 		disableActivation = if fFlagLuaAppVideoTileDisableActivation then true else nil,
-		onVideoLoaded = reactModule.useCallback(function(p1, p2) --[[ line: 39 ]]
+		onVideoLoaded = reactModule.useCallback(function(p1, p2)
 			-- upvalues: p0 (ref), videoPlaybackCoordinator (copy)
 			if p0.videoAnalytics then
 				p0.videoAnalytics.reportVideoLoad(p0.itemIndex, if p0.videoPlaybackCoordinator then p0.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId, p1, p2)
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 37 | named "GameTileVideoThumbnail" ]]
 			p0.videoAnalytics,
 			p0.videoPlaybackCoordinator
 		}),
-		onVideoLooped = reactModule.useCallback(function() --[[ line: 59 ]]
+		onVideoLooped = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), videoPlaybackCoordinator (copy)
 			if p0.videoAnalytics then
 				p0.videoAnalytics.reportVideoLoop(p0.itemIndex, if p0.videoPlaybackCoordinator then p0.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId)
@@ -44,11 +44,11 @@ return function(p0) --[[ line: 37 | named "GameTileVideoThumbnail" ]]
 			p0.videoPlaybackCoordinator
 		}),
 		onVideoPlayerActivated = if fFlagLuaAppVideoTileDisableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then p0.onActivated else nil,
-		videoAnalyticsContext = reactModule.useMemo(function() --[[ line: 76 ]]
+		videoAnalyticsContext = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), videoPlaybackCoordinator (copy)
 			return {
 				videoAnalyticsData = { source = "universe", sourceId = p0.universeId },
-				getPlaybackSessionId = function() --[[ line: 82 ]]
+				getPlaybackSessionId = function()
 					-- upvalues: p0 (copy), videoPlaybackCoordinator (copy)
 					return if p0.videoPlaybackCoordinator then p0.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId
 				end

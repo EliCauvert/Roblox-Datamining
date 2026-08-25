@@ -10,7 +10,7 @@ local t = {
 	propose_plan = true
 }
 
-local function extractRawFrame(p0) --[[ line: 31 ]]
+local function extractRawFrame(p0)
 	if typeof(p0) == "string" then
 		return p0
 	elseif typeof(p0) ~= "table" then
@@ -32,7 +32,7 @@ local function extractRawFrame(p0) --[[ line: 31 ]]
 	return nil
 end
 
-local function _(p1) --[[ line: 47 | named "normalizeUniverseId" ]]
+local function _(p1)
 	if typeof(p1) == "number" and p1 ~= 0 then
 		return p1
 	elseif typeof(p1) ~= "string" or p1 == "" then
@@ -43,7 +43,7 @@ local function _(p1) --[[ line: 47 | named "normalizeUniverseId" ]]
 	return if var13 == nil or var13 == 0 then nil else var13
 end
 
-local _ = function(p2) --[[ line: 58 | named "getUniverseId" ]]
+local _ = function(p2)
 	local var14
 	local universeId = p2.universeId
 	
@@ -75,12 +75,12 @@ local _ = function(p2) --[[ line: 58 | named "getUniverseId" ]]
 	return if var16 == nil or var16 == 0 then nil else var16
 end
 
-local _ = function(p3) --[[ line: 71 | named "valueLooksLikeLocalTool" ]]
+local _ = function(p3)
 	-- upvalues: t (ref)
 	return typeof(p3) == "string" and t[string.lower(p3)] == true
 end
 
-local _ = function(p4) --[[ line: 75 | named "updateLooksLikeLocalTool" ]]
+local _ = function(p4)
 	-- upvalues: t (ref)
 	local kind = p4.kind
 	
@@ -106,7 +106,7 @@ local _ = function(p4) --[[ line: 75 | named "updateLooksLikeLocalTool" ]]
 	end
 end
 
-local _ = function(p5) --[[ line: 88 | named "getSessionUpdate" ]]
+local _ = function(p5)
 	-- upvalues: acpProtocolModule (ref)
 	if p5.kind ~= "notification" then
 		return nil, nil, nil
@@ -157,7 +157,7 @@ local _ = function(p5) --[[ line: 88 | named "getSessionUpdate" ]]
 	return update, sessionId, var19
 end
 
-local function classifyFrame(p6) --[[ line: 108 ]]
+local function classifyFrame(p6)
 	-- upvalues: acpProtocolModule (ref), fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), t (ref)
 	local var20, var21, var22, sessionId
 	if p6.kind == "notification" then
@@ -270,7 +270,7 @@ local function classifyFrame(p6) --[[ line: 108 ]]
 	end
 end
 
-local function classifyRtnDetail(p7) --[[ line: 141 ]]
+local function classifyRtnDetail(p7)
 	-- upvalues: extractRawFrame (ref), parseFrameModule (ref), classifyFrame (ref)
 	local var27 = extractRawFrame(p7)
 	
@@ -282,15 +282,15 @@ local function classifyRtnDetail(p7) --[[ line: 141 ]]
 	return if var28 == nil then nil else classifyFrame(var28)
 end
 
-local function targetMatchesNotification(p8, p9) --[[ line: 155 ]]
+local function targetMatchesNotification(p8, p9)
 	return if p8 == nil then false elseif not (p8.sessionId ~= nil and p8.sessionId ~= "" and p8.sessionId == p9.sessionId) then p8.universeId ~= nil and (p9.universeId ~= nil and p8.universeId == p9.universeId) else true
 end
 
-local function getNotificationId(p10) --[[ line: 170 ]]
+local function getNotificationId(p10)
 	return if p10.kind == "local_tool_call" and p10.toolCallId ~= nil then `CreatorAgentResume-{p10.sessionId}-{p10.toolCallId}` else `CreatorAgentResume-{p10.sessionId}-{p10.kind}`
 end
 
-local function getResumeDeepLink(p11) --[[ line: 177 ]]
+local function getResumeDeepLink(p11)
 	-- upvalues: httpService (ref)
 	local t = {}
 	
@@ -302,14 +302,14 @@ local function getResumeDeepLink(p11) --[[ line: 177 ]]
 	return `roblox://navigation/build?{table.concat(t, "&")}`
 end
 
-local _ = function(p12) --[[ line: 187 | named "getToastCopy" ]]
+local _ = function(p12)
 	if p12.kind == "local_tool_call" then
 		return "Assistant needs your input", "Resume your build chat to continue."
 	end
 	return "Assistant finished", "Resume your build chat to review the result."
 end
 
-local _ = function(p13) --[[ line: 194 | named "getActionEventParams" ]]
+local _ = function(p13)
 	-- upvalues: httpService (ref), getResumeDeepLink (ref)
 	return httpService:JSONEncode({
 		sessionId = p13.sessionId,
@@ -319,7 +319,7 @@ local _ = function(p13) --[[ line: 194 | named "getActionEventParams" ]]
 	})
 end
 
-local function getToastVisualItems(p14, p15, p16, p17) --[[ line: 203 ]]
+local function getToastVisualItems(p14, p15, p16, p17)
 	local t = {}
 	
 	if p14.universeId ~= nil then
@@ -373,7 +373,7 @@ return {
 	targetMatchesNotification = targetMatchesNotification,
 	getNotificationId = getNotificationId,
 	getResumeDeepLink = getResumeDeepLink,
-	buildToastNotification = function(p18) --[[ line: 256 ]]
+	buildToastNotification = function(p18)
 		-- upvalues: httpService (ref), getResumeDeepLink (ref), getToastVisualItems (ref)
 		local var31, var32
 		if p18.kind == "local_tool_call" then

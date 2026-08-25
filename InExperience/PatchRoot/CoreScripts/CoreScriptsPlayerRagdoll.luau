@@ -21,7 +21,7 @@ if not avatarJointUpgradeFeatureEngineFeature then
 	onRagdoll = robloxReplicatedStorageService:WaitForChild("OnRagdoll", 1e999)
 	
 	if onRagdoll and onRagdoll:IsA("RemoteEvent") then
-		local function onOwnedHumanoidDeath(p0, p1) --[[ line: 36 ]]
+		local function onOwnedHumanoidDeath(p0, p1)
 			-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), deathType (ref), ragdollRiggingModule (ref), onRagdoll (write)
 			if avatarJointUpgradeFeatureEngineFeature then
 				if deathType.Value == "Ragdoll" then
@@ -42,24 +42,24 @@ if not avatarJointUpgradeFeatureEngineFeature then
 			end
 		end
 		
-		humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4) --[[ line: 91 ]]
+		humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4)
 			-- upvalues: deathType (ref), ragdollRiggingModule (ref), localPlayer (write), onOwnedHumanoidDeath (ref)
 			local characterRemovingConnection = nil
 			local diedConnection = nil
 			
-			local function _() --[[ line: 94 | named "disconnect" ]]
+			local function _()
 				-- upvalues: characterRemovingConnection (write), diedConnection (write)
 				characterRemovingConnection:Disconnect()
 				diedConnection:Disconnect()
 			end
 			
-			diedConnection = p4.Died:Connect(function() --[[ line: 100 ]]
+			diedConnection = p4.Died:Connect(function()
 				-- upvalues: characterRemovingConnection (write), diedConnection (write), deathType (copy), ragdollRiggingModule (copy), p3 (ref), p2 (ref), localPlayer (copy), onOwnedHumanoidDeath (copy), p4 (ref)
 				characterRemovingConnection:Disconnect()
 				diedConnection:Disconnect()
 				
 				if deathType.Value == "Ragdoll" then
-					delay(2, function() --[[ line: 105 ]]
+					delay(2, function()
 						-- upvalues: ragdollRiggingModule (copy), p3 (copy)
 						ragdollRiggingModule.disableParticleEmittersAndFadeOut(p3, 0.4)
 					end)
@@ -68,7 +68,7 @@ if not avatarJointUpgradeFeatureEngineFeature then
 					onOwnedHumanoidDeath(p3, p4)
 				end
 			end)
-			characterRemovingConnection = p2.CharacterRemoving:Connect(function(p5) --[[ line: 117 ]]
+			characterRemovingConnection = p2.CharacterRemoving:Connect(function(p5)
 				-- upvalues: p3 (ref), characterRemovingConnection (write), diedConnection (write)
 				if p5 == p3 then
 					characterRemovingConnection:Disconnect()

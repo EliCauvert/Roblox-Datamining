@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 16 ]]
+﻿return function(p0)
 	return p0:gsub("[%s]+$", "")
 end

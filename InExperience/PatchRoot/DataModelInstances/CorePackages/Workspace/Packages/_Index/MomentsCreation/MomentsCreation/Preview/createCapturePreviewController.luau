@@ -2,7 +2,7 @@
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local createSignal = require(momentsCreation.Parent.Signals).createSignal
 
-return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewController" ]]
+return function(p0, p1, p2)
 	-- upvalues: createSignal (ref)
 	local var1, var2 = createSignal(0)
 	local var3, var4 = createSignal(0)
@@ -13,7 +13,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 	local var13, var14 = createSignal(nil)
 	local var15 = nil
 	
-	local function play() --[[ line: 168 ]]
+	local function play()
 		-- upvalues: var13 (ref), var7 (ref), var8 (ref), var15 (write)
 		local var17 = var13(false)
 		
@@ -32,14 +32,14 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 	
 	return {
 		getCapture = p0.getSelectedCapture,
-		getReadiness = function(p3) --[[ line: 160 ]]
+		getReadiness = function(p3)
 			-- upvalues: var13 (ref), var11 (ref)
 			local var18 = var13(p3)
 			
 			return if var18 == nil then var11(p3) else var18.getState(p3).readiness
 		end,
 		playback = {
-			getPosition = function(p4) --[[ line: 131 ]]
+			getPosition = function(p4)
 				-- upvalues: var13 (ref), p1 (ref), var1 (ref)
 				local var19 = var13(p4)
 				
@@ -50,7 +50,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 				
 				return if var20 == nil then var1(p4) else math.clamp(var1(p4) - var20.startTime, 0, math.max(0, var20.endTime - var20.startTime))
 			end,
-			getDuration = function(p5) --[[ line: 108 ]]
+			getDuration = function(p5)
 				-- upvalues: var13 (ref), p1 (ref), var3 (ref)
 				local var21 = var13(p5)
 				
@@ -61,34 +61,34 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 				
 				return if var22 == nil then var3(p5) else math.max(0, var22.endTime - var22.startTime)
 			end,
-			getTimeLength = function(p6) --[[ line: 121 ]]
+			getTimeLength = function(p6)
 				-- upvalues: var13 (ref), var5 (ref)
 				local var23 = var13(p6)
 				
 				return if var23 == nil then var5(p6) else var23.getState(p6).timeLength
 			end,
-			getRegion = function(p7) --[[ line: 97 ]]
+			getRegion = function(p7)
 				-- upvalues: p1 (ref)
 				return if p1 == nil then nil else p1(p7)
 			end,
-			getMusic = function(p8) --[[ line: 102 ]]
+			getMusic = function(p8)
 				-- upvalues: p2 (ref)
 				return if p2 == nil then nil else p2(p8)
 			end,
-			getIsPlaying = function(p9) --[[ line: 144 ]]
+			getIsPlaying = function(p9)
 				-- upvalues: var13 (ref), var7 (ref)
 				local var24 = var13(p9)
 				
 				return if var24 == nil then var7(p9) else var24.getState(p9).isPlaying
 			end,
-			getIsMuted = function(p10) --[[ line: 152 ]]
+			getIsMuted = function(p10)
 				-- upvalues: var13 (ref), var9 (ref)
 				local var25 = var13(p10)
 				
 				return if var25 == nil then var9(p10) else var25.getState(p10).isMuted
 			end,
 			play = play,
-			pause = function() --[[ line: 187 ]]
+			pause = function()
 				-- upvalues: var13 (ref), var7 (ref), var8 (ref), var15 (write)
 				local var26 = var13(false)
 				
@@ -103,7 +103,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 					var15.pause()
 				end
 			end,
-			toggle = function() --[[ line: 202 ]]
+			toggle = function()
 				-- upvalues: var13 (ref), var7 (ref), var8 (ref), var15 (write), play (ref)
 				local var27 = var13(false)
 				
@@ -132,7 +132,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 					play()
 				end
 			end,
-			seek = function(p11) --[[ line: 231 ]]
+			seek = function(p11)
 				-- upvalues: var13 (ref), p1 (ref), var2 (ref), var15 (write)
 				local var29 = var13(false)
 				
@@ -149,7 +149,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 					var15.seek(var31)
 				end
 			end,
-			setMuted = function(value) --[[ line: 215 ]]
+			setMuted = function(value)
 				-- upvalues: var13 (ref), var10 (ref), var15 (write)
 				local var32 = var13(false)
 				
@@ -164,7 +164,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 					var15.setMuted(value)
 				end
 			end,
-			toggleMute = function() --[[ line: 227 ]]
+			toggleMute = function()
 				-- upvalues: var13 (ref), var9 (ref), var10 (ref), var15 (write)
 				local var33 = var13(false)
 				local var34 = not (if var33 ~= nil then var9(false) else var33.getState(false).isMuted)
@@ -183,7 +183,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 			end
 		},
 		setMediaController = var14,
-		setRegion = function(value) --[[ line: 252 ]]
+		setRegion = function(value)
 			-- upvalues: var13 (ref)
 			local var36 = var13(false)
 			
@@ -191,7 +191,7 @@ return function(p0, p1, p2) --[[ line: 63 | named "createCapturePreviewControlle
 				var36.setRegion(value)
 			end
 		end,
-		bindEngine = function(p12) --[[ line: 85 ]]
+		bindEngine = function(p12)
 			-- upvalues: var15 (write), var7 (ref)
 			var15 = p12
 			

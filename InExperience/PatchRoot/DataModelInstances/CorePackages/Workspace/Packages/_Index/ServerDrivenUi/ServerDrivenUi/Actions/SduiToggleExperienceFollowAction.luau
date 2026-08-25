@@ -12,7 +12,7 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local gameFollow = discoveryAnalyticsModule.Events.gameFollow
 local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
-return function(p0, _, p1, _) --[[ line: 24 | named "SduiToggleExperienceFollowAction" ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), playersService (ref), gameFollow (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), localizeStrings (ref)
 	local var6 = if p0 then p0.actionParams else nil
 	
@@ -49,7 +49,7 @@ return function(p0, _, p1, _) --[[ line: 24 | named "SduiToggleExperienceFollowA
 	local var12 = followingsStore.updateFollowing(universeId, var11)
 	local localization = p1.dependencies.localization
 	local t = {}
-	t.dispose = signalsModule.createEffect(function(p2) --[[ line: 70 ]]
+	t.dispose = signalsModule.createEffect(function(p2)
 		-- upvalues: var12 (ref), p1 (ref), localization (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), localizeStrings (copy), gameName (ref), t (ref)
 		local var14 = var12(p2)
 		

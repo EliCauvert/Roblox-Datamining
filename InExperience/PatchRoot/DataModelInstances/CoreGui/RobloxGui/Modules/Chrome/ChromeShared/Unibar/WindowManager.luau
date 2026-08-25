@@ -4,7 +4,7 @@ local serviceModule = require(chromeShared.Service)
 local useChromeWindowItemsModule = require(chromeShared.Hooks.useChromeWindowItems)
 local windowHostModule = require(chromeShared.Unibar.ComponentHosts.WindowHost)
 
-return function(_) --[[ line: 13 ]]
+return function(_)
 	-- upvalues: useChromeWindowItemsModule (ref), reactModule (ref), windowHostModule (ref), serviceModule (ref)
 	local t = {}
 	

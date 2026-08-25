@@ -1,6 +1,6 @@
 ﻿local fFlagChatModeratedMaskRandomLength = require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 
-local function isPartySystemMessage(p0) --[[ line: 54 ]]
+local function isPartySystemMessage(p0)
 	local cards = p0.cards
 	
 	if type(cards) ~= "table" then
@@ -22,14 +22,14 @@ local function isPartySystemMessage(p0) --[[ line: 54 ]]
 	return false
 end
 
-local function _(p1) --[[ line: 78 | named "getSystemMessageBody" ]]
+local function _(p1)
 	local cards = p1.cards
 	local var1 = if type(cards) == "table" then cards[1] else nil
 	
 	return if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p1.content or ""
 end
 
-local _ = function(p2) --[[ line: 87 | named "classifySystemMessage" ]]
+local _ = function(p2)
 	-- upvalues: isPartySystemMessage (ref)
 	local t = { kind = "systemMessage" }
 	local cards = p2.cards
@@ -40,7 +40,7 @@ local _ = function(p2) --[[ line: 87 | named "classifySystemMessage" ]]
 	return t
 end
 
-return function(p3) --[[ line: 95 | named "classifyMessage" ]]
+return function(p3)
 	-- upvalues: isPartySystemMessage (ref), fFlagChatModeratedMaskRandomLength (ref)
 	local var6
 	if p3.type == "system" or p3.sender_user_id == nil then

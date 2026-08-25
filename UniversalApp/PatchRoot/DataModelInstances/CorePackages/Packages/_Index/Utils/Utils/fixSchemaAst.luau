@@ -7,12 +7,12 @@ local buildASTSchema = require(parent.GraphQL).buildASTSchema
 local _ = require(script.Parent.types)
 local getDocumentNodeFromSchema = require(script.Parent["print-schema-with-directives"]).getDocumentNodeFromSchema
 
-local function buildFixedSchema(p0, p1) --[[ line: 24 ]]
+local function buildFixedSchema(p0, p1)
 	-- upvalues: getDocumentNodeFromSchema (ref), buildASTSchema (ref), object (ref), boolean (ref)
 	return buildASTSchema(getDocumentNodeFromSchema(p0), object.assign({}, if boolean.toJSBoolean(p1) then p1 else {}))
 end
 
-function t.fixSchemaAst(p2, p3) --[[ line: 28 ]]
+function t.fixSchemaAst(p2, p3)
 	-- upvalues: boolean (ref), buildFixedSchema (ref)
 	local var3 = if not (boolean.toJSBoolean(p2.astNode) and boolean.toJSBoolean(p2.extensionASTNodes)) then buildFixedSchema(p2, p3) else nil
 	

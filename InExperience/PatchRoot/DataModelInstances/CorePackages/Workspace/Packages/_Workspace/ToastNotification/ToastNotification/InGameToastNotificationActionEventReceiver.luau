@@ -7,12 +7,12 @@ local lifecycleEventsModule = require(script.Parent.utils.LifecycleEvents)
 local notificationTypeEnum = require(parent.type).NotificationTypeEnum
 local useProperty = require(parent_1.GuiObjectUtils).useProperty
 
-return function() --[[ line: 18 | named "InGameToastNotificationActionEventReceiver" ]]
+return function()
 	-- upvalues: useProperty (ref), playersService (ref), reactModule (ref), lifecycleEventsModule (ref), notificationTypeEnum (ref), httpService (ref)
 	local var4 = useProperty(playersService, "LocalPlayer")
-	reactModule.useEffect(function() --[[ line: 21 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEventsModule (copy), notificationTypeEnum (copy), httpService (copy), var4 (ref), playersService (copy)
-		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.FriendRequestReceived, function(p0) --[[ line: 25 ]]
+		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.FriendRequestReceived, function(p0)
 			-- upvalues: httpService (copy), var4 (copy), playersService (copy)
 			if p0 and p0.userActionType == "click" and (p0.notificationData and p0.visualItem) then
 				local senderUserId = httpService:JSONDecode(p0.visualItem.actionEventParams).senderUserId
@@ -31,7 +31,7 @@ return function() --[[ line: 18 | named "InGameToastNotificationActionEventRecei
 			end
 		end)
 		
-		return function() --[[ line: 45 ]]
+		return function()
 			-- upvalues: userAction (ref)
 			userAction()
 		end

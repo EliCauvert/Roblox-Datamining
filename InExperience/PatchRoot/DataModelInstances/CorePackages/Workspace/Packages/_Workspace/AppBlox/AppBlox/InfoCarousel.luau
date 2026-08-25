@@ -3,13 +3,13 @@ local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local infoCarouselCellModule = require(script.Parent.InfoCarouselCell)
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), infoCarouselCellModule (ref)
 	local var2 = useDesignTokens()
 	local padding = p0.padding or var2.Size.Size_600
 	local var4, var5 = reactModule.useBinding(0)
 	
-	local var6 = function(p1) --[[ line: 24 ]]
+	local var6 = function(p1)
 		-- upvalues: var5 (ref)
 		var5(p1.AbsoluteSize.Y)
 	end
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 18 ]]
 			t["Divider" .. i] = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				LayoutOrder = i * 2 + 1,
-				Size = var4:map(function(p2) --[[ line: 42 ]]
+				Size = var4:map(function(p2)
 					return UDim2.fromOffset(1, p2 / 2)
 				end),
 				BorderColor3 = var2.Color.Stroke.Emphasis.Color3,

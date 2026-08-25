@@ -3,7 +3,7 @@ local _ = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
 local sceneAnalysisContextModule = require(reactSceneUnderstanding.SceneAnalysisContext)
 local useSourceAssetsModule = require(reactSceneUnderstanding.useSourceAssets)
 
-return function(value) --[[ line: 72 | named "useAssetsInView" ]]
+return function(value)
 	-- upvalues: sceneAnalysisContextModule (ref), useSourceAssetsModule (ref)
 	return useSourceAssetsModule({
 		viewportQueryOptions = value or sceneAnalysisContextModule.use().viewportQueryOptions

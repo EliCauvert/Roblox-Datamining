@@ -11,13 +11,13 @@ local response = require(parent.Fetch).Response
 local t = {}
 local var3 = urlBuilder.new({ path = "users/{id}", base = urlBase.new("users", 1) })
 
-local function findUserById(p0, p1) --[[ line: 23 ]]
+local function findUserById(p0, p1)
 	-- upvalues: fetch (ref), promiseModule (ref), var3 (ref), response (ref), graphQLError (ref)
 	local var5 = p1 or fetch
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 25 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: var3 (copy), p0 (ref), var5 (ref), response (copy), graphQLError (copy)
-		local var6 = var5(var3({ id = p0 }), { method = "GET" }):catch(function() --[[ line: 33 ]]
+		local var6 = var5(var3({ id = p0 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -27,7 +27,7 @@ local function findUserById(p0, p1) --[[ line: 23 ]]
 			
 			return
 		end
-		local var7 = var6:json():catch(function() --[[ line: 45 ]]
+		local var7 = var6:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -42,7 +42,7 @@ end
 
 t.findUserById = findUserById
 
-function t.findMe(p4, p5) --[[ line: 66 ]]
+function t.findMe(p4, p5)
 	-- upvalues: playersService (ref), promiseModule (ref), graphQLError (ref), findUserById (ref)
 	local var8 = p5 or playersService.LocalPlayer
 	

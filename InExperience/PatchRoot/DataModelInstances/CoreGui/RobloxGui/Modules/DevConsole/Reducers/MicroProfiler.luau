@@ -2,7 +2,7 @@
 local appendRecentDumpPathModule = require(script.Parent.Parent.Actions.AppendRecentDumpPath)
 local setRCCProfilerStateModule = require(script.Parent.Parent.Actions.SetRCCProfilerState)
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: setRCCProfilerStateModule (ref), immutableModule (ref), appendRecentDumpPathModule (ref)
 	p0 = p0 or {
 		waitingForRecording = false,

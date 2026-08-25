@@ -16,7 +16,7 @@ local t = {
 	[backButton.IconType.Cross] = "cross"
 }
 
-local var11 = function(p0) --[[ line: 36 ]]
+local var11 = function(p0)
 	-- upvalues: t (ref), shareGameIconsModule (ref), roactModule (ref), iconButtonModule (ref)
 	local iconType = p0.iconType
 	local visible = p0.visible
@@ -42,7 +42,7 @@ local var11 = function(p0) --[[ line: 36 ]]
 	end
 end
 
-function backButton.render(p1) --[[ line: 65 ]]
+function backButton.render(p1)
 	-- upvalues: backButton (ref), roactModule (ref), rectangleButtonModule (ref), var8 (ref), themeModule (ref), constantsModule (ref), var11 (ref)
 	return if p1.props.iconType == backButton.IconType.None then roactModule.createElement(rectangleButtonModule, p1.props, {
 		TextLabel = roactModule.createElement("TextLabel", {

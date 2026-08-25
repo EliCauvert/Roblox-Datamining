@@ -18,26 +18,26 @@ local getRobuxPackageBonusPresentationModule = require(inExperienceShop.Utils.ge
 local promoteBonusRobuxPackageToTopPicksModule = require(inExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
 local _ = require(inExperienceShop.Types)
 
-return reactModule.memo(function(p0) --[[ line: 40 | named "RobuxPackageTileContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), getRobuxPackageBonusPresentationModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), sessionService (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), purchasePromptModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
 	local pkg = p0.pkg
 	local var16 = reactModule.useRef(nil)
 	local var17 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
 	local bonusGamePassId = promoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(pkg)
-	local var19 = getRobuxPackageBonusPresentationModule(pkg, signalsReactModule.useSignalState(function(p1) --[[ line: 46 ]]
+	local var19 = getRobuxPackageBonusPresentationModule(pkg, signalsReactModule.useSignalState(function(p1)
 		-- upvalues: var17 (ref), bonusGamePassId (ref)
 		return if bonusGamePassId == nil then nil else var17.getOwnership(p1)[bonusGamePassId]
-	end), signalsReactModule.useSignalState(function(p2) --[[ line: 56 ]]
+	end), signalsReactModule.useSignalState(function(p2)
 		-- upvalues: var17 (ref), bonusGamePassId (ref)
 		return if bonusGamePassId == nil then nil else var17.getBonusPromotionEligibility(p2)[bonusGamePassId]
 	end))
 	local mobileProductId = pkg.mobileProductId
 	local productId = pkg.productId
 	local paymentSessionId = p0.paymentSessionId
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), pkg (ref), productId (ref), p0 (ref), var16 (ref), sessionService (copy)
 		if fFlagEnableInExperienceShopUnifiedLoggingModule then
-			task.defer(function() --[[ line: 80 ]]
+			task.defer(function()
 				-- upvalues: parent (copy), pkg (copy), productId (copy), p0 (copy), var16 (copy), sessionService (copy)
 				local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
 				local marketplaceUnifiedItemType = avatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
@@ -57,14 +57,14 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "RobuxPackageTileCont
 		pkg.id, productId, pkg.bonusItem, p0.categoryId, p0.gridPositionRow,
 		p0.gridPositionColumn
 	})
-	local var20 = reactModule.useCallback(function() --[[ line: 114 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: bonusGamePassId (ref), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), var17 (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy)
 		if bonusGamePassId == nil then
 			return
 		end
 		var17.pollGamePassOwnership(bonusGamePassId, fIntShopOwnershipFetchMaxAttemptsModule, if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassHttpModule, true)
 	end, { bonusGamePassId, var17 })
-	local var21 = reactModule.useCallback(function() --[[ line: 124 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: purchasePromptModule (copy), mobileProductId (ref), productId (ref), paymentSessionId (ref), var20 (ref)
 		local launchRobuxPackagePurchase = purchasePromptModule.launchRobuxPackagePurchase
 		
@@ -93,7 +93,7 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "RobuxPackageTileCont
 			robuxImage = pkg.robuxImage,
 			hasBonusItem = var19.hasBonusItem,
 			bonusItemThumbnail = var19.bonusItemThumbnail,
-			onTileActivated = reactModule.useCallback(function() --[[ line: 140 ]]
+			onTileActivated = reactModule.useCallback(function()
 				-- upvalues: getBlockRobuxTileClickInShopModule (copy), hasBonusItem (ref), bonusItemDetails (ref), onBonusItemActivated (ref)
 				if getBlockRobuxTileClickInShopModule() then return end
 				if not hasBonusItem or bonusItemDetails == nil or onBonusItemActivated == nil then return end

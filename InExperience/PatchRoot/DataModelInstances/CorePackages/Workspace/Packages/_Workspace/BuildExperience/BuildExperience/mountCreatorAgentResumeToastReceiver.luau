@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local buildEventReceiverModule = require(buildExperience.BuildEventReceiver)
 
-return function(p0) --[[ line: 11 | named "mountCreatorAgentResumeToastReceiver" ]]
+return function(p0)
 	-- upvalues: coreGuiService (ref), reactRobloxModule (ref), reactModule (ref), buildEventReceiverModule (ref)
 	local buildEventReceiver = Instance.new("Folder")
 	buildEventReceiver.Name = "BuildEventReceiver"

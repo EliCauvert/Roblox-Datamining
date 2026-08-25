@@ -4,27 +4,27 @@ local signalModule = require(script.Parent.Parent.Parent.Signal)
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).NetworkFormatting.ChartHeaderNames
 local var3 = tonumber(settings():GetFVariable("NewDevConsoleMaxHttpCount"))
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 12 ]]
+	[chartHeaderNames[1]] = function(p0, p1)
 		return p0.Num < p1.Num
 	end,
-	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 15 ]]
+	[chartHeaderNames[2]] = function(p2, p3)
 		return p2.Method < p3.Method
 	end,
-	[chartHeaderNames[3]] = function(p4, p5) --[[ line: 18 ]]
+	[chartHeaderNames[3]] = function(p4, p5)
 		return p4.Status < p5.Status
 	end,
-	[chartHeaderNames[4]] = function(p6, p7) --[[ line: 21 ]]
+	[chartHeaderNames[4]] = function(p6, p7)
 		return p6.Time < p7.Time
 	end,
-	[chartHeaderNames[5]] = function(p8, p9) --[[ line: 24 ]]
+	[chartHeaderNames[5]] = function(p8, p9)
 		return p8.RequestType < p9.RequestType
 	end,
-	[chartHeaderNames[6]] = function(p10, p11) --[[ line: 27 ]]
+	[chartHeaderNames[6]] = function(p10, p11)
 		return p10.Url < p11.Url
 	end
 }
 
-local function _(p12, p13, p14, p15, p16, p17, p18) --[[ line: 32 | named "newHttpEntry" ]]
+local function _(p12, p13, p14, p15, p16, p17, p18)
 	return {
 		Num = p12,
 		Method = p13,
@@ -39,7 +39,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p19) --[[ line: 47 ]]
+function t_1.new(p19)
 	-- upvalues: t_1 (ref), logService (ref), signalModule (ref), circularBufferModule (ref), var3 (ref), chartHeaderNames (ref)
 	local t = {}
 	setmetatable(t, t_1)
@@ -56,7 +56,7 @@ function t_1.new(p19) --[[ line: 47 ]]
 	return t
 end
 
-function t_1:addHttpEntry(p20) --[[ line: 65 ]]
+function t_1:addHttpEntry(p20)
 	self._httpLifeTimeEntryCount += 1
 	self._httpEntryBuffer:push_back({
 		Num = self._httpLifeTimeEntryCount,
@@ -103,7 +103,7 @@ function t_1:addHttpEntry(p20) --[[ line: 65 ]]
 	end
 end
 
-function t_1:setSortType(p21) --[[ line: 117 ]]
+function t_1:setSortType(p21)
 	-- upvalues: t (ref)
 	if t[p21] then
 		self._sortType = p21
@@ -114,11 +114,11 @@ function t_1:setSortType(p21) --[[ line: 117 ]]
 	error(string.format("attempted to pass invalid sortType: %s", tostring(p21)), 2)
 end
 
-function t_1:getSortType() --[[ line: 130 ]]
+function t_1:getSortType()
 	return self._sortType
 end
 
-function t_1:resetHttpEntryList() --[[ line: 134 ]]
+function t_1:resetHttpEntryList()
 	-- upvalues: logService (ref)
 	self._httpSummaryTable = {}
 	self._httpEntryBuffer:reset()
@@ -135,11 +135,11 @@ function t_1:resetHttpEntryList() --[[ line: 134 ]]
 	end
 end
 
-function t_1:Signal() --[[ line: 149 ]]
+function t_1:Signal()
 	return self._httpEntryAdded
 end
 
-function t_1:getSortedEntries() --[[ line: 153 ]]
+function t_1:getSortedEntries()
 	-- upvalues: t (ref)
 	local var9 = self._httpEntryBuffer:iterator()
 	local var10 = var9:next()
@@ -155,7 +155,7 @@ function t_1:getSortedEntries() --[[ line: 153 ]]
 	return t_1
 end
 
-function t_1:getCurrentData() --[[ line: 170 ]]
+function t_1:getCurrentData()
 	return {
 		summaryTable = self._httpSummaryTable,
 		summaryCount = self._httpSummaryCount,
@@ -163,17 +163,17 @@ function t_1:getCurrentData() --[[ line: 170 ]]
 	}
 end
 
-function t_1:isRunning() --[[ line: 178 ]]
+function t_1:isRunning()
 	return self._isRunning
 end
 
-function t_1:start() --[[ line: 182 ]]
+function t_1:start()
 	-- upvalues: logService (ref)
 	if not self._httpResultConnection then
 		if self._additionHttpSetup then
 			self._additionHttpSetup()
 		end
-		self._httpResultConnection = self._httpResultSignal:connect(function(p22) --[[ line: 188 ]]
+		self._httpResultConnection = self._httpResultSignal:connect(function(p22)
 			-- upvalues: self (ref)
 			self:addHttpEntry(p22)
 			self._httpEntryAdded:Fire(self._httpSummaryTable, self._httpSummaryCount, self:getSortedEntries())
@@ -181,7 +181,7 @@ function t_1:start() --[[ line: 182 ]]
 		self:resetHttpEntryList()
 		
 		if not self._isClient then
-			self._onHttpResultApprovedConnection = logService.OnHttpResultApproved:connect(function(p23) --[[ line: 200 ]]
+			self._onHttpResultApprovedConnection = logService.OnHttpResultApproved:connect(function(p23)
 				-- upvalues: logService (copy), self (ref)
 				logService:RequestHttpResultApproved()
 				
@@ -196,7 +196,7 @@ function t_1:start() --[[ line: 182 ]]
 	end
 end
 
-function t_1:stop() --[[ line: 213 ]]
+function t_1:stop()
 	if self._httpResultConnection then
 		self._httpResultConnection:Disconnect()
 		self._httpResultConnection = nil

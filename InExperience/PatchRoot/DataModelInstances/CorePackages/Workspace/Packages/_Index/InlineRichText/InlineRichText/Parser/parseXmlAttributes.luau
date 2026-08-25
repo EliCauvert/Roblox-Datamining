@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 | named "parseXmlAttributes" ]]
+﻿return function(p0)
 	local var0 = p0:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]*)\"%s*")
 	local var1 = p0:gmatch("%s*([A-Za-z0-9_-]+)='([^']*)'%s*")
 	local t = {}

@@ -16,23 +16,23 @@ local progressSize = foundationModule.Enums.ProgressSize
 local useTokens = foundationModule.Hooks.useTokens
 local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 36 | named "MediaPreview" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), runService (ref), view (ref), skeleton (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), inputSize (ref), progress (ref), progressShape (ref), progressSize (ref), image (ref)
 	local var3 = useTokens()
 	local var4, var5 = reactModule.useState(true)
 	local var6 = reactModule.useRef(nil)
 	local var7, var8 = reactModule.useBinding(0)
 	local var9 = if p0.isIcon then 1 else 1.777777777778
-	local var10 = reactModule.useCallback(function() --[[ line: 44 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref), var4 (ref)
 		var5(not var4)
 	end, { var4 })
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var6 (ref), runService (copy), var8 (ref)
 		if p0.mediaType ~= "video" then
 			return nil
 		elseif var6.current then
-			local renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 58 ]]
+			local renderSteppedConnection = runService.RenderStepped:Connect(function()
 				-- upvalues: var6 (copy), var8 (copy)
 				local current = var6.current
 				
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 36 | named "MediaPreview" ]]
 				end
 			end)
 			
-			return function() --[[ line: 65 ]]
+			return function()
 				-- upvalues: renderSteppedConnection (ref)
 				renderSteppedConnection:Disconnect()
 			end

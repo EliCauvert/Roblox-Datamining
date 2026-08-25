@@ -20,7 +20,7 @@ local requestTypeModule = require(purchasePrompt.Enums.RequestType)
 local t = { requestType = requestTypeModule.None }
 
 return rodux.createReducer(t, {
-	[requestAssetPurchaseModule.name] = function(_, p0) --[[ line: 30 ]]
+	[requestAssetPurchaseModule.name] = function(_, p0)
 		-- upvalues: httpService (ref), requestTypeModule (ref)
 		local idempotencyKey = p0.idempotencyKey
 		
@@ -41,7 +41,7 @@ return rodux.createReducer(t, {
 			expectedPrice = p0.expectedPrice or 0
 		}
 	end,
-	[requestGamepassPurchaseModule.name] = function(_, p1) --[[ line: 49 ]]
+	[requestGamepassPurchaseModule.name] = function(_, p1)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			isRobloxPurchase = false,
@@ -50,7 +50,7 @@ return rodux.createReducer(t, {
 			requestType = requestTypeModule.GamePass
 		}
 	end,
-	[requestProductPurchaseModule.name] = function(_, p2) --[[ line: 57 ]]
+	[requestProductPurchaseModule.name] = function(_, p2)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			isRobloxPurchase = false,
@@ -59,7 +59,7 @@ return rodux.createReducer(t, {
 			requestType = requestTypeModule.Product
 		}
 	end,
-	[requestBundlePurchaseModule.name] = function(_, p3) --[[ line: 65 ]]
+	[requestBundlePurchaseModule.name] = function(_, p3)
 		-- upvalues: httpService (ref), requestTypeModule (ref)
 		local idempotencyKey = p3.idempotencyKey
 		
@@ -79,15 +79,15 @@ return rodux.createReducer(t, {
 			expectedPrice = p3.expectedPrice or 0
 		}
 	end,
-	[requestPremiumPurchaseModule.name] = function(_, _) --[[ line: 83 ]]
+	[requestPremiumPurchaseModule.name] = function(_, _)
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.Premium }
 	end,
-	[requestSubscriptionPurchaseModule.name] = function(_, p4) --[[ line: 88 ]]
+	[requestSubscriptionPurchaseModule.name] = function(_, p4)
 		-- upvalues: requestTypeModule (ref)
 		return { id = p4.id, requestType = requestTypeModule.Subscription }
 	end,
-	[requestAvatarCreationFeePurchaseModule.name] = function(_, p5) --[[ line: 94 ]]
+	[requestAvatarCreationFeePurchaseModule.name] = function(_, p5)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			requestType = requestTypeModule.AvatarCreationFee,
@@ -95,22 +95,22 @@ return rodux.createReducer(t, {
 			id = p5.guid
 		}
 	end,
-	[requestExperiencePurchaseModule.name] = function(_, p6) --[[ line: 101 ]]
+	[requestExperiencePurchaseModule.name] = function(_, p6)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			requestType = requestTypeModule.Experience,
 			universeId = p6.universeId
 		}
 	end,
-	[requestLookPurchaseModule.name] = function(_, p7) --[[ line: 107 ]]
+	[requestLookPurchaseModule.name] = function(_, p7)
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.Look, lookId = p7.lookId }
 	end,
-	[requestRobuxUpsellPurchaseModule.name] = if sharedFlagsModule.FFlagAXMISWithBlackbird then function(_, _) --[[ line: 114 ]]
+	[requestRobuxUpsellPurchaseModule.name] = if sharedFlagsModule.FFlagAXMISWithBlackbird then function(_, _)
 		-- upvalues: requestTypeModule (ref)
 		return { requestType = requestTypeModule.RobuxUpsell }
 	end else nil,
-	[requestDeveloperSubscriptionPurchaseModule.name] = function(_, p8) --[[ line: 120 ]]
+	[requestDeveloperSubscriptionPurchaseModule.name] = function(_, p8)
 		-- upvalues: requestTypeModule (ref)
 		return {
 			requestType = requestTypeModule.DeveloperSubscription,
@@ -118,13 +118,13 @@ return rodux.createReducer(t, {
 			expectedPrice = p8.expectedPrice
 		}
 	end,
-	[refreshExpectedPriceModule.name] = function(p9, p10) --[[ line: 127 ]]
+	[refreshExpectedPriceModule.name] = function(p9, p10)
 		local cloned = table.clone(p9)
 		cloned.expectedPrice = p10.expectedPrice
 		
 		return cloned
 	end,
-	[completeRequestModule.name] = function(_, _) --[[ line: 132 ]]
+	[completeRequestModule.name] = function(_, _)
 		-- upvalues: t (ref)
 		return t
 	end

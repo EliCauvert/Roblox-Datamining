@@ -11,7 +11,7 @@ local mergePropsModule = require(phoneUpsell.Utils.mergeProps)
 local linkButton = UIBloxModule.App.Button.LinkButton
 local getFFlagDisablePVUpsellDataConsent = require(parent.SharedFlags).GetFFlagDisablePVUpsellDataConsent
 
-local function noOp() --[[ line: 51 ]] end
+local function noOp() end
 
 local t = {
 	isButtonDisabled = false,
@@ -24,7 +24,7 @@ local t = {
 	onExtraButtonClick = noOp
 }
 
-local function getButtonStackProps(p0, p1, p2, p3, p4, p5, p6) --[[ line: 64 ]]
+local function getButtonStackProps(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
@@ -42,7 +42,7 @@ local function getButtonStackProps(p0, p1, p2, p3, p4, p5, p6) --[[ line: 64 ]]
 	return { buttonHeight = p1, buttons = list }
 end
 
-return function(p7) --[[ line: 100 | named "InGameEntryView" ]]
+return function(p7)
 	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), useStyle (ref), useLocalization (ref), interactiveAlert (ref), getButtonStackProps (ref), getFFlagDisablePVUpsellDataConsent (ref), checkbox (ref), linkButton (ref)
 	local var8 = mergePropsModule(t, p7)
 	local var9, var10 = reactModule.useState(false)
@@ -72,7 +72,7 @@ return function(p7) --[[ line: 100 | named "InGameEntryView" ]]
 		screenSize = var8.screenSize,
 		buttonStackInfo = getButtonStackProps(var13.buttonKey, var12.Tokens.Size.Size_1200, var8.onButtonClick, var8.isButtonDisabled, var13.extraButtonKey, var8.onExtraButtonClick, var8.isExtraButtonDisabled),
 		onCloseClicked = var8.onClose,
-		middleContent = function() --[[ line: 139 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), var13 (ref), baseSize (ref), var12 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -95,7 +95,7 @@ return function(p7) --[[ line: 100 | named "InGameEntryView" ]]
 				})
 			})
 		end,
-		footerContent = if not getFFlagDisablePVUpsellDataConsent() then function() --[[ line: 162 ]]
+		footerContent = if not getFFlagDisablePVUpsellDataConsent() then function()
 			-- upvalues: reactModule (copy), var12 (ref), var8 (ref), size150 (ref), checkbox (copy), var10 (ref), var9 (ref), var13 (ref), baseSize (ref), relativeSize (ref), linkButton (copy)
 			local frame
 			local createElement = reactModule.createElement
@@ -198,7 +198,7 @@ return function(p7) --[[ line: 100 | named "InGameEntryView" ]]
 			})
 			
 			return createElement(var14, t, t_1)
-		end else function() --[[ line: 267 ]]
+		end else function()
 			return nil
 		end
 	})

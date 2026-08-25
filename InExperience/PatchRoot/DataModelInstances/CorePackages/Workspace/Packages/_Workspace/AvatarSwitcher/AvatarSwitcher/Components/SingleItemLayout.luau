@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 
-return function(p0) --[[ line: 16 | named "SingleItemLayout" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.View, { tag = "size-full-full col" }, {
 		Header = reactModule.createElement(foundationModule.View, {

@@ -14,19 +14,19 @@ local homeConstantsModule = require(home.HomeConstants)
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 
-local function _(p0, p1) --[[ line: 33 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1)
 	return p0[p1] or p0.navigation and p0.navigation.getParam(p1)
 end
 
-return reactModule.memo(function(p2) --[[ line: 37 | named "HomeContentEntryPoint" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: homeConstantsModule (ref), reactModule (ref), sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), responsiveModule (ref), videoUtilsModule (ref), sduiPageEntryPoint (ref), refreshHomePageModule (ref), compositionTags (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local pageTimer = p2.pageTimer or p2.navigation and p2.navigation.getParam("pageTimer")
-	local var9 = reactModule.useMemo(function() --[[ line: 41 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: pageTimer (ref), sduiSharedUtilitiesModule (copy), appPage (copy)
 		return pageTimer or sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(appPage.Home)
 	end, { configKey, pageTimer })
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fetchHomePageModule (copy), var9 (ref)
 		fetchHomePageModule(var9)
 	end, { configKey, var9 })
@@ -34,7 +34,7 @@ return reactModule.memo(function(p2) --[[ line: 37 | named "HomeContentEntryPoin
 	
 	if fFlagLuaAppSduiVideoThumbnail then
 		local var11 = responsiveModule.usePreferredInput() == responsiveModule.Input.Touch
-		var10 = reactModule.useMemo(function() --[[ line: 54 ]]
+		var10 = reactModule.useMemo(function()
 			-- upvalues: videoUtilsModule (copy), var11 (ref)
 			return videoUtilsModule.FeedVideoPlaybackContext.new(var11)
 		end, { var11 })

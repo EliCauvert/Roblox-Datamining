@@ -21,7 +21,7 @@ local t_1 = {
 }
 
 return {
-	reportError = function(p0, p1, p2) --[[ line: 33 ]]
+	reportError = function(p0, p1, p2)
 		-- upvalues: telemetryService (ref), t_1 (ref), t (ref), updateDiscoveryEventErrorDetailsLogging (ref), cryoModule (ref)
 		if not _G.__TESTEZ_RUNNING_TEST__ then
 			warn(`[DiscoveryEventErrorLogger]\nError Type: {p0}\nError Message: {p1}`)

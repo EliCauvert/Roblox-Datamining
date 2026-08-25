@@ -11,15 +11,15 @@ local getInputGroup = inputTypeModule.getInputGroup
 local focusNavigationStore = require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetFocusNavigationStore(false)
 local chatSelectorModule = require(robloxGui.Modules.ChatSelector)
 
-local function _() --[[ line: 22 | named "isUsingGamepad" ]]
+local function _()
 	-- upvalues: getInputGroup (ref), userInputService (ref), inputTypeModule (ref)
 	return getInputGroup(userInputService:GetLastInputType()) == inputTypeModule.InputTypeConstants.Gamepad
 end
 
-return function(_) --[[ line: 27 ]]
+return function(_)
 	-- upvalues: chatSelectorModule (ref), getInputGroup (ref), userInputService (ref), inputTypeModule (ref), focusUtils (ref), fFlagChatIntegrationFixShortcutModule (ref), serviceModule (ref), constantsModule (ref), focusNavigationStore (ref)
 	if chatSelectorModule:GetVisibility() and getInputGroup(userInputService:GetLastInputType()) == inputTypeModule.InputTypeConstants.Gamepad then
-		focusUtils.FocusOffChrome(function() --[[ line: 29 ]]
+		focusUtils.FocusOffChrome(function()
 			-- upvalues: fFlagChatIntegrationFixShortcutModule (copy), serviceModule (copy), constantsModule (copy), focusNavigationStore (copy)
 			if not fFlagChatIntegrationFixShortcutModule then
 				serviceModule:setShortcutBar(constantsModule.UNIBAR_SHORTCUTBAR_ID)

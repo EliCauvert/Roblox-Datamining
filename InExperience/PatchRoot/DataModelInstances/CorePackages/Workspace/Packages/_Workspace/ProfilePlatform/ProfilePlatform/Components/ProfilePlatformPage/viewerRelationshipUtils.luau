@@ -14,21 +14,21 @@ local t = {
 	_ = friendStatusModule.Unknown
 }
 
-local function getViewerRelationshipFromProfileResponse(p0) --[[ line: 19 ]]
+local function getViewerRelationshipFromProfileResponse(p0)
 	-- upvalues: getDeepValueModule (ref), enumsModule (ref)
 	return getDeepValueModule(p0, `responseBody.components.{enumsModule.Components.UserProfileHeader}.viewerRelationship`)
 end
 
-local function getContextualInformationFromProfileResponse(p1) --[[ line: 23 ]]
+local function getContextualInformationFromProfileResponse(p1)
 	-- upvalues: getDeepValueModule (ref), enumsModule (ref)
 	return getDeepValueModule(p1, `responseBody.components.{enumsModule.Components.UserProfileHeader}.contextualInformation`)
 end
 
-local function _(p2) --[[ line: 27 | named "getTrustedFriendStatusString" ]]
+local function _(p2)
 	return if p2 then p2.trustedFriendStatus or nil else nil
 end
 
-local _ = function(p3) --[[ line: 35 | named "mapFriendshipStatusToAnalyticsFriendStatus" ]]
+local _ = function(p3)
 	-- upvalues: t (ref)
 	return t[p3]
 end
@@ -36,13 +36,13 @@ end
 return {
 	getViewerRelationshipFromProfileResponse = getViewerRelationshipFromProfileResponse,
 	getContextualInformationFromProfileResponse = getContextualInformationFromProfileResponse,
-	mapViewerRelationshipAndContextToAnalyticsFriendStatus = function(p4, p5) --[[ line: 39 ]]
+	mapViewerRelationshipAndContextToAnalyticsFriendStatus = function(p4, p5)
 		-- upvalues: enumsModule (ref), friendStatusModule (ref), t (ref)
 		local var7 = if p4 then p4.friendshipStatus else "Invalid"
 		
 		return if p5 and p5.context == enumsModule.ContextualTypes.AccountDeleted and var7 == "Friends" then friendStatusModule.Ineligible else t[var7]
 	end,
-	isViewerTrustedFriendsFromViewerRelationship = function(_) --[[ line: 53 ]]
+	isViewerTrustedFriendsFromViewerRelationship = function(_)
 -- FATAL: Failed to generate AST for `isViewerTrustedFriendsFromViewerRelationship` function:
 runtime : [KeyError] :11990: 31
 Traceback:

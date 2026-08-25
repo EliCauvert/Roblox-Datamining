@@ -13,7 +13,7 @@ local t = {
 	variant = require(foundation.Enums.IndicatorVariant).Success
 }
 
-return reactModule.memo(function(p0) --[[ line: 30 | named "Indicator" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useIndicatorVariantsModule (ref), reactModule (ref), imageModule (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var10 = withDefaultsModule(p0, t)
 	local var11 = useIndicatorVariantsModule(useTokensModule(), var10.shape, var10.variant, var10.size)

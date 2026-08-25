@@ -21,7 +21,7 @@ local progressChecklistModule = require(script.Parent.ProgressChecklist)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local idvWithQRCodeUpsellStrings = require(ampUpsell.Common.LocalizationStrings).idvWithQRCodeUpsellStrings
 
-return function(p0) --[[ line: 43 | named "IDVWithQRCodeUpsell" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), idvWithQRCodeUpsellStrings (ref), useStyle (ref), analyticsServiceModule (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), sendButtonClickEventModule (ref), appScreensModule (ref), styledTextLabel (ref), directionsTileModule (ref), progressChecklistModule (ref), displayQRCode (ref), ECLevels (ref), loading (ref), iconSize (ref), linkButton (ref)
 	local featureName = p0.featureName
 	local qrCodeLink = p0.qrCodeLink
@@ -40,10 +40,10 @@ return function(p0) --[[ line: 43 | named "IDVWithQRCodeUpsell" ]]
 	return reactModule.createElement(partialPageModal, {
 		bottomPadding = 0,
 		title = var10.title,
-		screenSize = useSelector(function(p1) --[[ line: 58 ]]
+		screenSize = useSelector(function(p1)
 			return p1.ScreenSize
 		end),
-		onCloseClicked = function() --[[ line: 65 ]]
+		onCloseClicked = function()
 			-- upvalues: sendButtonClickEventModule (copy), var13 (ref), appScreensModule (copy), featureName (ref), onClose (ref)
 			sendButtonClickEventModule(var13, appScreensModule.IDVWithQRCodeUpsell, featureName, "CloseModal")
 			onClose()
@@ -181,7 +181,7 @@ return function(p0) --[[ line: 43 | named "IDVWithQRCodeUpsell" ]]
 					fontStyle = "CaptionBody",
 					underlineAlwaysEnabled = true,
 					text = var10.privacyLinkText,
-					onActivated = function() --[[ line: 227 ]]
+					onActivated = function()
 						-- upvalues: sendButtonClickEventModule (copy), var13 (ref), appScreensModule (copy), featureName (ref), openPrivacyPolicyLink (ref)
 						sendButtonClickEventModule(var13, appScreensModule.IDVWithQRCodeUpsell, featureName, "OpenPrivacyPolicy")
 						openPrivacyPolicyLink()

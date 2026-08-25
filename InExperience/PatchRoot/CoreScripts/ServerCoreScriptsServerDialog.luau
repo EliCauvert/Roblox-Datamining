@@ -5,7 +5,7 @@ setDialogInUse.Name = "SetDialogInUse"
 setDialogInUse.Parent = robloxReplicatedStorageService
 local t = {}
 
-local function setDialogInUse_1(value, p0, p1) --[[ line: 10 | named "setDialogInUse" ]]
+local function setDialogInUse_1(value, p0, p1)
 	-- upvalues: t (ref)
 	if typeof(p0) ~= "Instance" or not p0:IsA("Dialog") then return end
 	if type(p1) ~= "boolean" then return end
@@ -16,7 +16,7 @@ local function setDialogInUse_1(value, p0, p1) --[[ line: 10 | named "setDialogI
 	end
 end
 
-playersService.PlayerRemoving:Connect(function(p2) --[[ line: 29 ]]
+playersService.PlayerRemoving:Connect(function(p2)
 	-- upvalues: t (ref)
 	local var5 = t[p2]
 	

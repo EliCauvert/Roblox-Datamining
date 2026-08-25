@@ -26,7 +26,7 @@ local fFlagAddIEMProfilePage = sharedFlagsModule.FFlagAddIEMProfilePage
 local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
 local fFlagProfilePlatformEnableSchoolChip = sharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
 
-return function(p0) --[[ line: 46 | named "SocialCountsChipRowContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useAreWebViewsSupportedModule (ref), useLocalUserId (ref), useDynamicSizeMarginModule (ref), fFlagAddIEMProfilePage (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), useSocialCountsDataModule (ref), useSocialCountsActionsModule (ref), fFlagEnableSocialTabsPage (ref), fFlagProfilePlatformEnableSchoolChip (ref), useSchoolChipModule (ref), reactModule (ref), enumsModule (ref), chipSize (ref), chipGroup (ref)
 	local var14 = useProfileWrapperContextModule()
 	local var15 = useProfileAnalyticsContextModule()
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 46 | named "SocialCountsChipRowContainer" ]]
 		}),
 		ChipGroup = reactModule.createElement(chipGroup, {
 			scrollingEnabledOverride = true,
-			chips = reactModule.useMemo(function() --[[ line: 99 ]]
+			chips = reactModule.useMemo(function()
 				-- upvalues: fFlagAddIEMProfilePage (copy), var20 (ref), enumsModule (copy), fFlagProfilePlatformEnableSchoolChip (copy), var27 (write), var25 (ref), var26 (ref), chipSize (copy)
 				local t = {}
 				

@@ -3,17 +3,17 @@ local reactModule = require(mediaGallery.Parent.React)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 local useGuiObjectVisibilityModule = require(mediaGallery.Hooks.useGuiObjectVisibility)
 
-return function(p0) --[[ line: 39 | named "useAutoAdvance" ]]
+return function(p0)
 	-- upvalues: mediaGalleryConstantsModule (ref), reactModule (ref), useGuiObjectVisibilityModule (ref)
 	local intervalSeconds = p0.intervalSeconds or mediaGalleryConstantsModule.AUTO_ADVANCE_DURATION_SECONDS
 	local var5, var6 = reactModule.useBinding(0)
 	local var7, var8 = reactModule.useBinding(0)
-	local var9 = reactModule.useCallback(function() --[[ line: 45 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), var8 (ref)
 		var6(0)
 		var8(0)
 	end, {})
-	local var10 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.enabled then
 			p0.scrollRight()
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 39 | named "useAutoAdvance" ]]
 			return
 		end
 	end, { p0.enabled, p0.scrollRight })
-	useGuiObjectVisibilityModule(p0.galleryRef, p0.enabled and (not p0.isMediaGalleryOccluded and not p0.isAutoAdvanceTimerSuspended), reactModule.useCallback(function(p1) --[[ line: 57 ]]
+	useGuiObjectVisibilityModule(p0.galleryRef, p0.enabled and (not p0.isMediaGalleryOccluded and not p0.isAutoAdvanceTimerSuspended), reactModule.useCallback(function(p1)
 		-- upvalues: var5 (ref), intervalSeconds (ref), var6 (ref), var8 (ref), p0 (ref)
 		local var11 = var5:getValue() + p1
 		

@@ -6,10 +6,10 @@ local getNamedType = definitionModule.getNamedType
 local isLeafType = definitionModule.isLeafType
 
 return {
-	ScalarLeafsRule = function(p0) --[[ line: 25 ]]
+	ScalarLeafsRule = function(p0)
 		-- upvalues: isLeafType (ref), getNamedType (ref), inspect (ref), graphQLError (ref)
 		return {
-			Field = function(_, p1) --[[ line: 27 ]]
+			Field = function(_, p1)
 				-- upvalues: p0 (ref), isLeafType (copy), getNamedType (copy), inspect (copy), graphQLError (copy)
 				local type = p0:getType()
 				local selectionSet = p1.selectionSet

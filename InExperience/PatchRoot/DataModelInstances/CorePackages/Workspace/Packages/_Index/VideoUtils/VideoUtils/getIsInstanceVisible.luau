@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 1 | named "getIsInstanceVisible" ]]
+﻿return function(p0, p1, p2)
 	if not p0 then
 		return false
 	end

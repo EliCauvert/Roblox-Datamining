@@ -6,7 +6,7 @@ local feedbackAlert = foundationModule.FeedbackAlert
 local alertSeverity = foundationModule.Enums.AlertSeverity
 local t = { message = "Feature.InExperienceShop.Label.PreviewBanner" }
 
-return function(p0) --[[ line: 19 | named "CreatorEarlyAccessBanner" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), feedbackAlert (ref), alertSeverity (ref)
 	return reactModule.createElement(feedbackAlert, {
 		testId = "CreatorEarlyAccessBanner",

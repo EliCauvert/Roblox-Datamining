@@ -9,7 +9,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local useClock = reactUtilsModule.useClock
 local color3 = Color3.new(1, 1, 1)
 
-local function generateShimmerGradient(p0) --[[ line: 37 ]]
+local function generateShimmerGradient(p0)
 	local var5 = p0:Lerp(Color3.new(0, 0, 0), 0.2)
 	
 	return ColorSequence.new({
@@ -21,7 +21,7 @@ local function generateShimmerGradient(p0) --[[ line: 37 ]]
 	})
 end
 
-return function(p1) --[[ line: 50 | named "useShimmerText" ]]
+return function(p1)
 	-- upvalues: usePreferences (ref), useTokens (ref), useClock (ref), usePulseBinding (ref), reactModule (ref), generateShimmerGradient (ref), color3 (ref)
 	local var6 = usePreferences()
 	local var7 = useTokens()
@@ -36,7 +36,7 @@ return function(p1) --[[ line: 50 | named "useShimmerText" ]]
 	
 	return if p1.isShimmerEnabled == false then { children = p1.children, textStyle = p1.textStyle } elseif var6.reducedMotion then {
 		children = p1.children,
-		textStyle = var9:map(function(p3) --[[ line: 81 ]]
+		textStyle = var9:map(function(p3)
 			-- upvalues: color3_1 (ref), transparency (ref)
 			return {
 				Color3 = color3_1,
@@ -48,11 +48,11 @@ return function(p1) --[[ line: 50 | named "useShimmerText" ]]
 			Content = reactModule.createElement(reactModule.Fragment, nil, p1.children),
 			ShimmerGradient = reactModule.createElement("UIGradient", {
 				Rotation = 15,
-				Color = reactModule.useMemo(function() --[[ line: 67 ]]
+				Color = reactModule.useMemo(function()
 					-- upvalues: generateShimmerGradient (copy), color3_1 (ref)
 					return generateShimmerGradient(color3_1)
 				end, { color3_1 }),
-				Offset = var8:map(function(p2) --[[ line: 95 ]]
+				Offset = var8:map(function(p2)
 					-- upvalues: var10 (ref), var11 (ref)
 					return Vector2.new(p2 * var10 % var11 - var11 / 2, 0)
 				end)

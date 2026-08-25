@@ -1,4 +1,4 @@
-﻿local function prettyPrint(p0, p1) --[[ line: 3 ]]
+﻿local function prettyPrint(p0, p1)
 	-- upvalues: prettyPrint (ref)
 	p1 = p1 or 0
 	local t = {}

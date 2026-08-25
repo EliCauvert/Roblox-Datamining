@@ -1,11 +1,11 @@
 ﻿local diagnosticsModule = require(script:FindFirstAncestor("ViewRecycler").Core.Diagnostics)
 local frozen = table.freeze({})
 
-local function _(a) --[[ line: 65 | named "validMaximum" ]]
+local function _(a)
 	return if a ~= nil then a >= 0 and a % 1 == 0 else true
 end
 
-local _ = function(p0, p1, p2, p3, p4, p5) --[[ line: 69 | named "appendChange" ]]
+local _ = function(p0, p1, p2, p3, p4, p5)
 	table.insert(p0, {
 		p1,
 		p2,
@@ -15,7 +15,7 @@ local _ = function(p0, p1, p2, p3, p4, p5) --[[ line: 69 | named "appendChange" 
 	})
 end
 
-return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
+return function(p6)
 	-- upvalues: frozen (ref), diagnosticsModule (ref)
 	local maxPoolSize = p6.maxPoolSize
 	assert(if maxPoolSize ~= nil then maxPoolSize >= 0 and maxPoolSize % 1 == 0 else true, "RecyclingScope: maxPoolSize must be a non-negative integer")
@@ -28,11 +28,11 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 	local var6 = 1
 	local var7 = false
 	local var8 = false
-	local batch = adapter.batch or function(p7) --[[ line: 84 ]]
+	local batch = adapter.batch or function(p7)
 		p7()
 	end
 	
-	local function poolFor(p8) --[[ line: 88 ]]
+	local function poolFor(p8)
 		-- upvalues: t (ref)
 		local var13 = t[p8]
 		
@@ -43,7 +43,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 		return var13
 	end
 	
-	local function _(p9) --[[ line: 97 | named "removeInventory" ]]
+	local function _(p9)
 		-- upvalues: t_1 (ref), t_2 (ref)
 		local var14 = t_1[p9]
 		local t_2Count = #t_2
@@ -57,7 +57,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 		t_1[p9] = nil
 	end
 	
-	local function notify(p10, p11, p12, p13, p14) --[[ line: 110 ]]
+	local function notify(p10, p11, p12, p13, p14)
 		-- upvalues: p6 (ref)
 		if p6.onPoolChanged ~= nil then
 			p6.onPoolChanged({
@@ -70,7 +70,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 		end
 	end
 	
-	local function evictExcess() --[[ line: 314 ]]
+	local function evictExcess()
 		-- upvalues: t (ref), maxPoolSize_1 (write), t_1 (ref), t_2 (ref), diagnosticsModule (copy), p6 (ref), adapter (ref)
 		local t_3 = {}
 		local t_4 = {}
@@ -114,7 +114,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 	end
 	
 	return {
-		exchange = function(p15, p16, p17) --[[ line: 122 ]]
+		exchange = function(p15, p16, p17)
 			-- upvalues: var7 (write), var8 (write), var6 (write), t_1 (ref), p6 (ref), frozen (copy), t (ref), maxPoolSize_1 (write), t_2 (ref), batch (ref), adapter (ref), diagnosticsModule (copy), poolFor (ref), var5 (write)
 			assert(not var7, "RecyclingScope: cannot exchange after destruction")
 			assert(not var8, "RecyclingScope: cannot mutate during an exchange")
@@ -159,7 +159,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 					end
 				end
 				var8 = false
-				batch(function() --[[ line: 167 ]]
+				batch(function()
 					-- upvalues: t_4 (ref), adapter (copy)
 					for i, v in t_4 do
 						adapter.destroy(v)
@@ -191,7 +191,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 				local t_4 = {}
 				local var32 = if var30 == nil then nil else {}
 				local var33 = if var32 == nil then frozen else {}
-				local ok, status = pcall(function() --[[ line: 197 ]]
+				local ok, status = pcall(function()
 					-- upvalues: p17 (ref), var30 (ref), var32 (ref), var33 (ref), t_3 (ref), adapter (copy), t_1 (copy), var23 (ref), t_4 (ref)
 					for i, v in p17 do
 						local var46 = if var30 == nil then nil else var30[v.viewType]
@@ -328,7 +328,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 					end
 				end
 				var8 = false
-				batch(function() --[[ line: 301 ]]
+				batch(function()
 					-- upvalues: var36 (ref), p6 (copy), t_6 (ref), adapter (copy)
 					if var36 ~= nil then
 						for i, v in var36 do
@@ -358,24 +358,24 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 			end
 		end,
 		batch = batch,
-		isLeaseCurrent = function(p18, p19, p20) --[[ line: 338 ]]
+		isLeaseCurrent = function(p18, p19, p20)
 			-- upvalues: t_1 (ref), var7 (write)
 			local var55 = t_1[p19]
 			
 			return not var7 and (var55 ~= nil and (var55.owner == p18 and var55.leaseToken == p20))
 		end,
-		setMaxPoolSize = function(a) --[[ line: 342 ]]
+		setMaxPoolSize = function(a)
 			-- upvalues: var7 (write), var8 (write), maxPoolSize_1 (write), evictExcess (ref)
 			assert(not var7 and not var8, "RecyclingScope: cannot set capacity now")
 			assert(if a ~= nil then a >= 0 and a % 1 == 0 else true, "RecyclingScope: maxPoolSize must be a non-negative integer")
 			maxPoolSize_1 = a
 			evictExcess()
 		end,
-		getScopeInventory = function() --[[ line: 348 ]]
+		getScopeInventory = function()
 			-- upvalues: t_2 (ref)
 			return table.clone(t_2)
 		end,
-		getVacantRecords = function() --[[ line: 351 ]]
+		getVacantRecords = function()
 			-- upvalues: t (ref)
 			local t_1 = {}
 			
@@ -386,7 +386,7 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 			end
 			return t_1
 		end,
-		destroy = function() --[[ line: 360 ]]
+		destroy = function()
 			-- upvalues: var7 (write), var8 (write), t_2 (ref), p6 (ref), t_1 (ref), t (ref), batch (ref), notify (ref), diagnosticsModule (copy), adapter (ref)
 			if var7 then return end
 			assert(not var8, "RecyclingScope: cannot destroy during an exchange")
@@ -405,14 +405,14 @@ return function(p6) --[[ line: 73 | named "createRecyclingScope" ]]
 			table.clear(t)
 			local var60 = nil
 			
-			local function _(p21, p22) --[[ line: 384 | named "captureFailure" ]]
+			local function _(p21, p22)
 				-- upvalues: var60 (write)
 				if not p21 and var60 == nil then
 					var60 = p22
 				end
 			end
 			
-			batch(function() --[[ line: 389 ]]
+			batch(function()
 				-- upvalues: cloned (ref), var58 (ref), notify (copy), diagnosticsModule (copy), var60 (write), adapter (copy)
 				for i, v in cloned do
 					if var58 ~= nil then

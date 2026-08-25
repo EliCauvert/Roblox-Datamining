@@ -11,14 +11,14 @@ local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
 local shareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
 local shareSendRowModule = require(script.Parent.ShareSendRow)
 
-local function setContentScrollingFrameRef(value) --[[ line: 37 ]]
+local function setContentScrollingFrameRef(value)
 	if value then
 		value.AutomaticSize = Enum.AutomaticSize.Y
 		value.ScrollBarThickness = 0
 	end
 end
 
-return function(p0) --[[ line: 44 | named "ShareSheetView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), sheet (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetActionRowModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,

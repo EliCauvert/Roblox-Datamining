@@ -1,10 +1,10 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-local function _(p0) --[[ line: 16 | named "computeChannelId" ]]
+local function _(p0)
 	return if p0 then if game:GetEngineFeature("VoiceChatServiceExposesChannelId") and p0.service then tostring(p0.service:GetChannelId()) elseif p0.service then tostring(p0.service:GetGroupId()) else "" else ""
 end
 
-local function buildState(p1) --[[ line: 28 ]]
+local function buildState(p1)
 	local t = {}
 	
 	if p1 and p1.participants then
@@ -25,19 +25,19 @@ local function buildState(p1) --[[ line: 28 ]]
 end
 
 return {
-	useVoiceSnapshot = function(p2) --[[ line: 53 ]]
+	useVoiceSnapshot = function(p2)
 		-- upvalues: reactModule (ref), buildState (ref)
 		local var4 = reactModule.useRef(buildState(p2))
-		reactModule.useEffect(function() --[[ line: 56 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p2 (ref), var4 (ref), buildState (copy)
 			if p2 then
 				var4.current = buildState(p2)
-				local eventConnection = p2.participantsUpdate.Event:Connect(function() --[[ line: 63 ]]
+				local eventConnection = p2.participantsUpdate.Event:Connect(function()
 					-- upvalues: var4 (copy), buildState (copy), p2 (copy)
 					var4.current = buildState(p2)
 				end)
 				
-				return function() --[[ line: 67 ]]
+				return function()
 					-- upvalues: eventConnection (ref)
 					eventConnection:Disconnect()
 				end

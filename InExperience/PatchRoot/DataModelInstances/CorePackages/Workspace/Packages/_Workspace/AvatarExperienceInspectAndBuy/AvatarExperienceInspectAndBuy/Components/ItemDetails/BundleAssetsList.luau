@@ -11,7 +11,7 @@ local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 local getItemWidth = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getItemWidth
 
-return function(value) --[[ line: 44 | named "BundleAssetsList" ]]
+return function(value)
 	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), itemCard (ref), getItemWidth (ref), itemCardHeader (ref), itemCardThumbnail (ref), foundationModule (ref)
 	local var5 = useTokens()
 	local itemData = value.itemData
@@ -24,7 +24,7 @@ return function(value) --[[ line: 44 | named "BundleAssetsList" ]]
 	if itemData.assetsInBundle then
 		for i, v in itemData.assetsInBundle do
 			t["AssetItemCard" .. i] = reactModule.createElement(itemCard, {
-				Size = var8:map(function(p0) --[[ line: 57 ]]
+				Size = var8:map(function(p0)
 					-- upvalues: getItemWidth (copy), var11 (ref), var5 (ref)
 					return UDim2.new(0, getItemWidth(p0.X, var11, var5.Gap.Medium), 1, 0)
 				end),
@@ -43,7 +43,7 @@ return function(value) --[[ line: 44 | named "BundleAssetsList" ]]
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-y size-full-0 col align-x-left align-y-top gap-small",
 		LayoutOrder = value.LayoutOrder or 5,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p1) --[[ line: 81 ]]
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
 			-- upvalues: var9 (ref)
 			var9(p1.AbsoluteSize)
 		end, {})

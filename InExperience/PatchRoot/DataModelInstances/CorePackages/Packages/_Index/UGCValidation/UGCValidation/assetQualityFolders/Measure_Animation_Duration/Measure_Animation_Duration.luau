@@ -10,11 +10,11 @@ local getFStringUGCValidationMaxAnimationLengthModule = require(parent.flags.Get
 
 return {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION },
-	fflag = function() --[[ line: 15 ]]
+	fflag = function()
 		-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), getFFlagUGCValidateAQEmoteDurationModule (ref)
 		return getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and getFFlagUGCValidateAQEmoteDurationModule()
 	end,
-	run = function(p0, p1) --[[ line: 22 ]]
+	run = function(p0, p1)
 		-- upvalues: getAQEmotePartDataModule (ref), getFStringUGCValidateCurveAnimationMinLengthModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), errorSourceStringsModule (ref)
 		local var7 = getAQEmotePartDataModule(p1.aqsSummaryData and p1.aqsSummaryData.Measure_Animation_Duration)
 		

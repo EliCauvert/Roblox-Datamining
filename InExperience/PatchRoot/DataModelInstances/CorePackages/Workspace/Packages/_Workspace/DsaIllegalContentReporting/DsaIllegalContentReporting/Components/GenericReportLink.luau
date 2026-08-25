@@ -12,7 +12,7 @@ local view = foundationModule.View
 local genericReportLink = game:DefineFastString("GenericReportLink", "https://www.roblox.com/illegal-content-reporting")
 local improveIllegalContentReportingLinkLook = game:DefineFastFlag("ImproveIllegalContentReportingLinkLook", false)
 
-function GenericReportLink() --[[ line: 22 ]]
+function GenericReportLink()
 	-- upvalues: improveIllegalContentReportingLinkLook (ref), reactModule (ref), useLocalization (ref), getIconRichText (ref), iconName (ref), default (ref), genericReportLink (ref), controlState (ref), view (ref), text (ref)
 	local var5 = nil
 	local var6 = nil
@@ -32,11 +32,11 @@ function GenericReportLink() --[[ line: 22 ]]
 			RichText = true,
 			tag = "auto-xy radius-small padding-xsmall text-wrap text-body-small",
 			Text = if improveIllegalContentReportingLinkLook then if var5 then `<u>{var10}</u>` else var10 else `<b>{var9.GenericReportLinkText}</b>`,
-			onActivated = reactModule.useCallback(function() --[[ line: 39 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: default (copy), genericReportLink (copy)
 				default:openURL(genericReportLink)
 			end, {}),
-			onStateChanged = if improveIllegalContentReportingLinkLook then if improveIllegalContentReportingLinkLook then reactModule.useCallback(function(p0) --[[ line: 45 ]]
+			onStateChanged = if improveIllegalContentReportingLinkLook then if improveIllegalContentReportingLinkLook then reactModule.useCallback(function(p0)
 				-- upvalues: var6 (write), controlState (copy)
 				var6(p0 == controlState.Hover)
 			end, {}) else nil else nil

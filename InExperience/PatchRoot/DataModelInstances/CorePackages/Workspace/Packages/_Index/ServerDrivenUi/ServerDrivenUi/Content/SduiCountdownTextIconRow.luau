@@ -6,7 +6,7 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local sduiTextIconRowModule = require(serverDrivenUi.Content.SduiTextIconRow)
 local useCountdownSubtitleTextBinding = require(parent.GameCollections).useCountdownSubtitleTextBinding
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "SduiCountdownTextIconRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useCountdownSubtitleTextBinding (ref), reactModule (ref), sduiTextIconRowModule (ref), cryoModule (ref)
 	local var4 = useTokens()
 	local textColor = p0.textColor or var4.Color.Content.Default.Color3

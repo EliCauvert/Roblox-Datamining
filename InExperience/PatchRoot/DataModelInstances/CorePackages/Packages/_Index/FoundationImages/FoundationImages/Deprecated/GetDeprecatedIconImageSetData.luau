@@ -1,6 +1,6 @@
 ﻿local var0 = nil
 
-function make_assets_1x() --[[ line: 7 ]]
+function make_assets_1x()
 	-- upvalues: var0 (write)
 	var0 = {
 		["icons/actions/accept"] = {
@@ -3723,7 +3723,7 @@ end
 
 local var1 = nil
 
-function make_assets_2x() --[[ line: 756 ]]
+function make_assets_2x()
 	-- upvalues: var1 (write)
 	var1 = {
 		["icons/actions/accept"] = {
@@ -7446,7 +7446,7 @@ end
 
 local var2 = nil
 
-function make_assets_3x() --[[ line: 1505 ]]
+function make_assets_3x()
 	-- upvalues: var2 (write)
 	var2 = {
 		["icons/actions/accept"] = {
@@ -11167,7 +11167,7 @@ function make_assets_3x() --[[ line: 1505 ]]
 	}
 end
 
-return function(p0) --[[ line: 2253 ]]
+return function(p0)
 	-- upvalues: var2 (write), var1 (write), var0 (write)
 	if p0 > 2.5 then
 		if not var2 then

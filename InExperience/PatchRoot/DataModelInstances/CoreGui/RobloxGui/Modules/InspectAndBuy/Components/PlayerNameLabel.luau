@@ -12,7 +12,7 @@ local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContex
 local playerNameLabel = roactModule.PureComponent:extend("PlayerNameLabel")
 local verified = verifiedBadgesModule.emoji.verified
 
-function playerNameLabel.render(p0) --[[ line: 21 ]]
+function playerNameLabel.render(p0)
 	-- upvalues: playersService (ref), userLibModule (ref), robloxTranslatorModule (ref), verified (ref), roactModule (ref), inspectAndBuyContextModule (ref), colorsModule (ref), appFonts (ref)
 	local locale = p0.props.locale
 	local view = p0.props.view
@@ -22,7 +22,7 @@ function playerNameLabel.render(p0) --[[ line: 21 ]]
 	local var12 = if playerName == "" then "" elseif if var11 then userLibModule.Utils.isPlayerVerified(var11) else false then robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.VerifiedAvatar", locale, { PLAYER_NAME = playerName, VERIFIED_BADGE = verified }) else robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.Avatar", locale, { PLAYER_NAME = playerName })
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p1) --[[ line: 43 ]]
+		render = function(p1)
 			-- upvalues: view (ref), roactModule (copy), colorsModule (copy), var12 (write), appFonts (copy)
 			local var13 = p1[view]
 			
@@ -43,7 +43,7 @@ function playerNameLabel.render(p0) --[[ line: 21 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ line: 66 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
 	return {
 		view = p2.view,
 		playerName = p2.playerName,

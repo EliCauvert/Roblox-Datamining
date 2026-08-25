@@ -7,7 +7,7 @@ local useLayoutValuesModule = require(parent.Common.useLayoutValues)
 local fFlagRemoveNewPlayerListOverlayModule = require(parent.Flags.FFlagRemoveNewPlayerListOverlay)
 local fFlagEnableMobilePlayerListOnConsoleModule = require(parent.Flags.FFlagEnableMobilePlayerListOnConsole)
 
-return reactModule.memo(function(p0) --[[ line: 36 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useStyle (ref), useLayoutValuesModule (ref), fFlagEnableMobilePlayerListOnConsoleModule (ref), reactModule (ref), formatStatStringModule (ref), fFlagRemoveNewPlayerListOverlayModule (ref)
 	local font, var11
 	local var5 = useStyle()
@@ -28,11 +28,11 @@ return reactModule.memo(function(p0) --[[ line: 36 ]]
 		font = var5.Font.CaptionHeader.Font
 		var11 = if fFlagEnableMobilePlayerListOnConsoleModule then var6.StatTextSize else var5.Font.CaptionHeader.RelativeSize * var5.Font.BaseSize
 	end
-	local var12 = reactModule.useMemo(function() --[[ line: 63 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), formatStatStringModule (copy), font (write), var11 (write), var7 (ref), var8 (ref), var9 (ref), var10 (ref)
 		return {
 			BackgroundTransparency = 1,
-			Text = p0.statValue:map(function(p1) --[[ line: 65 ]]
+			Text = p0.statValue:map(function(p1)
 				-- upvalues: formatStatStringModule (copy)
 				return formatStatStringModule(p1)
 			end),

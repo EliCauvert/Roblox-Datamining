@@ -27,11 +27,11 @@ local var10 = urlBuilder.new({
 	base = urlBase.APIS
 })()
 
-local function _(p0) --[[ line: 46 | named "getHttpStatusFromWrappedNetworkingError" ]]
+local function _(p0)
 	return if type(p0) == "table" then p0.StatusCode or (p0.responseCode or (p0.status or p0.statusCode)) else nil
 end
 
-local _ = function(p1) --[[ line: 59 | named "maybeShowAgeVerificationFeatureRestriction" ]]
+local _ = function(p1)
 	-- upvalues: fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
 	if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and p1 == 403 then
 		showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
@@ -40,12 +40,12 @@ local _ = function(p1) --[[ line: 59 | named "maybeShowAgeVerificationFeatureRes
 	end
 end
 
-local function startVerification(p2, p3) --[[ line: 152 ]]
+local function startVerification(p2, p3)
 	-- upvalues: var9 (ref), var10 (ref), fetch (ref), promiseModule (ref), httpService (ref), cryoModule (ref), response (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
 	p3 = p3 or var9()
 	local var13 = p3 ~= var10
 	
-	return promiseModule.new(function(p4, p5) --[[ line: 157 ]]
+	return promiseModule.new(function(p4, p5)
 		-- upvalues: fetch (ref), p3 (ref), httpService (copy), cryoModule (copy), p2 (ref), response (copy), var13 (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
 		local var14 = fetch(p3, {
 			method = "POST",
@@ -54,13 +54,13 @@ local function startVerification(p2, p3) --[[ line: 152 ]]
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):catch(function() --[[ line: 166 ]]
+		}):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
 		
 		if var14.ok then
-			local var15 = var14:json():catch(function() --[[ line: 182 ]]
+			local var15 = var14:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -89,19 +89,19 @@ end
 
 return {
 	startVerification = startVerification,
-	startVerificationWithWrappedNetworking = function(p6, p7) --[[ line: 114 ]]
+	startVerificationWithWrappedNetworking = function(p6, p7)
 		-- upvalues: promiseModule (ref), var9 (ref), cryoModule (ref), httpService (ref), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (ref), showFeatureRestriction (ref), abuseVector (ref), buildAgeVerificationFeatureRestrictionOverridesModule (ref)
-		return promiseModule.new(function(p8, p9) --[[ line: 115 ]]
+		return promiseModule.new(function(p8, p9)
 			-- upvalues: var9 (copy), cryoModule (copy), p7 (ref), p6 (ref), httpService (copy), fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy)
 			p6(var9(), "POST", {
 				postBody = httpService:JSONEncode(cryoModule.Dictionary.join({ generatedLink = true }, p7 or {}))
-			}):catch(function(p11) --[[ line: 123 ]]
+			}):catch(function(p11)
 				-- upvalues: fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule (copy), showFeatureRestriction (copy), abuseVector (copy), buildAgeVerificationFeatureRestrictionOverridesModule (copy), p9 (ref)
 				if fFlagEnableFeatureRestrictionOnAgeVerificationAttemptModule and (if type(p11) == "table" then p11.StatusCode or (p11.responseCode or (p11.status or p11.statusCode)) else nil) == 403 then
 					showFeatureRestriction(abuseVector.AgeVerification, buildAgeVerificationFeatureRestrictionOverridesModule())
 				end
 				p9("Got error on start-verificatin")
-			end):andThen(function(p10) --[[ line: 129 ]]
+			end):andThen(function(p10)
 				-- upvalues: p9 (ref), p8 (ref)
 				if not p10 or not p10[1] then
 					p9("Got start-verification HTTP with no valid response")
@@ -125,15 +125,15 @@ return {
 			end)
 		end)
 	end,
-	startLivenessVerification = function(p12) --[[ line: 203 ]]
+	startLivenessVerification = function(p12)
 		-- upvalues: startVerification (ref), var10 (ref)
 		return startVerification(p12, var10)
 	end,
-	getVerifiedStatus = function(p13) --[[ line: 71 ]]
+	getVerifiedStatus = function(p13)
 		-- upvalues: fetch (ref), promiseModule (ref), var8 (ref), response (ref)
-		return promiseModule.new(function(p14, p15) --[[ line: 73 ]]
+		return promiseModule.new(function(p14, p15)
 			-- upvalues: var8 (copy), p13 (ref), fetch (ref), response (copy)
-			local var17 = fetch(var8({ token = p13 }), { method = "GET" }):catch(function() --[[ line: 76 ]]
+			local var17 = fetch(var8({ token = p13 }), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
@@ -143,7 +143,7 @@ return {
 				
 				return
 			end
-			local var18 = var17:json():catch(function() --[[ line: 90 ]]
+			local var18 = var17:json():catch(function()
 				return nil
 			end):expect()
 			

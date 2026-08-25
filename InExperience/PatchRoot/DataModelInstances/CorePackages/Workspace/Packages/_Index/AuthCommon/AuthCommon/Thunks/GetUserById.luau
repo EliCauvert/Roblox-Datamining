@@ -2,9 +2,9 @@
 local promiseModule = require(authCommon.Parent.Promise)
 local getUserByIdRequestModule = require(authCommon.Http.Requests.GetUserByIdRequest)
 
-return function(p0, p1) --[[ line: 7 ]]
+return function(p0, p1)
 	-- upvalues: getUserByIdRequestModule (ref), promiseModule (ref)
-	return getUserByIdRequestModule(p0, p1):andThen(function(p2) --[[ line: 8 ]]
+	return getUserByIdRequestModule(p0, p1):andThen(function(p2)
 		-- upvalues: promiseModule (copy)
 		if not p2 or not p2.responseBody then
 			return promiseModule.reject()

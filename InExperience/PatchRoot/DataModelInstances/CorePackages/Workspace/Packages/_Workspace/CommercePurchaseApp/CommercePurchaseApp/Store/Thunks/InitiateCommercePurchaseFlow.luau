@@ -10,12 +10,12 @@ local toastRoduxModule = require(commercePurchaseApp.Parent.ToastRodux)
 local toastType = toastRoduxModule.Enums.ToastType
 local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 
-local function convertErrorMessageToErrorCode(p0) --[[ line: 16 ]]
+local function convertErrorMessageToErrorCode(p0)
 	-- upvalues: fFlagAddCommerceErrorsModule (ref), errorCodeEnumModule (ref)
 	return if fFlagAddCommerceErrorsModule then if p0 == "DeviceTypeNotAllowed" or p0 == "PurchasePlatformNotSupported" then errorCodeEnumModule.DeviceNotSupported elseif p0 == "UniverseNotAllowed" or p0 == "ProductContentModerated" or p0 == "ProductNotFound" then errorCodeEnumModule.NotPurchasable elseif p0 == "UserNotAllowed" or p0 == "AccountCountryNotSupported" or p0 == "UserAgeNotAllowed" then errorCodeEnumModule.AccountNotSupported else errorCodeEnumModule.Generic elseif p0 == "NotPurchasable" then errorCodeEnumModule.NotPurchasable else errorCodeEnumModule.Generic
 end
 
-local function handleError(p1, p2, p3) --[[ line: 44 ]]
+local function handleError(p1, p2, p3)
 	-- upvalues: convertErrorMessageToErrorCode (ref), errorCodeEnumModule (ref), setCurrentToastMessage (ref), toastType (ref), commercePurchaseEndedModule (ref), commercePurchaseFailedModule (ref)
 	local var11 = convertErrorMessageToErrorCode(p1)
 	
@@ -28,12 +28,12 @@ local function handleError(p1, p2, p3) --[[ line: 44 ]]
 	p2:dispatch(commercePurchaseFailedModule(var11))
 end
 
-return function(p4, p5) --[[ line: 58 | named "InitiateCommercePurchaseFlow" ]]
+return function(p4, p5)
 	-- upvalues: commercePurchaseStartedModule (ref), commerceService (ref), commercePurchaseCheckoutModule (ref), handleError (ref)
-	return function(p6) --[[ line: 59 ]]
+	return function(p6)
 		-- upvalues: commercePurchaseStartedModule (copy), p4 (ref), commerceService (copy), commercePurchaseCheckoutModule (copy), handleError (copy), p5 (ref)
 		p6:dispatch(commercePurchaseStartedModule(p4))
-		local ok, status = pcall(function() --[[ line: 61 ]]
+		local ok, status = pcall(function()
 			-- upvalues: commerceService (copy), p4 (copy)
 			return commerceService:PrepareCommerceProductPurchase(p4)
 		end)

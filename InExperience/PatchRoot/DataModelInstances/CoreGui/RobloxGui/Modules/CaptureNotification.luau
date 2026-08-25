@@ -25,7 +25,7 @@ captureNotification.validateProps = tModule.strictInterface({
 	permissionEvent = tModule.optional(tModule.instanceOf("BindableEvent"))
 })
 
-function captureNotification.init(p0) --[[ line: 40 ]]
+function captureNotification.init(p0)
 	-- upvalues: images (ref), robloxTranslatorModule (ref), roactModule (ref), userInputService (ref)
 	p0.state = {
 		dismissedPermission = false,
@@ -34,14 +34,14 @@ function captureNotification.init(p0) --[[ line: 40 ]]
 		screenSize = Vector2.new(0, 0)
 	}
 	
-	function p0.onScreenSizeChanged(p1) --[[ line: 48 ]]
+	function p0.onScreenSizeChanged(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.screenSize ~= p1.AbsoluteSize then
 			p0:setState({ screenSize = p1.AbsoluteSize })
 		end
 	end
 	
-	function p0.getToastContent(p2) --[[ line: 56 ]]
+	function p0.getToastContent(p2)
 		-- upvalues: images (copy), robloxTranslatorModule (copy), p0 (ref), roactModule (copy)
 		if p2 == "Success" or p2 == "Fail" then
 			local isSuccess = p2 == "Success"
@@ -50,7 +50,7 @@ function captureNotification.init(p0) --[[ line: 40 ]]
 				iconImage = if isSuccess then images["icons/status/success"] else images["icons/status/alert"],
 				iconColorStyle = if not isSuccess then { Transparency = 0, Color = Color3.fromRGB(247, 75, 82) } else nil,
 				toastTitle = isSuccess and robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Success.ToastText") or robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Fail.ToastText"),
-				onDismissed = function() --[[ line: 68 ]]
+				onDismissed = function()
 					-- upvalues: p0 (copy), roactModule (copy)
 					p0:setState({
 						notificationType = "None",
@@ -66,7 +66,7 @@ function captureNotification.init(p0) --[[ line: 40 ]]
 		return roactModule.None
 	end
 	
-	function p0.dismissPermissionAlert() --[[ line: 83 ]]
+	function p0.dismissPermissionAlert()
 		-- upvalues: p0 (ref)
 		p0:setState({
 			dismissedPermission = true,
@@ -75,7 +75,7 @@ function captureNotification.init(p0) --[[ line: 40 ]]
 		})
 	end
 	
-	function p0.screenshotSavedToAlbumCallback(_, p3, p4) --[[ line: 91 ]]
+	function p0.screenshotSavedToAlbumCallback(_, p3, p4)
 		-- upvalues: p0 (ref)
 		local _ = nil
 		local var12 = if p3 then "Success" elseif p0.state.dismissedPermission or not p4:find("Domain=ALAssetsLibraryErrorDomain") or not p4:find("Data unavailable") then "Fail" else "Permission"
@@ -85,7 +85,7 @@ function captureNotification.init(p0) --[[ line: 40 ]]
 		})
 	end
 	
-	function p0.permissionEventCallback() --[[ line: 116 ]]
+	function p0.permissionEventCallback()
 		-- upvalues: p0 (ref)
 		p0:setState({
 			notificationType = "Permission",
@@ -93,18 +93,18 @@ function captureNotification.init(p0) --[[ line: 40 ]]
 		})
 	end
 	
-	function p0.getPermissionAlertBodyText() --[[ line: 123 ]]
+	function p0.getPermissionAlertBodyText()
 		-- upvalues: userInputService (copy), robloxTranslatorModule (copy)
 		return if userInputService:GetPlatform() == Enum.Platform.IOS then robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Permission.AlertTextIOS") elseif userInputService:GetPlatform() == Enum.Platform.Android then robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Permission.AlertTextAndroid") else robloxTranslatorModule:FormatByKey("InGame.NotificationScript2.Capture.Permission.AlertText")
 	end
 end
 
-function captureNotification.renderWithStyle(_, p5) --[[ line: 134 ]]
+function captureNotification.renderWithStyle(_, p5)
 	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref)
 	return renderWithCoreScriptsStyleProviderModule(p5)
 end
 
-function captureNotification.render(p6) --[[ line: 138 ]]
+function captureNotification.render(p6)
 	-- upvalues: roactModule (ref), toast (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref), shouldSaveScreenshotToAlbumModule (ref), externalEventConnection (ref)
 	local notificationType = p6.state.notificationType
 	
@@ -168,7 +168,7 @@ function captureNotification.render(p6) --[[ line: 138 ]]
 	})
 end
 
-function captureNotification.didUpdate(p7, p8) --[[ line: 208 ]]
+function captureNotification.didUpdate(p7, p8)
 	local forceDismissToast = p7.props.forceDismissToast
 	
 	if p8.forceDismissToast ~= forceDismissToast then

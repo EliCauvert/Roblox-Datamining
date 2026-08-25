@@ -11,13 +11,13 @@ local var7 = true
 local maxValue = math.max(fIntSafetyBubbleRadius * currentCamera.HeadScale, 0.1)
 local var9 = nil
 
-function initDummy() --[[ line: 22 ]]
+function initDummy()
 	-- upvalues: var9 (write), generateDummyModule (ref), workspaceService (ref)
 	var9 = generateDummyModule(Vector3.new(0, 8.800000190735, -50.5), Vector3.new(0, 180, 0))
 	var9.Parent = workspaceService
 end
 
-local function calculateTransparency(_, p0) --[[ line: 27 ]]
+local function calculateTransparency(_, p0)
 	-- upvalues: VRService (ref), currentCamera (ref), var9 (write), maxValue (ref), var6 (ref)
 	if p0 then
 		local magnitude = ((currentCamera.CFrame * VRService:GetUserCFrame(Enum.UserCFrame.Head)).Position - var9.HumanoidRootPart.Position).Magnitude
@@ -29,10 +29,10 @@ local function calculateTransparency(_, p0) --[[ line: 27 ]]
 	return 0
 end
 
-function EnableSafetyBubbleDummy() --[[ line: 50 ]]
+function EnableSafetyBubbleDummy()
 	-- upvalues: var9 (write), userGameSettingsService (ref), var7 (write), calculateTransparency (ref), runService (ref)
 	initDummy()
-	runService.Stepped:Connect(function() --[[ line: 53 | named "onStep" ]]
+	runService.Stepped:Connect(function()
 		-- upvalues: var9 (copy), userGameSettingsService (copy), var7 (copy), calculateTransparency (copy)
 		local children = var9:GetChildren()
 		var7 = userGameSettingsService.VRSafetyBubbleMode ~= Enum.VRSafetyBubbleMode.Anyone

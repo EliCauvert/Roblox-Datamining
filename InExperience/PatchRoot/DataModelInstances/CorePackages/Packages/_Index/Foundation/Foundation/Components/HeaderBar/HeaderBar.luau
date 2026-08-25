@@ -17,7 +17,7 @@ local t = {
 }
 local t_1 = { hasBackground = true, testId = "--foundation-header-bar" }
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "HeaderBar" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useViewportBreakpointModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), t (ref), headerBarContextModule (ref)
 	local var10 = withDefaultsModule(p0, t_1)
 	

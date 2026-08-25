@@ -1,7 +1,7 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 local playersService = game:GetService("Players")
 local var2 = false
-task.spawn(function() --[[ line: 12 ]]
+task.spawn(function()
 	-- upvalues: playersService (ref), localizationService (ref), var2 (write)
 	local localPlayer = playersService.LocalPlayer
 	while not localPlayer do
@@ -16,7 +16,7 @@ task.spawn(function() --[[ line: 12 ]]
 	end
 end)
 
-return function() --[[ line: 31 | named "isShowUKOSAIllegalContentReportingLink" ]]
+return function()
 	-- upvalues: var2 (write)
 	return var2
 end

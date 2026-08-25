@@ -9,7 +9,7 @@ local clearPolicyOnLogout = game:DefineFastFlag("ClearPolicyOnLogout", false)
 local _ = nil
 local var8 = if fFlagLogFirstGuacRead then require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol).default else nil
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: httpService (ref), memStorageService (ref), playersService (ref), cacheReadParsePolicy (ref), clearPolicyOnLogout (ref), fixPolicyStalePlayerUpdates (ref), fFlagLogAllGuacRead (ref), var8 (write), fFlagLogFirstGuacRead (ref)
 	p0 = p0 or {}
 	p0.HttpService = p0.HttpService or httpService
@@ -23,11 +23,11 @@ return function(p0) --[[ line: 21 ]]
 	local playersService_1 = p0.PlayersService
 	local var10 = false
 	
-	return function(p1) --[[ line: 36 ]]
+	return function(p1)
 		-- upvalues: playersService_1 (ref), p0 (ref), cacheReadParsePolicy (copy), clearPolicyOnLogout (copy), memStorageService_1 (ref), fixPolicyStalePlayerUpdates (copy), fFlagLogAllGuacRead (copy), var8 (copy), fFlagLogFirstGuacRead (copy), var10 (write)
 		assert(p1, "expected behavior")
 		
-		local function _() --[[ line: 39 | named "getStoreKey" ]]
+		local function _()
 			-- upvalues: playersService_1 (copy), p1 (ref)
 			local var21 = -1
 			local localPlayer = playersService_1.LocalPlayer
@@ -45,10 +45,10 @@ return function(p0) --[[ line: 21 ]]
 		local var15 = nil
 		local bindableEvent = Instance.new("BindableEvent")
 		
-		local function onPolicyUpdated(p2) --[[ line: 57 ]]
+		local function onPolicyUpdated(p2)
 			-- upvalues: var14 (write), p0 (copy), var15 (write), bindableEvent (ref)
 			if p2 ~= var14 and p2 and #p2 > 0 then
-				local ok, status = pcall(function() --[[ line: 61 ]]
+				local ok, status = pcall(function()
 					-- upvalues: p0 (copy), p2 (ref)
 					return p0:JSONDecode(p2)
 				end)
@@ -64,7 +64,7 @@ return function(p0) --[[ line: 21 ]]
 		if cacheReadParsePolicy then
 			local var18 = nil
 			
-			local function invalidateForKeyChange() --[[ line: 77 ]]
+			local function invalidateForKeyChange()
 				-- upvalues: clearPolicyOnLogout (copy), var12 (write), var15 (write), var14 (write), var13 (write), playersService_1 (copy), p1 (ref), text (ref), memStorageService_1 (copy), onPolicyUpdated (ref)
 				local var22 = if clearPolicyOnLogout then var12 else nil
 				var15 = nil
@@ -92,14 +92,14 @@ return function(p0) --[[ line: 21 ]]
 				var13 = memStorageService_1:BindAndFire(text_1, onPolicyUpdated)
 			end
 			
-			local function localPlayerChanged() --[[ line: 104 ]]
+			local function localPlayerChanged()
 				-- upvalues: var18 (write), playersService_1 (copy), fixPolicyStalePlayerUpdates (copy), invalidateForKeyChange (ref), var15 (write)
 				if var18 then
 					var18:Disconnect()
 					var18 = nil
 				end
 				if playersService_1.LocalPlayer then
-					var18 = playersService_1.LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(function() --[[ line: 110 ]]
+					var18 = playersService_1.LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(function()
 						-- upvalues: fixPolicyStalePlayerUpdates (copy), invalidateForKeyChange (copy), var15 (copy)
 						if fixPolicyStalePlayerUpdates then
 							invalidateForKeyChange()
@@ -121,7 +121,7 @@ return function(p0) --[[ line: 21 ]]
 			localPlayerChanged()
 		end
 		return {
-			read = function() --[[ line: 129 ]]
+			read = function()
 				-- upvalues: cacheReadParsePolicy (copy), var15 (write), playersService_1 (copy), p1 (ref), memStorageService_1 (copy), p0 (copy), fFlagLogAllGuacRead (copy), var8 (copy), fFlagLogFirstGuacRead (copy), var10 (copy), var14 (write)
 				if cacheReadParsePolicy and var15 then
 					return var15
@@ -135,7 +135,7 @@ return function(p0) --[[ line: 21 ]]
 				var25 = memStorageService_1:GetItem("GUAC:" .. var25 .. ":" .. p1)
 				
 				if var25 and #var25 > 0 then
-					local ok, status = pcall(function() --[[ line: 136 ]]
+					local ok, status = pcall(function()
 						-- upvalues: p0 (copy), var25 (ref)
 						return p0:JSONDecode(var25)
 					end)
@@ -155,7 +155,7 @@ return function(p0) --[[ line: 21 ]]
 					return status
 				end
 			end,
-			onPolicyChanged = function(p3) --[[ line: 158 ]]
+			onPolicyChanged = function(p3)
 				-- upvalues: playersService_1 (copy), p1 (ref), bindableEvent (ref), var13 (write), var12 (write), var15 (write), memStorageService_1 (copy), onPolicyUpdated (ref)
 				local var26 = -1
 				local localPlayer = playersService_1.LocalPlayer

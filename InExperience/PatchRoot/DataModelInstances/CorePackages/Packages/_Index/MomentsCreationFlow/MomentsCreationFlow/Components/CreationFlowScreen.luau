@@ -60,7 +60,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 86 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), reactModule (ref), creationFlowContextModule (ref), useCallback (ref), useRef (ref), useSelector (ref), constantsModule (ref), useMemo (ref), useUnifiedPlayback (ref), getContentFromCaptureModule (ref), eventNamesModule (ref), creationFlowStateUpdatedModule (ref), creationFlowStateModule (ref), dialogTypeModule (ref), makeMomentMetadataModule (ref), makeRegistrationInfoModule (ref), clearEditsModule (ref), trimEditUpdatedModule (ref), musicEditUpdatedModule (ref), textOverlayEditsUpdatedModule (ref), t (ref), selectedCaptureUpdatedModule (ref), view (ref), foundationModule (ref), creationFlowLocalizationModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), formFactor (ref), icon (ref), musicChipModule (ref), playbackControlsModule (ref), textOverlayEditorModule (ref), captureViewModule (ref), textOverlayDisplay (ref), editCTABarModule (ref), galleryViewModule (ref), previewViewModule (ref), trimmingViewModule (ref), textOverlayViewModule (ref), descriptionViewModule (ref), musicOverlayModule (ref)
 	local var34 = useDispatch()
 	local var35 = useDeviceInsets()
@@ -72,44 +72,44 @@ return function(p0) --[[ line: 86 ]]
 	local var42, var43 = reactModule.useState(Vector2.new(0, 0))
 	local var44, var45 = reactModule.useState(Vector2.new(0, 0))
 	local var46, var47 = reactModule.useState({ modalType = nil, modalProps = nil })
-	local var48 = useCallback(function(p1) --[[ line: 99 ]]
+	local var48 = useCallback(function(p1)
 		-- upvalues: var45 (ref)
 		var45(p1.AbsoluteSize)
 	end, {})
 	local captures = var41.captures
 	local var49 = useRef(0)
-	local var50 = useSelector(function(p2) --[[ line: 107 ]]
+	local var50 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].CreationFlow.currentState
 	end)
-	local var51 = useSelector(function(p3) --[[ line: 111 ]]
+	local var51 = useSelector(function(p3)
 		-- upvalues: constantsModule (copy)
 		return p3[constantsModule.RoduxKey].CreationFlow.capture
 	end)
-	local var52 = useSelector(function(p4) --[[ line: 115 ]]
+	local var52 = useSelector(function(p4)
 		-- upvalues: constantsModule (copy)
 		return p4[constantsModule.RoduxKey].CreationFlow.textOverlayEdits
 	end)
-	local var53 = useSelector(function(p5) --[[ line: 119 ]]
+	local var53 = useSelector(function(p5)
 		-- upvalues: constantsModule (copy)
 		return p5[constantsModule.RoduxKey].CreationFlow.trimEdit
 	end)
-	local var54 = useSelector(function(p6) --[[ line: 123 ]]
+	local var54 = useSelector(function(p6)
 		-- upvalues: constantsModule (copy)
 		return p6[constantsModule.RoduxKey].CreationFlow.musicEdit
 	end)
-	local var55 = useSelector(function(p7) --[[ line: 127 ]]
+	local var55 = useSelector(function(p7)
 		-- upvalues: constantsModule (copy)
 		return p7[constantsModule.RoduxKey].CreationFlow.description
 	end)
 	local var56, var57 = reactModule.useState(nil)
 	local var58, var59 = reactModule.useState(nil)
 	local var60, var61 = reactModule.useState(nil)
-	local var62 = useMemo(function() --[[ line: 136 ]]
+	local var62 = useMemo(function()
 		-- upvalues: var60 (ref), var54 (ref)
 		return var60 or var54
 	end, { var60, var54 })
-	local var63 = useMemo(function() --[[ line: 140 ]]
+	local var63 = useMemo(function()
 		-- upvalues: var58 (ref), var53 (ref)
 		return var58 or var53
 	end, { var58, var53 })
@@ -120,21 +120,21 @@ return function(p0) --[[ line: 86 ]]
 		content = if var51 then getContentFromCaptureModule(var51) else nil,
 		captureType = if var51 then var51.CaptureType else nil
 	})
-	local var65 = useCallback(function() --[[ line: 155 ]]
+	local var65 = useCallback(function()
 		-- upvalues: var41 (ref), eventNamesModule (copy), var50 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var40 (ref)
 		var41.fireEvent(eventNamesModule.EditingFlowNextButtonPressed, { editFlowState = var50 })
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 		var40()
 		var41.fireEvent(eventNamesModule.MomentsEditingFlowContinueToEditButtonPressed)
 	end, { var40, var50 })
-	local var66 = useCallback(function() --[[ line: 164 ]]
+	local var66 = useCallback(function()
 		-- upvalues: var41 (ref), eventNamesModule (copy), var50 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var38 (ref)
 		var41.fireEvent(eventNamesModule.EditingFlowNextButtonPressed, { editFlowState = var50 })
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Description))
 		var38.disable()
 		var41.fireEvent(eventNamesModule.MomentsEditingFlowContinueToDescriptionButtonPressed)
 	end, { var50 })
-	local var67 = useCallback(function(p8) --[[ line: 174 ]]
+	local var67 = useCallback(function(p8)
 		-- upvalues: var41 (ref), var47 (ref), dialogTypeModule (copy)
 		local var86 = var41.isTextFiltered(p8)
 		
@@ -142,7 +142,7 @@ return function(p0) --[[ line: 86 ]]
 			var47({
 				modalType = dialogTypeModule.TextFiltered,
 				modalProps = {
-					onConfirm = function() --[[ line: 180 ]]
+					onConfirm = function()
 						-- upvalues: var47 (copy)
 						var47(nil)
 					end
@@ -151,7 +151,7 @@ return function(p0) --[[ line: 86 ]]
 		end
 		return var86
 	end, {})
-	local var68 = useCallback(function() --[[ line: 189 ]]
+	local var68 = useCallback(function()
 		-- upvalues: var67 (ref), var55 (ref), var49 (ref), var53 (ref), var54 (ref), var52 (ref), makeMomentMetadataModule (copy), var51 (ref), makeRegistrationInfoModule (copy), var41 (ref), p0 (ref), var34 (ref), clearEditsModule (copy), creationFlowStateModule (copy), eventNamesModule (copy)
 		if var67(var55) then return end
 		local processTime = os.clock()
@@ -171,22 +171,22 @@ return function(p0) --[[ line: 86 ]]
 	end, {
 		var51, var55, var54, var41, var52, var53, p0.excludeGallery
 	})
-	local var69 = useCallback(function() --[[ line: 227 ]]
+	local var69 = useCallback(function()
 		-- upvalues: var41 (ref), eventNamesModule (copy), var50 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy)
 		var41.fireEvent(eventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = var50 })
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 	end, { var50 })
-	local var70 = useCallback(function() --[[ line: 235 ]]
+	local var70 = useCallback(function()
 		-- upvalues: var41 (ref), eventNamesModule (copy), var50 (ref), var47 (ref), var34 (ref), clearEditsModule (copy), creationFlowStateModule (copy), var38 (ref), dialogTypeModule (copy)
 		var41.fireEvent(eventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = var50 })
 		var47({
 			modalType = dialogTypeModule.ExitCreationConfirmation,
 			modalProps = {
-				onCancel = function() --[[ line: 249 ]]
+				onCancel = function()
 					-- upvalues: var47 (copy)
 					var47(nil)
 				end,
-				onConfirm = function() --[[ line: 240 ]]
+				onConfirm = function()
 					-- upvalues: var47 (copy), var34 (copy), clearEditsModule (copy), creationFlowStateModule (copy), var38 (copy)
 					var47(nil)
 					var34(clearEditsModule(creationFlowStateModule.Gallery))
@@ -195,47 +195,47 @@ return function(p0) --[[ line: 86 ]]
 			}
 		})
 	end, { var50 })
-	local var71 = useCallback(function() --[[ line: 257 ]]
+	local var71 = useCallback(function()
 		-- upvalues: var59 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy)
 		var59(nil)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 		var41.fireEvent(eventNamesModule.EditingFlowTrimBackButtonPressed)
 	end, { var41 })
-	local var72 = useCallback(function() --[[ line: 263 ]]
+	local var72 = useCallback(function()
 		-- upvalues: var34 (ref), trimEditUpdatedModule (copy), var58 (ref), var59 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy)
 		var34(trimEditUpdatedModule(var58))
 		var59(nil)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 		var41.fireEvent(eventNamesModule.EditingFlowTrimDoneButtonPressed)
 	end, { var58, var41 })
-	local var73 = useCallback(function(p9) --[[ line: 270 ]]
+	local var73 = useCallback(function(p9)
 		-- upvalues: var59 (ref)
 		var59(p9)
 	end, {})
-	local var74 = useCallback(function() --[[ line: 274 ]]
+	local var74 = useCallback(function()
 		-- upvalues: var61 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy)
 		var61(nil)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 		var41.fireEvent(eventNamesModule.EditingFlowMusicBackButtonPressed)
 	end, {})
-	local var75 = useCallback(function() --[[ line: 280 ]]
+	local var75 = useCallback(function()
 		-- upvalues: var34 (ref), musicEditUpdatedModule (copy), var60 (ref), var61 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy)
 		var34(musicEditUpdatedModule(var60))
 		var61(nil)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 		var41.fireEvent(eventNamesModule.EditingFlowMusicDoneButtonPressed)
 	end, { var60 })
-	local var76 = useCallback(function(p10) --[[ line: 287 ]]
+	local var76 = useCallback(function(p10)
 		-- upvalues: var61 (ref)
 		var61(p10)
 	end, {})
-	local var77 = useCallback(function() --[[ line: 291 ]]
+	local var77 = useCallback(function()
 		-- upvalues: var57 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy)
 		var57(nil)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
 		var41.fireEvent(eventNamesModule.EditingFlowTextOverlayBackButtonPressed)
 	end, { var56, var41 })
-	local var78 = useCallback(function() --[[ line: 297 ]]
+	local var78 = useCallback(function()
 		-- upvalues: var56 (ref), var34 (ref), textOverlayEditsUpdatedModule (copy), var67 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy), var57 (ref)
 		local text = var56 and (var56[1] and var56[1].text)
 		
@@ -247,37 +247,37 @@ return function(p0) --[[ line: 86 ]]
 		var41.fireEvent(eventNamesModule.EditingFlowTextOverlayDoneButtonPressed)
 		var57(nil)
 	end, { var56, var41, var67 })
-	local var79 = useCallback(function(p11) --[[ line: 312 ]]
+	local var79 = useCallback(function(p11)
 		-- upvalues: var57 (ref)
 		var57(p11)
 	end, {})
-	local var80 = useCallback(function(p12) --[[ line: 316 ]]
+	local var80 = useCallback(function(p12)
 		-- upvalues: var34 (ref), textOverlayEditsUpdatedModule (copy)
 		var34(textOverlayEditsUpdatedModule(p12))
 	end, {})
-	local var81 = useCallback(function() --[[ line: 320 ]]
+	local var81 = useCallback(function()
 		-- upvalues: var57 (ref), var52 (ref), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy)
 		var57(var52)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.TextOverlay))
 	end, { var52 })
-	reactModule.useEffect(function() --[[ line: 325 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var50 (ref), creationFlowStateModule (copy), var57 (ref), var52 (ref), t (copy)
 		if var50 == creationFlowStateModule.TextOverlay then
 			var57(var52 or { t })
 		end
 	end, { var52, var50 })
-	local var82 = useCallback(function() --[[ line: 331 ]]
+	local var82 = useCallback(function()
 		-- upvalues: var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var41 (ref), eventNamesModule (copy)
 		var34(creationFlowStateUpdatedModule(creationFlowStateModule.Music))
 		var41.fireEvent(eventNamesModule.EditingFlowMusicButtonPressed)
 	end, {})
-	local var83 = useCallback(function(p13) --[[ line: 336 ]]
+	local var83 = useCallback(function(p13)
 		-- upvalues: var34 (ref), selectedCaptureUpdatedModule (copy), var40 (ref), var41 (ref), eventNamesModule (copy)
 		var34(selectedCaptureUpdatedModule(p13))
 		var40()
 		var41.fireEvent(eventNamesModule.EditingFlowGalleryItemSelected)
 	end, { var40, var41 })
-	local var84 = reactModule.useCallback(function() --[[ line: 342 ]]
+	local var84 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), view (copy), foundationModule (copy), var41 (ref), creationFlowLocalizationModule (copy), var36 (ref)
 		return reactModule.createElement(view, {
 			Size = UDim2.fromScale(1, 1),
@@ -295,9 +295,9 @@ return function(p0) --[[ line: 86 ]]
 			})
 		})
 	end, {})
-	local var85 = useCallback(function() --[[ line: 358 ]]
+	local var85 = useCallback(function()
 		-- upvalues: var41 (ref), eventNamesModule (copy), var47 (ref), p0 (ref), var34 (ref), clearEditsModule (copy), creationFlowStateModule (copy), var51 (ref), dialogTypeModule (copy)
-		local function onExitCreation() --[[ line: 359 ]]
+		local function onExitCreation()
 			-- upvalues: var41 (copy), eventNamesModule (copy), var47 (copy), p0 (copy), var34 (copy), clearEditsModule (copy), creationFlowStateModule (copy)
 			var41.fireEvent(eventNamesModule.MomentsEditingFlowExited)
 			var47(nil)
@@ -314,7 +314,7 @@ return function(p0) --[[ line: 86 ]]
 			var47({
 				modalType = dialogTypeModule.ExitCreationConfirmation,
 				modalProps = {
-					onCancel = function() --[[ line: 374 ]]
+					onCancel = function()
 						-- upvalues: var47 (copy)
 						var47(nil)
 					end,
@@ -326,16 +326,16 @@ return function(p0) --[[ line: 86 ]]
 		end
 		onExitCreation()
 	end, { var51, var41, p0.excludeGallery })
-	reactModule.useEffect(function() --[[ line: 385 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var41 (ref)
 		var41.setScreenOrientation(Enum.ScreenOrientation.Portrait)
 		
-		return function() --[[ line: 388 ]]
+		return function()
 			-- upvalues: var41 (copy)
 			var41.setScreenOrientation(Enum.ScreenOrientation.Sensor)
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 393 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var50 (ref), creationFlowStateModule (copy), var38 (ref)
 		if var50 == creationFlowStateModule.Gallery or var50 == creationFlowStateModule.Music or var50 == creationFlowStateModule.Description then
 			var38.disable()
@@ -491,7 +491,7 @@ return function(p0) --[[ line: 86 ]]
 				}) else nil
 			})
 		}),
-		Modal = reactModule.useCallback(function() --[[ line: 403 ]]
+		Modal = reactModule.useCallback(function()
 			-- upvalues: var46 (ref), dialogTypeModule (copy), reactModule (copy), exitConfirmationDialogModule (copy), textFilteredDialogModule (copy)
 			return if var46 then if var46.modalType == dialogTypeModule.ExitCreationConfirmation then reactModule.createElement(exitConfirmationDialogModule, var46.modalProps) elseif var46.modalType == dialogTypeModule.TextFiltered then reactModule.createElement(textFilteredDialogModule, var46.modalProps) else nil else nil
 		end, { var46 })()

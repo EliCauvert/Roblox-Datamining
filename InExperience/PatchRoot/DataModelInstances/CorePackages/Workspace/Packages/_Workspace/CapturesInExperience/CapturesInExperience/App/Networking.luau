@@ -11,7 +11,7 @@ local var6 = lumberyakModule.Logger.new(nil, require(parent.Constants).LoggerKey
 local var7 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = "NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 19 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: var6 (ref), httpRequest (ref)
 			var6:debug(`Request: [ requestMethod = {p1}, url = {p0} ]`)
 			

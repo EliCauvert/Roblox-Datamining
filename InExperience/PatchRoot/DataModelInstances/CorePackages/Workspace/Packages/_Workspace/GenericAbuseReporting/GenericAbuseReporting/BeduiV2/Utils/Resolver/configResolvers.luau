@@ -4,7 +4,7 @@ local _ = require(script.Parent.ResolverTypes)
 local transformJsonLeafFirstModule = require(script.Parent.transformJsonLeafFirst)
 local _ = require(genericAbuseReporting.BeduiV2.Types)
 
-local function getByPath(p0, p1) --[[ line: 18 ]]
+local function getByPath(p0, p1)
 	local var4 = p0
 	
 	for i, v in ipairs(string.split(p1, ".")) do
@@ -20,35 +20,35 @@ local function getByPath(p0, p1) --[[ line: 18 ]]
 	return var4
 end
 
-local function _(p2) --[[ line: 47 | named "isTruthy" ]]
+local function _(p2)
 	return p2 ~= nil and (p2 ~= false and p2 ~= "")
 end
 
 local t = {
 	["$attribute"] = {
-		is = function(p3) --[[ line: 57 ]]
+		is = function(p3)
 			return type(p3) == "table" and (p3["$attribute"] ~= nil and type(p3["$attribute"]) == "string")
 		end,
-		resolve = function(p4, p5) --[[ line: 60 ]]
+		resolve = function(p4, p5)
 			-- upvalues: getByPath (ref)
 			return getByPath(p5.attribute, p4["$attribute"])
 		end
 	},
 	["$resource"] = {
-		is = function(p6) --[[ line: 66 ]]
+		is = function(p6)
 			return type(p6) == "table" and (p6["$resource"] ~= nil and type(p6["$resource"]) == "string")
 		end,
-		resolve = function(p7, p8) --[[ line: 69 ]]
+		resolve = function(p7, p8)
 			local var5 = p8.resources[p7["$resource"]]
 			
 			return if var5 then var5.value else nil
 		end
 	},
 	["$switch"] = {
-		is = function(p9) --[[ line: 75 ]]
+		is = function(p9)
 			return type(p9) == "table" and (p9["$switch"] ~= nil and type(p9["$switch"]) == "table")
 		end,
-		resolve = function(p10, _) --[[ line: 78 ]]
+		resolve = function(p10, _)
 			for i, v in ipairs(p10["$switch"]) do
 				if type(v) ~= "string" then
 					if type(v) == "table" and v.condition then
@@ -65,10 +65,10 @@ local t = {
 		end
 	},
 	["$store"] = {
-		is = function(p11) --[[ line: 93 ]]
+		is = function(p11)
 			return type(p11) == "table" and (p11["$store"] ~= nil and type(p11["$store"]) == "string")
 		end,
-		resolve = function(p12, p13) --[[ line: 96 ]]
+		resolve = function(p12, p13)
 			-- upvalues: getByPath (ref)
 			return getByPath(p13.store, p12["$store"])
 		end
@@ -76,7 +76,7 @@ local t = {
 }
 
 return {
-	resolveArConfig = function(p14, p15) --[[ line: 139 ]]
+	resolveArConfig = function(p14, p15)
 		-- upvalues: t (ref), transformJsonLeafFirstModule (ref)
 		local t_1 = {
 			attribute = p14.attributes,
@@ -85,7 +85,7 @@ return {
 		}
 		t_1 = {
 			attribute = p14.attributes,
-			resources = transformJsonLeafFirstModule(p14.resources, function(p16) --[[ line: 113 | named "replacerFn" ]]
+			resources = transformJsonLeafFirstModule(p14.resources, function(p16)
 				-- upvalues: t (copy), t_1 (ref)
 				if type(p16) == "table" then
 					return if t["$attribute"].is(p16) then t["$attribute"].resolve(p16, t_1) elseif t["$resource"].is(p16) then t["$resource"].resolve(p16, t_1) elseif t["$switch"].is(p16) then t["$switch"].resolve(p16, t_1) elseif t["$store"].is(p16) then t["$store"].resolve(p16, t_1) else p16
@@ -94,16 +94,16 @@ return {
 			store = p15.store
 		}
 		
-		return transformJsonLeafFirstModule(p14, function(p17) --[[ line: 113 | named "replacerFn" ]]
+		return transformJsonLeafFirstModule(p14, function(p17)
 			-- upvalues: t (copy), t_1 (ref)
 			if type(p17) == "table" then
 				return if t["$attribute"].is(p17) then t["$attribute"].resolve(p17, t_1) elseif t["$resource"].is(p17) then t["$resource"].resolve(p17, t_1) elseif t["$switch"].is(p17) then t["$switch"].resolve(p17, t_1) elseif t["$store"].is(p17) then t["$store"].resolve(p17, t_1) else p17
 			end
 		end)
 	end,
-	resolveConfig = function(p18, p19) --[[ line: 105 ]]
+	resolveConfig = function(p18, p19)
 		-- upvalues: t (ref), transformJsonLeafFirstModule (ref)
-		return transformJsonLeafFirstModule(p18, function(p20) --[[ line: 113 | named "replacerFn" ]]
+		return transformJsonLeafFirstModule(p18, function(p20)
 			-- upvalues: t (copy), p19 (ref)
 			if type(p20) == "table" then
 				return if t["$attribute"].is(p20) then t["$attribute"].resolve(p20, p19) elseif t["$resource"].is(p20) then t["$resource"].resolve(p20, p19) elseif t["$switch"].is(p20) then t["$switch"].resolve(p20, p19) elseif t["$store"].is(p20) then t["$store"].resolve(p20, p19) else p20

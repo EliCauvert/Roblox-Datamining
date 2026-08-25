@@ -1,6 +1,6 @@
 ﻿local nilDependency = require(script:FindFirstAncestor("RoactUtils").Parent.AppCommonLib).Symbol.named("NilDependency")
 
-return function(...) --[[ line: 22 | named "dependencyArray" ]]
+return function(...)
 	-- upvalues: nilDependency (ref)
 	local t = {}
 	

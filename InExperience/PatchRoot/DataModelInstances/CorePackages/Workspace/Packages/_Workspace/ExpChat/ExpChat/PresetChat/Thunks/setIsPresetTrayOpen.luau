@@ -4,7 +4,7 @@ local expChatSharedModule = require(expChat.Parent.ExpChatShared)
 local constantsModule = require(expChat.PresetChat.Constants)
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 
-local function buildPresetTrayItems(value, p0) --[[ line: 12 ]]
+local function buildPresetTrayItems(value, p0)
 	local t = {}
 	
 	for i, v in value do
@@ -24,7 +24,7 @@ local function buildPresetTrayItems(value, p0) --[[ line: 12 ]]
 	return t
 end
 
-return function(value, p1) --[[ line: 34 | named "setIsPresetTrayOpen" ]]
+return function(value, p1)
 	-- upvalues: expChatSharedModule (ref), constantsModule (ref), httpService (ref), buildPresetTrayItems (ref)
 	if p1 == value.getIsTrayOpen(false) then return end
 	value.setIsTrayOpen(p1)

@@ -11,29 +11,29 @@ local useState = reactModule.useState
 local contentPostsThumbnailsInitialDelayTimeMs = game:DefineFastInt("ContentPostsThumbnailsInitialDelayTimeMs", 100)
 local contentPostsThumbnailsMaxRetries = game:DefineFastInt("ContentPostsThumbnailsMaxRetries", 10)
 
-local function makeThumbnailRequest(p0, p1, p2) --[[ line: 20 ]]
+local function makeThumbnailRequest(p0, p1, p2)
 	-- upvalues: capturesCommonNetworking (ref), assetTypeModule (ref), thumbnailStateModule (ref)
 	return p0(capturesCommonNetworking.GetThumbnailByAssetId.API({
 		assetId = p1,
 		assetType = assetTypeModule.Screenshot,
 		size = p2
-	})):andThen(function(p3) --[[ line: 26 ]]
+	})):andThen(function(p3)
 		-- upvalues: thumbnailStateModule (copy)
 		local var7 = p3.responseBody.data[1]
 		
 		return if var7.imageUrl and var7.imageUrl ~= "" and var7.state == thumbnailStateModule.Completed then var7.imageUrl else nil
-	end):catch(function(_) --[[ line: 38 ]]
+	end):catch(function(_)
 		return nil
 	end):await()
 end
 
-return function(p4, p5, p6) --[[ line: 44 ]]
+return function(p4, p5, p6)
 	-- upvalues: useDispatch (ref), useState (ref), useEffect (ref), contentPostsThumbnailsInitialDelayTimeMs (ref), contentPostsThumbnailsMaxRetries (ref), makeThumbnailRequest (ref)
 	local var8 = useDispatch()
 	local var9, var10 = useState("")
 	local var11, var12 = useState(false)
 	local text = tostring(p5) .. "x" .. tostring(p6)
-	useEffect(function() --[[ line: 52 ]]
+	useEffect(function()
 		-- upvalues: contentPostsThumbnailsInitialDelayTimeMs (copy), contentPostsThumbnailsMaxRetries (copy), var12 (ref), var10 (ref), p4 (ref), makeThumbnailRequest (copy), var8 (ref), text (ref)
 		local var14 = false
 		local var15 = contentPostsThumbnailsInitialDelayTimeMs
@@ -42,7 +42,7 @@ return function(p4, p5, p6) --[[ line: 44 ]]
 		var10("")
 		
 		if p4 then
-			task.spawn(function() --[[ line: 64 ]]
+			task.spawn(function()
 				-- upvalues: var14 (write), var16 (write), makeThumbnailRequest (copy), var8 (copy), p4 (copy), text (copy), var10 (copy), var12 (copy), var15 (write)
 				while not var14 and var16 > 0 do
 					local var17, var18 = makeThumbnailRequest(var8, p4, text)
@@ -61,7 +61,7 @@ return function(p4, p5, p6) --[[ line: 44 ]]
 				end
 			end)
 			
-			return function() --[[ line: 84 ]]
+			return function()
 				-- upvalues: var14 (write)
 				var14 = true
 			end

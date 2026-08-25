@@ -14,13 +14,13 @@ local var4 = createDataResolver({
 })
 
 return {
-	getDescription = function(p0) --[[ line: 29 ]]
+	getDescription = function(p0)
 		-- upvalues: var4 (ref)
 		return var4.getAndFetchItem(p0)
 	end,
-	updateDescription = function(p1, p2) --[[ line: 34 ]]
+	updateDescription = function(p1, p2)
 		-- upvalues: updateUserDescriptionModule (ref), var3 (ref)
-		return updateUserDescriptionModule(p2):andThen(function(p3) --[[ line: 35 ]]
+		return updateUserDescriptionModule(p2):andThen(function(p3)
 			-- upvalues: var3 (copy), p1 (ref)
 			var3.replaceItem(p1, p3)
 			

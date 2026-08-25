@@ -15,7 +15,7 @@ local _game = game
 local captureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
 game:DefineFastString("MomentsUploadUniverseId", "8357232245")
 
-local function _(p0) --[[ line: 64 | named "injectUniverseIdOverride" ]]
+local function _(p0)
 	-- upvalues: _game (ref)
 	local gameId = _game.GameId
 	
@@ -28,7 +28,7 @@ local function _(p0) --[[ line: 64 | named "injectUniverseIdOverride" ]]
 	return p0
 end
 
-return function(p1, p2, p3, p4) --[[ line: 74 | named "createMoment" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), captureService (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
 	local gameId, var11
 	if captureServiceUploadUniverseIdOverrideEngineFeature then
@@ -53,14 +53,14 @@ return function(p1, p2, p3, p4) --[[ line: 74 | named "createMoment" ]]
 	
 	if getFFlagMomentsUseUploadPostAsync() then
 		local var13 = makePostMetadataModule(p2)
-		local ok, status = pcall(function() --[[ line: 93 ]]
+		local ok, status = pcall(function()
 			-- upvalues: captureService (copy), p1 (ref), var13 (ref)
 			captureService:UploadPostAsync(p1, var13)
 		end)
 		gameId = ok
 		var14 = status
 	else
-		local ok, status = pcall(function() --[[ line: 97 ]]
+		local ok, status = pcall(function()
 			-- upvalues: captureService (copy), p1 (ref), var11 (write), p3 (ref)
 			captureService:UploadCaptureAndPostMoment(p1, var11, p3)
 		end)

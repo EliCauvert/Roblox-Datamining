@@ -26,22 +26,22 @@ local t_1 = {}
 local t_2 = {}
 local var10 = map.new()
 
-local function _(p0) --[[ line: 89 | named "addOperationVariable" ]]
+local function _(p0)
 	-- upvalues: t_2 (write)
 	table.insert(t_2, p0)
 end
 
-local _ = function() --[[ line: 92 | named "resetOperationVariables" ]]
+local _ = function()
 	-- upvalues: t_2 (write)
 	t_2 = {}
 end
 
-local _ = function() --[[ line: 95 | named "resetFieldMap" ]]
+local _ = function()
 	-- upvalues: var10 (write), map (ref)
 	var10 = map.new()
 end
 
-function t.buildOperationNodeForField(p1) --[[ line: 102 ]]
+function t.buildOperationNodeForField(p1)
 	-- upvalues: t_2 (write), var10 (write), map (ref), getRootTypeNames (ref), buildOperationAndCollectVariables (write), boolean (ref), array (ref)
 	local schema = p1.schema
 	local kind = p1.kind
@@ -73,7 +73,7 @@ function t.buildOperationNodeForField(p1) --[[ line: 102 ]]
 	return var15
 end
 
-buildOperationAndCollectVariables = function(p2) --[[ line: 174 | named "buildOperationAndCollectVariables" ]]
+buildOperationAndCollectVariables = function(p2)
 	-- upvalues: getDefinedRootType (ref), array (ref), resolveVariable (write), t_2 (write), kind (ref), resolveField (write)
 	local schema = p2.schema
 	local fieldName = p2.fieldName
@@ -127,7 +127,7 @@ buildOperationAndCollectVariables = function(p2) --[[ line: 174 | named "buildOp
 	}
 end
 
-local function resolveSelectionSet(value) --[[ line: 259 ]]
+local function resolveSelectionSet(value)
 	-- upvalues: boolean (ref), isUnionType (ref), kind (ref), array (ref), hasCircularRef (write), resolveSelectionSet (ref), t_1 (ref), isInterfaceType (ref), isObjectType (ref), getNamedType (ref), resolveField (write), object (ref)
 	local parent = value.parent
 	local type = value.type
@@ -148,10 +148,10 @@ local function resolveSelectionSet(value) --[[ line: 259 ]]
 	if boolean.toJSBoolean(isUnionType(type)) then
 		return {
 			kind = kind.SELECTION_SET,
-			selections = array.filter(array.map(array.filter(type:getTypes(), function(p3) --[[ line: 305 ]]
+			selections = array.filter(array.map(array.filter(type:getTypes(), function(p3)
 				-- upvalues: hasCircularRef (copy), array (copy), ancestors (ref), circularReferenceDepth (ref)
 				return not hasCircularRef(array.concat({}, ancestors, { p3 }), { depth = circularReferenceDepth })
-			end), function(p4) --[[ line: 319 ]]
+			end), function(p4)
 				-- upvalues: kind (copy), resolveSelectionSet (copy), type (ref), models (ref), path (ref), ancestors (ref), ignore (ref), depthLimit (ref), circularReferenceDepth (ref), schema (ref), depth (ref), argNames (ref), selectedFields (ref), rootTypeNames (ref)
 				return {
 					kind = kind.INLINE_FRAGMENT,
@@ -175,7 +175,7 @@ local function resolveSelectionSet(value) --[[ line: 259 ]]
 						rootTypeNames = rootTypeNames
 					})
 				}
-			end), function(p5) --[[ line: 344 ]]
+			end), function(p5)
 				-- upvalues: t_1 (copy)
 				return typeof(p5) == "table" and (p5.selectionSet ~= t_1 and (typeof(p5.selectionSet) == "table" and (typeof(p5.selectionSet.selections) == "table" and #p5.selectionSet.selections > 0)))
 			end)
@@ -183,15 +183,15 @@ local function resolveSelectionSet(value) --[[ line: 259 ]]
 	elseif boolean.toJSBoolean(isInterfaceType(type)) then
 		return {
 			kind = kind.SELECTION_SET,
-			selections = array.filter(array.map(array.filter(array.filter(schema:getTypeMap():values(), function(p6) --[[ line: 376 ]]
+			selections = array.filter(array.map(array.filter(array.filter(schema:getTypeMap():values(), function(p6)
 				-- upvalues: isObjectType (copy), boolean (copy), array (copy), type (ref)
 				local var23 = isObjectType(p6)
 				
 				return if boolean.toJSBoolean(var23) then array.includes(p6:getInterfaces(), type) else var23
-			end), function(p7) --[[ line: 387 ]]
+			end), function(p7)
 				-- upvalues: hasCircularRef (copy), array (copy), ancestors (ref), circularReferenceDepth (ref)
 				return not hasCircularRef(array.concat({}, ancestors, { p7 }), { depth = circularReferenceDepth })
-			end), function(p8) --[[ line: 401 ]]
+			end), function(p8)
 				-- upvalues: kind (copy), resolveSelectionSet (copy), type (ref), models (ref), path (ref), ancestors (ref), ignore (ref), depthLimit (ref), circularReferenceDepth (ref), schema (ref), depth (ref), argNames (ref), selectedFields (ref), rootTypeNames (ref)
 				return {
 					kind = kind.INLINE_FRAGMENT,
@@ -215,7 +215,7 @@ local function resolveSelectionSet(value) --[[ line: 259 ]]
 						rootTypeNames = rootTypeNames
 					})
 				}
-			end), function(p9) --[[ line: 426 ]]
+			end), function(p9)
 				-- upvalues: t_1 (copy)
 				return typeof(p9) == "table" and p9.selectionSet ~= t_1 and (typeof(p9.selectionSet) == "table" and typeof(p9.selectionSet.selections) == "table") and #p9.selectionSet.selections > 0
 			end)
@@ -244,10 +244,10 @@ local function resolveSelectionSet(value) --[[ line: 259 ]]
 	
 	return {
 		kind = kind.SELECTION_SET,
-		selections = array.filter(array.map(array.filter(fields:keys(), function(p10) --[[ line: 504 ]]
+		selections = array.filter(array.map(array.filter(fields:keys(), function(p10)
 			-- upvalues: hasCircularRef (copy), array (copy), ancestors (ref), getNamedType (copy), fields (ref), circularReferenceDepth (ref)
 			return not hasCircularRef(array.concat({}, ancestors, { getNamedType(fields:get(p10).type) }), { depth = circularReferenceDepth })
-		end), function(p11) --[[ line: 517 ]]
+		end), function(p11)
 			-- upvalues: selectedFields (ref), boolean (copy), resolveField (copy), type (ref), fields (ref), models (ref), array (copy), path (ref), ancestors (ref), ignore (ref), depthLimit (ref), circularReferenceDepth (ref), schema (ref), depth (ref), argNames (ref), rootTypeNames (ref), t_1 (copy)
 			local var24 = if typeof(selectedFields) == "table" then selectedFields[tostring(p11)] else true
 			
@@ -266,16 +266,16 @@ local function resolveSelectionSet(value) --[[ line: 259 ]]
 				selectedFields = var24,
 				rootTypeNames = rootTypeNames
 			}) else t_1
-		end), function(p12) --[[ line: 552 ]]
+		end), function(p12)
 			-- upvalues: t_1 (copy), array (copy), object (copy), boolean (copy)
 			return if p12 == nil or p12 == t_1 then false else array.indexOf(object.keys(p12), "selectionSet") == -1 or boolean.toJSBoolean(if typeof(p12.selectionSet) == "table" and typeof(p12.selectionSet.selections) == "table" then #p12.selectionSet.selections else nil)
 		end)
 	}
 end
 
-resolveVariable = function(p13, p14) --[[ line: 592 | named "resolveVariable" ]]
+resolveVariable = function(p13, p14)
 	-- upvalues: boolean (ref), isListType (ref), kind (ref), isNonNullType (ref)
-	local function resolveVariableType(p15) --[[ line: 599 ]]
+	local function resolveVariableType(p15)
 		-- upvalues: boolean (copy), isListType (copy), kind (copy), resolveVariableType (ref), isNonNullType (copy)
 		return if boolean.toJSBoolean(isListType(p15)) then {
 			kind = kind.LIST_TYPE,
@@ -302,12 +302,12 @@ resolveVariable = function(p13, p14) --[[ line: 592 | named "resolveVariable" ]]
 	}
 end
 
-local function getArgumentName(p16, p17) --[[ line: 622 ]]
+local function getArgumentName(p16, p17)
 	-- upvalues: array (ref)
 	return array.join(array.concat({}, p17, { p16 }), "_")
 end
 
-resolveField = function(p18) --[[ line: 646 | named "resolveField" ]]
+resolveField = function(p18)
 	-- upvalues: getNamedType (ref), boolean (ref), array (ref), getArgumentName (ref), isNonNullType (ref), resolveVariable (write), t_2 (write), kind (ref), var10 (write), isScalarType (ref), isEnumType (ref), resolveSelectionSet (ref), object (ref), t_1 (ref)
 	local type = p18.type
 	local field = p18.field
@@ -328,7 +328,7 @@ resolveField = function(p18) --[[ line: 646 | named "resolveField" ]]
 	local var28 = false
 	
 	if boolean.toJSBoolean(field.args) and #field.args ~= 0 then
-		t = array.filter(array.map(field.args, function(p19) --[[ line: 686 ]]
+		t = array.filter(array.map(field.args, function(p19)
 			-- upvalues: getArgumentName (copy), path (ref), argNames (ref), array (copy), boolean (copy), isNonNullType (copy), var28 (write), firstCall (ref), resolveVariable (copy), t_2 (copy), kind (copy)
 			local var35 = getArgumentName(p19.name, path)
 			
@@ -407,11 +407,11 @@ resolveField = function(p18) --[[ line: 646 | named "resolveField" ]]
 	})
 end
 
-hasCircularRef = function(p20, p21) --[[ line: 782 | named "hasCircularRef" ]]
+hasCircularRef = function(p20, p21)
 	-- upvalues: boolean (ref), isScalarType (ref), array (ref)
 	local var36 = p20[#p20]
 	
-	return if boolean.toJSBoolean(isScalarType(var36)) then false else (if p21 ~= nil then { depth = 1 } else p21).depth < #array.filter(p20, function(p22) --[[ line: 798 ]]
+	return if boolean.toJSBoolean(isScalarType(var36)) then false else (if p21 ~= nil then { depth = 1 } else p21).depth < #array.filter(p20, function(p22)
 		-- upvalues: var36 (ref)
 		return p22.name == var36.name
 	end)

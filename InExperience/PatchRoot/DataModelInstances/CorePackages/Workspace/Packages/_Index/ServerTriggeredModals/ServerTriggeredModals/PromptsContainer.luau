@@ -9,14 +9,14 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableHomepagePromptsForModalsAndBanners = sharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
 local fFlagPromptsHandlerEnabled = sharedFlagsModule.FFlagPromptsHandlerEnabled
 
-return reactModule.memo(function(p0) --[[ line: 46 | named "PromptsContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref)
 	local modalId = p0.modalId
 	local modalType = p0.modalType
-	reactModule.useEffect(function() --[[ line: 50 ]]
+	reactModule.useEffect(function()
 		-- upvalues: modalId (ref), modalType (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
 		if modalId and modalType then
-			reportPromptImpressionModule(modalType, modalId):catch(function() --[[ line: 52 ]]
+			reportPromptImpressionModule(modalType, modalId):catch(function()
 				-- upvalues: loggerModule (copy)
 				loggerModule:warning("Failed to report prompt impression")
 			end)

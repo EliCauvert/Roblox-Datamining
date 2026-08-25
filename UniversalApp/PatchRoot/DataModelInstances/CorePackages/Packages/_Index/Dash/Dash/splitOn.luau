@@ -1,6 +1,6 @@
 ﻿local insert = table.insert
 
-return function(p0, p1) --[[ line: 10 | named "splitOn" ]]
+return function(p0, p1)
 	-- upvalues: insert (ref)
 	local t = {}
 	local t_1 = {}

@@ -10,14 +10,14 @@ local errorStateEnumModule = require(cancelSubscriptionApp.Enums.ErrorStateEnum)
 local selectSubscriptionIdModule = require(cancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
 local _ = require(script.Parent.CancelUserSubscriptionErrorPrompt)
 
-return function() --[[ line: 15 | named "useCancelUserSubscriptionErrorPromptProps" ]]
+return function()
 	-- upvalues: useSelector (ref), selectErrorStateModule (ref), useDispatch (ref), selectSubscriptionIdModule (ref), reactModule (ref), errorStateEnumModule (ref), marketplaceService (ref), cancelSubscriptionEndedModule (ref)
 	local var7 = useSelector(selectErrorStateModule)
 	local var8 = useDispatch()
 	local var9 = useSelector(selectSubscriptionIdModule) or ""
 	
 	return {
-		onDismiss = reactModule.useCallback(function() --[[ line: 20 ]]
+		onDismiss = reactModule.useCallback(function()
 			-- upvalues: var7 (ref), errorStateEnumModule (copy), marketplaceService (copy), var9 (ref), var8 (ref), cancelSubscriptionEndedModule (copy)
 			if var7 == errorStateEnumModule.Expiring then
 				marketplaceService:SignalUserSubscriptionStatusChanged(var9)

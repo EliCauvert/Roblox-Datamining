@@ -118,7 +118,7 @@ local sounds = Instance.new("Folder")
 sounds.Name = "Sounds"
 sounds.Parent = robloxGui
 
-local function safeRequire(p0) --[[ line: 192 ]]
+local function safeRequire(p0)
 	local ok, status = pcall(require, p0)
 	
 	if ok then
@@ -179,7 +179,7 @@ if fFlagTopBarRefactor then
 	end
 end
 if game:GetEngineFeature("LuobuModerationStatus") then
-	coroutine.wrap(function() --[[ line: 261 ]]
+	coroutine.wrap(function()
 		-- upvalues: modules (ref)
 		local watermark = modules.Watermark
 		local ok, status = pcall(require, watermark)
@@ -201,13 +201,13 @@ end
 if game:GetEngineFeature("ValidateUGCBodyAPIFeature") then
 	require(modules.Server.UGCValidation.UGCValidationFunctionInstaller)()
 end
-coroutine.wrap(function() --[[ line: 282 ]]
+coroutine.wrap(function()
 	-- upvalues: scriptContextService (ref), robloxGui (ref)
 	scriptContextService:AddCoreScriptLocal("CoreScripts/ScreenTimeInGame", robloxGui)
 end)()
 
 if not disableLuobuWarningToast then
-	coroutine.wrap(function() --[[ line: 287 ]]
+	coroutine.wrap(function()
 		-- upvalues: cachedPolicyServiceModule (ref), modules (ref)
 		if cachedPolicyServiceModule:IsSubjectToChinaPolicies() then
 			if not game:IsLoaded() then
@@ -226,14 +226,14 @@ scriptContextService:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", robloxGui)
 coroutine.wrap(safeRequire)(robloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(robloxGui.Modules.PlayerList.PlayerListManager)
 local _ = nil
-local ok, status = pcall(function() --[[ line: 309 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
 if game:GetEngineFeature("EnableBubbleChatFromChatService") or ok and status then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/PlayerBillboards", robloxGui)
 end
-coroutine.wrap(function() --[[ line: 320 ]]
+coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
 	local var56
 	local purchasePrompt = corePackagesService.Workspace.Packages.PurchasePrompt
@@ -309,7 +309,7 @@ if if game:GetEngineFeature("TouchScreenEnabled") then userInputService.TouchScr
 	robloxGui.ControlFrame.BottomLeftControl.Visible = false
 end
 scriptContextService:AddCoreScriptLocal("CoreScripts/InspectAndBuy", robloxGui)
-coroutine.wrap(function() --[[ line: 406 ]]
+coroutine.wrap(function()
 	-- upvalues: VRService (ref), robloxGui (ref)
 	if not VRService.VREnabled then
 		VRService:GetPropertyChangedSignal("VREnabled"):Wait()
@@ -345,7 +345,7 @@ scriptContextService:AddCoreScriptLocal("CoreScripts/MicrophoneDevicePermissions
 if game:GetEngineFeature("VoiceChatSupported") then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/VoiceDefaultChannel", robloxGui)
 end
-coroutine.wrap(function() --[[ line: 429 ]]
+coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref), localPlayer (write), getCoreScriptsLayersModule (ref), getFFlagEnableNewInviteMenuIXPModule (ref), newInviteMenuExperimentManagerModule (ref), getFFlagReportAnythingAnnotationIXP (ref), trustAndSafetyIXPManager (ref)
 	require(corePackagesService.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper:InitializeAsync(localPlayer.UserId, getCoreScriptsLayersModule())
 	
@@ -370,7 +370,7 @@ if game:GetEngineFeature("FacialAnimationStreaming2") then
 end
 scriptContextService:AddCoreScriptLocal("CoreScripts/AvatarMood", script.Parent)
 scriptContextService:AddCoreScriptLocal("CoreScripts/PortalTeleportGUI", robloxGui)
-coroutine.wrap(function() --[[ line: 462 ]]
+coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
 	local var57
 	local adsEudsa = corePackagesService.Workspace.Packages.AdsEudsa
@@ -388,7 +388,7 @@ coroutine.wrap(function() --[[ line: 462 ]]
 end)()
 
 if game:GetEngineFeature("EnableAdGuiInteractivityControlRefactor") then
-	coroutine.wrap(function() --[[ line: 471 ]]
+	coroutine.wrap(function()
 		-- upvalues: corePackagesService (ref)
 		local var58
 		local adGuiInteractivity = corePackagesService.Workspace.Packages.AdGuiInteractivity
@@ -405,7 +405,7 @@ if game:GetEngineFeature("EnableAdGuiInteractivityControlRefactor") then
 		end
 	end)()
 end
-coroutine.wrap(function() --[[ line: 479 ]]
+coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
 	local var59
 	local enhancedVideo = corePackagesService.Workspace.Packages.EnhancedVideo
@@ -421,7 +421,7 @@ coroutine.wrap(function() --[[ line: 479 ]]
 		var59.starterScript()
 	end
 end)()
-coroutine.wrap(function() --[[ line: 487 ]]
+coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref)
 	local var60
 	local inExperienceClickout = corePackagesService.Workspace.Packages.InExperienceClickout
@@ -514,7 +514,7 @@ if fFlagLuaAppInExperienceDetailsPrompt then
 	scriptContextService:AddCoreScriptLocal("CoreScripts/InExperienceDetailsPrompt", robloxGui)
 end
 if not enableExperienceGenericChallengeRenderingOnLoadingScript then
-	coroutine.wrap(function() --[[ line: 588 ]]
+	coroutine.wrap(function()
 		-- upvalues: corePackagesService (ref)
 		require(corePackagesService.Workspace.Packages.GenericChallenges).Middleware.InitExperienceChallengeInterceptor()
 	end)()
@@ -523,13 +523,13 @@ local reactPerfTrackerModule = require(modules.Common.ReactPerfTracker)
 
 if reactPerfTrackerModule then
 	local var53 = reactPerfTrackerModule.new()
-	task.delay(5, function() --[[ line: 599 ]]
+	task.delay(5, function()
 		-- upvalues: var53 (ref)
 		var53:start()
 	end)
 end
 local reactSchedulingTrackerModule = require(modules.Common.ReactSchedulingTracker)
-task.delay(game:DefineFastInt("ReactSchedulingTrackerStartUpDelayMs", 5000) / 1000, function() --[[ line: 609 ]]
+task.delay(game:DefineFastInt("ReactSchedulingTrackerStartUpDelayMs", 5000) / 1000, function()
 	-- upvalues: reactSchedulingTrackerModule (ref)
 	reactSchedulingTrackerModule:start()
 end)
@@ -540,7 +540,7 @@ if game:GetEngineFeature("RecordingServicePlaybackApiLua") then
 	coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.ExperienceStateReplay)
 end
 if fFlagEnableAEGIS2CommsFAEUpsell then
-	coroutine.wrap(function() --[[ line: 621 ]]
+	coroutine.wrap(function()
 		-- upvalues: corePackagesService (ref)
 		local var61
 		local socialUpsell = corePackagesService.Workspace.Packages.SocialUpsell
@@ -557,7 +557,7 @@ if fFlagEnableAEGIS2CommsFAEUpsell then
 		end
 	end)()
 end
-coroutine.wrap(function() --[[ line: 629 ]]
+coroutine.wrap(function()
 	-- upvalues: corePackagesService (ref), guiService (ref)
 	local var62
 	local display = corePackagesService.Workspace.Packages.Display
@@ -569,7 +569,7 @@ coroutine.wrap(function() --[[ line: 629 ]]
 		warn("Failure to Start CoreScript module " .. display.Name .. ".\n" .. status)
 		var62 = nil
 	end
-	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ line: 631 ]]
+	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
 		-- upvalues: var62 (ref), guiService (copy)
 		var62.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
 	end)

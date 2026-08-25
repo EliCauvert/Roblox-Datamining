@@ -2,7 +2,7 @@
 local _ = require(foundation.Components.Types)
 local foundationImagesModule = require(foundation.Parent.FoundationImages)
 
-return function(p0, p1) --[[ line: 9 | named "getScaledSlice" ]]
+return function(p0, p1)
 	-- upvalues: foundationImagesModule (ref)
 	local resolutionScale = foundationImagesModule.getResolutionScale()
 	

@@ -6,7 +6,7 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/clear", "/cls" },
-	clientRun = function(p0, _, _, p1) --[[ line: 14 ]]
+	clientRun = function(p0, _, _, p1)
 		-- upvalues: fFlagExpChatUseMessagesStore (ref), chatWindowMessagesClearedModule (ref)
 		if fFlagExpChatUseMessagesStore then
 			if not p1 or not p1.messagesStore then

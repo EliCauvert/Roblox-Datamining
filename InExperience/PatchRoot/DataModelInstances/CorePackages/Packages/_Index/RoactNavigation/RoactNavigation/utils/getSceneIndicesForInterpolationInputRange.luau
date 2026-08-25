@@ -1,6 +1,6 @@
 ﻿local array = require(script.Parent.Parent.Parent.LuauPolyfill).Array
 
-return function(p0) --[[ line: 5 | named "getSceneIndicesForInterpolationInputRange" ]]
+return function(p0)
 	-- upvalues: array (ref)
 	local scene = p0.scene
 	local scenes = p0.scenes

@@ -10,12 +10,12 @@ local t = {
 	animationConfig = { dampingRatio = 1, frequency = 6.666666666667 }
 }
 
-return function(vectorA) --[[ line: 52 | named "CrossFadeAnimatedView" ]]
+return function(vectorA)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), reactOtterModule (ref)
 	local var4 = cryoModule.Dictionary.join(t, vectorA)
 	local itemsCount = #var4.items
 	local var6 = useStyle()
-	local var7, var8 = reactOtterModule.useAnimatedBinding(0, reactModule.useCallback(function() --[[ line: 58 ]]
+	local var7, var8 = reactOtterModule.useAnimatedBinding(0, reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		if var4.crossAnim.isCrossFade then
 			var4.crossAnim.setCrossFade(false)
@@ -27,7 +27,7 @@ return function(vectorA) --[[ line: 52 | named "CrossFadeAnimatedView" ]]
 		var4.crossAnim.setCrossFade,
 		var4.crossAnim.setCurrentIndex
 	}))
-	reactModule.useEffect(function() --[[ line: 74 ]]
+	reactModule.useEffect(function()
 		-- upvalues: itemsCount (ref), var4 (ref), var8 (ref), reactOtterModule (copy)
 		if itemsCount < 2 then return end
 		if var4.crossAnim.isCrossFade then
@@ -56,7 +56,7 @@ return function(vectorA) --[[ line: 52 | named "CrossFadeAnimatedView" ]]
 			Size = UDim2.fromScale(1, 1),
 			Image = var4.items[var4.crossAnim.nextIndex].imageId,
 			ScaleType = Enum.ScaleType.Crop,
-			ImageTransparency = var7:map(function(p0) --[[ line: 107 ]]
+			ImageTransparency = var7:map(function(p0)
 				return 1 - p0
 			end)
 		}) else nil,

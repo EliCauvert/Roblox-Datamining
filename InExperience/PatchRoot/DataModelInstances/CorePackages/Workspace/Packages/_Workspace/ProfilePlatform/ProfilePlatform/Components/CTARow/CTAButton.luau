@@ -19,24 +19,24 @@ local iconButton = foundationModule.IconButton
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 
-return function(p0) --[[ line: 43 | named "CTAButton" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonVariant (ref), enumsModule (ref), iconButton (ref), button (ref), fillBehavior (ref), view (ref), contextualMenuModule (ref)
 	local var9, var10 = reactModule.useState(false)
 	local var11 = if fFlagProfileTradeItemsExposureLoggingModule then useTradeItemsExposureLoggerModule() else nil
-	local var12 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
 		var10(false)
 	end, {})
-	local var13 = reactModule.useCallback(function() --[[ line: 54 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
-		var10(function(p1) --[[ line: 55 ]]
+		var10(function(p1)
 			return not p1
 		end)
 	end, {})
 	local var14 = useAppFocusRoot({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		customEventHandlers = reactModule.useMemo(function() --[[ line: 60 ]]
+		customEventHandlers = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var12 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var12) }
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 43 | named "CTAButton" ]]
 	local var16 = if p0.buttonItem.buttonStyle then p0.buttonItem.buttonStyle else buttonVariant.Standard
 	local var17 = contextualMenuItems and #contextualMenuItems > 0
 	local isDisabled = p0.buttonItem.menuItem.isDisabled
-	local var18 = reactModule.useCallback(function() --[[ line: 86 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (copy), menuItem (ref), enumsModule (copy), var9 (ref), var11 (write), var17 (ref), var13 (ref)
 		if fFlagProfileTradeItemsExposureLoggingModule and menuItem.id == enumsModule.ProfileActions.ContextualOverflow and not var9 then
 			var11()

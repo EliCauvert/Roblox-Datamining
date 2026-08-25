@@ -3,12 +3,12 @@ local spyModule = require(script.Parent.Spy)
 local setReturnValueModule = require(script.Parent.setReturnValue)
 local setSideEffectModule = require(script.Parent.setSideEffect)
 
-local function _(p0, p1) --[[ line: 8 | named "isKeyInSpec" ]]
+local function _(p0, p1)
 	-- upvalues: symbolsModule (ref)
 	local spec = p0[symbolsModule.Spec]
 	
 	if spec then
-		local ok, status = pcall(function() --[[ line: 11 ]]
+		local ok, status = pcall(function()
 			-- upvalues: spec (ref), p1 (ref)
 			return spec[p1]
 		end)
@@ -20,7 +20,7 @@ end
 
 local t = { is = require(script.Parent.isAMagicMock) }
 local t_1 = {
-	__tostring = function(p2) --[[ line: 24 ]]
+	__tostring = function(p2)
 		-- upvalues: symbolsModule (ref)
 		local var15 = getmetatable(p2)
 		local list = { "id=" .. var15[symbolsModule.Address] }
@@ -31,14 +31,14 @@ local t_1 = {
 		end
 		return "<MagicMock " .. table.concat(list, " ") .. ">"
 	end,
-	__index = function(p3, p4) --[[ line: 36 ]]
+	__index = function(p3, p4)
 		-- upvalues: symbolsModule (ref), t (ref)
 		local status_1
 		local var17 = getmetatable(p3)
 		local spec = var17[symbolsModule.Spec]
 		
 		if spec then
-			local ok, status = pcall(function() --[[ line: 11 ]]
+			local ok, status = pcall(function()
 				-- upvalues: spec (ref), p4 (ref)
 				return spec[p4]
 			end)
@@ -59,14 +59,14 @@ local t_1 = {
 		end
 		return if var19 == symbolsModule.None then nil else var19
 	end,
-	__newindex = function(p5, p6, p7) --[[ line: 56 ]]
+	__newindex = function(p5, p6, p7)
 		-- upvalues: symbolsModule (ref), spyModule (ref)
 		local status_1
 		local var20 = getmetatable(p5)
 		local spec = var20[symbolsModule.Spec]
 		
 		if spec then
-			local ok, status = pcall(function() --[[ line: 11 ]]
+			local ok, status = pcall(function()
 				-- upvalues: spec (ref), p6 (ref)
 				return spec[p6]
 			end)
@@ -92,14 +92,14 @@ local t_1 = {
 	end
 }
 
-local _ = function(p8) --[[ line: 78 | named "isTuple" ]]
+local _ = function(p8)
 	-- upvalues: symbolsModule (ref), t (ref)
 	if type(p8) == "table" and p8[symbolsModule.isTuple] then
 		return not t.is(p8)
 	end
 end
 
-local function getReturnValue(p9, ...) --[[ line: 84 ]]
+local function getReturnValue(p9, ...)
 	-- upvalues: symbolsModule (ref), spyModule (ref), t (ref)
 	if p9[symbolsModule.ReturnValue] then
 		return p9[symbolsModule.ReturnValue]
@@ -128,7 +128,7 @@ local function getReturnValue(p9, ...) --[[ line: 84 ]]
 	return nil
 end
 
-function t_1:__call(...) --[[ line: 117 ]]
+function t_1:__call(...)
 	-- upvalues: getReturnValue (ref), t (ref), symbolsModule (ref)
 	local var24 = getmetatable(self)
 	local t_1 = {
@@ -156,9 +156,9 @@ function t_1:__call(...) --[[ line: 117 ]]
 	return table.unpack(t_1.result)
 end
 
-local _ = function(p10) --[[ line: 144 | named "operation" ]]
+local _ = function(p10)
 	-- upvalues: symbolsModule (ref), t (ref)
-	return function(p11, p12) --[[ line: 145 ]]
+	return function(p11, p12)
 		-- upvalues: p10 (ref), symbolsModule (copy), t (copy)
 		local var27, formattedText
 		local _ = nil
@@ -185,7 +185,7 @@ end
 
 local var7 = "add"
 
-function t_1:__add(p13) --[[ line: 145 ]]
+function t_1:__add(p13)
 	-- upvalues: var7 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -211,7 +211,7 @@ end
 
 local var8 = "sub"
 
-function t_1:__sub(p14) --[[ line: 145 ]]
+function t_1:__sub(p14)
 	-- upvalues: var8 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -237,7 +237,7 @@ end
 
 local var9 = "div"
 
-function t_1:__div(p15) --[[ line: 145 ]]
+function t_1:__div(p15)
 	-- upvalues: var9 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -263,7 +263,7 @@ end
 
 local var10 = "mul"
 
-function t_1:__mul(p16) --[[ line: 145 ]]
+function t_1:__mul(p16)
 	-- upvalues: var10 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -289,7 +289,7 @@ end
 
 local var11 = "mod"
 
-function t_1:__mod(p17) --[[ line: 145 ]]
+function t_1:__mod(p17)
 	-- upvalues: var11 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -315,7 +315,7 @@ end
 
 local var12 = "pow"
 
-function t_1:__pow(p18) --[[ line: 145 ]]
+function t_1:__pow(p18)
 	-- upvalues: var12 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -341,7 +341,7 @@ end
 
 local var13 = "neg"
 
-function t_1:__unm(p19) --[[ line: 145 ]]
+function t_1:__unm(p19)
 	-- upvalues: var13 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -367,7 +367,7 @@ end
 
 local var14 = "concat"
 
-function t_1:__concat(p20) --[[ line: 145 ]]
+function t_1:__concat(p20)
 	-- upvalues: var14 (ref), symbolsModule (ref), t (ref)
 	local var27, formattedText
 	local _ = nil
@@ -391,11 +391,11 @@ function t_1:__concat(p20) --[[ line: 145 ]]
 	return var29
 end
 
-function t.new(p21) --[[ line: 176 ]]
+function t.new(p21)
 	-- upvalues: symbolsModule (ref), t_1 (ref), setReturnValueModule (ref), setSideEffectModule (ref)
 	p21 = p21 or {}
 	
-	local function _() --[[ line: 179 | named "getName" ]]
+	local function _()
 		-- upvalues: p21 (write)
 		return if p21.name then p21.name elseif p21.spec then tostring(p21.spec) else "mock"
 	end
@@ -427,7 +427,7 @@ function t.new(p21) --[[ line: 176 ]]
 	return tbl
 end
 
-function t.is(p22) --[[ line: 218 ]]
+function t.is(p22)
 	-- upvalues: symbolsModule (ref)
 	local var34 = getmetatable(p22)
 	

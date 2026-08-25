@@ -17,20 +17,20 @@ local t = {
 	}
 }
 local t_1 = {
-	isEnabled = function() --[[ line: 28 ]]
+	isEnabled = function()
 		return game:GetEngineFeature("PageMilestoneSignalEnabled")
 	end,
-	getService = function() --[[ line: 31 ]]
+	getService = function()
 		return game:GetService("AppLifecycleObserverService")
 	end,
 	resolveEnumItem = resolveEnumItemModule,
-	defer = function(p0) --[[ line: 35 ]]
+	defer = function(p0)
 		task.defer(p0)
 	end,
 	warn = warn
 }
 
-function t.signal(value, p1) --[[ line: 41 ]]
+function t.signal(value, p1)
 	-- upvalues: signalWithModule (ref), t_1 (ref)
 	signalWithModule(t_1, value, p1)
 end

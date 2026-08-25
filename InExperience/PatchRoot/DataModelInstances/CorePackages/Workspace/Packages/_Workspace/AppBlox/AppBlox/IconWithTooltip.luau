@@ -16,7 +16,7 @@ game:DefineFastInt("TooltipHitboxMinSize", 26)
 local info = images["icons/actions/info"]
 local vector2 = Vector2.new(game:GetFastInt("TooltipHitboxMinSize"), game:GetFastInt("TooltipHitboxMinSize"))
 
-return function(p0) --[[ line: 42 | named "IconWithTooltip" ]]
+return function(p0)
 	-- upvalues: useUiModeInfo (ref), useDesignTokens (ref), getFFlagTenFootUiSupportSortHeaderTooltip (ref), fFlagLuaAppFixCursorHooks (ref), useCursor (ref), uiMode (ref), coreGuiService (ref), withHoverTooltip (ref), reactModule (ref), imageSetLabel (ref), info (ref), interactable (ref), vector2 (ref)
 	local var4 = useUiModeInfo()
 	local var5 = useDesignTokens()
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 42 | named "IconWithTooltip" ]]
 		guiTarget = coreGuiService,
 		triggerPointName = p0.triggerPointName,
 		disabled = var7
-	}, function(p1, p2) --[[ line: 81 ]]
+	}, function(p1, p2)
 		-- upvalues: reactModule (copy), size (ref), p0 (ref), fFlagLuaAppFixCursorHooks (copy), getFFlagTenFootUiSupportSortHeaderTooltip (copy), var6 (ref), useCursor (copy), circle (write), size0 (write), imageSetLabel (copy), info (copy), color3 (ref), interactable (copy), vector2 (copy)
 		return reactModule.createElement("Frame", {
 			Size = size,

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("GameFilters").Parent.DiscoveryTypes)
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	if p1 == nil then
 		return nil
 	end

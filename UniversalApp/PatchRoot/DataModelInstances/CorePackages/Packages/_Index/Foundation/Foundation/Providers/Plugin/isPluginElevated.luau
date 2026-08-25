@@ -1,5 +1,5 @@
-﻿return function(p0) --[[ line: 5 | named "isPluginElevated" ]]
-	return pcall(function() --[[ line: 6 ]]
+﻿return function(p0)
+	return pcall(function()
 		-- upvalues: p0 (ref)
 		return p0:GetPluginComponent("Panels")
 	end)

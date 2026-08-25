@@ -22,11 +22,11 @@ local t_1 = {
 	}
 }
 
-local function _(p0, p1) --[[ line: 38 | named "valueLooksLikeToolName" ]]
+local function _(p0, p1)
 	return typeof(p0) == "string" and string.lower(p0) == p1
 end
 
-local function toolCallLooksLikeRequest(p2, p3) --[[ line: 42 ]]
+local function toolCallLooksLikeRequest(p2, p3)
 	local kind = p2.kind
 	
 	if not (typeof(kind) == "string" and string.lower(kind) == p3) then
@@ -51,7 +51,7 @@ local function toolCallLooksLikeRequest(p2, p3) --[[ line: 42 ]]
 	end
 end
 
-local function hasPersistedToolResult(p4) --[[ line: 59 ]]
+local function hasPersistedToolResult(p4)
 	-- upvalues: httpService (ref)
 	if p4.content == nil then
 		return false
@@ -72,7 +72,7 @@ local function hasPersistedToolResult(p4) --[[ line: 59 ]]
 	return false
 end
 
-local function findRequestInTurnState(p5, p6, p7) --[[ line: 85 ]]
+local function findRequestInTurnState(p5, p6, p7)
 	-- upvalues: hasPersistedToolResult (ref), toolCallLooksLikeRequest (ref)
 	local t = {}
 	
@@ -99,15 +99,15 @@ return {
 	SEARCH_LOCAL_TOOL_DEFINITION = t,
 	INSPECT_LOCAL_TOOL_DEFINITION = t_1,
 	toolCallLooksLikeRequest = toolCallLooksLikeRequest,
-	findSearchRequestInTurnState = function(p8, p9) --[[ line: 115 ]]
+	findSearchRequestInTurnState = function(p8, p9)
 		-- upvalues: findRequestInTurnState (ref)
 		return findRequestInTurnState(p8, "search_client_datamodel", p9)
 	end,
-	findInspectRequestInTurnState = function(p10, p11) --[[ line: 122 ]]
+	findInspectRequestInTurnState = function(p10, p11)
 		-- upvalues: findRequestInTurnState (ref)
 		return findRequestInTurnState(p10, "inspect_client_instance", p11)
 	end,
-	formatResultContent = function(p12) --[[ line: 129 ]]
+	formatResultContent = function(p12)
 		-- upvalues: httpService (ref)
 		local ok, status = pcall(httpService.JSONEncode, httpService, p12)
 		

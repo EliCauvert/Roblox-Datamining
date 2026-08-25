@@ -8,14 +8,14 @@ local recyclableViewRecordModule = require(script.Parent.RecyclableViewRecord)
 local createElement = reactModule.createElement
 
 return {
-	new = function(p0) --[[ line: 41 ]]
+	new = function(p0)
 		-- upvalues: createElement (ref), listItemViewHostModule (ref), signalsExperimentalModule (ref), viewRecyclerModule (ref), recyclableViewRegistryModule (ref), recyclableViewRecordModule (ref)
 		local t = {}
 		local var8 = 1
 		local var9 = false
 		local var10 = nil
 		
-		local function _() --[[ line: 47 | named "notifyChanged" ]]
+		local function _()
 			-- upvalues: var9 (write), p0 (ref)
 			if not var9 then
 				p0()
@@ -24,14 +24,14 @@ return {
 		
 		local _ = nil
 		local t_1 = {
-			allocateId = function() --[[ line: 55 ]]
+			allocateId = function()
 				-- upvalues: var9 (write), var8 (write)
 				assert(not var9, "RecyclingRuntime: cannot allocate after destroy")
 				var8 += 1
 				
 				return var8
 			end,
-			addHosts = function(p1, p2, p3) --[[ line: 61 ]]
+			addHosts = function(p1, p2, p3)
 				-- upvalues: var9 (write), t (ref), p0 (ref)
 				assert(not var9, "RecyclingRuntime: cannot add hosts after destroy")
 				local var12 = false
@@ -45,7 +45,7 @@ return {
 					p0()
 				end
 			end,
-			removeHosts = function(p4) --[[ line: 76 ]]
+			removeHosts = function(p4)
 				-- upvalues: t (ref), var9 (write), p0 (ref)
 				local var13 = false
 				
@@ -62,7 +62,7 @@ return {
 		}
 		
 		return {
-			getRecyclingScope = function(p5) --[[ line: 90 ]]
+			getRecyclingScope = function(p5)
 				-- upvalues: var9 (write), var10 (write), t_1 (write), createElement (copy), listItemViewHostModule (copy), signalsExperimentalModule (copy), viewRecyclerModule (copy), recyclableViewRegistryModule (copy), recyclableViewRecordModule (copy)
 				assert(not var9, "RecyclingRuntime: cannot get a Recycling scope after destroy")
 				
@@ -71,7 +71,7 @@ return {
 					local t = {}
 					local t_2 = {}
 					
-					local function flushHosts() --[[ line: 100 ]]
+					local function flushHosts()
 						-- upvalues: t_2 (ref), t_1 (copy), t (ref), createElement (copy), listItemViewHostModule (copy)
 						if #t_2 > 0 then
 							t_1.removeHosts(t_2)
@@ -93,11 +93,11 @@ return {
 								end
 							end
 							if #t_3 > 0 then
-								t_1.addHosts(t_3, function(p6) --[[ line: 119 ]]
+								t_1.addHosts(t_3, function(p6)
 									return `RecyclableViewRecord{p6.id}`
-								end, function(p7) --[[ line: 121 ]]
+								end, function(p7)
 									-- upvalues: createElement (copy), listItemViewHostModule (copy)
-									return function(p8) --[[ line: 122 ]]
+									return function(p8)
 										-- upvalues: createElement (copy), listItemViewHostModule (copy), p7 (ref)
 										return createElement(listItemViewHostModule, { itemView = p7, createPortal = p8 })
 									end
@@ -110,7 +110,7 @@ return {
 					
 					local var18 = viewRecyclerModule.Adapter.createRecyclingScope({
 						maxPoolSize = p5.maxPoolSize,
-						onPoolChanged = if p5.diagnostics == nil then nil else function(p9) --[[ line: 151 ]]
+						onPoolChanged = if p5.diagnostics == nil then nil else function(p9)
 							-- upvalues: p5 (ref), viewRecyclerModule (copy)
 							p5.diagnostics({
 								kind = viewRecyclerModule.Diagnostics.EventKind.PoolChanged,
@@ -122,7 +122,7 @@ return {
 							})
 						end,
 						adapter = {
-							create = function(p10) --[[ line: 162 ]]
+							create = function(p10)
 								-- upvalues: recyclableViewRegistryModule (copy), recyclableViewRecordModule (copy), t_1 (copy), t (ref)
 								local metadata = recyclableViewRegistryModule.getMetadata(p10)
 								assert(metadata ~= nil, "RecyclingScope: cannot create an unregistered Recyclable view type")
@@ -131,11 +131,11 @@ return {
 								
 								return var22
 							end,
-							destroy = function(p11) --[[ line: 175 ]]
+							destroy = function(p11)
 								-- upvalues: t_2 (ref)
 								table.insert(t_2, p11)
 							end,
-							batch = function(p12) --[[ line: 135 ]]
+							batch = function(p12)
 								-- upvalues: var14 (write), signalsExperimentalModule (copy), flushHosts (ref)
 								var14 += 1
 								local ok, status = pcall(signalsExperimentalModule.batch, p12)
@@ -151,7 +151,7 @@ return {
 						}
 					})
 					var10 = {
-						exchange = function(p13, p14, p15) --[[ line: 183 ]]
+						exchange = function(p13, p14, p15)
 							-- upvalues: var18 (ref), var14 (write), flushHosts (ref)
 							local var23 = var18.exchange(p13, p14, p15)
 							
@@ -162,7 +162,7 @@ return {
 						end,
 						batch = var18.batch,
 						isLeaseCurrent = var18.isLeaseCurrent,
-						setMaxPoolSize = function(a) --[[ line: 192 ]]
+						setMaxPoolSize = function(a)
 							-- upvalues: var18 (ref), var14 (write), flushHosts (ref)
 							var18.setMaxPoolSize(a)
 							
@@ -172,7 +172,7 @@ return {
 						end,
 						getScopeInventory = var18.getScopeInventory,
 						getVacantRecords = var18.getVacantRecords,
-						destroy = function() --[[ line: 200 ]]
+						destroy = function()
 							-- upvalues: var18 (ref), var14 (write), flushHosts (ref)
 							var18.destroy()
 							
@@ -186,7 +186,7 @@ return {
 				end
 				return var10
 			end,
-			getHostChildren = function(p16) --[[ line: 212 ]]
+			getHostChildren = function(p16)
 				-- upvalues: t (ref)
 				local t_1 = {}
 				
@@ -195,7 +195,7 @@ return {
 				end
 				return t_1
 			end,
-			destroy = function() --[[ line: 219 ]]
+			destroy = function()
 				-- upvalues: var9 (write), var10 (write), t (ref)
 				if var9 then return end
 				var9 = true

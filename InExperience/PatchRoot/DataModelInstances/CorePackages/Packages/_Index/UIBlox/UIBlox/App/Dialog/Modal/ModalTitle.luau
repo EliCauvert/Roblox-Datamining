@@ -32,16 +32,16 @@ modalTitle.defaultProps = {
 	closeButtonIcon = closeButtonIconModule.Close
 }
 
-function modalTitle.GetHeight(_) --[[ line: 53 ]]
+function modalTitle.GetHeight(_)
 	return 48
 end
 
-local function _(p0) --[[ line: 57 | named "getCloseButtonIcon" ]]
+local function _(p0)
 	-- upvalues: closeButtonIconModule (ref)
 	return if p0 == closeButtonIconModule.Close then "icons/navigation/close" elseif p0 == closeButtonIconModule.Back then "icons/actions/cycleLeft" else nil
 end
 
-local function renderBackgroundImage(value, p1, p2) --[[ line: 67 ]]
+local function renderBackgroundImage(value, p1, p2)
 	-- upvalues: cryoModule (ref), roactModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref)
 	local text = value.text
 	local var11 = text and #text > 0
@@ -112,11 +112,11 @@ local function renderBackgroundImage(value, p1, p2) --[[ line: 67 ]]
 	return var14
 end
 
-function modalTitle.render(p3) --[[ line: 147 ]]
+function modalTitle.render(p3)
 	-- upvalues: withStyleModule (ref), roactModule (ref), controllableModule (ref), imageSetComponentModule (ref), imagesModule (ref), closeButtonIconModule (ref), genericTextLabelModule (ref), renderBackgroundImage (ref)
 	local titleBackgroundImageProps = p3.props.titleBackgroundImageProps
 	
-	return withStyleModule(function(p4) --[[ line: 150 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: roactModule (copy), p3 (ref), controllableModule (copy), imageSetComponentModule (copy), imagesModule (copy), closeButtonIconModule (copy), genericTextLabelModule (copy), titleBackgroundImageProps (ref), renderBackgroundImage (copy)
 		local createElement_1
 		local font = p4.Font
@@ -163,7 +163,7 @@ function modalTitle.render(p3) --[[ line: 147 ]]
 			t_3.children = t_4
 			t_2.controlComponent = t_3
 			
-			function t_2.onStateChanged(...) --[[ line: 184 ]] end
+			function t_2.onStateChanged(...) end
 			
 			createElement_1 = createElement_1(var19, t_2) or nil
 		end

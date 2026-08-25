@@ -9,7 +9,7 @@ local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useSignalState = signalsReactModule.useSignalState
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-local function selectRoduxTabType(p0) --[[ line: 31 ]]
+local function selectRoduxTabType(p0)
 	local channelTabs = p0.ChannelTabs
 	
 	if channelTabs == nil or channelTabs.allChannelTabs == nil or channelTabs.selectedTabName == nil then
@@ -20,7 +20,7 @@ local function selectRoduxTabType(p0) --[[ line: 31 ]]
 	return if selectedTabName then selectedTabName.Type else nil
 end
 
-return function() --[[ line: 40 | named "useSelectedTabType" ]]
+return function()
 	-- upvalues: useSelector (ref), selectRoduxTabType (ref), useSignalState (ref), getChannelTabsStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref)
 	local var6 = useSelector(selectRoduxTabType)
 	local var7 = useSignalState(getChannelTabsStoreModule(false).getChannelTabsState)

@@ -6,10 +6,10 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
 local completeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
 
-return function() --[[ line: 14 | named "useHeadlessSubscriptionErrorCompletion" ]]
+return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), reactModule (ref), promptStateModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref)
 	local var6 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), promptStateModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy)
 		if var6 == promptStateModule.Error then
 			completeRobloxSubscriptionUpsellFlowModule()

@@ -6,12 +6,12 @@ local promptsApiModule = require(script.promptsApi)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 
-return signalsModule.createComputed(function() --[[ line: 15 ]]
+return signalsModule.createComputed(function()
 	-- upvalues: createChatTooltipStoreModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), promptsApiModule (ref), fFlagExpChatPresetChatEnabled (ref)
 	local var4 = createChatTooltipStoreModule()
 	
 	if fFlagExpChatUseUnifiedTooltipStore then
-		promptsApiModule.fetchAllTooltipEligibility(function(p0) --[[ line: 19 ]]
+		promptsApiModule.fetchAllTooltipEligibility(function(p0)
 			-- upvalues: var4 (ref), fFlagExpChatPresetChatEnabled (copy)
 			local customPrompts = p0.customPrompts
 			var4.setIsEligible("GlobalChatTooltip", customPrompts.GlobalChatTooltip ~= nil)

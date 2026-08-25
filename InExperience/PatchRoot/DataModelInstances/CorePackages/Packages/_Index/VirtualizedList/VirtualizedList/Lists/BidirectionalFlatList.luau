@@ -9,16 +9,16 @@ local useState = reactModule.useState
 local viewModule = require(parent.Components.View.View)
 local flatListModule = require(script.Parent.FlatList)
 
-local function _(p0) --[[ line: 81 | named "_getLength" ]]
-	return function(p1) --[[ line: 82 ]]
+local function _(p0)
+	return function(p1)
 		-- upvalues: p0 (ref)
 		return if p0 then p1.X else p1.Y
 	end
 end
 
-t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 ]]
+t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3)
 	-- upvalues: promiseModule (ref), useState (ref), useRef (ref), reactModule (ref), flatListModule (ref), object (ref), viewModule (ref)
-	local function promiseFn() --[[ line: 99 ]]
+	local function promiseFn()
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve()
 	end
@@ -47,7 +47,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 	local var22 = useRef(nil)
 	local var23 = useRef(nil)
 	
-	local function maybeCallOnStartReached() --[[ line: 133 ]]
+	local function maybeCallOnStartReached()
 		-- upvalues: data (ref), var20 (ref), p2 (ref), var18 (ref), var15 (ref), promiseModule (copy), var22 (ref), var23 (ref), var9 (ref)
 		local var26
 		if data and #data > 0 and var20.current[#data] then return end
@@ -63,9 +63,9 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 		end
 		var15(true)
 		
-		local function p() --[[ line: 151 ]]
+		local function p()
 			-- upvalues: promiseModule (copy), var22 (copy), var15 (copy)
-			return promiseModule.new(function(p4) --[[ line: 152 ]]
+			return promiseModule.new(function(p4)
 				-- upvalues: var22 (copy), var15 (copy)
 				var22.current = nil
 				var15(false)
@@ -74,7 +74,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 		end
 		
 		if var23.current then
-			var23.current:andThen(function() --[[ line: 160 ]]
+			var23.current:andThen(function()
 				-- upvalues: var22 (copy), var9 (copy), p (ref)
 				var22.current = var9():andThen(p)
 			end)
@@ -84,7 +84,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 		var22.current = var9():andThen(p)
 	end
 	
-	local function maybeCallOnEndReached() --[[ line: 168 ]]
+	local function maybeCallOnEndReached()
 		-- upvalues: data (ref), var21 (ref), p2 (ref), var18 (ref), var17 (ref), promiseModule (copy), var23 (ref), var22 (ref), var7 (ref)
 		local var28
 		if data and #data > 0 and var21.current[#data] then return end
@@ -100,9 +100,9 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 		end
 		var17(true)
 		
-		local function p() --[[ line: 186 ]]
+		local function p()
 			-- upvalues: promiseModule (copy), var23 (copy), var17 (copy)
-			return promiseModule.new(function(p5) --[[ line: 187 ]]
+			return promiseModule.new(function(p5)
 				-- upvalues: var23 (copy), var17 (copy)
 				var23.current = nil
 				var17(false)
@@ -111,7 +111,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 		end
 		
 		if var22.current then
-			var22.current:andThen(function() --[[ line: 195 ]]
+			var22.current:andThen(function()
 				-- upvalues: var23 (copy), var7 (copy), p (ref)
 				var23.current = var7():andThen(p)
 			end)
@@ -122,19 +122,19 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 	end
 	
 	return reactModule.createElement(reactModule.Fragment, nil, reactModule.createElement(flatListModule, object.assign(table.clone(p2), {
-		renderItem = function(p6) --[[ line: 314 ]]
+		renderItem = function(p6)
 			-- upvalues: reactModule (copy), viewModule (copy), p3 (ref), p2 (ref), enableAutoscrollToTop (ref), var6 (ref)
 			local item = p6.item
 			
 			return reactModule.createElement(viewModule, {
 				BorderSizePixel = 0,
 				name = "resize",
-				onLayout = function(p7) --[[ line: 317 ]]
+				onLayout = function(p7)
 					-- upvalues: p3 (copy), p2 (copy), item (ref), enableAutoscrollToTop (copy), var6 (copy)
 					local var30 = if p3 and p3.current then p3.current._listRef._scrollRef.getNativeScrollRef()._nativeRef.current else nil
 					local horizontal = p2.horizontal
 					
-					local var31 = function(p8) --[[ line: 82 ]]
+					local var31 = function(p8)
 						-- upvalues: horizontal (ref)
 						return if horizontal then p8.X else p8.Y
 					end
@@ -168,7 +168,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 			}, { child = p2.renderItem(p6) })
 		end,
 		ref = p3,
-		ListHeaderComponent = function() --[[ line: 247 ]]
+		ListHeaderComponent = function()
 			-- upvalues: var11 (ref), listHeaderComponent (ref), reactModule (copy), var14 (ref), headerLoadingIndicator (ref)
 			if var11 then
 				if not var14 then
@@ -183,7 +183,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 				return if listHeaderComponent then reactModule.createElement(listHeaderComponent, nil) else nil
 			end
 		end,
-		ListFooterComponent = function() --[[ line: 277 ]]
+		ListFooterComponent = function()
 			-- upvalues: var11 (ref), listFooterComponent (ref), reactModule (copy), var16 (ref), footerLoadingIndicator (ref)
 			if var11 then
 				if not var16 then
@@ -199,9 +199,9 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 			end
 		end,
 		onEndReached = object.None,
-		onScroll = function(p9) --[[ line: 204 ]]
+		onScroll = function(p9)
 			-- upvalues: var19 (ref), onScroll (ref), p2 (ref), var10 (ref), var8 (ref), maybeCallOnStartReached (ref), var12 (ref), data (ref), var20 (ref), maybeCallOnEndReached (ref), var13 (ref), var21 (ref)
-			var19(function(p10) --[[ line: 206 ]]
+			var19(function(p10)
 				return p10 + 1
 			end)
 			
@@ -211,7 +211,7 @@ t.BidirectionalFlatList = reactModule.forwardRef(function(p2, p3) --[[ line: 98 
 			local var35 = p9:GetChildren()[1]
 			local horizontal = p2.horizontal
 			
-			local var36 = function(p11) --[[ line: 82 ]]
+			local var36 = function(p11)
 				-- upvalues: horizontal (ref)
 				return if horizontal then p11.X else p11.Y
 			end

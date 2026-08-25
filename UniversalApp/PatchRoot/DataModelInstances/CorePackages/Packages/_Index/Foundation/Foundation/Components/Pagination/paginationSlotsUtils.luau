@@ -8,10 +8,10 @@ local t = {
 
 return {
 	NAV_SLOT_IDS = t,
-	getPageSlotId = function(p0) --[[ line: 71 ]]
+	getPageSlotId = function(p0)
 		return `page-{p0}`
 	end,
-	getPaginationSelectableSlotOrder = function(p1) --[[ line: 76 ]]
+	getPaginationSelectableSlotOrder = function(p1)
 		-- upvalues: t (ref), paginationDirectionModule (ref)
 		local t_1 = {}
 		
@@ -36,7 +36,7 @@ return {
 		end
 		return t_1
 	end,
-	getVisiblePageSlots = function(p2, p3) --[[ line: 30 ]]
+	getVisiblePageSlots = function(p2, p3)
 		if p3 <= 7 then
 			local t = {}
 			

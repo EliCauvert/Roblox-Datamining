@@ -10,7 +10,7 @@ local isNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local insert = table.insert
 local t = {}
 
-local function createTextNode(p0, p1) --[[ line: 23 ]]
+local function createTextNode(p0, p1)
 	-- upvalues: getNodeTypeModule (ref)
 	return {
 		name = "TEXT",
@@ -21,7 +21,7 @@ local function createTextNode(p0, p1) --[[ line: 23 ]]
 	}
 end
 
-function t.buildTree(p2, p3) --[[ line: 34 ]]
+function t.buildTree(p2, p3)
 	-- upvalues: nodeTypeModule (ref), getNodeTypeModule (ref), insert (ref), t (ref), STYLED_TEXT (ref), createTextNode (ref), LISTS (ref), isNodeBlockModule (ref), DIVIDERS (ref)
 	local t_1 = {
 		name = "ROOT",
@@ -53,13 +53,13 @@ function t.buildTree(p2, p3) --[[ line: 34 ]]
 				type = getNodeTypeModule("STYLED_TEXT", p3)
 			})
 		elseif var10.name == "EMPHASIS_END" then
-			t.closeNode(list, function(p4) --[[ line: 76 ]]
+			t.closeNode(list, function(p4)
 				return p4.name == "STYLED_TEXT"
 			end)
 		elseif STYLED_TEXT[var10.name] then
 			insert(var11.children, createTextNode(var10, p3))
 		elseif LISTS[var10.name] and var10.capture then
-			t.closeNode(list, function(p5) --[[ line: 85 ]]
+			t.closeNode(list, function(p5)
 				-- upvalues: isNodeBlockModule (copy)
 				return isNodeBlockModule(p5)
 			end)
@@ -71,13 +71,13 @@ function t.buildTree(p2, p3) --[[ line: 34 ]]
 				type = getNodeTypeModule("LIST_ITEM", p3)
 			})
 		elseif var10.name == "HEADING" and not var10.isBlock then
-			if not t.closeNode(list, function(p6) --[[ line: 101 ]]
+			if not t.closeNode(list, function(p6)
 				return p6.name == "HEADING"
 			end) then
 				insert(var11.children, createTextNode(var10, p3))
 			end
 		elseif var10.isBlock then
-			t.closeNode(list, function(p7) --[[ line: 110 ]]
+			t.closeNode(list, function(p7)
 				-- upvalues: isNodeBlockModule (copy)
 				return isNodeBlockModule(p7)
 			end)
@@ -113,7 +113,7 @@ function t.buildTree(p2, p3) --[[ line: 34 ]]
 				type = getNodeTypeModule("LINK", p3)
 			})
 		elseif var10.name == "LINK_END" then
-			t.closeNode(list, function(p8) --[[ line: 153 ]]
+			t.closeNode(list, function(p8)
 				return p8.name == "LINK"
 			end)
 		elseif var10.name == "IMAGE" and var10.capture then
@@ -169,7 +169,7 @@ function t.buildTree(p2, p3) --[[ line: 34 ]]
 			end
 		elseif var10.name == "CLOSE" and var10.capture then
 			local var18 = var10.capture[1]
-			assert(t.closeNode(list, function(p9) --[[ line: 213 ]]
+			assert(t.closeNode(list, function(p9)
 				-- upvalues: var18 (ref), var10 (ref)
 				if p9.name == "TAG" then
 					assert(p9.text == var18, `Found <{p9.text}> at {p9.offset} when trying to close </{var18}> at {var10.offset}`)
@@ -202,7 +202,7 @@ function t.buildTree(p2, p3) --[[ line: 34 ]]
 						offset = var10.offset,
 						type = getNodeTypeModule(var10.name, p3)
 					})
-					t.closeNode(list, function(p10) --[[ line: 264 ]]
+					t.closeNode(list, function(p10)
 						return p10.name == "HEADING"
 					end)
 					insert(list, {
@@ -241,18 +241,18 @@ function t.buildTree(p2, p3) --[[ line: 34 ]]
 		end
 		var9 += 1
 	end
-	t.closeNode(list, function(p11) --[[ line: 294 ]]
+	t.closeNode(list, function(p11)
 		-- upvalues: isNodeBlockModule (copy)
 		return isNodeBlockModule(p11)
 	end)
-	t.closeNode(list, function(p12) --[[ line: 298 ]]
+	t.closeNode(list, function(p12)
 		return p12.name == "ROOT"
 	end)
 	
 	return t_1
 end
 
-function t.closeNode(p13, p14) --[[ line: 305 ]]
+function t.closeNode(p13, p14)
 	-- upvalues: t (ref), insert (ref)
 	local var23 = t.findLastNodeIndex(p13, p14)
 	
@@ -276,7 +276,7 @@ function t.closeNode(p13, p14) --[[ line: 305 ]]
 	return var24
 end
 
-function t.findLastNodeIndex(p15, p16) --[[ line: 332 ]]
+function t.findLastNodeIndex(p15, p16)
 	for i = #p15, 1, -1 do
 		local var27
 		local var26 = p15[i]
@@ -295,7 +295,7 @@ function t.findLastNodeIndex(p15, p16) --[[ line: 332 ]]
 	return nil
 end
 
-function t.parseXmlAttributes(p17) --[[ line: 344 ]]
+function t.parseXmlAttributes(p17)
 	local t = {}
 	
 	for i, v in p17:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do

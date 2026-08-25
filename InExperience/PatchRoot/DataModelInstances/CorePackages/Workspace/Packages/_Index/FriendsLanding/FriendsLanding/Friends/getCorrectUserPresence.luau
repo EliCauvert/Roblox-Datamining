@@ -1,7 +1,7 @@
 ﻿local presenceType = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxPresence.Enums.PresenceType
 local isUserInGameModule = require(script.Parent.isUserInGame)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: presenceType (ref), isUserInGameModule (ref)
 	if not p0 then
 		return nil

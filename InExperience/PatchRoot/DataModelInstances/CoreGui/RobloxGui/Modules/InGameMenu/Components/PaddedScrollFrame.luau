@@ -14,12 +14,12 @@ local var4 = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-return function(p0) --[[ line: 23 | named "PaddedScrollFrame" ]]
+return function(p0)
 	-- upvalues: globalConfigModule (ref), var4 (ref), withFoundationOrUIBloxStyle (ref), roact (ref), assetsModule (ref)
 	if globalConfigModule.propValidation then
 		assert(var4(p0))
 	end
-	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 27 ]]
+	return withFoundationOrUIBloxStyle(function(p1)
 		return {
 			Theme = {
 				UIEmphasis = {
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 23 | named "PaddedScrollFrame" ]]
 				}
 			}
 		}
-	end, function(p2) --[[ line: 33 ]]
+	end, function(p2)
 		-- upvalues: roact (copy), assetsModule (copy), p0 (ref)
 		return roact.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,

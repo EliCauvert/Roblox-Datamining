@@ -12,7 +12,7 @@ local unibarListModule = require(inExperienceSideSheet.Components.UnibarList)
 local useExperienceIconModule = require(inExperienceSideSheet.Hooks.useExperienceIcon)
 local useExperienceNameModule = require(inExperienceSideSheet.Hooks.useExperienceName)
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "ExperienceDetailsRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useExperienceNameModule (ref), useExperienceIconModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), radius (ref), text (ref), unibarListModule (ref)
 	local var6 = useTokens()
 	local var7 = useExperienceNameModule()

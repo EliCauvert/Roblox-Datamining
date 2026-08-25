@@ -1,11 +1,11 @@
 ﻿local t = {}
 local isType = require(script.Parent.Parent.Parent.Parent.GraphQL).isType
 
-function t.removeTemporaryGlobals() --[[ line: 26 ]]
+function t.removeTemporaryGlobals()
 	-- upvalues: isType (ref)
 	isType(nil)
 	
-	return (function() --[[ line: 33 | named "remove" ]] end)()
+	return (function() end)()
 end
 
 return t

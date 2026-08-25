@@ -12,18 +12,18 @@ local useDictationInputBarModule = require(script.Parent.useDictationInputBar)
 local useDictationTextAreaModule = require(script.Parent.useDictationTextArea)
 local dictationAffordancesModule = require(script.Parent.DictationAffordances)
 
-local function _(startValue, endValue, alpha) --[[ line: 23 | named "lerp" ]]
+local function _(startValue, endValue, alpha)
 	return startValue + (endValue - startValue) * alpha
 end
 
-local _ = function(value, p0) --[[ line: 29 | named "setTransparency" ]]
-	return p0:map(function(p1) --[[ line: 30 ]]
+local _ = function(value, p0)
+	return p0:map(function(p1)
 		-- upvalues: value (ref)
 		return value + (1 - value) * p1
 	end)
 end
 
-return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), configModule (ref), stopCountdownModule (ref), channelChipModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
 	local var12 = foundationModule.Hooks.useTokens()
 	local var13 = useDictationInputBarModule({
@@ -51,9 +51,9 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 		listeningColor3 = var12.Color.Shift.Shift_200.Color3,
 		listeningTransparency = var12.Color.Shift.Shift_200.Transparency
 	})
-	local var16 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), var15 (ref)
-		return p2.transparencyValue:map(function(p3) --[[ line: 71 ]]
+		return p2.transparencyValue:map(function(p3)
 			-- upvalues: var15 (copy)
 			local t = { Color3 = var15.color3 }
 			local baseTransparency = var15.baseTransparency
@@ -67,9 +67,9 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 		var15.baseTransparency
 	})
 	local var17 = dictationAffordancesModule.shouldPreventFade(var13)
-	local var18 = reactModule.useMemo(function() --[[ line: 83 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), p2 (ref)
-		return if var17 then p2.transparencyValue:map(function(_) --[[ line: 85 ]]
+		return if var17 then p2.transparencyValue:map(function(_)
 			return 0
 		end) else p2.transparencyValue
 	end, { var17, p2.transparencyValue })
@@ -88,7 +88,7 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 	}
 	local t_1 = { Color = configModule.ChatInputBarBorderColor3 }
 	local chatInputBarBorderTransparency = configModule.ChatInputBarBorderTransparency
-	t_1.Transparency = p2.transparencyValue:map(function(p4) --[[ line: 30 ]]
+	t_1.Transparency = p2.transparencyValue:map(function(p4)
 		-- upvalues: chatInputBarBorderTransparency (ref)
 		return chatInputBarBorderTransparency + (1 - chatInputBarBorderTransparency) * p4
 	end)
@@ -118,7 +118,7 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 	local createElement_2 = reactModule.createElement
 	local t_5 = {}
 	local var27 = 0
-	t_5.transparency = p2.transparencyValue:map(function(p5) --[[ line: 30 ]]
+	t_5.transparency = p2.transparencyValue:map(function(p5)
 		-- upvalues: var27 (ref)
 		return var27 + (1 - var27) * p5
 	end)
@@ -141,14 +141,14 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 			Font = configModule.ChatInputBarFont,
 			Text = p2.disabledChatPlaceholderText,
 			Position = UDim2.fromScale(1, 0),
-			Size = p2.targetChannelWidth:map(function(p6) --[[ line: 141 ]]
+			Size = p2.targetChannelWidth:map(function(p6)
 				return UDim2.new(1, -(p6 + 8), 0, 0)
 			end),
 			TextColor3 = if p2.showPlaceholderText then p2.chatInputBarSettings.PlaceholderColor3 else p2.chatInputBarSettings.TextColor3,
 			TextSize = if p2.isSpatialUIEnabled then p2.chatInputBarSettings.SpatialPanelTextSize else p2.chatInputBarSettings.TextSize
 		}
 		local var31 = if p2.showPlaceholderText then 0.5 else 0
-		t_6.TextTransparency = p2.transparencyValue:map(function(p7) --[[ line: 30 ]]
+		t_6.TextTransparency = p2.transparencyValue:map(function(p7)
 			-- upvalues: var31 (ref)
 			return var31 + (1 - var31) * p7
 		end)
@@ -165,7 +165,7 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 		AnchorPoint = Vector2.new(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Position = UDim2.fromScale(1, 0),
-		Size = p2.targetChannelWidth:map(function(p8) --[[ line: 165 ]]
+		Size = p2.targetChannelWidth:map(function(p8)
 			return UDim2.new(1, -(p8 + 8), 0, 0)
 		end)
 	}, {
@@ -227,7 +227,7 @@ return reactModule.memo(function(p2) --[[ line: 35 | named "DictationInputBar" ]
 			size = foundationModule.Enums.InputSize.Small,
 			variant = var14.variant,
 			isDisabled = var14.isDisabled,
-			onActivated = if useLongPressOverlay then function() --[[ line: 253 ]] end else var14.onActivated,
+			onActivated = if useLongPressOverlay then function() end else var14.onActivated,
 			Selectable = if useLongPressOverlay then false else nil
 		}),
 		InputTarget = if useLongPressOverlay and micGestureHandlers ~= nil then reactModule.createElement("TextButton", {

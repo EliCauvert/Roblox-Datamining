@@ -25,19 +25,19 @@ local t_2 = {
 	variant = iconVariant.Filled
 }
 
-local function _(p0) --[[ line: 37 | named "scrollingFrameCanScrollLeft" ]]
+local function _(p0)
 	return p0.CanvasPosition.X > 0
 end
 
-local _ = function(p1) --[[ line: 41 | named "scrollingFrameCanScrollRight" ]]
+local _ = function(p1)
 	return p1.AbsoluteSize.X < p1.AbsoluteCanvasSize.X - p1.CanvasPosition.X
 end
 
-local function getCanvasPosition(p2) --[[ line: 45 ]]
+local function getCanvasPosition(p2)
 	return Vector2.new(p2, 0)
 end
 
-local function gradientTransparency(p3, p4, p5) --[[ line: 49 ]]
+local function gradientTransparency(p3, p4, p5)
 	local var15 = 1 - p5
 	local var16 = var15 * p3[1]
 	local var17 = var15 * p3[2]
@@ -66,23 +66,23 @@ local function gradientTransparency(p3, p4, p5) --[[ line: 49 ]]
 	return NumberSequence.new(t)
 end
 
-local _ = function(p6, p7) --[[ line: 86 | named "makeGradientTransparency" ]]
+local _ = function(p6, p7)
 	-- upvalues: gradientTransparency (ref)
-	return function(p8) --[[ line: 87 ]]
+	return function(p8)
 		-- upvalues: gradientTransparency (copy), p6 (ref), p7 (ref)
 		return gradientTransparency(p8, p6, p7)
 	end
 end
 
-local function makeButtonTransparency(p9) --[[ line: 92 ]]
+local function makeButtonTransparency(p9)
 	return 1 - p9[1] * p9[2]
 end
 
-local function isVisibleFromTransparency(p10) --[[ line: 98 ]]
+local function isVisibleFromTransparency(p10)
 	return p10 < 1
 end
 
-return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "ScrollingFrameWithIndicators" ]]
+return reactModule.forwardRef(function(p11, p12)
 	-- upvalues: useTokens (ref), fFlagAXCategoryMenuVisualFixes (ref), useAnimatedBinding (ref), reactModule (ref), responsiveModule (ref), shouldShowScrollArrowsForInputTypeModule (ref), getCanvasPosition (ref), gradientTransparency (ref), makeButtonTransparency (ref), isVisibleFromTransparency (ref), reactOtterModule (ref), makeOtterSpringValueModule (ref), t (ref), getFixedTabHeightModule (ref), view (ref), iconButton (ref), inputSize (ref), t_1 (ref), t_2 (ref)
 	local var21 = useTokens()
 	local backgroundTransparency = p11.BackgroundTransparency or var21.Color.Common.NavigationBar.Transparency
@@ -97,36 +97,36 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 	local var36 = if fFlagAXCategoryMenuVisualFixes then shouldShowScrollArrowsForInputTypeModule(responsiveModule.useLastInput()) else nil
 	local var37, var38 = useAnimatedBinding(0)
 	local var39 = reactModule.useRef(nil)
-	local var40 = reactModule.useMemo(function() --[[ line: 150 ]]
+	local var40 = reactModule.useMemo(function()
 		-- upvalues: var37 (ref), getCanvasPosition (copy)
 		return var37:map(getCanvasPosition)
 	end, {})
-	local var41 = reactModule.useMemo(function() --[[ line: 154 ]]
+	local var41 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var26 (ref), var28 (ref), var30 (ref), var21 (ref), backgroundTransparency (ref), gradientTransparency (copy)
 		local var55 = var21.Size.Size_300 * 2
 		
-		return reactModule.joinBindings({ var26, var28, var30 }):map(function(p13) --[[ line: 87 ]]
+		return reactModule.joinBindings({ var26, var28, var30 }):map(function(p13)
 			-- upvalues: gradientTransparency (copy), var55 (ref), backgroundTransparency (ref)
 			return gradientTransparency(p13, var55, backgroundTransparency)
 		end)
 	end, { var21, backgroundTransparency })
-	local var42 = reactModule.useMemo(function() --[[ line: 162 ]]
+	local var42 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var28 (ref), var32 (ref), makeButtonTransparency (copy)
 		return reactModule.joinBindings({ var28, var32 }):map(makeButtonTransparency)
 	end, {})
-	local var43 = reactModule.useMemo(function() --[[ line: 166 ]]
+	local var43 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var26 (ref), var32 (ref), makeButtonTransparency (copy)
 		return reactModule.joinBindings({ var26, var32 }):map(makeButtonTransparency)
 	end, {})
-	local var44 = reactModule.useMemo(function() --[[ line: 173 ]]
+	local var44 = reactModule.useMemo(function()
 		-- upvalues: var43 (ref), isVisibleFromTransparency (copy)
 		return var43:map(isVisibleFromTransparency)
 	end, {})
-	local var45 = reactModule.useMemo(function() --[[ line: 177 ]]
+	local var45 = reactModule.useMemo(function()
 		-- upvalues: var42 (ref), isVisibleFromTransparency (copy)
 		return var42:map(isVisibleFromTransparency)
 	end, {})
-	local var46 = reactModule.useCallback(function() --[[ line: 181 ]]
+	local var46 = reactModule.useCallback(function()
 		-- upvalues: var39 (ref), var38 (ref), reactOtterModule (copy), makeOtterSpringValueModule (copy), t (copy)
 		local current = var39.current
 		
@@ -135,7 +135,7 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 			var38(makeOtterSpringValueModule(current.AbsoluteCanvasSize.X - current.AbsoluteSize.X, t))
 		end
 	end, {})
-	local var47 = reactModule.useCallback(function() --[[ line: 194 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: var39 (ref), var38 (ref), reactOtterModule (copy), makeOtterSpringValueModule (copy), t (copy)
 		local current = var39.current
 		
@@ -145,7 +145,7 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 		end
 	end, {})
 	
-	local function onMouseEnter() --[[ line: 204 ]]
+	local function onMouseEnter()
 		-- upvalues: fFlagAXCategoryMenuVisualFixes (copy), var36 (write), var33 (ref), makeOtterSpringValueModule (copy), t (copy), var35 (ref)
 		if fFlagAXCategoryMenuVisualFixes and not var36 then
 			return
@@ -154,7 +154,7 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 		var35(true)
 	end
 	
-	local function onMouseLeave() --[[ line: 212 ]]
+	local function onMouseLeave()
 		-- upvalues: fFlagAXCategoryMenuVisualFixes (copy), var36 (write), var33 (ref), makeOtterSpringValueModule (copy), t (copy), var35 (ref)
 		if fFlagAXCategoryMenuVisualFixes and not var36 then
 			return
@@ -164,7 +164,7 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 	end
 	
 	if fFlagAXCategoryMenuVisualFixes then
-		reactModule.useEffect(function() --[[ line: 223 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var36 (write), var33 (ref), reactOtterModule (copy), var35 (ref)
 			if not var36 then
 				var33(reactOtterModule.instant(0))
@@ -172,18 +172,18 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 			end
 		end, { var36 })
 	end
-	local function onCanvasChanged(p14) --[[ line: 231 ]]
+	local function onCanvasChanged(p14)
 		-- upvalues: var27 (ref), makeOtterSpringValueModule (copy), t (copy), var29 (ref)
 		var27(makeOtterSpringValueModule(if p14.CanvasPosition.X > 0 then 1 else 0, t))
 		var29(makeOtterSpringValueModule(if p14.AbsoluteSize.X < p14.AbsoluteCanvasSize.X - p14.CanvasPosition.X then 1 else 0, t))
 	end
 	
-	local function onSizeChanged(p15) --[[ line: 238 ]]
+	local function onSizeChanged(p15)
 		-- upvalues: var31 (ref)
 		var31(p15.AbsoluteSize.X)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 242 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var39 (ref), var27 (ref), reactOtterModule (copy), var29 (ref)
 		local current = var39.current
 		
@@ -194,7 +194,7 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 	end, {})
 	
 	if fFlagAXCategoryMenuVisualFixes then
-		local var52 = reactModule.useCallback(function(p16) --[[ line: 257 ]]
+		local var52 = reactModule.useCallback(function(p16)
 			-- upvalues: var39 (ref), var38 (ref), reactOtterModule (copy), makeOtterSpringValueModule (copy), t (copy)
 			local current = var39.current
 			
@@ -203,18 +203,18 @@ return reactModule.forwardRef(function(p11, p12) --[[ line: 121 | named "Scrolli
 				var38(makeOtterSpringValueModule(p16, t))
 			end
 		end, {})
-		local var53 = reactModule.useCallback(function(p17) --[[ line: 266 ]]
+		local var53 = reactModule.useCallback(function(p17)
 			-- upvalues: var39 (ref), var38 (ref), reactOtterModule (copy)
 			if var39.current then
 				var38(reactOtterModule.instant(p17))
 			end
 		end, {})
-		reactModule.useImperativeHandle(p11.controllerRef, function() --[[ line: 273 ]]
+		reactModule.useImperativeHandle(p11.controllerRef, function()
 			-- upvalues: var52 (ref), var53 (ref), var39 (ref)
 			return {
 				scrollToOffset = var52,
 				setOffset = var53,
-				getScrollingFrame = function() --[[ line: 277 ]]
+				getScrollingFrame = function()
 					-- upvalues: var39 (copy)
 					return var39.current
 				end

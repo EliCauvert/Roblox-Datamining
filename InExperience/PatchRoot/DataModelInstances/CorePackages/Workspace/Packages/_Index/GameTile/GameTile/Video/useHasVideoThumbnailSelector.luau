@@ -4,9 +4,9 @@ local gameInfosReducer = require(parent.GameInfosRodux).GameInfosReducer
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local getGameTileLayoutDataModule = require(gameTile.getGameTileLayoutData)
 
-return function(p0, p1) --[[ line: 10 | named "useHasVideoThumbnailSelector" ]]
+return function(p0, p1)
 	-- upvalues: useSelector (ref), gameInfosReducer (ref), getGameTileLayoutDataModule (ref)
-	local var2 = getGameTileLayoutDataModule(useSelector(function(p2) --[[ line: 11 ]]
+	local var2 = getGameTileLayoutDataModule(useSelector(function(p2)
 		-- upvalues: gameInfosReducer (copy), p0 (ref)
 		return p2.Personalization[gameInfosReducer.key][p0]
 	end), p1)

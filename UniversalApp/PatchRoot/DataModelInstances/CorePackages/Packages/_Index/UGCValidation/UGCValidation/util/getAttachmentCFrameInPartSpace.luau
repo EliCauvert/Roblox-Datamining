@@ -1,6 +1,6 @@
 ﻿local r15plusUtilsModule = require(script.Parent.Parent.util.R15plusUtils)
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: r15plusUtilsModule (ref)
 	if not r15plusUtilsModule.checkFlagEnabledForAllowHrd() then
 		return p0.CFrame

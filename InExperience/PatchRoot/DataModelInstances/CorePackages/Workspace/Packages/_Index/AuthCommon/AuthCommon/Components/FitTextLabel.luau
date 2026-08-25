@@ -10,14 +10,14 @@ fitTextLabel.defaultProps = {
 	fitAxis = fitChildrenModule.FitAxis.Height
 }
 
-function fitTextLabel.init(p0) --[[ line: 17 ]]
+function fitTextLabel.init(p0)
 	-- upvalues: fitChildrenModule (ref), text (ref)
-	function p0.onRef(p1) --[[ line: 18 ]]
+	function p0.onRef(p1)
 		-- upvalues: p0 (ref)
 		p0.ref = p1
 	end
 	
-	function p0.resize(p2) --[[ line: 22 ]]
+	function p0.resize(p2)
 		-- upvalues: p0 (ref), fitChildrenModule (copy), text (copy)
 		local fitAxis = p0.props.fitAxis
 		local maxWidth = p0.props.maxWidth
@@ -46,7 +46,7 @@ function fitTextLabel.init(p0) --[[ line: 17 ]]
 	p0:setState({ width = nil, height = nil })
 end
 
-function fitTextLabel.render(p3) --[[ line: 62 ]]
+function fitTextLabel.render(p3)
 	-- upvalues: fitChildrenModule (ref), immutable (ref), roactModule (ref)
 	local fitAxis = p3.props.fitAxis or fitChildrenModule.FitAxis.Height
 	local fitAxis_1 = immutable.RemoveFromDictionary(p3.props, "fitAxis", "maxWidth")
@@ -64,7 +64,7 @@ function fitTextLabel.render(p3) --[[ line: 62 ]]
 	}))
 end
 
-function fitTextLabel.didMount(p4) --[[ line: 85 ]]
+function fitTextLabel.didMount(p4)
 	p4.resize(p4.ref)
 end
 

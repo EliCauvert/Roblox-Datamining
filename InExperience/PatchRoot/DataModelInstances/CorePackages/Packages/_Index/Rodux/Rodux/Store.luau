@@ -2,22 +2,22 @@
 local signalModule = require(script.Parent.Signal)
 local noYieldModule = require(script.Parent.NoYield)
 local t = {
-	reportReducerError = function(_, _, p0) --[[ line: 9 ]]
+	reportReducerError = function(_, _, p0)
 		error(string.format("Received error: %s\n\n%s", p0.message, p0.thrownValue))
 	end,
-	reportUpdateError = function(_, _, _, p1) --[[ line: 12 ]]
+	reportUpdateError = function(_, _, _, p1)
 		error(string.format("Received error: %s\n\n%s", p1.message, p1.thrownValue))
 	end
 }
 
-local function tracebackReporter(p2) --[[ line: 17 ]]
+local function tracebackReporter(p2)
 	return debug.traceback(tostring(p2))
 end
 
 local t_1 = { _flushEvent = runService.Heartbeat }
 t_1.__index = t_1
 
-function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
+function t_1.new(p3, p4, p5, p6, p7)
 	-- upvalues: t (ref), signalModule (ref), tracebackReporter (ref), t_1 (ref)
 	assert(typeof(p3) == "function", "Bad argument #1 to Store.new, expected function.")
 	assert(if p5 ~= nil then typeof(p5) == "table" else true, "Bad argument #3 to Store.new, expected nil or table.")
@@ -37,7 +37,7 @@ function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
 	t_2.changed = signalModule.new(t_2)
 	t_2._reducer = p3
 	
-	function t_2._flushHandler(p8) --[[ line: 66 ]]
+	function t_2._flushHandler(p8)
 		-- upvalues: t_2 (ref)
 		t_2.changed:fire(p8, t_2._lastState)
 	end
@@ -48,7 +48,7 @@ function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
 	end
 	local t_3 = { type = "@@INIT" }
 	t_2._actionLog = { t_3 }
-	local ok, status = xpcall(function() --[[ line: 82 ]]
+	local ok, status = xpcall(function()
 		-- upvalues: t_2 (ref), p4 (ref), t_3 (ref)
 		t_2._state = t_2._reducer(p4, t_3)
 	end, tracebackReporter)
@@ -64,7 +64,7 @@ function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
 	t_2._mutatedSinceFlush = false
 	t_2._connections = {}
 	setmetatable(t_2, t_1)
-	table.insert(t_2._connections, t_2._flushEvent:Connect(function() --[[ line: 99 ]]
+	table.insert(t_2._connections, t_2._flushEvent:Connect(function()
 		-- upvalues: t_2 (ref)
 		t_2:flush()
 	end))
@@ -72,7 +72,7 @@ function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
 	if p5 then
 		local dispatch = t_2.dispatch
 		
-		local var8 = function(...) --[[ line: 106 ]]
+		local var8 = function(...)
 			-- upvalues: dispatch (ref), t_2 (ref)
 			return dispatch(t_2, ...)
 		end
@@ -80,7 +80,7 @@ function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
 		for i_1 = #p5, 1, -1 do
 			var8 = p5[i_1](var8, t_2)
 		end
-		function t_2.dispatch(_, ...) --[[ line: 115 ]]
+		function t_2.dispatch(_, ...)
 			-- upvalues: var8 (write)
 			return var8(...)
 		end
@@ -88,14 +88,14 @@ function t_1.new(p3, p4, p5, p6, p7) --[[ line: 41 ]]
 	return t_2
 end
 
-function t_1:getState() --[[ line: 126 ]]
+function t_1:getState()
 	if self._isDispatching then
 		error(("You may not call store:getState() while the reducer is executing. The reducer (%s) has already received the state as an argument. Pass it down from the top reducer instead of reading it from the store."):format(tostring(self._reducer)))
 	end
 	return self._state
 end
 
-function t_1:dispatch(p9) --[[ line: 143 ]]
+function t_1:dispatch(p9)
 	if typeof(p9) ~= "table" then
 		error(("Actions must be tables. Use custom middleware for %q actions."):format(typeof(p9)), 2)
 	end
@@ -105,7 +105,7 @@ function t_1:dispatch(p9) --[[ line: 143 ]]
 	if self._isDispatching then
 		error("Reducers may not dispatch actions.")
 	end
-	local ok, status = pcall(function() --[[ line: 161 ]]
+	local ok, status = pcall(function()
 		-- upvalues: self (ref), p9 (ref)
 		self._isDispatching = true
 		self._state = self._reducer(self._state, p9)
@@ -125,19 +125,19 @@ function t_1:dispatch(p9) --[[ line: 143 ]]
 	table.insert(self._actionLog, p9)
 end
 
-function t_1:destruct() --[[ line: 189 ]]
+function t_1:destruct()
 	for i, v in ipairs(self._connections) do
 		v:Disconnect()
 	end
 	self._connections = nil
 end
 
-function t_1:flush() --[[ line: 200 ]]
+function t_1:flush()
 	-- upvalues: noYieldModule (ref), tracebackReporter (ref)
 	if not self._mutatedSinceFlush then return end
 	self._mutatedSinceFlush = false
 	local state = self._state
-	local ok, status = xpcall(function() --[[ line: 212 ]]
+	local ok, status = xpcall(function()
 		-- upvalues: noYieldModule (copy), self (ref), state (ref)
 		noYieldModule(self._flushHandler, state)
 	end, tracebackReporter)

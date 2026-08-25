@@ -10,7 +10,7 @@ local responseIndicator = socialLibrariesModule.Components.ResponseIndicator
 local removeUserDialogModule = require(script.Parent.RemoveUserDialog)
 local t = {}
 
-function RemoveUserDialogLayout(p0) --[[ line: 42 ]]
+function RemoveUserDialogLayout(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), removeUserDialogModule (ref), responseIndicator (ref)
 	local var6 = cryoModule.Dictionary.join(t, p0)
 	local var7 = useStyle()

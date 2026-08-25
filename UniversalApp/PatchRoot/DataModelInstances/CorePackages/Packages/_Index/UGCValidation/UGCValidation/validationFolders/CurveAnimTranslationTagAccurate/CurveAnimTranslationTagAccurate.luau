@@ -6,7 +6,7 @@ local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStri
 local getFFlagUGCValidateMigrateCurveAnimModule = require(parent.flags.getFFlagUGCValidateMigrateCurveAnim)
 local UGCValidateEmoteTranslationTag = game:DefineFastFlag("UGCValidateEmoteTranslationTag", false)
 
-local function _(p0) --[[ line: 19 | named "toFiniteNumber" ]]
+local function _(p0)
 	return if typeof(p0) == "number" and p0 > -1e999 and p0 < 1e999 then p0 else nil
 end
 
@@ -14,13 +14,13 @@ return {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION },
 	requiredData = {},
 	conditionalData = { validationEnumsModule.SharedDataMember.curveAnimations },
-	fflag = function() --[[ line: 31 ]]
+	fflag = function()
 		-- upvalues: getFFlagUGCValidateMigrateCurveAnimModule (ref), UGCValidateEmoteTranslationTag (ref)
 		return getFFlagUGCValidateMigrateCurveAnimModule() and (UGCValidateEmoteTranslationTag and game:GetEngineFeature("EngineTagEmoteMaxPartTranslation"))
 	end,
 	expectedFailures = {},
 	prereqTests = {},
-	run = function(p1, p2) --[[ line: 39 ]]
+	run = function(p1, p2)
 		-- upvalues: publishService (ref), errorSourceStringsModule (ref)
 		for i, v in p2.curveAnimations do
 			local RBXmaxPartTranslationAttribute = v:GetAttribute("RBXmaxPartTranslation")

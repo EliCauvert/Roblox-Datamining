@@ -56,7 +56,7 @@ local fIntCapturesCoreGuiEventsPerMyriadModule = require(parent.Flags.FIntCaptur
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 
 return {
-	createApp = function(p0) --[[ line: 82 ]]
+	createApp = function(p0)
 		-- upvalues: dashModule (ref), analyticsServiceModule (ref), appStorageService (ref), captureService (ref), localizationService (ref), notificationService (ref), playersService (ref), rbxAnalyticsService (ref), robloxReplicatedStorageService (ref), starterGuiService (ref), setupFireEventModule (ref), constantsModule (ref), getLocalUserIdModule (ref), roduxModule (ref), installReducerModule (ref), momentsCreationFlowModule (ref), networkingModule (ref), screenSizeModule (ref), serverTypeModule (ref), retrieveCapturesModule (ref), fFlagCreateMomentsToastModule (ref), checkMomentsEligibilityModule (ref), makeCaptureSavedHandlerModule (ref), fFlagCapturesVideoCaptureTriggerHandlerEnabledModule (ref), makeVideoCaptureInProgressHandlerModule (ref), getUserIdsFromStringModule (ref), capturesActivatedModule (ref), capturesDeactivatedModule (ref), serverTypeDetectedModule (ref), menuClosedModule (ref), menuOpenedModule (ref), takeCaptureModule (ref), fIntCapturesCoreGuiEventsPerMyriadModule (ref), eventNamesModule (ref), capturesCoreGuiEnabledModule (ref), capturesCoreGuiDisabledModule (ref), signal (ref), SSUIMetaLuaEngineFeature (ref), onViewportSizeChanged (ref), screenSizeChangedModule (ref), onToggleActivationModule (ref), makeWrapWithProvidersModule (ref), capturesPolicyModule (ref), reactModule (ref), captureManagerScreenModule (ref), captureOverlayModule (ref), carouselScreenModule (ref), captureServicePromptsModule (ref), capturesCoreUIModule (ref), capturesPageModule (ref), momentsCreationFlowScreenModule (ref)
 		local t = {
 			_store = roduxModule.Store.new(roduxModule.combineReducers({
@@ -99,9 +99,9 @@ return {
 		if fFlagCapturesVideoCaptureTriggerHandlerEnabledModule then
 			var52.CaptureService.VideoCaptureInProgress:Connect(makeVideoCaptureInProgressHandlerModule(t._store, var52, var53))
 		end
-		var52.AppStorageService:WhenLoaded(function() --[[ line: 134 ]]
+		var52.AppStorageService:WhenLoaded(function()
 			-- upvalues: var52 (ref), constantsModule (copy), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), t (ref), capturesActivatedModule (copy), capturesDeactivatedModule (copy)
-			local ok, status = pcall(function() --[[ line: 135 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var52 (copy), constantsModule (copy)
 				return var52.AppStorageService:GetItem(constantsModule.CapturesActiveLocalStorageKey)
 			end)
@@ -115,9 +115,9 @@ return {
 				t._store:dispatch(capturesDeactivatedModule())
 			end
 		end)
-		task.spawn(function() --[[ line: 150 ]]
+		task.spawn(function()
 			-- upvalues: var52 (ref), t (ref), serverTypeDetectedModule (copy)
-			local ok, status = pcall(function() --[[ line: 151 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var52 (copy)
 				return var52.RobloxReplicatedStorage:WaitForChild("GetServerType", 1e999):InvokeServer()
 			end)
@@ -127,22 +127,22 @@ return {
 			end
 		end)
 		
-		function t.closeMenu() --[[ line: 160 ]]
+		function t.closeMenu()
 			-- upvalues: t (ref), menuClosedModule (copy)
 			t._store:dispatch(menuClosedModule())
 		end
 		
-		function t.openMenu() --[[ line: 164 ]]
+		function t.openMenu()
 			-- upvalues: t (ref), menuOpenedModule (copy)
 			t._store:dispatch(menuOpenedModule())
 		end
 		
-		function t.takeCapture() --[[ line: 168 ]]
+		function t.takeCapture()
 			-- upvalues: t (ref), takeCaptureModule (copy)
 			t._store:dispatch(takeCaptureModule())
 		end
 		
-		local function maybeSendCoreGuiEvent(p1, p2) --[[ line: 172 ]]
+		local function maybeSendCoreGuiEvent(p1, p2)
 			-- upvalues: fIntCapturesCoreGuiEventsPerMyriadModule (copy), var53 (ref), eventNamesModule (copy)
 			if fIntCapturesCoreGuiEventsPerMyriadModule == 0 then return end
 			if fIntCapturesCoreGuiEventsPerMyriadModule <= Random.new():NextInteger(1, 10000) then return end
@@ -154,7 +154,7 @@ return {
 			var53(eventNamesModule.CapturesCoreGuiDisabled, { allTypeChanged = p1 })
 		end
 		
-		var52.StarterGui.CoreGuiChangedSignal:Connect(function(p3, p4) --[[ line: 189 ]]
+		var52.StarterGui.CoreGuiChangedSignal:Connect(function(p3, p4)
 			-- upvalues: maybeSendCoreGuiEvent (ref), t (ref), capturesCoreGuiEnabledModule (copy), capturesCoreGuiDisabledModule (copy)
 			if not (if p3 ~= Enum.CoreGuiType.All then p3 == Enum.CoreGuiType.Captures else true) then return end
 			maybeSendCoreGuiEvent(p3 == Enum.CoreGuiType.All, p4)
@@ -174,17 +174,17 @@ return {
 		end
 		t.onIsActiveChanged = signal.new()
 		
-		function t.getIsActive() --[[ line: 213 ]]
+		function t.getIsActive()
 			-- upvalues: t (ref), constantsModule (copy)
 			return t._store:getState()[constantsModule.RoduxKey].IsActive or false
 		end
 		
-		t._store.changed:connect(function(p5, p6) --[[ line: 217 ]]
+		t._store.changed:connect(function(p5, p6)
 			-- upvalues: constantsModule (copy), var52 (ref), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), dashModule (copy), t (ref)
 			local isActive = p5[constantsModule.RoduxKey].IsActive
 			
 			if isActive ~= p6[constantsModule.RoduxKey].IsActive then
-				pcall(function() --[[ line: 222 ]]
+				pcall(function()
 					-- upvalues: var52 (copy), constantsModule (copy), getUserIdsFromStringModule (copy), getLocalUserIdModule (copy), isActive (ref), dashModule (copy)
 					local var60 = getUserIdsFromStringModule(var52.AppStorageService:GetItem(constantsModule.CapturesActiveLocalStorageKey))
 					local players = getLocalUserIdModule(var52.Players) or ""
@@ -202,10 +202,10 @@ return {
 		end)
 		
 		if SSUIMetaLuaEngineFeature then
-			pcall(function() --[[ line: 243 ]]
+			pcall(function()
 				-- upvalues: t (ref), constantsModule (copy)
 				local safetyService = game:GetService("SafetyService")
-				t._store.changed:connect(function(p7, p8) --[[ line: 245 ]]
+				t._store.changed:connect(function(p7, p8)
 					-- upvalues: constantsModule (copy), safetyService (ref)
 					local roduxKey = p7[constantsModule.RoduxKey]
 					local roduxKey_1 = p8[constantsModule.RoduxKey]
@@ -213,14 +213,14 @@ return {
 					local isMenuOpen_1 = roduxKey.IsMenuOpen or roduxKey.Carousel and roduxKey.Carousel.IsOpen
 					
 					if isMenuOpen_1 and not isMenuOpen then
-						pcall(function() --[[ line: 255 ]]
+						pcall(function()
 							-- upvalues: safetyService (copy)
 							safetyService:ReportCapturesUIOpen()
 						end)
 						
 						return
 					elseif not isMenuOpen_1 and isMenuOpen then
-						pcall(function() --[[ line: 259 ]]
+						pcall(function()
 							-- upvalues: safetyService (copy)
 							safetyService:ReportCapturesUIClose()
 						end)
@@ -228,14 +228,14 @@ return {
 				end)
 			end)
 		end
-		onViewportSizeChanged(function(p9) --[[ line: 267 ]]
+		onViewportSizeChanged(function(p9)
 			-- upvalues: t (ref), screenSizeChangedModule (copy)
 			t._store:dispatch(screenSizeChangedModule(p9))
 		end)
 		
-		function t.onToggleActivationFromChrome(...) --[[ line: 271 ]]
+		function t.onToggleActivationFromChrome(...)
 			-- upvalues: t (ref), onToggleActivationModule (copy), var53 (ref), eventNamesModule (copy)
-			onToggleActivationModule(t.getIsActive(), nil, var53, function(...) --[[ line: 272 ]]
+			onToggleActivationModule(t.getIsActive(), nil, var53, function(...)
 				-- upvalues: t (copy)
 				t._store:dispatch(...)
 			end, eventNamesModule.CapturesActivatedChrome, eventNamesModule.CapturesDeactivatedChrome)
@@ -247,7 +247,7 @@ return {
 		local var58 = if var56 then capturesPolicyModule.Mapper(var56).enableCapturesBulkManagement() else false
 		local t_1 = { fireAnalyticsEvent = var53 }
 		
-		function t.mountCaptureManager(p10) --[[ line: 300 ]]
+		function t.mountCaptureManager(p10)
 			-- upvalues: var58 (ref), var57 (ref), t (ref), var55 (ref), t_1 (ref), reactModule (copy), captureManagerScreenModule (copy)
 			if not var58 then return end
 			if var57 then
@@ -259,7 +259,7 @@ return {
 			end
 		end
 		
-		function t.mountCaptureOverlay(p11) --[[ line: 312 ]]
+		function t.mountCaptureOverlay(p11)
 			-- upvalues: var57 (ref), reactModule (copy), captureOverlayModule (copy), t (ref), var55 (ref), t_1 (ref)
 			if var57 then
 				t._captureOverlayHandle = var55(p11, t_1, {
@@ -270,7 +270,7 @@ return {
 			end
 		end
 		
-		function t.mountCarousel(p12) --[[ line: 324 ]]
+		function t.mountCarousel(p12)
 			-- upvalues: var57 (ref), reactModule (copy), carouselScreenModule (copy), t (ref), var55 (ref), t_1 (ref)
 			if var57 then
 				t._carouselHandle = var55(p12, t_1, {
@@ -281,7 +281,7 @@ return {
 			end
 		end
 		
-		function t.mountCoreUI(p13, p14) --[[ line: 336 ]]
+		function t.mountCoreUI(p13, p14)
 			-- upvalues: var57 (ref), var53 (ref), t (ref), var55 (ref), reactModule (copy), captureServicePromptsModule (copy), capturesCoreUIModule (copy)
 			if var57 then
 				t._coreUiHandle = var55(p13, { chromeEnabled = p14, fireAnalyticsEvent = var53 }, {
@@ -293,7 +293,7 @@ return {
 			end
 		end
 		
-		function t.mountMenuPage(p15, p16, p17) --[[ line: 352 ]]
+		function t.mountMenuPage(p15, p16, p17)
 			-- upvalues: var57 (ref), var53 (ref), t (ref), var55 (ref), reactModule (copy), capturesPageModule (copy)
 			if var57 then
 				t._menuPageHandle = var55(p15, { chromeEnabled = p17, fireAnalyticsEvent = var53 }, {
@@ -304,7 +304,7 @@ return {
 			end
 		end
 		
-		function t.mountMomentsCreationFlow(p18) --[[ line: 367 ]]
+		function t.mountMomentsCreationFlow(p18)
 			-- upvalues: fFlagCreateMomentsToastModule (copy), var57 (ref), t (ref), var55 (ref), t_1 (ref), reactModule (copy), momentsCreationFlowScreenModule (copy)
 			if not fFlagCreateMomentsToastModule then return end
 			if var57 then

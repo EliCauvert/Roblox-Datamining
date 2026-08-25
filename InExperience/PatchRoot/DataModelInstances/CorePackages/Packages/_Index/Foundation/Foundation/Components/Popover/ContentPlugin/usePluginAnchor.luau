@@ -8,7 +8,7 @@ local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local useUniqueWidgetModule = require(foundation.Providers.StudioWidgets.useUniqueWidget)
 
-return function(p0, p1) --[[ line: 19 | named "usePluginAnchor" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), overlayContextModule (ref), useUniqueWidgetModule (ref), viewModule (ref), reactRobloxModule (ref)
 	local var6 = reactModule.useContext(overlayContextModule)
 	local var7 = p0 ~= nil and typeof(p0) ~= "Instance"
@@ -20,7 +20,7 @@ return function(p0, p1) --[[ line: 19 | named "usePluginAnchor" ]]
 	local var9, var10 = reactModule.useState(nil)
 	local var11 = reactModule.useRef(nil)
 	var11.current = var9
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 38 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var10 (ref)
 		var10(p2)
 	end, { var10 })
@@ -28,10 +28,10 @@ return function(p0, p1) --[[ line: 19 | named "usePluginAnchor" ]]
 	local var14, var15 = reactModule.useState(Vector2.zero)
 	local var16, var17 = reactModule.useState(Vector2.one)
 	local var18, var19 = reactModule.useState(Vector2.zero)
-	reactModule.useLayoutEffect(function() --[[ line: 50 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var7 (ref), p0 (ref), var15 (ref), var17 (ref)
 		if var7 and p0 ~= nil then
-			local function updateFromAnchor() --[[ line: 56 ]]
+			local function updateFromAnchor()
 				-- upvalues: var15 (copy), p0 (ref), var17 (copy)
 				var15(p0.AbsolutePosition)
 				var17(p0.AbsoluteSize)
@@ -42,20 +42,20 @@ return function(p0, p1) --[[ line: 19 | named "usePluginAnchor" ]]
 			local var21 = p0:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateFromAnchor)
 			local var22 = p0:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateFromAnchor)
 			
-			return function() --[[ line: 66 ]]
+			return function()
 				-- upvalues: var21 (ref), var22 (ref)
 				var21:Disconnect()
 				var22:Disconnect()
 			end
 		end
 	end, { p0, var7 })
-	reactModule.useLayoutEffect(function() --[[ line: 72 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var7 (ref), var6 (ref)
 		if var7 then
 			var6.requestOverlay()
 		end
 	end, { var6.requestOverlay, var7 })
-	reactModule.useLayoutEffect(function() --[[ line: 78 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var7 (ref), var6 (ref), var19 (ref)
 		if not var7 then return end
 		local instance = var6.instance
@@ -65,7 +65,7 @@ return function(p0, p1) --[[ line: 19 | named "usePluginAnchor" ]]
 			
 			return
 		end
-		local function updateOffset() --[[ line: 89 ]]
+		local function updateOffset()
 			-- upvalues: var19 (copy), instance (ref)
 			var19(instance.AbsolutePosition)
 		end
@@ -73,7 +73,7 @@ return function(p0, p1) --[[ line: 19 | named "usePluginAnchor" ]]
 		var19(instance.AbsolutePosition)
 		local var24 = instance:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateOffset)
 		
-		return function() --[[ line: 95 ]]
+		return function()
 			-- upvalues: var24 (ref)
 			var24:Disconnect()
 		end

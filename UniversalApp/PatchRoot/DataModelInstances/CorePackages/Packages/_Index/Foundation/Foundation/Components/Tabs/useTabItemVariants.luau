@@ -6,7 +6,7 @@ local variantsContextModule = require(foundation.Providers.Style.VariantsContext
 local inputSizeModule = require(foundation.Enums.InputSize)
 local iconSizeModule = require(foundation.Enums.IconSize)
 
-local function variantsFactory(_) --[[ line: 35 ]]
+local function variantsFactory(_)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
@@ -58,7 +58,7 @@ local function variantsFactory(_) --[[ line: 35 ]]
 	}
 end
 
-return function(p0, p1, p2) --[[ line: 84 ]]
+return function(p0, p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), flagsModule (ref)
 	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p0)
 	

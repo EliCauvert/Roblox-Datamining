@@ -15,7 +15,7 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 39 ]]
+	run = function(p0, p1)
 		-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), UGCValidationService (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (ref), errorSourceStringsModule (ref)
 		local t = {}
 		
@@ -24,7 +24,7 @@ return {
 				table.insert(t, v_1)
 			end
 		end
-		local function checkCage(p2, p3) --[[ line: 48 ]]
+		local function checkCage(p2, p3)
 			-- upvalues: UGCValidationService (copy), t (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (copy), p0 (ref), errorSourceStringsModule (copy)
 			for i, v in p2 do
 				local var7 = UGCValidationService:ValidateEditableMeshUVDuplicates(t, v.editable)

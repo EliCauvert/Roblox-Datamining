@@ -10,7 +10,7 @@ local componentSubtextModule = require(genericAbuseReporting.Bedui.Components.Co
 local dropdownWithPopoverModule = require(genericAbuseReporting.Common.DropdownWithPopover)
 local useFormDataModule = require(genericAbuseReporting.Bedui.Provider.useFormData)
 
-return reactModule.memo(function(p0) --[[ line: 24 | named "Dropdown" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useFormDataModule (ref), reactModule (ref), cryoModule (ref), view (ref), text (ref), dropdownWithPopoverModule (ref), componentSubtextModule (ref)
 	local updateForm = useFormDataModule().updateForm
 	
@@ -31,13 +31,13 @@ return reactModule.memo(function(p0) --[[ line: 24 | named "Dropdown" ]]
 			DropdownWithPopover = reactModule.createElement(dropdownWithPopoverModule, {
 				layoutOrder = 1,
 				placeholder = p0.component.dropdown.placeholder,
-				onChange = reactModule.useCallback(function(p1) --[[ line: 36 ]]
+				onChange = reactModule.useCallback(function(p1)
 					-- upvalues: updateForm (ref), p0 (ref)
 					updateForm(p0.component.formDataKey, p1)
 				end, { p0.component.formDataKey }),
-				cellDatas = reactModule.useMemo(function() --[[ line: 27 ]]
+				cellDatas = reactModule.useMemo(function()
 					-- upvalues: cryoModule (copy), p0 (ref)
-					return cryoModule.List.map(p0.component.dropdown.items, function(p2) --[[ line: 28 ]]
+					return cryoModule.List.map(p0.component.dropdown.items, function(p2)
 						return { text = p2.label or "", value = p2.formDataValue }
 					end)
 				end, { p0.component.dropdown.items }),

@@ -5,7 +5,7 @@ local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyl
 local nameTextBoxModule = require(script.Parent.NameTextBox)
 local t = { textBoxHeight = 30, topPadding = 0 }
 
-return function(p0) --[[ line: 43 | named "LabeledTextBox" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), nameTextBoxModule (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local var6 = useStyle()

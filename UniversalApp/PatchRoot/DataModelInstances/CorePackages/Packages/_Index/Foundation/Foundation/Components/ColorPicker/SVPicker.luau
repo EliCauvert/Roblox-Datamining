@@ -10,7 +10,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Components.Types)
 local t = { showSelectionKnob = true }
 
-return function(p0) --[[ line: 31 | named "SVPicker" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), colorUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), knobModule (ref), inputSizeModule (ref)
 	local var10 = withDefaultsModule(p0, t)
 	local hue = var10.hue
@@ -20,11 +20,11 @@ return function(p0) --[[ line: 31 | named "SVPicker" ]]
 	local onDragStarted = var10.onDragStarted
 	local onDragEnded = var10.onDragEnded
 	local var11 = useTokensModule()
-	local var12 = hue:map(function(p1) --[[ line: 40 ]]
+	local var12 = hue:map(function(p1)
 		return Color3.fromHSV(p1, 1, 1)
 	end)
 	local var13 = reactModule.useRef(nil)
-	local var14 = reactModule.useCallback(function(p2) --[[ line: 45 ]]
+	local var14 = reactModule.useCallback(function(p2)
 		-- upvalues: var13 (ref), colorUtilsModule (copy), onChanged (ref)
 		local current = var13.current
 		
@@ -43,14 +43,14 @@ return function(p0) --[[ line: 31 | named "SVPicker" ]]
 	}), {
 		DragDetector = reactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-			[reactModule.Event.DragStart] = reactModule.useCallback(function(_, p3) --[[ line: 57 ]]
+			[reactModule.Event.DragStart] = reactModule.useCallback(function(_, p3)
 				-- upvalues: onDragStarted (ref), var14 (ref)
 				if onDragStarted then
 					onDragStarted()
 				end
 				var14(p3)
 			end, { var14, onDragStarted }),
-			[reactModule.Event.DragContinue] = reactModule.useCallback(function(_, p4) --[[ line: 64 ]]
+			[reactModule.Event.DragContinue] = reactModule.useCallback(function(_, p4)
 				-- upvalues: var14 (ref)
 				var14(p4)
 			end, { var14 }),
@@ -94,10 +94,10 @@ return function(p0) --[[ line: 31 | named "SVPicker" ]]
 			ZIndex = 4,
 			size = inputSizeModule.Medium,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = reactModule.joinBindings({ saturation, value }):map(function(p5) --[[ line: 119 ]]
+			Position = reactModule.joinBindings({ saturation, value }):map(function(p5)
 				return UDim2.fromScale(p5[1], 1 - p5[2])
 			end),
-			style = reactModule.joinBindings({ hue, saturation, value }):map(function(p6) --[[ line: 124 ]]
+			style = reactModule.joinBindings({ hue, saturation, value }):map(function(p6)
 				return {
 					Transparency = 0,
 					Color3 = Color3.fromHSV(p6[1], p6[2], p6[3])

@@ -1,10 +1,10 @@
 ﻿local textSplitByModule = require(script:FindFirstAncestor("Utils").Parent.Enums.TextSplitBy)
 
-local function _(p0) --[[ line: 9 | named "isWhitespace" ]]
+local function _(p0)
 	return p0:match("%s") ~= nil
 end
 
-local _ = function(p1, p2) --[[ line: 14 | named "codepointEnd" ]]
+local _ = function(p1, p2)
 	local byteOffset = utf8.offset(p1, p2 + 1)
 	
 	return if byteOffset == nil then #p1 else byteOffset - 1
@@ -13,7 +13,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p3, p4, p5, p6) --[[ line: 32 ]]
+function t.new(p3, p4, p5, p6)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl._text = p3
@@ -24,11 +24,11 @@ function t.new(p3, p4, p5, p6) --[[ line: 32 ]]
 	return tbl
 end
 
-function t:_guessInitialBreak(_, p7, p8) --[[ line: 44 ]]
+function t:_guessInitialBreak(_, p7, p8)
 	return math.max(math.floor(#self._text * p8 / p7), 1)
 end
 
-function t:findPossibleBreak() --[[ line: 48 ]]
+function t:findPossibleBreak()
 	local index = self._index
 	while self.direction == 1 and index <= #self._text or self.direction == -1 and index > 0 do
 		if self._text:sub(index, index):match("%s") == nil then
@@ -42,7 +42,7 @@ function t:findPossibleBreak() --[[ line: 48 ]]
 	return index
 end
 
-function t:setDirection(p9) --[[ line: 63 ]]
+function t:setDirection(p9)
 	self.direction = p9
 	
 	if p9 ~= 1 then
@@ -54,7 +54,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p10, p11, p12, p13) --[[ line: 75 ]]
+function t_1.new(p10, p11, p12, p13)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl._text = p10
@@ -65,11 +65,11 @@ function t_1.new(p10, p11, p12, p13) --[[ line: 75 ]]
 	return tbl
 end
 
-function t_1._guessInitialBreak(_, p14, p15, p16) --[[ line: 84 ]]
+function t_1._guessInitialBreak(_, p14, p15, p16)
 	return math.max(math.floor(p14 * p16 / p15), 1)
 end
 
-function t_1:findPossibleBreak() --[[ line: 88 ]]
+function t_1:findPossibleBreak()
 	self._codepointIndex += self._step
 	local text = self._text
 	local byteOffset = utf8.offset(text, self._codepointIndex + 1)
@@ -77,12 +77,12 @@ function t_1:findPossibleBreak() --[[ line: 88 ]]
 	return if byteOffset == nil then #text else byteOffset - 1
 end
 
-function t_1:setDirection(p17) --[[ line: 93 ]]
+function t_1:setDirection(p17)
 	self.direction = p17
 	self._step = if p17 == 1 then 1 else -1
 end
 
-local function splitWith(p18, p19, p20, p21, p22, p23) --[[ line: 98 ]]
+local function splitWith(p18, p19, p20, p21, p22, p23)
 	local var8 = p18.new(p20, p21, p22, p23)
 	local _ = nil
 	local _ = nil
@@ -115,7 +115,7 @@ local function splitWith(p18, p19, p20, p21, p22, p23) --[[ line: 98 ]]
 	return var10, var9
 end
 
-return function(p24, p25, p26, p27) --[[ line: 174 | named "split" ]]
+return function(p24, p25, p26, p27)
 	-- upvalues: textSplitByModule (ref), t (ref), t_1 (ref), splitWith (ref)
 	local charCount = utf8.len(p26)
 	

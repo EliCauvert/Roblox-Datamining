@@ -2,7 +2,7 @@
 t.__index = t
 local var1 = newproxy(true)
 
-function t.new(p0, p1) --[[ line: 6 ]]
+function t.new(p0, p1)
 	-- upvalues: var1 (ref), t (ref)
 	assert(typeof(p0) == "boolean")
 	local t_1 = {
@@ -16,22 +16,22 @@ function t.new(p0, p1) --[[ line: 6 ]]
 	return t_1
 end
 
-function t.success(p2) --[[ line: 27 ]]
+function t.success(p2)
 	-- upvalues: t (ref)
 	return t.new(true, p2)
 end
 
-function t.error(p3) --[[ line: 31 ]]
+function t.error(p3)
 	-- upvalues: t (ref)
 	return t.new(false, p3)
 end
 
-function t:is() --[[ line: 38 ]]
+function t:is()
 	-- upvalues: var1 (ref)
 	return typeof(self) == "table" and self[var1]
 end
 
-function t:match(p4, p5) --[[ line: 51 ]]
+function t:match(p4, p5)
 	-- upvalues: t (ref)
 	assert(if typeof(p4) ~= "function" then typeof(p4) == "nil" else true, string.format("Result:match expects successHandler to be a function or nil, got %s", typeof(p4)))
 	assert(if typeof(p5) ~= "function" then typeof(p5) == "nil" else true, string.format("Result:match expects errorHandler to be a function or nil, got %s", typeof(p5)))
@@ -49,15 +49,15 @@ function t:match(p4, p5) --[[ line: 51 ]]
 	return if t.is(var3) then var3 else t.success(var3)
 end
 
-function t:matchSuccess(p6) --[[ line: 83 ]]
+function t:matchSuccess(p6)
 	return self:match(p6, nil)
 end
 
-function t:matchError(p7) --[[ line: 92 ]]
+function t:matchError(p7)
 	return self:match(nil, p7)
 end
 
-function t:unwrap() --[[ line: 96 ]]
+function t:unwrap()
 	return self._status, self._value
 end
 

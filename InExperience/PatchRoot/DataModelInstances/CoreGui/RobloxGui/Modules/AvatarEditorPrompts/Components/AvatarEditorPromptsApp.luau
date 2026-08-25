@@ -50,13 +50,13 @@ avatarEditorPromptsApp.validateProps = tModule.strictInterface({
 	screenSizeUpdated = tModule.callback
 })
 
-function avatarEditorPromptsApp.init(p0) --[[ line: 70 ]]
+function avatarEditorPromptsApp.init(p0)
 	-- upvalues: t (ref), userInputService (ref), roactGamepadModule (ref)
 	p0:setState({
 		isGamepad = t[userInputService:GetLastInputType()] or false
 	})
 	
-	function p0.absoluteSizeChanged(p1) --[[ line: 75 ]]
+	function p0.absoluteSizeChanged(p1)
 		-- upvalues: p0 (ref)
 		p0.props.screenSizeUpdated(p1.AbsoluteSize)
 	end
@@ -66,7 +66,7 @@ function avatarEditorPromptsApp.init(p0) --[[ line: 70 ]]
 	p0.selectedGuiObject = nil
 end
 
-function avatarEditorPromptsApp.render(p2) --[[ line: 85 ]]
+function avatarEditorPromptsApp.render(p2)
 	-- upvalues: t_1 (ref), roactModule (ref), connectionModule (ref), externalEventConnection (ref), userInputService (ref), t (ref), roactGamepadModule (ref)
 	local var24 = nil
 	
@@ -89,7 +89,7 @@ function avatarEditorPromptsApp.render(p2) --[[ line: 85 ]]
 		Connection = roactModule.createElement(connectionModule),
 		LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService.LastInputTypeChanged,
-			callback = function(p3) --[[ line: 110 ]]
+			callback = function(p3)
 				-- upvalues: p2 (ref), t (copy)
 				p2:setState({ isGamepad = t[p3] or false })
 			end
@@ -102,7 +102,7 @@ function avatarEditorPromptsApp.render(p2) --[[ line: 85 ]]
 	})
 end
 
-function avatarEditorPromptsApp.revertSelectedGuiObject(p4) --[[ line: 128 ]]
+function avatarEditorPromptsApp.revertSelectedGuiObject(p4)
 	-- upvalues: localPlayer (ref), coreGuiService (ref), guiService (ref)
 	local playerGui = localPlayer and localPlayer:FindFirstChildWhichIsA("PlayerGui")
 	
@@ -118,7 +118,7 @@ function avatarEditorPromptsApp.revertSelectedGuiObject(p4) --[[ line: 128 ]]
 	p4.selectedGuiObject = nil
 end
 
-function avatarEditorPromptsApp.didUpdate(p5, p6, p7) --[[ line: 144 ]]
+function avatarEditorPromptsApp.didUpdate(p5, p6, p7)
 	-- upvalues: guiService (ref)
 	local var26 = p5.state.isGamepad and p5.props.promptType ~= nil
 	
@@ -139,18 +139,18 @@ function avatarEditorPromptsApp.didUpdate(p5, p6, p7) --[[ line: 144 ]]
 	end
 end
 
-function avatarEditorPromptsApp.willUnmount(p8) --[[ line: 163 ]]
+function avatarEditorPromptsApp.willUnmount(p8)
 	if p8.state.isGamepad then
 		p8:revertSelectedGuiObject()
 	end
 end
 
-return roactRoduxModule.connect(function(p9) --[[ line: 169 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p9)
 	return { promptType = p9.promptInfo.promptType }
-end, function(p10) --[[ line: 175 | named "mapDispatchToProps" ]]
+end, function(p10)
 	-- upvalues: screenSizeUpdatedModule (ref)
 	return {
-		screenSizeUpdated = function(p11) --[[ line: 177 ]]
+		screenSizeUpdated = function(p11)
 			-- upvalues: p10 (ref), screenSizeUpdatedModule (copy)
 			return p10(screenSizeUpdatedModule(p11))
 		end

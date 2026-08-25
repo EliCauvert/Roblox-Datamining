@@ -9,7 +9,7 @@ local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent
 local t = {}
 local var6 = nil
 
-local function _() --[[ line: 23 | named "createPropertyLengthRestrictions" ]]
+local function _()
 	-- upvalues: var6 (write), getFIntUGCValidateMaxHSRDataLenModule (ref)
 	if var6 then
 		return
@@ -19,12 +19,12 @@ local function _() --[[ line: 23 | named "createPropertyLengthRestrictions" ]]
 	}
 end
 
-function t.resetPropertyLengthRestrictions() --[[ line: 33 ]]
+function t.resetPropertyLengthRestrictions()
 	-- upvalues: var6 (write)
 	var6 = nil
 end
 
-local function validateIndividual(p0) --[[ line: 37 ]]
+local function validateIndividual(p0)
 	-- upvalues: UGCValidationService (ref), var6 (write)
 	local var8, var9 = UGCValidationService:ValidatePropertiesSensible(p0, var6[p0.ClassName])
 	
@@ -36,7 +36,7 @@ local function validateIndividual(p0) --[[ line: 37 ]]
 	}
 end
 
-function t.validate(p1, p2) --[[ line: 58 ]]
+function t.validate(p1, p2)
 	-- upvalues: getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), var6 (write), getFIntUGCValidateMaxHSRDataLenModule (ref), failureReasonsAccumulatorModule (ref), validateIndividual (ref), analyticsModule (ref)
 	if not getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
 		return true

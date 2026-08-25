@@ -1,5 +1,5 @@
 ﻿return {
-	combineReactTags = function(...) --[[ line: 15 ]]
+	combineReactTags = function(...)
 		local packed = table.pack(...)
 		local t = {}
 		

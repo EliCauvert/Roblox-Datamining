@@ -6,7 +6,7 @@ local usePulseAnimationBinding = require(parent.AvatarExperienceCommon).Hooks.us
 local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
 local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 25 | named "ImageItem" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), reactModule (ref), usePulseAnimationBinding (ref), foundationModule (ref)
 	local var5 = useSemanticTokensModule()
 	local var6, var7 = useHoverBindingModule()
@@ -30,7 +30,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 25 | named "ImageItem"
 			tag = "radius-circle",
 			Image = p0.thumbnailUrl,
 			Size = UDim2.fromOffset(var9, var9),
-			backgroundStyle = var6:map(function(p2) --[[ line: 49 ]]
+			backgroundStyle = var6:map(function(p2)
 				-- upvalues: var5 (ref)
 				return if p2 then var5.hoverThumbnailBackgroundStyle else var5.thumbnailBackgroundStyle
 			end)
@@ -47,10 +47,10 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 25 | named "ImageItem"
 		}) else nil,
 		UIStroke = if p0.enableFocusAnimation then reactModule.createElement("UIStroke", {
 			Color = var5.imageBorderFocusStyle,
-			Thickness = var10:map(function(p3) --[[ line: 71 ]]
+			Thickness = var10:map(function(p3)
 				return p3.thickness
 			end),
-			Transparency = var10:map(function(p4) --[[ line: 74 ]]
+			Transparency = var10:map(function(p4)
 				return p4.transparency
 			end),
 			ref = var8

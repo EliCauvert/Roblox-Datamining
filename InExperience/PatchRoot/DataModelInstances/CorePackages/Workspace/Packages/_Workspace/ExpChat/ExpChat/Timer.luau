@@ -2,12 +2,12 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 7 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	return setmetatable({ goalTime = p0 }, t)
 end
 
-function t:start() --[[ line: 15 ]]
+function t:start()
 	-- upvalues: promiseModule (ref)
 	self:stop()
 	self.promise = promiseModule.delay(self.goalTime)
@@ -15,7 +15,7 @@ function t:start() --[[ line: 15 ]]
 	return self.promise
 end
 
-function t:stop() --[[ line: 24 ]]
+function t:stop()
 	if self.promise then
 		self.promise:cancel()
 	end

@@ -4,10 +4,10 @@ local httpRequestModule = require(parent.HttpRequest)
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local url = httpModule.Url
 
-return function(p0) --[[ line: 12 | named "fetchGameMedia" ]]
+return function(p0)
 	-- upvalues: urlBuilder (ref), url (ref), httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ line: 21 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end

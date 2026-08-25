@@ -53,12 +53,12 @@ local t_6 = {
 	[controlStateModule.Hover] = "BackgroundOnHover"
 }
 
-local function Pillv2(p0) --[[ line: 113 ]]
+local function Pillv2(p0)
 	-- upvalues: cryoModule (ref), t (ref), useControlStateModule (ref), reactModule (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), t_3 (ref), t_2 (ref), t_5 (ref), t_4 (ref), getContentStyleModule (ref), t_1 (ref), t_6 (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), skeleton (ref), radius (ref), controlStateModule (ref), interactableModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local var24 = cryoModule.Dictionary.join(t, p0)
 	local text = var24.text
 	local var25, var26 = useControlStateModule()
-	local var27 = reactModule.useCallback(function(p1, p2) --[[ line: 118 ]]
+	local var27 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var24 (ref), var26 (ref)
 		if var24.onStateChanged then
 			var24.onStateChanged(p1, p2)
@@ -172,7 +172,7 @@ local function Pillv2(p0) --[[ line: 113 ]]
 	})
 end
 
-return reactModule.forwardRef(function(p3, p4) --[[ line: 256 ]]
+return reactModule.forwardRef(function(p3, p4)
 	-- upvalues: reactModule (ref), Pillv2 (ref), cryoModule (ref)
 	return reactModule.createElement(Pillv2, cryoModule.Dictionary.join(p3, { controlRef = p4 }))
 end)

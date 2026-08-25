@@ -5,31 +5,31 @@ local subagentTasks = creatorAgentChatModule.SubagentTasks
 local studioAskUserTool = creatorAgentChatModule.StudioAskUserTool
 local studioProposePlanTool = creatorAgentChatModule.StudioProposePlanTool
 
-local function formatTurnFailureMessage(p0) --[[ line: 21 ]]
+local function formatTurnFailureMessage(p0)
 	-- upvalues: localizationStringsModule (ref)
 	return localizationStringsModule.formatChatTurnFailureMessage(p0.error or localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED, p0.errorCode)
 end
 
-local function _(p1) --[[ line: 26 | named "normalizeToolTitle" ]]
+local function _(p1)
 	return string.lower(string.gsub(p1, "[_%-%s]", ""))
 end
 
-local _ = function(p2) --[[ line: 30 | named "isManageTasksToolTitle" ]]
+local _ = function(p2)
 	-- upvalues: subagentTasks (ref)
 	return typeof(p2) == "string" and string.lower(string.gsub(p2, "[_%-%s]", "")) == string.lower(string.gsub(subagentTasks.TOOL_NAME, "[_%-%s]", ""))
 end
 
-local function formatStepCount(p3) --[[ line: 35 ]]
+local function formatStepCount(p3)
 	-- upvalues: localizationStringsModule (ref)
 	return localizationStringsModule.formatChatTaskCount(p3)
 end
 
-local function formatWorkedDuration(p4) --[[ line: 41 ]]
+local function formatWorkedDuration(p4)
 	-- upvalues: localizationStringsModule (ref)
 	return localizationStringsModule.formatChatWorkedDuration(p4)
 end
 
-local _ = function(p5) --[[ line: 45 | named "parseEmittedTimeMillis" ]]
+local _ = function(p5)
 	if typeof(p5) ~= "string" or p5 == "" then
 		return nil
 	end
@@ -38,12 +38,12 @@ local _ = function(p5) --[[ line: 45 | named "parseEmittedTimeMillis" ]]
 	return if dateTime == nil then nil else dateTime.UnixTimestampMillis
 end
 
-local _ = function(p6) --[[ line: 53 | named "toolCallIsLocalPrompt" ]]
+local _ = function(p6)
 	-- upvalues: studioProposePlanTool (ref), studioAskUserTool (ref)
 	return if studioProposePlanTool.extractPlanFromToolCall(p6) == nil then studioAskUserTool.extractQuestionsFromToolCall(p6) ~= nil else true
 end
 
-local function getLocalToolWaitSeconds(p7) --[[ line: 61 ]]
+local function getLocalToolWaitSeconds(p7)
 	-- upvalues: studioProposePlanTool (ref), studioAskUserTool (ref)
 	local eventMetaBySequenceId = p7.eventMetaBySequenceId
 	
@@ -86,7 +86,7 @@ local function getLocalToolWaitSeconds(p7) --[[ line: 61 ]]
 	return var11 / 1000
 end
 
-local function getTurnWorkedDurationLabel(p8, p9, p10, p11, p12) --[[ line: 94 ]]
+local function getTurnWorkedDurationLabel(p8, p9, p10, p11, p12)
 	-- upvalues: formatWorkedDuration (ref), localizationStringsModule (ref)
 	if p8 ~= nil and p9 ~= nil and p10 ~= nil then
 		local emittedTime, var21
@@ -128,11 +128,11 @@ local function getTurnWorkedDurationLabel(p8, p9, p10, p11, p12) --[[ line: 94 ]
 	end
 end
 
-local _ = function(p13) --[[ line: 119 | named "isActiveToolActivity" ]]
+local _ = function(p13)
 	return p13.kind == "tool_call" and (if p13.status ~= "pending" then if p13.status ~= "in_progress" then p13.status == nil else true else true)
 end
 
-local function getToolActivityLabel(p14) --[[ line: 126 ]]
+local function getToolActivityLabel(p14)
 	-- upvalues: localizationStringsModule (ref), subagentTasks (ref)
 	if p14.kind ~= "tool_call" then
 		return localizationStringsModule.CHAT_TOOL
@@ -143,7 +143,7 @@ local function getToolActivityLabel(p14) --[[ line: 126 ]]
 	return if chatToolActivityLabel == nil then if typeof(var24) == "string" and string.lower(string.gsub(var24, "[_%-%s]", "")) == string.lower(string.gsub(subagentTasks.TOOL_NAME, "[_%-%s]", "")) then localizationStringsModule.CHAT_ASSIGNING_TASKS elseif p14.status == "completed" then localizationStringsModule.formatChatFinishedTool(var24) elseif p14.status == "failed" then localizationStringsModule.formatChatFailedTool(var24) else localizationStringsModule.formatChatRunningTool(var24) else chatToolActivityLabel
 end
 
-local function getActiveActivityLabel(p15, _) --[[ line: 181 ]]
+local function getActiveActivityLabel(p15, _)
 	-- upvalues: getToolActivityLabel (ref), localizationStringsModule (ref)
 	for i = #p15, 1, -1 do
 		local var26 = p15[i]
@@ -161,7 +161,7 @@ end
 
 return {
 	ASSISTANT_STOPPED_TEXT = localizationStringsModule.CHAT_ASSISTANT_STOPPED,
-	countToolCalls = function(p16) --[[ line: 150 ]]
+	countToolCalls = function(p16)
 		local var27 = 0
 		
 		for i, v in p16 do
@@ -175,11 +175,11 @@ return {
 	formatStepCount = formatStepCount,
 	formatWorkedDuration = formatWorkedDuration,
 	getActiveActivityLabel = getActiveActivityLabel,
-	getAskUserActivityLabel = function(p17, p18) --[[ line: 206 ]]
+	getAskUserActivityLabel = function(p17, p18)
 		-- upvalues: localizationStringsModule (ref)
 		return if p18 == 0 then localizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER elseif p17 == 1 then localizationStringsModule.CHAT_QUESTION_SINGLE else localizationStringsModule.CHAT_QUESTION_MULTIPLE
 	end,
-	getCompletedActivityLabel = function(p19) --[[ line: 191 ]]
+	getCompletedActivityLabel = function(p19)
 		-- upvalues: getToolActivityLabel (ref), formatStepCount (ref), getActiveActivityLabel (ref)
 		local var28 = 0
 		
@@ -198,7 +198,7 @@ return {
 		return if var28 > 0 then formatStepCount(var28) else getActiveActivityLabel(p19, false)
 	end,
 	getLocalToolWaitSeconds = getLocalToolWaitSeconds,
-	getSummaryToolActivity = function(p20, p21) --[[ line: 160 ]]
+	getSummaryToolActivity = function(p20, p21)
 		if p21 == "active" then
 			for i = #p20, 1, -1 do
 				local var29 = p20[i]

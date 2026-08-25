@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
 
-local function _(p0) --[[ line: 78 | named "encodeUDim2" ]]
+local function _(p0)
 	return {
 		xScale = p0.X.Scale,
 		xOffset = p0.X.Offset,
@@ -9,11 +9,11 @@ local function _(p0) --[[ line: 78 | named "encodeUDim2" ]]
 	}
 end
 
-local _ = function(p1) --[[ line: 87 | named "encodeColor3" ]]
+local _ = function(p1)
 	return { r = p1.R, g = p1.G, b = p1.B }
 end
 
-local function encodeTextOverlay(p2) --[[ line: 91 ]]
+local function encodeTextOverlay(p2)
 	local textOverlayStyle = p2.textOverlayStyle
 	local t = {}
 	local position = p2.position
@@ -37,7 +37,7 @@ local function encodeTextOverlay(p2) --[[ line: 91 ]]
 	return t
 end
 
-local _ = function(p3) --[[ line: 108 | named "encodeStickerOverlay" ]]
+local _ = function(p3)
 	local t = { stickerURI = p3.stickerURI }
 	local position = p3.position
 	t.position = {
@@ -54,7 +54,7 @@ local _ = function(p3) --[[ line: 108 | named "encodeStickerOverlay" ]]
 	return t
 end
 
-local function serialize(p4) --[[ line: 119 ]]
+local function serialize(p4)
 	-- upvalues: encodeTextOverlay (ref)
 	local edits = p4.edits
 	local t = { trim = edits.trim, music = edits.music }
@@ -99,19 +99,19 @@ local function serialize(p4) --[[ line: 119 ]]
 	}
 end
 
-local function decodeUDim2(p5) --[[ line: 160 ]]
+local function decodeUDim2(p5)
 	return if type(p5) == "table" then if type(p5.xScale) == "number" and type(p5.xOffset) == "number" and (type(p5.yScale) == "number" and type(p5.yOffset) == "number") then UDim2.new(p5.xScale, p5.xOffset, p5.yScale, p5.yOffset) else nil else nil
 end
 
-local _ = function(p6) --[[ line: 176 | named "decodeColor3" ]]
+local _ = function(p6)
 	return if type(p6) == "table" then if type(p6.r) == "number" and type(p6.g) == "number" and type(p6.b) == "number" then Color3.new(p6.r, p6.g, p6.b) else nil else nil
 end
 
-local _ = function(p7, p8) --[[ line: 187 | named "safeDecodeEnum" ]]
+local _ = function(p7, p8)
 	if type(p8) ~= "string" then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 191 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p7 (ref), p8 (ref)
 		return p7[p8]
 	end)
@@ -119,7 +119,7 @@ local _ = function(p7, p8) --[[ line: 187 | named "safeDecodeEnum" ]]
 	return if ok then status else nil
 end
 
-local function decodeTextOverlay(p9) --[[ line: 197 ]]
+local function decodeTextOverlay(p9)
 	-- upvalues: decodeUDim2 (ref)
 	if type(p9) ~= "table" or type(p9.textOverlayStyle) ~= "table" then
 		return nil
@@ -131,7 +131,7 @@ local function decodeTextOverlay(p9) --[[ line: 197 ]]
 	local font_1 = textOverlayStyle.font
 	
 	if type(font_1) == "string" then
-		local ok, status = pcall(function() --[[ line: 191 ]]
+		local ok, status = pcall(function()
 			-- upvalues: font (ref), font_1 (ref)
 			return font[font_1]
 		end)
@@ -145,7 +145,7 @@ local function decodeTextOverlay(p9) --[[ line: 197 ]]
 	local textXAlignment_1 = textOverlayStyle.textXAlignment
 	
 	if type(textXAlignment_1) == "string" then
-		local ok, status = pcall(function() --[[ line: 191 ]]
+		local ok, status = pcall(function()
 			-- upvalues: textXAlignment (ref), textXAlignment_1 (ref)
 			return textXAlignment[textXAlignment_1]
 		end)
@@ -168,7 +168,7 @@ local function decodeTextOverlay(p9) --[[ line: 197 ]]
 	} else nil
 end
 
-local function decodeStickerOverlay(p10) --[[ line: 239 ]]
+local function decodeStickerOverlay(p10)
 	-- upvalues: decodeUDim2 (ref)
 	if type(p10) ~= "table" then
 		return nil
@@ -185,17 +185,17 @@ local function decodeStickerOverlay(p10) --[[ line: 239 ]]
 	} else nil else nil
 end
 
-local function decodeTrim(p11) --[[ line: 273 ]]
+local function decodeTrim(p11)
 	return if type(p11) == "table" then if type(p11.startTime) == "number" and type(p11.endTime) == "number" then { startTime = p11.startTime, endTime = p11.endTime } else nil else nil
 end
 
-local function decodeMusic(p12) --[[ line: 288 ]]
+local function decodeMusic(p12)
 	return if type(p12) == "table" then if type(p12.assetId) == "number" and type(p12.startTime) == "number" then { assetId = p12.assetId, startTime = p12.startTime } else nil else nil
 end
 
 return {
 	serialize = serialize,
-	deserialize = function(p13) --[[ line: 303 ]]
+	deserialize = function(p13)
 		-- upvalues: decodeTrim (ref), decodeMusic (ref), decodeTextOverlay (ref), decodeStickerOverlay (ref)
 		if type(p13) ~= "table" then
 			return nil
@@ -210,7 +210,7 @@ return {
 		local captureType_1 = captureRef.captureType
 		
 		if type(captureType_1) == "string" then
-			local ok, status = pcall(function() --[[ line: 191 ]]
+			local ok, status = pcall(function()
 				-- upvalues: captureType (ref), captureType_1 (ref)
 				return captureType[captureType_1]
 			end)

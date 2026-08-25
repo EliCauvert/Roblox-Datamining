@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), imageSetLabel (ref)
 	local var1 = useDesignTokens()
 	local padding = p0.padding or var1.Size.Size_100

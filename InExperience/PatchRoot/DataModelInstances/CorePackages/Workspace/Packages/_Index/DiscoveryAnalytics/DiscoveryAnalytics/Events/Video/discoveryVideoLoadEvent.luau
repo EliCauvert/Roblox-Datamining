@@ -69,7 +69,7 @@ local t = {
 	lastUpdated = { 25, 4, 23 }
 }
 
-return function(p0, p1) --[[ line: 101 | named "discoveryVideoLoadEvent" ]]
+return function(p0, p1)
 	-- upvalues: fFlagLuaAppBroadenVideoAnalytics (ref), getVideoEventParamsValidatorModule (ref), var6 (ref), discoveryEventErrorLogger (ref), var5 (ref), mutedError (ref), loggingProtocolModule (ref), t (ref)
 	if fFlagLuaAppBroadenVideoAnalytics then
 		local var8 = getVideoEventParamsValidatorModule(p1)

@@ -27,13 +27,13 @@ local var1 = if not fFlagLuaAppSduiVideoThumbnail then {
 	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser else nil
 } else nil
 
-return function(p0, p1) --[[ line: 55 | named "useIsVideoEligible" ]]
+return function(p0, p1)
 	-- upvalues: useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), fFlagLuaAppSduiVideoThumbnail (ref), isVideoEligibleForPlayability (ref), retrievalStatus (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), cryoModule (ref), var1 (write)
-	local var2 = useSelector(function(p2) --[[ line: 56 ]]
+	local var2 = useSelector(function(p2)
 		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p0 (ref)
 		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p2, p0)
 	end)
-	local var3 = useSelector(function(p3) --[[ line: 60 ]]
+	local var3 = useSelector(function(p3)
 		-- upvalues: p0 (ref)
 		return if p3.PlayabilityStatus then p3.PlayabilityStatus[p0] else nil
 	end)

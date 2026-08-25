@@ -11,13 +11,13 @@ return serviceModule:register({
 	label = "CoreScripts.InGameMenu.PageTitle.Players",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Vertical,
-	activated = function(_) --[[ line: 19 ]]
+	activated = function(_)
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), playersPage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("PlayersPage", playersPage:get())
 	end,
 	isActivated = playersPage,
 	components = {
-		Icon = function(_) --[[ line: 24 ]]
+		Icon = function(_)
 			-- upvalues: commonIconModule (ref), playersPage (ref)
 			return commonIconModule("icons/menu/friends", "icons/menu/friendsOn", playersPage)
 		end

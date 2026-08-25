@@ -9,7 +9,7 @@ local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
 local useButtonHold = focusNavigationUtilsModule.useButtonHold
 local constants = holdToPlayModule.Constants
 
-return function(p0) --[[ line: 21 | named "GamepadJoinFocusBehavior" ]]
+return function(p0)
 	-- upvalues: reactFocusNavigationModule (ref), reactModule (ref), useButtonHold (ref), constants (ref), appShortcutBarContext (ref), buttonHoldStateEnum (ref), focusNavigationEventNameEnum (ref)
 	local var4 = reactFocusNavigationModule.useFocusedGuiObject()
 	local var5 = reactModule.useRef(p0.joinExperience)
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 21 | named "GamepadJoinFocusBehavior" ]]
 	local var8 = appShortcutBarContext.useDispatchButtonHoldEnded()
 	local var9 = reactModule.useRef(false)
 	local var10 = if var6.holdState ~= buttonHoldStateEnum.HOLDING then if var6.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var6.holdState == buttonHoldStateEnum.COMPLETED else true else true
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var10 (ref), var7 (ref), focusNavigationEventNameEnum (copy), var6 (ref), var8 (ref)
 		if not var9.current and var10 then
 			var9.current = true
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 21 | named "GamepadJoinFocusBehavior" ]]
 		end
 	end, { var10, var6.holdProgress, var7, var8 })
 	local var11 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 57 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), buttonHoldStateEnum (copy), var11 (ref), var5 (ref)
 		if var6.holdState ~= buttonHoldStateEnum.COMPLETED then
 			var11.current = false
@@ -46,18 +46,18 @@ return function(p0) --[[ line: 21 | named "GamepadJoinFocusBehavior" ]]
 			var6.cancelHold()
 		end
 	end, { var6.holdState, var6.cancelHold })
-	local var12 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 78 ]]
+	local var12 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), var6 (ref)
 		return {
 			[focusNavigationEventNameEnum.HoldToJoinFriend] = { handler = var6.eventHandler }
 		}
-	end, { var6.eventHandler }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function() --[[ line: 72 ]]
+	end, { var6.eventHandler }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy)
 		return {
 			[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.HoldToJoinFriend
 		}
 	end, {})))
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), p0 (ref), var4 (ref)
 		if not var12 then return end
 		local current = p0.tileRef.current
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 21 | named "GamepadJoinFocusBehavior" ]]
 		end
 		var12(var14)
 		
-		return function() --[[ line: 105 ]]
+		return function()
 			-- upvalues: var12 (copy)
 			var12(nil)
 		end

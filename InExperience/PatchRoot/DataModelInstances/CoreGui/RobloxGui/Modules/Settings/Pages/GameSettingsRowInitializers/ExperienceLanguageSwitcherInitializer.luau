@@ -58,7 +58,7 @@ local t = {
 	vi = "vi_vn"
 }
 
-return function(p0, p1, p2) --[[ line: 76 ]]
+return function(p0, p1, p2)
 	-- upvalues: playersService (ref), url (ref), httpService (ref), utilityModule (ref), robloxTranslatorModule (ref), name (ref), ugcLocaleFromGameJoinEnabledEngineFeature (ref), localPlayer (ref), runService (ref), t (ref)
 	local var10 = 1
 	local var11 = 1
@@ -81,7 +81,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 	local text_3 = url.GAME_INTERNATIONALIZATION_URL .. string.format("v1/user-localization-settings/universe/%d", game.GameId)
 	local var29 = httpService:RequestInternal({ Method = "GET", Url = text_3 })
 	
-	local function _(p3, p4) --[[ line: 135 | named "tryGetErrorMessage" ]]
+	local function _(p3, p4)
 		local statusCode = nil
 		
 		if not p3 or not p4 or not p4.StatusCode then
@@ -98,7 +98,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		return statusCode
 	end
 	
-	local function createSessionDormantLanguageSwitcherRow() --[[ line: 148 ]]
+	local function createSessionDormantLanguageSwitcherRow()
 		-- upvalues: p0 (ref), utilityModule (copy), robloxTranslatorModule (copy), p1 (ref)
 		local var32, var33, var34 = utilityModule:AddNewRow(p0, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.SettingLabel"), "DropDown", {
 			robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.Unavailable")
@@ -110,7 +110,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		p0.LanguageSelectorFrame.LayoutOrder = p1.LanguageSelectorFrame
 	end
 	
-	local function userExperienceLanguageSettingsCallback(value, p5) --[[ line: 164 ]]
+	local function userExperienceLanguageSettingsCallback(value, p5)
 		-- upvalues: name (copy), createSessionDormantLanguageSwitcherRow (ref), t_2 (ref), var15 (write), var13 (write), t_6 (ref), t_3 (ref), t_1 (ref), var10 (write), var11 (write), p0 (ref), utilityModule (copy), robloxTranslatorModule (copy), p1 (ref), ugcLocaleFromGameJoinEnabledEngineFeature (copy), localPlayer (copy), p2 (ref), url (copy), httpService (copy), var12 (write), runService (copy)
 		if value then
 			local var35 = false
@@ -154,7 +154,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 				end
 			end
 			p0.LanguageSelectorMode.CurrentLocale = p0.LanguageSelectorMode.DropDownFrame.DropDownFrameTextLabel.Text
-			p0.LanguageSelectorMode.IndexChanged:connect(function(p6) --[[ line: 252 | named "toggleTranslation" ]]
+			p0.LanguageSelectorMode.IndexChanged:connect(function(p6)
 				-- upvalues: p0 (copy), t_3 (copy), var13 (copy), t_1 (copy), t_6 (copy), p2 (copy), url (copy), httpService (copy), var11 (copy), localPlayer (copy), name (copy), var12 (copy), runService (copy)
 				p0.LanguageSelectorMode:SetInteractable(false)
 				local _ = nil
@@ -176,7 +176,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 					})
 				})
 				
-				local function userExperienceLanguageSettingsUpdateCallback(value, p7) --[[ line: 301 ]]
+				local function userExperienceLanguageSettingsUpdateCallback(value, p7)
 					-- upvalues: var11 (copy), p6 (ref), localPlayer (copy), var13 (copy), t_1 (copy), t_6 (copy), name (copy), var12 (copy), p0 (copy)
 					if value then
 						var11 = p6
@@ -225,7 +225,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 					
 					return
 				end
-				var42:Start(function(p8, p9) --[[ line: 345 ]]
+				var42:Start(function(p8, p9)
 					-- upvalues: name (copy), text (ref), userExperienceLanguageSettingsUpdateCallback (ref)
 					local var44 = false
 					local _ = nil
@@ -259,10 +259,10 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		createSessionDormantLanguageSwitcherRow()
 	end
 	
-	local _ = function(p10, p11) --[[ line: 374 | named "experienceSourceLanguageCallback" ]]
+	local _ = function(p10, p11)
 		-- upvalues: var29 (ref), httpService (copy), var15 (write), var14 (ref), var13 (write), t_5 (ref), t_4 (ref), name (copy), text_3 (ref), userExperienceLanguageSettingsCallback (ref), createSessionDormantLanguageSwitcherRow (ref)
 		if p10 then
-			var29:Start(function(p12, p13) --[[ line: 376 ]]
+			var29:Start(function(p12, p13)
 				-- upvalues: httpService (copy), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 				local text
 				local var47 = false
@@ -277,7 +277,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 					ok = p13.StatusCode
 				end
 				if ok == nil then
-					ok, status = pcall(function() --[[ line: 385 ]]
+					ok, status = pcall(function()
 						-- upvalues: httpService (copy), p13 (ref), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy)
 						local userUniverseLocalizationSettingValue = httpService:JSONDecode(p13.Body).userUniverseLocalizationSettingValue
 						
@@ -341,10 +341,10 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		createSessionDormantLanguageSwitcherRow()
 	end
 	
-	local _ = function(p14, p15) --[[ line: 451 | named "experienceSupportedLanguagesCallback" ]]
+	local _ = function(p14, p15)
 		-- upvalues: var25 (ref), httpService (copy), var13 (write), t (copy), name (copy), text_1 (ref), var29 (ref), var15 (write), var14 (ref), t_5 (ref), t_4 (ref), text_3 (ref), userExperienceLanguageSettingsCallback (ref), createSessionDormantLanguageSwitcherRow (ref)
 		if p14 then
-			var25:Start(function(p16, p17) --[[ line: 453 ]]
+			var25:Start(function(p16, p17)
 				-- upvalues: httpService (copy), var13 (copy), t (copy), name (copy), text_1 (copy), p15 (write), p14 (ref), var29 (copy), var15 (copy), var14 (copy), t_5 (copy), t_4 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 				local text
 				local var51 = false
@@ -359,7 +359,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 					ok = p17.StatusCode
 				end
 				if ok == nil then
-					ok, status = pcall(function() --[[ line: 462 ]]
+					ok, status = pcall(function()
 						-- upvalues: httpService (copy), p17 (ref), var13 (copy), t (copy)
 						var13 = t[httpService:JSONDecode(p17.Body).languageCode]
 					end)
@@ -377,7 +377,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 				local var54 = p15
 				
 				if var51 and p14 then
-					var29:Start(function(p18, p19) --[[ line: 376 ]]
+					var29:Start(function(p18, p19)
 						-- upvalues: httpService (copy), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 						local text
 						local var47 = false
@@ -392,7 +392,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 							ok = p19.StatusCode
 						end
 						if ok == nil then
-							ok, status = pcall(function() --[[ line: 385 ]]
+							ok, status = pcall(function()
 								-- upvalues: httpService (copy), p19 (ref), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy)
 								local userUniverseLocalizationSettingValue = httpService:JSONDecode(p19.Body).userUniverseLocalizationSettingValue
 								
@@ -466,10 +466,10 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		end
 	end
 	
-	local _ = function(p20, p21) --[[ line: 493 | named "localeInformationCallback" ]]
+	local _ = function(p20, p21)
 		-- upvalues: var27 (ref), httpService (copy), t_3 (ref), t_2 (ref), name (copy), text_2 (ref), var25 (ref), var13 (write), t (copy), text_1 (ref), var29 (ref), var15 (write), var14 (ref), t_5 (ref), t_4 (ref), text_3 (ref), userExperienceLanguageSettingsCallback (ref), createSessionDormantLanguageSwitcherRow (ref)
 		if p20 then
-			var27:Start(function(p22, p23) --[[ line: 495 ]]
+			var27:Start(function(p22, p23)
 				-- upvalues: httpService (copy), t_3 (copy), t_2 (copy), name (copy), text_2 (copy), p21 (write), p20 (ref), var25 (copy), var13 (copy), t (copy), text_1 (copy), var29 (copy), var15 (copy), var14 (copy), t_5 (copy), t_4 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 				local text
 				local var57 = false
@@ -484,7 +484,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 					ok = p23.StatusCode
 				end
 				if ok == nil then
-					ok, status = pcall(function() --[[ line: 503 ]]
+					ok, status = pcall(function()
 						-- upvalues: httpService (copy), p23 (ref), t_3 (copy), t_2 (copy)
 						local t = {}
 						
@@ -514,7 +514,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 				local var61 = p21
 				
 				if p20_1 then
-					var25:Start(function(p24, p25) --[[ line: 453 ]]
+					var25:Start(function(p24, p25)
 						-- upvalues: httpService (copy), var13 (copy), t (copy), name (copy), text_1 (copy), var61 (write), p20_1 (ref), var29 (copy), var15 (copy), var14 (copy), t_5 (copy), t_4 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 						local text
 						local var51 = false
@@ -529,7 +529,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 							ok = p25.StatusCode
 						end
 						if ok == nil then
-							ok, status = pcall(function() --[[ line: 462 ]]
+							ok, status = pcall(function()
 								-- upvalues: httpService (copy), p25 (ref), var13 (copy), t (copy)
 								var13 = t[httpService:JSONDecode(p25.Body).languageCode]
 							end)
@@ -545,7 +545,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 							p15 = text
 						end
 						if var51 and p20_1 then
-							var29:Start(function(p26, p27) --[[ line: 376 ]]
+							var29:Start(function(p26, p27)
 								-- upvalues: httpService (copy), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 								local text
 								local var47 = false
@@ -560,7 +560,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 									ok = p27.StatusCode
 								end
 								if ok == nil then
-									ok, status = pcall(function() --[[ line: 385 ]]
+									ok, status = pcall(function()
 										-- upvalues: httpService (copy), p27 (ref), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy)
 										local userUniverseLocalizationSettingValue = httpService:JSONDecode(p27.Body).userUniverseLocalizationSettingValue
 										
@@ -644,7 +644,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		end
 	end
 	
-	var23:Start(function(p28, p29) --[[ line: 542 ]]
+	var23:Start(function(p28, p29)
 		-- upvalues: httpService (copy), t (copy), t_5 (ref), t_3 (ref), t_4 (ref), t_1 (ref), name (copy), text (ref), var27 (ref), t_2 (ref), text_2 (ref), var25 (ref), var13 (write), text_1 (ref), var29 (ref), var15 (write), var14 (ref), text_3 (ref), userExperienceLanguageSettingsCallback (ref), createSessionDormantLanguageSwitcherRow (ref)
 		local text_4
 		local var64 = false
@@ -659,7 +659,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 			ok = p29.StatusCode
 		end
 		if ok == nil then
-			ok, status = pcall(function() --[[ line: 551 ]]
+			ok, status = pcall(function()
 				-- upvalues: httpService (copy), p29 (ref), t (copy), t_5 (copy), t_3 (copy), t_4 (copy), t_1 (copy)
 				for i, v in pairs(httpService:JSONDecode(p29.Body).data) do
 					local languageCode = v.locale.language.languageCode
@@ -694,7 +694,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 		local var67 = text_4
 		
 		if var64 then
-			var27:Start(function(p30, p31) --[[ line: 495 ]]
+			var27:Start(function(p30, p31)
 				-- upvalues: httpService (copy), t_3 (copy), t_2 (copy), name (copy), text_2 (copy), var67 (write), var64 (ref), var25 (copy), var13 (copy), t (copy), text_1 (copy), var29 (copy), var15 (copy), var14 (copy), t_5 (copy), t_4 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 				local text
 				local var57 = false
@@ -709,7 +709,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 					ok = p31.StatusCode
 				end
 				if ok == nil then
-					ok, status = pcall(function() --[[ line: 503 ]]
+					ok, status = pcall(function()
 						-- upvalues: httpService (copy), p31 (ref), t_3 (copy), t_2 (copy)
 						local t = {}
 						
@@ -738,7 +738,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 				local p20_1 = var57 and var64
 				
 				if p20_1 then
-					var25:Start(function(p32, p33) --[[ line: 453 ]]
+					var25:Start(function(p32, p33)
 						-- upvalues: httpService (copy), var13 (copy), t (copy), name (copy), text_1 (copy), p21 (write), p20_1 (ref), var29 (copy), var15 (copy), var14 (copy), t_5 (copy), t_4 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), createSessionDormantLanguageSwitcherRow (copy)
 						local text
 						local var51 = false
@@ -753,7 +753,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 							ok = p33.StatusCode
 						end
 						if ok == nil then
-							ok, status = pcall(function() --[[ line: 462 ]]
+							ok, status = pcall(function()
 								-- upvalues: httpService (copy), p33 (ref), var13 (copy), t (copy)
 								var13 = t[httpService:JSONDecode(p33.Body).languageCode]
 							end)
@@ -769,7 +769,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 							p15 = text
 						end
 						if var51 and p20_1 then
-							var29:Start(function(p34, p35) --[[ line: 376 ]]
+							var29:Start(function(p34, p35)
 								-- upvalues: httpService (copy), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 								local text
 								local var47 = false
@@ -784,7 +784,7 @@ return function(p0, p1, p2) --[[ line: 76 ]]
 									ok = p35.StatusCode
 								end
 								if ok == nil then
-									ok, status = pcall(function() --[[ line: 385 ]]
+									ok, status = pcall(function()
 										-- upvalues: httpService (copy), p35 (ref), var15 (copy), var14 (copy), var13 (copy), t_5 (copy), t_4 (copy)
 										local userUniverseLocalizationSettingValue = httpService:JSONDecode(p35.Body).userUniverseLocalizationSettingValue
 										

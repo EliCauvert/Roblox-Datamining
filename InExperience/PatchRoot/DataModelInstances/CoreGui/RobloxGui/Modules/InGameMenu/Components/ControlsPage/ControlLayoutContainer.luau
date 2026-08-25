@@ -26,14 +26,14 @@ local var11 = t.strictInterface({
 	closeButtonRef = t.optional(t.table)
 })
 
-local function ControlLayoutContainerWithSelectionCursor(p0, p1) --[[ line: 53 ]]
+local function ControlLayoutContainerWithSelectionCursor(p0, p1)
 	-- upvalues: globalConfigModule (ref), var11 (ref), withLocalizationModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), var4 (ref), imageSetButton (ref), themedTextLabelModule (ref), dividerModule (ref), imageSetLabel (ref)
 	if globalConfigModule.propValidation then
 		assert(var11(p0))
 	end
-	return withLocalizationModule({ titleText = p0.titleText })(function(p2) --[[ line: 60 ]]
+	return withLocalizationModule({ titleText = p0.titleText })(function(p2)
 		-- upvalues: withFoundationOrUIBloxStyle (copy), roact (copy), p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p1 (ref), var4 (copy), imageSetButton (copy), themedTextLabelModule (copy), dividerModule (copy), imageSetLabel (copy)
-		return withFoundationOrUIBloxStyle(function(p3) --[[ line: 61 ]]
+		return withFoundationOrUIBloxStyle(function(p3)
 			return {
 				Theme = {
 					Overlay = {
@@ -42,7 +42,7 @@ local function ControlLayoutContainerWithSelectionCursor(p0, p1) --[[ line: 53 ]
 					}
 				}
 			}
-		end, function(p4) --[[ line: 70 ]]
+		end, function(p4)
 			-- upvalues: roact (copy), p0 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p1 (copy), var4 (copy), imageSetButton (copy), themedTextLabelModule (copy), p2 (ref), dividerModule (copy), imageSetLabel (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 0,
@@ -132,17 +132,17 @@ local function ControlLayoutContainerWithSelectionCursor(p0, p1) --[[ line: 53 ]
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p7) --[[ line: 188 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p7)
 	-- upvalues: navigateBackModule (ref)
 	return {
-		onClosed = function() --[[ line: 190 ]]
+		onClosed = function()
 			-- upvalues: p7 (ref), navigateBackModule (copy)
 			p7(navigateBackModule())
 		end
 	}
-end)(function(p5) --[[ line: 182 | named "ControlLayoutContainer" ]]
+end)(function(p5)
 	-- upvalues: var3 (ref), ControlLayoutContainerWithSelectionCursor (ref)
-	return var3(function(p6) --[[ line: 183 ]]
+	return var3(function(p6)
 		-- upvalues: ControlLayoutContainerWithSelectionCursor (copy), p5 (ref)
 		return ControlLayoutContainerWithSelectionCursor(p5, p6)
 	end)

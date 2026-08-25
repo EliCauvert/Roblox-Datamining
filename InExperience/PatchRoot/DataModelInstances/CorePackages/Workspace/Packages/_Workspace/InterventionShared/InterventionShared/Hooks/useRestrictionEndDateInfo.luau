@@ -8,7 +8,7 @@ local useState = reactModule.useState
 local dependencyArray = require(parent.RoactUtils).Hooks.dependencyArray
 local var3 = require(parent.RobloxAppLocales).Localization.new(localizationService.RobloxLocaleId)
 
-local function formatCountdown(p0) --[[ line: 37 ]]
+local function formatCountdown(p0)
 	-- upvalues: var3 (ref), localizationService (ref)
 	if p0 <= 0 then
 		return nil
@@ -25,18 +25,18 @@ local function formatCountdown(p0) --[[ line: 37 ]]
 	return if ceiled == 1 then var3:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular") else var3:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural", { number = ceiled })
 end
 
-return function(p1) --[[ line: 70 | named "useRestrictionEndDateInfo" ]]
+return function(p1)
 	-- upvalues: useMemo (ref), localizationService (ref), dependencyArray (ref), useState (ref), formatCountdown (ref), useEffect (ref), runService (ref)
 	local var7 = if p1 and p1 ~= "" then DateTime.fromIsoDate(p1) else nil
-	local var8 = useMemo(function() --[[ line: 73 ]]
+	local var8 = useMemo(function()
 		-- upvalues: var7 (ref), localizationService (copy)
 		return if var7 then var7:FormatLocalTime("LLL", localizationService.RobloxLocaleId) else nil
 	end, dependencyArray(var7))
-	local var9, var10 = useState(function() --[[ line: 77 ]]
+	local var9, var10 = useState(function()
 		-- upvalues: var7 (ref), formatCountdown (copy)
 		return if var7 == nil then nil else formatCountdown(math.max(var7.UnixTimestamp - DateTime.now().UnixTimestamp, 0))
 	end)
-	useEffect(function() --[[ line: 86 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var10 (ref), formatCountdown (copy), runService (copy)
 		if var7 == nil then
 			var10(nil)
@@ -53,7 +53,7 @@ return function(p1) --[[ line: 70 | named "useRestrictionEndDateInfo" ]]
 		var10(formatCountdown(var11))
 		local var12 = 0
 		local heartbeatConnection = nil
-		heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 107 ]]
+		heartbeatConnection = runService.Heartbeat:Connect(function()
 			-- upvalues: var12 (write), var7 (copy), var10 (copy), formatCountdown (copy), heartbeatConnection (write)
 			local processTime = os.clock()
 			
@@ -68,7 +68,7 @@ return function(p1) --[[ line: 70 | named "useRestrictionEndDateInfo" ]]
 			end
 		end)
 		
-		return function() --[[ line: 125 ]]
+		return function()
 			-- upvalues: heartbeatConnection (write)
 			if heartbeatConnection then
 				heartbeatConnection:Disconnect()

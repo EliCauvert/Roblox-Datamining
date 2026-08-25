@@ -1,6 +1,6 @@
 ﻿local memStorageService = game:GetService("MemStorageService")
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	-- upvalues: memStorageService (ref)
 	if p1 == nil then return end
 	if memStorageService:HasItem(p0) then

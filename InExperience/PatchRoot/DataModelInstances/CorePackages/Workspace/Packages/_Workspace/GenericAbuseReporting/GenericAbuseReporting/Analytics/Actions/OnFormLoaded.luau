@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Rodux).makeActionCreator(script.Name, function(p0) --[[ line: 15 ]]
+﻿return require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Rodux).makeActionCreator(script.Name, function(p0)
 	return {
 		context = p0.context,
 		place_id = p0.place_id,

@@ -12,7 +12,7 @@ local getBooleanParam = sduiActionParams.getBooleanParam
 local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
 local sduiDismissPromptActionModule = require(sduiSharedContent.Actions.SduiDismissPromptAction)
 
-return function(p0, p1, p2, _) --[[ line: 24 | named "SduiShowToastAction" ]]
+return function(p0, p1, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getStringParam (ref), toastType (ref), setCurrentToastMessage (ref), fFlagSduiDismissPromptAction (ref), getBooleanParam (ref), sduiDismissPromptActionModule (ref)
 	local var4 = if p0 then p0.actionParams else nil
 	

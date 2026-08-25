@@ -3,11 +3,11 @@ local signalsModule = require(parent.Signals)
 local gameGetGameInfoStoreModule = require(parent.DataHydration.GameGetGameInfoStore)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local t = { name = nil, creatorName = nil, isCreatorVerified = false }
-local var3 = signalsModule.createComputed(function() --[[ line: 32 ]]
+local var3 = signalsModule.createComputed(function()
 	return nil
 end)
 
-return function(p0) --[[ line: 36 ]]
+return function(p0)
 	-- upvalues: gameGetGameInfoStoreModule (ref), var3 (ref), useSignalState (ref), t (ref)
 	local var4 = if p0 and p0 ~= 0 then tostring(p0) else nil
 	local var5 = useSignalState(if var4 then gameGetGameInfoStoreModule(false).getAndFetchGameInfo(var4).data else var3)

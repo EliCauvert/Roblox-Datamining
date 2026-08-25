@@ -39,7 +39,7 @@ local t = {
 }
 local t_1 = { publish = t.BuildPublish, settings = t.BuildSettings }
 
-local function _(p0) --[[ line: 72 | named "normalizeTarget" ]]
+local function _(p0)
 	return if p0 == nil then nil else {
 		universeId = p0.universeId,
 		placeId = p0.placeId,
@@ -50,11 +50,11 @@ local function _(p0) --[[ line: 72 | named "normalizeTarget" ]]
 	}
 end
 
-local _ = function(p1) --[[ line: 87 | named "getGameInfoName" ]]
+local _ = function(p1)
 	return if p1 == nil or p1.isUnavailable or (typeof(p1.name) ~= "string" or p1.name == "") then nil else p1.name
 end
 
-local function getTargetWithGameInfo(p2, p3, p4) --[[ line: 95 ]]
+local function getTargetWithGameInfo(p2, p3, p4)
 	-- upvalues: fFlagBuildLocalization (ref), localizationStringsModule (ref)
 	if p2 == nil then
 		return p2
@@ -84,24 +84,24 @@ local function getTargetWithGameInfo(p2, p3, p4) --[[ line: 95 ]]
 	return t
 end
 
-local _ = function(p5) --[[ line: 125 | named "isTitleDescriptionReady" ]]
+local _ = function(p5)
 	return (if p5 == nil or p5.isUnavailable or (typeof(p5.name) ~= "string" or p5.name == "") then nil else p5.name) ~= nil
 end
 
-local function useGameInfo(p6) --[[ line: 129 ]]
+local function useGameInfo(p6)
 	-- upvalues: reactModule (ref), signalsModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
 	local var33 = if p6 == nil then nil else tostring(p6)
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 131 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var33 (ref), dataHydrationModule (copy)
-		return signalsModule.createComputed(function(p7) --[[ line: 132 ]]
+		return signalsModule.createComputed(function(p7)
 			-- upvalues: var33 (copy), dataHydrationModule (copy)
 			return if var33 == nil then nil else dataHydrationModule.Game.getGameInfoStore(p7).getAndFetchGameInfo(var33).data(p7)
 		end)
 	end, { var33 }))
 end
 
-local function BuildFullscreenPage(p8) --[[ line: 149 ]]
+local function BuildFullscreenPage(p8)
 	-- upvalues: useBuildPageLayoutModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref)
 	local var34 = useBuildPageLayoutModule()
 	
@@ -113,7 +113,7 @@ local function BuildFullscreenPage(p8) --[[ line: 149 ]]
 	}, { Page = p8.pageContent })
 end
 
-local function BuildSheetPage(p9) --[[ line: 162 ]]
+local function BuildSheetPage(p9)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
 	local var35 = useTokens()
 	
@@ -124,7 +124,7 @@ local function BuildSheetPage(p9) --[[ line: 162 ]]
 	}, { Page = p9.pageContent })
 end
 
-local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
+local function ConfigurationScreen(p10, p11, p12)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), useGameInfo (ref), getTargetWithGameInfo (ref), reactModule (ref), t (ref), buildOverflowMenuPageModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref), buildExperience (ref)
 	local var36 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }) else nil).loading else nil
 	local navigation = p10.navigation
@@ -142,7 +142,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 	local var41 = getTargetWithGameInfo(var39, var40, var36)
 	local var42, var43 = reactModule.useState(false)
 	local var44, var45 = reactModule.useState(false)
-	local var46 = reactModule.useCallback(function() --[[ line: 189 ]]
+	local var46 = reactModule.useCallback(function()
 		-- upvalues: screenProps (ref), navigation (ref)
 		if screenProps.onClose then
 			screenProps.onClose()
@@ -151,7 +151,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		end
 		navigation.goBack()
 	end, { navigation, screenProps.onClose })
-	local var47 = reactModule.useCallback(function() --[[ line: 196 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: screenProps (ref), navigation (ref), t (copy), var41 (ref)
 		if screenProps.onOpenAudiencePage then
 			screenProps.onOpenAudiencePage()
@@ -160,7 +160,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		end
 		navigation.navigate(t.BuildAudience, { target = var41 })
 	end, { navigation, screenProps.onOpenAudiencePage, var41 })
-	local var48 = reactModule.useCallback(function() --[[ line: 205 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var40 (ref), screenProps (ref), navigation (ref), t (copy), var41 (ref)
 		if (if var40 == nil or var40.isUnavailable or (typeof(var40.name) ~= "string" or var40.name == "") then nil else var40.name) == nil then return end
 		if screenProps.onOpenTitleDescriptionPage then
@@ -175,7 +175,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		screenProps.onOpenTitleDescriptionPage,
 		var41
 	})
-	local var49 = reactModule.useCallback(function() --[[ line: 217 ]]
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: screenProps (ref), navigation (ref), t (copy), var41 (ref)
 		if screenProps.onOpenMediaSelectionPage then
 			screenProps.onOpenMediaSelectionPage()
@@ -184,7 +184,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		end
 		navigation.navigate(t.BuildMediaSelection, { target = var41 })
 	end, { navigation, screenProps.onOpenMediaSelectionPage, var41 })
-	local var50 = reactModule.useCallback(function() --[[ line: 226 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: var41 (ref), screenProps (ref), navigation (ref), t (copy)
 		if var41 == nil or var41.placeId == nil then return end
 		if screenProps.onOpenVersionTitleDescriptionPage then
@@ -198,7 +198,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		screenProps.onOpenVersionTitleDescriptionPage,
 		var41
 	})
-	local var51 = reactModule.useCallback(function() --[[ line: 238 ]]
+	local var51 = reactModule.useCallback(function()
 		-- upvalues: var41 (ref), screenProps (ref), var45 (ref)
 		if var41 == nil or var41.placeId == nil then return end
 		if screenProps.onOpenVersionHistory then
@@ -208,23 +208,23 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		end
 		var45(true)
 	end, { screenProps.onOpenVersionHistory, var41 })
-	local var52 = reactModule.useCallback(function() --[[ line: 248 ]]
+	local var52 = reactModule.useCallback(function()
 		-- upvalues: var45 (ref)
 		var45(false)
 	end, {})
-	local var53 = reactModule.useCallback(function() --[[ line: 251 ]]
+	local var53 = reactModule.useCallback(function()
 		-- upvalues: var43 (ref)
 		var43(true)
 	end, {})
-	local var54 = reactModule.useCallback(function() --[[ line: 254 ]]
+	local var54 = reactModule.useCallback(function()
 		-- upvalues: var43 (ref)
 		var43(false)
 	end, {})
-	local var55 = reactModule.useCallback(function() --[[ line: 257 ]]
+	local var55 = reactModule.useCallback(function()
 		-- upvalues: navigation (ref), t (copy), var41 (ref)
 		navigation.navigate(t.BuildPlaytestInviteManagement, { target = var41 })
 	end, { navigation, var41 })
-	local var56 = reactModule.useCallback(function() --[[ line: 264 ]]
+	local var56 = reactModule.useCallback(function()
 		-- upvalues: var43 (ref), var55 (ref)
 		var43(false)
 		var55()
@@ -261,7 +261,7 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 	})
 end
 
-local function BuildTitleDescriptionContent(p13) --[[ line: 464 ]]
+local function BuildTitleDescriptionContent(p13)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useGameInfo (ref), getTargetWithGameInfo (ref), reactModule (ref), titleDescriptionPageModule (ref)
 	local var59 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }) else nil).loading else nil
 	local var60 = useGameInfo(p13.target.universeId)
@@ -283,15 +283,15 @@ end
 return {
 	Screens = t,
 	SCREEN_BY_PAGE = t_1,
-	BuildPublishScreen = function(p14) --[[ line: 322 ]]
+	BuildPublishScreen = function(p14)
 		-- upvalues: ConfigurationScreen (ref)
 		return ConfigurationScreen(p14, "publish", "BuildPage.publish.Page")
 	end,
-	BuildSettingsScreen = function(value) --[[ line: 326 ]]
+	BuildSettingsScreen = function(value)
 		-- upvalues: ConfigurationScreen (ref)
 		return ConfigurationScreen(value, "settings", "BuildPage.settings.Page")
 	end,
-	BuildAudienceScreen = function(p15) --[[ line: 330 ]]
+	BuildAudienceScreen = function(p15)
 		-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), reactModule (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), audienceConfigurationContentModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
 		local var62 = if fFlagBuildLocalization then useLocalization({ audience = localizationStringsModule.BUILD_MENU_AUDIENCE }) else nil
 		local navigation = p15.navigation
@@ -309,7 +309,7 @@ return {
 			testId = "BuildPage.audience.Page",
 			title = if fFlagBuildLocalization then var62.audience else localizationStringsModule.BUILD_MENU_AUDIENCE,
 			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
-			onClose = reactModule.useCallback(function() --[[ line: 340 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: navigation (ref)
 				navigation.goBack()
 			end, { navigation }),
@@ -319,7 +319,7 @@ return {
 		
 		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var66 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var66 })
 	end,
-	BuildPrivateInvitesPickerScreen = function(p16) --[[ line: 374 ]]
+	BuildPrivateInvitesPickerScreen = function(p16)
 		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), privateInvitesPickerContainerModule (ref)
 		local navigation = p16.navigation
 		local screenProps = p16.screenProps or {}
@@ -332,7 +332,7 @@ return {
 			gameIcon = var68.gameIcon,
 			isNewGameTarget = var68.isNewGameTarget
 		}
-		local var70 = reactModule.useCallback(function() --[[ line: 379 ]]
+		local var70 = reactModule.useCallback(function()
 			-- upvalues: screenProps (ref), navigation (ref)
 			if screenProps.onClose then
 				screenProps.onClose()
@@ -348,7 +348,7 @@ return {
 			onInvitesSent = var70
 		})
 	end,
-	BuildPlaytestInviteManagementScreen = function(p17) --[[ line: 398 ]]
+	BuildPlaytestInviteManagementScreen = function(p17)
 		-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), reactModule (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), privateInvitesManagementContainerModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref)
 		local var71 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 			pageTitle = localizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
@@ -365,7 +365,7 @@ return {
 			isNewGameTarget = var73.isNewGameTarget
 		}
 		local var75, var76 = reactModule.useState(false)
-		local var77 = reactModule.useCallback(function() --[[ line: 418 ]]
+		local var77 = reactModule.useCallback(function()
 			-- upvalues: var76 (ref)
 			var76(false)
 		end, {})
@@ -373,13 +373,13 @@ return {
 			testId = "BuildPage.playtestInviteManagement.Page",
 			title = var71,
 			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
-			onClose = reactModule.useCallback(function() --[[ line: 412 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: navigation (ref)
 				navigation.goBack()
 			end, { navigation }),
 			content = reactModule.createElement(privateInvitesManagementContainerModule, {
 				universeId = var74.universeId,
-				onOpenInvitePicker = reactModule.useCallback(function() --[[ line: 415 ]]
+				onOpenInvitePicker = reactModule.useCallback(function()
 					-- upvalues: var76 (ref)
 					var76(true)
 				end, {})
@@ -395,7 +395,7 @@ return {
 			}) else nil
 		})
 	end,
-	BuildTitleDescriptionScreen = function(p18) --[[ line: 493 ]]
+	BuildTitleDescriptionScreen = function(p18)
 		-- upvalues: buildNavigationParamsModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), BuildTitleDescriptionContent (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
 		local navigation = p18.navigation
 		local screenProps = p18.screenProps or {}
@@ -419,7 +419,7 @@ return {
 			pageContent = var82
 		})
 	end,
-	BuildVersionTitleDescriptionScreen = function(p19) --[[ line: 519 ]]
+	BuildVersionTitleDescriptionScreen = function(p19)
 		-- upvalues: buildNavigationParamsModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildExperience (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
 		local navigation = p19.navigation
 		local screenProps = p19.screenProps or {}
@@ -443,7 +443,7 @@ return {
 			pageContent = var86
 		})
 	end,
-	BuildMediaSelectionScreen = function(p20) --[[ line: 548 ]]
+	BuildMediaSelectionScreen = function(p20)
 		-- upvalues: buildNavigationParamsModule (ref), useBuildPageLayoutModule (ref), reactModule (ref), mediaSelectionPageModule (ref), fullscreenPageWithSafeArea (ref)
 		local navigation = p20.navigation
 		local target = buildNavigationParamsModule.getTarget(navigation)
@@ -456,7 +456,7 @@ return {
 			includeBottomBar = var88.shouldIncludeBottomBar
 		}, {
 			Page = if target == nil or target.universeId == nil then nil else reactModule.createElement(mediaSelectionPageModule, {
-				onClose = reactModule.useCallback(function() --[[ line: 553 ]]
+				onClose = reactModule.useCallback(function()
 					-- upvalues: navigation (ref)
 					navigation.goBack()
 				end, { navigation }),

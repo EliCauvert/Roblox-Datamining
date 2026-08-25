@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("ReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercent", 65)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastInt("ReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercent")
 end

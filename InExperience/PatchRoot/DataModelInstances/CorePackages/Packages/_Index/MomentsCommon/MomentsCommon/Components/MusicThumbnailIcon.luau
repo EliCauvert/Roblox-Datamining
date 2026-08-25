@@ -16,7 +16,7 @@ local t_1 = {
 	[musicThumbnailIconSizeModule.Large] = 4
 }
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: getRbxThumb (ref), foundationModule (ref), useImageLoadingStateModule (ref), t (ref), reactModule (ref), image (ref), t_1 (ref), skeleton (ref)
 	local var7 = getRbxThumb(foundationModule.Enums.ThumbnailType.Asset, p0.assetId)
 	local size = t[p0.size]

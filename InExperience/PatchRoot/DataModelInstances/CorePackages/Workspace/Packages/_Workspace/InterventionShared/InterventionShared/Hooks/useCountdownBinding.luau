@@ -2,10 +2,10 @@
 local runService = game:GetService("RunService")
 local reactModule = require(script:FindFirstAncestor("InterventionShared").Parent.React)
 
-return function(p0, p1) --[[ line: 15 | named "useCountdownBinding" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), localizationService (ref), runService (ref)
 	local var3, var4 = reactModule.useBinding(p1 or "")
-	local var5 = reactModule.useCallback(function() --[[ line: 17 ]]
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), localizationService (copy), var4 (ref), p1 (ref)
 		if p0 == nil then
 			var4(p1 or "")
@@ -18,11 +18,11 @@ return function(p0, p1) --[[ line: 15 | named "useCountdownBinding" ]]
 		
 		return maxValue
 	end, { p1, p0 })
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref)
 		var5()
 	end, { var5 })
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), runService (copy), var5 (ref)
 		local heartbeatConnection = nil
 		
@@ -31,7 +31,7 @@ return function(p0, p1) --[[ line: 15 | named "useCountdownBinding" ]]
 			
 			if var8 > 0 then
 				local var9 = 0
-				heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 52 ]]
+				heartbeatConnection = runService.Heartbeat:Connect(function()
 					-- upvalues: var9 (write), var8 (write), var5 (copy), heartbeatConnection (write)
 					local processTime = os.clock()
 					
@@ -46,7 +46,7 @@ return function(p0, p1) --[[ line: 15 | named "useCountdownBinding" ]]
 				end)
 			end
 		end
-		return function() --[[ line: 66 ]]
+		return function()
 			-- upvalues: heartbeatConnection (write)
 			if heartbeatConnection ~= nil then
 				heartbeatConnection:Disconnect()

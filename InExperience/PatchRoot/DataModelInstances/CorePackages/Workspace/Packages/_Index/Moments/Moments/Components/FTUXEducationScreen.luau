@@ -26,14 +26,14 @@ local t = {
 	back = "Feature.Moments.Action.Back"
 }
 
-return function(p0) --[[ line: 55 | named "FTUXEducationScreen" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), view (ref), formFactor (ref), icon (ref), foundationModule (ref), image (ref), constantsModule (ref), text (ref), button (ref), howToCaptureModalModule (ref)
 	local var8 = useLocalization(t)
 	local var9 = useDeviceInsets()
 	local var10 = useTokens()
 	local var11 = useFormFactor()
 	local var12, var13 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy)
 		fireAnalyticsEvent(eventNames.FTUXEducationScreenImpression)
 	end, {})
@@ -102,7 +102,7 @@ return function(p0) --[[ line: 55 | named "FTUXEducationScreen" ]]
 					HowToCaptureButton = reactModule.createElement(button, {
 						LayoutOrder = 1,
 						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-						onActivated = reactModule.useCallback(function() --[[ line: 68 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var13 (ref)
 							fireAnalyticsEvent(eventNames.FTUXHowToCaptureButtonPressed)
 							var13(true)
@@ -125,7 +125,7 @@ return function(p0) --[[ line: 55 | named "FTUXEducationScreen" ]]
 			})
 		}) else nil,
 		HowToCard = if var12 then reactModule.createElement(howToCaptureModalModule, {
-			onClose = reactModule.useCallback(function() --[[ line: 73 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: var13 (ref)
 				var13(false)
 			end, {})

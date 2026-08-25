@@ -2,7 +2,7 @@
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.GetInstance(p0, p1) --[[ line: 14 ]]
+function t_1.GetInstance(p0, p1)
 	if p0.InstancePoolsByClass[p1] == nil then
 		p0.InstancePoolsByClass[p1] = {}
 	end
@@ -17,7 +17,7 @@ function t_1.GetInstance(p0, p1) --[[ line: 14 ]]
 	return Instance.new(p1)
 end
 
-function t_1.ReturnInstance(p2, p3) --[[ line: 27 ]]
+function t_1.ReturnInstance(p2, p3)
 	if p2.InstancePoolsByClass[p3.ClassName] == nil then
 		p2.InstancePoolsByClass[p3.ClassName] = {}
 	end
@@ -29,7 +29,7 @@ function t_1.ReturnInstance(p2, p3) --[[ line: 27 ]]
 	p3:Destroy()
 end
 
-function t.new(p4) --[[ line: 41 ]]
+function t.new(p4)
 	-- upvalues: t_1 (ref)
 	local objectPool = setmetatable({}, t_1)
 	objectPool.InstancePoolsByClass = {}

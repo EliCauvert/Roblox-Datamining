@@ -3,7 +3,7 @@ local playersService = game:GetService("Players")
 local _ = require(currencyTransfers.Stores.createTransferStore)
 local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
 
-return function(p0, p1) --[[ line: 10 | named "buildRobuxTransferFlowPayload" ]]
+return function(p0, p1)
 	-- upvalues: playersService (ref), transferDirectionModule (ref)
 	local localPlayer = playersService.LocalPlayer
 	local var3 = if localPlayer then localPlayer.UserId else 0

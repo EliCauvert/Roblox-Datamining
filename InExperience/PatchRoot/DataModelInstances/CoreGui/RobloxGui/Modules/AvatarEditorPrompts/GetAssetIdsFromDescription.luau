@@ -4,7 +4,7 @@
 	"RightLeg", "RunAnimation", "Shirt", "SwimAnimation", "Torso", "WalkAnimation"
 }
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: list (ref)
 	local v_1
 	local t = {}

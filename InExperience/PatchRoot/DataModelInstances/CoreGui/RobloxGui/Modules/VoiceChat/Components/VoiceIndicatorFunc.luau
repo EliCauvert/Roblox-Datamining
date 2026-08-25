@@ -16,17 +16,17 @@ local voiceIndicatorPerformanceOptimizationsV2 = game:DefineFastFlag("VoiceIndic
 local micTalkingUpdateFrequency = game:DefineFastInt("MicTalkingUpdateFrequency", 3)
 local uDim2 = UDim2.fromOffset(28, 28)
 
-local function _(p0, p1) --[[ line: 32 | named "useJoinBinding" ]]
+local function _(p0, p1)
 	-- upvalues: reactModule (ref), roactModule (ref)
-	return reactModule.useMemo(function() --[[ line: 33 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: roactModule (copy), p0 (ref), p1 (ref)
 		return roactModule.joinBindings({ p0, p1 })
 	end, { p0, p1 })
 end
 
-local _ = function(p2, p3) --[[ line: 38 | named "mapLevelToIcon" ]]
+local _ = function(p2, p3)
 	-- upvalues: constantsModule (ref), default (ref)
-	return function(p4) --[[ line: 40 ]]
+	return function(p4)
 		-- upvalues: constantsModule (copy), default (copy), p2 (ref), p3 (ref)
 		local var17 = p4[1]
 		
@@ -39,23 +39,23 @@ local t = {
 	[constantsModule.VOICE_STATE.HIDDEN] = true
 }
 
-local function GenerateGUID() --[[ line: 67 ]]
+local function GenerateGUID()
 	-- upvalues: httpService (ref)
 	return httpService:GenerateGUID()
 end
 
-local function createTweenShimmeringEffect(p5) --[[ line: 83 ]]
+local function createTweenShimmeringEffect(p5)
 	-- upvalues: tweenService (ref)
 	return tweenService:Create(p5:getValue(), TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, -1), { Offset = Vector2.new(1, 0) })
 end
 
-return function(p6) --[[ line: 91 | named "VoiceIndicator" ]]
+return function(p6)
 	-- upvalues: useVoiceStateModule (ref), reactModule (ref), roactModule (ref), GenerateGUID (ref), constantsModule (ref), createTweenShimmeringEffect (ref), voiceIndicatorPerformanceOptimizationsV2 (ref), runService (ref), micTalkingUpdateFrequency (ref), t (ref), reactIsModule (ref), default (ref), useSelectionCursor (ref), cursorKind (ref), uDim2 (ref)
 	local var18 = useVoiceStateModule(p6.userId, p6.disable or false)
 	local var19, var20 = reactModule.useBinding(0)
 	local var21 = p6.selectable ~= nil or p6.selectable
 	local var22, var23 = reactModule.useBinding(var18)
-	local var24 = reactModule.useMemo(function() --[[ line: 33 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: roactModule (copy), var22 (ref), var19 (ref)
 		return roactModule.joinBindings({ var22, var19 })
 	end, { var22, var19 })
@@ -65,27 +65,27 @@ return function(p6) --[[ line: 91 | named "VoiceIndicator" ]]
 	local var27 = var18 == constantsModule.VOICE_STATE.CONNECTING
 	local var28 = p6.showConnectingShimmer == true
 	local var29 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 105 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref), var27 (ref), var29 (ref), createTweenShimmeringEffect (copy)
 		if var28 and var27 and var29.current then
 			local var34 = createTweenShimmeringEffect(var29)
 			var34:Play()
 			
-			return function() --[[ line: 110 ]]
+			return function()
 				-- upvalues: var34 (ref)
 				var34:Cancel()
 			end
 		end
-		return function() --[[ line: 114 ]] end
+		return function() end
 	end, { var27, var28 })
 	
 	if voiceIndicatorPerformanceOptimizationsV2 then
 		local var30 = reactModule.useRef(false)
 		var30.current = var18 == constantsModule.VOICE_STATE.TALKING
-		reactModule.useEffect(function() --[[ line: 121 ]]
+		reactModule.useEffect(function()
 			-- upvalues: runService (copy), current (ref), var30 (ref), micTalkingUpdateFrequency (copy), var20 (ref)
 			local var35 = 0
-			runService:BindToRenderStep(current, 1, function() --[[ line: 124 ]]
+			runService:BindToRenderStep(current, 1, function()
 				-- upvalues: var30 (copy), var35 (write), micTalkingUpdateFrequency (copy), var20 (copy)
 				if not var30.current then return end
 				var35 += 1
@@ -96,21 +96,21 @@ return function(p6) --[[ line: 91 | named "VoiceIndicator" ]]
 				end
 			end)
 			
-			return function() --[[ line: 136 ]]
+			return function()
 				-- upvalues: runService (copy), current (copy)
 				runService:UnbindFromRenderStep(current)
 			end
 		end, { current })
 	else
-		reactModule.useEffect(function() --[[ line: 141 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var26 (ref), runService (copy), current (ref), var20 (ref)
 			if var26 then
-				runService:BindToRenderStep(current, 1, function() --[[ line: 143 ]]
+				runService:BindToRenderStep(current, 1, function()
 					-- upvalues: var20 (copy)
 					var20(math.random())
 				end)
 			end
-			return function() --[[ line: 147 ]]
+			return function()
 				-- upvalues: var26 (copy), runService (copy), current (copy)
 				if var26 then
 					runService:UnbindFromRenderStep(current)
@@ -123,7 +123,7 @@ return function(p6) --[[ line: 91 | named "VoiceIndicator" ]]
 	
 	if p6.iconTransparency then
 		local var33 = var32
-		var32 = if reactIsModule.isBinding(p6.iconTransparency) then p6.iconTransparency:map(function(p7) --[[ line: 161 ]]
+		var32 = if reactIsModule.isBinding(p6.iconTransparency) then p6.iconTransparency:map(function(p7)
 			-- upvalues: var33 (ref)
 			return 1 - (1 - p7) * (1 - var33)
 		end) else 1 - (1 - p6.iconTransparency) * (1 - var33)
@@ -132,11 +132,11 @@ return function(p6) --[[ line: 91 | named "VoiceIndicator" ]]
 		Size = p6.size or uDim2,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Image = reactModule.useMemo(function() --[[ line: 169 ]]
+		Image = reactModule.useMemo(function()
 			-- upvalues: var24 (ref), p6 (ref), var28 (ref), constantsModule (copy), default (copy)
 			local iconStyle = p6.iconStyle
 			
-			return var24:map(function(p8) --[[ line: 40 ]]
+			return var24:map(function(p8)
 				-- upvalues: constantsModule (copy), default (copy), iconStyle (ref), var28 (ref)
 				local var17 = p8[1]
 				

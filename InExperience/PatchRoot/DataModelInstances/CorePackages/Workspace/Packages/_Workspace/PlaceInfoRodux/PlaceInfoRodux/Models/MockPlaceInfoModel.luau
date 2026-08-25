@@ -1,7 +1,7 @@
 ﻿local generateStringId = require(script:FindFirstAncestor("PlaceInfoRodux").Parent.AppCommonLib).GenerateStringId
 local placeInfoModelModule = require(script.Parent.PlaceInfoModel)
 local t = {
-	mock = function() --[[ line: 11 ]]
+	mock = function()
 		-- upvalues: placeInfoModelModule (ref), generateStringId (ref)
 		local name = placeInfoModelModule.new()
 		name.builder = "builder"

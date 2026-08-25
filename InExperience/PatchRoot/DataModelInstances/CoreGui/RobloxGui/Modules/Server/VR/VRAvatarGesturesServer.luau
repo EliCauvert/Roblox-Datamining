@@ -10,12 +10,12 @@ local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VR
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 20 ]]
+function t.new()
 	-- upvalues: t (ref), connectionUtil (ref), VRService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.connections = connectionUtil.new()
 	tbl.VRPlayers = {}
-	tbl.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ line: 28 ]]
+	tbl.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
 		-- upvalues: tbl (ref)
 		tbl:onAvatarGesturesChanged()
 	end)
@@ -26,7 +26,7 @@ function t.new() --[[ line: 20 ]]
 	return tbl
 end
 
-function cleanCharacter(p0) --[[ line: 35 ]]
+function cleanCharacter(p0)
 	if p0.Character then
 		local humanoid = p0.Character:FindFirstChild("Humanoid")
 		
@@ -53,7 +53,7 @@ function cleanCharacter(p0) --[[ line: 35 ]]
 	end
 end
 
-function t:onPlayerChanged(p1, p2) --[[ line: 62 ]]
+function t:onPlayerChanged(p1, p2)
 	-- upvalues: avatarUtil (ref)
 	self.VRPlayers[p1] = p2 or nil
 	
@@ -64,13 +64,13 @@ function t:onPlayerChanged(p1, p2) --[[ line: 62 ]]
 	elseif not self.avatarUtil then
 		self.avatarUtil = avatarUtil.new()
 	end
-	self.avatarUtil:connectPlayerCharacterChanges(p1, function(p3) --[[ line: 71 ]]
+	self.avatarUtil:connectPlayerCharacterChanges(p1, function(p3)
 		-- upvalues: self (ref)
 		self:onCharacterChanged(p3)
 	end)
 end
 
-function t:onPlayerAdded(p4) --[[ line: 79 ]]
+function t:onPlayerAdded(p4)
 	-- upvalues: rbxAnalyticsService (ref), VRAvatarGesturesAnalyticsThrottleHundrethsPercent (ref)
 	if next(self.VRPlayers) ~= nil then
 		rbxAnalyticsService:ReportInfluxSeries("VRAvatarGestures", {
@@ -81,7 +81,7 @@ function t:onPlayerAdded(p4) --[[ line: 79 ]]
 	end
 end
 
-function t:onAvatarGesturesChanged() --[[ line: 90 ]]
+function t:onAvatarGesturesChanged()
 	-- upvalues: VRService (ref), robloxReplicatedStorageService (ref), playersService (ref)
 	if VRService.AvatarGestures then
 		local avatarGesturesVRPlayer_1 = robloxReplicatedStorageService:FindFirstChild("AvatarGesturesVRPlayer")
@@ -91,15 +91,15 @@ function t:onAvatarGesturesChanged() --[[ line: 90 ]]
 			avatarGesturesVRPlayer_1.Name = "AvatarGesturesVRPlayer"
 			avatarGesturesVRPlayer_1.Parent = robloxReplicatedStorageService
 		end
-		self.connections:connect("VRPlayerOnServerEvent", avatarGesturesVRPlayer_1.OnServerEvent, function(p5, p6) --[[ line: 101 ]]
+		self.connections:connect("VRPlayerOnServerEvent", avatarGesturesVRPlayer_1.OnServerEvent, function(p5, p6)
 			-- upvalues: self (ref)
 			self:onPlayerChanged(p5, p6)
 		end)
-		self.connections:connect("PlayerAdded", playersService.PlayerAdded, function(p7) --[[ line: 104 ]]
+		self.connections:connect("PlayerAdded", playersService.PlayerAdded, function(p7)
 			-- upvalues: self (ref)
 			self:onPlayerAdded(p7)
 		end)
-		self.connections:connect("PlayerRemoving", playersService.PlayerRemoving, function(p8) --[[ line: 107 ]]
+		self.connections:connect("PlayerRemoving", playersService.PlayerRemoving, function(p8)
 			-- upvalues: self (ref)
 			self:onPlayerChanged(p8, false)
 		end)
@@ -110,14 +110,14 @@ function t:onAvatarGesturesChanged() --[[ line: 90 ]]
 			self:onPlayerChanged(i, false)
 		end
 		self.connections:disconnectAll()
-		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ line: 115 ]]
+		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
 			-- upvalues: self (ref)
 			self:onAvatarGesturesChanged()
 		end)
 	end
 end
 
-function t.findOrCreateColliders(_, p9, p10) --[[ line: 121 ]]
+function t.findOrCreateColliders(_, p9, p10)
 	-- upvalues: playersService (ref)
 	local var12 = playersService:GetPlayerFromCharacter(p10)
 	local text = "Tracked" .. p9
@@ -187,7 +187,7 @@ function t.findOrCreateColliders(_, p9, p10) --[[ line: 121 ]]
 	end
 end
 
-function t:createHandCollider(p11, p12) --[[ line: 196 ]]
+function t:createHandCollider(p11, p12)
 	self:findOrCreateColliders(p11 .. "Hand", p12)
 	local var22 = p12:FindFirstChild(p11 .. "Hand")
 	local humanoid = p12:FindFirstChild("Humanoid")
@@ -201,7 +201,7 @@ function t:createHandCollider(p11, p12) --[[ line: 196 ]]
 			
 			if var25 then
 				var24.ChainRoot = var22
-				coroutine.wrap(function() --[[ line: 213 ]]
+				coroutine.wrap(function()
 					-- upvalues: var24 (ref), var25 (ref)
 					task.wait(0.1)
 					var24.ChainRoot = var25
@@ -222,7 +222,7 @@ function t:createHandCollider(p11, p12) --[[ line: 196 ]]
 	end
 end
 
-function t:createHeadCollider(p13) --[[ line: 234 ]]
+function t:createHeadCollider(p13)
 	self:findOrCreateColliders("Head", p13)
 	local head = p13:FindFirstChild("Head")
 	local humanoid = p13:FindFirstChild("Humanoid")
@@ -244,7 +244,7 @@ function t:createHeadCollider(p13) --[[ line: 234 ]]
 	end
 end
 
-function t:onCharacterChanged(p14) --[[ line: 260 ]]
+function t:onCharacterChanged(p14)
 	-- upvalues: playersService (ref), VRService (ref)
 	if self.VRPlayers[playersService:GetPlayerFromCharacter(p14)] and VRService.AvatarGestures then
 		self:createHandCollider("Left", p14)

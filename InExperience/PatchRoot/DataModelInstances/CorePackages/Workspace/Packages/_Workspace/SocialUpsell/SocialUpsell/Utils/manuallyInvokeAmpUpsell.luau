@@ -7,9 +7,9 @@ local DEFAULT_FAE_ENTRY_POINT_EVENT_CTX = constantsModule.DEFAULT_FAE_ENTRY_POIN
 local fStringCommsFAEFeatureNameModule = require(socialUpsell.Flag.FStringCommsFAEFeatureName)
 local fStringCommsFAENamespaceModule = require(socialUpsell.Flag.FStringCommsFAENamespace)
 
-return function(p0, p1, p2) --[[ line: 14 ]]
+return function(p0, p1, p2)
 	-- upvalues: DEFAULT_FAE_ENTRY_POINT_EVENT_CTX (ref), inExpAmpWizardController (ref), fStringCommsFAEFeatureNameModule (ref), accessResponseEnum (ref), fStringCommsFAENamespaceModule (ref)
-	return inExpAmpWizardController.OpenAmpWizardContainerInExp(fStringCommsFAEFeatureNameModule, function(p3, _) --[[ line: 18 ]]
+	return inExpAmpWizardController.OpenAmpWizardContainerInExp(fStringCommsFAEFeatureNameModule, function(p3, _)
 		-- upvalues: accessResponseEnum (copy), p1 (ref), p2 (ref)
 		if p3 == accessResponseEnum.Granted then
 			if p1 then

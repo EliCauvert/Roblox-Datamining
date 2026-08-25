@@ -7,7 +7,7 @@ local var1 = httpRequestModule.config({
 })
 local promiseModule = require(parent.Promise)
 
-return function() --[[ line: 14 ]]
+return function()
 	-- upvalues: promiseModule (ref), url (ref), var1 (ref)
 	return if game.GameId == nil or game.GameId == 0 then promiseModule.reject("GameId is nil or 0") else var1(string.format("%sreferral-reward-metadata/v1/get-reward-metadata?%s", url.APIS_URL, url:makeQueryString({ UniverseId = game.GameId })), "GET")
 end

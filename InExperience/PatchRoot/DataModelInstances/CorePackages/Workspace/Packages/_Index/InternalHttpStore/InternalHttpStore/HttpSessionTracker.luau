@@ -1,12 +1,12 @@
 ﻿local t = {}
 local var1 = 0
 
-function t.currentSession() --[[ line: 5 ]]
+function t.currentSession()
 	-- upvalues: var1 (write)
 	return var1
 end
 
-function t.cancelAll() --[[ line: 9 ]]
+function t.cancelAll()
 	-- upvalues: var1 (write)
 	var1 += 1
 end

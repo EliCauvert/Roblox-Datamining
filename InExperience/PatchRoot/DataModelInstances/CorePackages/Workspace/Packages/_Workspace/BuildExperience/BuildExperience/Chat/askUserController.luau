@@ -10,7 +10,7 @@ local debug = creatorAgentChatModule.debug
 local awaitRequestState = toolControllerUtilsModule.awaitRequestState
 local getToolCallOrder = toolControllerUtilsModule.getToolCallOrder
 
-local function getSelectedOptionId(p0) --[[ line: 59 ]]
+local function getSelectedOptionId(p0)
 	if p0 == nil then
 		return nil
 	elseif p0.options == nil then
@@ -24,7 +24,7 @@ local function getSelectedOptionId(p0) --[[ line: 59 ]]
 	return t
 end
 
-local function _(p1, p2) --[[ line: 76 | named "makeAnswerStackPrompt" ]]
+local function _(p1, p2)
 	-- upvalues: getSelectedOptionId (ref)
 	return {
 		question = p1.questions[p1.currentIndex],
@@ -36,7 +36,7 @@ local function _(p1, p2) --[[ line: 76 | named "makeAnswerStackPrompt" ]]
 	}
 end
 
-local function buildOptimisticAskUserTool(p3) --[[ line: 87 ]]
+local function buildOptimisticAskUserTool(p3)
 	-- upvalues: getSelectedOptionId (ref)
 	local t = {}
 	
@@ -54,7 +54,7 @@ local function buildOptimisticAskUserTool(p3) --[[ line: 87 ]]
 	}
 end
 
-local function toggleOptionInSelection(p4, p5) --[[ line: 103 ]]
+local function toggleOptionInSelection(p4, p5)
 	local var10 = if p4 == nil or p4.options == nil then {} else p4.options
 	local t = {}
 	local var12 = false
@@ -72,13 +72,13 @@ local function toggleOptionInSelection(p4, p5) --[[ line: 103 ]]
 	return { option = nil, customResponseText = nil, options = t }
 end
 
-local _ = function(p6, p7, p8) --[[ line: 126 | named "createAnswerStackSync" ]]
+local _ = function(p6, p7, p8)
 	-- upvalues: studioAskUserTool (ref), debug (ref), getToolCallOrder (ref)
 	local var13 = nil
 	local var14 = nil
 	local var15 = false
 	
-	return function(p9) --[[ line: 135 ]]
+	return function(p9)
 		-- upvalues: studioAskUserTool (copy), p8 (ref), var15 (write), debug (copy), var13 (write), var14 (write), p6 (ref), p7 (ref), getToolCallOrder (copy)
 		local var16, var17, _, var18, var19 = studioAskUserTool.findQuestionsInTurnState(p9, p8())
 		
@@ -131,18 +131,18 @@ local _ = function(p6, p7, p8) --[[ line: 126 | named "createAnswerStackSync" ]]
 	end
 end
 
-return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserController" ]]
+return function(p10, p11, p12, p13)
 	-- upvalues: buildOptimisticAskUserTool (ref), studioAskUserTool (ref), debug (ref), getToolCallOrder (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), toggleOptionInSelection (ref)
 	local var21 = nil
 	local onAnswerSelectedImpl = nil
 	local onAnswerConfirmedImpl = nil
 	
-	local function setAnswerFlow(value) --[[ line: 191 ]]
+	local function setAnswerFlow(value)
 		-- upvalues: var21 (write)
 		var21 = value
 	end
 	
-	local function setCurrentAnswerStackPrompt(value) --[[ line: 195 ]]
+	local function setCurrentAnswerStackPrompt(value)
 		-- upvalues: var21 (write), p12 (ref), buildOptimisticAskUserTool (copy), onAnswerSelectedImpl (write), onAnswerConfirmedImpl (write)
 		if value == nil then
 			if var21 ~= nil then
@@ -156,12 +156,12 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		end
 	end
 	
-	local function getSubmittedToolCallIds() --[[ line: 210 ]]
+	local function getSubmittedToolCallIds()
 		-- upvalues: p11 (ref)
 		return p11
 	end
 	
-	local function _(p14, p15) --[[ line: 214 | named "recoverFailedSubmission" ]]
+	local function _(p14, p15)
 		-- upvalues: p13 (ref), p12 (ref), buildOptimisticAskUserTool (copy)
 		p14.submitted = false
 		
@@ -179,7 +179,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 	local submitAskUserResponses = nil
 	local submitAskUserCancellation = false
 	
-	local var30 = function(p16) --[[ line: 135 ]]
+	local var30 = function(p16)
 		-- upvalues: studioAskUserTool (copy), getSubmittedToolCallIds (ref), submitAskUserCancellation (write), debug (copy), var27 (write), submitAskUserResponses (write), setCurrentAnswerStackPrompt (ref), setAnswerFlow (ref), getToolCallOrder (copy)
 		local var16, var17, _, var18, var19 = studioAskUserTool.findQuestionsInTurnState(p16, getSubmittedToolCallIds())
 		
@@ -233,7 +233,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 	
 	var27 = false
 	
-	submitAskUserResponses = function(p17) --[[ line: 231 | named "submitAskUserResponses" ]]
+	submitAskUserResponses = function(p17)
 		-- upvalues: studioAskUserTool (copy), debug (copy), p10 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), p13 (ref), p12 (ref), buildOptimisticAskUserTool (copy), awaitRequestState (copy), chatConstantsModule (copy), p11 (ref), var21 (write)
 		local t = {}
 		
@@ -328,7 +328,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		local errorCode
 	end
 	
-	submitAskUserCancellation = function(p18) --[[ line: 302 | named "submitAskUserCancellation" ]]
+	submitAskUserCancellation = function(p18)
 		-- upvalues: studioAskUserTool (copy), p11 (ref), p12 (ref), var21 (write), p10 (ref), debug (copy), awaitRequestState (copy), chatConstantsModule (copy)
 		local var40 = studioAskUserTool.formatCancellationContent()
 		p11[p18.toolCallId] = true
@@ -350,7 +350,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		awaitRequestState(var41.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 	end
 	
-	local _ = function(p19) --[[ line: 321 | named "advanceToNextQuestion" ]]
+	local _ = function(p19)
 		-- upvalues: p12 (ref), buildOptimisticAskUserTool (copy)
 		if #p19.questions <= p19.currentIndex then
 			return false
@@ -361,7 +361,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		return true
 	end
 	
-	local _ = function(p20) --[[ line: 331 | named "commitCurrentSelectionAndAdvance" ]]
+	local _ = function(p20)
 		-- upvalues: p12 (ref), buildOptimisticAskUserTool (copy), submitAskUserResponses (ref)
 		local var42
 		if #p20.questions <= p20.currentIndex then
@@ -375,13 +375,13 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			return
 		end
 		p20.submitted = true
-		task.spawn(function() --[[ line: 337 ]]
+		task.spawn(function()
 			-- upvalues: submitAskUserResponses (copy), p20 (ref)
 			submitAskUserResponses(p20)
 		end)
 	end
 	
-	onAnswerSelectedImpl = function(p21, p22) --[[ line: 342 | named "onAnswerSelectedImpl" ]]
+	onAnswerSelectedImpl = function(p21, p22)
 		-- upvalues: var21 (write), toggleOptionInSelection (copy), p12 (ref), buildOptimisticAskUserTool (copy), debug (copy), submitAskUserResponses (ref)
 		if var21 == nil or var21.submitted then return end
 		local currentIndex = var21.questions[var21.currentIndex]
@@ -422,13 +422,13 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			return
 		end
 		var21.submitted = true
-		task.spawn(function() --[[ line: 337 ]]
+		task.spawn(function()
 			-- upvalues: submitAskUserResponses (copy), var21 (ref)
 			submitAskUserResponses(var21)
 		end)
 	end
 	
-	onAnswerConfirmedImpl = function() --[[ line: 385 | named "onAnswerConfirmedImpl" ]]
+	onAnswerConfirmedImpl = function()
 		-- upvalues: var21 (write), debug (copy), p12 (ref), buildOptimisticAskUserTool (copy), submitAskUserResponses (ref)
 		if var21 == nil or var21.submitted then return end
 		local currentIndex = var21.questions[var21.currentIndex]
@@ -457,14 +457,14 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			return
 		end
 		var21.submitted = true
-		task.spawn(function() --[[ line: 337 ]]
+		task.spawn(function()
 			-- upvalues: submitAskUserResponses (copy), var21 (ref)
 			submitAskUserResponses(var21)
 		end)
 	end
 	
 	return {
-		syncAnswerStack = function(p23) --[[ line: 448 ]]
+		syncAnswerStack = function(p23)
 			-- upvalues: var30 (ref), var27 (write)
 			if var30(p23) then
 				var27 = true
@@ -474,24 +474,24 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			return false
 		end,
 		getSubmittedToolCallIds = getSubmittedToolCallIds,
-		hasDisplayedAnswerStack = function() --[[ line: 471 ]]
+		hasDisplayedAnswerStack = function()
 			-- upvalues: var27 (write)
 			return var27
 		end,
-		stopPendingAnswer = function() --[[ line: 456 ]]
+		stopPendingAnswer = function()
 			-- upvalues: var21 (write), submitAskUserCancellation (ref)
 			if var21 == nil or var21.submitted then
 				return false
 			end
 			var21.submitted = true
-			task.spawn(function() --[[ line: 462 ]]
+			task.spawn(function()
 				-- upvalues: submitAskUserCancellation (copy), var21 (ref)
 				submitAskUserCancellation(var21)
 			end)
 			
 			return true
 		end,
-		trySubmitComposerText = function(p24) --[[ line: 412 ]]
+		trySubmitComposerText = function(p24)
 			-- upvalues: var21 (write), debug (copy), p12 (ref), buildOptimisticAskUserTool (copy), submitAskUserResponses (ref)
 			if var21 == nil or var21.submitted then
 				return false
@@ -523,7 +523,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 				return true
 			end
 			var21.submitted = true
-			task.spawn(function() --[[ line: 442 ]]
+			task.spawn(function()
 				-- upvalues: submitAskUserResponses (copy), var21 (ref)
 				submitAskUserResponses(var21)
 			end)

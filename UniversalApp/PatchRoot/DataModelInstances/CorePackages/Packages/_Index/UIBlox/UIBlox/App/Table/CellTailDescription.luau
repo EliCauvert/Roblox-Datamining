@@ -31,9 +31,9 @@ cellTailDescription.defaultProps = {
 	testId = "--uiblox-cell-tail-description"
 }
 
-function cellTailDescription.init(p0) --[[ line: 44 ]]
+function cellTailDescription.init(p0)
 	-- upvalues: roactModule (ref), genericTextLabelModule (ref)
-	function p0.getDescription(p1, p2, p3, p4, p5) --[[ line: 45 ]]
+	function p0.getDescription(p1, p2, p3, p4, p5)
 		-- upvalues: roactModule (copy), genericTextLabelModule (copy)
 		local var14 = nil
 		
@@ -54,14 +54,14 @@ function cellTailDescription.init(p0) --[[ line: 44 ]]
 	end
 end
 
-function cellTailDescription.render(p6) --[[ line: 69 ]]
+function cellTailDescription.render(p6)
 	-- upvalues: withStyleModule (ref), roactModule (ref), reactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imagesModule (ref)
 	local text = p6.props.text
 	local renderTextOverride = p6.props.renderTextOverride
 	local showArrow = p6.props.showArrow
 	local var15 = p6.props.infoIcon ~= nil
 	
-	return if text or showArrow or var15 then withStyleModule(function(p7) --[[ line: 79 ]]
+	return if text or showArrow or var15 then withStyleModule(function(p7)
 		-- upvalues: p6 (ref), roactModule (copy), reactModule (copy), text (ref), renderTextOverride (ref), showArrow (ref), imageSetComponentModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imagesModule (copy), var15 (ref)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

@@ -9,11 +9,11 @@ local validateRefsModule = require(momentsCreation.Utils.validateRefs)
 local dragHandleModule = require(momentsCreation.Enums.DragHandle)
 local _ = require(parent.MomentsTypes)
 
-local function _(p0, p1, p2) --[[ line: 38 | named "initialFraction" ]]
+local function _(p0, p1, p2)
 	return if p0 == nil or p1 <= 0 then p2 else p0 / p1
 end
 
-return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTrimDragController" ]]
+return function(value, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: useRef (ref), useBinding (ref), useCallback (ref), validateRefsModule (ref), dragHandleModule (ref), useEffect (ref)
 	local var4 = useRef(nil)
 	local var5 = useRef(nil)
@@ -32,7 +32,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 	local var16 = useRef(nil)
 	local var17 = useRef(nil)
 	local var18 = if p8 > 0 then 1 / p8 else 0
-	local var19 = useCallback(function() --[[ line: 78 ]]
+	local var19 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var5 (ref), var17 (ref), dragHandleModule (copy), var13 (ref), var12 (ref), p4 (ref)
 		if validateRefsModule({ var5 }) and not var17.current then
 			var17.current = dragHandleModule.LeftHandle
@@ -42,7 +42,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p4 })
-	local var20 = useCallback(function() --[[ line: 87 ]]
+	local var20 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var13 (ref), var5 (ref), var10 (ref), var18 (ref), var11 (ref), p9 (ref), dragHandleModule (copy)
 		if not validateRefsModule({ var13, var5 }) then return end
 		local clampedValue = math.clamp(var13.current + var5.current.DragUDim2.X.Scale, 0, var10:getValue() - var18)
@@ -52,7 +52,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			p9(dragHandleModule.LeftHandle, clampedValue, var10:getValue())
 		end
 	end, { var18, p9 })
-	local var21 = useCallback(function() --[[ line: 102 ]]
+	local var21 = useCallback(function()
 		-- upvalues: var17 (ref), dragHandleModule (copy), p5 (ref), var12 (ref), p8 (ref), var13 (ref), p3 (ref)
 		if var17.current == dragHandleModule.LeftHandle then
 			p5(var12:getValue() * p8, nil)
@@ -63,7 +63,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p3, p5, p8 })
-	local var22 = useCallback(function() --[[ line: 112 ]]
+	local var22 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var6 (ref), var17 (ref), dragHandleModule (copy), var15 (ref), var10 (ref), p4 (ref)
 		if validateRefsModule({ var6 }) and not var17.current then
 			var17.current = dragHandleModule.RightHandle
@@ -73,7 +73,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p4 })
-	local var23 = useCallback(function() --[[ line: 121 ]]
+	local var23 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var15 (ref), var6 (ref), var12 (ref), var18 (ref), var14 (ref), p9 (ref), dragHandleModule (copy)
 		if not validateRefsModule({ var15, var6 }) then return end
 		local clampedValue = math.clamp(var15.current + var6.current.DragUDim2.X.Scale, var12:getValue() + var18, 1)
@@ -83,7 +83,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			p9(dragHandleModule.RightHandle, var12:getValue(), clampedValue)
 		end
 	end, { var18, p9 })
-	local var24 = useCallback(function() --[[ line: 135 ]]
+	local var24 = useCallback(function()
 		-- upvalues: var17 (ref), dragHandleModule (copy), p5 (ref), var10 (ref), p8 (ref), var15 (ref), p3 (ref)
 		if var17.current == dragHandleModule.RightHandle then
 			p5(nil, var10:getValue() * p8)
@@ -94,7 +94,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p3, p5, p8 })
-	local var25 = useCallback(function() --[[ line: 145 ]]
+	local var25 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var9 (ref), var8 (ref), var17 (ref), dragHandleModule (copy), var16 (ref), p4 (ref)
 		if validateRefsModule({ var9, var8 }) and not var17.current then
 			var17.current = dragHandleModule.Scrubber
@@ -104,7 +104,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p4 })
-	local var26 = useCallback(function() --[[ line: 154 ]]
+	local var26 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var16 (ref), var9 (ref), p6 (ref)
 		if validateRefsModule({ var16, var9 }) then
 			p6(math.clamp(var16.current + var9.current.DragUDim2.X.Scale, 0, 1))
@@ -112,7 +112,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p6 })
-	local var27 = useCallback(function() --[[ line: 164 ]]
+	local var27 = useCallback(function()
 		-- upvalues: var17 (ref), dragHandleModule (copy), var16 (ref), p3 (ref)
 		if var17.current == dragHandleModule.Scrubber then
 			var17.current = nil
@@ -122,7 +122,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p3 })
-	local var28 = useCallback(function() --[[ line: 173 ]]
+	local var28 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var7 (ref), var17 (ref), dragHandleModule (copy), var13 (ref), var12 (ref), var15 (ref), var10 (ref), p4 (ref)
 		if validateRefsModule({ var7 }) and not var17.current then
 			var17.current = dragHandleModule.Segment
@@ -133,7 +133,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p4 })
-	local var29 = useCallback(function() --[[ line: 183 ]]
+	local var29 = useCallback(function()
 		-- upvalues: validateRefsModule (copy), var7 (ref), var13 (ref), var5 (ref), var15 (ref), var6 (ref), var11 (ref), var14 (ref), p5 (ref), p8 (ref)
 		if not validateRefsModule({
 			var7,
@@ -156,7 +156,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 		var14(var35)
 		p5(var34 * p8, var35 * p8)
 	end, { p5, p8 })
-	local var30 = useCallback(function() --[[ line: 214 ]]
+	local var30 = useCallback(function()
 		-- upvalues: var17 (ref), dragHandleModule (copy), var13 (ref), var15 (ref), p3 (ref)
 		if var17.current == dragHandleModule.Segment then
 			var17.current = nil
@@ -167,7 +167,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			return
 		end
 	end, { p3 })
-	useEffect(function() --[[ line: 225 ]]
+	useEffect(function()
 		-- upvalues: value (ref), var5 (ref), var19 (ref), var20 (ref), var21 (ref), var6 (ref), var22 (ref), var23 (ref), var24 (ref), var9 (ref), var25 (ref), var26 (ref), var27 (ref), var7 (ref), var28 (ref), var29 (ref), var30 (ref)
 		if not value then return end
 		local t = {}
@@ -192,7 +192,7 @@ return function(value, p3, p4, p5, p6, p7, p8, p9) --[[ line: 45 | named "useTri
 			table.insert(t, var7.current.DragContinue:Connect(var29))
 			table.insert(t, var7.current.DragEnd:Connect(var30))
 		end
-		return function() --[[ line: 256 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

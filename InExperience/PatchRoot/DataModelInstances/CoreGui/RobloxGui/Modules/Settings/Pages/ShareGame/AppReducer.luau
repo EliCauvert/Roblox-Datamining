@@ -14,7 +14,7 @@ local toastsModule = require(shareGame.Reducers.Toasts)
 local var7 = reducerDependencies.RoduxNetworking.installReducer()
 local var8 = reducerDependencies.ShareLinksRodux.installReducer()
 
-return function(p0, p1) --[[ line: 25 ]]
+return function(p0, p1)
 	-- upvalues: conversationsSearchModule (ref), deviceInfoModule (ref), invitesModule (ref), pageModule (ref), placeInfosReducer (ref), toastsModule (ref), userReducer (ref), friends (ref), friendCount (ref), var8 (ref), gameInfoModule (ref), var7 (ref)
 	p0 = p0 or {}
 	

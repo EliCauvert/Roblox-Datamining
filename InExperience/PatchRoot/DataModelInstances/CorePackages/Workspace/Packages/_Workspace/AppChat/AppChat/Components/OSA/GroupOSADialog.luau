@@ -54,17 +54,17 @@ local t_1 = {
 	disablePortal = false,
 	hasBackdrop = true,
 	dialogSize = dialogSize.Medium,
-	onClose = function() --[[ line: 99 ]] end,
-	onJoin = function() --[[ line: 100 ]] end,
-	onDecline = function() --[[ line: 101 ]] end
+	onClose = function() end,
+	onJoin = function() end,
+	onDecline = function() end
 }
 
-local function _(p0, p1) --[[ line: 104 | named "resolveModalVariant" ]]
+local function _(p0, p1)
 	-- upvalues: shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), osaContextCard (ref)
 	return p0 or (if shouldShowU13ChatOptInForConversationModule(p1) then constantsModule.OptInVariant.ChatOptInInfoCard else osaContextCard)
 end
 
-return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
+return function(p2)
 	-- upvalues: cryoModule (ref), t_1 (ref), fFlagAppChatEnableU13ChatOptIn (ref), osaContextCard (ref), useDispatch (ref), useStore (ref), useLocalUserId (ref), useTokens (ref), useAppPolicyModule (ref), reactModule (ref), var21 (ref), linkBehavior (ref), useEffect (ref), useTelemetryModule (ref), appTelemetryLayerModule (ref), conversationListOverlayTelemetryModule (ref), squadExternalContractContext (ref), useGetConversationFromIdModule (ref), t (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), API (ref), name (ref), useSelector (ref), getDeepValue2Module (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), dateTime (ref), getCombinedNameFromId (ref), conversationModule (ref), useLocalization (ref), appChatGroupOsaViewDetailsUrl (ref), userRow (ref), foundationModule (ref), badgeVariant (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), modalTelemetryModule (ref), squadPromptType (ref), useRecordModalSequenceResponseForConversationModule (ref), accept (ref), conversationListOverlay (ref), API_1 (ref), skeleton (ref), radius (ref), dialog (ref), renderer (ref), orientation (ref), buttonVariant (ref)
 	local var24 = cryoModule.Dictionary.union(t_1, p2)
 	local var25 = if fFlagAppChatEnableU13ChatOptIn then var24.modalVariant else osaContextCard
@@ -72,28 +72,28 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 	local var27 = useStore()
 	local var28 = useLocalUserId()
 	local var29 = useTokens()
-	local var30 = useAppPolicyModule(function(p3) --[[ line: 129 ]]
+	local var30 = useAppPolicyModule(function(p3)
 		return p3.getWebViewSupport()
 	end)
-	local var31 = reactModule.useMemo(function() --[[ line: 132 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: var30 (ref), var21 (copy), linkBehavior (copy)
 		return {
-			evaluateLinkBehavior = function(_, _) --[[ line: 134 ]]
+			evaluateLinkBehavior = function(_, _)
 				-- upvalues: var30 (copy), var21 (copy), linkBehavior (copy)
 				return if var30 and not var21 then linkBehavior.Webview else linkBehavior.Hide
 			end
 		}
 	end, { var30 })
 	local var32, var33 = reactModule.useState(false)
-	useEffect(function() --[[ line: 145 ]]
+	useEffect(function()
 		-- upvalues: var33 (ref)
-		return function() --[[ line: 146 ]]
+		return function()
 			-- upvalues: var33 (copy)
 			var33(false)
 		end
 	end, {})
 	local var34 = useTelemetryModule(appTelemetryLayerModule.Context)
-	useEffect(function() --[[ line: 152 ]]
+	useEffect(function()
 		-- upvalues: var34 (ref), conversationListOverlayTelemetryModule (copy), var25 (write), var24 (ref)
 		var34.emit(conversationListOverlayTelemetryModule.Events.ModalRendered, {
 			modalVariant = var25,
@@ -109,10 +109,10 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 		local var38 = var25
 		var25 = var38 or (if shouldShowU13ChatOptInForConversationModule(var36_1) then constantsModule.OptInVariant.ChatOptInInfoCard else osaContextCard)
 	end
-	useEffect(function() --[[ line: 167 ]]
+	useEffect(function()
 		-- upvalues: var24 (ref), var36 (ref), var26 (ref), API (copy), name (copy)
 		if var24.conversationId and not var36 then
-			var26(API(var24.conversationId)):catch(function(p4) --[[ line: 169 ]]
+			var26(API(var24.conversationId)):catch(function(p4)
 				-- upvalues: name (copy), var24 (copy)
 				name:warning("Error fetching conversation in GroupOSADialog: " .. tostring(p4))
 				var24.onClose()
@@ -121,14 +121,14 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 	end, { var26, var24.conversationId, var36, var24.onClose })
 	local _ = nil
 	local source = var36_1.source
-	local var39 = useSelector(function(p5) --[[ line: 179 ]]
+	local var39 = useSelector(function(p5)
 		-- upvalues: getDeepValue2Module (copy), var24 (ref)
 		return getDeepValue2Module(p5, `ChatAppReducer.ParticipantMetadata.{var24.conversationId or ""}`)
 	end)
-	useEffect(function() --[[ line: 183 ]]
+	useEffect(function()
 		-- upvalues: source (ref), var24 (ref), var26 (ref), appChatNetworkingModule (copy), name (copy)
 		if source == "channels" and var24.conversationId ~= nil then
-			var26(appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ var24.conversationId })):catch(function() --[[ line: 189 ]]
+			var26(appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ var24.conversationId })):catch(function()
 				-- upvalues: name (copy)
 				name:warning("Error in GroupOSADialog -> GetConversationsParticipantsMetadata")
 			end)
@@ -136,7 +136,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 			return
 		end
 	end, { var26, var24.conversationId, source })
-	local var40 = reactModule.useMemo(function() --[[ line: 194 ]]
+	local var40 = reactModule.useMemo(function()
 		-- upvalues: var39 (write)
 		if not var39 then
 			return nil
@@ -152,14 +152,14 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 		userIds = if var40 then { var40 } else {},
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
-	local var42 = reactModule.useMemo(function() --[[ line: 213 ]]
+	local var42 = reactModule.useMemo(function()
 		-- upvalues: var36_1 (ref), cryoModule (copy), var28 (ref)
-		return if var36_1 and var36_1.participants then cryoModule.List.filter(var36_1.participants, function(p6) --[[ line: 217 ]]
+		return if var36_1 and var36_1.participants then cryoModule.List.filter(var36_1.participants, function(p6)
 			-- upvalues: var28 (copy)
 			return tostring(p6) ~= var28
 		end) else {}
 	end, { var36_1, var28 })
-	local var43 = reactModule.useMemo(function() --[[ line: 223 ]]
+	local var43 = reactModule.useMemo(function()
 		-- upvalues: var36_1 (ref), dateTime (copy), name (copy), var24 (ref)
 		if var36_1.createdAt then
 			return dateTime.fromIsoDate(var36_1.createdAt):Format("MMM DD, YYYY")
@@ -170,7 +170,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 	end, { var36_1, var24.conversationId })
 	local var44 = if var41 then var41.data else nil
 	local var45 = if var41 then var41.loading else false
-	local var46 = reactModule.useMemo(function() --[[ line: 233 ]]
+	local var46 = reactModule.useMemo(function()
 		-- upvalues: var40 (ref), var44 (ref), getCombinedNameFromId (copy)
 		return if var40 and var44 then getCombinedNameFromId(var44, var40) else nil
 	end, { var40, var44 })
@@ -197,7 +197,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 			osaViewDetailsUrl = appChatGroupOsaViewDetailsUrl
 		}
 	})
-	local var49 = reactModule.useMemo(function() --[[ line: 266 ]]
+	local var49 = reactModule.useMemo(function()
 		-- upvalues: var42 (ref), var39 (write), name (copy), reactModule (copy), userRow (copy), var24 (ref), foundationModule (copy), var48 (ref), badgeVariant (copy)
 		local t = {}
 		
@@ -212,7 +212,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 				Row = reactModule.createElement(userRow, {
 					layoutMode = "wide",
 					entityId = var55,
-					onActivated = if var24.onViewUserProfile ~= nil then nil else function() --[[ line: 284 ]]
+					onActivated = if var24.onViewUserProfile ~= nil then nil else function()
 						-- upvalues: var24 (copy), var55 (ref)
 						var24.onClose()
 						var24.onViewUserProfile(var55, {})
@@ -234,7 +234,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 		if fFlagSupportViewingUserProfileOnOSAModule then var24.onViewUserProfile else nil,
 		if fFlagSupportViewingUserProfileOnOSAModule then var24.onClose else nil
 	})
-	local var50 = reactModule.useCallback(function() --[[ line: 318 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: var34 (ref), conversationListOverlayTelemetryModule (copy), var25 (write), modalTelemetryModule (copy), var24 (ref)
 		var34.emit(conversationListOverlayTelemetryModule.Events.ModalAction, {
 			modalVariant = var25,
@@ -250,7 +250,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 		var24.conversationId,
 		var25
 	})
-	local var51 = reactModule.useCallback(function() --[[ line: 327 ]]
+	local var51 = reactModule.useCallback(function()
 		-- upvalues: var35 (ref), var27 (ref), squadPromptType (copy)
 		var35.setSquadPrompt(var27, {
 			hideCancelButton = true,
@@ -270,7 +270,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 			LayoutOrder = 1,
 			text = if var46 then if var47 then var48.inviterTitleText else var48.inviterTitleTextOneToOne else var48.titleText
 		}),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, if var53 then reactModule.useMemo(function() --[[ line: 465 ]]
+		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, if var53 then reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), foundationModule (copy), skeleton (copy), var29 (ref), radius (copy)
 			return reactModule.createElement(foundationModule.View, {
 				tag = "col gap-medium size-full-0 auto-y margin-top-small"
@@ -301,7 +301,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 					radius = radius.Medium
 				})
 			})
-		end, { var29 }) else reactModule.useMemo(function() --[[ line: 498 ]]
+		end, { var29 }) else reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), foundationModule (copy), dialog (copy), var48 (ref), var49 (ref), renderer (copy), var29 (ref), var31 (ref)
 			return reactModule.createElement(foundationModule.View, { tag = "col gap-medium size-full-0 auto-y" }, {
 				DialogContentHeader = reactModule.createElement(dialog.Text, { LayoutOrder = 1, Text = var48.subtitleText }),
@@ -325,7 +325,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 				{
 					text = var48.joinButtonText,
 					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function() --[[ line: 336 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var32 (ref), var33 (ref), var25 (write), modalTelemetryModule (copy), var24 (ref), var34 (ref), conversationListOverlayTelemetryModule (copy), var52 (ref), accept (copy), conversationListOverlay (copy), cryoModule (copy), name (copy), var51 (ref)
 						if var32 then
 							return
@@ -338,13 +338,13 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 							impressionId = var24.impressionId
 						}
 						var34.emit(conversationListOverlayTelemetryModule.Events.ModalAction, t)
-						var52(accept, conversationListOverlay, nil, var25):andThen(function() --[[ line: 350 ]]
+						var52(accept, conversationListOverlay, nil, var25):andThen(function()
 							-- upvalues: var34 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), var24 (copy)
 							var34.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 								actionResult = modalTelemetryModule.Enums.ModalActionResults.Success
 							}))
 							var24.onJoin()
-						end):catch(function(p7) --[[ line: 359 ]]
+						end):catch(function(p7)
 							-- upvalues: var34 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), name (copy), var51 (copy), var24 (copy)
 							var34.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 								actionResult = modalTelemetryModule.Enums.ModalActionResults.Failure
@@ -362,7 +362,7 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 				{
 					text = var48.declineButtonText,
 					variant = buttonVariant.Standard,
-					onActivated = reactModule.useCallback(function() --[[ line: 385 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var32 (ref), var33 (ref), var25 (write), modalTelemetryModule (copy), var24 (ref), var34 (ref), conversationListOverlayTelemetryModule (copy), var36_1 (ref), conversationModule (copy), var26 (ref), API_1 (copy), var28 (ref), cryoModule (copy), name (copy), var51 (ref)
 						if var32 then return end
 						var33(true)
@@ -376,13 +376,13 @@ return function(p2) --[[ line: 118 | named "GroupOSADialog" ]]
 						
 						if var24.conversationId then
 							if var36_1.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then
-								var26(API_1(var24.conversationId, var28)):andThen(function() --[[ line: 402 ]]
+								var26(API_1(var24.conversationId, var28)):andThen(function()
 									-- upvalues: var34 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), var24 (copy)
 									var34.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 										actionResult = modalTelemetryModule.Enums.ModalActionResults.Success
 									}))
 									var24.onDecline()
-								end):catch(function(p8) --[[ line: 411 ]]
+								end):catch(function(p8)
 									-- upvalues: var34 (copy), conversationListOverlayTelemetryModule (copy), cryoModule (copy), t (ref), modalTelemetryModule (copy), name (copy), var51 (copy), var24 (copy)
 									var34.emit(conversationListOverlayTelemetryModule.Events.ModalActionResult, cryoModule.Dictionary.union(t, {
 										actionResult = modalTelemetryModule.Enums.ModalActionResults.Failure

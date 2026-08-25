@@ -17,44 +17,44 @@ local loadingScreenView = progressLoadingModule.LoadingScreenView
 local placeLauncherState = progressLoadingModule.PlaceLauncherState
 local createNetworking = progressLoadingModule.createNetworking
 
-return function(p0) --[[ line: 33 | named "LoadingScreenWrapper" ]]
+return function(p0)
 	-- upvalues: useSelector (ref), useDispatch (ref), reactModule (ref), responsiveModule (ref), getUniverseIdModule (ref), createNetworking (ref), getGameProductInfoModule (ref), getIsSubjectToChinaPoliciesModule (ref), queueExperimentation (ref), experienceService (ref), placeLauncherState (ref), loadingScreenView (ref), getFFlagReportFirstExperienceCancelledModule (ref), loggingProtocolModule (ref)
-	local var11 = useSelector(function(p1) --[[ line: 34 ]]
+	local var11 = useSelector(function(p1)
 		-- upvalues: p0 (ref)
 		return if p1.gameIds then p1.gameIds.placeId else p0.placeId
 	end)
-	local var12 = useSelector(function(p2) --[[ line: 37 ]]
+	local var12 = useSelector(function(p2)
 		return if p2.gameIds then p2.gameIds.universeId else 0
 	end)
-	local var13 = useSelector(function(p3) --[[ line: 40 ]]
+	local var13 = useSelector(function(p3)
 		return p3.productInfo
 	end)
-	local var14 = useSelector(function(p4) --[[ line: 43 ]]
+	local var14 = useSelector(function(p4)
 		return p4.isSubjectToChinaPolicies
 	end)
 	local var15 = useDispatch()
 	local var16, var17 = reactModule.useState(false)
 	local var18 = reactModule.useRef(nil)
 	var18.current = responsiveModule.usePreferredInput()
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), getUniverseIdModule (copy), createNetworking (copy), var11 (ref), getGameProductInfoModule (copy), getIsSubjectToChinaPoliciesModule (copy)
 		var15(getUniverseIdModule(createNetworking, var11))
 		var15(getGameProductInfoModule(var11))
 		var15(getIsSubjectToChinaPoliciesModule())
 	end, { var11, var15 })
-	reactModule.useEffect(function() --[[ line: 60 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref)
-		local loadedConnection = game.Loaded:Connect(function() --[[ line: 61 ]]
+		local loadedConnection = game.Loaded:Connect(function()
 			-- upvalues: var17 (copy)
 			var17(true)
 		end)
 		
-		return function() --[[ line: 64 ]]
+		return function()
 			-- upvalues: loadedConnection (ref)
 			loadedConnection:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function()
 		-- upvalues: queueExperimentation (copy), experienceService (copy), var11 (ref), placeLauncherState (copy)
 		if not queueExperimentation.isInExperiment() or experienceService:GetFollowUserId() <= 0 or var11 <= 0 then return end
 		if experienceService:GetPlaceJoinState() == placeLauncherState.Queued then
@@ -62,14 +62,14 @@ return function(p0) --[[ line: 33 | named "LoadingScreenWrapper" ]]
 			
 			return
 		end
-		local placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p5) --[[ line: 78 ]]
+		local placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p5)
 			-- upvalues: placeLauncherState (copy), queueExperimentation (copy)
 			if p5 == placeLauncherState.Queued then
 				queueExperimentation.logExposure()
 			end
 		end)
 		
-		return function() --[[ line: 83 ]]
+		return function()
 			-- upvalues: placeJoinStateChangedConnection (ref)
 			placeJoinStateChangedConnection:Disconnect()
 		end
@@ -83,14 +83,14 @@ return function(p0) --[[ line: 33 | named "LoadingScreenWrapper" ]]
 		isSubjectToChinaPolicies = var14,
 		preferredInputRef = var18,
 		shouldStartFadeOut = var16,
-		onCloseButtonActivated = function() --[[ line: 96 ]]
+		onCloseButtonActivated = function()
 			-- upvalues: getFFlagReportFirstExperienceCancelledModule (copy), loggingProtocolModule (copy)
 			if getFFlagReportFirstExperienceCancelledModule then
 				loggingProtocolModule.default:logEventOnce("first_experience_cancelled")
 			end
 			game:Shutdown()
 		end,
-		onGamepadCancel = function() --[[ line: 102 ]]
+		onGamepadCancel = function()
 			if not game:IsLoaded() then
 				game:Shutdown()
 			end

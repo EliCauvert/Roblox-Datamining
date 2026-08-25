@@ -8,7 +8,7 @@ local pageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 370 ]]
+function t_1.new(p0)
 	-- upvalues: pageEntryContentModule (ref), t_1 (ref)
 	return setmetatable({
 		badge_id = if p0 == nil or p0.badge_id == nil then 0 else p0.badge_id,
@@ -17,7 +17,7 @@ function t_1.new(p0) --[[ line: 370 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 383 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref), pageEntryContentModule (ref)
 	local buff = buffer.create(0)
 	local var19 = 0
@@ -46,7 +46,7 @@ function t_1:encode() --[[ line: 383 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 420 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), pageEntryContentModule (ref)
 	local var27 = t_1.new()
 	local var28 = 0
@@ -102,7 +102,7 @@ function t_1.decode(p1) --[[ line: 420 ]]
 	return var27
 end
 
-function t_1:jsonEncode() --[[ line: 476 ]]
+function t_1:jsonEncode()
 	-- upvalues: pageEntryContentModule (ref)
 	local t = {}
 	
@@ -118,7 +118,7 @@ function t_1:jsonEncode() --[[ line: 476 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 505 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), pageEntryContentModule (ref)
 	local var50 = t_1.new()
 	
@@ -152,7 +152,7 @@ typeRegistryModule.default:register(t.BadgeDetailsPageRequest)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 561 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		page_entries = if p2 == nil or p2.page_entries == nil then {} else p2.page_entries,
@@ -161,7 +161,7 @@ function t_2.new(p2) --[[ line: 561 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 569 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var52 = 0
@@ -203,7 +203,7 @@ function t_2:encode() --[[ line: 569 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 606 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var68 = t_2.new()
 	local var69 = 0
@@ -261,7 +261,7 @@ function t_2.decode(p3) --[[ line: 606 ]]
 	return var68
 end
 
-function t_2:jsonEncode() --[[ line: 667 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -286,7 +286,7 @@ function t_2:jsonEncode() --[[ line: 667 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 693 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var92 = t_2.new()
 	
@@ -332,7 +332,7 @@ typeRegistryModule.default:register(t.BadgeDetailsPageResponse)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 752 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		key = if p4 == nil or p4.key == nil then "" else p4.key,
@@ -340,7 +340,7 @@ function t_3.new(p4) --[[ line: 752 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 761 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var97 = 0
@@ -364,7 +364,7 @@ function t_3:encode() --[[ line: 761 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 781 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), templateEntryModule (ref)
 	local var104 = t_3.new()
 	local var105 = 0
@@ -416,7 +416,7 @@ function t_3.decode(p5) --[[ line: 781 ]]
 	return var104
 end
 
-function t_3:jsonEncode() --[[ line: 829 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -428,7 +428,7 @@ function t_3:jsonEncode() --[[ line: 829 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 843 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), templateEntryModule (ref)
 	local var124 = t_3.new()
 	
@@ -450,7 +450,7 @@ typeRegistryModule.default:register(t.BadgeDetailsPageResponse_TemplatesEntry)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 873 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		page_entries = if p6 == nil or p6.page_entries == nil then {} else p6.page_entries,
@@ -459,7 +459,7 @@ function t_4.new(p6) --[[ line: 873 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 883 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var126 = 0
@@ -501,7 +501,7 @@ function t_4:encode() --[[ line: 883 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 920 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var142 = t_4.new()
 	local var143 = 0
@@ -559,7 +559,7 @@ function t_4.decode(p7) --[[ line: 920 ]]
 	return var142
 end
 
-function t_4:jsonEncode() --[[ line: 984 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -584,7 +584,7 @@ function t_4:jsonEncode() --[[ line: 984 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 1010 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var166 = t_4.new()
 	
@@ -630,7 +630,7 @@ typeRegistryModule.default:register(t.BadgeDetailsPageV2Response)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 1075 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		key = if p8 == nil or p8.key == nil then "" else p8.key,
@@ -638,7 +638,7 @@ function t_5.new(p8) --[[ line: 1075 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 1084 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var171 = 0
@@ -662,7 +662,7 @@ function t_5:encode() --[[ line: 1084 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 1106 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), templateEntryModule (ref)
 	local var178 = t_5.new()
 	local var179 = 0
@@ -714,7 +714,7 @@ function t_5.decode(p9) --[[ line: 1106 ]]
 	return var178
 end
 
-function t_5:jsonEncode() --[[ line: 1156 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -726,7 +726,7 @@ function t_5:jsonEncode() --[[ line: 1156 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 1172 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), templateEntryModule (ref)
 	local var198 = t_5.new()
 	
@@ -748,7 +748,7 @@ typeRegistryModule.default:register(t.BadgeDetailsPageV2Response_TemplatesEntry)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1202 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		page_entry = if p10 == nil or p10.page_entry == nil then nil else p10.page_entry,
@@ -756,7 +756,7 @@ function t_6.new(p10) --[[ line: 1202 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1209 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var200 = 0
@@ -781,7 +781,7 @@ function t_6:encode() --[[ line: 1209 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1232 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), pageEntryModule (ref), t (ref)
 	local var208 = t_6.new()
 	local var209 = 0
@@ -836,7 +836,7 @@ function t_6.decode(p11) --[[ line: 1232 ]]
 	return var208
 end
 
-function t_6:jsonEncode() --[[ line: 1280 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.page_entry ~= nil then
@@ -848,7 +848,7 @@ function t_6:jsonEncode() --[[ line: 1280 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1296 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), pageEntryModule (ref), t (ref)
 	local var228 = t_6.new()
 	
@@ -882,7 +882,7 @@ typeRegistryModule.default:register(t.BadgeDetailsPageEntry)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 1332 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		badge_id = if p12 == nil or p12.badge_id == nil then "" else p12.badge_id,
@@ -892,7 +892,7 @@ function t_7.new(p12) --[[ line: 1332 ]]
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 1341 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var230 = 0
@@ -928,7 +928,7 @@ function t_7:encode() --[[ line: 1341 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 1371 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref), t (ref)
 	local var241 = t_7.new()
 	local var242 = 0
@@ -990,7 +990,7 @@ function t_7.decode(p13) --[[ line: 1371 ]]
 	return var241
 end
 
-function t_7:jsonEncode() --[[ line: 1429 ]]
+function t_7:jsonEncode()
 	local t = {}
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
@@ -1008,7 +1008,7 @@ function t_7:jsonEncode() --[[ line: 1429 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 1451 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref), t (ref)
 	local var265 = t_7.new()
 	
@@ -1048,7 +1048,7 @@ typeRegistryModule.default:register(t.BadgeDetailsContent)
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 1504 ]]
+function t_8.new(p14)
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		info_table = if p14 == nil or p14.info_table == nil then nil else p14.info_table,
@@ -1057,7 +1057,7 @@ function t_8.new(p14) --[[ line: 1504 ]]
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 1514 ]]
+function t_8:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var267 = 0
@@ -1089,7 +1089,7 @@ function t_8:encode() --[[ line: 1514 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 1541 ]]
+function t_8.decode(p15)
 	-- upvalues: t_8 (ref), protoModule (ref), t (ref)
 	local var278 = t_8.new()
 	local var279 = 0
@@ -1146,7 +1146,7 @@ function t_8.decode(p15) --[[ line: 1541 ]]
 	return var278
 end
 
-function t_8:jsonEncode() --[[ line: 1594 ]]
+function t_8:jsonEncode()
 	local t = {}
 	
 	if self.info_table ~= nil then
@@ -1161,7 +1161,7 @@ function t_8:jsonEncode() --[[ line: 1594 ]]
 	return t
 end
 
-function t_8:jsonDecode() --[[ line: 1612 ]]
+function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), t (ref)
 	local var300 = t_8.new()
 	
@@ -1195,7 +1195,7 @@ typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 1662 ]]
+function t_9.new(p16)
 	-- upvalues: t_9 (ref)
 	return setmetatable({
 		type_label = if p16 == nil or p16.type_label == nil then "" else p16.type_label,
@@ -1208,7 +1208,7 @@ function t_9.new(p16) --[[ line: 1662 ]]
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 1678 ]]
+function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var302 = 0
@@ -1261,7 +1261,7 @@ function t_9:encode() --[[ line: 1678 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 1724 ]]
+function t_9.decode(p17)
 	-- upvalues: t_9 (ref), protoModule (ref)
 	local var318 = t_9.new()
 	local var319 = 0
@@ -1338,7 +1338,7 @@ function t_9.decode(p17) --[[ line: 1724 ]]
 	return var318
 end
 
-function t_9:jsonEncode() --[[ line: 1799 ]]
+function t_9:jsonEncode()
 	local t = {}
 	
 	if self.type_label ~= nil and self.type_label ~= "" then
@@ -1365,7 +1365,7 @@ function t_9:jsonEncode() --[[ line: 1799 ]]
 	return t
 end
 
-function t_9:jsonDecode() --[[ line: 1835 ]]
+function t_9:jsonDecode()
 	-- upvalues: t_9 (ref)
 	local var348 = t_9.new()
 	
@@ -1423,7 +1423,7 @@ typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals_Info
 local t_10 = {}
 t_10.__index = t_10
 
-function t_10.new(p18) --[[ line: 1915 ]]
+function t_10.new(p18)
 	-- upvalues: t_10 (ref)
 	return setmetatable({
 		share = if p18 == nil or p18.share == nil then "" else p18.share,
@@ -1431,7 +1431,7 @@ function t_10.new(p18) --[[ line: 1915 ]]
 	}, t_10)
 end
 
-function t_10:encode() --[[ line: 1927 ]]
+function t_10:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var350 = 0
@@ -1454,7 +1454,7 @@ function t_10:encode() --[[ line: 1927 ]]
 	return buff_1
 end
 
-function t_10.decode(p19) --[[ line: 1948 ]]
+function t_10.decode(p19)
 	-- upvalues: t_10 (ref), protoModule (ref)
 	local var356 = t_10.new()
 	local var357 = 0
@@ -1506,7 +1506,7 @@ function t_10.decode(p19) --[[ line: 1948 ]]
 	return var356
 end
 
-function t_10:jsonEncode() --[[ line: 1998 ]]
+function t_10:jsonEncode()
 	local t = {}
 	
 	if self.share ~= nil and self.share ~= "" then
@@ -1518,7 +1518,7 @@ function t_10:jsonEncode() --[[ line: 1998 ]]
 	return t
 end
 
-function t_10:jsonDecode() --[[ line: 2014 ]]
+function t_10:jsonDecode()
 	-- upvalues: t_10 (ref)
 	local var376 = t_10.new()
 	
@@ -1540,7 +1540,7 @@ typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals_Acti
 local t_11 = {}
 t_11.__index = t_11
 
-function t_11.new(p20) --[[ line: 2046 ]]
+function t_11.new(p20)
 	-- upvalues: t_11 (ref)
 	return setmetatable({
 		report = if p20 == nil or p20.report == nil then "" else p20.report,
@@ -1548,7 +1548,7 @@ function t_11.new(p20) --[[ line: 2046 ]]
 	}, t_11)
 end
 
-function t_11:encode() --[[ line: 2058 ]]
+function t_11:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var378 = 0
@@ -1571,7 +1571,7 @@ function t_11:encode() --[[ line: 2058 ]]
 	return buff_1
 end
 
-function t_11.decode(p21) --[[ line: 2079 ]]
+function t_11.decode(p21)
 	-- upvalues: t_11 (ref), protoModule (ref)
 	local var384 = t_11.new()
 	local var385 = 0
@@ -1623,7 +1623,7 @@ function t_11.decode(p21) --[[ line: 2079 ]]
 	return var384
 end
 
-function t_11:jsonEncode() --[[ line: 2129 ]]
+function t_11:jsonEncode()
 	local t = {}
 	
 	if self.report ~= nil and self.report ~= "" then
@@ -1635,7 +1635,7 @@ function t_11:jsonEncode() --[[ line: 2129 ]]
 	return t
 end
 
-function t_11:jsonDecode() --[[ line: 2145 ]]
+function t_11:jsonDecode()
 	-- upvalues: t_11 (ref)
 	local var404 = t_11.new()
 	

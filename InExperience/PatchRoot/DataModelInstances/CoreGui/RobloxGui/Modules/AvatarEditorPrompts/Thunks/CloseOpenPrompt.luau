@@ -3,7 +3,7 @@ local parent = script.Parent.Parent
 local closeOpenPromptModule = require(parent.Actions.CloseOpenPrompt)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: promptTypeModule (ref), avatarEditorService (ref), closeOpenPromptModule (ref)
 	local promptType = p0:getState().promptInfo.promptType
 	

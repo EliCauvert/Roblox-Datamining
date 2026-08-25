@@ -18,12 +18,12 @@
 local t_1 = {}
 t_1.__index = t_1
 
-local function createSignalTracker() --[[ line: 32 ]]
+local function createSignalTracker()
 	-- upvalues: t_1 (ref)
 	return setmetatable({ _totalCount = 0, _payload = {}, _counts = {} }, t_1)
 end
 
-function t_1.recordSignal(value, p0, p1, p2) --[[ line: 41 ]]
+function t_1.recordSignal(value, p0, p1, p2)
 	-- upvalues: t (ref)
 	local var3 = t[p1]
 	
@@ -63,11 +63,11 @@ function t_1.recordSignal(value, p0, p1, p2) --[[ line: 41 ]]
 	end
 end
 
-function t_1.getSignalsPayload(value) --[[ line: 82 ]]
+function t_1.getSignalsPayload(value)
 	return if value._totalCount == 0 then nil else value._payload
 end
 
-function t_1.getSignalCount(value) --[[ line: 90 ]]
+function t_1.getSignalCount(value)
 	return value._totalCount
 end
 

@@ -12,7 +12,7 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local handlePurchaseItemsSuccessModule = require(profilePlatform.Components.InspectAvatar.HandlePurchaseItemsSuccess)
 local useRecentActivityPurchaseSelectionModule = require(script.Parent.useRecentActivityPurchaseSelection)
 
-return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), robloxAppHooksModule (ref), useProfileWrapperContextModule (ref), useRecentActivityPurchaseSelectionModule (ref), reactModule (ref), useLocalization (ref), purchaseBulkItemsModule (ref), handlePurchaseItemsSuccessModule (ref), getIsInsufficientRobuxError (ref), setCurrentToastMessage (ref)
 	local var7 = useDispatch()
 	local var8 = robloxAppHooksModule.useLocalRobuxBalance()
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
 			numItems = purchaseData.count
 		}
 	})
-	local var18 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref)
 		return {
 			purchaseSuccessSingular = var17.purchaseSuccessSingular,
@@ -59,7 +59,7 @@ return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
 		isShowingInsufficientRobux = var15,
 		robuxBalance = if var8 ~= nil then 0 else var8,
 		onToggleItem = var10.onToggleItem,
-		onBuyAll = reactModule.useCallback(function() --[[ line: 88 ]]
+		onBuyAll = reactModule.useCallback(function()
 			-- upvalues: purchaseData (ref), localUserId (ref), var8 (ref), var16 (ref), var14 (ref)
 			if #purchaseData.lineItems == 0 or not localUserId then return end
 			if var8 == nil or var8 >= purchaseData.totalPrice then
@@ -69,13 +69,13 @@ return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
 			end
 			var16(true)
 		end, { purchaseData, localUserId, var8 }),
-		onConfirmPurchase = reactModule.useCallback(function() --[[ line: 108 ]]
+		onConfirmPurchase = reactModule.useCallback(function()
 			-- upvalues: var11 (ref), purchaseData (ref), localUserId (ref), var12 (ref), purchaseBulkItemsModule (copy), handlePurchaseItemsSuccessModule (copy), var9 (ref), var7 (ref), var18 (ref), var14 (ref), p0 (ref), getIsInsufficientRobuxError (copy), var16 (ref), setCurrentToastMessage (copy), var17 (ref)
 			if var11 or #purchaseData.lineItems == 0 or not localUserId then
 				return
 			end
 			var12(true)
-			purchaseBulkItemsModule({ userId = localUserId, lineItems = purchaseData.lineItems }):andThen(function(p2) --[[ line: 119 ]]
+			purchaseBulkItemsModule({ userId = localUserId, lineItems = purchaseData.lineItems }):andThen(function(p2)
 				-- upvalues: handlePurchaseItemsSuccessModule (copy), var9 (copy), var7 (copy), var18 (copy), var14 (copy), p0 (copy)
 				handlePurchaseItemsSuccessModule({
 					result = p2,
@@ -85,7 +85,7 @@ return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
 				})
 				var14(false)
 				p0.onClose()
-			end):catch(function(p1) --[[ line: 131 ]]
+			end):catch(function(p1)
 				-- upvalues: var14 (copy), getIsInsufficientRobuxError (copy), var16 (copy), var7 (copy), setCurrentToastMessage (copy), var17 (copy), p0 (copy)
 				var14(false)
 				
@@ -100,7 +100,7 @@ return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
 					toastMessage = var17.purchaseFailed
 				}))
 				p0.onClose()
-			end):finally(function() --[[ line: 144 ]]
+			end):finally(function()
 				-- upvalues: var12 (copy)
 				var12(false)
 			end)
@@ -108,11 +108,11 @@ return function(p0) --[[ line: 50 | named "useRecentActivityPurchase" ]]
 			var11, purchaseData, localUserId, var9, var7, var18, var17.purchaseFailed,
 			p0.onClose
 		}),
-		onCancelPurchase = reactModule.useCallback(function() --[[ line: 99 ]]
+		onCancelPurchase = reactModule.useCallback(function()
 			-- upvalues: var14 (ref)
 			var14(false)
 		end, {}),
-		onDismissInsufficientRobux = reactModule.useCallback(function() --[[ line: 103 ]]
+		onDismissInsufficientRobux = reactModule.useCallback(function()
 			-- upvalues: var16 (ref)
 			var16(false)
 		end, {})

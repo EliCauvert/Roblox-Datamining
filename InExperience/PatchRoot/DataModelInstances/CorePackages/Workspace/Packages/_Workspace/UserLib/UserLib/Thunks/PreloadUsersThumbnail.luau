@@ -7,7 +7,7 @@ local promiseModule = require(parent.Promise)
 local constantsModule = require(userLib.Utils.Constants)
 local getRbxthumbWithTypeSizeAndOptions = require(userLib.Utils).getRbxthumbWithTypeSizeAndOptions
 
-local function subdivideEntries(p0, p1) --[[ line: 33 ]]
+local function subdivideEntries(p0, p1)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
@@ -17,9 +17,9 @@ local function subdivideEntries(p0, p1) --[[ line: 33 ]]
 	return t
 end
 
-local function _(p2, p3, p4) --[[ line: 42 | named "makePreloadAsyncPromise" ]]
+local function _(p2, p3, p4)
 	-- upvalues: promiseModule (ref), constantsModule (ref), getRbxthumbWithTypeSizeAndOptions (ref)
-	return promiseModule.new(function(p5, _) --[[ line: 47 ]]
+	return promiseModule.new(function(p5, _)
 		-- upvalues: p2 (ref), p3 (ref), constantsModule (copy), getRbxthumbWithTypeSizeAndOptions (copy), p4 (ref)
 		local t = {}
 		local t_1 = {}
@@ -39,14 +39,14 @@ local function _(p2, p3, p4) --[[ line: 42 | named "makePreloadAsyncPromise" ]]
 	end)
 end
 
-return function(p6, p7, p8) --[[ line: 80 ]]
+return function(p6, p7, p8)
 	-- upvalues: subdivideEntries (ref), promiseModule (ref), constantsModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), promiseUtilities (ref)
-	return function(_) --[[ line: 81 ]]
+	return function(_)
 		-- upvalues: subdivideEntries (copy), p6 (ref), p7 (ref), p8 (ref), promiseModule (copy), constantsModule (copy), getRbxthumbWithTypeSizeAndOptions (copy), promiseUtilities (copy)
 		local t = {}
 		
 		for i, v in pairs(subdivideEntries(p6, 100)) do
-			table.insert(t, promiseModule.new(function(p9, _) --[[ line: 47 ]]
+			table.insert(t, promiseModule.new(function(p9, _)
 				-- upvalues: v (ref), p7 (ref), constantsModule (copy), getRbxthumbWithTypeSizeAndOptions (copy), p8 (ref)
 				local t = {}
 				local t_1 = {}

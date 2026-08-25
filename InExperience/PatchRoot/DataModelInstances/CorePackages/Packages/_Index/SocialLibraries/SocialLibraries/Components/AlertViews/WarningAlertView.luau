@@ -16,14 +16,14 @@ warningAlertView.defaultProps = {
 	soakAreaTransparency = 0.9,
 	screenSize = Vector2.new(0, 0),
 	width = UDim.new(0.5, 0),
-	onActivated = function() --[[ line: 24 ]] end,
-	onModalClose = function() --[[ line: 25 ]] end,
+	onActivated = function() end,
+	onModalClose = function() end,
 	soakAreaColor3 = Color3.fromRGB(0, 0, 255)
 }
 
-local function No_Op() --[[ line: 31 ]] end
+local function No_Op() end
 
-function warningAlertView.render(p0) --[[ line: 33 ]]
+function warningAlertView.render(p0)
 	-- upvalues: buttonType (ref), No_Op (ref), roact (ref), alertViewBuilderModule (ref)
 	local failureTitleText, failureBodyText, list
 	local props = p0.props

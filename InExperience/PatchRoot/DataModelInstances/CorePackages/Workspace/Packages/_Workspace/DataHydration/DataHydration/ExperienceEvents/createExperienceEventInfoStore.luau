@@ -15,13 +15,13 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 
-return function() --[[ line: 30 | named "createExperienceEventInfoStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), experienceEventDerivedFieldsModule (ref), experienceEventTypesModule (ref), updateEventRsvpModule (ref), logResponseError (ref), experienceEventsUrlBuilderModule (ref), discoveryEventErrorLogger (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref)
 	local var10 = createDataCacheModule()
 	local var11 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var10,
-		fetchFn = function(_) --[[ line: 35 ]]
+		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end
@@ -31,7 +31,7 @@ return function() --[[ line: 30 | named "createExperienceEventInfoStore" ]]
 		getExperienceEventInfo = var11.getCachedItem,
 		getExperienceEventInfos = var11.getCachedItems,
 		updateExperienceEventInfo = var10.updateItem,
-		updateExperienceEventInfos = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then function(p0) --[[ line: 44 | named "updateExperienceEventInfos" ]]
+		updateExperienceEventInfos = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then function(p0)
 			-- upvalues: experienceEventDerivedFieldsModule (copy), var10 (ref)
 			for i, v in p0 do
 				p0[i] = experienceEventDerivedFieldsModule.enrichWithTimestamps(v)
@@ -39,11 +39,11 @@ return function() --[[ line: 30 | named "createExperienceEventInfoStore" ]]
 			var10.updateItems(p0)
 		end else var10.updateItems,
 		calculateDerivedField = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then experienceEventDerivedFieldsModule.calculateDerivedField else nil,
-		patchRsvpStatus = function(p1, p2) --[[ line: 51 ]]
+		patchRsvpStatus = function(p1, p2)
 			-- upvalues: var11 (ref), experienceEventTypesModule (copy), updateEventRsvpModule (copy), var10 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy)
 			local var12 = var11.getCachedItem(p1).data()
 			
-			return if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then updateEventRsvpModule(p1, if p2 then experienceEventTypesModule.EventRsvpTypes.Going else experienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(p4) --[[ line: 60 ]]
+			return if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then updateEventRsvpModule(p1, if p2 then experienceEventTypesModule.EventRsvpTypes.Going else experienceEventTypesModule.EventRsvpTypes.NotGoing):andThen(function(p4)
 				-- upvalues: var12 (ref), p2 (ref), var10 (copy), p1 (ref)
 				if var12 then
 					var10.updateItem(p1, {
@@ -59,7 +59,7 @@ return function() --[[ line: 30 | named "createExperienceEventInfoStore" ]]
 					})
 				end
 				return p4 and p4.responseBody
-			end):catch(function(p3) --[[ line: 78 ]]
+			end):catch(function(p3)
 				-- upvalues: var12 (ref), var10 (copy), p1 (ref), logResponseError (copy), experienceEventsUrlBuilderModule (copy), discoveryEventErrorLogger (copy), p2 (ref)
 				if var12 then
 					var10.updateItem(p1, var12)

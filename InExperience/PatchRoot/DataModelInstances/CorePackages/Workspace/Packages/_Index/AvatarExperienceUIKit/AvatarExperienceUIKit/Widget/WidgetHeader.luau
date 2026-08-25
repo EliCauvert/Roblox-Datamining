@@ -12,11 +12,11 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXWidgetHeaderTreatEmptyTextAsNil = avatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
 local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
 
-local function _(p0) --[[ line: 39 | named "nonEmptyOrNil" ]]
+local function _(p0)
 	return if p0 == nil or p0 == "" then nil else p0
 end
 
-return function(p1) --[[ line: 43 | named "WidgetHeader" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local titleText, var8, var10
 	local var3, var4 = reactModule.useBinding(Vector2.new())
@@ -67,7 +67,7 @@ return function(p1) --[[ line: 43 | named "WidgetHeader" ]]
 	}, {
 		UIFlexItem = if var11 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
 		UISizeConstraint = if p1.seeAllCallback then reactModule.createElement("UISizeConstraint", {
-			MinSize = var3:map(function(p2) --[[ line: 94 ]]
+			MinSize = var3:map(function(p2)
 				return Vector2.new(0, p2.Y)
 			end)
 		}) else nil
@@ -83,7 +83,7 @@ return function(p1) --[[ line: 43 | named "WidgetHeader" ]]
 		TitleDescriptionFrame = if var8 or var10 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = if p1.seeAllCallback then var3:map(function(p3) --[[ line: 172 ]]
+			Size = if p1.seeAllCallback then var3:map(function(p3)
 				-- upvalues: var5 (ref)
 				return UDim2.new(1, 0 - (p3.X + var5.Size.Size_300), 0, 0)
 			end) else UDim2.new(1, 0, 0, 0),
@@ -150,7 +150,7 @@ return function(p1) --[[ line: 43 | named "WidgetHeader" ]]
 			standardSize = standardButtonSize.XSmall,
 			onActivated = p1.seeAllCallback,
 			buttonRef = p1.seeAllRef,
-			[reactModule.Change.AbsoluteSize] = function(p4) --[[ line: 213 ]]
+			[reactModule.Change.AbsoluteSize] = function(p4)
 				-- upvalues: var4 (ref)
 				var4(p4.AbsoluteSize)
 			end,

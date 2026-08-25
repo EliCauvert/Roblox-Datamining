@@ -4,14 +4,14 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local parseSessionStreamModule = require(script.Parent.parseSessionStream)
 
-return function(p0) --[[ line: 24 | named "useSessionSummary" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signalsReactModule (ref), parseSessionStreamModule (ref)
-	local var3 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 25 ]]
+	local var3 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref)
 		return p0.getMergedHistory(p1)
 	end, { p0 }))
 	
-	return reactModule.useMemo(function() --[[ line: 29 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: parseSessionStreamModule (copy), var3 (ref), p0 (ref)
 		local var4 = parseSessionStreamModule(var3, { sessionId = p0.getCasSessionId() })
 		

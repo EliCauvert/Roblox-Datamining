@@ -6,7 +6,7 @@ local button = foundationModule.Button
 local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function validateSteps(p0) --[[ line: 58 ]]
+local function validateSteps(p0)
 	if not p0 or type(p0) ~= "table" then
 		return "Steps must not be nil and be a table", false
 	end
@@ -18,11 +18,11 @@ local function validateSteps(p0) --[[ line: 58 ]]
 	return "", true
 end
 
-return reactModule.memo(function(p1) --[[ line: 70 | named "Stepper" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), validateSteps (ref), cryoModule (ref), view (ref), button (ref), buttonVariant (ref)
 	local var4, var5 = reactModule.useState(p1.currentStep)
 	local var6, var7 = reactModule.useState({ p1.currentStep })
-	local var8 = reactModule.useCallback(function(p2) --[[ line: 74 ]]
+	local var8 = reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref)
 		if p1.onErrorCallback then
 			p1.onErrorCallback(p2)
@@ -31,7 +31,7 @@ return reactModule.memo(function(p1) --[[ line: 70 | named "Stepper" ]]
 		end
 		warn(p2)
 	end, { p1.onErrorCallback })
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: validateSteps (copy), p1 (ref), var8 (ref)
 		local var11, var12 = validateSteps(p1.steps)
 		
@@ -39,11 +39,11 @@ return reactModule.memo(function(p1) --[[ line: 70 | named "Stepper" ]]
 			var8(var11)
 		end
 	end, { p1.steps, p1.onErrorCallback, var8 })
-	local var9 = reactModule.useMemo(function() --[[ line: 89 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), var4 (ref)
 		return p1.steps and p1.steps[var4]
 	end, { var4, p1.steps })
-	local var10 = reactModule.useCallback(function(p3) --[[ line: 95 ]]
+	local var10 = reactModule.useCallback(function(p3)
 		-- upvalues: p1 (ref), var5 (ref), var6 (ref), var7 (ref), cryoModule (copy)
 		if not p1.steps[p3] then
 			return false
@@ -52,12 +52,12 @@ return reactModule.memo(function(p1) --[[ line: 70 | named "Stepper" ]]
 		local index = table.find(var6, p3)
 		
 		if index then
-			var7(function(p4) --[[ line: 105 ]]
+			var7(function(p4)
 				-- upvalues: cryoModule (copy), index (ref)
 				return if #p4 == 0 then p4 else cryoModule.List.removeRange(p4, index + 1, #p4)
 			end)
 		else
-			var7(function(p5) --[[ line: 112 ]]
+			var7(function(p5)
 				-- upvalues: p3 (ref)
 				local cloned = table.clone(p5)
 				table.insert(cloned, p3)
@@ -76,7 +76,7 @@ return reactModule.memo(function(p1) --[[ line: 70 | named "Stepper" ]]
 		}, {
 			BackButton = if var9.labels and var9.labels.backButton then reactModule.createElement(button, {
 				LayoutOrder = 0,
-				onActivated = reactModule.useCallback(function() --[[ line: 136 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var6 (ref), var10 (ref), var9 (ref)
 					local var15 = var6[#var6 - 1]
 					
@@ -90,7 +90,7 @@ return reactModule.memo(function(p1) --[[ line: 70 | named "Stepper" ]]
 			}) else nil,
 			ContinueButton = if var9.labels and var9.labels.continueButton then reactModule.createElement(button, {
 				LayoutOrder = 1,
-				onActivated = reactModule.useCallback(function() --[[ line: 122 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var9 (ref), var10 (ref)
 					if not var9 or var9.validateState and not var9.validateState() then return end
 					if var10(var9.predefinedNextStepId) and var9.onStepContinue then

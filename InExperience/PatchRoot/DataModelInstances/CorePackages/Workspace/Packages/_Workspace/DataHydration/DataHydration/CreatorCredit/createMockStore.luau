@@ -4,7 +4,7 @@ local promiseModule = require(parent.Promise)
 local createDataCacheModule = require(script.Parent.Parent.createDataCache)
 local _ = require(script.Parent.types)
 
-local function _() --[[ line: 30 | named "defaultDailyLimit" ]]
+local function _()
 	return {
 		additionalUsageEnabled = false,
 		dailyLimitSet = true,
@@ -12,7 +12,7 @@ local function _() --[[ line: 30 | named "defaultDailyLimit" ]]
 	}
 end
 
-local _ = function() --[[ line: 38 | named "defaultQuota" ]]
+local _ = function()
 	return {
 		freeTrialDailyAllowance = 100,
 		freeTrialRemaining = 72,
@@ -29,7 +29,7 @@ local _ = function() --[[ line: 38 | named "defaultQuota" ]]
 	}
 end
 
-return function(p0) --[[ line: 51 | named "createMockStore" ]]
+return function(p0)
 	-- upvalues: createDataCacheModule (ref), luauPolyfillModule (ref), promiseModule (ref)
 	p0 = p0 or {}
 	local var4 = createDataCacheModule(300, 300)
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 51 | named "createMockStore" ]]
 	local var6 = nil
 	local var7 = 0
 	
-	local function _() --[[ line: 66 | named "scheduleAutoPopulate" ]]
+	local function _()
 		-- upvalues: var6 (write), var7 (write), var4 (ref), luauPolyfillModule (copy)
 		if var6 == nil then return end
 		if var7 <= 0 then
@@ -52,14 +52,14 @@ return function(p0) --[[ line: 51 | named "createMockStore" ]]
 			
 			return
 		end
-		luauPolyfillModule.setTimeout(function() --[[ line: 75 ]]
+		luauPolyfillModule.setTimeout(function()
 			-- upvalues: var4 (copy), var6 (ref)
 			var4.replaceItem("current-user", var6)
 		end, var7 * 1000)
 	end
 	
 	return {
-		getQuotaSummary = function() --[[ line: 80 ]]
+		getQuotaSummary = function()
 			-- upvalues: var4 (ref), var6 (write), var7 (write), luauPolyfillModule (copy)
 			local item, item_1 = var4.getItem("current-user")
 			
@@ -74,18 +74,18 @@ return function(p0) --[[ line: 51 | named "createMockStore" ]]
 					
 					return item
 				end
-				luauPolyfillModule.setTimeout(function() --[[ line: 75 ]]
+				luauPolyfillModule.setTimeout(function()
 					-- upvalues: var4 (copy), var10 (ref)
 					var4.replaceItem("current-user", var10)
 				end, var7 * 1000)
 			end
 			return item
 		end,
-		getQuotaSummarySignals = function() --[[ line: 88 ]]
+		getQuotaSummarySignals = function()
 			-- upvalues: var4 (ref)
 			return var4.getItem("current-user")
 		end,
-		refreshQuotaSummary = function() --[[ line: 93 ]]
+		refreshQuotaSummary = function()
 			-- upvalues: var4 (ref), var6 (write), promiseModule (copy)
 			local var6_1 = var6 or (var4.getItem("current-user").data(false) or {
 				freeTrialDailyAllowance = 100,
@@ -105,7 +105,7 @@ return function(p0) --[[ line: 51 | named "createMockStore" ]]
 			
 			return promiseModule.resolve(var6_1)
 		end,
-		getDailyLimit = function() --[[ line: 100 ]]
+		getDailyLimit = function()
 			-- upvalues: var5 (ref)
 			if var5.getItem("current-user").data(false) == nil then
 				var5.replaceItem("current-user", {
@@ -116,11 +116,11 @@ return function(p0) --[[ line: 51 | named "createMockStore" ]]
 			end
 			return var5.getItem("current-user")
 		end,
-		getDailyLimitSignals = function() --[[ line: 108 ]]
+		getDailyLimitSignals = function()
 			-- upvalues: var5 (ref)
 			return var5.getItem("current-user")
 		end,
-		refreshDailyLimit = function() --[[ line: 113 ]]
+		refreshDailyLimit = function()
 			-- upvalues: var5 (ref), promiseModule (copy)
 			local var12 = var5.getItem("current-user").data(false) or {
 				additionalUsageEnabled = false,
@@ -131,39 +131,39 @@ return function(p0) --[[ line: 51 | named "createMockStore" ]]
 			
 			return promiseModule.resolve(var12)
 		end,
-		setDailyLimit = function(value) --[[ line: 119 ]]
+		setDailyLimit = function(value)
 			-- upvalues: var5 (ref), promiseModule (copy)
 			var5.replaceItem("current-user", value)
 			
 			return promiseModule.resolve(value)
 		end,
-		clear = function() --[[ line: 124 ]]
+		clear = function()
 			-- upvalues: var4 (ref), var5 (ref)
 			var4.clear()
 			var5.clear()
 		end,
-		dispose = function() --[[ line: 129 ]]
+		dispose = function()
 			-- upvalues: var4 (ref), var5 (ref)
 			var4.dispose()
 			var5.dispose()
 		end,
-		_setQuota = function(value) --[[ line: 144 ]]
+		_setQuota = function(value)
 			-- upvalues: var4 (ref)
 			var4.replaceItem("current-user", value)
 		end,
-		_setDailyLimit = function(value) --[[ line: 147 ]]
+		_setDailyLimit = function(value)
 			-- upvalues: var5 (ref)
 			var5.replaceItem("current-user", value)
 		end,
-		_setError = function() --[[ line: 150 ]]
+		_setError = function()
 			-- upvalues: var4 (ref)
 			var4.markItemsAsFailed({ "current-user" })
 		end,
-		_setLoading = function() --[[ line: 153 ]]
+		_setLoading = function()
 			-- upvalues: var4 (ref)
 			var4.clear()
 		end,
-		_setAutoPopulate = function(value, p1) --[[ line: 156 ]]
+		_setAutoPopulate = function(value, p1)
 			-- upvalues: var6 (write), var7 (write)
 			var6 = value or {
 				freeTrialDailyAllowance = 100,

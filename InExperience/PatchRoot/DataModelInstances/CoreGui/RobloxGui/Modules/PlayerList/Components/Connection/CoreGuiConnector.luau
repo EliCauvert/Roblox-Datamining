@@ -10,24 +10,24 @@ local setPlayerIsBlockedModule = require(parent.Actions.SetPlayerIsBlocked)
 local eventConnectionModule = require(script.Parent.EventConnection)
 local coreGuiConnector = roactModule.PureComponent:extend("CoreGuiConnector")
 
-function coreGuiConnector.didMount(p0) --[[ line: 22 ]]
+function coreGuiConnector.didMount(p0)
 	-- upvalues: userGameSettingsService (ref)
 	p0.props.setPerformanceStatsVisible(userGameSettingsService.PerformanceStatsVisible)
 end
 
-function coreGuiConnector.render(p1) --[[ line: 26 ]]
+function coreGuiConnector.render(p1)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), userGameSettingsService (ref), blockedStatusChangedEvent (ref), playersService (ref)
 	return roactModule.createFragment({
 		PerformanceStatsChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = userGameSettingsService.PerformanceStatsVisibleChanged,
-			callback = function(p2) --[[ line: 30 ]]
+			callback = function(p2)
 				-- upvalues: p1 (ref)
 				p1.props.setPerformanceStatsVisible(p2)
 			end
 		}),
 		BlockedStatusChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = blockedStatusChangedEvent,
-			callback = function(p3, p4) --[[ line: 37 ]]
+			callback = function(p3, p4)
 				-- upvalues: playersService (copy), p1 (ref)
 				local var10 = playersService:GetPlayerByUserId(p3)
 				
@@ -39,14 +39,14 @@ function coreGuiConnector.render(p1) --[[ line: 26 ]]
 	})
 end
 
-return roactRoduxModule.connect(nil, function(p5) --[[ line: 47 | named "mapDispatchToProps" ]]
+return roactRoduxModule.connect(nil, function(p5)
 	-- upvalues: setPerformanceStatsVisibleModule (ref), setPlayerIsBlockedModule (ref)
 	return {
-		setPerformanceStatsVisible = function(value) --[[ line: 49 ]]
+		setPerformanceStatsVisible = function(value)
 			-- upvalues: p5 (ref), setPerformanceStatsVisibleModule (copy)
 			return p5(setPerformanceStatsVisibleModule(value))
 		end,
-		setPlayerIsBlocked = function(value, p6) --[[ line: 53 ]]
+		setPlayerIsBlocked = function(value, p6)
 			-- upvalues: p5 (ref), setPlayerIsBlockedModule (copy)
 			return p5(setPlayerIsBlockedModule(value, p6))
 		end

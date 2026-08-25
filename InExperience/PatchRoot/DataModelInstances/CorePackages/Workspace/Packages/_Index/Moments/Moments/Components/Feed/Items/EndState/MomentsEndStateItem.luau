@@ -8,7 +8,7 @@ local useFeed = require(moments.Components.Feed.FeedContext).useFeed
 local momentsEndStateViewModule = require(script.Parent.MomentsEndStateView)
 local var6 = if fFlagMomentsNonInfiniteScrollEndStateFixesModule then signalsModule.createSignal(true) else nil
 
-return function(p0) --[[ line: 31 | named "MomentsEndStateItem" ]]
+return function(p0)
 	-- upvalues: useFeed (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), signalsReactModule (ref), var6 (write), reactModule (ref), momentsEndStateViewModule (ref)
 	local var7 = useFeed()
 	local var8 = true
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 31 | named "MomentsEndStateItem" ]]
 	
 	return reactModule.createElement(momentsEndStateViewModule, {
 		LayoutOrder = p0.LayoutOrder,
-		onLoadMore = reactModule.useCallback(function() --[[ line: 41 ]]
+		onLoadMore = reactModule.useCallback(function()
 			-- upvalues: loadMoreBeyondLimit (ref)
 			if loadMoreBeyondLimit ~= nil then
 				loadMoreBeyondLimit()

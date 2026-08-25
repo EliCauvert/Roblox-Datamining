@@ -20,14 +20,14 @@ headsetMenu.validateProps = tModule.strictInterface({
 })
 headsetMenu.defaultProps = { vrService = VRService, guiService = guiService }
 
-function headsetMenu.init(p0) --[[ line: 37 ]]
+function headsetMenu.init(p0)
 	-- upvalues: isSubjectToDesktopPolicies (ref), runService (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
 	p0.state = {
 		vrDeviceAvailable = false,
 		shouldShowDisconnectDialog = false
 	}
 	
-	function p0.restartApp() --[[ line: 43 ]]
+	function p0.restartApp()
 		-- upvalues: p0 (ref), isSubjectToDesktopPolicies (copy), runService (copy)
 		local notificationTypeList = p0.props.guiService:GetNotificationTypeList()
 		
@@ -44,19 +44,19 @@ function headsetMenu.init(p0) --[[ line: 37 ]]
 	
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p0.disposeScreenSize = signalsModule.createEffect(function(p1) --[[ line: 65 ]]
+		p0.disposeScreenSize = signalsModule.createEffect(function(p1)
 			-- upvalues: p0 (ref), getViewportSize (ref)
 			p0:setState({ screenSize = getViewportSize(p1) })
 		end)
 	end
 end
 
-function headsetMenu.render(p2) --[[ line: 73 ]]
+function headsetMenu.render(p2)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), disconnectedDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref)
 	return roactModule.createFragment({
 		HeadsetConnection = roactModule.createElement(eventConnectionModule, {
 			event = p2.props.vrService:GetPropertyChangedSignal("VRDeviceAvailable"),
-			callback = function() --[[ line: 77 ]]
+			callback = function()
 				-- upvalues: p2 (ref)
 				p2:setState({ vrDeviceAvailable = p2.props.vrService.VRDeviceAvailable })
 			end
@@ -71,25 +71,25 @@ function headsetMenu.render(p2) --[[ line: 73 ]]
 	})
 end
 
-function headsetMenu.didMount(p3) --[[ line: 93 ]]
+function headsetMenu.didMount(p3)
 	p3:setState({ vrDeviceAvailable = p3.props.vrService.VRDeviceAvailable })
 end
 
-function headsetMenu.willUnmount(p4) --[[ line: 99 ]]
+function headsetMenu.willUnmount(p4)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeScreenSize then
 		p4.disposeScreenSize()
 	end
 end
 
-function headsetMenu.didUpdate(p5, _, p6) --[[ line: 105 ]]
+function headsetMenu.didUpdate(p5, _, p6)
 	if p5.state.vrDeviceAvailable ~= p6.vrDeviceAvailable and not p5.state.vrDeviceAvailable then
 		p5:setState({ shouldShowDisconnectDialog = true })
 	end
 end
 
 if not fFlagTopBarSignalizeScreenSize then
-	headsetMenu = roactRoduxModule.connect(function(p7) --[[ line: 116 ]]
+	headsetMenu = roactRoduxModule.connect(function(p7)
 		return { screenSize = p7.displayOptions.screenSize }
 	end)(headsetMenu)
 end

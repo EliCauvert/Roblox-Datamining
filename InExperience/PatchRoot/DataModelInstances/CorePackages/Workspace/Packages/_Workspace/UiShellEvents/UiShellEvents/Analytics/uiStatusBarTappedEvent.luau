@@ -3,7 +3,7 @@ local tModule = require(uiShellEvents.Parent.t)
 local loggerModule = require(uiShellEvents.Logger)
 local var3 = tModule.strictInterface({ page = tModule.string })
 
-return function(p0, p1, p2) --[[ line: 14 ]]
+return function(p0, p1, p2)
 	-- upvalues: var3 (ref), loggerModule (ref)
 	local var4, var5 = var3(p2)
 	

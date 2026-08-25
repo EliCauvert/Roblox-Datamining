@@ -2,14 +2,14 @@
 local t = {}
 
 return {
-	getOrInit = function(p0) --[[ line: 20 ]]
+	getOrInit = function(p0)
 		-- upvalues: t (write), symbolModule (ref)
 		if t[p0] == nil then
 			t[p0] = symbolModule.new(p0)
 		end
 		return t[p0]
 	end,
-	__clear = function() --[[ line: 28 ]]
+	__clear = function()
 		-- upvalues: t (write)
 		t = {}
 	end

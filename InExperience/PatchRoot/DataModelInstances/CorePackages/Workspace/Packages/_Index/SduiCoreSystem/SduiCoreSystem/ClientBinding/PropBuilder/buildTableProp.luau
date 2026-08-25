@@ -6,12 +6,12 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 
-local function buildTableProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 18 ]]
+local function buildTableProp(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: sduiPropUtilsModule (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), buildTableProp (ref)
 	if p0 == "literal" then
 		return sduiPropUtilsModule.generateTablePropSignalValue(p1, p2, p4, p5, p3, sduiClientBindingBuilderModule.buildPropTable, p6), propResultCategory.PropSignal
 	elseif p0 == "binding_path" then
-		return sduiPropUtilsModule.generateDynamicBindingPropValue(p1, p2, p4, p3, function(p7, p8) --[[ line: 40 | named "evaluatePropTable" ]]
+		return sduiPropUtilsModule.generateDynamicBindingPropValue(p1, p2, p4, p3, function(p7, p8)
 			-- upvalues: sduiClientBindingBuilderModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), sduiPropUtilsModule (copy)
 			local var4, var5, var6 = sduiClientBindingBuilderModule.buildPropTable(p7, p2, p3, p4, p5)
 			

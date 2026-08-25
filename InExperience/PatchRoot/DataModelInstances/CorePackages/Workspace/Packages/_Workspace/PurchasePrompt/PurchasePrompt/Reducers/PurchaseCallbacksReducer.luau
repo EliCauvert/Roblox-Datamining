@@ -6,7 +6,7 @@ local fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = 
 local fFlagEnableLaunchAfterPurchase = require(purchasePrompt.Parent.SharedFlags).FFlagEnableLaunchAfterPurchase
 
 return rodux.createReducer({}, {
-	[setPurchaseCallbacksModule.name] = function(_, p0) --[[ line: 14 ]]
+	[setPurchaseCallbacksModule.name] = function(_, p0)
 		-- upvalues: fFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal (ref), fFlagAddFetchProductInfoAsACallback (ref), fFlagEnableLaunchAfterPurchase (ref)
 		return {
 			onFlowComplete = p0.purchaseCallbacks.onFlowComplete,

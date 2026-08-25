@@ -22,7 +22,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local banner = appBloxModule.Banner
 local t = { isContained = true }
 
-local function _(p0, p1) --[[ line: 66 | named "getButtonVariant" ]]
+local function _(p0, p1)
 	-- upvalues: fFlagAgeBasedUXHomepageVerificationBannerGreyButton (ref), isCompactUpsellBannerModule (ref), UPSELL_BUTTON_ACTION (ref), buttonVariant (ref)
 	if fFlagAgeBasedUXHomepageVerificationBannerGreyButton and p0.variantOverride then
 		return p0.variantOverride
@@ -34,7 +34,7 @@ local function _(p0, p1) --[[ line: 66 | named "getButtonVariant" ]]
 	end
 end
 
-local function getBannerPropsFromConfig(p2, p3) --[[ line: 83 ]]
+local function getBannerPropsFromConfig(p2, p3)
 	-- upvalues: fFlagAgeBasedUXHomepageVerificationBannerGreyButton (ref), isCompactUpsellBannerModule (ref), UPSELL_BUTTON_ACTION (ref), buttonVariant (ref), constantsModule (ref), foundationModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -84,20 +84,20 @@ local function getBannerPropsFromConfig(p2, p3) --[[ line: 83 ]]
 	}
 end
 
-return function(p4) --[[ line: 124 | named "UpsellBanner" ]]
+return function(p4)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), httpService (ref), getUpsellSignalStoreModule (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useEffect (ref), eventTypes (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), useCallback (ref), UPSELL_BUTTON_ACTION (ref), getBannerPropsFromConfig (ref), banner (ref)
 	local var20 = cryoModule.Dictionary.union(t, p4)
-	local var21 = reactModule.useMemo(function() --[[ line: 127 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), httpService (copy)
 		return var20.impressionId or httpService:GenerateGUID(false)
 	end, { var20.impressionId, var20.config.type })
 	local var22 = reactModule.useRef(nil)
 	local var23 = getUpsellSignalStoreModule()
-	local var24 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: socialUpsellAnalyticsModule (copy), var20 (ref), upsellComponentModule (copy)
 		return socialUpsellAnalyticsModule.evaluateUpsellStage(var20.upsellEntrySurface, upsellComponentModule.Banner, var20.upsellEntryComponent)
 	end, { var20.upsellEntrySurface, var20.upsellEntryComponent })
-	useEffect(function() --[[ line: 143 ]]
+	useEffect(function()
 		-- upvalues: var21 (ref), var22 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), var20 (ref), var24 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
 		if var21 and var22.current ~= var21 then
 			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellShown, {
@@ -118,20 +118,20 @@ return function(p4) --[[ line: 124 | named "UpsellBanner" ]]
 		var21,
 		if fFlagAddUpsellEntryComponentToAnalyticsModule then var20.upsellEntryComponent else nil
 	})
-	useEffect(function() --[[ line: 169 ]]
+	useEffect(function()
 		-- upvalues: var20 (ref), var23 (ref)
 		local type = var20.config.type
 		local upsellEntrySurface = var20.upsellEntrySurface
 		var23.setUpsellBannerData(type, upsellEntrySurface, var20.config)
 		
-		return function() --[[ line: 174 ]]
+		return function()
 			-- upvalues: var23 (copy), type (ref), upsellEntrySurface (ref)
 			var23.setUpsellBannerData(type, upsellEntrySurface, nil)
 		end
 	end, { var20.upsellEntrySurface, var20.config, var23 })
-	local var25 = useCallback(function(p5, p6) --[[ line: 181 ]]
+	local var25 = useCallback(function(p5, p6)
 		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var20 (ref), var24 (ref), var21 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
-		return function() --[[ line: 182 ]]
+		return function()
 			-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), var20 (copy), var24 (copy), var21 (copy), upsellComponentModule (copy), p6 (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (copy), p5 (ref)
 			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellButtonClick, {
 				upsellPurpose = var20.config.type,
@@ -156,7 +156,7 @@ return function(p4) --[[ line: 124 | named "UpsellBanner" ]]
 	local var27 = useCallback(var25(var20.onSecondaryAction, UPSELL_BUTTON_ACTION.Secondary), { var25, var20.onSecondaryAction })
 	local var28 = useCallback(var25(var20.onDismiss, "Dismiss"), { var25, var20.onDismiss })
 	
-	return reactModule.createElement(banner, cryoModule.Dictionary.join(reactModule.useMemo(function() --[[ line: 224 ]]
+	return reactModule.createElement(banner, cryoModule.Dictionary.join(reactModule.useMemo(function()
 		-- upvalues: getBannerPropsFromConfig (copy), var20 (ref), UPSELL_BUTTON_ACTION (copy), var26 (ref), var27 (ref), var28 (ref)
 		return getBannerPropsFromConfig(var20.config, {
 			[UPSELL_BUTTON_ACTION.Primary] = var26,

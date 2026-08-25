@@ -26,7 +26,7 @@ local itemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
 local catalogItemRowCardContainerModule = require(script.Parent.CatalogItemRowCardContainer)
 local isItemPurchasable = require(script.Parent.InspectAvatarUtils).isItemPurchasable
 
-return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), view (ref), displayBackground (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref), skeleton (ref), divider (ref), buyActionBar (ref), fFlagProfileInspectAvatarBuyAllModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
 	local var9 = useLocalization({
 		buyItems = "Feature.Catalog.Label.BuyItems",
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 	local var10 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
 	local var11 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
 	local var12 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local var13 = reactModule.useMemo(function() --[[ line: 87 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref), dashModule (copy), var11 (ref), var12 (ref)
 		return {
 			bundleParts = nil,
@@ -127,7 +127,7 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 					ItemList = if not p0.isLoading then reactModule.createElement(view, {
 						tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
 					}, t) else nil,
-					LoadingShimmer = if p0.isLoading then reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, (function() --[[ line: 193 ]]
+					LoadingShimmer = if p0.isLoading then reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, (function()
 						-- upvalues: reactModule (copy), skeleton (copy)
 						local t = {}
 						
@@ -162,9 +162,9 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function() --[[ line: 114 ]]
+				handler = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
 					-- upvalues: inputHandlersModule (copy), p0 (ref)
-					return inputHandlersModule.onRelease(function(p1) --[[ line: 115 ]]
+					return inputHandlersModule.onRelease(function(p1)
 						-- upvalues: p0 (copy)
 						p1:cancel()
 						p0.onClose()

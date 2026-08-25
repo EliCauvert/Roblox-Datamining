@@ -4,7 +4,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 14 ]]
+local function variantsFactory(p0)
 	-- upvalues: progressSizeModule (ref)
 	return {
 		sizes = {
@@ -27,7 +27,7 @@ local function variantsFactory(p0) --[[ line: 14 ]]
 	}
 end
 
-return function(p1, p2) --[[ line: 46 ]]
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	return composeStyleVariantModule(variantsContextModule.useVariants("Progress", variantsFactory, p1).sizes[p2])
 end

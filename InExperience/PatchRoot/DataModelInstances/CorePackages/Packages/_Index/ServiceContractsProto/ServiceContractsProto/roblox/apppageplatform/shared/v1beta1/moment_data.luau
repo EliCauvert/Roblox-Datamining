@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 258 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		moment_id = if p0 == nil or p0.moment_id == nil then nil else p0.moment_id,
@@ -15,7 +15,7 @@ function t_1.new(p0) --[[ line: 258 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 268 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var11 = 0
@@ -57,7 +57,7 @@ function t_1:encode() --[[ line: 268 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 303 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var24 = t_1.new()
 	local var25 = 0
@@ -124,7 +124,7 @@ function t_1.decode(p1) --[[ line: 303 ]]
 	return var24
 end
 
-function t_1:jsonEncode() --[[ line: 366 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.moment_id ~= nil then
@@ -145,7 +145,7 @@ function t_1:jsonEncode() --[[ line: 366 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 392 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var50 = t_1.new()
 	
@@ -185,7 +185,7 @@ typeRegistryModule.default:register(t.MomentData)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 444 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		asset_total_duration_seconds = if p2 == nil or p2.asset_total_duration_seconds == nil then nil else p2.asset_total_duration_seconds,
@@ -197,7 +197,7 @@ function t_2.new(p2) --[[ line: 444 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 461 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var52 = 0
@@ -245,7 +245,7 @@ function t_2:encode() --[[ line: 461 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 501 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var67 = t_2.new()
 	local var68 = 0
@@ -319,7 +319,7 @@ function t_2.decode(p3) --[[ line: 501 ]]
 	return var67
 end
 
-function t_2:jsonEncode() --[[ line: 569 ]]
+function t_2:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -344,7 +344,7 @@ function t_2:jsonEncode() --[[ line: 569 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 599 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var95 = t_2.new()
 	
@@ -390,7 +390,7 @@ typeRegistryModule.default:register(t.MomentData_MomentMetadata)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 659 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		music = if p4 == nil or p4.music == nil then nil else p4.music,
@@ -399,7 +399,7 @@ function t_3.new(p4) --[[ line: 659 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 669 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var97 = 0
@@ -433,7 +433,7 @@ function t_3:encode() --[[ line: 669 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 698 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var108 = t_3.new()
 	local var109 = 0
@@ -490,7 +490,7 @@ function t_3.decode(p5) --[[ line: 698 ]]
 	return var108
 end
 
-function t_3:jsonEncode() --[[ line: 754 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.music ~= nil then
@@ -510,7 +510,7 @@ function t_3:jsonEncode() --[[ line: 754 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 776 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), t (ref)
 	local var131 = t_3.new()
 	
@@ -548,7 +548,7 @@ typeRegistryModule.default:register(t.MomentData_MomentMetadata_MomentEdits)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 824 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		asset_id = if p6 == nil or p6.asset_id == nil then nil else p6.asset_id,
@@ -556,7 +556,7 @@ function t_4.new(p6) --[[ line: 824 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 833 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var135 = 0
@@ -579,7 +579,7 @@ function t_4:encode() --[[ line: 833 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 854 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref)
 	local var141 = t_4.new()
 	local var142 = 0
@@ -633,7 +633,7 @@ function t_4.decode(p7) --[[ line: 854 ]]
 	return var141
 end
 
-function t_4:jsonEncode() --[[ line: 904 ]]
+function t_4:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -646,7 +646,7 @@ function t_4:jsonEncode() --[[ line: 904 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 920 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), protoModule (ref)
 	local var161 = t_4.new()
 	
@@ -674,7 +674,7 @@ typeRegistryModule.default:register(t.MomentData_MomentMetadata_MomentEdits_Musi
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 959 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		start_time_seconds = if p8 == nil or p8.start_time_seconds == nil then nil else p8.start_time_seconds,
@@ -682,7 +682,7 @@ function t_5.new(p8) --[[ line: 959 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 968 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var163 = 0
@@ -705,7 +705,7 @@ function t_5:encode() --[[ line: 968 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 989 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref)
 	local var169 = t_5.new()
 	local var170 = 0
@@ -755,7 +755,7 @@ function t_5.decode(p9) --[[ line: 989 ]]
 	return var169
 end
 
-function t_5:jsonEncode() --[[ line: 1039 ]]
+function t_5:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -768,7 +768,7 @@ function t_5:jsonEncode() --[[ line: 1039 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 1055 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), protoModule (ref)
 	local var189 = t_5.new()
 	
@@ -796,7 +796,7 @@ typeRegistryModule.default:register(t.MomentData_MomentMetadata_MomentEdits_Trim
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1094 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		position = if p10 == nil or p10.position == nil then {} else p10.position,
@@ -808,7 +808,7 @@ function t_6.new(p10) --[[ line: 1094 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1110 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var191 = 0
@@ -864,7 +864,7 @@ function t_6:encode() --[[ line: 1110 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1159 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
 	local var210 = t_6.new()
 	local var211 = 0
@@ -950,7 +950,7 @@ function t_6.decode(p11) --[[ line: 1159 ]]
 	return var210
 end
 
-function t_6:jsonEncode() --[[ line: 1242 ]]
+function t_6:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -980,7 +980,7 @@ function t_6:jsonEncode() --[[ line: 1242 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1278 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
 	local var243 = t_6.new()
 	
@@ -1022,7 +1022,7 @@ typeRegistryModule.default:register(t.MomentData_MomentMetadata_MomentEdits_Text
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 1335 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		font = if p12 == nil or p12.font == nil then nil else p12.font,
@@ -1032,7 +1032,7 @@ function t_7.new(p12) --[[ line: 1335 ]]
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 1349 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var246 = 0
@@ -1075,7 +1075,7 @@ function t_7:encode() --[[ line: 1349 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 1387 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref)
 	local var260 = t_7.new()
 	local var261 = 0
@@ -1150,7 +1150,7 @@ function t_7.decode(p13) --[[ line: 1387 ]]
 	return var260
 end
 
-function t_7:jsonEncode() --[[ line: 1460 ]]
+function t_7:jsonEncode()
 	-- upvalues: protoModule (ref)
 	local t = {}
 	
@@ -1174,7 +1174,7 @@ function t_7:jsonEncode() --[[ line: 1460 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 1488 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref), protoModule (ref)
 	local var289 = t_7.new()
 	

@@ -32,7 +32,7 @@ local list_1 = {
 	}
 }
 
-return function(p0, p1) --[[ line: 52 ]]
+return function(p0, p1)
 	-- upvalues: dashModule (ref), list_1 (ref), list (ref)
 	local t = {}
 	

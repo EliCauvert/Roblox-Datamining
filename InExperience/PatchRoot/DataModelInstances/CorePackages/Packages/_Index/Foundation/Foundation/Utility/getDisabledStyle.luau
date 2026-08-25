@@ -2,7 +2,7 @@
 local constantsModule = require(foundation.Constants)
 local _ = require(foundation.Components.Types)
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	-- upvalues: constantsModule (ref)
 	return if p1 then {
 		Color3 = p0.Color3,

@@ -5,7 +5,7 @@ local getOutputWiresModule = require(sceneUnderstanding.wiring.getOutputWires)
 local _ = require(sceneUnderstanding.wiring.types)
 local toWirableInstanceModule = require(sceneUnderstanding.wiring.toWirableInstance)
 
-local function _(p0) --[[ line: 13 | named "calculateSoundPotentialAudibility" ]]
+local function _(p0)
 	-- upvalues: safelyAccessPropertyModule (ref)
 	if not p0.IsPlaying then
 		return 0
@@ -19,7 +19,7 @@ local function _(p0) --[[ line: 13 | named "calculateSoundPotentialAudibility" ]
 	return var8 * p0.Volume * var7
 end
 
-local function getOutputsOf(p1) --[[ line: 41 ]]
+local function getOutputsOf(p1)
 	-- upvalues: getOutputWiresModule (ref), toWirableInstanceModule (ref)
 	if typeof(p1) == "Instance" and p1:IsA("AudioEmitter") then
 		return p1:GetInteractingListeners()
@@ -36,7 +36,7 @@ local function getOutputsOf(p1) --[[ line: 41 ]]
 	return t
 end
 
-local _ = function(p2) --[[ line: 60 | named "getAudibilityMultiplierFor" ]]
+local _ = function(p2)
 	local var11 = 0
 	
 	for i, v in p2:GetInteractingListeners() do
@@ -45,7 +45,7 @@ local _ = function(p2) --[[ line: 60 | named "getAudibilityMultiplierFor" ]]
 	return var11
 end
 
-local function getAudibilityOf(p3, p4) --[[ line: 68 ]]
+local function getAudibilityOf(p3, p4)
 	-- upvalues: getOutputsOf (ref), getAudibilityOf (ref)
 	local var12 = p4 or {}
 	
@@ -77,7 +77,7 @@ local function getAudibilityOf(p3, p4) --[[ line: 68 ]]
 	return var15
 end
 
-return function(p5) --[[ line: 105 | named "calculatePotentialAudibility" ]]
+return function(p5)
 	-- upvalues: safelyAccessPropertyModule (ref), userGameSettingsService (ref), getAudibilityOf (ref)
 	local var17
 	local var16 = safelyAccessPropertyModule(userGameSettingsService, "MasterVolume", 0)

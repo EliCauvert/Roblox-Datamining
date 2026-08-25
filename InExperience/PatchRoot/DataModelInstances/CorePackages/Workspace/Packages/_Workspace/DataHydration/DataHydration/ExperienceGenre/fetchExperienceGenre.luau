@@ -8,13 +8,13 @@ local experienceGenreStoreTypesModule = require(script.Parent.ExperienceGenreSto
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0) --[[ line: 21 | named "resolveMutatingNetwork" ]]
+local function _(p0)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
 	return (p0 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
 return {
-	fetchExperienceGenre = function(p1, p2, p3) --[[ line: 29 ]]
+	fetchExperienceGenre = function(p1, p2, p3)
 		-- upvalues: urlBase (ref), experienceGenreStoreTypesModule (ref), fetch (ref), urlBuilderModule (ref), asPromise (ref)
 		p3 = p3 or {}
 		local baseUrl = p3.baseUrl or urlBase.APIS
@@ -47,12 +47,12 @@ return {
 			analyticsKey = "experience-genre.get",
 			network = p3.network,
 			url = urlBuilderModule.UrlBuilder.addQueryString(baseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre", t),
-			decode = function(p4) --[[ line: 66 ]]
+			decode = function(p4)
 				return p4
 			end
 		}))
 	end,
-	setExperienceGenre = function(value, p5) --[[ line: 73 ]]
+	setExperienceGenre = function(value, p5)
 		-- upvalues: urlBase (ref), experienceGenreStoreTypesModule (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
 		local baseUrl = (p5 or {}).baseUrl or urlBase.APIS
 		local t = {
@@ -70,7 +70,7 @@ return {
 			network = (p5 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
 			url = baseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre",
 			body = t,
-			decode = function(p6) --[[ line: 95 ]]
+			decode = function(p6)
 				return p6
 			end
 		}))

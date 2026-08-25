@@ -56,7 +56,7 @@ local t = {
 	verticalPadding = 0
 }
 
-return reactModule.memo(function(p0) --[[ line: 172 | named "CollectionGrid" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: validateProps (ref), var10 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), argCheckModule (ref), useDesignTokens (ref), useCollectionSizeBindingsModule (ref), reactModule (ref), fFlagLuaAppRfyRevealRows (ref), collectionHeaderModule (ref), fFlagLuaAppSortHeaderAnchorTag (ref), gridOfCollectionItemsModule (ref)
 	local createElement_2
 	validateProps(var10, p0)

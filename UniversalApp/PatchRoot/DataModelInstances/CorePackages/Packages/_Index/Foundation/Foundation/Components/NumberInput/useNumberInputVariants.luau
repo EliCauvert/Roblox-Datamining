@@ -7,7 +7,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function computeProps(p0) --[[ line: 23 ]]
+local function computeProps(p0)
 	local var9 = if p0.width and p0.horizontalPadding then UDim.new(0, (p0.buttonWidth - p0.horizontalPadding) / 2) else nil
 	
 	return {
@@ -24,7 +24,7 @@ local function computeProps(p0) --[[ line: 23 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ line: 66 ]]
+local function variantsFactory(p1)
 	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref), computeProps (ref), numberInputControlsVariantModule (ref)
 	return {
 		common = if flagsModule.FoundationNumberInputBeta then {
@@ -115,7 +115,7 @@ local function variantsFactory(p1) --[[ line: 66 ]]
 	}
 end
 
-return function(p2, p3, p4) --[[ line: 174 ]]
+return function(p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), composeStyleVariantModule (ref)
 	local numberInput = variantsContextModule.useVariants("NumberInput", variantsFactory, p2)
 	

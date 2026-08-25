@@ -8,9 +8,9 @@ local withStyle = UIBloxModule.Style.withStyle
 local iconSize = UIBloxModule.App.Constant.IconSize
 local var3 = iconSize.Small + 16
 
-return function(p0) --[[ line: 24 ]]
+return function(p0)
 	-- upvalues: withStyle (ref), textService (ref), var3 (ref), roactModule (ref), imageSetLabel (ref), iconSize (ref), images (ref)
-	return withStyle(function(p1) --[[ line: 25 ]]
+	return withStyle(function(p1)
 		-- upvalues: p0 (ref), textService (copy), var3 (copy), roactModule (copy), imageSetLabel (copy), iconSize (copy), images (copy)
 		local theme = p1.Theme
 		local font = p1.Font

@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 9 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { _appUpdate = p0 }
 	setmetatable(t_1, t)
@@ -10,13 +10,13 @@ function t.new(p0) --[[ line: 9 ]]
 	return t_1
 end
 
-function t.checkForUpdate(p1) --[[ line: 18 ]]
+function t.checkForUpdate(p1)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p2, _) --[[ line: 19 ]]
+	return promiseModule.new(function(p2, _)
 		-- upvalues: p1 (ref)
-		local ok, status = pcall(function() --[[ line: 20 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (copy), p2 (ref)
-			p1._appUpdate:CheckForUpdate(function(p3) --[[ line: 21 ]]
+			p1._appUpdate:CheckForUpdate(function(p3)
 				-- upvalues: p2 (copy)
 				p2({ appUpdateStatus = p3 })
 			end)
@@ -28,11 +28,11 @@ function t.checkForUpdate(p1) --[[ line: 18 ]]
 	end)
 end
 
-function t:performManagedUpdate() --[[ line: 36 ]]
+function t:performManagedUpdate()
 	self._appUpdate:PerformManagedUpdate()
 end
 
-function t:canPerformBinaryUpdate() --[[ line: 40 ]]
+function t:canPerformBinaryUpdate()
 	return self._appUpdate:CanPerformBinaryUpdate()
 end
 

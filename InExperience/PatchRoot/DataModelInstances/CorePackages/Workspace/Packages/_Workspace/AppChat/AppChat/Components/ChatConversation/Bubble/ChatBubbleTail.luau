@@ -8,7 +8,7 @@ local t = {
 	imageColor = Color3.new(0, 0, 0)
 }
 
-function ChatBubbleTail(p0) --[[ line: 38 ]]
+function ChatBubbleTail(p0)
 	-- upvalues: cryoModule (ref), t (ref), chatBubbleEnumModule (ref), reactModule (ref)
 	local var4 = cryoModule.Dictionary.union(t, p0)
 	

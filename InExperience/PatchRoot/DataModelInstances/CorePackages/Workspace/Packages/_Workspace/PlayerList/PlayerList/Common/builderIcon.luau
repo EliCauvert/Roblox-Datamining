@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "builderIcon" ]]
+﻿return function(p0, p1)
 	return {
 		isFoundationIcon = true,
 		name = p0,

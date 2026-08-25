@@ -8,10 +8,10 @@ local trackerMode_1 = faceChatUtilsModule.getTrackerMode()
 local var6 = if trackerMode_1 ~= trackerMode.Video then trackerMode_1 == trackerMode.AudioVideo else true
 local var7 = if trackerMode_1 ~= trackerMode.Audio then trackerMode_1 == trackerMode.AudioVideo else true
 
-return function() --[[ line: 23 ]]
+return function()
 	-- upvalues: reactModule (ref), trackerMode (ref), faceChatUtilsModule (ref), var6 (write), var4 (ref), var7 (write), videoCaptureService (ref), faceAnimatorService (ref)
 	local var8, var9 = reactModule.useState(trackerMode.None)
-	local var10 = reactModule.useCallback(function() --[[ line: 26 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: faceChatUtilsModule (copy), trackerMode (copy), var6 (copy), var4 (copy), var7 (copy), var9 (ref)
 		local trackerMode_1 = faceChatUtilsModule.getTrackerMode()
 		local var12 = if trackerMode_1 ~= trackerMode.Video then trackerMode_1 == trackerMode.AudioVideo else true
@@ -28,7 +28,7 @@ return function() --[[ line: 23 ]]
 		end
 		var9(trackerMode_1)
 	end)
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: videoCaptureService (copy), var10 (ref), faceAnimatorService (copy)
 		if videoCaptureService then
 			var10()
@@ -38,7 +38,7 @@ return function() --[[ line: 23 ]]
 			local var17 = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(var10)
 			local var18 = faceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(var10)
 			
-			return function() --[[ line: 55 ]]
+			return function()
 				-- upvalues: startedConnection (ref), stoppedConnection (ref), devicesChangedConnection (ref), var17 (ref), var18 (ref)
 				startedConnection:Disconnect()
 				stoppedConnection:Disconnect()
@@ -47,7 +47,7 @@ return function() --[[ line: 23 ]]
 				var18:Disconnect()
 			end
 		end
-		return function() --[[ line: 63 ]] end
+		return function() end
 	end, {})
 	
 	return var8

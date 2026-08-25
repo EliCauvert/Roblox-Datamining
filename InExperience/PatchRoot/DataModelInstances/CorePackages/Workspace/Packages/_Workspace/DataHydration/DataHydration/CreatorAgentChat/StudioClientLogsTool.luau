@@ -9,11 +9,11 @@ local t = {
 	}
 }
 
-local function _(p0) --[[ line: 42 | named "valueLooksLikeToolName" ]]
+local function _(p0)
 	return typeof(p0) == "string" and string.lower(p0) == "ask_for_logs"
 end
 
-local function toolCallLooksLikeClientLogsRequest(p1) --[[ line: 46 ]]
+local function toolCallLooksLikeClientLogsRequest(p1)
 	local kind = p1.kind
 	
 	if not (typeof(kind) == "string" and string.lower(kind) == "ask_for_logs") then
@@ -38,14 +38,14 @@ local function toolCallLooksLikeClientLogsRequest(p1) --[[ line: 46 ]]
 	end
 end
 
-local _ = function(p2) --[[ line: 63 | named "decodePersistedToolResultText" ]]
+local _ = function(p2)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, p2)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
 end
 
-local function getPersistedToolResultText(p3) --[[ line: 73 ]]
+local function getPersistedToolResultText(p3)
 	-- upvalues: httpService (ref)
 	if p3.content == nil then
 		return nil
@@ -75,7 +75,7 @@ return {
 	STALE_LOGS_MESSAGE = "The available logs are from an older saved version. Playtest the latest version first.",
 	LOCAL_TOOL_DEFINITION = t,
 	toolCallLooksLikeClientLogsRequest = toolCallLooksLikeClientLogsRequest,
-	findClientLogsRequestInTurnState = function(p4, p5) --[[ line: 96 ]]
+	findClientLogsRequestInTurnState = function(p4, p5)
 		-- upvalues: fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), getPersistedToolResultText (ref)
 		local t = {}
 		
@@ -126,13 +126,13 @@ return {
 		end
 		return nil, nil, nil, nil
 	end,
-	formatLogsContent = function(p6, p7) --[[ line: 128 ]]
+	formatLogsContent = function(p6, p7)
 		-- upvalues: httpService (ref)
 		return {
 			text = httpService:JSONEncode({ status = "ok", clientLogs = p6, serverLogs = p7 })
 		}
 	end,
-	formatNotInGameContent = function() --[[ line: 138 ]]
+	formatNotInGameContent = function()
 		-- upvalues: httpService (ref)
 		return {
 			text = httpService:JSONEncode({
@@ -141,7 +141,7 @@ return {
 			})
 		}
 	end,
-	formatStaleLogsContent = function() --[[ line: 147 ]]
+	formatStaleLogsContent = function()
 		-- upvalues: httpService (ref)
 		return {
 			text = httpService:JSONEncode({

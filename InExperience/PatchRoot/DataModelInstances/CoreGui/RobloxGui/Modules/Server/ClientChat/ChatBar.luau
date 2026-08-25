@@ -16,14 +16,14 @@ local curveUtilModule = require(parent:WaitForChild("CurveUtil"))
 local whisperModule = require(clientChatModules:WaitForChild("CommandModules"):WaitForChild("Whisper"))
 local _ = require(parent:WaitForChild("MessageSender"))
 local t_1 = nil
-pcall(function() --[[ line: 35 ]]
+pcall(function()
 	-- upvalues: t_1 (write)
 	t_1 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
 if t_1 == nil then
 	t_1 = {
-		Get = function(_, _, p0) --[[ line: 36 ]]
+		Get = function(_, _, p0)
 			return p0
 		end
 	}
@@ -31,7 +31,7 @@ end
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.CreateGuiObjects(p1, p2) --[[ line: 43 ]]
+function t_2.CreateGuiObjects(p1, p2)
 	-- upvalues: chatSettingsModule (ref)
 	p1.ChatBarParentFrame = p2
 	local frame = Instance.new("Frame")
@@ -119,7 +119,7 @@ function t_2.CreateGuiObjects(p1, p2) --[[ line: 43 ]]
 	p1.eGuiObjectsChanged:Fire()
 end
 
-function t_2.DoLockChatBar(p3) --[[ line: 142 ]]
+function t_2.DoLockChatBar(p3)
 	-- upvalues: localPlayer (write), t_1 (write)
 	if p3.TextLabel then
 		if localPlayer.UserId > 0 then
@@ -131,26 +131,26 @@ function t_2.DoLockChatBar(p3) --[[ line: 142 ]]
 	end
 	if p3.TextBox then
 		p3.TextBox.Active = false
-		p3.TextBox.Focused:connect(function() --[[ line: 159 ]]
+		p3.TextBox.Focused:connect(function()
 			-- upvalues: p3 (ref)
 			p3.TextBox:ReleaseFocus()
 		end)
 	end
 end
 
-function t_2.SetUpTextBoxEvents(value, p4, p5, p6) --[[ line: 165 ]]
+function t_2.SetUpTextBoxEvents(value, p4, p5, p6)
 	-- upvalues: userInputService (ref), chatSettingsModule (ref)
 	for i, v in pairs(value.TextBoxConnections) do
 		v:disconnect()
 		value.TextBoxConnections[i] = nil
 	end
-	value.TextBoxConnections.UserInputBegan = userInputService.InputBegan:connect(function(p7, _) --[[ line: 173 ]]
+	value.TextBoxConnections.UserInputBegan = userInputService.InputBegan:connect(function(p7, _)
 		-- upvalues: value (ref), p4 (ref), chatSettingsModule (copy)
 		if p7.KeyCode == Enum.KeyCode.Backspace and value:IsFocused() and p4.Text == "" then
 			value:SetChannelTarget(chatSettingsModule.GeneralChannelName)
 		end
 	end)
-	value.TextBoxConnections.TextBoxChanged = p4.Changed:connect(function(p8) --[[ line: 181 ]]
+	value.TextBoxConnections.TextBoxChanged = p4.Changed:connect(function(p8)
 		-- upvalues: value (ref), p4 (ref), chatSettingsModule (copy)
 		if p8 == "AbsoluteSize" then
 			value:CalculateSize()
@@ -178,7 +178,7 @@ function t_2.SetUpTextBoxEvents(value, p4, p5, p6) --[[ line: 165 ]]
 		end
 	end)
 	
-	local function _(p9) --[[ line: 210 | named "UpdateOnFocusStatusChanged" ]]
+	local function _(p9)
 		-- upvalues: p4 (ref), p5 (ref)
 		if p9 or p4.Text ~= "" then
 			p5.Visible = false
@@ -188,20 +188,20 @@ function t_2.SetUpTextBoxEvents(value, p4, p5, p6) --[[ line: 165 ]]
 		p5.Visible = true
 	end
 	
-	value.TextBoxConnections.MessageModeClick = p6.MouseButton1Click:connect(function() --[[ line: 218 ]]
+	value.TextBoxConnections.MessageModeClick = p6.MouseButton1Click:connect(function()
 		-- upvalues: p6 (ref), value (ref), chatSettingsModule (copy)
 		if p6.Text ~= "" then
 			value:SetChannelTarget(chatSettingsModule.GeneralChannelName)
 		end
 	end)
-	value.TextBoxConnections.TextBoxFocused = p4.Focused:connect(function() --[[ line: 224 ]]
+	value.TextBoxConnections.TextBoxFocused = p4.Focused:connect(function()
 		-- upvalues: value (ref), p5 (ref)
 		if not value.UserHasChatOff then
 			value:CalculateSize()
 			p5.Visible = false
 		end
 	end)
-	value.TextBoxConnections.TextBoxFocusLost = p4.FocusLost:connect(function(_, p10) --[[ line: 231 ]]
+	value.TextBoxConnections.TextBoxFocusLost = p4.FocusLost:connect(function(_, p10)
 		-- upvalues: value (ref), p4 (ref), p5 (ref)
 		value:CalculateSize()
 		
@@ -217,49 +217,49 @@ function t_2.SetUpTextBoxEvents(value, p4, p5, p6) --[[ line: 165 ]]
 	end)
 end
 
-function t_2.GetTextBox(p11) --[[ line: 240 ]]
+function t_2.GetTextBox(p11)
 	return p11.TextBox
 end
 
-function t_2.GetMessageModeTextButton(p12) --[[ line: 244 ]]
+function t_2.GetMessageModeTextButton(p12)
 	return p12.GuiObjects.MessageModeTextButton
 end
 
-function t_2.GetMessageModeTextLabel(p13) --[[ line: 250 ]]
+function t_2.GetMessageModeTextLabel(p13)
 	return p13:GetMessageModeTextButton()
 end
 
-function t_2.IsFocused(p14) --[[ line: 254 ]]
+function t_2.IsFocused(p14)
 	return if p14.UserHasChatOff then false else p14:GetTextBox():IsFocused()
 end
 
-function t_2.GetVisible(p15) --[[ line: 262 ]]
+function t_2.GetVisible(p15)
 	return p15.GuiObject.Visible
 end
 
-function t_2.CaptureFocus(p16) --[[ line: 266 ]]
+function t_2.CaptureFocus(p16)
 	if not p16.UserHasChatOff then
 		p16:GetTextBox():CaptureFocus()
 	end
 end
 
-function t_2.ReleaseFocus(p17, p18) --[[ line: 272 ]]
+function t_2.ReleaseFocus(p17, p18)
 	p17:GetTextBox():ReleaseFocus(p18)
 end
 
-function t_2.ResetText(value) --[[ line: 276 ]]
+function t_2.ResetText(value)
 	value:GetTextBox().Text = ""
 end
 
-function t_2.SetText(value, p19) --[[ line: 280 ]]
+function t_2.SetText(value, p19)
 	value:GetTextBox().Text = p19
 end
 
-function t_2.GetEnabled(p20) --[[ line: 284 ]]
+function t_2.GetEnabled(p20)
 	return p20.GuiObject.Visible
 end
 
-function t_2.SetEnabled(value, p21) --[[ line: 288 ]]
+function t_2.SetEnabled(value, p21)
 	if value.UserHasChatOff then
 		value.GuiObject.Visible = true
 		
@@ -268,31 +268,31 @@ function t_2.SetEnabled(value, p21) --[[ line: 288 ]]
 	value.GuiObject.Visible = p21
 end
 
-function t_2.SetTextLabelText(value, p22) --[[ line: 298 ]]
+function t_2.SetTextLabelText(value, p22)
 	if not value.UserHasChatOff then
 		value.TextLabel.Text = p22
 	end
 end
 
-function t_2.SetTextBoxText(value, p23) --[[ line: 304 ]]
+function t_2.SetTextBoxText(value, p23)
 	value.TextBox.Text = p23
 end
 
-function t_2.GetTextBoxText(p24) --[[ line: 308 ]]
+function t_2.GetTextBoxText(p24)
 	return p24.TextBox.Text
 end
 
-function t_2.ResetSize(value) --[[ line: 312 ]]
+function t_2.ResetSize(value)
 	value.TargetYSize = 0
 	value:TweenToTargetYSize()
 end
 
-local function _(p25) --[[ line: 317 | named "measureSize" ]]
+local function _(p25)
 	-- upvalues: textService (ref)
 	return textService:GetTextSize(p25.Text, p25.TextSize, p25.Font, Vector2.new(p25.AbsoluteSize.X, 10000))
 end
 
-function t_2.CalculateSize(p26) --[[ line: 326 ]]
+function t_2.CalculateSize(p26)
 	-- upvalues: textService (ref)
 	if p26.CalculatingSizeLock then return end
 	local textSize, y
@@ -318,7 +318,7 @@ function t_2.CalculateSize(p26) --[[ line: 326 ]]
 	p26.CalculatingSizeLock = false
 end
 
-function t_2.TweenToTargetYSize(p27) --[[ line: 352 ]]
+function t_2.TweenToTargetYSize(p27)
 	local uDim2 = UDim2.new(1, 0, 1, p27.TargetYSize)
 	local size = p27.GuiObject.Size
 	local y = p27.GuiObject.AbsoluteSize.Y
@@ -327,7 +327,7 @@ function t_2.TweenToTargetYSize(p27) --[[ line: 352 ]]
 	p27.GuiObject.Size = size
 	local minValue = math.min(1, math.abs(y_1 - y) * (1 / p27.TweenPixelsPerSecond))
 	
-	if not pcall(function() --[[ line: 364 ]]
+	if not pcall(function()
 		-- upvalues: p27 (ref), uDim2 (ref), minValue (ref)
 		p27.GuiObject:TweenSize(uDim2, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, minValue, true)
 	end) then
@@ -335,7 +335,7 @@ function t_2.TweenToTargetYSize(p27) --[[ line: 352 ]]
 	end
 end
 
-function t_2.SetTextSize(value, p28) --[[ line: 372 ]]
+function t_2.SetTextSize(value, p28)
 	if not value:IsInCustomState() then
 		if value.TextBox then
 			value.TextBox.TextSize = p28
@@ -346,12 +346,12 @@ function t_2.SetTextSize(value, p28) --[[ line: 372 ]]
 	end
 end
 
-function t_2.GetDefaultChannelNameColor(_) --[[ line: 383 ]]
+function t_2.GetDefaultChannelNameColor(_)
 	-- upvalues: chatSettingsModule (ref)
 	return if chatSettingsModule.DefaultChannelNameColor then chatSettingsModule.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
 end
 
-function t_2.SetChannelTarget(value, p29) --[[ line: 390 ]]
+function t_2.SetChannelTarget(value, p29)
 	-- upvalues: chatSettingsModule (ref), t_1 (write)
 	local messageModeTextButton = value.GuiObjects.MessageModeTextButton
 	local textBox = value.TextBox
@@ -388,11 +388,11 @@ function t_2.SetChannelTarget(value, p29) --[[ line: 390 ]]
 	end
 end
 
-function t_2.IsInCustomState(p30) --[[ line: 430 ]]
+function t_2.IsInCustomState(p30)
 	return p30.InCustomState
 end
 
-function t_2.ResetCustomState(value) --[[ line: 434 ]]
+function t_2.ResetCustomState(value)
 	-- upvalues: t_1 (write)
 	if value.InCustomState then
 		value.CustomState:Destroy()
@@ -404,7 +404,7 @@ function t_2.ResetCustomState(value) --[[ line: 434 ]]
 	end
 end
 
-function t_2.EnterWhisperState(p31, p32) --[[ line: 451 ]]
+function t_2.EnterWhisperState(p31, p32)
 	-- upvalues: whisperModule (ref), chatSettingsModule (ref)
 	p31:ResetCustomState()
 	
@@ -418,41 +418,41 @@ function t_2.EnterWhisperState(p31, p32) --[[ line: 451 ]]
 	p31:CaptureFocus()
 end
 
-function t_2.GetCustomMessage(p33) --[[ line: 475 ]]
+function t_2.GetCustomMessage(p33)
 	return if p33.InCustomState then p33.CustomState:GetMessage() else nil
 end
 
-function t_2.CustomStateProcessCompletedMessage(p34, _) --[[ line: 482 ]]
+function t_2.CustomStateProcessCompletedMessage(p34, _)
 	return if p34.InCustomState then p34.CustomState:ProcessCompletedMessage() else false
 end
 
-function t_2.FadeOutBackground(value, p35) --[[ line: 489 ]]
+function t_2.FadeOutBackground(value, p35)
 	-- upvalues: curveUtilModule (ref)
 	value.AnimParams.Background_TargetTransparency = 1
 	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p35)
 	value:FadeOutText(p35)
 end
 
-function t_2.FadeInBackground(value, p36) --[[ line: 495 ]]
+function t_2.FadeInBackground(value, p36)
 	-- upvalues: curveUtilModule (ref)
 	value.AnimParams.Background_TargetTransparency = 0.6
 	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p36)
 	value:FadeInText(p36)
 end
 
-function t_2.FadeOutText(p37, p38) --[[ line: 501 ]]
+function t_2.FadeOutText(p37, p38)
 	-- upvalues: curveUtilModule (ref)
 	p37.AnimParams.Text_TargetTransparency = 1
 	p37.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p38)
 end
 
-function t_2.FadeInText(p39, p40) --[[ line: 506 ]]
+function t_2.FadeInText(p39, p40)
 	-- upvalues: curveUtilModule (ref)
 	p39.AnimParams.Text_TargetTransparency = 0.4
 	p39.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p40)
 end
 
-function t_2.AnimGuiObjects(p41) --[[ line: 511 ]]
+function t_2.AnimGuiObjects(p41)
 	p41.GuiObject.BackgroundTransparency = p41.AnimParams.Background_CurrentTransparency
 	p41.GuiObjects.TextBoxFrame.BackgroundTransparency = p41.AnimParams.Background_CurrentTransparency
 	p41.GuiObjects.TextLabel.TextTransparency = p41.AnimParams.Text_CurrentTransparency
@@ -460,7 +460,7 @@ function t_2.AnimGuiObjects(p41) --[[ line: 511 ]]
 	p41.GuiObjects.MessageModeTextButton.TextTransparency = p41.AnimParams.Text_CurrentTransparency
 end
 
-function t_2.InitializeAnimParams(p42) --[[ line: 520 ]]
+function t_2.InitializeAnimParams(p42)
 	p42.AnimParams.Text_TargetTransparency = 0.4
 	p42.AnimParams.Text_CurrentTransparency = 0.4
 	p42.AnimParams.Text_NormalizedExptValue = 1
@@ -469,14 +469,14 @@ function t_2.InitializeAnimParams(p42) --[[ line: 520 ]]
 	p42.AnimParams.Background_NormalizedExptValue = 1
 end
 
-function t_2.Update(p43, p44) --[[ line: 530 ]]
+function t_2.Update(p43, p44)
 	-- upvalues: curveUtilModule (ref)
 	p43.AnimParams.Text_CurrentTransparency = curveUtilModule:Expt(p43.AnimParams.Text_CurrentTransparency, p43.AnimParams.Text_TargetTransparency, p43.AnimParams.Text_NormalizedExptValue, p44)
 	p43.AnimParams.Background_CurrentTransparency = curveUtilModule:Expt(p43.AnimParams.Background_CurrentTransparency, p43.AnimParams.Background_TargetTransparency, p43.AnimParams.Background_NormalizedExptValue, p44)
 	p43:AnimGuiObjects()
 end
 
-function t_2.SetChannelNameColor(value, p45, p46) --[[ line: 547 ]]
+function t_2.SetChannelNameColor(value, p45, p46)
 	value.ChannelNameColors[p45] = p46
 	
 	if value.GuiObjects.MessageModeTextButton.Text == p45 then
@@ -484,11 +484,11 @@ function t_2.SetChannelNameColor(value, p45, p46) --[[ line: 547 ]]
 	end
 end
 
-function t_2.GetChannelNameColor(p47, p48) --[[ line: 554 ]]
+function t_2.GetChannelNameColor(p47, p48)
 	return p47.ChannelNameColors[p48]
 end
 
-function t.new(p49, p50) --[[ line: 561 ]]
+function t.new(p49, p50)
 	-- upvalues: t_2 (ref), chatSettingsModule (ref), chatService (ref), localPlayer (write), runService (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.GuiObject = nil
@@ -512,15 +512,15 @@ function t.new(p49, p50) --[[ line: 561 ]]
 	tbl.ChannelNameColors = {}
 	tbl.UserHasChatOff = false
 	tbl:InitializeAnimParams()
-	chatSettingsModule.SettingsChanged:connect(function(p51, p52) --[[ line: 593 ]]
+	chatSettingsModule.SettingsChanged:connect(function(p51, p52)
 		-- upvalues: tbl (ref)
 		if p51 == "ChatBarTextSize" then
 			tbl:SetTextSize(p52)
 		end
 	end)
-	coroutine.wrap(function() --[[ line: 599 ]]
+	coroutine.wrap(function()
 		-- upvalues: chatService (copy), localPlayer (copy), runService (copy), tbl (ref)
-		local ok, status = pcall(function() --[[ line: 600 ]]
+		local ok, status = pcall(function()
 			-- upvalues: chatService (copy), localPlayer (copy)
 			return chatService:CanUserChatAsync(localPlayer.UserId)
 		end)

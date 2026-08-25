@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local roactGamepadModule = require(parent.RoactGamepad)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 28 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), roactGamepadModule (ref)
 	local horizontalMargin = p0.horizontalMargin or 0
 	local var3 = useDesignTokens()

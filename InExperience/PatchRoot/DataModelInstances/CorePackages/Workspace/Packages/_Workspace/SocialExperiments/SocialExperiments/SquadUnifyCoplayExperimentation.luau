@@ -8,7 +8,7 @@ local enableSquadsUnifyCoplayMultiInvitePartyCreationDev = game:DefineFastFlag("
 local enableSquadsUnifyCoplayExperimentationDev = game:DefineFastFlag("EnableSquadsUnifyCoplayExperimentation_dev", false)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 
-local function _(p0) --[[ line: 20 | named "getIsUserInTreatment" ]]
+local function _(p0)
 	-- upvalues: experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref)
 	local var6 = experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer)
 	
@@ -16,7 +16,7 @@ local function _(p0) --[[ line: 20 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getOneOnOnePartyCreationEnabled = function() --[[ line: 30 ]]
+	getOneOnOnePartyCreationEnabled = function()
 		-- upvalues: enableSquadsUnifyCoplayOneOnOnePartyCreationDev (ref), enableSquadsUnifyCoplayExperimentationDev (ref), squadsUnifyCoplayOneOnOnePartyCreationVariant (ref), experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref), getFFlagIsSquadEnabled (ref)
 		local var7 = enableSquadsUnifyCoplayOneOnOnePartyCreationDev
 		
@@ -32,7 +32,7 @@ return {
 		end
 		return var7
 	end,
-	getMultiInvitePartyCreationEnabled = function() --[[ line: 39 ]]
+	getMultiInvitePartyCreationEnabled = function()
 		-- upvalues: enableSquadsUnifyCoplayMultiInvitePartyCreationDev (ref), enableSquadsUnifyCoplayExperimentationDev (ref), squadsUnifyCoplayMultiInvitePartyCreationVariant (ref), experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref), getFFlagIsSquadEnabled (ref)
 		local var10 = enableSquadsUnifyCoplayMultiInvitePartyCreationDev
 		
@@ -48,7 +48,7 @@ return {
 		end
 		return var10
 	end,
-	logExposure = function() --[[ line: 48 ]]
+	logExposure = function()
 		-- upvalues: enableSquadsUnifyCoplayExperimentationDev (ref), experimentCacheManager (ref), squadsUnifyCoplayExpLayer (ref)
 		if enableSquadsUnifyCoplayExperimentationDev and experimentCacheManager.default:getLayerVariables(squadsUnifyCoplayExpLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(squadsUnifyCoplayExpLayer)

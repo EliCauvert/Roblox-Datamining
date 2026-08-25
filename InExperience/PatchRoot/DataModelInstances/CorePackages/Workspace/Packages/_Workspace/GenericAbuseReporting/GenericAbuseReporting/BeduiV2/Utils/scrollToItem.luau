@@ -1,7 +1,7 @@
 ﻿local tweenService = game:GetService("TweenService")
 local _ = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p0, p1) --[[ line: 13 | named "scrollToItem" ]]
+return function(p0, p1)
 	-- upvalues: tweenService (ref)
 	if not p0 or not p0.current or not p1 then return end
 	local scrollingFrame = p0.current:FindFirstChildWhichIsA("ScrollingFrame", true)

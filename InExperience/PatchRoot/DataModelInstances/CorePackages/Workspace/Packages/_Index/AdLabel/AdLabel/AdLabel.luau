@@ -12,7 +12,7 @@ local whyThisAdModalModule = require(parent.WhyThisAdModal)
 local adDisclosureTelemetryModule = require(parent.AdDisclosureTelemetry)
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "AdLabel" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), enums (ref), reactModule (ref), adDisclosureTelemetryModule (ref), view (ref), menu (ref), text (ref), icon (ref), whyThisAdModalModule (ref)
 	local createElement_1
 	local var5 = useLocalization({
@@ -30,13 +30,13 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "AdLabel" ]]
 	local var7, var8 = reactModule.useState(false)
 	local var9, var10 = reactModule.useState(false)
 	
-	local function _(p1) --[[ line: 37 | named "toggleMenu" ]]
+	local function _(p1)
 		-- upvalues: adDisclosureTelemetryModule (copy), var8 (ref)
 		adDisclosureTelemetryModule.logAdDisclosureMenuToggled(p1)
 		var8(p1)
 	end
 	
-	local _ = function(p2) --[[ line: 42 | named "toggleWhyThisAdModal" ]]
+	local _ = function(p2)
 		-- upvalues: adDisclosureTelemetryModule (copy), var10 (ref)
 		adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(p2)
 		var10(p2)
@@ -53,12 +53,12 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "AdLabel" ]]
 			size = enums.InputSize.Medium,
 			align = enums.PopoverAlign.End,
 			width = UDim.new(0, 180),
-			onPressedOutside = function() --[[ line: 58 ]]
+			onPressedOutside = function()
 				-- upvalues: adDisclosureTelemetryModule (copy), var8 (ref)
 				adDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
 				var8(false)
 			end,
-			onActivated = function(p3) --[[ line: 61 ]]
+			onActivated = function(p3)
 				-- upvalues: adDisclosureTelemetryModule (copy), var8 (ref), var10 (ref), p0 (ref)
 				if p3 == "whyThisAd" then
 					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(false)
@@ -71,7 +71,7 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "AdLabel" ]]
 		}, {
 			AdLabel = reactModule.createElement(view, {
 				tag = "row align-x-center align-y-center size-1300-600 stroke-standard stroke-default radius-small bg-over-media-100",
-				onActivated = function() --[[ line: 71 ]]
+				onActivated = function()
 					-- upvalues: var7 (ref), adDisclosureTelemetryModule (copy), var8 (ref)
 					local var13 = not var7
 					adDisclosureTelemetryModule.logAdDisclosureMenuToggled(var13)
@@ -98,7 +98,7 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "AdLabel" ]]
 		createElement_1 = createElement_1(whyThisAdModalModule, {
 			adDisclosureBody = if p0.adDisclosureText == nil or p0.adDisclosureText == "" then var5.errorAdDisclosureText else p0.adDisclosureText,
 			showAdPreferencesUrl = p0.showAdPreferencesUrl,
-			onClose = function() --[[ line: 97 ]]
+			onClose = function()
 				-- upvalues: adDisclosureTelemetryModule (copy), var10 (ref)
 				adDisclosureTelemetryModule.logAdDisclosureWhyThisAdToggled(false)
 				var10(false)

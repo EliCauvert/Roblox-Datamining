@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 47 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		following_count_by_type = if p0 == nil or p0.following_count_by_type == nil then 0 else p0.following_count_by_type,
@@ -12,7 +12,7 @@ function t_1.new(p0) --[[ line: 47 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 60 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -35,7 +35,7 @@ function t_1:encode() --[[ line: 60 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 79 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var11 = t_1.new()
 	local var12 = 0
@@ -85,7 +85,7 @@ function t_1.decode(p1) --[[ line: 79 ]]
 	return var11
 end
 
-function t_1:jsonEncode() --[[ line: 127 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.following_count_by_type ~= nil and self.following_count_by_type ~= 0 then
@@ -97,7 +97,7 @@ function t_1:jsonEncode() --[[ line: 127 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 141 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var31 = t_1.new()
 	

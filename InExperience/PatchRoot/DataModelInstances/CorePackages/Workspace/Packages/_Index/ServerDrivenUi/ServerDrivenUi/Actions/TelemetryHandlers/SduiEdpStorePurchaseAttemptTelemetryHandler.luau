@@ -10,7 +10,7 @@ local t = {
 	[productKind.Product] = storeEnums.ProductType.DeveloperProducts
 }
 
-return function(p0, p1, _) --[[ line: 25 ]]
+return function(p0, p1, _)
 	-- upvalues: getActionTelemetryFieldValue (ref), t (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
 	local var2 = getActionTelemetryFieldValue(p0, p1, "kind")
 	local var3 = var2 and t[var2]

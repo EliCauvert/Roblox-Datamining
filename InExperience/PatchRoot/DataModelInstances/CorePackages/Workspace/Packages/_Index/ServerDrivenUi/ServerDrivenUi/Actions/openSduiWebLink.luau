@@ -7,15 +7,15 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiCounterName = sduiCoreSystemModule.SduiErrors.SduiCounterName
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-local function _() --[[ line: 17 | named "isWebViewSupported" ]]
+local function _()
 	-- upvalues: getAppFeaturePolicies (ref)
 	return getAppFeaturePolicies().getWebViewSupport()
 end
 
-return function(p0, p1, p2, p3) --[[ line: 24 | named "openSduiWebLink" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: urlBuilder (ref), sduiErrorType (ref), getAppFeaturePolicies (ref), fFlagSduiExperienceDetailsSupport (ref), appPage (ref), sduiCounterName (ref)
 	local var1
-	local ok, status = pcall(function() --[[ line: 27 ]]
+	local ok, status = pcall(function()
 		-- upvalues: urlBuilder (copy), p1 (ref)
 		return urlBuilder.fromString(if string.find(p1, "/") == 1 then p1:gsub("/", "www:", 1) else p1)()
 	end)
@@ -31,9 +31,9 @@ return function(p0, p1, p2, p3) --[[ line: 24 | named "openSduiWebLink" ]]
 		}, p0.appPage)
 	end
 	local linkingProtocol = p0.dependencies.linkingProtocol
-	local ok_1, status_1 = pcall(function() --[[ line: 42 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: linkingProtocol (ref), var1 (write), getAppFeaturePolicies (copy), p0 (ref), fFlagSduiExperienceDetailsSupport (copy), p2 (ref), p3 (ref), appPage (copy), sduiCounterName (copy)
-		linkingProtocol:isURLRegistered(var1):andThen(function(p4) --[[ line: 43 ]]
+		linkingProtocol:isURLRegistered(var1):andThen(function(p4)
 			-- upvalues: linkingProtocol (copy), var1 (copy), getAppFeaturePolicies (copy), p0 (copy), fFlagSduiExperienceDetailsSupport (copy), p2 (copy), p3 (copy), appPage (copy), sduiCounterName (copy)
 			if p4 then
 				linkingProtocol:detectURL(var1)
@@ -48,7 +48,7 @@ return function(p0, p1, p2, p3) --[[ line: 24 | named "openSduiWebLink" ]]
 			local var3 = if fFlagSduiExperienceDetailsSupport then { titleKey = p2 } else nil
 			
 			if fFlagSduiExperienceDetailsSupport and var3 and p3 then
-				function var3.onClose() --[[ line: 52 ]]
+				function var3.onClose()
 					-- upvalues: p3 (copy)
 					p3()
 				end

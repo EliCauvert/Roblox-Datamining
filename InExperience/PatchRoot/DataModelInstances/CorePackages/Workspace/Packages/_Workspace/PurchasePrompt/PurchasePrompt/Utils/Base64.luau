@@ -1,5 +1,5 @@
 ﻿local t = {
-	MakeEncoder = function(p0, p1, p2) --[[ line: 8 ]]
+	MakeEncoder = function(p0, p1, p2)
 		local t = {}
 		
 		for i, v in pairs({
@@ -79,7 +79,7 @@ local char = string.char
 local concat = table.concat
 local extract = bit32.extract
 
-function t.Encode(p3, p4, p5) --[[ line: 88 ]]
+function t.Encode(p3, p4, p5)
 	-- upvalues: var1 (ref), extract (ref), char (ref), concat (ref)
 	p4 = p4 or var1
 	local t = {}

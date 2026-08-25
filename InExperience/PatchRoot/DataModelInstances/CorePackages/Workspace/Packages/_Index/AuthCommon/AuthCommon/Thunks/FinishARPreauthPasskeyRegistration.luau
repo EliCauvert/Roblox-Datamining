@@ -7,17 +7,17 @@ local url = require(parent.Http).Url
 local passkeyConstantsModule = require(authCommon.Common.PasskeyConstants)
 local fFlagEmitPasskeyRegistrationSourceOnFinish = require(parent.SharedFlags).FFlagEmitPasskeyRegistrationSourceOnFinish
 
-local function _() --[[ line: 15 | named "getFinishRegistrationUrl" ]]
+local function _()
 	-- upvalues: url (ref)
 	return string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL)
 end
 
-local function finishARPreauthPasskeyRegistration(p0, p1) --[[ line: 19 ]]
+local function finishARPreauthPasskeyRegistration(p0, p1)
 	-- upvalues: url (ref), promiseModule (ref), httpService (ref), passkeyConstantsModule (ref)
-	return p0(string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL), "POST", { postBody = p1 }):andThen(function(p2) --[[ line: 20 ]]
+	return p0(string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL), "POST", { postBody = p1 }):andThen(function(p2)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(p2)
-	end, function(p3) --[[ line: 22 ]]
+	end, function(p3)
 		-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy)
 		return promiseModule.reject({
 			body = if type(p3) == "table" then httpService:JSONEncode(p3) else nil,
@@ -26,7 +26,7 @@ local function finishARPreauthPasskeyRegistration(p0, p1) --[[ line: 19 ]]
 	end)
 end
 
-return function(p4, p5, p6, p7, p8, p9, p10) --[[ line: 28 | named "attemptFinishARPreauthPasskeyRegistration" ]]
+return function(p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: httpService (ref), base64Module (ref), fFlagEmitPasskeyRegistrationSourceOnFinish (ref), finishARPreauthPasskeyRegistration (ref)
 	local var6 = httpService:JSONDecode(p8)
 	var6.id = base64Module.ToUrlSafeBase64(var6.id)

@@ -4,15 +4,15 @@ local statusCodeModule = require(script.Parent.Parent.StatusCode)
 local extreme = Enum.ThrottlingPriority.Extreme
 local applicationJson = Enum.HttpContentType.ApplicationJson
 
-local function _(p0, p1) --[[ line: 9 | named "doHttpGet" ]]
+local function _(p0, p1)
 	-- upvalues: httpRbxApiService (ref), extreme (ref)
-	return pcall(function() --[[ line: 10 ]]
+	return pcall(function()
 		-- upvalues: httpRbxApiService (copy), p0 (ref), p1 (ref), extreme (copy)
 		return httpRbxApiService:GetAsyncFullUrl(p0, p1.throttlingPriority or extreme, p1.httpRequestType or nil)
 	end)
 end
 
-local function doHttpPost(p2, p3) --[[ line: 19 ]]
+local function doHttpPost(p2, p3)
 	-- upvalues: httpService (ref), httpRbxApiService (ref), extreme (ref), applicationJson (ref)
 	local postBody = nil
 	assert(p3.postBody, "Expected a postBody to be specified with this request")
@@ -24,16 +24,16 @@ local function doHttpPost(p2, p3) --[[ line: 19 ]]
 	else
 		error("Expected postBody to be a string or table")
 	end
-	return pcall(function() --[[ line: 30 ]]
+	return pcall(function()
 		-- upvalues: httpRbxApiService (copy), p2 (ref), postBody (write), p3 (ref), extreme (copy), applicationJson (copy)
 		return httpRbxApiService:PostAsyncFullUrl(p2, postBody, p3.throttlingPriority or extreme, p3.contentType or applicationJson, p3.httpRequestType or nil)
 	end)
 end
 
-local function createResponse(p4) --[[ line: 41 ]]
+local function createResponse(p4)
 	-- upvalues: statusCodeModule (ref), httpService (ref)
 	local OK = statusCodeModule.OK
-	local ok, _ = pcall(function() --[[ line: 44 ]]
+	local ok, _ = pcall(function()
 		-- upvalues: httpService (copy), p4 (ref)
 		return httpService:JSONDecode(p4)
 	end)
@@ -44,10 +44,10 @@ local function createResponse(p4) --[[ line: 41 ]]
 	return { Body = p4, StatusCode = OK, Headers = {} }
 end
 
-return function(p5, p6, p7) --[[ line: 61 ]]
+return function(p5, p6, p7)
 	-- upvalues: httpRbxApiService (ref), extreme (ref), doHttpPost (ref), createResponse (ref)
 	return {
-		Start = function(_, p8) --[[ line: 63 ]]
+		Start = function(_, p8)
 			-- upvalues: p6 (ref), p5 (ref), p7 (ref), httpRbxApiService (copy), extreme (copy), doHttpPost (copy), createResponse (copy)
 			local var5 = nil
 			local var6 = nil
@@ -55,7 +55,7 @@ return function(p5, p6, p7) --[[ line: 61 ]]
 			if p6 == "GET" then
 				local var7 = p5
 				local var8 = p7
-				local ok, status = pcall(function() --[[ line: 10 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpRbxApiService (copy), var7 (ref), var8 (ref), extreme (copy)
 					return httpRbxApiService:GetAsyncFullUrl(var7, var8.throttlingPriority or extreme, var8.httpRequestType or nil)
 				end)
@@ -70,6 +70,6 @@ return function(p5, p6, p7) --[[ line: 61 ]]
 			end
 			p8(var5, createResponse(var6))
 		end,
-		Cancel = function() --[[ line: 77 ]] end
+		Cancel = function() end
 	}
 end

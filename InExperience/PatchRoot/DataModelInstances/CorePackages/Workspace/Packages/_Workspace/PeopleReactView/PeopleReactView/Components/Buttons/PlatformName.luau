@@ -12,26 +12,26 @@ local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 local useSignalState = signalsReactModule.useSignalState
 
-return function(p0) --[[ line: 28 | named "PlatformNameSection" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), peopleServiceModule (ref), useSignalState (ref), view (ref), constantsModule (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	local var6 = useTokens()
-	local var7 = reactModule.useMemo(function() --[[ line: 31 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleUtility")
 	end, {})
-	local var8 = reactModule.useMemo(function() --[[ line: 35 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleListStore")
 	end, {})
-	local var9 = useSignalState(reactModule.useMemo(function() --[[ line: 40 ]]
+	local var9 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: var8 (ref), p0 (ref)
 		return var8.getPlatformName(p0.UserId)
 	end, { p0.UserId }))
-	local var10 = useSignalState(reactModule.useMemo(function() --[[ line: 44 ]]
+	local var10 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: var8 (ref), p0 (ref)
 		return var8.getPlatformProfileId(p0.UserId)
 	end, { p0.UserId }))
-	local var11 = reactModule.useMemo(function() --[[ line: 52 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), var10 (ref)
 		return var7.canShowPlatformProfile(var10)
 	end, { var10 })
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 28 | named "PlatformNameSection" ]]
 		}),
 		PlatformNameButton = reactModule.createElement(button, {
 			LayoutOrder = 2,
-			onActivated = reactModule.useCallback(function() --[[ line: 57 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var7 (ref), var10 (ref)
 				var7.showPlatformProfile(var10)
 			end, { var10 }),
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 28 | named "PlatformNameSection" ]]
 			size = buttonSize.Small,
 			isDisabled = not var11,
 			Selectable = var11,
-			ref = reactModule.useCallback(function(p1) --[[ line: 63 ]]
+			ref = reactModule.useCallback(function(p1)
 				-- upvalues: var12 (ref), var11 (ref)
 				var12.current = p1
 				

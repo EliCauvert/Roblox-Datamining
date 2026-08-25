@@ -7,7 +7,7 @@ local _ = {
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 49 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	return setmetatable({
 		_status = "Disabled",
@@ -19,11 +19,11 @@ function t.new(p0) --[[ line: 49 ]]
 	}, t)
 end
 
-function t:connectEvent(p1, p2) --[[ line: 77 ]]
+function t:connectEvent(p1, p2)
 	self:_connect(p1, self._instance[p1], p2)
 end
 
-function t:connectPropertyChange(p3, p4) --[[ line: 81 ]]
+function t:connectPropertyChange(p3, p4)
 	local ok, status = pcall(self._instance.GetPropertyChangedSignal, self._instance, p3)
 	
 	if not ok then
@@ -32,7 +32,7 @@ function t:connectPropertyChange(p3, p4) --[[ line: 81 ]]
 	self:_connect("Change." .. p3, status, p4)
 end
 
-function t:_connect(p5, p6, p7) --[[ line: 99 ]]
+function t:_connect(p5, p6, p7)
 	if p7 == nil then
 		if self._connections[p5] ~= nil then
 			self._connections[p5]:Disconnect()
@@ -42,7 +42,7 @@ function t:_connect(p5, p6, p7) --[[ line: 99 ]]
 		
 		return
 	elseif self._connections[p5] == nil then
-		self._connections[p5] = p6:Connect(function(...) --[[ line: 110 ]]
+		self._connections[p5] = p6:Connect(function(...)
 			-- upvalues: self (ref), p5 (ref)
 			if self._status == "Enabled" then
 				self._listeners[p5](self._instance, ...)
@@ -56,11 +56,11 @@ function t:_connect(p5, p6, p7) --[[ line: 99 ]]
 	self._listeners[p5] = p7
 end
 
-function t:suspend() --[[ line: 130 ]]
+function t:suspend()
 	self._status = "Suspended"
 end
 
-function t:resume() --[[ line: 134 ]]
+function t:resume()
 	-- upvalues: console (ref)
 	if self._isResuming then return end
 	self._isResuming = true

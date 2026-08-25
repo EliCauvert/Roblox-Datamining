@@ -1,9 +1,9 @@
-﻿local function _(p0) --[[ line: 65 | named "isNaN" ]]
+﻿local function _(p0)
 	return p0 ~= p0
 end
 
 return {
-	estimateVelocity = function(p1) --[[ line: 74 ]]
+	estimateVelocity = function(p1)
 		local p1Count = #p1
 		
 		if p1Count < 2 then
@@ -20,7 +20,7 @@ return {
 		
 		return if var4 ~= var4 then 0 else var4
 	end,
-	planTargets = function(p2, p3, p4, p5) --[[ line: 97 ]]
+	planTargets = function(p2, p3, p4, p5)
 		local granularity = p5.granularity
 		
 		if p2 ~= p2 or granularity <= 0 or (#p5.bands == 0 or p5.maxSamples <= 0) then
@@ -29,7 +29,7 @@ return {
 		local var5 = p5.maxLeadFraction * (p4.max - p4.min)
 		local rounded = math.round((p2 + math.clamp((if p3 ~= p3 then 0 else p3) * p5.predictionLead, -var5, var5)) / granularity)
 		
-		local function _(p6) --[[ line: 111 | named "strideForDistance" ]]
+		local function _(p6)
 			-- upvalues: p5 (ref)
 			for i, v in p5.bands do
 				if p6 <= v.radius + 0.000000001 then
@@ -43,7 +43,7 @@ return {
 		local t = {}
 		local t_1 = {}
 		
-		local function consider(p7) --[[ line: 126 ]]
+		local function consider(p7)
 			-- upvalues: t (ref), p5 (ref), granularity (ref), rounded (ref), p4 (ref), t_1 (ref)
 			if p5.maxSamples <= #t then return end
 			local stride
@@ -95,7 +95,7 @@ return {
 		
 		return t
 	end,
-	diff = function(p8, p9) --[[ line: 160 ]]
+	diff = function(p8, p9)
 		local t = {}
 		local t_1 = {}
 		
@@ -117,7 +117,7 @@ return {
 		
 		return { fetch = t_1, evict = t_2 }
 	end,
-	selectFrameTime = function(p10, p11) --[[ line: 185 ]]
+	selectFrameTime = function(p10, p11)
 		local var16 = nil
 		local var17 = 1e999
 		

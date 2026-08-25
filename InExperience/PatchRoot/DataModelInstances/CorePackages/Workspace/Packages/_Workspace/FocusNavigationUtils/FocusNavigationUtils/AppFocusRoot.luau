@@ -12,7 +12,7 @@ local useDefaultAppEventHandlersModule = require(focusNavigationUtils.useDefault
 local focusNavigationDefaultEventMapModule = require(focusNavigationUtils.FocusNavigationDefaultEventMap)
 local t = {}
 
-return function(p0) --[[ line: 26 | named "AppFocusRoot" ]]
+return function(p0)
 	-- upvalues: fFlagFocusRootUseHooksModule (ref), useAppFocusRootModule (ref), reactModule (ref), baseFocusRootModule (ref), t (ref), navigationModule (ref), useDefaultAppEventHandlersModule (ref), cryoModule (ref), focusNavigationDefaultEventMapModule (ref), focusRootModule (ref)
 	if fFlagFocusRootUseHooksModule then
 		return reactModule.createElement(baseFocusRootModule, {

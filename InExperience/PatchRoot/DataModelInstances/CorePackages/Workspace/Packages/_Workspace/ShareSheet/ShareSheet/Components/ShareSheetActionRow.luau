@@ -11,7 +11,7 @@ local copyLinkModule = require(shareSheet.copyLink)
 local shareLinkModule = require(shareSheet.shareLink)
 local iconName = foundationModule.Enums.IconName
 
-return function(p0) --[[ line: 30 | named "ShareSheetActionRow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useLocalization (ref), copyLinkModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetTelemetryModule (ref), shareLinkModule (ref), shareSheetRowModule (ref), shareSheetItemContainerModule (ref), iconName (ref)
 	local var9, var10 = reactModule.useState(false)
 	local var11 = reactModule.useRef(nil)
@@ -19,20 +19,20 @@ return function(p0) --[[ line: 30 | named "ShareSheetActionRow" ]]
 		copyLink = "Feature.SocialShare.Action.CopyLink",
 		share = "Feature.SocialShare.Action.Share"
 	})
-	local var13 = reactModule.useCallback(function() --[[ line: 37 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var11 (ref)
 		var10(true)
 		
 		if var11.current then
 			task.cancel(var11.current)
 		end
-		var11.current = task.delay(2, function() --[[ line: 42 ]]
+		var11.current = task.delay(2, function()
 			-- upvalues: var11 (copy), var10 (copy)
 			var11.current = nil
 			var10(false)
 		end)
 	end, {})
-	local var14 = reactModule.useCallback(function() --[[ line: 48 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: copyLinkModule (copy), p0 (ref), var13 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
 		copyLinkModule({ context = p0.context, url = p0.url })
 		var13()
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 30 | named "ShareSheetActionRow" ]]
 			telemetryId = p0.telemetryId or ""
 		})
 	end, { p0.context, p0.telemetryId, p0.url, var13 })
-	local var15 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: shareLinkModule (copy), p0 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
 		shareLinkModule({ context = p0.context, url = p0.url })
 		
@@ -64,9 +64,9 @@ return function(p0) --[[ line: 30 | named "ShareSheetActionRow" ]]
 			})
 		end
 	end, { p0.context, p0.telemetryId, p0.url })
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref)
-		return function() --[[ line: 89 ]]
+		return function()
 			-- upvalues: var11 (copy)
 			if var11.current then
 				task.cancel(var11.current)

@@ -25,7 +25,7 @@ local t_1 = {
 }
 local t_2 = { backToTop = "Feature.GamePage.Action.BackToTop" }
 
-local function _(p0) --[[ line: 51 | named "getNativeScrollingFrameRef" ]]
+local function _(p0)
 	if p0.current ~= nil then
 		local nativeScrollRef = p0.current:getNativeScrollRef()
 		
@@ -33,7 +33,7 @@ local function _(p0) --[[ line: 51 | named "getNativeScrollingFrameRef" ]]
 	end
 end
 
-local function VirtualizedFeedBackToTopButton(p1) --[[ line: 66 ]]
+local function VirtualizedFeedBackToTopButton(p1)
 	-- upvalues: useLocalization (ref), t_2 (ref), reactModule (ref), button (ref), buttonVariant (ref)
 	return reactModule.createElement(button, {
 		text = p1.text or useLocalization(t_2).backToTop,
@@ -44,17 +44,17 @@ end
 
 local var8 = if fFlagAXSduiFeedBackToTopAndNavClearance then "row align-x-center align-y-center size-full-0 auto-y padding-xlarge" else "row align-y-center align-x-center padding-xlarge"
 
-local function VirtualizedFeedFooterLayout(p2) --[[ line: 84 ]]
+local function VirtualizedFeedFooterLayout(p2)
 	-- upvalues: reactModule (ref), view (ref), var8 (ref)
 	return reactModule.createElement(view, { tag = var8 }, p2.children)
 end
 
-local _ = function(p3) --[[ line: 137 | named "createFooterComponent" ]]
+local _ = function(p3)
 	-- upvalues: reactModule (ref), VirtualizedFeedFooterLayout (ref)
 	return if p3.shouldWrap then reactModule.createElement(VirtualizedFeedFooterLayout, {}, p3.footerContent) else p3.footerContent
 end
 
-return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "VirtualizedFeed" ]]
+return reactModule.forwardRef(function(p4, p5)
 	-- upvalues: fFlagAXVirtualizedFeedVerticalPadding (ref), fFlagVirtualizedFeedFooterWrapperProp (ref), reactModule (ref), fFlagAXSduiFeedBackToTopAndNavClearance (ref), userGameSettingsService (ref), isFeedContentScrollableModule (ref), VirtualizedFeedBackToTopButton (ref), loading (ref), iconSize (ref), view (ref), VirtualizedFeedFooterLayout (ref), flatList (ref), t (ref), t_1 (ref)
 	local var13
 	local horizontalPadding = p4.horizontalPadding or 0
@@ -67,7 +67,7 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 		var13 = true
 	end
 	local var14 = reactModule.useRef(nil)
-	local var15 = reactModule.useCallback(function(p6) --[[ line: 152 ]]
+	local var15 = reactModule.useCallback(function(p6)
 		-- upvalues: var14 (ref), p4 (ref)
 		var14.current = p6
 		local flatListRef = p4.flatListRef
@@ -96,12 +96,12 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 		local var25, var26 = reactModule.useState(0)
 		var19 = var25
 		var20 = var26
-		var21 = reactModule.useCallback(function(_, p7) --[[ line: 182 ]]
+		var21 = reactModule.useCallback(function(_, p7)
 			-- upvalues: var24 (write)
 			var24(p7)
 		end, {})
 	end
-	local var27 = reactModule.useCallback(function() --[[ line: 187 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), userGameSettingsService (copy)
 		if var14.current then
 			var14.current:scrollToOffset({
@@ -117,11 +117,11 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 			local nativeScrollRef = var14.current:getNativeScrollRef()
 			var29 = if nativeScrollRef == nil then nil else nativeScrollRef._nativeRef
 		end
-		reactModule.useEffect(function() --[[ line: 199 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var29 (ref), var17 (ref)
 			local t = {}
 			
-			local function sizeChangeHandler() --[[ line: 202 ]]
+			local function sizeChangeHandler()
 				-- upvalues: var29 (copy), var17 (copy)
 				if var29 == nil or var29.current == nil then
 					return
@@ -139,7 +139,7 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 					var17(current.AbsoluteWindowSize.Y < current.AbsoluteCanvasSize.Y)
 				end
 			end
-			return function() --[[ line: 220 ]]
+			return function()
 				-- upvalues: t (ref)
 				for i, v in t do
 					v:Disconnect()
@@ -152,7 +152,7 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 	if fFlagAXSduiFeedBackToTopAndNavClearance then
 		local var31 = if p4.ListFooterComponent then p4.ListFooterComponent elseif isFeedContentScrollableModule(var18 or 0, var19 or 0, var12) and p4.isEndOfList == true then reactModule.createElement(VirtualizedFeedBackToTopButton, { text = p4.scrollToTopLabel, onActivated = var27 }) elseif p4.isLoading then reactModule.createElement(loading, { size = iconSize.Medium }) else nil
 		local endOfListBottomPadding = p4.endOfListBottomPadding or 0
-		local var33 = reactModule.useMemo(function() --[[ line: 248 ]]
+		local var33 = reactModule.useMemo(function()
 			-- upvalues: endOfListBottomPadding (ref)
 			return if endOfListBottomPadding <= 0 then nil else { bottom = UDim.new(0, endOfListBottomPadding) }
 		end, { endOfListBottomPadding })
@@ -201,7 +201,7 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 		Size = p4.Size or UDim2.new(1, 0, 1, 0),
 		ClipsDescendants = p4.clipsDescendants ~= nil or p4.clipsDescendants,
 		LayoutOrder = p4.LayoutOrder,
-		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p8) --[[ line: 312 ]]
+		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p8)
 			-- upvalues: p4 (ref), fFlagAXSduiFeedBackToTopAndNavClearance (copy), var20 (write)
 			if p4.onContainerWidthChanged then
 				p4.onContainerWidthChanged(p8.AbsoluteSize.X)
@@ -231,7 +231,7 @@ return reactModule.forwardRef(function(p4, p5) --[[ line: 146 | named "Virtualiz
 			ref = var15,
 			contentContainerStyle = t,
 			style = t_1,
-			onScroll = reactModule.useCallback(function(p9) --[[ line: 306 ]]
+			onScroll = reactModule.useCallback(function(p9)
 				-- upvalues: p4 (ref)
 				if p4.onScroll then
 					p4.onScroll(p9.CanvasPosition.Y)

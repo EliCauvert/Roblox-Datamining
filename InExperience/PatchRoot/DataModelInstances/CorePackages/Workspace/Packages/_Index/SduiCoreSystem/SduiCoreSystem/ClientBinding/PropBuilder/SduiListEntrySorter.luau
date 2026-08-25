@@ -8,7 +8,7 @@ local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormaliz
 local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 local t = {}
 
-local function resolvePropToValue(p0, p1, p2, p3, p4, p5) --[[ line: 39 ]]
+local function resolvePropToValue(p0, p1, p2, p3, p4, p5)
 	-- upvalues: sduiClientBindingBuilderModule (ref), propResultCategory (ref)
 	if p0 == nil or p0.kind == nil then
 		return nil
@@ -23,7 +23,7 @@ local function resolvePropToValue(p0, p1, p2, p3, p4, p5) --[[ line: 39 ]]
 	return var8
 end
 
-local function _(p6, p7, p8, p9, p10, p11) --[[ line: 67 | named "resolveOrderedIdentifiers" ]]
+local function _(p6, p7, p8, p9, p10, p11)
 	-- upvalues: sduiClientBindingBuilderModule (ref), propResultCategory (ref)
 	if p6 == nil or p6.kind == nil then
 		return nil
@@ -40,7 +40,7 @@ local function _(p6, p7, p8, p9, p10, p11) --[[ line: 67 | named "resolveOrdered
 	var13 = var11
 end
 
-local function resolveItemSortRank(p12, p13, p14, p15, p16, p17) --[[ line: 99 ]]
+local function resolveItemSortRank(p12, p13, p14, p15, p16, p17)
 	-- upvalues: t (ref), buildDataBindingSourcesForTemplateModule (ref), resolvePropToValue (ref)
 	if p12 == nil or p12.kind == nil then
 		return nil
@@ -49,10 +49,10 @@ local function resolveItemSortRank(p12, p13, p14, p15, p16, p17) --[[ line: 99 ]
 	local value = kind and kind.value
 	local var17 = if typeof(p13) == "table" then p13 else t
 	local var18 = buildDataBindingSourcesForTemplateModule(var17, value and (value.shared and value.shared.data) or t)
-	local ok, status = pcall(resolvePropToValue, p12, function() --[[ line: 131 | named "sourcesGetter" ]]
+	local ok, status = pcall(resolvePropToValue, p12, function()
 		-- upvalues: var18 (ref)
 		return var18
-	end, function() --[[ line: 134 | named "itemInputGetter" ]]
+	end, function()
 		-- upvalues: var17 (ref)
 		return var17
 	end, p15, p16, p17)
@@ -60,12 +60,12 @@ local function resolveItemSortRank(p12, p13, p14, p15, p16, p17) --[[ line: 99 ]
 	return if ok then tonumber(status) else nil
 end
 
-local function compareEntryRank(p18, p19) --[[ line: 152 ]]
+local function compareEntryRank(p18, p19)
 	return if p18.rank == p19.rank then p18.originalIndex < p19.originalIndex elseif p18.rank == nil then false else p19.rank == nil or p18.rank < p19.rank
 end
 
 return {
-	applyOrder = function(p20, p21, p22, p23, p24, p25, p26) --[[ line: 182 ]]
+	applyOrder = function(p20, p21, p22, p23, p24, p25, p26)
 		-- upvalues: sduiClientBindingBuilderModule (ref), propResultCategory (ref), resolveItemSortRank (ref), compareEntryRank (ref)
 		local data
 		if p21 == nil or p21.kind == nil then

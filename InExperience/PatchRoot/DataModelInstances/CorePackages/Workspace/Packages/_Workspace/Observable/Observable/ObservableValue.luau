@@ -2,11 +2,11 @@
 local t = {}
 t.__index = t
 
-local function defaultCompareFn(p0, p1) --[[ line: 44 ]]
+local function defaultCompareFn(p0, p1)
 	return p0 == p1
 end
 
-function t.new(p2, p3) --[[ line: 48 ]]
+function t.new(p2, p3)
 	-- upvalues: defaultCompareFn (ref), signal (ref), t (ref)
 	return setmetatable({
 		_isEqual = p3 or defaultCompareFn,
@@ -15,18 +15,18 @@ function t.new(p2, p3) --[[ line: 48 ]]
 	}, t)
 end
 
-function t:get() --[[ line: 57 ]]
+function t:get()
 	return self._value
 end
 
-function t:set(p4) --[[ line: 61 ]]
+function t:set(p4)
 	if not self._isEqual(self._value, p4) then
 		self._value = p4
 		self._changeSignal:fire(p4)
 	end
 end
 
-function t:connect(p5, p6) --[[ line: 68 ]]
+function t:connect(p5, p6)
 	local changeSignalConnection = self._changeSignal:connect(p5)
 	
 	if p6 == true then
@@ -35,7 +35,7 @@ function t:connect(p5, p6) --[[ line: 68 ]]
 	return changeSignalConnection
 end
 
-function t:__tostring() --[[ line: 77 ]]
+function t:__tostring()
 	return "ObservableValue(" .. tostring(self._value) .. ")"
 end
 

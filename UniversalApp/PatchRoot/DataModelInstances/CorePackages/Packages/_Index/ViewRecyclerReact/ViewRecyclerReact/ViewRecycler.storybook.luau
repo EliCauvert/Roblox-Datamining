@@ -10,9 +10,9 @@ return {
 	name = "ViewRecycler",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0) --[[ line: 11 ]]
+	mapStory = function(p0)
 		-- upvalues: reactModule (ref)
-		return function(p1) --[[ line: 12 ]]
+		return function(p1)
 			-- upvalues: reactModule (copy), p0 (ref)
 			return reactModule.createElement(p0, p1)
 		end

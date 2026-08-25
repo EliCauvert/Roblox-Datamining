@@ -9,20 +9,20 @@ return {
 	variant = "secondary",
 	fieldLabel = "AttachScreenshot",
 	componentName = "OptionalScreenshot",
-	getIsVisible = function(p0) --[[ line: 11 ]]
+	getIsVisible = function(p0)
 		-- upvalues: tnSIXPWrapperModule (ref), constantsModule (ref)
 		return tnSIXPWrapperModule.getReportAnythingAvatarEnabled() and (if p0.methodOfAbuse ~= constantsModule.AbuseMethods.Other then p0.methodOfAbuse == constantsModule.AbuseMethods.Avatar else true)
 	end,
-	getIsDisabled = function(_, p1) --[[ line: 18 ]]
+	getIsDisabled = function(_, p1)
 		return p1.reportAnythingState.attachCompleted
 	end,
-	getIconSrc = function(p2) --[[ line: 22 ]]
+	getIconSrc = function(p2)
 		return if p2.reportAnythingState.attachCompleted then "icons/actions/accept" else "icons/controls/screenshot"
 	end,
-	getButtonLabel = function(p3) --[[ line: 27 ]]
+	getButtonLabel = function(p3)
 		return if p3.reportAnythingState.attachCompleted then "SceneCaptured" else "CaptureScene"
 	end,
-	onClick = function(_, _, p4) --[[ line: 30 ]]
+	onClick = function(_, _, p4)
 		-- upvalues: constantsModule (ref), annotationModalModule (ref)
 		p4.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.IncrementCaptureScene

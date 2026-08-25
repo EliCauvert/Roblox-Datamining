@@ -5,7 +5,7 @@ local isNillish = isNillishModule.isNillish
 local isNotNillish = isNillishModule.isNotNillish
 
 return {
-	LoneSchemaDefinitionRule = function(p0) --[[ line: 24 ]]
+	LoneSchemaDefinitionRule = function(p0)
 		-- upvalues: isNillish (ref), isNotNillish (ref), graphQLError (ref)
 		local schema = p0:getSchema()
 		local subscriptionType = nil
@@ -26,7 +26,7 @@ return {
 		local var3 = 0
 		
 		return {
-			SchemaDefinition = function(_, p1) --[[ line: 42 ]]
+			SchemaDefinition = function(_, p1)
 				-- upvalues: isNotNillish (copy), subscriptionType (write), p0 (ref), graphQLError (copy), var3 (write)
 				if isNotNillish(subscriptionType) then
 					p0:reportError(graphQLError.new("Cannot define a new schema within a schema extension.", p1))

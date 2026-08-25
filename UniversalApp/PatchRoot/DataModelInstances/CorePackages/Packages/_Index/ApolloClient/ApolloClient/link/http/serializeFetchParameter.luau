@@ -6,10 +6,10 @@ local httpService = game:GetService("HttpService")
 local t = {}
 local invariantError = require(parent.jsutils.invariant).InvariantError
 
-function t.serializeFetchParameter(p0, p1, p2) --[[ line: 27 ]]
+function t.serializeFetchParameter(p0, p1, p2)
 	-- upvalues: array (ref), httpService (ref), invariantError (ref), error (ref)
 	local var3 = nil
-	local ok, status = pcall(function() --[[ line: 29 ]]
+	local ok, status = pcall(function()
 		-- upvalues: array (copy), p0 (ref), p2 (ref), var3 (write), httpService (copy)
 		if array.isArray(p0) and #p0 == 0 and p2 then
 			var3 = "{}"

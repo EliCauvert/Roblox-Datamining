@@ -5,7 +5,7 @@ local signalsModule = require(parent.Signals)
 local signalsExperimentalModule = require(parent.SignalsExperimental)
 local useStableSignalModule = require(chatUIPrimitives.Hooks.useStableSignal)
 
-return function(p0) --[[ line: 66 | named "useMessagePool" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useStableSignalModule (ref), signalsExperimentalModule (ref), signalsModule (ref)
 	local var5 = reactModule.useRef({})
 	local var6 = reactModule.useRef({})
@@ -15,7 +15,7 @@ return function(p0) --[[ line: 66 | named "useMessagePool" ]]
 	var9.current = p0.createSlotElement
 	local var10, var11 = useStableSignalModule({})
 	
-	local function publishChildrenFromCache() --[[ line: 86 ]]
+	local function publishChildrenFromCache()
 		-- upvalues: var5 (ref), var6 (ref), var11 (ref)
 		local t = {}
 		
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 66 | named "useMessagePool" ]]
 		var11(t)
 	end
 	
-	local function rebuildElementsFromFactory() --[[ line: 103 ]]
+	local function rebuildElementsFromFactory()
 		-- upvalues: var9 (ref), var5 (ref), var6 (ref), publishChildrenFromCache (ref)
 		local current = var9.current
 		
@@ -47,9 +47,9 @@ return function(p0) --[[ line: 66 | named "useMessagePool" ]]
 		publishChildrenFromCache()
 	end
 	
-	local function _(p1) --[[ line: 137 | named "reconcile" ]]
+	local function _(p1)
 		-- upvalues: signalsExperimentalModule (copy), var5 (ref), var6 (ref), maxSlots (ref), var7 (ref), signalsModule (copy), var9 (ref), publishChildrenFromCache (ref)
-		signalsExperimentalModule.batch(function() --[[ line: 138 ]]
+		signalsExperimentalModule.batch(function()
 			-- upvalues: var5 (copy), var6 (copy), p1 (ref), maxSlots (copy), var7 (copy), signalsModule (copy), var9 (copy), publishChildrenFromCache (copy)
 			local current = var5.current
 			local current_1 = var6.current
@@ -126,7 +126,7 @@ return function(p0) --[[ line: 66 | named "useMessagePool" ]]
 	if not var14.current then
 		var14.current = true
 		local var15 = p0.messageIdsSignal()
-		signalsExperimentalModule.batch(function() --[[ line: 138 ]]
+		signalsExperimentalModule.batch(function()
 			-- upvalues: var5 (ref), var6 (ref), var15 (ref), maxSlots (ref), var7 (ref), signalsModule (copy), var9 (ref), publishChildrenFromCache (ref)
 			local current = var5.current
 			local current_1 = var6.current
@@ -199,12 +199,12 @@ return function(p0) --[[ line: 66 | named "useMessagePool" ]]
 			end
 		end)
 	end
-	reactModule.useEffect(function() --[[ line: 234 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), p0 (ref), signalsExperimentalModule (copy), var5 (ref), var6 (ref), maxSlots (ref), var7 (ref), var9 (ref), publishChildrenFromCache (ref)
-		return signalsModule.createEffect(function(p2) --[[ line: 235 ]]
+		return signalsModule.createEffect(function(p2)
 			-- upvalues: p0 (copy), signalsExperimentalModule (copy), var5 (copy), var6 (copy), maxSlots (copy), var7 (copy), signalsModule (copy), var9 (copy), publishChildrenFromCache (copy)
 			local var32 = p0.messageIdsSignal(p2)
-			signalsExperimentalModule.batch(function() --[[ line: 138 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: var5 (copy), var6 (copy), var32 (ref), maxSlots (copy), var7 (copy), signalsModule (copy), var9 (copy), publishChildrenFromCache (copy)
 				local current = var5.current
 				local current_1 = var6.current
@@ -281,7 +281,7 @@ return function(p0) --[[ line: 66 | named "useMessagePool" ]]
 		end)
 	end, { p0.messageIdsSignal, var11, maxSlots })
 	local var16 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 248 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), rebuildElementsFromFactory (ref)
 		if var16.current then
 			rebuildElementsFromFactory()

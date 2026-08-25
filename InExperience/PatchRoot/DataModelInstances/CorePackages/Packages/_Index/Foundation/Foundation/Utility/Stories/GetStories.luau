@@ -14,15 +14,15 @@ local t_1 = {}
 for i_1 in unknownModule.Utility do
 	t_1[i_1] = true
 end
-local function _(p0) --[[ line: 40 | named "isFoundationExport" ]]
+local function _(p0)
 	-- upvalues: unknownModule (ref)
-	return pcall(function() --[[ line: 41 ]]
+	return pcall(function()
 		-- upvalues: unknownModule (copy), p0 (ref)
 		return unknownModule[p0]
 	end)
 end
 
-local _ = function(p1, p2) --[[ line: 46 | named "topChild" ]]
+local _ = function(p1, p2)
 	local var8 = p1
 	while var8.Parent and var8.Parent ~= p2 do
 		var8 = var8.Parent
@@ -30,19 +30,19 @@ local _ = function(p1, p2) --[[ line: 46 | named "topChild" ]]
 	return var8
 end
 
-local _ = function(p3) --[[ line: 54 | named "isDeprecatedStory" ]]
+local _ = function(p3)
 	local ok, status = pcall(require, p3)
 	
 	return ok and (typeof(status) == "table" and status.deprecated == true)
 end
 
-local _ = function(p4) --[[ line: 59 | named "isEngineeringOnlyStory" ]]
+local _ = function(p4)
 	local ok, status = pcall(require, p4)
 	
 	return ok and (typeof(status) == "table" and status.engineeringOnly == true)
 end
 
-local function getStoryScope(p5) --[[ line: 64 ]]
+local function getStoryScope(p5)
 	-- upvalues: planned (ref), elements (ref), flags (ref), t (ref), t_1 (ref), components (ref), unknownModule (ref)
 	if planned and p5:IsDescendantOf(planned) then
 		return "planned"
@@ -72,14 +72,14 @@ local function getStoryScope(p5) --[[ line: 64 ]]
 		end
 		local name = var10.Name
 		
-		return if pcall(function() --[[ line: 41 ]]
+		return if pcall(function()
 			-- upvalues: unknownModule (copy), name (ref)
 			return unknownModule[name]
 		end) then "components" else "internal"
 	end
 end
 
-local _ = function(p6, p7) --[[ line: 98 | named "isNested" ]]
+local _ = function(p6, p7)
 	local parent = p6.Parent
 	while parent do
 		if not p7[parent] then
@@ -91,7 +91,7 @@ local _ = function(p6, p7) --[[ line: 98 | named "isNested" ]]
 	return false
 end
 
-return function(p8) --[[ line: 109 | named "GetStories" ]]
+return function(p8)
 	-- upvalues: foundation (ref), getStoryScope (ref)
 	local t = {}
 	

@@ -46,7 +46,7 @@ local badgeTypeModule = require(parent.Enums.BadgeType)
 local _ = require(parent.Enums.VirtualItemBadgeType)
 local _ = require(parent.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
 
-local function UpsellProductDetailsLegacyImpl(p0, p1) --[[ line: 95 ]]
+local function UpsellProductDetailsLegacyImpl(p0, p1)
 	-- upvalues: badgeTypeModule (ref), reactModule (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), yellowBadgeModule (ref)
 	local var27 = if p0.badgeType == badgeTypeModule.Popular then p1.Popular elseif p0.badgeType == badgeTypeModule.LastPurchased then p1.LastPurchased else nil
 	local var28 = "size-full-1400 radius-medium padding-x-large row"
@@ -93,7 +93,7 @@ local function UpsellProductDetailsLegacyImpl(p0, p1) --[[ line: 95 ]]
 	})
 end
 
-local function UpsellProductDetailsMultiDisplayImpl(p2, p3) --[[ line: 168 ]]
+local function UpsellProductDetailsMultiDisplayImpl(p2, p3)
 	-- upvalues: getFFlagIAPExperienceUseUpsellBadgeHelperModule (ref), getUpsellBadgeInfoModule (ref), badgeTypeModule (ref), enums (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), formatNumberModule (ref), localizationService (ref), grayBadgeModule (ref)
 	local text_1, icon
 	local _ = nil
@@ -148,7 +148,7 @@ local function UpsellProductDetailsMultiDisplayImpl(p2, p3) --[[ line: 168 ]]
 	})
 end
 
-local function UpsellProductDetails(p4) --[[ line: 259 ]]
+local function UpsellProductDetails(p4)
 	-- upvalues: useLocalization (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), UpsellProductDetailsMultiDisplayImpl (ref), UpsellProductDetailsLegacyImpl (ref)
 	local var31 = useLocalization({
 		Popular = "IAPExperience.RobuxUpsell.Text.PopularItem",
@@ -161,7 +161,7 @@ local function UpsellProductDetails(p4) --[[ line: 259 ]]
 	return if getFFlagIAPExperienceEnableMultiDisplayUpsellModule() then UpsellProductDetailsMultiDisplayImpl(p4, var31) else UpsellProductDetailsLegacyImpl(p4, var31)
 end
 
-local function UnifiedRobuxUpsellModalV2(_) --[[ line: 308 ]]
+local function UnifiedRobuxUpsellModalV2(_)
 	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useLocalization (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), fFlagAXMISWithBlackbird (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalTypeEnumModule (ref), compactUpsellModalBreakpoint (ref), fFlagShouldFixDevSubsFlashingTitleModule (ref), useFocusNavigationRefsModule (ref), buildCartPricingOfferCheckboxesModule (ref), checkbox (ref), view (ref), fFlagShouldApplyDevSubsUpsellFixModule (ref), image (ref), text (ref), fFlagAXFixMISUpsellDiscountSummary (ref), productDetailsContainerModule (ref), dialog (ref), dialogSize (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), cartPricingLoadingModule (ref), getFFlagIAPExperienceEnableMultiDisplayUpsellModule (ref), UpsellProductDetails (ref), orientation (ref), buttonVariant (ref)
 -- FATAL: Failed to generate AST for `UnifiedRobuxUpsellModalV2` function:
 runtime : [KeyError] :11990: 162
@@ -171,7 +171,7 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-return function(p5) --[[ line: 749 | named "UnifiedRobuxUpsellModalV2Container" ]]
+return function(p5)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedRobuxUpsellModalV2 (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

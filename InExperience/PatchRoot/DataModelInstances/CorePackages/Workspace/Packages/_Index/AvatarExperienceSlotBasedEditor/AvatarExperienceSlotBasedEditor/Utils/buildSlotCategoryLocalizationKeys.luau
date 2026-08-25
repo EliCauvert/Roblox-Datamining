@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(p0) --[[ line: 8 | named "buildSlotCategoryLocalizationKeys" ]]
+return function(p0)
 	local t = {}
 	
 	for i, v in p0 do

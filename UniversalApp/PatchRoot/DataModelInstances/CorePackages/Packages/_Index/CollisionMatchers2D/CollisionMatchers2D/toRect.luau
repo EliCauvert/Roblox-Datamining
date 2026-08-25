@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 11 | named "toRect" ]]
+﻿return function(p0)
 	local var0 = typeof(p0)
 	
 	if var0 == "Rect" then

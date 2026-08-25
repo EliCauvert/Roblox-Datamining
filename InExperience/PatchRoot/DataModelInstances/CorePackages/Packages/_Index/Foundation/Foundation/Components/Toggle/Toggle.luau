@@ -30,7 +30,7 @@ local t_1 = {
 }
 local t_2 = { colorNamespace = colorNamespaceModule.Color }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 70 | named "Toggle" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t_1 (ref), withDefaultsModule (ref), useTokensModule (ref), useToggleVariantsModule (ref), useUncontrolledStateModule (ref), inputSizeModule (ref), reactModule (ref), otterModule (ref), t (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), presentationContextModule (ref), t_2 (ref), knobModule (ref), builderIconsModule (ref)
 	local var21 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p0, t_1) else withDefaultsModule(p0, t_1)
 	local var22 = useToggleVariantsModule(useTokensModule(), var21.size)
@@ -39,26 +39,26 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 70 | 
 	local var26 = if var23 then 1 else 0
 	local var27, var28 = reactModule.useBinding(var26)
 	local var29 = reactModule.useRef(nil)
-	local var30 = var27:map(function(p2) --[[ line: 85 ]]
+	local var30 = var27:map(function(p2)
 		-- upvalues: var22 (ref)
 		return var22.knob.offPosition:Lerp(var22.knob.onPosition, p2)
 	end)
-	reactModule.useEffect(function() --[[ line: 89 ]]
+	reactModule.useEffect(function()
 		-- upvalues: otterModule (copy), var26 (ref), var29 (ref), var28 (ref)
 		local var31 = otterModule.createSingleMotor(var26)
 		var29.current = var31
 		var31:start()
-		var31:onStep(function(p3) --[[ line: 94 ]]
+		var31:onStep(function(p3)
 			-- upvalues: var28 (copy)
 			var28(p3)
 		end)
 		
-		return function() --[[ line: 98 ]]
+		return function()
 			-- upvalues: var31 (ref)
 			var31:destroy()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var23 (ref), var29 (ref), otterModule (copy), t (copy)
 		local var32 = if var23 then 1 else 0
 		

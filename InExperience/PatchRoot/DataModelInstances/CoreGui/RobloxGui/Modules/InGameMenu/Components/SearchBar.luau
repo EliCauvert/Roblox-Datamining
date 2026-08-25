@@ -31,11 +31,11 @@ searchBar.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function searchBar.init(p0) --[[ line: 52 ]]
+function searchBar.init(p0)
 	-- upvalues: roact (ref)
 	p0.textboxRef = roact.createRef()
 	
-	function p0.onAbsoluteSizeChanged(p1) --[[ line: 55 ]]
+	function p0.onAbsoluteSizeChanged(p1)
 		-- upvalues: p0 (ref)
 		local var6 = false
 		
@@ -52,35 +52,35 @@ function searchBar.init(p0) --[[ line: 52 ]]
 		end
 	end
 	
-	function p0.searchTextChanged(p2) --[[ line: 76 ]]
+	function p0.searchTextChanged(p2)
 		-- upvalues: p0 (ref)
 		if p0.props.onTextChanged then
 			p0.props.onTextChanged(p2.Text)
 		end
 	end
 	
-	function p0.searchBoxFocused(_) --[[ line: 82 ]]
+	function p0.searchBoxFocused(_)
 		-- upvalues: p0 (ref)
 		if p0.props.onFocused then
 			p0.props.onFocused()
 		end
 	end
 	
-	function p0.searchCancel() --[[ line: 88 ]]
+	function p0.searchCancel()
 		-- upvalues: p0 (ref)
 		if p0.props.onCancelled then
 			p0.props.onCancelled()
 		end
 	end
 	
-	function p0.onFocusLost() --[[ line: 94 ]]
+	function p0.onFocusLost()
 		-- upvalues: p0 (ref)
 		if p0.props.onFocusLost then
 			p0.props.onFocusLost()
 		end
 	end
 	
-	function p0.onTextboxTouchTap() --[[ line: 100 ]]
+	function p0.onTextboxTouchTap()
 		-- upvalues: p0 (ref)
 		if p0.props.onTextboxTouchTap then
 			p0.props.onTextboxTouchTap()
@@ -88,27 +88,27 @@ function searchBar.init(p0) --[[ line: 52 ]]
 	end
 end
 
-function searchBar.willUpdate(p3, p4) --[[ line: 107 ]]
+function searchBar.willUpdate(p3, p4)
 	if p3.props.autoCaptureFocus and p3.props.visible == false and p4.visible then
 		p3:focus()
 	end
 end
 
-function searchBar.didMount(p5) --[[ line: 113 ]]
+function searchBar.didMount(p5)
 	if p5.props.autoCaptureFocus and p5.props.visible then
 		p5:focus()
 	end
 end
 
-function searchBar.focus(p6) --[[ line: 119 ]]
+function searchBar.focus(p6)
 	if p6.textboxRef then
 		p6.textboxRef.current:CaptureFocus()
 	end
 end
 
-function searchBar.render(p7) --[[ line: 125 ]]
+function searchBar.render(p7)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), roact (ref), userInputService (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), icon (ref), iconSize (ref), imageSetLabel (ref), images (ref)
-	return withFoundationOrUIBloxStyle(function(p8) --[[ line: 126 ]]
+	return withFoundationOrUIBloxStyle(function(p8)
 		return {
 			Theme = {
 				TextEmphasis = {
@@ -128,12 +128,12 @@ function searchBar.render(p7) --[[ line: 125 ]]
 				}
 			}
 		}
-	end, function(p9) --[[ line: 137 ]]
+	end, function(p9)
 		-- upvalues: withLocalizationModule (copy), p7 (ref), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
 		return withLocalizationModule({
 			search = "CoreScripts.InGameMenu.InviteFriends.Search",
 			cancel = "CoreScripts.InGameMenu.Cancel"
-		})(function(p10) --[[ line: 141 ]]
+		})(function(p10)
 			-- upvalues: p9 (ref), p7 (copy), roact (copy), userInputService (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconSize (copy), imageSetLabel (copy), images (copy)
 			local body = p9.Font.Body
 			local body_1 = p9.Font.Body
@@ -225,7 +225,7 @@ function searchBar.render(p7) --[[ line: 125 ]]
 	end)
 end
 
-return roact.forwardRef(function(p11, p12) --[[ line: 259 ]]
+return roact.forwardRef(function(p11, p12)
 	-- upvalues: roact (ref), searchBar (ref), cryo (ref)
 	return roact.createElement(searchBar, cryo.Dictionary.join(p11, { forwardRef = p12 }))
 end)

@@ -27,7 +27,7 @@ local transferRobuxHeaderModule = require(currencyTransfers.Components.Generic.T
 local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ line: 43 | named "InsufficientBalanceSheet" ]]
+return function(_)
 	-- upvalues: useTransferStoreModule (ref), useTokens (ref), useLocalization (ref), transferLocalizationKeysModule (ref), signalsReactModule (ref), reactModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), purchaseRobuxConstantsModule (ref), webViewServiceWrapperModule (ref), transferOriginationModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), getBalanceAfterPurchaseWebviewModule (ref), sheet (ref), useScaledValue (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var16 = useTransferStoreModule()
 	local var17 = useTokens()
@@ -39,7 +39,7 @@ return function(_) --[[ line: 43 | named "InsufficientBalanceSheet" ]]
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		snapPoints = { useScaledValue(300), 0.5 },
-		onClose = function() --[[ line: 93 ]]
+		onClose = function()
 			-- upvalues: var16 (ref), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
 			if var16.getTransferOrigination(false) == transferOriginationModule.InExperience then
 				var16.triggerOnClose()
@@ -72,7 +72,7 @@ return function(_) --[[ line: 43 | named "InsufficientBalanceSheet" ]]
 				ErrorMessage = reactModule.createElement(text, {
 					tag = "text-body-large content-emphasis text-align-x-center auto-y text-wrap",
 					LayoutOrder = 2,
-					Text = reactModule.useMemo(function() --[[ line: 52 ]]
+					Text = reactModule.useMemo(function()
 						-- upvalues: transferLocaleFormatModule (copy), var18 (ref), var21 (ref)
 						return transferLocaleFormatModule.substituteAmount(var18.InsufficientBalance or "", tostring(var21))
 					end, { var21, var18.InsufficientBalance }),
@@ -87,15 +87,15 @@ return function(_) --[[ line: 43 | named "InsufficientBalanceSheet" ]]
 				reactModule.createElement(view, { tag = "row auto-y size-full-0 gap-small" }, {
 					reactModule.createElement(button, {
 						text = var18.BuyRobux or "Buy",
-						onActivated = function() --[[ line: 56 ]]
+						onActivated = function()
 							-- upvalues: var16 (ref), purchaseRobuxConstantsModule (copy), webViewServiceWrapperModule (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy), var20 (ref), getBalanceAfterPurchaseWebviewModule (copy)
 							local transferOrigination = var16.getTransferOrigination(false)
 							webViewServiceWrapperModule.new({
 								url = purchaseRobuxConstantsModule.getPurchaseRobuxUrl(),
 								title = purchaseRobuxConstantsModule.PURCHASE_ROBUX_WEBVIEW_TITLE,
-								closeCallback = function() --[[ line: 63 ]]
+								closeCallback = function()
 									-- upvalues: transferOrigination (ref), transferOriginationModule (copy), setTransferPromptStateModule (copy), var16 (copy), promptStateModule (copy), var20 (copy), getBalanceAfterPurchaseWebviewModule (copy)
-									local function _() --[[ line: 64 | named "applyPromptAfterBalance" ]]
+									local function _()
 										-- upvalues: transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), var16 (copy), promptStateModule (copy)
 										if transferOrigination == transferOriginationModule.InExperience then
 											setTransferPromptStateModule(var16, promptStateModule.TransferConfirm)
@@ -107,7 +107,7 @@ return function(_) --[[ line: 43 | named "InsufficientBalanceSheet" ]]
 									
 									var20.current += 1
 									local current = var20.current
-									getBalanceAfterPurchaseWebviewModule(nil, var16.getNetworkImpl()):andThen(function(p0) --[[ line: 74 ]]
+									getBalanceAfterPurchaseWebviewModule(nil, var16.getNetworkImpl()):andThen(function(p0)
 										-- upvalues: var20 (copy), current (ref), var16 (copy), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
 										if var20.current ~= current then return end
 										var16.setRobuxBalanceAmount(p0)
@@ -119,7 +119,7 @@ return function(_) --[[ line: 43 | named "InsufficientBalanceSheet" ]]
 											return
 										end
 										setTransferPromptStateModule(var16, promptStateModule.TransferInput)
-									end):catch(function(_) --[[ line: 82 ]]
+									end):catch(function(_)
 										-- upvalues: var20 (copy), current (ref), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), var16 (copy), promptStateModule (copy)
 										if var20.current ~= current then return end
 										if transferOrigination == transferOriginationModule.InExperience then

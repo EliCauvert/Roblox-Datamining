@@ -17,12 +17,12 @@ local fFlagUserProfilesLogErrorCodesModule = require(userProfiles.Flags.FFlagUse
 local userProfileDefaultRetryCount = game:DefineFastInt("UserProfileDefaultRetryCount", 2)
 local userProfilesFilterInvalidUserIds = game:DefineFastFlag("UserProfilesFilterInvalidUserIds", false)
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: userProfilesFilterInvalidUserIds (ref), reactModule (ref), cryoModule (ref), useQuery (ref), userProfilesEnableRetries (ref), useApolloAutoRetry (ref), userProfileDefaultRetryCount (ref), fFlagUserProfilesLogCancelledRequestsModule (ref), setupFireDiagModule (ref), userProfilesAnalyticsModule (ref), useEffectOnMount (ref), eventNamesModule (ref), useEffectOnce (ref), fFlagUserProfilesLogErrorCodesModule (ref), getDeepValue (ref)
 	local var13
-	local var12 = if userProfilesFilterInvalidUserIds then reactModule.useMemo(function() --[[ line: 37 ]]
+	local var12 = if userProfilesFilterInvalidUserIds then reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), p0 (ref)
-		return cryoModule.List.filter(p0.userIds, function(p1) --[[ line: 38 ]]
+		return cryoModule.List.filter(p0.userIds, function(p1)
 			return tonumber(p1) ~= nil
 		end)
 	end, { p0.userIds }) else nil
@@ -48,19 +48,19 @@ return function(p0) --[[ line: 29 ]]
 	if fFlagUserProfilesLogCancelledRequestsModule then
 		var16.current = var15.loading or var15.isRetrying
 	end
-	local var17 = reactModule.useMemo(function() --[[ line: 68 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: setupFireDiagModule (copy), userProfilesAnalyticsModule (copy)
 		return setupFireDiagModule({ analytics = { Diag = userProfilesAnalyticsModule.Diag } })
 	end, {})
 	local var18 = reactModule.useRef(DateTime.now())
-	useEffectOnMount(function() --[[ line: 78 ]]
+	useEffectOnMount(function()
 		-- upvalues: var18 (ref), var17 (ref), eventNamesModule (copy)
 		var18.current = DateTime.now()
 		var17(eventNamesModule.UserProfilesRequestBegin)
 	end)
 	
 	if userProfilesEnableRetries then
-		useEffectOnce(function() --[[ line: 84 ]]
+		useEffectOnce(function()
 			-- upvalues: var18 (ref), var17 (ref), eventNamesModule (copy), userProfilesAnalyticsModule (copy), fFlagUserProfilesLogErrorCodesModule (copy), getDeepValue (copy), var15 (write)
 			local _ = nil
 			
@@ -80,7 +80,7 @@ return function(p0) --[[ line: 29 ]]
 				end
 			end
 		end, var15.error)
-		useEffectOnce(function() --[[ line: 105 ]]
+		useEffectOnce(function()
 			-- upvalues: var18 (ref), var15 (write), var17 (ref), eventNamesModule (copy), userProfilesAnalyticsModule (copy), fFlagUserProfilesLogErrorCodesModule (copy), getDeepValue (copy)
 			local _ = nil
 			
@@ -114,9 +114,9 @@ return function(p0) --[[ line: 29 ]]
 		end, if fFlagUserProfilesLogCancelledRequestsModule then not var16.current else var15.loading == false and var15.isRetrying == false)
 	end
 	if fFlagUserProfilesLogCancelledRequestsModule then
-		reactModule.useEffect(function() --[[ line: 148 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var16 (ref), var17 (ref), eventNamesModule (copy)
-			return function() --[[ line: 149 ]]
+			return function()
 				-- upvalues: var16 (copy), var17 (copy), eventNamesModule (copy)
 				if var16.current then
 					var17(eventNamesModule.UserProfilesUnmountEarly)

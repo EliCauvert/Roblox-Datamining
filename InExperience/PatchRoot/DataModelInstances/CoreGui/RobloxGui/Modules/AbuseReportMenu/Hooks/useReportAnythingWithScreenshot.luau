@@ -6,7 +6,7 @@ local useCaptureScreenshotModule = require(abuseReportMenu.Hooks.useCaptureScree
 local reportAnythingReducerModule = require(abuseReportMenu.Reducers.reportAnythingReducer)
 local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
 
-return function(p0, p1, p2, p3) --[[ line: 12 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: tnSIXPWrapperModule (ref), reactModule (ref), reportAnythingReducerModule (ref), constantsModule (ref), useCaptureScreenshotModule (ref), useHideForScreenshotModule (ref)
 	local var11
 	local reportAnythingAvatarEnabled = tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
@@ -16,25 +16,25 @@ return function(p0, p1, p2, p3) --[[ line: 12 ]]
 	if not reportAnythingAvatarEnabled then
 		var11 = reportAnythingExperienceEnabled and var9.screenshotContentId == ""
 	end
-	useHideForScreenshotModule(var11, p0, p1, p2, useCaptureScreenshotModule(reactModule.useCallback(function(p4) --[[ line: 25 ]]
+	useHideForScreenshotModule(var11, p0, p1, p2, useCaptureScreenshotModule(reactModule.useCallback(function(p4)
 		-- upvalues: var10 (ref), constantsModule (copy)
 		var10({
 			type = constantsModule.ReportAnythingActions.SetScreenshotContentId,
 			screenshotContentId = p4
 		})
-	end), reactModule.useCallback(function(p5) --[[ line: 31 ]]
+	end), reactModule.useCallback(function(p5)
 		-- upvalues: var10 (ref), constantsModule (copy)
 		var10({
 			type = constantsModule.ReportAnythingActions.SetScreenshotId,
 			screenshotId = p5
 		})
-	end), reactModule.useCallback(function(p6) --[[ line: 37 ]]
+	end), reactModule.useCallback(function(p6)
 		-- upvalues: var10 (ref), constantsModule (copy)
 		var10({
 			type = constantsModule.ReportAnythingActions.SetIdentificationResults,
 			identificationResults = p6
 		})
-	end)), function() --[[ line: 44 ]]
+	end)), function()
 		-- upvalues: p3 (ref), var9 (ref), var10 (ref)
 		p3(var9, var10)
 	end)

@@ -1,7 +1,7 @@
 ﻿local useNavigation = require(script:FindFirstAncestor("RobloxAppNavigation").Parent.Navigation).useNavigation
 local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 8 | named "useNavigationProps" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref)
 	local var0 = useNavigation()
 	

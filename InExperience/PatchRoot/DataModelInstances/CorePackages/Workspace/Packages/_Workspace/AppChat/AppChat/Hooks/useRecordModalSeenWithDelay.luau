@@ -11,12 +11,12 @@ local loggerModule = require(appChat.Logger)
 local useRecordModalSequenceResponseForConversationModule = require(appChat.Hooks.useRecordModalSequenceResponseForConversation)
 local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
 
-return function(p0) --[[ line: 26 | named "useRecordModalSeenWithDelay" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), useRecordModalSequenceResponseForConversationModule (ref), fFlagAppChatEnableDoubleOptIn (ref), appChatNetworkingModule (ref), statusCodes (ref), loggerModule (ref), setTimeout (ref), clearTimeout (ref)
 	local var6 = useDispatch()
 	local var7, var8 = reactModule.useState(false)
 	local var9 = useRecordModalSequenceResponseForConversationModule(p0.conversationId)
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref)
 		var8(false)
 	end, {
@@ -30,22 +30,22 @@ return function(p0) --[[ line: 26 | named "useRecordModalSeenWithDelay" ]]
 	if fFlagAppChatEnableDoubleOptIn then
 		modalId = p0.canRecordAction and (not var7 and (p0.actionToRecord and (p0.modalSequence and (p0.modalId or p0.modalVariant))))
 	end
-	local var11 = reactModule.useCallback(function() --[[ line: 56 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var9 (ref), var6 (ref), appChatNetworkingModule (copy), statusCodes (copy), var8 (ref), loggerModule (copy)
 		local actionToRecord = p0.actionToRecord;
-		(if p0.conversationId then var9(actionToRecord, p0.modalSequence, p0.modalId, p0.modalVariant) else var6(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(actionToRecord, p0.modalSequence, p0.modalId))):andThen(function(p2) --[[ line: 74 ]]
+		(if p0.conversationId then var9(actionToRecord, p0.modalSequence, p0.modalId, p0.modalVariant) else var6(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(actionToRecord, p0.modalSequence, p0.modalId))):andThen(function(p2)
 			-- upvalues: statusCodes (copy), var8 (copy)
 			if p2 and p2.responseCode == statusCodes.OK then
 				var8(true)
 			end
-		end):catch(function(p1) --[[ line: 79 ]]
+		end):catch(function(p1)
 			-- upvalues: loggerModule (copy), p0 (copy)
 			loggerModule:warning(`Error in {p0.modalSequence} {p0.modalId} -> RecordModalSequenceResponse seen: {tostring(p1)}`)
 		end)
 	end, {
 		var6, p0.actionToRecord, p0.modalId, p0.modalSequence, p0.conversationId, var9
 	})
-	reactModule.useEffect(function() --[[ line: 97 ]]
+	reactModule.useEffect(function()
 		-- upvalues: modalId (write), p0 (ref), setTimeout (copy), var11 (ref), clearTimeout (copy)
 		local var12 = nil
 		
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 26 | named "useRecordModalSeenWithDelay" ]]
 				var11()
 			end
 		end
-		return function() --[[ line: 106 ]]
+		return function()
 			-- upvalues: var12 (write), clearTimeout (copy)
 			if var12 then
 				clearTimeout(var12)

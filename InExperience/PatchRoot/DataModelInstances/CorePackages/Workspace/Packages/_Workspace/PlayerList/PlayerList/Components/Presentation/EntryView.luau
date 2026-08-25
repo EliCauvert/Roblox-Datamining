@@ -13,7 +13,7 @@ local TEAM_LAYOUT_MULTIPLIER = require(parent.Common.Constants).TEAM_LAYOUT_MULT
 local var7 = signalsModule.createSignal({})
 local t = { Selectable = true }
 
-local function buildEntryViewElement(p0, p1, p2, p3, p4, p5) --[[ line: 45 ]]
+local function buildEntryViewElement(p0, p1, p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), peopleCellModule (ref), resolveDisplayNameModule (ref), statCellModule (ref), leaderboardRowShellModule (ref)
 	local rowHeight = p0.rowHeight
 	local t = {
@@ -45,10 +45,10 @@ local function buildEntryViewElement(p0, p1, p2, p3, p4, p5) --[[ line: 45 ]]
 	}, t)
 end
 
-local function useEntryViewCore(p6) --[[ line: 88 ]]
+local function useEntryViewCore(p6)
 	-- upvalues: reactModule (ref), signalsReactModule (ref), var7 (ref), signalsModule (ref), TEAM_LAYOUT_MULTIPLIER (ref)
 	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: p6 (ref), var12 (ref)
 		if p6.onActivated then
 			p6.onActivated(p6.player, if var12.current then var12.current.AbsolutePosition else nil)
@@ -57,21 +57,21 @@ local function useEntryViewCore(p6) --[[ line: 88 ]]
 	local playerEntry = p6.leaderboardStore.getPlayerEntry(p6.player, false)
 	signalsReactModule.useSignalState(if playerEntry then playerEntry.stats.getAllData else var7)
 	
-	return var12, playerEntry, signalsReactModule.useSignalBinding(reactModule.useMemo(function() --[[ line: 105 ]]
+	return var12, playerEntry, signalsReactModule.useSignalBinding(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), playerEntry (ref), p6 (ref), TEAM_LAYOUT_MULTIPLIER (copy)
-		return signalsModule.createComputed(function(p7) --[[ line: 106 ]]
+		return signalsModule.createComputed(function(p7)
 			-- upvalues: playerEntry (copy), p6 (copy), TEAM_LAYOUT_MULTIPLIER (copy)
 			return if playerEntry and p6.teamOrder ~= nil then p6.teamOrder * TEAM_LAYOUT_MULTIPLIER + playerEntry.order(p7) else p6.layoutOrder or 0
 		end)
 	end, { playerEntry, p6.teamOrder, p6.layoutOrder })), var13
 end
 
-return reactModule.memo(function(p8) --[[ line: 120 | named "EntryView" ]]
+return reactModule.memo(function(p8)
 	-- upvalues: useEntryViewCore (ref), reactModule (ref), buildEntryViewElement (ref), t (ref)
 	local var15, var16, var17, var18 = useEntryViewCore(p8)
 	local rowRefForward = p8.rowRefForward
 	
-	return buildEntryViewElement(p8, var16, var17, var18, reactModule.useCallback(function(p9) --[[ line: 124 ]]
+	return buildEntryViewElement(p8, var16, var17, var18, reactModule.useCallback(function(p9)
 		-- upvalues: var15 (ref), rowRefForward (ref)
 		var15.current = p9
 		

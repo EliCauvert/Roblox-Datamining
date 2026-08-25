@@ -10,7 +10,7 @@ local _ = {
 	OK = "OK"
 }
 
-local var3 = function(p0) --[[ line: 67 ]]
+local var3 = function(p0)
 	local t = {}
 	
 	for i, v in ipairs(p0) do
@@ -25,7 +25,7 @@ local var3 = function(p0) --[[ line: 67 ]]
 	return t
 end
 
-local var4 = function(p1, p2) --[[ line: 81 ]]
+local var4 = function(p1, p2)
 	local t = {}
 	
 	for i, v in ipairs(p2) do
@@ -40,7 +40,7 @@ local var4 = function(p1, p2) --[[ line: 81 ]]
 	return t
 end
 
-local var5 = function(p3) --[[ line: 95 ]]
+local var5 = function(p3)
 	local t = {}
 	
 	for i, v in p3:GetPlayingAnimationTracks() do
@@ -55,7 +55,7 @@ local var5 = function(p3) --[[ line: 95 ]]
 end
 
 return {
-	getHumanoidDescription = function(p4) --[[ line: 110 ]]
+	getHumanoidDescription = function(p4)
 		-- upvalues: playersService (ref), getFFlagGetHumanoidDescriptionUpdatesModule (ref), var3 (ref), getHumanoidDescriptionUpdatesV2A (ref), var4 (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), var5 (ref)
 		local var10 = playersService:GetPlayerByUserId(p4)
 		local t = {
@@ -117,7 +117,7 @@ return {
 		
 		if getFFlagGetHumanoidDescriptionUpdatesModule() then
 			local _ = nil
-			local ok, status = pcall(function() --[[ line: 171 ]]
+			local ok, status = pcall(function()
 				-- upvalues: humanoid (ref)
 				return humanoid:GetAppliedDescription()
 			end)
@@ -131,7 +131,7 @@ return {
 			local var14 = 0
 			
 			if getFFlagGetHumanoidDescriptionUpdatesModule() then
-				local var15 = function(p5) --[[ line: 188 ]]
+				local var15 = function(p5)
 					-- upvalues: var13 (write), t (ref)
 					if typeof(var13[p5]) == "Color3" then
 						t[p5] = { var13[p5].R, var13[p5].G, var13[p5].B }
@@ -192,7 +192,7 @@ return {
 				end
 				t.FieldErrorCount = var14
 			else
-				pcall(function() --[[ line: 255 ]]
+				pcall(function()
 					-- upvalues: t (ref), var13 (write)
 					for i, v in pairs(t) do
 						if typeof(var13[i]) == "Color3" then

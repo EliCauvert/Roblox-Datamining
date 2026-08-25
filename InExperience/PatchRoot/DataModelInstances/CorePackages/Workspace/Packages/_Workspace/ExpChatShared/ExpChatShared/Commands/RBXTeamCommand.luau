@@ -6,7 +6,7 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/team", "/t", "%%" },
-	clientRun = function(p0, _, _) --[[ line: 12 ]]
+	clientRun = function(p0, _, _)
 		-- upvalues: chatInputBarActivatedTeamModeModule (ref), team (ref)
 		if p0:getState().LocalTeam then
 			p0:dispatch(chatInputBarActivatedTeamModeModule())

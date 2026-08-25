@@ -1,12 +1,12 @@
 ﻿local symbolsModule = require(script.Parent.symbols)
 
-return function(...) --[[ line: 3 ]]
+return function(...)
 	-- upvalues: symbolsModule (ref)
 	local list = { ... }
 	assert(#list > 1, "Mock Error: tuple only accepts more than 1 value.")
 	
 	return setmetatable({ [symbolsModule.isTuple] = true, values = list }, {
-		__tostring = function(_) --[[ line: 11 ]]
+		__tostring = function(_)
 			-- upvalues: list (ref)
 			local t = {}
 			

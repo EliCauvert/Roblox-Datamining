@@ -11,10 +11,10 @@ local t = {
 	preferredTextSize = Enum.PreferredTextSize.Medium
 }
 
-return function(p0) --[[ line: 31 | named "PreferencesProvider" ]]
+return function(p0)
 	-- upvalues: flagsModule (ref), reactModule (ref), withDefaultsModule (ref), t (ref), preferencesContextModule (ref)
 	return reactModule.createElement(preferencesContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 34 ]]
+		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 			-- upvalues: withDefaultsModule (copy), p0 (ref), t (copy)
 			return withDefaultsModule({
 				preferredTextSize = p0.preferredTextSize,

@@ -20,13 +20,13 @@ local constantsModule = require(momentsCreationFlow.Constants)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
 
-return function(p0) --[[ line: 37 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useSelector (ref), constantsModule (ref), useState (ref), useCallback (ref), descriptionUpdatedModule (ref), eventNamesModule (ref), view (ref), creationFlowLocalizationModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
 	local var9 = useDispatch()
 	local var10 = useDeviceInsets()
 	local var11 = useTokens()
 	local var12 = reactModule.useContext(creationFlowContextModule)
-	local var13, var14 = useState(useSelector(function(p1) --[[ line: 43 ]]
+	local var13, var14 = useState(useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].CreationFlow.description
 	end))
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 37 ]]
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = useCallback(function(p2) --[[ line: 54 ]]
+					[reactModule.Change.Text] = useCallback(function(p2)
 						-- upvalues: var14 (ref)
 						local var15 = p2.Text:gsub("[\r\n]+", " ")
 						local charCount = utf8.len(var15)
@@ -80,7 +80,7 @@ return function(p0) --[[ line: 37 ]]
 						var14(substring)
 						p2.Text = substring
 					end, {}),
-					[reactModule.Event.FocusLost] = useCallback(function() --[[ line: 49 ]]
+					[reactModule.Event.FocusLost] = useCallback(function()
 						-- upvalues: var9 (ref), descriptionUpdatedModule (copy), var13 (ref), var12 (ref), eventNamesModule (copy)
 						var9(descriptionUpdatedModule(var13))
 						var12.fireEvent(eventNamesModule.EditingFlowDescriptionEdited)

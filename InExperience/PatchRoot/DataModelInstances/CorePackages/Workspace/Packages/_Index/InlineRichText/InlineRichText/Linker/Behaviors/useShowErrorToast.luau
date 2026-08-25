@@ -5,13 +5,13 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(inlineRichText.Types)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), notificationModalsManagerModule (ref)
 	local var3 = if p0.errorToastTextOverride and p0.errorToastTextOverride ~= "" then p0.errorToastTextOverride else useLocalization({
 		errorToastText = "CommonUI.Messages.Response.SomethingWentWrong"
 	}).errorToastText
 	
-	return reactModule.useCallback(function() --[[ line: 22 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: notificationModalsManagerModule (copy), var3 (ref)
 		notificationModalsManagerModule.SetUIBloxToast({
 			toastTitle = var3,

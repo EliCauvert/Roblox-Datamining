@@ -39,7 +39,7 @@ local getFFlagMomentsCreationTextOverlayResolutionScaleModule = require(momentsC
 local getFFlagMomentsTextDragToDeleteModule = require(momentsCreation.Flags.GetFFlagMomentsTextDragToDelete)
 local t = { dampingRatio = 0.85, frequency = 12 }
 
-local function GenerateTextButton(p0) --[[ line: 99 ]]
+local function GenerateTextButton(p0)
 	-- upvalues: useTokens (ref), useCreationFlowStringsModule (ref), useSignalState (ref), useCallback (ref), reactModule (ref), view (ref), button (ref), foundationModule (ref), builderIconsModule (ref)
 	local controller = p0.controller
 	local var22 = useTokens()
@@ -57,7 +57,7 @@ local function GenerateTextButton(p0) --[[ line: 99 ]]
 			icon = builderIconsModule.Icon.TagSparkle,
 			text = useCreationFlowStringsModule().GenerateTextCta,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis,
-			onActivated = useCallback(function() --[[ line: 105 ]]
+			onActivated = useCallback(function()
 				-- upvalues: controller (ref)
 				controller.beginTool("generateText")
 			end, { controller }),
@@ -67,7 +67,7 @@ local function GenerateTextButton(p0) --[[ line: 99 ]]
 	})
 end
 
-return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
+return function(p1)
 	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useAnimatedBinding (ref), getFFlagMomentsTextDragToDeleteModule (ref), reactOtterModule (ref), t (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref), GenerateTextButton (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref), textOverlayTrashZoneModule (ref)
 	local controller = p1.controller
 	local var23 = useSignalState(controller.getStep)
@@ -76,9 +76,9 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 	local textOverlays = useSignalState(controller.getComposedEdits).textOverlays
 	local var26 = getFFlagMomentsCreationTextOverlayResolutionScaleModule()
 	local var27 = if var26 then getScale(var24, var25, Enum.ScaleType.Crop) else 1
-	local var28 = useSignalState(useMemo(function() --[[ line: 148 ]]
+	local var28 = useSignalState(useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 149 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: controller (copy)
 			local activeSession = controller.getActiveSession(p2)
 			
@@ -90,13 +90,13 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 	local var31 = useRef(nil)
 	local var32, var33 = useBinding(UDim2.fromOffset(0, 0))
 	local var34 = useOnScreenKeyboardHeightModule()
-	local var35 = useCallback(function() --[[ line: 163 ]]
+	local var35 = useCallback(function()
 		-- upvalues: var31 (ref)
 		if var31.current then
 			var31.current:CaptureFocus()
 		end
 	end, {})
-	local var36 = useCallback(function(p3) --[[ line: 169 ]]
+	local var36 = useCallback(function(p3)
 		-- upvalues: controller (ref), getFFlagMomentsStickerButton (copy), dashModule (copy)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -118,7 +118,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 		end
 		activeSession.update({ dashModule.joinDeep(var58, { text = p3.Text }) })
 	end, { controller })
-	local var37 = useCallback(function() --[[ line: 196 ]]
+	local var37 = useCallback(function()
 		-- upvalues: getFFlagEnableMomentTextGeneration (copy), controller (ref)
 		if getFFlagEnableMomentTextGeneration() and controller.getIsGenerating(false) then
 			controller.onDisabledToolActivated("text")
@@ -127,7 +127,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 		end
 		controller.beginTool("text")
 	end, { controller })
-	local var38 = useCallback(function(p4) --[[ line: 209 ]]
+	local var38 = useCallback(function(p4)
 		-- upvalues: controller (ref)
 		controller.updateCommittedEdit("text", p4)
 	end, { controller })
@@ -136,7 +136,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 	local var41, var42 = useBinding(false)
 	local var43, var44 = useAnimatedBinding(1)
 	local var45, var46 = useAnimatedBinding(1)
-	local var47 = useCallback(function(p5) --[[ line: 221 ]]
+	local var47 = useCallback(function(p5)
 		-- upvalues: var39 (ref)
 		local current = var39.current
 		
@@ -148,7 +148,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 		
 		return absolutePosition.X <= p5.X and (p5.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= p5.Y and p5.Y <= absolutePosition.Y + absoluteSize.Y))
 	end, {})
-	local var48 = useCallback(function() --[[ line: 234 ]]
+	local var48 = useCallback(function()
 		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), p1 (ref), var40 (ref), var44 (ref), reactOtterModule (copy), var46 (ref), var42 (ref)
 		if not getFFlagMomentsTextDragToDeleteModule() then return end
 		if p1.ctx.setIsOverlayDragging then
@@ -159,7 +159,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 		var46(reactOtterModule.instant(1))
 		var42(true)
 	end, { p1.ctx, var44, var46, var42 })
-	local var49 = useCallback(function(p6) --[[ line: 247 ]]
+	local var49 = useCallback(function(p6)
 		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var47 (ref), var40 (ref), var44 (ref), reactOtterModule (copy), t (copy), var46 (ref)
 		if not getFFlagMomentsTextDragToDeleteModule() then return end
 		local var61 = var47(p6)
@@ -171,7 +171,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 		var44(reactOtterModule.spring(if var61 then 1.15 else 1, t))
 		var46(reactOtterModule.spring(if var61 then 0.45 else 1, t))
 	end, { var47, var44, var46 })
-	local var50 = useCallback(function(p7) --[[ line: 267 ]]
+	local var50 = useCallback(function(p7)
 		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), var38 (ref), p1 (ref), var40 (ref), var42 (ref), var44 (ref), reactOtterModule (copy), controller (ref), var46 (ref)
 		if not getFFlagMomentsTextDragToDeleteModule() then
 			var38(p7)
@@ -195,14 +195,14 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 	end, {
 		p1.ctx, controller, var38, var42, var44, var46
 	})
-	useEffect(function() --[[ line: 305 ]]
+	useEffect(function()
 		-- upvalues: getFFlagMomentsTextDragToDeleteModule (copy), textOverlays (ref), var46 (ref), reactOtterModule (copy)
 		if not getFFlagMomentsTextDragToDeleteModule() then return end
 		if textOverlays == nil or #textOverlays == 0 then
 			var46(reactOtterModule.instant(1))
 		end
 	end, { textOverlays })
-	useEffect(function() --[[ line: 316 ]]
+	useEffect(function()
 		-- upvalues: var29 (ref), controller (ref), makeTextOverlayEditsForEditorModule (copy), textOverlays (ref), makeDefaultTextOverlayEditModule (copy), var27 (ref)
 		if not var29 then return end
 		local activeSession = controller.getActiveSession(false)
@@ -213,7 +213,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 		activeSession.update(makeTextOverlayEditsForEditorModule(textOverlays, makeDefaultTextOverlayEditModule(), var27))
 	end, { var29, textOverlays, controller, var27 })
 	local var51 = useRef(false)
-	useEffect(function() --[[ line: 332 ]]
+	useEffect(function()
 		-- upvalues: var29 (ref), var51 (ref), var31 (ref), var30 (ref), var35 (ref)
 		if var29 then
 			if var51.current or var31.current == nil or var30 == nil then
@@ -231,7 +231,7 @@ return function(p1) --[[ line: 131 | named "TextOverlayLayer" ]]
 			end
 		end
 	end, { var29, var30, var35 })
-	useEffect(function() --[[ line: 347 ]]
+	useEffect(function()
 		-- upvalues: var29 (ref), var30 (ref), var34 (ref), var33 (ref), textService (copy), var24 (ref)
 		if not var29 or var30 == nil then return end
 		if var34 == 0 then

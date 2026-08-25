@@ -3,7 +3,7 @@ local parent = script.Parent.Parent.Parent
 local set = require(parent.Parent.LuauPolyfill).Set
 local var1 = newproxy(true)
 
-getmetatable(var1).__tostring = function() --[[ line: 23 ]]
+getmetatable(var1).__tostring = function()
 	return "Value.None"
 end
 
@@ -12,14 +12,14 @@ local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
 local objectKeysForEachModule = require(parent.luaUtils.objectKeysForEach)
 local var4 = nil
 
-function t.mergeDeep(...) --[[ line: 59 ]]
+function t.mergeDeep(...)
 	-- upvalues: var4 (write)
 	return var4({ ... })
 end
 
 local t_1 = {}
 
-function t.mergeDeepArray(p0) --[[ line: 73 ]]
+function t.mergeDeepArray(p0)
 	-- upvalues: t_1 (ref)
 	local var6 = p0[1] or {}
 	local p0Count = #p0
@@ -36,11 +36,11 @@ end
 
 t_1.__index = t_1
 
-function t_1.new(p1) --[[ line: 107 ]]
+function t_1.new(p1)
 	-- upvalues: t_1 (ref), isNonNullObject (ref), set (ref)
 	local tbl = setmetatable({}, t_1)
 	
-	local var10 = function(p2, p3, p4, p5) --[[ line: 110 ]]
+	local var10 = function(p2, p3, p4, p5)
 		return p2:merge(p3[p5], p4[p5])
 	end
 	
@@ -54,12 +54,12 @@ function t_1.new(p1) --[[ line: 107 ]]
 	return tbl
 end
 
-function t_1.merge(p6, p7, p8, ...) --[[ line: 124 ]]
+function t_1.merge(p6, p7, p8, ...)
 	-- upvalues: isNonNullObject (ref), objectKeysForEachModule (ref), hasOwnPropertyModule (ref), var1 (ref)
 	local packed = table.pack(...)
 	
 	if isNonNullObject(p8) and isNonNullObject(p7) then
-		objectKeysForEachModule(p8, function(p9) --[[ line: 130 ]]
+		objectKeysForEachModule(p8, function(p9)
 			-- upvalues: hasOwnPropertyModule (copy), p7 (write), p8 (ref), p6 (ref), packed (ref), var1 (copy)
 			if hasOwnPropertyModule(p7, p9) then
 				local var12 = p7[p9]
@@ -86,7 +86,7 @@ function t_1.merge(p6, p7, p8, ...) --[[ line: 124 ]]
 	return p8
 end
 
-function t_1:shallowCopyForMerge(p10) --[[ line: 163 ]]
+function t_1:shallowCopyForMerge(p10)
 	-- upvalues: isNonNullObject (ref)
 	if isNonNullObject(p10) and not self.pastCopies:has(p10) then
 		p10 = table.clone(p10)

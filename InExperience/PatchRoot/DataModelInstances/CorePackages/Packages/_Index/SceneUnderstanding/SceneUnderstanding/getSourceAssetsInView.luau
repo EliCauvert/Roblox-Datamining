@@ -5,9 +5,9 @@ local getSourceAssetsFromDescendantsModule = require(sceneUnderstanding.getSourc
 local isSourceAssetModule = require(sceneUnderstanding.isSourceAsset)
 local _ = require(sceneUnderstanding.options.ViewportQueryOptions)
 
-return function(value, p0) --[[ line: 62 | named "getSourceAssetsInView" ]]
+return function(value, p0)
 	-- upvalues: queryViewportModule (ref), isSourceAssetModule (ref), findSourceAssetsFromDescendantModule (ref), getSourceAssetsFromDescendantsModule (ref)
-	return getSourceAssetsFromDescendantsModule(queryViewportModule(value, function(p1) --[[ line: 63 ]]
+	return getSourceAssetsFromDescendantsModule(queryViewportModule(value, function(p1)
 		-- upvalues: isSourceAssetModule (copy), findSourceAssetsFromDescendantModule (copy)
 		return isSourceAssetModule(p1) or #findSourceAssetsFromDescendantModule(p1) > 0
 	end, p0))

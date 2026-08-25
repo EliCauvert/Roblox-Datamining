@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-local function _(p0) --[[ line: 7 | named "isPascalCase" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	if t[p0] then
 		return true
@@ -16,7 +16,7 @@ local function _(p0) --[[ line: 7 | named "isPascalCase" ]]
 	return var2
 end
 
-return function(p1, p2) --[[ line: 34 | named "mapServerBindingProps" ]]
+return function(p1, p2)
 	-- upvalues: t (ref)
 	local var5
 	local var3 = nil

@@ -13,7 +13,7 @@ local getUiSelectorSignalStore = require(coreGuiCommon.Stores).GetUiSelectorSign
 local baseMenu = foundationModule.UNSTABLE.BaseMenu
 local inputSize = foundationModule.Enums.InputSize
 
-return function(_) --[[ line: 27 | named "InExperienceUiSelector" ]]
+return function(_)
 	-- upvalues: signalsReactModule (ref), getUiSelectorSignalStore (ref), reactModule (ref), useLocalization (ref), guiService (ref), focusOnChrome (ref), gamepadService (ref), foundationModule (ref), baseMenu (ref), inputSize (ref)
 	local var8 = signalsReactModule.useSignalState(getUiSelectorSignalStore)
 	local var9 = signalsReactModule.useSignalState(var8.getVisibility)
@@ -23,7 +23,7 @@ return function(_) --[[ line: 27 | named "InExperienceUiSelector" ]]
 		robloxMenu = "CoreScripts.InGameMenu.Controls.RobloxMenu",
 		uiNavToggle = "CoreScripts.InGameMenu.GameSettings.UINavToggle"
 	})
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var11 (ref), guiService (copy)
 		if var9 and var11.current then
 			guiService.SelectedCoreObject = var11.current
@@ -46,14 +46,14 @@ return function(_) --[[ line: 27 | named "InExperienceUiSelector" ]]
 		}
 	}, {
 		Menu = reactModule.createElement(baseMenu.Root, {
-			items = reactModule.useMemo(function() --[[ line: 45 ]]
+			items = reactModule.useMemo(function()
 				-- upvalues: var12 (ref), var11 (ref), var8 (ref), focusOnChrome (copy), guiService (copy), gamepadService (copy)
 				return {
 					{
 						id = "RobloxMenu",
 						text = var12.robloxMenu,
 						ref = var11,
-						onActivated = function() --[[ line: 51 ]]
+						onActivated = function()
 							-- upvalues: var8 (copy), focusOnChrome (copy)
 							var8.setVisibility(false)
 							focusOnChrome()
@@ -62,11 +62,11 @@ return function(_) --[[ line: 27 | named "InExperienceUiSelector" ]]
 					{
 						id = "UiNavigationMode",
 						text = var12.uiNavToggle,
-						onActivated = function() --[[ line: 59 ]]
+						onActivated = function()
 							-- upvalues: var8 (copy), guiService (copy), gamepadService (copy)
 							var8.setVisibility(false)
 							guiService.SelectedCoreObject = nil
-							local _, _ = pcall(function() --[[ line: 62 ]]
+							local _, _ = pcall(function()
 								-- upvalues: gamepadService (copy)
 								gamepadService:AutoSelectGui()
 							end)

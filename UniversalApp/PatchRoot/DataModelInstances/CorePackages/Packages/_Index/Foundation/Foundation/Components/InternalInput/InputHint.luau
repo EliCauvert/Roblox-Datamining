@@ -5,13 +5,13 @@ local _ = require(foundation.Components.Types)
 local inputLabelSizeModule = require(foundation.Enums.InputLabelSize)
 local medium = inputLabelSizeModule.Medium
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "InputHint" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: medium (ref), reactModule (ref), inputLabelSizeModule (ref), textModule (ref)
 	local size = p0.size or medium
 	
 	return reactModule.createElement(textModule, {
 		Text = p0.text,
-		tag = reactModule.useMemo(function() --[[ line: 26 ]]
+		tag = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), size (ref), inputLabelSizeModule (copy)
 			return {
 				["size-0 auto-xy text-wrap text-align-x-left text-align-y-top"] = true,

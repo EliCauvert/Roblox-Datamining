@@ -4,7 +4,7 @@ local createEffect = signalsModule.createEffect
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 36 ]]
+function t.new(p0)
 	-- upvalues: t (ref), createSignal (ref), createEffect (ref)
 	local tbl = setmetatable({}, t)
 	local defaultVisible = false
@@ -22,7 +22,7 @@ function t.new(p0) --[[ line: 36 ]]
 	tbl.setEnabled = var6
 	local t_1 = {}
 	local t_2 = {}
-	local var9 = createEffect(function(p1) --[[ line: 58 ]]
+	local var9 = createEffect(function(p1)
 		-- upvalues: var3 (ref), tbl (ref), t_1 (ref), var4 (ref)
 		local var11 = var3(p1)
 		
@@ -38,7 +38,7 @@ function t.new(p0) --[[ line: 36 ]]
 			end
 		end
 	end)
-	local var10 = createEffect(function(p2) --[[ line: 71 ]]
+	local var10 = createEffect(function(p2)
 		-- upvalues: var5 (ref), t_2 (ref)
 		local var13 = var5(p2)
 		
@@ -47,17 +47,17 @@ function t.new(p0) --[[ line: 36 ]]
 		end
 	end)
 	
-	function tbl.dispose(_) --[[ line: 78 ]]
+	function tbl.dispose(_)
 		-- upvalues: var9 (ref), var10 (ref)
 		var9()
 		var10()
 	end
 	
-	function tbl.onVisibilityChanged(_, p3) --[[ line: 83 ]]
+	function tbl.onVisibilityChanged(_, p3)
 		-- upvalues: t_1 (ref)
 		table.insert(t_1, p3)
 		
-		return function() --[[ line: 86 ]]
+		return function()
 			-- upvalues: t_1 (copy), p3 (ref)
 			local index = table.find(t_1, p3)
 			
@@ -67,12 +67,12 @@ function t.new(p0) --[[ line: 36 ]]
 		end
 	end
 	
-	function tbl.onEnabledChanged(_, p4) --[[ line: 94 ]]
+	function tbl.onEnabledChanged(_, p4)
 		-- upvalues: t_2 (ref), var5 (ref)
 		table.insert(t_2, p4)
 		p4(var5(false))
 		
-		return function() --[[ line: 97 ]]
+		return function()
 			-- upvalues: t_2 (copy), p4 (ref)
 			local index = table.find(t_2, p4)
 			

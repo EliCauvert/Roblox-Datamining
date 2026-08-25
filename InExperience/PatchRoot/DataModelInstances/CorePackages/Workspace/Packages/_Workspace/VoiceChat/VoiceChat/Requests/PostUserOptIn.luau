@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
 
-return function(p0, p1, p2) --[[ line: 15 ]]
+return function(p0, p1, p2)
 	-- upvalues: url (ref), httpService (ref)
 	local var2
 	assert(type(p1) == "boolean", "UserOptIn request expects isUserOptIn to be a boolean")

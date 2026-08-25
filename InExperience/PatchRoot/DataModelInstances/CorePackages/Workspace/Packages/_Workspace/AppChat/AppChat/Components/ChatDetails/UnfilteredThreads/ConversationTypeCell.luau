@@ -19,10 +19,10 @@ local t = {
 	shouldShowIcon = true,
 	cellHeight = 28,
 	iconSize = iconSize.Small,
-	onIconActivated = function() --[[ line: 40 ]] end
+	onIconActivated = function() end
 }
 
-return function(p0) --[[ line: 45 | named "ConversationTypeCell" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), reactModule (ref), baseCellModule (ref), foundationModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), iconButton (ref)
 	local var9 = cryoModule.Dictionary.join(t, p0)
 	local style = var9.style or useStyle()
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 45 | named "ConversationTypeCell" ]]
 		}),
 		Content = reactModule.createElement(foundationModule.View, {
 			tag = "row size-full align-y-center",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1) --[[ line: 54 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
 				-- upvalues: var14 (ref)
 				var14(p1.AbsoluteSize.X)
 			end, {})
@@ -59,7 +59,7 @@ return function(p0) --[[ line: 45 | named "ConversationTypeCell" ]]
 				tag = "size-0-full auto-x content-emphasis text-align-x-left text-title-large text-truncate-end",
 				Text = var9.bodyText,
 				sizeConstraint = {
-					MaxSize = var13:map(function(p2) --[[ line: 83 ]]
+					MaxSize = var13:map(function(p2)
 						-- upvalues: fFlagHideConversationTypeInfoIfNoWebViewModule (copy), var9 (ref)
 						local var15 = p2 - (if fFlagHideConversationTypeInfoIfNoWebViewModule and not var9.shouldShowIcon then 0 else var9.iconCellWidth)
 						

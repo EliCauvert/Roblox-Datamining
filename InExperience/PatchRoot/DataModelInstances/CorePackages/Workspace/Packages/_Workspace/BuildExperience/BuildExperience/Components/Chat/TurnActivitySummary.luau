@@ -20,13 +20,13 @@ local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local t = {}
 
-local function constantSource() --[[ line: 47 ]]
+local function constantSource()
 	return 0
 end
 
-local function useReactiveValue(p0) --[[ line: 51 ]]
+local function useReactiveValue(p0)
 	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 52 ]]
+	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), constantSource (copy)
 		if typeof(p0) == "function" then
 			return p0(p1)
@@ -37,7 +37,7 @@ local function useReactiveValue(p0) --[[ line: 51 ]]
 	end, { p0 }))
 end
 
-local function createThinkingGradient(p2, p3) --[[ line: 65 ]]
+local function createThinkingGradient(p2, p3)
 	-- upvalues: reactModule (ref), chatConstantsModule (ref)
 	return reactModule.createElement("UIGradient", {
 		Enabled = p3,
@@ -46,14 +46,14 @@ local function createThinkingGradient(p2, p3) --[[ line: 65 ]]
 			NumberSequenceKeypoint.new(0.5, 0),
 			NumberSequenceKeypoint.new(1, 0.55)
 		}),
-		Offset = p2:map(function(p4) --[[ line: 73 ]]
+		Offset = p2:map(function(p4)
 			-- upvalues: chatConstantsModule (copy)
 			return Vector2.new(p4 * chatConstantsModule.THINKING_GRADIENT_ANIMATION_SPEED % chatConstantsModule.THINKING_GRADIENT_OFFSET - chatConstantsModule.THINKING_GRADIENT_OFFSET / 2, 0)
 		end)
 	})
 end
 
-local function createActivityText(p5, p6) --[[ line: 83 ]]
+local function createActivityText(p5, p6)
 	-- upvalues: reactModule (ref), text (ref)
 	return reactModule.createElement(text, {
 		tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
@@ -62,12 +62,12 @@ local function createActivityText(p5, p6) --[[ line: 83 ]]
 	})
 end
 
-local function createActivityItem(p7, p8) --[[ line: 91 ]]
+local function createActivityItem(p7, p8)
 	-- upvalues: createActivityText (ref), turnDisplayModule (ref)
 	return if p7.kind == "tool_call" then createActivityText(turnDisplayModule.getToolActivityLabel(p7), p8) else nil
 end
 
-local function createActivitySummaryActionText(p9, p10, p11, p12) --[[ line: 99 ]]
+local function createActivitySummaryActionText(p9, p10, p11, p12)
 	-- upvalues: reactModule (ref), text (ref), createThinkingGradient (ref)
 	return reactModule.createElement(text, {
 		tag = "size-full-0 auto-y text-body-medium text-no-wrap text-align-x-left text-truncate-end content-muted",
@@ -77,9 +77,9 @@ local function createActivitySummaryActionText(p9, p10, p11, p12) --[[ line: 99 
 	}, { ThinkingGradient = createThinkingGradient(p11, p12) })
 end
 
-local function _(p13, p14, p15, p16, p17, p18, p19) --[[ line: 115 | named "getActivitySummaryActionText" ]]
+local function _(p13, p14, p15, p16, p17, p18, p19)
 	-- upvalues: chatConstantsModule (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref)
-	return if p14 then p17:map(function(p20) --[[ line: 128 ]]
+	return if p14 then p17:map(function(p20)
 		-- upvalues: p18 (ref), p15 (ref), chatConstantsModule (copy), fFlagBuildLocalization (copy), p19 (ref), localizationStringsModule (copy), p16 (ref)
 		if not p18.isThinking then
 			return p15
@@ -92,7 +92,7 @@ local function _(p13, p14, p15, p16, p17, p18, p19) --[[ line: 115 | named "getA
 	end) else p13
 end
 
-local function localizeActivityLabel(p21, p22, p23, p24, p25) --[[ line: 151 ]]
+local function localizeActivityLabel(p21, p22, p23, p24, p25)
 	-- upvalues: localizationStringsModule (ref)
 	local var17 = p23[p21]
 	
@@ -112,7 +112,7 @@ local function localizeActivityLabel(p21, p22, p23, p24, p25) --[[ line: 151 ]]
 	return if p22.status == "completed" then p25:Format(localizationStringsModule.CHAT_TOOL_FINISHED, { TITLE = var20 }) elseif p22.status == "failed" then p25:Format(localizationStringsModule.CHAT_TOOL_FAILED, { TITLE = var20 }) else p25:Format(localizationStringsModule.CHAT_TOOL_RUNNING, { title = var20 })
 end
 
-return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
+return function(p26)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), useReactiveValue (ref), t (ref), localizeActivityLabel (ref), createActivityText (ref), chatConstantsModule (ref), createActivityItem (ref), foundationModule (ref), view (ref), createActivitySummaryActionText (ref), text (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), scrollView (ref)
 	local ASSISTANT_LOADING_TEXT, ASSISTANT_STILL_WORKING_TEXT, var25
 	local segment = p26.segment
@@ -150,7 +150,7 @@ return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
 		}
 		var25 = if actionCount == nil or actionCount <= 1 or segment.summaryToolActivity ~= nil then localizeActivityLabel(var23, segment.summaryToolActivity, t_1, var21.tool, var22) else var21.taskCount
 		
-		local var26 = function(p27, p28) --[[ line: 238 ]]
+		local var26 = function(p27, p28)
 			-- upvalues: localizeActivityLabel (copy), localizationStringsModule (copy), t_1 (ref), var21 (ref), var22 (ref), createActivityText (copy)
 			return if p27.kind == "tool_call" then createActivityText(localizeActivityLabel(localizationStringsModule.CHAT_TOOL, p27, t_1, var21.tool, var22), p28) else nil
 		end
@@ -173,18 +173,18 @@ return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
 		current.isThinking = var36
 		current.startedAt = nil
 	end
-	local var37 = reactModule.useCallback(function() --[[ line: 274 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref)
-		var30(function(p29) --[[ line: 275 ]]
+		var30(function(p29)
 			return not p29
 		end)
 	end, {})
-	local var38 = reactModule.useCallback(function(p30) --[[ line: 280 ]]
+	local var38 = reactModule.useCallback(function(p30)
 		-- upvalues: var33 (ref)
 		if p30 == nil then
 			return
 		end
-		task.defer(function() --[[ line: 285 ]]
+		task.defer(function()
 			-- upvalues: var33 (copy), p30 (ref)
 			if var33.current == p30 then
 				p30.CanvasPosition = Vector2.new(0, math.max(0, p30.AbsoluteCanvasSize.Y - p30.AbsoluteWindowSize.Y))
@@ -193,7 +193,7 @@ return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
 			end
 		end)
 	end, {})
-	local var39 = reactModule.useCallback(function(p31) --[[ line: 296 ]]
+	local var39 = reactModule.useCallback(function(p31)
 		-- upvalues: var33 (ref), var38 (ref)
 		var33.current = p31
 		
@@ -201,20 +201,20 @@ return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
 			var38(p31)
 		end
 	end, { var38 })
-	local var40 = reactModule.useCallback(function(p32) --[[ line: 303 ]]
+	local var40 = reactModule.useCallback(function(p32)
 		-- upvalues: var32 (ref), var38 (ref)
 		var32(p32.AbsoluteCanvasSize.Y)
 		var38(p32)
 	end, { var32, var38 })
-	local var41 = reactModule.useCallback(function(p33) --[[ line: 308 ]]
+	local var41 = reactModule.useCallback(function(p33)
 		-- upvalues: var38 (ref)
 		var38(p33)
 	end, { var38 })
-	reactModule.useEffect(function() --[[ line: 312 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), var33 (ref)
 		var38(var33.current)
 		
-		return function() --[[ line: 314 ]] end
+		return function() end
 	end, { var38, var24 })
 	local t_1 = {}
 	local var43 = 0
@@ -249,7 +249,7 @@ return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
 				style = var35.Color.Content.Muted
 			}) else nil,
 			Label = if var28 then reactModule.createElement(view, { LayoutOrder = 2, tag = "col fill gap-xxsmall auto-y" }, {
-				CurrentAction = createActivitySummaryActionText(if not var36 then var25 else p26.clockBinding:map(function(p34) --[[ line: 128 ]]
+				CurrentAction = createActivitySummaryActionText(if not var36 then var25 else p26.clockBinding:map(function(p34)
 					-- upvalues: current (ref), ASSISTANT_LOADING_TEXT (ref), chatConstantsModule (copy), fFlagBuildLocalization (copy), var22 (ref), localizationStringsModule (copy), ASSISTANT_STILL_WORKING_TEXT (ref)
 					if not current.isThinking then
 						return ASSISTANT_LOADING_TEXT
@@ -270,7 +270,7 @@ return function(p26) --[[ line: 190 | named "TurnActivitySummary" ]]
 			LayoutOrder = 2,
 			tag = "size-full-0 clip",
 			testId = "TurnActivitySummary.ActivityHistory",
-			Size = var31:map(function(p35) --[[ line: 383 ]]
+			Size = var31:map(function(p35)
 				return UDim2.new(1, 0, 0, math.clamp(p35, 24, 220))
 			end),
 			scrollingFrameRef = var39,

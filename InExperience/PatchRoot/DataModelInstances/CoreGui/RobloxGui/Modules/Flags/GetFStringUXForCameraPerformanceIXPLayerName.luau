@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("UXForCameraPerformanceIXPLayerName", "")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("UXForCameraPerformanceIXPLayerName")
 end

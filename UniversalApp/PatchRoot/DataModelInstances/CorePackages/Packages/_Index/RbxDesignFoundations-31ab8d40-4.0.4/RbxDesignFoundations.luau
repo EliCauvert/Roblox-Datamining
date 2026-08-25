@@ -6,53 +6,53 @@ return {
 	ColorMode = enumsModule.ColorMode,
 	Theme = enumsModule.Theme,
 	themes = {
-		CircuitRush = function() --[[ line: 16 ]]
+		CircuitRush = function()
 			return require(script.CircuitRush)
 		end,
-		CosmicDust = function() --[[ line: 19 ]]
+		CosmicDust = function()
 			return require(script.CosmicDust)
 		end,
-		Default = function() --[[ line: 22 ]]
+		Default = function()
 			-- upvalues: defaultModule (ref)
 			return defaultModule
 		end,
-		ElectricLime = function() --[[ line: 25 ]]
+		ElectricLime = function()
 			return require(script.ElectricLime)
 		end,
-		HyperPlum = function() --[[ line: 28 ]]
+		HyperPlum = function()
 			return require(script.HyperPlum)
 		end,
-		InfernoBlast = function() --[[ line: 31 ]]
+		InfernoBlast = function()
 			return require(script.InfernoBlast)
 		end,
-		Kids = function() --[[ line: 34 ]]
+		Kids = function()
 			return require(script.Kids)
 		end,
-		KineticEnergy = function() --[[ line: 37 ]]
+		KineticEnergy = function()
 			return require(script.KineticEnergy)
 		end,
-		LavaGlow = function() --[[ line: 40 ]]
+		LavaGlow = function()
 			return require(script.LavaGlow)
 		end,
-		NebulaDrift = function() --[[ line: 43 ]]
+		NebulaDrift = function()
 			return require(script.NebulaDrift)
 		end,
-		NitroFrost = function() --[[ line: 46 ]]
+		NitroFrost = function()
 			return require(script.NitroFrost)
 		end,
-		PixelPop = function() --[[ line: 49 ]]
+		PixelPop = function()
 			return require(script.PixelPop)
 		end,
-		PolarFreeze = function() --[[ line: 52 ]]
+		PolarFreeze = function()
 			return require(script.PolarFreeze)
 		end,
-		QuantumPulse = function() --[[ line: 55 ]]
+		QuantumPulse = function()
 			return require(script.QuantumPulse)
 		end,
-		StarBurst = function() --[[ line: 58 ]]
+		StarBurst = function()
 			return require(script.StarBurst)
 		end,
-		SuperCharge = function() --[[ line: 61 ]]
+		SuperCharge = function()
 			return require(script.SuperCharge)
 		end
 	}

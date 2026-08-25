@@ -26,18 +26,18 @@ autoPropertyToggleEntry.defaultProps = {
 	subtextKey = ""
 }
 
-function autoPropertyToggleEntry.init(p0, p1) --[[ line: 37 ]]
+function autoPropertyToggleEntry.init(p0, p1)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref)
 	local valueKey = p1.instance[p1.valueKey]
 	p0.changeEvent = p1.instance:GetPropertyChangedSignal(p1.valueKey)
 	p0:setState({ checked = not p1.lockedToOff and valueKey == p1.onValue })
 	
-	function p0.onExternalChange() --[[ line: 45 ]]
+	function p0.onExternalChange()
 		-- upvalues: p1 (ref), p0 (ref)
 		p0:setState({ checked = p1.instance[p1.valueKey] == p1.onValue })
 	end
 	
-	function p0.onToggled() --[[ line: 52 ]]
+	function p0.onToggled()
 		-- upvalues: p0 (ref), p1 (ref), sendAnalyticsModule (copy), constantsModule (copy)
 		if p0.props.lockedToOff then return end
 		if p1.instance[p1.valueKey] == p1.onValue then
@@ -49,7 +49,7 @@ function autoPropertyToggleEntry.init(p0, p1) --[[ line: 37 ]]
 	end
 end
 
-function autoPropertyToggleEntry.render(p2) --[[ line: 69 ]]
+function autoPropertyToggleEntry.render(p2)
 	-- upvalues: roact (ref), toggleEntryModule (ref), externalEventConnectionModule (ref)
 	local props = p2.props
 	

@@ -17,14 +17,14 @@ local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContex
 local premium = images["icons/status/premium"]
 local detailsText = roactModule.PureComponent:extend("DetailsText")
 
-function detailsText.init(p0) --[[ line: 29 ]]
+function detailsText.init(p0)
 	-- upvalues: getSelectionImageObjectRegularModule (ref)
 	p0.name = ""
 	p0.creator = ""
 	p0.selectedImage = getSelectionImageObjectRegularModule()
 end
 
-function detailsText.setText(value) --[[ line: 39 ]]
+function detailsText.setText(value)
 	-- upvalues: utilityFunctionsModule (ref)
 	local assetInfo = value.props.assetInfo or {}
 	local bundleInfo = value.props.bundleInfo or {}
@@ -44,7 +44,7 @@ function detailsText.setText(value) --[[ line: 39 ]]
 	end
 end
 
-function detailsText.render(p1) --[[ line: 58 ]]
+function detailsText.render(p1)
 	-- upvalues: iconSize (ref), constantsModule (ref), utilityFunctionsModule (ref), roactModule (ref), inspectAndBuyContextModule (ref), notificationModule (ref), cryoModule (ref), premium (ref), appFonts (ref), colorsModule (ref), favoritesModule (ref)
 	p1:setText()
 	local view = p1.props.view
@@ -68,7 +68,7 @@ function detailsText.render(p1) --[[ line: 58 ]]
 		layeredClothingOnR6Key = constantsModule.NotificationKeys.LayeredClothingOnR6Key
 	end
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2) --[[ line: 87 ]]
+		render = function(p2)
 			-- upvalues: view (ref), roactModule (copy), layeredClothingOnR6Key (write), notificationModule (copy), var19 (ref), cryoModule (copy), premium (copy), iconSize (copy), var20 (ref), p1 (ref), appFonts (copy), colorsModule (copy), showFavoritesCount (ref), favoritesModule (copy)
 			return roactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -130,7 +130,7 @@ function detailsText.render(p1) --[[ line: 58 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p3, _) --[[ line: 158 ]]
+return roactRoduxModule.connect(function(p3, _)
 	return {
 		view = p3.view,
 		locale = p3.locale,

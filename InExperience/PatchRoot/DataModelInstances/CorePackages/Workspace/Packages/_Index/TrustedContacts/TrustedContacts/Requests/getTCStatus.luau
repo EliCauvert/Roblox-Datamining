@@ -2,9 +2,9 @@
 local url = require(trustedContacts.Parent.Http).Url
 local myHttpRequestModule = require(trustedContacts.Networking.myHttpRequest)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: url (ref), myHttpRequestModule (ref)
-	return myHttpRequestModule(string.format("%s/my/trusted-friends/%s/status", url.FRIEND_URL, tostring(p0)), "GET"):andThen(function(p1) --[[ line: 11 ]]
+	return myHttpRequestModule(string.format("%s/my/trusted-friends/%s/status", url.FRIEND_URL, tostring(p0)), "GET"):andThen(function(p1)
 		return p1 and (p1.responseBody and p1.responseBody.status)
 	end)
 end

@@ -7,7 +7,7 @@ local requestSelectTabModule = require(expChat.ExternalNavigation.requestSelectT
 local friendsChatChannelSelected = expChatSharedModule.Actions.FriendsChatChannelSelected
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 
-return function() --[[ line: 17 | named "requestSelectFriendsTab" ]]
+return function()
 	-- upvalues: fFlagExpChatEnableFriendsTab (ref), expChatSharedModule (ref), requestSelectTabModule (ref), friendsChatTabNameModule (ref), friendsChatChannelSelected (ref)
 	if not fFlagExpChatEnableFriendsTab then
 		return false

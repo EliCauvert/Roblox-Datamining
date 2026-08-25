@@ -13,7 +13,7 @@ local foundationProvider = foundationModule.FoundationProvider
 local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 local t = { Light = colorMode.Light, Dark = colorMode.Dark }
-local var9 = roduxModule.Store.new(function(p0) --[[ line: 23 ]]
+local var9 = roduxModule.Store.new(function(p0)
 	return p0
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
@@ -21,11 +21,11 @@ end, {
 	GlobalGuiInset = { bottom = 0, left = 0, right = 0, top = 0 }
 }, {})
 local t_1 = {
-	isFocused = function() --[[ line: 32 ]]
+	isFocused = function()
 		return true
 	end,
-	addListener = function(_, _, _) --[[ line: 35 ]]
-		return { remove = function() --[[ line: 36 ]] end }
+	addListener = function(_, _, _)
+		return { remove = function() end }
 	end
 }
 
@@ -33,9 +33,9 @@ return {
 	name = mediaGallery.Name,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p1) --[[ line: 40 ]]
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), roactRoduxModule (ref), var9 (ref), roactNavigationModule (ref), t_1 (ref), foundationProvider (ref), t (ref), device (ref), appStyleProvider (ref)
-		return function(p2) --[[ line: 41 ]]
+		return function(p2)
 			-- upvalues: reactModule (copy), roactRoduxModule (copy), var9 (copy), roactNavigationModule (copy), t_1 (copy), foundationProvider (copy), t (copy), device (copy), appStyleProvider (copy), p1 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

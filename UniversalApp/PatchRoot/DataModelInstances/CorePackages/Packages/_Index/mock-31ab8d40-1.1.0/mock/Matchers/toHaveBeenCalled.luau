@@ -3,7 +3,7 @@ local magicMockModule = require(parent.MagicMock)
 local spyModule = require(parent.Spy)
 local getCallsModule = require(parent.getCalls)
 
-return function(_, _) --[[ line: 6 ]]
+return function(_, _)
 	-- upvalues: magicMockModule (ref), spyModule (ref), getCallsModule (ref)
 -- FATAL: Failed to generate AST for `unnamed` function:
 runtime : [KeyError] :11990: 4

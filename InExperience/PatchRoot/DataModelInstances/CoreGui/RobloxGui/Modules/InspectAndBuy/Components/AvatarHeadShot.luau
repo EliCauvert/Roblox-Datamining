@@ -7,7 +7,7 @@ local colorsModule = require(parent.Colors)
 local avatarHeadShot = roactModule.PureComponent:extend("AvatarHeadShot")
 local headshot = require(coreGuiService:WaitForChild("RobloxGui"):WaitForChild("Modules").Common.LegacyThumbnailUrls).Headshot
 
-function avatarHeadShot.render(p0) --[[ line: 19 ]]
+function avatarHeadShot.render(p0)
 	-- upvalues: headshot (ref), roactModule (ref), colorsModule (ref)
 	local playerId = p0.props.playerId
 	local var6 = if playerId and playerId ~= "" then headshot:format(playerId, 48, 48) else nil
@@ -29,6 +29,6 @@ function avatarHeadShot.render(p0) --[[ line: 19 ]]
 	}) else nil
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ line: 50 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return { playerId = p1.playerId }
 end)(avatarHeadShot)

@@ -16,7 +16,7 @@ local t = {
 	[contextTypeModule.Contacts] = true
 }
 
-local function _() --[[ line: 26 | named "resolveTargetUserId" ]]
+local function _()
 	-- upvalues: localUserIdStore (ref), getLocalPlayerUserId (ref)
 	local currentUserId = localUserIdStore.getCurrentUserId(false)
 	
@@ -28,7 +28,7 @@ local function _() --[[ line: 26 | named "resolveTargetUserId" ]]
 	return if var9 then tostring(var9) else ""
 end
 
-local function normalizeRecommendation(p0) --[[ line: 35 ]]
+local function normalizeRecommendation(p0)
 	-- upvalues: t (ref)
 	local var10 = if p0.contactId and p0.contactId ~= "" then p0.contactId else nil
 	
@@ -49,12 +49,12 @@ local function normalizeRecommendation(p0) --[[ line: 35 ]]
 	}
 end
 
-return function() --[[ line: 60 | named "createFriendsRecommendationsStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), requestsModule (ref), localUserIdStore (ref), getLocalPlayerUserId (ref), cryoModule (ref), normalizeRecommendation (ref)
 	local var11 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = createDataCacheModule(),
-		fetchFn = function(p1, _) --[[ line: 65 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: requestsModule (copy), localUserIdStore (copy), getLocalPlayerUserId (copy), cryoModule (copy), normalizeRecommendation (copy)
 			local var13
 			local getFriendsRecommendations = requestsModule.GetFriendsRecommendations
@@ -66,12 +66,12 @@ return function() --[[ line: 60 | named "createFriendsRecommendationsStore" ]]
 			else
 				var13 = currentUserId
 			end
-			return getFriendsRecommendations(var13, p1):andThen(function(p2) --[[ line: 67 ]]
+			return getFriendsRecommendations(var13, p1):andThen(function(p2)
 				-- upvalues: cryoModule (copy), normalizeRecommendation (copy)
 				local var15 = if p2.data then cryoModule.List.map(p2.data, normalizeRecommendation) else nil
 				
 				if var15 then
-					table.sort(var15, function(p3, p4) --[[ line: 73 ]]
+					table.sort(var15, function(p3, p4)
 						return (p3.rank or 0) < (p4.rank or 0)
 					end)
 				end
@@ -84,19 +84,19 @@ return function() --[[ line: 60 | named "createFriendsRecommendationsStore" ]]
 	})
 	
 	return {
-		getFriendsRecommendations = function(p5, p6) --[[ line: 86 ]]
+		getFriendsRecommendations = function(p5, p6)
 			-- upvalues: var11 (ref)
 			return if p6 and p6.skipFetch then var11.getCachedItem(p5) else var11.getAndFetchItem(p5)
 		end,
-		refreshFriendsRecommendations = function(p7) --[[ line: 96 ]]
+		refreshFriendsRecommendations = function(p7)
 			-- upvalues: var11 (ref)
 			return var11.fetchItem(p7)
 		end,
-		clear = function() --[[ line: 102 ]]
+		clear = function()
 			-- upvalues: var11 (ref)
 			var11.clear()
 		end,
-		dispose = function() --[[ line: 106 ]]
+		dispose = function()
 			-- upvalues: var11 (ref)
 			var11.dispose()
 		end

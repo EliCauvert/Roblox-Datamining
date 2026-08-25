@@ -6,36 +6,36 @@ local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRe
 local fFlagLuaAppSduiVerificationUpsellActions = require(parent.SharedFlags).FFlagLuaAppSduiVerificationUpsellActions
 local fFlagSduiRequestFriendshipActionHandler = require(parent.SharedFlags).FFlagSduiRequestFriendshipActionHandler
 
-return function() --[[ line: 13 | named "registerSocialActions" ]]
+return function()
 	-- upvalues: sduiActionType (ref), fFlagLuaAppSduiVerificationUpsellActions (ref), socialServerDrivenUi (ref), fFlagSduiRequestFriendshipActionHandler (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.OpenFacialAgeEstimation] = if not fFlagLuaAppSduiVerificationUpsellActions then {
-			lazyHandler = function() --[[ line: 20 ]]
+			lazyHandler = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Actions.SduiOpenFacialAgeEstimationAction)
 			end
 		} else nil,
 		[sduiActionType.OpenAddConnectionsPage] = {
-			lazyHandler = function() --[[ line: 26 ]]
+			lazyHandler = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Actions.SduiOpenAddConnectionsPageAction)
 			end
 		},
 		[sduiActionType.OpenMarketplace] = {
-			lazyHandler = function() --[[ line: 31 ]]
+			lazyHandler = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Actions.SduiOpenMarketplaceAction)
 			end
 		},
 		[sduiActionType.HideProfileCompletion] = {
-			lazyHandler = function() --[[ line: 36 ]]
+			lazyHandler = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Actions.SduiHideProfileCompletionAction)
 			end
 		},
 		[sduiActionType.RequestFriendship] = if fFlagSduiRequestFriendshipActionHandler then {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ line: 42 ]]
+			lazyHandler = function()
 				-- upvalues: socialServerDrivenUi (copy)
 				return require(socialServerDrivenUi.Actions.SduiRequestFriendshipAction)
 			end

@@ -6,14 +6,14 @@ local var1 = require(parent.UrlBuilder).UrlBuilder.new({
 	query = { maxRows = "{maxRows}", startIndex = "{startIndex}" }
 })
 
-return function(p0, p1, p2) --[[ line: 17 ]]
+return function(p0, p1, p2)
 	-- upvalues: var1 (ref), promiseModule (ref)
-	return p0(var1({ maxRows = p1 or 10, startIndex = p2 or 0 }), "GET"):andThen(function(p3) --[[ line: 26 ]]
+	return p0(var1({ maxRows = p1 or 10, startIndex = p2 or 0 }), "GET"):andThen(function(p3)
 		-- upvalues: promiseModule (copy)
 		local responseBody = p3.responseBody or nil
 		
 		return if p3.responseCode == 200 and responseBody ~= nil then promiseModule.resolve(responseBody) else promiseModule.reject()
-	end, function(p4) --[[ line: 33 ]]
+	end, function(p4)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p4)
 	end)

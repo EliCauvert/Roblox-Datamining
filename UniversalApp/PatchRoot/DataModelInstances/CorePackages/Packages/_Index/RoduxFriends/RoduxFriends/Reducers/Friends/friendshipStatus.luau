@@ -10,11 +10,11 @@ local friendRequestDeclinedModule = require(actions.FriendRequestDeclined)
 local _ = require(parent.roduxFriendsTypes)
 local t = {}
 
-local function _(p0) --[[ line: 18 | named "mapFriendshipStatusToEnum" ]]
+local function _(p0)
 	return if p0 == "NotFriends" then Enum.FriendStatus.NotFriend elseif p0 == "Friends" then Enum.FriendStatus.Friend elseif p0 == "RequestSent" then Enum.FriendStatus.FriendRequestSent elseif p0 == "RequestReceived" then Enum.FriendStatus.FriendRequestReceived else Enum.FriendStatus.Unknown
 end
 
-local function difference(p1, p2) --[[ line: 32 ]]
+local function difference(p1, p2)
 	local t = {}
 	
 	for i, v in pairs(p1) do
@@ -35,12 +35,12 @@ local function difference(p1, p2) --[[ line: 32 ]]
 	return t_1
 end
 
-return function(p3) --[[ line: 54 ]]
+return function(p3)
 	-- upvalues: roduxModule (ref), t (ref), llamaModule (ref), difference (ref), friendshipDestroyedModule (ref), friendshipCreatedModule (ref), friendRequestCreatedModule (ref), friendRequestDeclinedModule (ref)
 	local friendsNetworking = p3.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[friendsNetworking.GetFriendshipStatus.Succeeded.name] = function(p4, p5) --[[ line: 58 ]]
+		[friendsNetworking.GetFriendshipStatus.Succeeded.name] = function(p4, p5)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
@@ -50,7 +50,7 @@ return function(p3) --[[ line: 54 ]]
 			end
 			return llamaModule.Dictionary.join(p4, t)
 		end,
-		[friendsNetworking.GetExtendedFriendshipStatus.Succeeded.name] = function(p6, p7) --[[ line: 66 ]]
+		[friendsNetworking.GetExtendedFriendshipStatus.Succeeded.name] = function(p6, p7)
 			-- upvalues: llamaModule (copy)
 			local var12 = tostring(p7.ids[1])
 			local join = llamaModule.Dictionary.join
@@ -60,12 +60,12 @@ return function(p3) --[[ line: 54 ]]
 			
 			return join(p6, t)
 		end,
-		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p8, p9) --[[ line: 71 ]]
+		[friendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p8, p9)
 			-- upvalues: llamaModule (copy), difference (copy)
-			local var14 = llamaModule.Dictionary.keys(llamaModule.Dictionary.filter(p8, function(p10) --[[ line: 72 ]]
+			local var14 = llamaModule.Dictionary.keys(llamaModule.Dictionary.filter(p8, function(p10)
 				return p10 == Enum.FriendStatus.Friend
 			end))
-			local var15 = llamaModule.List.map(llamaModule.Dictionary.values(p9.responseBody.data), function(p11) --[[ line: 75 ]]
+			local var15 = llamaModule.List.map(llamaModule.Dictionary.values(p9.responseBody.data), function(p11)
 				return tostring(p11.id)
 			end)
 			local var16 = difference(var14, var15)
@@ -78,17 +78,17 @@ return function(p3) --[[ line: 54 ]]
 			end
 			return p8
 		end,
-		[friendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p12, p13) --[[ line: 94 ]]
+		[friendsNetworking.UnfriendTargetUserId.Succeeded.name] = function(p12, p13)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p12, {
 				[tostring(p13.namedIds.users)] = Enum.FriendStatus.NotFriend
 			})
 		end,
-		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p14, p15) --[[ line: 101 ]]
+		[friendsNetworking.AcceptFriendRequestFromUserId.Succeeded.name] = function(p14, p15)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p14, { [tostring(p15.ids[1])] = Enum.FriendStatus.Friend })
 		end,
-		[friendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p16, p17) --[[ line: 108 ]]
+		[friendsNetworking.DeclineFriendRequestFromUserId.Succeeded.name] = function(p16, p17)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
@@ -97,7 +97,7 @@ return function(p3) --[[ line: 54 ]]
 			end
 			return llamaModule.Dictionary.join(p16, t)
 		end,
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p18, p19) --[[ line: 117 ]]
+		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p18, p19)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
@@ -106,7 +106,7 @@ return function(p3) --[[ line: 54 ]]
 			end
 			return llamaModule.Dictionary.join(p18, t)
 		end,
-		[friendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(p20) --[[ line: 126 ]]
+		[friendsNetworking.DeclineAllFriendRequests.Succeeded.name] = function(p20)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
@@ -117,37 +117,37 @@ return function(p3) --[[ line: 54 ]]
 			end
 			return llamaModule.Dictionary.join(p20, t)
 		end,
-		[friendsNetworking.RequestFriendshipFromUserId.Succeeded.name] = function(p21, p22) --[[ line: 136 ]]
+		[friendsNetworking.RequestFriendshipFromUserId.Succeeded.name] = function(p21, p22)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p21, {
 				[tostring(p22.namedIds.users)] = Enum.FriendStatus.FriendRequestSent
 			})
 		end,
-		[friendsNetworking.RequestFriendshipFromContactId.Succeeded.name] = function(p23, p24) --[[ line: 143 ]]
+		[friendsNetworking.RequestFriendshipFromContactId.Succeeded.name] = function(p23, p24)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p23, {
 				[tostring(p24.namedIds.contacts)] = Enum.FriendStatus.FriendRequestSent
 			})
 		end,
-		[friendshipDestroyedModule.name] = function(p25, p26) --[[ line: 150 ]]
+		[friendshipDestroyedModule.name] = function(p25, p26)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p25, {
 				[tostring(p26.payload.userId1)] = Enum.FriendStatus.NotFriend
 			})
 		end,
-		[friendshipCreatedModule.name] = function(p27, p28) --[[ line: 157 ]]
+		[friendshipCreatedModule.name] = function(p27, p28)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p27, {
 				[tostring(p28.payload.userId1)] = Enum.FriendStatus.Friend
 			})
 		end,
-		[friendRequestCreatedModule.name] = function(p29, p30) --[[ line: 164 ]]
+		[friendRequestCreatedModule.name] = function(p29, p30)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p29, {
 				[tostring(p30.requesteeId)] = Enum.FriendStatus.FriendRequestReceived
 			})
 		end,
-		[friendRequestDeclinedModule.name] = function(p31, p32) --[[ line: 171 ]]
+		[friendRequestDeclinedModule.name] = function(p31, p32)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			

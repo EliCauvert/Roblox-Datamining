@@ -2,18 +2,18 @@
 local t = {}
 t.__index = t
 
-function t.onBeforeSendingMessage(_, _) --[[ line: 9 ]] end
+function t.onBeforeSendingMessage(_, _) end
 
-function t.sendMessage(_, _) --[[ line: 11 ]]
+function t.sendMessage(_, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.reject("Not implemented")
 end
 
-function t.onSuccess(_, _, p0) --[[ line: 15 ]]
+function t.onSuccess(_, _, p0)
 	return p0
 end
 
-function t.onFailure(_, _, p1) --[[ line: 19 ]]
+function t.onFailure(_, _, p1)
 	return p1
 end
 

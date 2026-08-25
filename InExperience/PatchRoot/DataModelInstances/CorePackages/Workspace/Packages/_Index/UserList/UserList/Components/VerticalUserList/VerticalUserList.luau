@@ -17,15 +17,15 @@ local t = {
 }
 local t_1 = { BackgroundTransparency = 1 }
 
-local function keyExtractor(p0, _) --[[ line: 58 ]]
+local function keyExtractor(p0, _)
 	return p0
 end
 
-local function VerticalUserList(p1) --[[ line: 62 ]]
+local function VerticalUserList(p1)
 	-- upvalues: useEntitiesModule (ref), useEntitySelectionHandlerModule (ref), reactModule (ref), useRenderEntityModule (ref), enumsModule (ref), view (ref), flatList (ref), keyExtractor (ref), t (ref), t_1 (ref)
 	local var11 = useEntitiesModule(p1.entities)
 	local var12 = useEntitySelectionHandlerModule(p1.onRowSelected)
-	local var13 = reactModule.useMemo(function() --[[ line: 67 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref)
 		if not p1.initialRowCount or p1.initialRowCount >= #p1.entities then
 			return p1.entities
@@ -37,7 +37,7 @@ local function VerticalUserList(p1) --[[ line: 62 ]]
 		end
 		return t
 	end, { p1.entities, p1.initialRowCount })
-	local var14 = reactModule.useMemo(function() --[[ line: 79 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: var13 (ref)
 		local t = {}
 		
@@ -60,7 +60,7 @@ local function VerticalUserList(p1) --[[ line: 62 ]]
 			initialNumToRender = 10,
 			onEndReachedThreshold = 2,
 			data = var14,
-			renderItem = reactModule.useCallback(function(p2) --[[ line: 96 ]]
+			renderItem = reactModule.useCallback(function(p2)
 				-- upvalues: var15 (ref)
 				return var15(p2.item, p2.index)
 			end, { var15 }),
@@ -74,7 +74,7 @@ local function VerticalUserList(p1) --[[ line: 62 ]]
 		tag = "size-full-0 auto-y col gap-xxsmall",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		EntityRows = reactModule.createElement(reactModule.Fragment, {}, unpack(reactModule.useMemo(function() --[[ line: 133 ]]
+		EntityRows = reactModule.createElement(reactModule.Fragment, {}, unpack(reactModule.useMemo(function()
 			-- upvalues: var14 (ref), reactModule (copy), view (copy), var15 (ref)
 			local t = {}
 			
@@ -86,11 +86,11 @@ local function VerticalUserList(p1) --[[ line: 62 ]]
 	})
 end
 
-return if fFlagUserListCtaIntegrationEnabled then function(p3) --[[ line: 151 | named "VerticalUserListWithCta" ]]
+return if fFlagUserListCtaIntegrationEnabled then function(p3)
 	-- upvalues: var6 (ref), reactModule (ref), VerticalUserList (ref)
 	return if var6 ~= nil and (p3.ctaConfig ~= nil and p3.renderRow == nil) then reactModule.createElement(var6.CtaRenderRowBridge, {
 		ctaConfig = p3.ctaConfig,
-		render = function(p4) --[[ line: 157 ]]
+		render = function(p4)
 			-- upvalues: p3 (ref), reactModule (copy), VerticalUserList (copy)
 			local cloned = table.clone(p3)
 			cloned.renderRow = p4

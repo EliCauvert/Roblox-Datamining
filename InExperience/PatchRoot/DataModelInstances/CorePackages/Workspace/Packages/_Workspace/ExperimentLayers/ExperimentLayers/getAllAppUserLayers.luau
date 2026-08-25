@@ -2,7 +2,7 @@
 local appUserLayersModule = require(script.Parent.AppUserLayers)
 local ixpNewLayersForRegistration = game:DefineFastString("IxpNewLayersForRegistration", "")
 
-local function findNextKey(p0, p1) --[[ line: 21 ]]
+local function findNextKey(p0, p1)
 	if not p0[p1] then
 		p0[p1] = true
 		
@@ -21,7 +21,7 @@ local function findNextKey(p0, p1) --[[ line: 21 ]]
 	error("Exceeded max index for next key search: " .. p1)
 end
 
-return function(p2) --[[ line: 37 | named "getAllAppUserLayers" ]]
+return function(p2)
 	-- upvalues: ixpNewLayersForRegistration (ref), appUserLayersModule (ref), dashModule (ref), findNextKey (ref)
 	p2 = p2 or ixpNewLayersForRegistration
 	

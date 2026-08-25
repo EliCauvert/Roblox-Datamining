@@ -1,6 +1,6 @@
 ﻿local priceChangedSubscriptionMembershipCheckProductTypes = game:DefineFastString("PriceChangedSubscriptionMembershipCheckProductTypes", "")
 
-return function(p0) --[[ line: 9 | named "shouldCheckSubscriptionMembershipForProductType" ]]
+return function(p0)
 	-- upvalues: priceChangedSubscriptionMembershipCheckProductTypes (ref)
 	if p0 == nil or priceChangedSubscriptionMembershipCheckProductTypes == "" then
 		return false

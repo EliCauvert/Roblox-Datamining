@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 4 | named "removeIndex" ]]
+﻿return function(p0, p1)
 	local t = {}
 	local var1 = 0
 	

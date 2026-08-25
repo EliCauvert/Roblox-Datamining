@@ -10,19 +10,19 @@ local reactElementModule = require(script.Parent.ReactElement)
 local isValidElement = reactElementModule.isValidElement
 local cloneAndReplaceKey = reactElementModule.cloneAndReplaceKey
 
-local function _(p0) --[[ line: 45 | named "escape" ]]
+local function _(p0)
 	return "$" .. string.gsub(string.gsub(p0, "=", "=0"), ":", "=2")
 end
 
-local _ = function(p1) --[[ line: 60 | named "escapeUserProvidedKey" ]]
+local _ = function(p1)
 	return p1
 end
 
-local _ = function(p2, p3) --[[ line: 73 | named "getElementKey" ]]
+local _ = function(p2, p3)
 	return if typeof(p2) == "table" and p2 ~= nil and p2.key ~= nil then "$" .. string.gsub(string.gsub(tostring(p2.key), "=", "=0"), ":", "=2") else tostring(p3)
 end
 
-local function mapIntoArray(p4, p5, p6, p7, p8) --[[ line: 86 ]]
+local function mapIntoArray(p4, p5, p6, p7, p8)
 	-- upvalues: REACT_ELEMENT_TYPE (ref), REACT_PORTAL_TYPE (ref), array (ref), mapIntoArray (ref), isValidElement (ref), cloneAndReplaceKey (ref), getIteratorFn (ref)
 	local var3 = typeof(p4)
 	
@@ -50,7 +50,7 @@ local function mapIntoArray(p4, p5, p6, p7, p8) --[[ line: 86 ]]
 		local var7 = if p7 == "" then "." .. (if typeof(var5) == "table" and var5 ~= nil and var5.key ~= nil then "$" .. string.gsub(string.gsub(tostring(var5.key), "=", "=0"), ":", "=2") else tostring(1)) else p7
 		
 		if array.isArray(var6) then
-			mapIntoArray(var6, p5, if var7 ~= nil then var7 .. "/" else "", "", function(p9) --[[ line: 135 ]]
+			mapIntoArray(var6, p5, if var7 ~= nil then var7 .. "/" else "", "", function(p9)
 				return p9
 			end)
 		elseif var6 ~= nil then
@@ -94,14 +94,14 @@ local function mapIntoArray(p4, p5, p6, p7, p8) --[[ line: 86 ]]
 	end
 end
 
-local function mapChildren(p10, p11, _) --[[ line: 253 ]]
+local function mapChildren(p10, p11, _)
 	-- upvalues: mapIntoArray (ref)
 	if p10 == nil then
 		return nil
 	end
 	local t = {}
 	local var15 = 1
-	mapIntoArray(p10, t, "", "", function(p12) --[[ line: 263 ]]
+	mapIntoArray(p10, t, "", "", function(p12)
 		-- upvalues: p11 (ref), var15 (write)
 		local var16 = p11(p12, var15)
 		var15 += 1
@@ -113,33 +113,33 @@ local function mapChildren(p10, p11, _) --[[ line: 253 ]]
 end
 
 return {
-	forEach = function(p13, p14, p15) --[[ line: 305 ]]
+	forEach = function(p13, p14, p15)
 		-- upvalues: mapChildren (ref)
-		mapChildren(p13, function(...) --[[ line: 310 ]]
+		mapChildren(p13, function(...)
 			-- upvalues: p14 (ref)
 			p14(...)
 		end, p15)
 	end,
 	map = mapChildren,
-	count = function(p16) --[[ line: 281 ]]
+	count = function(p16)
 		-- upvalues: mapChildren (ref)
 		local var17 = 0
-		mapChildren(p16, function() --[[ line: 283 ]]
+		mapChildren(p16, function()
 			-- upvalues: var17 (write)
 			var17 += 1
 		end)
 		
 		return var17
 	end,
-	only = function(p17) --[[ line: 345 ]]
+	only = function(p17)
 		-- upvalues: invariant (ref), isValidElement (ref)
 		invariant(isValidElement(p17), "React.Children.only expected to receive a single React element child.")
 		
 		return p17
 	end,
-	toArray = function(p18) --[[ line: 324 ]]
+	toArray = function(p18)
 		-- upvalues: mapChildren (ref)
-		return mapChildren(p18, function(p19) --[[ line: 325 ]]
+		return mapChildren(p18, function(p19)
 			return p19
 		end) or {}
 	end

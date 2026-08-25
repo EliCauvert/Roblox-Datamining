@@ -12,12 +12,12 @@ local var4 = builderIconModule("hammer-code", "Filled")
 local var5 = builderIconModule("person-check", "Filled")
 local var6 = builderIconModule("premium")
 
-local function _(p0) --[[ line: 20 | named "getSocialIcon" ]]
+local function _(p0)
 	-- upvalues: var3 (ref), t (ref)
 	return if p0 then if p0.isBlocked then var3 else t[p0.friendStatus] else nil
 end
 
-return function(p1, p2, p3, p4) --[[ line: 30 | named "getPlayerBadgeIcon" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: var3 (ref), t (ref), var4 (ref), var5 (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), var6 (ref)
 	if not p1 then
 		return nil

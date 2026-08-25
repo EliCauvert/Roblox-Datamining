@@ -5,7 +5,7 @@ local productPurchaseSurface = require(parent.PurchasePromptLite).Enums.ProductP
 local appContextModule = require(purchasePrompt.Utils.AppContext)
 local typesModule = require(purchasePrompt.types)
 
-return function(value, p0, p1) --[[ line: 12 | named "logUnifiedPurchaseTelemetryCounter" ]]
+return function(value, p0, p1)
 	-- upvalues: loggingProtocolModule (ref), appContextModule (ref), productPurchaseSurface (ref), typesModule (ref)
 	loggingProtocolModule.default:logRobloxTelemetryCounter(value, 1, {
 		appContext = appContextModule.get(),

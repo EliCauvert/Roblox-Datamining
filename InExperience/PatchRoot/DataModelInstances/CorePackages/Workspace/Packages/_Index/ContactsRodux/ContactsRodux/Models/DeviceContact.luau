@@ -4,7 +4,7 @@ local _ = require(script.Parent.Parent.Types.ContactTypes)
 local dashModule = require(parent.Dash)
 local t = {}
 
-function t.new(p0) --[[ line: 9 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	t.__index = t
 	local t_1 = {
@@ -17,7 +17,7 @@ function t.new(p0) --[[ line: 9 ]]
 	return t_1
 end
 
-function t.mock(p1) --[[ line: 23 ]]
+function t.mock(p1)
 	-- upvalues: getMockNameModule (ref), dashModule (ref), t (ref)
 	local var4 = getMockNameModule()
 	
@@ -28,7 +28,7 @@ function t.mock(p1) --[[ line: 23 ]]
 	}, p1))
 end
 
-function t.formatFromDevice(p2) --[[ line: 39 ]]
+function t.formatFromDevice(p2)
 	-- upvalues: t (ref)
 	return t.new({
 		id = t.generateId(p2),
@@ -37,7 +37,7 @@ function t.formatFromDevice(p2) --[[ line: 39 ]]
 	})
 end
 
-function t.generateId(p3) --[[ line: 49 ]]
+function t.generateId(p3)
 	return (p3.firstname or "") .. (p3.lastname or "") .. tostring(p3.phonenumber[1])
 end
 

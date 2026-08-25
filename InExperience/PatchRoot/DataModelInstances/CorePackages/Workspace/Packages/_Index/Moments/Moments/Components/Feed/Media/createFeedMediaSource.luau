@@ -5,11 +5,11 @@ local _ = require(parent.MomentsCommon)
 local _ = require(moments.Components.Feed.FeedTypes)
 local toMediaItemModule = require(script.Parent.toMediaItem)
 
-return function(p0, p1, p2) --[[ line: 31 | named "createFeedMediaSource" ]]
+return function(p0, p1, p2)
 	-- upvalues: toMediaItemModule (ref)
 	return {
 		getActiveIndex = p0.getCurrentIndex,
-		getItems = function(p3) --[[ line: 44 ]]
+		getItems = function(p3)
 			-- upvalues: p0 (ref), toMediaItemModule (copy)
 			local t = {}
 			

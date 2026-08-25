@@ -4,14 +4,14 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local textKeysModule = require(groups.Common.TextKeys)
 
-return function(p0) --[[ line: 31 | named "useMembersFollowersLabel" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), textKeysModule (ref), useLocalization (ref)
 	local hasSocialModules = p0.hasSocialModules
 	local count = p0.count
 	local truncatedCount = p0.truncatedCount
 	local capitalize = p0.capitalize or false
 	local var4 = useLocalization({
-		noun = reactModule.useMemo(function() --[[ line: 38 ]]
+		noun = reactModule.useMemo(function()
 			-- upvalues: count (ref), hasSocialModules (ref), capitalize (ref), textKeysModule (copy)
 			local var5 = count == 1
 			
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 31 | named "useMembersFollowersLabel" ]]
 		end, { count, capitalize, hasSocialModules })
 	})
 	
-	return reactModule.useMemo(function() --[[ line: 61 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: truncatedCount (ref), count (ref), var4 (ref)
 		return `{if truncatedCount and truncatedCount ~= "" then truncatedCount else tostring(count)} {var4.noun}`
 	end, { truncatedCount, count, var4.noun })

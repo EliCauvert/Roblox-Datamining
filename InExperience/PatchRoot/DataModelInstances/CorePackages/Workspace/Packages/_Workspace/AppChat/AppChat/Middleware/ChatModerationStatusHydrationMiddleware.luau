@@ -3,9 +3,9 @@ local appChatNetworkingModule = require(appChat.Parent.AppChatNetworking)
 local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
 local getChatModerationStatusDataHydrationModule = require(appChat.Stores.GetChatModerationStatusDataHydration)
 
-return function(p0, _) --[[ line: 11 | named "ChatModerationStatusHydrationMiddleware" ]]
+return function(p0, _)
 	-- upvalues: appChatNetworkingModule (ref), getChatModerationStatusDataHydrationModule (ref), removedConversationModule (ref)
-	return function(p1) --[[ line: 12 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), appChatNetworkingModule (copy), getChatModerationStatusDataHydrationModule (copy), removedConversationModule (copy)
 		local var4 = p0(p1)
 		

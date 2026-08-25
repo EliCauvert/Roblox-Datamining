@@ -7,7 +7,7 @@ local createResolveDepsModule = require(whatsNew.storage.createResolveDeps)
 local var4 = false
 
 return {
-	ensureWhatsNewStoreInitialized = function(p0) --[[ line: 23 ]]
+	ensureWhatsNewStoreInitialized = function(p0)
 		-- upvalues: var4 (write), createResolveDepsModule (ref), loadWhatsNewRegistryModule (ref), getWhatsNewStoreModule (ref)
 		if var4 then
 			return
@@ -18,7 +18,7 @@ return {
 		})
 		var4 = true
 	end,
-	resetForTests = function() --[[ line: 42 ]]
+	resetForTests = function()
 		-- upvalues: var4 (write), getWhatsNewStoreModule (ref)
 		var4 = false
 		getWhatsNewStoreModule().resetForTests()

@@ -8,7 +8,7 @@ local fetchPrompts = serverTriggeredModalsModule.fetchPrompts
 local reportPromptImpression = serverTriggeredModalsModule.reportPromptImpression
 local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
 
-return function(p0, _, p1, _) --[[ line: 21 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), reportPromptImpression (ref), fetchPrompts (ref), createProfileCompletionPromptsConfig (ref), setCurrentToastMessage (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	
@@ -31,10 +31,10 @@ return function(p0, _, p1, _) --[[ line: 21 ]]
 		
 		return
 	end
-	reportPromptImpression(promptType, var2.promptId):andThen(function() --[[ line: 49 ]]
+	reportPromptImpression(promptType, var2.promptId):andThen(function()
 		-- upvalues: fetchPrompts (copy), createProfileCompletionPromptsConfig (copy)
 		fetchPrompts(createProfileCompletionPromptsConfig(), true)
-	end):catch(function() --[[ line: 52 ]]
+	end):catch(function()
 		-- upvalues: p1 (ref), setCurrentToastMessage (copy)
 		p1.dependencies.dispatch(setCurrentToastMessage({
 			toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong"

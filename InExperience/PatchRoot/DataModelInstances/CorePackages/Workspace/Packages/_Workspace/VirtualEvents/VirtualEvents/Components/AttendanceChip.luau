@@ -11,7 +11,7 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 21 | named "AttendanceChip" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), eventSocialProofModule (ref), playersService (ref), text (ref), formatNumberWithShortUnitsModule (ref)
 	local var6 = useTokens()
 	local var7 = useLocalization({
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 21 | named "AttendanceChip" ]]
 			PaddingRight = UDim.new(0, 12)
 		}),
 		EventSocialProof = reactModule.createElement(eventSocialProofModule, {
-			userIds = reactModule.useMemo(function() --[[ line: 32 ]]
+			userIds = reactModule.useMemo(function()
 				-- upvalues: p0 (ref)
 				local t = {}
 				

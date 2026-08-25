@@ -13,7 +13,7 @@ local makeRecommendationAttributionModule = require(moments.Analytics.makeRecomm
 local toMediaItemModule = require(moments.Components.Feed.Media.toMediaItem)
 local momentMediaView = momentsCommonModule.Media.MomentMediaView
 
-local function momentAttribution(p0) --[[ line: 47 ]]
+local function momentAttribution(p0)
 	-- upvalues: makeRecommendationAttributionModule (ref)
 	return if p0 == nil then nil else makeRecommendationAttributionModule(p0.recommendationMetadata)
 end
@@ -21,17 +21,17 @@ end
 return {
 	{
 		kind = "moment",
-		getKey = function(p1) --[[ line: 59 ]]
+		getKey = function(p1)
 			local moment = p1.moment
 			local recommendationMetadata = moment.recommendationMetadata
 			
 			return if recommendationMetadata and recommendationMetadata.feedItemId and recommendationMetadata.feedItemId ~= "" then recommendationMetadata.feedItemId else moment.momentId
 		end,
-		getAttribution = function(p2) --[[ line: 75 ]]
+		getAttribution = function(p2)
 			-- upvalues: momentAttribution (ref)
 			return momentAttribution(p2.moment)
 		end,
-		render = function(p3, _) --[[ line: 79 ]]
+		render = function(p3, _)
 			-- upvalues: toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsPartnerContentLabelModule (ref), momentItemModule (ref)
 			local moment = p3.moment
 			
@@ -74,13 +74,13 @@ return {
 	},
 	{
 		kind = "skeleton",
-		getKey = function(_) --[[ line: 151 ]]
+		getKey = function(_)
 			return "__feed_skeleton__"
 		end,
-		getAttribution = function(_) --[[ line: 156 ]]
+		getAttribution = function(_)
 			return nil
 		end,
-		render = function(_, _) --[[ line: 160 ]]
+		render = function(_, _)
 			-- upvalues: reactModule (ref), momentItemSkeletonModule (ref)
 			return reactModule.createElement(momentItemSkeletonModule)
 		end

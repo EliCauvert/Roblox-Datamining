@@ -4,7 +4,7 @@ local UIManagerModule = require(vrSpatialUi.UIManager)
 local constantsModule = require(vrSpatialUi.Constants)
 local fFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(vrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
 
-local function _(p0, p1) --[[ line: 17 | named "createInertDecoy" ]]
+local function _(p0, p1)
 	local part = Instance.new("Part")
 	part.Name = p0
 	part.Anchored = true
@@ -18,7 +18,7 @@ local function _(p0, p1) --[[ line: 17 | named "createInertDecoy" ]]
 	part.Parent = p1
 end
 
-local _ = function(p2) --[[ line: 37 | named "renameAndProtectPart" ]]
+local _ = function(p2)
 	-- upvalues: httpService (ref)
 	if p2:GetAttribute("_isProtectedSpatialUIPart") then
 		return
@@ -40,7 +40,7 @@ local _ = function(p2) --[[ line: 37 | named "renameAndProtectPart" ]]
 	part.Parent = parent
 end
 
-local _ = function(value) --[[ line: 48 | named "setupBottomBarRuntime" ]]
+local _ = function(value)
 	-- upvalues: httpService (ref)
 	if value == nil then return end
 	local adornee = value.Adornee
@@ -66,7 +66,7 @@ local _ = function(value) --[[ line: 48 | named "setupBottomBarRuntime" ]]
 	part.Parent = parent
 end
 
-return function(p3, p4, p5) --[[ line: 61 ]]
+return function(p3, p4, p5)
 	-- upvalues: constantsModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), httpService (ref), UIManagerModule (ref)
 	local t = nil
 	local var9 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p4]

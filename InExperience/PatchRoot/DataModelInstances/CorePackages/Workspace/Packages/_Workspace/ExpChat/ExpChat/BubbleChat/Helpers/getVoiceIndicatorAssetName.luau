@@ -1,6 +1,6 @@
 ﻿local getFFlagExpChatEnableVoiceReverseNudgeModule = require(script:FindFirstAncestor("ExpChat").Flags.GetFFlagExpChatEnableVoiceReverseNudge)
 
-return function(p0, p1, p2, p3) --[[ line: 4 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: getFFlagExpChatEnableVoiceReverseNudgeModule (ref)
 	local text
 	local _ = nil

@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "getClosestItemToCenter" ]]
+﻿return function(p0, p1)
 	local canvasPosition = p1.CanvasPosition
 	local var0 = math.floor((canvasPosition.X + p1.AbsoluteSize.X / 2) / p0.X) + 1
 	

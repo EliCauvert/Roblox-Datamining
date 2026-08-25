@@ -3,7 +3,7 @@ local useLocalUserId = require(appChat.Parent.RobloxAppHooks).useLocalUserId
 local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
 local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: useLocalUserId (ref), useGetConversationFromIdModule (ref), getOtherParticipantsModule (ref)
 	local var3 = useLocalUserId()
 	local var4 = useGetConversationFromIdModule(p0)

@@ -6,7 +6,7 @@ local AXTooltipAllowedTooltips = game:DefineFastString("AXTooltipAllowedTooltips
 local AXTooltipUseMemStorage = game:DefineFastFlag("AXTooltipUseMemStorage", false)
 local AXTooltipMaxNumberOfTimesSeen = game:DefineFastInt("AXTooltipMaxNumberOfTimesSeen", 2)
 
-local function deserializeSeenTooltips(p0) --[[ line: 30 ]]
+local function deserializeSeenTooltips(p0)
 	local t = {}
 	
 	for i, v in p0:split(",") do
@@ -15,7 +15,7 @@ local function deserializeSeenTooltips(p0) --[[ line: 30 ]]
 	return t
 end
 
-local function serializeSeenTooltips(p1) --[[ line: 42 ]]
+local function serializeSeenTooltips(p1)
 	-- upvalues: AXTooltipMaxNumberOfTimesSeen (ref)
 	local t = {}
 	
@@ -27,7 +27,7 @@ local function serializeSeenTooltips(p1) --[[ line: 42 ]]
 	return table.concat(t, ",")
 end
 
-return function() --[[ line: 54 | named "createAXTooltipStore" ]]
+return function()
 	-- upvalues: AXTooltipAllowedTooltips (ref), safeAppStorageServiceModule (ref), constantsModule (ref), AXTooltipUseMemStorage (ref), deserializeSeenTooltips (ref), AXTooltipMaxNumberOfTimesSeen (ref), serializeSeenTooltips (ref), signalsModule (ref)
 	local var11 = AXTooltipAllowedTooltips:split(",")
 	local var12 = deserializeSeenTooltips(safeAppStorageServiceModule.getItem(constantsModule.AX_TOOLTIP_STORAGE_KEY, AXTooltipUseMemStorage))
@@ -49,17 +49,17 @@ return function() --[[ line: 54 | named "createAXTooltipStore" ]]
 	local t_2 = {}
 	
 	return {
-		getIsTooltipAllowedToBeShown = function(value) --[[ line: 87 ]]
+		getIsTooltipAllowedToBeShown = function(value)
 			-- upvalues: t_2 (ref), signalsModule (copy), var15 (ref)
 			if t_2[value] == nil then
-				t_2[value] = signalsModule.createComputed(function(p2) --[[ line: 89 ]]
+				t_2[value] = signalsModule.createComputed(function(p2)
 					-- upvalues: var15 (copy), value (ref)
 					return var15(p2)[value] == true
 				end)
 			end
 			return t_2[value]
 		end,
-		dismissTooltip = function(p3, p4) --[[ line: 97 ]]
+		dismissTooltip = function(p3, p4)
 			-- upvalues: var15 (ref), var16 (ref), var17 (ref), AXTooltipMaxNumberOfTimesSeen (copy), safeAppStorageServiceModule (copy), constantsModule (copy), serializeSeenTooltips (copy), AXTooltipUseMemStorage (copy), var18 (ref)
 			local cloned = table.clone(var15(false))
 			

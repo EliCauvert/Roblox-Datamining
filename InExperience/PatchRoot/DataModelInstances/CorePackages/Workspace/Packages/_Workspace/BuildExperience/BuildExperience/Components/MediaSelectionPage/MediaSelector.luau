@@ -30,7 +30,7 @@ local fFlagMediaSelectorErrorLoggingModule = require(buildExperience.Flags.FFlag
 local formatErrorModule = require(buildExperience.utils.formatError)
 local snackbar = foundationModule.Snackbar
 
-return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
+return function(p0)
 	-- upvalues: fFlagBuildDesktopReadinessModule (ref), var8 (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagMediaSelectorErrorLoggingModule (ref), getGameMediaForUniverseModule (ref), reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), useTokens (ref), createGalleryCaptureSourceModule (ref), useMediaUpdaterModule (ref), getGameMediaStore (ref), formatErrorModule (ref), uploadCaptureAsyncModule (ref), getThumbnailUrlAsyncModule (ref), promiseModule (ref), createImageAssetAsyncModule (ref), captureSelectionViewModule (ref), filmstripSlotModule (ref), view (ref), snackbar (ref), mediaPreviewModule (ref), scrollView (ref), foundationModule (ref)
 	local MEDIA_SELECTION_CAPTURE_LIBRARY, MEDIA_SELECTION_DELETE
 	local var22 = if fFlagBuildDesktopReadinessModule then var8() else nil
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 		MEDIA_SELECTION_DELETE = localizationStringsModule.MEDIA_SELECTION_DELETE
 	end
 	local var25 = getGameMediaForUniverseModule(p0.universeId)
-	local var26 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 82 ]]
+	local var26 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: universeConfigurationModule (copy), p0 (ref)
 		return universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p0.universeId)
 	end, { p0.universeId }).data)
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 	var51.current = var31
 	reactModule.useRef(var29).current = var29
 	local var52 = useMediaUpdaterModule()
-	reactModule.useEffect(function() --[[ line: 114 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var47 (ref), var32 (ref), var25 (ref)
 		if var47.current == 0 then
 			var32(var25.thumbnails)
@@ -85,13 +85,13 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			return
 		end
 	end, { var25.thumbnails })
-	reactModule.useEffect(function() --[[ line: 125 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var47 (ref), var30 (ref), var25 (ref)
 		if var47.current == 0 then
 			var30(var25.icon)
 		end
 	end, { var25.icon })
-	local var53 = reactModule.useMemo(function() --[[ line: 131 ]]
+	local var53 = reactModule.useMemo(function()
 		-- upvalues: var31 (ref)
 		local t = {}
 		
@@ -103,9 +103,9 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 	local var54 = var27 ~= nil
 	local var55 = #var53 < 10 and var54
 	local var56 = if var53[1] then var53[1].id else nil
-	local var57 = reactModule.useCallback(function(p1, p2) --[[ line: 146 ]]
+	local var57 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var44 (ref)
-		var44(function(p3) --[[ line: 147 ]]
+		var44(function(p3)
 			-- upvalues: p1 (ref), p2 (ref)
 			local cloned = table.clone(p3)
 			cloned[p1] = if p2 then true else nil
@@ -113,19 +113,19 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			return cloned
 		end)
 	end, {})
-	local var58 = reactModule.useCallback(function() --[[ line: 154 ]]
+	local var58 = reactModule.useCallback(function()
 		-- upvalues: var47 (ref)
 		var47.current += 1
 	end, {})
-	local var59 = reactModule.useCallback(function() --[[ line: 158 ]]
+	local var59 = reactModule.useCallback(function()
 		-- upvalues: var47 (ref)
 		var47.current = math.max(0, var47.current - 1)
 	end, {})
-	local var60 = reactModule.useCallback(function() --[[ line: 162 ]]
+	local var60 = reactModule.useCallback(function()
 		-- upvalues: var46 (ref)
 		var46("")
 	end, {})
-	local var61 = reactModule.useCallback(function(p4) --[[ line: 166 ]]
+	local var61 = reactModule.useCallback(function(p4)
 		-- upvalues: var54 (ref), MEDIA_SELECTION_CAPTURE_LIBRARY (write), var56 (ref), MEDIA_SELECTION_DELETE (write)
 		local t = {}
 		
@@ -150,7 +150,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 		MEDIA_SELECTION_DELETE,
 		var56
 	})
-	local var62 = reactModule.useCallback(function(p5) --[[ line: 187 ]]
+	local var62 = reactModule.useCallback(function(p5)
 		-- upvalues: var43 (ref), var48 (ref), var38 (ref), var36 (ref)
 		if var43[p5] or var48.current and p5 ~= "icon" and p5 ~= "empty" then
 			return
@@ -158,7 +158,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 		var38(p5)
 		var36(true)
 	end, { var43 })
-	local var63 = reactModule.useCallback(function(p6) --[[ line: 196 ]]
+	local var63 = reactModule.useCallback(function(p6)
 		-- upvalues: var36 (ref), var48 (ref), var37 (ref), var54 (ref), var42 (ref), editor_1 (ref), var27 (ref), var43 (ref), var31 (ref), var58 (ref), var57 (ref), var32 (ref), var33 (ref), var34 (ref), var52 (ref), getGameMediaStore (copy), p0 (ref), fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (ref), var24 (ref), var59 (ref)
 		var36(false)
 		
@@ -190,7 +190,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			var48.current = true
 			var58()
 			var57(var82, true)
-			var32(function(p7) --[[ line: 232 ]]
+			var32(function(p7)
 				-- upvalues: var82 (ref)
 				local t = {}
 				
@@ -205,16 +205,16 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			if var33.kind == "thumbnail" and var33.id == var82 then
 				var34({ kind = "icon" })
 			end
-			var52.removePreview(var27, assetResourceName):andThen(function() --[[ line: 247 ]]
+			var52.removePreview(var27, assetResourceName):andThen(function()
 				-- upvalues: getGameMediaStore (copy), p0 (copy)
 				getGameMediaStore().fetchGameMedia(tostring(p0.universeId))
-			end):catch(function(p8) --[[ line: 250 ]]
+			end):catch(function(p8)
 				-- upvalues: fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (copy), var24 (copy), var32 (copy), var82 (ref), var83 (write), var85 (ref)
 				if fFlagMediaSelectorErrorLoggingModule then
 					warn(`[BuildExperience] MediaSelector delete failed: {formatErrorModule(p8)}`)
 					var46(var24.mediaError)
 				end
-				var32(function(p9) --[[ line: 255 ]]
+				var32(function(p9)
 					-- upvalues: var82 (copy), var83 (copy), var85 (copy)
 					for i, v in p9 do
 						if v.id == var82 then
@@ -226,7 +226,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 					
 					return cloned
 				end)
-			end):finally(function() --[[ line: 266 ]]
+			end):finally(function()
 				-- upvalues: var48 (copy), var57 (copy), var82 (ref), var59 (copy)
 				var48.current = false
 				var57(var82, false)
@@ -237,31 +237,31 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 		var37, var33, var31, var52, var27, var54, var43, var58, var59, var57, var24,
 		p0.universeId
 	})
-	local var64 = reactModule.useCallback(function() --[[ line: 289 ]]
+	local var64 = reactModule.useCallback(function()
 		-- upvalues: var36 (ref)
 		var36(false)
 	end, {})
-	local var65 = reactModule.useCallback(function() --[[ line: 293 ]]
+	local var65 = reactModule.useCallback(function()
 		-- upvalues: var34 (ref)
 		var34({ kind = "icon" })
 	end, {})
-	local var66 = reactModule.useCallback(function(p10) --[[ line: 297 ]]
+	local var66 = reactModule.useCallback(function(p10)
 		-- upvalues: var34 (ref)
 		var34({ kind = "thumbnail", id = p10 })
 	end, {})
-	local var67 = reactModule.useCallback(function() --[[ line: 301 ]]
+	local var67 = reactModule.useCallback(function()
 		-- upvalues: var62 (ref)
 		var62("icon")
 	end, { var62 })
-	local var68 = reactModule.useCallback(function() --[[ line: 305 ]]
+	local var68 = reactModule.useCallback(function()
 		-- upvalues: var62 (ref)
 		var62("empty")
 	end, { var62 })
-	local var69 = reactModule.useCallback(function(p11) --[[ line: 309 ]]
+	local var69 = reactModule.useCallback(function(p11)
 		-- upvalues: var62 (ref)
 		var62(p11)
 	end, { var62 })
-	local var70 = reactModule.useCallback(function(p12) --[[ line: 314 ]]
+	local var70 = reactModule.useCallback(function(p12)
 		-- upvalues: var41 (ref), var27 (ref), var43 (ref), editor_1 (ref), var42 (ref), var51 (ref), var49 (ref), var58 (ref), var57 (ref), var34 (ref), var32 (ref), uploadCaptureAsyncModule (copy), getThumbnailUrlAsyncModule (copy), promiseModule (copy), var26 (ref), createImageAssetAsyncModule (copy), var52 (ref), var30 (ref), getGameMediaStore (copy), p0 (ref), fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (ref), var24 (ref), var59 (ref)
 		if var41 == nil or var27 == nil or var43[var41] then return end
 		editor_1("editor")
@@ -295,7 +295,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 		if var41 == "icon" then
 			var34({ kind = "icon" })
 		elseif var41 == "empty" then
-			var32(function(p13) --[[ line: 355 ]]
+			var32(function(p13)
 				-- upvalues: current (write)
 				local cloned = table.clone(p13)
 				table.insert(cloned, { mediaType = "image", assetSource = nil, id = current })
@@ -304,7 +304,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			end)
 			var34({ kind = "thumbnail", id = current })
 		else
-			var32(function(p14) --[[ line: 366 ]]
+			var32(function(p14)
 				-- upvalues: var41 (ref)
 				local cloned = table.clone(p14)
 				
@@ -318,10 +318,10 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 				return cloned
 			end)
 		end
-		local var91 = uploadCaptureAsyncModule(p12):andThen(function(p17) --[[ line: 383 ]]
+		local var91 = uploadCaptureAsyncModule(p12):andThen(function(p17)
 			-- upvalues: getThumbnailUrlAsyncModule (copy)
 			return getThumbnailUrlAsyncModule(p17.assetId)
-		end):andThen(function(p15) --[[ line: 386 ]]
+		end):andThen(function(p15)
 			-- upvalues: promiseModule (copy), var26 (copy), createImageAssetAsyncModule (copy), var41 (ref)
 			if typeof(p15) == "table" and p15.status == "in_review" then
 				return promiseModule.reject({
@@ -334,7 +334,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			return createImageAssetAsyncModule(imageUrl, nil, var41 == "icon", if var26 then {
 				creatorType = var26.creatorType,
 				creatorTargetId = var26.creatorTargetId
-			} else nil):andThen(function(p16) --[[ line: 400 ]]
+			} else nil):andThen(function(p16)
 				-- upvalues: imageUrl (ref)
 				return {
 					imageAssetId = tostring(p16.assetId),
@@ -342,19 +342,19 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 				}
 			end)
 		end)
-		local var92 = var91:andThen(function(p18) --[[ line: 408 ]]
+		local var92 = var91:andThen(function(p18)
 			return p18.imageAssetId
 		end)
-		;(if var41 == "icon" then var52.setIcon(var27, var92) elseif var41 == "empty" then var52.addPreview(var27, var92) else var52.replacePreview(var27, var92, var89.assetResourceName)):andThen(function() --[[ line: 426 ]]
+		;(if var41 == "icon" then var52.setIcon(var27, var92) elseif var41 == "empty" then var52.addPreview(var27, var92) else var52.replacePreview(var27, var92, var89.assetResourceName)):andThen(function()
 			-- upvalues: var91 (ref)
 			return var91
-		end):andThen(function(p23) --[[ line: 429 ]]
+		end):andThen(function(p23)
 			-- upvalues: var41 (ref), var30 (copy), var32 (copy), current (write), var34 (copy), getGameMediaStore (copy), p0 (copy)
 			if var41 == "icon" then
 				var30(p23.displayUrl)
 			else
 				local imageAssetId = p23.imageAssetId
-				var32(function(p24) --[[ line: 437 ]]
+				var32(function(p24)
 					-- upvalues: current (copy), imageAssetId (ref), p23 (ref)
 					local cloned = table.clone(p24)
 					
@@ -372,13 +372,13 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 					end
 					return cloned
 				end)
-				var34(function(p25) --[[ line: 452 ]]
+				var34(function(p25)
 					-- upvalues: current (copy), imageAssetId (ref)
 					return if p25.kind == "thumbnail" and p25.id == current then { kind = "thumbnail", id = imageAssetId } else p25
 				end)
 			end
 			getGameMediaStore().fetchGameMedia(tostring(p0.universeId))
-		end):catch(function(p19) --[[ line: 461 ]]
+		end):catch(function(p19)
 			-- upvalues: fFlagMediaSelectorErrorLoggingModule (copy), formatErrorModule (copy), var46 (copy), var24 (copy), var41 (ref), var32 (copy), current (write), var34 (copy), var89 (write)
 			if fFlagMediaSelectorErrorLoggingModule then
 				warn(`[BuildExperience] MediaSelector upload failed: {formatErrorModule(p19)}`)
@@ -386,7 +386,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			end
 			if var41 == "icon" then return end
 			if var41 == "empty" then
-				var32(function(p20) --[[ line: 469 ]]
+				var32(function(p20)
 					-- upvalues: current (copy)
 					local t = {}
 					
@@ -397,14 +397,14 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 					end
 					return t
 				end)
-				var34(function(p21) --[[ line: 478 ]]
+				var34(function(p21)
 					-- upvalues: current (copy)
 					return if p21.kind == "thumbnail" and p21.id == current then { kind = "icon" } else p21
 				end)
 				
 				return
 			end
-			var32(function(p22) --[[ line: 485 ]]
+			var32(function(p22)
 				-- upvalues: current (copy), var89 (ref)
 				local cloned = table.clone(p22)
 				
@@ -417,7 +417,7 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 				end
 				return cloned
 			end)
-		end):finally(function() --[[ line: 497 ]]
+		end):finally(function()
 			-- upvalues: var57 (copy), current (write), var59 (copy)
 			var57(current, false)
 			var59()
@@ -425,26 +425,26 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 	end, {
 		var41, var52, var27, var26, var43, var58, var59, var57, var24, p0.universeId
 	})
-	local var71 = reactModule.useCallback(function() --[[ line: 516 ]]
+	local var71 = reactModule.useCallback(function()
 		-- upvalues: editor_1 (ref), var42 (ref)
 		editor_1("editor")
 		var42(nil)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 521 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), editor (ref), var71 (ref)
 		local backHandlerRef = p0.backHandlerRef
 		
 		if backHandlerRef then
 			backHandlerRef.current = if editor == "captureSelection" then var71 else nil
 		end
-		return function() --[[ line: 526 ]]
+		return function()
 			-- upvalues: backHandlerRef (ref)
 			if backHandlerRef then
 				backHandlerRef.current = nil
 			end
 		end
 	end, { editor, var71, p0.backHandlerRef })
-	local var72 = reactModule.useMemo(function() --[[ line: 533 ]]
+	local var72 = reactModule.useMemo(function()
 		-- upvalues: var37 (ref), var61 (ref)
 		return if var37 then var61(var37) else { { items = {} } }
 	end, { var37, var61 })
@@ -507,11 +507,11 @@ return function(p0) --[[ line: 59 | named "IconThumbnailsEditor" ]]
 			menuItems = if var78 then var72 else nil,
 			onMenuActivated = var63,
 			onMenuClose = var64,
-			onSelect = function() --[[ line: 603 ]]
+			onSelect = function()
 				-- upvalues: var66 (ref), id_1 (ref)
 				var66(id_1)
 			end,
-			onEditPressed = if var54 or id_1 ~= var56 then function() --[[ line: 607 ]]
+			onEditPressed = if var54 or id_1 ~= var56 then function()
 				-- upvalues: var69 (ref), id_1 (ref)
 				var69(id_1)
 			end else nil,

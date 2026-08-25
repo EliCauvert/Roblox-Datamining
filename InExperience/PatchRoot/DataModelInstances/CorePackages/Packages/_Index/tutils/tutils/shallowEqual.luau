@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 5 ]]
+﻿return function(p0, p1, p2)
 	if not p0 or not p1 then
 		return false
 	elseif p0 == p1 then

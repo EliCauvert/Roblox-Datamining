@@ -10,7 +10,7 @@ local UGCValidatePoseArmMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCVali
 local UGCValidatePoseLegMinDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMinDegFromXVectorOnXYPlane", -93)
 local UGCValidatePoseLegMaxDegFromXVectorOnXYPlane = game:DefineFastInt("UGCValidatePoseLegMaxDegFromXVectorOnXYPlane", -60)
 
-local function validateAngleFromXYPlane(vectorA, vectorB, p0) --[[ line: 24 ]]
+local function validateAngleFromXYPlane(vectorA, vectorB, p0)
 	-- upvalues: failureReasonsAccumulatorModule (ref), UGCValidatePoseDegFromXYPlane (ref)
 	local var11 = failureReasonsAccumulatorModule.new()
 	local degrees = math.deg(math.acos(vectorB:Dot(p0)))
@@ -23,7 +23,7 @@ local function validateAngleFromXYPlane(vectorA, vectorB, p0) --[[ line: 24 ]]
 	return var11:getFinalResults()
 end
 
-local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p1, p2, p3) --[[ line: 45 ]]
+local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p1, p2, p3)
 	-- upvalues: failureReasonsAccumulatorModule (ref), prettyPrintVector3Module (ref)
 	local degrees = math.deg(math.acos(vectorB:Dot(p1)))
 	
@@ -40,7 +40,7 @@ local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p1, p2, 
 	return var14:getFinalResults()
 end
 
-return function(p4, p5) --[[ line: 72 | named "validatePose" ]]
+return function(p4, p5)
 	-- upvalues: assetCalculatorModule (ref), canBeNormalizedModule (ref), failureReasonsAccumulatorModule (ref), validateAngleFromXYPlane (ref), UGCValidatePoseArmMinDegFromXVectorOnXYPlane (ref), UGCValidatePoseArmMaxDegFromXVectorOnXYPlane (ref), UGCValidatePoseLegMinDegFromXVectorOnXYPlane (ref), UGCValidatePoseLegMaxDegFromXVectorOnXYPlane (ref), validateAngleFromWorldXVectorOnXYPlane (ref)
 	local assetTypeEnum = p5.assetTypeEnum
 	assert(assetTypeEnum)

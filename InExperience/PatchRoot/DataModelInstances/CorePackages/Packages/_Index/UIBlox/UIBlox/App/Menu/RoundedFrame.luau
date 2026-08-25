@@ -5,7 +5,7 @@ local object = require(parent_1.LuauPolyfill).Object
 local _ = require(parent.Style.StyleTypes)
 local t = { zIndex = 1 }
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: object (ref), t (ref), reactModule (ref)
 	local var2 = object.assign({}, t, p0)
 	

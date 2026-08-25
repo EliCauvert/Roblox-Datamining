@@ -13,7 +13,7 @@ local UGCValidateRigAttachmentRotationUsesDiff = game:DefineFastFlag("UGCValidat
 local thresholdGetters = attachmentRotationFIntsModule.thresholdGetters
 local var10 = CFrame.new(Vector3.new(0, 0, 0), Vector3.new(0, 0, -1)) * CFrame.fromEulerAnglesXYZ(-1.570796326795, 0, 0)
 
-function t.expectedGripAttCFrameRotation(p0, p1) --[[ line: 34 ]]
+function t.expectedGripAttCFrameRotation(p0, p1)
 	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), var10 (ref)
 	assert(if p1 ~= Enum.AssetType.RightArm then p1 == Enum.AssetType.LeftArm else true)
 	local var11 = if p1 == Enum.AssetType.RightArm then "Right" else "Left"
@@ -35,7 +35,7 @@ function t.expectedGripAttCFrameRotation(p0, p1) --[[ line: 34 ]]
 	return CFrame.fromEulerAnglesXYZ(0, 0, 1.570796326795 - math.acos(Vector3.new(var19.X, math.max(0, -var19.Y), 0).Unit.X)) * var10.Rotation
 end
 
-function t.runValidation(p2, p3) --[[ line: 87 ]]
+function t.runValidation(p2, p3)
 	-- upvalues: failureReasonsAccumulatorModule (ref), UGCValidateRigAttachmentRotationUsesDiff (ref), getDiffBetweenOrientationsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), thresholdGetters (ref), floatEqualsModule (ref), analyticsModule (ref), t (ref), valueToStringModule (ref)
 	local var20 = failureReasonsAccumulatorModule.new()
 	

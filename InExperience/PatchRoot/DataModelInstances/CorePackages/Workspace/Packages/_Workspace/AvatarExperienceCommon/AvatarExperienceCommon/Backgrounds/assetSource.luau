@@ -3,15 +3,15 @@ local promiseModule = require(script:FindFirstAncestor("AvatarExperienceCommon")
 local _ = require(script.Parent.types)
 
 return {
-	create = function(value) --[[ line: 19 ]]
+	create = function(value)
 		-- upvalues: promiseModule (ref)
-		return function(p0) --[[ line: 20 ]]
+		return function(p0)
 			-- upvalues: promiseModule (copy), value (ref)
-			return promiseModule.new(function(p1, p2) --[[ line: 21 ]]
+			return promiseModule.new(function(p1, p2)
 				-- upvalues: value (copy), p0 (ref)
-				task.spawn(function() --[[ line: 22 ]]
+				task.spawn(function()
 					-- upvalues: value (copy), p0 (copy), p2 (ref), p1 (ref)
-					local ok, status = pcall(function() --[[ line: 23 ]]
+					local ok, status = pcall(function()
 						-- upvalues: value (copy), p0 (copy)
 						return value:LoadAsset(p0)
 					end)
@@ -37,13 +37,13 @@ return {
 			end)
 		end
 	end,
-	default = function(p3) --[[ line: 20 ]]
+	default = function(p3)
 		-- upvalues: promiseModule (ref), insertService (ref)
-		return promiseModule.new(function(p4, p5) --[[ line: 21 ]]
+		return promiseModule.new(function(p4, p5)
 			-- upvalues: insertService (copy), p3 (ref)
-			task.spawn(function() --[[ line: 22 ]]
+			task.spawn(function()
 				-- upvalues: insertService (copy), p3 (copy), p5 (ref), p4 (ref)
-				local ok, status = pcall(function() --[[ line: 23 ]]
+				local ok, status = pcall(function()
 					-- upvalues: insertService (copy), p3 (copy)
 					return insertService:LoadAsset(p3)
 				end)

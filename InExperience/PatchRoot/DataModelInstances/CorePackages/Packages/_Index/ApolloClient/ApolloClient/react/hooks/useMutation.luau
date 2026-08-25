@@ -14,20 +14,20 @@ local _ = require(script.Parent.Parent.types.types)
 local mutationData = require(script.Parent.Parent.data).MutationData
 local getApolloContext = require(script.Parent.Parent.context).getApolloContext
 
-function t.useMutation(p0, p1) --[[ line: 40 ]]
+function t.useMutation(p0, p1)
 	-- upvalues: useContext (ref), getApolloContext (ref), useState (ref), object (ref), useRef (ref), mutationData (ref), useEffect (ref)
 	local var2 = useContext(getApolloContext())
 	local var3, var4 = useState({ called = false, loading = false })
 	local var5 = if p1 then object.assign({}, p1, { mutation = p0 }) else { mutation = p0 }
 	local var6 = useRef(nil)
-	local var7 = (function() --[[ line: 52 | named "getMutationDataRef" ]]
+	local var7 = (function()
 		-- upvalues: var6 (ref), mutationData (copy), var5 (ref), var2 (ref), var3 (ref), var4 (ref)
 		if not var6.current then
 			var6.current = mutationData.new({
 				options = var5,
 				context = var2,
 				result = var3,
-				setResult = function(_, p2) --[[ line: 58 ]]
+				setResult = function(_, p2)
 					-- upvalues: var4 (copy)
 					var4(p2)
 					
@@ -39,7 +39,7 @@ function t.useMutation(p0, p1) --[[ line: 40 ]]
 	end)()
 	var7:setOptions(var5)
 	var7.context = var2
-	useEffect(function() --[[ line: 72 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref)
 		return var7:afterExecute()
 	end)

@@ -22,16 +22,16 @@ detailsPageBody.validateProps = tModule.strictInterface({
 })
 detailsPageBody.defaultProps = { bodyClipsDescendants = true, showPageDetails = false }
 
-function detailsPageBody.init(p0) --[[ line: 51 ]]
+function detailsPageBody.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.state = { containerWidth = nil }
 	p0.containerFrameRef = roactModule.createRef()
 	p0.mounted = false
 	
-	function p0.onContainerSizeChange(p1) --[[ line: 57 ]]
+	function p0.onContainerSizeChange(p1)
 		-- upvalues: p0 (ref)
 		if p0.mounted then
-			p0:setState(function(p2, _) --[[ line: 62 ]]
+			p0:setState(function(p2, _)
 				-- upvalues: p1 (ref)
 				return if p2.containerWidth == p1.AbsoluteSize.x then nil else { containerWidth = p1.AbsoluteSize.x }
 			end)
@@ -41,7 +41,7 @@ function detailsPageBody.init(p0) --[[ line: 51 ]]
 	end
 end
 
-function detailsPageBody.renderSinglePanel(p3) --[[ line: 73 ]]
+function detailsPageBody.renderSinglePanel(p3)
 	-- upvalues: roactModule (ref), fFlagLuaAppFixEdpRecommendedCarouselHoverZIndex (ref)
 	local t = {
 		Layout = roactModule.createElement("UIListLayout", {
@@ -75,7 +75,7 @@ function detailsPageBody.renderSinglePanel(p3) --[[ line: 73 ]]
 	}
 end
 
-function detailsPageBody.renderDualPanel(p4) --[[ line: 113 ]]
+function detailsPageBody.renderDualPanel(p4)
 	-- upvalues: roactModule (ref), contentPositionModule (ref)
 	local var8 = if p4.state.containerWidth < 1920 then 48 else 96
 	local t = {
@@ -130,11 +130,11 @@ function detailsPageBody.renderDualPanel(p4) --[[ line: 113 ]]
 	}
 end
 
-function detailsPageBody.renderBodyContent(p5) --[[ line: 180 ]]
+function detailsPageBody.renderBodyContent(p5)
 	return if not (not p5.state.containerWidth or not p5.props.componentList) then if p5.state.containerWidth < (p5.props.dualPanelBreakpoint or 1280) then p5:renderSinglePanel() else p5:renderDualPanel() else {}
 end
 
-function detailsPageBody.render(p6) --[[ line: 193 ]]
+function detailsPageBody.render(p6)
 	-- upvalues: getPlatformConfigModule (ref), roactModule (ref), detailsPageTitleContentModule (ref)
 	local var11 = if p6.props.sideMargin then p6.props.sideMargin else getPlatformConfigModule(p6.props.deviceType).sideMargin
 	
@@ -182,7 +182,7 @@ function detailsPageBody.render(p6) --[[ line: 193 ]]
 	})
 end
 
-function detailsPageBody.didMount(p7) --[[ line: 243 ]]
+function detailsPageBody.didMount(p7)
 	p7.mounted = true
 	
 	if p7.containerFrameRef.current then
@@ -190,7 +190,7 @@ function detailsPageBody.didMount(p7) --[[ line: 243 ]]
 	end
 end
 
-function detailsPageBody.willUnmount(p8) --[[ line: 251 ]]
+function detailsPageBody.willUnmount(p8)
 	p8.mounted = false
 end
 

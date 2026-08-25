@@ -18,9 +18,9 @@ local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
 local image = foundationModule.Image
 local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
 
-local function renderWithSelectionCursor(p0, p1) --[[ line: 37 ]]
+local function renderWithSelectionCursor(p0, p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), assetsModule (ref), var4 (ref), imageSetButton (ref), themedTextLabelModule (ref), constantsModule (ref), zonePortalModule (ref), directionModule (ref)
-	return withFoundationOrUIBloxStyle(function(p2) --[[ line: 38 ]]
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				IconEmphasis = {
@@ -33,7 +33,7 @@ local function renderWithSelectionCursor(p0, p1) --[[ line: 37 ]]
 				}
 			}
 		}
-	end, function(p3) --[[ line: 51 ]]
+	end, function(p3)
 		-- upvalues: p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), assetsModule (copy), p1 (ref), var4 (copy), imageSetButton (copy), themedTextLabelModule (copy), constantsModule (copy), zonePortalModule (copy), directionModule (copy)
 		return roact.createElement("TextButton", {
 			AutoButtonColor = false,
@@ -92,17 +92,17 @@ local function renderWithSelectionCursor(p0, p1) --[[ line: 37 ]]
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p6) --[[ line: 123 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p6)
 	-- upvalues: navigateUpModule (ref)
 	return {
-		navigateUp = function() --[[ line: 125 ]]
+		navigateUp = function()
 			-- upvalues: p6 (ref), navigateUpModule (copy)
 			p6(navigateUpModule)
 		end
 	}
-end)(function(p4) --[[ line: 117 | named "Page" ]]
+end)(function(p4)
 	-- upvalues: var3 (ref), renderWithSelectionCursor (ref)
-	return var3(function(p5) --[[ line: 118 ]]
+	return var3(function(p5)
 		-- upvalues: renderWithSelectionCursor (copy), p4 (ref)
 		return renderWithSelectionCursor(p4, p5)
 	end)

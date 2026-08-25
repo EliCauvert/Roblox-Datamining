@@ -6,7 +6,7 @@ local recordAndDumpViewModule = require(script.Parent.RecordAndDumpView)
 local column = roactModule.Component:extend("Column")
 local microProfilerView = roactModule.Component:extend("MicroProfilerView")
 
-function column.render(p0) --[[ line: 13 ]]
+function column.render(p0)
 	-- upvalues: roactModule (ref), immutableModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -23,7 +23,7 @@ function column.render(p0) --[[ line: 13 ]]
 	}, p0.props[roactModule.Children]))
 end
 
-function microProfilerView.render(p1) --[[ line: 35 ]]
+function microProfilerView.render(p1)
 	-- upvalues: roactModule (ref), column (ref), localActionsViewModule (ref), recordAndDumpViewModule (ref), recentlyCapturedDumpsViewModule (ref)
 	return roactModule.createElement("Frame", {
 		Size = p1.props.Size,

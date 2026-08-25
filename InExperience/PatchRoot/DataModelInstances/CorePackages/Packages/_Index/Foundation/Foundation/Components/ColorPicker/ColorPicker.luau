@@ -18,14 +18,14 @@ local t = {
 	initialMode = colorInputModeModule.RGB
 }
 
-local function _(p0) --[[ line: 40 | named "resolveInitialHSV" ]]
+local function _(p0)
 	if type(p0) == "table" then
 		return p0.H / 360, (p0.S or 100) / 100, (p0.V or 100) / 100
 	end
 	return p0:ToHSV()
 end
 
-return function(p1) --[[ line: 48 | named "ColorPicker" ]]
+return function(p1)
 	-- upvalues: colorInputModeModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), colorUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), colorInputsModule (ref), brickColorPickerModule (ref), SVPickerModule (ref), colorSliderModule (ref), colorSliderTypeModule (ref)
 	local var19, var20, var21
 	local availableModes = p1.availableModes or {
@@ -54,12 +54,12 @@ return function(p1) --[[ line: 48 | named "ColorPicker" ]]
 	local var31, var32 = reactModule.useBinding(var15.initialAlpha or 1)
 	local var33, var34 = reactModule.useState(var15.initialMode or colorInputModeModule.RGB)
 	local toColor3 = var17:map(colorUtilsModule.toColor3)
-	local var36 = var17:map(function(p2) --[[ line: 70 ]]
+	local var36 = var17:map(function(p2)
 		-- upvalues: colorUtilsModule (copy)
 		return not colorUtilsModule.isPartialHSV(p2)
 	end)
 	local var37 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), availableModes (ref), var34 (ref)
 		local initialMode = var15.initialMode
 		
@@ -78,12 +78,12 @@ return function(p1) --[[ line: 48 | named "ColorPicker" ]]
 			end
 		end
 	end, { var15.initialMode })
-	local var38 = reactModule.useCallback(function(p3, p4) --[[ line: 95 ]]
+	local var38 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var18 (ref), var15 (ref)
 		var18(p3)
 		var15.onColorChanged(p3, p4)
 	end, { var15.onColorChanged })
-	local var39 = reactModule.useCallback(function(p5) --[[ line: 100 ]]
+	local var39 = reactModule.useCallback(function(p5)
 		-- upvalues: var32 (ref), var15 (ref)
 		var32(p5)
 		
@@ -91,12 +91,12 @@ return function(p1) --[[ line: 48 | named "ColorPicker" ]]
 			var15.onAlphaChanged(p5)
 		end
 	end, { var15.onAlphaChanged })
-	local var40 = reactModule.useCallback(function(p6) --[[ line: 107 ]]
+	local var40 = reactModule.useCallback(function(p6)
 		-- upvalues: var38 (ref)
 		var38(p6.Color, p6)
 	end, { var38 })
 	local var41 = var15.onAlphaChanged ~= nil
-	local var42 = reactModule.useCallback(function(p7) --[[ line: 113 ]]
+	local var42 = reactModule.useCallback(function(p7)
 		-- upvalues: var38 (ref)
 		var38(p7, nil)
 	end, { var38 })
@@ -114,7 +114,7 @@ return function(p1) --[[ line: 48 | named "ColorPicker" ]]
 		var28,
 		var30
 	})
-	reactModule.useEffect(function() --[[ line: 139 ]]
+	reactModule.useEffect(function()
 		-- upvalues: toColor3 (ref), var26 (ref), var28 (ref), var30 (ref)
 		local var46, var47, var48 = toColor3:getValue():ToHSV()
 		var26(var46)
@@ -145,7 +145,7 @@ return function(p1) --[[ line: 48 | named "ColorPicker" ]]
 				hue = var25,
 				saturation = var27,
 				value = var29,
-				onChanged = function(p8, p9) --[[ line: 182 ]]
+				onChanged = function(p8, p9)
 					-- upvalues: var43 (ref), var25 (ref)
 					var43(var25:getValue(), p8, p9)
 				end,
@@ -159,7 +159,7 @@ return function(p1) --[[ line: 48 | named "ColorPicker" ]]
 			LayoutOrder = 3,
 			sliderType = colorSliderTypeModule.Hue,
 			value = var25,
-			onValueChanged = function(p10) --[[ line: 197 ]]
+			onValueChanged = function(p10)
 				-- upvalues: var43 (ref), var27 (ref), var29 (ref)
 				var43(p10, var27:getValue(), var29:getValue())
 			end,

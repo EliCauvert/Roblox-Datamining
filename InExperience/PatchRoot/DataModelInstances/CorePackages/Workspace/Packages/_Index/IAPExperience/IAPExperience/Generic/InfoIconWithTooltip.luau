@@ -9,7 +9,7 @@ local interactable = UIBloxModule.Core.Control.Interactable
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local info = images["icons/actions/info"]
 
-function InfoIconWithTooltip(p0) --[[ line: 22 ]]
+function InfoIconWithTooltip(p0)
 	-- upvalues: withHoverTooltip (ref), tooltipOrientation (ref), coreGuiService (ref), roactModule (ref), imageSetLabel (ref), info (ref), interactable (ref)
 	local uDim2 = UDim2.new(0, 18, 0, 18)
 	
@@ -19,7 +19,7 @@ function InfoIconWithTooltip(p0) --[[ line: 22 ]]
 		triggerPointName = "BonusBannerInfoIcon",
 		preferredOrientation = tooltipOrientation.Bottom,
 		guiTarget = coreGuiService
-	}, function(p1, p2) --[[ line: 32 ]]
+	}, function(p1, p2)
 		-- upvalues: roactModule (copy), uDim2 (ref), p0 (ref), imageSetLabel (copy), info (copy), interactable (copy)
 		return roactModule.createElement("Frame", {
 			Size = uDim2,

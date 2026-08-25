@@ -8,11 +8,11 @@ local getVersionInformationStoreModule = require(buildExperience.Stores.GetVersi
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
 local dataStatus = dataHydrationModule.DataStatus
 
-return function(p0) --[[ line: 22 | named "useVersionTitleDescriptionPageViewModel" ]]
+return function(p0)
 	-- upvalues: getVersionInformationStoreModule (ref), placeVersionHistoryModule (ref), reactModule (ref), signalsReactModule (ref), dataStatus (ref)
 	local var6 = getVersionInformationStoreModule()
 	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
-	local var8 = reactModule.useMemo(function() --[[ line: 25 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: placeVersionHistoryStore (ref), p0 (ref)
 		return placeVersionHistoryStore.getAndFetchHistory(p0.placeId)
 	end, { p0.placeId, placeVersionHistoryStore })
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 22 | named "useVersionTitleDescriptionPageViewMod
 	local var21 = reactModule.useRef("")
 	local var22 = reactModule.useRef("")
 	local var23, var24 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var23 (ref), p0 (ref), var21 (ref), var14 (ref), var22 (ref), var15 (ref), var18 (ref), var20 (ref), var24 (ref)
 		if var16 and var23 ~= p0.placeId then
 			var21.current = var14
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 22 | named "useVersionTitleDescriptionPageViewMod
 		var16,
 		p0.placeId
 	})
-	local var25 = reactModule.useCallback(function() --[[ line: 69 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), p0 (ref), var17 (ref), var19 (ref), var21 (ref), var22 (ref), var6 (ref)
 		if var23 ~= p0.placeId then return end
 		local value = var17:getValue()
@@ -66,14 +66,14 @@ return function(p0) --[[ line: 22 | named "useVersionTitleDescriptionPageViewMod
 		var17,
 		var6
 	})
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref)
 		return var25
 	end, { var25 })
 	
 	return {
 		isReady = var23 == p0.placeId,
-		onBack = reactModule.useCallback(function() --[[ line: 97 ]]
+		onBack = reactModule.useCallback(function()
 			-- upvalues: var25 (ref), p0 (ref)
 			var25()
 			p0.onBack()

@@ -24,7 +24,7 @@ local t = {
 	userPresence = require(foundation.Enums.UserPresence).None
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | named "Avatar" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useAvatarVariantsModule (ref), getAvatarSizeModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), flagsModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref), dashModule (ref), statusIndicatorModule (ref), indicatorModule (ref)
 	local var18 = withDefaultsModule(p0, t)
 	local var19 = useTokensModule()
@@ -40,7 +40,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | 
 		Size = UDim2.fromOffset(var22, var22)
 	}), {
 		Image = reactModule.createElement(imageModule, {
-			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var18.userId, function(p2) --[[ line: 73 ]]
+			Image = if flagsModule.FoundationAvatarBindableUserId then mapBindableModule(var18.userId, function(p2)
 				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy), flagsModule (copy), var18 (ref)
 				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p2, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var18.includeProfileFrame } else nil)
 			end) else getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, var18.userId, thumbnailSizeModule.Medium, if flagsModule.FoundationAvatarIncludeProfileFrame then { includeProfileFrame = var18.includeProfileFrame } else nil),

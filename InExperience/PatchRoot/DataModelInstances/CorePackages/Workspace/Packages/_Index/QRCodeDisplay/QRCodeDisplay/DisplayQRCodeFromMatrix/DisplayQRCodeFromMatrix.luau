@@ -11,7 +11,7 @@ local t = {
 	pixelColor3 = Color3.fromRGB(0, 0, 0)
 }
 
-local function _(p0, p1) --[[ line: 36 | named "getQrCodeImageSize" ]]
+local function _(p0, p1)
 	if not p1 then
 		return p0
 	end
@@ -25,7 +25,7 @@ local function _(p0, p1) --[[ line: 36 | named "getQrCodeImageSize" ]]
 	return math.round(p0 / (math.sin(radians) + math.cos(radians)))
 end
 
-return function(p2) --[[ line: 51 ]]
+return function(p2)
 	-- upvalues: dashModule (ref), t (ref), reactModule (ref), assetService (ref), drawImageModule (ref)
 	local var10
 	local var6 = dashModule.join(t, p2)
@@ -46,7 +46,7 @@ return function(p2) --[[ line: 51 ]]
 	else
 		var10 = sideLength
 	end
-	reactModule.useEffect(function() --[[ line: 58 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var10 (ref), assetService (copy), var8 (ref), drawImageModule (copy), var6 (ref)
 		if not var9.current or var9.current.Size.X ~= var10 then
 			var9.current = assetService:CreateEditableImage({ Size = Vector2.new(var10, var10) })

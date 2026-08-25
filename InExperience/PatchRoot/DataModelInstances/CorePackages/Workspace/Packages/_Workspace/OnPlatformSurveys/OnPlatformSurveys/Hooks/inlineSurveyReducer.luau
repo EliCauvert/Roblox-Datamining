@@ -7,7 +7,7 @@ local phaseModule = require(onPlatformSurveys.Enums.Phase)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 local t = {}
 
-local function getInitialState(p0) --[[ line: 51 ]]
+local function getInitialState(p0)
 	-- upvalues: phaseModule (ref), t (ref)
 	return {
 		index = 1,
@@ -22,14 +22,14 @@ local function getInitialState(p0) --[[ line: 51 ]]
 	}
 end
 
-local function closedState(p1) --[[ line: 65 ]]
+local function closedState(p1)
 	-- upvalues: dashModule (ref), getInitialState (ref), phaseModule (ref)
 	return dashModule.join(getInitialState(p1), { phase = phaseModule.Closed })
 end
 
 return {
 	getInitialState = getInitialState,
-	reducer = function(p2, p3) --[[ line: 69 ]]
+	reducer = function(p2, p3)
 		-- upvalues: getInitialState (ref), closedState (ref), dashModule (ref), phaseModule (ref), inlineSurveyHelpersModule (ref), fFlagInlineSurveyBranching (ref), t (ref)
 		if p3.type == "fetchRequested" then
 			return getInitialState(p2.hasInvite)

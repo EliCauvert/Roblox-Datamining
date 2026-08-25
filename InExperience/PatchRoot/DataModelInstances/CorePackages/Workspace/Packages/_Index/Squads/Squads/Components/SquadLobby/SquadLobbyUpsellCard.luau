@@ -23,7 +23,7 @@ local inputSize = foundation.Enums.InputSize
 local noResponseInviteAgainOrAddOthersEnumModule = require(squads.Enums.NoResponseInviteAgainOrAddOthersEnum)
 local squadInvitePageNavSourceEnumModule = require(squads.Enums.SquadInvitePageNavSourceEnum)
 
-return function(p0) --[[ line: 42 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useTokens (ref), responsiveModule (ref), useLocalUserId (ref), useLocalization (ref), useCurrentSquadSelector (ref), useCurrentSquadId (ref), react (ref), networkingSquads (ref), useSelector (ref), squadExternalContractContext (ref), foundation (ref), avatarGroup (ref), inputSize (ref), avatarGroupType (ref), useEffectOnce (ref), eventNamesModule (ref), noResponseInviteAgainOrAddOthersEnumModule (ref), reinviteToSquad (ref), squadInvitePageNavSourceEnumModule (ref), networkStatus (ref)
 	local var6 = useDispatch()
 	local var7 = useTokens()
@@ -39,13 +39,13 @@ return function(p0) --[[ line: 42 ]]
 	local var12 = useCurrentSquadSelector()
 	local var13 = if var12 and var12.parentChannelId then var12.parentChannelId else nil
 	local var14 = useCurrentSquadId()
-	local var15 = useSelector(react.useCallback(function(p1) --[[ line: 62 ]]
+	local var15 = useSelector(react.useCallback(function(p1)
 		-- upvalues: networkingSquads (copy), var14 (ref)
 		return networkingSquads.ReinviteToSquad.getStatus(p1, { squadId = var14 })
 	end, { var14 }))
 	local var16 = react.useContext(squadExternalContractContext)
 	local var17 = var16.useGetConversationFromId(var13 or "")
-	local var18 = react.useMemo(function() --[[ line: 70 ]]
+	local var18 = react.useMemo(function()
 		-- upvalues: react (copy), foundation (copy), var7 (ref), var11 (ref)
 		return react.createElement(foundation.Text, {
 			LayoutOrder = 1,
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 42 ]]
 			TextXAlignment = Enum.TextXAlignment.Center
 		})
 	end, { var7, var11.upsellText })
-	local var19 = react.useMemo(function() --[[ line: 83 ]]
+	local var19 = react.useMemo(function()
 		-- upvalues: var17 (ref), var10 (ref), var9 (ref), var8 (ref), react (copy), avatarGroup (copy), inputSize (copy), avatarGroupType (copy), var7 (ref)
 		local t = {}
 		
@@ -85,7 +85,7 @@ return function(p0) --[[ line: 42 ]]
 			}
 		})
 	end, { var17 and var17.participants, var10, var9, var8 })
-	useEffectOnce(function() --[[ line: 112 ]]
+	useEffectOnce(function()
 		-- upvalues: var16 (ref), eventNamesModule (copy), noResponseInviteAgainOrAddOthersEnumModule (copy), var13 (ref)
 		var16.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
 			actionType = noResponseInviteAgainOrAddOthersEnumModule.Impression,
@@ -98,7 +98,7 @@ return function(p0) --[[ line: 42 ]]
 			conversationId = var13
 		})
 	end, var13)
-	local var20 = react.useCallback(function() --[[ line: 125 ]]
+	local var20 = react.useCallback(function()
 		-- upvalues: var6 (ref), reinviteToSquad (copy), var14 (ref), var16 (ref), eventNamesModule (copy), noResponseInviteAgainOrAddOthersEnumModule (copy), var13 (ref)
 		var6(reinviteToSquad(var14, var16.setSquadPrompt))
 		var16.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
@@ -107,7 +107,7 @@ return function(p0) --[[ line: 42 ]]
 			conversationId = var13
 		})
 	end, { var16.fireSquadAnalytics, var13 })
-	local var21 = react.useCallback(function() --[[ line: 136 ]]
+	local var21 = react.useCallback(function()
 		-- upvalues: var16 (ref), eventNamesModule (copy), noResponseInviteAgainOrAddOthersEnumModule (copy), var13 (ref), squadInvitePageNavSourceEnumModule (copy), p0 (ref)
 		var16.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
 			actionType = noResponseInviteAgainOrAddOthersEnumModule.Click,
@@ -161,7 +161,7 @@ return function(p0) --[[ line: 42 ]]
 					row = not var8
 				}
 			}, {
-				InviteAgainButton = react.useMemo(function() --[[ line: 155 ]]
+				InviteAgainButton = react.useMemo(function()
 					-- upvalues: react (copy), foundation (copy), var15 (ref), networkStatus (copy), var20 (ref), var11 (ref)
 					return react.createElement(foundation.Button, {
 						LayoutOrder = 1,
@@ -173,7 +173,7 @@ return function(p0) --[[ line: 42 ]]
 						variant = foundation.Enums.ButtonVariant.Standard
 					})
 				end, { var20, var11.inviteAgain, var15 }),
-				AddOthersButton = react.useMemo(function() --[[ line: 171 ]]
+				AddOthersButton = react.useMemo(function()
 					-- upvalues: react (copy), foundation (copy), var21 (ref), var11 (ref)
 					return react.createElement(foundation.Button, {
 						LayoutOrder = 2,

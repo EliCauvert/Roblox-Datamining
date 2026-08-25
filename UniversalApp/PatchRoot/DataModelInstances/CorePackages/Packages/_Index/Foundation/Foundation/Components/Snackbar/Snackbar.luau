@@ -21,7 +21,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { testId = "--foundation-snackbar" }
 local t_1 = { colorNamespace = colorNamespaceModule.Inverse }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 56 | named "Snackbar" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), iconVariant (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), t_1 (ref), iconModule (ref), dashModule (ref), textModule (ref), stateLayerModeModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
 	local var19 = withDefaultsModule(p0, t)
 	local var20 = useTokensModule()

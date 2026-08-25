@@ -8,26 +8,26 @@ local editProfileStoreModule = require(editProfile.Stores.EditProfileStore)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local analyticsServiceV2Module = require(editProfile.Analytics.AnalyticsServiceV2)
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: useLocalUserId (ref), editProfileStoreModule (ref), useSignalState (ref), reactModule (ref), analyticsServiceV2Module (ref), promiseModule (ref), editBioModule (ref)
 	local var6 = useLocalUserId()
 	local data = useSignalState(editProfileStoreModule.getDescription(var6).data) or ""
 	local var8, var9 = reactModule.useState(data)
 	local var10, var11 = reactModule.useState(nil)
-	local var12 = reactModule.useCallback(function(p1) --[[ line: 26 ]]
+	local var12 = reactModule.useCallback(function(p1)
 		-- upvalues: var9 (ref), var11 (ref)
 		var9(p1)
 		var11(nil)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), data (ref)
 		var9(data)
 	end, { data })
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), editProfileStoreModule (copy), var6 (ref), var8 (ref), var11 (ref), analyticsServiceV2Module (copy), promiseModule (copy)
-		p0.registerSaveHandler(function() --[[ line: 36 ]]
+		p0.registerSaveHandler(function()
 			-- upvalues: editProfileStoreModule (copy), var6 (copy), var8 (copy), var11 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
-			return editProfileStoreModule.updateDescription(var6, var8):catch(function(p2) --[[ line: 37 ]]
+			return editProfileStoreModule.updateDescription(var6, var8):catch(function(p2)
 				-- upvalues: var11 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
 				if not p2 then return end
 				local statusCode = nil

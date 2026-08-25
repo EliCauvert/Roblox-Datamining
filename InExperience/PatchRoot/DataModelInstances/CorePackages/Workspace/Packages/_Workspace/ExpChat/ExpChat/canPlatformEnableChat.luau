@@ -7,7 +7,7 @@ local deviceMeetsRequirementsForFAE = socialExperimentsModule.deviceMeetsRequire
 local fFlagAEGIS2UseGuacToShowFAEUpsell = require(parent.SharedFlags).FFlagAEGIS2UseGuacToShowFAEUpsell
 local var3 = if fFlagAEGIS2UseGuacToShowFAEUpsell then require(parent.UniversalAppPolicy) else nil
 
-return function() --[[ line: 21 ]]
+return function()
 	-- upvalues: fFlagAEGIS2UseGuacToShowFAEUpsell (ref), userInputService (ref), avatarChatService (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), var3 (write)
 	local platform
 	if fFlagAEGIS2UseGuacToShowFAEUpsell then

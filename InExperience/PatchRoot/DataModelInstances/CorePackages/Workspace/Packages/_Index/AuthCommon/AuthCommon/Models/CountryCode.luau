@@ -1,10 +1,10 @@
 ﻿local t = {
-	new = function() --[[ line: 4 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.fromJSON(p0) --[[ line: 10 ]]
+function t.fromJSON(p0)
 	-- upvalues: t (ref)
 	local var1 = t.new()
 	var1.name = p0.name

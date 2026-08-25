@@ -17,10 +17,10 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 40 | named "createTrustedConnectionEventListener" ]]
+return function(p0)
 	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var3 (ref), t (ref), trustedConnectionStatusModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref)
 	local var6 = getLocalPlayerUserId()
-	local var7 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ line: 48 ]]
+	local var7 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: getLocalPlayerUserId (copy), var6 (write)
 		local var9 = getLocalPlayerUserId()
 		
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 40 | named "createTrustedConnectionEventListener"
 			var6 = var9
 		end
 	end)
-	local namespace = var3:observeEvent(t.Namespace, function(p1) --[[ line: 57 ]]
+	local namespace = var3:observeEvent(t.Namespace, function(p1)
 		-- upvalues: var6 (write), t (copy), p0 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
 		if not p1.Actor or not p1.Target or not var6 then return end
 		local var10 = tostring(p1.Actor)
@@ -57,7 +57,7 @@ return function(p0) --[[ line: 40 | named "createTrustedConnectionEventListener"
 		end
 	end)
 	
-	return function() --[[ line: 93 ]]
+	return function()
 		-- upvalues: var7 (write), namespace (ref)
 		if var7 then
 			var7:Disconnect()

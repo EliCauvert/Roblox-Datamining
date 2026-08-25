@@ -3,16 +3,16 @@ local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local t = { frequency = 3, dampingRatio = 1 }
 
-return function() --[[ line: 18 | named "useImageLoadFade" ]]
+return function()
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref)
 	local var3, var4 = reactModule.useState(true)
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0, function() --[[ line: 21 ]]
+	local var5, var6 = reactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: var4 (ref)
 		var4(false)
 	end)
 	
 	return {
-		onLoaded = reactModule.useCallback(function(p0) --[[ line: 25 ]]
+		onLoaded = reactModule.useCallback(function(p0)
 			-- upvalues: var6 (ref), reactOtterModule (copy), t (copy)
 			if p0 == Enum.AssetFetchStatus.Success then
 				var6(reactOtterModule.spring(1, t))

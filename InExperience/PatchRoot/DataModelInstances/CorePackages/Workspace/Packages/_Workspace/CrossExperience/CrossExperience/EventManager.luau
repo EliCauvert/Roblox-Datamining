@@ -19,7 +19,7 @@ local var12 = httpService:GenerateGUID(false)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 105 ]]
+function t.new(p0, p1)
 	-- upvalues: eventQueueModule (ref), t (ref)
 	local t_1 = {
 		isSubscribed = false,
@@ -32,14 +32,14 @@ function t.new(p0, p1) --[[ line: 105 ]]
 	return t_1
 end
 
-local _ = function(p2) --[[ line: 116 ]]
+local _ = function(p2)
 	return {
 		userId = tonumber(p2.userId) or -1,
 		isLocalUser = p2.isLocalUser
 	}
 end
 
-function t.notify(_, p3, p4) --[[ line: 123 ]]
+function t.notify(_, p3, p4)
 	-- upvalues: var11 (write), var12 (ref), communicationModule (ref)
 	if not p4 then
 		p4 = {}
@@ -50,15 +50,15 @@ function t.notify(_, p3, p4) --[[ line: 123 ]]
 	communicationModule.notify(p3, p4)
 end
 
-function t:removeObserver(p5, p6) --[[ line: 134 ]]
+function t:removeObserver(p5, p6)
 	-- upvalues: communicationModule (ref)
 	communicationModule.removeObserver(self.experienceType, p6, p5)
 end
 
-function t:addObserver(p7, p8) --[[ line: 138 ]]
+function t:addObserver(p7, p8)
 	-- upvalues: communicationModule (ref)
 	table.insert(self.observers, {
-		id = communicationModule.addObserver(self.experienceType, p7, function(p9) --[[ line: 139 ]]
+		id = communicationModule.addObserver(self.experienceType, p7, function(p9)
 			-- upvalues: self (ref), p7 (ref), p8 (ref)
 			self.eventQueue:process(p7, p9, p8)
 		end),
@@ -68,7 +68,7 @@ end
 
 local var14 = createPersistenceMiddlewareModule({ storeKey = constantsModule.STORAGE_CEV_STORE_KEY })
 
-function t:subscribe(p10, p11) --[[ line: 154 ]]
+function t:subscribe(p10, p11)
 	-- upvalues: enableCrossExpEventLogging (ref), constantsModule (ref), actionsModule (ref), cryo (ref), modelsModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), fFlagPartyVoiceBlockSync (ref)
 	if self.isSubscribed then return end
 	self.isSubscribed = true
@@ -76,7 +76,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 	if p11 and enableCrossExpEventLogging then
 		p11:info("{}: Subscribing to the CEV Store", self.experienceType)
 	end
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_GAME_JOIN_FAILED, function(p12) --[[ line: 167 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_GAME_JOIN_FAILED, function(p12)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy), constantsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Experience Party Voice Game Join Failed: {}", self.experienceType, p12.state)
@@ -85,7 +85,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			status = constantsModule.VOICE_STATUS.ERROR_RCC_CONNECTING
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_STATUS_CHANGED, function(p13) --[[ line: 180 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_STATUS_CHANGED, function(p13)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), constantsModule (copy), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Experience Voice Status Changed: {}, {}, {}, {}", self.experienceType, p13.status, p13.detail, p13.voiceChannelId, p13.voiceSessionId)
@@ -104,7 +104,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			voiceSessionId = p13.voiceSessionId
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_EXPERIENCE_JOINED, function(p14) --[[ line: 212 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_EXPERIENCE_JOINED, function(p14)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), cryo (copy), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Experience joined JobID: {}, GameID: {}, PlaceId: {}", self.experienceType, p14.jobId, p14.gameId, p14.placeId)
@@ -117,7 +117,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 		end
 		p10:dispatch(actionsModule.ExperienceJoined(var17))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_AUDIO_FOCUS_CHANGED, function(p15) --[[ line: 234 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_AUDIO_FOCUS_CHANGED, function(p15)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant Audio Focus Changed {} = {}", self.experienceType, p15.userId, p15.contextId)
@@ -128,7 +128,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			contextIds = p15.contextIds
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_ADDED, function(p16) --[[ line: 254 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_ADDED, function(p16)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), modelsModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant added {}", self.experienceType, p16.userId)
@@ -146,7 +146,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			selectedVoicePack = if fFlagEnablePartyVoiceChangersInLua then p16.selectedVoicePack else nil
 		})))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_REMOVED, function(p17) --[[ line: 276 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_REMOVED, function(p17)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant removed {}", self.experienceType, p17.userId)
@@ -156,7 +156,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			isLocalUser = p17.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_ACTIVE, function(p18) --[[ line: 286 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_ACTIVE, function(p18)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant is active {}", self.experienceType, p18.userId)
@@ -166,7 +166,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			isLocalUser = p18.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_INACTIVE, function(p19) --[[ line: 296 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_IS_INACTIVE, function(p19)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant is inactive {}", self.experienceType, p19.userId)
@@ -176,7 +176,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			isLocalUser = p19.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_MUTED, function(p20) --[[ line: 306 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_MUTED, function(p20)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant is was muted {}", self.experienceType, p20.userId)
@@ -186,7 +186,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			isLocalUser = p20.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_UNMUTED, function(p21) --[[ line: 316 ]]
+	self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PARTICIPANT_WAS_UNMUTED, function(p21)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant is was unmuted {}", self.experienceType, p21.userId)
@@ -198,7 +198,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 	end)
 	
 	if fFlagEnablePartyVoiceChangersInLua then
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_ENABLED, function(p22) --[[ line: 327 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_ENABLED, function(p22)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant voice changer was enabled {}", self.experienceType, p22.userId)
@@ -208,7 +208,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 				isLocalUser = p22.isLocalUser
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_DISABLED, function(p23) --[[ line: 337 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_WAS_DISABLED, function(p23)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant voice changer was disabled {}", self.experienceType, p23.userId)
@@ -218,7 +218,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 				isLocalUser = p23.isLocalUser
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PACK_WAS_SET, function(p24) --[[ line: 347 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_PACK_WAS_SET, function(p24)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant {} voice pack was set to {}", self.experienceType, p24.userId, p24.voicePackName)
@@ -229,7 +229,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 				voicePackName = p24.voicePackName
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_ENABLED, function(p25) --[[ line: 366 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_ENABLED, function(p25)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant voice changer feedback was enabled {}", self.experienceType, p25.userId)
@@ -239,7 +239,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 				isLocalUser = p25.isLocalUser
 			}))
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_DISABLED, function(p26) --[[ line: 380 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_CHANGER_FEEDBACK_WAS_DISABLED, function(p26)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant voice changer feedback was disabled {}", self.experienceType, p26.userId)
@@ -250,7 +250,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			}))
 		end)
 	end
-	self:addObserver(constantsModule.EVENTS.MUTE_PARTY_VOICE_PARTICIPANT, function(p27) --[[ line: 395 ]]
+	self:addObserver(constantsModule.EVENTS.MUTE_PARTY_VOICE_PARTICIPANT, function(p27)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant is muted locally {}", self.experienceType, p27.userId)
@@ -260,7 +260,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 			isLocalUser = p27.isLocalUser
 		}))
 	end)
-	self:addObserver(constantsModule.EVENTS.UNMUTE_PARTY_VOICE_PARTICIPANT, function(p28) --[[ line: 405 ]]
+	self:addObserver(constantsModule.EVENTS.UNMUTE_PARTY_VOICE_PARTICIPANT, function(p28)
 		-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref), p10 (ref), actionsModule (copy)
 		if p11 and enableCrossExpEventLogging then
 			p11:info("{}: Participant is unmuted locally {}", self.experienceType, p28.userId)
@@ -272,13 +272,13 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 	end)
 	
 	if fFlagPartyVoiceBlockSync then
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_BLOCK_PARTICIPANT, function(p29) --[[ line: 416 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_BLOCK_PARTICIPANT, function(p29)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant was blocked {} from party voice", self.experienceType, p29.userId)
 			end
 		end)
-		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, function(p30) --[[ line: 425 ]]
+		self:addObserver(constantsModule.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, function(p30)
 			-- upvalues: p11 (ref), enableCrossExpEventLogging (copy), self (ref)
 			if p11 and enableCrossExpEventLogging then
 				p11:info("{}: Participant was unblocked {} from party voice", self.experienceType, p30.userId)
@@ -287,7 +287,7 @@ function t:subscribe(p10, p11) --[[ line: 154 ]]
 	end
 end
 
-function t.getBackgroundStateSnapshot(_) --[[ line: 434 ]]
+function t.getBackgroundStateSnapshot(_)
 	-- upvalues: var14 (ref), utilsModule (ref)
 	local var18 = var14.restore()
 	
@@ -301,7 +301,7 @@ function t.getBackgroundStateSnapshot(_) --[[ line: 434 ]]
 	} else nil
 end
 
-function t:restoreStateFromBackground(p31, p32) --[[ line: 452 ]]
+function t:restoreStateFromBackground(p31, p32)
 	-- upvalues: enableCrossExpEventLogging (ref), httpService (ref), actionsModule (ref)
 	local backgroundStateSnapshot = self:getBackgroundStateSnapshot()
 	
@@ -313,7 +313,7 @@ function t:restoreStateFromBackground(p31, p32) --[[ line: 452 ]]
 	end
 end
 
-function t:unsubscribe(p33, p34) --[[ line: 462 ]]
+function t:unsubscribe(p33, p34)
 	-- upvalues: enableCrossExpEventLogging (ref), actionsModule (ref)
 	if p34 and enableCrossExpEventLogging then
 		p34:info("{}: Unsubscribing from the CEV Store", self.experienceType)

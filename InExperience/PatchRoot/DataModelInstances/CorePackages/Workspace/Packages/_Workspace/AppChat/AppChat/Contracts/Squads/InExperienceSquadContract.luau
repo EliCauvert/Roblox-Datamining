@@ -13,19 +13,19 @@ local inExperienceAppChatModalModule = require(appChat.App.InExperienceAppChatMo
 local squadCoordinationExperienceJoinExperimentation = socialExperimentsModule.SquadCoordinationExperienceJoinExperimentation
 
 return makeSquadContract(cryoModule.Dictionary.union(require(script.Parent.SquadContract), {
-	setSquadPrompt = function(p0, p1) --[[ line: 22 ]]
+	setSquadPrompt = function(p0, p1)
 		-- upvalues: setSquadPrompt (ref)
 		p0:dispatch(setSquadPrompt(p1))
 	end,
 	closeSquadPrompt = closeSquadPrompt,
-	useSquadRootView = function() --[[ line: 26 ]]
+	useSquadRootView = function()
 		-- upvalues: reactModule (ref), squadCoordinationExperienceJoinExperimentation (ref), inExperienceAppChatModalModule (ref), squadRootViewType (ref)
 		local useState = reactModule.useState
 		local var7 = if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled and inExperienceAppChatModalModule.default:getVisible() then squadRootViewType.InExperienceAppChatModal else squadRootViewType.None
 		useState, var7 = useState(var7)
-		reactModule.useEffect(function() --[[ line: 33 ]]
+		reactModule.useEffect(function()
 			-- upvalues: inExperienceAppChatModalModule (copy), var7 (ref), squadRootViewType (copy)
-			local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p2) --[[ line: 34 ]]
+			local eventConnection = inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p2)
 				-- upvalues: var7 (copy), squadRootViewType (copy)
 				if p2 then
 					var7(squadRootViewType.InExperienceAppChatModal)
@@ -35,7 +35,7 @@ return makeSquadContract(cryoModule.Dictionary.union(require(script.Parent.Squad
 				var7(squadRootViewType.None)
 			end)
 			
-			return function() --[[ line: 42 ]]
+			return function()
 				-- upvalues: eventConnection (ref)
 				if eventConnection then
 					eventConnection:Disconnect()

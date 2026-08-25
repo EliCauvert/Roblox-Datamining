@@ -51,18 +51,18 @@ local t_3 = {
 	lastUpdated = { 25, 5, 27 }
 }
 
-local function _(p0, p1) --[[ line: 70 | named "makeErrorKey" ]]
+local function _(p0, p1)
 	return `{p0}_{p1.name}_{p1.componentType}_{p1.parserName}_{p1.propName}`
 end
 
 local t_4 = {}
 
 return {
-	clearSeenErrors = function() --[[ line: 76 ]]
+	clearSeenErrors = function()
 		-- upvalues: t_4 (write)
 		t_4 = {}
 	end,
-	reportError = function(p2, p3, p4, p5) --[[ line: 80 ]]
+	reportError = function(p2, p3, p4, p5)
 		-- upvalues: loggingProtocolModule (ref), t_4 (write), t_1 (ref), t (ref), cryoModule (ref), luaAppSduiErrorPage (ref), tutilsModule (ref)
 		p5 = p5 or loggingProtocolModule.default
 		assert(p5, "loggingProtocol must exist")
@@ -90,7 +90,7 @@ return {
 			warn(`Discovery server-driven ui error \n{p2} \n{tutilsModule.toString(p3)}`)
 		end
 	end,
-	reportCounter = function(p6, p7, p8, p9) --[[ line: 128 ]]
+	reportCounter = function(p6, p7, p8, p9)
 		-- upvalues: loggingProtocolModule (ref), tutilsModule (ref)
 		p9 = p9 or loggingProtocolModule.default
 		assert(p9, "loggingProtocol must exist")
@@ -111,7 +111,7 @@ return {
 			warn(`Discovery server-driven ui counter \n{p6} \n{tutilsModule.toString(p7)}`)
 		end
 	end,
-	reportTimers = function(p10, p11, p12) --[[ line: 164 ]]
+	reportTimers = function(p10, p11, p12)
 		-- upvalues: loggingProtocolModule (ref), t_2 (ref)
 		p12 = p12 or loggingProtocolModule.default
 		assert(p12, "loggingProtocol must exist")
@@ -128,7 +128,7 @@ return {
 			}, p11)
 		end
 	end,
-	reportOmniFeedStats = function(p13, p14, p15, p16, p17) --[[ line: 190 ]]
+	reportOmniFeedStats = function(p13, p14, p15, p16, p17)
 		-- upvalues: loggingProtocolModule (ref), t_3 (ref)
 		p17 = p17 or loggingProtocolModule.default
 		assert(p17, "loggingProtocol must exist")

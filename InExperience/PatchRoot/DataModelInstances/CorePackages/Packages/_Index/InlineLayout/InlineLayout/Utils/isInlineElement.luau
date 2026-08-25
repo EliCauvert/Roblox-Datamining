@@ -2,7 +2,7 @@
 local hardBreakElementModule = require(parent.Components.InlineLayout.InlineLayoutElements.HardBreakElement)
 local inlineElementTypeModule = require(parent.Utils.InlineElementType)
 
-return function(p0) --[[ line: 6 | named "isInlineElement" ]]
+return function(p0)
 	-- upvalues: hardBreakElementModule (ref), inlineElementTypeModule (ref)
 	if p0 == hardBreakElementModule then
 		return true

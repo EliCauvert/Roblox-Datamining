@@ -3,7 +3,7 @@ local parent = script.Parent
 local isArrayModule = require(parent.isArray)
 local _ = require(parent.Parent.Parent.ES7Types)
 
-return function(p0, ...) --[[ line: 23 ]]
+return function(p0, ...)
 	-- upvalues: dEV (ref), isArrayModule (ref)
 	if dEV and not isArrayModule(p0) then
 		error(string.format("Array.unshift called on non-array %s", typeof(p0)))

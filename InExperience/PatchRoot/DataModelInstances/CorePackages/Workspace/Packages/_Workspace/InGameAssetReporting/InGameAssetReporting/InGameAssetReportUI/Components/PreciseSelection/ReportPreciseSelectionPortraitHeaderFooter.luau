@@ -11,9 +11,9 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0) --[[ line: 36 | named "renderHeaderBarLeft" ]]
+local function _(p0)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function() --[[ line: 37 ]]
+	return function()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p0 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -35,11 +35,11 @@ local function _(p0) --[[ line: 36 | named "renderHeaderBarLeft" ]]
 	end
 end
 
-local _ = function(p1) --[[ line: 58 | named "renderHeaderBarCenter" ]]
+local _ = function(p1)
 	-- upvalues: withStyle (ref), reactModule (ref)
-	return function() --[[ line: 59 ]]
+	return function()
 		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref)
-		return withStyle(function(p2) --[[ line: 60 ]]
+		return withStyle(function(p2)
 			-- upvalues: reactModule (copy), p1 (copy)
 			local currentCamera = game.Workspace.CurrentCamera
 			local theme = p2.Theme
@@ -60,9 +60,9 @@ local _ = function(p1) --[[ line: 58 | named "renderHeaderBarCenter" ]]
 	end
 end
 
-local _ = function() --[[ line: 87 | named "renderHeaderBarRight" ]]
+local _ = function()
 	-- upvalues: reactModule (ref)
-	return function() --[[ line: 88 ]]
+	return function()
 		-- upvalues: reactModule (copy)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -79,7 +79,7 @@ local _ = function() --[[ line: 87 | named "renderHeaderBarRight" ]]
 end
 
 return {
-	PortraitModeHeader = function(p3) --[[ line: 103 ]]
+	PortraitModeHeader = function(p3)
 		-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), withStyle (ref)
 		local createElement = reactModule.createElement
 		local var3 = "Frame"
@@ -101,7 +101,7 @@ return {
 		}
 		local backAction = p3.backAction
 		
-		function t_2.renderLeft() --[[ line: 37 ]]
+		function t_2.renderLeft()
 			-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -122,7 +122,7 @@ return {
 			})
 		end
 		
-		function t_2.renderRight() --[[ line: 88 ]]
+		function t_2.renderRight()
 			-- upvalues: reactModule (copy)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -139,9 +139,9 @@ return {
 		
 		local titleText = p3.titleText
 		
-		function t_2.renderCenter() --[[ line: 59 ]]
+		function t_2.renderCenter()
 			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-			return withStyle(function(p4) --[[ line: 60 ]]
+			return withStyle(function(p4)
 				-- upvalues: reactModule (copy), titleText (copy)
 				local currentCamera = game.Workspace.CurrentCamera
 				local theme = p4.Theme
@@ -165,7 +165,7 @@ return {
 		
 		return createElement(var3, t, t_1)
 	end,
-	PortraitModeFooter = function(p5) --[[ line: 124 ]]
+	PortraitModeFooter = function(p5)
 		-- upvalues: reactModule (ref), foundationModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
 		return reactModule.createElement("Frame", {
 			BorderSizePixel = 0,

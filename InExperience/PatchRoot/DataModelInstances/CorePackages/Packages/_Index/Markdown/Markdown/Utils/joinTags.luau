@@ -1,10 +1,10 @@
 ﻿local forEachArgs = require(script:FindFirstAncestor("Markdown").Parent.Dash).forEachArgs
 local concat = table.concat
 
-return function(...) --[[ line: 11 | named "joinTags" ]]
+return function(...)
 	-- upvalues: forEachArgs (ref), concat (ref)
 	local t = {}
-	forEachArgs(function(p0) --[[ line: 13 ]]
+	forEachArgs(function(p0)
 		-- upvalues: t (ref)
 		if typeof(p0) == "string" then
 			table.insert(t, p0)

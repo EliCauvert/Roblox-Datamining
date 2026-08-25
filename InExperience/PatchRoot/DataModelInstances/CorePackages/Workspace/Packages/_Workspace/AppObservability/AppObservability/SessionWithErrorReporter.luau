@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 43 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({
 		_eventConfig = p0,
@@ -16,11 +16,11 @@ function t.new(p0, p1) --[[ line: 43 ]]
 	return tbl
 end
 
-function t.getCurrentTimeStamp(_) --[[ line: 67 ]]
+function t.getCurrentTimeStamp(_)
 	return os.time()
 end
 
-function t:reportEvent(p2, p3, p4) --[[ line: 80 ]]
+function t:reportEvent(p2, p3, p4)
 	-- upvalues: telemetryService (ref)
 	local var3 = false
 	local currentTimeStamp = self:getCurrentTimeStamp()

@@ -15,7 +15,7 @@ else
 		BrickColor.new("Brick yellow").Color
 	}
 	
-	local function GetNameValue(p0) --[[ line: 24 ]]
+	local function GetNameValue(p0)
 		local var3 = 0
 		
 		for i = 1, #p0 do
@@ -33,12 +33,12 @@ else
 		return var3
 	end
 	
-	local computeNameColor = function(p1) --[[ line: 42 ]]
+	local computeNameColor = function(p1)
 		-- upvalues: list (ref), GetNameValue (ref)
 		return list[(GetNameValue(p1) + 0) % #list + 1]
 	end
 end
-return function(p2) --[[ line: 47 | named "GetNameColor" ]]
+return function(p2)
 	-- upvalues: playersService (ref), computeNameColor (write)
 	local var6 = playersService:GetPlayerByUserId(p2)
 	

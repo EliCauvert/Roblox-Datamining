@@ -8,11 +8,11 @@ local debug = require(parent.DataHydration.CreatorAgentChat).debug
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function cropToSquareAsync(p0) --[[ line: 19 ]]
+local function cropToSquareAsync(p0)
 	-- upvalues: promiseModule (ref), assetService (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 20 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: assetService (copy), p0 (ref)
-		local ok, status = pcall(function() --[[ line: 21 ]]
+		local ok, status = pcall(function()
 			-- upvalues: assetService (copy), p0 (copy)
 			return assetService:CreateEditableImageAsync(Content.fromUri(p0))
 		end)
@@ -63,29 +63,29 @@ local function cropToSquareAsync(p0) --[[ line: 19 ]]
 	end)
 end
 
-return function(value, p3, p4, p5) --[[ line: 87 | named "createImageAssetAsync" ]]
+return function(value, p3, p4, p5)
 	-- upvalues: playersService (ref), promiseModule (ref), cropToSquareAsync (ref), fetch (ref), asPromise (ref), debug (ref), getAssetUserAuthStore (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
-		local function getImageContent() --[[ line: 98 ]]
+		local function getImageContent()
 			-- upvalues: p4 (ref), cropToSquareAsync (copy), value (ref), fetch (copy), asPromise (copy)
 			return if p4 then cropToSquareAsync(value) else asPromise(fetch({
 				method = "GET",
 				analyticsKey = "build-experience.download-thumbnail",
 				responseEncoding = "protobuf",
 				url = value,
-				decode = function(p7) --[[ line: 107 ]]
+				decode = function(p7)
 					return p7
 				end
-			})):andThen(function(p6) --[[ line: 111 ]]
+			})):andThen(function(p6)
 				return buffer.tostring(p6)
 			end)
 		end
 		
 		debug.log("info", "create_image_asset starting", { cropSquare = p4 })
 		
-		return getImageContent():andThen(function(p10) --[[ line: 120 ]]
+		return getImageContent():andThen(function(p10)
 			-- upvalues: p4 (ref), getAssetUserAuthStore (copy), p3 (ref), p5 (ref), localPlayer (ref)
 			local var18 = if p4 then "image/bmp" else "image/png"
 			local var19 = getAssetUserAuthStore()
@@ -97,10 +97,10 @@ return function(value, p3, p4, p5) --[[ line: 87 | named "createImageAssetAsync"
 				t.userId = tostring(localPlayer.UserId)
 			end
 			return var19.createImageAsset(p10, var18, t)
-		end):andThen(function(p9) --[[ line: 133 ]]
+		end):andThen(function(p9)
 			-- upvalues: getAssetUserAuthStore (copy)
 			return getAssetUserAuthStore().pollUntilDone(p9)
-		end):andThen(function(p8) --[[ line: 137 ]]
+		end):andThen(function(p8)
 			-- upvalues: promiseModule (copy), debug (copy)
 			if typeof(p8) == "table" and p8.status == "timed_out" then
 				return promiseModule.reject("Operation did not complete in time")

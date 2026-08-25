@@ -4,7 +4,7 @@ local getChatStatusStoreModule = require(expChat.Stores.GetChatStatusStore)
 local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local getIsARButtonVisibleModule = require(expChat.getIsARButtonVisible)
 
-return function() --[[ line: 21 | named "useIsARButtonVisible" ]]
+return function()
 	-- upvalues: getChatStatusStoreModule (ref), signalsReactModule (ref), getPresetChatStoreModule (ref), getIsARButtonVisibleModule (ref)
 	local var5 = getPresetChatStoreModule(false)
 	

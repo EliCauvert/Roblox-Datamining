@@ -20,12 +20,12 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function areNumbersGood(...) --[[ line: 24 ]]
-	local function _(p0) --[[ line: 25 | named "isNaN" ]]
+local function areNumbersGood(...)
+	local function _(p0)
 		return p0 ~= p0
 	end
 	
-	local _ = function(p1) --[[ line: 29 | named "isInfinite" ]]
+	local _ = function(p1)
 		return if p1 ~= 1e999 then p1 == -1e999 else true
 	end
 	
@@ -40,7 +40,7 @@ local function areNumbersGood(...) --[[ line: 24 ]]
 	return true
 end
 
-function t.run(p2, p3) --[[ line: 44 ]]
+function t.run(p2, p3)
 	-- upvalues: areNumbersGood (ref), errorSourceStringsModule (ref)
 	local curveAnimComputedFrames = p3.curveAnimComputedFrames
 	

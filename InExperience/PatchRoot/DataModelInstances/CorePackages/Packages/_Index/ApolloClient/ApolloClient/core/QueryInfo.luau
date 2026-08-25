@@ -27,12 +27,12 @@ local t_1 = { FORBID = 0, OVERWRITE = 1, MERGE = 2 }
 t.CacheWriteBehavior = t_1
 local var6 = if canUseWeakMap then weakMap.new() else map.new(nil)
 
-local function _(p0, p1) --[[ line: 98 | named "wrapDestructiveCacheMethod" ]]
+local function _(p0, p1)
 	-- upvalues: var6 (ref)
 	local var9 = p0[p1]
 	
 	if typeof(var9) == "function" then
-		p0[p1] = function(...) --[[ line: 105 ]]
+		p0[p1] = function(...)
 			-- upvalues: var6 (copy), p0 (ref), var9 (ref)
 			var6:set(p0, (var6:get(p0) + 1) % 1000000000000000)
 			
@@ -41,7 +41,7 @@ local function _(p0, p1) --[[ line: 98 | named "wrapDestructiveCacheMethod" ]]
 	end
 end
 
-local _ = function(p2) --[[ line: 119 | named "cancelNotifyTimeout" ]]
+local _ = function(p2)
 	-- upvalues: boolean (ref), clearTimeout (ref)
 	if boolean.toJSBoolean(p2.notifyTimeout) then
 		clearTimeout(p2.notifyTimeout)
@@ -52,7 +52,7 @@ end
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p3) --[[ line: 204 ]]
+function t_2.new(p3)
 	-- upvalues: set (ref), var6 (ref), t_2 (ref)
 	local t = {
 		listeners = set.new(),
@@ -70,7 +70,7 @@ function t_2.new(p3) --[[ line: 204 ]]
 		local evict = p3.evict
 		
 		if typeof(evict) == "function" then
-			function p3.evict(...) --[[ line: 105 ]]
+			function p3.evict(...)
 				-- upvalues: var6 (copy), p3 (ref), evict (ref)
 				var6:set(p3, (var6:get(p3) + 1) % 1000000000000000)
 				
@@ -80,7 +80,7 @@ function t_2.new(p3) --[[ line: 204 ]]
 		local modify = p3.modify
 		
 		if typeof(modify) == "function" then
-			function p3.modify(...) --[[ line: 105 ]]
+			function p3.modify(...)
 				-- upvalues: var6 (copy), p3 (ref), modify (ref)
 				var6:set(p3, (var6:get(p3) + 1) % 1000000000000000)
 				
@@ -90,7 +90,7 @@ function t_2.new(p3) --[[ line: 204 ]]
 		local reset = p3.reset
 		
 		if typeof(reset) == "function" then
-			function p3.reset(...) --[[ line: 105 ]]
+			function p3.reset(...)
 				-- upvalues: var6 (copy), p3 (ref), reset (ref)
 				var6:set(p3, (var6:get(p3) + 1) % 1000000000000000)
 				
@@ -101,7 +101,7 @@ function t_2.new(p3) --[[ line: 204 ]]
 	return setmetatable(t, t_2)
 end
 
-function t_2:init(p4) --[[ line: 230 ]]
+function t_2:init(p4)
 	-- upvalues: boolean (ref), networkStatus (ref), equalModule (ref), object (ref)
 	local var11 = if boolean.toJSBoolean(self.variables) and self.networkStatus ~= networkStatus.loading and not equalModule(self.variables, p4.variables) then networkStatus.setVariables elseif boolean.toJSBoolean(p4.networkStatus) then p4.networkStatus else networkStatus.loading
 	
@@ -125,7 +125,7 @@ function t_2:init(p4) --[[ line: 230 ]]
 	return self
 end
 
-function t_2:reset() --[[ line: 271 ]]
+function t_2:reset()
 	-- upvalues: boolean (ref), clearTimeout (ref)
 	if boolean.toJSBoolean(self.notifyTimeout) then
 		clearTimeout(self.notifyTimeout)
@@ -135,7 +135,7 @@ function t_2:reset() --[[ line: 271 ]]
 	self.dirty = false
 end
 
-function t_2:getDiff(p5) --[[ line: 277 ]]
+function t_2:getDiff(p5)
 	-- upvalues: boolean (ref), equalModule (ref)
 	if p5 == nil then
 		p5 = self.variables
@@ -158,7 +158,7 @@ function t_2:getDiff(p5) --[[ line: 277 ]]
 	return var13
 end
 
-function t_2:updateLastDiff(p6, p7) --[[ line: 302 ]]
+function t_2:updateLastDiff(p6, p7)
 	-- upvalues: boolean (ref)
 	self.lastDiff = boolean.toJSBoolean(p6) and ({
 		diff = p6,
@@ -166,7 +166,7 @@ function t_2:updateLastDiff(p6, p7) --[[ line: 302 ]]
 	} or nil)
 end
 
-function t_2:getDiffOptions(p8) --[[ line: 311 ]]
+function t_2:getDiffOptions(p8)
 	-- upvalues: boolean (ref)
 	if p8 == nil then
 		p8 = self.variables
@@ -182,7 +182,7 @@ function t_2:getDiffOptions(p8) --[[ line: 311 ]]
 	}
 end
 
-function t_2:setDiff(p9) --[[ line: 327 ]]
+function t_2:setDiff(p9)
 	-- upvalues: boolean (ref), equalModule (ref), setTimeout (ref)
 	local var14 = if boolean.toJSBoolean(self.lastDiff) then self.lastDiff.diff else self.lastDiff
 	self:updateLastDiff(p9)
@@ -193,7 +193,7 @@ function t_2:setDiff(p9) --[[ line: 327 ]]
 		self.dirty = true
 		
 		if not boolean.toJSBoolean(self.notifyTimeout) then
-			self.notifyTimeout = setTimeout(function() --[[ line: 352 ]]
+			self.notifyTimeout = setTimeout(function()
 				-- upvalues: self (ref)
 				return self:notify()
 			end, 0)
@@ -201,7 +201,7 @@ function t_2:setDiff(p9) --[[ line: 327 ]]
 	end
 end
 
-function t_2:setObservableQuery(p10) --[[ line: 359 ]]
+function t_2:setObservableQuery(p10)
 	-- upvalues: boolean (ref)
 	if p10 == self.observableQuery then return end
 	if boolean.toJSBoolean(self.oqListener) then
@@ -212,7 +212,7 @@ function t_2:setObservableQuery(p10) --[[ line: 359 ]]
 	if boolean.toJSBoolean(p10) and p10 ~= nil then
 		p10.queryInfo = self
 		
-		function self.oqListener() --[[ line: 373 ]]
+		function self.oqListener()
 			-- upvalues: boolean (copy), self (ref), p10 (ref)
 			if boolean.toJSBoolean(self:getDiff().fromOptimisticTransaction) then
 				p10:observe()
@@ -229,14 +229,14 @@ function t_2:setObservableQuery(p10) --[[ line: 359 ]]
 	self.oqListener = nil
 end
 
-function t_2:notify() --[[ line: 391 ]]
+function t_2:notify()
 	-- upvalues: boolean (ref), clearTimeout (ref)
 	if boolean.toJSBoolean(self.notifyTimeout) then
 		clearTimeout(self.notifyTimeout)
 		self.notifyTimeout = nil
 	end
 	if self:shouldNotify() then
-		self.listeners:forEach(function(p11) --[[ line: 395 ]]
+		self.listeners:forEach(function(p11)
 			-- upvalues: self (ref)
 			return p11(self)
 		end)
@@ -244,7 +244,7 @@ function t_2:notify() --[[ line: 391 ]]
 	self.dirty = false
 end
 
-function t_2:shouldNotify() --[[ line: 402 ]]
+function t_2:shouldNotify()
 	-- upvalues: boolean (ref), isNetworkRequestInFlight (ref)
 	if not self.dirty or not boolean.toJSBoolean(self.listeners.size) then
 		return false
@@ -255,14 +255,14 @@ function t_2:shouldNotify() --[[ line: 402 ]]
 	end
 end
 
-function t_2:stop() --[[ line: 416 ]]
+function t_2:stop()
 	-- upvalues: t_2 (ref), boolean (ref)
 	if not self.stopped then
 		self.stopped = true
 		self:reset()
 		self:cancel()
 		self.cancel = t_2.cancel
-		self.subscriptions:forEach(function(p12) --[[ line: 426 ]]
+		self.subscriptions:forEach(function(p12)
 			return p12:unsubscribe()
 		end)
 		local observableQuery = self.observableQuery
@@ -273,9 +273,9 @@ function t_2:stop() --[[ line: 416 ]]
 	end
 end
 
-function t_2.cancel(_) --[[ line: 440 ]] end
+function t_2.cancel(_) end
 
-function t_2:updateWatch(p13) --[[ line: 442 ]]
+function t_2:updateWatch(p13)
 	-- upvalues: boolean (ref), object (ref), equalModule (ref)
 	if p13 == nil then
 		p13 = self.variables
@@ -285,7 +285,7 @@ function t_2:updateWatch(p13) --[[ line: 442 ]]
 	if boolean.toJSBoolean(observableQuery) and observableQuery.options.fetchPolicy == "no-cache" then return end
 	local var15 = object.assign({}, self:getDiffOptions(p13), {
 		watcher = self,
-		callback = function(_, p14) --[[ line: 461 ]]
+		callback = function(_, p14)
 			-- upvalues: self (ref)
 			return self:setDiff(p14)
 		end
@@ -298,11 +298,11 @@ function t_2:updateWatch(p13) --[[ line: 442 ]]
 	end
 end
 
-function t_2:resetLastWrite() --[[ line: 477 ]]
+function t_2:resetLastWrite()
 	self.lastWrite = nil
 end
 
-function t_2:shouldWrite(p15, p16) --[[ line: 481 ]]
+function t_2:shouldWrite(p15, p16)
 	-- upvalues: boolean (ref), var6 (ref), equalModule (ref)
 	local lastWrite = self.lastWrite
 	
@@ -311,7 +311,7 @@ end
 
 local var8 = nil
 
-function t_2:markResult(p17, p18, p19) --[[ line: 507 ]]
+function t_2:markResult(p17, p18, p19)
 	-- upvalues: isNonEmptyArray (ref), t_1 (ref), var8 (write), var6 (ref), boolean (ref)
 	if isNonEmptyArray(p17.errors) then
 		self.graphQLErrors = p17.errors
@@ -326,7 +326,7 @@ function t_2:markResult(p17, p18, p19) --[[ line: 507 ]]
 		return
 	elseif p19 ~= t_1.FORBID then
 		if var8(p17, p18.errorPolicy) then
-			self.cache:performTransaction(function(p20) --[[ line: 529 ]]
+			self.cache:performTransaction(function(p20)
 				-- upvalues: self (ref), p17 (ref), p18 (ref), p19 (ref), t_1 (copy), var6 (copy), boolean (copy)
 				if self:shouldWrite(p17, p18.variables) then
 					p20:writeQuery({
@@ -364,7 +364,7 @@ function t_2:markResult(p17, p18, p19) --[[ line: 507 ]]
 	end
 end
 
-function t_2:markReady() --[[ line: 613 ]]
+function t_2:markReady()
 	-- upvalues: networkStatus (ref)
 	self.networkError = nil
 	self.networkStatus = networkStatus.ready
@@ -372,7 +372,7 @@ function t_2:markReady() --[[ line: 613 ]]
 	return self.networkStatus
 end
 
-function t_2:markError(p21) --[[ line: 619 ]]
+function t_2:markError(p21)
 	-- upvalues: networkStatus (ref), boolean (ref)
 	self.networkStatus = networkStatus.error
 	self.lastWrite = nil
@@ -389,7 +389,7 @@ end
 
 t.QueryInfo = t_2
 
-function t.shouldWriteResult(p22, p23) --[[ line: 637 ]]
+function t.shouldWriteResult(p22, p23)
 	-- upvalues: graphQLResultHasError (ref), boolean (ref)
 	if p23 == nil then
 		p23 = "none"

@@ -1,4 +1,4 @@
-﻿local function resultHandler(p0, p1, ...) --[[ line: 12 ]]
+﻿local function resultHandler(p0, p1, ...)
 	if not p1 then
 		error(debug.traceback(p0, ...), 2)
 	end
@@ -8,7 +8,7 @@
 	return ...
 end
 
-return function(p2, ...) --[[ line: 25 | named "NoYield" ]]
+return function(p2, ...)
 	-- upvalues: resultHandler (ref)
 	local thread = coroutine.create(p2)
 	

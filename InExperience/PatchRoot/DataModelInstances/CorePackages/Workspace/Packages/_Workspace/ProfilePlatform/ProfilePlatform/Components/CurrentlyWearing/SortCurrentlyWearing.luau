@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("ProfilePlatform").Common.AssetInfo)
 
-return function(p0, p1) --[[ line: 5 | named "sortCurrentlyWearingItems" ]]
+return function(p0, p1)
 	local t = {
 		isOffSale = p0.isOffSale or false,
 		price = p0.price or (p0.lowestResalePrice or 0),

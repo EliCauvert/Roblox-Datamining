@@ -6,7 +6,7 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local var4 = false
 
-return roduxModule.makeActionCreator(script.Name, function(p0) --[[ line: 16 ]]
+return roduxModule.makeActionCreator(script.Name, function(p0)
 	-- upvalues: fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), var4 (write)
 	if fFlagAppChatPerfTrackingModule then
 		if p0 == nil then

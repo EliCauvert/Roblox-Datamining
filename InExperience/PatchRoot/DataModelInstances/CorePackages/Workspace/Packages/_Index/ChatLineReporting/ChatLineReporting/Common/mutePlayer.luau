@@ -11,7 +11,7 @@ local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesSt
 local fFlagChatLineReportingGlobalMuteEnabled = sharedFlagsModule.FFlagChatLineReportingGlobalMuteEnabled
 local expChatMuteByUserIdBeforeUsernameCheck = game:DefineFastFlag("ExpChatMuteByUserIdBeforeUsernameCheck", false)
 
-function mutePlayer(p0, p1, p2) --[[ line: 26 ]]
+function mutePlayer(p0, p1, p2)
 	-- upvalues: fFlagExpChatUseChatMuteStore (ref), expChatMuteByUserIdBeforeUsernameCheck (ref), constantsModule (ref), chatMuteModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), expChatSharedModule (ref), fFlagExpChatUseMessagesStore (ref), userMuted (ref), RBXMuteCommand (ref)
 	if fFlagExpChatUseChatMuteStore then
 		if p0.username == "" and (not expChatMuteByUserIdBeforeUsernameCheck or not tonumber(p0.userId)) then

@@ -3,9 +3,9 @@ local centralOverlayModule = require(parent.CentralOverlay)
 local robloxAppEnumsModule = require(parent.RobloxAppEnums)
 local _ = require(script.Parent.Components)
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: centralOverlayModule (ref), robloxAppEnumsModule (ref)
-	return function(p1) --[[ line: 10 ]]
+	return function(p1)
 		-- upvalues: centralOverlayModule (copy), robloxAppEnumsModule (copy), p0 (ref)
 		p1:dispatch(centralOverlayModule.Actions.SetCentralOverlay(robloxAppEnumsModule.CentralOverlayType.PlayerContextualMenu, p0))
 	end

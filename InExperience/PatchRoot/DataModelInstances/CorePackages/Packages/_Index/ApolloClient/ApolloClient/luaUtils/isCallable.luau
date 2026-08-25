@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 9 | named "isCallable" ]]
+﻿return function(p0)
 	if typeof(p0) == "function" then
 		return true
 	elseif typeof(p0) == "table" then

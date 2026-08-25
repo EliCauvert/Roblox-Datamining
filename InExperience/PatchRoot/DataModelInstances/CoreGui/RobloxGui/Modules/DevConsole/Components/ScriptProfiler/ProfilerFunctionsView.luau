@@ -18,7 +18,7 @@ local cellPadding = constantsModule.ScriptProfilerFormatting.CellPadding
 local valuePadding = constantsModule.ScriptProfilerFormatting.ValuePadding
 local profilerView = roactModule.PureComponent:extend("ProfilerView")
 
-function profilerView.renderChildren(p0) --[[ line: 29 ]]
+function profilerView.renderChildren(p0)
 	-- upvalues: getDurations (ref), getPluginFlag (ref), roactModule (ref), profilerFunctionViewEntryModule (ref)
 	local data = p0.props.data
 	assert(data.Version == 2)
@@ -46,7 +46,7 @@ function profilerView.renderChildren(p0) --[[ line: 29 ]]
 	return t
 end
 
-function profilerView.render(p1) --[[ line: 70 ]]
+function profilerView.render(p1)
 	-- upvalues: roactModule (ref), constantsModule (ref), formatSessionLength (ref), headerFrameHeight (ref), headerButtonModule (ref), valueCellWidth (ref), valuePadding (ref), cellPadding (ref), lineColor (ref), headerNames (ref), lineWidth (ref)
 	local layoutOrder = p1.props.layoutOrder
 	local size = p1.props.size

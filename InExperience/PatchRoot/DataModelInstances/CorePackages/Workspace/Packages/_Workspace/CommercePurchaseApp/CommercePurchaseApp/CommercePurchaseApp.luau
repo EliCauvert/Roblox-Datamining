@@ -13,14 +13,14 @@ local focusNavigationModalSurface = require(parent.EconomyCommonCoreScriptHooks)
 local usePurchaseBrowserClosedListenerEffectModule = require(commercePurchaseApp.Hooks.usePurchaseBrowserClosedListenerEffect)
 local selectPromptStateModule = require(commercePurchaseApp.Store.Selectors.selectPromptState)
 
-return function() --[[ line: 20 | named "CommercePurchaseApp" ]]
+return function()
 	-- upvalues: reactModule (ref), useSelector (ref), selectPromptStateModule (ref), useBenefitStatusReceivedListenerEffectModule (ref), usePurchaseBrowserClosedListenerEffectModule (ref), useCommerceProductPurchaseRequestListenerEffectModule (ref), commercePurchasePromptStateEnumModule (ref), guiService (ref), screenSizeContext (ref), focusNavigationModalSurface (ref), commercePurchaseErrorContainerModule (ref), toast (ref)
 	local var9, var10 = reactModule.useState(Vector2.new(0, 0))
 	local var11 = useSelector(selectPromptStateModule)
 	useBenefitStatusReceivedListenerEffectModule()
 	usePurchaseBrowserClosedListenerEffectModule()
 	useCommerceProductPurchaseRequestListenerEffectModule()
-	reactModule.useEffect(function() --[[ line: 28 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), commercePurchasePromptStateEnumModule (copy), guiService (copy)
 		if var11 == commercePurchasePromptStateEnumModule.None then
 			guiService.SelectedCoreObject = nil
@@ -28,7 +28,7 @@ return function() --[[ line: 20 | named "CommercePurchaseApp" ]]
 	end, { var11 })
 	
 	return if var11 == commercePurchasePromptStateEnumModule.None then nil else reactModule.createElement(screenSizeContext.Provider, { value = var9 }, reactModule.createElement("ScreenGui", {
-		[reactModule.Change.AbsoluteSize] = function(p0) --[[ line: 39 ]]
+		[reactModule.Change.AbsoluteSize] = function(p0)
 			-- upvalues: var10 (ref)
 			var10(p0.AbsoluteSize)
 		end,

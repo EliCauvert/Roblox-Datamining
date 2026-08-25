@@ -10,7 +10,7 @@ local firePlayerFriendAddTelemetryModule = require(socialServerDrivenUi.Analytic
 local fFlagSduiSearchPeoplePlayerTileTelemetry = require(parent.SharedFlags).FFlagSduiSearchPeoplePlayerTileTelemetry
 local var3 = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
-return function(p0, p1, p2) --[[ line: 24 ]]
+return function(p0, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), var3 (ref), friendsStore (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref)
 	local var4 = if p0 then p0.actionParams else nil
 	
@@ -34,13 +34,13 @@ return function(p0, p1, p2) --[[ line: 24 ]]
 		return
 	end
 	local source = var4.source
-	friendsStore.get().RequestFriendship(targetUserId, if typeof(source) == "string" and source ~= "" then source else var3):andThen(function() --[[ line: 53 ]]
+	friendsStore.get().RequestFriendship(targetUserId, if typeof(source) == "string" and source ~= "" then source else var3):andThen(function()
 		-- upvalues: p2 (ref), setCurrentToastMessage (copy)
 		p2.dependencies.dispatch(setCurrentToastMessage({
 			toastMessage = "Feature.Friends.Action.FriendRequestSent",
 			isLocalized = false
 		}))
-	end):catch(function() --[[ line: 59 ]]
+	end):catch(function()
 		-- upvalues: p2 (ref), setCurrentToastMessage (copy)
 		p2.dependencies.dispatch(setCurrentToastMessage({
 			toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",

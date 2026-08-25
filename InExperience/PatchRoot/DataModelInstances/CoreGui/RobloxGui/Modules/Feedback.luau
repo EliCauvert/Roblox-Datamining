@@ -11,7 +11,7 @@ local reducersModule = require(script.Reducers)
 local feedbackAppModule = require(script.Components.FeedbackApp)
 
 return {
-	initialize = function() --[[ line: 23 ]]
+	initialize = function()
 		-- upvalues: globalConfigModule (ref), roactModule (ref), roduxModule (ref), reducersModule (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), feedbackAppModule (ref), coreGuiService (ref)
 		if globalConfigModule.propValidation then
 			roactModule.setGlobalConfig({ propValidation = true })

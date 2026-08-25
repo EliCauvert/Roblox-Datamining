@@ -3,7 +3,7 @@ local set = require(expChat.Parent.llama).Set
 local getOtherDisplayNameInWhisperChannelModule = require(expChat.getOtherDisplayNameInWhisperChannel)
 local t = {}
 
-return function(p0, p1) --[[ line: 14 ]]
+return function(p0, p1)
 	-- upvalues: set (ref), t (write), getOtherDisplayNameInWhisperChannelModule (ref)
 	if p0.TextChannel and string.find(p0.TextChannel.Name, "^RBXWhisper") and not set.has(t, p0.TextChannel) then
 		local var3 = getOtherDisplayNameInWhisperChannelModule(p0.TextChannel, p1)

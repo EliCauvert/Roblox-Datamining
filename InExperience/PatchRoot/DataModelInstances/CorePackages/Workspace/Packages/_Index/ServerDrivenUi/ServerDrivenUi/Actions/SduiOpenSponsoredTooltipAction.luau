@@ -7,7 +7,7 @@ local openInfoPeekView = require(parent.DiscoveryRouting).OpenInfoPeekView
 local openCloseOnlyInteractiveAlert = require(parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
 local sduiResponsiveHelpers = require(parent.SduiCoreSystem).SduiResponsiveHelpers
 
-return function(_, _, p0) --[[ line: 19 ]]
+return function(_, _, p0)
 	-- upvalues: localizeStrings (ref), sduiResponsiveHelpers (ref), getInputModeStore (ref), responsiveModule (ref), openInfoPeekView (ref), openCloseOnlyInteractiveAlert (ref), closeCentralOverlay (ref)
 	local dispatch = p0.dependencies.dispatch
 	local var1 = localizeStrings(p0.dependencies.localization, {
@@ -24,7 +24,7 @@ return function(_, _, p0) --[[ line: 19 ]]
 		
 		return
 	end
-	dispatch(openCloseOnlyInteractiveAlert(sponsoredTitle, sponsoredDisclosure, function() --[[ line: 38 ]]
+	dispatch(openCloseOnlyInteractiveAlert(sponsoredTitle, sponsoredDisclosure, function()
 		-- upvalues: dispatch (ref), closeCentralOverlay (copy)
 		return dispatch(closeCentralOverlay())
 	end))

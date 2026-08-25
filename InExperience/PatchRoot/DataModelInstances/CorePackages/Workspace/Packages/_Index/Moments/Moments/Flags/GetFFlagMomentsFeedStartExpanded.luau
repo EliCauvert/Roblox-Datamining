@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsFeedStartExpanded", false)
 
-return function() --[[ line: 8 ]]
+return function()
 	return game:GetFastFlag("MomentsFeedStartExpanded")
 end

@@ -17,15 +17,15 @@ local constants = require(corePackagesService.Workspace.Packages.VoiceChatCore).
 local playerMenuActions = constantsModule.PlayerMenuActions
 local preselectedPlayerReportBugfix = game:DefineFastFlag("PreselectedPlayerReportBugfix", false)
 
-local function alphabeticalSort(x, p0) --[[ line: 31 ]]
+local function alphabeticalSort(x, p0)
 	return x.Name:lower() < p0.Name:lower()
 end
 
-return function(p1) --[[ line: 35 | named "ReportPersonMenuItemsContainer" ]]
+return function(p1)
 	-- upvalues: getMenuItemSizingsModule (ref), reactModule (ref), reportPersonUIStateReducerModule (ref), constantsModule (ref), preselectedPlayerReportBugfix (ref), default (ref), constants (ref), handlePreselectedPlayerModule (ref), playerMenuActions (ref), alphabeticalSort (ref), playersService (ref), cryoModule (ref), getMenuItemsFromConfigsModule (ref), reportPlayerMenuItemConfigListModule (ref)
 	local var13 = getMenuItemSizingsModule()
 	local var14, var15 = reactModule.useReducer(reportPersonUIStateReducerModule, constantsModule.InitPersonUIState)
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), constantsModule (copy), preselectedPlayerReportBugfix (copy), default (copy), constants (copy), handlePreselectedPlayerModule (copy), var15 (ref), playerMenuActions (copy)
 		if p1.utilityProps.isReportTabVisible ~= true then return end
 		p1.utilityProps.analyticsDispatch({
@@ -33,13 +33,13 @@ return function(p1) --[[ line: 35 | named "ReportPersonMenuItemsContainer" ]]
 		})
 		
 		if not preselectedPlayerReportBugfix or default:UserVoiceEnabled() and default:GetVoiceJoinProgress() ~= constants.VOICE_JOIN_PROGRESS.Suspended then
-			default:asyncInit():andThen(function() --[[ line: 67 ]]
+			default:asyncInit():andThen(function()
 				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var15 (copy), playerMenuActions (copy)
 				if p1.utilityProps.preselectedPlayer then
 					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, true, var15, p1.utilityProps.analyticsDispatch)
 				end
 				var15({ enabled = true, type = playerMenuActions.SetVoiceEnabled })
-			end):catch(function() --[[ line: 81 ]]
+			end):catch(function()
 				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var15 (copy)
 				if p1.utilityProps.preselectedPlayer then
 					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var15, p1.utilityProps.analyticsDispatch)
@@ -55,7 +55,7 @@ return function(p1) --[[ line: 35 | named "ReportPersonMenuItemsContainer" ]]
 			type = playerMenuActions.SetVoiceEnabled
 		})
 	end, { p1.utilityProps.isReportTabVisible })
-	reactModule.useEffect(function() --[[ line: 96 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), constantsModule (copy), default (copy), alphabeticalSort (copy), playersService (copy), cryoModule (copy), var15 (ref), playerMenuActions (copy)
 		local t = {}
 		
@@ -72,7 +72,7 @@ return function(p1) --[[ line: 35 | named "ReportPersonMenuItemsContainer" ]]
 		local var18 = false
 		var15({
 			type = playerMenuActions.UpdatePlayerNameMap,
-			playerObjects = cryoModule.List.filter(t, function(p2) --[[ line: 175 ]]
+			playerObjects = cryoModule.List.filter(t, function(p2)
 				-- upvalues: var14 (copy), var17 (write), var18 (write), playersService (copy)
 				if var14.preselectedPlayer and p2.UserId == var14.preselectedPlayer.UserId then
 					var17 = true

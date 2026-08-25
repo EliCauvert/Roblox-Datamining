@@ -13,12 +13,12 @@ local defaultButtonHeight = constantsModule.DefaultButtonHeight
 local useNotificationCardStateModule = require(context.useNotificationCardState)
 local useNotificationCardDataModule = require(context.useNotificationCardData)
 
-local _ = function(p0) --[[ line: 17 ]]
+local _ = function(p0)
 	-- upvalues: typeModule (ref), buttonType (ref)
 	return if p0 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p0 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p0 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p0 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
 end
 
-local var5 = function(p1, p2, p3) --[[ line: 31 ]]
+local var5 = function(p1, p2, p3)
 	-- upvalues: useStyle (ref), typeModule (ref), buttonType (ref)
 	local captionHeader = useStyle().Font.CaptionHeader
 	local t = {}
@@ -31,7 +31,7 @@ local var5 = function(p1, p2, p3) --[[ line: 31 ]]
 			t_1.props = {
 				text = v.label.text,
 				fontStyle = captionHeader,
-				onActivated = function() --[[ line: 47 ]]
+				onActivated = function()
 					-- upvalues: p2 (ref), p3 (ref), v (ref)
 					if p2 and p3 then
 						p2(v, p3)
@@ -44,7 +44,7 @@ local var5 = function(p1, p2, p3) --[[ line: 31 ]]
 	return t
 end
 
-return function() --[[ line: 60 ]]
+return function()
 	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), var5 (ref), react (ref), defaultContentPadding (ref), buttonStack (ref), defaultButtonHeight (ref)
 	local var8 = useNotificationCardDataModule()
 	local var9 = var5(useNotificationCardStateModule("button"), var8.handleActions, var8.notificationPayload)

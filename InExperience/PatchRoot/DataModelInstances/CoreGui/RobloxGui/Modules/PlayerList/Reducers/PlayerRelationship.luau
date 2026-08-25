@@ -4,7 +4,7 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local actions = script.Parent.Parent.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p0, p1) --[[ line: 16 ]]
+	[require(actions.AddPlayer).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, {
 			[p1.userId] = {
@@ -15,11 +15,11 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.RemovePlayer).name] = function(p2, p3) --[[ line: 27 ]]
+	[require(actions.RemovePlayer).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p2, { [p3.userId] = cryoModule.None })
 	end,
-	[require(actions.SetPlayerIsBlocked).name] = function(p4, p5) --[[ line: 33 ]]
+	[require(actions.SetPlayerIsBlocked).name] = function(p4, p5)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p4, {
 			[p5.userId] = {
@@ -30,7 +30,7 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerFollowRelationship).name] = function(p6, p7) --[[ line: 44 ]]
+	[require(actions.SetPlayerFollowRelationship).name] = function(p6, p7)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p6, {
 			[p7.userId] = {
@@ -41,7 +41,7 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerIsFollowing).name] = function(p8, p9) --[[ line: 55 ]]
+	[require(actions.SetPlayerIsFollowing).name] = function(p8, p9)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p8, {
 			[p9.userId] = {
@@ -52,7 +52,7 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerFriendStatus).name] = function(p10, p11) --[[ line: 66 ]]
+	[require(actions.SetPlayerFriendStatus).name] = function(p10, p11)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p10, {
 			[p11.userId] = {

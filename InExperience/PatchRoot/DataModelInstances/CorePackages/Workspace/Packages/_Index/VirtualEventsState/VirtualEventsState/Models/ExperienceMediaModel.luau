@@ -1,5 +1,5 @@
 ﻿return {
-	mock = function(p0) --[[ line: 18 ]]
+	mock = function(p0)
 		return {
 			assetTypeId = -1,
 			assetType = "Image",

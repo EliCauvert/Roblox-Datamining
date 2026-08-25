@@ -12,14 +12,14 @@ local layoutMode = require(parent.UserTile).LayoutMode
 local userPresence = require(parent.Foundation).Enums.UserPresence
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 28 | named "CardContainer" ]]
+return function(p0)
 	-- upvalues: useLocalUserId (ref), useTokens (ref), useChatPagePaddingModule (ref), useChatPlacementContext (ref), reactModule (ref), foundationModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), cards (ref)
 	local var5 = useLocalUserId()
 	local var6 = tostring(var5) == p0.senderTargetId
 	local var7 = useTokens()
 	local var8 = useChatPagePaddingModule()
 	local var9 = useChatPlacementContext()
-	local var10 = reactModule.useMemo(function() --[[ line: 35 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref)
 		return Vector2.new(var7.Size.Size_700, var7.Size.Size_700)
 	end, { var7 })

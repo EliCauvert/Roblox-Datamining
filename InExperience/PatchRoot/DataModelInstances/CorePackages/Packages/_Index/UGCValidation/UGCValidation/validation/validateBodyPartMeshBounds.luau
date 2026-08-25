@@ -10,7 +10,7 @@ local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 local getMeshInfoModule = require(parent.util.getMeshInfo)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 
-local function validateWrapTargetComparison(p0, p1, p2) --[[ line: 21 ]]
+local function validateWrapTargetComparison(p0, p1, p2)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), validateMeshComparisonModule (ref)
 	local _ = nil
 	local _ = nil
@@ -36,7 +36,7 @@ local function validateWrapTargetComparison(p0, p1, p2) --[[ line: 21 ]]
 	return false, var17
 end
 
-local function calculateMeshSize(p3, p4) --[[ line: 52 ]]
+local function calculateMeshSize(p3, p4)
 	-- upvalues: getEditableMeshFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref), analyticsModule (ref)
 	local t = {
 		fieldName = "MeshId",
@@ -52,7 +52,7 @@ local function calculateMeshSize(p3, p4) --[[ line: 52 ]]
 		}
 	end
 	t.editableMesh = var21
-	local var22, var23 = pcallDeferredModule(function() --[[ line: 76 ]]
+	local var22, var23 = pcallDeferredModule(function()
 		-- upvalues: getMeshSizeModule (copy), t (ref)
 		return getMeshSizeModule(t)
 	end, p4)
@@ -68,7 +68,7 @@ local function calculateMeshSize(p3, p4) --[[ line: 52 ]]
 	return false, { "Failed to read mesh" }
 end
 
-local function validateInternal(p5, p6) --[[ line: 94 ]]
+local function validateInternal(p5, p6)
 	-- upvalues: calculateMeshSize (ref), getExpectedPartSizeModule (ref), failureReasonsAccumulatorModule (ref), validateWrapTargetComparison (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local var25, var26, var27 = calculateMeshSize(p5, p6)
@@ -83,7 +83,7 @@ local function validateInternal(p5, p6) --[[ line: 94 ]]
 	return var25, var26
 end
 
-return function(p7, p8) --[[ line: 115 | named "validateBodyPartMeshBounds" ]]
+return function(p7, p8)
 	-- upvalues: constantsModule (ref), validateInternal (ref), failureReasonsAccumulatorModule (ref)
 	local assetTypeEnum = p8.assetTypeEnum
 	local var29 = constantsModule.ASSET_TYPE_INFO[assetTypeEnum]

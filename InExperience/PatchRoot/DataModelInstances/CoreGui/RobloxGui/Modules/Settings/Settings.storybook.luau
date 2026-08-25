@@ -12,9 +12,9 @@ local t = {
 
 return {
 	roact = roactModule,
-	mapStory = function(p0) --[[ line: 31 ]]
+	mapStory = function(p0)
 		-- upvalues: roactModule (ref), appStyleProvider (ref), t (ref)
-		return function(p1) --[[ line: 32 ]]
+		return function(p1)
 			-- upvalues: roactModule (copy), appStyleProvider (copy), t (copy), p0 (ref)
 			return roactModule.createElement(appStyleProvider, { style = if p1 then t[p1.theme] else t.Default }, { Child = roactModule.createElement(p0, p1) })
 		end

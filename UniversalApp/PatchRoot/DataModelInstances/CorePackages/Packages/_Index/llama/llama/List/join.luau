@@ -1,6 +1,6 @@
 ﻿local noneModule = require(script.Parent.Parent.None)
 
-return function(...) --[[ line: 4 | named "join" ]]
+return function(...)
 	-- upvalues: noneModule (ref)
 	local t = {}
 	local var2 = 1

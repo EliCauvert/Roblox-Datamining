@@ -4,7 +4,7 @@ local curveUtilModule = require(script.Parent:WaitForChild("CurveUtil"))
 local t_1 = {}
 t_1.__index = t_1
 
-local function CreateGuiObjects() --[[ line: 21 ]]
+local function CreateGuiObjects()
 	-- upvalues: chatSettingsModule (ref)
 	local frame = Instance.new("Frame")
 	frame.Selectable = false
@@ -105,11 +105,11 @@ local function CreateGuiObjects() --[[ line: 21 ]]
 	return frame, textButton, var13, var14, imageLabel_2, unselectedFrame, selectedFrame
 end
 
-function t_1.Destroy(p0) --[[ line: 141 ]]
+function t_1.Destroy(p0)
 	p0.GuiObject:Destroy()
 end
 
-function t_1.UpdateMessagePostedInChannel(p1, p2) --[[ line: 145 ]]
+function t_1.UpdateMessagePostedInChannel(p1, p2)
 	if p1.Active and p2 ~= true then
 		return
 	end
@@ -125,7 +125,7 @@ function t_1.UpdateMessagePostedInChannel(p1, p2) --[[ line: 145 ]]
 	newMessageIcon:TweenPosition(UDim2.new(0, 0, 0, 0), out, quad, 0.15, true)
 end
 
-function t_1.SetActive(value, p3) --[[ line: 168 ]]
+function t_1.SetActive(value, p3)
 	value.Active = p3
 	value.UnselectedFrame.Visible = not p3
 	value.SelectedFrame.Visible = p3
@@ -140,23 +140,23 @@ function t_1.SetActive(value, p3) --[[ line: 168 ]]
 	value.NameTag.Font = Enum.Font.SourceSans
 end
 
-function t_1.SetTextSize(value, p4) --[[ line: 184 ]]
+function t_1.SetTextSize(value, p4)
 	value.NameTag.TextSize = p4
 end
 
-function t_1.FadeOutBackground(value, p5) --[[ line: 188 ]]
+function t_1.FadeOutBackground(value, p5)
 	-- upvalues: curveUtilModule (ref)
 	value.AnimParams.Background_TargetTransparency = 1
 	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p5)
 end
 
-function t_1.FadeInBackground(value, p6) --[[ line: 193 ]]
+function t_1.FadeInBackground(value, p6)
 	-- upvalues: curveUtilModule (ref)
 	value.AnimParams.Background_TargetTransparency = 0.6
 	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p6)
 end
 
-function t_1.FadeOutText(p7, p8) --[[ line: 198 ]]
+function t_1.FadeOutText(p7, p8)
 	-- upvalues: curveUtilModule (ref)
 	p7.AnimParams.Text_TargetTransparency = 1
 	p7.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p8)
@@ -164,7 +164,7 @@ function t_1.FadeOutText(p7, p8) --[[ line: 198 ]]
 	p7.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p8)
 end
 
-function t_1.FadeInText(p9, p10) --[[ line: 205 ]]
+function t_1.FadeInText(p9, p10)
 	-- upvalues: curveUtilModule (ref)
 	p9.AnimParams.Text_TargetTransparency = 0
 	p9.AnimParams.Text_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p10)
@@ -172,7 +172,7 @@ function t_1.FadeInText(p9, p10) --[[ line: 205 ]]
 	p9.AnimParams.TextStroke_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p10)
 end
 
-function t_1.AnimGuiObjects(p11) --[[ line: 212 ]]
+function t_1.AnimGuiObjects(p11)
 	p11.UnselectedFrame.BackgroundTransparency = p11.AnimParams.Background_CurrentTransparency
 	p11.SelectedFrame.BackgroundImage.BackgroundTransparency = p11.AnimParams.Background_CurrentTransparency
 	p11.SelectedFrame.BlueBarLeft.ImageTransparency = p11.AnimParams.Background_CurrentTransparency
@@ -188,7 +188,7 @@ function t_1.AnimGuiObjects(p11) --[[ line: 212 ]]
 	p11.NameTagSelect.TextStrokeTransparency = p11.AnimParams.TextStroke_CurrentTransparency
 end
 
-function t_1.InitializeAnimParams(p12) --[[ line: 230 ]]
+function t_1.InitializeAnimParams(p12)
 	-- upvalues: curveUtilModule (ref)
 	p12.AnimParams.Text_TargetTransparency = 0
 	p12.AnimParams.Text_CurrentTransparency = 0
@@ -201,7 +201,7 @@ function t_1.InitializeAnimParams(p12) --[[ line: 230 ]]
 	p12.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
 end
 
-function t_1.Update(p13, p14) --[[ line: 244 ]]
+function t_1.Update(p13, p14)
 	-- upvalues: curveUtilModule (ref)
 	p13.AnimParams.Background_CurrentTransparency = curveUtilModule:Expt(p13.AnimParams.Background_CurrentTransparency, p13.AnimParams.Background_TargetTransparency, p13.AnimParams.Background_NormalizedExptValue, p14)
 	p13.AnimParams.Text_CurrentTransparency = curveUtilModule:Expt(p13.AnimParams.Text_CurrentTransparency, p13.AnimParams.Text_TargetTransparency, p13.AnimParams.Text_NormalizedExptValue, p14)
@@ -209,7 +209,7 @@ function t_1.Update(p13, p14) --[[ line: 244 ]]
 	p13:AnimGuiObjects()
 end
 
-function t.new(p15) --[[ line: 270 ]]
+function t.new(p15)
 	-- upvalues: t_1 (ref), CreateGuiObjects (ref), chatSettingsModule (ref)
 	local tbl = setmetatable({}, t_1)
 	local var20, var21, var22, var23, var24, var25, var26 = CreateGuiObjects()

@@ -20,7 +20,7 @@ local dialogSize = foundationModule.Enums.DialogSize
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function ChatSheetContent(p0) --[[ line: 61 ]]
+local function ChatSheetContent(p0)
 	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var12 (ref), var11 (ref)
 	local var14 = reactModule.useRef(nil)
 	
@@ -28,7 +28,7 @@ local function ChatSheetContent(p0) --[[ line: 61 ]]
 		var12("LuaApp_Build_Chat_Scroll", var14)
 	end
 	return reactModule.createElement(var11.Content, {
-		scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then reactModule.useCallback(function(p1) --[[ line: 71 ]]
+		scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then reactModule.useCallback(function(p1)
 			-- upvalues: var14 (ref), p0 (ref)
 			var14.current = p1
 			p0.setScrollingFrame(p1)
@@ -36,7 +36,7 @@ local function ChatSheetContent(p0) --[[ line: 61 ]]
 	}, p0.children)
 end
 
-return function(p2) --[[ line: 83 | named "ChatSheetView" ]]
+return function(p2)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), fFlagBuildDesktopReadinessModule (ref), reactModule (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), view (ref), var11 (ref), dialogSize (ref), ChatSheetContent (ref), chatActionsModule (ref), buildPillMenuPortalModule (ref)
 	local var15 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER

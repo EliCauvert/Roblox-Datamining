@@ -4,14 +4,14 @@ local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
 local getEngineUGCValidateAssetTextureLimitsModule = require(parent.flags.getEngineUGCValidateAssetTextureLimits)
 
 return {
-	isBodyPart = function(p0) --[[ line: 10 ]]
+	isBodyPart = function(p0)
 		-- upvalues: constantsModule (ref)
 		return constantsModule.ASSET_TYPE_INFO[p0] and constantsModule.ASSET_TYPE_INFO[p0].isBodyPart
 	end,
-	isMakeupAsset = function(value) --[[ line: 14 ]]
+	isMakeupAsset = function(value)
 		return if value ~= Enum.AssetType.LipMakeup then if value ~= Enum.AssetType.EyeMakeup then value == Enum.AssetType.FaceMakeup else true else true
 	end,
-	getBodyPartAssets = function() --[[ line: 20 ]]
+	getBodyPartAssets = function()
 		-- upvalues: constantsModule (ref)
 		local t = {}
 		
@@ -22,7 +22,7 @@ return {
 		end
 		return t
 	end,
-	getRigAttachmentToParent = function(p1, p2) --[[ line: 31 ]]
+	getRigAttachmentToParent = function(p1, p2)
 		-- upvalues: constantsModule (ref)
 		if not p1 then
 			p1 = constantsModule.UGC_BODY_PART_NAMES_TO_ASSET_TYPE[p2]
@@ -34,7 +34,7 @@ return {
 		
 		return if var4.isBodyPart then var4.subParts[p2].rigAttachmentToParent.name else ""
 	end,
-	getAttachments = function(p3, p4) --[[ line: 46 ]]
+	getAttachments = function(p3, p4)
 		-- upvalues: constantsModule (ref)
 		if not p3 then
 			p3 = constantsModule.UGC_BODY_PART_NAMES_TO_ASSET_TYPE[p4]
@@ -60,7 +60,7 @@ return {
 		end
 		return t
 	end,
-	getTextureLimit = function(p5, p6, p7) --[[ line: 70 ]]
+	getTextureLimit = function(p5, p6, p7)
 		-- upvalues: getEngineUGCValidateAssetTextureLimitsModule (ref), constantsModule (ref), validationRulesUtilModule (ref)
 		if not getEngineUGCValidateAssetTextureLimitsModule() then
 			return constantsModule.MAX_TEXTURE_SIZE

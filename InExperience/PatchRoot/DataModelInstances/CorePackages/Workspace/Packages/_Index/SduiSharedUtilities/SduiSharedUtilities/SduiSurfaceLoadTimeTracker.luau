@@ -8,7 +8,7 @@ local milestone = timeToInteractiveTracker.Milestone
 
 return {
 	SURFACE_LOAD_TIME_PAGE_SCOPE_KEY = "__sduiSurfaceLoadTimeTracker",
-	createLoadTimerWithSurfaceLoadTime = function(p0, p1, p2) --[[ line: 48 ]]
+	createLoadTimerWithSurfaceLoadTime = function(p0, p1, p2)
 		-- upvalues: sduiLoadTimerModule (ref), timeToInteractiveTracker (ref), milestone (ref), getSduiClientPageScope (ref)
 		local eventName = p1.eventName
 		local var2 = p1.manualSurfaceReady == true
@@ -16,7 +16,7 @@ return {
 		local var4 = false
 		local t = {}
 		
-		local function trackOnce(p3) --[[ line: 61 ]]
+		local function trackOnce(p3)
 			-- upvalues: t (ref), timeToInteractiveTracker (copy), eventName (ref)
 			if not t[p3] then
 				t[p3] = true
@@ -24,7 +24,7 @@ return {
 			end
 		end
 		
-		local function trackSurfaceReady(p4) --[[ line: 68 ]]
+		local function trackSurfaceReady(p4)
 			-- upvalues: t (ref), milestone (copy), timeToInteractiveTracker (copy), eventName (ref)
 			if t[milestone.SurfaceReady] then return end
 			if p4 then
@@ -39,7 +39,7 @@ return {
 			timeToInteractiveTracker.trackEnd(eventName)
 		end
 		
-		local function _() --[[ line: 82 | named "ensureStarted" ]]
+		local function _()
 			-- upvalues: var4 (write), timeToInteractiveTracker (copy), eventName (ref), p1 (ref)
 			if not var4 then
 				var4 = true
@@ -53,7 +53,7 @@ return {
 		
 		local logUiRequestSent = var3.logUiRequestSent
 		
-		function var3.logUiRequestSent() --[[ line: 94 ]]
+		function var3.logUiRequestSent()
 			-- upvalues: logUiRequestSent (ref), var4 (write), timeToInteractiveTracker (copy), eventName (ref), p1 (ref), milestone (copy), t (ref)
 			logUiRequestSent()
 			
@@ -75,7 +75,7 @@ return {
 		
 		local logUiRequestQueued = var3.logUiRequestQueued
 		
-		function var3.logUiRequestQueued() --[[ line: 101 ]]
+		function var3.logUiRequestQueued()
 			-- upvalues: logUiRequestQueued (ref), var4 (write), timeToInteractiveTracker (copy), eventName (ref), p1 (ref)
 			logUiRequestQueued()
 			
@@ -91,7 +91,7 @@ return {
 		
 		local logResponseDecodeBegin = var3.logResponseDecodeBegin
 		
-		function var3.logResponseDecodeBegin() --[[ line: 107 ]]
+		function var3.logResponseDecodeBegin()
 			-- upvalues: logResponseDecodeBegin (ref), milestone (copy), t (ref), timeToInteractiveTracker (copy), eventName (ref)
 			logResponseDecodeBegin()
 			local name = milestone.PrimaryDataReady.Name
@@ -110,7 +110,7 @@ return {
 		
 		local logComponentMounted = var3.logComponentMounted
 		
-		function var3.logComponentMounted() --[[ line: 115 ]]
+		function var3.logComponentMounted()
 			-- upvalues: logComponentMounted (ref), milestone (copy), t (ref), timeToInteractiveTracker (copy), eventName (ref)
 			logComponentMounted()
 			local surfaceMounted = milestone.SurfaceMounted
@@ -123,7 +123,7 @@ return {
 		
 		local logComponentReady = var3.logComponentReady
 		
-		function var3.logComponentReady() --[[ line: 121 ]]
+		function var3.logComponentReady()
 			-- upvalues: milestone (copy), t (ref), timeToInteractiveTracker (copy), eventName (ref), logComponentReady (ref), var2 (ref)
 			local name = milestone.DataProcessingCompleted.Name
 			

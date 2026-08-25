@@ -9,7 +9,7 @@ local text = foundationModule.Text
 local useLocalization = localizationModule.Hooks.useLocalization
 local fFlagProfileAboutDetailsUseSheet = require(parent.SharedFlags).FFlagProfileAboutDetailsUseSheet
 
-return function(p0) --[[ line: 19 | named "AboutDescription" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), fFlagProfileAboutDetailsUseSheet (ref), text (ref)
 	local var5 = useLocalization({
 		about = textKeysModule.About,

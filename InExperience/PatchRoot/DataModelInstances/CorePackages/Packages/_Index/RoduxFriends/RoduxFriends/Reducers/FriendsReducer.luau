@@ -15,9 +15,9 @@ local t = {
 	contactNamesByUserId = {}
 }
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: t (ref), byUserIdModule (ref), countsByUserIdModule (ref), requestsModule (ref), recommendationsModule (ref), friendshipStatusModule (ref), friendsRankByUserIdModule (ref), contactNamesByUserIdModule (ref)
-	return function(p1, p2) --[[ line: 22 ]]
+	return function(p1, p2)
 		-- upvalues: t (copy), byUserIdModule (copy), p0 (ref), countsByUserIdModule (copy), requestsModule (copy), recommendationsModule (copy), friendshipStatusModule (copy), friendsRankByUserIdModule (copy), contactNamesByUserIdModule (copy)
 		p1 = p1 or t
 		

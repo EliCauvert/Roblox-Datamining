@@ -16,7 +16,7 @@ local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenL
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
 return {
-	Skeleton = reactModule.memo(function(p0) --[[ line: 34 | named "ExperienceDetailsActionBarSkeleton" ]]
+	Skeleton = reactModule.memo(function(p0)
 		-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), skeleton (ref), radius (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 		local size1200 = useTokens().Size.Size_1200
 		
@@ -51,7 +51,7 @@ return {
 			})
 		})
 	end),
-	Error = reactModule.memo(function(p1) --[[ line: 79 | named "ExperienceDetailsActionBarError" ]]
+	Error = reactModule.memo(function(p1)
 		-- upvalues: useGameInfoModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), reactModule (ref), view (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 		local var4 = useGameInfoModule(p1.universeId)
 		

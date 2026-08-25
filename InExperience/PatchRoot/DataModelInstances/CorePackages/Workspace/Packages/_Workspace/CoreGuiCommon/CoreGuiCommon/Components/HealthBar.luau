@@ -14,7 +14,7 @@ local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
 local useTokens = foundationModule.Hooks.useTokens
 local healthBarColors = constantsModule.HealthBarColors
 
-local function getHealthBarColor(p0) --[[ line: 25 ]]
+local function getHealthBarColor(p0)
 	-- upvalues: healthBarColors (ref)
 	if p0 <= healthBarColors.Red.Fraction then
 		return healthBarColors.Red.Color
@@ -41,7 +41,7 @@ local function getHealthBarColor(p0) --[[ line: 25 ]]
 	return Color3.new(var12.X, var12.Y, var12.Z)
 end
 
-return reactModule.memo(function(p1) --[[ line: 54 | named "HealthBar" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: starterGuiService (ref), useTokens (ref), useDeviceOrientation (ref), signalsReactModule (ref), getLocalHumanoidStore (ref), reactModule (ref), constantsModule (ref), signalsModule (ref), view (ref), robloxAppEnumsModule (ref), getHealthBarColor (ref)
 	local mockStarterGui = p1.mockStarterGui or starterGuiService
 	local var17 = useTokens()
@@ -51,7 +51,7 @@ return reactModule.memo(function(p1) --[[ line: 54 | named "HealthBar" ]]
 	local var22, var23 = reactModule.useBinding(constantsModule.InitialHealth)
 	local var24, var25 = reactModule.useBinding(constantsModule.InitialHealth)
 	local var26, var27 = reactModule.useBinding(false)
-	local var28 = reactModule.joinBindings({ var22, var24, var26 }):map(function(p2) --[[ line: 67 ]]
+	local var28 = reactModule.joinBindings({ var22, var24, var26 }):map(function(p2)
 		local var30 = p2[1]
 		local var31 = p2[2]
 		local var32 = 1
@@ -65,26 +65,26 @@ return reactModule.memo(function(p1) --[[ line: 54 | named "HealthBar" ]]
 		end
 		return var32
 	end)
-	local var29 = reactModule.joinBindings({ var22, var24 }):map(function(p3) --[[ line: 82 ]]
+	local var29 = reactModule.joinBindings({ var22, var24 }):map(function(p3)
 		return p3[1] < p3[2]
 	end)
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var19 (ref), var23 (ref), constantsModule (copy), var25 (ref), var27 (ref), mockStarterGui (ref), var21 (ref)
-		local var33 = signalsModule.createEffect(function(p4) --[[ line: 87 ]]
+		local var33 = signalsModule.createEffect(function(p4)
 			-- upvalues: var19 (copy), var23 (copy), constantsModule (copy), var25 (copy), var27 (copy)
 			local healthValue = var19.getHealthValue(p4)
 			var23(healthValue.health or constantsModule.InitialHealth)
 			var25(healthValue.maxHealth or constantsModule.InitialHealth)
 			var27(healthValue.isDead or false)
 		end)
-		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p5, p6) --[[ line: 96 ]]
+		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p5, p6)
 			-- upvalues: var21 (copy)
 			if p5 == Enum.CoreGuiType.Health or p5 == Enum.CoreGuiType.All then
 				var21(p6)
 			end
 		end)
 		
-		return function() --[[ line: 103 ]]
+		return function()
 			-- upvalues: var33 (ref), coreGuiChangedSignalConnection (ref)
 			var33()
 			coreGuiChangedSignalConnection:Disconnect()
@@ -115,11 +115,11 @@ return reactModule.memo(function(p1) --[[ line: 54 | named "HealthBar" ]]
 			Fill = reactModule.createElement(view, {
 				tag = "anchor-left-center radius-medium",
 				testId = "health-bar-fill",
-				backgroundStyle = var28:map(function(p7) --[[ line: 138 ]]
+				backgroundStyle = var28:map(function(p7)
 					-- upvalues: getHealthBarColor (copy)
 					return { Transparency = 0, Color3 = getHealthBarColor(p7) }
 				end),
-				Size = var28:map(function(p8) --[[ line: 144 ]]
+				Size = var28:map(function(p8)
 					return UDim2.fromScale(p8, 1)
 				end)
 			})

@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3, p4) --[[ line: 1 ]]
+﻿return function(p0, p1, p2, p3, p4)
 	local r = p3.R
 	local g = p3.G
 	local b = p3.B

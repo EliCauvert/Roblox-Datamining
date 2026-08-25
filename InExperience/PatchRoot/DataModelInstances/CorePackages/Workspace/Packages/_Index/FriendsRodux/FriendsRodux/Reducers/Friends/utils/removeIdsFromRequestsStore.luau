@@ -1,6 +1,6 @@
 ﻿local llamaModule = require(script:FindFirstAncestor("FriendsRodux").Parent.llama)
 
-return function(p0, p1) --[[ line: 5 ]]
+return function(p0, p1)
 	-- upvalues: llamaModule (ref)
 	local t = {}
 	

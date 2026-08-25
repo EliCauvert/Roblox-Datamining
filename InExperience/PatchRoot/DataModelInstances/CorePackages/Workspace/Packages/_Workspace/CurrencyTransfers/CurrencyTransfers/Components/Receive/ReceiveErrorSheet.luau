@@ -21,7 +21,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
 local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 
-local function _(p0, p1, p2) --[[ line: 38 | named "getErrorMessageAndButton" ]]
+local function _(p0, p1, p2)
 	-- upvalues: failureReasonModule (ref), transferLocaleFormatModule (ref)
 	if not p0 then
 		return p1.GenericError, p1.TryAgain
@@ -41,7 +41,7 @@ local function _(p0, p1, p2) --[[ line: 38 | named "getErrorMessageAndButton" ]]
 	return accountDisabled, OK
 end
 
-return function(_) --[[ line: 64 | named "ReceiveErrorSheet" ]]
+return function(_)
 	-- upvalues: useTransferStoreModule (ref), useTokens (ref), signalsReactModule (ref), failureReasonModule (ref), reactModule (ref), getTransferRequestByIdRequestModule (ref), useUserNameFromUserIdModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), transferLocaleFormatModule (ref), sheet (ref), useScaledValue (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local genericError, tryAgain
 	local var10 = useTransferStoreModule()
@@ -53,15 +53,15 @@ return function(_) --[[ line: 64 | named "ReceiveErrorSheet" ]]
 	local triggerOnClose = var10.triggerOnClose
 	local var16 = if var12 then var12.failureReason else nil
 	local var17 = var16 == failureReasonModule.TransferExpired
-	reactModule.useEffect(function() --[[ line: 81 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var13 (ref), var14 (ref), var15 (ref), getTransferRequestByIdRequestModule (copy), var10 (ref)
 		if var17 and not var13 and (not var14 or not var14.sender) and var15 then
-			getTransferRequestByIdRequestModule({ transferRequestId = var15 }, nil, var10.getNetworkImpl()):andThen(function(p3) --[[ line: 91 ]]
+			getTransferRequestByIdRequestModule({ transferRequestId = var15 }, nil, var10.getNetworkImpl()):andThen(function(p3)
 				-- upvalues: var10 (copy)
 				if p3 and p3.transfer and p3.transfer.sender then
 					var10.setSender(p3.transfer.sender)
 				end
-			end):catch(function() --[[ line: 96 ]] end)
+			end):catch(function() end)
 			
 			return
 		end

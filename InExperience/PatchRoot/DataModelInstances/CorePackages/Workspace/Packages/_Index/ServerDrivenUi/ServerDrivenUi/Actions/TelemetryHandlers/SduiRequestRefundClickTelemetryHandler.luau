@@ -9,7 +9,7 @@ local var2 = tModule.strictInterface({
 	eventContext = tModule.string
 })
 
-return function(p0, p1, p2) --[[ line: 20 ]]
+return function(p0, p1, p2)
 	-- upvalues: getActionTelemetryFieldValue (ref), var2 (ref), sduiErrorType (ref), sendRequestRefundClickEvent (ref)
 	local var3 = getActionTelemetryFieldValue(p0, p1, "placeId")
 	local var4 = getActionTelemetryFieldValue(p0, p1, "eventContext")

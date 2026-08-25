@@ -20,7 +20,7 @@ local t = {
 }
 local UGCValidationRemoveHRDBlocker = game:DefineFastFlag("UGCValidationRemoveHRDBlocker", false)
 
-local function fillBoneTreeFlatList(p0, p1, p2) --[[ line: 23 ]]
+local function fillBoneTreeFlatList(p0, p1, p2)
 	-- upvalues: fillBoneTreeFlatList (ref)
 	for i, v in p0:GetChildren() do
 		local var11 = if v:IsA("Bone") then true else p1
@@ -32,7 +32,7 @@ local function fillBoneTreeFlatList(p0, p1, p2) --[[ line: 23 ]]
 	end
 end
 
-local function nameIsMappedInRigDescriptions(p3, p4, p5) --[[ line: 38 ]]
+local function nameIsMappedInRigDescriptions(p3, p4, p5)
 	-- upvalues: r15plusUtilsModule (ref)
 	for i, v in r15plusUtilsModule.getHrdJointLabels() do
 		if p3.Name == v.Name then
@@ -53,7 +53,7 @@ local function nameIsMappedInRigDescriptions(p3, p4, p5) --[[ line: 38 ]]
 	return false
 end
 
-local function validateBonesForRoot(p6, p7) --[[ line: 64 ]]
+local function validateBonesForRoot(p6, p7)
 	-- upvalues: getAllInstancesIsAModule (ref), UGCValidationRemoveHRDBlocker (ref), errorSourceStringsModule (ref), r15plusUtilsModule (ref), fillBoneTreeFlatList (ref), nameIsMappedInRigDescriptions (ref)
 	for i, v in getAllInstancesIsAModule(p6, "MeshPart") do
 		local name = v.Name
@@ -124,7 +124,7 @@ local function validateBonesForRoot(p6, p7) --[[ line: 64 ]]
 	end
 end
 
-function t.run(p8, p9) --[[ line: 159 ]]
+function t.run(p8, p9)
 	-- upvalues: validateBonesForRoot (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), shouldValidateR15LegacyDuplicateModule (ref), errorSourceStringsModule (ref)
 	validateBonesForRoot(p9.rootInstance, p8)
 	

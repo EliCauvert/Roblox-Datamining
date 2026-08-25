@@ -5,25 +5,25 @@ local enableMessageBusUnSubscribeErrorTelemetry = game:DefineFastFlag("EnableMes
 local t = {}
 t.__index = t
 
-function t.publish(p0, p1) --[[ line: 41 ]]
+function t.publish(p0, p1)
 	-- upvalues: messageBusService (ref)
 	assert(p0.validateParams(p1))
 	messageBusService:Publish(p0.mid, p1)
 end
 
-function t.publishProtocolMethodRequest(p2, p3, p4) --[[ line: 46 ]]
+function t.publishProtocolMethodRequest(p2, p3, p4)
 	-- upvalues: messageBusService (ref)
 	assert(p2.validateParams(p3))
 	messageBusService:PublishProtocolMethodRequest(p2.protocolName, p2.methodName, p3, p4)
 end
 
-function t.publishProtocolMethodResponse(p5, p6, p7, p8) --[[ line: 55 ]]
+function t.publishProtocolMethodResponse(p5, p6, p7, p8)
 	-- upvalues: messageBusService (ref)
 	assert(p5.validateParams(p6))
 	messageBusService:PublishProtocolMethodResponse(p5.protocolName, p5.methodName, p6, p7, p8)
 end
 
-function t.getLast(p9) --[[ line: 71 ]]
+function t.getLast(p9)
 	-- upvalues: messageBusService (ref)
 	local midLast = messageBusService:GetLast(p9.mid)
 	
@@ -35,22 +35,22 @@ function t.getLast(p9) --[[ line: 71 ]]
 	return midLast
 end
 
-function t.getMessageId(p10, p11) --[[ line: 80 ]]
+function t.getMessageId(p10, p11)
 	-- upvalues: messageBusService (ref)
 	return messageBusService:GetMessageId(p10, p11)
 end
 
-function t.getProtocolMethodRequestMessageId(p12, p13) --[[ line: 84 ]]
+function t.getProtocolMethodRequestMessageId(p12, p13)
 	-- upvalues: messageBusService (ref)
 	return messageBusService:GetProtocolMethodRequestMessageId(p12, p13)
 end
 
-function t.getProtocolMethodResponseMessageId(p14, p15) --[[ line: 88 ]]
+function t.getProtocolMethodResponseMessageId(p14, p15)
 	-- upvalues: messageBusService (ref)
 	return messageBusService:GetProtocolMethodResponseMessageId(p14, p15)
 end
 
-function t.call(p16, p17) --[[ line: 92 ]]
+function t.call(p16, p17)
 	-- upvalues: messageBusService (ref)
 	assert(p16.validateParams(p17))
 	
@@ -60,12 +60,12 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 100 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref)
 	return setmetatable({ connections = {} }, t_1)
 end
 
-function t_1:getSubscriptionCount() --[[ line: 107 ]]
+function t_1:getSubscriptionCount()
 	local var6 = 0
 	
 	for i in pairs(self.connections) do
@@ -74,7 +74,7 @@ function t_1:getSubscriptionCount() --[[ line: 107 ]]
 	return var6
 end
 
-function t_1:subscribe(p18, p19, p20, p21) --[[ line: 115 ]]
+function t_1:subscribe(p18, p19, p20, p21)
 	-- upvalues: messageBusService (ref)
 	local var7 = if p20 ~= nil then p20 else true
 	local var8 = p21 ~= nil and p21
@@ -86,7 +86,7 @@ function t_1:subscribe(p18, p19, p20, p21) --[[ line: 115 ]]
 	self.connections[mid] = messageBusService:Subscribe(mid, p19, var8, var7)
 end
 
-function t_1:subscribeProtocolMethodRequest(p22, p23, p24, p25) --[[ line: 128 ]]
+function t_1:subscribeProtocolMethodRequest(p22, p23, p24, p25)
 	-- upvalues: t (ref), messageBusService (ref)
 	local var9 = if p24 ~= nil then p24 else true
 	local var10 = p25 ~= nil and p25
@@ -100,7 +100,7 @@ function t_1:subscribeProtocolMethodRequest(p22, p23, p24, p25) --[[ line: 128 ]
 	self.connections[protocolMethodRequestMessageId] = messageBusService:SubscribeToProtocolMethodRequest(protocolName, methodName, p23, var10, var9)
 end
 
-function t_1:subscribeProtocolMethodResponse(p26, p27, p28, p29) --[[ line: 148 ]]
+function t_1:subscribeProtocolMethodResponse(p26, p27, p28, p29)
 	-- upvalues: t (ref), messageBusService (ref)
 	local var12 = if p28 ~= nil then p28 else true
 	local var13 = p29 ~= nil and p29
@@ -114,21 +114,21 @@ function t_1:subscribeProtocolMethodResponse(p26, p27, p28, p29) --[[ line: 148 
 	self.connections[protocolMethodResponseMessageId] = messageBusService:SubscribeToProtocolMethodResponse(protocolName, methodName, p27, var13, var12)
 end
 
-function t_1:unsubscribeToProtocolMethodRequest(p30) --[[ line: 168 ]]
+function t_1:unsubscribeToProtocolMethodRequest(p30)
 	-- upvalues: messageBusService (ref)
 	self:unsubscribeWithMsgId(messageBusService:GetProtocolMethodRequestMessageId(p30.protocolName, p30.methodName))
 end
 
-function t_1:unsubscribeToProtocolMethodResponse(p31) --[[ line: 172 ]]
+function t_1:unsubscribeToProtocolMethodResponse(p31)
 	-- upvalues: messageBusService (ref)
 	self:unsubscribeWithMsgId(messageBusService:GetProtocolMethodResponseMessageId(p31.protocolName, p31.methodName))
 end
 
-function t_1:unsubscribe(p32) --[[ line: 176 ]]
+function t_1:unsubscribe(p32)
 	self:unsubscribeWithMsgId(p32.mid)
 end
 
-function t_1:unsubscribeWithMsgId(p33) --[[ line: 180 ]]
+function t_1:unsubscribeWithMsgId(p33)
 	-- upvalues: disableMessageBusUnSubscribeError (ref), enableMessageBusUnSubscribeErrorTelemetry (ref), messageBusService (ref)
 	local var15 = self.connections[p33]
 	
@@ -163,7 +163,7 @@ function t_1:unsubscribeWithMsgId(p33) --[[ line: 180 ]]
 	var15:Disconnect()
 end
 
-function t_1:unsubscribeFromAllMessages() --[[ line: 223 ]]
+function t_1:unsubscribeFromAllMessages()
 	for i, v in pairs(self.connections) do
 		self.connections[i] = nil
 		v:Disconnect()

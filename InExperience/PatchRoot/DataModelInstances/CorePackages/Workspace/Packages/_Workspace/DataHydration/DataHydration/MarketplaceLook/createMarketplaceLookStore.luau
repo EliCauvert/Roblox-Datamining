@@ -5,12 +5,12 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceLookStoreTypes)
 local createDataResolverModule = require(dataHydration.createDataResolver)
 
-return function() --[[ line: 10 | named "createMarketplaceLookStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref)
 	local var4 = createDataCacheModule()
 	local var5 = createDataResolverModule({
 		cache = var4,
-		fetchFn = function(_) --[[ line: 15 ]]
+		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end

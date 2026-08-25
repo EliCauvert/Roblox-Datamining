@@ -9,23 +9,23 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local abbreviateCount = localizationModule.abbreviateCount
 local socialCountsConfigModule = require(script.Parent.Parent.config.SocialCountsConfig)
 
-return function(_, p0, p1, p2) --[[ line: 25 | named "useSocialCountsData" ]]
+return function(_, p0, p1, p2)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), cryoModule (ref), socialCountsConfigModule (ref), useLocalization (ref), abbreviateCount (ref)
 	local counts = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader).counts
-	local var7 = useLocalization(reactModule.useMemo(function() --[[ line: 33 ]]
+	local var7 = useLocalization(reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), socialCountsConfigModule (copy)
-		return cryoModule.Dictionary.map(socialCountsConfigModule.RowConfig, function(p3) --[[ line: 34 ]]
+		return cryoModule.Dictionary.map(socialCountsConfigModule.RowConfig, function(p3)
 			return p3.textKey
 		end)
 	end, {}))
-	local var8 = useLocalization(reactModule.useMemo(function() --[[ line: 41 ]]
+	local var8 = useLocalization(reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), socialCountsConfigModule (copy)
-		return cryoModule.Dictionary.map(socialCountsConfigModule.RowConfig, function(p4) --[[ line: 42 ]]
+		return cryoModule.Dictionary.map(socialCountsConfigModule.RowConfig, function(p4)
 			return p4.singleTextKey
 		end)
 	end, {}))
 	
-	return reactModule.useMemo(function() --[[ line: 49 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: counts (ref), socialCountsConfigModule (copy), var7 (ref), var8 (ref), p2 (ref), abbreviateCount (copy), p1 (ref), p0 (ref)
 		local t = {}
 		
@@ -48,7 +48,7 @@ return function(_, p0, p1, p2) --[[ line: 25 | named "useSocialCountsData" ]]
 				})
 			end
 		end
-		table.sort(t, function(p5, p6) --[[ line: 89 ]]
+		table.sort(t, function(p5, p6)
 			return p5.layoutOrder < p6.layoutOrder
 		end)
 		

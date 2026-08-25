@@ -14,7 +14,7 @@ local t_1 = {
 
 return {
 	_hasFetchedLocalization = false,
-	_getTranslator = function(p0) --[[ line: 27 ]]
+	_getTranslator = function(p0)
 		-- upvalues: chatService (ref), localizationService (ref)
 		if not p0._translator and not p0._hasFetchedLocalization then
 			p0._hasFetchedLocalization = true
@@ -22,7 +22,7 @@ return {
 			
 			if chatLocalization then
 				p0._translator = chatLocalization:GetTranslator(localizationService.RobloxLocaleId)
-				localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ line: 35 ]]
+				localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 					-- upvalues: p0 (ref)
 					p0._hasFetchedLocalization = false
 					p0._translator = nil
@@ -33,9 +33,9 @@ return {
 		end
 		return p0._translator
 	end,
-	Get = function(p1, p2, p3, p4) --[[ line: 47 ]]
+	Get = function(p1, p2, p3, p4)
 		local var5 = p3
-		pcall(function() --[[ line: 49 ]]
+		pcall(function()
 			-- upvalues: p1 (ref), var5 (write), p2 (ref), p4 (ref)
 			local translator = p1:_getTranslator()
 			
@@ -49,7 +49,7 @@ return {
 		
 		return var5
 	end,
-	LocalizeFormattedMessage = function(p5, p6) --[[ line: 60 ]]
+	LocalizeFormattedMessage = function(p5, p6)
 		local matchIndex, matchIndex_1 = string.find(p6, "{RBX_LOCALIZATION_KEY}")
 		
 		if not matchIndex then
@@ -75,10 +75,10 @@ return {
 		end
 		return p5:Get(substring, substring_1, t)
 	end,
-	FormatMessageToSend = function(_, p7, p8, p9, p10) --[[ line: 89 ]]
+	FormatMessageToSend = function(_, p7, p8, p9, p10)
 		return if p9 and p10 then "{RBX_LOCALIZATION_KEY}" .. p7 .. "{RBX_LOCALIZATION_DEFAULT}" .. p8 .. "{RBX_LOCALIZATION_PARAMS}" .. p9 .. "=" .. p10 else "{RBX_LOCALIZATION_KEY}" .. p7 .. "{RBX_LOCALIZATION_DEFAULT}" .. p8
 	end,
-	tryLocalize = function(p11, p12) --[[ line: 100 ]]
+	tryLocalize = function(p11, p12)
 		-- upvalues: t (ref), t_1 (ref)
 		if t[p12] then
 			return p11:Get(t[p12], p12)

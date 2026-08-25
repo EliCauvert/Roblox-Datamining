@@ -4,7 +4,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 17 ]]
+local function variantsFactory(p0)
 	-- upvalues: chipSizeModule (ref)
 	return {
 		textSpacing = {
@@ -46,7 +46,7 @@ local function variantsFactory(p0) --[[ line: 17 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ line: 65 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local chipAccessory = variantsContextModule.useVariants("ChipAccessory", variantsFactory, p1)
 	local var6 = if p4 then "Circular" else "Default"

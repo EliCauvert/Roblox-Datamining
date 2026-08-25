@@ -12,14 +12,14 @@ local editProfileScreenModule = require(editProfile.BaseComponents.EditProfileSc
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: useEditProfileScreenConfigModule (ref), getDisplayStore (ref), useTokens (ref), reactModule (ref), fFlagAXEnableProfileTab (ref), cryoModule (ref), editProfileScreenModule (ref), editProfileModalModule (ref), focusNavigatorWrapperModule (ref)
 	local var8 = useEditProfileScreenConfigModule(p0.navigation.state.params.screen)
 	local var9 = getDisplayStore(false)
 	local var10 = useTokens()
 	local var11 = reactModule.useRef(nil)
 	local var12 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11.current and var11.current.focus and not var12.current then
 			var12.current = true
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 29 ]]
 	end, { var11.current })
 	local var13 = fFlagAXEnableProfileTab and p0.navigation.state.params.fullBleed == true
 	local var14 = cryoModule.Dictionary.join(var8, {
-		component = reactModule.useMemo(function() --[[ line: 45 ]]
+		component = reactModule.useMemo(function()
 			-- upvalues: var8 (ref), var11 (ref), reactModule (copy)
 			local t = {
 				registerSaveHandler = var8.registerSaveHandler,

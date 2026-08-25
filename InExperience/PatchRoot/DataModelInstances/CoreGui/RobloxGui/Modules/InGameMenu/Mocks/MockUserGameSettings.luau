@@ -1,16 +1,16 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new() --[[ line: 8 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local bindableEvent = Instance.new("BindableEvent")
 	local t_1 = {
 		FullscreenChanged = {
-			Connect = function(_, p0) --[[ line: 13 ]]
+			Connect = function(_, p0)
 				-- upvalues: bindableEvent (ref)
 				return bindableEvent.Event:Connect(p0)
 			end,
-			GoFullscreen = function() --[[ line: 16 ]]
+			GoFullscreen = function()
 				-- upvalues: bindableEvent (ref)
 				bindableEvent:Fire(true)
 			end
@@ -21,7 +21,7 @@ function t.new() --[[ line: 8 ]]
 	return t_1
 end
 
-function t.InFullScreen(_) --[[ line: 28 ]]
+function t.InFullScreen(_)
 	return false
 end
 

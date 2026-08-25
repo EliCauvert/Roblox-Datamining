@@ -22,15 +22,15 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local navProps = require(appChat.Constants).NavProps
 
-local function instantTransitionConfig() --[[ line: 32 ]]
+local function instantTransitionConfig()
 	return {
 		transitionSpec = { frequency = 1000000, dampingRatio = 1 }
 	}
 end
 
-return function(p0, p1) --[[ line: 41 ]]
+return function(p0, p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), cryoModule (ref), chatDetailsNavigationOptionsModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), reactModule (ref), squadAddFriendsIconButtonModule (ref), navProps (ref), fFlagEnablePartyQuickStartButton (ref), topBarProviderModule (ref), enumScreensModule (ref), withLocalization (ref), createSystemMenuButtonModule (ref), chatConversationScreenModule (ref), autoFocusNavigationModule (ref), chatDetailsScreenModule (ref), getFFlagIsSquadEnabled (ref), squadLobbyScreenModule (ref), squadInviteFriendsScreenModule (ref), fFlagAppChatDisableAbsorbInputSelectableModule (ref), roactNavigationModule (ref), instantTransitionConfig (ref)
-	local function getChatDetailsNavigationOptions(_) --[[ line: 42 ]]
+	local function getChatDetailsNavigationOptions(_)
 		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p0 (ref), cryoModule (copy), chatDetailsNavigationOptionsModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
 		return if fFlagAppChatTopBarConfigDrivenModule() then p0 or {} else cryoModule.Dictionary.join({
 			backButtonEnabled = true,
@@ -39,7 +39,7 @@ return function(p0, p1) --[[ line: 41 ]]
 		}, p0 or {})
 	end
 	
-	local function getSquadLobbyNavigationOptions(p2) --[[ line: 55 ]]
+	local function getSquadLobbyNavigationOptions(p2)
 		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p0 (ref), cryoModule (copy), reactModule (copy), squadAddFriendsIconButtonModule (copy)
 		if fFlagAppChatTopBarConfigDrivenModule() then
 			return p0 or {}
@@ -48,14 +48,14 @@ return function(p0, p1) --[[ line: 41 ]]
 		
 		return cryoModule.Dictionary.join({
 			backButtonEnabled = true,
-			renderRight = function() --[[ line: 62 ]]
+			renderRight = function()
 				-- upvalues: reactModule (copy), squadAddFriendsIconButtonModule (copy), navigation (ref)
 				return reactModule.createElement(squadAddFriendsIconButtonModule, { navigation = navigation })
 			end
 		}, p0 or {})
 	end
 	
-	local function getSquadInviteFriendsNavigationOptions(p3) --[[ line: 70 ]]
+	local function getSquadInviteFriendsNavigationOptions(p3)
 		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p0 (ref), navProps (copy), fFlagEnablePartyQuickStartButton (copy), reactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy), cryoModule (copy)
 		if fFlagAppChatTopBarConfigDrivenModule() then
 			return p0 or {}
@@ -66,15 +66,15 @@ return function(p0, p1) --[[ line: 41 ]]
 		}
 		
 		if p3.navigation and (p3.navigation.getScreenProps and p3.navigation.getScreenProps(navProps.WIDE_MODE, false)) then
-			function t.renderRight() --[[ line: 90 ]]
+			function t.renderRight()
 				-- upvalues: reactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy)
 				return reactModule.createElement(topBarProviderModule, {
 					screenName = enumScreensModule.SquadInviteFriends,
-					render = function(p4) --[[ line: 93 ]]
+					render = function(p4)
 						-- upvalues: enumScreensModule (copy), withLocalization (copy), createSystemMenuButtonModule (copy)
 						local screenTopBar = p4.getScreenTopBar(enumScreensModule.SquadInviteFriends)
 						
-						return withLocalization({ systemButtonText = "Feature.Squads.Action.Add" })(function(p5) --[[ line: 98 ]]
+						return withLocalization({ systemButtonText = "Feature.Squads.Action.Add" })(function(p5)
 							-- upvalues: createSystemMenuButtonModule (copy), screenTopBar (ref)
 							return createSystemMenuButtonModule({
 								localizedStrings = p5,

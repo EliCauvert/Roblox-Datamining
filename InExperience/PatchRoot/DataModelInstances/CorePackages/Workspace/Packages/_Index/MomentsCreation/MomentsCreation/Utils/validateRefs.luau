@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 7 | named "validateRefs" ]]
+﻿return function(p0)
 	for i, v in p0 do
 		if v.current == nil then
 			return false

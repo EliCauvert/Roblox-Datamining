@@ -2,7 +2,7 @@
 local attributeType = momentsCommonModule.Enums.AttributeType
 local getTagsForMoment = momentsCommonModule.Utils.getTagsForMoment
 
-return function(p0, p1) --[[ line: 12 | named "makeRegistrationInfo" ]]
+return function(p0, p1)
 	-- upvalues: attributeType (ref), getTagsForMoment (ref)
 	local assetTotalDuration
 	local edits = p1.edits

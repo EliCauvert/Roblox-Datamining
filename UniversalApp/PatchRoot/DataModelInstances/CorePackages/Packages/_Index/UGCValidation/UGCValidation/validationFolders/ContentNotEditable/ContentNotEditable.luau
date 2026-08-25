@@ -12,7 +12,7 @@ return {
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateBackendContentNotEditable),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 20 ]]
+	run = function(p0, p1)
 		-- upvalues: validationEnumsModule (ref), constantsModule (ref), errorSourceStringsModule (ref)
 		if p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
 		local descendants = p1.rootInstance:GetDescendants()

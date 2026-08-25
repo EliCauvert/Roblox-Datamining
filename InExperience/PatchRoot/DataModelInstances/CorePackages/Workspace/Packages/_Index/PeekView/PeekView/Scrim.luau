@@ -4,7 +4,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local reactOtterModule = require(parent.ReactOtter)
 local removePeekViewScrimBorder = game:DefineFastFlag("RemovePeekViewScrimBorder", false)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 16 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), reactOtterModule (ref), removePeekViewScrimBorder (ref)
 	local var3 = useDesignTokens()
 	local _ = nil
@@ -16,7 +16,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 16 ]]
 	local var7 = var5
 	local var8, var9 = reactOtterModule.useAnimatedBinding(1)
 	local var10 = var9
-	reactModule.useEffect(function() --[[ line: 22 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (write), reactOtterModule (copy), var6 (write)
 		var10(reactOtterModule.spring(if var6 then 0.35 else 1))
 	end, { var6 })
@@ -29,7 +29,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 16 ]]
 		ClipsDescendants = false,
 		Text = "",
 		AutoButtonColor = false,
-		[reactModule.Event.Activated] = function() --[[ line: 34 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: p0 (ref), var7 (write), var6 (write)
 			if p0.onActivated then
 				p0.onActivated()

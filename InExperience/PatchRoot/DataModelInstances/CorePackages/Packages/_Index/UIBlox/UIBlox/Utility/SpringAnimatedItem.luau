@@ -10,7 +10,7 @@ local var4 = tModule.intersection(tModule.strictInterface({
 	onComplete = tModule.optional(tModule.callback),
 	regularProps = tModule.table,
 	[roactModule.Children] = tModule.optional(tModule.table)
-}), function(p0) --[[ line: 53 ]]
+}), function(p0)
 	-- upvalues: roactModule (ref)
 	if p0[roactModule.Children] == nil or p0.regularProps[roactModule.Children] == nil then
 		return true
@@ -18,16 +18,16 @@ local var4 = tModule.intersection(tModule.strictInterface({
 	return false, "Children must be specified in one place, but the [Roact.Children] key was found in both props and props.regularProps on SpringAnimatedItem."
 end)
 local t = {
-	wrap = function(p1) --[[ line: 66 ]]
+	wrap = function(p1)
 		-- upvalues: roactModule (ref), otterModule (ref), var4 (ref), cryoModule (ref)
 		local var6 = roactModule.PureComponent:extend(string.format("SpringAnimatedItem(%s)", tostring(p1)))
 		var6.defaultProps = { regularProps = {} }
 		
-		function var6.init(p2) --[[ line: 73 ]]
+		function var6.init(p2)
 			-- upvalues: roactModule (copy)
 			p2.ref = p2.props.regularProps[roactModule.Ref] or roactModule.createRef()
 			
-			function p2.applyAnimatedValues(p3) --[[ line: 76 ]]
+			function p2.applyAnimatedValues(p3)
 				-- upvalues: p2 (ref)
 				local current = p2.ref.current
 				
@@ -37,7 +37,7 @@ local t = {
 				end
 			end
 			
-			function p2.onComplete() --[[ line: 90 ]]
+			function p2.onComplete()
 				-- upvalues: p2 (ref)
 				if p2.props.onComplete then
 					p2.props.onComplete()
@@ -47,12 +47,12 @@ local t = {
 			p2.motor = nil
 		end
 		
-		function var6.didMount(p4) --[[ line: 99 ]]
+		function var6.didMount(p4)
 			-- upvalues: otterModule (copy)
 			local animatedValues = p4.props.animatedValues
 			p4.applyAnimatedValues(animatedValues)
 			p4.motor = otterModule.createGroupMotor(animatedValues)
-			p4.motor:onStep(function(p5) --[[ line: 107 ]]
+			p4.motor:onStep(function(p5)
 				-- upvalues: p4 (ref)
 				p4.applyAnimatedValues(p5)
 			end)
@@ -60,14 +60,14 @@ local t = {
 			p4.motor:start()
 		end
 		
-		function var6.willUpdate(p6, p7) --[[ line: 114 ]]
+		function var6.willUpdate(p6, p7)
 			-- upvalues: roactModule (copy)
 			if p6.props.regularProps[roactModule.Ref] ~= p7.regularProps[roactModule.Ref] and p7.regularProps[roactModule.Ref] ~= nil then
 				p6.ref = p7.regularProps[roactModule.Ref]
 			end
 		end
 		
-		function var6.render(p8) --[[ line: 123 ]]
+		function var6.render(p8)
 			-- upvalues: var4 (copy), cryoModule (copy), roactModule (copy), p1 (ref)
 			assert(var4(p8.props))
 			
@@ -77,7 +77,7 @@ local t = {
 			}))
 		end
 		
-		function var6.didUpdate(p9, p10) --[[ line: 135 ]]
+		function var6.didUpdate(p9, p10)
 			-- upvalues: otterModule (copy)
 			if p9.props.animatedValues ~= p10.animatedValues then
 				local t = {}
@@ -96,7 +96,7 @@ local t = {
 			end
 		end
 		
-		function var6.willUnmount(p11) --[[ line: 153 ]]
+		function var6.willUnmount(p11)
 			if p11.motor then
 				p11.motor:destroy()
 				p11.motor = nil

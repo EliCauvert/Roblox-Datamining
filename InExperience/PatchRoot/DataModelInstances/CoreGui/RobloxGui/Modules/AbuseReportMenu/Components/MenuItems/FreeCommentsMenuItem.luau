@@ -4,7 +4,7 @@ local reportTextEntryModule = require(abuseReportMenu.Components.ReportTextEntry
 local reportMenuItemModule = require(abuseReportMenu.Components.MenuItems.ReportMenuItem)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 
-return function(p0) --[[ line: 18 | named "FreeCommentsMenuItem" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reportMenuItemModule (ref), reportTextEntryModule (ref), constantsModule (ref)
 	return reactModule.createElement(reportMenuItemModule, {
 		label = "Abuse Description",

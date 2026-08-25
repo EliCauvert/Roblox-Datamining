@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 ]]
+﻿return function(p0, p1)
 	local var0 = p0
 	
 	for i, v in ipairs(p1:split(".")) do

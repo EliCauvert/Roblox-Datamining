@@ -2,7 +2,7 @@
 local default = require(parent.LoggingProtocol).default
 local bulkPurchaseMissingPurchaseOptionsCounter = require(parent.AvatarExperienceAnalytics).Events.BulkPurchaseMissingPurchaseOptionsCounter
 
-local function reportMissingPurchaseOptions(p0) --[[ line: 8 ]]
+local function reportMissingPurchaseOptions(p0)
 	-- upvalues: default (ref), bulkPurchaseMissingPurchaseOptionsCounter (ref)
 	for i, v in p0 do
 		local purchaseOptions = v.purchaseOptions
@@ -15,7 +15,7 @@ local function reportMissingPurchaseOptions(p0) --[[ line: 8 ]]
 	end
 end
 
-return function(p1) --[[ line: 20 | named "reportBulkPurchaseRequestIssues" ]]
+return function(p1)
 	-- upvalues: reportMissingPurchaseOptions (ref)
 	if p1 == nil then
 		return

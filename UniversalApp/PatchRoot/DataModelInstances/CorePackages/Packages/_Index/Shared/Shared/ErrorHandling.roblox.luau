@@ -9,7 +9,7 @@ local list = {
 }
 local var2 = nil
 
-local function getReactPackagePrefixes() --[[ line: 52 ]]
+local function getReactPackagePrefixes()
 	-- upvalues: var2 (write), list (ref), parent (ref)
 	if var2 then
 		return var2
@@ -28,7 +28,7 @@ local function getReactPackagePrefixes() --[[ line: 52 ]]
 	return t
 end
 
-local function _(p0) --[[ line: 79 | named "isInternalFrame" ]]
+local function _(p0)
 	-- upvalues: getReactPackagePrefixes (ref)
 	for i, v in getReactPackagePrefixes() do
 		if string.sub(p0, 1, #v) == v then
@@ -38,7 +38,7 @@ local function _(p0) --[[ line: 79 | named "isInternalFrame" ]]
 	return false
 end
 
-local function buildStackString(p1) --[[ line: 98 ]]
+local function buildStackString(p1)
 	-- upvalues: getReactPackagePrefixes (ref)
 	local var7 = ""
 	local var8 = false
@@ -80,7 +80,7 @@ end
 
 return {
 	__ERROR_DIVIDER = "\n------ Error caught by React ------\n",
-	describeError = function(p2) --[[ line: 141 ]]
+	describeError = function(p2)
 		-- upvalues: luauPolyfillModule (ref), filterInternalStackFrames (ref), buildStackString (ref)
 		if typeof(p2) ~= "string" then
 			return p2
@@ -97,13 +97,13 @@ return {
 		
 		return var16
 	end,
-	errorToString = function(p3) --[[ line: 165 ]]
+	errorToString = function(p3)
 		-- upvalues: inspect (ref)
 		local _ = nil
 		
 		return if typeof(p3) == "table" then if p3.message and p3.stack then "\n------ Error caught by React ------\n" .. p3.message .. "\n------ Error caught by React ------\n" .. tostring(p3.stack) else inspect(p3) else inspect(p3)
 	end,
-	parseReactError = function(p4) --[[ line: 191 ]]
+	parseReactError = function(p4)
 		-- upvalues: error (ref)
 		local parts = string.split(p4, "\n------ Error caught by React ------\n")
 		

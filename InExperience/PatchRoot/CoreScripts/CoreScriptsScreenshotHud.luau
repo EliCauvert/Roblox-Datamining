@@ -37,7 +37,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 	local var18 = nil
 	local var19 = false
 	
-	local function createFrame(p0, p1) --[[ line: 72 ]]
+	local function createFrame(p0, p1)
 		local frame = Instance.new("Frame")
 		frame.BackgroundColor3 = Color3.new(1, 1, 1)
 		frame.BackgroundTransparency = 1
@@ -53,7 +53,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		return frame
 	end
 	
-	local function createImageLabel(p2, p3, p4) --[[ line: 89 ]]
+	local function createImageLabel(p2, p3, p4)
 		local imageLabel = Instance.new("ImageLabel")
 		imageLabel.Image = p2
 		imageLabel.BackgroundTransparency = 1
@@ -69,7 +69,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		return imageLabel
 	end
 	
-	local function createImageButton(p5, p6, p7) --[[ line: 107 ]]
+	local function createImageButton(p5, p6, p7)
 		local imageButton = Instance.new("ImageButton")
 		imageButton.Image = p5
 		imageButton.BackgroundTransparency = 1
@@ -85,7 +85,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		return imageButton
 	end
 	
-	local function createTextLabel(p8, p9, p10) --[[ line: 125 ]]
+	local function createTextLabel(p8, p9, p10)
 		-- upvalues: appFonts (ref)
 		local textLabel = Instance.new("TextLabel")
 		textLabel.Text = p8
@@ -215,15 +215,15 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		ZIndex = 3
 	}, var26)
 	
-	local function checkOrRequestExternalStoragePermissions() --[[ line: 279 ]]
+	local function checkOrRequestExternalStoragePermissions()
 		-- upvalues: permissionsProtocol (ref), promiseModule (ref)
-		return permissionsProtocol.default:checkOrRequestPermissions({ permissionsProtocol.Permissions.WRITE_MEDIA_STORAGE }):andThen(function(p11) --[[ line: 284 ]]
+		return permissionsProtocol.default:checkOrRequestPermissions({ permissionsProtocol.Permissions.WRITE_MEDIA_STORAGE }):andThen(function(p11)
 			-- upvalues: permissionsProtocol (copy), promiseModule (copy)
 			return p11 == permissionsProtocol.Status.AUTHORIZED and promiseModule.resolve() or promiseModule.reject()
 		end)
 	end
 	
-	local function getEnabledPlayerScreenGuis() --[[ line: 290 ]]
+	local function getEnabledPlayerScreenGuis()
 		-- upvalues: playersService (ref)
 		local t = {}
 		
@@ -235,7 +235,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		return t
 	end
 	
-	local function getEnabledCoreGuiTypes() --[[ line: 301 ]]
+	local function getEnabledCoreGuiTypes()
 		-- upvalues: starterGuiService (ref)
 		local t = {}
 		
@@ -247,12 +247,12 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		return t
 	end
 	
-	local var43 = function() --[[ line: 311 ]] end
+	local var43 = function() end
 	
-	local function onCameraButtonActivated() --[[ line: 313 ]]
+	local function onCameraButtonActivated()
 		-- upvalues: userInputService (ref), checkOrRequestExternalStoragePermissions (ref), var43 (write), captureMasterModule (ref)
 		if userInputService:GetPlatform() == Enum.Platform.Android then
-			checkOrRequestExternalStoragePermissions():andThen(var43, function() --[[ line: 315 ]]
+			checkOrRequestExternalStoragePermissions():andThen(var43, function()
 				-- upvalues: captureMasterModule (copy)
 				captureMasterModule:ShowPermissionToast()
 			end)
@@ -262,7 +262,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		var43()
 	end
 	
-	var43 = function() --[[ line: 323 ]]
+	var43 = function()
 		-- upvalues: captureMasterModule (ref), var18 (write), screenshotHud (ref), getEnabledPlayerScreenGuis (ref), getEnabledCoreGuiTypes (ref), starterGuiService (ref), proximityPromptService (ref), var27 (ref), playersService (ref), coreGuiService (ref), var39 (ref), var28 (ref), onCameraButtonActivated (ref), rbxAnalyticsService (ref)
 		captureMasterModule:DismissNotification()
 		
@@ -338,11 +338,11 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		rbxAnalyticsService:SendEventDeferred("client", "screenshotHud", "TakeScreenshot", { pid = tostring(game.PlaceId) })
 	end
 	
-	local function _(p12) --[[ line: 424 | named "isGamepad" ]]
+	local function _(p12)
 		return p12.Name:match("^Gamepad*") ~= nil
 	end
 	
-	local function updateGamepadButtons() --[[ line: 428 ]]
+	local function updateGamepadButtons()
 		-- upvalues: var14 (write), var15 (write), var19 (write), var35 (ref), var28 (ref), var37 (ref), var33 (ref), var27 (ref), screenshotHud (ref)
 		if var14 then
 			var14.Parent = nil
@@ -363,7 +363,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		end
 	end
 	
-	local function onLastInputTypeChanged(p13) --[[ line: 453 ]]
+	local function onLastInputTypeChanged(p13)
 		-- upvalues: userInputService (ref), var19 (write), updateGamepadButtons (ref)
 		local var63 = (p13 or userInputService:GetLastInputType()).Name:match("^Gamepad*") ~= nil
 		
@@ -373,9 +373,9 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		end
 	end
 	
-	local function setupConnections() --[[ line: 469 ]]
+	local function setupConnections()
 		-- upvalues: var28 (ref), var30 (ref), t (ref), t_1 (write), var18 (write), onCameraButtonActivated (ref), var33 (ref), screenshotHud (ref), contextActionService (ref), t_2 (write), userInputService (ref), var19 (write), updateGamepadButtons (ref), onLastInputTypeChanged (ref)
-		table.insert(t_1, var28.InputBegan:Connect(function(p14) --[[ line: 470 ]]
+		table.insert(t_1, var28.InputBegan:Connect(function(p14)
 			-- upvalues: var30 (copy), t (copy)
 			if p14.UserInputType == Enum.UserInputType.MouseMovement then
 				var30.BackgroundColor3 = t.Hovered.BackgroundColor3
@@ -387,7 +387,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 				var30.BackgroundTransparency = t.Pressed.BackgroundTransparency
 			end
 		end))
-		table.insert(t_1, var28.InputEnded:Connect(function() --[[ line: 484 ]]
+		table.insert(t_1, var28.InputEnded:Connect(function()
 			-- upvalues: var30 (copy), t (copy)
 			var30.BackgroundColor3 = t.Default.BackgroundColor3
 			var30.BackgroundTransparency = t.Default.BackgroundTransparency
@@ -399,18 +399,18 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		end
 		var18 = var28.Activated:connect(onCameraButtonActivated)
 		table.insert(t_1, var18)
-		table.insert(t_1, var33.Activated:connect(function() --[[ line: 497 ]]
+		table.insert(t_1, var33.Activated:connect(function()
 			-- upvalues: screenshotHud (copy)
 			screenshotHud.Visible = false
 		end))
-		contextActionService:BindAction("ScreenshotHudGamepadClose", function(_, p15, p16) --[[ line: 503 | named "gamepadHandleClose" ]]
+		contextActionService:BindAction("ScreenshotHudGamepadClose", function(_, p15, p16)
 			-- upvalues: screenshotHud (copy)
 			if p15 == Enum.UserInputState.End and p16.UserInputType.Name:match("^Gamepad*") ~= nil then
 				screenshotHud.Visible = false
 			end
 		end, false, Enum.KeyCode.ButtonB)
 		table.insert(t_2, "ScreenshotHudGamepadClose")
-		contextActionService:BindAction("ScreenshotHudGamepadCamera", function(_, p17, p18) --[[ line: 513 | named "gamepadHandleCamera" ]]
+		contextActionService:BindAction("ScreenshotHudGamepadCamera", function(_, p17, p18)
 			-- upvalues: onCameraButtonActivated (copy)
 			if p17 == Enum.UserInputState.End and p18.UserInputType.Name:match("^Gamepad*") ~= nil then
 				onCameraButtonActivated()
@@ -427,7 +427,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		table.insert(t_1, userInputService.LastInputTypeChanged:Connect(onLastInputTypeChanged))
 	end
 	
-	local function disconnectAll() --[[ line: 528 ]]
+	local function disconnectAll()
 		-- upvalues: t_1 (write), t_2 (write), contextActionService (ref)
 		for i, v in ipairs(t_1) do
 			v:Disconnect()
@@ -441,7 +441,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		t_2 = {}
 	end
 	
-	local function screenshotHudEnabled(p19) --[[ line: 541 ]]
+	local function screenshotHudEnabled(p19)
 		-- upvalues: var26 (ref), screenshotHud (ref), disconnectAll (ref), var27 (ref), var39 (ref), setupConnections (ref), captureMasterModule (ref), rbxAnalyticsService (ref)
 		var26.Visible = screenshotHud.Visible
 		disconnectAll()
@@ -455,11 +455,11 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 		rbxAnalyticsService:SendEventDeferred("client", "screenshotHud", "ScreenshotHudEnabled", { pid = tostring(game.PlaceId), enabled = p19 })
 	end
 	
-	screenshotHud:GetPropertyChangedSignal("Visible"):Connect(function() --[[ line: 558 ]]
+	screenshotHud:GetPropertyChangedSignal("Visible"):Connect(function()
 		-- upvalues: screenshotHudEnabled (ref), screenshotHud (ref)
 		screenshotHudEnabled(screenshotHud.Visible)
 	end)
-	screenshotHud:GetPropertyChangedSignal("CameraButtonIcon"):Connect(function() --[[ line: 562 ]]
+	screenshotHud:GetPropertyChangedSignal("CameraButtonIcon"):Connect(function()
 		-- upvalues: var32 (ref), screenshotHud (ref), rbxAnalyticsService (ref)
 		var32.Image = screenshotHud.CameraButtonIcon or "rbxasset://textures/ui/ScreenshotHud/Camera.png"
 		rbxAnalyticsService:SendEventDeferred("client", "screenshotHud", "CameraButtonIcon", {
@@ -467,7 +467,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 			icon = screenshotHud.CameraButtonIcon
 		})
 	end)
-	screenshotHud:GetPropertyChangedSignal("CameraButtonPosition"):Connect(function() --[[ line: 571 ]]
+	screenshotHud:GetPropertyChangedSignal("CameraButtonPosition"):Connect(function()
 		-- upvalues: var14 (write), screenshotHud (ref), rbxAnalyticsService (ref)
 		var14.Position = screenshotHud.CameraButtonPosition
 		rbxAnalyticsService:SendEventDeferred("client", "screenshotHud", "CameraButtonPosition", {
@@ -475,7 +475,7 @@ if require(robloxGui.Modules.Flags.GetFFlagScreenshotHudApi)() then
 			position = tostring(screenshotHud.CameraButtonPosition)
 		})
 	end)
-	screenshotHud:GetPropertyChangedSignal("CloseButtonPosition"):Connect(function() --[[ line: 579 ]]
+	screenshotHud:GetPropertyChangedSignal("CloseButtonPosition"):Connect(function()
 		-- upvalues: var15 (write), screenshotHud (ref), rbxAnalyticsService (ref)
 		var15.Position = screenshotHud.CloseButtonPosition
 		rbxAnalyticsService:SendEventDeferred("client", "screenshotHud", "CloseButtonPosition", {

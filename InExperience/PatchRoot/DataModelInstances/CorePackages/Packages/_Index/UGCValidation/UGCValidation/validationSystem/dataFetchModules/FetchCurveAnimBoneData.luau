@@ -1,7 +1,7 @@
 ﻿local curveAnimBoneHierarchyUtilsModule = require(script.Parent.Parent.Parent.util.CurveAnimBoneHierarchyUtils)
 
 return {
-	getData = function(p0) --[[ line: 6 ]]
+	getData = function(p0)
 		-- upvalues: curveAnimBoneHierarchyUtilsModule (ref)
 		if not p0 then
 			return nil

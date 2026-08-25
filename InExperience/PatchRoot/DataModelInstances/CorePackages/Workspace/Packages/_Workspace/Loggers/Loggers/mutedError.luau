@@ -2,15 +2,15 @@
 local robloxAppEventsModule = require(parent.RobloxAppEvents)
 local fFlagDebugUnmuteLuaErrors = require(parent.SharedFlags).Debug.FFlagDebugUnmuteLuaErrors
 
-local function _() --[[ line: 20 | named "IsRunningInStudio" ]]
+local function _()
 	return game:GetService("RunService"):IsStudio()
 end
 
-return function(p0, p1) --[[ line: 24 ]]
+return function(p0, p1)
 	-- upvalues: fFlagDebugUnmuteLuaErrors (ref), robloxAppEventsModule (ref)
 	if type(p0) ~= "string" then
 		warn("mutedError: errorMessage should be a string!")
-		local ok, _ = pcall(function() --[[ line: 28 ]]
+		local ok, _ = pcall(function()
 			-- upvalues: p0 (write)
 			p0 = tostring(p0)
 		end)

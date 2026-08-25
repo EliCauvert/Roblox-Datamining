@@ -18,7 +18,7 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 66 ]]
+function t_1.new(p0)
 	-- upvalues: cryoModule (ref), t (ref), regexModule (ref), constantsModule (ref), regExpModule (ref), t_1 (ref)
 	local var7 = cryoModule.Dictionary.union(t, p0 or {})
 	local text = regexModule.oneOf(var7.protocolPatterns) .. regexModule.COLON .. regexModule.SLASH .. regexModule.SLASH
@@ -44,16 +44,16 @@ function t_1.new(p0) --[[ line: 66 ]]
 	return t_2
 end
 
-function t_1.default() --[[ line: 108 ]]
+function t_1.default()
 	-- upvalues: t_1 (ref), t (ref)
 	return t_1.new(t)
 end
 
-function t_1.match(p1, p2) --[[ line: 119 ]]
+function t_1.match(p1, p2)
 	-- upvalues: matchAllRegexModule (ref), stringTrim (ref)
 	local t = {}
 	local var14 = 0
-	local ok, status = pcall(function() --[[ line: 122 ]]
+	local ok, status = pcall(function()
 		-- upvalues: matchAllRegexModule (copy), p2 (ref), p1 (ref), var14 (write), stringTrim (copy), t (ref)
 		for i, v in matchAllRegexModule(p2:lower(), p1._urlPattern) do
 			local v

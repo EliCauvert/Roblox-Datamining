@@ -8,7 +8,7 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local localizationModule = require(expChat.Localization)
 local useIsChatBackgroundVisibleModule = require(expChat.Stores.GetTransparencyStore.useIsChatBackgroundVisible)
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "DictationFTUX" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useIsChatBackgroundVisibleModule (ref), foundationModule (ref), localizationModule (ref), reactModule (ref), popover (ref), popoverSide (ref), popoverAlign (ref)
 	local var5 = useIsChatBackgroundVisibleModule()
 	local var6 = foundationModule.Hooks.useTokens()

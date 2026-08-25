@@ -23,7 +23,7 @@ local fFlagFriendsEmptyStateIllustrationThemingModule = require(friendsLanding.F
 local emptyResultsView = roact.PureComponent:extend("EmptyResultsView")
 emptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
 
-local function _(value) --[[ line: 47 | named "loadFoundationCloudAsset" ]]
+local function _(value)
 	-- upvalues: preloadAsset (ref), assets (ref)
 	preloadAsset(value)
 	local var10 = assets[value]
@@ -31,14 +31,14 @@ local function _(value) --[[ line: 47 | named "loadFoundationCloudAsset" ]]
 	return var10.assetId, var10.size
 end
 
-function emptyResultsView.render(p0) --[[ line: 53 ]]
+function emptyResultsView.render(p0)
 	-- upvalues: withStyle (ref), withLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), roact (ref), constantsModule (ref), migrateEmptyResultsViewToFoundation (ref), image (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), imageSetLabel (ref), images (ref), appFonts (ref)
-	return withStyle(function(p1) --[[ line: 54 ]]
+	return withStyle(function(p1)
 		-- upvalues: withLocalization (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy), roact (copy), constantsModule (copy), p0 (ref), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), appFonts (copy)
 		return withLocalization({
 			noResultsText = "CommonUI.Messages.Response.NoResults",
 			addFriendsBtn = if fFlagConnectionsToFriendsRename then textKeysModule.ADD_FRIENDS_BTN else textKeysModule.ADD_CONNECTIONS_BTN
-		})(function(p2) --[[ line: 60 ]]
+		})(function(p2)
 			-- upvalues: roact (copy), constantsModule (copy), p0 (copy), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), p1 (ref), appFonts (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -89,7 +89,7 @@ function emptyResultsView.render(p0) --[[ line: 53 ]]
 	end)
 end
 
-return if migrateEmptyResultsViewToFoundation then function(p3) --[[ line: 114 | named "EmptyResultsViewContainer" ]]
+return if migrateEmptyResultsViewToFoundation then function(p3)
 	-- upvalues: preloadAsset (ref), assets (ref), useTokens (ref), roact (ref), emptyResultsView (ref), cryoModule (ref)
 	preloadAsset("pictograms/collaborators")
 	local collaborators = assets["pictograms/collaborators"]

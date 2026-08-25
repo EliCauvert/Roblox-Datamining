@@ -10,7 +10,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local orientation = foundationModule.Enums.Orientation
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 40 | named "TeleportLeaveConfirmation" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), traversalTelemetryModule (ref), teleportBackModule (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
 	local var5 = useLocalization({
 		leaveHeader = "CoreScripts.InGameMenu.Traversal.LeaveHeader",
@@ -24,7 +24,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 40 | 
 	
 	return reactModule.createElement(dialog.Root, {
 		size = dialogSize.Small,
-		onClose = function(p2) --[[ line: 65 ]]
+		onClose = function(p2)
 			-- upvalues: traversalTelemetryModule (copy), p0 (ref)
 			traversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p0.source })
 			
@@ -50,7 +50,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 40 | 
 					testId = "--teleport-leave-continue",
 					text = var5.leaveContinueAction,
 					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function() --[[ line: 54 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: traversalTelemetryModule (copy), p0 (ref), teleportBackModule (copy)
 						traversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "confirm", source = p0.source })
 						teleportBackModule(p0.placeId)
@@ -60,7 +60,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 40 | 
 					testId = "--teleport-leave-cancel",
 					text = var5.leaveCancelAction,
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 105 ]]
+					onActivated = function()
 						-- upvalues: traversalTelemetryModule (copy), p0 (ref)
 						traversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p0.source })
 						p0.onCancel()

@@ -2,11 +2,11 @@
 local argCheckModule = require(appTabBarRodux.Parent.ArgCheck)
 local setTabBarVisibleModule = require(appTabBarRodux.Actions.SetTabBarVisible)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: argCheckModule (ref), setTabBarVisibleModule (ref)
 	argCheckModule.isType(p0, "boolean", "SetTabBarVisibleFromChat.isVisible")
 	
-	return function(p1) --[[ line: 10 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), setTabBarVisibleModule (copy)
 		local state = p1:getState()
 		

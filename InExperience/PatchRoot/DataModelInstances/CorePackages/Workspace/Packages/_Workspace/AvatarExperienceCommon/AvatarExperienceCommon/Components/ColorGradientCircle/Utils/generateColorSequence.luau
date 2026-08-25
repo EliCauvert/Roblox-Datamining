@@ -1,4 +1,4 @@
-﻿local function deduplicateBodyColor3s(p0) --[[ line: 5 ]]
+﻿local function deduplicateBodyColor3s(p0)
 	local t = {}
 	local t_1 = {}
 	
@@ -13,7 +13,7 @@
 	return t
 end
 
-return function(p1) --[[ line: 23 | named "generateColorSequence" ]]
+return function(p1)
 	-- upvalues: deduplicateBodyColor3s (ref)
 	local var4 = deduplicateBodyColor3s(p1)
 	local var4Count = #var4

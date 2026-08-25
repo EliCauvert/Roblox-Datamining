@@ -10,7 +10,7 @@ local t = {
 	lastUpdated = { 26, 4, 24 }
 }
 
-return function(p0, p1) --[[ line: 23 ]]
+return function(p0, p1)
 	-- upvalues: discoveryEventErrorLogger (ref), var2 (ref), telemetryService (ref), t (ref)
 	if type(p1) ~= "string" or p1 == "" then
 		discoveryEventErrorLogger.reportError("RequestRefundClickInvalidInterface", `string eventContext expected, got {type(p1)} with value {tostring(p1)}`)

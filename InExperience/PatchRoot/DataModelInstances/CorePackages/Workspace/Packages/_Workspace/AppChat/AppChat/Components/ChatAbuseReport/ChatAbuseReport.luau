@@ -45,14 +45,14 @@ local list = {
 	}
 }
 
-local function _() --[[ line: 44 | named "getLocalPlayerUserId" ]]
+local function _()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	return if localPlayer then localPlayer.UserId else 0
 end
 
-return function(p0) --[[ line: 49 | named "ChatAbuseReport" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), appChatNetworkingModule (ref), playersService (ref), name (ref), defaultTwoStepReportFlow (ref), list (ref)
 	local var6 = useDispatch()
 	
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 49 | named "ChatAbuseReport" ]]
 		analyticsContext = "AppChat",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = reactModule.useCallback(function(p1, p2) --[[ line: 52 ]]
+			onSubmit = reactModule.useCallback(function(p1, p2)
 				-- upvalues: var6 (ref), appChatNetworkingModule (copy), p0 (ref), playersService (copy), name (copy)
 				local API = appChatNetworkingModule.rodux.SubmitAppChatAbuseReport.API
 				local t = {

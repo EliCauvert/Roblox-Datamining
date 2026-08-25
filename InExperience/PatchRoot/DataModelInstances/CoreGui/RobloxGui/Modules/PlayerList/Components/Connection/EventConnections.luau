@@ -7,7 +7,7 @@ local userInputServiceConnectorModule = require(script.Parent.UserInputServiceCo
 local screenSizeConnectorModule = require(script.Parent.ScreenSizeConnector)
 local eventConnections = roactModule.PureComponent:extend("EventConnections")
 
-function eventConnections.render(_) --[[ line: 17 ]]
+function eventConnections.render(_)
 	-- upvalues: roactModule (ref), playerServiceConnectorModule (ref), coreGuiConnectorModule (ref), socialConnectorModule (ref), guiServiceConnectorModule (ref), userInputServiceConnectorModule (ref), screenSizeConnectorModule (ref)
 	return roactModule.createFragment({
 		PlayerServiceConnector = roactModule.createElement(playerServiceConnectorModule),

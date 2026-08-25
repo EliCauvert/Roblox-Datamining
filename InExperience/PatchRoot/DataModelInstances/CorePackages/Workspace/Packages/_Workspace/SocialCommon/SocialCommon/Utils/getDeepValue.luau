@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 17 ]]
+﻿return function(p0, p1)
 	local var0 = p0
 	
 	if not var0 then

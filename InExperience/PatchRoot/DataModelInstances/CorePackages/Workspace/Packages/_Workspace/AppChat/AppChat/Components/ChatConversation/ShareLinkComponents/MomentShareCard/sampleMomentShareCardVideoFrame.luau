@@ -1,11 +1,11 @@
 ﻿local videoService = game:GetService("VideoService")
 local full = Enum.VideoSampleSize.Full
 
-return function(p0, p1) --[[ line: 6 | named "sampleMomentShareCardVideoFrame" ]]
+return function(p0, p1)
 	-- upvalues: videoService (ref), full (ref)
 	p1 = p1 or videoService
 	local var2 = nil
-	local ok, status = pcall(function() --[[ line: 9 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var2 (write), p1 (ref), p0 (ref), full (copy)
 		var2 = p1:CreateVideoSamplerAsync(p0, { Size = full })
 		
@@ -13,7 +13,7 @@ return function(p0, p1) --[[ line: 6 | named "sampleMomentShareCardVideoFrame" ]
 	end)
 	
 	if var2 ~= nil then
-		pcall(function() --[[ line: 16 ]]
+		pcall(function()
 			-- upvalues: var2 (write)
 			var2:Destroy()
 		end)

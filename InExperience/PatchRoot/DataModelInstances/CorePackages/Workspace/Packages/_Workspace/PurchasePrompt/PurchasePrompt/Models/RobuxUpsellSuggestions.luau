@@ -1,11 +1,11 @@
 ﻿local robuxUpsellModule = require(script.Parent.Parent.Models.RobuxUpsell)
 local t = {
-	new = function(p0) --[[ line: 17 ]]
+	new = function(p0)
 		return { products = p0 }
 	end
 }
 
-function t.fromJson(p1) --[[ line: 25 ]]
+function t.fromJson(p1)
 	-- upvalues: robuxUpsellModule (ref), t (ref)
 	local t_1 = {}
 	

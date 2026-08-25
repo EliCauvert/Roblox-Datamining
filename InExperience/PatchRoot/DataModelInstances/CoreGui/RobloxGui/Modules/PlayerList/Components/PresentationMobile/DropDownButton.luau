@@ -20,7 +20,7 @@ local images = UIBloxModule.App.ImageSet.Images
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local fFlagAllowDisplayingFoundationIconsForDropdownModule = require(parent.Parent.Flags.FFlagAllowDisplayingFoundationIconsForDropdown)
 
-local function _(p0) --[[ line: 37 | named "isFoundationIconName" ]]
+local function _(p0)
 	-- upvalues: iconName (ref)
 	return iconName[p0] ~= nil
 end
@@ -45,7 +45,7 @@ dropDownButton.validateProps = tModule.strictInterface({
 	layoutValues = tModule.optional(tModule.table)
 })
 
-function dropDownButton.init(p1) --[[ line: 65 ]]
+function dropDownButton.init(p1)
 	p1.state = {
 		isHovered = false,
 		isPressed = false,
@@ -55,7 +55,7 @@ function dropDownButton.init(p1) --[[ line: 65 ]]
 	}
 end
 
-function dropDownButton.getColorBackgroundAnimation(value, p2) --[[ line: 75 ]]
+function dropDownButton.getColorBackgroundAnimation(value, p2)
 	if value.props.animatingPercentage == nil then
 		return 0, 0
 	end
@@ -75,11 +75,11 @@ function dropDownButton.getColorBackgroundAnimation(value, p2) --[[ line: 75 ]]
 	return var11, dropDownRightOptionSize
 end
 
-function dropDownButton.render(p3) --[[ line: 96 ]]
+function dropDownButton.render(p3)
 	-- upvalues: withLayoutValues (ref), withStyle (ref), colors (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), iconName (ref), roactModule (ref), foundationModule (ref), iconVariant (ref), iconSize (ref), imageSetLabel (ref), fFlagEnableMobilePlayerListOnConsole (ref), iconButtonModule (ref), images (ref)
-	return withLayoutValues(function(p4) --[[ line: 97 ]]
+	return withLayoutValues(function(p4)
 		-- upvalues: withStyle (copy), p3 (ref), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
-		return withStyle(function(p5) --[[ line: 98 ]]
+		return withStyle(function(p5)
 			-- upvalues: p4 (write), p3 (copy), colors (copy), fFlagAllowDisplayingFoundationIconsForDropdownModule (copy), iconName (copy), roactModule (copy), foundationModule (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), fFlagEnableMobilePlayerListOnConsole (copy), iconButtonModule (copy), images (copy)
 			p4 = p3.props.layoutValues
 			local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
@@ -125,34 +125,34 @@ function dropDownButton.render(p3) --[[ line: 96 ]]
 				BorderSizePixel = 0,
 				Selectable = not var17,
 				[roactModule.Event.Activated] = if not var17 then p3.props.onActivated else nil,
-				[roactModule.Event.MouseEnter] = function() --[[ line: 198 ]]
+				[roactModule.Event.MouseEnter] = function()
 					-- upvalues: var17 (ref), p3 (copy)
 					if not var17 then
 						p3:setState({ isHovered = true })
 					end
 				end,
-				[roactModule.Event.MouseLeave] = function() --[[ line: 206 ]]
+				[roactModule.Event.MouseLeave] = function()
 					-- upvalues: p3 (copy)
 					p3:setState({ isHovered = false, isPressed = false })
 				end,
-				[roactModule.Change.AbsoluteSize] = function(p6) --[[ line: 213 ]]
+				[roactModule.Change.AbsoluteSize] = function(p6)
 					-- upvalues: p3 (copy)
 					p3:setState({ sizeX = p6.AbsoluteSize.X })
 				end,
-				[roactModule.Change.AbsolutePosition] = function(p7) --[[ line: 219 ]]
+				[roactModule.Change.AbsolutePosition] = function(p7)
 					-- upvalues: p3 (copy)
 					p3:setState({
 						absolutePosX = p7.AbsolutePosition.X,
 						absolutePosY = p7.AbsolutePosition.Y
 					})
 				end,
-				[roactModule.Event.MouseButton1Down] = function() --[[ line: 166 ]]
+				[roactModule.Event.MouseButton1Down] = function()
 					-- upvalues: var17 (ref), p3 (copy)
 					if not var17 then
 						p3:setState({ isPressed = true })
 					end
 				end,
-				[roactModule.Event.MouseButton1Up] = function() --[[ line: 174 ]]
+				[roactModule.Event.MouseButton1Up] = function()
 					-- upvalues: p3 (copy)
 					p3:setState({ isPressed = false })
 				end
@@ -275,12 +275,12 @@ function dropDownButton.render(p3) --[[ line: 96 ]]
 	end)
 end
 
-return roactRoduxModule.connect(function(p9) --[[ line: 350 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p9)
 	return {
 		screenSizeX = p9.screenSize.X,
 		screenSizeY = p9.screenSize.Y
 	}
-end, nil)(function(p8) --[[ line: 342 ]]
+end, nil)(function(p8)
 	-- upvalues: useLayoutValues (ref), roactModule (ref), dropDownButton (ref), cryoModule (ref)
 	return roactModule.createElement(dropDownButton, cryoModule.Dictionary.join(p8, { layoutValues = useLayoutValues() }))
 end)

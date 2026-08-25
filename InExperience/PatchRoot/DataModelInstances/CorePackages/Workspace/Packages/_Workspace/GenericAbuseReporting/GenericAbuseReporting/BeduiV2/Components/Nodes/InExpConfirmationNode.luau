@@ -43,7 +43,7 @@ local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local fFlagAbuseReportLinkOpenedAnalytics = sharedFlagsModule.FFlagAbuseReportLinkOpenedAnalytics
 
-local function _(p0) --[[ line: 89 | named "computeInitialMuteState" ]]
+local function _(p0)
 	-- upvalues: isUserMuted (ref)
 	if not p0 or not p0.userId then
 		return "Hidden"
@@ -53,12 +53,12 @@ local function _(p0) --[[ line: 89 | named "computeInitialMuteState" ]]
 	return if userId == 0 or isUserMuted(userId) then "Hidden" else "Visible"
 end
 
-local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
+local function useBlockMuteActions(p1, p2, p3)
 	-- upvalues: useArTranslation (ref), reactModule (ref), voiceSpeakingSignalsModule (ref), isUserMuted (ref), useAbuseReportAnalytics (ref), useRoactService (ref), roactNetworking (ref), isBlockedUser (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatHttpErrorMessageForAnalytics (ref), dashModule (ref), localPlayer (ref), muteUser (ref), playersService (ref), blockingUtilityModule (ref), blockUser (ref), flaggedMutedError (ref), buttonVariant (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	local var24 = reactModule.useContext(voiceSpeakingSignalsModule.VoiceChatServiceManagerContext)
 	local hidden, hidden_1 = reactModule.useState("Hidden")
-	local var27, var28 = reactModule.useState(function() --[[ line: 111 ]]
+	local var27, var28 = reactModule.useState(function()
 		-- upvalues: p2 (ref), isUserMuted (copy)
 		if not p2 or not p2.userId then
 			return "Hidden"
@@ -70,14 +70,14 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 	local var29, var30 = reactModule.useState(false)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	local var31 = useRoactService(roactNetworking)
-	reactModule.useEffect(function() --[[ line: 119 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), isBlockedUser (copy), var31 (ref), hidden_1 (ref), var30 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), dashModule (copy)
 		if p1 and p1.userId then
-			isBlockedUser(var31, p1.userId):andThen(function(p5) --[[ line: 122 ]]
+			isBlockedUser(var31, p1.userId):andThen(function(p5)
 				-- upvalues: hidden_1 (copy), var30 (copy)
 				hidden_1(if p5.responseBody then "Hidden" else "Visible")
 				var30(true)
-			end):catch(function(p4) --[[ line: 127 ]]
+			end):catch(function(p4)
 				-- upvalues: sendEvent (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatHttpErrorMessageForAnalytics (copy), p1 (copy), dashModule (copy), var30 (copy)
 				sendEvent({
 					sub_event_type = telemetryEventType.Error,
@@ -91,14 +91,14 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 		end
 	end, { if p1 then p1.userId else nil, var31, sendEvent })
 	local var32 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 153 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref), var32 (ref), sendEvent (ref), telemetryEventType (copy)
 		if var27 == "Visible" and not var32.current then
 			var32.current = true
 			sendEvent({ sub_event_type = telemetryEventType.IsUserMuteAvailable })
 		end
 	end, { var27, sendEvent })
-	local var33 = reactModule.useCallback(function() --[[ line: 160 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), localPlayer (copy), var28 (ref), muteUser (copy), var24 (ref), sendEvent (ref), telemetryEventType (copy), p3 (ref)
 		if not p2 or not p2.userId then return end
 		local var38 = tonumber(p2.userId)
@@ -119,7 +119,7 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 			p3({ didBlockUser = false, didMuteUser = false })
 		end
 	end, { p2, sendEvent, p3, var24 })
-	local var34 = reactModule.useCallback(function(p6) --[[ line: 186 ]]
+	local var34 = reactModule.useCallback(function(p6)
 		-- upvalues: sendEvent (ref), telemetryEventType (copy), playersService (copy), blockingUtilityModule (copy)
 		if not p6 or p6 == 0 then
 			sendEvent({
@@ -140,18 +140,18 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 			})
 		end
 	end, { sendEvent })
-	local var35 = reactModule.useCallback(function() --[[ line: 206 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), hidden_1 (ref), blockUser (copy), var31 (ref), var34 (ref), flaggedMutedError (copy), p3 (ref), sendEvent (ref), telemetryEventType (copy), formatHttpErrorMessageForAnalytics (copy)
 		if not p1 or not p1.userId then return end
 		if fFlagAbuseReportImproveErrorEventsModule then
 			hidden_1("Loading")
-			blockUser(var31, p1.userId):andThen(function() --[[ line: 213 ]]
+			blockUser(var31, p1.userId):andThen(function()
 				-- upvalues: hidden_1 (copy), p1 (copy), var34 (copy), flaggedMutedError (copy), p3 (copy)
 				hidden_1("Hidden")
 				local var40 = tonumber(p1.userId)
 				
 				if var40 then
-					local ok, status = pcall(function() --[[ line: 217 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var34 (copy), var40 (ref)
 						var34(var40)
 						
@@ -163,7 +163,7 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 					end
 				end
 				p3({ didBlockUser = true, didMuteUser = false })
-			end, function(p7) --[[ line: 226 ]]
+			end, function(p7)
 				-- upvalues: hidden_1 (copy), sendEvent (copy), telemetryEventType (copy), formatHttpErrorMessageForAnalytics (copy), p1 (copy)
 				hidden_1("Error")
 				sendEvent({
@@ -178,7 +178,7 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 			return
 		end
 		hidden_1("Loading")
-		blockUser(var31, p1.userId):andThen(function() --[[ line: 244 ]]
+		blockUser(var31, p1.userId):andThen(function()
 			-- upvalues: sendEvent (copy), telemetryEventType (copy), p1 (copy), var34 (copy), p3 (copy)
 			sendEvent({ sub_event_type = telemetryEventType.DidBlockUser })
 			local var41 = tonumber(p1.userId)
@@ -187,7 +187,7 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 				var34(var41)
 			end
 			p3({ didBlockUser = true, didMuteUser = false })
-		end):catch(function() --[[ line: 252 ]]
+		end):catch(function()
 			-- upvalues: hidden_1 (copy), sendEvent (copy), telemetryEventType (copy), p1 (copy)
 			hidden_1("Error")
 			sendEvent({
@@ -207,7 +207,7 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 	local var36 = if p1 ~= nil then var29 else true
 	
 	return {
-		actions = reactModule.useMemo(function() --[[ line: 266 ]]
+		actions = reactModule.useMemo(function()
 			-- upvalues: var36 (ref), p1 (ref), hidden (ref), translateIntoString (ref), buttonVariant (copy), var35 (ref), p2 (ref), var27 (ref), var33 (ref)
 			local t = {}
 			
@@ -240,17 +240,17 @@ local function useBlockMuteActions(p1, p2, p3) --[[ line: 100 ]]
 	}
 end
 
-local function useDelayedTrue(p8) --[[ line: 311 ]]
+local function useDelayedTrue(p8)
 	-- upvalues: reactModule (ref)
 	local var43, var44 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 313 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p8 (ref), var44 (ref)
-		local delayedThread = task.delay(p8, function() --[[ line: 314 ]]
+		local delayedThread = task.delay(p8, function()
 			-- upvalues: var44 (copy)
 			var44(true)
 		end)
 		
-		return function() --[[ line: 317 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
@@ -259,7 +259,7 @@ local function useDelayedTrue(p8) --[[ line: 311 ]]
 	return var43
 end
 
-return reactModule.memo(function(p9) --[[ line: 329 | named "InExpConfirmationNode" ]]
+return reactModule.memo(function(p9)
 	-- upvalues: useArTranslation (ref), useInExpOpenLinkModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), useAbuseReportAnalytics (ref), useBlockMuteActions (ref), useDelayedTrue (ref), useLayoutSlots (ref), reactModule (ref), telemetryEventType (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), dialog (ref), dialogSize (ref), view (ref), textWithTranslationModule (ref), textLinkModule (ref), footerModule (ref), orientation (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	local var46 = useInExpOpenLinkModule()
@@ -272,7 +272,7 @@ return reactModule.memo(function(p9) --[[ line: 329 | named "InExpConfirmationNo
 	local layout = useLayoutSlots().Layout
 	
 	if fFlagAbuseReportLinkOpenedAnalytics then
-		reactModule.useEffect(function() --[[ line: 357 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var47 (write), isStoryMode (ref), p9 (ref), telemetryEventType (copy)
 			if var47 and isStoryMode and (p9.helpline and p9.helpline.href) then
 				var47({ sub_event_type = telemetryEventType.HelplineShown })
@@ -280,7 +280,7 @@ return reactModule.memo(function(p9) --[[ line: 329 | named "InExpConfirmationNo
 		end, { p9.helpline and p9.helpline.href, isStoryMode })
 	end
 	local createElement_1
-	local var50 = reactModule.useCallback(function() --[[ line: 366 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: p9 (ref), var46 (ref), fFlagAbuseReportLinkOpenedAnalytics (copy), var47 (write), telemetryEventType (copy)
 		if p9.helpline and p9.helpline.href then
 			var46(p9.helpline.href)
@@ -290,7 +290,7 @@ return reactModule.memo(function(p9) --[[ line: 329 | named "InExpConfirmationNo
 			end
 		end
 	end, { p9.helpline, var46 })
-	local var51 = reactModule.useCallback(function() --[[ line: 375 ]]
+	local var51 = reactModule.useCallback(function()
 		-- upvalues: p9 (ref)
 		p9.onNext({ didBlockUser = false, didMuteUser = false })
 	end, { p9.onNext })

@@ -1,6 +1,6 @@
 ﻿local isSourceAssetModule = require(script:FindFirstAncestor("SceneUnderstanding").isSourceAsset)
 
-return function(value) --[[ line: 5 | named "findSourceAssetsFromDescendant" ]]
+return function(value)
 	-- upvalues: isSourceAssetModule (ref)
 	local t = {}
 	local parent = value.Parent

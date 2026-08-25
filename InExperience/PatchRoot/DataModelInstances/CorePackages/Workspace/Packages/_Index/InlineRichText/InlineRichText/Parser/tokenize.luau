@@ -10,7 +10,7 @@ local list = {
 	{ name = "CLOSE", pattern = "^</([%w-]+)%s?([^>]*)>" }
 }
 local t = {
-	OPEN = function(p0, p1, p2) --[[ line: 32 ]]
+	OPEN = function(p0, p1, p2)
 		-- upvalues: parseXmlAttributesModule (ref), tokenNameModule (ref)
 		table.insert(p0, {
 			name = tokenNameModule.Open,
@@ -18,11 +18,11 @@ local t = {
 			attributes = parseXmlAttributesModule(p2)
 		})
 	end,
-	CLOSE = function(p3, p4) --[[ line: 40 ]]
+	CLOSE = function(p3, p4)
 		-- upvalues: tokenNameModule (ref)
 		table.insert(p3, { name = tokenNameModule.Close, text = p4, attributes = {} })
 	end,
-	OPEN_CLOSE = function(p5, p6, p7) --[[ line: 47 ]]
+	OPEN_CLOSE = function(p5, p6, p7)
 		-- upvalues: parseXmlAttributesModule (ref), tokenNameModule (ref)
 		table.insert(p5, {
 			name = tokenNameModule.Open,
@@ -33,7 +33,7 @@ local t = {
 	end
 }
 
-return function(p8) --[[ line: 62 | named "tokenize" ]]
+return function(p8)
 	-- upvalues: list (ref), tokenNameModule (ref), escapeRichFormattingModule (ref), t (ref)
 	local var10, name, matchIndex, matchIndex_1, var14, var15
 	local var6 = 0

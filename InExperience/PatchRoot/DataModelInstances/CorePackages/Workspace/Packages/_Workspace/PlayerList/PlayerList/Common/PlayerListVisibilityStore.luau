@@ -2,12 +2,12 @@
 local var1, var2 = signalsModule.createSignal(true)
 local var3 = false
 
-local function setShouldPersistVisibility(value) --[[ line: 19 ]]
+local function setShouldPersistVisibility(value)
 	-- upvalues: var3 (write)
 	var3 = value
 end
 
-local function setVisible(value) --[[ line: 23 ]]
+local function setVisible(value)
 	-- upvalues: var2 (ref), var3 (write)
 	var2(value)
 	
@@ -23,14 +23,14 @@ return {
 	getVisible = var1,
 	setVisible = setVisible,
 	setShouldPersistVisibility = setShouldPersistVisibility,
-	getEffectiveVisible = signalsModule.createComputed(function(p0) --[[ line: 37 ]]
+	getEffectiveVisible = signalsModule.createComputed(function(p0)
 		-- upvalues: var1 (ref), var6 (ref)
 		return var1(p0) and next(var6(p0)) == nil
 	end),
-	setTempHide = function(value, p1) --[[ line: 43 ]]
+	setTempHide = function(value, p1)
 		-- upvalues: var6 (ref), var7 (ref), var8 (write), var1 (ref), var2 (ref)
 		local var9 = next(var6(false)) == nil
-		var7(function(p2) --[[ line: 45 ]]
+		var7(function(p2)
 			-- upvalues: value (ref), p1 (ref)
 			local cloned = table.clone(p2)
 			cloned[value] = if p1 then true else nil
@@ -52,7 +52,7 @@ return {
 			end
 		end
 	end,
-	reset = function() --[[ line: 64 ]]
+	reset = function()
 		-- upvalues: var3 (write), var8 (write), var7 (ref), var2 (ref)
 		var3 = false
 		var8 = nil

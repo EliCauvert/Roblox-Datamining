@@ -2,7 +2,7 @@
 
 return {
 	NoTransition = 0,
-	requestCurrentTransition = function() --[[ line: 20 ]]
+	requestCurrentTransition = function()
 		-- upvalues: reactCurrentBatchConfig (ref)
 		return reactCurrentBatchConfig.transition
 	end

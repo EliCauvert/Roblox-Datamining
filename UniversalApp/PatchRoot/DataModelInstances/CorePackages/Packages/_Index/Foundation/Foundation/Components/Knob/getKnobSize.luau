@@ -2,7 +2,7 @@
 local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Providers.Style.Tokens)
 
-return function(p0, p1) --[[ line: 9 | named "getKnobSize" ]]
+return function(p0, p1)
 	-- upvalues: inputSizeModule (ref)
 	local var2 = ({
 		[inputSizeModule.XSmall] = p0.Size.Size_300,

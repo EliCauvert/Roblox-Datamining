@@ -18,19 +18,19 @@ local t = {
 	thresholdRowsFromBottom = 0
 }
 
-return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItems" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (ref), argCheckModule (ref), fFlagCollectionViewMathChanges (ref), calculateSpacePerItemModule (ref), calculateRelativeColumnGapModule (ref)
 	local var8 = cryoModule.Dictionary.join(t, p0)
 	local var9 = reactModule.useRef(nil)
 	local minValue = math.min(math.ceil(#var8.items / var8.numColumns), var8.maxNumRows)
-	local var11 = var8.itemSizeBinding:map(function(p1) --[[ line: 92 ]]
+	local var11 = var8.itemSizeBinding:map(function(p1)
 		-- upvalues: minValue (ref), var8 (ref)
 		return minValue * (p1.Y + var8.verticalPadding) - var8.verticalPadding
 	end)
 	local var12, var13 = reactModule.useState(-1)
 	local var14, var15 = reactModule.useState(-1)
 	local var16, var17 = reactModule.useState(var8.bufferRowsBelowScreen + var8.bufferRowsAboveScreen)
-	reactModule.useEffect(function() --[[ line: 105 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var9 (ref), minValue (ref), var13 (ref), var15 (ref), var17 (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (copy)
 		local t = {}
 		
@@ -42,14 +42,14 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 			local y_2 = current_1.AbsoluteWindowSize.Y
 			local var22 = math.ceil(y_2 / math.max(1, y + var8.verticalPadding)) + 1
 			
-			local function _() --[[ line: 122 | named "calculateOffsetOfGrid" ]]
+			local function _()
 				-- upvalues: current (ref), current_1 (ref), y_1 (write)
 				return current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y_1
 			end
 			
 			local var23 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y_1
 			
-			local function updateRowsToRender() --[[ line: 129 ]]
+			local function updateRowsToRender()
 				-- upvalues: current_1 (ref), var8 (copy), minValue (copy), var23 (write), y_2 (write), var22 (write), var13 (copy), var15 (copy)
 				local maxValue_1, minValue_1
 				local y = current_1.CanvasPosition.Y
@@ -75,7 +75,7 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 				var15(minValue_1)
 			end
 			
-			local function updateWindowParams() --[[ line: 174 ]]
+			local function updateWindowParams()
 				-- upvalues: var8 (copy), y_1 (write), current_1 (ref), y_2 (write), var23 (write), current (ref), var22 (write), var17 (copy), minValue (copy), updateRowsToRender (ref)
 				local maxValue = math.max(1, var8.itemSizeBinding:getValue().Y + var8.verticalPadding)
 				y_1 = current_1.AbsolutePosition.Y
@@ -96,7 +96,7 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 			var15(minValue)
 			var17(minValue)
 		end
-		return function() --[[ line: 221 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()
@@ -110,14 +110,14 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 	var14 = math.min(var14, minValue)
 	local maxValue = math.max(-1, (var12 - 1) * var8.numColumns + 1)
 	local maxValue_1 = math.max(-1, math.min(#var8.items, var14 * var8.numColumns))
-	reactModule.useEffect(function() --[[ line: 246 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), maxValue (ref), maxValue_1 (ref)
 		if var8.onViewableItemsChanged then
 			var8.onViewableItemsChanged(maxValue, maxValue_1)
 		end
 	end, { maxValue, maxValue_1, var8.onViewableItemsChanged })
 	local var20 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 254 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (write), minValue (ref), var8 (ref), var20 (ref)
 		if minValue - var8.thresholdRowsFromBottom <= var14 and var20.current ~= var8.items and var8.onReachedThresholdFromEnd then
 			var8.onReachedThresholdFromEnd()
@@ -134,12 +134,12 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ref = var9,
-		Size = var11:map(function(p2) --[[ line: 379 ]]
+		Size = var11:map(function(p2)
 			return UDim2.new(1, 0, 0, p2)
 		end),
 		LayoutOrder = var8.LayoutOrder,
 		Position = var8.Position
-	}, reactModule.useMemo(function() --[[ line: 273 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: var12 (ref), var14 (write), maxValue (ref), maxValue_1 (ref), var8 (ref), minValue (ref), argCheckModule (copy), reactModule (copy), fFlagCollectionViewMathChanges (copy), calculateSpacePerItemModule (copy), calculateRelativeColumnGapModule (copy), var16 (ref)
 		local t = {}
 		
@@ -156,7 +156,7 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 		if var12 > 1 then
 			local var37 = var12 - 1
 			t.Padding = reactModule.createElement("UIPadding", {
-				PaddingTop = var8.itemSizeBinding:map(function(p3) --[[ line: 291 ]]
+				PaddingTop = var8.itemSizeBinding:map(function(p3)
 					-- upvalues: var37 (ref), var8 (copy)
 					return UDim.new(0, var37 * (p3.Y + var8.verticalPadding))
 				end)
@@ -177,7 +177,7 @@ return reactModule.memo(function(p0) --[[ line: 84 | named "GridOfCollectionItem
 		else
 			local var39 = var8.numColumns - 1
 			uDim2 = UDim2.new(1 / var8.numColumns, math.floor(-(var39 / var8.numColumns) * var8.columnGap), 1 / var38, math.floor(-((var38 - 1) / var38) * var8.verticalPadding))
-			var41 = if var8.disableRelativeGap then UDim2.new(0, var8.columnGap + (math.floor(var39 / var8.numColumns * var8.columnGap) * var8.numColumns - var8.columnGap * var39) / var39, 0, var8.verticalPadding) else var8.itemSizeBinding:map(function(p4) --[[ line: 329 ]]
+			var41 = if var8.disableRelativeGap then UDim2.new(0, var8.columnGap + (math.floor(var39 / var8.numColumns * var8.columnGap) * var8.numColumns - var8.columnGap * var39) / var39, 0, var8.verticalPadding) else var8.itemSizeBinding:map(function(p4)
 				-- upvalues: calculateRelativeColumnGapModule (copy), var8 (copy)
 				return UDim2.new(calculateRelativeColumnGapModule(var8.numColumns, var8.columnGap, p4.X, var8.sideMargin), 0, 0, var8.verticalPadding)
 			end)

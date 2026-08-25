@@ -3,7 +3,7 @@ local appStorageService = game:GetService("AppStorageService")
 game:DefineFastInt("ExperienceChatUserProfileApiRollout_v1", 0)
 game:DefineFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1", false)
 
-local _ = function(p0) --[[ line: 8 ]]
+local _ = function(p0)
 	-- upvalues: appStorageService (ref)
 	local appInstallationIdItem = (p0 or appStorageService):GetItem("AppInstallationId")
 	local var8 = typeof(appInstallationIdItem)
@@ -11,7 +11,7 @@ local _ = function(p0) --[[ line: 8 ]]
 	return if var8 == "number" then appInstallationIdItem elseif var8 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
 end
 
-local _ = function(p1, p2) --[[ line: 35 ]]
+local _ = function(p1, p2)
 	-- upvalues: appStorageService (ref)
 	local var9 = p1()
 	local appInstallationIdItem = (p2 or appStorageService):GetItem("AppInstallationId")
@@ -21,7 +21,7 @@ local _ = function(p1, p2) --[[ line: 35 ]]
 	return if var12 == nil then var9 >= 100 else var12 % 100 + 1 <= var9
 end
 
-local _ = function(p3, p4) --[[ line: 51 ]]
+local _ = function(p3, p4)
 	-- upvalues: appStorageService (ref)
 	local var17
 	local var13 = p3()
@@ -35,17 +35,17 @@ local _ = function(p3, p4) --[[ line: 51 ]]
 	else
 		var17 = var16 % 100 + 1 <= var13
 	end
-	return function() --[[ line: 57 ]]
+	return function()
 		-- upvalues: var17 (ref)
 		return var17
 	end
 end
 
-local _ = function() --[[ line: 62 ]]
+local _ = function()
 	return game:GetFastInt("ExperienceChatUserProfileApiRollout_v1")
 end
 
-local _ = function() --[[ line: 66 ]]
+local _ = function()
 	return game:GetFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1")
 end
 
@@ -60,12 +60,12 @@ if var4 == nil then
 else
 	var5 = var4 % 100 + 1 <= experienceChatUserProfileApiRolloutV1FastInt
 end
-local var6 = function() --[[ line: 57 ]]
+local var6 = function()
 	-- upvalues: var5 (ref)
 	return var5
 end
 
-return function() --[[ line: 72 ]]
+return function()
 	-- upvalues: var6 (ref)
 	return game:GetFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1") or var6()
 end

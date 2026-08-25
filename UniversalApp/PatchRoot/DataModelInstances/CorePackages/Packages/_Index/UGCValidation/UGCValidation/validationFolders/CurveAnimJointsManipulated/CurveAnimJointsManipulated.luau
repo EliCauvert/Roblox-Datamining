@@ -19,7 +19,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 25 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
 	local bodyPartFolderRoot
 	for i, v in p1.curveAnimations do

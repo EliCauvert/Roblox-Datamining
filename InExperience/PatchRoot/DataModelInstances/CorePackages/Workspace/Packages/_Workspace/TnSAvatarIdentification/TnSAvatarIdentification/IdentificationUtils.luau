@@ -1,7 +1,7 @@
 ﻿local getFFlagReportAnythingFixConvexHullCalculationModule = require(script:FindFirstAncestor("TnSAvatarIdentification").Flags.GetFFlagReportAnythingFixConvexHullCalculation)
 local coreGuiService = game:GetService("CoreGui")
 
-local function getViewportInfo() --[[ line: 17 ]]
+local function getViewportInfo()
 	-- upvalues: coreGuiService (ref)
 	assert(coreGuiService, "getViewportInfo requires CoreGui to be available")
 	local fullscreenTestGuiAvatarID_1 = coreGuiService:FindFirstChild("_FullscreenTestGui_AvatarID")
@@ -38,18 +38,18 @@ end
 local vector2 = Vector2.new(0, 0)
 local vector2_1 = Vector2.new(1e999, 1e999)
 
-local _ = function(p0) --[[ line: 52 ]]
+local _ = function(p0)
 	return if p0.Y >= 0 then if p0.Y <= 1 then if p0.X >= 0 then p0.X > 1 else true else true else true
 end
 
-function worldToFullViewportPointNormalized(p1, p2, p3) --[[ line: 56 ]]
+function worldToFullViewportPointNormalized(p1, p2, p3)
 	local var9, _ = p2:WorldToViewportPoint(p1)
 	local vector2 = Vector2.new((var9.X + p3.insets.left) / p3.width, (var9.Y + p3.insets.top) / p3.height)
 	
 	return vector2, var9.Z, not (if vector2.Y >= 0 then if vector2.Y <= 1 then if vector2.X >= 0 then vector2.X > 1 else true else true else true) and var9.Z > 0
 end
 
-function getViewportCorners(p4, p5, p6) --[[ line: 73 ]]
+function getViewportCorners(p4, p5, p6)
 	-- upvalues: vector2_1 (ref), vector2 (ref), getFFlagReportAnythingFixConvexHullCalculationModule (ref)
 	local var11 = vector2_1
 	local var12 = vector2
@@ -81,13 +81,13 @@ function getViewportCorners(p4, p5, p6) --[[ line: 73 ]]
 	return var11, var12
 end
 
-function shouldIgnoreLocalCharacter(p7) --[[ line: 109 ]]
+function shouldIgnoreLocalCharacter(p7)
 	local head = p7:FindFirstChild("Head")
 	
 	return if head and head:IsA("BasePart") then head.LocalTransparencyModifier >= 0.95 else false
 end
 
-function getLocalCharacterPosition(p8) --[[ line: 118 ]]
+function getLocalCharacterPosition(p8)
 	local humanoidRootPart = p8:FindFirstChild("HumanoidRootPart")
 	
 	return if humanoidRootPart then humanoidRootPart.Position else nil

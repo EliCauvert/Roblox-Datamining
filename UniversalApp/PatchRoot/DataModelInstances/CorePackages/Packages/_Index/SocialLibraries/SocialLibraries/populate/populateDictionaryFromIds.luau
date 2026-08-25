@@ -1,4 +1,4 @@
-﻿local function populateDictionaryFromIds(p0, p1) --[[ line: 5 ]]
+﻿local function populateDictionaryFromIds(p0, p1)
 	-- upvalues: populateDictionaryFromIds (ref)
 	local t = {}
 	

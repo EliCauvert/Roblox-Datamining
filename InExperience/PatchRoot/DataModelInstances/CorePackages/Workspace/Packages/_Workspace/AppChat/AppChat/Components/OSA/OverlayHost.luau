@@ -10,13 +10,13 @@ local fFlagSupportViewingUserProfileOnOSAModule = require(appChat.Flags.FFlagSup
 local fFlagAppChatShowOSAOnPageEntry = require(parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
 local t = { GroupOSADialog = groupOSADialogModule }
 
-return function(p0) --[[ line: 35 | named "OverlayHost" ]]
+return function(p0)
 	-- upvalues: getOverlayStoreModule (ref), signalsReactModule (ref), fFlagSupportViewingUserProfileOnOSAModule (ref), reactModule (ref), t (ref), cryoModule (ref), fFlagAppChatShowOSAOnPageEntry (ref), providerContainer (ref)
 	local union
 	local var8 = getOverlayStoreModule(false)
 	local var9 = signalsReactModule.useSignalState(var8.getCurrentOverlay)
 	local var10 = if fFlagSupportViewingUserProfileOnOSAModule then signalsReactModule.useSignalState(var8.getOverlayDefaultProps) else nil
-	local var11 = reactModule.useCallback(function() --[[ line: 43 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref)
 		var8.dismissOverlay()
 	end, {})
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 35 | named "OverlayHost" ]]
 	if fFlagAppChatShowOSAOnPageEntry then
 		local onClose = union.onClose
 		
-		function union.onClose() --[[ line: 58 ]]
+		function union.onClose()
 			-- upvalues: onClose (ref), var11 (ref)
 			if onClose then
 				onClose()

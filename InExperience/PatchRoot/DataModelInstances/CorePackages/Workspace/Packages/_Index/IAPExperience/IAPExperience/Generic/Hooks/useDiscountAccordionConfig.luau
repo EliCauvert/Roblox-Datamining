@@ -4,7 +4,7 @@ local reactModule = require(parent_1.React)
 local iconName = require(parent_1.Foundation).Enums.IconName
 local _ = require(parent.ProductPurchase.PricingTypes)
 
-return function(p0) --[[ line: 24 | named "useDiscountAccordionConfig" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), iconName (ref)
 	local itemPrice = p0.itemPrice
 	local hasSubscriptionDiscount = p0.hasSubscriptionDiscount
@@ -13,7 +13,7 @@ return function(p0) --[[ line: 24 | named "useDiscountAccordionConfig" ]]
 	
 	return {
 		showAccordion = itemPrice.priceInRobux < itemPrice.basePriceInRobux and (hasSubscriptionDiscount or #itemPrice.discounts >= 2),
-		accordionHeaderText = reactModule.useMemo(function() --[[ line: 33 ]]
+		accordionHeaderText = reactModule.useMemo(function()
 			-- upvalues: savingsSummary (ref), blackbirdSummaryText (ref)
 			return if savingsSummary == nil or savingsSummary == "" then blackbirdSummaryText else savingsSummary
 		end, { savingsSummary, blackbirdSummaryText }),

@@ -4,7 +4,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local videoUtilsModule = require(parent.VideoUtils)
 local t = { PlayWhenReady = "PlayWhenReady" }
 
-local function _(p0, p1) --[[ line: 16 | named "resolvePlaybackState" ]]
+local function _(p0, p1)
 	if p1 ~= nil then
 		return p1, true
 	elseif (p0 or "PlayWhenReady") == "PlayWhenReady" then
@@ -13,11 +13,11 @@ local function _(p0, p1) --[[ line: 16 | named "resolvePlaybackState" ]]
 	return false, false
 end
 
-local _ = function(value) --[[ line: 55 | named "normalizeAssetId" ]]
+local _ = function(value)
 	return if value == nil or value == "" then nil elseif string.find(value, "://", 1, true) then value else `rbxassetid://{value}`
 end
 
-return function(p2) --[[ line: 65 | named "SduiVideoPlayer" ]]
+return function(p2)
 	-- upvalues: t (ref), reactModule (ref), sduiCoreSystemModule (ref), videoUtilsModule (ref)
 	local var8, var9
 	local videoAssetId = p2.videoAssetId
@@ -40,7 +40,7 @@ return function(p2) --[[ line: 65 | named "SduiVideoPlayer" ]]
 		var9 = false
 	end
 	local var10 = if p2.loadingImage == nil or p2.loadingImage == "" then p2.defaultLoadingImageComponent else nil
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), p2 (ref), sduiCoreSystemModule (copy), var9 (ref)
 		if not var4 then
 			p2.sduiContext.dependencies.logger.reportError(sduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidProps, {

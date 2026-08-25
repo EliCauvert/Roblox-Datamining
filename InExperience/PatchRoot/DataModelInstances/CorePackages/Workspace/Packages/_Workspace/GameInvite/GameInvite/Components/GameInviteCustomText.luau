@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local sidePadding = require(gameInvite.GameInviteConstants).Layout.SidePadding
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), sidePadding (ref)
 	local var2 = useStyle()
 	local theme = var2.Theme

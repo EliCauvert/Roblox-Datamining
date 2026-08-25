@@ -7,7 +7,7 @@ local text = foundationModule.Text
 local avatarGroup = foundationModule.AvatarGroup
 local icon = foundationModule.Icon
 local useTokens = foundationModule.Hooks.useTokens
-local var2 = reactModule.memo(function(p0) --[[ line: 65 | named "AccessoryComponent" ]]
+local var2 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), avatarGroup (ref), icon (ref)
 	local layoutOrder = p0.LayoutOrder
 	
@@ -38,12 +38,12 @@ local var2 = reactModule.memo(function(p0) --[[ line: 65 | named "AccessoryCompo
 	return nil
 end)
 
-return reactModule.memo(function(p1) --[[ line: 96 | named "SduiTextAccessoryRow" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), foundationModule (ref), var2 (ref), text (ref)
 	local testId = p1.testId or "--sdui-text-accessory-row"
 	
 	return reactModule.createElement(view, {
-		tag = reactModule.useMemo(function() --[[ line: 114 ]]
+		tag = reactModule.useMemo(function()
 			-- upvalues: p1 (ref)
 			return {
 				["row align-y-center auto-xy"] = true,

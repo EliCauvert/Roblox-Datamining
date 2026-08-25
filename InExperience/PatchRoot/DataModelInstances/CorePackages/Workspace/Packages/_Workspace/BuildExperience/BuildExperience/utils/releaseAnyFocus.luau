@@ -1,7 +1,7 @@
 ﻿local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
 
-return function() --[[ line: 4 | named "releaseAnyFocus" ]]
+return function()
 	-- upvalues: userInputService (ref), guiService (ref)
 	local focusedTextBox = userInputService:GetFocusedTextBox()
 	

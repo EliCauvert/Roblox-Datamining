@@ -40,7 +40,7 @@ local t_1 = {
 }
 
 return {
-	reportVideoAction = function(p0, p1, p2, p3) --[[ line: 59 ]]
+	reportVideoAction = function(p0, p1, p2, p3)
 		-- upvalues: var7 (ref), reportWarning (ref), loggingProtocolModule (ref), var8 (ref), cryoModule (ref), videoEngagementEvents (ref), t (ref), t_1 (ref), telemetryService (ref)
 		local var10, var11 = var7(p2)
 		

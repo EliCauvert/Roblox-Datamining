@@ -10,7 +10,7 @@ local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local flags = foundationModule.Utility.Flags
 local constantsModule = require(script.Parent.Parent.Constants)
 
-return function(p0) --[[ line: 22 | named "PrimaryNavigationItem" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), icon (ref), iconSize (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), constantsModule (ref)
 	local var3 = useTokens()
 	

@@ -45,7 +45,7 @@ local t = {
 	verifiedUserIds = {}
 }
 
-return reactModule.memo(function(p0) --[[ line: 60 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: dictionary (ref), t (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), showChatEnabledUIModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), getGlobalChatTooltipStoreModule (ref), reactModule (ref), getFFlagMemoizeChatReportingMenu (ref), fFlagExpChatEnableV2ChatWindowModule (ref), getMessagesStoreModule (ref), list (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getFFlagEnableChatLineReporting (ref), useUserExperiment (ref), fStringReportingIXPLayer (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), fFlagExpChatPerfTrackerTabName (ref), expChatPerfTracker (ref), fFlagExpChatRewriteInlineModule (ref), configModule (ref), fFlagExpChatEnableFriendsTab (ref), isChatRegionLockedModule (ref), topBannerModule (ref), scrollingViewModule (ref), textChatService (ref), globalChatTooltipModule (ref)
 	local var24 = dictionary.join(t, p0)
 	local chatWindowSettings = var24.chatWindowSettings
@@ -65,11 +65,11 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 	
 	if fFlagExpChatUseUnifiedTooltipStore then
 		local setIsChatWindowOpen = getChatTooltipStoreModule(false).setIsChatWindowOpen
-		reactModule.useEffect(function() --[[ line: 89 ]]
+		reactModule.useEffect(function()
 			-- upvalues: setIsChatWindowOpen (ref), var24 (ref)
 			setIsChatWindowOpen(var24.visible)
 			
-			return function() --[[ line: 91 ]]
+			return function()
 				-- upvalues: setIsChatWindowOpen (copy)
 				setIsChatWindowOpen(false)
 			end
@@ -80,19 +80,19 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 	
 	if getFFlagMemoizeChatReportingMenu() and not fFlagExpChatEnableV2ChatWindowModule then
 		local var29 = reactModule.useRef(if fFlagExpChatEnableV2ChatWindowModule then nil else var24.messages)
-		reactModule.useEffect(function() --[[ line: 101 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var29 (write), fFlagExpChatEnableV2ChatWindowModule (copy), var24 (ref)
 			var29.current = if fFlagExpChatEnableV2ChatWindowModule then nil else var24.messages
 		end, {
 			if fFlagExpChatEnableV2ChatWindowModule then nil else var24.messages
 		})
-		var28 = reactModule.useCallback(function() --[[ line: 105 ]]
+		var28 = reactModule.useCallback(function()
 			-- upvalues: var29 (write)
 			return var29.current
 		end, {})
 	end
 	if fFlagExpChatEnableV2ChatWindowModule then
-		var28 = reactModule.useCallback(function() --[[ line: 111 ]]
+		var28 = reactModule.useCallback(function()
 			-- upvalues: getMessagesStoreModule (copy), var24 (ref), list (copy), getFFlagTextChatEnableUniverseChatTabs (copy)
 			local var36 = getMessagesStoreModule(false)
 			local t = {
@@ -102,19 +102,19 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 			}
 			
 			if not var24.isChannelBarVisible then
-				return list.map(t.windowMessagesInOrder, function(p1) --[[ line: 120 ]]
+				return list.map(t.windowMessagesInOrder, function(p1)
 					-- upvalues: t (ref)
 					return t.byMessageId[p1]
 				end)
 			elseif getFFlagTextChatEnableUniverseChatTabs() then
 				local var38 = if var24.targetTextChannel and t.windowMessagesInOrderByTabId[var24.targetTextChannel.Name] then var24.targetTextChannel.Name else var24.selectedChannelName
 				
-				return if var38 then list.map(t.windowMessagesInOrderByTabId[var38] or {}, function(p2) --[[ line: 135 ]]
+				return if var38 then list.map(t.windowMessagesInOrderByTabId[var38] or {}, function(p2)
 					-- upvalues: t (ref)
 					return t.byMessageId[p2]
 				end) else {}
 			end
-			return if var24.targetTextChannel then list.map(t.windowMessagesInOrderByTabId[var24.targetTextChannel.Name] or {}, function(p3) --[[ line: 143 ]]
+			return if var24.targetTextChannel then list.map(t.windowMessagesInOrderByTabId[var24.targetTextChannel.Name] or {}, function(p3)
 				-- upvalues: t (ref)
 				return t.byMessageId[p3]
 			end) else {}
@@ -124,18 +124,18 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 			if getFFlagTextChatEnableUniverseChatTabs() then var24.selectedChannelName else nil
 		})
 	end
-	local var30 = if getFFlagEnableChatLineReporting() then useUserExperiment({ fStringReportingIXPLayer }, function(p4) --[[ line: 161 ]]
+	local var30 = if getFFlagEnableChatLineReporting() then useUserExperiment({ fStringReportingIXPLayer }, function(p4)
 		-- upvalues: fStringReportingIXPLayer (copy)
 		return (p4[fStringReportingIXPLayer] or {}).EnableChatLineReporting
 	end) else false
-	local var31 = reactModule.useCallback(function(p5, p6) --[[ line: 167 ]]
+	local var31 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: var24 (ref)
-		return if type(p6) == "number" then var24.transparencyValue else p6:map(function(p7) --[[ line: 172 ]]
+		return if type(p6) == "number" then var24.transparencyValue else p6:map(function(p7)
 			-- upvalues: p5 (ref)
 			return p5 + p7 * (1 - p5)
 		end)
 	end, if getFFlagChatWindowUseCallbackOptimizationsModule() then { var24.transparencyValue } else nil)
-	local var32 = reactModule.useCallback(function(p8) --[[ line: 178 ]]
+	local var32 = reactModule.useCallback(function(p8)
 		-- upvalues: var24 (ref)
 		var24.resetTargetChannel()
 		local var39 = tonumber(p8.userId)
@@ -146,16 +146,16 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 	end, if getFFlagChatWindowUseCallbackOptimizationsModule() then { var24.resetTargetChannel, var24.activateWhisperMode } else nil)
 	local selectedChannelName = var24.selectedChannelName or "UNKNOWN_TAB"
 	local var34 = if fFlagExpChatPerfTrackerTabName then { tabName = selectedChannelName } else nil
-	reactModule.useEffect(function() --[[ line: 192 ]]
+	reactModule.useEffect(function()
 		-- upvalues: expChatPerfTracker (copy), var34 (ref)
 		expChatPerfTracker.finish(expChatPerfTracker.Events.ChatWindowMountTTI, {}, var34)
 		
-		return function() --[[ line: 194 ]]
+		return function()
 			-- upvalues: expChatPerfTracker (copy)
 			expChatPerfTracker.cancelAll()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 198 ]]
+	reactModule.useEffect(function()
 		-- upvalues: expChatPerfTracker (copy), selectedChannelName (ref), var34 (ref)
 		expChatPerfTracker.finish(expChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = selectedChannelName }, var34)
 	end, { selectedChannelName })
@@ -178,14 +178,14 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 		Size = var24.size,
 		Visible = var24.visible,
 		BackgroundTransparency = if fFlagExpChatEnableFriendsTab and var24.suppressBackground then 1 else var31(backgroundTransparency, var24.transparencyValue),
-		[reactModule.Change.AbsoluteSize] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p10) --[[ line: 266 ]]
+		[reactModule.Change.AbsoluteSize] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p10)
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
 			if chatWindowConfiguration and var24.onAbsoluteSizeChanged then
 				var24.onAbsoluteSizeChanged(p10, chatWindowConfiguration)
 			end
-		end, { textChatService, var24.onAbsoluteSizeChanged }) else function(p9) --[[ line: 272 ]]
+		end, { textChatService, var24.onAbsoluteSizeChanged }) else function(p9)
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
@@ -193,14 +193,14 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 				var24.onAbsoluteSizeChanged(p9, chatWindowConfiguration)
 			end
 		end,
-		[reactModule.Change.AbsolutePosition] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p12) --[[ line: 279 ]]
+		[reactModule.Change.AbsolutePosition] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p12)
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
 			if chatWindowConfiguration and var24.onAbsoluteSizeChanged then
 				var24.onAbsolutePositionChanged(p12, chatWindowConfiguration)
 			end
-		end, { textChatService, var24.onAbsolutePositionChanged }) else function(p11) --[[ line: 285 ]]
+		end, { textChatService, var24.onAbsolutePositionChanged }) else function(p11)
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
@@ -221,7 +221,7 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 		contentFrame = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Visible = var24.textTransparency:map(function(p13) --[[ line: 219 ]]
+			Visible = var24.textTransparency:map(function(p13)
 				-- upvalues: configModule (copy)
 				return p13 < configModule.ChatWindowMessageHideRootFadeThreshold
 			end)

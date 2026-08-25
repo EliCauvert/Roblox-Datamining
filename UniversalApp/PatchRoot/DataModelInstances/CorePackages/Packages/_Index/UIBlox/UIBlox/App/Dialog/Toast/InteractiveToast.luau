@@ -45,9 +45,9 @@ interactiveToast.defaultProps = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-function interactiveToast.render(p0) --[[ line: 72 ]]
+function interactiveToast.render(p0)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), circle21 (ref), rect (ref), springAnimatedItemModule (ref), t (ref), toastFrameModule (ref)
-	return withStyleModule(function(p1) --[[ line: 73 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: roactModule (copy), imageSetComponentModule (copy), p0 (ref), circle21 (copy), rect (copy), springAnimatedItemModule (copy), t (copy), toastFrameModule (copy)
 		local theme = p1.Theme
 		
@@ -69,7 +69,7 @@ function interactiveToast.render(p0) --[[ line: 72 ]]
 				animatedValues = {
 					scale = if p0.props.pressed then p0.props.pressedScale else 1
 				},
-				mapValuesToProps = function(p2) --[[ line: 94 ]]
+				mapValuesToProps = function(p2)
 					return { Scale = p2.scale }
 				end
 			}),

@@ -11,7 +11,7 @@ local requestInternalWrapper = require(parent.Http).NetworkLayers.requestInterna
 local t = {}
 local var6 = false
 
-local var7 = function(p0, p1) --[[ line: 18 ]]
+local var7 = function(p0, p1)
 	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), roactModule (ref)
 	return roactModule.mount(reactModule.createElement("Folder", nil, reactModule.createElement(coreScriptsRootProvider, {}, {
 		RoactServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
@@ -20,11 +20,11 @@ local var7 = function(p0, p1) --[[ line: 18 ]]
 	})), p0, "SelfieQRRoot")
 end
 
-function t.createFactory() --[[ line: 32 ]]
+function t.createFactory()
 	-- upvalues: var6 (write), var7 (ref), reactModule (ref), selfieQRConnectionModule (ref)
 	local t = {}
 	
-	function t.mountCoreUI(p2) --[[ line: 34 ]]
+	function t.mountCoreUI(p2)
 		-- upvalues: var6 (copy), t (ref), var7 (copy), reactModule (copy), selfieQRConnectionModule (copy)
 		if var6 then
 			return

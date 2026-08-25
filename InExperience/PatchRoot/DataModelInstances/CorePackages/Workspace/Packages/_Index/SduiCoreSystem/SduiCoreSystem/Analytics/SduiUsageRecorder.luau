@@ -13,7 +13,7 @@ end
 local t = {}
 local t_1 = {}
 
-local function getOrCreateAccumulator(p0, p1) --[[ line: 73 ]]
+local function getOrCreateAccumulator(p0, p1)
 	-- upvalues: t (write)
 	local var19 = t[p0]
 	
@@ -38,7 +38,7 @@ local function getOrCreateAccumulator(p0, p1) --[[ line: 73 ]]
 	return t_1
 end
 
-local function getOrCreateGlobalSeen(p2, p3) --[[ line: 94 ]]
+local function getOrCreateGlobalSeen(p2, p3)
 	-- upvalues: t_1 (write)
 	local var22 = t_1[p2]
 	
@@ -62,7 +62,7 @@ local function getOrCreateGlobalSeen(p2, p3) --[[ line: 94 ]]
 	return t
 end
 
-local function deltaAndCommit(p4, p5) --[[ line: 115 ]]
+local function deltaAndCommit(p4, p5)
 	local t = {}
 	
 	for i, v in p4 do
@@ -74,7 +74,7 @@ local function deltaAndCommit(p4, p5) --[[ line: 115 ]]
 	return t
 end
 
-local function recordComponentType(p6, p7, p8) --[[ line: 126 ]]
+local function recordComponentType(p6, p7, p8)
 	-- upvalues: var4 (write), getOrCreateAccumulator (ref)
 	if not var4 or not p8 then return end
 	local var26 = getOrCreateAccumulator(p6, p7)
@@ -85,7 +85,7 @@ local function recordComponentType(p6, p7, p8) --[[ line: 126 ]]
 	end
 end
 
-local function recordProp(p9, p10, p11, p12) --[[ line: 137 ]]
+local function recordProp(p9, p10, p11, p12)
 	-- upvalues: var5 (write), getOrCreateAccumulator (ref)
 	if not var5 or not p11 or not p12 then return end
 	local var27 = getOrCreateAccumulator(p9, p10)
@@ -97,7 +97,7 @@ local function recordProp(p9, p10, p11, p12) --[[ line: 137 ]]
 	end
 end
 
-local function recordActionType(p13, p14, p15) --[[ line: 149 ]]
+local function recordActionType(p13, p14, p15)
 	-- upvalues: var4 (write), getOrCreateAccumulator (ref)
 	if not var4 or not p15 then return end
 	local var29 = getOrCreateAccumulator(p13, p14)
@@ -108,7 +108,7 @@ local function recordActionType(p13, p14, p15) --[[ line: 149 ]]
 	end
 end
 
-local function recordActionParam(p16, p17, p18, p19) --[[ line: 160 ]]
+local function recordActionParam(p16, p17, p18, p19)
 	-- upvalues: var5 (write), getOrCreateAccumulator (ref)
 	if not var5 or not p18 or not p19 then return end
 	local var30 = getOrCreateAccumulator(p16, p17)
@@ -120,7 +120,7 @@ local function recordActionParam(p16, p17, p18, p19) --[[ line: 160 ]]
 	end
 end
 
-local function flushPageVersion(p20, p21) --[[ line: 172 ]]
+local function flushPageVersion(p20, p21)
 	-- upvalues: t (write), getOrCreateGlobalSeen (ref), deltaAndCommit (ref), sduiUsageAnalyticsModule (ref)
 	local var32 = t[p20]
 	local var33 = var32 and var32[p21]
@@ -154,7 +154,7 @@ local function flushPageVersion(p20, p21) --[[ line: 172 ]]
 	end
 end
 
-local function flushAll() --[[ line: 211 ]]
+local function flushAll()
 	-- upvalues: t (write), flushPageVersion (ref)
 	local t_1 = {}
 	
@@ -176,39 +176,39 @@ return {
 	recordProp = recordProp,
 	recordActionType = recordActionType,
 	recordActionParam = recordActionParam,
-	scheduleFlush = function() --[[ line: 228 ]]
+	scheduleFlush = function()
 		-- upvalues: var18 (write), var17 (write), flushAll (ref)
 		if var18 then
 			return
 		end
 		var18 = true
-		task.delay(var17, function() --[[ line: 233 ]]
+		task.delay(var17, function()
 			-- upvalues: var18 (copy), flushAll (copy)
 			var18 = false
 			flushAll()
 		end)
 	end,
-	isTypeSamplingEnabled = function() --[[ line: 239 ]]
+	isTypeSamplingEnabled = function()
 		-- upvalues: var4 (write)
 		return var4
 	end,
-	isParamSamplingEnabled = function() --[[ line: 243 ]]
+	isParamSamplingEnabled = function()
 		-- upvalues: var5 (write)
 		return var5
 	end,
 	_flushAllForTesting = flushAll,
-	_resetAllForTesting = function() --[[ line: 247 ]]
+	_resetAllForTesting = function()
 		-- upvalues: t (write), t_1 (write), var18 (write)
 		t = {}
 		t_1 = {}
 		var18 = false
 	end,
-	_setSamplingForTesting = function(value, p22) --[[ line: 253 ]]
+	_setSamplingForTesting = function(value, p22)
 		-- upvalues: var4 (write), var5 (write)
 		var4 = value
 		var5 = p22
 	end,
-	_setFlushDelayForTesting = function(value) --[[ line: 258 ]]
+	_setFlushDelayForTesting = function(value)
 		-- upvalues: var17 (write)
 		var17 = value
 	end

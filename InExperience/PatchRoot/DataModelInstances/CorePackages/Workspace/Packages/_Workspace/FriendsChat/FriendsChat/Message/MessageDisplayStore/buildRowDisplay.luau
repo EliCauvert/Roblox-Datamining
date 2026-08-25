@@ -11,7 +11,7 @@ local _ = require(script.Parent.classifyMessage)
 local iconName = foundationModule.Enums.IconName
 local color = Color3.fromRGB(255, 255, 255)
 
-local function _(value) --[[ line: 86 | named "ceilToEven" ]]
+local function _(value)
 	local ceiled = math.ceil(value)
 	
 	if ceiled % 2 == 1 then
@@ -20,7 +20,7 @@ local function _(value) --[[ line: 86 | named "ceilToEven" ]]
 	return math.max(0, ceiled)
 end
 
-local function getSystemIconAttributes(p0) --[[ line: 98 ]]
+local function getSystemIconAttributes(p0)
 	if p0 == nil then
 		return { weight = "600" }
 	end
@@ -32,16 +32,16 @@ local function getSystemIconAttributes(p0) --[[ line: 98 ]]
 	return { weight = "600", size = tostring(math.max(0, ceiled)) }
 end
 
-local _ = function(p1) --[[ line: 119 | named "hashContent" ]]
+local _ = function(p1)
 	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref)
 	return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.messageId or p1.body) else string.gsub(p1.body, "[^%s]", "#")
 end
 
-local _ = function(p2) --[[ line: 127 | named "isNameLoading" ]]
+local _ = function(p2)
 	return if p2.name ~= nil then p2.name == "" else true
 end
 
-local function makeSystemRow(p3) --[[ line: 134 ]]
+local function makeSystemRow(p3)
 	-- upvalues: escapeRichText (ref), formatInlineIcon (ref), getSystemIconAttributes (ref)
 	local var12 = escapeRichText(p3.content)
 	
@@ -52,7 +52,7 @@ local function makeSystemRow(p3) --[[ line: 134 ]]
 	}
 end
 
-local function buildReplyHeader(p4, p5, p6) --[[ line: 146 ]]
+local function buildReplyHeader(p4, p5, p6)
 	-- upvalues: makeSystemRow (ref), getReplyLabelDescriptorModule (ref), iconName (ref)
 	local var19
 	local localize = p6.localize
@@ -87,7 +87,7 @@ local function buildReplyHeader(p4, p5, p6) --[[ line: 146 ]]
 	end
 end
 
-local function buildHiddenUser(p7, p8) --[[ line: 187 ]]
+local function buildHiddenUser(p7, p8)
 	-- upvalues: makeSystemRow (ref), iconName (ref)
 	if if p7.name ~= nil then p7.name == "" else true then
 		return makeSystemRow({ content = "", skeletonWidth = "full" })
@@ -104,7 +104,7 @@ local function buildHiddenUser(p7, p8) --[[ line: 187 ]]
 	})
 end
 
-local function buildUserText(p9, p10) --[[ line: 202 ]]
+local function buildUserText(p9, p10)
 	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), escapeRichText (ref), computeNameColor (ref), color (ref)
 	local var20 = if not p9.moderated then if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p9.messageId or p9.body) else string.gsub(p9.body, "[^%s]", "#") else escapeRichText(p9.body)
 	local name = p10.name
@@ -125,7 +125,7 @@ local function buildUserText(p9, p10) --[[ line: 202 ]]
 	}
 end
 
-return function(p11, p12, p13) --[[ line: 235 | named "buildRowDisplay" ]]
+return function(p11, p12, p13)
 	-- upvalues: iconName (ref), makeSystemRow (ref), buildHiddenUser (ref), buildReplyHeader (ref), buildUserText (ref)
 	local localize = p13.localize
 	local systemTextSize = p13.systemTextSize

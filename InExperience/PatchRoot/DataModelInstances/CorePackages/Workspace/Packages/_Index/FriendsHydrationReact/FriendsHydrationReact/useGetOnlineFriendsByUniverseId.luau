@@ -4,20 +4,20 @@ local signalsReactModule = require(parent.SignalsReact)
 local signalsModule = require(parent.Signals)
 local var3 = require(parent.DataHydration).Friends.FriendsStore.get()
 
-return function(p0) --[[ line: 15 | named "useGetOnlineFriendsByUniverseId" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), var3 (ref), signalsModule (ref), signalsReactModule (ref)
-	local var4 = reactModule.useMemo(function() --[[ line: 16 ]]
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: var3 (copy), p0 (ref)
 		return var3.GetOnlineFriendsByUniverseId(p0)
 	end, { p0 })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 20 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var4 (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 21 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: var4 (copy)
 			return var4(p1)
 		end)
-	end, { var4 })), signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 26 ]]
+	end, { var4 })), signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: var3 (copy)
 		return var3.GetOnlineFriendsStatus()
 	end, {}))

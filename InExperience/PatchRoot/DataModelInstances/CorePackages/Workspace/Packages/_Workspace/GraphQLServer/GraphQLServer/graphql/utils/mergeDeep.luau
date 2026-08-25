@@ -2,7 +2,7 @@
 local object = luauPolyfillModule.Object
 local array = luauPolyfillModule.Array
 
-local function _(p0) --[[ line: 9 | named "isObject" ]]
+local function _(p0)
 	-- upvalues: array (ref)
 	local var2 = false
 	
@@ -12,7 +12,7 @@ local function _(p0) --[[ line: 9 | named "isObject" ]]
 	return var2
 end
 
-local function mergeDeep(p1, p2) --[[ line: 13 ]]
+local function mergeDeep(p1, p2)
 	-- upvalues: array (ref), object (ref), mergeDeep (ref)
 	local var3 = p1[1] or {}
 	local t = {}

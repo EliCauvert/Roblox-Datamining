@@ -2,7 +2,7 @@
 local interventionPlacementModule = require(interventionShared.Contexts.InterventionPlacement)
 local reactModule = require(interventionShared.Parent.React)
 
-return function() --[[ line: 7 ]]
+return function()
 	-- upvalues: reactModule (ref), interventionPlacementModule (ref)
 	return reactModule.useContext(interventionPlacementModule)
 end

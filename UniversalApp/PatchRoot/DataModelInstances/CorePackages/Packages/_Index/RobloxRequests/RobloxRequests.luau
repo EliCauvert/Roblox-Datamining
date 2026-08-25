@@ -13,14 +13,14 @@ local t = {
 	FormData = formModule.FormData.new,
 	File = formModule.File.new,
 	cache = require(src.cache),
-	request = function(p0, p1, p2) --[[ line: 32 ]]
+	request = function(p0, p1, p2)
 		-- upvalues: requestModule (ref)
 		return requestModule.new(p0, p1, p2 or {}):send()
 	end
 }
 t.send = utilModule.deprecate(t.request, "0.5", "http.send")
 
-function t.promise_request(p3, p4, p5) --[[ line: 50 ]]
+function t.promise_request(p3, p4, p5)
 	-- upvalues: requestModule (ref)
 	return requestModule.new(p3, p4, p5 or {}):send(true)
 end
@@ -31,23 +31,23 @@ t.fetch = fetchModule(t.promise_request)
 for i, v in pairs({
 	"GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE", "PATCH"
 }) do
-	t[v:lower()] = function(p6, p7) --[[ line: 65 ]]
+	t[v:lower()] = function(p6, p7)
 		-- upvalues: t (ref), v (ref)
 		return t.request(v, p6, p7)
 	end
 	
-	t["promise_" .. v:lower()] = function(p8, p9) --[[ line: 69 ]]
+	t["promise_" .. v:lower()] = function(p8, p9)
 		-- upvalues: t (ref), v (ref)
 		return t.promise_request(v, p8, p9)
 	end
 end
-function t.set_ratelimit(value, p10) --[[ line: 74 ]]
+function t.set_ratelimit(value, p10)
 	-- upvalues: ratelimitModule (ref)
 	local http = ratelimitModule.get("http", value, p10)
 	print("[http] RateLimiter settings changed: ", http.rate, "reqs /", http.window_size, "secs")
 end
 
-function t.parse_html(p11, p12) --[[ line: 81 ]]
+function t.parse_html(p11, p12)
 	-- upvalues: htmlModule (ref)
 	return htmlModule.parse(p11, 100000, p12)
 end

@@ -62,7 +62,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0) --[[ line: 91 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.footerRef = roactModule.createRef()
@@ -71,14 +71,14 @@ function name.init(p0) --[[ line: 91 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.changeContentSize(p1) --[[ line: 99 ]]
+	function p0.changeContentSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.contentSize ~= p1.AbsoluteSize then
 			p0:setState({ contentSize = p1.AbsoluteSize })
 		end
 	end
 	
-	function p0.changeFooterSize(p2) --[[ line: 107 ]]
+	function p0.changeFooterSize(p2)
 		-- upvalues: p0 (ref)
 		if p0.state.footerSize ~= p2.AbsoluteSize then
 			p0:setState({ footerSize = p2.AbsoluteSize })
@@ -86,7 +86,7 @@ function name.init(p0) --[[ line: 91 ]]
 	end
 end
 
-function name.didMount(_) --[[ line: 116 ]]
+function name.didMount(_)
 	-- upvalues: fFlagIntroduceMetricsLegacyUpsellModule (ref), loggerModule (ref), default (ref), legacyUpsellCounterModule (ref)
 	if fFlagIntroduceMetricsLegacyUpsellModule then
 		loggerModule.debug({ message = "Legacy Upsell Modal Shown" })
@@ -94,7 +94,7 @@ function name.didMount(_) --[[ line: 116 ]]
 	end
 end
 
-function name.render(p3) --[[ line: 125 ]]
+function name.render(p3)
 	-- upvalues: sharedFlagsModule (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), multiTextLocalizerModule (ref)
 	return if sharedFlagsModule.FFlagLowCogsBannerExperiment then roactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
@@ -115,16 +115,16 @@ function name.render(p3) --[[ line: 125 ]]
 			ButtonCancel = { key = "IAPExperience.RobuxUpsell.Action.Cancel" },
 			LoadingText = { key = "IAPExperience.RobuxUpsell.Text.Loading" }
 		},
-		render = function(p4) --[[ line: 170 ]]
+		render = function(p4)
 			-- upvalues: p3 (ref)
 			return p3:renderAlert(p4)
 		end
 	})
 end
 
-function name.renderAlert(p5, p6) --[[ line: 176 ]]
+function name.renderAlert(p5, p6)
 	-- upvalues: withStyle (ref), getEnableFixRobuxUpsellPriceCrashModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), fitTextLabel (ref), imageSetLabel (ref), robux (ref), buttonType (ref), iconSize (ref)
-	return withStyle(function(p7) --[[ line: 177 ]]
+	return withStyle(function(p7)
 		-- upvalues: getEnableFixRobuxUpsellPriceCrashModule (copy), p5 (ref), roactModule (copy), interactiveAlert (copy), p6 (ref), fitFrameVertical (copy), productDetailsModule (copy), fitTextLabel (copy), imageSetLabel (copy), robux (copy), buttonType (copy), iconSize (copy)
 		local theme = p7.Theme
 		local font = p7.Font
@@ -135,7 +135,7 @@ function name.renderAlert(p5, p6) --[[ line: 176 ]]
 			position = p5.props.position,
 			anchorPoint = p5.props.anchorPoint,
 			title = p6.InsufficientFundsTitle,
-			middleContent = function() --[[ line: 198 ]]
+			middleContent = function()
 				-- upvalues: roactModule (copy), fitFrameVertical (copy), p5 (copy), productDetailsModule (copy), theme (ref), fitTextLabel (copy), font (ref), p6 (copy), imageSetLabel (copy), robux (copy)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -257,7 +257,7 @@ function name.renderAlert(p5, p6) --[[ line: 176 ]]
 					}
 				}
 			},
-			footerContent = function() --[[ line: 329 ]]
+			footerContent = function()
 				-- upvalues: p6 (copy), roactModule (copy), fitFrameVertical (copy), p5 (copy), fitTextLabel (copy), font (ref), theme (ref), imageSetLabel (copy), iconSize (copy), robux (copy), var15 (write)
 				local parts = string.split(p6.RemainingBalance, " {robux} ")
 				
@@ -314,7 +314,7 @@ function name.renderAlert(p5, p6) --[[ line: 176 ]]
 	end)
 end
 
-function name.renderNewAlert(p8) --[[ line: 401 ]]
+function name.renderNewAlert(p8)
 	-- upvalues: withLocalization (ref), withStyle (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), fitTextLabel (ref), buttonType (ref)
 	return withLocalization({
 		InsufficientFundsTitle = "IAPExperience.RobuxUpsell.Title.InsufficientFunds",
@@ -328,9 +328,9 @@ function name.renderNewAlert(p8) --[[ line: 401 ]]
 		BonusBannerInfo = "IAPExperience.RobuxUpsell.Text.BonusBannerInfo",
 		BuyRobuxQuestion = if p8.props.isLuobu then "IAPExperience.RobuxUpsell.Text.BuyRobuxQuestionWithWarning" else "IAPExperience.RobuxUpsell.Text.BuyRobuxQuestion",
 		DisclosureTerms = if p8.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTerms" else "IAPExperience.RobuxUpsell.Text.DisclosureTerms"
-	})(function(p9) --[[ line: 419 ]]
+	})(function(p9)
 		-- upvalues: withStyle (copy), p8 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), productDetailsModule (copy), fitTextLabel (copy), buttonType (copy)
-		return withStyle(function(p10) --[[ line: 420 ]]
+		return withStyle(function(p10)
 			-- upvalues: p9 (ref), p8 (copy), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), productDetailsModule (copy), fitTextLabel (copy), buttonType (copy)
 			local theme = p10.Theme
 			local font = p10.Font
@@ -346,7 +346,7 @@ function name.renderNewAlert(p8) --[[ line: 401 ]]
 				position = p8.props.position,
 				anchorPoint = p8.props.anchorPoint,
 				title = p9.NeedMoreRobux,
-				middleContent = function() --[[ line: 450 ]]
+				middleContent = function()
 					-- upvalues: roactModule (copy), fitFrameVertical (copy), p8 (copy), productDetailsModule (copy), theme (ref), fitTextLabel (copy), font (ref), text (write), p9 (copy)
 					return roactModule.createElement(fitFrameVertical, {
 						BackgroundTransparency = 1,
@@ -450,7 +450,7 @@ function name.renderNewAlert(p8) --[[ line: 401 ]]
 						}
 					}
 				},
-				footerContent = function() --[[ line: 560 ]]
+				footerContent = function()
 					-- upvalues: p8 (copy), p10 (ref), var18 (write), p9 (copy)
 					return p8:renderFooterExperiment(p10, var18, p9.BonusBannerInfo)
 				end
@@ -459,7 +459,7 @@ function name.renderNewAlert(p8) --[[ line: 401 ]]
 	end)
 end
 
-function name.renderFooterExperiment(p11, p12, p13, p14) --[[ line: 568 ]]
+function name.renderFooterExperiment(p11, p12, p13, p14)
 	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
 	local font = p12.Font
 	local flint = colors.Flint

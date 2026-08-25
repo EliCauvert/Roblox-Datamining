@@ -3,7 +3,7 @@ local array = luauPolyfillModule.Array
 local boolean = luauPolyfillModule.Boolean
 local mergeDeepModule = require(script.Parent.mergeDeep)
 
-local function mergeResolvers(p0, p1) --[[ line: 14 ]]
+local function mergeResolvers(p0, p1)
 	-- upvalues: array (ref), mergeResolvers (ref), mergeDeepModule (ref), boolean (ref)
 	if not p0 or array.isArray(p0) and #p0 == 0 then
 		return {}

@@ -2,7 +2,7 @@
 local _ = require(abuseReportMenu.Components.Types)
 local playerMenuActions = require(abuseReportMenu.Components.Constants).PlayerMenuActions
 
-return function(p0, p1) --[[ line: 6 | named "reportExperienceUIStateReducer" ]]
+return function(p0, p1)
 	-- upvalues: playerMenuActions (ref)
 	local cloned = table.clone(p0)
 	

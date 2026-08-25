@@ -22,7 +22,7 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
 local fFlagAXHideHeadAdjustmentForDefaultHead = avatarExperienceFlagsModule.FFlagAXHideHeadAdjustmentForDefaultHead
 
-return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarProps" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useNavigation (ref), useAvatarRoute (ref), useSelector (ref), selectColorAdjustmentButtonColor (ref), reactModule (ref), avatarScreen (ref), slotBasedEditorAnalytics (ref), menuItemEnumModule (ref), fFlagAXHideHeadAdjustmentForDefaultHead (ref), selectHasDynamicHead (ref), fFlagAXMigrateBuilderIcons (ref), iconName (ref), iconVariant (ref)
 	local var9 = useTokens()
 	local var10 = useNavigation()
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 	local var12 = useSelector(selectColorAdjustmentButtonColor)
 	local size600 = var9.Size.Size_600
 	local name = p0.avatarRoute and (p0.avatarRoute.opaque and p0.avatarRoute.opaque.name)
-	local var14 = reactModule.useCallback(function() --[[ line: 48 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var10.navigate(avatarScreen.AccessoryAdjustment)
 		
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.AdjustAccessory, var11.opaque.name)
 		end
 	end, { var10, var11 })
-	local var15 = reactModule.useCallback(function() --[[ line: 58 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var10.navigate(avatarScreen.BodyShape)
 		
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.BodyScale, var11.opaque.name)
 		end
 	end, { var10, var11 })
-	local var16 = reactModule.useCallback(function() --[[ line: 68 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var10.navigate(avatarScreen.HeadRefinement)
 		
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.CustomizeHead, var11.opaque.name)
 		end
 	end, { var10, var11 })
-	local var17 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), avatarScreen (copy), var10 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		if var11 and var11.current and var11.current.name == avatarScreen.LayeredMakeupSort then
 			var10.pop()
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.ClothingLayers, var11.opaque.name)
 		end
 	end, { var10, var11 })
-	local var18 = reactModule.useCallback(function() --[[ line: 93 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), avatarScreen (copy), var10 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		if var11 and var11.current and var11.current.name == avatarScreen.LayeredClothingSort then
 			var10.pop()
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 			slotBasedEditorAnalytics.trackAdvancedCustomizationControlBarClickFromSurface(menuItemEnumModule.AvatarRefinement.MakeupLayers, var11.opaque.name)
 		end
 	end, { var10, var11 })
-	local var19 = reactModule.useCallback(function() --[[ line: 108 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), avatarScreen (copy), var11 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var10.navigate(avatarScreen.ColorAdjustment)
 		
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 37 | named "useAdvancedCustomizationControlBarPro
 	local var20 = if fFlagAXHideHeadAdjustmentForDefaultHead then useSelector(selectHasDynamicHead) else nil
 	
 	return {
-		config = reactModule.useMemo(function() --[[ line: 121 ]]
+		config = reactModule.useMemo(function()
 			-- upvalues: menuItemEnumModule (copy), fFlagAXMigrateBuilderIcons (copy), iconName (copy), iconVariant (copy), var14 (ref), name (ref), avatarScreen (copy), size600 (ref), var15 (ref), var16 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var20 (ref), var17 (ref), var18 (ref), var12 (ref), var19 (ref)
 			return {
 				{

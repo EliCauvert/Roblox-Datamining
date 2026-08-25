@@ -5,7 +5,7 @@ local achievementRulesModule = require(script.Parent.AchievementRules)
 local achievementTelemetryModule = require(script.Parent.AchievementTelemetry)
 local t = {
 	NAMES = require(script.Parent.AchievementConstants).ACHIEVEMENT_NAMES,
-	_init = function(p0, p1, p2, p3) --[[ line: 28 ]]
+	_init = function(p0, p1, p2, p3)
 		-- upvalues: achievementRulesModule (ref)
 		p0.achievementService = p3
 		p0.achievementName = p1
@@ -15,13 +15,13 @@ local t = {
 		assert(p0.achievementRule, "Achievement rule not found for " .. tostring(p1))
 		
 		if p0.achievementService:IsAvailable() then
-			pcall(function() --[[ line: 37 ]]
+			pcall(function()
 				-- upvalues: p0 (ref), p1 (ref)
 				p0.hasAchieved = p0.achievementService:HasAchieved(p1)
 			end)
 			
 			if p0.hasAchieved == false then
-				p0.achievementDataSubscription = p2:subscribe(function(p4) --[[ line: 42 ]]
+				p0.achievementDataSubscription = p2:subscribe(function(p4)
 					-- upvalues: p0 (ref)
 					if p0.achievementRule(p4) then
 						p0:grantAchievement(p0.achievementName)
@@ -30,10 +30,10 @@ local t = {
 			end
 		end
 	end,
-	grantAchievement = function(p5, p6) --[[ line: 51 ]]
+	grantAchievement = function(p5, p6)
 		-- upvalues: loggingProtocolModule (ref), achievementTelemetryModule (ref)
 		if p5.hasAchieved == false then
-			local _, status = pcall(function() --[[ line: 53 ]]
+			local _, status = pcall(function()
 				-- upvalues: p5 (ref), p6 (ref)
 				return p5.achievementService:GrantAchievement(p6)
 			end)
@@ -49,11 +49,11 @@ local t = {
 			end
 		end
 	end,
-	registerOnAchievementAwardedListener = function(p7, p8) --[[ line: 72 ]]
+	registerOnAchievementAwardedListener = function(p7, p8)
 		p7.achievementAwardedCallbacks[p8] = p8
 		
 		return {
-			unsubscribe = function() --[[ line: 77 ]]
+			unsubscribe = function()
 				-- upvalues: p7 (ref), p8 (ref)
 				p7.achievementAwardedCallbacks[p8] = nil
 			end
@@ -61,7 +61,7 @@ local t = {
 	end
 }
 
-function t.new(p9, p10, p11) --[[ line: 83 ]]
+function t.new(p9, p10, p11)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, { __index = t })
@@ -70,13 +70,13 @@ function t.new(p9, p10, p11) --[[ line: 83 ]]
 	return t_1
 end
 
-function t.newWithRefresher(p12, p13, p14, p15) --[[ line: 94 ]]
+function t.newWithRefresher(p12, p13, p14, p15)
 	-- upvalues: t (ref)
 	local var5 = t.new(p12, p13, p15)
 	
 	if var5.hasAchieved == false then
 		p14:start()
-		var5:registerOnAchievementAwardedListener(function() --[[ line: 104 ]]
+		var5:registerOnAchievementAwardedListener(function()
 			-- upvalues: p14 (ref)
 			p14:stop()
 		end)

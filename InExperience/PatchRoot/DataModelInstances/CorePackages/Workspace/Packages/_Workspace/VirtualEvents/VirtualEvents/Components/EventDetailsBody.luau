@@ -15,14 +15,14 @@ local text_1 = foundationModule.Text
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0) --[[ line: 36 | named "EventDetailsBody" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref), getEventCategoryModule (ref), getVirtualEventDatesModule (ref), useLocalization (ref), attendanceChipModule (ref), text_1 (ref), descriptionExpanderModule (ref), icon (ref), iconSize (ref), formatDateModule (ref)
 	local var8 = useTokens()
-	local var9 = reactModule.useMemo(function() --[[ line: 39 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), text (copy)
 		return if p0.virtualEvent.description == nil then nil else text.Trim(p0.virtualEvent.description)
 	end, { p0.virtualEvent.description })
-	local var10 = reactModule.useMemo(function() --[[ line: 46 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: getEventCategoryModule (copy), p0 (ref)
 		return getEventCategoryModule(p0.virtualEvent)
 	end, { p0.virtualEvent })
@@ -129,7 +129,7 @@ return function(p0) --[[ line: 36 | named "EventDetailsBody" ]]
 				Label = reactModule.createElement(text_1, {
 					LayoutOrder = 2,
 					TextWrapped = false,
-					Text = formatDateModule(reactModule.useMemo(function() --[[ line: 50 ]]
+					Text = formatDateModule(reactModule.useMemo(function()
 						-- upvalues: getVirtualEventDatesModule (copy), p0 (ref)
 						return getVirtualEventDatesModule(p0.virtualEvent)
 					end, { p0.virtualEvent }).startDate, true),

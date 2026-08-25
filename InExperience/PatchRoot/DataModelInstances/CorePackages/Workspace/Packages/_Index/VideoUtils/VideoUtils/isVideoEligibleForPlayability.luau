@@ -22,7 +22,7 @@ local list = {
 	if fFlagLuaAppAddVideoIneligiblePlayabilityStatus then playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser else nil
 }
 
-return function(p0, p1, p2) --[[ line: 48 | named "isVideoEligibleForPlayability" ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), cryoModule (ref), list (ref)
 	return if fFlagLuaAppUsePrevalidatedVideoGamePlayability and p2 then true else not (not p0 or p1 == nil) and (p1.isPlayable == true or cryoModule.List.find(list, p1.playabilityStatus) == nil)
 end

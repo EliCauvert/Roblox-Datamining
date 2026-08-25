@@ -33,15 +33,15 @@ local fFlagEnableFlyoutOnNavRail = sharedFlagsModule.FFlagEnableFlyoutOnNavRail
 local var17 = if fFlagEnableBlackbirdCheck then require(script.Parent.Parent.Hooks.useHasRobloxSubscription) else nil
 local var18 = if fFlagEnableBlackbird and fFlagEnableBlackbirdOnFlyoutMenu and enableBlackbirdUpsellOnFlyoutMenu then require(script.Parent.BlackbirdUpsellBanner) else nil
 
-local function selectStatusBarHeight(p0) --[[ line: 66 ]]
+local function selectStatusBarHeight(p0)
 	return p0.TopBar.statusBarHeight or 0
 end
 
-local function selectGlobalGuiInset(value) --[[ line: 70 ]]
+local function selectGlobalGuiInset(value)
 	return value.GlobalGuiInset or { left = 0, top = 0, right = 0, bottom = 0 }
 end
 
-return reactModule.memo(function(p1, _) --[[ line: 74 ]]
+return reactModule.memo(function(p1, _)
 	-- upvalues: useTokens (ref), useLocalRobuxBalance (ref), useSelector (ref), selectStatusBarHeight (ref), selectGlobalGuiInset (ref), fFlagEnableFlyoutOnNavRail (ref), useScreenSize (ref), constantsModule (ref), useAppPolicy (ref), fFlagEnableBlackbirdCheck (ref), var17 (ref), var18 (ref), useFlyoutNavigationItemsModule (ref), createNextOrder (ref), useSetDrawerVisible (ref), fFlagFlyoutTradesEntryExposureLoggingModule (ref), useFlyoutTradesEntryExposureLoggingModule (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutProfileCardModule (ref), fFlagEnableFlyoutMenuRobuxCardRefactor (ref), robuxPillModule (ref), foundationModule (ref), divider (ref), flyoutNavigationListModule (ref), flyoutSwitchAccountButtonModule (ref), flyoutQuickSigninButtonModule (ref), flyoutReportLogsModule (ref), termsPrivacyFooterModule (ref), useDismissFlyoutOnPartyTopBannerModule (ref), drawerContainer (ref)
 	local var21 = useTokens()
 	local var22 = useLocalRobuxBalance()
@@ -52,7 +52,7 @@ return reactModule.memo(function(p1, _) --[[ line: 74 ]]
 	local var26 = useScreenSize()
 	local var27 = if var26.X - constantsModule.FLYOUT_SIDE_PADDING < constantsModule.FLYOUT_SIDE_PANEL_WIDTH then var26.X - constantsModule.FLYOUT_SIDE_PADDING else constantsModule.FLYOUT_SIDE_PANEL_WIDTH
 	local var28 = if fFlagEnableBlackbirdCheck then var17() else false
-	local var29 = not useAppPolicy(function(p2) --[[ line: 89 ]]
+	local var29 = not useAppPolicy(function(p2)
 		return p2.getDisableBlackbirdEntrypoints() or false
 	end) and (var18 ~= nil and not var28)
 	local var30 = var22 and var22 >= 0
@@ -65,11 +65,11 @@ return reactModule.memo(function(p1, _) --[[ line: 74 ]]
 		useFlyoutTradesEntryExposureLoggingModule()
 	end
 	local var39
-	local var35 = reactModule.useCallback(function() --[[ line: 104 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: var34 (ref)
 		var34(false)
 	end, { var34 })
-	local var36 = reactModule.useCallback(function(p3) --[[ line: 107 ]]
+	local var36 = reactModule.useCallback(function(p3)
 		-- upvalues: flyoutAnalyticsModule (copy)
 		flyoutAnalyticsModule.onFlyoutSidePanelClosed(p3)
 	end, {})

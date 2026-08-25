@@ -18,7 +18,7 @@ enterOutfitNamePrompt.validateProps = tModule.strictInterface({
 	performCreateOutfit = tModule.callback
 })
 
-function enterOutfitNamePrompt.init(p0) --[[ line: 33 ]]
+function enterOutfitNamePrompt.init(p0)
 	-- upvalues: roactModule (ref)
 	p0:setState({
 		outfitName = "",
@@ -26,18 +26,18 @@ function enterOutfitNamePrompt.init(p0) --[[ line: 33 ]]
 	})
 	p0.textBoxRef = roactModule.createRef()
 	
-	function p0.confirmCreateOutfit() --[[ line: 41 ]]
+	function p0.confirmCreateOutfit()
 		-- upvalues: p0 (ref)
 		p0.props.performCreateOutfit(p0.state.outfitName)
 	end
 	
-	function p0.textUpdated(p1) --[[ line: 45 ]]
+	function p0.textUpdated(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ outfitName = p1 })
 	end
 end
 
-function enterOutfitNamePrompt.render(p2) --[[ line: 52 ]]
+function enterOutfitNamePrompt.render(p2)
 	-- upvalues: roactModule (ref), promptWithTextFieldModule (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return roactModule.createElement(promptWithTextFieldModule, {
 		fieldText = p2.state.outfitName,
@@ -66,16 +66,16 @@ function enterOutfitNamePrompt.render(p2) --[[ line: 52 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p3) --[[ line: 82 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p3)
 	return { screenSize = p3.screenSize }
-end, function(p4) --[[ line: 88 | named "mapDispatchToProps" ]]
+end, function(p4)
 	-- upvalues: signalCreateOutfitPermissionDeniedModule (ref), performCreateOutfitModule (ref)
 	return {
-		signalCreateOutfitPermissionDenied = function() --[[ line: 90 ]]
+		signalCreateOutfitPermissionDenied = function()
 			-- upvalues: p4 (ref), signalCreateOutfitPermissionDeniedModule (copy)
 			return p4(signalCreateOutfitPermissionDeniedModule)
 		end,
-		performCreateOutfit = function(p5) --[[ line: 94 ]]
+		performCreateOutfit = function(p5)
 			-- upvalues: p4 (ref), performCreateOutfitModule (copy)
 			return p4(performCreateOutfitModule(p5))
 		end

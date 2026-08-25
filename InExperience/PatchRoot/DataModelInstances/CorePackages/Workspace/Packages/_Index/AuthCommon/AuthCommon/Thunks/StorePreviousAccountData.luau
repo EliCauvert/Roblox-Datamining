@@ -2,7 +2,7 @@
 local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
 local userModule = require(authCommon.Thunks.User)
 
-return function() --[[ line: 5 ]]
+return function()
 	-- upvalues: userModule (ref), appStorageUtilitiesModule (ref)
 	local var3 = userModule.fromLocalStorage()
 	

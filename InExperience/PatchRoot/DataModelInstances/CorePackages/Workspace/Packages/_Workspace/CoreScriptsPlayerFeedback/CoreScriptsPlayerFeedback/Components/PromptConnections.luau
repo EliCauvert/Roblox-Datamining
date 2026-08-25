@@ -5,32 +5,32 @@ local getFFlagEnablePlayerSupportPromptModule = require(coreScriptsPlayerFeedbac
 local reactModule = require(parent.React)
 local useEventConnection = reactUtilsModule.useEventConnection
 local var4 = getFFlagEnablePlayerSupportPromptModule()
-local var5 = reactModule.memo(function(p0) --[[ line: 21 ]]
+local var5 = reactModule.memo(function(p0)
 	-- upvalues: useEventConnection (ref)
 	useEventConnection(p0.event, p0.handler)
 	
 	return nil
 end)
 
-return reactModule.memo(function(p1) --[[ line: 26 ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), var4 (ref), var5 (ref)
 	local socialService = game:GetService("SocialService")
-	local var7 = if var4 then reactModule.useCallback(function(p2) --[[ line: 32 ]]
+	local var7 = if var4 then reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref)
 		local var12 = false
-		pcall(function() --[[ line: 34 ]]
+		pcall(function()
 			-- upvalues: var12 (write), p2 (ref)
 			var12 = p2 == Enum.FeedbackType.PlayerSupport
 		end)
 		p1.openFeedbackPrompt()
-	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt }) else reactModule.useCallback(function() --[[ line: 29 ]]
+	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt }) else reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.openFeedbackPrompt()
 	end, { p1.openFeedbackPrompt })
-	local var8 = if var4 then reactModule.useCallback(function(p4, p5) --[[ line: 56 ]]
+	local var8 = if var4 then reactModule.useCallback(function(p4, p5)
 		-- upvalues: p1 (ref)
 		local var13 = false
-		pcall(function() --[[ line: 58 ]]
+		pcall(function()
 			-- upvalues: var13 (write), p5 (ref)
 			var13 = p5 == Enum.FeedbackType.PlayerSupport
 		end)
@@ -41,7 +41,7 @@ return reactModule.memo(function(p1) --[[ line: 26 ]]
 	end, {
 		p1.openUnavailablePrompt,
 		p1.openPlayerSupportUnavailablePrompt
-	}) else reactModule.useCallback(function(p3) --[[ line: 51 ]]
+	}) else reactModule.useCallback(function(p3)
 		-- upvalues: p1 (ref)
 		if p1.openUnavailablePrompt then
 			p1.openUnavailablePrompt(p3)
@@ -51,7 +51,7 @@ return reactModule.memo(function(p1) --[[ line: 26 ]]
 	local var10 = nil
 	
 	if socialService then
-		local ok, status = pcall(function() --[[ line: 79 ]]
+		local ok, status = pcall(function()
 			-- upvalues: socialService (ref)
 			return socialService.ShowPromptFeedbackSubmission
 		end)
@@ -59,7 +59,7 @@ return reactModule.memo(function(p1) --[[ line: 26 ]]
 		if ok then
 			var9 = status
 		end
-		local ok_1, status_1 = pcall(function() --[[ line: 86 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: socialService (ref)
 			return socialService.ShowPromptFeedbackUnavailable
 		end)

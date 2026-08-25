@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateTextureSizeExtraErrorInfo", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateTextureSizeExtraErrorInfo")
 end

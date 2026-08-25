@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new() --[[ line: 14 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.min = Vector3.new(1e999, 1e999, 1e999)
@@ -10,7 +10,7 @@ function t.new() --[[ line: 14 ]]
 	return tbl
 end
 
-function t:fromMinMax(b) --[[ line: 22 ]]
+function t:fromMinMax(b)
 	-- upvalues: t (ref)
 	local var2 = t.new()
 	local t_1 = { X = self.X, Y = self.Y, Z = self.Z }
@@ -29,7 +29,7 @@ function t:fromMinMax(b) --[[ line: 22 ]]
 	return var2
 end
 
-function t:unionExtents(p0) --[[ line: 42 ]]
+function t:unionExtents(p0)
 	-- upvalues: t (ref)
 	local var6 = t.new()
 	var6.min = self.min:Min(p0.min)
@@ -38,7 +38,7 @@ function t:unionExtents(p0) --[[ line: 42 ]]
 	return var6
 end
 
-function t:intersectExtents(p1) --[[ line: 49 ]]
+function t:intersectExtents(p1)
 	-- upvalues: t (ref)
 	local t_1 = { X = 1e999, Y = 1e999, Z = 1e999 }
 	local t_2 = { X = -1e999, Y = -1e999, Z = -1e999 }
@@ -61,7 +61,7 @@ function t:intersectExtents(p1) --[[ line: 49 ]]
 	return var9
 end
 
-function t:expandToInclude(p2) --[[ line: 72 ]]
+function t:expandToInclude(p2)
 	-- upvalues: t (ref)
 	local var12 = t.new()
 	var12.min = self.min:Min(p2)
@@ -70,7 +70,7 @@ function t:expandToInclude(p2) --[[ line: 72 ]]
 	return var12
 end
 
-function t:isValid() --[[ line: 79 ]]
+function t:isValid()
 	for i, v in { "X", "Y", "Z" } do
 		if self.max[v] < self.min[v] then
 			return false
@@ -79,11 +79,11 @@ function t:isValid() --[[ line: 79 ]]
 	return true
 end
 
-function t:size() --[[ line: 88 ]]
+function t:size()
 	return if self:isValid() then self.max - self.min else nil
 end
 
-function t:center() --[[ line: 95 ]]
+function t:center()
 	return if self:isValid() then (self.max + self.min) / 2 else nil
 end
 

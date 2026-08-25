@@ -13,7 +13,7 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local profileCollectionGridConfigModule = require(script.Parent.ProfileCollectionGridConfig)
 local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 
-return function(p0) --[[ line: 28 | named "SquareCollectionsGridView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagProfilePlatformEnableImpressions (ref), useProfileAnalyticsContextModule (ref), useCollectionImpressionsSignal (ref), profileCollectionGridConfigModule (ref), useDynamicSizeMarginModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), collectionGrid (ref), screenSizeImpressionsTracker (ref), appPage (ref)
 	local var6, var7 = reactModule.useState(nil)
 	local var8 = if fFlagProfilePlatformEnableImpressions then reactModule.useRef(nil) else nil
@@ -26,7 +26,7 @@ return function(p0) --[[ line: 28 | named "SquareCollectionsGridView" ]]
 		var10 = var12
 		var11 = var13
 	end
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var6 (ref), fFlagProfilePlatformEnableImpressions (copy), var8 (ref)
 		if p0.setForwardRef then
 			p0.setForwardRef(var6)
@@ -59,14 +59,14 @@ return function(p0) --[[ line: 28 | named "SquareCollectionsGridView" ]]
 			numColumns = if p0.overrides then p0.overrides.numColumns else var18.numColumns,
 			onActivateHeader = p0.onActivateHeader,
 			onActivateInfoIcon = p0.onActivateInfoIcon,
-			onContainerSizeChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p1) --[[ line: 58 ]]
+			onContainerSizeChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p1)
 				-- upvalues: p0 (ref), var11 (write)
 				if p0.onContainerSizeChanged then
 					p0.onContainerSizeChanged(p1)
 				end
 				var11()
 			end, { p0.onContainerSizeChanged, var11 }) else nil else p0.onContainerSizeChanged,
-			onViewableItemsChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p2, p3) --[[ line: 67 ]]
+			onViewableItemsChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p2, p3)
 				-- upvalues: p0 (ref), var11 (write)
 				if p0.onViewableItemsChanged then
 					p0.onViewableItemsChanged(p2, p3)

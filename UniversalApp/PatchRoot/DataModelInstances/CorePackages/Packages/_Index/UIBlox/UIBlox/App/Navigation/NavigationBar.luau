@@ -16,7 +16,7 @@ local t = {
 	animationConfig = { dampingRatio = 1, frequency = 3 }
 }
 
-return function(p0) --[[ line: 69 | named "NavigationBar" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), UIBloxConfigModule (ref), navigationBarAlignmentModule (ref), reactOtterModule (ref)
 	assert(#p0.items > 0, "At least one item should be present!")
 	local var7 = cryoModule.Dictionary.join(t, p0)
@@ -37,14 +37,14 @@ return function(p0) --[[ line: 69 | named "NavigationBar" ]]
 	else
 		error("NavigationBar Alignment type is incorrect!")
 	end
-	local var15 = reactModule.useCallback(function(p1) --[[ line: 105 ]]
+	local var15 = reactModule.useCallback(function(p1)
 		-- upvalues: var7 (ref), var10 (ref)
 		if var7.visibility or var7.animated then
 			var10(p1.AbsoluteSize.Y)
 		end
 	end, { var7.visibility, var7.animated })
 	local var16, var17 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function() --[[ line: 111 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var17 (ref), reactOtterModule (copy), var9 (ref)
 		if not var7.visibility and var7.animated then
 			if var7.isVisible then
@@ -95,10 +95,10 @@ return function(p0) --[[ line: 69 | named "NavigationBar" ]]
 			BorderSizePixel = 0,
 			Selectable = false,
 			Active = var7.active,
-			Position = if var7.visibility then var7.visibility:map(function(p3) --[[ line: 149 ]]
+			Position = if var7.visibility then var7.visibility:map(function(p3)
 				-- upvalues: var9 (ref)
 				return UDim2.new(0, 0, 0, math.floor((1 - p3) * var9 + 0.5))
-			end) else var16:map(function(p2) --[[ line: 153 ]]
+			end) else var16:map(function(p2)
 				return UDim2.new(0, 0, 0, math.floor(p2 + 0.5))
 			end),
 			Size = UDim2.fromScale(1, 1),

@@ -4,14 +4,14 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 61 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		kind = if p0 == nil or p0.kind == nil then nil else p0.kind
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 67 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -29,7 +29,7 @@ function t_1:encode() --[[ line: 67 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 84 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var11 = t_1.new()
 	local var12 = 0
@@ -76,7 +76,7 @@ function t_1.decode(p1) --[[ line: 84 ]]
 	return var11
 end
 
-function t_1:jsonEncode() --[[ line: 127 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "peek_view" then
@@ -85,7 +85,7 @@ function t_1:jsonEncode() --[[ line: 127 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 139 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var29 = t_1.new()
 	
@@ -113,14 +113,14 @@ typeRegistryModule.default:register(t.Surfacing)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 167 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		height_offset = if p2 == nil or p2.height_offset == nil then nil else p2.height_offset
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 173 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var31 = 0
@@ -137,7 +137,7 @@ function t_2:encode() --[[ line: 173 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 187 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref)
 	local var35 = t_2.new()
 	local var36 = 0
@@ -182,7 +182,7 @@ function t_2.decode(p3) --[[ line: 187 ]]
 	return var35
 end
 
-function t_2:jsonEncode() --[[ line: 230 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.height_offset ~= nil then
@@ -191,7 +191,7 @@ function t_2:jsonEncode() --[[ line: 230 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 240 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref)
 	local var53 = t_2.new()
 	

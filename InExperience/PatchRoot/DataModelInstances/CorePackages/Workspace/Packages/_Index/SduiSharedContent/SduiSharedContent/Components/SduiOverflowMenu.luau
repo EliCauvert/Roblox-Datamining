@@ -9,7 +9,7 @@ local _ = require(parent.SduiCompat)
 local foundationModule = require(parent.Foundation)
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 42 | named "SduiOverflowMenu" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useUidRefString (ref), fFlagSduiExperienceDetailsSupport (ref), reactModule (ref), getOverflowMenuSignalStore (ref), useBackButtonBinding (ref), foundationModule (ref), overflowMenu (ref)
 	local current = `sdui-overflow-menu-{useUidRefString().current}`
 	local anchorPoint = p0.anchorPoint or Vector2.new(0, 0)
@@ -33,7 +33,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "SduiOverflowMenu" ]]
 			menuWidth = p0.menuWidth
 		})
 	end
-	local var6 = useBackButtonBinding(reactModule.useCallback(function() --[[ line: 51 ]]
+	local var6 = useBackButtonBinding(reactModule.useCallback(function()
 		-- upvalues: getOverflowMenuSignalStore (copy), current (ref)
 		getOverflowMenuSignalStore().closeMenu(current)
 	end, { current }))

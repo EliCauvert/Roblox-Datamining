@@ -20,7 +20,7 @@ local fFlagPeoplePageDismissCardMenuOnScrollOutOfView = flags.FFlagPeoplePageDis
 local fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule = require(peopleReactView.Flags.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted)
 local fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = flags.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
 
-return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), constantsModule (ref), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (ref), useGetPeopleServiceModule (ref), personButtonConfigsModule (ref), signalsReactModule (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), reactModule (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), useDismissWhenOutOfViewModule (ref), iconName (ref), personButtonModule (ref), view (ref), cardMenuWithVoiceVolumeModule (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (ref), menu (ref), inputSize (ref)
 	local var12 = useLocalization({
 		unblock = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.UNBLOCK,
@@ -41,17 +41,17 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 	local var21 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then signalsReactModule.useSignalState(var14.getShowVolumeControl) else false
 	local var22 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var21 and var17[var16.PERSON_BUTTONS.MUTE_PLAYER].shouldShow() else false
 	local var23, var24 = reactModule.useState(false)
-	local var25 = reactModule.useCallback(function(p1) --[[ line: 73 ]]
+	local var25 = reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), var24 (ref)
 		p0.onIsOpenChanged(p1)
 		var24(p1)
 	end, { p0.onIsOpenChanged })
-	local var26 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), var25 (ref)
 		var15:trackPersonCardMenuToggled(false)
 		var25(false)
 	end, { var25 })
-	local var27 = reactModule.useCallback(function() --[[ line: 84 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), var15 (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var22 (ref), var16 (ref), var25 (ref)
 		local var34 = not var23
 		var15:trackPersonCardMenuToggled(var34)
@@ -72,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 		var28 = reactModule.useRef(nil)
 		useDismissWhenOutOfViewModule(var23, var26, var28)
 	end
-	local var29 = reactModule.useMemo(function() --[[ line: 112 ]]
+	local var29 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), var16 (ref)
 		return var17[var16.PERSON_BUTTONS.MUTE_PLAYER].animatedIcon
 	end, { var17 })
@@ -80,12 +80,12 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 	
 	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		local getPlayerIsLocalMuted = var14.getPlayerIsLocalMuted
-		var30 = reactModule.useCallback(function(p2) --[[ line: 119 ]]
+		var30 = reactModule.useCallback(function(p2)
 			-- upvalues: getPlayerIsLocalMuted (ref)
 			return if p2 and getPlayerIsLocalMuted then getPlayerIsLocalMuted(p2)(false) else false
 		end, { getPlayerIsLocalMuted })
 	end
-	local var31 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then reactModule.useMemo(function() --[[ line: 130 ]]
+	local var31 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then reactModule.useMemo(function()
 		-- upvalues: var17 (ref), var16 (ref), var19 (ref), var12 (ref), iconName (copy), var21 (ref), var18 (ref), var25 (ref)
 		local MUTE_PLAYER = var17[var16.PERSON_BUTTONS.MUTE_PLAYER]
 		local BLOCK_PLAYER = var17[var16.PERSON_BUTTONS.BLOCK_PLAYER]
@@ -97,7 +97,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 			id = "mute",
 			text = if var19 then var12.unmute else var12.mute,
 			icon = if var19 then iconName.SpeakerSlash else iconName.Speaker,
-			onActivated = function() --[[ line: 145 ]]
+			onActivated = function()
 				-- upvalues: MUTE_PLAYER (ref), PEOPLE_CARD (ref)
 				MUTE_PLAYER.onActivated(PEOPLE_CARD)
 			end
@@ -111,7 +111,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 				id = "block",
 				text = if var18 then var12.unblock else var12.block,
 				icon = iconName.CircleSlash,
-				onActivated = function() --[[ line: 161 ]]
+				onActivated = function()
 					-- upvalues: BLOCK_PLAYER (ref), PEOPLE_CARD (ref), var25 (copy)
 					BLOCK_PLAYER.onActivated(PEOPLE_CARD)
 					var25(false)
@@ -123,7 +123,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 				id = "report",
 				text = var12.report,
 				icon = iconName.Flag,
-				onActivated = function() --[[ line: 172 ]]
+				onActivated = function()
 					-- upvalues: REPORT_PLAYER (ref), PEOPLE_CARD (ref)
 					REPORT_PLAYER.onActivated(PEOPLE_CARD)
 				end
@@ -142,7 +142,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 		return t
 	end, {
 		var18, var19, var25, var17, var12, var21
-	}) else reactModule.useMemo(function() --[[ line: 201 ]]
+	}) else reactModule.useMemo(function()
 		-- upvalues: var17 (ref), var16 (ref), var19 (ref), var12 (ref), iconName (copy), var18 (ref), var25 (ref)
 		local MUTE_PLAYER = var17[var16.PERSON_BUTTONS.MUTE_PLAYER]
 		local BLOCK_PLAYER = var17[var16.PERSON_BUTTONS.BLOCK_PLAYER]
@@ -154,7 +154,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 				id = "mute",
 				text = if var19 then var12.unmute else var12.mute,
 				icon = if var19 then iconName.SpeakerSlash else iconName.Speaker,
-				onActivated = function() --[[ line: 213 ]]
+				onActivated = function()
 					-- upvalues: MUTE_PLAYER (ref), var16 (copy)
 					MUTE_PLAYER.onActivated(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end
@@ -165,7 +165,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 				id = "block",
 				text = if var18 then var12.unblock else var12.block,
 				icon = iconName.CircleSlash,
-				onActivated = function() --[[ line: 223 ]]
+				onActivated = function()
 					-- upvalues: BLOCK_PLAYER (ref), var16 (copy), var25 (copy)
 					BLOCK_PLAYER.onActivated(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 					var25(false)
@@ -177,7 +177,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
 				id = "report",
 				text = var12.report,
 				icon = iconName.Flag,
-				onActivated = function() --[[ line: 234 ]]
+				onActivated = function()
 					-- upvalues: REPORT_PLAYER (ref), var16 (copy)
 					REPORT_PLAYER.onActivated(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end

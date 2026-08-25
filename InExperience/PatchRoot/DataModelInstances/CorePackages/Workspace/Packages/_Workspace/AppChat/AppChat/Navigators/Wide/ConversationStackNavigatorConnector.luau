@@ -20,25 +20,25 @@ local t = {
 	createNewNavigator = conversationStackNavigatorModule
 }
 
-function ConversationStackNavigatorConnector(p0) --[[ line: 40 ]]
+function ConversationStackNavigatorConnector(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), userGameSettingsService (ref), fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), enumScreensModule (ref), chatConversationTopBarModule (ref), chatTopBarBaseModule (ref), squadAddFriendsIconButtonModule (ref), systemMenuTopBarModule (ref)
 	local var16 = cryoModule.Dictionary.union(t, p0)
 	local var17 = useStyle()
 	local _ = nil
 	local var18, var19 = reactModule.useState(userGameSettingsService.ReducedMotion)
-	reactModule.useEffect(function() --[[ line: 47 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userGameSettingsService (copy), var19 (ref)
-		local var24 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(function() --[[ line: 48 ]]
+		local var24 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
 			-- upvalues: var19 (copy), userGameSettingsService (copy)
 			var19(userGameSettingsService.ReducedMotion)
 		end)
 		
-		return function() --[[ line: 51 ]]
+		return function()
 			-- upvalues: var24 (ref)
 			var24:Disconnect()
 		end
 	end, {})
-	local var20 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), var17 (ref), var18 (ref)
 		local var25 = var16.createNewNavigator({
 			transparent = true,
@@ -71,7 +71,7 @@ function ConversationStackNavigatorConnector(p0) --[[ line: 40 ]]
 			var21 = reactModule.createElement(chatTopBarBaseModule, {
 				screenName = enumScreensModule.SquadLobby,
 				navigation = var16.navigation,
-				renderRight = function() --[[ line: 92 ]]
+				renderRight = function()
 					-- upvalues: reactModule (copy), squadAddFriendsIconButtonModule (copy), var16 (ref)
 					return reactModule.createElement(squadAddFriendsIconButtonModule, { navigation = var16.navigation })
 				end
@@ -97,10 +97,10 @@ end
 local conversationStackNavigatorConnectorWrapper = reactModule.PureComponent:extend("ConversationStackNavigatorConnectorWrapper")
 conversationStackNavigatorConnectorWrapper.router = conversationStackNavigatorModule().router
 
-function conversationStackNavigatorConnectorWrapper.render(p1) --[[ line: 129 ]]
+function conversationStackNavigatorConnectorWrapper.render(p1)
 	-- upvalues: reactModule (ref), cryoModule (ref), conversationStackNavigatorConnectorWrapper (ref)
 	return reactModule.createElement(ConversationStackNavigatorConnector, cryoModule.Dictionary.join(p1.props, {
-		setRouter = function(value) --[[ line: 133 ]]
+		setRouter = function(value)
 			-- upvalues: conversationStackNavigatorConnectorWrapper (copy)
 			conversationStackNavigatorConnectorWrapper.router = value
 		end

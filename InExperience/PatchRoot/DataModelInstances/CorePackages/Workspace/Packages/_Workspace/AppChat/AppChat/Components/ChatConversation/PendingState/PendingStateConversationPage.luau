@@ -17,37 +17,37 @@ local t = {
 	networkErrorText = "PLACEHOLDER There was a network error, please try again later",
 	shouldShowPhoneVerificationUpsell = false,
 	shouldShowIneligibleModal = false,
-	onConversationUnmount = function(_) --[[ line: 46 ]] end,
-	navigateToToast = function(_) --[[ line: 47 ]] end,
-	navigateBack = function() --[[ line: 48 ]] end
+	onConversationUnmount = function(_) end,
+	navigateToToast = function(_) end,
+	navigateBack = function() end
 }
 
-return memo(function(p0) --[[ line: 56 | named "PendingStateConversationPage" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useState (ref), useCallback (ref), useRef (ref), conversationExitTypeModule (ref), useEffect (ref), reactModule (ref), pendingStateIndicatorModule (ref), pendingStateModalContainerModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local style = var7.style or useStyle()
 	local var9, var10 = useState(0)
-	local var11 = useCallback(function(p1) --[[ line: 62 ]]
+	local var11 = useCallback(function(p1)
 		-- upvalues: var10 (ref)
 		var10(p1)
 	end, { var10 })
-	local var12 = useCallback(function() --[[ line: 66 ]]
+	local var12 = useCallback(function()
 		-- upvalues: var7 (ref)
 		var7.navigateToToast({
 			toastProps = { toastContent = { toastTitle = var7.networkErrorText } }
 		})
 	end, { var7.navigateToToast, var7.networkErrorText })
 	local var13 = useRef(conversationExitTypeModule.Default)
-	local var14 = useCallback(function(_, p2, p3) --[[ line: 78 ]]
+	local var14 = useCallback(function(_, p2, p3)
 		-- upvalues: var7 (ref), var13 (ref), conversationExitTypeModule (copy)
 		if not var7.wideMode and p2 == Enum.SwipeDirection.Right and p3 == 1 then
 			var13.current = conversationExitTypeModule.SwipedRight
 			var7.navigateBack()
 		end
 	end, { var7.wideMode, var7.navigateBack })
-	useEffect(function() --[[ line: 85 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var13 (ref), conversationExitTypeModule (copy)
-		return function() --[[ line: 86 ]]
+		return function()
 			-- upvalues: var7 (copy), var13 (copy), conversationExitTypeModule (copy)
 			var7.onConversationUnmount(var13.current)
 			var13.current = conversationExitTypeModule.Default

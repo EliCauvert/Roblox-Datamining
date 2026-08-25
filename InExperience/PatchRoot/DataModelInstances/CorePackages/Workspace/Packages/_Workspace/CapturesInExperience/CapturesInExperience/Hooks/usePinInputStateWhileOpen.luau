@@ -2,9 +2,9 @@
 local reactModule = require(script.Parent.Parent.Parent.React)
 local default = Enum.MouseBehavior.Default
 
-return function(p0, p1) --[[ line: 30 ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), userInputService (ref), default (ref)
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), p1 (ref), userInputService (copy), default (copy)
 		if p0 then
 			local var2 = if p1 ~= nil then userInputService else p1
@@ -14,7 +14,7 @@ return function(p0, p1) --[[ line: 30 ]]
 				MouseIcon = var2.MouseIcon
 			}
 			
-			local function _(p2, p3) --[[ line: 44 | named "pin" ]]
+			local function _(p2, p3)
 				-- upvalues: var2 (ref)
 				var2[p2] = p3
 			end
@@ -23,9 +23,9 @@ return function(p0, p1) --[[ line: 30 ]]
 			var2.MouseIconEnabled = true
 			var2.MouseIcon = ""
 			
-			local function watch(p4, p5) --[[ line: 52 ]]
+			local function watch(p4, p5)
 				-- upvalues: var2 (ref), t (ref)
-				return var2:GetPropertyChangedSignal(p4):Connect(function() --[[ line: 53 ]]
+				return var2:GetPropertyChangedSignal(p4):Connect(function()
 					-- upvalues: var2 (copy), p4 (ref), p5 (ref), t (copy)
 					local var11 = var2[p4]
 					
@@ -38,7 +38,7 @@ return function(p0, p1) --[[ line: 30 ]]
 			
 			local t_1 = {}
 			local var6 = "MouseBehavior"
-			local var7 = var2:GetPropertyChangedSignal("MouseBehavior"):Connect(function() --[[ line: 53 ]]
+			local var7 = var2:GetPropertyChangedSignal("MouseBehavior"):Connect(function()
 				-- upvalues: var2 (ref), var6 (ref), default (ref), t (ref)
 				local var11 = var2[var6]
 				
@@ -52,7 +52,7 @@ return function(p0, p1) --[[ line: 30 ]]
 			local var10 = true
 			-- Unknown statement at pc 13: <SetList>
 			
-			return function() --[[ line: 68 ]]
+			return function()
 				-- upvalues: t_1 (ref), var2 (ref), t (ref)
 				for i, v in t_1 do
 					v:Disconnect()

@@ -3,7 +3,7 @@ local _ = require(parent.DiscoveryTypes)
 local reportWarning = require(parent.DiscoveryAnalytics).Points.reportWarning
 local loggingProtocolModule = require(parent.LoggingProtocol)
 
-local function removeFromAvailableCells(p0, p1, p2) --[[ line: 18 ]]
+local function removeFromAvailableCells(p0, p1, p2)
 	for i = 1, #p0 do
 		local var6 = p0[i]
 		
@@ -16,7 +16,7 @@ local function removeFromAvailableCells(p0, p1, p2) --[[ line: 18 ]]
 	end
 end
 
-local function _(p3, p4, p5, p6, p7, p8, p9) --[[ line: 28 | named "markOccupiedCell" ]]
+local function _(p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: removeFromAvailableCells (ref)
 	p3[p5] = p3[p5] or {}
 	p3[p5][p4] = p6
@@ -29,11 +29,11 @@ local function _(p3, p4, p5, p6, p7, p8, p9) --[[ line: 28 | named "markOccupied
 	return maxValue, maxValue_1
 end
 
-local _ = function(p10, p11, p12) --[[ line: 53 | named "isCellOccupied" ]]
+local _ = function(p10, p11, p12)
 	return if p10[p12] then p10[p12][p11] ~= nil else false
 end
 
-local function canInsertItem(p13, p14, p15, p16, p17, p18) --[[ line: 60 ]]
+local function canInsertItem(p13, p14, p15, p16, p17, p18)
 	if p18 < p14 + p16 - 1 then
 		return false
 	end
@@ -58,7 +58,7 @@ local function canInsertItem(p13, p14, p15, p16, p17, p18) --[[ line: 60 ]]
 	return true
 end
 
-local function markItemCells(p19, p20, p21, p22, p23, p24, p25, p26, p27) --[[ line: 85 ]]
+local function markItemCells(p19, p20, p21, p22, p23, p24, p25, p26, p27)
 	-- upvalues: removeFromAvailableCells (ref)
 	p19[p21] = p19[p21] or {}
 	p19[p21][p20] = p22
@@ -93,7 +93,7 @@ local function markItemCells(p19, p20, p21, p22, p23, p24, p25, p26, p27) --[[ l
 	return var14, var15
 end
 
-local function findPinnedInsertionPointAndMarkOccupiedItem(p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38) --[[ line: 114 ]]
+local function findPinnedInsertionPointAndMarkOccupiedItem(p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38)
 	-- upvalues: reportWarning (ref), loggingProtocolModule (ref), canInsertItem (ref), markItemCells (ref)
 	p37 = p37 or 1
 	
@@ -130,7 +130,7 @@ local function findPinnedInsertionPointAndMarkOccupiedItem(p28, p29, p30, p31, p
 	return p33, p34, nil
 end
 
-local function findInsertionPointAndMarkOccupiedItem(p39, p40, p41, p42, p43, p44, p45, p46) --[[ line: 187 ]]
+local function findInsertionPointAndMarkOccupiedItem(p39, p40, p41, p42, p43, p44, p45, p46)
 	-- upvalues: reportWarning (ref), loggingProtocolModule (ref), canInsertItem (ref), markItemCells (ref)
 	if p43 < p41 then
 		reportWarning(loggingProtocolModule.default, "InvalidGrid", `Item {p40} has colSpan {p41} greater than itemsPerRow {p43}`)
@@ -164,7 +164,7 @@ local function findInsertionPointAndMarkOccupiedItem(p39, p40, p41, p42, p43, p4
 	return p44, p45
 end
 
-return function(p47, p48, p49) --[[ line: 256 | named "calculateGridLayout" ]]
+return function(p47, p48, p49)
 	-- upvalues: findPinnedInsertionPointAndMarkOccupiedItem (ref), findInsertionPointAndMarkOccupiedItem (ref)
 	if not p48 or p48 <= 0 then
 		return { totalRows = 0, totalCols = 0, layout = {} }

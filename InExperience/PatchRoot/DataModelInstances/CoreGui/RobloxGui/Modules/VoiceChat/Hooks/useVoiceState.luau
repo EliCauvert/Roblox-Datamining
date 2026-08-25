@@ -31,12 +31,12 @@ local t = {
 	[var7.Failed] = VOICE_STATE.ERROR
 }
 
-local function _(p0) --[[ line: 74 | named "mapVoiceChatStateToVoiceState" ]]
+local function _(p0)
 	-- upvalues: t (ref), VOICE_STATE (ref)
 	return if t[p0] then t[p0] else VOICE_STATE.MUTED
 end
 
-local _ = function(p1) --[[ line: 82 | named "mapParticipantStateToVoiceState" ]]
+local _ = function(p1)
 	-- upvalues: VOICE_STATE (ref)
 	local INACTIVE = VOICE_STATE.INACTIVE
 	
@@ -62,12 +62,12 @@ local _ = function(p1) --[[ line: 82 | named "mapParticipantStateToVoiceState" ]
 	return INACTIVE
 end
 
-return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
+return function(p2, p3, p4)
 	-- upvalues: default (ref), reactModule (ref), voiceStateContextModule (ref), VOICE_STATE (ref), var6 (ref), t (ref), var7 (write), blockedStatusChangedEvent (ref)
 	local var9 = if p4 then p4.voiceChatServiceManager else default
 	local var10 = reactModule.useContext(voiceStateContextModule.Context)
 	local var11, var12 = reactModule.useState(VOICE_STATE.HIDDEN)
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), p2 (ref), p3 (ref), var12 (ref), VOICE_STATE (copy), var6 (copy), var11 (ref), t (copy), var9 (ref), var7 (copy), blockedStatusChangedEvent (copy)
 		if var10.voiceEnabled and p2 and not p3 then
 			local var13 = tonumber(p2)
@@ -77,14 +77,14 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 			local t_1 = {}
 			local var18 = false
 			
-			local function _(p5) --[[ line: 117 | named "updateVoiceState" ]]
+			local function _(p5)
 				-- upvalues: var18 (write), var12 (copy)
 				if not var18 then
 					var12(p5)
 				end
 			end
 			
-			local function setVoiceEnabled(value) --[[ line: 123 ]]
+			local function setVoiceEnabled(value)
 				-- upvalues: var11 (copy), var15 (ref), t (copy), VOICE_STATE (copy), var9 (copy), var14 (ref), var16 (write), var7 (copy), var18 (write), var12 (copy)
 				local var20 = var11
 				
@@ -123,13 +123,13 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 			end
 			
 			setVoiceEnabled(var10.voiceState)
-			delay(0, function() --[[ line: 157 ]]
+			delay(0, function()
 				-- upvalues: var18 (write), setVoiceEnabled (ref), var10 (copy), var15 (ref), t_1 (ref), var9 (copy), VOICE_STATE (copy), var12 (copy), var14 (ref), var16 (write), var13 (ref), blockedStatusChangedEvent (copy)
 				if var18 then return end
 				setVoiceEnabled(var10.voiceState)
 				
 				if var15 then
-					table.insert(t_1, var9.talkingChanged.Event:Connect(function(p6) --[[ line: 168 ]]
+					table.insert(t_1, var9.talkingChanged.Event:Connect(function(p6)
 						-- upvalues: VOICE_STATE (copy), var18 (copy), var12 (copy)
 						local var22 = if p6 then VOICE_STATE.TALKING else VOICE_STATE.INACTIVE
 						
@@ -137,7 +137,7 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 							var12(var22)
 						end
 					end))
-					table.insert(t_1, var9.muteChanged.Event:Connect(function(p7) --[[ line: 175 ]]
+					table.insert(t_1, var9.muteChanged.Event:Connect(function(p7)
 						-- upvalues: VOICE_STATE (copy), var18 (copy), var12 (copy)
 						local var23 = if p7 then VOICE_STATE.MUTED else VOICE_STATE.INACTIVE
 						
@@ -148,7 +148,7 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 					
 					return
 				end
-				table.insert(t_1, var9.participantsUpdate.Event:Connect(function(p8) --[[ line: 183 ]]
+				table.insert(t_1, var9.participantsUpdate.Event:Connect(function(p8)
 					-- upvalues: var14 (copy), var16 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy)
 					local var24 = p8[var14]
 					
@@ -183,7 +183,7 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 						end
 					end
 				end))
-				table.insert(t_1, var9.participantLeft.Event:Connect(function(_, p9) --[[ line: 195 ]]
+				table.insert(t_1, var9.participantLeft.Event:Connect(function(_, p9)
 					-- upvalues: var13 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy)
 					if p9 == var13 then
 						local HIDDEN = VOICE_STATE.HIDDEN
@@ -193,7 +193,7 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 						end
 					end
 				end))
-				table.insert(t_1, var9.participantJoined.Event:Connect(function(_, p10) --[[ line: 204 ]]
+				table.insert(t_1, var9.participantJoined.Event:Connect(function(_, p10)
 					-- upvalues: var13 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy)
 					if p10 == var13 then
 						local HIDDEN = VOICE_STATE.HIDDEN
@@ -203,7 +203,7 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 						end
 					end
 				end))
-				table.insert(t_1, blockedStatusChangedEvent:Connect(function(p11, p12) --[[ line: 215 ]]
+				table.insert(t_1, blockedStatusChangedEvent:Connect(function(p11, p12)
 					-- upvalues: var13 (copy), var16 (copy), VOICE_STATE (copy), var18 (copy), var12 (copy), var9 (copy), var14 (copy)
 					if var13 == p11 then
 						if p12 then
@@ -255,10 +255,10 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 				end))
 			end)
 			
-			return function() --[[ line: 235 ]]
+			return function()
 				-- upvalues: var18 (write), t_1 (ref)
 				var18 = true
-				delay(0, function() --[[ line: 238 ]]
+				delay(0, function()
 					-- upvalues: t_1 (copy)
 					for i, v in t_1 do
 						v:disconnect()
@@ -268,7 +268,7 @@ return function(p2, p3, p4) --[[ line: 98 | named "useVoiceState" ]]
 		end
 		var12(VOICE_STATE.HIDDEN)
 		
-		return function() --[[ line: 106 ]] end
+		return function() end
 	end, { p2, var10.voiceState, p3 == true })
 	
 	return var11

@@ -24,7 +24,7 @@ local fFlagProfilePlatformEnableTransferTooltipModule = require(profilePlatform.
 local fFlagProfileTradeItemsExposureLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
 local useTradeItemsExposureLoggerModule = require(profilePlatform.Hooks.useTradeItemsExposureLogger)
 
-return function(p0) --[[ line: 38 | named "ProfileActionBarContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useNavigation (ref), useFocusGuiObject (ref), useLastInputMode (ref), useProfileAnalyticsContextModule (ref), fFlagProfileTradeItemsExposureLoggingModule (ref), useTradeItemsExposureLoggerModule (ref), reactModule (ref), eventNamesModule (ref), constantsModule (ref), enumsModule (ref), useMapJsonToProfileActionsModule (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), useProfileJsonComponentModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), useEffectOnMount (ref), socialStopwatchModule (ref), loadingStagesExtensionModule (ref), profileActionBarWithTransferTooltipModule (ref), profileActionBarModule (ref)
 	local profileId = useProfileWrapperContextModule().profileId
 	local var19 = useNavigation()
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 38 | named "ProfileActionBarContainer" ]]
 	local var26 = reactModule.useRef(nil)
 	local var27 = reactModule.useRef(nil)
 	local var28 = reactModule.useRef(nil)
-	local var29 = reactModule.useCallback(function() --[[ line: 54 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), var28 (ref), var22 (ref), eventNamesModule (copy), fFlagProfileTradeItemsExposureLoggingModule (copy), var23 (write), constantsModule (copy), var25 (ref), var26 (ref), var19 (ref), enumsModule (copy)
 		if var24 then
 			if var28 and var28.current then
@@ -50,11 +50,11 @@ return function(p0) --[[ line: 38 | named "ProfileActionBarContainer" ]]
 				var23()
 			end
 			var19.navigate(enumsModule.Screens.ContextualMenu, {
-				[constantsModule.Navigation.ON_CLOSE] = function() --[[ line: 68 ]]
+				[constantsModule.Navigation.ON_CLOSE] = function()
 					-- upvalues: var25 (copy)
 					var25(false)
 				end,
-				[constantsModule.Navigation.GET_ROOT_ELEMENT_REF] = function() --[[ line: 71 ]]
+				[constantsModule.Navigation.GET_ROOT_ELEMENT_REF] = function()
 					-- upvalues: var26 (copy)
 					return var26.current
 				end,
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 38 | named "ProfileActionBarContainer" ]]
 		var22,
 		if fFlagProfileTradeItemsExposureLoggingModule then var23 else nil
 	})
-	reactModule.useEffect(function() --[[ line: 87 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref), var21 (ref), var20 (ref)
 		if var27.current and var21 == "Focus" then
 			var20(var27.current)
@@ -81,7 +81,7 @@ return function(p0) --[[ line: 38 | named "ProfileActionBarContainer" ]]
 		local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
 		var32 = fFlagProfilePlatformEnableCurrencyTransfer and (actions.contextual ~= nil and table.find(actions.contextual, enumsModule.ProfileActions.CurrencyTransfer) ~= nil)
 	end
-	useEffectOnMount(function() --[[ line: 102 ]]
+	useEffectOnMount(function()
 		-- upvalues: socialStopwatchModule (copy), var22 (ref), eventNamesModule (copy), loadingStagesExtensionModule (copy)
 		local var34 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
 		var22.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {

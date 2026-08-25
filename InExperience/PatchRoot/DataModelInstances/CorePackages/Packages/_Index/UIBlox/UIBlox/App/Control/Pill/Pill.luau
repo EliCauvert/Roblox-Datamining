@@ -33,14 +33,14 @@ pill.defaultProps = {
 	isLoading = false
 }
 
-function pill.init(p0) --[[ line: 55 ]]
+function pill.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0.state = { controlState = controlStateModule.Initialize }
 end
 
-function pill.render(p1) --[[ line: 61 ]]
+function pill.render(p1)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), roactModule (ref), interactableModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), skeleton (ref), radius (ref)
-	return withStyleModule(function(p2) --[[ line: 62 ]]
+	return withStyleModule(function(p2)
 		-- upvalues: p1 (ref), controlStateModule (copy), getContentStyleModule (copy), getIconSizeModule (copy), iconSizeModule (copy), getTextSizeModule (copy), roactModule (copy), interactableModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), skeleton (copy), radius (copy)
 		local var24
 		local font = p2.Font
@@ -81,7 +81,7 @@ function pill.render(p1) --[[ line: 61 ]]
 				LayoutOrder = 1,
 				isDisabled = isDisabled,
 				[roactModule.Event.Activated] = if not isLoading then onActivated else nil,
-				onStateChanged = function(_, p3) --[[ line: 106 ]]
+				onStateChanged = function(_, p3)
 					-- upvalues: p1 (copy)
 					p1:setState({ controlState = p3 })
 				end

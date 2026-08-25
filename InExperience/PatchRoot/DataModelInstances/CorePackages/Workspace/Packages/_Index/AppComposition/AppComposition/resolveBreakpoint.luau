@@ -12,7 +12,7 @@ local list = {
 	breakpoint.XLarge, breakpoint.XXLarge
 }
 
-return function(p0) --[[ line: 26 | named "resolveBreakpoint" ]]
+return function(p0)
 	-- upvalues: list (ref), t (ref), breakpoint (ref)
 	for i, v in list do
 		if p0 <= (t[v] or 0) then

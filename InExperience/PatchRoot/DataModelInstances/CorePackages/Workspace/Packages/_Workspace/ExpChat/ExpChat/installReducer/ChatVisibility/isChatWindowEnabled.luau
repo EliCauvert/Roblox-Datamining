@@ -11,28 +11,28 @@ return roduxModule.createReducer({
 	_topBarVisibility = true,
 	value = true
 }, {
-	[require(actions.ChatWindowConfigurationEnabled).name] = function(p0, p1) --[[ line: 29 ]]
+	[require(actions.ChatWindowConfigurationEnabled).name] = function(p0, p1)
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p0, {
 			_propertyEnabled = p1.enabled,
 			value = p0._topBarVisibility and (p0._coreGuiEnabled and p1.enabled)
 		})
 	end,
-	[require(actions.ChatTopBarButtonActivated).name] = function(p2, p3) --[[ line: 36 ]]
+	[require(actions.ChatTopBarButtonActivated).name] = function(p2, p3)
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p2, {
 			_topBarVisibility = p3.isVisible,
 			value = p2._propertyEnabled and (p2._coreGuiEnabled and p3.isVisible)
 		})
 	end,
-	[require(actions.SetCoreGuiEnabledChanged).name] = function(p4, p5) --[[ line: 43 ]]
+	[require(actions.SetCoreGuiEnabledChanged).name] = function(p4, p5)
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p4, {
 			_coreGuiEnabled = p5.enabled,
 			value = p4._propertyEnabled and (p4._topBarVisibility and p5.enabled)
 		})
 	end,
-	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p6, p7) --[[ line: 50 ]]
+	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p6, p7)
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p6, {
 			_coreGuiEnabled = p7.isChatCoreGuiEnabled,

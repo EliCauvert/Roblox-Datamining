@@ -2,11 +2,11 @@
 local playersService = game:GetService("Players")
 local promiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
 
-return function(p0) --[[ line: 21 | named "userOwnsGamePass" ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), playersService (ref), marketplaceService (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 22 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: playersService (copy), marketplaceService (copy), p0 (ref)
-		task.spawn(function() --[[ line: 23 ]]
+		task.spawn(function()
 			-- upvalues: playersService (copy), p2 (ref), marketplaceService (copy), p0 (copy), p1 (ref)
 			local localPlayer = playersService.LocalPlayer
 			
@@ -15,7 +15,7 @@ return function(p0) --[[ line: 21 | named "userOwnsGamePass" ]]
 				
 				return
 			end
-			local ok, status = pcall(function() --[[ line: 29 ]]
+			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), localPlayer (ref), p0 (copy)
 				return marketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, p0)
 			end)

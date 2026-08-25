@@ -34,7 +34,7 @@ local list = {
 }
 local t = { skipFetch = true }
 
-return function(p0, p1) --[[ line: 52 ]]
+return function(p0, p1)
 	-- upvalues: list (ref), useLocalUserId (ref), useGetRecommendationsModule (ref), useFriendsListOrderedByPresence (ref), fIntFriendsCarouselInitialFetchSize (ref), prefetchFriendGameMedia (ref), usePrefetchInGameFriendsMedia (ref), fFlagFixIsConsoleCheckForSocialCarousel (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableRecommendationsForPCGDK (ref), thirdPartyUserService (ref), fFlagSocialCarouselShareQREnabled (ref), useIsSpatial (ref), useSelector (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), getDeepValueModule (ref), constantsModule (ref), useGetFriendsCountByUserId (ref), t (ref), fIntSocialCarouselShowRecsLimit (ref), reactModule (ref), tileGroup (ref), tile (ref), cryoModule (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref)
 	local var20
 	p1 = p1 or list
@@ -52,7 +52,7 @@ return function(p0, p1) --[[ line: 52 ]]
 		local _ = usePreferredInput() == responsiveModule.Input.Directional
 	var20 = if fFlagEnableRecommendationsForPCGDK and thirdPartyUserService then thirdPartyUserService:HaveActiveUser() else usePreferredInput() == responsiveModule.Input.Directional
 	local var21 = if fFlagSocialCarouselShareQREnabled then useIsSpatial() else false
-	local var22 = useSelector(function(p2) --[[ line: 71 ]]
+	local var22 = useSelector(function(p2)
 		-- upvalues: fFlagFriendsCountDataHydrationMigrationEnabled (copy), getDeepValueModule (copy), p0 (ref), constantsModule (copy), var17 (ref)
 		return {
 			friendCount = if fFlagFriendsCountDataHydrationMigrationEnabled then nil else getDeepValueModule(p2, string.format("%s.Friends.countsByUserId.%s", p0 or constantsModule.RODUX_KEY, var17 or "")) or 0,
@@ -63,7 +63,7 @@ return function(p0, p1) --[[ line: 52 ]]
 	local var24 = var20 and var23 <= fIntSocialCarouselShowRecsLimit
 	local var25 = var23 == 0 and not var20
 	local var26 = fFlagSocialCarouselShareQREnabled and (var23 == 0 and (not var20 and not var21))
-	local var27 = reactModule.useMemo(function() --[[ line: 100 ]]
+	local var27 = reactModule.useMemo(function()
 		-- upvalues: tileGroup (copy), var19 (ref), tile (copy), var24 (ref), var18 (ref), var26 (ref), var25 (ref)
 		return {
 			[tileGroup.FriendsList] = {
@@ -88,7 +88,7 @@ return function(p0, p1) --[[ line: 52 ]]
 	})
 	
 	return {
-		tiles = reactModule.useMemo(function() --[[ line: 133 ]]
+		tiles = reactModule.useMemo(function()
 			-- upvalues: p1 (ref), var27 (ref), cryoModule (copy)
 			local t = {}
 			

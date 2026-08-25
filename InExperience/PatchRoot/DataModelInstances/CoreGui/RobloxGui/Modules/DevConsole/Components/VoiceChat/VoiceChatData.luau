@@ -3,7 +3,7 @@ local voiceChatService = game:GetService("VoiceChatService")
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 9 ]]
+function t.new()
 	-- upvalues: t (ref), signalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -14,22 +14,22 @@ function t.new() --[[ line: 9 ]]
 	return t_1
 end
 
-function t:Signal() --[[ line: 19 ]]
+function t:Signal()
 	return self._statsUpdated
 end
 
-function t:getCurrentData() --[[ line: 23 ]]
+function t:getCurrentData()
 	return self._statsData
 end
 
-function t:isRunning() --[[ line: 27 ]]
+function t:isRunning()
 	return self._isRunning
 end
 
-function t:start() --[[ line: 31 ]]
+function t:start()
 	-- upvalues: voiceChatService (ref)
 	if voiceChatService and not self._statsListenerConnection then
-		self._statsListenerConnection = voiceChatService.VoiceChatStatsCollected:Connect(function() --[[ line: 33 ]]
+		self._statsListenerConnection = voiceChatService.VoiceChatStatsCollected:Connect(function()
 			-- upvalues: self (ref), voiceChatService (copy)
 			self._statsData = voiceChatService:lastVoiceChatStats()
 			self._statsUpdated:Fire(self._statsData)
@@ -38,7 +38,7 @@ function t:start() --[[ line: 31 ]]
 	end
 end
 
-function t:stop() --[[ line: 41 ]]
+function t:stop()
 	self._isRunning = false
 	
 	if self._statsListenerConnection then

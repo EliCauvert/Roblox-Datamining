@@ -28,7 +28,7 @@ t.SessionConstants = {
 }
 local _ = { SUBMIT = 1, ABANDON = 2 }
 
-function t.new(p0, p1, p2) --[[ line: 57 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref)
 	assert(p2, "Base context needs to be provided to ReportAbuseAnalytics")
 	local t_1 = { _eventStreamImpl = p0, _diagImpl = p1, _context = p2 }
@@ -37,7 +37,7 @@ function t.new(p0, p1, p2) --[[ line: 57 ]]
 	return t_1
 end
 
-function t:reportFormSubmitted(p3, p4, p5) --[[ line: 70 ]]
+function t:reportFormSubmitted(p3, p4, p5)
 	-- upvalues: t (ref), cryoModule (ref)
 	local text = self._context .. "_" .. t.DiagCounters.SuccessfulSubmissionTime
 	local text_1 = self._context .. "_" .. t.DiagCounters.SubmittedMethodOfAbuse .. "_" .. p4
@@ -47,24 +47,24 @@ function t:reportFormSubmitted(p3, p4, p5) --[[ line: 70 ]]
 	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormSubmitted, var6)
 end
 
-function t:reportFormAbandoned(p6, p7) --[[ line: 93 ]]
+function t:reportFormAbandoned(p6, p7)
 	-- upvalues: t (ref), cryoModule (ref)
 	local var7 = cryoModule.Dictionary.join(p7 or {}, { timeToExit = p6 })
 	self._diagImpl:reportStats(self._context .. "_" .. t.DiagCounters.AbandonedSubmissionTime, p6)
 	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FormAbandoned, var7)
 end
 
-function t:reportAnalyticsFieldChanged(p8) --[[ line: 108 ]]
+function t:reportAnalyticsFieldChanged(p8)
 	-- upvalues: t (ref)
 	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.FieldChanged, p8 or {})
 end
 
-function t:reportButtonClick(p9) --[[ line: 116 ]]
+function t:reportButtonClick(p9)
 	-- upvalues: t (ref)
 	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.ButtonActivated, p9 or {})
 end
 
-function t:reportInGameAbuseReportInteraction(p10) --[[ line: 129 ]]
+function t:reportInGameAbuseReportInteraction(p10)
 	-- upvalues: t (ref)
 	local abandonedSubmissionTime = t.DiagCounters.AbandonedSubmissionTime
 	
@@ -76,12 +76,12 @@ function t:reportInGameAbuseReportInteraction(p10) --[[ line: 129 ]]
 	self._eventStreamImpl:sendEventDeferred(self._context, t.ActionNames.InGameAbuseReport, p10)
 end
 
-function t:reportEventAndIncrement(p11, p12) --[[ line: 150 ]]
+function t:reportEventAndIncrement(p11, p12)
 	self._diagImpl:reportCounter(self._context .. "_" .. p11, 1)
 	self._eventStreamImpl:sendEventDeferred(self._context, p11, p12 or {})
 end
 
-function t.startAbuseReportSession(_, p13) --[[ line: 156 ]]
+function t.startAbuseReportSession(_, p13)
 	-- upvalues: sessionService (ref), t (ref)
 	if not sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then
 		sessionService:SetSession(t.SessionConstants.StructuralIdentifier.Level1, t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.StructuralIdentifier.AbuseReport)
@@ -92,12 +92,12 @@ function t.startAbuseReportSession(_, p13) --[[ line: 156 ]]
 	sessionService:SetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.DeleteOnGameLeave, "True")
 end
 
-function t.getAbuseReportSessionEntryPoint(_) --[[ line: 188 ]]
+function t.getAbuseReportSessionEntryPoint(_)
 	-- upvalues: sessionService (ref), t (ref)
 	return if sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then sessionService:GetMetadata(t.SessionConstants.StructuralIdentifier.AbuseReport, t.SessionConstants.Metadata.EntryPoint) else ""
 end
 
-function t.endAbuseReportSession(_) --[[ line: 202 ]]
+function t.endAbuseReportSession(_)
 	-- upvalues: sessionService (ref), t (ref)
 	if sessionService:SessionExists(t.SessionConstants.StructuralIdentifier.AbuseReport) then
 		sessionService:RemoveSession(t.SessionConstants.StructuralIdentifier.AbuseReport)

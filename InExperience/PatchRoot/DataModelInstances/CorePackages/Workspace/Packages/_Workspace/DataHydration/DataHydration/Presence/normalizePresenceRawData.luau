@@ -6,16 +6,16 @@ local t = {
 	[3] = presenceTypeModule.InStudio
 }
 
-local function _(p0) --[[ line: 34 | named "coerceStringField" ]]
+local function _(p0)
 	return if p0 == nil then "" else tostring(p0)
 end
 
-local function mapRawPresenceTypeToEnum(p1) --[[ line: 41 ]]
+local function mapRawPresenceTypeToEnum(p1)
 	-- upvalues: t (ref), presenceTypeModule (ref)
 	return if type(p1) == "number" then t[p1] or presenceTypeModule.Offline elseif type(p1) == "string" and (p1 == "Offline" or p1 == "Online" or (p1 == "InGame" or p1 == "InStudio")) then p1 elseif p1 == presenceTypeModule.Offline or p1 == presenceTypeModule.Online or (p1 == presenceTypeModule.InGame or p1 == presenceTypeModule.InStudio) then p1 else presenceTypeModule.Offline
 end
 
-return function(p2, p3) --[[ line: 61 | named "fromApiPresenceTable" ]]
+return function(p2, p3)
 	-- upvalues: mapRawPresenceTypeToEnum (ref)
 	local var3 = if p2 then p2.userId else p3
 	

@@ -16,7 +16,7 @@ local _ = {
 	Failed = "Failed"
 }
 
-return function(p0, p1, p2, p3) --[[ line: 37 | named "useExperienceBannerImage" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: getGameMediaStore (ref), signalsReactModule (ref), experienceBannerImageAllowCustomDimensions (ref), reactModule (ref), dataStatus (ref), experienceBannerImageDefaultFallback (ref), gameMediaImageType (ref), url (ref)
 	local andFetchGameMedia = getGameMediaStore(false).getAndFetchGameMedia(p0)
 	local var6 = signalsReactModule.useSignalState(andFetchGameMedia.data)
@@ -24,7 +24,7 @@ return function(p0, p1, p2, p3) --[[ line: 37 | named "useExperienceBannerImage"
 	local var8 = if experienceBannerImageAllowCustomDimensions then p2 or 768 else 768
 	local var9 = if experienceBannerImageAllowCustomDimensions then p3 or 432 else 432
 	
-	return reactModule.useMemo(function() --[[ line: 54 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var7 (ref), dataStatus (copy), experienceBannerImageDefaultFallback (copy), var6 (ref), gameMediaImageType (copy), var8 (ref), var9 (ref), p1 (ref), url (copy)
 		if var7 == dataStatus.NotReady then
 			return { status = "Loading", url = nil }

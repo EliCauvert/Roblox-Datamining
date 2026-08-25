@@ -16,7 +16,7 @@ local useKeyboardEnabledModule = require(parent.Hooks.useKeyboardEnabled)
 local usePlayShutterSoundModule = require(parent.Hooks.usePlayShutterSound)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 
-local _ = function() --[[ line: 25 ]]
+local _ = function()
 	-- upvalues: getCaptureShortcutSetupKeysModule (ref), userInputService (ref)
 	for i, v in getCaptureShortcutSetupKeysModule() do
 		if userInputService:IsKeyDown(v) then
@@ -26,25 +26,25 @@ local _ = function() --[[ line: 25 ]]
 	return false
 end
 
-return function() --[[ line: 35 ]]
+return function()
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useSelector (ref), constantsModule (ref), usePlayShutterSoundModule (ref), useKeyboardEnabledModule (ref), useEffect (ref), socialStopwatchModule (ref), eventNamesModule (ref), takeCaptureModule (ref), contextActionService (ref), getCaptureShortcutSetupKeysModule (ref), userInputService (ref)
 	local var12 = useAnalyticsModule()
 	local var13 = useDispatch()
-	local var14 = useSelector(function(p0) --[[ line: 39 ]]
+	local var14 = useSelector(function(p0)
 		-- upvalues: constantsModule (copy)
 		return p0[constantsModule.RoduxKey].IsActive
 	end)
-	local var15 = useSelector(function(p1) --[[ line: 43 ]]
+	local var15 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
 	local var16 = usePlayShutterSoundModule()
 	local var17 = useKeyboardEnabledModule()
-	useEffect(function() --[[ line: 50 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), var15 (ref), var16 (ref), socialStopwatchModule (copy), var12 (ref), eventNamesModule (copy), var13 (ref), takeCaptureModule (copy), contextActionService (copy), getCaptureShortcutSetupKeysModule (copy), userInputService (copy)
 		if not var17 then return end
 		if var15 then
-			local var18 = function() --[[ line: 59 ]]
+			local var18 = function()
 				-- upvalues: var16 (copy), socialStopwatchModule (copy), var12 (copy), eventNamesModule (copy), var13 (copy), takeCaptureModule (copy)
 				var16()
 				
@@ -56,7 +56,7 @@ return function() --[[ line: 35 ]]
 				var13(takeCaptureModule())
 			end
 			
-			contextActionService:BindCoreAction("CaptureShortcutAction", function(_, p2) --[[ line: 70 ]]
+			contextActionService:BindCoreAction("CaptureShortcutAction", function(_, p2)
 				-- upvalues: getCaptureShortcutSetupKeysModule (copy), userInputService (copy), var18 (ref)
 				if p2 == Enum.UserInputState.Begin then
 					local var19
@@ -75,7 +75,7 @@ return function() --[[ line: 35 ]]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.One)
 			
-			return function() --[[ line: 79 ]]
+			return function()
 				-- upvalues: contextActionService (copy)
 				contextActionService:UnbindCoreAction("CaptureShortcutAction")
 			end

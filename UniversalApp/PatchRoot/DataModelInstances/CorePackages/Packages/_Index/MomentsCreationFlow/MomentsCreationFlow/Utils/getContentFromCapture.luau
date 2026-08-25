@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 2 | named "getContentFromCapture" ]]
+﻿return function(p0)
 	return Content.fromObject(p0)
 end

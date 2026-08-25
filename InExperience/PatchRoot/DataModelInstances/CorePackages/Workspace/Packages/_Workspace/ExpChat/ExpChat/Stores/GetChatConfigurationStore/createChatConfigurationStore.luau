@@ -6,7 +6,7 @@ local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local defaultSettingsModule = require(expChat.installReducer.BubbleChat.DefaultSettings)
 
-return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
+return function()
 	-- upvalues: defaultSettingsModule (ref), expChat (ref), createSignal (ref), tutilsModule (ref), createComputed (ref)
 	local cloned = table.clone(defaultSettingsModule)
 	local configModule = require(expChat.Config)
@@ -60,9 +60,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 		setChatWindowSettings = var12,
 		setChatInputBarSettings = var14,
 		setChannelTabsSettings = var16,
-		mergeBubbleChatSettings = function(value) --[[ line: 163 ]]
+		mergeBubbleChatSettings = function(value)
 			-- upvalues: var10 (ref)
-			var10(function(p0) --[[ line: 164 ]]
+			var10(function(p0)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p0)
 				
@@ -72,9 +72,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		mergeChatWindowSettings = function(value) --[[ line: 173 ]]
+		mergeChatWindowSettings = function(value)
 			-- upvalues: var12 (ref)
-			var12(function(p1) --[[ line: 174 ]]
+			var12(function(p1)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p1)
 				
@@ -84,9 +84,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		mergeChatInputBarSettings = function(value) --[[ line: 183 ]]
+		mergeChatInputBarSettings = function(value)
 			-- upvalues: var14 (ref)
-			var14(function(p2) --[[ line: 184 ]]
+			var14(function(p2)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p2)
 				
@@ -96,9 +96,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		mergeChannelTabsSettings = function(value) --[[ line: 193 ]]
+		mergeChannelTabsSettings = function(value)
 			-- upvalues: var16 (ref)
-			var16(function(p3) --[[ line: 194 ]]
+			var16(function(p3)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p3)
 				
@@ -108,9 +108,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		setBubbleChatProperty = function(value, p4) --[[ line: 203 ]]
+		setBubbleChatProperty = function(value, p4)
 			-- upvalues: var10 (ref)
-			var10(function(p5) --[[ line: 204 ]]
+			var10(function(p5)
 				-- upvalues: value (ref), p4 (ref)
 				local cloned = table.clone(p5)
 				cloned[value] = p4
@@ -118,9 +118,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		setChatWindowProperty = function(value, p6) --[[ line: 211 ]]
+		setChatWindowProperty = function(value, p6)
 			-- upvalues: var12 (ref)
-			var12(function(p7) --[[ line: 212 ]]
+			var12(function(p7)
 				-- upvalues: value (ref), p6 (ref)
 				local cloned = table.clone(p7)
 				cloned[value] = p6
@@ -128,9 +128,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		setChatInputBarProperty = function(value, p8) --[[ line: 219 ]]
+		setChatInputBarProperty = function(value, p8)
 			-- upvalues: var14 (ref)
-			var14(function(p9) --[[ line: 220 ]]
+			var14(function(p9)
 				-- upvalues: value (ref), p8 (ref)
 				local cloned = table.clone(p9)
 				cloned[value] = p8
@@ -138,9 +138,9 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		setChannelTabsProperty = function(value, p10) --[[ line: 227 ]]
+		setChannelTabsProperty = function(value, p10)
 			-- upvalues: var16 (ref)
-			var16(function(p11) --[[ line: 228 ]]
+			var16(function(p11)
 				-- upvalues: value (ref), p10 (ref)
 				local cloned = table.clone(p11)
 				cloned[value] = p10
@@ -148,7 +148,7 @@ return function() --[[ line: 111 | named "createChatConfigurationStore" ]]
 				return cloned
 			end)
 		end,
-		getIsBubbleChatEnabled = createComputed(function(p12) --[[ line: 157 ]]
+		getIsBubbleChatEnabled = createComputed(function(p12)
 			-- upvalues: var9 (ref)
 			return var9(p12).Enabled or false
 		end)

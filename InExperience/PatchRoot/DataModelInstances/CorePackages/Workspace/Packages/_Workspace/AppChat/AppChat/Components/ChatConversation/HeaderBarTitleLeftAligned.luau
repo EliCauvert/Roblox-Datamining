@@ -5,7 +5,7 @@ local conversationTitleWithFacePileModule = require(appChat.Components.ChatConve
 local useTokens = foundationModule.Hooks.useTokens
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 19 | named "HeaderBarTitleLeftAligned" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), conversationTitleWithFacePileModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		Size = UDim2.new(1, 0, 1, 0),

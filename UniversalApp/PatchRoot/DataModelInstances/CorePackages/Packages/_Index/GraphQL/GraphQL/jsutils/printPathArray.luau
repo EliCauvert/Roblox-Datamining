@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 
 return {
-	printPathArray = function(p0) --[[ line: 15 ]]
+	printPathArray = function(p0)
 		local t = {}
 		
 		for i = 1, #p0 do

@@ -4,23 +4,23 @@ local debugVisualizationsStaticContentModule = require(script.Parent.DebugVisual
 local slimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
 local slimTintContextFilter = game:DefineFastFlag("SlimTintContextFilter", false)
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 12 ]]
+	[chartHeaderNames[1]] = function(p0, p1)
 		return p0.name < p1.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 15 ]]
+	[chartHeaderNames[2]] = function(p2, p3)
 		return if p2.settingInfo.Value == p3.settingInfo.Value then p2.name < p3.name else p2.settingInfo.Value
 	end,
-	[chartHeaderNames[3]] = function(p4, p5) --[[ line: 18 ]]
+	[chartHeaderNames[3]] = function(p4, p5)
 		return if p4.settingInfo.Type == p5.settingInfo.Type then p4.name < p5.name else p4.settingInfo.Type < p5.settingInfo.Type
 	end,
-	[chartHeaderNames[4]] = function(p6, p7) --[[ line: 23 ]]
+	[chartHeaderNames[4]] = function(p6, p7)
 		return p6.name < p7.name
 	end
 }
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 31 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), signalModule (ref), chartHeaderNames (ref)
 	local t = {}
 	setmetatable(t, t_1)
@@ -34,7 +34,7 @@ function t_1.new() --[[ line: 31 ]]
 	return t
 end
 
-function t_1:setSortType(p8) --[[ line: 44 ]]
+function t_1:setSortType(p8)
 	-- upvalues: t (ref)
 	if t[p8] then
 		self._sortType = p8
@@ -46,19 +46,19 @@ function t_1:setSortType(p8) --[[ line: 44 ]]
 	error(string.format("attempted to pass invalid sortType: %s", tostring(p8)), 2)
 end
 
-function t_1:getSortType() --[[ line: 54 ]]
+function t_1:getSortType()
 	return self._sortType
 end
 
-function t_1:Signal() --[[ line: 58 ]]
+function t_1:Signal()
 	return self._visualizationsUpdated
 end
 
-function t_1:getCurrentData() --[[ line: 62 ]]
+function t_1:getCurrentData()
 	return self._sortedVisualizationData
 end
 
-function t_1:updateDebugVisualizationDataEntry(p9, p10) --[[ line: 68 ]]
+function t_1:updateDebugVisualizationDataEntry(p9, p10)
 	if p10 == nil then
 		self._visualizationsData[p9] = nil
 		
@@ -80,7 +80,7 @@ function t_1:updateDebugVisualizationDataEntry(p9, p10) --[[ line: 68 ]]
 	table.insert(self._sortedVisualizationData, {
 		name = p9,
 		settingInfo = self._visualizationsData[p9],
-		valueChangeCallback = function(p11, p12) --[[ line: 84 ]]
+		valueChangeCallback = function(p11, p12)
 			-- upvalues: self (ref)
 			self:_toggleValue(p11, p12)
 		end,
@@ -88,11 +88,11 @@ function t_1:updateDebugVisualizationDataEntry(p9, p10) --[[ line: 68 ]]
 	})
 end
 
-function t_1:isRunning() --[[ line: 95 ]]
+function t_1:isRunning()
 	return self._isRunning
 end
 
-function t_1:_toggleValue(p13, p14) --[[ line: 99 ]]
+function t_1:_toggleValue(p13, p14)
 	-- upvalues: slimDevConsole2 (ref), t (ref)
 	if slimDevConsole2 then
 		local var7 = self._visualizationsData[p13]
@@ -125,14 +125,14 @@ function t_1:_toggleValue(p13, p14) --[[ line: 99 ]]
 	end
 end
 
-function _constructInfo(p15, p16) --[[ line: 132 ]]
+function _constructInfo(p15, p16)
 	-- upvalues: slimDevConsole2 (ref), slimTintContextFilter (ref)
 	local var9 = nil
 	local t = nil
 	local enumItems = nil
 	
 	if slimDevConsole2 and p16.kind == "Dropdown" then
-		local ok, status = pcall(function() --[[ line: 138 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p16 (ref)
 			return settings():GetService(p16.service)
 		end)
@@ -187,7 +187,7 @@ function _constructInfo(p15, p16) --[[ line: 132 ]]
 	return t_1
 end
 
-function t_1:start() --[[ line: 194 ]]
+function t_1:start()
 	-- upvalues: debugVisualizationsStaticContentModule (ref), t (ref)
 	for i, v in pairs(debugVisualizationsStaticContentModule) do
 		self:updateDebugVisualizationDataEntry(i, _constructInfo(i, v))
@@ -196,7 +196,7 @@ function t_1:start() --[[ line: 194 ]]
 	self._isRunning = true
 end
 
-function t_1:stop() --[[ line: 202 ]]
+function t_1:stop()
 	self._isRunning = false
 end
 

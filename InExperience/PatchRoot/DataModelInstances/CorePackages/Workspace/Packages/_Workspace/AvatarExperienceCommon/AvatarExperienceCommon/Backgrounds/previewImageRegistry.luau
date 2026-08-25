@@ -1,15 +1,15 @@
 ﻿local t = {}
 
 return {
-	register = function(p0, p1) --[[ line: 5 ]]
+	register = function(p0, p1)
 		-- upvalues: t (write)
 		t[p0] = p1
 	end,
-	resolve = function(p2) --[[ line: 9 ]]
+	resolve = function(p2)
 		-- upvalues: t (write)
 		return t[p2]
 	end,
-	destroy = function(p3) --[[ line: 13 ]]
+	destroy = function(p3)
 		-- upvalues: t (write)
 		local var1 = t[p3]
 		
@@ -18,7 +18,7 @@ return {
 			var1:Destroy()
 		end
 	end,
-	clear = function() --[[ line: 21 ]]
+	clear = function()
 		-- upvalues: t (write)
 		t = {}
 		

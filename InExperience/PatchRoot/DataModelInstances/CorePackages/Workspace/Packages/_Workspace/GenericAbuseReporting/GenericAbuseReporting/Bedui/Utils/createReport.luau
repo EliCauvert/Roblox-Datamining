@@ -7,7 +7,7 @@ local fFlagLuaAppEnableReportBadge = require(parent.SharedFlags).FFlagLuaAppEnab
 local fFlagEnableReportingFlowForDevSubs = require(parent.SharedFlags).FFlagEnableReportingFlowForDevSubs
 local fFlagEnableReportingFlowForExperienceShop = require(parent.SharedFlags).FFlagEnableReportingFlowForExperienceShop
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagLuaAppEnableReportBadge (ref), updateAbuseReportRevampItemAbuseVector (ref)
 	local t = {}
 	

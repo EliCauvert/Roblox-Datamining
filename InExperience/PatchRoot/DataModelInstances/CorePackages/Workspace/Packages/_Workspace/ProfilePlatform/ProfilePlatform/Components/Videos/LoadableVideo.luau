@@ -7,23 +7,23 @@ local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
 local loadingState = require(profilePlatform.Common.Enums).LoadingState
 
-return function(p0) --[[ line: 28 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), loadingState (ref), contentProviderService (ref), view (ref), skeleton (ref)
 	local var4, var5 = reactModule.useState(loadingState.Loading)
 	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), contentProviderService (copy), var5 (ref), loadingState (copy)
 		if p0.Video == nil or p0.Video == "" then
 			return
 		end
-		local var8 = contentProviderService:GetAssetFetchStatusChangedSignal(p0.Video):Connect(function(p1) --[[ line: 38 ]]
+		local var8 = contentProviderService:GetAssetFetchStatusChangedSignal(p0.Video):Connect(function(p1)
 			-- upvalues: var5 (copy), loadingState (copy)
 			if p1 == Enum.AssetFetchStatus.Failure then
 				var5(loadingState.Failed)
 			end
 		end)
 		
-		return function() --[[ line: 44 ]]
+		return function()
 			-- upvalues: var8 (ref), var5 (copy), loadingState (copy)
 			var8:Disconnect()
 			var5(loadingState.Loading)
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 28 ]]
 			Size = UDim2.fromScale(1, 1),
 			Video = p0.Video,
 			Visible = var6.X > 0 and var6.Y > 0,
-			[reactModule.Change.Resolution] = reactModule.useCallback(function(p2) --[[ line: 50 ]]
+			[reactModule.Change.Resolution] = reactModule.useCallback(function(p2)
 				-- upvalues: var7 (ref), p0 (ref)
 				local resolution = p2.Resolution
 				var7(resolution)
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 28 ]]
 					p0.onResolutionChanged(resolution)
 				end
 			end, { p0.onResolutionChanged, var7 }),
-			[reactModule.Event.Loaded] = reactModule.useCallback(function(p3) --[[ line: 59 ]]
+			[reactModule.Event.Loaded] = reactModule.useCallback(function(p3)
 				-- upvalues: var4 (ref), loadingState (copy), var5 (ref), p0 (ref)
 				if var4 == loadingState.Loading then
 					var5(loadingState.Finished)

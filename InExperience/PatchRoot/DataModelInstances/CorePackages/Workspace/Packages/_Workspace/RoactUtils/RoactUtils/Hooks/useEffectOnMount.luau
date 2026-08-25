@@ -1,8 +1,8 @@
 ﻿local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function() --[[ line: 11 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref)
 		p0()
 	end, {})

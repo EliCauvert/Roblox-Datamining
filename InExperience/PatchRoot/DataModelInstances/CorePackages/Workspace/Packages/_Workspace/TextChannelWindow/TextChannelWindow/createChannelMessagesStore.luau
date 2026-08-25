@@ -2,11 +2,11 @@
 local _ = require(script.Parent.Message)
 local fFlagExpChatTrimMessageStoreModule = require(script.Parent.Flags.FFlagExpChatTrimMessageStore)
 
-return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), fFlagExpChatTrimMessageStoreModule (ref)
 	local t = {}
 	
-	local function getOrCreate(p0) --[[ line: 49 ]]
+	local function getOrCreate(p0)
 		-- upvalues: t (ref), signalsModule (copy)
 		if not t[p0] then
 			local var5, var6 = signalsModule.createSignal({})
@@ -16,7 +16,7 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 				setByMessageId = var6,
 				getOrderedIds = var7,
 				setOrderedIds = var8,
-				getMessages = signalsModule.createComputed(function(p1) --[[ line: 54 ]]
+				getMessages = signalsModule.createComputed(function(p1)
 					-- upvalues: var7 (ref), var5 (ref)
 					local var9 = var7(p1)
 					local var10 = var5(p1)
@@ -37,11 +37,11 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 		return t[p0]
 	end
 	
-	local function upsertMessage(p2, p3) --[[ line: 79 ]]
+	local function upsertMessage(p2, p3)
 		-- upvalues: getOrCreate (ref), fFlagExpChatTrimMessageStoreModule (copy)
 		local var13 = getOrCreate(p2)
 		local messageId = p3.messageId
-		var13.setByMessageId(function(p4) --[[ line: 83 ]]
+		var13.setByMessageId(function(p4)
 			-- upvalues: messageId (ref), p3 (ref)
 			local cloned = table.clone(p4)
 			cloned[messageId] = p3
@@ -49,7 +49,7 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 			return cloned
 		end)
 		local var14 = if fFlagExpChatTrimMessageStoreModule then {} else nil
-		var13.setOrderedIds(function(p5) --[[ line: 90 ]]
+		var13.setOrderedIds(function(p5)
 			-- upvalues: messageId (ref), var14 (ref)
 			for i, v in p5 do
 				if v == messageId then
@@ -74,7 +74,7 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 		end)
 		
 		if var14 and #var14 > 0 then
-			var13.setByMessageId(function(p6) --[[ line: 114 ]]
+			var13.setByMessageId(function(p6)
 				-- upvalues: var14 (ref)
 				local cloned = table.clone(p6)
 				
@@ -92,10 +92,10 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 	
 	return {
 		upsertMessage = upsertMessage,
-		removeMessage = function(p7, p8) --[[ line: 127 ]]
+		removeMessage = function(p7, p8)
 			-- upvalues: getOrCreate (ref)
 			local var19 = getOrCreate(p7)
-			var19.setByMessageId(function(p9) --[[ line: 130 ]]
+			var19.setByMessageId(function(p9)
 				-- upvalues: p8 (ref)
 				if p9[p8] == nil then
 					return p9
@@ -105,7 +105,7 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 				
 				return cloned
 			end)
-			var19.setOrderedIds(function(p10) --[[ line: 139 ]]
+			var19.setOrderedIds(function(p10)
 				-- upvalues: p8 (ref)
 				local index = table.find(p10, p8)
 				
@@ -118,7 +118,7 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 				return p10
 			end)
 		end,
-		insertIfAbsent = function(value, p11) --[[ line: 150 ]]
+		insertIfAbsent = function(value, p11)
 			-- upvalues: getOrCreate (ref), upsertMessage (ref)
 			if getOrCreate(value).getByMessageId(false)[p11.messageId] == nil then
 				upsertMessage(value, p11)
@@ -126,19 +126,19 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 				return
 			end
 		end,
-		removeChannelEntry = function(p12) --[[ line: 158 ]]
+		removeChannelEntry = function(p12)
 			-- upvalues: t (ref)
 			t[p12] = nil
 		end,
-		clearChannel = function(p13) --[[ line: 162 ]]
+		clearChannel = function(p13)
 			-- upvalues: t (ref)
 			local var23 = t[p13]
 			
 			if var23 then
-				var23.setByMessageId(function() --[[ line: 167 ]]
+				var23.setByMessageId(function()
 					return {}
 				end)
-				var23.setOrderedIds(function() --[[ line: 170 ]]
+				var23.setOrderedIds(function()
 					return {}
 				end)
 				table.clear(var23.messageGetters)
@@ -146,16 +146,16 @@ return function() --[[ line: 45 | named "createChannelMessagesStore" ]]
 				return
 			end
 		end,
-		getMessagesForChannel = function(p14) --[[ line: 176 ]]
+		getMessagesForChannel = function(p14)
 			-- upvalues: getOrCreate (ref)
 			return getOrCreate(p14).getMessages
 		end,
-		getMessageById = function(p15, p16) --[[ line: 180 ]]
+		getMessageById = function(p15, p16)
 			-- upvalues: getOrCreate (ref), signalsModule (copy)
 			local var24 = getOrCreate(p15)
 			
 			if not var24.messageGetters[p16] then
-				var24.messageGetters[p16] = signalsModule.createComputed(function(p17) --[[ line: 183 ]]
+				var24.messageGetters[p16] = signalsModule.createComputed(function(p17)
 					-- upvalues: var24 (ref), p16 (ref)
 					return var24.getByMessageId(p17)[p16]
 				end)

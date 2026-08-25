@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p0) --[[ line: 24 ]]
+return function(p0)
 	assert(p0 ~= nil, "cannot get entries from a nil value")
 	local var0 = typeof(p0)
 	local t = {}

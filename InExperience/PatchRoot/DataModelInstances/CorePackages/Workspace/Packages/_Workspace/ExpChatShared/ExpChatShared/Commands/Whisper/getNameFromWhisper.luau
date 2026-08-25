@@ -1,4 +1,4 @@
-﻿local function getArgs(p0, p1) --[[ line: 2 ]]
+﻿local function getArgs(p0, p1)
 	for i, v in pairs(p1) do
 		local text = v .. " "
 		local var2 = string.len(text)
@@ -10,7 +10,7 @@
 	return nil
 end
 
-return function(p2, p3) --[[ line: 15 ]]
+return function(p2, p3)
 	-- upvalues: getArgs (ref)
 	local var3 = getArgs(p2, p3)
 	

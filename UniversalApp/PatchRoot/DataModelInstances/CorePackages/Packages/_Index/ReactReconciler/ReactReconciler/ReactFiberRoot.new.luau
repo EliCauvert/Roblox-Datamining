@@ -24,7 +24,7 @@ local blockingRoot = reactRootTagsModule.BlockingRoot
 local concurrentRoot = reactRootTagsModule.ConcurrentRoot
 local t = {}
 
-local function FiberRootNode(p0, p1, p2) --[[ line: 49 ]]
+local function FiberRootNode(p0, p1, p2)
 	-- upvalues: noTimeout (ref), noLanePriority (ref), createLaneMap (ref), noLanes (ref), noTimestamp (ref), supportsHydration (ref), enableSchedulerTracing (ref), unstableGetThreadID (ref), set (ref), map (ref), enableSuspenseCallback (ref), reactGlobalsModule (ref), blockingRoot (ref), concurrentRoot (ref), legacyRoot (ref)
 	local t = {
 		pendingChildren = nil,
@@ -78,7 +78,7 @@ local function FiberRootNode(p0, p1, p2) --[[ line: 49 ]]
 	return t
 end
 
-function t.createFiberRoot(p3, p4, p5, p6) --[[ line: 105 ]]
+function t.createFiberRoot(p3, p4, p5, p6)
 	-- upvalues: FiberRootNode (ref), enableSuspenseCallback (ref), createHostRootFiber (ref), initializeUpdateQueue (ref)
 	local var8 = FiberRootNode(p3, p4, p5)
 	

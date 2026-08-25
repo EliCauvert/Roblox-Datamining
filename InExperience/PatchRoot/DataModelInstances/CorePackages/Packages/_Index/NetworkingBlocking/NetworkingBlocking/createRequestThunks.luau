@@ -3,7 +3,7 @@ local createGetBlockedUsersModule = require(networkRequests.createGetBlockedUser
 local createBlockUserByIdModule = require(networkRequests.createBlockUserById)
 local createUnblockUserByIdModule = require(networkRequests.createUnblockUserById)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: createGetBlockedUsersModule (ref), createBlockUserByIdModule (ref), createUnblockUserByIdModule (ref)
 	return {
 		GetBlockedUsers = createGetBlockedUsersModule(p0),

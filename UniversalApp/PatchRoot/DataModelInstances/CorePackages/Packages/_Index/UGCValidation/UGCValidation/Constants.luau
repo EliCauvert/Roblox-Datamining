@@ -12,7 +12,7 @@ local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
-local function _(p0) --[[ line: 20 | named "convertArrayToTable" ]]
+local function _(p0)
 	local t = {}
 	
 	for i, v in pairs(p0) do
@@ -61,7 +61,7 @@ for i_1, v_1 in t.R15_BODY_PARTS do
 end
 t.NAMED_R15_BODY_PARTS.Head = "Head"
 setmetatable(t.NAMED_R15_BODY_PARTS, {
-	__index = function() --[[ line: 109 ]]
+	__index = function()
 		error("NAMED_R15_BODY_PARTS key does not exist")
 		
 		return nil
@@ -200,7 +200,7 @@ t.COMPARISON_METHODS = {
 	FOUND_IN = "one of the following:"
 }
 setmetatable(t.COMPARISON_METHODS, {
-	__index = function(_, p1) --[[ line: 307 ]]
+	__index = function(_, p1)
 		return error("Invalid COMPARISON_METHOD " .. tostring(p1))
 	end
 })
@@ -210,7 +210,7 @@ t.INCLUSION_METHODS = {
 	EXCLUSION_LIST = "EXCLUSION_LIST"
 }
 setmetatable(t.INCLUSION_METHODS, {
-	__index = function(_, p2) --[[ line: 322 ]]
+	__index = function(_, p2)
 		return error("Invalid INCLUSION_METHOD " .. tostring(p2))
 	end
 })

@@ -13,13 +13,13 @@ local getFFlagMomentsTextOverlayMediaRectModule = require(momentsCommon.Flags.Ge
 local fFlagMomentsOverlayContainerScaleFallbackModule = require(momentsCommon.Flags.FFlagMomentsOverlayContainerScaleFallback)
 local var8 = signalsModule.createSignal(Enum.ScaleType.Crop)
 
-local function TextOverlayLayer(p0) --[[ line: 86 ]]
+local function TextOverlayLayer(p0)
 	-- upvalues: reactModule (ref), signalsModule (ref), useSignalState (ref), var8 (ref), fFlagMomentsOverlayContainerScaleFallbackModule (ref), textOverlayDisplayModule (ref)
 	local getResolution = p0.getResolution
 	local var11 = useSignalState(p0.getItemSize)
-	local var12 = useSignalState(reactModule.useMemo(function() --[[ line: 98 ]]
+	local var12 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), getResolution (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 99 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: getResolution (copy)
 			return getResolution(p1)
 		end)
@@ -35,7 +35,7 @@ local function TextOverlayLayer(p0) --[[ line: 86 ]]
 	})
 end
 
-local function LegacyTextOverlayLayer(p2) --[[ line: 138 ]]
+local function LegacyTextOverlayLayer(p2)
 	-- upvalues: useSignalState (ref), overlayScaleModule (ref), reactModule (ref), textOverlayModule (ref)
 	return reactModule.createElement(textOverlayModule, {
 		draggable = false,
@@ -47,7 +47,7 @@ end
 
 return {
 	kind = "text",
-	create = function(p3, _) --[[ line: 151 ]]
+	create = function(p3, _)
 		-- upvalues: getFFlagMomentsTextOverlayMediaRectModule (ref), reactModule (ref), LegacyTextOverlayLayer (ref), TextOverlayLayer (ref)
 		local overlay = p3.overlay
 		assert(overlay ~= nil, "createTextOverlayNode: spec.overlay (a TextOverlayEdit) is required")
@@ -56,12 +56,12 @@ return {
 			kind = "text",
 			usesDecoder = false,
 			id = p3.id,
-			assets = function() --[[ line: 159 ]]
+			assets = function()
 				return {}
 			end,
-			download = function() --[[ line: 185 ]] end,
+			download = function() end,
 			zIndex = p3.zIndex or overlay.zIndex,
-			render = function(p4) --[[ line: 163 ]]
+			render = function(p4)
 				-- upvalues: getFFlagMomentsTextOverlayMediaRectModule (copy), reactModule (copy), LegacyTextOverlayLayer (copy), overlay (ref), TextOverlayLayer (copy)
 				return if getFFlagMomentsTextOverlayMediaRectModule() then reactModule.createElement(TextOverlayLayer, {
 					overlay = overlay,
@@ -70,7 +70,7 @@ return {
 					getScaleType = p4.getScaleType
 				}) else reactModule.createElement(LegacyTextOverlayLayer, { overlay = overlay, getItemSize = p4.getItemSize })
 			end,
-			dispose = function() --[[ line: 189 ]] end
+			dispose = function() end
 		}
 	end
 }

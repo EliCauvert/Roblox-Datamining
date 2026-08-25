@@ -30,7 +30,7 @@ local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImme
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 local getFFlagMomentsPushedFeedSafeAreaModule = require(moments.Flags.GetFFlagMomentsPushedFeedSafeArea)
 
-local function OverlayInfoFrame(p0) --[[ line: 99 ]]
+local function OverlayInfoFrame(p0)
 	-- upvalues: useTokens (ref), momentOverlayInsetContextModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), reactModule (ref), view (ref)
 	local var22 = useTokens()
 	local var23 = momentOverlayInsetContextModule.useMomentOverlayInset()
@@ -53,7 +53,7 @@ local function OverlayInfoFrame(p0) --[[ line: 99 ]]
 	}, p0.children)
 end
 
-return function(p1) --[[ line: 137 | named "MomentItem" ]]
+return function(p1)
 	-- upvalues: useTokens (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), useFormFactor (ref), reactUtilsModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), fFlagMomentsImmersiveChromeModule (ref), reactModule (ref), topContentModule (ref), scrubberModule (ref), callToActionModule (ref), momentLayoutModule (ref), formFactor (ref), OverlayInfoFrame (ref), view (ref), momentContextModule (ref), text (ref), videoScrimModule (ref), momentGestureLayerModule (ref), gradientBackdrop (ref), playbackToggleIndicatorModule (ref), reactionExplosionLayerModule (ref), reactionEffectsContextModule (ref)
 	local var24 = useTokens()
 	local var25 = nil
@@ -70,7 +70,7 @@ return function(p1) --[[ line: 137 | named "MomentItem" ]]
 	local var31 = if var25 ~= nil then var24.Padding.XLarge else var25.margin
 	local var32, var33 = reactModule.useBinding(UDim2.fromScale(1, 0))
 	local var34 = 2 * var24.Padding.XLarge
-	local var35 = reactModule.useCallback(function(p2) --[[ line: 167 ]]
+	local var35 = reactModule.useCallback(function(p2)
 		-- upvalues: var33 (ref), var34 (ref)
 		var33(UDim2.new(1, 0, 0, p2.AbsoluteSize.Y + var34))
 	end, { var34 })

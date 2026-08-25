@@ -2,7 +2,7 @@
 local noneModule = require(parent.None)
 local _ = require(parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2, p3, ...) --[[ line: 30 ]]
+return function(p0, p1, p2, p3, ...)
 	-- upvalues: noneModule (ref)
 	if p1 ~= nil and typeof(p1) == "table" then
 		for i, v in pairs(p1) do

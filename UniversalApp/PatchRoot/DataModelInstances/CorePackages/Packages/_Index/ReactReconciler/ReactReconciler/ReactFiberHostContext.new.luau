@@ -11,16 +11,16 @@ local var3 = createCursor(t)
 local var4 = createCursor(t)
 local var5 = createCursor(t)
 
-function requiredContext(p0) --[[ line: 42 ]]
+function requiredContext(p0)
 	return p0
 end
 
-function getRootHostContainer() --[[ line: 52 ]]
+function getRootHostContainer()
 	-- upvalues: var5 (ref)
 	return var5.current
 end
 
-function pushHostContainer(p1, p2) --[[ line: 59 ]]
+function pushHostContainer(p1, p2)
 	-- upvalues: push (ref), var5 (ref), var4 (ref), var3 (ref), t (ref), getRootHostContext (ref), pop (ref)
 	push(var5, p2, p1)
 	push(var4, p1, p1)
@@ -30,19 +30,19 @@ function pushHostContainer(p1, p2) --[[ line: 59 ]]
 	push(var3, var6, p1)
 end
 
-function popHostContainer(p3) --[[ line: 79 ]]
+function popHostContainer(p3)
 	-- upvalues: pop (ref), var3 (ref), var4 (ref), var5 (ref)
 	pop(var3, p3)
 	pop(var4, p3)
 	pop(var5, p3)
 end
 
-function getHostContext() --[[ line: 85 ]]
+function getHostContext()
 	-- upvalues: var3 (ref)
 	return var3.current
 end
 
-function pushHostContext(p4) --[[ line: 92 ]]
+function pushHostContext(p4)
 	-- upvalues: var5 (ref), var3 (ref), getChildHostContext (ref), push (ref), var4 (ref)
 	local var7 = requiredContext(var3.current)
 	local var8 = getChildHostContext(var7, p4.type, requiredContext(var5.current))
@@ -54,7 +54,7 @@ function pushHostContext(p4) --[[ line: 92 ]]
 	push(var3, var8, p4)
 end
 
-function popHostContext(p5) --[[ line: 108 ]]
+function popHostContext(p5)
 	-- upvalues: var4 (ref), pop (ref), var3 (ref)
 	if var4.current == p5 then
 		pop(var3, p5)

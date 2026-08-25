@@ -13,23 +13,23 @@ local localizationProvider = localizationModule.LocalizationProvider
 local localizationRoactContext = localizationModule.LocalizationRoactContext
 local createStyleProvider = unitTestHelpersModule.createStyleProvider
 local mockLocale = socialTestHelpersModule.StoryHelpers.mockLocale
-local var9 = roduxModule.Store.new(function(p0) --[[ line: 19 ]]
+local var9 = roduxModule.Store.new(function(p0)
 	return p0
 end, { ScreenSize = Vector2.new(390, 844) }, { roduxModule.thunkMiddleware })
 
-local function _(p1) --[[ line: 25 | named "withTolerantLocalization" ]]
+local function _(p1)
 	-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationProvider (ref)
-	return function(p2) --[[ line: 26 ]]
+	return function(p2)
 		-- upvalues: reactModule (copy), localizationRoactContext (copy), localizationProvider (copy), p1 (ref)
 		local var10 = reactModule.useContext(localizationRoactContext)
 		
 		return reactModule.createElement(localizationProvider, {
-			localization = reactModule.useMemo(function() --[[ line: 29 ]]
+			localization = reactModule.useMemo(function()
 				-- upvalues: var10 (ref)
 				return setmetatable({
-					Format = function(_, p3, p4) --[[ line: 31 ]]
+					Format = function(_, p3, p4)
 						-- upvalues: var10 (copy)
-						local ok, status = pcall(function() --[[ line: 32 ]]
+						local ok, status = pcall(function()
 							-- upvalues: var10 (copy), p3 (ref), p4 (ref)
 							return var10:Format(p3, p4)
 						end)
@@ -47,19 +47,19 @@ return {
 	storyRoots = { socialCommon },
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p5) --[[ line: 48 ]]
+	mapStory = function(p5)
 		-- upvalues: reactModule (ref), localizationRoactContext (ref), localizationProvider (ref), foundationProvider (ref), roactRoduxModule (ref), var9 (ref), createStyleProvider (ref), mockLocale (ref)
-		local var11 = function(p6) --[[ line: 26 ]]
+		local var11 = function(p6)
 			-- upvalues: reactModule (copy), localizationRoactContext (copy), localizationProvider (copy), p5 (ref)
 			local var10 = reactModule.useContext(localizationRoactContext)
 			
 			return reactModule.createElement(localizationProvider, {
-				localization = reactModule.useMemo(function() --[[ line: 29 ]]
+				localization = reactModule.useMemo(function()
 					-- upvalues: var10 (ref)
 					return setmetatable({
-						Format = function(_, p7, p8) --[[ line: 31 ]]
+						Format = function(_, p7, p8)
 							-- upvalues: var10 (copy)
-							local ok, status = pcall(function() --[[ line: 32 ]]
+							local ok, status = pcall(function()
 								-- upvalues: var10 (copy), p7 (ref), p8 (ref)
 								return var10:Format(p7, p8)
 							end)
@@ -71,7 +71,7 @@ return {
 			}, { Story = reactModule.createElement(p5, p6) })
 		end
 		
-		return function(p9) --[[ line: 51 ]]
+		return function(p9)
 			-- upvalues: reactModule (copy), foundationProvider (copy), roactRoduxModule (copy), var9 (copy), createStyleProvider (copy), mockLocale (copy), var11 (ref)
 			return reactModule.createElement(foundationProvider, {
 				device = "Phone",

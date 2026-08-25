@@ -17,12 +17,12 @@ local getFFlagIBGateUGC4ACollectibleAssetsBundlesModule = require(parent.Flags.G
 local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local detailsButtons = roactModule.PureComponent:extend("DetailsButtons")
 
-local function _(value) --[[ line: 35 | named "isAnimationAsset" ]]
+local function _(value)
 	-- upvalues: constantsModule (ref)
 	return constantsModule.AnimationAssetTypes[value] ~= nil
 end
 
-local function getBuyText(p0, p1, p2, p3) --[[ line: 39 ]]
+local function getBuyText(p0, p1, p2, p3)
 	-- upvalues: getFFlagIBEnableCollectiblesSystemSupportModule (ref), robloxTranslatorModule (ref), constantsModule (ref), playersService (ref)
 	local price = nil
 	local isLimited = p0.isLimited or getFFlagIBEnableCollectiblesSystemSupportModule() and p0.isLimitedUnique
@@ -61,14 +61,14 @@ local function getBuyText(p0, p1, p2, p3) --[[ line: 39 ]]
 	return price
 end
 
-function detailsButtons.init(p4) --[[ line: 83 ]]
+function detailsButtons.init(p4)
 	-- upvalues: roactModule (ref)
 	p4.tryOnButtonRef = roactModule.createRef()
 	p4.buyButtonRef = roactModule.createRef()
 	p4.favoriteButtonRef = roactModule.createRef()
 end
 
-function detailsButtons.didUpdate(p5, p6) --[[ line: 89 ]]
+function detailsButtons.didUpdate(p5, p6)
 	-- upvalues: guiService (ref)
 	local detailsInformation = p5.props.detailsInformation
 	local gamepadEnabled = p5.props.gamepadEnabled
@@ -88,7 +88,7 @@ function detailsButtons.didUpdate(p5, p6) --[[ line: 89 ]]
 	end
 end
 
-function detailsButtons.calculateBuyStatusForLimitedItem(p7, p8, p9, _) --[[ line: 113 ]]
+function detailsButtons.calculateBuyStatusForLimitedItem(p7, p8, p9, _)
 	-- upvalues: utilityFunctionsModule (ref), tutilsModule (ref), playersService (ref), getBuyText (ref), constantsModule (ref)
 	local var22
 	local var19 = utilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(p8)
@@ -147,7 +147,7 @@ function detailsButtons.calculateBuyStatusForLimitedItem(p7, p8, p9, _) --[[ lin
 	end
 end
 
-function detailsButtons.render(p10) --[[ line: 188 ]]
+function detailsButtons.render(p10)
 	-- upvalues: utilityFunctionsModule (ref), constantsModule (ref), getFFlagIBGateUGC4ACollectibleAssetsBundlesModule (ref), roactModule (ref), inspectAndBuyControllerBarModule (ref), favoritesButtonModule (ref), tryOnButtonModule (ref), buyButtonModule (ref)
 	local locale = p10.props.locale
 	local assetInfo = p10.props.assetInfo
@@ -247,7 +247,7 @@ function detailsButtons.render(p10) --[[ line: 188 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p11, _) --[[ line: 315 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p11, _)
 	-- upvalues: getIsFavoriteModule (ref)
 	return {
 		visible = p11.visible,

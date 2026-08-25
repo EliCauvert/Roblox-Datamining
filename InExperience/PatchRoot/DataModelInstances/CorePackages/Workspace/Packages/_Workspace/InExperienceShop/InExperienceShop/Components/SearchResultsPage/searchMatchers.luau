@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-local function _(p0) --[[ line: 41 | named "tokenize" ]]
+local function _(p0)
 	local t = {}
 	
 	for i in string.gmatch(p0, "%S+") do
@@ -9,15 +9,15 @@ local function _(p0) --[[ line: 41 | named "tokenize" ]]
 	return t
 end
 
-local _ = function(p1) --[[ line: 49 | named "trim" ]]
+local _ = function(p1)
 	return string.match(p1, "^%s*(.-)%s*$") or ""
 end
 
-local _ = function(p2, p3) --[[ line: 53 | named "startsWith" ]]
+local _ = function(p2, p3)
 	return if #p2 < #p3 then false else string.sub(p2, 1, #p3) == p3
 end
 
-local _ = function(p4, p5) --[[ line: 60 | named "anyWordEquals" ]]
+local _ = function(p4, p5)
 	for i, v in p4 do
 		if v == p5 then
 			return true
@@ -26,7 +26,7 @@ local _ = function(p4, p5) --[[ line: 60 | named "anyWordEquals" ]]
 	return false
 end
 
-local _ = function(p6, p7) --[[ line: 69 | named "anyWordStartsWith" ]]
+local _ = function(p6, p7)
 	for i, v in p6 do
 		if if #v < #p7 then false else string.sub(v, 1, #p7) == p7 then
 			return true
@@ -35,7 +35,7 @@ local _ = function(p6, p7) --[[ line: 69 | named "anyWordStartsWith" ]]
 	return false
 end
 
-local function anyWordIncludes(p8, p9) --[[ line: 78 ]]
+local function anyWordIncludes(p8, p9)
 	for i, v in p8 do
 		if string.find(v, p9, 1, true) ~= nil then
 			return true
@@ -44,11 +44,11 @@ local function anyWordIncludes(p8, p9) --[[ line: 78 ]]
 	return false
 end
 
-local _ = function(a) --[[ line: 87 | named "maxEditsFor" ]]
+local _ = function(a)
 	return if a >= 8 then 2 else 1
 end
 
-local function editDistanceWithin(p10, p11, p12) --[[ line: 95 ]]
+local function editDistanceWithin(p10, p11, p12)
 	if p10 == p11 then
 		return true
 	end
@@ -119,7 +119,7 @@ local function editDistanceWithin(p10, p11, p12) --[[ line: 95 ]]
 	return list_1[p11Count + 1] <= p12
 end
 
-local _ = function(p13, p14, p15) --[[ line: 164 | named "anyWordWithinEditDistance" ]]
+local _ = function(p13, p14, p15)
 	-- upvalues: editDistanceWithin (ref)
 	for i, v in p13 do
 		if editDistanceWithin(p14, v, p15) then
@@ -129,7 +129,7 @@ local _ = function(p13, p14, p15) --[[ line: 164 | named "anyWordWithinEditDista
 	return false
 end
 
-local function anyWordHasFuzzyPrefix(p16, p17, p18) --[[ line: 176 ]]
+local function anyWordHasFuzzyPrefix(p16, p17, p18)
 	-- upvalues: editDistanceWithin (ref)
 	local p17Count = #p17
 	
@@ -141,7 +141,7 @@ local function anyWordHasFuzzyPrefix(p16, p17, p18) --[[ line: 176 ]]
 	return false
 end
 
-local function scoreToken(p19, p20, p21, p22) --[[ line: 215 ]]
+local function scoreToken(p19, p20, p21, p22)
 	-- upvalues: anyWordHasFuzzyPrefix (ref), anyWordIncludes (ref), editDistanceWithin (ref)
 	if p19 == p21 then
 		return 100
@@ -186,7 +186,7 @@ local function scoreToken(p19, p20, p21, p22) --[[ line: 215 ]]
 end
 
 return {
-	substringMatch = function(p23, p24, p25) --[[ line: 191 ]]
+	substringMatch = function(p23, p24, p25)
 		if p25 <= 0 then
 			return {}
 		elseif p24 == "" then
@@ -204,7 +204,7 @@ return {
 		end
 		return t
 	end,
-	fuzzyMatch = function(p26, p27, p28) --[[ line: 256 ]]
+	fuzzyMatch = function(p26, p27, p28)
 		-- upvalues: scoreToken (ref)
 		if p28 <= 0 then
 			return {}
@@ -247,7 +247,7 @@ return {
 				table.insert(t_1, { item = v, score = var37, index = i_1 })
 			end
 		end
-		table.sort(t_1, function(p29, p30) --[[ line: 294 ]]
+		table.sort(t_1, function(p29, p30)
 			return if p29.score == p30.score then p29.index < p30.index else p30.score < p29.score
 		end)
 		local minValue = math.min(p28, #t_1)

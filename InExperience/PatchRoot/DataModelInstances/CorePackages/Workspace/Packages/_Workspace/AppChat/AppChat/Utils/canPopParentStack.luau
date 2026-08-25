@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 6 | named "canPopParentStack" ]]
+﻿return function(p0)
 	if not p0 or not p0._dangerouslyGetParent then
 		return false
 	end

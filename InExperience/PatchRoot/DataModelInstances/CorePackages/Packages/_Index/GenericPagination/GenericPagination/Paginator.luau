@@ -10,7 +10,7 @@ local var2 = t.strictInterface({
 	fetchInit = t.callback
 })
 
-function t_1.new(p0) --[[ line: 23 ]]
+function t_1.new(p0)
 	-- upvalues: var2 (ref), t_1 (ref)
 	assert(var2(p0))
 	local t = {}
@@ -24,11 +24,11 @@ function t_1.new(p0) --[[ line: 23 ]]
 	return t
 end
 
-function t_1:_init() --[[ line: 35 ]]
+function t_1:_init()
 	-- upvalues: linkedList (ref)
 	self._isFetching = true
 	
-	return self.fetchInit():andThen(function(p1, p2) --[[ line: 38 ]]
+	return self.fetchInit():andThen(function(p1, p2)
 		-- upvalues: self (ref), linkedList (copy)
 		self.llRoot = linkedList.createNode()
 		self.llIndex = self.llRoot
@@ -38,11 +38,11 @@ function t_1:_init() --[[ line: 35 ]]
 	end)
 end
 
-function t_1:getCurrent() --[[ line: 47 ]]
+function t_1:getCurrent()
 	return self.llIndex.value or {}
 end
 
-function t_1:getNext() --[[ line: 51 ]]
+function t_1:getNext()
 	-- upvalues: promise (ref)
 	if self._isFetching then
 		return promise.reject("Paginator is currently busy. Please wait.")
@@ -55,7 +55,7 @@ function t_1:getNext() --[[ line: 51 ]]
 	self.llIndex = self.llIndex.next
 	self._isFetching = true
 	
-	return self.fetchWithCursor(value):andThen(function(p3, p4) --[[ line: 65 ]]
+	return self.fetchWithCursor(value):andThen(function(p3, p4)
 		-- upvalues: self (ref)
 		self.llIndex.previous.value = p3
 		
@@ -68,7 +68,7 @@ function t_1:getNext() --[[ line: 51 ]]
 	end)
 end
 
-function t_1:getPrevious() --[[ line: 76 ]]
+function t_1:getPrevious()
 	-- upvalues: promise (ref)
 	if self._isFetching then
 		return promise.reject("Paginator is currently busy. Please wait.")
@@ -81,7 +81,7 @@ function t_1:getPrevious() --[[ line: 76 ]]
 	self.llIndex = self.llIndex.previous
 	self._isFetching = true
 	
-	return self.fetchWithCursor(value, true):andThen(function(p5, p6) --[[ line: 90 ]]
+	return self.fetchWithCursor(value, true):andThen(function(p5, p6)
 		-- upvalues: self (ref)
 		self.llIndex.next.value = p6
 		
@@ -94,7 +94,7 @@ function t_1:getPrevious() --[[ line: 76 ]]
 	end)
 end
 
-function t_1:isFetching() --[[ line: 101 ]]
+function t_1:isFetching()
 	return self._isFetching
 end
 

@@ -2,12 +2,12 @@
 local cryoModule = require(corePackagesService.Packages.Cryo)
 local reactModule = require(corePackagesService.Packages.React)
 
-return function(p0) --[[ line: 5 | named "AudioDeviceInputDebugger" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref)
 	local var3, var4 = reactModule.useState(true)
 	local instances = p0.instances
 	local mutedPlayers = p0.mutedPlayers
-	local var5 = cryoModule.List.map(cryoModule.Dictionary.keys(instances), function(p1, p2) --[[ line: 15 ]]
+	local var5 = cryoModule.List.map(cryoModule.Dictionary.keys(instances), function(p1, p2)
 		-- upvalues: mutedPlayers (ref), reactModule (copy)
 		return reactModule.createElement("TextLabel", {
 			RichText = true,
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 5 | named "AudioDeviceInputDebugger" ]]
 	end)
 	var5.Title = reactModule.createElement("TextButton", {
 		Text = "<b>AudioDeviceInputs</b>",
-		[reactModule.Event.Activated] = function() --[[ line: 37 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: var4 (ref), var3 (ref)
 			var4(not var3)
 		end,

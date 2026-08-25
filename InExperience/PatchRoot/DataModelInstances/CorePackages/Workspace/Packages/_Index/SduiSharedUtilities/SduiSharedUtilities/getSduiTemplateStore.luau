@@ -2,21 +2,21 @@
 local cryoModule = require(sduiSharedUtilities.Parent.Cryo)
 local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
 
-local function createSduiTemplateStore() --[[ line: 24 ]]
+local function createSduiTemplateStore()
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	local t_1 = {}
 	
 	return {
-		getTemplate = function(p0) --[[ line: 35 ]]
+		getTemplate = function(p0)
 			-- upvalues: t (write)
 			return t[p0]
 		end,
-		addTemplates = function(p1) --[[ line: 41 ]]
+		addTemplates = function(p1)
 			-- upvalues: t (write), cryoModule (copy)
 			t = cryoModule.Dictionary.join(t, p1)
 		end,
-		recordSurfaceTemplates = function(p2, p3) --[[ line: 48 ]]
+		recordSurfaceTemplates = function(p2, p3)
 			-- upvalues: t_1 (write)
 			if p3 == nil then return end
 			local var6 = t_1[p2]
@@ -29,13 +29,13 @@ local function createSduiTemplateStore() --[[ line: 24 ]]
 				var6[i] = v
 			end
 		end,
-		getCachedRobloxComponentToTemplateId = function(p4) --[[ line: 66 ]]
+		getCachedRobloxComponentToTemplateId = function(p4)
 			-- upvalues: t_1 (write)
 			local var7 = t_1[p4]
 			
 			return if var7 == nil then {} else var7
 		end,
-		getTemplateForRobloxComponent = function(p5, p6) --[[ line: 76 ]]
+		getTemplateForRobloxComponent = function(p5, p6)
 			-- upvalues: t_1 (write), t (write)
 			local var8 = t_1[p5]
 			
@@ -46,7 +46,7 @@ local function createSduiTemplateStore() --[[ line: 24 ]]
 			
 			return if var9 == nil then nil else t[var9]
 		end,
-		clear = function() --[[ line: 88 ]]
+		clear = function()
 			-- upvalues: t (write), t_1 (write)
 			t = {}
 			t_1 = {}
@@ -56,7 +56,7 @@ end
 
 local var3 = nil
 
-return function() --[[ line: 108 | named "getSduiTemplateStore" ]]
+return function()
 	-- upvalues: var3 (write), createSduiTemplateStore (ref)
 	if var3 == nil then
 		var3 = createSduiTemplateStore()

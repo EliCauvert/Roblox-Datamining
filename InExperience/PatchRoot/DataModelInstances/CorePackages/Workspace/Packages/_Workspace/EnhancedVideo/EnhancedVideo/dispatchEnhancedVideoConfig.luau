@@ -1,9 +1,9 @@
 ﻿local replicatedStorageService = game:GetService("ReplicatedStorage")
 local _ = require(script.Parent.Types)
 
-return function(p0) --[[ line: 9 | named "dispatchEnhancedVideoConfig" ]]
+return function(p0)
 	-- upvalues: replicatedStorageService (ref)
-	task.spawn(function() --[[ line: 10 ]]
+	task.spawn(function()
 		-- upvalues: replicatedStorageService (copy), p0 (ref)
 		local enhancedVideoConfig = replicatedStorageService:WaitForChild("EnhancedVideoConfig", 60)
 		

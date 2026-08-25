@@ -3,7 +3,7 @@ local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceCha
 local _ = require(viewRecycler.Core.Types)
 local createEventModule = require(viewRecycler.Internal.createEvent)
 
-local function getItems(p0, p1, p2, p3) --[[ line: 16 ]]
+local function getItems(p0, p1, p2, p3)
 	local list = table.create(math.max(0, p3 - p2 + 1))
 	
 	for i = p2, math.min(p3, p0) do
@@ -12,14 +12,14 @@ local function getItems(p0, p1, p2, p3) --[[ line: 16 ]]
 	return list
 end
 
-return function(p4, p5) --[[ line: 24 | named "createMapDataSource" ]]
+return function(p4, p5)
 	-- upvalues: createEventModule (ref), dataSourceChangeTypeModule (ref), getItems (ref)
 	local t = {}
 	local var6 = createEventModule()
 	local var7 = 0
 	local var8 = nil
 	
-	local function getItem(p6) --[[ line: 36 ]]
+	local function getItem(p6)
 		-- upvalues: p4 (ref), var7 (write), p5 (ref), t (write)
 		local item = p4.getItem(p6)
 		
@@ -38,9 +38,9 @@ return function(p4, p5) --[[ line: 24 | named "createMapDataSource" ]]
 		return var12.output
 	end
 	
-	local function _() --[[ line: 55 | named "connectChild" ]]
+	local function _()
 		-- upvalues: var8 (write), p4 (ref), dataSourceChangeTypeModule (copy), t (write), var6 (ref)
-		var8 = p4.subscribe(function(p7) --[[ line: 56 ]]
+		var8 = p4.subscribe(function(p7)
 			-- upvalues: dataSourceChangeTypeModule (copy), t (copy), var6 (copy)
 			for i, v in p7.changes do
 				if v.type ~= dataSourceChangeTypeModule.Reset then
@@ -65,15 +65,15 @@ return function(p4, p5) --[[ line: 24 | named "createMapDataSource" ]]
 		getItemCount = p4.getItemCount,
 		getItem = getItem,
 		getItemKey = p4.getItemKey,
-		getItems = function(p8, p9) --[[ line: 105 ]]
+		getItems = function(p8, p9)
 			-- upvalues: getItems (copy), p4 (ref), getItem (ref)
 			return getItems(p4.getItemCount(), getItem, p8, p9)
 		end,
-		subscribe = function(p10) --[[ line: 78 ]]
+		subscribe = function(p10)
 			-- upvalues: var7 (write), t (write), var8 (write), p4 (ref), dataSourceChangeTypeModule (copy), var6 (ref)
 			if var7 == 0 then
 				t = {}
-				var8 = p4.subscribe(function(p11) --[[ line: 56 ]]
+				var8 = p4.subscribe(function(p11)
 					-- upvalues: dataSourceChangeTypeModule (copy), t (copy), var6 (copy)
 					for i, v in p11.changes do
 						if v.type ~= dataSourceChangeTypeModule.Reset then
@@ -97,7 +97,7 @@ return function(p4, p5) --[[ line: 24 | named "createMapDataSource" ]]
 			local var14 = var6.connect(p10)
 			local var15 = true
 			
-			return function() --[[ line: 86 ]]
+			return function()
 				-- upvalues: var15 (write), var14 (ref), var7 (copy), var8 (copy), t (copy)
 				if not var15 then return end
 				var15 = false

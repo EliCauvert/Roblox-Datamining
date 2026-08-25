@@ -3,7 +3,7 @@ local array = luauPolyfillModule.Array
 local boolean = luauPolyfillModule.Boolean
 local var1 = nil
 
-local function deepDiffer(p0, p1, p2, p3) --[[ line: 29 ]]
+local function deepDiffer(p0, p1, p2, p3)
 	-- upvalues: var1 (write), boolean (ref), array (ref), deepDiffer (ref)
 	local var3 = if p2 ~= nil then -1 else p2
 	local var4 = if typeof(var3) == "number" then p3 else var3
@@ -56,12 +56,12 @@ local function deepDiffer(p0, p1, p2, p3) --[[ line: 29 ]]
 end
 
 return setmetatable({
-	unstable_setLogListeners = function(value) --[[ line: 22 ]]
+	unstable_setLogListeners = function(value)
 		-- upvalues: var1 (write)
 		var1 = value
 	end
 }, {
-	__call = function(_, p4, p5, p6, p7) --[[ line: 110 ]]
+	__call = function(_, p4, p5, p6, p7)
 		-- upvalues: deepDiffer (ref)
 		return deepDiffer(p4, p5, p6, p7)
 	end

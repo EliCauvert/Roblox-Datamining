@@ -1,10 +1,10 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function() --[[ line: 5 | named "useTagsState" ]]
+return function()
 	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useState({})
 	
-	return var1, reactModule.useCallback(function(...) --[[ line: 8 ]]
+	return var1, reactModule.useCallback(function(...)
 		-- upvalues: var2 (ref)
 		local t = {}
 		
@@ -13,7 +13,7 @@ return function() --[[ line: 5 | named "useTagsState" ]]
 				table.insert(t, v_1)
 			end
 		end
-		var2(function(p0) --[[ line: 20 ]]
+		var2(function(p0)
 			-- upvalues: t (ref)
 			local var4 = false
 			

@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local text = require(parent.Foundation).Text
 
-return function(p0) --[[ line: 14 | named "HeaderText" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), text (ref)
 	return reactModule.createElement(text, {
 		tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",

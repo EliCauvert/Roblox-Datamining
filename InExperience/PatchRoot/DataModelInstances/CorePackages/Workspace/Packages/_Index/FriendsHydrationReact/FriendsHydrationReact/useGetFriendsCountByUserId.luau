@@ -6,23 +6,23 @@ local dataHydrationModule = require(parent.DataHydration)
 local var4 = dataHydrationModule.Friends.FriendsStore.get()
 local dataStatus = dataHydrationModule.DataStatus
 
-return function(p0, p1) --[[ line: 14 | named "useGetFriendsCountByUserId" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), var4 (ref), signalsModule (ref), dataStatus (ref), signalsReactModule (ref)
 	local var5 = if p0 then tostring(p0) else ""
-	local var6 = reactModule.useMemo(function() --[[ line: 20 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref), var4 (copy), p1 (ref)
 		return if var5 == "" then nil else var4.GetFriendsCountByUserId(var5, p1)
 	end, { var5, p1 })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 27 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var6 (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 28 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: var6 (copy)
 			return if var6 then var6.data(p2) else nil
 		end)
-	end, { var6 })), signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 33 ]]
+	end, { var6 })), signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var6 (ref), dataStatus (copy)
-		return signalsModule.createComputed(function(p3) --[[ line: 34 ]]
+		return signalsModule.createComputed(function(p3)
 			-- upvalues: var6 (copy), dataStatus (copy)
 			return if var6 then var6.status(p3) else dataStatus.NotReady
 		end)

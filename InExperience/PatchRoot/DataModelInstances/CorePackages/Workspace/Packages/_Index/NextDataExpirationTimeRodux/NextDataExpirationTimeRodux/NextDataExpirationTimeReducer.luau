@@ -3,7 +3,7 @@ local setNextDataExpirationTimeModule = require(nextDataExpirationTimeRodux.SetN
 local expirationTimeNamespaceModule = require(nextDataExpirationTimeRodux.ExpirationTimeNamespace)
 local _ = require(nextDataExpirationTimeRodux.Parent.DiscoveryTypes)
 
-local function initializeExpirationTimes() --[[ line: 8 ]]
+local function initializeExpirationTimes()
 	-- upvalues: expirationTimeNamespaceModule (ref)
 	local t = {}
 	
@@ -15,7 +15,7 @@ end
 
 return {
 	key = "NextDataExpirationTimeKey",
-	reducer = function(p0, p1) --[[ line: 17 ]]
+	reducer = function(p0, p1)
 		-- upvalues: initializeExpirationTimes (ref), setNextDataExpirationTimeModule (ref)
 		p0 = p0 or initializeExpirationTimes()
 		

@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.React)
 
-return function(p0) --[[ line: 21 | named "useUniformItemHeight" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef({})
 	local var2 = reactModule.useRef(false)
@@ -11,7 +11,7 @@ return function(p0) --[[ line: 21 | named "useUniformItemHeight" ]]
 	return {
 		measuredMaxHeight = if p0 then var4 else nil,
 		measuredMaxHeightBinding = if p0 then var6 else nil,
-		onItemSizeChanged = if p0 then reactModule.useCallback(function(p1, p2) --[[ line: 29 ]]
+		onItemSizeChanged = if p0 then reactModule.useCallback(function(p1, p2)
 			-- upvalues: p0 (ref), var3 (ref), var1 (ref), var5 (ref), var7 (ref), var2 (ref)
 			if not p0 then return end
 			local x = p2.AbsoluteSize.X
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 21 | named "useUniformItemHeight" ]]
 			
 			if not var2.current then
 				var2.current = true
-				task.defer(function() --[[ line: 53 ]]
+				task.defer(function()
 					-- upvalues: var2 (copy), var1 (copy), var7 (copy), var5 (copy)
 					var2.current = false
 					local var8 = 0

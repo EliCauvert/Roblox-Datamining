@@ -14,7 +14,7 @@ local getDeviceBottomInsetModule = require(parent.Common.getDeviceBottomInset)
 local useViewportSizeModule = require(parent.Hooks.useViewportSize)
 local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs)
 
-return function(p0, p1, p2) --[[ line: 32 | named "usePanelLayout" ]]
+return function(p0, p1, p2)
 	-- upvalues: useViewportSizeModule (ref), useTokens (ref), reactModule (ref), layoutValuesContextModule (ref), signalsReactModule (ref), panelContentHeightStoreModule (ref), constantsModule (ref), useScaledValue (ref), getDeviceBottomInsetModule (ref), computeMobilePanelSizeModule (ref), fFlagPlayerListTwoTabsModule (ref), computeDesktopPanelHeightModule (ref)
 	local var25, var27
 	local var11 = useViewportSizeModule()

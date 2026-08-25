@@ -15,13 +15,13 @@ local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppComp
 local fFlagLuaAppSearchPlaceholderGrid = require(parent.SharedFlags).FFlagLuaAppSearchPlaceholderGrid
 local t = {}
 
-local function renderItem(_, _, _, _) --[[ line: 42 ]]
+local function renderItem(_, _, _, _)
 	return nil, "placeholder"
 end
 
-return reactModule.memo(function(p0) --[[ line: 49 | named "PlaceholderGameGrid" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useAppPolicy (ref), usePreferredInput (ref), responsiveModule (ref), fFlagLuaAppCompositionAlways (ref), getGameTileCollectionItemSize (ref), reactModule (ref), useGameCollectionLayoutParamsModule (ref), useCollectionLayout (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), t (ref), collectionGrid (ref), fFlagLuaAppSearchPlaceholderGrid (ref), renderItem (ref)
-	local var8 = useAppPolicy(function(p1) --[[ line: 51 ]]
+	local var8 = useAppPolicy(function(p1)
 		return p1.useGridPageLayout()
 	end)
 	local var9 = p0.isHoverSupportEnabled and (var8 and usePreferredInput() == responsiveModule.Input.Pointer)
@@ -36,7 +36,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "PlaceholderGameGrid"
 	
 	if not fFlagLuaAppCompositionAlways then
 		local var18 = reactModule.useRef(0)
-		reactModule.useEffect(function() --[[ line: 102 ]]
+		reactModule.useEffect(function()
 			-- upvalues: fFlagLuaAppCompositionAlways_1 (ref), var15 (ref), var18 (ref), p0 (ref)
 			if not fFlagLuaAppCompositionAlways_1 and var15.numColumns ~= var18.current then
 				var18.current = var15.numColumns
@@ -62,7 +62,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "PlaceholderGameGrid"
 			headerComponent = if fFlagLuaAppSearchPlaceholderGrid then p0.headerComponent else nil,
 			containerRef = var14,
 			verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-			items = reactModule.useMemo(function() --[[ line: 125 ]]
+			items = reactModule.useMemo(function()
 				-- upvalues: var16 (ref), clampedValue (ref), t (copy)
 				local t_1 = {}
 				

@@ -8,7 +8,7 @@ local roactGamepadModule = require(corePackagesService.Packages.RoactGamepad)
 local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
 local getFFlagDebugLuaAppAlwaysUseGamepad = require(corePackagesService.Workspace.Packages.SharedFlags).getFFlagDebugLuaAppAlwaysUseGamepad
 
-return function(p0, p1, p2) --[[ line: 26 | named "createHintActionView" ]]
+return function(p0, p1, p2)
 	-- upvalues: create (ref), globalSettingsModule (ref), textService (ref), utilityModule (ref), contextActionService (ref), getFFlagDebugLuaAppAlwaysUseGamepad (ref), roactGamepadModule (ref)
 	if p2 == nil then
 		p2 = UDim2.new(1, -1, 1, -1)
@@ -44,7 +44,7 @@ return function(p0, p1, p2) --[[ line: 26 | named "createHintActionView" ]]
 		Parent = var8
 	})
 	
-	local function updateLayout() --[[ line: 69 ]]
+	local function updateLayout()
 		-- upvalues: textService (copy), var9 (ref), utilityModule (copy), var10 (ref), var8 (ref), p2 (write)
 		local textTextSize = textService:GetTextSize(var9.Text, utilityModule.ConvertFontSizeEnumToInt(var9.FontSize), var9.Font, Vector2.new(0, 0))
 		var9.Size = UDim2.new(0, textTextSize.x, 0, var10.Size.Y.Offset)
@@ -53,7 +53,7 @@ return function(p0, p1, p2) --[[ line: 26 | named "createHintActionView" ]]
 		var8.Position = UDim2.new(p2.X.Scale, p2.X.Offset * var8.Size.X.Offset, p2.Y.Scale, p2.Y.Offset * var8.Size.Y.Offset)
 	end
 	
-	function t.BindAction(_, p3, p4) --[[ line: 86 ]]
+	function t.BindAction(_, p3, p4)
 		-- upvalues: contextActionService (copy), p1 (write), getFFlagDebugLuaAppAlwaysUseGamepad (copy), roactGamepadModule (copy)
 		if not p3 then return end
 		contextActionService:UnbindCoreAction(p1)
@@ -66,34 +66,34 @@ return function(p0, p1, p2) --[[ line: 26 | named "createHintActionView" ]]
 		contextActionService:BindCoreAction(p1, p3, false, p4)
 	end
 	
-	function t.UnbindAction(_) --[[ line: 100 ]]
+	function t.UnbindAction(_)
 		-- upvalues: contextActionService (copy), p1 (write)
 		contextActionService:UnbindCoreAction(p1)
 	end
 	
-	function t.SetParent(_, p5) --[[ line: 104 ]]
+	function t.SetParent(_, p5)
 		-- upvalues: var8 (ref)
 		var8.Parent = p5
 	end
 	
-	function t.SetVisible(_, p6) --[[ line: 108 ]]
+	function t.SetVisible(_, p6)
 		-- upvalues: var8 (ref)
 		var8.Visible = p6
 	end
 	
-	function t.SetTransparency(_, p7) --[[ line: 112 ]]
+	function t.SetTransparency(_, p7)
 		-- upvalues: var9 (ref), var10 (ref)
 		var9.TextTransparency = p7
 		var10.ImageTransparency = p7
 	end
 	
-	function t.SetVisibleWithTween(_, p8) --[[ line: 117 ]]
+	function t.SetVisibleWithTween(_, p8)
 		-- upvalues: utilityModule (copy), var9 (ref), var10 (ref)
 		utilityModule.PropertyTweener(var9, "TextTransparency", var9.TextTransparency, p8, 0.25, utilityModule.EaseOutQuad, true)
 		utilityModule.PropertyTweener(var10, "ImageTransparency", var10.ImageTransparency, p8, 0.25, utilityModule.EaseOutQuad, true)
 	end
 	
-	function t.SetText(_, p9) --[[ line: 122 ]]
+	function t.SetText(_, p9)
 		-- upvalues: var9 (ref), updateLayout (ref)
 		if p9 == var9.Text then
 			return
@@ -102,7 +102,7 @@ return function(p0, p1, p2) --[[ line: 26 | named "createHintActionView" ]]
 		updateLayout()
 	end
 	
-	function t.SetImage(_, p10) --[[ line: 131 ]]
+	function t.SetImage(_, p10)
 		-- upvalues: var10 (ref)
 		if p10 == var10.Image then
 			return

@@ -5,7 +5,7 @@ local _ = require(script.Parent.custom_options)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 225 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		capabilities = if p0 == nil or p0.capabilities == nil then nil else p0.capabilities,
@@ -15,7 +15,7 @@ function t_1.new(p0) --[[ line: 225 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 236 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var10 = 0
@@ -56,7 +56,7 @@ function t_1:encode() --[[ line: 236 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 271 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var24 = t_1.new()
 	local var25 = 0
@@ -118,7 +118,7 @@ function t_1.decode(p1) --[[ line: 271 ]]
 	return var24
 end
 
-function t_1:jsonEncode() --[[ line: 329 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.capabilities ~= nil then
@@ -141,7 +141,7 @@ function t_1:jsonEncode() --[[ line: 329 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 355 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var49 = t_1.new()
 	
@@ -174,7 +174,7 @@ typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 400 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		can_submit_review = if p2 == nil or p2.can_submit_review == nil then false else p2.can_submit_review,
@@ -183,7 +183,7 @@ function t_2.new(p2) --[[ line: 400 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 419 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var52 = 0
@@ -212,7 +212,7 @@ function t_2:encode() --[[ line: 419 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 445 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref)
 	local var60 = t_2.new()
 	local var61 = 0
@@ -267,7 +267,7 @@ function t_2.decode(p3) --[[ line: 445 ]]
 	return var60
 end
 
-function t_2:jsonEncode() --[[ line: 500 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.can_submit_review then
@@ -282,7 +282,7 @@ function t_2:jsonEncode() --[[ line: 500 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 520 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref)
 	local var82 = t_2.new()
 	
@@ -316,7 +316,7 @@ typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Capab
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 567 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		type = if p4 == nil or p4.type == nil then "" else p4.type,
@@ -326,7 +326,7 @@ function t_3.new(p4) --[[ line: 567 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 580 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var84 = 0
@@ -364,7 +364,7 @@ function t_3:encode() --[[ line: 580 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 614 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var95 = t_3.new()
 	local var96 = 0
@@ -427,7 +427,7 @@ function t_3.decode(p5) --[[ line: 614 ]]
 	return var95
 end
 
-function t_3:jsonEncode() --[[ line: 677 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.type ~= nil and self.type ~= "" then
@@ -450,7 +450,7 @@ function t_3:jsonEncode() --[[ line: 677 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 705 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), t (ref)
 	local var120 = t_3.new()
 	
@@ -486,7 +486,7 @@ typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Categ
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 753 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		id = if p6 == nil or p6.id == nil then "" else p6.id,
@@ -494,7 +494,7 @@ function t_4.new(p6) --[[ line: 753 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 765 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var123 = 0
@@ -517,7 +517,7 @@ function t_4:encode() --[[ line: 765 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 786 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref)
 	local var129 = t_4.new()
 	local var130 = 0
@@ -569,7 +569,7 @@ function t_4.decode(p7) --[[ line: 786 ]]
 	return var129
 end
 
-function t_4:jsonEncode() --[[ line: 836 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -581,7 +581,7 @@ function t_4:jsonEncode() --[[ line: 836 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 852 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref)
 	local var149 = t_4.new()
 	
@@ -603,7 +603,7 @@ typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Categ
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 883 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		label = if p8 == nil or p8.label == nil then "" else p8.label,
@@ -613,7 +613,7 @@ function t_5.new(p8) --[[ line: 883 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 894 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var151 = 0
@@ -648,7 +648,7 @@ function t_5:encode() --[[ line: 894 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 925 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref)
 	local var161 = t_5.new()
 	local var162 = 0
@@ -711,7 +711,7 @@ function t_5.decode(p9) --[[ line: 925 ]]
 	return var161
 end
 
-function t_5:jsonEncode() --[[ line: 985 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.label ~= nil and self.label ~= "" then
@@ -729,7 +729,7 @@ function t_5:jsonEncode() --[[ line: 985 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 1009 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref)
 	local var185 = t_5.new()
 	
@@ -766,7 +766,7 @@ typeRegistryModule.default:register(t.UniverseUserVoteFeedbackMetadataData_Comme
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1059 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		disclaimer_label = if p10 == nil or p10.disclaimer_label == nil then "" else p10.disclaimer_label,
@@ -775,7 +775,7 @@ function t_6.new(p10) --[[ line: 1059 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1071 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var187 = 0
@@ -804,7 +804,7 @@ function t_6:encode() --[[ line: 1071 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1097 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref)
 	local var195 = t_6.new()
 	local var196 = 0
@@ -861,7 +861,7 @@ function t_6.decode(p11) --[[ line: 1097 ]]
 	return var195
 end
 
-function t_6:jsonEncode() --[[ line: 1152 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.disclaimer_label ~= nil and self.disclaimer_label ~= "" then
@@ -876,7 +876,7 @@ function t_6:jsonEncode() --[[ line: 1152 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1172 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref)
 	local var217 = t_6.new()
 	

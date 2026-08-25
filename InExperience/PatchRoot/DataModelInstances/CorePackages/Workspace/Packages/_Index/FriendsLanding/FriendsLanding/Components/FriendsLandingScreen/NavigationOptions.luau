@@ -5,7 +5,7 @@ local localizedKeysModule = require(friendsLanding.Enums.LocalizedKeys)
 local headerBarRightViewModule = require(friendsLanding.Components.HeaderBarRightView)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: fFlagConnectionsToFriendsRename (ref), localizedKeysModule (ref), roact (ref), headerBarRightViewModule (ref)
 	return {
 		useSecondaryHeader = true,
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 12 ]]
 			shouldLocalize = true,
 			raw = if fFlagConnectionsToFriendsRename then localizedKeysModule.FriendsHeader.rawValue() else localizedKeysModule.ConnectionsHeader.rawValue()
 		},
-		renderRight = function() --[[ line: 23 ]]
+		renderRight = function()
 			-- upvalues: roact (copy), headerBarRightViewModule (copy), p0 (ref)
 			return roact.createElement(headerBarRightViewModule, p0)
 		end

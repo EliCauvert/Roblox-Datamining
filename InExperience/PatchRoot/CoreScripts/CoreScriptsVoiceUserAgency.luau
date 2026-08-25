@@ -29,15 +29,15 @@ local var19 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Voi
 local var20 = tostring(game.PlaceId)
 local userId = playersService.LocalPlayer.UserId
 
-local function getAppStorageTable() --[[ line: 48 ]]
+local function getAppStorageTable()
 	-- upvalues: appStorageService (ref), httpService (ref)
-	local ok, status = pcall(function() --[[ line: 49 ]]
+	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy)
 		return appStorageService:GetItem("VoiceUserAgencyPlaceIds")
 	end)
 	
 	if ok then
-		local ok_1, status_1 = pcall(function() --[[ line: 53 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: httpService (copy), status (ref)
 			return httpService:JSONDecode(status)
 		end)
@@ -48,10 +48,10 @@ end
 
 local var22 = false
 
-local function _() --[[ line: 64 | named "resetHistory" ]]
+local function _()
 	-- upvalues: var22 (write), getAppStorageTable (ref), var20 (ref), appStorageService (ref), httpService (ref), name (ref)
 	if var22 then return end
-	local ok, status = pcall(function() --[[ line: 68 ]]
+	local ok, status = pcall(function()
 		-- upvalues: getAppStorageTable (copy), var20 (copy), appStorageService (copy), httpService (copy), var22 (copy)
 		local var26 = getAppStorageTable()
 		
@@ -72,12 +72,12 @@ local function _() --[[ line: 64 | named "resetHistory" ]]
 	end
 end
 
-local function bindResetHistory() --[[ line: 85 ]]
+local function bindResetHistory()
 	-- upvalues: default (ref), var22 (write), getAppStorageTable (ref), var20 (ref), appStorageService (ref), httpService (ref), name (ref)
-	default.muteAllChanged.Event:Connect(function(_) --[[ line: 87 ]]
+	default.muteAllChanged.Event:Connect(function(_)
 		-- upvalues: var22 (copy), getAppStorageTable (copy), var20 (copy), appStorageService (copy), httpService (copy), name (copy)
 		if var22 then return end
-		local ok, status = pcall(function() --[[ line: 68 ]]
+		local ok, status = pcall(function()
 			-- upvalues: getAppStorageTable (copy), var20 (copy), appStorageService (copy), httpService (copy), var22 (copy)
 			local var26 = getAppStorageTable()
 			
@@ -97,10 +97,10 @@ local function bindResetHistory() --[[ line: 85 ]]
 			name:trace(status)
 		end
 	end)
-	default.mutedNonFriends.Event:Connect(function() --[[ line: 90 ]]
+	default.mutedNonFriends.Event:Connect(function()
 		-- upvalues: var22 (copy), getAppStorageTable (copy), var20 (copy), appStorageService (copy), httpService (copy), name (copy)
 		if var22 then return end
-		local ok, status = pcall(function() --[[ line: 68 ]]
+		local ok, status = pcall(function()
 			-- upvalues: getAppStorageTable (copy), var20 (copy), appStorageService (copy), httpService (copy), var22 (copy)
 			local var26 = getAppStorageTable()
 			
@@ -122,7 +122,7 @@ local function bindResetHistory() --[[ line: 85 ]]
 	end)
 end
 
-local function removeUserAgencyPrompt(p0, p1, p2) --[[ line: 95 ]]
+local function removeUserAgencyPrompt(p0, p1, p2)
 	-- upvalues: getAppStorageTable (ref), var20 (ref), appStorageService (ref), httpService (ref), voiceUserAgencyAddMuteDecisionAnalytics (ref), rbxAnalyticsService (ref), userId (ref), default (ref), bindResetHistory (ref)
 	p0:Destroy()
 	
@@ -145,13 +145,13 @@ local function removeUserAgencyPrompt(p0, p1, p2) --[[ line: 95 ]]
 	bindResetHistory()
 end
 
-local function showUserAgencyPrompt() --[[ line: 120 ]]
+local function showUserAgencyPrompt()
 	-- upvalues: getFFlagVoiceUserAgencyEnableIXPModule (ref), IXPServiceWrapper (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getAppStorageTable (ref), var20 (ref), name (ref), default (ref), constantsModule (ref), bindResetHistory (ref), rbxAnalyticsService (ref), userId (ref), coreGuiService (ref), create (ref), appFonts (ref), robloxTranslatorModule (ref), removeUserAgencyPrompt (ref), voiceUserAgencyAlertTimerDuration (ref), tweenService (ref), fFlagManuallyMigrateDeprecatedIconUsage (ref), builderIconsModule (ref), images (ref), var19 (ref), textService (ref), voiceUserAgencyAdjustDescriptionText (ref), voiceUserAgencyAlertStartTimeOffset (ref)
 	local var28 = false
 	local var29 = false
 	
 	if getFFlagVoiceUserAgencyEnableIXPModule() then
-		local ok, status = pcall(function() --[[ line: 126 ]]
+		local ok, status = pcall(function()
 			-- upvalues: IXPServiceWrapper (copy), getFStringVoiceUserAgencyIXPLayerNameModule (copy)
 			return IXPServiceWrapper:GetLayerData(getFStringVoiceUserAgencyIXPLayerNameModule())
 		end)
@@ -160,7 +160,7 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 		if not status then return end
 		if not status.VoiceUserAgencyEnabled then return end
 	end
-	local ok, status = pcall(function() --[[ line: 145 ]]
+	local ok, status = pcall(function()
 		-- upvalues: getAppStorageTable (copy), var20 (copy)
 		for i, v in pairs(getAppStorageTable()) do
 			if i == var20 and v ~= nil then
@@ -197,7 +197,7 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 				Color = Color3.fromRGB(178, 178, 178)
 			})
 		})
-		var31.Activated:Connect(function() --[[ line: 200 ]]
+		var31.Activated:Connect(function()
 			-- upvalues: var28 (write), default (copy), constantsModule (copy), removeUserAgencyPrompt (copy), voiceUserAgency (ref), var29 (write)
 			var28 = true
 			default:MuteAll(var28, constantsModule.VOICE_CONTEXT_TYPE.USER_AGENCY)
@@ -215,7 +215,7 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 			LayoutOrder = 2,
 			create("UICorner")({ CornerRadius = UDim.new(0, 8) })
 		})
-		var32.Activated:Connect(function() --[[ line: 221 ]]
+		var32.Activated:Connect(function()
 			-- upvalues: var28 (write), default (copy), constantsModule (copy), removeUserAgencyPrompt (copy), voiceUserAgency (ref), var29 (write)
 			var28 = false
 			default:MuteAll(var28, constantsModule.VOICE_CONTEXT_TYPE.USER_AGENCY)
@@ -229,7 +229,7 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		})
 		local var34 = tweenService:Create(var33, TweenInfo.new(voiceUserAgencyAlertTimerDuration, Enum.EasingStyle.Sine), { Size = UDim2.fromScale(1, 1) })
-		var34.Completed:Connect(function(p3) --[[ line: 238 ]]
+		var34.Completed:Connect(function(p3)
 			-- upvalues: removeUserAgencyPrompt (copy), voiceUserAgency (ref), var29 (write), var28 (write)
 			if p3 == Enum.PlaybackState.Completed then
 				removeUserAgencyPrompt(voiceUserAgency, var29, var28)
@@ -256,7 +256,7 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 		})
 		var35.Visible = false
 		var35.Parent = var36
-		var36.Activated:Connect(function() --[[ line: 267 ]]
+		var36.Activated:Connect(function()
 			-- upvalues: var35 (ref), var29 (write), var34 (ref), rbxAnalyticsService (copy), userId (copy), default (copy)
 			var35.Visible = not var35.Visible
 			var29 = var35.Visible
@@ -366,7 +366,7 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 				var37
 			})
 		}).Parent = voiceUserAgency
-		task.delay(voiceUserAgencyAlertStartTimeOffset, function() --[[ line: 408 ]]
+		task.delay(voiceUserAgencyAlertStartTimeOffset, function()
 			-- upvalues: rbxAnalyticsService (copy), userId (copy), default (copy), var34 (ref)
 			rbxAnalyticsService:SendEventDeferred("client", "voiceChat", "ShowJoinWithVoice", {
 				userId = userId,
@@ -389,12 +389,12 @@ local function showUserAgencyPrompt() --[[ line: 120 ]]
 	})
 end
 
-task.delay(voiceUserAgencyAlertInitTimeOffset, function() --[[ line: 421 ]]
+task.delay(voiceUserAgencyAlertInitTimeOffset, function()
 	-- upvalues: default (ref), showUserAgencyPrompt (ref), name (ref)
-	default:asyncInit():andThen(function() --[[ line: 423 ]]
+	default:asyncInit():andThen(function()
 		-- upvalues: showUserAgencyPrompt (copy)
 		showUserAgencyPrompt()
-	end):catch(function() --[[ line: 426 ]]
+	end):catch(function()
 		-- upvalues: name (copy)
 		name:trace("VoiceChatServiceManager did not initialize for VoiceUserAgency")
 	end)

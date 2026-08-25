@@ -51,20 +51,20 @@ iconButton.validateProps = tModule.strictInterface({
 	[roactModule.Change.AbsolutePosition] = tModule.optional(tModule.callback)
 })
 
-function AnimatedScaleIcon(p0) --[[ line: 65 ]]
+function AnimatedScaleIcon(p0)
 	-- upvalues: reactOtterModule (ref), reactModule (ref), roactModule (ref), imageSetLabel (ref)
 	local var19, var20 = reactOtterModule.useAnimatedBinding(p0.iconSize)
-	reactModule.useEffect(function() --[[ line: 68 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), reactOtterModule (copy), p0 (ref)
 		var20(reactOtterModule.spring(p0.iconSize, { dampingRatio = 1, frequency = 2.857142857143 }))
 		
-		return function() --[[ line: 73 ]] end
+		return function() end
 	end, { p0.iconSize })
 	
 	return roactModule.createElement(imageSetLabel, {
 		BackgroundTransparency = 1,
 		ZIndex = 1,
-		Size = var19:map(function(p1) --[[ line: 77 ]]
+		Size = var19:map(function(p1)
 			return UDim2.fromOffset(p1, p1)
 		end),
 		Position = UDim2.fromScale(0.5, 0.5),
@@ -75,11 +75,11 @@ function AnimatedScaleIcon(p0) --[[ line: 65 ]]
 	})
 end
 
-function iconButton.init(p2) --[[ line: 90 ]]
+function iconButton.init(p2)
 	-- upvalues: controlState (ref), signalsModule (ref), displayModule (ref)
 	p2:setState({ controlState = controlState.Default })
 	
-	function p2.controlStateUpdated(p3, p4) --[[ line: 95 ]]
+	function p2.controlStateUpdated(p3, p4)
 		-- upvalues: p2 (ref), controlState (copy)
 		if p2.props.onHover and p4 == controlState.Hover then
 			p2.props.onHover()
@@ -89,7 +89,7 @@ function iconButton.init(p2) --[[ line: 90 ]]
 		p2:setState({ controlState = p4 })
 	end
 	
-	p2.disposeUiScaleEffect = signalsModule.createEffect(function(p5) --[[ line: 109 ]]
+	p2.disposeUiScaleEffect = signalsModule.createEffect(function(p5)
 		-- upvalues: displayModule (copy), p2 (ref)
 		p2:setState({
 			UiScale = displayModule.GetDisplayStore(p5).getUIScale(p5)
@@ -97,23 +97,23 @@ function iconButton.init(p2) --[[ line: 90 ]]
 	end)
 end
 
-function iconButton.render(p6) --[[ line: 117 ]]
+function iconButton.render(p6)
 	-- upvalues: var15 (ref), withCursor (ref), withSelectionCursorProvider (ref)
-	return if var15 then withCursor(function(p8) --[[ line: 119 ]]
+	return if var15 then withCursor(function(p8)
 		-- upvalues: p6 (ref)
 		return p6:renderWithCursor(p8)
-	end) else withSelectionCursorProvider(function(p7) --[[ line: 123 ]]
+	end) else withSelectionCursorProvider(function(p7)
 		-- upvalues: p6 (ref)
 		return p6:renderWithCursor(p7)
 	end)
 end
 
-function iconButton.renderWithCursor(p9, p10) --[[ line: 129 ]]
+function iconButton.renderWithCursor(p9, p10)
 	-- upvalues: isNewTiltIconEnabledModule (ref), constantsModule (ref), withStyle (ref), controlState (ref), roactModule (ref), interactable (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), skinToneCircle (ref), var15 (ref), fFlagEnableConsoleExpControls (ref), imageSetLabel (ref), getFFlagFlashingDotUseAsyncInitModule (ref), flashingDotV2Module (ref), flashingDotModule (ref), circle17 (ref)
 	local backgroundColor3 = not isNewTiltIconEnabledModule() and p9.props.backgroundColor3
 	local var22 = constantsModule.TopBarButtonHeight * p9.state.UiScale
 	
-	return withStyle(function(p11) --[[ line: 132 ]]
+	return withStyle(function(p11)
 		-- upvalues: p9 (ref), controlState (copy), roactModule (copy), interactable (copy), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), isNewTiltIconEnabledModule (copy), var22 (ref), p10 (ref), skinToneCircle (copy), var15 (copy), fFlagEnableConsoleExpControls (copy), backgroundColor3 (ref), imageSetLabel (copy), getFFlagFlashingDotUseAsyncInitModule (copy), flashingDotV2Module (copy), flashingDotModule (copy), circle17 (copy)
 		local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 		
@@ -188,13 +188,13 @@ function iconButton.renderWithCursor(p9, p10) --[[ line: 129 ]]
 	end)
 end
 
-function iconButton.willUnmount(p12) --[[ line: 236 ]]
+function iconButton.willUnmount(p12)
 	if p12.disposeUiScaleEffect then
 		p12.disposeUiScaleEffect()
 	end
 end
 
-return roactModule.forwardRef(function(p13, p14) --[[ line: 241 ]]
+return roactModule.forwardRef(function(p13, p14)
 	-- upvalues: roactModule (ref), iconButton (ref), cryoModule (ref)
 	return roactModule.createElement(iconButton, cryoModule.Dictionary.join(p13, { forwardRef = p14 }))
 end)

@@ -8,7 +8,7 @@ local createHttpStore = require(parent.InternalHttpStore).createHttpStore
 local mutedError = require(parent.Loggers).mutedError
 local url = require(parent.Http).Url
 
-return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
+return function()
 	-- upvalues: createSignal (ref), createHttpStore (ref), signalsModule (ref), url (ref), httpService (ref), mutedError (ref), promiseModule (ref), createComputed (ref)
 	local var3, var4 = createSignal({
 		isTimedOut = false,
@@ -26,7 +26,7 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 	local _ = nil
 	local t = {}
 	
-	local function extractTimeoutAction(p0, p1) --[[ line: 107 ]]
+	local function extractTimeoutAction(p0, p1)
 		if not p0.features then
 			return nil
 		end
@@ -47,13 +47,13 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 	end
 	
 	local var12 = nil
-	local var13 = signalsModule.createEffect(function(p2) --[[ line: 131 ]]
+	local var13 = signalsModule.createEffect(function(p2)
 		-- upvalues: var3 (ref), var12 (write)
 		local var19 = var3(p2)
 		local var20 = if var19.details and var19.details.endDate then var19.details.endDate elseif var19.timeoutAction and var19.timeoutAction.endTime then var19.timeoutAction.endTime else nil
 		
 		if not var20 or var20 == "" then return end
-		local ok, status = pcall(function() --[[ line: 145 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var20 (ref)
 			return DateTime.fromIsoDate(var20)
 		end)
@@ -66,12 +66,12 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 			
 			return
 		end
-		local delayedThread = task.delay(var21, function() --[[ line: 163 ]]
+		local delayedThread = task.delay(var21, function()
 			-- upvalues: var12 (copy)
 			var12()
 		end)
 		
-		return function() --[[ line: 168 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			if delayedThread then
 				task.cancel(delayedThread)
@@ -79,7 +79,7 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 		end
 	end)
 	
-	local function fetchTimeoutDetails(p3, p4) --[[ line: 176 ]]
+	local function fetchTimeoutDetails(p3, p4)
 		-- upvalues: var6 (write), url (copy), var7 (ref), var9 (write), signalsModule (copy), httpService (copy), var3 (ref), var4 (ref), mutedError (copy)
 		if var6 then
 			p4()
@@ -95,19 +95,19 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 		if var9 then
 			var9()
 		end
-		local function _() --[[ line: 196 | named "complete" ]]
+		local function _()
 			-- upvalues: var6 (copy), p4 (ref)
 			var6 = false
 			p4()
 		end
 		
-		var9 = signalsModule.createEffect(function(p5) --[[ line: 201 ]]
+		var9 = signalsModule.createEffect(function(p5)
 			-- upvalues: var23 (ref), httpService (copy), var3 (copy), var4 (copy), var6 (copy), p4 (ref), mutedError (copy)
 			local var24 = var23(p5)
 			
 			if var24.status == "Success" then
 				local body = var24.response.Body
-				local ok, status = pcall(function() --[[ line: 205 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
@@ -158,7 +158,7 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 		end)
 	end
 	
-	local function resolvePendingFetches() --[[ line: 251 ]]
+	local function resolvePendingFetches()
 		-- upvalues: var3 (ref), t (write)
 		local var28 = var3(false)
 		
@@ -168,7 +168,7 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 		t = {}
 	end
 	
-	local function doFetchStatus(p6, p7) --[[ line: 259 ]]
+	local function doFetchStatus(p6, p7)
 		-- upvalues: var5 (write), url (copy), var7 (ref), var8 (write), resolvePendingFetches (ref), signalsModule (copy), httpService (copy), extractTimeoutAction (ref), var4 (ref), fetchTimeoutDetails (ref), mutedError (copy)
 		if var5 then return end
 		var5 = true
@@ -184,18 +184,18 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 		if var8 then
 			var8()
 		end
-		local function complete() --[[ line: 288 ]]
+		local function complete()
 			-- upvalues: resolvePendingFetches (copy)
 			resolvePendingFetches()
 		end
 		
-		var8 = signalsModule.createEffect(function(p8) --[[ line: 292 ]]
+		var8 = signalsModule.createEffect(function(p8)
 			-- upvalues: var30 (ref), httpService (copy), extractTimeoutAction (copy), p6 (ref), var4 (copy), var5 (copy), fetchTimeoutDetails (copy), complete (ref), resolvePendingFetches (copy), mutedError (copy)
 			local var32 = var30(p8)
 			
 			if var32.status == "Success" then
 				local body = var32.response.Body
-				local ok, status = pcall(function() --[[ line: 296 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), body (ref)
 					return httpService:JSONDecode(body)
 				end)
@@ -263,31 +263,31 @@ return function() --[[ line: 88 | named "createTimeoutStatusStore" ]]
 	
 	return {
 		getStatus = var3,
-		getIsTimedOut = createComputed(function(p9) --[[ line: 373 ]]
+		getIsTimedOut = createComputed(function(p9)
 			-- upvalues: var3 (ref)
 			return var3(p9).isTimedOut
 		end),
-		getTimeoutDetails = createComputed(function(p10) --[[ line: 377 ]]
+		getTimeoutDetails = createComputed(function(p10)
 			-- upvalues: var3 (ref)
 			return var3(p10).details
 		end),
-		fetchStatus = function(p11, p12) --[[ line: 361 ]]
+		fetchStatus = function(p11, p12)
 			-- upvalues: doFetchStatus (ref)
 			doFetchStatus(p11, p12)
 		end,
-		fetchStatusAsync = function(p13, p14) --[[ line: 365 ]]
+		fetchStatusAsync = function(p13, p14)
 			-- upvalues: promiseModule (copy), t (write), doFetchStatus (ref)
-			return promiseModule.new(function(p15) --[[ line: 366 ]]
+			return promiseModule.new(function(p15)
 				-- upvalues: t (copy), doFetchStatus (copy), p13 (ref), p14 (ref)
 				table.insert(t, p15)
 				doFetchStatus(p13, p14)
 			end)
 		end,
-		setStatus = function(value) --[[ line: 382 ]]
+		setStatus = function(value)
 			-- upvalues: var4 (ref)
 			var4(value)
 		end,
-		clearStatus = function() --[[ line: 388 ]]
+		clearStatus = function()
 			-- upvalues: var9 (write), var8 (write), var6 (write), var5 (write), var4 (ref), resolvePendingFetches (ref)
 			if var9 then
 				var9()

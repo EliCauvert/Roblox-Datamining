@@ -9,7 +9,7 @@ local appChatRemoveThirdPartyRestrictionModule = require(script.Parent.AppChatRe
 local fFlagAppChatFriendsTabIxpEnabledModule = require(appChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
 local var8 = nil
 
-local function _() --[[ line: 15 | named "getFriendsChatExperimentExposureEventReceiver" ]]
+local function _()
 	-- upvalues: var8 (write)
 	if var8 == nil then
 		var8 = require(script.Parent.FriendsChatExperimentExposureEventReceiver)
@@ -21,7 +21,7 @@ local fFlagEnableShareSheet = require(parent.SharedFlags).FFlagEnableShareSheet
 local var9 = if fFlagEnableShareSheet then require(script.Parent.ExternalChatMessageSenderRegistration) else nil
 local thirdPartyUserService = game:GetService("ThirdPartyUserService")
 
-return function(p0) --[[ line: 33 | named "AppChatPersistentEventReceivers" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), appChatAccountSettingsEventReceiverModule (ref), appChatInterventionEventReceiverModule (ref), thirdPartyUserService (ref), appChatThirdPartySettingsEventReceiverModule (ref), appChatRemoveThirdPartyRestrictionModule (ref), appChatNotificationEventReceiverModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), var8 (write), fFlagEnableShareSheet (ref), var9 (ref)
 	local var13
 	local createElement = reactModule.createElement

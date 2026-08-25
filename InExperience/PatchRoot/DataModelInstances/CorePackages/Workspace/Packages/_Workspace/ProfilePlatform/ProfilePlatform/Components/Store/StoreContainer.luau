@@ -32,7 +32,7 @@ local var20 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigati
 local httpService = game:GetService("HttpService")
 local storeGridModule = require(script.Parent.StoreGrid)
 local storeGridSkeletonModule = require(script.Parent.StoreGridSkeleton)
-local var24 = memoize(function(p0, p1, p2) --[[ line: 53 ]]
+local var24 = memoize(function(p0, p1, p2)
 	-- upvalues: enumsModule (ref)
 	local t = {}
 	local var26 = 1
@@ -49,7 +49,7 @@ local var24 = memoize(function(p0, p1, p2) --[[ line: 53 ]]
 	return t
 end)
 
-return function(p3) --[[ line: 76 | named "StoreContainer" ]]
+return function(p3)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), reactModule (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), useMarketplaceAnalyticsContextModule (ref), eventNamesModule (ref), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), constantsModule (ref), var24 (ref), useSelector (ref), fFlagAXEnableProfileTab (ref), useProfileFormFactorModule (ref), getFIntProfilePlatformMeTabStoreItemLimitModule (ref), profilePlatformStoreItemLimit (ref), httpService (ref), fFlagProfilePlatformNavigateToMarketplaceWebViewModule (ref), url (ref), appPage (ref), textKeysModule (ref), fFlagSignalsNavP3Dispatch (ref), var20 (ref), navigateDown (ref), networkingCatalogModule (ref), storeGridSkeletonModule (ref), profilePlatformHideStoreIfNoAssets (ref), storeGridModule (ref), dashModule (ref)
 	local var38
 	local var28 = useProfileWrapperContextModule()
@@ -57,7 +57,7 @@ return function(p3) --[[ line: 76 | named "StoreContainer" ]]
 	local var30 = useDispatch()
 	local var31, var32 = reactModule.useState(if fFlagEnableCommunityProfileLoadingSkeletonsModule then true else false)
 	local var33 = useMarketplaceAnalyticsContextModule()
-	local var34 = reactModule.useCallback(function(p4, p5, p6) --[[ line: 85 ]]
+	local var34 = reactModule.useCallback(function(p4, p5, p6)
 		-- upvalues: var28 (ref), var29 (ref), eventNamesModule (copy), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), enumsModule (copy), var33 (ref)
 		var28.navigateTo.itemOrBundleDetails(p4, p5)
 		var29.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
@@ -77,7 +77,7 @@ return function(p3) --[[ line: 76 | named "StoreContainer" ]]
 		var28.externalAnalytics.catalogAnalytics
 	})
 	local assets = useProfileJsonComponentModule(enumsModule.Components.Store).assets or {}
-	local var36 = useSelector(reactModule.useCallback(function(p7) --[[ line: 119 ]]
+	local var36 = useSelector(reactModule.useCallback(function(p7)
 		-- upvalues: constantsModule (copy), var24 (copy), assets (ref)
 		return var24(assets, p7[constantsModule.RODUX_KEY].BundleDetails or {}, p7[constantsModule.RODUX_KEY].AssetDetails or {})
 	end, { assets }))
@@ -102,7 +102,7 @@ return function(p3) --[[ line: 76 | named "StoreContainer" ]]
 	local profileType = var28.profileType
 	local profileId = var28.profileId
 	local var42 = if profileType == enumsModule.ProfileTypes.Community then httpService:UrlEncode(name) else name
-	local var43 = if fFlagProfilePlatformNavigateToMarketplaceWebViewModule then reactModule.useCallback(function() --[[ line: 160 ]]
+	local var43 = if fFlagProfilePlatformNavigateToMarketplaceWebViewModule then reactModule.useCallback(function()
 		-- upvalues: var29 (ref), eventNamesModule (copy), profileType (ref), enumsModule (copy), url (copy), profileId (ref), var42 (ref), appPage (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var20 (copy), var30 (ref), navigateDown (copy)
 		var29.fireAnalyticsEvent(eventNamesModule.StoreHeaderButton)
 		local t = {
@@ -118,14 +118,14 @@ return function(p3) --[[ line: 76 | named "StoreContainer" ]]
 		end
 		var30(navigateDown(t))
 	end, { var29, name, profileType, profileId }) else nil
-	local var44 = reactModule.useCallback(function() --[[ line: 186 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: var29 (ref), eventNamesModule (copy), var28 (ref), name (ref)
 		var29.fireAnalyticsEvent(eventNamesModule.StoreHeaderButton)
 		var28.navigateTo.catalogSearch(name)
 	end, { var28.navigateTo.catalogSearch, name, var29 })
-	reactModule.useEffect(function() --[[ line: 198 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), networkingCatalogModule (copy), assets (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var32 (ref)
-		var30(networkingCatalogModule.GetItemAndBundleDetails.API(assets)):catch(function(_) --[[ line: 199 ]] end):finally(function() --[[ line: 199 ]]
+		var30(networkingCatalogModule.GetItemAndBundleDetails.API(assets)):catch(function(_) end):finally(function()
 			-- upvalues: fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var32 (copy)
 			if fFlagEnableCommunityProfileLoadingSkeletonsModule then
 				var32(false)

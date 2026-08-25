@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p0, p1) --[[ line: 16 | named "filter" ]]
+return function(p0, p1)
 	local t = {}
 	
 	for i, v in p0 do

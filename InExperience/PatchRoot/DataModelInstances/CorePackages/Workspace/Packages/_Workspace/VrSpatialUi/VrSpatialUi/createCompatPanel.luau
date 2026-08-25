@@ -28,7 +28,7 @@ local t_2 = {
 	cframe = CFrame.new(0, 0, 0)
 }
 
-local function createPanelPart(p0) --[[ line: 36 ]]
+local function createPanelPart(p0)
 	local part = Instance.new("Part")
 	part.Name = p0.name .. "_Part"
 	part.CFrame = p0.cframe
@@ -44,7 +44,7 @@ local function createPanelPart(p0) --[[ line: 36 ]]
 	return part
 end
 
-local function createPanel(p1) --[[ line: 51 ]]
+local function createPanel(p1)
 	-- upvalues: object (ref), t (ref), spatialUIType (ref), t_2 (ref), createPanelPart (ref), coreGuiService (ref), curvedSurfaceGuisEnabledEngineFeature (ref), t_1 (ref)
 	local var11 = object.assign({}, t, p1)
 	
@@ -90,7 +90,7 @@ local function createPanel(p1) --[[ line: 51 ]]
 	return { type = var11.type, panelObject = screenGui }
 end
 
-return function(p2) --[[ line: 105 ]]
+return function(p2)
 	-- upvalues: VRService (ref), createPanel (ref), constantsModule (ref), spatialUIType (ref)
 	if VRService.VREnabled then
 		local var17 = createPanel(constantsModule.COMPAT_PANEL_PROPS_MAP[p2.panelType])

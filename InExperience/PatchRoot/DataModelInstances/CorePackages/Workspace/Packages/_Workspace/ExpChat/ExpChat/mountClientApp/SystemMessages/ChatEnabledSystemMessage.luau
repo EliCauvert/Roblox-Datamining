@@ -13,27 +13,27 @@ local expChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChat
 local expChatChatableUserCountSystemMessageMinUsers = game:DefineFastInt("ExpChatChatableUserCountSystemMessageMinUsers", 5)
 local var8 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p0) --[[ line: 33 | named "createDisplayChatEnabledMessage" ]]
+return function(p0)
 	-- upvalues: fFlagConnectionsToFriendsRename (ref), displaySystemMessageModule (ref), expChatLocalChatEnabledMessageExperimentation (ref), expChatLocalUserCountEnabledEngineFeature (ref), textChatService (ref), expChatReportChatEnabledUserCountMetrics (ref), analytics (ref), var8 (ref), fFlagExpChatUseUpdatedUserCountStrings (ref), expChatChatableUserCountSystemMessageMinUsers (ref)
 	local translator = p0.translator
 	local defaultSystemTextChannel = p0.defaultSystemTextChannel
 	local localPlayer = p0.localPlayer
 	local var9 = false
 	
-	return function() --[[ line: 40 ]]
+	return function()
 		-- upvalues: fFlagConnectionsToFriendsRename (copy), displaySystemMessageModule (copy), translator (ref), defaultSystemTextChannel (ref), expChatLocalChatEnabledMessageExperimentation (copy), expChatLocalUserCountEnabledEngineFeature (copy), textChatService (copy), localPlayer (ref), expChatReportChatEnabledUserCountMetrics (copy), analytics (copy), var8 (copy), fFlagExpChatUseUpdatedUserCountStrings (copy), expChatChatableUserCountSystemMessageMinUsers (copy), var9 (write)
 		local var10 = if fFlagConnectionsToFriendsRename then "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF" else "CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC"
 		local var11 = if fFlagConnectionsToFriendsRename then "Only people in similar age groups and your trusted friends can chat with you." else "Only people in similar age groups and your Trusted Connections can chat with you."
 		
-		local function _() --[[ line: 48 | named "displayControlMessage" ]]
+		local function _()
 			-- upvalues: displaySystemMessageModule (copy), var10 (ref), translator (copy), defaultSystemTextChannel (copy), var11 (ref)
 			displaySystemMessageModule(var10, nil, "Roblox.ChatEnabled.Info", translator, defaultSystemTextChannel, var11)
 		end
 		
 		if expChatLocalChatEnabledMessageExperimentation.isExperimentEnabled and expChatLocalUserCountEnabledEngineFeature then
-			task.spawn(function() --[[ line: 63 ]]
+			task.spawn(function()
 				-- upvalues: textChatService (copy), localPlayer (copy), expChatReportChatEnabledUserCountMetrics (copy), analytics (copy), var8 (copy), displaySystemMessageModule (copy), var10 (ref), translator (copy), defaultSystemTextChannel (copy), var11 (ref), expChatLocalChatEnabledMessageExperimentation (copy), fFlagExpChatUseUpdatedUserCountStrings (copy), expChatChatableUserCountSystemMessageMinUsers (copy), var9 (copy)
-				local ok, status = pcall(function() --[[ line: 64 ]]
+				local ok, status = pcall(function()
 					-- upvalues: textChatService (copy), localPlayer (copy)
 					return textChatService:GetChatableUserCountAsync(localPlayer.UserId, "local")
 				end)
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 33 | named "createDisplayChatEnabledMessage" ]]
 					
 					return
 				end
-				local var13 = (function(p1) --[[ line: 90 | named "GetSystemMessageKey" ]]
+				local var13 = (function(p1)
 					-- upvalues: fFlagExpChatUseUpdatedUserCountStrings (copy), var10 (copy), status (ref), expChatChatableUserCountSystemMessageMinUsers (copy)
 					local t = {
 						FRIENDLY = "CoreScripts.TextChat.ChatWindow.ChatWithOnlinePlayers.Local.Friendly",

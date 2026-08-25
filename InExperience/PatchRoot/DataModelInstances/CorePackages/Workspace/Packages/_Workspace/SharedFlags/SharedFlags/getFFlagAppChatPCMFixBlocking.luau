@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("AppChatPCMFixBlocking", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("AppChatPCMFixBlocking")
 end

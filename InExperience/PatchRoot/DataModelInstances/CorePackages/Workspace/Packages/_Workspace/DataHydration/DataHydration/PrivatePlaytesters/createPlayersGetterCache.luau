@@ -1,17 +1,17 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
 local _ = require(script.Parent.PrivatePlaytestersStoreTypes)
 
-return function() --[[ line: 26 | named "createPlayersGetterCache" ]]
+return function()
 	-- upvalues: signalsModule (ref)
 	local t = {}
 	
 	return {
-		getFor = function(p0) --[[ line: 29 ]]
+		getFor = function(p0)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var2 = t[p0]
 			
 			if var2 == nil then
-				local var3 = signalsModule.createComputed(function(p1) --[[ line: 34 ]]
+				local var3 = signalsModule.createComputed(function(p1)
 					-- upvalues: p0 (ref)
 					return p0(p1) or {}
 				end)
@@ -21,7 +21,7 @@ return function() --[[ line: 26 | named "createPlayersGetterCache" ]]
 			end
 			return var2
 		end,
-		clear = function() --[[ line: 41 ]]
+		clear = function()
 			-- upvalues: t (ref)
 			table.clear(t)
 		end

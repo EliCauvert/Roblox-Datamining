@@ -25,7 +25,7 @@ local list = {
 if getFFlagUGCValidateAddObjectValueToAcceptableTypesModule() then
 	table.insert(list, "ObjectValue")
 end
-function t.run(p0, p1) --[[ line: 38 ]]
+function t.run(p0, p1)
 	-- upvalues: list (ref), errorSourceStringsModule (ref)
 	local var6
 	for i, v in p1.curveAnimations do

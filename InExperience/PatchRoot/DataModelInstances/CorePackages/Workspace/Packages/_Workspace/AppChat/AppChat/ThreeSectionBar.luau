@@ -11,7 +11,7 @@ threeSectionBar.defaultProps = {
 	height = UDim.new(0, 0)
 }
 
-function threeSectionBar.init(p0) --[[ line: 23 ]]
+function threeSectionBar.init(p0)
 	-- upvalues: roactModule (ref)
 	local var2, var3 = roactModule.createBinding(0)
 	p0.leftWidth = var2
@@ -24,12 +24,12 @@ function threeSectionBar.init(p0) --[[ line: 23 ]]
 	p0.updateFullWidth = var7
 end
 
-function threeSectionBar.render(p1) --[[ line: 30 ]]
+function threeSectionBar.render(p1)
 	-- upvalues: roactModule (ref), roactFitComponents (ref)
 	return roactModule.createElement("Frame", {
 		Size = UDim2.new(UDim.new(1, 0), p1.props.height),
 		LayoutOrder = p1.props.LayoutOrder,
-		[roactModule.Change.AbsoluteSize] = function(p2) --[[ line: 35 ]]
+		[roactModule.Change.AbsoluteSize] = function(p2)
 			-- upvalues: p1 (ref)
 			p1.updateFullWidth(p2.AbsoluteSize.X)
 		end
@@ -43,7 +43,7 @@ function threeSectionBar.render(p1) --[[ line: 30 ]]
 			FillDirection = Enum.FillDirection.Horizontal,
 			contentPadding = p1.props.contentPaddingLeft,
 			margin = p1.props.marginLeft,
-			[roactModule.Change.AbsoluteSize] = function(p3) --[[ line: 49 ]]
+			[roactModule.Change.AbsoluteSize] = function(p3)
 				-- upvalues: p1 (ref)
 				p1.updateLeftWidth(p3.AbsoluteSize.X)
 			end
@@ -51,7 +51,7 @@ function threeSectionBar.render(p1) --[[ line: 30 ]]
 		centerFrame = roactModule.createElement("Frame", {
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
-			Size = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p4) --[[ line: 60 ]]
+			Size = roactModule.joinBindings({ p1.leftWidth, p1.rightWidth, p1.fullWidth }):map(function(p4)
 				return UDim2.new(0, (Vector2.new(p4[3] / 2, 0) - Vector2.new(math.max(p4[1], p4[2]), 0)).Magnitude * 2, 1, 0)
 			end)
 		}, {
@@ -66,7 +66,7 @@ function threeSectionBar.render(p1) --[[ line: 30 ]]
 			FillDirection = Enum.FillDirection.Horizontal,
 			contentPadding = p1.props.contentPaddingRight,
 			margin = p1.props.marginRight,
-			[roactModule.Change.AbsoluteSize] = function(p5) --[[ line: 89 ]]
+			[roactModule.Change.AbsoluteSize] = function(p5)
 				-- upvalues: p1 (ref)
 				p1.updateRightWidth(p5.AbsoluteSize.X)
 			end

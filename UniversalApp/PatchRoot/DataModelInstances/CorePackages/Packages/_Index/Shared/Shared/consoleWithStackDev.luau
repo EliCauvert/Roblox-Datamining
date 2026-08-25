@@ -6,13 +6,13 @@ local array = luauPolyfillModule.Array
 local reactSharedInternalsModule = require(script.Parent.ReactSharedInternals)
 local printWarning = nil
 local t = {
-	warn = function(p0, ...) --[[ line: 26 ]]
+	warn = function(p0, ...)
 		-- upvalues: reactGlobalsModule (ref), printWarning (write)
 		if reactGlobalsModule.__DEV__ then
 			printWarning("warn", p0, { ... })
 		end
 	end,
-	error = function(p1, ...) --[[ line: 31 ]]
+	error = function(p1, ...)
 		-- upvalues: reactGlobalsModule (ref), printWarning (write)
 		if reactGlobalsModule.__DEV__ then
 			printWarning("error", p1, { ... })
@@ -20,7 +20,7 @@ local t = {
 	end
 }
 
-printWarning = function(p2, p3, p4) --[[ line: 37 | named "printWarning" ]]
+printWarning = function(p2, p3, p4)
 	-- upvalues: reactGlobalsModule (ref), reactSharedInternalsModule (ref), array (ref), console (ref)
 	if reactGlobalsModule.__DEV__ then
 		local stackAddendum = reactSharedInternalsModule.ReactDebugCurrentFrame.getStackAddendum()

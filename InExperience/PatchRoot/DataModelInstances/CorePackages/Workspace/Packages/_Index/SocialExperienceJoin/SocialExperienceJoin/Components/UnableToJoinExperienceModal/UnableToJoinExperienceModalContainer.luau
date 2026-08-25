@@ -12,10 +12,10 @@ local useNavigationProps = robloxAppNavigationModule.useNavigationProps
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local unableToJoinExperienceModalModule = require(script.Parent.UnableToJoinExperienceModal)
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useNavigationProps (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useScreenSize (ref), userProfilesModule (ref), eventNamesModule (ref), unableToJoinExperienceModalModule (ref)
 	local var9 = useNavigation()
-	local var10 = useNavigationProps(function(p1, p2) --[[ line: 27 ]]
+	local var10 = useNavigationProps(function(p1, p2)
 		return {
 			universeId = p1,
 			userId = p2.userId,
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 25 ]]
 			analyticProps = p2.analyticProps
 		}
 	end)
-	local var11 = reactModule.useMemo(function() --[[ line: 36 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), var10 (ref)
 		return initializeSocialExperienceJoinAnalyticsModule(var10.analyticProps)
 	end, { var10.analyticProps })
@@ -32,13 +32,13 @@ return function(p0) --[[ line: 25 ]]
 		userIds = { var10.userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds
 	})
-	local var14 = reactModule.useCallback(function() --[[ line: 49 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref)
 		var9.pop()
 	end, { var9 })
 	
 	return reactModule.createElement(unableToJoinExperienceModalModule, {
-		cancel = reactModule.useCallback(function() --[[ line: 53 ]]
+		cancel = reactModule.useCallback(function()
 			-- upvalues: var11 (ref), eventNamesModule (copy), var10 (ref), var14 (ref)
 			var11.fireAnalyticsEvent(eventNamesModule.UnableToJoinCancel, {
 				universeId = var10.universeId,
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 25 ]]
 			})
 			var14()
 		end, { var14 }),
-		openGameDetailsPeekView = reactModule.useCallback(function() --[[ line: 63 ]]
+		openGameDetailsPeekView = reactModule.useCallback(function()
 			-- upvalues: var11 (ref), eventNamesModule (copy), var10 (ref), var14 (ref), p0 (ref)
 			var11.fireAnalyticsEvent(eventNamesModule.UnableToJoinViewDetails, {
 				universeId = var10.universeId,

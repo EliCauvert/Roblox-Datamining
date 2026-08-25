@@ -8,15 +8,15 @@ local t = {
 	VisibilityFirst = "visibilityFirst"
 }
 
-local function GetFFlagSocialNetworksInEditProfileIXPSetupEnabled() --[[ line: 17 ]]
+local function GetFFlagSocialNetworksInEditProfileIXPSetupEnabled()
 	return game:GetFastFlag("SocialNetworksInEditProfileIXPSetupEnabled_v6")
 end
 
-local function _() --[[ line: 21 | named "GetFFlagSocialNetworksInEditProfileIXPEnabled" ]]
+local function _()
 	return game:GetFastFlag("SocialNetworksInEditProfileIXPEnabled")
 end
 
-local function getExperimentVariant(p0) --[[ line: 25 ]]
+local function getExperimentVariant(p0)
 	-- upvalues: socialNetworksEditProfileIXPLayer (ref), t (ref)
 	return if game:GetFastFlag("SocialNetworksInEditProfileIXPEnabled") then ((p0 or {})[socialNetworksEditProfileIXPLayer] or {}).editSocialNetworks or t.Control else nil
 end
@@ -24,7 +24,7 @@ end
 return {
 	GetFFlagSocialNetworksInEditProfileIXPSetupEnabled = GetFFlagSocialNetworksInEditProfileIXPSetupEnabled,
 	getExperimentVariant = getExperimentVariant,
-	useGetExperimentVariant = function(p1) --[[ line: 39 ]]
+	useGetExperimentVariant = function(p1)
 		-- upvalues: useUserExperiment (ref), socialNetworksEditProfileIXPLayer (ref), getExperimentVariant (ref)
 		return useUserExperiment({ socialNetworksEditProfileIXPLayer }, getExperimentVariant, p1.isExposureEnabled)
 	end,

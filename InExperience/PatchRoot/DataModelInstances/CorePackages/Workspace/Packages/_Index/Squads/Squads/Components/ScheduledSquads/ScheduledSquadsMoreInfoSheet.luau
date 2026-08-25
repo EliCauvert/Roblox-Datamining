@@ -29,7 +29,7 @@ local scheduledSquadSheetModule = require(squads.Components.ScheduledSquads.Sche
 local scheduledSquadActionEnumModule = require(squads.Enums.ScheduledSquadActionEnum)
 local scheduledSquadActionSourceEnumModule = require(squads.Enums.ScheduledSquadActionSourceEnum)
 
-return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useStore (ref), cryoModule (ref), squadPromptType (ref), userProfileStore (ref), useLocalization (ref), view (ref), avatar (ref), fFlagSquadsUseProfileFrameThumbnailModule (ref), text (ref), deleteScheduledSquad (ref), eventNamesModule (ref), scheduledSquadActionEnumModule (ref), scheduledSquadActionSourceEnumModule (ref), unsubscribeFromScheduledSquad (ref), subscribeToScheduledSquad (ref), scheduledSquadSheetModule (ref), sheet (ref), localizationService (ref), foundationModule (ref), button (ref), buttonVariant (ref)
 	local var11 = useDispatch()
 	local var12 = useLocalUserId()
@@ -41,27 +41,27 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 	local var18 = dateTime and dateTime.UnixTimestamp < DateTime.now().UnixTimestamp
 	local var19, var20 = reactModule.useState(false)
 	local var21, var22 = reactModule.useState(p0.scheduledSquad.subscribers)
-	local var23 = reactModule.useMemo(function() --[[ line: 62 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), var21 (ref)
-		return cryoModule.List.map(var21, function(p1) --[[ line: 63 ]]
+		return cryoModule.List.map(var21, function(p1)
 			return tostring(p1.userId)
 		end)
 	end, { var21 })
-	reactModule.useEffect(function() --[[ line: 68 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref), p0 (ref)
 		var22(p0.scheduledSquad.subscribers)
 	end, { p0.scheduledSquad.subscribers })
 	local var24 = tostring(p0.scheduledSquad.initiatorId) == tostring(var12)
-	local var25 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var24 (ref), cryoModule (copy), var23 (ref), var12 (ref)
-		return var24 or cryoModule.List.findWhere(var23, function(p2) --[[ line: 75 ]]
+		return var24 or cryoModule.List.findWhere(var23, function(p2)
 			-- upvalues: var12 (copy)
 			return p2 == tostring(var12)
 		end) ~= nil
 	end, { var24, var12, var23 })
 	local var26, var27 = reactModule.useState({})
 	local var28, var29 = reactModule.useState(true)
-	local var30 = reactModule.useCallback(function() --[[ line: 84 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), p0 (ref)
 		var20(false)
 		
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 			p0.onClose()
 		end
 	end, { p0.onClose })
-	local var31 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref), var13 (ref), var15 (ref), squadPromptType (copy)
 		var30()
 		var13.setSquadPrompt(var15, {
@@ -77,10 +77,10 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 			promptType = squadPromptType.Error
 		})
 	end, { var30, var13.setSquadPrompt, var15 })
-	reactModule.useEffect(function() --[[ line: 100 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (ref), userProfileStore (copy), cryoModule (copy), var23 (ref), var16 (ref), var27 (ref), var30 (ref), var31 (ref)
 		var29(true)
-		userProfileStore.get().fetchNamesByUserIds(cryoModule.List.join(var23, if var16 then var16.participants else {}), function(p3) --[[ line: 103 ]]
+		userProfileStore.get().fetchNamesByUserIds(cryoModule.List.join(var23, if var16 then var16.participants else {}), function(p3)
 			-- upvalues: var27 (copy), var29 (copy), var30 (copy), var31 (copy)
 			if p3.status == "success" then
 				local t = {}
@@ -119,7 +119,7 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 			displayName = var26[tostring(p0.scheduledSquad.initiatorId)]
 		}
 	})
-	local var33 = reactModule.useMemo(function() --[[ line: 147 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: var21 (ref), reactModule (copy), view (copy), avatar (copy), fFlagSquadsUseProfileFrameThumbnailModule (copy), text (copy), var26 (ref)
 		local t = {}
 		
@@ -141,7 +141,7 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 		end
 		return t
 	end, { var26, var21 })
-	local var34 = reactModule.useMemo(function() --[[ line: 173 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), cryoModule (copy), var23 (ref), reactModule (copy), view (copy), avatar (copy), fFlagSquadsUseProfileFrameThumbnailModule (copy), text (copy), var26 (ref)
 		local t = {}
 		
@@ -169,7 +169,7 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 		end
 		return t
 	end, { var26, var23, var16 and var16.participants })
-	local var35 = reactModule.useCallback(function() --[[ line: 206 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref), var11 (ref), deleteScheduledSquad (copy), p0 (ref), var13 (ref), eventNamesModule (copy), scheduledSquadActionEnumModule (copy), scheduledSquadActionSourceEnumModule (copy), var14 (ref)
 		var30()
 		var11(deleteScheduledSquad(p0.scheduledSquad.scheduledGroupUpId, var13.setSquadPrompt))
@@ -187,20 +187,20 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 		var13.setSquadPrompt, var13.squadLocation, var15
 	})
 	
-	local var36 = function() --[[ line: 231 ]]
+	local var36 = function()
 		-- upvalues: var22 (ref), cryoModule (copy), var21 (ref), var12 (ref)
-		var22(cryoModule.List.filter(var21, function(p4) --[[ line: 232 ]]
+		var22(cryoModule.List.filter(var21, function(p4)
 			-- upvalues: var12 (copy)
 			return tostring(p4.userId) ~= tostring(var12)
 		end))
 	end
 	
-	local var37 = function() --[[ line: 237 ]]
+	local var37 = function()
 		-- upvalues: var22 (ref), cryoModule (copy), var21 (ref), var12 (ref)
 		var22(cryoModule.List.join(var21, { { userId = tostring(var12) } }))
 	end
 	
-	local var38 = reactModule.useCallback(function() --[[ line: 242 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref), unsubscribeFromScheduledSquad (copy), p0 (ref), var36 (ref), var31 (ref), subscribeToScheduledSquad (copy), var37 (ref), var30 (ref), var13 (ref), eventNamesModule (copy), scheduledSquadActionEnumModule (copy), scheduledSquadActionSourceEnumModule (copy), var14 (ref)
 		if var25 then
 			unsubscribeFromScheduledSquad({
@@ -224,7 +224,7 @@ return function(p0) --[[ line: 48 | named "ScheduledSquadsMoreInfoSheet" ]]
 		var25, var13.squadLocation, var14, p0.scheduledSquad, var13.fireSquadAnalytics,
 		var30, var31, var36, var37, var14
 	})
-	local var39 = reactModule.useCallback(function() --[[ line: 284 ]]
+	local var39 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), var13 (ref), eventNamesModule (copy), scheduledSquadActionEnumModule (copy), p0 (ref), scheduledSquadActionSourceEnumModule (copy), var14 (ref)
 		var20(true)
 		var13.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {

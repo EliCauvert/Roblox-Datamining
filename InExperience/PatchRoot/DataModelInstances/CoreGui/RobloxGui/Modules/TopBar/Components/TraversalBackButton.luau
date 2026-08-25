@@ -25,7 +25,7 @@ local _ = traversal.Flags.FFlagUseLocalTraversalHistory
 local fFlagAddTraversalBackButtonAnimation = traversal.Flags.FFlagAddTraversalBackButtonAnimation
 local fixTraversalBackButtonAnimation = game:DefineFastFlag("FixTraversalBackButtonAnimation", false)
 
-return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" ]]
+return reactModule.memo(function(_)
 	-- upvalues: useTokens (ref), reactModule (ref), teleportService (ref), constants (ref), settingsShowSignal (ref), traversalTelemetry (ref), useLocalization (ref), getGameInfoStore (ref), dataHydrationTypes (ref), signalsReactModule (ref), fixTraversalBackButtonAnimation (ref), fFlagAddTraversalBackButtonAnimation (ref), reactOtterModule (ref), userGameSettingsService (ref), view (ref), teleportBackButton (ref)
 	local var12 = useTokens()
 	local var13 = reactModule.useRef(nil)
@@ -35,19 +35,19 @@ return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" 
 		return nil
 	end
 	local var16, var17 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: settingsShowSignal (copy), var17 (ref)
-		local var32 = settingsShowSignal:connect(function(p0) --[[ line: 47 ]]
+		local var32 = settingsShowSignal:connect(function(p0)
 			-- upvalues: var17 (copy)
 			var17(p0)
 		end)
 		
-		return function() --[[ line: 50 ]]
+		return function()
 			-- upvalues: var32 (ref)
 			var32:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), traversalTelemetry (copy), var14 (ref)
 		if var16 then
 			traversalTelemetry.sendBackButtonActionEvent({
@@ -60,7 +60,7 @@ return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" 
 	local var18 = useLocalization({
 		defaultBackButtonText = "CoreScripts.TopBar.Traversal.BackButtonDefault"
 	})
-	local var19 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 69 ]]
+	local var19 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: getGameInfoStore (copy), var14 (ref), dataHydrationTypes (copy), var18 (ref)
 		local andFetchGameInfo = getGameInfoStore(p1).getAndFetchGameInfo(tostring(var14))
 		local var34 = andFetchGameInfo.data(p1)
@@ -84,14 +84,14 @@ return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" 
 		if fixTraversalBackButtonAnimation then
 			var22 = reactModule.useRef(nil)
 		end
-		local var28 = reactModule.useMemo(function() --[[ line: 100 ]]
+		local var28 = reactModule.useMemo(function()
 			-- upvalues: var12 (ref)
 			return {
 				duration = var12.Time.Time_300,
 				easingStyle = var12.Ease.StandardOut
 			}
 		end, { var12 })
-		local var29, var30 = reactOtterModule.useAnimatedBinding(0, function(p2) --[[ line: 106 ]]
+		local var29, var30 = reactOtterModule.useAnimatedBinding(0, function(p2)
 			-- upvalues: var26 (write), fixTraversalBackButtonAnimation (copy), var22 (write), var27 (write)
 			var26.current = nil
 			
@@ -110,7 +110,7 @@ return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" 
 		end)
 		var23 = var29
 		local var31 = var30
-		reactModule.useEffect(function() --[[ line: 119 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var16 (ref), fixTraversalBackButtonAnimation (copy), var20 (write), var19 (ref), var22 (write), var13 (ref), var31 (write), reactOtterModule (copy), var28 (ref)
 			if not var16 then
 				var31(reactOtterModule.ease(0, var28))
@@ -130,7 +130,7 @@ return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" 
 				var20.current = var19
 			end
 		end, { var16, var28, var19 })
-		var24 = reactModule.useCallback(function(p3) --[[ line: 142 ]]
+		var24 = reactModule.useCallback(function(p3)
 			-- upvalues: fixTraversalBackButtonAnimation (copy), var22 (write), var16 (ref), var13 (ref), var26 (write), var27 (write), var21 (ref)
 			if fixTraversalBackButtonAnimation then
 				if var22.current then
@@ -169,7 +169,7 @@ return reactModule.memo(function(_) --[[ line: 36 | named "TraversalBackButton" 
 			end
 			return UDim2.new(0, p3 * var21, 0, 0)
 		end, { var16 })
-		var25 = reactModule.useCallback(function(p4) --[[ line: 182 ]]
+		var25 = reactModule.useCallback(function(p4)
 			-- upvalues: var16 (ref)
 			return if p4 <= 0 then var16 else true
 		end, { var16 })

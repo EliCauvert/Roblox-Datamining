@@ -14,7 +14,7 @@ local SHOES_BUNDLE_TYPE_ID = constants.SHOES_BUNDLE_TYPE_ID
 local DYNAMIC_HEAD_BUNDLE_TYPE_ID = constants.DYNAMIC_HEAD_BUNDLE_TYPE_ID
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-local _ = function(p0, p1) --[[ line: 24 ]]
+local _ = function(p0, p1)
 	-- upvalues: LAYERED_CLOTHING_ORDER (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_ASSET_TYPES (ref)
 	return {
 		AssetId = tonumber(p1) or 0,
@@ -24,9 +24,9 @@ local _ = function(p0, p1) --[[ line: 24 ]]
 	}
 end
 
-local _ = function(p2, p3) --[[ line: 43 ]]
+local _ = function(p2, p3)
 	-- upvalues: cryoModule (ref)
-	return cryoModule.List.filter(p2, function(p4) --[[ line: 47 ]]
+	return cryoModule.List.filter(p2, function(p4)
 		-- upvalues: p3 (ref)
 		for i, v in p3 do
 			if p4.AccessoryType == v then
@@ -37,7 +37,7 @@ local _ = function(p2, p3) --[[ line: 43 ]]
 	end)
 end
 
-local var3 = function(p5, p6) --[[ line: 60 ]]
+local var3 = function(p5, p6)
 	-- upvalues: ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref)
 	local var7
 	local t = {}
@@ -73,7 +73,7 @@ local var3 = function(p5, p6) --[[ line: 60 ]]
 	return t
 end
 
-local var4 = function(p7, p8) --[[ line: 97 ]]
+local var4 = function(p7, p8)
 	-- upvalues: cryoModule (ref)
 	local var8 = p7:GetAccessories(true)
 	local t = {}
@@ -81,7 +81,7 @@ local var4 = function(p7, p8) --[[ line: 97 ]]
 	for i, v in p8 do
 		table.insert(t, v.AccessoryType)
 	end
-	p7:SetAccessories(cryoModule.List.join(cryoModule.List.filter(var8, function(p9) --[[ line: 47 ]]
+	p7:SetAccessories(cryoModule.List.join(cryoModule.List.filter(var8, function(p9)
 		-- upvalues: t (ref)
 		for i, v in t do
 			if p9.AccessoryType == v then
@@ -92,7 +92,7 @@ local var4 = function(p7, p8) --[[ line: 97 ]]
 	end), p8), true)
 end
 
-return function(p10, p11) --[[ line: 116 ]]
+return function(p10, p11)
 	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), var4 (ref), BODY_BUNDLE_TYPE_ID (ref), var3 (ref), SHOES_BUNDLE_TYPE_ID (ref), DYNAMIC_HEAD_BUNDLE_TYPE_ID (ref)
 	local itemSubType
 	if p10.itemType == itemTypeEnum.Asset and (ASSET_TYPE_TO_ACCESSORY_TYPE[p10.itemSubType] or ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[p10.itemSubType]) then

@@ -7,7 +7,7 @@ local urlBase = require(parent.UrlBuilder).UrlBase
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-return function(p0, p1, p2, p3) --[[ line: 39 | named "searchFriendsAsync" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: playersService (ref), promiseModule (ref), urlBase (ref), httpService (ref), fetch (ref), asPromise (ref)
 	local var4 = p3
 	
@@ -28,10 +28,10 @@ return function(p0, p1, p2, p3) --[[ line: 39 | named "searchFriendsAsync" ]]
 		method = "GET",
 		analyticsKey = "build-experience.friends-search",
 		url = formattedText,
-		decode = function(p5) --[[ line: 64 ]]
+		decode = function(p5)
 			return p5
 		end
-	})):andThen(function(p4) --[[ line: 69 ]]
+	})):andThen(function(p4)
 		local t = {}
 		
 		for i, v in if p4 then p4.PageItems else {} do

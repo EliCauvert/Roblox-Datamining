@@ -9,7 +9,7 @@ local userLibModule = require(parent.UserLib)
 local constants = userLibModule.Utils.Constants
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-local var3 = function(p0) --[[ line: 24 ]]
+local var3 = function(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
@@ -22,7 +22,7 @@ local var3 = function(p0) --[[ line: 24 ]]
 	})
 end
 
-local var4 = function(p1, p2) --[[ line: 38 ]]
+local var4 = function(p1, p2)
 	-- upvalues: getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), reactModule (ref), imageSetLabel (ref), var3 (ref), styledTextLabel (ref)
 	local t = {}
 	
@@ -76,7 +76,7 @@ local var4 = function(p1, p2) --[[ line: 38 ]]
 	}, t), var6
 end
 
-return function(p3) --[[ line: 99 ]]
+return function(p3)
 	-- upvalues: useStyle (ref), var4 (ref), useLocalization (ref), reactModule (ref), styledTextLabel (ref)
 	local var8 = useStyle()
 	local font = var8.Font

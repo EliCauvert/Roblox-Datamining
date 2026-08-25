@@ -18,11 +18,11 @@ local constantsModule_1 = require(modules.TopBar.Constants)
 local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
 local container = roactModule.PureComponent:extend("Container")
 
-function container.init(p0) --[[ line: 26 ]]
+function container.init(p0)
 	-- upvalues: roactModule (ref), signalsModule (ref), displayModule (ref)
 	p0.frameRef = roactModule.createRef()
 	p0.lastSavedSelectedCoreGui = nil
-	p0.disposeUiScaleEffect = signalsModule.createEffect(function(p1) --[[ line: 29 ]]
+	p0.disposeUiScaleEffect = signalsModule.createEffect(function(p1)
 		-- upvalues: displayModule (copy), p0 (ref)
 		p0:setState({
 			UiScale = displayModule.GetDisplayStore(p1).getUIScale(p1)
@@ -30,10 +30,10 @@ function container.init(p0) --[[ line: 26 ]]
 	end)
 end
 
-function container.didMount(p2) --[[ line: 37 ]]
+function container.didMount(p2)
 	-- upvalues: guiService (ref)
 	local gamepadEnabled = p2.props.gamepadEnabled
-	p2.selectedCoreObjectChangedSignal = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 40 ]]
+	p2.selectedCoreObjectChangedSignal = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 		-- upvalues: p2 (ref), guiService (copy)
 		if p2.props.visible and guiService.SelectedCoreObject then
 			p2.lastSavedSelectedCoreGui = guiService.SelectedCoreObject
@@ -45,7 +45,7 @@ function container.didMount(p2) --[[ line: 37 ]]
 	end
 end
 
-function container.didUpdate(p3, p4) --[[ line: 52 ]]
+function container.didUpdate(p3, p4)
 	-- upvalues: guiService (ref)
 	local visible = p3.props.visible
 	local gamepadEnabled = p3.props.gamepadEnabled
@@ -65,7 +65,7 @@ function container.didUpdate(p3, p4) --[[ line: 52 ]]
 	end
 end
 
-function container.willUnmount(p5) --[[ line: 72 ]]
+function container.willUnmount(p5)
 	-- upvalues: guiService (ref)
 	p5.selectedCoreObjectChangedSignal:disconnect()
 	guiService:RemoveSelectionGroup("InspectMenu")
@@ -76,7 +76,7 @@ function container.willUnmount(p5) --[[ line: 72 ]]
 	end
 end
 
-function container.render(p6) --[[ line: 81 ]]
+function container.render(p6)
 	-- upvalues: themeModule (ref), constantsModule_1 (ref), roactModule (ref), inspectAndBuyContextModule (ref), constantsModule (ref), guiService (ref), overlayModule (ref), colorsModule (ref), closeButtonModule (ref), initialViewModule (ref), assetDetailsModule (ref), noInventoryNoticeModule (ref)
 	local view = p6.props.view
 	local localPlayerModel = p6.props.localPlayerModel
@@ -86,7 +86,7 @@ function container.render(p6) --[[ line: 81 ]]
 	local var19 = constantsModule_1.ScreenSideOffset * p6.state.UiScale
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p7) --[[ line: 90 ]]
+		render = function(p7)
 			-- upvalues: view (ref), p6 (ref), roactModule (copy), var17 (ref), var19 (ref), themeModule (copy), var18 (ref), visible (ref), constantsModule (copy), guiService (copy), overlayModule (copy), colorsModule (copy), closeButtonModule (copy), initialViewModule (copy), assetDetailsModule (copy), localPlayerModel (ref), noInventoryNoticeModule (copy)
 			local var20 = p7[view]
 			
@@ -99,7 +99,7 @@ function container.render(p6) --[[ line: 81 ]]
 				Selectable = false,
 				AutoButtonColor = false,
 				AutoLocalize = false,
-				[roactModule.Event.Activated] = function() --[[ line: 114 ]]
+				[roactModule.Event.Activated] = function()
 					-- upvalues: view (copy), constantsModule (copy), guiService (copy)
 					if view == constantsModule.View.Wide then
 						guiService:CloseInspectMenu()
@@ -130,7 +130,7 @@ function container.render(p6) --[[ line: 81 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p8, _) --[[ line: 153 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p8, _)
 	return {
 		view = p8.view,
 		visible = p8.visible,

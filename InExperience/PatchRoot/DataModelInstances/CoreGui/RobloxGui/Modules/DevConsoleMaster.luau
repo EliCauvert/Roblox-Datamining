@@ -82,7 +82,7 @@ local t_3 = {
 	VoiceChat = {
 		layoutOrder = 13,
 		tab = mainViewVoiceChatModule,
-		isEnabled = function() --[[ line: 159 ]]
+		isEnabled = function()
 			-- upvalues: default (ref)
 			return game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and (default ~= nil and default:canUseService())
 		end
@@ -90,7 +90,7 @@ local t_3 = {
 	RequestOrchestrator = {
 		layoutOrder = 100,
 		tab = mainViewRequestOrchestratorModule,
-		isEnabled = function() --[[ line: 168 ]]
+		isEnabled = function()
 			-- upvalues: devConsoleRequestOrchestratorTab2 (ref)
 			return devConsoleRequestOrchestratorTab2
 		end
@@ -121,12 +121,12 @@ local t_5 = {
 	[Enum.Platform.None] = constantsModule.FormFactor.Large
 }
 
-local function _() --[[ line: 200 | named "isAdminAsync" ]]
+local function _()
 	-- upvalues: playerPermissionsModule (ref), playersService (ref)
 	return playerPermissionsModule.IsPlayerAdminAsync(playersService.LocalPlayer)
 end
 
-local function getAdminTabList() --[[ line: 207 ]]
+local function getAdminTabList()
 	-- upvalues: t (ref), t_3 (ref)
 	local cloned = table.clone(t)
 	
@@ -138,7 +138,7 @@ local function getAdminTabList() --[[ line: 207 ]]
 	return cloned
 end
 
-function t_4.new() --[[ line: 222 ]]
+function t_4.new()
 	-- upvalues: t_4 (ref)
 	local t = {}
 	setmetatable(t, t_4)
@@ -147,7 +147,7 @@ function t_4.new() --[[ line: 222 ]]
 	t.isEmployee = false
 	t.waitForStart = true
 	t.waitForStartBindable = Instance.new("BindableEvent")
-	coroutine.wrap(function() --[[ line: 233 ]]
+	coroutine.wrap(function()
 		-- upvalues: t (ref)
 		t:SetupDevConsole()
 	end)()
@@ -155,7 +155,7 @@ function t_4.new() --[[ line: 222 ]]
 	return t
 end
 
-function t_4:SetupDevConsole() --[[ line: 240 ]]
+function t_4:SetupDevConsole()
 	-- upvalues: userInputService (ref), t_5 (ref), mainViewModule (ref), setTabListModule (ref), t_2 (ref), devConsoleAnalyticsModule (ref), roduxModule (ref), devConsoleReducerModule (ref), roactModule (ref), roactRoduxModule (ref), dataProviderModule (ref), devConsoleWindowModule (ref), constantsModule (ref), RCCProfilerDataCompleteListenerModule (ref)
 	local var46 = t_5[userInputService:GetPlatform()]
 	self.store = roduxModule.Store.new(devConsoleReducerModule, {
@@ -172,7 +172,7 @@ function t_4:SetupDevConsole() --[[ line: 240 ]]
 					position = constantsModule.MainWindowInit.Position,
 					size = constantsModule.MainWindowInit.Size,
 					tabList = t_2,
-					onCloseCallback = function(p0) --[[ line: 275 ]]
+					onCloseCallback = function(p0)
 						-- upvalues: self (ref)
 						self:SetServerStatsConnection(p0)
 					end
@@ -187,7 +187,7 @@ end
 
 local var43 = t_4.new()
 
-function t_4:refreshTabList() --[[ line: 294 ]]
+function t_4:refreshTabList()
 	-- upvalues: setTabListModule (ref), getAdminTabList (ref), t (ref)
 	if self.isEmployee then
 		self.store:dispatch(setTabListModule(getAdminTabList(), "Log", true))
@@ -198,7 +198,7 @@ function t_4:refreshTabList() --[[ line: 294 ]]
 	end
 end
 
-function t_4:Start() --[[ line: 302 ]]
+function t_4:Start()
 	-- upvalues: roactModule (ref), coreGuiService (ref), getClientReplicatorModule (ref), devConsoleAdminSeesDevTabs (ref), playerPermissionsModule (ref), playersService (ref), setTabListModule (ref), t_1 (ref), t (ref)
 	if not self.init then
 		if self.waitForStart then
@@ -207,7 +207,7 @@ function t_4:Start() --[[ line: 302 ]]
 		self.init = true
 		self.element = roactModule.mount(self.root, coreGuiService, "DevConsoleMaster")
 		local var47 = getClientReplicatorModule()
-		task.spawn(function() --[[ line: 312 ]]
+		task.spawn(function()
 			-- upvalues: devConsoleAdminSeesDevTabs (copy), playerPermissionsModule (copy), playersService (copy), self (ref), setTabListModule (copy), t_1 (copy)
 			if devConsoleAdminSeesDevTabs then
 				if playerPermissionsModule.IsPlayerAdminAsync(playersService.LocalPlayer) then
@@ -222,7 +222,7 @@ function t_4:Start() --[[ line: 302 ]]
 		end)
 		
 		if var47 then
-			self._statsConnector = var47.StatsReceived:connect(function(_) --[[ line: 327 ]]
+			self._statsConnector = var47.StatsReceived:connect(function(_)
 				-- upvalues: self (ref), devConsoleAdminSeesDevTabs (copy), setTabListModule (copy), t (copy)
 				if not self._statsConnector then return end
 				self._statsConnector:Disconnect()
@@ -241,7 +241,7 @@ function t_4:Start() --[[ line: 302 ]]
 	end
 end
 
-function t_4:ToggleVisibility() --[[ line: 348 ]]
+function t_4:ToggleVisibility()
 	-- upvalues: var43 (ref)
 	if not self.init then
 		var43:Start()
@@ -249,7 +249,7 @@ function t_4:ToggleVisibility() --[[ line: 348 ]]
 	self:SetVisibility(not self.store:getState().DisplayOptions.isVisible)
 end
 
-function t_4:GetVisibility() --[[ line: 357 ]]
+function t_4:GetVisibility()
 	if not self.init then
 		return false
 	end
@@ -258,7 +258,7 @@ function t_4:GetVisibility() --[[ line: 357 ]]
 	return if state and state.DisplayOptions then state.DisplayOptions.isVisible and not state.DisplayOptions.isMinimized else false
 end
 
-function t_4.SetServerStatsConnection(_, p1) --[[ line: 372 ]]
+function t_4.SetServerStatsConnection(_, p1)
 	-- upvalues: getClientReplicatorModule (ref)
 	local var49 = getClientReplicatorModule()
 	
@@ -267,7 +267,7 @@ function t_4.SetServerStatsConnection(_, p1) --[[ line: 372 ]]
 	end
 end
 
-function t_4:SetVisibility(p2) --[[ line: 379 ]]
+function t_4:SetVisibility(p2)
 	-- upvalues: var43 (ref), setDevConsoleVisibilityModule (ref)
 	if type(p2) == "boolean" then
 		if not self.init and p2 then
@@ -278,11 +278,11 @@ function t_4:SetVisibility(p2) --[[ line: 379 ]]
 	end
 end
 
-starterGuiService:RegisterGetCore("DevConsoleVisible", function() --[[ line: 391 ]]
+starterGuiService:RegisterGetCore("DevConsoleVisible", function()
 	-- upvalues: var43 (ref)
 	return var43:GetVisibility()
 end)
-starterGuiService:RegisterSetCore("DevConsoleVisible", function(p3) --[[ line: 395 ]]
+starterGuiService:RegisterSetCore("DevConsoleVisible", function(p3)
 	-- upvalues: var43 (ref)
 	if type(p3) ~= "boolean" then
 		error("DevConsoleVisible must be given a boolean value.")

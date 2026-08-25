@@ -14,21 +14,21 @@ local selectExpirationDateModule = require(cancelSubscriptionApp.Store.Selectors
 local selectSubscriptionIdModule = require(cancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
 local _ = require(script.Parent.CancelUserSubscriptionRequestPrompt)
 
-return function() --[[ line: 23 | named "useCancelUserSubscriptionRequestPromptProps" ]]
+return function()
 	-- upvalues: useSelector (ref), selectExpirationDateModule (ref), selectSubscriptionIdModule (ref), useDispatch (ref), reactModule (ref), cancelSubscriptionEndedModule (ref), cancelSubscriptionRequestedModule (ref), marketplaceService (ref), cancelSubscriptionSucceededModule (ref), cancelSubscriptionFailedModule (ref), errorStateEnumModule (ref)
 	local var10 = useSelector(selectExpirationDateModule) or ""
 	local var11 = useSelector(selectSubscriptionIdModule) or ""
 	local var12 = useDispatch()
 	
 	return {
-		onCancel = reactModule.useCallback(function() --[[ line: 28 ]]
+		onCancel = reactModule.useCallback(function()
 			-- upvalues: var12 (ref), cancelSubscriptionEndedModule (copy)
 			var12(cancelSubscriptionEndedModule())
 		end, { var12 }),
-		onConfirm = reactModule.useCallback(function() --[[ line: 32 ]]
+		onConfirm = reactModule.useCallback(function()
 			-- upvalues: var12 (ref), cancelSubscriptionRequestedModule (copy), marketplaceService (copy), var11 (ref), cancelSubscriptionSucceededModule (copy), cancelSubscriptionFailedModule (copy), errorStateEnumModule (copy)
 			var12(cancelSubscriptionRequestedModule())
-			local ok, _ = pcall(function() --[[ line: 34 ]]
+			local ok, _ = pcall(function()
 				-- upvalues: marketplaceService (copy), var11 (copy)
 				return marketplaceService:PerformCancelSubscription(var11)
 			end)

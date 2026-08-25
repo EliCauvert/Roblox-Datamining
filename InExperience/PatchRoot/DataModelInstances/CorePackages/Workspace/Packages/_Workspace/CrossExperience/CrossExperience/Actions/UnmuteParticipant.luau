@@ -1,6 +1,6 @@
 ﻿local crossExperience = script:FindFirstAncestor("CrossExperience")
 local _ = require(crossExperience.Types)
 
-return require(crossExperience.dependencies).Rodux.makeActionCreator(script.Name, function(p0) --[[ line: 7 ]]
+return require(crossExperience.dependencies).Rodux.makeActionCreator(script.Name, function(p0)
 	return { payload = p0 }
 end)

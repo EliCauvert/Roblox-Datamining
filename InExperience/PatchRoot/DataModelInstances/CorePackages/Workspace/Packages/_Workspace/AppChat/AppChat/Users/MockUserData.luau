@@ -86,7 +86,7 @@ local t = {
 	}
 }
 
-function createMockUserProfile(p0) --[[ line: 107 ]]
+function createMockUserProfile(p0)
 	-- upvalues: signalsModule (ref)
 	local createSignal = signalsModule.createSignal
 	local var4, _ = createSignal(p0.username or "")
@@ -111,7 +111,7 @@ function createMockUserProfile(p0) --[[ line: 107 ]]
 	}
 end
 
-function createMockUserProfileStore() --[[ line: 133 ]]
+function createMockUserProfileStore()
 	-- upvalues: t (ref), cryoModule (ref), signalsModule (ref)
 	local t_1 = {}
 	
@@ -119,11 +119,11 @@ function createMockUserProfileStore() --[[ line: 133 ]]
 		t_1[i] = createMockUserProfile(v)
 	end
 	return {
-		fetchNamesByUserIds = function(p1) --[[ line: 141 ]]
+		fetchNamesByUserIds = function(p1)
 			-- upvalues: cryoModule (copy), t_1 (ref), t (copy), signalsModule (copy)
 			return signalsModule.createSignal({
 				status = "success",
-				data = cryoModule.List.filterMap(p1, function(p2) --[[ line: 142 ]]
+				data = cryoModule.List.filterMap(p1, function(p2)
 					-- upvalues: t_1 (copy), t (copy)
 					local var12 = t_1[p2]
 					
@@ -135,11 +135,11 @@ function createMockUserProfileStore() --[[ line: 133 ]]
 				end)
 			})
 		end,
-		invalidateCachedNamesForUserIds = function() --[[ line: 164 ]] end
+		invalidateCachedNamesForUserIds = function() end
 	}
 end
 
-function createMockPresenceData() --[[ line: 169 ]]
+function createMockPresenceData()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -152,7 +152,7 @@ function createMockPresenceData() --[[ line: 169 ]]
 	return t_1
 end
 
-function createMockApolloProfiles() --[[ line: 183 ]]
+function createMockApolloProfiles()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -168,9 +168,9 @@ function createMockApolloProfiles() --[[ line: 183 ]]
 	return t_1
 end
 
-function getUserProfilesFetchData() --[[ line: 200 ]]
+function getUserProfilesFetchData()
 	-- upvalues: cryoModule (ref), t (ref)
-	return cryoModule.List.map(t, function(p3) --[[ line: 201 ]]
+	return cryoModule.List.map(t, function(p3)
 		return p3
 	end)
 end

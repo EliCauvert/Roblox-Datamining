@@ -1,6 +1,6 @@
 ﻿local propertiesModule = require(script.Parent.Parent.Properties)
 
-return function(p0) --[[ line: 7 | named "processThumbstickInput" ]]
+return function(p0)
 	-- upvalues: propertiesModule (ref)
 	local var1 = 0
 	local var2 = 0

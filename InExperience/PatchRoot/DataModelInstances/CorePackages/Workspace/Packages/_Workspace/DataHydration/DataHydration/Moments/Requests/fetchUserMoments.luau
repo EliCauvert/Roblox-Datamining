@@ -9,7 +9,7 @@ local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extr
 local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
 local fFlagProfileMomentsOrderingAndReactions = require(parent.SharedFlags).FFlagProfileMomentsOrderingAndReactions
 
-return function(p0, p1, p2) --[[ line: 22 | named "fetchUserMoments" ]]
+return function(p0, p1, p2)
 	-- upvalues: constructApiUrlModule (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), fFlagProfileMomentsOrderingAndReactions (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref)
 	local var7, var8 = constructApiUrlModule("content-captures-api/v2/moments/get-users-moments")
 	
@@ -19,7 +19,7 @@ return function(p0, p1, p2) --[[ line: 22 | named "fetchUserMoments" ]]
 		url = `{var7}?{httpModule.Url:makeQueryString({ count = 18, targetUserId = p0, paginationContext = p1 })}`,
 		headers = var8,
 		network = p2,
-		decode = function(p3) --[[ line: 41 ]]
+		decode = function(p3)
 			-- upvalues: convertApiMomentsToMomentItemsModule (copy), p1 (ref), fFlagProfileMomentsOrderingAndReactions (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy)
 			local items = p3.items
 			

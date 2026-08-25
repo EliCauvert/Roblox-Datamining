@@ -12,9 +12,9 @@ local var4 = httpRequestModule.config({
 })
 local notificationsUpsellDisableBackgroundDismiss = game:DefineFastFlag("NotificationsUpsellDisableBackgroundDismiss", false)
 
-local function openModal(p0) --[[ line: 22 ]]
+local function openModal(p0)
 	-- upvalues: sendEventDeferred (ref), modalEventConstantsModule (ref), notificationModalsManagerModule (ref), getGameNameAndDescription (ref), var4 (ref), notificationsUpsellModalModule (ref), notificationsUpsellDisableBackgroundDismiss (ref)
-	local var7 = function() --[[ line: 23 ]]
+	local var7 = function()
 		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (ref)
 		game:GetService("ExperienceNotificationService"):InvokeOptInPromptClosed()
 		sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
@@ -23,7 +23,7 @@ local function openModal(p0) --[[ line: 22 ]]
 		})
 	end
 	
-	local var8 = function() --[[ line: 30 ]]
+	local var8 = function()
 		-- upvalues: notificationModalsManagerModule (copy)
 		notificationModalsManagerModule.CloseModal("UENUpsell")
 	end
@@ -32,9 +32,9 @@ local function openModal(p0) --[[ line: 22 ]]
 	local var10 = nil
 	
 	if p0 ~= "0" and p0 ~= "" then
-		local var11, var12 = getGameNameAndDescription(var4, p0):andThen(function(p1) --[[ line: 36 ]]
+		local var11, var12 = getGameNameAndDescription(var4, p0):andThen(function(p1)
 			return p1 and p1.Name
-		end, function() --[[ line: 38 ]]
+		end, function()
 			return nil
 		end):await()
 		var9 = var11
@@ -55,9 +55,9 @@ local function openModal(p0) --[[ line: 22 ]]
 	})
 end
 
-return function() --[[ line: 59 ]]
+return function()
 	-- upvalues: openModal (ref)
-	game:GetService("ExperienceNotificationService").PromptOptInRequested:Connect(function() --[[ line: 60 ]]
+	game:GetService("ExperienceNotificationService").PromptOptInRequested:Connect(function()
 		-- upvalues: openModal (copy)
 		openModal(tostring(game.GameId))
 	end)

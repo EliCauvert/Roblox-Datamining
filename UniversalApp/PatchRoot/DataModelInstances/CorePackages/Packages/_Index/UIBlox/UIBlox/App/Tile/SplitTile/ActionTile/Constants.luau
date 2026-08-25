@@ -4,7 +4,7 @@ local _ = require(parent.Style.StyleTypes)
 local _ = require(parent.Style.Fonts)
 
 return {
-	getDefaultStyleProps = function(p0) --[[ line: 36 ]]
+	getDefaultStyleProps = function(p0)
 		-- upvalues: UIBloxConfigModule (ref)
 		assert(p0.Tokens ~= nil, "Design token support is not enabled!")
 		

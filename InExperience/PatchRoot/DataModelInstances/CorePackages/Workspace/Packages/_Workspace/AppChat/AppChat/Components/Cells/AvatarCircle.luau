@@ -5,7 +5,7 @@ local avatarOneToOneModule = require(script.AvatarOneToOne)
 local avatarGroupModule = require(script.AvatarGroup)
 local t = { presenceIndicatorSize = 14 }
 
-return function(p0) --[[ line: 32 | named "AvatarCircle" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), avatarOneToOneModule (ref), avatarGroupModule (ref)
 	local var5 = cryoModule.Dictionary.union(p0, t)
 	

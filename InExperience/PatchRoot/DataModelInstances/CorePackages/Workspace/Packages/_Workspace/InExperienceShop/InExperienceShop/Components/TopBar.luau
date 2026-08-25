@@ -21,7 +21,7 @@ local t = {
 	report = "Feature.Catalog.Action.Report"
 }
 
-return function(p0) --[[ line: 39 | named "TopBar" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), REPORT_MENU_ITEM_ID (ref), REPORT_ICON (ref), reactModule (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), iconButton (ref), OVERFLOW_ICON (ref), buttonVariant (ref), view (ref), iconName (ref), text (ref)
 	local var5 = useLocalization(t)
 	local t_1 = {}

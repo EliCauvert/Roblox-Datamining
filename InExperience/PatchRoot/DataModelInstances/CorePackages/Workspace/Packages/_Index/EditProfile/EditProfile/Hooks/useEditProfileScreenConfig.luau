@@ -20,7 +20,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 38 ]]
+return function(p0)
 	-- upvalues: t (ref), useNavigation (ref), useRealNamesInDisplayNamesEnabledModule (ref), reactModule (ref), profileRefreshSignal (ref), promiseModule (ref), enumsModule (ref), textKeysModule (ref)
 	local var9 = t[p0]
 	local var10 = useNavigation()
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 38 ]]
 	local var12 = reactModule.useRef(nil)
 	local var13, var14 = reactModule.useState(false)
 	local var15, var16 = reactModule.useState(false)
-	local var17 = reactModule.useCallback(function() --[[ line: 51 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: profileRefreshSignal (copy), var10 (ref)
 		profileRefreshSignal.notifyProfileRefresh()
 		var10.goBack()
@@ -39,26 +39,26 @@ return function(p0) --[[ line: 38 ]]
 		titleKey = if p0 == enumsModule.Screens.EditDisplayName then if var11 then textKeysModule.EditAgedUpDisplayName else textKeysModule.EditDisplayName else var9.titleKey,
 		saveKey = textKeysModule.SaveButtonText,
 		onClose = var17,
-		onSave = reactModule.useCallback(function() --[[ line: 60 ]]
+		onSave = reactModule.useCallback(function()
 			-- upvalues: var12 (ref), var15 (ref), var14 (ref), promiseModule (copy), var17 (ref)
 			if var12.current and not var15 then
 				var14(true)
-				promiseModule.resolve(var12.current()):andThen(function() --[[ line: 64 ]]
+				promiseModule.resolve(var12.current()):andThen(function()
 					-- upvalues: var14 (copy), var17 (copy)
 					var14(false)
 					var17()
-				end):catch(function(_) --[[ line: 68 ]]
+				end):catch(function(_)
 					-- upvalues: var14 (copy)
 					var14(false)
 				end)
 			end
 		end, { var15 }),
 		isLoading = var13,
-		registerSaveHandler = reactModule.useCallback(function(p1) --[[ line: 56 ]]
+		registerSaveHandler = reactModule.useCallback(function(p1)
 			-- upvalues: var12 (ref)
 			var12.current = p1
 		end, {}),
-		updateErrorState = reactModule.useCallback(function(p2) --[[ line: 47 ]]
+		updateErrorState = reactModule.useCallback(function(p2)
 			-- upvalues: var16 (ref)
 			var16(p2)
 		end, {}),

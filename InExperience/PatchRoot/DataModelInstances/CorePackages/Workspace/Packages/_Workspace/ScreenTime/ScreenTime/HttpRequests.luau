@@ -31,7 +31,7 @@ local var3 = urlBuilder.new({
 })()
 local var4 = urlBuilder.new({ path = "v1/logout", base = url.AUTH_URL })()
 
-local function checkFormat(p0, p1) --[[ line: 60 ]]
+local function checkFormat(p0, p1)
 	for i, v in pairs(p0) do
 		assert(p1[i] ~= nil, "Missing key")
 		assert(type(p1[i]) == v, "Wrong type")
@@ -40,7 +40,7 @@ end
 
 return {
 	httpService = nil,
-	new = function(p2, p3) --[[ line: 77 ]]
+	new = function(p2, p3)
 		-- upvalues: argCheckModule (ref)
 		argCheckModule.isNotNil(p3, "httpService")
 		local t = { httpService = p3 }
@@ -49,11 +49,11 @@ return {
 		
 		return t
 	end,
-	getInstructions = function(p4, p5) --[[ line: 99 ]]
+	getInstructions = function(p4, p5)
 		-- upvalues: argCheckModule (ref), var2 (ref), checkFormat (ref), t (ref), logging (ref)
 		argCheckModule.isNotNil(p4.httpService, "httpService")
 		argCheckModule.isNotNil(p5, "callback")
-		p4.httpService:RequestInternal({ Method = "GET", Url = var2 }):Start(function(p6, p7) --[[ line: 106 ]]
+		p4.httpService:RequestInternal({ Method = "GET", Url = var2 }):Start(function(p6, p7)
 			-- upvalues: p4 (ref), checkFormat (copy), t (copy), logging (copy), var2 (copy), p5 (ref)
 			local var9, var10
 			local _ = nil
@@ -72,7 +72,7 @@ return {
 				var9 = false
 				var10 = "Status code: " .. p7.StatusCode
 			else
-				local ok, status = pcall(function() --[[ line: 123 ]]
+				local ok, status = pcall(function()
 					-- upvalues: p4 (copy), p7 (ref), checkFormat (copy), t (copy), t_1 (write)
 					local body = p4.httpService:JSONDecode(p7.Body)
 					checkFormat(t.GET_INSTRUCTIONS, body)
@@ -92,7 +92,7 @@ return {
 			p5(var9, var7, t_1)
 		end)
 	end,
-	reportExecution = function(p8, p9, p10, p11) --[[ line: 148 ]]
+	reportExecution = function(p8, p9, p10, p11)
 		-- upvalues: argCheckModule (ref), var3 (ref), checkFormat (ref), t (ref), logging (ref)
 		argCheckModule.isNotNil(p8.httpService, "httpService")
 		p8.httpService:RequestInternal({
@@ -104,7 +104,7 @@ return {
 				serialId = p10,
 				execTime = os.date("%Y-%m-%dT%H:%M:%SZ")
 			})
-		}):Start(function(p12, p13) --[[ line: 165 ]]
+		}):Start(function(p12, p13)
 			-- upvalues: p8 (ref), checkFormat (copy), t (copy), logging (copy), var3 (copy), p11 (ref)
 			local var12, var13
 			local _ = nil
@@ -117,7 +117,7 @@ return {
 				var12 = false
 				var13 = "Status code: " .. p13.StatusCode
 			else
-				local ok, status = pcall(function() --[[ line: 176 ]]
+				local ok, status = pcall(function()
 					-- upvalues: p8 (copy), p13 (ref), checkFormat (copy), t (copy)
 					local body = p8.httpService:JSONDecode(p13.Body)
 					checkFormat(t.REPORT_EXECUTION, body)
@@ -134,7 +134,7 @@ return {
 			end
 		end)
 	end,
-	logout = function(p14) --[[ line: 191 ]]
+	logout = function(p14)
 		-- upvalues: argCheckModule (ref), var4 (ref)
 		argCheckModule.isNotNil(p14.httpService, "httpService")
 		local var15 = p14.httpService:RequestInternal({
@@ -143,9 +143,9 @@ return {
 			Url = var4,
 			Headers = { ["Content-Type"] = "application/json" }
 		})
-		pcall(function() --[[ line: 201 ]]
+		pcall(function()
 			-- upvalues: var15 (ref)
-			var15:Start(function(_, _) --[[ line: 202 ]] end)
+			var15:Start(function(_, _) end)
 		end)
 	end
 }

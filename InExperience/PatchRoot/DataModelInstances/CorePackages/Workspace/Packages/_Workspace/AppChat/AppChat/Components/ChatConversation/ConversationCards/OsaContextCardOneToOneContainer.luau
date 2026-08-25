@@ -23,12 +23,12 @@ local useIsChatUserMessagesEnabledModule = require(appChat.Hooks.useIsChatUserMe
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
 local useIsRobloxSubscriber = userProfilesModule.Hooks.useIsRobloxSubscriber
 
-return reactModule.memo(function(p0) --[[ line: 37 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), useChatPagePaddingModule (ref), reactModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), useUserProfilesFetch (ref), userProfilesModule (ref), useRecordModalSequenceResponseForConversationModule (ref), useGetConversationFromIdModule (ref), appChatNetworkingModule (ref), useIsGuiInChatVisibleModule (ref), useSelector (ref), roduxNetworkingModule (ref), API (ref), name (ref), getUsernameFromId (ref), getCombinedNameFromId (ref), getThumbnailsForUserIdsModule (ref), foundationModule (ref), osaContextCardOneToOneModule (ref)
 	local var15 = useDispatch()
 	local conversationId = useGetOneToOneFriendIdFromConversationIdModule(p0.conversationId) or ""
 	local var17 = useChatPagePaddingModule()
-	local var18 = reactModule.useMemo(function() --[[ line: 41 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref)
 		return {
 			left = UDim.new(0, var17.left),
@@ -44,7 +44,7 @@ return reactModule.memo(function(p0) --[[ line: 37 ]]
 	})
 	local var22, var23 = reactModule.useState(false)
 	local var24 = useRecordModalSequenceResponseForConversationModule(p0.conversationId)
-	local var25 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), conversationId (ref)
 		if p0.openViewProfile then
 			p0.openViewProfile(conversationId)
@@ -54,23 +54,23 @@ return reactModule.memo(function(p0) --[[ line: 37 ]]
 	local var27 = var26 and var26.osaAcknowledgementStatus == appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse.Unacknowledged
 	local var28 = reactModule.useRef(nil)
 	local var29 = if var27 then useIsGuiInChatVisibleModule(var28, { var28.current }) else false
-	local var30 = useSelector(function(p1) --[[ line: 79 ]]
+	local var30 = useSelector(function(p1)
 		-- upvalues: appChatNetworkingModule (copy), p0 (ref)
 		return appChatNetworkingModule.rodux.RecordModalSequenceResponse.getStatus(p1, p0.conversationId)
 	end)
 	local var31, var32 = reactModule.useState(nil)
 	local var33, var34 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 87 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref), var29 (ref), var30 (ref), roduxNetworkingModule (copy), var22 (ref), var24 (ref), var23 (ref), var26 (ref), var15 (ref), API (copy), p0 (ref), name (copy)
 		if var27 and var29 and (var30 ~= roduxNetworkingModule.Enum.NetworkStatus.Fetching and not var22) and var24 then
-			var24("record_has_seen", "conversation_inline_top_modal", nil, "OsaContextCard"):andThen(function() --[[ line: 96 ]]
+			var24("record_has_seen", "conversation_inline_top_modal", nil, "OsaContextCard"):andThen(function()
 				-- upvalues: var23 (copy), var26 (copy), var15 (copy), API (copy), p0 (copy)
 				var23(true)
 				
 				if var26 and var26.source ~= "friends" then
 					var15(API(p0.conversationId))
 				end
-			end):catch(function(p2) --[[ line: 104 ]]
+			end):catch(function(p2)
 				-- upvalues: name (copy)
 				name:error("Error in OsaContextCardOneToOneContainer -> recordModalSequenceResponseForConversation -> record_has_seen: " .. tostring(p2))
 			end)
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 37 ]]
 	end, {
 		var27, var29, var30, var24, var22, var15, p0.conversationId
 	})
-	reactModule.useEffect(function() --[[ line: 123 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var21 (ref), conversationId (ref), getUsernameFromId (copy), var32 (ref), var34 (ref), getCombinedNameFromId (copy)
 		if var21.data and conversationId then
 			local var35 = getUsernameFromId(var21.data, conversationId)
@@ -94,7 +94,7 @@ return reactModule.memo(function(p0) --[[ line: 37 ]]
 		OsaContextCardOneToOne = reactModule.createElement(osaContextCardOneToOneModule, {
 			displayName = var33,
 			username = var31,
-			avatarThumbnail = reactModule.useMemo(function() --[[ line: 131 ]]
+			avatarThumbnail = reactModule.useMemo(function()
 				-- upvalues: getThumbnailsForUserIdsModule (copy), conversationId (ref)
 				return getThumbnailsForUserIdsModule({ conversationId })[1]
 			end, { conversationId }),

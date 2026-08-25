@@ -6,11 +6,11 @@ local fStringLivePreviewPlaceId = flagsModule.GetFStringLivePreviewPlaceId()
 local fFlagUseV2LivePreviewWatermark = flagsModule.GetFFlagUseV2LivePreviewWatermark()
 local livePreviewWatermark = roactModule.PureComponent:extend("LivePreviewWatermark")
 
-function livePreviewWatermark.init(p0) --[[ line: 13 ]]
+function livePreviewWatermark.init(p0)
 	p0.placeId = tostring(game.PlaceId)
 end
 
-function livePreviewWatermark.render(p1) --[[ line: 17 ]]
+function livePreviewWatermark.render(p1)
 	-- upvalues: fStringLivePreviewPlaceId (ref), roactModule (ref), fFlagUseV2LivePreviewWatermark (ref), fStringAdGuiLivePreviewWatermarkV2 (ref), fStringAdGuiLivePreviewWatermark (ref)
 	return fStringLivePreviewPlaceId == p1.placeId and p1.props.IsVisible and (roactModule.createElement("ImageLabel", {
 		ZIndex = -999,

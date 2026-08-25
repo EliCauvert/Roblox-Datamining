@@ -7,20 +7,20 @@ local _ = require(corePackagesService.Packages.UIBlox).App.ImageSet.Images
 local watermarkComponent = roactModule.PureComponent:extend("WatermarkComponent")
 local policyService = game:GetService("PolicyService")
 
-function watermarkComponent.init(p0) --[[ line: 17 ]]
+function watermarkComponent.init(p0)
 	-- upvalues: runService (ref), policyService (ref)
-	local function UpdateWatermarkVisibility() --[[ line: 18 ]]
+	local function UpdateWatermarkVisibility()
 		-- upvalues: p0 (ref), runService (copy), policyService (copy)
 		p0:setState({
 			watermarkVisible = not runService:IsStudio() and (policyService.IsLuobuServer == Enum.TriStateBoolean.True and policyService.LuobuWhitelisted == Enum.TriStateBoolean.False)
 		})
 	end
 	
-	policyService:GetPropertyChangedSignal("IsLuobuServer"):connect(function() --[[ line: 26 ]]
+	policyService:GetPropertyChangedSignal("IsLuobuServer"):connect(function()
 		-- upvalues: UpdateWatermarkVisibility (ref)
 		UpdateWatermarkVisibility()
 	end)
-	policyService:GetPropertyChangedSignal("LuobuWhitelisted"):connect(function() --[[ line: 30 ]]
+	policyService:GetPropertyChangedSignal("LuobuWhitelisted"):connect(function()
 		-- upvalues: UpdateWatermarkVisibility (ref)
 		UpdateWatermarkVisibility()
 	end)
@@ -29,7 +29,7 @@ function watermarkComponent.init(p0) --[[ line: 17 ]]
 		absoluteSize = Vector2.new(0, 0)
 	})
 	
-	function p0.onAbsoluteSizeChange(p1) --[[ line: 39 ]]
+	function p0.onAbsoluteSizeChange(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ absoluteSize = p1.AbsoluteSize })
 	end
@@ -37,14 +37,14 @@ function watermarkComponent.init(p0) --[[ line: 17 ]]
 	UpdateWatermarkVisibility()
 end
 
-function watermarkComponent.render(p2) --[[ line: 48 ]]
+function watermarkComponent.render(p2)
 	-- upvalues: roactModule (ref)
-	local function _() --[[ line: 49 | named "CalculateRotatedFrameWidth" ]]
+	local function _()
 		-- upvalues: p2 (ref)
 		return p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054
 	end
 	
-	local _ = function() --[[ line: 54 | named "CalculateRotatedFrameHeight" ]]
+	local _ = function()
 		-- upvalues: p2 (ref)
 		return p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054
 	end
@@ -61,7 +61,7 @@ function watermarkComponent.render(p2) --[[ line: 48 ]]
 			Rotation = 14.5,
 			Size = UDim2.new(0, p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054, 0, p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054),
 			Position = UDim2.new(0, (p2.state.absoluteSize.X - (p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054)) * 0.5, 0, (p2.state.absoluteSize.Y - (p2.state.absoluteSize.Y * 0.968147640378 + p2.state.absoluteSize.X * 0.250380004054)) * 0.5)
-		}, (function() --[[ line: 59 | named "CreateGridItems" ]]
+		}, (function()
 			-- upvalues: p2 (ref), roactModule (copy)
 			local ceiled = math.ceil((p2.state.absoluteSize.X * 0.968147640378 + p2.state.absoluteSize.Y * 0.250380004054) / 450)
 			local t = {}

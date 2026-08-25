@@ -14,17 +14,17 @@ local networkingAssetModule = require(profilePlatform.Networking.NetworkingAsset
 local constants = userLibModule.Utils.Constants
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useDispatch (ref), useLazyFmod (ref), useSelector (ref), constantsModule (ref), reactModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), networkingAssetModule (ref), videoTileModule (ref)
 	local var9 = useProfileJsonComponentModule(enumsModule.Components.Videos)
 	local var10 = useDispatch()
 	useLazyFmod()
 	local var11 = if var9 and var9.assetIds and #var9.assetIds > 0 then var9.assetIds else {}
-	local var12 = useSelector(function(p1) --[[ line: 45 ]]
+	local var12 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RODUX_KEY].AssetData or {}
 	end)
-	local var13 = reactModule.useMemo(function() --[[ line: 49 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var11 (write), var12 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy)
 		local t = {}
 		
@@ -41,11 +41,11 @@ return function(p0) --[[ line: 27 ]]
 		end
 		return t
 	end, { var11, var12 })
-	reactModule.useEffect(function() --[[ line: 69 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (write), var12 (ref), var10 (ref), networkingAssetModule (copy)
 		for i, v in var11 do
 			if not var12[tostring(v)] then
-				var10(networkingAssetModule.GetAssetDetails.API(tostring(v))):catch(function() --[[ line: 72 ]] end)
+				var10(networkingAssetModule.GetAssetDetails.API(tostring(v))):catch(function() end)
 			end
 		end
 	end, { var11, var12 })

@@ -14,21 +14,21 @@ local subMenuContextModule = require(chrome.ChromeShared.Unibar.SubMenuContext)
 local inExperienceAppChatModalModule = require(corePackagesService.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule.FFlagTokenizeUnibarConstantsWithStyleProvider
 
-return function() --[[ line: 26 | named "PartyIcon" ]]
+return function()
 	-- upvalues: useTokens (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), mappedSignal (ref), inExperienceAppChatModalModule (ref), useMappedSignal (ref), usePartyIconModule (ref), reactModule (ref), subMenuContextModule (ref), foundationModule (ref)
 	local none
 	local var10 = useTokens()
 	local _ = nil
 	local var11 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else constantsModule.ICON_SIZE
-	local var12 = usePartyIconModule(var11, 24, if useMappedSignal(mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function(_) --[[ line: 37 ]]
+	local var12 = usePartyIconModule(var11, 24, if useMappedSignal(mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function(_)
 		-- upvalues: inExperienceAppChatModalModule (copy)
 		return inExperienceAppChatModalModule:getVisible()
 	end)) then "icons/menu/2-person-with-bubble-on" else "icons/menu/2-person-with-bubble")
 	local var13 = reactModule.useContext(subMenuContextModule)
 	
-	local function _(p0) --[[ line: 45 | named "getTransparency" ]]
+	local function _(p0)
 		-- upvalues: var13 (ref)
-		return if var13 then var13:map(function(p1) --[[ line: 47 ]]
+		return if var13 then var13:map(function(p1)
 			-- upvalues: p0 (ref)
 			return p0 + (1 - p0) * (1 - p1)
 		end) else p0
@@ -42,7 +42,7 @@ return function() --[[ line: 26 | named "PartyIcon" ]]
 	local image = foundationModule.Image
 	local t_2 = {
 		tag = "anchor-center-center position-center-center radius-circle",
-		Size = var12.size:map(function(p2) --[[ line: 57 ]]
+		Size = var12.size:map(function(p2)
 			return UDim2.fromOffset(p2, p2)
 		end)
 	}
@@ -53,7 +53,7 @@ return function() --[[ line: 26 | named "PartyIcon" ]]
 		
 		if var13 then
 			local var17 = 0
-			var18 = var13:map(function(p3) --[[ line: 47 ]]
+			var18 = var13:map(function(p3)
 				-- upvalues: var17 (ref)
 				return var17 + (1 - var17) * (1 - p3)
 			end)
@@ -68,7 +68,7 @@ return function() --[[ line: 26 | named "PartyIcon" ]]
 	t_2.Image = var12.image.thumbnail
 	local t_3 = { Color3 = var10.Color.Content.Emphasis.Color3 }
 	local transparency = var10.Color.Content.Emphasis.Transparency
-	t_3.Transparency = if var13 then var13:map(function(p4) --[[ line: 47 ]]
+	t_3.Transparency = if var13 then var13:map(function(p4)
 		-- upvalues: transparency (ref)
 		return transparency + (1 - transparency) * (1 - p4)
 	end) else transparency
@@ -83,14 +83,14 @@ return function() --[[ line: 26 | named "PartyIcon" ]]
 	}
 	local t_5 = { Color3 = var10.Color.System.Success.Color3 }
 	local transparency_1 = var10.Color.System.Success.Transparency
-	t_5.Transparency = if var13 then var13:map(function(p5) --[[ line: 47 ]]
+	t_5.Transparency = if var13 then var13:map(function(p5)
 		-- upvalues: transparency_1 (ref)
 		return transparency_1 + (1 - transparency_1) * (1 - p5)
 	end) else transparency_1
 	t_4.backgroundStyle = t_5
 	local t_6 = { Color = var10.Color.Surface.Surface_0.Color3 }
 	local transparency_2 = var10.Color.Surface.Surface_0.Transparency
-	t_6.Transparency = if var13 then var13:map(function(p6) --[[ line: 47 ]]
+	t_6.Transparency = if var13 then var13:map(function(p6)
 		-- upvalues: transparency_2 (ref)
 		return transparency_2 + (1 - transparency_2) * (1 - p6)
 	end) else transparency_2

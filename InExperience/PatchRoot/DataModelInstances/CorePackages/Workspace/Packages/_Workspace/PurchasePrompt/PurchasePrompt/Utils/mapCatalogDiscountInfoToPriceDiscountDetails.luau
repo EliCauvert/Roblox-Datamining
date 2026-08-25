@@ -1,6 +1,6 @@
 ﻿local fFlagPurchasePromptCartPricingEnabledModule = require(script:FindFirstAncestor("PurchasePrompt").Flags.FFlagPurchasePromptCartPricingEnabled)
 
-return function(p0) --[[ line: 4 | named "mapCatalogDiscountInfoToPriceDiscountDetails" ]]
+return function(p0)
 	-- upvalues: fFlagPurchasePromptCartPricingEnabledModule (ref)
 	if type(p0) ~= "table" or type(p0.discounts) ~= "table" or #p0.discounts == 0 then
 		return nil

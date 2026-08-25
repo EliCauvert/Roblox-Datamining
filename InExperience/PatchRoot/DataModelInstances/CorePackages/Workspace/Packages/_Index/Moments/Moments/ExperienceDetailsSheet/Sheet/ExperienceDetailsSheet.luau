@@ -14,7 +14,7 @@ local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 local getFFlagMomentsAnalyticsSchemaIdentity = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsSchemaIdentity
 
-return reactModule.memo(function() --[[ line: 37 | named "ExperienceDetailsSheet" ]]
+return reactModule.memo(function()
 	-- upvalues: getExperienceDetailsSheetStoreModule (ref), useSignalState (ref), useJoinExperienceModule (ref), useMomentsSession (ref), useHideTabBarWhileOpenModule (ref), reactModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), inExperienceDetailsPromptContainerModule (ref)
 	local var8 = getExperienceDetailsSheetStoreModule(false)
 	local var9 = useSignalState(var8.getIsOpen)
@@ -22,7 +22,7 @@ return reactModule.memo(function() --[[ line: 37 | named "ExperienceDetailsSheet
 	local var11 = useJoinExperienceModule()
 	local var12 = useMomentsSession()
 	useHideTabBarWhileOpenModule(var9)
-	reactModule.useEffect(function() --[[ line: 47 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var10 (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy), var12 (ref)
 		if var9 and var10 then
 			if getFFlagMomentsAnalyticsSchemaIdentity() then
@@ -54,7 +54,7 @@ return reactModule.memo(function() --[[ line: 37 | named "ExperienceDetailsSheet
 	return if var9 and var10 ~= nil then reactModule.createElement(inExperienceDetailsPromptContainerModule, {
 		universeId = tostring(var10.universeId),
 		onClose = var8.close,
-		onJoin = reactModule.useCallback(function(p0) --[[ line: 82 ]]
+		onJoin = reactModule.useCallback(function(p0)
 			-- upvalues: var10 (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var11 (ref), var8 (ref)
 			if var10 then
 				if fFlagMomentsFixRecommendationImpressionLifecycleModule and var10.onBeforeJoin ~= nil then

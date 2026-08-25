@@ -2,7 +2,7 @@
 local getTryOnItemComparisonDataModule = require(script.Parent.getTryOnItemComparisonData)
 local getShouldReplaceTryOnModule = require(script.Parent.getShouldReplaceTryOn)
 
-function getFilteredTryOnItems(p0, p1) --[[ line: 8 ]]
+function getFilteredTryOnItems(p0, p1)
 	-- upvalues: getTryOnItemComparisonDataModule (ref), getShouldReplaceTryOnModule (ref)
 	local t = {}
 	local t_1 = {}

@@ -2,7 +2,7 @@
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 13 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundColor3 = p0.backgroundColor,

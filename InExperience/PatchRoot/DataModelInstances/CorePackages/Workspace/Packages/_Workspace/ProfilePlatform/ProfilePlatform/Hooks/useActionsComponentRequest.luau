@@ -14,7 +14,7 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
-return function() --[[ line: 21 ]]
+return function()
 	-- upvalues: useProfileWrapperContextModule (ref), getDeepValueModule (ref), useAreWebViewsSupportedModule (ref), useIsProfileQrCodeEnabledModule (ref), useCanRenderTransferOnProfileModule (ref), useCanSeeChatTabModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), useLocalUserId (ref), reactModule (ref), buildUserActionsComponentModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref)
 	local var17
 	local var10 = useProfileWrapperContextModule()
@@ -31,7 +31,7 @@ return function() --[[ line: 21 ]]
 	else
 		var17 = false
 	end
-	return reactModule.useMemo(function() --[[ line: 34 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: buildUserActionsComponentModule (copy), var11 (ref), var12 (ref), var13 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var14 (ref), var15 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var17 (ref)
 		return buildUserActionsComponentModule(var11, {
 			areWebViewsSupported = var12,

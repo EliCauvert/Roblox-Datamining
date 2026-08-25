@@ -18,7 +18,7 @@ local t = { holdTime = 1, resetTime = 0.5 }
 local t_1 = { testId = "--foundation-key-label" }
 local rect = Rect.new(Vector2.new(10, 9), Vector2.new(25, 25))
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | named "KeyLabel" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), t (ref), useTokensModule (ref), reactModule (ref), reactOtterModule (ref), getVisualForKeyModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), rect (ref), textModule (ref), circularProgressBarModule (ref), eventConnection (ref), userInputService (ref)
 	local var15 = withDefaultsModule(p0, t_1)
 	local var16 = if var15.holdBehavior then withDefaultsModule(var15.holdBehavior, t) else nil
@@ -26,7 +26,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | 
 	local var18, var19 = reactModule.useState(nil)
 	local _ = nil
 	local var20 = nil
-	local var21, var22 = reactOtterModule.useAnimatedBinding(0, function(p2) --[[ line: 61 ]]
+	local var21, var22 = reactOtterModule.useAnimatedBinding(0, function(p2)
 		-- upvalues: var16 (ref), var18 (ref), var20 (write), reactOtterModule (copy), var19 (ref)
 		if var16 and p2 == 1 and var18 then
 			var20(reactOtterModule.ease(0, {
@@ -65,7 +65,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | 
 		}, {}) else nil,
 		InputBeganConnection = if var16 then reactModule.createElement(eventConnection, {
 			event = userInputService.InputBegan,
-			callback = function(p3) --[[ line: 121 ]]
+			callback = function(p3)
 				-- upvalues: var18 (ref), var15 (ref), var16 (ref), var19 (ref), var20 (write), reactOtterModule (copy), var23 (write)
 				if var18 then return end
 				if p3.KeyCode == var15.keyCode then
@@ -87,7 +87,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | 
 		}) else nil,
 		InputEndedConnection = if var16 then reactModule.createElement(eventConnection, {
 			event = userInputService.InputEnded,
-			callback = function(p4) --[[ line: 147 ]]
+			callback = function(p4)
 				-- upvalues: var18 (ref), var16 (ref), var19 (ref), var20 (write), reactOtterModule (copy), var23 (write)
 				if p4 == var18 then
 					if var16.onEndHold then

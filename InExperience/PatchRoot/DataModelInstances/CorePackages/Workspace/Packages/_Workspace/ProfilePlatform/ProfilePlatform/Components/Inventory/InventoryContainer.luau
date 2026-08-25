@@ -23,7 +23,7 @@ local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profileP
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var14 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0) --[[ line: 38 | named "InventoryContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), useMarketplaceAnalyticsContextModule (ref), reactModule (ref), eventNamesModule (ref), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), useSelector (ref), constantsModule (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var14 (ref), navigateDown (ref), networkingCatalogModule (ref), assetsCarouselModule (ref)
 	local var15 = useProfileWrapperContextModule()
 	local var16 = useProfileAnalyticsContextModule()
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 38 | named "InventoryContainer" ]]
 	local var17 = useDispatch()
 	local var18 = useLocalization({ inventory = textKeysModule.Inventory })
 	local var19 = useMarketplaceAnalyticsContextModule()
-	local var20 = reactModule.useCallback(function(p1, p2, _, _, p3) --[[ line: 50 ]]
+	local var20 = reactModule.useCallback(function(p1, p2, _, _, p3)
 		-- upvalues: var15 (ref), var16 (ref), eventNamesModule (copy), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), enumsModule (copy), var19 (ref)
 		var15.navigateTo.itemDetails(p1)
 		var16.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
@@ -50,11 +50,11 @@ return function(p0) --[[ line: 38 | named "InventoryContainer" ]]
 		var15.externalAnalytics.catalogAnalytics
 	})
 	local assets = useProfileJsonComponentModule(enumsModule.Components.Inventory).assets or {}
-	local var22 = useSelector(function(p4) --[[ line: 83 ]]
+	local var22 = useSelector(function(p4)
 		-- upvalues: constantsModule (copy)
 		return p4[constantsModule.RODUX_KEY].AssetDetails or {}
 	end)
-	local var23 = reactModule.useMemo(function() --[[ line: 87 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: assets (ref), var22 (ref)
 		local t = {}
 		
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 38 | named "InventoryContainer" ]]
 		end
 		return t
 	end, { assets, var22 })
-	local var24 = reactModule.useCallback(function() --[[ line: 100 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: appPage (copy), url (copy), profileId (ref), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var14 (copy), var17 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.GenericWebPage,
@@ -83,7 +83,7 @@ return function(p0) --[[ line: 38 | named "InventoryContainer" ]]
 		end
 		var17(navigateDown(t))
 	end)
-	reactModule.useEffect(function() --[[ line: 115 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), networkingCatalogModule (copy), assets (ref)
 		var17(networkingCatalogModule.GetItemAndBundleDetails.API(assets))
 	end, { assets, var17 })

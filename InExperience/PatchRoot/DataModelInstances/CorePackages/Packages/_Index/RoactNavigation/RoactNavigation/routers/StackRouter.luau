@@ -14,32 +14,32 @@ local invariantModule = require(parent.utils.invariant)
 local createPathParser = require(script.Parent.pathUtils).createPathParser
 local unknownModule = require(script.Parent["ChildIsScreenRouterSymbol.roblox"])
 
-local var11 = function() --[[ line: 28 ]]
+local var11 = function()
 	return {}
 end
 
-local function _(p0) --[[ line: 32 | named "behavesLikePushAction" ]]
+local function _(p0)
 	-- upvalues: navigationActionsModule (ref), stackActionsModule (ref)
 	return if p0.type ~= navigationActionsModule.Navigate then p0.type == stackActionsModule.Push else true
 end
 
-local _ = function(value) --[[ line: 36 | named "isResetToRootStack" ]]
+local _ = function(value)
 	-- upvalues: stackActionsModule (ref)
 	return value.type == stackActionsModule.Reset and value.key == nil
 end
 
-local function mapToRouteName(p1) --[[ line: 40 ]]
+local function mapToRouteName(p1)
 	return next(p1)
 end
 
-local function foldToRoutes(p2, p3, _) --[[ line: 45 ]]
+local function foldToRoutes(p2, p3, _)
 	local var14, var15 = next(p3)
 	p2[var14] = var15
 	
 	return p2
 end
 
-return function(p4, p5) --[[ line: 51 ]]
+return function(p4, p5)
 	-- upvalues: validateRouteConfigArrayModule (ref), validateRouteConfigMapModule (ref), array (ref), foldToRoutes (ref), mapToRouteName (ref), unknownModule (ref), var11 (ref), navigationActionsModule (ref), stackActionsModule (ref), object (ref), keyGeneratorModule (ref), createPathParser (ref), invariantModule (ref), getScreenForRouteNameModule (ref), stateUtilsModule (ref), createConfigGetterModule (ref)
 	validateRouteConfigArrayModule(p4)
 	p5 = p5 or {}
@@ -70,7 +70,7 @@ return function(p4, p5) --[[ line: 51 ]]
 		end
 		error(string.format("Invalid initialRouteName '%s'. Must be one of [%s]", initialRouteName, var22), 2)
 	end
-	local function var22(p6) --[[ line: 97 | named "getInitialState" ]]
+	local function var22(p6)
 		-- upvalues: t (ref), navigationActionsModule (copy), stackActionsModule (copy), unknownModule (copy), object (copy), keyGeneratorModule (copy), var21 (ref), initialRouteName (ref), initialRouteParams (ref), var16 (ref), p5 (write)
 		local t_1 = {}
 		local routeName = t[p6.routeName]
@@ -125,7 +125,7 @@ return function(p4, p5) --[[ line: 51 ]]
 		end
 	end
 	
-	local function getParamsForRouteAndAction(p7, p8) --[[ line: 162 ]]
+	local function getParamsForRouteAndAction(p7, p8)
 		-- upvalues: object (copy), var16 (ref)
 		if p8.params == object.None then
 			return nil
@@ -148,7 +148,7 @@ return function(p4, p5) --[[ line: 51 ]]
 	return {
 		childRouters = t_1,
 		_CHILD_IS_SCREEN = unknownModule,
-		getComponentForState = function(p9) --[[ line: 199 ]]
+		getComponentForState = function(p9)
 			-- upvalues: invariantModule (copy), t (ref), unknownModule (copy), getScreenForRouteNameModule (copy), var16 (ref)
 			local index = p9.routes[p9.index] or {}
 			local routeName = index.routeName
@@ -157,26 +157,26 @@ return function(p4, p5) --[[ line: 51 ]]
 			
 			return if var33 == nil or var33 == unknownModule then getScreenForRouteNameModule(var16, routeName) else t[routeName].getComponentForState(index)
 		end,
-		getComponentForRouteName = function(p10) --[[ line: 220 ]]
+		getComponentForRouteName = function(p10)
 			-- upvalues: getScreenForRouteNameModule (copy), var16 (ref)
 			return getScreenForRouteNameModule(var16, p10)
 		end,
-		getActionCreators = function(p11, p12) --[[ line: 224 ]]
+		getActionCreators = function(p11, p12)
 			-- upvalues: object (copy), getCustomActionCreators (ref), stackActionsModule (copy), invariantModule (copy), navigationActionsModule (copy)
 			return object.assign(table.clone(getCustomActionCreators(p11, p12)), {
-				pop = function(p13, p14) --[[ line: 226 ]]
+				pop = function(p13, p14)
 					-- upvalues: stackActionsModule (copy), object (copy)
 					return stackActionsModule.pop(object.assign({ n = p13 }, p14 or {}))
 				end,
-				popToTop = function(p15) --[[ line: 229 ]]
+				popToTop = function(p15)
 					-- upvalues: stackActionsModule (copy)
 					return stackActionsModule.popToTop(p15)
 				end,
-				push = function(p16, p17, p18) --[[ line: 232 ]]
+				push = function(p16, p17, p18)
 					-- upvalues: stackActionsModule (copy)
 					return stackActionsModule.push({ routeName = p16, params = p17, action = p18 })
 				end,
-				replace = function(p19, p20, p21, p22) --[[ line: 239 ]]
+				replace = function(p19, p20, p21, p22)
 					-- upvalues: stackActionsModule (copy), p11 (ref), invariantModule (copy)
 					if type(p19) == "string" then
 						return stackActionsModule.replace({
@@ -194,7 +194,7 @@ return function(p4, p5) --[[ line: 51 ]]
 					
 					return stackActionsModule.replace(p19)
 				end,
-				reset = function(value, p23) --[[ line: 257 ]]
+				reset = function(value, p23)
 					-- upvalues: stackActionsModule (copy), p12 (ref)
 					return stackActionsModule.reset({
 						actions = value,
@@ -202,13 +202,13 @@ return function(p4, p5) --[[ line: 51 ]]
 						key = p12
 					})
 				end,
-				dismiss = function() --[[ line: 269 ]]
+				dismiss = function()
 					-- upvalues: navigationActionsModule (copy), p12 (ref)
 					return navigationActionsModule.back({ key = p12 })
 				end
 			})
 		end,
-		getStateForAction = function(p24, p25) --[[ line: 277 ]]
+		getStateForAction = function(p24, p25)
 			-- upvalues: var22 (ref), stackActionsModule (copy), navigationActionsModule (copy), t (ref), unknownModule (copy), stateUtilsModule (copy), object (copy), invariantModule (copy), array (copy), getParamsForRouteAndAction (ref), keyGeneratorModule (copy)
 			if not p25 then
 				return var22(p24)
@@ -251,10 +251,10 @@ return function(p4, p5) --[[ line: 51 ]]
 			if var39 and t[p24.routeName] ~= nil then
 				var39 = t[p24.routeName]
 				invariantModule(if p24.type == stackActionsModule.Push then p24.key == nil else true, "StackRouter does not support key on the push action")
-				local var40 = array.findIndex(p25.routes, if p24.key then function(p27) --[[ line: 353 ]]
+				local var40 = array.findIndex(p25.routes, if p24.key then function(p27)
 					-- upvalues: p24 (ref)
 					return p27.key == p24.key
-				end else function(p26) --[[ line: 349 ]]
+				end else function(p26)
 					-- upvalues: p24 (ref)
 					return p26.routeName == p24.routeName
 				end)
@@ -318,7 +318,7 @@ return function(p4, p5) --[[ line: 51 ]]
 			elseif p24.type == stackActionsModule.Replace then
 				local var48
 				local _ = nil
-				local var45 = if p24.key == nil and #p25.routes > 0 then #p25.routes else array.findIndex(p25.routes, function(p28) --[[ line: 496 ]]
+				local var45 = if p24.key == nil and #p25.routes > 0 then #p25.routes else array.findIndex(p25.routes, function(p28)
 					-- upvalues: p24 (ref)
 					return p28.key == p24.key
 				end)
@@ -342,7 +342,7 @@ return function(p4, p5) --[[ line: 51 ]]
 					return object.assign(table.clone(p25), { isTransitioning = false })
 				elseif p24.type == navigationActionsModule.SetParams then
 					local key = p24.key
-					local var47 = array.findIndex(p25.routes, function(p29) --[[ line: 545 ]]
+					local var47 = array.findIndex(p25.routes, function(p29)
 						-- upvalues: key (ref)
 						return p29.key == key
 					end)
@@ -360,7 +360,7 @@ return function(p4, p5) --[[ line: 51 ]]
 						return object.assign(table.clone(p25), { routes = cloned })
 					elseif p24.type == stackActionsModule.Reset then
 						return if p24.key == nil or p24.key == p25.key then object.assign(table.clone(p25), {
-							routes = if p24.actions then array.map(p24.actions, function(p30) --[[ line: 576 ]]
+							routes = if p24.actions then array.map(p24.actions, function(p30)
 								-- upvalues: t (copy), unknownModule (copy), navigationActionsModule (copy), getParamsForRouteAndAction (copy), object (copy), keyGeneratorModule (copy)
 								local routeName = t[p30.routeName]
 								local t_1 = {}
@@ -382,7 +382,7 @@ return function(p4, p5) --[[ line: 51 ]]
 						var35 = p24.prune
 						
 						if p24.type == stackActionsModule.Pop and var35 == false and key then
-							local var50 = array.findIndex(p25.routes, function(p31) --[[ line: 617 ]]
+							local var50 = array.findIndex(p25.routes, function(p31)
 								-- upvalues: key (ref)
 								return p31.key == key
 							end)
@@ -404,7 +404,7 @@ return function(p4, p5) --[[ line: 51 ]]
 							if p24.type == stackActionsModule.Pop and n ~= nil then
 								index_1 = math.max(2, p25.index - n + 1)
 							elseif key then
-								index_1 = array.findIndex(p25.routes, function(p32) --[[ line: 642 ]]
+								index_1 = array.findIndex(p25.routes, function(p32)
 									-- upvalues: key (ref)
 									return p32.key == key
 								end)
@@ -443,11 +443,11 @@ return function(p4, p5) --[[ line: 51 ]]
 				end
 			end
 		end,
-		getPathAndParamsForState = function(p33) --[[ line: 696 ]]
+		getPathAndParamsForState = function(p33)
 			-- upvalues: getPathAndParamsForRoute (ref)
 			return getPathAndParamsForRoute(p33.routes[p33.index])
 		end,
-		getActionForPathAndParams = function(p34, p35) --[[ line: 701 ]]
+		getActionForPathAndParams = function(p34, p35)
 			-- upvalues: getActionForPathAndParams (ref)
 			return getActionForPathAndParams(p34, p35)
 		end,

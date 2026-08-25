@@ -5,7 +5,7 @@ local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 12 ]]
+function t.new()
 	-- upvalues: t (ref), signalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -18,15 +18,15 @@ function t.new() --[[ line: 12 ]]
 	return t_1
 end
 
-function t:Signal() --[[ line: 24 ]]
+function t:Signal()
 	return self._dataStoresUpdated
 end
 
-function t:getCurrentData() --[[ line: 28 ]]
+function t:getCurrentData()
 	return self._dataStoresData, self._dataStoresDataCount
 end
 
-function t:updateValue(p0, p1) --[[ line: 32 ]]
+function t:updateValue(p0, p1)
 	-- upvalues: circularBufferModule (ref), var2 (ref)
 	if not self._dataStoresData[p0] then
 		local var6 = circularBufferModule.new(var2)
@@ -63,16 +63,16 @@ function t:updateValue(p0, p1) --[[ line: 32 ]]
 	self._dataStoresData[p0].min = if min < p1 then min else p1
 end
 
-function t:isRunning() --[[ line: 80 ]]
+function t:isRunning()
 	return self._isRunning
 end
 
-function t:start() --[[ line: 84 ]]
+function t:start()
 	-- upvalues: getClientReplicatorModule (ref)
 	local var11 = getClientReplicatorModule()
 	
 	if var11 and not self._statsListenerConnection then
-		self._statsListenerConnection = var11.StatsReceived:connect(function(p2) --[[ line: 87 ]]
+		self._statsListenerConnection = var11.StatsReceived:connect(function(p2)
 			-- upvalues: self (ref)
 			local dataStoreBudget = p2.DataStoreBudget
 			self._lastUpdateTime = os.time()
@@ -95,7 +95,7 @@ function t:start() --[[ line: 84 ]]
 	end
 end
 
-function t:stop() --[[ line: 107 ]]
+function t:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

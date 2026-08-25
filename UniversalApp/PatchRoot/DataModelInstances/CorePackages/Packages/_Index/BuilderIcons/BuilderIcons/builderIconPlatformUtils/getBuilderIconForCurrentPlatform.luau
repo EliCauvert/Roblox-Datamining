@@ -9,14 +9,14 @@ local t = {
 	[platformModule.Xbox] = Enum.Platform.XBoxOne
 }
 
-local function _() --[[ line: 13 | named "getPlatform" ]]
+local function _()
 	-- upvalues: userInputService (ref), guiService (ref), getInputPlatformModule (ref), t (ref)
 	local ok, status = pcall(userInputService.GetPlatform, userInputService)
 	
 	return if ok then status elseif guiService:IsTenFootInterface() then t[getInputPlatformModule()] else nil
 end
 
-return function() --[[ line: 27 | named "getBuilderIconForCurrentPlatform" ]]
+return function()
 	-- upvalues: userInputService (ref), guiService (ref), getInputPlatformModule (ref), t (ref), platformIconMapModule (ref)
 	local ok, status = pcall(userInputService.GetPlatform, userInputService)
 	

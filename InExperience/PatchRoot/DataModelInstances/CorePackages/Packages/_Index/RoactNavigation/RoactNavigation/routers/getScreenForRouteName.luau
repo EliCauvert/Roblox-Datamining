@@ -5,12 +5,12 @@ local object = luauPolyfillModule.Object
 local invariantModule = require(parent.utils.invariant)
 local isValidScreenComponentModule = require(parent.utils.isValidScreenComponent)
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: array (ref), object (ref), invariantModule (ref), isValidScreenComponentModule (ref)
 	local var3 = p0[p1]
 	
 	if var3 == nil then
-		error(("There is no route defined for key %s.\nMust be one of: %s"):format(p1, table.concat(array.map(object.keys(p0), function(p2) --[[ line: 16 ]]
+		error(("There is no route defined for key %s.\nMust be one of: %s"):format(p1, table.concat(array.map(object.keys(p0), function(p2)
 			return ("'%s'"):format(p2)
 		end), ",")), 2)
 	end

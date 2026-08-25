@@ -16,7 +16,7 @@ local t = {
 	size = paginationSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 37 | named "DirectionalPagination" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), paginationVariantModule (ref), reactModule (ref), usePaginationNavModule (ref), paginationUtilsModule (ref), chipModule (ref), paginationSizeModule (ref), chipSizeModule (ref), chipVariantModule (ref), viewModule (ref), textModule (ref)
 	local var16
 	local var13 = withDefaultsModule(p0, t)
@@ -51,12 +51,12 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 37 | 
 			isLastDisabled = var17
 		}
 	}, var19)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 64 ]]
+	reactModule.useImperativeHandle(p1, function()
 		-- upvalues: var18 (ref)
 		return var18
 	end, { var18 })
 	
-	return var20.createLayout(reactModule.useMemo(function() --[[ line: 68 ]]
+	return var20.createLayout(reactModule.useMemo(function()
 		-- upvalues: var15 (ref), var13 (ref), paginationUtilsModule (copy), reactModule (copy), chipModule (copy), size (ref), paginationSizeModule (copy), chipSizeModule (copy), chipVariantModule (copy), viewModule (copy), textModule (copy)
 		if not var15 then
 			return nil
@@ -67,7 +67,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 37 | 
 			LayoutOrder = 2,
 			isChecked = false,
 			isDisabled = true,
-			onActivated = function() --[[ line: 80 ]] end,
+			onActivated = function() end,
 			size = if size == paginationSizeModule.Small then chipSizeModule.Small else chipSizeModule.Medium,
 			testId = `{var13.testId}--page-label`,
 			text = var21,

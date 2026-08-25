@@ -12,7 +12,7 @@ local images = UIBloxModule.App.ImageSet.Images
 local standardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0) --[[ line: 26 | named "GamePlayerFeedbackPrompt" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), getFFlagEdpPlayerFeedbackPromptTitleOnly (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), playerFeedbackEventsModule (ref), inlinePrompt (ref), images (ref), buttonType (ref), standardButtonSize (ref)
 	local var4 = useLocalization({
 		buttonLabelKey = "PlayerFeedbacks.VoteForm.PromptBanner.GiveFeedbackButton",
@@ -21,17 +21,17 @@ return function(p0) --[[ line: 26 | named "GamePlayerFeedbackPrompt" ]]
 		titleOnlyKey = if getFFlagEdpPlayerFeedbackPromptTitleOnly() then "PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly" else nil
 	})
 	local var5 = useRoactService(appEventIngestService)
-	local var6 = reactModule.useCallback(function() --[[ line: 36 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var5 (ref), p0 (ref)
 		playerFeedbackEventsModule.ClickPlayerFeedbackPromptCta(var5, p0.placeId)
 		p0.onButtonClick()
 	end, { var5, p0.placeId, p0.onButtonClick })
-	local var7 = reactModule.useCallback(function() --[[ line: 41 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var5 (ref), p0 (ref)
 		playerFeedbackEventsModule.DismissPlayerFeedbackPrompt(var5, p0.placeId)
 		p0.onDimiss()
 	end, { var5, p0.placeId, p0.onDimiss })
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var5 (ref), p0 (ref)
 		playerFeedbackEventsModule.PlayerFeedbackPromptMounted(var5, p0.placeId)
 	end, { var5, p0.placeId })

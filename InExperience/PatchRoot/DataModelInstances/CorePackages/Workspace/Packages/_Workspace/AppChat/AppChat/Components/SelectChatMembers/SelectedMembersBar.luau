@@ -8,12 +8,12 @@ local friendCountLabelModule = require(script.Parent.FriendCountLabel)
 local memberEntryModule = require(script.Parent.MemberEntry)
 local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
 
-return reactModule.memo(function(p0) --[[ line: 20 | named "SelectedMembersBar" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), memberEntryModule (ref), foundationModule (ref), friendCountLabelModule (ref)
 	local var6 = useStyle()
 	local var7 = reactModule.useRef(nil)
 	local var8 = useSignalState(getSelectedUsersStoreModule(false).getMaxSize())
-	local var9 = reactModule.useMemo(function() --[[ line: 27 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), reactModule (copy), memberEntryModule (copy), var6 (ref)
 		local t = {}
 		
@@ -22,7 +22,7 @@ return reactModule.memo(function(p0) --[[ line: 20 | named "SelectedMembersBar" 
 		end
 		return t
 	end, { var8 })
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref)
 		if var7.current then
 			var7.current.ScrollBarThickness = 0

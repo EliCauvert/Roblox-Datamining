@@ -1,4 +1,4 @@
-﻿return function() --[[ line: 2 | named "createMakeupSchema" ]]
+﻿return function()
 	return {
 		ClassName = "Decal",
 		_children = {

@@ -8,7 +8,7 @@ local view = foundationModule.View
 local chatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local chatMessageItemModule = require(script.Parent.ChatMessageItem)
 
-return function(p0) --[[ line: 26 | named "ChatMessageList" ]]
+return function(p0)
 	-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), reactModule (ref), chatHistoryLoadingStateModule (ref), view (ref), chatMessageItemModule (ref)
 	local t = {}
 	

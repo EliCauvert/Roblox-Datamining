@@ -10,7 +10,7 @@ local debug = creatorAgentChatModule.debug
 local awaitRequestState = toolControllerUtilsModule.awaitRequestState
 local getToolCallOrder = toolControllerUtilsModule.getToolCallOrder
 
-local function _(p0) --[[ line: 44 | named "buildOptimisticPlanTool" ]]
+local function _(p0)
 	return {
 		toolCallId = p0.toolCallId,
 		callOrder = p0.proposal.callOrder or 0,
@@ -19,13 +19,13 @@ local function _(p0) --[[ line: 44 | named "buildOptimisticPlanTool" ]]
 	}
 end
 
-local _ = function(p1, p2, p3) --[[ line: 53 | named "createPlanProposalSync" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: studioProposePlanTool (ref), debug (ref), getToolCallOrder (ref)
 	local var5 = nil
 	local var6 = nil
 	local var7 = false
 	
-	return function(p4) --[[ line: 62 ]]
+	return function(p4)
 		-- upvalues: studioProposePlanTool (copy), p3 (ref), var7 (write), debug (copy), var5 (write), var6 (write), p1 (ref), p2 (ref), getToolCallOrder (copy)
 		local var8, var9, var10, var11, var12 = studioProposePlanTool.findPlanInTurnState(p4, p3())
 		
@@ -74,17 +74,17 @@ local _ = function(p1, p2, p3) --[[ line: 53 | named "createPlanProposalSync" ]]
 	end
 end
 
-return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanController" ]]
+return function(p5, p6, p7, p8)
 	-- upvalues: debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), studioProposePlanTool (ref), getToolCallOrder (ref)
 	local var14 = nil
 	local onPlanAcceptedImpl = nil
 	
-	local function setPlanFlow(value) --[[ line: 120 ]]
+	local function setPlanFlow(value)
 		-- upvalues: var14 (write)
 		var14 = value
 	end
 	
-	local function recoverFailedSubmission(p9, p10, p11) --[[ line: 124 ]]
+	local function recoverFailedSubmission(p9, p10, p11)
 		-- upvalues: p8 (ref), p7 (ref)
 		p9.submitted = false
 		
@@ -109,7 +109,7 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 		p8(p10, p11)
 	end
 	
-	local function submitPlanResult(p12, p13, p14, p15) --[[ line: 143 ]]
+	local function submitPlanResult(p12, p13, p14, p15)
 		-- upvalues: debug (copy), p5 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), recoverFailedSubmission (ref), awaitRequestState (copy), chatConstantsModule (copy), p6 (ref), p7 (ref), var14 (write)
 		debug.log("info", "present_plan tool_result submitting", {
 			sessionId = p12.sessionId,
@@ -168,17 +168,17 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 		end
 	end
 	
-	local function _(p16) --[[ line: 205 | named "submitPlanAccepted" ]]
+	local function _(p16)
 		-- upvalues: submitPlanResult (ref), studioProposePlanTool (copy)
 		submitPlanResult(p16, studioProposePlanTool.formatAcceptedContent(), "accept", nil)
 	end
 	
-	local _ = function(p17, p18) --[[ line: 209 | named "submitPlanFeedback" ]]
+	local _ = function(p17, p18)
 		-- upvalues: submitPlanResult (ref), studioProposePlanTool (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy)
 		submitPlanResult(p17, studioProposePlanTool.formatFeedbackContent(p18), "feedback", if fFlagBuildExperienceToolResultFailureRecoveryModule then p18 else nil)
 	end
 	
-	local function setCurrentPlanProposal(value) --[[ line: 218 ]]
+	local function setCurrentPlanProposal(value)
 		-- upvalues: var14 (write), p7 (ref), onPlanAcceptedImpl (write)
 		if value == nil then
 			if var14 ~= nil then
@@ -201,7 +201,7 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 		end
 	end
 	
-	local function getSubmittedToolCallIds() --[[ line: 235 ]]
+	local function getSubmittedToolCallIds()
 		-- upvalues: p6 (ref)
 		return p6
 	end
@@ -210,7 +210,7 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 	local var22 = nil
 	local var23 = false
 	
-	onPlanAcceptedImpl = function() --[[ line: 240 | named "onPlanAcceptedImpl" ]]
+	onPlanAcceptedImpl = function()
 		-- upvalues: var14 (write), setCurrentPlanProposal (ref), submitPlanResult (ref), studioProposePlanTool (copy)
 		if var14 == nil or var14.submitted then
 			return
@@ -226,14 +226,14 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 			callOrder = var14.proposal.callOrder
 		}
 		setCurrentPlanProposal(var14.proposal)
-		task.spawn(function() --[[ line: 257 ]]
+		task.spawn(function()
 			-- upvalues: var14 (ref), submitPlanResult (copy), studioProposePlanTool (copy)
 			submitPlanResult(var14, studioProposePlanTool.formatAcceptedContent(), "accept", nil)
 		end)
 	end
 	
 	return {
-		syncPlanProposal = function(p19) --[[ line: 62 ]]
+		syncPlanProposal = function(p19)
 			-- upvalues: studioProposePlanTool (copy), getSubmittedToolCallIds (ref), var23 (write), debug (copy), var21 (write), var22 (write), setCurrentPlanProposal (ref), setPlanFlow (ref), getToolCallOrder (copy)
 			local var8, var9, var10, var11, var12 = studioProposePlanTool.findPlanInTurnState(p19, getSubmittedToolCallIds())
 			
@@ -280,7 +280,7 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 				return true
 			end
 		end,
-		stopPendingPlan = function() --[[ line: 287 ]]
+		stopPendingPlan = function()
 			-- upvalues: var14 (write), p7 (ref)
 			if var14 == nil or var14.submitted then
 				return false
@@ -292,7 +292,7 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 			
 			return true
 		end,
-		trySubmitComposerText = function(p20) --[[ line: 263 ]]
+		trySubmitComposerText = function(p20)
 			-- upvalues: var14 (write), setCurrentPlanProposal (ref), submitPlanResult (ref), studioProposePlanTool (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy)
 			if var14 == nil or var14.submitted then
 				return false
@@ -308,7 +308,7 @@ return function(p5, p6, p7, p8) --[[ line: 111 | named "createProposePlanControl
 				feedbackText = p20
 			}
 			setCurrentPlanProposal(var14.proposal)
-			task.spawn(function() --[[ line: 281 ]]
+			task.spawn(function()
 				-- upvalues: var14 (ref), p20 (ref), submitPlanResult (copy), studioProposePlanTool (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy)
 				submitPlanResult(var14, studioProposePlanTool.formatFeedbackContent(p20), "feedback", if fFlagBuildExperienceToolResultFailureRecoveryModule then p20 else nil)
 			end)

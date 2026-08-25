@@ -3,7 +3,7 @@ local reactGlobalsModule = require(parent.ReactGlobals)
 local reactModule = require(parent.React)
 local warnOnceModule = require(script.Parent.warnOnce)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactModule (ref)
 	if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 		warnOnceModule("createFragment", "Please instead use:\n\tReact.createElement(React.Fragment, ...)")

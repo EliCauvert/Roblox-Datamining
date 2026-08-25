@@ -10,7 +10,7 @@ local var4 = tModule.tuple(tModule.callback, tModule.optional(tModule.strictInte
 	queueKeyLimit = tModule.optional(tModule.numberPositive)
 })))
 
-function t.new(p0, p1) --[[ line: 54 ]]
+function t.new(p0, p1)
 	-- upvalues: var4 (ref), t (ref)
 	assert(var4(p0, p1))
 	p1 = p1 or {}
@@ -30,11 +30,11 @@ function t.new(p0, p1) --[[ line: 54 ]]
 	return t_1
 end
 
-function t:hasError(p2) --[[ line: 80 ]]
+function t:hasError(p2)
 	return type(p2) == "string" and p2 ~= "" and self._errors[p2] ~= nil
 end
 
-function t:addError(p3, p4) --[[ line: 88 ]]
+function t:addError(p3, p4)
 	if type(p3) ~= "string" or p3 == "" then return end
 	if self._errors[p3] then
 		self._errors[p3].count += 1
@@ -49,11 +49,11 @@ function t:addError(p3, p4) --[[ line: 88 ]]
 	end
 end
 
-function t:isReadyToReport() --[[ line: 112 ]]
+function t:isReadyToReport()
 	return if self._queueKeyLimit > self._totalKeyCount then if self._queueErrorLimit > self._totalErrorCount then self._totalErrorCount > 0 and self._queueTimeLimit <= self._runningTime else true else true
 end
 
-function t:reportAllErrors() --[[ line: 118 ]]
+function t:reportAllErrors()
 	-- upvalues: cryoModule (ref)
 	local var7 = cryoModule.Dictionary.join(self._errors, {})
 	self._errors = {}
@@ -66,7 +66,7 @@ function t:reportAllErrors() --[[ line: 118 ]]
 	end
 end
 
-function t:_onRenderStep(p5) --[[ line: 133 ]]
+function t:_onRenderStep(p5)
 	self._runningTime += p5
 	
 	if self:isReadyToReport() then
@@ -74,18 +74,18 @@ function t:_onRenderStep(p5) --[[ line: 133 ]]
 	end
 end
 
-function t:startTimer() --[[ line: 141 ]]
+function t:startTimer()
 	-- upvalues: runService (ref)
 	if self._renderSteppedConnection == nil then
 		self._runningTime = 0
-		self._renderSteppedConnection = runService.renderStepped:Connect(function(p6) --[[ line: 145 ]]
+		self._renderSteppedConnection = runService.renderStepped:Connect(function(p6)
 			-- upvalues: self (ref)
 			self:_onRenderStep(p6)
 		end)
 	end
 end
 
-function t:stopTimer() --[[ line: 151 ]]
+function t:stopTimer()
 	if self._renderSteppedConnection ~= nil then
 		self._renderSteppedConnection:Disconnect()
 		self._runningTime = 0

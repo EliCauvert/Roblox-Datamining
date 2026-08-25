@@ -7,7 +7,7 @@ local _ = require(parent.React)
 local motionModule = require(parent.Motion)
 local transitionPreset = motionModule.TransitionPreset
 
-return function(p0, p1) --[[ line: 41 | named "useInputMotionStates" ]]
+return function(p0, p1)
 	-- upvalues: flagsModule (ref), motionModule (ref), transitionPreset (ref)
 	local var7
 	local _ = nil

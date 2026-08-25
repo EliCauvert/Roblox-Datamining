@@ -16,23 +16,23 @@ return if avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag then roduxM
 	tryOnViewState = peekViewState.Closed,
 	tryOnManagerViewState = peekViewState.Closed
 }, {
-	[setItemDetailsPeekViewStateModule.name] = function(p2, p3) --[[ line: 44 ]]
+	[setItemDetailsPeekViewStateModule.name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p2, { viewState = p3.viewState })
 	end,
-	[setItemTryOnPeekViewStateModule.name] = function(p4, p5) --[[ line: 49 ]]
+	[setItemTryOnPeekViewStateModule.name] = function(p4, p5)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p4, { tryOnViewState = p5.viewState })
 	end,
-	[setTryOnManagerPeekViewStateModule.name] = function(p6, p7) --[[ line: 54 ]]
+	[setTryOnManagerPeekViewStateModule.name] = function(p6, p7)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p6, { tryOnManagerViewState = p7.viewState })
 	end,
-	[setLookDetailsPeekViewSelectedTabModule.name] = function(p8, p9) --[[ line: 59 ]]
+	[setLookDetailsPeekViewSelectedTabModule.name] = function(p8, p9)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p8, { lookDetailsSelectedTab = p9.selectedTab })
 	end,
-	[avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p10, p11) --[[ line: 64 ]]
+	[avatarExperienceCommonModule.State.Actions.CharacterHistoryStateChangeButtonActivated.name] = function(p10, p11)
 		-- upvalues: cryoModule (ref), peekViewState (ref)
 		if not p11.tryOn or not p11.tryOn.OutfitTryOn then
 			return p10
@@ -44,7 +44,7 @@ return if avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag then roduxM
 			tryOnManagerViewState = if var9 and p10.tryOnManagerViewState == peekViewState.Closed then peekViewState.SuperBrief elseif not var9 and p10.tryOnManagerViewState ~= peekViewState.Closed then peekViewState.Closed else p10.tryOnManagerViewState
 		})
 	end
-}) else function(p0, p1) --[[ line: 86 ]]
+}) else function(p0, p1)
 	-- upvalues: peekViewState (ref), setItemDetailsPeekViewStateModule (ref), cryoModule (ref), setItemTryOnPeekViewStateModule (ref), setTryOnManagerPeekViewStateModule (ref), setLookDetailsPeekViewSelectedTabModule (ref)
 	p0 = p0 or {
 		lookDetailsSelectedTab = 2,

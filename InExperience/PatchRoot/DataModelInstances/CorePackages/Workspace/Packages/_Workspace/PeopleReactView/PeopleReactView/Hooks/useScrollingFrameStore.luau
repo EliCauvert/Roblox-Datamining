@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local getScrollingFrameStoreModule = require(peopleReactView.Stores.GetScrollingFrameStore)
 
-return function(p0) --[[ line: 9 | named "useScrollingFrameStore" ]]
+return function(p0)
 	-- upvalues: signalsReactModule (ref), getScrollingFrameStoreModule (ref), reactModule (ref)
 	local var4 = signalsReactModule.useSignalState(getScrollingFrameStoreModule)
 	local var5 = reactModule.useRef(false)
@@ -13,9 +13,9 @@ return function(p0) --[[ line: 9 | named "useScrollingFrameStore" ]]
 		var4.setScrollingFrame(p0)
 		var5.current = true
 	end
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref)
-		return function() --[[ line: 19 ]]
+		return function()
 			-- upvalues: var4 (copy)
 			var4.cleanUp()
 		end

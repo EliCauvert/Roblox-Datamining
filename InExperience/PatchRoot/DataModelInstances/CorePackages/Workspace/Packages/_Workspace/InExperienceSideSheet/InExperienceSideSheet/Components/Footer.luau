@@ -7,7 +7,7 @@ local view = foundationModule.View
 local sessionActionButtonsModule = require(inExperienceSideSheet.Components.SessionActionButtons)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 18 | named "Footer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), view (ref), fFlagSideSheetFocusNav (ref), divider (ref), sessionActionButtonsModule (ref)
 	return reactModule.createElement(view, {
 		tag = {

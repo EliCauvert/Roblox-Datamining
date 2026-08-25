@@ -2,7 +2,7 @@
 local cartIdServiceModule = require(avatarExperienceAnalytics.Lib.CartIdService)
 local unifiedEventLogEnumsModule = require(avatarExperienceAnalytics.UnifiedEventLogEnums)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 13 ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: cartIdServiceModule (ref), unifiedEventLogEnumsModule (ref)
 	local var16
 	local var3 = 0

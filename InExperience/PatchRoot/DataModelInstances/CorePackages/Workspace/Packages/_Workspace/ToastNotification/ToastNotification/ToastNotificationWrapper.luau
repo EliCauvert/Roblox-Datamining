@@ -49,7 +49,7 @@ local enableNotificationsToastTTLFix = game:DefineFastFlag("EnableNotificationsT
 local default = require(parent.ToastNotificationSnoozeManager).default
 local getFStringPCGDKFilteredNotificationTypes = sharedFlagsModule.GetFStringPCGDKFilteredNotificationTypes
 
-local function _() --[[ line: 61 | named "GetIsFriendCommunicationRestricted" ]]
+local function _()
 	-- upvalues: thirdPartyUserService (ref)
 	return thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
@@ -64,10 +64,10 @@ local var33 = false
 local var34 = nil
 local var35 = nil
 
-local _ = function() --[[ line: 82 | named "getFRRToastPositionVariant" ]]
+local _ = function()
 	-- upvalues: fFlagFriendshipNotifsUseSendrExperiment (ref), var33 (write), var34 (write), var35 (write), IXPServiceWrapper (ref), friendshipNotifsUseSendrLayerName (ref), FRRToastPositionVariantKey (ref)
 	if fFlagFriendshipNotifsUseSendrExperiment and not var33 then
-		local ok, status = pcall(function() --[[ line: 84 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var33 (copy), IXPServiceWrapper (copy), friendshipNotifsUseSendrLayerName (copy)
 			var33 = true
 			
@@ -87,18 +87,18 @@ local calculateToastPosition = toastNotificationHelperModule.calculateToastPosit
 local isToastToRight = toastNotificationHelperModule.isToastToRight
 local calculateTimeRemaining = toastNotificationHelperModule.calculateTimeRemaining
 
-return function(p0) --[[ line: 115 ]]
+return function(p0)
 	-- upvalues: typeModule (ref), toastNotificationHelperModule (ref), constantsModule (ref), toastNotificationProtocol (ref), reactModule (ref), userGameSettingsService (ref), getNotificationSize (ref), getDeviceOrientation (ref), fFlagFriendshipNotifsUseSendrExperiment (ref), calculateToastPosition (ref), isToastToRight (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), userInputService (ref), useKeyCodeHoldModule (ref), useStyle (ref), playersService (ref), loggerModule (ref), analyticsServiceModule (ref), toastNotificationSessionizationHelperModule (ref), cryoModule (ref), default (ref), var33 (write), var34 (write), var35 (write), IXPServiceWrapper (ref), friendshipNotifsUseSendrLayerName (ref), FRRToastPositionVariantKey (ref), enableNotificationsToastTTLFix (ref), clientToastNotificationsEnabledEngineFeature (ref), guiService (ref), joinExperience (ref), httpService (ref), calculateTimeRemaining (ref), lifecycleEventsModule (ref), getFStringPCGDKFilteredNotificationTypes (ref), thirdPartyUserService (ref), enableDisplayLoggingForToastsFix (ref), getFFlagFilterSecurityAlertsVRToastEnabled (ref), getFFlagEnableChatNewMessage (ref), marshalNotificationData (ref), t (ref), reactOtterModule (ref), isVRAppBuild (ref), touchEnabled (ref), imageSetLabel (ref), close (ref), springAnimatedItem (ref), swipeDetectionWrapperModule (ref), clientNotificationWrapperModule (ref), enableClientToastNotificationsReducedMotion (ref), notificationCardProviderModule (ref), notificationCardModule (ref), toastVRWrapperModule (ref), toastNotificationSnoozeMenuModule (ref), deeplinkConfirmationModal (ref)
 	local var37 = p0.renderLocation == typeModule.RenderLocationEnum.CoreScript
 	local var38 = toastNotificationHelperModule.isDesktopDevice()
 	local var39 = if var37 then constantsModule.CardTopMargin.Experience else constantsModule.CardTopMargin.App
 	local default_1 = toastNotificationProtocol.default
 	
-	local _ = function() --[[ line: 122 ]]
+	local _ = function()
 		return workspace.CurrentCamera.ViewportSize
 	end
 	
-	local _ = function(p1) --[[ line: 127 ]]
+	local _ = function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1 and workspace.CurrentCamera.ViewportSize.X < constantsModule.CompactCardThreashold
 	end
@@ -113,7 +113,7 @@ return function(p0) --[[ line: 115 ]]
 	local var54, var55 = reactModule.useState(calculateToastPosition(false, isToastToRight(var44), var39, var40))
 	local var56, var57 = reactModule.useState(nil)
 	local var58, var59 = reactModule.useState(nil)
-	local var60, var61 = reactModule.useState(function() --[[ line: 148 ]]
+	local var60, var61 = reactModule.useState(function()
 		-- upvalues: var37 (ref), constantsModule (copy)
 		return var37 and workspace.CurrentCamera.ViewportSize.X < constantsModule.CompactCardThreashold
 	end)
@@ -132,14 +132,14 @@ return function(p0) --[[ line: 115 ]]
 	local var79, var80 = reactModule.useState(false)
 	local var81 = var79
 	local var82 = var80
-	local var83 = reactModule.useMemo(function() --[[ line: 167 ]]
+	local var83 = reactModule.useMemo(function()
 		-- upvalues: var78 (ref), var81 (write), var50 (ref)
 		return not var78 or (var81 or var50 == nil)
 	end, { var78, var81, var50 })
-	reactModule.useEffect(function() --[[ line: 172 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var81 (write), userInputService (copy), var82 (write)
 		if var81 then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p2, p3) --[[ line: 177 ]]
+			local inputBeganConnection = userInputService.InputBegan:Connect(function(p2, p3)
 				-- upvalues: var82 (copy)
 				if p3 then return end
 				if p2.KeyCode == Enum.KeyCode.ButtonB then
@@ -147,13 +147,13 @@ return function(p0) --[[ line: 115 ]]
 				end
 			end)
 			
-			return function() --[[ line: 187 ]]
+			return function()
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
 		end
 	end, { var81 })
-	local var84 = useKeyCodeHoldModule(Enum.KeyCode.ButtonSelect, constantsModule.SIGNAL_HOLD_INTENT_SECONDS, constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS, reactModule.useCallback(function() --[[ line: 193 ]]
+	local var84 = useKeyCodeHoldModule(Enum.KeyCode.ButtonSelect, constantsModule.SIGNAL_HOLD_INTENT_SECONDS, constantsModule.SIGNAL_HOLD_COMPLETE_SECONDS, reactModule.useCallback(function()
 		-- upvalues: var82 (write)
 		var82(true)
 	end, {}), var83)
@@ -162,7 +162,7 @@ return function(p0) --[[ line: 115 ]]
 	local var85, var86 = reactModule.useState(Instance.new("BindableEvent"))
 	local var87 = useStyle()
 	
-	local _ = function() --[[ line: 210 ]]
+	local _ = function()
 		-- upvalues: getDeviceOrientation (copy), getNotificationSize (copy), var37 (ref), var43 (ref), var61 (ref), constantsModule (copy), var45 (ref)
 		local viewportSize = workspace.CurrentCamera.ViewportSize
 		local var113 = getDeviceOrientation(viewportSize)
@@ -171,7 +171,7 @@ return function(p0) --[[ line: 115 ]]
 		var45(var113)
 	end
 	
-	local _ = function(p4) --[[ line: 219 ]]
+	local _ = function(p4)
 		-- upvalues: default_1 (ref)
 		default_1:dismissNotification(p4)
 	end
@@ -179,7 +179,7 @@ return function(p0) --[[ line: 115 ]]
 	local var69_1 = var69 or var71
 	local userId = playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or nil))
 	
-	local var90 = function(p5, p6, p7) --[[ line: 226 ]]
+	local var90 = function(p5, p6, p7)
 		-- upvalues: loggerModule (copy), analyticsServiceModule (copy), toastNotificationSessionizationHelperModule (copy), toastNotificationHelperModule (copy), cryoModule (copy), constantsModule (copy), var37 (ref), default (copy), fFlagFriendshipNotifsUseSendrExperiment (copy), typeModule (copy), var33 (copy), var34 (copy), var35 (copy), IXPServiceWrapper (copy), friendshipNotifsUseSendrLayerName (copy), FRRToastPositionVariantKey (copy)
 		if p7 == nil then return end
 		local var116
@@ -204,7 +204,7 @@ return function(p0) --[[ line: 115 ]]
 		
 		if fFlagFriendshipNotifsUseSendrExperiment and p7.notificationType == typeModule.NotificationTypeEnum.FriendRequestReceived then
 			if fFlagFriendshipNotifsUseSendrExperiment and not var33 then
-				local ok, status = pcall(function() --[[ line: 84 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var33 (copy), IXPServiceWrapper (copy), friendshipNotifsUseSendrLayerName (copy)
 					var33 = true
 					
@@ -221,12 +221,12 @@ return function(p0) --[[ line: 115 ]]
 		fireEvent(eventStream, join(t, if p7 then p7.clientEventsPayload else {}))
 	end
 	
-	reactModule.useEffect(function() --[[ line: 273 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userGameSettingsService (copy), var41 (ref)
-		local changedConnection = userGameSettingsService.Changed:Connect(function(p8) --[[ line: 274 ]]
+		local changedConnection = userGameSettingsService.Changed:Connect(function(p8)
 			-- upvalues: userGameSettingsService (copy), var41 (copy)
 			if p8 == "ReducedMotion" then
-				local ok, status = pcall(function() --[[ line: 276 ]]
+				local ok, status = pcall(function()
 					-- upvalues: userGameSettingsService (copy), p8 (ref)
 					return userGameSettingsService[p8]
 				end)
@@ -237,7 +237,7 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end)
 		
-		return function() --[[ line: 286 ]]
+		return function()
 			-- upvalues: changedConnection (ref)
 			if changedConnection then
 				changedConnection:Disconnect()
@@ -245,7 +245,7 @@ return function(p0) --[[ line: 115 ]]
 		end
 	end, { var41, userGameSettingsService })
 	
-	local var91 = function(p9) --[[ line: 293 ]]
+	local var91 = function(p9)
 		-- upvalues: var90 (ref), typeModule (copy), userId (ref), var50 (ref), var65 (ref), var85 (ref)
 		if not p9 then
 			var90(typeModule.ToastNotificationActionsEnum.ModalCancel, userId, var50)
@@ -257,7 +257,7 @@ return function(p0) --[[ line: 115 ]]
 		end
 	end
 	
-	local var92 = reactModule.useCallback(function() --[[ line: 304 ]]
+	local var92 = reactModule.useCallback(function()
 		-- upvalues: var56 (ref), var57 (ref)
 		if var56 then
 			task.cancel(var56)
@@ -265,24 +265,24 @@ return function(p0) --[[ line: 115 ]]
 		var57(nil)
 	end, { var56 })
 	
-	local _ = function(p10) --[[ line: 313 ]]
+	local _ = function(p10)
 		-- upvalues: default_1 (ref), var53 (ref), var92 (ref)
 		default_1:dismissNotification(p10)
 		var53(nil)
 		var92()
 	end
 	
-	local _ = function(p11) --[[ line: 319 ]]
+	local _ = function(p11)
 		-- upvalues: constantsModule (copy)
 		local timeOnScreenMs = p11.state and p11.state.timeOnScreenMs
 		
 		return (timeOnScreenMs and timeOnScreenMs / 1000 or constantsModule.DefaultNotificationDisplayTime) + 1
 	end
 	
-	local var93 = if enableNotificationsToastTTLFix then function(p15, p16, p17) --[[ line: 331 ]]
+	local var93 = if enableNotificationsToastTTLFix then function(p15, p16, p17)
 		-- upvalues: var92 (ref), var68 (ref), var90 (ref), typeModule (copy), userId (ref), clientToastNotificationsEnabledEngineFeature (copy), guiService (copy), default_1 (ref), var53 (ref), var57 (ref)
 		var92()
-		var57(task.delay(p16, function() --[[ line: 337 ]]
+		var57(task.delay(p16, function()
 			-- upvalues: var68 (copy), var92 (copy), var90 (copy), typeModule (copy), userId (copy), p17 (ref), clientToastNotificationsEnabledEngineFeature (copy), guiService (copy), p15 (ref), default_1 (copy), var53 (copy)
 			if var68.current then
 				var92()
@@ -300,10 +300,10 @@ return function(p0) --[[ line: 115 ]]
 			var53(nil)
 			var92()
 		end))
-	end else reactModule.useCallback(function(p12, p13, p14) --[[ line: 357 ]]
+	end else reactModule.useCallback(function(p12, p13, p14)
 		-- upvalues: var92 (ref), var66 (ref), var90 (ref), typeModule (copy), userId (ref), clientToastNotificationsEnabledEngineFeature (copy), guiService (copy), default_1 (ref), var53 (ref), var57 (ref)
 		var92()
-		var57(task.delay(p13, function() --[[ line: 359 ]]
+		var57(task.delay(p13, function()
 			-- upvalues: var66 (copy), var90 (copy), typeModule (copy), userId (copy), p14 (ref), clientToastNotificationsEnabledEngineFeature (copy), guiService (copy), p12 (ref), default_1 (copy), var53 (copy), var92 (copy)
 			if not var66 then
 				var90(typeModule.ToastNotificationActionsEnum.Ignored, userId, p14)
@@ -319,7 +319,7 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end))
 	end, { var66 })
-	local var94 = reactModule.useCallback(function() --[[ line: 380 ]]
+	local var94 = reactModule.useCallback(function()
 		-- upvalues: var50 (ref), var52 (ref), clientToastNotificationsEnabledEngineFeature (copy), guiService (copy), default_1 (ref), var53 (ref), var92 (ref)
 		if var50 and var52 and var52.id == var50.id then
 			if clientToastNotificationsEnabledEngineFeature and var50.luaNotifInfo then
@@ -333,14 +333,14 @@ return function(p0) --[[ line: 115 ]]
 		end
 	end, { var50, var52 })
 	
-	local var95 = function() --[[ line: 397 ]]
+	local var95 = function()
 		-- upvalues: var90 (ref), typeModule (copy), userId (ref), var50 (ref), var94 (ref), var72 (ref)
 		var90(typeModule.ToastNotificationActionsEnum.Dismissed, userId, var50)
 		var94()
 		var72(false)
 	end
 	
-	local var96 = reactModule.useCallback(function() --[[ line: 404 ]]
+	local var96 = reactModule.useCallback(function()
 		-- upvalues: var37 (ref), var85 (ref), var65 (ref)
 		if var37 and var85 then
 			var65(true)
@@ -350,7 +350,7 @@ return function(p0) --[[ line: 115 ]]
 		return true
 	end, { var37, var85 })
 	
-	local var97 = function() --[[ line: 418 ]]
+	local var97 = function()
 		-- upvalues: var50 (ref), var52 (ref), var56 (ref), var93 (write), constantsModule (copy)
 		if var50 and var52 and not var56 then
 			local timeOnScreenMs = var50.state and var50.state.timeOnScreenMs
@@ -358,7 +358,7 @@ return function(p0) --[[ line: 115 ]]
 		end
 	end
 	
-	local var98 = if enableNotificationsToastTTLFix then function(p21, ...) --[[ line: 432 ]]
+	local var98 = if enableNotificationsToastTTLFix then function(p21, ...)
 		-- upvalues: var92 (ref), var50 (ref), var52 (ref), var56 (ref), var93 (write), constantsModule (copy)
 		if p21 then
 			var92()
@@ -368,7 +368,7 @@ return function(p0) --[[ line: 115 ]]
 			local timeOnScreenMs = var50.state and var50.state.timeOnScreenMs
 			var93(var50.id, (timeOnScreenMs and timeOnScreenMs / 1000 or constantsModule.DefaultNotificationDisplayTime) + 1, var50)
 		end
-	end else function(p18, p19, p20) --[[ line: 441 ]]
+	end else function(p18, p19, p20)
 		if p18 then
 			p19()
 			
@@ -376,20 +376,20 @@ return function(p0) --[[ line: 115 ]]
 		end
 		p20()
 	end
-	local var99 = reactModule.useCallback(function() --[[ line: 451 ]]
+	local var99 = reactModule.useCallback(function()
 		-- upvalues: var75 (ref)
 		for i, v in ipairs(var75) do
 			task.cancel(v)
 		end
 	end, { var75 })
-	reactModule.useEffect(function() --[[ line: 457 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var99 (ref)
-		return function() --[[ line: 460 ]]
+		return function()
 			-- upvalues: var99 (copy)
 			var99()
 		end
 	end, { var99 })
-	local var100 = reactModule.useCallback(function(p22, p23) --[[ line: 466 ]]
+	local var100 = reactModule.useCallback(function(p22, p23)
 		-- upvalues: typeModule (copy), var94 (ref), var96 (ref), joinExperience (copy), var37 (ref), var65 (ref), default_1 (ref), var90 (ref), userId (ref), httpService (copy), loggerModule (copy), toastNotificationProtocol (copy)
 		if p22.actionType == typeModule.ActionTypeEnum.Dismiss then
 			var94()
@@ -397,7 +397,7 @@ return function(p0) --[[ line: 115 ]]
 			return
 		elseif p22.actionType ~= typeModule.ActionTypeEnum.Deeplink then
 			if p22.actionType == typeModule.ActionTypeEnum.VoltronBroadcast then
-				local ok, status = pcall(function() --[[ line: 493 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p22 (ref)
 					return httpService:JSONDecode(p22.parameters)
 				end)
@@ -430,9 +430,9 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end
 	end, { var94, var96 })
-	local var101 = reactModule.useCallback(function(p24) --[[ line: 522 ]]
+	local var101 = reactModule.useCallback(function(p24)
 		-- upvalues: var100 (ref), var99 (ref), calculateTimeRemaining (copy), var76 (ref)
-		local function _(p25) --[[ line: 523 | named "executeAllActions" ]]
+		local function _(p25)
 			-- upvalues: var100 (copy), p24 (ref)
 			for i, v in ipairs(p25) do
 				var100(v, p24)
@@ -448,7 +448,7 @@ return function(p0) --[[ line: 115 ]]
 				local var122 = calculateTimeRemaining(v, p24.notificationReceivedTimestampMs, p24.displayTimestamp)
 				
 				if var122 > 0 then
-					table.insert(t, task.delay(var122 / 1000, function() --[[ line: 539 ]]
+					table.insert(t, task.delay(var122 / 1000, function()
 						-- upvalues: v (ref), var100 (copy), p24 (ref)
 						for i, v_1 in ipairs(v.actions) do
 							var100(v_1, p24)
@@ -465,7 +465,7 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end
 	end, { var100, var99, calculateTimeRemaining })
-	local var102 = reactModule.useCallback(function(p26) --[[ line: 555 ]]
+	local var102 = reactModule.useCallback(function(p26)
 		-- upvalues: var62 (ref), var63 (ref), var90 (ref), userId (ref), var50 (ref), lifecycleEventsModule (copy), var100 (ref), typeModule (copy), var96 (ref)
 		if var62 then return end
 		var63(true)
@@ -491,7 +491,7 @@ return function(p0) --[[ line: 115 ]]
 		var63(false)
 	end, { var50, var94, var62, var96 })
 	
-	local var103 = function(p27, p28) --[[ line: 597 ]]
+	local var103 = function(p27, p28)
 		-- upvalues: getFStringPCGDKFilteredNotificationTypes (copy), thirdPartyUserService (copy), default_1 (ref), typeModule (copy), enableDisplayLoggingForToastsFix (copy), default (copy), var90 (ref), userId (ref), var51 (ref), constantsModule (copy), var93 (write), var101 (ref), clientToastNotificationsEnabledEngineFeature (copy), guiService (copy), var59 (ref)
 		p27.displayTimestamp = DateTime.now().UnixTimestampMillis
 		
@@ -531,19 +531,19 @@ return function(p0) --[[ line: 115 ]]
 		var59(nil)
 	end
 	
-	local _ = function(p29, p30) --[[ line: 644 ]]
+	local _ = function(p29, p30)
 		-- upvalues: var58 (ref), var103 (ref), lifecycleEventsModule (copy), var59 (ref)
 		if var58 then
 			task.cancel(var58)
 		end
-		var59(task.delay(p30, function() --[[ line: 648 ]]
+		var59(task.delay(p30, function()
 			-- upvalues: var103 (copy), p29 (ref), lifecycleEventsModule (copy)
 			var103(p29, "display")
 			lifecycleEventsModule:DispatchEvent(lifecycleEventsModule.ToastEvents.Display, p29.notificationType, p29)
 		end))
 	end
 	
-	local var104 = reactModule.useCallback(function(p31) --[[ line: 655 ]]
+	local var104 = reactModule.useCallback(function(p31)
 		-- upvalues: guiService (copy), typeModule (copy), getFFlagFilterSecurityAlertsVRToastEnabled (copy), var77 (ref), getFFlagEnableChatNewMessage (copy), default_1 (ref), marshalNotificationData (copy), var53 (ref), lifecycleEventsModule (copy)
 		if guiService:IsTenFootInterface() and p31 and (p31.notificationType ~= nil and p31.notificationType ~= typeModule.NotificationTypeEnum.ClientNotification) then return end
 		if getFFlagFilterSecurityAlertsVRToastEnabled() and var77 and (p31 and p31.notificationType ~= nil) and p31.notificationType == typeModule.NotificationTypeEnum.SecurityAlert then return end
@@ -560,7 +560,7 @@ return function(p0) --[[ line: 115 ]]
 		end
 		var53(nil)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 707 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var52 (ref), var50 (ref), var103 (ref), lifecycleEventsModule (copy), constantsModule (copy), t (copy), var58 (ref), var59 (ref)
 		if var52 then
 			if var50 and var50.id == var52.id then
@@ -575,14 +575,14 @@ return function(p0) --[[ line: 115 ]]
 			if var58 then
 				task.cancel(var58)
 			end
-			var59(task.delay(var127, function() --[[ line: 648 ]]
+			var59(task.delay(var127, function()
 				-- upvalues: var103 (copy), var126 (ref), lifecycleEventsModule (copy)
 				var103(var126, "display")
 				lifecycleEventsModule:DispatchEvent(lifecycleEventsModule.ToastEvents.Display, var126.notificationType, var126)
 			end))
 		end
 	end, { var52 })
-	reactModule.useEffect(function() --[[ line: 738 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var52 (ref), var50 (ref), var49 (ref), var82 (write)
 		local var128
 		if var52 and var50 then
@@ -598,7 +598,7 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end
 	end, { var52, var50 })
-	reactModule.useEffect(function() --[[ line: 755 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var48 (ref), var62 (ref), var69 (ref), var71 (ref), var73 (ref), var81 (write), holding (ref), var67 (ref), enableNotificationsToastTTLFix (copy), var68 (ref)
 		local var62_1 = var48 and (var62 or (var69 or (var71 or (var73 or (var81 or holding)))))
 		var67(var62_1)
@@ -609,7 +609,7 @@ return function(p0) --[[ line: 115 ]]
 	end, {
 		var48, var62, var69, var71, var73, var81, holding
 	})
-	reactModule.useEffect(function() --[[ line: 784 ]]
+	reactModule.useEffect(function()
 		-- upvalues: enableNotificationsToastTTLFix (copy), var98 (write), var66 (ref), var92 (ref), var97 (ref)
 		if enableNotificationsToastTTLFix then
 			var98(var66)
@@ -618,18 +618,18 @@ return function(p0) --[[ line: 115 ]]
 		end
 		var98(var66, var92, var97)
 	end, { var66 })
-	local var105, var106 = reactOtterModule.useAnimatedBinding(1, function() --[[ line: 793 ]]
+	local var105, var106 = reactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: var48 (ref), var51 (ref), var99 (ref)
 		if not var48 then
 			var51(nil)
 			var99()
 		end
 	end)
-	reactModule.useEffect(function() --[[ line: 800 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var106 (ref), reactOtterModule (copy), var48 (ref), t (copy)
 		var106(reactOtterModule.spring(if var48 then 0 else 1, t))
 	end, { var48, var106 })
-	reactModule.useEffect(function() --[[ line: 806 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagFriendshipNotifsUseSendrExperiment (copy), var50 (ref), typeModule (copy), var33 (copy), var34 (copy), var35 (copy), IXPServiceWrapper (copy), friendshipNotifsUseSendrLayerName (copy), FRRToastPositionVariantKey (copy), calculateToastPosition (copy), var48 (ref), isToastToRight (copy), var44 (ref), var39 (ref), var40 (ref), var46 (ref), var55 (ref)
 		local var131
 		local _ = nil
@@ -638,7 +638,7 @@ return function(p0) --[[ line: 115 ]]
 			local var130
 			if var50 and var50.notificationType == typeModule.NotificationTypeEnum.FriendRequestReceived then
 				if fFlagFriendshipNotifsUseSendrExperiment and not var33 then
-					local ok, status = pcall(function() --[[ line: 84 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var33 (copy), IXPServiceWrapper (copy), friendshipNotifsUseSendrLayerName (copy)
 						var33 = true
 						
@@ -660,14 +660,14 @@ return function(p0) --[[ line: 115 ]]
 		if fFlagFriendshipNotifsUseSendrExperiment then var39 else nil,
 		if fFlagFriendshipNotifsUseSendrExperiment then var46 else nil
 	})
-	reactModule.useEffect(function() --[[ line: 843 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getDeviceOrientation (copy), getNotificationSize (copy), var37 (ref), var43 (ref), var61 (ref), constantsModule (copy), var45 (ref), fFlagFriendshipNotifsUseSendrExperiment (copy), var47 (ref)
 		local viewportSize = workspace.CurrentCamera.ViewportSize
 		local var132 = getDeviceOrientation(viewportSize)
 		var43(getNotificationSize(var37, viewportSize.X))
 		var61(var37 and workspace.CurrentCamera.ViewportSize.X < constantsModule.CompactCardThreashold)
 		var45(var132)
-		local var133 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 847 ]]
+		local var133 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 			-- upvalues: getDeviceOrientation (copy), getNotificationSize (copy), var37 (copy), var43 (copy), var61 (copy), constantsModule (copy), var45 (copy), fFlagFriendshipNotifsUseSendrExperiment (copy), var47 (copy)
 			local viewportSize = workspace.CurrentCamera.ViewportSize
 			local var134 = getDeviceOrientation(viewportSize)
@@ -680,16 +680,16 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end)
 		
-		return function() --[[ line: 854 ]]
+		return function()
 			-- upvalues: var133 (ref)
 			if var133 then
 				var133:Disconnect()
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 862 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var58 (ref), var56 (ref), var85 (ref), var86 (ref)
-		return function() --[[ line: 863 ]]
+		return function()
 			-- upvalues: var58 (copy), var56 (copy), var85 (copy), var86 (copy)
 			if var58 then
 				task.cancel(var58)
@@ -704,9 +704,9 @@ return function(p0) --[[ line: 115 ]]
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 879 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var37 (ref), typeModule (copy), var38 (ref), default_1 (ref)
-		task.delay(0, function() --[[ line: 880 ]]
+		task.delay(0, function()
 			-- upvalues: var37 (copy), typeModule (copy), var38 (copy), default_1 (copy)
 			local var135 = if var37 then {
 				typeModule.ChannelListEnum.Experience,
@@ -722,11 +722,11 @@ return function(p0) --[[ line: 115 ]]
 			default_1:setupNotifications(var135)
 		end)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 900 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default_1 (ref), var104 (ref)
 		local var136 = default_1:listenToDisplayNotification(var104)
 		
-		return function() --[[ line: 902 ]]
+		return function()
 			-- upvalues: var136 (ref)
 			if var136 then
 				var136:Disconnect()
@@ -746,11 +746,11 @@ return function(p0) --[[ line: 115 ]]
 		BackgroundColor3 = var87.Theme.BackgroundUIDefault.Color,
 		Text = "",
 		[reactModule.Event.Activated] = var95,
-		[reactModule.Event.MouseEnter] = function() --[[ line: 927 ]]
+		[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var72 (ref)
 			var72(true)
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 930 ]]
+		[reactModule.Event.MouseLeave] = function()
 			-- upvalues: var72 (ref)
 			var72(false)
 		end
@@ -771,7 +771,7 @@ return function(p0) --[[ line: 115 ]]
 			ImageColor3 = var87.Theme.SystemPrimaryDefault.Color
 		})
 	})
-	local var111 = reactModule.useMemo(function() --[[ line: 953 ]]
+	local var111 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), springAnimatedItem (copy), var42 (ref), var48_1 (ref), var50 (ref), var90 (ref), typeModule (copy), userId (ref), var70 (ref), var54 (ref), t (copy), var107 (ref), var48 (ref), var51 (ref), var99 (ref), swipeDetectionWrapperModule (copy), var94 (ref), var72 (ref), clientToastNotificationsEnabledEngineFeature (copy), clientNotificationWrapperModule (copy), var74 (ref), enableClientToastNotificationsReducedMotion (copy), var105 (ref), var48_2 (ref), textButton (ref), notificationCardProviderModule (copy), var60 (ref), var102 (ref), notificationCardModule (copy), var69_1 (ref), var81 (write), var78 (ref), holdProgress (ref)
 		return reactModule.createElement(springAnimatedItem.AnimatedFrame, {
 			regularProps = {
@@ -781,26 +781,26 @@ return function(p0) --[[ line: 115 ]]
 				BackgroundTransparency = 1,
 				Active = true,
 				Visible = var48_1 and var50 ~= nil,
-				[reactModule.Event.MouseEnter] = function() --[[ line: 962 ]]
+				[reactModule.Event.MouseEnter] = function()
 					-- upvalues: var90 (copy), typeModule (copy), userId (copy), var50 (copy), var70 (copy)
 					var90(typeModule.ToastNotificationActionsEnum.Hover, userId, var50)
 					var70(true)
 				end,
-				[reactModule.Event.MouseLeave] = function() --[[ line: 970 ]]
+				[reactModule.Event.MouseLeave] = function()
 					-- upvalues: var70 (copy)
 					var70(false)
 				end
 			},
 			animatedValues = var54,
 			springOptions = t,
-			mapValuesToProps = function(p32) --[[ line: 976 ]]
+			mapValuesToProps = function(p32)
 				-- upvalues: var107 (copy)
 				return {
 					Position = if var107 then UDim2.new(0.5, 0, 0.5, 0) else UDim2.new(p32.positionX, p32.positionXOffset, p32.positionY, p32.positionYOffset),
 					AnchorPoint = if var107 then Vector2.new(0.5, 0.5) else Vector2.new(p32.anchorX, p32.anchorY)
 				}
 			end,
-			onComplete = function() --[[ line: 991 ]]
+			onComplete = function()
 				-- upvalues: var48 (copy), var51 (copy), var99 (copy)
 				if not var48 then
 					var51(nil)
@@ -812,7 +812,7 @@ return function(p0) --[[ line: 115 ]]
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				swipeEnabled = var48,
-				swipeCallback = function(p33) --[[ line: 1002 ]]
+				swipeCallback = function(p33)
 					-- upvalues: var90 (copy), typeModule (copy), userId (copy), var50 (copy), var94 (copy), var72 (copy)
 					if p33 == Enum.SwipeDirection.Up or p33 == Enum.SwipeDirection.Right then
 						var90(typeModule.ToastNotificationActionsEnum.Dismissed, userId, var50)

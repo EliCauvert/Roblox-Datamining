@@ -5,13 +5,13 @@ local buildTablePropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.bu
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 
-local function _(p0) --[[ line: 21 | named "isArrayLike" ]]
+local function _(p0)
 	local p0Count = #p0
 	
 	return p0Count > 0 and next(p0, p0Count) == nil
 end
 
-return function(_, p1, p2, p3, p4, p5) --[[ line: 26 | named "buildContainerProp" ]]
+return function(_, p1, p2, p3, p4, p5)
 	-- upvalues: propResultCategory (ref), buildRepeatedPropModule (ref), buildTablePropModule (ref)
 	if next(p1) == nil then
 		return p1, propResultCategory.Literal

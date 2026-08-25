@@ -9,13 +9,13 @@ local keystrokeEventModule = require(appChat.Analytics.KeystrokeEvent)
 local getFIntAppChatBehaviorCollectionEnabledPercentageModule = require(appChat.Flags.getFIntAppChatBehaviorCollectionEnabledPercentage)
 local list = { Enum.KeyCode.Return, Enum.KeyCode.KeypadEnter }
 
-return function(p0) --[[ line: 31 | named "useKeystrokeCollection" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), getAppFeaturePolicies (ref), getFIntAppChatBehaviorCollectionEnabledPercentageModule (ref), playersService (ref), default (ref), keystrokeEventModule (ref), cryoModule (ref), list (ref)
 	local var7 = reactModule.useRef(false)
 	local var8 = reactModule.useRef({})
 	local var9 = reactModule.useRef({})
 	local var10 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getAppFeaturePolicies (copy), getFIntAppChatBehaviorCollectionEnabledPercentageModule (copy), playersService (copy), var7 (ref)
 		local var12 = getFIntAppChatBehaviorCollectionEnabledPercentageModule()
 		
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 31 | named "useKeystrokeCollection" ]]
 			var7.current = playersService.LocalPlayer.UserId % 100 < var12
 		end
 	end, {})
-	local var11 = reactModule.useCallback(function(p1) --[[ line: 45 ]]
+	local var11 = reactModule.useCallback(function(p1)
 		-- upvalues: var8 (ref), p0 (ref), default (copy), keystrokeEventModule (copy), var9 (ref), var10 (ref)
 		if #var8.current >= 0 then
 			p0.eventLoggingFunc(default, keystrokeEventModule, {}, {
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 31 | named "useKeystrokeCollection" ]]
 	end, { p0.eventLoggingFunc })
 	
 	return {
-		recordKeystroke = reactModule.useCallback(function(p2, p3) --[[ line: 59 ]]
+		recordKeystroke = reactModule.useCallback(function(p2, p3)
 			-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref), cryoModule (copy), list (copy), p0 (ref), var11 (ref)
 			if not var7.current then return end
 			if p2 then
@@ -55,7 +55,7 @@ return function(p0) --[[ line: 31 | named "useKeystrokeCollection" ]]
 				var11("UAMaxLengthReached")
 			end
 		end, { var11, p0.maxKeystrokeDataLength }),
-		recordTextChange = reactModule.useCallback(function(p4) --[[ line: 84 ]]
+		recordTextChange = reactModule.useCallback(function(p4)
 			-- upvalues: var7 (ref), var8 (ref), var10 (ref), p0 (ref), var11 (ref)
 			if not var7.current then return end
 			table.insert(var8.current, string.sub(p4, -1))
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 31 | named "useKeystrokeCollection" ]]
 				var11("UAMaxLengthReached")
 			end
 		end, { var11, p0.maxKeystrokeDataLength }),
-		sendKeystrokeEventOnSend = reactModule.useCallback(function() --[[ line: 99 ]]
+		sendKeystrokeEventOnSend = reactModule.useCallback(function()
 			-- upvalues: var7 (ref), var11 (ref)
 			if var7.current then
 				var11("UASendPressed")

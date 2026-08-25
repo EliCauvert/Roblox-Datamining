@@ -7,33 +7,33 @@ local _ = require(script.Parent.RoactServicesTypes)
 local serviceProvider = roactModule.PureComponent:extend("ServiceProvider")
 local t = {
 	ServiceProvider = serviceProvider,
-	createService = function(p0) --[[ line: 62 ]]
+	createService = function(p0)
 		-- upvalues: symbol (ref)
 		assert(type(p0) == "string", "Expected serviceName to be a string")
 		local var4 = symbol.named(p0)
 		
 		return {
-			get = function(p1) --[[ line: 68 ]]
+			get = function(p1)
 				-- upvalues: var4 (ref)
 				return if p1 then p1[var4] else nil
 			end,
-			set = function(value, p2) --[[ line: 72 ]]
+			set = function(value, p2)
 				-- upvalues: var4 (ref)
 				value[var4] = p2
 			end
 		}
 	end,
-	connect = function(p3) --[[ line: 81 ]]
+	connect = function(p3)
 		-- upvalues: roactModule (ref), immutable (ref), roactServicesContextModule (ref)
 		assert(p3 ~= nil, "Expected some services to connect, found none.")
 		
-		return function(p4) --[[ line: 83 ]]
+		return function(p4)
 			-- upvalues: roactModule (copy), p3 (ref), immutable (copy), roactServicesContextModule (copy)
 			assert(p4 ~= nil, "Expected a component to connect, found none.")
 			local t = {}
 			local var6 = roactModule.PureComponent:extend(("Services(%s)"):format(tostring(p4)))
 			
-			function var6.init(_, p5) --[[ line: 91 ]]
+			function var6.init(_, p5)
 				-- upvalues: p3 (copy), t (ref)
 				for i, v in pairs(p3) do
 					assert(type(i) == "string", string.format("serviceMap must be indexed by strings, not %s", type(i)))
@@ -44,17 +44,17 @@ local t = {
 				end
 			end
 			
-			function var6.render(p6) --[[ line: 105 ]]
+			function var6.render(p6)
 				-- upvalues: immutable (copy), t (ref), roactModule (copy), p4 (ref)
 				return roactModule.createElement(p4, immutable.JoinDictionaries(p6.props.innerProps, t))
 			end
 			
 			local connectionWrapper = roactModule.PureComponent:extend("ConnectionWrapper")
 			
-			function connectionWrapper.render(p7) --[[ line: 112 ]]
+			function connectionWrapper.render(p7)
 				-- upvalues: roactModule (copy), roactServicesContextModule (copy), var6 (ref)
 				return roactModule.createElement(roactServicesContextModule.Consumer, {
-					render = function(p8) --[[ line: 114 ]]
+					render = function(p8)
 						-- upvalues: roactModule (copy), var6 (copy), p7 (ref)
 						return roactModule.createElement(var6, { innerProps = p7.props, services = p8 })
 					end
@@ -66,7 +66,7 @@ local t = {
 	end
 }
 
-function serviceProvider.init(p9, p10) --[[ line: 36 ]]
+function serviceProvider.init(p9, p10)
 	local t = {}
 	
 	if p10 and p10.services then
@@ -82,7 +82,7 @@ function serviceProvider.init(p9, p10) --[[ line: 36 ]]
 	p9:setState({ services = t })
 end
 
-function serviceProvider.render(p11) --[[ line: 54 ]]
+function serviceProvider.render(p11)
 	-- upvalues: roactModule (ref), roactServicesContextModule (ref)
 	return roactModule.createElement(roactServicesContextModule.Provider, { value = p11.state.services }, roactModule.oneChild(p11.props[roactModule.Children]))
 end

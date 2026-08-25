@@ -7,19 +7,19 @@ local thirdPartyChatSettingsLoadedModule = require(appChat.Actions.ThirdPartyCha
 local getFriendsChatMetadataStoreModule = require(appChat.Stores.GetFriendsChatMetadataStore)
 local getFriendsChatSettingsStoreModule = require(appChat.Stores.GetFriendsChatSettingsStore)
 local t = {
-	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p0) --[[ line: 12 ]]
+	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p0)
 		-- upvalues: getFriendsChatMetadataStoreModule (ref)
 		getFriendsChatMetadataStoreModule(false).updateFriendsChatMetadata(p0.responseBody)
 	end,
-	[thirdPartyChatSettingsLoadedModule.name] = function(value) --[[ line: 16 ]]
+	[thirdPartyChatSettingsLoadedModule.name] = function(value)
 		-- upvalues: getFriendsChatSettingsStoreModule (ref)
 		getFriendsChatSettingsStoreModule(false).setThirdPartyChatRestrictionStatus(value.status)
 	end
 }
 
-return function(value, _) --[[ line: 25 | named "SignalsFriendsChatSettingsMiddleware" ]]
+return function(value, _)
 	-- upvalues: fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), t (ref)
-	return function(p1) --[[ line: 26 ]]
+	return function(p1)
 		-- upvalues: value (ref), fFlagAppChatFriendsTabIxpEnabledModule (copy), fFlagExpChatEnableFriendsTab (copy), t (copy)
 		local var7 = value(p1)
 		

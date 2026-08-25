@@ -3,7 +3,7 @@ local _ = require(game:GetService("CorePackages").Workspace.Packages.RobloxTrans
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 19 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref), statsUtilsModule (ref)
 	local label = {}
 	setmetatable(label, t)
@@ -31,23 +31,23 @@ function t.new(p0, p1) --[[ line: 19 ]]
 	return label
 end
 
-function t:SetZIndex(p2) --[[ line: 53 ]]
+function t:SetZIndex(p2)
 	self._frame.ZIndex = p2
 	self._decorationFrame.ZIndex = p2
 	self._label.ZIndex = p2
 end
 
-function t:PlaceInParent(p3, p4, p5) --[[ line: 60 ]]
+function t:PlaceInParent(p3, p4, p5)
 	self._frame.Parent = p3
 	self._frame.Size = p4
 	self._frame.Position = p5
 end
 
-function t:GetDecorationFrame() --[[ line: 67 ]]
+function t:GetDecorationFrame()
 	return self._decorationFrame
 end
 
-function t:SetValue(p6) --[[ line: 71 ]]
+function t:SetValue(p6)
 	-- upvalues: statsUtilsModule (ref)
 	self._label.Text = string.format("%s: %s", self._valueName, statsUtilsModule.FormatTypedValue(p6, self._statType))
 end

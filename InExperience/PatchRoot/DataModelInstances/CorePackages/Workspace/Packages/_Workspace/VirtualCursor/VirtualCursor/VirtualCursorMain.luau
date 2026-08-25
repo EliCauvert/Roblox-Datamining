@@ -15,7 +15,7 @@ local var9 = nil
 local var10 = false
 local var11 = false
 
-local function enableVirtualCursor(p0) --[[ line: 39 ]]
+local function enableVirtualCursor(p0)
 	-- upvalues: var7 (write), interfaceModule (ref), gamepadService (ref), inputModule (ref), runService (ref), var9 (write), guiService (ref), fFlagVCWasDisabledFromMenuOpen (ref), var11 (write)
 	if var7 then
 		p0 = p0 or var7.CursorPosition
@@ -26,7 +26,7 @@ local function enableVirtualCursor(p0) --[[ line: 39 ]]
 		inputModule:EnableInput()
 		inputModule:DisablePreview()
 		runService:BindToRenderStep("VirtualCursorStepped", Enum.RenderPriority.Input.Value + 1, var7.OnRenderStep)
-		var9 = guiService.MenuOpened:Connect(function() --[[ line: 59 ]]
+		var9 = guiService.MenuOpened:Connect(function()
 			-- upvalues: fFlagVCWasDisabledFromMenuOpen (copy), var11 (copy), gamepadService (copy)
 			if fFlagVCWasDisabledFromMenuOpen then
 				var11 = true
@@ -38,7 +38,7 @@ local function enableVirtualCursor(p0) --[[ line: 39 ]]
 	end
 end
 
-local function disableVirtualCursor() --[[ line: 67 ]]
+local function disableVirtualCursor()
 	-- upvalues: var7 (write), var9 (write), interfaceModule (ref), inputModule (ref), runService (ref), fFlagVCWasDisabledFromMenuOpen (ref), var11 (write), guiService (ref)
 	if not var7.Enabled then return end
 	var9:Disconnect()
@@ -69,11 +69,11 @@ end
 local t = {}
 t.__index = t
 
-function t:GetEnabled() --[[ line: 104 ]]
+function t:GetEnabled()
 	return self.Enabled
 end
 
-function t.new() --[[ line: 108 ]]
+function t.new()
 	-- upvalues: onRenderStepModule (ref), var8 (write), userInputService (ref), gamepadService (ref), var10 (write), inputModule (ref), t (ref), var7 (write)
 	local t_1 = {
 		Enabled = false,
@@ -82,12 +82,12 @@ function t.new() --[[ line: 108 ]]
 		CursorPosition = Vector2.new()
 	}
 	
-	function t_1.OnRenderStep(p1) --[[ line: 116 ]]
+	function t_1.OnRenderStep(p1)
 		-- upvalues: onRenderStepModule (copy), t_1 (ref)
 		onRenderStepModule(t_1, p1)
 	end
 	
-	var8 = userInputService.LastInputTypeChanged:Connect(function(p2) --[[ line: 120 ]]
+	var8 = userInputService.LastInputTypeChanged:Connect(function(p2)
 		-- upvalues: gamepadService (copy), var10 (copy)
 		if p2 ~= Enum.UserInputType.Gamepad1 and p2 ~= Enum.UserInputType.Focus and gamepadService.GamepadCursorEnabled then
 			gamepadService.GamepadCursorEnabled = false
@@ -106,7 +106,7 @@ function t.new() --[[ line: 108 ]]
 	return t_1
 end
 
-gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function() --[[ line: 143 ]]
+gamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"):Connect(function()
 	-- upvalues: gamepadService (ref), var7 (write), userInputService (ref), enableVirtualCursor (ref), disableVirtualCursor (ref)
 	local gamepadCursorEnabled = gamepadService.GamepadCursorEnabled
 	

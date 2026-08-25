@@ -10,15 +10,15 @@ local useFinishChatWindowMessageRenderIntervals = require(parent.ChatUIPrimitive
 local _ = require(script.Parent.MessageDisplayStore.useMessageDisplayStore)
 local fFlagFriendsChatMessageSendPerfTrackingModule = require(friendsChat.Flags.FFlagFriendsChatMessageSendPerfTracking)
 
-local function _(p0, p1) --[[ line: 52 | named "fadeTransparency" ]]
+local function _(p0, p1)
 	return p0 + p1 * (1 - p0)
 end
 
-local _ = function(p2) --[[ line: 65 | named "isSystemDisplay" ]]
+local _ = function(p2)
 	return p2 ~= nil and p2.displayStyle == "system"
 end
 
-return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessage" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: foundationModule (ref), getMessageTextSize (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagFriendsChatMessageSendPerfTrackingModule (ref), useFinishChatWindowMessageRenderIntervals (ref), textService (ref)
 	local var7 = foundationModule.Hooks.useTokens()
 	local chatWindowSettings = p3.chatWindowSettings
@@ -35,31 +35,31 @@ return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessa
 	local getDisplayId = p3.getDisplayId
 	local getDisplayFromId = p3.getDisplayFromId
 	local localize = p3.localize
-	local var17 = reactModule.useMemo(function() --[[ line: 133 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: maxValue (ref), localize (ref)
 		return { systemTextSize = maxValue, localize = localize }
 	end, { maxValue, localize })
-	local var18 = signalsReactModule.useSignalBinding(reactModule.useMemo(function() --[[ line: 136 ]]
+	local var18 = signalsReactModule.useSignalBinding(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), getDisplayFromId (ref), getDisplayId (ref), var17 (ref)
-		return signalsModule.createComputed(function(p4) --[[ line: 137 ]]
+		return signalsModule.createComputed(function(p4)
 			-- upvalues: getDisplayFromId (copy), getDisplayId (copy), var17 (copy)
 			return getDisplayFromId(getDisplayId(p4), p4, var17)
 		end)
 	end, { getDisplayId, getDisplayFromId, var17 }))
 	local var19 = signalsReactModule.useSignalBinding(p3.getLayoutOrder)
 	local getMessageIdFromDisplayId = p3.getMessageIdFromDisplayId
-	local var20 = useFinishChatWindowMessageRenderIntervals(reactModule.useCallback(function() --[[ line: 147 ]]
+	local var20 = useFinishChatWindowMessageRenderIntervals(reactModule.useCallback(function()
 		-- upvalues: fFlagFriendsChatMessageSendPerfTrackingModule (copy), getMessageIdFromDisplayId (ref), getDisplayId (ref)
 		return if fFlagFriendsChatMessageSendPerfTrackingModule and getMessageIdFromDisplayId then getMessageIdFromDisplayId(getDisplayId(false)) else getDisplayId(false)
 	end, { getDisplayId, getMessageIdFromDisplayId }))
 	local var21 = reactModule.useRef(nil)
-	local var22 = reactModule.useCallback(function(p5) --[[ line: 155 ]]
+	local var22 = reactModule.useCallback(function(p5)
 		-- upvalues: var20 (ref)
 		if p5 and p5.Text and p5.Text ~= "" then
 			var20()
 		end
 	end, { var20 })
-	reactModule.useEffect(function() --[[ line: 165 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagFriendsChatMessageSendPerfTrackingModule (copy), var21 (ref), var20 (ref)
 		if not fFlagFriendsChatMessageSendPerfTrackingModule then return end
 		local current = var21.current
@@ -68,26 +68,26 @@ return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessa
 			var20()
 		end
 	end, { var20 })
-	local var23 = reactModule.useMemo(function() --[[ line: 181 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref)
 		return UDim2.fromOffset(math.floor(var11 * 3 / 2), var11)
 	end, { var11 })
 	local var24, var25 = reactModule.useBinding(var23)
-	reactModule.useEffect(function() --[[ line: 188 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), var23 (ref)
 		var25(var23)
 	end, { var23 })
-	reactModule.useEffect(function() --[[ line: 192 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var11 (ref), textService (copy), var25 (ref)
 		local var31 = false
-		task.spawn(function() --[[ line: 194 ]]
+		task.spawn(function()
 			-- upvalues: var9 (copy), var11 (copy), textService (copy), var31 (write), var25 (copy)
 			local getTextBoundsParams = Instance.new("GetTextBoundsParams")
 			getTextBoundsParams.Text = "          "
 			getTextBoundsParams.Font = var9
 			getTextBoundsParams.Size = var11
 			getTextBoundsParams.Width = 1e999
-			local ok, status = pcall(function() --[[ line: 200 ]]
+			local ok, status = pcall(function()
 				-- upvalues: textService (copy), getTextBoundsParams (ref)
 				return textService:GetTextBoundsAsync(getTextBoundsParams)
 			end)
@@ -98,21 +98,21 @@ return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessa
 			var25(UDim2.fromOffset(status.X, status.Y))
 		end)
 		
-		return function() --[[ line: 208 ]]
+		return function()
 			-- upvalues: var31 (write)
 			var31 = true
 		end
 	end, { var9, var11 })
-	local var26 = var18:map(function(p6) --[[ line: 213 ]]
+	local var26 = var18:map(function(p6)
 		return if p6 == nil then "" elseif p6.skeletonWidth == "prefix" then `          {p6.content}` else p6.content
 	end)
 	local t = { font = var9, textSize = var11, textColor = var13 }
 	local t_1 = { font = font, textSize = maxValue, textColor = color3 }
-	local var29 = var18:map(function(p7) --[[ line: 239 ]]
+	local var29 = var18:map(function(p7)
 		-- upvalues: t_1 (ref), t (ref)
 		return if p7 ~= nil and p7.displayStyle == "system" then t_1 else t
 	end)
-	local var30 = textTransparency:map(function(p8) --[[ line: 255 ]]
+	local var30 = textTransparency:map(function(p8)
 		-- upvalues: var15 (ref)
 		return var15 + p8 * (1 - var15)
 	end)
@@ -122,7 +122,7 @@ return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessa
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		LayoutOrder = var19,
-		Visible = var18:map(function(p9) --[[ line: 287 ]]
+		Visible = var18:map(function(p9)
 			return p9 ~= nil
 		end),
 		ref = p3.guiObjectRef
@@ -131,13 +131,13 @@ return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessa
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			FontFace = var29:map(function(p10) --[[ line: 243 ]]
+			FontFace = var29:map(function(p10)
 				return p10.font
 			end),
-			TextSize = var29:map(function(p11) --[[ line: 247 ]]
+			TextSize = var29:map(function(p11)
 				return p11.textSize
 			end),
-			TextColor3 = var29:map(function(p12) --[[ line: 251 ]]
+			TextColor3 = var29:map(function(p12)
 				return p12.textColor
 			end),
 			TextStrokeColor3 = var14,
@@ -158,14 +158,14 @@ return reactModule.memo(function(p3) --[[ line: 95 | named "FriendsChatTextMessa
 			})
 		}),
 		skeleton = reactModule.createElement(foundationModule.Skeleton, {
-			Size = reactModule.joinBindings({ display = var18, placeholder = var24 }):map(function(p13) --[[ line: 279 ]]
+			Size = reactModule.joinBindings({ display = var18, placeholder = var24 }):map(function(p13)
 				local display = p13.display
 				
 				return if display == nil or display.skeletonWidth ~= "full" then p13.placeholder else UDim2.new(1, 0, 0, p13.placeholder.Y.Offset)
 			end),
 			Position = UDim2.fromOffset(0, 0),
 			AnchorPoint = Vector2.new(0, 0),
-			Visible = reactModule.joinBindings({ display = var18, textTransparency = textTransparency }):map(function(p14) --[[ line: 265 ]]
+			Visible = reactModule.joinBindings({ display = var18, textTransparency = textTransparency }):map(function(p14)
 				if p14.textTransparency >= 0.9 then
 					return false
 				end

@@ -9,12 +9,12 @@ local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local enumGameDetailErrorTypes = require(parent.DiscoveryTypes).EnumGameDetailErrorTypes
 
-local function _(p0, p1) --[[ line: 18 | named "getErrorDisplayMessage" ]]
+local function _(p0, p1)
 	-- upvalues: enumGameDetailErrorTypes (ref)
 	return if p0 == enumGameDetailErrorTypes.ExperienceUnavailable then p1.experienceUnavailable else p1.noInternet
 end
 
-return function(p2) --[[ line: 25 | named "InExperienceDetailsPromptErrorContent" ]]
+return function(p2)
 	-- upvalues: useTokens (ref), useLocalization (ref), enumGameDetailErrorTypes (ref), reactModule (ref), view (ref), icon (ref), enums (ref), text (ref)
 	local var2 = useLocalization({
 		experienceUnavailable = "Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable",

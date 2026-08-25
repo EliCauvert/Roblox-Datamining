@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 
 return {
-	didYouMean = function(p0, p1) --[[ line: 20 ]]
+	didYouMean = function(p0, p1)
 		local var1
 		local var0 = nil
 		local _ = nil

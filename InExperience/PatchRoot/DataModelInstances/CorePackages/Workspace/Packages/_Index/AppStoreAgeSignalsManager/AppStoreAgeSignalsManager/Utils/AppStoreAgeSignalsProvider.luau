@@ -18,13 +18,13 @@ local var5 = urlBuilder.new({
 })
 
 return {
-	checkEligibility = function() --[[ line: 27 ]]
+	checkEligibility = function()
 		-- upvalues: fetch (ref), userInputService (ref), promiseModule (ref), var4 (ref), response (ref)
 		local name = userInputService:GetPlatform().Name
 		
-		return promiseModule.new(function(p0, p1) --[[ line: 30 ]]
+		return promiseModule.new(function(p0, p1)
 			-- upvalues: var4 (copy), name (ref), fetch (ref), response (copy)
-			local var6 = fetch(var4({ signalSource = name }), { method = "GET" }):catch(function() --[[ line: 33 ]]
+			local var6 = fetch(var4({ signalSource = name }), { method = "GET" }):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()
@@ -34,7 +34,7 @@ return {
 				
 				return
 			end
-			local var7 = var6:json():catch(function() --[[ line: 45 ]]
+			local var7 = var6:json():catch(function()
 				return nil
 			end):expect()
 			
@@ -46,9 +46,9 @@ return {
 			p1("Failed to decode eligibility response as JSON")
 		end)
 	end,
-	publishResult = function(p2, p3, p4) --[[ line: 62 ]]
+	publishResult = function(p2, p3, p4)
 		-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), httpService (ref), response (ref)
-		return promiseModule.new(function(p5, p6) --[[ line: 64 ]]
+		return promiseModule.new(function(p5, p6)
 			-- upvalues: var5 (copy), fetch (ref), httpService (copy), p2 (ref), p3 (ref), p4 (ref), response (copy)
 			local var8 = fetch(var5(), {
 				method = "POST",
@@ -57,7 +57,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function() --[[ line: 78 ]]
+			}):catch(function()
 				-- upvalues: response (copy)
 				return response.error()
 			end):expect()

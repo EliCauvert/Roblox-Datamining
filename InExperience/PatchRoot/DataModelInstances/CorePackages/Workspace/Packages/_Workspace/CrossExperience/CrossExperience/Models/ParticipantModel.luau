@@ -3,7 +3,7 @@ local fFlagEnablePartyVoiceChangersInLua = dependenciesModule.SharedFlags.FFlagE
 local t = dependenciesModule.t
 local t_1 = {}
 
-function t_1.new(p0) --[[ line: 10 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	assert(t_1.isValid(p0))
 	t_1.__index = t_1
@@ -12,7 +12,7 @@ function t_1.new(p0) --[[ line: 10 ]]
 	return p0
 end
 
-function t_1.format(p1) --[[ line: 22 ]]
+function t_1.format(p1)
 	-- upvalues: t_1 (ref), fFlagEnablePartyVoiceChangersInLua (ref)
 	return t_1.new({
 		userId = p1.userId,

@@ -9,35 +9,35 @@ local ringBufferDataSourceModule = require(script.RingBufferDataSource)
 local sequenceDataSourceModule = require(script.SequenceDataSource)
 
 return {
-	snapshot = function(p0, p1) --[[ line: 57 ]]
+	snapshot = function(p0, p1)
 		-- upvalues: arrayDataSourceModule (ref)
 		return arrayDataSourceModule(p0, p1)
 	end,
-	sequence = function(p2, p3) --[[ line: 61 ]]
+	sequence = function(p2, p3)
 		-- upvalues: sequenceDataSourceModule (ref)
 		return sequenceDataSourceModule(p2, p3)
 	end,
-	deque = function(p4, p5) --[[ line: 65 ]]
+	deque = function(p4, p5)
 		-- upvalues: dequeDataSourceModule (ref)
 		return dequeDataSourceModule(p4, p5)
 	end,
-	ringBuffer = function(p6, p7, p8) --[[ line: 69 ]]
+	ringBuffer = function(p6, p7, p8)
 		-- upvalues: ringBufferDataSourceModule (ref)
 		return ringBufferDataSourceModule(p6, p7, p8)
 	end,
-	map = function(p9, p10) --[[ line: 73 ]]
+	map = function(p9, p10)
 		-- upvalues: mapDataSourceModule (ref)
 		return mapDataSourceModule(p9, p10)
 	end,
-	concat = function(...) --[[ line: 77 ]]
+	concat = function(...)
 		-- upvalues: concatDataSourceModule (ref)
 		return concatDataSourceModule(...)
 	end,
-	reverse = function(p11) --[[ line: 81 ]]
+	reverse = function(p11)
 		-- upvalues: reverseDataSourceModule (ref)
 		return reverseDataSourceModule(p11)
 	end,
-	reconcileSnapshot = function(p12, p13, p14, p15) --[[ line: 85 ]]
+	reconcileSnapshot = function(p12, p13, p14, p15)
 		-- upvalues: reconcileSnapshotModule (ref)
 		reconcileSnapshotModule(p12, p13, p14, p15)
 	end

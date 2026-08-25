@@ -16,19 +16,19 @@ local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
 local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
 local touchHelpPageResponsiveUnits = game:DefineFastFlag("TouchHelpPageResponsiveUnits", false)
 
-local function _(p0, p1, p2) --[[ line: 26 | named "getTapOrRotate" ]]
+local function _(p0, p1, p2)
 	assert(not (p2[p0] and p2[p1]), "Cannot assign a position to both tap and rotate simultaneously.")
 	
 	return if p2[p0] then p0 elseif p2[p1] then p1 else nil
 end
 
-local var11 = reactModule.memo(function(p3) --[[ line: 62 ]]
+local var11 = reactModule.memo(function(p3)
 	-- upvalues: useTokens (ref), deviceOrientationMode (ref), reactModule (ref), view (ref)
 	local var12 = useTokens()
 	local components = p3.components
 	local var13 = p3.orientation == deviceOrientationMode.Portrait
 	
-	local function createSideColumn(p4, p5, p6, p7) --[[ line: 68 ]]
+	local function createSideColumn(p4, p5, p6, p7)
 		-- upvalues: reactModule (copy), view (copy)
 		return reactModule.createElement(view, {
 			tag = `align-x-{p4} auto-x col flex-y-between size-0-full`,
@@ -79,26 +79,26 @@ local var11 = reactModule.memo(function(p3) --[[ line: 62 ]]
 	})
 end)
 
-return reactModule.memo(function() --[[ line: 165 | named "TouchHelpPage" ]]
+return reactModule.memo(function()
 	-- upvalues: useDeviceOrientation (ref), useKeybindsModule (ref), reactModule (ref), userGameSettingsService (ref), displayModule (ref), touchControlsEnumModule (ref), touchActionModule (ref), view (ref), var11 (ref), constantsModule (ref), touchHelpPageResponsiveUnits (ref)
 	local var17 = useDeviceOrientation()
 	local controls = useKeybindsModule().controls
 	local var18, var19 = reactModule.useState(userGameSettingsService.TouchMovementMode)
 	local viewportSize = displayModule.GetDisplayStore(false).getViewportSize(false)
-	reactModule.useEffect(function() --[[ line: 172 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userGameSettingsService (copy), var19 (ref)
-		local var26 = userGameSettingsService:GetPropertyChangedSignal("TouchMovementMode"):Connect(function() --[[ line: 173 ]]
+		local var26 = userGameSettingsService:GetPropertyChangedSignal("TouchMovementMode"):Connect(function()
 			-- upvalues: var19 (copy), userGameSettingsService (copy)
 			var19(userGameSettingsService.TouchMovementMode)
 		end)
 		
-		return function() --[[ line: 177 ]]
+		return function()
 			-- upvalues: var26 (ref)
 			var26:Disconnect()
 		end
 	end, {})
 	local var21 = var18 == Enum.TouchMovementMode.ClickToMove
-	local var22 = reactModule.useMemo(function() --[[ line: 185 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: controls (ref), var21 (ref)
 		local t = {}
 		

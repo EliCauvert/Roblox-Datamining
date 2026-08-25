@@ -21,7 +21,7 @@ local t = {
 	customTextColor = Color3.fromRGB(255, 255, 255)
 }
 
-return reactModule.memo(function(p0) --[[ line: 56 | named "TitleBarView" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: t (ref), useLayoutValues (ref), useStyle (ref), reactModule (ref), robloxTranslatorModule (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), corePackagesService (ref)
 	local t_1 = {}
 	
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 56 | named "TitleBarView" ]]
 			end
 		end
 	elseif t_1.gameStatsCount and t_1.gameStatsCount > 0 then
-		t_1.gameStats.iterateData(function(p1, p2) --[[ line: 138 ]]
+		t_1.gameStats.iterateData(function(p1, p2)
 			-- upvalues: maxLeaderstats (ref), gameTranslatorModule (copy), coreGuiService (copy), t_2 (ref), reactModule (copy), var11 (ref), var12 (ref), fFlagEnableMobilePlayerListOnConsole (copy), var16 (ref), var15 (ref)
 			if maxLeaderstats < p2.order(false) then
 				return

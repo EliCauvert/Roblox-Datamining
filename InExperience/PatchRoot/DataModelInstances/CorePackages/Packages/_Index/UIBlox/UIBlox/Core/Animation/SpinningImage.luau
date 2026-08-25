@@ -13,16 +13,16 @@ spinningImage.validateProps = tModule.strictInterface({
 })
 spinningImage.defaultProps = { rotationRate = 360 }
 
-function spinningImage.init(p0) --[[ line: 25 ]]
+function spinningImage.init(p0)
 	-- upvalues: roactModule (ref)
 	local var4, var5 = roactModule.createBinding(0)
 	p0.angle = var4
 	p0.updateAngle = var5
 end
 
-function spinningImage.didMount(p1) --[[ line: 29 ]]
+function spinningImage.didMount(p1)
 	-- upvalues: runService (ref)
-	p1.heartbeatConnection = runService.Heartbeat:Connect(function(p2) --[[ line: 30 ]]
+	p1.heartbeatConnection = runService.Heartbeat:Connect(function(p2)
 		-- upvalues: p1 (ref)
 		local var6 = p1.angle:getValue() + p1.props.rotationRate * p2
 		
@@ -35,11 +35,11 @@ function spinningImage.didMount(p1) --[[ line: 29 ]]
 	end)
 end
 
-function spinningImage.willUnmount(p3) --[[ line: 41 ]]
+function spinningImage.willUnmount(p3)
 	p3.heartbeatConnection:Disconnect()
 end
 
-function spinningImage.getDerivedStateFromProps(p4, _) --[[ line: 45 ]]
+function spinningImage.getDerivedStateFromProps(p4, _)
 	local imageRectSize = p4.image.ImageRectSize
 	
 	return {
@@ -47,7 +47,7 @@ function spinningImage.getDerivedStateFromProps(p4, _) --[[ line: 45 ]]
 	}
 end
 
-function spinningImage.render(p5) --[[ line: 52 ]]
+function spinningImage.render(p5)
 	-- upvalues: roactModule (ref), label (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

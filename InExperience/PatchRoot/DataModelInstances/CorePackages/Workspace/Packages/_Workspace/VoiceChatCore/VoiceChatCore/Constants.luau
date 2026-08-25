@@ -31,7 +31,7 @@ local t_4 = {
 	FRIENDS = "friends",
 	NONFRIENDS = "nonfriends"
 }
-local _, _, var7 = (function() --[[ line: 54 | named "parseBaseUrlInformation" ]]
+local _, _, var7 = (function()
 	-- upvalues: contentProviderService (ref)
 	local baseUrl = contentProviderService.BaseUrl
 	

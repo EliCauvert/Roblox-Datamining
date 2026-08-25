@@ -1,7 +1,7 @@
 ﻿local llamaModule = require(script:FindFirstAncestor("RoduxFriends").Parent.llama)
 local removeUserModule = require(script.Parent.removeUser)
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: llamaModule (ref), removeUserModule (ref)
 	local var2 = tostring(p1.additionalData.currentUserId)
 	local var3 = tostring(p1.namedIds.users)

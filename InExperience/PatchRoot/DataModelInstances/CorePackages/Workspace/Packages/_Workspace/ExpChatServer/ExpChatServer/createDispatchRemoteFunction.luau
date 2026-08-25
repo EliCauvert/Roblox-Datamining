@@ -4,12 +4,12 @@ local parent = script:FindFirstAncestor("ExpChatServer").Parent
 local list = require(parent.llama).List
 local var2 = require(parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
 
-local function _(p0, p1) --[[ line: 11 | named "canUsersTalkToEachOther" ]]
+local function _(p0, p1)
 	-- upvalues: textChatService (ref), var2 (ref)
 	if p0 == p1 then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 15 ]]
+	local ok, status = pcall(function()
 		-- upvalues: textChatService (copy), p0 (ref), p1 (ref)
 		return textChatService:CanUsersWhisperAsync(p0, p1)
 	end)
@@ -19,12 +19,12 @@ local function _(p0, p1) --[[ line: 11 | named "canUsersTalkToEachOther" ]]
 	return status_1
 end
 
-local _ = function(p2, p3) --[[ line: 25 | named "whisperChannelAlreadyExists" ]]
+local _ = function(p2, p3)
 	-- upvalues: textChatService (ref)
 	return (textChatService:FindFirstChild("TextChannels") or textChatService):FindFirstChild(string.format("RBXWhisper:%d_%d", if p2 < p3 then p2 else p3, if p3 < p2 then p2 else p3))
 end
 
-local function createWhisperChannel(p4, p5) --[[ line: 32 ]]
+local function createWhisperChannel(p4, p5)
 	-- upvalues: textChatService (ref), list (ref)
 	local formattedText = string.format("RBXWhisper:%d_%d", if p4 < p5 then p4 else p5, if p5 < p4 then p4 else p5)
 	local textChannels = textChatService:FindFirstChild("TextChannels") or textChatService
@@ -33,9 +33,9 @@ local function createWhisperChannel(p4, p5) --[[ line: 32 ]]
 	textChannel.Parent = textChannels
 	textChannel:AddUserAsync(p4)
 	textChannel:AddUserAsync(p5)
-	textChannel.ChildRemoved:Connect(function(_) --[[ line: 44 ]]
+	textChannel.ChildRemoved:Connect(function(_)
 		-- upvalues: list (copy), textChannel (ref)
-		if list.count(textChannel:GetChildren(), function(p6) --[[ line: 45 ]]
+		if list.count(textChannel:GetChildren(), function(p6)
 			return p6:IsA("TextSource")
 		end) < 2 then
 			textChannel:Destroy()
@@ -45,7 +45,7 @@ local function createWhisperChannel(p4, p5) --[[ line: 32 ]]
 	return textChannel
 end
 
-local _ = function(p7, p8, p9) --[[ line: 57 | named "createInstance" ]]
+local _ = function(p7, p8, p9)
 	local var8 = Instance.new(p7)
 	var8.Name = p8
 	var8.Parent = p9
@@ -53,7 +53,7 @@ local _ = function(p7, p8, p9) --[[ line: 57 | named "createInstance" ]]
 	return var8
 end
 
-return function() --[[ line: 64 | named "createDispatchRemoteFunction" ]]
+return function()
 	-- upvalues: robloxReplicatedStorageService (ref), var2 (ref), textChatService (ref), createWhisperChannel (ref)
 	local experienceChat = robloxReplicatedStorageService:FindFirstChild("ExperienceChat")
 	
@@ -73,7 +73,7 @@ return function() --[[ line: 64 | named "createDispatchRemoteFunction" ]]
 		whisperChat = whisperChat_1
 	end
 	if whisperChat:IsA("RemoteFunction") then
-		function whisperChat.OnServerInvoke(p10, p11) --[[ line: 73 ]]
+		function whisperChat.OnServerInvoke(p10, p11)
 			-- upvalues: var2 (copy), textChatService (copy), createWhisperChannel (copy)
 			var2:trace("WhisperChat remote invoked with: {}", tostring(p11))
 			local var14 = tonumber(p11)
@@ -90,7 +90,7 @@ return function() --[[ line: 64 | named "createDispatchRemoteFunction" ]]
 				elseif userId == var14 then
 					var16 = false
 				else
-					local ok, status = pcall(function() --[[ line: 15 ]]
+					local ok, status = pcall(function()
 						-- upvalues: textChatService (copy), userId (ref), var14 (ref)
 						return textChatService:CanUsersWhisperAsync(userId, var14)
 					end)

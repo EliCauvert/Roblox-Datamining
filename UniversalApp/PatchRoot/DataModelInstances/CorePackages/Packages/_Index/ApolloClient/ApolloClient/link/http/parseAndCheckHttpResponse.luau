@@ -9,13 +9,13 @@ local _ = require(script.Parent.Parent.core.types)
 local throwServerError = require(script.Parent.Parent.utils).throwServerError
 local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
 
-function t.parseAndCheckHttpResponse(p0) --[[ line: 34 ]]
+function t.parseAndCheckHttpResponse(p0)
 	-- upvalues: httpService (ref), error (ref), throwServerError (ref), array (ref), hasOwnPropertyModule (ref)
-	return function(p1) --[[ line: 35 ]]
+	return function(p1)
 		-- upvalues: httpService (copy), error (copy), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p0 (ref)
-		return p1:text():andThen(function(p4) --[[ line: 38 ]]
+		return p1:text():andThen(function(p4)
 			-- upvalues: httpService (copy), error (copy), p1 (ref)
-			local ok, status = pcall(function() --[[ line: 39 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpService (copy), p4 (ref)
 				return httpService:JSONDecode(p4), true
 			end)
@@ -29,13 +29,13 @@ function t.parseAndCheckHttpResponse(p0) --[[ line: 34 ]]
 				error(serverParseError)
 			end
 			return status
-		end):andThen(function(p2) --[[ line: 54 ]]
+		end):andThen(function(p2)
 			-- upvalues: p1 (ref), throwServerError (copy), array (copy), hasOwnPropertyModule (copy), p0 (copy)
 			if p1.status ~= nil and p1.status >= 300 then
 				throwServerError(p1, p2, ("Response not successful: Received status code %s"):format(tostring(p1.status)))
 			end
 			if not array.isArray(p2) and not hasOwnPropertyModule(p2, "data") and not hasOwnPropertyModule(p2, "errors") then
-				throwServerError(p1, p2, ("Server response was missing for query '%s'."):format(array.isArray(p0) and array.join(array.map(p0, function(p3) --[[ line: 77 ]]
+				throwServerError(p1, p2, ("Server response was missing for query '%s'."):format(array.isArray(p0) and array.join(array.map(p0, function(p3)
 					return p3.operationName
 				end), ", ") or p0.operationName))
 			end

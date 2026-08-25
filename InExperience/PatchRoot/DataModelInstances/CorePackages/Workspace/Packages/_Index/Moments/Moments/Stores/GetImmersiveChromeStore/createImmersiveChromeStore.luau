@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-return function() --[[ line: 37 | named "createImmersiveChromeStore" ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal(true)
 	local var2 = nil
@@ -8,11 +8,11 @@ return function() --[[ line: 37 | named "createImmersiveChromeStore" ]]
 	
 	return {
 		getChromeVisible = var0,
-		setChromeVisible = function(value) --[[ line: 45 ]]
+		setChromeVisible = function(value)
 			-- upvalues: var1 (ref)
 			var1(value)
 		end,
-		revealChrome = function() --[[ line: 57 ]]
+		revealChrome = function()
 			-- upvalues: var2 (write), var1 (ref)
 			if var2 == nil then
 				var1(true)
@@ -21,12 +21,12 @@ return function() --[[ line: 37 | named "createImmersiveChromeStore" ]]
 			end
 			var2()
 		end,
-		setRevealHandler = function(value) --[[ line: 53 ]]
+		setRevealHandler = function(value)
 			-- upvalues: var2 (write)
 			var2 = value
 		end,
 		getOverlayCovering = var3,
-		setOverlayCovering = function(value) --[[ line: 49 ]]
+		setOverlayCovering = function(value)
 			-- upvalues: var4 (ref)
 			var4(value)
 		end

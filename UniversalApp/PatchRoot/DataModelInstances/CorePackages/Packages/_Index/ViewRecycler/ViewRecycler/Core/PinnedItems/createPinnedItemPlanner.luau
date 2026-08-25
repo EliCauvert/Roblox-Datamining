@@ -7,19 +7,19 @@ local buildPlacementPlanModule = require(viewRecycler.Core.PinnedItems.buildPlac
 local stickyIndexResolverModule = require(viewRecycler.Core.PinnedItems.StickyIndexResolver)
 local frozen = table.freeze({ "key", "value", "itemViewType" })
 
-local function _(p0, p1) --[[ line: 45 | named "sameItem" ]]
+local function _(p0, p1)
 	-- upvalues: recordModule (ref), frozen (ref)
 	return if p0 ~= p1 then p0 ~= nil and (p1 ~= nil and recordModule.containsEqual(p0, p1, frozen)) else true
 end
 
-return function(p2, p3) --[[ line: 49 | named "createPinnedItemPlanner" ]]
+return function(p2, p3)
 	-- upvalues: stickyIndexResolverModule (ref), recordModule (ref), frozen (ref), buildPlacementPlanModule (ref), placementTypesModule (ref)
 	local var6 = p3
 	local var7 = stickyIndexResolverModule(p2, var6.isItemStickyHeader)
 	local t = { revision = 1, length = 0, item = var6.pinnedStartItem }
 	local t_1 = { revision = 1, length = 0, item = var6.pinnedEndItem }
 	
-	local function _(value, p4) --[[ line: 66 | named "setItem" ]]
+	local function _(value, p4)
 		-- upvalues: recordModule (copy), frozen (copy)
 		local item = value.item
 		
@@ -33,7 +33,7 @@ return function(p2, p3) --[[ line: 49 | named "createPinnedItemPlanner" ]]
 		return true
 	end
 	
-	local _ = function(p5, p6) --[[ line: 83 | named "resolvedItem" ]]
+	local _ = function(p5, p6)
 		local item = p5.item
 		
 		return if item == nil then nil else {
@@ -47,14 +47,14 @@ return function(p2, p3) --[[ line: 49 | named "createPinnedItemPlanner" ]]
 	end
 	
 	return {
-		getContentInsets = function() --[[ line: 76 ]]
+		getContentInsets = function()
 			-- upvalues: t (ref), t_1 (ref)
 			return {
 				start = if t.item == nil then 0 else t.length,
 				finish = if t_1.item == nil then 0 else t_1.length
 			}
 		end,
-		update = function(p7) --[[ line: 103 ]]
+		update = function(p7)
 			-- upvalues: var7 (ref), buildPlacementPlanModule (copy), t (ref), placementTypesModule (copy), t_1 (ref)
 			var7.setDataSource(p7.dataSource)
 			local t_2 = {
@@ -86,11 +86,11 @@ return function(p2, p3) --[[ line: 49 | named "createPinnedItemPlanner" ]]
 			
 			return buildPlacementPlanModule(t_2)
 		end,
-		applyDataSourceChange = function(p8) --[[ line: 116 ]]
+		applyDataSourceChange = function(p8)
 			-- upvalues: var7 (ref)
 			var7.applyDataSourceChange(p8)
 		end,
-		updatePinnedMeasurement = function(p9, p10, p11, p12) --[[ line: 119 ]]
+		updatePinnedMeasurement = function(p9, p10, p11, p12)
 			-- upvalues: placementTypesModule (copy), t (ref), t_1 (ref)
 			assert(p12 >= 0 and p12 < 1e999, "PinnedItems: measured length must be finite and non-negative")
 			local var11 = if p9 == placementTypesModule.PinnedPosition.Start then t else t_1
@@ -106,7 +106,7 @@ return function(p2, p3) --[[ line: 49 | named "createPinnedItemPlanner" ]]
 				finish = if t_1.item == nil then 0 else t_1.length
 			}
 		end,
-		setOptions = function(value) --[[ line: 129 ]]
+		setOptions = function(value)
 			-- upvalues: var6 (write), var7 (ref), t (ref), recordModule (copy), frozen (copy), t_1 (ref)
 			local var13
 			var6 = value
@@ -138,6 +138,6 @@ return function(p2, p3) --[[ line: 49 | named "createPinnedItemPlanner" ]]
 			return var14 or var12
 		end,
 		setDataSource = var7.setDataSource,
-		destroy = function() --[[ line: 137 ]] end
+		destroy = function() end
 	}
 end

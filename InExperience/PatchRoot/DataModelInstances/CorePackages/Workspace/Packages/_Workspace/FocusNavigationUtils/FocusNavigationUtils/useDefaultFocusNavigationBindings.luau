@@ -13,11 +13,11 @@ local useDescendantHasFocusModule = require(focusNavigationUtils.useDescendantHa
 local useRegistryEntry = require(focusNavigationUtils.FocusNavigableSurfaceRegistry).useRegistryEntry
 local focusNavigationDefaultEventMapModule = require(focusNavigationUtils.FocusNavigationDefaultEventMap)
 
-local function _(p0) --[[ line: 23 | named "getScrollableAncestor" ]]
+local function _(p0)
 	return if p0 == nil then nil elseif p0:IsA("ScrollingFrame") then p0 else p0:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(p1, p2) --[[ line: 34 | named "scrollTo" ]]
+local _ = function(p1, p2)
 	if p1 ~= nil then
 		local var8 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
 		
@@ -34,27 +34,27 @@ local _ = function(p1, p2) --[[ line: 34 | named "scrollTo" ]]
 	end
 end
 
-function useDefaultFocusNavigationBindings(p3) --[[ line: 53 ]]
+function useDefaultFocusNavigationBindings(p3)
 	-- upvalues: useNavigation (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), useFocusRegistryEntry (ref), useDescendantHasFocusModule (ref), useSelector (ref), reactFocusNavigationModule (ref), focusNavigationDefaultEventMapModule (ref), reactModule (ref), focusNavigationEventNameEnumModule (ref), inputHandlersModule (ref), canGoBack (ref)
 	local var9 = useNavigation()
 	local var10 = useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SearchBar)
 	local var11 = useFocusRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SearchBar)
 	local var12 = useFocusRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.NavBar)
 	local var13 = useDescendantHasFocusModule(useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.NavBar))
-	local var14 = useSelector(function(p4) --[[ line: 60 ]]
+	local var14 = useSelector(function(p4)
 		return p4.TabBarVisible
 	end)
 	local var15 = reactFocusNavigationModule.useFocusedGuiObject()
 	local var16 = if var15 == nil then nil elseif var15:IsA("ScrollingFrame") then var15 else var15:FindFirstAncestorWhichIsA("ScrollingFrame")
 	local var17 = var16 ~= nil
 	
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 70 ]]
+	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: var13 (ref), focusNavigationEventNameEnumModule (copy), inputHandlersModule (copy), canGoBack (copy), var9 (ref), var14 (ref), var12 (ref), var11 (ref), var10 (ref), var17 (ref), var16 (ref)
 		local t = {}
 		
 		if not var13 then
 			t[focusNavigationEventNameEnumModule.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(_) --[[ line: 74 ]]
+				handler = inputHandlersModule.onRelease(function(_)
 					-- upvalues: canGoBack (copy), var9 (copy), var14 (copy), var12 (copy)
 					if canGoBack(var9) then
 						var9.goBack(false)
@@ -68,7 +68,7 @@ function useDefaultFocusNavigationBindings(p3) --[[ line: 53 ]]
 		end
 		if var11 and var10 ~= nil then
 			t[focusNavigationEventNameEnumModule.Search] = {
-				handler = inputHandlersModule.onRelease(function(_) --[[ line: 86 ]]
+				handler = inputHandlersModule.onRelease(function(_)
 					-- upvalues: var11 (copy), var10 (copy)
 					var11()
 					
@@ -84,7 +84,7 @@ function useDefaultFocusNavigationBindings(p3) --[[ line: 53 ]]
 		end
 		if var17 then
 			t[focusNavigationEventNameEnumModule.ScrollDown] = {
-				handler = inputHandlersModule.onRelease(function(_) --[[ line: 103 ]]
+				handler = inputHandlersModule.onRelease(function(_)
 					-- upvalues: var16 (copy)
 					if var16 ~= nil then
 						local var20 = var16.AbsoluteCanvasSize.Y - var16.AbsoluteWindowSize.Y
@@ -99,7 +99,7 @@ function useDefaultFocusNavigationBindings(p3) --[[ line: 53 ]]
 				end)
 			}
 			t[focusNavigationEventNameEnumModule.ScrollUp] = {
-				handler = inputHandlersModule.onRelease(function(_) --[[ line: 108 ]]
+				handler = inputHandlersModule.onRelease(function(_)
 					-- upvalues: var16 (copy)
 					if var16 ~= nil then
 						local _ = var16.AbsoluteCanvasSize.Y - var16.AbsoluteWindowSize.Y

@@ -9,19 +9,19 @@ local luaAppLaunchTrackerMilestones = game:DefineFastString("LuaAppLaunchTracker
 local t = {}
 t.__index = t
 
-function t.isEnabled() --[[ line: 45 ]]
+function t.isEnabled()
 	-- upvalues: var3 (write)
 	return var3
 end
 
-function t.disable() --[[ line: 49 ]]
+function t.disable()
 	-- upvalues: var3 (write)
 	var3 = false
 end
 
-function t.new(p0) --[[ line: 53 ]]
+function t.new(p0)
 	-- upvalues: luaAppLaunchTrackerMilestones (ref), discoveryAppLaunchEventsModule (ref), roduxPerfTrackerModule (ref), luaAppShouldTrackTopThunks (ref), t (ref), luaAppLaunchTrackerTimeoutSec (ref), var3 (write)
-	local ok, status = pcall(function() --[[ line: 54 ]]
+	local ok, status = pcall(function()
 		-- upvalues: luaAppLaunchTrackerMilestones (copy)
 		local t = {}
 		
@@ -48,7 +48,7 @@ function t.new(p0) --[[ line: 53 ]]
 	}, t)
 	
 	if luaAppLaunchTrackerTimeoutSec > 0 then
-		task.delay(luaAppLaunchTrackerTimeoutSec, function() --[[ line: 82 ]]
+		task.delay(luaAppLaunchTrackerTimeoutSec, function()
 			-- upvalues: var3 (copy), discoveryAppLaunchEventsModule (copy), p0 (ref), tbl (ref), t (copy)
 			if var3 then
 				discoveryAppLaunchEventsModule.reportError(p0, `Timeout after previousMilestone: {tbl.previousMilestone}`)
@@ -60,27 +60,27 @@ function t.new(p0) --[[ line: 53 ]]
 	return tbl
 end
 
-function t:trackTileRender() --[[ line: 97 ]]
+function t:trackTileRender()
 	self.numTileRenders += 1
 end
 
-function t:trackTileInit() --[[ line: 100 ]]
+function t:trackTileInit()
 	self.numTilesInit += 1
 end
 
-function t:trackFeedRender() --[[ line: 103 ]]
+function t:trackFeedRender()
 	self.numFeedRenders += 1
 end
 
-function t:trackNumFeedItems(p1) --[[ line: 106 ]]
+function t:trackNumFeedItems(p1)
 	self.numFeedItems = p1
 end
 
-function t:trackSduiDuration(p2) --[[ line: 110 ]]
+function t:trackSduiDuration(p2)
 	self.totalSduiDuration += p2
 end
 
-function t:onMilestoneChanged(p3) --[[ line: 114 ]]
+function t:onMilestoneChanged(p3)
 	-- upvalues: var3 (write), discoveryAppLaunchEventsModule (ref)
 	if not var3 then return end
 	if not self.supportedMilestones[p3] then return end
@@ -98,13 +98,13 @@ function t:onMilestoneChanged(p3) --[[ line: 114 ]]
 	self.previousMilestoneTime = processTime
 end
 
-function t:stopTracking() --[[ line: 152 ]]
+function t:stopTracking()
 	-- upvalues: t (ref)
 	self.roduxTracker:stopTracking()
 	t.disable()
 end
 
-function t.createDefault(...) --[[ line: 157 ]]
+function t.createDefault(...)
 	-- upvalues: t (ref)
 	t.default = t.new(...)
 end

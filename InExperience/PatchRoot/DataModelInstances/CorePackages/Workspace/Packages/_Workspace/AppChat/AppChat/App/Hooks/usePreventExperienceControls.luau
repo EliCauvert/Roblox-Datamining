@@ -11,16 +11,16 @@ local list = {
 	Enum.UserInputType.MouseButton2
 }
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useEffect (ref), contextActionService (ref), list (ref)
-	useEffect(function() --[[ line: 32 ]]
+	useEffect(function()
 		-- upvalues: p0 (ref), contextActionService (copy), list (copy)
 		if p0 then
-			contextActionService:BindCoreActionAtPriority("AppChatDisableGameControls", function(_, _, p1) --[[ line: 34 ]]
+			contextActionService:BindCoreActionAtPriority("AppChatDisableGameControls", function(_, _, p1)
 				return if p1.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 			end, false, Enum.ContextActionPriority.Low.Value, unpack(list))
 		end
-		return function() --[[ line: 43 ]]
+		return function()
 			-- upvalues: p0 (copy), contextActionService (copy)
 			if p0 then
 				contextActionService:UnbindCoreAction("AppChatDisableGameControls")

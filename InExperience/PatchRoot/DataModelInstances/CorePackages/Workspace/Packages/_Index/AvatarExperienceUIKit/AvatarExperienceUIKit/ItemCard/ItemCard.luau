@@ -14,7 +14,7 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 32 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (ref), useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
 	return reactModule.createElement("TextButton", {
 		Selectable = if fFlagAXMISEnableMultiShopping then p0.Selectable else nil,

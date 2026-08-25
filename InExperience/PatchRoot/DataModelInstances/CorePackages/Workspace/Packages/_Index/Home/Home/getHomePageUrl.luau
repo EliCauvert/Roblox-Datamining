@@ -4,7 +4,7 @@ local var0 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function() --[[ line: 12 | named "getHomePageUrl" ]]
+return function()
 	-- upvalues: var0 (ref)
 	return var0()
 end

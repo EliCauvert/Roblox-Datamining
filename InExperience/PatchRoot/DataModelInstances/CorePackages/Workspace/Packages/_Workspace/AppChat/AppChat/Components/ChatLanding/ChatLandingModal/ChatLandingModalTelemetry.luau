@@ -13,7 +13,7 @@ local t = {
 	}
 }
 
-local function _(p0) --[[ line: 14 | named "eventIngestWithFormatFunction" ]]
+local function _(p0)
 	-- upvalues: socialLuaAnalyticsModule (ref), defaultTelemetryEventsModule (ref)
 	return {
 		overrideName = nil,
@@ -36,7 +36,7 @@ t.Events = {
 				throttlingThousandths = nil,
 				type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 				standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-				format = function(_, _) --[[ line: 38 ]]
+				format = function(_, _)
 					-- upvalues: t (ref)
 					return {
 						field = t.Constants.FaeModalShownField,
@@ -53,7 +53,7 @@ t.Events = {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.ChatLandingModal.FaeButton.Click", function(p1) --[[ line: 55 ]]
+			defaultTelemetryEventsModule.namedCounterConfigurationAndFormat("AppChat.ChatLandingModal.FaeButton.Click", function(p1)
 				return { btn = p1.btn }
 			end),
 			{
@@ -61,7 +61,7 @@ t.Events = {
 				throttlingThousandths = nil,
 				type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
 				standardizedFields = defaultTelemetryEventsModule.STANDARDIZED_FIELDS,
-				format = function(p2, _) --[[ line: 65 ]]
+				format = function(p2, _)
 					return {
 						state = p2.state,
 						btn = p2.btn,
@@ -75,19 +75,19 @@ t.Events = {
 	}),
 	ModalRendered = modalTelemetryModule.Events.modalRenderedWithSequence({
 		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p3, _) --[[ line: 82 ]]
+		counterFormat = function(p3, _)
 			return { modalVariant = p3.modalVariant }
 		end
 	}),
 	ModalAction = modalTelemetryModule.Events.modalActionWithSequence({
 		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p4, _) --[[ line: 90 ]]
+		counterFormat = function(p4, _)
 			return { modalVariant = p4.modalVariant, action = p4.action }
 		end
 	}),
 	ModalActionResult = modalTelemetryModule.Events.modalActionResultWithSequence({
 		modalSequence = modalTelemetryModule.Enums.ModalSequence.ChatLandingModal,
-		counterFormat = function(p5, _) --[[ line: 102 ]]
+		counterFormat = function(p5, _)
 			return {
 				modalVariant = p5.modalVariant,
 				action = p5.action,

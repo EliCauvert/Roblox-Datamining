@@ -17,7 +17,7 @@ local fFlagGenericAbuseReportingGranularExports = require(parent.SharedFlags).FF
 local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 local fFlagDropUnroutableMultiReportOptions = require(parent.SharedFlags).FFlagDropUnroutableMultiReportOptions
 
-return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
+return function(value)
 	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), fFlagDropUnroutableMultiReportOptions (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagUpdateInGameAssetReportingCTAs (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
 	local var8 = if fFlagPrefillPreciseSelectionChoices then useLocalization({
 		title = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
@@ -54,7 +54,7 @@ return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
 	if fFlagPrefillPreciseSelectionChoices then
 		local var9 = getPreselectedSurfaceValueModule(value.extractionResult)
 		local var10 = if var9 == "avatar" then var8.surfaceAvatar elseif var9 == "item" then var8.surfaceItem elseif var9 == "text" then var8.surfaceTextChat else nil
-		reactModule.useEffect(function() --[[ line: 82 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var10 (ref), value (ref), constantsModule (copy)
 			if var10 then
 				value.analyticsDispatch({
@@ -63,7 +63,7 @@ return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
 				})
 			end
 		end, { var10 })
-		local var11 = reactModule.useMemo(function() --[[ line: 196 ]]
+		local var11 = reactModule.useMemo(function()
 			-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var8 (write)
 			return if fFlagDropUnroutableMultiReportOptions then {
 				{ value = "avatar", label = var8.surfaceAvatar },
@@ -89,7 +89,7 @@ return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
 		
 		return reactModule.createElement(defaultDualDropdownDialogV2Module, {
 			title = var8.title,
-			problems = reactModule.useMemo(function() --[[ line: 91 ]]
+			problems = reactModule.useMemo(function()
 				-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var8 (write)
 				return if fFlagDropUnroutableMultiReportOptions then {
 					{
@@ -194,7 +194,7 @@ return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
 				var8.problemIPInfringement, var8.problemIPInfringementDesc
 			}),
 			surfaces = var11,
-			preselected = reactModule.useMemo(function() --[[ line: 228 ]]
+			preselected = reactModule.useMemo(function()
 				-- upvalues: var9 (ref), var11 (ref)
 				local var12 = nil
 				
@@ -231,7 +231,7 @@ return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
 			},
 			onSubmitProps = {
 				hasNextSteps = true,
-				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p0, p1, p2) --[[ line: 374 ]]
+				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p0, p1, p2)
 					-- upvalues: value (ref)
 					value.onSubmit(p0, p1, p2)
 					
@@ -239,7 +239,7 @@ return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
 				end else value.onSubmit
 			},
 			onCloseProps = { hasPreviousSteps = false, onAbandon = value.onBack },
-			footerContent = function() --[[ line: 384 ]]
+			footerContent = function()
 				-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), reactModule (copy), view (copy), OSAReportLink (copy)
 				return if isShowUKOSAIllegalContentReportingLink() then reactModule.createElement(view, { tag = "size-full-0 auto-y" }, { OSALink = reactModule.createElement(OSAReportLink) }) else nil
 			end,

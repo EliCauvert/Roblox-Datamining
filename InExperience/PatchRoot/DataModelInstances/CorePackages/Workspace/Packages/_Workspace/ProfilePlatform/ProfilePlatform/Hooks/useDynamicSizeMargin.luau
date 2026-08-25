@@ -8,7 +8,7 @@ local useIsMeTabModule = require(profilePlatform.Hooks.useIsMeTab)
 local enumsModule = require(profilePlatform.Common.Enums)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function() --[[ line: 16 ]]
+return function()
 	-- upvalues: fFlagAXEnableProfileTab (ref), useTokens (ref), useIsMeTabModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), reactModule (ref), getPageMargin (ref)
 	local var7
 	local var5 = if fFlagAXEnableProfileTab then useTokens() else nil
@@ -22,7 +22,7 @@ return function() --[[ line: 16 ]]
 	end
 	local var8, var9 = reactModule.useState(24)
 	
-	return if fFlagAXEnableProfileTab and var6 then if fFlagAXEnableProfileTab then if var7 then var5.Margin.Large else var5.Padding.Large else nil else var8, reactModule.useCallback(function(p0) --[[ line: 25 ]]
+	return if fFlagAXEnableProfileTab and var6 then if fFlagAXEnableProfileTab then if var7 then var5.Margin.Large else var5.Padding.Large else nil else var8, reactModule.useCallback(function(p0)
 		-- upvalues: getPageMargin (copy), var9 (ref)
 		var9(getPageMargin(p0.AbsoluteSize.X))
 	end, {})

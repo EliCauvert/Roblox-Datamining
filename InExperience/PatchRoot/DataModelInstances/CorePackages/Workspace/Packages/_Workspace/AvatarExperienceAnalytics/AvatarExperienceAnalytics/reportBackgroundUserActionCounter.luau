@@ -9,13 +9,13 @@ local t = {
 	RemoveTryOn = constantsModule.AVATAR_EVENT_COUNTER_NAME.AXRemoveTryOnBackground
 }
 local t_1 = {
-	report = function(p0) --[[ line: 25 ]]
+	report = function(p0)
 		-- upvalues: sendAXCounterV2Module (ref), t (ref)
 		sendAXCounterV2Module(t[p0])
 	end
 }
 
-function t_1.reportIfAvatarBackgroundAsset(value, p1, p2) --[[ line: 30 ]]
+function t_1.reportIfAvatarBackgroundAsset(value, p1, p2)
 	-- upvalues: avatarBackground (ref), t_1 (ref)
 	if avatarBackground and p1 == "Asset" and p2 == avatarBackground then
 		t_1.report(value)

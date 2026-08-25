@@ -10,19 +10,19 @@ local t = {}
 for i, v in momentsTypesModule.Enums.ReactionType do
 	t[v] = true
 end
-local function _(p0) --[[ line: 33 | named "isValidReactionType" ]]
+local function _(p0)
 	-- upvalues: t (ref), resolveEmoteIdModule (ref)
 	return if t[p0] ~= true then t[resolveEmoteIdModule.normalizeName(p0)] == true else true
 end
 
-local _ = function(p1) --[[ line: 37 | named "asReactionType" ]]
+local _ = function(p1)
 	-- upvalues: resolveEmoteIdModule (ref), t (ref)
 	local var9 = resolveEmoteIdModule.normalizeName(p1)
 	
 	return if t[var9] then var9 else nil
 end
 
-local function convertReactionCountsArray(p2, p3) --[[ line: 45 ]]
+local function convertReactionCountsArray(p2, p3)
 	-- upvalues: resolveEmoteIdModule (ref), t (ref)
 	local t_1 = {}
 	local var11 = false
@@ -73,7 +73,7 @@ local function convertReactionCountsArray(p2, p3) --[[ line: 45 ]]
 	return if var11 then t_1 else nil
 end
 
-local function convertLegacyApiReactions(p4) --[[ line: 106 ]]
+local function convertLegacyApiReactions(p4)
 	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), t (ref), resolveEmoteIdModule (ref)
 	local t_1 = {}
 	local var19 = false
@@ -120,7 +120,7 @@ local function convertLegacyApiReactions(p4) --[[ line: 106 ]]
 	return if var19 then t_1 else nil
 end
 
-local _ = function(p5, p6) --[[ line: 151 | named "convertApiReactions" ]]
+local _ = function(p5, p6)
 	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), convertReactionCountsArray (ref), convertLegacyApiReactions (ref)
 	if type(p5) ~= "table" then
 		return nil
@@ -135,7 +135,7 @@ local _ = function(p5, p6) --[[ line: 151 | named "convertApiReactions" ]]
 	end
 end
 
-return function(p7) --[[ line: 169 | named "extractReactionsByMomentId" ]]
+return function(p7)
 	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), resolveMomentsEmojiCatalogModule (ref), hardcodedMomentsEmojisModule (ref), convertReactionCountsArray (ref), convertLegacyApiReactions (ref)
 	local t = {}
 	local var28 = if fFlagMomentsEmojiSetsApiModule then resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(nil).emojis else hardcodedMomentsEmojisModule

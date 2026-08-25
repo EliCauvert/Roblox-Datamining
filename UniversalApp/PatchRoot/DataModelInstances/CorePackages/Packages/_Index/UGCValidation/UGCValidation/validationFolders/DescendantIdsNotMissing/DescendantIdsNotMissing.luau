@@ -8,7 +8,7 @@ local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.ge
 local getFFlagUGCValidateCheckDescendantIdsLoadableModule = require(parent.flags.getFFlagUGCValidateCheckDescendantIdsLoadable)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 
-local function _(p0, p1) --[[ line: 14 | named "hasEditableBacking" ]]
+local function _(p0, p1)
 	-- upvalues: constantsModule (ref)
 	local className = constantsModule.CONTENT_ID_EDITABLE_PROPERTY[p0.ClassName]
 	local var7 = className and className[p1]
@@ -25,7 +25,7 @@ return {
 	},
 	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {},
-	run = function(p2, p3) --[[ line: 34 ]]
+	run = function(p2, p3)
 		-- upvalues: validationEnumsModule (ref), constantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), getFFlagUGCValidateCheckDescendantIdsLoadableModule (ref), UGCValidationService (ref)
 		local var8 = p3.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
 		local t = {}
@@ -92,7 +92,7 @@ return {
 		if var11 or getFFlagUGCValidateCheckDescendantIdsLoadableModule() then
 			for i_2, v_2 in p3.contentIds do
 				local var12 = v_2[1]
-				ok, status = pcall(function() --[[ line: 112 ]]
+				ok, status = pcall(function()
 					-- upvalues: UGCValidationService (copy), i_2 (ref)
 					return UGCValidationService:CanLoadAsset("rbxassetid://" .. i_2)
 				end)

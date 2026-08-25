@@ -6,7 +6,7 @@ local priceDEPRECATEDModule = require(bulkPurchaseApp.Components.Price_DEPRECATE
 local itemStatusModule = require(bulkPurchaseApp.Components.ItemStatus)
 
 return {
-	mapItemsToPresentation_DEPRECATED = function(p0, p1, p2) --[[ line: 10 ]]
+	mapItemsToPresentation_DEPRECATED = function(p0, p1, p2)
 		-- upvalues: reactModule (ref), priceDEPRECATEDModule (ref)
 		local t = {}
 		
@@ -20,7 +20,7 @@ return {
 		end
 		return t
 	end,
-	mapOwnedItemsToPresentation_DEPRECATED = function(p3, p4, p5, p6) --[[ line: 26 ]]
+	mapOwnedItemsToPresentation_DEPRECATED = function(p3, p4, p5, p6)
 		-- upvalues: reactModule (ref), styledTextLabel (ref)
 		local t = {}
 		
@@ -42,7 +42,7 @@ return {
 		end
 		return t
 	end,
-	mapUnpurchasableItemsToPresentation_DEPRECATED = function(p7) --[[ line: 47 ]]
+	mapUnpurchasableItemsToPresentation_DEPRECATED = function(p7)
 		-- upvalues: reactModule (ref), itemStatusModule (ref)
 		local t = {}
 		

@@ -4,20 +4,20 @@ local autoScrollTargetModule = require(viewRecycler.Core.Enums.AutoScrollTarget)
 local _ = require(viewRecycler.Core.Types)
 
 return {
-	resolveTarget = function(p0, p1, p2) --[[ line: 20 ]]
+	resolveTarget = function(p0, p1, p2)
 		-- upvalues: autoScrollPolicyModule (ref), autoScrollTargetModule (ref)
 		return if p0 == autoScrollPolicyModule.WhenAtEnd then if p2.atEnd then autoScrollTargetModule.End else false else type(p0) == "function" and p0(p1, p2)
 	end,
-	getTargetOffset = function(value, p3, p4) --[[ line: 33 ]]
+	getTargetOffset = function(value, p3, p4)
 		-- upvalues: autoScrollTargetModule (ref)
 		return if value == autoScrollTargetModule.Start then 0 else math.max(0, p3 - p4)
 	end,
-	create = function() --[[ line: 41 ]]
+	create = function()
 		-- upvalues: autoScrollTargetModule (ref)
 		local var3 = false
 		
 		return {
-			onDataSourceChanged = function(p5) --[[ line: 45 ]]
+			onDataSourceChanged = function(p5)
 				-- upvalues: autoScrollTargetModule (copy), var3 (write)
 				if p5 == autoScrollTargetModule.End then
 					var3 = true
@@ -28,11 +28,11 @@ return {
 				
 				return p5
 			end,
-			getContentLengthCorrection = function(p6, p7) --[[ line: 54 ]]
+			getContentLengthCorrection = function(p6, p7)
 				-- upvalues: var3 (write)
 				return if var3 then math.max(0, p6 - p7) else nil
 			end,
-			onScrollOffsetChanged = function(value, p8) --[[ line: 61 ]]
+			onScrollOffsetChanged = function(value, p8)
 				-- upvalues: var3 (write)
 				var3 = value and p8
 			end

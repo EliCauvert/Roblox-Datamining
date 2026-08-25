@@ -15,13 +15,13 @@ local var5 = urlBuilder.new({
 	base = urlBase.new("games", 2)
 })
 
-function t.findExperienceDetailsByUniverseId(p0, p1) --[[ line: 27 ]]
+function t.findExperienceDetailsByUniverseId(p0, p1)
 	-- upvalues: fetch (ref), promiseModule (ref), var4 (ref), response (ref), graphQLError (ref)
 	local var6 = p1 or fetch
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 30 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: var4 (copy), p0 (ref), var6 (ref), response (copy), graphQLError (copy)
-		local var7 = var6(var4({ universeIds = p0 }), { method = "GET" }):catch(function() --[[ line: 33 ]]
+		local var7 = var6(var4({ universeIds = p0 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -31,7 +31,7 @@ function t.findExperienceDetailsByUniverseId(p0, p1) --[[ line: 27 ]]
 			
 			return
 		end
-		local var8 = var7:json():catch(function() --[[ line: 44 ]]
+		local var8 = var7:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -44,13 +44,13 @@ function t.findExperienceDetailsByUniverseId(p0, p1) --[[ line: 27 ]]
 	end)
 end
 
-function t.findExperienceMediaByUniverseId(p4, p5) --[[ line: 67 ]]
+function t.findExperienceMediaByUniverseId(p4, p5)
 	-- upvalues: fetch (ref), promiseModule (ref), var5 (ref), response (ref), graphQLError (ref)
 	local var9 = p5 or fetch
 	
-	return promiseModule.new(function(p6, p7) --[[ line: 70 ]]
+	return promiseModule.new(function(p6, p7)
 		-- upvalues: var5 (copy), p4 (ref), var9 (ref), response (copy), graphQLError (copy)
-		local var10 = var9(var5({ universeId = p4 }), { method = "GET" }):catch(function() --[[ line: 73 ]]
+		local var10 = var9(var5({ universeId = p4 }), { method = "GET" }):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -60,7 +60,7 @@ function t.findExperienceMediaByUniverseId(p4, p5) --[[ line: 67 ]]
 			
 			return
 		end
-		local var11 = var10:json():catch(function() --[[ line: 84 ]]
+		local var11 = var10:json():catch(function()
 			return nil
 		end):expect()
 		

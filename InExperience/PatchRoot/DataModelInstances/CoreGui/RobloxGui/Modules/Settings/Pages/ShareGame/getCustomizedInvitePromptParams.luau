@@ -1,6 +1,6 @@
 ﻿local constantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: constantsModule (ref)
 	local var1 = if p0 and p0.InviteUser ~= 0 then p0.InviteUser else nil
 	local var2, var3 = p1(if var1 then constantsModule.Triggers.DeveloperSingle else constantsModule.Triggers.DeveloperMultiple, var1)

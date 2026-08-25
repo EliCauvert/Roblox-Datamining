@@ -26,7 +26,7 @@ local typeMetaFieldDef = introspectionModule.TypeMetaFieldDef
 local typeNameMetaFieldDef = introspectionModule.TypeNameMetaFieldDef
 local typeFromAST = require(parent.utilities.typeFromAST).typeFromAST
 
-local function _(p0) --[[ line: 79 | named "unwrapNull" ]]
+local function _(p0)
 	-- upvalues: nullModule (ref)
 	return if p0 == nullModule then nil else p0
 end
@@ -35,7 +35,7 @@ local t = {}
 local t_1 = { __index = t }
 local getFieldDef = nil
 
-function t.new(p1, p2, p3) --[[ line: 132 ]]
+function t.new(p1, p2, p3)
 	-- upvalues: t_1 (ref), getFieldDef (write), isInputType (ref), isCompositeType (ref), isOutputType (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl._schema = p1
@@ -63,7 +63,7 @@ function t.new(p1, p2, p3) --[[ line: 132 ]]
 	return tbl
 end
 
-function t.getType(p4) --[[ line: 169 ]]
+function t.getType(p4)
 	-- upvalues: nullModule (ref)
 	if #p4._typeStack <= 0 then
 		return nil
@@ -73,7 +73,7 @@ function t.getType(p4) --[[ line: 169 ]]
 	return if var8 == nullModule then nil else var8
 end
 
-function t.getParentType(p5) --[[ line: 176 ]]
+function t.getParentType(p5)
 	-- upvalues: nullModule (ref)
 	if #p5._parentTypeStack <= 0 then
 		return nil
@@ -83,7 +83,7 @@ function t.getParentType(p5) --[[ line: 176 ]]
 	return if var9 == nullModule then nil else var9
 end
 
-function t.getInputType(p6) --[[ line: 183 ]]
+function t.getInputType(p6)
 	-- upvalues: nullModule (ref)
 	if #p6._inputTypeStack <= 0 then
 		return nil
@@ -93,7 +93,7 @@ function t.getInputType(p6) --[[ line: 183 ]]
 	return if var10 == nullModule then nil else var10
 end
 
-function t.getParentInputType(p7) --[[ line: 190 ]]
+function t.getParentInputType(p7)
 	-- upvalues: nullModule (ref)
 	if #p7._inputTypeStack <= 1 then
 		return nil
@@ -103,7 +103,7 @@ function t.getParentInputType(p7) --[[ line: 190 ]]
 	return if var11 == nullModule then nil else var11
 end
 
-function t.getFieldDef(p8) --[[ line: 197 ]]
+function t.getFieldDef(p8)
 	-- upvalues: nullModule (ref)
 	if #p8._fieldDefStack <= 0 then
 		return nil
@@ -113,7 +113,7 @@ function t.getFieldDef(p8) --[[ line: 197 ]]
 	return if var12 == nullModule then nil else var12
 end
 
-function t.getDefaultValue(p9) --[[ line: 204 ]]
+function t.getDefaultValue(p9)
 	-- upvalues: nullModule (ref)
 	if #p9._defaultValueStack <= 0 then
 		return nil
@@ -123,19 +123,19 @@ function t.getDefaultValue(p9) --[[ line: 204 ]]
 	return if var13 == nullModule then nil else var13
 end
 
-function t.getDirective(p10) --[[ line: 211 ]]
+function t.getDirective(p10)
 	return p10._directive
 end
 
-function t.getArgument(p11) --[[ line: 215 ]]
+function t.getArgument(p11)
 	return p11._argument
 end
 
-function t.getEnumValue(p12) --[[ line: 219 ]]
+function t.getEnumValue(p12)
 	return p12._enumValue
 end
 
-function t.enter(p13, p14) --[[ line: 223 ]]
+function t.enter(p13, p14)
 	-- upvalues: kind (ref), getNamedType (ref), isCompositeType (ref), nullModule (ref), isOutputType (ref), isObjectType (ref), typeFromAST (ref), isInputType (ref), array (ref), getNullableType (ref), isListType (ref), isInputObjectType (ref), isEnumType (ref)
 	local schema = p13._schema
 	local kind_1 = p14.kind
@@ -197,7 +197,7 @@ function t.enter(p13, p14) --[[ line: 223 ]]
 		local var22 = directive or p13:getFieldDef()
 		
 		if var22 then
-			var20 = array.find(var22.args, function(p15) --[[ line: 297 ]]
+			var20 = array.find(var22.args, function(p15)
 				-- upvalues: p14 (ref)
 				return p15.name == p14.name.value
 			end)
@@ -242,7 +242,7 @@ function t.enter(p13, p14) --[[ line: 223 ]]
 	end
 end
 
-function t.leave(p16, p17) --[[ line: 343 ]]
+function t.leave(p16, p17)
 	-- upvalues: kind (ref)
 	local kind_1 = p17.kind
 	
@@ -283,7 +283,7 @@ function t.leave(p16, p17) --[[ line: 343 ]]
 	end
 end
 
-getFieldDef = function(p18, p19, p20) --[[ line: 377 | named "getFieldDef" ]]
+getFieldDef = function(p18, p19, p20)
 	-- upvalues: schemaMetaFieldDef (ref), typeMetaFieldDef (ref), typeNameMetaFieldDef (ref), isCompositeType (ref), isObjectType (ref), isInterfaceType (ref)
 	local value = p20.name.value
 	
@@ -292,10 +292,10 @@ end
 
 return {
 	TypeInfo = t,
-	visitWithTypeInfo = function(p21, p22) --[[ line: 404 ]]
+	visitWithTypeInfo = function(p21, p22)
 		-- upvalues: getVisitFn (ref), isNode (ref)
 		return {
-			enter = function(_, p23, ...) --[[ line: 409 ]]
+			enter = function(_, p23, ...)
 				-- upvalues: p21 (ref), getVisitFn (copy), p22 (ref), isNode (copy)
 				p21:enter(p23)
 				local var28 = getVisitFn(p22, p23.kind, false)
@@ -314,7 +314,7 @@ return {
 				end
 				return var29
 			end,
-			leave = function(_, p24, ...) --[[ line: 428 ]]
+			leave = function(_, p24, ...)
 				-- upvalues: getVisitFn (copy), p22 (ref), p21 (ref)
 				local var30 = getVisitFn(p22, p24.kind, true)
 				local var31 = if var30 then var30(p22, p24, ...) else nil

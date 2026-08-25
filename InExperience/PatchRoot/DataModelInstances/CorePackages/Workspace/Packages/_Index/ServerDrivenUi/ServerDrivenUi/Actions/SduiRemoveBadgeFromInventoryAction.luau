@@ -8,7 +8,7 @@ local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 local dataHydrationModule = require(parent.DataHydration)
 local localizeStrings = require(parent.Localization).localizeStrings
 
-return function(p0, _, p1, _) --[[ line: 16 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), localizeStrings (ref), setCentralOverlay (ref), centralOverlayType (ref), dataHydrationModule (ref), closeCentralOverlay (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	
@@ -40,12 +40,12 @@ return function(p0, _, p1, _) --[[ line: 16 ]]
 		disablePortal = false,
 		title = var3.RemoveBadgeTitle,
 		body = var3.RemoveBadgeBody,
-		onConfirm = function() --[[ line: 53 ]]
+		onConfirm = function()
 			-- upvalues: dataHydrationModule (copy), assetId (ref), dispatch (ref), closeCentralOverlay (copy)
 			dataHydrationModule.Badges.getBadgeInfoStore(false).removeBadge(tostring(assetId))
 			dispatch(closeCentralOverlay())
 		end,
-		onCancel = function() --[[ line: 58 ]]
+		onCancel = function()
 			-- upvalues: dispatch (ref), closeCentralOverlay (copy)
 			dispatch(closeCentralOverlay())
 		end

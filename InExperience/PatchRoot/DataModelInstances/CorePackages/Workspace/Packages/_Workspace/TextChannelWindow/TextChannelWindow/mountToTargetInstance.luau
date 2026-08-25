@@ -7,7 +7,7 @@ local expChatTextChannelWindowMinWidth = game:DefineFastInt("ExpChatTextChannelW
 local expChatTextChannelWindowMinHeight = game:DefineFastInt("ExpChatTextChannelWindowMinHeight", 200)
 local t = {}
 
-local function _(p0) --[[ line: 17 | named "getEffectiveAdornee" ]]
+local function _(p0)
 	if p0.Adornee ~= nil then
 		return p0.Adornee
 	end
@@ -16,7 +16,7 @@ local function _(p0) --[[ line: 17 | named "getEffectiveAdornee" ]]
 	return if parent and parent:IsA("BasePart") then parent else nil
 end
 
-local function createOverlay(p1, p2) --[[ line: 28 ]]
+local function createOverlay(p1, p2)
 	-- upvalues: coreGuiService (ref)
 	if p2 and p2:IsA("SurfaceGui") then
 		local adornee
@@ -57,8 +57,8 @@ local function createOverlay(p1, p2) --[[ line: 28 ]]
 	end
 end
 
-local function connectGuiObjectSync(p3, p4, _, p5) --[[ line: 59 ]]
-	local function syncTransform() --[[ line: 65 ]]
+local function connectGuiObjectSync(p3, p4, _, p5)
+	local function syncTransform()
 		-- upvalues: p4 (ref), p3 (ref)
 		p4.Position = UDim2.fromOffset(p3.AbsolutePosition.X, p3.AbsolutePosition.Y)
 		p4.Size = UDim2.fromOffset(p3.AbsoluteSize.X, p3.AbsoluteSize.Y)
@@ -70,8 +70,8 @@ local function connectGuiObjectSync(p3, p4, _, p5) --[[ line: 59 ]]
 	table.insert(p5, p3:GetPropertyChangedSignal("Rotation"):Connect(syncTransform))
 end
 
-local function connectSurfaceGuiSync(p6, p7, p8) --[[ line: 76 ]]
-	local function syncAdornee() --[[ line: 77 ]]
+local function connectSurfaceGuiSync(p6, p7, p8)
+	local function syncAdornee()
 		-- upvalues: p7 (ref), p6 (ref)
 		local adornee
 		if p6.Adornee == nil then
@@ -85,32 +85,32 @@ local function connectSurfaceGuiSync(p6, p7, p8) --[[ line: 76 ]]
 	
 	table.insert(p8, p6:GetPropertyChangedSignal("Adornee"):Connect(syncAdornee))
 	table.insert(p8, p6:GetPropertyChangedSignal("Parent"):Connect(syncAdornee))
-	table.insert(p8, p6:GetPropertyChangedSignal("Face"):Connect(function() --[[ line: 85 ]]
+	table.insert(p8, p6:GetPropertyChangedSignal("Face"):Connect(function()
 		-- upvalues: p7 (ref), p6 (ref)
 		p7.Face = p6.Face
 	end))
-	table.insert(p8, p6:GetPropertyChangedSignal("SizingMode"):Connect(function() --[[ line: 91 ]]
+	table.insert(p8, p6:GetPropertyChangedSignal("SizingMode"):Connect(function()
 		-- upvalues: p7 (ref), p6 (ref)
 		p7.SizingMode = p6.SizingMode
 	end))
-	table.insert(p8, p6:GetPropertyChangedSignal("CanvasSize"):Connect(function() --[[ line: 97 ]]
+	table.insert(p8, p6:GetPropertyChangedSignal("CanvasSize"):Connect(function()
 		-- upvalues: p7 (ref), p6 (ref)
 		p7.CanvasSize = p6.CanvasSize
 	end))
 end
 
-local function connectScreenGuiSync(p9, p10, p11) --[[ line: 103 ]]
-	table.insert(p11, p9:GetPropertyChangedSignal("IgnoreGuiInset"):Connect(function() --[[ line: 106 ]]
+local function connectScreenGuiSync(p9, p10, p11)
+	table.insert(p11, p9:GetPropertyChangedSignal("IgnoreGuiInset"):Connect(function()
 		-- upvalues: p10 (ref), p9 (ref)
 		p10.IgnoreGuiInset = p9.IgnoreGuiInset
 	end))
-	table.insert(p11, p9:GetPropertyChangedSignal("ZIndexBehavior"):Connect(function() --[[ line: 112 ]]
+	table.insert(p11, p9:GetPropertyChangedSignal("ZIndexBehavior"):Connect(function()
 		-- upvalues: p10 (ref), p9 (ref)
 		p10.ZIndexBehavior = p9.ZIndexBehavior
 	end))
 end
 
-local _ = function(p12, p13, p14) --[[ line: 118 | named "connectLayerCollectorSync" ]]
+local _ = function(p12, p13, p14)
 	-- upvalues: connectSurfaceGuiSync (ref), connectScreenGuiSync (ref)
 	if p12 == nil then return end
 	if p12:IsA("SurfaceGui") then
@@ -122,7 +122,7 @@ local _ = function(p12, p13, p14) --[[ line: 118 | named "connectLayerCollectorS
 	end
 end
 
-local function doMount(p15, p16) --[[ line: 133 ]]
+local function doMount(p15, p16)
 	-- upvalues: t (ref), createOverlay (ref), reactRobloxModule (ref), connectGuiObjectSync (ref), connectSurfaceGuiSync (ref), connectScreenGuiSync (ref), expChatTextChannelWindowMinWidth (ref), expChatTextChannelWindowMinHeight (ref)
 	if not p15:IsA("TextChannelWindow") then
 		return nil
@@ -153,7 +153,7 @@ local function doMount(p15, p16) --[[ line: 133 ]]
 			connectScreenGuiSync(layerCollector, var16, t_1)
 		end
 	end
-	local function updateEnabled() --[[ line: 165 ]]
+	local function updateEnabled()
 		-- upvalues: var16 (ref), p15 (ref), p15 (ref), expChatTextChannelWindowMinWidth (copy), expChatTextChannelWindowMinHeight (copy)
 		var16.Enabled = p15.IsRendering and (expChatTextChannelWindowMinWidth <= p15.AbsoluteSize.X and expChatTextChannelWindowMinHeight <= p15.AbsoluteSize.Y)
 	end
@@ -162,7 +162,7 @@ local function doMount(p15, p16) --[[ line: 133 ]]
 	table.insert(t_1, p15:GetPropertyChangedSignal("IsRendering"):Connect(updateEnabled))
 	table.insert(t_1, p15:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateEnabled))
 	
-	local function unmount() --[[ line: 174 ]]
+	local function unmount()
 		-- upvalues: t_1 (ref), var18 (ref), var16 (ref), t (copy), p15 (ref)
 		for i, v in t_1 do
 			v:Disconnect()
@@ -178,7 +178,7 @@ local function doMount(p15, p16) --[[ line: 133 ]]
 	return unmount
 end
 
-return function(p17, p18) --[[ line: 189 | named "mountToTargetInstance" ]]
+return function(p17, p18)
 	-- upvalues: starterGuiService (ref), doMount (ref)
 	return if p17:IsDescendantOf(starterGuiService) then nil else doMount(p17, p18)
 end

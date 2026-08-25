@@ -8,10 +8,10 @@ local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuse
 local recentlyLeftSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
 local accessoryType = foundationModule.Enums.AccessoryType
 
-local function appendRecentlyLeftItems(p0, p1, p2) --[[ line: 23 ]]
+local function appendRecentlyLeftItems(p0, p1, p2)
 	-- upvalues: accessoryType (ref)
 	local cloned = table.clone(p2)
-	table.sort(cloned, function(p3, p4) --[[ line: 29 ]]
+	table.sort(cloned, function(p3, p4)
 		return p3.username:lower() < p4.username:lower()
 	end)
 	
@@ -29,14 +29,14 @@ local function appendRecentlyLeftItems(p0, p1, p2) --[[ line: 23 ]]
 	return p0
 end
 
-return function() --[[ line: 59 | named "getUsers" ]]
+return function()
 	-- upvalues: promiseModule (ref), playersService (ref), localPlayer (ref), fFlagAbuseReportInExpPlayerListV3 (ref), accessoryType (ref), appendRecentlyLeftItems (ref), recentlyLeftSignalsModule (ref)
-	return promiseModule.new(function(p5, p6) --[[ line: 60 ]]
+	return promiseModule.new(function(p5, p6)
 		-- upvalues: playersService (copy), localPlayer (copy), fFlagAbuseReportInExpPlayerListV3 (copy), accessoryType (copy), appendRecentlyLeftItems (copy), recentlyLeftSignalsModule (copy)
-		local ok, status = pcall(function() --[[ line: 61 ]]
+		local ok, status = pcall(function()
 			-- upvalues: playersService (copy), localPlayer (copy), fFlagAbuseReportInExpPlayerListV3 (copy), accessoryType (copy), appendRecentlyLeftItems (copy), recentlyLeftSignalsModule (copy)
 			local players = playersService:GetPlayers()
-			table.sort(players, function(p7, p8) --[[ line: 63 ]]
+			table.sort(players, function(p7, p8)
 				return p7.Name:lower() < p8.Name:lower()
 			end)
 			local t = {}

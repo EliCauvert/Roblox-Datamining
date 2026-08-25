@@ -6,7 +6,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { LayoutOrder = 2 }
 
-return function(p0) --[[ line: 20 | named "TileContent" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTileModule (ref), reactModule (ref), viewModule (ref)
 	local var7 = withDefaultsModule(p0, t)
 	local var8 = useTileModule()

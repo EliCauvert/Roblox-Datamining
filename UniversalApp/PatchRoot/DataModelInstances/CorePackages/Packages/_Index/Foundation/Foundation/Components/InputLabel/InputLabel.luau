@@ -11,7 +11,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local controlStateModule = require(foundation.Enums.ControlState)
 local inputLabelSizeModule = require(foundation.Enums.InputLabelSize)
 
-local function labelText(p0, p1) --[[ line: 44 ]]
+local function labelText(p0, p1)
 	-- upvalues: reactModule (ref), flagsModule (ref), translatorModule (ref)
 	return if p1 == nil or p1 == reactModule.None then p0 elseif p1 then if flagsModule.FoundationIncludeSpaceRequiredLabel then p0 .. " *" else p0 .. "*" else translatorModule:FormatByKey("CommonUI.Controls.Input.Optional", { inputLabel = p0 })
 end
@@ -21,7 +21,7 @@ local t = {
 	size = inputLabelSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 61 | named "InputLabel" ]]
+return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), controlStateModule (ref), textModule (ref), withCommonPropsModule (ref), labelText (ref), stateLayerAffordanceModule (ref), flagsModule (ref), inputLabelSizeModule (ref)
 	local var12 = withDefaultsModule(p2, t)
 	
@@ -30,9 +30,9 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 61 | 
 		RichText = var12.RichText,
 		selection = { Selectable = false },
 		onActivated = if not var12.isDisabled then var12.onActivated else nil,
-		onStateChanged = if not var12.isDisabled then reactModule.useMemo(function() --[[ line: 63 ]]
+		onStateChanged = if not var12.isDisabled then reactModule.useMemo(function()
 			-- upvalues: var12 (ref), controlStateModule (copy)
-			return if var12.onHover == nil then nil else function(p4) --[[ line: 65 ]]
+			return if var12.onHover == nil then nil else function(p4)
 				-- upvalues: var12 (copy), controlStateModule (copy)
 				var12.onHover(p4 == controlStateModule.Hover)
 			end

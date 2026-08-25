@@ -11,7 +11,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getPeriodTypeDisplayLabelModule = require(robloxSubscriptionPurchaseApp.Utils.getPeriodTypeDisplayLabel)
 local fFlagSupportFreeTrialPriceRowModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrialPriceRow)
 
-return function(p0) --[[ line: 22 | named "RobloxSubscriptionPriceRow" ]]
+return function(p0)
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), fFlagSupportFreeTrialPriceRowModule (ref), getPeriodTypeDisplayLabelModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
 	local var10
 	local var7 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getRobloxSubscriptionProduct)

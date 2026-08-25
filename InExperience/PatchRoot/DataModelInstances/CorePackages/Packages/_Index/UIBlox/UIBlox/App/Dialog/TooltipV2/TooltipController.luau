@@ -11,7 +11,7 @@ local withAnimationModule = require(parent_2.Core.Animation.withAnimation)
 local tooltipCalloutModule = require(parent.TooltipCallout)
 local tooltipOrientationModule = require(parent_1.Tooltip.Enum.TooltipOrientation)
 
-local function argmax(a, b) --[[ line: 19 ]]
+local function argmax(a, b)
 	local var8 = nil
 	
 	for i, v in pairs(a) do
@@ -22,7 +22,7 @@ local function argmax(a, b) --[[ line: 19 ]]
 	return var8
 end
 
-local function getDistances(p0, p1) --[[ line: 32 ]]
+local function getDistances(p0, p1)
 	-- upvalues: tooltipOrientationModule (ref), constantsModule (ref)
 	return {
 		[tooltipOrientationModule.Top] = p0.Y - constantsModule.SCREEN_MARGIN,
@@ -32,7 +32,7 @@ local function getDistances(p0, p1) --[[ line: 32 ]]
 	}
 end
 
-function getOrientationAndContentOffset(value, p2, p3, p4) --[[ line: 43 ]]
+function getOrientationAndContentOffset(value, p2, p3, p4)
 	-- upvalues: argmax (ref), tooltipOrientationModule (ref), constantsModule (ref)
 	local var13
 	local t = {}
@@ -71,20 +71,20 @@ function getOrientationAndContentOffset(value, p2, p3, p4) --[[ line: 43 ]]
 	end
 end
 
-return function(p5) --[[ line: 106 | named "TooltipController" ]]
+return function(p5)
 	-- upvalues: reactModule (ref), tooltipOrientationModule (ref), getDistances (ref), constantsModule (ref), luauPolyfillModule (ref), tooltipCalloutModule (ref), portal (ref), withAnimationModule (ref)
 	local var15, var16 = reactModule.useState(Vector2.zero)
 	local var17, var18 = reactModule.useState(Vector2.zero)
 	local var19, var20 = reactModule.useState(Vector2.zero)
 	local var21, var22 = reactModule.useState(Vector2.zero)
 	local var23, var24 = reactModule.useState(Vector2.zero)
-	local var25 = reactModule.useCallback(function(p6) --[[ line: 113 ]]
+	local var25 = reactModule.useCallback(function(p6)
 		-- upvalues: var16 (ref), var18 (ref)
 		var16(p6.AbsolutePosition)
 		var18(p6.AbsoluteSize)
 	end)
 	
-	local var26 = function(p7) --[[ line: 119 ]]
+	local var26 = function(p7)
 		-- upvalues: var22 (ref), var20 (ref)
 		if p7 then
 			var22(p7.AbsolutePosition)
@@ -95,7 +95,7 @@ return function(p5) --[[ line: 106 | named "TooltipController" ]]
 	local var27 = var17 / 2
 	local var28 = var15 + var27 - var21
 	local preferredOrientation = p5.preferredOrientation or tooltipOrientationModule.Top
-	local var30, var31 = reactModule.useMemo(function() --[[ line: 131 ]]
+	local var30, var31 = reactModule.useMemo(function()
 		-- upvalues: getDistances (copy), var28 (ref), var19 (ref), preferredOrientation (ref), var27 (ref), var23 (ref)
 		return getOrientationAndContentOffset(preferredOrientation, getDistances(var28, var19), var27, var23)
 	end, {
@@ -107,7 +107,7 @@ return function(p5) --[[ line: 106 | named "TooltipController" ]]
 	})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		Portal = withAnimationModule(if if p5.disabled then false else p5.active then constantsModule.ACTIVE_ANIMATION_TARGETS else constantsModule.INACTIVE_ANIMATION_TARGETS, function(p8) --[[ line: 142 | named "renderWithAnimation" ]]
+		Portal = withAnimationModule(if if p5.disabled then false else p5.active then constantsModule.ACTIVE_ANIMATION_TARGETS else constantsModule.INACTIVE_ANIMATION_TARGETS, function(p8)
 			-- upvalues: var30 (ref), var28 (ref), var27 (ref), var31 (ref), var24 (ref), luauPolyfillModule (copy), p5 (ref), reactModule (copy), tooltipCalloutModule (copy), var26 (ref), portal (copy)
 			if p8.transparency == 1 then
 				return nil

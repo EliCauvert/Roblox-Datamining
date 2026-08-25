@@ -25,7 +25,7 @@ dropDownAnimator.validateProps = tModule.strictInterface({
 	forwardRef = tModule.optional(tModule.callback)
 })
 
-function dropDownAnimator.init(p0) --[[ line: 46 ]]
+function dropDownAnimator.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
 	p0.state = {
 		lastButtonProps = nil,
@@ -40,7 +40,7 @@ function dropDownAnimator.init(p0) --[[ line: 46 ]]
 	p0.lastButtonPosition = var11
 	p0.updateLastButtonPosition = var12
 	p0.positionMotor = otterModule.createSingleMotor(0)
-	p0.positionMotor:onStep(function(p1) --[[ line: 58 ]]
+	p0.positionMotor:onStep(function(p1)
 		-- upvalues: p0 (ref)
 		p0.updateCurrentButtonPosition(UDim2.new(p1, 0, 0, 0))
 		
@@ -51,7 +51,7 @@ function dropDownAnimator.init(p0) --[[ line: 46 ]]
 		end
 		p0.updateLastButtonPosition(UDim2.new(p1 - 1, 0, 0, 0))
 	end)
-	p0.positionMotor:onComplete(function(p2) --[[ line: 66 ]]
+	p0.positionMotor:onComplete(function(p2)
 		-- upvalues: p0 (ref), roactModule (copy)
 		if p2 == 0 then
 			p0:setState({
@@ -62,11 +62,11 @@ function dropDownAnimator.init(p0) --[[ line: 46 ]]
 		end
 	end)
 	p0.overlayMotor = otterModule.createSingleMotor(0)
-	p0.overlayMotor:onStep(function(p3) --[[ line: 77 ]]
+	p0.overlayMotor:onStep(function(p3)
 		-- upvalues: p0 (ref)
 		p0:setState({ overlayPercentage = p3 })
 	end)
-	p0.overlayMotor:onComplete(function(p4) --[[ line: 82 ]]
+	p0.overlayMotor:onComplete(function(p4)
 		-- upvalues: p0 (ref), otterModule (copy), t (copy)
 		if p4 == 1 then
 			p0.positionMotor:setGoal(otterModule.spring(0, t))
@@ -74,7 +74,7 @@ function dropDownAnimator.init(p0) --[[ line: 46 ]]
 	end)
 end
 
-function dropDownAnimator.getButtonProps(p5, p6, p7) --[[ line: 89 ]]
+function dropDownAnimator.getButtonProps(p5, p6, p7)
 	local t = {
 		text = p6.text,
 		icon = p6.icon,
@@ -92,7 +92,7 @@ function dropDownAnimator.getButtonProps(p5, p6, p7) --[[ line: 89 ]]
 			return t
 		end
 	elseif p6.onActivated and (p6.onDecline or p5.props.forceShowOptions) then
-		function t.onActivated() --[[ line: 106 ]]
+		function t.onActivated()
 			-- upvalues: p5 (ref), p6 (ref)
 			p5:setState({ onActivatedCalled = true, onDeclineCalled = false })
 			p6.onActivated()
@@ -101,7 +101,7 @@ function dropDownAnimator.getButtonProps(p5, p6, p7) --[[ line: 89 ]]
 		t.onActivated = p6.onActivated
 	end
 	if p6.onDecline then
-		function t.onDecline() --[[ line: 117 ]]
+		function t.onDecline()
 			-- upvalues: p5 (ref), p6 (ref)
 			p5:setState({ onActivatedCalled = false, onDeclineCalled = true })
 			p6.onDecline()
@@ -110,9 +110,9 @@ function dropDownAnimator.getButtonProps(p5, p6, p7) --[[ line: 89 ]]
 	return t
 end
 
-function dropDownAnimator.render(p8) --[[ line: 130 ]]
+function dropDownAnimator.render(p8)
 	-- upvalues: withLayoutValues (ref), roactModule (ref), dropDownButtonModule (ref)
-	return withLayoutValues(function(_) --[[ line: 131 ]]
+	return withLayoutValues(function(_)
 		-- upvalues: p8 (ref), roactModule (copy), dropDownButtonModule (copy)
 		layoutValues = p8.props.layoutValues
 		local t = {
@@ -145,7 +145,7 @@ function dropDownAnimator.render(p8) --[[ line: 130 ]]
 	end)
 end
 
-function dropDownAnimator.didUpdate(p9, p10, p11) --[[ line: 167 ]]
+function dropDownAnimator.didUpdate(p9, p10, p11)
 	-- upvalues: otterModule (ref), t_1 (ref), roactModule (ref)
 	local var15 = p9.state.lastButtonProps == nil and p11.lastButtonProps ~= nil
 	
@@ -175,14 +175,14 @@ function dropDownAnimator.didUpdate(p9, p10, p11) --[[ line: 167 ]]
 	end
 end
 
-function dropDownAnimator.willUnmount(p12) --[[ line: 209 ]]
+function dropDownAnimator.willUnmount(p12)
 	p12.positionMotor:destroy()
 	p12.positionMotor = nil
 	p12.overlayMotor:destroy()
 	p12.overlayMotor = nil
 end
 
-return function(p13) --[[ line: 216 ]]
+return function(p13)
 	-- upvalues: useLayoutValues (ref), roactModule (ref), dropDownAnimator (ref), cryoModule (ref)
 	return roactModule.createElement(dropDownAnimator, cryoModule.Dictionary.join(p13, { layoutValues = useLayoutValues() }))
 end

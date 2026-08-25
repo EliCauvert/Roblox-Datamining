@@ -9,7 +9,7 @@ local var3 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uj9vb188k-wC2u3U3-UX3fm7xLffIbbvF7BDq3hs2Ak",
 		throttlingThousandths = game:DefineFastInt("PresenceImpressionLoggingThrottlePerMyriad", 10000)
 	},
-	getSharedInfo = function() --[[ line: 31 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })
@@ -20,21 +20,21 @@ local var4 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			format = function(p0, _) --[[ line: 43 ]]
+			format = function(p0, _)
 				return p0
 			end
 		}
 	}
 })
 
-function areEqual(p1, p2) --[[ line: 50 ]]
+function areEqual(p1, p2)
 	return p1.userPresenceType == p2.userPresenceType and p1.placeId == p2.placeId
 end
 
-function usePresenceImpressionEvents(p3) --[[ line: 54 ]]
+function usePresenceImpressionEvents(p3)
 	-- upvalues: reactModule (ref), cryoModule (ref), var3 (ref), var4 (ref), fFlagFriendsSignalMigrationTelemetry (ref)
 	local var5, var6 = reactModule.useState({})
-	reactModule.useEffect(function() --[[ line: 57 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p3 (ref), cryoModule (copy), var5 (ref), var3 (copy), var4 (copy), fFlagFriendsSignalMigrationTelemetry (copy), var6 (ref)
 		local t = {}
 		

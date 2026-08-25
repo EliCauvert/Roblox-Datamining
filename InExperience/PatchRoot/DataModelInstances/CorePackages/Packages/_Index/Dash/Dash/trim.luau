@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 7 | named "trim" ]]
+﻿return function(p0)
 	return p0:match("^%s*(.-)%s*$")
 end

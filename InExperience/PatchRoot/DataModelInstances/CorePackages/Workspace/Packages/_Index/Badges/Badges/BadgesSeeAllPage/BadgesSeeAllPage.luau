@@ -10,22 +10,22 @@ local compositionTags = require(parent.AppComposition).CompositionTags
 local fetchBadgesSeeAllPageIfNeededModule = require(badges.BadgesSeeAllPage.fetchBadgesSeeAllPageIfNeeded)
 local getBadgesSeeAllPageKeyModule = require(badges.BadgesSeeAllPage.getBadgesSeeAllPageKey)
 
-local function _(p0, p1) --[[ line: 32 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1)
 	return p0[p1] or p0.navigation and p0.navigation.getParam(p1)
 end
 
-return reactModule.memo(function(p2) --[[ line: 36 | named "BadgesSeeAllPage" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: getBadgesSeeAllPageKeyModule (ref), useLocalization (ref), reactModule (ref), sduiLoadTimer (ref), fetchBadgesSeeAllPageIfNeededModule (ref), sduiPageEntryPoint (ref), compositionTags (ref)
 	local universeId = p2.universeId or p2.navigation and p2.navigation.getParam("universeId")
 	local var6 = getBadgesSeeAllPageKeyModule(universeId)
 	local var7 = useLocalization({ pageTitle = "CommonUI.Features.Label.Badges" })
-	local var8 = reactModule.useMemo(function() --[[ line: 43 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), sduiLoadTimer (copy)
 		local var9 = p2
 		
 		return var9.pageTimer or var9.navigation and var9.navigation.getParam("pageTimer") or sduiLoadTimer.createLoadTimer("BadgesSeeAll")
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: universeId (ref), fetchBadgesSeeAllPageIfNeededModule (copy), var8 (ref)
 		if universeId then
 			fetchBadgesSeeAllPageIfNeededModule(universeId, var8)
@@ -38,7 +38,7 @@ return reactModule.memo(function(p2) --[[ line: 36 | named "BadgesSeeAllPage" ]]
 		configKey = var6,
 		pageTimer = var8,
 		pageTitle = var7.pageTitle,
-		refresh = reactModule.useCallback(function() --[[ line: 54 ]]
+		refresh = reactModule.useCallback(function()
 			-- upvalues: universeId (ref), sduiLoadTimer (copy), fetchBadgesSeeAllPageIfNeededModule (copy)
 			if universeId then
 				local badgesSeeAll = sduiLoadTimer.createLoadTimer("BadgesSeeAll")

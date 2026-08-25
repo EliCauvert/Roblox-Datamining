@@ -4,10 +4,10 @@ local sharedFlagsModule = require(parent.SharedFlags)
 
 return {
 	Components = {
-		FlyoutSidePanelComponent = createLazyComponent(function() --[[ line: 10 ]]
+		FlyoutSidePanelComponent = createLazyComponent(function()
 			return require(script.Components.FlyoutSidePanelComponent)
 		end),
-		FlyoutProfileCard = createLazyComponent(function() --[[ line: 13 ]]
+		FlyoutProfileCard = createLazyComponent(function()
 			return require(script.Components.FlyoutProfileCard)
 		end),
 		FlyoutLeftHeader = require(script.Components.FlyoutLeftHeader),

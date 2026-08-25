@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Types)
 local insert = table.insert
 
-return function(p0, p1) --[[ line: 17 | named "groupBy" ]]
+return function(p0, p1)
 	-- upvalues: insert (ref)
 	local t = {}
 	

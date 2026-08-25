@@ -3,11 +3,11 @@ local enableAudioPlaybackInAppModule = require(mediaPlayback.Common.enableAudioP
 local useEffect = require(mediaPlayback.Parent.React).useEffect
 local initializeFmodMsDelay = game:DefineFastInt("InitializeFmodMsDelay", 0)
 
-return function() --[[ line: 24 | named "useLazyFmod" ]]
+return function()
 	-- upvalues: useEffect (ref), initializeFmodMsDelay (ref), enableAudioPlaybackInAppModule (ref)
-	useEffect(function() --[[ line: 25 ]]
+	useEffect(function()
 		-- upvalues: initializeFmodMsDelay (copy), enableAudioPlaybackInAppModule (copy)
-		task.delay(initializeFmodMsDelay / 1000, function() --[[ line: 26 ]]
+		task.delay(initializeFmodMsDelay / 1000, function()
 			-- upvalues: enableAudioPlaybackInAppModule (copy)
 			enableAudioPlaybackInAppModule()
 		end)

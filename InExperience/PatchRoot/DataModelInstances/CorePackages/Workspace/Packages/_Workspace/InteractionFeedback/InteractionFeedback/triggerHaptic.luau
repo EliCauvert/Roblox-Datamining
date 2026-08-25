@@ -7,7 +7,7 @@ local fFlagLuaAppHapticTriggeredTelemetry = sharedFlagsModule.FFlagLuaAppHapticT
 local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
 local t = {}
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 16 | named "triggerHaptic" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: t (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), cryoModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), sendHapticAnalyticsModule (ref)
 	if not t[p0] then
 		t[p0] = Instance.new("HapticEffect")

@@ -87,7 +87,7 @@ local t = {
 	size = UDim2.new(1, 0, 1, 0)
 }
 
-return memo(function(p0) --[[ line: 113 | named "PendingStateIndicator" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useCallback (ref), reactModule (ref), pendingShimmerBubbleModule (ref), bidirectionalFlatList (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local style = var5.style or useStyle()
@@ -103,7 +103,7 @@ return memo(function(p0) --[[ line: 113 | named "PendingStateIndicator" ]]
 			inverted = true,
 			optimizeInvertedCanvasResize = true,
 			data = var5.itemList,
-			renderItem = useCallback(function(p1) --[[ line: 119 ]]
+			renderItem = useCallback(function(p1)
 				-- upvalues: var5 (ref), reactModule (copy), pendingShimmerBubbleModule (copy), cryoModule (copy)
 				return reactModule.createElement(pendingShimmerBubbleModule, cryoModule.Dictionary.join(p1.item, {
 					backgroundTransparency = var5.maxTransparency - (var5.maxTransparency - var5.minTransparency) * (p1.index - 1) / math.max(1, #var5.itemList)
@@ -115,7 +115,7 @@ return memo(function(p0) --[[ line: 113 | named "PendingStateIndicator" ]]
 				Name = "ShimmerMessageList"
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 },
-			keyExtractor = function(_, p2) --[[ line: 154 ]]
+			keyExtractor = function(_, p2)
 				return p2
 			end
 		})

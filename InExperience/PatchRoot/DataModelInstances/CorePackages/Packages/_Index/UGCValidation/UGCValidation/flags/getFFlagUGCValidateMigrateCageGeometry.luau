@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateMigrateCageGeometry", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateMigrateCageGeometry")
 end

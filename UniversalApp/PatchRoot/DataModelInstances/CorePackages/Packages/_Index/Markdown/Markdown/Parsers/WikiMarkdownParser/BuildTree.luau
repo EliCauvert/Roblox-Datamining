@@ -10,7 +10,7 @@ local getNodeTypeModule = require(script.Parent.Parent.getNodeType)
 local isNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local t = {}
 
-function t.buildTree(p0, p1) --[[ line: 21 ]]
+function t.buildTree(p0, p1)
 	-- upvalues: nodeTypeModule (ref), getNodeTypeModule (ref), insert (ref), STYLED_TEXT (ref), t (ref), LISTS (ref), isNodeBlockModule (ref), DIVIDERS (ref)
 	local t_1 = {
 		name = "ROOT",
@@ -50,7 +50,7 @@ function t.buildTree(p0, p1) --[[ line: 21 ]]
 				type = getNodeTypeModule("STYLED_TEXT", p1)
 			})
 		elseif STYLED_TEXT[var9.name] then
-			if not t.closeNode(list, function(p2) --[[ line: 70 ]]
+			if not t.closeNode(list, function(p2)
 				-- upvalues: var9 (ref)
 				if p2.name == "STYLED_TEXT" and p2.attributes and p2.attributes.style then
 					assert(p2.attributes.style == var9.name, `Can't put {var9.name} at {var9.offset} inside {p2.attributes.style} at {p2.offset}`)
@@ -68,7 +68,7 @@ function t.buildTree(p0, p1) --[[ line: 21 ]]
 				})
 			end
 		elseif LISTS[var9.name] and var9.capture then
-			t.closeNode(list, function(p3) --[[ line: 95 ]]
+			t.closeNode(list, function(p3)
 				-- upvalues: isNodeBlockModule (copy)
 				return isNodeBlockModule(p3)
 			end)
@@ -80,7 +80,7 @@ function t.buildTree(p0, p1) --[[ line: 21 ]]
 				type = getNodeTypeModule("LIST_ITEM", p1)
 			})
 		elseif var9.isBlock then
-			t.closeNode(list, function(p4) --[[ line: 111 ]]
+			t.closeNode(list, function(p4)
 				-- upvalues: isNodeBlockModule (copy)
 				return isNodeBlockModule(p4)
 			end)
@@ -174,7 +174,7 @@ function t.buildTree(p0, p1) --[[ line: 21 ]]
 			end
 		elseif var9.name == "CLOSE" and var9.capture then
 			local var12 = var9.capture[1]
-			assert(t.closeNode(list, function(p5) --[[ line: 209 ]]
+			assert(t.closeNode(list, function(p5)
 				-- upvalues: var12 (ref), var9 (ref)
 				if p5.name == "TAG" then
 					assert(p5.text == var12, `Found <{p5.text}> at {p5.offset} when trying to close </{var12}> at {var9.offset}`)
@@ -194,18 +194,18 @@ function t.buildTree(p0, p1) --[[ line: 21 ]]
 		end
 		var8 += 1
 	end
-	t.closeNode(list, function(p6) --[[ line: 234 ]]
+	t.closeNode(list, function(p6)
 		-- upvalues: isNodeBlockModule (copy)
 		return isNodeBlockModule(p6)
 	end)
-	t.closeNode(list, function(p7) --[[ line: 238 ]]
+	t.closeNode(list, function(p7)
 		return p7.name == "ROOT"
 	end)
 	
 	return t_1
 end
 
-function t.closeNode(p8, p9) --[[ line: 245 ]]
+function t.closeNode(p8, p9)
 	-- upvalues: t (ref), insert (ref)
 	local var17 = t.findLastNodeIndex(p8, p9)
 	
@@ -229,7 +229,7 @@ function t.closeNode(p8, p9) --[[ line: 245 ]]
 	return var18
 end
 
-function t.findLastNodeIndex(p10, p11) --[[ line: 272 ]]
+function t.findLastNodeIndex(p10, p11)
 	for i = #p10, 1, -1 do
 		local var21
 		local var20 = p10[i]
@@ -248,7 +248,7 @@ function t.findLastNodeIndex(p10, p11) --[[ line: 272 ]]
 	return nil
 end
 
-function t.parseXmlAttributes(p12) --[[ line: 284 ]]
+function t.parseXmlAttributes(p12)
 	local t = {}
 	
 	for i, v in p12:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]+)\"%s*") do

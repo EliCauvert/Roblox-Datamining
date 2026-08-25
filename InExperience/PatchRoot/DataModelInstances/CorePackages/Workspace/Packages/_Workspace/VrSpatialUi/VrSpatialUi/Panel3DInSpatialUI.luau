@@ -11,7 +11,7 @@ local registerRoactPanelModule = require(vrSpatialUi.registerRoactPanel)
 local useHeadScaleModule = require(vrSpatialUi.Hooks.useHeadScale)
 local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "Panel3DInSpatialUI" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: UIManagerModule (ref), inExperienceUIVRIXP (ref), reactModule (ref), useHeadScaleModule (ref), panel3D (ref), constants (ref), guiService (ref), registerRoactPanelModule (ref)
 	local panelTypeScaledPartSizeInPixel = UIManagerModule.getInstance():getScaledPartSizeInPixel(p0.panelType)
 	local panelTypePanelSizeInPixel = UIManagerModule.getInstance():getPanelSizeInPixel(p0.panelType)
@@ -30,7 +30,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "Panel3DInSpatialUI" 
 		offset = CFrame.new(0, 0, 0),
 		anchoring = constants.AnchoringTypes.PanelManaged,
 		parent = guiService.CoreGuiFolder,
-		connectPanelManagerFunction = function(p1) --[[ line: 43 ]]
+		connectPanelManagerFunction = function(p1)
 			-- upvalues: registerRoactPanelModule (copy), p0 (ref), UIManagerModule (copy)
 			if p1 then
 				registerRoactPanelModule(p1, p0.panelType, p0.visibilityObservable)

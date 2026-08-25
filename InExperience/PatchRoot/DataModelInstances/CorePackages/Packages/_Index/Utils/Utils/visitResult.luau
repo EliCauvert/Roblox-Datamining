@@ -29,10 +29,10 @@ local updateObject = nil
 local addPathSegmentInfo = nil
 local visitFieldValue = nil
 
-local function visitData(p0, p1, p2) --[[ line: 101 ]]
+local function visitData(p0, p1, p2)
 	-- upvalues: boolean (ref), array (ref), visitData (ref)
 	if boolean.toJSBoolean(array.isArray(p0)) then
-		return array.map(p0, function(p3) --[[ line: 103 ]]
+		return array.map(p0, function(p3)
 			-- upvalues: visitData (copy), p1 (ref), p2 (ref)
 			return visitData(p3, p1, p2)
 		end)
@@ -51,17 +51,17 @@ end
 
 t.visitData = visitData
 
-function t.visitErrors(p4, p5) --[[ line: 128 ]]
+function t.visitErrors(p4, p5)
 	-- upvalues: array (ref)
-	return array.map(p4, function(p6) --[[ line: 132 ]]
+	return array.map(p4, function(p6)
 		-- upvalues: p5 (ref)
 		return p5(p6)
 	end)
 end
 
-function t.visitResult(p7, p8, p9, p10, p11) --[[ line: 137 ]]
+function t.visitResult(p7, p8, p9, p10, p11)
 	-- upvalues: array (ref), kind (ref), boolean (ref), map (ref), set (ref), getOperationASTFromRequest (ref), visitRoot (write), visitErrorsByType (write)
-	local var14 = array.reduce(p8.document.definitions, function(p12, p13) --[[ line: 144 ]]
+	local var14 = array.reduce(p8.document.definitions, function(p12, p13)
 		-- upvalues: kind (copy)
 		if p13.kind == kind.FRAGMENT_DEFINITION then
 			p12[tostring(p13.name.value)] = p13
@@ -84,16 +84,16 @@ function t.visitResult(p7, p8, p9, p10, p11) --[[ line: 137 ]]
 	return p7
 end
 
-visitErrorsByType = function(p14, p15, p16) --[[ line: 190 | named "visitErrorsByType" ]]
+visitErrorsByType = function(p14, p15, p16)
 	-- upvalues: array (ref), boolean (ref)
 	local segmentInfoMap = p16.segmentInfoMap
 	local unpathedErrors = p16.unpathedErrors
 	local unpathed = p15.__unpathed
 	
-	return array.map(p14, function(p17) --[[ line: 202 ]]
+	return array.map(p14, function(p17)
 		-- upvalues: segmentInfoMap (ref), array (copy), p15 (ref), boolean (copy), unpathed (ref), unpathedErrors (ref)
 		local var19 = segmentInfoMap:get(p17)
-		local var20 = if var19 == nil then p17 else array.reduce(array.reverse(array.concat({}, var19)), function(p18, p19) --[[ line: 222 ]]
+		local var20 = if var19 == nil then p17 else array.reduce(array.reverse(array.concat({}, var19)), function(p18, p19)
 			-- upvalues: p15 (copy)
 			local name = p15[p19.type.name]
 			
@@ -109,13 +109,13 @@ visitErrorsByType = function(p14, p15, p16) --[[ line: 190 | named "visitErrorsB
 	end)
 end
 
-local function _(p20, p21) --[[ line: 250 | named "getOperationRootType" ]]
+local function _(p20, p21)
 	local operation = p21.operation
 	
 	return if operation == "query" then p20:getQueryType() elseif operation == "mutation" then p20:getMutationType() elseif operation == "subscription" then p20:getSubscriptionType() else nil
 end
 
-visitRoot = function(p22, p23, p24, p25, p26, p27, p28, p29) --[[ line: 269 | named "visitRoot" ]]
+visitRoot = function(p22, p23, p24, p25, p26, p27, p28, p29)
 	-- upvalues: collectFields (ref), map (ref), set (ref), visitObjectValue (write)
 	local operation = p23.operation
 	local var21 = if operation == "query" then p24:getQueryType() elseif operation == "mutation" then p24:getMutationType() elseif operation == "subscription" then p24:getSubscriptionType() else nil
@@ -123,7 +123,7 @@ visitRoot = function(p22, p23, p24, p25, p26, p27, p28, p29) --[[ line: 269 | na
 	return visitObjectValue(p22, var21, collectFields(p24, p25, p26, var21, p23.selectionSet, map.new(), set.new()), p24, p25, p26, p27, 1, p28, p29)
 end
 
-visitObjectValue = function(p30, p31, p32, p33, p34, p35, p36, p37, p38, p39) --[[ line: 308 | named "visitObjectValue" ]]
+visitObjectValue = function(p30, p31, p32, p33, p34, p35, p36, p37, p38, p39)
 	-- upvalues: sortErrorsByPathSegment (write), typeNameMetaFieldDef (ref), schemaMetaFieldDef (ref), addPathSegmentInfo (write), visitFieldValue (write), updateObject (write)
 	local fields = p31:getFields()
 	local var23 = if typeof(p36) == "table" then p36[p31.name] else nil
@@ -182,7 +182,7 @@ visitObjectValue = function(p30, p31, p32, p33, p34, p35, p36, p37, p38, p39) --
 	return if var27 == nil then var25 else var27(var25)
 end
 
-updateObject = function(p40, p41, p42, p43, p44) --[[ line: 438 | named "updateObject" ]]
+updateObject = function(p40, p41, p42, p43, p44)
 	if p43 == nil then
 		p40[tostring(p41)] = p42
 		
@@ -205,15 +205,15 @@ updateObject = function(p40, p41, p42, p43, p44) --[[ line: 438 | named "updateO
 	p40[tostring(p41)] = var34
 end
 
-local function visitListValue(p45, p46, p47, p48, p49, p50, p51, p52, p53, p54) --[[ line: 469 ]]
+local function visitListValue(p45, p46, p47, p48, p49, p50, p51, p52, p53, p54)
 	-- upvalues: array (ref), visitFieldValue (write)
-	return array.map(p45, function(p55) --[[ line: 481 ]]
+	return array.map(p45, function(p55)
 		-- upvalues: visitFieldValue (copy), p46 (ref), p47 (ref), p48 (ref), p49 (ref), p50 (ref), p51 (ref), p52 (ref), p53 (ref), p54 (ref)
 		return visitFieldValue(p55, p46, p47, p48, p49, p50, p51, p52 + 1, p53, p54)
 	end)
 end
 
-visitFieldValue = function(p56, p57, p58, p59, p60, p61, p62, p63, p64, p65) --[[ line: 498 | named "visitFieldValue" ]]
+visitFieldValue = function(p56, p57, p58, p59, p60, p61, p62, p63, p64, p65)
 	-- upvalues: NULL (ref), getNullableType (ref), boolean (ref), isListType (ref), visitListValue (ref), isAbstractType (ref), collectSubFields (ref), visitObjectValue (write), isObjectType (ref)
 	local var35 = if p64 ~= nil then {} else p64
 	
@@ -241,7 +241,7 @@ visitFieldValue = function(p56, p57, p58, p59, p60, p61, p62, p63, p64, p65) --[
 	return if var39 == nil then p56 else var39
 end
 
-sortErrorsByPathSegment = function(p66, p67) --[[ line: 589 | named "sortErrorsByPathSegment" ]]
+sortErrorsByPathSegment = function(p66, p67)
 	-- upvalues: set (ref), array (ref), object (ref)
 	local t = {}
 	local var41 = set.new()
@@ -260,7 +260,7 @@ sortErrorsByPathSegment = function(p66, p67) --[[ line: 589 | named "sortErrorsB
 	return { errorMap = t, unpathedErrors = var41 }
 end
 
-addPathSegmentInfo = function(p68, p69, p70, p71, p72) --[[ line: 614 | named "addPathSegmentInfo" ]]
+addPathSegmentInfo = function(p68, p69, p70, p71, p72)
 	for i, v in if p71 ~= nil then {} else p71 do
 		local t = { type = p68, fieldName = p69, pathIndex = p70 }
 		local var44 = p72.segmentInfoMap:get(v)

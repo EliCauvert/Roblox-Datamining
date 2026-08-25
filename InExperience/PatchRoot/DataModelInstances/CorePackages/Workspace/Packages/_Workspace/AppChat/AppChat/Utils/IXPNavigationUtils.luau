@@ -11,7 +11,7 @@ local t = {
 		Creator = "Creator"
 	}
 }
-local t_1 = { remove = function() --[[ line: 102 ]] end }
+local t_1 = { remove = function() end }
 local t_2 = {
 	[t.ExposureKind.FlagLinked] = "LogFlagLinkedUserLayerExposure",
 	[t.ExposureKind.BrowserTracker] = "LogBrowserTrackerLayerExposure",
@@ -20,11 +20,11 @@ local t_2 = {
 }
 local var6 = IXPService
 
-local function _(p0) --[[ line: 119 | named "normalizeLayers" ]]
+local function _(p0)
 	return if type(p0) == "string" then { p0 } else p0
 end
 
-local _ = function(p1) --[[ line: 128 | named "isAnyFlagEnabled" ]]
+local _ = function(p1)
 	if p1 == nil then
 		return true
 	elseif type(p1) == "boolean" then
@@ -38,7 +38,7 @@ local _ = function(p1) --[[ line: 128 | named "isAnyFlagEnabled" ]]
 	return false
 end
 
-local function logExposure(p2, p3) --[[ line: 146 ]]
+local function logExposure(p2, p3)
 	-- upvalues: t (ref), t_2 (ref), var6 (write)
 	p3 = p3 or t.ExposureKind.FlagLinked
 	
@@ -52,13 +52,13 @@ local function logExposure(p2, p3) --[[ line: 146 ]]
 	end
 end
 
-function t.createExposureHandler(p4, p5) --[[ line: 167 ]]
+function t.createExposureHandler(p4, p5)
 	-- upvalues: logExposure (ref)
 	local var11 = if type(p4) == "string" then { p4 } else p4
 	local var12 = if p5 then p5.flags else nil
 	local var13 = if p5 then p5.kind else nil
 	
-	return function() --[[ line: 175 ]]
+	return function()
 		-- upvalues: var12 (ref), logExposure (copy), var11 (ref), var13 (ref)
 		local var15
 		local var14 = var12
@@ -81,12 +81,12 @@ function t.createExposureHandler(p4, p5) --[[ line: 167 ]]
 	end
 end
 
-function t.useExposureOnFocus(p6, p7) --[[ line: 193 ]]
+function t.useExposureOnFocus(p6, p7)
 	-- upvalues: useNavigation (ref), reactModule (ref), t (ref), roactNavigationModule (ref)
 	local var16 = useNavigation()
 	local var17 = if p7 then p7.flags else nil
 	local var18 = if p7 then p7.kind else nil
-	reactModule.useEffect(function() --[[ line: 198 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var17 (ref), t (copy), p6 (ref), var18 (ref), roactNavigationModule (copy)
 		if var16 then
 			local var20
@@ -113,7 +113,7 @@ function t.useExposureOnFocus(p6, p7) --[[ line: 193 ]]
 			if var16.isFocused and var16.isFocused() then
 				var21()
 			end
-			return function() --[[ line: 213 ]]
+			return function()
 				-- upvalues: var22 (ref)
 				var22.remove()
 			end
@@ -121,7 +121,7 @@ function t.useExposureOnFocus(p6, p7) --[[ line: 193 ]]
 	end, { var16, p6, var17, var18 })
 end
 
-function t.registerExposureOnFocus(p8, p9, p10) --[[ line: 231 ]]
+function t.registerExposureOnFocus(p8, p9, p10)
 	-- upvalues: t_1 (ref), roactNavigationModule (ref), t (ref)
 	if not p8 then
 		return t_1
@@ -144,12 +144,12 @@ function t.registerExposureOnFocus(p8, p9, p10) --[[ line: 231 ]]
 	return if var24 then p8.addListener(roactNavigationModule.Events.WillFocus, t.createExposureHandler(p9, p10)) else t_1
 end
 
-function t.setMocksForTesting(value) --[[ line: 251 ]]
+function t.setMocksForTesting(value)
 	-- upvalues: var6 (write)
 	var6 = value or var6
 end
 
-function t.restoreDefaultsAfterTesting() --[[ line: 255 ]]
+function t.restoreDefaultsAfterTesting()
 	-- upvalues: var6 (write), IXPService (ref)
 	var6 = IXPService
 end

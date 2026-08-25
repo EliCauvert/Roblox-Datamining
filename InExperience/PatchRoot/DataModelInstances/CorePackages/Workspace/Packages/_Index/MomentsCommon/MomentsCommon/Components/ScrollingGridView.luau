@@ -10,7 +10,7 @@ local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function GridItems(p0) --[[ line: 35 ]]
+local function GridItems(p0)
 	-- upvalues: reactModule (ref), view (ref)
 	local t = {}
 	
@@ -37,39 +37,39 @@ local function GridItems(p0) --[[ line: 35 ]]
 	})
 end
 
-return function(p1) --[[ line: 95 ]]
+return function(p1)
 	-- upvalues: reactModule (ref), useTokens (ref), dashModule (ref), fFlagMomentsProfileGridInfiniteLoadModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), GridItems (ref), button (ref), foundationModule (ref)
 	local var7, var8 = reactModule.useState(Vector2.new(0, 0))
 	local var9, var10 = reactModule.useState(0)
 	local var11 = useTokens()
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 101 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var8 (ref)
 		var8(p2.AbsoluteSize)
 	end, {})
-	local var13 = reactModule.useMemo(function() --[[ line: 105 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), p1 (ref)
 		return math.clamp(math.floor(var7.X / p1.itemConfig.minItemWidth), 1, p1.itemConfig.maxItemsPerRow)
 	end, { var7, p1.itemConfig })
-	local var14 = reactModule.useMemo(function() --[[ line: 113 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), p1 (ref), var13 (ref)
 		local var20 = var7.X - p1.itemConfig.padding * (var13 - 1)
 		local minValue = math.min(var20 / var13, var20)
 		
 		return Vector2.new(math.floor(minValue), math.floor(minValue * p1.aspectRatio))
 	end, { var7, var13, p1.aspectRatio, p1.itemConfig })
-	local var15 = reactModule.useMemo(function() --[[ line: 123 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), var14 (ref), var13 (ref), p1 (ref)
 		return if var7.Y <= 0 then 0 else math.max(math.floor(var7.Y / var14.Y) * var13, p1.itemConfig.minItemsPerPage)
 	end, { var7, var14, var13, p1.itemConfig })
 	local var16 = var7.X > 0 and var7.Y > 0
 	local shouldShowShowMoreButton = p1.shouldShowShowMoreButton or var9 < #p1.items
-	reactModule.useEffect(function() --[[ line: 137 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var15 (ref), var10 (ref)
 		if var9 < var15 then
 			var10(var15)
 		end
 	end, { var7, var15, var9 })
-	local var18 = reactModule.useCallback(function() --[[ line: 144 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), var15 (ref), p1 (ref), var10 (ref)
 		if #p1.items < var9 + var15 and p1.shouldShowShowMoreButton then
 			p1.onShowMoreCallback()
@@ -82,13 +82,13 @@ return function(p1) --[[ line: 95 ]]
 		p1.onShowMoreCallback,
 		p1.shouldShowShowMoreButton
 	})
-	local var19 = reactModule.useMemo(function() --[[ line: 155 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: shouldShowShowMoreButton (ref), p1 (ref), var9 (ref), dashModule (copy)
 		return if shouldShowShowMoreButton then dashModule.slice(p1.items, 1, math.min(#p1.items, var9)) else p1.items
 	end, { p1.items, shouldShowShowMoreButton, var9 })
 	
 	if fFlagMomentsProfileGridInfiniteLoadModule then
-		reactModule.useEffect(function() --[[ line: 167 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p1 (ref), shouldShowShowMoreButton (ref), var7 (ref), var14 (ref), var13 (ref), var9 (ref), var19 (ref), var18 (ref)
 			if not p1.enableInfiniteScroll or not shouldShowShowMoreButton then return end
 			if var7.Y <= 0 or var14.Y <= 0 or var13 <= 0 then return end
@@ -114,7 +114,7 @@ return function(p1) --[[ line: 95 ]]
 					Padding = UDim.new(0, var11.Padding.Large)
 				},
 				LayoutOrder = if p1.layoutOrder then p1.layoutOrder else 1,
-				onCanvasPositionChanged = if p1.enableInfiniteScroll then if fFlagMomentsProfileGridInfiniteLoadModule then reactModule.useCallback(function(p3) --[[ line: 201 ]]
+				onCanvasPositionChanged = if p1.enableInfiniteScroll then if fFlagMomentsProfileGridInfiniteLoadModule then reactModule.useCallback(function(p3)
 					-- upvalues: shouldShowShowMoreButton (ref), var14 (ref), var18 (ref)
 					if not shouldShowShowMoreButton then return end
 					if p3.AbsoluteCanvasSize.Y - var14.Y <= p3.CanvasPosition.Y + p3.AbsoluteSize.Y then

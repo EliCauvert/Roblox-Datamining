@@ -21,7 +21,7 @@ local parseContentIdsModule = require(parent.util.ParseContentIds)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getFFlagDebugAllowHRDUploadOnBundleBackendModule = require(parent.flags.getFFlagDebugAllowHRDUploadOnBundleBackend)
 
-local function _(p0, p1) --[[ line: 33 | named "getInstance" ]]
+local function _(p0, p1)
 	for i, v in p0 do
 		if v.Name == p1 then
 			return v
@@ -30,7 +30,7 @@ local function _(p0, p1) --[[ line: 33 | named "getInstance" ]]
 	return nil
 end
 
-local function validateAllAssetsWithSchema(value, p2, p3) --[[ line: 44 ]]
+local function validateAllAssetsWithSchema(value, p2, p3)
 	-- upvalues: validateSingleInstanceModule (ref), validateWithSchemaModule (ref), createDynamicHeadMeshPartSchemaModule (ref), createLimbsAndTorsoSchemaModule (ref)
 	for i, v in value do
 		if Enum.AssetType.DynamicHead == v.assetTypeEnum then
@@ -61,7 +61,7 @@ local function validateAllAssetsWithSchema(value, p2, p3) --[[ line: 44 ]]
 	return true
 end
 
-local function validateCorrectAssetTypesExist(value) --[[ line: 83 ]]
+local function validateCorrectAssetTypesExist(value)
 	-- upvalues: constantsInterfaceModule (ref)
 	local t = {}
 	local count = #constantsInterfaceModule.getBodyPartAssets()
@@ -81,7 +81,7 @@ local function validateCorrectAssetTypesExist(value) --[[ line: 83 ]]
 	return var29 == count
 end
 
-local function createAllBodyPartsTable(p4, p5) --[[ line: 101 ]]
+local function createAllBodyPartsTable(p4, p5)
 	local t = {}
 	
 	for i, v in p5 do
@@ -103,7 +103,7 @@ local function createAllBodyPartsTable(p4, p5) --[[ line: 101 ]]
 	return t
 end
 
-local function validateMeshIds(p6, p7) --[[ line: 116 ]]
+local function validateMeshIds(p6, p7)
 	-- upvalues: parseContentIdsModule (ref), analyticsModule (ref)
 	local t = { MeshPart = { "MeshId" } }
 	local t_1 = { MeshPart = { MeshId = true } }
@@ -122,7 +122,7 @@ local function validateMeshIds(p6, p7) --[[ line: 116 ]]
 	return true
 end
 
-local function validateInstanceHierarchy(p8, p9, p10) --[[ line: 153 ]]
+local function validateInstanceHierarchy(p8, p9, p10)
 	-- upvalues: validateCorrectAssetTypesExist (ref), analyticsModule (ref), validateAllAssetsWithSchema (ref), validateMeshIds (ref)
 	local var34 = if p10 then p10.isServer else nil
 	
@@ -152,7 +152,7 @@ local function validateInstanceHierarchy(p8, p9, p10) --[[ line: 153 ]]
 	end
 end
 
-local function resetAllPhysicsData(value) --[[ line: 187 ]]
+local function resetAllPhysicsData(value)
 	-- upvalues: resetPhysicsDataModule (ref)
 	for i, v in value.fullBodyData do
 		local var37, var38 = resetPhysicsDataModule(v.allSelectedInstances, value)
@@ -164,7 +164,7 @@ local function resetAllPhysicsData(value) --[[ line: 187 ]]
 	return true
 end
 
-return function(p11) --[[ line: 200 | named "validateFullBody" ]]
+return function(p11)
 	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), constantsModule (ref), validateInstanceHierarchy (ref), resetAllPhysicsData (ref), failureReasonsAccumulatorModule (ref), createAllBodyPartsTable (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateAssetBodyPartCagesModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validateAssetBoundsModule (ref), getFFlagUGCValidateLegFullBodySeparationModule (ref), validateLegsSeparationModule (ref)
 	assert(p11.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBody")
 	local fullBodyData = p11.fullBodyData

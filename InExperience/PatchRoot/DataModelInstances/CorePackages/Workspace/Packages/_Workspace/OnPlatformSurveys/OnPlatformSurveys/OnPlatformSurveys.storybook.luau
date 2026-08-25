@@ -9,7 +9,7 @@ local device = foundationModule.Enums.Device
 local mockProvidersModule = require(onPlatformSurveys.MockProviders)
 local t = { Dark = colorMode.Dark, Light = colorMode.Light }
 
-local function _(p0, p1) --[[ line: 26 | named "union" ]]
+local function _(p0, p1)
 	local cloned = table.clone(p0)
 	
 	if p1 then
@@ -23,9 +23,9 @@ end
 return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2) --[[ line: 39 ]]
+	mapStory = function(p2)
 		-- upvalues: reactModule (ref), mockProvidersModule (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref)
-		return function(p3) --[[ line: 40 ]]
+		return function(p3)
 			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p2 (ref)
 			local var7 = if p3.definition then p3.definition.props else {}
 			local cloned = table.clone(p3)

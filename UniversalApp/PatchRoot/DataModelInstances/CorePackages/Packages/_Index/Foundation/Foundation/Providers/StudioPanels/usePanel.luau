@@ -6,7 +6,7 @@ local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Utility.Plugin.StudioUri)
 local _ = require(script.Parent.Types)
 
-return function(p0) --[[ line: 15 | named "usePanel" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reactUtilsModule (ref), flagsModule (ref)
 	local var9
 	local var4 = reactModule.useRef(nil)
@@ -25,12 +25,12 @@ return function(p0) --[[ line: 15 | named "usePanel" ]]
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
 		local var10, var11 = reactModule.useState(false)
-		local var12 = reactModule.useCallback(function() --[[ line: 54 ]]
+		local var12 = reactModule.useCallback(function()
 			-- upvalues: var11 (ref), var6 (ref)
 			var11(true)
 			var6.current()
 		end, {})
-		local var13 = reactUtilsModule.useAsync(function() --[[ line: 59 ]]
+		local var13 = reactUtilsModule.useAsync(function()
 			-- upvalues: p0 (ref), var10 (ref), var7 (ref), var5 (ref), var12 (ref), flagsModule (copy), var4 (ref)
 			if p0.isOpen and not var10 then
 				local var14, var15 = var7.current(var5.current.anchorUri, var5.current.position, var12, var5.current.depth, var5.current.parentPopoverId, if flagsModule.FoundationPopoverPluginFocusable then var5.current.isFocusable else nil)
@@ -44,14 +44,14 @@ return function(p0) --[[ line: 15 | named "usePanel" ]]
 			return nil
 		end, { p0.isOpen, var5, var10 })
 		var9 = if var10 or var13.status ~= "ok" then nil else var13.value
-		reactModule.useEffect(function() --[[ line: 85 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), var11 (ref)
 			if not p0.isOpen then
 				var11(false)
 			end
 		end, { p0.isOpen })
 	else
-		local var8 = reactUtilsModule.useAsync(function() --[[ line: 91 ]]
+		local var8 = reactUtilsModule.useAsync(function()
 			-- upvalues: p0 (ref), var7 (ref), var5 (ref), var6 (ref), flagsModule (copy), var4 (ref)
 			if p0.isOpen then
 				local var16, var17 = var7.current(var5.current.anchorUri, var5.current.position, var6.current, var5.current.depth, var5.current.parentPopoverId, if flagsModule.FoundationPopoverPluginFocusable then var5.current.isFocusable else nil)
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 15 | named "usePanel" ]]
 		end, { p0.isOpen, var5 })
 		var9 = if var8.status == "ok" then var8.value else nil
 	end
-	reactUtilsModule.useAsync(function() --[[ line: 116 ]]
+	reactUtilsModule.useAsync(function()
 		-- upvalues: var9 (write), p0 (ref)
 		if var9 then
 			var9.updateAsync({
@@ -80,9 +80,9 @@ return function(p0) --[[ line: 15 | named "usePanel" ]]
 		end
 		return nil
 	end, { var9, p0.anchorUri, p0.position })
-	reactModule.useEffect(function() --[[ line: 129 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref)
-		return function() --[[ line: 130 ]]
+		return function()
 			-- upvalues: var4 (copy)
 			if var4.current then
 				var4.current()

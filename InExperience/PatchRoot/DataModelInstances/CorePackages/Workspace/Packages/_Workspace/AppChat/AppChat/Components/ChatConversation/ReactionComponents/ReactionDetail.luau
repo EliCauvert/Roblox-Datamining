@@ -7,7 +7,7 @@ local white = colors.White
 local flint = colors.Flint
 local arialBold = Enum.Font.ArialBold
 
-return function(p0) --[[ line: 20 | named "ReactionDetail" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), roactModule (ref), flint (ref), white (ref), arialBold (ref), colors (ref), detailListModule (ref)
 	return {
 		ReactionDetail = roactModule.createElement("Frame", {

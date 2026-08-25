@@ -1,6 +1,6 @@
 ﻿local urlModule = require(script.Parent.Parent.Parent.Network.Url)
 
-return function(p0, p1) --[[ line: 4 ]]
+return function(p0, p1)
 	-- upvalues: urlModule (ref)
 	for i, v in ipairs(p1) do
 		p1[i] = tostring(v)

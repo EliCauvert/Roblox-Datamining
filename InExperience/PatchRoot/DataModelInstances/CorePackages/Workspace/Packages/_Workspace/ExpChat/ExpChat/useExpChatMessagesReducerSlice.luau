@@ -4,9 +4,9 @@ local tutilsModule = require(parent.tutils)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local _ = require(expChat.installReducer.Messages)
 
-return function() --[[ line: 14 ]]
+return function()
 	-- upvalues: useSelector (ref), tutilsModule (ref)
-	return useSelector(function(p0) --[[ line: 15 ]]
+	return useSelector(function(p0)
 		return p0.Messages
 	end, tutilsModule.shallowEqual)
 end

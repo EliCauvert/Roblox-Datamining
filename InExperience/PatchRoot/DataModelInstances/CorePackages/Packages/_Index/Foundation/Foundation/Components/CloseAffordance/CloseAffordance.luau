@@ -25,7 +25,7 @@ local t = {
 	variant = closeAffordanceVariantModule.OverMedia
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | named "CloseAffordance" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useCloseAffordanceVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), iconModule (ref), builderIconsModule (ref), iconVariant (ref)
 	local var13 = withDefaultsModule(p0, t)
 	local var14 = useTokensModule()
@@ -46,7 +46,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | 
 		padding = var15.container.padding,
 		cornerRadius = uDim,
 		stateLayer = var15.container.stateLayer,
-		cursor = reactModule.useMemo(function() --[[ line: 68 ]]
+		cursor = reactModule.useMemo(function()
 			-- upvalues: uDim (ref), var14 (ref)
 			return {
 				radius = uDim,

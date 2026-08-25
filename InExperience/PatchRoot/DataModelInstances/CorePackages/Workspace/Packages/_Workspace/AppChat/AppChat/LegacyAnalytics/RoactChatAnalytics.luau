@@ -26,7 +26,7 @@ local t_1 = {
 	}
 }
 
-function t.new(p0, p1) --[[ line: 52 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref)
 	assert(p1, "RoactChatAnalytics must be passed the ID of the local user")
 	local t_1 = {
@@ -40,19 +40,19 @@ function t.new(p0, p1) --[[ line: 52 ]]
 	return t_1
 end
 
-function t:withEventStream(p2) --[[ line: 66 ]]
+function t:withEventStream(p2)
 	self._eventStreamImpl = p2
 	
 	return self
 end
 
-function t:withDiag(p3) --[[ line: 71 ]]
+function t:withDiag(p3)
 	self._diagImpl = p3
 	
 	return self
 end
 
-function t:userFetchedOlderConversations() --[[ line: 76 ]]
+function t:userFetchedOlderConversations()
 	-- upvalues: t (ref)
 	if self.hasAlreadyFetchedOlderConversations then
 		return
@@ -62,7 +62,7 @@ function t:userFetchedOlderConversations() --[[ line: 76 ]]
 	self._diagImpl:reportCounter(t.DiagCounters.FetchedOlderConversation, 1)
 end
 
-function t:inputShareGameInviteSent(p4, p5, p6, p7, p8) --[[ line: 96 ]]
+function t:inputShareGameInviteSent(p4, p5, p6, p7, p8)
 	-- upvalues: t (ref)
 	self._eventStreamImpl:setRBXEventStream("touch", "inputShareGameInviteSent", {
 		btn = "roactChatInputBar",
@@ -75,7 +75,7 @@ function t:inputShareGameInviteSent(p4, p5, p6, p7, p8) --[[ line: 96 ]]
 	self._diagImpl:reportCounter(t.DiagCounters.LuaShareGameInputBarInvite, 1)
 end
 
-function t:inputShareGameEntryPoint(p9) --[[ line: 115 ]]
+function t:inputShareGameEntryPoint(p9)
 	-- upvalues: t (ref)
 	self._eventStreamImpl:setRBXEventStream("touch", "inputShareGameInviteSent", {
 		btn = "roactChatInputBar",
@@ -85,7 +85,7 @@ function t:inputShareGameEntryPoint(p9) --[[ line: 115 ]]
 	self._diagImpl:reportCounter(t.DiagCounters.LuaShareGameInputBarEntry, 1)
 end
 
-function t:loadGameLinkCardInChat(p10, p11) --[[ line: 130 ]]
+function t:loadGameLinkCardInChat(p10, p11)
 	self._eventStreamImpl:setRBXEventStream("roactChat", "loadGameLinkCardInChat", {
 		uid = self.localUserId,
 		cid = tostring(p10),
@@ -93,13 +93,13 @@ function t:loadGameLinkCardInChat(p10, p11) --[[ line: 130 ]]
 	})
 end
 
-function t:userLoadedChat() --[[ line: 141 ]]
+function t:userLoadedChat()
 	-- upvalues: t (ref)
 	self._eventStreamImpl:setRBXEventStream("roactChat", "userLoadedChat", { uid = self.localUserId })
 	self._diagImpl:reportCounter(t.DiagCounters.UserLoadedChat, 1)
 end
 
-function t:navigate(p12) --[[ line: 153 ]]
+function t:navigate(p12)
 	-- upvalues: t_1 (ref), t (ref), cryoModule (ref)
 	assert(t_1[p12], "Invalid navigation option given")
 	self._diagImpl:reportCounter(t.DiagCounters[p12], 1)

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableNewDeviceIntegrityFailureHandling", false)
 
-return function() --[[ line: 2 ]]
+return function()
 	return game:GetFastFlag("EnableNewDeviceIntegrityFailureHandling")
 end

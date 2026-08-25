@@ -4,14 +4,14 @@ local eventStream = require(game:GetService("CorePackages").Workspace.Packages.A
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 19 ]]
+function t.new()
 	-- upvalues: eventStream (ref), rbxAnalyticsService (ref), starterGuiService (ref), t (ref)
 	local t_1 = {
 		evenStream = eventStream.new(rbxAnalyticsService),
 		playSessionStart = os.clock()
 	}
 	
-	function t_1.sendCoreGuiAnalytic(p0, p1) --[[ line: 25 ]]
+	function t_1.sendCoreGuiAnalytic(p0, p1)
 		-- upvalues: t_1 (ref), rbxAnalyticsService (copy)
 		local _ = nil
 		t_1.evenStream:sendEventDeferred("core_gui_type", "core_gui_type", {
@@ -24,7 +24,7 @@ function t.new() --[[ line: 19 ]]
 		})
 	end
 	
-	t_1.signalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3) --[[ line: 42 ]]
+	t_1.signalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
 		-- upvalues: t_1 (ref)
 		t_1.sendCoreGuiAnalytic(p2, p3)
 	end)
@@ -33,7 +33,7 @@ function t.new() --[[ line: 19 ]]
 	return t_1
 end
 
-function t:DisconnectSignal() --[[ line: 50 ]]
+function t:DisconnectSignal()
 	self.signalConnection:Disconnect()
 end
 

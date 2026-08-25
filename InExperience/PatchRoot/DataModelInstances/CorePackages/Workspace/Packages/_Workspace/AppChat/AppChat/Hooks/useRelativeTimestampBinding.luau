@@ -4,26 +4,26 @@ local reactModule = require(parent.React)
 local dateTime = require(parent.Time).DateTime
 local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
 
-local function computeTimestamp(p0) --[[ line: 10 ]]
+local function computeTimestamp(p0)
 	-- upvalues: getConversationTimestampModule (ref), dateTime (ref)
 	return if p0 == nil then "" else getConversationTimestampModule(dateTime.fromUnixTimestamp(p0))
 end
 
-return function(p1) --[[ line: 17 | named "useRelativeTimestampBinding" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), computeTimestamp (ref)
 	local var4, var5 = reactModule.useBinding(computeTimestamp(p1))
-	reactModule.useEffect(function() --[[ line: 20 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), computeTimestamp (copy), p1 (ref)
 		var5(computeTimestamp(p1))
 		
 		if p1 == nil then
-			return function() --[[ line: 24 ]] end
+			return function() end
 		end
 		local var6 = false
 		
-		local function scheduleUpdate() --[[ line: 29 ]]
+		local function scheduleUpdate()
 			-- upvalues: var6 (write), var5 (copy), computeTimestamp (copy), p1 (copy), scheduleUpdate (ref)
-			task.delay(30, function() --[[ line: 30 ]]
+			task.delay(30, function()
 				-- upvalues: var6 (copy), var5 (copy), computeTimestamp (copy), p1 (copy), scheduleUpdate (copy)
 				if var6 then
 					return
@@ -33,7 +33,7 @@ return function(p1) --[[ line: 17 | named "useRelativeTimestampBinding" ]]
 			end)
 		end
 		
-		task.delay(30, function() --[[ line: 30 ]]
+		task.delay(30, function()
 			-- upvalues: var6 (write), var5 (copy), computeTimestamp (copy), p1 (copy), scheduleUpdate (ref)
 			if var6 then
 				return
@@ -42,7 +42,7 @@ return function(p1) --[[ line: 17 | named "useRelativeTimestampBinding" ]]
 			scheduleUpdate()
 		end)
 		
-		return function() --[[ line: 41 ]]
+		return function()
 			-- upvalues: var6 (write)
 			var6 = true
 		end

@@ -9,7 +9,7 @@ local useTileModule = require(foundation.Components.Tile.useTile)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 
-local function getTypographyComponent(p0, p1, p2, p3, p4, p5, p6) --[[ line: 31 ]]
+local function getTypographyComponent(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), skeletonModule (ref), useTextSizeOffsetModule (ref), textModule (ref)
 	local var11, var12, var13, var14
 	local _ = nil
@@ -52,7 +52,7 @@ end
 
 local t = { TextXAlignment = Enum.TextXAlignment.Left }
 
-return function(p7) --[[ line: 98 | named "TileHeader" ]]
+return function(p7)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTileModule (ref), getTypographyComponent (ref), reactModule (ref), viewModule (ref)
 	local var15 = withDefaultsModule(p7, t)
 	local var16 = useTokensModule()

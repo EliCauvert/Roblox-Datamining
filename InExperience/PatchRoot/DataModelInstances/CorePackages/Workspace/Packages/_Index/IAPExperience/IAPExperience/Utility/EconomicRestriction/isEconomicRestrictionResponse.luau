@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 8 ]]
+﻿return function(p0)
 	local var0 = false
 	
 	if p0 ~= nil then

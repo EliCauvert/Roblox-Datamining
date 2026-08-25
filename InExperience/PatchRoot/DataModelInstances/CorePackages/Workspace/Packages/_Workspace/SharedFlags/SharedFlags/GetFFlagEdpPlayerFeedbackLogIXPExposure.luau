@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EdpPlayerFeedbackLogIXPExposure2", false)
 
-return function() --[[ line: 4 ]]
+return function()
 	return game:GetFastFlag("EdpPlayerFeedbackLogIXPExposure2")
 end

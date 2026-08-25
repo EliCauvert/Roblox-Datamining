@@ -44,10 +44,10 @@ local fStringCanAccessTrustedContactsAmpNameSpace = require(parent.SharedFlags).
 local ampApiProvider = require(parent.AmpUpsell).AmpApiProvider
 local ampEnums = require(parent.AmpUpsell).AmpEnums
 
-return function(p0) --[[ line: 85 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useAppPolicy (ref), useLocalization (ref), textKeysModule (ref), fFlagQRCodeCopyUpdates (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var9 (ref), navigateDown (ref), fFlagProfileQRCodeFixFocusNavigationModule (ref), useIsWideMode (ref), useStyle (ref), useLastInputMode (ref), useFocusGuiObject (ref), useProfileShareLink (ref), contexts (ref), profileSharePolicyEnum (ref), images (ref), fFlagTCPolicyCheckRedirect (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpFeature (ref), ampApiProvider (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), ampEnums (ref), profileQRCodeTopElementsModule (ref), verticalScrollView (ref), color3 (ref), QRCodeViewModule (ref), styledTextLabel (ref), inputLabel (ref), inputLabelSize (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var15 = useDispatch()
-	local var16 = useAppPolicy(function(p1) --[[ line: 88 ]]
+	local var16 = useAppPolicy(function(p1)
 		return p1.getWebViewSupport()
 	end)
 	local var17 = useLocalization({
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 85 ]]
 		shareProfileLink = textKeysModule.ShareProfileLink,
 		copyProfileLink = textKeysModule.CopyProfileLink
 	})
-	local var18 = reactModule.useCallback(function() --[[ line: 101 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var9 (copy), var15 (ref), navigateDown (copy)
 		local t = {
 			detail = "https://en.help.roblox.com/hc/en-us/articles/37725513985812",
@@ -92,7 +92,7 @@ return function(p0) --[[ line: 85 ]]
 		link = images["icons/menu/link"]
 	end
 	if fFlagProfileQRCodeFixFocusNavigationModule then
-		reactModule.useEffect(function() --[[ line: 137 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var25 (ref), var21 (ref), var24 (ref)
 			if var25 and var21 and (var21.current and var24 == "Focus") then
 				var25(var21.current)
@@ -103,7 +103,7 @@ return function(p0) --[[ line: 85 ]]
 	local var30, var31 = reactModule.useState(false)
 	
 	if fFlagQRCodeCopyUpdates then
-		reactModule.useEffect(function() --[[ line: 148 ]]
+		reactModule.useEffect(function()
 			-- upvalues: fFlagTCPolicyCheckRedirect (copy), fStringIsUserInTcEligibleCountryAmpFeature (copy), fStringCanAccessTrustedContactsAmpFeature (copy), ampApiProvider (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), ampEnums (copy), var29 (ref), var31 (ref)
 			if ampApiProvider.upsellFeatureAccess(if fFlagTCPolicyCheckRedirect then fStringIsUserInTcEligibleCountryAmpFeature else fStringCanAccessTrustedContactsAmpFeature, {}, fStringCanAccessTrustedContactsAmpNameSpace).access == ampEnums.AccessResponseEnum.Granted then
 				var29(true)
@@ -144,7 +144,7 @@ return function(p0) --[[ line: 85 ]]
 		Position = UDim2.fromScale(0, 0),
 		Size = if var22 then UDim2.fromScale(0.6, 1) else UDim2.fromScale(1, 1),
 		BorderSizePixel = 0,
-		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2) --[[ line: 183 ]]
+		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
 			-- upvalues: var20 (ref)
 			if p2.AbsoluteSize.Y >= 450 then
 				var20(true)

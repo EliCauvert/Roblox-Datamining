@@ -15,14 +15,14 @@ local useEventConnection = reactUtilsModule.useEventConnection
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local fFlagEnableUpdatedCaptureControlsModule = require(parent.Flags.FFlagEnableUpdatedCaptureControls)
 
-return function(_) --[[ line: 25 ]]
+return function(_)
 	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), useCallback (ref), makeVideoCaptureStartFailedHandlerModule (ref), useEventConnection (ref), captureService (ref), makeVideoCaptureFailedHandlerModule (ref), reactModule (ref), fFlagEnableUpdatedCaptureControlsModule (ref), captureControlsViewModule (ref), toastContainerModule (ref)
 	local var10 = useDispatch()
-	local var11 = useSelector(function(p0) --[[ line: 28 ]]
+	local var11 = useSelector(function(p0)
 		-- upvalues: constantsModule (copy)
 		return p0[constantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local var12 = useSelector(function(p1) --[[ line: 32 ]]
+	local var12 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)

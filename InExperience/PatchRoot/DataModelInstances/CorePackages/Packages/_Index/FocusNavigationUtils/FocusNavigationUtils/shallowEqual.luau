@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 4 | named "shallowEqual" ]]
+﻿return function(p0, p1)
 	for i, v in p0 do
 		if p1[i] ~= v then
 			return false

@@ -9,11 +9,11 @@ local _ = require(parent_1.GraphQL)
 local invariant = require(parent.jsutils.invariant).invariant
 local error = luauPolyfillModule.Error
 
-function t.getFragmentQueryDocument(p0, p1) --[[ line: 49 ]]
+function t.getFragmentQueryDocument(p0, p1)
 	-- upvalues: array (ref), error (ref), boolean (ref), invariant (ref), object (ref)
 	local var2 = p1
 	local t = {}
-	array.forEach(p0.definitions, function(p2) --[[ line: 55 ]]
+	array.forEach(p0.definitions, function(p2)
 		-- upvalues: error (copy), boolean (copy), t (ref)
 		if p2.kind == "OperationDefinition" then
 			error(error.new(("Found a %s operation%s. "):format(tostring(p2.operation), if boolean.toJSBoolean(p2.name) then (" named '%s'"):format(tostring(p2.name.value)) else "") .. "No operations are allowed when using a fragment as a query. Only fragments are allowed."))
@@ -46,10 +46,10 @@ function t.getFragmentQueryDocument(p0, p1) --[[ line: 49 ]]
 	})
 end
 
-function t.createFragmentMap(p3) --[[ line: 121 ]]
+function t.createFragmentMap(p3)
 	-- upvalues: array (ref)
 	local t = {}
-	array.forEach(if p3 ~= nil then {} else p3, function(p4) --[[ line: 124 ]]
+	array.forEach(if p3 ~= nil then {} else p3, function(p4)
 		-- upvalues: t (ref)
 		t[p4.name.value] = p4
 	end)
@@ -57,7 +57,7 @@ function t.createFragmentMap(p3) --[[ line: 121 ]]
 	return t
 end
 
-function t.getFragmentFromSelection(p5, p6) --[[ line: 131 ]]
+function t.getFragmentFromSelection(p5, p6)
 	-- upvalues: invariant (ref)
 	local kind = p5.kind
 	

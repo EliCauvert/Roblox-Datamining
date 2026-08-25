@@ -4,7 +4,7 @@ local messageModelModule = require(script.Parent.MessageModel)
 local dateTime = require(parent.Time).DateTime
 
 return {
-	responseUser = function(p0) --[[ line: 13 ]]
+	responseUser = function(p0)
 		-- upvalues: messageModelModule (ref), dateTime (ref)
 		return {
 			id = if p0.id then p0.id else "message-id",
@@ -18,7 +18,7 @@ return {
 			is_badgeable = if p0.is_badgeable ~= nil then false else p0.is_badgeable
 		}
 	end,
-	responseSystem = function(p1) --[[ line: 40 ]]
+	responseSystem = function(p1)
 		return {
 			type = "system",
 			id = if p1.id then p1.id else "message-id",

@@ -5,7 +5,7 @@ local userModule = require(authCommon.Thunks.User)
 local cryoModule = require(authCommon.Parent.Cryo)
 local prunePreviousAccountsListModule = require(authCommon.Utils.prunePreviousAccountsList)
 
-return function(value, p0) --[[ line: 16 | named "recordSignOut" ]]
+return function(value, p0)
 	-- upvalues: userModule (ref), appStorageUtilitiesModule (ref), cryoModule (ref), prunePreviousAccountsListModule (ref)
 	local var6, var7
 	local _ = nil

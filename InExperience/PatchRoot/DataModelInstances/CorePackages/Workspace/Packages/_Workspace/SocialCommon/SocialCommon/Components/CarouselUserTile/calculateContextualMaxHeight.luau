@@ -3,7 +3,7 @@ local text = require(parent.AppCommonLib).Text
 local constantsModule = require(script.Parent.Constants)
 local _ = require(parent.UIBlox)
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: constantsModule (ref), text (ref)
 	local font = p0.font
 	

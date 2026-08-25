@@ -6,22 +6,22 @@ local screenshotDialogModule = require(parent.Components.ScreenshotDialog)
 local screenshotReviewDialogModule = require(parent.Components.ScreenshotReviewDialog)
 local _ = require(script.Parent.Parent.Parent.Components.Types)
 
-return function(p0) --[[ line: 25 | named "ScreenshotFlowStepHandler" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), screenshotReviewDialogModule (ref), robloxTranslatorModule (ref), screenshotDialogModule (ref)
 	local var5, var6 = reactModule.useState(if p0.initialPageNumber == nil then 1 else p0.initialPageNumber)
 	local var7, var8 = reactModule.useState(1.777777777778)
 	local var9, var10 = reactModule.useState(800)
 	local var11, var12 = reactModule.useState(800)
 	local var13, var14 = reactModule.useState(true)
-	local var15 = reactModule.useCallback(function() --[[ line: 32 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref)
 		var6(2)
 	end, { var6 })
-	local var16 = reactModule.useCallback(function() --[[ line: 35 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref)
 		var6(1)
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var8 (ref), var10 (ref), var12 (ref), var14 (ref)
 		local currentCamera = game.Workspace.CurrentCamera
 		

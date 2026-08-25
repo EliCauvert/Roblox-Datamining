@@ -2,7 +2,7 @@
 local reportSuccessToast = constantsModule.ReportSuccessToast
 local playerAbuseTypes = constantsModule.PlayerAbuseTypes
 
-return function(p0, p1) --[[ line: 6 | named "getToastMessageFromAbuseReason" ]]
+return function(p0, p1)
 	-- upvalues: reportSuccessToast (ref), playerAbuseTypes (ref), constantsModule (ref)
 	local chatGeneric = reportSuccessToast.ChatGeneric
 	

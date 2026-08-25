@@ -1,10 +1,10 @@
 ﻿local runService = game:GetService("RunService")
 local reactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p0, p1) --[[ line: 9 | named "useCarouselScrollingBinding" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), runService (ref)
 	local var2, var3 = reactModule.useBinding(false)
-	reactModule.useEffect(function() --[[ line: 15 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), p1 (ref), var3 (ref), runService (copy)
 		local current = p0.current
 		
@@ -12,13 +12,13 @@ return function(p0, p1) --[[ line: 9 | named "useCarouselScrollingBinding" ]]
 			assert(current, "scrollingFrame must exist")
 			local var4 = 0
 			local var5 = nil
-			local var6 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 25 ]]
+			local var6 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: var4 (write), var5 (write), var3 (copy), runService (copy)
 				var4 = os.clock() + 0.01
 				
 				if not var5 then
 					var3(true)
-					var5 = runService.Heartbeat:Connect(function() --[[ line: 29 ]]
+					var5 = runService.Heartbeat:Connect(function()
 						-- upvalues: var4 (copy), var3 (copy), var5 (copy)
 						if var4 <= os.clock() then
 							var3(false)
@@ -32,7 +32,7 @@ return function(p0, p1) --[[ line: 9 | named "useCarouselScrollingBinding" ]]
 				end
 			end)
 			
-			return function() --[[ line: 41 ]]
+			return function()
 				-- upvalues: var6 (ref), var5 (write)
 				var6:Disconnect()
 				

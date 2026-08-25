@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MomentsTTSWaveformMaxBarHeightPercent", 85)
 
-return function() --[[ line: 5 ]]
+return function()
 	return game:GetFastInt("MomentsTTSWaveformMaxBarHeightPercent")
 end

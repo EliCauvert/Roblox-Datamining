@@ -5,11 +5,11 @@ local _ = require(script.Parent.IsPrivatePlaytesterStoreTypes)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0, p1) --[[ line: 15 | named "isPrivatePlaytesterUrl" ]]
+local function _(p0, p1)
 	return ("%s/universes/v1/universes/%d/is-private-playtester"):format(p0, p1)
 end
 
-return function(p2, p3) --[[ line: 21 | named "fetchIsPrivatePlaytester" ]]
+return function(p2, p3)
 	-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
 	p3 = p3 or {}
 	
@@ -18,7 +18,7 @@ return function(p2, p3) --[[ line: 21 | named "fetchIsPrivatePlaytester" ]]
 		analyticsKey = "universe-private-playtester.get",
 		network = p3.network,
 		url = ("%s/universes/v1/universes/%d/is-private-playtester"):format(p3.baseUrl or urlBase.APIS, p2),
-		decode = function(p4) --[[ line: 33 ]]
+		decode = function(p4)
 			return p4
 		end
 	}))

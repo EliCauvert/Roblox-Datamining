@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local _ = require(parent.Otter)
 local useMotorModule = require(script.Parent.useMotor)
 
-return function(p0, p1) --[[ line: 12 | named "useAnimatedBinding" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), useMotorModule (ref)
 	local var2, var3 = reactModule.useBinding(p0)
 	

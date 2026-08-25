@@ -5,12 +5,12 @@ local signalsReactModule = require(parent.SignalsReact)
 local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local presetCooldownContextModule = require(script.Parent.PresetCooldownContext)
 
-return function(value) --[[ line: 13 | named "PresetCooldownProvider" ]]
+return function(value)
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), reactModule (ref), presetCooldownContextModule (ref)
 	local var5 = getPresetChatStoreModule(false)
 	local var6 = signalsReactModule.useSignalState(var5.getPresetCooldownEndsAt)
 	local var7 = var6 ~= nil and os.clock() < var6
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var5 (ref)
 		if var6 == nil then return end
 		local var8 = var6 - os.clock()
@@ -21,7 +21,7 @@ return function(value) --[[ line: 13 | named "PresetCooldownProvider" ]]
 			return
 		end
 		local var9 = false
-		task.delay(var8, function() --[[ line: 28 ]]
+		task.delay(var8, function()
 			-- upvalues: var9 (write), var5 (copy), var6 (copy)
 			if var9 then return end
 			if var5.getPresetCooldownEndsAt(false) == var6 then
@@ -29,7 +29,7 @@ return function(value) --[[ line: 13 | named "PresetCooldownProvider" ]]
 			end
 		end)
 		
-		return function() --[[ line: 36 ]]
+		return function()
 			-- upvalues: var9 (write)
 			var9 = true
 		end
@@ -40,7 +40,7 @@ return function(value) --[[ line: 13 | named "PresetCooldownProvider" ]]
 	})
 	
 	return reactModule.createElement(presetCooldownContextModule.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 41 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: var6 (ref), var7 (ref)
 			return { endsAt = var6, isCooldownActive = var7 }
 		end, { var6, var7 })

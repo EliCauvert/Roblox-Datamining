@@ -8,7 +8,7 @@ local var4 = tModule.strictInterface({
 	params = tModule.optional(tModule.table)
 })
 
-return function(p0) --[[ line: 19 | named "MultiTextLocalizer" ]]
+return function(p0)
 	-- upvalues: var3 (ref), var4 (ref), roactModule (ref), localeRoactContextModule (ref)
 	assert(var3(p0))
 	
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 19 | named "MultiTextLocalizer" ]]
 	local render = p0.render
 	
 	return roactModule.createElement(localeRoactContextModule.Consumer, {
-		render = function(p1) --[[ line: 28 ]]
+		render = function(p1)
 			-- upvalues: p0 (ref), render (ref)
 			local t = {}
 			

@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("LCCageQualityDocumentationLink", "")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("LCCageQualityDocumentationLink")
 end

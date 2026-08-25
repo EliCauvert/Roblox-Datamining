@@ -19,7 +19,7 @@ local dataProvider = roactModule.Component:extend("DataProvider")
 local voiceChatDevConsoleTabEnabledEngineFeature = game:GetEngineFeature("VoiceChatDevConsoleTabEnabled")
 local devConsoleStartDataOnMount = game:DefineFastFlag("DevConsoleStartDataOnMount", false)
 
-function dataProvider.init(p0) --[[ line: 26 ]]
+function dataProvider.init(p0)
 	-- upvalues: logDataModule (ref), clientMemoryDataModule (ref), serverMemoryDataModule (ref), networkDataModule (ref), serverScriptsDataModule (ref), dataStoresDataModule (ref), serverStatsDataModule (ref), actionBindingsDataModule (ref), serverJobsDataModule (ref), debugVisualizationsDataModule (ref), luauHeapDataModule (ref), voiceChatDevConsoleTabEnabledEngineFeature (ref), voiceChatDataModule (ref)
 	p0:setState({
 		DevConsoleData = {
@@ -41,7 +41,7 @@ function dataProvider.init(p0) --[[ line: 26 ]]
 	})
 end
 
-function dataProvider.didMount(p1) --[[ line: 47 ]]
+function dataProvider.didMount(p1)
 	-- upvalues: voiceChatDevConsoleTabEnabledEngineFeature (ref), devConsoleStartDataOnMount (ref)
 	p1.state.DevConsoleData.ClientLogData:start()
 	p1.state.DevConsoleData.ClientMemoryData:start()
@@ -58,7 +58,7 @@ function dataProvider.didMount(p1) --[[ line: 47 ]]
 	end
 end
 
-function dataProvider.willUpdate(p2, p3, _) --[[ line: 64 ]]
+function dataProvider.willUpdate(p2, p3, _)
 	if p3.isDeveloperView and not p2.props.isDeveloperView then
 		for i, v in pairs(p2.state.DevConsoleData) do
 			if not v:isRunning() then
@@ -68,11 +68,11 @@ function dataProvider.willUpdate(p2, p3, _) --[[ line: 64 ]]
 	end
 end
 
-function dataProvider.render(p4) --[[ line: 74 ]]
+function dataProvider.render(p4)
 	-- upvalues: roactModule (ref), dataContextModule (ref)
 	return roactModule.createElement(dataContextModule.Provider, { value = p4.state.DevConsoleData }, roactModule.oneChild(p4.props[roactModule.Children]))
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p5, _) --[[ line: 80 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p5, _)
 	return { isDeveloperView = p5.MainView.isDeveloperView }
 end, nil)(dataProvider)

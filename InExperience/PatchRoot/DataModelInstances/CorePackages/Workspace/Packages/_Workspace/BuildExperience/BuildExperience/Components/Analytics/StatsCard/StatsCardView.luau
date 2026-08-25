@@ -10,7 +10,7 @@ local iconPosition = foundationModule.Enums.IconPosition
 local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 
-return function(p0) --[[ line: 49 | named "StatsCardView" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), iconName (ref), iconPosition (ref), reactModule (ref), view (ref), text (ref), icon (ref), iconSize (ref), iconVariant (ref)
 	local var2 = useTokens()
 	local testId = p0.testId or "StatsCardView"

@@ -6,19 +6,19 @@ local selectCurrentLegacyRoute = navigationRoduxModule.Selectors.selectCurrentLe
 local getLegacyNavigationStore = navigationRoduxModule.GetLegacyNavigationStore
 local fFlagSignalsNavP2NavigationPrimitives = require(parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
 
-local function getCurrentLegacyRouteFromSignals() --[[ line: 17 ]]
+local function getCurrentLegacyRouteFromSignals()
 	-- upvalues: getLegacyNavigationStore (ref)
 	return getLegacyNavigationStore(false).getCurrentLegacyRoute(false)
 end
 
-return function() --[[ line: 23 | named "useGetCurrentLegacyRoute" ]]
+return function()
 	-- upvalues: fFlagSignalsNavP2NavigationPrimitives (ref), getCurrentLegacyRouteFromSignals (ref), useStore (ref), reactModule (ref), selectCurrentLegacyRoute (ref)
 	if fFlagSignalsNavP2NavigationPrimitives then
 		return getCurrentLegacyRouteFromSignals
 	end
 	local var3 = useStore()
 	
-	return reactModule.useCallback(function() --[[ line: 28 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: selectCurrentLegacyRoute (copy), var3 (ref)
 		return selectCurrentLegacyRoute(var3:getState())
 	end, { var3 })

@@ -16,13 +16,13 @@ local t = {
 	LayoutOrder = 0,
 	showDivider = true,
 	Size = UDim2.new(1, 0, 1, 0),
-	onActivated = function() --[[ line: 44 ]]
+	onActivated = function()
 		print("IconWithTextCell onActivated")
 	end,
 	style = cryoModule.Dictionary.join(require(appChat.SocialLibraries).Components.TestStyle, { Tokens = { Color = { None = {} } } })
 }
 
-return memo(function(p0) --[[ line: 65 | named "IconWithTextCell" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local style = var5.style

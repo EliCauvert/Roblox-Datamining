@@ -18,11 +18,11 @@ local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubsc
 local fFlagEnableStudioMockPurchaseRobloxSubscriptionModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableStudioMockPurchaseRobloxSubscription)
 local fStringBlackbirdWebviewHeaderName = game:DefineFastString("FStringBlackbirdWebviewHeaderName", "Black bird")
 
-local function _(p0) --[[ line: 34 | named "getPaymentProviderForPlatform" ]]
+local function _(p0)
 	return if p0 == Enum.Platform.IOS then "AppleAppStore" elseif p0 == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 end
 
-function performRobloxSubscriptionPurchase() --[[ line: 44 ]]
+function performRobloxSubscriptionPurchase()
 	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnableStudioMockPurchaseRobloxSubscriptionModule (ref), runService (ref), marketplaceService (ref), completeRobloxSubscriptionUpsellFlowModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), userInputService (ref), promptStateModule (ref), webViewServiceWrapperModule (ref), getSubscriptionPurchaseUrlModule (ref), fStringBlackbirdWebviewHeaderName (ref), constantsModule (ref), transitionToErrorModule (ref), errorReasonModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref)
 	local var18 = robloxSubscriptionStoreModule.get()
 	local robloxSubscriptionProductId = var18.getRobloxSubscriptionProductId()
@@ -46,12 +46,12 @@ function performRobloxSubscriptionPurchase() --[[ line: 44 ]]
 		webViewServiceWrapperModule.new({
 			url = getSubscriptionPurchaseUrlModule(robloxSubscriptionProductId, paymentSessionId),
 			title = fStringBlackbirdWebviewHeaderName,
-			closeCallback = function() --[[ line: 77 ]]
+			closeCallback = function()
 				-- upvalues: var18 (ref), completeRobloxSubscriptionUpsellFlowModule (copy)
 				var18.setDidTryPurchasing(true)
 				completeRobloxSubscriptionUpsellFlowModule()
 			end,
-			onOpenCallback = function() --[[ line: 83 ]]
+			onOpenCallback = function()
 				-- upvalues: var18 (ref), promptStateModule (copy)
 				var18.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
 			end
@@ -62,7 +62,7 @@ function performRobloxSubscriptionPurchase() --[[ line: 44 ]]
 	var18.setPromptState(promptStateModule.SubscriptionPurchaseInProgress)
 	local var22 = if platform == Enum.Platform.IOS then "AppleAppStore" elseif platform == Enum.Platform.Android then "GooglePlayStore" else "Unknown"
 	var18.setIsNativePurchase(true)
-	local ok, _ = pcall(function() --[[ line: 96 ]]
+	local ok, _ = pcall(function()
 		-- upvalues: marketplaceService (copy), constantsModule (copy), robloxSubscriptionProductId (ref), var22 (ref), paymentSessionId (ref)
 		marketplaceService:PerformSubscriptionPurchaseV3Async(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE, robloxSubscriptionProductId, var22, paymentSessionId)
 	end)

@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 22 | named "get" ]]
+﻿return function(p0, p1, p2)
 	if p0 == nil then
 		return p2
 	end

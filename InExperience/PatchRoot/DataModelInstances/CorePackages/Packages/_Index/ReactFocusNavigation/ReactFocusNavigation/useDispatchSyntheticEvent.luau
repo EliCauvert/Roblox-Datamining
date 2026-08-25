@@ -3,11 +3,11 @@ local reactModule = require(parent.React)
 local _ = require(parent.FocusNavigation)
 local focusNavigationContextModule = require(script.Parent.FocusNavigationContext)
 
-return function() --[[ line: 16 | named "useDispatchSyntheticEvent" ]]
+return function()
 	-- upvalues: reactModule (ref), focusNavigationContextModule (ref)
 	local var2 = reactModule.useContext(focusNavigationContextModule)
 	
-	return reactModule.useCallback(function(p0, p1, p2) --[[ line: 20 ]]
+	return reactModule.useCallback(function(p0, p1, p2)
 		-- upvalues: var2 (ref)
 		if var2 then
 			assert(p1:IsA("GuiObject"), "Synthetic events must be dispatched on GuiObjects")

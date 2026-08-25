@@ -13,7 +13,7 @@ local var5 = urlBuilderModule.UrlBuilder.new({
 	base = urlBuilderModule.UrlBase.APIS
 })()
 
-local function makeHttpCall(p0, p1, p2, p3) --[[ line: 51 ]]
+local function makeHttpCall(p0, p1, p2, p3)
 	-- upvalues: httpService (ref), var5 (ref), profileInsightsStoreHttpTimeout (ref)
 	httpService:RequestInternal({
 		Method = "POST",
@@ -31,13 +31,13 @@ local function makeHttpCall(p0, p1, p2, p3) --[[ line: 51 ]]
 			Accept = "application/json"
 		},
 		RequestType = Enum.HttpRequestType.Default
-	}):Start(function(p4, p5) --[[ line: 75 ]]
+	}):Start(function(p4, p5)
 		-- upvalues: httpService (copy), p3 (ref)
 		local var7 = nil
 		local var8 = false
 		
 		if p5 and p5.Body then
-			local ok, status = pcall(function() --[[ line: 79 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpService (copy), p5 (ref)
 				return httpService:JSONDecode(p5.Body)
 			end)
@@ -48,20 +48,20 @@ local function makeHttpCall(p0, p1, p2, p3) --[[ line: 51 ]]
 	end)
 end
 
-local function _(p6, p7) --[[ line: 87 | named "createFetchResult" ]]
+local function _(p6, p7)
 	return { status = p6, data = p7 }
 end
 
-return createComputed(function(_) --[[ line: 98 ]]
+return createComputed(function(_)
 	-- upvalues: createSignal (ref), fFlagTFProfileInsightsBypassCache (ref), profileInsightsModelModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), makeHttpCall (ref), httpService (ref)
 	local t = {}
 	local t_1 = {}
 	
-	local function _(p8, p9, p10) --[[ line: 103 | named "getCacheKey" ]]
+	local function _(p8, p9, p10)
 		return table.concat(p8, ",") .. tostring(p9) .. tostring(p10)
 	end
 	
-	local function mergeWithExisting(p11, p12) --[[ line: 107 ]]
+	local function mergeWithExisting(p11, p12)
 		-- upvalues: t_1 (ref)
 		local var12 = t_1[p11]
 		
@@ -86,7 +86,7 @@ return createComputed(function(_) --[[ line: 98 ]]
 	end
 	
 	return {
-		getProfileInsightsByUserId = function(p13) --[[ line: 134 ]]
+		getProfileInsightsByUserId = function(p13)
 			-- upvalues: createSignal (copy), fFlagTFProfileInsightsBypassCache (copy), t (ref), profileInsightsModelModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), makeHttpCall (copy)
 			local userIds = p13.userIds
 			local count = p13.count
@@ -111,7 +111,7 @@ return createComputed(function(_) --[[ line: 98 ]]
 				return createSignal({ status = "success", data = t[text] })
 			end
 			local var17, var18 = createSignal({ status = "fetching", data = t[text] })
-			makeHttpCall(userIds, count, rankingStrategy, function(p14, p15) --[[ line: 166 ]]
+			makeHttpCall(userIds, count, rankingStrategy, function(p14, p15)
 				-- upvalues: t (copy), text (ref), profileInsightsModelModule (copy), var18 (ref), fFlagTFProfileInsightsBypassCache (copy)
 				if p14 and p15.userInsights then
 					t[text].setProfileInsights(profileInsightsModelModule.createProfileInsightsList(p15.userInsights))
@@ -128,7 +128,7 @@ return createComputed(function(_) --[[ line: 98 ]]
 			
 			return var17
 		end,
-		getProfileInsightsByPage = function(p16) --[[ line: 183 ]]
+		getProfileInsightsByPage = function(p16)
 			-- upvalues: httpService (copy), t_1 (ref), profileInsightsModelModule (copy), createSignal (copy), t (ref), mergeWithExisting (ref), makeHttpCall (copy)
 			local var19 = if p16.pageId then p16.pageId else httpService:GenerateGUID(false)
 			local userIds = p16.userIds
@@ -150,7 +150,7 @@ return createComputed(function(_) --[[ line: 98 ]]
 			end
 			t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
 			local var21, var22 = createSignal({ status = "success", data = t_1[var19] })
-			makeHttpCall(userIds, count, rankingStrategy, function(p17, p18) --[[ line: 205 ]]
+			makeHttpCall(userIds, count, rankingStrategy, function(p17, p18)
 				-- upvalues: profileInsightsModelModule (copy), t (copy), text (ref), t_1 (copy), var19 (ref), mergeWithExisting (copy), var22 (ref)
 				if p17 and p18.userInsights then
 					local var23 = profileInsightsModelModule.createProfileInsightsList(p18.userInsights)

@@ -1,6 +1,6 @@
 ﻿local viewerRelationshipUtilsModule = require(script.Parent.viewerRelationshipUtils)
 
-return function(p0) --[[ line: 3 | named "getIsTrustedConnectionsStatusFromProfileResponse" ]]
+return function(p0)
 	-- upvalues: viewerRelationshipUtilsModule (ref)
 	local viewerRelationshipFromProfileResponse = viewerRelationshipUtilsModule.getViewerRelationshipFromProfileResponse(p0)
 	

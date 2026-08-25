@@ -40,14 +40,14 @@ local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurr
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
+return function(_)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTokens (ref), getFFlagCurrencyTransferFixDesktopInputModule (ref), userInputService (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), getFIntCurrencyTransferMinAmountModule (ref), getFIntCurrencyTransferMaxAmountModule (ref), setTransferPromptStateModule (ref), promptStateModule (ref), proceedToConfirmModule (ref), useTextBoxOnChangeRefModule (ref), useAutoFocusTextBoxOnMountModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), formatNumberModule (ref), localizationService (ref), transferLocaleFormatModule (ref), useScaledValue (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), getFFlagCurrencyTransferFixTextBoxInputModule (ref), transferProfileThumbnailModule (ref), robuxTextModule (ref), icon (ref), text (ref), transferAmountOptionChipsModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local createElement_3
 	local var30 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxInputSheet)
 	local var31 = useTokens()
 	local var32 = getFFlagCurrencyTransferFixDesktopInputModule() and not userInputService.TouchEnabled
 	local var33 = useTransferStoreModule()
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: logCurrencyTransferCounterModule (copy), var33 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		logCurrencyTransferCounterModule(var33, currencyTransferTelemetryModule.CurrencyTransferInputSheetShownCounter)
 		
@@ -66,13 +66,13 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 	local var41 = signalsReactModule.useSignalState(var33.getMaximumTransferAmount)
 	local var42 = if getFFlagCurrencyTransferUseBackendTransferLimitsModule() and var40 then var40 else getFIntCurrencyTransferMinAmountModule()
 	local var43 = if getFFlagCurrencyTransferUseBackendTransferLimitsModule() and var41 then var41 else getFIntCurrencyTransferMaxAmountModule()
-	reactModule.useEffect(function() --[[ line: 98 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getSelectedAmount (ref), var42 (ref), var43 (ref), var36 (ref)
 		if getSelectedAmount == 0 or var42 <= getSelectedAmount and getSelectedAmount <= var43 then
 			var36(false)
 		end
 	end, { getSelectedAmount, var42, var43 })
-	local var44 = reactModule.useCallback(function() --[[ line: 104 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: getSelectedAmount (ref), var42 (ref), var43 (ref), var36 (ref), getRobuxBalanceAmount (ref), setTransferPromptStateModule (copy), var33 (ref), promptStateModule (copy), proceedToConfirmModule (copy)
 		if getSelectedAmount and (getSelectedAmount < var42 or var43 < getSelectedAmount) then
 			var36(true)
@@ -92,10 +92,10 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 		var43
 	})
 	local triggerOnClose = var33.triggerOnClose
-	local var45 = useAutoFocusTextBoxOnMountModule(useTextBoxOnChangeRefModule(reactModule.useCallback(function(p0) --[[ line: 118 ]]
+	local var45 = useAutoFocusTextBoxOnMountModule(useTextBoxOnChangeRefModule(reactModule.useCallback(function(p0)
 		-- upvalues: setSelectedAmount (ref)
 		setSelectedAmount(p0 or 0)
-	end, { setSelectedAmount }), reactModule.useCallback(function(p1, p2) --[[ line: 122 ]]
+	end, { setSelectedAmount }), reactModule.useCallback(function(p1, p2)
 		-- upvalues: getSelectedAmount (ref), var42 (ref), var43 (ref), var36 (ref), var44 (ref)
 		if not p1 and p2 then
 			if getSelectedAmount and getSelectedAmount > 0 and (getSelectedAmount < var42 or var43 < getSelectedAmount) then
@@ -106,14 +106,14 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 			var44()
 		end
 	end, { var44, getSelectedAmount, var42, var43 })), 0.05)
-	local var46 = reactModule.useCallback(function(p3) --[[ line: 141 ]]
+	local var46 = reactModule.useCallback(function(p3)
 		-- upvalues: var39 (ref), var45 (ref)
 		if p3 then
 			var39.current = p3
 			var45(p3)
 		end
 	end, { var45 })
-	local var47 = reactModule.useMemo(function() --[[ line: 148 ]]
+	local var47 = reactModule.useMemo(function()
 		return {
 			{ amount = 25, text = "25" },
 			{ amount = 50, text = "50" },
@@ -121,7 +121,7 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 			{ amount = 200, text = "200" }
 		}
 	end, {})
-	local var48 = reactModule.useCallback(function(p4) --[[ line: 157 ]]
+	local var48 = reactModule.useCallback(function(p4)
 		-- upvalues: setSelectedAmount (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var39 (ref)
 		setSelectedAmount(p4)
 		
@@ -134,19 +134,19 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 		end
 	end, { setSelectedAmount })
 	local var49 = var35 and (getSelectedAmount > 0 and (if getSelectedAmount >= var42 then var43 < getSelectedAmount else true))
-	local var50 = reactModule.useMemo(function() --[[ line: 173 ]]
+	local var50 = reactModule.useMemo(function()
 		-- upvalues: var49 (ref), getSelectedAmount (ref), var42 (ref), formatNumberModule (copy), localizationService (copy), transferLocaleFormatModule (copy), var30 (ref), var43 (ref)
 		return if not (not var49 or not getSelectedAmount or getSelectedAmount <= 0) then if getSelectedAmount < var42 then transferLocaleFormatModule.substituteAmount(var30.LowerThanMinAmount or "", tostring(formatNumberModule(localizationService.RobloxLocaleId, var42))) elseif var43 < getSelectedAmount then transferLocaleFormatModule.substituteAmount(var30.GreaterThanMaxAmount or "", tostring(formatNumberModule(localizationService.RobloxLocaleId, var43))) else nil else nil
 	end, {
 		var49, getSelectedAmount, var42, var43, var30.LowerThanMinAmount,
 		var30.GreaterThanMaxAmount
 	})
-	local var51 = reactModule.useMemo(function() --[[ line: 196 ]]
+	local var51 = reactModule.useMemo(function()
 		-- upvalues: getSelectedAmount (ref)
 		return not getSelectedAmount or getSelectedAmount <= 0
 	end, { getSelectedAmount })
 	local var52 = useScaledValue(500)
-	local var53 = reactModule.useMemo(function() --[[ line: 206 ]]
+	local var53 = reactModule.useMemo(function()
 		-- upvalues: var52 (ref)
 		return { var52, 0.62 }
 	end, { var52 })
@@ -311,7 +311,7 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 		Text = "",
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		[reactModule.Event.Activated] = function() --[[ line: 370 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: var39 (ref)
 			if var39.current then
 				var39.current:CaptureFocus()
@@ -339,7 +339,7 @@ return function(_) --[[ line: 67 | named "TransferRobuxInputSheet" ]]
 		Text = "",
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		[reactModule.Event.Activated] = function() --[[ line: 403 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: var39 (ref)
 			if var39.current then
 				var39.current:CaptureFocus()

@@ -7,7 +7,7 @@ local pcallDeferredModule = require(util.pcallDeferred)
 local getEngineFeatureEngineUGCValidationLCOOBModule = require(parent.flags.getEngineFeatureEngineUGCValidationLCOOB)
 local getFFlagEnforceMaxSizeOffsetForLCModule = require(parent.flags.getFFlagEnforceMaxSizeOffsetForLC)
 
-return function(p0, p1) --[[ line: 17 ]]
+return function(p0, p1)
 	-- upvalues: getEngineFeatureEngineUGCValidationLCOOBModule (ref), getFFlagEnforceMaxSizeOffsetForLCModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	if p1.allowEditableInstances then
 		return true
@@ -40,7 +40,7 @@ return function(p0, p1) --[[ line: 17 ]]
 		wrapLayer.Offset = Vector3.new(0, 0, 0)
 	end
 	local currentTime = tick()
-	local var8, var9 = pcallDeferredModule(function() --[[ line: 51 ]]
+	local var8, var9 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p0 (ref)
 		return UGCValidationService:IsDeformedLayeredClothingOutOfRenderBounds(p0)
 	end, p1)

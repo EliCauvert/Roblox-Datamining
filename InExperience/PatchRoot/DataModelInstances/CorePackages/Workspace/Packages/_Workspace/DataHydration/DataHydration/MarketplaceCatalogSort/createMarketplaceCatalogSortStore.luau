@@ -9,7 +9,7 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceCatalogSortStoreTypes)
 local fFlagMarketplaceCatalogSortTrackLastReceived = sharedFlagsModule.FFlagMarketplaceCatalogSortTrackLastReceived
 
-local function normalizeCardFooters(p0) --[[ line: 34 ]]
+local function normalizeCardFooters(p0)
 	if not p0 then
 		return nil
 	end
@@ -21,13 +21,13 @@ local function normalizeCardFooters(p0) --[[ line: 34 ]]
 	return list
 end
 
-local function _(p1) --[[ line: 47 | named "normalizeCardStyle" ]]
+local function _(p1)
 	return {
 		thumbnailAspectRatio = p1.thumbnailAspectRatio or p1.thumbnail_aspect_ratio
 	}
 end
 
-local _ = function(p2) --[[ line: 53 | named "normalizeSort" ]]
+local _ = function(p2)
 	-- upvalues: normalizeCardFooters (ref)
 	if not p2.cardFooters and not p2.cardStyle then
 		return p2
@@ -46,12 +46,12 @@ local _ = function(p2) --[[ line: 53 | named "normalizeSort" ]]
 	return cloned
 end
 
-return function() --[[ line: 67 | named "createMarketplaceCatalogSortStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagMarketplaceCatalogSortTrackLastReceived (ref), signalsModule (ref), normalizeCardFooters (ref)
 	local var9 = createDataCacheModule()
 	local var10 = createDataResolverModule({
 		cache = var9,
-		fetchFn = function(_) --[[ line: 71 ]]
+		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end
@@ -67,12 +67,12 @@ return function() --[[ line: 67 | named "createMarketplaceCatalogSortStore" ]]
 	return {
 		getMarketplaceCatalogSort = var10.getCachedItem,
 		getMarketplaceCatalogSorts = var10.getCachedItems,
-		getNormalizedMarketplaceCatalogSort = function(p3) --[[ line: 96 ]]
+		getNormalizedMarketplaceCatalogSort = function(p3)
 			-- upvalues: var10 (ref), normalizeCardFooters (copy)
 			local cachedItem = var10.getCachedItem(p3)
 			
 			return {
-				data = function(p4) --[[ line: 99 ]]
+				data = function(p4)
 					-- upvalues: cachedItem (ref), normalizeCardFooters (copy)
 					local var16 = cachedItem.data(p4)
 					
@@ -97,14 +97,14 @@ return function() --[[ line: 67 | named "createMarketplaceCatalogSortStore" ]]
 				status = cachedItem.status
 			}
 		end,
-		updateMarketplaceCatalogSorts = if fFlagMarketplaceCatalogSortTrackLastReceived then function(p5) --[[ line: 88 | named "updateMarketplaceCatalogSorts" ]]
+		updateMarketplaceCatalogSorts = if fFlagMarketplaceCatalogSortTrackLastReceived then function(p5)
 			-- upvalues: var12 (write), var9 (ref)
 			var12(p5)
 			var9.updateItems(p5)
 		end else var9.updateItems,
 		updateMarketplaceCatalogSort = var9.updateItem,
 		getLastReceivedSorts = var11,
-		clear = if fFlagMarketplaceCatalogSortTrackLastReceived then function() --[[ line: 112 | named "clear" ]]
+		clear = if fFlagMarketplaceCatalogSortTrackLastReceived then function()
 			-- upvalues: var12 (write), var10 (ref)
 			if var12 then
 				var12({})

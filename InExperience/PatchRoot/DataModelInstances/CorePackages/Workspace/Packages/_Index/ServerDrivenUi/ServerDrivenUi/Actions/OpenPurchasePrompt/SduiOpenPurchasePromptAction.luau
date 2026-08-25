@@ -23,7 +23,7 @@ local httpService = game:GetService("HttpService")
 local enableJoinAfterBuyFromEDP = game:DefineFastFlag("EnableJoinAfterBuyFromEDP", false)
 local enablePurchasePayloadForSduiPurchase = game:DefineFastFlag("EnablePurchasePayloadForSduiPurchase", false)
 
-local function mapPriceDiscountDetails(p0) --[[ line: 45 ]]
+local function mapPriceDiscountDetails(p0)
 	if p0 == nil or #p0 == 0 then
 		return nil
 	end
@@ -39,9 +39,9 @@ local function mapPriceDiscountDetails(p0) --[[ line: 45 ]]
 	return t
 end
 
-local function _(p1, p2) --[[ line: 60 | named "buildFetchProductInfo" ]]
+local function _(p1, p2)
 	-- upvalues: promiseModule (ref), mapPriceDiscountDetails (ref)
-	return if p1 == nil then nil else function() --[[ line: 64 ]]
+	return if p1 == nil then nil else function()
 		-- upvalues: promiseModule (copy), p1 (ref), p2 (ref), mapPriceDiscountDetails (copy)
 		return promiseModule.resolve({
 			ProductId = p1.productId,
@@ -60,15 +60,15 @@ local function _(p1, p2) --[[ line: 60 | named "buildFetchProductInfo" ]]
 	end
 end
 
-local function buildOnPurchaseSuccess(p3, p4, p5, p6) --[[ line: 82 ]]
+local function buildOnPurchaseSuccess(p3, p4, p5, p6)
 	-- upvalues: productKind (ref), productPurchaseSurface (ref), fFlagEnableHomeGameItemOwnershipUpdate (ref), dataHydrationModule (ref), fFlagSduiDevStoreSeeAllSupport (ref), playersService (ref)
-	return if p5 then if p4 == productKind.Gamepass and (p3 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p3 == productPurchaseSurface.HomePageGameItemShop) then function() --[[ line: 94 ]]
+	return if p5 then if p4 == productKind.Gamepass and (p3 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p3 == productPurchaseSurface.HomePageGameItemShop) then function()
 		-- upvalues: dataHydrationModule (copy), p5 (ref)
 		dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfo(p5, { isOwned = true })
-	end elseif fFlagSduiDevStoreSeeAllSupport and p4 == productKind.DeveloperSubscription and p3 == productPurchaseSurface.EDP then function() --[[ line: 106 ]]
+	end elseif fFlagSduiDevStoreSeeAllSupport and p4 == productKind.DeveloperSubscription and p3 == productPurchaseSurface.EDP then function()
 		-- upvalues: dataHydrationModule (copy), p5 (ref)
 		dataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(p5, { isSubscribed = true })
-	end elseif p4 == productKind.Product and (fFlagSduiDevStoreSeeAllSupport and p3 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p3 == productPurchaseSurface.HomePageGameItemShop) and p6 then function() --[[ line: 125 ]]
+	end elseif p4 == productKind.Product and (fFlagSduiDevStoreSeeAllSupport and p3 == productPurchaseSurface.EDP or fFlagEnableHomeGameItemOwnershipUpdate and p3 == productPurchaseSurface.HomePageGameItemShop) and p6 then function()
 		-- upvalues: playersService (copy), dataHydrationModule (copy), p6 (ref)
 		local localPlayer = playersService.LocalPlayer
 		local userId = localPlayer and localPlayer.UserId
@@ -80,18 +80,18 @@ local function buildOnPurchaseSuccess(p3, p4, p5, p6) --[[ line: 82 ]]
 	end else nil else nil
 end
 
-local _ = function(p7, p8, p9) --[[ line: 140 | named "buildOnPurchaseComplete" ]]
+local _ = function(p7, p8, p9)
 	-- upvalues: enableJoinAfterBuyFromEDP (ref), productPurchaseSurface (ref), experienceService (ref), closeCentralOverlay (ref)
-	return if enableJoinAfterBuyFromEDP and p7 == productPurchaseSurface.EDP and p8 then function() --[[ line: 142 ]]
+	return if enableJoinAfterBuyFromEDP and p7 == productPurchaseSurface.EDP and p8 then function()
 		-- upvalues: experienceService (copy), p8 (ref), p9 (ref), closeCentralOverlay (copy)
 		experienceService:LaunchExperience({ placeId = tonumber(p8) })
 		p9(closeCentralOverlay())
 	end else nil
 end
 
-local _ = function(p10, p11, p12) --[[ line: 153 | named "buildOnLaunchAfterPurchase" ]]
+local _ = function(p10, p11, p12)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiCoreSystemModule (ref), sduiReportGamePlayIntent (ref)
-	return function() --[[ line: 158 ]]
+	return function()
 		-- upvalues: p10 (ref), p12 (ref), sduiErrorType (copy), sduiActionType (copy), sduiCoreSystemModule (copy), p11 (ref), sduiReportGamePlayIntent (copy)
 		local logger = p10.dependencies.logger
 		
@@ -124,15 +124,15 @@ local _ = function(p10, p11, p12) --[[ line: 153 | named "buildOnLaunchAfterPurc
 	end
 end
 
-local _ = function(p13) --[[ line: 188 | named "buildOnFlowComplete" ]]
+local _ = function(p13)
 	-- upvalues: closeCentralOverlay (ref)
-	return function() --[[ line: 189 ]]
+	return function()
 		-- upvalues: p13 (ref), closeCentralOverlay (copy)
 		p13(closeCentralOverlay())
 	end
 end
 
-local function normalizeProductPayload(p14, p15) --[[ line: 197 ]]
+local function normalizeProductPayload(p14, p15)
 	-- upvalues: productKind (ref)
 	if (p15 == productKind.Gamepass or p15 == productKind.Product) and typeof(p14.id) == "string" then
 		local var18 = tonumber(p14.id)
@@ -158,14 +158,14 @@ local t = {
 	[productPurchaseSurface.HomePageGameItemShop] = "homePageGameItemShop"
 }
 
-local function buildPurchasePayload(p16) --[[ line: 223 ]]
+local function buildPurchasePayload(p16)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
 		surface = { scopeType = "lua", location = { locationType = p16 } }
 	})
 end
 
-return function(p17, p18, p19) --[[ line: 234 ]]
+return function(p17, p18, p19)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), normalizeProductPayload (ref), enablePurchasePayloadForSduiPurchase (ref), t (ref), buildPurchasePayload (ref), purchasePromptLiteModule (ref), timeToInteractiveTracker (ref), setCentralOverlay (ref), centralOverlayType (ref), buildOnPurchaseSuccess (ref), promiseModule (ref), mapPriceDiscountDetails (ref), closeCentralOverlay (ref), enableJoinAfterBuyFromEDP (ref), productPurchaseSurface (ref), experienceService (ref), fFlagEnableLaunchAfterPurchase (ref), sduiCoreSystemModule (ref), sduiReportGamePlayIntent (ref)
 	local logger = p19.dependencies.logger
 	local appPage = p19.appPage
@@ -220,7 +220,7 @@ return function(p17, p18, p19) --[[ line: 234 ]]
 		productPayload = productPayload,
 		purchaseCallbacks = {
 			onPurchaseSuccess = buildOnPurchaseSuccess(surface, kind, id, rootPlaceId),
-			fetchProductInfo = if displayInfo == nil then nil else function() --[[ line: 64 ]]
+			fetchProductInfo = if displayInfo == nil then nil else function()
 				-- upvalues: promiseModule (copy), displayInfo (ref), kind (ref), mapPriceDiscountDetails (copy)
 				return promiseModule.resolve({
 					ProductId = displayInfo.productId,
@@ -237,16 +237,16 @@ return function(p17, p18, p19) --[[ line: 234 ]]
 					PriceDiscountDetails = mapPriceDiscountDetails(displayInfo.priceDiscountDetails)
 				})
 			end,
-			onFlowComplete = function() --[[ line: 189 ]]
+			onFlowComplete = function()
 				-- upvalues: dispatch (ref), closeCentralOverlay (copy)
 				dispatch(closeCentralOverlay())
 			end,
-			onPurchaseComplete = if enableJoinAfterBuyFromEDP and surface == productPurchaseSurface.EDP and rootPlaceId then function() --[[ line: 142 ]]
+			onPurchaseComplete = if enableJoinAfterBuyFromEDP and surface == productPurchaseSurface.EDP and rootPlaceId then function()
 				-- upvalues: experienceService (copy), rootPlaceId (ref), dispatch (ref), closeCentralOverlay (copy)
 				experienceService:LaunchExperience({ placeId = tonumber(rootPlaceId) })
 				dispatch(closeCentralOverlay())
 			end else nil,
-			onLaunchAfterPurchase = if fFlagEnableLaunchAfterPurchase then function() --[[ line: 158 ]]
+			onLaunchAfterPurchase = if fFlagEnableLaunchAfterPurchase then function()
 				-- upvalues: p19 (ref), rootPlaceId (ref), sduiErrorType (copy), sduiActionType (copy), sduiCoreSystemModule (copy), p18 (ref), sduiReportGamePlayIntent (copy)
 				local logger = p19.dependencies.logger
 				

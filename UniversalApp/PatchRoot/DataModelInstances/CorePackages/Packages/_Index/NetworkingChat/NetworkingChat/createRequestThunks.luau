@@ -22,7 +22,7 @@ local createGetChatSettingsModule = require(networkRequests.createGetChatSetting
 local createGetRolloutSettingsModule = require(networkRequests.createGetRolloutSettings)
 local createGetMetadataModule = require(networkRequests.createGetMetadata)
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: createAddToConversationModule (ref), createRemoveFromConversationModule (ref), createRenameGroupConversationModule (ref), createStartGroupConversationModule (ref), createStartOneToOneConversationModule (ref), createSetConversationUniverseModule (ref), createResetConversationUniverseModule (ref), createSendMessageModule (ref), createSendGameLinkMessageModule (ref), createUpdateUserTypingStatusModule (ref), createMarkAsReadModule (ref), createMarkAsSeenModule (ref), createGetMessagesModule (ref), createGetUserConversationsModule (ref), createGetConversationsModule (ref), createGetLatestMessagesModule (ref), createGetUnreadConversationCountModule (ref), createGetUnreadMessagesModule (ref), createGetChatSettingsModule (ref), createGetRolloutSettingsModule (ref), createGetMetadataModule (ref)
 	return {
 		AddToConversation = createAddToConversationModule(p0),

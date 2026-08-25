@@ -7,13 +7,13 @@ local themeModule = require(robloxGui.Modules.Settings.Theme)
 local var5 = require(shareGame.getTranslator)()
 local friendsErrorPage = roactModule.PureComponent:extend("FriendsErrorPage")
 
-function friendsErrorPage.render(p0) --[[ line: 17 ]]
+function friendsErrorPage.render(p0)
 	-- upvalues: roactModule (ref), var5 (ref), constantsModule (ref), themeModule (ref)
 	local layoutOrder = p0.props.LayoutOrder
 	local zIndex = p0.props.ZIndex
 	local var7 = 0
 	
-	local function _() --[[ line: 22 | named "incrementLayoutOrder" ]]
+	local function _()
 		-- upvalues: var7 (write)
 		var7 += 1
 		

@@ -14,11 +14,11 @@ local fFlagLuaAppPlayButtonWizardCloseDelay = sharedFlagsModule.FFlagLuaAppPlayB
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 21 ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: fFlagEnableAmpWizardDeepLink (ref), appPage (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), fFlagLuaAppWizardContainerBypassNavigationLock (ref), navigateBack (ref), fFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (ref), selectors (ref), navigateFromWebView (ref), navigateDown (ref)
 	local var4 = fFlagEnableAmpWizardDeepLink and (p7 ~= nil and p7.returnPage ~= nil)
 	
-	return function(p11) --[[ line: 36 ]]
+	return function(p11)
 		-- upvalues: appPage (copy), p0 (ref), p2 (ref), p3 (ref), p5 (ref), p4 (ref), p7 (ref), fFlagLuaAppPlayButtonWizardCloseDelay (copy), p8 (ref), fFlagSignalsNavP3Dispatch (copy), var3 (copy), fFlagLuaAppWizardContainerBypassNavigationLock (copy), navigateBack (copy), p1 (ref), p6 (ref), p9 (ref), p10 (ref), fFlagAmpWizardDeepLinkReplaceOnlyWebViewModule (copy), var4 (write), selectors (copy), navigateFromWebView (copy), navigateDown (copy)
 		local t = {
 			name = appPage.AmpWizardContainer,
@@ -29,7 +29,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 21 ]]
 				nameSpace = p5,
 				extraParameters = p4,
 				metadata = p7,
-				completionCallback = function(p12, p13) --[[ line: 46 ]]
+				completionCallback = function(p12, p13)
 					-- upvalues: fFlagLuaAppPlayButtonWizardCloseDelay (copy), p8 (copy), p11 (ref), fFlagSignalsNavP3Dispatch (copy), var3 (copy), fFlagLuaAppWizardContainerBypassNavigationLock (copy), navigateBack (copy), p1 (copy)
 					if fFlagLuaAppPlayButtonWizardCloseDelay and p8 then
 						p8(p11, p12, p13)

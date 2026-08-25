@@ -9,7 +9,7 @@ local textKeysModule = require(editProfile.Common.TextKeys)
 local constantsModule = require(editProfile.Common.Constants)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), constantsModule (ref), view (ref), text (ref), textArea (ref)
 	local var5 = useLocalization({
 		AboutModalCaption = textKeysModule.AboutModalCaption,
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 23 ]]
 	local var6, var7 = reactModule.useState(p0.bioText)
 	local var8, var9 = reactModule.useState(string.len(p0.bioText) >= 1000)
 	
-	local function _(p1) --[[ line: 34 | named "textChanged" ]]
+	local function _(p1)
 		-- upvalues: var7 (ref), var9 (ref), p0 (ref)
 		local var10 = string.len(p1)
 		var7(p1)
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 23 ]]
 			numLines = 4,
 			text = var6,
 			width = UDim.new(1, 0),
-			onChanged = function(p2) --[[ line: 60 ]]
+			onChanged = function(p2)
 				-- upvalues: var7 (ref), var9 (ref), p0 (ref)
 				local var11 = string.len(p2)
 				var7(p2)

@@ -15,27 +15,27 @@ local fIntMomentsFeedAnimationSpeedModule = require(moments.Flags.FIntMomentsFee
 local verticalPagerContextModule = require(script.Parent.VerticalPagerContext)
 local verticalPagerContext = verticalPagerContextModule.VerticalPagerContext
 local pagerItemContext = verticalPagerContextModule.PagerItemContext
-local var13 = reactModule.memo(function(p0) --[[ line: 57 | named "PagerItemProviderInner" ]]
+local var13 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), signalsModule (ref), pagerItemContext (ref), snapMathModule (ref)
 	local index = p0.index
 	local getActiveIndex = p0.getActiveIndex
-	local var15 = reactModule.useMemo(function() --[[ line: 61 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), getActiveIndex (ref), index (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 62 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: getActiveIndex (copy), index (copy)
 			return getActiveIndex(p1) == index
 		end)
 	end, { getActiveIndex, index })
-	local var16 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), getActiveIndex (ref), index (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 71 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: getActiveIndex (copy), index (copy)
 			return math.abs(getActiveIndex(p2) - index) <= 1
 		end)
 	end, { getActiveIndex, index })
 	
 	return reactModule.createElement(pagerItemContext.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 76 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: index (ref), p0 (ref), var15 (ref), var16 (ref)
 			return {
 				index = index,
@@ -53,21 +53,21 @@ local var13 = reactModule.memo(function(p0) --[[ line: 57 | named "PagerItemProv
 	})
 end)
 
-local function useNativeScrollEnabled() --[[ line: 121 ]]
+local function useNativeScrollEnabled()
 	-- upvalues: reactModule (ref), userInputService (ref)
-	local function _(p3) --[[ line: 122 | named "isNonTouch" ]]
+	local function _(p3)
 		return if p3 ~= Enum.UserInputType.MouseWheel then if p3 ~= Enum.UserInputType.MouseButton1 then if p3 ~= Enum.UserInputType.MouseMovement then p3 == Enum.UserInputType.Keyboard else true else true else true
 	end
 	
-	local var17, var18 = reactModule.useState(function() --[[ line: 129 ]]
+	local var17, var18 = reactModule.useState(function()
 		-- upvalues: userInputService (copy)
 		local lastInputType = userInputService:GetLastInputType()
 		
 		return not (if lastInputType ~= Enum.UserInputType.MouseWheel then if lastInputType ~= Enum.UserInputType.MouseButton1 then if lastInputType ~= Enum.UserInputType.MouseMovement then lastInputType == Enum.UserInputType.Keyboard else true else true else true)
 	end)
-	reactModule.useEffect(function() --[[ line: 133 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var18 (ref)
-		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p4) --[[ line: 134 ]]
+		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p4)
 			-- upvalues: var18 (copy)
 			if p4 == Enum.UserInputType.Touch then
 				var18(true)
@@ -78,7 +78,7 @@ local function useNativeScrollEnabled() --[[ line: 121 ]]
 			end
 		end)
 		
-		return function() --[[ line: 141 ]]
+		return function()
 			-- upvalues: lastInputTypeChangedConnection (ref)
 			lastInputTypeChangedConnection:Disconnect()
 		end
@@ -87,7 +87,7 @@ local function useNativeScrollEnabled() --[[ line: 121 ]]
 	return var17
 end
 
-return function(p5) --[[ line: 149 | named "VerticalPager" ]]
+return function(p5)
 	-- upvalues: constantsModule (ref), fFlagMomentsFeedSwipeSensitivityConfigModule (ref), fIntMomentsFeedSnapSensitivityMilliModule (ref), fIntMomentsFeedAnimationSpeedModule (ref), reactModule (ref), useNativeScrollEnabled (ref), usePagerControllerModule (ref), usePagerInputNavigationModule (ref), signalsReactModule (ref), snapMathModule (ref), var13 (ref), verticalPagerContext (ref)
 	local store = p5.store
 	local renderItem = p5.renderItem
@@ -111,7 +111,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 	local initialIndex = p5.initialIndex
 	local keyboardNavigation = tuning.keyboardNavigation or "global"
 	
-	local function _(p6, p7) --[[ line: 180 | named "keyOf" ]]
+	local function _(p6, p7)
 		-- upvalues: keyExtractor (ref)
 		return if keyExtractor == nil then tostring(p7) else keyExtractor(p6, p7)
 	end
@@ -120,7 +120,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 	local var31, var32 = reactModule.useState(0)
 	local var33 = reactModule.useRef(nil)
 	local var34 = reactModule.useRef({})
-	local var35 = reactModule.useCallback(function(p8) --[[ line: 194 ]]
+	local var35 = reactModule.useCallback(function(p8)
 		-- upvalues: var30 (ref), var32 (ref)
 		var30(p8)
 		
@@ -128,7 +128,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 			var32(p8.AbsoluteSize.Y)
 		end
 	end, {})
-	local var36 = reactModule.useCallback(function(p9) --[[ line: 201 ]]
+	local var36 = reactModule.useCallback(function(p9)
 		-- upvalues: var32 (ref)
 		var32(p9.AbsoluteSize.Y)
 	end, {})
@@ -153,7 +153,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 	local var40 = signalsReactModule.useSignalState(store.getCount)
 	local var41 = signalsReactModule.useSignalState(store.getItems)
 	local var42 = signalsReactModule.useSignalState(var38.getActiveIndex)
-	reactModule.useEffect(function() --[[ line: 238 ]]
+	reactModule.useEffect(function()
 		-- upvalues: onEndReached (ref), var40 (ref), var42 (ref), endReachedThreshold (ref), var33 (ref), var41 (ref)
 		if onEndReached == nil or var40 <= 0 then return end
 		if var40 - endReachedThreshold <= var42 and var33.current ~= var41 then
@@ -167,7 +167,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 		endReachedThreshold,
 		onEndReached
 	})
-	reactModule.useEffect(function() --[[ line: 250 ]]
+	reactModule.useEffect(function()
 		-- upvalues: analytics (ref), var40 (ref), var41 (ref), var42 (ref), keyExtractor (ref), var34 (ref)
 		local var50 = if analytics ~= nil then nil else analytics.onItemImpression
 		
@@ -189,7 +189,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 		analytics,
 		keyExtractor
 	})
-	local var43 = reactModule.useMemo(function() --[[ line: 267 ]]
+	local var43 = reactModule.useMemo(function()
 		-- upvalues: store (ref), var38 (ref), analytics (ref)
 		return {
 			store = store,
@@ -203,7 +203,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 		}
 	end, { store, var38, analytics })
 	local var44 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 286 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var44 (ref), initialIndex (ref), var40 (ref), store (ref)
 		if var44.current then return end
 		if initialIndex == nil then
@@ -222,7 +222,7 @@ return function(p5) --[[ line: 149 | named "VerticalPager" ]]
 		store.getCurrentIndex,
 		store.goToItem
 	})
-	reactModule.useImperativeHandle(p5.controllerRef, function() --[[ line: 305 ]]
+	reactModule.useImperativeHandle(p5.controllerRef, function()
 		-- upvalues: var38 (ref)
 		return var38
 	end, { var38 })

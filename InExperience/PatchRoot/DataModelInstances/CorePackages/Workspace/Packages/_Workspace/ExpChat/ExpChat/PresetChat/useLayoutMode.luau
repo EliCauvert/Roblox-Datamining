@@ -5,12 +5,12 @@ local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
 local constantsModule = require(script.Parent.Constants)
 local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 
-local function _() --[[ line: 13 | named "isTouchDevice" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	return userInputService.TouchEnabled and not userInputService.MouseEnabled
 end
 
-return function() --[[ line: 17 | named "useLayoutMode" ]]
+return function()
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref)
 	local var6 = signalsReactModule.useSignalState(getPresetChatStoreModule(false).getLayoutModeOverride)
 	

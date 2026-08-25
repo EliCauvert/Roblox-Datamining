@@ -5,14 +5,14 @@ local var3 = require(coreGuiService:WaitForChild("RobloxGui").Modules.Common.htt
 local setGameNameModule = require(script.Parent.Parent.Actions.SetGameName)
 local getGameNameAndDescription = require(corePackagesService.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
 
-return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateGameInfoRodux) then nil else function(p0) --[[ line: 28 ]]
+return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateGameInfoRodux) then nil else function(p0)
 	-- upvalues: promiseModule (ref), getGameNameAndDescription (ref), var3 (ref), setGameNameModule (ref)
-	return if game.GameId == 0 then promiseModule.resolve() else getGameNameAndDescription(var3, game.GameId):andThen(function(p1) --[[ line: 33 ]]
+	return if game.GameId == 0 then promiseModule.resolve() else getGameNameAndDescription(var3, game.GameId):andThen(function(p1)
 		-- upvalues: p0 (ref), setGameNameModule (copy)
 		p0:dispatch(setGameNameModule(p1.Name))
 		
 		return p1.Name
-	end, function() --[[ line: 37 ]]
+	end, function()
 		-- upvalues: promiseModule (copy)
 		warn("Unable to get game name for Gamepad Menu")
 		

@@ -96,7 +96,7 @@ if dEV then
 	var16 = false
 	t_1 = {}
 end
-local function _(p0) --[[ line: 181 | named "getContextForSubtree" ]]
+local function _(p0)
 	-- upvalues: emptyContextObject (ref), get (ref), findCurrentUnmaskedContext (ref), classComponent (ref), isContextProvider (ref), processChildContext (ref)
 	if not p0 then
 		return emptyContextObject
@@ -111,7 +111,7 @@ local function _(p0) --[[ line: 181 | named "getContextForSubtree" ]]
 	end
 end
 
-local function findHostInstance(p1) --[[ line: 199 ]]
+local function findHostInstance(p1)
 	-- upvalues: get (ref), invariant (ref), object (ref), findCurrentHostFiber (ref)
 	local var36 = get(p1)
 	
@@ -127,7 +127,7 @@ local function findHostInstance(p1) --[[ line: 199 ]]
 	return if var37 == nil then nil else var37.stateNode
 end
 
-local function findHostInstanceWithWarning(p2, p3) --[[ line: 220 ]]
+local function findHostInstanceWithWarning(p2, p3)
 	-- upvalues: dEV (ref), get (ref), invariant (ref), object (ref), findCurrentHostFiber (ref), strictMode (ref), getComponentName (ref), t_1 (write), reactCurrentFiberModule (ref), setCurrentFiber (ref), console (ref), describeError (ref), resetCurrentFiber (ref), findHostInstance (ref)
 	if not dEV then
 		return findHostInstance(p2)
@@ -151,7 +151,7 @@ local function findHostInstanceWithWarning(p2, p3) --[[ line: 220 ]]
 		if not t_1[type] then
 			t_1[type] = true
 			local current = reactCurrentFiberModule.current
-			local ok, status = xpcall(function() --[[ line: 248 ]]
+			local ok, status = xpcall(function()
 				-- upvalues: setCurrentFiber (copy), var39 (ref), var38 (ref), strictMode (copy), console (copy), p3 (ref), type (ref)
 				setCurrentFiber(var39)
 				
@@ -176,12 +176,12 @@ local function findHostInstanceWithWarning(p2, p3) --[[ line: 220 ]]
 	return var39.stateNode
 end
 
-function t.createContainer(p4, p5, p6, p7) --[[ line: 293 ]]
+function t.createContainer(p4, p5, p6, p7)
 	-- upvalues: createFiberRoot (ref)
 	return createFiberRoot(p4, p5, p6, p7)
 end
 
-function t.updateContainer(p8, p9, p10, p11) --[[ line: 302 ]]
+function t.updateContainer(p8, p9, p10, p11)
 	-- upvalues: dEV (ref), onScheduleRoot (ref), requestEventTime (ref), reactGlobalsModule (ref), warnIfUnmockedScheduler (ref), warnIfNotScopedWithMatchingAct (ref), requestUpdateLane (ref), enableSchedulingProfiler (ref), markRenderScheduled (ref), emptyContextObject (ref), get (ref), findCurrentUnmaskedContext (ref), classComponent (ref), isContextProvider (ref), processChildContext (ref), isRendering (ref), reactCurrentFiberModule (ref), var16 (write), console (ref), getComponentName (ref), createUpdate (ref), object (ref), enqueueUpdate (ref), scheduleUpdateOnFiber (ref)
 	if dEV then
 		onScheduleRoot(p9, p8)
@@ -250,7 +250,7 @@ t.flushPassiveEffects = flushPassiveEffects
 t.IsThisRendererActing = isThisRendererActing
 t.act = act
 
-function t.getPublicRootInstance(p12) --[[ line: 397 ]]
+function t.getPublicRootInstance(p12)
 	-- upvalues: hostComponent (ref), getPublicInstance (ref)
 	local current = p12.current
 	
@@ -259,7 +259,7 @@ end
 
 local var20 = nil
 
-function t.attemptSynchronousHydration(p13) --[[ line: 414 ]]
+function t.attemptSynchronousHydration(p13)
 	-- upvalues: hostRoot (ref), getHighestPriorityPendingLanes (ref), flushRoot (ref), suspenseComponent (ref), requestEventTime (ref), flushSync (ref), scheduleUpdateOnFiber (ref), syncLane (ref), inputDiscreteHydrationLane (ref), var20 (write)
 	if p13.tag == hostRoot then
 		local stateNode = p13.stateNode
@@ -271,7 +271,7 @@ function t.attemptSynchronousHydration(p13) --[[ line: 414 ]]
 		end
 	elseif p13.tag == suspenseComponent then
 		local var46 = requestEventTime()
-		flushSync(function() --[[ line: 424 ]]
+		flushSync(function()
 			-- upvalues: scheduleUpdateOnFiber (copy), p13 (ref), syncLane (copy), var46 (ref)
 			return scheduleUpdateOnFiber(p13, syncLane, var46)
 		end)
@@ -279,7 +279,7 @@ function t.attemptSynchronousHydration(p13) --[[ line: 414 ]]
 	end
 end
 
-local _ = function(p14, p15) --[[ line: 435 | named "markRetryLaneImpl" ]]
+local _ = function(p14, p15)
 	-- upvalues: higherPriorityLane (ref)
 	local memoizedState = p14.memoizedState
 	
@@ -288,7 +288,7 @@ local _ = function(p14, p15) --[[ line: 435 | named "markRetryLaneImpl" ]]
 	end
 end
 
-var20 = function(p16, p17) --[[ line: 446 ]]
+var20 = function(p16, p17)
 	-- upvalues: higherPriorityLane (ref)
 	local memoizedState = p16.memoizedState
 	
@@ -306,7 +306,7 @@ var20 = function(p16, p17) --[[ line: 446 ]]
 	end
 end
 
-function t.attemptUserBlockingHydration(p18) --[[ line: 455 ]]
+function t.attemptUserBlockingHydration(p18)
 	-- upvalues: suspenseComponent (ref), requestEventTime (ref), inputDiscreteHydrationLane (ref), scheduleUpdateOnFiber (ref), var20 (write)
 	if p18.tag == suspenseComponent then
 		scheduleUpdateOnFiber(p18, inputDiscreteHydrationLane, requestEventTime())
@@ -316,7 +316,7 @@ function t.attemptUserBlockingHydration(p18) --[[ line: 455 ]]
 	end
 end
 
-function t.attemptContinuousHydration(p19) --[[ line: 469 ]]
+function t.attemptContinuousHydration(p19)
 	-- upvalues: suspenseComponent (ref), requestEventTime (ref), selectiveHydrationLane (ref), scheduleUpdateOnFiber (ref), var20 (write)
 	if p19.tag == suspenseComponent then
 		scheduleUpdateOnFiber(p19, selectiveHydrationLane, requestEventTime())
@@ -326,7 +326,7 @@ function t.attemptContinuousHydration(p19) --[[ line: 469 ]]
 	end
 end
 
-function t.attemptHydrationAtCurrentPriority(p20) --[[ line: 483 ]]
+function t.attemptHydrationAtCurrentPriority(p20)
 	-- upvalues: suspenseComponent (ref), requestEventTime (ref), requestUpdateLane (ref), scheduleUpdateOnFiber (ref), var20 (write)
 	if p20.tag == suspenseComponent then
 		local var47 = requestUpdateLane(p20)
@@ -337,7 +337,7 @@ function t.attemptHydrationAtCurrentPriority(p20) --[[ line: 483 ]]
 	end
 end
 
-function t.runWithPriority(p21, p22) --[[ line: 495 ]]
+function t.runWithPriority(p21, p22)
 	-- upvalues: getCurrentUpdateLanePriority (ref), setCurrentUpdateLanePriority (ref), describeError (ref)
 	local var48 = getCurrentUpdateLanePriority()
 	setCurrentUpdateLanePriority(p21)
@@ -354,18 +354,18 @@ t.getCurrentUpdateLanePriority = getCurrentUpdateLanePriority
 t.findHostInstance = findHostInstance
 t.findHostInstanceWithWarning = findHostInstanceWithWarning
 
-function t.findHostInstanceWithNoPortals(p23) --[[ line: 513 ]]
+function t.findHostInstanceWithNoPortals(p23)
 	-- upvalues: findCurrentHostFiberWithNoPortals (ref), fundamentalComponent (ref)
 	local var49 = findCurrentHostFiberWithNoPortals(p23)
 	
 	return if var49 == nil then nil elseif var49.tag == fundamentalComponent then var49.stateNode.instance else var49.stateNode
 end
 
-local function shouldSuspendImpl(_) --[[ line: 524 ]]
+local function shouldSuspendImpl(_)
 	return false
 end
 
-function t.shouldSuspend(p24) --[[ line: 528 ]]
+function t.shouldSuspend(p24)
 	-- upvalues: shouldSuspendImpl (write)
 	return shouldSuspendImpl(p24)
 end
@@ -380,7 +380,7 @@ local var28 = nil
 local var29 = nil
 
 if dEV then
-	local function copyWithDeleteImpl(p25, p26, p27) --[[ line: 543 ]]
+	local function copyWithDeleteImpl(p25, p26, p27)
 		-- upvalues: array (ref), copyWithDeleteImpl (ref)
 		local var50 = p26[p27]
 		local var51 = if array.isArray(p25) then array.slice(p25) else table.clone(p25)
@@ -399,12 +399,12 @@ if dEV then
 		return var51
 	end
 	
-	local _ = function(p28, p29) --[[ line: 571 | named "copyWithDelete" ]]
+	local _ = function(p28, p29)
 		-- upvalues: copyWithDeleteImpl (ref)
 		return copyWithDeleteImpl(p28, p29, 0)
 	end
 	
-	local function copyWithRenameImpl(p30, p31, p32, p33) --[[ line: 579 ]]
+	local function copyWithRenameImpl(p30, p31, p32, p33)
 		-- upvalues: array (ref), copyWithRenameImpl (ref)
 		local var52 = p31[p33]
 		local var53 = if array.isArray(p30) then array.slice(p30) else table.clone(p30)
@@ -426,7 +426,7 @@ if dEV then
 		return var53
 	end
 	
-	local function copyWithRename(p34, p35, p36) --[[ line: 615 ]]
+	local function copyWithRename(p34, p35, p36)
 		-- upvalues: console (ref), copyWithRenameImpl (ref)
 		if #p35 ~= #p36 then
 			console.warn("copyWithRename() expects paths of the same length")
@@ -444,7 +444,7 @@ if dEV then
 		return copyWithRenameImpl(p34, p35, p36, 0)
 	end
 	
-	local function copyWithSetImpl(value, p37, p38, p39) --[[ line: 637 ]]
+	local function copyWithSetImpl(value, p37, p38, p39)
 		-- upvalues: array (ref), copyWithSetImpl (ref)
 		if #p37 + 1 <= p38 then
 			return p39
@@ -456,12 +456,12 @@ if dEV then
 		return var55
 	end
 	
-	local _ = function(value, p40, p41) --[[ line: 659 | named "copyWithSet" ]]
+	local _ = function(value, p40, p41)
 		-- upvalues: copyWithSetImpl (ref)
 		return copyWithSetImpl(value, p40, 1, p41)
 	end
 	
-	local _ = function(p42, p43) --[[ line: 667 | named "findHook" ]]
+	local _ = function(p42, p43)
 		local memoizedState = p42.memoizedState
 		while memoizedState ~= nil and p43 > 1 do
 			memoizedState = memoizedState.next
@@ -470,7 +470,7 @@ if dEV then
 		return memoizedState
 	end
 	
-	var22 = function(p44, p45, p46, p47) --[[ line: 679 ]]
+	var22 = function(p44, p45, p46, p47)
 		-- upvalues: copyWithSetImpl (ref), scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		local var56 = p45
 		local memoizedState = p44.memoizedState
@@ -487,7 +487,7 @@ if dEV then
 		end
 	end
 	
-	var23 = function(p48, p49, p50) --[[ line: 701 ]]
+	var23 = function(p48, p49, p50)
 		-- upvalues: copyWithDeleteImpl (ref), scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		local var58 = p49
 		local memoizedState = p48.memoizedState
@@ -504,7 +504,7 @@ if dEV then
 		end
 	end
 	
-	var24 = function(p51, p52, p53, p54) --[[ line: 722 ]]
+	var24 = function(p51, p52, p53, p54)
 		-- upvalues: copyWithRename (ref), scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		local var60 = p52
 		local memoizedState = p51.memoizedState
@@ -521,7 +521,7 @@ if dEV then
 		end
 	end
 	
-	var25 = function(p55, p56, p57) --[[ line: 746 ]]
+	var25 = function(p55, p56, p57)
 		-- upvalues: copyWithSetImpl (ref), scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		p55.pendingProps = copyWithSetImpl(p55.memoizedProps, p56, 1, p57)
 		local alternate = p55.alternate
@@ -532,7 +532,7 @@ if dEV then
 		scheduleUpdateOnFiber(p55, syncLane, noTimestamp)
 	end
 	
-	var26 = function(p58, p59) --[[ line: 755 ]]
+	var26 = function(p58, p59)
 		-- upvalues: copyWithDeleteImpl (ref), scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		p58.pendingProps = copyWithDeleteImpl(p58.memoizedProps, p59, 0)
 		local alternate = p58.alternate
@@ -543,7 +543,7 @@ if dEV then
 		scheduleUpdateOnFiber(p58, syncLane, noTimestamp)
 	end
 	
-	var27 = function(p60, p61, p62) --[[ line: 764 ]]
+	var27 = function(p60, p61, p62)
 		-- upvalues: copyWithRename (ref), scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		p60.pendingProps = copyWithRename(p60.memoizedProps, p61, p62)
 		local alternate = p60.alternate
@@ -554,33 +554,33 @@ if dEV then
 		scheduleUpdateOnFiber(p60, syncLane, noTimestamp)
 	end
 	
-	var28 = function(p63) --[[ line: 778 ]]
+	var28 = function(p63)
 		-- upvalues: scheduleUpdateOnFiber (ref), syncLane (ref), noTimestamp (ref)
 		scheduleUpdateOnFiber(p63, syncLane, noTimestamp)
 	end
 	
-	var29 = function(p64) --[[ line: 782 ]]
+	var29 = function(p64)
 		-- upvalues: shouldSuspendImpl (write)
 		shouldSuspendImpl = p64
 	end
 end
-function findHostInstanceByFiber(p65) --[[ line: 787 ]]
+function findHostInstanceByFiber(p65)
 	-- upvalues: findCurrentHostFiber (ref)
 	local var62 = findCurrentHostFiber(p65)
 	
 	return if var62 == nil then nil else var62.stateNode
 end
 
-function emptyFindFiberByHostInstance(_) --[[ line: 795 ]]
+function emptyFindFiberByHostInstance(_)
 	return nil
 end
 
-function getCurrentFiberForDevTools() --[[ line: 799 ]]
+function getCurrentFiberForDevTools()
 	-- upvalues: reactCurrentFiberModule (ref)
 	return reactCurrentFiberModule.current
 end
 
-function t.injectIntoDevTools(p66) --[[ line: 803 ]]
+function t.injectIntoDevTools(p66)
 	-- upvalues: reactSharedInternals (ref), dEV (ref), injectInternals (ref), var22 (write), var23 (write), var24 (write), var25 (write), var26 (write), var27 (write), var29 (write), var28 (write), findHostInstancesForRefresh (ref), scheduleRefresh (ref), scheduleRoot (ref), setRefreshHandler (ref)
 	return injectInternals({
 		bundleType = p66.bundleType,

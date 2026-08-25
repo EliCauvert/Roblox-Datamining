@@ -25,7 +25,7 @@ local t = {
 	hasDivider = { hasDivider = true, isInset = false }
 }
 
-local function renderRowTrailing(p0, p1, p2, p3) --[[ line: 57 ]]
+local function renderRowTrailing(p0, p1, p2, p3)
 	-- upvalues: reactModule (ref), skeleton (ref), radius (ref), fFlagFixNonTruncatedTextModule (ref), text (ref), editProfileLandingTrailingWidthRatio (ref)
 	return if p0 then reactModule.createElement(skeleton, { Size = UDim2.new(0.3, 0, 0, p2), radius = radius.Medium }) elseif fFlagFixNonTruncatedTextModule and p3 ~= nil then reactModule.createElement(text, {
 		tag = "auto-y text-body-small text-align-x-right text-truncate-end",
@@ -37,7 +37,7 @@ local function renderRowTrailing(p0, p1, p2, p3) --[[ line: 57 ]]
 	})
 end
 
-return function(p4) --[[ line: 84 | named "EditProfileLandingV2" ]]
+return function(p4)
 	-- upvalues: useProfileCardWidth (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), list (ref), t (ref), renderRowTrailing (ref), fFlagFixNonTruncatedTextModule (ref)
 	local var10 = useProfileCardWidth()
 	local var11 = useTokens()

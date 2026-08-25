@@ -15,7 +15,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local gameDetailsSubpage = discoveryAnalyticsModule.Events.gameDetailsSubpage
 local useNavigateToServersModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useNavigateToServers)
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "ExperienceDetailsActiveCountChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: signalsReactModule (ref), dataHydrationModule (ref), usePlayerCountText (ref), useLocalization (ref), useNavigateToServersModule (ref), reactModule (ref), playersService (ref), gameDetailsSubpage (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId
@@ -31,7 +31,7 @@ return reactModule.memo(function(p0) --[[ line: 26 | named "ExperienceDetailsAct
 		}).numActivePlayers,
 		layoutOrder = layoutOrder,
 		leadingIconName = foundationModule.Enums.IconName.TwoPeople,
-		onActivated = reactModule.useCallback(function() --[[ line: 41 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: var11 (ref), playersService (copy), gameDetailsSubpage (copy), universeId (ref), var12 (ref)
 			local rootPlaceId = var11 and var11.rootPlaceId
 			

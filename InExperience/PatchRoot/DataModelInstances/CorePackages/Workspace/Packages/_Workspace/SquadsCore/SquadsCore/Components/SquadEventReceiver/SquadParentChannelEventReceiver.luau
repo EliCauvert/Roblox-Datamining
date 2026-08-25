@@ -10,11 +10,11 @@ local reactModule = require(parent.React)
 local realtimeDeliveryModule = require(parent.RealtimeDelivery)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), squadExternalContractContextModule (ref), realtimeDeliveryModule (ref), constantsModule (ref), loggerModule (ref), serializeTableModule (ref), roduxSquadsModule (ref), fetchActiveSquadModule (ref)
 	local var9 = useDispatch()
 	local var10 = reactModule.useContext(squadExternalContractContextModule)
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p1) --[[ line: 27 ]]
+	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p1)
 		-- upvalues: constantsModule (copy), p0 (ref), loggerModule (copy), serializeTableModule (copy), var9 (ref), roduxSquadsModule (copy), fetchActiveSquadModule (copy)
 		if table.find(constantsModule.PARENT_CHANNEL_TYPES, p1.ChannelType) and (p0.currentParentChannelId and p0.currentParentChannelId == p1.ChannelId) then
 			loggerModule:debug("Parent squad channel RTN received. Detail: {}, CurrentParentChannelId: {}", serializeTableModule(p1), p0.currentParentChannelId)
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 22 ]]
 		p0.currentParentChannelId,
 		var10.fetchParentChannelDetails
 	})
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var10 (ref), var9 (ref)
 		if p0.currentParentChannelId and p0.currentParentChannelId ~= "" then
 			var10.fetchParentChannelDetails(var9, p0.currentParentChannelId)

@@ -2,7 +2,7 @@
 local createDataCacheModule = require(dataHydration.createDataCache)
 local _ = require(dataHydration.DataHydrationTypes)
 
-return function() --[[ line: 14 | named "createSongInfoStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref)
 	local var2 = createDataCacheModule()
 	

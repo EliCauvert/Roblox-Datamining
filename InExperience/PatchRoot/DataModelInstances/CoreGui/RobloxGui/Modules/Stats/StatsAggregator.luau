@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 18 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref), statsUtilsModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -23,7 +23,7 @@ function t.new(p0, p1, p2) --[[ line: 18 ]]
 	return t_1
 end
 
-function t:AddListener(p3) --[[ line: 45 ]]
+function t:AddListener(p3)
 	local nextListenerId = self._nextListenerId
 	self._nextListenerId += 1
 	self._listeners[nextListenerId] = p3
@@ -31,21 +31,21 @@ function t:AddListener(p3) --[[ line: 45 ]]
 	return nextListenerId
 end
 
-function t:RemoveListener(p4) --[[ line: 52 ]]
+function t:RemoveListener(p4)
 	self._listeners[p4] = nil
 end
 
-function t:_notifyAllListeners() --[[ line: 56 ]]
+function t:_notifyAllListeners()
 	for i, v in pairs(self._listeners) do
 		v()
 	end
 end
 
-function t:StartListening() --[[ line: 62 ]]
+function t:StartListening()
 	if self._listening == true then
 		return
 	end
-	spawn(function() --[[ line: 70 ]]
+	spawn(function()
 		-- upvalues: self (ref)
 		self._listening = true
 		while self._listening do
@@ -56,11 +56,11 @@ function t:StartListening() --[[ line: 62 ]]
 	end)
 end
 
-function t:StopListening() --[[ line: 81 ]]
+function t:StopListening()
 	self._listening = false
 end
 
-function t:GetValues() --[[ line: 85 ]]
+function t:GetValues()
 	local t = {}
 	local _ = nil
 	
@@ -70,7 +70,7 @@ function t:GetValues() --[[ line: 85 ]]
 	return t
 end
 
-function t:GetAverage() --[[ line: 96 ]]
+function t:GetAverage()
 	local var4 = 0
 	
 	for i = 0, self._numSamples - 1 do
@@ -79,16 +79,16 @@ function t:GetAverage() --[[ line: 96 ]]
 	return var4 / self._numSamples
 end
 
-function t:GetLatestValue() --[[ line: 105 ]]
+function t:GetLatestValue()
 	return self._samples[(self._oldestIndex + self._numSamples - 1) % self._numSamples]
 end
 
-function t:_storeStatValue(p5) --[[ line: 111 ]]
+function t:_storeStatValue(p5)
 	self._samples[self._oldestIndex] = p5
 	self._oldestIndex = (self._oldestIndex + 1) % self._numSamples
 end
 
-function t:_getStatValue() --[[ line: 117 ]]
+function t:_getStatValue()
 	local statsService = game:GetService("Stats")
 	
 	if statsService == nil then
@@ -104,7 +104,7 @@ function t:_getStatValue() --[[ line: 117 ]]
 	return if statName == nil then 0 else statName:GetValue()
 end
 
-function t:GetTarget() --[[ line: 137 ]]
+function t:GetTarget()
 	local statsService = game:GetService("Stats")
 	
 	if statsService == nil then

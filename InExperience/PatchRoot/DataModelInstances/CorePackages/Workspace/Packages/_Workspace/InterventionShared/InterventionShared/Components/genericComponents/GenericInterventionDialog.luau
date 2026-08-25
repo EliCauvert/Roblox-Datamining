@@ -44,11 +44,11 @@ local fFlagUFRInlineAppealLinkModule = require(interventionShared.Flags.FFlagUFR
 local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local accept = images["icons/actions/accept"]
 
-local function _(p0) --[[ line: 88 | named "getNonEmptyString" ]]
+local function _(p0)
 	return if p0 == "" then nil else p0
 end
 
-return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionDialog" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useRef (ref), useInterventionPlacementModule (ref), useLocalization (ref), constantsModule (ref), usePreferredInput (ref), responsiveModule (ref), fFlagNavigateToSafetyDashboardForAppeals (ref), urlBuilder (ref), useWebViewModule (ref), linkingProtocol (ref), useInterventionFocusRootModule (ref), focusNavigableSurfaceIdentifierEnum (ref), useEffect (ref), interventionAnalyticsModule (ref), useCallback (ref), postDismissInterventionModule (ref), fFlagUniversalFeatureRestrictionReceivers (ref), notificationModalsManagerModule (ref), accept (ref), VRService (ref), fFlagUFRInlineAppealLinkModule (ref), reactModule (ref), text (ref), fFlagUFRImprovementsModule (ref), view (ref), divider (ref), evidenceFieldModule (ref), badge (ref), badgeVariant (ref), iconName (ref), iconPosition (ref), iconVariant (ref), cryoModule (ref), button (ref), buttonVariant (ref), buttonSize (ref), dialog (ref), dialogSize (ref), interventionDialogLoadingSkeletonModule (ref), interventionDialogFooterModule (ref)
 	local var18 = useTokens()
 	local interventionId = p1.interventionId
@@ -74,7 +74,7 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ModerationOverlay
 	})
-	useEffect(function() --[[ line: 128 ]]
+	useEffect(function()
 		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var26 (ref), var25 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogRendered, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.ModalAppeared,
@@ -88,10 +88,10 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 			abuseVector = p1.abuseVectorForAnalytics
 		})
 	end, { var25 })
-	local var32 = useCallback(function() --[[ line: 143 ]]
+	local var32 = useCallback(function()
 		-- upvalues: p1 (ref), var19 (ref), postDismissInterventionModule (copy), interventionAnalyticsModule (copy), var26 (ref), var25 (ref)
 		if p1.acknowledgeable and var19 then
-			postDismissInterventionModule(var19):andThen(function(_) --[[ line: 145 ]]
+			postDismissInterventionModule(var19):andThen(function(_)
 				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
@@ -102,7 +102,7 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
-			end):catch(function(p2) --[[ line: 158 ]]
+			end):catch(function(p2)
 				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
@@ -120,7 +120,7 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 		p1.acknowledgeable, var19, p1.interventionTypeForAnalytics, var26,
 		var25.current, p1.eventId, p1.abuseVectorForAnalytics
 	})
-	local var33 = useCallback(function() --[[ line: 189 ]]
+	local var33 = useCallback(function()
 		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var26 (ref), var25 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var32 (ref), var19 (ref), postDismissInterventionModule (copy)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogCtaClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.CtaClicked,
@@ -135,7 +135,7 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 		if fFlagUniversalFeatureRestrictionReceivers then
 			var32()
 		elseif p1.acknowledgeable and var19 then
-			postDismissInterventionModule(var19):andThen(function(_) --[[ line: 204 ]]
+			postDismissInterventionModule(var19):andThen(function(_)
 				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissSuccess, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissSuccess,
@@ -146,7 +146,7 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 					acknowledgeable = p1.acknowledgeable,
 					abuseVector = p1.abuseVectorForAnalytics
 				})
-			end):catch(function(p3) --[[ line: 217 ]]
+			end):catch(function(p3)
 				-- upvalues: interventionAnalyticsModule (copy), p1 (copy), var26 (copy), var25 (copy)
 				interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogInterventionDismissFailed, {
 					eventType = interventionAnalyticsModule.Constants.EventTypes.DialogInterventionDismissFailed,
@@ -165,7 +165,7 @@ return reactModule.memo(function(p1) --[[ line: 97 | named "GenericInterventionD
 		p1.onDismiss, p1.interventionTypeForAnalytics, var26, var25.current,
 		p1.eventId, p1.abuseVectorForAnalytics, p1.acknowledgeable, var19, var32
 	})
-	local var34 = useCallback(function() --[[ line: 253 ]]
+	local var34 = useCallback(function()
 		-- upvalues: interventionAnalyticsModule (copy), p1 (ref), var26 (ref), var25 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var32 (ref), notificationModalsManagerModule (copy), accept (copy), var27 (ref), var18 (ref), VRService (copy), var28 (ref), default (ref), var29 (ref), var30 (ref)
 		interventionAnalyticsModule.sendAnalyticsEvent(interventionAnalyticsModule.TelemetryConfigs.DialogAppealClicked, {
 			eventType = interventionAnalyticsModule.Constants.EventTypes.AppealClicked,

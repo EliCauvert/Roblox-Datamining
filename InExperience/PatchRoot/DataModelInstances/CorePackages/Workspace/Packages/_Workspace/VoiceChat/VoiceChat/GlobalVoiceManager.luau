@@ -11,7 +11,7 @@ local fFlagEnableCrossExperienceVoiceCaptureMute = sharedFlagsModule.GetFFlagEna
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 38 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -19,17 +19,17 @@ function t.new() --[[ line: 38 ]]
 	return t_1
 end
 
-function t.isPublicVoiceFocused(_) --[[ line: 44 ]]
+function t.isPublicVoiceFocused(_)
 	-- upvalues: fFlagEnableCrossExpVoice (ref), default_1 (ref), AUDIO_FOCUS_MANAGEMENT (ref)
 	return not fFlagEnableCrossExpVoice or default_1:getCurrentAudioContext() == AUDIO_FOCUS_MANAGEMENT.UGC.CONTEXT_ID
 end
 
-function t.isPrivateVoiceFocused(_) --[[ line: 49 ]]
+function t.isPrivateVoiceFocused(_)
 	-- upvalues: fFlagEnableCrossExpVoice (ref), default_1 (ref), AUDIO_FOCUS_MANAGEMENT (ref)
 	return fFlagEnableCrossExpVoice and default_1:getCurrentAudioContext() == AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 end
 
-function t:MuteAll(p0) --[[ line: 54 ]]
+function t:MuteAll(p0)
 	-- upvalues: fFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref)
 	if self:isPrivateVoiceFocused() and fFlagEnableCrossExperienceVoiceCaptureMute then
 		default_1:muteAll(p0)
@@ -39,7 +39,7 @@ function t:MuteAll(p0) --[[ line: 54 ]]
 	end
 end
 
-function t:UnmuteAll(p1) --[[ line: 64 ]]
+function t:UnmuteAll(p1)
 	-- upvalues: fFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref)
 	if self:isPrivateVoiceFocused() and fFlagEnableCrossExperienceVoiceCaptureMute then
 		default_1:unmuteAll(p1)

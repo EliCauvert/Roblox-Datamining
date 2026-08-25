@@ -14,10 +14,10 @@ local t = {
 	replyingToUserText = nil,
 	replyingToUserContent = nil,
 	replyingToUserId = nil,
-	onCloseActivated = function() --[[ line: 36 ]] end
+	onCloseActivated = function() end
 }
 
-function ReplyComposeBar(p0) --[[ line: 39 ]]
+function ReplyComposeBar(p0)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useFoundationPresenceModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), reactModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), replyComposeBarTextModule (ref), builderIconsModule (ref)
 	local var10 = cryoModule.Dictionary.union(t, p0)
 	local var11 = foundationModule.Hooks.useTokens()

@@ -1,7 +1,7 @@
 ﻿local inspect = require(script.Parent.Parent.Parent.LuauPolyfill).util.inspect
 local deepContainsModule = require(script.Parent.Parent.luaUtils.deepContains)
 
-return function(p0, p1) --[[ line: 20 | named "toObjectContain" ]]
+return function(p0, p1)
 	-- upvalues: deepContainsModule (ref), inspect (ref)
 	local var1 = deepContainsModule(p0, p1)
 	

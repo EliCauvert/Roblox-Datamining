@@ -15,13 +15,13 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p0) --[[ line: 23 ]]
+			namedCounterConfigurationAndFormat("AppChat.Navigation.Visible", function(p0)
 				return {
 					isChatEnabled = p0.isChatEnabled,
 					isChatLoading = p0.isChatLoading
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ line: 33 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return {
 					isChatEnabled = p1.isChatEnabled,
 					isChatLoading = p1.isChatLoading
@@ -34,13 +34,13 @@ return {
 		description = "",
 		lastUpdated = { 2026, 2, 9 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p2) --[[ line: 47 ]]
+			namedCounterConfigurationAndFormat("AppChat.Navigation.Closed", function(p2)
 				return {
 					isChatEnabled = p2.isChatEnabled,
 					isChatLoading = p2.isChatLoading
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p3) --[[ line: 57 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p3)
 				return {
 					isChatEnabled = p3.isChatEnabled,
 					isChatLoading = p3.isChatLoading
@@ -53,10 +53,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Rendered", function(p4) --[[ line: 71 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Rendered", function(p4)
 				return { isChatEnabled = p4.isChatEnabled }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p5) --[[ line: 78 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p5)
 				return { isChatEnabled = p5.isChatEnabled }
 			end)
 		}
@@ -66,10 +66,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.EmptyState.Rendered", function(p6) --[[ line: 90 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.EmptyState.Rendered", function(p6)
 				return { emptyStateType = p6.emptyStateType }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p7) --[[ line: 97 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p7)
 				return { emptyStateType = p7.emptyStateType }
 			end)
 		}
@@ -115,10 +115,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Snooze", function(p8) --[[ line: 145 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Snooze", function(p8)
 				return { isChatNotificationsMuted = p8.isChatNotificationsMuted }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p9) --[[ line: 153 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p9)
 				return { isChatNotificationsMuted = p9.isChatNotificationsMuted }
 			end)
 		}
@@ -128,7 +128,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.ConversationCell.Rendered", function(p10) --[[ line: 166 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.ConversationCell.Rendered", function(p10)
 				return {
 					isFiltered = p10.isFiltered,
 					hasUnreadMessages = p10.hasUnreadMessages,
@@ -137,7 +137,7 @@ return {
 					osaAcknowledgementStatus = p10.osaAcknowledgementStatus
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p11) --[[ line: 187 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p11)
 				return {
 					isFiltered = p11.isFiltered,
 					conversationListCount = p11.conversationListCount,
@@ -157,7 +157,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 30 },
 		backendsList = {
-			namedStatConfigurationAndFormat("chatLandingConversationCellRenderedIndexStat", function(_) --[[ line: 217 ]]
+			namedStatConfigurationAndFormat("chatLandingConversationCellRenderedIndexStat", function(_)
 				return {}
 			end)
 		}
@@ -167,7 +167,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Conversation", function(p12) --[[ line: 229 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatLanding.Button.Conversation", function(p12)
 				return {
 					isFiltered = p12.isFiltered,
 					hasUnreadMessages = p12.hasUnreadMessages,
@@ -176,7 +176,7 @@ return {
 					osaAcknowledgementStatus = p12.osaAcknowledgementStatus
 				}
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p13) --[[ line: 249 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p13)
 				return {
 					isFiltered = p13.isFiltered,
 					conversationListCount = p13.conversationListCount,
@@ -197,7 +197,7 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 30 },
 		backendsList = {
-			namedStatConfigurationAndFormat("chatLandingConversationClickedIndexStat", function(_) --[[ line: 281 ]]
+			namedStatConfigurationAndFormat("chatLandingConversationClickedIndexStat", function(_)
 				return {}
 			end)
 		}

@@ -4,10 +4,10 @@ local boolean = luauPolyfillModule.Boolean
 local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 
-local function __rest(p0, p1) --[[ line: 21 ]]
+local function __rest(p0, p1)
 	-- upvalues: array (ref), object (ref)
 	local t = {}
-	array.forEach(p1, function(p2) --[[ line: 23 ]]
+	array.forEach(p1, function(p2)
 		-- upvalues: t (ref), object (copy)
 		t[p2] = object.None
 	end)
@@ -22,28 +22,28 @@ local getExtras = nil
 local makeEmptyData = nil
 local list = nil
 
-function t.concatPagination(p3) --[[ line: 47 ]]
+function t.concatPagination(p3)
 	-- upvalues: array (ref)
 	if p3 == nil then
 		p3 = false
 	end
 	return {
 		keyArgs = p3,
-		merge = function(_, p4, p5) --[[ line: 53 ]]
+		merge = function(_, p4, p5)
 			-- upvalues: array (copy)
 			return if p4 then array.concat(p4, p5) else p5
 		end
 	}
 end
 
-function t.offsetLimitPagination(value) --[[ line: 65 ]]
+function t.offsetLimitPagination(value)
 	-- upvalues: array (ref)
 	if value == nil then
 		value = false
 	end
 	return {
 		keyArgs = value,
-		merge = function(_, p6, p7, p8) --[[ line: 72 ]]
+		merge = function(_, p6, p7, p8)
 			-- upvalues: array (copy)
 			local args = p8.args
 			local var7 = if p6 ~= nil then {} else array.slice(p6, 1)
@@ -61,20 +61,20 @@ function t.offsetLimitPagination(value) --[[ line: 65 ]]
 	}
 end
 
-function t.relayStylePagination(p9) --[[ line: 139 ]]
+function t.relayStylePagination(p9)
 	-- upvalues: array (ref), boolean (ref), object (ref), getExtras (write), makeEmptyData (write), mergeDeep (ref)
 	if p9 == nil then
 		p9 = false
 	end
 	return {
 		keyArgs = p9,
-		read = function(_, p10, p11) --[[ line: 146 ]]
+		read = function(_, p10, p11)
 			-- upvalues: array (copy), boolean (copy), object (copy), getExtras (copy)
 			if p10 then
 				local t = {}
 				local var10 = ""
 				local var11 = ""
-				array.forEach(p10.edges, function(p12) --[[ line: 158 ]]
+				array.forEach(p10.edges, function(p12)
 					-- upvalues: p11 (ref), t (ref), var10 (write), boolean (copy), var11 (write)
 					if p11:canRead(p11:readField("node", p12)) then
 						table.insert(t, p12)
@@ -98,13 +98,13 @@ function t.relayStylePagination(p9) --[[ line: 139 ]]
 				})
 			end
 		end,
-		merge = function(_, p13, p14, p15) --[[ line: 199 ]]
+		merge = function(_, p13, p14, p15)
 			-- upvalues: makeEmptyData (copy), array (copy), object (copy), mergeDeep (copy), boolean (copy), getExtras (copy)
 			if p13 == nil then
 				p13 = makeEmptyData()
 			end
 			local args = p15.args
-			local var14 = if p14.edges then array.map(p14.edges, function(p16) --[[ line: 210 ]]
+			local var14 = if p14.edges then array.map(p14.edges, function(p16)
 				-- upvalues: object (copy), p15 (ref)
 				local var24 = object.assign({ cursor = "" }, p16)
 				
@@ -142,7 +142,7 @@ function t.relayStylePagination(p9) --[[ line: 139 ]]
 			local t = {}
 			
 			if args ~= nil and args.after then
-				local var20 = array.findIndex(edges, function(p17) --[[ line: 262 ]]
+				local var20 = array.findIndex(edges, function(p17)
 					-- upvalues: args (ref)
 					return p17.cursor == args.after
 				end)
@@ -151,7 +151,7 @@ function t.relayStylePagination(p9) --[[ line: 139 ]]
 					edges = array.slice(edges, 1, var20 + 1)
 				end
 			elseif args ~= nil and boolean.toJSBoolean(args.before) then
-				local var21 = array.findIndex(edges, function(p18) --[[ line: 273 ]]
+				local var21 = array.findIndex(edges, function(p18)
 					-- upvalues: args (ref)
 					return p18.cursor == args.before
 				end)
@@ -203,14 +203,14 @@ function t.relayStylePagination(p9) --[[ line: 139 ]]
 	}
 end
 
-getExtras = function(p19) --[[ line: 358 | named "getExtras" ]]
+getExtras = function(p19)
 	-- upvalues: __rest (ref), list (write)
 	return __rest(p19, list)
 end
 
 list = { "edges", "pageInfo" }
 
-makeEmptyData = function() --[[ line: 363 | named "makeEmptyData" ]]
+makeEmptyData = function()
 	return {
 		edges = {},
 		pageInfo = {

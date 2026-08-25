@@ -3,7 +3,7 @@ local telemetryService = game:GetService("TelemetryService")
 local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
 
 return {
-	sendEventToTelemetryV2 = function(p0) --[[ line: 12 ]]
+	sendEventToTelemetryV2 = function(p0)
 		-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 		local t = {
 			eventName = "coreui_vr_bottom_bar_action",

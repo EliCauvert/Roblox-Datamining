@@ -3,13 +3,13 @@ local signalsModule = require(appChat.Parent.Signals)
 local _ = require(appChat.Stores.GetConversationStore.createConversationStore)
 local getConversationIdsModule = require(appChat.Utils.getConversationIds)
 
-local function _(p0) --[[ line: 23 | named "getLastUpdatedUnixTime" ]]
+local function _(p0)
 	local lastUpdated = p0.lastUpdated
 	
 	return if lastUpdated == nil then nil elseif typeof(lastUpdated) == "DateTime" then lastUpdated.UnixTimestamp elseif type(lastUpdated) == "table" and lastUpdated.GetUnixTimestamp ~= nil then lastUpdated:GetUnixTimestamp() else nil
 end
 
-local function conversationSortPredicate(p1, p2) --[[ line: 37 ]]
+local function conversationSortPredicate(p1, p2)
 	local lastUpdated = p1.lastUpdated
 	local var5 = if lastUpdated == nil then nil elseif typeof(lastUpdated) == "DateTime" then lastUpdated.UnixTimestamp elseif type(lastUpdated) == "table" and lastUpdated.GetUnixTimestamp ~= nil then lastUpdated:GetUnixTimestamp() else nil
 	local lastUpdated_1 = p2.lastUpdated
@@ -18,7 +18,7 @@ local function conversationSortPredicate(p1, p2) --[[ line: 37 ]]
 	return if not (var5 ~= nil and lastUpdated ~= nil) then if var5 == nil and lastUpdated == nil then string.lower(p1.title or "") < string.lower(p2.title or "") else var5 ~= nil else lastUpdated < var5
 end
 
-local function containsAllFrozenConversations(p3, p4) --[[ line: 48 ]]
+local function containsAllFrozenConversations(p3, p4)
 	for i, v in p4 do
 		if table.find(p3, v) == nil then
 			return false
@@ -27,7 +27,7 @@ local function containsAllFrozenConversations(p3, p4) --[[ line: 48 ]]
 	return true
 end
 
-local _ = function(p5, p6) --[[ line: 57 | named "getSortedConversations" ]]
+local _ = function(p5, p6)
 	-- upvalues: conversationSortPredicate (ref)
 	local conversations = p5.getConversations(p6)
 	table.sort(conversations, conversationSortPredicate)
@@ -35,17 +35,17 @@ local _ = function(p5, p6) --[[ line: 57 | named "getSortedConversations" ]]
 	return conversations
 end
 
-return function(p7) --[[ line: 63 | named "createConversationListStore" ]]
+return function(p7)
 	-- upvalues: signalsModule (ref), conversationSortPredicate (ref), getConversationIdsModule (ref), containsAllFrozenConversations (ref)
 	local var7 = nil
 	local var8, var9 = signalsModule.createSignal(false)
-	p7.addClearListener(function() --[[ line: 67 ]]
+	p7.addClearListener(function()
 		-- upvalues: var7 (write), var9 (ref)
 		var7 = nil
 		var9(false)
 	end)
 	
-	local function getOrderedConversationIds(p8) --[[ line: 72 ]]
+	local function getOrderedConversationIds(p8)
 		-- upvalues: p7 (ref), conversationSortPredicate (copy), getConversationIdsModule (copy), var8 (ref), var7 (write), containsAllFrozenConversations (copy)
 		local conversations = p7.getConversations(p8)
 		table.sort(conversations, conversationSortPredicate)
@@ -69,7 +69,7 @@ return function(p7) --[[ line: 63 | named "createConversationListStore" ]]
 	
 	return {
 		getOrderedConversationIds = getOrderedConversationIds,
-		getConversations = function(p9) --[[ line: 93 ]]
+		getConversations = function(p9)
 			-- upvalues: getOrderedConversationIds (ref), p7 (ref)
 			local t = {}
 			
@@ -82,11 +82,11 @@ return function(p7) --[[ line: 63 | named "createConversationListStore" ]]
 			end
 			return t
 		end,
-		getListStatus = function(p10) --[[ line: 104 ]]
+		getListStatus = function(p10)
 			-- upvalues: p7 (ref)
 			return p7.getListStatus(p10)
 		end,
-		setLatestMessagesFetching = function(value) --[[ line: 108 ]]
+		setLatestMessagesFetching = function(value)
 			-- upvalues: var9 (ref)
 			var9(value)
 		end

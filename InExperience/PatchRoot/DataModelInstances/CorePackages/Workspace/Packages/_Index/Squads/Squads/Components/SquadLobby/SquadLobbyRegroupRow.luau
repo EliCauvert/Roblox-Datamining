@@ -27,7 +27,7 @@ local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlag
 local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
 local var8 = if fFlagSquadsPresenceStoreMigration then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
-return function(p0) --[[ line: 41 | named "SquadLobbyRegroupRow" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), react (ref), squadExternalContractContext (ref), useLocalization (ref), useSelector (ref), useCurrentSquadId (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), fFlagSquadsPresenceStoreMigration (ref), var8 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), foundation (ref), image (ref), regroupTextTruncationFix (ref), buttonSize (ref), buttonVariant (ref), loggerModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), eventNamesModule (ref), rbxAnalyticsService (ref), squadToastActionsAndStates (ref), squadRegroupEntryPoint (ref)
 	local var9 = useDispatch()
 	local var10 = react.useContext(squadExternalContractContext)
@@ -36,12 +36,12 @@ return function(p0) --[[ line: 41 | named "SquadLobbyRegroupRow" ]]
 		Body = "Notifications.SquadRegroupPrompt.ToastLabel.JoinANewServer",
 		Join = "Notifications.SquadRegroupPrompt.ToastAction.Join"
 	})
-	local var12 = useSelector(react.useCallback(function(p1) --[[ line: 50 ]]
+	local var12 = useSelector(react.useCallback(function(p1)
 		return p1.Squad and (p1.Squad.Squad and p1.Squad.Squad.currentExperienceInvite)
 	end, {}))
 	local var13 = useCurrentSquadId()
 	local var14 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var13) else false
-	local var15 = if fFlagSquadsPresenceStoreMigration then var8(tostring(p0.localUserId)) else useSelector(react.useCallback(function(p2) --[[ line: 59 ]]
+	local var15 = if fFlagSquadsPresenceStoreMigration then var8(tostring(p0.localUserId)) else useSelector(react.useCallback(function(p2)
 		-- upvalues: p0 (ref)
 		return p2 and (p2.Squad and (p2.Squad.Presence and (p2.Squad.Presence.byUserId and p2.Squad.Presence.byUserId[tostring(p0.localUserId)])))
 	end, { p0.localUserId }))
@@ -84,14 +84,14 @@ return function(p0) --[[ line: 41 | named "SquadLobbyRegroupRow" ]]
 			size = buttonSize.Medium,
 			variant = buttonVariant.Standard,
 			isDisabled = if var12 == nil then var14 else true,
-			onActivated = react.useCallback(function() --[[ line: 129 ]]
+			onActivated = react.useCallback(function()
 				-- upvalues: var16 (ref), loggerModule (copy), var9 (ref), createExperienceInviteModule (copy), var10 (ref), squadExperienceInviteSource (copy), eventNamesModule (copy), var13 (ref), p0 (ref), fFlagSquadsPresenceStoreMigration (copy), var15 (ref), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
 				if var16 == nil then
 					loggerModule:warning("SquadRegroupEventReceiver: Join clicked but rootPlaceId is missing from local presence")
 					
 					return
 				end
-				var9(createExperienceInviteModule(tostring(var16), var10, squadExperienceInviteSource.Regroup)):andThen(function(p3) --[[ line: 141 ]]
+				var9(createExperienceInviteModule(tostring(var16), var10, squadExperienceInviteSource.Regroup)):andThen(function(p3)
 					-- upvalues: var10 (copy), eventNamesModule (copy), var13 (copy), p0 (copy), fFlagSquadsPresenceStoreMigration (copy), var15 (copy), rbxAnalyticsService (copy), squadToastActionsAndStates (copy), squadRegroupEntryPoint (copy)
 					var10.fireSquadAnalytics(eventNamesModule.SquadRegroupButtonClicked, {
 						clientTimestamp = os.time(),

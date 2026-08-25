@@ -9,11 +9,11 @@ local studioClientLogsTool = creatorAgentChatModule.StudioClientLogsTool
 local debug = creatorAgentChatModule.debug
 local awaitRequestState = toolControllerUtilsModule.awaitRequestState
 
-local function _(p0) --[[ line: 34 | named "getClientLogsReason" ]]
+local function _(p0)
 	return if typeof(p0) == "table" then if typeof(p0.reason) == "string" and p0.reason ~= "" then p0.reason else nil else nil
 end
 
-local function fetchLatestSavedVersion(p1) --[[ line: 41 ]]
+local function fetchLatestSavedVersion(p1)
 	-- upvalues: parent (ref)
 	if p1 == nil then
 		return nil
@@ -28,14 +28,14 @@ local function fetchLatestSavedVersion(p1) --[[ line: 41 ]]
 	return if typeof(var9) == "table" then tonumber(var9.version) else nil
 end
 
-return function(p2, p3, p4) --[[ line: 58 | named "createClientLogsController" ]]
+return function(p2, p3, p4)
 	-- upvalues: debug (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fetchLatestSavedVersion (ref), clientLogsCollectorModule (ref), awaitRequestState (ref), chatConstantsModule (ref), studioClientLogsTool (ref)
-	local function _() --[[ line: 63 | named "canHandleClientLogs" ]]
+	local function _()
 		-- upvalues: p4 (ref)
 		return if p4 ~= nil then p4() else true
 	end
 	
-	local function submitClientLogsResult(p5) --[[ line: 67 ]]
+	local function submitClientLogsResult(p5)
 		-- upvalues: debug (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fetchLatestSavedVersion (copy), p2 (ref), p4 (ref), p3 (ref), clientLogsCollectorModule (copy), awaitRequestState (copy), chatConstantsModule (copy)
 		local var13
 		debug.log("info", "ask_for_logs tool_result collecting", {
@@ -99,7 +99,7 @@ return function(p2, p3, p4) --[[ line: 58 | named "createClientLogsController" ]
 	end
 	
 	return {
-		syncClientLogsRequest = function(p6) --[[ line: 129 ]]
+		syncClientLogsRequest = function(p6)
 			-- upvalues: p4 (ref), studioClientLogsTool (copy), p3 (ref), submitClientLogsResult (ref)
 			if not (if p4 ~= nil then p4() else true) then
 				return false
@@ -117,7 +117,7 @@ return function(p2, p3, p4) --[[ line: 58 | named "createClientLogsController" ]
 				referenceId = var21,
 				reason = if typeof(var19) ~= "table" then if typeof(var19.reason) == "string" and var19.reason ~= "" then var19.reason else nil else nil
 			}
-			task.spawn(function() --[[ line: 148 ]]
+			task.spawn(function()
 				-- upvalues: submitClientLogsResult (copy), t (ref)
 				submitClientLogsResult(t)
 			end)

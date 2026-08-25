@@ -23,9 +23,9 @@ local t = {
 	JoinExperience = { buttonType = buttonTypes.Join }
 }
 
-local var4 = function() --[[ line: 41 ]] end
+local var4 = function() end
 
-local function _(p0, p1) --[[ line: 43 | named "isSupported" ]]
+local function _(p0, p1)
 	if not p0 then
 		return true
 	end
@@ -37,7 +37,7 @@ local function _(p0, p1) --[[ line: 43 | named "isSupported" ]]
 	return false
 end
 
-return function(p2, p3, p4, p5) --[[ line: 55 | named "mapServerActionsToRowCta" ]]
+return function(p2, p3, p4, p5)
 	-- upvalues: t (ref), var4 (ref), buttonTypes (ref), iconName (ref)
 	if not p2 or not p2.buttons then
 		return { primaryCta = nil, secondaryCta = nil }
@@ -65,7 +65,7 @@ return function(p2, p3, p4, p5) --[[ line: 55 | named "mapServerActionsToRowCta"
 				local var7 = if type.handlerKey then p3[type.handlerKey] else nil
 				type_1 = {
 					type = type.buttonType,
-					onActivated = if var7 then function() --[[ line: 74 ]]
+					onActivated = if var7 then function()
 						-- upvalues: var7 (ref), p4 (ref)
 						var7(p4)
 					end else var4,
@@ -81,7 +81,7 @@ return function(p2, p3, p4, p5) --[[ line: 55 | named "mapServerActionsToRowCta"
 					t_1 = {
 						type = buttonTypes.Dismiss,
 						icon = iconName.X,
-						onActivated = if dismiss then function() --[[ line: 91 ]]
+						onActivated = if dismiss then function()
 							-- upvalues: dismiss (ref), p4 (ref)
 							dismiss(p4)
 						end else var4

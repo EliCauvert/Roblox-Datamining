@@ -16,7 +16,7 @@ local t = {
 	[Enum.AvatarAssetType.EyelashAccessory] = "Eyelash"
 }
 
-local function getItemsFromFolder(p0, p1, p2, p3) --[[ line: 42 ]]
+local function getItemsFromFolder(p0, p1, p2, p3)
 	-- upvalues: getFFlagUploadMakeupSupportModule (ref), t (ref)
 	local t_1 = {}
 	
@@ -43,18 +43,18 @@ local function getItemsFromFolder(p0, p1, p2, p3) --[[ line: 42 ]]
 			})
 		end
 	end
-	table.sort(t_1, function(p4, p5) --[[ line: 92 ]]
+	table.sort(t_1, function(p4, p5)
 		return (p4.LayoutOrder or 0) < (p5.LayoutOrder or 0)
 	end)
 	
 	return t_1
 end
 
-return function(p6) --[[ line: 99 | named "MakeupPartGrid" ]]
+return function(p6)
 	-- upvalues: reactModule (ref), getItemsFromFolder (ref), t (ref), getFFlagUploadMakeupSupportModule (ref), constantsModule (ref), avatarItemCardModule (ref), itemTile (ref), defaultMetricsGridView (ref), gridMetrics (ref), vector2 (ref)
 	local var13, var14 = reactModule.useState({})
 	local var15 = p6.showAssetTypeInLabel == nil or p6.showAssetTypeInLabel
-	reactModule.useEffect(function() --[[ line: 104 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p6 (ref), var14 (ref), getItemsFromFolder (copy), var15 (ref), t (copy)
 		if p6.makeupFolder then
 			var14(getItemsFromFolder(p6.makeupFolder, p6.name, p6.makeupEntries, var15))
@@ -83,7 +83,7 @@ return function(p6) --[[ line: 99 | named "MakeupPartGrid" ]]
 			}
 		})
 	end, { p6.makeupFolder, p6.singleDecal })
-	reactModule.useEffect(function() --[[ line: 139 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), getFFlagUploadMakeupSupportModule (copy), var15 (ref), t (copy), p6 (ref), var14 (ref)
 		if var13[1] and var13[1].asset then
 			local t_1 = {}
@@ -120,11 +120,11 @@ return function(p6) --[[ line: 99 | named "MakeupPartGrid" ]]
 		LayoutOrder = p6.LayoutOrder
 	}, {
 		Grid = reactModule.createElement(defaultMetricsGridView, {
-			getItemHeight = function(p7) --[[ line: 198 ]]
+			getItemHeight = function(p7)
 				return p7 * 1.333333333333
 			end,
 			getItemMetrics = gridMetrics.makeCustomMetricsGetter({ minimumItemsPerRow = 2, minimumItemWidth = var16 }),
-			renderItem = reactModule.useCallback(function(p8) --[[ line: 177 ]]
+			renderItem = reactModule.useCallback(function(p8)
 				-- upvalues: reactModule (copy), avatarItemCardModule (copy), var16 (ref), itemTile (copy)
 				return if p8.asset then reactModule.createElement(avatarItemCardModule, {
 					asset = p8.asset,

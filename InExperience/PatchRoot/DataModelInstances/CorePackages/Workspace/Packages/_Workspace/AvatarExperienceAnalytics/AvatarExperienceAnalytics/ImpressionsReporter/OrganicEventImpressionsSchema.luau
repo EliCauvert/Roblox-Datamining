@@ -44,10 +44,10 @@ local t = {
 	})
 }
 setmetatable(t, {
-	__newindex = function(_, p0) --[[ line: 13 ]]
+	__newindex = function(_, p0)
 		error("Attempt to insert into impressions schemas: " .. p0)
 	end,
-	__index = function(p1, p2) --[[ line: 17 ]]
+	__index = function(p1, p2)
 		if not p2 then
 			warn("Nil ImpressionsSchema lookup")
 			

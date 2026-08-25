@@ -2,7 +2,7 @@
 local useChatPlacementContext = chatPlacementContextModule.useChatPlacementContext
 local isPlacementInExperience = chatPlacementContextModule.isPlacementInExperience
 
-return function() --[[ line: 7 ]]
+return function()
 	-- upvalues: useChatPlacementContext (ref), isPlacementInExperience (ref)
 	return isPlacementInExperience(useChatPlacementContext().chatPlacement)
 end

@@ -6,22 +6,22 @@ local t = {
 	cubic = Enum.EasingStyle.Cubic
 }
 
-local function _(p0) --[[ line: 32 | named "stopTween" ]]
+local function _(p0)
 	if p0.current then
 		p0.current:Cancel()
 		p0.current = nil
 	end
 end
 
-local _ = function(p1, p2) --[[ line: 40 | named "isApproximatelyEqual" ]]
+local _ = function(p1, p2)
 	return math.abs(p1 - p2) < 0.001
 end
 
-return function(p3) --[[ line: 44 | named "useAnimation" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), t (ref), tweenService (ref)
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p3 (ref), var4 (ref), t (copy), var3 (ref), tweenService (copy)
 		local startOffset = p3.startOffset
 		local endOffset = p3.endOffset or 0
@@ -39,7 +39,7 @@ return function(p3) --[[ line: 44 | named "useAnimation" ]]
 			var3.current = nil
 		end
 		var3.current = tweenService:Create(numberValue, tweenInfo, { Value = endOffset })
-		local var10 = numberValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ line: 75 ]]
+		local var10 = numberValue:GetPropertyChangedSignal("Value"):Connect(function()
 			-- upvalues: numberValue (ref), var4 (copy), p3 (copy)
 			local value = numberValue.Value
 			
@@ -50,7 +50,7 @@ return function(p3) --[[ line: 44 | named "useAnimation" ]]
 		end)
 		
 		if var3.current then
-			var3.current.Completed:Connect(function() --[[ line: 84 ]]
+			var3.current.Completed:Connect(function()
 				-- upvalues: var10 (ref), numberValue (ref), var3 (copy), var4 (copy)
 				var10:Disconnect()
 				numberValue:Destroy()
@@ -59,7 +59,7 @@ return function(p3) --[[ line: 44 | named "useAnimation" ]]
 			end)
 			var3.current:Play()
 		end
-		return function() --[[ line: 93 ]]
+		return function()
 			-- upvalues: var10 (ref), var3 (copy), numberValue (ref), var4 (copy)
 			var10:Disconnect()
 			

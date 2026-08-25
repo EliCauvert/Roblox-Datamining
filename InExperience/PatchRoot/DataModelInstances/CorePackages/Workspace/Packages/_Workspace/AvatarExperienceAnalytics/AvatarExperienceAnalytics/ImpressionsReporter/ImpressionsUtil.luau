@@ -1,5 +1,5 @@
 ﻿return {
-	writeItemAttributes = function(p0, p1, p2) --[[ line: 58 ]]
+	writeItemAttributes = function(p0, p1, p2)
 		if not p0 then
 			warn("Impressions schema is nil")
 			
@@ -13,7 +13,7 @@
 			end
 		end
 	end,
-	buildSchema = function(p3, p4) --[[ line: 74 ]]
+	buildSchema = function(p3, p4)
 		local t = {}
 		local groupBy = p4.groupBy
 		
@@ -52,7 +52,7 @@
 			surfaceSpecificAnalyticsMetadata = p4.surfaceSpecificAnalyticsMetadata
 		}
 	end,
-	packEvents = function(p5, p6) --[[ line: 116 ]]
+	packEvents = function(p5, p6)
 		if not p5 then
 			warn("Impressions schema nil")
 			

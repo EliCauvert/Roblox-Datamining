@@ -1,6 +1,6 @@
 ﻿local replaced = string.gsub(string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl, ".*://", ""), "/.*", ""), "^www%.", "")
 local t = {
-	new = function(p0, p1) --[[ line: 24 ]]
+	new = function(p0, p1)
 		-- upvalues: replaced (write)
 		assert(type(p0) == "string", "UrlBase.new: `name` should be a string")
 		

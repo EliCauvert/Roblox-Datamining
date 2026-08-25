@@ -15,17 +15,17 @@ local conversationModalModule = require(script.Parent.ConversationModal)
 local appChatFAEBannerModule = require(appChat.Components.FaeBanner.AppChatFAEBanner)
 local t = {
 	shouldShowLegacyBottomModal = false,
-	onHeightChanged = function(_) --[[ line: 34 ]] end
+	onHeightChanged = function(_) end
 }
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "ConversationBottomModalContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), reactModule (ref), conversationBottomModal (ref), appChatFAEBannerModule (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), conversationModalModule (ref), foundationModule (ref)
 	local var10 = cryoModule.Dictionary.union(t, p0)
-	local var11 = useSelector(function(p1) --[[ line: 41 ]]
+	local var11 = useSelector(function(p1)
 		-- upvalues: getDeepValue2Module (copy), var10 (ref), modalConfigurationModule (copy)
 		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationBottomModals.{var10.conversationId}`) or modalConfigurationModule.default
 	end)
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 46 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var10 (ref)
 		var10.onHeightChanged(p2.AbsoluteSize.Y)
 	end, { var10.onHeightChanged })

@@ -4,7 +4,7 @@ local customFieldsModule = require(script.Parent.customFields)
 
 return {
 	customFields = customFieldsModule,
-	reportNewDevtoolsConnection = function() --[[ line: 12 ]]
+	reportNewDevtoolsConnection = function()
 		-- upvalues: reportCounterModule (ref), customFieldsModule (ref)
 		reportCounterModule({
 			eventName = "react_new_devtools_connection",
@@ -14,7 +14,7 @@ return {
 			customFields = customFieldsModule
 		})
 	end,
-	reportFailedDevtoolsConnection = function(p0) --[[ line: 23 ]]
+	reportFailedDevtoolsConnection = function(p0)
 		-- upvalues: reportCounterModule (ref), object (ref), customFieldsModule (ref)
 		reportCounterModule({
 			eventName = "react_failed_devtools_connection",

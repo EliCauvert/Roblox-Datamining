@@ -37,37 +37,37 @@ local _ = require(parent.Types)
 local updateSelectedCapturesModule = require(parent.Actions.UpdateSelectedCaptures)
 local uDim2 = UDim2.fromOffset(32, 32)
 
-local function _(p0) --[[ line: 66 | named "getItemsPerRow" ]]
+local function _(p0)
 	return math.clamp(math.floor(p0 / 90), 1, 3)
 end
 
-local _ = function(p1, p2) --[[ line: 70 | named "getGalleryItemSize" ]]
+local _ = function(p1, p2)
 	local clampedValue = math.clamp(math.floor(p2 / 90), 1, 3)
 	local var23 = (p2 - (clampedValue - 1) * 4) / clampedValue
 	
 	return Vector2.new(math.floor(var23), math.floor(var23 * p1))
 end
 
-local function renderItem(p3, p4) --[[ line: 80 ]]
+local function renderItem(p3, p4)
 	-- upvalues: reactModule (ref), captureManagerItemModule (ref)
 	return reactModule.createElement(captureManagerItemModule, { capture = p3, captureIndex = p4 })
 end
 
-return function(_) --[[ line: 87 ]]
+return function(_)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useTopbarInsetHeightModule (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), useState (ref), useScreenSize (ref), useCallback (ref), captureManagerClosedModule (ref), deleteCapturesModule (ref), updateSelectedCapturesModule (ref), eventNamesModule (ref), dashModule (ref), view (ref), imageSetButton (ref), images (ref), uDim2 (ref), text (ref), scrollView (ref), scrollBarVisibility (ref), gridView (ref), renderItem (ref), showMoreButtonModule (ref), captureManagerCTAContainerModule (ref), deleteWarningModalModule (ref), permissionModalModule (ref), toastContainerModule (ref)
 	local var24 = useAnalyticsModule()
 	local var25 = useDispatch()
 	local var26 = useStyle()
 	local var27 = useTopbarInsetHeightModule()
-	local var28 = useSelector(function(p5) --[[ line: 94 ]]
+	local var28 = useSelector(function(p5)
 		-- upvalues: constantsModule (copy)
 		return p5[constantsModule.RoduxKey].Captures
 	end)
-	local var29 = useSelector(function(p6) --[[ line: 98 ]]
+	local var29 = useSelector(function(p6)
 		-- upvalues: constantsModule (copy)
 		return p6[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
-	local var30 = useSelector(function(p7) --[[ line: 102 ]]
+	local var30 = useSelector(function(p7)
 		-- upvalues: constantsModule (copy)
 		return p7[constantsModule.RoduxKey].CaptureManager.IsOpen
 	end)
@@ -82,34 +82,34 @@ return function(_) --[[ line: 87 ]]
 	local var39, var40 = reactModule.useState(24)
 	local var41 = if #var29 == 0 then var31.selectAllAction else var31.cancelSelectAllAction
 	local var42 = useScreenSize()
-	reactModule.useEffect(function() --[[ line: 121 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), var34 (ref)
 		if var32.current then
 			var34(var32.current.AbsoluteSize)
 		end
 	end, {})
-	local var43 = useCallback(function(p8) --[[ line: 127 ]]
+	local var43 = useCallback(function(p8)
 		-- upvalues: var34 (ref)
 		var34(p8.AbsoluteSize)
 	end, {})
-	local var44 = useCallback(function() --[[ line: 131 ]]
+	local var44 = useCallback(function()
 		-- upvalues: var36 (ref), var25 (ref), captureManagerClosedModule (copy)
 		var36(false)
 		var25(captureManagerClosedModule())
 	end, {})
-	local var45 = useCallback(function() --[[ line: 136 ]]
+	local var45 = useCallback(function()
 		-- upvalues: var38 (ref)
 		var38(true)
 	end, {})
-	local var46 = useCallback(function() --[[ line: 140 ]]
+	local var46 = useCallback(function()
 		-- upvalues: var38 (ref)
 		var38(false)
 	end, {})
-	local var47 = useCallback(function() --[[ line: 144 ]]
+	local var47 = useCallback(function()
 		-- upvalues: var25 (ref), deleteCapturesModule (copy), var29 (ref)
 		var25(deleteCapturesModule(var29))
 	end, { var29 })
-	local var48 = useCallback(function() --[[ line: 148 ]]
+	local var48 = useCallback(function()
 		-- upvalues: var29 (ref), var25 (ref), updateSelectedCapturesModule (copy), var28 (ref), var24 (ref), eventNamesModule (copy)
 		if #var29 == 0 then
 			var25(updateSelectedCapturesModule(var28))
@@ -119,11 +119,11 @@ return function(_) --[[ line: 87 ]]
 		end
 		var25(updateSelectedCapturesModule({}))
 	end, { var29, var28 })
-	local var49 = reactModule.useCallback(function() --[[ line: 157 ]]
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: var40 (ref), var39 (ref)
 		var40(var39 + 24)
 	end, { var39 })
-	local var50 = reactModule.useMemo(function() --[[ line: 161 ]]
+	local var50 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref), var39 (ref), dashModule (copy)
 		return dashModule.slice(var28, 1, math.min(#var28, var39))
 	end, { var28, var39 })

@@ -20,15 +20,15 @@ local t_1 = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0, p1, p2, p3) --[[ line: 33 | named "useGameTileOverflowMenuFocusNavigation" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (ref), reactFocusNavigationModule (ref), t (ref), t_1 (ref), getInputModeStore (ref), responsiveModule (ref), guiService (ref), luaAppGameTileOverflowMenuSelectionCloseFix (ref)
 	local var11, var12 = reactModule.useState(nil)
 	local var13 = reactModule.useRef(false)
-	local var14, var15 = reactModule.useMemo(function() --[[ line: 42 ]]
+	local var14, var15 = reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), getOverflowMenuSignalStore (copy), p0 (ref), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (copy), p3 (ref)
 		return {
 			[focusNavigationEventNameEnum.OpenQuickMenu] = {
-				handler = inputHandlersModule.onRelease(function() --[[ line: 45 ]]
+				handler = inputHandlersModule.onRelease(function()
 					-- upvalues: getOverflowMenuSignalStore (copy), p0 (copy), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (copy), p3 (copy)
 					getOverflowMenuSignalStore().openMenu(p0)
 					
@@ -39,7 +39,7 @@ return function(p0, p1, p2, p3) --[[ line: 33 | named "useGameTileOverflowMenuFo
 			}
 		}, {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function() --[[ line: 55 ]]
+				handler = inputHandlersModule.onRelease(function()
 					-- upvalues: getOverflowMenuSignalStore (copy), p0 (copy), fFlagLuaAppFixExplicitFeedbackConsoleTelemetry (copy), p3 (copy)
 					getOverflowMenuSignalStore().closeMenu(p0)
 					
@@ -55,26 +55,26 @@ return function(p0, p1, p2, p3) --[[ line: 33 | named "useGameTileOverflowMenuFo
 	})
 	local var16 = reactFocusNavigationModule.useEventHandlerMap(var14, reactFocusNavigationModule.useEventMap(t))
 	local var17 = reactFocusNavigationModule.useEventHandlerMap(var15, reactFocusNavigationModule.useEventMap(t_1))
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), p2 (ref)
 		if var16 and p2 then
 			var16(p2.current)
 		end
 	end, { var16, p2 })
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var11 (ref)
 		if var17 then
 			var17(var11)
 		end
 	end, { var17, var11 })
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getInputModeStore (copy), responsiveModule (copy), p1 (ref), var11 (ref), guiService (copy)
 		if getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional and p1 and var11 then
 			guiService:Select(var11)
 		end
 	end, { var11 })
 	local var18 = reactModule.useRef(p1)
-	reactModule.useEffect(function() --[[ line: 94 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), p1 (ref), var13 (ref), luaAppGameTileOverflowMenuSelectionCloseFix (copy), getOverflowMenuSignalStore (copy), p0 (ref), guiService (copy), p2 (ref)
 		if var18.current ~= p1 then
 			var18.current = p1
@@ -105,7 +105,7 @@ return function(p0, p1, p2, p3) --[[ line: 33 | named "useGameTileOverflowMenuFo
 		if luaAppGameTileOverflowMenuSelectionCloseFix then p0 else nil,
 		if luaAppGameTileOverflowMenuSelectionCloseFix then p2 else nil
 	})
-	local var19 = reactModule.useCallback(function() --[[ line: 128 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), guiService (copy), var13 (ref), getOverflowMenuSignalStore (copy), p0 (ref)
 		if var11 and guiService.SelectedCoreObject and guiService.SelectedCoreObject:IsDescendantOf(var11) then
 			var13.current = true
@@ -116,12 +116,12 @@ return function(p0, p1, p2, p3) --[[ line: 33 | named "useGameTileOverflowMenuFo
 			getOverflowMenuSignalStore().closeMenu(p0)
 		end
 	end, { var11, p0 })
-	reactModule.useLayoutEffect(function() --[[ line: 139 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: guiService (copy), var19 (ref)
 		local var21 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(var19)
 		var19()
 		
-		return function() --[[ line: 143 ]]
+		return function()
 			-- upvalues: var21 (ref)
 			if var21 then
 				var21:Disconnect()

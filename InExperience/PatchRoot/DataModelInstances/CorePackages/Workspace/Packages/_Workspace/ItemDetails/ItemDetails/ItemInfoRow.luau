@@ -12,7 +12,7 @@ local pushRightSmall = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRi
 local vector2 = Vector2.new(14, 14)
 local uDim2 = UDim2.new(0.3, 0, 0.8, 0)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 47 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useStyle (ref), useSelectionCursor (ref), cursorKind (ref), vector2 (ref), focusable (ref), reactModule (ref), verifiedBadgesModule (ref), skeleton (ref), uDim2 (ref), imageSetLabel (ref), pushRightSmall (ref)
 	local layoutOrder = p0.LayoutOrder
 	local infoName = p0.infoName

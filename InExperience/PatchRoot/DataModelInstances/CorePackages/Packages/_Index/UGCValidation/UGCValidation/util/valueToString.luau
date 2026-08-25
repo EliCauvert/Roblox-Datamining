@@ -3,13 +3,13 @@ local cryoModule = require(parent.Parent.Cryo)
 local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.getFFlagUGCValidationEyebrowEyelashSupport)
 local UGCValidationValueToStringVector3Precision = game:DefineFastFlag("UGCValidationValueToStringVector3Precision", false)
 
-local function _(value, p0) --[[ line: 9 | named "round" ]]
+local function _(value, p0)
 	local var4 = 10 ^ (p0 or 0)
 	
 	return math.floor(value * var4 + 0.5) / var4
 end
 
-local function valueToString(p1) --[[ line: 14 ]]
+local function valueToString(p1)
 	-- upvalues: cryoModule (ref), UGCValidationValueToStringVector3Precision (ref), getFFlagUGCValidationEyebrowEyelashSupportModule (ref), valueToString (ref)
 	local var5 = typeof(p1)
 	

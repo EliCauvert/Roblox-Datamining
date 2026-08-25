@@ -12,22 +12,22 @@ local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubs
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 
-local function noOp() --[[ line: 30 ]] end
+local function noOp() end
 
 local repeated = string.rep("W", 20)
 
-return reactModule.memo(function(p0) --[[ line: 36 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useUserDataModule (ref), foundationModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), reactModule (ref), text (ref), repeated (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), noOp (ref)
 	local var10 = useUserDataModule(p0.userId)
 	local var11 = foundationModule.Hooks.useTokens()
 	local var12 = useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then p0.userId else nil)
 	local var13 = getSelectedUsersStoreModule(false)
 	local var14 = useSignalState(var13.getIsUserSelected(p0.userId))
-	local var15 = reactModule.useCallback(function() --[[ line: 45 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), p0 (ref)
 		var13.toggleUserId(p0.userId)
 	end, { p0.userId })
-	local var16 = reactModule.useMemo(function() --[[ line: 49 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: text (copy), repeated (copy), var11 (ref)
 		local textBounds = text.GetTextBounds(repeated, var11.Typography.TitleLarge.Font, var11.Typography.TitleLarge.FontSize, Vector2.zero)
 		
@@ -36,7 +36,7 @@ return reactModule.memo(function(p0) --[[ line: 36 ]]
 		var11.Typography.TitleLarge.Font,
 		var11.Typography.TitleLarge.FontSize
 	})
-	local var17 = reactModule.useMemo(function() --[[ line: 59 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: text (copy), var11 (ref)
 		local textBounds = text.GetTextBounds("Roblox Studio", var11.Typography.CaptionMedium.Font, var11.Typography.CaptionMedium.FontSize, Vector2.zero)
 		
@@ -52,7 +52,7 @@ return reactModule.memo(function(p0) --[[ line: 36 ]]
 		local var19, var20 = reactModule.useState("")
 		var18 = var19
 		local var21 = var20
-		reactModule.__subscribeToBinding(var10.username, function(p1) --[[ line: 72 ]]
+		reactModule.__subscribeToBinding(var10.username, function(p1)
 			-- upvalues: var21 (write)
 			var21(p1)
 		end)
@@ -79,7 +79,7 @@ return reactModule.memo(function(p0) --[[ line: 36 ]]
 			DisplayNameRow = if fFlagEnableBlackbirdCheck then reactModule.createElement(foundationModule.View, {
 				tag = "row auto-xy align-y-center gap-xsmall",
 				LayoutOrder = 1,
-				Visible = var10.isLoading:map(function(p2) --[[ line: 106 ]]
+				Visible = var10.isLoading:map(function(p2)
 					return not p2
 				end)
 			}, {
@@ -99,7 +99,7 @@ return reactModule.memo(function(p0) --[[ line: 36 ]]
 				tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 				LayoutOrder = 1,
 				Text = var10.combinedName,
-				Visible = var10.isLoading:map(function(p3) --[[ line: 130 ]]
+				Visible = var10.isLoading:map(function(p3)
 					return not p3
 				end)
 			}) else nil,
@@ -107,7 +107,7 @@ return reactModule.memo(function(p0) --[[ line: 36 ]]
 				tag = "auto-xy text-caption-medium text-truncate-end content-muted",
 				LayoutOrder = 3,
 				Text = var10.presenceText,
-				Visible = var10.isLoading:map(function(p4) --[[ line: 139 ]]
+				Visible = var10.isLoading:map(function(p4)
 					return not p4
 				end)
 			})

@@ -10,7 +10,7 @@ local var3 = tModule.strictInterface({
 	uid = tModule.string
 })
 
-return function(p0, p1) --[[ line: 17 ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), gameVoteThrottleHundrethsPercent (ref), telemetryService (ref)
 	local var4, var5 = var3(p0)
 	

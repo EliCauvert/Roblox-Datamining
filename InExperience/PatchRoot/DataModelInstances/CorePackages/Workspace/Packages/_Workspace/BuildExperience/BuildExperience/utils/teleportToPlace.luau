@@ -2,7 +2,7 @@
 local playtestTeleportRemoteModule = require(script.Parent.playtestTeleportRemote)
 local var2 = nil
 
-local function _() --[[ line: 10 | named "getRemote" ]]
+local function _()
 	-- upvalues: var2 (write), robloxReplicatedStorageService (ref), playtestTeleportRemoteModule (ref)
 	if var2 == nil then
 		local remote_name = robloxReplicatedStorageService:WaitForChild(playtestTeleportRemoteModule.REMOTE_NAME, 1e999)
@@ -13,7 +13,7 @@ local function _() --[[ line: 10 | named "getRemote" ]]
 	return var2
 end
 
-return function(p0) --[[ line: 20 | named "teleportToPlace" ]]
+return function(p0)
 	-- upvalues: var2 (write), robloxReplicatedStorageService (ref), playtestTeleportRemoteModule (ref)
 	local var4
 	if var2 == nil then

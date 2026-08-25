@@ -7,17 +7,17 @@ local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop
 local _ = require(inExperienceShop.Types)
 local _ = require(script.Parent.ShopHomePageView)
 
-return function(p0) --[[ line: 32 | named "useShopHomePageViewModel" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), signal (ref), categorySectionModule (ref)
 	local itemsPerRow = p0.itemsPerRow
-	local var4 = reactModule.useMemo(function() --[[ line: 34 ]]
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), signal (copy)
 		return if fFlagEnableInExperienceShopUnifiedLoggingModule then signal.new() else nil
 	end, {})
 	
 	return {
 		data = p0.sections,
-		renderItem = reactModule.useCallback(function(p1) --[[ line: 48 ]]
+		renderItem = reactModule.useCallback(function(p1)
 			-- upvalues: reactModule (copy), categorySectionModule (copy), itemsPerRow (ref), p0 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var4 (ref)
 			local item = p1.item
 			
@@ -42,12 +42,12 @@ return function(p0) --[[ line: 32 | named "useShopHomePageViewModel" ]]
 			p0.Visible,
 			var4
 		}),
-		keyExtractor = reactModule.useCallback(function(p2) --[[ line: 76 ]]
+		keyExtractor = reactModule.useCallback(function(p2)
 			return p2.id
 		end, {}),
 		LayoutOrder = p0.LayoutOrder,
 		Visible = p0.Visible,
-		onScroll = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_) --[[ line: 41 ]]
+		onScroll = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_)
 			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var4 (ref)
 			if fFlagEnableInExperienceShopUnifiedLoggingModule and var4 then
 				var4:fire()

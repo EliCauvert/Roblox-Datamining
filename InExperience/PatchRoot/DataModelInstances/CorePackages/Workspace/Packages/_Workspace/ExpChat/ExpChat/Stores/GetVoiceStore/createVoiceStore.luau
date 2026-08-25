@@ -4,22 +4,22 @@ local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local VOICE_STATE = require(parent.VoiceChat).Constants.VOICE_STATE
 
-return function() --[[ line: 26 | named "createVoiceStore" ]]
+return function()
 	-- upvalues: createSignal (ref), createComputed (ref), VOICE_STATE (ref)
 	local var1, var2 = createSignal({})
 	local t = {}
 	
-	local function _(p0) --[[ line: 32 | named "getKey" ]]
+	local function _(p0)
 		return tostring(p0)
 	end
 	
 	return {
-		getOrCreateVoiceState = function(p1) --[[ line: 36 ]]
+		getOrCreateVoiceState = function(p1)
 			-- upvalues: t (ref), createComputed (copy), var1 (ref)
 			local var4 = tostring(p1)
 			
 			if not t[var4] then
-				t[var4] = createComputed(function(p2) --[[ line: 39 ]]
+				t[var4] = createComputed(function(p2)
 					-- upvalues: var1 (copy), var4 (ref)
 					return var1(p2)[var4]
 				end)
@@ -27,10 +27,10 @@ return function() --[[ line: 26 | named "createVoiceStore" ]]
 			return t[var4]
 		end,
 		getVoiceParticipants = var1,
-		handleVoiceParticipantAdded = function(p3) --[[ line: 48 ]]
+		handleVoiceParticipantAdded = function(p3)
 			-- upvalues: var2 (ref), VOICE_STATE (copy)
 			local var5 = tostring(p3)
-			var2(function(p4) --[[ line: 51 ]]
+			var2(function(p4)
 				-- upvalues: var5 (ref), VOICE_STATE (copy)
 				local cloned = table.clone(p4)
 				cloned[var5] = cloned[var5] or VOICE_STATE.HIDDEN
@@ -38,10 +38,10 @@ return function() --[[ line: 26 | named "createVoiceStore" ]]
 				return cloned
 			end)
 		end,
-		handleVoiceParticipantRemoved = function(p5) --[[ line: 61 ]]
+		handleVoiceParticipantRemoved = function(p5)
 			-- upvalues: var2 (ref), t (ref)
 			local var7 = tostring(p5)
-			var2(function(p6) --[[ line: 64 ]]
+			var2(function(p6)
 				-- upvalues: t (copy), var7 (ref)
 				if t[var7] then
 					t[var7] = nil
@@ -52,9 +52,9 @@ return function() --[[ line: 26 | named "createVoiceStore" ]]
 				return cloned
 			end)
 		end,
-		handleVoiceParticipantsChanged = function(p7) --[[ line: 75 ]]
+		handleVoiceParticipantsChanged = function(p7)
 			-- upvalues: var2 (ref), VOICE_STATE (copy)
-			var2(function(p8) --[[ line: 76 ]]
+			var2(function(p8)
 				-- upvalues: p7 (ref), VOICE_STATE (copy)
 				local cloned = table.clone(p8)
 				
@@ -75,10 +75,10 @@ return function() --[[ line: 26 | named "createVoiceStore" ]]
 				return cloned
 			end)
 		end,
-		handleVoiceStateChanged = function(p9, p10) --[[ line: 96 ]]
+		handleVoiceStateChanged = function(p9, p10)
 			-- upvalues: var2 (ref)
 			local var10 = tostring(p9)
-			var2(function(p11) --[[ line: 99 ]]
+			var2(function(p11)
 				-- upvalues: var10 (ref), p10 (ref)
 				if p11[var10] then
 					local cloned = table.clone(p11)

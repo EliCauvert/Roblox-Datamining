@@ -10,7 +10,7 @@ local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local var4 = reactModule.memo(function(p0) --[[ line: 28 ]]
+local var4 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), checkbox (ref)
 	local capture = p0.capture
 	local var5 = p0.isDisabled == true
@@ -23,7 +23,7 @@ local var4 = reactModule.memo(function(p0) --[[ line: 28 ]]
 		Image = "",
 		LayoutOrder = p0.LayoutOrder,
 		Size = UDim2.fromScale(1, 1),
-		[reactModule.Event.Activated] = reactModule.useCallback(function() --[[ line: 46 ]]
+		[reactModule.Event.Activated] = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			p0.onPreview()
 		end, { p0.onPreview })
@@ -52,7 +52,7 @@ local var4 = reactModule.memo(function(p0) --[[ line: 28 ]]
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
 				isChecked = p0.isSelected,
-				onActivated = reactModule.useCallback(function() --[[ line: 40 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var5 (ref), p0 (ref)
 					if not var5 then
 						p0.onToggle()
@@ -64,7 +64,7 @@ local var4 = reactModule.memo(function(p0) --[[ line: 28 ]]
 	})
 end)
 
-return reactModule.memo(function(p1) --[[ line: 107 ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), reactModule (ref), getCaptureKeyModule (ref), var4 (ref), view (ref), text (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var6 = 0
 	
@@ -105,11 +105,11 @@ return reactModule.memo(function(p1) --[[ line: 107 ]]
 			capture = v_1,
 			isSelected = var11,
 			isDisabled = var7 and not var11,
-			onToggle = function() --[[ line: 153 ]]
+			onToggle = function()
 				-- upvalues: p1 (ref), v_1 (ref)
 				p1.onToggle(v_1)
 			end,
-			onPreview = function() --[[ line: 156 ]]
+			onPreview = function()
 				-- upvalues: p1 (ref), v_1 (ref)
 				p1.onPreview(v_1)
 			end,
@@ -134,7 +134,7 @@ return reactModule.memo(function(p1) --[[ line: 107 ]]
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				scrollBarVisibility = scrollBarVisibility.Auto
 			},
-			onCanvasPositionChanged = function(p2) --[[ line: 180 ]]
+			onCanvasPositionChanged = function(p2)
 				-- upvalues: p1 (ref)
 				if not p1.hasMore or p1.isLoading then return end
 				local y = p2.AbsoluteCanvasSize.Y

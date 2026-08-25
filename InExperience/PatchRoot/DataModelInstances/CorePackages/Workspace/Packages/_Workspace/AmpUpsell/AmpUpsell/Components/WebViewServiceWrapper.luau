@@ -5,7 +5,7 @@ local webViewService = game:GetService("WebViewService")
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 47 ]]
+function t.new(p0)
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref), webViewService (ref), t (ref)
 	local t_1 = {}
 	
@@ -16,15 +16,15 @@ function t.new(p0) --[[ line: 47 ]]
 	t_1.url = p0.url
 	t_1.closeCallbackConnection = nil
 	local tbl = setmetatable(t_1, t)
-	tbl:setCloseCallback(p0.closeCallback or function() --[[ line: 62 ]] end)
+	tbl:setCloseCallback(p0.closeCallback or function() end)
 	
 	return tbl
 end
 
-function t:setCloseCallback(p1) --[[ line: 67 ]]
+function t:setCloseCallback(p1)
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
 	if getFFlagEnableUnifiedWebViews() then
-		function self.closeCallback() --[[ line: 72 ]]
+		function self.closeCallback()
 			-- upvalues: self (ref), p1 (ref)
 			self:close()
 			
@@ -38,11 +38,11 @@ function t:setCloseCallback(p1) --[[ line: 67 ]]
 	self.closeCallback = p1
 end
 
-function t:setOpenCallback(p2) --[[ line: 85 ]]
+function t:setOpenCallback(p2)
 	self.openCallback = p2
 end
 
-function t:open() --[[ line: 89 ]]
+function t:open()
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref), browserService (ref), httpService (ref)
 	if self.openCallback ~= nil then
 		self.openCallback()
@@ -68,7 +68,7 @@ function t:open() --[[ line: 89 ]]
 	}))
 end
 
-function t:close() --[[ line: 117 ]]
+function t:close()
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
 	if getFFlagEnableUnifiedWebViews() then
 		self.webViewService:CloseWindow()

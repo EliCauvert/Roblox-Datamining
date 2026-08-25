@@ -16,10 +16,10 @@ end
 local VRComfortSettingsPage = roact.PureComponent:extend("VRComfortSettingsPage")
 VRComfortSettingsPage.validateProps = t.strictInterface({ closeMenu = t.callback, pageTitle = t.string })
 
-local function _() --[[ line: 25 | named "createLayoutOrderGenerator" ]]
+local function _()
 	local var7 = 0
 	
-	return function() --[[ line: 27 ]]
+	return function()
 		-- upvalues: var7 (write)
 		var7 += 1
 		
@@ -27,15 +27,15 @@ local function _() --[[ line: 25 | named "createLayoutOrderGenerator" ]]
 	end
 end
 
-function VRComfortSettingsPage.render(p0) --[[ line: 33 ]]
+function VRComfortSettingsPage.render(p0)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), pageModule (ref), comfortSettingsEntryModule (write), VRComfortAutoToggleEntryModule (write)
-	return withFoundationOrUIBloxStyle(function(_) --[[ line: 34 ]]
+	return withFoundationOrUIBloxStyle(function(_)
 		return {}
-	end, function(_) --[[ line: 36 ]]
+	end, function(_)
 		-- upvalues: roact (copy), pageModule (copy), p0 (ref), comfortSettingsEntryModule (copy), VRComfortAutoToggleEntryModule (copy)
 		local var8 = 0
 		
-		local var9 = function() --[[ line: 27 ]]
+		local var9 = function()
 			-- upvalues: var8 (write)
 			var8 += 1
 			
@@ -77,10 +77,10 @@ function VRComfortSettingsPage.render(p0) --[[ line: 33 ]]
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1) --[[ line: 84 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p1)
 	-- upvalues: closeMenuModule (ref)
 	return {
-		closeMenu = function() --[[ line: 86 ]]
+		closeMenu = function()
 			-- upvalues: p1 (ref), closeMenuModule (copy)
 			p1(closeMenuModule)
 		end

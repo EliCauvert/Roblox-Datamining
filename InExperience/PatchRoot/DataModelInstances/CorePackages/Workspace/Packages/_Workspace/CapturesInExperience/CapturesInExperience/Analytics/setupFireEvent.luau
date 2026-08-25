@@ -7,7 +7,7 @@ local _ = require(script.Parent.EventNames)
 local eventStreamActionListModule = require(script.Parent.EventStreamActionList)
 local telemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: fireEventStream (ref), eventStreamActionListModule (ref), fireDiagCounter (ref), diagActionListModule (ref), fireTelemetry (ref), telemetryActionListModule (ref)
 	local var4 = fireEventStream({
 		eventStreamImpl = p0.analytics.EventStream,
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 15 ]]
 		eventList = telemetryActionListModule
 	})
 	
-	return function(p1, p2) --[[ line: 35 ]]
+	return function(p1, p2)
 		-- upvalues: diagActionListModule (copy), var5 (ref), telemetryActionListModule (copy), var6 (ref), eventStreamActionListModule (copy), var4 (ref)
 		if diagActionListModule[p1] then
 			var5(p1)

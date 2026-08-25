@@ -8,7 +8,7 @@ local t = {
 	adData = nil
 }
 
-return function(p0, p1) --[[ line: 24 ]]
+return function(p0, p1)
 	-- upvalues: t (ref), setPlayWithRewardStateModule (ref)
 	return if p1.type == setPlayWithRewardStateModule.name then {
 		flowId = p1.flowId,

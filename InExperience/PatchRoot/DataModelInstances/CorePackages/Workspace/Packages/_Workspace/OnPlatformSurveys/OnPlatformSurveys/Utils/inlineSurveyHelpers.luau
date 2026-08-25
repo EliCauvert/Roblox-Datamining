@@ -7,16 +7,16 @@ local inlineSurveyTypesModule = require(onPlatformSurveys.Types.InlineSurveyType
 local t = {}
 local t_1 = {}
 
-local function _(p0) --[[ line: 25 | named "trim" ]]
+local function _(p0)
 	return p0:gsub("^%s*(.-)%s*$", "%1")
 end
 
-local function isAnswerComplete(p1, p2) --[[ line: 30 ]]
+local function isAnswerComplete(p1, p2)
 	-- upvalues: inlineQuestionTypeModule (ref)
 	return p1.type == inlineQuestionTypeModule.Text or (if p1.type == inlineQuestionTypeModule.MultipleChoiceSingle then p2.choiceIds ~= nil and #p2.choiceIds == 1 else p1.type == inlineQuestionTypeModule.MultipleChoiceMulti and (p2.choiceIds ~= nil and #p2.choiceIds >= 1))
 end
 
-local function buildChoiceTexts(p3) --[[ line: 42 ]]
+local function buildChoiceTexts(p3)
 	-- upvalues: t_1 (ref)
 	local choiceTexts = p3.choiceTexts
 	
@@ -37,7 +37,7 @@ local function buildChoiceTexts(p3) --[[ line: 42 ]]
 	return if var15 then t else nil
 end
 
-local function buildResponse(p4, p5) --[[ line: 60 ]]
+local function buildResponse(p4, p5)
 	-- upvalues: inlineQuestionTypeModule (ref), fFlagInlineSurveyChoiceTextEntry (ref), buildChoiceTexts (ref)
 	if p4.type == inlineQuestionTypeModule.Text then
 		local var17 = (p5.text or ""):gsub("^%s*(.-)%s*$", "%1")
@@ -52,7 +52,7 @@ local function buildResponse(p4, p5) --[[ line: 60 ]]
 	}
 end
 
-local function buildSubmitPayload(p6, p7, p8, p9, p10) --[[ line: 80 ]]
+local function buildSubmitPayload(p6, p7, p8, p9, p10)
 	-- upvalues: t (ref), buildResponse (ref)
 	local t_1 = {}
 	
@@ -75,7 +75,7 @@ local function buildSubmitPayload(p6, p7, p8, p9, p10) --[[ line: 80 ]]
 	}
 end
 
-local function canSubmitAll(p11, p12) --[[ line: 108 ]]
+local function canSubmitAll(p11, p12)
 	-- upvalues: t (ref), inlineQuestionTypeModule (ref)
 	for i, v in p11 do
 		if v.required == true then
@@ -109,7 +109,7 @@ local function canSubmitAll(p11, p12) --[[ line: 108 ]]
 	return true
 end
 
-local function mergeCurrentAnswerIntoBatch(p13, p14, p15) --[[ line: 121 ]]
+local function mergeCurrentAnswerIntoBatch(p13, p14, p15)
 	local cloned = table.clone(p13)
 	
 	if p14 ~= nil then
@@ -118,7 +118,7 @@ local function mergeCurrentAnswerIntoBatch(p13, p14, p15) --[[ line: 121 ]]
 	return cloned
 end
 
-local _ = function(p16, p17) --[[ line: 133 | named "indexOfQuestion" ]]
+local _ = function(p16, p17)
 	for i, v in p16 do
 		if v.questionId == p17 then
 			return i
@@ -127,7 +127,7 @@ local _ = function(p16, p17) --[[ line: 133 | named "indexOfQuestion" ]]
 	return nil
 end
 
-local function resolveNextQuestionId(p18, p19) --[[ line: 144 ]]
+local function resolveNextQuestionId(p18, p19)
 	local choiceIds = p19.choiceIds
 	
 	if p18.choices ~= nil and choiceIds ~= nil and #choiceIds > 0 then
@@ -142,7 +142,7 @@ local function resolveNextQuestionId(p18, p19) --[[ line: 144 ]]
 	return p18.next
 end
 
-local function getVisitedQuestions(p20, p21) --[[ line: 184 ]]
+local function getVisitedQuestions(p20, p21)
 	-- upvalues: t (ref), resolveNextQuestionId (ref), inlineSurveyTypesModule (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -187,7 +187,7 @@ return {
 	isAnswerComplete = isAnswerComplete,
 	buildSubmitPayload = buildSubmitPayload,
 	canSubmitAll = canSubmitAll,
-	canAdvance = function(p22, p23, p24, p25) --[[ line: 210 ]]
+	canAdvance = function(p22, p23, p24, p25)
 		-- upvalues: fFlagInlineSurveyBranching (ref), resolveNextQuestionId (ref), inlineSurveyTypesModule (ref), getVisitedQuestions (ref), canSubmitAll (ref), inlineQuestionTypeModule (ref)
 		local var39
 		local var34 = p22[p23]
@@ -257,7 +257,7 @@ return {
 			end
 		end
 	end,
-	resolveNextIndex = function(p26, p27, p28) --[[ line: 162 ]]
+	resolveNextIndex = function(p26, p27, p28)
 		-- upvalues: resolveNextQuestionId (ref), inlineSurveyTypesModule (ref)
 		local var43 = p26[p27]
 		
@@ -286,7 +286,7 @@ return {
 		return if var46 <= #p26 then var46 else nil
 	end,
 	getVisitedQuestions = getVisitedQuestions,
-	isLastQuestion = function(p29, p30, p31) --[[ line: 202 ]]
+	isLastQuestion = function(p29, p30, p31)
 		-- upvalues: fFlagInlineSurveyBranching (ref), resolveNextQuestionId (ref), inlineSurveyTypesModule (ref)
 		if not fFlagInlineSurveyBranching then
 			return #p29 <= p30
@@ -321,7 +321,7 @@ return {
 		return var48 == nil
 	end,
 	mergeCurrentAnswerIntoBatch = mergeCurrentAnswerIntoBatch,
-	toggleChoice = function(p32, p33, p34) --[[ line: 229 ]]
+	toggleChoice = function(p32, p33, p34)
 		-- upvalues: t_1 (ref)
 		if not p34 then
 			return { p33 }

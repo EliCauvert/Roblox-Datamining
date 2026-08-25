@@ -15,13 +15,13 @@ local var3 = urlBuilder.new({
 })
 
 return {
-	updateUserSetting = function(value, p0, p1) --[[ line: 28 ]]
+	updateUserSetting = function(value, p0, p1)
 		-- upvalues: var3 (ref), promise (ref), fetch_1 (ref), httpService (ref), response (ref)
 		local var4 = var3()
 		
-		return promise.new(function(p2, p3) --[[ line: 30 ]]
+		return promise.new(function(p2, p3)
 			-- upvalues: fetch_1 (copy), var4 (ref), httpService (copy), value (ref), p0 (ref), p1 (ref), response (copy)
-			local ok, status = pcall(function() --[[ line: 31 ]]
+			local ok, status = pcall(function()
 				-- upvalues: fetch_1 (copy), var4 (copy), httpService (copy), value (copy), p0 (copy), p1 (copy), response (copy)
 				return fetch_1(var4, {
 					method = "POST",
@@ -31,7 +31,7 @@ return {
 						Accept = "application/json",
 						["rbx-audit-data"] = p1
 					}
-				}):catch(function(_) --[[ line: 43 ]]
+				}):catch(function(_)
 					-- upvalues: response (copy)
 					return response.error()
 				end):expect()
@@ -49,7 +49,7 @@ return {
 			p3(string.format("Got update user setting HTTP Response: %d - %s", status.status, status.statusText))
 		end)
 	end,
-	updateUserSettings = if require(parent_1.SharedFlags).FFlagLuaAppSduiUpdateUserSettingsAction then function(value, p4) --[[ line: 72 | named "updateUserSettings" ]]
+	updateUserSettings = if require(parent_1.SharedFlags).FFlagLuaAppSduiUpdateUserSettingsAction then function(value, p4)
 		-- upvalues: userSettingModule (ref), promise (ref), var3 (ref), fetch_1 (ref), httpService (ref), response (ref)
 		for i, v in value do
 			if not userSettingModule[i] then
@@ -58,9 +58,9 @@ return {
 		end
 		local var5 = var3()
 		
-		return promise.new(function(p5, p6) --[[ line: 80 ]]
+		return promise.new(function(p5, p6)
 			-- upvalues: fetch_1 (copy), var5 (ref), httpService (copy), value (ref), p4 (ref), response (copy)
-			local ok, status = pcall(function() --[[ line: 81 ]]
+			local ok, status = pcall(function()
 				-- upvalues: fetch_1 (copy), var5 (copy), httpService (copy), value (copy), p4 (copy), response (copy)
 				return fetch_1(var5, {
 					method = "POST",
@@ -70,7 +70,7 @@ return {
 						Accept = "application/json",
 						["rbx-audit-data"] = p4
 					}
-				}):catch(function(_) --[[ line: 91 ]]
+				}):catch(function(_)
 					-- upvalues: response (copy)
 					return response.error()
 				end):expect()

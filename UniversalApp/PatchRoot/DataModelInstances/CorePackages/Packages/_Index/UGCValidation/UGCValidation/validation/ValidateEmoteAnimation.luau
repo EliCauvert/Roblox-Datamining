@@ -18,7 +18,7 @@ local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent
 local getFFlagUGCValidateMigrateCurveAnimModule = require(parent.flags.getFFlagUGCValidateMigrateCurveAnim)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local t = {
-	validateStructure = function(p0) --[[ line: 48 ]]
+	validateStructure = function(p0)
 		-- upvalues: validateSingleInstanceModule (ref), validateInstanceTreeModule (ref), createEmoteSchemaModule (ref)
 		local var17, var18 = validateSingleInstanceModule(p0.instances or {}, p0)
 		
@@ -35,7 +35,7 @@ local t = {
 	end
 }
 
-local function reportError(p1, p2, p3) --[[ line: 33 ]]
+local function reportError(p1, p2, p3)
 	-- upvalues: analyticsModule (ref)
 	if p3.isServer ~= nil and p3.isServer then
 		error(p1)
@@ -45,7 +45,7 @@ local function reportError(p1, p2, p3) --[[ line: 33 ]]
 	return false, { p1 }
 end
 
-function t.validate(p4) --[[ line: 69 ]]
+function t.validate(p4)
 	-- upvalues: t (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref), validateAttributesModule (ref), getFFlagUGCValidateMigrateCurveAnimModule (ref), pcallDeferredModule (ref), reportError (ref), analyticsModule (ref), validateCurveAnimationModule (ref), validateModerationModule (ref)
 	local _ = nil
 	local var22, var23, var24 = t.validateStructure(p4)
@@ -78,7 +78,7 @@ function t.validate(p4) --[[ line: 69 ]]
 	end
 	if not getFFlagUGCValidateMigrateCurveAnimModule() then
 		local var31 = nil
-		local var32, var33 = pcallDeferredModule(function() --[[ line: 106 ]]
+		local var32, var33 = pcallDeferredModule(function()
 			-- upvalues: var25 (write)
 			return game:GetObjectsAllOrNone(var25.AnimationId)
 		end, p4)

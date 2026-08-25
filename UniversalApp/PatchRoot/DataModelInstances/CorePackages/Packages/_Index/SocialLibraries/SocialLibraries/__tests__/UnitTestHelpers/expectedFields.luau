@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "expectedFields" ]]
+﻿return function(p0, p1)
 	local t = {}
 	
 	for i, v in ipairs(p1) do

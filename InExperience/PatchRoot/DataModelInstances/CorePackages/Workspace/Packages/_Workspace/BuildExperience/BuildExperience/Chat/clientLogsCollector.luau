@@ -10,7 +10,7 @@ local fFlagBuildExperiencePersistPlaytestLogsModule = require(buildExperience.Fl
 local studioClientLogsTool = creatorAgentChatModule.StudioClientLogsTool
 game:DefineFastInt("MyStatsExperienceAskForLogsMaxEntries", 100)
 
-local function _() --[[ line: 45 | named "getDefaultMaxEntriesPerSource" ]]
+local function _()
 	return math.max(0, game:GetFastInt("MyStatsExperienceAskForLogsMaxEntries"))
 end
 
@@ -27,30 +27,30 @@ local t_1 = {
 	[Enum.MessageType.MessageError.Value] = 3
 }
 
-local _ = function(p0) --[[ line: 65 | named "getMessageTypeValue" ]]
+local _ = function(p0)
 	return if typeof(p0) == "EnumItem" then p0.Value elseif typeof(p0) == "number" then p0 else nil
 end
 
-local _ = function(p1) --[[ line: 75 | named "getMessageTypeLabel" ]]
+local _ = function(p1)
 	-- upvalues: t (ref)
 	local var30 = if typeof(p1) == "EnumItem" then p1.Value elseif typeof(p1) == "number" then p1 else nil
 	
 	return if var30 == nil then if typeof(p1) == "EnumItem" then p1.Name elseif typeof(p1) == "string" and p1 ~= "" then p1 else nil else t[var30] or tostring(var30)
 end
 
-local _ = function(p2) --[[ line: 89 | named "encodeContext" ]]
+local _ = function(p2)
 	-- upvalues: httpService (ref)
 	return if typeof(p2) == "table" and next(p2) ~= nil then httpService:JSONEncode(p2) else nil
 end
 
-local _ = function(p3) --[[ line: 97 | named "getSeverityRank" ]]
+local _ = function(p3)
 	-- upvalues: t_1 (ref)
 	local messageTypeValue = p3.messageTypeValue
 	
 	return if messageTypeValue == nil then 0 else t_1[messageTypeValue] or 0
 end
 
-local function trimToCapBySeverity(p4, p5) --[[ line: 107 ]]
+local function trimToCapBySeverity(p4, p5)
 	-- upvalues: t_1 (ref)
 	while p5 < #p4 do
 		local var31 = 1
@@ -70,7 +70,7 @@ local function trimToCapBySeverity(p4, p5) --[[ line: 107 ]]
 	end
 end
 
-local function selectRetainedBySeverity(p6, p7) --[[ line: 124 ]]
+local function selectRetainedBySeverity(p6, p7)
 	-- upvalues: t_1 (ref)
 	local t = {}
 	
@@ -122,7 +122,7 @@ local function selectRetainedBySeverity(p6, p7) --[[ line: 124 ]]
 	return t
 end
 
-local _ = function(p8, p9, p10) --[[ line: 174 | named "pushCapped" ]]
+local _ = function(p8, p9, p10)
 	-- upvalues: fFlagBuildExperienceAskForLogsSeverityRetentionModule (ref), trimToCapBySeverity (ref)
 	if p10 <= 0 then return end
 	table.insert(p8, p9)
@@ -137,7 +137,7 @@ local _ = function(p8, p9, p10) --[[ line: 174 | named "pushCapped" ]]
 	end
 end
 
-local function toLogEntry(p11, p12, p13, p14) --[[ line: 188 ]]
+local function toLogEntry(p11, p12, p13, p14)
 	-- upvalues: t (ref), httpService (ref)
 	local var43 = if typeof(p13) == "number" then p13 else nil
 	local t_1 = {
@@ -164,7 +164,7 @@ local var21 = false
 local var22 = nil
 local var23 = nil
 
-local function collectClientLogs(p15, p16) --[[ line: 212 ]]
+local function collectClientLogs(p15, p16)
 	-- upvalues: logService (ref), toLogEntry (ref), fFlagBuildExperienceAskForLogsSeverityRetentionModule (ref), trimToCapBySeverity (ref)
 	p15 = p15 or logService
 	p16 = p16 or math.max(0, game:GetFastInt("MyStatsExperienceAskForLogsMaxEntries"))
@@ -190,7 +190,7 @@ local function collectClientLogs(p15, p16) --[[ line: 212 ]]
 	return t
 end
 
-local function trimServerLogs(p17) --[[ line: 227 ]]
+local function trimServerLogs(p17)
 	-- upvalues: fFlagBuildExperienceAskForLogsSeverityRetentionModule (ref), trimToCapBySeverity (ref), t_2 (write)
 	if fFlagBuildExperienceAskForLogsSeverityRetentionModule then
 		trimToCapBySeverity(t_2, p17)
@@ -202,7 +202,7 @@ local function trimServerLogs(p17) --[[ line: 227 ]]
 	end
 end
 
-local function stopServerLogCollection(p18) --[[ line: 237 ]]
+local function stopServerLogCollection(p18)
 	-- upvalues: var14 (write), var15 (write), var18 (write), var19 (write), var20 (write), var21 (write), var22 (write), var16 (write), t_2 (write)
 	if var14 ~= nil then
 		var14:Disconnect()
@@ -230,7 +230,7 @@ local function stopServerLogCollection(p18) --[[ line: 237 ]]
 	end
 end
 
-local function startServerLogCollection(p19) --[[ line: 263 ]]
+local function startServerLogCollection(p19)
 	-- upvalues: var16 (write), logService (ref), maxValue (write), trimServerLogs (ref), var14 (write), t_2 (write), toLogEntry (ref), fFlagBuildExperienceAskForLogsSeverityRetentionModule (ref), trimToCapBySeverity (ref), var22 (write), var15 (write), fFlagBuildExperiencePersistPlaytestLogsModule (ref), var23 (write)
 	p19 = p19 or {}
 	
@@ -242,7 +242,7 @@ local function startServerLogCollection(p19) --[[ line: 263 ]]
 	local logService_1 = p19.logService or logService
 	maxValue = p19.maxEntriesPerSource or math.max(0, game:GetFastInt("MyStatsExperienceAskForLogsMaxEntries"))
 	trimServerLogs(maxValue)
-	var14 = logService_1.ServerMessageOut:Connect(function(p20, p21, p22, p23) --[[ line: 277 ]]
+	var14 = logService_1.ServerMessageOut:Connect(function(p20, p21, p22, p23)
 		-- upvalues: t_2 (copy), toLogEntry (copy), maxValue (copy), fFlagBuildExperienceAskForLogsSeverityRetentionModule (copy), trimToCapBySeverity (copy), var22 (copy)
 		local var52 = toLogEntry(p20, p21, p22, p23)
 		
@@ -261,7 +261,7 @@ local function startServerLogCollection(p19) --[[ line: 263 ]]
 			var22()
 		end
 	end)
-	var15 = logService_1.ServerContextOut:Connect(function(p24) --[[ line: 285 ]]
+	var15 = logService_1.ServerContextOut:Connect(function(p24)
 		-- upvalues: t_2 (copy), toLogEntry (copy), maxValue (copy), fFlagBuildExperienceAskForLogsSeverityRetentionModule (copy), trimToCapBySeverity (copy), var22 (copy)
 		if typeof(p24) ~= "table" or p24._structuredContext == nil then return end
 		local var53 = toLogEntry(p24._message, p24._messageType, p24._timestamp, p24._structuredContext)
@@ -290,7 +290,7 @@ local function startServerLogCollection(p19) --[[ line: 263 ]]
 	return true
 end
 
-local function getCollectedServerLogs(p25) --[[ line: 308 ]]
+local function getCollectedServerLogs(p25)
 	-- upvalues: fFlagBuildExperienceAskForLogsSeverityRetentionModule (ref), selectRetainedBySeverity (ref), t_2 (write)
 	p25 = p25 or math.max(0, game:GetFastInt("MyStatsExperienceAskForLogsMaxEntries"))
 	
@@ -305,11 +305,11 @@ local function getCollectedServerLogs(p25) --[[ line: 308 ]]
 	return t
 end
 
-local _ = function(p26) --[[ line: 322 | named "getLogSnapshotKey" ]]
+local _ = function(p26)
 	return `BuildExperiencePlaytestLogs:{p26}`
 end
 
-local _ = function(p27, p28, p29) --[[ line: 326 | named "writeLogSnapshot" ]]
+local _ = function(p27, p28, p29)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONEncode, httpService, p29)
 	
@@ -320,7 +320,7 @@ local _ = function(p27, p28, p29) --[[ line: 326 | named "writeLogSnapshot" ]]
 	end
 end
 
-var23 = function(p30) --[[ line: 334 ]]
+var23 = function(p30)
 	-- upvalues: logService (ref), memStorageService (ref), playersService (ref), var20 (write), var21 (write), collectClientLogs (ref), getCollectedServerLogs (ref), httpService (ref), var22 (write), var18 (write), var19 (write)
 	local dataModel = p30.dataModel or game
 	local gameId = dataModel.GameId
@@ -338,7 +338,7 @@ var23 = function(p30) --[[ line: 334 ]]
 		var21 = false
 		pcall(memStorageService_1.SetItem, memStorageService_1, var61, "")
 		
-		local function persistNow() --[[ line: 359 ]]
+		local function persistNow()
 			-- upvalues: var62 (ref), var20 (copy), collectClientLogs (copy), logService_1 (ref), maxEntriesPerSource (ref), memStorageService_1 (ref), var61 (ref), gameId (ref), placeId (ref), placeVersion (ref), getCollectedServerLogs (copy), httpService (copy)
 			if var62 ~= var20 then return end
 			local ok, status = pcall(collectClientLogs, logService_1, maxEntriesPerSource)
@@ -359,12 +359,12 @@ var23 = function(p30) --[[ line: 334 ]]
 			end
 		end
 		
-		local function scheduleWrite() --[[ line: 377 ]]
+		local function scheduleWrite()
 			-- upvalues: var62 (ref), var20 (copy), var21 (copy), persistNow (ref), p30 (ref)
 			if var62 ~= var20 or var21 then return end
 			var21 = true
 			
-			local function writeAfterDelay() --[[ line: 382 ]]
+			local function writeAfterDelay()
 				-- upvalues: var62 (copy), var20 (copy), var21 (copy), persistNow (copy)
 				if var62 == var20 then
 					var21 = false
@@ -385,7 +385,7 @@ var23 = function(p30) --[[ line: 334 ]]
 		var22 = scheduleWrite
 		var18 = logService_1.MessageOut:Connect(scheduleWrite)
 		local localPlayer = playersService_1.LocalPlayer
-		var19 = playersService_1.PlayerRemoving:Connect(function(p31) --[[ line: 399 ]]
+		var19 = playersService_1.PlayerRemoving:Connect(function(p31)
 			-- upvalues: localPlayer (ref), persistNow (ref)
 			if p31 == localPlayer then
 				persistNow()
@@ -397,7 +397,7 @@ var23 = function(p30) --[[ line: 334 ]]
 	end
 end
 
-local function readLogSnapshot(p32) --[[ line: 407 ]]
+local function readLogSnapshot(p32)
 	-- upvalues: memStorageService (ref), httpService (ref)
 	local universeId = p32.universeId
 	local placeId = p32.placeId
@@ -416,14 +416,14 @@ local function readLogSnapshot(p32) --[[ line: 407 ]]
 	return if not (not ok_1 or typeof(status_1) ~= "table") then if status_1.schemaVersion == 1 and status_1.universeId == universeId and (status_1.placeId == placeId and typeof(status_1.placeVersion) == "number") and (typeof(status_1.clientLogs) == "table" and typeof(status_1.serverLogs) == "table") then status_1 else nil else nil
 end
 
-local _ = function(p33, p34) --[[ line: 438 | named "logsAreStale" ]]
+local _ = function(p33, p34)
 	return p34 ~= nil and (if typeof(p33) == "number" then p33 < p34 else true)
 end
 
 return {
 	startServerLogCollection = startServerLogCollection,
 	stopServerLogCollection = stopServerLogCollection,
-	collectToolResultContent = function(p35) --[[ line: 442 ]]
+	collectToolResultContent = function(p35)
 		-- upvalues: fFlagBuildExperiencePersistPlaytestLogsModule (ref), readLogSnapshot (ref), studioClientLogsTool (ref), startServerLogCollection (ref), collectClientLogs (ref), getCollectedServerLogs (ref)
 		p35 = p35 or {}
 		local dataModel = p35.dataModel or game

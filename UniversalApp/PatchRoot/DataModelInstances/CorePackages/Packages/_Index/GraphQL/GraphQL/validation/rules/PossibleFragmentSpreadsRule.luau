@@ -8,10 +8,10 @@ local doTypesOverlap = require(utilities.typeComparators).doTypesOverlap
 local t = {}
 local getFragmentType = nil
 
-function t.PossibleFragmentSpreadsRule(p0) --[[ line: 31 ]]
+function t.PossibleFragmentSpreadsRule(p0)
 	-- upvalues: isCompositeType (ref), doTypesOverlap (ref), inspect (ref), graphQLError (ref), getFragmentType (write)
 	return {
-		InlineFragment = function(_, p1) --[[ line: 33 ]]
+		InlineFragment = function(_, p1)
 			-- upvalues: p0 (ref), isCompositeType (copy), doTypesOverlap (copy), inspect (copy), graphQLError (copy)
 			local type = p0:getType()
 			local parentType = p0:getParentType()
@@ -20,7 +20,7 @@ function t.PossibleFragmentSpreadsRule(p0) --[[ line: 31 ]]
 				p0:reportError(graphQLError.new(("Fragment cannot be spread here as objects of type \"%s\" can never be of type \"%s\"."):format(inspect(parentType), inspect(type)), p1))
 			end
 		end,
-		FragmentSpread = function(_, p2) --[[ line: 54 ]]
+		FragmentSpread = function(_, p2)
 			-- upvalues: getFragmentType (copy), p0 (ref), doTypesOverlap (copy), inspect (copy), graphQLError (copy)
 			local value = p2.name.value
 			local var4 = getFragmentType(p0, value)
@@ -33,7 +33,7 @@ function t.PossibleFragmentSpreadsRule(p0) --[[ line: 31 ]]
 	}
 end
 
-getFragmentType = function(p3, p4) --[[ line: 78 | named "getFragmentType" ]]
+getFragmentType = function(p3, p4)
 	-- upvalues: typeFromAST (ref), isCompositeType (ref)
 	local var6 = p3:getFragment(p4)
 	

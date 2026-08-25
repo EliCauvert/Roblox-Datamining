@@ -38,7 +38,7 @@ freeFlowCarousel.defaultProps = {
 	carouselMargin = 24
 }
 
-function freeFlowCarousel.render(p0) --[[ line: 77 ]]
+function freeFlowCarousel.render(p0)
 	-- upvalues: roactModule (ref), fitFrameOnAxis (ref), carouselHeaderModule (ref), horizontalCarouselModule (ref)
 	local innerPadding = p0.props.innerPadding
 	local carouselMargin = p0.props.carouselMargin

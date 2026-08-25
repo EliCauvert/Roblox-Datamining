@@ -2,7 +2,7 @@
 local roduxModule = require(verifiedBadges.Parent.Rodux)
 local roduxNetworking = require(verifiedBadges.dependencies).RoduxNetworking
 
-return function() --[[ line: 12 | named "installReducer" ]]
+return function()
 	-- upvalues: roduxModule (ref), roduxNetworking (ref)
 	return roduxModule.combineReducers({
 		VerifiedUsers = require(script.VerifiedUsers),

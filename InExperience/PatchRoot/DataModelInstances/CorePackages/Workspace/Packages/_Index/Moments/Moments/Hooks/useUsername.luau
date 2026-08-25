@@ -6,17 +6,17 @@ local getUsersStoreModule = require(moments.Stores.GetUsersStore)
 local playersService = game:GetService("Players")
 local useSignalState = signalsReactModule.useSignalState
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: getUsersStoreModule (ref), useSignalState (ref), reactModule (ref), playersService (ref)
 	local var5 = getUsersStoreModule(false)
 	local username = useSignalState(var5.getUserProfile(tostring(p0))).username
-	reactModule.useEffect(function() --[[ line: 23 ]]
+	reactModule.useEffect(function()
 		-- upvalues: username (ref), playersService (copy), p0 (ref), var5 (ref)
 		if username == nil then
 			local var6 = false
-			task.spawn(function() --[[ line: 30 ]]
+			task.spawn(function()
 				-- upvalues: playersService (copy), p0 (copy), var6 (write), var5 (copy)
-				local ok, status = pcall(function() --[[ line: 31 ]]
+				local ok, status = pcall(function()
 					-- upvalues: playersService (copy), p0 (copy)
 					return playersService:GetNameFromUserIdAsync(p0)
 				end)
@@ -26,7 +26,7 @@ return function(p0) --[[ line: 18 ]]
 				end
 			end)
 			
-			return function() --[[ line: 39 ]]
+			return function()
 				-- upvalues: var6 (write)
 				var6 = true
 			end

@@ -9,11 +9,11 @@ local pcallDeferredModule = require(parent.util.pcallDeferred)
 local _ = require(parent.util.Types)
 local getFStringUGCValidateBoundsInflationThresholdModule = require(parent.flags.getFStringUGCValidateBoundsInflationThreshold)
 
-local function _(p0, p1) --[[ line: 30 | named "calculateExtentsUnion" ]]
+local function _(p0, p1)
 	return { min = p0.min:Min(p1.min), max = p0.max:Max(p1.max) }
 end
 
-local function checkExtentsValid(p2) --[[ line: 37 ]]
+local function checkExtentsValid(p2)
 	for i, v in { "X", "Y", "Z" } do
 		if p2.max[v] < p2.min[v] then
 			return false
@@ -22,11 +22,11 @@ local function checkExtentsValid(p2) --[[ line: 37 ]]
 	return true
 end
 
-local _ = function(p3, p4, p5, p6, p7) --[[ line: 46 | named "validationSpaceToWorldSpace" ]]
+local _ = function(p3, p4, p5, p6, p7)
 	return p6 * (p4:Inverse() * p3 / p5 * p7)
 end
 
-local function calculateAmountInflated(p8, p9) --[[ line: 59 ]]
+local function calculateAmountInflated(p8, p9)
 	local t = { min = p8.min:Min(p9.min), max = p8.max:Max(p9.max) }
 	t = 0
 	
@@ -36,7 +36,7 @@ local function calculateAmountInflated(p8, p9) --[[ line: 59 ]]
 	return t
 end
 
-local function getPartNamesInAsset(value, p10) --[[ line: 76 ]]
+local function getPartNamesInAsset(value, p10)
 	local t = {}
 	
 	if p10 == Enum.AssetType.DynamicHead then
@@ -52,7 +52,7 @@ local function getPartNamesInAsset(value, p10) --[[ line: 76 ]]
 	return t
 end
 
-local function calculateMeshScales(p11, p12, p13) --[[ line: 92 ]]
+local function calculateMeshScales(p11, p12, p13)
 	-- upvalues: getExpectedPartSizeModule (ref)
 	local t = {}
 	
@@ -63,7 +63,7 @@ local function calculateMeshScales(p11, p12, p13) --[[ line: 92 ]]
 	return t
 end
 
-local function checkInflatingGeo(p14, p15, p16, p17, p18, p19) --[[ line: 108 ]]
+local function checkInflatingGeo(p14, p15, p16, p17, p18, p19)
 	-- upvalues: calculateAmountInflated (ref), getFStringUGCValidateBoundsInflationThresholdModule (ref)
 	local t = {}
 	
@@ -74,7 +74,7 @@ local function checkInflatingGeo(p14, p15, p16, p17, p18, p19) --[[ line: 108 ]]
 			worldSpacePosition = v.worldSpacePosition
 		})
 	end
-	table.sort(t, function(p20, p21) --[[ line: 125 ]]
+	table.sort(t, function(p20, p21)
 		return p21.inflated < p20.inflated
 	end)
 	local var19 = tonumber(getFStringUGCValidateBoundsInflationThresholdModule())
@@ -100,7 +100,7 @@ local function checkInflatingGeo(p14, p15, p16, p17, p18, p19) --[[ line: 108 ]]
 	end
 end
 
-local function getWorldPositions(p22, p23, p24, p25, p26, p27) --[[ line: 167 ]]
+local function getWorldPositions(p22, p23, p24, p25, p26, p27)
 	local t = {}
 	
 	for i, v in p26 do
@@ -118,14 +118,14 @@ local function getWorldPositions(p22, p23, p24, p25, p26, p27) --[[ line: 167 ]]
 	return t
 end
 
-return function(p28, p29) --[[ line: 202 | named "validateAccurateBoundingBox" ]]
+return function(p28, p29)
 	-- upvalues: getPartNamesInAsset (ref), assetCalculatorModule (ref), calculateMeshScales (ref), getEditableMeshFromContextModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), checkExtentsValid (ref), getWorldPositions (ref), failureReasonsAccumulatorModule (ref), checkInflatingGeo (ref), analyticsModule (ref)
 	local assetTypeEnum = p29.assetTypeEnum
 	assert(assetTypeEnum)
 	local var26 = getPartNamesInAsset(p28, assetTypeEnum)
 	local var27 = assetCalculatorModule.calculateAllTransformsForAsset(assetTypeEnum, p28)
 	
-	local function findMeshHandle(p30) --[[ line: 213 ]]
+	local function findMeshHandle(p30)
 		-- upvalues: assetTypeEnum (ref), p28 (ref)
 		return if assetTypeEnum == Enum.AssetType.DynamicHead then p28 else p28:FindFirstChild(p30)
 	end
@@ -159,7 +159,7 @@ return function(p28, p29) --[[ line: 202 | named "validateAccurateBoundingBox" ]
 		table.insert(t_2, var27[v_1])
 		table.insert(t_3, var29[v_1])
 	end
-	local var34, var35 = pcallDeferredModule(function() --[[ line: 254 ]]
+	local var34, var35 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), t_1 (ref), t_2 (ref), t_3 (ref)
 		return UGCValidationService:GetBoundingBoxManipulationData(t_1, t_2, t_3)
 	end, p29)

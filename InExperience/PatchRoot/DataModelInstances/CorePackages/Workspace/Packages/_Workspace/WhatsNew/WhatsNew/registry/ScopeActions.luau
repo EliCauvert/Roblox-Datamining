@@ -2,12 +2,12 @@
 local signalsModule = require(whatsNew.Parent.Signals)
 local _ = require(whatsNew.Types)
 
-local function _(p0) --[[ line: 39 | named "assertValidKey" ]]
+local function _(p0)
 	assert(p0 ~= "", "scope action key must be a non-empty string")
 end
 
 return {
-	createScopeActions = function(p1) --[[ line: 43 ]]
+	createScopeActions = function(p1)
 		-- upvalues: signalsModule (ref)
 		local t = {
 			_actions = {},
@@ -22,23 +22,23 @@ return {
 			end
 		end
 		local t_1 = {
-			register = function(_, p2, p3) --[[ line: 59 ]]
+			register = function(_, p2, p3)
 				-- upvalues: t (ref)
 				assert(p2 ~= "", "scope action key must be a non-empty string")
 				assert(t._actions[p2] == nil, `scope action already registered: {p2}`)
 				t._actions[p2] = p3
 			end,
-			has = function(_, p4) --[[ line: 65 ]]
+			has = function(_, p4)
 				-- upvalues: t (ref)
 				return t._actions[p4] ~= nil
 			end,
-			invoke = function(_, p5) --[[ line: 69 ]]
+			invoke = function(_, p5)
 				-- upvalues: t (ref)
 				local var4 = t._actions[p5]
 				assert(var4 ~= nil, `unknown scope action key: {p5}`)
 				var4()
 			end,
-			getRegisteredKeys = function(_) --[[ line: 75 ]]
+			getRegisteredKeys = function(_)
 				-- upvalues: t (ref)
 				local t_1 = {}
 				
@@ -49,11 +49,11 @@ return {
 				
 				return t_1
 			end,
-			toMap = function(_) --[[ line: 84 ]]
+			toMap = function(_)
 				-- upvalues: t (ref)
 				return table.clone(t._actions)
 			end,
-			bindOpenState = function(_, p6) --[[ line: 89 ]]
+			bindOpenState = function(_, p6)
 				-- upvalues: t (ref)
 				assert(p6.openActionKey ~= "", "scope action key must be a non-empty string")
 				assert(p6.closeActionKey ~= "", "scope action key must be a non-empty string")
@@ -67,7 +67,7 @@ return {
 				end
 				table.insert(t._openStateBindings, p6)
 			end,
-			stopOpenStateWiring = function(_) --[[ line: 116 ]]
+			stopOpenStateWiring = function(_)
 				-- upvalues: t (ref)
 				for i, v in t._openStateDisposers do
 					v()
@@ -76,12 +76,12 @@ return {
 			end
 		}
 		
-		function t_1.startOpenStateWiring(_, p7) --[[ line: 123 ]]
+		function t_1.startOpenStateWiring(_, p7)
 			-- upvalues: t_1 (ref), t (ref), signalsModule (copy)
 			t_1:stopOpenStateWiring()
 			
 			for i, v in t._openStateBindings do
-				table.insert(t._openStateDisposers, signalsModule.createEffect(function(p8) --[[ line: 128 ]]
+				table.insert(t._openStateDisposers, signalsModule.createEffect(function(p8)
 					-- upvalues: v (ref), p7 (ref)
 					local isOpen = v.getIsOpen(p8)
 					p7.getRuntimeStateSignal(p8)
@@ -98,11 +98,11 @@ return {
 		
 		return t_1
 	end,
-	collectRegistryActionKeys = function(p9) --[[ line: 145 ]]
+	collectRegistryActionKeys = function(p9)
 		local t = {}
 		local t_1 = {}
 		
-		local function _(p10) --[[ line: 149 | named "addKey" ]]
+		local function _(p10)
 			-- upvalues: t (ref), t_1 (ref)
 			if p10 == nil or p10 == "" or t[p10] then
 				return

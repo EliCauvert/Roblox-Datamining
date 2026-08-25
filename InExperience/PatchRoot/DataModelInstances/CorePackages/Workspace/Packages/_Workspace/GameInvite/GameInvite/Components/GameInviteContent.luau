@@ -26,29 +26,29 @@ local getRewardMetadataModule = require(gameInvite.Requests.GetRewardMetadata)
 local sidePadding = gameInviteConstantsModule.Layout.SidePadding
 local titleHeight = gameInviteConstantsModule.Layout.TitleHeight
 
-local var13 = function(p0) --[[ line: 45 ]]
+local var13 = function(p0)
 	-- upvalues: reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), getFFlagEnableGameInviteRewardsBanner (ref), getRewardMetadataModule (ref), name (ref), useSelector (ref), deviceInfo (ref), titleHeight (ref), gameInviteTitleModule (ref), sidePadding (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref), gameInviteCustomTextModule (ref), gameInviteRewardsBannerModule (ref), friendsMenuFriendsList (ref), gameInviteConstantsModule (ref), friendMenuType (ref)
 	local var14 = reactModule.useContext(gameInviteModalLayoutContextModule)
 	local var15 = reactModule.useContext(gameDetailsContextModule)
 	local var16, var17 = reactModule.useState(nil)
 	
 	if getFFlagEnableGameInviteRewardsBanner() then
-		reactModule.useEffect(function() --[[ line: 50 ]]
+		reactModule.useEffect(function()
 			-- upvalues: getRewardMetadataModule (copy), var17 (ref), name (copy)
 			if game.GameId > 0 then
-				getRewardMetadataModule():andThen(function(p2) --[[ line: 52 ]]
+				getRewardMetadataModule():andThen(function(p2)
 					-- upvalues: var17 (copy)
 					if p2.responseBody and p2.responseBody.name and p2.responseBody.description then
 						var17(p2.responseBody)
 					end
-				end):catch(function(p1) --[[ line: 56 ]]
+				end):catch(function(p1)
 					-- upvalues: name (copy)
 					name:error(`Error fetching reward metadata: {p1}`)
 				end)
 			end
 		end, {})
 	end
-	local var18 = useSelector(function(p3) --[[ line: 63 ]]
+	local var18 = useSelector(function(p3)
 		return p3.TopBar
 	end)
 	local var19 = deviceInfo.isConsole()
@@ -121,7 +121,7 @@ local var13 = function(p0) --[[ line: 45 ]]
 				layoutOrder = 1,
 				focusElement = false,
 				size = UDim2.new(1, 0, 0, 36),
-				onFocus = function() --[[ line: 142 ]]
+				onFocus = function()
 					-- upvalues: gameInviteAnalyticsManagerModule (copy)
 					gameInviteAnalyticsManagerModule:onSearchFocused()
 				end
@@ -150,14 +150,14 @@ local var13 = function(p0) --[[ line: 45 ]]
 	return createElement(var25, t, t_1)
 end
 
-return function(p4) --[[ line: 170 ]]
+return function(p4)
 	-- upvalues: getFFlagEnableCommonFriendsMenu (ref), reactModule (ref), inviteFriendContext (ref), friendsMenuContextWrapper (ref), var13 (ref)
 	return if getFFlagEnableCommonFriendsMenu() then reactModule.createElement(friendsMenuContextWrapper, {
 		inviteSingleFriend = (if getFFlagEnableCommonFriendsMenu() then reactModule.useContext(inviteFriendContext) else {
-			inviteSingleFriend = function() --[[ line: 173 ]] end,
-			getMaxRecipientRowNum = function() --[[ line: 173 ]] end
+			inviteSingleFriend = function() end,
+			getMaxRecipientRowNum = function() end
 		}).inviteSingleFriend,
-		inviteMultiFriends = function() --[[ line: 177 ]] end,
+		inviteMultiFriends = function() end,
 		isLoadingCustomParams = p4.isLoadingCustomParams
 	}, { GameInviteContent = reactModule.createElement(var13, p4) }) else reactModule.createElement(var13, p4)
 end

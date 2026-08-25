@@ -5,7 +5,7 @@ local surfacingModule = require(script.Parent.surfacing)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 49 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		roblox_component = if p0 == nil or p0.roblox_component == nil then "" else p0.roblox_component,
@@ -16,7 +16,7 @@ function t_1.new(p0) --[[ line: 49 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 59 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -58,7 +58,7 @@ function t_1:encode() --[[ line: 59 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 94 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), surfacingModule (ref)
 	local var19 = t_1.new()
 	local var20 = 0
@@ -125,7 +125,7 @@ function t_1.decode(p1) --[[ line: 94 ]]
 	return var19
 end
 
-function t_1:jsonEncode() --[[ line: 157 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
@@ -146,7 +146,7 @@ function t_1:jsonEncode() --[[ line: 157 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 183 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), surfacingModule (ref)
 	local var45 = t_1.new()
 	

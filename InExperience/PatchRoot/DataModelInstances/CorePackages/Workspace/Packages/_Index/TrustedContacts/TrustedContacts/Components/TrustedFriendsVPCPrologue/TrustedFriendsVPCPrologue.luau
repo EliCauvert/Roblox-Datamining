@@ -15,7 +15,7 @@ local fFlagTCUpdateProfileCTAButton = require(parent.SharedFlags).FFlagTCUpdateP
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local _ = require(trustedContacts.Common.Types)
 
-local function TrustedFriendsVPCPrologue(p0) --[[ line: 33 ]]
+local function TrustedFriendsVPCPrologue(p0)
 	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), fFlagTCUpdateProfileCTAButton (ref), contexts (ref), fStringConnectionGraphCoreAmpNameSpace (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
 	local var5 = useLocalization({
 		cancel = "CommonUI.Controls.Action.Cancel",
@@ -24,11 +24,11 @@ local function TrustedFriendsVPCPrologue(p0) --[[ line: 33 ]]
 		vpcRequired = if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.AddFriendVPC" else "Feature.Friends.Label.AddConnectionVPC"
 	})
 	local fireAnalyticsEvent = useTCAnalytics({ friendId = p0.userId }).fireAnalyticsEvent
-	local var6 = reactModule.useCallback(function() --[[ line: 47 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.externalNavigation.closeModal()
 	end, { p0.externalNavigation })
-	local var7 = reactModule.useCallback(function(_, _) --[[ line: 56 ]]
+	local var7 = reactModule.useCallback(function(_, _)
 		-- upvalues: fFlagTCUpdateProfileCTAButton (copy), p0 (ref)
 		if fFlagTCUpdateProfileCTAButton and p0.completionCallback then
 			p0.completionCallback()
@@ -48,7 +48,7 @@ local function TrustedFriendsVPCPrologue(p0) --[[ line: 33 ]]
 				{
 					text = var5.ask,
 					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function() --[[ line: 65 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var6 (ref), p0 (ref), var7 (ref), contexts (copy), fStringConnectionGraphCoreAmpNameSpace (copy)
 						fireAnalyticsEvent(eventNames.TrustedFriendsVPCAskClicked)
 						var6()
@@ -73,7 +73,7 @@ local function TrustedFriendsVPCPrologue(p0) --[[ line: 33 ]]
 				{
 					text = var5.cancel,
 					variant = buttonVariant.Standard,
-					onActivated = reactModule.useCallback(function() --[[ line: 51 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var6 (ref)
 						fireAnalyticsEvent(eventNames.TrustedFriendsVPCCancelClicked)
 						var6()
@@ -85,7 +85,7 @@ local function TrustedFriendsVPCPrologue(p0) --[[ line: 33 ]]
 end
 
 return {
-	Screen = function(p1) --[[ line: 115 ]]
+	Screen = function(p1)
 		-- upvalues: reactModule (ref), TrustedFriendsVPCPrologue (ref)
 		return reactModule.createElement(TrustedFriendsVPCPrologue, {
 			userId = p1.navigation.getParam("userId"),

@@ -38,7 +38,7 @@ mediaGalleryPreview.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function mediaGalleryPreview.getDerivedStateFromProps(p0, p1) --[[ line: 77 ]]
+function mediaGalleryPreview.getDerivedStateFromProps(p0, p1)
 	-- upvalues: getShowItemsModule (ref)
 	if p1.items == p0.items and p1.numberOfThumbnails == p0.numberOfThumbnails then
 		return
@@ -57,7 +57,7 @@ function mediaGalleryPreview.getDerivedStateFromProps(p0, p1) --[[ line: 77 ]]
 	}
 end
 
-function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
+function mediaGalleryPreview.init(p2)
 	-- upvalues: otterModule (ref), roactModule (ref)
 	p2.state = {
 		items = nil,
@@ -96,17 +96,17 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 	p2.previewTransparency = var27
 	p2.updatePreviewTransparency = var28
 	
-	function p2.onResize(p3) --[[ line: 122 ]]
+	function p2.onResize(p3)
 		-- upvalues: p2 (ref)
 		p2:updateSizes(p3)
 		p2.updateCanvasPosition(Vector2.new(p2:getCanvasPositionX(), 0))
 	end
 	
-	function p2.onMouseLeave(_, p4) --[[ line: 127 ]]
+	function p2.onMouseLeave(_, p4)
 		-- upvalues: p2 (ref)
 		if p4.UserInputType == Enum.UserInputType.MouseMovement then
 			p2.resetAnimation()
-			p2:setState(function(p5) --[[ line: 133 ]]
+			p2:setState(function(p5)
 				-- upvalues: p2 (copy)
 				local selectedIndex = p5.selectedIndex
 				
@@ -121,7 +121,7 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		end
 	end
 	
-	function p2.onPreviewActivated() --[[ line: 145 ]]
+	function p2.onPreviewActivated()
 		-- upvalues: p2 (ref)
 		p2.resetAnimation()
 		p2:setState({ animationOn = false })
@@ -131,10 +131,10 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		end
 	end
 	
-	function p2.onMouseEnterPagination(_, p6) --[[ line: 160 ]]
+	function p2.onMouseEnterPagination(_, p6)
 		-- upvalues: p2 (ref)
 		if p6.UserInputType == Enum.UserInputType.MouseMovement then
-			p2:setState(function(p7) --[[ line: 165 ]]
+			p2:setState(function(p7)
 				if p7.showArrows then
 					return
 				end
@@ -145,10 +145,10 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		end
 	end
 	
-	function p2.onMouseLeavePagination(_, p8) --[[ line: 176 ]]
+	function p2.onMouseLeavePagination(_, p8)
 		-- upvalues: p2 (ref)
 		if p8.UserInputType == Enum.UserInputType.MouseMovement then
-			p2:setState(function(p9) --[[ line: 181 ]]
+			p2:setState(function(p9)
 				if p9.showArrows then
 					return { showArrows = false }
 				end
@@ -158,7 +158,7 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		end
 	end
 	
-	function p2.onCycleLeftActivated() --[[ line: 192 ]]
+	function p2.onCycleLeftActivated()
 		-- upvalues: p2 (ref)
 		if p2.scrolling then
 			return
@@ -168,7 +168,7 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		p2:setState({ animationOn = false, focusIndex = maxValue })
 	end
 	
-	function p2.onCycleRightActivated() --[[ line: 206 ]]
+	function p2.onCycleRightActivated()
 		-- upvalues: p2 (ref)
 		if p2.scrolling then
 			return
@@ -178,7 +178,7 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		p2:setState({ animationOn = false, focusIndex = minValue })
 	end
 	
-	function p2.onItemActivated(p10) --[[ line: 221 ]]
+	function p2.onItemActivated(p10)
 		-- upvalues: p2 (ref)
 		local isYouTubeVideo = p2.state.itemsToShow[p10].isYouTubeVideo
 		local selectedIndex = p2.state.selectedIndex
@@ -196,21 +196,21 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		end
 	end
 	
-	function p2.onItemPlayActivated(p11) --[[ line: 241 ]]
+	function p2.onItemPlayActivated(p11)
 		-- upvalues: p2 (ref)
 		p2.resetAnimation()
 		p2:setState({ animationOn = false })
 		p2.onVideoPlayActivated(p11)
 	end
 	
-	function p2.onVideoPlayActivated(p12) --[[ line: 250 ]]
+	function p2.onVideoPlayActivated(p12)
 		-- upvalues: p2 (ref)
 		if p2.props.onVideoPlayActivated then
 			p2.props.onVideoPlayActivated(p2.state.itemsToShow[p12].originalIndex)
 		end
 	end
 	
-	function p2.getNextFocusIndex(p13) --[[ line: 259 ]]
+	function p2.getNextFocusIndex(p13)
 		-- upvalues: p2 (ref)
 		local focusIndex = p2.state.focusIndex
 		local numberOfThumbnails = p2.props.numberOfThumbnails
@@ -218,14 +218,14 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		return if p13 < focusIndex then p13 elseif focusIndex + numberOfThumbnails <= p13 then p13 - numberOfThumbnails + 1 else focusIndex
 	end
 	
-	function p2.resetAnimation() --[[ line: 274 ]]
+	function p2.resetAnimation()
 		-- upvalues: p2 (ref)
 		p2.animationTime = 0
 		p2.updateProgress(0)
 		p2.updatePreviewTransparency(0)
 	end
 	
-	function p2.renderSteppedCallback(p14) --[[ line: 280 ]]
+	function p2.renderSteppedCallback(p14)
 		-- upvalues: p2 (ref)
 		p2.animationTime += p14
 		local var31 = p2.animationTime - 4.5
@@ -250,12 +250,12 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 		end
 	end
 	
-	function p2.scrollMotorOnStep(p15) --[[ line: 310 ]]
+	function p2.scrollMotorOnStep(p15)
 		-- upvalues: p2 (ref)
 		p2.updateCanvasPosition(Vector2.new(p15, 0))
 	end
 	
-	function p2.scrollMotorOnComplete() --[[ line: 314 ]]
+	function p2.scrollMotorOnComplete()
 		-- upvalues: p2 (ref)
 		p2.scrolling = false
 	end
@@ -264,7 +264,7 @@ function mediaGalleryPreview.init(p2) --[[ line: 95 ]]
 	p2.scrollMotor:onComplete(p2.scrollMotorOnComplete)
 end
 
-function mediaGalleryPreview.render(p16) --[[ line: 322 ]]
+function mediaGalleryPreview.render(p16)
 	-- upvalues: withStyle (ref), roactModule (ref), iconButton (ref), var9 (ref), images (ref), eventConnection (ref), runService (ref)
 	local layoutOrder = p16.props.layoutOrder
 	local anchorPoint = p16.props.anchorPoint
@@ -284,7 +284,7 @@ function mediaGalleryPreview.render(p16) --[[ line: 322 ]]
 	local var37 = focusIndex <= 1
 	local var38 = #itemsToShow < focusIndex + numberOfThumbnails
 	
-	return withStyle(function(p17) --[[ line: 346 ]]
+	return withStyle(function(p17)
 		-- upvalues: roactModule (copy), layoutOrder (ref), size (ref), anchorPoint (ref), position (ref), p16 (ref), var34 (ref), animationOn (ref), var35 (ref), itemsToShow (ref), selectedIndex (ref), var36 (ref), showArrows (ref), iconButton (copy), var9 (copy), images (copy), var37 (ref), var38 (ref), eventConnection (copy), runService (copy)
 		return roactModule.createElement("Frame", {
 			LayoutOrder = layoutOrder,
@@ -367,7 +367,7 @@ function mediaGalleryPreview.render(p16) --[[ line: 322 ]]
 	end)
 end
 
-function mediaGalleryPreview.renderScroller(p18, p19) --[[ line: 432 ]]
+function mediaGalleryPreview.renderScroller(p18, p19)
 	-- upvalues: roactModule (ref), var9 (ref)
 	return roactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
@@ -383,7 +383,7 @@ function mediaGalleryPreview.renderScroller(p18, p19) --[[ line: 432 ]]
 	}, p18:renderThumbnails(p19))
 end
 
-function mediaGalleryPreview.renderThumbnails(p20, p21) --[[ line: 447 ]]
+function mediaGalleryPreview.renderThumbnails(p20, p21)
 	-- upvalues: roactModule (ref), thumbnailButtonModule (ref)
 	local selectedIndex = p20.state.selectedIndex
 	local animationOn = p20.state.animationOn
@@ -419,7 +419,7 @@ function mediaGalleryPreview.renderThumbnails(p20, p21) --[[ line: 447 ]]
 	return t
 end
 
-function mediaGalleryPreview.renderTimerBar(p22, p23) --[[ line: 488 ]]
+function mediaGalleryPreview.renderTimerBar(p22, p23)
 	-- upvalues: roactModule (ref)
 	local UIDefault = p23.Theme.UIDefault
 	local secondaryContent = p23.Theme.SecondaryContent
@@ -446,7 +446,7 @@ function mediaGalleryPreview.renderTimerBar(p22, p23) --[[ line: 488 ]]
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				Size = p22.progress:map(function(p24) --[[ line: 513 ]]
+				Size = p22.progress:map(function(p24)
 					return UDim2.fromScale(p24, 1)
 				end)
 			}, {
@@ -463,7 +463,7 @@ function mediaGalleryPreview.renderTimerBar(p22, p23) --[[ line: 488 ]]
 	})
 end
 
-function mediaGalleryPreview.didUpdate(p25, _, p26) --[[ line: 535 ]]
+function mediaGalleryPreview.didUpdate(p25, _, p26)
 	if p25.state.focusIndex ~= p26.focusIndex then
 		p25:scrollToNewIndex()
 	end
@@ -472,7 +472,7 @@ function mediaGalleryPreview.didUpdate(p25, _, p26) --[[ line: 535 ]]
 	end
 end
 
-function mediaGalleryPreview.updateSizes(p27, p28) --[[ line: 545 ]]
+function mediaGalleryPreview.updateSizes(p27, p28)
 	-- upvalues: calcMediaGallerySizesFromWidthModule (ref), calcMediaGallerySizesFromHeightModule (ref)
 	local x = p28.AbsoluteSize.X
 	local y = p28.AbsoluteSize.Y
@@ -488,11 +488,11 @@ function mediaGalleryPreview.updateSizes(p27, p28) --[[ line: 545 ]]
 	p27.updateThumbnailSize(var40.thumbnailSize)
 end
 
-function mediaGalleryPreview.getCanvasPositionX(p29) --[[ line: 561 ]]
+function mediaGalleryPreview.getCanvasPositionX(p29)
 	return (p29.state.focusIndex - 1) * (p29.thumbnailSize:getValue().X.Offset + 12)
 end
 
-function mediaGalleryPreview.scrollToNewIndex(p30) --[[ line: 567 ]]
+function mediaGalleryPreview.scrollToNewIndex(p30)
 	-- upvalues: otterModule (ref), t (ref)
 	local canvasPositionX = p30:getCanvasPositionX()
 	p30.scrollMotor:setGoal(otterModule.instant(p30.canvasPosition:getValue().X))

@@ -5,7 +5,7 @@ local view = require(parent.Foundation).View
 local surfaceModule = require(onPlatformSurveys.Enums.Surface)
 local surveyModalModule = require(onPlatformSurveys.Components.SurveyModal)
 
-return reactModule.memo(function(p0) --[[ line: 24 | named "SurfaceWrapper" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: surfaceModule (ref), reactModule (ref), surveyModalModule (ref), view (ref)
 	return if p0.surface == surfaceModule.Modal then reactModule.createElement(surveyModalModule, {
 		isOpen = p0.isOpen,

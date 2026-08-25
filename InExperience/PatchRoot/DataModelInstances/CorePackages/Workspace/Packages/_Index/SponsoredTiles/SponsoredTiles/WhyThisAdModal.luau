@@ -34,21 +34,21 @@ local omniRecommendationsContentType = require(parent.DiscoveryTypes).OmniRecomm
 local fStringLuaAppAdPreferencesUrl = require(parent.SharedFlags).FStringLuaAppAdPreferencesUrl
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 
-local function useCreatorName(p0) --[[ line: 49 ]]
+local function useCreatorName(p0)
 	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), useSelector (ref), apiFetchGameDetails (ref), reactModule (ref), retrievalStatus (ref)
 	local var17 = useDispatch()
 	local var18 = useRoactService(roactNetworking)
 	
 	if not fFlagLuaAppEnableHomepageOneByTwoTile then
-		local var22 = useSelector(function(p1) --[[ line: 74 ]]
+		local var22 = useSelector(function(p1)
 			-- upvalues: p0 (ref), apiFetchGameDetails (copy)
 			return p0 and apiFetchGameDetails.GetFetchingStatus(p1, p0) or nil
 		end)
-		local var23 = useSelector(function(p2) --[[ line: 78 ]]
+		local var23 = useSelector(function(p2)
 			-- upvalues: p0 (ref)
 			return if p0 then p2.GameDetails[p0] else nil
 		end)
-		reactModule.useEffect(function() --[[ line: 82 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), var23 (ref), var22 (ref), retrievalStatus (copy), var17 (ref), apiFetchGameDetails (copy), var18 (ref)
 			if p0 and not var23 and var22 ~= retrievalStatus.Fetching then
 				var17(apiFetchGameDetails.Fetch(var18, { p0 }))
@@ -64,15 +64,15 @@ local function useCreatorName(p0) --[[ line: 49 ]]
 		return var23 and (var23.creator and (var23.creator.name or nil)), var22
 	end
 	local var19 = p0 ~= nil and p0 ~= ""
-	local var20 = useSelector(function(p3) --[[ line: 56 ]]
+	local var20 = useSelector(function(p3)
 		-- upvalues: var19 (ref), apiFetchGameDetails (copy), p0 (ref)
 		return var19 and apiFetchGameDetails.GetFetchingStatus(p3, p0) or nil
 	end)
-	local var21 = useSelector(function(p4) --[[ line: 60 ]]
+	local var21 = useSelector(function(p4)
 		-- upvalues: var19 (ref), p0 (ref)
 		return if var19 then p4.GameDetails[p0] else nil
 	end)
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var21 (ref), var20 (ref), retrievalStatus (copy), var17 (ref), apiFetchGameDetails (copy), var18 (ref), p0 (ref)
 		if var19 and not var21 and var20 ~= retrievalStatus.Fetching then
 			var17(apiFetchGameDetails.Fetch(var18, { p0 }))
@@ -84,17 +84,17 @@ local function useCreatorName(p0) --[[ line: 49 ]]
 	return var21 and (var21.creator and (var21.creator.name or nil)), var20
 end
 
-local function _(p5) --[[ line: 92 | named "getSponsoredDisclosureTranslationKey" ]]
+local function _(p5)
 	-- upvalues: sponsoredUserCohortModule (ref)
 	return if p5 == sponsoredUserCohortModule.UnderEighteen then "Feature.GameDetails.Message.SponsoredDisclosure.U18" elseif p5 == sponsoredUserCohortModule.EighteenPlusPersonalized then "Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink" elseif p5 == sponsoredUserCohortModule.EighteenPlusNonPersonalized then "Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink" else "Feature.GameDetails.Message.SponsoredDisclosure.U18"
 end
 
-local _ = function(value) --[[ line: 104 | named "getSponsoredDisclosureNoUniverseTranslationKey" ]]
+local _ = function(value)
 	-- upvalues: sponsoredUserCohortModule (ref)
 	return if value == sponsoredUserCohortModule.UnderEighteen then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18" elseif value == sponsoredUserCohortModule.EighteenPlusPersonalized then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink" elseif value == sponsoredUserCohortModule.EighteenPlusNonPersonalized then "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink" else "Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18"
 end
 
-local function resolveSponsoredDisclosure(p6, p7, p8, p9, p10, p11) --[[ line: 123 ]]
+local function resolveSponsoredDisclosure(p6, p7, p8, p9, p10, p11)
 	-- upvalues: flaggedMutedError (ref), sponsoredUserCohortModule (ref)
 	if not (p6 ~= nil and p6 ~= "") then
 		flaggedMutedError("WhyThisAdDisclosureError", "Missing payerName in WhyThisAdModal")
@@ -120,7 +120,7 @@ local function resolveSponsoredDisclosure(p6, p7, p8, p9, p10, p11) --[[ line: 1
 	return p11.sponsoredDisclosureError, var24
 end
 
-return function(p12) --[[ line: 161 | named "WhyThisAdModal" ]]
+return function(p12)
 	-- upvalues: useDispatch (ref), useCreatorName (ref), useLocalization (ref), sponsoredUserCohortModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), reactModule (ref), closeCentralOverlay (ref), appPage (ref), fStringLuaAppAdPreferencesUrl (ref), fFlagSignalsNavP3Dispatch (ref), var13 (ref), navigateDown (ref), retrievalStatus (ref), omniRecommendationsContentType (ref), resolveSponsoredDisclosure (ref), flaggedMutedError (ref), dialog (ref), view (ref), button (ref), buttonVariant (ref)
 	local t_2
 	local var25 = useDispatch()
@@ -147,11 +147,11 @@ return function(p12) --[[ line: 161 | named "WhyThisAdModal" ]]
 	end
 	t.sponsoredDisclosureNoUniverse = t_2
 	local var31 = useLocalization(t)
-	local var32 = reactModule.useCallback(function() --[[ line: 182 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref), closeCentralOverlay (copy)
 		var25(closeCentralOverlay())
 	end, { var25 })
-	local var33 = reactModule.useCallback(function() --[[ line: 186 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref), closeCentralOverlay (copy), appPage (copy), fStringLuaAppAdPreferencesUrl (copy), var31 (ref), fFlagSignalsNavP3Dispatch (copy), var13 (copy), navigateDown (copy)
 		var25(closeCentralOverlay())
 		local t = {

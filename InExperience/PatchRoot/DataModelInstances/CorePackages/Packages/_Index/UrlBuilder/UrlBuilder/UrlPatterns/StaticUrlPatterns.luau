@@ -1,7 +1,7 @@
 ﻿game:DefineFastFlag("EnableShopGiftCardsURL", false)
 
-return function(p0) --[[ line: 3 ]]
-	local function _() --[[ line: 4 | named "isQQ" ]]
+return function(p0)
+	local function _()
 		-- upvalues: p0 (ref)
 		return string.find(p0.fromString("corp:")(), "qq.com")
 	end
@@ -19,11 +19,11 @@ return function(p0) --[[ line: 3 ]]
 		develop = p0.fromString("www:develop"),
 		creatorHub = p0.fromString("create:"),
 		blog = p0.fromString("blog:"),
-		giftCards = function(p1) --[[ line: 21 ]]
+		giftCards = function(p1)
 			-- upvalues: p0 (ref)
 			return p0.fromString(if game:GetFastFlag("EnableShopGiftCardsURL") then "www:shopgiftcards?ref={source}" else "www:giftcards?ref={source}")({ source = p1 or "" })
 		end,
-		giftCardsWithRedeem = function(p2, p3) --[[ line: 29 ]]
+		giftCardsWithRedeem = function(p2, p3)
 			-- upvalues: p0 (ref)
 			return if p3 and p3 ~= "" then p0.fromString("www:giftcards-" .. p3 .. "?ref={source}")({ source = p2 }) else p0.fromString("www:shopgiftcards?ref={source}")({ source = p2 })
 		end,
@@ -48,23 +48,23 @@ return function(p0) --[[ line: 3 ]]
 			sendVerificationEmail = p0.fromString("accountSettings:v1/email/verify")
 		},
 		about = {
-			us = function(p4) --[[ line: 62 ]]
+			us = function(p4)
 				-- upvalues: p0 (ref)
 				return p0.fromString("www:info/about-us?locale={localeCode}")({ localeCode = p4 or "" })
 			end,
-			careers = function(p5) --[[ line: 66 ]]
+			careers = function(p5)
 				-- upvalues: p0 (ref)
 				return if string.find(p0.fromString("corp:")(), "qq.com") then p0.fromString("corp:careers.html") else p0.fromString("www:info/jobs?locale={localeCode}")({ localeCode = p5 or "" })
 			end,
-			parents = function(p6) --[[ line: 74 ]]
+			parents = function(p6)
 				-- upvalues: p0 (ref)
 				return p0.fromString("www:info/parents?locale={localeCode}")({ localeCode = p6 or "" })
 			end,
-			terms = function(p7) --[[ line: 78 ]]
+			terms = function(p7)
 				-- upvalues: p0 (ref)
 				return if string.find(p0.fromString("corp:")(), "qq.com") and p7.useGameQQUrls then p0.fromString("https://game.qq.com/contract.shtml")() else p0.fromString("www:info/terms")()
 			end,
-			privacy = function(p8) --[[ line: 85 ]]
+			privacy = function(p8)
 				-- upvalues: p0 (ref)
 				return if string.find(p0.fromString("corp:")(), "qq.com") and p8.useGameQQUrls then p0.fromString("https://game.qq.com/privacy_guide.shtml")() else p0.fromString("www:info/privacy")()
 			end,

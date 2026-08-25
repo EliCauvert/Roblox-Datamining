@@ -2,7 +2,7 @@
 local avatarEditorStoresModule = require(script.Parent.AvatarEditorStores)
 local createAvatarEditorStoresModule = require(script.Parent.Parent.Stores.createAvatarEditorStores)
 
-return function() --[[ line: 12 | named "useAvatarEditorStores" ]]
+return function()
 	-- upvalues: reactModule (ref), avatarEditorStoresModule (ref), createAvatarEditorStoresModule (ref)
 	local var3 = reactModule.useContext(avatarEditorStoresModule)
 	

@@ -1,4 +1,4 @@
-﻿return function(value) --[[ line: 3 | named "getAssetIdAsNumeric" ]]
+﻿return function(value)
 	if typeof(value) == "number" then
 		return value
 	end

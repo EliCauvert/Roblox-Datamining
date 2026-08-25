@@ -12,16 +12,16 @@ local discountType = require(IAPExperience.ProductPurchase.PricingTypes).Discoun
 local fFlagPurchasePromptFetchCartPricing = require(IAPExperience.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 local var6 = getIconRichText(iconName.Robux)
 
-local function _(p0, p1) --[[ line: 32 | named "resolveLabel" ]]
+local function _(p0, p1)
 	return if p0 == nil or p0 == "" then p1 else p0
 end
 
-local function RobloxSubscriptionDiscountRow(p2) --[[ line: 39 ]]
+local function RobloxSubscriptionDiscountRow(p2)
 	-- upvalues: localizationService (ref), reactModule (ref), var6 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local discountLabel
 	local discount = p2.discount
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var10 = reactModule.useMemo(function() --[[ line: 43 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: var6 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
 		return string.format("- %s %s", var6, formatNumberModule(robloxLocaleId, discount.amountInRobux))
 	end, { robloxLocaleId, discount.amountInRobux })
@@ -47,12 +47,12 @@ local function RobloxSubscriptionDiscountRow(p2) --[[ line: 39 ]]
 	return createElement(priceLineItemModule, t)
 end
 
-local function GenericDiscountRow(p3) --[[ line: 65 ]]
+local function GenericDiscountRow(p3)
 	-- upvalues: localizationService (ref), reactModule (ref), var6 (ref), formatNumberModule (ref), useLocalization (ref), priceLineItemModule (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local discountLabel
 	local discount = p3.discount
 	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var13 = reactModule.useMemo(function() --[[ line: 69 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var6 (copy), formatNumberModule (copy), robloxLocaleId (ref), discount (ref)
 		return string.format("- %s %s", var6, formatNumberModule(robloxLocaleId, discount.amountInRobux))
 	end, { robloxLocaleId, discount.amountInRobux })
@@ -83,7 +83,7 @@ local t = {
 	[discountType.RobloxPlusSubscription] = RobloxSubscriptionDiscountRow
 }
 
-return function(p4) --[[ line: 96 | named "DiscountRow" ]]
+return function(p4)
 	-- upvalues: t (ref), GenericDiscountRow (ref), reactModule (ref)
 	return reactModule.createElement(t[p4.discount.type] or GenericDiscountRow, p4)
 end

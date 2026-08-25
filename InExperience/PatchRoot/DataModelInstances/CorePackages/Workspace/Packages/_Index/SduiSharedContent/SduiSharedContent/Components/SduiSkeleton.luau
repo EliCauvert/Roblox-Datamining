@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local _ = require(parent.SduiCompat)
 local skeleton = require(parent.Foundation).Skeleton
 
-return reactModule.memo(function(p0) --[[ line: 28 | named "SduiSkeleton" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), skeleton (ref)
 	return reactModule.createElement(skeleton, {
 		radius = p0.radius,

@@ -22,12 +22,12 @@ local playtestModeTooltipDisplayOrder = game:DefineFastInt("PlaytestModeTooltipD
 local var12 = false
 local var13 = if playtestModeDismissTooltip then observableValue.new(false) else nil
 
-local function _(p0, p1) --[[ line: 49 | named "getCanShow" ]]
+local function _(p0, p1)
 	-- upvalues: playtestModeTooltipExcludeBuildMode (ref), buildModeLaunchModule (ref), var12 (write), playtestModeDismissTooltip (ref)
 	return if playtestModeTooltipExcludeBuildMode and buildModeLaunchModule:hasBuildMode() then false else not var12 and (p0 ~= nil and (p0.current ~= nil and (not playtestModeDismissTooltip or p1 ~= false)))
 end
 
-return reactModule.memo(function(p2) --[[ line: 57 | named "PlaytestModeTooltip" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: useLocalization (ref), useIsPlaytestModeModule (ref), playtestModeDismissTooltip (ref), useObservableValueModule (ref), var8 (ref), var13 (ref), reactModule (ref), playtestModeTooltipExcludeBuildMode (ref), buildModeLaunchModule (ref), var12 (write), linkingProtocol (ref), playtestModeTooltipLearnMoreUrl (ref), settingsShowSignal (ref), overlayProvider (ref), playtestModeTooltipDisplayOrder (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref), buttonVariant (ref)
 	local var14 = useLocalization({
 		title = "CoreScripts.FTUX.Heading.ReadyToPlaytest",
@@ -41,12 +41,12 @@ return reactModule.memo(function(p2) --[[ line: 57 | named "PlaytestModeTooltip"
 	local anchorRef = p2.anchorRef
 	local var17 = if playtestModeTooltipExcludeBuildMode and buildModeLaunchModule:hasBuildMode() then false else not var12 and (anchorRef ~= nil and (anchorRef.current ~= nil and (not playtestModeDismissTooltip or (if playtestModeDismissTooltip then var16 else nil) ~= false)))
 	useState, var17 = useState(var17)
-	local var18 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var12 (copy), var17 (ref)
 		var12 = true
 		var17(false)
 	end, {})
-	local var19 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: linkingProtocol (copy), playtestModeTooltipLearnMoreUrl (copy), playtestModeDismissTooltip (copy), var18 (ref), var12 (copy), var17 (ref)
 		linkingProtocol.default:openURL(playtestModeTooltipLearnMoreUrl)
 		
@@ -58,7 +58,7 @@ return reactModule.memo(function(p2) --[[ line: 57 | named "PlaytestModeTooltip"
 		var12 = true
 		var17(false)
 	end, { if playtestModeDismissTooltip then var18 else nil })
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), p2 (ref), playtestModeDismissTooltip (copy), var16 (write), playtestModeTooltipExcludeBuildMode (copy), buildModeLaunchModule (copy), var12 (copy)
 		local anchorRef = p2.anchorRef
 		var17(if playtestModeTooltipExcludeBuildMode and buildModeLaunchModule:hasBuildMode() then false else not var12 and (anchorRef ~= nil and (anchorRef.current ~= nil and (not playtestModeDismissTooltip or (if playtestModeDismissTooltip then var16 else nil) ~= false))))
@@ -68,22 +68,22 @@ return reactModule.memo(function(p2) --[[ line: 57 | named "PlaytestModeTooltip"
 	})
 	
 	if playtestModeDismissTooltip then
-		reactModule.useEffect(function() --[[ line: 98 ]]
+		reactModule.useEffect(function()
 			-- upvalues: useState (ref), var16 (write), var18 (ref)
 			if useState and not var16 then
 				var18()
 			end
 		end, { useState, var16 })
-		reactModule.useEffect(function() --[[ line: 104 ]]
+		reactModule.useEffect(function()
 			-- upvalues: settingsShowSignal (copy), var18 (ref)
-			local var20 = settingsShowSignal:connect(function(p3) --[[ line: 105 ]]
+			local var20 = settingsShowSignal:connect(function(p3)
 				-- upvalues: var18 (copy)
 				if p3 then
 					var18()
 				end
 			end)
 			
-			return function() --[[ line: 111 ]]
+			return function()
 				-- upvalues: var20 (ref)
 				var20:Disconnect()
 			end

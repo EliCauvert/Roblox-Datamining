@@ -7,12 +7,12 @@ alertViewCheckbox.defaultProps = {
 	Text = "",
 	LayoutOrder = 0,
 	checked = false,
-	onActivated = function() --[[ line: 12 ]] end
+	onActivated = function() end
 }
 
-function alertViewCheckbox.render(p0) --[[ line: 16 ]]
+function alertViewCheckbox.render(p0)
 	-- upvalues: UIBlox (ref), roact (ref), checkIconModule (ref)
-	return UIBlox.Style.withStyle(function(p1) --[[ line: 17 ]]
+	return UIBlox.Style.withStyle(function(p1)
 		-- upvalues: roact (copy), p0 (ref), checkIconModule (copy)
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,

@@ -11,13 +11,13 @@ local fFlagMoveInExperienceModeToEditProfile = sharedFlagsModule.FFlagMoveInExpe
 local fFlagAXEnableProfileTab = sharedFlagsModule.FFlagAXEnableProfileTab
 
 return {
-	[enumsModule.ProfileActions.EditProfile] = function(p0) --[[ line: 19 ]]
+	[enumsModule.ProfileActions.EditProfile] = function(p0)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), fFlagAXEnableProfileTab (ref), refreshProfilePlatformUserInfoModule (ref), fFlagMoveInExperienceModeToEditProfile (ref)
 		return {
 			variant = buttonVariant.Standard,
 			text = p0.localized[enumsModule.ProfileActions.EditProfile],
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 24 ]]
+				[profileTypes.User] = function()
 					-- upvalues: p0 (ref), eventNamesModule (copy), enumsModule (copy), fFlagAXEnableProfileTab (copy), refreshProfilePlatformUserInfoModule (copy), fFlagMoveInExperienceModeToEditProfile (copy)
 					local var6
 					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonOpenEditProfilePage, { buttonSurface = p0.buttonSurface })
@@ -33,23 +33,23 @@ return {
 					end
 					t.fullBleed = var6
 					
-					function t.navigateToEditUsername(p1) --[[ line: 36 ]]
+					function t.navigateToEditUsername(p1)
 						-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy)
 						p0.navigateTo.editUsername({
 							showToast = p1,
-							onUsernameChanged = function() --[[ line: 39 ]]
+							onUsernameChanged = function()
 								-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy)
 								p0.dispatch(refreshProfilePlatformUserInfoModule(p0.profileId))
 							end
 						})
 					end
 					
-					function t.onIdentityChange() --[[ line: 44 ]]
+					function t.onIdentityChange()
 						-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy)
 						p0.dispatch(refreshProfilePlatformUserInfoModule(p0.profileId))
 					end
 					
-					t.onToggleInExperienceMode = if fFlagMoveInExperienceModeToEditProfile then function() --[[ line: 48 ]]
+					t.onToggleInExperienceMode = if fFlagMoveInExperienceModeToEditProfile then function()
 						-- upvalues: p0 (copy), refreshProfilePlatformUserInfoModule (copy), eventNamesModule (copy)
 						p0.dispatch(refreshProfilePlatformUserInfoModule(p0.profileId))
 						p0.analytics.fireAnalyticsEvent(eventNamesModule.ToggleInExperienceModeButton, {})

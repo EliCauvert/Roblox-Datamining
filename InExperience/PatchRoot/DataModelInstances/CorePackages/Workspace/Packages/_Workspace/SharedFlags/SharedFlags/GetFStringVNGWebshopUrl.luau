@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("VNGWebshopUrl", "https://shop.vnggames.com/global")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("VNGWebshopUrl")
 end

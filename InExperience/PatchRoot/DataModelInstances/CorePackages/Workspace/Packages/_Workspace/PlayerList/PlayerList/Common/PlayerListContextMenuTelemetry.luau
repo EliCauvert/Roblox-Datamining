@@ -18,7 +18,7 @@ local t_1 = {
 }
 
 return {
-	logAction = function(p0, p1) --[[ line: 43 ]]
+	logAction = function(p0, p1)
 		-- upvalues: telemetryService (write), t (ref), t_1 (ref)
 		local list = {
 			"addPlaceId",
@@ -41,7 +41,7 @@ return {
 		telemetryService:LogEvent(t, t_3)
 		telemetryService:LogCounter(t_1, t_3, 1)
 	end,
-	_setServicesForTesting = function(value) --[[ line: 65 ]]
+	_setServicesForTesting = function(value)
 		-- upvalues: telemetryService (write)
 		telemetryService = value
 	end

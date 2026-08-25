@@ -11,7 +11,7 @@ local fFlagAXDisableHiddenCatalogCategoryPills = avatarExperienceFlagsModule.FFl
 local fFlagAXCatalogCategoriesSDUI = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUI
 local useCategoryPillColorAnimationModule = require(avatarExperienceCommon.Hooks.useCategoryPillColorAnimation)
 
-return function(p0) --[[ line: 43 | named "CategoryPill" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), fFlagAXCatalogCategoriesSDUI (ref), reactModule (ref), fFlagAXCategoryPillColorAnimation (ref), useCategoryPillColorAnimationModule (ref), foundationModule (ref), fFlagAXCategoryPillPositionAnimation (ref), fFlagAXDisableHiddenCatalogCategoryPills (ref)
 	local var5 = useTokens()
 	local var6 = useLocalization({
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 43 | named "CategoryPill" ]]
 	local categories = p0.categories
 	local var7 = if p0.pillRef then p0.pillRef else reactModule.useRef(nil)
 	local var8 = if fFlagAXCategoryPillColorAnimation then useCategoryPillColorAnimationModule(p0.isChecked) else nil
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (write), p0 (ref), pillIndex (ref)
 		if var7.current then
 			p0.categoryButtonRefs[p0.id] = var7

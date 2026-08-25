@@ -18,7 +18,7 @@ local var4 = urlBuilder.new({
 })
 
 return {
-	sendRequestToNewParent = function(p0, p1, p2, p3) --[[ line: 29 ]]
+	sendRequestToNewParent = function(p0, p1, p2, p3)
 		-- upvalues: var2 (ref), VPCRequestTypeEnum (ref), httpService (ref)
 		return p0(var2(), "POST", {
 			postBody = httpService:JSONEncode({
@@ -30,21 +30,21 @@ return {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(p5) --[[ line: 50 ]]
+		}):andThen(function(p5)
 			return {
 				sessionId = p5.responseBody.sessionId,
 				lockedUntil = p5.responseBody.lockedUntil
 			}
-		end):catch(function(p4) --[[ line: 56 ]]
+		end):catch(function(p4)
 			-- upvalues: httpService (copy)
-			local _, status = pcall(function() --[[ line: 57 ]]
+			local _, status = pcall(function()
 				-- upvalues: httpService (copy), p4 (ref)
 				return httpService:JSONDecode(p4.Body)
 			end)
 			error({ code = status.code, message = status.message })
 		end)
 	end,
-	sendRequestToAllParents = function(p6, p7, p8) --[[ line: 72 ]]
+	sendRequestToAllParents = function(p6, p7, p8)
 		-- upvalues: var3 (ref), httpService (ref)
 		return p6(var3(), "POST", {
 			postBody = httpService:JSONEncode({ requestType = p7[1], requestDetails = p8 }),
@@ -52,30 +52,30 @@ return {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(p10) --[[ line: 90 ]]
+		}):andThen(function(p10)
 			return {
 				sessionId = p10.responseBody.sessionId,
 				lockedUntil = p10.responseBody.lockedUntil
 			}
-		end):catch(function(p9) --[[ line: 96 ]]
+		end):catch(function(p9)
 			-- upvalues: httpService (copy)
-			local _, status = pcall(function() --[[ line: 97 ]]
+			local _, status = pcall(function()
 				-- upvalues: httpService (copy), p9 (ref)
 				return httpService:JSONDecode(p9.Body)
 			end)
 			error({ code = status.code, message = status.message })
 		end)
 	end,
-	getLinkedParentEmails = function(p11) --[[ line: 110 ]]
+	getLinkedParentEmails = function(p11)
 		-- upvalues: var4 (ref)
 		return p11(var4(), "GET", {
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(p12) --[[ line: 118 ]]
+		}):andThen(function(p12)
 			return { parentEmails = p12.responseBody.parentEmails }
-		end):catch(function(_) --[[ line: 123 ]]
+		end):catch(function(_)
 			error({})
 		end)
 	end

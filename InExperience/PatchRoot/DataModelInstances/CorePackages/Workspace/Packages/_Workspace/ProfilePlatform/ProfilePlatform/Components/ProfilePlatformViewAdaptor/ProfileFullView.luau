@@ -19,7 +19,7 @@ local iconButton = foundationModule.IconButton
 local iconSize = foundationModule.Enums.IconSize
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-return function(p0) --[[ line: 48 | named "ProfileFullView" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), useProfileWrapperContextModule (ref), useIsMeTabModule (ref), useProfileJsonComponentModule (ref), constantsModule (ref), reactModule (ref), fFlagProfilePlatformMeTabScrollAwayModule (ref), visibilityControl (ref), userInputService (ref), view (ref), iconButton (ref), iconSize (ref), fullscreenPageWithSafeArea (ref)
 	local var14
 	local theme = useStyle().Theme
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 48 | named "ProfileFullView" ]]
 	local var23 = if fFlagProfilePlatformMeTabScrollAwayModule then var14 else nil
 	local var24 = if fFlagProfilePlatformMeTabScrollAwayModule then reactModule.useRef(false) else nil
 	local var25 = if fFlagProfilePlatformMeTabScrollAwayModule then reactModule.useRef(0) else nil
-	local var26 = reactModule.useCallback(function(p1) --[[ line: 93 ]]
+	local var26 = reactModule.useCallback(function(p1)
 		-- upvalues: var21 (ref), var23 (ref), var24 (ref), var25 (ref), visibilityControl (copy)
 		local canvasPosition = p1.CanvasPosition
 		var21(math.abs(canvasPosition.Y))
@@ -62,27 +62,27 @@ return function(p0) --[[ line: 48 | named "ProfileFullView" ]]
 	})
 	
 	if fFlagProfilePlatformMeTabScrollAwayModule then
-		reactModule.useEffect(function() --[[ line: 116 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var23 (ref), userInputService (copy), var24 (ref), visibilityControl (copy)
 			if var23 then
-				local touchStartedConnection = userInputService.TouchStarted:Connect(function() --[[ line: 120 ]]
+				local touchStartedConnection = userInputService.TouchStarted:Connect(function()
 					-- upvalues: var24 (copy)
 					var24.current = true
 				end)
-				local touchEndedConnection = userInputService.TouchEnded:Connect(function() --[[ line: 123 ]]
+				local touchEndedConnection = userInputService.TouchEnded:Connect(function()
 					-- upvalues: var24 (copy), visibilityControl (copy)
 					var24.current = false
 					visibilityControl.onTouchEnded()
 				end)
 				
-				return function() --[[ line: 127 ]]
+				return function()
 					-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), visibilityControl (copy)
 					touchStartedConnection:Disconnect()
 					touchEndedConnection:Disconnect()
 					visibilityControl.show()
 				end
 			end
-			return function() --[[ line: 118 ]] end
+			return function() end
 		end, { var23 })
 	end
 	local frame = reactModule.createElement("Frame", {

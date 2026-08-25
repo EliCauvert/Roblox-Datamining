@@ -1,6 +1,6 @@
 ﻿game:DefineFastInt("LuaAppRecommendedGamesCount", 6)
 
-return function() --[[ line: 3 ]]
+return function()
 	local luaAppRecommendedGamesCountFastInt = game:GetFastInt("LuaAppRecommendedGamesCount")
 	
 	if luaAppRecommendedGamesCountFastInt > 20 then

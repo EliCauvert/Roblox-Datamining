@@ -9,25 +9,25 @@ local useInterpolatedClientSettingsModule = require(expChat.ClientSettings.useIn
 local enableChatButtonTelemetryEnabledEngineFeature = game:GetEngineFeature("EnableChatButtonTelemetryEnabled")
 local fFlagExpChatNewInputBarModule = require(expChat.Flags.FFlagExpChatNewInputBar)
 
-local function _(value, p0) --[[ line: 36 | named "setTransparency" ]]
-	return p0:map(function(p1) --[[ line: 37 ]]
+local function _(value, p0)
+	return p0:map(function(p1)
 		-- upvalues: value (ref)
 		return value + p1 * (1 - value)
 	end)
 end
 
-return localizationModule.connect(function() --[[ line: 124 ]]
+return localizationModule.connect(function()
 	return {
 		EnableChatButtonText = "CoreScripts.TextChat.EnableChatButton.Label.UnlockChat"
 	}
-end)(function(p2) --[[ line: 42 | named "EnableChatButton" ]]
+end)(function(p2)
 	-- upvalues: useCursor (ref), useInterpolatedClientSettingsModule (ref), reactModule (ref), enableChatButtonTelemetryEnabledEngineFeature (ref), textChatService (ref), fFlagExpChatNewInputBarModule (ref), configModule (ref)
 	local var8 = useCursor()
 	local isSpatialUIEnabled = p2.isSpatialUIEnabled
 	local chatWindowSettings = p2.chatWindowSettings
 	local backgroundTransparency = useInterpolatedClientSettingsModule(chatWindowSettings).BackgroundTransparency
 	local backgroundColor3 = useInterpolatedClientSettingsModule(chatWindowSettings).BackgroundColor3
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: enableChatButtonTelemetryEnabledEngineFeature (copy), p2 (ref), textChatService (copy)
 		if enableChatButtonTelemetryEnabledEngineFeature and p2.visible then
 			textChatService:SendEnableChatButtonShown()
@@ -38,7 +38,7 @@ end)(function(p2) --[[ line: 42 | named "EnableChatButton" ]]
 	local t = {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundColor3 = backgroundColor3,
-		BackgroundTransparency = if fFlagExpChatNewInputBarModule then 1 else p2.transparencyValue:map(function(p3) --[[ line: 37 ]]
+		BackgroundTransparency = if fFlagExpChatNewInputBarModule then 1 else p2.transparencyValue:map(function(p3)
 			-- upvalues: backgroundTransparency (ref)
 			return backgroundTransparency + p3 * (1 - backgroundTransparency)
 		end),
@@ -65,7 +65,7 @@ end)(function(p2) --[[ line: 42 | named "EnableChatButton" ]]
 		BackgroundColor3 = configModule.EnableChatButtonBackgroundColor
 	}
 	local enableChatButtonBackgroundTransparency = configModule.EnableChatButtonBackgroundTransparency
-	t_2.BackgroundTransparency = p2.transparencyValue:map(function(p4) --[[ line: 37 ]]
+	t_2.BackgroundTransparency = p2.transparencyValue:map(function(p4)
 		-- upvalues: enableChatButtonBackgroundTransparency (ref)
 		return enableChatButtonBackgroundTransparency + p4 * (1 - enableChatButtonBackgroundTransparency)
 	end)
@@ -77,7 +77,7 @@ end)(function(p2) --[[ line: 42 | named "EnableChatButton" ]]
 	t_2.TextColor3 = configModule.ChatInputBarTextColor3
 	t_2.TextSize = if isSpatialUIEnabled then configModule.ChatInputBarSpatialPanelTextSize else configModule.ChatInputBarTextSize
 	local var14 = 0
-	t_2.TextTransparency = p2.transparencyValue:map(function(p5) --[[ line: 37 ]]
+	t_2.TextTransparency = p2.transparencyValue:map(function(p5)
 		-- upvalues: var14 (ref)
 		return var14 + p5 * (1 - var14)
 	end)
@@ -86,7 +86,7 @@ end)(function(p2) --[[ line: 42 | named "EnableChatButton" ]]
 	t_2.TextYAlignment = Enum.TextYAlignment.Center
 	t_2.ZIndex = 2
 	
-	t_2[reactModule.Event.Activated] = function() --[[ line: 104 ]]
+	t_2[reactModule.Event.Activated] = function()
 		-- upvalues: enableChatButtonTelemetryEnabledEngineFeature (copy), textChatService (copy), p2 (ref)
 		if enableChatButtonTelemetryEnabledEngineFeature then
 			textChatService:SendEnableChatButtonClicked()

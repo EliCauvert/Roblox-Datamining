@@ -1,5 +1,5 @@
 ﻿return {
-	createControlBar = function(helpBar) --[[ line: 4 ]]
+	createControlBar = function(helpBar)
 		helpBar.ControlBarContainer = Instance.new("Frame")
 		helpBar.ControlBarContainer.Name = "ControlBarContainer"
 		helpBar.ControlBarContainer.BackgroundTransparency = 1
@@ -53,14 +53,14 @@
 		helpBar.HelpBar.Parent = helpBar.ControlBarContainer
 		helpBar.maxViewportScalingWidth = helpBar.maxControlBarHeight * UIAspectRatioConstraint.AspectRatio
 		
-		local function setupControlBarScaling() --[[ line: 73 ]]
+		local function setupControlBarScaling()
 			-- upvalues: helpBar (ref), UIAspectRatioConstraint (ref), UIPadding (ref)
 			helpBar.firstThresholdCheck = true
 			helpBar.lastCheckAboveThreshold = false
 			local currentCamera = workspace.CurrentCamera
 			
 			if currentCamera then
-				currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 81 ]]
+				currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 					-- upvalues: currentCamera (ref), helpBar (copy), UIAspectRatioConstraint (copy), UIPadding (copy)
 					if helpBar.maxViewportScalingWidth < currentCamera.ViewportSize.X then
 						if not helpBar.firstBoundaryCheck and helpBar.lastCheckAboveThreshold then return end
@@ -86,7 +86,7 @@
 		setupControlBarScaling()
 		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(setupControlBarScaling)
 		
-		function helpBar.createUIListLayout(p1, p2) --[[ line: 124 ]]
+		function helpBar.createUIListLayout(p1, p2)
 			local UIListLayout = Instance.new("UIListLayout")
 			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
 			UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center

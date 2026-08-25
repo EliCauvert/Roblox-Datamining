@@ -25,11 +25,11 @@ local var15, var16 = signalsModule.createSignal(false)
 local t = { get = var15, set = var16 }
 local t_1 = {}
 
-local function useAgentMessageCopy(p0) --[[ line: 53 ]]
+local function useAgentMessageCopy(p0)
 	-- upvalues: reactModule (ref), default (ref), iconName (ref)
 	local var20, var21 = reactModule.useState(false)
 	local var22 = reactModule.useRef(nil)
-	local var23 = reactModule.useCallback(function() --[[ line: 57 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), default (copy), var21 (ref), var22 (ref)
 		if p0 ~= nil and p0 ~= "" then
 			default:setClipboardText({ context = "Build-AgentMessage", text = p0 })
@@ -39,15 +39,15 @@ local function useAgentMessageCopy(p0) --[[ line: 53 ]]
 		if var22.current ~= nil then
 			task.cancel(var22.current)
 		end
-		var22.current = task.delay(2, function() --[[ line: 68 ]]
+		var22.current = task.delay(2, function()
 			-- upvalues: var22 (copy), var21 (copy)
 			var22.current = nil
 			var21(false)
 		end)
 	end, { p0 })
-	reactModule.useEffect(function() --[[ line: 74 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref)
-		return function() --[[ line: 75 ]]
+		return function()
 			-- upvalues: var22 (copy)
 			if var22.current ~= nil then
 				task.cancel(var22.current)
@@ -58,7 +58,7 @@ local function useAgentMessageCopy(p0) --[[ line: 53 ]]
 	return if var20 then iconName.CheckLarge else iconName.TwoStackedSquares, var23
 end
 
-local function _(value) --[[ line: 85 | named "getRollbackInProgressSignal" ]]
+local function _(value)
 	-- upvalues: t (ref), t_1 (ref), signalsModule (ref)
 	if value == nil then
 		return t
@@ -73,7 +73,7 @@ local function _(value) --[[ line: 85 | named "getRollbackInProgressSignal" ]]
 	return var24
 end
 
-return function(p1) --[[ line: 102 | named "AgentTurnFeedback" ]]
+return function(p1)
 	-- upvalues: feedbackIconsModule (ref), fFlagBuildLocalization (ref), reactModule (ref), localizationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagEnableTeamTestLua (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), useAgentMessageCopy (ref), t (ref), t_1 (ref), signalsModule (ref), getPlaytestLoadingStoreModule (ref), signalsReactModule (ref), feedbackActionModule (ref), sendAgentTurnFeedbackModule (ref), userFeedbackModule (ref), snackbar (ref), restoreVersionDialogModule (ref)
 	local CHAT_REVERT_FAILURE, CHAT_REVERT_SUCCESS, CHAT_REVERT_CONFIRMATION_TITLE, CHAT_REVERT_CONFIRMATION_DESCRIPTION
 	local turnFeedbackIds = p1.turnFeedbackIds
@@ -131,7 +131,7 @@ return function(p1) --[[ line: 102 | named "AgentTurnFeedback" ]]
 		var38 = var40
 		var39 = var41
 	end
-	local var42 = reactModule.useMemo(function() --[[ line: 168 ]]
+	local var42 = reactModule.useMemo(function()
 		-- upvalues: var27 (ref), t (copy), t_1 (copy), signalsModule (copy)
 		if var27 == nil then
 			return t
@@ -145,26 +145,26 @@ return function(p1) --[[ line: 102 | named "AgentTurnFeedback" ]]
 		end
 		return var50
 	end, { var27 })
-	local var43 = reactModule.useCallback(function(p2) --[[ line: 171 ]]
+	local var43 = reactModule.useCallback(function(p2)
 		-- upvalues: getPlaytestLoadingStoreModule (copy), var27 (ref)
 		return if var27 == nil then false else getPlaytestLoadingStoreModule(p2).getAgentStatusForPlaceId(var27)(p2) == "Loading"
 	end, { var27 })
 	local var44 = signalsReactModule.useSignalState(var43)
 	local var45 = signalsReactModule.useSignalState(var42.get)
-	local var46 = reactModule.useCallback(function() --[[ line: 180 ]]
+	local var46 = reactModule.useCallback(function()
 		-- upvalues: var37 (ref)
 		var37("")
 	end, {})
-	local var47 = reactModule.useCallback(function() --[[ line: 184 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref)
 		var42.set(true)
 	end, { var42 })
-	local var48 = reactModule.useCallback(function() --[[ line: 187 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref), var37 (ref), CHAT_REVERT_SUCCESS (write)
 		var42.set(false)
 		var37(CHAT_REVERT_SUCCESS)
 	end, { var42, CHAT_REVERT_SUCCESS })
-	local var49 = reactModule.useCallback(function() --[[ line: 191 ]]
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref), var37 (ref), CHAT_REVERT_FAILURE (write)
 		var42.set(false)
 		var37(CHAT_REVERT_FAILURE)
@@ -180,7 +180,7 @@ return function(p1) --[[ line: 102 | named "AgentTurnFeedback" ]]
 				includeRevert = feedbackIconsModule.canRevert(turnFeedbackIds),
 				isRevertDisabled = var44 or var45
 			}),
-			onActivated = reactModule.useCallback(function(p3) --[[ line: 196 ]]
+			onActivated = reactModule.useCallback(function(p3)
 				-- upvalues: turnFeedbackIds (ref), feedbackActionModule (copy), var33 (ref), fFlagBuildExperienceCopyChatMessagesModule (copy), var39 (write), sendAgentTurnFeedbackModule (copy), var35 (ref)
 				if turnFeedbackIds == nil then return end
 				if p3.action == feedbackActionModule.REVERT then
@@ -212,7 +212,7 @@ return function(p1) --[[ line: 102 | named "AgentTurnFeedback" ]]
 			isOpen = true,
 			title = CHAT_REVERT_CONFIRMATION_TITLE,
 			description = CHAT_REVERT_CONFIRMATION_DESCRIPTION,
-			onRestore = function() --[[ line: 253 ]]
+			onRestore = function()
 				-- upvalues: var33 (ref), var43 (ref), var42 (ref), var35 (ref), feedbackActionModule (copy), sendAgentTurnFeedbackModule (copy), turnFeedbackIds (ref), feedbackIconsModule (copy), var47 (ref), var48 (ref), var49 (ref)
 				var33(false)
 				
@@ -227,7 +227,7 @@ return function(p1) --[[ line: 102 | named "AgentTurnFeedback" ]]
 					onRevertFailure = var49
 				})
 			end,
-			onCancel = function() --[[ line: 266 ]]
+			onCancel = function()
 				-- upvalues: var33 (ref)
 				var33(false)
 			end

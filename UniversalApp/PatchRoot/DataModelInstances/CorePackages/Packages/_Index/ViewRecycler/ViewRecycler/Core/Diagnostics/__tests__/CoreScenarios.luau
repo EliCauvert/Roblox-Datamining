@@ -1,4 +1,4 @@
-﻿local function createCounters() --[[ line: 19 ]]
+﻿local function createCounters()
 	local t = {
 		visibleRangeChanges = 0,
 		renderedRangeChanges = 0,
@@ -18,7 +18,7 @@
 	}
 	local var4 = 0
 	
-	return t, function(p0) --[[ line: 39 | named "diagnostics" ]]
+	return t, function(p0)
 		-- upvalues: t (ref), var4 (write)
 		if p0.kind == "rangeChanged" then
 			if p0.rangeKind == "visible" then
@@ -62,7 +62,7 @@
 	end
 end
 
-local function values(p1) --[[ line: 75 ]]
+local function values(p1)
 	local list = table.create(p1)
 	
 	for i = 1, p1 do
@@ -74,10 +74,10 @@ local function values(p1) --[[ line: 75 ]]
 	return list
 end
 
-local function runScenario(p2, p3) --[[ line: 86 ]]
+local function runScenario(p2, p3)
 	-- upvalues: createCounters (ref), values (ref)
 	local var6, var7 = createCounters()
-	local var8 = p2.DataSource.sequence(values(100), function(p4) --[[ line: 88 ]]
+	local var8 = p2.DataSource.sequence(values(100), function(p4)
 		return p4.id
 	end)
 	local var9 = if p3 then p2.Layout.measured({ estimatedItemLength = 40 }) else p2.Layout.uniform({ itemLength = 40 })
@@ -85,15 +85,15 @@ local function runScenario(p2, p3) --[[ line: 86 ]]
 	local var11 = p2.Adapter.createRecyclingScope({
 		maxPoolSize = 2,
 		adapter = {
-			create = function() --[[ line: 97 ]]
+			create = function()
 				-- upvalues: var10 (write)
 				var10 += 1
 				
 				return var10
 			end,
-			destroy = function() --[[ line: 101 ]] end
+			destroy = function() end
 		},
-		onPoolChanged = function(p5) --[[ line: 104 ]]
+		onPoolChanged = function(p5)
 			-- upvalues: var7 (ref)
 			var7({
 				kind = "poolChanged",
@@ -110,7 +110,7 @@ local function runScenario(p2, p3) --[[ line: 86 ]]
 		dataSource = var8,
 		layout = var9,
 		recyclingScope = var11,
-		getItemViewType = function(p6) --[[ line: 119 ]]
+		getItemViewType = function(p6)
 			return p6.kind
 		end,
 		diagnostics = var7
@@ -180,7 +180,7 @@ local function runScenario(p2, p3) --[[ line: 86 ]]
 end
 
 return {
-	run = function(p7) --[[ line: 177 ]]
+	run = function(p7)
 		-- upvalues: runScenario (ref)
 		return {
 			fixed = runScenario(p7, false),

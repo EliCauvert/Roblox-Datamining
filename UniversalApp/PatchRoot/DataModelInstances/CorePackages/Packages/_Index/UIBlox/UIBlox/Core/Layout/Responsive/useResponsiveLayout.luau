@@ -3,7 +3,7 @@ local reactModule = require(parent.Parent.Parent.Parent.Parent.React)
 local responsiveLayoutContextModule = require(parent.ResponsiveLayoutContext)
 local responsiveLayoutConfigReaderModule = require(parent.ResponsiveLayoutConfigReader)
 
-return function(p0, p1) --[[ line: 19 ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), responsiveLayoutContextModule (ref), responsiveLayoutConfigReaderModule (ref)
 	local var3 = reactModule.useContext(responsiveLayoutContextModule)
 	

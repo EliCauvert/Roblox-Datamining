@@ -2,17 +2,17 @@
 local t = {}
 local t_1 = {}
 
-local function sanitize(p0) --[[ line: 8 ]]
+local function sanitize(p0)
 	return p0:gsub("&amp;", "&"):gsub("&lt;", "<"):gsub("&gt;", ">"):gsub("&quot;", "\""):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"):gsub("\"", "&quot;"):gsub(" *\n *", "\n")
 end
 
-local function _(p1) --[[ line: 21 | named "urlEncode" ]]
-	return string.gsub(p1, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p2) --[[ line: 22 ]]
+local function _(p1)
+	return string.gsub(p1, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p2)
 		return string.format("%%%02X", string.byte(p2))
 	end)
 end
 
-local function map(p3) --[[ line: 27 ]]
+local function map(p3)
 	-- upvalues: t_1 (write)
 	local name = t_1[p3.name]
 	
@@ -22,7 +22,7 @@ local function map(p3) --[[ line: 27 ]]
 	error(`No handler found for node {p3.name}`)
 end
 
-local _ = function(p4) --[[ line: 36 | named "processChildren" ]]
+local _ = function(p4)
 	-- upvalues: t_1 (write)
 	if not p4 then
 		return ""
@@ -45,7 +45,7 @@ local _ = function(p4) --[[ line: 36 | named "processChildren" ]]
 	return var5
 end
 
-local function emptyHandler(p5) --[[ line: 155 ]]
+local function emptyHandler(p5)
 	-- upvalues: t_1 (write)
 	local children = p5.children
 	
@@ -71,7 +71,7 @@ local function emptyHandler(p5) --[[ line: 155 ]]
 end
 
 t_1 = {
-	ROOT = function(p6) --[[ line: 48 ]]
+	ROOT = function(p6)
 		-- upvalues: t_1 (write)
 		local children = p6.children
 		
@@ -95,7 +95,7 @@ t_1 = {
 		end
 		return var11
 	end,
-	HEADING = function(p7) --[[ line: 52 ]]
+	HEADING = function(p7)
 		-- upvalues: t_1 (write)
 		local var16
 		local var14 = if p7.attributes then p7.attributes.depth else 1
@@ -124,7 +124,7 @@ t_1 = {
 		end
 		return var15:format(var14, var16, var14)
 	end,
-	PARAGRAPH = function(p8) --[[ line: 57 ]]
+	PARAGRAPH = function(p8)
 		-- upvalues: t_1 (write)
 		local var21
 		local var20 = "<p>%*</p>\n"
@@ -152,11 +152,11 @@ t_1 = {
 		end
 		return var20:format(var21:gsub("^ +", ""):gsub(" +$", ""))
 	end,
-	TEXT = function(p9) --[[ line: 107 ]]
+	TEXT = function(p9)
 		-- upvalues: sanitize (ref)
 		return sanitize(p9.text or "")
 	end,
-	STYLED_TEXT = function(p10) --[[ line: 90 ]]
+	STYLED_TEXT = function(p10)
 		-- upvalues: t_1 (write)
 		local var25 = if p10.attributes then p10.attributes.style else nil
 		
@@ -291,10 +291,10 @@ t_1 = {
 		end
 		return var46
 	end,
-	DIVIDER = function() --[[ line: 61 ]]
+	DIVIDER = function()
 		return "<hr />\n"
 	end,
-	QUOTE = function(p11) --[[ line: 65 ]]
+	QUOTE = function(p11)
 		-- upvalues: t_1 (write)
 		local var50
 		local var49 = "<blockquote>\n%*</blockquote>\n"
@@ -322,7 +322,7 @@ t_1 = {
 		end
 		return var49:format(var50)
 	end,
-	CODE_BLOCK = function(p12) --[[ line: 69 ]]
+	CODE_BLOCK = function(p12)
 		local t = {}
 		
 		if p12.attributes and p12.attributes.language and p12.attributes.language ~= "" then
@@ -335,7 +335,7 @@ t_1 = {
 		end
 		return `<pre><code{if #t_1 > 0 then ` {table.concat(t_1, " ")}` else ""}>{p12.text}</code></pre>\n`
 	end,
-	LIST = function(p13) --[[ line: 81 ]]
+	LIST = function(p13)
 		-- upvalues: t_1 (write)
 		local var58
 		local var56 = if p13.attributes then if p13.attributes.ordered then "ol" else "ul" else "ul"
@@ -364,7 +364,7 @@ t_1 = {
 		end
 		return var57:format(var56, var58, var56)
 	end,
-	LIST_ITEM = function(p14) --[[ line: 86 ]]
+	LIST_ITEM = function(p14)
 		-- upvalues: t_1 (write)
 		local var63
 		local var62 = "<li>%*</li>\n"
@@ -392,7 +392,7 @@ t_1 = {
 		end
 		return var62:format(var63)
 	end,
-	LINK = function(p15) --[[ line: 111 ]]
+	LINK = function(p15)
 		-- upvalues: t_1 (write), sanitize (ref)
 		local var69
 		local var67 = if p15.attributes then p15.attributes.url else p15.url or ""
@@ -422,11 +422,11 @@ t_1 = {
 		if var69 == "" and p15.text then
 			var69 = sanitize(p15.text)
 		end
-		return `<a href="{string.gsub(var67, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p16) --[[ line: 22 ]]
+		return `<a href="{string.gsub(var67, "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p16)
 			return string.format("%%%02X", string.byte(p16))
 		end)}"{if var68 then ` title="{sanitize(var68)}"` else ""}>{var69}</a>`
 	end,
-	TAG = function(p17) --[[ line: 123 ]]
+	TAG = function(p17)
 		-- upvalues: t_1 (write)
 		local text = p17.text
 		
@@ -471,15 +471,15 @@ t_1 = {
 		end
 		return var74:format(var75, var76, var77, text)
 	end,
-	LINE_BREAK = function() --[[ line: 141 ]]
+	LINE_BREAK = function()
 		return "<br />"
 	end,
-	BREAK = function() --[[ line: 145 ]]
+	BREAK = function()
 		return "<br />\n"
 	end,
-	IMAGE = function(p18) --[[ line: 149 ]]
+	IMAGE = function(p18)
 		-- upvalues: sanitize (ref)
-		return `<img src="{string.gsub(if p18.attributes then p18.attributes.url else p18.url or "", "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p19) --[[ line: 22 ]]
+		return `<img src="{string.gsub(if p18.attributes then p18.attributes.url else p18.url or "", "([^%w_%%%-%.%*%?%(%)#~/:=])", function(p19)
 			return string.format("%%%02X", string.byte(p19))
 		end)}" alt="{sanitize(p18.text or "")}" />`
 	end,
@@ -488,7 +488,7 @@ t_1 = {
 	ACTION = emptyHandler
 }
 
-function t.map(p20) --[[ line: 181 ]]
+function t.map(p20)
 	-- upvalues: map (ref)
 	return map(p20)
 end

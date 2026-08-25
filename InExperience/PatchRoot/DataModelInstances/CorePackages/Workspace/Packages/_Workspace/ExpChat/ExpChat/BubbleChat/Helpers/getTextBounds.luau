@@ -5,7 +5,7 @@ local textService = game:GetService("TextService")
 local getAbsolutePaddingbyDimensionModule = require(expChat.BubbleChat.Helpers.getAbsolutePaddingbyDimension)
 local getFFlagExpChatAlwaysRunTCS = require(expChat.Parent.SharedFlags).getFFlagExpChatAlwaysRunTCS
 
-local var5 = function(p0, p1) --[[ line: 9 ]]
+local var5 = function(p0, p1)
 	-- upvalues: coreGuiService (ref), getAbsolutePaddingbyDimensionModule (ref)
 	local richTextSizingLabel = Instance.new("ScreenGui")
 	richTextSizingLabel.Enabled = false
@@ -38,7 +38,7 @@ local var5 = function(p0, p1) --[[ line: 9 ]]
 	return vector2 + textBounds
 end
 
-return function(p2, p3, p4) --[[ line: 51 ]]
+return function(p2, p3, p4)
 	-- upvalues: textChatService (ref), getFFlagExpChatAlwaysRunTCS (ref), var5 (ref), textService (ref)
 	if p4 == nil then
 		p4 = textChatService

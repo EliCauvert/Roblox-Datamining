@@ -8,19 +8,19 @@ local _ = require(var0.createVirtualizedListController)
 local joinAndMapBindingsModule = require(var0.Util.joinAndMapBindings)
 local createElement = reactModule.createElement
 
-local function getKeyDefault(_, p0) --[[ line: 13 ]]
+local function getKeyDefault(_, p0)
 	return tostring(p0)
 end
 
-return function(p1) --[[ line: 23 | named "ReactStateRenderer" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), getKeyDefault (ref), dimensionsMethodsModule (ref), createElement (ref), joinAndMapBindingsModule (ref), adjustPositionToScrollAxisModule (ref)
 	local var6, var7 = reactModule.useState(p1.virtualizedListController.get)
 	local var8, var9 = reactModule.useBinding(nil)
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), p1 (ref), var9 (ref), var7 (ref)
 		local var15 = var6
 		
-		return p1.virtualizedListController.bindToUpdate(function() --[[ line: 42 ]]
+		return p1.virtualizedListController.bindToUpdate(function()
 			-- upvalues: var9 (copy), var15 (write), p1 (copy), var7 (copy)
 			var9({
 				lockedTo = var15,
@@ -39,7 +39,7 @@ return function(p1) --[[ line: 23 | named "ReactStateRenderer" ]]
 		local uDimRect = dimensionsMethodsModule.getUDimRect(p1.dimensions, v, var13, p1.virtualizedListController.getWindowSize(), p1.direction)
 		t[getKey(v, var13)] = createElement("Frame", {
 			BackgroundTransparency = 1,
-			Position = joinAndMapBindingsModule(function(p2, p3) --[[ line: 70 ]]
+			Position = joinAndMapBindingsModule(function(p2, p3)
 				-- upvalues: p1 (ref), var6 (ref), adjustPositionToScrollAxisModule (copy), uDimRect (ref)
 				return if p1.config.freezeViewWhileScrolling == false or p3 == nil or p3.lockedTo ~= var6 then adjustPositionToScrollAxisModule(uDimRect.position, p2, p1.direction) else adjustPositionToScrollAxisModule(uDimRect.position, p3.scrollAxis, p1.direction)
 			end, p1.scrollAxisBinding, var8),

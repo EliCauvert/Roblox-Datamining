@@ -41,7 +41,7 @@ local t_1 = {
 	}
 }
 
-local function gatherUVs(p0) --[[ line: 84 ]]
+local function gatherUVs(p0)
 	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref)
 	local t = {}
 	
@@ -53,7 +53,7 @@ local function gatherUVs(p0) --[[ line: 84 ]]
 	return t
 end
 
-local function lazyGetUVsExcludedForAssetType(value) --[[ line: 96 ]]
+local function lazyGetUVsExcludedForAssetType(value)
 	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), gatherUVs (ref)
 	if not value.uVsDisallowedForAssetType then
 		local t = {}
@@ -68,7 +68,7 @@ local function lazyGetUVsExcludedForAssetType(value) --[[ line: 96 ]]
 	return value.uVsDisallowedForAssetType
 end
 
-local function _(value) --[[ line: 110 | named "lazyGetUVsForAssetType" ]]
+local function _(value)
 	-- upvalues: gatherUVs (ref)
 	if not value.uVsForAssetType then
 		value.uVsForAssetType = gatherUVs(value.allowedParts)
@@ -76,7 +76,7 @@ local function _(value) --[[ line: 110 | named "lazyGetUVsForAssetType" ]]
 	return value.uVsForAssetType
 end
 
-local _ = function(value) --[[ line: 117 | named "lazyGetMainUVsForAssetType" ]]
+local _ = function(value)
 	-- upvalues: gatherUVs (ref)
 	if not value.mainUVsForAssetType then
 		value.mainUVsForAssetType = gatherUVs(value.mainParts)
@@ -84,7 +84,7 @@ local _ = function(value) --[[ line: 117 | named "lazyGetMainUVsForAssetType" ]]
 	return value.mainUVsForAssetType
 end
 
-function t.run(p1, p2) --[[ line: 124 ]]
+function t.run(p1, p2)
 	-- upvalues: t_1 (ref), lazyGetUVsExcludedForAssetType (ref), UGCValidationService (ref), UGCValidateExcludedUVModifyRequirements (ref), errorSourceStringsModule (ref), stringUtilModule (ref), gatherUVs (ref), UGCValidatePartUVModifyRequirements (ref), var10 (ref), collisionTestUtilModule (ref), UGCValidateRenderMeshInsideModifiedArea (ref)
 	local assetType = p2.uploadEnum.assetType
 	local var17 = t_1[assetType]

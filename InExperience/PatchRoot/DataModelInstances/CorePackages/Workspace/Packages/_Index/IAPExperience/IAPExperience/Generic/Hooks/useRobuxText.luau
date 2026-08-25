@@ -7,9 +7,9 @@ local foundationModule = require(parent_1.Foundation)
 local enums = foundationModule.Enums
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-function useRobuxText(p0) --[[ line: 10 ]]
+function useRobuxText(p0)
 	-- upvalues: reactModule (ref), formatNumberModule (ref), localizationService (ref), getIconRichText (ref), enums (ref)
-	return reactModule.useMemo(function() --[[ line: 11 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: formatNumberModule (copy), localizationService (copy), p0 (ref), getIconRichText (copy), enums (copy)
 		return `{getIconRichText(enums.IconName.Robux)} {formatNumberModule(localizationService.RobloxLocaleId, p0 or 0)}`
 	end, { p0, localizationService.RobloxLocaleId })

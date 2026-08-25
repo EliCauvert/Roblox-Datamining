@@ -2,7 +2,7 @@
 local fFlagProfileTradeItemsExposureLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
 local fStringProfileTradeItemsIxpLayerModule = require(profilePlatform.Flags.FStringProfileTradeItemsIxpLayer)
 
-return function(p0) --[[ line: 15 | named "logTradeItemsExposureIfEligible" ]]
+return function(p0)
 	-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (ref), fStringProfileTradeItemsIxpLayerModule (ref)
 	if not fFlagProfileTradeItemsExposureLoggingModule then return end
 	if tostring(p0.profileId) == tostring(p0.localUserId) then return end
@@ -15,7 +15,7 @@ return function(p0) --[[ line: 15 | named "logTradeItemsExposureIfEligible" ]]
 		ixpService = game:GetService("IXPService")
 	end
 	assert(ixpService ~= nil, "IXPService is required to log layer exposure")
-	pcall(function() --[[ line: 43 ]]
+	pcall(function()
 		-- upvalues: ixpService (ref), fStringProfileTradeItemsIxpLayerModule (ref)
 		ixpService:LogFlagLinkedUserLayerExposure(fStringProfileTradeItemsIxpLayerModule)
 	end)

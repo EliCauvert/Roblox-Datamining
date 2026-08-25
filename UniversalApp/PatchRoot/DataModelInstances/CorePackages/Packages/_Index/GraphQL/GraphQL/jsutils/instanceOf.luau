@@ -1,6 +1,6 @@
 ﻿local isNillish = require(script.Parent.Parent.luaUtils.isNillish).isNillish
 
-local function instanceOf(p0, p1) --[[ line: 10 ]]
+local function instanceOf(p0, p1)
 	-- upvalues: isNillish (ref)
 	if isNillish(p0) then
 		return false
@@ -26,7 +26,7 @@ local function instanceOf(p0, p1) --[[ line: 10 ]]
 	end
 end
 
-return function(p2, p3) --[[ line: 41 ]]
+return function(p2, p3)
 	-- upvalues: instanceOf (ref)
 	return instanceOf(p2, p3)
 end

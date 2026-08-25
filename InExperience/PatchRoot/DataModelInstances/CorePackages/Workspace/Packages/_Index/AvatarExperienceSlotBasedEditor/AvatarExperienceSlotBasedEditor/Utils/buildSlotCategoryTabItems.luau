@@ -2,7 +2,7 @@
 local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(p0, p1) --[[ line: 13 | named "buildSlotCategoryTabItems" ]]
+return function(p0, p1)
 	local t = {}
 	
 	for i, v in p0 do
@@ -13,7 +13,7 @@ return function(p0, p1) --[[ line: 13 | named "buildSlotCategoryTabItems" ]]
 			})
 		end
 	end
-	table.sort(t, function(p2, p3) --[[ line: 26 ]]
+	table.sort(t, function(p2, p3)
 		-- upvalues: p0 (ref)
 		return p0[p2.id].index < p0[p3.id].index
 	end)

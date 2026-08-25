@@ -19,13 +19,13 @@ return {
 	name = "ContactImporter",
 	storyRoot = parent,
 	roact = roact,
-	mapDefinition = function(p0) --[[ line: 44 ]]
+	mapDefinition = function(p0)
 		-- upvalues: llama (ref), t_1 (ref)
 		return llama.Dictionary.join(p0, { controls = llama.Dictionary.join(t_1, p0.controls or {}) })
 	end,
-	mapStory = function(p1) --[[ line: 48 ]]
+	mapStory = function(p1)
 		-- upvalues: roact (ref), appStyleProvider (ref), t (ref), mockLocale (ref)
-		return function(p2) --[[ line: 49 ]]
+		return function(p2)
 			-- upvalues: roact (copy), appStyleProvider (copy), t (copy), mockLocale (copy), p1 (ref)
 			return roact.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = mockLocale(p1, p2) })
 		end

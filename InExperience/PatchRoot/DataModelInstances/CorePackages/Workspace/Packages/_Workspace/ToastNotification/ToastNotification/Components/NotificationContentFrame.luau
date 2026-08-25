@@ -19,7 +19,7 @@ local defaultTextContentPadding = constantsModule.DefaultTextContentPadding
 local vector2 = Vector2.new(36, 36)
 local isUserThumbnail = require(parent_1.utils.toastNotificationHelper).isUserThumbnail
 
-return function(p0) --[[ line: 35 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useNotificationCardDataModule (ref), isUserThumbnail (ref), useNotificationCardStateModule (ref), reactModule (ref), constantsModule (ref), defaultContentPadding (ref), vector2 (ref), notificationThumbnailModule (ref), defaultTextContentPadding (ref), notificationStyledTextModule (ref), toastHoldButtonModule (ref), interactable (ref), imageSetLabel (ref), typeModule (ref)
 	local var14
 	local var10 = useStyle()
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 35 ]]
 	
 	if isUserThumbnail then
 		local var13 = useNotificationCardStateModule("thumbnail")
-		var14 = reactModule.useMemo(function() --[[ line: 46 ]]
+		var14 = reactModule.useMemo(function()
 			-- upvalues: var13 (ref), isUserThumbnail (copy), var10 (ref), cardSize (write), constantsModule (copy)
 			local var22 = false
 			
@@ -138,8 +138,8 @@ return function(p0) --[[ line: 35 ]]
 			BackgroundColor3 = var10.Theme.UIMuted.Color,
 			BackgroundTransparency = 0.9,
 			LayoutOrder = 2,
-			onStateChanged = function() --[[ line: 171 ]] end,
-			[reactModule.Event.Activated] = function() --[[ line: 172 ]]
+			onStateChanged = function() end,
+			[reactModule.Event.Activated] = function()
 				-- upvalues: handleActions (ref), var21 (ref)
 				if handleActions then
 					handleActions(var21)

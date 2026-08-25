@@ -2,7 +2,7 @@
 local clientScriptsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ClientScriptsUpdateSearchFilter)
 local serverScriptsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.ServerScriptsUpdateSearchFilter)
 
-return function(p0, p1) --[[ line: 13 ]]
+return function(p0, p1)
 	-- upvalues: clientScriptsUpdateSearchFilterModule (ref), immutableModule (ref), serverScriptsUpdateSearchFilterModule (ref)
 	p0 = p0 or {
 		clientSearchTerm = "",

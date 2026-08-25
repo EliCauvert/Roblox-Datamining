@@ -8,7 +8,7 @@ local images = UIBloxModule.App.ImageSet.Images
 local linkButton = UIBloxModule.App.Button.LinkButton
 local startupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
 
-return function(p0) --[[ line: 44 | named "StartupMessage" ]]
+return function(p0)
 	-- upvalues: startupMessageActionButtonEnabledEngineFeature (ref), buttonType (ref), dashModule (ref), reactModule (ref), linkButton (ref), interactiveAlert (ref), images (ref)
 	local localizedStrings = p0.localizedStrings
 	local message = p0.message
@@ -39,11 +39,11 @@ return function(p0) --[[ line: 44 | named "StartupMessage" ]]
 		end
 		var5 = if #t > 0 then { buttons = t } else nil
 	end
-	local var7 = dashModule.map(p0.localizedLinks, function(p1) --[[ line: 80 ]]
+	local var7 = dashModule.map(p0.localizedLinks, function(p1)
 		-- upvalues: reactModule (copy), linkButton (copy), p0 (ref)
 		return reactModule.createElement(linkButton, {
 			text = p1.label,
-			onActivated = function() --[[ line: 83 ]]
+			onActivated = function()
 				-- upvalues: p0 (copy), p1 (ref)
 				p0.onOpenUrl(p1.url, p1.label)
 			end
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 44 | named "StartupMessage" ]]
 			title = localizedStrings.titleText or "",
 			bodyText = localizedStrings.bodyText or "",
 			titleIcon = images["icons/status/error_large"],
-			middleContent = function() --[[ line: 107 ]]
+			middleContent = function()
 				-- upvalues: reactModule (copy), dashModule (copy), var7 (ref)
 				return reactModule.createElement("Frame", {
 					BorderSizePixel = 0,

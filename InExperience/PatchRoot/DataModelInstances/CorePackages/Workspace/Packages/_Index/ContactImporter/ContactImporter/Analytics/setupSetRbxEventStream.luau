@@ -1,8 +1,8 @@
 ﻿local getPlatformTarget = require(script:FindFirstAncestor("ContactImporter").Parent.Analytics).getPlatformTarget
 
-return function(p0) --[[ line: 5 ]]
+return function(p0)
 	-- upvalues: getPlatformTarget (ref)
-	return function(_, p1, p2, p3) --[[ line: 6 ]]
+	return function(_, p1, p2, p3)
 		-- upvalues: p0 (ref), getPlatformTarget (copy)
 		p0:setRBXEventStream(getPlatformTarget(), p1, p2, p3)
 	end

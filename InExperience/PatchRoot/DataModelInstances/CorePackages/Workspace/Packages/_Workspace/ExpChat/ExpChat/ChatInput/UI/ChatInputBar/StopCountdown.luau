@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 
-return reactModule.memo(function(p0) --[[ line: 17 | named "StopCountdown" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy radius-circle",
@@ -15,7 +15,7 @@ return reactModule.memo(function(p0) --[[ line: 17 | named "StopCountdown" ]]
 			ZIndex = 2,
 			shape = foundationModule.Enums.ProgressShape.Circle,
 			size = foundationModule.Enums.ProgressSize.Medium,
-			value = p0.countdownProgress:map(function(p1) --[[ line: 28 ]]
+			value = p0.countdownProgress:map(function(p1)
 				return math.clamp(p1, 0, 1) * 100
 			end)
 		}),

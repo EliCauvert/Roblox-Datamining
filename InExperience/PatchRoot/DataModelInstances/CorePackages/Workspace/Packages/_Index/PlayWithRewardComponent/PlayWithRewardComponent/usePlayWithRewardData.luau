@@ -12,21 +12,21 @@ local setPlayWithRewardState = playWithRewardStateModule.SetPlayWithRewardState
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 
-return function(p0) --[[ line: 30 | named "usePlayWithRewardData" ]]
+return function(p0)
 	-- upvalues: useSelector (ref), useDispatch (ref), fFlagPlayWithRewardClearOnExperienceLeave (ref), reactModule (ref), fetchPlayWithRewardStateModule (ref), adService (ref), experienceService (ref), setPlayWithRewardState (ref), shouldRenderPlayWithRewardBannerModule (ref)
 	local universeId = p0.universeId
 	local shouldFetch = p0.shouldFetch
-	local var8 = useSelector(function(p1) --[[ line: 34 ]]
+	local var8 = useSelector(function(p1)
 		-- upvalues: universeId (ref)
 		return if p1.PlayWithRewardState and p1.PlayWithRewardState.universeId == universeId then p1.PlayWithRewardState else nil
 	end)
-	local var9 = useSelector(function(p2) --[[ line: 40 ]]
+	local var9 = useSelector(function(p2)
 		return p2.LocalUserId
 	end)
 	local var10 = useDispatch()
 	local var11 = if fFlagPlayWithRewardClearOnExperienceLeave then reactModule.useRef(false) else nil
 	local onFetchDispatched = p0.onFetchDispatched
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagPlayWithRewardClearOnExperienceLeave (copy), shouldFetch (ref), var11 (write), var9 (ref), var8 (ref), universeId (ref), onFetchDispatched (ref), var10 (ref), fetchPlayWithRewardStateModule (copy), adService (copy)
 		if fFlagPlayWithRewardClearOnExperienceLeave then
 			if not shouldFetch and not var11.current then return end
@@ -41,19 +41,19 @@ return function(p0) --[[ line: 30 | named "usePlayWithRewardData" ]]
 		if onFetchDispatched then
 			onFetchDispatched()
 		end
-		var10(fetchPlayWithRewardStateModule(adService, universeId, var14)):catch(function() --[[ line: 74 ]] end)
+		var10(fetchPlayWithRewardStateModule(adService, universeId, var14)):catch(function() end)
 	end, {
 		shouldFetch, universeId, var9, var8, var10, onFetchDispatched
 	})
-	reactModule.useEffect(function() --[[ line: 77 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagPlayWithRewardClearOnExperienceLeave (copy), experienceService (copy), var11 (write), var10 (ref), setPlayWithRewardState (copy)
-		local var15 = if fFlagPlayWithRewardClearOnExperienceLeave then experienceService:RegisterForExperienceLeave(function() --[[ line: 80 ]]
+		local var15 = if fFlagPlayWithRewardClearOnExperienceLeave then experienceService:RegisterForExperienceLeave(function()
 			-- upvalues: var11 (copy), var10 (copy), setPlayWithRewardState (copy)
 			var11.current = true
 			var10(setPlayWithRewardState("", "", false, nil))
 		end) else nil
 		
-		return function() --[[ line: 85 ]]
+		return function()
 			-- upvalues: var10 (copy), setPlayWithRewardState (copy), var15 (write)
 			var10(setPlayWithRewardState("", "", false, nil))
 			

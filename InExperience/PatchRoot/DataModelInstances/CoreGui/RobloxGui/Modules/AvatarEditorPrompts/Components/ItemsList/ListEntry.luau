@@ -21,9 +21,9 @@ listEntry.validateProps = tModule.strictInterface({
 	forwardRef = tModule.optional(tModule.table)
 })
 
-function listEntry.render(p0) --[[ line: 34 ]]
+function listEntry.render(p0)
 	-- upvalues: withStyle (ref), text (ref), roactModule (ref), roactFitComponents (ref), fitTextLabel (ref)
-	return withStyle(function(p1) --[[ line: 35 ]]
+	return withStyle(function(p1)
 		-- upvalues: text (copy), p0 (ref), roactModule (copy), roactFitComponents (copy), fitTextLabel (copy)
 		local font = p1.Font
 		local theme = p1.Theme
@@ -70,7 +70,7 @@ function listEntry.render(p0) --[[ line: 34 ]]
 	end)
 end
 
-return roactModule.forwardRef(function(p2, p3) --[[ line: 91 ]]
+return roactModule.forwardRef(function(p2, p3)
 	-- upvalues: roactModule (ref), listEntry (ref), cryoModule (ref)
 	return roactModule.createElement(listEntry, cryoModule.Dictionary.join(p2, { forwardRef = p3 }))
 end)

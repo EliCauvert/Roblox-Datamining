@@ -9,7 +9,7 @@ local httpRbxApiService = game:GetService("HttpRbxApiService")
 local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
 local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
 
-local function _() --[[ line: 18 | named "leaveGame" ]]
+local function _()
 	-- upvalues: guiService (ref)
 	guiService.SelectedCoreObject = nil
 	game:Shutdown()
@@ -17,14 +17,14 @@ end
 
 local t = { Warning = 1, Lockout = 2 }
 
-local _ = function(p0) --[[ line: 28 | named "parseResponse" ]]
+local _ = function(p0)
 	return {
 		State = p0.response.state.type,
 		Messages = p0.response.state.messages
 	}
 end
 
-local _ = function(p1) --[[ line: 37 | named "markRead" ]]
+local _ = function(p1)
 	-- upvalues: url (ref), httpRbxApiService (ref)
 	local _, _ = pcall(httpRbxApiService.GetAsyncFullUrl, httpRbxApiService, url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. p1))
 end
@@ -34,13 +34,13 @@ local t_1 = {
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p2, p3) --[[ line: 57 ]]
+	update = function(p2, p3)
 		for i, v in pairs(p3) do
 			table.insert(p2.pendingResolveMessage, { id = v.id, message = v.text })
 		end
 		p2:processNext()
 	end,
-	processNext = function(p4) --[[ line: 68 ]]
+	processNext = function(p4)
 		-- upvalues: url (ref), httpRbxApiService (ref)
 		if p4.displaying then return end
 		local removed = table.remove(p4.pendingResolveMessage, 1)
@@ -56,12 +56,12 @@ local t_1 = {
 		if p4.displayMessageCallback then
 			p4.displayMessageCallback(removed.message)
 		end
-		spawn(function() --[[ line: 88 ]]
+		spawn(function()
 			-- upvalues: removed (ref), url (copy), httpRbxApiService (copy)
 			local _, _ = pcall(httpRbxApiService.GetAsyncFullUrl, httpRbxApiService, url.RCS_URL .. "screen-time-api/v1/messages/mark-read" .. "?" .. ("mesasgeId=" .. removed.id))
 		end)
 	end,
-	resolve = function(p5) --[[ line: 94 ]]
+	resolve = function(p5)
 		p5.resolvedMessage[p5.displaying.id] = p5.displaying.message
 		p5.displaying = nil
 		p5:processNext()
@@ -79,7 +79,7 @@ local list = {
 		LocalizationKey = "InGame.CommonUI.Button.Ok",
 		LayoutOrder = 1,
 		Primary = true,
-		Callback = function() --[[ line: 114 ]]
+		Callback = function()
 			-- upvalues: default (ref), t_1 (ref)
 			default:_close()
 			t_1:resolve()
@@ -87,7 +87,7 @@ local list = {
 	}
 }
 
-function t_1.displayMessage(p6) --[[ line: 110 ]]
+function t_1.displayMessage(p6)
 	-- upvalues: default (ref)
 	default:_open(p6)
 end
@@ -96,7 +96,7 @@ default:updateButtons(list)
 default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
 local x = robloxGui.AbsoluteSize.X
 local y = robloxGui.AbsoluteSize.Y
-robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ line: 136 | named "onScreenSizeChanged" ]]
+robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
 	-- upvalues: default (ref), robloxGui (ref), x (write), y (write)
 	if not default then return end
 	local x_1 = robloxGui.AbsoluteSize.X
@@ -119,7 +119,7 @@ if default then
 end
 x_1 = nil
 
-local _ = function(p7) --[[ line: 154 | named "antiAddictionStatesUpdated" ]]
+local _ = function(p7)
 	-- upvalues: x_1 (write), guiService (ref), t_1 (ref)
 	local t = {
 		State = p7.response.state.type,
@@ -136,7 +136,7 @@ local _ = function(p7) --[[ line: 154 | named "antiAddictionStatesUpdated" ]]
 	t_1:update(t.Messages)
 end
 
-x_1 = notificationService.RobloxEventReceived:Connect(function(p8) --[[ line: 168 ]]
+x_1 = notificationService.RobloxEventReceived:Connect(function(p8)
 	-- upvalues: httpService (ref), t (ref), x_1 (write), guiService (ref), t_1 (ref)
 	if p8.namespace == "AntiAddictionNotifications" then
 		local detail = httpService:JSONDecode(p8.detail)

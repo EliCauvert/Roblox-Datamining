@@ -5,7 +5,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, p1, p2) --[[ line: 19 | named "SduiExperienceDetailsCreatePrivateServerTelemetryHandler" ]]
+return function(p0, p1, p2)
 	-- upvalues: getActionTelemetryFieldValue (ref), sduiErrorType (ref), playersService (ref), gameCreatePrivateGame (ref)
 	local var2 = getActionTelemetryFieldValue(p0, p1, "placeId")
 	

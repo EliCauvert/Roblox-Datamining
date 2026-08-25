@@ -15,7 +15,7 @@ local avatarCreationService = game:GetService("AvatarCreationService")
 local browserService = game:GetService("BrowserService")
 local userInputService = game:GetService("UserInputService")
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useLegallySensitiveContentAndActions (ref), consentName (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), button (ref), buttonVariant (ref), userInputService (ref), browserService (ref), linkingProtocol (ref), avatarCreationService (ref)
 	local var7 = useLocalization({
 		title = "AvatarGeneration.SelfieConsent.Title",
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 27 ]]
 				DialogFooter = reactModule.createElement(button, {
 					text = var7.privacyLinkText,
 					variant = buttonVariant.Link,
-					onActivated = function() --[[ line: 55 ]]
+					onActivated = function()
 						-- upvalues: userInputService (copy), browserService (copy), linkingProtocol (copy)
 						if userInputService:GetPlatform() == Enum.Platform.Android then
 							browserService:OpenBrowserWindow("https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy")
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 27 ]]
 				{
 					text = var7.agreeButton,
 					variant = buttonVariant.Emphasis,
-					onActivated = function() --[[ line: 72 ]]
+					onActivated = function()
 						-- upvalues: avatarCreationService (copy), p0 (ref), var8 (ref)
 						avatarCreationService:HandleSelfieConsentResult(true)
 						p0.displaySelfieConsent(false)
@@ -64,7 +64,7 @@ return function(p0) --[[ line: 27 ]]
 				{
 					text = var7.cancelButton,
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 81 ]]
+					onActivated = function()
 						-- upvalues: avatarCreationService (copy), p0 (ref)
 						avatarCreationService:HandleSelfieConsentResult(false)
 						p0.displaySelfieConsent(false)

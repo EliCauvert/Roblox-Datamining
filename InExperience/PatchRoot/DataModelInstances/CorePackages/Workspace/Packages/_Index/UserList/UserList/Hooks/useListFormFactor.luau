@@ -2,10 +2,10 @@
 local useSelector = require(userList.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local _ = require(userList.Common.Enums)
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: useSelector (ref)
 	return {
-		formFactor = useSelector(function(p0) --[[ line: 12 ]]
+		formFactor = useSelector(function(p0)
 			return p0.FormFactor
 		end)
 	}

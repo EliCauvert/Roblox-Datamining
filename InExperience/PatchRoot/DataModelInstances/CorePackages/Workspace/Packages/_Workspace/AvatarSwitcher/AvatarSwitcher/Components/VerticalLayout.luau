@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 
-return function(p0) --[[ line: 18 | named "VerticalLayout" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.View, { tag = "size-full-full col" }, {
 		Header = reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0 shrink-0", LayoutOrder = 1 }, { HeaderSlot = p0.headerSlot }),

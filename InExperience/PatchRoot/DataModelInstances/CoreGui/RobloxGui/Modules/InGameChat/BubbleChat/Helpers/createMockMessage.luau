@@ -1,7 +1,7 @@
 ﻿local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
 local var1 = 0
 
-return function(p0) --[[ line: 7 | named "createMockMessage" ]]
+return function(p0)
 	-- upvalues: var1 (write), cryoModule (ref)
 	var1 += 1
 	

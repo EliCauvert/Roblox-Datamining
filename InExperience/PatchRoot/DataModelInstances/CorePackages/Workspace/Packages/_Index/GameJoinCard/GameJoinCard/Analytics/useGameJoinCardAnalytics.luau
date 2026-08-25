@@ -44,11 +44,11 @@ local t_4 = {
 	lastUpdated = { 2026, 5, 19 }
 }
 
-local function _(p0) --[[ line: 76 | named "optionalInt64FromString" ]]
+local function _(p0)
 	return if p0 == nil or p0 == "" then nil else tonumber(p0)
 end
 
-local function buildGameJoinCardCommonFields(p1) --[[ line: 84 ]]
+local function buildGameJoinCardCommonFields(p1)
 	-- upvalues: playersService (ref)
 	local t = {}
 	local localPlayer = playersService.LocalPlayer
@@ -76,7 +76,7 @@ local function buildGameJoinCardCommonFields(p1) --[[ line: 84 ]]
 end
 
 return {
-	logGameJoinCardButtonEvent = function(p2, p3) --[[ line: 111 ]]
+	logGameJoinCardButtonEvent = function(p2, p3)
 		-- upvalues: buildGameJoinCardCommonFields (ref), telemetryService (ref), t (ref)
 		local var13 = buildGameJoinCardCommonFields(p3 or {})
 		var13.buttonAction = p2
@@ -86,7 +86,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logGameJoinCardPageLoaded = function(p4) --[[ line: 122 ]]
+	logGameJoinCardPageLoaded = function(p4)
 		-- upvalues: buildGameJoinCardCommonFields (ref), telemetryService (ref), t_1 (ref)
 		telemetryService:LogEvent(t_1, {
 			eventContext = "gameJoinCard",
@@ -94,7 +94,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardAgeCheckUpsellImpression = function(p5) --[[ line: 136 ]]
+	logJoinCardAgeCheckUpsellImpression = function(p5)
 		-- upvalues: telemetryService (ref), t_2 (ref)
 		local t = {}
 		local universeId = p5.universeId
@@ -109,7 +109,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardAgeCheckVerificationOutcome = function(p6) --[[ line: 164 ]]
+	logJoinCardAgeCheckVerificationOutcome = function(p6)
 		-- upvalues: ageCheckUpsellOutcome (ref), telemetryService (ref), t_3 (ref)
 		local t = { outcome = ageCheckUpsellOutcome[p6.outcome] }
 		local universeId = p6.universeId
@@ -124,7 +124,7 @@ return {
 			standardizedFields = { "addSessionInfo" }
 		})
 	end,
-	logJoinCardCtaLoadTime = function(p7) --[[ line: 187 ]]
+	logJoinCardCtaLoadTime = function(p7)
 		-- upvalues: telemetryService (ref), t_4 (ref)
 		telemetryService:LogEvent(t_4, {
 			eventContext = "gameJoinCard",

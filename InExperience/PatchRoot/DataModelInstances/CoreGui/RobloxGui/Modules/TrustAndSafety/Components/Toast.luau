@@ -11,7 +11,7 @@ toast_1.validateProps = tModule.strictInterface({
 	toastSubtitle = tModule.optional(tModule.string)
 })
 
-function toast_1.render(p0) --[[ line: 18 ]]
+function toast_1.render(p0)
 	-- upvalues: roactModule (ref), toast (ref), images (ref)
 	return if p0.props.toastTitle then roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -29,7 +29,7 @@ function toast_1.render(p0) --[[ line: 18 ]]
 	}) else nil
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ line: 38 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		toastTitle = p1.common.toastTitle,
 		toastSubtitle = p1.common.toastSubtitle

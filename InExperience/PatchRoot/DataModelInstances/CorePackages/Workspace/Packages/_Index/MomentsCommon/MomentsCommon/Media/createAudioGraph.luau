@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 43 | named "createAudioGraph" ]]
+﻿return function(p0, p1, p2)
 	p2 = p2 or 0.2
 	local masterFader = Instance.new("AudioFader")
 	masterFader.Name = "MasterFader"
@@ -12,11 +12,11 @@
 	local var4 = false
 	local var5 = false
 	
-	local function _(p3) --[[ line: 62 | named "applyStem" ]]
+	local function _(p3)
 		p3.fader.Volume = if p3.muted then 0 else p3.targetVolume
 	end
 	
-	local _ = function(p4) --[[ line: 66 | named "removeStem" ]]
+	local _ = function(p4)
 		-- upvalues: t (ref)
 		local var6 = t[p4]
 		
@@ -29,7 +29,7 @@
 	end
 	
 	return {
-		addStem = function(p5, p6, p7) --[[ line: 77 ]]
+		addStem = function(p5, p6, p7)
 			-- upvalues: var5 (write), t (ref), p0 (ref), masterFader (ref)
 			assert(not var5, "createAudioGraph: addStem after dispose")
 			assert(not t[p5], `createAudioGraph: stem "{p5}" already added`)
@@ -48,7 +48,7 @@
 			wire_1.Parent = audioFader
 			t[p5] = { muted = false, fader = audioFader, targetVolume = p7 }
 			
-			return function() --[[ line: 104 ]]
+			return function()
 				-- upvalues: p5 (ref), t (copy)
 				local var11 = t[p5]
 				
@@ -60,7 +60,7 @@
 				end
 			end
 		end,
-		setVolume = function(value, p8) --[[ line: 109 ]]
+		setVolume = function(value, p8)
 			-- upvalues: var5 (write), t (ref)
 			assert(not var5, "createAudioGraph: setVolume after dispose")
 			local var12 = t[value]
@@ -68,7 +68,7 @@
 			var12.targetVolume = p8
 			var12.fader.Volume = if var12.muted then 0 else var12.targetVolume
 		end,
-		setMuted = function(value, p9) --[[ line: 117 ]]
+		setMuted = function(value, p9)
 			-- upvalues: var5 (write), t (ref)
 			assert(not var5, "createAudioGraph: setMuted after dispose")
 			local var13 = t[value]
@@ -76,21 +76,21 @@
 			var13.muted = p9
 			var13.fader.Volume = if var13.muted then 0 else var13.targetVolume
 		end,
-		setMasterMuted = function(value) --[[ line: 125 ]]
+		setMasterMuted = function(value)
 			-- upvalues: var5 (write), var4 (write), masterFader (ref), p2 (ref)
 			assert(not var5, "createAudioGraph: setMasterMuted after dispose")
 			var4 = value
 			masterFader.Volume = if value then 0 else p2
 		end,
-		getMasterMuted = function() --[[ line: 131 ]]
+		getMasterMuted = function()
 			-- upvalues: var4 (write)
 			return var4
 		end,
-		getOutput = function() --[[ line: 135 ]]
+		getOutput = function()
 			-- upvalues: p1 (ref)
 			return p1
 		end,
-		dispose = function() --[[ line: 139 ]]
+		dispose = function()
 			-- upvalues: var5 (write), t (ref), masterFader (ref)
 			if var5 then return end
 			var5 = true

@@ -6,11 +6,11 @@ local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 local text = urlBase.APIS .. "/sharelinks/v1/get-or-create-link"
 
-local function decodeShareLink(p0) --[[ line: 37 ]]
+local function decodeShareLink(p0)
 	return if type(p0) == "table" and type(p0.shortUrl) == "string" then p0.shortUrl else nil
 end
 
-return function(p1) --[[ line: 44 | named "createPrivateShareLink" ]]
+return function(p1)
 	-- upvalues: fetch (ref), text (ref), httpService (ref), decodeShareLink (ref), asPromise (ref)
 	return asPromise(fetch({
 		method = "POST",

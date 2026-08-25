@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local fFlagDebugSquadLogsEnabled = require(script:FindFirstAncestor("SquadsCore").Parent.SharedFlags).FFlagDebugSquadLogsEnabled
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: fFlagDebugSquadLogsEnabled (ref), httpService (ref)
 	return if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p0) else p0
 end

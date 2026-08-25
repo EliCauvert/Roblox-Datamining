@@ -249,7 +249,7 @@ local t_1 = {
 t.TelemetryConfigs = t_1
 local gameInviteAnalyticsManager = gameInviteModule.GameInviteAnalyticsManager
 
-function t.trackGameInviteEntryPoint(_) --[[ line: 286 ]]
+function t.trackGameInviteEntryPoint(_)
 	-- upvalues: t (ref), t_1 (ref), telemetryService (ref), gameInviteAnalyticsManager (ref)
 	local gameInviteEntryPoint = t_1.GameInviteEntryPoint
 	telemetryService:LogEvent(gameInviteEntryPoint.eventConfig, {
@@ -263,7 +263,7 @@ function t.trackGameInviteEntryPoint(_) --[[ line: 286 ]]
 	gameInviteAnalyticsManager:withButtonName(t.ButtonName.SettingsHub)
 end
 
-function t.trackToggleMuteSelf(_, p0) --[[ line: 300 ]]
+function t.trackToggleMuteSelf(_, p0)
 	-- upvalues: telemetryService (ref), t_1 (ref)
 	if p0 then
 		telemetryService:LogEvent(t_1.UnmuteSelf.eventConfig, {})
@@ -273,7 +273,7 @@ function t.trackToggleMuteSelf(_, p0) --[[ line: 300 ]]
 	telemetryService:LogEvent(t_1.MuteSelf.eventConfig, {})
 end
 
-function t.trackInspectButton(_, p1, p2, p3) --[[ line: 308 ]]
+function t.trackInspectButton(_, p1, p2, p3)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
 	local t = { playsessionid = p2, universeid = tostring(p1) }
 	
@@ -286,7 +286,7 @@ function t.trackInspectButton(_, p1, p2, p3) --[[ line: 308 ]]
 	})
 end
 
-function t.trackToggleMuteAll(_, p4) --[[ line: 324 ]]
+function t.trackToggleMuteAll(_, p4)
 	-- upvalues: telemetryService (ref), t_1 (ref)
 	if p4 then
 		telemetryService:LogEvent(t_1.UnmuteAll.eventConfig, {})
@@ -296,7 +296,7 @@ function t.trackToggleMuteAll(_, p4) --[[ line: 324 ]]
 	telemetryService:LogEvent(t_1.MuteAll.eventConfig, {})
 end
 
-function t.trackToggleMutePlayer(_, p5, p6, p7) --[[ line: 332 ]]
+function t.trackToggleMutePlayer(_, p5, p6, p7)
 	-- upvalues: telemetryService (ref), t_1 (ref), getFFlagAddPeoplePageCardLayout (ref)
 	if p6 then
 		telemetryService:LogEvent(t_1.UnmutePlayer.eventConfig, {
@@ -316,7 +316,7 @@ function t.trackToggleMutePlayer(_, p5, p6, p7) --[[ line: 332 ]]
 	})
 end
 
-function t.trackRequestFriendship(_, p8) --[[ line: 350 ]]
+function t.trackRequestFriendship(_, p8)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
 	local requestFriendship = t_1.RequestFriendship
 	telemetryService:LogEvent(requestFriendship.eventConfig, {
@@ -330,21 +330,21 @@ function t.trackRequestFriendship(_, p8) --[[ line: 350 ]]
 	telemetryService:LogCounter(requestFriendship.counterConfig, { customFields = { selectedItem = "RequestFriendship" } }, 1)
 end
 
-function t.trackBlockUserButtonClick(_, p9, p10, p11) --[[ line: 365 ]]
+function t.trackBlockUserButtonClick(_, p9, p10, p11)
 	-- upvalues: t_1 (ref), telemetryService (ref)
 	telemetryService:LogEvent(t_1.BlockUserButtonClick.eventConfig, {
 		customFields = { blockeeUserId = p9, blockerUserId = p10, source = p11 }
 	})
 end
 
-function t.trackBlockUser(_, p12, p13, p14) --[[ line: 376 ]]
+function t.trackBlockUser(_, p12, p13, p14)
 	-- upvalues: t_1 (ref), telemetryService (ref)
 	telemetryService:LogEvent(t_1.BlockUser.eventConfig, {
 		customFields = { blockeeUserId = p12, blockerUserId = p13, source = p14 }
 	})
 end
 
-function t.trackUnblockUser(_, p15, p16, p17) --[[ line: 387 ]]
+function t.trackUnblockUser(_, p15, p16, p17)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), t_1 (ref), telemetryService (ref)
 	telemetryService:LogEvent(t_1.UnblockUser.eventConfig, {
 		customFields = {
@@ -356,7 +356,7 @@ function t.trackUnblockUser(_, p15, p16, p17) --[[ line: 387 ]]
 end
 
 if getFFlagAddPeoplePageCardLayout() then
-	function t.trackPeoplePageLayoutChanged(_, p18) --[[ line: 399 ]]
+	function t.trackPeoplePageLayoutChanged(_, p18)
 		-- upvalues: t_1 (ref), telemetryService (ref)
 		telemetryService:LogEvent(t_1.PeoplePageLayoutChanged.eventConfig, {
 			customFields = { layout = p18.Name },
@@ -369,7 +369,7 @@ if getFFlagAddPeoplePageCardLayout() then
 		})
 	end
 	
-	function t.trackPersonCardMenuToggled(_, p19) --[[ line: 411 ]]
+	function t.trackPersonCardMenuToggled(_, p19)
 		-- upvalues: t_1 (ref), telemetryService (ref)
 		telemetryService:LogEvent(t_1.PersonCardMenuToggled.eventConfig, {
 			customFields = { is_toggled_on = tostring(p19) },
@@ -389,12 +389,12 @@ local t_2 = {
 	reported = false
 }
 
-local function _() --[[ line: 442 | named "getPerUserVoiceVolumeUxVariant" ]]
+local function _()
 	-- upvalues: fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref)
 	return if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
 end
 
-local _ = function() --[[ line: 452 | named "resetPerUserVoiceVolumeSessionState" ]]
+local _ = function()
 	-- upvalues: t_2 (ref)
 	t_2.openedVolumeUiList = false
 	t_2.openedVolumeUiCard = false
@@ -402,12 +402,12 @@ local _ = function() --[[ line: 452 | named "resetPerUserVoiceVolumeSessionState
 	t_2.reported = false
 end
 
-function t.getPerUserVoiceVolumeUxVariant() --[[ line: 459 ]]
+function t.getPerUserVoiceVolumeUxVariant()
 	-- upvalues: fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref)
 	return if fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted then uXVARIANT.DISABLE_WHEN_MUTED elseif fFlagVoiceChatVolumePerUserMuteVolumeSync then uXVARIANT.SYNC else uXVARIANT.INDEPENDENT
 end
 
-function t.recordPerUserVoiceVolumeUiOpened(_, p20) --[[ line: 463 ]]
+function t.recordPerUserVoiceVolumeUiOpened(_, p20)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), ENTRY_POINT (ref), t_2 (ref)
 	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if p20 == ENTRY_POINT.PEOPLE_LIST then
@@ -419,7 +419,7 @@ function t.recordPerUserVoiceVolumeUiOpened(_, p20) --[[ line: 463 ]]
 	end
 end
 
-function t.trackPerUserVoiceVolumeSliderTouch(_, p21) --[[ line: 475 ]]
+function t.trackPerUserVoiceVolumeSliderTouch(_, p21)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), telemetryService (ref), t_1 (ref)
 	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		telemetryService:LogCounter(t_1.PerUserVoiceVolumeSliderTouch.counterConfig, {
@@ -433,7 +433,7 @@ function t.trackPerUserVoiceVolumeSliderTouch(_, p21) --[[ line: 475 ]]
 	end
 end
 
-function t.trackPerUserVoiceVolumeChanged(_, p22) --[[ line: 490 ]]
+function t.trackPerUserVoiceVolumeChanged(_, p22)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), VOICE_VOLUME (ref), userGameSettingsService (ref), telemetryService (ref), t_1 (ref), t_2 (ref)
 	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if p22.newVolume == p22.oldVolume then return end
@@ -492,7 +492,7 @@ function t.trackPerUserVoiceVolumeChanged(_, p22) --[[ line: 490 ]]
 	end
 end
 
-function t.flushPerUserVoiceVolumeSession(_, p23, p24) --[[ line: 552 ]]
+function t.flushPerUserVoiceVolumeSession(_, p23, p24)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), t_2 (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMuted (ref), uXVARIANT (ref), fFlagVoiceChatVolumePerUserMuteVolumeSync (ref), telemetryService (ref), t_1 (ref)
 	if not fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then return end
 	if t_2.reported then return end
@@ -516,7 +516,7 @@ function t.flushPerUserVoiceVolumeSession(_, p23, p24) --[[ line: 552 ]]
 	t_2.changedPerUserVolume = false
 end
 
-function t.resetPerUserVoiceVolumeSession(_) --[[ line: 590 ]]
+function t.resetPerUserVoiceVolumeSession(_)
 	-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), t_2 (ref)
 	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
 		t_2.openedVolumeUiList = false

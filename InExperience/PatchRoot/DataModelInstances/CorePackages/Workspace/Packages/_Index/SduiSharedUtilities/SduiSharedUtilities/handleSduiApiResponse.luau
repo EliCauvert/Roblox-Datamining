@@ -35,7 +35,7 @@ local fFlagSduiGameIconSupport = require(parent.SharedFlags).FFlagSduiGameIconSu
 local fFlagSduiApiStoreOnSuccessAndRefresh = require(parent.SharedFlags).FFlagSduiApiStoreOnSuccessAndRefresh
 local cryoModule = require(parent.Cryo)
 
-local function mergeTables(p0, p1) --[[ line: 59 ]]
+local function mergeTables(p0, p1)
 	-- upvalues: mergeTables (ref)
 	for i, v in p1 do
 		if typeof(v) ~= "table" then
@@ -55,7 +55,7 @@ local function mergeTables(p0, p1) --[[ line: 59 ]]
 	end
 end
 
-local function _(p2, p3) --[[ line: 81 | named "getUpdatedInputData" ]]
+local function _(p2, p3)
 	-- upvalues: mergeTables (ref)
 	local cloned = table.clone(p2)
 	mergeTables(cloned, p3)
@@ -63,7 +63,7 @@ local function _(p2, p3) --[[ line: 81 | named "getUpdatedInputData" ]]
 	return cloned
 end
 
-return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
+return function(p4)
 	-- upvalues: fFlagSduiPaginatePostBody (ref), fFlagSduiAllowNoConfigsBuilt (ref), fFlagSduiInputDataMergeStrategy (ref), sduiRequestStatus (ref), sduiLogger (ref), sduiErrors (ref), fFlagSduiImprovedErrorDimensions (ref), fFlagSduiNilHydrationGuard (ref), getSduiDataBinder (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStoreModule (ref), fFlagSduiUsageTelemetry (ref), recordTemplateUsage (ref), sduiUsageRecorder (ref), sduiProtobufResponseHelpersModule (ref), fFlagSduiAlwaysCacheWithIdentifier (ref), fFlagLuaAppSduiStreamingChunkedResponses (ref), sduiInputDataMergeModule (ref), mergeTables (ref), createBuilderConfig (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), getSduiClientBindingBuilder (ref), fFlagEnableSduiV2HomepagePrompts (ref), fFlagPromptsHandlerEnabled (ref), fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagSduiPageEntrySurfacing (ref), cryoModule (ref), fFlagSduiGameIconSupport (ref), processClientHintsModule (ref), fFlagSduiApiStoreOnSuccessAndRefresh (ref)
 	local response = p4.response
 	local decodeResponse = p4.decodeResponse
@@ -83,7 +83,7 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 	assert(configCacheKey, "configCacheKey must exist")
 	loadTimer.logNetRequestStats(response.Stats)
 	loadTimer.logResponseDecodeBegin()
-	local ok, status = pcall(function() --[[ line: 157 ]]
+	local ok, status = pcall(function()
 		-- upvalues: decodeResponse (ref), response (ref)
 		return decodeResponse(response.Body)
 	end)
@@ -101,7 +101,7 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 	loadTimer.logResponseDataUpdateBegin()
 	
 	if parseHydrationDataFromResponse then
-		local ok_1, status_1 = pcall(function() --[[ line: 182 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: parseHydrationDataFromResponse (ref), status (ref), fFlagSduiNilHydrationGuard (copy), getSduiDataBinder (copy)
 			local var29 = parseHydrationDataFromResponse(status)
 			
@@ -129,7 +129,7 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 	local t = {}
 	
 	if parseTemplateEntriesFromResponse then
-		local ok_1, status_1 = pcall(function() --[[ line: 207 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: t (write), parseTemplateEntriesFromResponse (ref), status (ref), fFlagSduiClientTemplateCache (copy), enableTemplateCache (ref), getSduiTemplateStoreModule (copy), surfaceKey (ref), fFlagSduiUsageTelemetry (copy), recordTemplateUsage (copy), sduiUsageRecorder (copy)
 			local _ = nil
 			local _ = nil
@@ -161,7 +161,7 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 	local var14 = if parsePageEntriesFromResponse then parsePageEntriesFromResponse(status) else {}
 	local var15 = sduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse(status)
 	
-	local function resolveTemplateForRobloxComponent(p5) --[[ line: 265 ]]
+	local function resolveTemplateForRobloxComponent(p5)
 		-- upvalues: t (write), getSduiTemplateStoreModule (copy), surfaceKey (ref), sduiLogger (copy), sduiErrors (copy), fFlagSduiImprovedErrorDimensions (copy), configCacheKey (ref)
 		local var33 = t[p5]
 		
@@ -215,12 +215,12 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 				local var28 = if fFlagSduiClientTemplateCache and enableTemplateCache then resolveTemplateForRobloxComponent(var23_1) else t[var23_1]
 				
 				if var28 then
-					local ok_1, status_1 = pcall(function() --[[ line: 343 ]]
+					local ok_1, status_1 = pcall(function()
 						-- upvalues: createBuilderConfig (copy), surfaceKey (ref), configCacheKey (ref), fFlagSduiClientTemplateCache (copy), enableTemplateCache (ref), resolveTemplateForRobloxComponent (ref), t (write), var15 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), getSduiClientBindingBuilder (copy), var28 (ref), var22 (ref)
 						return getSduiClientBindingBuilder().buildConfigForComponent(var28, var22.get, createBuilderConfig({
 							appPage = surfaceKey,
 							debugName = configCacheKey,
-							getTemplateForRobloxComponent = function(p6) --[[ line: 347 ]]
+							getTemplateForRobloxComponent = function(p6)
 								-- upvalues: fFlagSduiClientTemplateCache (copy), enableTemplateCache (copy), resolveTemplateForRobloxComponent (copy), t (copy)
 								return if fFlagSduiClientTemplateCache and enableTemplateCache then resolveTemplateForRobloxComponent(p6) else t[p6]
 							end,
@@ -293,12 +293,12 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 	loadTimer.logSduiTreeBuildEnd()
 	
 	if fFlagSduiGameIconSupport then
-		local function getTemplateForRobloxComponent(p7) --[[ line: 440 ]]
+		local function getTemplateForRobloxComponent(p7)
 			-- upvalues: fFlagSduiClientTemplateCache (copy), enableTemplateCache (ref), resolveTemplateForRobloxComponent (ref), t (write)
 			return if fFlagSduiClientTemplateCache and enableTemplateCache then resolveTemplateForRobloxComponent(p7) else t[p7]
 		end
 		
-		local function getKnownTemplates() --[[ line: 450 ]]
+		local function getKnownTemplates()
 			-- upvalues: t (write), fFlagSduiClientTemplateCache (copy), enableTemplateCache (ref), getSduiTemplateStoreModule (copy), surfaceKey (ref)
 			local t_1 = {}
 			
@@ -320,7 +320,7 @@ return function(p4) --[[ line: 99 | named "handleSduiApiResponse" ]]
 		end
 		
 		loadTimer.logSduiClientHintsBegin()
-		local ok_1, status_1 = pcall(function() --[[ line: 468 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: processClientHintsModule (copy), var14 (ref), getTemplateForRobloxComponent (ref), getKnownTemplates (ref)
 			processClientHintsModule({
 				pageEntries = var14,

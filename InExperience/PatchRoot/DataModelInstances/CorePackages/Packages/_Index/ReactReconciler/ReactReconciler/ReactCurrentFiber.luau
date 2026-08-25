@@ -7,7 +7,7 @@ local getComponentName = require(parent.Shared).getComponentName
 local reactDebugCurrentFrame = reactSharedInternals.ReactDebugCurrentFrame
 local t = { current = nil, isRendering = false }
 
-function t.getCurrentFiberOwnerNameInDevOrNull() --[[ line: 39 ]]
+function t.getCurrentFiberOwnerNameInDevOrNull()
 	-- upvalues: dEV (ref), t (ref), getComponentName (ref)
 	if dEV then
 		if t.current == nil then
@@ -19,12 +19,12 @@ function t.getCurrentFiberOwnerNameInDevOrNull() --[[ line: 39 ]]
 	end
 end
 
-local function getCurrentFiberStackInDev() --[[ line: 53 ]]
+local function getCurrentFiberStackInDev()
 	-- upvalues: dEV (ref), t (ref), getStackByFiberInDevAndProd (ref)
 	return if dEV then if t.current == nil then "" else getStackByFiberInDevAndProd(t.current) else ""
 end
 
-function t.resetCurrentFiber() --[[ line: 66 ]]
+function t.resetCurrentFiber()
 	-- upvalues: dEV (ref), reactDebugCurrentFrame (ref), t (ref)
 	if dEV then
 		reactDebugCurrentFrame.getCurrentStack = nil
@@ -33,7 +33,7 @@ function t.resetCurrentFiber() --[[ line: 66 ]]
 	end
 end
 
-function t.setCurrentFiber(p0) --[[ line: 75 ]]
+function t.setCurrentFiber(p0)
 	-- upvalues: dEV (ref), reactDebugCurrentFrame (ref), getCurrentFiberStackInDev (ref), t (ref)
 	if dEV then
 		reactDebugCurrentFrame.getCurrentStack = getCurrentFiberStackInDev
@@ -42,14 +42,14 @@ function t.setCurrentFiber(p0) --[[ line: 75 ]]
 	end
 end
 
-function t.setIsRendering(p1) --[[ line: 84 ]]
+function t.setIsRendering(p1)
 	-- upvalues: dEV (ref), t (ref)
 	if dEV then
 		t.isRendering = p1
 	end
 end
 
-function t.getIsRendering() --[[ line: 90 ]]
+function t.getIsRendering()
 	-- upvalues: dEV (ref), t (ref)
 	return if dEV then t.isRendering else false
 end

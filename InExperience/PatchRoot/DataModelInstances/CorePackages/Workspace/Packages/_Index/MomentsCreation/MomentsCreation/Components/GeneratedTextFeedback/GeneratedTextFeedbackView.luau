@@ -11,7 +11,7 @@ local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local textFeedbackReasonDialogModule = require(momentsCreation.Components.Dialogs.TextFeedbackReasonDialog)
 
-return function(p0) --[[ line: 37 | named "GeneratedTextFeedbackView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconVariant (ref), inputSize (ref), buttonVariant (ref), textFeedbackReasonDialogModule (ref)
 	return if p0.visible then reactModule.createElement(reactModule.Fragment, nil, {
 		Feedback = reactModule.createElement(view, {

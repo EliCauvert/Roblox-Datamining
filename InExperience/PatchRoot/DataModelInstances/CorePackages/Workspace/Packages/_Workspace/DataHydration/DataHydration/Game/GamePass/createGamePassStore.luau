@@ -8,23 +8,23 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.GamePassStoreTypes)
 local fetchGamePassesModule = require(script.Parent.fetchGamePasses)
 
-return function() --[[ line: 23 | named "createGamePassStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchGamePassesModule (ref)
 	local var5 = createDataCacheModule()
 	local var6 = createDataCacheModule()
 	local var7 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var6,
-		logError = function(p0) --[[ line: 33 ]]
+		logError = function(p0)
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
 			logResponseError("game-passes/v1/universes/.../game-passes", {
 				StatusCode = if type(p0) == "table" and p0.StatusCode then p0.StatusCode else nil
 			})
 			discoveryEventErrorLogger.reportError("GamePassStore", "Failed to fetch game passes", { err = tostring(p0) })
 		end,
-		fetchFn = function(p1, _) --[[ line: 40 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: fetchGamePassesModule (copy), var5 (ref)
-			return fetchGamePassesModule(p1):andThen(function(p2) --[[ line: 41 ]]
+			return fetchGamePassesModule(p1):andThen(function(p2)
 				-- upvalues: var5 (copy)
 				local t = {}
 				
@@ -46,13 +46,13 @@ return function() --[[ line: 23 | named "createGamePassStore" ]]
 		updateGamePassInfo = var5.updateItem,
 		updateGamePassInfos = var5.updateItems,
 		updateUniversePasses = var6.updateItems,
-		clear = function() --[[ line: 55 ]]
+		clear = function()
 			-- upvalues: var6 (ref), var7 (ref), var5 (ref)
 			var6.clear()
 			var7.clear()
 			var5.clear()
 		end,
-		dispose = function() --[[ line: 61 ]]
+		dispose = function()
 			-- upvalues: var7 (ref), var5 (ref)
 			var7.dispose()
 			var5.dispose()

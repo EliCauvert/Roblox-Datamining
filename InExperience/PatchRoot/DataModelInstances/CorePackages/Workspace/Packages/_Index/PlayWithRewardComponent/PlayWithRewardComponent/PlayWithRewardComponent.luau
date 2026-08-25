@@ -41,7 +41,7 @@ local fFlagSduiPlayWithReward = sharedFlagsModule.FFlagSduiPlayWithReward
 local fFlagLuaAppEnableContainedRewardUi = playWithRewardStateModule.FFlagLuaAppEnableContainedRewardUi
 local fFlagCheckForUpdatePromise = sharedFlagsModule.FFlagCheckForUpdatePromise
 
-function PlayWithRewardComponent(p0) --[[ line: 69 ]]
+function PlayWithRewardComponent(p0)
 	-- upvalues: useTokens (ref), useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), useDispatch (ref), playersService (ref), reactModule (ref), fFlagEnablePlayWithRewardNonPeekviewEdp (ref), shouldRenderPlayWithRewardBannerModule (ref), usePlayButtonLaunchGame (ref), playButtonReferralSource (ref), playWithRewardTelemetryModule (ref), playWithRewardBlackoutCurtainModule (ref), setPlayWithRewardState (ref), adService (ref), playWithRewardFallbackBannerProductImageAssetId (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), fFlagCheckForUpdatePromise (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), checkForUpdate (ref), fFlagLuaAppEnableContainedRewardUi (ref), fFlagSduiPlayWithReward (ref), luaAppPlayWithRewardMobileEdpLayoutOrder (ref), skeleton (ref), icon (ref), enums (ref), image (ref), view (ref), text (ref), button (ref), playWithRewardCoachmarkModule (ref)
 	local variantId
 	local var20 = useTokens()
@@ -61,13 +61,13 @@ function PlayWithRewardComponent(p0) --[[ line: 69 ]]
 	local _ = nil
 	local var29 = if fFlagEnablePlayWithRewardNonPeekviewEdp then shouldRenderPlayWithRewardBannerModule(p0.universeId, p0.flowId, p0.fetchedUniverseId, p0.playWithRewardAdData) else localPlayer ~= nil and (p0.flowId ~= "" and (p0.fetchedUniverseId ~= nil and (p0.fetchedUniverseId == p0.universeId and (playWithRewardAdData ~= nil and (playWithRewardAdData.adAvailabilityResult == Enum.AdAvailabilityResult.IsAvailable and (playWithRewardAdData.experimentVariantData ~= nil and (if playWithRewardAdData.experimentVariantData.titleText == "" then false else (tonumber(var26) or 0) ~= 0)))))))
 	local var30 = usePlayButtonLaunchGame(p0.universeId, p0.placeIdOverride or p0.placeId, p0.placeId, playButtonReferralSource.PlayWithReward, "PlayWithRewardGameDetails", "PlayWithRewardButton", p0.experienceJoinData)
-	reactModule.useEffect(function() --[[ line: 119 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (write), var25 (ref), playWithRewardTelemetryModule (copy), p0 (ref), var26 (ref), variantId (ref)
 		if var29 then
 			var25.current = true
 			playWithRewardTelemetryModule.logPlayWithRewardBannerShown(p0.flowId, p0.universeId, "startShow", var26, variantId)
 		end
-		return function() --[[ line: 131 ]]
+		return function()
 			-- upvalues: var25 (copy), playWithRewardTelemetryModule (copy), p0 (copy), var26 (copy), variantId (copy)
 			if var25.current then
 				var25.current = false
@@ -84,21 +84,21 @@ function PlayWithRewardComponent(p0) --[[ line: 69 ]]
 	local var31 = if playWithRewardAdData then playWithRewardAdData.productName else ""
 	local var32 = if playWithRewardAdData then playWithRewardAdData.productImageAssetId else ""
 	local var33 = var32 == ""
-	local var34 = reactModule.useCallback(function() --[[ line: 150 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: playWithRewardTelemetryModule (copy), p0 (ref), var26 (ref), playWithRewardBlackoutCurtainModule (copy), var23 (ref), setPlayWithRewardState (copy), adService (copy), var31 (ref), var33 (ref), playWithRewardFallbackBannerProductImageAssetId (copy), var32 (ref), var30 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), fFlagCheckForUpdatePromise (copy), handleUpdate (copy), var22 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var21 (ref), checkForUpdate (copy)
-		local function showAdThenLaunch() --[[ line: 151 ]]
+		local function showAdThenLaunch()
 			-- upvalues: playWithRewardTelemetryModule (copy), p0 (copy), var26 (copy), playWithRewardBlackoutCurtainModule (copy), var23 (copy), setPlayWithRewardState (copy), adService (copy), var31 (copy), var33 (copy), playWithRewardFallbackBannerProductImageAssetId (copy), var32 (copy), var30 (copy)
 			playWithRewardTelemetryModule.logPlayWithRewardBlackoutCurtainAction(p0.flowId, p0.universeId, "shown", var26)
 			playWithRewardBlackoutCurtainModule.show()
 			playWithRewardTelemetryModule.logPlayWithRewardButtonClicked(p0.flowId, p0.universeId, var26)
-			local ok, status = pcall(function() --[[ line: 162 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var23 (copy), setPlayWithRewardState (copy), p0 (copy), playWithRewardTelemetryModule (copy), var26 (copy), adService (copy)
 				var23(setPlayWithRewardState(p0.flowId, p0.universeId, false, nil))
 				playWithRewardTelemetryModule.logPlayWithRewardAdPlaybackAttempted(p0.flowId, p0.universeId, var26)
 				
 				return adService:ShowRewardedVideoAdAtClientAsync(p0.universeId)
 			end)
-			pcall(function() --[[ line: 172 ]]
+			pcall(function()
 				-- upvalues: playWithRewardTelemetryModule (copy), p0 (copy), status (ref), var26 (copy), adService (copy), ok (ref), var31 (copy), var33 (copy), playWithRewardFallbackBannerProductImageAssetId (copy), var32 (copy)
 				playWithRewardTelemetryModule.logPlayWithRewardAdPlaybackStopped(p0.flowId, p0.universeId, tostring(status), var26)
 				adService:SubmitAdNotification(tonumber(p0.universeId) or 0, ok and status ~= nil, status == Enum.ShowAdResult.ShowCompleted, var31, if var33 then playWithRewardFallbackBannerProductImageAssetId else tonumber(var32) or playWithRewardFallbackBannerProductImageAssetId)

@@ -21,10 +21,10 @@ local getFFLagUseCoreScriptsRootProviderForUpsellModalModule = require(purchaseP
 local fFlagSetMenuOnPurchasePromptModule = require(purchasePrompt.Flags.FFlagSetMenuOnPurchasePrompt)
 local name = roact.Component:extend(script.Name)
 
-function name.init(p0) --[[ line: 34 ]]
+function name.init(p0)
 	p0.state = { screenSize = Vector2.new(0, 0) }
 	
-	function p0.changeScreenSize(p1) --[[ line: 39 ]]
+	function p0.changeScreenSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.screenSize ~= p1.AbsoluteSize then
 			p0:setState({ screenSize = p1.AbsoluteSize })
@@ -33,27 +33,27 @@ function name.init(p0) --[[ line: 34 ]]
 	
 	p0.savedSelectedCoreObject = nil
 	
-	function p0.endPurchase() --[[ line: 47 ]]
+	function p0.endPurchase()
 		-- upvalues: p0 (ref)
 		p0:restoreSelectedObject()
 		p0.props.completeRequest()
 	end
 end
 
-function name.saveSelectedObject(p2) --[[ line: 53 ]]
+function name.saveSelectedObject(p2)
 	-- upvalues: guiService (ref)
 	p2.savedSelectedCoreObject = guiService.SelectedCoreObject
 	guiService.SelectedCoreObject = nil
 end
 
-function name.restoreSelectedObject(p3) --[[ line: 58 ]]
+function name.restoreSelectedObject(p3)
 	-- upvalues: coreGuiService (ref), guiService (ref)
 	if p3.savedSelectedCoreObject == nil or p3.savedSelectedCoreObject:IsDescendantOf(coreGuiService) then
 		guiService.SelectedCoreObject = p3.savedSelectedCoreObject
 	end
 end
 
-function name.createElement(p4) --[[ line: 65 ]]
+function name.createElement(p4)
 	-- upvalues: requestTypeModule (ref), roact (ref), premiumUpsellOverlayModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
 	local props = p4.props
 	local state = p4.state
@@ -87,7 +87,7 @@ function name.createElement(p4) --[[ line: 65 ]]
 			}),
 			OnCoreGuiMenuOpened = roact.createElement(externalEventConnectionModule, {
 				event = guiService.MenuOpened,
-				callback = function() --[[ line: 107 ]]
+				callback = function()
 					-- upvalues: fFlagSetMenuOnPurchasePromptModule (copy), p4 (ref), props (ref)
 					if fFlagSetMenuOnPurchasePromptModule and p4.menuOpenedBySelf then
 						p4.menuOpenedBySelf = false
@@ -102,7 +102,7 @@ function name.createElement(p4) --[[ line: 65 ]]
 	return nil
 end
 
-function name.render(p5) --[[ line: 118 ]]
+function name.render(p5)
 	-- upvalues: fFlagSetMenuOnPurchasePromptModule (ref), guiService (ref), getFFLagUseCoreScriptsRootProviderForUpsellModalModule (ref), roact (ref), coreScriptsRootProvider (ref), reactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var16 = p5:createElement()
 	
@@ -121,7 +121,7 @@ function name.render(p5) --[[ line: 118 ]]
 	}) else var16
 end
 
-return connectToStoreModule(function(p6) --[[ line: 142 ]]
+return connectToStoreModule(function(p6)
 	return {
 		requestType = p6.promptRequest.requestType,
 		promptState = p6.promptState,
@@ -130,22 +130,22 @@ return connectToStoreModule(function(p6) --[[ line: 142 ]]
 		premiumProductInfo = p6.premiumProductInfo,
 		isGamepadEnabled = p6.gamepadEnabled
 	}
-end, function(p7) --[[ line: 154 ]]
+end, function(p7)
 	-- upvalues: launchPremiumUpsellModule (ref), completeRequestModule (ref), sendEventModule (ref), initiatePremiumPrecheckModule (ref)
 	return {
-		promptPremiumPurchase = function() --[[ line: 156 ]]
+		promptPremiumPurchase = function()
 			-- upvalues: p7 (ref), launchPremiumUpsellModule (copy)
 			return p7(launchPremiumUpsellModule())
 		end,
-		completeRequest = function() --[[ line: 159 ]]
+		completeRequest = function()
 			-- upvalues: p7 (ref), completeRequestModule (copy)
 			return p7(completeRequestModule())
 		end,
-		onAnalyticEvent = function(p8, p9) --[[ line: 162 ]]
+		onAnalyticEvent = function(p8, p9)
 			-- upvalues: p7 (ref), sendEventModule (copy)
 			return p7(sendEventModule(p8, p9))
 		end,
-		dispatchPremiumPrecheck = function() --[[ line: 165 ]]
+		dispatchPremiumPrecheck = function()
 			-- upvalues: p7 (ref), initiatePremiumPrecheckModule (copy)
 			return p7(initiatePremiumPrecheckModule())
 		end

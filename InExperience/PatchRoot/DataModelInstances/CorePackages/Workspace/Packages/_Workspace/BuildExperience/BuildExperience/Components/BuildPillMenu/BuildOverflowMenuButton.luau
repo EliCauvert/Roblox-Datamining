@@ -27,11 +27,11 @@ local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local releaseAnyFocusModule = require(buildExperience.utils.releaseAnyFocus)
 local buildOverflowMenuWidth = game:DefineFastInt("BuildOverflowMenuWidth", 172)
 
-local function _(p0, p1) --[[ line: 73 | named "getSourceText" ]]
+local function _(p0, p1)
 	return if p0.getText == nil then p0.text else p0.getText(p1)
 end
 
-return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
+return function(p2)
 	-- upvalues: useScaledValue (ref), buildOverflowMenuWidth (ref), reactModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), useSharePublishedExperience (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), useCreatorCreditMenuItem (ref), releaseAnyFocusModule (ref), leaveExperienceModule (ref), versionHistoryContainerModule (ref), menu (ref), popoverSide (ref), fFlagBuildDesktopReadinessModule (ref), inputSize (ref), popoverAlign (ref), iconButton (ref), buttonVariant (ref), experienceShareOverlaysModule (ref), friendsOnlyShareDialogModule (ref), privateShareTooltipModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref)
 	local var15 = useScaledValue(buildOverflowMenuWidth)
 	local var16, var17 = reactModule.useState(false)
@@ -45,7 +45,7 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 	local var28 = p2.onOpenCreatorCreditPage ~= nil
 	local var29 = if p2.isDisabled ~= true then p2.target.universeId == nil and not (fFlagEnableBuildOverflowMenuForNewGamesModule and (p2.target.universeId == nil and var28)) else true
 	local var30 = p2.hasPublishedTurn == true
-	local var31 = reactModule.useMemo(function() --[[ line: 105 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), var30 (ref)
 		return if p2.target.universeId == nil then nil else {
 			universeId = p2.target.universeId,
@@ -72,12 +72,12 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 	local var34 = if fFlagBuildLocalization then useLocalization(var33) else nil
 	local var35 = useCreatorCreditMenuItem({ onOpenCreatorCreditPage = p2.onOpenCreatorCreditPage })
 	
-	local function _(p3) --[[ line: 142 | named "getItemText" ]]
+	local function _(p3)
 		-- upvalues: fFlagBuildLocalization (copy), var34 (ref), var31 (ref)
 		return if fFlagBuildLocalization then var34[p3.id] elseif p3.getText == nil then p3.text else p3.getText(var31)
 	end
 	
-	local function buildMenuItems() --[[ line: 149 ]]
+	local function buildMenuItems()
 		-- upvalues: var29 (ref), var31 (ref), var32 (ref), fFlagBuildLocalization (copy), var34 (ref), var22 (ref), var28 (ref), var35 (ref)
 		local t = {}
 		
@@ -105,7 +105,7 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 		return t
 	end
 	
-	local var37 = reactModule.useCallback(function() --[[ line: 200 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), var21 (ref)
 		var17(false)
 		var21(false)
@@ -125,7 +125,7 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 			size = if fFlagBuildDesktopReadinessModule then inputSize.Large else nil,
 			align = popoverAlign.End,
 			onPressedOutside = var37,
-			onActivated = reactModule.useCallback(function(p4) --[[ line: 206 ]]
+			onActivated = reactModule.useCallback(function(p4)
 				-- upvalues: var28 (ref), var35 (ref), var17 (ref), var31 (ref), var32 (ref), p2 (ref), releaseAnyFocusModule (copy), var19 (ref), fFlagBuildExperiencePrivateInvitesModule (copy), var24 (ref), var25 (ref), var27 (ref), var21 (ref), leaveExperienceModule (copy)
 				if var28 and var35 ~= nil and p4 == var35.item.id then
 					var35.activate()
@@ -159,7 +159,7 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 								elseif var40.type == "confirmFriendsShare" then
 									var27(var40.placeId)
 								elseif var40.type == "showPrivateShareTooltip" then
-									var21(function(p5) --[[ line: 245 ]]
+									var21(function(p5)
 										return not p5
 									end)
 									
@@ -189,11 +189,11 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 			variant = buttonVariant.Utility,
 			size = inputSize.Medium,
 			isDisabled = var29,
-			onActivated = reactModule.useCallback(function() --[[ line: 187 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var29 (ref), var21 (ref), var17 (ref), p2 (ref)
 				if var29 then return end
 				var21(false)
-				var17(function(p6) --[[ line: 192 ]]
+				var17(function(p6)
 					return not p6
 				end)
 				
@@ -210,11 +210,11 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 			onConfirmPlaytesters = var23.onConfirmPlaytesters
 		}) else nil,
 		FriendsOnlyShareDialog = if fFlagBuildExperiencePrivateInvitesModule or var26 == nil then nil else reactModule.createElement(friendsOnlyShareDialogModule, {
-			onCancel = reactModule.useCallback(function() --[[ line: 285 ]]
+			onCancel = reactModule.useCallback(function()
 				-- upvalues: var27 (ref)
 				var27(nil)
 			end, {}),
-			onShare = reactModule.useCallback(function() --[[ line: 277 ]]
+			onShare = reactModule.useCallback(function()
 				-- upvalues: var26 (ref), var27 (ref), var25 (ref)
 				var27(nil)
 				
@@ -232,7 +232,7 @@ return function(p2) --[[ line: 77 | named "BuildOverflowMenuButton" ]]
 			isOpen = true,
 			testId = "build-version-history",
 			placeId = p2.target.placeId,
-			onClose = reactModule.useCallback(function() --[[ line: 272 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: var19 (ref)
 				var19(false)
 			end, {})

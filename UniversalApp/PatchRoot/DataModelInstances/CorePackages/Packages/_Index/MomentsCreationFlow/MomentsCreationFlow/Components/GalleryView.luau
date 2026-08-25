@@ -24,21 +24,21 @@ local constantsModule = require(momentsCreationFlow.Constants)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
 
-return function(p0) --[[ line: 50 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useContext (ref), creationFlowContextModule (ref), reactModule (ref), cryoModule (ref), eventNamesModule (ref), useCallback (ref), captureItemModule (ref), view (ref), text (ref), creationFlowLocalizationModule (ref), chip (ref), foundationModule (ref), image (ref), videoCamera (ref), scrollingGridView (ref), constantsModule (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	local var11 = useDeviceInsets()
 	local var12 = useTokens()
 	local var13 = useContext(creationFlowContextModule)
 	local var14, var15 = reactModule.useState(nil)
 	local var16 = reactModule.useRef(false)
-	local var17 = reactModule.useMemo(function() --[[ line: 57 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), p0 (ref), cryoModule (copy)
-		return if var14 then cryoModule.List.filter(p0.captures, function(p1) --[[ line: 62 ]]
+		return if var14 then cryoModule.List.filter(p0.captures, function(p1)
 			-- upvalues: var14 (copy)
 			return p1.CaptureType == var14
 		end) else p0.captures
 	end, { p0.captures, var14 })
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var16 (ref), var13 (ref), eventNamesModule (copy)
 		if #p0.captures == 0 and var16.current == false then
 			var16.current = true
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 50 ]]
 			AllChip = reactModule.createElement(chip, {
 				LayoutOrder = 1,
 				isChecked = var14 == nil,
-				onActivated = useCallback(function() --[[ line: 94 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var15 (ref)
 					var15(nil)
 				end, {}),
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 50 ]]
 				LayoutOrder = 2,
 				isChecked = var14 == Enum.CaptureType.Screenshot,
 				leading = image,
-				onActivated = useCallback(function() --[[ line: 98 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var15 (ref)
 					var15(Enum.CaptureType.Screenshot)
 				end, {}),
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 50 ]]
 				LayoutOrder = 3,
 				isChecked = var14 == Enum.CaptureType.Video,
 				leading = videoCamera,
-				onActivated = useCallback(function() --[[ line: 102 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var15 (ref)
 					var15(Enum.CaptureType.Video)
 				end, {}),
@@ -113,12 +113,12 @@ return function(p0) --[[ line: 50 ]]
 					minItemWidth = 100
 				},
 				items = var17,
-				onShowMoreCallback = useCallback(function() --[[ line: 106 ]]
+				onShowMoreCallback = useCallback(function()
 					-- upvalues: var13 (ref)
 					var13.fetchAdditionalCaptures()
 				end, { var13 }),
 				padding = { bottom = UDim.new(0, var12.Padding.Large) },
-				renderEmptyState = useCallback(function() --[[ line: 83 ]]
+				renderEmptyState = useCallback(function()
 					-- upvalues: reactModule (copy), view (copy), text (copy), var13 (ref), creationFlowLocalizationModule (copy)
 					return reactModule.createElement(view, { tag = "shrink size-full-full" }, {
 						EmptyState = reactModule.createElement(text, {
@@ -127,7 +127,7 @@ return function(p0) --[[ line: 50 ]]
 						})
 					})
 				end, { var13 }),
-				renderItem = useCallback(function(p2, _) --[[ line: 74 ]]
+				renderItem = useCallback(function(p2, _)
 					-- upvalues: reactModule (copy), captureItemModule (copy), p0 (ref)
 					return reactModule.createElement(captureItemModule, {
 						zIndex = 1,

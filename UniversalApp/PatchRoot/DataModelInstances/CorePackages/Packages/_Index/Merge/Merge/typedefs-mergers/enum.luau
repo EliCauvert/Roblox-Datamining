@@ -8,7 +8,7 @@ local mergeDirectives = require(script.Parent.directives).mergeDirectives
 local mergeEnumValues = require(script.Parent["enum-values"]).mergeEnumValues
 local _ = require(script.Parent["merge-typedefs_types"])
 
-function t.mergeEnum(p0, p1, p2) --[[ line: 26 ]]
+function t.mergeEnum(p0, p1, p2)
 	-- upvalues: boolean (ref), mergeDirectives (ref), mergeEnumValues (ref), object (ref), kind (ref)
 	return if boolean.toJSBoolean(p1) then {
 		name = p0.name,

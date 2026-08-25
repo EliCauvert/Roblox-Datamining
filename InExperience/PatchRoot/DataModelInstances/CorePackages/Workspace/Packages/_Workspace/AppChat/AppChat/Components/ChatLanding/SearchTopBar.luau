@@ -42,31 +42,31 @@ searchTopBar.defaultProps = {
 	containerRef = nil,
 	inputBoxRef = nil,
 	focusNavigationEventHandlerRef = nil,
-	resetOnMount = function() --[[ line: 54 ]] end,
-	onSelectCallback = function() --[[ line: 59 ]] end
+	resetOnMount = function() end,
+	onSelectCallback = function() end
 }
 
-function searchTopBar.init(p0) --[[ line: 66 ]]
+function searchTopBar.init(p0)
 	-- upvalues: roactModule (ref), memoize (ref), text (ref)
 	p0.focusNavigationService = p0.props.focusNavigationService
 	p0.inputBoxRef = p0.props.inputBoxRef or roactModule.createRef()
 	p0.containerRef = p0.props.containerRef or roactModule.createRef()
 	p0.props.onSelectCallback()
 	
-	function p0.focusInputBox() --[[ line: 72 ]]
+	function p0.focusInputBox()
 		-- upvalues: p0 (ref)
 		if p0.inputBoxRef and p0.inputBoxRef.current then
 			p0.inputBoxRef.current:CaptureFocus()
 		end
 	end
 	
-	p0.getTextWidth = memoize(function(p1, p2, p3) --[[ line: 78 ]]
+	p0.getTextWidth = memoize(function(p1, p2, p3)
 		-- upvalues: text (copy)
 		return text.GetTextWidth(p1, p2, p3)
 	end)
 end
 
-function searchTopBar.didMount(p4) --[[ line: 83 ]]
+function searchTopBar.didMount(p4)
 	if p4.props.captureFocusOnMount and p4.containerRef.current and (p4.focusNavigationService and p4.focusNavigationService.focusedGuiObject:getValue() ~= nil) then
 		p4.focusNavigationService:focusGuiObject(p4.containerRef.current)
 	end
@@ -76,15 +76,15 @@ function searchTopBar.didMount(p4) --[[ line: 83 ]]
 	p4.props.resetOnMount()
 end
 
-function searchTopBar.willUnmount(p5) --[[ line: 98 ]]
+function searchTopBar.willUnmount(p5)
 	if p5.focusNavigationService then
 		p5.focusNavigationService:teardown()
 	end
 end
 
-function searchTopBar.render(p6) --[[ line: 104 ]]
+function searchTopBar.render(p6)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), textButton (ref), withSelectionCursorProvider (ref), foundationModule (ref), cursorKind (ref), imageSetLabel (ref), t (ref), iconSize (ref), search (ref), callbackInputBox (ref), clearSmall (ref)
-	local var10 = function(p7) --[[ line: 105 ]]
+	local var10 = function(p7)
 		-- upvalues: p6 (ref)
 		if (not p7 or #p7 <= 0) and p6.focusNavigationService and p6.inputBoxRef.current then
 			if p6.focusNavigationService.focusedGuiObject:getValue() == nil then
@@ -99,7 +99,7 @@ function searchTopBar.render(p6) --[[ line: 104 ]]
 		end
 	end
 	
-	return UIBloxModule.Style.withStyle(function(p8) --[[ line: 122 ]]
+	return UIBloxModule.Style.withStyle(function(p8)
 		-- upvalues: p6 (ref), roactModule (copy), textButton (copy), withSelectionCursorProvider (copy), foundationModule (copy), cursorKind (copy), imageSetLabel (copy), t (copy), iconSize (copy), search (copy), callbackInputBox (copy), clearSmall (copy), var10 (ref)
 		local cancelText = p6.props.cancelText
 		local header2 = p8.Font.Header2
@@ -136,7 +136,7 @@ function searchTopBar.render(p6) --[[ line: 104 ]]
 				text = cancelText,
 				onActivated = p6.props.cancelCallback
 			}) else nil,
-			filterBoxContainer = withSelectionCursorProvider(function(p9) --[[ line: 174 ]]
+			filterBoxContainer = withSelectionCursorProvider(function(p9)
 				-- upvalues: roactModule (copy), foundationModule (copy), var13 (write), cursorKind (copy), p6 (copy), imageSetLabel (copy), t (copy), p8 (ref), iconSize (copy), search (copy), callbackInputBox (copy), body (ref), var14 (ref), clearSmall (copy), var10 (copy)
 				return roactModule.createElement(foundationModule.View, {
 					LayoutOrder = 1,
@@ -212,7 +212,7 @@ function searchTopBar.render(p6) --[[ line: 104 ]]
 	end)
 end
 
-function FocusableSearchTopBar(p10) --[[ line: 260 ]]
+function FocusableSearchTopBar(p10)
 	-- upvalues: reactModule (ref), focusNavigationService (ref), coreGui (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), roactModule (ref), searchTopBar (ref), cryoModule (ref)
 	local var15 = reactModule.useRef(nil)
 	local var16 = reactModule.useRef(nil)
@@ -222,7 +222,7 @@ function FocusableSearchTopBar(p10) --[[ line: 260 ]]
 	return roactModule.createElement(searchTopBar, cryoModule.Dictionary.join({
 		inputBoxRef = var16,
 		containerRef = var15,
-		focusNavigationEventHandlerRef = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, function(p11) --[[ line: 268 ]]
+		focusNavigationEventHandlerRef = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, function(p11)
 			-- upvalues: var17 (ref), var15 (ref), cancelCallback (ref)
 			if p11.eventData and var17.focusedGuiObject:getValue() == var15.current and p11.eventData.KeyCode ~= Enum.KeyCode.None then
 				p11:cancel()

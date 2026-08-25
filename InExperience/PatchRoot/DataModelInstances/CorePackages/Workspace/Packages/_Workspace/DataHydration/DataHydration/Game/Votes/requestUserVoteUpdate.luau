@@ -5,10 +5,10 @@ local httpService = game:GetService("HttpService")
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local url = httpModule.Url
 
-return function(p0, p1) --[[ line: 13 | named "requestUserVoteUpdate" ]]
+return function(p0, p1)
 	-- upvalues: urlBuilder (ref), url (ref), httpRequestModule (ref), httpService (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ line: 22 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
 		end

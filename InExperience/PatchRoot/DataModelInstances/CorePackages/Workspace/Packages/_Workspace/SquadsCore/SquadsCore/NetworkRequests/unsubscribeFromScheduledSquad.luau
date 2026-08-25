@@ -11,7 +11,7 @@ local var7 = urlBuilderModule.UrlBuilder.new({
 	base = urlBuilderModule.UrlBase.APIS
 })()
 
-return function(p0, p1, p2) --[[ line: 28 ]]
+return function(p0, p1, p2)
 	-- upvalues: var6 (ref), httpService (ref), var7 (ref), loggerModule (ref), serializeTableModule (ref)
 	assert(var6(p0))
 	
@@ -23,7 +23,7 @@ return function(p0, p1, p2) --[[ line: 28 ]]
 			Accept = "application/json"
 		},
 		Url = var7
-	}):Start(function(_, p3) --[[ line: 47 ]]
+	}):Start(function(_, p3)
 		-- upvalues: p1 (ref), httpService (copy), loggerModule (copy), serializeTableModule (copy), p2 (ref), p0 (ref)
 		if p3.StatusCode == 200 then
 			local body = p3.Body

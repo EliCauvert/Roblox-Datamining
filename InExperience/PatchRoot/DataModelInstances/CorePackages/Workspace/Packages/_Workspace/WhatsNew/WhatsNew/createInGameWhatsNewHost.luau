@@ -18,7 +18,7 @@ inGameWhatsNew.Parent = game:GetService("CoreGui")
 local var7 = nil
 
 return {
-	createInGameWhatsNewHost = function(p0) --[[ line: 36 ]]
+	createInGameWhatsNewHost = function(p0)
 		-- upvalues: var7 (write), ensureWhatsNewStoreInitializedModule (ref), reactModule (ref), foundationModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), inGameWhatsNew (ref), whatsNewScreenHostModule (ref), reactRobloxModule (ref)
 		if var7 ~= nil then
 			return var7
@@ -38,7 +38,7 @@ return {
 			})
 		})
 		local var9 = reactRobloxModule.createRoot(inGameWhatsNew)
-		local ok, status = pcall(function() --[[ line: 65 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var9 (ref), var8 (ref)
 			var9:render(var8)
 		end)
@@ -50,7 +50,7 @@ return {
 		
 		return var9
 	end,
-	resetForTests = function() --[[ line: 77 ]]
+	resetForTests = function()
 		-- upvalues: var7 (write)
 		var7 = nil
 	end

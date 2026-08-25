@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React).createContext(function() --[[ line: 6 ]] end)
+﻿return require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React).createContext(function() end)

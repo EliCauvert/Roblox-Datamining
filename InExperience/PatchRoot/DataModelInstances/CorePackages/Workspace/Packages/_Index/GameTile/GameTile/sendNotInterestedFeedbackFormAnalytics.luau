@@ -18,7 +18,7 @@ local t = {
 	lastUpdated = { 25, 10, 22 }
 }
 
-return function(p0, p1) --[[ line: 30 ]]
+return function(p0, p1)
 	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var3 (ref), telemetryService (ref), t (ref)
 	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
 		discoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", "event is missing context")

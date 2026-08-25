@@ -7,9 +7,9 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local getLocalUserIdModule = require(parent.Utils.getLocalUserId)
 local getUserIdsFromStringModule = require(parent.Utils.getUserIdsFromString)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: appStorageService (ref), constantsModule (ref), getUserIdsFromStringModule (ref), getLocalUserIdModule (ref), playersService (ref), dashModule (ref), eventNamesModule (ref)
-	local ok, status = pcall(function() --[[ line: 15 ]]
+	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy), constantsModule (copy)
 		return appStorageService:GetItem(constantsModule.DeleteWarningModalOptOutStorageKey)
 	end)
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 14 ]]
 	local var7 = getUserIdsFromStringModule(status)
 	var7[getLocalUserIdModule(playersService) or ""] = true
 	local joined = table.concat(dashModule.keys(var7), ",")
-	local ok_1, _ = pcall(function() --[[ line: 28 ]]
+	local ok_1, _ = pcall(function()
 		-- upvalues: appStorageService (copy), constantsModule (copy), joined (ref)
 		appStorageService:SetItem(constantsModule.DeleteWarningModalOptOutStorageKey, joined)
 		appStorageService:Flush()

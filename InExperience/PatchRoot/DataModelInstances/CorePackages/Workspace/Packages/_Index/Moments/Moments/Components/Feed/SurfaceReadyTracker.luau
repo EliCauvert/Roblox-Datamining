@@ -5,7 +5,7 @@ local useMomentMediaController = momentsCommonModule.Media.useMomentMediaControl
 local useMomentsSurfaceReadyTracking = momentsCommonModule.Performance.useMomentsSurfaceReadyTracking
 local _ = require(script.Parent.FeedTypes)
 
-return function(p0) --[[ line: 19 | named "SurfaceReadyTracker" ]]
+return function(p0)
 	-- upvalues: signalsReactModule (ref), useMomentMediaController (ref), useMomentsSurfaceReadyTracking (ref)
 	local var4
 	local var2 = signalsReactModule.useSignalState(p0.pager.getCurrentItem)

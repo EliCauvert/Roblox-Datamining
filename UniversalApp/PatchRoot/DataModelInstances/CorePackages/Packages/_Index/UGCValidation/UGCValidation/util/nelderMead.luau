@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 24 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref), floatVectorModule (ref)
 	local tbl = setmetatable({}, t)
 	
@@ -28,12 +28,12 @@ function t.new(p0, p1, p2) --[[ line: 24 ]]
 	return tbl
 end
 
-function t:evaluate() --[[ line: 51 ]]
+function t:evaluate()
 	-- upvalues: floatVectorModule (ref)
 	local simplex = self.simplex
 	local t = {}
 	
-	local _ = function(p3) --[[ line: 55 ]]
+	local _ = function(p3)
 		-- upvalues: t (write), self (ref)
 		local var22 = t[p3]
 		
@@ -47,7 +47,7 @@ function t:evaluate() --[[ line: 51 ]]
 	local var5 = 0
 	while not self.terminateFunction(simplex, var5) do
 		t = {}
-		table.sort(simplex, function(p4, p5) --[[ line: 68 ]]
+		table.sort(simplex, function(p4, p5)
 			-- upvalues: t (write), self (ref)
 			local var23 = t[p4]
 			
@@ -166,7 +166,7 @@ function t:evaluate() --[[ line: 51 ]]
 	end
 end
 
-function t:calculateMaxLengthBetweenVertices() --[[ line: 122 ]]
+function t:calculateMaxLengthBetweenVertices()
 	local var25 = 0
 	
 	for i_1 = 1, #self - 1 do

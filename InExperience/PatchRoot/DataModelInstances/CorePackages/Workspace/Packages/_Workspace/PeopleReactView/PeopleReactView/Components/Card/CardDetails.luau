@@ -22,7 +22,7 @@ local useIsComponentInputEndedModule = require(peopleReactView.Hooks.useIsCompon
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local fFlagAddIEMProfilePage = require(parent.SharedFlags).FFlagAddIEMProfilePage
 
-return reactModule.memo(function(p0) --[[ line: 42 | named "CardDetails" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useGetPeopleServiceModule (ref), fFlagAddIEMProfilePage (ref), personButtonConfigsModule (ref), useInExperienceCombinedNameModule (ref), signalsReactModule (ref), iconName (ref), iconVariant (ref), useIsComponentInputEndedModule (ref), controlState (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), guiService (ref), view (ref), stateLayerAffordance (ref), text (ref), formatUsername (ref), iconButton (ref), buttonVariant (ref), inputSize (ref)
 	local var11 = reactModule.useRef(nil)
 	local var12 = useGetPeopleServiceModule("FriendStatusStore")
@@ -30,14 +30,14 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardDetails" ]]
 	local var14 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("PeopleAnalyticsManager") else nil
 	local var15 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("SettingsHubService") else nil
 	local var16 = personButtonConfigsModule(p0.person.UserId)
-	local var17 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), var13 (ref)
 		return var16[var13.PERSON_BUTTONS.ADD_FRIEND]
 	end, { var16 })
 	local var18 = useInExperienceCombinedNameModule(p0.person.UserId, p0.person.DisplayName)
 	local var19 = signalsReactModule.useSignalState(var12.getFriendStatus(p0.person.UserId))
 	local var20 = signalsReactModule.useSignalState(var12.getIsFriendButtonGrayedOut(p0.person.UserId))
-	local var21 = reactModule.useMemo(function() --[[ line: 66 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var19 (ref), iconName (copy), iconVariant (copy), var20 (ref)
 		return if var19 then {
 			name = iconName.PersonCheck,
@@ -57,20 +57,20 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardDetails" ]]
 		stateLayer = {
 			affordance = if var24 or var22 then stateLayerAffordance.None else stateLayerAffordance.Background
 		},
-		onActivated = if fFlagAddIEMProfilePage then if fFlagAddIEMProfilePage then reactModule.useCallback(function() --[[ line: 96 ]]
+		onActivated = if fFlagAddIEMProfilePage then if fFlagAddIEMProfilePage then reactModule.useCallback(function()
 			-- upvalues: var15 (ref), p0 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var14 (ref), guiService (copy)
 			local var26 = var15.hubRef()
 			
 			if var26 then
 				var26:SwitchToReactPage(var26.PlayerProfilePage, {
 					userId = p0.person.UserId,
-					inspectAvatar = function() --[[ line: 101 ]]
+					inspectAvatar = function()
 						-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var14 (copy), guiService (copy), p0 (copy), var26 (ref)
 						var14:trackInspectButton(game.GameId, if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else nil, "player_profile")
 						guiService:InspectPlayerFromUserIdWithCtx(p0.person.UserId, "playerProfile")
 						var26:SetVisibility(false)
 					end,
-					closePage = function() --[[ line: 110 ]]
+					closePage = function()
 						-- upvalues: var26 (ref)
 						var26:CloseReactPage()
 					end
@@ -95,7 +95,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardDetails" ]]
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			stateLayer = { affordance = stateLayerAffordance.None },
-			onStateChanged = reactModule.useCallback(function(p1) --[[ line: 91 ]]
+			onStateChanged = reactModule.useCallback(function(p1)
 				-- upvalues: var25 (ref), controlState (copy)
 				var25(if p1 ~= controlState.Hover then p1 == controlState.Pressed else true)
 			end, {})
@@ -106,7 +106,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "CardDetails" ]]
 				size = inputSize.Medium,
 				isDisabled = var23,
 				Visible = var17.shouldShow(),
-				onActivated = reactModule.useCallback(function() --[[ line: 118 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var17 (ref), var13 (ref)
 					var17.onActivated(var13.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end, { var17.onActivated })

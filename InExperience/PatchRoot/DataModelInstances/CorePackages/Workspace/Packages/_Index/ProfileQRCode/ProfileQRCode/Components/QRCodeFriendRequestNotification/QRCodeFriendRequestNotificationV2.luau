@@ -22,7 +22,7 @@ local eventNamesModule = require(profileQRCode.Analytics.EventNames)
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p0) --[[ line: 39 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), textKeysModule (ref), useStyle (ref), useLocalUserInfoModule (ref), useCombinedUserNameModule (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), useAnalyticsModule (ref), reactModule (ref), eventNamesModule (ref), view (ref), userTile (ref), layoutMode (ref), foundationModule (ref), styledTextLabel (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref)
 	local var11 = useTokens()
 	local var12 = useLocalization({
@@ -36,11 +36,11 @@ return function(p0) --[[ line: 39 ]]
 	local var16 = if var15 == "" then if var14 then var14.displayName or (var14.username or "") else "" else var15 .. " @" .. (var14.username or (if fFlagProfileQrCodeDeprecateUserReduxModule then "" else nil))
 	local var17 = useAnalyticsModule()
 	local var18, var19 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 57 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref)
 		var19(false)
 	end, { p0.userId })
-	reactModule.useEffect(function() --[[ line: 61 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), eventNamesModule (copy), p0 (ref)
 		var17.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p0.notificationQueueSize })
 	end, { p0.userId, var17.fireEvent, p0.notificationQueueSize })
@@ -100,7 +100,7 @@ return function(p0) --[[ line: 39 ]]
 							size = inputSize.Small,
 							fillBehavior = fillBehavior.Fill,
 							isDisabled = var18,
-							onActivated = function() --[[ line: 131 ]]
+							onActivated = function()
 								-- upvalues: var19 (ref), p0 (ref)
 								var19(true)
 								p0.onAccept(p0.userId)

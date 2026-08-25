@@ -8,7 +8,7 @@ local getChatModerationStatusDataHydrationModule = require(appChat.Stores.GetCha
 local _ = require(appChat.Stores.GetConversationStore)
 local getConversationSendEligibilityStatusModule = require(appChat.Utils.getConversationSendEligibilityStatus)
 
-local function areResultsEqual(p0, p1) --[[ line: 29 ]]
+local function areResultsEqual(p0, p1)
 	if p0.isLoading ~= p1.isLoading or #p0.eligibleConversations ~= #p1.eligibleConversations then
 		return false
 	end
@@ -20,17 +20,17 @@ local function areResultsEqual(p0, p1) --[[ line: 29 ]]
 	return true
 end
 
-return function(p2) --[[ line: 43 | named "useExternalChatConversationEligibility" ]]
+return function(p2)
 	-- upvalues: getChatModerationStatusDataHydrationModule (ref), reactModule (ref), createCurrentTimeSignal (ref), signalsModule (ref), getConversationSendEligibilityStatusModule (ref), areResultsEqual (ref), signalsReactModule (ref)
 	local var7 = getChatModerationStatusDataHydrationModule()
-	local var8 = reactModule.useMemo(function() --[[ line: 45 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: createCurrentTimeSignal (copy)
 		return createCurrentTimeSignal(1)
 	end, {})
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 50 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), p2 (ref), var8 (ref), getConversationSendEligibilityStatusModule (copy), var7 (ref), areResultsEqual (copy)
-		return signalsModule.createComputed(function(p3) --[[ line: 51 ]]
+		return signalsModule.createComputed(function(p3)
 			-- upvalues: p2 (copy), var8 (copy), getConversationSendEligibilityStatusModule (copy), var7 (copy)
 			local t = {}
 			

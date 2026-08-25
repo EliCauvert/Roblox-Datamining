@@ -4,7 +4,7 @@ local createComputed = signalsModule.createComputed
 local t = {}
 local var2 = require(script.Parent.UserProfileStore).get()
 
-local function _(value) --[[ line: 22 | named "getOrCreateUserSignal" ]]
+local function _(value)
 	-- upvalues: t (write), createSignal (ref)
 	if not t[value] then
 		local var5, var6 = createSignal(false)
@@ -13,7 +13,7 @@ local function _(value) --[[ line: 22 | named "getOrCreateUserSignal" ]]
 	return t[value]
 end
 
-local function hasUserVerifiedBadge(p0, p1) --[[ line: 35 ]]
+local function hasUserVerifiedBadge(p0, p1)
 	-- upvalues: var2 (ref)
 	local ok, status = pcall(var2.fetchNamesByUserIds({ tostring(p0) }), p1)
 	
@@ -24,7 +24,7 @@ local function hasUserVerifiedBadge(p0, p1) --[[ line: 35 ]]
 end
 
 local t_1 = {
-	setBadgeVisibility = function(value, p2) --[[ line: 30 ]]
+	setBadgeVisibility = function(value, p2)
 		-- upvalues: t (write), createSignal (ref)
 		if not t[value] then
 			local var7, var8 = createSignal(false)
@@ -32,7 +32,7 @@ local t_1 = {
 		end
 		t[value].setter(p2)
 	end,
-	getBadgeVisibilitySignal = function(value) --[[ line: 51 ]]
+	getBadgeVisibilitySignal = function(value)
 		-- upvalues: t (write), createSignal (ref), createComputed (ref), hasUserVerifiedBadge (ref)
 		if not t[value] then
 			local var9, var10 = createSignal(false)
@@ -40,12 +40,12 @@ local t_1 = {
 		end
 		local var11 = t[value]
 		
-		return createComputed(function(p3) --[[ line: 54 ]]
+		return createComputed(function(p3)
 			-- upvalues: hasUserVerifiedBadge (copy), value (ref), var11 (ref)
 			return hasUserVerifiedBadge(value, p3) and var11.getter(p3)
 		end)
 	end,
-	isBadgeVisible = function(p4) --[[ line: 61 ]]
+	isBadgeVisible = function(p4)
 		-- upvalues: hasUserVerifiedBadge (ref), t (write), createSignal (ref)
 		local var12 = hasUserVerifiedBadge(p4, false)
 		
@@ -55,14 +55,14 @@ local t_1 = {
 		end
 		return var12 and t[p4].getter(false)
 	end,
-	reset = function() --[[ line: 69 ]]
+	reset = function()
 		-- upvalues: t (write)
 		t = {}
 	end
 }
 
 return {
-	get = function() --[[ line: 81 ]]
+	get = function()
 		-- upvalues: t_1 (ref)
 		return t_1
 	end

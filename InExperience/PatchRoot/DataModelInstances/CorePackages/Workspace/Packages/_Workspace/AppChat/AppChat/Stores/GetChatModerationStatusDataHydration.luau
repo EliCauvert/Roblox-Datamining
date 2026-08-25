@@ -7,7 +7,7 @@ local getResponseBodyModule = require(appChat.Stores.Ingestion.getResponseBody)
 local serializeChatTimeoutRangeModule = require(appChat.Utils.serializeChatTimeoutRange)
 local t = { status = "none" }
 
-local function _(p0) --[[ line: 38 | named "toTimeoutStatus" ]]
+local function _(p0)
 	-- upvalues: serializeChatTimeoutRangeModule (ref)
 	local var10 = serializeChatTimeoutRangeModule(p0)
 	
@@ -19,7 +19,7 @@ local function _(p0) --[[ line: 38 | named "toTimeoutStatus" ]]
 	}
 end
 
-local function mapResponseToStatuses(value, p1) --[[ line: 48 ]]
+local function mapResponseToStatuses(value, p1)
 	-- upvalues: getResponseBodyModule (ref), serializeChatTimeoutRangeModule (ref), t (ref)
 	local var12
 	local var11 = getResponseBodyModule(value)
@@ -63,7 +63,7 @@ local function mapResponseToStatuses(value, p1) --[[ line: 48 ]]
 	return var12, t_1
 end
 
-local function createChatModerationStatusDataHydrationStore() --[[ line: 78 ]]
+local function createChatModerationStatusDataHydrationStore()
 	-- upvalues: dataHydrationModule (ref), name (ref), appChatNetworkingModule (ref), mapResponseToStatuses (ref), t (ref)
 	local var17 = dataHydrationModule.createDataCache()
 	local var18 = dataHydrationModule.createDataCache()
@@ -72,13 +72,13 @@ local function createChatModerationStatusDataHydrationStore() --[[ line: 78 ]]
 		queueProcessDelaySec = 0,
 		replaceItems = true,
 		cache = var17,
-		logError = function(p2) --[[ line: 87 ]]
+		logError = function(p2)
 			-- upvalues: name (copy)
 			name:warning(`Failed to fetch local-user chat moderation status: {tostring(p2)}`)
 		end,
-		fetchFn = function() --[[ line: 90 ]]
+		fetchFn = function()
 			-- upvalues: appChatNetworkingModule (copy), mapResponseToStatuses (copy)
-			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, nil):andThen(function(p3) --[[ line: 91 ]]
+			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, nil):andThen(function(p3)
 				-- upvalues: mapResponseToStatuses (copy)
 				return mapResponseToStatuses(p3, { includeUser = true, conversationIds = {} })
 			end)
@@ -88,18 +88,18 @@ local function createChatModerationStatusDataHydrationStore() --[[ line: 78 ]]
 		queueProcessDelaySec = 0,
 		replaceItems = true,
 		cache = var18,
-		logError = function(p4) --[[ line: 105 ]]
+		logError = function(p4)
 			-- upvalues: name (copy)
 			name:warning(`Failed to fetch conversation chat moderation status: {tostring(p4)}`)
 		end,
-		fetchFn = function(p5) --[[ line: 108 ]]
+		fetchFn = function(p5)
 			-- upvalues: appChatNetworkingModule (copy), mapResponseToStatuses (copy)
 			local t = {}
 			
 			for i in p5 do
 				table.insert(t, i)
 			end
-			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, t):andThen(function(p6) --[[ line: 114 ]]
+			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, t):andThen(function(p6)
 				-- upvalues: mapResponseToStatuses (copy), t (ref)
 				local _, var22 = mapResponseToStatuses(p6, { includeUser = false, conversationIds = t })
 				
@@ -109,15 +109,15 @@ local function createChatModerationStatusDataHydrationStore() --[[ line: 78 ]]
 	})
 	
 	return {
-		getUserStatus = function() --[[ line: 135 ]]
+		getUserStatus = function()
 			-- upvalues: var19 (ref)
 			return var19.getAndFetchItem("__local_user__")
 		end,
-		getConversationStatus = function(p7) --[[ line: 138 ]]
+		getConversationStatus = function(p7)
 			-- upvalues: var20 (ref)
 			return var20.getAndFetchItem(p7)
 		end,
-		ingestResponse = function(p8, p9) --[[ line: 124 ]]
+		ingestResponse = function(p8, p9)
 			-- upvalues: mapResponseToStatuses (copy), var17 (ref), var18 (ref)
 			local var23, var24 = mapResponseToStatuses(p8, p9)
 			
@@ -128,11 +128,11 @@ local function createChatModerationStatusDataHydrationStore() --[[ line: 78 ]]
 				var18.replaceItems(var24)
 			end
 		end,
-		setConversationStatusNone = function(value) --[[ line: 142 ]]
+		setConversationStatusNone = function(value)
 			-- upvalues: var18 (ref), t (copy)
 			var18.replaceItem(value, t)
 		end,
-		clear = function() --[[ line: 145 ]]
+		clear = function()
 			-- upvalues: var19 (ref), var20 (ref)
 			var19.clear()
 			var20.clear()
@@ -142,7 +142,7 @@ end
 
 local var9 = nil
 
-return function(_) --[[ line: 154 | named "GetChatModerationStatusDataHydration" ]]
+return function(_)
 	-- upvalues: var9 (write), createChatModerationStatusDataHydrationStore (ref)
 	if var9 == nil then
 		local var25 = createChatModerationStatusDataHydrationStore()

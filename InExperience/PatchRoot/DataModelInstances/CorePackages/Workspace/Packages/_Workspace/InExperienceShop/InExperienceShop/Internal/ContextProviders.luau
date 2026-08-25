@@ -6,7 +6,7 @@ local foundationModule = require(parent.Foundation)
 local localization = require(parent.AppLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 
-return function(p0) --[[ line: 22 | named "ContextProviders" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref), styleModule (ref), localizationProvider (ref), localization (ref), localizationService (ref)
 	return reactModule.createElement(foundationModule.FoundationProvider, { colorMode = p0.theme, overlayGui = p0.overlayGui }, {
 		AppStyleProvider = reactModule.createElement(styleModule.AppStyleProvider, { style = { fontName = "Gotham", themeName = p0.theme } }, {

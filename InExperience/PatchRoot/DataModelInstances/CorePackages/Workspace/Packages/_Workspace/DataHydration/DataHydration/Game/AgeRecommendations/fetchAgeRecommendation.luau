@@ -7,10 +7,10 @@ local var3 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = httpModule.Url.APIS_URL
 })()
 
-return function(p0) --[[ line: 20 | named "requestAgeRecommendation" ]]
+return function(p0)
 	-- upvalues: httpService (ref), httpRequestModule (ref), var3 (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ line: 23 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end

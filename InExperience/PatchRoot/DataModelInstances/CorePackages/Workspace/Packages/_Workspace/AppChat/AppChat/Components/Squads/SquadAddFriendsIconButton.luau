@@ -16,7 +16,7 @@ local eventNamesModule = require(parent.SquadsCore.EventNames)
 local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
 local squadInvitePageNavSourceEnum = require(parent.Squads.Enums).SquadInvitePageNavSourceEnum
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), useGetConversationFromIdModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), enumScreensModule (ref), eventNamesModule (ref), squadInvitePageNavSourceEnum (ref), iconButton (ref), images (ref), iconSize (ref)
 	local var8 = reactModule.useContext(squadExternalContractContext)
 	local var9 = useCurrentSquadParentChannelId() or ""
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 29 ]]
 		size = UDim2.fromOffset(0, 0),
 		icon = images["icons/actions/friends/friendAdd"],
 		iconSize = iconSize.Medium,
-		onActivated = reactModule.useCallback(function() --[[ line: 46 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: var11 (ref), constantsModule (copy), p0 (ref), enumScreensModule (copy), var12 (ref), var8 (ref), eventNamesModule (copy), squadInvitePageNavSourceEnum (copy), var9 (ref)
 			if constantsModule.MAX_PARTICIPANT_COUNT < #var11 then
 				p0.navigation.navigate(enumScreensModule.RoactChatToast, {

@@ -51,22 +51,22 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local getRootedNavigationStoreModule = require(appChat.Stores.GetRootedNavigationStore)
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 
-local function _() --[[ line: 63 | named "getEnumScreens" ]]
+local function _()
 	-- upvalues: appChat (ref)
 	return require(appChat.EnumScreens)
 end
 
-return function(p0) --[[ line: 75 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useContext (ref), parentContainerContextModule (ref), useState (ref), useExternalNavigationByScreenModule (ref), useMemo (ref), signal (ref), robloxEventReceiver (ref), notificationService (ref), reactModule (ref), responsiveModule (ref), fIntAppChatWideBreakpointMinWidthModule (ref), fIntAppChatWideBreakpointMinHeightModule (ref), fFlagAppChatInExpSelectChatMembersMobileHeightModule (ref), useAppChatIsWideModeModule (ref), getFFlagAppChatRequestedRouteModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), appChat (ref), useRef (ref), useSignalState (ref), getRootedNavigationStoreModule (ref), useEffect (ref), partyPageCarouselExperimentation (ref), setFormFactor (ref), formFactorModule (ref), useParentContainerExtentsModule (ref), useCallback (ref), appChatInExperienceMountMinLoadingTimeMs (ref), appChatEntryPointModule (ref), localPlayer (ref), chatPlacementContextModule (ref), loading (ref), iconSize (ref), iconButton (ref), iconName (ref), buttonSize (ref), buttonVariant (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatEventReceiverModule (ref), chatExternalEventReceiverModule (ref), containerModule (ref), fFlagSquadAppChatRTNFix (ref), squadAppChatEventReceiver (ref)
 	local var29 = useDispatch()
 	local hideParentContainer = useContext(parentContainerContextModule).hideParentContainer
 	local var30, var31 = useState(0)
 	local var32, var33 = useExternalNavigationByScreenModule()
-	local var34 = useMemo(function() --[[ line: 80 ]]
+	local var34 = useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
-	local var35 = useMemo(function() --[[ line: 84 ]]
+	local var35 = useMemo(function()
 		-- upvalues: robloxEventReceiver (copy), notificationService (copy)
 		return robloxEventReceiver.new(notificationService)
 	end, {})
@@ -88,7 +88,7 @@ return function(p0) --[[ line: 75 ]]
 	end
 	local var42 = if var41.current then false else var38
 	local var43 = if var40 then useSignalState(getRootedNavigationStoreModule(false).getIsNavigationPending) else false
-	useEffect(function() --[[ line: 127 ]]
+	useEffect(function()
 		-- upvalues: partyPageCarouselExperimentation (copy), var42 (ref), var29 (ref), setFormFactor (copy), formFactorModule (copy)
 		if partyPageCarouselExperimentation.getAppChatFormFactorEnabled() then
 			if var42 then
@@ -103,19 +103,19 @@ return function(p0) --[[ line: 75 ]]
 	local var46 = var37 == responsiveModule.DefaultKey
 	local var47, var48 = useState(var46)
 	local var49 = useRef(os.clock())
-	local var50 = useCallback(function() --[[ line: 143 ]]
+	local var50 = useCallback(function()
 		-- upvalues: p0 (ref), hideParentContainer (ref)
 		p0.hideAppChat()
 		hideParentContainer()
 	end, { hideParentContainer, p0.hideAppChat })
-	useEffect(function() --[[ line: 148 ]]
+	useEffect(function()
 		-- upvalues: var46 (ref), var49 (ref), appChatInExperienceMountMinLoadingTimeMs (copy), var48 (ref)
 		if not var46 then
 			local var52 = os.clock() - var49.current
 			local var53 = appChatInExperienceMountMinLoadingTimeMs / 1000
 			
 			if var52 < var53 then
-				delay(var53 - var52, function() --[[ line: 154 ]]
+				delay(var53 - var52, function()
 					-- upvalues: var48 (copy)
 					var48(false)
 				end)
@@ -143,10 +143,10 @@ return function(p0) --[[ line: 75 ]]
 		AppChatWindow = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BackgroundColor3 = Color3.new(0, 0, 0),
-			Size = var44:map(function(p1) --[[ line: 181 ]]
+			Size = var44:map(function(p1)
 				return UDim2.fromOffset(p1.X, p1.Y)
 			end),
-			Position = var45:map(function(p2) --[[ line: 184 ]]
+			Position = var45:map(function(p2)
 				return UDim2.fromOffset(p2.X, p2.Y)
 			end),
 			ref = var36

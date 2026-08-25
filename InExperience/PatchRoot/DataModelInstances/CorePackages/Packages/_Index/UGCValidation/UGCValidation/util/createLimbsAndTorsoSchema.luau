@@ -3,7 +3,7 @@ local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local createIndividualBodyPartSchemaModule = require(parent.util.createIndividualBodyPartSchema)
 
-return function(p0, p1, p2) --[[ line: 8 | named "createLimbsAndTorsoSchema" ]]
+return function(p0, p1, p2)
 	-- upvalues: constantsModule (ref), createIndividualBodyPartSchemaModule (ref)
 	local t = { ClassName = "Folder", Name = { p1 }, _children = {} }
 	

@@ -1,14 +1,14 @@
 ﻿local playersService = game:GetService("Players")
 local constantsModule = require(script.Parent.Parent.Constants)
 
-local function _() --[[ line: 9 | named "getLocalPlayerCharacter" ]]
+local function _()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	return if localPlayer then localPlayer.Character else nil
 end
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: playersService (ref), constantsModule (ref)
 	local t = {}
 	local t_1 = {}

@@ -20,14 +20,14 @@ local t = {
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p0) --[[ line: 39 | named "ReportMomentDialog" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), view (ref), text (ref), radioGroup (ref)
 	local var4 = useLocalization(t)
 	local var5, var6 = reactModule.useState(false)
 	local var7, var8 = reactModule.useState(false)
 	local safety, safety_1 = reactModule.useState("Safety")
 	local var11, var12 = reactModule.useState("------")
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), safety_1 (ref), var6 (ref), var8 (ref), var12 (ref)
 		if p0.isOpen then
 			safety_1("Safety")
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 39 | named "ReportMomentDialog" ]]
 			var12("------")
 		end
 	end, { p0.isOpen })
-	local var13 = reactModule.useCallback(function() --[[ line: 55 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), safety (ref), var8 (ref), p0 (ref), var12 (ref), var6 (ref)
 		if var7 then return end
 		local isIntellectualProperty = safety == "IntellectualProperty"
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 39 | named "ReportMomentDialog" ]]
 			var8(false)
 			p0.onClose()
 		end
-		task.spawn(function() --[[ line: 69 ]]
+		task.spawn(function()
 			-- upvalues: p0 (copy), safety (ref), isIntellectualProperty (ref), var12 (copy), var6 (copy), var8 (copy)
 			local var17 = p0.onSubmitReport(safety, isIntellectualProperty)
 			
@@ -57,14 +57,14 @@ return function(p0) --[[ line: 39 | named "ReportMomentDialog" ]]
 			end
 		end)
 	end, { var7, safety, p0.onClose, p0.onSubmitReport })
-	local var14 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		if var7 then
 			return
 		end
 		p0.onClose()
 	end, { var7, p0.onClose })
-	local var15 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), p0 (ref)
 		var6(false)
 		p0.onClose()

@@ -2,9 +2,9 @@
 local signalsModule = require(parent.Signals)
 local getCurrentUserId = require(parent.LocalUserIdStore).LocalUserIdStore.getCurrentUserId
 
-return function(value, p0) --[[ line: 19 | named "createSessionScopedSignal" ]]
+return function(value, p0)
 	-- upvalues: signalsModule (ref), getCurrentUserId (ref)
-	local var1 = signalsModule.createComputed(function(p1) --[[ line: 23 ]]
+	local var1 = signalsModule.createComputed(function(p1)
 		-- upvalues: getCurrentUserId (copy), signalsModule (copy), value (ref), p0 (ref)
 		getCurrentUserId(p1)
 		local var2, var3 = signalsModule.createSignal(value, p0)
@@ -12,10 +12,10 @@ return function(value, p0) --[[ line: 19 | named "createSessionScopedSignal" ]]
 		return { getter = var2, setter = var3 }
 	end)
 	
-	return function(p2) --[[ line: 30 | named "getter" ]]
+	return function(p2)
 		-- upvalues: var1 (ref)
 		return var1(p2).getter(p2)
-	end, function(value) --[[ line: 33 | named "setter" ]]
+	end, function(value)
 		-- upvalues: var1 (ref)
 		var1().setter(value)
 	end

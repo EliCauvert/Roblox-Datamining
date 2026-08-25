@@ -16,7 +16,7 @@ local focusNavigationModalSurface = require(parent.EconomyCommonCoreScriptHooks)
 local selectPromptStateModule = require(bulkPurchaseApp.Store.Selectors.selectPromptState)
 local fixBulkPurchaseInputPerf = game:DefineFastFlag("FixBulkPurchaseInputPerf", false)
 
-return function() --[[ line: 24 | named "BulkPurchaseApp" ]]
+return function()
 	-- upvalues: reactModule (ref), useSelector (ref), selectPromptStateModule (ref), fixBulkPurchaseInputPerf (ref), useFocusNavigationSurface (ref), focusNavigableSurfaceIdentifierEnum (ref), useBulkPurchaseRequestListenerEffectModule (ref), bulkPurchasePromptStateEnumModule (ref), guiService (ref), screenSizeContext (ref), focusNavigationModalSurface (ref), bulkPurchaseErrorContainerModule (ref), bulkPurchaseSuccessContainerModule (ref), bulkPurchaseRequestContainerModule (ref), bulkPurchasePartialSuccessContainerModule (ref)
 	local var11, var12 = reactModule.useState(Vector2.new(0, 0))
 	local var13 = useSelector(selectPromptStateModule)
@@ -25,7 +25,7 @@ return function() --[[ line: 24 | named "BulkPurchaseApp" ]]
 		focusNavigableSurfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 	})
 	useBulkPurchaseRequestListenerEffectModule()
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), bulkPurchasePromptStateEnumModule (copy), guiService (copy)
 		if var13 == bulkPurchasePromptStateEnumModule.None then
 			guiService.SelectedCoreObject = nil
@@ -33,7 +33,7 @@ return function() --[[ line: 24 | named "BulkPurchaseApp" ]]
 	end, { var13 })
 	
 	return reactModule.createElement(screenSizeContext.Provider, { value = var11 }, reactModule.createElement("ScreenGui", {
-		[reactModule.Change.AbsoluteSize] = function(p0) --[[ line: 46 ]]
+		[reactModule.Change.AbsoluteSize] = function(p0)
 			-- upvalues: var12 (ref)
 			var12(p0.AbsoluteSize)
 		end,

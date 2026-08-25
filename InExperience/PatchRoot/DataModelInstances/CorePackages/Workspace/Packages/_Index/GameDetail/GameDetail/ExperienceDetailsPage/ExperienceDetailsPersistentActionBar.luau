@@ -22,7 +22,7 @@ local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLua
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 
-local function PersistentActionBarContextualMessage(p0) --[[ line: 50 ]]
+local function PersistentActionBarContextualMessage(p0)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useTokens (ref), reactModule (ref), usePlayButtonState (ref), usePlayButtonContextualMessage (ref), view (ref), text (ref), playButtonContextualMessageImpressionsDetector (ref), appPage (ref)
 	local var8 = useRoactService(roactServiceTagsModule.RoactNetworking)
 	local var9 = useTokens()
@@ -52,7 +52,7 @@ local function PersistentActionBarContextualMessage(p0) --[[ line: 50 ]]
 	})
 end
 
-return reactModule.memo(function(p1) --[[ line: 88 | named "ExperienceDetailsPersistentActionBar" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), view (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackActionBarModule (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), PersistentActionBarContextualMessage (ref)
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),

@@ -46,7 +46,7 @@ local t_1 = {
 	[radiusModule.Circle] = "radius-circle"
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverContentPlugin" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), usePanelsContextModule (ref), flagsModule (ref), reactModule (ref), pluginPopoverParentContextModule (ref), popoverContextModule (ref), useStyleSheet (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), elevationModule (ref), useOverlayModule (ref), popoverSideModule (ref), popoverAlignModule (ref), usePluginAnchorModule (ref), getPanelPositionModule (ref), SHADOW_SIZE (ref), loggerModule (ref), usePanelModule (ref), usePanelSizingModule (ref), isPointInGuiObjectBoundsModule (ref), positioningModule (ref), useArrowPositionModule (ref), reactRobloxModule (ref), viewModule (ref), popoverShadowModule (ref), popoverArrowModule (ref), t_1 (ref), elevationOwnerScope (ref)
 	local var30 = withDefaultsModule(p0, t)
 	local var31 = usePanelsContextModule()
@@ -58,12 +58,12 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	local var37 = useElevationModule(elevationLayerModule.Popover, { stackAboveOwner = true })
 	local relativeIndex = elevationModule.getRelativeIndex(var37)
 	local var39, var40 = reactModule.useState(nil)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 90 ]]
+	reactModule.useImperativeHandle(p1, function()
 		-- upvalues: var39 (ref)
 		return var39
 	end, { var39 })
 	local var41 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then useOverlayModule() else nil
-	local var42 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 100 ]]
+	local var42 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function()
 		local popoverPluginContainer = Instance.new("Frame")
 		popoverPluginContainer.Name = "PopoverPluginContainer"
 		popoverPluginContainer.BackgroundTransparency = 1
@@ -75,9 +75,9 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, {}) else nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useEffect(function() --[[ line: 112 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var42 (ref)
-			return function() --[[ line: 113 ]]
+			return function()
 				-- upvalues: var42 (copy)
 				var42:Destroy()
 			end
@@ -143,7 +143,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		ready = var34.isOpen and (var64.isReady and var32.ready)
 		var67 = ready and var41 ~= nil
 		var68 = var67 and var47 == nil
-		reactModule.useEffect(function() --[[ line: 173 ]]
+		reactModule.useEffect(function()
 			-- upvalues: ready (write), var48 (write)
 			if not ready then
 				var48(nil)
@@ -151,7 +151,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		end, { ready })
 	end
 	local var76, var77
-	local var69 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useCallback(function(p2) --[[ line: 181 ]]
+	local var69 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useCallback(function(p2)
 		-- upvalues: flagsModule (copy), var68 (write), var48 (write)
 		if not flagsModule.FoundationPopoverRecomputeContentSize and not var68 then return end
 		local absoluteSize = p2.AbsoluteSize
@@ -162,7 +162,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, {
 		if flagsModule.FoundationPopoverRecomputeContentSize then nil else var68
 	}) else nil
-	local var70 = reactModule.useMemo(function() --[[ line: 193 ]]
+	local var70 = reactModule.useMemo(function()
 		-- upvalues: getPanelPositionModule (copy), flagsModule (copy), var57 (write), var30 (ref), popoverSideModule (copy), popoverAlignModule (copy), SHADOW_SIZE (copy), var65 (ref), var55 (ref)
 		return getPanelPositionModule(if flagsModule.FoundationPopoverPluginOverlayMeasurement then var57 else var30.side or popoverSideModule.Bottom, var30.align or popoverAlignModule.Start, nil, SHADOW_SIZE, if var65 then var55 else 0)
 	end, {
@@ -171,12 +171,12 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		var65,
 		var55
 	})
-	local var71 = reactModule.useCallback(function(p3, p4, p5, p6, p7, p8) --[[ line: 211 ]]
+	local var71 = reactModule.useCallback(function(p3, p4, p5, p6, p7, p8)
 		-- upvalues: var31 (ref), flagsModule (copy)
 		return var31.registerPopoverAsync(p3, p4, p5, p6, p7, if flagsModule.FoundationPopoverPluginFocusable then p8 else nil)
 	end, { var31.registerPopoverAsync })
 	local var72 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 232 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), var72 (ref), loggerModule (copy)
 		if not var30.onPressedOutside and not var72.current then
 			var72.current = true
@@ -185,7 +185,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, { var30.onPressedOutside })
 	local var73 = usePanelModule({
 		isOpen = if flagsModule.FoundationPopoverPluginOverlayMeasurement then ready else var34.isOpen and var64.isReady,
-		onClose = reactModule.useCallback(function() --[[ line: 243 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: var30 (ref), flagsModule (copy), var34 (ref)
 			if var30.onPressedOutside then
 				if flagsModule.FoundationPopoverClickOutsideInGuiShadow and typeof(var34.anchor) == "Instance" and var34.anchor.GuiState ~= Enum.GuiState.Idle then return end
@@ -210,11 +210,11 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		var76 = var74
 		var77 = var75
 	end
-	reactModule.useEffect(function() --[[ line: 283 ]]
+	reactModule.useEffect(function()
 		-- upvalues: flagsModule (copy), var73 (ref), var30 (ref), var39 (ref), isPointInGuiObjectBoundsModule (copy)
 		if not flagsModule.FoundationPopoverClickOutsideInGuiShadow then return end
 		if var73 and var73.container and var30.onPressedOutside then
-			local inputBeganConnection = var73.container.InputBegan:Connect(function(p9) --[[ line: 292 ]]
+			local inputBeganConnection = var73.container.InputBegan:Connect(function(p9)
 				-- upvalues: var39 (copy), isPointInGuiObjectBoundsModule (copy), var30 (copy)
 				if p9.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 				if not var39 then return end
@@ -223,7 +223,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 				end
 			end)
 			
-			return function() --[[ line: 304 ]]
+			return function()
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
@@ -231,7 +231,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, { var73, var39, var30.onPressedOutside })
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useLayoutEffect(function() --[[ line: 311 ]]
+		reactModule.useLayoutEffect(function()
 			-- upvalues: var68 (write), var39 (ref), var48 (write)
 			if not var68 or var39 == nil then return end
 			local absoluteSize = var39.AbsoluteSize
@@ -241,7 +241,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 			end
 		end, { var68, var39 })
 	end
-	local var78 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 324 ]]
+	local var78 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function()
 		-- upvalues: var47 (write), positioningModule (copy), var61 (write), var59 (write), var60 (write), var65 (ref), var55 (ref), SHADOW_SIZE (copy)
 		return if var47 then positioningModule.calculatePopoverBounds(var61, var59, var60, if var65 then var55 else 0, var47) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2) else nil
 	end, {
@@ -249,7 +249,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	}) else nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useLayoutEffect(function() --[[ line: 342 ]]
+		reactModule.useLayoutEffect(function()
 			-- upvalues: var47 (write), var78 (ref), var46 (write), var44 (write), var73 (ref)
 			if var47 == nil or var78 == nil then
 				var46(UDim2.new())
@@ -264,7 +264,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 				var73.setSizeAsync(var78)
 			end
 		end, { var47, var78, var73 })
-		reactModule.useLayoutEffect(function() --[[ line: 358 ]]
+		reactModule.useLayoutEffect(function()
 			-- upvalues: var67 (write), var42 (ref), var73 (ref), var78 (ref), var41 (ref)
 			if not var67 then
 				var42.Parent = nil
@@ -305,7 +305,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	local var84
 	local var81 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var67 else var73 ~= nil
 	local var82 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var42 elseif var73 then var73.container else nil
-	local var83 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 396 ]]
+	local var83 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function()
 		-- upvalues: var73 (ref), var80 (ref)
 		return {
 			id = if var73 then var73.popoverId else nil,

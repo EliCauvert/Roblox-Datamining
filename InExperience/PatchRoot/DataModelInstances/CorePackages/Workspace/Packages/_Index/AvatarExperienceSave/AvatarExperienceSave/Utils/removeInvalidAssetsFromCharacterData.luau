@@ -2,7 +2,7 @@
 local tutilsModule = require(avatarExperienceSave.Parent.tutils)
 local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
 
-return function(value, p0) --[[ line: 8 | named "removeInvalidAssetsFromCharacterData" ]]
+return function(value, p0)
 	-- upvalues: tutilsModule (ref)
 	local var2 = false
 	

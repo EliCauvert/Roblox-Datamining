@@ -6,24 +6,24 @@ local fetchUserFriendsStarted = require(legacyFriendsRodux.Actions).FetchUserFri
 local fetchUserFriendsFailed = require(legacyFriendsRodux.Actions).FetchUserFriendsFailed
 local fetchUserFriendsCompleted = require(legacyFriendsRodux.Actions).FetchUserFriendsCompleted
 
-local function setFieldPerUser(value, p0, p1, p2) --[[ line: 11 ]]
+local function setFieldPerUser(value, p0, p1, p2)
 	-- upvalues: immutable (ref)
 	return immutable.JoinDictionaries(value, {
 		[p0] = immutable.JoinDictionaries(value[p0] or {}, { [p1] = p2 })
 	})
 end
 
-local function _(value, p3, p4) --[[ line: 20 | named "setRetrievalStatus" ]]
+local function _(value, p3, p4)
 	-- upvalues: setFieldPerUser (ref)
 	return setFieldPerUser(value, "retrievalStatus", p3, p4)
 end
 
-local _ = function(value, p5, p6) --[[ line: 24 | named "setRetrievalFailureResponse" ]]
+local _ = function(value, p5, p6)
 	-- upvalues: setFieldPerUser (ref)
 	return setFieldPerUser(value, "retrievalFailureResponse", p5, p6)
 end
 
-return function(p7, p8) --[[ line: 28 ]]
+return function(p7, p8)
 	-- upvalues: fetchUserFriendsStarted (ref), retrievalStatus (ref), setFieldPerUser (ref), fetchUserFriendsFailed (ref), fetchUserFriendsCompleted (ref)
 	p7 = p7 or { retrievalStatus = {}, retrievalFailureResponse = {} }
 	

@@ -1,4 +1,4 @@
-﻿local function parsePath(p0) --[[ line: 4 ]]
+﻿local function parsePath(p0)
 	local parts = string.split(p0, "/")
 	
 	for i = #parts, 1, -1 do
@@ -9,7 +9,7 @@
 	return parts
 end
 
-local function _(p1, p2) --[[ line: 14 | named "isManifestResolved" ]]
+local function _(p1, p2)
 	local var4 = 0
 	
 	for i in pairs(p1) do
@@ -20,7 +20,7 @@ local function _(p1, p2) --[[ line: 14 | named "isManifestResolved" ]]
 	return var4 == p2
 end
 
-local function unbindNodeDescend(p3, p4) --[[ line: 24 ]]
+local function unbindNodeDescend(p3, p4)
 	-- upvalues: unbindNodeDescend (ref)
 	if p3.instance == nil then return end
 	p3.instance = nil
@@ -47,7 +47,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p5, p6) --[[ line: 54 ]]
+function t.new(p5, p6)
 	-- upvalues: parsePath (ref), t (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -71,7 +71,7 @@ function t.new(p5, p6) --[[ line: 54 ]]
 	}, t)
 end
 
-function t:_startBoundFn(p7, p8) --[[ line: 80 ]]
+function t:_startBoundFn(p7, p8)
 	local boundFn = self._boundFn
 	local dtorMap = self._dtorMap
 	local var11 = dtorMap[p7]
@@ -87,7 +87,7 @@ function t:_startBoundFn(p7, p8) --[[ line: 80 ]]
 	end
 end
 
-function t:_stopBoundFn(p9) --[[ line: 96 ]]
+function t:_stopBoundFn(p9)
 	local dtorMap = self._dtorMap
 	local var13 = dtorMap[p9]
 	
@@ -97,7 +97,7 @@ function t:_stopBoundFn(p9) --[[ line: 96 ]]
 	end
 end
 
-function t:bindRoot(p10) --[[ line: 106 ]]
+function t:bindRoot(p10)
 	-- upvalues: unbindNodeDescend (ref)
 	debug.profilebegin("AtomicBinding:BindRoot")
 	local parsedManifest = self._parsedManifest
@@ -138,7 +138,7 @@ function t:bindRoot(p10) --[[ line: 106 ]]
 	end
 	debug.profileend()
 	
-	local function processNode(p11) --[[ line: 161 ]]
+	local function processNode(p11)
 		-- upvalues: t (ref), processNode (ref), self (ref), p10 (ref), unbindNodeDescend (copy), manifestSizeTarget (ref)
 		local var19 = assert(p11.instance, "instance does not exist")
 		local children = p11.children
@@ -149,7 +149,7 @@ function t:bindRoot(p10) --[[ line: 106 ]]
 			t[alias] = var19
 		end
 		if not var20 then
-			local function processAddChild(p12) --[[ line: 173 ]]
+			local function processAddChild(p12)
 				-- upvalues: children (ref), processNode (copy)
 				local name = children[p12.Name]
 				
@@ -161,7 +161,7 @@ function t:bindRoot(p10) --[[ line: 106 ]]
 				end
 			end
 			
-			local function processDeleteChild(p13) --[[ line: 184 ]]
+			local function processDeleteChild(p13)
 				-- upvalues: children (ref), self (copy), p10 (copy), unbindNodeDescend (copy), t (copy), var19 (ref), processNode (copy)
 				local name = p13.Name
 				local var26 = children[name]
@@ -217,7 +217,7 @@ function t:bindRoot(p10) --[[ line: 106 ]]
 	debug.profileend()
 end
 
-function t:unbindRoot(p14) --[[ line: 237 ]]
+function t:unbindRoot(p14)
 	-- upvalues: unbindNodeDescend (ref)
 	local rootInstToRootNode = self._rootInstToRootNode
 	local rootInstToManifest = self._rootInstToManifest
@@ -231,7 +231,7 @@ function t:unbindRoot(p14) --[[ line: 237 ]]
 	rootInstToManifest[p14] = nil
 end
 
-function t:destroy() --[[ line: 253 ]]
+function t:destroy()
 	-- upvalues: unbindNodeDescend (ref)
 	debug.profilebegin("AtomicBinding:destroy")
 	

@@ -5,11 +5,11 @@ local receiveUsersPresenceModule = require(userLib.Utils.receiveUsersPresence)
 local apiFetchGamesDataByPlaceIds = require(parent.GameDetailRodux).GamesByPlaceId.ApiFetchGamesDataByPlaceIds
 local usersGetPresenceModule = require(userLib.Requests.UsersGetPresence)
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: usersGetPresenceModule (ref), receiveUsersPresenceModule (ref), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (ref), apiFetchGamesDataByPlaceIds (ref)
-	return function(p2) --[[ line: 13 ]]
+	return function(p2)
 		-- upvalues: usersGetPresenceModule (copy), p0 (ref), p1 (ref), receiveUsersPresenceModule (copy), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (copy), apiFetchGamesDataByPlaceIds (copy)
-		return usersGetPresenceModule(p0, p1):andThen(function(p3) --[[ line: 14 ]]
+		return usersGetPresenceModule(p0, p1):andThen(function(p3)
 			-- upvalues: receiveUsersPresenceModule (copy), p2 (ref), getFriendsActiveGamesPlaceIdsFromUsersPresenceModule (copy), apiFetchGamesDataByPlaceIds (copy), p0 (copy)
 			local userPresences = p3.responseBody.userPresences
 			receiveUsersPresenceModule(userPresences, p2)

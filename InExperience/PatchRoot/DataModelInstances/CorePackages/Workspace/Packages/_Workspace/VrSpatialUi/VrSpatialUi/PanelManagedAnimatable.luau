@@ -2,7 +2,7 @@
 local otterModule = require(parent.Otter)
 local _ = require(parent.Observable)
 
-local var1 = function() --[[ line: 8 ]] end
+local var1 = function() end
 
 local t = {
 	Default = { dampingRatio = 1, frequency = 4.5 },
@@ -11,16 +11,16 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.checkIfAnimateNeeded(p0, p1) --[[ line: 36 ]]
+function t_1.checkIfAnimateNeeded(p0, p1)
 	return p1 ~= p0._currentGoal
 end
 
-function t_1.hideAndBlockAnimationUntilLookBackAgain(p2) --[[ line: 43 ]]
+function t_1.hideAndBlockAnimationUntilLookBackAgain(p2)
 	p2._ignoreAnimateShow = true
 	p2:animateHideIfNeeded(true)
 end
 
-function t_1.animateHideIfNeeded(p3, p4) --[[ line: 48 ]]
+function t_1.animateHideIfNeeded(p3, p4)
 	-- upvalues: var1 (ref), t (ref)
 	if not p4 then
 		p3._ignoreAnimateShow = false
@@ -33,7 +33,7 @@ function t_1.animateHideIfNeeded(p3, p4) --[[ line: 48 ]]
 	end
 end
 
-function t_1.animateShowIfNeeded(p5) --[[ line: 59 ]]
+function t_1.animateShowIfNeeded(p5)
 	-- upvalues: t (ref), var1 (ref)
 	if p5:checkIfAnimateNeeded(0) and not p5._ignoreAnimateShow then
 		p5:cancelPendingTaskIfNeeded()
@@ -41,7 +41,7 @@ function t_1.animateShowIfNeeded(p5) --[[ line: 59 ]]
 		p5:animateToGoal(p5._currentGoal, t.Default)
 		local pendingHideAnimation = nil
 		
-		function p5._pendingHideAnimation() --[[ line: 68 ]]
+		function p5._pendingHideAnimation()
 			-- upvalues: p5 (ref), pendingHideAnimation (write), var1 (copy), t (copy)
 			if p5._pendingHideAnimation == pendingHideAnimation then
 				p5._pendingHideAnimation = var1
@@ -56,17 +56,17 @@ function t_1.animateShowIfNeeded(p5) --[[ line: 59 ]]
 	end
 end
 
-function t_1.animateToGoal(p6, p7, p8) --[[ line: 78 ]]
+function t_1.animateToGoal(p6, p7, p8)
 	-- upvalues: otterModule (ref)
 	p6._fadeTransparencyMotor:stop()
 	p6._fadeTransparencyMotor:setGoal(otterModule.spring(p7, p8))
 end
 
-function t_1.isTargetVisible(p9) --[[ line: 83 ]]
+function t_1.isTargetVisible(p9)
 	return p9._targetInstance.GroupTransparency == 0
 end
 
-function t_1.reset(value) --[[ line: 87 ]]
+function t_1.reset(value)
 	value._fadeTransparencyMotor:stop()
 	value:cancelPendingTaskIfNeeded()
 	value._ignoreAnimateShow = false
@@ -75,12 +75,12 @@ function t_1.reset(value) --[[ line: 87 ]]
 	value._visibilityObservable:set(true)
 end
 
-function t_1.cancelPendingTaskIfNeeded(p10) --[[ line: 96 ]]
+function t_1.cancelPendingTaskIfNeeded(p10)
 	-- upvalues: var1 (ref)
 	p10._pendingHideAnimation = var1
 end
 
-function t_1.create(p11, p12) --[[ line: 100 ]]
+function t_1.create(p11, p12)
 	-- upvalues: otterModule (ref), var1 (ref), t_1 (ref)
 	local var4 = nil
 	
@@ -95,7 +95,7 @@ function t_1.create(p11, p12) --[[ line: 100 ]]
 	end
 	p12:set(var4.GroupTransparency == 0)
 	local var5 = otterModule.createSingleMotor(0)
-	var5:onStep(function(p13) --[[ line: 116 ]]
+	var5:onStep(function(p13)
 		-- upvalues: var4 (write), p12 (ref)
 		var4.GroupTransparency = p13
 		p12:set(var4.GroupTransparency == 0)

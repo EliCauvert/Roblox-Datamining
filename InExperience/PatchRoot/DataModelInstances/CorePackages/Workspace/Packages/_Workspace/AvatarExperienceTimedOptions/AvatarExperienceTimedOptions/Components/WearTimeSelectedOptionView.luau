@@ -15,7 +15,7 @@ local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
 local useWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 local fFlagAXFixIaBTimedOptionsPopoverFocus = avatarExperienceFlagsModule.FFlagAXFixIaBTimedOptionsPopoverFocus
 
-return function(p0) --[[ line: 24 | named "WearTimeSelectedOptionView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), view (ref), foundationModule (ref), enums (ref), text (ref), numberLocalization (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
 	local tokens = p0.tokens
 	local textButton = reactModule.createElement("TextButton", {
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 24 | named "WearTimeSelectedOptionView" ]]
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		ref = p0.anchorRef,
-		[reactModule.Event.Activated] = function() --[[ line: 46 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: p0 (ref)
 			p0.setIsOpen(not p0.isOpen)
 		end
@@ -83,7 +83,7 @@ return function(p0) --[[ line: 24 | named "WearTimeSelectedOptionView" ]]
 				hasArrow = false,
 				align = popoverAlign.Start,
 				side = popoverSide.Top,
-				onPressedOutside = function() --[[ line: 114 ]]
+				onPressedOutside = function()
 					-- upvalues: p0 (ref)
 					p0.setIsOpen(false)
 				end
@@ -91,7 +91,7 @@ return function(p0) --[[ line: 24 | named "WearTimeSelectedOptionView" ]]
 				ContentWrapper = reactModule.createElement(view, {
 					tag = "auto-y",
 					Size = UDim2.new(0, tokens.Size.Size_2900 * 2, 0, 0),
-					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function() --[[ line: 27 ]]
+					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function()
 						-- upvalues: p0 (ref)
 						p0.setIsOpen(false)
 					end, { p0.setIsOpen }), p0.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p0.anchorRef else nil)

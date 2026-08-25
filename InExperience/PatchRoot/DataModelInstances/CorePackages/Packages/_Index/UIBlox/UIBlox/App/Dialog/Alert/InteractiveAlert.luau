@@ -39,9 +39,9 @@ interactiveAlert.validateProps = tModule.strictInterface({
 })
 interactiveAlert.defaultProps = { bottomMargin = 24 }
 
-function interactiveAlert.render(p0) --[[ line: 85 ]]
+function interactiveAlert.render(p0)
 	-- upvalues: withStyleModule (ref), var4 (write), UIBloxConfigModule (ref), var5 (write), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), getTextHeightModule (ref), genericTextLabelModule (ref), alertModule (ref), alertTypeModule (ref)
-	return withStyleModule(function(p1) --[[ line: 86 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: var4 (copy), UIBloxConfigModule (copy), var5 (copy), p0 (ref), roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), getTextHeightModule (copy), genericTextLabelModule (copy), alertModule (copy), alertTypeModule (copy)
 		var4 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_400 else p1.Tokens.Global.Size_200) * 17
 		var5 = (if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Size.Size_1000 else p1.Tokens.Global.Size_500) * 10
@@ -49,7 +49,7 @@ function interactiveAlert.render(p0) --[[ line: 85 ]]
 		local font = p1.Font
 		local font_1 = font.Body.Font
 		local var12 = font.BaseSize * font.Body.RelativeSize
-		local var13 = if p0.props.titleIcon then function() --[[ line: 105 ]]
+		local var13 = if p0.props.titleIcon then function()
 			-- upvalues: roactModule (copy), fitFrameOnAxis (copy), imageSetComponentModule (copy), p0 (copy), theme (ref)
 			return roactModule.createElement(fitFrameOnAxis, {
 				BackgroundTransparency = 1,
@@ -72,7 +72,7 @@ function interactiveAlert.render(p0) --[[ line: 85 ]]
 		if p0.props.footerText then
 			local footerText = p0.props.footerText and getTextHeightModule(p0.props.footerText, font.Footer.Font, font.BaseSize * font.Footer.RelativeSize, var14, 100) or 0
 			
-			footerContent = function() --[[ line: 143 ]]
+			footerContent = function()
 				-- upvalues: roactModule (copy), genericTextLabelModule (copy), theme (ref), font (ref), p0 (copy), var12 (ref), footerText (ref)
 				return roactModule.createElement(genericTextLabelModule, {
 					BackgroundTransparency = 1,
@@ -100,7 +100,7 @@ function interactiveAlert.render(p0) --[[ line: 85 ]]
 			maxWidth = var5,
 			minWidth = var4,
 			buttonStackInfo = p0.props.buttonStackInfo,
-			middleContent = if p0.props.bodyText then function() --[[ line: 163 ]]
+			middleContent = if p0.props.bodyText then function()
 				-- upvalues: roactModule (copy), fitFrameOnAxis (copy), genericTextLabelModule (copy), theme (ref), font (ref), p0 (copy), var12 (ref), bodyText (ref)
 				return roactModule.createElement(fitFrameOnAxis, {
 					BackgroundTransparency = 1,

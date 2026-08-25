@@ -1,5 +1,5 @@
-﻿return function(p0) --[[ line: 1 | named "isWirable" ]]
-	return pcall(function() --[[ line: 2 ]]
+﻿return function(p0)
+	return pcall(function()
 		-- upvalues: p0 (ref)
 		p0:GetInputPins()
 		p0:GetOutputPins()

@@ -6,7 +6,7 @@ local var0 = urlBuilder.new({
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function(p0, p1) --[[ line: 14 | named "getBadgeDetailsUrl" ]]
+return function(p0, p1)
 	-- upvalues: fFlagSduiUniversalPageEntry (ref), urlBuilder (ref), var0 (ref)
 	local t = { badgeId = p0 }
 	

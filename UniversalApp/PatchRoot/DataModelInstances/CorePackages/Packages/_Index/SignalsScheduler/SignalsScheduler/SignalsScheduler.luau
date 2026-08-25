@@ -1,7 +1,7 @@
 ﻿local var0 = false
 local t = {}
 
-local function batch(p0) --[[ line: 7 ]]
+local function batch(p0)
 	-- upvalues: var0 (write), t (ref)
 	if var0 then
 		p0()
@@ -20,11 +20,11 @@ end
 
 return {
 	batch = batch,
-	flush = function() --[[ line: 21 ]]
+	flush = function()
 		-- upvalues: batch (ref)
-		batch(function() --[[ line: 22 ]] end)
+		batch(function() end)
 	end,
-	schedule = function(p1) --[[ line: 25 ]]
+	schedule = function(p1)
 		-- upvalues: t (ref)
 		table.insert(t, p1)
 	end

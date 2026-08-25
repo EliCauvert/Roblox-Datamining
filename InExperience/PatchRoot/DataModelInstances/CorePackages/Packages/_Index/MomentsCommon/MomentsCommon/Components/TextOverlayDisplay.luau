@@ -12,12 +12,12 @@ local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
 local getScaleModule = require(momentsCommon.Utils.getScale)
 local _ = require(momentsCommon.Types)
 
-return function(p0) --[[ line: 33 | named "TextOverlayDisplay" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useMemo (ref), getFitSizeModule (ref), getCropSizeModule (ref), getScaleModule (ref), useCallback (ref), dashModule (ref), textOverlayModule (ref), view (ref)
 	local var8 = reactModule.useRef(nil)
 	local var9 = reactModule.useRef(nil)
 	local var10 = if p0.textOverlayEdits then p0.textOverlayEdits[1] else nil
-	local var11, var12 = useMemo(function() --[[ line: 39 ]]
+	local var11, var12 = useMemo(function()
 		-- upvalues: p0 (ref), getFitSizeModule (copy), getCropSizeModule (copy), getScaleModule (copy)
 		if not p0.itemResolution then
 			return UDim2.fromScale(1, 1), 1
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 33 | named "TextOverlayDisplay" ]]
 		end
 		return var15, var16
 	end, { p0.scaleType, p0.itemResolution, p0.itemSize })
-	local var13 = useCallback(function() --[[ line: 55 ]]
+	local var13 = useCallback(function()
 		-- upvalues: var9 (ref), p0 (ref), dashModule (copy), var10 (ref)
 		if var9.current and p0.onTextOverlayDragEnd then
 			p0.onTextOverlayDragEnd({
@@ -48,7 +48,7 @@ return function(p0) --[[ line: 33 | named "TextOverlayDisplay" ]]
 		Size = var11,
 		ZIndex = p0.zIndex or 1
 	}, {
-		TextOverlay = useCallback(function(p1) --[[ line: 65 ]]
+		TextOverlay = useCallback(function(p1)
 			-- upvalues: reactModule (copy), textOverlayModule (copy), var12 (ref), var8 (ref), var9 (ref), p0 (ref), var13 (ref)
 			return reactModule.createElement(textOverlayModule, {
 				additionalScale = var12,

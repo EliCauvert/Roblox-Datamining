@@ -2,7 +2,7 @@
 local gamepadService = game:GetService("GamepadService")
 local tweenService = game:GetService("TweenService")
 
-function AnimateScrollViewToSelectionHelper(p0, p1, p2) --[[ line: 5 ]]
+function AnimateScrollViewToSelectionHelper(p0, p1, p2)
 	-- upvalues: gamepadService (ref), userGameSettingsService (ref), tweenService (ref)
 	local t = {}
 	local var4 = nil
@@ -10,15 +10,15 @@ function AnimateScrollViewToSelectionHelper(p0, p1, p2) --[[ line: 5 ]]
 	if p0 then
 		local y = p0.AbsolutePosition.Y
 		local y_1 = p0.AbsoluteWindowSize.Y
-		table.insert(t, p0:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 21 ]]
+		table.insert(t, p0:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 			-- upvalues: y (write), p0 (ref)
 			y = p0.AbsolutePosition.Y
 		end))
-		table.insert(t, p0:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ line: 27 ]]
+		table.insert(t, p0:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 			-- upvalues: y_1 (write), p0 (ref)
 			y_1 = p0.AbsoluteWindowSize.Y
 		end))
-		table.insert(t, p0.SelectionChanged:Connect(function(_, _, p3) --[[ line: 33 ]]
+		table.insert(t, p0.SelectionChanged:Connect(function(_, _, p3)
 			-- upvalues: p0 (ref), gamepadService (copy), var4 (write), y_1 (write), y (write), userGameSettingsService (copy), p2 (ref), tweenService (copy), p1 (ref)
 			if not p3 or not p3:IsDescendantOf(p0) or gamepadService.GamepadCursorEnabled then return end
 			if var4 then

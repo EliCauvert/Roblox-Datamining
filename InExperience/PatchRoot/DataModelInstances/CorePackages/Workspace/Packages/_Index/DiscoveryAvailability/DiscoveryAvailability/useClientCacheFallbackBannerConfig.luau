@@ -25,16 +25,16 @@ local appLogging = require(parent.RoactServiceTags).AppLogging
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local omniFeedConstants = require(parent.DiscoveryTypes).OmniFeedConstants
 
-return function(p0) --[[ line: 47 | named "useClientCacheFallbackBannerConfig" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), fFlagSignalsNavP3fGameDetails (ref), reactModule (ref), signalsModule (ref), getLegacyNavigationStore (ref), appPage (ref), signalsModule_1 (ref), signalsReactModule (ref), useSelector (ref), selectCurrentRoactNavigationRoute (ref), useRoactService (ref), roactNetworking (ref), appOmniRecommendationsRequest (ref), appLogging (ref), fFlagUseSignalsForStartup (ref), var4 (ref), retrievalStatus (ref), omniFeedConstants (ref), discoveryEventErrorLogger (ref), promiseModule (ref)
 	local var10 = useDispatch()
 	local var11 = nil
 	local var12 = nil
 	
 	if fFlagSignalsNavP3fGameDetails then
-		var12 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 54 ]]
+		var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), getLegacyNavigationStore (copy), appPage (copy), signalsModule_1 (copy)
-			return signalsModule.createComputed(function(p1) --[[ line: 55 ]]
+			return signalsModule.createComputed(function(p1)
 				-- upvalues: getLegacyNavigationStore (copy), appPage (copy), signalsModule_1 (copy)
 				local currentRoute = getLegacyNavigationStore(false).getCurrentRoute(p1)
 				
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 47 | named "useClientCacheFallbackBannerConfig" ]
 	local var14 = useRoactService(roactNetworking)
 	local var15 = useRoactService(appOmniRecommendationsRequest)
 	local var16 = useRoactService(appLogging)
-	local var17 = if fFlagUseSignalsForStartup then signalsReactModule.useSignalState(var4(false).getHomePageDataStatus) else useSelector(function(p2) --[[ line: 74 ]]
+	local var17 = if fFlagUseSignalsForStartup then signalsReactModule.useSignalState(var4(false).getHomePageDataStatus) else useSelector(function(p2)
 		return p2.Startup.HomePageDataStatus
 	end)
 	local var18 = signalsReactModule.useSignalState(signalsModule_1.getCacheStore().getHomePageDataSource)
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 47 | named "useClientCacheFallbackBannerConfig" ]
 	end
 	return {
 		shouldShowBanner = var19,
-		onRefreshButtonClick = reactModule.useCallback(function() --[[ line: 87 ]]
+		onRefreshButtonClick = reactModule.useCallback(function()
 			-- upvalues: fFlagSignalsNavP3fGameDetails (copy), getLegacyNavigationStore (copy), appPage (copy), var11 (write), var10 (ref), p0 (ref), var14 (ref), var15 (ref), omniFeedConstants (copy), var16 (ref), discoveryEventErrorLogger (copy), promiseModule (copy)
 			local var22
 			local _ = nil
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 47 | named "useClientCacheFallbackBannerConfig" ]
 				var22 = var11 == appPage.Home
 			end
 			if var22 then
-				return var10(p0(var14, var15, appPage.Home, nil, nil, omniFeedConstants.OmniRecommendationsRequestIntent.ManualRefresh, var16)):catch(function(p3) --[[ line: 109 ]]
+				return var10(p0(var14, var15, appPage.Home, nil, nil, omniFeedConstants.OmniRecommendationsRequestIntent.ManualRefresh, var16)):catch(function(p3)
 					-- upvalues: discoveryEventErrorLogger (copy), promiseModule (copy)
 					discoveryEventErrorLogger.reportError("ClientCacheFallbackBannerRefreshError", "Error refreshing omni recommendations")
 					

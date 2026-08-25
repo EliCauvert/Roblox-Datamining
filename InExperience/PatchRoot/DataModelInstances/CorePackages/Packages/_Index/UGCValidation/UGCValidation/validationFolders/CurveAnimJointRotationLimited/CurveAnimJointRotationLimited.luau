@@ -16,7 +16,7 @@ return {
 	prereqTests = {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p0, p1) --[[ line: 23 ]]
+	run = function(p0, p1)
 		-- upvalues: getFIntUGCValidateMaxAnimationFPSModule (ref), getFStringUGCValidateMaxJointRotationPerPartModule (ref), errorSourceStringsModule (ref)
 		local curveAnimComputedFrames = p1.curveAnimComputedFrames
 		local animLength = curveAnimComputedFrames.animLength

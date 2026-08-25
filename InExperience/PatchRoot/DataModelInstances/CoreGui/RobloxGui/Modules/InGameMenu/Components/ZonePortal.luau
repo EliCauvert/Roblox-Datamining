@@ -38,11 +38,11 @@ zonePortal.validateProps = t.strictInterface({
 	setCurrentZone = t.optional(t.callback)
 })
 
-function zonePortal.render(p0) --[[ line: 56 ]]
+function zonePortal.render(p0)
 	-- upvalues: t_1 (ref), var3 (ref), roact (ref), var4 (ref)
 	local direction = t_1[p0.props.direction]
 	
-	return var3(function(p1) --[[ line: 60 ]]
+	return var3(function(p1)
 		-- upvalues: roact (copy), direction (ref), var4 (copy), p0 (ref)
 		return roact.createElement("Frame", {
 			Size = direction.size,
@@ -51,7 +51,7 @@ function zonePortal.render(p0) --[[ line: 56 ]]
 			Selectable = true,
 			ZIndex = 2147483647,
 			SelectionImageObject = p1(var4.Invisible),
-			[roact.Event.SelectionGained] = function() --[[ line: 68 ]]
+			[roact.Event.SelectionGained] = function()
 				-- upvalues: p0 (copy)
 				p0.props.setCurrentZone(p0.props.targetZone)
 			end
@@ -59,10 +59,10 @@ function zonePortal.render(p0) --[[ line: 56 ]]
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p2) --[[ line: 75 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p2)
 	-- upvalues: setCurrentZoneModule (ref)
 	return {
-		setCurrentZone = function(value) --[[ line: 77 ]]
+		setCurrentZone = function(value)
 			-- upvalues: p2 (ref), setCurrentZoneModule (copy)
 			return p2(setCurrentZoneModule(value))
 		end

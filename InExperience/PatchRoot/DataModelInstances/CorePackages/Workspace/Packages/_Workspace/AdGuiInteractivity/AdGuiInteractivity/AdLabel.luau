@@ -8,7 +8,7 @@ local moreOn = images["icons/menu/more_on"]
 local moreOff = images["icons/menu/more_off"]
 local adLabel = roactModule.Component:extend("AdLabel")
 
-function adLabel.render(p0) --[[ line: 19 ]]
+function adLabel.render(p0)
 	-- upvalues: roactModule (ref), var1 (ref), imageSetButton (ref), moreOn (ref), moreOff (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,

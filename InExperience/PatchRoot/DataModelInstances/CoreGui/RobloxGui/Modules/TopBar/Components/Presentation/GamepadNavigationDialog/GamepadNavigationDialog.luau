@@ -17,7 +17,7 @@ local t = {
 	ButtonShare = "CoreScripts.InGameMenu.Label.ShareButton"
 }
 
-local function HeaderArea() --[[ line: 42 ]]
+local function HeaderArea()
 	-- upvalues: useDesignTokens (ref), useLocalization (ref), reactModule (ref)
 	local menuNavigationPrompt = useDesignTokens().LuaApps.MenuNavigationPrompt
 	local typography = menuNavigationPrompt.Typography
@@ -50,7 +50,7 @@ local function HeaderArea() --[[ line: 42 ]]
 	})
 end
 
-local function GamepadImageArea() --[[ line: 78 ]]
+local function GamepadImageArea()
 	-- upvalues: useDesignTokens (ref), userInputService (ref), t (ref), useLocalization (ref), reactModule (ref)
 	local menuNavigationPrompt = useDesignTokens().LuaApps.MenuNavigationPrompt
 	local typography = menuNavigationPrompt.Typography
@@ -118,7 +118,7 @@ local function GamepadImageArea() --[[ line: 78 ]]
 	})
 end
 
-local function Body(p0) --[[ line: 154 ]]
+local function Body(p0)
 	-- upvalues: useDesignTokens (ref), userInputService (ref), t (ref), useLocalization (ref), reactModule (ref), GamepadImageArea (ref), button (ref), buttonType (ref)
 	local menuNavigationPrompt = useDesignTokens().LuaApps.MenuNavigationPrompt
 	local typography = menuNavigationPrompt.Typography
@@ -175,24 +175,24 @@ local function Body(p0) --[[ line: 154 ]]
 	})
 end
 
-return function(p1) --[[ line: 216 | named "GamepadNavigationDialog" ]]
+return function(p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), default (ref), contextActionService (ref), HeaderArea (ref), Body (ref)
 	local menuNavigationPrompt = useDesignTokens().LuaApps.MenuNavigationPrompt
 	local color = menuNavigationPrompt.Color
 	local size = menuNavigationPrompt.Size
 	local space = menuNavigationPrompt.Space
 	local radius = menuNavigationPrompt.Radius
-	reactModule.useEffect(function() --[[ line: 224 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (copy), contextActionService (copy), p1 (ref)
 		default:onShowGamepadNavigationDialog()
-		contextActionService:BindCoreAction("ConfirmBindComponentMapperTokenModule", function(_, p2, _) --[[ line: 228 ]]
+		contextActionService:BindCoreAction("ConfirmBindComponentMapperTokenModule", function(_, p2, _)
 			-- upvalues: p1 (copy)
 			if p2 == Enum.UserInputState.End then
 				p1.onDismissed()
 			end
 		end, false, if p1.selectButtonDismissesGamepadNavigationDialog then Enum.KeyCode.ButtonSelect else Enum.KeyCode.ButtonA)
 		
-		return function() --[[ line: 239 ]]
+		return function()
 			-- upvalues: default (copy), contextActionService (copy)
 			default:onDismissGamepadNavigationDialog()
 			contextActionService:UnbindCoreAction("ConfirmBindComponentMapperTokenModule")

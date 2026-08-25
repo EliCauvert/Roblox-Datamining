@@ -12,14 +12,14 @@ local getVisibleAvatars = avatarIdentification.getVisibleAvatars
 if game:GetEngineFeature("ReportAnythingScreenshot") then
 	safetyService = game:GetService("SafetyService")
 end
-return function() --[[ line: 22 ]]
+return function()
 	-- upvalues: safetyService (write), screenshotHookManagerModule (ref), hideModule (ref), getVisibleAvatars (ref), runService (ref), showModule (ref), setIdentifiedAvatarsModule (ref)
-	return function(p0) --[[ line: 23 ]]
+	return function(p0)
 		-- upvalues: safetyService (copy), screenshotHookManagerModule (copy), hideModule (copy), getVisibleAvatars (copy), runService (copy), showModule (copy), setIdentifiedAvatarsModule (copy)
 		if safetyService == nil then
 			return
 		end
-		coroutine.wrap(function() --[[ line: 29 ]]
+		coroutine.wrap(function()
 			-- upvalues: screenshotHookManagerModule (copy), p0 (ref), hideModule (copy), safetyService (copy), getVisibleAvatars (copy), runService (copy), showModule (copy), setIdentifiedAvatarsModule (copy)
 			screenshotHookManagerModule.doPreScreenshot()
 			p0:dispatch(hideModule())

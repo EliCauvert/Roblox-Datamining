@@ -6,10 +6,10 @@ local profileQRCode = dependenciesModule.ProfileQRCode
 local contexts = dependenciesModule.SocialLuaAnalytics.Analytics.Enums.Contexts
 local friendsLandingContextModule = require(friendsLanding.FriendsLandingContext)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: friendsLandingContextModule (ref), roact (ref), profileQRCode (ref), llama (ref), contexts (ref)
 	return roact.createElement(profileQRCode.ProfileQRCodeEntryPoint, llama.Dictionary.join(p0, {
-		onClose = function() --[[ line: 16 ]]
+		onClose = function()
 			-- upvalues: p0 (ref)
 			p0.navigation.goBack()
 		end,

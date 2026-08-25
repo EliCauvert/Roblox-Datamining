@@ -57,12 +57,12 @@ if getFFlagDisplayServerChannel() then
 	getServerChannel.Name = "GetServerChannel"
 	getServerChannel.Parent = robloxReplicatedStorageService
 end
-local function getServerChannel_1() --[[ line: 115 | named "getServerChannel" ]]
+local function getServerChannel_1()
 	-- upvalues: runService (ref)
 	return runService:GetRobloxClientChannel()
 end
 
-function getServerVersion.getServerVersion() --[[ line: 94 ]]
+function getServerVersion.getServerVersion()
 	-- upvalues: runService (ref)
 	local robloxVersion = runService:GetRobloxVersion()
 	local var16 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion
@@ -73,7 +73,7 @@ end
 if getFFlagDisplayServerChannel() then
 	getServerChannel.OnServerInvoke = getServerChannel_1
 end
-if (function() --[[ line: 123 | named "shouldLoadLuaChat" ]]
+if (function()
 	return game:GetService("Chat").LoadDefaultChat and (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService and not game:GetService("GuiService"):IsTenFootInterface())
 end)() then
 	require(game:GetService("CoreGui").RobloxGui.Modules.Server.ClientChat.ChatWindowInstaller)()
@@ -92,7 +92,7 @@ if getFFlagExpChatAlwaysRunTCS() or chatVersion == Enum.ChatVersion.TextChatServ
 	require(corePackagesService.Workspace.Packages.ExpChatServer).mountServerApp({})
 elseif chatVersion == Enum.ChatVersion.LegacyChatService then
 	local chatService = game:GetService("Chat")
-	chatService:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ line: 151 ]]
+	chatService:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 		-- upvalues: chatService (ref), debugLogExpchatMigration (ref), corePackagesService (ref)
 		if chatService.IsAutoMigrated then
 			if debugLogExpchatMigration then

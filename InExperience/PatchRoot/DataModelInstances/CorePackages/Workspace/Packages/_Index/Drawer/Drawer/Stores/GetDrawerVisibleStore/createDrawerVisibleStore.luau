@@ -3,22 +3,22 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local fFlagEnableDrawerAnimatingHook = require(parent.SharedFlags).FFlagEnableDrawerAnimatingHook
 
-return function() --[[ line: 20 | named "createDrawerVisibleStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), signalsReactModule (ref), fFlagEnableDrawerAnimatingHook (ref)
 	local var2, var3 = signalsModule.createSignal(false)
 	local var4, var5 = signalsModule.createSignal(false)
 	
-	local function useDrawerVisible() --[[ line: 24 ]]
+	local function useDrawerVisible()
 		-- upvalues: signalsReactModule (copy), var2 (ref)
 		return signalsReactModule.useSignalState(var2)
 	end
 	
-	local function useDrawerShouldMount() --[[ line: 28 ]]
+	local function useDrawerShouldMount()
 		-- upvalues: signalsReactModule (copy), var4 (ref)
 		return signalsReactModule.useSignalState(var4)
 	end
 	
-	local var8 = function(p0) --[[ line: 32 ]]
+	local var8 = function(p0)
 		-- upvalues: var3 (ref), var5 (ref)
 		var3(p0)
 		
@@ -36,7 +36,7 @@ return function() --[[ line: 20 | named "createDrawerVisibleStore" ]]
 		var9 = var12
 		var10 = var13
 		
-		var11 = function() --[[ line: 42 ]]
+		var11 = function()
 			-- upvalues: signalsReactModule (copy), var9 (write)
 			return signalsReactModule.useSignalState(var9)
 		end

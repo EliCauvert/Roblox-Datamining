@@ -6,7 +6,7 @@ local setRespawningModule = require(parent.Actions.SetRespawning)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local constantsModule = require(parent.Resources.Constants)
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: avatarEditorService (ref), playersService (ref), setRespawningModule (ref), closeMenuModule (ref), sendAnalyticsModule (ref), constantsModule (ref)
 	local state = p0:getState()
 	

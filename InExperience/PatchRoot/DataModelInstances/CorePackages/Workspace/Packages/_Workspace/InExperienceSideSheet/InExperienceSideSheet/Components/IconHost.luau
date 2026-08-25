@@ -10,7 +10,7 @@ local statusIndicator = foundationModule.StatusIndicator
 local view = foundationModule.View
 local useNotificationCountModule = require(inExperienceSideSheet.Hooks.useNotificationCount)
 
-return function(p0) --[[ line: 25 | named "IconHost" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useNotificationCountModule (ref), reactModule (ref), view (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref)
 	local var4 = useTokens()
 	local var5, var6 = useNotificationCountModule(p0.notification)

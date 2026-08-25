@@ -4,9 +4,9 @@ local signalsModule = require(parent_1.Signals)
 local _ = require(parent_1.HttpSignals)
 local _ = require(parent.HttpStoreTypes)
 
-return function(p0, p1) --[[ line: 13 | named "createParsedResponse" ]]
+return function(p0, p1)
 	-- upvalues: signalsModule (ref)
-	return signalsModule.createComputed(function(p2) --[[ line: 17 ]]
+	return signalsModule.createComputed(function(p2)
 		-- upvalues: p0 (ref), p1 (ref)
 		local var1 = p0(p2)
 		

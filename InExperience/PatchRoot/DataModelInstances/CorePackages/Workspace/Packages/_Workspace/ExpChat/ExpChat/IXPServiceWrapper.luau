@@ -2,14 +2,14 @@
 local IXPService = game:GetService("IXPService")
 game:DefineFastFlag("IXPServiceWrapperWaitRefactor", false)
 
-local _ = function() --[[ line: 17 ]]
+local _ = function()
 	return game:GetFastFlag("IXPServiceWrapperWaitRefactor")
 end
 
 return {
-	InitializeAsync = function(p0, p1, p2) --[[ line: 35 ]]
+	InitializeAsync = function(p0, p1, p2)
 		-- upvalues: runService (ref), IXPService (ref)
-		local ok, status = pcall(function() --[[ line: 36 ]]
+		local ok, status = pcall(function()
 			-- upvalues: runService (copy), IXPService (copy), p2 (ref), p1 (ref), p0 (ref)
 			if runService:IsStudio() then
 				IXPService:ClearUserLayers()
@@ -30,7 +30,7 @@ return {
 		
 		return ok, status
 	end,
-	WaitForInitialization = function(_) --[[ line: 64 ]]
+	WaitForInitialization = function(_)
 		-- upvalues: IXPService (ref)
 		local userLayerLoadingStatus = IXPService:GetUserLayerLoadingStatus()
 		while userLayerLoadingStatus == Enum.IXPLoadingStatus.None or userLayerLoadingStatus == Enum.IXPLoadingStatus.Pending do
@@ -39,25 +39,25 @@ return {
 		end
 		return userLayerLoadingStatus
 	end,
-	GetLayerData = function(_, p3) --[[ line: 82 ]]
+	GetLayerData = function(_, p3)
 		-- upvalues: IXPService (ref)
-		local ok, status = pcall(function() --[[ line: 83 ]]
+		local ok, status = pcall(function()
 			-- upvalues: IXPService (copy), p3 (ref)
 			return IXPService:GetUserLayerVariables(p3)
 		end)
 		
 		return if ok then status else nil
 	end,
-	LogUserLayerExposure = function(_, p4) --[[ line: 95 ]]
+	LogUserLayerExposure = function(_, p4)
 		-- upvalues: IXPService (ref)
-		pcall(function() --[[ line: 96 ]]
+		pcall(function()
 			-- upvalues: IXPService (copy), p4 (ref)
 			IXPService:LogUserLayerExposure(p4)
 		end)
 	end,
-	LogBrowserTrackerLayerExposure = function(_, p5) --[[ line: 106 ]]
+	LogBrowserTrackerLayerExposure = function(_, p5)
 		-- upvalues: IXPService (ref)
-		pcall(function() --[[ line: 107 ]]
+		pcall(function()
 			-- upvalues: IXPService (copy), p5 (ref)
 			IXPService:LogBrowserTrackerLayerExposure(p5)
 		end)

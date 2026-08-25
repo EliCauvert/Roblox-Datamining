@@ -2,7 +2,7 @@
 local _ = require(script.Parent.source)
 
 return {
-	getLocation = function(p0, p1) --[[ line: 27 ]]
+	getLocation = function(p0, p1)
 		-- upvalues: string (ref)
 		local list = { "\r\n", "\r", "\n" }
 		local var1 = 1

@@ -9,7 +9,7 @@ local kind = graphQLModule.Kind
 local isListType = graphQLModule.isListType
 local inspect = require(script.Parent.inspect).inspect
 
-local function astFromType(p0) --[[ line: 25 ]]
+local function astFromType(p0)
 	-- upvalues: boolean (ref), isNonNullType (ref), astFromType (ref), kind (ref), error (ref), inspect (ref), isListType (ref)
 	if boolean.toJSBoolean(isNonNullType(p0)) then
 		local var4 = astFromType(p0.ofType)

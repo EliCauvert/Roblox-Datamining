@@ -4,9 +4,9 @@ local UIBlox = dependenciesModule.UIBlox
 local foundation = dependenciesModule.Foundation
 local iconSize = foundation.Enums.IconSize
 
-return function() --[[ line: 8 ]]
+return function()
 	-- upvalues: UIBlox (ref), roact (ref), foundation (ref), iconSize (ref)
-	return UIBlox.Style.withStyle(function(p0) --[[ line: 9 ]]
+	return UIBlox.Style.withStyle(function(p0)
 		-- upvalues: roact (copy), foundation (copy), iconSize (copy)
 		return roact.createElement("ImageButton", {
 			AutoButtonColor = false,

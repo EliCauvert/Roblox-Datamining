@@ -1,4 +1,4 @@
-﻿local function StringSplit(p0, p1, p2) --[[ line: 7 ]]
+﻿local function StringSplit(p0, p1, p2)
 	-- upvalues: StringSplit (ref)
 	if #p0 == 0 then
 		return if string.find(p0, p1) then {} else { "" }

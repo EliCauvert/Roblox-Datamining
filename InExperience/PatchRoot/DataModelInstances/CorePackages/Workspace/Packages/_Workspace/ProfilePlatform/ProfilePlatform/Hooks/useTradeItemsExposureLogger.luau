@@ -7,7 +7,7 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local useHasPaidTradingAccessModule = require(profilePlatform.Hooks.useHasPaidTradingAccess)
 local logTradeItemsExposureIfEligibleModule = require(profilePlatform.Utils.logTradeItemsExposureIfEligible)
 
-return function() --[[ line: 12 | named "useTradeItemsExposureLogger" ]]
+return function()
 	-- upvalues: useProfileWrapperContextModule (ref), enumsModule (ref), useLocalUserId (ref), useHasPaidTradingAccessModule (ref), reactModule (ref), logTradeItemsExposureIfEligibleModule (ref)
 	local var6 = useProfileWrapperContextModule()
 	local profileId = var6.profileId
@@ -16,7 +16,7 @@ return function() --[[ line: 12 | named "useTradeItemsExposureLogger" ]]
 	local var9 = useHasPaidTradingAccessModule(var8)
 	local var10 = useHasPaidTradingAccessModule(if var7 then profileId else nil)
 	
-	return reactModule.useCallback(function() --[[ line: 21 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: var7 (ref), logTradeItemsExposureIfEligibleModule (copy), profileId (ref), var8 (ref), var9 (ref), var10 (ref)
 		if var7 then
 			logTradeItemsExposureIfEligibleModule({

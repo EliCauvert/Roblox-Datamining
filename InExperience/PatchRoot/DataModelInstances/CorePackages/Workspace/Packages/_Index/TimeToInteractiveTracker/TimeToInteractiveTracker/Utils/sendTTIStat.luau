@@ -14,7 +14,7 @@ local TTIMetricsTableName = game:DefineFastString("TTIMetricsTableName", "market
 local AXTTIAddNumElementsRendered = game:DefineFastFlag("AXTTIAddNumElementsRendered", false)
 game:DefineFastInt("TimeToInteractiveTrackerSampleRate", 0)
 
-local function getDefaultMetadata(p0) --[[ line: 57 ]]
+local function getDefaultMetadata(p0)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
 	return dashModule.assign({
 		AppVersion = runService:GetRobloxVersion(),
@@ -24,7 +24,7 @@ local function getDefaultMetadata(p0) --[[ line: 57 ]]
 	}, p0)
 end
 
-return function(p1) --[[ line: 81 | named "sendTTIStat" ]]
+return function(p1)
 	-- upvalues: runService (ref), getDefaultMetadata (ref), default (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), AXTTIAddNumElementsRendered (ref), httpService (ref), var4 (ref), TTIMetricsTableName (ref), ttiDebugLogModule (ref)
 	if math.clamp(if p1.samplingRateOverride ~= nil then game:GetFastInt("TimeToInteractiveTrackerSampleRate") else p1.samplingRateOverride, 0, 1000) < math.random(1, 1000) and not runService:IsStudio() then return end
 	local t = {
@@ -36,7 +36,7 @@ return function(p1) --[[ line: 81 | named "sendTTIStat" ]]
 	}
 	local var12 = getDefaultMetadata(p1.metaData)
 	
-	local function logMemoryStats(p2, p3, p4) --[[ line: 118 ]]
+	local function logMemoryStats(p2, p3, p4)
 		-- upvalues: t (ref), default (copy), var12 (ref)
 		if p3 then
 			local cloned = table.clone(t)
@@ -89,7 +89,7 @@ return function(p1) --[[ line: 81 | named "sendTTIStat" ]]
 	
 	if p1.milestones then
 		local var17 = utilModule.milestonesToProto(p1.milestones)
-		local ok, status = pcall(function() --[[ line: 187 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), var17 (ref)
 			return httpService:JSONEncode(var17)
 		end)

@@ -7,11 +7,11 @@ local _ = {
 }
 local t = { [408] = true, [503] = true, [504] = true }
 
-local function _(p0, p1, p2) --[[ line: 16 | named "backoffSeconds" ]]
+local function _(p0, p1, p2)
 	return (p1 + math.random() * (p2 - p1)) * math.pow(2, p0 - 1) / 1000
 end
 
-local _ = function(p3, p4) --[[ line: 20 | named "shouldRetry" ]]
+local _ = function(p3, p4)
 	if p4[p3.statusCode] then
 		return true, nil
 	elseif p3.statusCode == 429 and p3.headers ~= nil then
@@ -25,7 +25,7 @@ local _ = function(p3, p4) --[[ line: 20 | named "shouldRetry" ]]
 	end
 end
 
-return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
+return function(p5, p6)
 	-- upvalues: t (ref), mutedError (ref)
 	p6 = p6 or {}
 	local maxRetryCount = p6.maxRetryCount or 4
@@ -43,7 +43,7 @@ return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
 		retryJitterMaxMs = 4000
 	end
 	return {
-		request = function(p7, p8) --[[ line: 53 ]]
+		request = function(p7, p8)
 			-- upvalues: p5 (ref), retryOnStatuses (ref), maxRetryCount (write), retryJitterMinMs (write), retryJitterMaxMs (write)
 			local var7 = 0
 			local var8 = false
@@ -51,7 +51,7 @@ return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
 			local var10 = nil
 			local _ = nil
 			
-			local var11 = function() --[[ line: 63 ]]
+			local var11 = function()
 				-- upvalues: var8 (write), p7 (ref), var7 (write), var9 (write), p5 (copy), retryOnStatuses (copy), maxRetryCount (copy), p8 (ref), var10 (write), retryJitterMinMs (copy), retryJitterMaxMs (copy), var11 (write)
 				if var8 then return end
 				local var12 = p7
@@ -66,7 +66,7 @@ return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
 						headers = var13
 					}
 				end
-				var9 = p5.request(var12, function(p9, p10) --[[ line: 74 ]]
+				var9 = p5.request(var12, function(p9, p10)
 					-- upvalues: var9 (copy), var8 (copy), retryOnStatuses (copy), var7 (copy), maxRetryCount (copy), p8 (copy), var10 (copy), retryJitterMinMs (copy), retryJitterMaxMs (copy), var11 (copy)
 					var9 = nil
 					
@@ -109,7 +109,7 @@ return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
 						var16 = retryJitterMinMs
 						var17 = (var16 + math.random() * (retryJitterMaxMs - var16)) * math.pow(2, var7 - 1) / 1000
 					end
-					var10 = delay(var17, function() --[[ line: 95 ]]
+					var10 = delay(var17, function()
 						-- upvalues: var10 (copy), var11 (copy)
 						var10 = nil
 						var11()
@@ -119,7 +119,7 @@ return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
 			
 			var11()
 			
-			return function() --[[ line: 104 ]]
+			return function()
 				-- upvalues: var8 (write), var10 (write), var9 (write)
 				if var8 then return end
 				var8 = true

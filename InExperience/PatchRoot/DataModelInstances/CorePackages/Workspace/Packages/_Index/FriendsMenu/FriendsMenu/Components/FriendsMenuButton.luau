@@ -26,22 +26,22 @@ local t = {
 	[inviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
 
-return function(p0) --[[ line: 47 ]]
+return function(p0)
 	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var5 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var10
 	local _ = nil
 	
 	if fFlagUseSignalsForGameInvitesStatus then
 		local id = p0.friend and p0.friend.id
-		var10 = useSignalState(reactModule.useMemo(function() --[[ line: 51 ]]
+		var10 = useSignalState(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), var5 (copy), id (ref)
-			return signalsModule.createComputed(function(p1) --[[ line: 52 ]]
+			return signalsModule.createComputed(function(p1)
 				-- upvalues: var5 (copy), id (copy)
 				return var5(false).getGameInvitesStatus(p1)[id]
 			end)
 		end, { id }))
 	else
-		var10 = useSelector(function(p2) --[[ line: 58 ]]
+		var10 = useSelector(function(p2)
 			-- upvalues: p0 (ref)
 			local friend = p0.friend
 			assert(friend, "friend should be non-nil. Silence type checker.")

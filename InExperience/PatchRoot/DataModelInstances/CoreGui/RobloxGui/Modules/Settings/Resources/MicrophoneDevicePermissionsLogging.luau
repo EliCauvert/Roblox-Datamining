@@ -14,7 +14,7 @@ return {
 		PROMPT_IMPRESSION = 1,
 		PROMPT_INTERACTION = 2
 	},
-	_init = function(p0, p1, p2) --[[ line: 56 ]]
+	_init = function(p0, p1, p2)
 		-- upvalues: avatarChatService (ref)
 		p0._initialized = true
 		p0.placeId = game.PlaceId
@@ -23,7 +23,7 @@ return {
 		p0.universeVoiceEnabled = avatarChatService:IsEnabled(p1, Enum.AvatarChatServiceFeature.UniverseAudio)
 		p0:logExperienceJoin({ didAuthorize = p2 })
 	end,
-	_getEventPayload = function(p3, p4, p5) --[[ line: 68 ]]
+	_getEventPayload = function(p3, p4, p5)
 		return {
 			uiType = p4,
 			uiContext = p5.uiContext,
@@ -35,10 +35,10 @@ return {
 			clientSessionId = p3.clientSessionId
 		}
 	end,
-	_isReady = function(p6) --[[ line: 81 ]]
+	_isReady = function(p6)
 		return p6._initialized
 	end,
-	init = function(p7, p8) --[[ line: 85 ]]
+	init = function(p7, p8)
 		-- upvalues: avatarChatService (ref)
 		if avatarChatService.ClientFeaturesInitialized then
 			p7:_init(avatarChatService.ClientFeatures, p8)
@@ -46,13 +46,13 @@ return {
 			return
 		end
 		local var3 = nil
-		var3 = avatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function() --[[ line: 90 ]]
+		var3 = avatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
 			-- upvalues: p7 (ref), avatarChatService (copy), p8 (ref), var3 (write)
 			p7:_init(avatarChatService.ClientFeatures, p8)
 			var3:Disconnect()
 		end)
 	end,
-	logExperienceJoin = function(p9, p10) --[[ line: 97 ]]
+	logExperienceJoin = function(p9, p10)
 		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
 		if p9:_isReady() then
 			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p9:_getEventPayload(p9.UIType.EXPERIENCE_JOIN, p10))
@@ -60,7 +60,7 @@ return {
 			return
 		end
 	end,
-	logPromptImpression = function(p11, p12) --[[ line: 110 ]]
+	logPromptImpression = function(p11, p12)
 		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
 		if p11:_isReady() then
 			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p11:_getEventPayload(p11.UIType.PROMPT_IMPRESSION, p12))
@@ -68,7 +68,7 @@ return {
 			return
 		end
 	end,
-	logPromptInteraction = function(p13, p14) --[[ line: 123 ]]
+	logPromptInteraction = function(p13, p14)
 		-- upvalues: rbxAnalyticsService (ref), microphoneDevicePermissionsLoggingEventName (ref)
 		if p13:_isReady() then
 			rbxAnalyticsService:SendEventDeferred("client", "voice", microphoneDevicePermissionsLoggingEventName, p13:_getEventPayload(p13.UIType.PROMPT_INTERACTION, p14))
@@ -76,7 +76,7 @@ return {
 			return
 		end
 	end,
-	setClientSessionId = function(value, p15) --[[ line: 136 ]]
+	setClientSessionId = function(value, p15)
 		if value:_isReady() and value.clientSessionId ~= p15 then
 			value.clientSessionId = p15
 			

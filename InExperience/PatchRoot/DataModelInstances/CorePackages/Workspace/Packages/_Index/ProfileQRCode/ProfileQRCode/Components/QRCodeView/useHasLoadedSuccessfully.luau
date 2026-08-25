@@ -4,10 +4,10 @@ local useEffectOnce = require(profileQRCode.Parent.RoactUtils).Hooks.useEffectOn
 local useShareLinkIdModule = require(profileQRCode.Rodux.useShareLinkId)
 local _ = require(profileQRCode.Analytics.useAnalytics)
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: useShareLinkIdModule (ref), eventNamesModule (ref), useEffectOnce (ref)
 	local var3 = useShareLinkIdModule()
-	useEffectOnce(function() --[[ line: 11 ]]
+	useEffectOnce(function()
 		-- upvalues: p0 (ref), eventNamesModule (copy), var3 (ref)
 		p0.fireEvent(eventNamesModule.QRPageLoad, { shareLinkId = var3 })
 	end, p1)

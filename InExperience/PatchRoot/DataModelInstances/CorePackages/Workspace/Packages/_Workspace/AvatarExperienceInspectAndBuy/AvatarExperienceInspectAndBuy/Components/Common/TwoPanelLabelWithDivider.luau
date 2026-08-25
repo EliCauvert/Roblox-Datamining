@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 
-return function(p0) --[[ line: 26 | named "TwoPanelLabelWithDivider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-y size-full-0 padding-top-medium col align-x-left align-y-top gap-small",

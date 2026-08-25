@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppSupportDeviceSafeInsets = sharedFlagsModule.FFlagLuaAppUseDeviceSafeInsetsForAppContainer and sharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
 
-local function _() --[[ line: 39 | named "readStatusBarHeight" ]]
+local function _()
 	-- upvalues: fFlagLuaAppSupportDeviceSafeInsets (ref), userInputService (ref)
 	if fFlagLuaAppSupportDeviceSafeInsets then
 		return 0
@@ -14,9 +14,9 @@ local function _() --[[ line: 39 | named "readStatusBarHeight" ]]
 	return if statusBarSize then statusBarSize.Y else 0
 end
 
-return function() --[[ line: 47 ]]
+return function()
 	-- upvalues: reactModule (ref), fFlagLuaAppSupportDeviceSafeInsets (ref), userInputService (ref)
-	local var4, var5 = reactModule.useState(function() --[[ line: 48 ]]
+	local var4, var5 = reactModule.useState(function()
 		-- upvalues: fFlagLuaAppSupportDeviceSafeInsets (copy), userInputService (copy)
 		if fFlagLuaAppSupportDeviceSafeInsets then
 			return 0
@@ -25,7 +25,7 @@ return function() --[[ line: 47 ]]
 		
 		return if statusBarSize then statusBarSize.Y else 0
 	end)
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), fFlagLuaAppSupportDeviceSafeInsets (copy), userInputService (copy)
 		local var6
 		if fFlagLuaAppSupportDeviceSafeInsets then
@@ -35,7 +35,7 @@ return function() --[[ line: 47 ]]
 			var6 = if statusBarSize then statusBarSize.Y else 0
 		end
 		var5(var6)
-		local var7 = userInputService:GetPropertyChangedSignal("StatusBarSize"):Connect(function() --[[ line: 57 ]]
+		local var7 = userInputService:GetPropertyChangedSignal("StatusBarSize"):Connect(function()
 			-- upvalues: var5 (copy), fFlagLuaAppSupportDeviceSafeInsets (copy), userInputService (copy)
 			local var8
 			if fFlagLuaAppSupportDeviceSafeInsets then
@@ -47,7 +47,7 @@ return function() --[[ line: 47 ]]
 			var5(var8)
 		end)
 		
-		return function() --[[ line: 61 ]]
+		return function()
 			-- upvalues: var7 (ref)
 			var7:Disconnect()
 		end

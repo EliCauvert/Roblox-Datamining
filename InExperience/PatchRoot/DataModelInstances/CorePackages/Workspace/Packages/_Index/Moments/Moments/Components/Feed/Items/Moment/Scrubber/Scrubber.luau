@@ -11,14 +11,14 @@ local controlState = foundationModule.Enums.ControlState
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useSignalBinding = signalsReactModule.useSignalBinding
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "Scrubber" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: momentContextModule (ref), reactModule (ref), useMomentProgressModule (ref), useSignalBinding (ref), view (ref), stateLayerAffordance (ref), controlState (ref), scrubberBarModule (ref), previewPopoverModule (ref)
 	local var7 = momentContextModule.useMoment()
 	local var8, var9 = reactModule.useState(false)
 	local var10, var11 = reactModule.useState(false)
 	local var12, var13 = reactModule.useState(false)
 	local var14 = reactModule.useRef(nil)
-	local var15 = reactModule.useCallback(function(p1) --[[ line: 31 ]]
+	local var15 = reactModule.useCallback(function(p1)
 		-- upvalues: var14 (ref), var7 (ref)
 		local current = var14.current
 		
@@ -33,7 +33,7 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "Scrubber" ]]
 	local var16 = reactModule.joinBindings({
 		useSignalBinding(var7.store.getScrubPosition),
 		useSignalBinding(useMomentProgressModule())
-	}):map(function(p2) --[[ line: 51 ]]
+	}):map(function(p2)
 		local var19 = p2[1]
 		local var20 = p2[2]
 		local var21 = if var19 ~= nil then var20.ratio else var19
@@ -44,7 +44,7 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "Scrubber" ]]
 			ratio = var21
 		}
 	end)
-	local var17 = var16:map(function(p3) --[[ line: 63 ]]
+	local var17 = var16:map(function(p3)
 		return p3.ratio
 	end)
 	
@@ -52,7 +52,7 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "Scrubber" ]]
 		tag = "size-full-300",
 		LayoutOrder = p0.LayoutOrder,
 		stateLayer = { affordance = stateLayerAffordance.None },
-		onStateChanged = function(p4) --[[ line: 71 ]]
+		onStateChanged = function(p4)
 			-- upvalues: controlState (copy), var9 (ref), var11 (ref)
 			local var22 = if p4 ~= controlState.Pressed then p4 == controlState.SelectedPressed else true
 			var9(if p4 ~= controlState.Hover then p4 == controlState.Selected else true)
@@ -65,7 +65,7 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "Scrubber" ]]
 				DragAxis = Vector2.new(1, 0),
 				DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
 				ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale,
-				[reactModule.Event.DragStart] = function(_, p5) --[[ line: 89 ]]
+				[reactModule.Event.DragStart] = function(_, p5)
 					-- upvalues: var13 (ref), var7 (ref), var15 (ref)
 					var13(true)
 					
@@ -74,11 +74,11 @@ return reactModule.memo(function(p0) --[[ line: 23 | named "Scrubber" ]]
 					end
 					var15(p5)
 				end,
-				[reactModule.Event.DragContinue] = function(_, p6) --[[ line: 97 ]]
+				[reactModule.Event.DragContinue] = function(_, p6)
 					-- upvalues: var15 (ref)
 					var15(p6)
 				end,
-				[reactModule.Event.DragEnd] = function(_, p7) --[[ line: 100 ]]
+				[reactModule.Event.DragEnd] = function(_, p7)
 					-- upvalues: var15 (ref), var7 (ref), var13 (ref)
 					local var23 = var15(p7)
 					var7.store.setScrubPosition(nil)

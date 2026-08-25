@@ -18,7 +18,7 @@ local fFlagSduiInlineNestedComponentSchema = sharedFlagsModule.FFlagSduiInlineNe
 local fFlagSduiGenericContainerDispatch = sharedFlagsModule.FFlagSduiGenericContainerDispatch
 local fFlagSduiDeferredListItems = sharedFlagsModule.FFlagSduiDeferredListItems
 
-local function buildProp(p0, p1, p2, p3, p4) --[[ line: 36 ]]
+local function buildProp(p0, p1, p2, p3, p4)
 	-- upvalues: fFlagSduiOneofPropSupport (ref), buildProp (ref), fFlagSduiGenericContainerDispatch (ref), fFlagSduiImprovedErrorDimensions (ref)
 	if fFlagSduiOneofPropSupport and p0.oneof_prop and p0.oneof_prop.value then
 		return buildProp(p0.oneof_prop.value, p1, p2, p3, p4)
@@ -49,7 +49,7 @@ local function buildProp(p0, p1, p2, p3, p4) --[[ line: 36 ]]
 	return var15, var16, var17
 end
 
-local function buildPropTable(p5, p6, p7, p8, p9) --[[ line: 96 ]]
+local function buildPropTable(p5, p6, p7, p8, p9)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), protoVariableMapperModule (ref), buildProp (ref), propResultCategory (ref), fFlagSduiNestedComponentListProp (ref), sduiLoggerModule (ref), sduiErrorsModule (ref)
 	local t = {}
 	
@@ -63,7 +63,7 @@ local function buildPropTable(p5, p6, p7, p8, p9) --[[ line: 96 ]]
 	
 	for i, v in p5 do
 		local var23 = protoVariableMapperModule.mapPropName(i)
-		local ok, status = pcall(function() --[[ line: 118 ]]
+		local ok, status = pcall(function()
 			-- upvalues: buildProp (copy), v (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), propResultCategory (copy), var20 (write), var23 (ref), var21 (write), fFlagSduiNestedComponentListProp (copy), var22 (write), t (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), var19 (write)
 			local var24, var25, var26 = buildProp(v, p6, p7, p8, p9)
 			
@@ -136,7 +136,7 @@ local function buildPropTable(p5, p6, p7, p8, p9) --[[ line: 96 ]]
 end
 
 local t = {
-	__index = function(p10, p11) --[[ line: 187 ]]
+	__index = function(p10, p11)
 		return if p11 == "analyticsData" then p10.analyticsContext and p10.analyticsContext.analyticsData else nil
 	end
 }
@@ -144,7 +144,7 @@ local t = {
 return {
 	buildPropTable = buildPropTable,
 	buildProp = buildProp,
-	buildConfigForComponent = function(p12, p13, p14, p15, _, p16, p17) --[[ line: 196 ]]
+	buildConfigForComponent = function(p12, p13, p14, p15, _, p16, p17)
 		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), protoVariableMapperModule (ref), fFlagSduiInlineNestedComponentSchema (ref), signalsModule (ref), buildDataBindingSourcesForTemplateModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiDeferredListItems (ref), t (ref), buildPropTable (ref), buildAnalyticsContextForClientBindingModule (ref), fFlagSduiNestedComponentListProp (ref), buildProp (ref), propResultCategory (ref)
 		if not p12 or not next(p12) then
 			error("Attempt to buildConfigForComponent with nil template")
@@ -168,9 +168,9 @@ return {
 			var30 = p16
 		else
 			local var29 = if value.shared then value.shared.data else {}
-			var30 = signalsModule.createComputed(function(p18) --[[ line: 237 ]]
+			var30 = signalsModule.createComputed(function(p18)
 				-- upvalues: buildDataBindingSourcesForTemplateModule (copy), p13 (ref), var29 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p14 (ref), fFlagSduiImprovedErrorDimensions (copy), var27 (write), sduiParseHelpersModule (copy)
-				local ok, status = pcall(function() --[[ line: 238 ]]
+				local ok, status = pcall(function()
 					-- upvalues: buildDataBindingSourcesForTemplateModule (copy), p13 (copy), p18 (ref), var29 (copy)
 					return buildDataBindingSourcesForTemplateModule(p13(p18), var29)
 				end)
@@ -243,7 +243,7 @@ return {
 		end
 		if value.shared and value.shared.is_component_filtered then
 			local isComponentFiltered = value.shared.is_component_filtered
-			local ok, status, var44, var45 = pcall(function() --[[ line: 319 ]]
+			local ok, status, var44, var45 = pcall(function()
 				-- upvalues: buildProp (copy), isComponentFiltered (ref), var30 (write), p13 (ref), p14 (ref), p17 (write)
 				return buildProp(isComponentFiltered, var30, p13, p14, p17.analyticsContext)
 			end)
@@ -258,7 +258,7 @@ return {
 			elseif var44 == propResultCategory.PropSignal then
 				p17.isComponentFilteredSignal = status
 			elseif var44 == propResultCategory.Literal then
-				function p17.isComponentFilteredSignal() --[[ line: 344 ]]
+				function p17.isComponentFilteredSignal()
 					-- upvalues: status (ref)
 					return { data = status }
 				end

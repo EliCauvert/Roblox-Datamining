@@ -24,12 +24,12 @@ local t = {
 	layout = navigationTabLayoutModule.Stacked
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 78 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), textService (ref), vector2 (ref), UIBloxConfigModule (ref), isBuilderIcon (ref), icon (ref), inputSize (ref), label (ref), navigationTabLayoutModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), stateLayerModule (ref)
 	local var11 = cryoModule.Dictionary.join(t, p0)
 	local tokens = useStyleModule().Tokens
 	local var12, var13 = reactModule.useBinding(UDim2.new())
-	local var14 = reactModule.useCallback(function(p2) --[[ line: 82 ]]
+	local var14 = reactModule.useCallback(function(p2)
 		-- upvalues: var13 (ref)
 		var13(UDim2.fromOffset(p2.AbsoluteSize.X, p2.AbsoluteSize.Y))
 	end, {})
@@ -44,7 +44,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 78 ]]
 		end
 	end
 	local var20
-	local var16 = reactModule.useMemo(function() --[[ line: 95 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref), textService (copy), value (write), vector2 (copy)
 		if var11.hasLabel and var11.labelText and var11.labelTypography then
 			local labelTextTextSize = textService:GetTextSize(var11.labelText, value, var11.labelTypography.Font, vector2)

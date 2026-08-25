@@ -7,9 +7,9 @@ local playerContext = UIBloxModule.App.Indicator.PlayerContext
 local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), button (ref), buttonType (ref), playerName (ref), playerContext (ref)
-	local var2 = useDesignTokens(function(p1) --[[ line: 41 ]]
+	local var2 = useDesignTokens(function(p1)
 		return {
 			contextTextSpacing = p1.Size.Size_150,
 			joinEventSpacing = p1.Size.Size_300,
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 40 ]]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
-		[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 88 ]]
+		[reactModule.Change.AbsoluteSize] = function(p2)
 			-- upvalues: p0 (ref)
 			p0.onHeaderHeightChanged(p2.AbsoluteSize.Y)
 		end
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 40 ]]
 			iconTransparency = p0.contextIconTransparency,
 			text = p0.contextText
 		}) else nil,
-		JoinButton = (function() --[[ line: 50 ]]
+		JoinButton = (function()
 			-- upvalues: p0 (ref), reactModule (copy), var2 (ref), button (copy), buttonType (copy)
 			return if p0.renderJoinEventButton or p0.joinEventText then reactModule.createElement("Frame", {
 				LayoutOrder = 5,

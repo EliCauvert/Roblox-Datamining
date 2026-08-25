@@ -15,7 +15,7 @@ local luaInExpSchedulerLookbackUseRingBuffer = game:DefineFastInt("LuaInExpSched
 local luaInExpSchedulerDesiredFrameRate = game:DefineFastInt("LuaInExpSchedulerDesiredFrameRate", -1)
 local luaInExpSchedulerMinimumFrameRate = game:DefineFastInt("LuaInExpSchedulerMinimumFrameRate", -1)
 
-local function buildFlags(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 36 ]]
+local function buildFlags(p0, p1, p2, p3, p4, p5, p6, p7)
 	local t = {}
 	local var18 = false
 	
@@ -55,11 +55,11 @@ local function buildFlags(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 36 ]]
 end
 
 return {
-	getApp = function() --[[ line: 88 ]]
+	getApp = function()
 		-- upvalues: buildFlags (ref), luaAppSchedulerYieldInterval (ref), luaAppSchedulerDeferredWork (ref), luaAppSchedulerHeartbeatFrameMarker (ref), luaAppSchedulerTargetMsByHeartbeatDelta (ref), luaAppSchedulerNumberOfLookbackFrames (ref), luaAppSchedulerLookbackUseRingBuffer (ref), luaAppSchedulerDesiredFrameRate (ref), luaAppSchedulerMinimumFrameRate (ref)
 		return buildFlags(luaAppSchedulerYieldInterval, luaAppSchedulerDeferredWork, luaAppSchedulerHeartbeatFrameMarker, luaAppSchedulerTargetMsByHeartbeatDelta, luaAppSchedulerNumberOfLookbackFrames, luaAppSchedulerLookbackUseRingBuffer, luaAppSchedulerDesiredFrameRate, luaAppSchedulerMinimumFrameRate)
 	end,
-	getInExp = function() --[[ line: 103 ]]
+	getInExp = function()
 		-- upvalues: buildFlags (ref), luaInExpSchedulerYieldInterval (ref), luaInExpSchedulerDeferredWork (ref), luaInExpSchedulerHeartbeatFrameMarker (ref), luaInExpSchedulerTargetMsByHeartbeatDelta (ref), luaInExpSchedulerNumberOfLookbackFrames (ref), luaInExpSchedulerLookbackUseRingBuffer (ref), luaInExpSchedulerDesiredFrameRate (ref), luaInExpSchedulerMinimumFrameRate (ref)
 		return buildFlags(luaInExpSchedulerYieldInterval, luaInExpSchedulerDeferredWork, luaInExpSchedulerHeartbeatFrameMarker, luaInExpSchedulerTargetMsByHeartbeatDelta, luaInExpSchedulerNumberOfLookbackFrames, luaInExpSchedulerLookbackUseRingBuffer, luaInExpSchedulerDesiredFrameRate, luaInExpSchedulerMinimumFrameRate)
 	end

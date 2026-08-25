@@ -10,7 +10,7 @@ local t = {
 	reasonSelection = cryoModule.None
 }
 
-return function(p0, p1) --[[ line: 18 | named "analyticsReducer" ]]
+return function(p0, p1)
 	-- upvalues: analyticsActions (ref), constantsModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref), t (ref)
 	local cloned = table.clone(p0)
 	local type = p1.type

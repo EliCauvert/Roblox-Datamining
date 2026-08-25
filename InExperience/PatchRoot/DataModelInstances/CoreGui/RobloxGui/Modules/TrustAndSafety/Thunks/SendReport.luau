@@ -7,9 +7,9 @@ local openReportSentDialogModule = require(parent.Actions.OpenReportSentDialog)
 local endReportFlowModule = require(parent.Actions.EndReportFlow)
 local reportManagerModule = require(parent.Utility.ReportManager)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 15 ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: constantsModule (ref), reportManagerModule (ref), openReportSentDialogModule (ref), showToastModule (ref), endReportFlowModule (ref)
-	return function(p7) --[[ line: 16 ]]
+	return function(p7)
 		-- upvalues: p0 (ref), constantsModule (copy), reportManagerModule (copy), p4 (ref), p1 (ref), p2 (ref), p3 (ref), openReportSentDialogModule (copy), showToastModule (copy), p5 (ref), p6 (ref), endReportFlowModule (copy)
 		local state = p7:getState()
 		
@@ -21,7 +21,7 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 15 ]]
 				comment = p3,
 				beginningTimestamp = state.report.beginningTimestamp,
 				sortedUserIds = state.report.sortedUserIds
-			}, function() --[[ line: 26 ]]
+			}, function()
 				-- upvalues: p7 (ref), openReportSentDialogModule (copy), p0 (copy), p1 (copy)
 				p7:dispatch(openReportSentDialogModule(p0, p1))
 			end)
@@ -34,7 +34,7 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 15 ]]
 				placeDescription = state.placeInfo.description,
 				reason = p2,
 				comment = p3
-			}, function() --[[ line: 36 ]]
+			}, function()
 				-- upvalues: p7 (ref), showToastModule (copy), p5 (copy), p6 (copy)
 				p7:dispatch(showToastModule(p5, p6))
 			end)

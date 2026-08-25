@@ -12,7 +12,7 @@ local bindModule = require(parent.Utility.bind)
 local useStyleModule = require(parent.Core.Style.useStyle)
 local styleDefaultsModule = require(script.Parent.StyleDefaults)
 
-local function _(p0) --[[ line: 27 | named "getCellDataKey" ]]
+local function _(p0)
 	return if p0.key == nil then p0.text else p0.key
 end
 
@@ -59,13 +59,13 @@ dropdownMenu.defaultProps = {
 	defaultKey = nil
 }
 
-function dropdownMenu.didUpdate(p1, _, p2) --[[ line: 129 ]]
+function dropdownMenu.didUpdate(p1, _, p2)
 	if p1.props.onMenuOpenChange and p1.state.menuOpen ~= p2.menuOpen then
 		p1.props.onMenuOpenChange(p1.state.menuOpen)
 	end
 end
 
-function dropdownMenu.init(p3) --[[ line: 135 ]]
+function dropdownMenu.init(p3)
 	-- upvalues: cryoModule (ref), bindModule (ref)
 	p3:setState({
 		menuOpen = false,
@@ -73,23 +73,23 @@ function dropdownMenu.init(p3) --[[ line: 135 ]]
 		absoluteSize = Vector2.new(0, 0)
 	})
 	
-	function p3.openMenu() --[[ line: 142 ]]
+	function p3.openMenu()
 		-- upvalues: p3 (ref)
 		p3:setState({ menuOpen = true })
 	end
 	
-	function p3.closeMenu() --[[ line: 148 ]]
+	function p3.closeMenu()
 		-- upvalues: p3 (ref)
 		p3:setState({ menuOpen = false })
 	end
 	
-	function p3.onSelect(p4) --[[ line: 154 ]]
+	function p3.onSelect(p4)
 		-- upvalues: p3 (ref)
 		p3:setState({ menuOpen = false, selectedKey = p4 })
 		p3.props.onChange(p4)
 	end
 	
-	function p3.mapCellData(p5) --[[ line: 162 ]]
+	function p3.mapCellData(p5)
 		-- upvalues: cryoModule (copy), bindModule (copy), p3 (ref)
 		local var12 = if p5.key ~= nil then p5.text else p5.key
 		local var13 = cryoModule.Dictionary.join(p5, { key = cryoModule.None })
@@ -99,13 +99,13 @@ function dropdownMenu.init(p3) --[[ line: 135 ]]
 		return var13
 	end
 	
-	function p3.onResize(p6) --[[ line: 172 ]]
+	function p3.onResize(p6)
 		-- upvalues: p3 (ref)
 		p3:setState({ absoluteSize = p6.AbsoluteSize })
 	end
 end
 
-function dropdownMenu.getDerivedStateFromProps(p7, p8) --[[ line: 179 ]]
+function dropdownMenu.getDerivedStateFromProps(p7, p8)
 	-- upvalues: roactModule (ref)
 	local var14 = false
 	
@@ -118,12 +118,12 @@ function dropdownMenu.getDerivedStateFromProps(p7, p8) --[[ line: 179 ]]
 	return if var14 then nil else { selectedKey = roactModule.None }
 end
 
-function dropdownMenu.render(p9) --[[ line: 197 ]]
+function dropdownMenu.render(p9)
 	-- upvalues: cryoModule (ref), controlStateModule (ref), roactModule (ref), dropdownMenuCellModule (ref), imagesModule (ref), dropdownMenuListModule (ref)
 	local t, t_1
 	local var15 = cryoModule.List.map(p9.props.cellDatas, p9.mapCellData)
 	local selectionOrder = p9.props.selectionOrder
-	local var16 = cryoModule.List.findWhere(var15, function(p10) --[[ line: 203 ]]
+	local var16 = cryoModule.List.findWhere(var15, function(p10)
 		return p10.selected
 	end)
 	local var17 = if var16 ~= nil then p9.props.placeholder else var15[var16].text
@@ -176,7 +176,7 @@ function dropdownMenu.render(p9) --[[ line: 197 ]]
 				isDisabled = p9.props.isDisabled,
 				isActivated = p9.state.menuOpen,
 				hasContent = var16 ~= nil,
-				onActivated = function() --[[ line: 276 ]]
+				onActivated = function()
 					-- upvalues: p9 (ref)
 					if p9.state.menuOpen then
 						p9.closeMenu()
@@ -209,7 +209,7 @@ function dropdownMenu.render(p9) --[[ line: 197 ]]
 	})
 end
 
-return roactModule.forwardRef(function(p11, p12) --[[ line: 311 ]]
+return roactModule.forwardRef(function(p11, p12)
 	-- upvalues: useStyleModule (ref), styleDefaultsModule (ref), cryoModule (ref), roactModule (ref), dropdownMenu (ref)
 	local var24
 	local _ = nil

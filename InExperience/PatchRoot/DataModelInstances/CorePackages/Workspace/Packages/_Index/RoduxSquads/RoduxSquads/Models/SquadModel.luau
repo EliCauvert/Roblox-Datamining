@@ -7,7 +7,7 @@ local tModule = require(parent.t)
 local fFlagEnableSquadRegroupExperimentation = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation
 local t = {}
 
-function t.new(p0) --[[ line: 15 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -16,11 +16,11 @@ function t.new(p0) --[[ line: 15 ]]
 	return p0
 end
 
-function tryGetSquadId(p1) --[[ line: 28 ]]
+function tryGetSquadId(p1)
 	return p1.groupUpId or p1.squadId
 end
 
-function t.mock(p2) --[[ line: 32 ]]
+function t.mock(p2)
 	-- upvalues: cryoModule (ref), squadMemberModelModule (ref), squadInviteeModelModule (ref), t (ref), fFlagEnableSquadRegroupExperimentation (ref)
 	p2 = p2 or {}
 	
@@ -31,11 +31,11 @@ function t.mock(p2) --[[ line: 32 ]]
 		updatedAtTime = p2.updatedAtTime or "2024-07-19T21:02:47.777+00:00",
 		deletedAtTime = p2.deletedAtTime,
 		parentChannelId = p2.parentChannelId or "23456",
-		members = cryoModule.List.map(p2.members or { { userId = 1234 } }, function(p3) --[[ line: 35 ]]
+		members = cryoModule.List.map(p2.members or { { userId = 1234 } }, function(p3)
 			-- upvalues: squadMemberModelModule (copy)
 			return squadMemberModelModule.mock(p3)
 		end),
-		invitees = cryoModule.List.map(p2.invitees or { { userId = 2345, invitedAtTimestampMs = 3333333 } }, function(p4) --[[ line: 41 ]]
+		invitees = cryoModule.List.map(p2.invitees or { { userId = 2345, invitedAtTimestampMs = 3333333 } }, function(p4)
 			-- upvalues: squadInviteeModelModule (copy)
 			return squadInviteeModelModule.mock(p4)
 		end),
@@ -46,17 +46,17 @@ function t.mock(p2) --[[ line: 32 ]]
 	})
 end
 
-function t.format(p5) --[[ line: 68 ]]
+function t.format(p5)
 	-- upvalues: cryoModule (ref), squadMemberModelModule (ref), squadInviteeModelModule (ref), t (ref), fFlagEnableSquadRegroupExperimentation (ref)
 	return t.new({
 		createdAtTime = p5.createdAtTime,
 		deletedAtTime = p5.deletedAtTime,
 		initiatorId = p5.initiatorId,
-		invitees = cryoModule.List.map(p5.invitees, function(p6) --[[ line: 73 ]]
+		invitees = cryoModule.List.map(p5.invitees, function(p6)
 			-- upvalues: squadInviteeModelModule (copy)
 			return squadInviteeModelModule.format(p6)
 		end),
-		members = cryoModule.List.map(p5.members, function(p7) --[[ line: 69 ]]
+		members = cryoModule.List.map(p5.members, function(p7)
 			-- upvalues: squadMemberModelModule (copy)
 			return squadMemberModelModule.format(p7)
 		end),

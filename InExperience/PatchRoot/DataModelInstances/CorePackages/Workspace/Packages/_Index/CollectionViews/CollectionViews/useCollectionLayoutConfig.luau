@@ -3,11 +3,11 @@ local reactModule = require(collectionViews.Parent.React)
 local collectionItemSize = require(collectionViews.CollectionViewTypes).CollectionItemSize
 local useCollectionLayoutParamsComputedModule = require(collectionViews.useCollectionLayoutParamsComputed)
 
-return function(p0, p1) --[[ line: 15 | named "useCollectionLayoutConfig" ]]
+return function(p0, p1)
 	-- upvalues: useCollectionLayoutParamsComputedModule (ref), reactModule (ref), collectionItemSize (ref)
 	local var3 = useCollectionLayoutParamsComputedModule(p0, p1)
 	
-	return reactModule.useMemo(function() --[[ line: 21 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: collectionItemSize (copy), var3 (ref)
 		local t = {}
 		

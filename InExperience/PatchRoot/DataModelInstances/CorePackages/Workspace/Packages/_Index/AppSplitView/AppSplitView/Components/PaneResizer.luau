@@ -3,7 +3,7 @@ local parent = script:FindFirstAncestor("AppSplitView").Parent
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-local function VisualPaneResizer(p0) --[[ line: 22 ]]
+local function VisualPaneResizer(p0)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var4 = useTokens()
 	local lineTopInset = p0.lineTopInset or 0
@@ -30,7 +30,7 @@ local function VisualPaneResizer(p0) --[[ line: 22 ]]
 	})
 end
 
-local function InteractivePaneResizer(p1) --[[ line: 49 ]]
+local function InteractivePaneResizer(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), userInputService (ref)
 	local var6 = useTokens()
 	local name = p1.Name or "PaneResizer"
@@ -44,7 +44,7 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 	var13.current = p1.onDragEnd
 	local var14 = reactModule.useRef(false)
 	local var15 = reactModule.useRef(false)
-	local var16 = reactModule.useCallback(function() --[[ line: 65 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var14 (ref), var15 (ref)
 		var10(var14.current or var15.current)
 	end, {})
@@ -59,7 +59,7 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 		Position = p1.position,
 		Size = UDim2.new(0, p1.hitWidth, 1, 0),
 		ZIndex = p1.ZIndex,
-		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p2) --[[ line: 69 ]]
+		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p2)
 			-- upvalues: var14 (ref), var16 (ref), var12 (ref), userInputService (copy), var11 (ref), var13 (ref)
 			if p2.UserInputType ~= Enum.UserInputType.MouseButton1 and p2.UserInputType ~= Enum.UserInputType.Touch then return end
 			local position = p2.Position
@@ -71,7 +71,7 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 			end
 			local _ = nil
 			local changedConnection = nil
-			local inputChangedConnection = userInputService.InputChanged:Connect(function(p3) --[[ line: 87 ]]
+			local inputChangedConnection = userInputService.InputChanged:Connect(function(p3)
 				-- upvalues: var11 (copy), position (write)
 				if p3.UserInputType ~= Enum.UserInputType.MouseMovement and p3.UserInputType ~= Enum.UserInputType.Touch then return end
 				if var11.current then
@@ -80,7 +80,7 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 					var11.current(Vector2.new(var19.X, var19.Y))
 				end
 			end)
-			changedConnection = p2.Changed:Connect(function(p4) --[[ line: 101 ]]
+			changedConnection = p2.Changed:Connect(function(p4)
 				-- upvalues: p2 (ref), inputChangedConnection (write), changedConnection (write), var14 (copy), var16 (copy), var13 (copy)
 				if p4 == "UserInputState" and p2.UserInputState == Enum.UserInputState.End then
 					if inputChangedConnection then
@@ -98,12 +98,12 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 				end
 			end)
 		end, { var16 }),
-		[reactModule.Event.MouseEnter] = reactModule.useCallback(function(_, _) --[[ line: 118 ]]
+		[reactModule.Event.MouseEnter] = reactModule.useCallback(function(_, _)
 			-- upvalues: var15 (ref), var16 (ref)
 			var15.current = true
 			var16()
 		end, { var16 }),
-		[reactModule.Event.MouseLeave] = reactModule.useCallback(function(_, _) --[[ line: 122 ]]
+		[reactModule.Event.MouseLeave] = reactModule.useCallback(function(_, _)
 			-- upvalues: var15 (ref), var16 (ref)
 			var15.current = false
 			var16()
@@ -116,11 +116,11 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 0, lineTopInset),
 			Size = UDim2.new(0, 1, 1, -lineTopInset),
-			BackgroundColor3 = var9:map(function(p5) --[[ line: 127 ]]
+			BackgroundColor3 = var9:map(function(p5)
 				-- upvalues: var6 (ref)
 				return if p5 then var6.Color.System.Emphasis.Color3 else var6.Color.Stroke.Emphasis.Color3
 			end),
-			BackgroundTransparency = var9:map(function(p6) --[[ line: 130 ]]
+			BackgroundTransparency = var9:map(function(p6)
 				-- upvalues: var6 (ref)
 				return if p6 then var6.Color.System.Emphasis.Transparency else var6.Color.Stroke.Emphasis.Transparency
 			end)
@@ -128,7 +128,7 @@ local function InteractivePaneResizer(p1) --[[ line: 49 ]]
 	})
 end
 
-return reactModule.memo(function(p7) --[[ line: 161 | named "PaneResizer" ]]
+return reactModule.memo(function(p7)
 	-- upvalues: reactModule (ref), VisualPaneResizer (ref), InteractivePaneResizer (ref)
 	return if p7.interactive == false then reactModule.createElement(VisualPaneResizer, p7) else reactModule.createElement(InteractivePaneResizer, p7)
 end)

@@ -7,15 +7,15 @@ local _ = {
 local t = {}
 t.__index = t
 
-function t:getCFrame() --[[ line: 33 ]]
+function t:getCFrame()
 	return self.part.CFrame
 end
 
-function t:setCFrame(p0) --[[ line: 37 ]]
+function t:setCFrame(p0)
 	self.part.CFrame = p0
 end
 
-function t:updateTransparency() --[[ line: 41 ]]
+function t:updateTransparency()
 	if self.dragBarState == "Hovering" then
 		self.dragBarImage.ImageTransparency = 0.2
 		
@@ -28,7 +28,7 @@ function t:updateTransparency() --[[ line: 41 ]]
 	self.dragBarImage.ImageTransparency = 0.6
 end
 
-function t:updateState() --[[ line: 51 ]]
+function t:updateState()
 	if self.dragging then
 		self.dragBarState = "Dragging"
 	elseif self.hovering and not self.dragging then
@@ -39,36 +39,36 @@ function t:updateState() --[[ line: 51 ]]
 	self:updateTransparency()
 end
 
-function t:startDrag(p1) --[[ line: 62 ]]
+function t:startDrag(p1)
 	self.dragging = true
 	self.uiGroupOffSet = p1
 	self:updateState()
 end
 
-function t:dragEnd() --[[ line: 68 ]]
+function t:dragEnd()
 	self.dragging = false
 	self:updateState()
 end
 
-function t:startHover() --[[ line: 73 ]]
+function t:startHover()
 	self.hovering = true
 	self:updateState()
 end
 
-function t:hoverEnd() --[[ line: 78 ]]
+function t:hoverEnd()
 	self.hovering = false
 	self:updateState()
 end
 
-function t:show() --[[ line: 83 ]]
+function t:show()
 	self.part.Parent = self.partsParent
 end
 
-function t:hide() --[[ line: 87 ]]
+function t:hide()
 	self.part.Parent = nil
 end
 
-function t:rescale(p2) --[[ line: 91 ]]
+function t:rescale(p2)
 	-- upvalues: utilsModule (ref)
 	self.part.Size *= p2
 	
@@ -77,7 +77,7 @@ function t:rescale(p2) --[[ line: 91 ]]
 	end
 end
 
-function t.new(p3, p4) --[[ line: 98 ]]
+function t.new(p3, p4)
 	-- upvalues: t (ref)
 	local t_1 = {
 		hovering = false,

@@ -8,7 +8,7 @@ local useStyleModule = require(core.Style.useStyle)
 local _ = require(parent.Style.Fonts)
 local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 
-local function renderStatItem(p0, p1, p2, p3) --[[ line: 28 ]]
+local function renderStatItem(p0, p1, p2, p3)
 	-- upvalues: UIBloxConfigModule (ref), reactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local tokens = p3.Tokens
 	local font = p3.Font
@@ -58,7 +58,7 @@ local function renderStatItem(p0, p1, p2, p3) --[[ line: 28 ]]
 	})
 end
 
-return function(p4) --[[ line: 98 | named "StatGroup" ]]
+return function(p4)
 	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), renderStatItem (ref)
 	local var12 = useStyleModule()
 	

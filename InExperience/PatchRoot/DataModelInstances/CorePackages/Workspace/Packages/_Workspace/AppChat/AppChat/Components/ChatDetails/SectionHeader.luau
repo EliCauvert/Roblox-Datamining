@@ -12,7 +12,7 @@ local t = {
 	style = require(appChat.SocialLibraries).Components.TestStyle
 }
 
-function SectionHeader(p0) --[[ line: 30 ]]
+function SectionHeader(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), roactFitComponents (ref)
 	local var4 = cryoModule.Dictionary.join(t, p0)
 	local style = var4.style

@@ -9,7 +9,7 @@ local inviteFriendProviderModule = require(parent.InviteFriendProvider)
 local gameDetailsContextProviderModule = require(parent.GameDetailsContextProvider)
 local _ = require(parent_1.gameInviteModalType)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), gameDetailsContextProviderModule (ref), getFFlagEnableCommonFriendsMenu (ref), inviteFriendProviderModule (ref), friendsListContextProvider (ref)
 	local trigger = nil
 	local inviteMessageId = nil

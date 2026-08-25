@@ -9,7 +9,7 @@ local priceBoxLineLayoutModule = require(script.Parent.PriceBoxLineLayout)
 local priceModule = require(script.Parent.Price)
 local priceBoxLineVariantEnumModule = require(bulkPurchaseApp.Enums.PriceBoxLineVariantEnum)
 
-return function(p0) --[[ line: 22 | named "PriceBoxLine" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), priceBoxLineVariantEnumModule (ref), reactModule (ref), priceBoxLineLayoutModule (ref), text (ref), view (ref), priceModule (ref)
 	local var6 = useTokens()
 	local t = {

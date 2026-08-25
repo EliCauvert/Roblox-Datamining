@@ -15,7 +15,7 @@ name.defaultProps = {
 	borderState = authStatefulRoundCornerBorderModule.BorderState.Default
 }
 
-function name.render(p0) --[[ line: 29 ]]
+function name.render(p0)
 	-- upvalues: getFFlagEnableAuthStatefulTextInputUpdates (ref), withStyle (ref), roactModule (ref), authStatefulRoundCornerBorderModule (ref), passwordBoxModule (ref), genericTextBoxModule (ref)
 	local text = p0.props.text
 	local textInputType = p0.props.textInputType
@@ -32,7 +32,7 @@ function name.render(p0) --[[ line: 29 ]]
 	local maxLength = p0.props.maxLength
 	local var7 = p0.props.textInputType == Enum.TextInputType.Password
 	
-	return withStyle(function(p1) --[[ line: 48 ]]
+	return withStyle(function(p1)
 		-- upvalues: p0 (ref), roactModule (copy), layoutOrder (ref), var6 (ref), labelText (ref), authStatefulRoundCornerBorderModule (copy), textInputHeight (ref), getFFlagEnableAuthStatefulTextInputUpdates (copy), borderState (ref), var7 (ref), passwordBoxModule (copy), text (ref), placeholderText (ref), onChangeTextCallback (ref), genericTextBoxModule (copy), textInputType (ref), onFocused (ref), onFocusLost (ref), maxLength (ref), errorText (ref)
 		local font = p1.Font.Body.Font
 		local var8 = p1.Font.BaseSize * p1.Font.Body.RelativeSize

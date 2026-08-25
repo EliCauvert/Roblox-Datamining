@@ -6,15 +6,15 @@ local radiusModule = require(foundation.Enums.Radius)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 16 | named "useArrowPosition" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: useTokensModule (ref), reactModule (ref), radiusModule (ref), popoverSideModule (ref), SHADOW_SIZE (ref)
 	local var6 = useTokensModule()
-	local var7 = reactModule.useMemo(function() --[[ line: 25 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), radiusModule (copy), var6 (ref)
 		return if p2 == radiusModule.XSmall then var6.Size.Size_50 elseif p2 == radiusModule.Small then var6.Size.Size_100 elseif p2 == radiusModule.Medium then var6.Size.Size_200 elseif p2 == radiusModule.Large then var6.Size.Size_300 else 0
 	end, { p2, var6 })
 	
-	return p0:map(function(p6) --[[ line: 39 ]]
+	return p0:map(function(p6)
 		-- upvalues: var7 (ref), p2 (ref), radiusModule (copy), p4 (ref), p1 (ref), popoverSideModule (copy), p5 (ref), p3 (ref), SHADOW_SIZE (copy)
 		local var11
 		local offset = p6.X.Offset

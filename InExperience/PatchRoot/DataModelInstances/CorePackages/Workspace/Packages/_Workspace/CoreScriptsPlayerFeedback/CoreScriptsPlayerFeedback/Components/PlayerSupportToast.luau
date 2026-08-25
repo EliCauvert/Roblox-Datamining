@@ -8,20 +8,20 @@ local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local builderIconsModule = require(parent.BuilderIcons)
 
-return reactModule.memo(function(p0) --[[ line: 29 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), text (ref)
 	local var3 = useTokens()
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref)
 		local var4 = false
-		task.delay(4, function() --[[ line: 34 ]]
+		task.delay(4, function()
 			-- upvalues: var4 (write), p0 (copy)
 			if not var4 then
 				p0.onDismiss()
 			end
 		end)
 		
-		return function() --[[ line: 39 ]]
+		return function()
 			-- upvalues: var4 (write)
 			var4 = true
 		end

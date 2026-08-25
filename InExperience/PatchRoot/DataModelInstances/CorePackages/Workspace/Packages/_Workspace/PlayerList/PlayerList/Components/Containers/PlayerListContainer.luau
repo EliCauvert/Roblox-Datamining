@@ -23,18 +23,18 @@ local fFlagPlayerListTwoTabsModule = require(parent.Flags.FFlagPlayerListTwoTabs
 local fStringPlayerListIXPLayerModule = require(parent.Flags.FStringPlayerListIXPLayer)
 local IXPService = game:GetService("IXPService")
 
-return reactModule.memo(function(p0) --[[ line: 41 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagPlayerListReskinModule (ref), reactModule (ref), createLayoutValuesModule (ref), focusNavigationService (ref), reactFocusNavigationModule (ref), signalsReactModule (ref), fFlagEnablePlayerListExposureEventsModule (ref), IXPService (ref), fStringPlayerListIXPLayerModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListTwoTabsModule (ref), platformLeaderboardContainerModule (ref), leaderboardStoreContextModule (ref), layoutValuesContextModule (ref), fFlagAddNewPlayerListFocusNavModule (ref), focusNavigationContext (ref), gameTextTranslatorContextModule (ref), localizationProvider (ref)
 	local var17, var18
 	local _ = nil
 	local _ = nil
 	
 	if fFlagPlayerListReskinModule then
-		var17 = reactModule.useMemo(function() --[[ line: 45 ]]
+		var17 = reactModule.useMemo(function()
 			-- upvalues: createLayoutValuesModule (copy), p0 (ref)
 			return createLayoutValuesModule(p0.isTenFoot or false, p0.TopBarConstants)
 		end, { p0.isTenFoot, p0.TopBarConstants })
-		var18 = reactModule.useMemo(function() --[[ line: 48 ]]
+		var18 = reactModule.useMemo(function()
 			-- upvalues: focusNavigationService (copy), reactFocusNavigationModule (copy)
 			return focusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 		end, {})
@@ -45,12 +45,12 @@ return reactModule.memo(function(p0) --[[ line: 41 ]]
 	local var19 = signalsReactModule.useSignalState(p0.leaderboardStore)
 	
 	if fFlagEnablePlayerListExposureEventsModule then
-		reactModule.useEffect(function() --[[ line: 58 ]]
+		reactModule.useEffect(function()
 			-- upvalues: IXPService (copy), fStringPlayerListIXPLayerModule (copy)
 			IXPService:LogFlagLinkedUserLayerExposure(fStringPlayerListIXPLayerModule)
 		end, {})
 	end
-	local var20 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function() --[[ line: 65 ]]
+	local var20 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
 		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {}) else nil

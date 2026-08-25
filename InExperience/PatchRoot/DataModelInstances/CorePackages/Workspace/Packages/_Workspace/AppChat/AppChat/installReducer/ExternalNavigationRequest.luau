@@ -8,7 +8,7 @@ return require(parent.Rodux).createReducer({
 	requestId = 0,
 	completedRequestId = 0
 }, {
-	[require(appChat.Actions.NavigateIntoChat).name] = function(p0, p1) --[[ line: 18 ]]
+	[require(appChat.Actions.NavigateIntoChat).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, {
 			screen = p1.screen,
@@ -16,7 +16,7 @@ return require(parent.Rodux).createReducer({
 			requestId = p0.requestId + 1
 		})
 	end,
-	[require(appChat.Actions.CompleteExternalNavigationIntoChat).name] = function(p2, p3) --[[ line: 26 ]]
+	[require(appChat.Actions.CompleteExternalNavigationIntoChat).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p2, { completedRequestId = p3.requestId })
 	end

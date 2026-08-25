@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 9 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -12,7 +12,7 @@ function t.new(p0) --[[ line: 9 ]]
 	return t_1
 end
 
-function t:addSound(p1, p2) --[[ line: 17 ]]
+function t:addSound(p1, p2)
 	-- upvalues: getFFlagSoundTelemetryOsClockModule (ref)
 	local var3 = self.sounds[p1]
 	
@@ -40,7 +40,7 @@ function t:addSound(p1, p2) --[[ line: 17 ]]
 	end
 end
 
-function t:removeSound(p3, p4) --[[ line: 37 ]]
+function t:removeSound(p3, p4)
 	-- upvalues: getFFlagSoundTelemetryOsClockModule (ref)
 	local var4 = self.sounds[p3]
 	
@@ -59,7 +59,7 @@ function t:removeSound(p3, p4) --[[ line: 37 ]]
 	end
 end
 
-function t:loopSound(p5, p6) --[[ line: 66 ]]
+function t:loopSound(p5, p6)
 	local var5 = self.sounds[p5]
 	
 	if var5 == nil or var5.instances[p6] == nil then

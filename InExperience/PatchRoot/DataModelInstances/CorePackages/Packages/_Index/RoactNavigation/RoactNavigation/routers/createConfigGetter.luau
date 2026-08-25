@@ -5,7 +5,7 @@ local getScreenForRouteNameModule = require(parent.getScreenForRouteName)
 local validateScreenOptionsModule = require(parent.validateScreenOptions)
 local invariantModule = require(parent_1.utils.invariant)
 
-local function applyConfig(p0, p1, p2) --[[ line: 13 ]]
+local function applyConfig(p0, p1, p2)
 	-- upvalues: object (ref)
 	p1 = p1 or {}
 	local var5 = type(p0)
@@ -13,9 +13,9 @@ local function applyConfig(p0, p1, p2) --[[ line: 13 ]]
 	return if var5 == "function" then object.assign({}, p1, p0(object.assign(table.clone(p2), { navigationOptions = p1 }))) elseif var5 == "table" then object.assign(table.clone(p1), p0) else p1
 end
 
-return function(p3, p4) --[[ line: 32 ]]
+return function(p3, p4)
 	-- upvalues: invariantModule (ref), getScreenForRouteNameModule (ref), applyConfig (ref), validateScreenOptionsModule (ref)
-	return function(p5, p6) --[[ line: 33 ]]
+	return function(p5, p6)
 		-- upvalues: invariantModule (copy), getScreenForRouteNameModule (copy), p3 (ref), applyConfig (copy), p4 (ref), validateScreenOptionsModule (copy)
 		p6 = p6 or {}
 		local state = p5.state

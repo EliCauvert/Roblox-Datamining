@@ -38,7 +38,7 @@ local bindableEvent_1 = Instance.new("BindableEvent")
 local var29 = createStoreModule()
 
 return {
-	mountInGameMenu = function() --[[ line: 56 ]]
+	mountInGameMenu = function()
 		-- upvalues: registerSetCoresModule (ref), var29 (ref), bindMenuActionsModule (ref), requestGameNameAndDescriptionModule (ref), globalConfigModule (ref), roact (ref), bindableEvent (ref), bindableEvent_1 (ref), localization (ref), localizationService (ref), setLocaleIdModule (ref), setInspectMenuEnabledModule (ref), guiService (ref), initVoiceChatStoreModule (ref), renderWithCoreScriptsStyleProviderModule (ref), localizationProvider (ref), selectionCursorProvider (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerContextProviderModule (ref), appModule (ref), appInteractionFeedbackProvider (ref), feedbackManagerInjectionContextProvider (ref), constantsModule (ref), setScreenSizeModule (ref), roactRodux (ref), inGameMenuPolicyModule (ref), coreGuiService (ref)
 		registerSetCoresModule(var29)
 		bindMenuActionsModule(var29)
@@ -50,7 +50,7 @@ return {
 		if globalConfigModule.elementTracing then
 			roact.setGlobalConfig({ elementTracing = true })
 		end
-		var29.changed:connect(function(p0, p1) --[[ line: 72 ]]
+		var29.changed:connect(function(p0, p1)
 			-- upvalues: bindableEvent (copy), bindableEvent_1 (copy)
 			if p0.isMenuOpen ~= p1.isMenuOpen then
 				bindableEvent:Fire(p0.isMenuOpen)
@@ -64,13 +64,13 @@ return {
 		end)
 		local var30 = localization.new(localizationService.RobloxLocaleId)
 		var29:dispatch(setLocaleIdModule(localizationService.RobloxLocaleId))
-		localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ line: 90 ]]
+		localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 			-- upvalues: var30 (ref), localizationService (copy), var29 (copy), setLocaleIdModule (copy)
 			var30:SetLocale(localizationService.RobloxLocaleId)
 			var29:dispatch(setLocaleIdModule(localizationService.RobloxLocaleId))
 		end)
 		var29:dispatch(setInspectMenuEnabledModule(guiService:GetInspectMenuEnabled()))
-		guiService.InspectMenuEnabledChangedSignal:Connect(function(p2) --[[ line: 96 ]]
+		guiService.InspectMenuEnabledChangedSignal:Connect(function(p2)
 			-- upvalues: var29 (copy), setInspectMenuEnabledModule (copy)
 			var29:dispatch(setInspectMenuEnabledModule(p2))
 		end)
@@ -81,7 +81,7 @@ return {
 			DisplayOrder = constantsModule.DisplayOrder.RootMenu,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 			AutoLocalize = false,
-			[roact.Change.AbsoluteSize] = function(p3) --[[ line: 128 ]]
+			[roact.Change.AbsoluteSize] = function(p3)
 				-- upvalues: var29 (copy), setScreenSizeModule (copy)
 				var29:dispatch(setScreenSizeModule(p3.AbsoluteSize))
 			end
@@ -104,59 +104,59 @@ return {
 			})
 		}), coreGuiService, "InGameMenu")
 	end,
-	openInGameMenu = function(p4) --[[ line: 145 ]]
+	openInGameMenu = function(p4)
 		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref)
 		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.TopbarButton, p4))
 	end,
-	closeInGameMenu = function() --[[ line: 149 ]]
+	closeInGameMenu = function()
 		-- upvalues: closeMenuModule (ref), var29 (ref)
 		closeMenuModule(var29)
 	end,
-	openReportDialog = function(p5, p6) --[[ line: 153 ]]
+	openReportDialog = function(p5, p6)
 		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), trustAndSafetyModule (ref)
 		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.ReportAbuseTriggered, constantsModule.ReportDialogKey))
 		trustAndSafetyModule.openReportDialogForPlayer(p5, if p6 ~= nil then constantsModule.AnalyticsInGameMenuName else p6)
 	end,
-	openGameSettingsPage = function() --[[ line: 159 ]]
+	openGameSettingsPage = function()
 		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
 		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.SettingsTriggered))
 		var29:dispatch(setCurrentPageModule("GameSettings"))
 	end,
-	openGameLeavePage = function() --[[ line: 164 ]]
+	openGameLeavePage = function()
 		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
 		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.GamepadLeaveGame))
 		var29:dispatch(setCurrentPageModule(constantsModule.LeaveGamePromptPageKey))
 	end,
-	openCharacterResetPage = function() --[[ line: 169 ]]
+	openCharacterResetPage = function()
 		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref), setRespawningModule (ref)
 		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.GamepadResetCharacter))
 		var29:dispatch(setCurrentPageModule(constantsModule.MainPagePageKey))
 		var29:dispatch(setRespawningModule(true))
 	end,
-	openPlayersPage = function() --[[ line: 175 ]]
+	openPlayersPage = function()
 		-- upvalues: var29 (ref), openMenuModule (ref), constantsModule (ref), setCurrentPageModule (ref)
 		var29:dispatch(openMenuModule(constantsModule.AnalyticsMenuOpenTypes.PlayersTriggered))
 		var29:dispatch(setCurrentPageModule("Players"))
 	end,
-	getOpenChangedEvent = function() --[[ line: 180 ]]
+	getOpenChangedEvent = function()
 		-- upvalues: bindableEvent (ref)
 		return bindableEvent
 	end,
-	getOpen = function() --[[ line: 184 ]]
+	getOpen = function()
 		-- upvalues: var29 (ref)
 		return var29:getState().isMenuOpen
 	end,
-	getRespawnBehaviour = function() --[[ line: 188 ]]
+	getRespawnBehaviour = function()
 		-- upvalues: var29 (ref)
 		local state = var29:getState()
 		
 		return state.respawn.enabled, state.respawn.customCallback
 	end,
-	getRespawnBehaviourChangedEvent = function() --[[ line: 193 ]]
+	getRespawnBehaviourChangedEvent = function()
 		-- upvalues: bindableEvent_1 (ref)
 		return bindableEvent_1
 	end,
-	setMenuIconTooltipOpen = function(value) --[[ line: 197 ]]
+	setMenuIconTooltipOpen = function(value)
 		-- upvalues: var29 (ref), setMenuIconTooltipOpenModule (ref)
 		var29:dispatch(setMenuIconTooltipOpenModule(value))
 	end

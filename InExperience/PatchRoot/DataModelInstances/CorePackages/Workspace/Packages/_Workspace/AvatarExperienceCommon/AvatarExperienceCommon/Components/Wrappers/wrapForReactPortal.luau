@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local foundationModule = require(parent.Foundation)
 
-local var3 = function(p0, p1) --[[ line: 8 ]]
+local var3 = function(p0, p1)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		BackgroundTransparency = 1,
@@ -19,7 +19,7 @@ local var3 = function(p0, p1) --[[ line: 8 ]]
 	}, p0)
 end
 
-return function(p2, p3, p4) --[[ line: 23 | named "wrapForReactPortal" ]]
+return function(p2, p3, p4)
 	-- upvalues: reactRobloxModule (ref), var3 (ref)
 	return reactRobloxModule.createPortal(var3(p2, p4), p3)
 end

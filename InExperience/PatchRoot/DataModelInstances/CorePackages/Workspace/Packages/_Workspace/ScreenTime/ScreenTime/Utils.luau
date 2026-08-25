@@ -5,7 +5,7 @@ local logging = require(parent.AppCommonLib).Logging
 return {
 	globalGetter = nil,
 	globalSetter = nil,
-	new = function(p0, p1) --[[ line: 30 ]]
+	new = function(p0, p1)
 		-- upvalues: argCheckModule (ref)
 		argCheckModule.isType(p1.globalGetter, "function", "globalGetter")
 		argCheckModule.isType(p1.globalSetter, "function", "globalSetter")
@@ -18,13 +18,13 @@ return {
 		
 		return t
 	end,
-	isLockedOut = function(p2) --[[ line: 45 ]]
+	isLockedOut = function(p2)
 		-- upvalues: argCheckModule (ref)
 		argCheckModule.isType(p2.globalGetter, "function", "globalGetter")
 		
 		return p2.globalGetter("ScreenTime.lockedOut") == "true"
 	end,
-	setLockedOut = function(value) --[[ line: 54 ]]
+	setLockedOut = function(value)
 		-- upvalues: logging (ref), argCheckModule (ref)
 		logging.warn("Utils setLockedOut")
 		argCheckModule.isType(value.globalSetter, "function", "globalSetter")

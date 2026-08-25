@@ -5,7 +5,7 @@ local countriesWithGenericIllegalContentReporting2 = game:DefineFastString("Coun
 local var4 = false
 
 if enableGenericIllegalContentReporting3 then
-	task.spawn(function() --[[ line: 18 ]]
+	task.spawn(function()
 		-- upvalues: playersService (ref), localizationService (ref), countriesWithGenericIllegalContentReporting2 (ref), var4 (write)
 		local localPlayer = playersService.LocalPlayer
 		while not localPlayer do
@@ -24,7 +24,7 @@ if enableGenericIllegalContentReporting3 then
 		end
 	end)
 end
-return function() --[[ line: 42 | named "isShowGenericIllegalContentReportingLink" ]]
+return function()
 	-- upvalues: enableGenericIllegalContentReporting3 (ref), var4 (write)
 	return enableGenericIllegalContentReporting3 and var4
 end

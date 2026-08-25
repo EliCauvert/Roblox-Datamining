@@ -9,20 +9,20 @@ local momentsSurfaceLoadManagerModule = require(script.Parent.MomentsSurfaceLoad
 local fFlagMomentsMediaSmoothnessTelemetryModule = require(momentsCommon.Flags.FFlagMomentsMediaSmoothnessTelemetry)
 local captureKindModule = require(momentsCommon.Enums.CaptureKind)
 
-return function(p0) --[[ line: 23 | named "useMomentsSurfaceReadyTracking" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useHasPresentedFrameModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsMediaSmoothnessTelemetryModule (ref), momentsSurfaceLoadManagerModule (ref), captureKindModule (ref)
 	local controller = p0.controller
 	local isVideo = p0.isVideo
 	local enabled = p0.enabled
 	local var8 = reactModule.useRef(nil)
-	local var9 = if isVideo then useHasPresentedFrameModule(controller, enabled and isVideo) else signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 38 ]]
+	local var9 = if isVideo then useHasPresentedFrameModule(controller, enabled and isVideo) else signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 39 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: controller (copy)
 			return if controller == nil then nil else controller.getState(p1).readiness
 		end)
 	end, { controller })) == "Ready"
-	reactModule.useEffect(function() --[[ line: 50 ]]
+	reactModule.useEffect(function()
 		-- upvalues: enabled (ref), var9 (ref), controller (ref), var8 (ref), fFlagMomentsMediaSmoothnessTelemetryModule (copy), momentsSurfaceLoadManagerModule (copy), isVideo (ref), captureKindModule (copy)
 		if enabled and var9 and (controller ~= nil and var8.current ~= controller) then
 			var8.current = controller

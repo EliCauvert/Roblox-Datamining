@@ -11,14 +11,14 @@ local view = foundationModule.View
 local useTextSizeOffset = foundationModule.Hooks.useTextSizeOffset
 local t = { numColumns = 3 }
 
-local function _(p0) --[[ line: 23 | named "getTextSizeAdjustedSquareExperienceTileHeight" ]]
-	return function(p1) --[[ line: 24 ]]
+local function _(p0)
+	return function(p1)
 		-- upvalues: p0 (ref)
 		return p1 + 80 + p0 * 3
 	end
 end
 
-return function(p2) --[[ line: 29 | named "ExperiencesSkeleton" ]]
+return function(p2)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useTextSizeOffset (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), squareCollectionGridViewModule (ref), t (ref)
 	local var6 = useLocalization({ experiences = textKeysModule.Experiences })
 	local _ = nil
@@ -27,7 +27,7 @@ return function(p2) --[[ line: 29 | named "ExperiencesSkeleton" ]]
 	
 	return reactModule.createElement(squareCollectionGridViewModule, {
 		layoutOrder = p2.layoutOrder,
-		items = reactModule.useMemo(function() --[[ line: 65 ]]
+		items = reactModule.useMemo(function()
 			-- upvalues: p2 (ref)
 			local t = {}
 			
@@ -36,7 +36,7 @@ return function(p2) --[[ line: 29 | named "ExperiencesSkeleton" ]]
 			end
 			return t
 		end, { p2.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p3, p4) --[[ line: 40 ]]
+		renderItem = reactModule.useCallback(function(_, p3, p4)
 			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
 			return reactModule.createElement(view, {
 				tag = "col gap-small radius-medium",
@@ -60,9 +60,9 @@ return function(p2) --[[ line: 29 | named "ExperiencesSkeleton" ]]
 				})
 			}), "Skeleton_" .. p3
 		end, {}),
-		getItemHeight = reactModule.useMemo(function() --[[ line: 36 ]]
+		getItemHeight = reactModule.useMemo(function()
 			-- upvalues: var7 (write)
-			return function(p5) --[[ line: 24 ]]
+			return function(p5)
 				-- upvalues: var7 (ref)
 				return p5 + 80 + var7 * 3
 			end

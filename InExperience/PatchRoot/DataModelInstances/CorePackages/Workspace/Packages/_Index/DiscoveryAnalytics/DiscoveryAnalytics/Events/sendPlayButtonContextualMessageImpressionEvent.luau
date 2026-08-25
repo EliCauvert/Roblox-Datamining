@@ -15,7 +15,7 @@ local t = {
 	lastUpdated = { 26, 5, 6 }
 }
 
-return function(p0, p1) --[[ line: 23 | named "sendPlayButtonContextualMessageImpressionEvent" ]]
+return function(p0, p1)
 	-- upvalues: var2 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
 	local var4, var5 = var2(p0)
 	

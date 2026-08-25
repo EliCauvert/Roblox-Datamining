@@ -26,7 +26,7 @@ local sign = math.sign
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 61 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: propertiesModule (ref), t (ref)
 	return setmetatable({
 		_isScrolling = false,
@@ -40,7 +40,7 @@ function t.new(p0, p1, p2) --[[ line: 61 ]]
 	}, t)
 end
 
-function t:processScrolling(p3, p4, p5) --[[ line: 76 ]]
+function t:processScrolling(p3, p4, p5)
 	-- upvalues: propertiesModule (ref), abs (ref), cos (ref), sin (ref), max (ref), min (ref), sign (ref)
 	if not p3:IsA("ScrollingFrame") then
 		return false
@@ -90,7 +90,7 @@ function t:processScrolling(p3, p4, p5) --[[ line: 76 ]]
 	return false
 end
 
-function t:getClosestCandidate(p6, p7, _, p8, p9) --[[ line: 141 ]]
+function t:getClosestCandidate(p6, p7, _, p8, p9)
 	-- upvalues: isSelectableGuiObject (ref), getPointRotatedAroundObject (ref), isSinkingGuiObject (ref), isCircleContainedInGuiObject (ref), propertiesModule (ref)
 	local var19 = nil
 	local var20 = nil
@@ -130,7 +130,7 @@ function t:getClosestCandidate(p6, p7, _, p8, p9) --[[ line: 141 ]]
 	return var19, var20, var21
 end
 
-function t:processMoving(p10) --[[ line: 211 ]]
+function t:processMoving(p10)
 	-- upvalues: guiService (ref), gamepadService (ref), fFlagEnableMoveSnapInVirtualCursor (ref), fIntSnapLevelInVirtualCursor (ref), propertiesModule (ref), getMaxSpeed (ref)
 	local var25 = guiService:GetScreenResolution() + guiService:GetGuiInset()
 	local moveVector = self._inputController:GetMoveVector()
@@ -153,7 +153,7 @@ function t:processMoving(p10) --[[ line: 211 ]]
 	gamepadService:SetGamepadCursorPosition(gamepadCursorPosition)
 end
 
-function t:processSnapping(p11, p12, p13, p14) --[[ line: 244 ]]
+function t:processSnapping(p11, p12, p13, p14)
 	-- upvalues: fFlagEnableSnapInVirtualCursor (ref), fFlagVirtualCursorSnapStopsWhenInputStops (ref), fFlagEnableVirtualCursorDebugging (ref), fIntSnapLevelInVirtualCursor (ref), propertiesModule (ref), guiService (ref), fFlagVirtualCursorSnapLevelBasedOnDirection (ref), gamepadService (ref)
 	if not fFlagEnableSnapInVirtualCursor then return end
 	local var30 = (p12 - p13) / p11
@@ -186,7 +186,7 @@ function t:processSnapping(p11, p12, p13, p14) --[[ line: 244 ]]
 	end
 end
 
-function t.getCandidates(_, p15, p16) --[[ line: 292 ]]
+function t.getCandidates(_, p15, p16)
 	-- upvalues: playersService (ref), coreGuiService (ref)
 	local playerGui = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
 	
@@ -202,7 +202,7 @@ function t.getCandidates(_, p15, p16) --[[ line: 292 ]]
 	}
 end
 
-function t:processAncestors(p17, p18, p19, p20) --[[ line: 300 ]]
+function t:processAncestors(p17, p18, p19, p20)
 	local parent = p17.Parent
 	while parent and parent ~= p18 do
 		if not self:processScrolling(parent, p19, p20) then
@@ -215,7 +215,7 @@ function t:processAncestors(p17, p18, p19, p20) --[[ line: 300 ]]
 	end
 end
 
-function t:processCandidates(p21, p22, p23) --[[ line: 311 ]]
+function t:processCandidates(p21, p22, p23)
 	-- upvalues: guiService (ref)
 	p21 -= guiService:GetGuiInset()
 	local var36 = self:getCandidates(p21, p22)
@@ -258,7 +258,7 @@ function t:processCandidates(p21, p22, p23) --[[ line: 311 ]]
 	return var37, var39
 end
 
-function t:getSnapCandidateList(p24, p25) --[[ line: 358 ]]
+function t:getSnapCandidateList(p24, p25)
 	-- upvalues: guiService (ref), playersService (ref), coreGuiService (ref)
 	local t = {}
 	p24 -= guiService:GetGuiInset()
@@ -280,7 +280,7 @@ function t:getSnapCandidateList(p24, p25) --[[ line: 358 ]]
 	return t
 end
 
-function t:onRenderStep(p26) --[[ line: 385 ]]
+function t:onRenderStep(p26)
 	-- upvalues: gamepadService (ref), fFlagEnableSnapInVirtualCursor (ref), fFlagEnableMoveSnapInVirtualCursor (ref), playersService (ref), coreGuiService (ref), guiService (ref)
 	local gamepadCursorPosition = gamepadService:GetGamepadCursorPosition()
 	self:processMoving(p26)

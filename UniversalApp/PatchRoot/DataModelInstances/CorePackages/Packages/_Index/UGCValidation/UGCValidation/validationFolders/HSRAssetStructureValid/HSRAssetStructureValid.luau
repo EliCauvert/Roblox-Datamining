@@ -12,7 +12,7 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 22 ]]
+	run = function(p0, p1)
 		-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref)
 		if p1.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC or p1.consumerConfig.source == "AutoSetup" then return end
 		local rootInstance = p1.rootInstance

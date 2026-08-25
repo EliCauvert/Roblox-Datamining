@@ -16,11 +16,11 @@ local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local reactionsSheetModule = require(moments.Components.ReactionsSheet)
 local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
 
-local function _(p0) --[[ line: 46 | named "formatCount" ]]
+local function _(p0)
 	return if p0 == nil then "" elseif p0 >= 1000000 then string.format("%.1fM", p0 / 1000000) elseif p0 >= 1000 then string.format("%.1fK", p0 / 1000) else tostring(p0)
 end
 
-return reactModule.memo(function(p1) --[[ line: 58 | named "Reactions" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), momentContextModule (ref), reactModule (ref), useSignalBinding (ref), useSignalState (ref), getColorStyleWithTransparencyModule (ref), reaction (ref), reactionSize (ref), view (ref), stateLayerAffordance (ref), text (ref), reactionsSheetModule (ref)
 	local var8 = useTokens()
 	local var9 = momentContextModule.useMoment()
@@ -28,15 +28,15 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "Reactions" ]]
 	local var12 = useSignalBinding(var9.store.getReactionCount)
 	local var13 = useSignalState(var9.store.getIndividualReactionCounts)
 	local animationRatio = var9.animationRatio
-	local var14 = animationRatio:map(function(p2) --[[ line: 71 ]]
+	local var14 = animationRatio:map(function(p2)
 		-- upvalues: getColorStyleWithTransparencyModule (copy), var8 (ref)
 		return getColorStyleWithTransparencyModule(var8.Color.Content.Emphasis, p2)
 	end)
-	local var15 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref)
 		var11(true)
 	end, {})
-	local var16 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref)
 		var11(false)
 	end, {})
@@ -56,7 +56,7 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "Reactions" ]]
 			LayoutOrder = p1.LayoutOrder,
 			onActivated = var15,
 			stateLayer = { affordance = stateLayerAffordance.None },
-			Visible = var12:map(function(p3) --[[ line: 102 ]]
+			Visible = var12:map(function(p3)
 				return p3 ~= nil
 			end)
 		}, {
@@ -67,10 +67,10 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "Reactions" ]]
 			Count = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium text-align-x-left text-align-y-center content-default",
-				Text = var12:map(function(p4) --[[ line: 114 ]]
+				Text = var12:map(function(p4)
 					return `{if p4 == nil then "" elseif p4 >= 1000000 then string.format("%.1fM", p4 / 1000000) elseif p4 >= 1000 then string.format("%.1fK", p4 / 1000) else tostring(p4)} reactions`
 				end),
-				textStyle = animationRatio:map(function(p5) --[[ line: 117 ]]
+				textStyle = animationRatio:map(function(p5)
 					-- upvalues: getColorStyleWithTransparencyModule (copy), var8 (ref)
 					return getColorStyleWithTransparencyModule(var8.Color.Content.Default, p5)
 				end)

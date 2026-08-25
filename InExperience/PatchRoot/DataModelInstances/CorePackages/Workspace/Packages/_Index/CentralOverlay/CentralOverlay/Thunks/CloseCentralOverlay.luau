@@ -1,8 +1,8 @@
 ﻿local setCentralOverlayModule = require(script:FindFirstAncestor("CentralOverlay").Actions.SetCentralOverlay)
 
-return function() --[[ line: 4 ]]
+return function()
 	-- upvalues: setCentralOverlayModule (ref)
-	return function(p0) --[[ line: 5 ]]
+	return function(p0)
 		-- upvalues: setCentralOverlayModule (copy)
 		if p0:getState().CentralOverlay.Configs.DisableBackButtonClose then
 			return

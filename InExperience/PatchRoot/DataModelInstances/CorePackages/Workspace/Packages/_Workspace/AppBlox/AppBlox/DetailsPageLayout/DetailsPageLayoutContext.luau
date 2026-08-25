@@ -21,7 +21,7 @@
 	setFullscreenContent = nil,
 	onExitFullscreenOverlay = nil,
 	setOnExitFullscreenOverlay = nil,
-	setHasHeader = function() --[[ line: 119 ]] end,
-	setHasActions = function() --[[ line: 120 ]] end,
-	setActionBarHeight = function() --[[ line: 124 ]] end
+	setHasHeader = function() end,
+	setHasActions = function() end,
+	setActionBarHeight = function() end
 })

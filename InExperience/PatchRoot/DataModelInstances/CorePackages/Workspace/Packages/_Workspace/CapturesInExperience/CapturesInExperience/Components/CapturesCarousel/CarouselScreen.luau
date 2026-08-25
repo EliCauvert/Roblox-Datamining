@@ -38,7 +38,7 @@ local fFlagUseMediaPlayerInCarousel = require(parent_1.SharedFlags).FFlagUseMedi
 local fStringSocialCaptureTakenIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local uDim2 = UDim2.fromOffset(32, 32)
 
-local function getTitle(p0) --[[ line: 55 ]]
+local function getTitle(p0)
 	-- upvalues: getTimestampFromCaptureModule (ref), localizationService (ref)
 	local var22 = getTimestampFromCaptureModule(p0)
 	
@@ -52,24 +52,24 @@ local function getTitle(p0) --[[ line: 55 ]]
 	return ""
 end
 
-return function(_) --[[ line: 73 ]]
+return function(_)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSelector (ref), constantsModule (ref), useRef (ref), signal (ref), useState (ref), useScreenSize (ref), useEffectOnce (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref), useEffect (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), useCallback (ref), eventNamesModule (ref), carouselClosedModule (ref), deleteCaptureModule (ref), contextActionService (ref), getTitle (ref), reactModule (ref), fFlagUseMediaPlayerInCarousel (ref), imageSetButton (ref), images (ref), uDim2 (ref), capturesCarouselModule (ref), carouselCTAContainerModule (ref), deleteWarningModalModule (ref), permissionModalModule (ref), toastContainerModule (ref)
 	local var24 = useAnalyticsModule()
 	local var25 = useDispatch()
 	local var26 = useStyle()
-	local var27 = useSelector(function(p1) --[[ line: 78 ]]
+	local var27 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].Captures
 	end)
-	local var28 = useSelector(function(p2) --[[ line: 82 ]]
+	local var28 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].Carousel.IsOpen
 	end)
-	local var29 = useSelector(function(p3) --[[ line: 86 ]]
+	local var29 = useSelector(function(p3)
 		-- upvalues: constantsModule (copy)
 		return p3[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	end)
-	local var30 = useSelector(function(p4) --[[ line: 90 ]]
+	local var30 = useSelector(function(p4)
 		-- upvalues: constantsModule (copy)
 		return p4[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
@@ -77,55 +77,55 @@ return function(_) --[[ line: 73 ]]
 	local var32, var33 = useState(false)
 	local var34, var35 = useState(false)
 	local var36 = useScreenSize()
-	useEffectOnce(function() --[[ line: 99 ]]
+	useEffectOnce(function()
 		-- upvalues: IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
 		IXPServiceWrapper:LogUserLayerExposure(fStringSocialCaptureTakenIXPLayer)
 	end, var28)
-	useEffect(function() --[[ line: 103 ]]
+	useEffect(function()
 		-- upvalues: var25 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
 		var25(toastTriggeredModule(capturesToastTypeModule.None))
 	end, { var28 })
-	local var37 = useCallback(function() --[[ line: 107 ]]
+	local var37 = useCallback(function()
 		-- upvalues: var33 (ref), var24 (ref), eventNamesModule (copy), var25 (ref), carouselClosedModule (copy)
 		var33(false)
 		var24.fireEvent(eventNamesModule.CapturesCarouselClosed)
 		var25(carouselClosedModule())
 	end, {})
-	local var38 = useCallback(function() --[[ line: 113 ]]
+	local var38 = useCallback(function()
 		-- upvalues: var33 (ref), var24 (ref), eventNamesModule (copy), var25 (ref), carouselClosedModule (copy)
 		var33(false)
 		var24.fireEvent(eventNamesModule.CapturesCarouselClosedByKeyboard)
 		var25(carouselClosedModule())
 	end, {})
-	local var39 = useCallback(function() --[[ line: 119 ]]
+	local var39 = useCallback(function()
 		-- upvalues: var35 (ref)
 		var35(true)
 	end, {})
-	local var40 = useCallback(function() --[[ line: 123 ]]
+	local var40 = useCallback(function()
 		-- upvalues: var35 (ref)
 		var35(false)
 	end, {})
-	local var41 = useCallback(function() --[[ line: 127 ]]
+	local var41 = useCallback(function()
 		-- upvalues: var33 (ref), var27 (ref), var29 (ref), var25 (ref), deleteCaptureModule (copy), var31 (ref)
 		var33(true)
 		local var43 = var27[var29]
-		var31.current:fire(function() --[[ line: 131 ]]
+		var31.current:fire(function()
 			-- upvalues: var25 (copy), deleteCaptureModule (copy), var43 (ref), var33 (copy)
 			var25(deleteCaptureModule(var43))
 			var33(false)
 		end)
 	end, { var27, var29 })
-	useEffect(function() --[[ line: 139 ]]
+	useEffect(function()
 		-- upvalues: var28 (ref), var30 (ref), contextActionService (copy), var38 (ref)
 		if var28 and not var30 then
-			contextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, p5) --[[ line: 144 ]]
+			contextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, p5)
 				-- upvalues: var38 (copy)
 				if p5 == Enum.UserInputState.End then
 					var38()
 				end
 			end, false, Enum.KeyCode.Escape)
 			
-			return function() --[[ line: 150 ]]
+			return function()
 				-- upvalues: contextActionService (copy)
 				contextActionService:UnbindCoreAction("CapturesCarouselCloseShortcutAction")
 			end

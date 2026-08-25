@@ -8,7 +8,7 @@ local sduiChip = require(parent.SduiSharedContent).SduiChip
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useExperienceDetailsShareModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useExperienceDetailsShare)
 
-return reactModule.memo(function(p0) --[[ line: 22 | named "ExperienceDetailsShareChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), signalsReactModule (ref), game (ref), useExperienceDetailsShareModule (ref), reactModule (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId

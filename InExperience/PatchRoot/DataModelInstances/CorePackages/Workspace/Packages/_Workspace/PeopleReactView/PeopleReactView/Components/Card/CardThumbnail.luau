@@ -22,7 +22,7 @@ local cardMenuModule = require(peopleReactView.Components.Card.CardMenu)
 local getFFlagPeoplePageLazyRenderCards = peopleServiceModule.getService("Flags").GetFFlagPeoplePageLazyRenderCards
 local peoplePageCardMenuUseVisibleProperty = game:DefineFastFlag("PeoplePageCardMenuUseVisibleProperty", false)
 
-return reactModule.memo(function(p0) --[[ line: 43 | named "CardThumbnail" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), getFFlagPeoplePageLazyRenderCards (ref), usePreferredInput (ref), useLastInputMode (ref), useGetPeopleServiceModule (ref), personButtonConfigsModule (ref), signalsReactModule (ref), useIsComponentInputEndedModule (ref), controlState (ref), input (ref), view (ref), stateLayerAffordance (ref), image (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), peoplePageCardMenuUseVisibleProperty (ref), cardMenuModule (ref)
 	local var11 = reactModule.useRef(nil)
 	local var12 = if not getFFlagPeoplePageLazyRenderCards() then usePreferredInput() else nil
@@ -30,7 +30,7 @@ return reactModule.memo(function(p0) --[[ line: 43 | named "CardThumbnail" ]]
 	local var14 = useGetPeopleServiceModule("Constants")
 	local var15 = useGetPeopleServiceModule("PeopleVoiceChatStore")
 	local var16 = personButtonConfigsModule(p0.person.UserId)
-	local var17 = reactModule.useMemo(function() --[[ line: 54 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), var14 (ref)
 		return var16[var14.PERSON_BUTTONS.INSPECT]
 	end, { var16 })
@@ -39,7 +39,7 @@ return reactModule.memo(function(p0) --[[ line: 43 | named "CardThumbnail" ]]
 	local var21, var22 = reactModule.useState(false)
 	local var23, var24 = reactModule.useState(false)
 	local var25 = useIsComponentInputEndedModule(var11)
-	local var26 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: getFFlagPeoplePageLazyRenderCards (copy), p0 (ref), var13 (ref), var12 (ref), input (copy), var19 (ref), var23 (ref), var18 (ref)
 		return var19 or (var23 or (var18 or (if getFFlagPeoplePageLazyRenderCards() then p0.shouldShowMenu elseif var13 ~= "Focus" then var12 ~= input.Pointer else true)))
 	end, {
@@ -51,16 +51,16 @@ return reactModule.memo(function(p0) --[[ line: 43 | named "CardThumbnail" ]]
 		selection = { Selectable = var17.shouldShow() },
 		LayoutOrder = p0.layoutOrder,
 		stateLayer = {
-			affordance = if reactModule.useMemo(function() --[[ line: 81 ]]
+			affordance = if reactModule.useMemo(function()
 				-- upvalues: var21 (ref), var23 (ref), var25 (ref)
 				return var21 or (var23 or var25)
 			end, { var21, var23, var25 }) then stateLayerAffordance.None else stateLayerAffordance.Background
 		},
-		onActivated = if var17.shouldShow() then reactModule.useCallback(function() --[[ line: 85 ]]
+		onActivated = if var17.shouldShow() then reactModule.useCallback(function()
 			-- upvalues: var17 (ref), var14 (ref)
 			var17.onActivated(var14.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 		end, { var17.onActivated }) else nil,
-		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 65 ]]
+		onStateChanged = reactModule.useCallback(function(p1)
 			-- upvalues: var20 (ref), controlState (copy)
 			var20(p1 == controlState.Hover)
 		end, {}),
@@ -79,7 +79,7 @@ return reactModule.memo(function(p0) --[[ line: 43 | named "CardThumbnail" ]]
 				AutomaticSize = Enum.AutomaticSize.XY,
 				selection = { Selectable = false },
 				stateLayer = { affordance = stateLayerAffordance.None },
-				onStateChanged = reactModule.useCallback(function(p2) --[[ line: 69 ]]
+				onStateChanged = reactModule.useCallback(function(p2)
 					-- upvalues: var22 (ref), controlState (copy)
 					var22(p2 == controlState.Hover)
 				end, {}),

@@ -25,7 +25,7 @@ saveAvatarPrompt.validateProps = tModule.strictInterface({
 	signalSaveAvatarPermissionDenied = tModule.callback
 })
 
-function saveAvatarPrompt.init(p0) --[[ line: 47 ]]
+function saveAvatarPrompt.init(p0)
 	-- upvalues: roactModule (ref), itemsListModule (ref), humanoidViewportModule (ref)
 	p0.mounted = false
 	p0:setState({
@@ -38,7 +38,7 @@ function saveAvatarPrompt.init(p0) --[[ line: 47 ]]
 	p0.contentSize = var13
 	p0.updateContentSize = var14
 	
-	function p0.onAlertSizeChanged(p1) --[[ line: 59 ]]
+	function p0.onAlertSizeChanged(p1)
 		-- upvalues: p0 (ref)
 		local absoluteSize = p1.AbsoluteSize
 		
@@ -55,20 +55,20 @@ function saveAvatarPrompt.init(p0) --[[ line: 47 ]]
 		end
 	end
 	
-	function p0.itemListScrollableUpdated(p2, p3) --[[ line: 82 ]]
+	function p0.itemListScrollableUpdated(p2, p3)
 		-- upvalues: p0 (ref)
 		if p3 == p0.contentSize:getValue().Y.Offset then
 			p0:setState({ itemListScrollable = p2 })
 		end
 	end
 	
-	function p0.retryLoadDescription() --[[ line: 90 ]]
+	function p0.retryLoadDescription()
 		-- upvalues: p0 (ref)
 		p0:setState({ getConformedDescriptionFailed = false })
 		p0:getConformedHumanoidDescription()
 	end
 	
-	function p0.renderAlertMiddleContent() --[[ line: 98 ]]
+	function p0.renderAlertMiddleContent()
 		-- upvalues: p0 (ref), roactModule (copy), itemsListModule (copy), humanoidViewportModule (copy)
 		local conformedHumanoidDescription = p0.state.conformedHumanoidDescription
 		local getConformedDescriptionFailed = p0.state.getConformedDescriptionFailed
@@ -111,7 +111,7 @@ function saveAvatarPrompt.init(p0) --[[ line: 47 ]]
 	end
 end
 
-function saveAvatarPrompt.render(p4) --[[ line: 146 ]]
+function saveAvatarPrompt.render(p4)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return roactModule.createElement(interactiveAlert, {
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.SaveAvatarPromptTitle"),
@@ -143,16 +143,16 @@ function saveAvatarPrompt.render(p4) --[[ line: 146 ]]
 	})
 end
 
-function saveAvatarPrompt.getConformedHumanoidDescription(p5, p6) --[[ line: 179 ]]
+function saveAvatarPrompt.getConformedHumanoidDescription(p5, p6)
 	-- upvalues: getConformedHumanoidDescriptionModule (ref)
-	getConformedHumanoidDescriptionModule(p6, true):andThen(function(p7) --[[ line: 181 ]]
+	getConformedHumanoidDescriptionModule(p6, true):andThen(function(p7)
 		-- upvalues: p5 (ref)
 		if p5.mounted then
 			p5:setState({ conformedHumanoidDescription = p7 })
 			
 			return
 		end
-	end, function(_) --[[ line: 189 ]]
+	end, function(_)
 		-- upvalues: p5 (ref)
 		if p5.mounted then
 			p5:setState({ getConformedDescriptionFailed = true })
@@ -162,12 +162,12 @@ function saveAvatarPrompt.getConformedHumanoidDescription(p5, p6) --[[ line: 179
 	end)
 end
 
-function saveAvatarPrompt.didMount(p8) --[[ line: 200 ]]
+function saveAvatarPrompt.didMount(p8)
 	p8.mounted = true
 	p8:getConformedHumanoidDescription(p8.props.humanoidDescription)
 end
 
-function saveAvatarPrompt.didUpdate(p9, p10, _) --[[ line: 206 ]]
+function saveAvatarPrompt.didUpdate(p9, p10, _)
 	-- upvalues: roactModule (ref)
 	if p9.props.humanoidDescription ~= p10.humanoidDescription then
 		p9:setState({
@@ -178,25 +178,25 @@ function saveAvatarPrompt.didUpdate(p9, p10, _) --[[ line: 206 ]]
 	end
 end
 
-function saveAvatarPrompt.willUnmount(p11) --[[ line: 217 ]]
+function saveAvatarPrompt.willUnmount(p11)
 	p11.mounted = false
 end
 
-return roactRoduxModule.connect(function(p12) --[[ line: 221 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p12)
 	return {
 		gameName = p12.gameName,
 		screenSize = p12.screenSize,
 		humanoidDescription = p12.promptInfo.humanoidDescription,
 		rigType = p12.promptInfo.rigType
 	}
-end, function(p13) --[[ line: 230 | named "mapDispatchToProps" ]]
+end, function(p13)
 	-- upvalues: signalSaveAvatarPermissionDeniedModule (ref), performSaveAvatarModule (ref)
 	return {
-		signalSaveAvatarPermissionDenied = function() --[[ line: 232 ]]
+		signalSaveAvatarPermissionDenied = function()
 			-- upvalues: p13 (ref), signalSaveAvatarPermissionDeniedModule (copy)
 			return p13(signalSaveAvatarPermissionDeniedModule)
 		end,
-		performSaveAvatar = function() --[[ line: 236 ]]
+		performSaveAvatar = function()
 			-- upvalues: p13 (ref), performSaveAvatarModule (copy)
 			return p13(performSaveAvatarModule)
 		end

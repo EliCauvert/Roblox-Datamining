@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(...) --[[ line: 10 | named "joinArrays" ]]
+return function(...)
 	local t = {}
 	
 	for i, v in { ... } do

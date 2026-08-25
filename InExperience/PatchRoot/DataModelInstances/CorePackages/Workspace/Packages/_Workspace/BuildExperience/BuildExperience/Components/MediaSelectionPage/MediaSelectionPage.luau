@@ -16,7 +16,7 @@ local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuil
 local mediaSelectorModule = require(script.Parent.MediaSelector)
 local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 31 | named "IconThumbnailsSheet" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), mediaSelectorModule (ref)
 	local var7 = reactModule.useRef(nil)
 	
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 31 | named "IconThumbnailsSheet" ]]
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = if fFlagBuildDesktopReadinessModule then iconName.ChevronLargeLeft else iconName.ArrowLargeLeft,
-				onActivated = reactModule.useCallback(function() --[[ line: 40 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var7 (ref), p0 (ref)
 					if var7.current then
 						var7.current()

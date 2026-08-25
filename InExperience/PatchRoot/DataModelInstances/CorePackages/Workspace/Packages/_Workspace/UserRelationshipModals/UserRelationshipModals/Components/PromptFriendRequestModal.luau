@@ -11,7 +11,7 @@ local layoutMode = userTileModule.LayoutMode
 local promptFriendRequestModalRevampFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename and game:DefineFastFlag("PromptFriendRequestModalRevampFriendsRename", false)
 local promptFriendRequestModalInputDelayMs = game:DefineFastInt("PromptFriendRequestModalInputDelayMs", 1000)
 
-return function(p0) --[[ line: 34 | named "PromptFriendRequestModal" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), promptFriendRequestModalRevampFriendsRename (ref), reactModule (ref), dialog (ref), dialogSize (ref), foundationModule (ref), userTile (ref), layoutMode (ref), buttonVariant (ref), promptFriendRequestModalInputDelayMs (ref)
 	local var5 = useLocalization({
 		sendText = "InGame.FriendPlayerPrompt.Action.Send",

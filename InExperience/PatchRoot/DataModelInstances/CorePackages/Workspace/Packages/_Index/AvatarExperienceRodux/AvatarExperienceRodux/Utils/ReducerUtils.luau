@@ -7,7 +7,7 @@ local _ = require(script.Parent.Parent.Types.OutfitTryOn)
 local LOOK_TYPE = constants.LOOK_TYPE
 
 return {
-	filterTryOns = function(p0, p1) --[[ line: 42 ]]
+	filterTryOns = function(p0, p1)
 		-- upvalues: assetTypeToAssetCategory (ref)
 		local t = {}
 		local var1 = nil
@@ -23,7 +23,7 @@ return {
 		end
 		return t, var1
 	end,
-	convertDefaultBodyColorRanges = function(p2) --[[ line: 62 ]]
+	convertDefaultBodyColorRanges = function(p2)
 		local t = {}
 		
 		for i, v in p2 do
@@ -31,11 +31,11 @@ return {
 		end
 		return t
 	end,
-	generateTryOnItemIdKey = function(p3, p4, p5) --[[ line: 76 ]]
+	generateTryOnItemIdKey = function(p3, p4, p5)
 		-- upvalues: LOOK_TYPE (ref), fFlagAXCatalogMakeupSupport (ref)
 		return if p5 == nil or p5 ~= LOOK_TYPE.Avatar and (not fFlagAXCatalogMakeupSupport or p5 ~= LOOK_TYPE.Makeup) then p3 else tostring(p3) .. "-" .. p4
 	end,
-	generateRecommendedItemsKey = function(p6, p7) --[[ line: 89 ]]
+	generateRecommendedItemsKey = function(p6, p7)
 		return (p7 or "") .. "-" .. (p6 or "")
 	end
 }

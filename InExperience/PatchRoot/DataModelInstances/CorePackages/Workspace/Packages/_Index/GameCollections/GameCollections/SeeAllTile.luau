@@ -8,7 +8,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useDesignTokens = require(parent.Style).useDesignTokens
 local pushRight = images["icons/navigation/pushRight"]
 
-function SeeAllTile(p0) --[[ line: 27 ]]
+function SeeAllTile(p0)
 	-- upvalues: useDesignTokens (ref), useLocalization (ref), useCursor (ref), pushRight (ref), reactModule (ref), imageSetLabel (ref)
 	local size = p0.size
 	local layoutOrder = p0.layoutOrder

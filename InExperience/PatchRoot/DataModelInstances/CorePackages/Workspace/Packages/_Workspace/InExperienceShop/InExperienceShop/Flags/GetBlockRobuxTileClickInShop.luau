@@ -1,6 +1,6 @@
 ﻿local fFlagBlockRobuxTileClickInShopModule = require(script.Parent.FFlagBlockRobuxTileClickInShop)
 
-return function() --[[ line: 3 ]]
+return function()
 	-- upvalues: fFlagBlockRobuxTileClickInShopModule (ref)
 	return fFlagBlockRobuxTileClickInShopModule
 end

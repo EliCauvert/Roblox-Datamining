@@ -23,7 +23,7 @@ local appPage = robloxAppEnumsModule.AppPage
 local useAppPolicy = universalAppPolicyModule.useAppPolicy
 local urlBuilder = urlBuilderModule.UrlBuilder
 
-return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModal" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), closeCentralOverlay (ref), useAppPolicy (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateDown (ref), dialog (ref), luaAppTextFeedbackFormModalStandardInput (ref), buttonVariant (ref)
 	local var12 = useDispatch()
 	local var13 = useTokens()
@@ -38,7 +38,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModa
 	})
 	local var15 = reactModule.useRef("")
 	local var16, var17 = reactModule.useState(false)
-	local var18 = reactModule.useCallback(function(p1) --[[ line: 63 ]]
+	local var18 = reactModule.useCallback(function(p1)
 		-- upvalues: var12 (ref), closeCentralOverlay (copy), p0 (ref)
 		var12(closeCentralOverlay())
 		
@@ -49,7 +49,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModa
 	
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
-		onClose = reactModule.useCallback(function() --[[ line: 121 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: var18 (ref)
 			var18(false)
 		end, { var18 })
@@ -82,7 +82,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModa
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = reactModule.useCallback(function(p2) --[[ line: 71 ]]
+					[reactModule.Change.Text] = reactModule.useCallback(function(p2)
 						-- upvalues: var15 (ref), var17 (ref)
 						if not p2 then return end
 						if p2.Text:len() > 500 then
@@ -114,7 +114,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModa
 			actions = {
 				{
 					isDisabled = not var16,
-					onActivated = reactModule.useCallback(function() --[[ line: 84 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var16 (ref), var18 (ref), p0 (ref), var15 (ref)
 						if var16 then
 							var18(true)
@@ -128,7 +128,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModa
 				}
 			}
 		}),
-		DisclaimerText = if p0.showTermsOfUseDisclaimer and useAppPolicy(function(p3) --[[ line: 93 ]]
+		DisclaimerText = if p0.showTermsOfUseDisclaimer and useAppPolicy(function(p3)
 			return p3.getWebViewSupport()
 		end) then reactModule.createElement("TextButton", {
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -145,7 +145,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "TextFeedbackFormModa
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			[reactModule.Event.Activated] = reactModule.useCallback(function() --[[ line: 98 ]]
+			[reactModule.Event.Activated] = reactModule.useCallback(function()
 				-- upvalues: appPage (copy), urlBuilder (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var12 (ref), navigateDown (copy), var18 (ref)
 				local t = {
 					name = appPage.GenericWebPage,

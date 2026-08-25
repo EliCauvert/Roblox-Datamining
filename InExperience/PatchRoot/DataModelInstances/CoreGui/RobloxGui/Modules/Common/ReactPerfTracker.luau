@@ -1,6 +1,6 @@
 ﻿local reactPerfTrackerKibana = game:DefineFastInt("ReactPerfTrackerKibana", 0)
 
-function applicationId() --[[ line: 47 ]]
+function applicationId()
 	local appStorageService = game:GetService("AppStorageService")
 	
 	if not appStorageService then
@@ -42,7 +42,7 @@ if var1 > 0 then
 	local t_1 = {}
 	t_1.__index = t_1
 	
-	function t_1.new() --[[ line: 117 ]]
+	function t_1.new()
 		-- upvalues: loggingProtocolModule (ref), t_1 (ref)
 		return setmetatable({
 			totalTime = 0,
@@ -57,9 +57,9 @@ if var1 > 0 then
 		}, t_1)
 	end
 	
-	function t_1:start() --[[ line: 132 ]]
+	function t_1:start()
 		-- upvalues: t (ref), reactRobloxModule (ref)
-		self.eventSender = coroutine.create(function() --[[ line: 134 ]]
+		self.eventSender = coroutine.create(function()
 			-- upvalues: self (ref), t (copy)
 			while true do
 				local removed = table.remove(self.outgoingEvents, 1)
@@ -71,7 +71,7 @@ if var1 > 0 then
 				end
 			end
 		end)
-		reactRobloxModule.robloxReactProfiling.startTimerSampling(function(p0) --[[ line: 147 ]]
+		reactRobloxModule.robloxReactProfiling.startTimerSampling(function(p0)
 			-- upvalues: self (ref)
 			local id = p0.id
 			local var14 = (p0.endTime - p0.startTime) * 1000
@@ -101,7 +101,7 @@ if var1 > 0 then
 		end)
 	end
 	
-	function t_1:genEvents() --[[ line: 180 ]]
+	function t_1:genEvents()
 		-- upvalues: rbxAnalyticsService (ref)
 		local var15 = 0
 		
@@ -127,7 +127,7 @@ if var1 > 0 then
 		})
 	end
 	
-	function t_1:sendEvents() --[[ line: 206 ]]
+	function t_1:sendEvents()
 		if self.sampleCount == 0 then
 			return
 		end
@@ -136,7 +136,7 @@ if var1 > 0 then
 		coroutine.resume(self.eventSender)
 	end
 	
-	function t_1:resetCounts() --[[ line: 218 ]]
+	function t_1:resetCounts()
 		self.componentTotalTime = {}
 		self.componentMaxTime = {}
 		self.componentCount = {}

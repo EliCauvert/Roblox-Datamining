@@ -9,7 +9,7 @@ local uDim2_3 = UDim2.new(0.6, 0, 1, 0)
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 31 ]]
+function t.new()
 	-- upvalues: t (ref), statsUtilsModule (ref)
 	local pSViewer = {}
 	setmetatable(pSViewer, t)
@@ -28,7 +28,7 @@ function t.new() --[[ line: 31 ]]
 	return pSViewer
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged() --[[ line: 51 ]]
+function t:OnPerformanceStatsShouldBeVisibleChanged()
 	if self._graph then
 		self._graph:OnPerformanceStatsShouldBeVisibleChanged()
 	end
@@ -37,24 +37,24 @@ function t:OnPerformanceStatsShouldBeVisibleChanged() --[[ line: 51 ]]
 	end
 end
 
-function t:GetIsVisible() --[[ line: 60 ]]
+function t:GetIsVisible()
 	return self._frameImageLabel.Visible
 end
 
-function t:GetStatType() --[[ line: 64 ]]
+function t:GetStatType()
 	return self._statType
 end
 
-function t:SetSizeAndPosition(p0, p1) --[[ line: 68 ]]
+function t:SetSizeAndPosition(p0, p1)
 	self._frameImageLabel.Size = p0
 	self._frameImageLabel.Position = p1
 end
 
-function t:SetParent(p2) --[[ line: 73 ]]
+function t:SetParent(p2)
 	self._frameImageLabel.Parent = p2
 end
 
-function t:SetVisible(p3) --[[ line: 77 ]]
+function t:SetVisible(p3)
 	self._frameImageLabel.Visible = p3
 	
 	if self._graph then
@@ -65,7 +65,7 @@ function t:SetVisible(p3) --[[ line: 77 ]]
 	end
 end
 
-function t:SetStatType(p4) --[[ line: 89 ]]
+function t:SetStatType(p4)
 	-- upvalues: statsTextPanelModule (ref), uDim2_1 (ref), uDim2 (ref), statsAnnotatedGraphModule (ref), uDim2_3 (ref), uDim2_2 (ref), statsUtilsModule (ref)
 	self._statType = p4
 	self._frameImageLabel:ClearAllChildren()
@@ -85,7 +85,7 @@ function t:SetStatType(p4) --[[ line: 89 ]]
 	self:_applyStatsAggregator()
 end
 
-function t:_applyStatsAggregator() --[[ line: 118 ]]
+function t:_applyStatsAggregator()
 	if self._aggregator == nil then return end
 	if self._textPanel then
 		self._textPanel:SetStatsAggregator(self._aggregator)
@@ -95,7 +95,7 @@ function t:_applyStatsAggregator() --[[ line: 118 ]]
 	end
 end
 
-function t:SetStatsAggregator(p5) --[[ line: 132 ]]
+function t:SetStatsAggregator(p5)
 	self._aggregator = p5
 	self:_applyStatsAggregator()
 end

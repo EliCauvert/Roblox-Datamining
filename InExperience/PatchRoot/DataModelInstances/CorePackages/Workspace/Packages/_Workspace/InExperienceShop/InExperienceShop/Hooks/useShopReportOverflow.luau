@@ -5,7 +5,7 @@ local _ = require(parent.GenericAbuseReporting.AbuseVector)
 local shopOverflowConstantsModule = require(inExperienceShop.Components.Shared.shopOverflowConstants)
 
 return {
-	useShopReportOverflow = function(p0) --[[ line: 31 ]]
+	useShopReportOverflow = function(p0)
 		-- upvalues: reactModule (ref), shopOverflowConstantsModule (ref)
 		local var3, var4 = reactModule.useState(false)
 		local var5, var6 = reactModule.useState(nil)
@@ -14,17 +14,17 @@ return {
 			isOverflowMenuOpen = var3,
 			reportSession = var5,
 			isReportingEnabled = p0.isReportingEnabled,
-			onOverflowActivated = reactModule.useCallback(function() --[[ line: 36 ]]
+			onOverflowActivated = reactModule.useCallback(function()
 				-- upvalues: var4 (ref)
-				var4(function(p1) --[[ line: 37 ]]
+				var4(function(p1)
 					return not p1
 				end)
 			end, {}),
-			onOverflowMenuClosed = reactModule.useCallback(function() --[[ line: 42 ]]
+			onOverflowMenuClosed = reactModule.useCallback(function()
 				-- upvalues: var4 (ref)
 				var4(false)
 			end, {}),
-			onMenuItemActivated = reactModule.useCallback(function(p2) --[[ line: 46 ]]
+			onMenuItemActivated = reactModule.useCallback(function(p2)
 				-- upvalues: var4 (ref), shopOverflowConstantsModule (copy), p0 (ref), var6 (ref)
 				var4(false)
 				
@@ -35,7 +35,7 @@ return {
 					return
 				end
 			end, { p0.isReportingEnabled, p0.buildReportSession }),
-			onReportClose = reactModule.useCallback(function() --[[ line: 60 ]]
+			onReportClose = reactModule.useCallback(function()
 				-- upvalues: var6 (ref)
 				var6(nil)
 			end, {})

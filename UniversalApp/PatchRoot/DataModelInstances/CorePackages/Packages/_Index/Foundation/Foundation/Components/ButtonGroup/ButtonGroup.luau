@@ -17,7 +17,7 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | named "ButtonGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), devAssertModule (ref), orientationModule (ref), fillBehaviorModule (ref), reactModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var11 = withDefaultsModule(p0, t)
 	devAssertModule(#var11.buttons <= var11.maxButtonCount, `ButtonGroup: a maximum of {var11.maxButtonCount} buttons is supported, got {#var11.buttons}.`)

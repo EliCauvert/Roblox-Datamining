@@ -19,7 +19,7 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local permissionPromptFinishedModule = require(parent.Thunks.PermissionPromptFinished)
 local fFlagCapturePermissionsPromptFreeMouseModule = require(parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), usePinInputStateWhileOpenModule (ref), fFlagCapturePermissionsPromptFreeMouseModule (ref), reactModule (ref), eventNamesModule (ref), permissionPromptFinishedModule (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var9 = useAnalyticsModule()
 	local var10 = useDispatch()
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 34 ]]
 		dontAllow = "Feature.Captures.Action.DontAllow"
 	})
 	usePinInputStateWhileOpenModule(fFlagCapturePermissionsPromptFreeMouseModule)
-	reactModule.useEffect(function() --[[ line: 50 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), eventNamesModule (copy)
 		var9.fireEvent(eventNamesModule.CapturePermissionsPromptViewed)
 	end, {})
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 34 ]]
 				AcceptButton = reactModule.createElement(button, {
 					text = var11.allow,
 					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function() --[[ line: 54 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var9 (ref), eventNamesModule (copy), var10 (ref), permissionPromptFinishedModule (copy), p0 (ref)
 						var9.fireEvent(eventNamesModule.CapturePermissionsPromptAccepted)
 						var10(permissionPromptFinishedModule(p0.promptId, true))
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 34 ]]
 				RejectButton = reactModule.createElement(button, {
 					text = var11.dontAllow,
 					variant = buttonVariant.Standard,
-					onActivated = reactModule.useCallback(function() --[[ line: 60 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var9 (ref), eventNamesModule (copy), var10 (ref), permissionPromptFinishedModule (copy), p0 (ref)
 						var9.fireEvent(eventNamesModule.CapturePermissionsPromptRejected)
 						var10(permissionPromptFinishedModule(p0.promptId, false))

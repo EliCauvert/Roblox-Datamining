@@ -5,14 +5,14 @@ local ensureWhatsNewStoreInitializedModule = require(whatsNew.store.ensureWhatsN
 local _ = require(whatsNew.registry.ScopeActions)
 local whatsNewTourtipModule = require(script.Parent.WhatsNewTourtip)
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "WhatsNewScreenHost" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getWhatsNewStoreModule (ref), reactModule (ref), ensureWhatsNewStoreInitializedModule (ref), whatsNewTourtipModule (ref)
 	local screenScopeId = p0.screenScopeId
 	local scopeActions = p0.scopeActions
 	local var5 = p0.isEnabled == true
 	local onReady = p0.onReady
 	local var6 = getWhatsNewStoreModule()
-	reactModule.useEffect(function() --[[ line: 33 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var6 (ref), ensureWhatsNewStoreInitializedModule (copy), scopeActions (ref), onReady (ref), screenScopeId (ref)
 		if not var5 then
 			var6.stopTour()
@@ -26,7 +26,7 @@ return reactModule.memo(function(p0) --[[ line: 26 | named "WhatsNewScreenHost" 
 		end
 		var6.startEligibleTour(screenScopeId)
 		
-		return function() --[[ line: 49 ]]
+		return function()
 			-- upvalues: var6 (copy)
 			var6.stopTour()
 		end

@@ -21,7 +21,7 @@ local list = {
 	"RightLipCornerDown", "LeftLowerLipDepressor", "RightLowerLipDepressor"
 }
 
-local function downloadFailure(p0, p1, p2) --[[ line: 52 ]]
+local function downloadFailure(p0, p1, p2)
 	-- upvalues: analyticsModule (ref)
 	local formattedText = string.format("Failed to load model for dynamic head '%s'. Make sure model exists and try again.", p1)
 	
@@ -33,10 +33,10 @@ local function downloadFailure(p0, p1, p2) --[[ line: 52 ]]
 	return false, { formattedText }
 end
 
-local function validateFacialBounds(p3, p4) --[[ line: 79 ]]
+local function validateFacialBounds(p3, p4)
 	-- upvalues: pcallDeferredModule (ref), getExpectedPartSizeModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), var6 (ref)
 	local isServer = p4.isServer
-	local var18, var19 = pcallDeferredModule(function() --[[ line: 85 ]]
+	local var18, var19 = pcallDeferredModule(function()
 		-- upvalues: getExpectedPartSizeModule (copy), p3 (ref), p4 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var6 (copy)
 		local var21 = getExpectedPartSizeModule(p3, p4)
 		local var22, var23 = getEditableMeshFromContextModule(p3, "MeshId", p4)
@@ -64,10 +64,10 @@ local function validateFacialBounds(p3, p4) --[[ line: 79 ]]
 	end
 end
 
-local function validateFacialExpressiveness(p5, p6) --[[ line: 119 ]]
+local function validateFacialExpressiveness(p5, p6)
 	-- upvalues: pcallDeferredModule (ref), getExpectedPartSizeModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), var8 (ref), var7 (ref)
 	local isServer = p6.isServer
-	local var24, var25 = pcallDeferredModule(function() --[[ line: 125 ]]
+	local var24, var25 = pcallDeferredModule(function()
 		-- upvalues: getExpectedPartSizeModule (copy), p5 (ref), p6 (ref), getEditableMeshFromContextModule (copy), UGCValidationService (copy), var8 (copy)
 		local var27 = getExpectedPartSizeModule(p5, p6)
 		local var28, var29 = getEditableMeshFromContextModule(p5, "MeshId", p6)
@@ -95,13 +95,13 @@ local function validateFacialExpressiveness(p5, p6) --[[ line: 119 ]]
 	end
 end
 
-return function(p7, p8) --[[ line: 161 | named "validateDynamicHeadData" ]]
+return function(p7, p8)
 	-- upvalues: getFFlagUGCValidateMigrateDynamicHeadDataModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), downloadFailure (ref), analyticsModule (ref), failureReasonsAccumulatorModule (ref), list (ref), validateFacialExpressiveness (ref), getEngineFeatureEngineUGCValidateMinMaxMeshSizeAcrossAllFacsModule (ref), validateFacialBounds (ref), getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule (ref), validateFacsJointBoundsModule (ref)
 	local currentTime = tick()
 	local isServer = p8.isServer
 	
 	if not getFFlagUGCValidateMigrateDynamicHeadDataModule() then
-		local ok, status = pcall(function() --[[ line: 170 ]]
+		local ok, status = pcall(function()
 			-- upvalues: getEditableMeshFromContextModule (copy), p7 (ref), p8 (ref), UGCValidationService (copy)
 			local var35, var36 = getEditableMeshFromContextModule(p7, "MeshId", p8)
 			
@@ -124,7 +124,7 @@ return function(p7, p8) --[[ line: 161 | named "validateDynamicHeadData" ]]
 	local var31 = failureReasonsAccumulatorModule.new()
 	
 	if not getFFlagUGCValidateMigrateDynamicHeadDataModule() then
-		local ok, status, var32 = pcall(function() --[[ line: 203 ]]
+		local ok, status, var32 = pcall(function()
 			-- upvalues: getEditableMeshFromContextModule (copy), p7 (ref), p8 (ref), UGCValidationService (copy), list (copy)
 			local var37, var38 = getEditableMeshFromContextModule(p7, "MeshId", p8)
 			

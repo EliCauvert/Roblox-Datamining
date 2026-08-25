@@ -7,7 +7,7 @@ local t = {
 	lastUpdated = { 25, 8, 29 }
 }
 
-return function(p0, p1, p2) --[[ line: 18 ]]
+return function(p0, p1, p2)
 	-- upvalues: default (ref), t (ref)
 	if p2 == nil then
 		p2 = default

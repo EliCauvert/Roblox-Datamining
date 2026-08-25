@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 2 | named "escapeRichFormatting" ]]
+﻿return function(p0)
 	return p0:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",

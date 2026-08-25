@@ -14,9 +14,9 @@ local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTele
 local sendUnifiedPurchaseEventLogModule = require(parent.Utils.sendUnifiedPurchaseEventLog)
 local unifiedPurchaseEventNameEnumModule = require(parent.Enums.UnifiedPurchaseEventNameEnum)
 
-return function(p0) --[[ line: 31 | named "completePurchase" ]]
+return function(p0)
 	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
-	return thunkModule.new(script.Name, {}, function(p1, _) --[[ line: 32 ]]
+	return thunkModule.new(script.Name, {}, function(p1, _)
 		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p0 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
 		local var11 = workspaceService.DistributedGameTime - p1:getState().purchasingStartTime
 		p1:dispatch(purchaseCompleteRecievedModule())
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 31 | named "completePurchase" ]]
 			elseif var11 >= 1 then
 				return p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 			end
-			delay(1 - var11, function() --[[ line: 93 ]]
+			delay(1 - var11, function()
 				-- upvalues: p1 (ref), setPromptStateModule (copy), promptStateModule (copy)
 				return p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 			end)

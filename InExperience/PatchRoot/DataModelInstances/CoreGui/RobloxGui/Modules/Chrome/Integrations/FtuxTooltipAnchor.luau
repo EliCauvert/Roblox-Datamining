@@ -5,7 +5,7 @@ local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
 local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 9 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withTooltip (ref), coreGuiService (ref), tooltipOrientation (ref), reactModule (ref)
 	return withTooltip({
 		ref = p1,
@@ -16,7 +16,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 9 ]]
 		active = p0.shouldShowTooltip,
 		guiTarget = coreGuiService,
 		preferredOrientation = tooltipOrientation.Bottom
-	}, function(p2) --[[ line: 20 ]]
+	}, function(p2)
 		-- upvalues: reactModule (copy)
 		return reactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),

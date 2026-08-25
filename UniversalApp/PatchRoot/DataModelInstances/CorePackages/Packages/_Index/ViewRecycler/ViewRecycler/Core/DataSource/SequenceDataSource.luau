@@ -4,22 +4,22 @@ local _ = require(viewRecycler.Core.Types)
 local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local mutationControllerModule = require(script.Parent.MutationController)
 
-return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
+return function(p0, p1)
 	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), dataSourceChangeTypeModule (ref)
 	local cloned = table.clone(p0 or {})
 	local var5 = itemKeyRegistryModule.create(p1, "DataSource.sequence")
 	local var6 = var5.rebuild(cloned)
-	local var7 = mutationControllerModule(function() --[[ line: 37 ]]
+	local var7 = mutationControllerModule(function()
 		-- upvalues: cloned (write)
 		return #cloned
-	end, function() --[[ line: 39 ]]
+	end, function()
 		-- upvalues: cloned (write), var6 (write), var5 (ref)
 		return {
 			values = table.clone(cloned),
 			keys = table.clone(var6),
 			keyRegistry = var5.snapshot()
 		}
-	end, function(p2) --[[ line: 41 ]]
+	end, function(p2)
 		-- upvalues: cloned (write), var6 (write), var5 (ref)
 		cloned = p2.values
 		var6 = p2.keys
@@ -27,19 +27,19 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 	end)
 	local _ = nil
 	local t = {
-		getItemCount = function() --[[ line: 49 ]]
+		getItemCount = function()
 			-- upvalues: cloned (write)
 			return #cloned
 		end,
-		getItem = function(p3) --[[ line: 52 ]]
+		getItem = function(p3)
 			-- upvalues: cloned (write)
 			return cloned[p3]
 		end,
-		getItemKey = function(p4) --[[ line: 55 ]]
+		getItemKey = function(p4)
 			-- upvalues: var6 (write)
 			return var6[p4]
 		end,
-		getItems = function(p5, p6) --[[ line: 58 ]]
+		getItems = function(p5, p6)
 			-- upvalues: cloned (write)
 			return table.move(cloned, p5, p6, 1, {})
 		end,
@@ -47,17 +47,17 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		transaction = var7.transaction
 	}
 	
-	function t.append(p7) --[[ line: 65 ]]
+	function t.append(p7)
 		-- upvalues: t (write), cloned (write)
 		t.insert(#cloned + 1, p7)
 	end
 	
-	function t.prepend(p8) --[[ line: 69 ]]
+	function t.prepend(p8)
 		-- upvalues: t (write)
 		t.insert(1, p8)
 	end
 	
-	function t.insert(p9, p10) --[[ line: 73 ]]
+	function t.insert(p9, p10)
 		-- upvalues: cloned (write), var5 (ref), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		assert(p9 >= 1 and p9 <= clonedCount + 1, "DataSource.sequence: insert index out of range")
@@ -71,7 +71,7 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		}, clonedCount)
 	end
 	
-	function t.remove(p11, p12) --[[ line: 82 ]]
+	function t.remove(p11, p12)
 		-- upvalues: cloned (write), var6 (write), var5 (ref), var7 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		p12 = p12 or 1
@@ -91,7 +91,7 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		}, clonedCount)
 	end
 	
-	function t.setItem(value, p13) --[[ line: 99 ]]
+	function t.setItem(value, p13)
 		-- upvalues: cloned (write), var6 (write), var5 (ref), var7 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		assert(value >= 1 and value <= clonedCount, "DataSource.sequence: setItem index out of range")
@@ -104,7 +104,7 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		}, clonedCount)
 	end
 	
-	function t.moveItem(p14, p15) --[[ line: 108 ]]
+	function t.moveItem(p14, p15)
 		-- upvalues: cloned (write), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		assert(p14 >= 1 and p14 <= clonedCount, "DataSource.sequence: moveItem source index out of range")
@@ -124,7 +124,7 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		}, clonedCount)
 	end
 	
-	function t.reorder(p16) --[[ line: 133 ]]
+	function t.reorder(p16)
 		-- upvalues: cloned (write), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		assert(#p16 == clonedCount, "DataSource.sequence: reorder must contain every key")
@@ -151,10 +151,10 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		}, clonedCount)
 	end
 	
-	function t.replaceItems(p17, p18, p19) --[[ line: 157 ]]
+	function t.replaceItems(p17, p18, p19)
 		-- upvalues: cloned (write), var7 (ref), t (write), var5 (ref), var6 (write), dataSourceChangeTypeModule (copy)
 		assert(p17 >= 1 and (p17 <= p18 and p18 <= #cloned), "DataSource.sequence: replaceItems range out of range")
-		var7.transaction(function() --[[ line: 162 ]]
+		var7.transaction(function()
 			-- upvalues: t (copy), p17 (ref), p18 (ref), p19 (ref), cloned (copy), var5 (copy), var6 (copy), var7 (copy), dataSourceChangeTypeModule (copy)
 			t.remove(p17, p18 - p17 + 1)
 			
@@ -191,7 +191,7 @@ return function(p0, p1) --[[ line: 33 | named "createSequenceDataSource" ]]
 		end)
 	end
 	
-	function t.reset(value) --[[ line: 199 ]]
+	function t.reset(value)
 		-- upvalues: cloned (write), var5 (ref), var6 (write), var7 (ref), dataSourceChangeTypeModule (copy)
 		local clonedCount = #cloned
 		local cloned_1 = table.clone(value)

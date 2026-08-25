@@ -17,7 +17,7 @@ local squadPromptType = require(parent.SquadsCore.Enums).SquadPromptType
 local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
 local updateScheduledSquad = require(parent.SquadsCore.NetworkRequests).updateScheduledSquad
 
-return function(p0) --[[ line: 36 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), squadExternalContractContext (ref), useDispatch (ref), useLocalUserId (ref), useStore (ref), useLocalization (ref), squadPromptType (ref), updateScheduledSquad (ref), eventNamesModule (ref), squadPromptResponse (ref), createScheduledSquad (ref), sheet (ref), text (ref), foundationModule (ref), view (ref)
 	local var32
 	local var4 = reactModule.useContext(squadExternalContractContext)
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 36 ]]
 	local var12, var13 = reactModule.useState(if p0.scheduledSquad then p0.scheduledSquad.title else "")
 	local var14, var15 = reactModule.useState(false)
 	local _ = if var14 then var8.fieldIsRequiredText else ""
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), p0 (ref), var11 (ref), var15 (ref)
 		var9(if p0.scheduledSquad and p0.scheduledSquad.startTime then p0.scheduledSquad.startTime else nil)
 		var11(false)
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 36 ]]
 	local var16 = p0.scheduledSquad and tostring(p0.scheduledSquad.initiatorId) == tostring(var6)
 	local currentDateTime = DateTime.now()
 	local var18 = currentDateTime:ToLocalTime()
-	local var19 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var4 (ref), var7 (ref), squadPromptType (copy)
 		p0.onClose()
 		var4.setSquadPrompt(var7, {
@@ -61,26 +61,26 @@ return function(p0) --[[ line: 36 ]]
 			promptType = squadPromptType.Error
 		})
 	end, { p0.onClose, var4.setSquadPrompt, var7 })
-	local _ = reactModule.useCallback(function(p1) --[[ line: 86 ]]
+	local _ = reactModule.useCallback(function(p1)
 		-- upvalues: var14 (ref), var15 (ref), var13 (ref)
 		if var14 then
 			var15(false)
 		end
 		var13(p1)
 	end, { var14, var15, var13 })
-	local var20 = reactModule.useCallback(function(p2, p3) --[[ line: 94 ]]
+	local var20 = reactModule.useCallback(function(p2, p3)
 		return if p2 == 2 and (p3 % 4 == 0 and p3 % 100 ~= 0 or p3 % 400 == 0) then 29 else ({
 			31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 		})[p2]
 	end, {})
-	local var21 = reactModule.useCallback(function(p4, _) --[[ line: 107 ]]
+	local var21 = reactModule.useCallback(function(p4, _)
 		-- upvalues: var10 (ref), var11 (ref), var9 (ref)
 		if p4 and var10 then
 			var11(false)
 		end
 		var9(if p4 then p4:ToIsoDate() else nil)
 	end, { var11, var9, var10 })
-	local var22 = reactModule.useCallback(function() --[[ line: 116 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: useState (ref), var11 (ref), var16 (ref), p0 (ref), updateScheduledSquad (copy), var12 (ref), var19 (ref), var4 (ref), eventNamesModule (copy), squadPromptType (copy), squadPromptResponse (copy), var5 (ref), createScheduledSquad (copy)
 		local var33 = false
 		
@@ -128,7 +128,7 @@ return function(p0) --[[ line: 36 ]]
 		useState, var11, var15, var14, var12, var4.setSquadPrompt,
 		var4.fireSquadAnalytics, var4.squadLocation
 	})
-	local var23 = reactModule.useCallback(function() --[[ line: 187 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref), var20 (ref)
 		local day = var18.Day
 		local var35 = if var18.Month + 6 > 12 then (var18.Month + 6) % 12 else var18.Month + 6
@@ -137,7 +137,7 @@ return function(p0) --[[ line: 36 ]]
 		
 		return if var37 < day then DateTime.fromLocalTime(var36, var35, var37) else DateTime.fromLocalTime(var36, var35, day)
 	end, { var18, var20 })
-	local var24 = reactModule.useCallback(function() --[[ line: 204 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var4 (ref), eventNamesModule (copy), squadPromptType (copy), squadPromptResponse (copy)
 		p0.onClose()
 		var4.fireSquadAnalytics(eventNamesModule.SquadPromptResponded, {

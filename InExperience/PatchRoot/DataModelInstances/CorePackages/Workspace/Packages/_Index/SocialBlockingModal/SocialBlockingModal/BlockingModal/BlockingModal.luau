@@ -33,7 +33,7 @@ local fFlagDisableBlockAndReport = require(parent.SharedFlags).FFlagDisableBlock
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local socialBlockingModalFocusNavSupport = game:DefineFastFlag("SocialBlockingModalFocusNavSupport", false)
 
-return function() --[[ line: 55 | named "BlockingModal" ]]
+return function()
 	-- upvalues: useNavigation (ref), fFlagDisableBlockAndReport (ref), useLocalUserId (ref), useDispatch (ref), useScreenSize (ref), useLayerCollector (ref), reactModule (ref), useSocialBlockingModalAnalytics (ref), eventNames (ref), useShowToastOnErrorModule (ref), myUserBlockingNetworkingModule (ref), fFlagEnableAbuseReportRevampFlow (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), appPage (ref), url (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref), userProfilesModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), buttonType (ref), socialBlockingModalFocusNavSupport (ref), interactiveAlert (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var13 = useNavigation()
 	local navProps = var13.getParam("navProps")
@@ -49,24 +49,24 @@ return function() --[[ line: 55 | named "BlockingModal" ]]
 	if not var18 and var19 and var19.absoluteSize then
 		var18 = var19.absoluteSize
 	end
-	local var20 = reactModule.useCallback(function() --[[ line: 73 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref)
 		var13.pop()
 	end, { var13 })
 	local fireAnalyticsEvent = useSocialBlockingModalAnalytics({ userId = userId }).fireAnalyticsEvent
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalSeen)
 	end, { userId })
 	local var21 = useShowToastOnErrorModule()
-	local var22 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), myUserBlockingNetworkingModule (copy), userId (ref), var16 (ref), onBlockSuccess (ref), var21 (ref), var20 (ref)
-		var17(myUserBlockingNetworkingModule.BlockUserById.API({ userId = userId, currentUserId = var16 })):andThen(function() --[[ line: 90 ]]
+		var17(myUserBlockingNetworkingModule.BlockUserById.API({ userId = userId, currentUserId = var16 })):andThen(function()
 			-- upvalues: onBlockSuccess (copy)
 			if onBlockSuccess then
 				onBlockSuccess()
 			end
-		end):catch(function(p0) --[[ line: 95 ]]
+		end):catch(function(p0)
 			-- upvalues: var21 (copy)
 			var21(p0)
 		end)
@@ -74,12 +74,12 @@ return function() --[[ line: 55 | named "BlockingModal" ]]
 	end, {
 		onBlockSuccess, var20, userId, var16, var17, var21
 	})
-	local var23 = reactModule.useCallback(function() --[[ line: 102 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var22 (ref)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalBlockPressed)
 		var22()
 	end, { var22, userId, fireAnalyticsEvent })
-	local var24 = reactModule.useCallback(function() --[[ line: 108 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var22 (ref), openReportUser (ref), fFlagEnableAbuseReportRevampFlow (copy), var17 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), userId (ref), closeCentralOverlay (copy), appPage (copy), url (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), navigateDown (copy)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalBlockAndReportPressed)
 		var22()
@@ -92,7 +92,7 @@ return function() --[[ line: 55 | named "BlockingModal" ]]
 			var17(openDynamicAbuseReportModule({
 				abuseVector = abuseVectorModule.UserProfile,
 				targetId = userId,
-				onClose = function() --[[ line: 119 ]]
+				onClose = function()
 					-- upvalues: var17 (copy), closeCentralOverlay (copy)
 					var17(closeCentralOverlay())
 				end
@@ -119,7 +119,7 @@ return function() --[[ line: 55 | named "BlockingModal" ]]
 		fireAnalyticsEvent,
 		openReportUser
 	})
-	local var25 = reactModule.useCallback(function() --[[ line: 148 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var20 (ref)
 		fireAnalyticsEvent(eventNames.SocialBlockingModalCancelPressed)
 		var20()
@@ -138,7 +138,7 @@ return function() --[[ line: 55 | named "BlockingModal" ]]
 		},
 		bodyText = if fFlagConnectionsToFriendsRename then "Feature.BlockingModal.Message.BlockConfirmation.FriendsRename" else "Feature.BlockingModal.Message.BlockConfirmation"
 	})
-	local var28 = reactModule.useMemo(function() --[[ line: 176 ]]
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: buttonType (copy), var27 (ref), var25 (ref), fFlagDisableBlockAndReport (copy), var15 (ref), var24 (ref), var23 (ref)
 		local t = {}
 		table.insert(t, {

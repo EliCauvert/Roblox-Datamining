@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Components.Types)
 
-return function(p0, p1) --[[ line: 6 | named "withCommonProps" ]]
+return function(p0, p1)
 	if type(p1) == "table" then
 		p1.AnchorPoint = p0.AnchorPoint
 		p1.LayoutOrder = p0.LayoutOrder

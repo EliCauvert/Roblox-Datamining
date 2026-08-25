@@ -6,7 +6,7 @@ local cursorType = foundationModule.Enums.CursorType
 local useCursor = foundationModule.Hooks.useCursor
 local fFlagAXResetAvatarButton = avatarExperienceFlagsModule.FFlagAXResetAvatarButton
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 21 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: foundationModule (ref), useCursor (ref), cursorType (ref), reactModule (ref), fFlagAXResetAvatarButton (ref)
 	local var3 = foundationModule.Hooks.useTokens()
 	local var4 = useCursor(cursorType.SmallPill)
@@ -17,7 +17,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 21 ]]
 		tag = if fFlagAXResetAvatarButton then "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1000" else "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1100",
 		ref = p1,
 		onActivated = p0.onActivated,
-		onStateChanged = reactModule.useCallback(function(p2) --[[ line: 28 ]]
+		onStateChanged = reactModule.useCallback(function(p2)
 			-- upvalues: foundationModule (copy), var6 (ref)
 			if p2 == foundationModule.Enums.ControlState.Default then
 				var6(false)
@@ -27,7 +27,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 21 ]]
 				var6(true)
 			end
 		end, {}),
-		backgroundStyle = var5:map(function(p3) --[[ line: 46 ]]
+		backgroundStyle = var5:map(function(p3)
 			-- upvalues: var3 (ref)
 			return if p3 then var3.Color.Shift.Shift_200 else var3.Color.Surface.Surface_0
 		end),

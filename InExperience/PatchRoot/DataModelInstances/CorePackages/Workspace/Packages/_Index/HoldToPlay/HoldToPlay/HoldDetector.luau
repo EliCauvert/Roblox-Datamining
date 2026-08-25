@@ -9,7 +9,7 @@ local useButtonHold = focusNavigationUtilsModule.useButtonHold
 local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
 local constantsModule = require(holdToPlay.Constants)
 
-local function HoldDetectorForSelectedObject(p0) --[[ line: 29 ]]
+local function HoldDetectorForSelectedObject(p0)
 	-- upvalues: reactModule (ref), useButtonHold (ref), constantsModule (ref), appShortcutBarContext (ref), buttonHoldStateEnum (ref), reactFocusNavigationModule (ref)
 	local var6, var7 = reactModule.useState(nil)
 	local var8, var9 = reactModule.useState(nil)
@@ -21,19 +21,19 @@ local function HoldDetectorForSelectedObject(p0) --[[ line: 29 ]]
 	local var15 = appShortcutBarContext.useDispatchButtonHoldStarted()
 	local var16 = appShortcutBarContext.useDispatchButtonHoldEnded()
 	local var17 = if var14.holdState ~= buttonHoldStateEnum.HOLDING then if var14.holdState ~= buttonHoldStateEnum.JUST_PRESSED then var14.holdState == buttonHoldStateEnum.COMPLETED else true else true
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), p0 (ref)
 		if not var17 and p0.setDisabledForHold then
 			p0.setDisabledForHold(false)
 		end
-		return function() --[[ line: 61 ]]
+		return function()
 			-- upvalues: p0 (copy)
 			if p0.setDisabledForHold then
 				p0.setDisabledForHold(false)
 			end
 		end
 	end, { var17, p0.setDisabledForHold })
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var17 (ref), p0 (ref), var15 (ref), var14 (ref), var7 (ref), var9 (ref), var8_1 (ref), var16 (ref), var13 (ref)
 		if var12.current or not var17 then
 			if var12.current and not var17 then
@@ -63,7 +63,7 @@ local function HoldDetectorForSelectedObject(p0) --[[ line: 29 ]]
 		p0.keyCode, var8_1, var6_1
 	})
 	local var18 = var14.holdState == buttonHoldStateEnum.COMPLETED and var13.current == false
-	reactModule.useEffect(function() --[[ line: 113 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), p0 (ref), var13 (ref)
 		if var18 and p0.onHoldDetected then
 			var13.current = true
@@ -79,19 +79,19 @@ local function HoldDetectorForSelectedObject(p0) --[[ line: 29 ]]
 		p0.guiObject,
 		p0.setDisabledForHold
 	})
-	local var19 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 143 ]]
+	local var19 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: var8_1 (ref), var14 (ref)
 		return if var8_1 then { [var8_1] = { handler = var14.eventHandler } } else {}
-	end, { var14.eventHandler, var8_1 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function() --[[ line: 133 ]]
+	end, { var14.eventHandler, var8_1 }), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
 		-- upvalues: var6_1 (ref), var8_1 (ref)
 		return if var6_1 and var8_1 then { [var6_1] = var8_1 } else {}
 	end, { var6_1, var8_1 })))
-	reactModule.useEffect(function() --[[ line: 159 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), p0 (ref)
 		if var19 then
 			var19(p0.guiObject)
 		end
-		return function() --[[ line: 163 ]]
+		return function()
 			-- upvalues: var19 (copy)
 			var19(nil)
 		end
@@ -100,7 +100,7 @@ local function HoldDetectorForSelectedObject(p0) --[[ line: 29 ]]
 	return nil
 end
 
-return reactModule.memo(function(p1) --[[ line: 171 | named "HoldDetector" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useSelected (ref), reactModule (ref), HoldDetectorForSelectedObject (ref)
 	return if useSelected({ current = p1.guiObject }) then reactModule.createElement(HoldDetectorForSelectedObject, p1) else nil
 end)

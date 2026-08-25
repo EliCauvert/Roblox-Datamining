@@ -20,21 +20,21 @@ local t_2 = {
 }
 
 return {
-	logAdDisclosureMenuToggled = function(p0) --[[ line: 42 ]]
+	logAdDisclosureMenuToggled = function(p0)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogCounter(t, {
 			standardizedFields = list,
 			customFields = { isOpened = p0 }
 		}, 1)
 	end,
-	logAdDisclosureWhyThisAdToggled = function(p1) --[[ line: 50 ]]
+	logAdDisclosureWhyThisAdToggled = function(p1)
 		-- upvalues: telemetryService (ref), t_1 (ref), list (ref)
 		telemetryService:LogCounter(t_1, {
 			standardizedFields = list,
 			customFields = { isOpened = p1 }
 		}, 1)
 	end,
-	logAdPreferencesLinkClicked = function() --[[ line: 58 ]]
+	logAdPreferencesLinkClicked = function()
 		-- upvalues: telemetryService (ref), t_2 (ref), list (ref)
 		telemetryService:LogCounter(t_2, { standardizedFields = list, customFields = {} }, 1)
 	end

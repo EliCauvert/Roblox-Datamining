@@ -29,7 +29,7 @@ local discoverabilityAnalytics = dependenciesModule.DiscoverabilityAnalytics
 local contactsListContainer = roact.PureComponent:extend("ContactsListContainer")
 contactsListContainer.defaultProps = { contactsProtocol = contactsProtocol.default }
 
-function contactsListContainer.init(p0) --[[ line: 74 ]]
+function contactsListContainer.init(p0)
 	-- upvalues: setupFireAnalyticsEventsModule (ref), analyticsModule (ref), getDeepValue (ref), ampApiProvider (ref), promise (ref), eventNames (ref), fieldNames (ref), formatContactsModule (ref), uploadContactsSourcesModule (ref), fFlagContactImporterIXPCleanup (ref), IXPVariantsModule (ref), getFIntContactImporterUploadContactsMinModule (ref), constantsModule (ref), accessResponseEnum (ref), enumScreens (ref), discoverabilityAnalytics (ref), getFFlagFindFriendsClickedEventEnabledModule (ref), dash (ref)
 	p0.entryPoint = p0.props.navigation.getParam("entryPoint")
 	p0.fireAnalyticsEvent = setupFireAnalyticsEventsModule({
@@ -42,7 +42,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		showMatchedContacts = false
 	}
 	
-	function p0.getPropOrParam(p1) --[[ line: 91 ]]
+	function p0.getPropOrParam(p1)
 		-- upvalues: p0 (ref), getDeepValue (copy)
 		return if p0.props.navigation and p0.props.navigation.getParam(p1) or p0.props.navigation then p0.props.navigation.getParam(p1) else getDeepValue(p0.props, p1)
 	end
@@ -54,9 +54,9 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 	p0.startTime = os.clock()
 	p0.ampApiProvider = if p0.props.ampApiProvider ~= nil then ampApiProvider else p0.props.ampApiProvider
 	
-	local function _(p2) --[[ line: 107 | named "makeErrorFunction" ]]
+	local function _(p2)
 		-- upvalues: promise (copy), p0 (ref)
-		return function(p3) --[[ line: 108 ]]
+		return function(p3)
 			-- upvalues: promise (copy), p0 (copy), p2 (ref)
 			if type(p3) == "table" and p3.hasAlreadyErrored then
 				return promise.reject({ hasAlreadyErrored = true })
@@ -69,14 +69,14 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		end
 	end
 	
-	local _ = function(p4) --[[ line: 131 ]]
+	local _ = function(p4)
 		-- upvalues: getDeepValue (copy)
 		local var13 = getDeepValue(p4 or {}, "responseBody.userContactsEntities")
 		
 		return if var13 then #var13 else 0
 	end
 	
-	local _ = function() --[[ line: 137 ]]
+	local _ = function()
 		-- upvalues: p0 (ref)
 		if p0.props.navigation then
 			p0.props.navigation.pop()
@@ -87,17 +87,17 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		end
 	end
 	
-	function p0.requestFriendship(p5) --[[ line: 145 ]]
+	function p0.requestFriendship(p5)
 		-- upvalues: p0 (ref), eventNames (copy)
 		local props = p0.props
 		p0.fireAnalyticsEvent(eventNames.RequestFriendship, { requestedId = p5 })
-		props.requestFriendship({ currentUserId = props.localUserId, contactId = p5 }):andThen(function() --[[ line: 157 ]]
+		props.requestFriendship({ currentUserId = props.localUserId, contactId = p5 }):andThen(function()
 			-- upvalues: props (ref), p5 (ref)
 			props.requestSent(p5)
 		end)
 	end
 	
-	function p0.fireContactImportingTimeEvent(p6) --[[ line: 162 ]]
+	function p0.fireContactImportingTimeEvent(p6)
 		-- upvalues: p0 (ref), eventNames (copy), fieldNames (copy)
 		p0.fireAnalyticsEvent(eventNames.ContactImportingTime, {
 			[fieldNames.NumTotalContactsImported] = p0.contactsCount,
@@ -112,20 +112,20 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		})
 	end
 	
-	function p0.getContactsFromDevice() --[[ line: 180 ]]
+	function p0.getContactsFromDevice()
 		-- upvalues: p0 (ref), promise (copy)
 		local props = p0.props
 		
-		return props.contactsProtocol:supportsContacts():andThen(function(p7) --[[ line: 185 ]]
+		return props.contactsProtocol:supportsContacts():andThen(function(p7)
 			-- upvalues: promise (copy), props (ref)
 			return if p7 then props.contactsProtocol:getContacts() else promise.reject()
-		end):catch(function() --[[ line: 192 ]]
+		end):catch(function()
 			-- upvalues: promise (copy)
 			return promise.reject()
 		end)
 	end
 	
-	function p0.formatContactsFromDevice(p8) --[[ line: 197 ]]
+	function p0.formatContactsFromDevice(p8)
 		-- upvalues: p0 (ref), formatContactsModule (copy)
 		local props = p0.props
 		
@@ -153,15 +153,15 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		return var14
 	end
 	
-	function p0.uploadDeviceContacts(p9) --[[ line: 230 ]]
+	function p0.uploadDeviceContacts(p9)
 		-- upvalues: uploadContactsSourcesModule (copy), p0 (ref), fFlagContactImporterIXPCleanup (copy), IXPVariantsModule (copy), getFIntContactImporterUploadContactsMinModule (copy), promise (copy), eventNames (copy)
 		p9.source = uploadContactsSourcesModule.CI
 		local props = p0.props
 		
-		return if #p9.contacts == 0 or not fFlagContactImporterIXPCleanup and props.variant == IXPVariantsModule.INVITES_ONLY or #p9.contacts < getFIntContactImporterUploadContactsMinModule() then promise.resolve({ shouldFindContacts = false }) else props.uploadContacts(p9):andThen(function() --[[ line: 246 ]]
+		return if #p9.contacts == 0 or not fFlagContactImporterIXPCleanup and props.variant == IXPVariantsModule.INVITES_ONLY or #p9.contacts < getFIntContactImporterUploadContactsMinModule() then promise.resolve({ shouldFindContacts = false }) else props.uploadContacts(p9):andThen(function()
 			-- upvalues: promise (copy)
 			return promise.resolve({ shouldFindContacts = true })
-		end, function() --[[ line: 248 ]]
+		end, function()
 			-- upvalues: p0 (copy), eventNames (copy), promise (copy)
 			p0.fireAnalyticsEvent(eventNames.FailedUploadContactsFromDevice, { failedStep = eventNames.FailedUploadContactsFromDevice })
 			p0.fireContactImportingTimeEvent({
@@ -173,17 +173,17 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		end)
 	end
 	
-	function p0.findContacts(p10) --[[ line: 262 ]]
+	function p0.findContacts(p10)
 		-- upvalues: p0 (ref), promise (copy)
 		return if p10.shouldFindContacts then p0.props.findContacts() else promise.resolve()
 	end
 	
-	function p0.getContactEntities(p11) --[[ line: 271 ]]
+	function p0.getContactEntities(p11)
 		-- upvalues: p0 (ref), promise (copy)
 		return if p11 then p0.props.getContactEntities(p11) else promise.resolve()
 	end
 	
-	function p0.fireHasLoaded(p12) --[[ line: 281 ]]
+	function p0.fireHasLoaded(p12)
 		-- upvalues: getDeepValue (copy), p0 (ref), eventNames (copy), fieldNames (copy), promise (copy)
 		local var18 = getDeepValue(p12 or {}, "responseBody.userContactsEntities")
 		local var19 = if var18 then #var18 else 0
@@ -200,13 +200,13 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		return promise.resolve()
 	end
 	
-	function p0.failedToUpload(_) --[[ line: 303 ]]
+	function p0.failedToUpload(_)
 		-- upvalues: p0 (ref)
 		p0:setState({ hasUploadError = true, isFetching = false })
 		p0.fireContactImportingTimeEvent({ isSuccessfulUpload = false })
 	end
 	
-	function p0.getContacts() --[[ line: 312 ]]
+	function p0.getContacts()
 		-- upvalues: p0 (ref), constantsModule (copy), accessResponseEnum (copy), fFlagContactImporterIXPCleanup (copy), eventNames (copy), promise (copy)
 		local _ = nil
 		p0:setState({ isFetching = true })
@@ -216,7 +216,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		
 		if fFlagContactImporterIXPCleanup or not p0.props.isPVRequired or var21 then
 			local failedGetContactsFromDevice = eventNames.FailedGetContactsFromDevice
-			local formatContactsFromDevice = p0.getContactsFromDevice():andThen(p0.formatContactsFromDevice, function(p13) --[[ line: 108 ]]
+			local formatContactsFromDevice = p0.getContactsFromDevice():andThen(p0.formatContactsFromDevice, function(p13)
 				-- upvalues: promise (copy), p0 (copy), failedGetContactsFromDevice (ref)
 				if type(p13) == "table" and p13.hasAlreadyErrored then
 					return promise.reject({ hasAlreadyErrored = true })
@@ -231,7 +231,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 				return promise.reject({ hasAlreadyErrored = true })
 			end)
 			local failedFormatContactsFromDevice = eventNames.FailedFormatContactsFromDevice
-			formatContactsFromDevice = formatContactsFromDevice:andThen(p0.uploadDeviceContacts, function(p14) --[[ line: 108 ]]
+			formatContactsFromDevice = formatContactsFromDevice:andThen(p0.uploadDeviceContacts, function(p14)
 				-- upvalues: promise (copy), p0 (copy), failedFormatContactsFromDevice (ref)
 				if type(p14) == "table" and p14.hasAlreadyErrored then
 					return promise.reject({ hasAlreadyErrored = true })
@@ -246,7 +246,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 				return promise.reject({ hasAlreadyErrored = true })
 			end)
 			local failedUploadContactsFromDevice = eventNames.FailedUploadContactsFromDevice
-			formatContactsFromDevice = formatContactsFromDevice:andThen(p0.findContacts, function(p15) --[[ line: 108 ]]
+			formatContactsFromDevice = formatContactsFromDevice:andThen(p0.findContacts, function(p15)
 				-- upvalues: promise (copy), p0 (copy), failedUploadContactsFromDevice (ref)
 				if type(p15) == "table" and p15.hasAlreadyErrored then
 					return promise.reject({ hasAlreadyErrored = true })
@@ -261,7 +261,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 				return promise.reject({ hasAlreadyErrored = true })
 			end)
 			local failedFindContacts = eventNames.FailedFindContacts
-			formatContactsFromDevice = formatContactsFromDevice:andThen(p0.getContactEntities, function(p16) --[[ line: 108 ]]
+			formatContactsFromDevice = formatContactsFromDevice:andThen(p0.getContactEntities, function(p16)
 				-- upvalues: promise (copy), p0 (copy), failedFindContacts (ref)
 				if type(p16) == "table" and p16.hasAlreadyErrored then
 					return promise.reject({ hasAlreadyErrored = true })
@@ -276,7 +276,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 				return promise.reject({ hasAlreadyErrored = true })
 			end)
 			local failedGetContactEntities = eventNames.FailedGetContactEntities
-			formatContactsFromDevice:andThen(p0.fireHasLoaded, function(p17) --[[ line: 108 ]]
+			formatContactsFromDevice:andThen(p0.fireHasLoaded, function(p17)
 				-- upvalues: promise (copy), p0 (copy), failedGetContactEntities (ref)
 				if type(p17) == "table" and p17.hasAlreadyErrored then
 					return promise.reject({ hasAlreadyErrored = true })
@@ -294,7 +294,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 			return
 		end
 		local failedGetContactsFromDevice = eventNames.FailedGetContactsFromDevice
-		local formatContactsFromDevice = p0.getContactsFromDevice():andThen(p0.formatContactsFromDevice, function(p18) --[[ line: 108 ]]
+		local formatContactsFromDevice = p0.getContactsFromDevice():andThen(p0.formatContactsFromDevice, function(p18)
 			-- upvalues: promise (copy), p0 (copy), failedGetContactsFromDevice (ref)
 			if type(p18) == "table" and p18.hasAlreadyErrored then
 				return promise.reject({ hasAlreadyErrored = true })
@@ -309,7 +309,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 			return promise.reject({ hasAlreadyErrored = true })
 		end)
 		local failedFormatContactsFromDevice = eventNames.FailedFormatContactsFromDevice
-		formatContactsFromDevice:andThen(p0.fireHasLoaded, function(p19) --[[ line: 108 ]]
+		formatContactsFromDevice:andThen(p0.fireHasLoaded, function(p19)
 			-- upvalues: promise (copy), p0 (copy), failedFormatContactsFromDevice (ref)
 			if type(p19) == "table" and p19.hasAlreadyErrored then
 				return promise.reject({ hasAlreadyErrored = true })
@@ -325,7 +325,7 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		end):catch(p0.failedToUpload)
 	end
 	
-	function p0.closeModal(p20) --[[ line: 342 ]]
+	function p0.closeModal(p20)
 		-- upvalues: p0 (ref), fFlagContactImporterIXPCleanup (copy), IXPVariantsModule (copy)
 		p0.fireAnalyticsEvent(p20, {
 			isLoading = if fFlagContactImporterIXPCleanup then p0.state.isFetching else p0.isFetching(p0.props.variant, IXPVariantsModule),
@@ -341,23 +341,23 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 		end
 	end
 	
-	function p0.onAddFriendsActivated() --[[ line: 356 ]]
+	function p0.onAddFriendsActivated()
 		-- upvalues: p0 (ref), enumScreens (copy)
 		p0.props.navigation.replace(enumScreens.AddFriendsPage)
 	end
 	
-	p0.isFetching = if fFlagContactImporterIXPCleanup then nil else function(p21, p22) --[[ line: 365 ]]
+	p0.isFetching = if fFlagContactImporterIXPCleanup then nil else function(p21, p22)
 		-- upvalues: p0 (ref)
 		return p21 == p22.BLENDED and p0.state.isFetching
 	end
 	
-	function p0.openDiscoverabilityModal() --[[ line: 370 ]]
+	function p0.openDiscoverabilityModal()
 		-- upvalues: p0 (ref), enumScreens (copy), discoverabilityAnalytics (copy), constantsModule (copy), accessResponseEnum (copy), getFFlagFindFriendsClickedEventEnabledModule (copy), eventNames (copy), dash (copy)
 		local navigation = p0.props.navigation
 		navigation.replace(enumScreens.DiscoverabilityOverlay, {
 			isStandaloneDiscoverabilityModal = true,
 			entryPoint = discoverabilityAnalytics.EntryPoints.ContactsList,
-			navigateOnActivated = function() --[[ line: 377 ]]
+			navigateOnActivated = function()
 				-- upvalues: navigation (ref), enumScreens (copy), constantsModule (copy), p0 (copy)
 				navigation.replace(enumScreens.ContactsList, {
 					[constantsModule.SHOULD_UPDATE_USER_SETTINGS] = true,
@@ -368,9 +368,9 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 			end
 		})
 		local propOrParam = p0.getPropOrParam(constantsModule.OPEN_AMP_UPSELL)
-		p0.openAmpUpsell = if propOrParam then function() --[[ line: 390 ]]
+		p0.openAmpUpsell = if propOrParam then function()
 			-- upvalues: accessResponseEnum (copy), p0 (copy), getFFlagFindFriendsClickedEventEnabledModule (copy), eventNames (copy), propOrParam (ref), constantsModule (copy)
-			local var25 = function(p23, _) --[[ line: 391 ]]
+			local var25 = function(p23, _)
 				-- upvalues: accessResponseEnum (copy), p0 (copy)
 				if p23 == accessResponseEnum.Granted then
 					p0.getContacts()
@@ -386,11 +386,11 @@ function contactsListContainer.init(p0) --[[ line: 74 ]]
 	end
 end
 
-function contactsListContainer.didMount(p24) --[[ line: 407 ]]
+function contactsListContainer.didMount(p24)
 	p24.getContacts()
 end
 
-function contactsListContainer.render(p25) --[[ line: 411 ]]
+function contactsListContainer.render(p25)
 	-- upvalues: fFlagContactImporterIXPCleanup (ref), roact (ref), contactsListModule (ref), IXPVariantsModule (ref), analyticsModule (ref)
 	local props = p25.props
 	

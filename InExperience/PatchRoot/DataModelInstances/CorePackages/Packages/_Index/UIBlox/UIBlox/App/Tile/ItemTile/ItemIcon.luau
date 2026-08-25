@@ -15,7 +15,7 @@ local t = {
 	[itemTileEnumsModule.ItemIconType.DynamicHead] = imagesModule["icons/status/dynamicHead_small"]
 }
 itemIcon.validateProps = tModule.strictInterface({
-	itemIconType = tModule.intersection(itemTileEnumsModule.ItemIconType.isEnumValue, function(p0) --[[ line: 25 | named "isValidItemIconType" ]]
+	itemIconType = tModule.intersection(itemTileEnumsModule.ItemIconType.isEnumValue, function(p0)
 		-- upvalues: t (ref)
 		if t[p0] then
 			return true
@@ -24,12 +24,12 @@ itemIcon.validateProps = tModule.strictInterface({
 	end)
 })
 
-function itemIcon.render(p1) --[[ line: 38 ]]
+function itemIcon.render(p1)
 	-- upvalues: t (ref), imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
 	local itemIconType = t[p1.props.itemIconType]
 	local var9 = itemIconType.ImageRectSize / imagesModule.ImagesResolutionScale
 	
-	return withStyleModule(function(p2) --[[ line: 44 ]]
+	return withStyleModule(function(p2)
 		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), UIBloxConfigModule (copy), var9 (ref)
 		local theme = p2.Theme
 		local tokens = p2.Tokens

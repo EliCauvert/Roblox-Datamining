@@ -13,7 +13,7 @@ local t = {
 	size = iconSizeModule.Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 27 | named "Loading" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useRotationModule (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref)
 	local var10 = withDefaultsModule(p0, t)
 	

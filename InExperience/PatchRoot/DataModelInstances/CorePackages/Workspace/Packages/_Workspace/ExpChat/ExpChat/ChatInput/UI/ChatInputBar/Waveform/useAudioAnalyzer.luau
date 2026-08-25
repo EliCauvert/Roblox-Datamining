@@ -1,9 +1,9 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function(p0) --[[ line: 10 | named "useAudioAnalyzer" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 13 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var1 (ref)
 		if p0 then
 			local waveformAnalyzer = Instance.new("AudioAnalyzer")
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 10 | named "useAudioAnalyzer" ]]
 			wire.TargetInstance = waveformAnalyzer
 			wire.Parent = p0.Parent
 			
-			return function() --[[ line: 29 ]]
+			return function()
 				-- upvalues: wire (ref), waveformAnalyzer (ref), var1 (copy)
 				wire:Destroy()
 				waveformAnalyzer:Destroy()

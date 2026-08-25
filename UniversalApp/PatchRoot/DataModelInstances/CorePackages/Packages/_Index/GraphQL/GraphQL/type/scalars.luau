@@ -1,8 +1,8 @@
-﻿local function _(p0, p1) --[[ line: 8 | named "parseInt" ]]
+﻿local function _(p0, p1)
 	return tonumber(p0, p1)
 end
 
-local _ = function(p2) --[[ line: 11 | named "NumberisFinite" ]]
+local _ = function(p2)
 	return typeof(p2) == "number" and (p2 ~= 1e999 and p2 == p2)
 end
 
@@ -24,7 +24,7 @@ local _ = nil
 local _ = nil
 local _ = nil
 
-function serializeInt(p3) --[[ line: 55 ]]
+function serializeInt(p3)
 	-- upvalues: serializeObject (write), number (ref), graphQLError (ref), inspect (ref)
 	local var12 = serializeObject(p3)
 	
@@ -42,7 +42,7 @@ function serializeInt(p3) --[[ line: 55 ]]
 	return var13
 end
 
-function coerceInt(p4) --[[ line: 84 ]]
+function coerceInt(p4)
 	-- upvalues: number (ref), graphQLError (ref), inspect (ref)
 	if typeof(p4) ~= "number" or not number.isInteger(p4) then
 		error(graphQLError.new(("Int cannot represent non-integer value: %s"):format(inspect(p4))))
@@ -58,7 +58,7 @@ local var2 = graphQLScalarType.new({
 	description = "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
 	serialize = serializeInt,
 	parseValue = coerceInt,
-	parseLiteral = function(p5) --[[ line: 110 ]]
+	parseLiteral = function(p5)
 		-- upvalues: kind (ref), graphQLError (ref), print (ref)
 		if p5.kind ~= kind.INT then
 			error(graphQLError.new(("Int cannot represent non-integer value: %s"):format(print(p5)), p5))
@@ -72,7 +72,7 @@ local var2 = graphQLScalarType.new({
 	end
 })
 
-local function serializeFloat(p6) --[[ line: 139 ]]
+local function serializeFloat(p6)
 	-- upvalues: serializeObject (write), graphQLError (ref), inspect (ref)
 	local var15 = serializeObject(p6)
 	
@@ -91,7 +91,7 @@ local function serializeFloat(p6) --[[ line: 139 ]]
 	end
 end
 
-function coerceFloat(p7) --[[ line: 161 ]]
+function coerceFloat(p7)
 	-- upvalues: graphQLError (ref), inspect (ref)
 	if typeof(p7) == "number" then
 		if not (typeof(p7) == "number" and (p7 ~= 1e999 and p7 == p7)) then
@@ -106,7 +106,7 @@ local var4 = graphQLScalarType.new({
 	description = "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
 	serialize = serializeFloat,
 	parseValue = coerceFloat,
-	parseLiteral = function(p8) --[[ line: 178 ]]
+	parseLiteral = function(p8)
 		-- upvalues: kind (ref), graphQLError (ref), print (ref)
 		if p8.kind ~= kind.FLOAT and p8.kind ~= kind.INT then
 			error(graphQLError.new(("Float cannot represent non numeric value: %s"):format(print(p8)), p8))
@@ -115,7 +115,7 @@ local var4 = graphQLScalarType.new({
 	end
 })
 
-serializeObject = function(p9) --[[ line: 197 | named "serializeObject" ]]
+serializeObject = function(p9)
 	-- upvalues: isObjectLike (ref)
 	if isObjectLike(p9) then
 		if typeof(p9.valueOf) == "function" then
@@ -126,7 +126,7 @@ serializeObject = function(p9) --[[ line: 197 | named "serializeObject" ]]
 	end
 end
 
-local function serializeString(p10) --[[ line: 214 ]]
+local function serializeString(p10)
 	-- upvalues: serializeObject (write), graphQLError (ref), inspect (ref)
 	local var19 = serializeObject(p10)
 	
@@ -142,7 +142,7 @@ local function serializeString(p10) --[[ line: 214 ]]
 	error(graphQLError.new(("String cannot represent value: %s"):format(inspect(p10))))
 end
 
-function coerceString(p11) --[[ line: 231 ]]
+function coerceString(p11)
 	-- upvalues: graphQLError (ref), inspect (ref)
 	if typeof(p11) ~= "string" then
 		error(graphQLError.new(("String cannot represent a non string value: %s"):format(inspect(p11))))
@@ -155,7 +155,7 @@ local var6 = graphQLScalarType.new({
 	description = "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
 	serialize = serializeString,
 	parseValue = coerceString,
-	parseLiteral = function(p12) --[[ line: 248 ]]
+	parseLiteral = function(p12)
 		-- upvalues: kind (ref), graphQLError (ref), print (ref)
 		if p12.kind ~= kind.STRING then
 			error(graphQLError.new(("String cannot represent a non string value: %s"):format(print(p12)), p12))
@@ -164,7 +164,7 @@ local var6 = graphQLScalarType.new({
 	end
 })
 
-local function serializeBoolean(p13) --[[ line: 263 ]]
+local function serializeBoolean(p13)
 	-- upvalues: serializeObject (write), graphQLError (ref), inspect (ref)
 	local var20 = serializeObject(p13)
 	
@@ -176,7 +176,7 @@ local function serializeBoolean(p13) --[[ line: 263 ]]
 	error(graphQLError.new(("Boolean cannot represent a non boolean value: %s"):format(inspect(var20))))
 end
 
-function coerceBoolean(p14) --[[ line: 281 ]]
+function coerceBoolean(p14)
 	-- upvalues: graphQLError (ref), inspect (ref)
 	if typeof(p14) ~= "boolean" then
 		error(graphQLError.new(("Boolean cannot represent a non boolean value: %s"):format(inspect(p14))))
@@ -189,7 +189,7 @@ local var8 = graphQLScalarType.new({
 	description = "The `Boolean` scalar type represents `true` or `false`.",
 	serialize = serializeBoolean,
 	parseValue = coerceBoolean,
-	parseLiteral = function(p15) --[[ line: 298 ]]
+	parseLiteral = function(p15)
 		-- upvalues: kind (ref), graphQLError (ref), print (ref)
 		if p15.kind ~= kind.BOOLEAN then
 			error(graphQLError.new(("Boolean cannot represent a non boolean value: %s"):format(print(p15)), p15))
@@ -198,7 +198,7 @@ local var8 = graphQLScalarType.new({
 	end
 })
 
-local function serializeID(p16) --[[ line: 313 ]]
+local function serializeID(p16)
 	-- upvalues: serializeObject (write), number (ref), graphQLError (ref), inspect (ref)
 	local var21 = serializeObject(p16)
 	
@@ -210,7 +210,7 @@ local function serializeID(p16) --[[ line: 313 ]]
 	error(graphQLError.new(("ID cannot represent value: %s"):format(inspect(p16))))
 end
 
-function coerceID(p17) --[[ line: 326 ]]
+function coerceID(p17)
 	-- upvalues: number (ref), graphQLError (ref), inspect (ref)
 	if typeof(p17) == "string" then
 		return p17
@@ -225,7 +225,7 @@ local var10 = graphQLScalarType.new({
 	description = "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
 	serialize = serializeID,
 	parseValue = coerceID,
-	parseLiteral = function(p18) --[[ line: 342 ]]
+	parseLiteral = function(p18)
 		-- upvalues: kind (ref), graphQLError (ref), print (ref)
 		if p18.kind ~= kind.STRING and p18.kind ~= kind.INT then
 			error(graphQLError.new("ID cannot represent a non-string and non-integer value: " .. print(p18), p18))
@@ -248,9 +248,9 @@ return {
 	GraphQLBoolean = var8,
 	GraphQLID = var10,
 	specifiedScalarTypes = var11,
-	isSpecifiedScalarType = function(p19) --[[ line: 364 ]]
+	isSpecifiedScalarType = function(p19)
 		-- upvalues: array (ref), var11 (ref)
-		return array.some(var11, function(p20) --[[ line: 365 ]]
+		return array.some(var11, function(p20)
 			-- upvalues: p19 (ref)
 			return p19.name == p20.name
 		end)

@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 1 | named "isErrorReasonContainsEconomicRestrictions" ]]
+﻿return function(p0)
 	return string.find(p0, "EconomicRestrictions") ~= nil
 end

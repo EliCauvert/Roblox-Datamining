@@ -17,7 +17,7 @@ local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFrie
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local var6 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return reactModule.memo(function(p0) --[[ line: 40 | named "ExperienceDetailsConnectionsPlayedChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), gameConnectionsPlayedChipClicked (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), sduiChip (ref), avatarGroupType (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId
@@ -39,7 +39,7 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "ExperienceDetailsCon
 			if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.FriendRecentlyPlayed" else "Feature.Friends.Label.ConnectionRecentlyPlayed"
 		}
 	})
-	local var13 = reactModule.useCallback(function() --[[ line: 74 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), playersService (copy), gameConnectionsPlayedChipClicked (copy), universeId (ref), var11 (ref), appPage (copy), var10 (ref), var12 (ref), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (ref), navigateDown (copy)
 		local rootPlaceId = var9 and var9.rootPlaceId
 		

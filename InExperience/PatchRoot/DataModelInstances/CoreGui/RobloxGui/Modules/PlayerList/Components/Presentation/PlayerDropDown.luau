@@ -50,12 +50,12 @@ playerDropDown.validateProps = tModule.strictInterface({
 	requestFriendship = tModule.callback
 })
 
-function playerDropDown.init(p0) --[[ line: 73 ]]
+function playerDropDown.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref)
 	p0.innerFrameRef = roactModule.createRef()
 	p0.motorOptions = { dampingRatio = 1, frequency = 4 }
 	p0.motor = otterModule.createSingleMotor(1)
-	p0.motor:onStep(function(p1) --[[ line: 83 ]]
+	p0.motor:onStep(function(p1)
 		-- upvalues: p0 (ref)
 		local current = p0.innerFrameRef.current
 		
@@ -71,7 +71,7 @@ function playerDropDown.init(p0) --[[ line: 73 ]]
 	p0.dropDownPosition = 0
 end
 
-function playerDropDown.createFriendButton(p2, p3) --[[ line: 99 ]]
+function playerDropDown.createFriendButton(p2, p3)
 	-- upvalues: roactModule (ref), friendDropDownButtonModule (ref)
 	return roactModule.createElement(friendDropDownButtonModule, {
 		layoutOrder = 1,
@@ -83,7 +83,7 @@ function playerDropDown.createFriendButton(p2, p3) --[[ line: 99 ]]
 	})
 end
 
-function playerDropDown.createBlockButton(p4, p5) --[[ line: 111 ]]
+function playerDropDown.createBlockButton(p4, p5)
 	-- upvalues: robloxTranslatorModule (ref), images (ref), roactModule (ref), dropDownButtonModule (ref), onBlockButtonActivatedModule (ref)
 	local selectedPlayer = p4.props.selectedPlayer
 	
@@ -93,7 +93,7 @@ function playerDropDown.createBlockButton(p4, p5) --[[ line: 111 ]]
 		forceShowOptions = false,
 		text = if p5.isBlocked then robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.UnBlock") else robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Block"),
 		icon = images["icons/actions/block"],
-		onActivated = function() --[[ line: 123 ]]
+		onActivated = function()
 			-- upvalues: p5 (ref), p4 (ref), selectedPlayer (ref), onBlockButtonActivatedModule (copy)
 			if p5.isBlocked then
 				p4.props.unblockPlayer(selectedPlayer)
@@ -101,7 +101,7 @@ function playerDropDown.createBlockButton(p4, p5) --[[ line: 111 ]]
 				return
 			end
 			onBlockButtonActivatedModule(selectedPlayer, nil, p4.__componentName, {
-				onBlockingSuccess = function() --[[ line: 128 ]]
+				onBlockingSuccess = function()
 					-- upvalues: p4 (copy), selectedPlayer (copy)
 					p4.props.blockPlayerSuccess(selectedPlayer)
 				end
@@ -110,7 +110,7 @@ function playerDropDown.createBlockButton(p4, p5) --[[ line: 111 ]]
 	})
 end
 
-function playerDropDown.createReportButton(p6) --[[ line: 137 ]]
+function playerDropDown.createReportButton(p6)
 	-- upvalues: fFlagStandardizeSafetyIcon (ref), fFlagAllowDisplayingFoundationIconsForDropdownModule (ref), images (ref), roactModule (ref), dropDownButtonModule (ref), robloxTranslatorModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref)
 	local selectedPlayer = p6.props.selectedPlayer
 	
@@ -120,7 +120,7 @@ function playerDropDown.createReportButton(p6) --[[ line: 137 ]]
 		forceShowOptions = false,
 		text = robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Report"),
 		icon = if fFlagStandardizeSafetyIcon and fFlagAllowDisplayingFoundationIconsForDropdownModule then "Flag" else images["icons/actions/feedback"],
-		onActivated = function() --[[ line: 150 ]]
+		onActivated = function()
 			-- upvalues: isNewInGameMenuEnabledModule (copy), robloxGui (copy), selectedPlayer (ref), p6 (ref)
 			if isNewInGameMenuEnabledModule() then
 				require(robloxGui.Modules.InGameMenuInit).openReportDialog(selectedPlayer, p6.__componentName)
@@ -133,7 +133,7 @@ function playerDropDown.createReportButton(p6) --[[ line: 137 ]]
 	})
 end
 
-function playerDropDown.createInspectButton(p7) --[[ line: 164 ]]
+function playerDropDown.createInspectButton(p7)
 	-- upvalues: images (ref), roactModule (ref), dropDownButtonModule (ref), robloxTranslatorModule (ref), localPlayer (ref), guiService (ref)
 	local selectedPlayer = p7.props.selectedPlayer
 	
@@ -143,7 +143,7 @@ function playerDropDown.createInspectButton(p7) --[[ line: 164 ]]
 		text = robloxTranslatorModule:FormatByKey("InGame.PlayerDropDown.Examine"),
 		icon = images["icons/actions/zoomIn"],
 		lastButton = selectedPlayer == localPlayer,
-		onActivated = function() --[[ line: 174 ]]
+		onActivated = function()
 			-- upvalues: guiService (copy), selectedPlayer (ref), p7 (ref)
 			guiService:InspectPlayerFromUserIdWithCtx(selectedPlayer.UserId, "leaderBoard")
 			p7.props.closeDropDown()
@@ -151,9 +151,9 @@ function playerDropDown.createInspectButton(p7) --[[ line: 164 ]]
 	})
 end
 
-function playerDropDown.render(p8) --[[ line: 181 ]]
+function playerDropDown.render(p8)
 	-- upvalues: withLayoutValues (ref), roactModule (ref), dropDownPlayerHeaderModule (ref), localPlayer (ref)
-	return withLayoutValues(function(p9) --[[ line: 182 ]]
+	return withLayoutValues(function(p9)
 		-- upvalues: p8 (ref), roactModule (copy), dropDownPlayerHeaderModule (copy), localPlayer (copy)
 		local selectedPlayer = p8.props.selectedPlayer
 		
@@ -210,22 +210,22 @@ function playerDropDown.render(p8) --[[ line: 181 ]]
 	end)
 end
 
-function playerDropDown.getDropDownPosition(p10) --[[ line: 256 ]]
+function playerDropDown.getDropDownPosition(p10)
 	return if p10.props.isVisible and p10.props.contentsVisible then 0 else 1
 end
 
-function playerDropDown.didMount(p11) --[[ line: 263 ]]
+function playerDropDown.didMount(p11)
 	-- upvalues: otterModule (ref)
 	local dropDownPosition = p11:getDropDownPosition()
 	p11.motor:start()
 	p11.motor:setGoal(otterModule.spring(dropDownPosition, p11.motorOptions))
 end
 
-function playerDropDown.willUpdate(p12, p13, _) --[[ line: 269 ]]
+function playerDropDown.willUpdate(p12, p13, _)
 	p12.dropDownPosition = p13.positionY
 end
 
-function playerDropDown.didUpdate(p14, p15, _) --[[ line: 273 ]]
+function playerDropDown.didUpdate(p14, p15, _)
 	-- upvalues: otterModule (ref)
 	if p15.selectedPlayer ~= p14.props.selectedPlayer then
 		p14.motor:setGoal(otterModule.instant(1))
@@ -234,11 +234,11 @@ function playerDropDown.didUpdate(p14, p15, _) --[[ line: 273 ]]
 	p14.motor:setGoal(otterModule.spring(p14:getDropDownPosition(), p14.motorOptions))
 end
 
-function playerDropDown.willUnmount(p16) --[[ line: 283 ]]
+function playerDropDown.willUnmount(p16)
 	p16.motor:destroy()
 end
 
-local function mapStateToProps(p17) --[[ line: 287 ]]
+local function mapStateToProps(p17)
 	local selectedPlayer = p17.playerDropDown.selectedPlayer
 	
 	return {
@@ -251,22 +251,22 @@ local function mapStateToProps(p17) --[[ line: 287 ]]
 	}
 end
 
-local function mapDispatchToProps(p18) --[[ line: 301 ]]
+local function mapDispatchToProps(p18)
 	-- upvalues: closePlayerDropDownModule (ref), setPlayerIsBlockedModule (ref), unblockPlayerModule (ref), requestFriendshipModule (ref)
 	return {
-		closeDropDown = function() --[[ line: 303 ]]
+		closeDropDown = function()
 			-- upvalues: p18 (ref), closePlayerDropDownModule (copy)
 			return p18(closePlayerDropDownModule())
 		end,
-		blockPlayerSuccess = function(p19) --[[ line: 307 ]]
+		blockPlayerSuccess = function(p19)
 			-- upvalues: p18 (ref), setPlayerIsBlockedModule (copy)
 			p18(setPlayerIsBlockedModule(p19, true))
 		end,
-		unblockPlayer = function(p20) --[[ line: 311 ]]
+		unblockPlayer = function(p20)
 			-- upvalues: p18 (ref), unblockPlayerModule (copy)
 			return p18(unblockPlayerModule(p20))
 		end,
-		requestFriendship = function(p21, _) --[[ line: 315 ]]
+		requestFriendship = function(p21, _)
 			-- upvalues: p18 (ref), requestFriendshipModule (copy)
 			return p18(requestFriendshipModule(p21))
 		end

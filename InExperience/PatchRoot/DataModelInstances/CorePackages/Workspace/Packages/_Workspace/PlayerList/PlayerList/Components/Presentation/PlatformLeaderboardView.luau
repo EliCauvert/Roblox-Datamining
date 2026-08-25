@@ -25,11 +25,11 @@ local var13 = signalsModule.createSignal(nil)
 local var14 = signalsModule.createSignal(nil)
 local var15 = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap()
 
-local function _(p0, p1) --[[ line: 47 | named "formatRelativeTimeLegacy" ]]
+local function _(p0, p1)
 	return if p0 == nil then "Unable to load" else `Last updated {math.max(0, math.floor((p1 - p0) / 60))} min ago`
 end
 
-return reactModule.memo(function(p2) --[[ line: 64 | named "PlatformLeaderboardViewImpl" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: usePlatformLeaderboardModule (ref), useTokens (ref), constantsModule (ref), useReportPanelContentHeightModule (ref), var15 (ref), var13 (ref), var14 (ref), reactModule (ref), signalsReactModule (ref), signalsModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), playersService (ref), resolveDisplayNameModule (ref), getPeopleHeaderLabelModule (ref), serviceUnavailableState (ref), loadingState (ref), emptyFriendsState (ref), platformEntryViewModule (ref), scrollView (ref), view (ref), text (ref)
 	local tab = p2.tab
 	local isFriends = tab == "Friends"
@@ -51,9 +51,9 @@ return reactModule.memo(function(p2) --[[ line: 64 | named "PlatformLeaderboardV
 	local var32, var33 = reactModule.useState(0)
 	local var34 = reactModule.useRef(false)
 	local var35 = signalsReactModule.useSignalState(var25.getAllData)
-	local var36 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 107 ]]
+	local var36 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var26 (ref)
-		return signalsModule.createComputed(function(p3) --[[ line: 108 ]]
+		return signalsModule.createComputed(function(p3)
 			-- upvalues: var26 (copy)
 			return var26(p3) ~= nil
 		end)
@@ -70,30 +70,30 @@ return reactModule.memo(function(p2) --[[ line: 64 | named "PlatformLeaderboardV
 	if fFlagPlayerListLocalizeGameTextModule then
 		local var38 = signalsReactModule.useSignalState(var26)
 		local _, var39 = reactModule.useState(0)
-		reactModule.useEffect(function() --[[ line: 125 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var39 (ref)
 			local delayedThread = nil
 			
-			local function schedule() --[[ line: 127 ]]
+			local function schedule()
 				-- upvalues: delayedThread (write), var39 (copy), schedule (ref)
-				delayedThread = task.delay(300, function() --[[ line: 128 ]]
+				delayedThread = task.delay(300, function()
 					-- upvalues: var39 (copy), schedule (copy)
-					var39(function(p4) --[[ line: 129 ]]
+					var39(function(p4)
 						return p4 + 1
 					end)
 					schedule()
 				end)
 			end
 			
-			delayedThread = task.delay(300, function() --[[ line: 128 ]]
+			delayedThread = task.delay(300, function()
 				-- upvalues: var39 (copy), schedule (ref)
-				var39(function(p5) --[[ line: 129 ]]
+				var39(function(p5)
 					return p5 + 1
 				end)
 				schedule()
 			end)
 			
-			return function() --[[ line: 136 ]]
+			return function()
 				-- upvalues: delayedThread (write)
 				if delayedThread then
 					task.cancel(delayedThread)
@@ -114,26 +114,26 @@ return reactModule.memo(function(p2) --[[ line: 64 | named "PlatformLeaderboardV
 	else
 		local var42 = signalsReactModule.useSignalBinding(var26)
 		local var43, var44 = reactModule.useBinding(os.time())
-		reactModule.useEffect(function() --[[ line: 158 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var44 (ref)
 			local delayedThread = nil
 			
-			local function schedule() --[[ line: 160 ]]
+			local function schedule()
 				-- upvalues: delayedThread (write), var44 (copy), schedule (ref)
-				delayedThread = task.delay(300, function() --[[ line: 161 ]]
+				delayedThread = task.delay(300, function()
 					-- upvalues: var44 (copy), schedule (copy)
 					var44(os.time())
 					schedule()
 				end)
 			end
 			
-			delayedThread = task.delay(300, function() --[[ line: 161 ]]
+			delayedThread = task.delay(300, function()
 				-- upvalues: var44 (copy), schedule (ref)
 				var44(os.time())
 				schedule()
 			end)
 			
-			return function() --[[ line: 167 ]]
+			return function()
 				-- upvalues: delayedThread (write)
 				if delayedThread then
 					task.cancel(delayedThread)
@@ -141,66 +141,66 @@ return reactModule.memo(function(p2) --[[ line: 64 | named "PlatformLeaderboardV
 				end
 			end
 		end, {})
-		var41 = reactModule.useMemo(function() --[[ line: 174 ]]
+		var41 = reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), var42 (ref), var43 (ref)
-			return reactModule.joinBindings({ lastRefreshedAt = var42, tick = var43 }):map(function(p6) --[[ line: 178 ]]
+			return reactModule.joinBindings({ lastRefreshedAt = var42, tick = var43 }):map(function(p6)
 				local lastRefreshedAt = p6.lastRefreshedAt
 				
 				return if lastRefreshedAt == nil then "Unable to load" else `Last updated {math.max(0, math.floor((os.time() - lastRefreshedAt) / 60))} min ago`
 			end)
 		end, { var42, var43 })
 	end
-	reactModule.useEffect(function() --[[ line: 184 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), tab (ref)
 		if var18 then
 			var18:fireTabOpened(tab)
 		end
-		return function() --[[ line: 188 ]]
+		return function()
 			-- upvalues: var18 (copy), tab (copy)
 			if var18 then
 				var18:fireTabClosed(tab)
 			end
 		end
 	end, { var18, tab })
-	reactModule.useEffect(function() --[[ line: 195 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var34 (ref), loading_1 (ref), var36 (ref)
 		var34.current = false
 		loading_1("loading")
 		
 		if var36 then
-			return function() --[[ line: 199 ]]
+			return function()
 				-- upvalues: var34 (copy)
 				var34.current = true
 			end
 		end
-		local delayedThread = task.delay(30, function() --[[ line: 203 ]]
+		local delayedThread = task.delay(30, function()
 			-- upvalues: var34 (copy), loading_1 (copy)
 			if not var34.current then
 				loading_1("error")
 			end
 		end)
 		
-		return function() --[[ line: 208 ]]
+		return function()
 			-- upvalues: var34 (copy), delayedThread (ref)
 			var34.current = true
 			task.cancel(delayedThread)
 		end
 	end, { var18, tab, var36, var32 })
 	local localPlayer = playersService.LocalPlayer
-	local var45 = reactModule.useMemo(function() --[[ line: 215 ]]
+	local var45 = reactModule.useMemo(function()
 		-- upvalues: localPlayer (ref), resolveDisplayNameModule (copy)
 		return if localPlayer then resolveDisplayNameModule(localPlayer) else nil
 	end, { localPlayer })
 	local var46 = signalsReactModule.useSignalState(var29)
 	local var47 = getPeopleHeaderLabelModule()
-	local var48 = reactModule.useCallback(function() --[[ line: 223 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref), tab (ref), loading_1 (ref), var33 (ref)
 		if var18 then
 			var18:fireTabClosed(tab)
 			var18:fireTabOpened(tab)
 		end
 		loading_1("loading")
-		var33(function(p7) --[[ line: 229 ]]
+		var33(function(p7)
 			return p7 + 1
 		end)
 	end, { var18, tab })

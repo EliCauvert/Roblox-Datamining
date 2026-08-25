@@ -6,12 +6,12 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useIsSpatial = responsiveModule.useIsSpatial
 local usePreferredInput = responsiveModule.usePreferredInput
 
-return function(p0, p1, p2) --[[ line: 11 ]]
+return function(p0, p1, p2)
 	-- upvalues: useTokens (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), textService (ref)
 	local var3 = useTokens()
 	local bodyMedium = var3.Typography.BodyMedium
 	local var4 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
-	local var5, var6 = reactModule.useMemo(function() --[[ line: 19 ]]
+	local var5, var6 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), textService (copy), bodyMedium (ref), var4 (ref), p1 (ref), var3 (ref)
 		local y = textService:GetTextSize(string.gsub(p0 or "", "[\r\n]+", " "), bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y
 		local var7 = y * ((if var4 then 1.3 else 1) * bodyMedium.LineHeight) + y

@@ -12,7 +12,7 @@ return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 20 ]]
+	run = function(p0, p1)
 		-- upvalues: getEngineFeatureEngineUGCValidationLCOOBModule (ref), errorSourceStringsModule (ref), getFFlagEnforceMaxSizeOffsetForLCModule (ref), UGCValidationService (ref)
 		if p1.consumerConfig.consumerEnv == "IEC" then return end
 		local rootInstance = p1.rootInstance

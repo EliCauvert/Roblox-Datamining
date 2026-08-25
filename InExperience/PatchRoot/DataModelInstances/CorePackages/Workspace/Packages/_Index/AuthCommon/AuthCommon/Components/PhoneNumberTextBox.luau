@@ -11,23 +11,23 @@ local countryCodeSelectorModule = require(authCommon.Components.CountryCodeSelec
 local phoneNumberTextBox = roactModule.Component:extend("PhoneNumberTextBox")
 phoneNumberTextBox.defaultProps = { CountryCodeSize = 70, InnerPadding = 12 }
 
-function phoneNumberTextBox.init(p0) --[[ line: 26 ]]
+function phoneNumberTextBox.init(p0)
 	p0:setState({
 		CountryCodeHover = false,
 		CountryCodeSearchVisible = false
 	})
 	
-	function p0.CountryCodeMouseEnter() --[[ line: 32 ]]
+	function p0.CountryCodeMouseEnter()
 		-- upvalues: p0 (ref)
 		p0:setState({ CountryCodeHover = true })
 	end
 	
-	function p0.CountryCodeMouseLeave() --[[ line: 38 ]]
+	function p0.CountryCodeMouseLeave()
 		-- upvalues: p0 (ref)
 		p0:setState({ CountryCodeHover = false })
 	end
 	
-	function p0.OpenCountryCode() --[[ line: 44 ]]
+	function p0.OpenCountryCode()
 		-- upvalues: p0 (ref)
 		p0:setState({ CountryCodeSearchVisible = true })
 		
@@ -36,7 +36,7 @@ function phoneNumberTextBox.init(p0) --[[ line: 26 ]]
 		end
 	end
 	
-	function p0.CloseCountryCode() --[[ line: 54 ]]
+	function p0.CloseCountryCode()
 		-- upvalues: p0 (ref)
 		p0:setState({ CountryCodeSearchVisible = false })
 		
@@ -45,7 +45,7 @@ function phoneNumberTextBox.init(p0) --[[ line: 26 ]]
 		end
 	end
 	
-	function p0.SelectCountryCode(p1) --[[ line: 64 ]]
+	function p0.SelectCountryCode(p1)
 		-- upvalues: p0 (ref)
 		if p0.props.SetCountryCode then
 			p0.props.SetCountryCode(p1)
@@ -54,9 +54,9 @@ function phoneNumberTextBox.init(p0) --[[ line: 26 ]]
 	end
 end
 
-function phoneNumberTextBox.render(p2) --[[ line: 72 ]]
+function phoneNumberTextBox.render(p2)
 	-- upvalues: withStyle (ref), text (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), coreGuiService (ref), countryCodeSelectorModule (ref)
-	return withStyle(function(p3) --[[ line: 73 ]]
+	return withStyle(function(p3)
 		-- upvalues: p2 (ref), text (copy), roactModule (copy), imageSetLabel (copy), getImageData (copy), coreGuiService (copy), countryCodeSelectorModule (copy)
 		local color = p2.props.Color
 		local color_1 = p3.Theme.BackgroundMuted.Color

@@ -15,7 +15,7 @@ local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesSt
 local fFlagExpChatUseSharedChannelTabDisplayLabel = sharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
 local var8 = localization.new(localizationService.RobloxLocaleId)
 
-local function getLocalizedChannelTabLabels() --[[ line: 22 ]]
+local function getLocalizedChannelTabLabels()
 	-- upvalues: channelTabDisplayLabel (ref), var8 (ref)
 	local localizationKeys = channelTabDisplayLabel.LocalizationKeys
 	
@@ -30,7 +30,7 @@ end
 
 return {
 	type = "groupedListItem",
-	fetch = function(_) --[[ line: 38 ]]
+	fetch = function(_)
 		-- upvalues: expChatSharedModule (ref), promiseModule (ref), fFlagExpChatUseMessagesStore (ref), expChatMessageHelpersModule (ref), var8 (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref), getLocalizedChannelTabLabels (ref), fFlagExpChatUseChannelTabsStore (ref), playersService (ref)
 		local store = expChatSharedModule.context.store
 		
@@ -99,7 +99,7 @@ return {
 					t[i] = { id = i, label = var31, items = v_1 }
 				end
 			end
-			table.sort(t_1, function(p0, p1) --[[ line: 170 ]]
+			table.sort(t_1, function(p0, p1)
 				-- upvalues: allChannelTabs (ref), expChatMessageHelpersModule (copy)
 				local var32 = allChannelTabs[p0]
 				local var33 = allChannelTabs[p1]

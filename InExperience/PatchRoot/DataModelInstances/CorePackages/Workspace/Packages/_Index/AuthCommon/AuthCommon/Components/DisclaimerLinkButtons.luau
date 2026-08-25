@@ -9,11 +9,11 @@ local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-local var2 = function(p0, p1, p2) --[[ line: 40 ]]
+local var2 = function(p0, p1, p2)
 	return if p0 == Enum.FillDirection.Horizontal then { CellSize = UDim2.new(0.5, -p2, 0, p1) } else { CellSize = UDim2.new(1, 0, 0, p1) }
 end
 
-local var3 = function(p3) --[[ line: 52 ]]
+local var3 = function(p3)
 	-- upvalues: useStyle (ref), useDesignTokens (ref), useSelectionCursor (ref), cursorKind (ref), reactModule (ref), styledTextLabel (ref), imageSetLabel (ref), images (ref)
 	local var4 = useStyle()
 	local var5 = useDesignTokens()
@@ -56,7 +56,7 @@ local var3 = function(p3) --[[ line: 52 ]]
 	})
 end
 
-return function(p4) --[[ line: 95 ]]
+return function(p4)
 	-- upvalues: useDesignTokens (ref), var2 (ref), reactModule (ref), var3 (ref)
 	local var9 = useDesignTokens()
 	local size1400 = var9.Size.Size_1400 or 80

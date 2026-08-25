@@ -1,7 +1,7 @@
 ﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local iconButton = roactModule.PureComponent:extend("IconButton")
 
-function iconButton.render(p0) --[[ line: 6 ]]
+function iconButton.render(p0)
 	-- upvalues: roactModule (ref)
 	local visible = p0.props.visible
 	local anchorPoint = p0.props.anchorPoint

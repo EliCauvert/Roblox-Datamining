@@ -7,7 +7,7 @@ local arrowFrameModule = require(parent.HorizontalNav.ArrowFrame)
 local utilsModule = require(parent.HorizontalNav.Utils)
 local useIsMouseAndKeyboardModule = require(parent_1.Utility.useIsMouseAndKeyboard)
 
-return function(p0) --[[ line: 56 | named "ScrollingListWithArrowsAndGradient" ]]
+return function(p0)
 	-- upvalues: useIsMouseAndKeyboardModule (ref), reactModule (ref), utilsModule (ref), gradientFrameModule (ref), arrowFrameModule (ref), introScrollModule (ref)
 	local listHeight = p0.listHeight
 	local childWidgetIndex = p0.childWidgetIndex
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 56 | named "ScrollingListWithArrowsAndGradient" ]
 	local var9, var10 = reactModule.useBinding(false)
 	local var11, var12 = reactModule.useBinding(false)
 	local var13, var14 = reactModule.useBinding(Vector2.new(0, 0))
-	local var15 = reactModule.useCallback(function(p1) --[[ line: 70 ]]
+	local var15 = reactModule.useCallback(function(p1)
 		-- upvalues: var8 (ref), utilsModule (copy), p0 (ref), var7 (ref), var10 (ref), var12 (ref)
 		local value = var8:getValue()
 		
@@ -35,12 +35,12 @@ return function(p0) --[[ line: 56 | named "ScrollingListWithArrowsAndGradient" ]
 		var10(var19)
 		var12(var20)
 	end, { var8, var10, var12 })
-	local var16 = reactModule.useCallback(function(p2) --[[ line: 92 ]]
+	local var16 = reactModule.useCallback(function(p2)
 		-- upvalues: var15 (ref), var14 (ref)
 		var15(p2)
 		var14(p2.CanvasPosition)
 	end, { var15, var14 })
-	reactModule.useEffect(function() --[[ line: 99 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var15 (ref)
 		local value = p0.scrollingFrameRef:getValue()
 		

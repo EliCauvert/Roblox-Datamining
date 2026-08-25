@@ -44,33 +44,33 @@ comboButton.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function comboButton.init(p0) --[[ line: 77 ]]
+function comboButton.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0:setState({
 		buttonControlState = controlStateModule.Initialize,
 		overflowControlState = controlStateModule.Initialize
 	})
 	
-	function p0.onButtonStateChanged(_, p1) --[[ line: 80 ]]
+	function p0.onButtonStateChanged(_, p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ buttonControlState = p1 })
 	end
 	
-	function p0.onOverflowStateChanged(_, p2) --[[ line: 84 ]]
+	function p0.onOverflowStateChanged(_, p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ overflowControlState = p2 })
 	end
 end
 
-function comboButton.render(p3) --[[ line: 89 ]]
+function comboButton.render(p3)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p4) --[[ line: 90 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: p3 (ref)
 		return p3:renderWithProviders(p4, nil, nil)
 	end)
 end
 
-function comboButton.renderWithProviders(p5, _, _, _) --[[ line: 95 ]]
+function comboButton.renderWithProviders(p5, _, _, _)
 	-- upvalues: roactModule (ref), reactModule (ref), genericButtonModule (ref), imagesModule (ref), t (ref), t_1 (ref)
 	return roactModule.createElement("Frame", {
 		LayoutOrder = p5.props.layoutOrder,
@@ -114,7 +114,7 @@ function comboButton.renderWithProviders(p5, _, _, _) --[[ line: 95 ]]
 	})
 end
 
-function ComboButtonFunctionalWrapper(p6) --[[ line: 142 ]]
+function ComboButtonFunctionalWrapper(p6)
 	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), comboButton (ref), cryoModule (ref)
 	return roactModule.createElement(comboButton, cryoModule.Dictionary.join(p6, { cursor = useCursorModule(uDim) }))
 end
@@ -122,7 +122,7 @@ end
 local comboButtonOuterWrapper = roactModule.PureComponent:extend("ComboButtonOuterWrapper")
 comboButtonOuterWrapper.validateProps = comboButton.validateProps
 
-function comboButtonOuterWrapper.render(p7) --[[ line: 156 ]]
+function comboButtonOuterWrapper.render(p7)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement(ComboButtonFunctionalWrapper, p7.props)
 end

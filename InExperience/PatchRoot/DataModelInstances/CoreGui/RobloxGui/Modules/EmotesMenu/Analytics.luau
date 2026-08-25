@@ -8,7 +8,7 @@ t.EventName = {
 	EmoteFailed = "emoteTriggerFailed"
 }
 
-function t.new() --[[ line: 13 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { eventStreamImpl = nil }
 	setmetatable(t_1, t)
@@ -16,13 +16,13 @@ function t.new() --[[ line: 13 ]]
 	return t_1
 end
 
-function t:withEventStream(p0) --[[ line: 22 ]]
+function t:withEventStream(p0)
 	self.eventStreamImpl = p0
 	
 	return self
 end
 
-function t:onMenuOpened() --[[ line: 27 ]]
+function t:onMenuOpened()
 	-- upvalues: playersService (ref), statsService (ref)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.MenuOpened, {
 		pid = tostring(game.PlaceId),
@@ -31,7 +31,7 @@ function t:onMenuOpened() --[[ line: 27 ]]
 	})
 end
 
-function t:onEmotePlayed(p1, p2) --[[ line: 40 ]]
+function t:onEmotePlayed(p1, p2)
 	-- upvalues: playersService (ref), statsService (ref)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmotePlayed, {
 		pid = tostring(game.PlaceId),
@@ -42,7 +42,7 @@ function t:onEmotePlayed(p1, p2) --[[ line: 40 ]]
 	})
 end
 
-function t:onEmoteFailed(p3, p4, p5) --[[ line: 55 ]]
+function t:onEmoteFailed(p3, p4, p5)
 	-- upvalues: playersService (ref), statsService (ref)
 	self:_getEventStream():setRBXEventStream("emoteMenu", self.EventName.EmoteFailed, {
 		invokedByCoreGui = true,
@@ -55,7 +55,7 @@ function t:onEmoteFailed(p3, p4, p5) --[[ line: 55 ]]
 	})
 end
 
-function t:_getEventStream() --[[ line: 72 ]]
+function t:_getEventStream()
 	assert(self.eventStreamImpl, "EventStream implementation not found. Did you forget to construct withEventStream?")
 	
 	return self.eventStreamImpl

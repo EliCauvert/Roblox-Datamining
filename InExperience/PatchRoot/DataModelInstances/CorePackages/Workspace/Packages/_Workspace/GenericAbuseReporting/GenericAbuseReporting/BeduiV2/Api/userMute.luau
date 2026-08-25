@@ -7,7 +7,7 @@ local fFlagExpChatUseChatMuteStore = sharedFlagsModule.FFlagExpChatUseChatMuteSt
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
 
-local function _(p0, p1) --[[ line: 16 | named "voiceMutePlayer" ]]
+local function _(p0, p1)
 	-- upvalues: fFlagAbuseReportVoiceMute (ref)
 	if not fFlagAbuseReportVoiceMute or not p1 then return end
 	local participants = p1.participants
@@ -20,7 +20,7 @@ local function _(p0, p1) --[[ line: 16 | named "voiceMutePlayer" ]]
 	end
 end
 
-function muteUser(p2, p3, p4) --[[ line: 31 ]]
+function muteUser(p2, p3, p4)
 	-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), fFlagAbuseReportVoiceMute (ref), expChatSharedModule (ref), fFlagExpChatUseMessagesStore (ref), userMuted (ref)
 	if not p2 or not p3 then
 		return false
@@ -84,7 +84,7 @@ function muteUser(p2, p3, p4) --[[ line: 31 ]]
 	end
 end
 
-function isUserMuted(p5) --[[ line: 70 ]]
+function isUserMuted(p5)
 	-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), expChatSharedModule (ref), fFlagExpChatUseMessagesStore (ref)
 	if not p5 then
 		return false

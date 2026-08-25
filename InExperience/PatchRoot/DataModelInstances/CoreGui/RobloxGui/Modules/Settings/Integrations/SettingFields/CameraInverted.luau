@@ -6,10 +6,10 @@ local availabilitySignal = settingsServiceModule.AvailabilitySignal
 local settingEnum = settingsServiceModule.SettingEnum
 local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ line: 22 | named "CameraInvertedValue" ]]
+local function _()
 	-- upvalues: valueChangedSignal (ref), gameSettings (ref)
 	local var5 = valueChangedSignal.new(gameSettings.CameraYInverted)
-	var5:connect(function(p0) --[[ line: 25 ]]
+	var5:connect(function(p0)
 		-- upvalues: gameSettings (copy)
 		if gameSettings.CameraYInverted == p0 then
 			return
@@ -20,10 +20,10 @@ local function _() --[[ line: 22 | named "CameraInvertedValue" ]]
 	return var5
 end
 
-local _ = function() --[[ line: 36 | named "CameraInvertedAvailability" ]]
+local _ = function()
 	-- upvalues: availabilitySignal (ref), gameSettings (ref)
 	local var6 = availabilitySignal.new(gameSettings.IsUsingCameraYInverted)
-	gameSettings.Changed:Connect(function(p1) --[[ line: 39 ]]
+	gameSettings.Changed:Connect(function(p1)
 		-- upvalues: var6 (ref), gameSettings (copy)
 		if p1 == "IsUsingCameraYInverted" then
 			var6:set(gameSettings.IsUsingCameraYInverted)
@@ -40,7 +40,7 @@ local t = {
 	field_type = settingEnum.Toggle
 }
 local var3 = valueChangedSignal.new(gameSettings.CameraYInverted)
-var3:connect(function(p2) --[[ line: 25 ]]
+var3:connect(function(p2)
 	-- upvalues: gameSettings (ref)
 	if gameSettings.CameraYInverted == p2 then
 		return
@@ -49,7 +49,7 @@ var3:connect(function(p2) --[[ line: 25 ]]
 end, true)
 t.onChanged = var3
 local var4 = availabilitySignal.new(gameSettings.IsUsingCameraYInverted)
-gameSettings.Changed:Connect(function(p3) --[[ line: 39 ]]
+gameSettings.Changed:Connect(function(p3)
 	-- upvalues: var4 (ref), gameSettings (ref)
 	if p3 == "IsUsingCameraYInverted" then
 		var4:set(gameSettings.IsUsingCameraYInverted)

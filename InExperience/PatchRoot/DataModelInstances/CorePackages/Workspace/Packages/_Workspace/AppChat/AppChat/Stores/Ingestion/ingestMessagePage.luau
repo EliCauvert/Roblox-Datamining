@@ -3,7 +3,7 @@ local buildValidMessagesModule = require(script.Parent.buildValidMessages)
 local ingestBatchModule = require(script.Parent.ingestBatch)
 local ingestOperationModule = require(script.Parent.IngestOperation)
 
-return function(p0, p1) --[[ line: 21 | named "ingestMessagePage" ]]
+return function(p0, p1)
 	-- upvalues: buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 	return ingestBatchModule(p0, buildValidMessagesModule(p0, p1), ingestOperationModule.Append)
 end

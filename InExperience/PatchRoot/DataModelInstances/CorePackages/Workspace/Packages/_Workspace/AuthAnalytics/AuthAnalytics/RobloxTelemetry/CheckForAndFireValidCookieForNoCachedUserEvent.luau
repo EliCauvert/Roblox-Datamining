@@ -10,25 +10,25 @@ local t = {
 	[loginStatus.LOGGED_IN] = true
 }
 
-local function _(p0) --[[ line: 24 | named "normalizeAuthenticationStatusForTelemetry" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	return if p0 == nil then "NIL" elseif t[p0] then p0 else "UNRECOGNIZED"
 end
 
-return function(p1, p2, p3) --[[ line: 34 ]]
+return function(p1, p2, p3)
 	-- upvalues: fFlagUseSignalsForAuthenticationStatus (ref), var2 (ref), loginStatus (ref), telemetryConfigsModule (ref), t (ref)
-	return function(p4) --[[ line: 37 ]]
+	return function(p4)
 		-- upvalues: fFlagUseSignalsForAuthenticationStatus (copy), var2 (copy), loginStatus (copy), p3 (ref), p1 (ref), p2 (ref), telemetryConfigsModule (copy), t (copy)
 		local var4 = if fFlagUseSignalsForAuthenticationStatus then var2(false).getStatus(false) else p4:getState().AuthenticationStatus.status
 		
 		if var4 == loginStatus.LOGGED_IN then
 			return
 		end
-		p3(p1):andThen(function(_) --[[ line: 52 ]]
+		p3(p1):andThen(function(_)
 			-- upvalues: p2 (copy), telemetryConfigsModule (copy), var4 (ref), t (copy)
 			p2:logRobloxTelemetryCounter(telemetryConfigsModule.ValidCookieForNoCachedUserTelemetryConfig, 1, {
 				authenticationStatus = if var4 == nil then "NIL" elseif t[var4] then var4 else "UNRECOGNIZED"
 			})
-		end):catch(function(_) --[[ line: 63 ]] end)
+		end):catch(function(_) end)
 	end
 end

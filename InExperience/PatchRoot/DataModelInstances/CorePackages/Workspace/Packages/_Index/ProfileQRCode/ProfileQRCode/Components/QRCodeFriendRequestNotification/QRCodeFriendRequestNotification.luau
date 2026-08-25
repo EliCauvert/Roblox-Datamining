@@ -20,7 +20,7 @@ local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnect
 local scanqr = images["icons/menu/scanqr"]
 local close = images["icons/navigation/close"]
 
-return function(p0) --[[ line: 46 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), fFlagConnectionsToFriendsRename (ref), useStyle (ref), useLocalUserInfoModule (ref), useAnalyticsModule (ref), reactModule (ref), eventNamesModule (ref), imageSetLabel (ref), scanqr (ref), styledTextLabel (ref), iconButton (ref), close (ref), iconSize (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var7 = useLocalization({
 		notificationRequest = textKeysModule.NotificationRequestText,
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 46 ]]
 	local var9 = useLocalUserInfoModule(p0.userId)
 	local var10 = useAnalyticsModule()
 	local var11, var12 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 57 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), eventNamesModule (copy), p0 (ref)
 		var10.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p0.notificationQueueSize })
 	end, { p0.userId })
@@ -148,7 +148,7 @@ return function(p0) --[[ line: 46 ]]
 			text = var7.acceptFriend,
 			fontStyle = var8.Font.CaptionBody,
 			isDisabled = var11,
-			onActivated = function() --[[ line: 184 ]]
+			onActivated = function()
 				-- upvalues: var12 (ref), p0 (ref)
 				var12(true)
 				p0.onAccept(p0.userId)

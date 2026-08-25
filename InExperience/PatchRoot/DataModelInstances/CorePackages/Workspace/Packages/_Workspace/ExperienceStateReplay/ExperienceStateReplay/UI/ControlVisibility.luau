@@ -2,31 +2,31 @@
 local mouse = game:GetService("Players").LocalPlayer:GetMouse()
 local tweenService = game:GetService("TweenService")
 
-function t.setupControl(value) --[[ line: 10 ]]
+function t.setupControl(value)
 	-- upvalues: mouse (ref), tweenService (ref)
 	local timestamp = os.time()
 	local var4 = false
 	local var5 = false
-	mouse.Move:Connect(function() --[[ line: 15 ]]
+	mouse.Move:Connect(function()
 		-- upvalues: timestamp (write)
 		timestamp = os.time()
 	end)
-	value.ControlBarContainer.MouseEnter:Connect(function() --[[ line: 19 ]]
+	value.ControlBarContainer.MouseEnter:Connect(function()
 		-- upvalues: var4 (write)
 		var4 = true
 	end)
-	value.ControlBarContainer.MouseLeave:Connect(function() --[[ line: 23 ]]
+	value.ControlBarContainer.MouseLeave:Connect(function()
 		-- upvalues: var4 (write)
 		var4 = false
 	end)
 	local var6 = nil
 	
-	local function createTween() --[[ line: 29 ]]
+	local function createTween()
 		-- upvalues: var6 (write), tweenService (copy), value (ref), createTween (ref)
 		var6 = tweenService:Create(value.ControlBarContainer, TweenInfo.new(2), { Position = value.ControlBarContainerNonVisiblePosition })
 		
 		if var6 then
-			var6.Completed:Connect(function() --[[ line: 36 ]]
+			var6.Completed:Connect(function()
 				-- upvalues: createTween (copy)
 				createTween()
 			end)
@@ -37,7 +37,7 @@ function t.setupControl(value) --[[ line: 10 ]]
 	end
 	
 	createTween()
-	task.spawn(function() --[[ line: 45 ]]
+	task.spawn(function()
 		-- upvalues: var6 (write), var4 (write), timestamp (write), var5 (write), value (ref)
 		while true do
 			if not var6 then

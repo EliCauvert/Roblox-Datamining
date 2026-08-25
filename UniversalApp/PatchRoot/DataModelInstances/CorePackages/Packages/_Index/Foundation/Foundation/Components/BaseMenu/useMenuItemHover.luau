@@ -2,13 +2,13 @@
 local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Components.Types)
 
-return function(p0) --[[ line: 28 | named "useMenuItemHover" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function() --[[ line: 30 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref)
 		if p0.itemRef.current == nil then return end
 		if typeof(p0.itemRef.current) == "Instance" then
-			local var2 = p0.itemRef.current:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ line: 38 ]]
+			local var2 = p0.itemRef.current:GetPropertyChangedSignal("GuiState"):Connect(function()
 				-- upvalues: p0 (copy)
 				if p0.isSubmenu then
 					if p0.isDisabled then return end
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 28 | named "useMenuItemHover" ]]
 				end
 			end)
 			
-			return function() --[[ line: 64 ]]
+			return function()
 				-- upvalues: var2 (ref)
 				var2:Disconnect()
 			end

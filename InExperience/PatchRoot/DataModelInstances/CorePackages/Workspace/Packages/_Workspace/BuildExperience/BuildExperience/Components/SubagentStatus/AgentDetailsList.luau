@@ -55,7 +55,7 @@ local list = {
 	}
 }
 
-local function _(p0, p1) --[[ line: 81 | named "getStatusFilterText" ]]
+local function _(p0, p1)
 	for i, v in p0 do
 		if v.status == p1 then
 			return v.text
@@ -64,16 +64,16 @@ local function _(p0, p1) --[[ line: 81 | named "getStatusFilterText" ]]
 	return p1 or "All"
 end
 
-local _ = function(p2, p3) --[[ line: 90 | named "taskMatchesSearch" ]]
+local _ = function(p2, p3)
 	-- upvalues: matchesSearchQueryModule (ref)
 	return matchesSearchQueryModule(p2.text, p3) or matchesSearchQueryModule(p2.description, p3)
 end
 
-local _ = function(p4, p5) --[[ line: 94 | named "taskMatchesStatus" ]]
+local _ = function(p4, p5)
 	return p5 == nil or p4.status == p5
 end
 
-local _ = function(p6, p7) --[[ line: 101 | named "shouldIncludeTask" ]]
+local _ = function(p6, p7)
 	-- upvalues: matchesSearchQueryModule (ref)
 	local searchQuery = p7.searchQuery
 	local var10 = matchesSearchQueryModule(p6.text, searchQuery) or matchesSearchQueryModule(p6.description, searchQuery)
@@ -89,7 +89,7 @@ local _ = function(p6, p7) --[[ line: 101 | named "shouldIncludeTask" ]]
 	return var10
 end
 
-return reactModule.memo(function(p8) --[[ line: 105 | named "AgentDetailsList" ]]
+return reactModule.memo(function(p8)
 	-- upvalues: reactModule (ref), useScaledValue (ref), buildAgentDetailsStatusMenuWidth (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), list (ref), subagentTaskStatus (ref), matchesSearchQueryModule (ref), view (ref), searchInput (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), todoListModule (ref)
 	local SUBAGENT_STATUS_SEARCH_TASKS
 	local var11, var12 = reactModule.useState("")
@@ -165,7 +165,7 @@ return reactModule.memo(function(p8) --[[ line: 105 | named "AgentDetailsList" ]
 		end
 	end
 	local var13_1
-	local function buildStatusMenuItems() --[[ line: 164 ]]
+	local function buildStatusMenuItems()
 		-- upvalues: var19 (write), var13 (ref)
 		local t = {}
 		
@@ -181,17 +181,17 @@ return reactModule.memo(function(p8) --[[ line: 105 | named "AgentDetailsList" ]
 	end
 	
 	local var23 = if fFlagBuildLocalization then buildStatusMenuItems() else reactModule.useMemo(buildStatusMenuItems, { var13 })
-	local var24 = reactModule.useCallback(function() --[[ line: 180 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref)
-		var16(function(p9) --[[ line: 181 ]]
+		var16(function(p9)
 			return not p9
 		end)
 	end, {})
-	local var25 = reactModule.useCallback(function() --[[ line: 186 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref)
 		var16(false)
 	end, {})
-	local var26 = reactModule.useCallback(function(p10) --[[ line: 190 ]]
+	local var26 = reactModule.useCallback(function(p10)
 		-- upvalues: var14 (ref), var16 (ref)
 		var14(if p10 == "All" then nil else p10)
 		var16(false)

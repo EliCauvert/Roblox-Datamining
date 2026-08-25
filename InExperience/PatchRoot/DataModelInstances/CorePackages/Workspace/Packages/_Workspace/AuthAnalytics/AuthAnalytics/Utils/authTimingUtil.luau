@@ -3,7 +3,7 @@ local var1 = httpService:GenerateGUID()
 local var2 = nil
 local processTime = os.clock()
 
-local function _() --[[ line: 12 | named "getLandingPageTiming" ]]
+local function _()
 	-- upvalues: var2 (write), processTime (write), var1 (ref)
 	return if var2 then {
 		app_session = var1,
@@ -13,12 +13,12 @@ local function _() --[[ line: 12 | named "getLandingPageTiming" ]]
 end
 
 return {
-	landingPageLoadStart = function() --[[ line: 32 ]]
+	landingPageLoadStart = function()
 		-- upvalues: var2 (write), httpService (ref), processTime (write)
 		var2 = httpService:GenerateGUID()
 		processTime = os.clock()
 	end,
-	landingPageLoadFinish = function() --[[ line: 41 ]]
+	landingPageLoadFinish = function()
 		-- upvalues: var2 (write), processTime (write), var1 (ref)
 		local var4 = if not var2 then nil else {
 			app_session = var1,

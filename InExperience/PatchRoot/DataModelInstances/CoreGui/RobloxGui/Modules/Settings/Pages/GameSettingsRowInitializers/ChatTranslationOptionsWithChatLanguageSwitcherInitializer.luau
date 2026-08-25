@@ -14,14 +14,14 @@ local getFStringChatTranslationEnabledLocalesModule = require(robloxGui.Modules.
 local textChatServiceSettingsSavedEngineFeature = game:GetEngineFeature("TextChatServiceSettingsSaved")
 local var11 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.Unavailable")
 
-return function(p0, p1, p2) --[[ line: 29 ]]
+return function(p0, p1, p2)
 	-- upvalues: url (ref), playersService (ref), httpService (ref), name (ref), fixChatLanguageSwitcherLabel (ref), utilityModule (ref), robloxTranslatorModule (ref), var11 (ref), gameSettings (ref), localPlayer (ref), textChatService (ref), textChatServiceSettingsSavedEngineFeature (ref), getFStringChatTranslationEnabledLocalesModule (ref)
 	local t = { [1] = "en_us" }
 	local t_1 = { en_us = 1 }
 	local list = { "English" }
 	local text = url.LOCALE_URL .. string.format("v1/locales?displayValueLocale=%s", playersService.LocalPlayer.LocaleId:gsub("-", "_"))
 	
-	local function localeCodeToLanguageCodeMappingCallback(p3, p4) --[[ line: 53 ]]
+	local function localeCodeToLanguageCodeMappingCallback(p3, p4)
 		-- upvalues: name (copy), fixChatLanguageSwitcherLabel (copy), p0 (ref), utilityModule (copy), robloxTranslatorModule (copy), var11 (copy), p1 (ref), gameSettings (copy), t (ref), localPlayer (copy), textChatService (copy), list (ref), p2 (ref), textChatServiceSettingsSavedEngineFeature (copy)
 		if not p3 then
 			if p4 == nil then
@@ -93,7 +93,7 @@ return function(p0, p1, p2) --[[ line: 29 ]]
 			var39.ChatLanguageSelectorMode = var42
 		end
 		p0.ChatLanguageSelectorFrame.LayoutOrder = p1.ChatLanguageSelectorFrame
-		p0.ChatLanguageSelectorMode.IndexChanged:connect(function(p5) --[[ line: 134 | named "onChatSelectionIndexUpdated" ]]
+		p0.ChatLanguageSelectorMode.IndexChanged:connect(function(p5)
 			-- upvalues: gameSettings (copy), t (copy), localPlayer (copy), var30 (write), p2 (copy)
 			local chatTranslationLocale = gameSettings.ChatTranslationLocale
 			local var50 = t[p5]
@@ -107,7 +107,7 @@ return function(p0, p1, p2) --[[ line: 29 ]]
 		p0.ChatTranslationToggleLabel = var44
 		p0.ChatTranslationToggleEnabler = var45
 		p0.ChatTranslationToggleFrame.LayoutOrder = p1.ChatTranslationToggleFrame
-		p0.ChatTranslationToggleEnabler.IndexChanged:connect(function(p6) --[[ line: 161 ]]
+		p0.ChatTranslationToggleEnabler.IndexChanged:connect(function(p6)
 			-- upvalues: textChatService (copy), textChatServiceSettingsSavedEngineFeature (copy), gameSettings (copy), p2 (copy), var30 (write)
 			local var51 = p6 ~= 1
 			local chatTranslationToggleEnabled = textChatService.ChatTranslationToggleEnabled
@@ -132,7 +132,7 @@ return function(p0, p1, p2) --[[ line: 29 ]]
 		p0.ChatTranslationLabel = var48
 		p0.ChatTranslationEnabler = var49
 		p0.ChatTranslationFrame.LayoutOrder = p1.ChatTranslationFrame
-		p0.ChatTranslationEnabler.IndexChanged:connect(function(p7) --[[ line: 198 ]]
+		p0.ChatTranslationEnabler.IndexChanged:connect(function(p7)
 			-- upvalues: textChatService (copy), textChatServiceSettingsSavedEngineFeature (copy), gameSettings (copy), p2 (copy), localPlayer (copy), p0 (copy)
 			local var52 = p7 ~= 1
 			local chatTranslationEnabled = textChatService.ChatTranslationEnabled
@@ -155,7 +155,7 @@ return function(p0, p1, p2) --[[ line: 29 ]]
 		end)
 	end
 	
-	httpService:RequestInternal({ Method = "GET", Url = text }):Start(function(p8, p9) --[[ line: 223 ]]
+	httpService:RequestInternal({ Method = "GET", Url = text }):Start(function(p8, p9)
 		-- upvalues: httpService (copy), getFStringChatTranslationEnabledLocalesModule (copy), list (ref), t (ref), t_1 (ref), name (copy), text (ref), localeCodeToLanguageCodeMappingCallback (ref)
 		local var54
 		local var53 = false
@@ -168,7 +168,7 @@ return function(p0, p1, p2) --[[ line: 29 ]]
 		elseif p9.StatusCode < 200 or p9.StatusCode >= 400 then
 			var54 = "Locale Code to Language Code Mapping Request Status code: " .. p9.StatusCode
 		else
-			local ok, status = pcall(function() --[[ line: 234 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpService (copy), p9 (ref), getFStringChatTranslationEnabledLocalesModule (copy), list (copy), t (copy), t_1 (copy)
 				local body = httpService:JSONDecode(p9.Body)
 				local t_2 = {}
@@ -177,7 +177,7 @@ return function(p0, p1, p2) --[[ line: 29 ]]
 					table.insert(t_2, i)
 				end
 				local name
-				local function _(p10) --[[ line: 244 | named "shouldAddLocaleAsChatTranslationOption" ]]
+				local function _(p10)
 					-- upvalues: t_2 (ref)
 					for i, v in t_2 do
 						if v == p10 then

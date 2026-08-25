@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableSecurityAlertToastCallback", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableSecurityAlertToastCallback")
 end

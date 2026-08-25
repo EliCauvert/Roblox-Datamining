@@ -12,20 +12,20 @@ local var4 = reactModule.createElement(contextualSliderModule, {
 	min = 0,
 	max = 100,
 	value = 0,
-	onValueChanged = function() --[[ line: 21 ]] end
+	onValueChanged = function() end
 })
 local var5 = reactModule.createElement(systemSliderModule, {
 	min = 0,
 	max = 100,
 	value = 0,
-	onValueChanged = function() --[[ line: 27 ]] end
+	onValueChanged = function() end
 })
-describe("ContextualSlider", function() --[[ line: 30 ]]
+describe("ContextualSlider", function()
 	-- upvalues: mountComponentTimes (ref), var4 (ref), scrollComponentTimes (ref)
 	mountComponentTimes(var4, 100, "ContextualSlider")
 	scrollComponentTimes(var4, 100, "ContextualSlider")
 end)
-describe("SystemSlider", function() --[[ line: 34 ]]
+describe("SystemSlider", function()
 	-- upvalues: mountComponentTimes (ref), var5 (ref), scrollComponentTimes (ref)
 	mountComponentTimes(var5, 100, "SystemSlider")
 	scrollComponentTimes(var5, 100, "SystemSlider")

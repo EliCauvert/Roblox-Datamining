@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 14 | named "reduce" ]]
+﻿return function(p0, p1, p2)
 	local var0 = p2
 	
 	for i, v in p0 do

@@ -7,7 +7,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local buttonSize = foundationModule.Enums.ButtonSize
 local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p0) --[[ line: 19 | named "FlyoutSwitchAccountButton" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	return reactModule.createElement(button, {
 		isDisabled = false,
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 19 | named "FlyoutSwitchAccountButton" ]]
 		}).title,
 		variant = buttonVariant.Standard,
 		LayoutOrder = p0.layoutOrder,
-		onActivated = reactModule.useCallback(function() --[[ line: 20 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			p0.closeDrawer()
 			

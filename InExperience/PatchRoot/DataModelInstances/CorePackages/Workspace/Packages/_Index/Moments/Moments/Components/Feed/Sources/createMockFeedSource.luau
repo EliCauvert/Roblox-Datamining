@@ -2,7 +2,7 @@
 local _ = require(moments.Components.Feed.FeedTypes)
 local momentsMomentFixturesModule = require(moments.Parent.DataHydration.MomentsMomentFixtures)
 
-return function(p0) --[[ line: 58 | named "createMockFeedSource" ]]
+return function(p0)
 	-- upvalues: momentsMomentFixturesModule (ref)
 	p0 = p0 or {}
 	local pageSize = p0.pageSize or 5
@@ -13,7 +13,7 @@ return function(p0) --[[ line: 58 | named "createMockFeedSource" ]]
 	local var6 = 0
 	local t = {}
 	
-	local function buildPage(p1) --[[ line: 71 ]]
+	local function buildPage(p1)
 		-- upvalues: total (ref), pageSize (ref), momentsMomentFixturesModule (copy)
 		local var11
 		local minValue = math.min(pageSize, if total ~= nil then pageSize else math.max(total - (p1 - 1), 0))
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 58 | named "createMockFeedSource" ]]
 	end
 	
 	return {
-		fetchAsync = function(p2) --[[ line: 82 ]]
+		fetchAsync = function(p2)
 			-- upvalues: var6 (write), var5 (ref), t (ref), latencySeconds (ref), failAfterPages (ref), buildPage (ref)
 			p2 = p2 or 1
 			var6 += 1
@@ -55,12 +55,12 @@ return function(p0) --[[ line: 58 | named "createMockFeedSource" ]]
 		end,
 		id = p0.id or "mock",
 		recommendationSource = p0.recommendationSource or "Trending",
-		dispose = function() --[[ line: 134 ]] end,
-		getPendingCount = function() --[[ line: 108 ]]
+		dispose = function() end,
+		getPendingCount = function()
 			-- upvalues: t (ref)
 			return #t
 		end,
-		resolveNext = function() --[[ line: 112 ]]
+		resolveNext = function()
 			-- upvalues: t (ref)
 			local removed = table.remove(t, 1)
 			
@@ -72,7 +72,7 @@ return function(p0) --[[ line: 58 | named "createMockFeedSource" ]]
 				end
 			end
 		end,
-		rejectNext = function(p3) --[[ line: 124 ]]
+		rejectNext = function(p3)
 			-- upvalues: t (ref)
 			local removed = table.remove(t, 1)
 			

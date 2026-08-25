@@ -19,10 +19,10 @@ local var9 = socialLuaAnalyticsModule.Telemetry.new({
 		{
 			type = "EventIngest",
 			standardizedFields = if require(momentsCommon.Flags.GetFFlagMomentsAnalyticsProducerPrereqs)() then { "addSessionInfo", "addSessionId" } else nil,
-			overrideName = function(p0) --[[ line: 72 ]]
+			overrideName = function(p0)
 				return p0.eventName
 			end,
-			format = function(p1, _) --[[ line: 75 ]]
+			format = function(p1, _)
 				-- upvalues: fFlagMomentsAnalyticsClientEventTimestampModule (ref), cryoModule (ref)
 				return if fFlagMomentsAnalyticsClientEventTimestampModule then cryoModule.Dictionary.join(p1.additionalInfo or {}, {
 					client_event_timestamp_ms = DateTime.now().UnixTimestampMillis
@@ -32,7 +32,7 @@ local var9 = socialLuaAnalyticsModule.Telemetry.new({
 	}
 })
 
-return function(p2, p3) --[[ line: 88 | named "fireAnalyticsEvent" ]]
+return function(p2, p3)
 	-- upvalues: telemetryEmitterModule (ref), var9 (ref), funnelEventActionListModule (ref), getFFlagMomentsCreationSaveDraftModule (ref), sessionManagerModule (ref), fireFunnelAnalyticsEventModule (ref)
 	telemetryEmitterModule.emit(var9, { eventName = p2, additionalInfo = p3 })
 	local var10 = funnelEventActionListModule[p2]

@@ -1,7 +1,7 @@
 ﻿local number = require(script.Parent.Parent.Parent.LuauPolyfill).Number
 local nullModule = require(script.Parent.null)
 
-local function deepContains(p0, p1) --[[ line: 4 ]]
+local function deepContains(p0, p1)
 	-- upvalues: number (ref), nullModule (ref), deepContains (ref)
 	if typeof(p0) ~= typeof(p1) then
 		return false, ("{1}: value of type '%s'\n{2}: value of type '%s'"):format(typeof(p0), typeof(p1))

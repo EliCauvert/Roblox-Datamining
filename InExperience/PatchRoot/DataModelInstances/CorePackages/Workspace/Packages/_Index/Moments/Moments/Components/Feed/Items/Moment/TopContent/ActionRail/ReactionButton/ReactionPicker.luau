@@ -14,7 +14,7 @@ local useSignalState = signalsReactModule.useSignalState
 local var9 = if fFlagMomentsEmojiSetsApiModule then require(parent.DataHydration.MomentsGetMomentsReactionsStore) else nil
 local FALLBACK_PICKER_REACTIONS = reactionTypesFromEmojisModule.FALLBACK_PICKER_REACTIONS
 local reactionTypesFromEmojis = reactionTypesFromEmojisModule.reactionTypesFromEmojis
-local var10 = if fFlagMomentsEmojiSetsApiModule then function(p0) --[[ line: 30 ]]
+local var10 = if fFlagMomentsEmojiSetsApiModule then function(p0)
 	-- upvalues: var9 (ref), reactionTypesFromEmojis (ref)
 	assert(var9 ~= nil, "expected Moments reactions store when FFlagMomentsEmojiSetsApi is on")
 	local getEmojis = var9(false).getEmojis
@@ -23,12 +23,12 @@ local var10 = if fFlagMomentsEmojiSetsApiModule then function(p0) --[[ line: 30 
 	return reactionTypesFromEmojis(getEmojis(p0))
 end else nil
 
-return reactModule.memo(function() --[[ line: 38 | named "ReactionPicker" ]]
+return reactModule.memo(function()
 	-- upvalues: momentContextModule (ref), useReactionCommitModule (ref), FALLBACK_PICKER_REACTIONS (ref), fFlagMomentsEmojiSetsApiModule (ref), useSignalState (ref), var10 (ref), reactModule (ref), pickerItemModule (ref), view (ref)
 	local store = momentContextModule.useMoment().store
 	local var11 = useReactionCommitModule()
 	local var12 = if fFlagMomentsEmojiSetsApiModule then useSignalState(var10) else FALLBACK_PICKER_REACTIONS
-	local var13 = reactModule.useCallback(function(p1, p2) --[[ line: 50 ]]
+	local var13 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var11 (ref), store (ref)
 		var11("pickerSelect", p2, p1)
 		store.setReactionPickerOpen(false)

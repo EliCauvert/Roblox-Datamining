@@ -8,7 +8,7 @@ local foundationModule = require(corePackagesService.Packages.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
 local menuButtonsModule = require(script.Parent.MenuButtons)
 
-return function(p0) --[[ line: 27 | named "Container" ]]
+return function(p0)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), menuButtonsModule (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

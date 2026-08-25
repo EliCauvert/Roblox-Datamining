@@ -6,7 +6,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local verifiedBadgesModule = require(parent.VerifiedBadges)
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-local function ItemCardCreatorName(p0) --[[ line: 19 ]]
+local function ItemCardCreatorName(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref), verifiedBadgesModule (ref), fFlagAXAddTextXAlignmentProp (ref)
 	local var4 = useTokens()
 	

@@ -8,10 +8,10 @@ local availabilitySignal = settingsServiceModule.AvailabilitySignal
 local settingEnum = settingsServiceModule.SettingEnum
 local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ line: 23 | named "UINavValue" ]]
+local function _()
 	-- upvalues: valueChangedSignal (ref), gameSettings (ref)
 	local var7 = valueChangedSignal.new(gameSettings.UiNavigationKeyBindEnabled)
-	var7:connect(function(p0) --[[ line: 26 ]]
+	var7:connect(function(p0)
 		-- upvalues: gameSettings (copy)
 		if gameSettings.UiNavigationKeyBindEnabled == p0 then
 			return
@@ -22,10 +22,10 @@ local function _() --[[ line: 23 | named "UINavValue" ]]
 	return var7
 end
 
-local _ = function() --[[ line: 39 | named "UINavAvailability" ]]
+local _ = function()
 	-- upvalues: availabilitySignal (ref), userInputService (ref)
 	local var8 = availabilitySignal.new(userInputService.KeyboardEnabled)
-	userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 42 ]]
+	userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
 		-- upvalues: var8 (ref), userInputService (copy)
 		var8:set(userInputService.KeyboardEnabled)
 	end)
@@ -41,7 +41,7 @@ local t = {
 	field_type = settingEnum.Toggle
 }
 local var5 = valueChangedSignal.new(gameSettings.UiNavigationKeyBindEnabled)
-var5:connect(function(p1) --[[ line: 26 ]]
+var5:connect(function(p1)
 	-- upvalues: gameSettings (ref)
 	if gameSettings.UiNavigationKeyBindEnabled == p1 then
 		return
@@ -50,7 +50,7 @@ var5:connect(function(p1) --[[ line: 26 ]]
 end)
 t.onChanged = var5
 local var6 = availabilitySignal.new(userInputService.KeyboardEnabled)
-userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 42 ]]
+userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
 	-- upvalues: var6 (ref), userInputService (ref)
 	var6:set(userInputService.KeyboardEnabled)
 end)

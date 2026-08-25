@@ -23,12 +23,12 @@ local getFFlagExpChatEnableVoiceReverseNudgeModule = require(expChat.Flags.GetFF
 local getFFlagExpChatUseVoiceParticipantsStore = sharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
 local getVoiceIndicatorAssetNameModule = require(expChat.BubbleChat.Helpers.getVoiceIndicatorAssetName)
 
-local function createTweenShimmeringEffect(p0) --[[ line: 53 ]]
+local function createTweenShimmeringEffect(p0)
 	-- upvalues: tweenService (ref)
 	return tweenService:Create(p0:getValue(), TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.Out, -1), { Offset = Vector2.new(1, 0) })
 end
 
-local function ControlBubble(p1) --[[ line: 61 ]]
+local function ControlBubble(p1)
 	-- upvalues: fFlagExpChatMicBubbleSingleImageModule (ref), reactModule (ref), getVoiceIndicatorAssetNameModule (ref), image (ref), enableChatMicPerfBinding (ref), imageSetLabel (ref), runService (ref), expChatMicActivityHeartbeatIncrement (ref), createTweenShimmeringEffect (ref), vector2 (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), getFFlagExpChatEnableVoiceReverseNudgeModule (ref), images (ref), guiService (ref), var8 (write)
 	local var20, var21, var22
 	local _ = nil
@@ -46,7 +46,7 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 		local var23, var24 = reactModule.useBinding(0)
 		var20 = var23
 		var21 = var24
-		var17 = var20:map(function(p2) --[[ line: 70 ]]
+		var17 = var20:map(function(p2)
 			-- upvalues: p1 (ref), getVoiceIndicatorAssetNameModule (copy)
 			return p1.iconAssetName or getVoiceIndicatorAssetNameModule(p1.voiceState, p2, p1.iconStyle, false)
 		end)
@@ -62,7 +62,7 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 	local _ = reactModule.useRef(nil)
 	local var28 = reactModule.useRef(nil)
 	local var29 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (write), var29 (write)
 		if var28.current then
 			local UIGradient = var28.current:FindFirstChildWhichIsA("UIGradient", true)
@@ -72,12 +72,12 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 			end
 		end
 	end, { var28 })
-	reactModule.useEffect(function() --[[ line: 97 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), runService (copy), var27 (ref), expChatMicActivityHeartbeatIncrement (copy), var21 (write), var29 (write), createTweenShimmeringEffect (copy), vector2 (copy)
 		local postSimulationConnection = nil
 		
 		if p1.voiceState and p1.voiceState == "Talking" then
-			postSimulationConnection = runService.PostSimulation:Connect(function() --[[ line: 100 ]]
+			postSimulationConnection = runService.PostSimulation:Connect(function()
 				-- upvalues: var27 (copy), expChatMicActivityHeartbeatIncrement (copy), var21 (copy)
 				var27.current = ((var27.current or 0) + 1) % expChatMicActivityHeartbeatIncrement
 				
@@ -86,7 +86,7 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 				end
 			end)
 			
-			return function() --[[ line: 109 ]]
+			return function()
 				-- upvalues: postSimulationConnection (write)
 				if postSimulationConnection then
 					postSimulationConnection:Disconnect()
@@ -97,7 +97,7 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 			local var35 = createTweenShimmeringEffect(var29)
 			var35:Play()
 			
-			return function() --[[ line: 119 ]]
+			return function()
 				-- upvalues: var35 (ref), var29 (copy), vector2 (copy)
 				var35:Cancel()
 				
@@ -106,7 +106,7 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 				end
 			end
 		end
-		return function() --[[ line: 128 ]]
+		return function()
 			-- upvalues: postSimulationConnection (write)
 			if postSimulationConnection then
 				postSimulationConnection:Disconnect()
@@ -119,11 +119,11 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 	
 	if getFFlagExpChatUseVoiceParticipantsStore() then
 		local var31 = reactModule.useRef(p1.voiceState)
-		reactModule.useEffect(function() --[[ line: 141 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var31 (write), p1 (ref)
 			var31.current = p1.voiceState
 		end, { p1.voiceState })
-		var30 = reactModule.useCallback(function(p3) --[[ line: 145 ]]
+		var30 = reactModule.useCallback(function(p3)
 			-- upvalues: p1 (ref), var31 (write)
 			if p1.onActivated then
 				p1.onActivated(p3, var31.current)
@@ -179,7 +179,7 @@ local function ControlBubble(p1) --[[ line: 61 ]]
 				}),
 				ActivityGradient = fFlagExpChatMicBubbleSingleImageModule and reactModule.createElement("UIGradient", {
 					Rotation = 0,
-					Color = var20:map(function(p4) --[[ line: 213 ]]
+					Color = var20:map(function(p4)
 						return ColorSequence.new({
 							ColorSequenceKeypoint.new(0, Color3.new(1, 1, 1)),
 							ColorSequenceKeypoint.new(p4 * 0.5, Color3.new(1, 1, 1)),

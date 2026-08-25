@@ -1,6 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 3 | named "stripMeshFromGltf" ]]
+return function(p0)
 	-- upvalues: httpService (ref)
 	local var1 = httpService:JSONDecode(p0)
 	var1.meshes = nil

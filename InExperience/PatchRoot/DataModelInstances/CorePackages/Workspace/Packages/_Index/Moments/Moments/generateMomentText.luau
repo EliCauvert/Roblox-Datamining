@@ -8,14 +8,14 @@ local getFFlagMomentTextGenerationDisableCacheModule = require(moments.Flags.Get
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local t = {}
 
-local function log(p0, ...) --[[ line: 60 ]]
+local function log(p0, ...)
 	if _G.__MOMENTS_DISABLE_GEN_TEXT_LOG__ then
 		return
 	end
 	print(`[moments-gen] {string.format(p0, ...)}`)
 end
 
-local function _() --[[ line: 67 | named "mockResult" ]]
+local function _()
 	return {
 		summary = "insane save",
 		description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
@@ -23,9 +23,9 @@ local function _() --[[ line: 67 | named "mockResult" ]]
 	}
 end
 
-local function captureKey(p1) --[[ line: 75 ]]
+local function captureKey(p1)
 	local var9 = nil
-	pcall(function() --[[ line: 77 ]]
+	pcall(function()
 		-- upvalues: var9 (write), p1 (ref)
 		var9 = p1.LocalId
 	end)
@@ -33,11 +33,11 @@ local function captureKey(p1) --[[ line: 75 ]]
 	return if var9 == nil then if typeof(p1) == "table" and p1.assetId ~= nil then `asset:{p1.assetId}` else `capture:{tostring(p1)}` else `local:{var9}`
 end
 
-local _ = function(p2) --[[ line: 92 | named "resultName" ]]
+local _ = function(p2)
 	if p2 == nil then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 96 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p2 (ref)
 		return p2.Name
 	end)
@@ -45,17 +45,17 @@ local _ = function(p2) --[[ line: 92 | named "resultName" ]]
 	return if ok and typeof(status) == "string" then status else nil
 end
 
-local function runGeneration(p3, p4, p5, p6) --[[ line: 105 ]]
+local function runGeneration(p3, p4, p5, p6)
 	-- upvalues: promiseModule (ref), log (ref), isStudioModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref)
 	local captureService = p6.captureService or game:GetService("CaptureService")
 	local pollIntervalSeconds = p6.pollIntervalSeconds or 1
 	local maxPollAttempts = p6.maxPollAttempts or 30
 	
-	return promiseModule.new(function(p7, _, p8) --[[ line: 110 ]]
+	return promiseModule.new(function(p7, _, p8)
 		-- upvalues: p5 (ref), captureService (ref), p3 (ref), log (copy), p4 (ref), isStudioModule (copy), maxPollAttempts (ref), pollIntervalSeconds (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy)
-		local thread = task.spawn(function() --[[ line: 111 ]]
+		local thread = task.spawn(function()
 			-- upvalues: p5 (copy), captureService (copy), p3 (copy), log (copy), p4 (copy), isStudioModule (copy), p7 (ref), maxPollAttempts (copy), pollIntervalSeconds (copy), fFlagMomentTextGenerationFilteredSignal (copy)
-			local ok, status, var14 = pcall(function() --[[ line: 112 ]]
+			local ok, status, var14 = pcall(function()
 				-- upvalues: p5 (copy), captureService (copy), p3 (copy)
 				return if p5 == nil then captureService:GenerateMomentTextAsync(p3) else captureService:GenerateMomentTextAsync(p3, p5)
 			end)
@@ -65,7 +65,7 @@ local function runGeneration(p3, p4, p5, p6) --[[ line: 105 ]]
 				if status == nil then
 					var15 = nil
 				else
-					local ok_1, status_1 = pcall(function() --[[ line: 96 ]]
+					local ok_1, status_1 = pcall(function()
 						-- upvalues: status (ref)
 						return status.Name
 					end)
@@ -77,7 +77,7 @@ local function runGeneration(p3, p4, p5, p6) --[[ line: 105 ]]
 					for _ = 1, maxPollAttempts do
 						local var18
 						task.wait(pollIntervalSeconds)
-						local ok_1, status_1, var16, var17 = pcall(function() --[[ line: 141 ]]
+						local ok_1, status_1, var16, var17 = pcall(function()
 							-- upvalues: captureService (copy), var14 (ref)
 							return captureService:CheckMomentTextStatusAsync(var14)
 						end)
@@ -88,7 +88,7 @@ local function runGeneration(p3, p4, p5, p6) --[[ line: 105 ]]
 						if status_1 == nil then
 							var18 = nil
 						else
-							local ok_2, status_2 = pcall(function() --[[ line: 96 ]]
+							local ok_2, status_2 = pcall(function()
 								-- upvalues: status_1 (ref)
 								return status_1.Name
 							end)
@@ -136,7 +136,7 @@ local function runGeneration(p3, p4, p5, p6) --[[ line: 105 ]]
 		end)
 		
 		if getFFlagEnableMomentTextGeneration() then
-			p8(function() --[[ line: 171 ]]
+			p8(function()
 				-- upvalues: log (copy), p4 (copy), thread (ref)
 				log("generation cancelled for %s", p4)
 				task.cancel(thread)
@@ -145,11 +145,11 @@ local function runGeneration(p3, p4, p5, p6) --[[ line: 105 ]]
 	end)
 end
 
-return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
+return function(p9, p10, p11)
 	-- upvalues: isStudioModule (ref), promiseModule (ref), captureKey (ref), getFFlagMomentTextGenerationDisableCacheModule (ref), runGeneration (ref), t (ref), log (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref)
 	p11 = p11 or {}
 	
-	if (p11.isEngineEnabled or function() --[[ line: 182 ]]
+	if (p11.isEngineEnabled or function()
 		return game:GetEngineFeature("CaptureServiceGenerateMomentText")
 	end)() then
 		local var20 = captureKey(p9)
@@ -166,11 +166,11 @@ return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
 		local captureService = p11.captureService or game:GetService("CaptureService")
 		local pollIntervalSeconds = p11.pollIntervalSeconds or 1
 		local maxPollAttempts = p11.maxPollAttempts or 30
-		local var25 = promiseModule.new(function(p12, _, p13) --[[ line: 110 ]]
+		local var25 = promiseModule.new(function(p12, _, p13)
 			-- upvalues: p10 (ref), captureService (ref), p9 (ref), log (copy), var21 (ref), isStudioModule (copy), maxPollAttempts (ref), pollIntervalSeconds (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy)
-			local thread = task.spawn(function() --[[ line: 111 ]]
+			local thread = task.spawn(function()
 				-- upvalues: p10 (copy), captureService (copy), p9 (copy), log (copy), var21 (copy), isStudioModule (copy), p12 (ref), maxPollAttempts (copy), pollIntervalSeconds (copy), fFlagMomentTextGenerationFilteredSignal (copy)
-				local ok, status, var26 = pcall(function() --[[ line: 112 ]]
+				local ok, status, var26 = pcall(function()
 					-- upvalues: p10 (copy), captureService (copy), p9 (copy)
 					return if p10 == nil then captureService:GenerateMomentTextAsync(p9) else captureService:GenerateMomentTextAsync(p9, p10)
 				end)
@@ -180,7 +180,7 @@ return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
 					if status == nil then
 						var15 = nil
 					else
-						local ok_1, status_1 = pcall(function() --[[ line: 96 ]]
+						local ok_1, status_1 = pcall(function()
 							-- upvalues: status (ref)
 							return status.Name
 						end)
@@ -192,7 +192,7 @@ return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
 						for _ = 1, maxPollAttempts do
 							local var18
 							task.wait(pollIntervalSeconds)
-							local ok_1, status_1, var27, var28 = pcall(function() --[[ line: 141 ]]
+							local ok_1, status_1, var27, var28 = pcall(function()
 								-- upvalues: captureService (copy), var26 (ref)
 								return captureService:CheckMomentTextStatusAsync(var26)
 							end)
@@ -204,7 +204,7 @@ return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
 							if status_1 == nil then
 								var18 = nil
 							else
-								local ok_2, status_2 = pcall(function() --[[ line: 96 ]]
+								local ok_2, status_2 = pcall(function()
 									-- upvalues: status_1 (ref)
 									return status_1.Name
 								end)
@@ -253,7 +253,7 @@ return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
 			end)
 			
 			if getFFlagEnableMomentTextGeneration() then
-				p13(function() --[[ line: 171 ]]
+				p13(function()
 					-- upvalues: log (copy), var21 (copy), thread (ref)
 					log("generation cancelled for %s", var21)
 					task.cancel(thread)
@@ -261,18 +261,18 @@ return function(p9, p10, p11) --[[ line: 179 | named "generateMomentText" ]]
 			end
 		end)
 		t[var20] = var25
-		var25:andThen(function(p14) --[[ line: 216 ]]
+		var25:andThen(function(p14)
 			-- upvalues: t (copy), var20 (write)
 			if p14 == nil or p14.error ~= nil then
 				t[var20] = nil
 			end
-		end, function() --[[ line: 220 ]]
+		end, function()
 			-- upvalues: t (copy), var20 (write)
 			t[var20] = nil
 		end)
 		
 		if getFFlagEnableMomentTextGeneration() then
-			var25:finally(function(p15) --[[ line: 228 ]]
+			var25:finally(function(p15)
 				-- upvalues: promiseModule (copy), t (copy), var20 (write)
 				if p15 == promiseModule.Status.Cancelled then
 					t[var20] = nil

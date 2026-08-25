@@ -7,7 +7,7 @@ local var0 = urlBuilder.new({
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function(p0) --[[ line: 14 | named "getChartsPageUrl" ]]
+return function(p0)
 	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), urlBuilder (ref), var0 (ref)
 	local t = {}
 	addSystemInfoToArgs(t)

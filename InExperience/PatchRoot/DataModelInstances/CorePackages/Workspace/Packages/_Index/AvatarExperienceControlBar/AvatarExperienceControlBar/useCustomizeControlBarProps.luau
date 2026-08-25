@@ -44,11 +44,11 @@ local t = {
 	[avatarScreen.SearchLandingFocusedWidgetPage] = true
 }
 
-local function selectUserId(p0) --[[ line: 61 ]]
+local function selectUserId(p0)
 	return p0.LocalUserId
 end
 
-return function(p1) --[[ line: 80 | named "useCustomizeControlBarProps" ]]
+return function(p1)
 	-- upvalues: useSemanticTokensModule (ref), useNavigation (ref), fFlagAXUseProfileIconEntryPoint (ref), fFlagAXPPEReturnToEntrySurface (ref), useAvatarRoute (ref), avatarScreen (ref), useSelector (ref), selectColorAdjustmentButtonColor (ref), responsiveModule (ref), selectUserId (ref), useLocalization (ref), fFlagAXAvatarSharingEntryPoint (ref), fFlagAXPhotoboothFunctionality (ref), reactModule (ref), slotBasedEditorAnalytics (ref), menuItemEnumModule (ref), t (ref), fFlagAXFavoritesManagerNavEntry (ref), fFlagAXHideHeadAdjustmentForDefaultHead (ref), selectHasDynamicHead (ref), fFlagAXResetAvatarButton (ref), useUndoRedoBarViewModelModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), avatarHeadShot (ref), fFlagAXRootSlotBasedEditorFlag (ref), fFlagAXMigrateBuilderIcons (ref), iconName (ref)
 	local var16 = useSemanticTokensModule()
 	local var17 = useNavigation()
@@ -71,37 +71,37 @@ return function(p1) --[[ line: 80 | named "useCustomizeControlBarProps" ]]
 		myPublishedAvatars = if fFlagAXAvatarSharingEntryPoint then "Feature.Avatar.Action.MyPublishedAvatars" else nil,
 		photobooth = if fFlagAXPhotoboothFunctionality then "Feature.Avatar.Label.Photobooth" else nil
 	})
-	local var24 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.AvatarSwitcher)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.Main.AvatarSwitcher)
 	end, { var17 })
-	local var25 = reactModule.useCallback(function() --[[ line: 116 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.AccessoryAdjustment)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.AdjustAccessory)
 	end, { var17 })
-	local var26 = reactModule.useCallback(function() --[[ line: 121 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.BodyShape)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.BodyScale)
 	end, { var17 })
-	local var27 = reactModule.useCallback(function() --[[ line: 126 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.HeadRefinement)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.CustomizeHead)
 	end, { var17 })
-	local var28 = reactModule.useCallback(function() --[[ line: 131 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.LayeredClothingSort)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.ClothingLayers)
 	end, { var17 })
-	local var29 = reactModule.useCallback(function() --[[ line: 136 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.LayeredMakeupSort)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.MakeupLayers)
 	end, { var17 })
-	local var30 = reactModule.useCallback(function() --[[ line: 141 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.ColorAdjustment)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.AvatarRefinement.ColorAdjustment)
@@ -110,33 +110,33 @@ return function(p1) --[[ line: 80 | named "useCustomizeControlBarProps" ]]
 	local var32 = nil
 	
 	if fFlagAXAvatarSharingEntryPoint then
-		var31 = reactModule.useCallback(function() --[[ line: 148 ]]
+		var31 = reactModule.useCallback(function()
 			-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 			var17.navigate(avatarScreen.LookComposerPage, {
 				prevNavPage = if var17.state and var17.state.key then var17.state.key else nil
 			})
 			slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.SharedCommunityAvatars.ShareAvatar)
 		end, { var17 })
-		var32 = reactModule.useCallback(function() --[[ line: 156 ]]
+		var32 = reactModule.useCallback(function()
 			-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 			var17.navigate(avatarScreen.MySharedAvatars)
 			slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.SharedCommunityAvatars.MyPublishedAvatars)
 		end, { var17 })
 	end
-	local var33 = reactModule.useCallback(function() --[[ line: 162 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		if p1.onInventoryActivated then
 			p1.onInventoryActivated()
 		end
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.More.Inventory)
 	end, { p1.onInventoryActivated })
-	local var34 = reactModule.useCallback(function() --[[ line: 169 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.EditEmotes)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.More.Emotes)
 	end, { var17 })
 	local useCallback = reactModule.useCallback
-	useCallback = useCallback(function() --[[ line: 174 ]]
+	useCallback = useCallback(function()
 		-- upvalues: var17 (ref), var18 (write), fFlagAXUseProfileIconEntryPoint (copy), t (copy), avatarScreen (copy), fFlagAXPPEReturnToEntrySurface (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		local var39 = if var17.state and var17.state.key then var17.state.key else nil
 		local var40 = if var18 then var18.opaque.name else var39
@@ -157,12 +157,12 @@ return function(p1) --[[ line: 80 | named "useCustomizeControlBarProps" ]]
 		var17,
 		if fFlagAXUseProfileIconEntryPoint or fFlagAXPPEReturnToEntrySurface then var18 else nil
 	})
-	local var35 = if fFlagAXPhotoboothFunctionality then reactModule.useCallback(function() --[[ line: 211 ]]
+	local var35 = if fFlagAXPhotoboothFunctionality then reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.Photobooth)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.Photobooth.Photobooth)
 	end, { var17 }) else nil
-	local var36 = if fFlagAXFavoritesManagerNavEntry then reactModule.useCallback(function() --[[ line: 219 ]]
+	local var36 = if fFlagAXFavoritesManagerNavEntry then reactModule.useCallback(function()
 		-- upvalues: var17 (ref), avatarScreen (copy), slotBasedEditorAnalytics (copy), menuItemEnumModule (copy)
 		var17.navigate(avatarScreen.FavoritesSaved)
 		slotBasedEditorAnalytics.trackControlBarClick(menuItemEnumModule.Main.Favorites)
@@ -171,7 +171,7 @@ return function(p1) --[[ line: 80 | named "useCustomizeControlBarProps" ]]
 	local var38 = if fFlagAXResetAvatarButton then useUndoRedoBarViewModelModule() else nil
 	
 	return {
-		config = reactModule.useMemo(function() --[[ line: 235 ]]
+		config = reactModule.useMemo(function()
 			-- upvalues: menuItemEnumModule (copy), p1 (ref), getRbxthumbWithTypeSizeAndOptions (copy), var22 (ref), avatarHeadShot (copy), fFlagAXRootSlotBasedEditorFlag (copy), useCallback (ref), var24 (ref), fFlagAXUseProfileIconEntryPoint (copy), var19 (ref), fFlagAXMigrateBuilderIcons (copy), iconName (copy), slotBasedEditorAnalytics (copy), var23 (ref), var16 (ref), var25 (ref), var26 (ref), var27 (ref), fFlagAXHideHeadAdjustmentForDefaultHead (copy), var37 (ref), var28 (ref), var29 (ref), var20 (ref), var30 (ref), fFlagAXAvatarSharingEntryPoint (copy), var31 (write), var32 (write), var33 (ref), var21 (ref), var34 (ref), fFlagAXPhotoboothFunctionality (copy), var35 (write), fFlagAXFavoritesManagerNavEntry (copy), var36 (write), fFlagAXResetAvatarButton (copy), var38 (ref)
 			local var44
 			local t = {}

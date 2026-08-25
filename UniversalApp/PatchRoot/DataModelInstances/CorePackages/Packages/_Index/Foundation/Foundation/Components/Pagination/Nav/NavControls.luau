@@ -18,17 +18,17 @@ local t = {
 }
 local t_1 = { start = "left-nav", ["end"] = "right-nav" }
 
-local function _(p0, p1) --[[ line: 56 | named "shouldShowNavButton" ]]
+local function _(p0, p1)
 	-- upvalues: paginationDirectionModule (ref)
 	return if p0 == paginationDirectionModule.First or p0 == paginationDirectionModule.Last then p1.hasFirstLastButtons else true
 end
 
-local _ = function(p2, p3) --[[ line: 64 | named "getIsDisabled" ]]
+local _ = function(p2, p3)
 	-- upvalues: paginationDirectionModule (ref)
 	return if p2 == paginationDirectionModule.First then p3.isFirstDisabled elseif p2 == paginationDirectionModule.Backward then p3.isBackDisabled elseif p2 == paginationDirectionModule.Forward then p3.isForwardDisabled else p3.isLastDisabled
 end
 
-return reactModule.memo(function(p4) --[[ line: 76 | named "NavControls" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: t (ref), paginationDirectionModule (ref), paginationSlotsUtilsModule (ref), reactModule (ref), navButtonModule (ref), viewModule (ref), t_1 (ref)
 	local side = t[p4.side]
 	local t_2 = {}

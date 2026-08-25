@@ -13,7 +13,7 @@ local reportUnifiedLoggingImpressions = sduiCoreSystemModule.reportUnifiedLoggin
 local sduiComponentType = sduiCoreSystemModule.SduiComponentType
 local useCollectionAnalyticsContextModule = require(script.Parent.useCollectionAnalyticsContext)
 
-local function buildSelectionsFromGroups(p0) --[[ line: 66 ]]
+local function buildSelectionsFromGroups(p0)
 	local t = {}
 	
 	if not p0 then
@@ -27,7 +27,7 @@ local function buildSelectionsFromGroups(p0) --[[ line: 66 ]]
 	return t
 end
 
-local function convertToFilterModel(p1, p2) --[[ line: 79 ]]
+local function convertToFilterModel(p1, p2)
 	local displayName = p1.displayName
 	local t = {}
 	
@@ -64,23 +64,23 @@ local function convertToFilterModel(p1, p2) --[[ line: 79 ]]
 	}
 end
 
-return reactModule.memo(function(p3) --[[ line: 117 | named "SduiFilterPillsCarousel" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: reactModule (ref), buildSelectionsFromGroups (ref), convertToFilterModel (ref), useCollectionAnalyticsContextModule (ref), sduiComponentType (ref), getOptionContextTag (ref), reportUnifiedLoggingImpressions (ref), cryoModule (ref), view (ref), filterPillCarousel (ref)
 	local filterGroups = p3.filterGroups
 	local sduiContext = p3.sduiContext
 	local analyticsContext = p3.analyticsContext
-	local var11, var12 = reactModule.useState(function() --[[ line: 122 ]]
+	local var11, var12 = reactModule.useState(function()
 		-- upvalues: buildSelectionsFromGroups (copy), filterGroups (ref)
 		return buildSelectionsFromGroups(filterGroups)
 	end)
-	reactModule.useEffect(function() --[[ line: 126 ]]
+	reactModule.useEffect(function()
 		-- upvalues: filterGroups (ref), var12 (ref), buildSelectionsFromGroups (copy)
 		if filterGroups then
 			var12(buildSelectionsFromGroups(filterGroups))
 		end
 	end, { filterGroups })
 	local var13 = reactModule.useRef(nil)
-	local var14 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: filterGroups (ref), var11 (ref), convertToFilterModel (copy)
 		if not filterGroups then
 			return {}
@@ -94,7 +94,7 @@ return reactModule.memo(function(p3) --[[ line: 117 | named "SduiFilterPillsCaro
 		return t
 	end, { filterGroups, var11 })
 	local _, var15 = useCollectionAnalyticsContextModule(analyticsContext, sduiComponentType.FilterPillsCarousel, #var14, #var14, sduiContext, nil)
-	local var16 = reactModule.useMemo(function() --[[ line: 156 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), getOptionContextTag (copy)
 		local t = {}
 		
@@ -121,9 +121,9 @@ return reactModule.memo(function(p3) --[[ line: 117 | named "SduiFilterPillsCaro
 			title = p3.title,
 			filters = var14,
 			sortIndex = if var15.current then var15.current.collectionPosition else 0,
-			onFilterApplied = reactModule.useCallback(function(p4, p5) --[[ line: 218 ]]
+			onFilterApplied = reactModule.useCallback(function(p4, p5)
 				-- upvalues: var12 (ref), cryoModule (copy), p3 (ref)
-				var12(function(p6) --[[ line: 219 ]]
+				var12(function(p6)
 					-- upvalues: cryoModule (copy), p4 (ref), p5 (ref), p3 (copy)
 					local var20 = cryoModule.Dictionary.join(p6, { [p4] = p5 })
 					
@@ -137,7 +137,7 @@ return reactModule.memo(function(p3) --[[ line: 117 | named "SduiFilterPillsCaro
 			pageContext = sduiContext.routeName or sduiContext.appPage,
 			dataUpdatedTimestamp = sduiContext.dataUpdatedTimestamp,
 			scrollViewPositionChangedSignal = p3.scrollViewPositionChangedSignal,
-			sendImpressions = reactModule.useCallback(function(p7) --[[ line: 173 ]]
+			sendImpressions = reactModule.useCallback(function(p7)
 				-- upvalues: reportUnifiedLoggingImpressions (copy), sduiContext (ref), var16 (ref), var15 (ref), p3 (ref)
 				reportUnifiedLoggingImpressions(sduiContext, p7, var16, var15.current, nil, p3.impressionEventName, p3.skipItemImpressionsLog)
 			end, {
@@ -147,7 +147,7 @@ return reactModule.memo(function(p3) --[[ line: 117 | named "SduiFilterPillsCaro
 				p3.impressionEventName,
 				p3.skipItemImpressionsLog
 			}),
-			sendFilterClick = reactModule.useCallback(function(p8, p9, p10, p11, p12, p13, p14) --[[ line: 194 ]]
+			sendFilterClick = reactModule.useCallback(function(p8, p9, p10, p11, p12, p13, p14)
 				-- upvalues: p3 (ref)
 				if p3.onFilterClick then
 					p3.onFilterClick(nil, nil, {

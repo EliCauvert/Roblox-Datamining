@@ -9,7 +9,7 @@ local UGCValidateLCCagingIncorrectUVThresholdBodyPart = game:DefineFastInt("UGCV
 return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityAvatar),
-	run = function(p0, p1) --[[ line: 15 ]]
+	run = function(p0, p1)
 		-- upvalues: constantsModule (ref), UGCValidateLCCagingIncorrectUVThresholdBodyPart (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local measureCageUVAvatar = p1.aqsSummaryData.Measure_Cage_UV_Avatar
 		

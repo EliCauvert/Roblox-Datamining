@@ -21,19 +21,19 @@ local t = {
 			referredByPlayerId = tModule.optional(tModule.number),
 			joinAttemptOrigin = tModule.optional(tModule.string),
 			joinAttemptId = tModule.string
-		}), function(p0) --[[ line: 45 | named "checkRequiredParams" ]]
+		}), function(p0)
 			return p0.placeId or p0.userId
 		end)
 	}
 }
 t.__index = t
 
-function t.new() --[[ line: 57 ]]
+function t.new()
 	-- upvalues: messageBus (ref), t (ref)
 	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
 end
 
-function t:launchGame(p1, p2, p3) --[[ line: 64 ]]
+function t:launchGame(p1, p2, p3)
 	-- upvalues: httpService (ref), cryoModule (ref), getFFlagMoveLuaExpLaunchBeginModule (ref), default (ref), messageBus (ref)
 	if type(p1.placeId) == "string" then
 		p1.placeId = tonumber(p1.placeId)

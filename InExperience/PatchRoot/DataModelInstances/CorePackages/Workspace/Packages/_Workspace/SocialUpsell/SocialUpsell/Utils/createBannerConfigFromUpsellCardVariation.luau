@@ -15,12 +15,12 @@ local t = {
 }
 local t_1 = { Fae = socialUpsellTypeModule.FacialAgeEstimation }
 
-local function _(p0) --[[ line: 69 | named "getButtonAction" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	return if p0.action and p0.action.type then t[p0.action.type] else nil
 end
 
-return function(p1, p2) --[[ line: 76 ]]
+return function(p1, p2)
 	-- upvalues: t_1 (ref), socialUpsellTypeModule (ref), constantsModule (ref), t (ref), fFlagAgeBasedUXHomepageVerificationBannerGreyButton (ref), createCommonSocialUpsellBannerConfigModule (ref), getDeepValue (ref), fFlagAgeBasedUXHomepageVerificationBannerLockIcon (ref)
 	local upsellCardType = t_1[p1.upsellCardType] or socialUpsellTypeModule.Unknown
 	local upsellCardV2Config = p1.upsellCardV2Config

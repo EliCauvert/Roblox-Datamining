@@ -3,11 +3,11 @@ local dataConsumerModule = require(script.Parent.Parent.Parent.Components.DataCo
 local networkViewModule = require(script.Parent.NetworkView)
 local serverNetwork = roactModule.Component:extend("ServerNetwork")
 
-function serverNetwork.init(p0, _) --[[ line: 10 ]]
+function serverNetwork.init(p0, _)
 	p0.state = { targetNetworkData = p0.props.ServerNetworkData }
 end
 
-function serverNetwork.render(p1) --[[ line: 16 ]]
+function serverNetwork.render(p1)
 	-- upvalues: roactModule (ref), networkViewModule (ref)
 	return roactModule.createElement(networkViewModule, {
 		size = p1.props.size,

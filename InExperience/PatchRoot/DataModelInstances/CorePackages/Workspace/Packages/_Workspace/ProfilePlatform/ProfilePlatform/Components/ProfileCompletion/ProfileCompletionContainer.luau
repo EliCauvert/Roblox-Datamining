@@ -12,24 +12,24 @@ local useProfileCompletionDataModule = require(profilePlatform.Hooks.useProfileC
 local enumsModule = require(profilePlatform.Common.Enums)
 local useScreenSize = robloxAppHooksModule.useScreenSize
 
-return reactModule.memo(function(p0) --[[ line: 22 | named "ProfileCompletionContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useProfileAnalyticsContextModule (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), reactModule (ref), useProfileCompletionSduiContextModule (ref), socialServerDrivenUiModule (ref), useProfileCompletionDataModule (ref), roactNavigationModule (ref), socialSduiComponentWrapper (ref), enumsModule (ref)
 	local var10 = useProfileAnalyticsContextModule()
 	local var11 = useScreenSize()
 	local var12, var13 = useDynamicSizeMarginModule()
 	local var14, var15 = reactModule.useState(var11.X)
 	local var16 = useProfileCompletionSduiContextModule({ sideMargin = var12, containerWidth = var14 })
-	local var17 = reactModule.useMemo(function() --[[ line: 33 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		return { collectionPosition = p0.layoutOrder }
 	end, { p0.layoutOrder })
 	local var18 = reactModule.useRef(nil)
-	local var19 = reactModule.useCallback(function(p1) --[[ line: 38 ]]
+	local var19 = reactModule.useCallback(function(p1)
 		-- upvalues: var13 (ref), var15 (ref)
 		var13(p1)
 		var15(p1.AbsoluteSize.X)
 	end, { var13, var15 })
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: socialServerDrivenUiModule (copy)
 		socialServerDrivenUiModule.registerSocialActions()
 	end, {})

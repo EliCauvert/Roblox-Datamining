@@ -3,13 +3,13 @@ local historyPageUtilsModule = require(script.Parent.historyPageUtils)
 local constantsModule = require(script.Parent.constants)
 
 return {
-	createSessionHistoryCache = function(p0) --[[ line: 24 ]]
+	createSessionHistoryCache = function(p0)
 		-- upvalues: constantsModule (ref), historyPageUtilsModule (ref)
 		p0 = p0 or constantsModule.getMaxCachedSessionHistories()
 		local t = {}
 		local t_1 = {}
 		
-		local function removeFromOrder(p1) --[[ line: 29 ]]
+		local function removeFromOrder(p1)
 			-- upvalues: t_1 (ref)
 			for i, v in t_1 do
 				if v == p1 then
@@ -20,13 +20,13 @@ return {
 			end
 		end
 		
-		local function _(p2) --[[ line: 38 | named "touch" ]]
+		local function _(p2)
 			-- upvalues: removeFromOrder (ref), t_1 (ref)
 			removeFromOrder(p2)
 			table.insert(t_1, p2)
 		end
 		
-		local _ = function() --[[ line: 43 | named "evictOldest" ]]
+		local _ = function()
 			-- upvalues: t_1 (ref), t (ref)
 			local var6 = t_1[1]
 			
@@ -38,7 +38,7 @@ return {
 		end
 		
 		return {
-			save = function(p3, p4) --[[ line: 52 ]]
+			save = function(p3, p4)
 				-- upvalues: t (ref), historyPageUtilsModule (copy), removeFromOrder (ref), t_1 (ref), p0 (ref)
 				t[p3] = {
 					loadedBySequenceId = historyPageUtilsModule.cloneHistoryBySequenceId(p4.loadedBySequenceId),
@@ -58,7 +58,7 @@ return {
 					t[var7] = nil
 				end
 			end,
-			restore = function(p5) --[[ line: 67 ]]
+			restore = function(p5)
 				-- upvalues: t (ref), removeFromOrder (ref), t_1 (ref), historyPageUtilsModule (copy)
 				local var8 = t[p5]
 				

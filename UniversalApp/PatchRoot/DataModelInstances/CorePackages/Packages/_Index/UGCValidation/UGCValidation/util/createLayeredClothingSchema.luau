@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 2 | named "createLayeredClothingSchema" ]]
+﻿return function(p0)
 	assert(p0, "attachmentName cannot be nil")
 	
 	return {

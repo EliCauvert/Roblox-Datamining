@@ -9,7 +9,7 @@ local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUG
 return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationCageMeshDistanceMaxCageMeshDistanceLC (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceMaxNegativeSDFThresholdLC (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local handleOuterCage = p1.aqsSummaryData.Measure_Cage_Mesh_Distance.Handle_OuterCage
 		

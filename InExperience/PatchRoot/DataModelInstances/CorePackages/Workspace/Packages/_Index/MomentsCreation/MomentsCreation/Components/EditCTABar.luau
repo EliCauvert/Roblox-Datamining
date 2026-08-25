@@ -17,10 +17,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local useCreationController = require(momentsCreation.CreationController).useCreationController
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 
-local function VoiceCoachmark(p0) --[[ line: 63 ]]
+local function VoiceCoachmark(p0)
 	-- upvalues: useCreationController (ref), reactModule (ref), educationalTooltip (ref), foundationModule (ref)
 	local var6 = useCreationController()
-	local var7, var8 = reactModule.useState(function() --[[ line: 70 ]]
+	local var7, var8 = reactModule.useState(function()
 		-- upvalues: var6 (ref)
 		return not var6.getVoiceCoachmarkDismissed(false)
 	end)
@@ -28,7 +28,7 @@ local function VoiceCoachmark(p0) --[[ line: 63 ]]
 	return if var7 then reactModule.createElement(educationalTooltip, {
 		isOpen = true,
 		LayoutOrder = p0.layoutOrder,
-		onClose = function() --[[ line: 81 ]]
+		onClose = function()
 			-- upvalues: var6 (ref), var8 (ref)
 			var6.dismissVoiceCoachmark()
 			var8(false)
@@ -40,7 +40,7 @@ local function VoiceCoachmark(p0) --[[ line: 63 ]]
 	}, p0.children) else p0.children
 end
 
-return function(p1) --[[ line: 92 ]]
+return function(p1)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), getFFlagEnableMomentTextGeneration (ref), loading (ref), foundationModule (ref), icon (ref), text (ref), VoiceCoachmark (ref), gradientBackdrop (ref)
 	local var9 = useDeviceInsets()
 	local var10 = useTokens()
@@ -54,7 +54,7 @@ return function(p1) --[[ line: 92 ]]
 	end
 	local var13 = useLocalization(t)
 	local var14, var15 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var16 = reactModule.useCallback(function(p2) --[[ line: 113 ]]
+	local var16 = reactModule.useCallback(function(p2)
 		-- upvalues: var15 (ref)
 		var15(UDim2.new(0, 1.5 * p2.AbsoluteSize.X, 1, 0))
 	end, {})
@@ -67,10 +67,10 @@ return function(p1) --[[ line: 92 ]]
 		local var19 = reactModule.createElement(view, {
 			tag = "row align-x-right align-y-center gap-medium auto-xy padding-xsmall radius-medium",
 			LayoutOrder = v_1.cta.order or i_1,
-			onActivated = if var18 then nil elseif isDisabledMap ~= nil and isDisabledMap[kind] == true then if p1.onDisabledToolActivated ~= nil then nil else function() --[[ line: 132 ]]
+			onActivated = if var18 then nil elseif isDisabledMap ~= nil and isDisabledMap[kind] == true then if p1.onDisabledToolActivated ~= nil then nil else function()
 				-- upvalues: p1 (ref), kind (ref)
 				p1.onDisabledToolActivated(kind)
-			end else function() --[[ line: 136 ]]
+			end else function()
 				-- upvalues: p1 (ref), kind (ref)
 				p1.onToolSelected(kind)
 			end

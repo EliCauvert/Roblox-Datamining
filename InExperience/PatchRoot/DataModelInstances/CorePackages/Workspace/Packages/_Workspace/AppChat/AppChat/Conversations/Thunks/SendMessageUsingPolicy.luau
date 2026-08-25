@@ -11,12 +11,12 @@ local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local fFlagAppChatCatchSendMessageSyncErrorModule = require(appChat.Flags.FFlagAppChatCatchSendMessageSyncError)
 local name = require(appChat.Logger):new(script.Name)
 
-local function invokeSendMessage(p0, p1) --[[ line: 20 ]]
+local function invokeSendMessage(p0, p1)
 	-- upvalues: fFlagAppChatCatchSendMessageSyncErrorModule (ref), name (ref), promiseModule (ref)
 	if not fFlagAppChatCatchSendMessageSyncErrorModule then
 		return p0:sendMessage(p1)
 	end
-	local ok, status = pcall(function() --[[ line: 25 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p0 (ref), p1 (ref)
 		return p0:sendMessage(p1)
 	end)
@@ -29,11 +29,11 @@ local function invokeSendMessage(p0, p1) --[[ line: 20 ]]
 	return promiseModule.reject({ sendMessageSyncError = tostring(status) })
 end
 
-return function(p2, _) --[[ line: 37 ]]
+return function(p2, _)
 	-- upvalues: requestTimeDiag (ref), constantsModule (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), invokeSendMessage (ref), statusCodes (ref), responseStatus (ref), promiseModule (ref)
 	local lua_chat_send_message = requestTimeDiag:new(constantsModule.PerformanceMeasurement.LUA_CHAT_SEND_MESSAGE)
 	
-	return function(p3) --[[ line: 40 ]]
+	return function(p3)
 		-- upvalues: p2 (ref), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), invokeSendMessage (copy), lua_chat_send_message (ref), statusCodes (copy), responseStatus (copy), promiseModule (copy)
 		p2:onBeforeSendingMessage(p3)
 		
@@ -43,15 +43,15 @@ return function(p2, _) --[[ line: 37 ]]
 			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, t)
 			appChatPerfTrackerModule.trackRequest(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "SendChatTextMessage", t)
 		end
-		return invokeSendMessage(p2, p3):andThen(function(p6) --[[ line: 65 ]]
+		return invokeSendMessage(p2, p3):andThen(function(p6)
 			-- upvalues: lua_chat_send_message (copy), statusCodes (copy), responseStatus (copy), promiseModule (copy)
 			lua_chat_send_message:report()
 			
 			return if p6 and p6.responseBody and (p6.responseCode == statusCodes.OK and p6.responseBody.messages) and #p6.responseBody.messages ~= 0 and (not p6.responseBody.messages[1].status or p6.responseBody.messages[1].status == "" or p6.responseBody.messages[1].status == responseStatus.SUCCESS) then p6 else promiseModule.reject(p6)
-		end):andThen(function(p5) --[[ line: 86 ]]
+		end):andThen(function(p5)
 			-- upvalues: p2 (copy), p3 (ref)
 			return p2:onSuccess(p3, p5)
-		end):catch(function(p4) --[[ line: 89 ]]
+		end):catch(function(p4)
 			-- upvalues: p2 (copy), p3 (ref)
 			return p2:onFailure(p3, p4)
 		end)

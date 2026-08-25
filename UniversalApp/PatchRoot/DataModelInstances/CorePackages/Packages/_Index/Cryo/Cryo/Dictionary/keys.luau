@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 4 | named "keys" ]]
+﻿return function(p0)
 	local t = {}
 	local var1 = 1
 	

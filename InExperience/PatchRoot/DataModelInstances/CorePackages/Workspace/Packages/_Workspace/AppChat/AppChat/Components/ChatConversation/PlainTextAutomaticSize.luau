@@ -24,10 +24,10 @@ local t = {
 	isRepliedTo = false,
 	isPressed = false,
 	isLastMessageInMessageGroup = false,
-	[reactModule.Change.AbsoluteSize] = function() --[[ line: 51 ]] end
+	[reactModule.Change.AbsoluteSize] = function() end
 }
 
-function PlainText(p0) --[[ line: 58 ]]
+function PlainText(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useStyle (ref), textService (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), chatBubbleContainerAutomaticSizeModule (ref), view (ref), text (ref), divider (ref), dividerVariant (ref)
 	local var8 = cryoModule.Dictionary.join(t, p0)
 	local var9 = useTokens()
@@ -42,14 +42,14 @@ function PlainText(p0) --[[ line: 58 ]]
 	local isRepliedTo = var8.isRepliedTo
 	local var14 = textService:GetTextSize(text_1, textSize, font, Vector2.new(maxValue, if isRepliedTo then textSize * 3 else 1e999))
 	local var15 = if var8.isRepliedTo then var10.Theme.TextDefault.Color elseif var8.isUnfiltered and not var8.isIncoming then Color3.new(1, 1, 1) elseif var8.isIncoming then var9.Color.Content.Emphasis.Color3 else var9.Color.ActionEmphasis.Foreground.Color3
-	local var16 = if fFlagAppChatEnableAutotranslationModule then reactModule.useMemo(function() --[[ line: 92 ]]
+	local var16 = if fFlagAppChatEnableAutotranslationModule then reactModule.useMemo(function()
 		-- upvalues: isRepliedTo (ref), textSize (ref)
 		return {
 			MinSize = Vector2.new(0, 0),
 			MaxSize = Vector2.new(1e999, if isRepliedTo then textSize * 3 else 1e999)
 		}
 	end, { isRepliedTo, var8.textSize }) else nil
-	local var17 = if fFlagAppChatEnableAutotranslationModule then reactModule.useMemo(function() --[[ line: 100 ]]
+	local var17 = if fFlagAppChatEnableAutotranslationModule then reactModule.useMemo(function()
 		-- upvalues: maxValue (ref), maxWidth (ref)
 		return {
 			MinSize = Vector2.new(0, 0),

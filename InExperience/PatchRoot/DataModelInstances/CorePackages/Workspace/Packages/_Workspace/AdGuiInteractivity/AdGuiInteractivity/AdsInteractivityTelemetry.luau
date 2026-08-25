@@ -37,23 +37,23 @@ local t_4 = {
 }
 
 return {
-	logAdMenuEvent = function(p0) --[[ line: 72 ]]
+	logAdMenuEvent = function(p0)
 		-- upvalues: default (ref), t (ref)
 		default:logRobloxTelemetryCounter(t, 1, { state = p0 })
 	end,
-	logWhyThisAdEvent = function() --[[ line: 78 ]]
+	logWhyThisAdEvent = function()
 		-- upvalues: default (ref), t_1 (ref)
 		default:logRobloxTelemetryCounter(t_1, 1)
 	end,
-	logReportAdEvent = function(p1) --[[ line: 88 ]]
+	logReportAdEvent = function(p1)
 		-- upvalues: default (ref), t_2 (ref)
 		default:logRobloxTelemetryCounter(t_2, 1, { state = p1 })
 	end,
-	logImmersiveBrandedAdButtonClickCounter = function(p2) --[[ line: 94 ]]
+	logImmersiveBrandedAdButtonClickCounter = function(p2)
 		-- upvalues: default (ref), t_3 (ref)
 		default:logRobloxTelemetryCounter(t_3, 1, { buttonName = p2 })
 	end,
-	logImmersiveBrandedAdLinkingFailedCounter = function(p3) --[[ line: 102 ]]
+	logImmersiveBrandedAdLinkingFailedCounter = function(p3)
 		-- upvalues: default (ref), t_4 (ref)
 		default:logRobloxTelemetryCounter(t_4, 1, { linkName = p3 })
 	end

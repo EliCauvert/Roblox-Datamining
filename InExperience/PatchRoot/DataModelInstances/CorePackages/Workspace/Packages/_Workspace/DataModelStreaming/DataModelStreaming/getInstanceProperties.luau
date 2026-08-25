@@ -70,8 +70,8 @@
 	LayerCollector = { "Enabled", "ResetOnSpawn", "ZIndexBehavior" }
 }
 
-local function getProperty(p0, p1) --[[ line: 217 ]]
-	local ok, status = pcall(function() --[[ line: 218 ]]
+local function getProperty(p0, p1)
+	local ok, status = pcall(function()
 		-- upvalues: p0 (ref), p1 (ref)
 		return p0[p1]
 	end)
@@ -79,7 +79,7 @@ local function getProperty(p0, p1) --[[ line: 217 ]]
 	if not ok or status == nil then
 		return nil
 	end
-	local function _(p2) --[[ line: 226 | named "handleInf" ]]
+	local function _(p2)
 		return if p2 == 1e999 then "inf" elseif p2 == -1e999 then "-inf" else p2
 	end
 	
@@ -127,7 +127,7 @@ local function getProperty(p0, p1) --[[ line: 217 ]]
 	return if typeof(status) == "number" or typeof(status) == "boolean" then status else tostring(status)
 end
 
-return function(p3, p4) --[[ line: 273 | named "getInstanceProperties" ]]
+return function(p3, p4)
 	-- upvalues: t (ref), getProperty (ref)
 	if not p3 then
 		return {}

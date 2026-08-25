@@ -44,7 +44,7 @@ local t_3 = {
 	[catalogItemCardItemInfoEnumModule.DynamicHead] = t.DYNAMIC_HEAD
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 128 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), t_3 (ref), t_2 (ref), t_1 (ref), reactModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref)
 	local var12 = useTokens()
 	local var13 = if p0.itemInfo then t_3[p0.itemInfo] else nil

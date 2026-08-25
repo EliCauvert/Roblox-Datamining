@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script.Parent.Parent.React)
 local createRefCacheModule = require(script.Parent.createRefCache)
 
-return function() --[[ line: 18 | named "useRefCache" ]]
+return function()
 	-- upvalues: reactModule (ref), createRefCacheModule (ref)
 	local var2 = reactModule.useRef(nil)
 	

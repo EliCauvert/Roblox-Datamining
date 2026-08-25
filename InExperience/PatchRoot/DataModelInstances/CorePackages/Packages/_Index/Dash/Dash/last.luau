@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 13 | named "last" ]]
+﻿return function(p0, p1)
 	for i = #p0, 1, -1 do
 		local var0 = p0[i]
 		

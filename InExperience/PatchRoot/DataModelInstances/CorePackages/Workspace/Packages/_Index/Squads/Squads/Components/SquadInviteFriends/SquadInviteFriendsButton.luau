@@ -27,12 +27,12 @@ local t = {
 	[userModel.PresenceType.IN_STUDIO] = 3
 }
 
-local function _() --[[ line: 46 | named "getFFlagRenameFriendsToConnectionsPartyLobby" ]]
+local function _()
 	-- upvalues: universalAppPolicyModule (ref)
 	return universalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
 end
 
-return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
+return function(p0)
 	-- upvalues: react (ref), selectedUsersContext (ref), inviteCallbackContext (ref), friendsListContext (ref), squadExternalContractContext (ref), useIsInviteButtonDisabledModule (ref), useLocalization (ref), fFlagEnablePartyQuickStartButton (ref), userModel (ref), t (ref), cryoModule (ref), encodeUserIdsModule (ref), eventNamesModule (ref), squadRootViewType (ref), button (ref), buttonType (ref), universalAppPolicyModule (ref)
 	local var17
 	local var11 = react.useContext(selectedUsersContext)
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
 	if fFlagEnablePartyQuickStartButton then
 		local var18 = var14.useSquadRootView()
 		local var19 = react.useRef({})
-		local var20 = react.useCallback(function() --[[ line: 77 ]]
+		local var20 = react.useCallback(function()
 			-- upvalues: var13 (ref), userModel (copy), t (copy)
 			if var13.isFetchingFriends then
 				return {}, {}
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
 			end
 			return t_1, t_2
 		end, { var13.isFetchingFriends, var13.friends })
-		local var21 = react.useCallback(function() --[[ line: 94 ]]
+		local var21 = react.useCallback(function()
 			-- upvalues: var11 (ref), var13 (ref), t (copy)
 			local t_1 = {}
 			local t_2 = {}
@@ -82,7 +82,7 @@ return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
 			end
 			return t_1, t_2
 		end, { var11.selectedFriends, var13.friends })
-		react.useEffect(function() --[[ line: 113 ]]
+		react.useEffect(function()
 			-- upvalues: var20 (ref), var21 (ref), var19 (ref)
 			local var28, var29 = var20()
 			local var30, var31 = var21()
@@ -95,7 +95,7 @@ return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
 				numSelectedFriends = #var30
 			}
 		end, { var20, var21 })
-		local var22 = react.useCallback(function(p1) --[[ line: 127 ]]
+		local var22 = react.useCallback(function(p1)
 			-- upvalues: var19 (ref), cryoModule (copy), p0 (ref), var14 (ref), encodeUserIdsModule (copy), eventNamesModule (copy)
 			local current = var19.current
 			var14.fireSquadAnalytics(eventNamesModule.MultiInviteMenuActionStatus, cryoModule.Dictionary.join(p0.analyticsInfo, {
@@ -114,9 +114,9 @@ return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
 			var14.fireSquadAnalytics,
 			p0.analyticsInfo
 		})
-		react.useEffect(function() --[[ line: 146 ]]
+		react.useEffect(function()
 			-- upvalues: p0 (ref), var22 (ref)
-			return function() --[[ line: 147 ]]
+			return function()
 				-- upvalues: p0 (copy), var22 (copy)
 				if p0.partyStartedRef.current then
 					var22("multi_invite_attempted")
@@ -126,19 +126,19 @@ return function(p0) --[[ line: 50 | named "SquadInviteFriendsButton" ]]
 				var22("leave_page")
 			end
 		end, {})
-		react.useEffect(function() --[[ line: 158 ]]
+		react.useEffect(function()
 			-- upvalues: var18 (ref), squadRootViewType (copy), var22 (ref)
 			if var18 == squadRootViewType.None then
 				var22("leave_page")
 			end
 		end, { var18, var22 })
-		var17 = react.useCallback(function() --[[ line: 165 ]]
+		var17 = react.useCallback(function()
 			-- upvalues: var22 (ref), var12 (ref), var11 (ref)
 			var22("multi_invite_button_clicked")
 			var12.inviteMultiFriends(var11.selectedFriends)
 		end, { var22, var12.inviteMultiFriends, var11.selectedFriends })
 	else
-		var17 = react.useCallback(function() --[[ line: 174 ]]
+		var17 = react.useCallback(function()
 			-- upvalues: var12 (ref), var11 (ref)
 			var12.inviteMultiFriends(var11.selectedFriends)
 		end, { var12.inviteMultiFriends, var11.selectedFriends })

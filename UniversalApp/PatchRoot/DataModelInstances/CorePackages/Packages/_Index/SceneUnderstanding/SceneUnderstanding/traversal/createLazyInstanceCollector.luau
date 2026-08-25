@@ -1,6 +1,6 @@
 ﻿local dataModelTraversalOptionsModule = require(script:FindFirstAncestor("SceneUnderstanding").options.DataModelTraversalOptions)
 
-return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]]
+return function(p0, p1, p2)
 	-- upvalues: dataModelTraversalOptionsModule (ref)
 	local var1 = dataModelTraversalOptionsModule.new(p2)
 	local var2 = false
@@ -11,12 +11,12 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 	local t_2 = {}
 	local t_3 = {}
 	
-	local function _() --[[ line: 24 | named "getBatchCount" ]]
+	local function _()
 		-- upvalues: t_2 (ref), var1 (ref)
 		return math.min(#t_2, var1.instanceProcessingLimit)
 	end
 	
-	local function onAncestryChanged(p3) --[[ line: 28 ]]
+	local function onAncestryChanged(p3)
 		-- upvalues: t (ref)
 		if p3.Parent == nil then
 			local index = table.find(t, p3)
@@ -27,7 +27,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 		end
 	end
 	
-	local function processStack() --[[ line: 37 ]]
+	local function processStack()
 		-- upvalues: t_2 (ref), var1 (ref), p1 (ref), t (ref), t_1 (ref), onAncestryChanged (ref), var4 (write), t_3 (write), var2 (write)
 		local removed
 		local minValue = math.min(#t_2, var1.instanceProcessingLimit)
@@ -49,7 +49,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 		var4 += minValue
 		
 		for removed in t_3 do
-			task.spawn(function() --[[ line: 58 ]]
+			task.spawn(function()
 				-- upvalues: removed (ref), t (copy)
 				removed(t)
 			end)
@@ -66,14 +66,14 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 		return false
 	end
 	
-	local _ = function() --[[ line: 80 | named "startProcessingLoop" ]]
+	local _ = function()
 		-- upvalues: var2 (write), t_2 (ref), var1 (ref), processStack (ref), var6 (write)
 		if var2 or math.min(#t_2, var1.instanceProcessingLimit) == 0 then
 			return
 		end
 		var2 = true
 		processStack()
-		var6 = task.spawn(function() --[[ line: 89 ]]
+		var6 = task.spawn(function()
 			-- upvalues: var2 (copy), processStack (copy)
 			task.wait()
 			while var2 do
@@ -84,7 +84,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 		end)
 	end
 	
-	local function onDescendantAdded(p4) --[[ line: 102 ]]
+	local function onDescendantAdded(p4)
 		-- upvalues: t_2 (ref), var2 (write), var1 (ref), processStack (ref), var6 (write)
 		table.insert(t_2, p4)
 		
@@ -92,7 +92,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 			if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
 			var2 = true
 			processStack()
-			var6 = task.spawn(function() --[[ line: 89 ]]
+			var6 = task.spawn(function()
 				-- upvalues: var2 (copy), processStack (copy)
 				task.wait()
 				while true do
@@ -107,7 +107,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 	end
 	
 	return {
-		setInstancesProcessedPerFrame = function(value) --[[ line: 143 ]]
+		setInstancesProcessedPerFrame = function(value)
 			-- upvalues: var1 (ref), var2 (write), t_2 (ref), processStack (ref), var6 (write)
 			var1.instanceProcessingLimit = math.clamp(value, 0, 1e999)
 			
@@ -115,7 +115,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 				if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
 				var2 = true
 				processStack()
-				var6 = task.spawn(function() --[[ line: 89 ]]
+				var6 = task.spawn(function()
 					-- upvalues: var2 (copy), processStack (copy)
 					task.wait()
 					while true do
@@ -128,7 +128,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 				end)
 			end
 		end,
-		listen = function() --[[ line: 110 ]]
+		listen = function()
 			-- upvalues: p0 (ref), t_1 (ref), onDescendantAdded (ref), t_2 (ref), var2 (write), var1 (ref), processStack (ref), var6 (write)
 			for i, v in p0 do
 				table.insert(t_1, v.DescendantAdded:Connect(onDescendantAdded))
@@ -141,7 +141,7 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 				if math.min(#t_2, var1.instanceProcessingLimit) == 0 then return end
 				var2 = true
 				processStack()
-				var6 = task.spawn(function() --[[ line: 89 ]]
+				var6 = task.spawn(function()
 					-- upvalues: var2 (copy), processStack (copy)
 					task.wait()
 					while true do
@@ -154,11 +154,11 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 				end)
 			end
 		end,
-		get = function() --[[ line: 148 ]]
+		get = function()
 			-- upvalues: t (ref)
 			return t
 		end,
-		destroy = function() --[[ line: 129 ]]
+		destroy = function()
 			-- upvalues: var2 (write), t_1 (ref), t_3 (write), var6 (write)
 			var2 = false
 			
@@ -171,11 +171,11 @@ return function(p0, p1, p2) --[[ line: 9 | named "createLazyInstanceCollector" ]
 				task.cancel(var6)
 			end
 		end,
-		onStepped = function(p5) --[[ line: 122 ]]
+		onStepped = function(p5)
 			-- upvalues: t_3 (write)
 			t_3[p5] = true
 			
-			return function() --[[ line: 124 ]]
+			return function()
 				-- upvalues: t_3 (copy), p5 (ref)
 				t_3[p5] = nil
 			end

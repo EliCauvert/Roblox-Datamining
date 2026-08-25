@@ -39,18 +39,18 @@ local fFlagTrustedFriendsUseEnumCTA = require(parent.SharedFlags).FFlagTrustedFr
 local fFlagTrustedFriendsUseFoundationSheet = require(parent.SharedFlags).FFlagTrustedFriendsUseFoundationSheet
 local _ = require(script.Parent.useModalButtonActions)
 
-return function(p0) --[[ line: 68 ]]
+return function(p0)
 	-- upvalues: useLayerCollector (ref), useScreenSize (ref), responsiveModule (ref), fFlagTrustedContactsModalFixFocusNavigationModule (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusOnMount (ref), TCMountMinLoadingTimeMs (ref), useTokens (ref), loading (ref), iconSize (ref), fFlagTrustedFriendsUseFoundationSheet (ref), sheet (ref), text (ref), fFlagTCLearnMoreLinkModule (ref), view (ref), socialMetadataSectionModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), fFlagTrustedFriendsUseEnumCTA (ref), dialog (ref), dialogSize (ref), fFlagTCModalUseFoundationOverlay (ref), onCloseCallbackReason (ref), TCDialogCloseBtn (ref), fullPageModal (ref), partialPageModal (ref), scrollView (ref), foundationModule (ref), sources (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local isVerticallyConstrained = p0.isVerticallyConstrained
 	local var12 = useLayerCollector()
 	local var13 = useScreenSize()
 	local var14 = responsiveModule.useOrientation()
 	local onCloseModal = p0.onCloseModal
-	local var15 = if fFlagTrustedContactsModalFixFocusNavigationModule then reactModule.useMemo(function() --[[ line: 76 ]]
+	local var15 = if fFlagTrustedContactsModalFixFocusNavigationModule then reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), onCloseModal (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1) --[[ line: 79 ]]
+				handler = inputHandlersModule.onRelease(function(p1)
 					-- upvalues: onCloseModal (copy)
 					onCloseModal()
 					p1:cancel()
@@ -62,14 +62,14 @@ return function(p0) --[[ line: 68 ]]
 	local var17 = var14 == responsiveModule.DefaultKey
 	local var18, var19 = reactModule.useState(var17)
 	local var20 = reactModule.useRef(os.clock())
-	reactModule.useEffect(function() --[[ line: 96 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var20 (ref), TCMountMinLoadingTimeMs (copy), var19 (ref)
 		if not var17 then
 			local var26 = os.clock() - var20.current
 			local var27 = TCMountMinLoadingTimeMs / 1000
 			
 			if var26 < var27 then
-				delay(var27 - var26, function() --[[ line: 102 ]]
+				delay(var27 - var26, function()
 					-- upvalues: var19 (copy)
 					var19(false)
 				end)
@@ -164,7 +164,7 @@ return function(p0) --[[ line: 68 ]]
 		createElement = reactModule.createElement
 		createElement = createElement(dialog.Root, {
 			size = dialogSize.Medium,
-			onClose = if fFlagTCModalUseFoundationOverlay then function(p2) --[[ line: 205 ]]
+			onClose = if fFlagTCModalUseFoundationOverlay then function(p2)
 				-- upvalues: onCloseCallbackReason (copy), p0 (ref)
 				if p2 == onCloseCallbackReason.BackdropClick then
 					return

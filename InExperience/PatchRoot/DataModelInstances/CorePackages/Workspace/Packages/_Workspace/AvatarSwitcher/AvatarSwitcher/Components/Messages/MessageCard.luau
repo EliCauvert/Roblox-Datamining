@@ -4,7 +4,7 @@ local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagAvatarSwitcherUiFixes = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
 
-return function(_) --[[ line: 20 | named "MessageCard" ]]
+return function(_)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), fFlagAvatarSwitcherUiFixes (ref)
 -- FATAL: Failed to generate AST for `MessageCard` function:
 runtime : [KeyError] :11990: 3

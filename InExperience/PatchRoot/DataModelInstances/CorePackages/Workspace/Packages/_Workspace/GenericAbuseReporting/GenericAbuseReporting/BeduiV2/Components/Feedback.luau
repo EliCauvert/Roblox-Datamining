@@ -22,14 +22,14 @@ local t = {
 	success = alertSeverity.Success
 }
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "Feedback" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: motionModule (ref), var4 (ref), reactModule (ref), useAbuseReportAnalytics (ref), t (ref), telemetryEventType (ref), view (ref), feedbackAlert (ref), alertSeverity (ref)
 	local var6 = motionModule.usePresence()
 	local var7, var8 = motionModule.useMotion(var4)
 	local var9 = reactModule.useRef(0)
 	local var10 = reactModule.useRef(var6.isPresent)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: t (copy), p0 (ref), sendEvent (ref), telemetryEventType (copy)
 		if not t[p0.severity] then
 			sendEvent({
@@ -40,11 +40,11 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "Feedback" ]]
 			})
 		end
 	end, { p0.severity, sendEvent })
-	reactModule.useEffect(function() --[[ line: 63 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var6 (ref)
 		var10.current = var6.isPresent
 	end, { var6.isPresent })
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var9 (ref), var8 (ref), p0 (ref)
 		if var6.isPresent then
 			if var9.current > 0 then
@@ -62,7 +62,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "Feedback" ]]
 				sizeY = 0,
 				position = UDim2.new(0, 0, -0.5, 0)
 			}, {
-				onAnimationComplete = function(p1) --[[ line: 82 ]]
+				onAnimationComplete = function(p1)
 					-- upvalues: var6 (copy)
 					if p1 == true then
 						var6.onExitComplete()
@@ -80,7 +80,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "Feedback" ]]
 	
 	return reactModule.createElement(view, {
 		ClipsDescendants = true,
-		Size = var7.sizeY:map(function(p2) --[[ line: 110 ]]
+		Size = var7.sizeY:map(function(p2)
 			-- upvalues: maxWidth (ref)
 			return if maxWidth == nil then UDim2.new(1, 0, 0, p2) else UDim2.new(0, maxWidth, 0, p2)
 		end),
@@ -92,7 +92,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "Feedback" ]]
 			BackgroundTransparency = 1,
 			GroupTransparency = var7.groupTransparency,
 			Position = var7.position,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p3) --[[ line: 91 ]]
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p3)
 				-- upvalues: var9 (ref), var10 (ref), var8 (ref), p0 (ref)
 				local y = p3.AbsoluteSize.Y
 				

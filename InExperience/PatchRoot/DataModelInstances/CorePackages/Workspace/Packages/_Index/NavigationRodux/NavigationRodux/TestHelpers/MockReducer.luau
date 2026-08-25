@@ -1,6 +1,6 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("NavigationRodux").Parent.Cryo)
 
-return function(p0, p1) --[[ line: 8 ]]
+return function(p0, p1)
 	-- upvalues: cryoModule (ref)
 	p0 = p0 or { Navigation = { lockNavigationActions = nil } }
 	

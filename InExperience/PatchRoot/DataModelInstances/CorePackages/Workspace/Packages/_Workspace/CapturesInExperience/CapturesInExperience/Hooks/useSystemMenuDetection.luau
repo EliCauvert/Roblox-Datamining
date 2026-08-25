@@ -3,14 +3,14 @@ local parent = script.Parent.Parent.Parent
 local useEventConnection = require(parent.ReactUtils).useEventConnection
 local useState = require(parent.React).useState
 
-return function() --[[ line: 12 | named "useSystemMenuDetection" ]]
+return function()
 	-- upvalues: useState (ref), useEventConnection (ref), guiService (ref)
 	local var1, var2 = useState(false)
-	useEventConnection(guiService.MenuOpened, function() --[[ line: 15 ]]
+	useEventConnection(guiService.MenuOpened, function()
 		-- upvalues: var2 (ref)
 		var2(true)
 	end)
-	useEventConnection(guiService.MenuClosed, function() --[[ line: 19 ]]
+	useEventConnection(guiService.MenuClosed, function()
 		-- upvalues: var2 (ref)
 		var2(false)
 	end)

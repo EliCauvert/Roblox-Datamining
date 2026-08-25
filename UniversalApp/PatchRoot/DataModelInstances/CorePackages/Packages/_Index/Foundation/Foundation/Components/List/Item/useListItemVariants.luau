@@ -6,7 +6,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(_) --[[ line: 26 ]]
+local function variantsFactory(_)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
@@ -47,7 +47,7 @@ local function variantsFactory(_) --[[ line: 26 ]]
 	}
 end
 
-return function(p0, p1) --[[ line: 68 ]]
+return function(p0, p1)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local listItem = variantsContextModule.useVariants("ListItem", variantsFactory, p0)
 	

@@ -3,18 +3,18 @@ local reactModule = require(parent.Parent.React)
 local presenceChildModule = require(script.Parent.PresenceChild)
 local presenceStateModule = require(parent.Enums.PresenceState)
 
-local function _(p0, p1) --[[ line: 55 | named "getCompositeKey" ]]
+local function _(p0, p1)
 	return if typeof(p1) == "table" and p1.props and p1.props.presenceId then string.format("%s:%s", p0, tostring(p1.props.presenceId)) else p0
 end
 
-return function(p2) --[[ line: 63 | named "AnimatePresence" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), presenceStateModule (ref), presenceChildModule (ref)
 	local children = p2.children
 	local var3 = if p2.childData ~= nil then nil else p2.childData
 	local var4 = if p2.onExitComplete ~= nil then nil else p2.onExitComplete
 	local var5, var6 = reactModule.useState({})
 	local var7 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: children (ref), presenceStateModule (copy), var5 (ref), var6 (ref), var7 (ref)
 		local t = {}
 		
@@ -52,7 +52,7 @@ return function(p2) --[[ line: 63 | named "AnimatePresence" ]]
 			end
 		end
 		if next(t) ~= nil then
-			var6(function(p3) --[[ line: 120 ]]
+			var6(function(p3)
 				-- upvalues: t (ref), presenceStateModule (copy), var7 (copy)
 				local cloned = table.clone(p3)
 				
@@ -78,11 +78,11 @@ return function(p2) --[[ line: 63 | named "AnimatePresence" ]]
 			end)
 		end
 	end, { children })
-	local var8 = reactModule.useCallback(function(p4) --[[ line: 150 ]]
+	local var8 = reactModule.useCallback(function(p4)
 		-- upvalues: var7 (ref), var6 (ref)
 		if var7.current[p4] then
 			var7.current[p4] = nil
-			var6(function(p5) --[[ line: 154 ]]
+			var6(function(p5)
 				-- upvalues: p4 (ref)
 				local cloned = table.clone(p5)
 				
@@ -98,7 +98,7 @@ return function(p2) --[[ line: 63 | named "AnimatePresence" ]]
 			end)
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 170 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var6 (ref), var4 (ref)
 		local t = {}
 		local var15 = false
@@ -110,7 +110,7 @@ return function(p2) --[[ line: 63 | named "AnimatePresence" ]]
 			end
 		end
 		if var15 then
-			var6(function(p6) --[[ line: 182 ]]
+			var6(function(p6)
 				-- upvalues: t (ref), var4 (copy)
 				local t_1 = {}
 				
@@ -133,7 +133,7 @@ return function(p2) --[[ line: 63 | named "AnimatePresence" ]]
 				key = i,
 				presenceId = i,
 				isPresent = v.isPresent,
-				onExitComplete = function() --[[ line: 208 ]]
+				onExitComplete = function()
 					-- upvalues: var8 (ref), i (ref)
 					var8(i)
 				end,

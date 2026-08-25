@@ -3,7 +3,7 @@ local _ = require(script.Parent.Parent.createTurnHandle)
 local _ = require(script.Parent.Parent.types)
 
 return {
-	ingestFrame = function(p0, p1, p2) --[[ line: 22 ]]
+	ingestFrame = function(p0, p1, p2)
 		-- upvalues: acpProtocolModule (ref)
 		local activeTurnBySession
 		assert(p1 and (if p1.kind ~= "notification" then p1.kind == "response" else true), "ingestFrame requires an IncomingFrame")

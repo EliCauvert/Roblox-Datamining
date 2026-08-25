@@ -7,7 +7,7 @@ local var4, var5 = signalsModule.createSignal({})
 
 return {
 	getCache = var4,
-	fetchAndCache = function(p0, p1) --[[ line: 16 ]]
+	fetchAndCache = function(p0, p1)
 		-- upvalues: var4 (ref), promiseModule (ref), fetchCollectibleProductIdsModule (ref), var5 (ref)
 		local var6 = var4(false)
 		local t = {}
@@ -17,7 +17,7 @@ return {
 				table.insert(t, v)
 			end
 		end
-		return if #t == 0 then promiseModule.resolve() else fetchCollectibleProductIdsModule(p0, t):andThen(function(p2) --[[ line: 28 ]]
+		return if #t == 0 then promiseModule.resolve() else fetchCollectibleProductIdsModule(p0, t):andThen(function(p2)
 			-- upvalues: var4 (copy), var5 (copy)
 			local cloned = table.clone(var4(false))
 			
@@ -30,19 +30,19 @@ return {
 			var5(cloned)
 		end)
 	end,
-	getProductId = function(p3) --[[ line: 40 ]]
+	getProductId = function(p3)
 		-- upvalues: var4 (ref)
 		local var9 = var4(false)[p3]
 		
 		return if var9 then var9.productId else nil
 	end,
-	getResaleProductId = function(p4) --[[ line: 45 ]]
+	getResaleProductId = function(p4)
 		-- upvalues: var4 (ref)
 		local var10 = var4(false)[p4]
 		
 		return if var10 then var10.resaleProductId else nil
 	end,
-	clear = function() --[[ line: 50 ]]
+	clear = function()
 		-- upvalues: var5 (ref)
 		var5({})
 	end

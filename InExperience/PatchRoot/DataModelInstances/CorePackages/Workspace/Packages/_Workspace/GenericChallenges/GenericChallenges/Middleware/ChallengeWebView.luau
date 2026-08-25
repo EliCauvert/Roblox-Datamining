@@ -10,7 +10,7 @@ local var5 = if getFFlagEnableUnifiedWebViews() then game:GetService("WebViewSer
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 63 ]]
+function t.new(p0)
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref), var5 (ref), browserService (ref), challengeHeadersModule (ref), buildChallengeWebViewUrlModule (ref), t (ref)
 	local t_1 = {}
 	
@@ -40,10 +40,10 @@ function t.new(p0) --[[ line: 63 ]]
 	return setmetatable(t_1, t)
 end
 
-function t:setCloseCallback(p1) --[[ line: 108 ]]
+function t:setCloseCallback(p1)
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
 	if getFFlagEnableUnifiedWebViews() then
-		function self.closeCallback() --[[ line: 111 ]]
+		function self.closeCallback()
 			-- upvalues: self (ref), p1 (ref)
 			self.webViewService:CloseWindow()
 			p1()
@@ -54,15 +54,15 @@ function t:setCloseCallback(p1) --[[ line: 108 ]]
 	self.closeCallback = p1
 end
 
-function t:setOpenCallback(p2) --[[ line: 120 ]]
+function t:setOpenCallback(p2)
 	self.openCallback = p2
 end
 
-function t:setHybridCallback(p3) --[[ line: 125 ]]
+function t:setHybridCallback(p3)
 	self.hybridCallback = p3
 end
 
-function t:open() --[[ line: 130 ]]
+function t:open()
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref), httpService (ref)
 	assert(self.hybridCallback ~= nil, "hybrid callback has not been initialized")
 	
@@ -100,7 +100,7 @@ function t:open() --[[ line: 130 ]]
 	}))
 end
 
-function t:close() --[[ line: 168 ]]
+function t:close()
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
 	if self.hybridCallbackConnection ~= nil then
 		self.hybridCallbackConnection:Disconnect()

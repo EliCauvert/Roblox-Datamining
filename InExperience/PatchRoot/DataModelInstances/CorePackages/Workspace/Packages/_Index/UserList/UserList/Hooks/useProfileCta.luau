@@ -6,9 +6,9 @@ local _ = require(userList.Common.Types)
 local profileCTAService = require(parent.ProfileCtaService).ProfileCTAService
 local useSignalState = signalsReactModule.useSignalState
 
-return function(p0) --[[ line: 18 | named "useProfileCta" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), profileCTAService (ref), useSignalState (ref)
-	local var3 = reactModule.useMemo(function() --[[ line: 19 ]]
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: profileCTAService (copy), p0 (ref)
 		return profileCTAService.getProfileCTA(p0)
 	end, { p0 })

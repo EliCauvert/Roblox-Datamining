@@ -8,7 +8,7 @@ local sduiBuilder = sduiCoreSystemModule.SduiBuilder
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sendSduiFeedImpressions = require(parent.UnifiedLogging).sendSduiFeedImpressions
 
-return function(p0) --[[ line: 29 | named "SduiFeedImpressionsDetector" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), sduiErrorType (ref), findAnalyticsField (ref), sduiBuilder (ref), sendSduiFeedImpressions (ref), screenSizeImpressionsTracker (ref)
 	local var2 = reactModule.useRef(p0.feedItems)
 	var2.current = p0.feedItems
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 29 | named "SduiFeedImpressionsDetector" ]]
 		parentRef = p0.parentRef,
 		impressionsTag = p0.impressionsTag,
 		scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
-		sendImpressions = reactModule.useCallback(function(p1) --[[ line: 37 ]]
+		sendImpressions = reactModule.useCallback(function(p1)
 			-- upvalues: var2 (ref), sduiContext (ref), sduiErrorType (copy), findAnalyticsField (copy), sduiBuilder (copy), sendSduiFeedImpressions (copy)
 			if not p1 or #p1 == 0 then return end
 			local current = var2.current

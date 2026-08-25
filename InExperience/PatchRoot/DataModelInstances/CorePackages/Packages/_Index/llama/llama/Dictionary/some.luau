@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 2 | named "some" ]]
+﻿return function(p0, p1)
 	local var0 = type(p1)
 	assert(var0 == "function", "expected a function for second argument, got " .. var0)
 	

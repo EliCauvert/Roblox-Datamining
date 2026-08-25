@@ -10,7 +10,7 @@ local _ = require(script.Parent.types)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 104 ]]
+function t.new(p0)
 	-- upvalues: createSignal (ref), eventPropagationModule (ref), t (ref)
 	local var4, var5 = createSignal({})
 	local var6, var7 = createSignal(p0.getSelection())
@@ -32,7 +32,7 @@ function t.new(p0) --[[ line: 104 ]]
 	return tbl
 end
 
-function t:_fireInputEvent(p1, p2, p3) --[[ line: 131 ]]
+function t:_fireInputEvent(p1, p2, p3)
 	local keyCode = self.activeEventMap:getValue()[p2.KeyCode]
 	
 	if keyCode then
@@ -47,8 +47,8 @@ function t:_fireInputEvent(p1, p2, p3) --[[ line: 131 ]]
 	end
 end
 
-function t:_connectToInputEvents() --[[ line: 149 ]]
-	local function forwardInputEvent(p4, p5) --[[ line: 151 ]]
+function t:_connectToInputEvents()
+	local function forwardInputEvent(p4, p5)
 		-- upvalues: self (ref)
 		local selection = self._engineInterface.getSelection()
 		
@@ -60,7 +60,7 @@ function t:_connectToInputEvents() --[[ line: 149 ]]
 	table.insert(self._engineEventConnections, self._engineInterface.InputBegan:Connect(forwardInputEvent))
 	table.insert(self._engineEventConnections, self._engineInterface.InputChanged:Connect(forwardInputEvent))
 	table.insert(self._engineEventConnections, self._engineInterface.InputEnded:Connect(forwardInputEvent))
-	table.insert(self._engineEventConnections, self._engineInterface.SelectionChanged:Connect(function() --[[ line: 162 | named "onFocusChanged" ]]
+	table.insert(self._engineEventConnections, self._engineInterface.SelectionChanged:Connect(function()
 		-- upvalues: self (ref)
 		local value = self.focusedGuiObject:getValue()
 		local selection = self._engineInterface.getSelection()
@@ -85,7 +85,7 @@ function t:_connectToInputEvents() --[[ line: 149 ]]
 	end))
 end
 
-function t:_cancelHandler(p6, p7) --[[ line: 189 ]]
+function t:_cancelHandler(p6, p7)
 	if p7 ~= "blur" and p7 ~= "focus" then
 		self._eventPropagationService:propagateEvent(p6, p7, {
 			KeyCode = Enum.KeyCode.Unknown,
@@ -95,7 +95,7 @@ function t:_cancelHandler(p6, p7) --[[ line: 189 ]]
 	end
 end
 
-function t:_updateActiveEventMap(p8) --[[ line: 202 ]]
+function t:_updateActiveEventMap(p8)
 	-- upvalues: getAncestors (ref), shallowEqual (ref)
 	local t = {}
 	local selection = self._engineInterface.getSelection()
@@ -139,7 +139,7 @@ function t:_updateActiveEventMap(p8) --[[ line: 202 ]]
 	end
 end
 
-function t:registerEventMap(p9, p10) --[[ line: 246 ]]
+function t:registerEventMap(p9, p10)
 	-- upvalues: mockableWarn (ref)
 	local var21 = self._eventMapByInstance[p9] or {}
 	
@@ -153,7 +153,7 @@ function t:registerEventMap(p9, p10) --[[ line: 246 ]]
 	self:_updateActiveEventMap()
 end
 
-function t:deregisterEventMap(p11, p12) --[[ line: 268 ]]
+function t:deregisterEventMap(p11, p12)
 	-- upvalues: mockableWarn (ref)
 	local var22 = self._eventMapByInstance[p11] or {}
 	
@@ -168,23 +168,23 @@ function t:deregisterEventMap(p11, p12) --[[ line: 268 ]]
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function t:registerEventHandler(p13, p14, p15, p16) --[[ line: 291 ]]
+function t:registerEventHandler(p13, p14, p15, p16)
 	self._eventPropagationService:registerEventHandler(p13, p14, p15, p16)
 	self:_updateActiveEventMap()
 end
 
-function t:deregisterEventHandler(p17, p18, p19, p20) --[[ line: 301 ]]
+function t:deregisterEventHandler(p17, p18, p19, p20)
 	self:_cancelHandler(p17, p18)
 	self._eventPropagationService:deregisterEventHandler(p17, p18, p19, p20)
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function t:registerEventHandlers(p21, p22) --[[ line: 314 ]]
+function t:registerEventHandlers(p21, p22)
 	self._eventPropagationService:registerEventHandlers(p21, p22)
 	self:_updateActiveEventMap()
 end
 
-function t:deregisterEventHandlers(p23, p24) --[[ line: 319 ]]
+function t:deregisterEventHandlers(p23, p24)
 	for i, v in p24 do
 		self:_cancelHandler(p23, i)
 	end
@@ -192,7 +192,7 @@ function t:deregisterEventHandlers(p23, p24) --[[ line: 319 ]]
 	self:_updateActiveEventMap(self.focusedGuiObject:getValue())
 end
 
-function t:registerFocusBehavior(p25, p26) --[[ line: 330 ]]
+function t:registerFocusBehavior(p25, p26)
 	-- upvalues: mockableWarn (ref), isValidFocusTargetModule (ref)
 	if _G.__DEV__ then
 		local var23 = self._focusBehaviorByInstance[p25]
@@ -203,7 +203,7 @@ function t:registerFocusBehavior(p25, p26) --[[ line: 330 ]]
 	end
 	self._focusBehaviorByInstance[p25] = {
 		behavior = p26,
-		connection = p25.SelectionChanged:Connect(function(p27, p28, p29) --[[ line: 346 ]]
+		connection = p25.SelectionChanged:Connect(function(p27, p28, p29)
 			-- upvalues: p25 (ref), p26 (ref), isValidFocusTargetModule (copy), self (ref)
 			if p29 and (p27 or p29:IsDescendantOf(p25)) then
 				if not p28 or not p28:IsDescendantOf(p25) then
@@ -231,7 +231,7 @@ function t:registerFocusBehavior(p25, p26) --[[ line: 330 ]]
 	}
 end
 
-function t:deregisterFocusBehavior(p30, p31) --[[ line: 384 ]]
+function t:deregisterFocusBehavior(p30, p31)
 	-- upvalues: mockableWarn (ref)
 	local var25 = self._focusBehaviorByInstance[p30]
 	
@@ -249,7 +249,7 @@ function t:deregisterFocusBehavior(p30, p31) --[[ line: 384 ]]
 	end
 end
 
-function t:focusGuiObject(p32, p33) --[[ line: 413 ]]
+function t:focusGuiObject(p32, p33)
 	if p33 then
 		self._silentBlurTarget = self._engineInterface.getSelection()
 		self._silentFocusTarget = p32
@@ -260,7 +260,7 @@ function t:focusGuiObject(p32, p33) --[[ line: 413 ]]
 	self._engineInterface.setSelection(p32)
 end
 
-function t:teardown() --[[ line: 428 ]]
+function t:teardown()
 	for i, v in self._engineEventConnections do
 		v:Disconnect()
 	end
@@ -269,7 +269,7 @@ function t:teardown() --[[ line: 428 ]]
 	end
 end
 
-function t:canDispatchEvent(p34, p35) --[[ line: 437 ]]
+function t:canDispatchEvent(p34, p35)
 	-- upvalues: getAncestors (ref)
 	if not p35 then
 		return false
@@ -292,7 +292,7 @@ function t:canDispatchEvent(p34, p35) --[[ line: 437 ]]
 	return false
 end
 
-function t:dispatchSyntheticEvent(p36, p37, p38) --[[ line: 462 ]]
+function t:dispatchSyntheticEvent(p36, p37, p38)
 	-- upvalues: mockableWarn (ref)
 	if p37 then
 		if self:canDispatchEvent(p36, p37) then

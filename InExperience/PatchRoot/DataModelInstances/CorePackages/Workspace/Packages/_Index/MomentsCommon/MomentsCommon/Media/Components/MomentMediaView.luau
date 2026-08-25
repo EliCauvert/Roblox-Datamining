@@ -14,34 +14,34 @@ local useSignalState = signalsReactModule.useSignalState
 local useSignalBinding = signalsReactModule.useSignalBinding
 local frozen = table.freeze({})
 
-return function(p0) --[[ line: 75 | named "MomentMediaView" ]]
+return function(p0)
 	-- upvalues: useMomentMediaControllerModule (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsTextOverlayAfterVideoLoadedModule (ref), useHasPresentedFrameModule (ref), frozen (ref), view (ref), skeleton (ref), foundationModule (ref)
 	local var9 = useMomentMediaControllerModule(p0.momentId)
-	local getScaleType = p0.getScaleType or reactModule.useMemo(function() --[[ line: 82 ]]
+	local getScaleType = p0.getScaleType or reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal(Enum.ScaleType.Crop)
 	end, {})
 	local var11 = useSignalBinding(getScaleType)
-	local var12 = reactModule.useMemo(function() --[[ line: 93 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		local var25, var26 = signalsModule.createSignal(Vector2.zero)
 		
 		return { get = var25, set = var26 }
 	end, {})
-	local var13 = reactModule.useCallback(function(p1) --[[ line: 98 ]]
+	local var13 = reactModule.useCallback(function(p1)
 		-- upvalues: var12 (ref)
 		var12.set(p1.AbsoluteSize)
 	end, { var12 })
 	local var14 = p0.suppressTapToToggle == true
-	local var15 = reactModule.useCallback(function() --[[ line: 107 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref)
 		if var9 ~= nil then
 			var9.toggle()
 		end
 	end, { var9 })
-	local var16 = reactModule.useMemo(function() --[[ line: 116 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var9 (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 117 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: var9 (copy)
 			return if var9 == nil then "Idle" else var9.getState(p2).readiness
 		end)
@@ -52,23 +52,23 @@ return function(p0) --[[ line: 75 | named "MomentMediaView" ]]
 	
 	if fFlagMomentsTextOverlayAfterVideoLoadedModule then
 		local var20 = var9 ~= nil and var9.getHasVideoPreview()
-		var19 = useSignalBinding(reactModule.useMemo(function() --[[ line: 129 ]]
+		var19 = useSignalBinding(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), var20 (ref), var16 (ref)
-			return signalsModule.createComputed(function(p3) --[[ line: 130 ]]
+			return signalsModule.createComputed(function(p3)
 				-- upvalues: var20 (copy), var16 (copy)
 				return not var20 or var16(p3) == "Ready"
 			end)
 		end, { var20, var16 }))
 	end
 	local var21 = if p0.holdPosterUntilPlaying then not useHasPresentedFrameModule(var9, p0.holdPosterUntilPlaying) else not isReady
-	local var22 = useSignalState(reactModule.useMemo(function() --[[ line: 144 ]]
+	local var22 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var9 (ref), frozen (copy)
-		return signalsModule.createComputed(function(p4) --[[ line: 145 ]]
+		return signalsModule.createComputed(function(p4)
 			-- upvalues: var9 (copy), frozen (copy)
 			return if var9 == nil then frozen else var9.getVisualLayers(p4)
 		end)
 	end, { var9 }))
-	local cloned = table.clone(reactModule.useMemo(function() --[[ line: 157 ]]
+	local cloned = table.clone(reactModule.useMemo(function()
 		-- upvalues: var9 (ref), var22 (ref), var12 (ref), var11 (ref), getScaleType (ref), reactModule (copy), view (copy), fFlagMomentsTextOverlayAfterVideoLoadedModule (copy), var19 (write)
 		local t = {}
 		
@@ -83,11 +83,11 @@ return function(p0) --[[ line: 75 | named "MomentMediaView" ]]
 					Surface = v.render({
 						getItemSize = var12.get,
 						getPlaybackPosition = var9.getPosition,
-						getResolution = function(p5) --[[ line: 165 ]]
+						getResolution = function(p5)
 							-- upvalues: var9 (copy)
 							return var9.getState(p5).resolution
 						end,
-						setSurface = function(value) --[[ line: 168 ]]
+						setSurface = function(value)
 							-- upvalues: var9 (copy), id (ref)
 							var9.setSurface(id, value)
 						end,

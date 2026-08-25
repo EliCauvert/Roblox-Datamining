@@ -11,13 +11,13 @@ local appPage = robloxAppEnumsModule.AppPage
 local useSduiContext = serverDrivenUiModule.useSduiContext
 local sduiComponent = serverDrivenUiModule.SduiComponent
 
-return reactModule.memo(function(p0) --[[ line: 22 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useSduiContext (ref), appPage (ref), reactModule (ref), reportModalImpressionModule (ref), sendModalImpressionEvent (ref), sduiComponent (ref)
 	local var6 = useRoactService(roactServiceTagsModule.RoactNetworking)
 	local var7 = useSduiContext({ appPage = appPage.Home, dataUpdatedTimestamp = os.time() })
 	local modalId = p0.modalId
 	local modalType = p0.modalType
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: reportModalImpressionModule (copy), var6 (ref), modalId (ref), modalType (ref), sendModalImpressionEvent (copy)
 		reportModalImpressionModule(var6, modalId, modalType)
 		sendModalImpressionEvent(modalId, modalType)

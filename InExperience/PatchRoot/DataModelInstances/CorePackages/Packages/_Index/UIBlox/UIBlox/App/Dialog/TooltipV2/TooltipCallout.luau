@@ -24,11 +24,11 @@ local iconSizeModule = require(parent_3.App.ImageSet.Enum.IconSize)
 local imagesModule = require(parent_3.App.ImageSet.Images)
 local UIBloxConfigModule = require(parent_3.UIBloxConfig)
 
-local function _(p0, p1) --[[ line: 32 | named "product" ]]
+local function _(p0, p1)
 	return Vector2.new(p0.X * p1.X, p0.Y * p1.Y)
 end
 
-function getOffsetPosition(value, p2, p3, p4) --[[ line: 37 ]]
+function getOffsetPosition(value, p2, p3, p4)
 	-- upvalues: constantsModule (ref)
 	local var16 = constantsModule.ORIENTATION_VECTOR[p3]
 	local var17 = p2 + Vector2.new(p4, p4)
@@ -36,25 +36,25 @@ function getOffsetPosition(value, p2, p3, p4) --[[ line: 37 ]]
 	return value + Vector2.new(var16.X * var17.X, var16.Y * var17.Y)
 end
 
-local _ = function(p5) --[[ line: 44 | named "vectorToPosition" ]]
+local _ = function(p5)
 	return UDim2.fromOffset(p5.X, p5.Y)
 end
 
-local _ = function(p6) --[[ line: 50 | named "getContentAnchorPoint" ]]
+local _ = function(p6)
 	-- upvalues: constantsModule (ref)
 	return Vector2.new(0.5, 0.5) - 0.5 * constantsModule.ORIENTATION_VECTOR[p6]
 end
 
-local _ = function(p7, p8) --[[ line: 55 | named "convertPadding" ]]
+local _ = function(p7, p8)
 	return UDim.new(0, p7 or p8)
 end
 
-local _ = function(value, p9) --[[ line: 60 | named "addOffsets" ]]
+local _ = function(value, p9)
 	-- upvalues: tooltipOrientationModule (ref)
 	return value + Vector2.new(p9[tooltipOrientationModule.Left] + p9[tooltipOrientationModule.Right], p9[tooltipOrientationModule.Top] + p9[tooltipOrientationModule.Bottom])
 end
 
-local function getHotkeysAndWidth(p10, p11, p12) --[[ line: 68 ]]
+local function getHotkeysAndWidth(p10, p11, p12)
 	-- upvalues: reactModule (ref), keyLabelModule (ref), getKeyLabelWidth (ref), constantsModule (ref)
 	if not p10 or #p10 == 0 then
 		return nil, p11
@@ -83,7 +83,7 @@ local function getHotkeysAndWidth(p10, p11, p12) --[[ line: 68 ]]
 	}, t), maxValue
 end
 
-return reactModule.forwardRef(function(p13, p14) --[[ line: 104 | named "TooltipWithRef" ]]
+return reactModule.forwardRef(function(p13, p14)
 	-- upvalues: reactModule (ref), useStyleModule (ref), constantsModule (ref), getTextSizeModule (ref), UIBloxConfigModule (ref), getHotkeysAndWidth (ref), luauPolyfillModule (ref), buttonTypeModule (ref), standardButtonSizeModule (ref), buttonModule (ref), tooltipOrientationModule (ref), label (ref), styledTextLabelModule (ref), iconButtonModule (ref), imagesModule (ref), iconSizeModule (ref)
 	assert(p13.headerText or p13.bodyText, "Must supply either header or body")
 	assert(not (p13.renderCustomComponents and p13.buttonProps), "renderCustomComponents and buttonProps are not compatible")
@@ -226,7 +226,7 @@ return reactModule.forwardRef(function(p13, p14) --[[ line: 104 | named "Tooltip
 		Position = UDim2.fromOffset(vector2_1.X, vector2_1.Y),
 		BackgroundColor3 = backgroundColor,
 		BackgroundTransparency = var50,
-		[reactModule.Change.AbsoluteSize] = function(p15) --[[ line: 293 ]]
+		[reactModule.Change.AbsoluteSize] = function(p15)
 			-- upvalues: var22 (ref), p13 (ref)
 			var22(p15.AbsoluteSize)
 			

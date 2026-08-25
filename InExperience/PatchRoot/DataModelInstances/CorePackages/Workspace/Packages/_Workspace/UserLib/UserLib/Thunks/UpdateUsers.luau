@@ -4,9 +4,9 @@ local userModule = require(userLib.Models.User)
 local addUsersModule = require(userLib.Actions.AddUsers)
 local setFriendCount = require(parent.LegacyFriendsRodux).Actions.SetFriendCount
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: userModule (ref), addUsersModule (ref), setFriendCount (ref)
-	return function(p1) --[[ line: 10 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), userModule (copy), addUsersModule (copy), setFriendCount (copy)
 		local var3 = 0
 		local t = {}

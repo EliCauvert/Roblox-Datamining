@@ -50,7 +50,7 @@ local t = {
 	}
 }
 
-return function(p0, p1, p2, p3) --[[ line: 197 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: t (ref), thumbnailSizeModule (ref), getAssetIdAsNumericModule (ref), thumbnailTypeModule (ref)
 	local var5 = t[p0][p2 or thumbnailSizeModule.Medium]
 	local var6 = getAssetIdAsNumericModule(p1)

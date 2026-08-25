@@ -13,15 +13,15 @@ return {
 	alreadyLocalized = false,
 	field_type = settingEnum.Toggle,
 	layoutOrder = LAYOUT_ORDER.HapticsFrame,
-	onChanged = (function() --[[ line: 29 | named "HapticValue" ]]
+	onChanged = (function()
 		-- upvalues: gameSettings (ref), valueChangedSignal (ref), t_1 (ref), t (ref)
-		local _ = function() --[[ line: 30 ]]
+		local _ = function()
 			-- upvalues: gameSettings (copy)
 			return gameSettings.HapticStrength ~= 0
 		end
 		
 		local var4 = valueChangedSignal.new(if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON)
-		var4:connect(function(p0) --[[ line: 35 ]]
+		var4:connect(function(p0)
 			-- upvalues: gameSettings (copy), t_1 (copy), t (copy)
 			if (if gameSettings.HapticStrength == t_1.MIN then t.OFF else t.ON) == p0 then
 				return

@@ -29,14 +29,14 @@ local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
 local var12 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
 local useSignalState = require(parent.SignalsReact).useSignalState
 
-return function(_) --[[ line: 43 | named "MutualConnectionList" ]]
+return function(_)
 	-- upvalues: useDispatch (ref), useNavigationProps (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), fFlagEnableSplitPane (ref), useSignalState (ref), var12 (ref), fFlagMutualConnectionsListPagination (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), userListViewAdaptor (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateDown (ref)
 	local var16
 	local var13 = useDispatch()
-	local var14 = useNavigationProps(function(_, p0) --[[ line: 45 ]]
+	local var14 = useNavigationProps(function(_, p0)
 		return { mutualFriendIds = p0.mutualFriendIds }
 	end)
-	local var15 = getSafeAreaSize(useScreenSize(), useSelector(function(p1) --[[ line: 53 ]]
+	local var15 = getSafeAreaSize(useScreenSize(), useSelector(function(p1)
 		return p1.GlobalGuiInset
 	end))
 	
@@ -58,18 +58,18 @@ return function(_) --[[ line: 43 | named "MutualConnectionList" ]]
 	
 	if fFlagMutualConnectionsListPagination then
 		local var21, var22 = reactModule.useState(25)
-		reactModule.useEffect(function() --[[ line: 90 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var22 (ref)
 			var22(25)
 		end, { mutualFriendIds })
-		var20 = reactModule.useCallback(function() --[[ line: 94 ]]
+		var20 = reactModule.useCallback(function()
 			-- upvalues: var22 (ref), mutualFriendIds (ref)
-			var22(function(p2) --[[ line: 95 ]]
+			var22(function(p2)
 				-- upvalues: mutualFriendIds (copy)
 				return math.min(p2 + 25, #mutualFriendIds)
 			end)
 		end, { mutualFriendIds })
-		var18 = reactModule.useMemo(function() --[[ line: 100 ]]
+		var18 = reactModule.useMemo(function()
 			-- upvalues: var21 (ref), mutualFriendIds (ref)
 			if var21 >= #mutualFriendIds then
 				return mutualFriendIds
@@ -95,7 +95,7 @@ return function(_) --[[ line: 43 | named "MutualConnectionList" ]]
 		users = if fFlagMutualConnectionsListPagination then var18 else mutualFriendIds,
 		title = if #mutualFriendIds == 1 then var23.mutualConnection else var23.mutualConnections,
 		wideModePeekViewLayout = t,
-		onUserSelected = function(p3) --[[ line: 132 ]]
+		onUserSelected = function(p3)
 			-- upvalues: appPage (copy), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var13 (ref), navigateDown (copy)
 			local t = {
 				name = appPage.ProfilePlatform,

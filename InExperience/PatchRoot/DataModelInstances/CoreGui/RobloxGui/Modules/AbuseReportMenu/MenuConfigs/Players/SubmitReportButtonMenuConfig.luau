@@ -12,17 +12,17 @@ local constantsModule = require(abuseReportMenu.Components.Constants)
 local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 
-function isEligibleForVoiceSubmit(p0, p1) --[[ line: 17 ]]
+function isEligibleForVoiceSubmit(p0, p1)
 	-- upvalues: playersService (ref)
 	return p0.allegedAbuser ~= nil and (p0.allegedAbuserId ~= nil and (p0.abuseReason ~= nil and (p0.methodOfAbuse ~= nil and (p1.analyticsState.menuOpenedUnixTimestampMilliseconds ~= nil and playersService.LocalPlayer ~= nil))))
 end
 
-function isEligibleForRAOtherSubmit(p2) --[[ line: 26 ]]
+function isEligibleForRAOtherSubmit(p2)
 	-- upvalues: playersService (ref)
 	return p2.allegedAbuser ~= nil and (p2.allegedAbuserId ~= nil and (p2.abuseReason ~= nil and playersService.LocalPlayer ~= nil))
 end
 
-function isEligibleForTextSubmit(p3) --[[ line: 32 ]]
+function isEligibleForTextSubmit(p3)
 	return p3.allegedAbuser ~= nil and p3.abuseReason ~= nil
 end
 
@@ -31,22 +31,22 @@ return {
 	variant = "primary",
 	fieldLabel = "",
 	componentName = "SubmitButton",
-	getIsVisible = function(_) --[[ line: 38 ]]
+	getIsVisible = function(_)
 		return true
 	end,
-	getIconSrc = function(_) --[[ line: 42 ]]
+	getIconSrc = function(_)
 		return ""
 	end,
-	getButtonLabel = function(_) --[[ line: 45 ]]
+	getButtonLabel = function(_)
 		return "SubmitButton"
 	end,
-	getIsDisabled = function(p4, p5) --[[ line: 48 ]]
+	getIsDisabled = function(p4, p5)
 		-- upvalues: constantsModule (ref), tnSIXPWrapperModule (ref)
 		local methodOfAbuse = p4.methodOfAbuse
 		
 		return if methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then not isEligibleForVoiceSubmit(p4, p5) elseif methodOfAbuse == constantsModule.AbuseMethods.TextChat or methodOfAbuse == nil or methodOfAbuse == constantsModule.AbuseMethods.Other and not tnSIXPWrapperModule.getReportAnythingAvatarEnabled() then not isEligibleForTextSubmit(p4) else (methodOfAbuse == constantsModule.AbuseMethods.Other or methodOfAbuse == constantsModule.AbuseMethods.Avatar) and not isEligibleForRAOtherSubmit(p4)
 	end,
-	onClick = function(p6, _, p7) --[[ line: 63 ]]
+	onClick = function(p6, _, p7)
 		-- upvalues: constantsModule (ref), createVoiceAbuseReportRequestModule (ref), playersService (ref), default (ref), cryoModule (ref), tnSIXPWrapperModule (ref), getToastMessageFromAbuseReasonModule (ref), abuseReportBuilderModule (ref), reportAbuseAnalyticsModule (ref)
 		local allegedAbuser = p6.allegedAbuser
 		local allegedAbuserId = p6.allegedAbuserId
@@ -56,9 +56,9 @@ return {
 		
 		if methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then
 			if isEligibleForVoiceSubmit(p6, p7) then
-				pcall(function() --[[ line: 76 ]]
+				pcall(function()
 					-- upvalues: createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), allegedAbuserId (ref), p6 (ref), abuseReason (ref), menuOpenedUnixTimestampMilliseconds (ref), cryoModule (copy), constantsModule (copy), p7 (ref), allegedAbuser (ref)
-					task.spawn(function() --[[ line: 77 ]]
+					task.spawn(function()
 						-- upvalues: createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), allegedAbuserId (copy), p6 (copy), abuseReason (copy), menuOpenedUnixTimestampMilliseconds (copy), cryoModule (copy), constantsModule (copy), p7 (copy), allegedAbuser (copy)
 						playersService:ReportAbuseV3(playersService.LocalPlayer, createVoiceAbuseReportRequestModule(playersService, default, {
 							localUserId = playersService.LocalPlayer.UserId,
@@ -66,7 +66,7 @@ return {
 							abuseComment = p6.comment,
 							abuseReason = abuseReason,
 							inExpMenuOpenedUnixMilli = menuOpenedUnixTimestampMilliseconds,
-							sortedPlayerListUserIds = cryoModule.List.map(p6.playerObjects, function(p8) --[[ line: 84 ]]
+							sortedPlayerListUserIds = cryoModule.List.map(p6.playerObjects, function(p8)
 								return p8.UserId
 							end),
 							abuseVector = constantsModule.AbuseVector.Voice
@@ -82,7 +82,7 @@ return {
 			end
 		elseif methodOfAbuse == constantsModule.AbuseMethods.TextChat or methodOfAbuse == constantsModule.AbuseMethods.Other and not tnSIXPWrapperModule.getReportAnythingAvatarEnabled() or methodOfAbuse == nil then
 			if isEligibleForTextSubmit(p6) then
-				spawn(function() --[[ line: 104 ]]
+				spawn(function()
 					-- upvalues: playersService (copy), allegedAbuser (ref), abuseReason (ref), p6 (ref)
 					playersService:ReportAbuse(allegedAbuser, abuseReason, p6.comment)
 				end)
@@ -94,9 +94,9 @@ return {
 				return
 			end
 		elseif (methodOfAbuse == constantsModule.AbuseMethods.Other or methodOfAbuse == constantsModule.AbuseMethods.Avatar) and isEligibleForRAOtherSubmit(p6) then
-			pcall(function() --[[ line: 113 ]]
+			pcall(function()
 				-- upvalues: abuseReportBuilderModule (copy), playersService (copy), allegedAbuserId (ref), p6 (ref), abuseReason (ref), reportAbuseAnalyticsModule (copy), p7 (ref), methodOfAbuse (ref), constantsModule (copy), getToastMessageFromAbuseReasonModule (copy)
-				task.spawn(function() --[[ line: 114 ]]
+				task.spawn(function()
 					-- upvalues: abuseReportBuilderModule (copy), playersService (copy), allegedAbuserId (copy), p6 (copy), abuseReason (copy), reportAbuseAnalyticsModule (copy), p7 (copy), methodOfAbuse (copy), constantsModule (copy), getToastMessageFromAbuseReasonModule (copy)
 					local var10 = abuseReportBuilderModule.buildOtherReportRequest({
 						localUserId = playersService.LocalPlayer.UserId,

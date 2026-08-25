@@ -18,23 +18,23 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Enums.ProgressShape)
 local t = { size = require(foundation.Enums.ProgressSize).Medium }
 
-local function _(p0, p1) --[[ line: 60 | named "getRotationFromProgress" ]]
+local function _(p0, p1)
 	return if p0 == nil then 0 else math.clamp(p0 * 360, if p1 == Enum.HorizontalAlignment.Left then 180 else 0, if p1 == Enum.HorizontalAlignment.Left then 360 else 180)
 end
 
-local function getLabelFromProgress(p2) --[[ line: 66 ]]
+local function getLabelFromProgress(p2)
 	return if p2 == nil then "0%" else `{math.floor(p2 * 100)}%`
 end
 
-local function getCapAngleFromProgress(vectorA) --[[ line: 70 ]]
+local function getCapAngleFromProgress(vectorA)
 	return math.clamp(vectorA or 0, 0, 1) * 360
 end
 
-local function hasVisibleArc(p3) --[[ line: 74 ]]
+local function hasVisibleArc(p3)
 	return (p3 or 0) > 0
 end
 
-local function ArcCap(p4) --[[ line: 84 ]]
+local function ArcCap(p4)
 	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
 		ZIndex = 2,
@@ -53,7 +53,7 @@ local function ArcCap(p4) --[[ line: 84 ]]
 	})
 end
 
-local function ArcCaps(p5) --[[ line: 108 ]]
+local function ArcCaps(p5)
 	-- upvalues: mapBindableModule (ref), hasVisibleArc (ref), reactModule (ref), ArcCap (ref), getCapAngleFromProgress (ref)
 	local var25 = mapBindableModule(p5.progress, hasVisibleArc)
 	
@@ -71,7 +71,7 @@ local function ArcCaps(p5) --[[ line: 108 ]]
 	})
 end
 
-local function ProgressGradient(p6) --[[ line: 128 ]]
+local function ProgressGradient(p6)
 	-- upvalues: useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), mapBindableModule (ref)
 	local side = p6.side
 	local isIndeterminate = p6.isIndeterminate
@@ -80,17 +80,17 @@ local function ProgressGradient(p6) --[[ line: 128 ]]
 	local var26 = useTokensModule()
 	
 	return if isIndeterminate and usePreferencesModule().reducedMotion and pulse then reactModule.createElement("UIGradient", {
-		Transparency = pulse:map(function(p8) --[[ line: 165 ]]
+		Transparency = pulse:map(function(p8)
 			-- upvalues: var26 (ref)
 			return NumberSequence.new(math.lerp(var26.Color.Content.Emphasis.Transparency, var26.Color.Shift.Shift_200.Transparency, p8))
 		end),
-		Color = pulse:map(function(p9) --[[ line: 174 ]]
+		Color = pulse:map(function(p9)
 			-- upvalues: var26 (ref)
 			return ColorSequence.new(var26.Color.Content.Emphasis.Color3:Lerp(var26.Color.Shift.Shift_200.Color3, p9))
 		end),
 		Rotation = if side == Enum.HorizontalAlignment.Left then 0 else 180
 	}) else reactModule.createElement("UIGradient", {
-		Transparency = reactModule.useMemo(function() --[[ line: 142 ]]
+		Transparency = reactModule.useMemo(function()
 			-- upvalues: var26 (ref), isIndeterminate (ref)
 			local transparency = var26.Color.Content.Emphasis.Transparency
 			local var27 = if isIndeterminate then 1 else var26.Color.Shift.Shift_200.Transparency
@@ -102,7 +102,7 @@ local function ProgressGradient(p6) --[[ line: 128 ]]
 				NumberSequenceKeypoint.new(1, var27)
 			})
 		end, { var26, isIndeterminate }),
-		Color = reactModule.useMemo(function() --[[ line: 154 ]]
+		Color = reactModule.useMemo(function()
 			-- upvalues: var26 (ref)
 			return ColorSequence.new({
 				ColorSequenceKeypoint.new(0, var26.Color.Content.Emphasis.Color3),
@@ -111,14 +111,14 @@ local function ProgressGradient(p6) --[[ line: 128 ]]
 				ColorSequenceKeypoint.new(1, var26.Color.Shift.Shift_200.Color3)
 			})
 		end, { var26 }),
-		Rotation = mapBindableModule(progress, function(p7) --[[ line: 185 ]]
+		Rotation = mapBindableModule(progress, function(p7)
 			-- upvalues: side (ref)
 			return if p7 == nil then 0 else math.clamp(p7 * 360, if side == Enum.HorizontalAlignment.Left then 180 else 0, if side == Enum.HorizontalAlignment.Left then 360 else 180)
 		end)
 	})
 end
 
-local function ProgressRing(p10) --[[ line: 193 ]]
+local function ProgressRing(p10)
 	-- upvalues: reactModule (ref), viewModule (ref), imageModule (ref), ProgressGradient (ref), ArcCaps (ref)
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		LeftGradient = reactModule.createElement(viewModule, {
@@ -162,7 +162,7 @@ local function ProgressRing(p10) --[[ line: 193 ]]
 	})
 end
 
-local function SpinningRing(p11) --[[ line: 248 ]]
+local function SpinningRing(p11)
 	-- upvalues: reactModule (ref), viewModule (ref), ProgressRing (ref)
 	return reactModule.createElement(viewModule, {
 		Size = p11.size,
@@ -178,7 +178,7 @@ local function SpinningRing(p11) --[[ line: 248 ]]
 	})
 end
 
-return function(p12) --[[ line: 268 | named "ProgressCircle" ]]
+return function(p12)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), useProgressVariantsModule (ref), useProgressBindingModule (ref), useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), SpinningRing (ref), flagsModule (ref), ProgressRing (ref), textModule (ref), mapBindableModule (ref), getLabelFromProgress (ref)
 	local var28 = withDefaultsModule(p12, t)
 	local var29 = usePreferencesModule()

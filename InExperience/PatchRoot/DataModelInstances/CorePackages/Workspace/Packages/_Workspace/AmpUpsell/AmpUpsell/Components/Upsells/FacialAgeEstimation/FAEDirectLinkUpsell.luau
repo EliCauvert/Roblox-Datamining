@@ -13,7 +13,7 @@ local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
 
-return function(p0) --[[ line: 30 | named "FAEDirectLinkUpsell" ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useTokens (ref), useRoactService (ref), appLinking (ref), useLocalization (ref), reactModule (ref), authButtonClick (ref), partialPageModal (ref), buttonType (ref), images (ref), text (ref)
 	local webLink = p0.webLink
 	local onCancel = p0.onCancel
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 30 | named "FAEDirectLinkUpsell" ]]
 		startBtn = "Amp.FAEUpsell.Modal.ExternalLink.ButtonStart",
 		cancelBtn = "Amp.FAEUpsell.Modal.ExternalLink.ButtonCancel"
 	})
-	local var7 = reactModule.useCallback(function() --[[ line: 52 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), onCancel (ref)
 		authButtonClick(entryPointEventCtx, "cancelFaeNonNative", sessionId)
 		onCancel()
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 30 | named "FAEDirectLinkUpsell" ]]
 					buttonType = buttonType.PrimaryContextual,
 					props = {
 						icon = images["icons/navigation/externallink_medium"],
-						onActivated = reactModule.useCallback(function() --[[ line: 47 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), var5 (ref), webLink (ref)
 							authButtonClick(entryPointEventCtx, "startFaeNonNative", sessionId)
 							var5:openURL(webLink)

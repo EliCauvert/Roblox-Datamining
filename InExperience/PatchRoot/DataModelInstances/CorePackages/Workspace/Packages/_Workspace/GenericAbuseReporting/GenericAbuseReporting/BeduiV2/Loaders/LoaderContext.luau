@@ -3,12 +3,12 @@ local var1 = reactModule.createContext(nil)
 
 return {
 	LoaderContext = var1,
-	LoaderProvider = function(p0) --[[ line: 44 ]]
+	LoaderProvider = function(p0)
 		-- upvalues: reactModule (ref), var1 (ref)
 		local var2 = reactModule.useRef({})
 		local var3 = reactModule.useRef(p0.loaders)
 		var3.current = p0.loaders
-		reactModule.useEffect(function() --[[ line: 49 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), var2 (ref)
 			if not p0.open then
 				var2.current = {}
@@ -19,7 +19,7 @@ return {
 			value = reactModule.useRef({ registryRef = var3, cacheRef = var2 }).current
 		}, p0.children)
 	end,
-	useLoaderContext = function() --[[ line: 64 ]]
+	useLoaderContext = function()
 		-- upvalues: reactModule (ref), var1 (ref)
 		local var4 = reactModule.useContext(var1)
 		

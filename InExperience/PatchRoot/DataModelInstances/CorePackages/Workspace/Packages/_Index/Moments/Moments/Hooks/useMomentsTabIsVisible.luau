@@ -12,7 +12,7 @@ local reactModule = require(parent.React)
 local var3 = if fFlagSignalsNavP3hMisc then navigationRoduxModule.GetLegacyNavigationStore else nil
 local var4 = if fFlagSignalsNavP3hMisc then require(parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-local function routeContainsMoments(p0) --[[ line: 36 ]]
+local function routeContainsMoments(p0)
 	-- upvalues: appPage (ref)
 	if type(p0) ~= "table" then
 		return false
@@ -25,10 +25,10 @@ local function routeContainsMoments(p0) --[[ line: 36 ]]
 	return false
 end
 
-return function() --[[ line: 48 | named "useMomentsTabIsVisible" ]]
+return function()
 	-- upvalues: fFlagSignalsNavP3hMisc (ref), var3 (ref), reactModule (ref), fFlagMomentsWatchSessionalization (ref), appPage (ref), useSignalState (ref), var4 (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), routeContainsMoments (ref), selectors (ref)
 	if not fFlagSignalsNavP3hMisc then
-		return useSelector(function(p1) --[[ line: 64 ]]
+		return useSelector(function(p1)
 			-- upvalues: fFlagUseNavigationSelectors (copy), fFlagMomentsWatchSessionalization (copy), routeContainsMoments (copy), selectors (copy), appPage (copy)
 			if not p1.Navigation then
 				return true
@@ -47,7 +47,7 @@ return function() --[[ line: 48 | named "useMomentsTabIsVisible" ]]
 	end
 	local var6 = var3(false)
 	
-	return if var4() then useSignalState(reactModule.useMemo(function() --[[ line: 51 ]]
+	return if var4() then useSignalState(reactModule.useMemo(function()
 		-- upvalues: fFlagMomentsWatchSessionalization (copy), var6 (ref), appPage (copy)
 		return if fFlagMomentsWatchSessionalization then var6.getRouteContainsPageSignal(appPage.Moments) else var6.getIsCurrentPageSignal(appPage.Moments)
 	end, {})) else true

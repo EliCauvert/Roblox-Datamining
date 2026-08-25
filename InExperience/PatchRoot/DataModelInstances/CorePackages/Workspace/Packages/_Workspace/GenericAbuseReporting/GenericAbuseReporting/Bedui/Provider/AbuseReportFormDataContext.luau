@@ -7,7 +7,7 @@ local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThum
 return reactModule.createContext({
 	custom = if fFlagAddThumbnailSelectorReport then {} else nil,
 	formData = {},
-	updateForm = function(_, _) --[[ line: 16 ]] end,
+	updateForm = function(_, _) end,
 	additionalReportTags = if fFlagAddThumbnailSelectorReport then {} else nil,
-	updateAdditionalReportTags = if fFlagAddThumbnailSelectorReport then function(_, _) --[[ line: 19 ]] end else nil
+	updateAdditionalReportTags = if fFlagAddThumbnailSelectorReport then function(_, _) end else nil
 })

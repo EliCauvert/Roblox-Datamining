@@ -13,7 +13,7 @@ local squadComponentAccessWrapper = squadsModule.SquadComponentAccessWrapper
 local squadJoinButton = squadsModule.SquadJoinButton
 local var9 = reactModule.memo(conversationFacePileModule)
 
-return reactModule.memo(function(p0) --[[ line: 41 | named "ConversationRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useConversationRowPresentationModule (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), var9 (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), domLocatorsModule (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var10 = useConversationRowPresentationModule({
 		conversationId = p0.conversationId,

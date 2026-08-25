@@ -5,9 +5,9 @@ local urlBase = require(parent.UrlBuilder).UrlBase
 local appScreensModule = require(ampUpsell.Common.AppScreens)
 local _ = require(ampUpsell.Common.Enums)
 
-return function(p0, p1, p2) --[[ line: 15 | named "useCompletionCallbackWithReturnPage" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), urlBase (ref), appScreensModule (ref)
-	return reactModule.useCallback(function(p3, p4) --[[ line: 20 ]]
+	return reactModule.useCallback(function(p3, p4)
 		-- upvalues: p2 (ref), urlBase (copy), p0 (ref), appScreensModule (copy), p1 (ref)
 		if p2 and p2.returnPage then
 			local text = urlBase.new("www") .. "/" .. p2.returnPage

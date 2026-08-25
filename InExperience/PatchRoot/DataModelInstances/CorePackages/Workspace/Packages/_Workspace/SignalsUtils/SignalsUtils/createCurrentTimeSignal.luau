@@ -3,7 +3,7 @@ local signalsModule = require(script:FindFirstAncestor("SignalsUtils").Parent.Si
 local tbl = setmetatable({}, { __mode = "v" })
 local var3 = nil
 
-local function _() --[[ line: 18 | named "maybeDisconnect" ]]
+local function _()
 	-- upvalues: tbl (ref), var3 (write)
 	if next(tbl) == nil and var3 then
 		var3:Disconnect()
@@ -11,7 +11,7 @@ local function _() --[[ line: 18 | named "maybeDisconnect" ]]
 	end
 end
 
-local function onHeartbeat() --[[ line: 25 ]]
+local function onHeartbeat()
 	-- upvalues: tbl (ref), var3 (write)
 	if next(tbl) == nil and var3 then
 		var3:Disconnect()
@@ -28,14 +28,14 @@ local function onHeartbeat() --[[ line: 25 ]]
 	end
 end
 
-local _ = function() --[[ line: 40 | named "ensureConnection" ]]
+local _ = function()
 	-- upvalues: var3 (write), runService (ref), onHeartbeat (ref)
 	if not var3 then
 		var3 = runService.Heartbeat:Connect(onHeartbeat)
 	end
 end
 
-return function(value) --[[ line: 46 | named "createCurrentTimeSignal" ]]
+return function(value)
 	-- upvalues: tbl (ref), signalsModule (ref), var3 (write), runService (ref), onHeartbeat (ref)
 	local value_1 = value or 30
 	
@@ -49,7 +49,7 @@ return function(value) --[[ line: 46 | named "createCurrentTimeSignal" ]]
 	end
 	local var9 = tbl[value_1]
 	
-	return function(p0) --[[ line: 63 ]]
+	return function(p0)
 		-- upvalues: var9 (ref)
 		return var9.getter(p0)
 	end

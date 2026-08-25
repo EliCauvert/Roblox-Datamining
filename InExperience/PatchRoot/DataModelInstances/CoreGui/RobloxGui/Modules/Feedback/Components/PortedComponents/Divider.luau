@@ -14,12 +14,12 @@ local var4 = t.strictInterface({
 	Visible = t.optional(t.boolean)
 })
 
-return function(p0) --[[ line: 23 | named "Divider" ]]
+return function(p0)
 	-- upvalues: globalConfigModule (ref), var4 (ref), withStyle (ref), roact (ref), cryo (ref)
 	if globalConfigModule.propValidation then
 		assert(var4(p0))
 	end
-	return withStyle(function(p1) --[[ line: 28 ]]
+	return withStyle(function(p1)
 		-- upvalues: roact (copy), cryo (copy), p0 (ref)
 		return roact.createElement("Frame", cryo.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p0, {
 			BorderSizePixel = 0,

@@ -19,7 +19,7 @@ local useStartPartySuggestionModule = require(script.Parent.useStartPartySuggest
 local createSmartSuggestionActionHandler = smartSuggestionActionHandlerModule.createSmartSuggestionActionHandler
 local suggestionType = typesModule.SuggestionType
 
-local function _(p0, p1) --[[ line: 48 | named "getConversationMessages" ]]
+local function _(p0, p1)
 	-- upvalues: getDeepValueModule (ref)
 	if p1 == nil then
 		return nil
@@ -29,7 +29,7 @@ local function _(p0, p1) --[[ line: 48 | named "getConversationMessages" ]]
 	return if var13 == nil or var13.messages == nil then nil else var13.messages
 end
 
-local function getLatestUserMessageId(p2, p3) --[[ line: 61 ]]
+local function getLatestUserMessageId(p2, p3)
 	-- upvalues: getDeepValueModule (ref), orderedMap (ref), messageModelModule (ref)
 	local var14
 	if p3 == nil then
@@ -52,7 +52,7 @@ local function getLatestUserMessageId(p2, p3) --[[ line: 61 ]]
 	return nil
 end
 
-local _ = function(p4, p5, p6) --[[ line: 77 | named "isMessageCommitted" ]]
+local _ = function(p4, p5, p6)
 	-- upvalues: getDeepValueModule (ref), orderedMap (ref)
 	local var17, var18
 	if p5 == nil then
@@ -66,17 +66,17 @@ local _ = function(p4, p5, p6) --[[ line: 77 | named "isMessageCommitted" ]]
 	return var18
 end
 
-return function(p7, p8, p9) --[[ line: 82 | named "useSmartSuggestions" ]]
+return function(p7, p8, p9)
 	-- upvalues: useCanAccessPartyModule (ref), useStartPartySuggestionModule (ref), useStore (ref), reactModule (ref), getLatestUserMessageId (ref), useSelector (ref), createSmartSuggestionActionHandler (ref), cryoModule (ref), suggestionType (ref), fetchSmartSuggestionsModule (ref), constantsModule (ref), getDeepValueModule (ref), orderedMap (ref), useRealtimePlatformChatConversationModule (ref)
 	local var19 = useStartPartySuggestionModule(p7, useCanAccessPartyModule())
 	local canStartParty = var19.canStartParty
 	local startParty = var19.startParty
 	local var20 = useStore()
-	local var21 = useSelector(reactModule.useCallback(function(p10) --[[ line: 92 ]]
+	local var21 = useSelector(reactModule.useCallback(function(p10)
 		-- upvalues: getLatestUserMessageId (copy), p7 (ref)
 		return getLatestUserMessageId(p10, p7)
 	end, { p7 }))
-	local var22 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: createSmartSuggestionActionHandler (copy), p8 (ref), p9 (ref), startParty (ref)
 		return createSmartSuggestionActionHandler({
 			sendMessage = p8,
@@ -86,9 +86,9 @@ return function(p7, p8, p9) --[[ line: 82 | named "useSmartSuggestions" ]]
 	end, { p8, p9, startParty })
 	local var23, var24 = reactModule.useState({})
 	local var25, var26 = reactModule.useState(false)
-	local var27 = reactModule.useMemo(function() --[[ line: 106 ]]
+	local var27 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), var23 (ref), suggestionType (copy), canStartParty (ref)
-		return cryoModule.List.filter(var23, function(p11) --[[ line: 107 ]]
+		return cryoModule.List.filter(var23, function(p11)
 			-- upvalues: suggestionType (copy), canStartParty (copy)
 			return if p11.type == suggestionType.StartParty then canStartParty else true
 		end)
@@ -99,14 +99,14 @@ return function(p7, p8, p9) --[[ line: 82 | named "useSmartSuggestions" ]]
 		previousNewestUserMessageId = var21,
 		newestMessageConversationId = p7
 	})
-	local var29 = reactModule.useCallback(function() --[[ line: 122 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: p7 (ref), var28 (ref), fetchSmartSuggestionsModule (copy), var24 (ref), var26 (ref)
 		if p7 == nil then
 			return
 		end
 		var28.current.requestId += 1
 		local requestId = var28.current.requestId
-		fetchSmartSuggestionsModule(p7):andThen(function(p12) --[[ line: 129 ]]
+		fetchSmartSuggestionsModule(p7):andThen(function(p12)
 			-- upvalues: var28 (copy), requestId (ref), var24 (copy), var26 (copy)
 			if var28.current.requestId == requestId then
 				var24(p12)
@@ -114,21 +114,21 @@ return function(p7, p8, p9) --[[ line: 82 | named "useSmartSuggestions" ]]
 				
 				return
 			end
-		end):catch(function() --[[ line: 136 ]] end)
+		end):catch(function() end)
 	end, { p7 })
-	reactModule.useEffect(function() --[[ line: 143 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var24 (ref), var26 (ref), var29 (ref), var28 (ref)
 		var24({})
 		var26(false)
 		var29()
 		
-		return function() --[[ line: 147 ]]
+		return function()
 			-- upvalues: var28 (copy)
 			var28.current.requestId += 1
 			var28.current.pendingRealtimeNotification = nil
 		end
 	end, { p7, var29 })
-	local var30 = reactModule.useCallback(function(p13) --[[ line: 154 ]]
+	local var30 = reactModule.useCallback(function(p13)
 		-- upvalues: constantsModule (copy), p7 (ref), var20 (ref), getLatestUserMessageId (copy), getDeepValueModule (copy), orderedMap (copy), var28 (ref), var29 (ref)
 		if p13.Type ~= constantsModule.PlatformChatConversation.Types.ConversationSuggestionsGenerated then return end
 		if p7 == nil or p13.ConversationId ~= p7 then return end
@@ -160,7 +160,7 @@ return function(p7, p8, p9) --[[ line: 82 | named "useSmartSuggestions" ]]
 		end
 	end, { p7, var20, var29 })
 	useRealtimePlatformChatConversationModule(var30, { var30 })
-	reactModule.useEffect(function() --[[ line: 196 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref), var21 (ref), p7 (ref), var24 (ref), var26 (ref), var29 (ref), var20 (ref), getDeepValueModule (copy), orderedMap (copy)
 		local previousNewestUserMessageId = var28.current.previousNewestUserMessageId
 		local newestMessageConversationId = var28.current.newestMessageConversationId
@@ -199,13 +199,13 @@ return function(p7, p8, p9) --[[ line: 82 | named "useSmartSuggestions" ]]
 	return {
 		suggestions = var27,
 		areSuggestionsDismissed = var25,
-		onActivated = reactModule.useCallback(function(p14) --[[ line: 227 ]]
+		onActivated = reactModule.useCallback(function(p14)
 			-- upvalues: var26 (ref), var22 (ref), p7 (ref)
 			var26(true)
 			local var37 = var22(p14, p7)
 			
 			if typeof(var37) == "table" and typeof(var37.catch) == "function" then
-				var37:catch(function() --[[ line: 232 ]]
+				var37:catch(function()
 					-- upvalues: var26 (copy)
 					var26(false)
 				end)

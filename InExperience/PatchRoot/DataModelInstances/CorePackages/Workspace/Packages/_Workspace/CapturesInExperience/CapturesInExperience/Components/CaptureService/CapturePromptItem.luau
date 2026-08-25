@@ -6,27 +6,27 @@ local checkbox = foundationModule.Checkbox
 local view = foundationModule.View
 local getCropSize = capturesCommonModule.Utils.getCropSize
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), foundationModule (ref), checkbox (ref), getCropSize (ref)
 	local var3, var4 = reactModule.useState(Vector2.new(0, 0))
 	local var5 = reactModule.useRef(nil)
 	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
-	local var8 = reactModule.useCallback(function() --[[ line: 25 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.updateSelected(not p0.isSelected)
 	end, { p0.isSelected, p0.updateSelected })
-	local var9 = reactModule.useCallback(function(p1) --[[ line: 29 ]]
+	local var9 = reactModule.useCallback(function(p1)
 		-- upvalues: var4 (ref)
 		var4(p1.AbsoluteSize)
 	end, {})
-	local var10 = reactModule.useCallback(function(p2) --[[ line: 33 ]]
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: var5 (ref), var7 (ref)
 		var5.current = p2
 		var7(p2.Resolution)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref)
-		return function() --[[ line: 39 ]]
+		return function()
 			-- upvalues: var5 (copy)
 			if var5.current then
 				var5.current.Video = ""

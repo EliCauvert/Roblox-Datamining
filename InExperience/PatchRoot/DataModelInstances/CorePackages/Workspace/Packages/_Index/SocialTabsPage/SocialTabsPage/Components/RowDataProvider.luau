@@ -19,10 +19,10 @@ local var8 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then {
 	userPresenceType = dataHydrationModule.Presence.PresenceEnums.PresenceType.Offline
 } else nil
 
-return reactModule.memo(function(p0) --[[ line: 49 | named "RowDataProvider" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), var6 (ref), var8 (ref), useSelector (ref), roduxPresenceModule (ref), t (ref), convertUserPresenceTypeToString (ref), useJoinUserInExperience (ref), useCTAForRowModule (ref)
 	local _ = nil
-	local var9 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then var6(p0.entity.id) or var8 else useSelector(function(p1) --[[ line: 55 ]]
+	local var9 = if fFlagSocialTabsPagePresenceSignalsMigrationModule then var6(p0.entity.id) or var8 else useSelector(function(p1)
 		-- upvalues: roduxPresenceModule (copy), p0 (ref), t (copy)
 		return roduxPresenceModule.Selectors.getUserPresenceByUserId(p1, p0.entity.id) or t
 	end)

@@ -1,9 +1,9 @@
 ﻿local var0 = newproxy(false)
 
-return function(p0) --[[ line: 24 ]]
+return function(p0)
 	-- upvalues: var0 (ref)
 	return {
-		setTimeout = function(value, p1, ...) --[[ line: 25 ]]
+		setTimeout = function(value, p1, ...)
 			-- upvalues: var0 (copy), p0 (ref)
 			local list = { ... }
 			local t = { [var0] = 1 }
@@ -11,7 +11,7 @@ return function(p0) --[[ line: 24 ]]
 			if p1 == nil then
 				p1 = 0
 			end
-			p0(p1 / 1000, function() --[[ line: 38 ]]
+			p0(p1 / 1000, function()
 				-- upvalues: t (ref), var0 (copy), value (ref), list (ref)
 				if t[var0] == 1 then
 					value(unpack(list))
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 24 ]]
 			
 			return t
 		end,
-		clearTimeout = function(p2) --[[ line: 48 ]]
+		clearTimeout = function(p2)
 			-- upvalues: var0 (copy)
 			if p2 == nil then return end
 			if p2[var0] == 1 then

@@ -10,7 +10,7 @@ local textKeysModule = require(profileQRCode.Common.TextKeys)
 local useLocalization = localizationModule.Hooks.useLocalization
 local useLocalUserInfoModule = require(profileQRCode.Utils.useLocalUserInfo)
 
-return function(p0) --[[ line: 24 | named "FriendAcceptedSnackbar" ]]
+return function(p0)
 	-- upvalues: useLocalUserInfoModule (ref), useTokens (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), snackbar (ref)
 	local var6 = useLocalUserInfoModule(p0.acceptedFriendUserId)
 	local var7 = useTokens()
@@ -21,16 +21,16 @@ return function(p0) --[[ line: 24 | named "FriendAcceptedSnackbar" ]]
 		},
 		friendAdded = textKeysModule.QRFriendAdded
 	})
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref)
-		local delayedThread = task.delay(5, function() --[[ line: 37 ]]
+		local delayedThread = task.delay(5, function()
 			-- upvalues: p0 (copy)
 			if p0.onDismissed then
 				p0.onDismissed()
 			end
 		end)
 		
-		return function() --[[ line: 42 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end

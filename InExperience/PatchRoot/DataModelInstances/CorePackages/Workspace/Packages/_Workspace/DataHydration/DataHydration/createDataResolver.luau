@@ -14,7 +14,7 @@ local luaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrat
 local luaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
 local luaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
 
-return function(p0) --[[ line: 27 | named "createDataResolver" ]]
+return function(p0)
 	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), createMutationLayerModule (ref), promiseModule (ref), fFlagSduiChartsSupport (ref), fFlagLuaAppDataHydrationDataResolverOnClear (ref), playersService (ref)
 	local var9 = p0.supportsMultiGet ~= nil or p0.supportsMultiGet
 	local var10 = p0.requestBatchSize or luaAppDataHydrationDefaultBatchSize
@@ -35,18 +35,18 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 	local var16 = getLocalPlayerUserId()
 	local var17 = if fFlagLuaAppDataHydrationOptimisticMutationLayer and p0.supportsMutations then createMutationLayerModule() else nil
 	
-	local function FORCE_FETCH() --[[ line: 65 ]]
+	local function FORCE_FETCH()
 		return true
 	end
 	
-	local function _(p1) --[[ line: 69 | named "logError" ]]
+	local function _(p1)
 		-- upvalues: p0 (ref)
 		if p0.logError then
 			p0.logError(p1)
 		end
 	end
 	
-	local _ = function(p2, p3, p4) --[[ line: 76 | named "handleFailure" ]]
+	local _ = function(p2, p3, p4)
 		-- upvalues: var16 (write), p0 (ref), t (write), cache (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (write)
 		if p4 ~= var16 then return end
 		if p0.logError then
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		end
 	end
 	
-	local function handleSuccess(p5, p6, p7) --[[ line: 93 ]]
+	local function handleSuccess(p5, p6, p7)
 		-- upvalues: var16 (write), t (write), p0 (ref), cache (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (write)
 		if p7 ~= var16 then return end
 		for i, v in p5 do
@@ -111,10 +111,10 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		end
 	end
 	
-	local function scheduleFetch() --[[ line: 138 ]]
+	local function scheduleFetch()
 		-- upvalues: var15 (write), var13 (ref), var11 (write), var16 (write), var10 (write), t (write), cache (ref), requestTimeoutSec (ref), p0 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (write), var9 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
 		if var15 == nil and not var13.isEmpty() then
-			var15 = task.delay(var11, function() --[[ line: 144 ]]
+			var15 = task.delay(var11, function()
 				-- upvalues: var16 (copy), var15 (copy), var13 (copy), var10 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p0 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), var9 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var15 = nil
 				
@@ -125,7 +125,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 					t[v] = true
 				end
 				local items = cache.getItems(var32)
-				local delayedThread = task.delay(requestTimeoutSec, function() --[[ line: 159 ]]
+				local delayedThread = task.delay(requestTimeoutSec, function()
 					-- upvalues: requestTimeoutSec (copy), var32 (ref), var16 (ref), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy)
 					local var35 = `No fetch response after {requestTimeoutSec} sec`
 					
@@ -142,14 +142,14 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 						var17.drainCommitted(var32, cache.updateItem)
 					end
 				end)
-				local ok, status = pcall(function() --[[ line: 163 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var9 (copy), var32 (ref), items (ref), p0 (copy), promiseModule (copy), handleSuccess (copy), var16 (ref), delayedThread (ref), var16 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy)
 					if var9 then
-						p0.fetchFn(items):andThen(function(p9) --[[ line: 186 ]]
+						p0.fetchFn(items):andThen(function(p9)
 							-- upvalues: handleSuccess (copy), var32 (copy), var16 (copy), delayedThread (copy)
 							handleSuccess(p9, var32, var16)
 							task.cancel(delayedThread)
-						end):catch(function(p8) --[[ line: 190 ]]
+						end):catch(function(p8)
 							-- upvalues: var32 (copy), var16 (copy), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), delayedThread (copy)
 							if var16 == var16 then
 								if p0.logError then
@@ -174,7 +174,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 					for i, v in var32 do
 						table.insert(t_1, p0.fetchFn(v, items[v]))
 					end
-					promiseModule.all(t_1):andThen(function(p11) --[[ line: 172 ]]
+					promiseModule.all(t_1):andThen(function(p11)
 						-- upvalues: var32 (copy), handleSuccess (copy), var16 (copy), delayedThread (copy)
 						local t = {}
 						
@@ -183,7 +183,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 						end
 						handleSuccess(t, var32, var16)
 						task.cancel(delayedThread)
-					end):catch(function(p10) --[[ line: 180 ]]
+					end):catch(function(p10)
 						-- upvalues: var32 (copy), var16 (copy), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), delayedThread (copy)
 						if var16 == var16 then
 							if p0.logError then
@@ -225,12 +225,12 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		end
 	end
 	
-	local function isRequestInQueueOrInFlight(p12) --[[ line: 206 ]]
+	local function isRequestInQueueOrInFlight(p12)
 		-- upvalues: var13 (ref), t (write)
 		return if var13.hasItem(p12) then true else t[p12] ~= nil
 	end
 	
-	local function getAndFetchItems(p13, p14) --[[ line: 216 ]]
+	local function getAndFetchItems(p13, p14)
 		-- upvalues: cache (ref), var13 (ref), t (write), var15 (write), var11 (write), var16 (write), var10 (write), requestTimeoutSec (ref), p0 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (write), var9 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
 		local items, items_1 = cache.getItems(p13, p14)
 		local t_1 = {}
@@ -251,7 +251,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 			if var13.isEmpty() then
 				return t_1
 			end
-			var15 = task.delay(var11, function() --[[ line: 144 ]]
+			var15 = task.delay(var11, function()
 				-- upvalues: var16 (copy), var15 (copy), var13 (copy), var10 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p0 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), var9 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var15 = nil
 				
@@ -262,7 +262,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 					t[v] = true
 				end
 				local items = cache.getItems(var32)
-				local delayedThread = task.delay(requestTimeoutSec, function() --[[ line: 159 ]]
+				local delayedThread = task.delay(requestTimeoutSec, function()
 					-- upvalues: requestTimeoutSec (copy), var32 (ref), var16 (ref), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy)
 					local var35 = `No fetch response after {requestTimeoutSec} sec`
 					
@@ -279,14 +279,14 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 						var17.drainCommitted(var32, cache.updateItem)
 					end
 				end)
-				local ok, status = pcall(function() --[[ line: 163 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var9 (copy), var32 (ref), items (ref), p0 (copy), promiseModule (copy), handleSuccess (copy), var16 (ref), delayedThread (ref), var16 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy)
 					if var9 then
-						p0.fetchFn(items):andThen(function(p16) --[[ line: 186 ]]
+						p0.fetchFn(items):andThen(function(p16)
 							-- upvalues: handleSuccess (copy), var32 (copy), var16 (copy), delayedThread (copy)
 							handleSuccess(p16, var32, var16)
 							task.cancel(delayedThread)
-						end):catch(function(p15) --[[ line: 190 ]]
+						end):catch(function(p15)
 							-- upvalues: var32 (copy), var16 (copy), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), delayedThread (copy)
 							if var16 == var16 then
 								if p0.logError then
@@ -311,7 +311,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 					for i, v in var32 do
 						table.insert(t_1, p0.fetchFn(v, items[v]))
 					end
-					promiseModule.all(t_1):andThen(function(p18) --[[ line: 172 ]]
+					promiseModule.all(t_1):andThen(function(p18)
 						-- upvalues: var32 (copy), handleSuccess (copy), var16 (copy), delayedThread (copy)
 						local t = {}
 						
@@ -320,7 +320,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 						end
 						handleSuccess(t, var32, var16)
 						task.cancel(delayedThread)
-					end):catch(function(p17) --[[ line: 180 ]]
+					end):catch(function(p17)
 						-- upvalues: var32 (copy), var16 (copy), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), delayedThread (copy)
 						if var16 == var16 then
 							if p0.logError then
@@ -361,7 +361,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		return t_1
 	end
 	
-	local function getAndFetchItem(p19, p20) --[[ line: 238 ]]
+	local function getAndFetchItem(p19, p20)
 		-- upvalues: cache (ref), var13 (ref), t (write), var15 (write), var11 (write), var16 (write), var10 (write), requestTimeoutSec (ref), p0 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (write), var9 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref), fFlagSduiChartsSupport (copy)
 		local item, item_1 = cache.getItem(p19, p20)
 		
@@ -370,7 +370,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 			var13.push(p19)
 		end
 		if not var13.isEmpty() and var15 == nil and not var13.isEmpty() then
-			var15 = task.delay(var11, function() --[[ line: 144 ]]
+			var15 = task.delay(var11, function()
 				-- upvalues: var16 (copy), var15 (copy), var13 (copy), var10 (copy), t (copy), cache (copy), requestTimeoutSec (copy), p0 (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), var9 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
 				var15 = nil
 				
@@ -381,7 +381,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 					t[v] = true
 				end
 				local items = cache.getItems(var32)
-				local delayedThread = task.delay(requestTimeoutSec, function() --[[ line: 159 ]]
+				local delayedThread = task.delay(requestTimeoutSec, function()
 					-- upvalues: requestTimeoutSec (copy), var32 (ref), var16 (ref), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy)
 					local var35 = `No fetch response after {requestTimeoutSec} sec`
 					
@@ -398,14 +398,14 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 						var17.drainCommitted(var32, cache.updateItem)
 					end
 				end)
-				local ok, status = pcall(function() --[[ line: 163 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var9 (copy), var32 (ref), items (ref), p0 (copy), promiseModule (copy), handleSuccess (copy), var16 (ref), delayedThread (ref), var16 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy)
 					if var9 then
-						p0.fetchFn(items):andThen(function(p22) --[[ line: 186 ]]
+						p0.fetchFn(items):andThen(function(p22)
 							-- upvalues: handleSuccess (copy), var32 (copy), var16 (copy), delayedThread (copy)
 							handleSuccess(p22, var32, var16)
 							task.cancel(delayedThread)
-						end):catch(function(p21) --[[ line: 190 ]]
+						end):catch(function(p21)
 							-- upvalues: var32 (copy), var16 (copy), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), delayedThread (copy)
 							if var16 == var16 then
 								if p0.logError then
@@ -430,7 +430,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 					for i, v in var32 do
 						table.insert(t_1, p0.fetchFn(v, items[v]))
 					end
-					promiseModule.all(t_1):andThen(function(p24) --[[ line: 172 ]]
+					promiseModule.all(t_1):andThen(function(p24)
 						-- upvalues: var32 (copy), handleSuccess (copy), var16 (copy), delayedThread (copy)
 						local t = {}
 						
@@ -439,7 +439,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 						end
 						handleSuccess(t, var32, var16)
 						task.cancel(delayedThread)
-					end):catch(function(p23) --[[ line: 180 ]]
+					end):catch(function(p23)
 						-- upvalues: var32 (copy), var16 (copy), var16 (copy), p0 (copy), t (copy), cache (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (copy), delayedThread (copy)
 						if var16 == var16 then
 							if p0.logError then
@@ -483,27 +483,27 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		return item, nil
 	end
 	
-	local function getCachedItem(p25) --[[ line: 255 ]]
+	local function getCachedItem(p25)
 		-- upvalues: cache (ref)
 		return cache.getItem(p25)
 	end
 	
-	local function getCachedItems(p26) --[[ line: 259 ]]
+	local function getCachedItems(p26)
 		-- upvalues: cache (ref)
 		return cache.getItems(p26)
 	end
 	
-	local function fetchItem(p27, p28) --[[ line: 263 ]]
+	local function fetchItem(p27, p28)
 		-- upvalues: getAndFetchItem (ref), FORCE_FETCH (ref)
 		return getAndFetchItem(p27, p28 or FORCE_FETCH)
 	end
 	
-	local function fetchItems(p29, p30) --[[ line: 267 ]]
+	local function fetchItems(p29, p30)
 		-- upvalues: getAndFetchItems (ref), FORCE_FETCH (ref)
 		return getAndFetchItems(p29, p30 or FORCE_FETCH)
 	end
 	
-	local function clear() --[[ line: 271 ]]
+	local function clear()
 		-- upvalues: var15 (write), t (write), cache (ref), var13 (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var17 (write), fFlagLuaAppDataHydrationDataResolverOnClear (copy), p0 (ref)
 		if var15 then
 			task.cancel(var15)
@@ -521,7 +521,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		end
 	end
 	
-	local var29 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ line: 288 ]]
+	local var29 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: getLocalPlayerUserId (copy), var16 (write), clear (ref)
 		local var44 = getLocalPlayerUserId()
 		
@@ -538,7 +538,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 		fetchItem = fetchItem,
 		fetchItems = fetchItems,
 		isRequestInQueueOrInFlight = isRequestInQueueOrInFlight,
-		dispose = function() --[[ line: 296 ]]
+		dispose = function()
 			-- upvalues: var29 (write), cache (ref)
 			if var29 then
 				var29:Disconnect()
@@ -550,14 +550,14 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 	}
 	
 	if fFlagLuaAppDataHydrationOptimisticMutationLayer and var17 then
-		function t_1.getOptimisticCachedItem(p31) --[[ line: 322 ]]
+		function t_1.getOptimisticCachedItem(p31)
 			-- upvalues: cache (ref), var17 (write)
 			local item, item_1 = cache.getItem(p31)
 			
 			return var17.getMergedResult(p31, item), item_1
 		end
 		
-		function t_1.getOptimisticCachedItems(p32) --[[ line: 327 ]]
+		function t_1.getOptimisticCachedItems(p32)
 			-- upvalues: cache (ref), var17 (write)
 			local items, items_1 = cache.getItems(p32)
 			local t = {}
@@ -568,7 +568,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 			return t, items_1
 		end
 		
-		function t_1.getOptimisticAndFetchItem(p33, p34) --[[ line: 337 ]]
+		function t_1.getOptimisticAndFetchItem(p33, p34)
 			-- upvalues: getAndFetchItem (ref), fFlagSduiChartsSupport (copy), var17 (write)
 			local var50, var51 = getAndFetchItem(p33, p34)
 			
@@ -578,7 +578,7 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 			return var17.getMergedResult(p33, var50), nil
 		end
 		
-		function t_1.getOptimisticAndFetchItems(p35, p36) --[[ line: 345 ]]
+		function t_1.getOptimisticAndFetchItems(p35, p36)
 			-- upvalues: getAndFetchItems (ref), var17 (write)
 			local t = {}
 			
@@ -588,17 +588,17 @@ return function(p0) --[[ line: 27 | named "createDataResolver" ]]
 			return t
 		end
 		
-		function t_1.setMutation(p37, p38) --[[ line: 355 ]]
+		function t_1.setMutation(p37, p38)
 			-- upvalues: var17 (write)
 			var17.set(p37, p38)
 		end
 		
-		function t_1.clearMutation(p39) --[[ line: 360 ]]
+		function t_1.clearMutation(p39)
 			-- upvalues: var17 (write)
 			var17.clear(p39)
 		end
 		
-		function t_1.commitMutation(p40) --[[ line: 365 ]]
+		function t_1.commitMutation(p40)
 			-- upvalues: var13 (ref), t (write), var17 (write), cache (ref)
 			if if var13.hasItem(p40) then true else t[p40] == nil then
 				var17.markCommitted(p40)

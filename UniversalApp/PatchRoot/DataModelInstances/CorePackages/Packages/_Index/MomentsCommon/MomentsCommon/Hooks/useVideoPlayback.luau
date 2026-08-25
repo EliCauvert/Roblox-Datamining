@@ -15,7 +15,7 @@ local t = {
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
+return function(p0, p1, p2)
 	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useToggleStateModule (ref), useState (ref), signalModule (ref), useCallback (ref), useEffect (ref)
 	local var6 = cryoModule.Dictionary.union(t, p2 or {})
 	local var7 = useRef(nil)
@@ -28,7 +28,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 	local var17, var18 = useState(0)
 	local var19 = useRef(signalModule.new())
 	local var20 = useRef(signalModule.new())
-	local var21 = useCallback(function(p3) --[[ line: 64 ]]
+	local var21 = useCallback(function(p3)
 		-- upvalues: var7 (ref), var6 (ref), var11 (ref)
 		local current = var7.current
 		
@@ -36,7 +36,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			current.TimePosition = math.clamp(p3 + var6.playbackRegion.Min, 0, var11)
 		end
 	end, { var11, var6.playbackRegion })
-	local var22 = useCallback(function() --[[ line: 72 ]]
+	local var22 = useCallback(function()
 		-- upvalues: var7 (ref), var20 (ref), var6 (ref), var10 (ref), var16 (ref), var12 (ref)
 		local current = var7.current
 		
@@ -48,7 +48,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			var12(current.TimeLength)
 		end
 	end, { var6.playbackRegion, var10.enabled })
-	local var23 = useCallback(function() --[[ line: 83 ]]
+	local var23 = useCallback(function()
 		-- upvalues: p0 (ref), var7 (ref), var18 (ref), var6 (ref), var14 (ref)
 		if not p0 then return end
 		local current = var7.current
@@ -58,7 +58,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			var14(current.TimePosition)
 		end
 	end, { p0, var6.playbackRegion })
-	local var24 = useCallback(function() --[[ line: 95 ]]
+	local var24 = useCallback(function()
 		-- upvalues: var7 (ref), var6 (ref), var19 (ref)
 		if var7.current then
 			var7.current.TimePosition = var6.playbackRegion.Min
@@ -67,7 +67,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			return
 		end
 	end, { var6.playbackRegion })
-	useEffect(function() --[[ line: 106 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), p1 (ref)
 		local current = var7.current
 		
@@ -76,7 +76,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			current.VideoContent = p1
 		end
 	end, { var8.enabled, p1 })
-	useEffect(function() --[[ line: 117 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var22 (ref), var23 (ref), var24 (ref)
 		local current = var7.current
 		
@@ -85,7 +85,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			local renderSteppedConnection = game:GetService("RunService").RenderStepped:Connect(var23)
 			local didLoopConnection = current.DidLoop:Connect(var24)
 			
-			return function() --[[ line: 127 ]]
+			return function()
 				-- upvalues: loadedConnection (ref), renderSteppedConnection (ref), didLoopConnection (ref)
 				loadedConnection:Disconnect()
 				renderSteppedConnection:Disconnect()
@@ -93,7 +93,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			end
 		end
 	end, { var8.enabled, var23, var22, var24 })
-	useEffect(function() --[[ line: 134 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var6 (ref)
 		local current = var7.current
 		
@@ -101,7 +101,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			current.Looped = var6.looping
 		end
 	end, { var8.enabled, var6.looping })
-	useEffect(function() --[[ line: 141 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var9 (ref)
 		local current = var7.current
 		
@@ -109,7 +109,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			current.Playing = var9.enabled
 		end
 	end, { var8.enabled, var9.enabled })
-	useEffect(function() --[[ line: 148 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var10 (ref)
 		local current = var7.current
 		
@@ -117,7 +117,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			current.Volume = if var10.enabled then 0 else 0.2
 		end
 	end, { var8.enabled, var10.enabled })
-	useEffect(function() --[[ line: 155 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var13 (write), var6 (ref), var9 (ref), var19 (ref)
 		local current = var7.current
 		
@@ -136,7 +136,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 			current.TimePosition = var6.playbackRegion.Min
 		end
 	end, { var13, var6.playbackRegion, var6.looping, var9.disable })
-	useEffect(function() --[[ line: 182 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var6 (ref), var16 (ref)
 		local current = var7.current
 		
@@ -168,7 +168,7 @@ return function(p0, p1, p2) --[[ line: 41 | named "useVideoPlayback" ]]
 		onVideoDidLoopSignalRef = var19,
 		onVideoLoadedSignalRef = var20,
 		ref = var7,
-		updateRef = useCallback(function(p4) --[[ line: 190 ]]
+		updateRef = useCallback(function(p4)
 			-- upvalues: var8 (ref), var7 (ref)
 			var8.toggle()
 			var7.current = p4

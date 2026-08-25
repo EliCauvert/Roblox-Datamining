@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("HideLaunchAtStartupMac", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetEngineFeature("HideLaunchAtStartupMac") and game:GetFastFlag("HideLaunchAtStartupMac")
 end

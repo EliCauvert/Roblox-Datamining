@@ -34,12 +34,12 @@ local var19 = motionModule.createState({ reveal = 0 }, {
 })
 local _ = require(script.Parent.Types)
 
-return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
+return function(p0)
 	-- upvalues: fFlagEnableTiltLoadingScreen (ref), reactModule (ref), replicatedFirstService (ref), userGameSettingsService (ref), motionModule (ref), var18 (ref), fFlagTiltLoadingScreenConsoleHints (ref), usePreferredInput (ref), responsiveModule (ref), getBuilderIconForKeycode (ref), useTiltLoadingScreenViewModelModule (ref), useScreenSizeModule (ref), useDeviceInsets (ref), useViewportSettledModule (ref), useLoadingScreenAnimationModule (ref), fFlagTiltLoadingScreenEnterExitHold (ref), inExperienceLocalesModule (ref), localizationService (ref), var19 (ref), ANIMATION (ref), shouldHoldForExitModule (ref), playersService (ref), fFlagDebugEnablePioneerUX (ref), contextActionService (ref), fFlagIncreaseLoadingScreenOrder (ref), constantsModule (ref), foundationModule (ref), localizationModule (ref), tiltLoadingScreenViewModule (ref)
 	if not fFlagEnableTiltLoadingScreen then
 		return nil
 	end
-	local var20, var21 = reactModule.useState(function() --[[ line: 55 ]]
+	local var20, var21 = reactModule.useState(function()
 		-- upvalues: replicatedFirstService (copy)
 		return not replicatedFirstService:IsDefaultLoadingGuiRemoved()
 	end)
@@ -62,18 +62,18 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 		reducedMotion = reducedMotion,
 		contentReady = var31.gameData ~= nil and var33,
 		isDismissing = var22,
-		onEnterComplete = if fFlagTiltLoadingScreenEnterExitHold then function() --[[ line: 80 ]]
+		onEnterComplete = if fFlagTiltLoadingScreenEnterExitHold then function()
 			-- upvalues: var34 (ref)
 			if var34.current then
 				var34.current()
 			end
 		end else nil
 	})
-	local var36 = reactModule.useMemo(function() --[[ line: 87 ]]
+	local var36 = reactModule.useMemo(function()
 		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
 		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 91 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var23 (ref), var26 (ref), var19 (copy), ANIMATION (copy), replicatedFirstService (copy), var21 (ref), var27 (ref), userGameSettingsService (copy), var34 (ref), shouldHoldForExitModule (copy), playersService (copy)
 		local t = {}
 		local var38 = false
@@ -85,12 +85,12 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 		local var44 = false
 		local var45 = false
 		
-		local function doDismiss() --[[ line: 102 ]]
+		local function doDismiss()
 			-- upvalues: var38 (write), var23 (copy), var40 (write), var39 (write), var26 (copy), var19 (copy), var41 (write), ANIMATION (copy), replicatedFirstService (copy), var21 (copy), var27 (copy), userGameSettingsService (copy)
 			var38 = true
 			var23(true)
 			
-			local function fadeChrome() --[[ line: 106 ]]
+			local function fadeChrome()
 				-- upvalues: var40 (copy), var39 (copy), var26 (copy), var19 (copy), var41 (copy), ANIMATION (copy), replicatedFirstService (copy), var21 (copy), var27 (copy)
 				var40 = nil
 				
@@ -98,10 +98,10 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 					return
 				end
 				var26.current(var19, {
-					onAnimationComplete = function(p1) --[[ line: 112 ]]
+					onAnimationComplete = function(p1)
 						-- upvalues: var39 (copy), var41 (copy), ANIMATION (copy), replicatedFirstService (copy), var21 (copy), var27 (copy)
 						if p1 == true and not var39 then
-							var41 = task.delay(ANIMATION.endPause, function() --[[ line: 116 ]]
+							var41 = task.delay(ANIMATION.endPause, function()
 								-- upvalues: var41 (copy), var39 (copy), replicatedFirstService (copy), var21 (copy), var27 (copy)
 								var41 = nil
 								
@@ -128,11 +128,11 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			var40 = task.delay(ANIMATION.closeDur, fadeChrome)
 		end
 		
-		function var34.current() --[[ line: 138 ]]
+		function var34.current()
 			-- upvalues: var39 (write), var38 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), var44 (write), var45 (write), doDismiss (ref), var43 (write), ANIMATION (copy)
 			if var39 or var38 then return end
 			if shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
-				var43 = task.delay(ANIMATION.enterExitHold, function() --[[ line: 149 ]]
+				var43 = task.delay(ANIMATION.enterExitHold, function()
 					-- upvalues: var43 (copy), var39 (copy), var38 (copy), var44 (copy), var45 (copy), doDismiss (copy)
 					var43 = nil
 					
@@ -153,7 +153,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			end
 		end
 		
-		local function _() --[[ line: 161 | named "dismiss" ]]
+		local function _()
 			-- upvalues: var38 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var44 (write), var45 (write)
 			if var38 then return end
 			if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
@@ -168,12 +168,12 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			var45 = true
 		end
 		
-		local _ = function() --[[ line: 178 | named "waitForCharacterAndDismiss" ]]
+		local _ = function()
 			-- upvalues: var42 (write), playersService (copy), var39 (write), var38 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var44 (write), var45 (write)
 			if var42 then
 				return
 			end
-			var42 = task.spawn(function() --[[ line: 182 ]]
+			var42 = task.spawn(function()
 				-- upvalues: playersService (copy), var42 (copy), var39 (copy), var38 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var44 (copy), var45 (copy)
 				if playersService.CharacterAutoLoads then
 					local localPlayer = playersService.LocalPlayer
@@ -203,18 +203,18 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			end)
 		end
 		
-		local function handleFinishedReplicating() --[[ line: 201 ]]
+		local function handleFinishedReplicating()
 			-- upvalues: var42 (write), playersService (copy), var39 (write), var38 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var44 (write), var45 (write), t (ref)
 			if not game:IsLoaded() then
 				local var49 = nil
-				table.insert(t, game.Loaded:Connect(function() --[[ line: 206 ]]
+				table.insert(t, game.Loaded:Connect(function()
 					-- upvalues: var49 (write), var42 (copy), playersService (copy), var39 (copy), var38 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var44 (copy), var45 (copy)
 					var49:Disconnect()
 					
 					if var42 then
 						return
 					end
-					var42 = task.spawn(function() --[[ line: 182 ]]
+					var42 = task.spawn(function()
 						-- upvalues: playersService (copy), var42 (copy), var39 (copy), var38 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var44 (copy), var45 (copy)
 						if playersService.CharacterAutoLoads then
 							local localPlayer = playersService.LocalPlayer
@@ -248,7 +248,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			elseif var42 then
 				return
 			end
-			var42 = task.spawn(function() --[[ line: 182 ]]
+			var42 = task.spawn(function()
 				-- upvalues: playersService (copy), var42 (copy), var39 (copy), var38 (copy), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (copy), var44 (copy), var45 (copy)
 				if playersService.CharacterAutoLoads then
 					local localPlayer = playersService.LocalPlayer
@@ -279,7 +279,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 		end
 		
 		table.insert(t, replicatedFirstService.FinishedReplicating:Connect(handleFinishedReplicating))
-		table.insert(t, replicatedFirstService.RemoveDefaultLoadingGuiSignal:Connect(function() --[[ line: 217 ]]
+		table.insert(t, replicatedFirstService.RemoveDefaultLoadingGuiSignal:Connect(function()
 			-- upvalues: var38 (write), shouldHoldForExitModule (copy), userGameSettingsService (copy), doDismiss (ref), var44 (write), var45 (write)
 			if var38 then return end
 			if not shouldHoldForExitModule(userGameSettingsService.ReducedMotion) then
@@ -304,7 +304,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 				doDismiss()
 			end
 		end
-		return function() --[[ line: 230 ]]
+		return function()
 			-- upvalues: var39 (write), var34 (copy), var43 (write), var40 (write), var41 (write), var42 (write), t (ref)
 			var39 = true
 			var34.current = nil
@@ -326,14 +326,14 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 250 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagDebugEnablePioneerUX (copy), p0 (ref), contextActionService (copy), var28 (ref)
 		if fFlagDebugEnablePioneerUX then
 			return
 		end
 		local contextActionService_1 = p0.contextActionService or contextActionService
 		local var51 = false
-		contextActionService_1:BindCoreAction("CancelGameLoad", function(_, p2) --[[ line: 256 ]]
+		contextActionService_1:BindCoreAction("CancelGameLoad", function(_, p2)
 			-- upvalues: var51 (write), var28 (copy)
 			if p2 == Enum.UserInputState.Begin then
 				var51 = true
@@ -348,7 +348,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 			end
 		end, false, Enum.KeyCode.ButtonB)
 		
-		return function() --[[ line: 267 ]]
+		return function()
 			-- upvalues: contextActionService_1 (ref)
 			contextActionService_1:UnbindCoreAction("CancelGameLoad")
 		end
@@ -363,7 +363,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 	}, {
 		Foundation = reactModule.createElement(foundationModule.FoundationProvider, {
 			colorMode = foundationModule.Enums.ColorMode.Dark,
-			preferences = reactModule.useMemo(function() --[[ line: 271 ]]
+			preferences = reactModule.useMemo(function()
 				-- upvalues: reducedMotion (ref)
 				return { reducedMotion = reducedMotion }
 			end, { reducedMotion })
@@ -379,7 +379,7 @@ return function(p0) --[[ line: 50 | named "TiltLoadingScreenContainer" ]]
 					thumbnailUrl = var31.thumbnailUrl,
 					isAutoTranslated = var31.isAutoTranslated,
 					statusPanel = var31.statusPanel,
-					onCancel = reactModule.useCallback(function() --[[ line: 274 ]]
+					onCancel = reactModule.useCallback(function()
 						-- upvalues: var28 (ref)
 						if var28.current then
 							var28.current(true)

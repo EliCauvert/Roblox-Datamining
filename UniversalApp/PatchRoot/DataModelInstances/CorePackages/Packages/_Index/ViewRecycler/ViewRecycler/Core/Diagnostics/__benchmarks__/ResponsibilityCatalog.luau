@@ -42,7 +42,7 @@ local frozen_2 = table.freeze({
 	Teardown = "react.teardown"
 })
 
-local function _(p0) --[[ line: 47 | named "values" ]]
+local function _(p0)
 	local t = {}
 	
 	for i, v in p0 do
@@ -92,11 +92,11 @@ return table.freeze({
 	Roblox = frozen_1,
 	React = frozen_2,
 	byOwner = freeze,
-	isKnown = function(p1) --[[ line: 69 ]]
+	isKnown = function(p1)
 		-- upvalues: t_4 (ref)
 		return t_4[p1] == true
 	end,
-	getMissing = function(p2, p3) --[[ line: 73 ]]
+	getMissing = function(p2, p3)
 		-- upvalues: freeze (ref)
 		local t = {}
 		

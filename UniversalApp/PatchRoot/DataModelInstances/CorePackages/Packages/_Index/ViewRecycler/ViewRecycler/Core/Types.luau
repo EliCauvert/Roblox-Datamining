@@ -8,10 +8,10 @@ return {
 		"scrollOffset", "viewportLength", "contentLength", "distanceFromEnd",
 		"atStart", "atEnd"
 	}),
-	isIndexRangeEmpty = function(p0) --[[ line: 110 ]]
+	isIndexRangeEmpty = function(p0)
 		return p0.lastIndex < p0.firstIndex
 	end,
-	getIndexRangeLength = function(p1) --[[ line: 114 ]]
+	getIndexRangeLength = function(p1)
 		return math.max(0, p1.lastIndex - p1.firstIndex + 1)
 	end
 }

@@ -20,7 +20,7 @@ local emoji = UIBloxModule.App.Emoji.Enum.Emoji
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local fFlagEnableVerifiedBadgeStore = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableVerifiedBadgeStore
 local fFlagPlayerListDropDownShowPlatformName = playerListModule.Flags.FFlagPlayerListDropDownShowPlatformName
-local _, status = pcall(function() --[[ line: 35 ]]
+local _, status = pcall(function()
 	return game:GetService("PlatformFriendsService")
 end)
 local dropDownPlayerHeader = roactModule.PureComponent:extend("DropDownPlayerHeader")
@@ -36,11 +36,11 @@ dropDownPlayerHeader.validateProps = tModule.strictInterface({
 	canShowPlatformProfile = tModule.optional(tModule.boolean)
 })
 
-function dropDownPlayerHeader.render(p0) --[[ line: 54 ]]
+function dropDownPlayerHeader.render(p0)
 	-- upvalues: withLayoutValues (ref), withStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), fFlagPlayerListDropDownShowPlatformName (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref), fFlagEnableMobilePlayerListOnConsole (ref), view (ref), status (ref), image (ref), text (ref)
-	return withLayoutValues(function(p1) --[[ line: 55 ]]
+	return withLayoutValues(function(p1)
 		-- upvalues: withStyle (copy), p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagPlayerListDropDownShowPlatformName (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), fFlagEnableMobilePlayerListOnConsole (copy), view (copy), status (copy), image (copy), text (copy)
-		return withStyle(function(p2) --[[ line: 56 ]]
+		return withStyle(function(p2)
 			-- upvalues: p1 (write), p0 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), fFlagPlayerListDropDownShowPlatformName (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), fFlagEnableMobilePlayerListOnConsole (copy), view (copy), status (copy), image (copy), text (copy)
 			local var11
 			p1 = p0.props.layoutValues
@@ -143,7 +143,7 @@ function dropDownPlayerHeader.render(p0) --[[ line: 54 ]]
 							LayoutOrder = 3,
 							tag = "row align-y-center gap-xsmall radius-small",
 							Size = UDim2.new(1, 0, 0, size500),
-							onActivated = if var12 then function() --[[ line: 163 ]]
+							onActivated = if var12 then function()
 								-- upvalues: p0 (copy), status (copy)
 								local platformProfileId = p0.props.platformProfileId
 								
@@ -201,7 +201,7 @@ function dropDownPlayerHeader.render(p0) --[[ line: 54 ]]
 	end)
 end
 
-return function(p3) --[[ line: 226 ]]
+return function(p3)
 	-- upvalues: useLayoutValues (ref), useTokens (ref), fFlagEnableVerifiedBadgeStore (ref), useVerifiedBadge (ref), fFlagPlayerListDropDownShowPlatformName (ref), userProfilesModule (ref), status (ref), roactModule (ref), dropDownPlayerHeader (ref), cryoModule (ref)
 	local var13 = useLayoutValues()
 	local var14 = useTokens()

@@ -7,7 +7,7 @@ local _ = require(parent.utilities.graphql.types)
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function tbl.new(p0, p1, p2, p3) --[[ line: 62 ]]
+function tbl.new(p0, p1, p2, p3)
 	-- upvalues: error (ref), tbl (ref)
 	local var2 = error.new(p0)
 	var2.message = p0

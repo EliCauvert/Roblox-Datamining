@@ -16,15 +16,15 @@ local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
-return function(p0) --[[ line: 43 | named "StickerOverlayLayer" ]]
+return function(p0)
 	-- upvalues: useSignalState (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useCallback (ref), reactModule (ref), view (ref), foundationModule (ref), stickerOverlay (ref), dashModule (ref), overlayDisplay (ref)
 	local controller = p0.controller
 	local var8 = useSignalState(controller.getStep)
 	local var9 = useSignalState(p0.ctx.getItemSize)
 	local stickerOverlays = useSignalState(controller.getComposedEdits).stickerOverlays
-	local var10 = useSignalState(useMemo(function() --[[ line: 52 ]]
+	local var10 = useSignalState(useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 53 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: controller (copy)
 			local activeSession = controller.getActiveSession(p1)
 			
@@ -33,11 +33,11 @@ return function(p0) --[[ line: 43 | named "StickerOverlayLayer" ]]
 	end, { controller }))
 	local var11 = var8 == creationFlowStateModule.StickerOverlay
 	local var12 = var10 and var10[1]
-	local var13 = useCallback(function() --[[ line: 63 ]]
+	local var13 = useCallback(function()
 		-- upvalues: controller (ref)
 		controller.beginTool("sticker")
 	end, { controller })
-	local var14 = useCallback(function(p2) --[[ line: 67 ]]
+	local var14 = useCallback(function(p2)
 		-- upvalues: controller (ref)
 		controller.updateCommittedEdit("sticker", p2)
 	end, { controller })

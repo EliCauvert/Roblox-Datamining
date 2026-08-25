@@ -3,7 +3,7 @@ local t = {}
 local t_1 = {}
 local getFFlagPeoplePageEnablePersonSignalStore = require(peopleService.Flags).GetFFlagPeoplePageEnablePersonSignalStore
 
-local function loadService(p0) --[[ line: 19 ]]
+local function loadService(p0)
 	-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (ref), t_1 (write)
 	local focusNavigationServiceModule = nil
 	
@@ -41,12 +41,12 @@ local function loadService(p0) --[[ line: 19 ]]
 	return focusNavigationServiceModule
 end
 
-function t.register(p1, p2) --[[ line: 60 ]]
+function t.register(p1, p2)
 	-- upvalues: t_1 (write)
 	t_1[p1] = p2
 end
 
-function t.get(p3) --[[ line: 64 ]]
+function t.get(p3)
 	-- upvalues: t_1 (write), loadService (ref)
 	if not t_1[p3] then
 		loadService(p3)
@@ -54,12 +54,12 @@ function t.get(p3) --[[ line: 64 ]]
 	return t_1[p3]
 end
 
-function t.has(p4) --[[ line: 71 ]]
+function t.has(p4)
 	-- upvalues: t_1 (write)
 	return t_1[p4] ~= nil
 end
 
-function t.clear() --[[ line: 75 ]]
+function t.clear()
 	-- upvalues: t_1 (write)
 	t_1 = {}
 end

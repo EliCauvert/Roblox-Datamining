@@ -28,10 +28,10 @@ local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
 inExperienceAppChatModalModule.default:initialize(constantsModule.ApplyDisplayScale(constantsModule.TopBarTopMargin), settingsHubModule, viewportUtilModule, chatSelectorModule, playerListManagerModule)
 
 if SSUIMetaLuaEngineFeature then
-	pcall(function() --[[ line: 46 ]]
+	pcall(function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		local safetyService = game:GetService("SafetyService")
-		inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p0) --[[ line: 48 ]]
+		inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p0)
 			-- upvalues: safetyService (ref)
 			if p0 then
 				safetyService:ReportPartyChatWindowOpen()
@@ -44,34 +44,34 @@ if SSUIMetaLuaEngineFeature then
 end
 local var21 = if var16 then var16.chatOpenCapability else nil
 renderCoreScriptInExperienceAppChatModule(apolloClientModule, {
-	getParentContainer = function() --[[ line: 75 ]]
+	getParentContainer = function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		return inExperienceAppChatModalModule.default.frame
 	end,
 	visibilitySignal = inExperienceAppChatModalModule.default.visibilitySignal.Event,
-	getRequestedRoute = function() --[[ line: 79 ]]
+	getRequestedRoute = function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		return inExperienceAppChatModalModule.default.requestedRoute
 	end,
 	requestedRouteSignal = inExperienceAppChatModalModule.default.requestedRouteSignal.Event,
-	clearRequestedRoute = function() --[[ line: 83 ]]
+	clearRequestedRoute = function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		inExperienceAppChatModalModule.default:clearRequestedRoute()
 	end,
-	getShouldSetAppChatVisible = function(...) --[[ line: 86 ]]
+	getShouldSetAppChatVisible = function(...)
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		return inExperienceAppChatModalModule:getVisible()
 	end,
 	entryPoint = chatEntryPointNames.ChromeDropdown,
-	hideParentContainer = function() --[[ line: 91 ]]
+	hideParentContainer = function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		inExperienceAppChatModalModule.default:setVisible(false)
 	end,
-	showParentContainer = function() --[[ line: 94 ]]
+	showParentContainer = function()
 		-- upvalues: inExperienceAppChatModalModule (ref)
 		inExperienceAppChatModalModule.default:setVisible(true)
 	end,
-	updateCurrentSquadId = function(p1) --[[ line: 97 ]]
+	updateCurrentSquadId = function(p1)
 		-- upvalues: getFFlagIsSquadEnabled (ref), inExperienceAppChatModalModule (ref)
 		if getFFlagIsSquadEnabled() then
 			inExperienceAppChatModalModule:setCurrentSquadId(p1)
@@ -82,11 +82,11 @@ renderCoreScriptInExperienceAppChatModule(apolloClientModule, {
 		openConversation = openConversationModule,
 		requestSelectFriendsTab = expChatModule.requestSelectFriendsTab,
 		ensureOpenChat = var21.ensureOpenChat
-	}) else function(_) --[[ line: 70 ]]
+	}) else function(_)
 		-- upvalues: promiseModule (ref)
 		return promiseModule.resolve(false)
 	end
-}, function(p2) --[[ line: 58 ]]
+}, function(p2)
 	-- upvalues: inExperienceAppChatModalModule (ref)
 	inExperienceAppChatModalModule:setUnreadCount(p2)
 end)

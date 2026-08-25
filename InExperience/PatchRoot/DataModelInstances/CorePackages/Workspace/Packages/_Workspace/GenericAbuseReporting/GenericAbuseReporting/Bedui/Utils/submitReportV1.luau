@@ -1,9 +1,9 @@
 ﻿local httpService = game:GetService("HttpService")
 local url = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Http).Url
 
-return function(p0, p1) --[[ line: 10 ]]
+return function(p0, p1)
 	-- upvalues: httpService (ref), url (ref)
-	local ok, status = pcall(function() --[[ line: 11 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p1 (ref)
 		return httpService:JSONEncode(p1)
 	end)

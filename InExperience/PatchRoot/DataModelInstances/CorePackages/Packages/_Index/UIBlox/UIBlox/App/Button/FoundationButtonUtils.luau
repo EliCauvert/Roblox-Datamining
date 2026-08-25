@@ -55,7 +55,7 @@ local vector2 = Vector2.new(10000, 10000)
 return {
 	buttonMapping = t,
 	sizeMapping = t_1,
-	findIcon = function(p0) --[[ line: 62 ]]
+	findIcon = function(p0)
 		-- upvalues: uiblox (ref), imagesInverseModule (ref)
 		if not p0 then
 			return nil
@@ -67,11 +67,11 @@ return {
 		end
 		return var10
 	end,
-	getSizeMapping = function(p1, p2, p3) --[[ line: 76 ]]
+	getSizeMapping = function(p1, p2, p3)
 		-- upvalues: t_1 (ref), inputSize (ref)
 		return if p1 then t_1[p1] elseif p2 then if p3.Size.Size_1200 <= p2.Y.Offset then inputSize.Large elseif p2.Y.Scale > 0 then inputSize.Medium elseif p3.Size.Size_1000 <= p2.Y.Offset then inputSize.Medium elseif p3.Size.Size_800 <= p2.Y.Offset then inputSize.Small else inputSize.XSmall else nil
 	end,
-	getWidth = function(p4, p5, p6) --[[ line: 95 ]]
+	getWidth = function(p4, p5, p6)
 		-- upvalues: t_2 (ref)
 		if p4 then
 			local var11 = t_2[p4]
@@ -84,10 +84,10 @@ return {
 			return if p5 then p5.X elseif p6 then nil else UDim.new(1, 0)
 		end
 	end,
-	getMaxWidth = function(a, b) --[[ line: 116 ]]
+	getMaxWidth = function(a, b)
 		return if a == nil then nil elseif b == nil then 640 else b
 	end,
-	getFitContentSize = function(p7, p8, p9) --[[ line: 125 ]]
+	getFitContentSize = function(p7, p8, p9)
 		-- upvalues: t_1 (ref), t_3 (ref), flags (ref), getTextSizeModule (ref), vector2 (ref)
 		local var12 = if p8 then t_1[p8] else nil
 		local var13 = if var12 then t_3[var12] else nil
@@ -99,7 +99,7 @@ return {
 		end
 		return nil
 	end,
-	getTestId = function(p10) --[[ line: 141 ]]
+	getTestId = function(p10)
 		return if p10 and #p10 ~= 0 then p10:match("data%-testid=([^%s]+)") else nil
 	end
 }

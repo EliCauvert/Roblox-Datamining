@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-return function(p0) --[[ line: 10 | named "Carat" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local chatSettings = p0.chatSettings
 	

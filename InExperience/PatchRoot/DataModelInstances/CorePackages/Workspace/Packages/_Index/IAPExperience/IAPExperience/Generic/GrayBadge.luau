@@ -6,7 +6,7 @@ local view = foundationModule.View
 local icon = foundationModule.Icon
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-x-center align-y-center gap-xsmall size-600 auto-x padding-x-small radius-circle bg-shift-300",

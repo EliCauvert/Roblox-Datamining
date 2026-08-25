@@ -5,18 +5,18 @@ local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention
 
 return {
 	configName = "ChatToastNudge",
-	shouldTriggerVisualTreatment = function(p0) --[[ line: 10 ]]
+	shouldTriggerVisualTreatment = function(p0)
 		-- upvalues: constants (ref)
 		return p0.type == constants.NotificationDialogType.ChatNudge and (p0.modalType == constants.NotificationModalType.Toast and p0.abuseVector == constants.AbuseVectorType.ExperienceChat)
 	end,
-	shouldTriggerBehavioralTreatment = function(_) --[[ line: 15 ]]
+	shouldTriggerBehavioralTreatment = function(_)
 		return false
 	end,
-	shouldTriggerEventReceived = function(p1) --[[ line: 18 ]]
+	shouldTriggerEventReceived = function(p1)
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Toast and p1.abuseVector == constants.AbuseVectorType.ExperienceChat)
 	end,
-	onTriggerVisualTreatment = function(p2, p3) --[[ line: 23 ]]
+	onTriggerVisualTreatment = function(p2, p3)
 		-- upvalues: constants (ref)
 		p2({
 			isShown = true,
@@ -25,8 +25,8 @@ return {
 			detail = p3
 		})
 	end,
-	onTriggerBehavioralTreatment = function(_) --[[ line: 31 ]] end,
-	onTriggerEventReceived = function(p4) --[[ line: 32 ]]
+	onTriggerBehavioralTreatment = function(_) end,
+	onTriggerEventReceived = function(p4)
 		-- upvalues: inExperienceInterventionAnalyticsModule (ref)
 		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ToastMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p4.decisionEventId, p4.evidence, p4.timeoutDurationSeconds)
 	end

@@ -20,7 +20,7 @@ local fFlagAppChatCustomConversationListRowModule = require(appChat.Flags.FFlagA
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local groups = images["icons/menu/groups"]
 
-function ConversationGroupsEntryContainer(p0) --[[ line: 33 ]]
+function ConversationGroupsEntryContainer(p0)
 	-- upvalues: getFFlagCommunitiesUseVisualConfigUtil (ref), getAppChatCommunitiesVisualConfigModule (ref), useLocalization (ref), getFFlagUseCommunitiesTranslation (ref), reactModule (ref), luaAppNavigationContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), images (ref), groups (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), fFlagAppChatCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref)
 	local var14 = if getFFlagCommunitiesUseVisualConfigUtil() then getAppChatCommunitiesVisualConfigModule() else nil
 	local var15 = useLocalization({
@@ -31,7 +31,7 @@ function ConversationGroupsEntryContainer(p0) --[[ line: 33 ]]
 	local var17 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
 	local var18 = if getFFlagCommunitiesUseVisualConfigUtil() then images[var14.icon] else groups
 	local var19 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("communities") else nil
-	local var20 = reactModule.useCallback(function() --[[ line: 52 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), chatLandingTelemetryEventsModule (copy), var16 (ref)
 		var17.emit(chatLandingTelemetryEventsModule.ChatLandingGroupsBtnClicked, {})
 		var16.navigateToGroups()

@@ -7,7 +7,7 @@ local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags
 local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
 local selectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p0) --[[ line: 33 | named "selectPrice" ]]
+return function(p0)
 	-- upvalues: fFlagFixResaleDisplayPriceModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref)
 	local productInfo = p0.productInfo
 	local price = productInfo.price or 0

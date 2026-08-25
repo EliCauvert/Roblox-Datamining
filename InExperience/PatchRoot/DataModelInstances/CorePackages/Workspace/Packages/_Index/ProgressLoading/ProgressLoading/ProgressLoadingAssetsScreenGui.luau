@@ -6,18 +6,18 @@ local progressLoadingTelemetryModule = require(script.Parent.ProgressLoadingTele
 local getDeferredAssetStoreModule = require(script.Parent.Stores.GetDeferredAssetStore)
 local constantsModule = require(script.Parent.Constants)
 
-local function getIsLoadingAssets(value) --[[ line: 14 ]]
+local function getIsLoadingAssets(value)
 	-- upvalues: getDeferredAssetStoreModule (ref)
 	local var7 = getDeferredAssetStoreModule(value)
 	
 	return if var7 then var7.getDownloadStatus(value) == Enum.PrefetchDownloadStatus.InProgress else false
 end
 
-return reactModule.memo(function(value) --[[ line: 28 | named "ProgressLoadingAssetsScreenGui" ]]
+return reactModule.memo(function(value)
 	-- upvalues: signalsReactModule (ref), getIsLoadingAssets (ref), reactModule (ref), progressLoadingTelemetryModule (ref), constantsModule (ref), progressLoadingAssetsModule (ref)
 	local var8 = signalsReactModule.useSignalState(getIsLoadingAssets)
 	local var9, var10 = reactModule.useState(var8)
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), progressLoadingTelemetryModule (copy), var10 (ref)
 		if var8 then
 			progressLoadingTelemetryModule.logLoadingAssetsActivated()
@@ -34,7 +34,7 @@ return reactModule.memo(function(value) --[[ line: 28 | named "ProgressLoadingAs
 	}, {
 		ProgressLoadingAssets = reactModule.createElement(progressLoadingAssetsModule, {
 			isVisible = var8,
-			onHideComplete = reactModule.useCallback(function() --[[ line: 39 ]]
+			onHideComplete = reactModule.useCallback(function()
 				-- upvalues: progressLoadingTelemetryModule (copy), var10 (ref)
 				progressLoadingTelemetryModule.logLoadingAssetsDeactivated()
 				var10(false)

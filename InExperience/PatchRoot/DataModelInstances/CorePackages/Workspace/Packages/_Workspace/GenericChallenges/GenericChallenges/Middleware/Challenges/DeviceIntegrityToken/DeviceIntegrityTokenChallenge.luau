@@ -15,15 +15,15 @@ local challengeEventConstantsModule = require(genericChallenges.Utils.ChallengeE
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 game:DefineFastInt("DeviceIntegrityNativeTimeoutMilliseconds", 450)
 
-function constructAccountServiceParams(p0) --[[ line: 21 ]]
+function constructAccountServiceParams(p0)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({ requestHash = p0 })
 end
 
-return function(p1) --[[ line: 54 | named "DeviceIntegrityTokenChallenge" ]]
+return function(p1)
 	-- upvalues: useRoactService (ref), appLogging (ref), useEffect (ref), httpService (ref), deviceIntegrityChallengeEventModule (ref), challengeEventConstantsModule (ref), getFFlagEnableNewDeviceIntegrityFailureHandlingModule (ref), useSelector (ref), getFFlagEnableTransparentDeviceIntegrityChallengeSpinnerModule (ref), reactModule (ref), loading (ref), iconSize (ref)
 	local var8 = useRoactService(appLogging)
-	useEffect(function() --[[ line: 57 ]]
+	useEffect(function()
 		-- upvalues: httpService (copy), p1 (ref), var8 (ref), deviceIntegrityChallengeEventModule (copy), challengeEventConstantsModule (copy), getFFlagEnableNewDeviceIntegrityFailureHandlingModule (copy)
 		local challengeMetadata = httpService:JSONDecode(p1.challengeMetadata)
 		var8:logRobloxTelemetryEvent(deviceIntegrityChallengeEventModule, {}, {
@@ -92,7 +92,7 @@ return function(p1) --[[ line: 54 | named "DeviceIntegrityTokenChallenge" ]]
 			integrityType = challengeMetadata.integrityType
 		})
 	end, {})
-	local var9 = useSelector(function(p2) --[[ line: 131 ]]
+	local var9 = useSelector(function(p2)
 		return { screenSize = p2.ScreenSize }
 	end)
 	local uDim2 = UDim2.fromOffset(var9.screenSize.X, var9.screenSize.Y)

@@ -8,9 +8,9 @@ local var3 = tModule.optional(tModule.strictInterface({
 	value = tModule.optional(tModule.string)
 }))
 
-local function _(p0) --[[ line: 12 | named "gamePlayerFeedbackEvent" ]]
+local function _(p0)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref)
-	return function(p1, p2, p3) --[[ line: 13 ]]
+	return function(p1, p2, p3)
 		-- upvalues: var3 (copy), mutedError (copy), cryoModule (copy), constantsModule (copy), p0 (ref)
 		local var5, var6 = var3(p3)
 		
@@ -29,7 +29,7 @@ end
 local t = {}
 local clickPlayerFeedbackPromptCta = constantsModule.EventNames.ClickPlayerFeedbackPromptCta
 
-function t.ClickPlayerFeedbackPromptCta(p4, p5, p6) --[[ line: 13 ]]
+function t.ClickPlayerFeedbackPromptCta(p4, p5, p6)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackPromptCta (ref)
 	local var5, var6 = var3(p6)
 	
@@ -46,7 +46,7 @@ end
 
 local playerFeedbackPromptMounted = constantsModule.EventNames.PlayerFeedbackPromptMounted
 
-function t.PlayerFeedbackPromptMounted(p7, p8, p9) --[[ line: 13 ]]
+function t.PlayerFeedbackPromptMounted(p7, p8, p9)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackPromptMounted (ref)
 	local var5, var6 = var3(p9)
 	
@@ -63,7 +63,7 @@ end
 
 local dismissPlayerFeedbackPrompt = constantsModule.EventNames.DismissPlayerFeedbackPrompt
 
-function t.DismissPlayerFeedbackPrompt(p10, p11, p12) --[[ line: 13 ]]
+function t.DismissPlayerFeedbackPrompt(p10, p11, p12)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackPrompt (ref)
 	local var5, var6 = var3(p12)
 	
@@ -80,7 +80,7 @@ end
 
 local playerFeedbackFormModalMounted = constantsModule.EventNames.PlayerFeedbackFormModalMounted
 
-function t.PlayerFeedbackFormModalMounted(p13, p14, p15) --[[ line: 13 ]]
+function t.PlayerFeedbackFormModalMounted(p13, p14, p15)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), playerFeedbackFormModalMounted (ref)
 	local var5, var6 = var3(p15)
 	
@@ -97,7 +97,7 @@ end
 
 local dismissPlayerFeedbackFormModal = constantsModule.EventNames.DismissPlayerFeedbackFormModal
 
-function t.DismissPlayerFeedbackFormModal(p16, p17, p18) --[[ line: 13 ]]
+function t.DismissPlayerFeedbackFormModal(p16, p17, p18)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), dismissPlayerFeedbackFormModal (ref)
 	local var5, var6 = var3(p18)
 	
@@ -114,7 +114,7 @@ end
 
 local clickPlayerFeedbackFormModalDisclaimer = constantsModule.EventNames.ClickPlayerFeedbackFormModalDisclaimer
 
-function t.ClickPlayerFeedbackFormModalDisclaimer(p19, p20, p21) --[[ line: 13 ]]
+function t.ClickPlayerFeedbackFormModalDisclaimer(p19, p20, p21)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalDisclaimer (ref)
 	local var5, var6 = var3(p21)
 	
@@ -131,7 +131,7 @@ end
 
 local clickPlayerFeedbackFormAbuseReportPrompt = constantsModule.EventNames.ClickPlayerFeedbackFormAbuseReportPrompt
 
-function t.ClickPlayerFeedbackFormAbuseReportPrompt(p22, p23, p24) --[[ line: 13 ]]
+function t.ClickPlayerFeedbackFormAbuseReportPrompt(p22, p23, p24)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormAbuseReportPrompt (ref)
 	local var5, var6 = var3(p24)
 	
@@ -148,7 +148,7 @@ end
 
 local togglePlayerFeedbackFormModalReason = constantsModule.EventNames.TogglePlayerFeedbackFormModalReason
 
-function t.TogglePlayerFeedbackFormModalReason(p25, p26, p27) --[[ line: 13 ]]
+function t.TogglePlayerFeedbackFormModalReason(p25, p26, p27)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), togglePlayerFeedbackFormModalReason (ref)
 	local var5, var6 = var3(p27)
 	
@@ -165,7 +165,7 @@ end
 
 local focusPlayerFeedbackFormModalComment = constantsModule.EventNames.FocusPlayerFeedbackFormModalComment
 
-function t.FocusPlayerFeedbackFormModalComment(p28, p29, p30) --[[ line: 13 ]]
+function t.FocusPlayerFeedbackFormModalComment(p28, p29, p30)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), focusPlayerFeedbackFormModalComment (ref)
 	local var5, var6 = var3(p30)
 	
@@ -182,7 +182,7 @@ end
 
 local clickPlayerFeedbackFormModalSubmit = constantsModule.EventNames.ClickPlayerFeedbackFormModalSubmit
 
-function t.ClickPlayerFeedbackFormModalSubmit(p31, p32, p33) --[[ line: 13 ]]
+function t.ClickPlayerFeedbackFormModalSubmit(p31, p32, p33)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), clickPlayerFeedbackFormModalSubmit (ref)
 	local var5, var6 = var3(p33)
 	
@@ -199,7 +199,7 @@ end
 
 local submitPlayerFeedbackFailCommentValidation = constantsModule.EventNames.SubmitPlayerFeedbackFailCommentValidation
 
-function t.SubmitPlayerFeedbackFailCommentValidation(p34, p35, p36) --[[ line: 13 ]]
+function t.SubmitPlayerFeedbackFailCommentValidation(p34, p35, p36)
 	-- upvalues: var3 (ref), mutedError (ref), cryoModule (ref), constantsModule (ref), submitPlayerFeedbackFailCommentValidation (ref)
 	local var5, var6 = var3(p36)
 	

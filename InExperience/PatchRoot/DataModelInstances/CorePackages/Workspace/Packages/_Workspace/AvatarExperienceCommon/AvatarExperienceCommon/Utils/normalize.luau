@@ -1,11 +1,11 @@
-﻿local function normalizeType(p0, p1) --[[ line: 3 ]]
+﻿local function normalizeType(p0, p1)
 	if type(p0) == p1 then
 		return p0
 	end
 	return nil, `Type {p1} required, got {type(p0)}.`
 end
 
-local function prepareValuesForError(p2) --[[ line: 10 ]]
+local function prepareValuesForError(p2)
 	local t = {}
 	
 	for i, v in p2 do
@@ -14,7 +14,7 @@ local function prepareValuesForError(p2) --[[ line: 10 ]]
 	return table.concat(t, ", ")
 end
 
-local function normalizeValue(p3, p4) --[[ line: 18 ]]
+local function normalizeValue(p3, p4)
 	-- upvalues: prepareValuesForError (ref)
 	if table.find(p4, p3) then
 		return p3
@@ -22,22 +22,22 @@ local function normalizeValue(p3, p4) --[[ line: 18 ]]
 	return nil, `Expected value to be one of {prepareValuesForError(p4)}, got {p3}.`
 end
 
-local function normalizeBoolean(p5) --[[ line: 25 ]]
+local function normalizeBoolean(p5)
 	-- upvalues: normalizeType (ref)
 	return normalizeType(p5, "boolean")
 end
 
-local function normalizeString(p6) --[[ line: 29 ]]
+local function normalizeString(p6)
 	-- upvalues: normalizeType (ref)
 	return normalizeType(p6, "string")
 end
 
-local function normalizeNumber(p7) --[[ line: 33 ]]
+local function normalizeNumber(p7)
 	-- upvalues: normalizeType (ref)
 	return normalizeType(p7, "number")
 end
 
-local function normalizeTable(p8, p9) --[[ line: 37 ]]
+local function normalizeTable(p8, p9)
 	local t = {}
 	
 	if type(p8) ~= "table" then
@@ -67,7 +67,7 @@ local function normalizeTable(p8, p9) --[[ line: 37 ]]
 	return t_1, if next(t) then table.concat(t, " ") else nil
 end
 
-local function normalizeList(p10, p11) --[[ line: 85 ]]
+local function normalizeList(p10, p11)
 	if type(p10) ~= "table" then
 		return nil, `Type table required, got {type(p10)}.`
 	end
@@ -87,7 +87,7 @@ local function normalizeList(p10, p11) --[[ line: 85 ]]
 	return t_1, if next(t) then table.concat(t, " ") else nil
 end
 
-local function normalizeUnion(p12, p13) --[[ line: 107 ]]
+local function normalizeUnion(p12, p13)
 	for i, v in p13 do
 		local var21, _ = v(p12)
 		
@@ -107,44 +107,44 @@ return {
 	normalizeTable = normalizeTable,
 	normalizeList = normalizeList,
 	normalizeUnion = normalizeUnion,
-	normalizeStringToBoolean = function(p14) --[[ line: 118 ]]
+	normalizeStringToBoolean = function(p14)
 		if p14 then
 			return p14 == "true"
 		end
 		return nil, "value is nil"
 	end,
-	makeNormalizeTableFn = function(p15) --[[ line: 125 ]]
+	makeNormalizeTableFn = function(p15)
 		-- upvalues: normalizeTable (ref)
-		return function(p16) --[[ line: 128 ]]
+		return function(p16)
 			-- upvalues: normalizeTable (copy), p15 (ref)
 			return normalizeTable(p16, p15)
 		end
 	end,
-	makeNormalizeListFn = function(p17) --[[ line: 133 ]]
+	makeNormalizeListFn = function(p17)
 		-- upvalues: normalizeList (ref)
-		return function(p18) --[[ line: 134 ]]
+		return function(p18)
 			-- upvalues: normalizeList (copy), p17 (ref)
 			return normalizeList(p18, p17)
 		end
 	end,
-	makeNormalizeUnionFn = function(p19) --[[ line: 139 ]]
+	makeNormalizeUnionFn = function(p19)
 		-- upvalues: normalizeUnion (ref)
-		return function(p20) --[[ line: 140 ]]
+		return function(p20)
 			-- upvalues: normalizeUnion (copy), p19 (ref)
 			return normalizeUnion(p20, p19)
 		end
 	end,
-	makeNormalizeValueFn = function(p21) --[[ line: 145 ]]
+	makeNormalizeValueFn = function(p21)
 		-- upvalues: normalizeValue (ref)
-		return function(p22) --[[ line: 146 ]]
+		return function(p22)
 			-- upvalues: normalizeValue (copy), p21 (ref)
 			return normalizeValue(p22, p21)
 		end
 	end,
-	makeRequired = function(p23) --[[ line: 151 ]]
+	makeRequired = function(p23)
 		return { required = true, fn = p23 }
 	end,
-	normalizeNotEmptyString = function(p24) --[[ line: 156 ]]
+	normalizeNotEmptyString = function(p24)
 		-- upvalues: normalizeString (ref)
 		if p24 == nil or p24 == "" then
 			return nil, nil

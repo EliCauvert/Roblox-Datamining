@@ -2,7 +2,7 @@
 local spyModule = require(script.Parent.Spy)
 local t = {}
 local t_1 = {
-	__index = function(p0, p1) --[[ line: 7 ]]
+	__index = function(p0, p1)
 		-- upvalues: symbolsModule (ref), t (ref)
 		local var4 = getmetatable(p0)
 		local var5 = var4[symbolsModule.Children][p1]
@@ -15,7 +15,7 @@ local t_1 = {
 		end
 		return if var5 == symbolsModule.None then nil else var5
 	end,
-	__newindex = function(p2, p3, p4) --[[ line: 22 ]]
+	__newindex = function(p2, p3, p4)
 		-- upvalues: spyModule (ref), symbolsModule (ref)
 		local var6 = getmetatable(p2)
 		
@@ -32,7 +32,7 @@ local t_1 = {
 		end
 		var6[symbolsModule.Children][p3] = p4
 	end,
-	__call = function(p5, ...) --[[ line: 39 ]]
+	__call = function(p5, ...)
 		-- upvalues: symbolsModule (ref), t (ref)
 		local var8 = getmetatable(p5)
 		local t_1 = {
@@ -52,7 +52,7 @@ local t_1 = {
 	end
 }
 
-function t.new(p6) --[[ line: 60 ]]
+function t.new(p6)
 	-- upvalues: symbolsModule (ref), t_1 (ref)
 	local t = {
 		[symbolsModule.Calls] = {},

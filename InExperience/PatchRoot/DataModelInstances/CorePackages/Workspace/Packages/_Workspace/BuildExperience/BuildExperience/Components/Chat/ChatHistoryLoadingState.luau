@@ -6,7 +6,7 @@ local view = foundationModule.View
 local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 
-return function() --[[ line: 15 | named "ChatHistoryLoadingState" ]]
+return function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	local var2 = useTokens()
 	

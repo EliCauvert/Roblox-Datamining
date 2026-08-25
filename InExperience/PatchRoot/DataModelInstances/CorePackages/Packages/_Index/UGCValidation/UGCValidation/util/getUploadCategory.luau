@@ -5,7 +5,7 @@ local constantsInterfaceModule = require(parent.ConstantsInterface)
 local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
 local parts = string.split(require(parent.flags.getFStringUGCLCAllowedAssetTypeIds)(), ",")
 
-return function(p0, p1, p2) --[[ line: 9 | named "getUploadCategory" ]]
+return function(p0, p1, p2)
 	-- upvalues: validationEnumsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), parts (ref), constantsInterfaceModule (ref)
 	if p2 == nil then
 		assert(p1)

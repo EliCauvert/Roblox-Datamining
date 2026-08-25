@@ -6,7 +6,7 @@ local t = {
 	[14] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
 }
 
-function getTimedOptionForItemData(p0) --[[ line: 10 ]]
+function getTimedOptionForItemData(p0)
 	-- upvalues: t (ref), unifiedEventLogEnumsModule (ref)
 	if not p0 or not p0.timedOptions then
 		return unifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT

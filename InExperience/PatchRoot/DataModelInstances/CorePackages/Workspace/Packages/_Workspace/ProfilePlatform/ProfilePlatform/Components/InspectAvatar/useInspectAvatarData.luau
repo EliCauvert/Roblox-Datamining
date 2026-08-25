@@ -16,19 +16,19 @@ local collectibleProductIdStore = catalogNetworkingModule.CollectibleProductIdSt
 local bundleOwnershipStore = catalogNetworkingModule.BundleOwnershipStore
 local itemDetailsStore = catalogNetworkingModule.ItemDetailsStore
 
-local function useLookApiData(p0) --[[ line: 42 ]]
+local function useLookApiData(p0)
 	-- upvalues: useSignalState (ref), purchaseDetailsStore (ref), reactModule (ref), dashModule (ref), enumsModule (ref), myRoduxNetworkingImplModule (ref)
 	local var11 = useSignalState(purchaseDetailsStore.getCache)
 	local var12, var13 = reactModule.useState({})
 	local var14, var15 = reactModule.useState(true)
-	reactModule.useEffect(function() --[[ line: 47 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var15 (ref), dashModule (copy), enumsModule (copy), var13 (ref), purchaseDetailsStore (copy), myRoduxNetworkingImplModule (copy)
 		if #p0 == 0 then
 			var15(false)
 			
 			return
 		end
-		local var16 = dashModule.collectArray(p0, function(_, p1) --[[ line: 52 ]]
+		local var16 = dashModule.collectArray(p0, function(_, p1)
 			-- upvalues: enumsModule (copy)
 			return if p1.itemType == enumsModule.ItemTypes.Bundle then nil else { id = tonumber(p1.assetId) or p1.assetId }
 		end)
@@ -40,16 +40,16 @@ local function useLookApiData(p0) --[[ line: 42 ]]
 		end
 		var15(true)
 		var13({})
-		purchaseDetailsStore.fetchAll(myRoduxNetworkingImplModule, var16):andThen(function(p2) --[[ line: 66 ]]
+		purchaseDetailsStore.fetchAll(myRoduxNetworkingImplModule, var16):andThen(function(p2)
 			-- upvalues: dashModule (copy), var13 (copy)
 			if p2 and p2.look and p2.look.items then
-				var13(dashModule.map(p2.look.items, function(p3) --[[ line: 68 ]]
+				var13(dashModule.map(p2.look.items, function(p3)
 					return tostring(p3.id)
 				end))
 			end
-		end, function(p4) --[[ line: 73 ]]
+		end, function(p4)
 			warn("[useInspectAvatarData] Failed to fetch purchase details:", tostring(p4))
-		end):finally(function() --[[ line: 76 ]]
+		end):finally(function()
 			-- upvalues: var15 (copy)
 			var15(false)
 		end)
@@ -58,13 +58,13 @@ local function useLookApiData(p0) --[[ line: 42 ]]
 	return { responseIds = var12, cache = var11, isLoading = var14 }
 end
 
-local function useCatalogEnrichment(p5, p6) --[[ line: 92 ]]
+local function useCatalogEnrichment(p5, p6)
 	-- upvalues: useSignalState (ref), itemDetailsStore (ref), reactModule (ref), collectibleProductIdStore (ref), bundleOwnershipStore (ref), enumsModule (ref), myRoduxNetworkingImplModule (ref), promiseModule (ref)
 	local var17 = useSignalState(itemDetailsStore.getCache)
 	local var18, var19 = reactModule.useState(true)
 	local var20 = useSignalState(collectibleProductIdStore.getCache)
 	local var21 = useSignalState(bundleOwnershipStore.getCache)
-	reactModule.useEffect(function() --[[ line: 100 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), p6 (ref), var19 (ref), enumsModule (copy), itemDetailsStore (copy), myRoduxNetworkingImplModule (copy), promiseModule (copy), bundleOwnershipStore (copy)
 		if p5.isLoading then return end
 		if #p6 == 0 then
@@ -114,19 +114,19 @@ local function useCatalogEnrichment(p5, p6) --[[ line: 92 ]]
 		var19(true)
 		promiseModule.all({
 			if #t_2 > 0 then itemDetailsStore.fetchAndCache(myRoduxNetworkingImplModule, t_2) else promiseModule.resolve(),
-			if #t_1 > 0 then bundleOwnershipStore.fetchAndCache(myRoduxNetworkingImplModule, t_1):catch(function(p8) --[[ line: 159 ]]
+			if #t_1 > 0 then bundleOwnershipStore.fetchAndCache(myRoduxNetworkingImplModule, t_1):catch(function(p8)
 				warn("[useInspectAvatarData] Failed to fetch bundle ownership:", tostring(p8))
 			end) else promiseModule.resolve()
-		}):andThen(function() --[[ line: 165 ]]
+		}):andThen(function()
 			-- upvalues: var19 (copy)
 			var19(false)
-		end):catch(function(p7) --[[ line: 168 ]]
+		end):catch(function(p7)
 			-- upvalues: var19 (copy)
 			warn("[useInspectAvatarData] Failed to fetch catalog details:", tostring(p7))
 			var19(false)
 		end)
 	end, { p5.responseIds, p5.isLoading, p6 })
-	reactModule.useEffect(function() --[[ line: 175 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p6 (ref), var17 (ref), enumsModule (copy), p5 (ref), collectibleProductIdStore (copy), myRoduxNetworkingImplModule (copy)
 		local var32
 		local t = {}
@@ -161,7 +161,7 @@ local function useCatalogEnrichment(p5, p6) --[[ line: 92 ]]
 		if #t == 0 then
 			return
 		end
-		collectibleProductIdStore.fetchAndCache(myRoduxNetworkingImplModule, t):catch(function(p9) --[[ line: 213 ]]
+		collectibleProductIdStore.fetchAndCache(myRoduxNetworkingImplModule, t):catch(function(p9)
 			warn("[useInspectAvatarData] Failed to fetch collectible product IDs:", tostring(p9))
 		end)
 	end, { var17, p6, p5.responseIds })
@@ -174,12 +174,12 @@ local function useCatalogEnrichment(p5, p6) --[[ line: 92 ]]
 	}
 end
 
-return function(p10) --[[ line: 229 | named "useInspectAvatarData" ]]
+return function(p10)
 	-- upvalues: useLocalUserId (ref), useLookApiData (ref), useCatalogEnrichment (ref), reactModule (ref), inspectAvatarUtilsModule (ref)
 	local var33 = useLocalUserId()
 	local var34 = useLookApiData(p10)
 	local var35 = useCatalogEnrichment(var34, p10)
-	local var36 = reactModule.useMemo(function() --[[ line: 235 ]]
+	local var36 = reactModule.useMemo(function()
 		-- upvalues: p10 (ref), inspectAvatarUtilsModule (copy), var34 (ref), var35 (ref)
 		if #p10 == 0 then
 			return {}
@@ -245,7 +245,7 @@ return function(p10) --[[ line: 229 | named "useInspectAvatarData" ]]
 	
 	return {
 		displayItems = var36,
-		ownedAssetIds = reactModule.useMemo(function() --[[ line: 316 ]]
+		ownedAssetIds = reactModule.useMemo(function()
 			-- upvalues: var36 (ref), inspectAvatarUtilsModule (copy)
 			local t = {}
 			local t_1 = {}

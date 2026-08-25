@@ -9,14 +9,14 @@ local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.Sideshe
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 30 | named "VerticalItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), view (ref), text (ref)
 	local var6 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
 	
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y radius-medium",
 		LayoutOrder = p0.layoutOrder,
-		onActivated = reactModule.useCallback(function() --[[ line: 31 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 			p0.onActivated()
 			toggleSideSheetModule(false)
@@ -26,7 +26,7 @@ return reactModule.memo(function(p0) --[[ line: 30 | named "VerticalItem" ]]
 			NextSelectionRight = if p0.disableGamepadDirections.right then var6 else nil,
 			NextSelectionLeft = if p0.disableGamepadDirections.left then var6 else nil
 		} else nil,
-		ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1) --[[ line: 39 ]]
+		ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1)
 			-- upvalues: var6 (ref), p0 (ref)
 			if var6 then
 				var6.current = p1

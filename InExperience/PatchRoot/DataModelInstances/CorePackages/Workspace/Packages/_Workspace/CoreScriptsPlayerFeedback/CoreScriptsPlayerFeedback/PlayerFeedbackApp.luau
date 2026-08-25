@@ -10,15 +10,15 @@ local coreGuiService = game:GetService("CoreGui")
 local robloxGui = coreGuiService:FindFirstChild("RobloxGui") or coreGuiService:WaitForChild("RobloxGui")
 local var7 = getFFlagEnablePlayerSupportPromptModule()
 local _ = nil
-local ok, status = pcall(function() --[[ line: 21 ]]
+local ok, status = pcall(function()
 	-- upvalues: robloxGui (ref)
 	return if robloxGui then require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider) else nil
 end)
-local var8 = if ok and status then status else function(p0) --[[ line: 31 ]]
+local var8 = if ok and status then status else function(p0)
 	return p0.App
 end
 
-return function(p1) --[[ line: 37 | named "createApp" ]]
+return function(p1)
 	-- upvalues: var8 (write), var7 (ref), reactRobloxModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), playerFeedbackPromptsModule (ref)
 	p1 = p1 or var8
 	local screenGui = Instance.new("ScreenGui")
@@ -37,7 +37,7 @@ return function(p1) --[[ line: 37 | named "createApp" ]]
 	
 	return {
 		instance = screenGui,
-		unmount = function() --[[ line: 67 ]]
+		unmount = function()
 			-- upvalues: var11 (ref)
 			var11:unmount()
 		end

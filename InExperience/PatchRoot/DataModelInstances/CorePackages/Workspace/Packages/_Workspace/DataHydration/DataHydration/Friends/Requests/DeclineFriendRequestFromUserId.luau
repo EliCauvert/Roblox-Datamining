@@ -5,11 +5,11 @@ local friends = dataHydration.Friends
 local myHttpRequestModule = require(friends.Networking.myHttpRequest)
 local normalizeFriendRequestErrorModule = require(friends.Networking.normalizeFriendRequestError)
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: url (ref), myHttpRequestModule (ref), httpService (ref), normalizeFriendRequestErrorModule (ref)
-	return myHttpRequestModule(string.format("%s/users/%s/decline-friend-request", url.FRIEND_URL, tostring(p0)), "POST", { postBody = httpService:JSONEncode({}) }):andThen(function() --[[ line: 20 ]]
+	return myHttpRequestModule(string.format("%s/users/%s/decline-friend-request", url.FRIEND_URL, tostring(p0)), "POST", { postBody = httpService:JSONEncode({}) }):andThen(function()
 		return nil
-	end):catch(function(p1) --[[ line: 23 ]]
+	end):catch(function(p1)
 		-- upvalues: normalizeFriendRequestErrorModule (copy)
 		error(normalizeFriendRequestErrorModule(p1))
 	end)

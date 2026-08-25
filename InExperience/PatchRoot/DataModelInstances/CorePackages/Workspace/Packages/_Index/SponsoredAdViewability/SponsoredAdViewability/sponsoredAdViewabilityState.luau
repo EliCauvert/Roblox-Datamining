@@ -18,7 +18,7 @@ local t = {
 	FullViewVideo = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then "FullViewVideo" else nil
 }
 
-local function newBand(p0, p1) --[[ line: 140 ]]
+local function newBand(p0, p1)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	return if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p1 ~= nil then {
 		enteredAtMs = nil,
@@ -35,7 +35,7 @@ local function newBand(p0, p1) --[[ line: 140 ]]
 	}
 end
 
-local function _(p2, p3) --[[ line: 154 | named "recordClosedWindow" ]]
+local function _(p2, p3)
 	p2.cumulativeMs += p3
 	
 	if p2.maxContinuousMs < p3 then
@@ -44,7 +44,7 @@ local function _(p2, p3) --[[ line: 154 | named "recordClosedWindow" ]]
 	p2.enteredAtMs = nil
 end
 
-local _ = function(p4, p5) --[[ line: 162 | named "closeWindow" ]]
+local _ = function(p4, p5)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local enteredAtMs = p4.enteredAtMs
 	local var9 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then p4.currentContinuousMs else nil
@@ -71,7 +71,7 @@ local _ = function(p4, p5) --[[ line: 162 | named "closeWindow" ]]
 	p4.pendingContinuity = false
 end
 
-local _ = function(p6, p7, p8) --[[ line: 182 | named "updateBandTimer" ]]
+local _ = function(p6, p7, p8)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	if p6.threshold <= p7 then
 		if p6.enteredAtMs == nil then
@@ -106,7 +106,7 @@ local _ = function(p6, p7, p8) --[[ line: 182 | named "updateBandTimer" ]]
 	end
 end
 
-local _ = function(p9, p10) --[[ line: 195 | named "durationAsOf" ]]
+local _ = function(p9, p10)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local cumulativeMs = p9.cumulativeMs
 	local maxContinuousMs = p9.maxContinuousMs
@@ -131,18 +131,18 @@ local _ = function(p9, p10) --[[ line: 195 | named "durationAsOf" ]]
 	return cumulativeMs, maxContinuousMs
 end
 
-local _ = function(p11) --[[ line: 216 | named "continuousVideoDurationAsOf" ]]
+local _ = function(p11)
 	return if p11.enteredAtMs == nil then 0 else p11.currentContinuousMs or 0
 end
 
-local _ = function(vectorA) --[[ line: 223 | named "preserveVideoBandAcrossSourceChange" ]]
+local _ = function(vectorA)
 	if vectorA.enteredAtMs ~= nil then
 		vectorA.enteredAtMs = nil
 		vectorA.pendingContinuity = true
 	end
 end
 
-local function copyGeometry(p12) --[[ line: 230 ]]
+local function copyGeometry(p12)
 	return {
 		adSize = p12.adSize,
 		viewportBounds = {
@@ -152,15 +152,15 @@ local function copyGeometry(p12) --[[ line: 230 ]]
 	}
 end
 
-local _ = function(p13) --[[ line: 240 | named "audioOn" ]]
+local _ = function(p13)
 	return p13 ~= nil and (p13.isPlaying and p13.audioLevel > 0)
 end
 
-local _ = function(p14) --[[ line: 244 | named "isNonnegativeInteger" ]]
+local _ = function(p14)
 	return typeof(p14) == "number" and (p14 >= 0 and p14 % 1 == 0)
 end
 
-local function isValidVideoPlaybackSnapshot(p15) --[[ line: 248 ]]
+local function isValidVideoPlaybackSnapshot(p15)
 	local playbackPositionMs = p15.playbackPositionMs
 	local loopCount = p15.loopCount
 	local endedCount = p15.endedCount
@@ -192,7 +192,7 @@ local function isValidVideoPlaybackSnapshot(p15) --[[ line: 248 ]]
 	return var15
 end
 
-local _ = function(p16, p17) --[[ line: 265 | named "realEstateOf" ]]
+local _ = function(p16, p17)
 	if p17 == nil then
 		return 0
 	end
@@ -205,7 +205,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p18, p19) --[[ line: 316 ]]
+function t_1.new(p18, p19)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), newBand (ref), t_1 (ref)
 	local var17 = fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p19 == true
 	
@@ -246,7 +246,7 @@ function t_1.new(p18, p19) --[[ line: 316 ]]
 	}, t_1)
 end
 
-function t_1:_classifyDisplayOnce(p20) --[[ line: 363 ]]
+function t_1:_classifyDisplayOnce(p20)
 	-- upvalues: t (ref)
 	if self._displayLabel ~= nil then return end
 	local var18 = p20.X * p20.Y
@@ -257,7 +257,7 @@ function t_1:_classifyDisplayOnce(p20) --[[ line: 363 ]]
 	self._displayLabel = if var18 > 242500 then t.IabDisplayLarge else t.IabDisplayStandard
 end
 
-function t_1:_tryFire(p21, p22, p23, p24, p25, p26) --[[ line: 376 ]]
+function t_1:_tryFire(p21, p22, p23, p24, p25, p26)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), copyGeometry (ref)
 	if self._achieved[p22] then return end
 	local var20
@@ -406,7 +406,7 @@ function t_1:_tryFire(p21, p22, p23, p24, p25, p26) --[[ line: 376 ]]
 	table.insert(p25, maxContinuousMs_1)
 end
 
-function t_1:_accumulate(p27, p28, p29) --[[ line: 440 ]]
+function t_1:_accumulate(p27, p28, p29)
 	local lastSampleMs = self._lastSampleMs
 	
 	if lastSampleMs ~= nil and self._lastRatio > 0 then
@@ -441,7 +441,7 @@ function t_1:_accumulate(p27, p28, p29) --[[ line: 440 ]]
 	end
 end
 
-local function updateVideoBand(p30, p31, p32, p33, p34, p35, p36) --[[ line: 470 ]]
+local function updateVideoBand(p30, p31, p32, p33, p34, p35, p36)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local enteredAtMs
 	if p30.pendingContinuity then
@@ -576,13 +576,13 @@ local function updateVideoBand(p30, p31, p32, p33, p34, p35, p36) --[[ line: 470
 	end
 end
 
-local _ = function(p37, p38, p39, p40, p41, p42, p43, p44) --[[ line: 521 | named "updateModeBand" ]]
+local _ = function(p37, p38, p39, p40, p41, p42, p43, p44)
 	-- upvalues: updateVideoBand (ref)
 	p38 = p38 or p37.pendingContinuity == true
 	updateVideoBand(p37, p39 and p38, p40 and p38, p41, p42, p43, p44)
 end
 
-local _ = function(p45, p46, p47, p48, p49) --[[ line: 543 | named "observedVideoMovementMs" ]]
+local _ = function(p45, p46, p47, p48, p49)
 	if p45 == nil or p46 == nil or (p47 == nil or p48 == nil) then
 		return 0
 	elseif p48 < p47 then
@@ -593,11 +593,11 @@ local _ = function(p45, p46, p47, p48, p49) --[[ line: 543 | named "observedVide
 	return if var43 == 0 then math.max(0, p46 - p45) elseif p49 == nil or p49 <= 0 then 0 else math.max(0, var43 * p49 + p46 - p45)
 end
 
-local _ = function(p50, p51, p52) --[[ line: 574 | named "videoProgressPercent" ]]
+local _ = function(p50, p51, p52)
 	return if p50 then 100 elseif p51 == nil or p51 <= 0 then 0 else math.clamp(p52 / p51 * 100, 0, 100)
 end
 
-function t_1:_buildVideoProgressMilestone(p53, p54) --[[ line: 588 ]]
+function t_1:_buildVideoProgressMilestone(p53, p54)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), copyGeometry (ref)
 	local video = self._video
 	local inGridBand50 = self._inGridBand50
@@ -731,7 +731,7 @@ function t_1:_buildVideoProgressMilestone(p53, p54) --[[ line: 588 ]]
 	}
 end
 
-function t_1:_advanceVideo(p55, p56, p57, p58, p59, p60) --[[ line: 627 ]]
+function t_1:_advanceVideo(p55, p56, p57, p58, p59, p60)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), isValidVideoPlaybackSnapshot (ref), updateVideoBand (ref), var2 (ref)
 	local enteredAtMs
 	local t = {}
@@ -1165,7 +1165,7 @@ function t_1:_advanceVideo(p55, p56, p57, p58, p59, p60) --[[ line: 627 ]]
 	end
 end
 
-function t_1:transitionVideoSource(p61, p62) --[[ line: 756 ]]
+function t_1:transitionVideoSource(p61, p62)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local video = self._video
 	local inGridBand50 = self._inGridBand50
@@ -1319,7 +1319,7 @@ function t_1:transitionVideoSource(p61, p62) --[[ line: 756 ]]
 	self._lastRealEstate = 0
 end
 
-function t_1:pause(p63) --[[ line: 798 ]]
+function t_1:pause(p63)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local var107
 	if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
@@ -1547,7 +1547,7 @@ function t_1:pause(p63) --[[ line: 798 ]]
 	self._pausedAtMs = p63
 end
 
-function t_1:resume(p64) --[[ line: 836 ]]
+function t_1:resume(p64)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local var125
 	local pausedAtMs = self._pausedAtMs
@@ -1573,7 +1573,7 @@ function t_1:resume(p64) --[[ line: 836 ]]
 	self._lastRealEstate = 0
 end
 
-function t_1:_advance_deprecated(p65, p66, p67) --[[ line: 859 ]]
+function t_1:_advance_deprecated(p65, p66, p67)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), t (ref)
 	assert(not self._finalized, "advance called after finalize")
 	assert(self._pausedAtMs == nil, "advance called while paused")
@@ -1685,7 +1685,7 @@ function t_1:_advance_deprecated(p65, p66, p67) --[[ line: 859 ]]
 	return t_1
 end
 
-function t_1:advance(p68, p69, p70, p71, p72) --[[ line: 894 ]]
+function t_1:advance(p68, p69, p70, p71, p72)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), t (ref), var1 (ref)
 	if not fFlagLuaAppSponsoredAdVideoViewabilityEnabled or self._video == nil then
 		return self:_advance_deprecated(p68, p69, p70)
@@ -1838,7 +1838,7 @@ function t_1:advance(p68, p69, p70, p71, p72) --[[ line: 894 ]]
 	return t_1, var134
 end
 
-function t_1:_finalize_deprecated(p73) --[[ line: 954 ]]
+function t_1:_finalize_deprecated(p73)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	assert(not self._finalized, "finalize called more than once on the same session")
 	self._finalized = true
@@ -1951,7 +1951,7 @@ function t_1:_finalize_deprecated(p73) --[[ line: 954 ]]
 	}
 end
 
-function t_1:finalize(p74) --[[ line: 1002 ]]
+function t_1:finalize(p74)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), copyGeometry (ref)
 	if not fFlagLuaAppSponsoredAdVideoViewabilityEnabled or self._video == nil then
 		return self:_finalize_deprecated(p74)

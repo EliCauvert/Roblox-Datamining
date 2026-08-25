@@ -1,22 +1,22 @@
 ﻿local t = {
-	preScreenshot = function() --[[ line: 2 ]] end,
-	postScreenshot = function() --[[ line: 3 ]] end
+	preScreenshot = function() end,
+	postScreenshot = function() end
 }
 
 return {
-	setPreScreenshotHook = function(value) --[[ line: 7 ]]
+	setPreScreenshotHook = function(value)
 		-- upvalues: t (ref)
 		t.preScreenshot = value
 	end,
-	setPostScreenshotHook = function(value) --[[ line: 10 ]]
+	setPostScreenshotHook = function(value)
 		-- upvalues: t (ref)
 		t.postScreenshot = value
 	end,
-	doPreScreenshot = function() --[[ line: 13 ]]
+	doPreScreenshot = function()
 		-- upvalues: t (ref)
 		t.preScreenshot()
 	end,
-	doPostScreenshot = function() --[[ line: 16 ]]
+	doPostScreenshot = function()
 		-- upvalues: t (ref)
 		t.postScreenshot()
 	end

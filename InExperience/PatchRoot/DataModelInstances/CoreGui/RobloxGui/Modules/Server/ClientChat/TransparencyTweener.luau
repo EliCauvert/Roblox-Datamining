@@ -3,13 +3,13 @@ local runService = game:GetService("RunService")
 local _ = script.Parent
 local t_1 = {
 	__ClassName = "TransparencyTweener",
-	__tostring = function(p0) --[[ line: 21 ]]
+	__tostring = function(p0)
 		return p0.__ClassName .. ": " .. p0.MemoryLocation
 	end,
 	__metatable = "The metatable is locked"
 }
 
-function t_1:__index(p1, _) --[[ line: 26 ]]
+function t_1:__index(p1, _)
 	-- upvalues: t_1 (ref)
 	if rawget(self, p1) then
 		return rawget(self, p1)
@@ -21,7 +21,7 @@ function t_1:__index(p1, _) --[[ line: 26 ]]
 	error(p1 .. " is not a valid member of " .. self.__ClassName)
 end
 
-function t_1:__newindex(p2, p3) --[[ line: 36 ]]
+function t_1:__newindex(p2, p3)
 	if p2 == "Transparency" then
 		self.InternalLastTweenPercentage = p3
 		self:SetPropertiesToTweenPercentage(p3)
@@ -31,7 +31,7 @@ function t_1:__newindex(p2, p3) --[[ line: 36 ]]
 	error(p2 .. " is not a valid member of " .. self.__ClassName)
 end
 
-function t_1.Dump(p4) --[[ line: 49 ]]
+function t_1.Dump(p4)
 	local var3 = tostring(p4)
 	
 	for i, v in pairs(p4.TweenObjects) do
@@ -50,7 +50,7 @@ function t_1.Dump(p4) --[[ line: 49 ]]
 	return var3
 end
 
-function t_1.OutputTest(p5) --[[ line: 70 ]]
+function t_1.OutputTest(p5)
 	print("Test Output for {={" .. p5:Dump() .. "}=}")
 	
 	for i, v in pairs(p5.TweenObjects) do
@@ -62,7 +62,7 @@ function t_1.OutputTest(p5) --[[ line: 70 ]]
 	end
 end
 
-function t_1.RegisterTweenObjectProperty(p6, p7, p8, p9) --[[ line: 80 ]]
+function t_1.RegisterTweenObjectProperty(p6, p7, p8, p9)
 	p9 = p9 or p7[p8]
 	
 	if not p6.TweenObjects[p7] then
@@ -72,15 +72,15 @@ function t_1.RegisterTweenObjectProperty(p6, p7, p8, p9) --[[ line: 80 ]]
 	p6:SetObjectPropertyToPercentValue(p7, p8, p9, p6.InternalLastTweenPercentage)
 end
 
-function t_1.UnregisterTweenObject(p10, p11) --[[ line: 92 ]]
+function t_1.UnregisterTweenObject(p10, p11)
 	p10.TweenObjects[p11] = nil
 end
 
-function t_1.SetObjectPropertyToPercentValue(_, p12, p13, p14, p15) --[[ line: 96 ]]
+function t_1.SetObjectPropertyToPercentValue(_, p12, p13, p14, p15)
 	p12[p13] = p14 + (1 - p14) * p15
 end
 
-function t_1.SetPropertiesToTweenPercentage(value, p16) --[[ line: 102 ]]
+function t_1.SetPropertiesToTweenPercentage(value, p16)
 	for i, v in pairs(value.TweenObjects) do
 		for i_1, v_1 in pairs(v) do
 			value:SetObjectPropertyToPercentValue(i, i_1, v_1, p16)
@@ -88,7 +88,7 @@ function t_1.SetPropertiesToTweenPercentage(value, p16) --[[ line: 102 ]]
 	end
 end
 
-function t_1.Tween(p17, p18, p19, p20) --[[ line: 110 ]]
+function t_1.Tween(p17, p18, p19, p20)
 	-- upvalues: runService (ref)
 	if p17.Tweening then
 		p17.QueuedTween = { p18, p19, p20 }
@@ -109,7 +109,7 @@ function t_1.Tween(p17, p18, p19, p20) --[[ line: 110 ]]
 	local var8 = currentTime + p18
 	local var9 = p19 - var6
 	local var10 = 0
-	spawn(function() --[[ line: 132 ]]
+	spawn(function()
 		-- upvalues: var8 (ref), p17 (ref), var10 (write), currentTime (ref), p18 (ref), var6 (write), var9 (ref), runService (copy), p19 (ref)
 		local currentTime_1 = tick()
 		while currentTime_1 < var8 and not p17.Canceled do
@@ -138,11 +138,11 @@ function t_1.Tween(p17, p18, p19, p20) --[[ line: 110 ]]
 	end)
 end
 
-function t_1.CancelTween(p21) --[[ line: 163 ]]
+function t_1.CancelTween(p21)
 	p21.Canceled = true
 end
 
-function t.new() --[[ line: 169 ]]
+function t.new()
 	-- upvalues: t_1 (ref)
 	local t = {}
 	t.MemoryLocation = tostring(t):match("[0123456789ABCDEF]+")

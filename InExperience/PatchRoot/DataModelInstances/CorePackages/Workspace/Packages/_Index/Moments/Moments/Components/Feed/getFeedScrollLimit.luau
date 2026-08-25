@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 7 | named "getFeedScrollLimit" ]]
+﻿return function(p0, p1, p2)
 	if p0 and not p1 then
 		return nil
 	end

@@ -25,7 +25,7 @@ local activeSquadPollingIdleIntervalSeconds = game:DefineFastInt("ActiveSquadPol
 local activeSquadInitPollingDelaySeconds = game:DefineFastInt("ActiveSquadInitPollingDelaySeconds", 3)
 local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
 
-return function(p0) --[[ line: 41 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContextModule (ref), useSquadStateModule (ref), setTimeout (ref), fetchActiveSquadModule (ref), activeSquadInitPollingDelaySeconds (ref), clearTimeout (ref), squadViewFlagsModule (ref), activeSquadPollingCardIntervalSeconds (ref), activeSquadPollingLobbyIntervalSeconds (ref), activeSquadPollingIdleIntervalSeconds (ref), setInterval (ref), clearInterval (ref), realtimeDeliveryModule (ref), constantsModule (ref), loggerModule (ref), serializeTableModule (ref), roduxSquadsModule (ref), squadStateModule (ref), messageBusService (ref), realtimeMessageId (ref)
 	local var19 = useDispatch()
 	local var20 = tonumber(useLocalUserId()) or 0
@@ -33,47 +33,47 @@ return function(p0) --[[ line: 41 ]]
 	local var23 = reactModule.useContext(squadExternalContractContextModule).useSquadViewFlags()
 	local var24 = useSquadStateModule()
 	local var25, var26 = reactModule.useState(-1)
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref), p0 (ref), setTimeout (copy), var19 (ref), fetchActiveSquadModule (copy), activeSquadInitPollingDelaySeconds (copy), clearTimeout (copy)
 		var22(false)
-		local var28 = if p0.currentSquadId ~= "" then nil else setTimeout(function() --[[ line: 57 ]]
+		local var28 = if p0.currentSquadId ~= "" then nil else setTimeout(function()
 			-- upvalues: var19 (copy), fetchActiveSquadModule (copy), var22 (copy)
 			var19(fetchActiveSquadModule())
 			var22(true)
 		end, activeSquadInitPollingDelaySeconds * 1000)
 		
-		return function() --[[ line: 63 ]]
+		return function()
 			-- upvalues: var28 (ref), clearTimeout (copy)
 			if var28 then
 				clearTimeout(var28)
 			end
 		end
 	end, { p0.currentSquadId })
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var23 (ref), squadViewFlagsModule (copy), activeSquadPollingCardIntervalSeconds (copy), activeSquadPollingLobbyIntervalSeconds (copy), activeSquadPollingIdleIntervalSeconds (copy), var21 (ref), p0 (ref), setInterval (copy), var19 (ref), fetchActiveSquadModule (copy), clearInterval (copy)
 		local _ = nil
-		local var29 = if var21 and p0.currentSquadId ~= "" then setInterval(function() --[[ line: 85 ]]
+		local var29 = if var21 and p0.currentSquadId ~= "" then setInterval(function()
 			-- upvalues: var19 (copy), fetchActiveSquadModule (copy)
 			var19(fetchActiveSquadModule())
 		end, (if bit32.band(var23, squadViewFlagsModule.SquadSystemMessage) ~= 0 then if bit32.band(var23, squadViewFlagsModule.SquadLobby) ~= 0 then activeSquadPollingIdleIntervalSeconds else activeSquadPollingLobbyIntervalSeconds else activeSquadPollingCardIntervalSeconds) * 1000) else nil
 		
-		return function() --[[ line: 90 ]]
+		return function()
 			-- upvalues: var29 (write), clearInterval (copy)
 			if var29 then
 				clearInterval(var29)
 			end
 		end
 	end, { p0.currentSquadId, var23, var25, var21 })
-	local var27 = reactModule.useCallback(function(p1) --[[ line: 101 ]]
+	local var27 = reactModule.useCallback(function(p1)
 		-- upvalues: var25 (ref), var19 (ref), fetchActiveSquadModule (copy), var26 (ref)
 		if var25 < p1 then
-			var19(fetchActiveSquadModule()):andThen(function() --[[ line: 103 ]]
+			var19(fetchActiveSquadModule()):andThen(function()
 				-- upvalues: var26 (copy), p1 (ref)
 				var26(p1)
 			end)
 		end
 	end, { var19, fetchActiveSquadModule, var26, var25 })
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2) --[[ line: 110 ]]
+	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2)
 		-- upvalues: constantsModule (copy), loggerModule (copy), serializeTableModule (copy), p0 (ref), var20 (ref), var19 (ref), roduxSquadsModule (copy), var27 (ref), var24 (ref), squadStateModule (copy)
 		if p2.ChannelType == constantsModule.SQUAD_CHANNEL_TYPE then
 			loggerModule:debug("Squad RTN received. Detail: {}, CurrentSquadId: {}, LocalUserId: {}", serializeTableModule(p2), p0.currentSquadId, var20)
@@ -105,16 +105,16 @@ return function(p0) --[[ line: 41 ]]
 		var27,
 		var24
 	})
-	reactModule.useEffect(function() --[[ line: 166 ]]
+	reactModule.useEffect(function()
 		-- upvalues: messageBusService (copy), realtimeMessageId (copy), p0 (ref), var19 (ref), fetchActiveSquadModule (copy)
-		local var30 = messageBusService:Subscribe(realtimeMessageId, function() --[[ line: 167 ]]
+		local var30 = messageBusService:Subscribe(realtimeMessageId, function()
 			-- upvalues: p0 (copy), var19 (copy), fetchActiveSquadModule (copy)
 			if p0.currentSquadId ~= "" then
 				var19(fetchActiveSquadModule())
 			end
 		end, false, true)
 		
-		return function() --[[ line: 172 ]]
+		return function()
 			-- upvalues: var30 (ref)
 			if var30 then
 				var30:Disconnect()

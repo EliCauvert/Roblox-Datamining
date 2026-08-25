@@ -91,7 +91,7 @@ local t_2 = {
 	Bold_Font = { Font = appFonts.default:getMedium() }
 }
 setmetatable(t_1, {
-	__index = function(_, p0) --[[ line: 163 ]]
+	__index = function(_, p0)
 		-- upvalues: darkTheme (ref)
 		return darkTheme[p0]
 	end
@@ -147,7 +147,7 @@ local t_3 = {
 	ButtonNonInteractable = "IGM_ButtonNonInteractable"
 }
 
-local function getViewportSize() --[[ line: 235 ]]
+local function getViewportSize()
 	return if _G.__TESTEZ_RUNNING_TEST__ then Vector2.new(1024, 1024) elseif workspace.CurrentCamera then if workspace.CurrentCamera.ViewportSize == Vector2.new(0, 0) or workspace.CurrentCamera.ViewportSize == Vector2.new(1, 1) then nil else workspace.CurrentCamera.ViewportSize else nil
 end
 
@@ -190,18 +190,18 @@ return {
 	platformNameTextSize = 18,
 	DefaultCornerRadius = UDim.new(0, 8),
 	MenuContainerCornerRadius = UDim.new(0, 10),
-	AlwaysShowBottomBar = function() --[[ line: 292 ]]
+	AlwaysShowBottomBar = function()
 		-- upvalues: var16 (write)
 		return not var16
 	end,
-	UseInspectAndBuyPanel = function() --[[ line: 296 ]]
+	UseInspectAndBuyPanel = function()
 		-- upvalues: var16 (write)
 		return var16
 	end,
-	HubPadding = function() --[[ line: 300 ]]
+	HubPadding = function()
 		-- upvalues: fFlagRelocateMobileMenuButtonsModule (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), getViewportSize (ref), userInputService (ref), t_5 (ref), t_4 (ref), var16 (write)
 		if fFlagRelocateMobileMenuButtonsModule and fIntRelocateMobileMenuButtonsVariantModule ~= 0 then
-			local _ = function() --[[ line: 303 ]]
+			local _ = function()
 				-- upvalues: getViewportSize (copy), userInputService (copy)
 				local var22 = getViewportSize()
 				
@@ -214,7 +214,7 @@ return {
 		end
 		return if var16 then t_5 else t_4
 	end,
-	MenuContainerPosition = function(p1) --[[ line: 323 ]]
+	MenuContainerPosition = function(p1)
 		-- upvalues: isInExperienceUIVREnabled (ref), var16 (write), t_7 (ref), t_6 (ref)
 		if isInExperienceUIVREnabled and p1 then
 			local menuContainerPositionOverride = p1:getMenuContainerPositionOverride()
@@ -226,24 +226,24 @@ return {
 	getIconSize = getIconSize,
 	IconSize = iconSize,
 	SHIELD_INACTIVE_POSITION = UDim2.new(0, 0, 1, 36),
-	viewportResized = function() --[[ line: 344 ]]
+	viewportResized = function()
 		-- upvalues: var15 (write), getViewportSize (ref), var16 (write), userInputService (ref)
 		var15 = getViewportSize()
 		var16 = var15 and (userInputService.TouchEnabled and (if var15.Y >= 500 then var15.X < 700 else true))
 	end,
-	color = function(p2, p3) --[[ line: 350 ]]
+	color = function(p2, p3)
 		-- upvalues: t_3 (ref), t_1 (ref), color (ref)
 		p2 = t_3[p2] or p2
 		
 		return if t_1[p2] then t_1[p2].Color else p3 or color
 	end,
-	transparency = function(p4, p5) --[[ line: 354 ]]
+	transparency = function(p4, p5)
 		-- upvalues: t_3 (ref), t_1 (ref)
 		p4 = t_3[p4] or p4
 		
 		return if t_1[p4] then t_1[p4].Transparency else p5 or 0
 	end,
-	font = function(p6, p7) --[[ line: 358 ]]
+	font = function(p6, p7)
 		-- upvalues: default (ref), t_3 (ref), t_2 (ref)
 		if not p7 then
 			return default
@@ -252,7 +252,7 @@ return {
 		
 		return if t_2[p7] then t_2[p7].Font else p6 or default
 	end,
-	fontSize = function(p8, p9) --[[ line: 365 ]]
+	fontSize = function(p8, p9)
 		-- upvalues: t (ref), t_3 (ref), t_2 (ref), size24 (ref)
 		if not p9 then
 			return t[p8]
@@ -261,7 +261,7 @@ return {
 		
 		return if t_2[p9] then t_2[p9].RelativeSize else p8 or size24
 	end,
-	textSize = function(p10, p11) --[[ line: 372 ]]
+	textSize = function(p10, p11)
 		-- upvalues: getUIScale (ref), var16 (write), t_3 (ref), t_2 (ref)
 		local var24 = getUIScale(false)
 		
@@ -276,7 +276,7 @@ return {
 		
 		return if p10 == nil then if t_2[p11] and t_2[p11].TextSize then t_2[p11].TextSize else p10 * 0.794 or 19 elseif t_2[p11] and t_2[p11].TextSize then t_2[p11].TextSize * var24 else p10 * 0.794 * var24
 	end,
-	hydrateLabel = function(p12, p13, p14) --[[ line: 393 ]]
+	hydrateLabel = function(p12, p13, p14)
 		-- upvalues: t_3 (ref), t_1 (ref), t_2 (ref)
 		p13 = t_3[p13] or p13
 		

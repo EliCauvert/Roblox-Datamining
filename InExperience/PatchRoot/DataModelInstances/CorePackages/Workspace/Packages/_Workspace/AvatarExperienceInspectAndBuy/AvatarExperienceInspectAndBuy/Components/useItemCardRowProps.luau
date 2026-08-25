@@ -34,20 +34,20 @@ local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
 local catalogItemCardStatusIconTypeEnum = AXCommonModule.Components.CatalogItemCard.CatalogItemCardStatusIconTypeEnum
 
-return function(p0, p1, _, p2, p3) --[[ line: 54 ]]
+return function(p0, p1, _, p2, p3)
 	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), itemTypeEnum (ref), bundleLocalizationKeys (ref), assetLocalizationKeys (ref), cryoModule (ref), priceStatusLocalizationKeys (ref), useLocalization (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), useItemSelectionStore (ref), useSignalState (ref), reactModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), getPriceInRobux (ref), getItemThumbnailUrlModule (ref), getCatalogCardItemTypeModule (ref), catalogItemCardStatusIconTypeEnum (ref), retrievalStatus (ref), getPriceLineContentModule (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), itemCardThumbnail (ref), wearTimeSelectedOptionInList (ref)
 	local var14 = useTokens()
 	local var15, var16 = useConvertedItemDataModule(p0)
 	local var17 = useLocalization(cryoModule.Dictionary.join(if p0.itemType == itemTypeEnum.Bundle then bundleLocalizationKeys else assetLocalizationKeys, priceStatusLocalizationKeys))
 	local var18 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then useItemSelectionStore() else nil
 	local var19 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then useSignalState(var18.getItemData(p0.id)) else nil
-	local var20 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useMemo(function() --[[ line: 76 ]]
+	local var20 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useMemo(function()
 		-- upvalues: getPriceStatusModule (copy), var15 (ref), priceStatusModule (copy)
 		return getPriceStatusModule(var15) == priceStatusModule.Owned
 	end, { var15 }) else nil
 	
 	if fFlagAXEnableIaBTimedOptionsBulkPurchase then
-		reactModule.useEffect(function() --[[ line: 86 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var15 (ref), getPriceInRobux (copy), getPriceStatusModule (copy), var18 (ref), p0 (ref)
 			if var15 and var15.timedOptions then
 				local cloned = table.clone(var15.timedOptions)
@@ -62,7 +62,7 @@ return function(p0, p1, _, p2, p3) --[[ line: 54 ]]
 			end
 		end, { var15, p0.id, var18 })
 	end
-	local var21 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function(p4, p5) --[[ line: 107 ]]
+	local var21 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function(p4, p5)
 		-- upvalues: var19 (ref), var18 (ref), p0 (ref)
 		if not var19 or not var19.timedOptions then return end
 		local t = {}
@@ -77,7 +77,7 @@ return function(p0, p1, _, p2, p3) --[[ line: 54 ]]
 		var18.setItemData(p0.id, { timedOptions = t })
 	end, { p0.id, var19, var18 }) else nil
 	local var22 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then if var19 then var19.timedOptions else nil else nil
-	local var23 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useMemo(function() --[[ line: 134 ]]
+	local var23 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useMemo(function()
 		-- upvalues: var22 (ref)
 		if not var22 then
 			return nil
@@ -106,7 +106,7 @@ return function(p0, p1, _, p2, p3) --[[ line: 54 ]]
 		verified = var15.creator.creatorHasVerifiedBadge
 	} else nil
 	local var29 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 171 ]]
+	reactModule.useEffect(function()
 		-- upvalues: addUnifiedEventLogging (copy), var29 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), p0 (ref), sessionService (copy)
 		addUnifiedEventLogging(var29, {
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
@@ -127,7 +127,7 @@ return function(p0, p1, _, p2, p3) --[[ line: 54 ]]
 		headerSize = UDim2.fromOffset(p3, p3),
 		footerAutomaticSize = Enum.AutomaticSize.XY,
 		AutomaticSize = Enum.AutomaticSize.XY,
-		onActivated = reactModule.useCallback(function() --[[ line: 181 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: p2 (ref), p0 (ref)
 			p2(p0)
 		end, { p2, p0 }),

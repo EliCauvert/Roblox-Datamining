@@ -17,7 +17,7 @@ local t = {
 	}
 }
 
-function t.getDefaultTransition() --[[ line: 28 ]]
+function t.getDefaultTransition()
 	-- upvalues: t (ref), transitionPresetModule (ref)
 	local default = t.presets[transitionPresetModule.Default]
 	
@@ -28,7 +28,7 @@ function t.getDefaultTransition() --[[ line: 28 ]]
 	}
 end
 
-function t.createDefaultTransitionState() --[[ line: 39 ]]
+function t.createDefaultTransitionState()
 	-- upvalues: t (ref)
 	return { default = t.getDefaultTransition() }
 end

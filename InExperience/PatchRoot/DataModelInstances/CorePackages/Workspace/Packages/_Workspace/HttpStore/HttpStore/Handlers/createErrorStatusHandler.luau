@@ -4,11 +4,11 @@ local signalsModule = require(parent_1.Signals)
 local _ = require(parent_1.InternalHttpStore)
 local _ = require(parent.Types)
 
-return function(p0) --[[ line: 11 | named "createErrorStatusHandler" ]]
+return function(p0)
 	-- upvalues: signalsModule (ref)
-	return function(p1) --[[ line: 12 ]]
+	return function(p1)
 		-- upvalues: signalsModule (copy), p0 (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 13 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: p1 (ref), p0 (copy)
 			local var1 = p1(p2)
 			

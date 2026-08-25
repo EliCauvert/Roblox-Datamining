@@ -3,15 +3,15 @@ local userInputService = game:GetService("UserInputService")
 local reactModule = require(parent.React)
 local useEventConnection = require(parent.ReactUtils).useEventConnection
 
-local function _(p0) --[[ line: 51 | named "isActivationInput" ]]
+local function _(p0)
 	return if p0.UserInputType ~= Enum.UserInputType.MouseButton1 then p0.UserInputType == Enum.UserInputType.Touch else true
 end
 
-local _ = function(p1, p2, p3) --[[ line: 56 | named "withinDistance" ]]
+local _ = function(p1, p2, p3)
 	return (p1 - p2).Magnitude <= p3
 end
 
-return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
+return function(p4, p5, p6)
 	-- upvalues: reactModule (ref), useEventConnection (ref), userInputService (ref)
 	local var2 = reactModule.useRef(nil)
 	local var3 = reactModule.useRef(p5)
@@ -26,7 +26,7 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 	local var11 = reactModule.useRef(false)
 	local var12 = reactModule.useRef(nil)
 	local var13 = reactModule.useRef(false)
-	local var14 = reactModule.useCallback(function(p7) --[[ line: 82 ]]
+	local var14 = reactModule.useCallback(function(p7)
 		-- upvalues: p4 (ref), var10 (ref), var11 (ref), var13 (ref), p6 (ref), var12 (ref), var5 (ref), var6 (ref), var7 (ref), var9 (ref), var8 (ref), var3 (ref)
 		if p4 then
 			if not (if p7.UserInputType ~= Enum.UserInputType.MouseButton1 then p7.UserInputType == Enum.UserInputType.Touch else true) then return end
@@ -52,7 +52,7 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 			if var8.current then
 				task.cancel(var8.current)
 			end
-			var8.current = task.delay(0.5, function() --[[ line: 116 ]]
+			var8.current = task.delay(0.5, function()
 				-- upvalues: p4 (copy), var10 (copy), p7 (ref), var11 (copy), var3 (copy)
 				if not p4 then return end
 				if var10.current == p7 and not var11.current then
@@ -68,7 +68,7 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 			return
 		end
 	end, { p4, p6 })
-	local var15 = reactModule.useCallback(function(p8) --[[ line: 132 ]]
+	local var15 = reactModule.useCallback(function(p8)
 		-- upvalues: p4 (ref), var10 (ref), var12 (ref), var13 (ref), var8 (ref)
 		if not p4 or var10.current == nil then return end
 		if p8.UserInputType == Enum.UserInputType.Touch and p8 ~= var10.current then return end
@@ -82,7 +82,7 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 		end
 	end, { p4 })
 	useEventConnection(userInputService.InputChanged, var15, { var15 })
-	local var16 = reactModule.useCallback(function(p9) --[[ line: 156 ]]
+	local var16 = reactModule.useCallback(function(p9)
 		-- upvalues: var10 (ref), var8 (ref), var11 (ref), var13 (ref), var3 (ref), var7 (ref), var9 (ref), var6 (ref)
 		if var10.current ~= p9 then return end
 		var10.current = nil
@@ -114,7 +114,7 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 			elseif var9.current then
 				task.cancel(var9.current)
 			end
-			var9.current = task.delay(0.25, function() --[[ line: 195 ]]
+			var9.current = task.delay(0.25, function()
 				-- upvalues: var9 (copy), var7 (copy), var3 (copy)
 				var9.current = nil
 				
@@ -131,7 +131,7 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 		end
 	end, {})
 	useEventConnection(userInputService.InputEnded, var16, { var16 })
-	reactModule.useEffect(function() --[[ line: 210 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var2 (ref), var14 (ref)
 		local current = var2.current
 		
@@ -140,14 +140,14 @@ return function(p4, p5, p6) --[[ line: 60 | named "useMomentGestures" ]]
 		end
 		local inputBeganConnection = current.InputBegan:Connect(var14)
 		
-		return function() --[[ line: 216 ]]
+		return function()
 			-- upvalues: inputBeganConnection (ref)
 			inputBeganConnection:Disconnect()
 		end
 	end, { var14 })
-	reactModule.useEffect(function() --[[ line: 221 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var9 (ref)
-		return function() --[[ line: 222 ]]
+		return function()
 			-- upvalues: var8 (copy), var9 (copy)
 			if var8.current then
 				task.cancel(var8.current)

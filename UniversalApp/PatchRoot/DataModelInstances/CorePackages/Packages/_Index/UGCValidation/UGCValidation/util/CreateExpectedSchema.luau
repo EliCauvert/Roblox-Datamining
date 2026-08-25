@@ -17,7 +17,7 @@ local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.f
 local getFFlagUGCValidationAnimationPackDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackDisableModelStructure)
 local t = {}
 
-local function _(p0) --[[ line: 26 | named "getRootInstance" ]]
+local function _(p0)
 	-- upvalues: constantsModule (ref)
 	for i, v in p0 do
 		if v.Name == constantsModule.FOLDER_NAMES.R15ArtistIntent then
@@ -27,7 +27,7 @@ local function _(p0) --[[ line: 26 | named "getRootInstance" ]]
 	return p0[1]
 end
 
-function t.generateBundleSchema(p1) --[[ line: 37 ]]
+function t.generateBundleSchema(p1)
 	-- upvalues: constantsModule (ref), getUploadCategoryModule (ref), t (ref)
 	local t_1 = { ClassName = "Folder", _children = {} }
 	
@@ -54,7 +54,7 @@ function t.generateBundleSchema(p1) --[[ line: 37 ]]
 	return t_1
 end
 
-local function createBodyPartSchema(p2) --[[ line: 63 ]]
+local function createBodyPartSchema(p2)
 	-- upvalues: constantsModule (ref), createIndividualBodyPartSchemaModule (ref)
 	local t = { ClassName = "Folder", _children = {} }
 	
@@ -65,46 +65,46 @@ local function createBodyPartSchema(p2) --[[ line: 63 ]]
 end
 
 local t_1 = {
-	EMOTE_ANIMATION = function(_, _) --[[ line: 79 ]]
+	EMOTE_ANIMATION = function(_, _)
 		-- upvalues: createEmoteSchemaModule (ref)
 		return createEmoteSchemaModule()
 	end,
-	DYNAMIC_HEAD = function(_, _) --[[ line: 82 ]]
+	DYNAMIC_HEAD = function(_, _)
 		-- upvalues: createDynamicHeadMeshPartSchemaModule (ref)
 		return createDynamicHeadMeshPartSchemaModule()
 	end,
-	TORSO_AND_LIMBS = function(p3, _) --[[ line: 85 ]]
+	TORSO_AND_LIMBS = function(p3, _)
 		-- upvalues: createBodyPartSchema (ref)
 		return createBodyPartSchema(p3)
 	end,
-	LAYERED_CLOTHING = function(p4, _) --[[ line: 88 ]]
+	LAYERED_CLOTHING = function(p4, _)
 		-- upvalues: getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), createEyebrowEyelashSchemaModule (ref), constantsModule (ref), createLayeredClothingSchemaModule (ref)
 		return if getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule() then if p4 == Enum.AssetType.EyebrowAccessory or p4 == Enum.AssetType.EyelashAccessory then createEyebrowEyelashSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames) else createLayeredClothingSchemaModule(constantsModule.ASSET_TYPE_INFO[p4].attachmentNames)
 	end,
-	RIGID_ACCESSORY = function(p5, p6) --[[ line: 99 ]]
+	RIGID_ACCESSORY = function(p5, p6)
 		-- upvalues: constantsModule (ref), createMeshPartAccessorySchemaModule (ref), createAccessorySchemaModule (ref)
 		local var22 = constantsModule.ASSET_TYPE_INFO[p5]
 		
 		return if p6:FindFirstChildOfClass("MeshPart") then createMeshPartAccessorySchemaModule(var22.attachmentNames) else createAccessorySchemaModule(var22.attachmentNames)
 	end,
-	MAKEUP = function(_, _) --[[ line: 108 ]]
+	MAKEUP = function(_, _)
 		-- upvalues: createMakeupSchemaModule (ref)
 		return createMakeupSchemaModule()
 	end
 }
 
 if getFFlagUGCValidationAnimationPackSupportModule() then
-	function t_1.ANIMATION(p7, p8) --[[ line: 114 ]]
+	function t_1.ANIMATION(p7, p8)
 		-- upvalues: createAnimationSchemaModule (ref)
 		return createAnimationSchemaModule(p7, p8)
 	end
 end
-function t.generateAssetSchema(value, p9, p10) --[[ line: 119 ]]
+function t.generateAssetSchema(value, p9, p10)
 	-- upvalues: t_1 (ref)
 	return t_1[value](p9, p10)
 end
 
-local _ = function(p11) --[[ line: 127 | named "hasTopLevelR15Anim" ]]
+local _ = function(p11)
 	if not p11 then
 		return false
 	end
@@ -116,7 +116,7 @@ local _ = function(p11) --[[ line: 127 | named "hasTopLevelR15Anim" ]]
 	return false
 end
 
-function t.generateAnimationPackBundleSchema(p12) --[[ line: 140 ]]
+function t.generateAnimationPackBundleSchema(p12)
 	-- upvalues: getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), constantsModule (ref)
 	local t = { ClassName = "Model", _children = {} }
 	local var24 = getFFlagUGCValidationAnimationPackDisableModelStructureModule()

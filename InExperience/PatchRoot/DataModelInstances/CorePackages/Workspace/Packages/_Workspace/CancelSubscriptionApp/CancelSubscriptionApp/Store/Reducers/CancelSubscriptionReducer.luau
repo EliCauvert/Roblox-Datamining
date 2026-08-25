@@ -8,7 +8,7 @@ local cancelSubscriptionStartedModule = require(cancelSubscriptionApp.Store.Acti
 local cancelSubscriptionRequestedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionRequested)
 local _ = require(cancelSubscriptionApp.Store.Types)
 
-local function _() --[[ line: 22 | named "createInitialState" ]]
+local function _()
 	-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
 	return {
 		promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
@@ -18,13 +18,13 @@ end
 return roduxModule.createReducer({
 	promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
 }, {
-	[cancelSubscriptionEndedModule.name] = function(_, _) --[[ line: 29 ]]
+	[cancelSubscriptionEndedModule.name] = function(_, _)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
 		return {
 			promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
 		}
 	end,
-	[cancelSubscriptionSucceededModule.name] = function(p0, p1) --[[ line: 35 ]]
+	[cancelSubscriptionSucceededModule.name] = function(p0, p1)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
 		local cloned = table.clone(p0)
 		cloned.subscriptionId = p1.subscriptionId
@@ -32,7 +32,7 @@ return roduxModule.createReducer({
 		
 		return cloned
 	end,
-	[cancelSubscriptionFailedModule.name] = function(p2, p3) --[[ line: 44 ]]
+	[cancelSubscriptionFailedModule.name] = function(p2, p3)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
 		local cloned = table.clone(p2)
 		cloned.errorState = p3.errorState
@@ -41,7 +41,7 @@ return roduxModule.createReducer({
 		
 		return cloned
 	end,
-	[cancelSubscriptionRequestedModule.name] = function(p4, p5) --[[ line: 54 ]]
+	[cancelSubscriptionRequestedModule.name] = function(p4, p5)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
 		local cloned = table.clone(p4)
 		cloned.subscriptionId = p5.subscriptionId
@@ -49,7 +49,7 @@ return roduxModule.createReducer({
 		
 		return cloned
 	end,
-	[cancelSubscriptionStartedModule.name] = function(p6, p7) --[[ line: 63 ]]
+	[cancelSubscriptionStartedModule.name] = function(p6, p7)
 		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
 		local cloned = table.clone(p6)
 		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Request

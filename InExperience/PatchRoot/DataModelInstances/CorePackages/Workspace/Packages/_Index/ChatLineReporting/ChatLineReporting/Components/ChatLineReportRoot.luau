@@ -16,7 +16,7 @@ local foundationProvider = require(parent.Foundation).FoundationProvider
 local var7 = nil
 local var8 = nil
 
-local var9 = function() --[[ line: 28 ]]
+local var9 = function()
 	-- upvalues: var8 (write), roactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), var7 (write)
 	if var8 then
 		roactModule.unmount(var8)
@@ -28,7 +28,7 @@ local var9 = function() --[[ line: 28 ]]
 end
 
 return {
-	initialize = function(p0) --[[ line: 38 ]]
+	initialize = function(p0)
 		-- upvalues: reactModule (ref), layerCollectorProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationProvider (ref), styleProviderWithDefaultTheme (ref), chatLineReportStepHandlerModule (ref), var9 (ref), fFlagChatLineReportingFocusFixesEnabled (ref), var7 (write), reactFocusNavigationModule (ref), var8 (write), provider (ref), coreGuiService (ref)
 		local screenGui = reactModule.createElement("ScreenGui", {
 			IgnoreGuiInset = true,

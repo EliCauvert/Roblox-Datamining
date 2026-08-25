@@ -38,7 +38,7 @@ local t = {
 	[enumsModule.DisabledReasons.InsufficientVerificationLevelLow] = "subTextInsufficientVerificationLevelLow"
 }
 
-return function(p0) --[[ line: 61 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useScreenSize (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), enumsModule (ref), t (ref), textService (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), view (ref), loadableImage (ref), text (ref), skeleton (ref), verifiedBadgesModule (ref), useAbbreviatedNumberLocalization (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
 	local var11 = useTokens()
 	local var12 = p0.enableInputDelayed ~= nil or p0.enableInputDelayed
@@ -97,11 +97,11 @@ return function(p0) --[[ line: 61 ]]
 			ownerName = var16 or ""
 		}
 	})
-	reactModule.useEffect(function() --[[ line: 124 ]]
+	reactModule.useEffect(function()
 		-- upvalues: mouseIconOverrideService (copy)
 		mouseIconOverrideService.push("GroupJoinPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function() --[[ line: 127 ]]
+		return function()
 			-- upvalues: mouseIconOverrideService (copy)
 			mouseIconOverrideService.pop("GroupJoinPromptOverride")
 		end
@@ -110,7 +110,7 @@ return function(p0) --[[ line: 61 ]]
 	local var26, var27 = reactModule.useState(nil)
 	local var28 = reactModule.useRef(nil)
 	local var29, var30 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 138 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), var27 (ref), var26 (ref)
 		local var46 = nil
 		
@@ -120,14 +120,14 @@ return function(p0) --[[ line: 61 ]]
 			if current.AbsoluteSize.X > 0 then
 				var27(current.AbsoluteSize.X)
 			end
-			var46 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 145 ]]
+			var46 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: current (ref), var26 (copy), var27 (copy)
 				if current.AbsoluteSize.X > 0 and current.AbsoluteSize.X ~= var26 then
 					var27(current.AbsoluteSize.X)
 				end
 			end)
 		end
-		return function() --[[ line: 151 ]]
+		return function()
 			-- upvalues: var46 (write)
 			if var46 then
 				var46:Disconnect()
@@ -135,7 +135,7 @@ return function(p0) --[[ line: 61 ]]
 			end
 		end
 	end, { var26 })
-	reactModule.useEffect(function() --[[ line: 159 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref), var30 (ref), var29 (ref)
 		local var47 = nil
 		
@@ -145,14 +145,14 @@ return function(p0) --[[ line: 61 ]]
 			if current.AbsoluteSize.X > 0 then
 				var30(current.AbsoluteSize.X)
 			end
-			var47 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 166 ]]
+			var47 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: current (ref), var29 (copy), var30 (copy)
 				if current.AbsoluteSize.X > 0 and current.AbsoluteSize.X ~= var29 then
 					var30(current.AbsoluteSize.X)
 				end
 			end)
 		end
-		return function() --[[ line: 172 ]]
+		return function()
 			-- upvalues: var47 (write)
 			if var47 then
 				var47:Disconnect()
@@ -160,7 +160,7 @@ return function(p0) --[[ line: 61 ]]
 			end
 		end
 	end, { var29 })
-	local var31 = reactModule.useMemo(function() --[[ line: 180 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), var24 (ref), var19 (ref), var21 (ref), var22 (ref), enumsModule (copy), t (copy)
 		if var20 then
 			return var24.subTextPendingRequest
@@ -181,7 +181,7 @@ return function(p0) --[[ line: 61 ]]
 		var21,
 		var22
 	})
-	local var32 = reactModule.useMemo(function() --[[ line: 201 ]]
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), var23 (ref), var24 (ref), var19 (ref), var20 (ref), var21 (ref), var15 (ref)
 		if var14 then
 			return nil
@@ -204,11 +204,11 @@ return function(p0) --[[ line: 61 ]]
 	local font_1 = var11.Typography.BodyMedium.Font
 	local fontSize_1 = var11.Typography.BodyMedium.FontSize
 	local medium = var11.Padding.Medium
-	local var33 = reactModule.useMemo(function() --[[ line: 230 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: var32 (ref), var26 (ref), textService (copy), fontSize (ref), font (ref)
 		return if var32 and var32 ~= "" and (var26 and var26 > 0) then textService:GetTextSize(var32, fontSize, font, Vector2.new(var26, 1e999)) else nil
 	end, { var32, var26, font, fontSize })
-	local var34 = reactModule.useMemo(function() --[[ line: 244 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: var31 (ref), var29 (ref), medium (ref), textService (copy), fontSize_1 (ref), font_1 (ref)
 		if var31 and var29 and var29 > 0 then
 			local var51 = var29 - medium * 2
@@ -222,7 +222,7 @@ return function(p0) --[[ line: 61 ]]
 		fontSize_1,
 		medium
 	})
-	local var35 = reactModule.useMemo(function() --[[ line: 261 ]]
+	local var35 = reactModule.useMemo(function()
 		-- upvalues: var33 (ref), var34 (ref)
 		local t = {}
 		
@@ -235,7 +235,7 @@ return function(p0) --[[ line: 61 ]]
 		return t
 	end, { var33, var34 })
 	local var36 = if p0.groupId then getRbxthumbWithTypeSizeAndOptions(tostring(p0.groupId), constants.RbxthumbTypes.GroupIcon, constantsModule.THUMBNAIL_SIZE) else nil
-	local var37 = reactModule.useCallback(function() --[[ line: 281 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var36 (ref), reactModule (copy), view (copy), var11 (ref), var13 (ref), loadableImage (copy)
 		return if var36 then reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y align-x-center",
@@ -258,7 +258,7 @@ return function(p0) --[[ line: 61 ]]
 			})
 		}) else nil
 	end, { var36, var11, var13 })
-	local var38 = reactModule.useCallback(function() --[[ line: 310 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), view (copy), var25 (ref), var32 (ref), var14 (ref), var35 (ref), text (copy), var11 (ref), var26 (ref), skeleton (copy), fontSize (ref)
 		return reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y",
@@ -286,7 +286,7 @@ return function(p0) --[[ line: 61 ]]
 	end, {
 		var32, var14, var35, var26, var11, var25, fontSize
 	})
-	local var39 = reactModule.useCallback(function() --[[ line: 348 ]]
+	local var39 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), var14 (ref), reactModule (copy), view (copy), var11 (ref), verifiedBadgesModule (copy), var17 (ref), text (copy), var24 (ref), skeleton (copy), fontSize_1 (ref)
 		return if not (var16 ~= nil and var16 ~= "" and not var14) then if var14 then reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, {
 			UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var11.Padding.XSmall) }),
@@ -310,7 +310,7 @@ return function(p0) --[[ line: 61 ]]
 		var16, var17, var14, var11, var24, fontSize_1
 	})
 	local var40 = useAbbreviatedNumberLocalization(var18)
-	local var41 = reactModule.useCallback(function() --[[ line: 389 ]]
+	local var41 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), view (copy), var28 (ref), var11 (ref), var14 (ref), skeleton (copy), fontSize_1 (ref), var31 (ref), var35 (ref), text (copy), var29 (ref), var18 (ref), var40 (ref), var23 (ref), var24 (ref)
 		return reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y",
@@ -343,7 +343,7 @@ return function(p0) --[[ line: 61 ]]
 		fontSize_1
 	})
 	local var42, var43 = reactModule.useState(false)
-	local var44 = reactModule.useCallback(function() --[[ line: 450 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref), var43 (ref), p0 (ref)
 		if not var42 then
 			var43(true)
@@ -353,7 +353,7 @@ return function(p0) --[[ line: 61 ]]
 			end
 		end
 	end, { p0.onJoin })
-	local var45 = reactModule.useCallback(function() --[[ line: 459 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref), p0 (ref)
 		if not var42 and p0.onClose then
 			p0.onClose()
@@ -376,7 +376,7 @@ return function(p0) --[[ line: 61 ]]
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 2,
-			actions = reactModule.useMemo(function() --[[ line: 467 ]]
+			actions = reactModule.useMemo(function()
 				-- upvalues: var14 (ref), buttonVariant (copy), var19 (ref), var21 (ref), var20 (ref), var24 (ref), var45 (ref), var42 (ref), var23 (ref), var44 (ref), var12 (ref), constantsModule (copy)
 				return if var14 then {
 					{

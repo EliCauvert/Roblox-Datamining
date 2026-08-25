@@ -2,10 +2,10 @@
 local actions = expChat.Actions
 
 return require(expChat.Parent.Rodux).createReducer(false, {
-	[require(actions.ChatPrivacySettingsReceived).name] = function(_, p0) --[[ line: 10 ]]
+	[require(actions.ChatPrivacySettingsReceived).name] = function(_, p0)
 		return p0.canUserChat
 	end,
-	[require(actions.ChatPrivacySettingsFetchFailed).name] = function(_, _) --[[ line: 14 ]]
+	[require(actions.ChatPrivacySettingsFetchFailed).name] = function(_, _)
 		return false
 	end
 })

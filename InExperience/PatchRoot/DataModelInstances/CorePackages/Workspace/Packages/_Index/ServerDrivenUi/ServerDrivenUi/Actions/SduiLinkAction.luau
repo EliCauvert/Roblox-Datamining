@@ -12,12 +12,12 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiLinkActionSharedWebLink = sharedFlagsModule.FFlagSduiLinkActionSharedWebLink
 
-local function _() --[[ line: 25 | named "isWebViewSupported" ]]
+local function _()
 	-- upvalues: getAppFeaturePolicies (ref)
 	return getAppFeaturePolicies().getWebViewSupport()
 end
 
-return function(p0, _, p1) --[[ line: 29 ]]
+return function(p0, _, p1)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiLinkActionSharedWebLink (ref), openSduiWebLinkModule (ref), urlBuilder (ref), getAppFeaturePolicies (ref), appPage (ref), sduiCounterName (ref)
 	local var4 = if p0 then p0.actionParams else nil
 	
@@ -47,7 +47,7 @@ return function(p0, _, p1) --[[ line: 29 ]]
 		return
 	end
 	local var6
-	local ok, status = pcall(function() --[[ line: 62 ]]
+	local ok, status = pcall(function()
 		-- upvalues: urlBuilder (copy), url (ref)
 		return urlBuilder.fromString(if string.find(url, "/") == 1 then url:gsub("/", "www:", 1) else url)()
 	end)
@@ -63,9 +63,9 @@ return function(p0, _, p1) --[[ line: 29 ]]
 		}, p1.appPage)
 	end
 	local linkingProtocol = p1.dependencies.linkingProtocol
-	local ok_1, status_1 = pcall(function() --[[ line: 77 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: linkingProtocol (ref), var6 (write), getAppFeaturePolicies (copy), p1 (ref), fFlagSduiExperienceDetailsSupport (copy), var5 (ref), var4 (ref), appPage (copy), sduiCounterName (copy)
-		linkingProtocol:isURLRegistered(var6):andThen(function(p2) --[[ line: 78 ]]
+		linkingProtocol:isURLRegistered(var6):andThen(function(p2)
 			-- upvalues: linkingProtocol (copy), var6 (copy), getAppFeaturePolicies (copy), p1 (copy), fFlagSduiExperienceDetailsSupport (copy), var5 (copy), var4 (copy), appPage (copy), sduiCounterName (copy)
 			if p2 then
 				linkingProtocol:detectURL(var6)
@@ -83,7 +83,7 @@ return function(p0, _, p1) --[[ line: 29 ]]
 				local onWebviewClose = var4.onWebviewClose
 				
 				if onWebviewClose then
-					function var8.onClose() --[[ line: 89 ]]
+					function var8.onClose()
 						-- upvalues: onWebviewClose (ref)
 						onWebviewClose()
 					end

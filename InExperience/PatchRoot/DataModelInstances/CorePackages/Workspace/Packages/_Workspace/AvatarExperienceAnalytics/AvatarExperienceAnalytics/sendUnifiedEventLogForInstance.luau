@@ -12,7 +12,7 @@ local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlag
 local fFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 
-return function(p0, p1, p2) --[[ line: 27 ]]
+return function(p0, p1, p2)
 	-- upvalues: sessionService (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), fFlagAllowCustomUnifiedEventFilterModule (ref), AXUnifiedEventFilterModule (ref), sendUnifiedEventLogModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref)
 	if sessionService:GetSessionTag("level2a") ~= p0:GetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME) and not isRunningInStudio() then return end
 	p2 = p2 or {}

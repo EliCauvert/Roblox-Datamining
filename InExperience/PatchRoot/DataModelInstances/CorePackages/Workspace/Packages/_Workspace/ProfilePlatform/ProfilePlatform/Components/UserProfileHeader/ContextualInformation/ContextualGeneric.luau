@@ -8,7 +8,7 @@ local playerContext = UIBloxModule.App.Indicator.PlayerContext
 local textKeysModule = require(profilePlatform.Common.TextKeys)
 local enumsModule = require(profilePlatform.Common.Enums)
 
-return function(p0) --[[ line: 21 | named "ContextualInformation" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), enumsModule (ref), textKeysModule (ref), images (ref), reactModule (ref), playerContext (ref)
 	local contextualType = p0.contextualType
 	

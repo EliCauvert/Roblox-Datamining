@@ -25,7 +25,7 @@ local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPur
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 
-return function(p0) --[[ line: 56 | named "SubscriptionUpsellContainer" ]]
+return function(p0)
 	-- upvalues: useTransferStoreModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), transferOriginationModule (ref), surfaceContext (ref), sharedFlagsModule (ref), robloxSubscriptionPurchaseAppModule (ref), surfaceName (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), promptStateModule (ref), getCounterUserIdModule (ref), inExpAmpWizardController (ref), accessResponseEnum (ref), transferRetryOriginModule (ref), acceptTransferModule (ref), initiateTransferModule (ref), processTransferModule (ref), transferDirectionModule (ref), ampWizardTransferConstantsModule (ref)
 	local var20 = useTransferStoreModule()
 	local var21 = useLocalization(transferLocalizationKeysModule.Presets.SubscriptionUpsellContainer)
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 56 | named "SubscriptionUpsellContainer" ]]
 			}
 		} else nil
 	}
-	reactModule.useEffect(function() --[[ line: 99 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), triggerOnClose (ref), logCurrencyTransferCounterModule (copy), var20 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), promptStateModule (copy), getCounterUserIdModule (copy), direction (ref), inExpAmpWizardController (copy), accessResponseEnum (copy), transferRetryOrigin (ref), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), selectedAmount (ref), transferDirectionModule (copy), t (ref), ampWizardTransferConstantsModule (copy)
 		if not p0.ampFeatureCheck then
 			triggerOnClose()
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 56 | named "SubscriptionUpsellContainer" ]]
 		var20.setPreviousPromptState(var20.getPromptState(false))
 		var20.setPromptState(promptStateModule.Hidden)
 		local var26 = getCounterUserIdModule(var20, direction)
-		inExpAmpWizardController.OpenAmpWizardContainerInExp(p0.ampFeatureCheck, function(p1, _) --[[ line: 128 ]]
+		inExpAmpWizardController.OpenAmpWizardContainerInExp(p0.ampFeatureCheck, function(p1, _)
 			-- upvalues: accessResponseEnum (copy), logCurrencyTransferCounterModule (copy), var20 (copy), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), transferRetryOrigin (copy), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), selectedAmount (copy), direction (copy), transferDirectionModule (copy), triggerOnClose (copy)
 			if p1 == accessResponseEnum.Granted then
 				logCurrencyTransferCounterModule(var20, currencyTransferTelemetryModule.CurrencyTransferSubscriptionUpsellWizardResultGrantedCounter, { recourseSurface = "subscription" })

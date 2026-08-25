@@ -16,13 +16,13 @@ local sduiConditionKey = sduiConditionalPropTypesModule.SduiConditionKey
 local sduiResponsiveKey = sduiConditionalPropTypesModule.SduiResponsiveKey
 local t = {}
 
-return reactModule.memo(function(p0) --[[ line: 46 | named "SduiConditionalPropWrapper" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), sduiConditionKey (ref), sduiResponsiveKey (ref), getDisplayStore (ref), getInputModeStore (ref), checkResponsiveConditions (ref), t (ref), checkPresenceConditionsModule (ref), cryoModule (ref), sduiPresenceDetectorModule (ref), sduiResponsiveDetectorModule (ref)
 	local sduiContext = p0.sduiContext
 	sduiContext.dependencies.instrumentation:startTimerFlow("SduiConditionalPropWrapper")
 	local conditionalProps = p0.componentConfig.conditionalProps
 	local dataStore = sduiContext.dataStore
-	local var9 = reactModule.useMemo(function() --[[ line: 55 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: conditionalProps (ref), sduiConditionKey (copy), sduiResponsiveKey (copy)
 		local t = {}
 		
@@ -47,9 +47,9 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiConditionalPropW
 		return t
 	end, { conditionalProps })
 	local var10, var11 = reactModule.useState(nil)
-	local var12 = reactModule.useCallback(function(p1, p2) --[[ line: 81 ]]
+	local var12 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var11 (ref)
-		var11(function(p3) --[[ line: 82 ]]
+		var11(function(p3)
 			-- upvalues: p2 (ref), p1 (ref)
 			if p3 == nil and p2 == nil then
 				return p3
@@ -64,15 +64,15 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiConditionalPropW
 			return cloned
 		end)
 	end, {})
-	local var13, var14 = reactModule.useState(function() --[[ line: 99 ]]
+	local var13, var14 = reactModule.useState(function()
 		-- upvalues: var9 (ref), getDisplayStore (copy), getInputModeStore (copy), checkResponsiveConditions (copy), conditionalProps (ref), sduiContext (ref), t (copy)
 		return if var9.hasResponsiveProp then checkResponsiveConditions(conditionalProps, getDisplayStore(false).getViewportSize(false), getInputModeStore(false).getLastInputType(false), getInputModeStore(false).getPreferredInputType(false), getDisplayStore(false).getIsSpatial(false), sduiContext) else t
 	end)
-	local var15, var16 = reactModule.useState(function() --[[ line: 119 ]]
+	local var15, var16 = reactModule.useState(function()
 		-- upvalues: var9 (ref), checkPresenceConditionsModule (copy), conditionalProps (ref), dataStore (ref), t (copy)
 		return if var9.hasPresenceProp then checkPresenceConditionsModule(conditionalProps, dataStore.social.getInGameFriendsByGame(false)) else t
 	end)
-	local var17 = reactModule.useCallback(function(p4, p5) --[[ line: 128 ]]
+	local var17 = reactModule.useCallback(function(p4, p5)
 		-- upvalues: var13 (ref), var15 (ref), sduiResponsiveKey (copy), sduiConditionKey (copy), var10 (ref)
 		if var13[p4] or var15[p4] then
 			return false
@@ -85,7 +85,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiConditionalPropW
 		end
 		return true
 	end, { var13, var15, var10 })
-	local var18 = reactModule.useMemo(function() --[[ line: 146 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref), conditionalProps (ref), var17 (ref), cryoModule (copy)
 		local t = { setCustomConditionState = var12 }
 		
@@ -98,7 +98,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiConditionalPropW
 		end
 		return t
 	end, { var17, conditionalProps, var12 })
-	local var19 = reactModule.useMemo(function() --[[ line: 166 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: conditionalProps (ref), var9 (ref), reactModule (copy), sduiPresenceDetectorModule (copy), var16 (ref), sduiContext (ref), sduiResponsiveDetectorModule (copy), var14 (ref)
 		if not conditionalProps then
 			return {}
@@ -122,7 +122,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "SduiConditionalPropW
 		end
 		return t
 	end, { conditionalProps, sduiContext, var9 })
-	var19.WrappedComponent = reactModule.useMemo(function() --[[ line: 200 ]]
+	var19.WrappedComponent = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), p0 (ref), cryoModule (copy), var18 (ref)
 		return reactModule.createElement(p0.wrappedComponent, cryoModule.Dictionary.join(p0, { conditionalProps = var18 }))
 	end, { p0.wrappedComponent, var18, p0 })

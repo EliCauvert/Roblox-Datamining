@@ -16,7 +16,7 @@ local getFFlagContactsListEntryUpdatedTruncationFixModule = require(contactImpor
 local sendInviteLinkModule = require(script.Parent.sendInviteLink)
 local t = { smsProtocol = SMSProtocol.default }
 
-function ContactsListInviteEntry(p0) --[[ line: 42 ]]
+function ContactsListInviteEntry(p0)
 	-- upvalues: dash (ref), t (ref), useLocalization (ref), textKeysModule (ref), useStyle (ref), sendInviteLinkModule (ref), SMSProtocol (ref), react (ref), roact (ref), getFFlagContactsListEntryUpdatedTruncationFixModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var6 = dash.join(t, p0)
 	local var7 = useLocalization({ invite = textKeysModule.INVITE_BUTTON_TEXT })
@@ -69,7 +69,7 @@ function ContactsListInviteEntry(p0) --[[ line: 42 ]]
 				text = var7.invite,
 				isDisabled = var9.isLoading,
 				onActivated = var9.sendInvite,
-				[react.Change.AbsoluteSize] = function(p2) --[[ line: 108 ]]
+				[react.Change.AbsoluteSize] = function(p2)
 					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var11 (ref)
 					if getFFlagContactsListEntryUpdatedTruncationFixModule() then
 						var11(0 - (p2.AbsoluteSize.X + 10))
@@ -83,7 +83,7 @@ function ContactsListInviteEntry(p0) --[[ line: 42 ]]
 				isDisabled = true,
 				text = var7.invite,
 				onActivated = dash.noop,
-				[react.Change.AbsoluteSize] = function(p1) --[[ line: 122 ]]
+				[react.Change.AbsoluteSize] = function(p1)
 					-- upvalues: getFFlagContactsListEntryUpdatedTruncationFixModule (copy), var11 (ref)
 					if getFFlagContactsListEntryUpdatedTruncationFixModule() then
 						var11(0 - (p1.AbsoluteSize.X + 10))

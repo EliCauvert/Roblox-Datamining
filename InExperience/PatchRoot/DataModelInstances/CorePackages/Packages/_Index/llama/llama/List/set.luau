@@ -1,4 +1,4 @@
-﻿return function(value, p0, p1) --[[ line: 2 | named "set" ]]
+﻿return function(value, p0, p1)
 	local var0 = type(value)
 	assert(var0 == "table", "expected a table for first argument, got " .. var0)
 	local valueCount = #value

@@ -3,7 +3,7 @@ local cryo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchaseP
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 25 ]]
+function t.new(p0)
 	-- upvalues: cryo (ref), t (ref), userInputService (ref)
 	local t_1 = {
 		_inputConnection = nil,
@@ -17,7 +17,7 @@ function t.new(p0) --[[ line: 25 ]]
 		}, p0 or {})
 	}
 	setmetatable(t_1, t)
-	t_1._inputConnection = userInputService.InputBegan:Connect(function(p1) --[[ line: 50 ]]
+	t_1._inputConnection = userInputService.InputBegan:Connect(function(p1)
 		-- upvalues: t_1 (ref)
 		t_1:_onInput(p1)
 	end)
@@ -25,24 +25,24 @@ function t.new(p0) --[[ line: 25 ]]
 	return t_1
 end
 
-function t:_onInput(p2) --[[ line: 63 ]]
+function t:_onInput(p2)
 	local userInputType = p2.UserInputType
 	
 	if (self._options.buttonInput ~= nil and p2.KeyCode == self._options.buttonInput) or (if userInputType ~= Enum.UserInputType.MouseButton1 then userInputType == Enum.UserInputType.Touch else true) then
 		self._clickCount += 1
-		delay(self._options.clickTimeWindow, function() --[[ line: 73 ]]
+		delay(self._options.clickTimeWindow, function()
 			-- upvalues: self (ref)
 			self._clickCount -= 1
 		end)
 	end
 end
 
-function t:isClickValid() --[[ line: 83 ]]
+function t:isClickValid()
 	-- upvalues: userInputService (ref)
 	return if userInputService.MouseBehavior == Enum.MouseBehavior.LockCurrentPosition then false elseif tick() - self._startTime < self._options.initialDelay then false else self._clickCount / self._options.clickTimeWindow < self._options.clickSpeedThreshold
 end
 
-function t:destroy() --[[ line: 105 ]]
+function t:destroy()
 	self._inputConnection:Disconnect()
 end
 

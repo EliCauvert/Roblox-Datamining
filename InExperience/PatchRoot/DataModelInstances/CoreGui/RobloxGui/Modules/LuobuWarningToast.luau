@@ -4,12 +4,12 @@ local luobuWarningToastComponentModule = require(script.LuobuWarningToastCompone
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 11 ]]
+function t.new()
 	-- upvalues: t (ref), roactModule (ref), luobuWarningToastComponentModule (ref), coreGuiService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.element = roactModule.createElement(luobuWarningToastComponentModule)
 	tbl.root = roactModule.mount(tbl.element, coreGuiService, "LuobuWarningToast")
-	task.delay(10, function() --[[ line: 18 ]]
+	task.delay(10, function()
 		-- upvalues: roactModule (copy), tbl (ref)
 		roactModule.unmount(tbl.root)
 	end)

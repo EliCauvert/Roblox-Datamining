@@ -10,7 +10,7 @@ _ = "apps/UniversalApp/build/app/bootstrap.luau"
 local t = nil
 t = {
 	cache = {},
-	load = function(p0) --[[ line: 11 ]]
+	load = function(p0)
 		-- upvalues: t (write)
 		if not t.cache[p0] then
 			t.cache[p0] = { c = t[p0]() }
@@ -19,10 +19,10 @@ t = {
 	end
 }
 
-local function _(_) --[[ line: 21 | named "createModuleLoader" ]]
+local function _(_)
 	local t = {}
 	
-	return function(p1, p2) --[[ line: 23 | named "loadModule" ]]
+	return function(p1, p2)
 		-- upvalues: t (ref)
 		local var6 = t[p1]
 		
@@ -36,10 +36,10 @@ local function _(_) --[[ line: 21 | named "createModuleLoader" ]]
 	end
 end
 
-local _ = function(p3) --[[ line: 35 | named "createChunkLoader" ]]
+local _ = function(p3)
 	local t = {}
 	
-	local function resolveChunk(p4) --[[ line: 37 ]]
+	local function resolveChunk(p4)
 		-- upvalues: t (ref), p3 (ref), resolveChunk (ref)
 		local var10 = t[p4]
 		
@@ -51,7 +51,7 @@ local _ = function(p3) --[[ line: 35 | named "createChunkLoader" ]]
 		local t_1 = { resolveChunk = resolveChunk }
 		local t_2 = {}
 		
-		function t_1.loadModule(p5, p6) --[[ line: 23 ]]
+		function t_1.loadModule(p5, p6)
 			-- upvalues: t_2 (ref)
 			local var6 = t_2[p5]
 			
@@ -73,13 +73,13 @@ local _ = function(p3) --[[ line: 35 | named "createChunkLoader" ]]
 	return resolveChunk
 end
 
-local function requireChunk(p7) --[[ line: 53 ]]
+local function requireChunk(p7)
 	return require(`@game/CorePackages/LuauForgeChunks/{p7}`)
 end
 
 local t_1 = {}
 
-local function resolveChunk(p8) --[[ line: 37 ]]
+local function resolveChunk(p8)
 	-- upvalues: t_1 (ref), requireChunk (ref), resolveChunk (ref)
 	local var10 = t_1[p8]
 	
@@ -91,7 +91,7 @@ local function resolveChunk(p8) --[[ line: 37 ]]
 	local t_1 = { resolveChunk = resolveChunk }
 	local t_2 = {}
 	
-	function t_1.loadModule(p9, p10) --[[ line: 23 ]]
+	function t_1.loadModule(p9, p10)
 		-- upvalues: t_2 (ref)
 		local var6 = t_2[p9]
 		

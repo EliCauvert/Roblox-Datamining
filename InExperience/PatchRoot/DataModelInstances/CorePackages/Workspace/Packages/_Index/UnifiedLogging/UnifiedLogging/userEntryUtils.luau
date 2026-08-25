@@ -1,5 +1,5 @@
 ﻿return {
-	extractFieldsFromUserEntry = function(p0) --[[ line: 7 ]]
+	extractFieldsFromUserEntry = function(p0)
 		return if p0 then {
 			presence = if p0.presence then p0.presence.userPresenceType else "",
 			friendStatus = if p0.isFriend then "friend" else "notFriend",

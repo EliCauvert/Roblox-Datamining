@@ -15,7 +15,7 @@ local readString = nil
 local _ = nil
 local char2hex = nil
 
-local function uniCharCode(p0, p1, p2, p3) --[[ line: 88 ]]
+local function uniCharCode(p0, p1, p2, p3)
 	-- upvalues: char2hex (write)
 	local var12 = char2hex(p0)
 	local var13 = char2hex(p1)
@@ -25,50 +25,50 @@ local function uniCharCode(p0, p1, p2, p3) --[[ line: 88 ]]
 	return if var12 < 0 or var13 < 0 or (var14 < 0 or var15 < 0) then -1 else bit32.bor(bit32.lshift(var12, 12), bit32.lshift(var13, 8), bit32.lshift(var14, 4), var15)
 end
 
-char2hex = function(p4) --[[ line: 108 | named "char2hex" ]]
+char2hex = function(p4)
 	return if p4 >= 48 and p4 <= 57 then p4 - 48 elseif p4 >= 65 and p4 <= 70 then p4 - 55 elseif p4 >= 97 and p4 <= 102 then p4 - 87 else -1
 end
 
-local function readName(p5, p6, p7, p8, p9) --[[ line: 126 ]]
+local function readName(p5, p6, p7, p8, p9)
 	-- upvalues: string (ref), isNaN (ref), token (ref), tokenKind (ref)
 	local body = p5.body
 	local var16 = string.len(body)
 	local var17 = p6 + 1
 	local var18 = 0
 	
-	local _ = function() --[[ line: 132 ]]
+	local _ = function()
 		-- upvalues: var17 (write), var16 (ref)
 		return var17 ~= var16 + 1
 	end
 	
-	local _ = function() --[[ line: 135 ]]
+	local _ = function()
 		-- upvalues: var18 (write), string (copy), body (ref), var17 (write), isNaN (copy)
 		var18 = string.charCodeAt(body, var17)
 		
 		return not isNaN(var18)
 	end
 	
-	local _ = function() --[[ line: 139 ]]
+	local _ = function()
 		-- upvalues: var18 (write)
 		return var18 == 95
 	end
 	
-	local _ = function() --[[ line: 142 ]]
+	local _ = function()
 		-- upvalues: var18 (write)
 		return var18 >= 48 and var18 <= 57
 	end
 	
-	local _ = function() --[[ line: 145 ]]
+	local _ = function()
 		-- upvalues: var18 (write)
 		return var18 >= 65 and var18 <= 90
 	end
 	
-	local _ = function() --[[ line: 148 ]]
+	local _ = function()
 		-- upvalues: var18 (write)
 		return var18 >= 97 and var18 <= 122
 	end
 	
-	local _ = function() --[[ line: 151 ]]
+	local _ = function()
 		-- upvalues: var18 (write)
 		return var18 == 95 or ((var18 >= 48 and var18 <= 57) or ((var18 >= 65 and var18 <= 90) or (var18 >= 97 and var18 <= 122)))
 	end
@@ -81,7 +81,7 @@ local function readName(p5, p6, p7, p8, p9) --[[ line: 126 ]]
 	return token.new(tokenKind.NAME, p6, var17, p7, p8, p9, string.slice(body, p6, var17))
 end
 
-local function readComment(p10, p11, p12, p13, p14) --[[ line: 179 ]]
+local function readComment(p10, p11, p12, p13, p14)
 	-- upvalues: string (ref), isNaN (ref), token (ref), tokenKind (ref)
 	local body = p10.body
 	local _ = nil
@@ -93,12 +93,12 @@ local function readComment(p10, p11, p12, p13, p14) --[[ line: 179 ]]
 	return token.new(tokenKind.COMMENT, p11, var19, p12, p13, p14, string.slice(body, p11 + 1, var19))
 end
 
-function printCharCode(p15) --[[ line: 201 ]]
+function printCharCode(p15)
 	-- upvalues: isNaN (ref), tokenKind (ref), httpService (ref), toUnicodeStringModule (ref)
 	return if isNaN(p15) then tokenKind.EOF elseif p15 < 127 then httpService:JSONEncode(string.char(p15)) else toUnicodeStringModule(p15)
 end
 
-function readDigits(p16, p17, p18) --[[ line: 220 ]]
+function readDigits(p16, p17, p18)
 	-- upvalues: string (ref), syntaxError (ref)
 	local body = p16.body
 	local var21 = p17
@@ -116,15 +116,15 @@ function readDigits(p16, p17, p18) --[[ line: 220 ]]
 	return var21
 end
 
-function unexpectedCharacterMessage(p19) --[[ line: 245 ]]
+function unexpectedCharacterMessage(p19)
 	return if p19 < 32 and p19 ~= 9 and (p19 ~= 10 and p19 ~= 13) then "Cannot contain the invalid character " .. printCharCode(p19) .. "." elseif p19 == 39 then "Unexpected single quote character ('), did you mean to use a double quote (\")?" else "Cannot parse the unexpected character " .. printCharCode(p19) .. "."
 end
 
-function isNameStart(p20) --[[ line: 259 ]]
+function isNameStart(p20)
 	return p20 == 95 or ((p20 >= 65 and p20 <= 90) or (p20 >= 97 and p20 <= 122))
 end
 
-function readNumber(p21, p22, p23, p24, p25, p26) --[[ line: 274 ]]
+function readNumber(p21, p22, p23, p24, p25, p26)
 	-- upvalues: string (ref), syntaxError (ref), token (ref), tokenKind (ref)
 	local body = p21.body
 	local var23 = p23
@@ -170,7 +170,7 @@ function readNumber(p21, p22, p23, p24, p25, p26) --[[ line: 274 ]]
 	return token.new(if var25 then tokenKind.FLOAT else tokenKind.INT, p22, var24, p24, p25, p26, string.slice(body, p22, var24))
 end
 
-local function readToken(p27, p28) --[[ line: 359 ]]
+local function readToken(p27, p28)
 	-- upvalues: string (ref), token (ref), tokenKind (ref), readComment (ref), readBlockString (write), readString (write), readName (ref), syntaxError (ref)
 	local var27, line, var28
 	local source = p27.source
@@ -259,7 +259,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p29) --[[ line: 558 ]]
+function t.new(p29)
 	-- upvalues: token (ref), tokenKind (ref), t (ref)
 	local var29 = token.new(tokenKind.SOF, 1, 1, 0, 0, nil)
 	
@@ -272,14 +272,14 @@ function t.new(p29) --[[ line: 558 ]]
 	}, t)
 end
 
-function t:advance() --[[ line: 571 ]]
+function t:advance()
 	self.lastToken = self.token
 	self.token = self:lookahead()
 	
 	return self.token
 end
 
-function t:lookahead() --[[ line: 577 ]]
+function t:lookahead()
 	-- upvalues: tokenKind (ref), readToken (ref)
 	local token = self.token
 	
@@ -298,12 +298,12 @@ function t:lookahead() --[[ line: 577 ]]
 	return token
 end
 
-local function isPunctuatorTokenKind(p30) --[[ line: 600 ]]
+local function isPunctuatorTokenKind(p30)
 	-- upvalues: tokenKind (ref)
 	return if p30 ~= tokenKind.BANG then if p30 ~= tokenKind.DOLLAR then if p30 ~= tokenKind.AMP then if p30 ~= tokenKind.PAREN_L then if p30 ~= tokenKind.PAREN_R then if p30 ~= tokenKind.SPREAD then if p30 ~= tokenKind.COLON then if p30 ~= tokenKind.EQUALS then if p30 ~= tokenKind.AT then if p30 ~= tokenKind.BRACKET_L then if p30 ~= tokenKind.BRACKET_R then if p30 ~= tokenKind.BRACE_L then if p30 ~= tokenKind.PIPE then p30 == tokenKind.BRACE_R else true else true else true else true else true else true else true else true else true else true else true else true else true
 end
 
-readBlockString = function(p31, p32, p33, p34, p35, p36) --[[ line: 623 | named "readBlockString" ]]
+readBlockString = function(p31, p32, p33, p34, p35, p36)
 	-- upvalues: isNaN (ref), string (ref), token (ref), tokenKind (ref), dedentBlockStringValue (ref), syntaxError (ref)
 	local body = p31.body
 	local var31 = p32 + 3
@@ -340,7 +340,7 @@ readBlockString = function(p31, p32, p33, p34, p35, p36) --[[ line: 623 | named 
 	error(syntaxError(p31, var31, "Unterminated string."))
 end
 
-readString = function(p37, p38, p39, p40, p41) --[[ line: 697 | named "readString" ]]
+readString = function(p37, p38, p39, p40, p41)
 	-- upvalues: string (ref), isNaN (ref), token (ref), tokenKind (ref), syntaxError (ref), uniCharCode (write)
 	local body = p37.body
 	local charCount = utf8.len(body)

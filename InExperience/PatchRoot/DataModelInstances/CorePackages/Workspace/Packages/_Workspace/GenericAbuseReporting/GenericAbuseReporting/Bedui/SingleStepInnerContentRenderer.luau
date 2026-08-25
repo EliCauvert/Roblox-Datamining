@@ -14,11 +14,11 @@ local useAnalyticsContextModule = require(genericAbuseReporting.Bedui.Provider.u
 local webViewLinkModule = require(genericAbuseReporting.Bedui.Components.WebViewLink)
 local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return reactModule.memo(function(p0) --[[ line: 30 | named "SingleStepInnerContentRenderer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useAnalyticsContextModule (ref), reactModule (ref), componentType (ref), dropdownModule (ref), freeCommentModule (ref), paragraphModule (ref), webViewLinkModule (ref), fFlagAddThumbnailSelectorReport (ref), selectorModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), view (ref)
 	local var9 = useAnalyticsContextModule()
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y col gap-xxlarge" }, reactModule.useMemo(function() --[[ line: 33 ]]
+	return reactModule.createElement(view, { tag = "size-full-0 auto-y col gap-xxlarge" }, reactModule.useMemo(function()
 		-- upvalues: p0 (ref), componentType (copy), reactModule (copy), dropdownModule (copy), freeCommentModule (copy), paragraphModule (copy), webViewLinkModule (copy), fFlagAddThumbnailSelectorReport (copy), selectorModule (copy), var9 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy)
 		if p0.contentConfig == nil then
 			return {}

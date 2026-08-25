@@ -2,7 +2,7 @@
 local buttonTypes = require(socialTabsPage.Parent.UserList).Enums.ButtonTypes
 local _ = require(socialTabsPage.Common.Types)
 
-local var1 = function() --[[ line: 13 ]] end
+local var1 = function() end
 
 local t = {
 	JoinExperience = buttonTypes.Join,
@@ -12,7 +12,7 @@ local t = {
 	PendingFriendRequest = buttonTypes.Pending
 }
 
-return function(p0, p1, p2) --[[ line: 23 | named "mapProfileCTAToRowCTA" ]]
+return function(p0, p1, p2)
 	-- upvalues: t (ref), var1 (ref), buttonTypes (ref)
 	if not p0 or not p0.buttons then
 		return nil
@@ -25,7 +25,7 @@ return function(p0, p1, p2) --[[ line: 23 | named "mapProfileCTAToRowCTA" ]]
 			
 			return {
 				type = type,
-				onActivated = if var3 then function() --[[ line: 39 ]]
+				onActivated = if var3 then function()
 					-- upvalues: var3 (ref), p2 (ref)
 					var3(p2)
 				end else var1,

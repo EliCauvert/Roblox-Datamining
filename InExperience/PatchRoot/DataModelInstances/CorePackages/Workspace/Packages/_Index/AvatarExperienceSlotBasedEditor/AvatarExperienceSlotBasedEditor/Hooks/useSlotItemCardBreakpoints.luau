@@ -5,16 +5,16 @@ local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 
-local function _(p0, p1, p2) --[[ line: 23 | named "getItemWidth" ]]
+local function _(p0, p1, p2)
 	return math.floor((p0 - (p1 - 1) * p2) / p1)
 end
 
-local _ = function(p3, p4, p5) --[[ line: 29 | named "getItemCardWidthParameters" ]]
+local _ = function(p3, p4, p5)
 	-- upvalues: responsiveModule (ref)
 	return if p4 == responsiveModule.BreakpointConfig.Enum.Medium or p5 == responsiveModule.BreakpointConfig.Enum.Portrait then { visibleItemCount = 6, itemGap = p3 } else nil
 end
 
-return function(p6) --[[ line: 50 ]]
+return function(p6)
 	-- upvalues: useTokens (ref), responsiveModule (ref), iconSize (ref), fFlagAXMigrateBuilderIcons (ref)
 	local var2 = useTokens()
 	local var3 = responsiveModule.useResponsive()

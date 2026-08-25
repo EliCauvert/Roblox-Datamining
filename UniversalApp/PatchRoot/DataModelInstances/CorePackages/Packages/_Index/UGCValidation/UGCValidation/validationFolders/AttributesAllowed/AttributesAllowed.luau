@@ -21,7 +21,7 @@ end
 t.fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule
 t.expectedFailures = {}
 
-local function hasOnlyAllowedAttribute(p0, p1) --[[ line: 33 ]]
+local function hasOnlyAllowedAttribute(p0, p1)
 	-- upvalues: constantsModule (ref)
 	for i, v in p0 do
 		if not p1 or i ~= constantsModule.AlternateMeshIdAttributeName then
@@ -39,7 +39,7 @@ local function hasOnlyAllowedAttribute(p0, p1) --[[ line: 33 ]]
 	return true
 end
 
-local function _(p2, p3) --[[ line: 54 | named "reportInstanceWithDisallowedAttributes" ]]
+local function _(p2, p3)
 	-- upvalues: errorSourceStringsModule (ref)
 	p2:fail(errorSourceStringsModule.Keys.NoAttributes, {
 		RootInstanceName = p3.Name,
@@ -47,7 +47,7 @@ local function _(p2, p3) --[[ line: 54 | named "reportInstanceWithDisallowedAttr
 	})
 end
 
-local function walkInstanceTree(p4, p5, p6) --[[ line: 62 ]]
+local function walkInstanceTree(p4, p5, p6)
 	-- upvalues: hasOnlyAllowedAttribute (ref), errorSourceStringsModule (ref), constantsModule (ref)
 	if not hasOnlyAllowedAttribute(p5:GetAttributes(), p6) then
 		p4:fail(errorSourceStringsModule.Keys.NoAttributes, {
@@ -65,7 +65,7 @@ local function walkInstanceTree(p4, p5, p6) --[[ line: 62 ]]
 	end
 end
 
-function t.run(p7, p8) --[[ line: 81 ]]
+function t.run(p7, p8)
 	-- upvalues: validationEnumsModule (ref), walkInstanceTree (ref), getFFlagUGCValidateR15FixedAttributesModule (ref), getFFlagUGCValidateCurveAnimAttributesModule (ref)
 	local var9 = p8.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC
 	walkInstanceTree(p7, p8.rootInstance, var9)

@@ -1,7 +1,7 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
 local fIntAXGuiObjectIsObscuredPaddingModule = require(script:FindFirstAncestor("BulkPurchaseApp").Flags.FIntAXGuiObjectIsObscuredPadding)
 
-local function getGuiObjectIsObscuredAtPosition(p0, p1, p2) --[[ line: 5 ]]
+local function getGuiObjectIsObscuredAtPosition(p0, p1, p2)
 	-- upvalues: coreGuiService (ref)
 	for i, v in coreGuiService:GetGuiObjectsAtPosition(p1, p2) do
 		if (not v:IsA("Frame") or v.Active ~= false or v.BackgroundTransparency ~= 1) and not v:IsDescendantOf(p0) then
@@ -11,7 +11,7 @@ local function getGuiObjectIsObscuredAtPosition(p0, p1, p2) --[[ line: 5 ]]
 	return false
 end
 
-return function(p3) --[[ line: 21 | named "getGuiObjectIsObscured" ]]
+return function(p3)
 	-- upvalues: getGuiObjectIsObscuredAtPosition (ref), fIntAXGuiObjectIsObscuredPaddingModule (ref)
 	local absolutePosition = p3.AbsolutePosition
 	local absoluteSize = p3.AbsoluteSize

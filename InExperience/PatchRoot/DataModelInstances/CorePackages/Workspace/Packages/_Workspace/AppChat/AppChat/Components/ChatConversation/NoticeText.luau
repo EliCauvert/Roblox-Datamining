@@ -14,13 +14,13 @@ noticeText.defaultProps = {
 	TextWrapped = true,
 	TextXAlignment = Enum.TextXAlignment.Left,
 	TextYAlignment = Enum.TextYAlignment.Top,
-	[roactModule.Change.AbsoluteSize] = function() --[[ line: 22 ]] end,
+	[roactModule.Change.AbsoluteSize] = function() end,
 	margin = { top = 0, left = 0, right = 0, bottom = 0 },
 	maxWidth = 0,
 	width = UDim.new(1, 0)
 }
 
-function noticeText.render(p0) --[[ line: 34 ]]
+function noticeText.render(p0)
 	-- upvalues: textService (ref), roactModule (ref)
 	local maxValue = math.max(0, p0.props.maxWidth - (p0.props.margin.left + p0.props.margin.right))
 	local textTextSize = textService:GetTextSize(p0.props.Text, p0.props.TextSize, p0.props.Font, Vector2.new(maxValue, 1e999))

@@ -4,7 +4,7 @@ return {
 	mockFindContactFriends = "FIND_CONTACT_FRIENDS_SUCCEEDED_ACTION",
 	mockGetContactEntitiesByContactId = "GET_CONTACT_ENTITIES",
 	mockUploadContacts = "UPLOAD_CONTACTS",
-	mockFindContactFriendsAction = roduxModule.makeActionCreator("FIND_CONTACT_FRIENDS_SUCCEEDED_ACTION", function() --[[ line: 5 ]]
+	mockFindContactFriendsAction = roduxModule.makeActionCreator("FIND_CONTACT_FRIENDS_SUCCEEDED_ACTION", function()
 		return {
 			responseBody = {
 				userContactIds = {
@@ -16,7 +16,7 @@ return {
 			}
 		}
 	end),
-	mockGetContactEntitiesByContactIdAction = roduxModule.makeActionCreator("GET_CONTACT_ENTITIES", function() --[[ line: 19 ]]
+	mockGetContactEntitiesByContactIdAction = roduxModule.makeActionCreator("GET_CONTACT_ENTITIES", function()
 		return {
 			responseBody = {
 				userContactsEntities = {
@@ -44,7 +44,7 @@ return {
 			}
 		}
 	end),
-	mockUploadContactsAction = roduxModule.makeActionCreator("UPLOAD_CONTACTS", function(p0) --[[ line: 49 ]]
+	mockUploadContactsAction = roduxModule.makeActionCreator("UPLOAD_CONTACTS", function(p0)
 		return {
 			responseBody = if p0 then { matchedContactFields = p0 } else {
 				matchedContactFields = {

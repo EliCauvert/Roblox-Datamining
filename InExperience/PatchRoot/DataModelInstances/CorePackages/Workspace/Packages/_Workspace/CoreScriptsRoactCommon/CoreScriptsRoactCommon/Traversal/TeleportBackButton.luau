@@ -11,7 +11,7 @@ local iconSize = foundationModule.Enums.IconSize
 local useTeleportBackModule = require(coreScriptsRoactCommon.Hooks.useTeleportBack)
 local traversalTelemetryModule = require(script.Parent.TraversalTelemetry)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 23 | named "TeleportBackButton" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: teleportService (ref), useTeleportBackModule (ref), foundationModule (ref), reactModule (ref), view (ref), traversalTelemetryModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local var6, var7 = teleportService:GetThirdPartyTeleportInfo(false)
 	local var8 = useTeleportBackModule(var7)
@@ -20,7 +20,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 23 | 
 	
 	return reactModule.createElement(view, {
 		tag = "padding-left-small padding-right-medium align-x-center align-y-center auto-x bg-over-media-0 radius-circle row size-0-1100",
-		onActivated = function() --[[ line: 32 ]]
+		onActivated = function()
 			-- upvalues: traversalTelemetryModule (copy), var6 (ref), var8 (ref)
 			traversalTelemetryModule.sendBackButtonActionEvent({
 				integration_id = "back_button",

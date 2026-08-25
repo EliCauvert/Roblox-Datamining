@@ -13,21 +13,21 @@ local useChannelTabUnreadWriterModule = require(expChat.useChannelTabUnreadWrite
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-local function selectIsChatWindowVisible(p0) --[[ line: 39 ]]
+local function selectIsChatWindowVisible(p0)
 	return p0.ChatVisibility.isChatWindowEnabled.value
 end
 
-local function onActiveConversationMessageReceived() --[[ line: 45 ]]
+local function onActiveConversationMessageReceived()
 	-- upvalues: getTransparencyStoreModule (ref)
 	getTransparencyStoreModule(false).resetAllTransparency()
 end
 
-local function _() --[[ line: 49 | named "useSelectedTabName" ]]
+local function _()
 	-- upvalues: useSelector (ref), selectSelectedTabNameModule (ref), fFlagExpChatUseChannelTabsStore (ref), signalsReactModule (ref), getChannelTabsStoreModule (ref)
 	return if fFlagExpChatUseChannelTabsStore then signalsReactModule.useSignalState(getChannelTabsStoreModule(false).getSelectedTabName) else useSelector(selectSelectedTabNameModule)
 end
 
-return function() --[[ line: 58 | named "FriendsChatEventReceiverConnector" ]]
+return function()
 	-- upvalues: useSelector (ref), selectSelectedTabNameModule (ref), fFlagExpChatUseChannelTabsStore (ref), signalsReactModule (ref), getChannelTabsStoreModule (ref), selectIsChatWindowVisible (ref), useChannelTabUnreadWriterModule (ref), friendsChatTabNameModule (ref), reactModule (ref), friendsChatEventReceiverModule (ref), onActiveConversationMessageReceived (ref)
 	return reactModule.createElement(friendsChatEventReceiverModule, {
 		setTabUnread = useChannelTabUnreadWriterModule(friendsChatTabNameModule),

@@ -20,7 +20,7 @@ local cellPadding = constantsModule.ScriptProfilerFormatting.CellPadding
 local valuePadding = constantsModule.ScriptProfilerFormatting.ValuePadding
 local profilerFunctionViewEntry = roactModule.PureComponent:extend("ProfilerFunctionViewEntry")
 
-local function BorderedCellLabel(p0) --[[ line: 42 ]]
+local function BorderedCellLabel(p0)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
 		Label = roactModule.createElement(cellLabelModule, { text = p0.text, size = p0.size, pos = p0.pos }),
@@ -34,22 +34,22 @@ local function BorderedCellLabel(p0) --[[ line: 42 ]]
 	})
 end
 
-function profilerFunctionViewEntry.init(p1) --[[ line: 59 ]]
+function profilerFunctionViewEntry.init(p1)
 	p1.state = {
 		showTooltip = false,
 		expanded = p1.props.depth == 0,
 		tooltipPos = UDim2.fromOffset(0, 0)
 	}
 	
-	function p1.onButtonPress() --[[ line: 66 ]]
+	function p1.onButtonPress()
 		-- upvalues: p1 (ref)
-		p1:setState(function(_) --[[ line: 67 ]]
+		p1:setState(function(_)
 			-- upvalues: p1 (copy)
 			return { expanded = not p1.state.expanded }
 		end)
 	end
 	
-	function p1.onMouseEnter(_, p2, p3) --[[ line: 74 ]]
+	function p1.onMouseEnter(_, p2, p3)
 		-- upvalues: p1 (ref)
 		p1:setState({
 			showTooltip = true,
@@ -57,7 +57,7 @@ function profilerFunctionViewEntry.init(p1) --[[ line: 59 ]]
 		})
 	end
 	
-	function p1.onMouseMove(_, p4, p5) --[[ line: 81 ]]
+	function p1.onMouseMove(_, p4, p5)
 		-- upvalues: p1 (ref)
 		p1:setState({
 			showTooltip = true,
@@ -65,13 +65,13 @@ function profilerFunctionViewEntry.init(p1) --[[ line: 59 ]]
 		})
 	end
 	
-	function p1.onMouseLeave() --[[ line: 88 ]]
+	function p1.onMouseLeave()
 		-- upvalues: p1 (ref)
 		p1:setState({ showTooltip = false })
 	end
 end
 
-function profilerFunctionViewEntry.renderValues(_, p6) --[[ line: 95 ]]
+function profilerFunctionViewEntry.renderValues(_, p6)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), entryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, entryFrameHeight)
@@ -87,7 +87,7 @@ function profilerFunctionViewEntry.renderValues(_, p6) --[[ line: 95 ]]
 	return t
 end
 
-function profilerFunctionViewEntry.render(p7) --[[ line: 110 ]]
+function profilerFunctionViewEntry.render(p7)
 	-- upvalues: entryFrameHeight (ref), getNativeFlag (ref), getPluginFlag (ref), profilerUtilModule (ref), valueCellWidth (ref), roactModule (ref), tooltipModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
 	local props = p7.props
 	local size = props.size or UDim2.new(1, 0, 0, entryFrameHeight)

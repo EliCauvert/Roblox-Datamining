@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 16 | named "is" ]]
+﻿return function(p0, p1)
 	local var0
 	if p0 == p1 then
 		var0 = true

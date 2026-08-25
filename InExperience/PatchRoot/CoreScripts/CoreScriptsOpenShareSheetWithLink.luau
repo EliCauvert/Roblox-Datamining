@@ -19,7 +19,7 @@ if differentiateSharingBaseOnPlatform then
 		var5 = eligibleForCapturesFeature
 	end
 end
-socialService.OpenShareSheetWithLink:Connect(function(p0) --[[ line: 21 ]]
+socialService.OpenShareSheetWithLink:Connect(function(p0)
 	-- upvalues: default (ref), differentiateSharingBaseOnPlatform (ref), var5 (write), var2 (ref)
 	if not default then return end
 	assert(default ~= nil, "ExternalContentSharingProtocol is required")

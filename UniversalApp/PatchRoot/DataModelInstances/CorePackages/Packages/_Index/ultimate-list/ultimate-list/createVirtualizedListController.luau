@@ -7,7 +7,7 @@ local binarySearchIndexRangeInViewModule = require(script.binarySearchIndexRange
 local exhaustiveMatchModule = require(var0.Util.exhaustiveMatch)
 local var5 = require(var0.Util.createDebugLogger)("createVirtualizedListController")
 
-return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListController" ]]
+return function(p0, p1, p2)
 	-- upvalues: dimensionsMethodsModule (ref), exhaustiveMatchModule (ref), var5 (ref), binarySearchIndexRangeInViewModule (ref), dataSourceMethodsModule (ref)
 	local t = {
 		scrollSizeAxis = 0,
@@ -22,12 +22,12 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 	local var8 = 0
 	local vector2 = Vector2.new()
 	
-	local function _(p3) --[[ line: 62 | named "getIndexRangeInViewForSize" ]]
+	local function _(p3)
 		-- upvalues: var7 (write), var8 (write)
 		return Vector3.new(var7 // p3 + 1, (var7 + var8) // p3 + 1)
 	end
 	
-	local function getIndexRangeInViewForUDim2(p4) --[[ line: 69 ]]
+	local function getIndexRangeInViewForUDim2(p4)
 		-- upvalues: dimensionsMethodsModule (copy), vector2 (write), p2 (ref), exhaustiveMatchModule (copy), var7 (write), var8 (write), var5 (copy)
 		local amountPerNonDominantInGrid = dimensionsMethodsModule.getAmountPerNonDominantInGrid(p4, vector2, p2)
 		local var16 = if p2 == "x" then p4.X.Offset elseif p2 == "y" then p4.Y.Offset else exhaustiveMatchModule(p2)
@@ -38,7 +38,7 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 		return Vector3.new(var17, var18)
 	end
 	
-	local function getIndexRangeInView() --[[ line: 97 ]]
+	local function getIndexRangeInView()
 		-- upvalues: p1 (write), getIndexRangeInViewForUDim2 (ref), var7 (write), var8 (write), binarySearchIndexRangeInViewModule (copy), p0 (write), p2 (ref), exhaustiveMatchModule (copy)
 		if p1.type == "consistentUDim2" then
 			return getIndexRangeInViewForUDim2(p1.udim2)
@@ -66,14 +66,14 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 	
 	local t_1 = {}
 	
-	local _ = function() --[[ line: 127 | named "callUpdateCallbacks" ]]
+	local _ = function()
 		-- upvalues: t_1 (ref)
 		for i in t_1 do
 			i()
 		end
 	end
 	
-	local function update() --[[ line: 133 ]]
+	local function update()
 		-- upvalues: t (write), var7 (write), var8 (write), vector2 (write), p0 (write), p1 (write), getIndexRangeInView (ref), dataSourceMethodsModule (copy), var5 (copy), t_1 (ref), dimensionsMethodsModule (copy), p2 (ref), exhaustiveMatchModule (copy)
 		if t.offsetBoundaries ~= nil and t.offsetBoundaries.X <= var7 and (var8 + var7 <= t.offsetBoundaries.Y and t.windowSize == vector2) and (t.dataSource == p0 and t.lastDimensions == p1) then return end
 		local var20 = getIndexRangeInView()
@@ -118,12 +118,12 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 	local var14 = if p0.type == "mutableSource" then p0.methods.bindToChanged(update) else nil
 	
 	return {
-		setScrollAxis = function(value) --[[ line: 208 ]]
+		setScrollAxis = function(value)
 			-- upvalues: var7 (write), update (ref)
 			var7 = value
 			update()
 		end,
-		setDataSource = function(value) --[[ line: 213 ]]
+		setDataSource = function(value)
 			-- upvalues: p0 (write), dataSourceMethodsModule (copy), update (ref)
 			assert(p0.type == value.type, "Data source type changed, you must keep it the same")
 			
@@ -133,7 +133,7 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 			p0 = value
 			update()
 		end,
-		setDimensions = function(value) --[[ line: 224 ]]
+		setDimensions = function(value)
 			-- upvalues: dimensionsMethodsModule (copy), p1 (write), update (ref)
 			if dimensionsMethodsModule.equals(p1, value) then
 				return
@@ -141,7 +141,7 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 			p1 = value
 			update()
 		end,
-		setWindowSize = function(value) --[[ line: 233 ]]
+		setWindowSize = function(value)
 			-- upvalues: vector2 (write), var8 (write), dimensionsMethodsModule (copy), p2 (ref), update (ref)
 			if vector2 == value then
 				return
@@ -150,32 +150,32 @@ return function(p0, p1, p2) --[[ line: 42 | named "createVirtualizedListControll
 			var8 = dimensionsMethodsModule.getDominantAxis(value, p2)
 			update()
 		end,
-		getWindowSize = function() --[[ line: 244 ]]
+		getWindowSize = function()
 			-- upvalues: vector2 (write)
 			return vector2
 		end,
-		get = function() --[[ line: 248 ]]
+		get = function()
 			-- upvalues: t (write)
 			return t.cachedLastResult
 		end,
-		getCanvasSize = function() --[[ line: 252 ]]
+		getCanvasSize = function()
 			-- upvalues: t (write)
 			return t.canvasSize
 		end,
-		getRange = function() --[[ line: 256 ]]
+		getRange = function()
 			-- upvalues: t (write)
 			return t.range
 		end,
-		bindToUpdate = function(p5) --[[ line: 260 ]]
+		bindToUpdate = function(p5)
 			-- upvalues: t_1 (ref)
 			t_1[p5] = true
 			
-			return function() --[[ line: 262 ]]
+			return function()
 				-- upvalues: t_1 (copy), p5 (ref)
 				t_1[p5] = nil
 			end
 		end,
-		destroy = function() --[[ line: 271 ]]
+		destroy = function()
 			-- upvalues: var14 (ref)
 			if var14 ~= nil then
 				var14()

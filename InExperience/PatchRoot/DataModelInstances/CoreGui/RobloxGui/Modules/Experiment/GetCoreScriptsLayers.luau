@@ -25,7 +25,7 @@ local fStringReportMenuIXPLayer = require(corePackagesService.Workspace.Packages
 local fStringReportingIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReportingIXPLayer
 local fStringEARReportMenuIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringEARReportMenuIXPLayer
 
-return function() --[[ line: 42 ]]
+return function()
 	-- upvalues: getFStringDesktopToastNotificationLayer (ref), fStringReportMenuIXPLayer (ref), fStringReportingIXPLayer (ref), fStringEARReportMenuIXPLayer (ref), fStringSocialCaptureIXPLayer (ref), fStringSocialCaptureTakenIXPLayer (ref), getFStringLuaAppExperienceMenuLayer (ref), getFStringLuaAppConsoleExperienceMenuLayerModule (ref), getFStringLargerRobuxUpsellIxpLayer (ref), getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), getFFlagVoiceUserAgencyEnableIXPModule (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), getFStringGameInviteMenuLayer (ref), getFFlagUXForCameraPerformanceIXPEnabledModule (ref), getFStringUXForCameraPerformanceIXPLayerNameModule (ref), getFStringVoiceExposureIXPLayerNameModule (ref), getFStringAndroidPhoneVerificationLayer (ref), getFStringIOSPhoneVerificationLayer (ref), getFFlagEnableAppChatInExperience (ref), getFStringAppChatInExperienceIXPLayer (ref)
 	local list = {
 		"AbuseReports", getFStringDesktopToastNotificationLayer(),

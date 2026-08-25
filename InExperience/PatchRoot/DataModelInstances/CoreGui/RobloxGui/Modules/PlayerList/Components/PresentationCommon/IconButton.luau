@@ -18,15 +18,15 @@ iconButton.validateProps = tModule.strictInterface({
 	onActivated = tModule.optional(tModule.callback)
 })
 
-function iconButton.init(p0) --[[ line: 32 ]]
+function iconButton.init(p0)
 	p0.state = { isHovered = false, isPressed = false }
 end
 
-function iconButton.render(p1) --[[ line: 39 ]]
+function iconButton.render(p1)
 	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), iconSize (ref), imageSetLabel (ref)
-	return withLayoutValues(function(p2) --[[ line: 40 ]]
+	return withLayoutValues(function(p2)
 		-- upvalues: withFoundationOrUIBloxStyle (copy), p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), iconSize (copy), imageSetLabel (copy)
-		return withFoundationOrUIBloxStyle(function(p3) --[[ line: 41 ]]
+		return withFoundationOrUIBloxStyle(function(p3)
 			return {
 				Theme = {
 					BackgroundOnHover = {
@@ -43,7 +43,7 @@ function iconButton.render(p1) --[[ line: 39 ]]
 					}
 				}
 			}
-		end, function(p4) --[[ line: 58 ]]
+		end, function(p4)
 			-- upvalues: p1 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), p2 (ref), foundationModule (copy), iconSize (copy), imageSetLabel (copy)
 			local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
 			
@@ -107,19 +107,19 @@ function iconButton.render(p1) --[[ line: 39 ]]
 				Position = p1.props.position,
 				Size = p1.props.size,
 				[roactModule.Event.Activated] = p1.props.onActivated,
-				[roactModule.Event.MouseButton1Down] = function() --[[ line: 130 ]]
+				[roactModule.Event.MouseButton1Down] = function()
 					-- upvalues: p1 (copy)
 					p1:setState({ isPressed = true })
 				end,
-				[roactModule.Event.MouseButton1Up] = function() --[[ line: 135 ]]
+				[roactModule.Event.MouseButton1Up] = function()
 					-- upvalues: p1 (copy)
 					p1:setState({ isPressed = false })
 				end,
-				[roactModule.Event.MouseEnter] = function() --[[ line: 141 ]]
+				[roactModule.Event.MouseEnter] = function()
 					-- upvalues: p1 (copy)
 					p1:setState({ isHovered = true })
 				end,
-				[roactModule.Event.MouseLeave] = function() --[[ line: 147 ]]
+				[roactModule.Event.MouseLeave] = function()
 					-- upvalues: p1 (copy)
 					p1:setState({ isHovered = false, isPressed = false })
 				end

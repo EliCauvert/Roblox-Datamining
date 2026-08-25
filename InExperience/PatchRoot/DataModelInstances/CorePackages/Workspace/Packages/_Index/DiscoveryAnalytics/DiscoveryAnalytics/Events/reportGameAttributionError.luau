@@ -23,7 +23,7 @@ local t = {
 	lastUpdated = { 25, 7, 30 }
 }
 
-return function(p0, p1) --[[ line: 36 | named "reportGameAttributionError" ]]
+return function(p0, p1)
 	-- upvalues: var4 (ref), reportWarningModule (ref), loggingProtocolModule (ref), t (ref)
 	local var6, var7 = var4(p1)
 	

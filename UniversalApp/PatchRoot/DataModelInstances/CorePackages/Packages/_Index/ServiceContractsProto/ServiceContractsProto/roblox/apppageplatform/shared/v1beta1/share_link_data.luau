@@ -5,14 +5,14 @@ local propTypesModule = require(script.Parent.prop_types)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 274 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		kind = if p0 == nil or p0.kind == nil then nil else p0.kind
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 280 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var14 = 0
@@ -30,7 +30,7 @@ function t_1:encode() --[[ line: 280 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 297 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var19 = t_1.new()
 	local var20 = 0
@@ -80,7 +80,7 @@ function t_1.decode(p1) --[[ line: 297 ]]
 	return var19
 end
 
-function t_1:jsonEncode() --[[ line: 343 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -89,7 +89,7 @@ function t_1:jsonEncode() --[[ line: 343 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 355 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var37 = t_1.new()
 	
@@ -111,7 +111,7 @@ typeRegistryModule.default:register(t.GenericShareLinkData)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 383 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		url = if p2 == nil or p2.url == nil then nil else p2.url,
@@ -119,7 +119,7 @@ function t_2.new(p2) --[[ line: 383 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 397 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var39 = 0
@@ -144,7 +144,7 @@ function t_2:encode() --[[ line: 397 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 420 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), propTypesModule (ref)
 	local var47 = t_2.new()
 	local var48 = 0
@@ -196,7 +196,7 @@ function t_2.decode(p3) --[[ line: 420 ]]
 	return var47
 end
 
-function t_2:jsonEncode() --[[ line: 470 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.url ~= nil then
@@ -208,7 +208,7 @@ function t_2:jsonEncode() --[[ line: 470 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 486 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), propTypesModule (ref)
 	local var67 = t_2.new()
 	
@@ -233,14 +233,14 @@ typeRegistryModule.default:register(t.GenericShareLinkData_GenericShareLinkLiter
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 523 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		kind = if p4 == nil or p4.kind == nil then nil else p4.kind
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 529 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var69 = 0
@@ -258,7 +258,7 @@ function t_3:encode() --[[ line: 529 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 546 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var74 = t_3.new()
 	local var75 = 0
@@ -308,7 +308,7 @@ function t_3.decode(p5) --[[ line: 546 ]]
 	return var74
 end
 
-function t_3:jsonEncode() --[[ line: 592 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -317,7 +317,7 @@ function t_3:jsonEncode() --[[ line: 592 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 604 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), t (ref)
 	local var92 = t_3.new()
 	
@@ -339,7 +339,7 @@ typeRegistryModule.default:register(t.ShareLinkFetchData)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 631 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		share_url_context = if p6 == nil or p6.share_url_context == nil then nil else p6.share_url_context,
@@ -348,7 +348,7 @@ function t_4.new(p6) --[[ line: 631 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 641 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var94 = 0
@@ -380,7 +380,7 @@ function t_4:encode() --[[ line: 641 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 670 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var105 = t_4.new()
 	local var106 = 0
@@ -437,7 +437,7 @@ function t_4.decode(p7) --[[ line: 670 ]]
 	return var105
 end
 
-function t_4:jsonEncode() --[[ line: 725 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.share_url_context ~= nil then
@@ -452,7 +452,7 @@ function t_4:jsonEncode() --[[ line: 725 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 745 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), propTypesModule (ref), t (ref)
 	local var127 = t_4.new()
 	
@@ -486,14 +486,14 @@ typeRegistryModule.default:register(t.ShareLinkFetchData_ShareLinkFetchLiteralDa
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 793 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		oneof_prop = if p8 == nil or p8.oneof_prop == nil then nil else p8.oneof_prop
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 799 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var129 = 0
@@ -519,7 +519,7 @@ function t_5:encode() --[[ line: 799 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 820 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), t (ref)
 	local var137 = t_5.new()
 	local var138 = 0
@@ -577,7 +577,7 @@ function t_5.decode(p9) --[[ line: 820 ]]
 	return var137
 end
 
-function t_5:jsonEncode() --[[ line: 872 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.oneof_prop ~= nil then
@@ -592,7 +592,7 @@ function t_5:jsonEncode() --[[ line: 872 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 886 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), t (ref)
 	local var157 = t_5.new()
 	
@@ -632,14 +632,14 @@ typeRegistryModule.default:register(t.ShareLinkPayload)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 934 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		kind = if p10 == nil or p10.kind == nil then nil else p10.kind
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 942 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var159 = 0
@@ -657,7 +657,7 @@ function t_6:encode() --[[ line: 942 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 959 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
 	local var164 = t_6.new()
 	local var165 = 0
@@ -707,7 +707,7 @@ function t_6.decode(p11) --[[ line: 959 ]]
 	return var164
 end
 
-function t_6:jsonEncode() --[[ line: 1005 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -716,7 +716,7 @@ function t_6:jsonEncode() --[[ line: 1005 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1017 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), t (ref)
 	local var182 = t_6.new()
 	
@@ -738,14 +738,14 @@ typeRegistryModule.default:register(t.ExperienceShareLinkPayload)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 1045 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		universe_id = if p12 == nil or p12.universe_id == nil then nil else p12.universe_id
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 1056 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var184 = 0
@@ -763,7 +763,7 @@ function t_7:encode() --[[ line: 1056 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 1073 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref), propTypesModule (ref)
 	local var189 = t_7.new()
 	local var190 = 0
@@ -810,7 +810,7 @@ function t_7.decode(p13) --[[ line: 1073 ]]
 	return var189
 end
 
-function t_7:jsonEncode() --[[ line: 1118 ]]
+function t_7:jsonEncode()
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -819,7 +819,7 @@ function t_7:jsonEncode() --[[ line: 1118 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 1130 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref), propTypesModule (ref)
 	local var207 = t_7.new()
 	
@@ -841,14 +841,14 @@ typeRegistryModule.default:register(t.ExperienceShareLinkPayload_ExperienceShare
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 1162 ]]
+function t_8.new(p14)
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		kind = if p14 == nil or p14.kind == nil then nil else p14.kind
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 1168 ]]
+function t_8:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var209 = 0
@@ -866,7 +866,7 @@ function t_8:encode() --[[ line: 1168 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 1185 ]]
+function t_8.decode(p15)
 	-- upvalues: t_8 (ref), protoModule (ref), t (ref)
 	local var214 = t_8.new()
 	local var215 = 0
@@ -916,7 +916,7 @@ function t_8.decode(p15) --[[ line: 1185 ]]
 	return var214
 end
 
-function t_8:jsonEncode() --[[ line: 1231 ]]
+function t_8:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil and self.kind.type == "literal" then
@@ -925,7 +925,7 @@ function t_8:jsonEncode() --[[ line: 1231 ]]
 	return t
 end
 
-function t_8:jsonDecode() --[[ line: 1243 ]]
+function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), t (ref)
 	local var232 = t_8.new()
 	
@@ -947,14 +947,14 @@ typeRegistryModule.default:register(t.EventShareLinkPayload)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 1271 ]]
+function t_9.new(p16)
 	-- upvalues: t_9 (ref)
 	return setmetatable({
 		event_id = if p16 == nil or p16.event_id == nil then nil else p16.event_id
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 1282 ]]
+function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var234 = 0
@@ -972,7 +972,7 @@ function t_9:encode() --[[ line: 1282 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 1299 ]]
+function t_9.decode(p17)
 	-- upvalues: t_9 (ref), protoModule (ref), propTypesModule (ref)
 	local var239 = t_9.new()
 	local var240 = 0
@@ -1019,7 +1019,7 @@ function t_9.decode(p17) --[[ line: 1299 ]]
 	return var239
 end
 
-function t_9:jsonEncode() --[[ line: 1344 ]]
+function t_9:jsonEncode()
 	local t = {}
 	
 	if self.event_id ~= nil then
@@ -1028,7 +1028,7 @@ function t_9:jsonEncode() --[[ line: 1344 ]]
 	return t
 end
 
-function t_9:jsonDecode() --[[ line: 1356 ]]
+function t_9:jsonDecode()
 	-- upvalues: t_9 (ref), propTypesModule (ref)
 	local var257 = t_9.new()
 	

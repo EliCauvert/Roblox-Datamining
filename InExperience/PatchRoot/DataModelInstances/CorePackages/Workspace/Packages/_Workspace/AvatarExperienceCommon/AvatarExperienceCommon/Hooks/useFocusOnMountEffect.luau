@@ -6,13 +6,13 @@ local responsiveModule = require(parent.Responsive)
 local useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject
 local inputModeStore = responsiveModule.GetInputModeStore(false)
 
-return function(p0, p1) --[[ line: 20 | named "useFocusOnMountEffect" ]]
+return function(p0, p1)
 	-- upvalues: useFocusGuiObject (ref), responsiveModule (ref), reactModule (ref), inputModeStore (ref), userInputService (ref), guiService (ref)
 	local var5 = useFocusGuiObject()
 	local var6 = responsiveModule.useIsSpatial()
-	reactModule.useEffect(function() --[[ line: 24 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), inputModeStore (copy), responsiveModule (copy), userInputService (copy), p0 (ref), var5 (ref), var6 (ref), guiService (copy)
-		local delayedThread = task.delay(p1 or 0, function() --[[ line: 26 ]]
+		local delayedThread = task.delay(p1 or 0, function()
 			-- upvalues: inputModeStore (copy), responsiveModule (copy), userInputService (copy), p0 (copy), var5 (copy), var6 (copy), guiService (copy)
 			if p0.current and (userInputService.PreferredInput == Enum.PreferredInput.Gamepad or inputModeStore.getLastInputType(false) == responsiveModule.Input.Directional) and (var5 and not var6) then
 				local selectedCoreObject = guiService.SelectedCoreObject
@@ -23,7 +23,7 @@ return function(p0, p1) --[[ line: 20 | named "useFocusOnMountEffect" ]]
 			end
 		end)
 		
-		return function() --[[ line: 42 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end

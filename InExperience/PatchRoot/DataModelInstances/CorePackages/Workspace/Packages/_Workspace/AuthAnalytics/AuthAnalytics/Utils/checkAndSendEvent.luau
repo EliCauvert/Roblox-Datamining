@@ -5,7 +5,7 @@ local logging = dependenciesModule.Logging
 local eventStreamConstantsModule = require(parent.Constants.EventStreamConstants)
 local fFlagEnableAuthAnalyticsPrintDebuggingDev = require(parent.Parent.SharedFlags).FFlagEnableAuthAnalyticsPrintDebuggingDev
 
-return function(p0, p1, p2) --[[ line: 11 ]]
+return function(p0, p1, p2)
 	-- upvalues: eventStreamConstantsModule (ref), logging (ref), fFlagEnableAuthAnalyticsPrintDebuggingDev (ref), var1 (ref)
 	local t = {}
 	p2[eventStreamConstantsModule.EventTimingKeys.OsClock] = tostring(os.clock())

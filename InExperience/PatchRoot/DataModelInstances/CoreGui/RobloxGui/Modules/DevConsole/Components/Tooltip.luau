@@ -12,16 +12,16 @@ local offset = constantsModule.Tooltip.Offset
 local maxWidth = constantsModule.Tooltip.MaxWidth
 local delay = constantsModule.Tooltip.Delay
 
-return function(p0) --[[ line: 21 | named "Tooltip" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), delay (ref), roactModule (ref), coreGuiService (ref), mainWindowHeader_1 (ref), text (ref), mainWindowHeader (ref), offset (ref), unselectedGray (ref), padding (ref), maxWidth (ref)
 	local var5, var6 = reactModule.useState(false)
 	local text_1 = p0.text
 	local pos = p0.pos
-	reactModule.useEffect(function() --[[ line: 26 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), delay (copy)
 		var6(false)
 		local var7 = false
-		task.delay(delay, function() --[[ line: 29 ]]
+		task.delay(delay, function()
 			-- upvalues: var7 (write), var6 (copy)
 			if var7 then
 				return
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 21 | named "Tooltip" ]]
 			var6(true)
 		end)
 		
-		return function() --[[ line: 35 ]]
+		return function()
 			-- upvalues: var7 (write)
 			var7 = true
 		end

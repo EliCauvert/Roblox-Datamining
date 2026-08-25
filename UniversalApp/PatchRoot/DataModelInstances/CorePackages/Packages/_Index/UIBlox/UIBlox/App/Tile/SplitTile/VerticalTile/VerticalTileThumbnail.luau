@@ -4,7 +4,7 @@ local loadableImageModule = require(parent.Loading.LoadableImage)
 local _ = require(parent.Style.StyleTypes)
 local uDim = UDim.new(0, 8)
 
-return function(p0) --[[ line: 27 | named "VerticalTileThumbnail" ]]
+return function(p0)
 	-- upvalues: uDim (ref), reactModule (ref), loadableImageModule (ref)
 	local var9
 	local aspectRatio = p0.aspectRatio

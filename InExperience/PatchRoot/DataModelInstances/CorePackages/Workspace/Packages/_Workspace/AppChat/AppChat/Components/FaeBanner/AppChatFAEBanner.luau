@@ -43,11 +43,11 @@ local t_3 = {
 	[conversationBottomModal.NudgeToBottomChatUpsell] = "padding-large align-x-center auto-y size-full-0 stroke-standard stroke-default bg-shift-100"
 }
 
-return reactModule.memo(function(p0) --[[ line: 71 | named "AppChatFAEBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), useIsInExperienceModule (ref), useCallback (ref), fetchChatMetadataModule (ref), t_1 (ref), t (ref), useSocialUpsellOverlayController (ref), reactModule (ref), startFacialAgeEstimation (ref), socialUpsellModule (ref), upsellComponent (ref), createBannerConfigFromModalConfigurationModule (ref), name (ref), t_2 (ref), t_3 (ref), foundationModule (ref), upsellBanner (ref)
 	local var13 = useDispatch()
 	local var14 = useIsInExperienceModule()
-	local var15 = useCallback(function() --[[ line: 74 ]]
+	local var15 = useCallback(function()
 		-- upvalues: var13 (ref), fetchChatMetadataModule (copy)
 		var13(fetchChatMetadataModule())
 	end, { var13, fetchChatMetadataModule })
@@ -60,11 +60,11 @@ return reactModule.memo(function(p0) --[[ line: 71 | named "AppChatFAEBanner" ]]
 		UpsellBanner = reactModule.createElement(upsellBanner, {
 			config = var18,
 			isContained = t_2[modalConfiguration.modal_variant],
-			onPrimaryAction = reactModule.useCallback(function(_) --[[ line: 84 ]]
+			onPrimaryAction = reactModule.useCallback(function(_)
 				-- upvalues: var13 (ref), startFacialAgeEstimation (copy), socialUpsellModule (copy), var16 (ref), var15 (ref), var14 (ref)
 				var13(startFacialAgeEstimation(socialUpsellModule.Enums.SocialUpsellType.FacialAgeEstimation .. var16, var15, nil, var16, var14))
 			end, { var13, var16, var14 }),
-			onSecondaryAction = reactModule.useCallback(function(p1) --[[ line: 95 ]]
+			onSecondaryAction = reactModule.useCallback(function(p1)
 				-- upvalues: var17 (ref), socialUpsellModule (copy), var16 (ref), upsellComponent (copy)
 				var17.openSocialOverlay(socialUpsellModule.Enums.SocialUpsellType.FacialAgeEstimation, {
 					upsellEntrySurface = var16,
@@ -72,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 71 | named "AppChatFAEBanner" ]]
 					impressionId = p1
 				})
 			end, { var17.openSocialOverlay, var16 }),
-			onDismiss = p0.onDismiss or reactModule.useCallback(function(_) --[[ line: 105 ]]
+			onDismiss = p0.onDismiss or reactModule.useCallback(function(_)
 				-- upvalues: var18 (ref), name (copy)
 				if not var18.isDismissable then
 					name:warning("attempt to call AppChatFAEBanner onDismiss not provided and banner is not dismissable")

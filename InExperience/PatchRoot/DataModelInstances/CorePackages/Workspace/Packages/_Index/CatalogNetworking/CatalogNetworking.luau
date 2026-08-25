@@ -4,7 +4,7 @@ local _ = require(script.Types)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 
 return {
-	config = function(p0) --[[ line: 21 ]]
+	config = function(p0)
 		-- upvalues: createGetItemAndBundleDetailsModule (ref)
 		return {
 			GetItemAndBundleDetails = createGetItemAndBundleDetailsModule(p0)

@@ -10,7 +10,7 @@ local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
 local sduiBuilderProcessingPhase = sduiBuilderTypesModule.SduiBuilderProcessingPhase
 local serverBindingPropMap = require(parent.SduiCompat).ServerBindingPropMap
 
-local function parseProps(p0, p1, p2, p3, p4, p5, p6) --[[ line: 32 ]]
+local function parseProps(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: sduiBuilderProcessingPhase (ref), serverBindingPropMap (ref), parseProps (ref), reactModule (ref), sduiErrorType (ref), cryoModule (ref), sduiParseHelpersModule (ref)
 	if not p1 then return end
 	assert(p1, "props must exist")
@@ -23,7 +23,7 @@ local function parseProps(p0, p1, p2, p3, p4, p5, p6) --[[ line: 32 ]]
 		local var7 = p5[i]
 		
 		if var7 and (p6 ~= sduiBuilderProcessingPhase.Render or p3.componentDefinitions:doesParserRequireRenderContext(var7)) then
-			local ok, status = pcall(function() --[[ line: 66 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var7 (ref), v (ref), serverBindingPropMap (copy), parseProps (copy), p0 (ref), p2 (ref), p3 (ref), p4 (ref), p6 (ref), reactModule (copy)
 				if typeof(var7) == "table" then
 					if typeof(v) ~= "table" then

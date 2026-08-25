@@ -9,7 +9,7 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
 local gameTileTypesModule = require(gameTile.GameTileTypes)
 
-return function(p0) --[[ line: 48 | named "GridTileIconTextFooter" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), gameTileTypesModule (ref), getGameTileMetadataFontModule (ref), reactModule (ref), imageSetLabel (ref)
 	local var12, var13
 	local var5 = useDesignTokens()

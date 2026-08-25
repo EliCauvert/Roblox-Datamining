@@ -7,7 +7,7 @@ local useSongAlbumArtModule = require(songbird.Hooks.useSongAlbumArt)
 local useCallback = reactModule.useCallback
 local useMemo = reactModule.useMemo
 
-return function(p0) --[[ line: 21 | named "ChromeWindowWrapper" ]]
+return function(p0)
 	-- upvalues: useCurrentSongModule (ref), useMemo (ref), getFFlagSongbirdMusicIconThumbnailModule (ref), useSongAlbumArtModule (ref), useCallback (ref), reactModule (ref), chromeWindowModule (ref)
 	local var6 = useCurrentSongModule()
 	local meetsCriteria = getFFlagSongbirdMusicIconThumbnailModule() and (var6 and var6.meetsCriteria)
@@ -18,14 +18,14 @@ return function(p0) --[[ line: 21 | named "ChromeWindowWrapper" ]]
 			artists = { var6.metadata.Artist },
 			isLiked = var6.isFavorited,
 			meetsCriteria = var6.meetsCriteria,
-			thumbnailUrl = if meetsCriteria then useSongAlbumArtModule(if meetsCriteria then useMemo(function() --[[ line: 24 ]]
+			thumbnailUrl = if meetsCriteria then useSongAlbumArtModule(if meetsCriteria then useMemo(function()
 				-- upvalues: var6 (ref)
 				return if var6 then tonumber(var6.metadata.AssetId) else nil
 			end, { var6 }) else nil).value else nil
 		} else nil,
 		isFocused = p0.isFocused,
 		maxSize = p0.maxSize,
-		onToggleLike = useCallback(function() --[[ line: 32 ]]
+		onToggleLike = useCallback(function()
 			-- upvalues: var6 (ref)
 			if var6 then
 				var6.toggleFavorite()

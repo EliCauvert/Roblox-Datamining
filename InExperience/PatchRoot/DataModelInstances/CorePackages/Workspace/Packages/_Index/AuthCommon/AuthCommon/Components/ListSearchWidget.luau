@@ -20,7 +20,7 @@ local flint = colors.Flint
 local obsidian = colors.Obsidian
 local white = colors.White
 
-function listSearchWidget.init(p0) --[[ line: 40 ]]
+function listSearchWidget.init(p0)
 	-- upvalues: roactModule (ref), imageSetLabel (ref), getImageData (ref), flint (ref), imageSetButton (ref)
 	p0.state = {
 		fullLoad = false,
@@ -31,12 +31,12 @@ function listSearchWidget.init(p0) --[[ line: 40 ]]
 	p0.visibilityTarget = 0
 	p0.baseFrameRef = roactModule.createRef()
 	
-	function p0.getWidgetPosition() --[[ line: 51 ]]
+	function p0.getWidgetPosition()
 		-- upvalues: p0 (ref)
 		return UDim2.new(0.5, 0, 2 - p0.visibility, 10)
 	end
 	
-	function p0.searchTextChanged(p1) --[[ line: 55 ]]
+	function p0.searchTextChanged(p1)
 		-- upvalues: p0 (ref)
 		local lowerText = string.lower(p1.Text)
 		
@@ -60,7 +60,7 @@ function listSearchWidget.init(p0) --[[ line: 40 ]]
 		end
 	end
 	
-	function p0.renderWidgetBackground(p2) --[[ line: 76 ]]
+	function p0.renderWidgetBackground(p2)
 		-- upvalues: roactModule (copy), imageSetLabel (copy), getImageData (copy), flint (copy), p0 (ref), imageSetButton (copy)
 		local var10 = 1.4 * p2.closeButtonSize
 		
@@ -125,10 +125,10 @@ function listSearchWidget.init(p0) --[[ line: 40 ]]
 	end
 end
 
-function listSearchWidget.didMount(p3) --[[ line: 141 ]]
+function listSearchWidget.didMount(p3)
 	-- upvalues: otterModule (ref)
 	p3.motor = otterModule.createSingleMotor(p3.visibility)
-	p3.motor:onStep(function(p4) --[[ line: 143 ]]
+	p3.motor:onStep(function(p4)
 		-- upvalues: p3 (ref)
 		p3.visibility = p4
 		
@@ -146,7 +146,7 @@ function listSearchWidget.didMount(p3) --[[ line: 141 ]]
 	end)
 end
 
-function listSearchWidget.willUnmount(p5) --[[ line: 162 ]]
+function listSearchWidget.willUnmount(p5)
 	if p5.motor then
 		p5.motor:destroy()
 	end
@@ -154,7 +154,7 @@ end
 
 listSearchWidget.defaultProps = { SearchPlaceholder = "Feature.Chat.Label.SearchWord" }
 
-function listSearchWidget.render(p6) --[[ line: 172 ]]
+function listSearchWidget.render(p6)
 	-- upvalues: formFactor (ref), withLocalization (ref), roactModule (ref), appFonts (ref), white (ref), searchBarModule (ref), obsidian (ref), flint (ref), windowedListFrameModule (ref)
 	local var12 = p6.props.formFactor == formFactor.WIDE
 	local var13 = 27
@@ -177,7 +177,7 @@ function listSearchWidget.render(p6) --[[ line: 172 ]]
 	return withLocalization({
 		heading = p6.props.Heading,
 		search = p6.props.SearchPlaceholder
-	})(function(p7) --[[ line: 197 ]]
+	})(function(p7)
 		-- upvalues: var20 (ref), roactModule (copy), p6 (ref), var12 (ref), var13 (write), var16 (write), appFonts (copy), white (copy), searchBarModule (copy), var18 (ref), obsidian (copy), flint (copy), var15 (write), var14 (write), windowedListFrameModule (copy), var19 (ref), var17 (write)
 		return roactModule.createElement(if var20 then "TextButton" else "Frame", {
 			BorderSizePixel = 0,
@@ -232,7 +232,7 @@ function listSearchWidget.render(p6) --[[ line: 172 ]]
 	end)
 end
 
-function listSearchWidget.didUpdate(p8, p9) --[[ line: 255 ]]
+function listSearchWidget.didUpdate(p8, p9)
 	-- upvalues: otterModule (ref)
 	if p8.visibilityTarget ~= p8.props.VisibilityTarget and p8.motor then
 		p8.visibilityTarget = p8.props.VisibilityTarget
@@ -247,6 +247,6 @@ function listSearchWidget.didUpdate(p8, p9) --[[ line: 255 ]]
 	end
 end
 
-return roactServices.connect({ networking = roactNetworking })(roactRoduxModule.connect(function(p10, _) --[[ line: 277 ]]
+return roactServices.connect({ networking = roactNetworking })(roactRoduxModule.connect(function(p10, _)
 	return { formFactor = p10.FormFactor }
 end)(listSearchWidget))

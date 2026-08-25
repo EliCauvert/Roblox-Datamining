@@ -8,7 +8,7 @@ local var5, var6 = signalsModule.createSignal({})
 
 return {
 	getCache = var5,
-	fetchAndCache = function(p0, p1) --[[ line: 12 ]]
+	fetchAndCache = function(p0, p1)
 		-- upvalues: var5 (ref), promiseModule (ref), dashModule (ref), fetchBundleOwnershipModule (ref), var6 (ref)
 		local var7 = var5(false)
 		local t = {}
@@ -18,10 +18,10 @@ return {
 				table.insert(t, v)
 			end
 		end
-		return if #t == 0 then promiseModule.resolve() else promiseModule.all(dashModule.map(t, function(p3) --[[ line: 24 ]]
+		return if #t == 0 then promiseModule.resolve() else promiseModule.all(dashModule.map(t, function(p3)
 			-- upvalues: fetchBundleOwnershipModule (copy), p0 (ref)
 			return fetchBundleOwnershipModule(p0, p3)
-		end)):andThen(function(p2) --[[ line: 28 ]]
+		end)):andThen(function(p2)
 			-- upvalues: var5 (copy), var6 (copy)
 			local cloned = table.clone(var5(false))
 			
@@ -33,15 +33,15 @@ return {
 			var6(cloned)
 		end)
 	end,
-	isOwned = function(p4) --[[ line: 39 ]]
+	isOwned = function(p4)
 		-- upvalues: var5 (ref)
 		return var5(false)[p4]
 	end,
-	clear = function() --[[ line: 43 ]]
+	clear = function()
 		-- upvalues: var6 (ref)
 		var6({})
 	end,
-	markOwned = function(p5) --[[ line: 47 ]]
+	markOwned = function(p5)
 		-- upvalues: var5 (ref), var6 (ref)
 		local cloned = table.clone(var5(false))
 		

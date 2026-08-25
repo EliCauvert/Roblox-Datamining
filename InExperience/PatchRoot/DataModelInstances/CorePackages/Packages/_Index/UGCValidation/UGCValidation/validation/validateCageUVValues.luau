@@ -5,12 +5,12 @@ local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVRef
 local analyticsModule = require(parent.Analytics)
 local UGCValidationService = game:GetService("UGCValidationService")
 
-return function(p0, p1, p2) --[[ line: 19 | named "validateCageUVValues" ]]
+return function(p0, p1, p2)
 	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local isServer = p2.isServer
 	local var5 = assert(wrapTargetCageUVReferenceValuesModule[p1.Parent.Name], "WrapTarget is not parented to a MeshPart")
-	local var6, var7 = pcallDeferredModule(function() --[[ line: 32 ]]
+	local var6, var7 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), var5 (ref), p0 (ref)
 		return UGCValidationService:ValidateEditableMeshUVValuesInReference(var5, p0.editableMesh)
 	end, p2)

@@ -2,7 +2,7 @@
 local _ = require(moments.Parent.MomentsTypes)
 local _ = require(moments.Components.Feed.FeedTypes)
 
-return function(p0) --[[ line: 28 | named "makeRecommendationAttribution" ]]
+return function(p0)
 	if p0 == nil then
 		return nil
 	end

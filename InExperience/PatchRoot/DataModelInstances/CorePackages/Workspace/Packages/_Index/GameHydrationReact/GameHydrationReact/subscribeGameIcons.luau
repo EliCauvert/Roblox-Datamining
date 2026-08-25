@@ -2,7 +2,7 @@
 local signalsModule = require(parent.Signals)
 local dataHydrationModule = require(parent.DataHydration)
 
-local function toIds(p0) --[[ line: 28 ]]
+local function toIds(p0)
 	local t = {}
 	
 	if p0 == nil then
@@ -21,7 +21,7 @@ local function toIds(p0) --[[ line: 28 ]]
 	return t
 end
 
-local function sameIds(p1, p2) --[[ line: 45 ]]
+local function sameIds(p1, p2)
 	if #p1 ~= #p2 then
 		return false
 	end
@@ -38,7 +38,7 @@ local function sameIds(p1, p2) --[[ line: 45 ]]
 	return true
 end
 
-return function(p3) --[[ line: 69 | named "subscribeGameIcons" ]]
+return function(p3)
 	-- upvalues: dataHydrationModule (ref), signalsModule (ref), toIds (ref), sameIds (ref)
 	local gameIconStore = dataHydrationModule.Game.getGameIconStore(false)
 	local var9, var10 = signalsModule.createSignal(toIds(p3.universeIds), sameIds)
@@ -46,15 +46,15 @@ return function(p3) --[[ line: 69 | named "subscribeGameIcons" ]]
 	local var12 = true
 	
 	return {
-		getCurrent = function() --[[ line: 98 ]]
+		getCurrent = function()
 			-- upvalues: t (write)
 			return t
 		end,
-		update = function(p4) --[[ line: 101 ]]
+		update = function(p4)
 			-- upvalues: var10 (ref), toIds (copy)
 			var10(toIds(p4))
 		end,
-		dispose = signalsModule.createEffect(function(p5) --[[ line: 76 ]]
+		dispose = signalsModule.createEffect(function(p5)
 			-- upvalues: var9 (ref), gameIconStore (ref), p3 (ref), t (write), var12 (write)
 			local var13 = var9(p5)
 			local t_1 = {}

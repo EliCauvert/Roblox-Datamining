@@ -4,7 +4,7 @@ local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEnt
 local promptStyleModule = require(script.Parent.SduiV2.PromptStyle)
 local usePromptEntriesModule = require(script.Parent.SduiV2.usePromptEntries)
 
-return function(p0) --[[ line: 17 | named "PromptsSystemBanner" ]]
+return function(p0)
 	-- upvalues: usePromptEntriesModule (ref), promptStyleModule (ref), reactModule (ref), sduiFeatureEntryPoint (ref)
 	local var3 = usePromptEntriesModule(p0.configKey, promptStyleModule.SystemBanner)[1]
 	

@@ -14,22 +14,22 @@ local t = {
 	placement = require(foundation.Enums.InputPlacement).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | named "RadioGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), internalInputGroupModule (ref), withCommonPropsModule (ref), radioGroupContextModule (ref), viewModule (ref)
 	local var9 = withDefaultsModule(p0, t)
 	local var10, var11 = reactModule.useState(var9.value)
-	reactModule.useEffect(function() --[[ line: 40 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var11 (ref)
 		if var9.value ~= nil then
 			var11(var9.value)
 		end
 	end, { var9.value })
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 46 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: var11 (ref), var9 (ref)
 		var11(p2)
 		var9.onValueChanged(p2)
 	end, { var11, var9.onValueChanged })
-	local var13 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 52 ]]
+	local var13 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 		-- upvalues: var10 (ref), var12 (ref), var9 (ref)
 		return {
 			value = var10,

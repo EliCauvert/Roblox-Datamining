@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local focusNavigableSurfaceIdentifierEnum = require(parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
 local useFocusNavigationSurfaceModule = require(script.Parent.useFocusNavigationSurface)
 
-return function(p0) --[[ line: 16 | named "FocusNavigationModalSurface" ]]
+return function(p0)
 	-- upvalues: useFocusNavigationSurfaceModule (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

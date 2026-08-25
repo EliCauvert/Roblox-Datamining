@@ -19,7 +19,7 @@ local t = {
 	soakAreaColor3 = Color3.fromRGB(25, 25, 25)
 }
 
-function EditChatGroupNameDialog(p0) --[[ line: 46 ]]
+function EditChatGroupNameDialog(p0)
 	-- upvalues: cryoModule (ref), t (ref), usePositionOffsetForVirtualKeyboardModule (ref), reactModule (ref), textInput (ref)
 	return reactModule.createElement(textInput, cryoModule.Dictionary.join(cryoModule.Dictionary.join(t, p0), {
 		shouldAdjustForKeyboard = usePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = false }) == nil

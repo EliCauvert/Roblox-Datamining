@@ -15,7 +15,7 @@ local chatService = game:GetService("Chat")
 local corePackagesService = game:GetService("CorePackages")
 local var15 = false
 
-function enableAvatarContextMenu(p0) --[[ line: 42 ]]
+function enableAvatarContextMenu(p0)
 	-- upvalues: var1 (write), var15 (write), rbxAnalyticsService (ref)
 	var1 = not not p0
 	
@@ -27,7 +27,7 @@ end
 
 starterGuiService:RegisterSetCore("SetAvatarContextMenuEnabled", enableAvatarContextMenu)
 starterGuiService:RegisterSetCore("AvatarContextMenuEnabled", enableAvatarContextMenu)
-starterGuiService:RegisterGetCore("AvatarContextMenuEnabled", function() --[[ line: 53 ]]
+starterGuiService:RegisterGetCore("AvatarContextMenuEnabled", function()
 	-- upvalues: var1 (write)
 	return var1
 end)
@@ -44,7 +44,7 @@ local var22 = if not fFlagEnableNewBackpack then require(modules.BackpackScript)
 local emotesMenuMasterModule = require(modules.EmotesMenu.EmotesMenuMaster)
 local blockingUtilityModule = require(corePackagesService.Workspace.Packages.BlockingUtility)
 local fFlagAvatarContextMenuItemsChatButtonRefactorModule = require(modules.Flags.FFlagAvatarContextMenuItemsChatButtonRefactor)
-local ok, status = pcall(function() --[[ line: 78 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRaycastUpdateAPI2")
 end)
 status = ok and status
@@ -68,7 +68,7 @@ raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 local var34 = contextMenuGuiModule:CreateMenuFrame(themeHandlerModule:GetTheme())
 local var35 = contextMenuItemsModule.new(var34.Content.ContextActionList)
 
-function SetSelectedPlayer(value, p1) --[[ line: 116 ]]
+function SetSelectedPlayer(value, p1)
 	-- upvalues: var28 (write), selectedCharacterIndicatorModule (ref), themeHandlerModule (ref), fFlagAvatarContextMenuItemsChatButtonRefactorModule (ref), chatService (ref), localPlayer (write), runService (ref), contextMenuUtilModule (ref), var35 (write), contextMenuGuiModule (ref)
 	if var28 == value then return end
 	var28 = value
@@ -76,7 +76,7 @@ function SetSelectedPlayer(value, p1) --[[ line: 116 ]]
 	
 	if fFlagAvatarContextMenuItemsChatButtonRefactorModule then
 		local t = {}
-		local ok, status = pcall(function() --[[ line: 123 ]]
+		local ok, status = pcall(function()
 			-- upvalues: chatService (copy), localPlayer (copy)
 			return chatService:CanUserChatAsync(localPlayer.UserId)
 		end)
@@ -93,13 +93,13 @@ function SetSelectedPlayer(value, p1) --[[ line: 116 ]]
 	contextMenuGuiModule:SwitchToPlayerEntry(var28, p1)
 end
 
-function OpenMenu(p2) --[[ line: 137 ]]
+function OpenMenu(p2)
 	-- upvalues: var26 (write), var34 (write), var32 (write), contextMenuGuiModule (ref), tweenService (ref), tweenInfo (ref)
 	var26 = true
 	var34.Visible = true
 	var34.Content.ContextActionList.CanvasPosition = Vector2.new(0, 0)
 	var34.Position = p2.OffScreenPosition
-	var32 = contextMenuGuiModule.SelectedPlayerChanged:connect(function() --[[ line: 144 ]]
+	var32 = contextMenuGuiModule.SelectedPlayerChanged:connect(function()
 		-- upvalues: contextMenuGuiModule (copy)
 		SetSelectedPlayer(contextMenuGuiModule:GetSelectedPlayer())
 	end)
@@ -110,16 +110,16 @@ function OpenMenu(p2) --[[ line: 137 ]]
 	var26 = false
 end
 
-function BindMenuActions() --[[ line: 156 ]]
+function BindMenuActions()
 	-- upvalues: contextActionService (ref), contextMenuGuiModule (ref), guiService (ref)
-	contextActionService:BindCoreAction("EscapeAvatarContextMenu", function(_, p3, _) --[[ line: 158 ]]
+	contextActionService:BindCoreAction("EscapeAvatarContextMenu", function(_, p3, _)
 		if p3 == Enum.UserInputState.Begin then
 			CloseContextMenu()
 			
 			return
 		end
 	end, false, Enum.KeyCode.Escape, Enum.KeyCode.ButtonB)
-	contextActionService:BindCoreAction("SwitchPageAvatarContextMenu", function(_, p4, p5) --[[ line: 167 ]]
+	contextActionService:BindCoreAction("SwitchPageAvatarContextMenu", function(_, p4, p5)
 		-- upvalues: contextMenuGuiModule (copy)
 		if p4 == Enum.UserInputState.Begin then
 			if p5.KeyCode == Enum.KeyCode.ButtonR1 then
@@ -132,7 +132,7 @@ function BindMenuActions() --[[ line: 156 ]]
 		end
 	end, false, Enum.KeyCode.ButtonR1, Enum.KeyCode.ButtonL1)
 	local menuOpenedConnection = nil
-	menuOpenedConnection = guiService.MenuOpened:connect(function() --[[ line: 180 ]]
+	menuOpenedConnection = guiService.MenuOpened:connect(function()
 		-- upvalues: menuOpenedConnection (write)
 		menuOpenedConnection:disconnect()
 		
@@ -144,7 +144,7 @@ function BindMenuActions() --[[ line: 156 ]]
 	end)
 end
 
-function BuildPlayerCarousel(_, p6) --[[ line: 186 ]]
+function BuildPlayerCarousel(_, p6)
 	-- upvalues: playersService (ref), var0 (ref), localPlayer (write), contextMenuUtilModule (ref), contextMenuGuiModule (ref), themeHandlerModule (ref)
 	local t = {}
 	local players = playersService:GetPlayers()
@@ -158,20 +158,20 @@ function BuildPlayerCarousel(_, p6) --[[ line: 186 ]]
 			end
 		end
 	end
-	table.sort(t, function(p7, p8) --[[ line: 201 | named "closestPlayerComp" ]]
+	table.sort(t, function(p7, p8)
 		return p8[2] < p7[2]
 	end)
 	contextMenuGuiModule:BuildPlayerCarousel(t, themeHandlerModule:GetTheme())
 end
 
-playersService.PlayerRemoving:connect(function(p9) --[[ line: 209 ]]
+playersService.PlayerRemoving:connect(function(p9)
 	-- upvalues: var27 (write), var28 (write), contextMenuGuiModule (ref)
 	if var27 and p9 ~= var28 then
 		contextMenuGuiModule:RemovePlayerEntry(p9)
 	end
 end)
 
-local function _() --[[ line: 215 | named "CloseOtherOpenCoreGui" ]]
+local function _()
 	-- upvalues: emotesMenuMasterModule (ref), fFlagEnableNewBackpack (ref), var21 (ref), var22 (ref)
 	if emotesMenuMasterModule:isOpen() then
 		emotesMenuMasterModule:close()
@@ -185,7 +185,7 @@ local function _() --[[ line: 215 | named "CloseOtherOpenCoreGui" ]]
 	end
 end
 
-function OpenContextMenu(p10, p11) --[[ line: 229 ]]
+function OpenContextMenu(p10, p11)
 	-- upvalues: var26 (write), var27 (write), var1 (write), emotesMenuMasterModule (ref), fFlagEnableNewBackpack (ref), var21 (ref), var22 (ref), contextMenuUtilModule (ref), contextMenuGuiModule (ref), themeHandlerModule (ref)
 	if var26 or var27 or not var1 then return end
 	var27 = true
@@ -206,7 +206,7 @@ function OpenContextMenu(p10, p11) --[[ line: 229 ]]
 	OpenMenu(themeHandlerModule:GetTheme())
 end
 
-function CloseContextMenu() --[[ line: 247 ]]
+function CloseContextMenu()
 	-- upvalues: guiService (ref), contextActionService (ref), contextMenuUtilModule (ref), var32 (write), tweenService (ref), var34 (write), tweenInfo_1 (ref), var27 (write)
 	guiService.SelectedCoreObject = nil
 	contextActionService:UnbindCoreAction("EscapeAvatarContextMenu")
@@ -227,11 +227,11 @@ end
 contextMenuGuiModule:SetCloseMenuFunc(CloseContextMenu)
 var35:SetCloseMenuFunc(CloseContextMenu)
 
-local _ = function(p12, p13, p14) --[[ line: 269 | named "isPointInside" ]]
+local _ = function(p12, p13, p14)
 	return p13.X <= p12.X and (p12.X <= p14.X and (p13.Y <= p12.Y and p12.Y <= p14.Y))
 end
 
-function PointInSwipeArea(p15) --[[ line: 276 ]]
+function PointInSwipeArea(p15)
 	-- upvalues: var34 (write)
 	local absolutePosition = var34.AbsolutePosition
 	local nameTag = var34.Content:FindFirstChild("NameTag")
@@ -240,7 +240,7 @@ function PointInSwipeArea(p15) --[[ line: 276 ]]
 	return absolutePosition.X <= p15.X and (p15.X <= vector2.X and (absolutePosition.Y <= p15.Y and p15.Y <= vector2.Y))
 end
 
-function LocalPlayerHasToolEquipped() --[[ line: 285 ]]
+function LocalPlayerHasToolEquipped()
 	-- upvalues: localPlayer (write)
 	if not localPlayer.Character then
 		return false
@@ -253,7 +253,7 @@ function LocalPlayerHasToolEquipped() --[[ line: 285 ]]
 	return false
 end
 
-function shouldIgnoreLocalCharacter() --[[ line: 297 ]]
+function shouldIgnoreLocalCharacter()
 	-- upvalues: localPlayer (write)
 	if localPlayer.Character then
 		local head = localPlayer.Character:FindFirstChild("Head")
@@ -264,7 +264,7 @@ function shouldIgnoreLocalCharacter() --[[ line: 297 ]]
 	end
 end
 
-function clickedOnPoint(p16) --[[ line: 307 ]]
+function clickedOnPoint(p16)
 	-- upvalues: status (write), raycastParams (ref), localPlayer (write), contextMenuUtilModule (ref), var0 (ref), var27 (write)
 	local currentCamera = workspace.CurrentCamera
 	
@@ -326,7 +326,7 @@ function clickedOnPoint(p16) --[[ line: 307 ]]
 	end
 end
 
-function OnUserInput(p17, p18) --[[ line: 352 ]]
+function OnUserInput(p17, p18)
 	-- upvalues: var29 (write), var30 (write)
 	if p18.UserInputState == Enum.UserInputState.Begin and var29 == nil then
 		var29 = p18
@@ -347,7 +347,7 @@ function OnUserInput(p17, p18) --[[ line: 352 ]]
 	end
 end
 
-function OnMouseMoved(p19) --[[ line: 368 ]]
+function OnMouseMoved(p19)
 	-- upvalues: var27 (write), var29 (write), var30 (write)
 	if not var27 and var29 and (p19 - var30).magnitude > 20 then
 		var29 = nil
@@ -355,7 +355,7 @@ function OnMouseMoved(p19) --[[ line: 368 ]]
 	end
 end
 
-function trackTouchSwipeInput(p20) --[[ line: 375 ]]
+function trackTouchSwipeInput(p20)
 	-- upvalues: var31 (write)
 	if p20.UserInputType == Enum.UserInputType.Touch then
 		if not var31 and p20.UserInputState == Enum.UserInputState.Begin then
@@ -365,7 +365,7 @@ function trackTouchSwipeInput(p20) --[[ line: 375 ]]
 				return
 			end
 		elseif var31 == p20 and p20.UserInputState == Enum.UserInputState.End then
-			spawn(function() --[[ line: 382 ]]
+			spawn(function()
 				-- upvalues: var31 (copy)
 				var31 = nil
 			end)
@@ -373,7 +373,7 @@ function trackTouchSwipeInput(p20) --[[ line: 375 ]]
 	end
 end
 
-local function functionProcessInput(p21, p22) --[[ line: 389 ]]
+local function functionProcessInput(p21, p22)
 	-- upvalues: var29 (write)
 	trackTouchSwipeInput(p21)
 	
@@ -394,7 +394,7 @@ end
 userInputService.InputBegan:Connect(functionProcessInput)
 userInputService.InputChanged:Connect(functionProcessInput)
 userInputService.InputEnded:Connect(functionProcessInput)
-userInputService.TouchSwipe:Connect(function(p23, _, p24) --[[ line: 411 ]]
+userInputService.TouchSwipe:Connect(function(p23, _, p24)
 	-- upvalues: var27 (write), var31 (write), contextMenuGuiModule (ref)
 	if not p24 then return end
 	if not var27 then return end
@@ -411,7 +411,7 @@ userInputService.TouchSwipe:Connect(function(p23, _, p24) --[[ line: 411 ]]
 		SetSelectedPlayer(contextMenuGuiModule:GetSelectedPlayer())
 	end
 end)
-localPlayer.FriendStatusChanged:Connect(function(p25, p26) --[[ line: 429 ]]
+localPlayer.FriendStatusChanged:Connect(function(p25, p26)
 	-- upvalues: var28 (write), blockingUtilityModule (ref), var35 (write)
 	if p25 and p25 == var28 then
 		var35:UpdateFriendButton(p26, blockingUtilityModule:IsPlayerBlockedByUserId(p25.UserId))
@@ -419,28 +419,28 @@ localPlayer.FriendStatusChanged:Connect(function(p25, p26) --[[ line: 429 ]]
 end)
 
 if fFlagEnableNewBackpack then
-	var21.onVisibilityChanged(var21.FeatureName.Backpack, function(p27) --[[ line: 437 ]]
+	var21.onVisibilityChanged(var21.FeatureName.Backpack, function(p27)
 		-- upvalues: var27 (write)
 		if p27 and var27 then
 			CloseContextMenu()
 		end
 	end)
 else
-	var22.StateChanged.Event:Connect(function(p28) --[[ line: 443 ]]
+	var22.StateChanged.Event:Connect(function(p28)
 		-- upvalues: var27 (write)
 		if p28 and var27 then
 			CloseContextMenu()
 		end
 	end)
 end
-emotesMenuMasterModule.EmotesMenuToggled.Event:Connect(function(p29) --[[ line: 450 ]]
+emotesMenuMasterModule.EmotesMenuToggled.Event:Connect(function(p29)
 	-- upvalues: var27 (write)
 	if p29 and var27 then
 		CloseContextMenu()
 	end
 end)
 
-function GetWorldPoint(p30) --[[ line: 456 ]]
+function GetWorldPoint(p30)
 	-- upvalues: localPlayer (write)
 	if p30.Character then
 		local humanoidRootPart = p30.Character:FindFirstChild("HumanoidRootPart")
@@ -449,11 +449,11 @@ function GetWorldPoint(p30) --[[ line: 456 ]]
 	end
 end
 
-starterGuiService:RegisterGetCore("AvatarContextMenuTarget", function() --[[ line: 470 ]]
+starterGuiService:RegisterGetCore("AvatarContextMenuTarget", function()
 	-- upvalues: var28 (write)
 	return var28
 end)
-starterGuiService:RegisterSetCore("AvatarContextMenuTarget", function(p31) --[[ line: 475 ]]
+starterGuiService:RegisterSetCore("AvatarContextMenuTarget", function(p31)
 	-- upvalues: var27 (write), var26 (write)
 	if typeof(p31) == "Instance" and p31:IsA("Player") then
 		if p31.Parent == nil then
@@ -476,7 +476,7 @@ starterGuiService:RegisterSetCore("AvatarContextMenuTarget", function(p31) --[[ 
 	error("AvatarContextMenuTarget argument must be a Player or nil")
 end)
 
-local function getClosestPlayer() --[[ line: 495 ]]
+local function getClosestPlayer()
 	-- upvalues: localPlayer (write), playersService (ref)
 	if not localPlayer.Character then return end
 	local humanoidRootPart = localPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -501,7 +501,7 @@ local function getClosestPlayer() --[[ line: 495 ]]
 	return var60, position_1
 end
 
-contextActionService:BindCoreAction("GamepadOpenAvatarContextMenu", function(_, p32, _) --[[ line: 523 | named "gamepadOpenMenu" ]]
+contextActionService:BindCoreAction("GamepadOpenAvatarContextMenu", function(_, p32, _)
 	-- upvalues: var1 (write), guiService (ref), var27 (write), getClosestPlayer (ref)
 	if not var1 then
 		return Enum.ContextActionResult.Pass

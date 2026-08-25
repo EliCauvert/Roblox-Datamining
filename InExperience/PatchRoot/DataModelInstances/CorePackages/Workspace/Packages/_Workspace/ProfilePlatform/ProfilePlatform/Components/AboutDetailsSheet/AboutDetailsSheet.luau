@@ -44,7 +44,7 @@ local t = {
 	anchorPoint = Vector2.new(0, 0)
 }
 
-local function AboutDetailsSheetLegacy(_) --[[ line: 58 ]]
+local function AboutDetailsSheetLegacy(_)
 	-- upvalues: useTopBarHeight (ref), useDispatch (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagEnableSplitPane (ref), var15 (ref), var14 (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), reactModule (ref), fFlagSignalsNavP3Dispatch (ref), var16 (ref), navigateBack (ref), peekViewState (ref), useNavigationProps (ref), t (ref), view (ref), peekViewWithTopBar (ref), iconButton (ref)
 	local uDim = UDim.new(0.55, 0)
 	local var22 = useTopBarHeight()
@@ -52,14 +52,14 @@ local function AboutDetailsSheetLegacy(_) --[[ line: 58 ]]
 	local var24 = useProfileFormFactorModule()
 	local var25 = var24.formFactor == enumsModule.ProfileFormFactor.Wide
 	local var26 = if fFlagEnableSplitPane then var15(var14.getStore().getIsSplitEnabled) else false
-	local var27 = useSelector(function(p0) --[[ line: 72 ]]
+	local var27 = useSelector(function(p0)
 		return p0.TopBar.statusBarHeight
 	end)
-	local var28 = getSafeAreaSize(useScreenSize(), useSelector(function(p1) --[[ line: 69 ]]
+	local var28 = getSafeAreaSize(useScreenSize(), useSelector(function(p1)
 		return p1.GlobalGuiInset
 	end))
 	local var29 = (if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var25) else math.min(var28.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)) / var28.X.Offset
-	local var30 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var16 (copy), var23 (ref), navigateBack (copy)
 		if fFlagSignalsNavP3Dispatch then
 			var16.back(true)
@@ -68,17 +68,17 @@ local function AboutDetailsSheetLegacy(_) --[[ line: 58 ]]
 		end
 		var23(navigateBack(true))
 	end, { var23 })
-	local var31 = reactModule.useCallback(function() --[[ line: 93 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var30 (ref)
 		var30()
 	end, { var30 })
-	local var32 = reactModule.useCallback(function(p2, _, _) --[[ line: 97 ]]
+	local var32 = reactModule.useCallback(function(p2, _, _)
 		-- upvalues: peekViewState (copy), var30 (ref)
 		if p2 == peekViewState.Closed then
 			var30()
 		end
 	end, { var30 })
-	local sections = useNavigationProps(function(_, p3) --[[ line: 103 ]]
+	local sections = useNavigationProps(function(_, p3)
 		return { sections = p3.sections }
 	end).sections or {}
 	local t_1 = {
@@ -86,7 +86,7 @@ local function AboutDetailsSheetLegacy(_) --[[ line: 58 ]]
 		size = UDim2.fromScale(var29, 1),
 		anchorPoint = Vector2.new(1, 0)
 	}
-	local var35 = reactModule.useMemo(function() --[[ line: 116 ]]
+	local var35 = reactModule.useMemo(function()
 		-- upvalues: fFlagEnableSplitPane (copy), var26 (ref), t (copy), var25 (ref), t_1 (ref)
 		return if fFlagEnableSplitPane and var26 then t elseif var25 then t_1 else t
 	end, { var24.formFactor, var26 })
@@ -131,11 +131,11 @@ local function AboutDetailsSheetLegacy(_) --[[ line: 58 ]]
 	})
 end
 
-local function AboutDetailsSheetFoundation(_) --[[ line: 167 ]]
+local function AboutDetailsSheetFoundation(_)
 	-- upvalues: useDispatch (ref), fFlagEnableSplitPane (ref), var15 (ref), var14 (ref), reactModule (ref), fFlagSignalsNavP3Dispatch (ref), var16 (ref), navigateBack (ref), useNavigationProps (ref), useLocalization (ref), textKeysModule (ref), view (ref), overlayProvider (ref), sheet (ref), list (ref), text (ref)
 	local var36 = useDispatch()
 	local var37 = if fFlagEnableSplitPane then var15(var14.getStore().getIsSplitEnabled) else false
-	local var38 = reactModule.useCallback(function() --[[ line: 173 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var16 (copy), var36 (ref), navigateBack (copy)
 		if fFlagSignalsNavP3Dispatch then
 			var16.back(true)
@@ -144,7 +144,7 @@ local function AboutDetailsSheetFoundation(_) --[[ line: 167 ]]
 		end
 		var36(navigateBack(true))
 	end, { var36 })
-	local var39 = useNavigationProps(function(_, p4) --[[ line: 181 ]]
+	local var39 = useNavigationProps(function(_, p4)
 		return { sections = p4.sections, profileName = p4.profileName }
 	end)
 	local sections = var39.sections or {}
@@ -194,7 +194,7 @@ local function AboutDetailsSheetFoundation(_) --[[ line: 167 ]]
 	})
 end
 
-return function(p5) --[[ line: 242 | named "AboutDetailsSheet" ]]
+return function(p5)
 	-- upvalues: fFlagProfileAboutDetailsUseSheet (ref), AboutDetailsSheetFoundation (ref), AboutDetailsSheetLegacy (ref)
 	return if fFlagProfileAboutDetailsUseSheet then AboutDetailsSheetFoundation(p5) else AboutDetailsSheetLegacy(p5)
 end

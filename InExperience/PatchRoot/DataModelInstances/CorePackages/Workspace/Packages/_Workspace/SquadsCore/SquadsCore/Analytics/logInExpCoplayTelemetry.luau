@@ -9,9 +9,9 @@ local fFlagEncodeSquadMembersUpdatedModule = require(squadsCore.Flags.FFlagEncod
 local encodeSquadMembersModule = require(squadsCore.Common.encodeSquadMembers)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.RoduxSquads)
-local var8 = if fFlagEncodeSquadMembersUpdatedModule then require(squadsCore.Common.encodeUserIds) else function(p0) --[[ line: 21 ]]
+local var8 = if fFlagEncodeSquadMembersUpdatedModule then require(squadsCore.Common.encodeUserIds) else function(p0)
 	-- upvalues: httpService (ref)
-	local ok, status = pcall(function() --[[ line: 22 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p0 (ref)
 		return httpService:JSONEncode(p0)
 	end)
@@ -19,7 +19,7 @@ local var8 = if fFlagEncodeSquadMembersUpdatedModule then require(squadsCore.Com
 	return if ok then status else "[]"
 end
 
-return function(p1, p2, p3, p4, p5) --[[ line: 33 ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: squadLocationEnumModule (ref), playersService (ref), fFlagEncodeSquadMembersUpdatedModule (ref), var8 (ref), encodeSquadMembersModule (ref), cryoModule (ref), eventNamesModule (ref)
 	if p3 == squadLocationEnumModule.InExperience then
 		local t = {}
@@ -42,7 +42,7 @@ return function(p1, p2, p3, p4, p5) --[[ line: 33 ]]
 			var12 = var8(t_1)
 			var13 = encodeSquadMembersModule(p2)
 		else
-			var11 = cryoModule.List.map(p2, function(p6) --[[ line: 63 ]]
+			var11 = cryoModule.List.map(p2, function(p6)
 				return p6.userId
 			end)
 			var12 = var8(t_1)

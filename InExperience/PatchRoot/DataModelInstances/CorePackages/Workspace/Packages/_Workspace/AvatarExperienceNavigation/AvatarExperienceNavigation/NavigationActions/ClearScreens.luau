@@ -1,6 +1,6 @@
 ﻿local avatarMainStackNavigationActionModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").Enums.AvatarMainStackNavigationAction)
 
-return function(p0) --[[ line: 5 | named "ClearScreens" ]]
+return function(p0)
 	-- upvalues: avatarMainStackNavigationActionModule (ref)
 	return {
 		type = avatarMainStackNavigationActionModule.ClearScreens,

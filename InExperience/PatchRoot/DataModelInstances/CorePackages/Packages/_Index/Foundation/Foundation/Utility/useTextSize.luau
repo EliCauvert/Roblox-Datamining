@@ -4,10 +4,10 @@ local _ = require(foundation.Components.Types)
 local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
 local textService = require(foundation.Utility.Wrappers.Services).TextService
 
-return function(value, p0, p1) --[[ line: 14 | named "useTextSize" ]]
+return function(value, p0, p1)
 	-- upvalues: reactModule (ref), usePreferencesModule (ref), textService (ref)
 	local var3, var4 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function()
 		-- upvalues: value (ref), var4 (ref), textService (copy), p0 (ref), p1 (ref)
 		if value == nil then
 			var4(nil)

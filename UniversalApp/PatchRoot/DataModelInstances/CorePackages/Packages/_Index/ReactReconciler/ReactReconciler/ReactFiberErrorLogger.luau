@@ -13,9 +13,9 @@ local classComponent = require(script.Parent.ReactWorkTags).ClassComponent
 local getComponentName = require(parent.Shared).getComponentName
 
 return {
-	logCapturedError = function(p0, p1) --[[ line: 34 ]]
+	logCapturedError = function(p0, p1)
 		-- upvalues: showErrorDialog (ref), reactGlobalsModule (ref), classComponent (ref), console (ref), getComponentName (ref), inspect (ref), setTimeout (ref), errorToString (ref)
-		local ok, status = pcall(function() --[[ line: 35 ]]
+		local ok, status = pcall(function()
 			-- upvalues: showErrorDialog (copy), p0 (ref), p1 (ref), reactGlobalsModule (copy), classComponent (copy), console (copy), getComponentName (copy), inspect (copy)
 			if showErrorDialog(p0, p1) == false then
 				return nil
@@ -43,7 +43,7 @@ return {
 		
 		if not ok then
 			warn("failed to error with error: " .. inspect(status))
-			setTimeout(function() --[[ line: 126 ]]
+			setTimeout(function()
 				-- upvalues: errorToString (copy), status (ref)
 				error(errorToString(status))
 			end)

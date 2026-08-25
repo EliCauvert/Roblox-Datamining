@@ -19,42 +19,42 @@ chatConnector.validateProps = tModule.strictInterface({
 	updateChatMessages = tModule.callback
 })
 
-function chatConnector.didMount(p0) --[[ line: 35 ]]
+function chatConnector.didMount(p0)
 	-- upvalues: gameSettings (ref), chatSelectorModule (ref)
 	chatSelectorModule:SetVisible(if p0.props.isSmallTouchScreen then false else gameSettings.ChatVisible)
 	p0.props.updateChatMessages(chatSelectorModule:GetMessageCount())
 	p0.props.updateChatVisible(chatSelectorModule:GetVisibility())
-	p0.chatVisibleConnection = chatSelectorModule.VisibilityStateChanged:connect(function(p1) --[[ line: 45 ]]
+	p0.chatVisibleConnection = chatSelectorModule.VisibilityStateChanged:connect(function(p1)
 		-- upvalues: p0 (ref)
 		p0.props.updateChatVisible(p1)
 	end)
-	p0.chatMessagesConnection = chatSelectorModule.MessagesChanged:connect(function(p2) --[[ line: 49 ]]
+	p0.chatMessagesConnection = chatSelectorModule.MessagesChanged:connect(function(p2)
 		-- upvalues: p0 (ref)
 		p0.props.updateChatMessages(p2)
 	end)
 end
 
-function chatConnector.render(_) --[[ line: 54 ]]
+function chatConnector.render(_)
 	return nil
 end
 
-function chatConnector.willUnmount(p3) --[[ line: 58 ]]
+function chatConnector.willUnmount(p3)
 	p3.chatVisibleConnection:disconnect()
 	p3.chatMessagesConnection:disconnect()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4) --[[ line: 63 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p4)
 	return {
 		isSmallTouchScreen = p4.displayOptions.isSmallTouchDevice
 	}
-end, function(p5) --[[ line: 69 | named "mapDispatchToProps" ]]
+end, function(p5)
 	-- upvalues: updateChatVisibleModule (ref), updateChatMessagesModule (ref)
 	return {
-		updateChatVisible = function(p6) --[[ line: 71 ]]
+		updateChatVisible = function(p6)
 			-- upvalues: p5 (ref), updateChatVisibleModule (copy)
 			return p5(updateChatVisibleModule(p6))
 		end,
-		updateChatMessages = function(p7) --[[ line: 75 ]]
+		updateChatMessages = function(p7)
 			-- upvalues: p5 (ref), updateChatMessagesModule (copy)
 			return p5(updateChatMessagesModule(p7))
 		end

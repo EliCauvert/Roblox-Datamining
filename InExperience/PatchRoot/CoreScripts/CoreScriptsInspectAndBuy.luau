@@ -22,7 +22,7 @@ if isInExperienceUIVREnabled then
 	UIManager = vrSpatialUiModule.UIManager
 	panelType = vrSpatialUiModule.Constants.PanelType
 end
-local function mount(p0, p1, p2, p3) --[[ line: 38 ]]
+local function mount(p0, p1, p2, p3)
 	-- upvalues: var5 (write), roactModule (ref), renderWithCoreScriptsStyleProviderModule (ref), inspectAndBuyModule (ref), fFlagAXEnableNewInspectAndBuyContainerModule (ref), inspectAndBuyFixStyleLink (ref), isInExperienceUIVREnabled (ref), isSpatial (write), UIManager (write), panelType (write), robloxGui (ref), guiService (ref), fFlagTopBarSignalizeMenuOpen (ref), coreGuiCommonModule (ref), topBarModule (ref)
 	if var5 then
 		roactModule.unmount(var5)
@@ -56,7 +56,7 @@ local function mount(p0, p1, p2, p3) --[[ line: 38 ]]
 	topBarModule:setInspectMenuOpen(true)
 end
 
-local function unmountInspectAndBuy() --[[ line: 82 ]]
+local function unmountInspectAndBuy()
 	-- upvalues: var5 (write), roactModule (ref), guiService (ref), fFlagTopBarSignalizeMenuOpen (ref), coreGuiCommonModule (ref), topBarModule (ref)
 	if var5 then
 		roactModule.unmount(var5)
@@ -72,31 +72,31 @@ local function unmountInspectAndBuy() --[[ line: 82 ]]
 	end
 end
 
-local function _(p4, p5, p6) --[[ line: 97 | named "mountInspectAndBuyFromHumanoidDescription" ]]
+local function _(p4, p5, p6)
 	-- upvalues: mount (ref)
 	mount(p4, p5, nil, p6)
 end
 
-local _ = function(p7, p8) --[[ line: 101 | named "mountInspectAndBuyFromUserId" ]]
+local _ = function(p7, p8)
 	-- upvalues: mount (ref)
 	mount(nil, nil, p7, p8)
 end
 
-guiService.InspectPlayerFromHumanoidDescriptionRequest:Connect(function(p9, p10) --[[ line: 105 ]]
+guiService.InspectPlayerFromHumanoidDescriptionRequest:Connect(function(p9, p10)
 	-- upvalues: mount (ref)
 	mount(p9, p10, nil, "developerThroughHumanoidDescription")
 end)
-guiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function(p11, p12) --[[ line: 109 ]]
+guiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function(p11, p12)
 	-- upvalues: mount (ref)
 	mount(nil, nil, p11, p12)
 end)
-guiService.CloseInspectMenuRequest:Connect(function() --[[ line: 113 ]]
+guiService.CloseInspectMenuRequest:Connect(function()
 	-- upvalues: var5 (write), unmountInspectAndBuy (ref)
 	if var5 then
 		unmountInspectAndBuy()
 	end
 end)
-guiService.InspectMenuEnabledChangedSignal:Connect(function(p13) --[[ line: 119 ]]
+guiService.InspectMenuEnabledChangedSignal:Connect(function(p13)
 	-- upvalues: var5 (write), unmountInspectAndBuy (ref)
 	if not p13 and var5 then
 		unmountInspectAndBuy()

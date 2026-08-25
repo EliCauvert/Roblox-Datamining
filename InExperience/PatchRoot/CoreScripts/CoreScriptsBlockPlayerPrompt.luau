@@ -17,13 +17,13 @@ local size352x352 = Enum.ThumbnailSize.Size352x352
 local headShot = Enum.ThumbnailType.HeadShot
 local avatarThumbnail = Enum.ThumbnailType.AvatarThumbnail
 
-function createFetchImageFunction(...) --[[ line: 33 ]]
+function createFetchImageFunction(...)
 	-- upvalues: socialUtilModule (ref)
 	local list = { ... }
 	
-	return function(p0) --[[ line: 35 ]]
+	return function(p0)
 		-- upvalues: socialUtilModule (copy), list (ref)
-		spawn(function() --[[ line: 36 ]]
+		spawn(function()
 			-- upvalues: socialUtilModule (copy), list (copy), p0 (ref)
 			local playerImage = socialUtilModule.GetPlayerImage(unpack(list))
 			
@@ -34,7 +34,7 @@ function createFetchImageFunction(...) --[[ line: 33 ]]
 	end
 end
 
-function DoPromptBlockPlayer(p1) --[[ line: 45 ]]
+function DoPromptBlockPlayer(p1)
 	-- upvalues: blockingUtilityModule (ref), onBlockButtonActivatedModule (ref)
 	if blockingUtilityModule:IsPlayerBlockedByUserId(p1.UserId) then
 		return
@@ -42,7 +42,7 @@ function DoPromptBlockPlayer(p1) --[[ line: 45 ]]
 	onBlockButtonActivatedModule(p1)
 end
 
-function PromptBlockPlayer(p2) --[[ line: 53 ]]
+function PromptBlockPlayer(p2)
 	-- upvalues: localPlayer (write)
 	if localPlayer.UserId < 0 then
 		error("PromptBlockPlayer can not be called for guests!")
@@ -60,7 +60,7 @@ function PromptBlockPlayer(p2) --[[ line: 53 ]]
 	DoPromptBlockPlayer(p2)
 end
 
-function DoPromptUnblockPlayer(p3) --[[ line: 70 ]]
+function DoPromptUnblockPlayer(p3)
 	-- upvalues: blockingUtilityModule (ref), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref)
 	local _ = not blockingUtilityModule:IsPlayerBlockedByUserId(p3.UserId)
 	promptCreatorModule:CreatePrompt({
@@ -73,7 +73,7 @@ function DoPromptUnblockPlayer(p3) --[[ line: 70 ]]
 		MainText = string.format("Would you like to unblock %s?", p3.Name),
 		FetchImageFunction = createFetchImageFunction(p3.UserId, size150x150, headShot),
 		FetchImageFunctionConsoleVR = createFetchImageFunction(p3.UserId, size352x352, avatarThumbnail),
-		PromptCompletedCallback = function(p4) --[[ line: 78 ]]
+		PromptCompletedCallback = function(p4)
 			-- upvalues: blockingUtilityModule (copy), p3 (ref), promptCreatorModule (copy), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
 			if p4 and not blockingUtilityModule:UnblockPlayerAsync(p3) then
 				while promptCreatorModule:IsCurrentlyPrompting() do
@@ -94,7 +94,7 @@ function DoPromptUnblockPlayer(p3) --[[ line: 70 ]]
 	})
 end
 
-function PromptUnblockPlayer(p5) --[[ line: 113 ]]
+function PromptUnblockPlayer(p5)
 	-- upvalues: localPlayer (write)
 	if localPlayer.UserId < 0 then
 		error("PromptUnblockPlayer can not be called for guests!")
@@ -112,7 +112,7 @@ function PromptUnblockPlayer(p5) --[[ line: 113 ]]
 	DoPromptUnblockPlayer(p5)
 end
 
-function GetBlockedUserIds() --[[ line: 130 ]]
+function GetBlockedUserIds()
 	-- upvalues: localPlayer (write), blockingUtilityModule (ref)
 	if localPlayer.UserId < 0 then
 		error("GetBlockedUserIds can not be called for guests!")

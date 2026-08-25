@@ -14,7 +14,7 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local t = { deviceStatusBarHeight = 0, contentMaps = {} }
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "AppTopBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), fFlagUseSignalsForAppTopBanner (ref), var5 (ref), var4 (ref), useSelector (ref), appTopBannerTypeModule (ref), foundationModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var13, var14, var15, var16, var17
 	p0 = cryoModule.Dictionary.join(t, p0)
@@ -34,23 +34,23 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "AppTopBanner" ]]
 		var16 = var4(var12.getAppTopBannerContentHeight)
 		var17 = var4(var12.getIsDisabled)
 	else
-		var13 = useSelector(reactModule.useCallback(function(p1) --[[ line: 61 ]]
+		var13 = useSelector(reactModule.useCallback(function(p1)
 			return if p1.AppTopBanner then p1.AppTopBanner.expanded else false
 		end, {}))
-		var14 = useSelector(reactModule.useCallback(function(p2) --[[ line: 65 ]]
+		var14 = useSelector(reactModule.useCallback(function(p2)
 			return p2.AppTopBanner and p2.AppTopBanner.appTopBannerContentProps
 		end, {}))
-		var15 = useSelector(reactModule.useCallback(function(p3) --[[ line: 69 ]]
+		var15 = useSelector(reactModule.useCallback(function(p3)
 			return p3.AppTopBanner and p3.AppTopBanner.onAppTopBannerClick
 		end, {}))
-		var16 = useSelector(reactModule.useCallback(function(p4) --[[ line: 73 ]]
+		var16 = useSelector(reactModule.useCallback(function(p4)
 			return p4.AppTopBanner and p4.AppTopBanner.appTopBannerContentHeight
 		end, {}))
-		var17 = useSelector(reactModule.useCallback(function(p5) --[[ line: 77 ]]
+		var17 = useSelector(reactModule.useCallback(function(p5)
 			return if p5.AppTopBanner then p5.AppTopBanner.isDisabled else false
 		end, {}))
 	end
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (write), var17 (write), var11 (ref), var16 (write), p0 (write)
 		if var13 and not var17 then
 			var11(var16 + p0.deviceStatusBarHeight)
@@ -59,7 +59,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "AppTopBanner" ]]
 		end
 		var11(0)
 	end, { var16, var13, p0.deviceStatusBarHeight, var17 })
-	local var18 = p0.contentMaps[if fFlagUseSignalsForAppTopBanner then var4(var12.getAppTopBannerType) else useSelector(reactModule.useCallback(function(p6) --[[ line: 105 ]]
+	local var18 = p0.contentMaps[if fFlagUseSignalsForAppTopBanner then var4(var12.getAppTopBannerType) else useSelector(reactModule.useCallback(function(p6)
 		-- upvalues: appTopBannerTypeModule (copy)
 		return if p6.AppTopBanner then p6.AppTopBanner.appTopBannerType else appTopBannerTypeModule.None
 	end, {}))]

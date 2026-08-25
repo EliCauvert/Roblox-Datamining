@@ -10,7 +10,7 @@ local getEditableMeshFromContextModule = require(util.getEditableMeshFromContext
 local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
 local t = {}
 
-local function reportFailure(p0, p1, p2, p3) --[[ line: 21 ]]
+local function reportFailure(p0, p1, p2, p3)
 	-- upvalues: analyticsModule (ref)
 	if p3 and p2.isServer ~= nil and p2.isServer then
 		error(p0)
@@ -20,12 +20,12 @@ local function reportFailure(p0, p1, p2, p3) --[[ line: 21 ]]
 	return false, { p0 }
 end
 
-local function _(p4, p5) --[[ line: 40 | named "vector3Equals" ]]
+local function _(p4, p5)
 	-- upvalues: floatEqualsModule (ref)
 	return floatEqualsModule(p4.X, p5.X, 0.00001) and (floatEqualsModule(p4.Y, p5.Y, 0.00001) and floatEqualsModule(p4.Z, p5.Z, 0.00001))
 end
 
-local function calculateMeshSize(p6, p7) --[[ line: 45 ]]
+local function calculateMeshSize(p6, p7)
 	-- upvalues: getEditableMeshFromContextModule (ref), reportFailure (ref), analyticsModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref)
 	local t = {
 		fieldName = "MeshId",
@@ -39,7 +39,7 @@ local function calculateMeshSize(p6, p7) --[[ line: 45 ]]
 		return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", p6.Name), analyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p7, false)
 	end
 	t.editableMesh = var13
-	local var14, var15 = pcallDeferredModule(function() --[[ line: 68 ]]
+	local var14, var15 = pcallDeferredModule(function()
 		-- upvalues: getMeshSizeModule (copy), t (ref)
 		return getMeshSizeModule(t)
 	end, p7)
@@ -50,7 +50,7 @@ local function calculateMeshSize(p6, p7) --[[ line: 45 ]]
 	return reportFailure(string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", p6.Name), analyticsModule.ErrorType.validateMeshSizeProperty_FailedToLoadMesh, p7, true)
 end
 
-local function validateInternal(p8, p9) --[[ line: 83 ]]
+local function validateInternal(p8, p9)
 	-- upvalues: calculateMeshSize (ref), floatEqualsModule (ref), reportFailure (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local var17, var18, var19 = calculateMeshSize(p8, p9)
@@ -68,12 +68,12 @@ local function validateInternal(p8, p9) --[[ line: 83 ]]
 	return reportFailure(string.format("Calculated mesh size for %s does not match MeshSize property value", p8.Name), analyticsModule.ErrorType.validateMeshSizeProperty_Mismatch, p9, false)
 end
 
-function t.validateSingleMeshPart(p10, p11) --[[ line: 107 ]]
+function t.validateSingleMeshPart(p10, p11)
 	-- upvalues: validateInternal (ref)
 	return if p11.allowEditableInstances then true else validateInternal(p10, p11)
 end
 
-function t.validateBodyAsset(value, p12) --[[ line: 117 ]]
+function t.validateBodyAsset(value, p12)
 	-- upvalues: validateInternal (ref), analyticsModule (ref), failureReasonsAccumulatorModule (ref), constantsModule (ref)
 	local currentTime = tick()
 	

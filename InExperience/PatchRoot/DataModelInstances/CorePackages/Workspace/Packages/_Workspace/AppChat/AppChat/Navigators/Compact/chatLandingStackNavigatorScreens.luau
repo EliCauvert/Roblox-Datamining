@@ -17,7 +17,7 @@ local list = {
 	{
 		[enumScreensModule.ChatLanding] = {
 			screen = chatLandingScreenModule,
-			navigationOptions = if require(appChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function() --[[ line: 34 ]]
+			navigationOptions = if require(appChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function()
 				return {
 					isRoot = true,
 					backButtonEnabled = false,
@@ -44,7 +44,7 @@ local list = {
 	{
 		[enumScreensModule.ChatDetails] = {
 			screen = chatDetailsScreenModule,
-			navigationOptions = if require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then function(p0) --[[ line: 23 | named "getChatDetailsNavigationOptions" ]]
+			navigationOptions = if require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then function(p0)
 				-- upvalues: chatDetailsNavigationOptionsModule (ref)
 				return chatDetailsNavigationOptionsModule.getNavigationOptions(p0, { tabBarVisible = false })
 			end else { backButtonEnabled = true, tabBarVisible = false }

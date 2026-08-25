@@ -13,7 +13,7 @@ local var5 = tModule.strictInterface({
 	feedbackText = tModule.optional(tModule.string)
 })
 
-return function(p0, p1) --[[ line: 28 ]]
+return function(p0, p1)
 	-- upvalues: var5 (ref), discoveryEventErrorLogger (ref), aiOverviewExplicitFeedbackThrottleHundrethsPercent (ref), telemetryService (ref)
 	local var6, var7 = var5(p0)
 	

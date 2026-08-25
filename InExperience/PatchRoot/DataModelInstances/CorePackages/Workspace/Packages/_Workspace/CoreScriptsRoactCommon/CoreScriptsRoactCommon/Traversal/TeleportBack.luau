@@ -5,7 +5,7 @@ local fFlagUseLocalTraversalHistory = require(script.Parent.Flags).FFlagUseLocal
 local teleportBackAttemptLimit = game:DefineFastInt("TeleportBackAttemptLimit", 5)
 local teleportBackRetryDelay = game:DefineFastInt("TeleportBackRetryDelay", 1)
 
-return function(p0) --[[ line: 17 | named "TeleportBack" ]]
+return function(p0)
 	-- upvalues: isRunningInStudio (ref), fFlagUseLocalTraversalHistory (ref), useTeleportedPlacesBackHistory2EngineFeature (ref), teleportService (ref), teleportBackRetryDelay (ref), teleportBackAttemptLimit (ref)
 	if isRunningInStudio() then
 		warn("Teleporting is not supported in Studio")
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 17 | named "TeleportBack" ]]
 	local _ = nil
 	local _ = nil
 	repeat
-		local ok, status = pcall(function() --[[ line: 27 ]]
+		local ok, status = pcall(function()
 			-- upvalues: fFlagUseLocalTraversalHistory (copy), useTeleportedPlacesBackHistory2EngineFeature (copy), p0 (ref), teleportService (copy)
 			return if (fFlagUseLocalTraversalHistory or useTeleportedPlacesBackHistory2EngineFeature) and p0 then teleportService:TeleportTrustedBackHistory(p0) else teleportService:TeleportTrustedBackForth(false)
 		end)

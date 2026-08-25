@@ -18,11 +18,11 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXItemDetailsIxpExposure = avatarExperienceFlagsModule.FFlagAXItemDetailsIxpExposure
 local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
 
-local function AnalyticsMetadataSelector(p0) --[[ line: 36 ]]
+local function AnalyticsMetadataSelector(p0)
 	return p0.AvatarExperience.AnalyticsMetadata
 end
 
-local function getImpressionDedupKey(p1) --[[ line: 40 ]]
+local function getImpressionDedupKey(p1)
 	-- upvalues: unifiedEventLogConstantsModule (ref)
 	local ATTRIBUTE_PREFIX = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX
 	local var13 = p1:GetAttribute(ATTRIBUTE_PREFIX .. "widgetId")
@@ -31,7 +31,7 @@ local function getImpressionDedupKey(p1) --[[ line: 40 ]]
 	return if var14 == nil then if var13 == nil then p1:GetFullName() else "widget|" .. tostring(var13) else string.format("item|%s|%s|%s|%s|%s", tostring(var13), tostring(var14), tostring(p1:GetAttribute(ATTRIBUTE_PREFIX .. "gridPositionRow")), tostring(p1:GetAttribute(ATTRIBUTE_PREFIX .. "gridPositionColumn")), tostring(p1:GetAttribute(ATTRIBUTE_PREFIX .. "itemPosition")))
 end
 
-return function(p2) --[[ line: 59 ]]
+return function(p2)
 	-- upvalues: fFlagAXItemDetailsIxpExposure (ref), useAvatarRoute (ref), useSelectorSignal (ref), selectSearchKeyword (ref), AnalyticsMetadataSelector (ref), reactModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), unifiedEventLogConstantsModule (ref), seenImpressionsStoreModule (ref), unifiedImpressions (ref), getImpressionDedupKey (ref), avatarScreenProperties (ref), sendUnifiedEventLogForInstanceModule (ref), cryoModule (ref), unifiedEventLogEnumsModule (ref), collectionService (ref), avatarExperienceScreenSizeImpressionsDetectorModule (ref)
 	local var15 = nil
 	local var16 = nil
@@ -44,11 +44,11 @@ return function(p2) --[[ line: 59 ]]
 	end
 	local var18 = reactModule.useRef({})
 	local var19 = if fFlagAXItemDetailsIxpExposure then reactModule.useRef({}) else nil
-	local var20 = reactModule.useCallback(function(p3) --[[ line: 75 ]]
+	local var20 = reactModule.useCallback(function(p3)
 		-- upvalues: fFlagAXUnifiedImpressionsOnThumbnail (copy), unifiedEventLogConstantsModule (copy), seenImpressionsStoreModule (copy), unifiedImpressions (copy), getImpressionDedupKey (copy), var18 (ref)
 		return if fFlagAXUnifiedImpressionsOnThumbnail then if p3:GetAttribute(unifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION) then false else not seenImpressionsStoreModule.hasSeen(unifiedImpressions, getImpressionDedupKey(p3)) else not var18.current[p3:GetFullName()]
 	end, {})
-	local var21 = reactModule.useCallback(function(p4) --[[ line: 86 ]]
+	local var21 = reactModule.useCallback(function(p4)
 		-- upvalues: fFlagAXUnifiedImpressionsOnThumbnail (copy), seenImpressionsStoreModule (copy), unifiedImpressions (copy), getImpressionDedupKey (copy), var18 (ref), fFlagAXItemDetailsIxpExposure (copy), var19 (write), avatarScreenProperties (copy), var15 (write), sendUnifiedEventLogForInstanceModule (copy), cryoModule (copy), var17 (write), unifiedEventLogEnumsModule (copy), var16 (write), p2 (ref)
 		local t = {}
 		
@@ -60,7 +60,7 @@ return function(p2) --[[ line: 59 ]]
 					t[fullName] = v
 					
 					if not fFlagAXUnifiedImpressionsOnThumbnail and not var19.current[fullName] then
-						var19.current[fullName] = v.AncestryChanged:Connect(function() --[[ line: 106 ]]
+						var19.current[fullName] = v.AncestryChanged:Connect(function()
 							-- upvalues: v (ref), var18 (copy), fullName (ref), var19 (copy)
 							if not v.Parent then
 								var18.current[fullName] = nil
@@ -100,9 +100,9 @@ return function(p2) --[[ line: 59 ]]
 	end, if fFlagAXItemDetailsIxpExposure then { p2.extensions } else { var15, var16, var17 })
 	
 	if fFlagAXItemDetailsIxpExposure then
-		reactModule.useEffect(function() --[[ line: 162 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var19 (write)
-			return function() --[[ line: 163 ]]
+			return function()
 				-- upvalues: var19 (copy)
 				for i, v in var19.current do
 					if v then
@@ -119,7 +119,7 @@ return function(p2) --[[ line: 59 ]]
 		onRequestImpressionsSignal = p2.requestImpressionsSignal,
 		filterImpressionFunc = var20,
 		onImpressionsDetected = var21,
-		collectObjectsFunc = reactModule.useCallback(function(p5) --[[ line: 174 ]]
+		collectObjectsFunc = reactModule.useCallback(function(p5)
 			-- upvalues: fFlagAXUnifiedImpressionsOnThumbnail (copy), collectionService (copy), unifiedEventLogConstantsModule (copy)
 			if not fFlagAXUnifiedImpressionsOnThumbnail then
 				return collectionService:GetTagged(unifiedEventLogConstantsModule.TAG_NAME)

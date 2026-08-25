@@ -1,14 +1,14 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 local getHardwareSafeAreaInsetsModule = require(script.Parent.getHardwareSafeAreaInsets)
 
-return function(value) --[[ line: 7 | named "useHardwareInsets" ]]
+return function(value)
 	-- upvalues: reactModule (ref), getHardwareSafeAreaInsetsModule (ref)
 	local var2, var3 = reactModule.useState(getHardwareSafeAreaInsetsModule)
-	reactModule.useEffect(function() --[[ line: 10 ]]
+	reactModule.useEffect(function()
 		-- upvalues: value (ref), var3 (ref), getHardwareSafeAreaInsetsModule (copy)
-		local var4 = if value then value:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 14 ]]
+		local var4 = if value then value:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: var3 (copy), getHardwareSafeAreaInsetsModule (copy)
-			var3(function(p0) --[[ line: 15 ]]
+			var3(function(p0)
 				-- upvalues: getHardwareSafeAreaInsetsModule (copy)
 				local var5 = getHardwareSafeAreaInsetsModule()
 				
@@ -16,7 +16,7 @@ return function(value) --[[ line: 7 | named "useHardwareInsets" ]]
 			end)
 		end) else nil
 		
-		return function() --[[ line: 31 ]]
+		return function()
 			-- upvalues: var4 (write)
 			if var4 then
 				var4:Disconnect()

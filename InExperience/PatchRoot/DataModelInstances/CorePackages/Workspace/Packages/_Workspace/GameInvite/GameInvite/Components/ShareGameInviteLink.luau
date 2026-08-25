@@ -27,10 +27,10 @@ local t = {
 	copyLink = "Feature.SocialShare.Action.CopyLink"
 }
 
-return function(p0) --[[ line: 46 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useSelector (ref), useStyle (ref), useDispatch (ref), getLocalizedStrings (ref), t (ref), shareLinksNetworking (ref), shareLinksRodux (ref), gameInviteAnalyticsManagerModule (ref), default (ref), throttle (ref), linkButton (ref), networkStatus (ref), imageSetButton (ref), link (ref), share (ref)
 	local var6, var7 = reactModule.useState(false)
-	local var8 = useSelector(function(p1) --[[ line: 49 ]]
+	local var8 = useSelector(function(p1)
 		return p1
 	end)
 	local var9 = useStyle()
@@ -38,11 +38,11 @@ return function(p0) --[[ line: 46 ]]
 	local var11 = getLocalizedStrings(t)
 	local shareInviteLink = var8.ShareLinks.Invites.ShareInviteLink
 	
-	local var12 = function() --[[ line: 61 ]]
+	local var12 = function()
 		-- upvalues: var10 (ref), shareLinksNetworking (copy), shareLinksRodux (copy), gameInviteAnalyticsManagerModule (copy), default (copy)
 		var10(shareLinksNetworking.GenerateLink.API({
 			linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
-		})):andThen(function(p2) --[[ line: 64 ]]
+		})):andThen(function(p2)
 			-- upvalues: gameInviteAnalyticsManagerModule (copy), shareLinksRodux (copy), default (copy)
 			gameInviteAnalyticsManagerModule:linkGenerated({
 				linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue(),
@@ -55,13 +55,13 @@ return function(p0) --[[ line: 46 ]]
 		end)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: shareInviteLink (ref), var12 (ref)
 		if not game:GetFastFlag("generateGameInviteShareLinkOnClick") and not shareInviteLink then
 			var12()
 		end
 	end, {})
-	local var13 = throttle(function() --[[ line: 100 ]]
+	local var13 = throttle(function()
 		-- upvalues: shareInviteLink (ref), gameInviteAnalyticsManagerModule (copy), default (copy), var12 (ref), p0 (ref), var7 (ref)
 		gameInviteAnalyticsManagerModule:onShareButtonClick(if shareInviteLink then shareInviteLink.linkId else nil)
 		
@@ -72,7 +72,7 @@ return function(p0) --[[ line: 46 ]]
 		end
 		if p0.isDesktop then
 			var7(true)
-			task.delay(1, function() --[[ line: 116 ]]
+			task.delay(1, function()
 				-- upvalues: var7 (copy)
 				var7(false)
 			end)

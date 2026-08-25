@@ -27,7 +27,7 @@ local resetComments = utilsModule_1.resetComments
 local printWithComments = utilsModule_1.printWithComments
 local DEFAULT_OPERATION_TYPE_NAME_MAP = require(script.Parent["schema-def"]).DEFAULT_OPERATION_TYPE_NAME_MAP
 
-function t.mergeTypeDefs(p0, p1) --[[ line: 159 ]]
+function t.mergeTypeDefs(p0, p1)
 	-- upvalues: resetComments (ref), kind (ref), var2 (write), object (ref), printWithComments (ref)
 	resetComments()
 	local t = {
@@ -46,7 +46,7 @@ function t.mergeTypeDefs(p0, p1) --[[ line: 159 ]]
 	return var9
 end
 
-local function visitTypeSources(p2, p3, p4, p5) --[[ line: 188 ]]
+local function visitTypeSources(p2, p3, p4, p5)
 	-- upvalues: set (ref), boolean (ref), visitTypeSources (ref), array (ref), isSchema (ref), getDocumentNodeFromSchema (ref), isStringTypes (ref), isSourceTypes (ref), parse (ref), isDefinitionNode (ref), isDocumentNode (ref), error (ref)
 	local var10 = if p4 ~= nil then {} else p4
 	local var11 = if p5 ~= nil then set.new() else p5
@@ -88,7 +88,7 @@ local function visitTypeSources(p2, p3, p4, p5) --[[ line: 188 ]]
 	return var10
 end
 
-function t.mergeGraphQLTypes(p6, p7) --[[ line: 262 ]]
+function t.mergeGraphQLTypes(p6, p7)
 	-- upvalues: resetComments (ref), visitTypeSources (ref), mergeGraphQLNodes (ref), boolean (ref), schemaDefSymbol (ref), kind (ref), DEFAULT_OPERATION_TYPE_NAME_MAP (ref), array (ref), defaultStringComparator (ref)
 	resetComments()
 	local var13 = mergeGraphQLNodes(visitTypeSources(p6, p7), p7)
@@ -98,7 +98,7 @@ function t.mergeGraphQLTypes(p6, p7) --[[ line: 262 ]]
 		local operationTypes = var14.operationTypes
 		
 		for i in DEFAULT_OPERATION_TYPE_NAME_MAP do
-			if not boolean.toJSBoolean(array.find(operationTypes, function(p8) --[[ line: 288 ]]
+			if not boolean.toJSBoolean(array.find(operationTypes, function(p8)
 				-- upvalues: i (ref)
 				return p8.operation == i
 			end)) then
@@ -136,7 +136,7 @@ function t.mergeGraphQLTypes(p6, p7) --[[ line: 262 ]]
 	
 	if p7 and boolean.toJSBoolean(p7.sort) then
 		local var17 = if typeof(p7.sort) == "function" then p7.sort else defaultStringComparator
-		array.sort(var16, function(p9, p10) --[[ line: 392 ]]
+		array.sort(var16, function(p9, p10)
 			-- upvalues: var17 (ref)
 			return var17(if typeof(p9.name) == "table" then p9.name.value else nil, if typeof(p10.name) == "table" then p10.name.value else nil)
 		end)

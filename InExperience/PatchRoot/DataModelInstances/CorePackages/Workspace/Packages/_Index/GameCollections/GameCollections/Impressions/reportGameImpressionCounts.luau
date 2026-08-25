@@ -3,7 +3,7 @@ local parent = script:FindFirstAncestor("GameCollections").Parent
 local isVRAppBuild = require(parent.AppCommonLib).IsVRAppBuild
 local appPage = require(parent.RobloxAppEnums).AppPage
 local var1 = "Other"
-pcall(function() --[[ line: 11 ]]
+pcall(function()
 	-- upvalues: userInputService (ref), var1 (write)
 	local platform = userInputService:GetPlatform()
 	
@@ -36,7 +36,7 @@ pcall(function() --[[ line: 11 ]]
 	end
 end)
 
-return function(p0, p1, p2, p3) --[[ line: 32 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: appPage (ref), var1 (write), isVRAppBuild (ref)
 	if not p0 or not p0.Diag then return end
 	if not p1 then return end

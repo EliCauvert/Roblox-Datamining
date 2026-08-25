@@ -16,18 +16,18 @@ local resetCanonicalStringify = nil
 local var6 = nil
 local var7 = nil
 
-local function _(p0) --[[ line: 47 | named "shallowCopy" ]]
+local function _(p0)
 	return table.clone(p0)
 end
 
-local _ = function(p1) --[[ line: 53 | named "isArrayLike" ]]
+local _ = function(p1)
 	return #p1 == 0 and not next(p1) or #p1 > 1
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 147 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), set (ref), trie (ref), canUseWeakMap (ref), weakMap (ref), map (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.known = set.new()
@@ -39,12 +39,12 @@ function t_1.new() --[[ line: 147 ]]
 	return tbl
 end
 
-function t_1:isKnown(p2) --[[ line: 162 ]]
+function t_1:isKnown(p2)
 	-- upvalues: isNonNullObject (ref)
 	return isNonNullObject(p2) and self.known:has(p2)
 end
 
-function t_1:pass(p3) --[[ line: 166 ]]
+function t_1:pass(p3)
 	-- upvalues: isNonNullObject (ref)
 	if isNonNullObject(p3) then
 		local cloned = table.clone(p3)
@@ -55,7 +55,7 @@ function t_1:pass(p3) --[[ line: 166 ]]
 	return p3
 end
 
-function t_1:admit(p4) --[[ line: 177 ]]
+function t_1:admit(p4)
 	-- upvalues: isNonNullObject (ref), objectModule (ref), array (ref)
 	if isNonNullObject(p4) then
 		local var11 = self.passes:get(p4)
@@ -89,7 +89,7 @@ function t_1:admit(p4) --[[ line: 177 ]]
 		local var16 = self:sortedKeys(p4)
 		table.insert(list, var16.json)
 		local listCount = #list
-		array.forEach(var16.sorted, function(p5) --[[ line: 226 ]]
+		array.forEach(var16.sorted, function(p5)
 			-- upvalues: list (ref), self (ref), p4 (ref)
 			table.insert(list, self:admit(p4[p5]))
 		end)
@@ -99,7 +99,7 @@ function t_1:admit(p4) --[[ line: 177 ]]
 			var18.object = objectModule.create(prototypeOf)
 			local object = var18.object
 			self.known:add(object)
-			array.forEach(var16.sorted, function(p6, p7) --[[ line: 244 ]]
+			array.forEach(var16.sorted, function(p6, p7)
 				-- upvalues: object (ref), list (ref), listCount (ref)
 				object[p6] = list[listCount + p7]
 			end)
@@ -112,7 +112,7 @@ function t_1:admit(p4) --[[ line: 177 ]]
 	end
 end
 
-function t_1:sortedKeys(p8) --[[ line: 267 ]]
+function t_1:sortedKeys(p8)
 	-- upvalues: objectModule (ref), array (ref), httpService (ref)
 	local var19 = objectModule.keys(p8)
 	local var20 = self.pool:lookupArray(var19)
@@ -132,7 +132,7 @@ end
 
 t.ObjectCanon = t_1
 t.canonicalStringify = objectModule.assign(setmetatable({}, {
-	__call = function(_, p9) --[[ line: 301 ]]
+	__call = function(_, p9)
 		-- upvalues: isNonNullObject (ref), var6 (write), resetCanonicalStringify (write), var7 (write), sortedEncode (ref), httpService (ref)
 		if not isNonNullObject(p9) then
 			return httpService:JSONEncode(p9)
@@ -149,13 +149,13 @@ t.canonicalStringify = objectModule.assign(setmetatable({}, {
 		return var23
 	end
 }), {
-	reset = function(_) --[[ line: 323 ]]
+	reset = function(_)
 		-- upvalues: resetCanonicalStringify (write)
 		return resetCanonicalStringify()
 	end
 })
 
-resetCanonicalStringify = function() --[[ line: 330 | named "resetCanonicalStringify" ]]
+resetCanonicalStringify = function()
 	-- upvalues: var6 (write), t_1 (ref), var7 (write), weakMap (ref)
 	var6 = t_1.new()
 	var7 = weakMap.new()

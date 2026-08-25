@@ -1,4 +1,4 @@
-﻿local function copyDeep(p0) --[[ line: 2 ]]
+﻿local function copyDeep(p0)
 	-- upvalues: copyDeep (ref)
 	local var1 = type(p0)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)

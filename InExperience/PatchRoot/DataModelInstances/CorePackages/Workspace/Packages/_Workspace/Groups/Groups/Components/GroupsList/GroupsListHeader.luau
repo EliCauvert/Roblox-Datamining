@@ -13,7 +13,7 @@ local appHeaderBarModule = require(parent.AppHeaderBar)
 local textKeysModule = require(groups.Common.TextKeys)
 local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
 
-return function(p0) --[[ line: 33 | named "GroupsListHeader" ]]
+return function(p0)
 	-- upvalues: useGroupsWrapperContextModule (ref), useNavigation (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), appHeaderBarModule (ref), view (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var6 = useGroupsWrapperContextModule()
 	local var7 = useNavigation()
@@ -21,11 +21,11 @@ return function(p0) --[[ line: 33 | named "GroupsListHeader" ]]
 		title = textKeysModule.HeadingGroups,
 		seeAll = textKeysModule.ActionSeeAll
 	})
-	local var9 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		var7.goBack()
 	end, { var7 })
-	local var10 = reactModule.useMemo(function() --[[ line: 46 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: appHeaderBarModule (copy), var9 (ref)
 		return appHeaderBarModule.makeBackButton(var9)
 	end, { var9 })
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 33 | named "GroupsListHeader" ]]
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		LeftSection = reactModule.createElement(view, { tag = "row auto-xy align-y-center gap-small" }, {
-			BackButton = reactModule.useMemo(function() --[[ line: 50 ]]
+			BackButton = reactModule.useMemo(function()
 				-- upvalues: var10 (ref), reactModule (copy), view (copy)
 				return reactModule.createElement(view, { tag = "size-0 auto-xy align-x-left", LayoutOrder = 1 }, { button = var10() })
 			end, { var10 }),

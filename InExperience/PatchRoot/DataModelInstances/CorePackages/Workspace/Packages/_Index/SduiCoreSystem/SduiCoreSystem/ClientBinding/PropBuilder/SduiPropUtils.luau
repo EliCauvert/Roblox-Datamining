@@ -34,7 +34,7 @@ local sduiPropBuilderSupportNilHydration = game:DefineFastFlag("SduiPropBuilderS
 local frozen = table.freeze({ status = dataStatus.Failed })
 local frozen_1 = table.freeze({})
 
-local function resolveHydrationBinding(p0, p1, p2, p3) --[[ line: 88 ]]
+local function resolveHydrationBinding(p0, p1, p2, p3)
 	-- upvalues: sduiPropBuilderSupportNilHydration (ref), sduiDataBindingContentTypeModule (ref), fFlagSduiHydrationFetchIfMissing (ref), sduiDataBinderModule (ref)
 	local joined = table.concat(p0, ".")
 	local var31 = p0[1]
@@ -61,7 +61,7 @@ local function resolveHydrationBinding(p0, p1, p2, p3) --[[ line: 88 ]]
 	return fieldValue, fieldValue_1
 end
 
-local function resolveBindingPathValue(p4, p5, p6, p7, p8, p9, p10) --[[ line: 144 ]]
+local function resolveBindingPathValue(p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: tryGetPathFromDataModule (ref), sduiDataBinderModule (ref), fFlagSduiClientPageScope (ref), resolveHydrationBinding (ref), fFlagSduiRenderPerf (ref), sduiParseHelpersModule (ref)
 	local var35, var36 = tryGetPathFromDataModule(p7(p4), p5)
 	
@@ -81,7 +81,7 @@ local function resolveBindingPathValue(p4, p5, p6, p7, p8, p9, p10) --[[ line: 1
 		if fFlagSduiRenderPerf then
 			var38 = p8(var38, p4)
 		else
-			local ok, status = pcall(function() --[[ line: 190 ]]
+			local ok, status = pcall(function()
 				-- upvalues: p8 (ref), var38 (write), p4 (ref)
 				return p8(var38, p4)
 			end)
@@ -95,11 +95,11 @@ local function resolveBindingPathValue(p4, p5, p6, p7, p8, p9, p10) --[[ line: 1
 	return var38, var39
 end
 
-local function generateStaticPropValue(p11, p12) --[[ line: 212 ]]
+local function generateStaticPropValue(p11, p12)
 	return if p12 then p12(p11) else p11
 end
 
-local function generateDynamicBindingPropValue(p13, p14, p15, p16, p17, p18) --[[ line: 236 ]]
+local function generateDynamicBindingPropValue(p13, p14, p15, p16, p17, p18)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), signalsModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
@@ -113,9 +113,9 @@ local function generateDynamicBindingPropValue(p13, p14, p15, p16, p17, p18) --[
 	if not var41 or #var41 == 0 then
 		error(`Invalid bindingPath: {p13}`)
 	end
-	return signalsModule.createComputed(function(p19) --[[ line: 258 ]]
+	return signalsModule.createComputed(function(p19)
 		-- upvalues: resolveBindingPathValue (copy), var41 (ref), p14 (ref), p16 (ref), p17 (ref), p18 (ref), fFlagSduiClientPageScope (copy), p15 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), p13 (ref), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
-		local ok, status, var42 = pcall(function() --[[ line: 259 ]]
+		local ok, status, var42 = pcall(function()
 			-- upvalues: resolveBindingPathValue (copy), p19 (ref), var41 (copy), p14 (copy), p16 (copy), p17 (copy), p18 (copy), fFlagSduiClientPageScope (copy), p15 (copy)
 			local var43, var44 = resolveBindingPathValue(p19, var41, p14, p16, p17, p18, if fFlagSduiClientPageScope then p15 else nil)
 			
@@ -137,7 +137,7 @@ local function generateDynamicBindingPropValue(p13, p14, p15, p16, p17, p18) --[
 	end, tutilsModule.shallowEqual)
 end
 
-local function generateTokenBindingPropValue(p20, p21, p22) --[[ line: 298 ]]
+local function generateTokenBindingPropValue(p20, p21, p22)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), signalsModule (ref), getSduiTokensStoreModule (ref), tryGetPathFromDataModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), fFlagLuaAppSduiColorPropMigration (ref), dataStatus (ref), tutilsModule (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
@@ -148,7 +148,7 @@ local function generateTokenBindingPropValue(p20, p21, p22) --[[ line: 298 ]]
 	end
 	local var45 = if fFlagSduiRenderPerf then splitDottedPathModule(p20) else string.split(p20, ".")
 	
-	return signalsModule.createComputed(function(p23) --[[ line: 314 ]]
+	return signalsModule.createComputed(function(p23)
 		-- upvalues: getSduiTokensStoreModule (copy), p21 (ref), tryGetPathFromDataModule (copy), var45 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy), fFlagLuaAppSduiColorPropMigration (copy), p22 (ref), dataStatus (copy)
 		local var46, var47 = tryGetPathFromDataModule(getSduiTokensStoreModule().getTokens(p23, p21.appPage), var45)
 		
@@ -168,7 +168,7 @@ local function generateTokenBindingPropValue(p20, p21, p22) --[[ line: 298 ]]
 	end, tutilsModule.shallowEqual)
 end
 
-local function generateFormatStringPropValue(p24, p25, p26, p27, p28) --[[ line: 361 ]]
+local function generateFormatStringPropValue(p24, p25, p26, p27, p28)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiFormatArgFormatters (ref), applyFormatArgFormatter (ref), frozen (ref), generateDynamicBindingPropValue (ref), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), tutilsModule (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
@@ -207,7 +207,7 @@ local function generateFormatStringPropValue(p24, p25, p26, p27, p28) --[[ line:
 					str = str:gsub("{" .. i .. "}", var50)
 					continue
 				end
-				return function() --[[ line: 409 ]]
+				return function()
 					-- upvalues: frozen (copy)
 					return frozen
 				end
@@ -224,7 +224,7 @@ local function generateFormatStringPropValue(p24, p25, p26, p27, p28) --[[ line:
 			warn(`Unrecognized argType in buildFormatString {type}`)
 		end
 	end
-	return signalsModule.createComputed(function(p29) --[[ line: 427 ]]
+	return signalsModule.createComputed(function(p29)
 		-- upvalues: str (write), t (ref), fFlagSduiFormatArgFormatters (copy), t_1 (ref), applyFormatArgFormatter (copy), p26 (ref), frozen (copy), p28 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
 		local var51 = str
 		
@@ -254,7 +254,7 @@ local function generateFormatStringPropValue(p24, p25, p26, p27, p28) --[[ line:
 		if not p28 then
 			return { data = var51 }
 		end
-		local ok, status = pcall(function() --[[ line: 454 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p28 (copy), var51 (write)
 			return p28(var51)
 		end)
@@ -274,7 +274,7 @@ local function generateFormatStringPropValue(p24, p25, p26, p27, p28) --[[ line:
 	end, tutilsModule.shallowEqual)
 end
 
-local function validateNumbers(p30, p31, p32) --[[ line: 483 ]]
+local function validateNumbers(p30, p31, p32)
 	if typeof(p31) ~= "number" then
 		p31 = tonumber(p31)
 	end
@@ -287,11 +287,11 @@ local function validateNumbers(p30, p31, p32) --[[ line: 483 ]]
 	return p31, p32
 end
 
-local function _(p33) --[[ line: 502 | named "isEmpty" ]]
+local function _(p33)
 	return p33 == nil or (if type(p33) == "string" then p33 == "" else type(p33) == "table" and next(p33) == nil)
 end
 
-local function isSame(p34, p35) --[[ line: 527 ]]
+local function isSame(p34, p35)
 	-- upvalues: sduiParsersModule (ref)
 	if p34 == p35 then
 		return true
@@ -312,7 +312,7 @@ local function isSame(p34, p35) --[[ line: 527 ]]
 	return p34 == p35
 end
 
-local function evaluateCondition(p36, p37, p38, p39, p40) --[[ line: 571 ]]
+local function evaluateCondition(p36, p37, p38, p39, p40)
 	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref), dataStatus (ref), validateNumbers (ref), isSame (ref), fFlagSduiIsEmptyConditions (ref), evaluateCondition (ref)
 	if p37 == nil then
 		return true
@@ -327,10 +327,10 @@ local function evaluateCondition(p36, p37, p38, p39, p40) --[[ line: 571 ]]
 		error("nil conditionValue in condition")
 	end
 	local var76, var77
-	local function getFieldObject(p41) --[[ line: 591 ]]
+	local function getFieldObject(p41)
 		-- upvalues: fFlagSduiRenderPerf (copy), splitDottedPathModule (copy), resolveBindingPathValue (copy), p36 (ref), p38 (ref), p40 (ref), fFlagSduiClientPageScope (copy), p39 (ref)
 		local var80 = if fFlagSduiRenderPerf then splitDottedPathModule(p41) else string.split(p41, ".")
-		local ok, status, var81 = pcall(function() --[[ line: 597 ]]
+		local ok, status, var81 = pcall(function()
 			-- upvalues: resolveBindingPathValue (copy), p36 (copy), var80 (ref), p38 (copy), p40 (copy), fFlagSduiClientPageScope (copy), p39 (copy)
 			return resolveBindingPathValue(p36, var80, p38, p40, nil, true, if fFlagSduiClientPageScope then p39 else nil)
 		end)
@@ -446,7 +446,7 @@ local function evaluateCondition(p36, p37, p38, p39, p40) --[[ line: 571 ]]
 	return false
 end
 
-local function selectConditionalOption(p42, p43, p44, p45, p46) --[[ line: 718 ]]
+local function selectConditionalOption(p42, p43, p44, p45, p46)
 	-- upvalues: evaluateCondition (ref), dataStatus (ref)
 	for i, v in p43 do
 		local var82, var83 = evaluateCondition(p42, v.condition, p44, p45, p46)
@@ -461,7 +461,7 @@ local function selectConditionalOption(p42, p43, p44, p45, p46) --[[ line: 718 ]
 	return nil
 end
 
-local function resolveTablePropValue(p47, p48, p49, p50, _, _, _, _, _) --[[ line: 823 ]]
+local function resolveTablePropValue(p47, p48, p49, p50, _, _, _, _, _)
 	-- upvalues: fFlagSduiRenderPerf (ref), cryoModule (ref), frozen_1 (ref), dataStatus (ref)
 	local join
 	if fFlagSduiRenderPerf then
@@ -491,7 +491,7 @@ return {
 	generateDynamicBindingPropValue = generateDynamicBindingPropValue,
 	generateTokenBindingPropValue = generateTokenBindingPropValue,
 	generateFormatStringPropValue = generateFormatStringPropValue,
-	generateConditionalPropValue = function(p51, p52, p53, p54, p55, p56, p57, p58) --[[ line: 754 ]]
+	generateConditionalPropValue = function(p51, p52, p53, p54, p55, p56, p57, p58)
 		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), signalsModule (ref), selectConditionalOption (ref), propResultCategory (ref), dataStatus (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), frozen (ref), tutilsModule (ref)
 		local currentComponentType = nil
 		local currentParserName = nil
@@ -502,9 +502,9 @@ return {
 		end
 		local options = p51.options
 		
-		return signalsModule.createComputed(function(p59) --[[ line: 773 ]]
+		return signalsModule.createComputed(function(p59)
 			-- upvalues: selectConditionalOption (copy), options (ref), p52 (ref), p53 (ref), p55 (ref), p56 (ref), p54 (ref), p57 (ref), propResultCategory (copy), dataStatus (copy), p58 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
-			local ok, status, var85 = pcall(function() --[[ line: 774 ]]
+			local ok, status, var85 = pcall(function()
 				-- upvalues: selectConditionalOption (copy), p59 (ref), options (copy), p52 (copy), p53 (copy), p55 (copy), p56 (copy), p54 (copy), p57 (copy), propResultCategory (copy), dataStatus (copy)
 				local var86, var87 = selectConditionalOption(p59, options, p52, p53, p55)
 				
@@ -541,7 +541,7 @@ return {
 			return frozen
 		end, tutilsModule.shallowEqual)
 	end,
-	generateTablePropSignalValue = function(value, p60, p61, p62, p63, p64, p65) --[[ line: 853 ]]
+	generateTablePropSignalValue = function(value, p60, p61, p62, p63, p64, p65)
 		-- upvalues: fFlagSduiImprovedErrorDimensions (ref), signalsModule (ref), resolveTablePropValue (ref), fFlagSduiFocusNavActionsStructured (ref), sduiParseHelpersModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), frozen (ref), tutilsModule (ref)
 		local currentComponentType = nil
 		local currentParserName = nil
@@ -552,9 +552,9 @@ return {
 		end
 		local var91, var92, var93 = p64(value, p60, p63, p61, p62)
 		
-		return signalsModule.createComputed(function(p66) --[[ line: 876 ]]
+		return signalsModule.createComputed(function(p66)
 			-- upvalues: resolveTablePropValue (copy), var91 (ref), var92 (ref), var93 (ref), p60 (ref), p61 (ref), p62 (ref), p63 (ref), p64 (ref), fFlagSduiFocusNavActionsStructured (copy), p65 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), frozen (copy)
-			local ok, status, var94 = pcall(function() --[[ line: 877 ]]
+			local ok, status, var94 = pcall(function()
 				-- upvalues: resolveTablePropValue (copy), p66 (ref), var91 (copy), var92 (copy), var93 (copy), p60 (copy), p61 (copy), p62 (copy), p63 (copy), p64 (copy)
 				local var95, var96 = resolveTablePropValue(p66, var91, var92, var93, p60, p61, p62, p63, p64)
 				
@@ -571,7 +571,7 @@ return {
 				
 				return frozen
 			elseif fFlagSduiFocusNavActionsStructured and p65 and status ~= nil then
-				local ok_1, status_1 = pcall(function() --[[ line: 894 ]]
+				local ok_1, status_1 = pcall(function()
 					-- upvalues: p65 (copy), status (write)
 					return p65(status)
 				end)
@@ -597,29 +597,29 @@ return {
 	resolveHydrationBinding = resolveHydrationBinding,
 	resolveBindingPathValue = resolveBindingPathValue,
 	resolveTablePropValue = resolveTablePropValue,
-	resolveSourceArray = function(p67, p68, p69, p70, p71, p72) --[[ line: 937 ]]
+	resolveSourceArray = function(p67, p68, p69, p70, p71, p72)
 		-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), resolveBindingPathValue (ref), fFlagSduiClientPageScope (ref)
 		return if p67 == "binding_path" then resolveBindingPathValue(p69, if fFlagSduiRenderPerf then splitDottedPathModule(p68) else string.split(p68, "."), p70, p71, nil, nil, if fFlagSduiClientPageScope then p72 else nil) elseif p67 == "literal" then p68 and p68.items else nil
 	end,
-	resolveFieldMap = function(p73, p74, p75, p76, p77, p78, p79) --[[ line: 980 ]]
+	resolveFieldMap = function(p73, p74, p75, p76, p77, p78, p79)
 		-- upvalues: resolveTablePropValue (ref)
 		local var97, var98 = p79(p73, p74, p75, p76, p77)
 		
 		return resolveTablePropValue(p78, var97, var98, nil, p74, p76, p77, p75, nil)
 	end,
-	mapArrayWithFieldMap = function(p80, p81, p82, p83, p84, p85, p86) --[[ line: 1020 ]]
+	mapArrayWithFieldMap = function(p80, p81, p82, p83, p84, p85, p86)
 		-- upvalues: buildDataBindingSourcesForTemplateModule (ref), resolveTablePropValue (ref)
 		local t = {}
 		
 		for i, v in p80 do
 			local var100 = buildDataBindingSourcesForTemplateModule(v, p81)
 			
-			local var101 = function() --[[ line: 1032 ]]
+			local var101 = function()
 				-- upvalues: var100 (ref)
 				return var100
 			end
 			
-			local var102 = function() --[[ line: 1035 ]]
+			local var102 = function()
 				-- upvalues: v (ref)
 				return v
 			end
@@ -629,10 +629,10 @@ return {
 		end
 		return t
 	end,
-	isComponentVisible = function(p87, p88) --[[ line: 1052 ]]
+	isComponentVisible = function(p87, p88)
 		return p87.isComponentFilteredSignal == nil or p87.isComponentFilteredSignal(p88).data ~= true
 	end,
-	resolveTemplate = if fFlagSduiInlineNestedComponentSchema then function(p91, p92, p93) --[[ line: 1098 | named "resolveTemplate" ]]
+	resolveTemplate = if fFlagSduiInlineNestedComponentSchema then function(p91, p92, p93)
 		if p92 ~= nil then
 			return p92
 		elseif p91 == nil or p91 == "" then
@@ -644,7 +644,7 @@ return {
 			error(`Could not find template for roblox_component {p91}`)
 		end
 		return templateForRobloxComponent
-	end else function(p89, p90) --[[ line: 1065 | named "resolveTemplate_legacy" ]]
+	end else function(p89, p90)
 		if p89 == nil then
 			error("Missing roblox_component")
 		end
@@ -655,7 +655,7 @@ return {
 		end
 		return templateForRobloxComponent
 	end,
-	resolveTemplateFromData = if fFlagSduiInlineNestedComponentSchema then function(p94, p95) --[[ line: 1123 | named "resolveTemplateFromData" ]]
+	resolveTemplateFromData = if fFlagSduiInlineNestedComponentSchema then function(p94, p95)
 		local inlineComponent = p94.inline_component
 		local robloxComponent = p94.roblox_component
 		

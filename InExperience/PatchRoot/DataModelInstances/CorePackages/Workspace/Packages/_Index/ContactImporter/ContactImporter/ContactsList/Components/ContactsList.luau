@@ -8,7 +8,7 @@ local roact = dependenciesModule.Roact
 local useNavigation = dependenciesModule.useNavigation
 local fFlagContactImporterIXPCleanup = require(parent_1.SharedFlags).FFlagContactImporterIXPCleanup
 
-function ContactsList(p0) --[[ line: 15 ]]
+function ContactsList(p0)
 	-- upvalues: useNavigation (ref), fFlagContactImporterIXPCleanup (ref), offPlatformFriendRequestsIXPModule (ref), roact (ref), contactsListContainerModule (ref), dash (ref)
 	local var3 = useNavigation()
 	local var4 = if fFlagContactImporterIXPCleanup then nil else offPlatformFriendRequestsIXPModule.useOffPlatformFriendRequestsVariant()

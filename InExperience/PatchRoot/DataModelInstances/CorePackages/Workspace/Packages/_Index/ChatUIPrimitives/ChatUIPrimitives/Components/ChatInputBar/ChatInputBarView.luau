@@ -9,27 +9,27 @@ local useChatAutocompleteEngineModule = require(script.Parent.Autocomplete.useCh
 local expChatFixInputBarSendEligibility = game:DefineFastFlag("ExpChatFixInputBarSendEligibility", false)
 local expChatComposerFigmaParity = game:DefineFastFlag("ExpChatComposerFigmaParity", false)
 
-local function _(p0, p1) --[[ line: 25 | named "fade" ]]
+local function _(p0, p1)
 	return p0 + p1 * (1 - p0)
 end
 
-local _ = function(p2, p3) --[[ line: 29 | named "deriveTransparency" ]]
+local _ = function(p2, p3)
 	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p3) then p3:map(function(p4) --[[ line: 34 ]]
+	return if reactIsModule.isBinding(p3) then p3:map(function(p4)
 		-- upvalues: p2 (ref)
 		return p2 + p4 * (1 - p2)
 	end) else p2 + p3 * (1 - p2)
 end
 
-local function deriveBackgroundStyle(value, p5, p6) --[[ line: 44 ]]
+local function deriveBackgroundStyle(value, p5, p6)
 	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p6) then p6:map(function(p7) --[[ line: 50 ]]
+	return if reactIsModule.isBinding(p6) then p6:map(function(p7)
 		-- upvalues: value (ref), p5 (ref)
 		return { Color3 = value, Transparency = p5 + p7 * (1 - p5) }
 	end) else { Color3 = value, Transparency = p5 + p6 * (1 - p5) }
 end
 
-return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
+return reactModule.memo(function(p8)
 	-- upvalues: foundationModule (ref), fFlagExpChatEnableFriendsTab (ref), reactModule (ref), useChatAutocompleteEngineModule (ref), expChatFixInputBarSendEligibility (ref), chatAutocompleteDropdownModule (ref), expChatComposerFigmaParity (ref), deriveBackgroundStyle (ref), reactIsModule (ref), channelChipModule (ref)
 	local var9 = foundationModule.Hooks.useTokens()
 	local themedColors = p8.themedColors
@@ -47,16 +47,16 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 	local var17 = reactModule.useRef(nil)
 	local var18 = useChatAutocompleteEngineModule(textBoxRef, p8.autocomplete)
 	local var19 = reactModule.useRef(p8.defaultValue or "")
-	local var20, var21 = reactModule.useState(function() --[[ line: 113 ]]
+	local var20, var21 = reactModule.useState(function()
 		-- upvalues: p8 (ref)
 		return (p8.defaultValue or "") == ""
 	end)
 	local var22, var23 = reactModule.useBinding(0)
-	local var24 = reactModule.useCallback(function(p9) --[[ line: 119 ]]
+	local var24 = reactModule.useCallback(function(p9)
 		-- upvalues: var23 (ref)
 		var23(p9.AbsoluteSize.X)
 	end, {})
-	local var25 = reactModule.useCallback(function() --[[ line: 123 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: textBoxRef (ref), onSend (ref), var21 (ref)
 		local current = textBoxRef.current
 		local var49 = if current then current.Text else ""
@@ -69,7 +69,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 		end
 		var21(true)
 	end, { onSend, textBoxRef })
-	local var26 = reactModule.useCallback(function() --[[ line: 136 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: textBoxRef (ref)
 		local current = textBoxRef.current
 		
@@ -77,7 +77,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 			current:ReleaseFocus(true)
 		end
 	end, { textBoxRef })
-	local var27 = reactModule.useCallback(function(p10) --[[ line: 143 ]]
+	local var27 = reactModule.useCallback(function(p10)
 		-- upvalues: maximumCharacterLimit (ref), var19 (ref), var21 (ref), onChange (ref), var18 (ref)
 		local text = p10.Text
 		
@@ -98,13 +98,13 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 		end
 		var18.onTextChanged(text)
 	end, { onChange, maximumCharacterLimit, var18.onTextChanged })
-	local var28 = reactModule.useCallback(function() --[[ line: 161 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: p8 (ref)
 		if p8.onFocusGained then
 			p8.onFocusGained()
 		end
 	end, { p8.onFocusGained })
-	local var29 = reactModule.useCallback(function(_, p11) --[[ line: 168 ]]
+	local var29 = reactModule.useCallback(function(_, p11)
 		-- upvalues: textBoxRef (ref), var18 (ref), var25 (ref), p8 (ref)
 		local current = textBoxRef.current
 		
@@ -117,7 +117,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 	end, { var25, p8.onFocusLost, textBoxRef, var18.interceptSend })
 	
 	if expChatFixInputBarSendEligibility then
-		reactModule.useEffect(function() --[[ line: 188 ]]
+		reactModule.useEffect(function()
 			-- upvalues: canLocalUserChat (ref), var21 (ref)
 			if not canLocalUserChat then
 				var21(true)
@@ -160,7 +160,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 	}
 	local t_5 = { Color = var9.Color.Stroke.Default.Color3 }
 	local transparency = var9.Color.Stroke.Default.Transparency
-	t_5.Transparency = if reactIsModule.isBinding(transparencyValue) then transparencyValue:map(function(p12) --[[ line: 34 ]]
+	t_5.Transparency = if reactIsModule.isBinding(transparencyValue) then transparencyValue:map(function(p12)
 		-- upvalues: transparency (ref)
 		return transparency + p12 * (1 - transparency)
 	end) else transparency + transparencyValue * (1 - transparency)
@@ -206,7 +206,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 			local t_9 = {
 				tag = "position-top-right anchor-top-right auto-y text-caption-medium text-wrap text-align-x-left text-align-y-top content-muted",
 				Text = p8.disabledChatPlaceholderText or "",
-				Size = var22:map(function(p13) --[[ line: 259 ]]
+				Size = var22:map(function(p13)
 					-- upvalues: var9 (ref)
 					return UDim2.new(1, -(p13 + var9.Size.Size_200), 0, 0)
 				end)
@@ -214,7 +214,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 			
 			if reactIsModule.isBinding(transparencyValue) then
 				local var41 = 0.5
-				var42 = transparencyValue:map(function(p14) --[[ line: 34 ]]
+				var42 = transparencyValue:map(function(p14)
 					-- upvalues: var41 (ref)
 					return var41 + p14 * (1 - var41)
 				end)
@@ -233,7 +233,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 			local view_4 = foundationModule.View
 			local t_9 = {
 				tag = "position-top-right anchor-top-right auto-y",
-				Size = var22:map(function(p15) --[[ line: 269 ]]
+				Size = var22:map(function(p15)
 					-- upvalues: var9 (ref)
 					return UDim2.new(1, -(p15 + var9.Size.Size_200), 0, 0)
 				end)
@@ -259,7 +259,7 @@ return reactModule.memo(function(p8) --[[ line: 86 | named "ChatInputBarView" ]]
 			
 			if reactIsModule.isBinding(transparencyValue) then
 				local var48 = 0
-				var47 = transparencyValue:map(function(p16) --[[ line: 34 ]]
+				var47 = transparencyValue:map(function(p16)
 					-- upvalues: var48 (ref)
 					return var48 + p16 * (1 - var48)
 				end)

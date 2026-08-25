@@ -20,7 +20,7 @@ local hiddenFriendsSortHeaderAddSubTabDependency = game:DefineFastFlag("HiddenFr
 local fFlagAppIaHomeSubTab = require(parent.SharedFlags).FFlagAppIaHomeSubTab
 local var15 = nil
 
-local function getIXPVariant() --[[ line: 32 ]]
+local function getIXPVariant()
 	-- upvalues: flyoutTestVariantRollout12 (ref), enableFlyoutIxp11 (ref), ixpFlyoutControl (ref), var15 (write), experimentCacheManager (ref), flyoutIxpLayer (ref), enableFlyoutExposure (ref), flyoutIxpVariantKey (ref)
 	if flyoutTestVariantRollout12 ~= -1 then
 		return flyoutTestVariantRollout12
@@ -40,25 +40,25 @@ local function getIXPVariant() --[[ line: 32 ]]
 end
 
 return {
-	isFlyoutSidePanelEnabled = function() --[[ line: 54 ]]
+	isFlyoutSidePanelEnabled = function()
 		-- upvalues: getIXPVariant (ref), ixpFlyoutControl (ref)
 		return getIXPVariant() ~= ixpFlyoutControl
 	end,
-	isRobloxLogoEnabled = function() --[[ line: 60 ]]
+	isRobloxLogoEnabled = function()
 		-- upvalues: getIXPVariant (ref), ixpFlyoutControl (ref)
 		return getIXPVariant() ~= ixpFlyoutControl
 	end,
-	isProfileEntryRemoved = function() --[[ line: 66 ]]
+	isProfileEntryRemoved = function()
 		-- upvalues: getIXPVariant (ref), flyoutHamburgerEnableProfileEntry (ref), ixpFlyoutVariantHamburger (ref), flyoutFacepileEnableProfileEntry (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantNoSubTabs (ref), ixpFlyoutControl (ref)
 		local var19 = getIXPVariant()
 		
 		return if flyoutHamburgerEnableProfileEntry and var19 == ixpFlyoutVariantHamburger then false elseif flyoutFacepileEnableProfileEntry and (var19 == ixpFlyoutVariantAlternateEntry or var19 == ixpFlyoutVariantNoSubTabs) then false else var19 ~= ixpFlyoutControl
 	end,
-	isFriendsSortHeaderHiddenInFlyoutIxp = function() --[[ line: 80 ]]
+	isFriendsSortHeaderHiddenInFlyoutIxp = function()
 		-- upvalues: fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (ref), hiddenFriendsSortHeaderAddSubTabDependency (ref), fFlagAppIaHomeSubTab (ref), flyoutShowFriendsSortForCurrentVariant (ref), getIXPVariant (ref), ixpFlyoutControl (ref)
 		return if fFlagHiddenFriendsSortHeaderRemoveFlyoutDependency then if hiddenFriendsSortHeaderAddSubTabDependency then fFlagAppIaHomeSubTab and not flyoutShowFriendsSortForCurrentVariant else not flyoutShowFriendsSortForCurrentVariant else getIXPVariant() ~= ixpFlyoutControl and not flyoutShowFriendsSortForCurrentVariant
 	end,
-	isAlternateEntryPointEnabled = function() --[[ line: 91 ]]
+	isAlternateEntryPointEnabled = function()
 		-- upvalues: getIXPVariant (ref), flyoutDisallowAlternativeEntryOnProfileEntryEnabled (ref), flyoutHamburgerEnableProfileEntry (ref), ixpFlyoutVariantHamburger (ref), flyoutFacepileEnableProfileEntry (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantNoSubTabs (ref), ixpFlyoutControl (ref)
 		local var20 = getIXPVariant()
 		
@@ -74,15 +74,15 @@ return {
 			return if var20 ~= ixpFlyoutVariantAlternateEntry then var20 == ixpFlyoutVariantNoSubTabs else true
 		end
 	end,
-	isRobuxIconRemoved = function() --[[ line: 102 ]]
+	isRobuxIconRemoved = function()
 		-- upvalues: getIXPVariant (ref), ixpFlyoutVariantRemovalRobuxIcon (ref)
 		return getIXPVariant() == ixpFlyoutVariantRemovalRobuxIcon
 	end,
-	isScrollAwayEnabled = function() --[[ line: 108 ]]
+	isScrollAwayEnabled = function()
 		-- upvalues: getIXPVariant (ref), ixpFlyoutControl (ref)
 		return getIXPVariant() ~= ixpFlyoutControl
 	end,
-	isHomeSubTabEnabled = function() --[[ line: 113 ]]
+	isHomeSubTabEnabled = function()
 		-- upvalues: fFlagSubTabRemoveFlyoutDependency (ref), getIXPVariant (ref), ixpFlyoutVariantAlternateEntry (ref), ixpFlyoutVariantHamburger (ref)
 		if fFlagSubTabRemoveFlyoutDependency then
 			return true

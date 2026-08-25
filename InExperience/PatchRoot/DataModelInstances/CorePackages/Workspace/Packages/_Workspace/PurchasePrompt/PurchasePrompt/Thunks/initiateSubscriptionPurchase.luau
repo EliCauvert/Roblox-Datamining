@@ -19,9 +19,9 @@ local fFlagEnablePurchaseFlowUUIDMigrationModule = require(purchasePrompt.Flags.
 local purchaseFlowUUIDTelemetryModule = require(purchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { networkModule, externalSettingsModule }
 
-return function(p0) --[[ line: 31 | named "initiateSubscriptionPurchase" ]]
+return function(p0)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (ref), httpService (ref), setPurchaseFlowUUIDModule (ref), loggingProtocolModule (ref), purchaseFlowUUIDTelemetryModule (ref), hasPendingRequestModule (ref), requestSubscriptionPurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), getSubscriptionPurchaseInfoModule (ref), resolveSubscriptionPromptStateModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2) --[[ line: 32 ]]
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: networkModule (copy), externalSettingsModule (copy), fFlagEnablePurchaseFlowUUIDMigrationModule (copy), httpService (copy), setPurchaseFlowUUIDModule (copy), loggingProtocolModule (copy), purchaseFlowUUIDTelemetryModule (copy), hasPendingRequestModule (copy), requestSubscriptionPurchaseModule (copy), p0 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), getSubscriptionPurchaseInfoModule (copy), resolveSubscriptionPromptStateModule (copy)
 		local var16 = p2[networkModule]
 		local var17 = p2[externalSettingsModule]
@@ -40,10 +40,10 @@ return function(p0) --[[ line: 31 | named "initiateSubscriptionPurchase" ]]
 			
 			return nil
 		end
-		return getSubscriptionPurchaseInfoModule(var16, p0):andThen(function(p4) --[[ line: 58 ]]
+		return getSubscriptionPurchaseInfoModule(var16, p0):andThen(function(p4)
 			-- upvalues: p1 (ref), resolveSubscriptionPromptStateModule (copy)
 			p1:dispatch(resolveSubscriptionPromptStateModule(p4))
-		end):catch(function(p3) --[[ line: 61 ]]
+		end):catch(function(p3)
 			-- upvalues: p1 (ref), errorOccurredModule (copy)
 			p1:dispatch(errorOccurredModule(p3))
 		end)

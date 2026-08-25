@@ -16,7 +16,7 @@ local reactionSize = momentsCommonModule.Enums.ReactionSize
 local useConfigurationModule = require(moments.Hooks.useConfiguration)
 local t = { title = "Feature.Moments.Label.Reactions" }
 
-return function(p0) --[[ line: 35 | named "ReactionsSheet" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useConfigurationModule (ref), reactModule (ref), view (ref), reaction (ref), reactionSize (ref), text (ref), abbreviateCount (ref), localizationService (ref), sheet (ref), foundationModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		isOpen = true,
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 35 | named "ReactionsSheet" ]]
 		Content = reactModule.createElement(sheet.Content, if useConfigurationModule("android_tv_enabled", false) then { Selectable = false } else nil, {
 			ReactionsContainer = reactModule.createElement(view, {
 				tag = "row wrap align-y-center gap-small size-full-0 auto-y padding-bottom-large"
-			}, reactModule.useMemo(function() --[[ line: 39 ]]
+			}, reactModule.useMemo(function()
 				-- upvalues: p0 (ref), reactModule (copy), view (copy), reaction (copy), reactionSize (copy), text (copy), abbreviateCount (copy), localizationService (copy)
 				local t = {}
 				

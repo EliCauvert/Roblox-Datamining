@@ -13,7 +13,7 @@ local isNonNullType = definitionModule.isNonNullType
 local nullModule = require(parent.luaUtils.null)
 local isMissingVariable = nil
 
-local function valueFromAST(p0, p1, p2) --[[ line: 37 ]]
+local function valueFromAST(p0, p1, p2)
 	-- upvalues: kind (ref), nullModule (ref), isNonNullType (ref), valueFromAST (ref), isListType (ref), isMissingVariable (write), isInputObjectType (ref), keyMap (ref), isLeafType (ref), invariant (ref), inspect (ref)
 	local ofType, var6
 	if not p0 then return end
@@ -69,7 +69,7 @@ local function valueFromAST(p0, p1, p2) --[[ line: 37 ]]
 	elseif isInputObjectType(p1) then
 		if p0.kind ~= kind.OBJECT then return end
 		ofType = {}
-		local var8 = keyMap(p0.fields, function(p3) --[[ line: 118 ]]
+		local var8 = keyMap(p0.fields, function(p3)
 			return p3.name.value
 		end)
 		
@@ -98,7 +98,7 @@ local function valueFromAST(p0, p1, p2) --[[ line: 37 ]]
 	end
 	ofType = nil
 	
-	if not pcall(function() --[[ line: 148 ]]
+	if not pcall(function()
 		-- upvalues: ofType (write), p1 (ref), p0 (ref), p2 (ref)
 		ofType = p1:parseLiteral(p0, p2)
 	end) then return end
@@ -108,7 +108,7 @@ local function valueFromAST(p0, p1, p2) --[[ line: 37 ]]
 	return ofType
 end
 
-isMissingVariable = function(p4, p5) --[[ line: 170 | named "isMissingVariable" ]]
+isMissingVariable = function(p4, p5)
 	-- upvalues: kind (ref)
 	return p4.kind == kind.VARIABLE and (if p5 ~= nil then p5[p4.name.value] == nil else true)
 end

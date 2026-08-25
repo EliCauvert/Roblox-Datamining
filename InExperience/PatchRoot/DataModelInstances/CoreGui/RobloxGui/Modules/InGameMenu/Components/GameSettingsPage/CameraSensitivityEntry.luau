@@ -14,11 +14,11 @@ local sliderEntryModule = require(script.Parent.SliderEntry)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local constantsModule = require(parent.Resources.Constants)
 
-local function _(p0) --[[ line: 30 | named "guiToEngineSensitivity" ]]
+local function _(p0)
 	return math.clamp(if p0 <= 5 then 0.198 * p0 + 0.01 else 0.6 * p0 - 2, 0, 10)
 end
 
-local _ = function(p1) --[[ line: 41 | named "engineToGuiSensitivity" ]]
+local _ = function(p1)
 	return math.clamp(math.floor((if p1 <= 1 then (p1 - 0.01) / 0.198 else (p1 + 2) / 0.6) / 0.01 + 0.5) * 0.01, 0, 10)
 end
 
@@ -29,9 +29,9 @@ cameraSensitivityEntry.validateProps = t.strictInterface({
 	isMenuOpen = t.optional(t.boolean)
 })
 
-function cameraSensitivityEntry.init(p2) --[[ line: 62 ]]
+function cameraSensitivityEntry.init(p2)
 	-- upvalues: userGameSettingsService (ref)
-	function p2.onSensitivityChanged() --[[ line: 63 ]]
+	function p2.onSensitivityChanged()
 		-- upvalues: p2 (ref), userGameSettingsService (copy)
 		p2:setState({
 			engineSensitivity = userGameSettingsService.MouseSensitivityFirstPerson.X
@@ -41,7 +41,7 @@ function cameraSensitivityEntry.init(p2) --[[ line: 62 ]]
 	p2.onSensitivityChanged()
 end
 
-function cameraSensitivityEntry.render(p3) --[[ line: 73 ]]
+function cameraSensitivityEntry.render(p3)
 	-- upvalues: roact (ref), sliderEntryModule (ref), userGameSettingsService (ref), sendAnalyticsModule (ref), constantsModule (ref), list (ref), externalEventConnectionModule (ref)
 	local t = {}
 	local createElement = roact.createElement
@@ -56,7 +56,7 @@ function cameraSensitivityEntry.render(p3) --[[ line: 73 ]]
 	local engineSensitivity = p3.state.engineSensitivity
 	t_1.value = math.clamp(math.floor((if engineSensitivity <= 1 then (engineSensitivity - 0.01) / 0.198 else (engineSensitivity + 2) / 0.6) / 0.01 + 0.5) * 0.01, 0, 10)
 	
-	function t_1.valueChanged(p4) --[[ line: 84 ]]
+	function t_1.valueChanged(p4)
 		-- upvalues: userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
 		local clampedValue = math.clamp(if p4 <= 5 then 0.198 * p4 + 0.01 else 0.6 * p4 - 2, 0, 10)
 		local vector2 = Vector2.new(clampedValue, clampedValue)

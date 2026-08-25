@@ -10,7 +10,7 @@ local createElement = reactModule.createElement
 local record = viewRecyclerModule.Adapter._Private.Record
 local frozen = table.freeze({ "axis", "activationMargin", "retentionMargin" })
 
-local function _(value, p0) --[[ line: 26 | named "assignRef" ]]
+local function _(value, p0)
 	if value == nil then return end
 	if type(value) == "function" then
 		value(p0)
@@ -21,14 +21,14 @@ local function _(value, p0) --[[ line: 26 | named "assignRef" ]]
 end
 
 return {
-	create = function(p1) --[[ line: 37 ]]
+	create = function(p1)
 		-- upvalues: recyclingScopeModule (ref), reactModule (ref), recyclingScopeContextModule (ref), record (ref), frozen (ref), viewRecyclerRobloxModule (ref), axis (ref), createElement (ref), recyclingViewportContextModule (ref)
 		local var8 = recyclingScopeModule.create(p1)
 		
-		return function(p2) --[[ line: 40 | named "RecyclingViewport" ]]
+		return function(p2)
 			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), record (copy), frozen (copy), viewRecyclerRobloxModule (copy), axis (copy), createElement (copy), recyclingViewportContextModule (copy), var8 (ref)
 			local var9 = reactModule.useContext(recyclingScopeContextModule)
-			local var10 = reactModule.useState(function() --[[ line: 42 ]]
+			local var10 = reactModule.useState(function()
 				-- upvalues: p2 (ref)
 				return {
 					axis = p2.axis,
@@ -37,16 +37,16 @@ return {
 				}
 			end)
 			assert(record.containsEqual(p2, var10, frozen), "RecyclingViewport: axis and margins cannot change during its lifetime")
-			local var11 = reactModule.useState(function() --[[ line: 54 ]]
+			local var11 = reactModule.useState(function()
 				-- upvalues: viewRecyclerRobloxModule (copy), var10 (ref)
 				return viewRecyclerRobloxModule.ViewportCoordinator.new(var10)
 			end)
-			local var12 = reactModule.useState(function() --[[ line: 57 ]]
+			local var12 = reactModule.useState(function()
 				-- upvalues: var11 (ref)
 				return { register = var11.register }
 			end)
 			local scrollingFrameRef = p2.scrollingFrameRef
-			local var13 = reactModule.useCallback(function(p3) --[[ line: 63 ]]
+			local var13 = reactModule.useCallback(function(p3)
 				-- upvalues: var11 (ref), scrollingFrameRef (ref)
 				var11.setViewport(p3)
 				
@@ -58,9 +58,9 @@ return {
 				end
 				scrollingFrameRef.current = p3
 			end, { var11, scrollingFrameRef })
-			reactModule.useEffect(function() --[[ line: 68 ]]
+			reactModule.useEffect(function()
 				-- upvalues: var11 (ref)
-				return function() --[[ line: 69 ]]
+				return function()
 					-- upvalues: var11 (copy)
 					var11.destroy()
 				end

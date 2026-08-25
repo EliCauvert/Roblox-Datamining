@@ -1,11 +1,11 @@
 ﻿local getSceneOverridesStore = require(script:FindFirstAncestor("VrSpatialUi").Parent.Style).getSceneOverridesStore
 local var0 = nil
 
-local function getVrEnvironment() --[[ line: 24 ]]
+local function getVrEnvironment()
 	return workspace:FindFirstChild("VR Environment")
 end
 
-local function applyColorToBaseParts(p0, p1) --[[ line: 28 ]]
+local function applyColorToBaseParts(p0, p1)
 	for i, v in p0:GetDescendants() do
 		if v:IsA("BasePart") then
 			v.Color = p1
@@ -13,7 +13,7 @@ local function applyColorToBaseParts(p0, p1) --[[ line: 28 ]]
 	end
 end
 
-local function applySceneOverrides(p2) --[[ line: 36 ]]
+local function applySceneOverrides(p2)
 	-- upvalues: applyColorToBaseParts (ref)
 	if not p2 then return end
 	local var4 = workspace:FindFirstChild("VR Environment")
@@ -32,7 +32,7 @@ local function applySceneOverrides(p2) --[[ line: 36 ]]
 end
 
 return {
-	initialize = function() --[[ line: 64 ]]
+	initialize = function()
 		-- upvalues: var0 (write), getSceneOverridesStore (ref), applySceneOverrides (ref)
 		if var0 then
 			var0()
@@ -40,12 +40,12 @@ return {
 		end
 		local var7 = getSceneOverridesStore()
 		applySceneOverrides(var7.getSceneOverrides())
-		var0 = var7.subscribe(function(p3) --[[ line: 69 ]]
+		var0 = var7.subscribe(function(p3)
 			-- upvalues: applySceneOverrides (copy)
 			applySceneOverrides(p3)
 		end)
 	end,
-	deinitialize = function() --[[ line: 57 ]]
+	deinitialize = function()
 		-- upvalues: var0 (write)
 		if var0 then
 			var0()

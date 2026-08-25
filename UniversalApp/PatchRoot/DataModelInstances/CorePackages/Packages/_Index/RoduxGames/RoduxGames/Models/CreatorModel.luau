@@ -3,7 +3,7 @@ local tModule = require(roduxGames.Parent.t)
 local creatorType = require(roduxGames.Enums).CreatorType
 local t = {}
 
-function t.new(p0) --[[ line: 15 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -12,7 +12,7 @@ function t.new(p0) --[[ line: 15 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 27 ]]
+function t.mock(p1)
 	-- upvalues: t (ref), creatorType (ref)
 	p1 = p1 or {}
 	
@@ -23,7 +23,7 @@ function t.mock(p1) --[[ line: 27 ]]
 	})
 end
 
-function t.format(p2) --[[ line: 39 ]]
+function t.format(p2)
 	-- upvalues: t (ref), creatorType (ref)
 	return t.new({
 		creatorId = tostring(p2.id),

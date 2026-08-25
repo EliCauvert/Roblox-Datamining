@@ -14,11 +14,11 @@ local fFlagSduiFocusNavActionsStructured = require(parent.SharedFlags).FFlagSdui
 local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 local fFlagSduiUnwrapStructPropEnvelope = require(parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 
-local function applyTokenScaling(p0, p1) --[[ line: 18 ]]
+local function applyTokenScaling(p0, p1)
 	return p0 * (if p1 then p1.Config.UI.Scale else 1)
 end
 
-local function resolveTokenValueToNumber(p2, p3) --[[ line: 23 ]]
+local function resolveTokenValueToNumber(p2, p3)
 	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref)
 	local var19 = string.sub(p3, 1, 1) == "-"
 	local var20 = if var19 then string.sub(p3, 2) else p3
@@ -38,7 +38,7 @@ local function resolveTokenValueToNumber(p2, p3) --[[ line: 23 ]]
 	return if var19 then var21 * -1 else var21
 end
 
-local function getTokenOrNumber(p4, p5, p6, p7) --[[ line: 49 ]]
+local function getTokenOrNumber(p4, p5, p6, p7)
 	-- upvalues: getSduiTokensStoreModule (ref), resolveTokenValueToNumber (ref)
 	local var24 = tonumber(p4)
 	
@@ -54,7 +54,7 @@ local function getTokenOrNumber(p4, p5, p6, p7) --[[ line: 49 ]]
 		
 		return
 	end
-	local ok, status = pcall(function() --[[ line: 64 ]]
+	local ok, status = pcall(function()
 		-- upvalues: resolveTokenValueToNumber (copy), getSduiTokensStoreModule (copy), p5 (ref), p7 (ref), p4 (ref)
 		return resolveTokenValueToNumber(getSduiTokensStoreModule().getTokens(p5, p7), p4)
 	end)
@@ -65,9 +65,9 @@ local function getTokenOrNumber(p4, p5, p6, p7) --[[ line: 49 ]]
 	error(if typeof(status) == "string" then status else nil)
 end
 
-local var8 = if fFlagSduiPropParsersShouldHandleTokens then function(p11, p12, p13) --[[ line: 81 ]]
+local var8 = if fFlagSduiPropParsersShouldHandleTokens then function(p11, p12, p13)
 	-- upvalues: getTokenOrNumber (ref)
-	local ok, status = pcall(function() --[[ line: 82 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p11 (ref), getTokenOrNumber (copy), p12 (ref), p13 (ref)
 		local parts = string.split(p11, ",")
 		
@@ -81,9 +81,9 @@ local var8 = if fFlagSduiPropParsersShouldHandleTokens then function(p11, p12, p
 		return status
 	end
 	error(if typeof(status) == "string" then status else nil)
-end else function(p8, p9, p10) --[[ line: 99 ]]
+end else function(p8, p9, p10)
 	-- upvalues: getSduiTokensStoreModule (ref)
-	local ok, status = pcall(function() --[[ line: 100 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p8 (ref), p10 (ref), getSduiTokensStoreModule (copy), p9 (ref)
 		local parts = string.split(p8, ",")
 		
@@ -108,9 +108,9 @@ end else function(p8, p9, p10) --[[ line: 99 ]]
 	end
 	error(if typeof(status) == "string" then status else nil)
 end
-local var9 = if fFlagSduiPropParsersShouldHandleTokens then function(p17, p18, p19) --[[ line: 127 ]]
+local var9 = if fFlagSduiPropParsersShouldHandleTokens then function(p17, p18, p19)
 	-- upvalues: getTokenOrNumber (ref)
-	local ok, status = pcall(function() --[[ line: 128 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p17 (ref), getTokenOrNumber (copy), p18 (ref), p19 (ref)
 		local parts = string.split(p17, ",")
 		
@@ -124,9 +124,9 @@ local var9 = if fFlagSduiPropParsersShouldHandleTokens then function(p17, p18, p
 		return status
 	end
 	error(if typeof(status) == "string" then status else nil)
-end else function(p14, p15, p16) --[[ line: 144 ]]
+end else function(p14, p15, p16)
 	-- upvalues: getSduiTokensStoreModule (ref)
-	local ok, status = pcall(function() --[[ line: 145 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p14 (ref), p16 (ref), getSduiTokensStoreModule (copy), p15 (ref)
 		local parts = string.split(p14, ",")
 		
@@ -150,9 +150,9 @@ end else function(p14, p15, p16) --[[ line: 144 ]]
 	error(if typeof(status) == "string" then status else nil)
 end
 
-local function parseNumber(p20, p21, p22) --[[ line: 170 ]]
+local function parseNumber(p20, p21, p22)
 	-- upvalues: getSduiTokensStoreModule (ref)
-	local ok, status = pcall(function() --[[ line: 175 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p20 (ref)
 		return tonumber(p20)
 	end)
@@ -169,24 +169,24 @@ local function parseNumber(p20, p21, p22) --[[ line: 170 ]]
 	return status
 end
 
-local function parseUiScaledNumber(p23, p24) --[[ line: 189 ]]
+local function parseUiScaledNumber(p23, p24)
 	-- upvalues: parseNumber (ref)
 	return parseNumber(p23, p24, true)
 end
 
-local function parseUiScaledUDim(p25, p26) --[[ line: 193 ]]
+local function parseUiScaledUDim(p25, p26)
 	-- upvalues: var9 (ref)
 	return var9(p25, p26, true)
 end
 
-local function parseUiScaledUDim2(p27, p28) --[[ line: 197 ]]
+local function parseUiScaledUDim2(p27, p28)
 	-- upvalues: var8 (ref)
 	return var8(p27, p28, true)
 end
 
 local unwrapStruct = nil
 
-local function isStructEnvelope(p29) --[[ line: 215 ]]
+local function isStructEnvelope(p29)
 	local fields = p29.fields
 	
 	if typeof(fields) ~= "table" then
@@ -210,7 +210,7 @@ local function isStructEnvelope(p29) --[[ line: 215 ]]
 	return var36 or next(fields) == nil
 end
 
-local function parseStruct(p30) --[[ line: 239 ]]
+local function parseStruct(p30)
 	-- upvalues: fFlagSduiUnwrapStructPropEnvelope (ref), isStructEnvelope (ref), unwrapStruct (write), protoVariableMapperModule (ref), parseStruct (ref)
 	if typeof(p30) ~= "table" then
 		return p30
@@ -228,7 +228,7 @@ end
 
 local unwrapStructValue = nil
 
-local function unwrapStructList(p31) --[[ line: 258 ]]
+local function unwrapStructList(p31)
 	-- upvalues: unwrapStructValue (write)
 	local t = {}
 	local var39 = if typeof(p31) == "table" then p31.values else nil
@@ -242,7 +242,7 @@ local function unwrapStructList(p31) --[[ line: 258 ]]
 	return t
 end
 
-unwrapStructValue = function(p32) --[[ line: 278 | named "unwrapStructValue" ]]
+unwrapStructValue = function(p32)
 	-- upvalues: parseStruct (ref), unwrapStructList (ref)
 	if typeof(p32) ~= "table" then
 		return p32
@@ -252,7 +252,7 @@ unwrapStructValue = function(p32) --[[ line: 278 | named "unwrapStructValue" ]]
 	return if not (typeof(kind) ~= "table" or typeof(kind.type) ~= "string") then if kind.type == "null_value" then nil elseif kind.type == "struct_value" then parseStruct(kind.value) elseif kind.type == "list_value" then unwrapStructList(kind.value) else kind.value else parseStruct(p32)
 end
 
-unwrapStruct = function(p33) --[[ line: 306 | named "unwrapStruct" ]]
+unwrapStruct = function(p33)
 	-- upvalues: protoVariableMapperModule (ref), unwrapStructValue (write)
 	local mapPropName = protoVariableMapperModule.mapPropName
 	local t = {}
@@ -272,7 +272,7 @@ return {
 	parseUiScaledUDim = parseUiScaledUDim,
 	parseUiScaledUDim2 = parseUiScaledUDim2,
 	parseStruct = parseStruct,
-	parseArrayOfStruct = function(p34) --[[ line: 318 ]]
+	parseArrayOfStruct = function(p34)
 		-- upvalues: parseStruct (ref)
 		if typeof(p34) ~= "table" then
 			return p34
@@ -284,17 +284,17 @@ return {
 		end
 		return t
 	end,
-	parseStringArray = function(p35) --[[ line: 340 ]]
+	parseStringArray = function(p35)
 		return if typeof(p35) == "table" then p35.items or p35 else nil
 	end,
-	parseToString = if fFlagSduiStringPropToString then function(value) --[[ line: 329 | named "parseToString" ]]
+	parseToString = if fFlagSduiStringPropToString then function(value)
 		return if value == nil then nil else tostring(value)
 	end else nil,
-	parseColor3 = if fFlagLuaAppSduiColorPropMigration then function(p36) --[[ line: 350 | named "parseColor3" ]]
+	parseColor3 = if fFlagLuaAppSduiColorPropMigration then function(p36)
 		if typeof(p36) == "Color3" then
 			return p36
 		elseif typeof(p36) == "string" then
-			local ok, status = pcall(function() --[[ line: 355 ]]
+			local ok, status = pcall(function()
 				-- upvalues: p36 (ref)
 				return Color3.fromHex(p36)
 			end)
@@ -305,10 +305,10 @@ return {
 		end
 		error(`Could not resolve Color3 from input: {p36}`)
 	end else nil,
-	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p37) --[[ line: 372 | named "parseColorPropLegacy" ]]
+	parseColorPropLegacy = if fFlagLuaAppSduiColorPropMigration then function(p37)
 		return if typeof(p37) == "string" then Color3.fromHex(p37) else p37
 	end else nil,
-	parseFocusNavActions = if fFlagSduiFocusNavActionsStructured then function(p38) --[[ line: 382 | named "parseFocusNavActions" ]]
+	parseFocusNavActions = if fFlagSduiFocusNavActionsStructured then function(p38)
 		-- upvalues: inputHandlersModule (ref)
 		if typeof(p38) ~= "table" then
 			return nil

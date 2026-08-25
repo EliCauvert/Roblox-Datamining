@@ -11,7 +11,7 @@ local validateCageUVDuplicatesModule = require(parent.validation.validateCageUVD
 local validateModifiedCageAreaModule = require(parent.validation.ValidateModifiedCageArea)
 local _ = require(parent.util.Types)
 
-return function(p0, p1, p2) --[[ line: 18 | named "validateLCCageQuality" ]]
+return function(p0, p1, p2)
 	-- upvalues: getCageMeshInfosModule (ref), getFFlagUGCValidateMigrateCageGeometryModule (ref), validateVerticesSimilarityModule (ref), validateLCCagingRelevancyModule (ref), validateRenderMeshInsideOuterCageMeshModule (ref), getFFlagUGCValidationEyebrowEyelashSupportModule (ref), validateCageMeshDistanceModule (ref), validateCageUVDuplicatesModule (ref), validateModifiedCageAreaModule (ref), getFStringLCCageQualityDocumentationLinkModule (ref)
 	local var10 = true
 	local t = {}

@@ -7,7 +7,7 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local searchPageTabSwitchBridgeModule = require(serverDrivenUi.System.SearchPageTabSwitchBridge)
 
-local function _(p0, p1, p2) --[[ line: 31 | named "reportInvalidParam" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
 	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.OpenSearchResultsTab,
@@ -16,7 +16,7 @@ local function _(p0, p1, p2) --[[ line: 31 | named "reportInvalidParam" ]]
 	}, p0.appPage)
 end
 
-return function(p3, _, p4, _) --[[ line: 39 | named "SduiOpenSearchResultsTabAction" ]]
+return function(p3, _, p4, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), searchTypes (ref), searchSourceEvent (ref), searchPageTabSwitchBridgeModule (ref)
 	local var3 = if p3 then p3.actionParams else nil
 	

@@ -2,11 +2,11 @@
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function() --[[ line: 21 | named "useCompactTileHeight" ]]
+return function()
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var1 = useTokens()
 	
-	return reactModule.useMemo(function() --[[ line: 24 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var1 (ref)
 		local size1400 = var1.Size.Size_1400
 		local medium = var1.Padding.Medium

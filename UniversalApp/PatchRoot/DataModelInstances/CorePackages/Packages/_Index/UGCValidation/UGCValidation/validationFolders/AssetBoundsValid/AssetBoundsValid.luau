@@ -19,14 +19,14 @@ local t = {
 	expectedFailures = {}
 }
 
-local function _(a) --[[ line: 28 | named "getScaleTypeFromInstance" ]]
+local function _(a)
 	-- upvalues: constantsModule (ref)
 	local avatarPartScaleType = a:FindFirstChild("AvatarPartScaleType")
 	
 	return if avatarPartScaleType and constantsModule.AvatarPartScaleTypes[avatarPartScaleType.Value] then avatarPartScaleType.Value else nil
 end
 
-local function getConsistentScaleType(p0, p1, p2) --[[ line: 36 ]]
+local function getConsistentScaleType(p0, p1, p2)
 	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
 	local var11 = constantsModule.ASSET_TYPE_INFO[p1]
 	local var12 = nil
@@ -57,7 +57,7 @@ local function getConsistentScaleType(p0, p1, p2) --[[ line: 36 ]]
 	return var12
 end
 
-local function validateMinBounds(a, b, p3, p4, p5) --[[ line: 67 ]]
+local function validateMinBounds(a, b, p3, p4, p5)
 	-- upvalues: errorSourceStringsModule (ref)
 	local var17 = p3.maxMeshCorner - p3.minMeshCorner
 	
@@ -76,7 +76,7 @@ local function validateMinBounds(a, b, p3, p4, p5) --[[ line: 67 ]]
 	end
 end
 
-local function validateMaxBounds(a, b, p6, p7, p8) --[[ line: 89 ]]
+local function validateMaxBounds(a, b, p6, p7, p8)
 	-- upvalues: errorSourceStringsModule (ref)
 	local var20 = p6.maxOverall - p6.minOverall
 	
@@ -95,7 +95,7 @@ local function validateMaxBounds(a, b, p6, p7, p8) --[[ line: 89 ]]
 	end
 end
 
-local function createAllBodyPartsFromRootInstance(p9) --[[ line: 111 ]]
+local function createAllBodyPartsFromRootInstance(p9)
 	local t = {}
 	
 	for i, v in p9:GetChildren() do
@@ -106,7 +106,7 @@ local function createAllBodyPartsFromRootInstance(p9) --[[ line: 111 ]]
 	return t
 end
 
-local function getFullBodyConsistentScaleType(p10, p11, p12) --[[ line: 121 ]]
+local function getFullBodyConsistentScaleType(p10, p11, p12)
 	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
 	local var24 = nil
 	
@@ -133,7 +133,7 @@ local function getFullBodyConsistentScaleType(p10, p11, p12) --[[ line: 121 ]]
 	return var24
 end
 
-function t.run(p13, p14) --[[ line: 149 ]]
+function t.run(p13, p14)
 	-- upvalues: validationEnumsModule (ref), createAllBodyPartsFromRootInstance (ref), getFullBodyConsistentScaleType (ref), constantsModule (ref), boundsCalculatorModule (ref), validateMinBounds (ref), validateMaxBounds (ref), getConsistentScaleType (ref)
 	local var30
 	local rootInstance = p14.rootInstance

@@ -2,7 +2,7 @@
 local _ = require(markdown.Types)
 local nodeTypeModule = require(markdown.Enums.NodeType)
 
-return function(p0, p1) --[[ line: 8 | named "getNodeType" ]]
+return function(p0, p1)
 	-- upvalues: nodeTypeModule (ref)
 	local var2 = p1.nodeConfiguration[p0]
 	

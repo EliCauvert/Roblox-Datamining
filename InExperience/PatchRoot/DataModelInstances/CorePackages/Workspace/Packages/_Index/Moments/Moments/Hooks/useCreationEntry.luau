@@ -7,7 +7,7 @@ local createGalleryCaptureSourceModule = require(moments.Capture.createGalleryCa
 local isStudioModule = require(parent.MomentsCommon.isStudio)
 local hasGalleryApiModule = require(moments.Capture.hasGalleryApi)
 
-return function(p0) --[[ line: 45 | named "useCreationEntry" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useDispatch (ref), isStudioModule (ref), hasGalleryApiModule (ref), createGalleryCaptureSourceModule (ref), setTabBarVisible (ref)
 	local var5, var6 = reactModule.useState(false)
 	local var7, var8 = reactModule.useState(false)
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 45 | named "useCreationEntry" ]]
 	local var11 = useDispatch()
 	local var12 = if p0 ~= nil then p0.manageTabBarVisibility ~= false else true
 	local var13 = isStudioModule() or not hasGalleryApiModule()
-	local var14 = reactModule.useCallback(function() --[[ line: 58 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), var6 (ref), var10 (ref), var9 (ref), createGalleryCaptureSourceModule (copy), var8 (ref)
 		if var13 then
 			var6(true)
@@ -26,9 +26,9 @@ return function(p0) --[[ line: 45 | named "useCreationEntry" ]]
 			return
 		end
 		var10.current = true
-		task.spawn(function() --[[ line: 68 ]]
+		task.spawn(function()
 			-- upvalues: var9 (copy), createGalleryCaptureSourceModule (copy), var10 (copy), var8 (copy), var6 (copy)
-			var9.current = createGalleryCaptureSourceModule(nil, function(p1, p2) --[[ line: 69 ]]
+			var9.current = createGalleryCaptureSourceModule(nil, function(p1, p2)
 				-- upvalues: var10 (copy), var8 (copy), var6 (copy)
 				var10.current = false
 				
@@ -41,12 +41,12 @@ return function(p0) --[[ line: 45 | named "useCreationEntry" ]]
 			end)
 		end)
 	end, { var13 })
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var5 (ref), var11 (ref), setTabBarVisible (copy)
 		if var12 and var5 then
 			var11(setTabBarVisible(false))
 		end
-		return function() --[[ line: 84 ]]
+		return function()
 			-- upvalues: var12 (copy), var5 (copy), var11 (copy), setTabBarVisible (copy)
 			if var12 and var5 then
 				var11(setTabBarVisible(true))
@@ -59,12 +59,12 @@ return function(p0) --[[ line: 45 | named "useCreationEntry" ]]
 		showFtux = if var13 then false else var7,
 		captureSource = if var13 then nil else var9.current,
 		onCreatePressed = var14,
-		onExitCreation = reactModule.useCallback(function() --[[ line: 91 ]]
+		onExitCreation = reactModule.useCallback(function()
 			-- upvalues: var9 (ref), var6 (ref)
 			var9.current = nil
 			var6(false)
 		end, {}),
-		onExitFtux = reactModule.useCallback(function() --[[ line: 96 ]]
+		onExitFtux = reactModule.useCallback(function()
 			-- upvalues: var9 (ref), var8 (ref)
 			var9.current = nil
 			var8(false)

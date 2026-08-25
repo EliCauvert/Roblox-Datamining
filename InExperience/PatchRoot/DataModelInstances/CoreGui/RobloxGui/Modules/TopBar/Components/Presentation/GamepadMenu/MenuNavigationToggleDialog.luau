@@ -18,7 +18,7 @@ local useObservableValueModule = require(chrome.ChromeShared.Hooks.useObservable
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local fFlagLocalizeMenuNavigationToggleDialogModule = require(coreGuiService.RobloxGui.Modules.TopBar.Flags.FFlagLocalizeMenuNavigationToggleDialog)
 
-return function(p0) --[[ line: 41 | named "MenuNavigationToggleDialog" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), fFlagLocalizeMenuNavigationToggleDialogModule (ref), userInputService (ref), reactModule (ref), localizationService (ref), useEventConnection (ref), localization (ref), getTextSize (ref), var6 (ref), fFlagEnableConsoleExpControls (ref), useObservableValueModule (ref), var7 (ref)
 	local var12, var13
 	local var10 = useDesignTokens()
@@ -36,11 +36,11 @@ return function(p0) --[[ line: 41 | named "MenuNavigationToggleDialog" ]]
 	
 	if fFlagLocalizeMenuNavigationToggleDialogModule then
 		local var14, var15 = reactModule.useState(localizationService.RobloxLocaleId)
-		useEventConnection(localizationService:GetPropertyChangedSignal("RobloxLocaleId"), function() --[[ line: 60 ]]
+		useEventConnection(localizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
 			-- upvalues: var15 (ref), localizationService (copy)
 			var15(localizationService.RobloxLocaleId)
 		end)
-		local var16, var17 = reactModule.useMemo(function() --[[ line: 70 ]]
+		local var16, var17 = reactModule.useMemo(function()
 			-- upvalues: localization (copy), var14 (ref)
 			local var24 = localization.new(var14)
 			local ok, status = pcall(var24.Format, var24, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 41 | named "MenuNavigationToggleDialog" ]]
 		var12 = "Some experiences require pressing "
 		var13 = " to toggle menu navigation"
 	end
-	local var18, var19 = reactModule.useMemo(function() --[[ line: 94 ]]
+	local var18, var19 = reactModule.useMemo(function()
 		-- upvalues: getTextSize (copy), var12 (write), captionMedium (ref), var13 (write)
 		return getTextSize(var12, captionMedium.FontSize, captionMedium.Font, Vector2.new(1e999, 1e999)), getTextSize(var13, captionMedium.FontSize, captionMedium.Font, Vector2.new(1e999, 1e999))
 	end, { captionMedium.FontSize, captionMedium.Font, var12, var13 })

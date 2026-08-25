@@ -5,17 +5,17 @@ local focusNavigationContextModule = require(script.Parent.FocusNavigationContex
 local useComposedRefModule = require(script.Parent.useComposedRef)
 local useEventLifecycleRefModule = require(script.Parent.useEventLifecycleRef)
 
-return function(p0, p1) --[[ line: 12 | named "useEventMap" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), focusNavigationContextModule (ref), useEventLifecycleRefModule (ref), useComposedRefModule (ref)
 	local var4 = reactModule.useContext(focusNavigationContextModule)
 	
-	return useComposedRefModule(useEventLifecycleRefModule(reactModule.useCallback(function(p2) --[[ line: 15 ]]
+	return useComposedRefModule(useEventLifecycleRefModule(reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref), p0 (ref)
 		if var4 then
 			assert(p2:IsA("GuiObject"), "EventMaps can only be mapped to GuiObjects")
 			var4:registerEventMap(p2, p0)
 		end
-	end, { var4, p0 }), reactModule.useCallback(function(p3) --[[ line: 22 ]]
+	end, { var4, p0 }), reactModule.useCallback(function(p3)
 		-- upvalues: var4 (ref), p0 (ref)
 		if var4 then
 			assert(p3:IsA("GuiObject"), "EventMaps can only be mapped to GuiObjects")

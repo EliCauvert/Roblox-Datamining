@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 5 | named "getRange" ]]
+﻿return function(p0, p1, p2)
 	assert(p1 <= p2, "startIndex must be less than or equal to endIndex")
 	local t = {}
 	local var1 = 1

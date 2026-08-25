@@ -1,5 +1,5 @@
 ﻿return {
-	IsPointInRect = function(p0, p1) --[[ line: 4 ]]
+	IsPointInRect = function(p0, p1)
 		local min = p0.Min
 		local max = p0.Max
 		

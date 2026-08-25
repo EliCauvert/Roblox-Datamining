@@ -31,7 +31,7 @@ local t = {
 	style = cryoModule.Dictionary.join(testStyle, { Tokens = { Color = { None = {} } } })
 }
 
-return reactModule.memo(function(p0) --[[ line: 69 | named "ConversationCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useIsUserPendingModule (ref), useIsInExperienceModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useConversationAvatarPresenceImageModule (ref), focusNavigationUtilsModule (ref), useNavigation (ref), fFlagLuaAppEnablePageLoadTracker (ref), fFlagLuaAppEnableChatMilestones (ref), usePageTracker (ref), reactModule (ref), enumScreensModule (ref), getConversationTitleModule (ref), useLocalization (ref), presenceBubbleCellStyledModule (ref), images (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref)
 	local var14 = cryoModule.Dictionary.join(t, p0)
 	local conversation = var14.conversation
@@ -43,13 +43,13 @@ return reactModule.memo(function(p0) --[[ line: 69 | named "ConversationCell" ]]
 	local var20 = focusNavigationUtilsModule.useLastInputMode()
 	local var21 = useNavigation()
 	local var22 = if fFlagLuaAppEnablePageLoadTracker and fFlagLuaAppEnableChatMilestones then usePageTracker() else nil
-	reactModule.useEffect(function() --[[ line: 91 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagLuaAppEnablePageLoadTracker (copy), fFlagLuaAppEnableChatMilestones (copy), var16 (ref), var22 (write)
 		if fFlagLuaAppEnablePageLoadTracker and fFlagLuaAppEnableChatMilestones and not var16 then
 			var22:sendMilestone("main_cta_interactable")
 		end
 	end, {})
-	local var23 = reactModule.useCallback(function() --[[ line: 99 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), var21 (ref), enumScreensModule (copy), var14 (ref)
 		if var20 == "Focus" and var21 then
 			var21.navigate(enumScreensModule.ChatConversation, {

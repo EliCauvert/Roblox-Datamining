@@ -9,7 +9,7 @@ local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUG
 return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityAvatar),
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationCageMeshDistanceMaxCageMeshDistanceAvatar (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceMaxNegativeSDFThresholdAvatar (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local fullBodyCage = p1.aqsSummaryData.Measure_Cage_Mesh_Distance_Avatar.full_body_cage
 		

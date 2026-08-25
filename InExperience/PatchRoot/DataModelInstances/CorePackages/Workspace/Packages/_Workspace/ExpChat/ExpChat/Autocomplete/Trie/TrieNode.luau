@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 4 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)

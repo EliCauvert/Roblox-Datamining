@@ -29,7 +29,7 @@ local t = { defaultSnapPointIndex = 1, testId = "--foundation-sheet" }
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-local function _(p0, p1, p2, p3) --[[ line: 59 | named "advanceCriticalDampedSpring" ]]
+local function _(p0, p1, p2, p3)
 	local var25 = p0 - p2
 	local var26 = 25.132741228718 * p3
 	local expValue = math.exp(-var26)
@@ -38,7 +38,7 @@ local function _(p0, p1, p2, p3) --[[ line: 59 | named "advanceCriticalDampedSpr
 	return p2 + (var25 + var28 * p3) * expValue, (p1 - var28 * var26) * expValue
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | named "BottomSheet" ]]
+return reactModule.memo(reactModule.forwardRef(function(p4, p5)
 	-- upvalues: withDefaultsModule (ref), t (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePreferencesModule (ref), useScreenHeightModule (ref), reactModule (ref), useHardwareInsetsModule (ref), flagsModule (ref), useAnimatedBinding (ref), childrenHasFullBleedModule (ref), otterModule (ref), reactUtilsModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), reactRobloxModule (ref), typesModule (ref), dashModule (ref), sheetContextModule (ref), elevationOwnerScope (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref)
 	local var29 = withDefaultsModule(p4, t)
 	local var30 = useOverlayModule()
@@ -48,11 +48,11 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 	local var33 = useScreenHeightModule()
 	local var34, var35 = reactModule.useState(if var30 then var30.AbsoluteSize.Y else 0)
 	local var36, var37 = reactModule.useState(0)
-	local snapPoints = var29.snapPoints or reactModule.useMemo(function() --[[ line: 90 ]]
+	local snapPoints = var29.snapPoints or reactModule.useMemo(function()
 		-- upvalues: var36 (ref)
 		return { var36 }
 	end, { var36 })
-	local var39 = reactModule.useCallback(function(p6) --[[ line: 97 ]]
+	local var39 = reactModule.useCallback(function(p6)
 		-- upvalues: var33 (ref)
 		return if p6 > 1 then p6 else p6 * var33
 	end, { var33 })
@@ -78,7 +78,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 	if flagsModule.FoundationBottomSheetOnSnapPointChanged then
 		var43.current = var29.onSnapPointChanged
 	end
-	local var44, var45 = useAnimatedBinding(1, function() --[[ line: 132 ]]
+	local var44, var45 = useAnimatedBinding(1, function()
 		-- upvalues: var42 (ref), var29 (ref)
 		if var42.current then
 			var29.onClose()
@@ -115,7 +115,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		local var74, var75 = reactModule.useState(false)
 		var71 = var74
 		local var76 = var75
-		var72 = reactModule.useCallback(function(p7) --[[ line: 165 ]]
+		var72 = reactModule.useCallback(function(p7)
 			-- upvalues: var73 (write), var76 (write)
 			if var73.current == p7 then
 				return
@@ -124,7 +124,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			var76(p7)
 		end, {})
 	end
-	local var77 = reactModule.useCallback(function() --[[ line: 174 ]]
+	local var77 = reactModule.useCallback(function()
 		-- upvalues: var68 (ref), var67 (ref), var69 (ref)
 		if var68.current then
 			var68.current:Disconnect()
@@ -133,7 +133,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		var67.current = 0
 		var69.current = false
 	end, {})
-	local var78 = reactModule.useCallback(function(p8) --[[ line: 183 ]]
+	local var78 = reactModule.useCallback(function(p8)
 		-- upvalues: var77 (ref), var69 (ref), var60 (ref), var68 (ref), var70 (ref)
 		var77()
 		var69.current = true
@@ -141,7 +141,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		if var60.current then
 			var60.current:ResetScrollVelocity()
 		end
-		var68.current = game:GetService("RunService").Heartbeat:Connect(function(p9) --[[ line: 192 ]]
+		var68.current = game:GetService("RunService").Heartbeat:Connect(function(p9)
 			-- upvalues: var60 (copy), var69 (copy), var77 (copy), var70 (copy), p8 (ref)
 			if not var60.current or not var69.current then
 				var77()
@@ -165,11 +165,11 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			end
 		end)
 	end, { var77 })
-	local var79 = reactModule.useCallback(function(p10) --[[ line: 218 ]]
+	local var79 = reactModule.useCallback(function(p10)
 		-- upvalues: var39 (ref), var40 (write), bottom (ref)
 		return math.min(var39(p10), var40) + bottom
 	end, { bottom, var39, var40 })
-	local var80 = reactModule.useCallback(function(p11) --[[ line: 228 ]]
+	local var80 = reactModule.useCallback(function(p11)
 		-- upvalues: var41 (ref), var78 (ref), var79 (ref), snapPoints (ref), flagsModule (copy), var43 (ref)
 		var41.current = p11
 		var78(var79(snapPoints[p11]))
@@ -178,7 +178,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			var43.current(snapPoints[p11], p11)
 		end
 	end, { var79, snapPoints })
-	local var81 = reactModule.useCallback(function(p12) --[[ line: 236 ]]
+	local var81 = reactModule.useCallback(function(p12)
 		-- upvalues: var77 (ref), var41 (ref), var60 (ref), var79 (ref), snapPoints (ref), flagsModule (copy), var43 (ref)
 		var77()
 		var41.current = p12
@@ -190,7 +190,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			var43.current(snapPoints[p12], p12)
 		end
 	end, { var77, var79, snapPoints })
-	local var82 = reactModule.useCallback(function(p13) --[[ line: 247 ]]
+	local var82 = reactModule.useCallback(function(p13)
 		-- upvalues: var42 (ref), reducedMotion (ref), var77 (ref), var60 (ref), var45 (ref), otterModule (copy), var70 (ref), var67 (ref), var78 (ref), var31 (ref)
 		if var42.current then return end
 		if not reducedMotion or p13 then
@@ -209,11 +209,11 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		end
 		var45(otterModule.instant(1))
 	end, { var78, var77, reducedMotion })
-	local var83 = if flagsModule.FoundationBottomSheetScrollAtMaxTolerance then reactModule.useCallback(function() --[[ line: 269 ]]
+	local var83 = if flagsModule.FoundationBottomSheetScrollAtMaxTolerance then reactModule.useCallback(function()
 		-- upvalues: var40 (write), bottom (ref), var59 (ref)
 		return math.floor(var40 + bottom) - 0.01 <= var59.current
 	end, { var40, bottom }) else nil
-	local var84 = reactModule.useCallback(function() --[[ line: 276 ]]
+	local var84 = reactModule.useCallback(function()
 		-- upvalues: var61 (ref), flagsModule (copy), var83 (ref), var59 (ref), var40 (write), bottom (ref), var67 (ref), var66 (ref), var65 (ref)
 		local var98 = if flagsModule.FoundationBottomSheetScrollAtMaxTolerance then var83() else math.floor(var40 + bottom) <= var59.current
 		
@@ -225,7 +225,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			var65(true)
 		end
 	end, if flagsModule.FoundationBottomSheetScrollAtMaxTolerance then { var83 } else { var40, bottom })
-	local var85 = reactModule.useCallback(function() --[[ line: 294 ]]
+	local var85 = reactModule.useCallback(function()
 		-- upvalues: var67 (ref), var59 (ref), snapPoints (ref), var79 (ref), var66 (ref), var70 (ref), var82 (ref), var80 (ref)
 		local current = var67.current
 		local var99 = var59.current - current / 2.35
@@ -234,7 +234,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		for i, v in snapPoints do
 			table.insert(list, { index = i, position = var79(v) })
 		end
-		table.sort(list, function(p14, p15) --[[ line: 312 ]]
+		table.sort(list, function(p14, p15)
 			-- upvalues: var99 (ref)
 			return math.abs(p14.position - var99) < math.abs(p15.position - var99)
 		end)
@@ -251,7 +251,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			var80(var101.index)
 		end
 	end, { snapPoints, var80, var79, var82 })
-	reactModule.useEffect(function() --[[ line: 328 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), reducedMotion (ref), var81 (ref), var29 (ref), var45 (ref), otterModule (copy), var80 (ref), var31 (ref), var39 (ref), snapPoints (ref), var40 (write), var65 (ref), var77 (ref)
 		if var30 then
 			if reducedMotion then
@@ -263,7 +263,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			end
 			var65(var40 <= var39(snapPoints[var29.defaultSnapPointIndex]))
 		end
-		return function() --[[ line: 344 ]]
+		return function()
 			-- upvalues: var77 (copy)
 			var77()
 		end
@@ -273,25 +273,25 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 	})
 	
 	if flagsModule.FoundationBottomSheetFixHeightCap then
-		reactModule.useLayoutEffect(function() --[[ line: 360 ]]
+		reactModule.useLayoutEffect(function()
 			-- upvalues: var30 (ref), var35 (ref)
 			if var30 then
 				var35(var30.AbsoluteSize.Y)
-				local var102 = var30:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 365 ]]
+				local var102 = var30:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 					-- upvalues: var35 (copy), var30 (copy)
 					var35(var30.AbsoluteSize.Y)
 				end)
 				
-				return function() --[[ line: 368 ]]
+				return function()
 					-- upvalues: var102 (ref)
 					var102:Disconnect()
 				end
 			end
 		end, { var30 })
 	end
-	reactModule.useEffect(function() --[[ line: 378 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var67 (ref), flagsModule (copy), var66 (ref), var72 (write), var84 (ref), var77 (ref), var60 (ref), var83 (ref), var59 (ref), var40 (write), bottom (ref), var42 (ref), var65 (ref), var85 (ref)
-		local touchPanConnection = game:GetService("UserInputService").TouchPan:Connect(function(_, p16, p17, _) --[[ line: 380 ]]
+		local touchPanConnection = game:GetService("UserInputService").TouchPan:Connect(function(_, p16, p17, _)
 			-- upvalues: var67 (copy), flagsModule (copy), var66 (copy), var72 (copy), var84 (copy)
 			var67.current = p17.Y
 			
@@ -300,7 +300,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			end
 			var84()
 		end)
-		local inputBeganConnection = game:GetService("UserInputService").InputBegan:Connect(function() --[[ line: 393 ]]
+		local inputBeganConnection = game:GetService("UserInputService").InputBegan:Connect(function()
 			-- upvalues: var66 (copy), var67 (copy), flagsModule (copy), var72 (copy), var77 (copy)
 			var66.current = true
 			var67.current = 0
@@ -310,7 +310,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			end
 			var77()
 		end)
-		local inputEndedConnection = game:GetService("UserInputService").InputEnded:Connect(function() --[[ line: 401 ]]
+		local inputEndedConnection = game:GetService("UserInputService").InputEnded:Connect(function()
 			-- upvalues: var66 (copy), flagsModule (copy), var72 (copy), var60 (copy), var67 (copy), var83 (copy), var59 (copy), var40 (copy), bottom (copy), var42 (copy), var65 (copy), var85 (copy)
 			if var66.current == false then return end
 			var66.current = false
@@ -328,7 +328,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			var85()
 		end)
 		
-		return function() --[[ line: 431 ]]
+		return function()
 			-- upvalues: flagsModule (copy), var72 (copy), touchPanConnection (ref), inputBeganConnection (ref), inputEndedConnection (ref)
 			if flagsModule.FoundationBottomSheetGestureInteractionSink then
 				var72(false)
@@ -351,7 +351,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 	local var87, var88 = reactModule.useState(nil)
 	local var89, var90 = reactModule.useState(nil)
 	local var91 = reactUtilsModule.useComposedRef(p5, var90)
-	reactModule.useImperativeHandle(var29.sheetRef, function() --[[ line: 464 ]]
+	reactModule.useImperativeHandle(var29.sheetRef, function()
 		-- upvalues: var82 (ref)
 		return { close = var82 }
 	end, {})
@@ -363,7 +363,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		selection = typesModule.nonSelectable,
 		selectionGroup = typesModule.isolatedSelectionGroup,
 		testId = `{var29.testId}--surface`,
-		onAbsoluteSizeChanged = if not flagsModule.FoundationBottomSheetFixHeightCap then function(p18) --[[ line: 568 ]]
+		onAbsoluteSizeChanged = if not flagsModule.FoundationBottomSheetFixHeightCap then function(p18)
 			-- upvalues: var35 (ref)
 			var35(p18.AbsoluteSize.Y)
 		end else nil
@@ -375,7 +375,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 		ScrollingDirection = Enum.ScrollingDirection.Y,
 		ScrollBarThickness = 0,
 		ref = var60,
-		[reactModule.Change.CanvasPosition] = function(p19) --[[ line: 581 ]]
+		[reactModule.Change.CanvasPosition] = function(p19)
 			-- upvalues: var59 (ref), var47 (ref), bottom (ref), var31 (ref), var84 (ref), var82 (ref)
 			var59.current = p19.CanvasPosition.Y
 			var47(var59.current - bottom - var31.Margin.Small)
@@ -394,7 +394,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			Sheet = reactModule.createElement(viewModule, {
 				Size = if var29.snapPoints == nil then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 0, var40 + 200),
 				AutomaticSize = if var29.snapPoints == nil then Enum.AutomaticSize.Y else nil,
-				onAbsoluteSizeChanged = if var29.snapPoints == nil then function(p20) --[[ line: 601 ]]
+				onAbsoluteSizeChanged = if var29.snapPoints == nil then function(p20)
 					-- upvalues: var37 (ref)
 					var37(p20.AbsoluteSize.Y - 200)
 				end else nil,
@@ -418,7 +418,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 						TouchTarget = reactModule.createElement(viewModule, {
 							tag = "size-1000-600",
 							stateLayer = { affordance = stateLayerAffordanceModule.None },
-							onActivated = function() --[[ line: 532 ]]
+							onActivated = function()
 								-- upvalues: var66 (ref), var63 (ref), var62 (ref), snapPoints (ref), var41 (ref), reducedMotion (ref), var81 (ref), var80 (ref), var39 (ref), var40 (write), var65 (ref), var82 (ref)
 								var66.current = false
 								
@@ -445,7 +445,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 					})
 				}),
 				Content = reactModule.createElement(sheetContextModule.Provider, {
-					value = reactModule.useMemo(function() --[[ line: 471 ]]
+					value = reactModule.useMemo(function()
 						-- upvalues: var48 (ref), var49 (ref), var50 (ref), var51 (ref), var46 (ref), var47 (ref), bottom (ref), var64 (ref), var61 (ref), var63 (ref), var62 (ref), var84 (ref), var52 (ref), var53 (ref), var54 (write), var57 (write), var58 (write), var82 (ref), sheetTypeModule (copy), var89 (ref), var29 (ref), var86 (ref), var87 (ref), var88 (ref), flagsModule (copy), var71 (write)
 						return {
 							bottomPadding = 200,
@@ -460,7 +460,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 							innerScrollingEnabled = var64,
 							innerScrollY = var61,
 							innerScrollingRef = var63,
-							setInnerScrollY = function(value) --[[ line: 484 ]]
+							setInnerScrollY = function(value)
 								-- upvalues: var62 (copy), var84 (copy)
 								var62(value)
 								var84()
@@ -502,14 +502,14 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 77 | 
 			Size = UDim2.fromScale(1, 2),
 			Position = UDim2.fromScale(0, -0.5),
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			backgroundStyle = var44:map(function(p21) --[[ line: 642 ]]
+			backgroundStyle = var44:map(function(p21)
 				-- upvalues: var31 (ref)
 				return {
 					Color3 = var31.Color.Common.Backdrop.Color3,
 					Transparency = math.lerp(var31.Color.Common.Backdrop.Transparency, 1, p21)
 				}
 			end),
-			onActivated = function() --[[ line: 648 ]]
+			onActivated = function()
 				-- upvalues: var82 (ref)
 				var82()
 			end,

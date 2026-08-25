@@ -7,7 +7,7 @@ local onFormLoadedModule = require(genericAbuseReporting.Analytics.Actions.OnFor
 local useAnalyticsSubmitDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsSubmitDispatch)
 local useAnalyticsDispatchModule = require(genericAbuseReporting.Analytics.useAnalyticsDispatch)
 
-return function(p0) --[[ line: 30 | named "DualDropdownReport" ]]
+return function(p0)
 	-- upvalues: useAnalyticsSubmitDispatchModule (ref), useAnalyticsDispatchModule (ref), defaultLocalizationKeysModule (ref), reactModule (ref), onFormLoadedModule (ref), frameModule (ref), dualDropdownSubmitDialogModule (ref)
 	local var8 = useAnalyticsSubmitDispatchModule()
 	local var9 = useAnalyticsDispatchModule()
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 30 | named "DualDropdownReport" ]]
 		p0.localizationKeys.formTitle = p0.localizationKeys.formTitle or defaultLocalizationKeysModule.formTitle
 		p0.localizationKeys.formSubmit = p0.localizationKeys.formSubmit or defaultLocalizationKeysModule.formSubmit
 	end
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), onFormLoadedModule (copy), p0 (ref)
 		var9(onFormLoadedModule({
 			context = p0.analyticsContext,
@@ -30,13 +30,13 @@ return function(p0) --[[ line: 30 | named "DualDropdownReport" ]]
 			localizationKeys = p0.localizationKeys,
 			reportProblems = p0.reportProblems,
 			reportSurfaces = p0.reportSurfaces,
-			onSubmit = reactModule.useCallback(function(p1, p2, p3) --[[ line: 48 ]]
+			onSubmit = reactModule.useCallback(function(p1, p2, p3)
 				-- upvalues: p0 (ref), var8 (ref)
 				if (if p0.onSubmitProps.hasNextSteps then p0.onSubmitProps.onProceedToNextStep(p1, p2, p3) else p0.onSubmitProps.onSubmit(p1, p2, p3)) and not p0.onSubmitProps.hasNextSteps then
 					var8("Submit")
 				end
 			end, { var8, p0.onSubmitProps }),
-			onAbandon = reactModule.useCallback(function() --[[ line: 58 ]]
+			onAbandon = reactModule.useCallback(function()
 				-- upvalues: p0 (ref), var8 (ref)
 				if not p0.onCloseProps then
 					var8("Abandon")

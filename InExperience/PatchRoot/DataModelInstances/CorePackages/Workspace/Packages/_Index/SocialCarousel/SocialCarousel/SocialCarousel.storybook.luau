@@ -23,9 +23,9 @@ local t = { language = "en-us" }
 local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_2 = { Console = device.Console, Desktop = device.Desktop }
 
-local var13 = function(p0) --[[ line: 44 ]]
+local var13 = function(p0)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
-	return roduxModule.Store.new(function() --[[ line: 45 ]]
+	return roduxModule.Store.new(function()
 		-- upvalues: cryoModule (copy), p0 (ref)
 		return cryoModule.Dictionary.join(p0, {
 			ScreenSize = Vector2.new(600, 600),
@@ -40,22 +40,22 @@ return {
 	storyRoot = socialCarousel,
 	roact = roactModule,
 	roactRodux = roactRoduxModule,
-	mapDefinition = function(p1) --[[ line: 66 ]]
+	mapDefinition = function(p1)
 		-- upvalues: cryoModule (ref), t (ref)
 		return cryoModule.Dictionary.join(p1, {
 			controls = cryoModule.Dictionary.join(t, p1.controls or {})
 		})
 	end,
-	mapStory = function(p2) --[[ line: 70 ]]
+	mapStory = function(p2)
 		-- upvalues: t_1 (ref), roactModule (ref), styleProviderWithDefaultTheme (ref), universalAppPolicy (ref), roactNavigationModule (ref), roactRoduxModule (ref), var13 (ref), apolloClientModule (ref), mockApolloClient (ref), foundationProvider (ref), t_2 (ref), designTokenProvider (ref), mockLocale (ref)
-		return function(p3) --[[ line: 71 ]]
+		return function(p3)
 			-- upvalues: t_1 (copy), roactModule (copy), styleProviderWithDefaultTheme (copy), universalAppPolicy (copy), roactNavigationModule (copy), roactRoduxModule (copy), var13 (copy), apolloClientModule (copy), mockApolloClient (copy), foundationProvider (copy), t_2 (copy), designTokenProvider (copy), mockLocale (copy), p2 (ref)
 			return roactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				roactModule.createElement(universalAppPolicy.Provider, {
 					policy = {
-						function() --[[ line: 80 ]]
+						function()
 							return {
-								useGridPageLayout = function() --[[ line: 82 ]]
+								useGridPageLayout = function()
 									return true
 								end
 							}
@@ -65,16 +65,16 @@ return {
 					navigationProvider = roactModule.createElement(roactNavigationModule.Provider, {
 						value = {
 							state = { routeName = "appPage" },
-							isFocused = function() --[[ line: 94 ]]
+							isFocused = function()
 								return false
 							end,
-							addListener = function() --[[ line: 97 ]]
-								return { remove = function() --[[ line: 99 ]] end }
+							addListener = function()
+								return { remove = function() end }
 							end,
-							getParam = function(_, p4) --[[ line: 102 ]]
+							getParam = function(_, p4)
 								return p4
 							end,
-							navigate = function() --[[ line: 105 ]] end
+							navigate = function() end
 						}
 					}, {
 						storeProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = var13(p3.definition.state or {}) }, {

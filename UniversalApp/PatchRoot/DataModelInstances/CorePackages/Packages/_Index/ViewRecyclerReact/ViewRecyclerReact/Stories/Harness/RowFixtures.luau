@@ -14,7 +14,7 @@ local list = {
 }
 
 return {
-	SimpleRow = unknownModule.createRecyclableView(function(p0) --[[ line: 28 | named "SimpleRowView" ]]
+	SimpleRow = unknownModule.createRecyclableView(function(p0)
 		-- upvalues: unknownModule (ref), recyclingStatsModule (ref), createElement (ref)
 		local var6 = unknownModule.useItemValue(p0.valueSignal)
 		local var7 = recyclingStatsModule.useAssignment(var6.id)
@@ -29,7 +29,7 @@ return {
 			TextColor3 = Color3.fromRGB(24, 25, 30)
 		})
 	end, { readiness = "ReadyOnCommit", hideWhilePending = true }),
-	MeasuredRow = unknownModule.createRecyclableView(function(p1) --[[ line: 43 | named "MeasuredRowView" ]]
+	MeasuredRow = unknownModule.createRecyclableView(function(p1)
 		-- upvalues: unknownModule (ref), recyclingStatsModule (ref), createElement (ref)
 		local var8 = unknownModule.useItemValue(p1.valueSignal)
 		local var9 = recyclingStatsModule.useAssignment(var8.id)
@@ -54,23 +54,23 @@ return {
 			Padding = createElement("UIPadding", { PaddingBottom = UDim.new(0, var8.gap or 0) })
 		})
 	end, { readiness = "ReadyOnCommit", hideWhilePending = true }),
-	ImmediateSimpleRow = unknownModule.createRecyclableView(function(p2) --[[ line: 70 | named "ImmediateSimpleRowView" ]]
+	ImmediateSimpleRow = unknownModule.createRecyclableView(function(p2)
 		-- upvalues: unknownModule (ref), createElement (ref)
 		return createElement("TextLabel", {
 			BorderSizePixel = 0,
 			TextSize = 17,
-			BackgroundColor3 = unknownModule.useItemBinding(p2.valueSignal, function(p3) --[[ line: 71 ]]
+			BackgroundColor3 = unknownModule.useItemBinding(p2.valueSignal, function(p3)
 				return Color3.fromHSV((tonumber(p3.id) or 1) % 17 / 17, 0.25, 0.9)
 			end),
 			Font = Enum.Font.BuilderSans,
 			Size = UDim2.fromScale(1, 1),
-			Text = unknownModule.useItemBinding(p2.valueSignal, function(p4) --[[ line: 74 ]]
+			Text = unknownModule.useItemBinding(p2.valueSignal, function(p4)
 				return p4.label
 			end),
 			TextColor3 = Color3.fromRGB(24, 25, 30)
 		})
 	end, { readiness = "ReadyOnAssignment" }),
-	ImmediateMeasuredRow = unknownModule.createRecyclableView(function(p5) --[[ line: 89 | named "ImmediateMeasuredRowView" ]]
+	ImmediateMeasuredRow = unknownModule.createRecyclableView(function(p5)
 		-- upvalues: unknownModule (ref), createElement (ref)
 		return createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -85,20 +85,20 @@ return {
 				BackgroundColor3 = Color3.fromRGB(238, 238, 243),
 				Font = Enum.Font.BuilderSans,
 				Size = UDim2.fromScale(1, 0),
-				Text = unknownModule.useItemBinding(p5.valueSignal, function(p6) --[[ line: 90 ]]
+				Text = unknownModule.useItemBinding(p5.valueSignal, function(p6)
 					return p6.label
 				end),
 				TextColor3 = Color3.fromRGB(24, 25, 30),
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			Padding = createElement("UIPadding", {
-				PaddingBottom = unknownModule.useItemBinding(p5.valueSignal, function(p7) --[[ line: 93 ]]
+				PaddingBottom = unknownModule.useItemBinding(p5.valueSignal, function(p7)
 					return UDim.new(0, p7.gap or 0)
 				end)
 			})
 		})
 	end, { readiness = "ReadyOnAssignment" }),
-	buildSimpleRows = function(p8, p9) --[[ line: 137 ]]
+	buildSimpleRows = function(p8, p9)
 		local list = table.create(p8)
 		
 		for i = 1, p8 do
@@ -106,7 +106,7 @@ return {
 		end
 		return list
 	end,
-	buildLogRows = function(p10) --[[ line: 148 ]]
+	buildLogRows = function(p10)
 		-- upvalues: list (ref)
 		local list_1 = table.create(p10)
 		
@@ -118,7 +118,7 @@ return {
 		end
 		return list_1
 	end,
-	buildKnownVariableRows = function(p11, p12, p13) --[[ line: 159 ]]
+	buildKnownVariableRows = function(p11, p12, p13)
 		local list = table.create(p11)
 		
 		for i = 1, p11 do
@@ -129,7 +129,7 @@ return {
 		end
 		return list
 	end,
-	buildMeasuredRows = function(p14, p15) --[[ line: 171 ]]
+	buildMeasuredRows = function(p14, p15)
 		-- upvalues: parts (ref)
 		local random = Random.new(1337)
 		local list = table.create(p14)
@@ -149,7 +149,7 @@ return {
 		end
 		return list
 	end,
-	getItemKey = function(p16) --[[ line: 189 ]]
+	getItemKey = function(p16)
 		return p16.id
 	end
 }

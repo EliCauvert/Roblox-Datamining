@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 36 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.maxTokens = p0.maxTokens
@@ -16,7 +16,7 @@ function t.new(p0) --[[ line: 36 ]]
 	return tbl
 end
 
-function t:refill() --[[ line: 58 ]]
+function t:refill()
 	local currentTime = tick()
 	local var3 = currentTime - self.lastRefillTime
 	
@@ -33,7 +33,7 @@ function t:refill() --[[ line: 58 ]]
 	end
 end
 
-function t:consume(p1) --[[ line: 93 ]]
+function t:consume(p1)
 	p1 = p1 or 1
 	self:refill()
 	
@@ -45,26 +45,26 @@ function t:consume(p1) --[[ line: 93 ]]
 	return false
 end
 
-function t:getAvailableTokens() --[[ line: 113 ]]
+function t:getAvailableTokens()
 	self:refill()
 	
 	return self.currentTokens
 end
 
-function t:getMaxTokens() --[[ line: 123 ]]
+function t:getMaxTokens()
 	return self.maxTokens
 end
 
-function t:hasTokensAvailable() --[[ line: 132 ]]
+function t:hasTokensAvailable()
 	return self:getAvailableTokens() > 0
 end
 
-function t:reset() --[[ line: 139 ]]
+function t:reset()
 	self.currentTokens = self.maxTokens
 	self.lastRefillTime = tick()
 end
 
-function t:toString() --[[ line: 149 ]]
+function t:toString()
 	self:refill()
 	
 	return string.format("TokenBucketRateLimiter{tokens=%d/%d, refillRate=%d/%ds, nextRefillIn=%.1fs}", self.currentTokens, self.maxTokens, self.refillRate, self.refillIntervalSeconds, self.refillIntervalSeconds - (tick() - self.lastRefillTime) % self.refillIntervalSeconds)

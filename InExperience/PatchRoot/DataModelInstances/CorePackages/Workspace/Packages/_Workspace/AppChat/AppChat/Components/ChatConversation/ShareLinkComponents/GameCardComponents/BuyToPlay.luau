@@ -8,9 +8,9 @@ local fitFrameVerticalModule = require(appChat.Components.ChatConversation.Asset
 local buyToPlay = roactModule.PureComponent:extend("BuyToPlay")
 buyToPlay.defaultProps = { text = "Buy to play!", gamePrice = 100 }
 
-function buyToPlay.render(p0) --[[ line: 26 ]]
+function buyToPlay.render(p0)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), fitFrameVerticalModule (ref), constantsModule (ref), playButtonModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 27 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: roactModule (copy), fitFrameVerticalModule (copy), constantsModule (copy), p0 (ref), playButtonModule (copy)
 		return roactModule.createElement(fitFrameVerticalModule, {
 			BackgroundTransparency = 1,

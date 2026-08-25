@@ -16,7 +16,7 @@ local t_1 = {
 	lastUpdated = { 25, 1, 22 }
 }
 
-return function(p0, p1, p2, p3) --[[ line: 31 | named "reportWarning" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: runService (ref), t_1 (ref), t (ref)
 	local var4 = p3 and table.clone(p3) or {}
 	var4.category = p1

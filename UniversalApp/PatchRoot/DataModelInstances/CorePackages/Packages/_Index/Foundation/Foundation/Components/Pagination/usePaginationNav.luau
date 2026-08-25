@@ -8,10 +8,10 @@ local navPaginationLayoutModule = require(script.Parent.Nav.NavPaginationLayout)
 local paginationSlotsUtilsModule = require(script.Parent.paginationSlotsUtils)
 local usePaginationSelectionChainModule = require(script.Parent.usePaginationSelectionChain)
 
-local function useNavCallbacks(p0, p1) --[[ line: 60 ]]
+local function useNavCallbacks(p0, p1)
 	-- upvalues: reactModule (ref), paginationDirectionModule (ref)
 	return {
-		onDirectionActivated = reactModule.useCallback(function(p2) --[[ line: 64 ]]
+		onDirectionActivated = reactModule.useCallback(function(p2)
 			-- upvalues: paginationDirectionModule (copy), p0 (ref)
 			if p2 == paginationDirectionModule.First then
 				p0.onActivated(1)
@@ -36,7 +36,7 @@ local function useNavCallbacks(p0, p1) --[[ line: 60 ]]
 	}
 end
 
-local function _(p3, p4, p5) --[[ line: 85 | named "mergeNavPaginationLayoutProps" ]]
+local function _(p3, p4, p5)
 	-- upvalues: withCommonPropsModule (ref)
 	local var8 = withCommonPropsModule(p3, p4)
 	var8.ref = p5
@@ -44,10 +44,10 @@ local function _(p3, p4, p5) --[[ line: 85 | named "mergeNavPaginationLayoutProp
 	return var8
 end
 
-return function(p6, p7, p8) --[[ line: 95 | named "usePaginationNav" ]]
+return function(p6, p7, p8)
 	-- upvalues: reactModule (ref), paginationSlotsUtilsModule (ref), usePaginationSelectionChainModule (ref), useNavCallbacks (ref), navPaginationLayoutModule (ref), withCommonPropsModule (ref)
 	local disabledState = p7.disabledState
-	local var9 = usePaginationSelectionChainModule(reactModule.useMemo(function() --[[ line: 103 ]]
+	local var9 = usePaginationSelectionChainModule(reactModule.useMemo(function()
 		-- upvalues: paginationSlotsUtilsModule (copy), p7 (ref), disabledState (ref)
 		return paginationSlotsUtilsModule.getPaginationSelectableSlotOrder({
 			hasFirstLastButtons = p7.hasFirstLastButtons,
@@ -73,7 +73,7 @@ return function(p6, p7, p8) --[[ line: 95 | named "usePaginationNav" ]]
 	
 	return {
 		selection = var9,
-		createLayout = reactModule.useCallback(function(p9, p10) --[[ line: 136 ]]
+		createLayout = reactModule.useCallback(function(p9, p10)
 			-- upvalues: reactModule (copy), navPaginationLayoutModule (copy), p6 (ref), disabledState (ref), var10 (ref), var9 (ref), p7 (ref), withCommonPropsModule (copy)
 			local createElement = reactModule.createElement
 			local var11 = withCommonPropsModule(p6, {

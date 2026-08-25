@@ -5,12 +5,12 @@ local getFStringNotificationsStreamNotificationUXLayer = sharedFlagsModule.GetFS
 local ixpHelper = require(parent.NotificationsCommon).ixpHelper
 local streamNotificationUXSettingsGearVariant = game:DefineFastString("StreamNotificationUXSettingsGearVariant", "enableStreamSettingsGear")
 
-local function _() --[[ line: 17 | named "getLayerVariables" ]]
+local function _()
 	-- upvalues: ixpHelper (ref), getFStringNotificationsStreamNotificationUXLayer (ref)
 	return ixpHelper.getIxpLayerData(getFStringNotificationsStreamNotificationUXLayer())
 end
 
-local _ = function() --[[ line: 21 | named "getIsUserInTreatment" ]]
+local _ = function()
 	-- upvalues: ixpHelper (ref), getFStringNotificationsStreamNotificationUXLayer (ref), streamNotificationUXSettingsGearVariant (ref)
 	local ixpLayerData = ixpHelper.getIxpLayerData(getFStringNotificationsStreamNotificationUXLayer())
 	
@@ -18,7 +18,7 @@ local _ = function() --[[ line: 21 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getSettingsGearEnabled = function() --[[ line: 31 ]]
+	getSettingsGearEnabled = function()
 		-- upvalues: fFlagStreamNotificationUXSettingsHeader (ref), ixpHelper (ref), getFStringNotificationsStreamNotificationUXLayer (ref), streamNotificationUXSettingsGearVariant (ref)
 		local var3 = fFlagStreamNotificationUXSettingsHeader
 		

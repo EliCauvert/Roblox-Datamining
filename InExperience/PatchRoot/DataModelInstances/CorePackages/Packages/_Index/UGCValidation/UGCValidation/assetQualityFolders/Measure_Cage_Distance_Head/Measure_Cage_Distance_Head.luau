@@ -9,7 +9,7 @@ local getFFlagUGCValidateAQScoreWarningsModule = require(parent.flags.getFFlagUG
 return {
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	fflag = require(parent.flags.getFFlagUGCValidateCageMeshDistanceHead),
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local headOuterCage = p1.aqsSummaryData.Measure_Cage_Distance_Head.Head_OuterCage
 		

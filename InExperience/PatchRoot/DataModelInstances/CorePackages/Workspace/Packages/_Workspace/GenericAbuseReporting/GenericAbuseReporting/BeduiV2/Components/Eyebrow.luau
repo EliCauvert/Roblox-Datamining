@@ -3,7 +3,7 @@ local reactModule = require(genericAbuseReporting.Parent.React)
 local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
 
-return reactModule.memo(function(p0) --[[ line: 20 | named "Eyebrow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), textWithTranslationModule (ref)
 	return if p0.eyebrow then reactModule.createElement(textWithTranslationModule, {
 		tag = "size-full-0 auto-y text-label-large",

@@ -80,7 +80,7 @@ local tweenInfo = TweenInfo.new(0.06, Enum.EasingStyle.Linear, Enum.EasingDirect
 local tweenInfo_1 = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 local tweenInfo_2 = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
 
-local function _() --[[ line: 99 | named "getScreenGui" ]]
+local function _()
 	-- upvalues: playerGui (ref)
 	local proximityPrompts_1 = playerGui:FindFirstChild("ProximityPrompts")
 	
@@ -94,7 +94,7 @@ local function _() --[[ line: 99 | named "getScreenGui" ]]
 	return proximityPrompts_1
 end
 
-local function createProgressBarGradient(p0, p1, p2, p3) --[[ line: 112 ]]
+local function createProgressBarGradient(p0, p1, p2, p3)
 	-- upvalues: tweenService (ref), tweenInfo (ref)
 	local frame = Instance.new("Frame")
 	frame.Size = UDim2.fromScale(0.5, 1)
@@ -124,7 +124,7 @@ local function createProgressBarGradient(p0, p1, p2, p3) --[[ line: 112 ]]
 	return UIGradient, frame
 end
 
-local function createCircularProgressBar(p4, p5) --[[ line: 144 ]]
+local function createCircularProgressBar(p4, p5)
 	-- upvalues: createProgressBarGradient (ref)
 	local circularProgressBar = Instance.new("Frame")
 	circularProgressBar.Name = "CircularProgressBar"
@@ -137,7 +137,7 @@ local function createCircularProgressBar(p4, p5) --[[ line: 144 ]]
 	local progress = Instance.new("NumberValue")
 	progress.Name = "Progress"
 	progress.Parent = circularProgressBar
-	progress.Changed:Connect(function(p6) --[[ line: 158 ]]
+	progress.Changed:Connect(function(p6)
 		-- upvalues: var29 (ref), progress (ref), var28 (ref), var31 (ref), var30 (ref)
 		local clampedValue = math.clamp(p6 * 360, 0, 360)
 		var29.Visible = progress.Value > 0.5
@@ -149,7 +149,7 @@ local function createCircularProgressBar(p4, p5) --[[ line: 144 ]]
 	return circularProgressBar
 end
 
-local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
+local function createPrompt(p7, p8, p9)
 	-- upvalues: color3 (ref), tweenService (ref), tweenInfo_2 (ref), appFonts (ref), color3_1 (ref), color3_2 (ref), tweenInfo (ref), userInputService (ref), t (ref), t_1 (ref), t_2 (ref), t_3 (ref), createCircularProgressBar (ref), tweenInfo_1 (ref), runService (ref)
 	local keyboardKeyCodeStringForKeyCode
 	local t_4 = {}
@@ -349,14 +349,14 @@ local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
 		textButton.Parent = prompt
 		textButton.Selectable = false
 		keyboardKeyCodeStringForKeyCode = false
-		textButton.InputBegan:Connect(function(p10) --[[ line: 399 ]]
+		textButton.InputBegan:Connect(function(p10)
 			-- upvalues: p7 (ref), keyboardKeyCodeStringForKeyCode (write)
 			if (p10.UserInputType == Enum.UserInputType.Touch or p10.UserInputType == Enum.UserInputType.MouseButton1) and p10.UserInputState ~= Enum.UserInputState.Change then
 				p7:InputHoldBegin()
 				keyboardKeyCodeStringForKeyCode = true
 			end
 		end)
-		textButton.InputEnded:Connect(function(p11) --[[ line: 406 ]]
+		textButton.InputEnded:Connect(function(p11)
 			-- upvalues: keyboardKeyCodeStringForKeyCode (write), p7 (ref)
 			if (p11.UserInputType == Enum.UserInputType.Touch or p11.UserInputType == Enum.UserInputType.MouseButton1) and keyboardKeyCodeStringForKeyCode then
 				keyboardKeyCodeStringForKeyCode = false
@@ -377,33 +377,33 @@ local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
 	local _ = nil
 	
 	if p7.HoldDuration > 0 then
-		promptButtonHoldBeganConnection = p7.PromptButtonHoldBegan:Connect(function() --[[ line: 431 ]]
+		promptButtonHoldBeganConnection = p7.PromptButtonHoldBegan:Connect(function()
 			-- upvalues: t_4 (ref)
 			for i, v in ipairs(t_4) do
 				v:Play()
 			end
 		end)
-		keyboardKeyCodeStringForKeyCode = p7.PromptButtonHoldEnded:Connect(function() --[[ line: 437 ]]
+		keyboardKeyCodeStringForKeyCode = p7.PromptButtonHoldEnded:Connect(function()
 			-- upvalues: t_5 (ref)
 			for i, v in ipairs(t_5) do
 				v:Play()
 			end
 		end)
 	end
-	local triggeredConnection = p7.Triggered:Connect(function() --[[ line: 444 ]]
+	local triggeredConnection = p7.Triggered:Connect(function()
 		-- upvalues: t_6 (ref)
 		for i, v in ipairs(t_6) do
 			v:Play()
 		end
 	end)
-	local triggerEndedConnection = p7.TriggerEnded:Connect(function() --[[ line: 450 ]]
+	local triggerEndedConnection = p7.TriggerEnded:Connect(function()
 		-- upvalues: t_7 (ref)
 		for i, v in ipairs(t_7) do
 			v:Play()
 		end
 	end)
 	
-	local function updateUIFromPrompt() --[[ line: 456 ]]
+	local function updateUIFromPrompt()
 		-- upvalues: p7 (ref), actionText (ref), objectText (ref), UIPadding (ref), prompt (ref), runService (copy), frame (ref)
 		local var66 = 72
 		local var67 = 24
@@ -425,7 +425,7 @@ local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
 		objectText.Position = UDim2.new(0, 0, 0, -10)
 		prompt.Size = UDim2.fromOffset(var66, 72)
 		prompt.SizeOffset = Vector2.new(p7.UIOffset.X / prompt.Size.Width.Offset, p7.UIOffset.Y / prompt.Size.Height.Offset)
-		task.defer(function() --[[ line: 492 ]]
+		task.defer(function()
 			-- upvalues: runService (copy), var66 (write), frame (copy), prompt (copy), p7 (copy)
 			runService.RenderStepped:Wait()
 			runService.RenderStepped:Wait()
@@ -439,7 +439,7 @@ local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
 	updateUIFromPrompt()
 	prompt.Adornee = p7.Parent
 	prompt.Parent = p9
-	local ancestryChangedConnection = p7.AncestryChanged:Connect(function() --[[ line: 509 | named "updateUIAncestry" ]]
+	local ancestryChangedConnection = p7.AncestryChanged:Connect(function()
 		-- upvalues: prompt (ref), p7 (ref)
 		prompt.Adornee = p7.Parent
 	end)
@@ -447,7 +447,7 @@ local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
 	for i, v in ipairs(t_7) do
 		v:Play()
 	end
-	return function() --[[ line: 518 | named "cleanup" ]]
+	return function()
 		-- upvalues: promptButtonHoldBeganConnection (write), keyboardKeyCodeStringForKeyCode (write), triggeredConnection (write), triggerEndedConnection (write), changedConnection (ref), ancestryChangedConnection (ref), t_6 (ref), prompt (ref)
 		if promptButtonHoldBeganConnection then
 			promptButtonHoldBeganConnection:Disconnect()
@@ -468,7 +468,7 @@ local function createPrompt(p7, p8, p9) --[[ line: 169 ]]
 	end
 end
 
-local function createIndicator(p12, p13) --[[ line: 544 ]]
+local function createIndicator(p12, p13)
 	-- upvalues: color3 (ref), color3_1 (ref), tweenService (ref), tweenInfo (ref)
 	local t = {}
 	local t_1 = {}
@@ -497,7 +497,7 @@ local function createIndicator(p12, p13) --[[ line: 544 ]]
 	table.insert(t_1, tweenService:Create(UIStroke, tweenInfo, { Transparency = 0.2 }))
 	indicator.Adornee = p12.Parent
 	indicator.Parent = p13
-	local ancestryChangedConnection = p12.AncestryChanged:Connect(function() --[[ line: 579 | named "updateUIAncestry" ]]
+	local ancestryChangedConnection = p12.AncestryChanged:Connect(function()
 		-- upvalues: indicator (ref), p12 (ref)
 		indicator.Adornee = p12.Parent
 	end)
@@ -505,7 +505,7 @@ local function createIndicator(p12, p13) --[[ line: 544 ]]
 	for i, v in ipairs(t_1) do
 		v:Play()
 	end
-	return function() --[[ line: 588 | named "cleanup" ]]
+	return function()
 		-- upvalues: ancestryChangedConnection (ref), t (ref), indicator (ref)
 		ancestryChangedConnection:Disconnect()
 		
@@ -517,9 +517,9 @@ local function createIndicator(p12, p13) --[[ line: 544 ]]
 	end
 end
 
-;(function() --[[ line: 603 | named "onLoad" ]]
+;(function()
 	-- upvalues: proximityPromptService (ref), playerGui (ref), createPrompt (ref), createIndicator (ref)
-	proximityPromptService.PromptShown:Connect(function(p14, p15) --[[ line: 604 ]]
+	proximityPromptService.PromptShown:Connect(function(p14, p15)
 		-- upvalues: playerGui (copy), createPrompt (copy)
 		if p14.Style == Enum.ProximityPromptStyle.Custom then return end
 		local proximityPrompts_1 = playerGui:FindFirstChild("ProximityPrompts")
@@ -533,11 +533,11 @@ end
 		end
 		proximityPrompts_1 = createPrompt(p14, p15, proximityPrompts_1)
 		local bindableEvent = Instance.new("BindableEvent")
-		local promptHiddenConnection = p14.PromptHidden:Connect(function() --[[ line: 615 ]]
+		local promptHiddenConnection = p14.PromptHidden:Connect(function()
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Fire()
 		end)
-		local destroyingConnection = p14.Destroying:Connect(function() --[[ line: 618 ]]
+		local destroyingConnection = p14.Destroying:Connect(function()
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Fire()
 		end)
@@ -546,7 +546,7 @@ end
 		destroyingConnection:Disconnect()
 		proximityPrompts_1()
 	end)
-	proximityPromptService.IndicatorShown:Connect(function(p16) --[[ line: 628 ]]
+	proximityPromptService.IndicatorShown:Connect(function(p16)
 		-- upvalues: playerGui (copy), createIndicator (copy)
 		if p16.Style == Enum.ProximityPromptStyle.Custom then return end
 		local proximityPrompts_1 = playerGui:FindFirstChild("ProximityPrompts")
@@ -560,11 +560,11 @@ end
 		end
 		proximityPrompts_1 = createIndicator(p16, proximityPrompts_1)
 		local bindableEvent = Instance.new("BindableEvent")
-		local indicatorHiddenConnection = p16.IndicatorHidden:Connect(function() --[[ line: 639 ]]
+		local indicatorHiddenConnection = p16.IndicatorHidden:Connect(function()
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Fire()
 		end)
-		local destroyingConnection = p16.Destroying:Connect(function() --[[ line: 642 ]]
+		local destroyingConnection = p16.Destroying:Connect(function()
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Fire()
 		end)

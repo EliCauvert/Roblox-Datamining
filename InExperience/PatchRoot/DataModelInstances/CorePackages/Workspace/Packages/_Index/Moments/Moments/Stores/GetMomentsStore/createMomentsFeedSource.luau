@@ -24,15 +24,15 @@ local getFFlagMomentsFixUnavailableDeeplinkModule = require(moments.Flags.GetFFl
 local getFFlagMomentsShareDeeplinkReliableOpenModule = require(moments.Flags.GetFFlagMomentsShareDeeplinkReliableOpen)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
 
-local function defaultFetchDeepLinkedMoments(p0, p1) --[[ line: 61 ]]
+local function defaultFetchDeepLinkedMoments(p0, p1)
 	-- upvalues: promiseModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchMomentsByIdsModule (ref)
-	return promiseModule.resolve():andThen(function() --[[ line: 62 ]]
+	return promiseModule.resolve():andThen(function()
 		-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (copy), fetchMomentsByIdsModule (copy), p0 (ref), p1 (ref)
 		return if fFlagMomentsPassFeedItemIdToBackendApis then fetchMomentsByIdsModule({ p0 }, p1) else fetchMomentsByIdsModule({ p0 })
 	end)
 end
 
-local function _(p2, p3) --[[ line: 75 | named "hasDeepLinkIdentity" ]]
+local function _(p2, p3)
 	if p2.momentId == p3 then
 		return true
 	end
@@ -41,13 +41,13 @@ local function _(p2, p3) --[[ line: 75 | named "hasDeepLinkIdentity" ]]
 	return recommendationMetadata ~= nil and recommendationMetadata.feedItemId == p3
 end
 
-local function loadDeepLinkedMoments(p4, p5, p6, p7) --[[ line: 85 ]]
+local function loadDeepLinkedMoments(p4, p5, p6, p7)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), promiseModule (ref)
 	local var17, var18 = promiseModule.race({
-		(if fFlagMomentsPassFeedItemIdToBackendApis then p4(p5, p6) else p4(p5)):catch(function() --[[ line: 95 ]]
+		(if fFlagMomentsPassFeedItemIdToBackendApis then p4(p5, p6) else p4(p5)):catch(function()
 			return nil
 		end),
-		promiseModule.delay(p7):andThen(function() --[[ line: 98 ]]
+		promiseModule.delay(p7):andThen(function()
 			return nil
 		end)
 	}):await()
@@ -59,13 +59,13 @@ local function loadDeepLinkedMoments(p4, p5, p6, p7) --[[ line: 85 ]]
 	}
 end
 
-local function loadDeepLinkedMomentsForUnavailableDialog(p8, p9, p10, p11) --[[ line: 111 ]]
+local function loadDeepLinkedMomentsForUnavailableDialog(p8, p9, p10, p11)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), promiseModule (ref)
 	local var19, var20 = promiseModule.race({
-		(if fFlagMomentsPassFeedItemIdToBackendApis then p8(p9, p10) else p8(p9)):catch(function() --[[ line: 120 ]]
+		(if fFlagMomentsPassFeedItemIdToBackendApis then p8(p9, p10) else p8(p9)):catch(function()
 			return nil
 		end),
-		promiseModule.delay(p11):andThen(function() --[[ line: 123 ]]
+		promiseModule.delay(p11):andThen(function()
 			return nil
 		end)
 	}):await()
@@ -73,7 +73,7 @@ local function loadDeepLinkedMomentsForUnavailableDialog(p8, p9, p10, p11) --[[ 
 	return if var19 and type(var20) == "table" then var20 else nil
 end
 
-return function(p12, p13) --[[ line: 134 | named "createMomentsFeedSource" ]]
+return function(p12, p13)
 	-- upvalues: momentsGetMomentsTrendingStoreModule (ref), getDeepLinkStoreModule (ref), defaultFetchDeepLinkedMoments (ref), getFFlagMomentsFixUnavailableDeeplinkModule (ref), getFFlagMomentsFilterUnavailableFeedItemsModule (ref), recommendationSource (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), getFFlagMomentsShareDeeplinkReliableOpenModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shouldShowMomentInFeedModule (ref), loadDeepLinkedMomentsForUnavailableDialog (ref), loadDeepLinkedMoments (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), reportUnavailableFeedItemModule (ref)
 	p13 = p13 or {}
 	local var22 = if p13.trendingStore ~= nil then momentsGetMomentsTrendingStoreModule(false) else p13.trendingStore
@@ -86,7 +86,7 @@ return function(p12, p13) --[[ line: 134 | named "createMomentsFeedSource" ]]
 	return {
 		id = "trending",
 		recommendationSource = recommendationSource.Trending,
-		fetchAsync = function(p14) --[[ line: 154 ]]
+		fetchAsync = function(p14)
 			-- upvalues: var27 (write), p13 (ref), var22 (ref), p12 (ref), getReactionsStoreModule (copy), getShareCountsStoreModule (copy), getFFlagMomentsShareDeeplinkReliableOpenModule (copy), deepLinkStore (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), getFFlagMomentsFilterUnavailableFeedItemsModule (copy), shouldShowMomentInFeedModule (copy), var26 (ref), loadDeepLinkedMomentsForUnavailableDialog (copy), fetchDeepLinkedMoments (ref), deepLinkFetchTimeoutSeconds (ref), loadDeepLinkedMoments (copy), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (copy), reportUnavailableFeedItemModule (copy)
 			local signalTracker = p13.signalTracker
 			local var28, var29 = var22.getTrending(p12(false), p14 or var27, if signalTracker then signalTracker:getSignalsPayload() else nil):await()
@@ -171,7 +171,7 @@ return function(p12, p13) --[[ line: 134 | named "createMomentsFeedSource" ]]
 						if var36 or var37 then
 							local var40 = var37
 							
-							var31 = function() --[[ line: 273 ]]
+							var31 = function()
 								-- upvalues: deepLinkStore (copy), deepLinkedMomentId (ref), var40 (ref), p13 (copy)
 								if deepLinkStore.getDeepLinkedMomentId(false) == deepLinkedMomentId then
 									deepLinkStore.setDeepLinkedMomentId(nil)

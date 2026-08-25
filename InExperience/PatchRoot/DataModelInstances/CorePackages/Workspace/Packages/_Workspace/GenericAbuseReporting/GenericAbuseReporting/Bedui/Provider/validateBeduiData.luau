@@ -2,12 +2,12 @@
 local tModule = require(genericAbuseReporting.Parent.t)
 local beduiDataTypeInterface = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).BeduiDataTypeInterface
 
-local function _(p0, p1) --[[ line: 15 | named "validateInterface" ]]
+local function _(p0, p1)
 	-- upvalues: tModule (ref)
 	return tModule.interface(p1)(p0)
 end
 
-local function validateStepId(p2) --[[ line: 24 ]]
+local function validateStepId(p2)
 	local var3 = false
 	local t = {}
 	
@@ -30,7 +30,7 @@ local function validateStepId(p2) --[[ line: 24 ]]
 	return false, "Bedui data does not contain a step with the rootStepId"
 end
 
-return function(p3) --[[ line: 51 | named "validateBeduiData" ]]
+return function(p3)
 	-- upvalues: beduiDataTypeInterface (ref), tModule (ref), validateStepId (ref)
 	if p3 == nil then
 		return false, "Bedui data is nil"

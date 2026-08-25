@@ -6,7 +6,7 @@ local empty = foundationModule.Empty
 local sheet = foundationModule.Sheet
 local view = foundationModule.View
 
-return reactModule.memo(if require(parent.SharedFlags).FFlagAbuseReportMenuV2 then function() --[[ line: 22 | named "DynamicReportV2ErrorV2" ]]
+return reactModule.memo(if require(parent.SharedFlags).FFlagAbuseReportMenuV2 then function()
 	-- upvalues: useLocalization (ref), reactModule (ref), sheet (ref), view (ref), empty (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Content = reactModule.createElement(sheet.Content, {}, {
@@ -20,7 +20,7 @@ return reactModule.memo(if require(parent.SharedFlags).FFlagAbuseReportMenuV2 th
 			})
 		})
 	})
-end else function() --[[ line: 14 | named "DynamicReportV2ErrorLegacy" ]]
+end else function()
 	-- upvalues: reactModule (ref), sheet (ref), empty (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Content = reactModule.createElement(sheet.Content, {}, { reactModule.createElement(empty, {}) })

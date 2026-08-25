@@ -8,11 +8,11 @@ local httpService = game:GetService("HttpService")
 local getFStringReferralRewardsTermsURL = require(parent.SharedFlags).GetFStringReferralRewardsTermsURL
 local enableRewardsWebViewOverlay = game:DefineFastFlag("EnableRewardsWebViewOverlay", false)
 
-local _ = function() --[[ line: 27 ]]
+local _ = function()
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local var6 = function(p0) --[[ line: 32 ]]
+local var6 = function(p0)
 	-- upvalues: localizationService (ref)
 	if not p0 or p0 == "" then
 		return ""
@@ -27,7 +27,7 @@ local var6 = function(p0) --[[ line: 32 ]]
 	return ""
 end
 
-return function(p1) --[[ line: 46 ]]
+return function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref), partialPageModal (ref), var6 (ref), enableRewardsWebViewOverlay (ref), httpService (ref), getFStringReferralRewardsTermsURL (ref), browserService (ref)
 	return reactModule.createElement("ScreenGui", {
 		DisplayOrder = 100,
@@ -36,7 +36,7 @@ return function(p1) --[[ line: 46 ]]
 	}, {
 		RewardsInfoModalContainer = reactModule.createElement(foundationModule.View, {
 			tag = "size-full-full bg-over-media-100",
-			onActivated = function() --[[ line: 55 ]]
+			onActivated = function()
 				-- upvalues: p1 (ref)
 				if p1.setModalOpen then
 					p1.setModalOpen(false)
@@ -47,7 +47,7 @@ return function(p1) --[[ line: 46 ]]
 				title = p1.title,
 				screenSize = workspace.CurrentCamera.ViewportSize,
 				position = UDim2.new(0.5, 0, 0.5, 0),
-				onCloseClicked = function() --[[ line: 65 ]]
+				onCloseClicked = function()
 					-- upvalues: p1 (ref)
 					if p1.setModalOpen then
 						p1.setModalOpen(false)
@@ -92,7 +92,7 @@ return function(p1) --[[ line: 46 ]]
 						tag = "row grow auto-xy align-x-left padding-top-small",
 						BackgroundTransparency = 1,
 						LayoutOrder = 6,
-						onActivated = function() --[[ line: 109 ]]
+						onActivated = function()
 							-- upvalues: enableRewardsWebViewOverlay (copy), httpService (copy), getFStringReferralRewardsTermsURL (copy), p1 (ref), browserService (copy)
 							browserService:SendCommand(if enableRewardsWebViewOverlay then httpService:JSONEncode({
 								command = "open",

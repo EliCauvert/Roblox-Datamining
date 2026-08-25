@@ -14,7 +14,7 @@ local t = {
 	orientation = orientationModule.Horizontal
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 29 | named "Divider" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useDividerVariantsModule (ref), dividerVariantModule (ref), orientationModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var10 = withDefaultsModule(p0, t)
 	local var11 = useDividerVariantsModule(useTokensModule(), var10.variant, var10.orientation)

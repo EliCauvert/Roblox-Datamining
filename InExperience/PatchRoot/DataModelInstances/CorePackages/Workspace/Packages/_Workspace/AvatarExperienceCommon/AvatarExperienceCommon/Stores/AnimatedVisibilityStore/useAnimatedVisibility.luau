@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
 local animatedVisibilityContextModule = require(script.Parent.AnimatedVisibilityContext)
 
-return function() --[[ line: 11 | named "useAnimatedVisibility" ]]
+return function()
 	-- upvalues: reactModule (ref), animatedVisibilityContextModule (ref)
 	local var2 = reactModule.useContext(animatedVisibilityContextModule)
 	

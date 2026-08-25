@@ -7,7 +7,7 @@ local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumu
 local analyticsModule = require(parent.Analytics)
 local UGCValidationService = game:GetService("UGCValidationService")
 
-return function(p0, p1, p2, p3) --[[ line: 18 | named "validateCageUVDuplicates" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (ref), failureReasonsAccumulatorModule (ref)
 	local t = {}
 	
@@ -16,9 +16,9 @@ return function(p0, p1, p2, p3) --[[ line: 18 | named "validateCageUVDuplicates"
 			table.insert(t, v_1)
 		end
 	end
-	local function checkCageUV(p4, p5, p6) --[[ line: 31 ]]
+	local function checkCageUV(p4, p5, p6)
 		-- upvalues: pcallDeferredModule (copy), UGCValidationService (copy), p3 (ref), analyticsModule (copy), p2 (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (copy)
-		local var9, var10 = pcallDeferredModule(function() --[[ line: 36 ]]
+		local var9, var10 = pcallDeferredModule(function()
 			-- upvalues: UGCValidationService (copy), p4 (ref), p5 (ref)
 			return UGCValidationService:ValidateEditableMeshUVDuplicates(p4, p5.editableMesh)
 		end, p3)

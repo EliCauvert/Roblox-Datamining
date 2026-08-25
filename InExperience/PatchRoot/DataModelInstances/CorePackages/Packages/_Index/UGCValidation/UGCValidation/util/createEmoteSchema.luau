@@ -4,7 +4,7 @@
 	"ThumbnailFieldOfView"
 }
 
-return function() --[[ line: 15 | named "createEmoteSchema" ]]
+return function()
 	-- upvalues: list (ref)
 	local t = { ClassName = "Animation", _children = {} }
 	

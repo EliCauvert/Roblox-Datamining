@@ -4,7 +4,7 @@ local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFrom
 local getMeshSizeModule = require(parent.util.getMeshSize)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 
-return function(p0, p1, p2) --[[ line: 8 ]]
+return function(p0, p1, p2)
 	-- upvalues: getEditableMeshFromContextModule (ref), pcallDeferredModule (ref), getMeshSizeModule (ref)
 	if p1.bypassFlags and p1.bypassFlags.skipPhysicsDataReset then
 		if not p1.partSizes then
@@ -27,7 +27,7 @@ return function(p0, p1, p2) --[[ line: 8 ]]
 			if p1.editableMeshes[p0].MeshId.created then
 				return if p2 then p0.MeshSize else p0.Size
 			end
-			local var6, var7 = pcallDeferredModule(function() --[[ line: 40 ]]
+			local var6, var7 = pcallDeferredModule(function()
 				-- upvalues: getMeshSizeModule (copy), t (ref)
 				return getMeshSizeModule(t)
 			end, p1)

@@ -5,7 +5,7 @@ local view = require(parent_1.Foundation).View
 local playerBadgeModule = require(parent.Components.Presentation.PlayerBadge)
 local playerVerifiedBadgeModule = require(parent.Components.Presentation.PlayerVerifiedBadge)
 
-return reactModule.memo(function(p0) --[[ line: 14 | named "PlayerBadgeGroup" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), view (ref), playerBadgeModule (ref), playerVerifiedBadgeModule (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-xsmall auto-xy",

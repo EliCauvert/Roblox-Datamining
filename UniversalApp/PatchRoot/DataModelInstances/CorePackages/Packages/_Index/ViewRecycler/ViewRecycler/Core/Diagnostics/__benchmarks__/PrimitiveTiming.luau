@@ -1,20 +1,20 @@
 ﻿local responsibilityCatalogModule = require(script.Parent.ResponsibilityCatalog)
 local list = { 1000, 100000 }
 
-local function _(p0, p1) --[[ line: 40 | named "createTree" ]]
+local function _(p0, p1)
 	local var5 = p0.new(40)
 	var5.buildFromArray(table.create(p1, 40))
 	
 	return var5
 end
 
-local function measureOffsetQueries(value, p2, p3, p4, p5, p6) --[[ line: 47 ]]
+local function measureOffsetQueries(value, p2, p3, p4, p5, p6)
 	-- upvalues: responsibilityCatalogModule (ref)
 	local var6 = value.OrderStatisticTree.new(40)
 	var6.buildFromArray(table.create(p4, 40))
 	local var7 = var6.totalSum()
 	local var8 = 0
-	var6 = p2.measure(function() --[[ line: 58 ]]
+	var6 = p2.measure(function()
 		-- upvalues: p5 (ref), p4 (ref), var8 (write), var6 (ref), var7 (ref)
 		for i = 1, p5 do
 			var8 += var6.prefixSum(i * 7919 % p4 + 1)
@@ -43,13 +43,13 @@ local function measureOffsetQueries(value, p2, p3, p4, p5, p6) --[[ line: 47 ]]
 	})
 end
 
-local function measureTreeUpdates(p7, p8, p9, p10, p11, p12) --[[ line: 94 ]]
+local function measureTreeUpdates(p7, p8, p9, p10, p11, p12)
 	-- upvalues: responsibilityCatalogModule (ref)
 	local var9 = p7.OrderStatisticTree.new(40)
 	var9.buildFromArray(table.create(p10, 40))
 	local var10 = 0
 	local var11 = 0
-	var9 = p8.measure(function() --[[ line: 105 ]]
+	var9 = p8.measure(function()
 		-- upvalues: var10 (write), p11 (ref), p10 (ref), var9 (ref), var11 (write)
 		var10 = (var10 + 1) % 5
 		
@@ -81,7 +81,7 @@ local function measureTreeUpdates(p7, p8, p9, p10, p11, p12) --[[ line: 94 ]]
 	})
 end
 
-local function measureLayoutBatch(p13, p14, p15, p16, p17, p18) --[[ line: 142 ]]
+local function measureLayoutBatch(p13, p14, p15, p16, p17, p18)
 	-- upvalues: responsibilityCatalogModule (ref)
 	local list = table.create(p16)
 	
@@ -92,7 +92,7 @@ local function measureLayoutBatch(p13, p14, p15, p16, p17, p18) --[[ line: 142 ]
 	var14.applyDataSourceChange({ type = "reset", keys = list })
 	local var15 = 0
 	local var16 = 0
-	local var17 = p14.measure(function() --[[ line: 161 ]]
+	local var17 = p14.measure(function()
 		-- upvalues: var15 (write), p17 (ref), p16 (ref), var14 (ref), list (ref), var16 (write)
 		var15 = (var15 + 1) % 5
 		
@@ -133,7 +133,7 @@ local function measureLayoutBatch(p13, p14, p15, p16, p17, p18) --[[ line: 142 ]
 end
 
 return {
-	run = function(p19, p20, p21, p22) --[[ line: 206 ]]
+	run = function(p19, p20, p21, p22)
 		-- upvalues: list (ref), measureOffsetQueries (ref), measureTreeUpdates (ref), measureLayoutBatch (ref)
 		p22 = p22 or {}
 		local itemCounts = p22.itemCounts or list

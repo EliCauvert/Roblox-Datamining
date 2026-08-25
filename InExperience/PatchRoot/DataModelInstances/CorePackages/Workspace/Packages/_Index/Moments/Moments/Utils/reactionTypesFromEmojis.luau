@@ -15,14 +15,14 @@ local list = {
 	reactionType.Wow, reactionType.Cry, reactionType.Fire, reactionType.Skull
 }
 
-local function _(p0) --[[ line: 37 | named "normalizeEmojiName" ]]
+local function _(p0)
 	local replaced = string.gsub(string.lower(p0), "%-", "")
 	
 	return if replaced == "crying" then "cry" else replaced
 end
 
 return {
-	reactionTypesFromEmojis = function(p1) --[[ line: 47 ]]
+	reactionTypesFromEmojis = function(p1)
 		-- upvalues: t (ref), list (ref)
 		local t_1 = {}
 		

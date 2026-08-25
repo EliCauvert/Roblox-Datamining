@@ -1,6 +1,6 @@
 ﻿local inspect = require(script.Parent.Parent.Parent.LuauPolyfill).util.inspect
 
-return function(...) --[[ line: 19 | named "devPrint" ]]
+return function(...)
 	-- upvalues: inspect (ref)
 	local t = {}
 	

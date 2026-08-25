@@ -5,7 +5,7 @@ local setSearchAreaActiveModule = require(shareGame.Actions.SetSearchAreaActive)
 local setSearchTextModule = require(shareGame.Actions.SetSearchText)
 local t = { SearchAreaActive = false, SearchText = "" }
 
-return function(p0, p1) --[[ line: 19 ]]
+return function(p0, p1)
 	-- upvalues: t (ref), setSearchAreaActiveModule (ref), immutable (ref), setSearchTextModule (ref), closePageModule (ref)
 	p0 = p0 or t
 	

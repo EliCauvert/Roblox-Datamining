@@ -5,7 +5,7 @@ local usePluginModule = require(foundation.Providers.Plugin.usePlugin)
 local useWidgetRefModule = require(script.Parent.useWidgetRef)
 local useWidgetsContextModule = require(script.Parent.useWidgetsContext)
 
-return function(p0) --[[ line: 16 | named "useUniqueWidget" ]]
+return function(p0)
 	-- upvalues: usePluginModule (ref), useWidgetsContextModule (ref), reactModule (ref), studioUriModule (ref), useWidgetRefModule (ref)
 	local var6 = usePluginModule()
 	
@@ -13,7 +13,7 @@ return function(p0) --[[ line: 16 | named "useUniqueWidget" ]]
 		error("useUniqueWidget must be used within a Plugin context")
 	end
 	local var7 = useWidgetsContextModule()
-	local var8 = reactModule.useMemo(function() --[[ line: 23 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: studioUriModule (copy), var6 (ref)
 		return studioUriModule.wrap(var6:GetUri())
 	end, { var6 })
@@ -26,7 +26,7 @@ return function(p0) --[[ line: 16 | named "useUniqueWidget" ]]
 			var9.current = var7.nextId()
 		end
 	end
-	local var10 = reactModule.useMemo(function() --[[ line: 36 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: studioUriModule (copy), var8 (ref), var9 (ref)
 		return studioUriModule.join(var8, { Category = "Actions", ItemId = var9.current })
 	end, { var8, var9.current })

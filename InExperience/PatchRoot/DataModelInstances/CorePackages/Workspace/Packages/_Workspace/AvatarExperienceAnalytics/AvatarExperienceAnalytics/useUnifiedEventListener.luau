@@ -26,7 +26,7 @@ local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAX
 local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
 local fFlagAXFixSearchPurchaseSurface = avatarExperienceFlagsModule.FFlagAXFixSearchPurchaseSurface
 
-local function markLastActivated(p0) --[[ line: 31 ]]
+local function markLastActivated(p0)
 	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref)
 	for i, v in collectionService:GetTagged(unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME) do
 		collectionService:RemoveTag(v, unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
@@ -34,7 +34,7 @@ local function markLastActivated(p0) --[[ line: 31 ]]
 	collectionService:AddTag(p0, unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
 end
 
-local function markSelectionListStatus(p1, p2, p3) --[[ line: 42 ]]
+local function markSelectionListStatus(p1, p2, p3)
 	-- upvalues: fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSearchPurchaseSurface (ref), resolveClickSurfaceModule (ref), unifiedSelectionListStoreModule (ref)
 	local attributes = p1:GetAttributes()
 	
@@ -65,7 +65,7 @@ local function markSelectionListStatus(p1, p2, p3) --[[ line: 42 ]]
 	unifiedSelectionListStoreModule.addToSelectionList(attributes)
 end
 
-local function getChildButton(p4) --[[ line: 83 ]]
+local function getChildButton(p4)
 	if not p4 then
 		return nil
 	elseif p4:IsA("TextButton") or p4:IsA("ImageButton") or p4:IsA("GuiButton") then
@@ -79,21 +79,21 @@ local function getChildButton(p4) --[[ line: 83 ]]
 	return nil
 end
 
-local function AnalyticsMetadataSelector(p5) --[[ line: 101 ]]
+local function AnalyticsMetadataSelector(p5)
 	return p5.AvatarExperience.AnalyticsMetadata
 end
 
-local _ = function(p6, p7) --[[ line: 105 ]]
+local _ = function(p6, p7)
 	-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstantsModule (ref), getChildButton (ref), markLastActivated (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), markSelectionListStatus (ref), fFlagAXFixSearchPurchaseSurface (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), getDeferredPurchaseSourceTileModule (ref), unifiedEventLoggingUtilsModule (ref), lastDeferredSingleItemStoreModule (ref), cryoModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), resolveClickSurfaceModule (ref), unifiedLoggingSurface (ref), avatarScreenProperties (ref), cartIdServiceModule (ref), applyClickStampFieldOverridesModule (ref), sendUnifiedEventLogForInstanceModule (ref)
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: collectionService (copy), unifiedEventLogConstantsModule (copy), getChildButton (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), p7 (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), p6 (ref), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 		local t = {}
-		t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p8) --[[ line: 115 ]]
+		t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p8)
 			-- upvalues: getChildButton (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), p7 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), p6 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy), t (write)
 			local var25 = getChildButton(p8)
 			
 			if var25 then
-				t[p8] = var25.Activated:Connect(function() --[[ line: 118 ]]
+				t[p8] = var25.Activated:Connect(function()
 					-- upvalues: p8 (ref), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), p7 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), p6 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 					local attributes = p8:GetAttributes()
 					
@@ -147,7 +147,7 @@ local _ = function(p6, p7) --[[ line: 105 ]]
 				end)
 			end
 		end)
-		t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p9) --[[ line: 236 ]]
+		t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p9)
 			-- upvalues: t (write)
 			local var32 = t[p9]
 			
@@ -157,7 +157,7 @@ local _ = function(p6, p7) --[[ line: 105 ]]
 			t[p9] = nil
 		end)
 		
-		return function() --[[ line: 245 ]]
+		return function()
 			-- upvalues: t (write)
 			for i, v in t do
 				v:Disconnect()
@@ -168,26 +168,26 @@ local _ = function(p6, p7) --[[ line: 105 ]]
 end
 
 return {
-	useUnifiedEventListener = function() --[[ line: 255 ]]
+	useUnifiedEventListener = function()
 		-- upvalues: useSelectorSignal (ref), AnalyticsMetadataSelector (ref), selectSearchKeyword (ref), useAvatarRoute (ref), reactModule (ref), collectionService (ref), unifiedEventLogConstantsModule (ref), getChildButton (ref), markLastActivated (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), markSelectionListStatus (ref), fFlagAXFixSearchPurchaseSurface (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), getDeferredPurchaseSourceTileModule (ref), unifiedEventLoggingUtilsModule (ref), lastDeferredSingleItemStoreModule (ref), cryoModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), resolveClickSurfaceModule (ref), unifiedLoggingSurface (ref), avatarScreenProperties (ref), cartIdServiceModule (ref), applyClickStampFieldOverridesModule (ref), sendUnifiedEventLogForInstanceModule (ref)
 		local var33 = useSelectorSignal(AnalyticsMetadataSelector)
 		local var34 = useSelectorSignal(selectSearchKeyword)
 		local var35 = useAvatarRoute()
 		local var36 = reactModule.useRef(var35)
-		reactModule.useEffect(function() --[[ line: 261 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var36 (ref), var35 (ref)
 			var36.current = var35
 		end, { var35 })
 		local t = { getAnalyticsMetadata = var33, getSearchKeyword = var34 }
-		reactModule.useEffect(function() --[[ line: 107 ]]
+		reactModule.useEffect(function()
 			-- upvalues: collectionService (copy), unifiedEventLogConstantsModule (copy), getChildButton (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var36 (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), t (ref), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 			local t = {}
-			t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p10) --[[ line: 115 ]]
+			t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p10)
 				-- upvalues: getChildButton (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var36 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), t (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy), t (write)
 				local var25 = getChildButton(p10)
 				
 				if var25 then
-					t[p10] = var25.Activated:Connect(function() --[[ line: 118 ]]
+					t[p10] = var25.Activated:Connect(function()
 						-- upvalues: p10 (ref), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var36 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), t (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 						local attributes = p10:GetAttributes()
 						
@@ -240,7 +240,7 @@ return {
 					end)
 				end
 			end)
-			t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p11) --[[ line: 236 ]]
+			t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p11)
 				-- upvalues: t (write)
 				local var32 = t[p11]
 				
@@ -250,7 +250,7 @@ return {
 				t[p11] = nil
 			end)
 			
-			return function() --[[ line: 245 ]]
+			return function()
 				-- upvalues: t (write)
 				for i, v in t do
 					v:Disconnect()
@@ -259,20 +259,20 @@ return {
 			end
 		end, {})
 	end,
-	useUnifiedEventListenerInExperience = function() --[[ line: 271 ]]
+	useUnifiedEventListenerInExperience = function()
 		-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstantsModule (ref), getChildButton (ref), markLastActivated (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), markSelectionListStatus (ref), fFlagAXFixSearchPurchaseSurface (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), getDeferredPurchaseSourceTileModule (ref), unifiedEventLoggingUtilsModule (ref), lastDeferredSingleItemStoreModule (ref), cryoModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), resolveClickSurfaceModule (ref), unifiedLoggingSurface (ref), avatarScreenProperties (ref), cartIdServiceModule (ref), applyClickStampFieldOverridesModule (ref), sendUnifiedEventLogForInstanceModule (ref)
 		local useEffect = reactModule.useEffect
 		local var38 = nil
 		local var39 = nil
-		useEffect(function() --[[ line: 107 ]]
+		useEffect(function()
 			-- upvalues: collectionService (copy), unifiedEventLogConstantsModule (copy), getChildButton (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var38 (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), var39 (ref), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 			local t = {}
-			t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p12) --[[ line: 115 ]]
+			t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p12)
 				-- upvalues: getChildButton (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var38 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), var39 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy), t (write)
 				local var25 = getChildButton(p12)
 				
 				if var25 then
-					t[p12] = var25.Activated:Connect(function() --[[ line: 118 ]]
+					t[p12] = var25.Activated:Connect(function()
 						-- upvalues: p12 (ref), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var38 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), var39 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
 						local attributes = p12:GetAttributes()
 						
@@ -325,7 +325,7 @@ return {
 					end)
 				end
 			end)
-			t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p13) --[[ line: 236 ]]
+			t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p13)
 				-- upvalues: t (write)
 				local var32 = t[p13]
 				
@@ -335,7 +335,7 @@ return {
 				t[p13] = nil
 			end)
 			
-			return function() --[[ line: 245 ]]
+			return function()
 				-- upvalues: t (write)
 				for i, v in t do
 					v:Disconnect()

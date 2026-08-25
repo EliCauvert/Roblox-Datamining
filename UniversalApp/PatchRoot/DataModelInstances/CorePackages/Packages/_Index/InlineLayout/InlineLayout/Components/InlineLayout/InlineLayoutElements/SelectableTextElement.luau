@@ -9,12 +9,12 @@ local getFontFaceModule = require(parent.Utils.getFontFace)
 local view = foundationModule.View
 local t = {}
 
-function mapProps(p0) --[[ line: 23 ]]
+function mapProps(p0)
 	-- upvalues: dashModule (ref)
 	return dashModule.omit(p0, { "id", "EngineTags" })
 end
 
-local function TextElementWrapper(p1) --[[ line: 27 ]]
+local function TextElementWrapper(p1)
 	-- upvalues: getFontFaceModule (ref), reactModule (ref), view (ref), dashModule (ref)
 	local var8 = if typeof(p1.textStyle) == "table" then p1.textStyle else {}
 	
@@ -42,7 +42,7 @@ local function TextElementWrapper(p1) --[[ line: 27 ]]
 	})
 end
 
-function t.new(p2) --[[ line: 59 ]]
+function t.new(p2)
 	-- upvalues: baseTextElementModule (ref), TextElementWrapper (ref), dashModule (ref)
 	return baseTextElementModule.new(TextElementWrapper, dashModule.omit(p2, { "EngineTags" }), mapProps)
 end

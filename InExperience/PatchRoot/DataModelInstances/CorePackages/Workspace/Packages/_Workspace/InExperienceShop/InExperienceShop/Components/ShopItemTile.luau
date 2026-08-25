@@ -21,25 +21,25 @@ local var10 = if fFlagEnableDiscountOnInShopTileModule then require(inExperience
 local _ = require(inExperienceShop.Types)
 local constantsModule = require(inExperienceShop.Constants)
 
-return reactModule.memo(function(p0) --[[ line: 54 | named "ShopItemTile" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), inExperienceShop (ref), sessionService (ref), fFlagEnableDiscountOnInShopTileModule (ref), var10 (ref), view (ref), image (ref), fFlagFixThumbnailBackgroundInExperienceShopModule (ref), SHOP_ITEM_MEDIA_HEIGHT_SCALE (ref), text (ref), icon (ref), constantsModule (ref), iconSize (ref), getIconRichText (ref), enums (ref), shopItemFooterModule (ref)
 	local var25
 	local var12 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
 	local var13 = reactModule.useRef(nil)
-	local var14 = signalsReactModule.useSignalState(function(p1) --[[ line: 61 ]]
+	local var14 = signalsReactModule.useSignalState(function(p1)
 		-- upvalues: var12 (ref), p0 (ref)
 		return var12.getOwnership(p1)[p0.itemId]
 	end)
-	reactModule.useEffect(function() --[[ line: 69 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var12 (ref)
 		if p0.itemType == "GamePass" then
 			var12.fetchGamePassOwnership(p0.itemId)
 		end
 	end, { p0.itemId, p0.itemType, var12.fetchGamePassOwnership })
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), inExperienceShop (copy), p0 (ref), var13 (ref), sessionService (copy)
 		if fFlagEnableInExperienceShopUnifiedLoggingModule then
-			task.defer(function() --[[ line: 81 ]]
+			task.defer(function()
 				-- upvalues: parent (copy), inExperienceShop (copy), p0 (copy), var13 (copy), sessionService (copy)
 				local addUnifiedEventLogging = require(parent.AvatarExperienceAnalytics).addUnifiedEventLogging
 				local var26 = require(inExperienceShop.Utils.mapShopItemTypeToUnifiedItemType)(p0.itemType)
@@ -65,7 +65,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "ShopItemTile" ]]
 	})
 	local onItemActivated = p0.onItemActivated
 	local itemType = p0.itemType
-	local var15 = reactModule.useCallback(function() --[[ line: 118 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: onItemActivated (ref), p0 (ref), itemType (ref)
 		if onItemActivated then
 			onItemActivated(p0.itemId, itemType)

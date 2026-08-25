@@ -23,7 +23,7 @@ local default = require(parent_1.LoggingProtocol).default
 local purchaseModalV2ShownCounter = require(parent.Generic.Events.PurchaseModalCounter).PurchaseModalV2ShownCounter
 local fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule = require(parent.Flags.FFlagAddDefaultFocusNavSelectorsOnBuyPurchasePrompt)
 
-local function ProductPurchaseModal(p0) --[[ line: 67 ]]
+local function ProductPurchaseModal(p0)
 	-- upvalues: fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), useDefaultFocusBehavior (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV2ShownCounter (ref), useLocalization (ref), formatNumberModule (ref), localizationService (ref), useTokens (ref), useTextSizeOffset (ref), textService (ref), interactiveAlert (ref), productDetailsModule (ref), buttonType (ref), text (ref)
 	local var12 = nil
 	local var13 = nil
@@ -33,7 +33,7 @@ local function ProductPurchaseModal(p0) --[[ line: 67 ]]
 		var12 = var14
 		var13 = var15
 	end
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: loggerModule (copy), p0 (ref), getAppContextModule (copy), default (copy), purchaseModalV2ShownCounter (copy)
 		loggerModule.debug({
 			message = "Purchase Modal V2 Shown",
@@ -69,13 +69,13 @@ local function ProductPurchaseModal(p0) --[[ line: 67 ]]
 	local var24 = var22
 	var19 = var19.Typography.CaptionSmall
 	local var25 = var16.RemainingBalance:gsub("{robux}", text_1)
-	local var26 = reactModule.useCallback(function(p1) --[[ line: 110 ]]
+	local var26 = reactModule.useCallback(function(p1)
 		-- upvalues: var23 (write), var24 (write)
 		if var23 ~= p1.AbsoluteSize.X then
 			var24(p1.AbsoluteSize.X)
 		end
 	end, { p0 })
-	local var27 = reactModule.useMemo(function() --[[ line: 116 ]]
+	local var27 = reactModule.useMemo(function()
 		-- upvalues: var19 (ref), textService (copy), var25 (write), var23 (write)
 		return var19.LineHeight * textService:GetTextSize(var25, var19.FontSize, var19.Font, Vector2.new(var23, 1e999)).Y
 	end, { var23, var20, var25 })
@@ -87,14 +87,14 @@ local function ProductPurchaseModal(p0) --[[ line: 67 ]]
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
 		title = var16.BuyItem,
-		onCloseClicked = function() --[[ line: 133 ]]
+		onCloseClicked = function()
 			-- upvalues: p0 (ref)
 			if not p0.buttons.isDisabled then
 				p0.buttons.cancelActivated()
 			end
 		end,
 		onAbsoluteSizeChanged = var26,
-		middleContent = function() --[[ line: 139 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), productDetailsModule (copy), p0 (ref)
 			return reactModule.createElement(productDetailsModule, {
 				isPortrait = false,
@@ -121,7 +121,7 @@ local function ProductPurchaseModal(p0) --[[ line: 67 ]]
 				}
 			}
 		},
-		footerContent = function() --[[ line: 167 ]]
+		footerContent = function()
 			-- upvalues: p0 (ref), reactModule (copy), text (copy), var25 (write), var27 (write), var26 (write)
 			return if p0.balanceAmountValid then reactModule.createElement(text, {
 				tag = "content-muted text-caption-small align-x-center text-wrap",
@@ -133,7 +133,7 @@ local function ProductPurchaseModal(p0) --[[ line: 67 ]]
 	})
 end
 
-return function(p2) --[[ line: 182 | named "ProductPurchaseModalContainer" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), ProductPurchaseModal (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

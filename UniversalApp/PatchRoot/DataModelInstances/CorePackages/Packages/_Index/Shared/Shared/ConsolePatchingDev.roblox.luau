@@ -9,11 +9,11 @@ local var7 = nil
 local var8 = nil
 local var9 = nil
 
-local var10 = function() --[[ line: 34 ]] end
+local var10 = function() end
 
 return {
 	disabledLog = var10,
-	disableLogs = function() --[[ line: 43 ]]
+	disableLogs = function()
 		-- upvalues: reactGlobalsModule (ref), var2 (write), var3 (write), consoleModule (ref), var4 (write), var5 (write), var6 (write), var7 (write), var8 (write), var9 (write), var10 (ref)
 		if reactGlobalsModule.__DEV__ then
 			if var2 == 0 then
@@ -35,7 +35,7 @@ return {
 			var2 += 1
 		end
 	end,
-	reenableLogs = function() --[[ line: 67 ]]
+	reenableLogs = function()
 		-- upvalues: reactGlobalsModule (ref), var2 (write), consoleModule (ref), var3 (write), var4 (write), var5 (write), var6 (write), var7 (write), var8 (write), var9 (write)
 		if reactGlobalsModule.__DEV__ then
 			var2 -= 1

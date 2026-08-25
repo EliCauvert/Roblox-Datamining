@@ -2,12 +2,12 @@
 local t = {}
 t.__index = t
 
-local function _(p0, p1) --[[ line: 9 | named "validateStateTableItem" ]]
+local function _(p0, p1)
 	local var2 = typeof(p0)
 	assert(if var2 ~= "string" then var2 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", p1, tostring(p0), var2))
 end
 
-function t.new(p2, p3, p4, p5) --[[ line: 72 ]]
+function t.new(p2, p3, p4, p5)
 	-- upvalues: t (ref)
 	assert(typeof(p2) == "string", "name must be a string")
 	assert(#p2 > 0, "name must not be an empty string")
@@ -46,7 +46,7 @@ function t.new(p2, p3, p4, p5) --[[ line: 72 ]]
 			t_2[i_1] = v_1
 			
 			if t_1.events[i_1] == nil then
-				t_1.events[i_1] = function(p6) --[[ line: 119 ]]
+				t_1.events[i_1] = function(p6)
 					-- upvalues: t_1 (ref), i_1 (ref)
 					return t_1:handleEvent(i_1, p6)
 				end
@@ -55,7 +55,7 @@ function t.new(p2, p3, p4, p5) --[[ line: 72 ]]
 		t_1.transitionTable[i] = t_2
 	end
 	setmetatable(t_1.events, {
-		__index = function(_, p7) --[[ line: 130 ]]
+		__index = function(_, p7)
 			-- upvalues: t_1 (ref)
 			error(string.format("'%s' is not a valid event in StateTable '%s'", tostring(p7), t_1.name), 2)
 		end
@@ -64,7 +64,7 @@ function t.new(p2, p3, p4, p5) --[[ line: 72 ]]
 	return t_1
 end
 
-function t:handleEvent(p8, p9) --[[ line: 150 ]]
+function t:handleEvent(p8, p9)
 	-- upvalues: cryoModule (ref)
 	local var9 = typeof(p8)
 	assert(if var9 ~= "string" then var9 == "userdata" else true, string.format("%s '%s' must be a string or userdata but is a %s", "event", tostring(p8), var9))
@@ -91,7 +91,7 @@ function t:handleEvent(p8, p9) --[[ line: 150 ]]
 	end
 end
 
-function t:onStateChange(p10) --[[ line: 191 ]]
+function t:onStateChange(p10)
 	assert(if p10 ~= nil then typeof(p10) == "function" else true, "stateChangeHandler must be nil or a function")
 	self.stateChangeHandler = p10
 end

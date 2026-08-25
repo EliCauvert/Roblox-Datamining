@@ -1,9 +1,9 @@
-﻿return function(p0) --[[ line: 1 ]]
-	return function() --[[ line: 2 | named "getPlatformTarget" ]]
+﻿return function(p0)
+	return function()
 		-- upvalues: p0 (ref)
 		local var0 = "unknownLua"
 		local none = Enum.Platform.None
-		pcall(function() --[[ line: 8 ]]
+		pcall(function()
 			-- upvalues: none (write), p0 (copy)
 			none = p0:GetPlatform()
 		end)

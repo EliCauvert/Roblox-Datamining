@@ -8,11 +8,11 @@ local getTextHeightModule = require(script.Parent.getTextHeight)
 local _ = require(script.Parent.StyleTypes)
 local t = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: llama (ref), t (ref), style (ref), roact (ref), styledTextLabel (ref), getTextHeightModule (ref)
 	local var3 = llama.Dictionary.join(t, p0)
 	
-	return style.withStyle(function(p1) --[[ line: 28 ]]
+	return style.withStyle(function(p1)
 		-- upvalues: roact (copy), styledTextLabel (copy), var3 (ref), getTextHeightModule (copy)
 		local font = p1.Font
 		

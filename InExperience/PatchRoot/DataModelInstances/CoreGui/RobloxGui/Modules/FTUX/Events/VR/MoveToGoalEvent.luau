@@ -2,7 +2,7 @@
 local t = { Name = "MoveToGoalEvent" }
 local var1 = nil
 
-local function _(p0, p1) --[[ line: 11 | named "spawnGoalArea" ]]
+local function _(p0, p1)
 	local part = Instance.new("Part")
 	part.Anchored = true
 	part.CanCollide = false
@@ -14,7 +14,7 @@ local function _(p0, p1) --[[ line: 11 | named "spawnGoalArea" ]]
 	return part
 end
 
-function t.StartEvent(p2) --[[ line: 24 ]]
+function t.StartEvent(p2)
 	-- upvalues: var1 (write)
 	local part = Instance.new("Part")
 	part.Anchored = true
@@ -24,7 +24,7 @@ function t.StartEvent(p2) --[[ line: 24 ]]
 	part.Position = Vector3.new(0.5, 6.300000190735, -40)
 	part.Parent = workspace
 	task.wait(1)
-	var1 = part.Touched:Connect(function(p3) --[[ line: 32 ]]
+	var1 = part.Touched:Connect(function(p3)
 		-- upvalues: part (ref), p2 (ref), var1 (copy)
 		if game.Players:GetPlayerFromCharacter(p3.Parent) then
 			part:Destroy()
@@ -39,7 +39,7 @@ function t.StartEvent(p2) --[[ line: 24 ]]
 	end)
 end
 
-function t.StopEvent() --[[ line: 51 ]]
+function t.StopEvent()
 	-- upvalues: var1 (write)
 	if var1 then
 		var1:Disconnect()

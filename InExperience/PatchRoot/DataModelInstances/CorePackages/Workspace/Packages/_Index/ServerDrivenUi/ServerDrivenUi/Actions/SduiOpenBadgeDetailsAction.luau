@@ -15,7 +15,7 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local var3 = urlBuilder.fromString("www:badges")()
 
-return function(p0, _, p1, _) --[[ line: 32 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppBadgeDetailsLogExposure (ref), IXPService (ref), fStringLuaAppBadgeDetailsIxpLayer (ref), fFlagLuaAppBadgeDetailsEnabled (ref), sduiLoadTimer (ref), fetchBadgeDetailsPage (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), var3 (ref)
 	local var4 = if p0 then p0.actionParams else nil
 	

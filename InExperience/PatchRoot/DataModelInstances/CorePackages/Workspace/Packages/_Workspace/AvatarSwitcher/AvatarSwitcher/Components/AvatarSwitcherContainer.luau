@@ -20,16 +20,16 @@ local experienceAvatarSupportTypeModule = require(avatarSwitcher.Enums.Experienc
 local fFlagAvatarSwitcherUiFixes = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
 local timeoutBanner = require(parent.AvatarExperienceCommon).Components.TimeoutBanner
 
-return function(p0) --[[ line: 42 | named "AvatarSwitcherContainer" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useSignalState (ref), getAvatarSwitcherStoreModule (ref), signalsReactModule (ref), experienceAvatarSupportTypeModule (ref), useUnifiedEventListenerInExperience (ref), reactModule (ref), topBarModule (ref), foundationModule (ref), timeoutBanner (ref), outfitsGridWithMessageModule (ref), previewPanelModule (ref), fFlagAvatarSwitcherUiFixes (ref), guiService (ref), emptyStateModule (ref), singleItemLayoutModule (ref), verticalLayoutModule (ref), horizontalLayoutModule (ref), respawnDialogContainerModule (ref)
 	local var15 = useTokens()
 	local var16 = useSignalState(getAvatarSwitcherStoreModule)
 	local var17 = useSignalState(var16.getIsEmpty)
 	local var18 = signalsReactModule.useSignalState(var16.getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport
 	useUnifiedEventListenerInExperience()
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref)
-		task.spawn(function() --[[ line: 52 ]]
+		task.spawn(function()
 			-- upvalues: var16 (copy)
 			var16.fetchExperienceAvatarSupportType()
 		end)

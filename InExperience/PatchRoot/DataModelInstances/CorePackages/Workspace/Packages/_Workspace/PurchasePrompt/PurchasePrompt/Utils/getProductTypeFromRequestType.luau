@@ -13,7 +13,7 @@ local t = {
 	[requestTypeModule.DeveloperSubscription] = productTypeEnum.DeveloperSubscription
 }
 
-function getProductTypeFromRequestType(p0) --[[ line: 21 ]]
+function getProductTypeFromRequestType(p0)
 	-- upvalues: t (ref), productTypeEnum (ref)
 	return t[p0] or productTypeEnum.Unknown
 end

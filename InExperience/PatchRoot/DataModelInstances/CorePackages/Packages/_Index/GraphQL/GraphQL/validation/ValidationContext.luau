@@ -17,7 +17,7 @@ local _ = require(parent.type.definition)
 local t = {}
 local t_1 = { __index = t }
 
-function t.new(p0, p1) --[[ line: 100 ]]
+function t.new(p0, p1)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		_fragments = nil,
@@ -28,15 +28,15 @@ function t.new(p0, p1) --[[ line: 100 ]]
 	}, t_1)
 end
 
-function t.reportError(p2, p3) --[[ line: 115 ]]
+function t.reportError(p2, p3)
 	p2._onError(p3)
 end
 
-function t.getDocument(p4) --[[ line: 119 ]]
+function t.getDocument(p4)
 	return p4._ast
 end
 
-function t.getFragment(p5, p6) --[[ line: 123 ]]
+function t.getFragment(p5, p6)
 	-- upvalues: kind (ref)
 	local fragments
 	local _ = nil
@@ -56,7 +56,7 @@ function t.getFragment(p5, p6) --[[ line: 123 ]]
 	return fragments[p6]
 end
 
-function t.getFragmentSpreads(p7, p8) --[[ line: 139 ]]
+function t.getFragmentSpreads(p7, p8)
 	-- upvalues: kind (ref)
 	local var8 = p7._fragmentSpreads[p8] or {}
 	
@@ -76,7 +76,7 @@ function t.getFragmentSpreads(p7, p8) --[[ line: 139 ]]
 	return var8
 end
 
-function t.getRecursivelyReferencedFragments(p9, p10) --[[ line: 165 ]]
+function t.getRecursivelyReferencedFragments(p9, p10)
 	local var10 = p9._recursivelyReferencedFragments[p10] or {}
 	
 	if not p9._recursivelyReferencedFragments[p10] then
@@ -105,7 +105,7 @@ end
 local tbl = setmetatable({}, { __index = t })
 local t_2 = { __index = tbl }
 
-function tbl.new(p11, p12, p13) --[[ line: 208 ]]
+function tbl.new(p11, p12, p13)
 	-- upvalues: t (ref), t_2 (ref)
 	local var14 = t.new(p11, p13)
 	var14._schema = p12
@@ -113,14 +113,14 @@ function tbl.new(p11, p12, p13) --[[ line: 208 ]]
 	return setmetatable(var14, t_2)
 end
 
-function tbl.getSchema(p14) --[[ line: 218 ]]
+function tbl.getSchema(p14)
 	return p14._schema
 end
 
 local tbl_1 = setmetatable({}, { __index = t })
 local t_3 = { __index = tbl_1 }
 
-function tbl_1.new(p15, p16, p17, p18) --[[ line: 257 ]]
+function tbl_1.new(p15, p16, p17, p18)
 	-- upvalues: t (ref), map (ref), t_3 (ref)
 	local var15 = t.new(p16, p18)
 	var15._schema = p15
@@ -131,11 +131,11 @@ function tbl_1.new(p15, p16, p17, p18) --[[ line: 257 ]]
 	return setmetatable(var15, t_3)
 end
 
-function tbl_1.getSchema(p19) --[[ line: 274 ]]
+function tbl_1.getSchema(p19)
 	return p19._schema
 end
 
-function tbl_1.getVariableUsages(p20, p21) --[[ line: 278 ]]
+function tbl_1.getVariableUsages(p20, p21)
 	-- upvalues: typeInfo (ref), visit (ref), visitWithTypeInfo (ref)
 	local var16 = p20._variableUsages[p21]
 	
@@ -143,10 +143,10 @@ function tbl_1.getVariableUsages(p20, p21) --[[ line: 278 ]]
 		local t = {}
 		local var18 = typeInfo.new(p20._schema)
 		visit(p21, visitWithTypeInfo(var18, {
-			VariableDefinition = function() --[[ line: 286 ]]
+			VariableDefinition = function()
 				return false
 			end,
-			Variable = function(_, p22) --[[ line: 289 ]]
+			Variable = function(_, p22)
 				-- upvalues: t (ref), var18 (ref)
 				table.insert(t, {
 					node = p22,
@@ -161,7 +161,7 @@ function tbl_1.getVariableUsages(p20, p21) --[[ line: 278 ]]
 	return var16
 end
 
-function tbl_1.getRecursiveVariableUsages(p23, p24) --[[ line: 305 ]]
+function tbl_1.getRecursiveVariableUsages(p23, p24)
 	-- upvalues: array (ref)
 	local var19 = p23._recursiveVariableUsages[p24]
 	
@@ -176,35 +176,35 @@ function tbl_1.getRecursiveVariableUsages(p23, p24) --[[ line: 305 ]]
 	return var19
 end
 
-function tbl_1.getType(p25) --[[ line: 319 ]]
+function tbl_1.getType(p25)
 	return p25._typeInfo:getType()
 end
 
-function tbl_1.getParentType(p26) --[[ line: 323 ]]
+function tbl_1.getParentType(p26)
 	return p26._typeInfo:getParentType()
 end
 
-function tbl_1.getInputType(p27) --[[ line: 327 ]]
+function tbl_1.getInputType(p27)
 	return p27._typeInfo:getInputType()
 end
 
-function tbl_1.getParentInputType(p28) --[[ line: 331 ]]
+function tbl_1.getParentInputType(p28)
 	return p28._typeInfo:getParentInputType()
 end
 
-function tbl_1.getFieldDef(p29) --[[ line: 335 ]]
+function tbl_1.getFieldDef(p29)
 	return p29._typeInfo:getFieldDef()
 end
 
-function tbl_1.getDirective(p30) --[[ line: 339 ]]
+function tbl_1.getDirective(p30)
 	return p30._typeInfo:getDirective()
 end
 
-function tbl_1.getArgument(p31) --[[ line: 343 ]]
+function tbl_1.getArgument(p31)
 	return p31._typeInfo:getArgument()
 end
 
-function tbl_1.getEnumValue(p32) --[[ line: 347 ]]
+function tbl_1.getEnumValue(p32)
 	return p32._typeInfo:getEnumValue()
 end
 

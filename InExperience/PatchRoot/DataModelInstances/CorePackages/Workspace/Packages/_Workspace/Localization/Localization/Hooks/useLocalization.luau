@@ -8,11 +8,11 @@ local localizationRoactContextModule = require(localization.LocalizationRoactCon
 local localizeStringsModule = require(localization.localizeStrings)
 local useSignal = require(parent.RoactUtils).Hooks.useSignal
 
-return function(p0) --[[ line: 17 | named "useLocalization" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), localizationRoactContextModule (ref), localizationService (ref), useSignal (ref), argCheckModule (ref), localizeStringsModule (ref), robloxLocaleIdKeyModule (ref)
 	local var7 = reactModule.useContext(localizationRoactContextModule)
 	local var8, var9 = reactModule.useState(localizationService.RobloxLocaleId)
-	useSignal(var7.changed, reactModule.useCallback(function(_) --[[ line: 22 ]]
+	useSignal(var7.changed, reactModule.useCallback(function(_)
 		-- upvalues: var7 (ref), var8 (ref), var9 (ref)
 		local locale = var7:GetLocale()
 		

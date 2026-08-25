@@ -1,7 +1,7 @@
 ﻿local populateUserWithStateModule = require(script:FindFirstAncestor("AppChat").Users.populateUserWithState)
 local isUserInConversationModule = require(script.Parent.isUserInConversation)
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	-- upvalues: isUserInConversationModule (ref), populateUserWithStateModule (ref)
 	local t = {}
 	

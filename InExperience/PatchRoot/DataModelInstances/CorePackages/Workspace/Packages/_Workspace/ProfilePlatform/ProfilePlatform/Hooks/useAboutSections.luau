@@ -7,14 +7,14 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local parseSectionsFromDataModule = require(profilePlatform.Components.About.parseSectionsFromData)
 local fFlagProfileAboutDetailsUseSheet = require(parent.SharedFlags).FFlagProfileAboutDetailsUseSheet
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), parseSectionsFromDataModule (ref), fFlagProfileAboutDetailsUseSheet (ref)
 	local profileType = useProfileWrapperContextModule().profileType
 	local about = useProfileJsonComponentModule(enumsModule.Components.About) or {}
 	
 	return {
 		aboutDetails = about,
-		aboutSections = reactModule.useMemo(function() --[[ line: 16 ]]
+		aboutSections = reactModule.useMemo(function()
 			-- upvalues: parseSectionsFromDataModule (copy), about (ref), profileType (ref), enumsModule (copy)
 			return parseSectionsFromDataModule(about, profileType, if profileType == enumsModule.ProfileTypes.User and about.name then `@{about.name}` else about.name or "")
 		end, { about, profileType, about.name }),

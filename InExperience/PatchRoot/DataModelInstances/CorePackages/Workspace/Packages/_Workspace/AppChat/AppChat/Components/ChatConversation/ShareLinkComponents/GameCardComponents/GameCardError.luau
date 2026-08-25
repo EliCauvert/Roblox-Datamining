@@ -6,7 +6,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local var3, _ = require(appChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
 
-function GameCardError() --[[ line: 14 ]]
+function GameCardError()
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), foundationModule (ref), var3 (ref)
 	local var4 = useTokens()
 	

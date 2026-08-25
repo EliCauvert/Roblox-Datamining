@@ -13,7 +13,7 @@ local var10 = nil
 local t_1 = {}
 local t_2 = {}
 
-local function getSortedCarouselButtons() --[[ line: 34 ]]
+local function getSortedCarouselButtons()
 	-- upvalues: var8 (write)
 	local t = {}
 	local t_1 = {}
@@ -24,7 +24,7 @@ local function getSortedCarouselButtons() --[[ line: 34 ]]
 			t[v] = i
 		end
 	end
-	table.sort(t_1, function(p0, p1) --[[ line: 43 ]]
+	table.sort(t_1, function(p0, p1)
 		-- upvalues: t (ref)
 		return if p0.LayoutOrder == p1.LayoutOrder then t[p0] < t[p1] else p0.LayoutOrder < p1.LayoutOrder
 	end)
@@ -32,7 +32,7 @@ local function getSortedCarouselButtons() --[[ line: 34 ]]
 	return t_1
 end
 
-local function CreateMenuCarousel(p2) --[[ line: 52 ]]
+local function CreateMenuCarousel(p2)
 	-- upvalues: var8 (write), var9 (write), var10 (write), getSortedCarouselButtons (ref), color_1 (ref), guiService (ref), color (ref), t_1 (write), userInputService (ref)
 	local playerCarousel = Instance.new("Frame")
 	playerCarousel.Name = "PlayerCarousel"
@@ -73,7 +73,7 @@ local function CreateMenuCarousel(p2) --[[ line: 52 ]]
 	var10 = Instance.new("BindableEvent")
 	var10.Name = "PlayerChanged"
 	local var20 = nil
-	var9:GetPropertyChangedSignal("CurrentPage"):Connect(function() --[[ line: 98 ]]
+	var9:GetPropertyChangedSignal("CurrentPage"):Connect(function()
 		-- upvalues: var9 (copy), getSortedCarouselButtons (copy), var20 (write), color_1 (copy), guiService (copy), color (copy), var10 (copy), t_1 (copy)
 		if var9.CurrentPage then
 			if var9.CurrentPage.Name ~= "_CarouselDivider" then
@@ -120,7 +120,7 @@ local function CreateMenuCarousel(p2) --[[ line: 52 ]]
 	prevButton.Selectable = false
 	prevButton.Parent = playerCarousel
 	
-	local function _(p3) --[[ line: 146 | named "moveChangePage" ]]
+	local function _(p3)
 		-- upvalues: var9 (copy)
 		if p3 then
 			var9:Next()
@@ -130,16 +130,16 @@ local function CreateMenuCarousel(p2) --[[ line: 52 ]]
 		var9:Previous()
 	end
 	
-	nextButton.MouseButton1Click:Connect(function() --[[ line: 154 ]]
+	nextButton.MouseButton1Click:Connect(function()
 		-- upvalues: var9 (copy)
 		var9:Next()
 	end)
-	prevButton.MouseButton1Click:Connect(function() --[[ line: 155 ]]
+	prevButton.MouseButton1Click:Connect(function()
 		-- upvalues: var9 (copy)
 		var9:Previous()
 	end)
 	
-	local function checkButtonVisibility() --[[ line: 159 ]]
+	local function checkButtonVisibility()
 		-- upvalues: userInputService (copy), prevButton (ref), var8 (copy), nextButton (ref)
 		local var26 = userInputService:GetLastInputType() == Enum.UserInputType.Touch
 		prevButton.Visible = not var26 and #var8:GetChildren() > 3
@@ -154,7 +154,7 @@ local function CreateMenuCarousel(p2) --[[ line: 52 ]]
 	return playerCarousel
 end
 
-function t:UpdateGuiTheme(p4) --[[ line: 170 ]]
+function t:UpdateGuiTheme(p4)
 	self.rbxGui.NextButton.Image = p4.ScrollRightImage
 	
 	if p4.ScrollLeftImage == "" then
@@ -166,7 +166,7 @@ function t:UpdateGuiTheme(p4) --[[ line: 170 ]]
 	self.rbxGui.PrevButton.Image = p4.ScrollLeftImage
 end
 
-function t.FadeTowardsEdges(_) --[[ line: 181 ]]
+function t.FadeTowardsEdges(_)
 	-- upvalues: var9 (write), getSortedCarouselButtons (ref)
 	if not var9.CurrentPage then return end
 	local var27 = getSortedCarouselButtons()
@@ -191,7 +191,7 @@ function t.FadeTowardsEdges(_) --[[ line: 181 ]]
 	end
 end
 
-function t.AddCarouselDivider(_) --[[ line: 209 ]]
+function t.AddCarouselDivider(_)
 	-- upvalues: var8 (write)
 	local carouselDivider = var8:FindFirstChild("_CarouselDivider")
 	
@@ -222,7 +222,7 @@ function t.AddCarouselDivider(_) --[[ line: 209 ]]
 	var34.Parent = carouselDivider_1
 end
 
-function t:RemovePlayerEntry(p5) --[[ line: 244 ]]
+function t:RemovePlayerEntry(p5)
 	-- upvalues: t_2 (write), t_1 (write), var9 (write)
 	local var35 = t_2[p5]
 	
@@ -238,7 +238,7 @@ function t:RemovePlayerEntry(p5) --[[ line: 244 ]]
 	end
 end
 
-function t.ClearPlayerEntries(_) --[[ line: 259 ]]
+function t.ClearPlayerEntries(_)
 	-- upvalues: t_1 (write), t_2 (write)
 	for i in pairs(t_1) do
 		i:Destroy()
@@ -247,7 +247,7 @@ function t.ClearPlayerEntries(_) --[[ line: 259 ]]
 	t_2 = {}
 end
 
-function t.CreatePlayerEntry(_, p6, p7) --[[ line: 268 ]]
+function t.CreatePlayerEntry(_, p6, p7)
 	-- upvalues: t_2 (write), color_1 (ref), color (ref), tweenService (ref), t_1 (write), var9 (write), var8 (write), avatarContextMenu (ref), guiService (ref)
 	local var36 = t_2[p6]
 	
@@ -263,11 +263,11 @@ function t.CreatePlayerEntry(_, p6, p7) --[[ line: 268 ]]
 	imageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	imageButton.BackgroundTransparency = 0
 	imageButton.Size = UDim2.new(1, 0, 1, 0)
-	imageButton.SelectionLost:connect(function() --[[ line: 283 ]]
+	imageButton.SelectionLost:connect(function()
 		-- upvalues: imageButton (ref), color_1 (copy)
 		imageButton.BackgroundColor3 = color_1
 	end)
-	imageButton.SelectionGained:connect(function() --[[ line: 284 ]]
+	imageButton.SelectionGained:connect(function()
 		-- upvalues: imageButton (ref), color (copy)
 		imageButton.BackgroundColor3 = color
 	end)
@@ -276,12 +276,12 @@ function t.CreatePlayerEntry(_, p6, p7) --[[ line: 268 ]]
 	var38:Play()
 	t_1[imageButton] = p6
 	t_2[p6] = imageButton
-	imageButton.MouseButton1Click:Connect(function() --[[ line: 298 ]]
+	imageButton.MouseButton1Click:Connect(function()
 		-- upvalues: var9 (copy), imageButton (ref)
 		var9:JumpTo(imageButton)
 	end)
 	imageButton.Parent = var8
-	spawn(function() --[[ line: 304 ]]
+	spawn(function()
 		-- upvalues: avatarContextMenu (copy), imageButton (ref), p6 (ref), var38 (write), guiService (copy), color (copy), color_1 (copy)
 		imageButton.Image = require(avatarContextMenu:WaitForChild("ContextMenuUtil")):GetHeadshotForPlayer(p6)
 		var38:Cancel()
@@ -296,7 +296,7 @@ function t.CreatePlayerEntry(_, p6, p7) --[[ line: 268 ]]
 	end)
 end
 
-function t:SwitchToPlayerEntry(p8, p9) --[[ line: 317 ]]
+function t:SwitchToPlayerEntry(p8, p9)
 	-- upvalues: t_2 (write), var9 (write)
 	if not p8 then return end
 	local var39 = t_2[p8]
@@ -309,13 +309,13 @@ function t:SwitchToPlayerEntry(p8, p9) --[[ line: 317 ]]
 		var9.TweenTime = 0
 	end
 	var9:JumpTo(var39)
-	spawn(function() --[[ line: 330 ]]
+	spawn(function()
 		-- upvalues: var9 (copy)
 		var9.TweenTime = 0.25
 	end)
 end
 
-function t.OffsetPlayerEntry(_, p10) --[[ line: 335 ]]
+function t.OffsetPlayerEntry(_, p10)
 	-- upvalues: var9 (write)
 	if p10 == 0 then return end
 	if p10 > 0 then
@@ -326,17 +326,17 @@ function t.OffsetPlayerEntry(_, p10) --[[ line: 335 ]]
 	var9:Previous()
 end
 
-function t.GetSelectedPlayer(_) --[[ line: 345 ]]
+function t.GetSelectedPlayer(_)
 	-- upvalues: t_1 (write), var9 (write)
 	return t_1[var9.CurrentPage]
 end
 
-function t.new(p11) --[[ line: 349 ]]
+function t.new(p11)
 	-- upvalues: t (ref), CreateMenuCarousel (ref), var10 (write)
 	local tbl = setmetatable({}, t)
 	tbl.rbxGui = CreateMenuCarousel(p11)
 	tbl.PlayerChanged = var10.Event
-	var10.Event:Connect(function() --[[ line: 355 ]]
+	var10.Event:Connect(function()
 		-- upvalues: tbl (ref)
 		tbl:FadeTowardsEdges()
 	end)

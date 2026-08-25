@@ -9,11 +9,11 @@ local errorsModule = require(script.Parent.Errors)
 local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
 local text = url.APIS_URL .. "game-passes/v1/game-passes:batchGetOwnership"
 
-return function(p0) --[[ line: 24 | named "userOwnsGamePassHttp" ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), playersService (ref), errorsModule (ref), shopDebugLoggerModule (ref), httpRbxApiService (ref), text (ref), httpService (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 25 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: playersService (copy), errorsModule (copy), p0 (ref), shopDebugLoggerModule (copy), httpRbxApiService (copy), text (copy), httpService (copy)
-		task.spawn(function() --[[ line: 26 ]]
+		task.spawn(function()
 			-- upvalues: playersService (copy), p2 (ref), errorsModule (copy), p0 (copy), shopDebugLoggerModule (copy), httpRbxApiService (copy), text (copy), httpService (copy), p1 (ref)
 			local localPlayer = playersService.LocalPlayer
 			
@@ -26,19 +26,19 @@ return function(p0) --[[ line: 24 | named "userOwnsGamePassHttp" ]]
 			local t = {
 				ownershipIdentifiers = { { userId = userId, gamePassId = p0 } }
 			}
-			shopDebugLoggerModule.logLazy(function() --[[ line: 43 ]]
+			shopDebugLoggerModule.logLazy(function()
 				-- upvalues: p0 (copy), userId (ref)
 				return "userOwnsGamePassHttp: POST gamePassId=" .. p0 .. " userId=" .. userId
 			end)
 			local var9 = shopDebugLoggerModule.startTimer()
-			local ok, status = pcall(function() --[[ line: 48 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpRbxApiService (copy), text (copy), httpService (copy), t (ref)
 				return httpRbxApiService:PostAsyncFullUrl(text, httpService:JSONEncode(t))
 			end)
 			
 			if not ok then
 				shopDebugLoggerModule.logElapsed("userOwnsGamePassHttp: HTTP error", var9)
-				shopDebugLoggerModule.logLazy(function() --[[ line: 53 ]]
+				shopDebugLoggerModule.logLazy(function()
 					-- upvalues: status (ref)
 					return "userOwnsGamePassHttp: HTTP error detail=" .. tostring(status)
 				end)
@@ -47,13 +47,13 @@ return function(p0) --[[ line: 24 | named "userOwnsGamePassHttp" ]]
 				return
 			end
 			shopDebugLoggerModule.logElapsed("userOwnsGamePassHttp: HTTP response received", var9)
-			local ok_1, status_1 = pcall(function() --[[ line: 62 ]]
+			local ok_1, status_1 = pcall(function()
 				-- upvalues: httpService (copy), status (ref)
 				return httpService:JSONDecode(status)
 			end)
 			
 			if not ok_1 then
-				shopDebugLoggerModule.logLazy(function() --[[ line: 66 ]]
+				shopDebugLoggerModule.logLazy(function()
 					-- upvalues: status_1 (ref)
 					return "userOwnsGamePassHttp: JSON parse error=" .. tostring(status_1)
 				end)
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 24 | named "userOwnsGamePassHttp" ]]
 			end
 			for i, v in status_1.ownershipIdentifiers do
 				if typeof(v) == "table" and v.userId == userId and v.gamePassId == p0 then
-					shopDebugLoggerModule.logLazy(function() --[[ line: 92 ]]
+					shopDebugLoggerModule.logLazy(function()
 						-- upvalues: p0 (copy)
 						return "userOwnsGamePassHttp: owns=true gamePassId=" .. p0
 					end)
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 24 | named "userOwnsGamePassHttp" ]]
 					return
 				end
 			end
-			shopDebugLoggerModule.logLazy(function() --[[ line: 100 ]]
+			shopDebugLoggerModule.logLazy(function()
 				-- upvalues: p0 (copy)
 				return "userOwnsGamePassHttp: owns=false gamePassId=" .. p0
 			end)

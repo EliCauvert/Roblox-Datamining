@@ -6,7 +6,7 @@ local t = {
 	History = navigationSymbolModule("HISTORY")
 }
 setmetatable(t, {
-	__index = function(_, p0) --[[ line: 24 ]]
+	__index = function(_, p0)
 		error(("%q is not a valid member of BackBehavior"):format(tostring(p0)), 2)
 	end
 })

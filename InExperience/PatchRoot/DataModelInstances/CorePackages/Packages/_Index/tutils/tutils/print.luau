@@ -1,20 +1,20 @@
-﻿return function(p0) --[[ line: 1 ]]
-	local function _(p1) --[[ line: 2 | named "makeKeyString" ]]
+﻿return function(p0)
+	local function _(p1)
 		return if type(p1) == "string" then string.format("%s", p1) else string.format("[%s]", tostring(p1))
 	end
 	
-	local function makeValueString(p2) --[[ line: 10 ]]
+	local function makeValueString(p2)
 		local var2 = type(p2)
 		
 		return if var2 == "string" then string.format("%q", p2) elseif var2 == "function" or var2 == "table" then string.format("<%s>", tostring(p2)) else string.format("%s", tostring(p2))
 	end
 	
-	local function printKeypair(p3, p4, p5, p6) --[[ line: 21 ]]
+	local function printKeypair(p3, p4, p5, p6)
 		-- upvalues: makeValueString (ref), p0 (ref)
 		p0(string.format("%s%s = %s,%s", p5, if type(p3) == "string" then string.format("%s", p3) else string.format("[%s]", tostring(p3)), makeValueString(p4), p6 and string.format(" -- %s", p6) or ""))
 	end
 	
-	return function(p7, p8) --[[ line: 33 ]]
+	return function(p7, p8)
 		-- upvalues: p0 (ref), makeValueString (ref), printKeypair (ref)
 		p8 = p8 or "  "
 		
@@ -23,7 +23,7 @@
 		end
 		local t = {}
 		
-		local function recurse(p9, p10, p11) --[[ line: 43 ]]
+		local function recurse(p9, p10, p11)
 			-- upvalues: t (ref), p8 (write), p0 (copy), makeValueString (copy), printKeypair (copy), recurse (ref)
 			t[p9] = true
 			local repeated = string.rep(p8, p11)

@@ -33,16 +33,16 @@ local fFlagAbuseReportSceneSelectionNextOnFailureModule = require(genericAbuseRe
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 local fFlagAbuseReportSubmissionTargetV4 = require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4
 
-local function getSubmissionTargetTelemetry(p0) --[[ line: 67 ]]
+local function getSubmissionTargetTelemetry(p0)
 	return if type(p0) == "table" then if p0.type == "default" then { target_type = "default" } elseif p0.type == "clientAction" then {
 		target_type = "clientAction",
 		client_action_name = if type(p0.name) == "string" then p0.name else nil
 	} else {} else {}
 end
 
-local function useAbuseSheetAnalytics(p1, p2, p3, p4) --[[ line: 83 ]]
+local function useAbuseSheetAnalytics(p1, p2, p3, p4)
 	-- upvalues: reactModule (ref), dashModule (ref), fFlagAbuseReportMenuV2 (ref), sendAnalyticsEvent (ref)
-	return reactModule.useCallback(function(p5) --[[ line: 85 ]]
+	return reactModule.useCallback(function(p5)
 		-- upvalues: p1 (ref), dashModule (copy), p2 (ref), p3 (ref), fFlagAbuseReportMenuV2 (copy), p4 (ref), sendAnalyticsEvent (copy)
 		sendAnalyticsEvent({
 			run_id = p1.runId,
@@ -50,7 +50,7 @@ local function useAbuseSheetAnalytics(p1, p2, p3, p4) --[[ line: 83 ]]
 			abuse_vector = p2,
 			target_id = p3,
 			total_duration = if p1.openTime then DateTime.now().UnixTimestampMillis - p1.openTime else 0,
-			path = dashModule.map(p1.stack, function(p6) --[[ line: 88 ]]
+			path = dashModule.map(p1.stack, function(p6)
 				return p6.nodeId
 			end),
 			config_name = if fFlagAbuseReportMenuV2 then p4 else nil
@@ -61,10 +61,10 @@ local function useAbuseSheetAnalytics(p1, p2, p3, p4) --[[ line: 83 ]]
 	})
 end
 
-return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
+return function(p7, p8)
 	-- upvalues: reactModule (ref), fFlagAbuseReportMenuV2 (ref), resolveStartNode (ref), reducer (ref), getInitialState (ref), getNewRunId (ref), useOpenLinkModule (ref), useRoactService (ref), roactNetworking (ref), useAbuseSheetAnalytics (ref), selectStore (ref), resolveArConfig (ref), telemetryEventType (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), fFlagAbuseReportLinkOpenedAnalytics (ref), linkOpenedSource (ref), fFlagAbuseReportSubmissionTargetV4 (ref), getSubmissionTargetTelemetry (ref), sendReportModule (ref), promiseModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), abuseVectorModule (ref), fFlagAbuseReportSceneSelectionNextOnFailureModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), contentNodeModule (ref)
 	local var18, var19
-	local var15 = reactModule.useMemo(function() --[[ line: 170 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: fFlagAbuseReportMenuV2 (copy), p7 (ref), resolveStartNode (copy)
 		return if fFlagAbuseReportMenuV2 and p7 then resolveStartNode(p7) else "root"
 	end, { p7 })
@@ -72,7 +72,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 	local _ = nil
 	
 	if fFlagAbuseReportMenuV2 then
-		local var16, var17 = reactModule.useReducer(reducer, nil, function() --[[ line: 175 ]]
+		local var16, var17 = reactModule.useReducer(reducer, nil, function()
 			-- upvalues: getInitialState (copy), getNewRunId (copy), var15 (ref)
 			return getInitialState(getNewRunId(), DateTime.now().UnixTimestampMillis, var15)
 		end)
@@ -86,11 +86,11 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 	local var22 = useOpenLinkModule()
 	local var23 = useRoactService(roactNetworking)
 	local var24 = useAbuseSheetAnalytics(var18, p8.abuseVector, p8.targetId, if fFlagAbuseReportMenuV2 and p7 then p7.name else nil)
-	local var25 = reactModule.useMemo(function() --[[ line: 193 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: selectStore (copy), var18 (write)
 		return selectStore(var18)
 	end, { var18 })
-	local var26 = reactModule.useMemo(function() --[[ line: 198 ]]
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: p7 (ref), resolveArConfig (copy), var25 (ref)
 		return if p7 then resolveArConfig(p7, {
 			attribute = p7.attributes,
@@ -107,17 +107,17 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 	local var32 = reactModule.useRef(var18.submissionState)
 	var32.current = var18.submissionState
 	
-	local function _(value) --[[ line: 229 | named "setNonReducerPendingInlineAlert" ]]
+	local function _(value)
 		-- upvalues: p8 (ref)
 		if p8.inlineAlertController then
 			p8.inlineAlertController.setInlineAlert(value)
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 237 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagAbuseReportMenuV2 (copy), none (ref), var31 (ref), var32 (ref), telemetryEventType (copy)
 		if fFlagAbuseReportMenuV2 then
-			return function() --[[ line: 241 ]]
+			return function()
 				-- upvalues: none (copy), var31 (copy), var32 (copy), telemetryEventType (copy)
 				if none.current == "started" then
 					none.current = "completed"
@@ -128,7 +128,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 259 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p8 (ref), var27 (ref), getNewRunId (copy), var19 (write), var15 (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy), fFlagFixAnalyticsForDynamicReportV2 (copy), var28 (ref), fFlagAbuseReportMenuV2 (copy), var29 (ref), var24 (ref), telemetryEventType (copy), none (ref)
 		if p8.open and not var27.current then
 			var19({
@@ -157,7 +157,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 			end
 		end
 	end, { p8.open })
-	reactModule.useLayoutEffect(function() --[[ line: 306 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: fFlagAbuseReportMenuV2 (copy), p7 (ref), var18 (write), var15 (ref), var19 (write), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy)
 		if not fFlagAbuseReportMenuV2 then return end
 		if not p7 then return end
@@ -213,7 +213,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 			})
 		end
 	end
-	reactModule.useEffect(function() --[[ line: 373 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagFixAnalyticsForDynamicReportV2 (copy), p8 (ref), var28 (ref), p7 (ref), var33 (ref), var24 (ref), telemetryEventType (copy), var26 (ref), nodeId (ref)
 		if not fFlagFixAnalyticsForDynamicReportV2 or not p8.open or var28.current then return end
 		if not p7 then return end
@@ -260,7 +260,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		p8.open, p7, var26, var33, nodeId, var24
 	})
 	
-	local function onExternalSubmit(p9) --[[ line: 419 ]]
+	local function onExternalSubmit(p9)
 		-- upvalues: var31 (ref), telemetryEventType (copy), var19 (write), var32 (ref)
 		var31.current({
 			sub_event_type = telemetryEventType.Submit,
@@ -274,7 +274,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		})
 	end
 	
-	local function notifyFinish() --[[ line: 432 ]]
+	local function notifyFinish()
 		-- upvalues: fFlagAbuseReportMenuV2 (copy), p8 (ref), var32 (ref), none (ref), var31 (ref), telemetryEventType (copy)
 		if fFlagAbuseReportMenuV2 and p8.onFinish then
 			p8.onFinish({ didSubmit = var32.current == "completed" })
@@ -285,7 +285,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		end
 	end
 	
-	local function handleClose() --[[ line: 447 ]]
+	local function handleClose()
 		-- upvalues: notifyFinish (ref), p8 (ref), fFlagAbuseReportMenuV2 (copy), var18 (write), var24 (ref), telemetryEventType (copy)
 		notifyFinish()
 		p8.onClose()
@@ -300,7 +300,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		end
 	end
 	
-	local function reset(value) --[[ line: 463 ]]
+	local function reset(value)
 		-- upvalues: getNewRunId (copy), var19 (write), var15 (ref), fFlagAbuseReportMenuV2 (copy), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy), p8 (ref), none (ref)
 		var19({
 			type = "reset",
@@ -318,7 +318,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		none.current = "none"
 	end
 	
-	reactModule.useEffect(function() --[[ line: 494 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var26 (ref), nodeId (ref), var18 (write), dashModule (copy), p8 (ref), fFlagAbuseReportMenuV2 (copy), var19 (write), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy), fFlagAbuseReportLinkOpenedAnalytics (copy), var31 (ref), telemetryEventType (copy), linkOpenedSource (copy), var22 (ref), handleClose (ref), notifyFinish (ref), reset (ref), fFlagAbuseReportSubmissionTargetV4 (copy), getSubmissionTargetTelemetry (copy), sendReportModule (copy), var23 (ref), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy), fFlagAbuseReportSceneSelectionNextOnFailureModule (copy), var24 (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var32 (ref)
 		if not var26 or not nodeId then return end
 		if var18.navigationState ~= "gotoNext" and var18.navigationState ~= "gotoFailure" then return end
@@ -336,7 +336,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 			
 			return
 		end
-		local function handleNextSimple(p10) --[[ line: 516 ]]
+		local function handleNextSimple(p10)
 			-- upvalues: p8 (copy), fFlagAbuseReportMenuV2 (copy), var19 (copy), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy), fFlagAbuseReportLinkOpenedAnalytics (copy), var31 (copy), telemetryEventType (copy), linkOpenedSource (copy), var22 (copy), handleClose (copy), notifyFinish (copy), reset (copy)
 			if not p10 then
 				warn("handleNextSimple called with nil next value")
@@ -416,7 +416,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		local var45 = if fFlagAbuseReportSubmissionTargetV4 then getSubmissionTargetTelemetry(target) else {}
 		local var46 = nil
 		
-		local function onSubmitForm() --[[ line: 596 ]]
+		local function onSubmitForm()
 			-- upvalues: fFlagAbuseReportSubmissionTargetV4 (copy), target (ref), sendReportModule (copy), var23 (copy), submission (ref), p8 (copy), var46 (write), promiseModule (copy), fFlagEnableReportingFlowForMomentsFeed (copy), abuseVectorModule (copy), fFlagAbuseReportMenuV2 (copy)
 			if fFlagAbuseReportSubmissionTargetV4 then
 				if type(target) == "table" and target.type == "default" then
@@ -466,10 +466,10 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 				} else nil
 			})
 			var19({ type = "startedSubmission" });
-			(if fFlagAbuseReportSubmissionTargetV4 then promiseModule.try(function() --[[ line: 659 ]]
+			(if fFlagAbuseReportSubmissionTargetV4 then promiseModule.try(function()
 				-- upvalues: onSubmitForm (ref)
 				return onSubmitForm()
-			end) else onSubmitForm()):andThen(function(p12) --[[ line: 665 ]]
+			end) else onSubmitForm()):andThen(function(p12)
 				-- upvalues: var19 (copy), var24 (copy), telemetryEventType (copy), unixTimestampMillis (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var45 (ref), fFlagAbuseReportMenuV2 (copy), var32 (copy), handleNextSimple (ref), var48 (ref)
 				var19({ type = "completedSubmission" })
 				var24({
@@ -487,7 +487,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 					var32.current = "completed"
 				end
 				handleNextSimple(var48.onSuccess)
-			end):catch(function(p11) --[[ line: 686 ]]
+			end):catch(function(p11)
 				-- upvalues: var19 (copy), var24 (copy), telemetryEventType (copy), unixTimestampMillis (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy), var45 (ref), var46 (write), dashModule (copy), fFlagAbuseReportMenuV2 (copy), var32 (copy), var48 (ref), handleNextSimple (ref)
 				var19({ type = "submissionFailed" })
 				var24({
@@ -520,7 +520,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 	end, { var18.navigationState })
 	local var39 = #var18.stack > 1 and not (var18.submissionState == "completed")
 	
-	local function goBack() --[[ line: 719 ]]
+	local function goBack()
 		-- upvalues: var26 (ref), nodeId (ref), var33 (ref), var39 (ref), var19 (write), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy), p8 (ref), var24 (ref), telemetryEventType (copy)
 		if not var26 or not nodeId or not var33 then return end
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
@@ -554,7 +554,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		currentPageElement = reactModule.createElement(contentNodeModule, {
 			key = var33.nodeId,
 			node = nodeId,
-			onNext = if nodeId and nodeId.next ~= nil then function(p13) --[[ line: 743 | named "onNext" ]]
+			onNext = if nodeId and nodeId.next ~= nil then function(p13)
 				-- upvalues: var26 (ref), nodeId (ref), var33 (ref), fFlagAbuseReportMenuV2 (copy), none (ref), var31 (ref), telemetryEventType (copy), var19 (write), var24 (ref)
 				if not var26 or not nodeId or not var33 then return end
 				if fFlagAbuseReportMenuV2 and none.current == "none" then
@@ -579,7 +579,7 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 					}
 				})
 			end else nil,
-			onFailure = if fFlagAbuseReportSceneSelectionNextOnFailureModule and (nodeId and nodeId.nextOnFailure ~= nil) then function() --[[ line: 774 | named "onFailure" ]]
+			onFailure = if fFlagAbuseReportSceneSelectionNextOnFailureModule and (nodeId and nodeId.nextOnFailure ~= nil) then function()
 				-- upvalues: var26 (ref), nodeId (ref), var33 (ref), var19 (write), var24 (ref), telemetryEventType (copy)
 				if var26 and nodeId and var33 then
 					local unixTimestampMillis = DateTime.now().UnixTimestampMillis
@@ -608,12 +608,12 @@ return function(p7, p8) --[[ line: 148 | named "useAbuseSheetFlow" ]]
 		currentNodeId = if fFlagAbuseReportMenuV2 then var33.nodeId else nil,
 		currentNodeType = if fFlagAbuseReportMenuV2 then nodeId.type else nil,
 		navigationDirection = if fFlagAbuseReportMenuV2 then var18.lastNavigationDirection else nil,
-		analytics = reactModule.useMemo(function() --[[ line: 804 ]]
+		analytics = reactModule.useMemo(function()
 			-- upvalues: var24 (ref)
 			return { sendEvent = var24 }
 		end, { var24 }),
 		pendingInlineAlert = if fFlagAbuseReportMenuV2 then if fFlagAbuseReportInlineAlertStateOutsideReducerModule then if p8.inlineAlertController then p8.inlineAlertController.pendingInlineAlert else nil else var18.pendingInlineAlert else nil,
-		dismissInlineAlert = reactModule.useCallback(function() --[[ line: 797 ]]
+		dismissInlineAlert = reactModule.useCallback(function()
 			-- upvalues: var19 (write), fFlagAbuseReportInlineAlertStateOutsideReducerModule (copy), p8 (ref)
 			var19({ type = "clearInlineAlert" })
 			

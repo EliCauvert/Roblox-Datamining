@@ -20,7 +20,7 @@ local t = {
 }
 local _ = require(bulkPurchaseApp.Store.Types)
 
-return function(p0) --[[ line: 41 | named "PriceBox" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useDiscountSummaryPropsModule (ref), reactModule (ref), view (ref), priceBoxLineModule (ref), priceBoxLineVariantEnumModule (ref), discountSummary (ref), foundationModule (ref), fFlagAddTimerToBulkPurchaseBuyButtonModule (ref), fIntBulkPurchaseEnabledCountdownMSModule (ref)
 	local var9 = useLocalization(t)
 	local var10 = useDiscountSummaryPropsModule(p0.discountInformation, p0.totalCost)
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 41 | named "PriceBox" ]]
 		PriceBoxConfirmButton = reactModule.createElement(foundationModule.Button, {
 			LayoutOrder = 2,
 			text = if p0.missingRobux then var9.buyRobuxCTA else var9.confirmCTA,
-			onActivated = p0.onAccept or function() --[[ line: 88 ]] end,
+			onActivated = p0.onAccept or function() end,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis,
 			size = foundationModule.Enums.InputSize.Medium,
 			width = UDim.new(1, 0),

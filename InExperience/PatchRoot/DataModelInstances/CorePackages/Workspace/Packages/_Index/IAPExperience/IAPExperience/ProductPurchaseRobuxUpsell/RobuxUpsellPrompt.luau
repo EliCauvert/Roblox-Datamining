@@ -40,7 +40,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0) --[[ line: 107 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref), getEnableCondenseRobuxUpsellModule (ref), constantsModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.state = {
@@ -49,7 +49,7 @@ function name.init(p0) --[[ line: 107 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.validateCondensedCondition(p1) --[[ line: 115 ]]
+	function p0.validateCondensedCondition(p1)
 		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), constantsModule (copy), p0 (ref)
 		if not getEnableCondenseRobuxUpsellModule() then return end
 		local var16 = p1.AbsoluteSize.Y + constantsModule.MODAL_HEIGHT_WITHOUT_CONTENT + constantsModule.MODAL_NORMAL_SECTION_PADDING * 2 + constantsModule.MODAL_NORMAL_BUTTON_HEIGHT * 2
@@ -66,7 +66,7 @@ function name.init(p0) --[[ line: 107 ]]
 		})
 	end
 	
-	function p0.changeContentSize(p2) --[[ line: 143 ]]
+	function p0.changeContentSize(p2)
 		-- upvalues: p0 (ref)
 		p0.validateCondensedCondition(p2)
 		
@@ -76,7 +76,7 @@ function name.init(p0) --[[ line: 107 ]]
 	end
 end
 
-function name.didMount(_) --[[ line: 153 ]]
+function name.didMount(_)
 	-- upvalues: fFlagIntroduceMetricsLegacyUpsellModule (ref), loggerModule (ref), default (ref), legacyUpsellCounterModule (ref)
 	if fFlagIntroduceMetricsLegacyUpsellModule then
 		loggerModule.debug({ message = "Legacy Upsell Modal Shown" })
@@ -84,7 +84,7 @@ function name.didMount(_) --[[ line: 153 ]]
 	end
 end
 
-function name.render(p3) --[[ line: 162 ]]
+function name.render(p3)
 	-- upvalues: sharedFlagsModule (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), fFlagMobilePopularItemBadgingExperimentEnabledModule (ref), multiTextLocalizerModule (ref)
 	return if sharedFlagsModule.FFlagLowCogsBannerExperiment then roactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
@@ -109,19 +109,19 @@ function name.render(p3) --[[ line: 162 ]]
 				key = "IAPExperience.RobuxUpsell.Text.PurchaseNotAvailableOnHeadSet"
 			}
 		},
-		render = function(p4) --[[ line: 220 ]]
+		render = function(p4)
 			-- upvalues: p3 (ref)
 			return p3:renderAlert(p4)
 		end
 	})
 end
 
-function name.renderAlert(p5, p6) --[[ line: 226 ]]
+function name.renderAlert(p5, p6)
 	-- upvalues: withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), buttonType (ref)
 	local props = p5.props
 	local state = p5.state
 	
-	return withStyle(function(p7) --[[ line: 230 ]]
+	return withStyle(function(p7)
 		-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), p6 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p5 (ref), productDetailsModule (copy), buttonType (copy)
 		local theme = p7.Theme
 		local font = p7.Font
@@ -143,7 +143,7 @@ function name.renderAlert(p5, p6) --[[ line: 226 ]]
 			position = props.position,
 			anchorPoint = props.anchorPoint,
 			title = p6.InsufficientRobuxTitle,
-			middleContent = function() --[[ line: 266 ]]
+			middleContent = function()
 				-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p5 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var18 (ref), var19 (ref), var17 (write), p6 (copy), parts (ref), termsOfUse (write)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -297,7 +297,7 @@ function name.renderAlert(p5, p6) --[[ line: 226 ]]
 	end)
 end
 
-function name.renderAlertNewProductDetails(p8, _) --[[ line: 450 ]]
+function name.renderAlertNewProductDetails(p8, _)
 	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), constantsModule (ref), roactModule (ref), productDetailsNewModule (ref), productDetailsModule (ref), interactiveAlert (ref), fitFrameVertical (ref), buttonType (ref)
 	local props = p8.props
 	local state = p8.state
@@ -315,9 +315,9 @@ function name.renderAlertNewProductDetails(p8, _) --[[ line: 450 ]]
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		BadgeText = "IAPExperience.RobuxUpsell.Text.PopularItem",
 		DisclosureTermsURL = if p8.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
-	})(function(p9) --[[ line: 468 ]]
+	})(function(p9)
 		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p8 (ref), buttonType (copy)
-		return withStyle(function(p10) --[[ line: 469 ]]
+		return withStyle(function(p10)
 			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p9 (ref), constantsModule (copy), roactModule (copy), productDetailsNewModule (copy), productDetailsModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p8 (copy), buttonType (copy)
 			local theme = p10.Theme
 			local font = p10.Font
@@ -372,7 +372,7 @@ function name.renderAlertNewProductDetails(p8, _) --[[ line: 450 ]]
 					position = props.position,
 					anchorPoint = props.anchorPoint,
 					title = p9.NeedMoreRobux,
-					middleContent = function() --[[ line: 570 ]]
+					middleContent = function()
 						-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p8 (copy), var32 (write), theme (ref), font (ref), var22 (ref), var23 (ref), var21 (write), p9 (copy), parts (ref), termsOfUse (write), props (copy)
 						return roactModule.createElement(fitFrameVertical, {
 							BackgroundTransparency = 1,
@@ -525,7 +525,7 @@ function name.renderAlertNewProductDetails(p8, _) --[[ line: 450 ]]
 	end)
 end
 
-function name.renderNewAlert(p11) --[[ line: 752 ]]
+function name.renderNewAlert(p11)
 	-- upvalues: withLocalization (ref), withStyle (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), constantsModule (ref), productDetailsModule (ref), buttonType (ref)
 	local props = p11.props
 	local state = p11.state
@@ -544,9 +544,9 @@ function name.renderNewAlert(p11) --[[ line: 752 ]]
 		BonusBannerV1 = "IAPExperience.RobuxUpsell.Text.BonusBannerV1",
 		BonusBannerInfo = "IAPExperience.RobuxUpsell.Text.BonusBannerInfo",
 		DisclosureTermsURL = if p11.props.isVng then "IAPExperience.RobuxUpsell.Text.VNGDisclosureTermsURL" else "IAPExperience.RobuxUpsell.Text.DisclosureTermsURL"
-	})(function(p12) --[[ line: 772 ]]
+	})(function(p12)
 		-- upvalues: withStyle (copy), getEnableCondenseRobuxUpsellModule (copy), state (ref), props (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p11 (ref), productDetailsModule (copy), buttonType (copy)
-		return withStyle(function(p13) --[[ line: 773 ]]
+		return withStyle(function(p13)
 			-- upvalues: getEnableCondenseRobuxUpsellModule (copy), state (copy), props (copy), p12 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), constantsModule (copy), p11 (copy), productDetailsModule (copy), buttonType (copy)
 			local theme = p13.Theme
 			local font = p13.Font
@@ -575,7 +575,7 @@ function name.renderNewAlert(p11) --[[ line: 752 ]]
 				position = props.position,
 				anchorPoint = props.anchorPoint,
 				title = p12.NeedMoreRobux,
-				middleContent = function() --[[ line: 830 ]]
+				middleContent = function()
 					-- upvalues: roactModule (copy), fitFrameVertical (copy), getEnableCondenseRobuxUpsellModule (copy), state (copy), constantsModule (copy), p11 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var36 (ref), var37 (write), var34 (write), p12 (copy), var35 (ref), parts (ref), termsOfUse (write)
 					return roactModule.createElement(fitFrameVertical, {
 						BackgroundTransparency = 1,
@@ -726,7 +726,7 @@ function name.renderNewAlert(p11) --[[ line: 752 ]]
 						}
 					}
 				},
-				footerContent = function() --[[ line: 1007 ]]
+				footerContent = function()
 					-- upvalues: p11 (copy), p13 (ref), var39 (write), p12 (copy)
 					return p11:renderFooterExperiment(p13, var39, p12.BonusBannerInfo)
 				end
@@ -735,7 +735,7 @@ function name.renderNewAlert(p11) --[[ line: 752 ]]
 	end)
 end
 
-function name.renderFooterExperiment(p14, p15, p16, p17) --[[ line: 1015 ]]
+function name.renderFooterExperiment(p14, p15, p16, p17)
 	-- upvalues: colors (ref), roactModule (ref), fitFrameVertical (ref), fFlagLowCogsBannerInfoIconModule (ref), infoIconWithTooltipModule (ref)
 	local font = p15.Font
 	local flint = colors.Flint

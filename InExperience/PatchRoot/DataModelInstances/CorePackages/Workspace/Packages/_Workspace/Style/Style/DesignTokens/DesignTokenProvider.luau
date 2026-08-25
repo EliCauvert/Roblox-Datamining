@@ -7,7 +7,7 @@ local useUiModeInfo = require(parent.RobloxAppHooks).useUiModeInfo
 local context = require(parent.UIBlox).Style.Context
 local designTokenContextModule = require(script.Parent.DesignTokenContext)
 
-return function(value) --[[ line: 27 | named "DesignTokenProvider" ]]
+return function(value)
 	-- upvalues: reactModule (ref), context (ref), useUiModeInfo (ref), cryoModule (ref), argCheckModule (ref), designTokenContextModule (ref)
 	local var4 = reactModule.useContext(context)
 	local uiModeInfo = value.uiModeInfo or useUiModeInfo()
@@ -20,7 +20,7 @@ return function(value) --[[ line: 27 | named "DesignTokenProvider" ]]
 		tokens = cryoModule.Dictionary.join(tokens, { LuaApps = {} })
 	end
 	return reactModule.createElement(designTokenContextModule.Provider, {
-		value = cryoModule.List.foldLeft(var6, function(p0, p1) --[[ line: 42 ]]
+		value = cryoModule.List.foldLeft(var6, function(p0, p1)
 			-- upvalues: tokenMappers (ref), uiModeInfo (write), tokens (write), cryoModule (copy)
 			local cloned = table.clone(p0.LuaApps)
 			cloned[p1] = tokenMappers[p1](uiModeInfo, tokens)

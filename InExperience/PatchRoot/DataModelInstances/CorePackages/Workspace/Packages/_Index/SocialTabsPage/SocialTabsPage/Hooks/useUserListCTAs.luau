@@ -2,19 +2,19 @@
 local reactModule = require(parent.React)
 local profileCTAService = require(parent.ProfileCtaService).ProfileCTAService
 
-return function(p0) --[[ line: 8 | named "useUserListCTAs" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), profileCTAService (ref)
 	local var1, var2 = reactModule.useState({})
-	reactModule.useEffect(function() --[[ line: 11 ]]
+	reactModule.useEffect(function()
 		-- upvalues: profileCTAService (copy)
 		local var3 = profileCTAService.connectRealTimeUpdates()
 		
-		return function() --[[ line: 13 ]]
+		return function()
 			-- upvalues: var3 (ref)
 			var3.Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), profileCTAService (copy), var2 (ref)
 		if #p0 == 0 then
 			return

@@ -29,7 +29,7 @@ local var4 = require(parent.UrlBuilder).UrlBuilder.new({
 	}
 })
 
-return function(p0, _, p1) --[[ line: 45 | named "SduiOpenFaeTrialUpsellAction" ]]
+return function(p0, _, p1)
 	-- upvalues: fFlagRobloxPlusUpsellRefreshOnComplete (ref), appPage (ref), surfaceName (ref), surfaceContext (ref), var4 (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref), claimTrial (ref), subscriptionGrantType (ref), getSduiApiStore (ref), sduiErrorType (ref), sduiActionType (ref), sduiParseHelpers (ref), startFacialAgeEstimation (ref)
 	local dispatch = p1.dependencies.dispatch
 	local localization = p1.dependencies.localization
@@ -48,9 +48,9 @@ return function(p0, _, p1) --[[ line: 45 | named "SduiOpenFaeTrialUpsellAction" 
 			},
 			surfaceName = surfaceName.HomepageFaeTrialBanner,
 			surfaceContext = surfaceContext.InApp,
-			onCtaOverride = function(p2, p3) --[[ line: 79 ]]
+			onCtaOverride = function(p2, p3)
 				-- upvalues: appPage (copy), var4 (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), dispatch (ref), navigateDown (copy), claimTrial (copy), subscriptionGrantType (copy), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), var6 (ref), p1 (ref), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy), startFacialAgeEstimation (copy)
-				local function openConfirmationWebview(p4) --[[ line: 80 ]]
+				local function openConfirmationWebview(p4)
 					-- upvalues: appPage (copy), var4 (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), dispatch (copy), navigateDown (copy)
 					local t = {
 						name = appPage.GenericWebPage,
@@ -66,11 +66,11 @@ return function(p0, _, p1) --[[ line: 45 | named "SduiOpenFaeTrialUpsellAction" 
 					dispatch(navigateDown(t))
 				end
 				
-				dispatch(startFacialAgeEstimation("FacialAgeEstimationHomepagePlusFreeTrialBanner", function() --[[ line: 96 | named "onFaeSuccess" ]]
+				dispatch(startFacialAgeEstimation("FacialAgeEstimationHomepagePlusFreeTrialBanner", function()
 					-- upvalues: claimTrial (copy), subscriptionGrantType (copy), p2 (ref), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), var6 (copy), openConfirmationWebview (ref), p1 (copy), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy)
-					claimTrial(subscriptionGrantType.FaeFreeTrial):andThen(function() --[[ line: 102 ]]
+					claimTrial(subscriptionGrantType.FaeFreeTrial):andThen(function()
 						-- upvalues: p2 (copy), fFlagRobloxPlusUpsellRefreshOnComplete (copy), getSduiApiStore (copy), var6 (copy), openConfirmationWebview (copy)
-						local var10 = if fFlagRobloxPlusUpsellRefreshOnComplete then function() --[[ line: 110 ]]
+						local var10 = if fFlagRobloxPlusUpsellRefreshOnComplete then function()
 							-- upvalues: getSduiApiStore (copy), var6 (copy), p2 (copy)
 							local dismissEntry = getSduiApiStore().dismissEntry
 							
@@ -79,11 +79,11 @@ return function(p0, _, p1) --[[ line: 45 | named "SduiOpenFaeTrialUpsellAction" 
 							end
 							p2()
 						end else p2
-						task.delay(1, function() --[[ line: 122 ]]
+						task.delay(1, function()
 							-- upvalues: openConfirmationWebview (copy), var10 (write)
 							openConfirmationWebview(var10)
 						end)
-					end):catch(function(p5) --[[ line: 126 ]]
+					end):catch(function(p5)
 						-- upvalues: p1 (copy), sduiErrorType (copy), sduiActionType (copy), sduiParseHelpers (copy)
 						p1.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
 							name = sduiActionType.OpenFaeTrialUpsell,

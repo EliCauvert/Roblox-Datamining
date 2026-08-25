@@ -6,7 +6,7 @@ local squadEnableRegroupVariant = game:DefineFastString("SquadEnableRegroupVaria
 local fFlagForceEnableSquadRegroup = sharedFlagsModule.FFlagForceEnableSquadRegroup
 local fFlagEnableSquadRegroupExperimentation = sharedFlagsModule.FFlagEnableSquadRegroupExperimentation
 
-local function _(p0) --[[ line: 14 | named "getIsUserInTreatment" ]]
+local function _(p0)
 	-- upvalues: experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
 	local var3 = experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer)
 	
@@ -14,7 +14,7 @@ local function _(p0) --[[ line: 14 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getSquadRegroupEnabled = function() --[[ line: 24 ]]
+	getSquadRegroupEnabled = function()
 		-- upvalues: fFlagForceEnableSquadRegroup (ref), fFlagEnableSquadRegroupExperimentation (ref), squadEnableRegroupVariant (ref), experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
 		local var4 = fFlagForceEnableSquadRegroup
 		
@@ -33,7 +33,7 @@ return {
 		end
 		return var4
 	end,
-	logExposure = function() --[[ line: 29 ]]
+	logExposure = function()
 		-- upvalues: fFlagForceEnableSquadRegroup (ref), fFlagEnableSquadRegroupExperimentation (ref), experimentCacheManager (ref), fStringSquadRegroupExpLayer (ref)
 		if not fFlagForceEnableSquadRegroup and fFlagEnableSquadRegroupExperimentation and experimentCacheManager.default:getLayerVariables(fStringSquadRegroupExpLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(fStringSquadRegroupExpLayer)

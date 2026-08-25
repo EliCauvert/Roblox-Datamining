@@ -6,7 +6,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local iconSizeModule = require(foundation.Enums.IconSize)
 
-local function variantsMap(p0) --[[ line: 38 ]]
+local function variantsMap(p0)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -110,7 +110,7 @@ local function variantsMap(p0) --[[ line: 38 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ line: 134 ]]
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsMap (ref), composeStyleVariantModule (ref)
 	local baseMenuItem = variantsContextModule.useVariants("BaseMenuItem", variantsMap, p1)
 	

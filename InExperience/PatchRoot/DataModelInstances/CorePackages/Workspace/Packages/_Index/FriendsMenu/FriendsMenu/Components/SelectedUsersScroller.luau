@@ -15,7 +15,7 @@ local selectedUsersContextModule = require(context.SelectedUsersContext)
 local getRenameFriendsToConnectionsEnabledFriendsMenuModule = require(friendsMenu.utils.getRenameFriendsToConnectionsEnabledFriendsMenu)
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), responsiveModule (ref), useLastInputMode (ref), useFocusGuiObject (ref), useStyle (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getRenameFriendsToConnectionsEnabledFriendsMenuModule (ref), friendsMenuUserCardModule (ref), constantsModule (ref)
 	local var9 = reactModule.useContext(selectedUsersContextModule)
 	local var10 = responsiveModule.useBreakpointYOrLarger(responsiveModule.Keys.Medium)
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 30 ]]
 			selectedCount = var9.selectedFriendsSize
 		}
 	})
-	local var17 = reactModule.useMemo(function() --[[ line: 66 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var13 (ref), reactModule (copy), var9 (ref), friendsMenuUserCardModule (copy), var14 (ref)
 		var13.current = {}
 		local t = {
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 30 ]]
 		for i, v in pairs(var9.selectedFriends) do
 			table.insert(t_1, { userId = i, userData = v })
 		end
-		table.sort(t_1, function(p1, p2) --[[ line: 80 ]]
+		table.sort(t_1, function(p1, p2)
 			return p1.userData.layoutOrder < p2.userData.layoutOrder
 		end)
 		
@@ -64,11 +64,11 @@ return function(p0) --[[ line: 30 ]]
 				layoutOrder = userData.layoutOrder,
 				userId = userId,
 				unremovable = userData.unremovable,
-				onRemoved = function() --[[ line: 93 ]]
+				onRemoved = function()
 					-- upvalues: var14 (copy), i_1 (ref)
 					var14.current = i_1
 				end,
-				ref = function(p3) --[[ line: 96 ]]
+				ref = function(p3)
 					-- upvalues: var13 (copy), i_1 (ref)
 					var13.current[i_1] = p3
 				end
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 30 ]]
 		end
 		return t
 	end, { var9.selectedFriends })
-	reactModule.useEffect(function() --[[ line: 105 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), var11 (ref), var13 (ref), var12 (ref)
 		if not var14.current or var11 ~= "Focus" then return end
 		local current = var13.current

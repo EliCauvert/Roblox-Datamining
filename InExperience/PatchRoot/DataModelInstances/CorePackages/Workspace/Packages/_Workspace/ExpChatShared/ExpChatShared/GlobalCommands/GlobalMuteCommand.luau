@@ -4,7 +4,7 @@ local _ = require(script.Parent.types)
 return {
 	name = script.Name,
 	alias = { "/mute", "/m" },
-	clientRun = function(_, _, p0, p1) --[[ line: 8 ]]
+	clientRun = function(_, _, p0, p1)
 		-- upvalues: playersService (ref)
 		local var1 = string.split(p0, " ")[2]
 		local var2 = var1 ~= nil and string.sub(var1, 1, 1) == "@"

@@ -14,7 +14,7 @@ local getFFlagUGCValidationEyebrowEyelashSupportModule = require(parent.flags.ge
 local getFFlagUGCValidateCurveAnimRotationSpeedModule = require(parent.flags.getFFlagUGCValidateCurveAnimRotationSpeed)
 local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCValidateTexturePack)
 
-local function joinTables(...) --[[ line: 30 ]]
+local function joinTables(...)
 	local t = {}
 	
 	for i_1 = 1, select("#", ...) do
@@ -220,13 +220,13 @@ if getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then
 	t.ErrorType.validateFACSJointTransformsWithinBounds_OOB = "validateFACSJointTransformsWithinBounds_OOB"
 end
 setmetatable(t.ErrorType, {
-	__index = function(_, p0) --[[ line: 254 ]]
+	__index = function(_, p0)
 		return `UNREGISTERED_{p0}`
 	end
 })
 t.metadata = {}
 
-function t.setMetadata(value) --[[ line: 261 ]]
+function t.setMetadata(value)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -236,19 +236,19 @@ function t.setMetadata(value) --[[ line: 261 ]]
 	t.metadata = t_1
 end
 
-function t.shouldReportIECTelemetry(p1) --[[ line: 269 ]]
+function t.shouldReportIECTelemetry(p1)
 	-- upvalues: getEngineFeatureEngineUGCValidationIECTelemetryModule (ref), runService (ref)
 	return if getEngineFeatureEngineUGCValidationIECTelemetryModule() then if p1 then runService:IsStudio() or not p1.allowEditableInstances or not p1.isServer else false else false
 end
 
-function t.reportCounter(p2, p3, p4) --[[ line: 285 ]]
+function t.reportCounter(p2, p3, p4)
 	-- upvalues: t (ref), UGCValidationService (ref)
 	if t.shouldReportIECTelemetry(p4) then
 		UGCValidationService:ReportUGCValidationCounter(p2, p3)
 	end
 end
 
-function t.reportFailure(p5, p6, p7) --[[ line: 291 ]]
+function t.reportFailure(p5, p6, p7)
 	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var2 (ref), UGCValidationService (ref)
 	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "failure", joinTables(t.metadata, p6 or {}, {
 		errorType = p5,
@@ -263,7 +263,7 @@ function t.reportFailure(p5, p6, p7) --[[ line: 291 ]]
 	end
 end
 
-function t.reportThumbnailing(p8, p9) --[[ line: 311 ]]
+function t.reportThumbnailing(p8, p9)
 	-- upvalues: runService (ref), joinTables (ref), t (ref), rbxAnalyticsService (ref), var2 (ref)
 	rbxAnalyticsService:SendEventDeferred(if runService:IsStudio() then "studio" else "rcc", "ugcValidation", "thumbnailing", joinTables(t.metadata, p9 or {}, {
 		time = p8,
@@ -274,7 +274,7 @@ function t.reportThumbnailing(p8, p9) --[[ line: 311 ]]
 	}))
 end
 
-function t.recordScriptTime(p10, p11, p12) --[[ line: 323 ]]
+function t.recordScriptTime(p10, p11, p12)
 	-- upvalues: getEngineFeatureEngineUGCValidationReportScriptTimeModule (ref)
 	if not getEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
 	if not p12.scriptTimes then
@@ -288,7 +288,7 @@ function t.recordScriptTime(p10, p11, p12) --[[ line: 323 ]]
 	scriptTimes[p10] += tick() - p11
 end
 
-function t.reportScriptTimes(p13) --[[ line: 341 ]]
+function t.reportScriptTimes(p13)
 	-- upvalues: getEngineFeatureEngineUGCValidationReportScriptTimeModule (ref), runService (ref), t (ref), UGCValidationService (ref)
 	if not getEngineFeatureEngineUGCValidationReportScriptTimeModule() then return end
 	if p13.isServer and not runService:IsStudio() and p13.scriptTimes then

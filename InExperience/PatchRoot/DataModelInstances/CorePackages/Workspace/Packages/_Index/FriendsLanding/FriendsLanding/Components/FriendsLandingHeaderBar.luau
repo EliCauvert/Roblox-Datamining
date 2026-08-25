@@ -11,25 +11,25 @@ local fFlagEnableLeftNavOnConsole = dependenciesModule.FFlagEnableLeftNavOnConso
 local guiService = dependenciesModule.GuiService
 local friendsLandingHeaderBar = roact.PureComponent:extend("FriendsLandingHeaderBar")
 
-function friendsLandingHeaderBar.init(p0) --[[ line: 18 ]]
+function friendsLandingHeaderBar.init(p0)
 	-- upvalues: appHeaderBar (ref), fFlagEnableLeftNavOnConsole (ref), guiService (ref), actions (ref)
-	function p0.renderLeft(p1, _, _) --[[ line: 19 ]]
+	function p0.renderLeft(p1, _, _)
 		-- upvalues: appHeaderBar (copy), fFlagEnableLeftNavOnConsole (copy), guiService (copy), actions (copy)
-		return if fFlagEnableLeftNavOnConsole and guiService:IsTenFootInterface() then nil else appHeaderBar.makeBackButton(function() --[[ line: 25 ]]
+		return if fFlagEnableLeftNavOnConsole and guiService:IsTenFootInterface() then nil else appHeaderBar.makeBackButton(function()
 			-- upvalues: p1 (ref), actions (copy)
 			p1.dispatch(actions.back())
 		end)
 	end
 end
 
-function friendsLandingHeaderBar.render(p2) --[[ line: 33 ]]
+function friendsLandingHeaderBar.render(p2)
 	-- upvalues: friendsLandingContextModule (ref), getActiveChildNavigationOptionsSafelyModule (ref), withLocalization (ref), roact (ref), friendsLandingHeaderBarPresentationalModule (ref)
-	return friendsLandingContextModule.with(function(p3) --[[ line: 34 ]]
+	return friendsLandingContextModule.with(function(p3)
 		-- upvalues: p2 (ref), getActiveChildNavigationOptionsSafelyModule (copy), withLocalization (copy), roact (copy), friendsLandingHeaderBarPresentationalModule (copy)
 		local navigation = p2.props.navigation
 		local var6 = getActiveChildNavigationOptionsSafelyModule(navigation)
 		
-		return withLocalization({ titleText = var6.headerText.raw })(function(p4) --[[ line: 40 ]]
+		return withLocalization({ titleText = var6.headerText.raw })(function(p4)
 			-- upvalues: p3 (ref), roact (copy), friendsLandingHeaderBarPresentationalModule (copy), var6 (ref), p2 (copy), navigation (ref)
 			local titleText = p4.titleText
 			

@@ -1,6 +1,6 @@
 ﻿local parent = script.Parent
 
-return function(p0, p1) --[[ line: 19 | named "formatValue" ]]
+return function(p0, p1)
 	-- upvalues: parent (ref)
 	p1 = p1 or ""
 	local var1, var2 = p1:find("[A-Za-z#?]+")

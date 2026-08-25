@@ -11,14 +11,14 @@ local peekViewDismissedEventModule = require(script.Parent.analytics.peekViewDis
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return function(p0) --[[ line: 49 | named "PeekViewWithTopBar" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), useRouteName (ref), useStyle (ref), reactModule (ref), peekViewStateModule (ref), peekViewDismissedEventModule (ref), cryoModule (ref), peekViewModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local var5 = useRoactService(appEventIngestService)
 	local var6 = useRouteName()
 	local var7 = useStyle()
 	local onClosed = p0.onClosed
 	local onViewStateChanged = p0.onViewStateChanged
-	local var8 = reactModule.useCallback(function(p1, p2, p3) --[[ line: 56 ]]
+	local var8 = reactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: peekViewStateModule (copy), onClosed (ref), var5 (ref), p0 (ref), peekViewDismissedEventModule (copy), cryoModule (copy), var6 (ref), onViewStateChanged (ref)
 		if p1 == peekViewStateModule.Closed then
 			if onClosed then
@@ -55,7 +55,7 @@ return function(p0) --[[ line: 49 | named "PeekViewWithTopBar" ]]
 			Size = UDim2.new(1, 0, 0, p0.topBarHeight),
 			BackgroundColor3 = var7.Theme.BackgroundDefault.Color,
 			BorderColor3 = var7.Tokens.Color.Common.Shimmer.Color3,
-			GroupTransparency = var9:map(function(p4) --[[ line: 102 ]]
+			GroupTransparency = var9:map(function(p4)
 				return 1 - p4
 			end)
 		}, { PeekViewTopBarInner = p0.topBarSlot }),
@@ -74,7 +74,7 @@ return function(p0) --[[ line: 49 | named "PeekViewWithTopBar" ]]
 				mountAsFullView = p0.mountAsFullView,
 				mountAnimation = p0.mountAnimation,
 				viewStateChanged = var8,
-				briefToFullTransitionPercent = function(p5) --[[ line: 81 ]]
+				briefToFullTransitionPercent = function(p5)
 					-- upvalues: var10 (ref), p0 (ref)
 					var10(p5)
 					

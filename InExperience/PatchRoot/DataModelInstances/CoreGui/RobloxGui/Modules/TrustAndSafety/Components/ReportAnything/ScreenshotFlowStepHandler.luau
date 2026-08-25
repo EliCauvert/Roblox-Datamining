@@ -6,22 +6,22 @@ local screenshotDialogModule = require(parent.Components.ReportAnything.Screensh
 local screenshotReviewDialogModule = require(parent.Components.ReportAnything.ScreenshotReviewDialog)
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 
-return function(p0) --[[ line: 21 | named "ScreenshotFlowStepHandler" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), screenshotReviewDialogModule (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), robloxTranslatorModule (ref), screenshotDialogModule (ref)
 	local var6, var7 = reactModule.useState(if p0.initialPageNumber == nil then 1 else p0.initialPageNumber)
 	local var8, var9 = reactModule.useState(1.777777777778)
 	local var10, var11 = reactModule.useState(800)
 	local var12, var13 = reactModule.useState(800)
 	local var14, var15 = reactModule.useState(true)
-	local var16 = reactModule.useCallback(function() --[[ line: 28 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		var7(2)
 	end, { var7 })
-	local var17 = reactModule.useCallback(function() --[[ line: 31 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		var7(1)
 	end, { var7 })
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var11 (ref), var13 (ref), var15 (ref), p0 (ref)
 		local currentCamera = game.Workspace.CurrentCamera
 		

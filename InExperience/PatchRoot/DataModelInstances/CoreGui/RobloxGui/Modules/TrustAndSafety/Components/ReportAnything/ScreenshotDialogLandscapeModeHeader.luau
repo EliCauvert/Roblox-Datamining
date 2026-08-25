@@ -11,11 +11,11 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0) --[[ line: 31 | named "renderWrappingCenter" ]]
+local function _(p0)
 	-- upvalues: withStyle (ref), reactModule (ref)
-	return function() --[[ line: 32 ]]
+	return function()
 		-- upvalues: withStyle (copy), reactModule (copy), p0 (ref)
-		return withStyle(function(p1) --[[ line: 33 ]]
+		return withStyle(function(p1)
 			-- upvalues: reactModule (copy), p0 (copy)
 			local theme = p1.Theme
 			
@@ -35,11 +35,11 @@ local function _(p0) --[[ line: 31 | named "renderWrappingCenter" ]]
 	end
 end
 
-local _ = function(p2, p3, p4, p5, p6) --[[ line: 53 | named "renderHeaderBarLeft" ]]
+local _ = function(p2, p3, p4, p5, p6)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
 	p5 = p5 or p6
 	
-	return function() --[[ line: 55 ]]
+	return function()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (ref), p5 (ref), p6 (ref), p3 (ref), p5 (ref), p4 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -75,9 +75,9 @@ local _ = function(p2, p3, p4, p5, p6) --[[ line: 53 | named "renderHeaderBarLef
 	end
 end
 
-local _ = function(p7, p8) --[[ line: 90 | named "renderHeaderBarRight" ]]
+local _ = function(p7, p8)
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), robloxTranslatorModule (ref)
-	return function() --[[ line: 91 ]]
+	return function()
 		-- upvalues: reactModule (copy), buttonStack (copy), buttonType (copy), p7 (ref), p8 (ref), getFFlagReportAnythingLocalizationEnabledModule (copy), robloxTranslatorModule (copy)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -93,7 +93,7 @@ local _ = function(p7, p8) --[[ line: 90 | named "renderHeaderBarRight" ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ line: 106 ]]
+							onActivated = function()
 								-- upvalues: p7 (copy), p8 (copy)
 								p7(p8)
 							end,
@@ -106,7 +106,7 @@ local _ = function(p7, p8) --[[ line: 90 | named "renderHeaderBarRight" ]]
 	end
 end
 
-return function(p9) --[[ line: 119 | named "LandscapeModeHeader" ]]
+return function(p9)
 	-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), buttonStack (ref), buttonType (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), robloxTranslatorModule (ref), withStyle (ref)
 	local createElement = reactModule.createElement
 	local var6 = "Frame"
@@ -127,7 +127,7 @@ return function(p9) --[[ line: 119 | named "LandscapeModeHeader" ]]
 	local isUndoEnabled = p9.isUndoEnabled
 	local isRedoEnabled_1 = isRedoEnabled or isUndoEnabled
 	
-	function t_2.renderLeft() --[[ line: 55 ]]
+	function t_2.renderLeft()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref), isRedoEnabled_1 (ref), isUndoEnabled (ref), undoAnnotationPoints (ref), isRedoEnabled (ref), redoAnnotationPoints (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -165,7 +165,7 @@ return function(p9) --[[ line: 119 | named "LandscapeModeHeader" ]]
 	local reportAction = p9.reportAction
 	local annotationPoints = p9.annotationPoints
 	
-	function t_2.renderRight() --[[ line: 91 ]]
+	function t_2.renderRight()
 		-- upvalues: reactModule (copy), buttonStack (copy), buttonType (copy), reportAction (ref), annotationPoints (ref), getFFlagReportAnythingLocalizationEnabledModule (copy), robloxTranslatorModule (copy)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -181,7 +181,7 @@ return function(p9) --[[ line: 119 | named "LandscapeModeHeader" ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ line: 106 ]]
+							onActivated = function()
 								-- upvalues: reportAction (copy), annotationPoints (copy)
 								reportAction(annotationPoints)
 							end,
@@ -198,9 +198,9 @@ return function(p9) --[[ line: 119 | named "LandscapeModeHeader" ]]
 	if getFFlagReportAnythingLocalizationEnabledModule() then
 		local titleText = p9.titleText
 		
-		local var11 = function() --[[ line: 32 ]]
+		local var11 = function()
 			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-			return withStyle(function(p10) --[[ line: 33 ]]
+			return withStyle(function(p10)
 				-- upvalues: reactModule (copy), titleText (copy)
 				local theme = p10.Theme
 				

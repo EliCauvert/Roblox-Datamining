@@ -6,7 +6,7 @@ local getFIntIGARSubtreeDivergenceThresholdPerMilleModule = require(inGameAssetR
 local extractAssetIdsFromInstanceModule = require(inGameAssetReporting.Analysis.extractAssetIdsFromInstance)
 local random = Random.new()
 
-function getRandomSampleUniformDisk(p0, p1, p2) --[[ line: 70 ]]
+function getRandomSampleUniformDisk(p0, p1, p2)
 	-- upvalues: random (write)
 	local var9, var10
 	local _ = nil
@@ -24,7 +24,7 @@ function getRandomSampleUniformDisk(p0, p1, p2) --[[ line: 70 ]]
 	return Vector2.new(var9, var10)
 end
 
-function interpretAnnotation(p3, p4, p5) --[[ line: 89 ]]
+function interpretAnnotation(p3, p4, p5)
 	-- upvalues: getFIntIGARRaycastTargetCountModule (ref), playersService (ref)
 	local var11 = false
 	local t = {
@@ -40,12 +40,12 @@ function interpretAnnotation(p3, p4, p5) --[[ line: 89 ]]
 		},
 		highlights = {},
 		topLevelObjects = {},
-		cancel = function() --[[ line: 110 ]]
+		cancel = function()
 			-- upvalues: var11 (write)
 			var11 = true
 		end
 	}
-	t.raycastComputation = coroutine.create(function() --[[ line: 116 ]]
+	t.raycastComputation = coroutine.create(function()
 		-- upvalues: p5 (ref), t (ref)
 		p5(t)
 	end)
@@ -75,7 +75,7 @@ function interpretAnnotation(p3, p4, p5) --[[ line: 89 ]]
 		return t
 	end
 	local list = { localPlayer.Character }
-	t.raycastComputation = coroutine.create(function() --[[ line: 147 ]]
+	t.raycastComputation = coroutine.create(function()
 		-- upvalues: list (ref), t (ref), var11 (write), p3 (ref), p4 (ref), viewportSize (ref), currentCamera (ref), p5 (ref)
 		local raycastParams = RaycastParams.new()
 		raycastParams.FilterType = Enum.RaycastFilterType.Exclude
@@ -143,7 +143,7 @@ function interpretAnnotation(p3, p4, p5) --[[ line: 89 ]]
 	return t
 end
 
-function createPlayerCharacterReferenceToPlayerMap(p6) --[[ line: 238 ]]
+function createPlayerCharacterReferenceToPlayerMap(p6)
 	local t = {}
 	
 	for i, v in ipairs(p6) do
@@ -156,11 +156,11 @@ function createPlayerCharacterReferenceToPlayerMap(p6) --[[ line: 238 ]]
 	return t
 end
 
-function descendingOrderBySecondElement(p7, p8) --[[ line: 249 ]]
+function descendingOrderBySecondElement(p7, p8)
 	return p8[2] < p7[2]
 end
 
-function createTraversalTaskList(p9, p10) --[[ line: 256 ]]
+function createTraversalTaskList(p9, p10)
 	-- upvalues: playersService (ref), getFIntIGARSubtreeDivergenceThresholdPerMilleModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -225,7 +225,7 @@ function createTraversalTaskList(p9, p10) --[[ line: 256 ]]
 	return t, t_1
 end
 
-function mutateMergeExtractedAssets(value, p11, p12) --[[ line: 344 ]]
+function mutateMergeExtractedAssets(value, p11, p12)
 	for i, v in ipairs(p12.Image) do
 		if not value[v] then
 			value[v] = true
@@ -266,7 +266,7 @@ function mutateMergeExtractedAssets(value, p11, p12) --[[ line: 344 ]]
 	end
 end
 
-function interpretInstanceListForGUIObjects(p13) --[[ line: 396 ]]
+function interpretInstanceListForGUIObjects(p13)
 	local t = {
 		errorReason = nil,
 		hitCountMap = {},
@@ -280,7 +280,7 @@ function interpretInstanceListForGUIObjects(p13) --[[ line: 396 ]]
 		},
 		highlights = {},
 		topLevelObjects = {},
-		cancel = function() --[[ line: 410 ]] end
+		cancel = function() end
 	}
 	
 	for i, v in ipairs(p13) do
@@ -289,7 +289,7 @@ function interpretInstanceListForGUIObjects(p13) --[[ line: 396 ]]
 	return t
 end
 
-function interpretAndExtractItemsFromInstanceForPreciseSelection(a) --[[ line: 439 ]]
+function interpretAndExtractItemsFromInstanceForPreciseSelection(a)
 	-- upvalues: extractAssetIdsFromInstanceModule (ref), playersService (ref)
 	local t = {
 		extractedAssets = {
@@ -301,7 +301,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(a) --[[ line: 4
 			Video = {}
 		},
 		extractedPlayers = {},
-		cancel = function() --[[ line: 450 ]] end,
+		cancel = function() end,
 		stats = {
 			hitCountMapSize = 0,
 			topLevelObjectsSize = 0,
@@ -317,7 +317,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(a) --[[ line: 4
 			raycastResumptionCount = 0,
 			raycastComputeTime = 0
 		},
-		computation = coroutine.create(function() --[[ line: 469 ]] end)
+		computation = coroutine.create(function() end)
 	}
 	
 	if not a then
@@ -325,7 +325,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(a) --[[ line: 4
 	end
 	local t_1 = {}
 	
-	local _ = function(p14) --[[ line: 476 ]]
+	local _ = function(p14)
 		-- upvalues: extractAssetIdsFromInstanceModule (copy), t_1 (ref), t (ref)
 		local var44 = extractAssetIdsFromInstanceModule(p14)
 		
@@ -362,7 +362,7 @@ function interpretAndExtractItemsFromInstanceForPreciseSelection(a) --[[ line: 4
 	return t
 end
 
-function extractItemsFromInterpretations(a, b) --[[ line: 516 ]]
+function extractItemsFromInterpretations(a, b)
 	-- upvalues: extractAssetIdsFromInstanceModule (ref)
 	local var45 = false
 	local t = {
@@ -375,7 +375,7 @@ function extractItemsFromInterpretations(a, b) --[[ line: 516 ]]
 			Video = {}
 		},
 		extractedPlayers = {},
-		cancel = function() --[[ line: 532 ]]
+		cancel = function()
 			-- upvalues: var45 (write)
 			var45 = true
 		end,
@@ -395,7 +395,7 @@ function extractItemsFromInterpretations(a, b) --[[ line: 516 ]]
 			raycastComputeTime = 0
 		}
 	}
-	t.computation = coroutine.create(function() --[[ line: 551 ]]
+	t.computation = coroutine.create(function()
 		-- upvalues: b (ref), t (ref)
 		b(t)
 	end)
@@ -437,17 +437,17 @@ function extractItemsFromInterpretations(a, b) --[[ line: 516 ]]
 	t.stats.playersCount = #var51
 	t.stats.wallTime = os.clock() - processTime
 	t.stats.traversalTaskListSize = #var50
-	t.computation = coroutine.create(function() --[[ line: 599 ]]
+	t.computation = coroutine.create(function()
 		-- upvalues: t (ref), var50 (ref), var45 (write), b (ref), t_1 (ref), extractAssetIdsFromInstanceModule (copy)
 		local processTime = os.clock()
 		local processTime_1 = os.clock()
 		
-		local _ = function() --[[ line: 602 ]]
+		local _ = function()
 			-- upvalues: processTime_1 (write)
 			return processTime_1 + 0.011111111111 < os.clock()
 		end
 		
-		local _ = function() --[[ line: 605 ]]
+		local _ = function()
 			-- upvalues: t (copy), processTime_1 (write)
 			t.stats.computeTime += os.clock() - processTime_1
 			task.wait()
@@ -476,7 +476,7 @@ return {
 	extractItemsFromInterpretations = extractItemsFromInterpretations,
 	interpretInstanceListForGUIObjects = interpretInstanceListForGUIObjects,
 	interpretAndExtractItemsFromInstanceForPreciseSelection = interpretAndExtractItemsFromInstanceForPreciseSelection,
-	__setRandomGenerator = function(value) --[[ line: 698 ]]
+	__setRandomGenerator = function(value)
 		-- upvalues: random (write)
 		random = value
 	end

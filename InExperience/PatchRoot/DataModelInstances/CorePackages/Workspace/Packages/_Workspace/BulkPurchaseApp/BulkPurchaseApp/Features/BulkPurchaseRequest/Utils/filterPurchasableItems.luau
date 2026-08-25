@@ -2,7 +2,7 @@
 local _ = require(bulkPurchaseApp.Store.Types)
 local purchasableStateEnumModule = require(bulkPurchaseApp.Enums.PurchasableStateEnum)
 
-return function(p0) --[[ line: 8 | named "filterPurchasableItems" ]]
+return function(p0)
 	-- upvalues: purchasableStateEnumModule (ref)
 	local t = {}
 	

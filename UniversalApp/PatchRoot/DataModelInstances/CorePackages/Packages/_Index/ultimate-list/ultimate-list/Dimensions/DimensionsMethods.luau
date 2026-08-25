@@ -5,7 +5,7 @@ local _ = require(script.Parent)
 local exhaustiveMatchModule = require(var0.Util.exhaustiveMatch)
 local t = {}
 
-function t.getCanvasSize(p0, p1, p2, p3) --[[ line: 11 ]]
+function t.getCanvasSize(p0, p1, p2, p3)
 	-- upvalues: dataSourceMethodsModule (ref), t (ref), exhaustiveMatchModule (ref)
 	local var6 = dataSourceMethodsModule.back(p1)
 	
@@ -17,34 +17,34 @@ function t.getCanvasSize(p0, p1, p2, p3) --[[ line: 11 ]]
 	return if p3 == "x" then UDim2.fromOffset(uDimRect.position.X.Offset + uDimRect.size.X.Offset, 0) elseif p3 == "y" then UDim2.fromOffset(0, uDimRect.position.Y.Offset + uDimRect.size.Y.Offset) else exhaustiveMatchModule(p3)
 end
 
-local function _(p4, p5) --[[ line: 30 | named "getUDimSizeForConsistentSize" ]]
+local function _(p4, p5)
 	-- upvalues: exhaustiveMatchModule (ref)
 	return if p5 == "x" then UDim2.new(0, p4, 1, 0) elseif p5 == "y" then UDim2.new(1, 0, 0, p4) else exhaustiveMatchModule(p5)
 end
 
-local _ = function(p6, p7, p8) --[[ line: 40 | named "getPositionForConsistentSize" ]]
+local _ = function(p6, p7, p8)
 	-- upvalues: exhaustiveMatchModule (ref)
 	return if p8 == "x" then UDim2.fromOffset(p6 * (p7 - 1), 0) elseif p8 == "y" then UDim2.fromOffset(0, p6 * (p7 - 1)) else exhaustiveMatchModule(p8)
 end
 
-local function getPositionForConsistentUDim2(p9, p10, p11, p12) --[[ line: 50 ]]
+local function getPositionForConsistentUDim2(p9, p10, p11, p12)
 	-- upvalues: t (ref), exhaustiveMatchModule (ref)
 	local amountPerNonDominantInGrid = t.getAmountPerNonDominantInGrid(p9, p11, p12)
 	
 	return if p12 == "x" then UDim2.new(0, (math.ceil(p10 / amountPerNonDominantInGrid) - 1) * p9.X.Offset, p9.Y.Scale * ((p10 - 1) % amountPerNonDominantInGrid), p9.Y.Offset * ((p10 - 1) % amountPerNonDominantInGrid)) elseif p12 == "y" then UDim2.new(p9.X.Scale * ((p10 - 1) % amountPerNonDominantInGrid), p9.X.Offset * ((p10 - 1) % amountPerNonDominantInGrid), 0, (math.ceil(p10 / amountPerNonDominantInGrid) - 1) * p9.Y.Offset) else exhaustiveMatchModule(p12)
 end
 
-function t.getAmountPerNonDominantInGrid(a, b, p13) --[[ line: 79 ]]
+function t.getAmountPerNonDominantInGrid(a, b, p13)
 	-- upvalues: exhaustiveMatchModule (ref)
 	return if p13 == "x" then b.Y // (a.Y.Offset + a.Y.Scale * b.Y) elseif p13 == "y" then b.X // (a.X.Offset + a.X.Scale * b.X) else exhaustiveMatchModule(p13)
 end
 
-function t.getDominantAxis(a, b) --[[ line: 93 ]]
+function t.getDominantAxis(a, b)
 	-- upvalues: exhaustiveMatchModule (ref)
 	return if b == "x" then a.X elseif b == "y" then a.Y else exhaustiveMatchModule(b)
 end
 
-function t.getUDimRect(p14, p15, p16, p17, p18) --[[ line: 103 ]]
+function t.getUDimRect(p14, p15, p16, p17, p18)
 	-- upvalues: exhaustiveMatchModule (ref), getPositionForConsistentUDim2 (ref)
 	if p14.type == "consistentSize" then
 		local t = {}
@@ -84,14 +84,14 @@ function t.getUDimRect(p14, p15, p16, p17, p18) --[[ line: 103 ]]
 	return exhaustiveMatchModule(p14.inner.type)
 end
 
-local function getElementsDisplayedForUDim2(p19, p20, p21) --[[ line: 152 ]]
+local function getElementsDisplayedForUDim2(p19, p20, p21)
 	-- upvalues: t (ref), exhaustiveMatchModule (ref)
 	local amountPerNonDominantInGrid = t.getAmountPerNonDominantInGrid(p19, p20, p21)
 	
 	return if p21 == "x" then amountPerNonDominantInGrid * (p20.X // p19.Y.Offset + 2) elseif p21 == "y" then amountPerNonDominantInGrid * (p20.Y // p19.X.Offset + 2) else exhaustiveMatchModule(p21)
 end
 
-function t.elementsDisplayedHint(p22, p23, p24) --[[ line: 165 ]]
+function t.elementsDisplayedHint(p22, p23, p24)
 	-- upvalues: t (ref), getElementsDisplayedForUDim2 (ref), exhaustiveMatchModule (ref)
 	if p22.type == "consistentSize" then
 		return t.getDominantAxis(p23, p24) // p22.size + 2
@@ -113,7 +113,7 @@ function t.elementsDisplayedHint(p22, p23, p24) --[[ line: 165 ]]
 	return exhaustiveMatchModule(p22.inner.type)
 end
 
-function t.equals(p25, p26) --[[ line: 203 ]]
+function t.equals(p25, p26)
 	-- upvalues: exhaustiveMatchModule (ref)
 	if p25.type ~= p26.type then
 		return false

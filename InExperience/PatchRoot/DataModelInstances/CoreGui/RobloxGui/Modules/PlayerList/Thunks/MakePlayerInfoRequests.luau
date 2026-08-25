@@ -26,7 +26,7 @@ local setPlayerAvatarIconModule = require(parent.Actions.SetPlayerAvatarIcon)
 local setPlayerIsBlockedModule = require(parent.Actions.SetPlayerIsBlocked)
 local setPlayerFriendStatusModule = require(parent.Actions.SetPlayerFriendStatus)
 
-local function dispatchIfPlayerExists(p0, p1, p2) --[[ line: 47 ]]
+local function dispatchIfPlayerExists(p0, p1, p2)
 	local var23 = false
 	
 	for i, v in ipairs(p0:getState().players) do
@@ -40,12 +40,12 @@ local function dispatchIfPlayerExists(p0, p1, p2) --[[ line: 47 ]]
 	end
 end
 
-local function _(p3) --[[ line: 61 | named "isInExperienceNameEnabled" ]]
+local function _(p3)
 	-- upvalues: fFlagInExperienceUserProfileSettingsEnabledModule (ref), playerPermissionsModule (ref)
 	return fFlagInExperienceUserProfileSettingsEnabledModule and playerPermissionsModule.IsPlayerInExperienceNameEnabledAsync(p3)
 end
 
-local function getGroupsPermissionsInfo(p4, p5) --[[ line: 70 ]]
+local function getGroupsPermissionsInfo(p4, p5)
 	-- upvalues: fFlagBadgeVisibilitySettingEnabled (ref), playerPermissionsModule (ref), t (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), dispatchIfPlayerExists (ref), setPlayerSpecialGroupIconModule (ref)
 	if fFlagBadgeVisibilitySettingEnabled then
 		local intern = nil
@@ -119,7 +119,7 @@ local function getGroupsPermissionsInfo(p4, p5) --[[ line: 70 ]]
 	end
 end
 
-local function getGameCreator(p6, p7) --[[ line: 142 ]]
+local function getGameCreator(p6, p7)
 	-- upvalues: enableBadgeCheckForUserCreator (ref), playerPermissionsModule (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), dispatchIfPlayerExists (ref), setPlayerIsCreatorModule (ref)
 	if not enableBadgeCheckForUserCreator and game.CreatorType ~= Enum.CreatorType.Group then return end
 	if playerPermissionsModule.CanPlayerManagePlaceAsync(p7) then
@@ -138,7 +138,7 @@ local function getGameCreator(p6, p7) --[[ line: 142 ]]
 	end
 end
 
-local function getPlayerAvatarIcon(p8, p9) --[[ line: 164 ]]
+local function getPlayerAvatarIcon(p8, p9)
 	-- upvalues: fFlagEnableMobilePlayerListOnConsole (ref), tenFootInterfaceModule (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), dispatchIfPlayerExists (ref), setPlayerAvatarIconModule (ref)
 	if fFlagEnableMobilePlayerListOnConsole or not tenFootInterfaceModule:IsEnabled() then return end
 	local text = "rbxthumb://type=Avatar&id=" .. p9.UserId .. "&w=100&h=100"
@@ -156,26 +156,26 @@ local function getPlayerAvatarIcon(p8, p9) --[[ line: 164 ]]
 	dispatchIfPlayerExists(p8, p9, setPlayerAvatarIconModule(p9, text))
 end
 
-local function getPlayerIsBlocked(p10, p11) --[[ line: 183 ]]
+local function getPlayerIsBlocked(p10, p11)
 	-- upvalues: blockingUtilityModule (ref), dispatchIfPlayerExists (ref), setPlayerIsBlockedModule (ref)
 	if blockingUtilityModule:IsPlayerBlockedByUserId(p11.UserId) then
 		dispatchIfPlayerExists(p10, p11, setPlayerIsBlockedModule(p11, true))
 	end
 end
 
-local function getPlayerFriendStatus(p12, p13) --[[ line: 189 ]]
+local function getPlayerFriendStatus(p12, p13)
 	-- upvalues: playersService (ref), dispatchIfPlayerExists (ref), setPlayerFriendStatusModule (ref)
 	if p13 ~= playersService.LocalPlayer and p13.Parent == playersService and playersService.LocalPlayer.Parent == playersService then
 		dispatchIfPlayerExists(p12, p13, setPlayerFriendStatusModule(p13, playersService.LocalPlayer:GetFriendStatus(p13)))
 	end
 end
 
-return function(p14) --[[ line: 199 | named "MakePlayerInfoRequests" ]]
+return function(p14)
 	-- upvalues: fFlagReplacePlayerIconRoduxWithSignal (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), playerPermissionsModule (ref), playerIconInfoStore (ref), getGroupsPermissionsInfo (ref), getGameCreator (ref), getPlayerAvatarIcon (ref), getPlayerIsBlocked (ref), getPlayerFriendStatus (ref)
-	return function(p15) --[[ line: 200 ]]
+	return function(p15)
 		-- upvalues: fFlagReplacePlayerIconRoduxWithSignal (copy), p14 (ref), fFlagInExperienceUserProfileSettingsEnabledModule (copy), playerPermissionsModule (copy), playerIconInfoStore (copy), getGroupsPermissionsInfo (copy), getGameCreator (copy), getPlayerAvatarIcon (copy), getPlayerIsBlocked (copy), getPlayerFriendStatus (copy)
 		if fFlagReplacePlayerIconRoduxWithSignal then
-			coroutine.wrap(function() --[[ line: 202 ]]
+			coroutine.wrap(function()
 				-- upvalues: p14 (copy), fFlagInExperienceUserProfileSettingsEnabledModule (copy), playerPermissionsModule (copy), playerIconInfoStore (copy), getGroupsPermissionsInfo (copy), p15 (ref), getGameCreator (copy), getPlayerAvatarIcon (copy)
 				if if fFlagInExperienceUserProfileSettingsEnabledModule and playerPermissionsModule.IsPlayerInExperienceNameEnabledAsync(p14) then true else false then
 					playerIconInfoStore.setPlayerIconInfo(p14.UserId, {

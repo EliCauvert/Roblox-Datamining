@@ -9,7 +9,7 @@ local var1 = tModule.strictInterface({
 	actionType = tModule.string
 })
 
-return function(p0, p1) --[[ line: 15 ]]
+return function(p0, p1)
 	-- upvalues: var1 (ref), mutedError (ref)
 	local var2, var3 = var1(p1)
 	

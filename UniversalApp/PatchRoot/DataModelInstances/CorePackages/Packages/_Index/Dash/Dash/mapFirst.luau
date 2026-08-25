@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 12 | named "mapFirst" ]]
+﻿return function(p0, p1)
 	for i, v in ipairs(p0) do
 		local var0 = p1(v, i)
 		

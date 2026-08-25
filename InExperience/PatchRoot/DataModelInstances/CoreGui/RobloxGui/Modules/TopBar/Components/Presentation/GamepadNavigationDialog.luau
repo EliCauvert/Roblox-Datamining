@@ -15,14 +15,14 @@ local setGamepadNavigationDialogOpenModule = require(script.Parent.Parent.Parent
 local fFlagAlwaysShowGamepadNavigationDialogModule = require(parent.Flags.FFlagAlwaysShowGamepadNavigationDialog)
 local var9 = require(parent.Flags.GetFStringGamepadNavigationDialogABTestLayerName)()
 
-return if require(parent.Flags.FFlagTopBarDeprecateGamepadNavigationDialogRodux) then function(_) --[[ line: 31 | named "GamepadNavigationDialogContainer" ]]
+return if require(parent.Flags.FFlagTopBarDeprecateGamepadNavigationDialogRodux) then function(_)
 	-- upvalues: reactModule (ref), userInputService (ref), guiService (ref), gamepadNavigationDialogShowCounterModule (ref), fFlagAlwaysShowGamepadNavigationDialogModule (ref)
 	local var11, var12 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var12 (ref), guiService (copy)
 		local gamepadConnectedConnection = nil
 		
-		local function disconnectGamepadConnected() --[[ line: 36 ]]
+		local function disconnectGamepadConnected()
 			-- upvalues: gamepadConnectedConnection (write)
 			if gamepadConnectedConnection then
 				gamepadConnectedConnection:Disconnect()
@@ -33,7 +33,7 @@ return if require(parent.Flags.FFlagTopBarDeprecateGamepadNavigationDialogRodux)
 		if userInputService:GetGamepadConnected(Enum.UserInputType.Gamepad1) then
 			var12(true)
 		else
-			gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function() --[[ line: 46 ]]
+			gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function()
 				-- upvalues: var12 (copy), gamepadConnectedConnection (write)
 				var12(true)
 				
@@ -56,19 +56,19 @@ return if require(parent.Flags.FFlagTopBarDeprecateGamepadNavigationDialogRodux)
 		isGamepadNavigationDialogOpen = var11,
 		SetGamepadNavigationDialogOpen = var12
 	}) else nil
-end else roactRoduxModule.connect(function(p1) --[[ line: 87 ]]
+end else roactRoduxModule.connect(function(p1)
 	return {
 		isGamepadNavigationDialogOpen = p1.displayOptions.isGamepadNavigationDialogOpen
 	}
-end, function(p2) --[[ line: 91 ]]
+end, function(p2)
 	-- upvalues: setGamepadNavigationDialogOpenModule (ref)
 	return {
-		SetGamepadNavigationDialogOpen = function(value) --[[ line: 93 ]]
+		SetGamepadNavigationDialogOpen = function(value)
 			-- upvalues: p2 (ref), setGamepadNavigationDialogOpenModule (copy)
 			return p2(setGamepadNavigationDialogOpenModule(value))
 		end
 	}
-end)(roactAppExperimentModule.connectUserLayer({ var9 }, function(p0, _) --[[ line: 72 ]]
+end)(roactAppExperimentModule.connectUserLayer({ var9 }, function(p0, _)
 	-- upvalues: var9 (ref), fFlagAlwaysShowGamepadNavigationDialogModule (ref)
 	local var10 = p0[var9] or {}
 	

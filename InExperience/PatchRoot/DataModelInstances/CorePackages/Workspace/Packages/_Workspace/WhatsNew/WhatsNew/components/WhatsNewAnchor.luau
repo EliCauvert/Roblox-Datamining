@@ -5,18 +5,18 @@ local reactModule = require(parent.React)
 local getWhatsNewStoreModule = require(whatsNew.store.GetWhatsNewStore)
 local view = foundationModule.View
 
-local function _(p0) --[[ line: 26 | named "isGuiObjectReady" ]]
+local function _(p0)
 	local absoluteSize = p0.AbsoluteSize
 	
 	return absoluteSize.X > 0 and absoluteSize.Y > 0
 end
 
-return reactModule.memo(function(p1) --[[ line: 31 | named "WhatsNewAnchor" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: getWhatsNewStoreModule (ref), reactModule (ref), view (ref)
 	local var4 = getWhatsNewStoreModule()
 	local anchorId = p1.anchorId
 	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useCallback(function(p2) --[[ line: 36 ]]
+	local var6 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref), anchorId (ref)
 		if p2 == nil then
 			return
@@ -24,7 +24,7 @@ return reactModule.memo(function(p1) --[[ line: 31 | named "WhatsNewAnchor" ]]
 		local absoluteSize = p2.AbsoluteSize
 		var4.setAnchorReady(anchorId, absoluteSize.X > 0 and absoluteSize.Y > 0, p2)
 	end, { var4, anchorId })
-	local var7 = reactModule.useCallback(function(p3) --[[ line: 43 ]]
+	local var7 = reactModule.useCallback(function(p3)
 		-- upvalues: var5 (ref), var4 (ref), anchorId (ref), var6 (ref)
 		if p3 == nil then
 			local current = var5.current
@@ -43,9 +43,9 @@ return reactModule.memo(function(p1) --[[ line: 31 | named "WhatsNewAnchor" ]]
 			end
 		end
 	end, { var4, anchorId, var6 })
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), anchorId (ref), var5 (ref)
-		return function() --[[ line: 60 ]]
+		return function()
 			-- upvalues: var4 (copy), anchorId (copy), var5 (copy)
 			var4.unregisterAnchor(anchorId, var5.current)
 		end
@@ -55,7 +55,7 @@ return reactModule.memo(function(p1) --[[ line: 31 | named "WhatsNewAnchor" ]]
 		ref = var7,
 		tag = p1.tag or "size-full-0 auto-y",
 		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p4) --[[ line: 65 ]]
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p4)
 			-- upvalues: var6 (ref)
 			var6(p4)
 		end, { var6 })

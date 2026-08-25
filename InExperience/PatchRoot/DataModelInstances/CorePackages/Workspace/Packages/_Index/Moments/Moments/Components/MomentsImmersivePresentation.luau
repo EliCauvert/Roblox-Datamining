@@ -46,12 +46,12 @@ local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local createRecommendationTelemetry = feedModule.createRecommendationTelemetry
 local createMockFeedSource = feedModule.createMockFeedSource
 
-local function PushedFeedSafeAreaProvider(p0) --[[ line: 106 ]]
+local function PushedFeedSafeAreaProvider(p0)
 	-- upvalues: useDeviceInsets (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref)
 	return reactModule.createElement(momentPushedFeedSafeAreaContextModule.Context.Provider, { value = useDeviceInsets() }, { Content = p0.children })
 end
 
-return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePresentation" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), fFlagMomentsFlyoutCreateButtonModule (ref), useCreationEntryModule (ref), useUploadHostModule (ref), logCreateIntentModule (ref), funnelEventNames (ref), immersiveFeedKind (ref), getDeepLinkStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), analytics (ref), fFlagMomentsSessionHeartbeat (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), PushedFeedSafeAreaProvider (ref), view (ref), constantsModule (ref), creationFlowScreen (ref), FTUXEducationScreenModule (ref), momentsHostShellModule (ref)
 	local var27 = reactModule.useRef(nil)
 	
@@ -79,7 +79,7 @@ return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePre
 		})
 	end
 	local var31 = if var29 ~= nil then nil else var29.onCreatePressed
-	local var32 = reactModule.useCallback(function() --[[ line: 150 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: var31 (ref), logCreateIntentModule (copy), funnelEventNames (copy)
 		if var31 ~= nil then
 			logCreateIntentModule(funnelEventNames.CreationIntentSource.TopBar)
@@ -107,7 +107,7 @@ return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePre
 			var36.current = var37
 		end
 	end
-	local var39 = reactModule.useMemo(function() --[[ line: 180 ]]
+	local var39 = reactModule.useMemo(function()
 		-- upvalues: feedKind (ref), immersiveFeedKind (copy), createUserMomentsFeedSourceModule (copy), targetUserId (ref), initialIndex (ref), isStudioModule (copy), getFFlagArgusStudioMockFeedModule (copy), createMockFeedSource (copy), createMomentsFeedSourceModule (copy), current (ref), current_1 (ref)
 		return if feedKind == immersiveFeedKind.User then createUserMomentsFeedSourceModule(targetUserId or 0, { initialIndex = initialIndex }) elseif isStudioModule() and getFFlagArgusStudioMockFeedModule() then createMockFeedSource() else createMomentsFeedSourceModule(current.getMomentsSessionId, { signalTracker = current_1 })
 	end, {
@@ -117,7 +117,7 @@ return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePre
 		current,
 		current_1
 	})
-	local var40 = reactModule.useMemo(function() --[[ line: 194 ]]
+	local var40 = reactModule.useMemo(function()
 		-- upvalues: feedKind (ref), immersiveFeedKind (copy), fFlagEnableArgus (copy), createRecommendationTelemetry (copy), current (ref), current_1 (ref)
 		return if feedKind == immersiveFeedKind.Trending and fFlagEnableArgus then createRecommendationTelemetry({
 			getMomentsSessionId = current.getMomentsSessionId,
@@ -125,7 +125,7 @@ return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePre
 		}) else nil
 	end, { feedKind, current, current_1 })
 	local sessionSource = p1.sessionSource
-	reactModule.useEffect(function() --[[ line: 210 ]]
+	reactModule.useEffect(function()
 		-- upvalues: current (ref), sessionSource (ref), fireAnalyticsEvent (copy), eventNames (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy), fFlagMomentsSessionHeartbeat (copy)
 		current.setSessionSource(sessionSource)
 		fireAnalyticsEvent(eventNames.TapMomentsTab, {
@@ -141,7 +141,7 @@ return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePre
 		if var47 ~= nil then
 			var47.start(sessionSource)
 		end
-		return function() --[[ line: 228 ]]
+		return function()
 			-- upvalues: var47 (ref), current (copy), fireAnalyticsEvent (copy), eventNames (copy), sessionSource (copy), fFlagMomentsRealtimeSessionTelemetry (copy), analytics (copy)
 			if var47 ~= nil then
 				var47.stop()
@@ -168,7 +168,7 @@ return reactModule.memo(function(p1) --[[ line: 116 | named "MomentsImmersivePre
 		active = var41 and (not getCovering and not var34),
 		playbackActive = var41 and (not var42 and (not var43 and (not getCovering and not var34))),
 		initialIndex = initialIndex,
-		header = reactModule.useMemo(function() --[[ line: 262 ]]
+		header = reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), momentsBackHeaderModule (copy), onBack (ref), var33 (ref), var32 (ref)
 			return reactModule.createElement(momentsBackHeaderModule, {
 				onBack = onBack,

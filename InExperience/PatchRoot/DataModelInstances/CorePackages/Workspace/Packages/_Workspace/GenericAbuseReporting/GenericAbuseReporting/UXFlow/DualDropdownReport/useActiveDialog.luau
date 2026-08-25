@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function() --[[ line: 8 | named "useActiveDialog" ]]
+return function()
 	-- upvalues: reactModule (ref)
 	local form, form_1 = reactModule.useState("Form")
 	

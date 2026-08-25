@@ -7,7 +7,7 @@ local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFiel
 local gameDetailsSubpage = discoveryAnalyticsModule.Events.gameDetailsSubpage
 local fFlagLuaAppAddUniverseIdToGameDetailsEvents = require(parent.SharedFlags).FFlagLuaAppAddUniverseIdToGameDetailsEvents
 
-return function(p0, p1, p2) --[[ line: 21 ]]
+return function(p0, p1, p2)
 	-- upvalues: getActionTelemetryFieldValue (ref), sduiErrorType (ref), fFlagLuaAppAddUniverseIdToGameDetailsEvents (ref), gameDetailsSubpage (ref), playersService (ref)
 	local var3 = getActionTelemetryFieldValue(p0, p1, "subpage")
 	local var4 = getActionTelemetryFieldValue(p0, p1, "universeId")

@@ -14,19 +14,19 @@ local requestJoinCommunityModule = require(script.Parent.requestJoinCommunity)
 local fFlagLuaAppDataHydrationOptimisticMutationLayer = require(parent.SharedFlags).FFlagLuaAppDataHydrationOptimisticMutationLayer
 local groups_url = `{url.GROUPS_URL}v1/groups/`
 
-return function() --[[ line: 26 | named "createCommunityUserMembershipStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), signalsModule (ref), requestJoinCommunityModule (ref), logResponseError (ref), groups_url (ref), discoveryEventErrorLogger (ref)
 	local var8 = createDataCacheModule()
 	local var9 = createDataResolverModule({
 		cache = var8,
-		fetchFn = function(_) --[[ line: 30 ]]
+		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end,
 		supportsMutations = fFlagLuaAppDataHydrationOptimisticMutationLayer
 	})
 	
-	local function applyOptimisticMembership(p0) --[[ line: 38 ]]
+	local function applyOptimisticMembership(p0)
 		-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var9 (ref), var8 (ref)
 		local var11, var12 = signalsModule.createSignal(nil)
 		local canJoin = nil
@@ -39,7 +39,7 @@ return function() --[[ line: 26 | named "createCommunityUserMembershipStore" ]]
 			canJoin = var15 and var15.canJoin
 			var8.updateItem(p0, { canJoin = false })
 		end
-		return var11, function(p1) --[[ line: 61 ]]
+		return var11, function(p1)
 			-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var9 (copy), p0 (ref), var8 (copy), canJoin (write), var12 (ref)
 			local var16 = p1 and p1.type == "error"
 			
@@ -61,13 +61,13 @@ return function() --[[ line: 26 | named "createCommunityUserMembershipStore" ]]
 		getMemberships = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var9.getOptimisticCachedItems else var9.getCachedItems,
 		updateMembership = var8.updateItem,
 		updateMemberships = var8.updateItems,
-		joinCommunity = function(p2) --[[ line: 84 ]]
+		joinCommunity = function(p2)
 			-- upvalues: applyOptimisticMembership (ref), requestJoinCommunityModule (copy), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy)
 			local var17, var18 = applyOptimisticMembership(p2)
-			requestJoinCommunityModule(p2):andThen(function() --[[ line: 88 ]]
+			requestJoinCommunityModule(p2):andThen(function()
 				-- upvalues: var18 (ref)
 				var18({ type = "success" })
-			end):catch(function(p3) --[[ line: 91 ]]
+			end):catch(function(p3)
 				-- upvalues: var18 (ref), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy), p2 (ref)
 				local var19 = if type(p3) == "table" and p3.StatusCode then p3.StatusCode else nil
 				local var20 = if type(p3) == "table" and p3.StatusMessage then p3.StatusMessage elseif type(p3) == "string" then p3 else nil

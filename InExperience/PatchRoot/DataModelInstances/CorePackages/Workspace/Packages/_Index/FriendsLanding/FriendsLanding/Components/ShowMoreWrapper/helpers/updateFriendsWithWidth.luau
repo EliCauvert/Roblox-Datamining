@@ -9,9 +9,9 @@ local var2 = t.interface({
 })
 local var3 = t.interface({ filterFriendCounts = t.table })
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: var2 (ref), var3 (ref), friendsPerLoadGroupModule (ref), dictionary (ref)
-	return function(p1, p2) --[[ line: 21 ]]
+	return function(p1, p2)
 		-- upvalues: var2 (copy), var3 (copy), friendsPerLoadGroupModule (copy), p0 (ref), dictionary (copy)
 		assert(var2(p2))
 		assert(var3(p1))
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 20 ]]
 		
 		return {
 			width = p0,
-			filterFriendCounts = dictionary.join(p1.filterFriendCounts, dictionary.map(p1.filterFriendCounts, function(p3) --[[ line: 31 ]]
+			filterFriendCounts = dictionary.join(p1.filterFriendCounts, dictionary.map(p1.filterFriendCounts, function(p3)
 				-- upvalues: var4 (ref)
 				return math.max(var4, p3)
 			end))

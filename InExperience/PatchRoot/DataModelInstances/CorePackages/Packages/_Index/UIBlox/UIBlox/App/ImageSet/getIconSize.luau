@@ -11,7 +11,7 @@ local t = {
 	[iconSizeModule.XXLarge] = 192
 }
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: iconSizeModule (ref), UIBloxConfigModule (ref), t (ref)
 	assert(iconSizeModule.isEnumValue(p0))
 	

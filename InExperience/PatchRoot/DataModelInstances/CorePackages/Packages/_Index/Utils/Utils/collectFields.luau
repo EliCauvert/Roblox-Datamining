@@ -17,7 +17,7 @@ local shouldIncludeNode = nil
 local getFieldEntryKey = nil
 local doesFragmentConditionMatch = nil
 
-local function collectFields(p0, p1, p2, p3, p4, p5, p6) --[[ line: 52 ]]
+local function collectFields(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: kind (ref), boolean (ref), shouldIncludeNode (write), getFieldEntryKey (write), doesFragmentConditionMatch (write), collectFields (ref)
 	for i, v in p4.selections do
 		local kind_1 = v.kind
@@ -55,7 +55,7 @@ end
 
 t.collectFields = collectFields
 
-shouldIncludeNode = function(p7, p8) --[[ line: 164 | named "shouldIncludeNode" ]]
+shouldIncludeNode = function(p7, p8)
 	-- upvalues: getDirectiveValues (ref), graphQLSkipDirective (ref), graphQLIncludeDirective (ref)
 	local var10 = getDirectiveValues(graphQLSkipDirective, p8, p7)
 	
@@ -67,7 +67,7 @@ shouldIncludeNode = function(p7, p8) --[[ line: 164 | named "shouldIncludeNode" 
 	return (if typeof(var11) == "table" then var11["if"] else nil) ~= false
 end
 
-doesFragmentConditionMatch = function(p9, p10, p11) --[[ line: 184 | named "doesFragmentConditionMatch" ]]
+doesFragmentConditionMatch = function(p9, p10, p11)
 	-- upvalues: boolean (ref), typeFromAST (ref), isAbstractType (ref), array (ref)
 	local typeCondition = p10.typeCondition
 	
@@ -79,11 +79,11 @@ doesFragmentConditionMatch = function(p9, p10, p11) --[[ line: 184 | named "does
 	return var12 == p11 or (if boolean.toJSBoolean(isAbstractType(var12)) then array.includes(p9:getPossibleTypes(var12), p11) else false)
 end
 
-getFieldEntryKey = function(p12) --[[ line: 218 | named "getFieldEntryKey" ]]
+getFieldEntryKey = function(p12)
 	return if p12.alias then p12.alias.value else p12.name.value
 end
 
-t.collectSubFields = memoize5(function(p13, p14, p15, p16, p17) --[[ line: 226 ]]
+t.collectSubFields = memoize5(function(p13, p14, p15, p16, p17)
 	-- upvalues: map (ref), set (ref), collectFields (ref)
 	local var13 = map.new()
 	local var14 = set.new()

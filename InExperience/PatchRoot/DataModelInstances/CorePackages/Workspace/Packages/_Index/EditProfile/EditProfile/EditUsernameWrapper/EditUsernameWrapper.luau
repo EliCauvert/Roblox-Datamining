@@ -13,7 +13,7 @@ local analyticsModule = require(editProfile.Analytics)
 local eventNames = analyticsModule.EventNames
 local useAnalytics = analyticsModule.useAnalytics
 
-return roactNavigationModule.withNavigation(function(p0) --[[ line: 29 | named "EditUsernameWrapper" ]]
+return roactNavigationModule.withNavigation(function(p0)
 	-- upvalues: useLocalUserId (ref), userProfilesModule (ref), useLocalization (ref), textKeysModule (ref), useAnalytics (ref), javascriptHybrid (ref), eventNames (ref), reactModule (ref), urlBuilder (ref), httpService (ref)
 	local var7 = userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { useLocalUserId() },
@@ -22,22 +22,22 @@ return roactNavigationModule.withNavigation(function(p0) --[[ line: 29 | named "
 	local var8 = useLocalization({ updated = textKeysModule.UsernameUpdated })
 	local var9 = useAnalytics()
 	
-	local function _(p1) --[[ line: 41 | named "getFeatureStringFromHybridEvent" ]]
+	local function _(p1)
 		-- upvalues: javascriptHybrid (copy)
 		return if p1.moduleID == javascriptHybrid.Module.Navigation and p1.functionName == javascriptHybrid.Function.navigateToFeature and (p1.params and p1.params.params) then p1.params.params.feature else nil
 	end
 	
-	local _ = function(p2) --[[ line: 66 | named "isCloseEditUsername" ]]
+	local _ = function(p2)
 		-- upvalues: javascriptHybrid (copy)
 		return (if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil) == javascriptHybrid.Feature.CloseUpdateUsernameModal
 	end
 	
-	local _ = function(p3) --[[ line: 71 | named "isCompletedEditUsername" ]]
+	local _ = function(p3)
 		-- upvalues: javascriptHybrid (copy)
 		return (if p3.moduleID == javascriptHybrid.Module.Navigation and p3.functionName == javascriptHybrid.Function.navigateToFeature and (p3.params and p3.params.params) then p3.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess
 	end
 	
-	local _ = function() --[[ line: 76 | named "updateUsername" ]]
+	local _ = function()
 		-- upvalues: var7 (ref), var9 (ref), eventNames (copy)
 		var7.refetch()
 		var9.fireAnalyticsEvent(eventNames.UsernameSaved)
@@ -49,7 +49,7 @@ return roactNavigationModule.withNavigation(function(p0) --[[ line: 29 | named "
 		modal = false,
 		isGenericWebview = true,
 		url = urlBuilder.static.settings.account() .. "?changeusername",
-		javaScriptCallback = function(p4) --[[ line: 88 ]]
+		javaScriptCallback = function(p4)
 			-- upvalues: httpService (copy), javascriptHybrid (copy), var7 (ref), var9 (ref), eventNames (copy), p0 (ref), var8 (ref)
 			local var10 = httpService:JSONDecode(p4)
 			

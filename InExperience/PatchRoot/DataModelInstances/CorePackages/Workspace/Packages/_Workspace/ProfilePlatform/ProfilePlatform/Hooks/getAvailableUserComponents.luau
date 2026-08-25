@@ -24,7 +24,7 @@ local t = {
 	[socialCommonModule.Enums.ContextualInfoTypes.Frequents] = enumsModule.ContextualTypes.PlayedTogether
 }
 
-return function(p0, p1) --[[ line: 34 ]]
+return function(p0, p1)
 	-- upvalues: fFlagProfilePlatformEnableVRModule (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), buildUserActionsComponentModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), enumsModule (ref), cryoModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), socialCommonModule (ref), fFlagProfilePlatformEnableSendPlayedTogetherContextToProfilePlatformServiceModule (ref), t (ref), fFlagProfilePlatformEnableFavoriteExperiencesModule (ref), fFlagProfilePlatformEnableInventory (ref), fFlagProfilePlatformEnableStore (ref), fFlagExperiencesOnProfile (ref), fFlagEnableProfileCompletion (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), fFlagProfilePlatformEnableMomentsModule (ref)
 	local list
 	local _ = nil
@@ -42,7 +42,7 @@ return function(p0, p1) --[[ line: 34 ]]
 			if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then buildUserActionsComponentModule(p0, p1) else {
 				component = enumsModule.Components.Actions,
 				context = if p0 == socialCommonModule.Enums.ContextualInfoTypes.OffNetworkFriendRequest then enumsModule.ContextualTypes.OffNetworkFriendRequest else nil,
-				supportedActions = cryoModule.List.filter(if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else cryoModule.Dictionary.values(enumsModule.ProfileActions), function(p2) --[[ line: 55 ]]
+				supportedActions = cryoModule.List.filter(if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.User) else cryoModule.Dictionary.values(enumsModule.ProfileActions), function(p2)
 					-- upvalues: enumsModule (copy), p1 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
 					return if p2 == enumsModule.ProfileActions.QrCode then p1 and p1.isProfileQrCodeEnabled elseif p2 == enumsModule.ProfileActions.EditProfile then p1 and p1.areWebViewsSupported elseif fFlagProfilePlatformEnableCurrencyTransfer and p2 == enumsModule.ProfileActions.CurrencyTransfer then p1 and p1.canRenderTransferInProfile elseif fFlagProfilePlatformEnableTradeItemsModule and p2 == enumsModule.ProfileActions.TradeItems then p1 and p1.areWebViewsSupported elseif p2 == enumsModule.ProfileActions.Chat then p1 and p1.canSeeChatTab ~= false else true
 				end),

@@ -19,7 +19,7 @@ local expChatShowPresetTooltipToNonAgeChecked2 = game:DefineFastFlag("ExpChatSho
 local expChatFixTooltipBadgeTransientOpen = game:DefineFastFlag("ExpChatFixTooltipBadgeTransientOpen", false)
 local _ = require(corePackagesService.Workspace.Packages.Chrome)
 
-return function(p0) --[[ line: 47 | named "ChatNotificationBadge" ]]
+return function(p0)
 	-- upvalues: textChatService (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStore (ref), signalsReactModule (ref), fFlagExpChatPresetChatEnabled (ref), reactModule (ref), expChatShowPresetTooltipToNonAgeChecked2 (ref), getGlobalChatTooltipStore (ref), getChatStatusStore (ref), isUserChatEnabled (ref), getFFlagTextChatEnableUniverseChatTabs (ref), expChatFixTooltipBadgeTransientOpen (ref), getTransparencyStore (ref), serviceModule (ref), expChatPresetChatBadgeFTUXExperimentation (ref)
 	local var14, var15, var22
 	local iconHostProps = p0.iconHostProps
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 47 | named "ChatNotificationBadge" ]]
 		local var12_1 = isChat and (signalsReactModule.useSignalState(var14.getIsScreenWideEnough) and var12)
 		local var26 = var23 == "GlobalChatTooltip" and var12_1
 		var13 = fFlagExpChatPresetChatEnabled and (var23 == "PresetChatTooltip" and var12_1)
-		reactModule.useEffect(function() --[[ line: 75 ]]
+		reactModule.useEffect(function()
 			-- upvalues: isChat (ref), expChatShowPresetTooltipToNonAgeChecked2 (copy), var13 (write), var24 (ref), var15 (write), var14 (write), var26 (ref), fFlagExpChatPresetChatEnabled (copy)
 			if not isChat then return end
 			local _ = false
@@ -61,27 +61,27 @@ return function(p0) --[[ line: 47 | named "ChatNotificationBadge" ]]
 		local var18 = signalsReactModule.useSignalState(var14.getIsGlobalChatTooltipEligible)
 		local var19 = signalsReactModule.useSignalState(var14.getIsScreenWideEnough)
 		local var20, var21 = reactModule.useState(false)
-		reactModule.useEffect(function() --[[ line: 117 ]]
+		reactModule.useEffect(function()
 			-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), textChatService (copy), var21 (ref)
 			if not getFFlagTextChatEnableUniverseChatTabs() then return end
 			if textChatService:HasAllocatedUniverseChatContext("global") then
 				var21(true)
 			end
-			local universeChatChannelAllocatedConnection = textChatService.UniverseChatChannelAllocated:Connect(function(p1) --[[ line: 126 ]]
+			local universeChatChannelAllocatedConnection = textChatService.UniverseChatChannelAllocated:Connect(function(p1)
 				-- upvalues: var21 (copy)
 				if p1 == "global" then
 					var21(true)
 				end
 			end)
 			
-			return function() --[[ line: 132 ]]
+			return function()
 				-- upvalues: universeChatChannelAllocatedConnection (ref)
 				universeChatChannelAllocatedConnection:Disconnect()
 			end
 		end, {})
 		var22 = isChat and (var16 and (var18 and (var20 and (var12 and (var19 and not var17)))))
 		local setShouldShowGlobalChatTooltip = var14.setShouldShowGlobalChatTooltip
-		reactModule.useEffect(function() --[[ line: 146 ]]
+		reactModule.useEffect(function()
 			-- upvalues: isChat (ref), setShouldShowGlobalChatTooltip (ref), var22 (write), var15 (write)
 			if isChat then
 				setShouldShowGlobalChatTooltip(var22 and var15)
@@ -92,27 +92,27 @@ return function(p0) --[[ line: 47 | named "ChatNotificationBadge" ]]
 	
 	if expChatFixTooltipBadgeTransientOpen then
 		local var29 = signalsReactModule.useSignalState(getTransparencyStore(false).getIsTextBoxFocused)
-		reactModule.useEffect(function() --[[ line: 157 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var22 (write), var29 (ref), var28 (ref), serviceModule (copy), var15 (write)
 			if var22 and var29 then
 				var28(true)
 			end
 			if var22 then
-				local var34 = serviceModule:onIntegrationActivated():connect(function(p2) --[[ line: 166 ]]
+				local var34 = serviceModule:onIntegrationActivated():connect(function(p2)
 					-- upvalues: var15 (copy), var28 (copy)
 					if p2 == "chat" and not var15 then
 						var28(true)
 					end
 				end)
 				
-				return function() --[[ line: 171 ]]
+				return function()
 					-- upvalues: var34 (ref)
 					var34:disconnect()
 				end
 			end
 		end, { var22, var29, var15 })
 	else
-		reactModule.useEffect(function() --[[ line: 176 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var22 (write), var15 (write), var28 (ref)
 			if var22 and var15 then
 				var28(true)
@@ -122,7 +122,7 @@ return function(p0) --[[ line: 47 | named "ChatNotificationBadge" ]]
 	local var30 = var22 and not var27
 	
 	if expChatFixTooltipBadgeTransientOpen then
-		reactModule.useEffect(function() --[[ line: 186 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var30 (ref), var13 (write), expChatPresetChatBadgeFTUXExperimentation (copy)
 			if var30 and var13 and expChatPresetChatBadgeFTUXExperimentation.isExperimentEnabled then
 				expChatPresetChatBadgeFTUXExperimentation.logExposure()

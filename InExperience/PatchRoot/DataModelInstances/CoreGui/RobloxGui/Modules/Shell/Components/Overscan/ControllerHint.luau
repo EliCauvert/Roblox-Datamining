@@ -3,7 +3,7 @@ local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local globalSettingsModule = require(modules.Shell.GlobalSettings)
 local localizedStringsModule = require(modules.Shell.LocalizedStrings)
 
-return function(_) --[[ line: 10 ]]
+return function(_)
 	-- upvalues: roactModule (ref), globalSettingsModule (ref), localizedStringsModule (ref)
 	return roactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,

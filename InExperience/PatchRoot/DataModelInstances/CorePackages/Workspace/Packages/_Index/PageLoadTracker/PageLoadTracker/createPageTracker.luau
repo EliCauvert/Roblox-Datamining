@@ -6,11 +6,11 @@ local sharedFlagsModule = require(script.Parent.Parent.SharedFlags)
 local isElementContentfulModule = require(script.Parent.isElementContentful)
 local IDLE_TIMEOUT_SECONDS = pageLoadConfigModule.IDLE_TIMEOUT_SECONDS
 
-local function _(p0) --[[ line: 30 | named "getGuiObjectArea" ]]
+local function _(p0)
 	return p0.AbsoluteSize.X * p0.AbsoluteSize.Y
 end
 
-return function() --[[ line: 34 | named "createPageTracker" ]]
+return function()
 	-- upvalues: signal (ref), sharedFlagsModule (ref), IDLE_TIMEOUT_SECONDS (ref), recordMilestoneModule (ref), isElementContentfulModule (ref)
 	return {
 		pageName = "",
@@ -21,7 +21,7 @@ return function() --[[ line: 34 | named "createPageTracker" ]]
 		numLoads = 0,
 		onCompleteSignal = signal.new(),
 		sentMilestones = {},
-		start = function(p1, p2) --[[ line: 46 ]]
+		start = function(p1, p2)
 			-- upvalues: sharedFlagsModule (copy), IDLE_TIMEOUT_SECONDS (copy)
 			if p1.isActive then return end
 			p1.pageName = p2 or "UnknownPage"
@@ -38,12 +38,12 @@ return function() --[[ line: 34 | named "createPageTracker" ]]
 					p1.LCPCandidate = { guiArea = 0, timestamp = 0 }
 				end
 			end
-			p1.timeoutThread = task.delay(IDLE_TIMEOUT_SECONDS, function() --[[ line: 71 ]]
+			p1.timeoutThread = task.delay(IDLE_TIMEOUT_SECONDS, function()
 				-- upvalues: p1 (ref)
 				p1:complete()
 			end)
 		end,
-		logMilestone = function(p3) --[[ line: 76 ]]
+		logMilestone = function(p3)
 			-- upvalues: IDLE_TIMEOUT_SECONDS (copy)
 			if not p3.isActive then return end
 			p3.lastActivityTime = os.clock()
@@ -51,12 +51,12 @@ return function() --[[ line: 34 | named "createPageTracker" ]]
 			if p3.timeoutThread then
 				task.cancel(p3.timeoutThread)
 			end
-			p3.timeoutThread = task.delay(IDLE_TIMEOUT_SECONDS, function() --[[ line: 89 ]]
+			p3.timeoutThread = task.delay(IDLE_TIMEOUT_SECONDS, function()
 				-- upvalues: p3 (ref)
 				p3:complete()
 			end)
 		end,
-		sendMilestone = function(p4, p5, p6) --[[ line: 94 ]]
+		sendMilestone = function(p4, p5, p6)
 			-- upvalues: sharedFlagsModule (copy), recordMilestoneModule (copy)
 			local var4 = if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking then ((p6 or os.clock()) - p4.startTime) * 1000 else (os.clock() - p4.startTime) * 1000
 			
@@ -71,7 +71,7 @@ return function() --[[ line: 34 | named "createPageTracker" ]]
 				first_load = p4.numLoads == 1
 			})
 		end,
-		onComponentAdded = function(p7, p8) --[[ line: 116 ]]
+		onComponentAdded = function(p7, p8)
 			-- upvalues: sharedFlagsModule (copy), isElementContentfulModule (copy)
 			if not p7.isActive then return end
 			if sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking and isElementContentfulModule(p8) then
@@ -84,7 +84,7 @@ return function() --[[ line: 34 | named "createPageTracker" ]]
 			end
 			p7:logMilestone()
 		end,
-		stop = function(p9) --[[ line: 135 ]]
+		stop = function(p9)
 			-- upvalues: sharedFlagsModule (copy)
 			if not p9.isActive then return end
 			if p9.timeoutThread then
@@ -97,7 +97,7 @@ return function() --[[ line: 34 | named "createPageTracker" ]]
 				p9.onCompleteSignal:fire()
 			end
 		end,
-		complete = function(p10) --[[ line: 151 ]]
+		complete = function(p10)
 			-- upvalues: sharedFlagsModule (copy), recordMilestoneModule (copy)
 			if not p10.isActive then return end
 			if not sharedFlagsModule.FFlagLuaAppEnableContentfulPaintTracking then

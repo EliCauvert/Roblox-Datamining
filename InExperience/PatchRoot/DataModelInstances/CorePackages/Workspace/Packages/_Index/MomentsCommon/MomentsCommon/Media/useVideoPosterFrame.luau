@@ -2,10 +2,10 @@
 local videoService = game:GetService("VideoService")
 local full = Enum.VideoSampleSize.Full
 
-return function(p0) --[[ line: 18 | named "useVideoPosterFrame" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), videoService (ref), full (ref)
 	local var2, var3 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 21 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), p0 (ref), videoService (copy), full (copy)
 		var3(nil)
 		
@@ -13,10 +13,10 @@ return function(p0) --[[ line: 18 | named "useVideoPosterFrame" ]]
 			return
 		end
 		local var4 = false
-		task.spawn(function() --[[ line: 28 ]]
+		task.spawn(function()
 			-- upvalues: videoService (copy), p0 (copy), full (copy), var4 (write), var3 (copy)
 			local var5 = nil
-			local ok, status = pcall(function() --[[ line: 30 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var5 (write), videoService (copy), p0 (copy), full (copy)
 				var5 = videoService:CreateVideoSamplerAsync(p0, { Size = full })
 				
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 18 | named "useVideoPosterFrame" ]]
 			end)
 			
 			if var5 ~= nil then
-				pcall(function() --[[ line: 37 ]]
+				pcall(function()
 					-- upvalues: var5 (write)
 					var5:Destroy()
 				end)
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 18 | named "useVideoPosterFrame" ]]
 			end
 		end)
 		
-		return function() --[[ line: 50 ]]
+		return function()
 			-- upvalues: var4 (write)
 			var4 = true
 		end

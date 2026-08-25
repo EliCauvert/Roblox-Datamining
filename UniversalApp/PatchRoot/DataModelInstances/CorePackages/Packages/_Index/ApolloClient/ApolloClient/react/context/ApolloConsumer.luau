@@ -4,9 +4,9 @@ local getApolloContext = require(script.Parent.ApolloContext).getApolloContext
 local invariant = require(parent.jsutils.invariant).invariant
 local _ = require(parent.core.ApolloClient)
 
-function ApolloConsumer(p0) --[[ line: 21 ]]
+function ApolloConsumer(p0)
 	-- upvalues: getApolloContext (ref), reactModule (ref), invariant (ref)
-	return reactModule.createElement(getApolloContext().Consumer, nil, function(p1) --[[ line: 23 ]]
+	return reactModule.createElement(getApolloContext().Consumer, nil, function(p1)
 		-- upvalues: invariant (copy), p0 (ref)
 		invariant(p1 and p1.client, "Could not find \"client\" in the context of ApolloConsumer. Wrap the root component in an <ApolloProvider>.")
 		

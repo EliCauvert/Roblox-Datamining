@@ -9,18 +9,18 @@ local socialChipCountsRowModule = require(corePackagesService.Workspace.Packages
 local useAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).useAppPolicy
 local fFlagFriendRequestNicknames = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagFriendRequestNicknames
 
-local _ = function(p0, p1, p2) --[[ line: 20 ]]
+local _ = function(p0, p1, p2)
 	local primaryName = p0.names.primaryName or ""
 	
 	return if p1.profileUserNickname and p2 and p1.profileUserNickname ~= "" then p1.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
 end
 
-return reactModule.memo(function(p3) --[[ line: 42 | named "ProfileHeader" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: reactModule (ref), profileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagFriendRequestNicknames (ref), useAppPolicy (ref), view (ref), avatarHeadshotComponentModule (ref), socialChipCountsRowModule (ref)
 	local var8 = reactModule.useContext(profileWrapperContextModule)
 	local var9 = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader)
 	local var10 = var9.counts ~= nil
-	local var11 = if fFlagFriendRequestNicknames then useAppPolicy(function(p4) --[[ line: 49 ]]
+	local var11 = if fFlagFriendRequestNicknames then useAppPolicy(function(p4)
 		return p4.getFriendRequestNicknamesEnabled()
 	end) else false
 	local createElement = reactModule.createElement

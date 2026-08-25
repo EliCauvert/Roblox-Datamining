@@ -5,7 +5,7 @@ local inventoryFiltersModule = require(script.Parent.Parent.Enums.InventoryFilte
 local inventorySortsModule = require(script.Parent.Parent.Enums.InventorySorts)
 local fFlagAXInventoryDurablesExpiredFilter = avatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
 
-return function() --[[ line: 36 | named "createSortAndFiltersStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), fFlagAXInventoryDurablesExpiredFilter (ref), inventoryFiltersModule (ref), inventorySortsModule (ref)
 	local var4, var5 = signalsModule.createSignal(if fFlagAXInventoryDurablesExpiredFilter then {
 		filter = inventoryFiltersModule.Active,
@@ -14,7 +14,7 @@ return function() --[[ line: 36 | named "createSortAndFiltersStore" ]]
 	
 	return {
 		getSortAndFilters = var4,
-		getFiltersCount = signalsModule.createComputed(function(p0) --[[ line: 42 ]]
+		getFiltersCount = signalsModule.createComputed(function(p0)
 			-- upvalues: fFlagAXInventoryDurablesExpiredFilter (copy), var4 (ref), inventorySortsModule (copy), inventoryFiltersModule (copy)
 			if fFlagAXInventoryDurablesExpiredFilter then
 				local var6 = var4(p0)
@@ -31,7 +31,7 @@ return function() --[[ line: 36 | named "createSortAndFiltersStore" ]]
 				return if var4(p0).sort == inventorySortsModule.Newest then 0 else 1
 			end
 		end),
-		applySortAndFilters = function(p1) --[[ line: 58 ]]
+		applySortAndFilters = function(p1)
 			-- upvalues: var5 (ref)
 			var5(p1)
 		end

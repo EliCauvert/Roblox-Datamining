@@ -19,7 +19,7 @@ local t = {}
 local inExperienceInterventionDisplayOrder = game:DefineFastInt("InExperienceInterventionDisplayOrder", 6)
 
 if game:DefineFastFlag("FFlagTimeoutRemoteEvent", false) then
-	robloxReplicatedStorageService:WaitForChild("TimeoutChatAttempt", 1e999).OnClientEvent:Connect(function(p0, p1) --[[ line: 31 ]]
+	robloxReplicatedStorageService:WaitForChild("TimeoutChatAttempt", 1e999).OnClientEvent:Connect(function(p0, p1)
 		-- upvalues: notificationModalsManagerModule (ref), images (ref)
 		notificationModalsManagerModule.SetUIBloxToast({
 			toastTitle = "Test Chat Timeout RemoteEvent",
@@ -30,7 +30,7 @@ if game:DefineFastFlag("FFlagTimeoutRemoteEvent", false) then
 		})
 	end)
 end
-function t.new() --[[ line: 42 ]]
+function t.new()
 	-- upvalues: t (ref), roactModule (ref), inExperienceInterventionDisplayOrder (ref), layerCollectorProvider (ref), localizationProvider (ref), localization (ref), localizationService (ref), interventionPlacement (ref), constants (ref), foundationProvider (ref), appStyleProvider (ref), inExperienceInterventionContainerModule (ref), coreGuiService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.root = roactModule.createElement("ScreenGui", { DisplayOrder = inExperienceInterventionDisplayOrder }, {

@@ -7,7 +7,7 @@ local useInputType = require(parent.RoactUtils).Hooks.useInputType
 local useIsTvRemoteDevice = require(parent.RoactUtils).Hooks.useIsTvRemoteDevice
 local logInputTypeChangedTvRemote1 = game:DefineFastFlag("LogInputTypeChangedTvRemote1", false)
 
-local function getConnectedGamepadTypes(p0) --[[ line: 11 ]]
+local function getConnectedGamepadTypes(p0)
 	-- upvalues: userInputService (ref)
 	if p0 == nil then
 		return nil
@@ -24,7 +24,7 @@ local function getConnectedGamepadTypes(p0) --[[ line: 11 ]]
 	return t
 end
 
-local function anyFullGamepadConnected(p1) --[[ line: 27 ]]
+local function anyFullGamepadConnected(p1)
 	-- upvalues: userInputService (ref)
 	if p1 == nil then
 		return nil
@@ -37,7 +37,7 @@ local function anyFullGamepadConnected(p1) --[[ line: 27 ]]
 	return false
 end
 
-return function(p2, p3) --[[ line: 40 | named "useLogInputTypeChanged" ]]
+return function(p2, p3)
 	-- upvalues: useInputType (ref), logInputTypeChangedTvRemote1 (ref), useIsTvRemoteDevice (ref), userInputService (ref), anyFullGamepadConnected (ref), getConnectedGamepadTypes (ref), reactModule (ref), logInputTypeChangedModule (ref)
 	local var8 = useInputType()
 	local var9 = if logInputTypeChangedTvRemote1 then useIsTvRemoteDevice() else nil
@@ -45,7 +45,7 @@ return function(p2, p3) --[[ line: 40 | named "useLogInputTypeChanged" ]]
 	local var11 = if logInputTypeChangedTvRemote1 then anyFullGamepadConnected(var10) else nil
 	local var12 = if logInputTypeChangedTvRemote1 then getConnectedGamepadTypes(var10) else nil
 	local var13 = if var12 then table.concat(var12, ",") else nil
-	reactModule.useEffect(function() --[[ line: 57 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), logInputTypeChangedModule (copy), p2 (ref), var8 (ref), var11 (ref), var13 (ref), var9 (ref), p3 (ref)
 		logInputTypeChangedModule(p2, "inputTypeChanged", {
 			inputType = var8,

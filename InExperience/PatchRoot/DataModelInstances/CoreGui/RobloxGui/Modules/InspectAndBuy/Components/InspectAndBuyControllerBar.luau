@@ -22,7 +22,7 @@ inspectAndBuyControllerBar.validateProps = tModule.strictInterface({
 	isFavorited = tModule.boolean
 })
 
-function inspectAndBuyControllerBar.render(p0) --[[ line: 31 ]]
+function inspectAndBuyControllerBar.render(p0)
 	-- upvalues: robloxTranslatorModule (ref), tryOn (ref), favorite (ref), roactModule (ref), coreGuiService (ref), controllerBar (ref)
 	local list = {
 		{

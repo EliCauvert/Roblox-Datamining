@@ -32,7 +32,7 @@ local contactDataModule = require(script.Parent.contact_data)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 1037 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		badge = if p0 == nil or p0.badge == nil then {} else p0.badge,
@@ -66,7 +66,7 @@ function t_1.new(p0) --[[ line: 1037 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 1087 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var61 = 0
@@ -497,7 +497,7 @@ function t_1:encode() --[[ line: 1087 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 1491 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref), badgeDataModule (ref), universeDataModule (ref), creatorDataModule (ref), eventDataModule (ref), songDataModule (ref), gamePassDataModule (ref), mediaAssetDataModule (ref), socialLinkDataModule (ref), gameDeveloperProductDataModule (ref), gameSubscriptionDataModule (ref), marketplaceCatalogCategoryDataModule (ref), marketplaceAssetDataModule (ref), marketplaceBundleDataModule (ref), marketplaceLookDataModule (ref), catalogSortDataModule (ref), ageRecommendationDataModule (ref), universeUserFollowDataModule (ref), universeUserVoteDataModule (ref), userProfileDataModule (ref), universeUserFavoriteDataModule (ref), playabilityDataModule (ref), universeUserFollowLimitDataModule (ref), universeUserVoteFeedbackMetadataDataModule (ref), momentDataModule (ref), communityDataModule (ref), communityUserMembershipDataModule (ref), userRecommendationDataModule (ref), contactDataModule (ref)
 	local var287 = t_1.new()
 	local var288 = 0
@@ -707,7 +707,7 @@ function t_1.decode(p1) --[[ line: 1491 ]]
 	return var287
 end
 
-function t_1:jsonEncode() --[[ line: 1880 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.badge ~= nil and next(self.badge) ~= nil then
@@ -937,7 +937,7 @@ function t_1:jsonEncode() --[[ line: 1880 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 2113 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), badgeDataModule (ref), universeDataModule (ref), creatorDataModule (ref), eventDataModule (ref), songDataModule (ref), gamePassDataModule (ref), mediaAssetDataModule (ref), socialLinkDataModule (ref), gameDeveloperProductDataModule (ref), gameSubscriptionDataModule (ref), marketplaceCatalogCategoryDataModule (ref), marketplaceAssetDataModule (ref), marketplaceBundleDataModule (ref), marketplaceLookDataModule (ref), catalogSortDataModule (ref), ageRecommendationDataModule (ref), universeUserFollowDataModule (ref), universeUserVoteDataModule (ref), userProfileDataModule (ref), universeUserFavoriteDataModule (ref), playabilityDataModule (ref), universeUserFollowLimitDataModule (ref), universeUserVoteFeedbackMetadataDataModule (ref), momentDataModule (ref), communityDataModule (ref), communityUserMembershipDataModule (ref), userRecommendationDataModule (ref), contactDataModule (ref)
 	local var387 = t_1.new()
 	
@@ -1329,7 +1329,7 @@ typeRegistryModule.default:register(t.HydrationContent)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 2681 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		key = if p2 == nil or p2.key == nil then "" else p2.key,
@@ -1337,7 +1337,7 @@ function t_2.new(p2) --[[ line: 2681 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 2690 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var436 = 0
@@ -1361,7 +1361,7 @@ function t_2:encode() --[[ line: 2690 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 2710 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), badgeDataModule (ref)
 	local var443 = t_2.new()
 	local var444 = 0
@@ -1413,7 +1413,7 @@ function t_2.decode(p3) --[[ line: 2710 ]]
 	return var443
 end
 
-function t_2:jsonEncode() --[[ line: 2758 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1425,7 +1425,7 @@ function t_2:jsonEncode() --[[ line: 2758 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 2772 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), badgeDataModule (ref)
 	local var463 = t_2.new()
 	
@@ -1447,7 +1447,7 @@ typeRegistryModule.default:register(t.HydrationContent_BadgeEntry)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 2800 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		key = if p4 == nil or p4.key == nil then "" else p4.key,
@@ -1455,7 +1455,7 @@ function t_3.new(p4) --[[ line: 2800 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 2809 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var465 = 0
@@ -1479,7 +1479,7 @@ function t_3:encode() --[[ line: 2809 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 2829 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), universeDataModule (ref)
 	local var472 = t_3.new()
 	local var473 = 0
@@ -1531,7 +1531,7 @@ function t_3.decode(p5) --[[ line: 2829 ]]
 	return var472
 end
 
-function t_3:jsonEncode() --[[ line: 2877 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1543,7 +1543,7 @@ function t_3:jsonEncode() --[[ line: 2877 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 2891 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), universeDataModule (ref)
 	local var492 = t_3.new()
 	
@@ -1565,7 +1565,7 @@ typeRegistryModule.default:register(t.HydrationContent_UniverseEntry)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 2919 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		key = if p6 == nil or p6.key == nil then "" else p6.key,
@@ -1573,7 +1573,7 @@ function t_4.new(p6) --[[ line: 2919 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 2928 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var494 = 0
@@ -1597,7 +1597,7 @@ function t_4:encode() --[[ line: 2928 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 2948 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), creatorDataModule (ref)
 	local var501 = t_4.new()
 	local var502 = 0
@@ -1649,7 +1649,7 @@ function t_4.decode(p7) --[[ line: 2948 ]]
 	return var501
 end
 
-function t_4:jsonEncode() --[[ line: 2996 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1661,7 +1661,7 @@ function t_4:jsonEncode() --[[ line: 2996 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 3010 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), creatorDataModule (ref)
 	local var521 = t_4.new()
 	
@@ -1683,7 +1683,7 @@ typeRegistryModule.default:register(t.HydrationContent_CreatorEntry)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 3038 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		key = if p8 == nil or p8.key == nil then "" else p8.key,
@@ -1691,7 +1691,7 @@ function t_5.new(p8) --[[ line: 3038 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 3047 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var523 = 0
@@ -1715,7 +1715,7 @@ function t_5:encode() --[[ line: 3047 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 3067 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), eventDataModule (ref)
 	local var530 = t_5.new()
 	local var531 = 0
@@ -1767,7 +1767,7 @@ function t_5.decode(p9) --[[ line: 3067 ]]
 	return var530
 end
 
-function t_5:jsonEncode() --[[ line: 3115 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1779,7 +1779,7 @@ function t_5:jsonEncode() --[[ line: 3115 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 3129 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), eventDataModule (ref)
 	local var550 = t_5.new()
 	
@@ -1801,7 +1801,7 @@ typeRegistryModule.default:register(t.HydrationContent_EventEntry)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 3157 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		key = if p10 == nil or p10.key == nil then "" else p10.key,
@@ -1809,7 +1809,7 @@ function t_6.new(p10) --[[ line: 3157 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 3166 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var552 = 0
@@ -1833,7 +1833,7 @@ function t_6:encode() --[[ line: 3166 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 3186 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), songDataModule (ref)
 	local var559 = t_6.new()
 	local var560 = 0
@@ -1885,7 +1885,7 @@ function t_6.decode(p11) --[[ line: 3186 ]]
 	return var559
 end
 
-function t_6:jsonEncode() --[[ line: 3234 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1897,7 +1897,7 @@ function t_6:jsonEncode() --[[ line: 3234 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 3248 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), songDataModule (ref)
 	local var579 = t_6.new()
 	
@@ -1919,7 +1919,7 @@ typeRegistryModule.default:register(t.HydrationContent_SongEntry)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 3276 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		key = if p12 == nil or p12.key == nil then "" else p12.key,
@@ -1927,7 +1927,7 @@ function t_7.new(p12) --[[ line: 3276 ]]
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 3285 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var581 = 0
@@ -1951,7 +1951,7 @@ function t_7:encode() --[[ line: 3285 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 3305 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref), gamePassDataModule (ref)
 	local var588 = t_7.new()
 	local var589 = 0
@@ -2003,7 +2003,7 @@ function t_7.decode(p13) --[[ line: 3305 ]]
 	return var588
 end
 
-function t_7:jsonEncode() --[[ line: 3353 ]]
+function t_7:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2015,7 +2015,7 @@ function t_7:jsonEncode() --[[ line: 3353 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 3367 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref), gamePassDataModule (ref)
 	local var608 = t_7.new()
 	
@@ -2037,7 +2037,7 @@ typeRegistryModule.default:register(t.HydrationContent_GamePassEntry)
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 3395 ]]
+function t_8.new(p14)
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		key = if p14 == nil or p14.key == nil then "" else p14.key,
@@ -2045,7 +2045,7 @@ function t_8.new(p14) --[[ line: 3395 ]]
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 3404 ]]
+function t_8:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var610 = 0
@@ -2069,7 +2069,7 @@ function t_8:encode() --[[ line: 3404 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 3424 ]]
+function t_8.decode(p15)
 	-- upvalues: t_8 (ref), protoModule (ref), mediaAssetDataModule (ref)
 	local var617 = t_8.new()
 	local var618 = 0
@@ -2121,7 +2121,7 @@ function t_8.decode(p15) --[[ line: 3424 ]]
 	return var617
 end
 
-function t_8:jsonEncode() --[[ line: 3472 ]]
+function t_8:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2133,7 +2133,7 @@ function t_8:jsonEncode() --[[ line: 3472 ]]
 	return t
 end
 
-function t_8:jsonDecode() --[[ line: 3486 ]]
+function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), mediaAssetDataModule (ref)
 	local var637 = t_8.new()
 	
@@ -2155,7 +2155,7 @@ typeRegistryModule.default:register(t.HydrationContent_MediaAssetEntry)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 3516 ]]
+function t_9.new(p16)
 	-- upvalues: t_9 (ref)
 	return setmetatable({
 		key = if p16 == nil or p16.key == nil then "" else p16.key,
@@ -2163,7 +2163,7 @@ function t_9.new(p16) --[[ line: 3516 ]]
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 3525 ]]
+function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var639 = 0
@@ -2187,7 +2187,7 @@ function t_9:encode() --[[ line: 3525 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 3545 ]]
+function t_9.decode(p17)
 	-- upvalues: t_9 (ref), protoModule (ref), socialLinkDataModule (ref)
 	local var646 = t_9.new()
 	local var647 = 0
@@ -2239,7 +2239,7 @@ function t_9.decode(p17) --[[ line: 3545 ]]
 	return var646
 end
 
-function t_9:jsonEncode() --[[ line: 3593 ]]
+function t_9:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2251,7 +2251,7 @@ function t_9:jsonEncode() --[[ line: 3593 ]]
 	return t
 end
 
-function t_9:jsonDecode() --[[ line: 3607 ]]
+function t_9:jsonDecode()
 	-- upvalues: t_9 (ref), socialLinkDataModule (ref)
 	local var666 = t_9.new()
 	
@@ -2273,7 +2273,7 @@ typeRegistryModule.default:register(t.HydrationContent_SocialLinkEntry)
 local t_10 = {}
 t_10.__index = t_10
 
-function t_10.new(p18) --[[ line: 3637 ]]
+function t_10.new(p18)
 	-- upvalues: t_10 (ref)
 	return setmetatable({
 		key = if p18 == nil or p18.key == nil then "" else p18.key,
@@ -2281,7 +2281,7 @@ function t_10.new(p18) --[[ line: 3637 ]]
 	}, t_10)
 end
 
-function t_10:encode() --[[ line: 3646 ]]
+function t_10:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var668 = 0
@@ -2305,7 +2305,7 @@ function t_10:encode() --[[ line: 3646 ]]
 	return buff_1
 end
 
-function t_10.decode(p19) --[[ line: 3668 ]]
+function t_10.decode(p19)
 	-- upvalues: t_10 (ref), protoModule (ref), gameDeveloperProductDataModule (ref)
 	local var675 = t_10.new()
 	local var676 = 0
@@ -2357,7 +2357,7 @@ function t_10.decode(p19) --[[ line: 3668 ]]
 	return var675
 end
 
-function t_10:jsonEncode() --[[ line: 3721 ]]
+function t_10:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2369,7 +2369,7 @@ function t_10:jsonEncode() --[[ line: 3721 ]]
 	return t
 end
 
-function t_10:jsonDecode() --[[ line: 3737 ]]
+function t_10:jsonDecode()
 	-- upvalues: t_10 (ref), gameDeveloperProductDataModule (ref)
 	local var695 = t_10.new()
 	
@@ -2391,7 +2391,7 @@ typeRegistryModule.default:register(t.HydrationContent_GameDeveloperProductEntry
 local t_11 = {}
 t_11.__index = t_11
 
-function t_11.new(p20) --[[ line: 3770 ]]
+function t_11.new(p20)
 	-- upvalues: t_11 (ref)
 	return setmetatable({
 		key = if p20 == nil or p20.key == nil then "" else p20.key,
@@ -2399,7 +2399,7 @@ function t_11.new(p20) --[[ line: 3770 ]]
 	}, t_11)
 end
 
-function t_11:encode() --[[ line: 3779 ]]
+function t_11:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var697 = 0
@@ -2423,7 +2423,7 @@ function t_11:encode() --[[ line: 3779 ]]
 	return buff_1
 end
 
-function t_11.decode(p21) --[[ line: 3799 ]]
+function t_11.decode(p21)
 	-- upvalues: t_11 (ref), protoModule (ref), gameSubscriptionDataModule (ref)
 	local var704 = t_11.new()
 	local var705 = 0
@@ -2475,7 +2475,7 @@ function t_11.decode(p21) --[[ line: 3799 ]]
 	return var704
 end
 
-function t_11:jsonEncode() --[[ line: 3848 ]]
+function t_11:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2487,7 +2487,7 @@ function t_11:jsonEncode() --[[ line: 3848 ]]
 	return t
 end
 
-function t_11:jsonDecode() --[[ line: 3862 ]]
+function t_11:jsonDecode()
 	-- upvalues: t_11 (ref), gameSubscriptionDataModule (ref)
 	local var724 = t_11.new()
 	
@@ -2509,7 +2509,7 @@ typeRegistryModule.default:register(t.HydrationContent_GameSubscriptionEntry)
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p22) --[[ line: 3895 ]]
+function t_12.new(p22)
 	-- upvalues: t_12 (ref)
 	return setmetatable({
 		key = if p22 == nil or p22.key == nil then "" else p22.key,
@@ -2517,7 +2517,7 @@ function t_12.new(p22) --[[ line: 3895 ]]
 	}, t_12)
 end
 
-function t_12:encode() --[[ line: 3907 ]]
+function t_12:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var726 = 0
@@ -2541,7 +2541,7 @@ function t_12:encode() --[[ line: 3907 ]]
 	return buff_1
 end
 
-function t_12.decode(p23) --[[ line: 3929 ]]
+function t_12.decode(p23)
 	-- upvalues: t_12 (ref), protoModule (ref), marketplaceCatalogCategoryDataModule (ref)
 	local var733 = t_12.new()
 	local var734 = 0
@@ -2593,7 +2593,7 @@ function t_12.decode(p23) --[[ line: 3929 ]]
 	return var733
 end
 
-function t_12:jsonEncode() --[[ line: 3982 ]]
+function t_12:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2605,7 +2605,7 @@ function t_12:jsonEncode() --[[ line: 3982 ]]
 	return t
 end
 
-function t_12:jsonDecode() --[[ line: 3998 ]]
+function t_12:jsonDecode()
 	-- upvalues: t_12 (ref), marketplaceCatalogCategoryDataModule (ref)
 	local var753 = t_12.new()
 	
@@ -2627,7 +2627,7 @@ typeRegistryModule.default:register(t.HydrationContent_MarketplaceCatalogCategor
 local t_13 = {}
 t_13.__index = t_13
 
-function t_13.new(p24) --[[ line: 4032 ]]
+function t_13.new(p24)
 	-- upvalues: t_13 (ref)
 	return setmetatable({
 		key = if p24 == nil or p24.key == nil then "" else p24.key,
@@ -2635,7 +2635,7 @@ function t_13.new(p24) --[[ line: 4032 ]]
 	}, t_13)
 end
 
-function t_13:encode() --[[ line: 4041 ]]
+function t_13:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var755 = 0
@@ -2659,7 +2659,7 @@ function t_13:encode() --[[ line: 4041 ]]
 	return buff_1
 end
 
-function t_13.decode(p25) --[[ line: 4061 ]]
+function t_13.decode(p25)
 	-- upvalues: t_13 (ref), protoModule (ref), marketplaceAssetDataModule (ref)
 	local var762 = t_13.new()
 	local var763 = 0
@@ -2711,7 +2711,7 @@ function t_13.decode(p25) --[[ line: 4061 ]]
 	return var762
 end
 
-function t_13:jsonEncode() --[[ line: 4110 ]]
+function t_13:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2723,7 +2723,7 @@ function t_13:jsonEncode() --[[ line: 4110 ]]
 	return t
 end
 
-function t_13:jsonDecode() --[[ line: 4124 ]]
+function t_13:jsonDecode()
 	-- upvalues: t_13 (ref), marketplaceAssetDataModule (ref)
 	local var782 = t_13.new()
 	
@@ -2745,7 +2745,7 @@ typeRegistryModule.default:register(t.HydrationContent_MarketplaceAssetEntry)
 local t_14 = {}
 t_14.__index = t_14
 
-function t_14.new(p26) --[[ line: 4156 ]]
+function t_14.new(p26)
 	-- upvalues: t_14 (ref)
 	return setmetatable({
 		key = if p26 == nil or p26.key == nil then "" else p26.key,
@@ -2753,7 +2753,7 @@ function t_14.new(p26) --[[ line: 4156 ]]
 	}, t_14)
 end
 
-function t_14:encode() --[[ line: 4165 ]]
+function t_14:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var784 = 0
@@ -2777,7 +2777,7 @@ function t_14:encode() --[[ line: 4165 ]]
 	return buff_1
 end
 
-function t_14.decode(p27) --[[ line: 4185 ]]
+function t_14.decode(p27)
 	-- upvalues: t_14 (ref), protoModule (ref), marketplaceBundleDataModule (ref)
 	local var791 = t_14.new()
 	local var792 = 0
@@ -2829,7 +2829,7 @@ function t_14.decode(p27) --[[ line: 4185 ]]
 	return var791
 end
 
-function t_14:jsonEncode() --[[ line: 4236 ]]
+function t_14:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2841,7 +2841,7 @@ function t_14:jsonEncode() --[[ line: 4236 ]]
 	return t
 end
 
-function t_14:jsonDecode() --[[ line: 4250 ]]
+function t_14:jsonDecode()
 	-- upvalues: t_14 (ref), marketplaceBundleDataModule (ref)
 	local var811 = t_14.new()
 	
@@ -2863,7 +2863,7 @@ typeRegistryModule.default:register(t.HydrationContent_MarketplaceBundleEntry)
 local t_15 = {}
 t_15.__index = t_15
 
-function t_15.new(p28) --[[ line: 4283 ]]
+function t_15.new(p28)
 	-- upvalues: t_15 (ref)
 	return setmetatable({
 		key = if p28 == nil or p28.key == nil then "" else p28.key,
@@ -2871,7 +2871,7 @@ function t_15.new(p28) --[[ line: 4283 ]]
 	}, t_15)
 end
 
-function t_15:encode() --[[ line: 4292 ]]
+function t_15:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var813 = 0
@@ -2895,7 +2895,7 @@ function t_15:encode() --[[ line: 4292 ]]
 	return buff_1
 end
 
-function t_15.decode(p29) --[[ line: 4312 ]]
+function t_15.decode(p29)
 	-- upvalues: t_15 (ref), protoModule (ref), marketplaceLookDataModule (ref)
 	local var820 = t_15.new()
 	local var821 = 0
@@ -2947,7 +2947,7 @@ function t_15.decode(p29) --[[ line: 4312 ]]
 	return var820
 end
 
-function t_15:jsonEncode() --[[ line: 4361 ]]
+function t_15:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2959,7 +2959,7 @@ function t_15:jsonEncode() --[[ line: 4361 ]]
 	return t
 end
 
-function t_15:jsonDecode() --[[ line: 4375 ]]
+function t_15:jsonDecode()
 	-- upvalues: t_15 (ref), marketplaceLookDataModule (ref)
 	local var840 = t_15.new()
 	
@@ -2981,7 +2981,7 @@ typeRegistryModule.default:register(t.HydrationContent_MarketplaceLookEntry)
 local t_16 = {}
 t_16.__index = t_16
 
-function t_16.new(p30) --[[ line: 4406 ]]
+function t_16.new(p30)
 	-- upvalues: t_16 (ref)
 	return setmetatable({
 		key = if p30 == nil or p30.key == nil then "" else p30.key,
@@ -2989,7 +2989,7 @@ function t_16.new(p30) --[[ line: 4406 ]]
 	}, t_16)
 end
 
-function t_16:encode() --[[ line: 4415 ]]
+function t_16:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var842 = 0
@@ -3013,7 +3013,7 @@ function t_16:encode() --[[ line: 4415 ]]
 	return buff_1
 end
 
-function t_16.decode(p31) --[[ line: 4435 ]]
+function t_16.decode(p31)
 	-- upvalues: t_16 (ref), protoModule (ref), catalogSortDataModule (ref)
 	local var849 = t_16.new()
 	local var850 = 0
@@ -3065,7 +3065,7 @@ function t_16.decode(p31) --[[ line: 4435 ]]
 	return var849
 end
 
-function t_16:jsonEncode() --[[ line: 4483 ]]
+function t_16:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3077,7 +3077,7 @@ function t_16:jsonEncode() --[[ line: 4483 ]]
 	return t
 end
 
-function t_16:jsonDecode() --[[ line: 4497 ]]
+function t_16:jsonDecode()
 	-- upvalues: t_16 (ref), catalogSortDataModule (ref)
 	local var869 = t_16.new()
 	
@@ -3099,7 +3099,7 @@ typeRegistryModule.default:register(t.HydrationContent_CatalogSortEntry)
 local t_17 = {}
 t_17.__index = t_17
 
-function t_17.new(p32) --[[ line: 4528 ]]
+function t_17.new(p32)
 	-- upvalues: t_17 (ref)
 	return setmetatable({
 		key = if p32 == nil or p32.key == nil then "" else p32.key,
@@ -3107,7 +3107,7 @@ function t_17.new(p32) --[[ line: 4528 ]]
 	}, t_17)
 end
 
-function t_17:encode() --[[ line: 4537 ]]
+function t_17:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var871 = 0
@@ -3131,7 +3131,7 @@ function t_17:encode() --[[ line: 4537 ]]
 	return buff_1
 end
 
-function t_17.decode(p33) --[[ line: 4557 ]]
+function t_17.decode(p33)
 	-- upvalues: t_17 (ref), protoModule (ref), ageRecommendationDataModule (ref)
 	local var878 = t_17.new()
 	local var879 = 0
@@ -3183,7 +3183,7 @@ function t_17.decode(p33) --[[ line: 4557 ]]
 	return var878
 end
 
-function t_17:jsonEncode() --[[ line: 4608 ]]
+function t_17:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3195,7 +3195,7 @@ function t_17:jsonEncode() --[[ line: 4608 ]]
 	return t
 end
 
-function t_17:jsonDecode() --[[ line: 4622 ]]
+function t_17:jsonDecode()
 	-- upvalues: t_17 (ref), ageRecommendationDataModule (ref)
 	local var898 = t_17.new()
 	
@@ -3217,7 +3217,7 @@ typeRegistryModule.default:register(t.HydrationContent_AgeRecommendationEntry)
 local t_18 = {}
 t_18.__index = t_18
 
-function t_18.new(p34) --[[ line: 4655 ]]
+function t_18.new(p34)
 	-- upvalues: t_18 (ref)
 	return setmetatable({
 		key = if p34 == nil or p34.key == nil then "" else p34.key,
@@ -3225,7 +3225,7 @@ function t_18.new(p34) --[[ line: 4655 ]]
 	}, t_18)
 end
 
-function t_18:encode() --[[ line: 4664 ]]
+function t_18:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var900 = 0
@@ -3249,7 +3249,7 @@ function t_18:encode() --[[ line: 4664 ]]
 	return buff_1
 end
 
-function t_18.decode(p35) --[[ line: 4686 ]]
+function t_18.decode(p35)
 	-- upvalues: t_18 (ref), protoModule (ref), universeUserFollowDataModule (ref)
 	local var907 = t_18.new()
 	local var908 = 0
@@ -3301,7 +3301,7 @@ function t_18.decode(p35) --[[ line: 4686 ]]
 	return var907
 end
 
-function t_18:jsonEncode() --[[ line: 4739 ]]
+function t_18:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3313,7 +3313,7 @@ function t_18:jsonEncode() --[[ line: 4739 ]]
 	return t
 end
 
-function t_18:jsonDecode() --[[ line: 4755 ]]
+function t_18:jsonDecode()
 	-- upvalues: t_18 (ref), universeUserFollowDataModule (ref)
 	local var927 = t_18.new()
 	
@@ -3335,7 +3335,7 @@ typeRegistryModule.default:register(t.HydrationContent_UniverseUserFollowEntry)
 local t_19 = {}
 t_19.__index = t_19
 
-function t_19.new(p36) --[[ line: 4788 ]]
+function t_19.new(p36)
 	-- upvalues: t_19 (ref)
 	return setmetatable({
 		key = if p36 == nil or p36.key == nil then "" else p36.key,
@@ -3343,7 +3343,7 @@ function t_19.new(p36) --[[ line: 4788 ]]
 	}, t_19)
 end
 
-function t_19:encode() --[[ line: 4797 ]]
+function t_19:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var929 = 0
@@ -3367,7 +3367,7 @@ function t_19:encode() --[[ line: 4797 ]]
 	return buff_1
 end
 
-function t_19.decode(p37) --[[ line: 4817 ]]
+function t_19.decode(p37)
 	-- upvalues: t_19 (ref), protoModule (ref), universeUserVoteDataModule (ref)
 	local var936 = t_19.new()
 	local var937 = 0
@@ -3419,7 +3419,7 @@ function t_19.decode(p37) --[[ line: 4817 ]]
 	return var936
 end
 
-function t_19:jsonEncode() --[[ line: 4868 ]]
+function t_19:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3431,7 +3431,7 @@ function t_19:jsonEncode() --[[ line: 4868 ]]
 	return t
 end
 
-function t_19:jsonDecode() --[[ line: 4882 ]]
+function t_19:jsonDecode()
 	-- upvalues: t_19 (ref), universeUserVoteDataModule (ref)
 	local var956 = t_19.new()
 	
@@ -3453,7 +3453,7 @@ typeRegistryModule.default:register(t.HydrationContent_UniverseUserVoteEntry)
 local t_20 = {}
 t_20.__index = t_20
 
-function t_20.new(p38) --[[ line: 4914 ]]
+function t_20.new(p38)
 	-- upvalues: t_20 (ref)
 	return setmetatable({
 		key = if p38 == nil or p38.key == nil then "" else p38.key,
@@ -3461,7 +3461,7 @@ function t_20.new(p38) --[[ line: 4914 ]]
 	}, t_20)
 end
 
-function t_20:encode() --[[ line: 4923 ]]
+function t_20:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var958 = 0
@@ -3485,7 +3485,7 @@ function t_20:encode() --[[ line: 4923 ]]
 	return buff_1
 end
 
-function t_20.decode(p39) --[[ line: 4943 ]]
+function t_20.decode(p39)
 	-- upvalues: t_20 (ref), protoModule (ref), userProfileDataModule (ref)
 	local var965 = t_20.new()
 	local var966 = 0
@@ -3537,7 +3537,7 @@ function t_20.decode(p39) --[[ line: 4943 ]]
 	return var965
 end
 
-function t_20:jsonEncode() --[[ line: 4991 ]]
+function t_20:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3549,7 +3549,7 @@ function t_20:jsonEncode() --[[ line: 4991 ]]
 	return t
 end
 
-function t_20:jsonDecode() --[[ line: 5005 ]]
+function t_20:jsonDecode()
 	-- upvalues: t_20 (ref), userProfileDataModule (ref)
 	local var985 = t_20.new()
 	
@@ -3571,7 +3571,7 @@ typeRegistryModule.default:register(t.HydrationContent_UserProfileEntry)
 local t_21 = {}
 t_21.__index = t_21
 
-function t_21.new(p40) --[[ line: 5036 ]]
+function t_21.new(p40)
 	-- upvalues: t_21 (ref)
 	return setmetatable({
 		key = if p40 == nil or p40.key == nil then "" else p40.key,
@@ -3579,7 +3579,7 @@ function t_21.new(p40) --[[ line: 5036 ]]
 	}, t_21)
 end
 
-function t_21:encode() --[[ line: 5045 ]]
+function t_21:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var987 = 0
@@ -3603,7 +3603,7 @@ function t_21:encode() --[[ line: 5045 ]]
 	return buff_1
 end
 
-function t_21.decode(p41) --[[ line: 5067 ]]
+function t_21.decode(p41)
 	-- upvalues: t_21 (ref), protoModule (ref), universeUserFavoriteDataModule (ref)
 	local var994 = t_21.new()
 	local var995 = 0
@@ -3655,7 +3655,7 @@ function t_21.decode(p41) --[[ line: 5067 ]]
 	return var994
 end
 
-function t_21:jsonEncode() --[[ line: 5120 ]]
+function t_21:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3667,7 +3667,7 @@ function t_21:jsonEncode() --[[ line: 5120 ]]
 	return t
 end
 
-function t_21:jsonDecode() --[[ line: 5136 ]]
+function t_21:jsonDecode()
 	-- upvalues: t_21 (ref), universeUserFavoriteDataModule (ref)
 	local var1014 = t_21.new()
 	
@@ -3689,7 +3689,7 @@ typeRegistryModule.default:register(t.HydrationContent_UniverseUserFavoriteEntry
 local t_22 = {}
 t_22.__index = t_22
 
-function t_22.new(p42) --[[ line: 5169 ]]
+function t_22.new(p42)
 	-- upvalues: t_22 (ref)
 	return setmetatable({
 		key = if p42 == nil or p42.key == nil then "" else p42.key,
@@ -3697,7 +3697,7 @@ function t_22.new(p42) --[[ line: 5169 ]]
 	}, t_22)
 end
 
-function t_22:encode() --[[ line: 5178 ]]
+function t_22:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1016 = 0
@@ -3721,7 +3721,7 @@ function t_22:encode() --[[ line: 5178 ]]
 	return buff_1
 end
 
-function t_22.decode(p43) --[[ line: 5198 ]]
+function t_22.decode(p43)
 	-- upvalues: t_22 (ref), protoModule (ref), playabilityDataModule (ref)
 	local var1023 = t_22.new()
 	local var1024 = 0
@@ -3773,7 +3773,7 @@ function t_22.decode(p43) --[[ line: 5198 ]]
 	return var1023
 end
 
-function t_22:jsonEncode() --[[ line: 5246 ]]
+function t_22:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3785,7 +3785,7 @@ function t_22:jsonEncode() --[[ line: 5246 ]]
 	return t
 end
 
-function t_22:jsonDecode() --[[ line: 5260 ]]
+function t_22:jsonDecode()
 	-- upvalues: t_22 (ref), playabilityDataModule (ref)
 	local var1043 = t_22.new()
 	
@@ -3807,7 +3807,7 @@ typeRegistryModule.default:register(t.HydrationContent_PlayabilityEntry)
 local t_23 = {}
 t_23.__index = t_23
 
-function t_23.new(p44) --[[ line: 5290 ]]
+function t_23.new(p44)
 	-- upvalues: t_23 (ref)
 	return setmetatable({
 		key = if p44 == nil or p44.key == nil then "" else p44.key,
@@ -3815,7 +3815,7 @@ function t_23.new(p44) --[[ line: 5290 ]]
 	}, t_23)
 end
 
-function t_23:encode() --[[ line: 5299 ]]
+function t_23:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1045 = 0
@@ -3839,7 +3839,7 @@ function t_23:encode() --[[ line: 5299 ]]
 	return buff_1
 end
 
-function t_23.decode(p45) --[[ line: 5321 ]]
+function t_23.decode(p45)
 	-- upvalues: t_23 (ref), protoModule (ref), universeUserFollowLimitDataModule (ref)
 	local var1052 = t_23.new()
 	local var1053 = 0
@@ -3891,7 +3891,7 @@ function t_23.decode(p45) --[[ line: 5321 ]]
 	return var1052
 end
 
-function t_23:jsonEncode() --[[ line: 5374 ]]
+function t_23:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -3903,7 +3903,7 @@ function t_23:jsonEncode() --[[ line: 5374 ]]
 	return t
 end
 
-function t_23:jsonDecode() --[[ line: 5390 ]]
+function t_23:jsonDecode()
 	-- upvalues: t_23 (ref), universeUserFollowLimitDataModule (ref)
 	local var1072 = t_23.new()
 	
@@ -3925,7 +3925,7 @@ typeRegistryModule.default:register(t.HydrationContent_UniverseUserFollowLimitEn
 local t_24 = {}
 t_24.__index = t_24
 
-function t_24.new(p46) --[[ line: 5424 ]]
+function t_24.new(p46)
 	-- upvalues: t_24 (ref)
 	return setmetatable({
 		key = if p46 == nil or p46.key == nil then "" else p46.key,
@@ -3933,7 +3933,7 @@ function t_24.new(p46) --[[ line: 5424 ]]
 	}, t_24)
 end
 
-function t_24:encode() --[[ line: 5436 ]]
+function t_24:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1074 = 0
@@ -3957,7 +3957,7 @@ function t_24:encode() --[[ line: 5436 ]]
 	return buff_1
 end
 
-function t_24.decode(p47) --[[ line: 5458 ]]
+function t_24.decode(p47)
 	-- upvalues: t_24 (ref), protoModule (ref), universeUserVoteFeedbackMetadataDataModule (ref)
 	local var1081 = t_24.new()
 	local var1082 = 0
@@ -4009,7 +4009,7 @@ function t_24.decode(p47) --[[ line: 5458 ]]
 	return var1081
 end
 
-function t_24:jsonEncode() --[[ line: 5511 ]]
+function t_24:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4021,7 +4021,7 @@ function t_24:jsonEncode() --[[ line: 5511 ]]
 	return t
 end
 
-function t_24:jsonDecode() --[[ line: 5527 ]]
+function t_24:jsonDecode()
 	-- upvalues: t_24 (ref), universeUserVoteFeedbackMetadataDataModule (ref)
 	local var1101 = t_24.new()
 	
@@ -4043,7 +4043,7 @@ typeRegistryModule.default:register(t.HydrationContent_UniverseUserVoteFeedbackM
 local t_25 = {}
 t_25.__index = t_25
 
-function t_25.new(p48) --[[ line: 5561 ]]
+function t_25.new(p48)
 	-- upvalues: t_25 (ref)
 	return setmetatable({
 		key = if p48 == nil or p48.key == nil then "" else p48.key,
@@ -4051,7 +4051,7 @@ function t_25.new(p48) --[[ line: 5561 ]]
 	}, t_25)
 end
 
-function t_25:encode() --[[ line: 5570 ]]
+function t_25:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1103 = 0
@@ -4075,7 +4075,7 @@ function t_25:encode() --[[ line: 5570 ]]
 	return buff_1
 end
 
-function t_25.decode(p49) --[[ line: 5590 ]]
+function t_25.decode(p49)
 	-- upvalues: t_25 (ref), protoModule (ref), momentDataModule (ref)
 	local var1110 = t_25.new()
 	local var1111 = 0
@@ -4127,7 +4127,7 @@ function t_25.decode(p49) --[[ line: 5590 ]]
 	return var1110
 end
 
-function t_25:jsonEncode() --[[ line: 5638 ]]
+function t_25:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4139,7 +4139,7 @@ function t_25:jsonEncode() --[[ line: 5638 ]]
 	return t
 end
 
-function t_25:jsonDecode() --[[ line: 5652 ]]
+function t_25:jsonDecode()
 	-- upvalues: t_25 (ref), momentDataModule (ref)
 	local var1130 = t_25.new()
 	
@@ -4161,7 +4161,7 @@ typeRegistryModule.default:register(t.HydrationContent_MomentEntry)
 local t_26 = {}
 t_26.__index = t_26
 
-function t_26.new(p50) --[[ line: 5680 ]]
+function t_26.new(p50)
 	-- upvalues: t_26 (ref)
 	return setmetatable({
 		key = if p50 == nil or p50.key == nil then "" else p50.key,
@@ -4169,7 +4169,7 @@ function t_26.new(p50) --[[ line: 5680 ]]
 	}, t_26)
 end
 
-function t_26:encode() --[[ line: 5689 ]]
+function t_26:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1132 = 0
@@ -4193,7 +4193,7 @@ function t_26:encode() --[[ line: 5689 ]]
 	return buff_1
 end
 
-function t_26.decode(p51) --[[ line: 5709 ]]
+function t_26.decode(p51)
 	-- upvalues: t_26 (ref), protoModule (ref), communityDataModule (ref)
 	local var1139 = t_26.new()
 	local var1140 = 0
@@ -4245,7 +4245,7 @@ function t_26.decode(p51) --[[ line: 5709 ]]
 	return var1139
 end
 
-function t_26:jsonEncode() --[[ line: 5757 ]]
+function t_26:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4257,7 +4257,7 @@ function t_26:jsonEncode() --[[ line: 5757 ]]
 	return t
 end
 
-function t_26:jsonDecode() --[[ line: 5771 ]]
+function t_26:jsonDecode()
 	-- upvalues: t_26 (ref), communityDataModule (ref)
 	local var1159 = t_26.new()
 	
@@ -4279,7 +4279,7 @@ typeRegistryModule.default:register(t.HydrationContent_CommunityEntry)
 local t_27 = {}
 t_27.__index = t_27
 
-function t_27.new(p52) --[[ line: 5799 ]]
+function t_27.new(p52)
 	-- upvalues: t_27 (ref)
 	return setmetatable({
 		key = if p52 == nil or p52.key == nil then "" else p52.key,
@@ -4287,7 +4287,7 @@ function t_27.new(p52) --[[ line: 5799 ]]
 	}, t_27)
 end
 
-function t_27:encode() --[[ line: 5808 ]]
+function t_27:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1161 = 0
@@ -4311,7 +4311,7 @@ function t_27:encode() --[[ line: 5808 ]]
 	return buff_1
 end
 
-function t_27.decode(p53) --[[ line: 5830 ]]
+function t_27.decode(p53)
 	-- upvalues: t_27 (ref), protoModule (ref), communityUserMembershipDataModule (ref)
 	local var1168 = t_27.new()
 	local var1169 = 0
@@ -4363,7 +4363,7 @@ function t_27.decode(p53) --[[ line: 5830 ]]
 	return var1168
 end
 
-function t_27:jsonEncode() --[[ line: 5883 ]]
+function t_27:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4375,7 +4375,7 @@ function t_27:jsonEncode() --[[ line: 5883 ]]
 	return t
 end
 
-function t_27:jsonDecode() --[[ line: 5899 ]]
+function t_27:jsonDecode()
 	-- upvalues: t_27 (ref), communityUserMembershipDataModule (ref)
 	local var1188 = t_27.new()
 	
@@ -4397,7 +4397,7 @@ typeRegistryModule.default:register(t.HydrationContent_CommunityUserMembershipEn
 local t_28 = {}
 t_28.__index = t_28
 
-function t_28.new(p54) --[[ line: 5932 ]]
+function t_28.new(p54)
 	-- upvalues: t_28 (ref)
 	return setmetatable({
 		key = if p54 == nil or p54.key == nil then "" else p54.key,
@@ -4405,7 +4405,7 @@ function t_28.new(p54) --[[ line: 5932 ]]
 	}, t_28)
 end
 
-function t_28:encode() --[[ line: 5941 ]]
+function t_28:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1190 = 0
@@ -4429,7 +4429,7 @@ function t_28:encode() --[[ line: 5941 ]]
 	return buff_1
 end
 
-function t_28.decode(p55) --[[ line: 5963 ]]
+function t_28.decode(p55)
 	-- upvalues: t_28 (ref), protoModule (ref), userRecommendationDataModule (ref)
 	local var1197 = t_28.new()
 	local var1198 = 0
@@ -4481,7 +4481,7 @@ function t_28.decode(p55) --[[ line: 5963 ]]
 	return var1197
 end
 
-function t_28:jsonEncode() --[[ line: 6016 ]]
+function t_28:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4493,7 +4493,7 @@ function t_28:jsonEncode() --[[ line: 6016 ]]
 	return t
 end
 
-function t_28:jsonDecode() --[[ line: 6032 ]]
+function t_28:jsonDecode()
 	-- upvalues: t_28 (ref), userRecommendationDataModule (ref)
 	local var1217 = t_28.new()
 	
@@ -4515,7 +4515,7 @@ typeRegistryModule.default:register(t.HydrationContent_UserRecommendationEntry)
 local t_29 = {}
 t_29.__index = t_29
 
-function t_29.new(p56) --[[ line: 6065 ]]
+function t_29.new(p56)
 	-- upvalues: t_29 (ref)
 	return setmetatable({
 		key = if p56 == nil or p56.key == nil then "" else p56.key,
@@ -4523,7 +4523,7 @@ function t_29.new(p56) --[[ line: 6065 ]]
 	}, t_29)
 end
 
-function t_29:encode() --[[ line: 6074 ]]
+function t_29:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1219 = 0
@@ -4547,7 +4547,7 @@ function t_29:encode() --[[ line: 6074 ]]
 	return buff_1
 end
 
-function t_29.decode(p57) --[[ line: 6094 ]]
+function t_29.decode(p57)
 	-- upvalues: t_29 (ref), protoModule (ref), contactDataModule (ref)
 	local var1226 = t_29.new()
 	local var1227 = 0
@@ -4599,7 +4599,7 @@ function t_29.decode(p57) --[[ line: 6094 ]]
 	return var1226
 end
 
-function t_29:jsonEncode() --[[ line: 6142 ]]
+function t_29:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -4611,7 +4611,7 @@ function t_29:jsonEncode() --[[ line: 6142 ]]
 	return t
 end
 
-function t_29:jsonDecode() --[[ line: 6156 ]]
+function t_29:jsonDecode()
 	-- upvalues: t_29 (ref), contactDataModule (ref)
 	local var1246 = t_29.new()
 	

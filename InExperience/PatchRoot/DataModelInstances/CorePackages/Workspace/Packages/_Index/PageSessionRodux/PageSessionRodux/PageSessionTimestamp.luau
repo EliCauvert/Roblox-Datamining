@@ -4,7 +4,7 @@ local cryoModule = require(parent.Cryo)
 local _ = require(parent.DiscoveryTypes)
 local setPageSessionTimestampModule = require(pageSessionRodux.SetPageSessionTimestamp)
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: setPageSessionTimestampModule (ref), cryoModule (ref)
 	p0 = p0 or {}
 	

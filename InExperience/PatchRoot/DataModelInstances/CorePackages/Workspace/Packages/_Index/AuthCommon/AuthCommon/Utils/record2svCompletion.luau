@@ -2,7 +2,7 @@
 local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
 local cryoModule = require(authCommon.Parent.Cryo)
 
-return function(p0) --[[ line: 7 | named "record2svCompletion" ]]
+return function(p0)
 	-- upvalues: appStorageUtilitiesModule (ref), cryoModule (ref)
 	if p0 == nil or p0 == "0" then
 		return false

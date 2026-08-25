@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("FriendsChat").Parent.Signals).createSignal
 
-return function() --[[ line: 19 ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal(false)
 	local var2, var3 = createSignal(nil)
@@ -10,17 +10,17 @@ return function() --[[ line: 19 ]]
 		getHasEnteredFriendsTab = var0,
 		getActiveConversationId = var2,
 		getLocalUnreadConversationIds = var4,
-		markFriendsTabEntered = function() --[[ line: 31 ]]
+		markFriendsTabEntered = function()
 			-- upvalues: var1 (ref)
 			var1(true)
 		end,
-		setActiveConversationId = function(value) --[[ line: 35 ]]
+		setActiveConversationId = function(value)
 			-- upvalues: var3 (ref)
 			var3(value)
 		end,
-		addLocalUnread = function(p0) --[[ line: 39 ]]
+		addLocalUnread = function(p0)
 			-- upvalues: var5 (ref)
-			var5(function(p1) --[[ line: 40 ]]
+			var5(function(p1)
 				-- upvalues: p0 (ref)
 				if p1[p0] then
 					return p1
@@ -31,9 +31,9 @@ return function() --[[ line: 19 ]]
 				return cloned
 			end)
 		end,
-		clearLocalUnread = function() --[[ line: 50 ]]
+		clearLocalUnread = function()
 			-- upvalues: var5 (ref)
-			var5(function(p2) --[[ line: 51 ]]
+			var5(function(p2)
 				return if next(p2) == nil then p2 else {}
 			end)
 		end

@@ -25,7 +25,7 @@ local list = {
 	}
 }
 
-function buildReport(p0, p1, p2, p3, p4) --[[ line: 54 ]]
+function buildReport(p0, p1, p2, p3, p4)
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode({
 		tags = {
@@ -41,7 +41,7 @@ function buildReport(p0, p1, p2, p3, p4) --[[ line: 54 ]]
 	})
 end
 
-function ReportAdPopup(p5) --[[ line: 109 ]]
+function ReportAdPopup(p5)
 	-- upvalues: httpService (ref), getAppFeaturePolicies (ref), default (ref), loggingProtocolModule (ref), flagsModule (ref), reactModule (ref), enableHideReportAdModalDuringScreenshot (ref), screenshotManager (ref), playersService (ref), adsInteractivityTelemetryModule (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), defaultTwoStepReportFlowModule (ref), list (ref), reportAdFooterModule (ref), adsDisplayOrderModule (ref)
 	local var13 = ""
 	local list_1 = { table.clone(p5.adInfo) }
@@ -96,7 +96,7 @@ function ReportAdPopup(p5) --[[ line: 109 ]]
 						isReportCategoryReadonly = true,
 						onCloseProps = {
 							hasPreviousSteps = false,
-							onAbandon = function() --[[ line: 175 ]]
+							onAbandon = function()
 								-- upvalues: adsInteractivityTelemetryModule (copy), p5 (ref)
 								adsInteractivityTelemetryModule.logReportAdEvent("close")
 								p5.onClose()
@@ -104,12 +104,12 @@ function ReportAdPopup(p5) --[[ line: 109 ]]
 						},
 						onSubmitProps = {
 							hasNextSteps = false,
-							onSubmit = reactModule.useCallback(function(p6, p7) --[[ line: 139 ]]
+							onSubmit = reactModule.useCallback(function(p6, p7)
 								-- upvalues: enableHideReportAdModalDuringScreenshot (copy), p5 (ref), screenshotManager (copy), playersService (copy), var13 (write), var15 (ref), adsInteractivityTelemetryModule (copy)
 								if enableHideReportAdModalDuringScreenshot then
 									p5.onClose()
 								end
-								screenshotManager:TakeScreenshotWithCallback(function(p8) --[[ line: 143 ]]
+								screenshotManager:TakeScreenshotWithCallback(function(p8)
 									-- upvalues: playersService (copy), var13 (copy), p6 (ref), p7 (ref), var15 (copy), adsInteractivityTelemetryModule (copy)
 									local localPlayer = playersService.LocalPlayer
 									
@@ -135,7 +135,7 @@ function ReportAdPopup(p5) --[[ line: 109 ]]
 							completeDescription = "Feature.ReportAbuse.Label.SelectInSceneComplete"
 						},
 						scaleDialog = { X = 0.8, Y = 1 },
-						footerContent = function() --[[ line: 198 ]]
+						footerContent = function()
 							-- upvalues: var16 (write), roactModule (copy), reportAdFooterModule (copy), list_1 (ref)
 							return if var16 then roactModule.createElement(reportAdFooterModule, { assetId = list_1[1].assetId }) else nil
 						end

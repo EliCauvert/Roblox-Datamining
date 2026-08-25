@@ -1,5 +1,5 @@
-﻿return function(p0, p1, p2) --[[ line: 15 | named "safelyAccessProperty" ]]
-	local ok, status = pcall(function() --[[ line: 16 ]]
+﻿return function(p0, p1, p2)
+	local ok, status = pcall(function()
 		-- upvalues: p0 (ref), p1 (ref)
 		return p0[p1]
 	end)

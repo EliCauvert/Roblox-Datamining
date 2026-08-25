@@ -7,12 +7,12 @@ local appendRecentDumpPathModule = require(actions.AppendRecentDumpPath)
 local setRCCProfilerStateModule = require(actions.SetRCCProfilerState)
 local RCCProfilerDataCompleteListener = roactModule.Component:extend("RCCProfilerDataCompleteListener")
 
-function RCCProfilerDataCompleteListener.didMount(p0) --[[ line: 13 ]]
+function RCCProfilerDataCompleteListener.didMount(p0)
 	-- upvalues: getClientReplicatorModule (ref)
 	local var7 = getClientReplicatorModule()
 	
 	if var7 then
-		p0.completeSignal = var7.RCCProfilerDataComplete:Connect(function(p1, p2) --[[ line: 16 ]]
+		p0.completeSignal = var7.RCCProfilerDataComplete:Connect(function(p1, p2)
 			-- upvalues: p0 (ref)
 			if p0.props.waitingForRecording then
 				if not p1 then
@@ -28,29 +28,29 @@ function RCCProfilerDataCompleteListener.didMount(p0) --[[ line: 13 ]]
 	end
 end
 
-function RCCProfilerDataCompleteListener.willUnmount(p3) --[[ line: 30 ]]
+function RCCProfilerDataCompleteListener.willUnmount(p3)
 	if p3.completeSignal then
 		p3.completeSignal:Disconnect()
 		p3.completeSignal = nil
 	end
 end
 
-function RCCProfilerDataCompleteListener.render(_) --[[ line: 37 ]]
+function RCCProfilerDataCompleteListener.render(_)
 	return nil
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4, _) --[[ line: 41 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p4, _)
 	return {
 		waitingForRecording = p4.MicroProfiler.waitingForRecording
 	}
-end, function(p5) --[[ line: 47 | named "mapDispatchToProps" ]]
+end, function(p5)
 	-- upvalues: appendRecentDumpPathModule (ref), setRCCProfilerStateModule (ref)
 	return {
-		dispatchAppendRecentDumpPath = function(p6) --[[ line: 49 ]]
+		dispatchAppendRecentDumpPath = function(p6)
 			-- upvalues: p5 (ref), appendRecentDumpPathModule (copy)
 			p5(appendRecentDumpPathModule(p6))
 		end,
-		dispatchSetRCCProfilerState = function(value, p7) --[[ line: 52 ]]
+		dispatchSetRCCProfilerState = function(value, p7)
 			-- upvalues: p5 (ref), setRCCProfilerStateModule (copy)
 			p5(setRCCProfilerStateModule(value, p7))
 		end

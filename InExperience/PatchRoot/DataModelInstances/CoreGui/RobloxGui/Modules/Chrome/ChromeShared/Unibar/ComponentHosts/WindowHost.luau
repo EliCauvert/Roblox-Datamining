@@ -37,32 +37,32 @@ local _ = {
 }
 local var22 = false
 
-return function(p0) --[[ line: 71 ]]
+return function(p0)
 	-- upvalues: useWindowSizeModule (ref), reactModule (ref), fFlagTopBarSignalizeMenuOpen (ref), useSelector (ref), reactOtterModule (ref), t (ref), signalsModule (ref), coreGuiCommonModule (ref), settingsShowSignal (ref), serviceModule (ref), constantsModule (ref), chromeAnalyticsModule (ref), userInputService (ref), shouldRejectMultiTouchModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), getUIScale (ref), VRService (ref), var22 (write), mouseIconOverrideService (ref), selfieViewCursorOverride (ref), fixWindowDragStaleConnection (ref), fixWindowDragError (ref), tweenService (ref), chromeWindowLayoutOrder (ref), useStyleSheet (ref), reactRobloxModule (ref), debounceModule (ref), interactable (ref), coreGuiService (ref)
 	local var23 = useWindowSizeModule(p0.integration.integration)
 	local var24 = reactModule.useRef(nil)
 	local var25 = reactModule.useRef(nil)
 	local var26, var27 = reactModule.useBinding(false)
 	local var28 = 0
-	local var29 = reactModule.useMemo(function() --[[ line: 77 ]]
+	local var29 = reactModule.useMemo(function()
 		return nil
 	end, {})
 	local var30, var31 = reactModule.useBinding(false)
 	local var32, var33 = reactModule.useBinding(false)
-	local var34 = if fFlagTopBarSignalizeMenuOpen then reactModule.joinBindings({ var30, var32 }):map(function(p1) --[[ line: 85 ]]
+	local var34 = if fFlagTopBarSignalizeMenuOpen then reactModule.joinBindings({ var30, var32 }):map(function(p1)
 		return p1[1] or p1[2]
 	end) else nil
-	local var35 = if not fFlagTopBarSignalizeMenuOpen then useSelector(function(p2) --[[ line: 91 ]]
+	local var35 = if not fFlagTopBarSignalizeMenuOpen then useSelector(function(p2)
 		return p2.displayOptions.menuOpen or p2.displayOptions.inspectMenuOpen
 	end) else nil
 	local var36, var37 = reactModule.useBinding(false)
 	local var38, var39 = reactOtterModule.useAnimatedBinding(var23.X.Offset)
 	local var40, var41 = reactOtterModule.useAnimatedBinding(var23.Y.Offset)
-	local var42 = reactModule.useCallback(function() --[[ line: 102 ]]
+	local var42 = reactModule.useCallback(function()
 		-- upvalues: var38 (ref), var40 (ref), p0 (ref)
 		return Vector2.new(var38:getValue(), var40:getValue()) * (p0.integration.integration.windowAnchorPoint or Vector2.zero)
 	end, { var38, var40, p0.integration })
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), var39 (ref), reactOtterModule (copy), var23 (ref), t (copy)
 		if var38:getValue() == 0 then
 			var39(reactOtterModule.instant(var23.X.Offset))
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 71 ]]
 		end
 		var39(reactOtterModule.spring(var23.X.Offset, t))
 	end, { var23.X.Offset })
-	reactModule.useEffect(function() --[[ line: 115 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var40 (ref), var41 (ref), reactOtterModule (copy), var23 (ref), t (copy)
 		if var40:getValue() == 0 then
 			var41(reactOtterModule.instant(var23.Y.Offset))
@@ -82,24 +82,24 @@ return function(p0) --[[ line: 71 ]]
 	end, { var23.Y.Offset })
 	
 	if fFlagTopBarSignalizeMenuOpen then
-		reactModule.useEffect(function() --[[ line: 124 ]]
+		reactModule.useEffect(function()
 			-- upvalues: signalsModule (copy), coreGuiCommonModule (copy), var33 (ref), settingsShowSignal (copy), var31 (ref)
-			local var49 = signalsModule.createEffect(function(p3) --[[ line: 125 ]]
+			local var49 = signalsModule.createEffect(function(p3)
 				-- upvalues: coreGuiCommonModule (copy), var33 (copy)
 				var33(coreGuiCommonModule.Stores.GetInspectAndBuyStore(p3).getInspectAndBuyOpen(p3))
 			end)
-			settingsShowSignal:connect(function(p4) --[[ line: 130 ]]
+			settingsShowSignal:connect(function(p4)
 				-- upvalues: var31 (copy)
 				var31(p4)
 			end)
 			
-			return function() --[[ line: 134 ]]
+			return function()
 				-- upvalues: var49 (ref)
 				var49()
 			end
 		end, {})
 	end
-	reactModule.useEffect(function() --[[ line: 144 ]]
+	reactModule.useEffect(function()
 		-- upvalues: serviceModule (copy), p0 (ref), var24 (ref), var25 (write), var27 (ref), var39 (ref), reactOtterModule (copy), constantsModule (copy), var41 (ref), var23 (ref), t (copy), chromeAnalyticsModule (copy), userInputService (copy), shouldRejectMultiTouchModule (copy), fFlagTokenizeUnibarConstantsWithStyleProvider (copy), getUIScale (copy)
 		local connection = nil
 		local inputObject = nil
@@ -141,7 +141,7 @@ return function(p0) --[[ line: 71 ]]
 				task.defer(var41, reactOtterModule.spring(var23.Y.Offset, t))
 				local vector3 = Vector3.new(var24.current.AbsolutePosition.X, var24.current.AbsolutePosition.Y, 0)
 				chromeAnalyticsModule.default:setWindowDefaultPosition(p0.integration.id, Vector2.new(vector3.X, vector3.Y))
-				var25.current = userInputService.InputChanged:Connect(function(p5, _) --[[ line: 179 ]]
+				var25.current = userInputService.InputChanged:Connect(function(p5, _)
 					-- upvalues: shouldRejectMultiTouchModule (copy), inputObject (write), vector3 (ref), vector3 (ref), absoluteSize (ref), current (ref)
 					local position = p5.Position
 					
@@ -158,27 +158,27 @@ return function(p0) --[[ line: 71 ]]
 			end
 		end
 	end, {})
-	local var43 = reactModule.useCallback(function(p6) --[[ line: 220 ]]
+	local var43 = reactModule.useCallback(function(p6)
 		-- upvalues: p0 (ref), serviceModule (copy)
 		if p0.integration.integration.cachePosition then
 			serviceModule:updateWindowPosition(p0.integration.id, p6)
 		end
 	end, { p0.integration })
-	local var44 = reactModule.useCallback(function() --[[ line: 226 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: VRService (copy), var22 (copy), mouseIconOverrideService (copy), selfieViewCursorOverride (copy)
 		if not VRService.VREnabled then
 			var22 = true
 			mouseIconOverrideService.push(selfieViewCursorOverride, Enum.OverrideMouseIconBehavior.ForceShow)
 		end
 	end)
-	local var45 = reactModule.useCallback(function() --[[ line: 233 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: var22 (copy), mouseIconOverrideService (copy), selfieViewCursorOverride (copy)
 		if var22 then
 			var22 = false
 			mouseIconOverrideService.pop(selfieViewCursorOverride)
 		end
 	end)
-	local var46 = reactModule.useCallback(function(_, p7) --[[ line: 240 ]]
+	local var46 = reactModule.useCallback(function(_, p7)
 		-- upvalues: var24 (ref), var42 (ref), chromeAnalyticsModule (copy), p0 (ref), fixWindowDragStaleConnection (copy), var25 (write), var27 (ref), var36 (ref), fixWindowDragError (copy), var38 (ref), var40 (ref), userInputService (copy), shouldRejectMultiTouchModule (copy), var28 (write), constantsModule (copy)
 		assert(var24.current ~= nil)
 		assert(var24.current.Parent ~= nil)
@@ -202,7 +202,7 @@ return function(p0) --[[ line: 71 ]]
 					Y = math.clamp(vector3.Y, 0, if fixWindowDragError then math.max(0, absoluteSize.Y - (var40:getValue() - var57.Y)) else absoluteSize.Y - (var40:getValue() - var57.Y))
 				}
 				current.Position = UDim2.fromOffset(t.X, t.Y)
-				var25.current = userInputService.InputChanged:Connect(function(p8, _) --[[ line: 300 ]]
+				var25.current = userInputService.InputChanged:Connect(function(p8, _)
 					-- upvalues: shouldRejectMultiTouchModule (copy), p7 (ref), position (ref), var28 (copy), fixWindowDragStaleConnection (copy), constantsModule (copy), var27 (copy), vector3 (ref), var57 (ref), fixWindowDragError (copy), absoluteSize (ref), var38 (copy), var40 (copy), current (ref), chromeAnalyticsModule (copy), p0 (copy)
 					if shouldRejectMultiTouchModule(p7, p8) then return end
 					local position_1 = p8.Position
@@ -223,7 +223,7 @@ return function(p0) --[[ line: 71 ]]
 		end
 	end, { var42 })
 	
-	local var47 = function(p9) --[[ line: 346 ]]
+	local var47 = function(p9)
 		-- upvalues: var42 (ref), var38 (ref), var40 (ref)
 		local parent = p9.Parent
 		local offset = p9.Position.X.Offset
@@ -234,7 +234,7 @@ return function(p0) --[[ line: 71 ]]
 		return if offset >= var62.X then if absoluteSize.X - (var38:getValue() - var62.X) >= offset then if offset_1 >= var62.Y then absoluteSize.Y - (var40:getValue() - var62.Y) < offset_1 else true else true else true
 	end
 	
-	local var48 = reactModule.useCallback(function(p10) --[[ line: 363 ]]
+	local var48 = reactModule.useCallback(function(p10)
 		-- upvalues: var24 (ref), var29 (write), var47 (ref), var42 (ref), var38 (ref), var40 (ref), var43 (ref), var37 (ref), tweenService (copy)
 		if var24 == nil or var24.current == nil then return end
 		assert(var24.current ~= nil)
@@ -273,7 +273,7 @@ return function(p0) --[[ line: 71 ]]
 		var37(true)
 		var29 = tweenService:Create(current, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Position = uDim2 })
 		assert(var29 ~= nil)
-		var29.Completed:Connect(function(_) --[[ line: 417 ]]
+		var29.Completed:Connect(function(_)
 			-- upvalues: var37 (copy), var29 (copy)
 			var37(false)
 			var29 = nil
@@ -284,11 +284,11 @@ return function(p0) --[[ line: 71 ]]
 	return reactRobloxModule.createPortal({
 		Name = reactModule.createElement("ScreenGui", {
 			Name = constantsModule.WINDOW_HOST_GUI_NAME .. ":" .. p0.integration.id,
-			[reactModule.Change.AbsoluteSize] = debounceModule(function() --[[ line: 463 ]]
+			[reactModule.Change.AbsoluteSize] = debounceModule(function()
 				-- upvalues: var48 (ref)
 				var48()
 			end, 0.2),
-			DisplayOrder = if fFlagTopBarSignalizeMenuOpen and var34 then var34:map(function(p11) --[[ line: 467 ]]
+			DisplayOrder = if fFlagTopBarSignalizeMenuOpen and var34 then var34:map(function(p11)
 				-- upvalues: chromeWindowLayoutOrder (ref)
 				return if p11 then -1 else chromeWindowLayoutOrder
 			end) elseif var35 then -1 else chromeWindowLayoutOrder,
@@ -298,7 +298,7 @@ return function(p0) --[[ line: 71 ]]
 				LayoutOrder = 1,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				Size = reactModule.joinBindings({ var38, var40 }):map(function(p12) --[[ line: 475 ]]
+				Size = reactModule.joinBindings({ var38, var40 }):map(function(p12)
 					-- upvalues: var48 (ref)
 					var48(true)
 					
@@ -324,7 +324,7 @@ return function(p0) --[[ line: 71 ]]
 						Size = UDim2.fromScale(1, 1),
 						BackgroundTransparency = 1,
 						[reactModule.Event.InputBegan] = var46,
-						[reactModule.Event.InputEnded] = reactModule.useCallback(function(_, p13) --[[ line: 430 ]]
+						[reactModule.Event.InputEnded] = reactModule.useCallback(function(_, p13)
 							-- upvalues: var28 (write), var24 (ref), chromeAnalyticsModule (copy), p0 (ref), var47 (ref), var25 (write), var27 (ref), serviceModule (copy), var48 (ref)
 							var28 = 0
 							

@@ -1,6 +1,6 @@
 ﻿local copyModule = require(script.Parent.copy)
 
-return function(value, p0, p1) --[[ line: 4 | named "set" ]]
+return function(value, p0, p1)
 	-- upvalues: copyModule (ref)
 	local var1 = type(value)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)

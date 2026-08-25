@@ -67,12 +67,12 @@ textLabel.TextScaled = true
 textLabel.Parent = teleportEffectGui
 local var17 = false
 
-function spinSpinner() --[[ line: 93 ]]
+function spinSpinner()
 	-- upvalues: var17 (write), runService (ref), spinnerRobloxTilt (ref)
 	if not var17 then
 		var17 = true
 		local processTime = os.clock()
-		runService:BindToRenderStep("PortalLoadingSpinner", Enum.RenderPriority.Last.Value, function() --[[ line: 97 ]]
+		runService:BindToRenderStep("PortalLoadingSpinner", Enum.RenderPriority.Last.Value, function()
 			-- upvalues: spinnerRobloxTilt (copy), processTime (ref)
 			if not spinnerRobloxTilt or not spinnerRobloxTilt.Parent then
 				stopSpinner()
@@ -98,13 +98,13 @@ function spinSpinner() --[[ line: 93 ]]
 	end
 end
 
-function stopSpinner() --[[ line: 119 ]]
+function stopSpinner()
 	-- upvalues: runService (ref), var17 (write)
 	runService:UnbindFromRenderStep("PortalLoadingSpinner")
 	var17 = false
 end
 
-function cover() --[[ line: 124 ]]
+function cover()
 	-- upvalues: var7 (write), var6 (write), lightingService (ref), tweenService (ref), teleportEffectGui (ref), topFrame (ref), var11 (ref), spinnerRobloxTilt (ref), textLabel (ref)
 	var7 += 1
 	local var23 = var7
@@ -119,7 +119,7 @@ function cover() --[[ line: 124 ]]
 	var6.Name = "TeleportColorCorrectionEffect"
 	var6.Parent = lightingService
 	tweenService:Create(var6, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Brightness = 1 }):Play()
-	task.delay(0.25, function() --[[ line: 144 ]]
+	task.delay(0.25, function()
 		-- upvalues: var23 (ref), var7 (copy), teleportEffectGui (copy), topFrame (copy), var11 (copy), tweenService (copy)
 		if var23 ~= var7 then return end
 		if teleportEffectGui and teleportEffectGui.Parent then
@@ -130,7 +130,7 @@ function cover() --[[ line: 124 ]]
 			tweenService:Create(var11, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Position = UDim2.new(0.5, 0, 0.5, 0) }):Play()
 		end
 	end)
-	task.delay(1.25, function() --[[ line: 165 ]]
+	task.delay(1.25, function()
 		-- upvalues: var23 (ref), var7 (copy), spinnerRobloxTilt (copy), tweenService (copy), textLabel (copy)
 		if var23 ~= var7 then return end
 		if spinnerRobloxTilt and spinnerRobloxTilt.Parent then
@@ -143,7 +143,7 @@ function cover() --[[ line: 124 ]]
 	end)
 end
 
-function uncover() --[[ line: 187 ]]
+function uncover()
 	-- upvalues: var7 (write), spinnerRobloxTilt (ref), tweenService (ref), textLabel (ref), var6 (write), topFrame (ref), var11 (ref), teleportEffectGui (ref)
 	var7 += 1
 	local var24 = var7
@@ -161,7 +161,7 @@ function uncover() --[[ line: 187 ]]
 		tweenService:Create(topFrame, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Position = UDim2.new(0.5, 0, 0, 0) }):Play()
 		tweenService:Create(var11, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), { Position = UDim2.new(0.5, 0, 1, 0) }):Play()
 	end
-	task.delay(3, function() --[[ line: 226 ]]
+	task.delay(3, function()
 		-- upvalues: var24 (ref), var7 (copy), var6 (copy), teleportEffectGui (copy)
 		if var24 ~= var7 then return end
 		if var6 then

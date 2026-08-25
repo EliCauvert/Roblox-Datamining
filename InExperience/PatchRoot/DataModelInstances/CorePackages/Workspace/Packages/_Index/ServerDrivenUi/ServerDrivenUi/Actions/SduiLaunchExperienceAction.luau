@@ -8,7 +8,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local launchExperience = sduiCoreSystemModule.SduiActionType.LaunchExperience
 
-return function(p0, p1, p2, _) --[[ line: 32 ]]
+return function(p0, p1, p2, _)
 	-- upvalues: sduiErrorType (ref), launchExperience (ref), fFlagDeferInExperienceRbxmDownload (ref), cryoModule (ref), sduiReportGamePlayIntent (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	

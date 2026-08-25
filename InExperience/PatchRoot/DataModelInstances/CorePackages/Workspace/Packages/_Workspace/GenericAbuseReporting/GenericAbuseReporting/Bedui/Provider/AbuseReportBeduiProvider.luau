@@ -10,13 +10,13 @@ local fetchBeduiDataModule = require(genericAbuseReporting.Bedui.Provider.fetchB
 local validateBeduiDataModule = require(genericAbuseReporting.Bedui.Provider.validateBeduiData)
 local fallbackGenericAbuseReporting = game:DefineFastFlag("FallbackGenericAbuseReporting", false)
 
-return function(p0) --[[ line: 35 | named "AbuseReportBeduiProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), abuseReportBeduiContextStatus (ref), useRoactService (ref), roactNetworking (ref), fetchBeduiDataModule (ref), validateBeduiDataModule (ref), fallbackGenericAbuseReporting (ref), abuseVectorModule (ref), abuseReportBeduiContextModule (ref)
 	local var7, var8 = reactModule.useState({ status = abuseReportBeduiContextStatus.Loading })
 	local var9 = useRoactService(roactNetworking)
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fetchBeduiDataModule (copy), var9 (ref), p0 (ref), validateBeduiDataModule (copy), fallbackGenericAbuseReporting (copy), abuseVectorModule (copy), var8 (ref), abuseReportBeduiContextStatus (copy)
-		fetchBeduiDataModule(var9, p0.abuseVector):andThen(function(p2) --[[ line: 43 ]]
+		fetchBeduiDataModule(var9, p0.abuseVector):andThen(function(p2)
 			-- upvalues: validateBeduiDataModule (copy), fallbackGenericAbuseReporting (copy), fetchBeduiDataModule (copy), var9 (copy), abuseVectorModule (copy), var8 (copy), abuseReportBeduiContextStatus (copy)
 			local var10, var11 = validateBeduiDataModule(p2.responseBody)
 			
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 35 | named "AbuseReportBeduiProvider" ]]
 			warn("Invalid Bedui data:", var11)
 			
 			if fallbackGenericAbuseReporting then
-				fetchBeduiDataModule(var9, abuseVectorModule.Common):andThen(function(p4) --[[ line: 51 ]]
+				fetchBeduiDataModule(var9, abuseVectorModule.Common):andThen(function(p4)
 					-- upvalues: validateBeduiDataModule (copy), var8 (copy), abuseReportBeduiContextStatus (copy)
 					local var12, var13 = validateBeduiDataModule(p4.responseBody)
 					
@@ -48,7 +48,7 @@ return function(p0) --[[ line: 35 | named "AbuseReportBeduiProvider" ]]
 						status = abuseReportBeduiContextStatus.Error,
 						error = var13
 					})
-				end):catch(function(p3) --[[ line: 67 ]]
+				end):catch(function(p3)
 					-- upvalues: var8 (copy), abuseReportBeduiContextStatus (copy)
 					warn("Failed to get Bedui common data")
 					var8({ status = abuseReportBeduiContextStatus.Error, error = p3 })
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 35 | named "AbuseReportBeduiProvider" ]]
 				status = abuseReportBeduiContextStatus.Error,
 				error = var11
 			})
-		end):catch(function(p1) --[[ line: 87 ]]
+		end):catch(function(p1)
 			-- upvalues: var8 (copy), abuseReportBeduiContextStatus (copy)
 			warn("Failed to get Bedui data")
 			var8({ status = abuseReportBeduiContextStatus.Error, error = p1 })

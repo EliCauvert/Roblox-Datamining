@@ -19,17 +19,17 @@ local t = {
 	DressSkirtAccessory = "Dresses & Skirts"
 }
 
-local function isPurchasableStatus(p0) --[[ line: 32 ]]
+local function isPurchasableStatus(p0)
 	-- upvalues: priceStatus (ref)
 	return if p0 ~= priceStatus.Free then if p0 ~= priceStatus.PurchaseFromRoblox then p0 == priceStatus.PurchaseFromResale else true else true
 end
 
-local function _(p1) --[[ line: 38 | named "isBundle" ]]
+local function _(p1)
 	-- upvalues: enumsModule (ref)
 	return if p1.itemType ~= enumsModule.ItemTypes.Bundle then p1.itemType == "Bundle" else true
 end
 
-local function getAssetTypeDisplayName(value, p2) --[[ line: 47 ]]
+local function getAssetTypeDisplayName(value, p2)
 	-- upvalues: t (ref)
 	if not value then
 		return ""
@@ -51,16 +51,16 @@ end
 
 return {
 	isPurchasableStatus = isPurchasableStatus,
-	getPriceStatus = function(p3) --[[ line: 96 ]]
+	getPriceStatus = function(p3)
 		-- upvalues: getPriceStatusInShop (ref)
 		return getPriceStatusInShop(p3)
 	end,
 	PriceStatusEnum = priceStatus,
-	getThumbnailUrl = function(p4) --[[ line: 42 ]]
+	getThumbnailUrl = function(p4)
 		-- upvalues: enumsModule (ref), bundleThumbnail (ref), asset (ref), getRbxthumbWithTypeSizeAndOptions (ref)
 		return getRbxthumbWithTypeSizeAndOptions(p4.id, if if p4.itemType ~= enumsModule.ItemTypes.Bundle then p4.itemType == "Bundle" else true then bundleThumbnail else asset, 150)
 	end,
-	getItemTypeDisplayName = function(p5, p6) --[[ line: 69 ]]
+	getItemTypeDisplayName = function(p5, p6)
 		-- upvalues: enumsModule (ref), getAssetTypeDisplayName (ref)
 		if p5.taxonomyName then
 			return p5.taxonomyName
@@ -69,7 +69,7 @@ return {
 		
 		return if if p5.itemType ~= enumsModule.ItemTypes.Bundle then p5.itemType == "Bundle" else true then if p5.itemSubType and assetTypeNames and assetTypeNames[p5.itemSubType] then assetTypeNames[p5.itemSubType] elseif p6 and p6.bundle then p6.bundle else "Bundle" else getAssetTypeDisplayName(p5.itemSubType, assetTypeNames)
 	end,
-	shouldShowBundleParts = function(p7) --[[ line: 86 ]]
+	shouldShowBundleParts = function(p7)
 		-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
 		local var8 = getPriceStatusInShop(p7)
 		

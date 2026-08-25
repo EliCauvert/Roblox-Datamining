@@ -1,4 +1,4 @@
-﻿return function(...) --[[ line: 2 | named "zip" ]]
+﻿return function(...)
 	local t = {}
 	local var1 = select("#", ...)
 	local count = #select(1, ...)

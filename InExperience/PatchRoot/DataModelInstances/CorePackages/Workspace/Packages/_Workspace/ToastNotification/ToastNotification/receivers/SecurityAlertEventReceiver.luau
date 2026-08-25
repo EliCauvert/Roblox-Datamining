@@ -10,11 +10,11 @@ local default = require(parent_1.ToastNotificationsProtocol).ToastNotificationPr
 local localizationService = game:GetService("LocalizationService")
 local localization = require(parent_1.RobloxAppLocales).Localization
 
-return function() --[[ line: 19 | named "SecurityEventReceiver" ]]
+return function()
 	-- upvalues: reactModule (ref), lifecycleEventsModule (ref), notificationTypeEnum (ref), getFFlagGenerateLinkWithChannel (ref), urlBuilder (ref), localization (ref), localizationService (ref), webViewServiceWrapperModule (ref), default (ref)
-	reactModule.useEffect(function() --[[ line: 20 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEventsModule (copy), notificationTypeEnum (copy), getFFlagGenerateLinkWithChannel (copy), urlBuilder (copy), localization (copy), localizationService (copy), webViewServiceWrapperModule (copy), default (copy)
-		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.SecurityAlert, function(p0) --[[ line: 24 ]]
+		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.SecurityAlert, function(p0)
 			-- upvalues: getFFlagGenerateLinkWithChannel (copy), urlBuilder (copy), localization (copy), localizationService (copy), webViewServiceWrapperModule (copy), default (copy)
 			if p0 and p0.notificationData and (p0.notificationData.notificationType and p0.notificationData.clientEventsPayload) and (p0.notificationData.clientEventsPayload.payload and p0.notificationData.clientEventsPayload.username) then
 				local payload = p0.notificationData.clientEventsPayload.payload
@@ -33,7 +33,7 @@ return function() --[[ line: 19 | named "SecurityEventReceiver" ]]
 			end
 		end)
 		
-		return function() --[[ line: 65 ]]
+		return function()
 			-- upvalues: userAction (ref)
 			userAction()
 		end

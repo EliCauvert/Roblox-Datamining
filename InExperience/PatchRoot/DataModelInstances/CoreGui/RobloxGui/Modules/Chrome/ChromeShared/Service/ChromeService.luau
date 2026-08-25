@@ -40,7 +40,7 @@ t.__index = t
 t.AvailabilitySignal = chromeUtilsModule.AvailabilitySignalState
 t.IntegrationStatus = { None = 0, Icon = 1, Window = 2 }
 
-function noop() --[[ line: 96 ]] end
+function noop() end
 
 local t_1 = {
 	id = "div",
@@ -53,11 +53,11 @@ local t_1 = {
 	sideSheetPlacement = if fFlagEnableSideSheet then sideSheetPlacement.None else nil
 }
 
-function createUnibarLayoutInfo(p0, p1) --[[ line: 240 ]]
+function createUnibarLayoutInfo(p0, p1)
 	return Rect.new(p0, p0 + p1)
 end
 
-function t.new() --[[ line: 244 ]]
+function t.new()
 	-- upvalues: localizationService (ref), fFlagEnableConsoleExpControls (ref), shortcutServiceModule (ref), chromeUtilsModule (ref), observableValue (ref), notifySignal (ref), localization (ref), signal (ref), isInExperienceUIVREnabled (ref), t (ref), viewportUtilModule (ref), chromeDeprecateMRUs (ref), focusOnChromeSignal (ref), focusOffChromeSignal (ref)
 	local t_1 = {
 		_shortcutService = if fFlagEnableConsoleExpControls then shortcutServiceModule.new() else nil,
@@ -94,7 +94,7 @@ function t.new() --[[ line: 244 ]]
 		_inFocusNav = observableValue.new(false)
 	}
 	local tbl = setmetatable(t_1, t)
-	viewportUtilModule.viewport:connect(function(p2) --[[ line: 287 ]]
+	viewportUtilModule.viewport:connect(function(p2)
 		-- upvalues: chromeDeprecateMRUs (copy), tbl (ref)
 		if chromeDeprecateMRUs then
 			tbl:updateWindowSizeSignals()
@@ -105,19 +105,19 @@ function t.new() --[[ line: 244 ]]
 	end, true)
 	
 	if fFlagEnableConsoleExpControls then
-		t_1._shortcutService.onShortcutBarChanged:connect(function(p3) --[[ line: 301 ]]
+		t_1._shortcutService.onShortcutBarChanged:connect(function(p3)
 			-- upvalues: tbl (ref)
 			tbl._currentShortcutBar:set(p3)
 		end)
 	end
-	focusOnChromeSignal:connect(function(p4) --[[ line: 305 ]]
+	focusOnChromeSignal:connect(function(p4)
 		-- upvalues: t_1 (ref), tbl (ref)
 		if p4 and not t_1._subMenuConfig.nine_dot[p4] then
 			tbl:setSelected(p4)
 		end
 		tbl:enableFocusNav()
 	end)
-	focusOffChromeSignal:connect(function() --[[ line: 312 ]]
+	focusOffChromeSignal:connect(function()
 		-- upvalues: tbl (ref), fFlagEnableConsoleExpControls (copy)
 		tbl:disableFocusNav()
 		
@@ -129,14 +129,14 @@ function t.new() --[[ line: 244 ]]
 	return tbl
 end
 
-function t.storeChromeInteracted(_) --[[ line: 324 ]]
+function t.storeChromeInteracted(_)
 	-- upvalues: localStoreModule (ref)
 	if localStoreModule.isEnabled() then
 		localStoreModule.storeForLocalPlayer("ChromeInteracted3", true)
 	end
 end
 
-function t:updateScreenSize(_, p5, p6, p7) --[[ line: 330 ]]
+function t:updateScreenSize(_, p5, p6, p7)
 	-- upvalues: constantsModule (ref)
 	local var21 = if p5 then if p7 then constantsModule.MOBILE_TINY_PORTRAIT_SLOTS - constantsModule.CORE_SLOTS elseif p6 then constantsModule.MOBILE_PORTRAIT_SLOTS - constantsModule.CORE_SLOTS else constantsModule.MOBILE_LANDSCAPE_SLOTS - constantsModule.CORE_SLOTS else constantsModule.NON_MOBILE_SLOTS - constantsModule.CORE_SLOTS
 	
@@ -148,7 +148,7 @@ function t:updateScreenSize(_, p5, p6, p7) --[[ line: 330 ]]
 	self:updateWindowSizeSignals()
 end
 
-function t:updateWindowSizeSignals() --[[ line: 366 ]]
+function t:updateWindowSizeSignals()
 	for i, v in self._integrations do
 		if v.windowSize then
 			v.windowSize:updateConstraints()
@@ -156,11 +156,11 @@ function t:updateWindowSizeSignals() --[[ line: 366 ]]
 	end
 end
 
-function t:notificationIndicator() --[[ line: 374 ]]
+function t:notificationIndicator()
 	return self._notificationIndicator
 end
 
-function t:toggleSubMenu(p8) --[[ line: 378 ]]
+function t:toggleSubMenu(p8)
 	-- upvalues: fFlagEnableSideSheet (ref), toggleSideSheet (write)
 	if fFlagEnableSideSheet and toggleSideSheet then
 		toggleSideSheet(true)
@@ -178,15 +178,15 @@ function t:toggleSubMenu(p8) --[[ line: 378 ]]
 	self._currentSubMenu:set(p8)
 end
 
-function t:currentSubMenu() --[[ line: 398 ]]
+function t:currentSubMenu()
 	return self._currentSubMenu
 end
 
-function t:inFocusNav() --[[ line: 402 ]]
+function t:inFocusNav()
 	return self._inFocusNav
 end
 
-function t:enableFocusNav() --[[ line: 406 ]]
+function t:enableFocusNav()
 	-- upvalues: gamepadService (ref), fFlagEnableConsoleExpControls (ref), constantsModule (ref)
 	if gamepadService.GamepadCursorEnabled then return end
 	if not self._inFocusNav:get() then
@@ -197,7 +197,7 @@ function t:enableFocusNav() --[[ line: 406 ]]
 	end
 end
 
-function t:disableFocusNav() --[[ line: 419 ]]
+function t:disableFocusNav()
 	-- upvalues: gamepadService (ref)
 	if gamepadService.GamepadCursorEnabled then return end
 	if self._inFocusNav:get() then
@@ -207,7 +207,7 @@ function t:disableFocusNav() --[[ line: 419 ]]
 	end
 end
 
-function t:toggleWindow(p9) --[[ line: 431 ]]
+function t:toggleWindow(p9)
 	-- upvalues: t (ref), localStoreModule (ref)
 	if self._integrations[p9].components.Window then
 		if self._integrationsStatus[p9] and self._integrationsStatus[p9] ~= t.IntegrationStatus.None and self._integrationsStatus[p9] ~= t.IntegrationStatus.Icon then
@@ -225,30 +225,30 @@ function t:toggleWindow(p9) --[[ line: 431 ]]
 	self:updateMenuList()
 end
 
-function t:isWindowOpen(p10) --[[ line: 457 ]]
+function t:isWindowOpen(p10)
 	-- upvalues: t (ref)
 	return self._integrations[p10].components.Window and self._integrationsStatus[p10] == t.IntegrationStatus.Window
 end
 
-function t:menuList() --[[ line: 461 ]]
+function t:menuList()
 	return self._menuList
 end
 
-function t:windowList() --[[ line: 465 ]]
+function t:windowList()
 	return self._windowList
 end
 
-function t:dragConnection(p11) --[[ line: 469 ]]
+function t:dragConnection(p11)
 	return if self._integrations[p11] then self._dragConnection[p11] else nil
 end
 
-function t:updateLocalization(p12) --[[ line: 477 ]]
+function t:updateLocalization(p12)
 	local _ = ""
 	local _ = ""
 	self._localizedLabelKeys[p12.id] = {}
 	self._localizedLabelKeys[p12.id].label = p12.label
 	local label = p12.label
-	local ok, status = pcall(function() --[[ line: 488 ]]
+	local ok, status = pcall(function()
 		-- upvalues: label (write), self (ref)
 		label = self._localization:Format(label)
 	end)
@@ -262,7 +262,7 @@ function t:updateLocalization(p12) --[[ line: 477 ]]
 	if p12.secondaryAction then
 		self._localizedLabelKeys[p12.id].secondaryActionLabel = p12.secondaryAction.label
 		local label_1 = p12.secondaryAction.label
-		local ok_1, status_1 = pcall(function() --[[ line: 502 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: label_1 (write), self (ref)
 			label_1 = self._localization:Format(label_1)
 		end)
@@ -276,7 +276,7 @@ function t:updateLocalization(p12) --[[ line: 477 ]]
 	return p12
 end
 
-function t:register(p13) --[[ line: 517 ]]
+function t:register(p13)
 	-- upvalues: fFlagEnableSideSheet (ref), sideSheetPlacement (ref), t (ref), availabilitySignal (ref), notifySignal (ref), windowSizeSignalModule (ref), constantsModule (ref), fFlagEnableConsoleExpControls (ref), gamepadService (ref)
 	if self._integrations[p13.id] then
 		warn(string.format(p13.id .. "already registered", debug.traceback()))
@@ -304,13 +304,13 @@ function t:register(p13) --[[ line: 517 ]]
 		p13.components = {}
 	end
 	if p13.availability then
-		id[#id + 1] = p13.availability:connect(function() --[[ line: 552 ]]
+		id[#id + 1] = p13.availability:connect(function()
 			-- upvalues: self (ref), p13 (write)
 			self:availabilityChanged(p13)
 		end)
 	end
 	if p13.notification and not p13.notification:excludeFromTotalCounts() then
-		id[#id + 1] = p13.notification:connect(function() --[[ line: 558 ]]
+		id[#id + 1] = p13.notification:connect(function()
 			-- upvalues: self (ref)
 			self:updateNotificationTotals()
 		end)
@@ -333,7 +333,7 @@ function t:register(p13) --[[ line: 517 ]]
 	self._integrations[p13.id] = var24
 	
 	if fFlagEnableConsoleExpControls and p13.selected then
-		id[#id + 1] = self:selectedItem():connect(function(p14) --[[ line: 592 ]]
+		id[#id + 1] = self:selectedItem():connect(function(p14)
 			-- upvalues: var24 (ref), gamepadService (copy), p13 (write)
 			if var24.id == p14 then
 				if gamepadService.GamepadCursorEnabled then return end
@@ -344,7 +344,7 @@ function t:register(p13) --[[ line: 517 ]]
 	return var24
 end
 
-function t:createIconProps(p15, p16) --[[ line: 605 ]]
+function t:createIconProps(p15, p16)
 	-- upvalues: t_1 (ref)
 	p16 = p16 or 0
 	
@@ -355,7 +355,7 @@ function t:createIconProps(p15, p16) --[[ line: 605 ]]
 		order = p16,
 		component = self._integrations[p15].components.Icon,
 		integration = self._integrations[p15],
-		activated = function() --[[ line: 615 ]]
+		activated = function()
 			-- upvalues: self (ref), p15 (ref)
 			self:activate(p15)
 		end
@@ -368,7 +368,7 @@ function t:createIconProps(p15, p16) --[[ line: 605 ]]
 	}
 end
 
-function t:isIntegrationValid(p17) --[[ line: 630 ]]
+function t:isIntegrationValid(p17)
 	-- upvalues: t (ref)
 	local var26 = self._integrations[p17]
 	
@@ -380,19 +380,19 @@ function t:isIntegrationValid(p17) --[[ line: 630 ]]
 	return false
 end
 
-function t:updateMenuList() --[[ line: 643 ]]
+function t:updateMenuList()
 	-- upvalues: t_1 (ref), fFlagEnableSideSheet (ref), fFlagEnableChromeWindowsNotInMenu (ref)
 	local var27 = 0
 	local var28 = 0
 	
-	local function iconProps(p18) --[[ line: 647 ]]
+	local function iconProps(p18)
 		-- upvalues: var28 (write), self (ref)
 		var28 += 1
 		
 		return self:createIconProps(p18, var28)
 	end
 	
-	local function windowProps(p19) --[[ line: 652 ]]
+	local function windowProps(p19)
 		-- upvalues: var28 (write), self (ref), t_1 (copy)
 		var28 += 1
 		
@@ -412,7 +412,7 @@ function t:updateMenuList() --[[ line: 643 ]]
 		}
 	end
 	
-	local function divider(_) --[[ line: 674 ]]
+	local function divider(_)
 		-- upvalues: var27 (write), var28 (write), t_1 (copy)
 		var27 += 1
 		var28 += 1
@@ -427,7 +427,7 @@ function t:updateMenuList() --[[ line: 643 ]]
 		}
 	end
 	
-	local function collectMenu(p20, p21, p22) --[[ line: 687 ]]
+	local function collectMenu(p20, p21, p22)
 		-- upvalues: divider (ref), var27 (write), collectMenu (ref), fFlagEnableSideSheet (copy), self (ref), var28 (write), windowProps (ref), iconProps (ref)
 		local var36 = 0
 		
@@ -493,7 +493,7 @@ function t:updateMenuList() --[[ line: 643 ]]
 end
 
 if fFlagEnableSideSheet then
-	function t:updateSideSheet() --[[ line: 761 ]]
+	function t:updateSideSheet()
 		-- upvalues: sideSheetPlacement (ref), fIntSideSheetVariant (ref), registerSideSheetIntegrations (write)
 		local var38 = 0
 		local t = {}
@@ -501,7 +501,7 @@ if fFlagEnableSideSheet then
 		local t_2 = {}
 		local t_3 = {}
 		
-		local function addIntegration(p23) --[[ line: 768 ]]
+		local function addIntegration(p23)
 			-- upvalues: self (ref), sideSheetPlacement (copy), t_1 (write), var38 (write), t_2 (ref), t_3 (ref), fIntSideSheetVariant (copy), t (write)
 			local var44 = self._integrations[p23]
 			
@@ -553,7 +553,7 @@ if fFlagEnableSideSheet then
 		})
 	end
 end
-function t:availabilityChanged(_) --[[ line: 823 ]]
+function t:availabilityChanged(_)
 	-- upvalues: fFlagEnableSideSheet (ref)
 	self:updateNotificationTotals()
 	self:updateMenuList()
@@ -563,7 +563,7 @@ function t:availabilityChanged(_) --[[ line: 823 ]]
 	end
 end
 
-function t:subMenuNotifications(p24) --[[ line: 831 ]]
+function t:subMenuNotifications(p24)
 	-- upvalues: notifySignal (ref)
 	if not self._subMenuNotifications[p24] then
 		self._subMenuNotifications[p24] = notifySignal.new(true)
@@ -571,31 +571,31 @@ function t:subMenuNotifications(p24) --[[ line: 831 ]]
 	return self._subMenuNotifications[p24]
 end
 
-function t:totalNotifications() --[[ line: 838 ]]
+function t:totalNotifications()
 	return self._totalNotifications
 end
 
-function t:onIntegrationRegistered() --[[ line: 842 ]]
+function t:onIntegrationRegistered()
 	return self._onIntegrationRegistered
 end
 
-function t:onIntegrationActivated() --[[ line: 846 ]]
+function t:onIntegrationActivated()
 	return self._onIntegrationActivated
 end
 
-function t:onIntegrationHovered() --[[ line: 850 ]]
+function t:onIntegrationHovered()
 	return self._onIntegrationHovered
 end
 
-function t:onIntegrationStatusChanged() --[[ line: 854 ]]
+function t:onIntegrationStatusChanged()
 	return self._onIntegrationStatusChanged
 end
 
-function t:integrations() --[[ line: 858 ]]
+function t:integrations()
 	return self._integrations
 end
 
-function t:updateNotificationTotals() --[[ line: 862 ]]
+function t:updateNotificationTotals()
 	-- upvalues: t (ref)
 	local var45 = 0
 	
@@ -631,13 +631,13 @@ function t:updateNotificationTotals() --[[ line: 862 ]]
 	end
 end
 
-function t:configureMenu(p25) --[[ line: 906 ]]
+function t:configureMenu(p25)
 	self._menuConfig = p25
 	self:updateNotificationTotals()
 	self:updateMenuList()
 end
 
-function t:configureSubMenu(p26, p27) --[[ line: 912 ]]
+function t:configureSubMenu(p26, p27)
 	-- upvalues: notifySignal (ref), fFlagEnableSideSheet (ref)
 	self._subMenuConfig[p26] = p27
 	
@@ -653,7 +653,7 @@ function t:configureSubMenu(p26, p27) --[[ line: 912 ]]
 end
 
 if fFlagEnableConsoleExpControls then
-	function t:registerShortcut(p28) --[[ line: 925 ]]
+	function t:registerShortcut(p28)
 		-- upvalues: t (ref)
 		self._shortcutService:registerShortcut(p28)
 		local idShortcut = self._shortcutService:getShortcut(p28.id)
@@ -664,7 +664,7 @@ if fFlagEnableConsoleExpControls then
 			if integration.availability:get() == t.AvailabilitySignal.Unavailable then
 				idShortcut.availability:unavailable()
 			end
-			integration.availability:connect(function() --[[ line: 933 ]]
+			integration.availability:connect(function()
 				-- upvalues: integration (ref), t (copy), idShortcut (ref)
 				local var51 = integration.availability:get()
 				
@@ -679,7 +679,7 @@ if fFlagEnableConsoleExpControls then
 		end
 	end
 	
-	function t:activateShortcut(p29) --[[ line: 947 ]]
+	function t:activateShortcut(p29)
 		-- upvalues: fFlagIntegrationsChromeShortcutTelemetryModule (ref)
 		local var52 = self._shortcutService:getShortcut(p29)
 		
@@ -704,70 +704,70 @@ if fFlagEnableConsoleExpControls then
 		end
 	end
 	
-	function t:configureShortcutBar(p30, p31) --[[ line: 967 ]]
+	function t:configureShortcutBar(p30, p31)
 		self._shortcutService:configureShortcutBar(p30, p31)
 	end
 	
-	function t:setShortcutBar(p32) --[[ line: 971 ]]
+	function t:setShortcutBar(p32)
 		self._shortcutService:setShortcutBar(p32)
 	end
 	
-	function t:getCurrentShortcutBar() --[[ line: 975 ]]
+	function t:getCurrentShortcutBar()
 		return self._currentShortcutBar
 	end
 	
-	function t:getShortcutsFromBar(p33) --[[ line: 979 ]]
+	function t:getShortcutsFromBar(p33)
 		return self._shortcutService:getShortcutsFromBar(p33, self._integrations)
 	end
 	
-	function t:getCurrentShortcuts() --[[ line: 983 ]]
+	function t:getCurrentShortcuts()
 		return self:getShortcutsFromBar(self._currentShortcutBar:get())
 	end
 	
-	function t:onShortcutBarChanged() --[[ line: 987 ]]
+	function t:onShortcutBarChanged()
 		return self._shortcutService.onShortcutBarChanged
 	end
 	
-	function t:selectMenuIcon() --[[ line: 991 ]]
+	function t:selectMenuIcon()
 		self._triggerMenuIcon:fire()
 	end
 	
-	function t:onTriggerMenuIcon() --[[ line: 995 ]]
+	function t:onTriggerMenuIcon()
 		return self._triggerMenuIcon
 	end
 	
-	function t:setHideShortcutBar(p34, p35) --[[ line: 999 ]]
+	function t:setHideShortcutBar(p34, p35)
 		self._shortcutService:setHideShortcutBar(p34, p35)
 	end
 	
-	function t:getHideShortcutBar() --[[ line: 1003 ]]
+	function t:getHideShortcutBar()
 		return self._shortcutService:getHideShortcutBar()
 	end
 end
 if isInExperienceUIVREnabled then
-	function t:onTriggerVRToggleButton() --[[ line: 1009 ]]
+	function t:onTriggerVRToggleButton()
 		return self._triggerVRToggleButton
 	end
 	
-	function t:showTopBar() --[[ line: 1013 ]]
+	function t:showTopBar()
 		return self._topBarVisibility:get()
 	end
 	
-	function t:getTopBarVisibiity() --[[ line: 1017 ]]
+	function t:getTopBarVisibiity()
 		return self._topBarVisibility
 	end
 	
-	function t:connectTopBarVisibility(p36) --[[ line: 1021 ]]
+	function t:connectTopBarVisibility(p36)
 		self._topBarVisibility = p36
 	end
 end
-function t:gesture(p37, p38, p39) --[[ line: 1026 ]]
+function t:gesture(p37, p38, p39)
 	if self._integrations[p37] then
 		self._dragConnection[p37] = { connection = p38, inputObject = p39 }
 	end
 end
 
-function t:withinCurrentTopLevelMenu(p40) --[[ line: 1039 ]]
+function t:withinCurrentTopLevelMenu(p40)
 	for i, v in self._menuList:get() do
 		if v.id == p40 then
 			return v, i
@@ -776,7 +776,7 @@ function t:withinCurrentTopLevelMenu(p40) --[[ line: 1039 ]]
 	return nil, 0
 end
 
-function t:withinCurrentSubmenu(p41) --[[ line: 1049 ]]
+function t:withinCurrentSubmenu(p41)
 	local var53 = self._currentSubMenu:get()
 	
 	if not var53 then
@@ -802,7 +802,7 @@ function t:withinCurrentSubmenu(p41) --[[ line: 1049 ]]
 end
 
 if fFlagEnableSideSheet then
-	function t:withinOpenSideSheet(p42) --[[ line: 1079 ]]
+	function t:withinOpenSideSheet(p42)
 		-- upvalues: getSideSheetVisibility (write), sideSheetPlacement (ref)
 		if not getSideSheetVisibility() then
 			return false
@@ -815,11 +815,11 @@ if fFlagEnableSideSheet then
 		return false
 	end
 end
-function t:windowPosition(p43) --[[ line: 1094 ]]
+function t:windowPosition(p43)
 	return self._windowPositions[p43]
 end
 
-function t:updateWindowPosition(p44, p45) --[[ line: 1098 ]]
+function t:updateWindowPosition(p44, p45)
 	-- upvalues: localStoreModule (ref)
 	if localStoreModule.isEnabled() and self._integrations[p44] and self._integrations[p44].persistWindowState then
 		local chromeWindowPosition = localStoreModule.loadForLocalPlayer("ChromeWindowPosition") or {}
@@ -829,12 +829,12 @@ function t:updateWindowPosition(p44, p45) --[[ line: 1098 ]]
 	self._windowPositions[p44] = p45
 end
 
-function t.getWindowStatusFromStore(_, p46) --[[ line: 1111 ]]
+function t.getWindowStatusFromStore(_, p46)
 	-- upvalues: localStoreModule (ref)
 	return if localStoreModule.isEnabled() then (localStoreModule.loadForLocalPlayer("ChromeWindowStatus") or {})[p46] or false else nil
 end
 
-function t.getWindowPositionFromStore(_, p47) --[[ line: 1121 ]]
+function t.getWindowPositionFromStore(_, p47)
 	-- upvalues: localStoreModule (ref)
 	if not localStoreModule.isEnabled() then
 		return nil
@@ -844,7 +844,7 @@ function t.getWindowPositionFromStore(_, p47) --[[ line: 1121 ]]
 	return if var55 then UDim2.new(var55[1], var55[2], var55[3], var55[4]) else nil
 end
 
-function t:activate(p48, p49) --[[ line: 1132 ]]
+function t:activate(p48, p49)
 	-- upvalues: fFlagIntegrationsChromeShortcutTelemetryModule (ref), fFlagEnableConsoleExpControls (ref)
 	local var56 = nil
 	
@@ -859,7 +859,7 @@ function t:activate(p48, p49) --[[ line: 1132 ]]
 		self:storeChromeInteracted()
 		
 		if activated then
-			local ok, status = pcall(function() --[[ line: 1148 ]]
+			local ok, status = pcall(function()
 				-- upvalues: activated (ref), self (ref), p48 (ref), fFlagEnableConsoleExpControls (copy)
 				activated(self._integrations[p48])
 				
@@ -885,11 +885,11 @@ function t:activate(p48, p49) --[[ line: 1132 ]]
 	end
 end
 
-function t:selectedItem() --[[ line: 1176 ]]
+function t:selectedItem()
 	return self._selectedItem
 end
 
-function t:setSelected(p50) --[[ line: 1180 ]]
+function t:setSelected(p50)
 	-- upvalues: userInputService (ref)
 	local var57, var58 = self:withinCurrentTopLevelMenu(p50 or "")
 	
@@ -904,7 +904,7 @@ function t:setSelected(p50) --[[ line: 1180 ]]
 	self._selectedItem:set(p50)
 end
 
-function t:setSelectedByOffset(p51) --[[ line: 1198 ]]
+function t:setSelectedByOffset(p51)
 	local var61 = self._menuList:get()
 	local _, var62 = self:withinCurrentTopLevelMenu(self._selectedItem:get() or "")
 	
@@ -913,7 +913,7 @@ function t:setSelectedByOffset(p51) --[[ line: 1198 ]]
 	end
 end
 
-function t:repairSelected() --[[ line: 1208 ]]
+function t:repairSelected()
 	if self._selectedItem:get() then
 		local _, var63 = self:withinCurrentTopLevelMenu(self._selectedItem:get() or "")
 		
@@ -925,32 +925,32 @@ function t:repairSelected() --[[ line: 1208 ]]
 	end
 end
 
-function t:configureOrderAlignment(p52) --[[ line: 1222 ]]
+function t:configureOrderAlignment(p52)
 	if self._orderAlignment:get() ~= p52 then
 		self._orderAlignment:set(p52)
 		self:updateMenuList()
 	end
 end
 
-function t:orderAlignment() --[[ line: 1229 ]]
+function t:orderAlignment()
 	return self._orderAlignment
 end
 
-function t:setMenuAbsolutePosition(p53) --[[ line: 1233 ]]
+function t:setMenuAbsolutePosition(p53)
 	if p53 ~= self._menuAbsolutePosition then
 		self._menuAbsolutePosition = p53
 		self._layout:set(createUnibarLayoutInfo(p53, self._menuAbsoluteSizeOpen))
 	end
 end
 
-function t:setMenuAbsoluteSize(p54) --[[ line: 1240 ]]
+function t:setMenuAbsoluteSize(p54)
 	if p54 ~= self._menuAbsoluteSizeOpen then
 		self._menuAbsoluteSizeOpen = p54
 		self._layout:set(createUnibarLayoutInfo(self._menuAbsolutePosition, p54))
 	end
 end
 
-function t:layout() --[[ line: 1247 ]]
+function t:layout()
 	return self._layout
 end
 

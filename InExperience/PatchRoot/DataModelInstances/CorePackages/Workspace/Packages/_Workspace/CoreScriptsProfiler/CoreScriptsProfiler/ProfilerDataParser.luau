@@ -2,10 +2,10 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 52 ]]
+function t.new(p0)
 	-- upvalues: t (ref), scriptProfilerService (ref)
 	local tbl = setmetatable({ _data = nil }, t)
-	local ok, status = pcall(function() --[[ line: 58 ]]
+	local ok, status = pcall(function()
 		-- upvalues: scriptProfilerService (copy), p0 (ref)
 		return scriptProfilerService:DeserializeJSON(p0)
 	end)
@@ -20,17 +20,17 @@ function t.new(p0) --[[ line: 52 ]]
 	return tbl
 end
 
-function t:getFunctionById(p1) --[[ line: 72 ]]
+function t:getFunctionById(p1)
 	return if self._data then self._data.Functions[p1] else nil
 end
 
-function t:getNodeById(p2) --[[ line: 80 ]]
+function t:getNodeById(p2)
 	local data = self._data
 	
 	return if data then data.Nodes[p2] else nil
 end
 
-function t:getSessionDuration() --[[ line: 89 ]]
+function t:getSessionDuration()
 	local data = self._data
 	
 	if not data then
@@ -42,17 +42,17 @@ function t:getSessionDuration() --[[ line: 89 ]]
 	return if sessionStartTime and sessionEndTime then sessionEndTime - sessionStartTime else nil
 end
 
-function t:getTotalFunctions() --[[ line: 103 ]]
+function t:getTotalFunctions()
 	return if self._data then #self._data.Functions else 0
 end
 
-function t:getTotalNodes() --[[ line: 111 ]]
+function t:getTotalNodes()
 	local data = self._data
 	
 	return if data then #data.Nodes else 0
 end
 
-function t:parsePackageName() --[[ line: 127 ]]
+function t:parsePackageName()
 	if not self or self == "" then
 		return "Unknown"
 	end
@@ -66,7 +66,7 @@ function t:parsePackageName() --[[ line: 127 ]]
 	return match_1 or (if string.match(self, "^CoreGui%.RobloxGui") then self:match("^CoreGui%.RobloxGui%.(.*)") elseif string.match(self, "^Players%.") then if string.match(self, "CameraModule") then "CameraModule" elseif string.match(self, "ControlModule") then "ControlModule" else "Players" else "Unknown")
 end
 
-function t:getPackageStatistics() --[[ line: 167 ]]
+function t:getPackageStatistics()
 	-- upvalues: t (ref)
 	if not self._data then
 		return {}

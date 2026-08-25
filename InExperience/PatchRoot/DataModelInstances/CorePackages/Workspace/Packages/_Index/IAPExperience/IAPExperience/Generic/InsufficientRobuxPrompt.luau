@@ -19,7 +19,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.render(p0) --[[ line: 45 ]]
+function name.render(p0)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -35,16 +35,16 @@ function name.render(p0) --[[ line: 45 ]]
 			cancel = { key = "IAPExperience.InsufficientRobux.Action.Cancel" },
 			buyRobux = { key = "IAPExperience.InsufficientRobux.Action.BuyRobux" }
 		},
-		render = function(p1) --[[ line: 64 ]]
+		render = function(p1)
 			-- upvalues: p0 (ref)
 			return p0:renderAlert(p1)
 		end
 	})
 end
 
-function name.renderAlert(p2, p3) --[[ line: 70 ]]
+function name.renderAlert(p2, p3)
 	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), buttonType (ref), fitFrameVertical (ref), roactFitComponentsModule (ref), fitTextLabel (ref), fitFrameHorizontal (ref), imageSetLabel (ref), robux (ref)
-	return withStyle(function(p4) --[[ line: 71 ]]
+	return withStyle(function(p4)
 		-- upvalues: roactModule (copy), interactiveAlert (copy), p2 (ref), p3 (ref), buttonType (copy), fitFrameVertical (copy), roactFitComponentsModule (copy), fitTextLabel (copy), fitFrameHorizontal (copy), imageSetLabel (copy), robux (copy)
 		local font = p4.Font
 		local theme = p4.Theme
@@ -66,7 +66,7 @@ function name.renderAlert(p2, p3) --[[ line: 70 ]]
 					}
 				}
 			},
-			middleContent = function() --[[ line: 99 ]]
+			middleContent = function()
 				-- upvalues: roactModule (copy), fitFrameVertical (copy), roactFitComponentsModule (copy), fitTextLabel (copy), font (ref), p3 (copy), theme (ref), var5 (ref), fitFrameHorizontal (copy), imageSetLabel (copy), robux (copy), p2 (copy)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,

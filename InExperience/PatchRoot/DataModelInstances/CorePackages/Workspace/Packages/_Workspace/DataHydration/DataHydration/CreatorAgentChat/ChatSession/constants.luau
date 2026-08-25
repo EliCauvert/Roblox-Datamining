@@ -9,31 +9,31 @@ game:DefineFastInt("CreatorAgentChatMaxCachedSessionHistories", 5)
 game:DefineFastInt("CreatorAgentChatPrefetchHistoryPagesOnRefresh", 1)
 
 return {
-	getRpcTimeoutSeconds = function() --[[ line: 13 ]]
+	getRpcTimeoutSeconds = function()
 		return game:GetFastInt("CreatorAgentChatRpcTimeoutSeconds")
 	end,
-	getRtnIdleFallbackSeconds = function() --[[ line: 17 ]]
+	getRtnIdleFallbackSeconds = function()
 		return game:GetFastInt("CreatorAgentChatRtnIdleFallbackSeconds")
 	end,
-	getRtnSequenceGapFallbackSeconds = function() --[[ line: 21 ]]
+	getRtnSequenceGapFallbackSeconds = function()
 		return game:GetFastInt("CreatorAgentChatRtnSequenceGapFallbackSeconds")
 	end,
-	getPollMinIntervalSeconds = function() --[[ line: 25 ]]
+	getPollMinIntervalSeconds = function()
 		return game:GetFastInt("CreatorAgentChatPollMinIntervalSeconds")
 	end,
-	getPollMaxIntervalSeconds = function() --[[ line: 29 ]]
+	getPollMaxIntervalSeconds = function()
 		return game:GetFastInt("CreatorAgentChatPollMaxIntervalSeconds")
 	end,
-	getPollBackoffMultiplier = function() --[[ line: 33 ]]
+	getPollBackoffMultiplier = function()
 		return game:GetFastInt("CreatorAgentChatPollBackoffMultiplier")
 	end,
-	getMaxReconciliationHistoryPages = function() --[[ line: 37 ]]
+	getMaxReconciliationHistoryPages = function()
 		return game:GetFastInt("CreatorAgentChatMaxReconciliationHistoryPages")
 	end,
-	getMaxCachedSessionHistories = function() --[[ line: 41 ]]
+	getMaxCachedSessionHistories = function()
 		return game:GetFastInt("CreatorAgentChatMaxCachedSessionHistories")
 	end,
-	getPrefetchHistoryPagesOnRefresh = function() --[[ line: 45 ]]
+	getPrefetchHistoryPagesOnRefresh = function()
 		return game:GetFastInt("CreatorAgentChatPrefetchHistoryPagesOnRefresh")
 	end
 }

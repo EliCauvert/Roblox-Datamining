@@ -35,7 +35,7 @@ local image = foundationModule.Image
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local t = { isInExperience = true }
 
-local var19 = function(p0, p1) --[[ line: 81 ]]
+local var19 = function(p0, p1)
 	-- upvalues: fIntMinDaysToShowCountdownLabelModule (ref), fIntMaxDaysToShowCountDownLabelModule (ref)
 	if not p0 or p0 == 0 then
 		return nil
@@ -47,7 +47,7 @@ end
 
 local var20 = if fFlagEnableAEGIS2CommsFAEUpsell then displayModule.GetDisplayStore(false).getViewportSize else nil
 
-return function(p2) --[[ line: 109 ]]
+return function(p2)
 	-- upvalues: t (ref), useSocialUpsellOverlayControllerModule (ref), reactModule (ref), useScaledValue (ref), reactFocusNavigationModule (ref), reactUtilsModule (ref), httpService (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useLocalization (ref), var19 (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), signalsReactModule (ref), var20 (write), useSelector (ref), minHeightFor (ref), eventTypes (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), constantsModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), image (ref), bannerBadge (ref), foundationModule (ref), iconName (ref), badgeVariant (ref), text (ref)
 	p2 = p2 or t
 	local var23 = useSocialUpsellOverlayControllerModule(p2.isInExperience)
@@ -56,7 +56,7 @@ return function(p2) --[[ line: 109 ]]
 	local var26, var27 = reactFocusNavigationModule.useDefaultFocusBehavior()
 	local var28 = reactModule.useRef(nil)
 	local var29 = reactUtilsModule.useComposedRef(var27, var28)
-	reactModule.useEffect(function() --[[ line: 118 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref)
 		if var28.current then
 			local scrollingFrame = var28.current:FindFirstChildWhichIsA("ScrollingFrame", true)
@@ -66,7 +66,7 @@ return function(p2) --[[ line: 109 ]]
 			end
 		end
 	end, {})
-	local var30 = reactModule.useMemo(function() --[[ line: 129 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), httpService (copy)
 		return p2.impressionId or httpService:GenerateGUID(false)
 	end, {
@@ -75,7 +75,7 @@ return function(p2) --[[ line: 109 ]]
 		p2.upsellPurpose,
 		p2.upsellEntryComponent
 	})
-	local var31 = reactModule.useMemo(function() --[[ line: 140 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: socialUpsellAnalyticsModule (copy), p2 (ref), upsellComponentModule (copy)
 		return socialUpsellAnalyticsModule.evaluateUpsellStage(p2.upsellEntrySurface, upsellComponentModule.Modal, p2.upsellEntryComponent)
 	end, { p2.upsellEntrySurface, p2.upsellEntryComponent })
@@ -83,18 +83,18 @@ return function(p2) --[[ line: 109 ]]
 		daysLeft = "Feature.FAE.Label.DaysLeft",
 		dayLeft = "Feature.FAE.Label.DayLeft"
 	})
-	local var33 = reactModule.useMemo(function() --[[ line: 153 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), var19 (copy), var32 (ref)
 		return if p2.countDownBadge then var19(p2.countDownBadge.deadlineUtcTimestamp, var32) else nil
 	end, { p2.countDownBadge, var32 })
-	local var34 = reactModule.useMemo(function() --[[ line: 160 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), var33 (ref)
 		return if p2.countDownBadge then if p2.countDownBadge.text then p2.countDownBadge.text else var33 else nil
 	end, { var33, p2.countDownBadge })
-	local var35 = minHeightFor <= (if fFlagEnableAEGIS2CommsFAEUpsell then signalsReactModule.useSignalState(var20) else useSelector(function(p3) --[[ line: 173 ]]
+	local var35 = minHeightFor <= (if fFlagEnableAEGIS2CommsFAEUpsell then signalsReactModule.useSignalState(var20) else useSelector(function(p3)
 		return p3.ScreenSize
 	end)).Y
-	reactModule.useEffect(function() --[[ line: 181 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), var24 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), p2 (ref), var31 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
 		if var30 and var24.current ~= var30 then
 			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellShown, {
@@ -114,7 +114,7 @@ return function(p2) --[[ line: 109 ]]
 		var31,
 		if fFlagAddUpsellEntryComponentToAnalyticsModule then p2.upsellEntryComponent else nil
 	})
-	local var36 = reactModule.useCallback(function(p4) --[[ line: 207 ]]
+	local var36 = reactModule.useCallback(function(p4)
 		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), p2 (ref), var31 (ref), var30 (ref), upsellComponentModule (copy), fFlagAddUpsellEntryComponentToAnalyticsModule (copy)
 		socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellButtonClick, {
 			upsellPurpose = p2.upsellPurpose,
@@ -132,7 +132,7 @@ return function(p2) --[[ line: 109 ]]
 		var31,
 		if fFlagAddUpsellEntryComponentToAnalyticsModule then p2.upsellEntryComponent else nil
 	})
-	local var37 = reactModule.useCallback(function() --[[ line: 231 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var36 (ref), constantsModule (copy), p2 (ref)
 		var36(constantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Primary)
 		p2.primaryAction.onActivated()
@@ -142,7 +142,7 @@ return function(p2) --[[ line: 109 ]]
 		hasBackdrop = true,
 		closeOnClickOutside = true,
 		size = dialogSize.Medium,
-		onClose = reactModule.useCallback(function() --[[ line: 243 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: var36 (ref), constantsModule (copy), var23 (ref), p2 (ref)
 			var36(constantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Dismiss)
 			var23.closeSocialOverlay()
@@ -194,7 +194,7 @@ return function(p2) --[[ line: 109 ]]
 		}),
 		DialogActions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = if var34 then 3 else 4,
-			actions = reactModule.useMemo(function() --[[ line: 257 ]]
+			actions = reactModule.useMemo(function()
 				-- upvalues: p2 (ref), buttonVariant (copy), var37 (ref), var26 (ref)
 				local t = {}
 				table.insert(t, {

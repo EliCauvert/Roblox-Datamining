@@ -1,3 +1,3 @@
-﻿return function(p0, p1) --[[ line: 1 | named "insert" ]]
+﻿return function(p0, p1)
 	return { size = p0, element = p1 }
 end

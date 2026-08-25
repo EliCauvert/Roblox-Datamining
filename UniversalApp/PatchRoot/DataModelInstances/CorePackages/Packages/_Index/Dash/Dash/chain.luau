@@ -1,9 +1,9 @@
-﻿return function(...) --[[ line: 14 | named "chain" ]]
+﻿return function(...)
 	local list = { ... }
 	local listCount = #list
 	local var2 = 1
 	
-	return function() --[[ line: 18 ]]
+	return function()
 		-- upvalues: var2 (write), listCount (ref), list (ref)
 		while var2 <= listCount do
 			local list_1 = { list[var2]() }

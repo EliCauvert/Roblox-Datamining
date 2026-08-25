@@ -1,18 +1,18 @@
 ﻿local t = {}
 
-local function _(p0, p1) --[[ line: 6 | named "createListener" ]]
+local function _(p0, p1)
 	return { id = p0, callback = p1 }
 end
 
 return {
-	addEventListener = function(_, p2, p3, p4) --[[ line: 18 ]]
+	addEventListener = function(_, p2, p3, p4)
 		-- upvalues: t (ref)
 		if t[p2] == nil then
 			t[p2] = {}
 		end
 		table.insert(t[p2], { id = p3, callback = p4 })
 	end,
-	removeEventListener = function(_, p5, p6) --[[ line: 26 ]]
+	removeEventListener = function(_, p5, p6)
 		-- upvalues: t (ref)
 		if t[p5] == nil then return end
 		for i, v in ipairs(t[p5]) do
@@ -21,7 +21,7 @@ return {
 			end
 		end
 	end,
-	removeCallbackFromEvent = function(_, p7, p8, p9) --[[ line: 40 ]]
+	removeCallbackFromEvent = function(_, p7, p8, p9)
 		-- upvalues: t (ref)
 		if t[p7] == nil then return end
 		for i, v in ipairs(t[p7]) do
@@ -32,7 +32,7 @@ return {
 			end
 		end
 	end,
-	dispatchEvent = function(_, p10, ...) --[[ line: 56 ]]
+	dispatchEvent = function(_, p10, ...)
 		-- upvalues: t (ref)
 		if t[p10] == nil then return end
 		for i, v in ipairs(t[p10]) do

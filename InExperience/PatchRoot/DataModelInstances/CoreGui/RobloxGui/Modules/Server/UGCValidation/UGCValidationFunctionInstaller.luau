@@ -4,7 +4,7 @@ local UGCValidationWithContextEntrypointFeatureEngineFeature = game:GetEngineFea
 local UGCValidateMigrateSchemaProperties2 = game:DefineFastFlag("UGCValidateMigrateSchemaProperties2", false)
 local UGCValidateForwardIECRestrictedUserIds = game:DefineFastFlag("UGCValidateForwardIECRestrictedUserIds", false)
 
-local function UGCValidationFunction(p0) --[[ line: 10 ]]
+local function UGCValidationFunction(p0)
 	-- upvalues: UGCValidationWithContextEntrypointFeatureEngineFeature (ref), UGCValidationModule (ref), UGCValidateMigrateSchemaProperties2 (ref), UGCValidateForwardIECRestrictedUserIds (ref)
 	local var11, var12
 	local instances = p0.instances
@@ -87,7 +87,7 @@ local function UGCValidationFunction(p0) --[[ line: 10 ]]
 	return false, var21
 end
 
-return function() --[[ line: 119 | named "Install" ]]
+return function()
 	-- upvalues: UGCValidationService (ref), UGCValidationFunction (ref)
 	UGCValidationService:RegisterUGCValidationFunction(UGCValidationFunction)
 end

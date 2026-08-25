@@ -5,7 +5,7 @@ local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1) --[[ line: 15 ]]
+return function(p0, _, p1)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), parent (ref), getSduiClientPageScope (ref), sduiLoadTimer (ref)
 	local var1 = if p0 then p0.actionParams else nil
 	
@@ -31,7 +31,7 @@ return function(p0, _, p1) --[[ line: 15 ]]
 	local var4 = chartsModule.fetchChartsPage(chartsPage, true)
 	
 	if var4 then
-		var4:finally(function() --[[ line: 46 ]]
+		var4:finally(function()
 			-- upvalues: chartsPage (ref)
 			chartsPage.logRefreshComplete()
 		end)

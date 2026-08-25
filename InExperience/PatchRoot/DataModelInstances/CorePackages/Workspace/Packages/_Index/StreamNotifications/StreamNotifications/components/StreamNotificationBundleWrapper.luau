@@ -22,7 +22,7 @@ local eventStream = require(streamNotifications.analytics.analyticsService).Even
 local analyticsConstantsModule = require(streamNotifications.analytics.analyticsConstants)
 local t = { stiffness = 207, damping = 24, mass = 1 }
 
-return function(p0) --[[ line: 54 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), reactOtterModule (ref), useLocalization (ref), constantsModule (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), t (ref), streamNotificationAnimationWrapperModule (ref), uDim (ref), uDim_1 (ref), imageSetLabel (ref), uDim2 (ref), truncationCollapse (ref), var9 (ref), truncationExpand (ref)
 	local var13 = useStyle()
 	local font = var13.Font
@@ -36,14 +36,14 @@ return function(p0) --[[ line: 54 ]]
 		moreText = constantsModule.Text.ShowMoreKey,
 		lessText = constantsModule.Text.ShowLessKey
 	})
-	local var24 = reactModule.useCallback(function(p1, p2) --[[ line: 77 ]]
+	local var24 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var15 (ref), var18 (ref)
 		if p1 == 1 and var15 then
 			var18(p2)
 		end
 	end)
 	
-	local var25 = function(p3) --[[ line: 83 ]]
+	local var25 = function(p3)
 		local t = {}
 		
 		for i, v in p3 do
@@ -54,9 +54,9 @@ return function(p0) --[[ line: 54 ]]
 		return t
 	end
 	
-	local var26 = function() --[[ line: 93 ]]
+	local var26 = function()
 		-- upvalues: var16 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), p0 (ref), var25 (ref)
-		var16(function(p4) --[[ line: 94 ]]
+		var16(function(p4)
 			-- upvalues: notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), p0 (copy), var25 (copy)
 			notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, if p4 then analyticsConstantsModule.EventNames.bundleOpened else analyticsConstantsModule.EventNames.bundleClosed, {
 				bundleKey = p0.notifications[1].content.bundleKey or nil,
@@ -79,19 +79,19 @@ return function(p0) --[[ line: 54 ]]
 		end)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 132 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref), reactOtterModule (copy), var15 (ref), t (copy)
 		var22({
 			shadowHeight = reactOtterModule.spring(if var15 then 0 else 1, t),
 			shadowWidth = reactOtterModule.spring(if var15 then 1 else 0, t)
 		})
 	end, { var15 })
-	reactModule.useEffect(function() --[[ line: 140 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), p0 (ref)
 		var20(#p0.notifications > 1)
 	end, { p0.notifications })
 	
-	return reactModule.useMemo(function() --[[ line: 145 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var15 (ref), var19 (ref), reactModule (copy), streamNotificationAnimationWrapperModule (copy), var24 (ref), var21 (ref), var17 (ref), constantsModule (copy), var13 (ref), uDim (copy), font_1 (ref), var14 (ref), var26 (ref), uDim_1 (copy), var23 (ref), imageSetLabel (copy), uDim2 (copy), truncationCollapse (copy), var9 (copy), truncationExpand (copy)
 		local t = {}
 		
@@ -125,7 +125,7 @@ return function(p0) --[[ line: 54 ]]
 		t.Shadow1 = if var15 and var19 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var21:map(function(p5) --[[ line: 185 ]]
+			Size = var21:map(function(p5)
 				-- upvalues: var17 (copy), constantsModule (copy)
 				return UDim2.new(1, 0, 0, p5.shadowHeight * var17 + constantsModule.DefaultPadding)
 			end),
@@ -135,7 +135,7 @@ return function(p0) --[[ line: 54 ]]
 			reactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Size = var21:map(function(p6) --[[ line: 194 ]]
+				Size = var21:map(function(p6)
 					-- upvalues: constantsModule (copy), var17 (copy)
 					return UDim2.new(1, -(constantsModule.DefaultPadding * 4 * p6.shadowWidth), 0, var17 - constantsModule.DefaultPadding)
 				end),
@@ -149,7 +149,7 @@ return function(p0) --[[ line: 54 ]]
 		t.Shadow2 = if var15 and var19 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var21:map(function(p7) --[[ line: 219 ]]
+			Size = var21:map(function(p7)
 				-- upvalues: var17 (copy), constantsModule (copy)
 				return UDim2.new(1, 0, 0, p7.shadowHeight * var17 + constantsModule.DefaultPadding * 2)
 			end),
@@ -159,7 +159,7 @@ return function(p0) --[[ line: 54 ]]
 			reactModule.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Size = var21:map(function(p8) --[[ line: 228 ]]
+				Size = var21:map(function(p8)
 					-- upvalues: constantsModule (copy), var17 (copy)
 					return UDim2.new(1, -(constantsModule.DefaultPadding * 6 * p8.shadowWidth), 0, var17 - constantsModule.DefaultPadding)
 				end),

@@ -23,21 +23,21 @@ local t_2 = {
 	[subagentTaskStatus.Deleted] = 5
 }
 
-local function _(p0) --[[ line: 46 | named "toTaskStatus" ]]
+local function _(p0)
 	-- upvalues: subagentTaskStatus (ref), t (ref)
 	return if typeof(p0) == "string" then t[string.lower(p0)] or p0 else subagentTaskStatus.Pending
 end
 
-local _ = function(p1) --[[ line: 53 | named "toTaskCategory" ]]
+local _ = function(p1)
 	-- upvalues: t_1 (ref)
 	return if typeof(p1) == "string" then t_1[string.lower(p1)] or p1 else nil
 end
 
-local _ = function(p2) --[[ line: 60 | named "valueLooksLikeToolName" ]]
+local _ = function(p2)
 	return typeof(p2) == "string" and string.lower(p2) == "manage_tasks"
 end
 
-local _ = function(p3) --[[ line: 64 | named "toolCallLooksLikeManageTasks" ]]
+local _ = function(p3)
 	local kind = p3.kind
 	
 	if not (typeof(kind) == "string" and string.lower(kind) == "manage_tasks") then
@@ -62,14 +62,14 @@ local _ = function(p3) --[[ line: 64 | named "toolCallLooksLikeManageTasks" ]]
 	end
 end
 
-local function toTaskMetadata(p4) --[[ line: 77 ]]
+local function toTaskMetadata(p4)
 	-- upvalues: httpService (ref)
 	if p4 == nil then
 		return nil
 	elseif typeof(p4) == "table" then
 		return p4
 	elseif typeof(p4) == "string" then
-		local ok, status = pcall(function() --[[ line: 84 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p4 (ref)
 			return httpService:JSONDecode(p4)
 		end)
@@ -78,7 +78,7 @@ local function toTaskMetadata(p4) --[[ line: 77 ]]
 	end
 end
 
-local function toTaskItem(p5) --[[ line: 94 ]]
+local function toTaskItem(p5)
 	-- upvalues: t_1 (ref), subagentTaskStatus (ref), t (ref), toTaskMetadata (ref)
 	if typeof(p5) ~= "table" or typeof(p5.text) ~= "string" or p5.text == "" then
 		return nil
@@ -99,25 +99,25 @@ local function toTaskItem(p5) --[[ line: 94 ]]
 	return t_2
 end
 
-local function isTaskComplete(p6) --[[ line: 114 ]]
+local function isTaskComplete(p6)
 	-- upvalues: subagentTaskStatus (ref)
 	return p6.status == subagentTaskStatus.Done
 end
 
-local function isTaskLoading(p7) --[[ line: 118 ]]
+local function isTaskLoading(p7)
 	-- upvalues: subagentTaskStatus (ref)
 	return p7.status == subagentTaskStatus.InProgress
 end
 
-local _ = function(p8) --[[ line: 122 | named "getTaskStatusPriority" ]]
+local _ = function(p8)
 	-- upvalues: t_2 (ref)
 	return if p8 == nil then 6 else t_2[p8] or 6
 end
 
-local _ = function(p9) --[[ line: 129 | named "sortTasksByStatus" ]]
+local _ = function(p9)
 	-- upvalues: t_2 (ref)
 	local cloned = table.clone(p9)
-	table.sort(cloned, function(p10, p11) --[[ line: 131 ]]
+	table.sort(cloned, function(p10, p11)
 		-- upvalues: t_2 (copy)
 		local status = p10.status
 		local status_1 = p11.status
@@ -128,7 +128,7 @@ local _ = function(p9) --[[ line: 129 | named "sortTasksByStatus" ]]
 	return cloned
 end
 
-local function appendTasksFromPayload(p12, p13) --[[ line: 137 ]]
+local function appendTasksFromPayload(p12, p13)
 	-- upvalues: toTaskItem (ref)
 	local var19 = if typeof(p12) == "table" then p12.tasks else nil
 	
@@ -142,14 +142,14 @@ local function appendTasksFromPayload(p12, p13) --[[ line: 137 ]]
 	end
 end
 
-local function appendTasksFromMaybeJson(p14, p15) --[[ line: 151 ]]
+local function appendTasksFromMaybeJson(p14, p15)
 	-- upvalues: appendTasksFromPayload (ref), httpService (ref)
 	if typeof(p14) == "table" then
 		appendTasksFromPayload(p14, p15)
 		
 		return
 	elseif typeof(p14) == "string" then
-		local ok, status = pcall(function() --[[ line: 155 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p14 (ref)
 			return httpService:JSONDecode(p14)
 		end)
@@ -158,7 +158,7 @@ local function appendTasksFromMaybeJson(p14, p15) --[[ line: 151 ]]
 		local var21 = if typeof(status) == "table" then status.text else nil
 		
 		if typeof(var21) == "string" then
-			local ok_1, status_1 = pcall(function() --[[ line: 164 ]]
+			local ok_1, status_1 = pcall(function()
 				-- upvalues: httpService (copy), var21 (ref)
 				return httpService:JSONDecode(var21)
 			end)
@@ -171,7 +171,7 @@ local function appendTasksFromMaybeJson(p14, p15) --[[ line: 151 ]]
 	end
 end
 
-local function extractTasksFromToolCall(p16) --[[ line: 175 ]]
+local function extractTasksFromToolCall(p16)
 	-- upvalues: appendTasksFromMaybeJson (ref)
 	local var22
 	local kind = p16.kind
@@ -211,7 +211,7 @@ local function extractTasksFromToolCall(p16) --[[ line: 175 ]]
 	end
 end
 
-local function orderedManageTasksToolCalls(p17) --[[ line: 185 ]]
+local function orderedManageTasksToolCalls(p17)
 	local kind
 	local t = {}
 	local t_1 = {}
@@ -303,11 +303,11 @@ local function orderedManageTasksToolCalls(p17) --[[ line: 185 ]]
 	return t
 end
 
-local _ = function(p18) --[[ line: 213 | named "taskKey" ]]
+local _ = function(p18)
 	return `{p18.category}:{p18.text}`
 end
 
-local function applyTasks(p19, p20, p21) --[[ line: 217 ]]
+local function applyTasks(p19, p20, p21)
 	for i, v in p19 do
 		local category = `{v.category}:{v.text}`
 		
@@ -318,7 +318,7 @@ local function applyTasks(p19, p20, p21) --[[ line: 217 ]]
 	end
 end
 
-local function groupTasks(p22) --[[ line: 227 ]]
+local function groupTasks(p22)
 	-- upvalues: subagentTaskStatus (ref), t_2 (ref)
 	local t = {}
 	local t_1 = {}
@@ -344,7 +344,7 @@ local function groupTasks(p22) --[[ line: 227 ]]
 	end
 	for i, v_1 in t do
 		local cloned = table.clone(v_1.tasks)
-		table.sort(cloned, function(p23, p24) --[[ line: 131 ]]
+		table.sort(cloned, function(p23, p24)
 			-- upvalues: t_2 (copy)
 			local status = p23.status
 			local status_1 = p24.status
@@ -364,7 +364,7 @@ local function groupTasks(p22) --[[ line: 227 ]]
 	return t
 end
 
-local function toTaskState(p25, p26) --[[ line: 264 ]]
+local function toTaskState(p25, p26)
 	-- upvalues: groupTasks (ref)
 	if #p25 == 0 then
 		return nil
@@ -389,7 +389,7 @@ end
 return {
 	TOOL_NAME = "manage_tasks",
 	extractTasksFromToolCall = extractTasksFromToolCall,
-	fromTasks = function(p27) --[[ line: 289 ]]
+	fromTasks = function(p27)
 		-- upvalues: toTaskItem (ref), applyTasks (ref), toTaskState (ref)
 		if typeof(p27) ~= "table" then
 			return nil
@@ -409,7 +409,7 @@ return {
 		
 		return toTaskState(t, t_1)
 	end,
-	fromTurnState = function(p28) --[[ line: 307 ]]
+	fromTurnState = function(p28)
 		-- upvalues: orderedManageTasksToolCalls (ref), appendTasksFromMaybeJson (ref), applyTasks (ref), toTaskState (ref)
 		local t = {}
 		local t_1 = {}

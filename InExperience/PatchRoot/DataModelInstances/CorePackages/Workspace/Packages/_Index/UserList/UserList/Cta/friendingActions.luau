@@ -14,12 +14,12 @@ local _ = {
 	TOO_MANY_REQUESTS = 429
 }
 
-local function _(p0) --[[ line: 61 | named "refreshCTA" ]]
+local function _(p0)
 	-- upvalues: profileCTAStore (ref)
 	profileCTAStore.get().getCTA(p0, true)
 end
 
-local function getErrorToastMessage(p1, p2, p3) --[[ line: 66 ]]
+local function getErrorToastMessage(p1, p2, p3)
 	-- upvalues: friendingErrorCodesModule (ref)
 	return if p2 == 400 then ({
 		[friendingErrorCodesModule.INVALID_TARGET_USER] = p1.invalidTargetUserError,
@@ -37,7 +37,7 @@ local function getErrorToastMessage(p1, p2, p3) --[[ line: 66 ]]
 	})[p3] else nil
 end
 
-local function showErrorToast(p4, p5, p6) --[[ line: 92 ]]
+local function showErrorToast(p4, p5, p6)
 	-- upvalues: getErrorToastMessage (ref), setCurrentToastMessage (ref)
 	p4(setCurrentToastMessage({
 		isLocalized = true,
@@ -46,9 +46,9 @@ local function showErrorToast(p4, p5, p6) --[[ line: 92 ]]
 end
 
 return {
-	executeAddFriend = function(p7) --[[ line: 103 ]]
+	executeAddFriend = function(p7)
 		-- upvalues: requests (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return requests.RequestFriendshipFromUserId(p7.targetUserId, p7.friendshipOriginSourceType):andThen(function() --[[ line: 105 ]]
+		return requests.RequestFriendshipFromUserId(p7.targetUserId, p7.friendshipOriginSourceType):andThen(function()
 			-- upvalues: p7 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
 			profileCTAStore.get().getCTA(p7.targetUserId, true)
 			p7.dispatch(setCurrentToastMessage({
@@ -56,14 +56,14 @@ return {
 				toastMessage = p7.localized.friendRequestSent,
 				toastIcon = friendAdd
 			}))
-		end):catch(function(p8) --[[ line: 113 ]]
+		end):catch(function(p8)
 			-- upvalues: showErrorToast (copy), p7 (ref)
 			showErrorToast(p7.dispatch, p7.localized, p8)
 		end)
 	end,
-	executeAcceptFriendRequest = function(p9) --[[ line: 118 ]]
+	executeAcceptFriendRequest = function(p9)
 		-- upvalues: friendsStore (ref), profileCTAStore (ref), setCurrentToastMessage (ref), friendAdd (ref), showErrorToast (ref)
-		return friendsStore.get().AcceptFriendRequest(p9.targetUserId):andThen(function() --[[ line: 121 ]]
+		return friendsStore.get().AcceptFriendRequest(p9.targetUserId):andThen(function()
 			-- upvalues: p9 (ref), profileCTAStore (copy), setCurrentToastMessage (copy), friendAdd (copy)
 			profileCTAStore.get().getCTA(p9.targetUserId, true)
 			p9.dispatch(setCurrentToastMessage({
@@ -71,17 +71,17 @@ return {
 				toastMessage = p9.localized.friendAdded,
 				toastIcon = friendAdd
 			}))
-		end):catch(function(p10) --[[ line: 129 ]]
+		end):catch(function(p10)
 			-- upvalues: showErrorToast (copy), p9 (ref)
 			showErrorToast(p9.dispatch, p9.localized, p10)
 		end)
 	end,
-	executeDeclineFriendRequest = function(p11) --[[ line: 134 ]]
+	executeDeclineFriendRequest = function(p11)
 		-- upvalues: friendsStore (ref), profileCTAStore (ref), showErrorToast (ref)
-		return friendsStore.get().DeclineFriendRequest(p11.targetUserId):andThen(function() --[[ line: 137 ]]
+		return friendsStore.get().DeclineFriendRequest(p11.targetUserId):andThen(function()
 			-- upvalues: p11 (ref), profileCTAStore (copy)
 			profileCTAStore.get().getCTA(p11.targetUserId, true)
-		end):catch(function(p12) --[[ line: 140 ]]
+		end):catch(function(p12)
 			-- upvalues: showErrorToast (copy), p11 (ref)
 			showErrorToast(p11.dispatch, p11.localized, p12)
 		end)

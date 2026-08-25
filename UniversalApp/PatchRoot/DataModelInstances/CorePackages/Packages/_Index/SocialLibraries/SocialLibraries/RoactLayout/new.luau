@@ -1,6 +1,6 @@
 ﻿local roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
 
-return function(p0, p1) --[[ line: 5 | named "new" ]]
+return function(p0, p1)
 	-- upvalues: roact (ref)
 	local t = { blockLayout = p0 }
 	

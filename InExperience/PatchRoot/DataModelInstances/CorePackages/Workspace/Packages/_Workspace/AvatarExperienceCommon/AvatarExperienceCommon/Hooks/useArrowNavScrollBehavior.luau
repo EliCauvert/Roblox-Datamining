@@ -6,7 +6,7 @@ local reactModule = require(parent.React)
 local constantsModule = require(avatarExperienceCommon.Constants)
 local t = { dampingRatio = 1, frequency = 3.5 }
 
-return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), otterModule (ref), constantsModule (ref), t (ref), runService (ref)
 	local var6 = reactModule.useRef(nil)
 	local var7 = reactModule.useRef(nil)
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 			error("Must set either buttonRefs or (buttonWidth and numButtons)")
 		end
 	end
-	local function disconnectHoldConn() --[[ line: 79 ]]
+	local function disconnectHoldConn()
 		-- upvalues: var6 (ref)
 		if var6.current then
 			var6.current:Disconnect()
@@ -39,12 +39,12 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 		end
 	end
 	
-	local function _(p1) --[[ line: 86 | named "getNewCanvasPosition" ]]
+	local function _(p1)
 		-- upvalues: p0 (ref)
 		return p0.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(p1, 0)
 	end
 	
-	local function setMotor(value) --[[ line: 91 ]]
+	local function setMotor(value)
 		-- upvalues: var7 (ref), otterModule (copy), p0 (ref)
 		if var7.current then
 			var7.current:destroy()
@@ -52,18 +52,18 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 		var7.current = otterModule.createSingleMotor(value)
 		
 		if var7.current then
-			var7.current:onStep(function(p2) --[[ line: 97 ]]
+			var7.current:onStep(function(p2)
 				-- upvalues: p0 (copy)
 				p0.defaultUseProps.updateCanvasPosition(Vector2.new(p2, 0))
 			end)
-			var7.current:onComplete(function(p3) --[[ line: 100 ]]
+			var7.current:onComplete(function(p3)
 				-- upvalues: p0 (copy)
 				p0.defaultUseProps.updateCanvasPosition(Vector2.new(p3, 0))
 			end)
 		end
 	end
 	
-	local function getScrollToLocation(p4) --[[ line: 106 ]]
+	local function getScrollToLocation(p4)
 		-- upvalues: p0 (ref), constantsModule (copy)
 		local t = {}
 		local buttonRefs = p0.defaultUseProps.buttonRefs
@@ -125,12 +125,12 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 		end
 	end
 	
-	local function getGoal(p5) --[[ line: 193 ]]
+	local function getGoal(p5)
 		-- upvalues: otterModule (copy), getScrollToLocation (ref), t (copy)
 		return otterModule.spring(getScrollToLocation(p5), t)
 	end
 	
-	local function onPressHoldInputBegan(p6, p7) --[[ line: 197 ]]
+	local function onPressHoldInputBegan(p6, p7)
 		-- upvalues: var8 (ref), var6 (ref), runService (copy), constantsModule (copy), p0 (ref)
 		if p6.UserInputState ~= Enum.UserInputState.Begin then return end
 		var8.current = tick()
@@ -139,13 +139,13 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 			var6.current:Disconnect()
 			var6.current = nil
 		end
-		var6.current = runService.RenderStepped:Connect(function(p8) --[[ line: 203 ]]
+		var6.current = runService.RenderStepped:Connect(function(p8)
 			-- upvalues: var8 (copy), constantsModule (copy), p7 (ref), p0 (copy)
 			p0.defaultUseProps.updateCanvasPosition(p0.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new((if p7 == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then -1 else 1) * 500 * p8 * (tick() - var8.current) ^ 2, 0))
 		end)
 	end
 	
-	local function onPressHoldInputEnded(p9, p10) --[[ line: 212 ]]
+	local function onPressHoldInputEnded(p9, p10)
 		-- upvalues: p0 (ref), var8 (ref), var7 (ref), setMotor (ref), getGoal (ref), otterModule (copy), var6 (ref)
 		if p9.UserInputState ~= Enum.UserInputState.End then return end
 		local current = p0.defaultUseProps.scrollingFrameRef.current
@@ -168,7 +168,7 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 		end
 	end
 	
-	local function handleInputBegan(_, p11) --[[ line: 233 ]]
+	local function handleInputBegan(_, p11)
 		-- upvalues: p0 (ref), onPressHoldInputBegan (ref)
 		local onPressHoldInputBegan_1 = p0.onPressHoldInputBegan or onPressHoldInputBegan
 		
@@ -177,7 +177,7 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 		end
 	end
 	
-	local function handleInputEnded(_, p12) --[[ line: 240 ]]
+	local function handleInputEnded(_, p12)
 		-- upvalues: p0 (ref), onPressHoldInputEnded (ref)
 		local onPressHoldInputEnded_1 = p0.onPressHoldInputEnded or onPressHoldInputEnded
 		
@@ -186,12 +186,12 @@ return function(p0) --[[ line: 42 | named "useArrowNavScrollBehavior" ]]
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 248 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), setMotor (ref), var6 (ref), var7 (ref)
 		if p0.defaultUseProps then
 			setMotor(0)
 		end
-		return function() --[[ line: 254 ]]
+		return function()
 			-- upvalues: var6 (copy), var7 (copy)
 			if var6.current then
 				var6.current:Disconnect()

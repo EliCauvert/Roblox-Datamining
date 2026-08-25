@@ -6,14 +6,14 @@ local roactModule = require(parent_1.Parent.Roact)
 local dumpInstanceTreeModule = require(parent.dumpInstanceTree)
 local mockStyleComponentModule = require(parent_1.Utility.mockStyleComponent)
 
-return function(p0, p1, p2) --[[ line: 33 | named "testWithStyledComponent" ]]
+return function(p0, p1, p2)
 	-- upvalues: roactModule (ref), mockStyleComponentModule (ref), httpService (ref), coreGuiService (ref), dumpInstanceTreeModule (ref)
 	local var5 = ("TestApp-%s"):format(httpService:GenerateGUID())
 	local var6 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
 		StyleProvider = mockStyleComponentModule({ TestComponent = roactModule.createElement(p0, p1) })
 	}), coreGuiService, var5)
 	local var7 = ("game.CoreGui.%s.Children.TestComponent"):format(var5)
-	local ok, status = pcall(function() --[[ line: 46 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p2 (ref), var7 (ref)
 		p2(var7)
 	end)

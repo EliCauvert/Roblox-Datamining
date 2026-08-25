@@ -1,6 +1,6 @@
 ﻿local calculateSpacePerItemModule = require(script:FindFirstAncestor("CollectionViews").calculateSpacePerItem)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 14 | named "calculateCarouselSpacingMetrics" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: calculateSpacePerItemModule (ref)
 	if p1 <= 0 then
 		return {

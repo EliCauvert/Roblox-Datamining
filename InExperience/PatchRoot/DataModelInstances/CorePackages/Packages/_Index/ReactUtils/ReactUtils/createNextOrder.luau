@@ -1,7 +1,7 @@
-﻿return function() --[[ line: 2 | named "createNextOrder" ]]
+﻿return function()
 	local var0 = 0
 	
-	return function() --[[ line: 5 ]]
+	return function()
 		-- upvalues: var0 (write)
 		var0 += 1
 		

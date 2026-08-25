@@ -20,17 +20,17 @@ local t = {
 	}
 }
 
-local function _(p0, p1, p2) --[[ line: 26 | named "sendEvent" ]]
+local function _(p0, p1, p2)
 	-- upvalues: rbxAnalyticsService (ref)
 	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", { section = p0, action = p1, element = p2 })
 end
 
-function t.sendPageLoad(p3) --[[ line: 34 ]]
+function t.sendPageLoad(p3)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
 	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", { element = nil, section = p3, action = t.Action.PageLoad })
 end
 
-function t.sendFieldTouched(p4, p5) --[[ line: 38 ]]
+function t.sendFieldTouched(p4, p5)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
 	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		section = p4,
@@ -39,7 +39,7 @@ function t.sendFieldTouched(p4, p5) --[[ line: 38 ]]
 	})
 end
 
-function t.sendButtonClicked(p6, p7) --[[ line: 42 ]]
+function t.sendButtonClicked(p6, p7)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
 	rbxAnalyticsService:SendEventDeferred("client", "publish_avatar_prompt", "iec_funnel_user_creation", {
 		section = p6,

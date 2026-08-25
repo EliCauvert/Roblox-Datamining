@@ -18,7 +18,7 @@ local fFlagAXFixBadgeStatusConfigOptions = avatarExperienceFlagsModule.FFlagAXFi
 local fFlagAXShowFaeUpsell = avatarExperienceFlagsModule.FFlagAXShowFaeUpsell
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 
-local var5 = function(p0) --[[ line: 43 ]]
+local var5 = function(p0)
 	local list = { { type = "icon", icon = p0.icon } }
 	
 	if p0.text then
@@ -27,7 +27,7 @@ local var5 = function(p0) --[[ line: 43 ]]
 	return list
 end
 
-return function(p1) --[[ line: 55 | named "CatalogItemCardSelectedOverlay" ]]
+return function(p1)
 	-- upvalues: useTokens (ref), useLastInput (ref), useIsSpatial (ref), responsiveModule (ref), reactModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref), itemCardBadge (ref), fFlagAXFixBadgeStatusConfigOptions (ref), fFlagAXShowFaeUpsell (ref), var5 (ref), fFlagAXInventoryDurablesSupport (ref), itemCardIcon (ref), button (ref), buttonType (ref)
 	local var12
 	local var7 = useTokens()

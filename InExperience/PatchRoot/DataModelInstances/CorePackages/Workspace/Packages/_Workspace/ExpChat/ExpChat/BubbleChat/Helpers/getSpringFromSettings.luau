@@ -1,6 +1,6 @@
 ﻿local otterModule = require(script:FindFirstAncestor("ExpChat").Parent.Otter)
 
-return function(value, p0) --[[ line: 7 | named "getSpringFromSettings" ]]
+return function(value, p0)
 	-- upvalues: otterModule (ref)
 	local var1 = if p0 == "size" then value.SizeAnimation else value.TransparencyAnimation
 	
@@ -12,7 +12,7 @@ return function(value, p0) --[[ line: 7 | named "getSpringFromSettings" ]]
 		frequency = var1.SpringFrequency
 	}
 	
-	return function(p1) --[[ line: 25 ]]
+	return function(p1)
 		-- upvalues: otterModule (copy), t (ref)
 		return otterModule.spring(p1, t)
 	end

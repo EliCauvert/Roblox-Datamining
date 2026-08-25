@@ -13,10 +13,10 @@ local tileOverlayModule = require(parent.SplitTile.TileOverlay)
 local _ = require(parent_1.Style.StyleTypes)
 local uDim = UDim.new(0, 8)
 
-local function useIsHoveredState(p0, p1) --[[ line: 65 ]]
+local function useIsHoveredState(p0, p1)
 	-- upvalues: useDebouncedState (ref), reactModule (ref)
 	local var8, var9 = useDebouncedState(false, p0)
-	reactModule.useLayoutEffect(function() --[[ line: 68 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: p1 (ref), var8 (ref)
 		if p1 ~= nil then
 			p1(var8)
@@ -26,7 +26,7 @@ local function useIsHoveredState(p0, p1) --[[ line: 65 ]]
 	return var8, var9
 end
 
-return function(p2) --[[ line: 77 | named "VerticalTile" ]]
+return function(p2)
 	-- upvalues: useStyleModule (ref), cryoModule (ref), uDim (ref), useIsHoveredState (ref), reactModule (ref), tileOverlayModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local theme = useStyleModule().Theme
 	local var10 = cryoModule.Dictionary.join({
@@ -62,9 +62,9 @@ return function(p2) --[[ line: 77 | named "VerticalTile" ]]
 	local hasBackground = var10.hasBackground
 	local isHoverEnabled = var10.isHoverEnabled
 	local var11, var12 = useIsHoveredState(var10.hoverDelay, var10.onHoverChanged)
-	local var13 = reactModule.useCallback(function(p3) --[[ line: 113 ]]
+	local var13 = reactModule.useCallback(function(p3)
 		-- upvalues: var12 (ref)
-		return function() --[[ line: 114 ]]
+		return function()
 			-- upvalues: var12 (copy), p3 (ref)
 			var12(p3)
 		end

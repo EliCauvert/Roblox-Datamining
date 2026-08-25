@@ -10,13 +10,13 @@ local getFFlagAppChatInExpToastSnoozeMenuDismissFix = sharedFlagsModule.GetFFlag
 local friendsSurfaceVisibility = require(parent.ExpChatShared).FriendsSurfaceVisibility
 local t = { hideAllChatToasts = false, isAppChatVisible = false }
 
-function AppChatToastManagerInExp(p0) --[[ line: 26 ]]
+function AppChatToastManagerInExp(p0)
 	-- upvalues: cryoModule (ref), t (ref), fFlagExpChatEnableFriendsTab (ref), signalsReactModule (ref), friendsSurfaceVisibility (ref), reactModule (ref), appChatToastEventReceiverModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	
 	return reactModule.createElement(appChatToastEventReceiverModule, {
 		isInExperience = true,
-		navigateToChat = reactModule.useCallback(function(p1) --[[ line: 34 ]]
+		navigateToChat = reactModule.useCallback(function(p1)
 			-- upvalues: var7 (ref)
 			var7.navigateToChat(p1)
 		end, { var7.navigateToChat }),

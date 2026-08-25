@@ -9,7 +9,7 @@ local list_2 = {
 	analyticsModule.ErrorType.validateLayeredClothingAccessory_NoOuterCageId
 }
 
-return function(p0, p1) --[[ line: 17 | named "getCageMeshInfos" ]]
+return function(p0, p1)
 	-- upvalues: list_1 (ref), list (ref), analyticsModule (ref), list_2 (ref), getEditableMeshFromContextModule (ref)
 	local wrapLayer = p0:FindFirstChild("Handle"):FindFirstChildOfClass("WrapLayer")
 	local t = {}

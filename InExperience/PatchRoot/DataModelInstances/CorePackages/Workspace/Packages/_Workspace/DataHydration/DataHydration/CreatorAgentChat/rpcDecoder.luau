@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function _(p0) --[[ line: 10 | named "tryJsonDecode" ]]
+local function _(p0)
 	-- upvalues: httpService (ref)
 	if p0 == nil or p0 == "" then
 		return nil
@@ -11,9 +11,9 @@ local function _(p0) --[[ line: 10 | named "tryJsonDecode" ]]
 	return if ok then status else nil
 end
 
-return function() --[[ line: 19 | named "rpcDecoder" ]]
+return function()
 	-- upvalues: httpService (ref)
-	return function(p1) --[[ line: 20 ]]
+	return function(p1)
 		-- upvalues: httpService (copy)
 		local var1
 		local responseBody = p1.responseBody

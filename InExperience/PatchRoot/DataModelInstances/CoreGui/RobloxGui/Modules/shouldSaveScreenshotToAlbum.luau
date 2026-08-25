@@ -3,7 +3,7 @@ local userInputService = game:GetService("UserInputService")
 local cachedPolicyServiceModule = require(game:GetService("CorePackages").Workspace.Packages.CachedPolicyService)
 local getFFlagScreenshotHudApiModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.Flags.GetFFlagScreenshotHudApi)
 
-return function() --[[ line: 9 ]]
+return function()
 	-- upvalues: userInputService (ref), getFFlagScreenshotHudApiModule (ref), cachedPolicyServiceModule (ref)
 	local platform = userInputService:GetPlatform()
 	

@@ -7,7 +7,7 @@ local useLeaderboardStore = require(corePackagesService.Workspace.Packages.Playe
 local titleBarViewModule = require(parent.Components.PresentationCommon.TitleBarView)
 local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return reactModule.memo(function(p0) --[[ line: 41 | named "TitleBarContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLeaderboardStore (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), reactModule (ref), titleBarViewModule (ref)
 	local gameStatsList = useLeaderboardStore().getGameStatsList()
 	

@@ -5,7 +5,7 @@ local getMeshInfoModule = require(parent.util.getMeshInfo)
 local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 
-return function(p0, p1) --[[ line: 12 | named "getRenderMeshScale" ]]
+return function(p0, p1)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), getMeshMinMaxModule (ref), getExpectedPartSizeModule (ref)
 	local _ = nil
 	local _ = nil

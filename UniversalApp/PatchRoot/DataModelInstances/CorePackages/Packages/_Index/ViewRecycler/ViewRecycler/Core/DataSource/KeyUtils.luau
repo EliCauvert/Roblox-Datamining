@@ -1,6 +1,6 @@
 ﻿local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 
-local function validateUnique(p0, p1) --[[ line: 5 ]]
+local function validateUnique(p0, p1)
 	local t = {}
 	local var3 = `{p1}: keys must be strings`
 	
@@ -17,7 +17,7 @@ end
 
 return {
 	validateUnique = validateUnique,
-	keysFor = function(p2, p3) --[[ line: 18 ]]
+	keysFor = function(p2, p3)
 		-- upvalues: itemKeyRegistryModule (ref), validateUnique (ref)
 		local list = table.create(#p2)
 		

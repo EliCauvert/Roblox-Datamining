@@ -3,7 +3,7 @@ local roduxModule = require(playerContextualMenu.Parent.Rodux)
 local userBlockingModule = require(playerContextualMenu.Rodux.UserBlocking)
 local fFlagUserBlockingApiPlayerContextMenuEnabledModule = require(playerContextualMenu.Flags.FFlagUserBlockingApiPlayerContextMenuEnabled)
 
-return function() --[[ line: 9 ]]
+return function()
 	-- upvalues: roduxModule (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), userBlockingModule (ref)
 	return roduxModule.combineReducers({
 		IsBlockedByMe = if not fFlagUserBlockingApiPlayerContextMenuEnabledModule then require(script.Parent.IsBlockedByMe) else nil,

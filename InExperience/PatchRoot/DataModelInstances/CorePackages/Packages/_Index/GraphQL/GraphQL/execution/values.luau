@@ -27,11 +27,11 @@ local _ = nil
 local _ = nil
 local hasOwnProperty = nil
 
-local var4 = function(p0, p1, p2, p3) --[[ line: 79 ]]
+local var4 = function(p0, p1, p2, p3)
 	-- upvalues: coerceVariableValues (write), graphQLError (ref)
 	local t = {}
 	local var7 = if p3 ~= nil then p3.maxErrors else nil
-	local ok, status = pcall(coerceVariableValues, p0, p1, p2, function(p4) --[[ line: 91 ]]
+	local ok, status = pcall(coerceVariableValues, p0, p1, p2, function(p4)
 		-- upvalues: var7 (write), t (ref), graphQLError (copy)
 		if var7 ~= nil and var7 <= #t then
 			error(graphQLError.new("Too many errors processing variables, error limit reached. Execution aborted."))
@@ -45,7 +45,7 @@ local var4 = function(p0, p1, p2, p3) --[[ line: 79 ]]
 	return if #t == 0 then { coerced = status } else { errors = t }
 end
 
-coerceVariableValues = function(p5, p6, p7, p8) --[[ line: 113 | named "coerceVariableValues" ]]
+coerceVariableValues = function(p5, p6, p7, p8)
 	-- upvalues: typeFromAST (ref), isInputType (ref), print (ref), graphQLError (ref), hasOwnProperty (write), valueFromAST (ref), isNonNullType (ref), inspect (ref), nullModule (ref), coerceInputValue (ref), printPathArray (ref)
 	local value
 	local t = {}
@@ -64,7 +64,7 @@ coerceVariableValues = function(p5, p6, p7, p8) --[[ line: 113 | named "coerceVa
 			if var10 == nullModule and isNonNullType(var9) then
 				p8(graphQLError.new(("Variable \"$%s\" of non-null type \"%s\" must not be null."):format(value, inspect(var9)), v))
 			else
-				t[value] = coerceInputValue(var10, var9, function(p9, p10, p11) --[[ line: 174 ]]
+				t[value] = coerceInputValue(var10, var9, function(p9, p10, p11)
 					-- upvalues: value (ref), inspect (copy), printPathArray (copy), p8 (ref), graphQLError (copy), v (ref)
 					local text = ("Variable \"$%s\" got invalid value "):format(value) .. inspect(p10)
 					
@@ -83,10 +83,10 @@ coerceVariableValues = function(p5, p6, p7, p8) --[[ line: 113 | named "coerceVa
 	return t
 end
 
-local function getArgumentValues(p12, p13, p14) --[[ line: 207 ]]
+local function getArgumentValues(p12, p13, p14)
 	-- upvalues: keyMap (ref), isNonNullType (ref), graphQLError (ref), inspect (ref), kind (ref), hasOwnProperty (write), isNillish (ref), valueFromAST (ref), print (ref)
 	local t = {}
-	local var13 = keyMap(if p13.arguments then p13.arguments else {}, function(p15) --[[ line: 217 ]]
+	local var13 = keyMap(if p13.arguments then p13.arguments else {}, function(p15)
 		return p15.name.value
 	end)
 	
@@ -130,16 +130,16 @@ local function getArgumentValues(p12, p13, p14) --[[ line: 207 ]]
 	return t
 end
 
-hasOwnProperty = function(p16, p17) --[[ line: 325 | named "hasOwnProperty" ]]
+hasOwnProperty = function(p16, p17)
 	return p16[p17] ~= nil
 end
 
 return {
 	getVariableValues = var4,
 	getArgumentValues = getArgumentValues,
-	getDirectiveValues = function(p18, p19, p20) --[[ line: 305 ]]
+	getDirectiveValues = function(p18, p19, p20)
 		-- upvalues: array (ref), getArgumentValues (write)
-		local var16 = if p19.directives then array.find(p19.directives, function(p21) --[[ line: 312 ]]
+		local var16 = if p19.directives then array.find(p19.directives, function(p21)
 			-- upvalues: p18 (ref)
 			return p21.name.value == p18.name
 		end) else nil

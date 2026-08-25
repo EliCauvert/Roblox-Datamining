@@ -8,7 +8,7 @@ local inputTypeManagerModule = require(script.Parent.InputTypeManager)
 local browserPurchaseFinishedConnectorModule = require(script.Parent.BrowserPurchaseFinishedConnector)
 local nativePurchaseFinishedConnectorModule = require(script.Parent.NativePurchaseFinishedConnector)
 
-return function() --[[ line: 20 | named "EventConnections" ]]
+return function()
 	-- upvalues: getUpsellFlowModule (ref), userInputService (ref), upsellFlowModule (ref), roact (ref), browserPurchaseFinishedConnectorModule (ref), nativePurchaseFinishedConnectorModule (ref), marketplaceServiceEventConnectorModule (ref), inputTypeManagerModule (ref)
 	local var8 = nil
 	local var9 = getUpsellFlowModule(userInputService:GetPlatform())

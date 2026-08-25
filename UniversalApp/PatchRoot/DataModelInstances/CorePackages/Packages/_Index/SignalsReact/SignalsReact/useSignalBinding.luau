@@ -2,14 +2,14 @@
 local reactModule = require(parent.React)
 local createEffect = require(parent.Signals).createEffect
 
-return function(value) --[[ line: 9 | named "useSignalBinding" ]]
+return function(value)
 	-- upvalues: reactModule (ref), createEffect (ref)
 	local var1, var2 = reactModule.useBinding(value(false))
-	reactModule.useLayoutEffect(function() --[[ line: 12 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var2 (ref), value (ref), createEffect (copy)
 		var2(value(false))
 		
-		return createEffect(function(p0) --[[ line: 14 ]]
+		return createEffect(function(p0)
 			-- upvalues: var2 (copy), value (copy)
 			var2(value(p0))
 		end)

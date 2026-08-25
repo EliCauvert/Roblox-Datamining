@@ -19,7 +19,7 @@ end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
 t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 
-function t.fflag() --[[ line: 26 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
 end
@@ -29,7 +29,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function buildAcceptableForFolder(p0, p1) --[[ line: 35 ]]
+local function buildAcceptableForFolder(p0, p1)
 	-- upvalues: curveAnimBoneHierarchyUtilsModule (ref), curveAnimationHierarchyUtilsModule (ref)
 	if curveAnimBoneHierarchyUtilsModule.isBoneFolderName(p0.Name) then
 		local t = {}
@@ -81,7 +81,7 @@ local function buildAcceptableForFolder(p0, p1) --[[ line: 35 ]]
 	end
 end
 
-local function getFirstUnacceptableChildDetail(p2, p3) --[[ line: 94 ]]
+local function getFirstUnacceptableChildDetail(p2, p3)
 	if not p2 then
 		return nil
 	end
@@ -103,7 +103,7 @@ local function getFirstUnacceptableChildDetail(p2, p3) --[[ line: 94 ]]
 	return nil
 end
 
-local function validateFolderStructure(p4, p5, p6) --[[ line: 116 ]]
+local function validateFolderStructure(p4, p5, p6)
 	-- upvalues: buildAcceptableForFolder (ref), getFirstUnacceptableChildDetail (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateRestrictNumFaceControlsModule (ref), getFIntUGCValidateMaxTotalFaceControlsModule (ref)
 	local var20 = getFirstUnacceptableChildDetail(p4, buildAcceptableForFolder(p4, p6))
 	
@@ -137,7 +137,7 @@ local function validateFolderStructure(p4, p5, p6) --[[ line: 116 ]]
 	return if curveAnimationHierarchyUtilsModule.containsGrandChildren(position) then `'{p5}/Position' contains unexpected grandchildren` elseif curveAnimationHierarchyUtilsModule.containsGrandChildren(rotation) then `'{p5}/Rotation' contains unexpected grandchildren` elseif curveAnimationHierarchyUtilsModule.containsGrandChildren(faceControlsName) then `'{p5}/FaceControls' contains unexpected grandchildren` else nil
 end
 
-local function validateHierarchyTree(p7, p8, p9, p10) --[[ line: 167 ]]
+local function validateHierarchyTree(p7, p8, p9, p10)
 	-- upvalues: validateFolderStructure (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref), curveAnimBoneHierarchyUtilsModule (ref), validateHierarchyTree (ref)
 	local var25 = validateFolderStructure(p7, p8, p9)
 	
@@ -153,7 +153,7 @@ local function validateHierarchyTree(p7, p8, p9, p10) --[[ line: 167 ]]
 	end
 end
 
-function t.run(p11, p12) --[[ line: 192 ]]
+function t.run(p11, p12)
 	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), curveAnimationHierarchyUtilsModule (ref), validateHierarchyTree (ref)
 	for i, v in p12.curveAnimations do
 		local t = {}

@@ -10,7 +10,7 @@ local preloadFastIntsModule = require(momentsCommon.Media.Preload.preloadFastInt
 
 return {
 	kind = "screenshot",
-	create = function(p0, p1) --[[ line: 72 ]]
+	create = function(p0, p1)
 		-- upvalues: preloadFastIntsModule (ref), signalsModule (ref), reactModule (ref), view (ref)
 		local image = p0.image
 		assert(image ~= nil, "createScreenshotNode: spec.image (the screenshot content URI) is required")
@@ -23,7 +23,7 @@ return {
 		local var12, var13 = signalsModule.createSignal(nil)
 		local var14 = false
 		local var15 = false
-		local heartbeatConnection = p1.runService.Heartbeat:Connect(function(p2) --[[ line: 89 ]]
+		local heartbeatConnection = p1.runService.Heartbeat:Connect(function(p2)
 			-- upvalues: var15 (write), var14 (write), var8 (ref), durationSeconds (ref), var9 (ref)
 			if var15 or not var14 then return end
 			local var19 = var8(false) + p2
@@ -33,7 +33,7 @@ return {
 			end
 			var9(var19)
 		end)
-		local var17 = p1.contentProvider:GetAssetFetchStatusChangedSignal(image):Connect(function() --[[ line: 104 | named "refreshLoaded" ]]
+		local var17 = p1.contentProvider:GetAssetFetchStatusChangedSignal(image):Connect(function()
 			-- upvalues: p1 (ref), image (ref), var11 (ref), var13 (ref)
 			local var20 = p1.contentProvider:GetAssetFetchStatus(image)
 			var11(var20 == Enum.AssetFetchStatus.Success)
@@ -48,11 +48,11 @@ return {
 			usesDecoder = false,
 			zIndex = 0,
 			id = p0.id,
-			assets = function() --[[ line: 114 ]]
+			assets = function()
 				-- upvalues: var7 (ref), content (ref)
 				return if var7 == nil then { content } else { content, var7 }
 			end,
-			download = function() --[[ line: 121 ]]
+			download = function()
 				-- upvalues: var15 (write), var7 (ref), content (ref), p1 (ref)
 				if var15 then return end
 				local list, var23, var24
@@ -72,7 +72,7 @@ return {
 				end
 				p1.contentProvider:PreloadAsync(t)
 			end,
-			render = function(p3) --[[ line: 154 ]]
+			render = function(p3)
 				-- upvalues: reactModule (copy), view (copy), var7 (ref), content (ref)
 				return reactModule.createElement(view, { tag = "size-full", ZIndex = 0 }, {
 					Poster = if var7 ~= nil then nil else reactModule.createElement("ImageLabel", {
@@ -92,19 +92,19 @@ return {
 					})
 				})
 			end,
-			play = function() --[[ line: 137 ]]
+			play = function()
 				-- upvalues: var14 (write)
 				var14 = true
 			end,
-			pause = function() --[[ line: 141 ]]
+			pause = function()
 				-- upvalues: var14 (write)
 				var14 = false
 			end,
-			seek = function(p4) --[[ line: 146 ]]
+			seek = function(p4)
 				-- upvalues: var9 (ref), durationSeconds (ref)
 				var9(math.clamp(p4, 0, durationSeconds))
 			end,
-			dispose = function() --[[ line: 181 ]]
+			dispose = function()
 				-- upvalues: var15 (write), var14 (write), heartbeatConnection (ref), var17 (ref)
 				if var15 then
 					return
@@ -115,7 +115,7 @@ return {
 				var17:Disconnect()
 			end,
 			getPosition = var8,
-			getDuration = function() --[[ line: 150 ]]
+			getDuration = function()
 				-- upvalues: durationSeconds (ref)
 				return durationSeconds
 			end,

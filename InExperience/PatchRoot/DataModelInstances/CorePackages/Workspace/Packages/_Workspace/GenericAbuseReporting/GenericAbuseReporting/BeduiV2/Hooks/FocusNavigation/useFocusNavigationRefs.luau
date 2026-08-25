@@ -10,8 +10,8 @@ local composeRefsModule = require(script.Parent.composeRefs)
 local useScrollNavigationBindingsModule = require(script.Parent.useScrollNavigationBindings)
 local fFlagAbuseReportV2ScrollNavigationModule = require(genericAbuseReporting.Flags.FFlagAbuseReportV2ScrollNavigation)
 
-local function _(p0, p1) --[[ line: 22 | named "mergeRefs" ]]
-	return function(p2) --[[ line: 23 ]]
+local function _(p0, p1)
+	return function(p2)
 		-- upvalues: p0 (ref), p1 (ref)
 		if type(p0) == "function" then
 			p0(p2)
@@ -28,7 +28,7 @@ local function _(p0, p1) --[[ line: 22 | named "mergeRefs" ]]
 	end
 end
 
-return function(p3, p4) --[[ line: 49 | named "useFocusNavigationRefs" ]]
+return function(p3, p4)
 	-- upvalues: useDefaultFocusBehavior (ref), fFlagAbuseReportV2ScrollNavigationModule (ref), useScrollNavigationBindingsModule (ref), useAppFocusRoot (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactModule (ref), composeRefsModule (ref)
 	local var7 = useDefaultFocusBehavior()
 	local var8 = if fFlagAbuseReportV2ScrollNavigationModule then useScrollNavigationBindingsModule({ includeDiscreteScroll = false }) else nil
@@ -40,9 +40,9 @@ return function(p3, p4) --[[ line: 49 | named "useFocusNavigationRefs" ]]
 		}
 	})
 	
-	return reactModule.useMemo(function() --[[ line: 68 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: fFlagAbuseReportV2ScrollNavigationModule (copy), composeRefsModule (copy), var9 (ref), var7 (ref), var8 (write)
-		return if fFlagAbuseReportV2ScrollNavigationModule then composeRefsModule(var9, var7, var8) else function(p5) --[[ line: 23 ]]
+		return if fFlagAbuseReportV2ScrollNavigationModule then composeRefsModule(var9, var7, var8) else function(p5)
 			-- upvalues: var9 (ref), var7 (ref)
 			if type(var9) == "function" then
 				var9(p5)

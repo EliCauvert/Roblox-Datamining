@@ -6,14 +6,14 @@ local reactOtterModule = require(parent_2.ReactOtter)
 local default = require(parent.TimingConfigs).presets[require(parent_1.Enums.TransitionPreset).Default]
 local _ = require(parent_1.Types)
 
-local function _(p0, p1) --[[ line: 54 | named "validateNumber" ]]
+local function _(p0, p1)
 	return if type(p0) == "number" then p0 else p1 or 0
 end
 
-return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), default (ref)
 	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function(...) --[[ line: 66 ]]
+	local var3 = reactModule.useCallback(function(...)
 		-- upvalues: var2 (ref)
 		if var2.current ~= nil then
 			if type(var2.current) == "function" then
@@ -39,12 +39,12 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 		t.Transparency = if type(transparency) == "number" then transparency else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p3) --[[ line: 85 ]]
+		return useAnimatedBinding:map(function(p3)
 			return {
 				Color3 = Color3.new(p3.r, p3.g, p3.b),
 				Transparency = p3.Transparency
 			}
-		end), function(p4, p5) --[[ line: 92 ]]
+		end), function(p4, p5)
 			-- upvalues: var2 (ref), default (copy), t (ref), reactOtterModule (copy)
 			if typeof(p4) == "table" and p4.Color3 and p4.Transparency ~= nil then
 				var2.current = if p5 then p5.onComplete else nil
@@ -76,9 +76,9 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 		t.offset = if type(offset) == "number" then offset else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p6) --[[ line: 125 ]]
+		return useAnimatedBinding:map(function(p6)
 			return UDim.new(p6.scale, p6.offset)
-		end), function(p7, p8) --[[ line: 129 ]]
+		end), function(p7, p8)
 			-- upvalues: var2 (ref), default (copy), t (ref), reactOtterModule (copy)
 			if not p7 then return end
 			if typeof(p7) == "UDim" then
@@ -111,9 +111,9 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 		t.yOffset = if type(offset_1) == "number" then offset_1 else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p9) --[[ line: 166 ]]
+		return useAnimatedBinding:map(function(p9)
 			return UDim2.new(p9.xScale, p9.xOffset, p9.yScale, p9.yOffset)
-		end), function(p10, p11) --[[ line: 170 ]]
+		end), function(p10, p11)
 			-- upvalues: var2 (ref), default (copy), t (ref), reactOtterModule (copy)
 			if not p10 then return end
 			if typeof(p10) == "UDim2" then
@@ -146,9 +146,9 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 		t.y = if type(y) == "number" then y else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p12) --[[ line: 205 ]]
+		return useAnimatedBinding:map(function(p12)
 			return Vector2.new(p12.x, p12.y)
-		end), function(p13, p14) --[[ line: 209 ]]
+		end), function(p13, p14)
 			-- upvalues: var2 (ref), default (copy), t (ref), reactOtterModule (copy)
 			if not p13 then return end
 			if typeof(p13) == "Vector2" then
@@ -179,9 +179,9 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 		t.b = if type(b) == "number" then b else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p15) --[[ line: 244 ]]
+		return useAnimatedBinding:map(function(p15)
 			return Color3.new(p15.r, p15.g, p15.b)
-		end), function(p16, p17) --[[ line: 248 ]]
+		end), function(p16, p17)
 			-- upvalues: var2 (ref), default (copy), t (ref), reactOtterModule (copy)
 			if not p16 then return end
 			if typeof(p16) == "Color3" then
@@ -206,9 +206,9 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 	elseif typeof(p2) == "number" then
 		local var9, var10 = reactOtterModule.useAnimatedBinding(if type(p2) == "number" then p2 else 0, var3)
 		
-		return var9:map(function(p18) --[[ line: 280 ]]
+		return var9:map(function(p18)
 			return p18
-		end), function(p19, p20) --[[ line: 284 ]]
+		end), function(p19, p20)
 			-- upvalues: var2 (ref), default (copy), var10 (ref), reactOtterModule (copy)
 			if typeof(p19) == "number" then
 				var2.current = if p20 then p20.onComplete else nil
@@ -223,5 +223,5 @@ return function(p2) --[[ line: 63 | named "useAnimatedValue" ]]
 	end
 	warn("Unsupported type for animated value:", typeof(p2))
 	
-	return reactModule.createBinding(p2), function() --[[ line: 304 ]] end
+	return reactModule.createBinding(p2), function() end
 end

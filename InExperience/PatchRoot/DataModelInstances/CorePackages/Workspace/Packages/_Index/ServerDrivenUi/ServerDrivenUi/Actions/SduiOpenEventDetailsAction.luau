@@ -5,7 +5,7 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local fFlagLuaAppSduiEventDetailsEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 
-return function(p0, p1, p2, _) --[[ line: 16 ]]
+return function(p0, p1, p2, _)
 	-- upvalues: sduiErrorType (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), navigateToEventDetails (ref), appPage (ref)
 	local var1 = if p0 then p0.actionParams else nil
 	

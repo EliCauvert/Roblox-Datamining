@@ -1,12 +1,12 @@
-﻿return function(p0) --[[ line: 4 | named "bindingValidator" ]]
-	return function(p1) --[[ line: 5 ]]
+﻿return function(p0)
+	return function(p1)
 		-- upvalues: p0 (ref)
 		if typeof(p1) ~= "table" or not string.match(tostring(p1), "RoactBinding") then
 			warn(string.format("RoactBinding expected, got %s", typeof(p1)))
 			
 			return false
 		end
-		local ok, status = pcall(function() --[[ line: 13 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (ref)
 			return p1:getValue()
 		end)

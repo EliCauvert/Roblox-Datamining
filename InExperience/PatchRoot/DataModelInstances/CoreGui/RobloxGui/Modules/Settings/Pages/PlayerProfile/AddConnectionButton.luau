@@ -9,26 +9,26 @@ local button = foundationModule.Button
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
 local peopleServiceModule = require(corePackagesService.Workspace.Packages.PeopleService)
 
-return reactModule.memo(function(p0) --[[ line: 22 | named "AddConnectionButton" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), peopleServiceModule (ref), playersService (ref), signalsReactModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var6 = useLocalization({
 		isFriend = "CommonUI.Features.Label.Connection",
 		addPerson = "CommonUI.Features.Label.Add",
 		requestSent = "CommonUI.Features.Label.Sent"
 	})
-	local var7 = reactModule.useMemo(function() --[[ line: 29 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("Constants")
 	end, {})
-	local var8 = reactModule.useMemo(function() --[[ line: 33 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleAnalyticsManager")
 	end, {})
-	local var9 = reactModule.useMemo(function() --[[ line: 37 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FriendStatusStore")
 	end, {})
-	local var10 = reactModule.useMemo(function() --[[ line: 41 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), playersService (copy)
 		return if p0.userId then playersService:GetPlayerByUserId(p0.userId) else nil
 	end, { p0.userId })
@@ -40,7 +40,7 @@ return reactModule.memo(function(p0) --[[ line: 22 | named "AddConnectionButton"
 		fillBehavior = fillBehavior.Fill,
 		isDisabled = var11,
 		LayoutOrder = p0.layoutOrder,
-		onActivated = function() --[[ line: 54 ]]
+		onActivated = function()
 			-- upvalues: var8 (ref), var7 (ref), var9 (ref), var10 (ref)
 			var8:trackRequestFriendship(var7.ANALYTICS.ENTRY_POINT.PLAYER_PROFILE)
 			var9.sendFriendRequest(var10)

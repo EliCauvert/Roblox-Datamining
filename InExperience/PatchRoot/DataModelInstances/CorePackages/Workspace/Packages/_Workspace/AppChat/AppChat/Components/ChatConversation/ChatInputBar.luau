@@ -38,23 +38,23 @@ local t = {
 	textChangedFallback = false,
 	moreMenuEnabled = false,
 	userInputService = userInputService,
-	onDisabledInputBarActivated = function() --[[ line: 65 ]] end,
+	onDisabledInputBarActivated = function() end,
 	maxCharacterLength = messageCharacterLimitModule,
-	onHeightChanged = function(_) --[[ line: 70 ]] end,
-	onPositionChanged = function(_) --[[ line: 71 ]] end,
-	onFocusLost = function() --[[ line: 72 ]] end,
-	onSendBtnClicked = function(_) --[[ line: 75 ]] end,
-	onSendChat = function(_) --[[ line: 76 ]] end,
-	onTextChanged = function(_) --[[ line: 77 ]] end,
+	onHeightChanged = function(_) end,
+	onPositionChanged = function(_) end,
+	onFocusLost = function() end,
+	onSendBtnClicked = function(_) end,
+	onSendChat = function(_) end,
+	onTextChanged = function(_) end,
 	eventLoggingFunc = default.logRobloxTelemetryEvent
 }
 
-local function heightOfNLines(p0, p1, p2, p3) --[[ line: 87 ]]
+local function heightOfNLines(p0, p1, p2, p3)
 	-- upvalues: text (ref)
 	return text.GetTextHeight(string.rep("A\n", p0 - 1), p1, p2, p3)
 end
 
-return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), userInputService (ref), useChatPagePaddingModule (ref), foundationModule (ref), useStyle (ref), heightOfNLines (ref), useKeystrokeCollectionModule (ref), isMessageValidModule (ref), text (ref), sendButtonClickActionResultModule (ref), isKeyCodePressedModule (ref), useInputConnectionsModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), useIsSpatial (ref), fFlagAppChatGamepadSendButtonNavModule (ref), chatInputBoxDisabledModule (ref), callbackInputBox (ref), builderIconsModule (ref)
 	local var20 = cryoModule.Dictionary.union(t, p4)
 	local var21, var22 = reactModule.useState(0)
@@ -68,7 +68,7 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 		var28 = var20.inputBarRef
 	end
 	local var30 = reactModule.useRef(Enum.KeyCode.None)
-	local bubble = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, function(p5) --[[ line: 110 ]]
+	local bubble = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, function(p5)
 		-- upvalues: var30 (ref)
 		if p5.eventData and var30.current == p5.eventData.KeyCode then
 			p5:cancel()
@@ -84,11 +84,11 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 	local var38 = useStyle()
 	local font = var38.Font.Body.Font
 	local var39 = var38.Font.BaseSize * var38.Font.Body.RelativeSize
-	local var40 = reactModule.useMemo(function() --[[ line: 131 ]]
+	local var40 = reactModule.useMemo(function()
 		-- upvalues: heightOfNLines (copy), font (ref), var39 (ref), var21 (ref)
 		return heightOfNLines(4, font, var39, var21)
 	end, { font, var39, var21 })
-	local var41 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var41 = reactModule.useMemo(function()
 		-- upvalues: heightOfNLines (copy), font (ref), var39 (ref)
 		return heightOfNLines(1, font, var39)
 	end, { font, var39 })
@@ -96,12 +96,12 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 		eventLoggingFunc = var20.eventLoggingFunc,
 		maxKeystrokeDataLength = var20.maxKeystrokeDataLength
 	})
-	local var43 = reactModule.useCallback(function() --[[ line: 143 ]]
+	local var43 = reactModule.useCallback(function()
 		-- upvalues: var32 (ref), isMessageValidModule (copy), var20 (ref)
 		return var32.current and isMessageValidModule(var32.current, var20.maxCharacterLength)
 	end, { var20.maxCharacterLength })
 	local var44 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	local var45 = reactModule.useCallback(function() --[[ line: 149 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: var32 (ref), var27 (write), text (copy), sendButtonClickActionResultModule (copy), var43 (ref), isMessageValidModule (copy), var20 (ref), var44 (ref), var29 (ref), var28 (write), var36 (ref), var42 (ref)
 		local var55
 		local var54 = text.Trim(if var27.current then var27.current.Text or "" else var32.current)
@@ -142,7 +142,7 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 	})
 	local var46 = useInputConnectionsModule({
 		userInputService = var20.userInputService,
-		onInputBegan = reactModule.useCallback(function(p6, _) --[[ line: 223 ]]
+		onInputBegan = reactModule.useCallback(function(p6, _)
 			-- upvalues: var42 (ref), var34 (ref), isKeyCodePressedModule (copy), var20 (ref), var45 (ref)
 			if var42 and not var34.current and p6.UserInputType == Enum.UserInputType.Keyboard then
 				var42.recordKeystroke(true, p6.KeyCode)
@@ -156,7 +156,7 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 			var42.sendKeystrokeEventOnSend,
 			var45
 		}),
-		onInputEnded = reactModule.useCallback(function(p7, _) --[[ line: 212 ]]
+		onInputEnded = reactModule.useCallback(function(p7, _)
 			-- upvalues: var42 (ref), var34 (ref)
 			if var42 and not var34.current and p7.UserInputType == Enum.UserInputType.Keyboard then
 				var42.recordKeystroke(false, p7.KeyCode)
@@ -164,7 +164,7 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 		end, { var42.recordKeystroke }),
 		onFocusLost = var20.onFocusLost
 	})
-	local var47 = reactModule.useCallback(function(p8, p9) --[[ line: 258 ]]
+	local var47 = reactModule.useCallback(function(p8, p9)
 		-- upvalues: text (copy), font (ref), var39 (ref), var40 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var37 (ref), var20 (ref)
 		local var57 = var39 + math.min(text.GetTextHeight(p8, font, var39, p9), var40) + (if fFlagAppChatReplyComposeBarContainerModule then 0 else var37.Padding.Medium * 2)
 		
@@ -179,7 +179,7 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 		font,
 		var39
 	})
-	local var48 = reactModule.useCallback(function(p10) --[[ line: 274 ]]
+	local var48 = reactModule.useCallback(function(p10)
 		-- upvalues: var33 (ref), var32 (ref), var36 (ref), var26 (ref), var43 (ref), var42 (ref), var34 (ref), var47 (ref), var21 (ref), var24 (ref), var20 (ref)
 		if not var33.current then return end
 		var32.current = p10
@@ -200,23 +200,23 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 		var20.onTextChanged,
 		var21
 	})
-	local var49 = reactModule.useCallback(function(p11) --[[ line: 297 ]]
+	local var49 = reactModule.useCallback(function(p11)
 		-- upvalues: var47 (ref), var32 (ref), var22 (ref), var24 (ref)
 		local var58 = var47(var32.current, p11.AbsoluteSize.X)
 		var22(p11.AbsoluteSize.X)
 		var24(var58)
 	end, { var47 })
-	local var50 = reactModule.useCallback(function() --[[ line: 303 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: var27 (write)
 		if var27.current then
 			var27.current:CaptureFocus()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 309 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var33 (ref), var20 (ref)
 		var33.current = true
 		
-		return function() --[[ line: 311 ]]
+		return function()
 			-- upvalues: var33 (copy), var20 (copy)
 			var33.current = false
 			
@@ -225,18 +225,18 @@ return reactModule.memo(function(p4) --[[ line: 91 | named "ChatInputBar" ]]
 			end
 		end
 	end, { var20.onHeightChanged })
-	reactModule.useEffect(function() --[[ line: 320 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (write), var30 (ref)
 		local focusLostConnection = nil
 		
 		if var27 and var27.current then
 			var27.current.Selectable = false
-			focusLostConnection = var27.current.FocusLost:Connect(function(_, p12) --[[ line: 325 ]]
+			focusLostConnection = var27.current.FocusLost:Connect(function(_, p12)
 				-- upvalues: var30 (copy)
 				var30.current = if p12 then p12.KeyCode else Enum.KeyCode.None
 			end)
 		end
-		return function() --[[ line: 332 ]]
+		return function()
 			-- upvalues: focusLostConnection (write)
 			if focusLostConnection then
 				focusLostConnection:Disconnect()

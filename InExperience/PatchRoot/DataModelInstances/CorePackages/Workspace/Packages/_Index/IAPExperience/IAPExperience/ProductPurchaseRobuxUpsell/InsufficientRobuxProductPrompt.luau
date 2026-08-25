@@ -15,7 +15,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0) --[[ line: 44 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.state = {
@@ -23,7 +23,7 @@ function name.init(p0) --[[ line: 44 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.changeContentSize(p1) --[[ line: 51 ]]
+	function p0.changeContentSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.contentSize ~= p1.AbsoluteSize then
 			p0:setState({ contentSize = p1.AbsoluteSize })
@@ -31,7 +31,7 @@ function name.init(p0) --[[ line: 44 ]]
 	end
 end
 
-function name.render(p2) --[[ line: 60 ]]
+function name.render(p2)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -44,18 +44,18 @@ function name.render(p2) --[[ line: 60 ]]
 			},
 			ButtonCancel = { key = "IAPExperience.InsufficientRobux.Action.Cancel" }
 		},
-		render = function(p3) --[[ line: 76 ]]
+		render = function(p3)
 			-- upvalues: p2 (ref)
 			return p2:renderAlert(p3)
 		end
 	})
 end
 
-function name.renderAlert(p4, p5) --[[ line: 82 ]]
+function name.renderAlert(p4, p5)
 	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), fitFrameVertical (ref), productDetailsModule (ref), buttonType (ref)
 	local props = p4.props
 	
-	return withStyle(function(p6) --[[ line: 85 ]]
+	return withStyle(function(p6)
 		-- upvalues: props (ref), p5 (ref), roactModule (copy), interactiveAlert (copy), fitFrameVertical (copy), p4 (ref), productDetailsModule (copy), buttonType (copy)
 		local theme = p6.Theme
 		local font = p6.Font
@@ -66,7 +66,7 @@ function name.renderAlert(p4, p5) --[[ line: 82 ]]
 			position = props.position,
 			anchorPoint = props.anchorPoint,
 			title = p5.InsufficientRobuxTitle,
-			middleContent = function() --[[ line: 109 ]]
+			middleContent = function()
 				-- upvalues: roactModule (copy), fitFrameVertical (copy), p4 (copy), productDetailsModule (copy), props (copy), theme (ref), font (ref), var5 (ref)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,

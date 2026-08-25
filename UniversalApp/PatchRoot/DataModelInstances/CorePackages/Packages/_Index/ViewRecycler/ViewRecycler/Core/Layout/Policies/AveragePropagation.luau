@@ -1,5 +1,5 @@
 ﻿return {
-	new = function(p0) --[[ line: 37 ]]
+	new = function(p0)
 		p0 = p0 or {}
 		local sampleInterval = p0.sampleInterval or 8
 		local driftThreshold = p0.driftThreshold or 8
@@ -7,7 +7,7 @@
 		local initialAverage = p0.initialAverage or 0
 		
 		return {
-			recordMeasurementAndShouldUpdateEstimates = function(p1) --[[ line: 45 ]]
+			recordMeasurementAndShouldUpdateEstimates = function(p1)
 				-- upvalues: var3 (write), sampleInterval (ref), initialAverage (write), driftThreshold (ref)
 				var3 += 1
 				

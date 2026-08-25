@@ -2,27 +2,27 @@
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 12 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({}, t)
 end
 
-function t.registerURL(_, _) --[[ line: 16 ]] end
+function t.registerURL(_, _) end
 
-function t.detectURL(_, _) --[[ line: 20 ]] end
+function t.detectURL(_, _) end
 
-function t.listenForLuaURLs(_, _) --[[ line: 24 ]] end
+function t.listenForLuaURLs(_, _) end
 
-function t.stopListeningForLuaURLs(_) --[[ line: 28 ]] end
+function t.stopListeningForLuaURLs(_) end
 
-function t:openURL(p0) --[[ line: 32 ]]
+function t:openURL(p0)
 	-- upvalues: promiseModule (ref)
 	self.lastOpenedURL = p0
 	
 	return promiseModule.resolve(true)
 end
 
-function t.isURLRegistered(_, _) --[[ line: 37 ]]
+function t.isURLRegistered(_, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(true)
 end

@@ -5,10 +5,10 @@ local var2 = reactModule.createContext({ testId = "" })
 
 return {
 	Context = var2,
-	Provider = function(p0) --[[ line: 25 ]]
+	Provider = function(p0)
 		-- upvalues: reactModule (ref), var2 (ref)
 		return reactModule.createElement(var2.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 26 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: p0 (ref)
 				return { testId = p0.testId, slot = p0.slot }
 			end, { p0.testId, p0.slot })

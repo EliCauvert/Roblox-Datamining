@@ -11,7 +11,7 @@ local fromSetModule = require(script.fromSet)
 local fromMapModule = require(script.fromMap)
 local fromArrayModule = require(script.fromArray)
 
-return function(p0, p1, p2) --[[ line: 37 ]]
+return function(p0, p1, p2)
 	-- upvalues: isArrayModule (ref), fromArrayModule (ref), instanceOfModule (ref), setModule (ref), fromSetModule (ref), mapModule (ref), fromMapModule (ref), fromStringModule (ref)
 	if p0 == nil then
 		error("cannot create array from a nil value")

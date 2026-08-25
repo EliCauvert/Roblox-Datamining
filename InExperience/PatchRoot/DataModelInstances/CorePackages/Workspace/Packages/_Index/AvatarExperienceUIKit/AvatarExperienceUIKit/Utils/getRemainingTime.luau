@@ -1,4 +1,4 @@
-﻿local function convertSecondsToTimeFrames(p0) --[[ line: 33 ]]
+﻿local function convertSecondsToTimeFrames(p0)
 	return if p0 >= 86400 then {
 		unit = "days",
 		value = math.floor(p0 / 86400),
@@ -18,7 +18,7 @@
 	}
 end
 
-return function(p1, p2) --[[ line: 61 | named "getRemainingTime" ]]
+return function(p1, p2)
 	-- upvalues: convertSecondsToTimeFrames (ref)
 	if not p1 then
 		return nil

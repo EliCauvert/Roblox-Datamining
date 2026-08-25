@@ -3,7 +3,7 @@ local _ = require(script.Parent.AsyncQueueTypes)
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 26 ]]
+function t.new()
 	-- upvalues: promiseModule (ref), t (ref)
 	local t_1 = { head = promiseModule.resolve() }
 	setmetatable(t_1, t)
@@ -11,14 +11,14 @@ function t.new() --[[ line: 26 ]]
 	return t_1
 end
 
-function t:request(p0) --[[ line: 34 ]]
+function t:request(p0)
 	-- upvalues: promiseModule (ref)
 	local bindableEvent = Instance.new("BindableEvent")
 	local var4 = false
 	local var5 = false
-	self.head = self.head:andThen(function() --[[ line: 39 ]]
+	self.head = self.head:andThen(function()
 		-- upvalues: promiseModule (copy), var4 (write), p0 (ref), var5 (write), bindableEvent (ref)
-		return promiseModule.new(function(p1) --[[ line: 40 ]]
+		return promiseModule.new(function(p1)
 			-- upvalues: var4 (copy), p0 (copy), var5 (copy), bindableEvent (copy)
 			if not var4 then
 				pcall(p0)
@@ -32,7 +32,7 @@ function t:request(p0) --[[ line: 34 ]]
 		end)
 	end)
 	
-	return function() --[[ line: 53 | named "release" ]]
+	return function()
 		-- upvalues: var5 (write), bindableEvent (ref), var4 (write)
 		if var5 then
 			bindableEvent:Fire()

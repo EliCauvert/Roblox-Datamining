@@ -1,8 +1,8 @@
-﻿return function(p0, p1) --[[ line: 63 | named "createPlaybackToggleIndicatorMachine" ]]
+﻿return function(p0, p1)
 	local var0 = "hidden"
 	local var1 = nil
 	
-	local function _() --[[ line: 71 | named "clearTimer" ]]
+	local function _()
 		-- upvalues: var1 (write)
 		if var1 ~= nil then
 			var1()
@@ -10,14 +10,14 @@
 		end
 	end
 	
-	local function onExitElapsed() --[[ line: 78 ]]
+	local function onExitElapsed()
 		-- upvalues: var1 (write), var0 (write), p1 (ref)
 		var1 = nil
 		var0 = "hidden"
 		p1.setMounted(false)
 	end
 	
-	local function beginExit() --[[ line: 85 ]]
+	local function beginExit()
 		-- upvalues: var1 (write), var0 (write), p1 (ref), p0 (ref), onExitElapsed (ref)
 		var1 = nil
 		var0 = "exiting"
@@ -25,7 +25,7 @@
 		var1 = p1.schedule(p0.exitDurationMs, onExitElapsed)
 	end
 	
-	local _ = function() --[[ line: 93 | named "armDwell" ]]
+	local _ = function()
 		-- upvalues: var1 (write), p1 (ref), p0 (ref), beginExit (ref)
 		if var1 ~= nil then
 			var1()
@@ -35,7 +35,7 @@
 	end
 	
 	return {
-		notifyUserToggle = function() --[[ line: 99 ]]
+		notifyUserToggle = function()
 			-- upvalues: var0 (write), p1 (ref), var1 (write), p0 (ref), beginExit (ref)
 			if var0 == "hidden" then
 				var0 = "shown"
@@ -51,11 +51,11 @@
 			end
 			var1 = p1.schedule(p0.dwellMs, beginExit)
 		end,
-		getPhase = function() --[[ line: 121 ]]
+		getPhase = function()
 			-- upvalues: var0 (write)
 			return var0
 		end,
-		dispose = function() --[[ line: 115 ]]
+		dispose = function()
 			-- upvalues: var1 (write)
 			if var1 ~= nil then
 				var1()

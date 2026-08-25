@@ -15,7 +15,7 @@ local playerListSortByLowercaseUsername = game:DefineFastFlag("PlayerListSortByL
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 54 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref), signalsModule (ref), createSignalMap (ref), createTeamStoreModule (ref)
 	local tbl = setmetatable({ _leaderboardConnections = {} }, t)
 	tbl._teamStores = {}
@@ -50,7 +50,7 @@ function t.new(p0, p1) --[[ line: 54 ]]
 	return tbl
 end
 
-function t:destroy() --[[ line: 105 ]]
+function t:destroy()
 	for i, v in pairs(self._serverAddOrderConnection) do
 		if v.Disconnect then
 			v:Disconnect()
@@ -84,32 +84,32 @@ function t:destroy() --[[ line: 105 ]]
 	self._playerStores = {}
 end
 
-function t:getGameStatsList() --[[ line: 140 ]]
+function t:getGameStatsList()
 	return self._topGameStatsOrder
 end
 
-function t:getTeamList() --[[ line: 144 ]]
+function t:getTeamList()
 	return self._virtualTeamList
 end
 
-function t:getTeamPlayerList(p2, _) --[[ line: 148 ]]
+function t:getTeamPlayerList(p2, _)
 	-- upvalues: createSignalMap (ref)
 	local var14 = self._teamStores[p2]
 	
 	return if var14 then var14.getPlayers else createSignalMap()
 end
 
-function t:getPlayerEntry(p3, _) --[[ line: 159 ]]
+function t:getPlayerEntry(p3, _)
 	local var15 = self._playerStores[p3]
 	
 	return if var15 then var15.getPlayerEntry() else nil
 end
 
-function t:_updateTeamStats(p4, p5) --[[ line: 170 ]]
+function t:_updateTeamStats(p4, p5)
 	local var16 = self._teamStores[p4]
 	
 	if var16 then
-		var16.updateStat(p5, function(p6, p7, p8) --[[ line: 173 ]]
+		var16.updateStat(p5, function(p6, p7, p8)
 			-- upvalues: self (ref)
 			local var17 = self._playerStores[p6]
 			
@@ -118,7 +118,7 @@ function t:_updateTeamStats(p4, p5) --[[ line: 170 ]]
 	end
 end
 
-function t:_removeTeamStats(p9, p10) --[[ line: 183 ]]
+function t:_removeTeamStats(p9, p10)
 	local var18 = self._teamStores[p9]
 	
 	if var18 then
@@ -126,23 +126,23 @@ function t:_removeTeamStats(p9, p10) --[[ line: 183 ]]
 	end
 end
 
-function t:_updateAllTeamStats(p11) --[[ line: 190 ]]
+function t:_updateAllTeamStats(p11)
 	for i, v in pairs(self._teamStores) do
 		self:_updateTeamStats(i, p11)
 	end
 end
 
-function t:_removeAllTeamStats(p12) --[[ line: 197 ]]
+function t:_removeAllTeamStats(p12)
 	for i, v in pairs(self._teamStores) do
 		self:_removeTeamStats(i, p12)
 	end
 end
 
-function t:_shouldSortPlayers(_, p13) --[[ line: 204 ]]
+function t:_shouldSortPlayers(_, p13)
 	return if p13 then if p13 == self._topGameStatSortOrder[1] and self._gameStatMetadata[p13] and self._gameStatMetadata[p13].isNumber then true elseif self._gameStatMetadata[p13] and self._gameStatMetadata[p13].priority == 1e999 then true else self._topGameStatSortOrder[1] or not self._gameStatMetadata[p13] or not self._gameStatMetadata[p13].isNumber else true
 end
 
-function t:_sortPlayers(p14, p15) --[[ line: 233 ]]
+function t:_sortPlayers(p14, p15)
 	-- upvalues: sortTableByValue (ref)
 	if not self:_shouldSortPlayers(p14, p15) then return end
 	local var19 = self._teamStores[p14]
@@ -157,9 +157,9 @@ function t:_sortPlayers(p14, p15) --[[ line: 233 ]]
 	end
 end
 
-function t._compareStatsValue(p16, p17) --[[ line: 266 ]]
+function t._compareStatsValue(p16, p17)
 	-- upvalues: playerListSortByLowercaseUsername (ref)
-	return function(p18, p19) --[[ line: 267 ]]
+	return function(p18, p19)
 		-- upvalues: p17 (ref), p16 (ref), playerListSortByLowercaseUsername (copy)
 		local var20 = p17[1]
 		
@@ -190,19 +190,19 @@ function t._compareStatsValue(p16, p17) --[[ line: 266 ]]
 	end
 end
 
-function t._compareRawStatsValue(_, p20, p21) --[[ line: 306 ]]
+function t._compareRawStatsValue(_, p20, p21)
 	return if p20 == nil or p21 == nil then p21 ~= nil else p21 < p20
 end
 
-local function _(p22) --[[ line: 315 | named "isGameStatValidNumber" ]]
+local function _(p22)
 	return p22:IsA("NumberValue") or (p22:IsA("IntValue") or (p22:IsA("DoubleConstrainedValue") or p22:IsA("IntConstrainedValue")))
 end
 
-local function compareGameStats(p23, p24) --[[ line: 322 ]]
+local function compareGameStats(p23, p24)
 	return p23.value.priority == nil and p24.value.priority == nil or (if p23.value.priority == nil then p24.value.priority < 0 elseif p24.value.priority == nil then p23.value.priority > 0 else p24.value.priority < p23.value.priority)
 end
 
-function t:_updateGameStatsToShow() --[[ line: 335 ]]
+function t:_updateGameStatsToShow()
 	-- upvalues: sortTableByValue (ref), compareGameStats (ref), playerListHideUnusedStats (ref), signalsModule (ref)
 	local t = {}
 	local var26 = sortTableByValue(self._gameStatMetadata, compareGameStats)
@@ -234,7 +234,7 @@ function t:_updateGameStatsToShow() --[[ line: 335 ]]
 	end
 end
 
-function t:_updateGameStatOrder(p25, p26) --[[ line: 382 ]]
+function t:_updateGameStatOrder(p25, p26)
 	local name = self._gameStatMetadata[p25.Name]
 	p26 = p26 or 0
 	
@@ -251,23 +251,23 @@ function t:_updateGameStatOrder(p25, p26) --[[ line: 382 ]]
 	end
 end
 
-function t:_updateServerAddOrder() --[[ line: 399 ]]
+function t:_updateServerAddOrder()
 	-- upvalues: robloxReplicatedStorageService (ref), signalsModule (ref), filterNewPlayerListValueStat (ref), playerListHideUnusedStats (ref)
 	local _ = {}
 	local leaderstatsOrder = robloxReplicatedStorageService:GetAttribute("LeaderstatsOrder") or {}
-	robloxReplicatedStorageService:GetAttributeChangedSignal("LeaderstatsOrder"):Connect(function() --[[ line: 405 ]]
+	robloxReplicatedStorageService:GetAttributeChangedSignal("LeaderstatsOrder"):Connect(function()
 		-- upvalues: leaderstatsOrder (write), robloxReplicatedStorageService (copy), self (ref)
 		leaderstatsOrder = robloxReplicatedStorageService:GetAttribute("LeaderstatsOrder") or {}
 		self._setServerAddOrder(leaderstatsOrder)
 	end)
 	local httpService = game:GetService("HttpService")
 	
-	local function decodeJSON(p27) --[[ line: 414 ]]
+	local function decodeJSON(p27)
 		-- upvalues: httpService (ref)
 		return httpService:JSONDecode(p27)
 	end
 	
-	local function _(p28) --[[ line: 418 | named "decodeAddOrder" ]]
+	local function _(p28)
 		-- upvalues: decodeJSON (ref)
 		local ok, status = pcall(decodeJSON, p28)
 		
@@ -276,7 +276,7 @@ function t:_updateServerAddOrder() --[[ line: 399 ]]
 	
 	self._serverInstanceAddedConnection = nil
 	
-	local function childAdded(p29) --[[ line: 425 ]]
+	local function childAdded(p29)
 		-- upvalues: self (ref), leaderstatsOrder (write), decodeJSON (ref)
 		if p29.Name ~= "LeaderstatsOrder" then return end
 		if self._serverInstanceAddedConnection then
@@ -284,7 +284,7 @@ function t:_updateServerAddOrder() --[[ line: 399 ]]
 		end
 		local ok, status = pcall(decodeJSON, p29.Value)
 		leaderstatsOrder = if ok then status else {}
-		self._serverAddOrderConnection[p29] = p29.Changed:Connect(function(p30) --[[ line: 433 ]]
+		self._serverAddOrderConnection[p29] = p29.Changed:Connect(function(p30)
 			-- upvalues: leaderstatsOrder (copy), decodeJSON (copy), self (copy)
 			local ok, status = pcall(decodeJSON, p30)
 			leaderstatsOrder = if ok then status else {}
@@ -297,7 +297,7 @@ function t:_updateServerAddOrder() --[[ line: 399 ]]
 	for i, v in ipairs(robloxReplicatedStorageService:GetChildren()) do
 		childAdded(v)
 	end
-	self._serverAddOrderEffectCleanup = signalsModule.createEffect(function(p31) --[[ line: 446 ]]
+	self._serverAddOrderEffectCleanup = signalsModule.createEffect(function(p31)
 		-- upvalues: self (ref), filterNewPlayerListValueStat (copy), playerListHideUnusedStats (copy)
 		local var35 = false
 		
@@ -319,7 +319,7 @@ function t:_updateServerAddOrder() --[[ line: 399 ]]
 	end)
 end
 
-function t:_updateGameStatPriority(p32) --[[ line: 479 ]]
+function t:_updateGameStatPriority(p32)
 	local var36 = nil
 	local priority = p32:FindFirstChild("Priority")
 	
@@ -338,7 +338,7 @@ function t:_updateGameStatPriority(p32) --[[ line: 479 ]]
 	self:_updateGameStatOrder(p32, var36)
 end
 
-function t:_addGameStat(p33) --[[ line: 499 ]]
+function t:_addGameStat(p33)
 	-- upvalues: playerListHideUnusedStats (ref)
 	if self._gameStatMetadata[p33.Name] == nil then
 		self._gameStatMetadata[p33.Name] = {}
@@ -354,7 +354,7 @@ function t:_addGameStat(p33) --[[ line: 499 ]]
 	self:_updateAllTeamStats(p33.Name)
 end
 
-function t:_removeGameStat(p34) --[[ line: 518 ]]
+function t:_removeGameStat(p34)
 	self._gameStatsUsage[p34.Name] = if self._gameStatsUsage[p34.Name] then self._gameStatsUsage[p34.Name] - 1 else 0
 	
 	if self._gameStatsUsage[p34.Name] <= 0 then
@@ -371,7 +371,7 @@ function t:_removeGameStat(p34) --[[ line: 518 ]]
 end
 
 if fFlagPlayerListFixLeaderstatsStacking then
-	function t:_checkGameStatsExist() --[[ line: 539 ]]
+	function t:_checkGameStatsExist()
 		local t = {}
 		
 		for i, v in self._gameStatMetadata do
@@ -400,32 +400,32 @@ if fFlagPlayerListFixLeaderstatsStacking then
 		end
 	end
 end
-function t._createPlayerStore(p35, p36) --[[ line: 569 ]]
+function t._createPlayerStore(p35, p36)
 	-- upvalues: createPlayerStoreModule (ref), fFlagPlayerListFixLeaderstatsStacking (ref)
-	return createPlayerStoreModule(p36, function(p37) --[[ line: 572 ]]
+	return createPlayerStoreModule(p36, function(p37)
 		-- upvalues: p35 (ref)
 		p35:_addGameStat(p37)
-	end, function(p38) --[[ line: 575 ]]
+	end, function(p38)
 		-- upvalues: p35 (ref)
 		p35:_removeGameStat(p38)
-	end, function(p39, p40) --[[ line: 578 ]]
+	end, function(p39, p40)
 		-- upvalues: p35 (ref)
 		p35:_updateTeamStats(p39, p40)
-	end, function(p41, p42) --[[ line: 581 ]]
+	end, function(p41, p42)
 		-- upvalues: p35 (ref)
 		p35:_sortPlayers(p41, p42)
-	end, if fFlagPlayerListFixLeaderstatsStacking then function() --[[ line: 585 ]]
+	end, if fFlagPlayerListFixLeaderstatsStacking then function()
 		-- upvalues: p35 (ref)
 		p35:_checkGameStatsExist()
 	end else nil)
 end
 
-function t:_createTeamStore(p43) --[[ line: 592 ]]
+function t:_createTeamStore(p43)
 	-- upvalues: createTeamStoreModule (ref)
 	return createTeamStoreModule(p43, self._teamsService)
 end
 
-function t:_getOrCreateTeamStore(p44) --[[ line: 596 ]]
+function t:_getOrCreateTeamStore(p44)
 	local var41 = self._teamStores[p44]
 	
 	if not var41 then
@@ -445,7 +445,7 @@ function t:_getOrCreateTeamStore(p44) --[[ line: 596 ]]
 	return var41
 end
 
-function t:_addPlayerStore(p45) --[[ line: 616 ]]
+function t:_addPlayerStore(p45)
 	if self._playerStores[p45] then
 		return
 	end
@@ -456,7 +456,7 @@ function t:_addPlayerStore(p45) --[[ line: 616 ]]
 	self:_sortPlayers(var42)
 end
 
-function t:_removePlayerStore(p46) --[[ line: 637 ]]
+function t:_removePlayerStore(p46)
 	local var43 = self._playerStores[p46]
 	
 	if not var43 then return end
@@ -478,8 +478,8 @@ function t:_removePlayerStore(p46) --[[ line: 637 ]]
 	self:_sortPlayers(team)
 end
 
-function t:_connectPlayerTeamChange(p47) --[[ line: 666 ]]
-	self._leaderboardConnections["PlayerTeamChanged_" .. p47.Name] = p47.Changed:Connect(function(p48) --[[ line: 667 ]]
+function t:_connectPlayerTeamChange(p47)
+	self._leaderboardConnections["PlayerTeamChanged_" .. p47.Name] = p47.Changed:Connect(function(p48)
 		-- upvalues: self (ref), p47 (ref)
 		if p48 == "Team" then
 			local var48 = self._playerStores[p47]
@@ -500,7 +500,7 @@ function t:_connectPlayerTeamChange(p47) --[[ line: 666 ]]
 	end)
 end
 
-function t:_addTeamStore(p49) --[[ line: 699 ]]
+function t:_addTeamStore(p49)
 	if self._teamStores[p49] then
 		return
 	end
@@ -515,7 +515,7 @@ function t:_addTeamStore(p49) --[[ line: 699 ]]
 	}, false)
 end
 
-function t:_removeTeamStore(p50) --[[ line: 717 ]]
+function t:_removeTeamStore(p50)
 	local var53 = self._teamStores[p50]
 	
 	if not var53 then return end
@@ -535,14 +535,14 @@ function t:_removeTeamStore(p50) --[[ line: 717 ]]
 	self._virtualTeamList.removeData(p50, false)
 end
 
-function t:_connectTeams() --[[ line: 749 ]]
-	self._leaderboardConnections.TeamAdded = self._teamsService.ChildAdded:Connect(function(p51) --[[ line: 750 ]]
+function t:_connectTeams()
+	self._leaderboardConnections.TeamAdded = self._teamsService.ChildAdded:Connect(function(p51)
 		-- upvalues: self (ref)
 		if p51:IsA("Team") then
 			self:_addTeamStore(p51)
 		end
 	end)
-	self._leaderboardConnections.TeamRemoved = self._teamsService.ChildRemoved:Connect(function(p52) --[[ line: 757 ]]
+	self._leaderboardConnections.TeamRemoved = self._teamsService.ChildRemoved:Connect(function(p52)
 		-- upvalues: self (ref)
 		if p52:IsA("Team") then
 			self:_removeTeamStore(p52)
@@ -554,12 +554,12 @@ function t:_connectTeams() --[[ line: 749 ]]
 	end
 end
 
-function t:_connectPlayers() --[[ line: 772 ]]
-	self._leaderboardConnections.PlayerAdded = self._playersService.PlayerAdded:Connect(function(p53) --[[ line: 773 ]]
+function t:_connectPlayers()
+	self._leaderboardConnections.PlayerAdded = self._playersService.PlayerAdded:Connect(function(p53)
 		-- upvalues: self (ref)
 		self:_addPlayerStore(p53)
 	end)
-	self._leaderboardConnections.PlayerRemoving = self._playersService.PlayerRemoving:Connect(function(p54) --[[ line: 778 ]]
+	self._leaderboardConnections.PlayerRemoving = self._playersService.PlayerRemoving:Connect(function(p54)
 		-- upvalues: self (ref)
 		self:_removePlayerStore(p54)
 	end)

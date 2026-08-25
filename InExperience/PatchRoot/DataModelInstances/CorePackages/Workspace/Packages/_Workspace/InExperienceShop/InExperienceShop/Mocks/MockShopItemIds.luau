@@ -184,9 +184,9 @@ local t = {
 
 return {
 	MOCK_RESPONSE_FOR_TESTING = t,
-	getShopItemIds = function(p0) --[[ line: 264 ]]
+	getShopItemIds = function(p0)
 		-- upvalues: promiseModule (ref), t (ref)
-		return promiseModule.delay(if p0 ~= nil then 0.5 else p0):andThen(function() --[[ line: 266 ]]
+		return promiseModule.delay(if p0 ~= nil then 0.5 else p0):andThen(function()
 			-- upvalues: t (copy)
 			return t
 		end)

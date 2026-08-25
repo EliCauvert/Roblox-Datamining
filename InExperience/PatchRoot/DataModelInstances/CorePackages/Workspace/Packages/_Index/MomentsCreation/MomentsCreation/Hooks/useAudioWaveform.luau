@@ -8,11 +8,11 @@ local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
 local waveformWidth = constantsModule.AudioWaveform.WaveformWidth
 local waveformPadding = constantsModule.AudioWaveform.WaveformPadding
 
-local function _(value) --[[ line: 28 | named "assetIdAsContent" ]]
+local function _(value)
 	return `rbxassetid://{value}`
 end
 
-local function normalizeWaveform(p0) --[[ line: 32 ]]
+local function normalizeWaveform(p0)
 	local var5 = 0
 	local t = {}
 	
@@ -32,10 +32,10 @@ local function normalizeWaveform(p0) --[[ line: 32 ]]
 	return t_1
 end
 
-return function(p1, p2) --[[ line: 55 | named "useAudioWaveform" ]]
+return function(p1, p2)
 	-- upvalues: reactModule (ref), useEffect (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), localPlayer (ref), normalizeWaveform (ref)
 	local var9, var10 = reactModule.useState({})
-	useEffect(function() --[[ line: 63 ]]
+	useEffect(function()
 		-- upvalues: var10 (ref), p2 (ref), segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p1 (ref), localPlayer (copy), normalizeWaveform (copy)
 		var10({})
 		
@@ -50,14 +50,14 @@ return function(p1, p2) --[[ line: 55 | named "useAudioWaveform" ]]
 		audioPlayer.Parent = audioWaveform
 		audioWaveform.Parent = localPlayer:WaitForChild("PlayerGui")
 		local var14 = false
-		local var15 = audioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ line: 83 | named "generate" ]]
+		local var15 = audioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function()
 			-- upvalues: var14 (write), audioPlayer (ref), var11 (ref), var10 (copy), normalizeWaveform (copy)
 			if var14 or not audioPlayer.IsReady then
 				return
 			end
-			task.spawn(function() --[[ line: 87 ]]
+			task.spawn(function()
 				-- upvalues: audioPlayer (copy), var11 (copy), var14 (copy), var10 (copy), normalizeWaveform (copy)
-				local ok, status = pcall(function() --[[ line: 88 ]]
+				local ok, status = pcall(function()
 					-- upvalues: audioPlayer (copy), var11 (copy)
 					return audioPlayer:GetWaveformAsync(NumberRange.new(0, audioPlayer.TimeLength), var11 * audioPlayer.TimeLength)
 				end)
@@ -69,9 +69,9 @@ return function(p1, p2) --[[ line: 55 | named "useAudioWaveform" ]]
 		end)
 		
 		if audioPlayer.IsReady and audioPlayer.IsReady then
-			task.spawn(function() --[[ line: 87 ]]
+			task.spawn(function()
 				-- upvalues: audioPlayer (ref), var11 (ref), var14 (write), var10 (copy), normalizeWaveform (copy)
-				local ok, status = pcall(function() --[[ line: 88 ]]
+				local ok, status = pcall(function()
 					-- upvalues: audioPlayer (copy), var11 (copy)
 					return audioPlayer:GetWaveformAsync(NumberRange.new(0, audioPlayer.TimeLength), var11 * audioPlayer.TimeLength)
 				end)
@@ -81,7 +81,7 @@ return function(p1, p2) --[[ line: 55 | named "useAudioWaveform" ]]
 				end
 			end)
 		end
-		return function() --[[ line: 106 ]]
+		return function()
 			-- upvalues: var14 (write), var15 (ref), audioWaveform (ref)
 			var14 = true
 			var15:Disconnect()

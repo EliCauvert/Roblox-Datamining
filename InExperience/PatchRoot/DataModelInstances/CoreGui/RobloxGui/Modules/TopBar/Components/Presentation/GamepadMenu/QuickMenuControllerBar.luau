@@ -17,7 +17,7 @@ local _ = {
 	hideChat = "CoreScripts.TopBar.HideChat"
 }
 
-return function(p0) --[[ line: 27 | named "QuickMenuControllerBar" ]]
+return function(p0)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), useSelector (ref), roactModule (ref), coreGuiService (ref), inGameMenuConstantsModule (ref), controllerBar (ref)
 	local var7 = localization.new(localizationService.RobloxLocaleId)
 	local list = {
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 27 | named "QuickMenuControllerBar" ]]
 	
 	if p0.chatMenuEnabled then
 		table.insert(list, 1, {
-			text = var7:Format(if useSelector(reactModule.useCallback(function(p1) --[[ line: 44 ]]
+			text = var7:Format(if useSelector(reactModule.useCallback(function(p1)
 				return p1.chat.visible
 			end)) then "CoreScripts.TopBar.HideChat" else "CoreScripts.TopBar.ShowChat"),
 			keyCode = Enum.KeyCode.ButtonR1

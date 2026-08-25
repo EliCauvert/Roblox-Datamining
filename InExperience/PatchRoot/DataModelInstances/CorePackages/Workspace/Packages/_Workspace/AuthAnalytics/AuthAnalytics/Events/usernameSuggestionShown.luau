@@ -1,6 +1,6 @@
 ﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p0, p1, p2, p3) --[[ line: 7 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: checkAndSendEventModule (ref)
 	assert(type(p2) == "table", "Expected suggestions to be a table")
 	checkAndSendEventModule(p0, "usernameSuggestionShown", {

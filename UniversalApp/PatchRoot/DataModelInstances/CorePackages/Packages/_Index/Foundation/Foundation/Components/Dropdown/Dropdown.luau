@@ -20,39 +20,39 @@ local t = {
 }
 local t_1 = { offset = 5, position = popoverSideModule.Bottom }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 82 | named "Dropdown" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
 	local var15 = withDefaultsModule(p0, t)
 	local var16, var17 = reactModule.useState(false)
 	local var18 = reactModule.useRef(nil)
 	local var19, var20 = reactModule.useState(nil)
-	local var21 = reactModule.useCallback(function(p2) --[[ line: 87 ]]
+	local var21 = reactModule.useCallback(function(p2)
 		-- upvalues: var18 (ref), var20 (ref)
 		var18.current = p2
 		var20(p2)
 	end, {})
-	reactModule.useImperativeHandle(p1, function() --[[ line: 91 ]]
+	reactModule.useImperativeHandle(p1, function()
 		-- upvalues: var19 (ref)
 		return var19
 	end, { var19 })
 	local var22, var23 = reactModule.useBinding(var15.width)
 	local var24, var25 = markSelectedItemModule(var15.items, var15.value)
-	local var26 = reactModule.useCallback(function() --[[ line: 100 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref)
-		var17(function(p3) --[[ line: 101 ]]
+		var17(function(p3)
 			return not p3
 		end)
 	end, {})
-	local var27 = reactModule.useCallback(function() --[[ line: 106 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref)
 		var17(false)
 	end, {})
-	local var28 = reactModule.useCallback(function(p4) --[[ line: 110 ]]
+	local var28 = reactModule.useCallback(function(p4)
 		-- upvalues: var17 (ref), var15 (ref)
 		var17(false)
 		var15.onItemChanged(p4)
 	end, { var15.onItemChanged })
-	var15.onAbsoluteSizeChanged = reactModule.useCallback(function(p5) --[[ line: 115 ]]
+	var15.onAbsoluteSizeChanged = reactModule.useCallback(function(p5)
 		-- upvalues: p0 (ref), var23 (ref)
 		if p0.onAbsoluteSizeChanged then
 			p0.onAbsoluteSizeChanged(p5)

@@ -12,19 +12,19 @@ local list = {
 }
 local mainViewDebugVisualizations = roactModule.Component:extend("MainViewDebugVisualizations")
 
-function mainViewDebugVisualizations.init(p0) --[[ line: 26 ]]
+function mainViewDebugVisualizations.init(p0)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1) --[[ line: 27 ]]
+	function p0.onUtilTabHeightChanged(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ utilTabHeight = p1 })
 	end
 	
-	function p0.onCheckboxChanged(p2, p3) --[[ line: 33 ]]
+	function p0.onCheckboxChanged(p2, p3)
 		-- upvalues: p0 (ref)
 		p0.props.dispatchDebugVisualizationsUpdateSearchFilter(nil, { [p2] = p3 })
 	end
 	
-	function p0.onSearchTermChanged(p4) --[[ line: 39 ]]
+	function p0.onSearchTermChanged(p4)
 		-- upvalues: p0 (ref)
 		p0.props.dispatchDebugVisualizationsUpdateSearchFilter(p4, {})
 	end
@@ -33,11 +33,11 @@ function mainViewDebugVisualizations.init(p0) --[[ line: 26 ]]
 	p0.state = { utilTabHeight = 0 }
 end
 
-function mainViewDebugVisualizations.didMount(p5) --[[ line: 50 ]]
+function mainViewDebugVisualizations.didMount(p5)
 	p5:setState({ utilTabHeight = p5.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewDebugVisualizations.didUpdate(p6) --[[ line: 57 ]]
+function mainViewDebugVisualizations.didUpdate(p6)
 	local size = p6.utilRef.current.Size
 	
 	if size.Y.Offset ~= p6.state.utilTabHeight then
@@ -45,7 +45,7 @@ function mainViewDebugVisualizations.didUpdate(p6) --[[ line: 57 ]]
 	end
 end
 
-function mainViewDebugVisualizations.render(p7) --[[ line: 66 ]]
+function mainViewDebugVisualizations.render(p7)
 	-- upvalues: list (ref), roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), debugVisualizationsChartModule (ref)
 	local size = p7.props.size
 	local formFactor = p7.props.formFactor
@@ -94,15 +94,15 @@ function mainViewDebugVisualizations.render(p7) --[[ line: 66 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p8, _) --[[ line: 121 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p8, _)
 	return {
 		debugVisualizationsSearchTerm = p8.DebugVisualizationsData.debugVisualizationsSearchTerm,
 		debugVisualizationsTypeFilters = p8.DebugVisualizationsData.debugVisualizationsTypeFilters
 	}
-end, function(p9) --[[ line: 128 | named "mapDispatchToProps" ]]
+end, function(p9)
 	-- upvalues: debugVisualizationsUpdateSearchFilterModule (ref)
 	return {
-		dispatchDebugVisualizationsUpdateSearchFilter = function(p10, p11) --[[ line: 130 ]]
+		dispatchDebugVisualizationsUpdateSearchFilter = function(p10, p11)
 			-- upvalues: p9 (ref), debugVisualizationsUpdateSearchFilterModule (copy)
 			p9(debugVisualizationsUpdateSearchFilterModule(p10, p11))
 		end

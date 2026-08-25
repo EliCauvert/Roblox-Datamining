@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("AppTopBanner").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3, p4) --[[ line: 7 ]]
+﻿return require(script:FindFirstAncestor("AppTopBanner").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3, p4)
 	return {
 		expanded = p0,
 		appTopBannerType = p1,

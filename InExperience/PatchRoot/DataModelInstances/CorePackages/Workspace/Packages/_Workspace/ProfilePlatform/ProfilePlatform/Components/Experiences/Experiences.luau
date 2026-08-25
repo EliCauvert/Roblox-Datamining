@@ -22,22 +22,22 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local useTextSizeOffset = require(parent.Foundation).Hooks.useTextSizeOffset
 local communityProfileAffiliatedExperienceTelemetryThrottlePermyriad = game:DefineFastInt("CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad", 0)
 
-local function _(p0) --[[ line: 40 | named "getTextSizeAdjustedSquareExperienceTileHeight" ]]
-	return function(p1) --[[ line: 41 ]]
+local function _(p0)
+	return function(p1)
 		-- upvalues: p0 (ref)
 		return p1 + 80 + p0 * 3
 	end
 end
 
-return function(p2) --[[ line: 46 | named "Experiences" ]]
+return function(p2)
 	-- upvalues: useTextSizeOffset (ref), reactModule (ref), useProfileAnalyticsContextModule (ref), useProfileWrapperContextModule (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), useGenerateImpressionsTagModule (ref), enumsModule (ref), formatExperienceDetailsForImpressionsModule (ref), useSendItemImpressionsModule (ref), contentType (ref), eventNamesModule (ref), communityProfileAffiliatedExperienceTelemetryThrottlePermyriad (ref), telemetryService (ref), appPage (ref), useRenderExperienceTileModule (ref), useLocalization (ref), textKeysModule (ref), cryoModule (ref), squareCollectionGridViewModule (ref)
 	local experienceDetails = p2.experienceDetails
 	local _ = nil
 	local _ = nil
 	local var15 = useTextSizeOffset()
-	local var16 = reactModule.useMemo(function() --[[ line: 50 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var15 (write)
-		return function(p3) --[[ line: 41 ]]
+		return function(p3)
 			-- upvalues: var15 (ref)
 			return p3 + 80 + var15 * 3
 		end
@@ -53,7 +53,7 @@ return function(p2) --[[ line: 46 | named "Experiences" ]]
 		getItemHeight = var16,
 		items = experienceDetails,
 		layoutOrder = p2.layoutOrder,
-		renderItem = useRenderExperienceTileModule(var20, "ProfileExperienceTile", reactModule.useCallback(function(p4, p5, p6) --[[ line: 70 ]]
+		renderItem = useRenderExperienceTileModule(var20, "ProfileExperienceTile", reactModule.useCallback(function(p4, p5, p6)
 			-- upvalues: var17 (ref), eventNamesModule (copy), communityProfileAffiliatedExperienceTelemetryThrottlePermyriad (copy), var18 (ref), telemetryService (copy), experienceDetails (ref), var19 (ref), appPage (copy), p2 (ref)
 			var17.fireAnalyticsEvent(eventNamesModule.ExperienceOpened, { experienceId = p4.experienceId, positionInComponent = p5 })
 			telemetryService:LogEvent({
@@ -75,7 +75,7 @@ return function(p2) --[[ line: 46 | named "Experiences" ]]
 		end, { var17, experienceDetails, var19, p2.layoutOrder }), true),
 		title = useLocalization({ title = textKeysModule.Experiences }).title,
 		impressionsTag = var20,
-		sendImpressions = useSendItemImpressionsModule(reactModule.useMemo(function() --[[ line: 58 ]]
+		sendImpressions = useSendItemImpressionsModule(reactModule.useMemo(function()
 			-- upvalues: formatExperienceDetailsForImpressionsModule (copy), experienceDetails (ref)
 			return formatExperienceDetailsForImpressionsModule(experienceDetails)
 		end, { experienceDetails }), 3, contentType.Game, p2.layoutOrder, enumsModule.Components.Experiences),

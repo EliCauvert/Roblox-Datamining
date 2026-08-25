@@ -1,7 +1,7 @@
 ﻿game:DefineFastFlag("JoinWithoutMicPermissions3", false)
 local var0 = true
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: var0 (write)
 	if p0 ~= nil then
 		var0 = p0

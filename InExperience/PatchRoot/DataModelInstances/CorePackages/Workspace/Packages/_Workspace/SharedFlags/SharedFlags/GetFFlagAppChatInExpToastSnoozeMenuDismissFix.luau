@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("AppChatInExpToastSnoozeMenuDismissFix", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("AppChatInExpToastSnoozeMenuDismissFix")
 end

@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 8 | named "normalizeWaveform" ]]
+﻿return function(p0)
 	local var0 = 0
 	local t = {}
 	

@@ -1,4 +1,4 @@
-﻿local function deepEqual(p0, p1, p2) --[[ line: 7 ]]
+﻿local function deepEqual(p0, p1, p2)
 	-- upvalues: deepEqual (ref)
 	if p0 == p1 then
 		return true

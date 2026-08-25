@@ -17,7 +17,7 @@ end
 t.requiredData = { validationEnumsModule.SharedDataMember.consumerConfig }
 t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 
-function t.fflag() --[[ line: 24 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
 end
@@ -27,14 +27,14 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function checkTrustedCreatorPermission() --[[ line: 30 ]]
+local function checkTrustedCreatorPermission()
 	-- upvalues: APIUtilModule (ref), httpService (ref)
 	local var9, var10 = APIUtilModule.requestAndRetryGet(string.format("https://itemconfiguration.%s/v1/permissions/action-allowed-for-item-type?trustedCreatorCheck=true&action=1&assetType=61", APIUtilModule.getBaseDomain()))
 	
 	if not var9 then
 		return false, "Failed to check trusted creator permission: " .. tostring(var10)
 	end
-	local ok, status = pcall(function() --[[ line: 41 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), var10 (ref)
 		return httpService:JSONDecode(var10)
 	end)
@@ -45,7 +45,7 @@ local function checkTrustedCreatorPermission() --[[ line: 30 ]]
 	return false, "Failed to decode permission response"
 end
 
-function t.run(p0, p1) --[[ line: 51 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidateEmotesBoneUserVerificationModule (ref), validationEnumsModule (ref), errorSourceStringsModule (ref), checkTrustedCreatorPermission (ref)
 	if not getFFlagUGCValidateEmotesBoneUserVerificationModule() then return end
 	local consumerEnv = p1.consumerConfig.consumerEnv

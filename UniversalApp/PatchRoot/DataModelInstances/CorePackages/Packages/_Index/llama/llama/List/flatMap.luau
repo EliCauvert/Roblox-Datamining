@@ -1,4 +1,4 @@
-﻿local function flatMap(p0, p1) --[[ line: 2 ]]
+﻿local function flatMap(p0, p1)
 	-- upvalues: flatMap (ref)
 	local var1 = type(p0)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)

@@ -26,7 +26,7 @@ local t = {
 	planByToolCallId = {}
 }
 
-local function contentBlocksToText(p0) --[[ line: 64 ]]
+local function contentBlocksToText(p0)
 	local t = {}
 	
 	for i, v in p0 do
@@ -37,7 +37,7 @@ local function contentBlocksToText(p0) --[[ line: 64 ]]
 	return table.concat(t)
 end
 
-local function getAssistantMessageTexts(p1) --[[ line: 74 ]]
+local function getAssistantMessageTexts(p1)
 	-- upvalues: contentBlocksToText (ref)
 	local t = {}
 	
@@ -55,14 +55,14 @@ local function getAssistantMessageTexts(p1) --[[ line: 74 ]]
 	return t
 end
 
-local function getFinalAssistantMessageText(p2) --[[ line: 88 ]]
+local function getFinalAssistantMessageText(p2)
 	-- upvalues: getAssistantMessageTexts (ref)
 	local var27 = getAssistantMessageTexts(p2)
 	
 	return var27[#var27]
 end
 
-local function _(p3, p4) --[[ line: 93 | named "makeTurnKey" ]]
+local function _(p3, p4)
 	if p4.turnKey ~= nil then
 		return p4.turnKey
 	end
@@ -72,7 +72,7 @@ local function _(p3, p4) --[[ line: 93 | named "makeTurnKey" ]]
 	return if var29 == nil then sessionId else `{sessionId}:{var29}`
 end
 
-local function makeSegmentKey(p5, ...) --[[ line: 105 ]]
+local function makeSegmentKey(p5, ...)
 	local list = { p5 }
 	
 	for i, v in { ... } do
@@ -81,7 +81,7 @@ local function makeSegmentKey(p5, ...) --[[ line: 105 ]]
 	return table.concat(list, ":")
 end
 
-local _ = function(p6) --[[ line: 113 | named "getSortedActivitySlotIndexes" ]]
+local _ = function(p6)
 	local t = {}
 	
 	for i in p6.activitySlots do
@@ -92,7 +92,7 @@ local _ = function(p6) --[[ line: 113 | named "getSortedActivitySlotIndexes" ]]
 	return t
 end
 
-local _ = function(p7, p8) --[[ line: 122 | named "makeTurnActivityItem" ]]
+local _ = function(p7, p8)
 	if p8.kind == "tool_call" then
 		local toolCallId = p7.toolCalls[p8.toolCallId]
 		
@@ -106,7 +106,7 @@ local _ = function(p7, p8) --[[ line: 122 | named "makeTurnActivityItem" ]]
 	return nil
 end
 
-local _ = function(p9, p10, p11, p12) --[[ line: 135 | named "makeAgentMessageSegment" ]]
+local _ = function(p9, p10, p11, p12)
 	return if p10 == "" then nil else {
 		kind = "agent_message",
 		key = p9,
@@ -116,7 +116,7 @@ local _ = function(p9, p10, p11, p12) --[[ line: 135 | named "makeAgentMessageSe
 	}
 end
 
-local function makeCompletedActivitySummary(p13, p14) --[[ line: 153 ]]
+local function makeCompletedActivitySummary(p13, p14)
 	-- upvalues: fFlagBuildLocalization (ref), getSummaryToolActivity (ref), getCompletedActivityLabel (ref), countToolCalls (ref)
 	if #p13 == 0 then
 		return nil
@@ -141,7 +141,7 @@ local function makeCompletedActivitySummary(p13, p14) --[[ line: 153 ]]
 	}
 end
 
-local function makeActiveActivitySummary(p15, p16, p17, p18, p19) --[[ line: 177 ]]
+local function makeActiveActivitySummary(p15, p16, p17, p18, p19)
 	-- upvalues: fFlagBuildLocalization (ref), getSummaryToolActivity (ref), localizationStringsModule (ref), getActiveActivityLabel (ref)
 	if #p15 == 0 and not p16 then
 		return nil
@@ -174,7 +174,7 @@ local function makeActiveActivitySummary(p15, p16, p17, p18, p19) --[[ line: 177
 	}
 end
 
-local function countActionsInSegments(p20) --[[ line: 213 ]]
+local function countActionsInSegments(p20)
 	-- upvalues: countToolCalls (ref)
 	local var36 = 0
 	
@@ -186,7 +186,7 @@ local function countActionsInSegments(p20) --[[ line: 213 ]]
 	return var36
 end
 
-local function getAnsweredPromptsByToolCallId(p21) --[[ line: 223 ]]
+local function getAnsweredPromptsByToolCallId(p21)
 	-- upvalues: studioAskUserTool (ref)
 	local t = {}
 	
@@ -203,7 +203,7 @@ local function getAnsweredPromptsByToolCallId(p21) --[[ line: 223 ]]
 	return t
 end
 
-local function getCompletedPlansByToolCallId(p22) --[[ line: 237 ]]
+local function getCompletedPlansByToolCallId(p22)
 	-- upvalues: studioProposePlanTool (ref)
 	local t = {}
 	
@@ -215,7 +215,7 @@ local function getCompletedPlansByToolCallId(p22) --[[ line: 237 ]]
 	return t
 end
 
-local _ = function(p23, p24, p25, p26, p27, p28, p29) --[[ line: 247 | named "makeClientToolSegment" ]]
+local _ = function(p23, p24, p25, p26, p27, p28, p29)
 	-- upvalues: makeSegmentKey (ref)
 	return {
 		kind = "client_tool",
@@ -228,7 +228,7 @@ local _ = function(p23, p24, p25, p26, p27, p28, p29) --[[ line: 247 | named "ma
 	}
 end
 
-local function projectAskUserSegments(p30, p31, p32, p33, p34) --[[ line: 267 ]]
+local function projectAskUserSegments(p30, p31, p32, p33, p34)
 	-- upvalues: makeSegmentKey (ref), studioAskUserTool (ref)
 	local var39 = p30.toolCalls[p32]
 	
@@ -303,7 +303,7 @@ local function projectAskUserSegments(p30, p31, p32, p33, p34) --[[ line: 267 ]]
 	end
 end
 
-local function projectPlanSegments(p35, p36, p37, p38, p39) --[[ line: 334 ]]
+local function projectPlanSegments(p35, p36, p37, p38, p39)
 	-- upvalues: makeSegmentKey (ref), studioProposePlanTool (ref)
 	local var45 = p35.toolCalls[p37]
 	
@@ -349,14 +349,14 @@ local function projectPlanSegments(p35, p36, p37, p38, p39) --[[ line: 334 ]]
 	}
 end
 
-local _ = function(p40, p41, p42, p43, p44, p45) --[[ line: 376 | named "projectLocalToolSegments" ]]
+local _ = function(p40, p41, p42, p43, p44, p45)
 	-- upvalues: projectAskUserSegments (ref), projectPlanSegments (ref)
 	local var49 = projectAskUserSegments(p40, p41, p42, p43, p45)
 	
 	return if #var49 > 0 then var49 else projectPlanSegments(p40, p41, p42, p44, p45)
 end
 
-local _ = function(p46, p47, p48) --[[ line: 392 | named "getActiveAskUserActivityLabel" ]]
+local _ = function(p46, p47, p48)
 	-- upvalues: studioAskUserTool (ref), getAskUserActivityLabel (ref)
 	local var50 = p48.askUserByToolCallId[p47]
 	local var51 = p46.toolCalls[p47]
@@ -374,7 +374,7 @@ local _ = function(p46, p47, p48) --[[ line: 392 | named "getActiveAskUserActivi
 	return getAskUserActivityLabel(#var52, if currentIndex ~= nil then nil else #currentIndex.options)
 end
 
-local function projectWorkSegments(p49, p50, p51, p52) --[[ line: 413 ]]
+local function projectWorkSegments(p49, p50, p51, p52)
 	-- upvalues: getAnsweredPromptsByToolCallId (ref), getCompletedPlansByToolCallId (ref), makeSegmentKey (ref), makeActiveActivitySummary (ref), makeCompletedActivitySummary (ref), projectAskUserSegments (ref), projectPlanSegments (ref), studioAskUserTool (ref), getAskUserActivityLabel (ref), contentBlocksToText (ref)
 	local t = {}
 	local t_1 = {}
@@ -383,7 +383,7 @@ local function projectWorkSegments(p49, p50, p51, p52) --[[ line: 413 ]]
 	local var57 = getAnsweredPromptsByToolCallId(p49)
 	local var58 = getCompletedPlansByToolCallId(p49)
 	
-	local function flushActivity(p53, p54) --[[ line: 426 ]]
+	local function flushActivity(p53, p54)
 		-- upvalues: makeSegmentKey (copy), p50 (ref), t (ref), p52 (ref), makeActiveActivitySummary (copy), t_1 (write), var55 (write), var56 (write), makeCompletedActivitySummary (copy)
 		local var70 = makeSegmentKey(p50, if p53 then "activity-trailing" else "activity", p54 or #t + 1)
 		local _ = nil
@@ -508,7 +508,7 @@ local function projectWorkSegments(p49, p50, p51, p52) --[[ line: 413 ]]
 	return t
 end
 
-local function makeTurnWorkSegment(p55, p56, p57, p58, p59, p60) --[[ line: 506 ]]
+local function makeTurnWorkSegment(p55, p56, p57, p58, p59, p60)
 	-- upvalues: countActionsInSegments (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), getTurnWorkedDurationLabel (ref), makeSegmentKey (ref)
 	if #p56 == 0 then
 		return nil
@@ -547,7 +547,7 @@ local function makeTurnWorkSegment(p55, p56, p57, p58, p59, p60) --[[ line: 506 
 	}
 end
 
-local function addTerminalAssistantMessageSegments(a, b, p61) --[[ line: 556 ]]
+local function addTerminalAssistantMessageSegments(a, b, p61)
 	-- upvalues: getAssistantMessageTexts (ref), makeSegmentKey (ref)
 	for i, v in getAssistantMessageTexts(b) do
 		local var81 = if v == "" then nil else {
@@ -564,7 +564,7 @@ local function addTerminalAssistantMessageSegments(a, b, p61) --[[ line: 556 ]]
 	end
 end
 
-local function projectTurnSegments(p62, p63, p64) --[[ line: 566 ]]
+local function projectTurnSegments(p62, p63, p64)
 	-- upvalues: projectWorkSegments (ref), fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule (ref), getLocalToolWaitSeconds (ref), makeTurnWorkSegment (ref), addTerminalAssistantMessageSegments (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), turnDisplayModule (ref), makeSegmentKey (ref), ASSISTANT_STOPPED_TEXT (ref), publishToolUtils (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref)
 	local turnKey
 	if p63.turnKey == nil then
@@ -632,11 +632,11 @@ end
 return {
 	formatStepCount = formatStepCount,
 	getFinalAssistantMessageText = getFinalAssistantMessageText,
-	projectActiveTurnSegments = function(p65, p66) --[[ line: 649 ]]
+	projectActiveTurnSegments = function(p65, p66)
 		-- upvalues: projectTurnSegments (ref), t (ref)
 		return projectTurnSegments(p65, p66 or {}, if p66 and p66.optimisticLocalTools then p66.optimisticLocalTools else t)
 	end,
-	projectLoadingTurnSegments = function(p67) --[[ line: 627 ]]
+	projectLoadingTurnSegments = function(p67)
 		-- upvalues: makeActiveActivitySummary (ref), makeSegmentKey (ref), countActionsInSegments (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), getTurnWorkedDurationLabel (ref)
 		local turnKey
 		if p67 == nil then
@@ -678,7 +678,7 @@ return {
 		end
 		return if t_1 == nil then {} else { t_1 }
 	end,
-	projectSetupErrorSegments = function(value, p68) --[[ line: 638 ]]
+	projectSetupErrorSegments = function(value, p68)
 		-- upvalues: makeSegmentKey (ref)
 		local turnKey
 		if p68 == nil then

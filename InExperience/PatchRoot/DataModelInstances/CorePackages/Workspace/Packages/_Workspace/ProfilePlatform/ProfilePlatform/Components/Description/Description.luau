@@ -22,7 +22,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return function(p0) --[[ line: 38 | named "Description" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), useProfileWrapperContextModule (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), useAboutSectionHeightModule (ref), fFlagProfilePlatformNewProfileHeader (ref), textService (ref), enumsModule (ref), view (ref), text (ref), horizontalPageMargin (ref), expandableTextArea (ref)
 	local var24
 	local var12 = useTokens()
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 38 | named "Description" ]]
 	local description = p0.description
 	local var20 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
 	local var21, var22 = useAboutSectionHeightModule(description, var17, var14)
-	local var23 = if fFlagProfilePlatformNewProfileHeader then var22 else reactModule.useMemo(function() --[[ line: 58 ]]
+	local var23 = if fFlagProfilePlatformNewProfileHeader then var22 else reactModule.useMemo(function()
 		-- upvalues: description (write), textService (copy), bodyMedium (ref), var20 (ref)
 		return textService:GetTextSize(string.gsub(description or "", "[\r\n]+", " "), bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y * (if var20 then 2.6 else 2)
 	end, { description, bodyMedium.FontSize, bodyMedium.Font, var20 })
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 38 | named "Description" ]]
 	else
 		var24 = nil
 	end
-	local var25 = reactModule.useMemo(function() --[[ line: 74 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), var14 (ref), reactModule (copy), var23 (ref)
 		return reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var17 - var14 * 2, var23) })
 	end, { var23, var17, var14 })
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 38 | named "Description" ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[reactModule.Change.AbsoluteSize] = function(p1) --[[ line: 95 ]]
+		[reactModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: var15 (ref), var18 (ref)
 			var15(p1)
 			var18(p1.AbsoluteSize.X)

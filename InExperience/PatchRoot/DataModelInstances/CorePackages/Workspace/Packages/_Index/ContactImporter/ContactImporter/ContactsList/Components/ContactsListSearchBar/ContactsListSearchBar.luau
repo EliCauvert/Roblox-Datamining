@@ -14,7 +14,7 @@ local useLocalization = dependenciesModule.useLocalization
 local search = images["icons/common/search"]
 local clearSmall = images["icons/actions/edit/clear_small"]
 
-function ContactsListSearchBar(p0) --[[ line: 29 ]]
+function ContactsListSearchBar(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useStyle (ref), react (ref), roact (ref), imageSetLabel (ref), iconSize (ref), search (ref), callbackInputBox (ref), clearSmall (ref)
 	local var3 = useLocalization({ searchContacts = textKeysModule.SEARCH_CONTACTS })
 	local var4 = useStyle()

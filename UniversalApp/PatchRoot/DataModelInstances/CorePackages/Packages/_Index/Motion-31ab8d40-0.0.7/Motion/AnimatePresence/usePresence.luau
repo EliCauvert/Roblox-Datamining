@@ -2,7 +2,7 @@
 local presenceContextModule = require(script.Parent.PresenceContext)
 local isPresent = require(script.Parent.PresenceUtils).isPresent
 
-return function() --[[ line: 37 | named "usePresence" ]]
+return function()
 	-- upvalues: reactModule (ref), presenceContextModule (ref), isPresent (ref)
 	local var2 = reactModule.useContext(presenceContextModule)
 	local id = var2.id
@@ -12,7 +12,7 @@ return function() --[[ line: 37 | named "usePresence" ]]
 	return {
 		isPresent = isPresent(var2),
 		id = id,
-		onExitComplete = reactModule.useCallback(function() --[[ line: 49 ]]
+		onExitComplete = reactModule.useCallback(function()
 			-- upvalues: onExitComplete (ref), id (ref)
 			if onExitComplete then
 				onExitComplete(id)

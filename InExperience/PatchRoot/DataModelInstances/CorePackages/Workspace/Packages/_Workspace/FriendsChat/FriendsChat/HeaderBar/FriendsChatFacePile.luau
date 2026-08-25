@@ -7,7 +7,7 @@ local escapeRichText = require(parent.ChatUIPrimitives).Utils.escapeRichText
 local getFacePileParticipantIdsModule = require(script.Parent.getFacePileParticipantIds)
 local useFacePilePresenceModule = require(script.Parent.useFacePilePresence)
 
-return function(p0) --[[ line: 35 | named "FriendsChatFacePile" ]]
+return function(p0)
 	-- upvalues: getFacePileParticipantIdsModule (ref), useFacePilePresenceModule (ref), reactModule (ref), userTile (ref), layoutMode (ref), fFlagAppChatSanitizeConversationTitleRichText (ref), escapeRichText (ref)
 	local var3 = getFacePileParticipantIdsModule(p0.participantUserIds or {}, p0.localUserId)
 	

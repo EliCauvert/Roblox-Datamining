@@ -9,7 +9,7 @@ local squadButtonClickIntentionEnum = require(parent.Squads.Enums).SquadButtonCl
 local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
 local enumScreensModule = require(appChat.EnumScreens)
 
-return function(p0, p1) --[[ line: 21 | named "useStartPartySuggestion" ]]
+return function(p0, p1)
 	-- upvalues: useNavigation (ref), useCurrentSquadId (ref), reactModule (ref), squadExternalContractContext (ref), eventNamesModule (ref), squadButtonSourceEnum (ref), squadButtonClickIntentionEnum (ref), enumScreensModule (ref)
 	local var4 = useNavigation()
 	local var5 = useCurrentSquadId()
@@ -21,7 +21,7 @@ return function(p0, p1) --[[ line: 21 | named "useStartPartySuggestion" ]]
 	
 	return {
 		canStartParty = var8,
-		startParty = reactModule.useCallback(function(p2) --[[ line: 31 ]]
+		startParty = reactModule.useCallback(function(p2)
 			-- upvalues: var8 (ref), fireSquadAnalytics (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadLocation (ref), var7 (ref), squadButtonClickIntentionEnum (copy), var4 (ref), enumScreensModule (copy)
 			if var8 then
 				fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {

@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 2 | named "isEmpty" ]]
+﻿return function(p0)
 	return next(p0) == nil
 end

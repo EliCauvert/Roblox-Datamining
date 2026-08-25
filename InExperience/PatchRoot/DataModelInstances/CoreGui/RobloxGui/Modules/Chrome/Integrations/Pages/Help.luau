@@ -11,13 +11,13 @@ return serviceModule:register({
 	label = "CoreScripts.Feedback.Help.MainHeader",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Page,
-	activated = function(_) --[[ line: 19 ]]
+	activated = function(_)
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), helpPage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("HelpPage", helpPage:get())
 	end,
 	isActivated = helpPage,
 	components = {
-		Icon = function(_) --[[ line: 24 ]]
+		Icon = function(_)
 			-- upvalues: commonIconModule (ref), helpPage (ref)
 			return commonIconModule("CircleQuestion", nil, helpPage)
 		end

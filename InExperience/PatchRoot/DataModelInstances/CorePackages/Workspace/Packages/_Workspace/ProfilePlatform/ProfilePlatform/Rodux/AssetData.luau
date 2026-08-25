@@ -3,7 +3,7 @@ local parent = profilePlatform.Parent
 local cryoModule = require(parent.Cryo)
 
 return require(parent.Rodux).createReducer({}, {
-	[require(profilePlatform.Networking.NetworkingAsset).GetAssetDetails.Succeeded.name] = function(p0, p1) --[[ line: 27 ]]
+	[require(profilePlatform.Networking.NetworkingAsset).GetAssetDetails.Succeeded.name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		local responseBody = p1.responseBody
 		

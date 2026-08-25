@@ -23,7 +23,7 @@ local fFlagEnableAEGIS2AppChatConversationBanner = require(parent.SharedFlags).F
 local fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace = require(parent.SharedFlags).FStringAEGIS2AppChatAgeVerifiedRealtimeNamespace
 local name = require(appChat.Logger):new(script.Name)
 
-return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceiver" ]]
+return function(value)
 	-- upvalues: useDispatch (ref), useIsAppLoadedModule (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var3 (ref), loginStatus (ref), useSelector (ref), getFFlagDebugAppChatModule (ref), useKeybindModule (ref), name (ref), reactModule (ref), fetchChatMetadataModule (ref), useIsAppChatVisibleModule (ref), useIsChatEnabledModule (ref), getDeepValue2Module (ref), usePrevious (ref), reloadAllMessagesModule (ref), realtimeDeliveryModule (ref), appChatNetworkingModule (ref), fFlagEnableAEGIS2AppChatConversationBanner (ref), dismissedAllConversationModalsForSequenceModule (ref), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (ref)
 	local var17
 	local var15 = useDispatch()
@@ -33,7 +33,7 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 		var17 = useSignalState(var3(false).getStatus) == loginStatus.LOGGED_IN
 		var17 = nil
 	else
-		var17 = useSelector(function(p0) --[[ line: 48 ]]
+		var17 = useSelector(function(p0)
 			-- upvalues: loginStatus (copy)
 			return p0.AuthenticationStatus and p0.AuthenticationStatus.status == loginStatus.LOGGED_IN
 		end)
@@ -42,21 +42,21 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 		useKeybindModule({
 			keyCode = Enum.KeyCode.G,
 			modifierKey = Enum.ModifierKey.Ctrl
-		}, function() --[[ line: 53 ]]
+		}, function()
 			-- upvalues: name (copy), var15 (ref)
 			name:debug("Ctrl + G pressed, toggling group chat enabled")
 			var15({ type = "Debug_GroupChatEnabledToggled" })
 		end, { var15 })
 	end
-	local var18 = reactModule.useCallback(function() --[[ line: 61 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), fetchChatMetadataModule (copy), name (copy)
-		var15(fetchChatMetadataModule()):andThen(function(p1) --[[ line: 62 ]]
+		var15(fetchChatMetadataModule()):andThen(function(p1)
 			-- upvalues: name (copy)
 			name:info("Finished fetching chat metadata. Determined isChatEnabled as {}", p1)
 		end)
 	end, { var15 })
 	local var19 = useIsAppChatVisibleModule()
-	reactModule.useEffect(function() --[[ line: 69 ]]
+	reactModule.useEffect(function()
 		-- upvalues: value (ref), var17 (ref), var16 (ref), name (copy), var18 (ref)
 		local var24
 		if not value.isInExperience then
@@ -68,22 +68,22 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 		end
 	end, { var18, var16, value.isInExperience, var17 })
 	local var20 = useIsChatEnabledModule()
-	local var21 = useSelector(function(p2) --[[ line: 77 ]]
+	local var21 = useSelector(function(p2)
 		-- upvalues: getDeepValue2Module (copy)
 		return getDeepValue2Module(p2, "ChatAppReducer.ChatSettings.chatUserMessagesEnabled")
 	end)
 	local var22 = usePrevious(var21)
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), var22 (ref), var21 (ref), name (copy), var15 (ref), reloadAllMessagesModule (copy)
 		if var20 and var22 ~= nil and var22 ~= var21 then
 			name:info("Chat messages eligibility changed, reloading all messages")
-			var15(reloadAllMessagesModule()):catch(function(p3) --[[ line: 89 ]]
+			var15(reloadAllMessagesModule()):catch(function(p3)
 				-- upvalues: name (copy)
 				name:warn("Failed to reload all messages after chat user messages eligibility change", p3)
 			end)
 		end
 	end, { var15, var20, var22, var21 })
-	realtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p4) --[[ line: 95 ]]
+	realtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p4)
 		-- upvalues: name (copy), var15 (ref), reloadAllMessagesModule (copy), var18 (ref)
 		if p4.SettingsChanged then
 			local var25 = false
@@ -91,7 +91,7 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 			
 			if index then
 				name:info("Received privacy setting notification, reloading all messages")
-				var15(reloadAllMessagesModule()):catch(function(p5) --[[ line: 101 ]]
+				var15(reloadAllMessagesModule()):catch(function(p5)
 					-- upvalues: name (copy)
 					name:warn("Failed to reload all messages after party setting change", p5)
 				end)
@@ -102,7 +102,7 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 			end
 		end
 	end, { var18, var15 })
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged("UserSettingsChanged", function(p6, p7) --[[ line: 117 ]]
+	realtimeDeliveryModule.useRealtimeConnectionStateChanged("UserSettingsChanged", function(p6, p7)
 		-- upvalues: name (copy), var18 (ref)
 		if p6 == Enum.ConnectionState.Connected and p7 then
 			name:info("Reconnected to UserSettingsChanged, fetching chat metadata")
@@ -110,9 +110,9 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 		end
 	end, { var18 })
 	
-	local var23 = function(p8) --[[ line: 124 ]]
+	local var23 = function(p8)
 		-- upvalues: var15 (ref), appChatNetworkingModule (copy), name (copy), fFlagEnableAEGIS2AppChatConversationBanner (copy), dismissedAllConversationModalsForSequenceModule (copy)
-		var15(appChatNetworkingModule.rodux.GetChatLandingModal.API(p8)):catch(function(p9) --[[ line: 125 ]]
+		var15(appChatNetworkingModule.rodux.GetChatLandingModal.API(p8)):catch(function(p9)
 			-- upvalues: name (copy)
 			name:warning("Error in GetChatLandingModal request. Error: {}", tostring(p9))
 		end)
@@ -122,7 +122,7 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 		end
 	end
 	
-	realtimeDeliveryModule.useRealtimeNamespace(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(_) --[[ line: 139 ]]
+	realtimeDeliveryModule.useRealtimeNamespace(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(_)
 		-- upvalues: name (copy), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy), var16 (ref), var23 (ref), value (ref), var18 (ref)
 		name:info("Received Realtime: {}", fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace)
 		
@@ -133,7 +133,7 @@ return function(value) --[[ line: 43 | named "AppChatAccountSettingsEventReceive
 			return
 		end
 	end, { var18, var16, value.isInExperience, var19 })
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p10, p11) --[[ line: 151 ]]
+	realtimeDeliveryModule.useRealtimeConnectionStateChanged(fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, function(p10, p11)
 		-- upvalues: name (copy), fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace (copy), var16 (ref), var23 (ref), value (ref), var18 (ref)
 		name:info("Reconnected to Realtime: {}, hasMissedEvents: {}", fStringAEGIS2AppChatAgeVerifiedRealtimeNamespace, tostring(p11))
 		

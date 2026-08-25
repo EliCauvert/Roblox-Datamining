@@ -19,7 +19,7 @@ local friendsMenuShareGameInviteLinkModule = require(components.FriendsMenuShare
 local enableFriendsMenuShareGameInviteLink3 = game:DefineFastFlag("EnableFriendsMenuShareGameInviteLink3", false)
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 
-return function(p0) --[[ line: 42 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), friendsListContextModule (ref), userInputService (ref), guiService (ref), useAppPolicy (ref), enableFriendsMenuShareGameInviteLink3 (ref), friendRowModule (ref), friendsMenuShareGameInviteLinkModule (ref), friendsListMsgModule (ref), emptyFriendsListModule (ref), verticalScrollView (ref), fFlagUpdateInvitesToUsePaginatedFriendsModule (ref)
 	local var19
 	local var12 = reactModule.useContext(friendsListContextModule)
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 42 ]]
 	local hasFriends = var12.hasFriends
 	local var14 = reactModule.useRef(nil)
 	local var15, var16 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), p0 (ref), var14 (ref), guiService (copy)
 		if not userInputService.GamepadEnabled or p0.disableListFocus then return end
 		local current = var14.current
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 42 ]]
 				end
 			end
 		end
-		return function() --[[ line: 76 ]]
+		return function()
 			-- upvalues: guiService (copy), screenGui (write), p0 (copy)
 			if guiService.SelectedCoreObject and screenGui and (guiService.SelectedCoreObject.Parent == nil or screenGui:IsAncestorOf(guiService.SelectedCoreObject)) then
 				guiService.SelectedCoreObject = nil
@@ -64,10 +64,10 @@ return function(p0) --[[ line: 42 ]]
 		p0.disableListFocus,
 		p0.disableSelectionParentManagement
 	})
-	local var17 = enableFriendsMenuShareGameInviteLink3 and (p0.parentComponentName == "GameInviteModal" and (game.GameId > 0 and (p0.gameDetailsData and (p0.gameDetailsData.isCoreScript and (p0.gameDetailsData.serverType == "StandardServer" and useAppPolicy(function(p1) --[[ line: 102 ]]
+	local var17 = enableFriendsMenuShareGameInviteLink3 and (p0.parentComponentName == "GameInviteModal" and (game.GameId > 0 and (p0.gameDetailsData and (p0.gameDetailsData.isCoreScript and (p0.gameDetailsData.serverType == "StandardServer" and useAppPolicy(function(p1)
 		return p1.getExperienceInviteShareLinkEnabled()
 	end))))))
-	local var18 = reactModule.useMemo(function() --[[ line: 115 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), friends (ref), friendRowModule (copy), userInputService (copy), p0 (ref), isFetchingFriends (ref), isFetchingFriends_1 (ref)
 		local t = {
 			RowListLayout = reactModule.createElement("UIListLayout", {
@@ -129,7 +129,7 @@ return function(p0) --[[ line: 42 ]]
 		canvasSizeY = UDim.new(1, 0),
 		selectable = false,
 		scrollingFrameRef = var14,
-		[reactModule.Change.CanvasPosition] = if fFlagUpdateInvitesToUsePaginatedFriendsModule then function(p2) --[[ line: 202 ]]
+		[reactModule.Change.CanvasPosition] = if fFlagUpdateInvitesToUsePaginatedFriendsModule then function(p2)
 			-- upvalues: var15 (ref), var16 (ref), var12 (ref)
 			if p2.CanvasPosition.Y / (p2.AbsoluteCanvasSize.Y - p2.AbsoluteWindowSize.Y) >= 0.8 and var15 < p2.AbsoluteCanvasSize.Y then
 				var16(p2.AbsoluteCanvasSize.Y)

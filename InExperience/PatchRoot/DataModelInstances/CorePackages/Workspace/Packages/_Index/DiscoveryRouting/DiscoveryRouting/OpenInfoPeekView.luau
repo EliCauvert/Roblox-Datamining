@@ -7,9 +7,9 @@ local getDeviceType = require(parent.AppCommonLib).getDeviceType
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0, p1) --[[ line: 14 ]]
+return function(p0, p1)
 	-- upvalues: getDeviceType (ref), deviceType (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	return function(p2) --[[ line: 15 ]]
+	return function(p2)
 		-- upvalues: getDeviceType (copy), deviceType (copy), appPage (copy), p0 (ref), p1 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
 		local var2 = getDeviceType(p2:getState().DeviceOrientation)
 		

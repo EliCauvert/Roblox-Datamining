@@ -4,7 +4,7 @@ local immutable = require(parent.Parent.Parent.AppCommonLib).Immutable
 local receivedUserInviteStatusModule = require(actions.ReceivedUserInviteStatus)
 local resetUserInviteStatusModule = require(actions.ResetUserInviteStatus)
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: receivedUserInviteStatusModule (ref), immutable (ref), resetUserInviteStatusModule (ref)
 	p0 = p0 or {}
 	

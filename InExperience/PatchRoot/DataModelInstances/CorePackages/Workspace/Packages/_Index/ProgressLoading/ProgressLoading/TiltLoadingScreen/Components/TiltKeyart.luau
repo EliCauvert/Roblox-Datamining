@@ -19,7 +19,7 @@ local t_1 = {
 	groupTransparency = reactModule.createBinding(0)
 }
 
-return reactModule.memo(function(p0) --[[ line: 29 | named "TiltKeyart" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), t (ref), t_1 (ref), TILT_DEGREES (ref), view (ref), skeleton (ref), image (ref)
 	local var5 = useTokens()
 	local var6, var7 = reactModule.useState(false)
@@ -36,13 +36,13 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "TiltKeyart" ]]
 			tag = "position-center-center anchor-center-center stroke-standard stroke-system-neutral",
 			testId = "tilt-keyart-frame",
 			ZIndex = 1,
-			Size = frame.sizeScale:map(function(p1) --[[ line: 51 ]]
+			Size = frame.sizeScale:map(function(p1)
 				-- upvalues: var11 (ref)
 				return UDim2.fromOffset(var11 * p1, var11 * p1)
 			end),
 			Rotation = frame.rotation,
 			GroupTransparency = frame.groupTransparency,
-			Visible = frame.groupTransparency:map(function(p2) --[[ line: 56 ]]
+			Visible = frame.groupTransparency:map(function(p2)
 				return p2 < 1
 			end)
 		}),
@@ -50,7 +50,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "TiltKeyart" ]]
 			tag = "position-center-center anchor-center-center",
 			testId = "tilt-keyart-card",
 			ZIndex = 2,
-			Size = keyart.sizeScale:map(function(p3) --[[ line: 64 ]]
+			Size = keyart.sizeScale:map(function(p3)
 				-- upvalues: var11 (ref)
 				return UDim2.fromOffset(var11 * p3, var11 * p3)
 			end),
@@ -68,7 +68,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "TiltKeyart" ]]
 				Image = p0.thumbnailUrl,
 				ScaleType = Enum.ScaleType.Crop,
 				ImageTransparency = if var6 then 0 else 1,
-				onLoaded = reactModule.useCallback(function(p4) --[[ line: 38 ]]
+				onLoaded = reactModule.useCallback(function(p4)
 					-- upvalues: var7 (ref)
 					if p4 == Enum.AssetFetchStatus.Success then
 						var7(true)
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "TiltKeyart" ]]
 			RevealCover = reactModule.createElement(view, {
 				tag = "size-full",
 				ZIndex = 3,
-				backgroundStyle = keyart.coverTransparency:map(function(p5) --[[ line: 90 ]]
+				backgroundStyle = keyart.coverTransparency:map(function(p5)
 					-- upvalues: var5 (ref)
 					return {
 						Color3 = var5.Color.Extended.Black.Black_100.Color3,

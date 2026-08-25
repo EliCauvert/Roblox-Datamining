@@ -19,10 +19,10 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 45 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationService (ref), list (ref), errorSourceStringsModule (ref)
 		local head = p1.renderMeshesData.Head
-		local ok, status, var4 = pcall(function() --[[ line: 48 ]]
+		local ok, status, var4 = pcall(function()
 			-- upvalues: UGCValidationService (copy), head (ref), list (copy)
 			return UGCValidationService:GetDynamicHeadEditableMeshInactiveControls(head.editable, list)
 		end)

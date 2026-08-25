@@ -11,7 +11,7 @@ local t = {
 	lastUpdated = { 2026, 4, 8 }
 }
 
-function _logEventWithStandardizedFields(p0, p1) --[[ line: 26 ]]
+function _logEventWithStandardizedFields(p0, p1)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 	local list = {
 		"addPlaceId",
@@ -30,7 +30,7 @@ function _logEventWithStandardizedFields(p0, p1) --[[ line: 26 ]]
 	telemetryService:LogEvent(p0, { standardizedFields = list, customFields = p1 })
 end
 
-function logSidesheetClosed(p2) --[[ line: 42 ]]
+function logSidesheetClosed(p2)
 	-- upvalues: t (ref)
 	_logEventWithStandardizedFields(t, { source = p2 })
 end

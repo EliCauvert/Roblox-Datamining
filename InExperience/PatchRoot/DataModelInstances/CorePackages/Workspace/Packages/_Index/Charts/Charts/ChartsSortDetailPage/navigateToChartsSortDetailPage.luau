@@ -10,7 +10,7 @@ local chartsSortDetailConstantsModule = require(charts.ChartsSortDetailPage.Char
 local fetchChartsSortDetailModule = require(charts.ChartsSortDetailPage.fetchChartsSortDetail)
 local getChartsSortDetailPageKeyModule = require(charts.ChartsSortDetailPage.getChartsSortDetailPageKey)
 
-return function(p0, p1) --[[ line: 14 | named "navigateToChartsSortDetailPage" ]]
+return function(p0, p1)
 	-- upvalues: getSduiClientPageScope (ref), chartsConstantsModule (ref), chartsPageScopeFieldsModule (ref), getChartsSortDetailPageKeyModule (ref), sduiSurfaceLoadTimeTracker (ref), chartsSortDetailConstantsModule (ref), fetchChartsSortDetailModule (ref), appPage (ref)
 	local var7 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(getChartsSortDetailPageKeyModule(p1.sortId, nil, getSduiClientPageScope(chartsConstantsModule.ConfigKey).get(chartsPageScopeFieldsModule.FilterSelections)), {
 		eventName = chartsSortDetailConstantsModule.SurfaceLoadTimeEventName,

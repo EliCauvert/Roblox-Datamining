@@ -8,7 +8,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 27 | named "BuyMoreRobuxCard" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",

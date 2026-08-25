@@ -13,7 +13,7 @@ local connectAssetServiceEventsModule = require(script.ConnectAssetServiceEvents
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 24 ]]
+function t.new()
 	-- upvalues: t (ref), roactModule (ref), publishAssetPromptAppModule (ref), roduxModule (ref), reducerModule (ref), roactRoduxModule (ref), renderWithCoreScriptsStyleProviderModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), coreGuiService (ref), connectAssetServiceEventsModule (ref)
 	local tbl = setmetatable({}, t)
 	local var12 = roactModule.createElement(publishAssetPromptAppModule)

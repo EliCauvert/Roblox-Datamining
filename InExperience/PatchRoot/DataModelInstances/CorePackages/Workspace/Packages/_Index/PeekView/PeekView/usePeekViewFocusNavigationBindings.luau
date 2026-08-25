@@ -3,18 +3,18 @@ local userInputService = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 7 | named "usePeekViewFocusNavigationBindings" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), runService (ref), userInputService (ref)
-	reactModule.useEffect(function() --[[ line: 8 ]]
+	reactModule.useEffect(function()
 		-- upvalues: runService (copy), p0 (ref), userInputService (copy)
 		local var3 = nil
-		local heartbeatConnection = runService.Heartbeat:Connect(function(p1) --[[ line: 10 ]]
+		local heartbeatConnection = runService.Heartbeat:Connect(function(p1)
 			-- upvalues: var3 (write), p0 (copy)
 			if var3 and var3.KeyCode == Enum.KeyCode.Thumbstick2 then
 				p0(var3, p1)
 			end
 		end)
-		local inputChangedConnection = userInputService.InputChanged:Connect(function(p2, _) --[[ line: 15 ]]
+		local inputChangedConnection = userInputService.InputChanged:Connect(function(p2, _)
 			-- upvalues: var3 (write)
 			if p2.KeyCode == Enum.KeyCode.Thumbstick2 then
 				if p2.UserInputState == Enum.UserInputState.Change then
@@ -27,7 +27,7 @@ return function(p0) --[[ line: 7 | named "usePeekViewFocusNavigationBindings" ]]
 			end
 		end)
 		
-		return function() --[[ line: 25 ]]
+		return function()
 			-- upvalues: heartbeatConnection (ref), inputChangedConnection (ref)
 			heartbeatConnection:Disconnect()
 			inputChangedConnection:Disconnect()

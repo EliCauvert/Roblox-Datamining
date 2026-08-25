@@ -9,13 +9,13 @@ local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPur
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 
-return function(p0) --[[ line: 32 | named "InExperienceRobuxTransferSubscriptionUpsell" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), reactModule (ref), surfaceName (ref), surfaceContext (ref), inExpAmpWizardController (ref), ampWizardTransferConstantsModule (ref)
 	local onClose = p0.onClose
 	local upsellSubscriptionTitle = useLocalization(transferLocalizationKeysModule.Presets.SubscriptionUpsellContainer).UpsellSubscriptionTitle or ""
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: upsellSubscriptionTitle (ref), surfaceName (copy), surfaceContext (copy), inExpAmpWizardController (copy), onClose (ref), ampWizardTransferConstantsModule (copy)
-		inExpAmpWizardController.OpenAmpWizardContainerInExp("CanInitiateRobuxTransfer", function() --[[ line: 57 ]]
+		inExpAmpWizardController.OpenAmpWizardContainerInExp("CanInitiateRobuxTransfer", function()
 			-- upvalues: onClose (copy)
 			onClose()
 		end, {

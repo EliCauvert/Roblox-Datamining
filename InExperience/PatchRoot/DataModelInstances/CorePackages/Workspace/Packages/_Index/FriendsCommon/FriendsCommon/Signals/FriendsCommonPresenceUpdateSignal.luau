@@ -1,3 +1,3 @@
-﻿return function() --[[ line: 1 ]]
+﻿return function()
 	return Instance.new("BindableEvent")
 end

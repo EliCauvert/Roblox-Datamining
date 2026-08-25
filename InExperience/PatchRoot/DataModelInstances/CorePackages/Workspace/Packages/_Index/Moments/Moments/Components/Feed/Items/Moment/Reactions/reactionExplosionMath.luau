@@ -1,28 +1,28 @@
-﻿local function _(value, minValue, maxValue) --[[ line: 52 | named "clamp" ]]
+﻿local function _(value, minValue, maxValue)
 	return math.max(minValue, math.min(maxValue, value))
 end
 
-local _ = function(startValue, endValue, alpha) --[[ line: 56 | named "lerp" ]]
+local _ = function(startValue, endValue, alpha)
 	return startValue + (endValue - startValue) * alpha
 end
 
-local _ = function(p0) --[[ line: 60 | named "easeOutQuint" ]]
+local _ = function(p0)
 	return 1 - (1 - p0) ^ 5
 end
 
-local _ = function(p1) --[[ line: 64 | named "easeOutQuad" ]]
+local _ = function(p1)
 	return 1 - (1 - p1) ^ 2
 end
 
-local _ = function(p2) --[[ line: 68 | named "easeInQuad" ]]
+local _ = function(p2)
 	return p2 * p2
 end
 
-local _ = function(p3) --[[ line: 73 | named "popScale" ]]
+local _ = function(p3)
 	return if p3 <= 0 then 0 elseif p3 < 0.15 then (1 - (1 - p3 / 0.15) ^ 2) * 1.15 + 0 elseif p3 < 0.35 then (p3 - 0.15) / 0.2 * -0.15 + 1.15 else 1
 end
 
-local _ = function(p4) --[[ line: 85 | named "fadeTransparency" ]]
+local _ = function(p4)
 	if p4 <= 0.55 then
 		return 0
 	end
@@ -49,7 +49,7 @@ return {
 	MAX_PARTICLES = 16,
 	FADE_START = 0.55,
 	OVERSHOOT = 1.15,
-	solveParticle = function(p5, p6) --[[ line: 92 ]]
+	solveParticle = function(p5, p6)
 		local var5
 		local maxValue = math.max(0, math.min(1, p5))
 		local var2 = p6.reach * (1 - (1 - maxValue) ^ 5)

@@ -6,7 +6,7 @@ local getFFlagUGCValidateTextureSizeExtraErrorInfoModule = require(parent.flags.
 local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
 
-return function(p0, p1, p2, p3) --[[ line: 14 | named "validateTextureSize" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: constantsModule (ref), analyticsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), getFFlagUGCValidateTextureSizeExtraErrorInfoModule (ref)
 	local currentTime = tick()
 	local isServer = p2.isServer
@@ -17,7 +17,7 @@ return function(p0, p1, p2, p3) --[[ line: 14 | named "validateTextureSize" ]]
 	assert(p3, "maxTextureSize is required for validateTextureSize")
 	
 	if p0.editableImage then
-		local var6, var7 = pcallDeferredModule(function() --[[ line: 41 ]]
+		local var6, var7 = pcallDeferredModule(function()
 			-- upvalues: UGCValidationService (copy), p0 (ref)
 			return UGCValidationService:GetEditableImageSize(p0.editableImage)
 		end, p2)

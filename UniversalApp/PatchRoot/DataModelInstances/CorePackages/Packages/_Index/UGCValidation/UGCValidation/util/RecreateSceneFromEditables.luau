@@ -11,7 +11,7 @@ local getFFlagUGCValidationAddGeometryToExportsModule = require(parent.flags.get
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {}
 
-local function createCagePart(p0, p1, p2, p3) --[[ line: 22 ]]
+local function createCagePart(p0, p1, p2, p3)
 	-- upvalues: assetService (ref)
 	local editable = assetService:CreateMeshPartAsync(Content.fromObject(p2.editable))
 	editable.Name = `{p0}_{p3}`
@@ -21,7 +21,7 @@ local function createCagePart(p0, p1, p2, p3) --[[ line: 22 ]]
 	return editable
 end
 
-local function copyMeshPart(p4, p5, p6) --[[ line: 36 ]]
+local function copyMeshPart(p4, p5, p6)
 	-- upvalues: assetService (ref), getFFlagUGCValidationAddPBRToSharedDataModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), r15plusUtilsModule (ref)
 	local editable = assetService:CreateMeshPartAsync(Content.fromObject(p5.editable))
 	
@@ -75,7 +75,7 @@ local function copyMeshPart(p4, p5, p6) --[[ line: 36 ]]
 	return editable
 end
 
-local function addBonesFromPoses(p7, p8, p9) --[[ line: 122 ]]
+local function addBonesFromPoses(p7, p8, p9)
 	-- upvalues: addBonesFromPoses (ref)
 	for i, v in p7:GetChildren() do
 		if v:IsA("Pose") then
@@ -94,7 +94,7 @@ local function addBonesFromPoses(p7, p8, p9) --[[ line: 122 ]]
 	end
 end
 
-local function createEmoteExportScene(p10) --[[ line: 139 ]]
+local function createEmoteExportScene(p10)
 	-- upvalues: rigBuilderModule (ref), buildEmoteKeyframeSequenceFromCurveAnimModule (ref), addBonesFromPoses (ref)
 	local var22 = rigBuilderModule.createDefaultCharacter(false)
 	local var23 = if p10.curveAnimations and #p10.curveAnimations > 0 then buildEmoteKeyframeSequenceFromCurveAnimModule(p10.curveAnimations[1]) else nil
@@ -114,7 +114,7 @@ local function createEmoteExportScene(p10) --[[ line: 139 ]]
 	return var22
 end
 
-function t.createModelForGltfExport(p11) --[[ line: 169 ]]
+function t.createModelForGltfExport(p11)
 	-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), createEmoteExportScene (ref), copyMeshPart (ref), createCagePart (ref), getFFlagUGCValidationAddGeometryToExportsModule (ref)
 	if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p11.uploadCategory == validationEnumsModule.UploadCategory.EMOTE_ANIMATION then
 		return createEmoteExportScene(p11)

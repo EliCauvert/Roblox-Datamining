@@ -14,7 +14,7 @@ local var5 = socialLuaAnalyticsModule.Telemetry.new({
 		{
 			type = "EventIngest",
 			standardizedFields = if require(momentsCommon.Flags.GetFFlagMomentsAnalyticsProducerPrereqs)() then { "addSessionInfo", "addSessionId" } else nil,
-			format = function(p0, _) --[[ line: 67 ]]
+			format = function(p0, _)
 				-- upvalues: cryoModule (ref)
 				return cryoModule.Dictionary.join(p0.customFields or {}, {
 					funnelName = p0.funnelName,
@@ -27,7 +27,7 @@ local var5 = socialLuaAnalyticsModule.Telemetry.new({
 	}
 })
 
-return function(p1, p2, p3, p4) --[[ line: 85 | named "fireFunnelAnalyticsEvent" ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: funnelEventNamesModule (ref), telemetryEmitterModule (ref), var5 (ref)
 	local var6 = funnelEventNamesModule.FunnelSteps[p1]
 	

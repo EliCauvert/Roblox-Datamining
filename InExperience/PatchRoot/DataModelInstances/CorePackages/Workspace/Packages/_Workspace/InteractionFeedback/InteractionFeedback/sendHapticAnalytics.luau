@@ -13,7 +13,7 @@ local var4 = tModule.interface({
 	ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else tModule.string
 })
 
-return function(p0, p1) --[[ line: 24 ]]
+return function(p0, p1)
 	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var4 (ref), flaggedMutedError (ref), hapticTriggerAttemptThrottleHundredthsPercent (ref), userGameSettingsService (ref), telemetryService (ref)
 	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
 		discoveryEventErrorLogger.reportError("HapticTriggerAttemptInvalidInterface", "event is missing context")

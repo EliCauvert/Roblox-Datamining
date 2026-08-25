@@ -3,7 +3,7 @@ local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
 
-local function getContent(p0, p1) --[[ line: 12 ]]
+local function getContent(p0, p1)
 	-- upvalues: constantsModule (ref)
 	if p1 == constantsModule.MESH_CONTENT_TYPE.RENDER_MESH then
 		assert(p0:IsA("MeshPart"), "Only MESH_TYPE.RENDER_MESH is only supported for MeshPart")
@@ -21,7 +21,7 @@ local function getContent(p0, p1) --[[ line: 12 ]]
 	error("No valid mesh content type was provided")
 end
 
-return function(p2, p3, p4) --[[ line: 27 | named "getMeshInfo" ]]
+return function(p2, p3, p4)
 	-- upvalues: getContent (ref), constantsModule (ref), getEditableMeshFromContextModule (ref)
 	local var3 = getContent(p2, p3)
 	local fullName = p2:GetFullName()

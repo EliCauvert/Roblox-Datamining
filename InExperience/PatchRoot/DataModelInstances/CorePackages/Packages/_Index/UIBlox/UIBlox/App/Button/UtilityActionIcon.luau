@@ -22,7 +22,7 @@ local t = {
 	tooltipTarget = coreGuiService
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 61 | named "UtilityActionIcon" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), withHoverTooltip (ref), tooltipOrientationModule (ref), stateLayerModule (ref), label (ref), statusIndicator (ref), migrateBadgeVariantModule (ref)
 	local var11 = cryoModule.Dictionary.join(t, p0)
 	local anchorPoint = var11.anchorPoint
@@ -43,7 +43,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 61 | named "UtilityAct
 	local var15 = if onMedia then "Darken" else "Standard"
 	local vector2 = Vector2.new(0, 1)
 	local uDim2 = UDim2.new(0.5, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Size_25, 0.5, -(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Size_25))
-	local var18 = reactModule.useMemo(function() --[[ line: 102 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: disableOutset (ref), UIBloxConfigModule (copy), tokens (ref)
 		return if disableOutset then nil else {
 			top = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Size_50),
@@ -52,7 +52,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 61 | named "UtilityAct
 			left = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_100 else tokens.Global.Size_50)
 		}
 	end, { disableOutset, tokens })
-	local var19 = reactModule.useMemo(function() --[[ line: 133 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref), var18 (ref)
 		local uDim = UDim.new(0, var12)
 		
@@ -65,7 +65,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 61 | named "UtilityAct
 		preferredOrientation = tooltipOrientationModule.Bottom,
 		guiTarget = tooltipTarget,
 		DEBUG_useTargetDirectly = var11._DEBUG_is_plugin
-	}, function(p2, p3) --[[ line: 148 ]]
+	}, function(p2, p3)
 		-- upvalues: reactModule (copy), var19 (ref), anchorPoint (ref), position (ref), layoutOrder (ref), p1 (ref), onMedia (ref), var12 (ref), UIBloxConfigModule (copy), tokens (ref), stateLayerModule (copy), var15 (ref), var18 (ref), onActivated (ref), label (copy), var13 (ref), icon (ref), var14 (ref), badgeValue (ref), statusIndicator (copy), uDim2 (ref), vector2 (ref), migrateBadgeVariantModule (copy), badgeVariant (ref), var11 (ref)
 		return reactModule.createElement("Frame", {
 			Selectable = false,

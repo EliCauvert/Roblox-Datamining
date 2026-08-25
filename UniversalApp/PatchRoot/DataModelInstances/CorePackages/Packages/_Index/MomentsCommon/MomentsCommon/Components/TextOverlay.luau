@@ -6,17 +6,17 @@ local view = foundationModule.View
 local useCallback = reactModule.useCallback
 local _ = require(momentsCommon.Types)
 
-return function(p0) --[[ line: 28 | named "TextOverlay" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useCallback (ref), view (ref), foundationModule (ref)
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(nil)
-	local var5 = useCallback(function(_, p1) --[[ line: 32 ]]
+	local var5 = useCallback(function(_, p1)
 		-- upvalues: p0 (ref), var4 (ref)
 		if p0.containerRef and p0.containerRef.current then
 			var4.current = p1
 		end
 	end, { p0.containerRef })
-	local var6 = useCallback(function(_, p2) --[[ line: 38 ]]
+	local var6 = useCallback(function(_, p2)
 		-- upvalues: var4 (ref), p0 (ref)
 		if var4.current == p2 and p0.onActivated then
 			p0.onActivated()
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 28 | named "TextOverlay" ]]
 		},
 		ZIndex = p0.textOverlayEdit.zIndex
 	}, {
-		UIDragDetector = reactModule.useMemo(function() --[[ line: 48 ]]
+		UIDragDetector = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), var3 (ref), var5 (ref), var6 (ref)
 			return if p0.draggable then reactModule.createElement("UIDragDetector", {
 				BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,

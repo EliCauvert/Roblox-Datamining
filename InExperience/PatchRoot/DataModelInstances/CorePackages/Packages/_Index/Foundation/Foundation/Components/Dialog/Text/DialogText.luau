@@ -5,7 +5,7 @@ local _ = require(foundation.Components.Types)
 local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
 local useDialogModule = require(script.Parent.Parent.useDialog)
 
-return function(p0) --[[ line: 17 | named "DialogText" ]]
+return function(p0)
 	-- upvalues: useDialogVariants (ref), useDialogModule (ref), reactModule (ref), textModule (ref)
 	return reactModule.createElement(textModule, {
 		RichText = true,

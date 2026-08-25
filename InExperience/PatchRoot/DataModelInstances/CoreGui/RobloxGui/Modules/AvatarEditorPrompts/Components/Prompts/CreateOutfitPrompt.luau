@@ -23,7 +23,7 @@ createOutfitPrompt.validateProps = tModule.strictInterface({
 	showCustomOutfitNames = tModule.boolean
 })
 
-function createOutfitPrompt.render(p0) --[[ line: 41 ]]
+function createOutfitPrompt.render(p0)
 	-- upvalues: roactModule (ref), promptWithAvatarViewportModule (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return roactModule.createElement(promptWithAvatarViewportModule, {
 		humanoidDescription = p0.props.humanoidDescription,
@@ -52,25 +52,25 @@ function createOutfitPrompt.render(p0) --[[ line: 41 ]]
 	})
 end
 
-return avatarEditorPromptsPolicyModule.connect(function(p3, _) --[[ line: 102 ]]
+return avatarEditorPromptsPolicyModule.connect(function(p3, _)
 	return { showCustomOutfitNames = p3.getCustomOutfitNames() }
-end)(roactRoduxModule.connect(function(p1) --[[ line: 77 | named "mapStateToProps" ]]
+end)(roactRoduxModule.connect(function(p1)
 	return {
 		humanoidDescription = p1.promptInfo.humanoidDescription,
 		rigType = p1.promptInfo.rigType
 	}
-end, function(p2) --[[ line: 84 | named "mapDispatchToProps" ]]
+end, function(p2)
 	-- upvalues: signalCreateOutfitPermissionDeniedModule (ref), createOutfitConfirmedModule (ref), performCreateOutfitModule (ref)
 	return {
-		signalCreateOutfitPermissionDenied = function() --[[ line: 86 ]]
+		signalCreateOutfitPermissionDenied = function()
 			-- upvalues: p2 (ref), signalCreateOutfitPermissionDeniedModule (copy)
 			return p2(signalCreateOutfitPermissionDeniedModule)
 		end,
-		createOutfitConfirmed = function() --[[ line: 90 ]]
+		createOutfitConfirmed = function()
 			-- upvalues: p2 (ref), createOutfitConfirmedModule (copy)
 			return p2(createOutfitConfirmedModule())
 		end,
-		performCreateOutfit = function() --[[ line: 94 ]]
+		performCreateOutfit = function()
 			-- upvalues: p2 (ref), performCreateOutfitModule (copy)
 			return p2(performCreateOutfitModule(""))
 		end

@@ -18,7 +18,7 @@ local createComputed = signalsModule.createComputed
 local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
 local loopEpsilonSeconds = preloadConstantsModule.loopEpsilonSeconds
 
-return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
+return function(p0, p1)
 	-- upvalues: defaultMediaNodeRegistryModule (ref), mediaRootModule (ref), createAudioGraphModule (ref), getFFlagMomentsStickerButtonModule (ref), createSignal (ref), createComputed (ref), cryoModule (ref), loopEpsilonSeconds (ref), fFlagMomentsLoopOnEndSeekModule (ref)
 	local services = p1.services
 	local registry = p1.registry or defaultMediaNodeRegistryModule()
@@ -30,7 +30,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 	local t = {}
 	local t_1 = {}
 	
-	local function _(p2) --[[ line: 118 | named "addNode" ]]
+	local function _(p2)
 		-- upvalues: t (ref), t_1 (ref)
 		table.insert(t, p2)
 		t_1[p2.id] = p2
@@ -110,13 +110,13 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 			table.insert(t_3, { id = v_1.id, zIndex = v_1.zIndex or 0, render = render })
 		end
 	end
-	table.sort(t_3, function(p3, p4) --[[ line: 220 ]]
+	table.sort(t_3, function(p3, p4)
 		return p3.zIndex < p4.zIndex
 	end)
 	local var26 = createSignal(t_3)
 	local t_4 = {}
 	
-	local _ = function(p5) --[[ line: 232 | named "addStem" ]]
+	local _ = function(p5)
 		-- upvalues: t_4 (ref), var12 (ref)
 		local audioStem = p5.audioStem
 		local getAudioSource = p5.getAudioSource
@@ -127,7 +127,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		t_4[audioStem.stemId] = var12.addStem(audioStem.stemId, getAudioSource(), audioStem.defaultVolume)
 	end
 	
-	local _ = function(p6) --[[ line: 240 | named "removeStem" ]]
+	local _ = function(p6)
 		-- upvalues: t_4 (ref)
 		local audioStem = p6.audioStem
 		
@@ -158,11 +158,11 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 	local var38 = false
 	local var39 = nil
 	local var40 = if var15 ~= nil then var16.getPosition else var15.getPosition
-	local var41 = createComputed(function(p7) --[[ line: 285 ]]
+	local var41 = createComputed(function(p7)
 		-- upvalues: var32 (ref), var30 (ref), var28 (ref)
 		return if var32(p7) then "Playing" elseif var30(p7) then "Decoded" elseif var28(p7) then "Downloaded" else "Idle"
 	end)
-	local var42 = createComputed(function(p8) --[[ line: 299 ]]
+	local var42 = createComputed(function(p8)
 		-- upvalues: var15 (write), var30 (ref), var28 (ref), var16 (write), var32 (ref), var36 (ref)
 		local var52, var53, duration, timeLength
 		local _ = nil
@@ -199,11 +199,11 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 	local var43 = nil
 	local var44 = 0
 	
-	local _ = function() --[[ line: 352 | named "startRealignLoop" ]]
+	local _ = function()
 		-- upvalues: var43 (write), var19 (write), var44 (write), var40 (ref), services (ref), var38 (write), loopEpsilonSeconds (copy)
 		if var43 == nil and var19 ~= nil then
 			var44 = var40(false)
-			var43 = services.runService.RenderStepped:Connect(function() --[[ line: 357 ]]
+			var43 = services.runService.RenderStepped:Connect(function()
 				-- upvalues: var38 (copy), var40 (copy), var44 (copy), loopEpsilonSeconds (copy), var19 (copy)
 				if var38 then return end
 				local var58 = var40(false)
@@ -218,7 +218,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 368 | named "stopRealignLoop" ]]
+	local _ = function()
 		-- upvalues: var43 (write)
 		if var43 ~= nil then
 			var43:Disconnect()
@@ -226,7 +226,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		end
 	end
 	
-	local function download() --[[ line: 375 ]]
+	local function download()
 		-- upvalues: var38 (write), t (ref), var29 (ref)
 		if var38 then return end
 		for i, v in t do
@@ -238,7 +238,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		var29(true)
 	end
 	
-	local function decode() --[[ line: 393 ]]
+	local function decode()
 		-- upvalues: var38 (write), t_2 (ref), t_4 (ref), var12 (ref), var21 (ref), var31 (ref)
 		if var38 then return end
 		for i, v in t_2 do
@@ -260,7 +260,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		var31(true)
 	end
 	
-	local function releaseDecoder() --[[ line: 414 ]]
+	local function releaseDecoder()
 		-- upvalues: var38 (write), t_2 (ref), t_4 (ref), var31 (ref), var33 (ref)
 		if var38 then return end
 		for i, v in t_2 do
@@ -284,7 +284,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		var33(false)
 	end
 	
-	local function play() --[[ line: 431 ]]
+	local function play()
 		-- upvalues: var38 (write), var39 (write), var19 (write), var16 (write), t (ref), var33 (ref), var43 (write), var44 (write), var40 (ref), services (ref), loopEpsilonSeconds (copy)
 		if var38 then return end
 		var39 = nil
@@ -316,7 +316,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		if var43 == nil then
 			if var19 == nil then return end
 			var44 = var40(false)
-			var43 = services.runService.RenderStepped:Connect(function() --[[ line: 357 ]]
+			var43 = services.runService.RenderStepped:Connect(function()
 				-- upvalues: var38 (copy), var40 (copy), var44 (copy), loopEpsilonSeconds (copy), var19 (copy)
 				if var38 then return end
 				if var40(false) < var44 - loopEpsilonSeconds then
@@ -326,7 +326,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		end
 	end
 	
-	local function pauseAndRemember(p9) --[[ line: 475 ]]
+	local function pauseAndRemember(p9)
 		-- upvalues: var38 (write), var15 (write), var39 (write), var40 (ref), t (ref), var33 (ref), var43 (write)
 		if var38 then return end
 		if var15 ~= nil then
@@ -354,19 +354,19 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		getVisualLayers = var26,
 		getResourceLevel = var41,
 		audio = {
-			setVolume = function(value, p10) --[[ line: 578 ]]
+			setVolume = function(value, p10)
 				-- upvalues: var38 (write), var12 (ref)
 				if not var38 then
 					var12.setVolume(value, p10)
 				end
 			end,
-			setMuted = function(value, p11) --[[ line: 583 ]]
+			setMuted = function(value, p11)
 				-- upvalues: var38 (write), var12 (ref)
 				if not var38 then
 					var12.setMuted(value, p11)
 				end
 			end,
-			setMasterMuted = function(value) --[[ line: 545 ]]
+			setMasterMuted = function(value)
 				-- upvalues: var38 (write), var12 (ref), var37 (ref)
 				if var38 then
 					return
@@ -379,11 +379,11 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 		decode = decode,
 		releaseDecoder = releaseDecoder,
 		play = play,
-		pause = function(p12) --[[ line: 495 ]]
+		pause = function(p12)
 			-- upvalues: pauseAndRemember (ref)
 			pauseAndRemember(p12 or 2)
 		end,
-		toggle = function() --[[ line: 499 ]]
+		toggle = function()
 			-- upvalues: var38 (write), var32 (ref), pauseAndRemember (ref), play (ref), var35 (ref), var34 (ref)
 			if var38 then return end
 			if var32(false) then
@@ -393,7 +393,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 			end
 			var35(var34(false) + 1)
 		end,
-		seek = function(p13) --[[ line: 516 ]]
+		seek = function(p13)
 			-- upvalues: var38 (write), fFlagMomentsLoopOnEndSeekModule (copy), var32 (ref), var42 (ref), t (ref)
 			if var38 then return end
 			if fFlagMomentsLoopOnEndSeekModule and var32(false) then
@@ -411,14 +411,14 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 				end
 			end
 		end,
-		setRegion = function(value) --[[ line: 536 ]]
+		setRegion = function(value)
 			-- upvalues: var38 (write), var15 (write)
 			if var38 then return end
 			if var15 ~= nil then
 				var15.setRegion(value)
 			end
 		end,
-		setActive = function(value) --[[ line: 555 ]]
+		setActive = function(value)
 			-- upvalues: var39 (write), var38 (write), var12 (ref), var37 (ref)
 			if value then
 				var39 = nil
@@ -431,7 +431,7 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 			var12.setMasterMuted(var59)
 			var37(var59)
 		end,
-		setSurface = function(value, p14) --[[ line: 567 ]]
+		setSurface = function(value, p14)
 			-- upvalues: var38 (write), t_1 (ref)
 			if var38 then return end
 			local var60 = t_1[value]
@@ -440,18 +440,18 @@ return function(p0, p1) --[[ line: 102 | named "createMomentMediaController" ]]
 				var60.setSurface(p14)
 			end
 		end,
-		getVideoPreviewSource = function() --[[ line: 609 ]]
+		getVideoPreviewSource = function()
 			-- upvalues: var10 (ref), p0 (ref), edits (ref)
 			return if var10 then {
 				content = p0.content,
 				region = if edits ~= nil then nil else edits.trim
 			} else nil
 		end,
-		getHasVideoPreview = function() --[[ line: 619 ]]
+		getHasVideoPreview = function()
 			-- upvalues: var10 (ref)
 			return var10
 		end,
-		dispose = function() --[[ line: 591 ]]
+		dispose = function()
 			-- upvalues: var38 (write), var43 (write), t (ref), var12 (ref), var11 (ref)
 			if var38 then return end
 			var38 = true

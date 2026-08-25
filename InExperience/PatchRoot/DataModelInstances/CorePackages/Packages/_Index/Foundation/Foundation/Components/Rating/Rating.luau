@@ -23,14 +23,14 @@ local t = {
 	value = ratingValueModule.None
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 41 | named "Rating" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useRatingVariantsModule (ref), reactModule (ref), ratingValueModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconVariant (ref), textModule (ref), dividerModule (ref), orientationModule (ref)
 	local var15 = withDefaultsModule(p0, t)
 	local var16 = useTokensModule()
 	local var17 = useRatingVariantsModule(var16, var15.size)
 	local var18 = reactModule.useRef(nil)
 	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useMemo(function() --[[ line: 49 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref)
 		local floored = math.floor(var16.Stroke.Thicker)
 		

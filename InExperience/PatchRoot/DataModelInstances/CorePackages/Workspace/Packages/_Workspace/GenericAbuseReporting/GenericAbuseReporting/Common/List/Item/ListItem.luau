@@ -14,11 +14,11 @@ local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV
 local reportListRadioSelectable = game:DefineFastFlag("ReportListRadioSelectable", false)
 local t = { hasDivider = false }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 35 | named "ListItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaults (ref), t (ref), useListModule (ref), reactModule (ref), view (ref), text (ref), radioGroup (ref), reportListRadioSelectable (ref), inputSize (ref), fFlagAbuseReportMenuV2 (ref), icon (ref), iconName (ref), divider (ref)
 	local var5 = withDefaults(p0, t)
 	local var6 = useListModule()
-	local var7 = reactModule.useCallback(function() --[[ line: 41 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), var5 (ref)
 		var6.onValueChanged(var5.value)
 	end, { var6, var5.value })

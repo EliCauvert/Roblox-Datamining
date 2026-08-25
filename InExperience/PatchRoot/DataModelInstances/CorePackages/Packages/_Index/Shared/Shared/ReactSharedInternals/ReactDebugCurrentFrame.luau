@@ -2,7 +2,7 @@
 local t = {}
 local var2 = nil
 
-function t.setExtraStackFrame(value) --[[ line: 19 ]]
+function t.setExtraStackFrame(value)
 	-- upvalues: reactGlobalsModule (ref), var2 (write)
 	if reactGlobalsModule.__DEV__ then
 		var2 = value
@@ -12,7 +12,7 @@ end
 if reactGlobalsModule.__DEV__ then
 	t.getCurrentStack = nil
 	
-	function t.getStackAddendum() --[[ line: 36 ]]
+	function t.getStackAddendum()
 		-- upvalues: var2 (write), t (ref)
 		local var3 = ""
 		

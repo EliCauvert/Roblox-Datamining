@@ -17,7 +17,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 23 ]]
+function t.run(p0, p1)
 	-- upvalues: errorSourceStringsModule (ref)
 	for i, v in p1.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do

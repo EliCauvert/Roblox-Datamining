@@ -2,7 +2,7 @@
 local isSourceAssetModule = require(sceneUnderstanding.isSourceAsset)
 local findSourceAssetsFromDescendantModule = require(sceneUnderstanding.findSourceAssetsFromDescendant)
 
-return function(value) --[[ line: 17 | named "getSourceAssetsFromDescendants" ]]
+return function(value)
 	-- upvalues: isSourceAssetModule (ref), findSourceAssetsFromDescendantModule (ref)
 	local t = {}
 	

@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 11 | named "calculateCountdownTime" ]]
+﻿return function(p0)
 	p0 += 59
 	local var0 = 0
 	local var1 = 0

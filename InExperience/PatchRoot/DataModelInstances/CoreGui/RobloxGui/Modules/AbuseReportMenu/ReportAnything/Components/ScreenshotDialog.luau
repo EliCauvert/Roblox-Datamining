@@ -16,7 +16,7 @@ local screenshotDialogLandscapeModeHeaderModule = require(parent.Components.Scre
 local _ = require(parent.Utility.ReportAnythingAnalytics)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function PortraitModeFooter(p0) --[[ line: 43 ]]
+local function PortraitModeFooter(p0)
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), robloxTranslatorModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -46,7 +46,7 @@ local function PortraitModeFooter(p0) --[[ line: 43 ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ line: 74 ]]
+							onActivated = function()
 								-- upvalues: p0 (ref)
 								p0.finishAnnotationAction(p0.annotationPoints)
 							end,
@@ -59,12 +59,12 @@ local function PortraitModeFooter(p0) --[[ line: 43 ]]
 	})
 end
 
-return function(p1) --[[ line: 86 | named "ScreenshotDialog" ]]
+return function(p1)
 	-- upvalues: useStyle (ref), virtualKeyboardMonitorModule (ref), reactModule (ref), cryoModule (ref), imageSetButton (ref), assetsModule (ref), screenshotDialogPortraitModeHeaderModule (ref), screenshotDialogLandscapeModeHeaderModule (ref), dividerModule (ref), screenshotHighlighterModule (ref), PortraitModeFooter (ref)
 	local theme = useStyle().Theme
 	local instance = virtualKeyboardMonitorModule.getInstance()
 	
-	local var13 = function() --[[ line: 92 ]]
+	local var13 = function()
 		-- upvalues: instance (ref), p1 (ref)
 		warn("OverlayActivated")
 		
@@ -77,22 +77,22 @@ return function(p1) --[[ line: 86 | named "ScreenshotDialog" ]]
 	
 	local var14, var15 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
 	local var16, var17 = reactModule.useState({})
-	local var18 = reactModule.useCallback(function() --[[ line: 109 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), var14 (ref)
 		var15(table.clone(var14))
 	end, { var15, var14 })
-	local var19 = reactModule.useCallback(function() --[[ line: 113 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.reportAnythingAnalytics.incrementAnnotationBack()
 		p1.backAction()
 	end, { p1.backAction, p1.reportAnythingAnalytics })
-	local var20 = reactModule.useCallback(function(_) --[[ line: 118 ]]
+	local var20 = reactModule.useCallback(function(_)
 		-- upvalues: p1 (ref), var18 (ref), var17 (ref)
 		p1.reportAnythingAnalytics.incrementAnnotationPlace()
 		var18()
 		var17({})
 	end, { var17, var18, p1.reportAnythingAnalytics })
-	local var21 = reactModule.useCallback(function() --[[ line: 125 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), p1 (ref), var16 (ref), var18 (ref)
 		if #var14 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationUndo()
@@ -101,7 +101,7 @@ return function(p1) --[[ line: 86 | named "ScreenshotDialog" ]]
 			var18()
 		end
 	end, { var18, var14, var16, p1.reportAnythingAnalytics })
-	local var22 = reactModule.useCallback(function() --[[ line: 135 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), p1 (ref), var14 (ref), var18 (ref)
 		if #var16 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationRedo()
@@ -110,7 +110,7 @@ return function(p1) --[[ line: 86 | named "ScreenshotDialog" ]]
 			var18()
 		end
 	end, { var18, var14, var16, p1.reportAnythingAnalytics })
-	local var23 = reactModule.useCallback(function(p2) --[[ line: 145 ]]
+	local var23 = reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref)
 		p1.reportAnythingAnalytics.setAnnotationNext()
 		p1.finishAnnotationAction(p2)

@@ -4,7 +4,7 @@ local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local eventNamesModule = require(appChat.Analytics.EventNames)
 local createConversationErrorModule = require(appChat.Analytics.Enums.CreateConversationError)
 
-return function(p0, p1, p2) --[[ line: 18 ]]
+return function(p0, p1, p2)
 	-- upvalues: promiseModule (ref), conversationChannelsModule (ref), createConversationErrorModule (ref), eventNamesModule (ref)
 	if not p0 then
 		return promiseModule.reject("No conversation returned.")

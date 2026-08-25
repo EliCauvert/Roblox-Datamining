@@ -4,7 +4,7 @@ local dataConsumerModule = require(components.DataConsumer)
 local memoryViewModule = require(components.Memory.MemoryView)
 local clientMemory = roactModule.Component:extend("ClientMemory")
 
-function clientMemory.render(p0) --[[ line: 10 ]]
+function clientMemory.render(p0)
 	-- upvalues: roactModule (ref), memoryViewModule (ref)
 	return roactModule.createElement(memoryViewModule, {
 		layoutOrder = p0.props.layoutOrder,

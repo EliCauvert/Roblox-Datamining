@@ -21,11 +21,11 @@ local canPopParentStackModule = require(appChat.Utils.canPopParentStack)
 local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local var13 = if flyoutSidePanelIXP.isFlyoutSidePanelEnabled() then require(parent.FlyoutSidePanel).Components.FlyoutLeftHeader else nil
 
-local function noOpt() --[[ line: 30 ]]
+local function noOpt()
 	return nil
 end
 
-return function(p0) --[[ line: 37 ]]
+return function(p0)
 	-- upvalues: fFlagAppIaScrollAway (ref), flyoutSidePanelIXP (ref), appHeaderBarModule (ref), withLocalization (ref), fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref), enumScreensModule (ref), fFlagAppChatDomLocatorFoundationMigrationModule (ref), reactModule (ref), foundationModule (ref), noOpt (ref), roactModule (ref), var13 (write), fFlagEnableHomeRobloxLogo (ref), headerBarTitleLeftAlignedModule (ref), appNavBarModule (ref), visibilityControl (ref), withStyle (ref), headerBar (ref)
 	local var15 = if fFlagAppIaScrollAway or flyoutSidePanelIXP.isFlyoutSidePanelEnabled() then p0.navigation.getScreenProps("isInExperience", false) else nil
 	local topBarHeight = p0.navigation.getScreenProps("topBarHeight", 0)
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 37 ]]
 	
 	return withLocalization({
 		headerText = if headerText.shouldLocalize then headerText.raw else nil
-	})(function(p1) --[[ line: 53 ]]
+	})(function(p1)
 		-- upvalues: headerText (ref), var18 (ref), p0 (ref), navigateToRootStack (ref), fFlagAppChatFixBackButtonOnRotationModule (copy), canPopParentStackModule (copy), enumScreensModule (copy), makeBackButton (ref), fFlagAppChatDomLocatorFoundationMigrationModule (copy), reactModule (copy), foundationModule (copy), makeCloseButton (ref), noOpt (copy), flyoutSidePanelIXP (copy), var15 (ref), roactModule (copy), var13 (copy), fFlagEnableHomeRobloxLogo (copy), headerBarTitleLeftAlignedModule (copy), fFlagAppIaScrollAway (copy), appNavBarModule (copy), visibilityControl (copy), topBarHeight (ref), withStyle (copy), headerBar (copy)
 		local renderCenter
 		local var20 = if headerText.shouldLocalize then p1.headerText else headerText.raw
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 37 ]]
 			local var23 = nil
 			renderCenter = p0.renderCenter
 		else
-			local var21 = function() --[[ line: 64 ]]
+			local var21 = function()
 				-- upvalues: p0 (copy)
 				local var31
 				if p0.renderRight and not p0.rightHidden then
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 37 ]]
 			end
 			
 			renderCenter = nil
-			local var22 = if navigateToRootStack then function() --[[ line: 71 ]]
+			local var22 = if navigateToRootStack then function()
 				-- upvalues: p0 (copy), fFlagAppChatFixBackButtonOnRotationModule (copy), canPopParentStackModule (copy), enumScreensModule (copy), navigateToRootStack (copy)
 				if p0.closeInputBar then
 					p0.closeInputBar()
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 37 ]]
 				end
 				p0.navigation.navigate(enumScreensModule.EmptyConversation)
 				navigateToRootStack()
-			end else function() --[[ line: 92 ]]
+			end else function()
 				-- upvalues: p0 (copy)
 				p0.navigation.pop()
 			end
@@ -88,7 +88,7 @@ return function(p0) --[[ line: 37 ]]
 				if fFlagAppChatDomLocatorFoundationMigrationModule and p0.backButtonTestId then
 					local var24 = var23
 					
-					local var23 = function() --[[ line: 100 ]]
+					local var23 = function()
 						-- upvalues: reactModule (copy), foundationModule (copy), p0 (copy), var24 (ref)
 						return reactModule.createElement(foundationModule.View, { tag = "auto-xy", testId = p0.backButtonTestId }, { backButton = var24() })
 					end
@@ -100,7 +100,7 @@ return function(p0) --[[ line: 37 ]]
 		local var25 = not p0.backButtonEnabled and not var18
 		
 		if flyoutSidePanelIXP.isFlyoutSidePanelEnabled() and not var15 and (var25 and not p0.conversationId) then
-			local var23 = function() --[[ line: 122 ]]
+			local var23 = function()
 				-- upvalues: roactModule (copy), var13 (copy), var20 (write), fFlagEnableHomeRobloxLogo (copy), flyoutSidePanelIXP (copy)
 				return roactModule.createElement(var13, {
 					isRobloxLogoEnabled = false,
@@ -113,7 +113,7 @@ return function(p0) --[[ line: 37 ]]
 		if p0.shouldBoldHeader and var23 == noOpt then
 			local var23 = nil
 		end
-		local var26 = function() --[[ line: 140 ]]
+		local var26 = function()
 			-- upvalues: roactModule (copy), headerBarTitleLeftAlignedModule (copy), var23 (write), noOpt (copy), var21 (write), var20 (write), p0 (copy)
 			return roactModule.createElement(headerBarTitleLeftAlignedModule, {
 				renderLeft = if var23 == noOpt then nil else var23,
@@ -134,7 +134,7 @@ return function(p0) --[[ line: 37 ]]
 		if p0.rightPaddingOverride ~= nil then
 			uDim_1 = UDim.new(0, p0.rightPaddingOverride)
 		end
-		local var29 = if fFlagAppIaScrollAway and not var15 and appNavBarModule.getScrollAwayEnabled() then visibilityControl.getHeaderBinding():map(function(p2) --[[ line: 163 ]]
+		local var29 = if fFlagAppIaScrollAway and not var15 and appNavBarModule.getScrollAwayEnabled() then visibilityControl.getHeaderBinding():map(function(p2)
 			-- upvalues: topBarHeight (copy)
 			return UDim2.new(0, 0, 0, (p2 - 1) * (topBarHeight + 36))
 		end) else nil
@@ -147,7 +147,7 @@ return function(p0) --[[ line: 37 ]]
 			ZIndex = if fFlagAppIaScrollAway then 2 else nil,
 			Position = if fFlagAppIaScrollAway then var29 else nil
 		}, {
-			headerBar = withStyle(function(p4) --[[ line: 181 ]]
+			headerBar = withStyle(function(p4)
 				-- upvalues: roactModule (copy), headerBar (copy), p0 (copy), var25_1 (ref), var20 (write), topBarHeight (copy), var23 (write), var26 (ref), renderCenter (write), var21 (write), uDim (write), uDim_1 (write), fFlagAppIaScrollAway (copy), var15 (copy)
 				return roactModule.createElement(headerBar, {
 					title = if p0.conversationId or var25_1 then nil else var20,
@@ -170,7 +170,7 @@ return function(p0) --[[ line: 37 ]]
 			ZIndex = if fFlagAppIaScrollAway then 2 else nil,
 			Position = if fFlagAppIaScrollAway then var29 else nil
 		}, {
-			headerBar = withStyle(function(p3) --[[ line: 209 ]]
+			headerBar = withStyle(function(p3)
 				-- upvalues: roactModule (copy), headerBar (copy), p0 (copy), var25_1 (ref), var20 (write), topBarHeight (copy), var25 (ref), var23 (write), var26 (ref), renderCenter (write), var21 (write), uDim (write), uDim_1 (write), fFlagAppIaScrollAway (copy), var15 (copy)
 				return roactModule.createElement(headerBar, {
 					title = if p0.conversationId or var25_1 then nil else var20,

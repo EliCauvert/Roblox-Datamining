@@ -1,6 +1,6 @@
 ﻿local dEV = _G.__DEV__
 
-return function(p0, p1) --[[ line: 20 | named "instanceof" ]]
+return function(p0, p1)
 	-- upvalues: dEV (ref)
 	if dEV then
 		assert(typeof(p1) == "table", "Received a non-table as the second argument for instanceof")
@@ -8,7 +8,7 @@ return function(p0, p1) --[[ line: 20 | named "instanceof" ]]
 	if typeof(p0) ~= "table" then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 29 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p1 (ref), p0 (write)
 		return p1.new ~= nil and p0.new == p1.new
 	end)

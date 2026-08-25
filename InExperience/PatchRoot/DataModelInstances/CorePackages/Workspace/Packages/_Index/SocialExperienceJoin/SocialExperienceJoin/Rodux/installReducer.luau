@@ -5,7 +5,7 @@ local gamesModule = require(socialExperienceJoin.Rodux.Games)
 local presenceModule = require(socialExperienceJoin.Rodux.Presence)
 local fFlagSocialExperienceJoinPresenceStoreMigrationModule = require(socialExperienceJoin.Flags.FFlagSocialExperienceJoinPresenceStoreMigration)
 
-return function() --[[ line: 17 ]]
+return function()
 	-- upvalues: roduxModule (ref), myRoduxNetworkingModule (ref), gamesModule (ref), fFlagSocialExperienceJoinPresenceStoreMigrationModule (ref), presenceModule (ref)
 	return roduxModule.combineReducers({
 		NetworkStatus = myRoduxNetworkingModule.installReducer(),

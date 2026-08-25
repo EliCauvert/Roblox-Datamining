@@ -5,7 +5,7 @@ local splitView = appSplitViewModule.SplitView
 local enums = appSplitViewModule.Enums
 local useSplitPaneRenderModule = require(script.Parent.Parent.Hooks.useSplitPaneRender)
 
-return function(p0) --[[ line: 21 | named "SplitPaneNavigationLayout" ]]
+return function(p0)
 	-- upvalues: useSplitPaneRenderModule (ref), reactModule (ref), enums (ref), splitView (ref)
 	local var3 = useSplitPaneRenderModule(p0.screens, p0.cards, p0.paneIndices, p0.isRouteActiveOnPane)
 	

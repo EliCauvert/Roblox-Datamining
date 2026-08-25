@@ -5,7 +5,7 @@ local flaggedMutedError = require(parent.Loggers).flaggedMutedError
 local _ = require(gameTile.GameTileTypes)
 local tileBadgePositionCalculators = require(gameTile.GameTileConstants).TileBadgePositionCalculators
 
-local function _(p0) --[[ line: 13 | named "isValidTileBadgePosition" ]]
+local function _(p0)
 	-- upvalues: tileBadgePositionCalculators (ref), flaggedMutedError (ref)
 	local var1 = tileBadgePositionCalculators[p0] ~= nil
 	
@@ -15,7 +15,7 @@ local function _(p0) --[[ line: 13 | named "isValidTileBadgePosition" ]]
 	return var1
 end
 
-return function(p1) --[[ line: 26 | named "getValidTileBadges" ]]
+return function(p1)
 	-- upvalues: tileBadgePositionCalculators (ref), flaggedMutedError (ref), mutedError (ref)
 	local t = {}
 	

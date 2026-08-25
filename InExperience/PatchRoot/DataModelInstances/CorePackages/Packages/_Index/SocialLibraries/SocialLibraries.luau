@@ -1,7 +1,7 @@
 ﻿local UIBloxModule = require(script.Parent.UIBlox)
 
 return {
-	config = function(p0) --[[ line: 5 ]]
+	config = function(p0)
 		-- upvalues: UIBloxModule (ref)
 		if p0.UIBloxConfig then
 			UIBloxModule.init(p0.UIBloxConfig)

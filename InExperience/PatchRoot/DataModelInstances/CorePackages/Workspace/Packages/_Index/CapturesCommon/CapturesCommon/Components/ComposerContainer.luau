@@ -12,12 +12,12 @@ local captureItemModule = require(parent.Components.CaptureItem)
 local _ = require(parent.Types)
 local vector2 = Vector2.new(700, 500)
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useScreenSizeModule (ref), useState (ref), useCallback (ref), vector2 (ref), reactModule (ref), view (ref), foundationModule (ref), icon (ref), captureItemModule (ref)
 	local var5 = useTokens()
 	local var6 = useScreenSizeModule()
 	local var7, var8 = useState(var6)
-	local var9 = useCallback(function(p1) --[[ line: 37 ]]
+	local var9 = useCallback(function(p1)
 		-- upvalues: var8 (ref), p0 (ref)
 		var8(p1.AbsoluteSize)
 		p0.onAbsoluteSizeChangedCallback(p1)
@@ -89,7 +89,7 @@ return function(p0) --[[ line: 31 ]]
 						CapturePreview = reactModule.createElement(captureItemModule, {
 							isVideoPlaying = true,
 							capture = p0.capture,
-							onActivated = function() --[[ line: 120 ]] end,
+							onActivated = function() end,
 							scaleType = Enum.ScaleType.Fit
 						})
 					})

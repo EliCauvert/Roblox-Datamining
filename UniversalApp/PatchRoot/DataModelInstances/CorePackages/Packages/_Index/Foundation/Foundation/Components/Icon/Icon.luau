@@ -23,7 +23,7 @@ local t = {
 	variant = iconVariant.Regular
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 46 | named "Icon" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextSizeOffsetModule (ref), migrateIconNameModule (ref), useIconSizeModule (ref), isBuilderIconModule (ref), migrateFontSizeModule (ref), loggerModule (ref), reactModule (ref), imageModule (ref), withCommonPropsModule (ref), textModule (ref), font (ref)
 	local var16 = withDefaultsModule(p0, t)
 	local var17 = useTokensModule()

@@ -27,7 +27,7 @@ local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatT
 local fFlagAppChatFixBackButtonOnRotationModule = require(appChat.Flags.FFlagAppChatFixBackButtonOnRotation)
 local canPopParentStackModule = require(appChat.Utils.canPopParentStack)
 
-local function _(p0) --[[ line: 44 | named "getBackButtonConfig" ]]
+local function _(p0)
 	-- upvalues: fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref)
 	local wideMode = p0.getScreenProps("wideMode", false)
 	
@@ -40,7 +40,7 @@ end
 local chatConversationScreen = roactModule.PureComponent:extend("ChatConversationScreen")
 chatConversationScreen.defaultProps = { navigation = nil }
 
-function chatConversationScreen.navigationOptions(p1) --[[ line: 56 ]]
+function chatConversationScreen.navigationOptions(p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref), getFFlagIsSquadEnabled (ref), enumScreensModule (ref), roactModule (ref), withChatPlacementContext (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
 	local navigation = p1.navigation
 	
@@ -71,7 +71,7 @@ function chatConversationScreen.navigationOptions(p1) --[[ line: 56 ]]
 			conversationId = navigation.getParam("conversationId", nil)
 			conversationId = if conversationId then tostring(conversationId) else nil
 			
-			local var31 = function() --[[ line: 78 ]]
+			local var31 = function()
 				-- upvalues: navigation (ref), enumScreensModule (copy), conversationId (write)
 				navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
 			end
@@ -82,7 +82,7 @@ function chatConversationScreen.navigationOptions(p1) --[[ line: 56 ]]
 					AutomaticSize = Enum.AutomaticSize.XY
 				}, {
 					UIListLayout = roactModule.createElement("UIListLayout", { HorizontalAlignment = Enum.HorizontalAlignment.Right }),
-					GroupUpButton = withChatPlacementContext(function(p2) --[[ line: 92 ]]
+					GroupUpButton = withChatPlacementContext(function(p2)
 						-- upvalues: roactModule (copy), squadComponentAccessWrapperModule (copy), conversationId (write), squadJoinButtonModule (copy), var31 (ref), squadButtonSourceEnum (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
 						return roactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = conversationId }, roactModule.createElement(squadJoinButtonModule, {
 							isFullWidth = false,
@@ -116,7 +116,7 @@ function chatConversationScreen.navigationOptions(p1) --[[ line: 56 ]]
 			absorbInput = false,
 			backButtonEnabled = conversationId,
 			isRoot = var33,
-			renderRight = function() --[[ line: 125 ]]
+			renderRight = function()
 				-- upvalues: roactModule (copy), frame (write)
 				return roactModule.createFragment({ groupUp = frame })
 			end,
@@ -126,7 +126,7 @@ function chatConversationScreen.navigationOptions(p1) --[[ line: 56 ]]
 	end
 end
 
-function chatConversationScreen.init(p3) --[[ line: 135 ]]
+function chatConversationScreen.init(p3)
 	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), roactModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), loggerModule (ref), enumScreensModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), fFlagAppChatFixBackButtonOnRotationModule (ref), canPopParentStackModule (ref), getTopBarStoreModule (ref), argCheckModule (ref), cryoModule (ref), readingMessagesIsEnabledModule (ref)
 	p3.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p3.props.navigation, "Party.ConversationPage") else nil
 	p3.toastProps = nil
@@ -139,7 +139,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 	local navigation = p3.props.navigation
 	local conversationId = navigation.getParam and navigation.getParam("conversationId", nil)
 	
-	function p3.navigateToConversationOverlay() --[[ line: 152 ]]
+	function p3.navigateToConversationOverlay()
 		-- upvalues: loggerModule (copy), conversationId (ref), p3 (ref), navigation (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To ConversationOverlay: {} from {screen}", conversationId)
 		navigation.navigate(enumScreensModule.ConversationOverlay, {
@@ -148,7 +148,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		})
 	end
 	
-	function p3.navigateToChatDetails() --[[ line: 162 ]]
+	function p3.navigateToChatDetails()
 		-- upvalues: p3 (ref), loggerModule (copy), getFFlagAppChatEnableRootedNavigationModule (copy), navigation (ref), enumScreensModule (copy)
 		local conversationId = p3.props.navigation.getParam and p3.props.navigation.getParam("conversationId", nil)
 		loggerModule:info("Navigate To ChatDetails: {} from {screen}", conversationId)
@@ -190,7 +190,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 			conversationId = conversationId
 		})
 	end
-	function p3.writeScreenTopBar() --[[ line: 200 ]]
+	function p3.writeScreenTopBar()
 		-- upvalues: p3 (ref), fFlagAppChatFixBackButtonOnRotationModule (copy), canPopParentStackModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy)
 		local var45, var46
 		local var42 = if p3.props.navigation.getParam then p3.props.navigation.getParam("conversationId", nil) else nil
@@ -223,7 +223,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatConversation, t)
 	end
 	
-	function p3.queueNavigationToToast(p4) --[[ line: 228 ]]
+	function p3.queueNavigationToToast(p4)
 		-- upvalues: p3 (ref)
 		if p3.props.navigation.isFocused() then
 			p3.navigateToToast(p4)
@@ -234,7 +234,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		p3.toastProps = p4
 	end
 	
-	function p3.onDidFocus() --[[ line: 238 ]]
+	function p3.onDidFocus()
 		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p3 (ref)
 		if fFlagAppChatTopBarConfigDrivenModule() then
 			p3.writeScreenTopBar()
@@ -247,26 +247,26 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		end
 	end
 	
-	function p3.releaseFocus() --[[ line: 254 ]]
+	function p3.releaseFocus()
 		-- upvalues: p3 (ref)
 		if p3.inputBoxRef and p3.inputBoxRef:getValue() then
 			p3.inputBoxRef:getValue():ReleaseFocus()
 		end
 	end
 	
-	function p3.onWillBlur() --[[ line: 260 ]]
+	function p3.onWillBlur()
 		-- upvalues: p3 (ref)
 		p3.releaseFocus()
 		p3.setInputBarCloseCallback()
 	end
 	
-	function p3.navigateToToast(p5) --[[ line: 266 ]]
+	function p3.navigateToToast(p5)
 		-- upvalues: loggerModule (copy), p3 (ref), enumScreensModule (copy), cryoModule (copy)
 		loggerModule:info("Navigate To Toast from {screen}")
 		p3.props.navigation.navigate(enumScreensModule.RoactChatToast, cryoModule.Dictionary.union(p5, { isOverlay = true }))
 	end
 	
-	function p3.openViewProfile(p6) --[[ line: 275 ]]
+	function p3.openViewProfile(p6)
 		-- upvalues: p3 (ref), enumScreensModule (copy), loggerModule (copy)
 		local viewUserProfile = p3.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.ViewUserProfile]
 		
@@ -279,7 +279,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		loggerModule:warning("UserProfile page was not set in navigateToLuaAppPages screenProps")
 	end
 	
-	function p3.openGameDetailsPage(p7, p8) --[[ line: 287 ]]
+	function p3.openGameDetailsPage(p7, p8)
 		-- upvalues: p3 (ref), enumScreensModule (copy), loggerModule (copy)
 		local gameDetail = p3.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.GameDetail]
 		
@@ -292,18 +292,18 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		loggerModule:warning("GameDetail page was not set in navigateToLuaAppPages screenProps")
 	end
 	
-	function p3.getOpenMomentsImmersive() --[[ line: 300 ]]
+	function p3.getOpenMomentsImmersive()
 		-- upvalues: p3 (ref), enumScreensModule (copy)
 		return p3.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.MomentsImmersive]
 	end
 	
-	function p3.navigateToChatConversation(p9) --[[ line: 305 ]]
+	function p3.navigateToChatConversation(p9)
 		-- upvalues: loggerModule (copy), p3 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Conversation: {} from {screen}", p9)
 		p3.props.navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p9 })
 	end
 	
-	function p3.navigateToScreen(p10, p11, p12) --[[ line: 310 ]]
+	function p3.navigateToScreen(p10, p11, p12)
 		-- upvalues: loggerModule (copy), p3 (ref), cryoModule (copy)
 		loggerModule:info("Navigate To Screen: {} from {screen}", p10)
 		local navigation = p3.props.navigation
@@ -317,14 +317,14 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		p3.props.navigation.navigate(p10, { conversationId = conversationId })
 	end
 	
-	function p3.navigateBack() --[[ line: 330 ]]
+	function p3.navigateBack()
 		-- upvalues: p3 (ref)
 		if p3.props.navigation.isFocused() then
 			p3.props.navigation.goBack()
 		end
 	end
 	
-	function p3.navigateToChatLanding() --[[ line: 336 ]]
+	function p3.navigateToChatLanding()
 		-- upvalues: loggerModule (copy), p3 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To ChatLanding from {screen}")
 		
@@ -336,13 +336,13 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		p3.props.navigation.navigate(enumScreensModule.ChatLanding)
 	end
 	
-	function p3.navigateToSquadLobby(p13) --[[ line: 346 ]]
+	function p3.navigateToSquadLobby(p13)
 		-- upvalues: loggerModule (copy), p3 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To SquadLobby from {screen}")
 		p3.props.navigation.navigate(enumScreensModule.SquadLobby, { conversationId = p13 })
 	end
 	
-	function p3.updateConversationTitle(p14) --[[ line: 351 ]]
+	function p3.updateConversationTitle(p14)
 		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p3 (ref), fFlagAppChatTopBarSignalsStoreModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), argCheckModule (copy)
 		local var49 = if p14 then { shouldLocalize = false, raw = p14 } else {
 			raw = "CommonUI.Features.Label.Chat",
@@ -364,7 +364,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		setScreenTopBar(enumScreensModule.ChatConversation, t)
 	end
 	
-	function p3.setInputBarCloseCallback(p15) --[[ line: 376 ]]
+	function p3.setInputBarCloseCallback(p15)
 		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p3 (ref), argCheckModule (copy)
 		if fFlagAppChatTopBarSignalsStoreModule then
 			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatLanding, { closeInputBar = p15 })
@@ -376,12 +376,12 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 		setScreenTopBar(enumScreensModule.ChatLanding, { closeInputBar = p15 })
 	end
 	
-	function p3.getReadingMessagesIsEnabled() --[[ line: 386 ]]
+	function p3.getReadingMessagesIsEnabled()
 		-- upvalues: readingMessagesIsEnabledModule (copy), p3 (ref)
 		return readingMessagesIsEnabledModule(p3.props.navigation)
 	end
 	
-	function p3.updatePrivateConversationTopBar(p16) --[[ line: 390 ]]
+	function p3.updatePrivateConversationTopBar(p16)
 		-- upvalues: fFlagAppChatTopBarConfigDrivenModule (copy), p3 (ref), fFlagAppChatTopBarSignalsStoreModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), argCheckModule (copy)
 		if fFlagAppChatTopBarConfigDrivenModule() then
 			p3.lastIsPrivateConversation = p16
@@ -397,7 +397,7 @@ function chatConversationScreen.init(p3) --[[ line: 135 ]]
 	end
 end
 
-function chatConversationScreen.didUpdate(p17, p18) --[[ line: 405 ]]
+function chatConversationScreen.didUpdate(p17, p18)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), argCheckModule (ref)
 	local conversationId = p17.props.navigation and (p17.props.navigation.getParam and p17.props.navigation.getParam("conversationId", nil))
 	
@@ -417,7 +417,7 @@ function chatConversationScreen.didUpdate(p17, p18) --[[ line: 405 ]]
 	end
 end
 
-function chatConversationScreen.render(p19) --[[ line: 433 ]]
+function chatConversationScreen.render(p19)
 	-- upvalues: argCheckModule (ref), fFlagAppChatMomentShareCardModule (ref), fFlagAppChatMomentShareCardNavigation (ref), roactModule (ref), roactNavigationModule (ref), chatConversationContainerModule (ref)
 	local var56 = argCheckModule.isNotNil(p19.props.navigation, "navigation in ChatConversationScreen")
 	local conversationId = var56.getParam("conversationId", nil)
@@ -448,7 +448,7 @@ function chatConversationScreen.render(p19) --[[ line: 433 ]]
 	})
 end
 
-function chatConversationScreen.didMount(p20) --[[ line: 477 ]]
+function chatConversationScreen.didMount(p20)
 	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref)
 	loggerModule:info("{screen} mounted")
 	
@@ -461,7 +461,7 @@ function chatConversationScreen.didMount(p20) --[[ line: 477 ]]
 	end
 end
 
-function chatConversationScreen.willUnmount(p21) --[[ line: 491 ]]
+function chatConversationScreen.willUnmount(p21)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref)
 	if fFlagAppChatTopBarConfigDrivenModule() then
 		getTopBarStoreModule(false).clearScreenTopBar(enumScreensModule.ChatConversation)

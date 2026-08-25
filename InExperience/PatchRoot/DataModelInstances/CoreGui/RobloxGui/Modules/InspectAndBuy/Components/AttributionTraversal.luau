@@ -14,21 +14,21 @@ local useScreenSizeModule = require(coreGuiService.RobloxGui.Modules.Common.Hook
 local experienceService = require(corePackagesService.Workspace.Packages.ExperienceService).ExperienceService
 local closeOverlayModule = require(script.Parent.Parent.Actions.CloseOverlay)
 
-return function(p0) --[[ line: 32 | named "AttributionTraversal" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useScreenSizeModule (ref), useStyle (ref), reactModule (ref), closeOverlayModule (ref), experienceService (ref), useSelector (ref), interactiveAlert (ref), robloxTranslatorModule (ref), imageSetLabel (ref), styledTextLabel (ref), buttonType (ref)
 	local var7 = useDispatch()
 	local var8 = useScreenSizeModule()
 	local var9 = useStyle()
-	local var10 = reactModule.useCallback(function() --[[ line: 37 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), closeOverlayModule (copy)
 		var7(closeOverlayModule())
 	end, { var7 })
-	local var11 = reactModule.useCallback(function() --[[ line: 41 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), experienceService (copy), var7 (ref), closeOverlayModule (copy)
 		experienceService:LaunchExperience({ placeId = p0.rootPlaceId })
 		var7(closeOverlayModule())
 	end, { var7, p0.rootPlaceId })
-	local var12 = useSelector(function(p1) --[[ line: 50 ]]
+	local var12 = useSelector(function(p1)
 		return p1.locale
 	end)
 	local theme = var9.Theme
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 32 | named "AttributionTraversal" ]]
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
 		title = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToExperience", var12),
-		middleContent = function() --[[ line: 60 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), var9 (ref), theme (ref), imageSetLabel (copy), p0 (ref), styledTextLabel (copy), robloxTranslatorModule (copy), var12 (ref), name (ref), font (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

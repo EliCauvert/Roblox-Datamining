@@ -20,11 +20,11 @@ local useDictationInputBarModule = require(script.Parent.Dictation.useDictationI
 local useDictationTextAreaModule = require(script.Parent.Dictation.useDictationTextArea)
 local dictationAffordancesModule = require(script.Parent.Dictation.DictationAffordances)
 
-local function _(startValue, endValue, alpha) --[[ line: 45 | named "lerp" ]]
+local function _(startValue, endValue, alpha)
 	return startValue + (endValue - startValue) * alpha
 end
 
-return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictation" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
 	local var16 = foundationModule.Hooks.useTokens()
 	local setTransparency = p0.setTransparency
@@ -61,9 +61,9 @@ return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictat
 		listeningColor3 = var16.Color.Shift.Shift_200.Color3,
 		listeningTransparency = var16.Color.Shift.Shift_200.Transparency
 	})
-	local var21 = reactModule.useMemo(function() --[[ line: 133 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var20 (ref)
-		return p0.transparencyValue:map(function(p1) --[[ line: 134 ]]
+		return p0.transparencyValue:map(function(p1)
 			-- upvalues: var20 (copy)
 			local t = { Color3 = var20.color3 }
 			local baseTransparency = var20.baseTransparency
@@ -77,9 +77,9 @@ return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictat
 		var20.baseTransparency
 	})
 	local var22 = dictationAffordancesModule.shouldPreventFade(var18)
-	local var23 = reactModule.useMemo(function() --[[ line: 143 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var22 (ref), p0 (ref)
-		return if var22 then p0.transparencyValue:map(function(_) --[[ line: 145 ]]
+		return if var22 then p0.transparencyValue:map(function(_)
 			return 0
 		end) else p0.transparencyValue
 	end, { var22, p0.transparencyValue })
@@ -142,7 +142,7 @@ return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictat
 		TargetChannelChip = reactModule.createElement(channelChipModule, {
 			transparency = setTransparency(0, p0.transparencyValue),
 			onAbsoluteSizeChanged = p0.onAbsoluteSizeChanged,
-			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function() --[[ line: 203 ]]
+			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function()
 				-- upvalues: p0 (ref)
 				p0.resetTargetChannel(p0.isGlobalChatTabActive)
 			end else p0.resetTargetChannel,
@@ -162,7 +162,7 @@ return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictat
 			Font = configModule.ChatInputBarFont,
 			Text = p0.disabledChatPlaceholderText,
 			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p2) --[[ line: 220 ]]
+			Size = targetChannelWidth:map(function(p2)
 				return UDim2.new(1, -(p2 + 8), 0, 0)
 			end),
 			TextColor3 = if showPlaceholderText then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
@@ -188,7 +188,7 @@ return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictat
 			AnchorPoint = Vector2.new(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p3) --[[ line: 257 ]]
+			Size = targetChannelWidth:map(function(p3)
 				return UDim2.new(1, -(p3 + 8), 0, 0)
 			end)
 		}
@@ -267,7 +267,7 @@ return reactModule.memo(function(p0) --[[ line: 90 | named "ChatInputBarV2Dictat
 			size = foundationModule.Enums.InputSize.Small,
 			isDisabled = var19.isDisabled,
 			Selectable = if useLongPressOverlay then false else nil,
-			onActivated = if useLongPressOverlay then function() --[[ line: 359 ]] end else var19.onActivated
+			onActivated = if useLongPressOverlay then function() end else var19.onActivated
 		}),
 		InputTarget = if useLongPressOverlay and micGestureHandlers ~= nil then reactModule.createElement("TextButton", {
 			Active = true,

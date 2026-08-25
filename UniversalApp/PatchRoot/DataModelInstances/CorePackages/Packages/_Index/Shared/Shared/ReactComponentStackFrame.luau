@@ -15,11 +15,11 @@ local reactCurrentDispatcher = require(script.Parent.ReactSharedInternals).React
 local describeComponentFrame = nil
 local _ = nil
 
-local function _(p0) --[[ line: 60 | named "describeOwner" ]]
+local function _(p0)
 	return if type(p0) == "function" then debug.info(p0, "n") elseif type(p0) == "table" then tostring(p0) else nil
 end
 
-local function describeBuiltInComponentFrame(p1, p2, p3) --[[ line: 69 ]]
+local function describeBuiltInComponentFrame(p1, p2, p3)
 	-- upvalues: reactGlobalsModule (ref), describeComponentFrame (write)
 	return describeComponentFrame(p1, p2, if reactGlobalsModule.__DEV__ and p3 then if type(p3) == "function" then debug.info(p3, "n") elseif type(p3) == "table" then tostring(p3) else nil else nil)
 end
@@ -27,7 +27,7 @@ end
 local var5 = false
 local var6 = if reactGlobalsModule.__DEV__ then setmetatable({}, { __mode = "k" }) else nil
 
-local function describeNativeComponentFrame(p4, p5) --[[ line: 116 ]]
+local function describeNativeComponentFrame(p4, p5)
 	-- upvalues: var5 (write), reactGlobalsModule (ref), var6 (write), reactCurrentDispatcher (ref), disableLogs (ref), reenableLogs (ref), describeComponentFrame (write)
 	if not p4 or var5 then
 		return ""
@@ -48,19 +48,19 @@ local function describeNativeComponentFrame(p4, p5) --[[ line: 116 ]]
 		disableLogs()
 	end
 	local var13 = nil
-	local _, status = xpcall(function() --[[ line: 156 ]]
+	local _, status = xpcall(function()
 		-- upvalues: p5 (ref), var13 (write), var12 (write), p4 (ref)
 		if p5 then
 			return
 		end
-		local _, status = pcall(function() --[[ line: 162 ]]
+		local _, status = pcall(function()
 			-- upvalues: var13 (copy)
 			var13 = debug.traceback()
 			error({ stack = var13 })
 		end)
 		var12 = status
 		p4()
-	end, function(p6) --[[ line: 172 ]]
+	end, function(p6)
 		-- upvalues: var13 (write)
 		return { message = p6, stack = var13 }
 	end)
@@ -87,7 +87,7 @@ local function describeNativeComponentFrame(p4, p5) --[[ line: 116 ]]
 	return var16
 end
 
-describeComponentFrame = function(p7, p8, p9) --[[ line: 286 | named "describeComponentFrame" ]]
+describeComponentFrame = function(p7, p8, p9)
 	-- upvalues: reactGlobalsModule (ref)
 	local var21 = ""
 	
@@ -109,17 +109,17 @@ describeComponentFrame = function(p7, p8, p9) --[[ line: 286 | named "describeCo
 	return "\n    in " .. (p7 or "Unknown") .. var21
 end
 
-local function describeClassComponentFrame(p10, p11, p12) --[[ line: 319 ]]
+local function describeClassComponentFrame(p10, p11, p12)
 	-- upvalues: reactGlobalsModule (ref), describeComponentFrame (write)
 	return describeComponentFrame(tostring(p10), p11, if reactGlobalsModule.__DEV__ and p12 then if type(p12) == "function" then debug.info(p12, "n") elseif type(p12) == "table" then tostring(p12) else nil else nil)
 end
 
-local function describeFunctionComponentFrame(p13, p14, p15) --[[ line: 343 ]]
+local function describeFunctionComponentFrame(p13, p14, p15)
 	-- upvalues: reactGlobalsModule (ref), describeComponentFrame (write)
 	return if p13 then describeComponentFrame(if type(p13) == "function" then debug.info(p13, "n") else tostring(p13), p14, if reactGlobalsModule.__DEV__ and p15 then if type(p15) == "function" then debug.info(p15, "n") elseif type(p15) == "table" then tostring(p15) else nil else nil) else ""
 end
 
-local function describeUnknownElementTypeFrameInDEV(p16, p17, p18) --[[ line: 390 ]]
+local function describeUnknownElementTypeFrameInDEV(p16, p17, p18)
 	-- upvalues: reactGlobalsModule (ref), describeClassComponentFrame (ref), describeFunctionComponentFrame (write), describeBuiltInComponentFrame (ref), REACT_SUSPENSE_TYPE (ref), REACT_SUSPENSE_LIST_TYPE (ref), REACT_FORWARD_REF_TYPE (ref), REACT_MEMO_TYPE (ref), describeUnknownElementTypeFrameInDEV (ref), REACT_BLOCK_TYPE (ref), REACT_LAZY_TYPE (ref)
 	if not reactGlobalsModule.__DEV__ then
 		return ""
@@ -147,7 +147,7 @@ local function describeUnknownElementTypeFrameInDEV(p16, p17, p18) --[[ line: 39
 		elseif var24 == REACT_LAZY_TYPE then
 			local payload = p16._payload
 			local init = p16._init
-			local ok, status = pcall(function() --[[ line: 449 ]]
+			local ok, status = pcall(function()
 				-- upvalues: describeUnknownElementTypeFrameInDEV (copy), init (ref), payload (ref), p17 (ref), p18 (ref)
 				describeUnknownElementTypeFrameInDEV(init(payload), p17, p18)
 			end)

@@ -14,27 +14,27 @@ local var8 = signalsModule.createSignal(nil)
 local platformLeaderboardUnrankedLabel = game:DefineFastString("PlatformLeaderboardUnrankedLabel", "100+")
 local var10 = signalsModule.createSignal(nil)
 
-local function formatScoreCell(p0) --[[ line: 29 ]]
+local function formatScoreCell(p0)
 	-- upvalues: numberLocalization (ref), localizationService (ref)
 	return if p0 == nil then "-" else numberLocalization.localize(p0, localizationService.RobloxLocaleId)
 end
 
-local function formatRankCell(p1) --[[ line: 36 ]]
+local function formatRankCell(p1)
 	-- upvalues: platformLeaderboardUnrankedLabel (ref)
 	return if p1 == nil then platformLeaderboardUnrankedLabel else tostring(p1)
 end
 
-local function rankToLayoutOrder(p2) --[[ line: 40 ]]
+local function rankToLayoutOrder(p2)
 	return if p2 == nil then 1000000 else p2
 end
 
-return reactModule.memo(function(p3) --[[ line: 63 | named "PlatformEntryViewImpl" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: signalsReactModule (ref), var8 (ref), var10 (ref), reactModule (ref), formatScoreCell (ref), formatRankCell (ref), rankToLayoutOrder (ref), constantsModule (ref), leaderboardRowShellModule (ref), leaderboardTextCellModule (ref), peopleCellModule (ref)
 	local var14 = p3.isHeader == true
 	local var15 = signalsReactModule.useSignalBinding(p3.scoreGetter or var8)
 	local var16 = signalsReactModule.useSignalBinding(p3.rankGetter or var10)
 	local scoreLabel = p3.scoreLabel
-	local var17 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), scoreLabel (ref), var15 (ref), formatScoreCell (copy)
 		return if var14 then scoreLabel or "-" else var15:map(formatScoreCell)
 	end, { var14, var15, scoreLabel })
@@ -43,7 +43,7 @@ return reactModule.memo(function(p3) --[[ line: 63 | named "PlatformEntryViewImp
 	
 	return reactModule.createElement(leaderboardRowShellModule, {
 		rowHeight = rowHeight,
-		layoutOrder = reactModule.useMemo(function() --[[ line: 87 ]]
+		layoutOrder = reactModule.useMemo(function()
 			-- upvalues: p3 (ref), var16 (ref), rankToLayoutOrder (copy)
 			return if p3.layoutOrder == nil then var16:map(rankToLayoutOrder) else p3.layoutOrder
 		end, { p3.layoutOrder, var16 }),
@@ -53,7 +53,7 @@ return reactModule.memo(function(p3) --[[ line: 63 | named "PlatformEntryViewImp
 	}, {
 		RankCell = reactModule.createElement(leaderboardTextCellModule, {
 			layoutOrder = 1,
-			text = reactModule.useMemo(function() --[[ line: 78 ]]
+			text = reactModule.useMemo(function()
 				-- upvalues: var14 (ref), rankHeaderText (ref), var16 (ref), formatRankCell (copy)
 				return if var14 then rankHeaderText or "Rank" else var16:map(formatRankCell)
 			end, { var14, var16, rankHeaderText }),

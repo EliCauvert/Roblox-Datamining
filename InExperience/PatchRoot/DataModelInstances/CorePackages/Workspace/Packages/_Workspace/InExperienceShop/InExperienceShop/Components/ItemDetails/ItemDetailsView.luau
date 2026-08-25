@@ -37,7 +37,7 @@ local t = {
 	noDescription = "Feature.InExperienceShop.Label.NoDescription"
 }
 
-local function CreatorRow(p0) --[[ line: 81 ]]
+local function CreatorRow(p0)
 	-- upvalues: verifiedBadgesModule (ref), reactModule (ref), text (ref)
 	local creator = p0.creator
 	
@@ -49,7 +49,7 @@ local function CreatorRow(p0) --[[ line: 81 ]]
 	})
 end
 
-local function DetailRow(p1) --[[ line: 93 ]]
+local function DetailRow(p1)
 	-- upvalues: reactModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "row flex-x-between align-y-center size-full-0 auto-y padding-y-medium",
@@ -68,7 +68,7 @@ local function DetailRow(p1) --[[ line: 93 ]]
 	})
 end
 
-return function(p2) --[[ line: 115 | named "ItemDetailsView" ]]
+return function(p2)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), DetailRow (ref), divider (ref), view (ref), text (ref), CreatorRow (ref), icon (ref), constantsModule (ref), iconSize (ref), formatPriceModule (ref), REPORT_MENU_ITEM_ID (ref), REPORT_ICON (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), iconButton (ref), OVERFLOW_ICON (ref), buttonVariant (ref), button (ref), fillBehavior (ref), image (ref), iconName (ref)
 	local var10 = useLocalization(t)
 	local var11 = if p2.description == nil or p2.description == "" then var10.noDescription else p2.description

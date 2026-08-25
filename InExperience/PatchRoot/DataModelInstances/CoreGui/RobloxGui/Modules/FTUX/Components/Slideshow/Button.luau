@@ -10,7 +10,7 @@ local withLocalization = require(corePackagesService.Workspace.Packages.Localiza
 local _ = require(parent.Enums.PlatformEnum)
 local buttonEnumModule = require(parent.Enums.ButtonEnum)
 
-return function(p0) --[[ line: 23 | named "SlideshowButton" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), FTUXSlideshowDataModule (ref), withLocalization (ref), buttonType (ref), buttonEnumModule (ref), reactModule (ref), button (ref)
 	local font = useStyle().Font
 	local increaseCurrentIndex = p0.increaseCurrentIndex
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 23 | named "SlideshowButton" ]]
 	return withLocalization({
 		skip = "CoreScripts.VRFTUX.Action.Skip",
 		next = "CoreScripts.VRFTUX.Action.Next"
-	})(function(p1) --[[ line: 36 ]]
+	})(function(p1)
 		-- upvalues: buttonType (copy), button_1 (ref), buttonEnumModule (copy), reactModule (copy), button (copy), font (ref), increaseCurrentIndex (ref)
 		local secondary = buttonType.Secondary
 		local skip = p1.skip

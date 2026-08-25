@@ -5,14 +5,14 @@ local promiseModule = require(parent.Parent.Promise)
 local APIUtilModule = require(parent.util.APIUtil)
 
 return {
-	fetch = function() --[[ line: 42 ]]
+	fetch = function()
 		-- upvalues: promiseModule (ref), httpService (ref), httpRbxApiService (ref), APIUtilModule (ref)
-		return promiseModule.try(function() --[[ line: 43 ]]
+		return promiseModule.try(function()
 			-- upvalues: httpService (copy), httpRbxApiService (copy), APIUtilModule (copy)
 			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(`https://itemconfiguration.{APIUtilModule.getBaseDomain()}/v1/bundles/metadata`))
 		end)
 	end,
-	mock = function() --[[ line: 50 ]]
+	mock = function()
 		return {
 			isBundlesControllerEnabled = true,
 			isBundlesCreationEnabled = true,

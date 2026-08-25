@@ -7,7 +7,7 @@ local assetInfoModule = require(profilePlatform.Common.AssetInfo)
 local enumsModule = require(profilePlatform.Common.Enums)
 
 return roduxModule.createReducer({}, {
-	[networkingCatalogModule.GetItemAndBundleDetails.Succeeded.name] = function(p0, p1) --[[ line: 23 ]]
+	[networkingCatalogModule.GetItemAndBundleDetails.Succeeded.name] = function(p0, p1)
 		-- upvalues: enumsModule (ref), assetInfoModule (ref), cryoModule (ref)
 		local t = {}
 		

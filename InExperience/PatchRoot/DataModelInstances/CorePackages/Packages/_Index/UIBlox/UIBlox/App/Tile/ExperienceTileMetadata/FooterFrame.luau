@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local cryoModule = require(parent.Cryo)
 local t = { size = UDim2.fromScale(1, 1) }
 
-return function(p0) --[[ line: 22 | named "FooterFrame" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref)
 	local var3 = cryoModule.Dictionary.join(t, p0)
 	

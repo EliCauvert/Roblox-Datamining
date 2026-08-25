@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 ]]
+﻿return function(p0, p1)
 	local descendants = p0:GetDescendants()
 	table.insert(descendants, p0)
 	local t = {}

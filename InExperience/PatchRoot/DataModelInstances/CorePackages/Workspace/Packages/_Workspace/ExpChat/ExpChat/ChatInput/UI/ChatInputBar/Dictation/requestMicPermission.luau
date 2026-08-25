@@ -6,15 +6,15 @@ local t = {
 }
 
 return {
-	requestMicPermission = function() --[[ line: 23 ]]
+	requestMicPermission = function()
 		-- upvalues: default (ref), t (ref)
-		return default:hasPermissions({ default.Permissions.MICROPHONE_ACCESS }):andThen(function(p1) --[[ line: 25 ]]
+		return default:hasPermissions({ default.Permissions.MICROPHONE_ACCESS }):andThen(function(p1)
 			-- upvalues: default (copy), t (copy)
-			return if p1.status == default.Status.AUTHORIZED then { status = t.AlreadyAllowed } else default:requestPermissions({ default.Permissions.MICROPHONE_ACCESS }):andThen(function(p2) --[[ line: 30 ]]
+			return if p1.status == default.Status.AUTHORIZED then { status = t.AlreadyAllowed } else default:requestPermissions({ default.Permissions.MICROPHONE_ACCESS }):andThen(function(p2)
 				-- upvalues: default (copy), t (copy)
 				return if p2.status == default.Status.AUTHORIZED then { status = t.Granted } else { status = t.Denied }
 			end)
-		end):catch(function(p0) --[[ line: 37 ]]
+		end):catch(function(p0)
 			-- upvalues: t (copy)
 			return { status = t.Denied, error = tostring(p0) }
 		end)

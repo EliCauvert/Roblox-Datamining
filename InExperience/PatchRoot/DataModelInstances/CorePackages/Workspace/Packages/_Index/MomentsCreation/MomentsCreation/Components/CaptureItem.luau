@@ -12,9 +12,9 @@ local getFormatTimeModule = require(momentsCreation.Utils.getFormatTime)
 local useCallback = reactModule.useCallback
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useCallback (ref), reactModule (ref), view (ref), foundationModule (ref), gradientBackdrop (ref), checkbox (ref), text (ref), getFormatTimeModule (ref), getCaptureContentModule (ref)
-	local var6 = useCallback(function() --[[ line: 37 ]]
+	local var6 = useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onActivated(p0.capture)
 	end, { p0.capture, p0.onActivated })
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 34 ]]
 				isChecked = true,
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
-				onActivated = function(_) --[[ line: 66 ]]
+				onActivated = function(_)
 					-- upvalues: var6 (ref)
 					var6()
 				end,

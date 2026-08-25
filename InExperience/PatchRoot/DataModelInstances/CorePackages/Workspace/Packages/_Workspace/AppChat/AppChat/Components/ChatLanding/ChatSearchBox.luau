@@ -12,9 +12,9 @@ local t = {
 	layoutOrder = -1
 }
 
-local var5 = function() --[[ line: 32 ]] end
+local var5 = function() end
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useLocalization (ref), reactModule (ref), searchTopBarModule (ref), var5 (ref)
 	local var6 = cryoModule.Dictionary.union(t, p0)
 	local var7 = useLocalization({

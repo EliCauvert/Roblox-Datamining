@@ -6,11 +6,11 @@ local useState = reactModule.useState
 local _ = require(parent.cache)
 local t_1 = { __value = "nil placeholder" }
 
-function t.useReactiveVar(p0) --[[ line: 25 ]]
+function t.useReactiveVar(p0)
 	-- upvalues: useState (ref), useEffect (ref), t_1 (ref)
 	local var3 = p0()
 	local _, var4 = useState(var3)
-	useEffect(function() --[[ line: 34 ]]
+	useEffect(function()
 		-- upvalues: p0 (ref), var3 (ref), var4 (ref)
 		local var5 = p0()
 		

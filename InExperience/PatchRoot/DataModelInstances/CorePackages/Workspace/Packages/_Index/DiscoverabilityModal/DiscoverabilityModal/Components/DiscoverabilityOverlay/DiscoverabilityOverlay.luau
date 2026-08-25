@@ -22,7 +22,7 @@ local t = {
 	["nil"] = "Unset"
 }
 
-return function(p0) --[[ line: 55 ]]
+return function(p0)
 	-- upvalues: playersService (ref), discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule (ref), react (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), eventNamesModule (ref), t (ref), imageSetLabel (ref), images (ref), iconSize (ref), checkbox (ref), styledTextLabel (ref), radioButtonList (ref), partialPageModal (ref), buttonType (ref)
 	local titleText, var13, var14, frame, infoText, color
 	local var6 = if playersService.LocalPlayer and discoverabilityUpsellNonPrefillDiscoverableUserIdsWhitelistModule.isWhitelistedUserId(playersService.LocalPlayer.UserId) then false else p0.prefillDiscoverabilitySetting
@@ -43,13 +43,13 @@ return function(p0) --[[ line: 55 ]]
 		infoTextPrefillDiscoverable = textKeysModule.DISCOVERABILITY_INFO_PREFILL_DISCOVERABLE
 	})
 	
-	local var11 = function(p1) --[[ line: 83 ]]
+	local var11 = function(p1)
 		-- upvalues: p0 (ref), eventNamesModule (copy), t (copy), var8 (ref)
 		p0.analytics.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = t[tostring(p1)] })
 		var8(p1)
 	end
 	
-	local var12 = function() --[[ line: 90 ]]
+	local var12 = function()
 		-- upvalues: p0 (ref), t (copy), var7 (ref)
 		p0.onActivated(t[tostring(var7)])
 	end
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 55 ]]
 	local _ = nil
 	
 	if var6 then
-		local var16 = function() --[[ line: 96 ]]
+		local var16 = function()
 			-- upvalues: var7 (ref), p0 (ref), eventNamesModule (copy), t (copy), var8 (ref)
 			local var17 = if var7 == 1 then 2 else 1
 			p0.analytics.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalRadioButtonClick, { selected = t[tostring(var17)] })
@@ -155,7 +155,7 @@ return function(p0) --[[ line: 55 ]]
 	return react.createElement(partialPageModal, {
 		title = titleText,
 		screenSize = p0.screenSize,
-		onCloseClicked = function() --[[ line: 190 ]]
+		onCloseClicked = function()
 			-- upvalues: p0 (ref), t (copy), var7 (ref)
 			p0.onCloseClicked(t[tostring(var7)])
 		end,

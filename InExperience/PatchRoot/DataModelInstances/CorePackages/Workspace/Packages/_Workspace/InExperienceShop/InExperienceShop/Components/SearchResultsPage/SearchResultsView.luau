@@ -17,7 +17,7 @@ local _ = require(inExperienceShop.Types)
 local formattedText = string.format("Type at least %d characters to search", require(inExperienceShop.Constants).SEARCH_MIN_LENGTH)
 local t = { emptyText = "CommonUI.Messages.Response.NoResults" }
 
-return function(p0) --[[ line: 51 | named "SearchResultsView" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useShopImpressionsDetectorModule (ref), var6 (ref), reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), itemRowModule (ref), var7 (ref), formattedText (ref), view (ref), scrollView (ref), foundationModule (ref), text (ref)
 	local var11 = useShopImpressionsDetectorModule({
 		isPageActive = true,
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 51 | named "SearchResultsView" ]]
 	}, {
 		Scroll = if var12 == nil then reactModule.createElement(scrollView, {
 			Size = UDim2.fromScale(1, 1),
-			onCanvasPositionChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_) --[[ line: 60 ]]
+			onCanvasPositionChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_)
 				-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var11 (ref)
 				if fFlagEnableInExperienceShopUnifiedLoggingModule then
 					var11.onLayoutChange()
@@ -49,11 +49,11 @@ return function(p0) --[[ line: 51 | named "SearchResultsView" ]]
 			Content = reactModule.createElement(view, {
 				tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
 				ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var11.gridRef else nil,
-				onAbsoluteSizeChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then function(_) --[[ line: 122 ]]
+				onAbsoluteSizeChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
 					-- upvalues: var11 (ref)
 					var11.onLayoutChange()
 				end else nil
-			}, reactModule.useMemo(function() --[[ line: 66 ]]
+			}, reactModule.useMemo(function()
 				-- upvalues: p0 (ref), reactModule (copy), itemRowModule (copy), var7 (copy)
 				if p0.state ~= "results" then
 					return {}

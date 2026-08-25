@@ -1,7 +1,7 @@
 ﻿local conversationChannelsModule = require(script:FindFirstAncestor("AppChat").Models.ConversationChannels)
 local _ = require(script.Parent.serializeChatTimeoutRange)
 
-return function(p0, p1, p2, p3) --[[ line: 15 | named "getEffectiveChatTimeoutDetails" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: conversationChannelsModule (ref)
 	p3 = p3 or DateTime.now().UnixTimestamp
 	local var2 = if p0 and p0.endTimestamp then p0.endTimestamp else 0

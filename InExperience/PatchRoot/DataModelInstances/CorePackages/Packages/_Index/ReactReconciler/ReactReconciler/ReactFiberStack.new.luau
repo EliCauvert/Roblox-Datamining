@@ -8,14 +8,14 @@ local var3 = if reactGlobalsModule.__DEV__ then {} else nil
 local var4 = 0
 
 return {
-	createCursor = function(p0) --[[ line: 36 ]]
+	createCursor = function(p0)
 		return { current = p0 }
 	end,
-	isEmpty = function() --[[ line: 42 ]]
+	isEmpty = function()
 		-- upvalues: var4 (write)
 		return var4 == 0
 	end,
-	pop = function(p1, p2) --[[ line: 46 ]]
+	pop = function(p1, p2)
 		-- upvalues: var4 (write), reactGlobalsModule (ref), console (ref), var3 (write), t_1 (ref), t (ref)
 		if var4 < 1 then
 			if reactGlobalsModule.__DEV__ then
@@ -39,7 +39,7 @@ return {
 		end
 		var4 -= 1
 	end,
-	push = function(p3, p4, p5) --[[ line: 78 ]]
+	push = function(p3, p4, p5)
 		-- upvalues: var4 (write), t_1 (ref), t (ref), reactGlobalsModule (ref), var3 (write)
 		var4 += 1
 		local current = p3.current
@@ -54,13 +54,13 @@ return {
 		end
 		p3.current = p4
 	end,
-	checkThatStackIsEmpty = function() --[[ line: 95 ]]
+	checkThatStackIsEmpty = function()
 		-- upvalues: reactGlobalsModule (ref), var4 (write), console (ref)
 		if reactGlobalsModule.__DEV__ and var4 ~= 0 then
 			console.error("Expected an empty stack. Something was not reset properly.")
 		end
 	end,
-	resetStackAfterFatalErrorInDev = function() --[[ line: 103 ]]
+	resetStackAfterFatalErrorInDev = function()
 		-- upvalues: reactGlobalsModule (ref), var4 (write), t_1 (ref), var3 (write)
 		if reactGlobalsModule.__DEV__ then
 			var4 = 0

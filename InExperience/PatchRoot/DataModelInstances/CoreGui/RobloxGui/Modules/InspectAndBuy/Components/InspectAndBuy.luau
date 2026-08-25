@@ -63,7 +63,7 @@ local fFlagAXEnableNewInspectAndBuyContainerModule = require(parent.Flags.FFlagA
 local overrideCursorInspectMenu = symbol.named("OverrideCursorInspectMenu")
 local inspectAndBuy = roactModule.PureComponent:extend("InspectAndBuy")
 
-function inspectAndBuy.pushMouseIconOverride(_) --[[ line: 87 ]]
+function inspectAndBuy.pushMouseIconOverride(_)
 	-- upvalues: userInputService (ref), mouseIconOverrideService (ref), overrideCursorInspectMenu (ref)
 	if userInputService:GetLastInputType().Name:find("Gamepad") then
 		mouseIconOverrideService.push(overrideCursorInspectMenu, Enum.OverrideMouseIconBehavior.ForceHide)
@@ -73,12 +73,12 @@ function inspectAndBuy.pushMouseIconOverride(_) --[[ line: 87 ]]
 	mouseIconOverrideService.push(overrideCursorInspectMenu, Enum.OverrideMouseIconBehavior.ForceShow)
 end
 
-function inspectAndBuy.popMouseIconOverride(_) --[[ line: 98 ]]
+function inspectAndBuy.popMouseIconOverride(_)
 	-- upvalues: mouseIconOverrideService (ref), overrideCursorInspectMenu (ref)
 	mouseIconOverrideService.pop(overrideCursorInspectMenu)
 end
 
-function inspectAndBuy.configureInputType(p0, p1) --[[ line: 102 ]]
+function inspectAndBuy.configureInputType(p0, p1)
 	-- upvalues: userInputService (ref), setGamepadEnabledModule (ref)
 	if (p1 or userInputService:GetLastInputType()).Name:find("Gamepad") then
 		p0.state.store:dispatch(setGamepadEnabledModule(true))
@@ -88,7 +88,7 @@ function inspectAndBuy.configureInputType(p0, p1) --[[ line: 102 ]]
 	p0.state.store:dispatch(setGamepadEnabledModule(false))
 end
 
-function inspectAndBuy.updateView(p2) --[[ line: 113 ]]
+function inspectAndBuy.updateView(p2)
 	-- upvalues: fFlagAXEnableNewInspectAndBuyContainerModule (ref), setViewModule (ref), getViewType (ref), constantsModule (ref)
 	local viewportSize = workspace.CurrentCamera.ViewportSize
 	
@@ -107,7 +107,7 @@ function inspectAndBuy.updateView(p2) --[[ line: 113 ]]
 	p2.state.store:dispatch(setViewModule(wide))
 end
 
-function inspectAndBuy.init(p3) --[[ line: 131 ]]
+function inspectAndBuy.init(p3)
 	-- upvalues: networkModule (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), analyticsModule (ref), fFlagEnableInspectAndBuyV2RootFlag (ref), inspectAndBuyVersion (ref), roduxModule (ref), inspectAndBuyReducerModule (ref), thunkModule (ref), constantsModule (ref), compactViewModule (ref), wideViewModule (ref), wideLandscapeViewModule (ref), updateStoreIdModule (ref), setPlayerNameModule (ref), setLocaleModule (ref), localizationService (ref), setPlayerIdModule (ref), var38 (ref), updateOwnedStatusModule (ref), setItemBeingPurchasedModule (ref)
 	local playerId = p3.props.playerId
 	local playerName = p3.props.playerName
@@ -140,7 +140,7 @@ function inspectAndBuy.init(p3) --[[ line: 131 ]]
 	if p3.humanoidDescription then
 		p3.state.store:dispatch(var38(p3.humanoidDescription, false))
 	end
-	function p3.onPromptPurchaseFinished(_, p4, p5) --[[ line: 184 ]]
+	function p3.onPromptPurchaseFinished(_, p4, p5)
 		-- upvalues: p3 (ref), constantsModule (copy), updateOwnedStatusModule (copy), setItemBeingPurchasedModule (copy)
 		local itemBeingPurchased = p3.state.store:getState().itemBeingPurchased
 		p3.analytics.sendCounter(constantsModule.Counters.PurchaseFinished)
@@ -161,7 +161,7 @@ function inspectAndBuy.init(p3) --[[ line: 131 ]]
 	end
 end
 
-function inspectAndBuy.didMount(p6) --[[ line: 204 ]]
+function inspectAndBuy.didMount(p6)
 	-- upvalues: AXEnableInspectAndBuyExposureLogging (ref), ixpUtilsModule (ref), AXInspectAndBuyLayerName (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var17 (ref), userInputService (ref), localizationService (ref), setLocaleModule (ref), guiService (ref), cachedPolicyServiceModule (ref), setIsSubjectToChinaPoliciesModule (ref), marketplaceService (ref), playersService (ref), getCharacterModelFromUserIdModule (ref), var38 (ref), getPlayerNameModule (ref)
 	local playerId = p6.props.playerId
 	p6.isMounted = true
@@ -176,34 +176,34 @@ function inspectAndBuy.didMount(p6) --[[ line: 204 ]]
 	if fFlagEnableConsoleExpControls and enabled() then
 		var17:setHideShortcutBar("InspectAndBuy", true)
 	end
-	local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p7) --[[ line: 221 ]]
+	local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p7)
 		-- upvalues: p6 (ref)
 		p6:configureInputType(p7)
 	end)
-	local var52 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 227 ]]
+	local var52 = workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 		-- upvalues: p6 (ref)
 		p6:updateView()
 	end)
-	local var53 = localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ line: 231 ]]
+	local var53 = localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
 		-- upvalues: p6 (ref), setLocaleModule (copy), localizationService (copy)
 		p6.state.store:dispatch(setLocaleModule(localizationService.RobloxLocaleId))
 	end)
-	local menuOpenedConnection = guiService.MenuOpened:Connect(function() --[[ line: 235 ]]
+	local menuOpenedConnection = guiService.MenuOpened:Connect(function()
 		-- upvalues: p6 (ref), guiService (copy)
 		p6:popMouseIconOverride()
 		guiService.SelectedCoreObject = nil
 	end)
-	local menuClosedConnection = guiService.MenuClosed:Connect(function() --[[ line: 240 ]]
+	local menuClosedConnection = guiService.MenuClosed:Connect(function()
 		-- upvalues: p6 (ref)
 		p6:pushMouseIconOverride()
 	end)
-	coroutine.wrap(function() --[[ line: 244 ]]
+	coroutine.wrap(function()
 		-- upvalues: cachedPolicyServiceModule (copy), p6 (ref), setIsSubjectToChinaPoliciesModule (copy)
 		p6.state.store:dispatch(setIsSubjectToChinaPoliciesModule(cachedPolicyServiceModule:IsSubjectToChinaPolicies()))
 	end)()
 	local promptPurchaseFinishedConnection = marketplaceService.PromptPurchaseFinished:Connect(p6.onPromptPurchaseFinished)
 	local promptBundlePurchaseFinishedConnection = marketplaceService.PromptBundlePurchaseFinished:Connect(p6.onPromptPurchaseFinished)
-	local changedConnection = p6.state.store.changed:connect(function(p8, p9) --[[ line: 257 ]]
+	local changedConnection = p6.state.store.changed:connect(function(p8, p9)
 		-- upvalues: p6 (ref)
 		p6:update(p8, p9)
 	end)
@@ -215,7 +215,7 @@ function inspectAndBuy.didMount(p6) --[[ line: 204 ]]
 	table.insert(p6.connections, promptPurchaseFinishedConnection)
 	table.insert(p6.connections, promptBundlePurchaseFinishedConnection)
 	table.insert(p6.connections, changedConnection)
-	p6.state.store:dispatch(getCharacterModelFromUserIdModule(playersService.LocalPlayer.UserId, true, function(p10) --[[ line: 271 ]]
+	p6.state.store:dispatch(getCharacterModelFromUserIdModule(playersService.LocalPlayer.UserId, true, function(p10)
 		-- upvalues: p6 (ref), var38 (copy)
 		if p6 and p6.isMounted then
 			p6.localPlayerModel = p10
@@ -229,7 +229,7 @@ function inspectAndBuy.didMount(p6) --[[ line: 204 ]]
 	end))
 	
 	if playerId then
-		p6.state.store:dispatch(getCharacterModelFromUserIdModule(playerId, false, function(p11) --[[ line: 287 ]]
+		p6.state.store:dispatch(getCharacterModelFromUserIdModule(playerId, false, function(p11)
 			-- upvalues: p6 (ref), var38 (copy)
 			if p6 and p6.isMounted then
 				p6.playerModel = p11
@@ -245,7 +245,7 @@ function inspectAndBuy.didMount(p6) --[[ line: 204 ]]
 	end
 end
 
-function inspectAndBuy.update(p12, p13, p14) --[[ line: 306 ]]
+function inspectAndBuy.update(p12, p13, p14)
 	-- upvalues: contextActionService (ref)
 	if not p13.visible and p14.visible then
 		contextActionService:UnbindCoreAction("BackButtonInspectMenu")
@@ -256,7 +256,7 @@ function inspectAndBuy.update(p12, p13, p14) --[[ line: 306 ]]
 	end
 end
 
-function inspectAndBuy.willUnmount(p15) --[[ line: 314 ]]
+function inspectAndBuy.willUnmount(p15)
 	-- upvalues: contextActionService (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var17 (ref)
 	p15.isMounted = false
 	
@@ -271,7 +271,7 @@ function inspectAndBuy.willUnmount(p15) --[[ line: 314 ]]
 	end
 end
 
-function inspectAndBuy.render(p16) --[[ line: 328 ]]
+function inspectAndBuy.render(p16)
 	-- upvalues: fFlagAXEnableNewInspectAndBuyContainerModule (ref), roactModule (ref), coreScriptsRootProvider (ref), fFlagAXEnableInspectAndBuyFocusNavigation (ref), roactRoduxModule (ref), inspectAndBuyBaseContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), inspectAndBuyContextModule (ref), renderWithCoreScriptsStyleProviderModule (ref), selectionCursorProvider (ref), containerModule (ref)
 	local localPlayerModel = p16.localPlayerModel
 	
@@ -306,9 +306,9 @@ function inspectAndBuy.render(p16) --[[ line: 328 ]]
 	})
 end
 
-function inspectAndBuy.bindButtonB(p17) --[[ line: 382 ]]
+function inspectAndBuy.bindButtonB(p17)
 	-- upvalues: contextActionService (ref), closeOverlayModule (ref), setDetailsInformationModule (ref), setTryingOnInfoModule (ref), guiService (ref)
-	contextActionService:BindCoreAction("BackButtonInspectMenu", function(_, p18, p19) --[[ line: 383 ]]
+	contextActionService:BindCoreAction("BackButtonInspectMenu", function(_, p18, p19)
 		-- upvalues: p17 (ref), closeOverlayModule (copy), setDetailsInformationModule (copy), setTryingOnInfoModule (copy), guiService (copy)
 		if p18 == Enum.UserInputState.End and p19.KeyCode == Enum.KeyCode.ButtonB then
 			local state = p17.state.store:getState()

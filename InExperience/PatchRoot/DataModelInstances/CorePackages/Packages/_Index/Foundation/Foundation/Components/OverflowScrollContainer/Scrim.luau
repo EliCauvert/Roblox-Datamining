@@ -19,7 +19,7 @@ local t = {
 	duration = tokensModule.defaultTokens.Time.Time_200
 }
 
-local function lerpNumberSequence(startValue, endValue, alpha) --[[ line: 29 ]]
+local function lerpNumberSequence(startValue, endValue, alpha)
 	local keypoints = startValue.Keypoints
 	local keypoints_1 = endValue.Keypoints
 	local t = {}
@@ -31,31 +31,31 @@ local function lerpNumberSequence(startValue, endValue, alpha) --[[ line: 29 ]]
 	return NumberSequence.new(t)
 end
 
-return function(p0) --[[ line: 54 | named "Scrim" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), useBackgroundStyle (ref), useScrimVariantsModule (ref), reactOtterModule (ref), reactModule (ref), t (ref), lerpNumberSequence (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), iconModule (ref)
 	local var15 = useBackgroundStyle()
 	local var16 = useScrimVariantsModule(useTokensModule(), p0.alignment, p0.preferredInput)
 	local var17 = p0.alignment == Enum.HorizontalAlignment.Right
 	local var18 = if p0.preferredInput ~= Enum.PreferredInput.Touch then p0.preferredInput == Enum.PreferredInput.Gamepad else true
 	local var19, var20 = reactOtterModule.useAnimatedBinding(if p0.isHovered then 1 else 0)
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), reactOtterModule (copy), p0 (ref), t (copy)
 		var20(reactOtterModule.ease(if p0.isHovered then 1 else 0, t))
 	end, { p0.isHovered })
-	local var21 = var19:map(function(p1) --[[ line: 68 ]]
+	local var21 = var19:map(function(p1)
 		-- upvalues: var18 (ref), var17 (ref)
 		return if var18 then UDim2.fromScale(0.5, 0.5) else UDim2.fromScale(0.5 + (if var17 then 1 else -1) * (1 - p1), 0.5)
 	end)
-	local var22 = p0.rowHeight:map(function(p2) --[[ line: 76 ]]
+	local var22 = p0.rowHeight:map(function(p2)
 		-- upvalues: var16 (ref)
 		return UDim2.new(0, p2 + var16.fade, 1, 0)
 	end)
-	local var23 = var19:map(function(p3) --[[ line: 80 ]]
+	local var23 = var19:map(function(p3)
 		-- upvalues: var18 (ref), var16 (ref), lerpNumberSequence (copy)
 		return if var18 then var16.hoverGradient else lerpNumberSequence(var16.gradient, var16.hoverGradient, p3)
 	end)
 	local var24, var25 = reactOtterModule.useAnimatedBinding(if p0.isVisible then 0 else 1)
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), reactOtterModule (copy), p0 (ref), t (copy)
 		var25(reactOtterModule.ease(if p0.isVisible then 0 else 1, t))
 	end, { p0.isVisible })

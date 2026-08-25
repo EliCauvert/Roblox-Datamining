@@ -12,7 +12,7 @@ local t = {
 	position = UDim2.fromScale(0, 0)
 }
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useMemo (ref), getEasingNumberSequenceModule (ref), reactModule (ref), view (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 34 ]]
 				ColorSequenceKeypoint.new(1, var5.color3)
 			}),
 			Rotation = var5.rotation,
-			Transparency = useMemo(function() --[[ line: 37 ]]
+			Transparency = useMemo(function()
 				-- upvalues: getEasingNumberSequenceModule (copy), var5 (ref)
 				return NumberSequence.new(getEasingNumberSequenceModule(var5.startingTransparency, var5.endingTransparency, 15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut))
 			end, { var5.startingTransparency, var5.endingTransparency })

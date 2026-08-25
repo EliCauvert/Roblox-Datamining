@@ -1,13 +1,13 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueDirectiveNamesRule = function(p0) --[[ line: 19 ]]
+	UniqueDirectiveNamesRule = function(p0)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		local schema = p0:getSchema()
 		
 		return {
-			DirectiveDefinition = function(_, p1) --[[ line: 24 ]]
+			DirectiveDefinition = function(_, p1)
 				-- upvalues: schema (ref), p0 (ref), graphQLError (copy), t (ref)
 				local value = p1.name.value
 				

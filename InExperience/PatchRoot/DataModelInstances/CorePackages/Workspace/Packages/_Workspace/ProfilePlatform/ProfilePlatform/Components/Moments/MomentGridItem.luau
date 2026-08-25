@@ -20,13 +20,13 @@ local momentMediaTile = momentsCommonModule.Media.MomentMediaTile
 local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
 local thumbUp = builderIconsModule.Icon.ThumbUp
 
-return function(p0) --[[ line: 48 | named "MomentGridItem" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), makeProfileTileFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), toMediaItemModule (ref), controlState (ref), fFlagProfileMomentsOrderingAndReactions (ref), view (ref), stateLayerAffordance (ref), momentMediaTile (ref), gradientBackdrop (ref), momentEngagementCountModule (ref), thumbUp (ref)
 	local var11
 	local moment = p0.moment
 	local onHoverChanged = p0.onHoverChanged
 	local var8 = useTokens()
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), moment (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy)
 		if p0.userId and moment.recommendationMetadata then
 			local grid = makeProfileTileFieldsModule.makeProfileTileImpressionFields(moment, p0.userId, "grid", p0.index or 0)
@@ -36,11 +36,11 @@ return function(p0) --[[ line: 48 | named "MomentGridItem" ]]
 			end
 		end
 	end, {})
-	local var9 = reactModule.useMemo(function() --[[ line: 69 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: toMediaItemModule (copy), moment (ref)
 		return toMediaItemModule({ kind = "moment", moment = moment })
 	end, { moment.momentId })
-	local var10 = reactModule.useCallback(function(p1) --[[ line: 73 ]]
+	local var10 = reactModule.useCallback(function(p1)
 		-- upvalues: onHoverChanged (ref), controlState (copy)
 		onHoverChanged(p1 == controlState.Hover)
 	end, { onHoverChanged })

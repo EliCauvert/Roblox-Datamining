@@ -1,6 +1,6 @@
 ﻿local robloxTranslatorModule = require(script.Parent.Parent.Parent.RobloxTranslator)
 
-return function() --[[ line: 7 | named "getPeopleHeaderLabel" ]]
+return function()
 	-- upvalues: robloxTranslatorModule (ref)
 	return robloxTranslatorModule:FormatByKey("InGame.PlayerList.Players")
 end

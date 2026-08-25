@@ -26,7 +26,7 @@ local t_1 = {
 	animationCoolDownTime = 0.75
 }
 
-local function renderIcon(p0, p1) --[[ line: 43 ]]
+local function renderIcon(p0, p1)
 	-- upvalues: foundationModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), reactModule (ref), keyLabelModule (ref), imageSetComponentModule (ref), progressIconAnimatedModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local itemProps = p0.itemProps
@@ -88,7 +88,7 @@ local function renderIcon(p0, p1) --[[ line: 43 ]]
 	})
 end
 
-return function(p2) --[[ line: 119 | named "Shortcut" ]]
+return function(p2)
 	-- upvalues: object (ref), t (ref), t_1 (ref), useStyleModule (ref), foundationModule (ref), reactModule (ref), UIBloxConfigModule (ref), genericTextLabelModule (ref), renderIcon (ref)
 	local var19 = object.assign({}, t, p2)
 	local var20 = object.assign({}, t_1, var19.publicProps)

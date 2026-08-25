@@ -6,25 +6,25 @@ local buttonAssetsModule = require(parent.ButtonAssets)
 local createButtonsTimeModule = require(parent.CreateButtonsTime)
 
 return {
-	setupControl = function(value) --[[ line: 12 ]]
+	setupControl = function(value)
 		-- upvalues: buttonAssetsModule (ref), experienceStateRecordingService (ref), createButtonsTimeModule (ref), replicatedStorageService (ref), userInputService (ref)
 		value.connections = {}
 		
-		function value.SetPlaying() --[[ line: 15 ]]
+		function value.SetPlaying()
 			-- upvalues: value (ref), buttonAssetsModule (copy), experienceStateRecordingService (copy)
 			value.state.Playing = true
 			value.PlayButton.Image = buttonAssetsModule.PauseButton
 			experienceStateRecordingService:SetPlaybackMode(Enum.ExperienceStateRecordingPlaybackMode.Playing)
 		end
 		
-		function value.SetPaused() --[[ line: 22 ]]
+		function value.SetPaused()
 			-- upvalues: value (ref), buttonAssetsModule (copy), experienceStateRecordingService (copy)
 			value.state.Playing = false
 			value.PlayButton.Image = buttonAssetsModule.PlayButton
 			experienceStateRecordingService:SetPlaybackMode(Enum.ExperienceStateRecordingPlaybackMode.Stopped)
 		end
 		
-		function value.ControlButtons(p0) --[[ line: 29 ]]
+		function value.ControlButtons(p0)
 			-- upvalues: value (ref), createButtonsTimeModule (copy), replicatedStorageService (copy), experienceStateRecordingService (copy)
 			value.StopButton.ImageColor3 = createButtonsTimeModule.regularColor
 			value.StopButton:SetAttribute("useHoverColor", true)
@@ -62,19 +62,19 @@ return {
 			end
 		end
 		
-		value.connections.PlayListener = value.PlayButton.MouseButton1Click:Connect(function() --[[ line: 64 ]]
+		value.connections.PlayListener = value.PlayButton.MouseButton1Click:Connect(function()
 			-- upvalues: value (ref)
 			value.ControlButtons(value.PlayButton)
 		end)
-		value.connections.StopListener = value.StopButton.MouseButton1Click:Connect(function() --[[ line: 69 ]]
+		value.connections.StopListener = value.StopButton.MouseButton1Click:Connect(function()
 			-- upvalues: value (ref)
 			value.ControlButtons(value.StopButton)
 		end)
-		value.connections.ReverseListener = value.ReverseButton.MouseButton1Click:Connect(function() --[[ line: 74 ]]
+		value.connections.ReverseListener = value.ReverseButton.MouseButton1Click:Connect(function()
 			-- upvalues: value (ref)
 			value.ControlButtons(value.ReverseButton)
 		end)
-		userInputService.InputBegan:Connect(function(p1, _) --[[ line: 79 ]]
+		userInputService.InputBegan:Connect(function(p1, _)
 			-- upvalues: value (ref)
 			if p1.KeyCode == Enum.KeyCode.Space then
 				value.ControlButtons(value.PlayButton)

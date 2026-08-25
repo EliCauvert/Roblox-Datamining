@@ -9,7 +9,7 @@ local _ = require(buildExperience.Chat.chatTypes)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local BUILD_ASSISTANT_FALLBACK_NAME = localizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
 
-local function _(p0) --[[ line: 41 | named "resolveUniverseIdFromSessionLoad" ]]
+local function _(p0)
 	if p0 == nil then
 		return nil
 	end
@@ -20,11 +20,11 @@ local function _(p0) --[[ line: 41 | named "resolveUniverseIdFromSessionLoad" ]]
 	return if typeof(var8) == "number" and var8 ~= 0 then var8 else nil
 end
 
-local _ = function(p1) --[[ line: 54 | named "gameIconForUniverseId" ]]
+local _ = function(p1)
 	return string.format("rbxthumb://type=GameIcon&id=%d&w=150&h=150", p1)
 end
 
-local function makeTarget(p2, p3, p4, p5) --[[ line: 58 ]]
+local function makeTarget(p2, p3, p4, p5)
 	p2 = p2 or 0
 	
 	return {
@@ -36,7 +36,7 @@ local function makeTarget(p2, p3, p4, p5) --[[ line: 58 ]]
 	}
 end
 
-return function(p6) --[[ line: 74 | named "resumeBuildChat" ]]
+return function(p6)
 	-- upvalues: fFlagBuildLocalization (ref), BUILD_ASSISTANT_FALLBACK_NAME (ref), creatorAgentChatModule (ref), universeConfigurationModule (ref), signalsModule (ref), makeTarget (ref)
 	local sessionId = p6.sessionId
 	local var10 = typeof(sessionId) == "string" and sessionId ~= ""
@@ -53,7 +53,7 @@ return function(p6) --[[ line: 74 | named "resumeBuildChat" ]]
 	end
 	local configurationStore = p6.configurationStore
 	
-	local function _() --[[ line: 93 | named "getConfigurationStore" ]]
+	local function _()
 		-- upvalues: configurationStore (write), universeConfigurationModule (copy)
 		local configurationStore_1 = configurationStore or universeConfigurationModule.getUniverseConfigurationStore()
 		configurationStore = configurationStore_1
@@ -63,7 +63,7 @@ return function(p6) --[[ line: 74 | named "resumeBuildChat" ]]
 	
 	local var14 = false
 	
-	return signalsModule.createEffect(function(p7) --[[ line: 101 ]]
+	return signalsModule.createEffect(function(p7)
 		-- upvalues: var14 (write), var11 (ref), p6 (ref), var13 (write), sessionId (ref), var12 (ref), configurationStore (write), universeConfigurationModule (copy), makeTarget (copy)
 		if var14 then return end
 		local universeId

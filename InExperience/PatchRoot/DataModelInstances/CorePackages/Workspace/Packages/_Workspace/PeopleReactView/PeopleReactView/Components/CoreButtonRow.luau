@@ -10,10 +10,10 @@ local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local fFlagEnablePeoplePageButtonOnMount = flags.FFlagEnablePeoplePageButtonOnMount
 
-local function MemoizedButton(p0) --[[ line: 21 ]]
+local function MemoizedButton(p0)
 	-- upvalues: reactModule (ref), fFlagEnablePeoplePageButtonOnMount (ref), coreButtonModule (ref)
 	local config = p0.config
-	local var8 = reactModule.useCallback(function(p1) --[[ line: 27 ]]
+	local var8 = reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), config (ref), fFlagEnablePeoplePageButtonOnMount (copy)
 		p0.onButtonMount(p1, config.id)
 		
@@ -22,7 +22,7 @@ local function MemoizedButton(p0) --[[ line: 21 ]]
 		end
 	end, { config.onMount, p0.onButtonMount, config.id })
 	
-	return reactModule.useMemo(function() --[[ line: 34 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), coreButtonModule (copy), config (ref), var8 (ref)
 		return reactModule.createElement(coreButtonModule, {
 			text = config.text,
@@ -41,16 +41,16 @@ local function MemoizedButton(p0) --[[ line: 21 ]]
 	})
 end
 
-return function(p2) --[[ line: 62 ]]
+return function(p2)
 	-- upvalues: coreButtonConfigsModule (ref), reactModule (ref), peopleServiceModule (ref), MemoizedButton (ref), view (ref), getFFlagAddPeoplePageCardLayout (ref)
 	local var9 = coreButtonConfigsModule(p2.chromeEnabled, p2.buttonActivatedTable)
-	local var10 = reactModule.useMemo(function() --[[ line: 67 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FocusNavigationService")
 	end, {})
 	local var11 = reactModule.useRef(nil)
 	local var12 = reactModule.useRef({})
-	local var13 = reactModule.useCallback(function(p3, p4) --[[ line: 77 ]]
+	local var13 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var12 (ref)
 		if p3 then
 			var12.current[p4] = p3
@@ -59,12 +59,12 @@ return function(p2) --[[ line: 62 ]]
 		end
 		var12.current[p4] = nil
 	end, {})
-	local var14 = reactModule.useCallback(function(p5) --[[ line: 85 ]]
+	local var14 = reactModule.useCallback(function(p5)
 		-- upvalues: var11 (ref), peopleServiceModule (copy), var10 (ref)
 		var11.current = p5
 		
 		if p5 then
-			var10.registerScrollCallback(-1, function() --[[ line: 89 ]]
+			var10.registerScrollCallback(-1, function()
 				-- upvalues: peopleServiceModule (copy), var11 (copy)
 				local var19 = peopleServiceModule.getService("SettingsHubService").hubRef()
 				
@@ -74,7 +74,7 @@ return function(p2) --[[ line: 62 ]]
 			end)
 		end
 	end, { var10 })
-	reactModule.useEffect(function() --[[ line: 112 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var12 (ref), var10 (ref)
 		local t = {}
 		
@@ -88,14 +88,14 @@ return function(p2) --[[ line: 62 ]]
 			end
 		end
 		if #t > 0 then
-			table.sort(t, function(p6, p7) --[[ line: 126 ]]
+			table.sort(t, function(p6, p7)
 				return p6.LayoutOrder < p7.LayoutOrder
 			end)
 			var10.registerButtonRow(-1, t, 0)
 		end
 	end, {
 		var10,
-		reactModule.useMemo(function() --[[ line: 101 ]]
+		reactModule.useMemo(function()
 			-- upvalues: var9 (ref)
 			local t = {}
 			
@@ -109,15 +109,15 @@ return function(p2) --[[ line: 62 ]]
 			return table.concat(t, ",")
 		end, { var9 })
 	})
-	reactModule.useEffect(function() --[[ line: 135 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref)
-		return function() --[[ line: 136 ]]
+		return function()
 			-- upvalues: var10 (copy)
 			var10.unregisterScrollCallback(-1)
 			var10.unregisterButtonRow(-1)
 		end
 	end, { var10 })
-	local var15 = reactModule.useMemo(function() --[[ line: 143 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref), reactModule (copy), MemoizedButton (copy), var13 (ref)
 		local t = {}
 		
@@ -132,7 +132,7 @@ return function(p2) --[[ line: 62 ]]
 	if #var15 == 0 then
 		return nil
 	end
-	local function _() --[[ line: 169 | named "getButtonElements" ]]
+	local function _()
 		-- upvalues: var15 (ref)
 		local t = {}
 		

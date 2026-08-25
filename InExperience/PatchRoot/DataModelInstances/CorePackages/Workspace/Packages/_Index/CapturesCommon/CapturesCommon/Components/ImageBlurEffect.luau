@@ -2,7 +2,7 @@
 local reactModule = require(parent.Parent.React)
 local blurDirectionModule = require(parent.Enums.BlurDirection)
 
-local function getImageRect(p0, p1) --[[ line: 24 ]]
+local function getImageRect(p0, p1)
 	-- upvalues: blurDirectionModule (ref)
 	local x = p1.X
 	local y = p1.Y
@@ -19,37 +19,37 @@ local function getImageRect(p0, p1) --[[ line: 24 ]]
 	return nil
 end
 
-local function _(p2) --[[ line: 40 | named "getGradientRotation" ]]
+local function _(p2)
 	-- upvalues: blurDirectionModule (ref)
 	return if p2 == blurDirectionModule.Up then 270 elseif p2 == blurDirectionModule.Down then 90 elseif p2 == blurDirectionModule.Left then 180 elseif p2 == blurDirectionModule.Right then 0 else nil
 end
 
-local function getRadialGradientPosition(p3) --[[ line: 54 ]]
+local function getRadialGradientPosition(p3)
 	-- upvalues: blurDirectionModule (ref)
 	return if p3 == blurDirectionModule.Up then UDim2.fromScale(0.5, 1) elseif p3 == blurDirectionModule.Down then UDim2.fromScale(0.5, 0) elseif p3 == blurDirectionModule.Left then UDim2.fromScale(1, 0.5) elseif p3 == blurDirectionModule.Right then UDim2.fromScale(0, 0.5) else nil
 end
 
-local function getTransparency(p4, p5) --[[ line: 68 ]]
-	return if p5 then p5:map(function(p6) --[[ line: 76 ]]
+local function getTransparency(p4, p5)
+	return if p5 then p5:map(function(p6)
 		-- upvalues: p4 (ref)
 		return p4 + (1 - p4) * p6
 	end) else p4
 end
 
-return function(p7) --[[ line: 81 | named "ImageBlurEffect" ]]
+return function(p7)
 	-- upvalues: getImageRect (ref), getRadialGradientPosition (ref), reactModule (ref), getTransparency (ref), blurDirectionModule (ref)
 	local var5 = if p7.gradientColor then p7.gradientColor else Color3.new(0, 0, 0)
 	local var6, var7 = getImageRect(p7.direction, p7.imageSize)
 	local var8 = getRadialGradientPosition(p7.direction)
-	local var9 = reactModule.useMemo(function() --[[ line: 86 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: getTransparency (copy), p7 (ref)
 		return getTransparency(0, p7.transparencyBinding)
 	end, { p7.transparencyBinding })
-	local var10 = reactModule.useMemo(function() --[[ line: 90 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: getTransparency (copy), p7 (ref)
 		return getTransparency(0.9, p7.transparencyBinding)
 	end, { p7.transparencyBinding })
-	local var11 = reactModule.useMemo(function() --[[ line: 94 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: getTransparency (copy), p7 (ref)
 		return getTransparency(0.8, p7.transparencyBinding)
 	end, { p7.transparencyBinding })

@@ -31,15 +31,15 @@ local t_1 = {
 	["'"] = "&apos;"
 }
 
-local function _(p0) --[[ line: 58 | named "useEscapedRichText" ]]
+local function _(p0)
 	-- upvalues: reactModule (ref), t_1 (ref)
-	return reactModule.useMemo(function() --[[ line: 59 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p0 (ref), t_1 (copy)
 		return string.gsub(p0, "[&<>\"']", t_1)
 	end, { p0 })
 end
 
-local function UserMessageBubble(p1) --[[ line: 64 ]]
+local function UserMessageBubble(p1)
 	-- upvalues: useTokens (ref), fFlagBuildExperienceRichTextUserMessagesModule (ref), reactModule (ref), t_1 (ref), text (ref), t (ref), view (ref)
 	local var13 = useTokens()
 	
@@ -53,7 +53,7 @@ local function UserMessageBubble(p1) --[[ line: 64 ]]
 			cornerRadius = UDim.new(0, var13.Size.Size_500),
 			onSecondaryActivated = p1.onSecondaryActivated,
 			stateLayer = if p1.onSecondaryActivated ~= nil then nil else t,
-			Text = reactModule.useMemo(function() --[[ line: 59 ]]
+			Text = reactModule.useMemo(function()
 				-- upvalues: messageText (ref), t_1 (copy)
 				return string.gsub(messageText, "[&<>\"']", t_1)
 			end, { messageText }),
@@ -75,7 +75,7 @@ local function UserMessageBubble(p1) --[[ line: 64 ]]
 	})
 end
 
-local function CopyableUserMessageBubble(p2) --[[ line: 101 ]]
+local function CopyableUserMessageBubble(p2)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var8 (ref), iconName (ref), menu (ref), popoverAlign (ref), default (ref), popoverSide (ref), inputSize (ref), UserMessageBubble (ref)
 	local var14 = if fFlagBuildLocalization then useLocalization({ copyText = localizationStringsModule.CHAT_COPY_TEXT }) else nil
 	local var15, var16 = reactModule.useState(false)
@@ -92,14 +92,14 @@ local function CopyableUserMessageBubble(p2) --[[ line: 101 ]]
 				text = if fFlagBuildLocalization then var14.copyText else localizationStringsModule.CHAT_COPY_TEXT
 			}
 		},
-		onActivated = function(p3) --[[ line: 122 ]]
+		onActivated = function(p3)
 			-- upvalues: default (copy), p2 (ref), var16 (ref)
 			if p3 == "copy-text" then
 				default:setClipboardText({ context = "Build-UserMessage", text = p2.messageText })
 			end
 			var16(false)
 		end,
-		onPressedOutside = function() --[[ line: 131 ]]
+		onPressedOutside = function()
 			-- upvalues: var16 (ref)
 			var16(false)
 		end,
@@ -109,7 +109,7 @@ local function CopyableUserMessageBubble(p2) --[[ line: 101 ]]
 		Bubble = reactModule.createElement(UserMessageBubble, {
 			testId = "ChatUserMessage.Bubble",
 			messageText = p2.messageText,
-			onSecondaryActivated = function() --[[ line: 139 ]]
+			onSecondaryActivated = function()
 				-- upvalues: fFlagBuildExperienceUserMessageHapticFeedbackModule (copy), var17 (ref), var16 (ref)
 				if fFlagBuildExperienceUserMessageHapticFeedbackModule then
 					var17("Default", "SecondaryActivated")
@@ -120,7 +120,7 @@ local function CopyableUserMessageBubble(p2) --[[ line: 101 ]]
 	})
 end
 
-return reactModule.memo(function(p4) --[[ line: 150 | named "ChatUserMessage" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: reactModule (ref), view (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), CopyableUserMessageBubble (ref), UserMessageBubble (ref)
 	local text = p4.message.text
 	

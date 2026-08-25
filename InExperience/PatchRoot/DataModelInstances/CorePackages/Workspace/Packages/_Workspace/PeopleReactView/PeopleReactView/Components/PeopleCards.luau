@@ -29,7 +29,7 @@ local fFlagPeopleCardsEnableVirtualizedGrid = flags.FFlagPeopleCardsEnableVirtua
 local maxNumUniversesExposedToCardTooltip = game:DefineFastInt("MaxNumUniversesExposedToCardTooltip", 3)
 local var16 = false
 
-return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useScaledValue (ref), constantsModule (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), useCardLayoutValuesModule (ref), useCardWidthModule (ref), reactModule (ref), useGetPeopleServiceModule (ref), getFFlagPeoplePageEnablePersonSignalStore (ref), signalsReactModule (ref), getFFlagPeoplePageLazyRenderCards (ref), useLastInputMode (ref), usePreferredInput (ref), input (ref), var16 (write), maxNumUniversesExposedToCardTooltip (ref), fFlagPeoplePageRemoveUseMemoElements (ref), lazyPersonCardModule (ref), personCardModule (ref), localPlayer (ref), virtualizedGridModule (ref), view (ref)
 	local var26
 	local medium = useTokens().Gap.Medium
@@ -64,11 +64,11 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 	local var35 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalState(var33.peopleSignalMap.getCount) else nil
 	local var36 = if getFFlagPeoplePageLazyRenderCards() then useLastInputMode() else nil
 	local var37 = if getFFlagPeoplePageLazyRenderCards() then usePreferredInput() else nil
-	local var38 = if getFFlagPeoplePageLazyRenderCards() then reactModule.useMemo(function() --[[ line: 92 ]]
+	local var38 = if getFFlagPeoplePageLazyRenderCards() then reactModule.useMemo(function()
 		-- upvalues: var36 (ref), var37 (ref), input (copy)
 		return if var36 ~= "Focus" then var37 ~= input.Pointer else true
 	end, { var36, var37 }) else nil
-	local var39 = reactModule.useMemo(function() --[[ line: 98 ]]
+	local var39 = reactModule.useMemo(function()
 		-- upvalues: fFlagPeopleCardsEnableVirtualizedGrid (copy), var29 (write), var16 (copy), p0 (ref), constantsModule (copy), maxNumUniversesExposedToCardTooltip (copy)
 		if fFlagPeopleCardsEnableVirtualizedGrid and var29 or (var16 or not p0.getUniversesExposedTo) or not p0.addUniverseToExposureList then
 			return false
@@ -93,7 +93,7 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 		p0.getUniversesExposedTo,
 		p0.addUniverseToExposureList
 	} else { p0.getUniversesExposedTo, p0.addUniverseToExposureList })
-	local var40 = reactModule.useCallback(function() --[[ line: 133 ]]
+	local var40 = reactModule.useCallback(function()
 		-- upvalues: var16 (copy), fFlagPeopleCardsEnableVirtualizedGrid (copy), var30 (write)
 		var16 = true
 		
@@ -101,14 +101,14 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 			var30(true)
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 140 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var40 (ref)
-		return function() --[[ line: 141 ]]
+		return function()
 			-- upvalues: var40 (copy)
 			var40()
 		end
 	end, {})
-	local var41 = reactModule.useCallback(function(p1) --[[ line: 146 ]]
+	local var41 = reactModule.useCallback(function(p1)
 		-- upvalues: var18 (write), var17 (ref), medium (ref)
 		var18(var17, p1.AbsoluteSize.X, medium)
 	end, { var18, var17, medium })
@@ -116,10 +116,10 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 	
 	if not fFlagPeopleCardsEnableVirtualizedGrid then
 		if not fFlagPeoplePageRemoveUseMemoElements then
-			t = if getFFlagPeoplePageEnablePersonSignalStore() then reactModule.useMemo(function() --[[ line: 194 ]]
+			t = if getFFlagPeoplePageEnablePersonSignalStore() then reactModule.useMemo(function()
 				-- upvalues: var33 (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (write), var39 (ref), localPlayer (copy), var40 (ref), p0 (ref), var38 (ref)
 				local t = {}
-				var33.peopleSignalMap.iterateData(function(p2, p3) --[[ line: 197 ]]
+				var33.peopleSignalMap.iterateData(function(p2, p3)
 					-- upvalues: t (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (copy), var39 (copy), localPlayer (copy), var40 (copy), p0 (copy), var38 (copy)
 					t["PersonCard_" .. p2] = reactModule.createElement(if getFFlagPeoplePageLazyRenderCards() then lazyPersonCardModule else personCardModule, {
 						width = var26,
@@ -133,7 +133,7 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 				end, false)
 				
 				return t
-			end, { var35, var39, p0.scrollingFrameStore, var38 }) else reactModule.useMemo(function() --[[ line: 219 ]]
+			end, { var35, var39, p0.scrollingFrameStore, var38 }) else reactModule.useMemo(function()
 				-- upvalues: var34 (ref), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (write), var39 (ref), var40 (ref), p0 (ref), var38 (ref)
 				local t = {}
 				
@@ -152,7 +152,7 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 			end, { var34, var39, p0.scrollingFrameStore, var38 })
 		elseif getFFlagPeoplePageEnablePersonSignalStore() then
 			t = {}
-			var33.peopleSignalMap.iterateData(function(p4, p5) --[[ line: 156 ]]
+			var33.peopleSignalMap.iterateData(function(p4, p5)
 				-- upvalues: t (write), reactModule (copy), getFFlagPeoplePageLazyRenderCards (copy), lazyPersonCardModule (copy), personCardModule (copy), var26 (write), var39 (ref), localPlayer (copy), var40 (ref), p0 (ref), var38 (ref)
 				t["PersonCard_" .. p4] = reactModule.createElement(if getFFlagPeoplePageLazyRenderCards() then lazyPersonCardModule else personCardModule, {
 					width = var26,
@@ -188,11 +188,11 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "PeopleCards" ]]
 		gapSize = medium,
 		numItems = #var34,
 		layoutOrder = p0.LayoutOrder,
-		onContainerWidthChanged = reactModule.useCallback(function(p6) --[[ line: 246 ]]
+		onContainerWidthChanged = reactModule.useCallback(function(p6)
 			-- upvalues: var21 (write), var17 (ref), medium (ref)
 			var21(var17, p6, medium)
 		end, { var17, medium }),
-		getElement = reactModule.useCallback(function(p7) --[[ line: 250 ]]
+		getElement = reactModule.useCallback(function(p7)
 			-- upvalues: var34 (ref), reactModule (copy), personCardModule (copy), var26 (write), var39 (ref), var40 (ref), var38 (ref)
 			local var46 = if p7 > 0 and p7 <= #var34 then var34[p7] else nil
 			

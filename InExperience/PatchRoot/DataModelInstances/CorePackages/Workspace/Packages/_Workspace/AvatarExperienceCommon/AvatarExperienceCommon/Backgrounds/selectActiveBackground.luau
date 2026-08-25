@@ -3,7 +3,7 @@ local avatarExperienceFlagsModule = require(avatarExperienceCommon.Parent.Avatar
 local avatarBackground = require(avatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 local nOBACKGROUNDASSETID = require(script.Parent.constants).NO_BACKGROUND_ASSET_ID
 
-local function scanTryOnForBackground(value) --[[ line: 32 ]]
+local function scanTryOnForBackground(value)
 	-- upvalues: avatarBackground (ref)
 	if not value then
 		return nil
@@ -20,7 +20,7 @@ local function scanTryOnForBackground(value) --[[ line: 32 ]]
 	return nil
 end
 
-local function _(value) --[[ line: 50 | named "firstEquippedBackgroundId" ]]
+local function _(value)
 	-- upvalues: avatarBackground (ref)
 	if not value then
 		return nil
@@ -40,7 +40,7 @@ local function _(value) --[[ line: 50 | named "firstEquippedBackgroundId" ]]
 	return nil
 end
 
-return function(value) --[[ line: 67 | named "selectActiveBackground" ]]
+return function(value)
 	-- upvalues: avatarBackground (ref), avatarExperienceFlagsModule (ref), scanTryOnForBackground (ref), nOBACKGROUNDASSETID (ref)
 	if not avatarBackground then
 		return nil

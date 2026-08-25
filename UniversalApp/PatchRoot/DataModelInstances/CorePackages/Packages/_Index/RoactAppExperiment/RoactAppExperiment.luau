@@ -6,7 +6,7 @@ local cryoModule = require(script.Parent.Cryo)
 local experimentContextModule = require(script.ExperimentContext)
 local ixpServiceProp = require(script.Symbol).named("IxpServiceProp")
 
-local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
+local function connect(p0, p1, p2, p3, p4)
 	-- upvalues: tModule (ref), roactModule (ref), ixpServiceProp (ref), cryoModule (ref), experimentContextModule (ref)
 	assert(tModule.string(p0))
 	assert(tModule.string(p1))
@@ -14,7 +14,7 @@ local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
 	assert(tModule.string(p3))
 	assert(tModule.string(p4))
 	
-	return function(p5, p6, p7) --[[ line: 95 ]]
+	return function(p5, p6, p7)
 		-- upvalues: roactModule (copy), ixpServiceProp (copy), p2 (ref), p4 (ref), p3 (ref), p1 (ref), cryoModule (copy), p0 (ref), experimentContextModule (copy)
 		if p7 == nil then
 			p7 = true
@@ -23,14 +23,14 @@ local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
 		assert(type(p5) == "table", "connect expects layerNames to be a list of layers")
 		assert(type(p6) == "function", "connect expects mapLayersToProps to be a function")
 		
-		return function(p8) --[[ line: 104 ]]
+		return function(p8)
 			-- upvalues: trac (ref), roactModule (copy), ixpServiceProp (copy), p5 (ref), p2 (copy), p7 (write), p4 (copy), p3 (copy), p1 (copy), cryoModule (copy), p6 (ref), p0 (copy), experimentContextModule (copy)
 			if p8 == nil then
 				error(string.format("connect returns a function that must be passed a component.\n Check the connection at:\n %s", trac), 2)
 			end
 			local var9 = roactModule.PureComponent:extend(("AppExperiment(%s)"):format(tostring(p8)))
 			
-			function var9.init(p9) --[[ line: 117 ]]
+			function var9.init(p9)
 				-- upvalues: ixpServiceProp (copy), p5 (copy), p2 (copy), p7 (copy), p4 (copy), p3 (copy), p1 (copy)
 				p9.onLoadingStatusChangeConnection = nil
 				p9.state = {
@@ -38,7 +38,7 @@ local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
 					layerLoadingStatus = Enum.IXPLoadingStatus.None
 				}
 				
-				function p9.updateStateLayerData(p10) --[[ line: 124 ]]
+				function p9.updateStateLayerData(p10)
 					-- upvalues: p9 (ref), ixpServiceProp (copy), p5 (copy), p2 (copy)
 					local var11 = p9.props[ixpServiceProp]
 					
@@ -52,7 +52,7 @@ local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
 					end
 				end
 				
-				function p9.logAllLayersExposure(p11) --[[ line: 140 ]]
+				function p9.logAllLayersExposure(p11)
 					-- upvalues: p9 (ref), ixpServiceProp (copy), p7 (copy), p5 (copy), p4 (copy), p3 (copy)
 					local var13 = p9.props[ixpServiceProp]
 					
@@ -72,19 +72,19 @@ local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
 				end
 			end
 			
-			function var9.render(p12) --[[ line: 163 ]]
+			function var9.render(p12)
 				-- upvalues: cryoModule (copy), ixpServiceProp (copy), p6 (copy), roactModule (copy), p8 (ref)
 				local var14 = cryoModule.Dictionary.join(p12.props, { [ixpServiceProp] = cryoModule.None })
 				
 				return roactModule.createElement(p8, cryoModule.Dictionary.join(var14, p6(p12.state.layerToVariables, var14)))
 			end
 			
-			function var9.didMount(p13) --[[ line: 172 ]]
+			function var9.didMount(p13)
 				-- upvalues: ixpServiceProp (copy), p0 (copy), p1 (copy), p2 (copy)
 				local var15 = p13.props[ixpServiceProp]
 				
 				if var15 ~= nil then
-					p13.onLoadingStatusChangeConnection = var15[p0]:Connect(function(_) --[[ line: 177 ]]
+					p13.onLoadingStatusChangeConnection = var15[p0]:Connect(function(_)
 						-- upvalues: var15 (ref), p1 (copy), p13 (ref), p2 (copy)
 						local var17 = var15[p1](var15)
 						
@@ -102,16 +102,16 @@ local function connect(p0, p1, p2, p3, p4) --[[ line: 79 ]]
 				end
 			end
 			
-			function var9.willUnmount(p14) --[[ line: 200 ]]
+			function var9.willUnmount(p14)
 				if p14.onLoadingStatusChangeConnection ~= nil then
 					p14.onLoadingStatusChangeConnection:Disconnect()
 				end
 			end
 			
-			return function(p15) --[[ line: 206 ]]
+			return function(p15)
 				-- upvalues: roactModule (copy), experimentContextModule (copy), ixpServiceProp (copy), cryoModule (copy), var9 (ref)
 				return roactModule.createElement(experimentContextModule.Consumer, {
-					render = function(p16) --[[ line: 208 ]]
+					render = function(p16)
 						-- upvalues: p15 (ref), ixpServiceProp (copy), cryoModule (copy), roactModule (copy), var9 (copy)
 						assert(p15[ixpServiceProp] == nil, "Symbol 'IxpServiceProp' should never exist in the incoming props.")
 						
@@ -127,7 +127,7 @@ return {
 	Provider = experimentContextModule.Provider,
 	Consumer = experimentContextModule.Consumer,
 	Context = experimentContextModule,
-	registerUserLayers = function(p17) --[[ line: 31 ]]
+	registerUserLayers = function(p17)
 		-- upvalues: tModule (ref), IXPService (ref), runService (ref)
 		assert(tModule.table(p17))
 		
@@ -143,13 +143,13 @@ return {
 			IXPService:RegisterUserLayers(t)
 		end
 	end,
-	initializeUserLayers = function(p18) --[[ line: 54 ]]
+	initializeUserLayers = function(p18)
 		-- upvalues: IXPService (ref)
 		if IXPService ~= nil then
 			IXPService:InitializeUserLayers(p18)
 		end
 	end,
-	clearUserLayers = function() --[[ line: 66 ]]
+	clearUserLayers = function()
 		-- upvalues: IXPService (ref)
 		if IXPService ~= nil then
 			IXPService:ClearUserLayers()

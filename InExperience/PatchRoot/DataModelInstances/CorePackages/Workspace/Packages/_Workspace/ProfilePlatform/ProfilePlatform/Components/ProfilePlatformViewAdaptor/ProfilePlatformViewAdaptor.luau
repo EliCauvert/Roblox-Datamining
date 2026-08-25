@@ -39,7 +39,7 @@ local var25 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneSt
 local useSignalState = require(parent.SignalsReact).useSignalState
 local t = { skipFetch = true }
 
-return function(_) --[[ line: 56 ]]
+return function(_)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileScrollContextModule (ref), useScreenSize (ref), useTopBarHeight (ref), fFlagEnableMobileGameJoinCard (ref), reactModule (ref), useSelector (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagEnableSplitPane (ref), useSignalState (ref), var25 (ref), profilePlatformPageModule (ref), profileTopBarModule (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var24 (ref), var23 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useShouldShowContextualInformationModule (ref), useProfilePeekViewHeightModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), profileFullViewModule (ref), profileModalViewModule (ref), profilePeekViewModule (ref)
 	local var27 = useProfileWrapperContextModule()
 	local var28 = useProfileScrollContextModule()
@@ -48,26 +48,26 @@ return function(_) --[[ line: 56 ]]
 	local var29 = useScreenSize()
 	local var30 = useTopBarHeight()
 	local var31 = if fFlagEnableMobileGameJoinCard then var27.mountAsFullView or false else false
-	local var32 = reactModule.useCallback(function() --[[ line: 67 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: previousView (ref)
 		previousView(false)
 	end, { previousView })
-	local var33 = reactModule.useCallback(function() --[[ line: 72 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: previousView (ref)
 		previousView(true)
 	end, { previousView })
-	local var34 = useSelector(function(p0) --[[ line: 77 ]]
+	local var34 = useSelector(function(p0)
 		return p0.GlobalGuiInset
 	end)
 	local var35 = useProfileFormFactorModule()
 	local var36 = var35.formFactor == enumsModule.ProfileFormFactor.Wide
 	local var37 = if fFlagEnableSplitPane then useSignalState(var25.getStore().getIsSplitEnabled) else false
-	local var38 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), profilePlatformPageModule (copy)
 		return reactModule.createElement(profilePlatformPageModule, {})
 	end, {})
 	local var37_1 = fFlagEnableSplitPane and var37
-	local var40 = reactModule.useCallback(function() --[[ line: 94 ]]
+	local var40 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), profileTopBarModule (copy), var32 (ref), fFlagEnableSplitPane (copy), var37_1 (ref)
 		return reactModule.createElement(profileTopBarModule, {
 			transparentBackground = true,
@@ -87,7 +87,7 @@ return function(_) --[[ line: 56 ]]
 		
 		if fFlagProfilePlatformPresenceStoreMigrationModule then
 			local var46
-			useEffectOnMount(function() --[[ line: 116 ]]
+			useEffectOnMount(function()
 				-- upvalues: var24 (copy), profileId (ref)
 				var24.RefreshPresenceByUserId(tostring(profileId))
 			end)
@@ -104,11 +104,11 @@ return function(_) --[[ line: 56 ]]
 			end
 		else
 			local var48 = useDispatch()
-			useEffectOnMount(function() --[[ line: 127 ]]
+			useEffectOnMount(function()
 				-- upvalues: var48 (ref), networkingPresenceModule (copy), profileId (ref)
-				var48(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) --[[ line: 128 ]] end)
+				var48(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) end)
 			end)
-			local var49 = useSelector(function(p1) --[[ line: 131 ]]
+			local var49 = useSelector(function(p1)
 				-- upvalues: presenceModule (copy), profileId (ref)
 				return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
 					lastLocation = "",
@@ -141,7 +141,7 @@ return function(_) --[[ line: 56 ]]
 		topBarHeight = var30,
 		topBarSlot = var40(),
 		viewWidth = UDim.new(0, var41.X.Offset),
-		transitionPercentCallback = function(p2) --[[ line: 189 ]]
+		transitionPercentCallback = function(p2)
 			-- upvalues: var28 (ref)
 			var28.setPeekViewOpenPercent(p2)
 		end,

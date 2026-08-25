@@ -11,13 +11,13 @@ local loadingScreenTelemetryModule = require(progressLoading.LoadingScreenTeleme
 local queueExperimentation = require(parent.SocialExperiments).QueueExperimentation
 local var7 = game:GetEngineFeature("PlaceJoinStateEnabled") and (queueExperimentation.getIsJoinNewServerButtonEnabled() or queueExperimentation.getIsAutoJoinNewServerEnabled())
 
-return function() --[[ line: 27 | named "createLoadingScreenStore" ]]
+return function()
 	-- upvalues: createDataCache (ref), createDataResolver (ref), loadingScreenTelemetryModule (ref), fetchPlayerLocalizationChoiceModule (ref), var7 (ref), signalsModule (ref), experienceService (ref), guiService (ref)
 	local var8 = createDataCache()
 	local var9 = createDataResolver({
 		supportsMultiGet = false,
 		cache = var8,
-		logError = function(p0) --[[ line: 32 ]]
+		logError = function(p0)
 			-- upvalues: loadingScreenTelemetryModule (copy)
 			if type(p0) == "table" then
 				loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p0.responseCode, errorType = p0.errorType })
@@ -26,9 +26,9 @@ return function() --[[ line: 27 | named "createLoadingScreenStore" ]]
 			end
 			loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 		end,
-		fetchFn = function(p1, _) --[[ line: 49 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: fetchPlayerLocalizationChoiceModule (copy)
-			return fetchPlayerLocalizationChoiceModule(p1):andThen(function(p3) --[[ line: 51 ]]
+			return fetchPlayerLocalizationChoiceModule(p1):andThen(function(p3)
 				-- upvalues: p1 (ref)
 				if not p3 or not p3.responseBody then
 					error({
@@ -49,7 +49,7 @@ return function() --[[ line: 27 | named "createLoadingScreenStore" ]]
 					})
 				end
 				return responseBody
-			end):catch(function(p2) --[[ line: 74 ]]
+			end):catch(function(p2)
 				error(p2)
 			end)
 		end
@@ -65,14 +65,14 @@ return function() --[[ line: 27 | named "createLoadingScreenStore" ]]
 		local var14, var15 = signalsModule.createSignal(experienceService:GetPlaceJoinState() or "")
 		var12 = var14
 		local var16 = var15
-		placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p4) --[[ line: 83 ]]
+		placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p4)
 			-- upvalues: var16 (write)
 			var16(p4)
 		end)
 		local var17, var18 = signalsModule.createSignal(guiService:GetUiMessage() or "")
 		var13 = var17
 		local var19 = var18
-		uiMessageChangedConnection = guiService.UiMessageChanged:Connect(function(p5, p6) --[[ line: 89 ]]
+		uiMessageChangedConnection = guiService.UiMessageChanged:Connect(function(p5, p6)
 			-- upvalues: var19 (write)
 			if p5 == Enum.UiMessageType.UiMessageInfo then
 				var19(p6)
@@ -84,12 +84,12 @@ return function() --[[ line: 27 | named "createLoadingScreenStore" ]]
 		getServerStatusText = var13,
 		getAndFetchPlayerLocalizationChoice = var9.getAndFetchItem,
 		getCachedPlayerLocalizationChoice = var9.getCachedItem,
-		clear = function() --[[ line: 96 ]]
+		clear = function()
 			-- upvalues: var8 (ref), var9 (ref)
 			var8.clear()
 			var9.clear()
 		end,
-		dispose = function() --[[ line: 101 ]]
+		dispose = function()
 			-- upvalues: var9 (ref), var7 (copy), placeJoinStateChangedConnection (write), uiMessageChangedConnection (write)
 			var9.dispose()
 			

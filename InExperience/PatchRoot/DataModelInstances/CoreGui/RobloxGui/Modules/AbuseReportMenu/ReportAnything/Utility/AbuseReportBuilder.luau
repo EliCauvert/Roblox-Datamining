@@ -25,7 +25,7 @@ local t = {
 	}
 }
 
-local var6 = function(p0) --[[ line: 96 ]]
+local var6 = function(p0)
 	local t = {}
 	
 	for i, v in ipairs(p0) do
@@ -34,7 +34,7 @@ local var6 = function(p0) --[[ line: 96 ]]
 	return t
 end
 
-local var7 = function(p1) --[[ line: 104 ]]
+local var7 = function(p1)
 	local t = {}
 	
 	for i, v in pairs(p1) do
@@ -55,7 +55,7 @@ local var7 = function(p1) --[[ line: 104 ]]
 	return t
 end
 
-local var8 = function(p2) --[[ line: 125 ]]
+local var8 = function(p2)
 	-- upvalues: var6 (ref)
 	local t = {}
 	
@@ -85,7 +85,7 @@ local var8 = function(p2) --[[ line: 125 ]]
 	return t
 end
 
-local _ = function(p3, p4) --[[ line: 155 ]]
+local _ = function(p3, p4)
 	-- upvalues: getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescription (ref)
 	local _ = nil
 	local _ = nil
@@ -105,7 +105,7 @@ local _ = function(p3, p4) --[[ line: 155 ]]
 	return var15, var16
 end
 
-local var9 = function(p5) --[[ line: 177 ]]
+local var9 = function(p5)
 	-- upvalues: getFFlagRAEnableCircleRegion (ref), getAvatarsForRegion (ref), getAvatarsForPoint (ref), getFFlagReportAnythingEnableAdReport (ref), getAdsForPoint (ref)
 	local t = {}
 	local t_1 = {}
@@ -150,7 +150,7 @@ local var9 = function(p5) --[[ line: 177 ]]
 	return t_2, t_3
 end
 
-local var10 = function(p6, _, p7) --[[ line: 242 ]]
+local var10 = function(p6, _, p7)
 	-- upvalues: getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var8 (ref), var7 (ref), var6 (ref)
 	local var27 = false
 	
@@ -221,7 +221,7 @@ local var10 = function(p6, _, p7) --[[ line: 242 ]]
 end
 
 return {
-	buildExperienceReportRequest = function(p8, p9, p10) --[[ line: 338 ]]
+	buildExperienceReportRequest = function(p8, p9, p10)
 		-- upvalues: t (ref), var9 (ref), var10 (ref), getFFlagReportAnythingEnableAdReport (ref), httpService (ref), var7 (ref)
 		local t_1 = {
 			tags = {
@@ -245,7 +245,7 @@ return {
 		end
 		return httpService:JSONEncode(t_1)
 	end,
-	buildOtherReportRequest = function(p11, p12, p13) --[[ line: 417 ]]
+	buildOtherReportRequest = function(p11, p12, p13)
 		-- upvalues: t (ref), var9 (ref), var10 (ref), getFFlagGetHumanoidDescription (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), getHumanoidDescription (ref), httpService (ref)
 		local t_1 = {
 			tags = {

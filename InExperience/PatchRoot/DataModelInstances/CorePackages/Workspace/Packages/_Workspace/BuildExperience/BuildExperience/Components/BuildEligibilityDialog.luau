@@ -11,7 +11,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 
-return function(p0) --[[ line: 24 | named "BuildEligibilityDialog" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useBuildPageEligibilityModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
 	local var6 = if fFlagBuildLocalization then useLocalization({
 		dialogAction = localizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,

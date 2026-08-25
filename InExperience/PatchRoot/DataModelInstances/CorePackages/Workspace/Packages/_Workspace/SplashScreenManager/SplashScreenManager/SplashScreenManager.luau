@@ -2,7 +2,7 @@
 local runService = require(script:FindFirstAncestor("SplashScreenManager").Parent.MockableProxyServices).RunService
 local var0 = nil
 
-local function _() --[[ line: 19 | named "obfuscateEnvironment" ]]
+local function _()
 	-- upvalues: var0 (write)
 	var0 = Instance.new("ColorCorrectionEffect")
 	
@@ -14,7 +14,7 @@ local function _() --[[ line: 19 | named "obfuscateEnvironment" ]]
 	end
 end
 
-local _ = function() --[[ line: 30 | named "unobfuscateEnvironment" ]]
+local _ = function()
 	-- upvalues: var0 (write)
 	if var0 then
 		var0:Destroy()
@@ -27,7 +27,7 @@ local var2 = true
 local var3 = false
 local t = {}
 
-local _ = function() --[[ line: 43 | named "callCallbacks" ]]
+local _ = function()
 	-- upvalues: t (ref), var2 (write)
 	for i, v in t do
 		v(var2)
@@ -35,7 +35,7 @@ local _ = function() --[[ line: 43 | named "callCallbacks" ]]
 end
 
 return {
-	initialize = function(p0, p1, p2) --[[ line: 50 ]]
+	initialize = function(p0, p1, p2)
 		-- upvalues: var3 (write), var1 (write), var2 (write), var0 (write), t (ref), runService (write)
 		if not var3 and not var1 then
 			var2 = false
@@ -58,7 +58,7 @@ return {
 			local var10 = 0
 			local renderSteppedConnection = nil
 			
-			local _ = function() --[[ line: 65 ]]
+			local _ = function()
 				-- upvalues: renderSteppedConnection (write), var0 (copy), var2 (copy), var3 (copy)
 				if renderSteppedConnection then
 					renderSteppedConnection:Disconnect()
@@ -71,7 +71,7 @@ return {
 				var3 = false
 			end
 			
-			renderSteppedConnection = runService.RenderStepped:Connect(function(p3) --[[ line: 74 ]]
+			renderSteppedConnection = runService.RenderStepped:Connect(function(p3)
 				-- upvalues: var10 (write), currentTime (ref), t_1 (ref), var6 (write), p2 (ref), p1 (ref), var7 (ref), var2 (copy), t (copy), renderSteppedConnection (write), var0 (copy), var3 (copy)
 				var10 = tick() - currentTime
 				table.insert(t_1, p3)
@@ -104,13 +104,13 @@ return {
 			var3 = true
 		end
 	end,
-	addStatusChangeListener = function(p4) --[[ line: 106 ]]
+	addStatusChangeListener = function(p4)
 		-- upvalues: t (ref)
 		table.insert(t, p4)
 		
 		return p4
 	end,
-	removeStatusChangeListener = function(p5) --[[ line: 111 ]]
+	removeStatusChangeListener = function(p5)
 		-- upvalues: t (ref)
 		for i, v in t do
 			if v == p5 then
@@ -118,11 +118,11 @@ return {
 			end
 		end
 	end,
-	isFPSAtTarget = function() --[[ line: 119 ]]
+	isFPSAtTarget = function()
 		-- upvalues: var2 (write)
 		return var2
 	end,
-	__setTestMode = function() --[[ line: 123 ]]
+	__setTestMode = function()
 		-- upvalues: var1 (write)
 		var1 = true
 	end

@@ -6,9 +6,9 @@ local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Enums.ThemeName)
 local getGeneratedRulesModule = require(foundation.Utility.getGeneratedRules)
 
-return function(p0, p1, p2) --[[ line: 15 | named "useGeneratedRules" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), getGeneratedRulesModule (ref), flagsModule (ref)
-	return reactModule.useMemo(function() --[[ line: 16 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: getGeneratedRulesModule (copy), flagsModule (copy), p0 (ref), p1 (ref), p2 (ref)
 		return getGeneratedRulesModule(if flagsModule.FoundationThemeName then p0 else nil, p1, p2)
 	end, {

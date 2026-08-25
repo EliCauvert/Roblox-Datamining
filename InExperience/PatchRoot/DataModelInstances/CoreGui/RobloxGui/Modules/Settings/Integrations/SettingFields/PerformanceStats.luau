@@ -10,17 +10,17 @@ return {
 	alreadyLocalized = false,
 	label = "CoreScripts.InGameMenu.GameSettings.ShowPerfStats",
 	field_type = settingsServiceModule.SettingEnum.Toggle,
-	onChanged = (function() --[[ line: 23 | named "PerfStatsValue" ]]
+	onChanged = (function()
 		-- upvalues: valueChangedSignal (ref), gameSettings (ref)
 		local var4 = valueChangedSignal.new(gameSettings.PerformanceStatsVisible)
-		var4:connect(function(p0) --[[ line: 26 ]]
+		var4:connect(function(p0)
 			-- upvalues: gameSettings (copy)
 			if gameSettings.PerformanceStatsVisible == p0 then
 				return
 			end
 			gameSettings.PerformanceStatsVisible = p0
 		end)
-		gameSettings.PerformanceStatsVisibleChanged:Connect(function() --[[ line: 36 ]]
+		gameSettings.PerformanceStatsVisibleChanged:Connect(function()
 			-- upvalues: var4 (ref), gameSettings (copy)
 			var4:set(gameSettings.PerformanceStatsVisible)
 		end)

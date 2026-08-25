@@ -13,7 +13,7 @@ local t = {
 	[suggestionType.StartParty] = foundationModule.Enums.IconName.ThreePeople
 }
 
-return reactModule.memo(function(p0) --[[ line: 44 | named "SmartSuggestionsChipRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: t (ref), reactModule (ref), view (ref), divider (ref), chipGroup (ref), chipSize (ref), chipGroupVariant (ref)
 	local t_1 = {}
 	
@@ -21,7 +21,7 @@ return reactModule.memo(function(p0) --[[ line: 44 | named "SmartSuggestionsChip
 		t_1[i] = {
 			text = v.display_text,
 			leading = t[v.type],
-			onActivated = function() --[[ line: 50 ]]
+			onActivated = function()
 				-- upvalues: p0 (ref), v (ref)
 				p0.onActivated(v)
 			end

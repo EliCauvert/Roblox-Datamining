@@ -6,7 +6,7 @@ local var2 = require(genericAbuseReporting.Logger):new("AbuseReport Analytics")
 
 return {
 	reducer = roduxModule.createReducer({}, {
-		[require(genericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p0, p1) --[[ line: 37 ]]
+		[require(genericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p0, p1)
 			-- upvalues: var2 (ref), dictionary (ref)
 			var2:trace("OnFormLoaded")
 			
@@ -16,7 +16,7 @@ return {
 				accumulated_time_ms = p1.accumulated_time_ms
 			})
 		end,
-		[require(genericAbuseReporting.Analytics.Actions.OnFormReasonSelected).name] = function(p2, p3) --[[ line: 45 ]]
+		[require(genericAbuseReporting.Analytics.Actions.OnFormReasonSelected).name] = function(p2, p3)
 			-- upvalues: var2 (ref), dictionary (ref)
 			var2:trace("OnFormReasonSelected - reason_selection: {}", p3.reason_selection)
 			
@@ -25,7 +25,7 @@ return {
 				reason_change_count = p2.reason_change_count + 1
 			})
 		end,
-		[require(genericAbuseReporting.Analytics.Actions.OnFormCommentUpdated).name] = function(p4, p5) --[[ line: 52 ]]
+		[require(genericAbuseReporting.Analytics.Actions.OnFormCommentUpdated).name] = function(p4, p5)
 			-- upvalues: var2 (ref), dictionary (ref)
 			var2:trace("OnFormCommentUpdated - comment_added: {}", p5.comment_added)
 			

@@ -96,13 +96,13 @@ local t_3 = {
 	[Enum.UserCFrame.RightHand] = Enum.VRTouchpad.Right
 }
 
-function t_2.new(p0) --[[ line: 109 ]]
+function t_2.new(p0)
 	-- upvalues: t_2 (ref), t_3 (ref), VRService (ref), create (ref), t (ref), granite (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.userCFrame = p0
 	tbl.touchpad = t_3[tbl.userCFrame]
 	tbl.touchpadMode = VRService:GetTouchpadMode(tbl.touchpad)
-	tbl.onTouchpadModeChangedConn = VRService.TouchpadModeChanged:connect(function(...) --[[ line: 114 ]]
+	tbl.onTouchpadModeChangedConn = VRService.TouchpadModeChanged:connect(function(...)
 		-- upvalues: tbl (ref)
 		tbl:onTouchpadModeChanged(...)
 	end)
@@ -180,7 +180,7 @@ function t_2.new(p0) --[[ line: 109 ]]
 	return tbl
 end
 
-function t_2:setPartVisible(p1, p2) --[[ line: 200 ]]
+function t_2:setPartVisible(p1, p2)
 	local var9 = self.parts[p1]
 	
 	if var9 then
@@ -188,18 +188,18 @@ function t_2:setPartVisible(p1, p2) --[[ line: 200 ]]
 	end
 end
 
-function t_2:setABXYEnabled(p3) --[[ line: 207 ]]
+function t_2:setABXYEnabled(p3)
 	self:setPartVisible("ButtonA", p3)
 	self:setPartVisible("ButtonB", p3)
 	self:setPartVisible("ButtonX", p3)
 	self:setPartVisible("ButtonY", p3)
 end
 
-function t_2:setCFrame(p4) --[[ line: 214 ]]
+function t_2:setCFrame(p4)
 	self.model:SetPrimaryPartCFrame(p4)
 end
 
-function t_2:setCFrameAndScale(p5, p6) --[[ line: 218 ]]
+function t_2:setCFrameAndScale(p5, p6)
 	-- upvalues: t (ref)
 	self.model:SetPrimaryPartCFrame(p5)
 	
@@ -231,7 +231,7 @@ function t_2:setCFrameAndScale(p5, p6) --[[ line: 218 ]]
 	end
 end
 
-function t_2:setButtonState(p7, p8) --[[ line: 247 ]]
+function t_2:setButtonState(p7, p8)
 	-- upvalues: t (ref)
 	local var15 = t[p7]
 	
@@ -269,7 +269,7 @@ function t_2:setButtonState(p7, p8) --[[ line: 247 ]]
 	end
 end
 
-function t_2:setTriggerState(p9) --[[ line: 284 ]]
+function t_2:setTriggerState(p9)
 	-- upvalues: t (ref)
 	local offset = t.Trigger.offset
 	offset = CFrame.new(offset.p * self.scale) * (offset - offset.p)
@@ -284,7 +284,7 @@ function t_2:setTriggerState(p9) --[[ line: 284 ]]
 	end
 end
 
-function t_2:setTrackpadState(p10) --[[ line: 302 ]]
+function t_2:setTrackpadState(p10)
 	-- upvalues: t (ref)
 	local trackpadIndicator = self.parts.TrackpadIndicator
 	local weld = trackpadIndicator:FindFirstChild("Weld")
@@ -298,7 +298,7 @@ function t_2:setTrackpadState(p10) --[[ line: 302 ]]
 	end
 end
 
-function t_2:onButtonInputChanged(p11, p12) --[[ line: 318 ]]
+function t_2:onButtonInputChanged(p11, p12)
 	if self.userCFrame == Enum.UserCFrame.RightHand and p11.KeyCode == Enum.KeyCode.ButtonR3 or self.userCFrame == Enum.UserCFrame.LeftHand and p11.KeyCode == Enum.KeyCode.ButtonL3 then
 		self:setButtonState("Trackpad", p12)
 		
@@ -333,7 +333,7 @@ function t_2:onButtonInputChanged(p11, p12) --[[ line: 318 ]]
 	end
 end
 
-function t_2:onInputBegan(p13) --[[ line: 368 ]]
+function t_2:onInputBegan(p13)
 	self:onButtonInputChanged(p13, true)
 	
 	if self.userCFrame == Enum.UserCFrame.RightHand and p13.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p13.KeyCode == Enum.KeyCode.Thumbstick1 then
@@ -341,7 +341,7 @@ function t_2:onInputBegan(p13) --[[ line: 368 ]]
 	end
 end
 
-function t_2:onInputChanged(p14) --[[ line: 378 ]]
+function t_2:onInputChanged(p14)
 	if self.userCFrame == Enum.UserCFrame.RightHand and p14.KeyCode == Enum.KeyCode.ButtonR2 or self.userCFrame == Enum.UserCFrame.LeftHand and p14.KeyCode == Enum.KeyCode.ButtonL2 then
 		self:setTriggerState(p14.Position.Z)
 	end
@@ -350,7 +350,7 @@ function t_2:onInputChanged(p14) --[[ line: 378 ]]
 	end
 end
 
-function t_2:onInputEnded(p15) --[[ line: 393 ]]
+function t_2:onInputEnded(p15)
 	self:onButtonInputChanged(p15, false)
 	
 	if self.userCFrame == Enum.UserCFrame.RightHand and p15.KeyCode == Enum.KeyCode.Thumbstick2 or self.userCFrame == Enum.UserCFrame.LeftHand and p15.KeyCode == Enum.KeyCode.Thumbstick1 then
@@ -358,7 +358,7 @@ function t_2:onInputEnded(p15) --[[ line: 393 ]]
 	end
 end
 
-function t_2:onTouchpadModeChanged(p16, p17) --[[ line: 403 ]]
+function t_2:onTouchpadModeChanged(p16, p17)
 	if p16 ~= self.touchpad then return end
 	self.touchpadMode = p17
 	
@@ -370,7 +370,7 @@ function t_2:onTouchpadModeChanged(p16, p17) --[[ line: 403 ]]
 	self:setABXYEnabled(false)
 end
 
-function t_2:destroy() --[[ line: 417 ]]
+function t_2:destroy()
 	if self.onTouchpadModeChangedConn then
 		self.onTouchpadModeChangedConn:disconnect()
 		self.onTouchpadModeChangedConn = nil
@@ -378,7 +378,7 @@ function t_2:destroy() --[[ line: 417 ]]
 	self.model:Destroy()
 end
 
-function t_2:getButtonPart(p18) --[[ line: 425 ]]
+function t_2:getButtonPart(p18)
 	-- upvalues: t_1 (ref)
 	local var24 = t_1[p18]
 	

@@ -53,7 +53,7 @@ local useAgeCheckUpsellAnalyticsModule = require(script.Parent.Parent.Parent.Ana
 local useAgeCheckCompletionLogger = useAgeCheckUpsellAnalyticsModule.useAgeCheckCompletionLogger
 local useAgeCheckPressLogger = useAgeCheckUpsellAnalyticsModule.useAgeCheckPressLogger
 
-return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useNavigationFocus (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), fFlagJoinCardAgeCheckUpsell (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), useAgeCheckPressLogger (ref), useGameJoinCardAnalyticsModule (ref), dependencyArray (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableConsoleGameJoinCard (ref), getPlatformFriendsServiceModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), appGuiService (ref), useAppPolicy (ref), gamePlayIntent (ref), peopleListInHomePage (ref), httpService (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), gameJoinCardButtonAction (ref), viewProfileSourceValues (ref), fFlagEnableSplitPane (ref), appPage (ref), notificationType (ref), desktopGameJoinCardModule (ref), gamepadJoinFocusBehaviorModule (ref)
 	local var19 = useDispatch()
 	local var20 = useNavigation()
@@ -64,20 +64,20 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 	local presence = p0.presence
 	local var22 = tostring(presence.universeId)
 	local lastLocation = presence.lastLocation
-	local var23 = reactModule.useMemo(function() --[[ line: 101 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: getRbxThumb (copy), thumbnailType (copy), var22 (ref), thumbnailSize (copy)
 		return getRbxThumb(thumbnailType.GameIcon, var22, thumbnailSize.Small)
 	end, { var22 })
 	local var24, var25 = reactModule.useState(Enum.AssetFetchStatus.None)
-	reactModule.useEffect(function() --[[ line: 105 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), contentProviderService (copy), var23 (ref)
 		var25(contentProviderService:GetAssetFetchStatus(var23))
 	end, { var23 })
-	reactModule.useEffect(function() --[[ line: 108 ]]
+	reactModule.useEffect(function()
 		-- upvalues: contentProviderService (copy), var23 (ref), var25 (ref)
 		local var44 = contentProviderService:GetAssetFetchStatusChangedSignal(var23):Connect(var25)
 		
-		return function() --[[ line: 111 ]]
+		return function()
 			-- upvalues: var44 (ref)
 			var44:Disconnect()
 		end
@@ -96,7 +96,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 	}) else nil
 	local var28 = fFlagJoinCardAgeCheckUpsell and var26.ageCheckRequired == true
 	local var29 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 138 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var21 (ref), var29 (ref), useGameJoinCardAnalyticsModule (copy)
 		local var45 = p0.isOpen == true and var21
 		
@@ -110,13 +110,13 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 		end
 		var29.current = var45
 	end, dependencyArray(p0.isOpen, var21, p0.userId, p0.presence, p0.homepageCarouselAbsolutePosition))
-	reactModule.useEffect(function() --[[ line: 162 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var21 (ref)
 		if p0.isOpen and not var21 then
 			p0.onClose()
 		end
 	end, dependencyArray(var21, p0))
-	reactModule.useEffect(function() --[[ line: 169 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var21 (ref), var28 (ref), useGameJoinCardAnalyticsModule (copy), var22 (ref)
 		if p0.isOpen and var21 and var28 then
 			useGameJoinCardAnalyticsModule.logJoinCardAgeCheckUpsellImpression({ universeId = if var22 ~= "" then nil else var22 })
@@ -130,7 +130,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 	
 	if fFlagEnableConsoleGameJoinCard then
 		local platformProfileId = p0.platformProfileId
-		var32 = reactModule.useCallback(function() --[[ line: 190 ]]
+		var32 = reactModule.useCallback(function()
 			-- upvalues: getPlatformFriendsServiceModule (copy), platformProfileId (ref)
 			if getPlatformFriendsServiceModule == nil or platformProfileId == nil or platformProfileId == "" then
 				return
@@ -144,7 +144,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 		isFocusable = p0.isFocused == true and var21
 	}) else nil
 	local var34 = reactModule.useRef(nil)
-	local var35 = reactModule.useCallback(function(p1) --[[ line: 208 ]]
+	local var35 = reactModule.useCallback(function(p1)
 		-- upvalues: fFlagEnableConsoleGameJoinCard (copy), var34 (ref), var33 (ref), p0 (ref)
 		if not fFlagEnableConsoleGameJoinCard then return end
 		var34.current = p1
@@ -159,10 +159,10 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 	local var36 = useRoactService(appEventIngestService)
 	local var37 = useRoactService(appSessionService)
 	local var38 = useRoactService(appGuiService)
-	local var39 = useAppPolicy(function(p2) --[[ line: 225 ]]
+	local var39 = useAppPolicy(function(p2)
 		return p2.getCanUsePlatformChat()
 	end)
-	local var40 = reactModule.useCallback(function() --[[ line: 229 ]]
+	local var40 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), presence (ref), gamePlayIntent (copy), var36 (ref), peopleListInHomePage (copy), httpService (copy)
 		local userId = p0.userId
 		
@@ -180,7 +180,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 			joinAttemptId = httpService:GenerateGUID(false)
 		})
 	end, dependencyArray(p0.userId, presence))
-	local var41 = reactModule.useCallback(function() --[[ line: 250 ]]
+	local var41 = reactModule.useCallback(function()
 		-- upvalues: var22 (ref), presence (ref), p0 (ref), var37 (ref), setGamePlaySession (copy), sessionType (copy), gameDetailReferral (copy), var36 (ref), var19 (ref), openGameDetails (copy), var20 (ref)
 		if var22 == "" then return end
 		local rootPlaceId = presence.rootPlaceId
@@ -203,7 +203,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 		})
 		var19(openGameDetails(var22, var20))
 	end, dependencyArray(var19, var20, var22, presence, p0.homepageCarouselAbsolutePosition, p0.layoutOrder, p0.userId))
-	local var42 = reactModule.useCallback(function(p3) --[[ line: 286 ]]
+	local var42 = reactModule.useCallback(function(p3)
 		-- upvalues: var22 (ref), p0 (ref), viewEDPsourceValues (copy), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var41 (ref)
 		if var22 == "" then return end
 		if p0.userId ~= "" then
@@ -221,7 +221,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 		end
 		var41()
 	end, dependencyArray(var41, var22, p0.userId, p0.homepageCarouselAbsolutePosition))
-	local var43 = reactModule.useCallback(function() --[[ line: 312 ]]
+	local var43 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var22 (ref), var40 (ref), var26 (ref)
 		if p0.userId ~= "" then
 			useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.JoinGame, {
@@ -252,7 +252,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 		ageCheckRequired = if fFlagJoinCardAgeCheckUpsell then var26.ageCheckRequired else nil,
 		onAgeCheckPressed = var27,
 		onPlatformProfilePressed = if fFlagEnableConsoleGameJoinCard and var31 then var32 else nil,
-		onChat = if var31 or not var39 then nil else reactModule.useCallback(function() --[[ line: 360 ]]
+		onChat = if var31 or not var39 then nil else reactModule.useCallback(function()
 			-- upvalues: p0 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var22 (ref), var38 (ref), notificationType (copy)
 			if p0.userId == "" then
 				return
@@ -265,7 +265,7 @@ return function(p0) --[[ line: 91 | named "DesktopGameJoinCardContainer" ]]
 			var38:BroadcastNotification(p0.userId, notificationType.LAUNCH_CONVERSATION)
 			p0.onClose()
 		end, dependencyArray(p0.userId, var22, p0.homepageCarouselAbsolutePosition, var38, p0.onClose)),
-		onViewProfile = if not var31 then reactModule.useCallback(function(p4) --[[ line: 334 ]]
+		onViewProfile = if not var31 then reactModule.useCallback(function(p4)
 			-- upvalues: p0 (ref), var22 (ref), viewProfileSourceValues (copy), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), fFlagEnableSplitPane (copy), var20 (ref), appPage (copy)
 			if p0.userId ~= "" then
 				local t = {

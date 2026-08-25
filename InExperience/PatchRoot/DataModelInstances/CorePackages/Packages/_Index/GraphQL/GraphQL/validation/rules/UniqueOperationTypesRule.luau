@@ -1,7 +1,7 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueOperationTypesRule = function(p0) --[[ line: 19 ]]
+	UniqueOperationTypesRule = function(p0)
 		-- upvalues: graphQLError (ref)
 		local var2
 		local schema = p0:getSchema()
@@ -14,7 +14,7 @@ return {
 				subscription = schema:getSubscriptionType()
 			} or {}
 		end
-		local function checkOperationTypes(_, p1) --[[ line: 32 ]]
+		local function checkOperationTypes(_, p1)
 			-- upvalues: t (ref), var2 (ref), p0 (ref), graphQLError (copy)
 			for i, v in ipairs(p1.operationTypes or {}) do
 				local operation = v.operation

@@ -6,7 +6,7 @@ local tweenService = game:GetService("TweenService")
 local _ = game:GetService("InsertService")
 local currentCamera = workspaceService.CurrentCamera
 
-local function removeScripts(p0) --[[ line: 22 ]]
+local function removeScripts(p0)
 	for i, v in ipairs(p0:GetDescendants()) do
 		if v:IsA("LuaSourceContainer") then
 			v:Destroy()
@@ -14,7 +14,7 @@ local function removeScripts(p0) --[[ line: 22 ]]
 	end
 end
 
-local function ApplyArrow(p1, p2) --[[ line: 30 ]]
+local function ApplyArrow(p1, p2)
 	-- upvalues: currentCamera (ref), removeScripts (ref), tweenService (ref), runService (ref)
 	local contextMenuArrow = Instance.new("Model")
 	contextMenuArrow.Name = "ContextMenuArrow"
@@ -38,14 +38,14 @@ local function ApplyArrow(p1, p2) --[[ line: 30 ]]
 	local var10 = tweenService:Create(var9, TweenInfo.new(4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, -1, false), { Orientation = Vector3.new(0, 360, 180) })
 	var10:Play()
 	
-	local function update() --[[ line: 59 ]]
+	local function update()
 		-- upvalues: var9 (ref), humanoidRootPart (ref)
 		var9.Position = humanoidRootPart.Position + Vector3.new(0, 5, 0)
 	end
 	
 	local var12 = false
 	
-	local function kill() --[[ line: 64 ]]
+	local function kill()
 		-- upvalues: var12 (write), contextMenuArrow (ref), var10 (ref), runService (copy)
 		if var12 then
 			return
@@ -64,9 +64,9 @@ local function ApplyArrow(p1, p2) --[[ line: 30 ]]
 	return kill
 end
 
-function t.ChangeSelectedPlayer(p3, p4, p5) --[[ line: 82 ]]
+function t.ChangeSelectedPlayer(p3, p4, p5)
 	-- upvalues: ApplyArrow (ref)
-	coroutine.wrap(function() --[[ line: 83 ]]
+	coroutine.wrap(function()
 		-- upvalues: p3 (ref), p4 (ref), ApplyArrow (copy), p5 (ref)
 		if p3.SelectedPlayer then
 			p3.SelectedPlayer = nil
@@ -80,7 +80,7 @@ function t.ChangeSelectedPlayer(p3, p4, p5) --[[ line: 82 ]]
 		end
 		if p4 then
 			p3.SelectedPlayer = p4
-			p3.CharacterAddedConn = p4.CharacterAdded:Connect(function(p6) --[[ line: 96 ]]
+			p3.CharacterAddedConn = p4.CharacterAdded:Connect(function(p6)
 				-- upvalues: p3 (copy), ApplyArrow (copy), p5 (copy)
 				if p3.KillOldRenderFunction then
 					p3.KillOldRenderFunction()
@@ -95,7 +95,7 @@ function t.ChangeSelectedPlayer(p3, p4, p5) --[[ line: 82 ]]
 	end)()
 end
 
-function t.new() --[[ line: 109 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.KillOldRenderFunction = nil

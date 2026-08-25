@@ -18,7 +18,7 @@ local momentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushed
 local fFlagMomentsUseCompositionLibraryModule = require(moments.Flags.FFlagMomentsUseCompositionLibrary)
 local getFFlagMomentsPushedFeedSafeAreaModule = require(moments.Flags.GetFFlagMomentsPushedFeedSafeArea)
 
-return function(p0) --[[ line: 54 | named "MomentItemSkeleton" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useFormFactor (ref), fFlagMomentsUseCompositionLibraryModule (ref), useCompositionLayout (ref), useDeviceInsets (ref), formFactor (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), view (ref), skeleton (ref), radius (ref), momentLayoutModule (ref), gradientBackdrop (ref)
 	local var9 = useTokens()
 	local var10 = useFormFactor()
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 54 | named "MomentItemSkeleton" ]]
 	local var14 = if var11 ~= nil then var9.Padding.XLarge else var11.margin
 	local var15, var16 = reactModule.useBinding(UDim2.fromScale(1, 0))
 	local var17 = 2 * var9.Padding.XLarge
-	local var18 = reactModule.useCallback(function(p1) --[[ line: 69 ]]
+	local var18 = reactModule.useCallback(function(p1)
 		-- upvalues: var16 (ref), var17 (ref)
 		var16(UDim2.new(1, 0, 0, p1.AbsoluteSize.Y + var17))
 	end, { var17 })

@@ -4,24 +4,24 @@ local fFlagEnableVirtualCursorDebugging = require(script:FindFirstAncestor("Virt
 local enumsModule = require(parent.Enums)
 local propertiesModule = require(parent.Properties)
 
-local function _(p0) --[[ line: 26 | named "normalizeSafe" ]]
+local function _(p0)
 	local magnitude = p0.Magnitude
 	
 	return if magnitude > 0.00001 then p0 / magnitude else Vector2.zero
 end
 
-local _ = function(p1, p2, p3) --[[ line: 34 | named "closestPointOnRect" ]]
+local _ = function(p1, p2, p3)
 	return Vector2.new(math.clamp(p1.X, p2.X, p2.X + p3.X), math.clamp(p1.Y, p2.Y, p2.Y + p3.Y))
 end
 
-local _ = function(p4) --[[ line: 43 | named "smoothStep" ]]
+local _ = function(p4)
 	return p4 * p4 * (3 - p4 * 2)
 end
 
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 60 ]]
+function t.new()
 	-- upvalues: enumsModule (ref), t (ref)
 	return setmetatable({
 		_currTargetObject = nil,
@@ -37,22 +37,22 @@ function t.new() --[[ line: 60 ]]
 	}, t)
 end
 
-function t:setMethodStrength(p5, p6) --[[ line: 78 ]]
+function t:setMethodStrength(p5, p6)
 	self._strengthTable[p5] = math.clamp(p6, 0, 1)
 end
 
-function t:getScaledMethodStrength(p7, p8) --[[ line: 84 ]]
+function t:getScaledMethodStrength(p7, p8)
 	return math.clamp((self._strengthTable[p7] or 0) * p8, 0, 1)
 end
 
-function t:adjustFriction(p9) --[[ line: 91 ]]
+function t:adjustFriction(p9)
 	-- upvalues: enumsModule (ref)
 	local frictionScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Friction, p9.strengthMultiplier)
 	
 	return if not (not p9.targetObject or frictionScaledMethodStrength <= 0) then if self._cursorStartingPosition then p9.cursorPosition:Lerp(self._cursorStartingPosition, frictionScaledMethodStrength) else p9.cursorPosition else p9.cursorPosition
 end
 
-function t:adjustTracking(p10) --[[ line: 106 ]]
+function t:adjustTracking(p10)
 	-- upvalues: enumsModule (ref)
 	local trackingScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Tracking, p10.strengthMultiplier)
 	
@@ -66,7 +66,7 @@ function t:adjustTracking(p10) --[[ line: 106 ]]
 	return p10.cursorPosition
 end
 
-function t:adjustCentering(p11) --[[ line: 124 ]]
+function t:adjustCentering(p11)
 	-- upvalues: enumsModule (ref), tweenService (ref)
 	local centeringScaledMethodStrength = self:getScaledMethodStrength(enumsModule.SnapAssistMethod.Centering, p11.strengthMultiplier)
 	
@@ -84,7 +84,7 @@ function t:adjustCentering(p11) --[[ line: 124 ]]
 	return p11.cursorPosition:Lerp(var9, centeringScaledMethodStrength)
 end
 
-function t:adjustSnap(p12) --[[ line: 159 ]]
+function t:adjustSnap(p12)
 	-- upvalues: fFlagEnableVirtualCursorDebugging (ref)
 	if p12.targetObject == self._currTargetObject then
 		if p12.expiredTime and p12.expiredTime < tick() - self._snapTimer then
@@ -112,11 +112,11 @@ function t:adjustSnap(p12) --[[ line: 159 ]]
 	end
 end
 
-function t.isSnapCandidate(_, p13, p14) --[[ line: 192 ]]
+function t.isSnapCandidate(_, p13, p14)
 	return not (not p13.Visible or not p13.Selectable) and (p13.AbsolutePosition.X + p13.AbsoluteSize.X < 0 or p13.AbsolutePosition.Y + p13.AbsoluteSize.Y < 0 or (p14.X < p13.AbsolutePosition.X or p14.Y < p13.AbsolutePosition.Y))
 end
 
-function t.adjustMove(_, p15, p16) --[[ line: 210 ]]
+function t.adjustMove(_, p15, p16)
 	-- upvalues: propertiesModule (ref), fFlagEnableVirtualCursorDebugging (ref)
 	local cursorPosition = p16.cursorPosition
 	local candidates = p16.candidates

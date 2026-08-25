@@ -33,7 +33,7 @@ local t = {
 	variant = chipGroupVariantModule.Row
 }
 
-local function Scrim(p0) --[[ line: 84 ]]
+local function Scrim(p0)
 	-- upvalues: useBackgroundStyle (ref), reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
 		LayoutOrder = p0.LayoutOrder,
@@ -45,7 +45,7 @@ local function Scrim(p0) --[[ line: 84 ]]
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 104 | named "ChipGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useChipGroupVariantsModule (ref), flagsModule (ref), reactModule (ref), chipModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), useClippingRectModule (ref), scrollViewModule (ref), visibilityModule (ref), Scrim (ref), numberSequence (ref), numberSequence_1 (ref)
 	local var19 = withDefaultsModule(p1, t)
 	local var20 = useChipGroupVariantsModule(useTokensModule(), var19.variant, var19.size)
@@ -82,7 +82,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 104 |
 		local var25, var26 = reactModule.useBinding(false)
 		local var27 = reactModule.useRef(nil)
 		local var28 = useClippingRectModule(var27)
-		local var29 = reactModule.useCallback(function(p3) --[[ line: 161 ]]
+		local var29 = reactModule.useCallback(function(p3)
 			-- upvalues: var20 (ref), var24 (ref), var26 (ref)
 			if var20.hasScrim and p3.AbsoluteWindowSize.X ~= 0 then
 				var24(p3.CanvasPosition.X ~= 0)
@@ -91,13 +91,13 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 104 |
 				return
 			end
 		end, { var20.hasScrim })
-		local var30 = reactModule.useCallback(function() --[[ line: 173 ]]
+		local var30 = reactModule.useCallback(function()
 			-- upvalues: var27 (ref), var29 (ref)
 			if var27.current then
 				var29(var27.current)
 			end
 		end, { var19.onAbsoluteSizeChanged, var29 })
-		local var31 = reactModule.useCallback(function() --[[ line: 179 ]]
+		local var31 = reactModule.useCallback(function()
 			-- upvalues: var27 (ref), var29 (ref)
 			if var27.current then
 				var29(var27.current)
@@ -149,7 +149,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 104 |
 			ScrimWrapper = if var20.hasScrim then reactModule.createElement(viewModule, {
 				tag = "row flex-between",
 				ZIndex = 2,
-				Size = var28:map(function(p4) --[[ line: 235 ]]
+				Size = var28:map(function(p4)
 					-- upvalues: scrimWidth (ref)
 					return UDim2.fromOffset(p4.Max.X - p4.Min.X, scrimWidth)
 				end),

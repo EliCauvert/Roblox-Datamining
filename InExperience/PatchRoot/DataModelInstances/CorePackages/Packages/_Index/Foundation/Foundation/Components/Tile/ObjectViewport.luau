@@ -6,19 +6,19 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local runService = require(foundation.Utility.Wrappers).Services.RunService
 
-local function _(p0, p1) --[[ line: 19 | named "getCameraDistance" ]]
+local function _(p0, p1)
 	local z = p1.Z
 	
 	return math.max(p1.X, p1.Y, z) * (1 / math.tan(math.rad(p0) / 2)) + z / 2
 end
 
-local _ = function(value, p2, p3) --[[ line: 29 | named "rotateVectorAround" ]]
+local _ = function(value, p2, p3)
 	return CFrame.fromAxisAngle(p3, p2):VectorToWorldSpace(value)
 end
 
 local t = { rotationSpeed = 0.01, fieldOfView = 70 }
 
-return function(p4) --[[ line: 44 | named "ObjectViewport" ]]
+return function(p4)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), eventConnection (ref), runService (ref)
 	local var5 = withDefaultsModule(p4, t)
 	local var6 = useTokensModule()
@@ -30,19 +30,19 @@ return function(p4) --[[ line: 44 | named "ObjectViewport" ]]
 	local var15, var16 = reactModule.useState(CFrame.new())
 	local var17, var18 = reactModule.useState(Vector3.new())
 	local var19, var20 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var7 (ref)
 		if var10.current and var7 ~= nil then
 			var7.Parent = var10.current
 		end
-		return function() --[[ line: 64 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			if var7 ~= nil then
 				var7.Parent = nil
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 71 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var16 (ref), var18 (ref), var20 (ref), var5 (ref)
 		if var7 ~= nil then
 			local pivot = var7:GetPivot()
@@ -53,7 +53,7 @@ return function(p4) --[[ line: 44 | named "ObjectViewport" ]]
 			var20(math.max(extentsSize.X, extentsSize.Y, z) * (1 / math.tan(math.rad(var5.fieldOfView) / 2)) + z / 2)
 		end
 	end, { var7 })
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var5 (ref), var10 (ref), var8 (ref)
 		if var7 ~= nil then
 			var7.Parent = nil
@@ -94,7 +94,7 @@ return function(p4) --[[ line: 44 | named "ObjectViewport" ]]
 			WorldModel = reactModule.createElement("WorldModel", { ref = var10 }),
 			RenderSteppedConnection = reactModule.createElement(eventConnection, {
 				event = runService.RenderStepped,
-				callback = function() --[[ line: 132 ]]
+				callback = function()
 					-- upvalues: var14 (ref), var13 (ref), var5 (ref), var17 (ref), var15 (ref), var19 (ref), var12 (ref)
 					var14(var13:getValue() + var5.rotationSpeed or 0)
 					var12(CFrame.new(var15.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), var13:getValue()):VectorToWorldSpace(var17) * var19, var15.Position))

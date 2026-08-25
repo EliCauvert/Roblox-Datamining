@@ -7,7 +7,7 @@ local _ = require(parent.AppCommonLib)
 local _ = require(parent.PlayabilityRodux)
 local sendPlayButtonContextualMessageImpressionEvent = require(parent.DiscoveryAnalytics).Events.sendPlayButtonContextualMessageImpressionEvent
 
-return function(p0) --[[ line: 23 | named "PlayButtonContextualMessageImpressionsDetector" ]]
+return function(p0)
 	-- upvalues: useImpressionsTagger (ref), reactModule (ref), sendPlayButtonContextualMessageImpressionEvent (ref), screenSizeImpressionsTracker (ref)
 	local playabilityStatus = p0.playabilityStatus and p0.playabilityStatus.playabilityStatus
 	local universeId = `PLAY_BUTTON_CONTEXTUAL_MESSAGE_{p0.universeId}_{playabilityStatus}`
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 23 | named "PlayButtonContextualMessageImpression
 		pageContext = p0.pageContext,
 		impressionsTag = universeId,
 		scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
-		sendImpressions = reactModule.useCallback(function(p1) --[[ line: 30 ]]
+		sendImpressions = reactModule.useCallback(function(p1)
 			-- upvalues: sendPlayButtonContextualMessageImpressionEvent (copy), p0 (ref), playabilityStatus (ref)
 			if #p1 == 0 then
 				return

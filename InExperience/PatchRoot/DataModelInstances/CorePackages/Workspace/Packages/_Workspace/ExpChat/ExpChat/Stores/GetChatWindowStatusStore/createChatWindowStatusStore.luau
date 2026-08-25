@@ -1,7 +1,7 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals)
 local createSignal = signalsModule.createSignal
 
-return function() --[[ line: 38 ]]
+return function()
 	-- upvalues: createSignal (ref), signalsModule (ref)
 	local var1, var2 = createSignal(0)
 	local var3, var4 = createSignal(0)
@@ -38,7 +38,7 @@ return function() --[[ line: 38 ]]
 		setCurrentChatWindowState = var12,
 		setPreviousChatWindowState = var14,
 		setDurationUpdates = var20,
-		newStateEffect = signalsModule.createEffect(function(p0) --[[ line: 63 ]]
+		newStateEffect = signalsModule.createEffect(function(p0)
 			-- upvalues: var1 (ref), var3 (ref), var5 (ref), var7 (ref), var14 (ref), var11 (ref), var12 (ref), var10 (ref)
 			local var21 = var1(p0)
 			local var22 = var3(p0)
@@ -69,7 +69,7 @@ return function() --[[ line: 38 ]]
 			end
 			var12("unknown")
 		end),
-		changingWindowStateEffect = signalsModule.createEffect(function(p1) --[[ line: 93 ]]
+		changingWindowStateEffect = signalsModule.createEffect(function(p1)
 			-- upvalues: var13 (ref), var9 (ref), var15 (write), var5 (ref), var16 (write), var7 (ref), var17 (write), var3 (ref), var18 (write), var1 (ref), var20 (ref)
 			local var25 = var13(p1)
 			local var26 = var9(p1)
@@ -83,7 +83,7 @@ return function() --[[ line: 38 ]]
 			elseif var25 == "backgroundIdle" then
 				var18 = var26 - var1(p1)
 			end
-			var20(function(p2) --[[ line: 105 ]]
+			var20(function(p2)
 				-- upvalues: var15 (copy), var16 (copy), var17 (copy), var18 (copy)
 				return {
 					openDuration = p2.openDuration + var15,

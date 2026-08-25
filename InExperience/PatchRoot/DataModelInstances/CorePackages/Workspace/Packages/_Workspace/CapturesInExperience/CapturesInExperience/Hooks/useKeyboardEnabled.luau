@@ -3,17 +3,17 @@ local reactModule = require(script.Parent.Parent.Parent.React)
 local useEffect = reactModule.useEffect
 local useState = reactModule.useState
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: useState (ref), userInputService (ref), useEffect (ref)
 	local var2, var3 = useState(userInputService.KeyboardEnabled)
-	useEffect(function() --[[ line: 14 ]]
+	useEffect(function()
 		-- upvalues: userInputService (copy), var3 (ref)
-		local var4 = userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 15 ]]
+		local var4 = userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
 			-- upvalues: var3 (copy), userInputService (copy)
 			var3(userInputService.KeyboardEnabled)
 		end)
 		
-		return function() --[[ line: 19 ]]
+		return function()
 			-- upvalues: var4 (ref)
 			var4:Disconnect()
 		end

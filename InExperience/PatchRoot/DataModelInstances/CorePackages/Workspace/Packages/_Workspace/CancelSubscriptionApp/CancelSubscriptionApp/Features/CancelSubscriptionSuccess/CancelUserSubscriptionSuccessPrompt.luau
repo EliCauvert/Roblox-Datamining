@@ -8,7 +8,7 @@ local t = {
 	heading = "CoreScripts.CancelUserSubscriptionPrompt.SuccessPrompt.Heading"
 }
 
-return function(p0) --[[ line: 17 | named "CancelUserSubscriptionSuccessPrompt" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), toast (ref), block (ref)
 	return reactModule.createElement(toast, {
 		duration = 3,
@@ -18,8 +18,8 @@ return function(p0) --[[ line: 17 | named "CancelUserSubscriptionSuccessPrompt" 
 			swipeUpDismiss = true,
 			toastTitle = useLocalization(t).heading,
 			iconImage = block,
-			onAppeared = function() --[[ line: 23 ]] end,
-			onDismissed = p0.onDismissed or function() --[[ line: 24 ]] end
+			onAppeared = function() end,
+			onDismissed = p0.onDismissed or function() end
 		},
 		anchorPoint = Vector2.new(0.5, 0),
 		position = UDim2.new(0.5, 0, 0, 20),

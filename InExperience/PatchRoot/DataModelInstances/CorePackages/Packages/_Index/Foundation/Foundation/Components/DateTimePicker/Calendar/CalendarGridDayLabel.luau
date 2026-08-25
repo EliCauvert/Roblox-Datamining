@@ -7,7 +7,7 @@ local textModule = require(foundation.Components.Text)
 local viewModule = require(foundation.Components.View)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-local function _(p0, p1) --[[ line: 14 | named "buildDayTags" ]]
+local function _(p0, p1)
 	local t = {
 		["size-full text-title-small text-align-x-center text-align-y-center"] = true,
 		["radius-circle"] = not p0
@@ -19,7 +19,7 @@ local function _(p0, p1) --[[ line: 14 | named "buildDayTags" ]]
 	return t
 end
 
-return function(p2) --[[ line: 42 | named "CalendarGridDayLabel" ]]
+return function(p2)
 	-- upvalues: useTokensModule (ref), constantsModule (ref), reactModule (ref), controlStateModule (ref), textModule (ref), stateLayerModeModule (ref), viewModule (ref)
 	local var9 = useTokensModule()
 	local var10 = if p2.isSelected then var9.Inverse.Content.Emphasis.Color3 elseif p2.isSelectable and p2.emphasizeText then var9.Color.Content.Emphasis.Color3 else var9.Color.Content.Muted.Color3
@@ -38,9 +38,9 @@ return function(p2) --[[ line: 42 | named "CalendarGridDayLabel" ]]
 	t = reactModule.createElement(textModule, {
 		backgroundStyle = if p2.isSelected then var9.Color.System.Contrast elseif p2.highlight then var9.Color.ActionStandard.Background else nil,
 		onActivated = if p2.isSelectable then p2.onActivated else nil,
-		onStateChanged = if p2.isSelectable then reactModule.useMemo(function() --[[ line: 57 ]]
+		onStateChanged = if p2.isSelectable then reactModule.useMemo(function()
 			-- upvalues: p2 (ref), controlStateModule (copy)
-			return if p2.onHoverEnter == nil then nil else function(p3) --[[ line: 61 ]]
+			return if p2.onHoverEnter == nil then nil else function(p3)
 				-- upvalues: controlStateModule (copy), p2 (copy)
 				if p3 == controlStateModule.Hover then
 					p2.onHoverEnter()

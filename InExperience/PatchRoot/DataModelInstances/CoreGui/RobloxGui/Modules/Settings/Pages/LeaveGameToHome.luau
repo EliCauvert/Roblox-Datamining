@@ -18,7 +18,7 @@ local collectAnalyticsForSystemMenuFFlag = settings():GetFFlag("CollectAnalytics
 local getDefaultQualityLevel = require(corePackagesService.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
 local var13 = if collectAnalyticsForSystemMenuFFlag then require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants")) else nil
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local var15 = (function() --[[ line: 51 | named "Initialize" ]]
+local var15 = (function()
 	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), getFFlagEnableInGameMenuDurationLoggerModule (ref), perfUtilsModule (ref), guiService (ref), collectAnalyticsForSystemMenuFFlag (ref), var13 (write), linkingProtocol (ref), runService (ref), getDefaultQualityLevel (ref), robloxTranslatorModule (ref), create (ref), themeModule (ref), var9 (ref), utilityModule (ref)
 	local leaveGameToHomePage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	leaveGameToHomePage.playsessionid = ""
@@ -26,7 +26,7 @@ local var15 = (function() --[[ line: 51 | named "Initialize" ]]
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		leaveGameToHomePage.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function leaveGameToHomePage.LeaveFunc() --[[ line: 60 ]]
+	function leaveGameToHomePage.LeaveFunc()
 		-- upvalues: getFFlagEnableInGameMenuDurationLoggerModule (copy), perfUtilsModule (copy), guiService (copy), collectAnalyticsForSystemMenuFFlag (copy), rbxAnalyticsService (copy), var13 (copy), leaveGameToHomePage (ref), linkingProtocol (copy), runService (copy), getDefaultQualityLevel (copy)
 		if getFFlagEnableInGameMenuDurationLoggerModule() then
 			perfUtilsModule.leavingGame()
@@ -48,7 +48,7 @@ local var15 = (function() --[[ line: 51 | named "Initialize" ]]
 		settings().Rendering.QualityLevel = getDefaultQualityLevel()
 	end
 	
-	function leaveGameToHomePage.DontLeaveFunc(p0) --[[ line: 92 ]]
+	function leaveGameToHomePage.DontLeaveFunc(p0)
 		-- upvalues: leaveGameToHomePage (ref), collectAnalyticsForSystemMenuFFlag (copy), rbxAnalyticsService (copy), var13 (copy)
 		if leaveGameToHomePage.HubRef then
 			leaveGameToHomePage.HubRef:PopMenu(p0, true)
@@ -63,14 +63,14 @@ local var15 = (function() --[[ line: 51 | named "Initialize" ]]
 		end
 	end
 	
-	function leaveGameToHomePage.DontLeaveFromHotkey(_, p1, p2) --[[ line: 111 ]]
+	function leaveGameToHomePage.DontLeaveFromHotkey(_, p1, p2)
 		-- upvalues: leaveGameToHomePage (ref)
 		if p1 == Enum.UserInputState.Begin then
 			leaveGameToHomePage.DontLeaveFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
 		end
 	end
 	
-	function leaveGameToHomePage.DontLeaveFromButton(p3) --[[ line: 119 ]]
+	function leaveGameToHomePage.DontLeaveFromButton(p3)
 		-- upvalues: leaveGameToHomePage (ref)
 		leaveGameToHomePage.DontLeaveFunc(p3)
 	end
@@ -126,12 +126,12 @@ local var15 = (function() --[[ line: 51 | named "Initialize" ]]
 	
 	return leaveGameToHomePage
 end)()
-var15.Displayed.Event:connect(function() --[[ line: 204 ]]
+var15.Displayed.Event:connect(function()
 	-- upvalues: guiService (ref), var15 (write), contextActionService (ref)
 	guiService.SelectedCoreObject = var15.LeaveGameButton
 	contextActionService:BindCoreAction("LeaveGameCancelAction", var15.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 end)
-var15.Hidden.Event:connect(function() --[[ line: 209 ]]
+var15.Hidden.Event:connect(function()
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("LeaveGameCancelAction")
 end)

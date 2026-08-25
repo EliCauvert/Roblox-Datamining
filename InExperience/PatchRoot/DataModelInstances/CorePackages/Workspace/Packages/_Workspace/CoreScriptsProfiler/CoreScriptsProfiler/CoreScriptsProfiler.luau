@@ -3,13 +3,13 @@ local playersService = game:GetService("Players")
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 37 ]]
+function t.new(p0)
 	-- upvalues: t (ref), playersService (ref), scriptProfilerService (ref)
 	local tbl = setmetatable({}, t)
 	tbl._isProfiling = false
 	tbl._isClient = false
 	tbl._player = playersService.LocalPlayer
-	tbl._connection = if p0 then scriptProfilerService.OnNewData:Connect(function(p1, p2) --[[ line: 45 ]]
+	tbl._connection = if p0 then scriptProfilerService.OnNewData:Connect(function(p1, p2)
 		-- upvalues: p0 (ref)
 		local var4 = p1 ~= nil
 		
@@ -21,7 +21,7 @@ function t.new(p0) --[[ line: 37 ]]
 	return tbl
 end
 
-function t:ClientStart(p3) --[[ line: 58 ]]
+function t:ClientStart(p3)
 	-- upvalues: scriptProfilerService (ref)
 	if self._isProfiling then
 		return
@@ -31,7 +31,7 @@ function t:ClientStart(p3) --[[ line: 58 ]]
 	self._isClient = true
 end
 
-function t:ClientStop() --[[ line: 70 ]]
+function t:ClientStop()
 	-- upvalues: scriptProfilerService (ref)
 	if self._isProfiling and self._isClient then
 		scriptProfilerService:ClientStop(self._player)
@@ -43,7 +43,7 @@ function t:ClientStop() --[[ line: 70 ]]
 	end
 end
 
-function t:ServerStart(p4) --[[ line: 82 ]]
+function t:ServerStart(p4)
 	-- upvalues: scriptProfilerService (ref)
 	if self._isProfiling then
 		return
@@ -53,7 +53,7 @@ function t:ServerStart(p4) --[[ line: 82 ]]
 	self._isClient = false
 end
 
-function t:ServerStop() --[[ line: 94 ]]
+function t:ServerStop()
 	-- upvalues: scriptProfilerService (ref)
 	if self._isProfiling and not self._isClient then
 		scriptProfilerService:ServerStop()
@@ -64,11 +64,11 @@ function t:ServerStop() --[[ line: 94 ]]
 	end
 end
 
-function t:IsProfiling() --[[ line: 105 ]]
+function t:IsProfiling()
 	return self._isProfiling
 end
 
-function t:Disconnect() --[[ line: 109 ]]
+function t:Disconnect()
 	if self._connection then
 		self._connection:Disconnect()
 		self._connection = nil

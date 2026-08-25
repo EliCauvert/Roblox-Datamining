@@ -1,12 +1,12 @@
 ﻿local unknownModule = require(script.Parent.Parent["Type.roblox"])
 local t = {}
 local t_1 = {
-	__tostring = function(p0) --[[ line: 33 ]]
+	__tostring = function(p0)
 		return string.format("RoactHostChangeEvent(%s)", p0.name)
 	end
 }
 setmetatable(t, {
-	__index = function(_, p1) --[[ line: 39 ]]
+	__index = function(_, p1)
 		-- upvalues: unknownModule (ref), t_1 (ref), t (ref)
 		local t_2 = {
 			[unknownModule] = unknownModule.HostChangeEvent,

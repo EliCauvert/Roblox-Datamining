@@ -3,7 +3,7 @@ local baseMemoryAnalyzerModule = require(coreGuiService.RobloxGui.Modules.Stats.
 local treeViewItemModule = require(coreGuiService.RobloxGui.Modules.Stats.TreeViewItem)
 local _ = require(coreGuiService.RobloxGui.Modules.Common.CommonUtil)
 
-local function __ReadAndSumValues(p0, p1) --[[ line: 25 ]]
+local function __ReadAndSumValues(p0, p1)
 	local var5 = 0
 	
 	for i, v in pairs(p1) do
@@ -18,7 +18,7 @@ local t = {}
 setmetatable(t, baseMemoryAnalyzerModule)
 t.__index = t
 
-function t.new(p2) --[[ line: 52 ]]
+function t.new(p2)
 	-- upvalues: baseMemoryAnalyzerModule (ref), t (ref)
 	local var7 = baseMemoryAnalyzerModule.new(p2)
 	setmetatable(var7, t)
@@ -31,11 +31,11 @@ function t.new(p2) --[[ line: 52 ]]
 	return var7
 end
 
-function t.filterServerMemoryTreeStats(_, p3) --[[ line: 78 ]]
+function t.filterServerMemoryTreeStats(_, p3)
 	return if p3.ServerMemoryTree == nil then {} else p3.ServerMemoryTree
 end
 
-function t:updateWithTreeStats(p4) --[[ line: 86 ]]
+function t:updateWithTreeStats(p4)
 	-- upvalues: treeViewItemModule (ref), __ReadAndSumValues (ref)
 	local var8 = 0
 	
@@ -59,11 +59,11 @@ function t:updateWithTreeStats(p4) --[[ line: 86 ]]
 	self:renderUpdates()
 end
 
-function t:getMemoryUsageTree() --[[ line: 123 ]]
+function t:getMemoryUsageTree()
 	return self._cachedRootTreeViewItem
 end
 
-function t:setVisible(p5) --[[ line: 127 ]]
+function t:setVisible(p5)
 	self._isVisible = p5
 	
 	if self._isVisible then

@@ -10,7 +10,7 @@ local viewModule = require(foundation.Components.View)
 local useScaledValueModule = require(foundation.Utility.useScaledValue)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0) --[[ line: 32 | named "DateTimePickerPanel" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), useScaledValueModule (ref), dateTimeLayoutUtilitiesModule (ref), reactModule (ref), buttonModule (ref), translatorModule (ref), buttonVariantModule (ref), viewModule (ref), dateTimeCalendarConstantsModule (ref), dividerModule (ref)
 	local var11 = useTokensModule()
 	local var12 = useScaledValueModule(dateTimeLayoutUtilitiesModule.PANE_WIDTH)

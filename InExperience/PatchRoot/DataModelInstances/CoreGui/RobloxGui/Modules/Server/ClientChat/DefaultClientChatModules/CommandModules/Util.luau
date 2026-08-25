@@ -3,7 +3,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.SendSystemMessageToSelf(_, p0, p1, p2) --[[ line: 31 ]]
+function t_1.SendSystemMessageToSelf(_, p0, p1, p2)
 	-- upvalues: chatConstantsModule (ref)
 	p1:AddMessageToChannel({
 		ID = -1,
@@ -20,7 +20,7 @@ function t_1.SendSystemMessageToSelf(_, p0, p1, p2) --[[ line: 31 ]]
 	})
 end
 
-function t.new() --[[ line: 50 ]]
+function t.new()
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.COMMAND_MODULES_VERSION = 1

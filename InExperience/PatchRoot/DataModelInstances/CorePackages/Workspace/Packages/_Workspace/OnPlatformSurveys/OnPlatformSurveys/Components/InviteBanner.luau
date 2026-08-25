@@ -10,7 +10,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local inlineSurveyLocalizationKeysModule = require(onPlatformSurveys.Constants.InlineSurveyLocalizationKeys)
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "InviteBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), inlineSurveyLocalizationKeysModule (ref), reactModule (ref), view (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
 	local var4 = useLocalization({
 		title = inlineSurveyLocalizationKeysModule.inviteTitle,

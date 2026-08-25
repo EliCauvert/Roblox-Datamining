@@ -17,13 +17,13 @@ local minFrameWidth = constantsModule.ServerJobsFormatting.MinFrameWidth
 local lineGraphHeight = constantsModule.GeneralFormatting.LineGraphHeight
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local list = {
-	function(p0) --[[ line: 27 ]]
+	function(p0)
 		return p0 and string.format("%.4f%%", p0) or ""
 	end,
-	function(p1) --[[ line: 30 ]]
+	function(p1)
 		return p1 and string.format("%.4f/s", p1) or ""
 	end,
-	function(p2) --[[ line: 33 ]]
+	function(p2)
 		return p2 and string.format("%.4fms", p2) or ""
 	end
 }
@@ -47,35 +47,35 @@ for i_1, v_1 in ipairs(t) do
 end
 local serverJobsChart = roactModule.Component:extend("ServerJobsChart")
 
-local function getX(p3) --[[ line: 63 ]]
+local function getX(p3)
 	return p3.time
 end
 
-local function getDutyCycle(p4) --[[ line: 67 ]]
+local function getDutyCycle(p4)
 	return p4.data[1]
 end
 
-local function getStepsPerSec(p5) --[[ line: 71 ]]
+local function getStepsPerSec(p5)
 	return p5.data[2]
 end
 
-local function getStepTime(p6) --[[ line: 75 ]]
+local function getStepTime(p6)
 	return p6.data[3]
 end
 
-function serverJobsChart.init(p7, p8) --[[ line: 79 ]]
+function serverJobsChart.init(p7, p8)
 	-- upvalues: roactModule (ref)
 	local currentData = p8.ServerJobsData:getCurrentData()
 	
-	function p7.getOnButtonPress(p9) --[[ line: 82 ]]
+	function p7.getOnButtonPress(p9)
 		-- upvalues: p7 (ref)
-		return function(_, _) --[[ line: 83 ]]
+		return function(_, _)
 			-- upvalues: p7 (copy), p9 (ref)
 			p7:setState({ expandIndex = p7.state.expandIndex ~= p9 and p9 })
 		end
 	end
 	
-	function p7.onSortChanged(p10) --[[ line: 90 ]]
+	function p7.onSortChanged(p10)
 		-- upvalues: p8 (ref), p7 (ref)
 		if p10 == p8.ServerJobsData:getSortType() then
 			p7:setState({ reverseSort = not p7.state.reverseSort })
@@ -86,7 +86,7 @@ function serverJobsChart.init(p7, p8) --[[ line: 79 ]]
 		p7:setState({ reverseSort = false })
 	end
 	
-	function p7.onCanvasPosChanged() --[[ line: 104 ]]
+	function p7.onCanvasPosChanged()
 		-- upvalues: p7 (ref)
 		local canvasPosition = p7.scrollingRef.current.CanvasPosition
 		
@@ -103,13 +103,13 @@ function serverJobsChart.init(p7, p8) --[[ line: 79 ]]
 	}
 end
 
-function serverJobsChart.willUpdate(p11) --[[ line: 122 ]]
+function serverJobsChart.willUpdate(p11)
 	if p11.canvasPosConnector then
 		p11.canvasPosConnector:Disconnect()
 	end
 end
 
-function serverJobsChart.didUpdate(p12) --[[ line: 128 ]]
+function serverJobsChart.didUpdate(p12)
 	if p12.scrollingRef.current then
 		p12.canvasPosConnector = p12.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p12.onCanvasPosChanged)
 		local absoluteSize = p12.scrollingRef.current.AbsoluteSize
@@ -121,8 +121,8 @@ function serverJobsChart.didUpdate(p12) --[[ line: 128 ]]
 	end
 end
 
-function serverJobsChart.didMount(p13) --[[ line: 143 ]]
-	p13.statsConnector = p13.props.ServerJobsData:Signal():Connect(function(p14) --[[ line: 144 ]]
+function serverJobsChart.didMount(p13)
+	p13.statsConnector = p13.props.ServerJobsData:Signal():Connect(function(p14)
 		-- upvalues: p13 (ref)
 		p13:setState({ serverJobsList = p14 })
 	end)
@@ -136,7 +136,7 @@ function serverJobsChart.didMount(p13) --[[ line: 143 ]]
 	end
 end
 
-function serverJobsChart.willUnmount(p15) --[[ line: 161 ]]
+function serverJobsChart.willUnmount(p15)
 	p15.statsConnector:Disconnect()
 	p15.statsConnector = nil
 	
@@ -146,7 +146,7 @@ function serverJobsChart.willUnmount(p15) --[[ line: 161 ]]
 	end
 end
 
-function serverJobsChart.render(p16) --[[ line: 170 ]]
+function serverJobsChart.render(p16)
 	-- upvalues: minFrameWidth (ref), roactModule (ref), constantsModule (ref), entryFrameHeight (ref), lineGraphHeight (ref), cellPadding (ref), cellLabelModule (ref), t_1 (ref), t (ref), chartHeaderNames (ref), list (ref), t_3 (ref), lineWidth (ref), lineColor (ref), bannerButtonModule (ref), lineGraphModule (ref), getX (ref), getDutyCycle (ref), convertTimeStampModule (ref), getStepsPerSec (ref), getStepTime (ref), noResultSearchStr (ref), headerButtonModule (ref), headerFrameHeight (ref)
 	local t_2 = {}
 	local searchTerm = p16.props.searchTerm

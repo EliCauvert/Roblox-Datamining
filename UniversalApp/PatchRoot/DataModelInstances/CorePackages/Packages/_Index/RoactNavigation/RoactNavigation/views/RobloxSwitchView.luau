@@ -6,7 +6,7 @@ local sceneViewModule = require(parent.SceneView)
 local t = { keepVisitedScreensMounted = false }
 local robloxSwitchView = reactModule.Component:extend("RobloxSwitchView")
 
-function robloxSwitchView.getDerivedStateFromProps(p0, p1) --[[ line: 16 ]]
+function robloxSwitchView.getDerivedStateFromProps(p0, p1)
 	-- upvalues: object (ref), t (ref)
 	local state = p0.navigation.state
 	local descriptors = p0.descriptors
@@ -22,11 +22,11 @@ function robloxSwitchView.getDerivedStateFromProps(p0, p1) --[[ line: 16 ]]
 	return { visitedScreenKeys = t_1 }
 end
 
-function robloxSwitchView.init(p2) --[[ line: 44 ]]
+function robloxSwitchView.init(p2)
 	p2.state = {}
 end
 
-function robloxSwitchView.render(p3) --[[ line: 48 ]]
+function robloxSwitchView.render(p3)
 	-- upvalues: reactModule (ref), sceneViewModule (ref)
 	local state = p3.props.navigation.state
 	local screenProps = p3.props.screenProps

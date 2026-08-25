@@ -1,9 +1,9 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	local var0 = nil
 	local _ = nil
 	local var1 = nil
 	
-	local function _(p1) --[[ line: 6 | named "fireCallback" ]]
+	local function _(p1)
 		-- upvalues: var0 (write), p0 (ref)
 		if p1 ~= var0 then
 			var0 = p1
@@ -11,7 +11,7 @@
 		end
 	end
 	
-	local function onViewportSizeChanged() --[[ line: 13 ]]
+	local function onViewportSizeChanged()
 		-- upvalues: var0 (write), p0 (ref)
 		local currentCamera = workspace.CurrentCamera
 		
@@ -25,7 +25,7 @@
 		end
 	end
 	
-	local var3 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 20 | named "onCurrentCameraChanged" ]]
+	local var3 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		-- upvalues: var1 (write), onViewportSizeChanged (ref), var0 (write), p0 (ref)
 		if var1 then
 			var1:Disconnect()
@@ -62,7 +62,7 @@
 			end
 		end
 	end
-	return function() --[[ line: 37 ]]
+	return function()
 		-- upvalues: var3 (write), var1 (write)
 		if var3 then
 			var3:Disconnect()

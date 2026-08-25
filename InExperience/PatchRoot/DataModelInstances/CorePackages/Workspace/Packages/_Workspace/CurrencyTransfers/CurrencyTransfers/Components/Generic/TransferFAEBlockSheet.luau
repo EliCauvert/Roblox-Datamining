@@ -33,7 +33,7 @@ local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTr
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p0) --[[ line: 60 | named "TransferFAEBlockSheet" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), useDispatch (ref), getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (ref), transferOriginationModule (ref), useScaledValue (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), transferDirectionModule (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), enums (ref), button (ref), promptStateModule (ref), getCounterUserIdModule (ref), accessResponseEnum (ref), acceptTransferModule (ref), processTransferModule (ref), inExpAmpWizardController (ref), ampWizardTransferConstantsModule (ref), openAmpWizardContainer (ref), buttonVariant (ref), fillBehavior (ref)
 	local var19 = useLocalization(transferLocalizationKeysModule.Presets.TransferFAEBlockSheet)
 	local var20 = useTransferStoreModule()
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 60 | named "TransferFAEBlockSheet" ]]
 	local selectedAmount = var20.getSelectedAmount(false)
 	local var23 = (if getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule() then var20.getTransferOrigination(false) else nil) == transferOriginationModule.InExperience
 	local var24 = useScaledValue(420)
-	reactModule.useEffect(function() --[[ line: 74 ]]
+	reactModule.useEffect(function()
 		-- upvalues: logCurrencyTransferCounterModule (copy), var20 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		logCurrencyTransferCounterModule(var20, currencyTransferTelemetryModule.CurrencyTransferFAEBlockSheetShownCounter, { recourseSurface = "fae" })
 		
@@ -125,7 +125,7 @@ return function(p0) --[[ line: 60 | named "TransferFAEBlockSheet" ]]
 				reactModule.createElement(view, { tag = "row auto-y size-full-0 gap-small" }, {
 					reactModule.createElement(button, {
 						text = var19.Continue,
-						onActivated = function() --[[ line: 168 ]]
+						onActivated = function()
 							-- upvalues: logCurrencyTransferCounterModule (copy), var20 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), p0 (ref), promptStateModule (copy), getCounterUserIdModule (copy), direction (ref), accessResponseEnum (copy), transferDirectionModule (copy), acceptTransferModule (copy), processTransferModule (copy), selectedAmount (ref), triggerOnClose (ref), var23 (ref), getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (copy), inExpAmpWizardController (copy), ampWizardTransferConstantsModule (copy), var21 (ref), openAmpWizardContainer (copy)
 							logCurrencyTransferCounterModule(var20, currencyTransferTelemetryModule.CurrencyTransferFAEBlockContinueClickedCounter, { recourseSurface = "fae" })
 							
@@ -149,7 +149,7 @@ return function(p0) --[[ line: 60 | named "TransferFAEBlockSheet" ]]
 								}
 							} else nil
 							
-							local var27 = function(p1, _) --[[ line: 193 ]]
+							local var27 = function(p1, _)
 								-- upvalues: var20 (copy), accessResponseEnum (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), direction (copy), transferDirectionModule (copy), acceptTransferModule (copy), processTransferModule (copy), selectedAmount (copy), triggerOnClose (copy)
 								local previousPromptState = var20.getPreviousPromptState(false)
 								

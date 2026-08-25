@@ -7,26 +7,26 @@ local reactionExplosionTickerModule = require(script.Parent.reactionExplosionTic
 local reactionExplosionMathModule = require(script.Parent.reactionExplosionMath)
 local medium = reactionSize.Medium
 local color3 = Color3.new(1, 1, 1)
-local var5 = reactModule.memo(function(p0) --[[ line: 38 ]]
+local var5 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), reactionExplosionMathModule (ref), color3 (ref), reaction (ref), medium (ref)
-	local var6 = reactModule.useMemo(function() --[[ line: 41 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), reactionExplosionMathModule (copy), color3 (copy)
-		local var7 = p0.progress:map(function(p1) --[[ line: 42 ]]
+		local var7 = p0.progress:map(function(p1)
 			-- upvalues: reactionExplosionMathModule (copy), p0 (copy)
 			return reactionExplosionMathModule.solveParticle(p1, p0.particle)
 		end)
 		
 		return {
-			position = var7:map(function(p2) --[[ line: 46 ]]
+			position = var7:map(function(p2)
 				return UDim2.fromOffset(p2.x, p2.y)
 			end),
-			rotation = var7:map(function(p3) --[[ line: 49 ]]
+			rotation = var7:map(function(p3)
 				return p3.rotation
 			end),
-			scale = var7:map(function(p4) --[[ line: 52 ]]
+			scale = var7:map(function(p4)
 				return p4.scale
 			end),
-			imageStyle = var7:map(function(p5) --[[ line: 55 ]]
+			imageStyle = var7:map(function(p5)
 				-- upvalues: color3 (copy)
 				return { Color3 = color3, Transparency = p5.transparency }
 			end)
@@ -51,14 +51,14 @@ local var5 = reactModule.memo(function(p0) --[[ line: 38 ]]
 	})
 end)
 
-return reactModule.memo(function(p6) --[[ line: 93 | named "ReactionExplosion" ]]
+return reactModule.memo(function(p6)
 	-- upvalues: reactionExplosionTickerModule (ref), reactModule (ref), reactionExplosionMathModule (ref), var5 (ref)
 	local ticker = p6.ticker or reactionExplosionTickerModule.shared
-	local var9 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p6 (ref), reactionExplosionMathModule (copy)
 		return p6.particleCount or math.random(reactionExplosionMathModule.MIN_PARTICLES, reactionExplosionMathModule.MAX_PARTICLES)
 	end, { p6.particleCount })
-	local var10 = reactModule.useMemo(function() --[[ line: 102 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref), reactionExplosionMathModule (copy)
 		local t = {}
 		
@@ -75,13 +75,13 @@ return reactModule.memo(function(p6) --[[ line: 93 | named "ReactionExplosion" ]
 	local var11, var12 = reactModule.useBinding(0)
 	local var13 = reactModule.useRef(p6.onComplete)
 	var13.current = p6.onComplete
-	reactModule.useLayoutEffect(function() --[[ line: 122 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: ticker (ref), reactionExplosionMathModule (copy), var12 (ref), var13 (ref)
 		local var16 = nil
 		local var17 = false
 		local var18 = nil
 		
-		return ticker.add(function(p7) --[[ line: 128 ]]
+		return ticker.add(function(p7)
 			-- upvalues: var16 (write), reactionExplosionMathModule (copy), var12 (copy), var17 (write), var18 (write), var13 (copy)
 			if var16 == nil then
 				var16 = p7

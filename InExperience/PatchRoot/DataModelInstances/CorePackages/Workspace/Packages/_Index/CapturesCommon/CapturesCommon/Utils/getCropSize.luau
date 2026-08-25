@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "getCropSize" ]]
+﻿return function(p0, p1)
 	if p0.X == 0 or p0.Y == 0 or (p1.X == 0 or p1.Y == 0) then
 		return UDim2.fromScale(1, 1)
 	end

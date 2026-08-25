@@ -7,15 +7,15 @@ local dateTime = require(parent.Time).DateTime
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 local playersService = game:GetService("Players")
 
-local function getMessageId(p0) --[[ line: 13 ]]
+local function getMessageId(p0)
 	return p0.id
 end
 
-local function messageSortPredicate(p1, p2) --[[ line: 17 ]]
+local function messageSortPredicate(p1, p2)
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p3, p4) --[[ line: 24 ]]
+local function sendingMessageSortPredicate(p3, p4)
 	return p3.order < p4.order
 end
 
@@ -28,7 +28,7 @@ local t = {
 	UserOptedIntoChatMessagesStatus = appChatNetworkingModule.Constants.UserOptedIntoChatMessagesStatusResponse
 }
 
-function t.IdForFakeOneOnOne(p5) --[[ line: 38 ]]
+function t.IdForFakeOneOnOne(p5)
 	-- upvalues: t (ref)
 	local ONE_TO_ONE_CONVERSATION = t.Type.ONE_TO_ONE_CONVERSATION
 	table.sort(p5)
@@ -39,11 +39,11 @@ function t.IdForFakeOneOnOne(p5) --[[ line: 38 ]]
 	return ONE_TO_ONE_CONVERSATION
 end
 
-function t.new() --[[ line: 50 ]]
+function t.new()
 	return {}
 end
 
-function t.fromUser(p6) --[[ line: 56 ]]
+function t.fromUser(p6)
 	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), playersService (ref), constantsModule (ref)
 	local var8 = t.new()
 	var8.messages = orderedMap.new(getMessageId, messageSortPredicate)
@@ -66,7 +66,7 @@ function t.fromUser(p6) --[[ line: 56 ]]
 	return var8
 end
 
-function t.empty(p7) --[[ line: 82 ]]
+function t.empty(p7)
 	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), constantsModule (ref), dateTime (ref)
 	local var9 = t.new()
 	var9.id = "-1"
@@ -95,7 +95,7 @@ function t.empty(p7) --[[ line: 82 ]]
 	return var9
 end
 
-function t.fromWeb(p8, p9) --[[ line: 116 ]]
+function t.fromWeb(p8, p9)
 	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), constantsModule (ref), dateTime (ref)
 	local var10 = t.new()
 	var10.messages = orderedMap.new(getMessageId, messageSortPredicate)

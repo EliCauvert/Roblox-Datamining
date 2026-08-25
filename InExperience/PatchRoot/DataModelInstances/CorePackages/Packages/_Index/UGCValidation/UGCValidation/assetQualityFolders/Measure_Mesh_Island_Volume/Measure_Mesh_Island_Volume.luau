@@ -11,7 +11,7 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshIslandVolume),
-	run = function(p0, p1) --[[ line: 17 ]]
+	run = function(p0, p1)
 		-- upvalues: getFFlagUGCValidateAQMeshQualityBlockUploadModule (ref), errorSourceStringsModule (ref), UGCValidationMeshIslandVolumeMaxComponents (ref)
 		local measureMeshIslandVolume = p1.aqsSummaryData.Measure_Mesh_Island_Volume
 		

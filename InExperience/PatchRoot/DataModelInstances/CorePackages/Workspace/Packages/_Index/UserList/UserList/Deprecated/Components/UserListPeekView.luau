@@ -18,12 +18,12 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useTopBarHeight (ref), useDispatch (ref), reactModule (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateBack (ref), peekViewState (ref), useLocalization (ref), peekViewWithTopBar (ref), userListPeekViewTopBarModule (ref), view (ref), text (ref), userListModule (ref), button (ref)
 	local uDim = UDim.new(0.55, 0)
 	local var9 = useTopBarHeight()
 	local var10 = useDispatch()
-	local var11 = reactModule.useCallback(function() --[[ line: 39 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var4 (copy), var10 (ref), navigateBack (copy)
 		if fFlagSignalsNavP3Dispatch then
 			var4.back(true)
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 34 ]]
 	return reactModule.createElement(peekViewWithTopBar, {
 		briefViewContentHeight = uDim,
 		fullViewContentHeight = UDim.new(1, -var9),
-		onViewStateChanged = reactModule.useCallback(function(p1, _, _) --[[ line: 47 ]]
+		onViewStateChanged = reactModule.useCallback(function(p1, _, _)
 			-- upvalues: peekViewState (copy), var11 (ref)
 			if p1 == peekViewState.Closed then
 				var11()

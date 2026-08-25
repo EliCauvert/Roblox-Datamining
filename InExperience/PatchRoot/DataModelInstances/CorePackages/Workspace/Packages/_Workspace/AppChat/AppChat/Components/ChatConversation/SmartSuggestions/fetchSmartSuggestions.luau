@@ -2,9 +2,9 @@
 local constantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 
-return function(p0) --[[ line: 11 | named "fetchSmartSuggestions" ]]
+return function(p0)
 	-- upvalues: appChatNetworkingModule (ref), constantsModule (ref)
-	return appChatNetworkingModule.http.GetSuggestions(nil, p0, constantsModule.SUGGESTION_TYPES, constantsModule.MAX_SUGGESTIONS):andThen(function(p1) --[[ line: 14 ]]
+	return appChatNetworkingModule.http.GetSuggestions(nil, p0, constantsModule.SUGGESTION_TYPES, constantsModule.MAX_SUGGESTIONS):andThen(function(p1)
 		local t
 		local responseBody = p1 and p1.responseBody
 		

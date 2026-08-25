@@ -5,28 +5,28 @@ local userInputService = game:GetService("UserInputService")
 local getFFlagDisableRobuxUpsellModule = require(parent.Flags.GetFFlagDisableRobuxUpsell)
 
 return {
-	new = function() --[[ line: 10 ]]
+	new = function()
 		-- upvalues: userInputService (ref), runService (ref), guiService (ref), getFFlagDisableRobuxUpsellModule (ref)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function() --[[ line: 14 ]]
+			__tostring = function()
 				return "Service(ExternalSettings)"
 			end
 		})
 		
-		function t.getPlatform() --[[ line: 19 ]]
+		function t.getPlatform()
 			-- upvalues: userInputService (copy)
 			return userInputService:GetPlatform()
 		end
 		
-		function t.isStudio() --[[ line: 23 ]]
+		function t.isStudio()
 			-- upvalues: runService (copy)
 			return runService:IsStudio()
 		end
 		
-		function t.isThirdPartyPurchaseAllowed() --[[ line: 27 ]]
+		function t.isThirdPartyPurchaseAllowed()
 			local var5 = true
-			pcall(function() --[[ line: 30 ]]
+			pcall(function()
 				-- upvalues: var5 (write)
 				var5 = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
 			end)
@@ -34,28 +34,28 @@ return {
 			return var5
 		end
 		
-		function t.getLuaUseThirdPartyPermissions() --[[ line: 36 ]]
+		function t.getLuaUseThirdPartyPermissions()
 			return true
 		end
 		
-		function t.getFlagBypassThirdPartySettingForRobloxPurchase() --[[ line: 40 ]]
+		function t.getFlagBypassThirdPartySettingForRobloxPurchase()
 			return true
 		end
 		
-		function t.getFlagRestrictSales2() --[[ line: 45 ]]
+		function t.getFlagRestrictSales2()
 			return settings():GetFFlag("RestrictSales2")
 		end
 		
-		function t.getFlagOrder66() --[[ line: 49 ]]
+		function t.getFlagOrder66()
 			return settings():GetFFlag("Order66")
 		end
 		
-		function t.isTenFootInterface() --[[ line: 53 ]]
+		function t.isTenFootInterface()
 			-- upvalues: guiService (copy)
 			return guiService:IsTenFootInterface()
 		end
 		
-		function t.getFFlagDisableRobuxUpsell() --[[ line: 57 ]]
+		function t.getFFlagDisableRobuxUpsell()
 			-- upvalues: getFFlagDisableRobuxUpsellModule (copy)
 			return getFFlagDisableRobuxUpsellModule()
 		end

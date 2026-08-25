@@ -7,7 +7,7 @@ alertViewSoakArea.defaultProps = {
 	BackgroundColor3 = Color3.fromRGB(255, 0, 255)
 }
 
-function alertViewSoakArea.render(p0) --[[ line: 14 ]]
+function alertViewSoakArea.render(p0)
 	-- upvalues: roact (ref), socialLibrariesSelectableAlertViewShim (ref)
 	return roact.createElement("ImageButton", {
 		Active = true,

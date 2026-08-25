@@ -4,9 +4,9 @@ local sortInvitesByScoreExperimentLayer = game:DefineFastString("SortInvitesBySc
 return {
 	FFlagEnableSortInvitesByScoreExperiment = game:DefineFastFlag("EnableSortInvitesByScoreExperiment", false),
 	FFlagSortInvitesByScoreEnabledForAll = game:DefineFastFlag("SortInvitesByScoreEnabledForAll", false),
-	useSortInvitesByScoreExperiment = function() --[[ line: 16 ]]
+	useSortInvitesByScoreExperiment = function()
 		-- upvalues: useUserExperiment (ref), sortInvitesByScoreExperimentLayer (ref)
-		return useUserExperiment({ sortInvitesByScoreExperimentLayer }, function(p0) --[[ line: 19 ]]
+		return useUserExperiment({ sortInvitesByScoreExperimentLayer }, function(p0)
 			-- upvalues: sortInvitesByScoreExperimentLayer (copy)
 			return (p0[sortInvitesByScoreExperimentLayer] or {}).sortInvitesByScore
 		end)

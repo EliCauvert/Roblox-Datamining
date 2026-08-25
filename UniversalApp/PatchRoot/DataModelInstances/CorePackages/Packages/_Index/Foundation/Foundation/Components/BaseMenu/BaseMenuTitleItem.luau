@@ -9,7 +9,7 @@ local _ = require(foundation.Enums.ControlState)
 local _ = require(foundation.Enums.InputSize)
 local useBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVariants)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | named "BaseMenuTitleItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokensModule (ref), useBaseMenuItemVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref)
 	local var7 = useBaseMenuItemVariantsModule(useTokensModule(), p0.size, false)
 	

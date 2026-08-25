@@ -24,7 +24,7 @@ local fFlagSduiUsageTelemetry = require(parent.SharedFlags).FFlagSduiUsageTeleme
 local t = {}
 local var16 = nil
 
-local function SduiErrorComponent(_) --[[ line: 45 ]]
+local function SduiErrorComponent(_)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -32,7 +32,7 @@ local function SduiErrorComponent(_) --[[ line: 45 ]]
 	})
 end
 
-local var18 = reactModule.memo(function(p0) --[[ line: 53 ]]
+local var18 = reactModule.memo(function(p0)
 	-- upvalues: sduiBuilderProcessingPhase (ref), reactModule (ref), sduiBuilderModule (ref), compareSduiAnalyticsContextModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), cryoModule (ref), t (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), parsePropsModule (ref), validateInterfaceModule (ref), var16 (write)
 	local processed = p0.componentConfig.__processed
 	local var19 = if processed then sduiBuilderProcessingPhase.Render else sduiBuilderProcessingPhase.Lazy
@@ -146,7 +146,7 @@ local var18 = reactModule.memo(function(p0) --[[ line: 53 ]]
 	return reactModule.createElement(var23, var24, var30)
 end, compareSduiPropsModule)
 
-return reactModule.memo(function(p1) --[[ line: 174 ]]
+return reactModule.memo(function(p1)
 	-- upvalues: sduiErrorType (ref), reactModule (ref), SduiErrorComponent (ref), validateInterfaceModule (ref), uiComponentInterface (ref), sduiErrorsModule (ref), fFlagSduiUsageTelemetry (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), sduiConditionalPropWrapperModule (ref), var18 (ref)
 	if not p1.componentConfig then
 		p1.sduiContext.dependencies.logger.reportError(sduiErrorType.NilComponentConfig, { name = p1.debugName }, p1.sduiContext.appPage)

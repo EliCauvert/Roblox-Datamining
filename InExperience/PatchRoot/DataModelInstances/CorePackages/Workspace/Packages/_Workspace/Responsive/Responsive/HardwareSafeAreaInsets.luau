@@ -19,13 +19,13 @@ local var5 = nil
 local var6 = nil
 local t_1 = { left = 0, top = 0, right = 0, bottom = 0 }
 
-function diffInsets(value, p0) --[[ line: 43 ]]
+function diffInsets(value, p0)
 	return if value.top == p0.top then if value.bottom == p0.bottom then if value.left == p0.left then value.right ~= p0.right else true else true else true
 end
 
 local var8 = nil
 
-function handleSizeChange() --[[ line: 48 ]]
+function handleSizeChange()
 	-- upvalues: t_1 (write), var8 (write), var4 (ref)
 	local var9 = getHardwareSafeAreaInsets()
 	
@@ -35,7 +35,7 @@ function handleSizeChange() --[[ line: 48 ]]
 		if var8 then
 			task.cancel(var8)
 		end
-		var8 = task.defer(function() --[[ line: 55 ]]
+		var8 = task.defer(function()
 			-- upvalues: var8 (copy), var4 (copy), var9 (ref)
 			var8 = nil
 			var4:fire(var9)
@@ -43,7 +43,7 @@ function handleSizeChange() --[[ line: 48 ]]
 	end
 end
 
-function init() --[[ line: 62 ]]
+function init()
 	-- upvalues: var3 (write), var5 (write), coreGuiService (ref), var6 (write)
 	if var3 then return end
 	if not var5 then
@@ -66,7 +66,7 @@ function init() --[[ line: 62 ]]
 	var3 = true
 end
 
-function getHardwareSafeAreaInsets() --[[ line: 89 ]]
+function getHardwareSafeAreaInsets()
 	-- upvalues: var5 (write), var6 (write), t (ref), userInputService (ref)
 	local absolutePosition = var5.AbsolutePosition
 	local absoluteSize = var5.AbsoluteSize
@@ -88,24 +88,24 @@ function getHardwareSafeAreaInsets() --[[ line: 89 ]]
 end
 
 return {
-	connect = function(_, p1) --[[ line: 113 ]]
+	connect = function(_, p1)
 		-- upvalues: var4 (ref)
 		init()
 		
 		return var4:connect(p1)
 	end,
-	deviceInsets = function() --[[ line: 117 ]]
+	deviceInsets = function()
 		-- upvalues: t_1 (write)
 		init()
 		
 		return t_1
 	end,
 	diffInsets = diffInsets,
-	hasExtraPlatformInset = function() --[[ line: 122 ]]
+	hasExtraPlatformInset = function()
 		-- upvalues: fFlagEnableLeftNavOnConsole (ref), t (ref), userInputService (ref)
 		return if fFlagEnableLeftNavOnConsole then false else t[userInputService:GetPlatform()]
 	end,
-	fullscreenGui = function() --[[ line: 128 ]]
+	fullscreenGui = function()
 		-- upvalues: var5 (write)
 		init()
 		

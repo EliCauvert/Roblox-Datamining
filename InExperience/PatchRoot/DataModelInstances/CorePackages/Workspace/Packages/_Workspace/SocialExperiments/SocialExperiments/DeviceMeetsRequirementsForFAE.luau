@@ -4,14 +4,14 @@ local FAEUpsellDeviceNamePipeDenyList = game:DefineFastString("FAEUpsellDeviceNa
 local FAEUpsellSystemVersionPipeDenyList = game:DefineFastString("FAEUpsellSystemVersionPipeDenyList", "")
 local var3 = nil
 
-return function() --[[ line: 9 | named "deviceMeetsRequirementsForFAE" ]]
+return function()
 	-- upvalues: fFlagTestDeviceForFAEUpsellModule (ref), var3 (write), systemInfoProtocol (ref), FAEUpsellDeviceNamePipeDenyList (ref), FAEUpsellSystemVersionPipeDenyList (ref)
 	if not fFlagTestDeviceForFAEUpsellModule then
 		return true
 	elseif var3 ~= nil then
 		return var3
 	end
-	local ok, status = pcall(function() --[[ line: 16 ]]
+	local ok, status = pcall(function()
 		-- upvalues: systemInfoProtocol (copy), FAEUpsellDeviceNamePipeDenyList (copy), var3 (copy), FAEUpsellSystemVersionPipeDenyList (copy)
 		local var4 = systemInfoProtocol.default:getSystemInfo({
 			systemInfoProtocol.InfoNames.DEVICE_NAME,

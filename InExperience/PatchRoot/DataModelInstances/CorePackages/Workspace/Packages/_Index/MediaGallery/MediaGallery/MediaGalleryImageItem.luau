@@ -11,7 +11,7 @@ local _ = require(mediaGallery.MediaGalleryTypes)
 local getImageUriModule = require(mediaGallery.getImageUri)
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "MediaGalleryImageItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), getImageUriModule (ref), fFlagSduiExperienceDetailsSupport (ref), image (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
 	local var4 = useTokens()
 	local imageId = p0.imageId
@@ -20,10 +20,10 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "MediaGalleryImageIte
 		imageId = string.format("https://img.youtube.com/vi/%s/hqdefault.jpg", p0.videoHash)
 	end
 	local uDim = UDim.new(0, p0.cornerRadius or var4.Radius.Medium)
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: imageId (write), getImageUriModule (copy)
 		if imageId then
-			task.spawn(function() --[[ line: 48 ]]
+			task.spawn(function()
 				-- upvalues: getImageUriModule (copy), imageId (copy)
 				local imageLabel = Instance.new("ImageLabel")
 				imageLabel.Image = getImageUriModule(imageId)
@@ -45,7 +45,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "MediaGalleryImageIte
 			Size = UDim2.fromScale(1, 1),
 			Image = getImageUriModule(imageId),
 			ScaleType = Enum.ScaleType.Crop,
-			onLoaded = if fFlagSduiExperienceDetailsSupport and p0.onMediaResolved then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p1) --[[ line: 59 ]]
+			onLoaded = if fFlagSduiExperienceDetailsSupport and p0.onMediaResolved then if fFlagSduiExperienceDetailsSupport then reactModule.useCallback(function(p1)
 				-- upvalues: p0 (ref)
 				if p0.onMediaResolved then
 					p0.onMediaResolved(p1 == Enum.AssetFetchStatus.Success)
@@ -75,7 +75,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "MediaGalleryImageIte
 			icon = { name = foundationModule.Enums.IconName.PlayLarge },
 			size = inputSize.Large,
 			variant = buttonVariant.OverMedia,
-			onActivated = reactModule.useCallback(function() --[[ line: 66 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: p0 (ref), imageId (write)
 				if p0.onYouTubeVideoPlay then
 					p0.onYouTubeVideoPlay({

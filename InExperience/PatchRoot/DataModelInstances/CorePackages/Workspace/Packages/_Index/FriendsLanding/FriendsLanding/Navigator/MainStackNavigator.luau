@@ -11,7 +11,7 @@ return roactNavigation.createRobloxStackNavigator({
 		}
 	}
 }, {
-	transitionConfig = function() --[[ line: 13 ]]
+	transitionConfig = function()
 		-- upvalues: userGameSettingsService (ref), roactNavigation (ref)
 		return if userGameSettingsService.ReducedMotion then roactNavigation.StackViewTransitionConfigs.FadeInPlace else roactNavigation.StackViewTransitionConfigs.SlideFromRight
 	end

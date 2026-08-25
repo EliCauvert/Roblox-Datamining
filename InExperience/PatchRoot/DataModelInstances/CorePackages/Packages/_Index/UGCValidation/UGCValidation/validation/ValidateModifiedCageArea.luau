@@ -32,7 +32,7 @@ local t_1 = {
 	}
 }
 
-local function reportTestFailedToExecute(p0, p1, p2) --[[ line: 58 ]]
+local function reportTestFailedToExecute(p0, p1, p2)
 	-- upvalues: analyticsModule (ref)
 	if p2.isServer ~= nil and p2.isServer then
 		error(p0)
@@ -42,7 +42,7 @@ local function reportTestFailedToExecute(p0, p1, p2) --[[ line: 58 ]]
 	return false, { p0 }
 end
 
-local function gatherUVs(p3) --[[ line: 73 ]]
+local function gatherUVs(p3)
 	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref)
 	local t = {}
 	
@@ -54,7 +54,7 @@ local function gatherUVs(p3) --[[ line: 73 ]]
 	return t
 end
 
-local function lazyGetUVsExcludedForAssetType(value) --[[ line: 87 ]]
+local function lazyGetUVsExcludedForAssetType(value)
 	-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), gatherUVs (ref)
 	if not value.uVsDisallowedForAssetType then
 		local t = {}
@@ -69,7 +69,7 @@ local function lazyGetUVsExcludedForAssetType(value) --[[ line: 87 ]]
 	return value.uVsDisallowedForAssetType
 end
 
-local function _(value) --[[ line: 102 | named "lazyGetUVsForAssetType" ]]
+local function _(value)
 	-- upvalues: gatherUVs (ref)
 	if not value.uVsForAssetType then
 		value.uVsForAssetType = gatherUVs(value.allowedParts)
@@ -77,7 +77,7 @@ local function _(value) --[[ line: 102 | named "lazyGetUVsForAssetType" ]]
 	return value.uVsForAssetType
 end
 
-local _ = function(value) --[[ line: 110 | named "lazyGetMainUVsForAssetType" ]]
+local _ = function(value)
 	-- upvalues: gatherUVs (ref)
 	if not value.mainUVsForAssetType then
 		value.mainUVsForAssetType = gatherUVs(value.mainParts)
@@ -85,7 +85,7 @@ local _ = function(value) --[[ line: 110 | named "lazyGetMainUVsForAssetType" ]]
 	return value.mainUVsForAssetType
 end
 
-function t.validateExcludedModifiedUVs(p4, p5, p6, p7, p8) --[[ line: 121 ]]
+function t.validateExcludedModifiedUVs(p4, p5, p6, p7, p8)
 	-- upvalues: t_1 (ref), lazyGetUVsExcludedForAssetType (ref), pcallDeferredModule (ref), UGCValidationService (ref), reportTestFailedToExecute (ref), analyticsModule (ref), UGCValidateExcludedUVModifyRequirements (ref), stringUtilModule (ref)
 	local var19 = assert(t_1[p8.assetTypeEnum], "bodyArea should be defined")
 	local var20 = lazyGetUVsExcludedForAssetType(var19)
@@ -93,7 +93,7 @@ function t.validateExcludedModifiedUVs(p4, p5, p6, p7, p8) --[[ line: 121 ]]
 	if #var20 == 0 then
 		return true
 	end
-	local var21, var22, var23, var24 = pcallDeferredModule(function() --[[ line: 136 ]]
+	local var21, var22, var23, var24 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), var20 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref)
 		return UGCValidationService:CalculateEditableMeshNumModifiedCageUVsInSet(var20, p4.editableMesh, p5, p6.editableMesh, p7)
 	end, p8)
@@ -118,7 +118,7 @@ function t.validateExcludedModifiedUVs(p4, p5, p6, p7, p8) --[[ line: 121 ]]
 	return true
 end
 
-function t.validateMainModifiedUVs(p9, p10, p11, p12, p13) --[[ line: 190 ]]
+function t.validateMainModifiedUVs(p9, p10, p11, p12, p13)
 	-- upvalues: t_1 (ref), gatherUVs (ref), pcallDeferredModule (ref), UGCValidationService (ref), reportTestFailedToExecute (ref), analyticsModule (ref), UGCValidatePartUVModifyRequirements (ref), stringUtilModule (ref)
 	local var26 = assert(t_1[p13.assetTypeEnum], "bodyArea should be defined")
 	
@@ -130,7 +130,7 @@ function t.validateMainModifiedUVs(p9, p10, p11, p12, p13) --[[ line: 190 ]]
 	if #mainUVsForAssetType == 0 then
 		return true
 	end
-	local var27, var28, _, var29 = pcallDeferredModule(function() --[[ line: 205 ]]
+	local var27, var28, _, var29 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), mainUVsForAssetType (ref), p9 (ref), p10 (ref), p11 (ref), p12 (ref)
 		return UGCValidationService:CalculateEditableMeshNumModifiedCageUVsInSet(mainUVsForAssetType, p9.editableMesh, p10, p11.editableMesh, p12)
 	end, p13)
@@ -151,7 +151,7 @@ function t.validateMainModifiedUVs(p9, p10, p11, p12, p13) --[[ line: 190 ]]
 	}
 end
 
-function t.validateRenderMeshInsideModifiedOuterCageArea(p14, p15, p16, p17, p18, p19) --[[ line: 251 ]]
+function t.validateRenderMeshInsideModifiedOuterCageArea(p14, p15, p16, p17, p18, p19)
 	-- upvalues: t_1 (ref), gatherUVs (ref), pcallDeferredModule (ref), UGCValidationService (ref), getMeshVertsModule (ref), reportTestFailedToExecute (ref), analyticsModule (ref), var11 (ref), collisionTestUtilModule (ref), UGCValidateRenderMeshInsideModifiedArea (ref), stringUtilModule (ref)
 	local var31 = assert(t_1[p19.assetTypeEnum], "bodyArea should be defined")
 	
@@ -164,7 +164,7 @@ function t.validateRenderMeshInsideModifiedOuterCageArea(p14, p15, p16, p17, p18
 		return true
 	end
 	local var39
-	local var32, var33, var34 = pcallDeferredModule(function() --[[ line: 267 ]]
+	local var32, var33, var34 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), uVsForAssetType (ref), p15 (ref), p16 (ref), p17 (ref), p18 (ref)
 		return UGCValidationService:CalculateEditableMeshModifiedCageBoundingBox(uVsForAssetType, p15.editableMesh, p16, p17.editableMesh, p18)
 	end, p19)
@@ -210,7 +210,7 @@ function t.validateRenderMeshInsideModifiedOuterCageArea(p14, p15, p16, p17, p18
 	}
 end
 
-function t.validate(p20, p21, p22, p23, p24, p25) --[[ line: 330 ]]
+function t.validate(p20, p21, p22, p23, p24, p25)
 	-- upvalues: t_1 (ref), failureReasonsAccumulatorModule (ref), t (ref)
 	local var42 = if p25.assetTypeEnum then t_1[p25.assetTypeEnum] else nil
 	

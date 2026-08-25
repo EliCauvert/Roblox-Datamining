@@ -7,20 +7,20 @@ local _ = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryNormaliz
 local sduiListEntryRendererModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiListEntryRenderer)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 
-local function resolvePoolDataGetter(p0, p1, p2, p3) --[[ line: 24 ]]
+local function resolvePoolDataGetter(p0, p1, p2, p3)
 	-- upvalues: sduiPropUtilsModule (ref)
 	if p0 == nil or p0 == "" then
 		return nil
 	end
 	local var12 = sduiPropUtilsModule.generateDynamicBindingPropValue(p0, p1, p2, p3)
 	
-	return function(p4) --[[ line: 39 ]]
+	return function(p4)
 		-- upvalues: var12 (ref)
 		return var12(p4).data
 	end
 end
 
-local function buildPoolEntryConfigs(p5) --[[ line: 50 ]]
+local function buildPoolEntryConfigs(p5)
 	if typeof(p5) ~= "table" then
 		return nil
 	end
@@ -46,7 +46,7 @@ local function buildPoolEntryConfigs(p5) --[[ line: 50 ]]
 	return if var14 then t else nil
 end
 
-local function normalizePoolData(p6) --[[ line: 79 ]]
+local function normalizePoolData(p6)
 	if p6 == nil or next(p6) == nil then
 		return nil
 	end
@@ -117,7 +117,7 @@ local function normalizePoolData(p6) --[[ line: 79 ]]
 	return t
 end
 
-local function poolSectionFromEntry(p7) --[[ line: 135 ]]
+local function poolSectionFromEntry(p7)
 	local identifier = p7.identifier
 	
 	if typeof(identifier) ~= "string" then
@@ -144,7 +144,7 @@ local function poolSectionFromEntry(p7) --[[ line: 135 ]]
 	}
 end
 
-local function computePoolSections(p8) --[[ line: 165 ]]
+local function computePoolSections(p8)
 	-- upvalues: poolSectionFromEntry (ref)
 	local t = {}
 	
@@ -158,7 +158,7 @@ local function computePoolSections(p8) --[[ line: 165 ]]
 	return t
 end
 
-local function sectionsHaveMultiRow(p9) --[[ line: 178 ]]
+local function sectionsHaveMultiRow(p9)
 	for i, v in p9 do
 		if v.numberOfRows ~= 1 then
 			return true
@@ -167,7 +167,7 @@ local function sectionsHaveMultiRow(p9) --[[ line: 178 ]]
 	return false
 end
 
-local function applyPoolEntryConfigs(p10, p11) --[[ line: 189 ]]
+local function applyPoolEntryConfigs(p10, p11)
 	if p11 == nil then return end
 	for i, v in p11 do
 		local var29 = p10[i]
@@ -178,7 +178,7 @@ local function applyPoolEntryConfigs(p10, p11) --[[ line: 189 ]]
 	end
 end
 
-local function ingestPoolSections(p12, p13, p14, p15) --[[ line: 207 ]]
+local function ingestPoolSections(p12, p13, p14, p15)
 	-- upvalues: sduiPoolStoreModule (ref), normalizePoolData (ref), applyPoolEntryConfigs (ref)
 	local configKey = p14.configKey
 	
@@ -205,7 +205,7 @@ return {
 	computePoolSections = computePoolSections,
 	sectionsHaveMultiRow = sectionsHaveMultiRow,
 	ingestPoolSections = ingestPoolSections,
-	createPoolEntryFns = function(p16, p17, p18, p19, p20, p21, p22) --[[ line: 232 ]]
+	createPoolEntryFns = function(p16, p17, p18, p19, p20, p21, p22)
 		-- upvalues: ingestPoolSections (ref), sduiListEntryRendererModule (ref)
 		local var32 = ingestPoolSections(p16, p21, p19, p22)
 		local var33 = nil
@@ -219,14 +219,14 @@ return {
 					t[v.sectionId] = true
 				end
 			end
-			var33 = function(p23) --[[ line: 254 ]]
+			var33 = function(p23)
 				-- upvalues: t (ref), var32 (ref)
 				local identifier = p23.identifier
 				
 				return if typeof(identifier) == "string" and t[identifier] then { _section = { cells = var32.getSectionCells(identifier) } } else nil
 			end
 			
-			var34 = function(p24, _) --[[ line: 266 ]]
+			var34 = function(p24, _)
 				-- upvalues: var32 (ref)
 				local identifier = p24.identifier
 				

@@ -8,11 +8,11 @@ local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
 local waveformWidth = constantsModule.AudioWaveform.WaveformWidth
 local waveformPadding = constantsModule.AudioWaveform.WaveformPadding
 
-local function _(value) --[[ line: 18 | named "assetIdAsContent" ]]
+local function _(value)
 	return `rbxassetid://{value}`
 end
 
-local function normalizeWaveform(p0) --[[ line: 22 ]]
+local function normalizeWaveform(p0)
 	local var5 = 0
 	local t = {}
 	
@@ -32,19 +32,19 @@ local function normalizeWaveform(p0) --[[ line: 22 ]]
 	return t_1
 end
 
-return function(p1, p2) --[[ line: 47 | named "useAudioWaveform" ]]
+return function(p1, p2)
 	-- upvalues: reactModule (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), useEffect (ref), localPlayer (ref), normalizeWaveform (ref)
 	local var9, var10 = reactModule.useState({})
 	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useMemo(function() --[[ line: 51 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p2 (ref)
 		return segmentSelectorWidth / (waveformWidth + waveformPadding) / p2
 	end, { p2 })
-	local var13 = reactModule.useMemo(function() --[[ line: 55 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref)
 		return `rbxassetid://{p1}`
 	end, { p1 })
-	useEffect(function() --[[ line: 59 ]]
+	useEffect(function()
 		-- upvalues: var13 (ref), var11 (ref), localPlayer (copy)
 		local audioWaveform = Instance.new("Folder")
 		audioWaveform.Name = "AudioWaveform"
@@ -54,23 +54,23 @@ return function(p1, p2) --[[ line: 47 | named "useAudioWaveform" ]]
 		var11.current = audioPlayer
 		audioWaveform.Parent = localPlayer:WaitForChild("PlayerGui")
 		
-		return function() --[[ line: 70 ]]
+		return function()
 			-- upvalues: audioWaveform (ref)
 			audioWaveform:Destroy()
 		end
 	end, { p1, p2 })
-	local var14 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), var12 (ref), var10 (ref), normalizeWaveform (copy)
 		local current = var11.current
 		
 		if current and current.IsReady then
-			task.spawn(function() --[[ line: 82 ]]
+			task.spawn(function()
 				-- upvalues: current (ref), var12 (copy), var10 (copy), normalizeWaveform (copy)
 				var10(normalizeWaveform(current:GetWaveformAsync(NumberRange.new(0, current.TimeLength), var12 * current.TimeLength)))
 			end)
 		end
 	end, {})
-	useEffect(function() --[[ line: 92 ]]
+	useEffect(function()
 		-- upvalues: var11 (ref), var14 (ref)
 		local current = var11.current
 		local t = {}
@@ -78,7 +78,7 @@ return function(p1, p2) --[[ line: 47 | named "useAudioWaveform" ]]
 		if current then
 			table.insert(t, current:GetPropertyChangedSignal("IsReady"):Connect(var14))
 		end
-		return function() --[[ line: 99 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

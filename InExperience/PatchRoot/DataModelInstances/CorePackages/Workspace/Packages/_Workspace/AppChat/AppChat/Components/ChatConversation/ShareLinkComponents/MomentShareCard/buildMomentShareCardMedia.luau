@@ -3,13 +3,13 @@ local foundationModule = require(script:FindFirstAncestor("AppChat").Parent.Foun
 local getRbxThumb = foundationModule.Utility.getRbxThumb
 local thumbnailType = foundationModule.Enums.ThumbnailType
 
-local function _(p0, p1, p2) --[[ line: 23 | named "getMediaContentUri" ]]
+local function _(p0, p1, p2)
 	local var2 = `rbxassetid://{p0}`
 	
 	return if p1 == Enum.CaptureType.Video and p2 ~= nil then `{var2}&accessContext={p2}&permissionContext=ignoreUniverse` else var2
 end
 
-return function(p3) --[[ line: 31 | named "buildMomentShareCardMedia" ]]
+return function(p3)
 	-- upvalues: httpService (ref), getRbxThumb (ref), thumbnailType (ref)
 	local assetId = p3.assetId
 	local captureType = p3.captureType

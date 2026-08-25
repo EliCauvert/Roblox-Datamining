@@ -23,7 +23,7 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0) --[[ line: 57 ]]
+local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0)
 	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var10, var11 = reactModule.useState(0)
 	
@@ -52,11 +52,11 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0) --[[ line:
 			text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Retake"),
 			fitContent = true,
 			standardSize = standardButtonSize.XSmall,
-			onActivated = reactModule.useCallback(function() --[[ line: 62 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: p0 (ref)
 				p0.setShowRestartDialog(true)
 			end, { p0.setShowRestartDialog }),
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1) --[[ line: 59 ]]
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
 				-- upvalues: var11 (ref)
 				var11(p1.AbsoluteSize.X)
 			end, { var11 })
@@ -64,34 +64,34 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0) --[[ line:
 	})
 end
 
-return function(p2) --[[ line: 103 | named "ScreenshotReviewDialog" ]]
+return function(p2)
 	-- upvalues: usePreferredInput (ref), responsiveModule (ref), robloxTranslatorModule (ref), reactModule (ref), useStyle (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), restartScreenshotDialogModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), ScreenshotReviewDialogSmallPortraitModeHeaderRight (ref), button (ref), buttonType (ref), standardButtonSize (ref), dividerModule (ref), buttonStack (ref)
 	local var12 = usePreferredInput() == responsiveModule.Input.Directional
 	
 	if robloxTranslatorModule then
 		local var13 = if p2.isSmallPortraitMode then 104 else 60
-		local var14 = reactModule.useCallback(function() --[[ line: 115 ]]
+		local var14 = reactModule.useCallback(function()
 			-- upvalues: p2 (ref)
 			p2.reportAnythingAnalytics.incrementPreviewBack()
 			p2.onBack()
 		end, { p2.onBack, p2.reportAnythingAnalytics })
-		local var15 = reactModule.useCallback(function() --[[ line: 120 ]]
+		local var15 = reactModule.useCallback(function()
 			-- upvalues: p2 (ref)
 			p2.reportAnythingAnalytics.incrementPreviewAttach()
 			p2.onSkip()
 		end, { p2.onSkip, p2.reportAnythingAnalytics })
 		local var16, var17 = reactModule.useState(false)
-		local var18 = reactModule.useCallback(function() --[[ line: 127 ]]
+		local var18 = reactModule.useCallback(function()
 			-- upvalues: p2 (ref), var17 (ref)
 			p2.reportAnythingAnalytics.incrementRetake()
 			var17(true)
 		end, { var17, p2.reportAnythingAnalytics })
-		local var19 = reactModule.useCallback(function() --[[ line: 132 ]]
+		local var19 = reactModule.useCallback(function()
 			-- upvalues: p2 (ref)
 			p2.reportAnythingAnalytics.setRetakeAbandon()
 			p2.onRestart()
 		end, { p2.onRestart, p2.reportAnythingAnalytics })
-		local var20 = reactModule.useCallback(function() --[[ line: 137 ]]
+		local var20 = reactModule.useCallback(function()
 			-- upvalues: p2 (ref)
 			p2.reportAnythingAnalytics.incrementHighlightScene()
 			p2.onNextPage()
@@ -129,7 +129,7 @@ return function(p2) --[[ line: 103 | named "ScreenshotReviewDialog" ]]
 						DialogBody = reactModule.createElement(restartScreenshotDialogModule, {
 							ZIndex = 3,
 							isSmallPortraitMode = p2.isSmallPortraitMode,
-							onCancel = function() --[[ line: 182 ]]
+							onCancel = function()
 								-- upvalues: var17 (ref)
 								var17(false)
 							end,
@@ -188,7 +188,7 @@ return function(p2) --[[ line: 103 | named "ScreenshotReviewDialog" ]]
 								backgroundTransparency = 1,
 								barHeight = 48,
 								margin = 12,
-								renderLeft = function() --[[ line: 242 ]]
+								renderLeft = function()
 									-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), var14 (ref)
 									return reactModule.createElement(iconButton, {
 										iconSize = iconSize.Medium,
@@ -196,7 +196,7 @@ return function(p2) --[[ line: 103 | named "ScreenshotReviewDialog" ]]
 										onActivated = var14
 									})
 								end,
-								renderRight = function() --[[ line: 250 ]]
+								renderRight = function()
 									-- upvalues: p2 (ref), reactModule (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), var18 (ref), font (ref), theme (ref), button (copy), buttonType (copy), robloxTranslatorModule (copy), standardButtonSize (copy)
 									return if p2.isSmallPortraitMode then reactModule.createElement(ScreenshotReviewDialogSmallPortraitModeHeaderRight, {
 										onActivated = var18,

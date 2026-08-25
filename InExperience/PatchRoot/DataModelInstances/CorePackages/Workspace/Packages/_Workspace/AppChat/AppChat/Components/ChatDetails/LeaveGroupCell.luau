@@ -18,7 +18,7 @@ local t = {
 	style = nil
 }
 
-function LeaveGroupCell(p0) --[[ line: 37 ]]
+function LeaveGroupCell(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), roactFitComponents (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	

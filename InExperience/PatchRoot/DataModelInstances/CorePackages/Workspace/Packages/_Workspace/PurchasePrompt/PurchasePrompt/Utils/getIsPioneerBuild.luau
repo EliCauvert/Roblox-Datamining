@@ -1,5 +1,5 @@
-﻿return function() --[[ line: 2 ]]
-	local ok, status = pcall(function() --[[ line: 3 ]]
+﻿return function()
+	local ok, status = pcall(function()
 		return game.PioneerSource == Enum.PioneerSource.DaveyBazooka
 	end)
 	

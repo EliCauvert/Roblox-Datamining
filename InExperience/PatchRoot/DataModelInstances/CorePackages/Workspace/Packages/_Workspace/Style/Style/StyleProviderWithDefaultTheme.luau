@@ -12,7 +12,7 @@ local colorMode = foundationModule.Enums.ColorMode
 local useTokens = foundationModule.Hooks.useTokens
 local t = { withUiModeSupport = true, withDarkTheme = true }
 
-return function(p0) --[[ line: 35 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), uiModeStyleProviderModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), foundationProvider (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local var8 = reactModule.createElement(if p0.withUiModeSupport then uiModeStyleProviderModule else appStyleProvider, {

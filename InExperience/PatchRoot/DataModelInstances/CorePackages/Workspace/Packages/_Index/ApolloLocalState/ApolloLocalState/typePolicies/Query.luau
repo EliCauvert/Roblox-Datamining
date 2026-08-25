@@ -7,7 +7,7 @@ return {
 	fields = {
 		omniFeedItem = {},
 		profilesInsightsByUserIds = {
-			read = function(_, _, p0) --[[ line: 12 ]]
+			read = function(_, _, p0)
 				local t = {}
 				
 				for i, v in pairs(p0.args.userIds) do
@@ -22,7 +22,7 @@ return {
 			end
 		},
 		userProfiles = {
-			read = function(_, _, p1) --[[ line: 34 ]]
+			read = function(_, _, p1)
 				local t = {}
 				
 				for i, v in p1.args.userIds do
@@ -38,7 +38,7 @@ return {
 		},
 		allFriendsByUserId = {
 			keyArgs = { "userId", "sort" },
-			merge = function(_, p2, p3) --[[ line: 57 ]]
+			merge = function(_, p2, p3)
 				-- upvalues: mergeListsWithoutDuplicatesModule (ref), cryoModule (ref)
 				return if p2 then if p2.nextCursor == p3.curCursor then cryoModule.Dictionary.join(p3, {
 					friends = mergeListsWithoutDuplicatesModule(p2 and p2.friends, p3 and p3.friends, "__ref")
@@ -47,9 +47,9 @@ return {
 		},
 		onlineFriendsByUserId = {
 			keyArgs = { "userId", "sort" },
-			read = function(_, p4, p5) --[[ line: 80 ]]
+			read = function(_, p4, p5)
 				-- upvalues: cryoModule (ref)
-				return p4 and cryoModule.List.filter(p4, function(p6) --[[ line: 85 ]]
+				return p4 and cryoModule.List.filter(p4, function(p6)
 					-- upvalues: p5 (ref)
 					local userPresenceType = p5:readField("userPresenceType", p5:readField("presence", p6))
 					

@@ -15,22 +15,22 @@ local useKeyboardEnabledModule = require(parent.Hooks.useKeyboardEnabled)
 local uDim = UDim.new(0, 8)
 local var10 = if userInputService:GetPlatform() == Enum.Platform.OSX then "Opt" else "Alt"
 
-return capturesPolicyModule.connect(function(p2) --[[ line: 222 ]]
+return capturesPolicyModule.connect(function(p2)
 	return { eligibleForVideoCapture = p2.eligibleForVideoCapture() }
-end)(function(p0) --[[ line: 44 ]]
+end)(function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), capturesContextModule (ref), guiService (ref), useLocalization (ref), var10 (ref), userInputService (ref), useKeyboardEnabledModule (ref), text (ref), uDim (ref), onOffButtonModule (ref), videoCaptureCTAModule (ref)
 	local var11 = useStyle()
 	local chromeEnabled = reactModule.useContext(capturesContextModule).chromeEnabled
 	local var12, var13 = reactModule.useState(Vector2.new(0, 0))
 	local var14, var15 = reactModule.useState(guiService.PreferredTextSize)
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), guiService (copy)
-		local var23 = guiService:GetPropertyChangedSignal("PreferredTextSize"):Connect(function() --[[ line: 52 | named "onPreferredTextSizeChangedSignal" ]]
+		local var23 = guiService:GetPropertyChangedSignal("PreferredTextSize"):Connect(function()
 			-- upvalues: var15 (copy), guiService (copy)
 			var15(guiService.PreferredTextSize)
 		end)
 		
-		return function() --[[ line: 58 ]]
+		return function()
 			-- upvalues: var23 (ref)
 			var23:Disconnect()
 		end
@@ -53,7 +53,7 @@ end)(function(p0) --[[ line: 44 ]]
 	local color_2 = var11.Theme.TextEmphasis.Color
 	local font_1 = var11.Font.Header2.Font
 	local var19 = var11.Font.BaseSize * var11.Font.Header2.RelativeSize
-	local var20 = reactModule.useCallback(function(p1) --[[ line: 89 ]]
+	local var20 = reactModule.useCallback(function(p1)
 		-- upvalues: var13 (ref), p0 (ref)
 		var13(p1.AbsoluteSize)
 		
@@ -61,7 +61,7 @@ end)(function(p0) --[[ line: 44 ]]
 			p0.onAbsoluteSizeChanged(p1.AbsoluteSize)
 		end
 	end, {})
-	local var21 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: text (copy), var17 (ref), font (ref), var18 (ref)
 		return text.GetTextWidth(var17, font, var18)
 	end, { font, var18, var14, var17 })

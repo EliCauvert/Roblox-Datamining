@@ -15,19 +15,19 @@ local fFlagVideoPlaybackDetectorCancelPendingScanTask = require(parent.SharedFla
 local var6 = signalsModule.createSignal({ instance = nil, shouldUseDwell = true })
 local var7 = if fFlagVideoPlaybackDetectorCancelPendingScanTask then require(parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
 
-return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
+return function(p0)
 	-- upvalues: useNavigationFocus (ref), useSelector (ref), reactModule (ref), signalsReactModule (ref), var6 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), videoEndReason (ref), appLifecycleObserverService (ref), experienceService (ref), var7 (ref), fFlagVideoPlaybackDetectorCancelPendingScanTask (ref)
 	local var8 = useNavigationFocus()
-	local var9 = useSelector(function(p1) --[[ line: 59 ]]
+	local var9 = useSelector(function(p1)
 		return p1.ScreenSize
 	end)
-	local var10 = useSelector(function(p2) --[[ line: 63 ]]
+	local var10 = useSelector(function(p2)
 		return p2.TopBar.topBarHeight
 	end)
-	local var11 = useSelector(function(p3) --[[ line: 67 ]]
+	local var11 = useSelector(function(p3)
 		return p3.GlobalGuiInset
 	end)
-	local var12 = reactModule.useMemo(function() --[[ line: 71 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var10 (ref), var9 (ref), var11 (ref)
 		return {
 			min = Vector2.new(0, var10),
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 		}
 	end, { var10, var9, var11 })
 	local var13 = signalsReactModule.useSignalState(if p0.viewportVideoAutoplayController then p0.viewportVideoAutoplayController.getWinnerState else var6)
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var13 (ref), var8 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), videoEndReason (copy)
 		if not p0.viewportVideoAutoplayController then return end
 		if p0.itemFrameRef.current ~= nil and var13.instance == p0.itemFrameRef.current then
@@ -51,28 +51,28 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 		p0.cancelVideoPlayback, p0.videoPlaybackCoordinator, var8, var13,
 		if fFlagLuaAppEdpMediaGalleryFullScreen then p0.isItemOccluded else nil
 	})
-	reactModule.useEffect(function() --[[ line: 118 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), appLifecycleObserverService (copy), experienceService (copy)
 		local viewportVideoAutoplayController = p0.viewportVideoAutoplayController
 		
 		if viewportVideoAutoplayController then
-			local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(function() --[[ line: 124 ]]
+			local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(function()
 				-- upvalues: viewportVideoAutoplayController (ref)
 				viewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
 			end)
-			local var15 = experienceService:RegisterForExperienceLeave(function() --[[ line: 129 ]]
+			local var15 = experienceService:RegisterForExperienceLeave(function()
 				-- upvalues: viewportVideoAutoplayController (ref)
 				viewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
 			end)
 			
-			return function() --[[ line: 134 ]]
+			return function()
 				-- upvalues: onUnhideConnection (ref), var15 (ref)
 				onUnhideConnection:Disconnect()
 				var15:Disconnect()
 			end
 		end
 	end, { p0.viewportVideoAutoplayController })
-	reactModule.useEffect(function() --[[ line: 143 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var8 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var12 (ref), videoEndReason (copy), var7 (copy), fFlagVideoPlaybackDetectorCancelPendingScanTask (copy), appLifecycleObserverService (copy), experienceService (copy)
 		if p0.viewportVideoAutoplayController ~= nil then return end
 		local t = {}
@@ -83,7 +83,7 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 			local var18 = nil
 			local var19 = nil
 			
-			local function requestPlaybackIfEligible() --[[ line: 156 ]]
+			local function requestPlaybackIfEligible()
 				-- upvalues: var18 (write), p0 (copy), var8 (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var12 (copy), videoEndReason (copy)
 				var18 = tick()
 				
@@ -95,7 +95,7 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 				p0.cancelVideoPlayback(videoEndReason.ExitViewport)
 			end
 			
-			local function onItemFrameLayoutChange() --[[ line: 174 ]]
+			local function onItemFrameLayoutChange()
 				-- upvalues: var19 (write), var18 (write), var7 (copy), requestPlaybackIfEligible (ref), fFlagVideoPlaybackDetectorCancelPendingScanTask (copy), var17 (write)
 				if var19 ~= nil then return end
 				local var24 = 0
@@ -105,7 +105,7 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 					var24 = var19 - tick()
 				end
 				if var24 > 0 then
-					local delayedThread = task.delay(var24, function() --[[ line: 187 ]]
+					local delayedThread = task.delay(var24, function()
 						-- upvalues: var19 (copy), requestPlaybackIfEligible (copy)
 						var19 = nil
 						requestPlaybackIfEligible()
@@ -123,11 +123,11 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 			end
 			
 			requestPlaybackIfEligible()
-			local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(function() --[[ line: 204 ]]
+			local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(function()
 				-- upvalues: requestPlaybackIfEligible (ref)
 				requestPlaybackIfEligible()
 			end)
-			local var23 = experienceService:RegisterForExperienceLeave(function() --[[ line: 210 ]]
+			local var23 = experienceService:RegisterForExperienceLeave(function()
 				-- upvalues: requestPlaybackIfEligible (ref)
 				requestPlaybackIfEligible()
 			end)
@@ -138,7 +138,7 @@ return function(p0) --[[ line: 56 | named "VideoViewportPlaybackDetector" ]]
 			table.insert(t, onUnhideConnection)
 			table.insert(t, var23)
 		end
-		return function() --[[ line: 223 ]]
+		return function()
 			-- upvalues: fFlagVideoPlaybackDetectorCancelPendingScanTask (copy), var17 (write), t (write)
 			if fFlagVideoPlaybackDetectorCancelPendingScanTask and var17 then
 				task.cancel(var17)

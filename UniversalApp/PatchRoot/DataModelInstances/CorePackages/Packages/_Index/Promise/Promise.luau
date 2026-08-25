@@ -4,7 +4,7 @@ local ok, status = pcall(game.DefineFastFlag, game, "ReducePromiseTaskDefer", fa
 if not ok then
 	status = false
 end
-local function _(p0) --[[ line: 16 | named "isCallable" ]]
+local function _(p0)
 	if type(p0) == "function" then
 		return true
 	elseif type(p0) == "table" then
@@ -14,18 +14,18 @@ local function _(p0) --[[ line: 16 | named "isCallable" ]]
 	end
 end
 
-local function makeEnum(p1, p2) --[[ line: 34 ]]
+local function makeEnum(p1, p2)
 	local t = {}
 	
 	for i, v in ipairs(p2) do
 		t[v] = v
 	end
 	return setmetatable(t, {
-		__index = function(_, p3) --[[ line: 42 ]]
+		__index = function(_, p3)
 			-- upvalues: p1 (ref)
 			error(string.format("%s is not in %s!", p3, p1), 2)
 		end,
-		__newindex = function() --[[ line: 45 ]]
+		__newindex = function()
 			-- upvalues: p1 (ref)
 			error(string.format("Creating new members in %s is not allowed!", p1), 2)
 		end
@@ -43,7 +43,7 @@ local t_1 = {
 }
 t_1.__index = t_1
 
-function t_1.new(p4, p5) --[[ line: 70 ]]
+function t_1.new(p4, p5)
 	-- upvalues: t_1 (write)
 	p4 = p4 or {}
 	
@@ -58,7 +58,7 @@ function t_1.new(p4, p5) --[[ line: 70 ]]
 	}, t_1)
 end
 
-function t_1.is(p6) --[[ line: 83 ]]
+function t_1.is(p6)
 	if type(p6) == "table" then
 		local var15 = getmetatable(p6)
 		
@@ -66,14 +66,14 @@ function t_1.is(p6) --[[ line: 83 ]]
 	end
 end
 
-function t_1:isKind(p7) --[[ line: 95 ]]
+function t_1:isKind(p7)
 	-- upvalues: t_1 (write)
 	assert(p7 ~= nil, "Argument #2 to Promise.Error.isKind must not be nil")
 	
 	return t_1.is(self) and self.kind == p7
 end
 
-function t_1:extend(p8) --[[ line: 101 ]]
+function t_1:extend(p8)
 	-- upvalues: t_1 (write)
 	p8 = p8 or {}
 	p8.kind = p8.kind or self.kind
@@ -81,7 +81,7 @@ function t_1:extend(p8) --[[ line: 101 ]]
 	return t_1.new(p8, self)
 end
 
-function t_1.getErrorChain(p9) --[[ line: 109 ]]
+function t_1.getErrorChain(p9)
 	local list = { p9 }
 	while list[#list].parent do
 		table.insert(list, list[#list].parent)
@@ -89,7 +89,7 @@ function t_1.getErrorChain(p9) --[[ line: 109 ]]
 	return list
 end
 
-function t_1:__tostring() --[[ line: 119 ]]
+function t_1:__tostring()
 	local list = {
 		string.format("-- Promise.Error(%s) --", self.kind or "?")
 	}
@@ -100,19 +100,19 @@ function t_1:__tostring() --[[ line: 119 ]]
 	return table.concat(list, "\n")
 end
 
-local function pack(...) --[[ line: 143 ]]
+local function pack(...)
 	return select("#", ...), { ... }
 end
 
-local function packResult(p10, ...) --[[ line: 150 ]]
+local function packResult(p10, ...)
 	return p10, select("#", ...), { ... }
 end
 
-local _ = function(p11) --[[ line: 154 | named "makeErrorHandler" ]]
+local _ = function(p11)
 	-- upvalues: t_1 (write)
 	assert(p11 ~= nil, "traceback is nil")
 	
-	return function(p12) --[[ line: 157 ]]
+	return function(p12)
 		-- upvalues: t_1 (copy), p11 (ref)
 		return if type(p12) == "table" then p12 else t_1.new({
 			error = p12,
@@ -123,12 +123,12 @@ local _ = function(p11) --[[ line: 154 | named "makeErrorHandler" ]]
 	end
 end
 
-local function runExecutor(p13, p14, ...) --[[ line: 177 ]]
+local function runExecutor(p13, p14, ...)
 	-- upvalues: packResult (ref), t_1 (write)
 	local _xpcall = xpcall
 	assert(p13 ~= nil, "traceback is nil")
 	
-	return packResult(_xpcall(p14, function(p15) --[[ line: 157 ]]
+	return packResult(_xpcall(p14, function(p15)
 		-- upvalues: t_1 (copy), p13 (ref)
 		return if type(p15) == "table" then p15 else t_1.new({
 			error = p15,
@@ -139,9 +139,9 @@ local function runExecutor(p13, p14, ...) --[[ line: 177 ]]
 	end, ...))
 end
 
-local _ = function(p16, p17, p18, p19) --[[ line: 185 | named "createAdvancer" ]]
+local _ = function(p16, p17, p18, p19)
 	-- upvalues: runExecutor (ref)
-	return function(...) --[[ line: 186 ]]
+	return function(...)
 		-- upvalues: runExecutor (copy), p16 (ref), p17 (ref), p18 (ref), p19 (ref)
 		local var20, var21, var22 = runExecutor(p16, p17, ...)
 		
@@ -154,7 +154,7 @@ local _ = function(p16, p17, p18, p19) --[[ line: 185 | named "createAdvancer" ]
 	end
 end
 
-local _ = function(p20) --[[ line: 197 | named "isEmpty" ]]
+local _ = function(p20)
 	return next(p20) == nil
 end
 
@@ -168,7 +168,7 @@ local t_2 = {
 }
 t_2.__index = t_2.prototype
 
-function t_2._new(p21, p22, p23) --[[ line: 236 ]]
+function t_2._new(p21, p22, p23)
 	-- upvalues: t_2 (ref), t (ref), runExecutor (ref)
 	if p23 ~= nil and not t_2.is(p23) then
 		error("Argument #2 to Promise.new must be a promise or nil", 2)
@@ -193,17 +193,17 @@ function t_2._new(p21, p22, p23) --[[ line: 236 ]]
 	end
 	setmetatable(t_1, t_2)
 	
-	local function resolve(...) --[[ line: 284 ]]
+	local function resolve(...)
 		-- upvalues: t_1 (ref)
 		t_1:_resolve(...)
 	end
 	
-	local function reject(...) --[[ line: 288 ]]
+	local function reject(...)
 		-- upvalues: t_1 (ref)
 		t_1:_reject(...)
 	end
 	
-	local function onCancel(p24) --[[ line: 292 ]]
+	local function onCancel(p24)
 		-- upvalues: t_1 (ref), t_2 (copy)
 		if p24 then
 			if t_1._status == t_2.Status.Cancelled then
@@ -215,7 +215,7 @@ function t_2._new(p21, p22, p23) --[[ line: 236 ]]
 		return t_1._status == t_2.Status.Cancelled
 	end
 	
-	t_1._thread = coroutine.create(function() --[[ line: 304 ]]
+	t_1._thread = coroutine.create(function()
 		-- upvalues: runExecutor (copy), t_1 (ref), p22 (ref), resolve (ref), reject (ref), onCancel (ref)
 		local var27, _, var28 = runExecutor(t_1._source, p22, resolve, reject, onCancel)
 		
@@ -228,24 +228,24 @@ function t_2._new(p21, p22, p23) --[[ line: 236 ]]
 	return t_1
 end
 
-function t_2.new(p25) --[[ line: 355 ]]
+function t_2.new(p25)
 	-- upvalues: t_2 (ref)
 	return t_2._new(debug.traceback(nil, 2), p25)
 end
 
-function t_2:__tostring() --[[ line: 359 ]]
+function t_2:__tostring()
 	return string.format("Promise(%s)", self._status)
 end
 
-function t_2.defer(p26) --[[ line: 381 ]]
+function t_2.defer(p26)
 	-- upvalues: t_2 (ref), runExecutor (ref)
 	local trac = debug.traceback(nil, 2)
 	local _ = nil
 	
-	return t_2._new(trac, function(p27, p28, p29) --[[ line: 384 ]]
+	return t_2._new(trac, function(p27, p28, p29)
 		-- upvalues: t_2 (copy), runExecutor (copy), trac (ref), p26 (ref)
 		local timeEventConnection = nil
-		timeEventConnection = t_2._timeEvent:Connect(function() --[[ line: 386 ]]
+		timeEventConnection = t_2._timeEvent:Connect(function()
 			-- upvalues: timeEventConnection (write), runExecutor (copy), trac (copy), p26 (copy), p27 (ref), p28 (ref), p29 (ref)
 			timeEventConnection:Disconnect()
 			local var31, _, var32 = runExecutor(trac, p26, p27, p28, p29)
@@ -259,42 +259,42 @@ end
 
 t_2.async = t_2.defer
 
-function t_2.resolve(...) --[[ line: 424 ]]
+function t_2.resolve(...)
 	-- upvalues: pack (ref), t_2 (ref)
 	local var33, var34 = pack(...)
 	
-	return t_2._new(debug.traceback(nil, 2), function(p30) --[[ line: 426 ]]
+	return t_2._new(debug.traceback(nil, 2), function(p30)
 		-- upvalues: var34 (ref), var33 (ref)
 		p30(unpack(var34, 1, var33))
 	end)
 end
 
-function t_2.reject(...) --[[ line: 441 ]]
+function t_2.reject(...)
 	-- upvalues: pack (ref), t_2 (ref)
 	local var35, var36 = pack(...)
 	
-	return t_2._new(debug.traceback(nil, 2), function(_, p31) --[[ line: 443 ]]
+	return t_2._new(debug.traceback(nil, 2), function(_, p31)
 		-- upvalues: var36 (ref), var35 (ref)
 		p31(unpack(var36, 1, var35))
 	end)
 end
 
-function t_2._try(p32, p33, ...) --[[ line: 452 ]]
+function t_2._try(p32, p33, ...)
 	-- upvalues: pack (ref), t_2 (ref)
 	local var37, var38 = pack(...)
 	
-	return t_2._new(p32, function(p34) --[[ line: 455 ]]
+	return t_2._new(p32, function(p34)
 		-- upvalues: p33 (ref), var38 (ref), var37 (ref)
 		p34(p33(unpack(var38, 1, var37)))
 	end)
 end
 
-function t_2.try(p35, ...) --[[ line: 483 ]]
+function t_2.try(p35, ...)
 	-- upvalues: t_2 (ref)
 	return t_2._try(debug.traceback(nil, 2), p35, ...)
 end
 
-function t_2._all(p36, p37, p38) --[[ line: 492 ]]
+function t_2._all(p36, p37, p38)
 	-- upvalues: t_2 (ref)
 	if type(p37) ~= "table" then
 		error(string.format("Please pass a list of promises to %s", "Promise.all"), 3)
@@ -304,7 +304,7 @@ function t_2._all(p36, p37, p38) --[[ line: 492 ]]
 			error(string.format("Non-promise value passed into %s at index %s", "Promise.all", tostring(i)), 3)
 		end
 	end
-	return if #p37 == 0 or p38 == 0 then t_2.resolve({}) else t_2._new(p36, function(p39, p40, p41) --[[ line: 510 ]]
+	return if #p37 == 0 or p38 == 0 then t_2.resolve({}) else t_2._new(p36, function(p39, p40, p41)
 		-- upvalues: p38 (ref), p37 (ref)
 		local t = {}
 		local t_1 = {}
@@ -312,7 +312,7 @@ function t_2._all(p36, p37, p38) --[[ line: 492 ]]
 		local var42 = 0
 		local var43 = false
 		
-		local function resolveOne(p42, ...) --[[ line: 528 ]]
+		local function resolveOne(p42, ...)
 			-- upvalues: var43 (write), var41 (write), p38 (copy), t (ref), p37 (copy), p39 (ref), t_1 (ref)
 			if var43 then return end
 			var41 += 1
@@ -332,7 +332,7 @@ function t_2._all(p36, p37, p38) --[[ line: 492 ]]
 			end
 		end
 		
-		p41(function() --[[ line: 521 | named "cancel" ]]
+		p41(function()
 			-- upvalues: t_1 (ref)
 			for i, v in ipairs(t_1) do
 				v:cancel()
@@ -340,10 +340,10 @@ function t_2._all(p36, p37, p38) --[[ line: 492 ]]
 		end)
 		
 		for i, v in ipairs(p37) do
-			t_1[i] = v:andThen(function(...) --[[ line: 553 ]]
+			t_1[i] = v:andThen(function(...)
 				-- upvalues: resolveOne (ref), i (ref)
 				resolveOne(i, ...)
-			end, function(...) --[[ line: 555 ]]
+			end, function(...)
 				-- upvalues: var42 (write), p38 (copy), p37 (copy), t_1 (ref), var43 (write), p40 (ref)
 				var42 += 1
 				
@@ -359,7 +359,7 @@ function t_2._all(p36, p37, p38) --[[ line: 492 ]]
 	end)
 end
 
-function t_2.all(...) --[[ line: 597 ]]
+function t_2.all(...)
 	-- upvalues: t_2 (ref)
 	local list = { ... }
 	
@@ -369,7 +369,7 @@ function t_2.all(...) --[[ line: 597 ]]
 	return t_2._all(debug.traceback(nil, 2), list)
 end
 
-function t_2.fold(p43, p44, p45) --[[ line: 634 ]]
+function t_2.fold(p43, p44, p45)
 	-- upvalues: t_2 (ref)
 	local isNotFunction
 	assert(type(p43) == "table", "Bad argument #1 to Promise.fold: must be a table")
@@ -386,33 +386,33 @@ function t_2.fold(p43, p44, p45) --[[ line: 634 ]]
 	assert(isNotFunction, "Bad argument #2 to Promise.fold: must be a function")
 	local var48 = t_2.resolve(p45)
 	
-	return t_2.each(p43, function(p46, p47) --[[ line: 639 ]]
+	return t_2.each(p43, function(p46, p47)
 		-- upvalues: var48 (write), p44 (ref)
-		var48 = var48:andThen(function(p48) --[[ line: 640 ]]
+		var48 = var48:andThen(function(p48)
 			-- upvalues: p44 (copy), p46 (ref), p47 (ref)
 			return p44(p48, p46, p47)
 		end)
-	end):andThen(function() --[[ line: 643 ]]
+	end):andThen(function()
 		-- upvalues: var48 (write)
 		return var48
 	end)
 end
 
-function t_2.some(p49, p50) --[[ line: 667 ]]
+function t_2.some(p49, p50)
 	-- upvalues: t_2 (ref)
 	assert(type(p50) == "number", "Bad argument #2 to Promise.some: must be a number")
 	
 	return t_2._all(debug.traceback(nil, 2), p49, p50)
 end
 
-function t_2.any(p51) --[[ line: 691 ]]
+function t_2.any(p51)
 	-- upvalues: t_2 (ref)
-	return t_2._all(debug.traceback(nil, 2), p51, 1):andThen(function(p52) --[[ line: 692 ]]
+	return t_2._all(debug.traceback(nil, 2), p51, 1):andThen(function(p52)
 		return p52[1]
 	end)
 end
 
-function t_2.allSettled(value) --[[ line: 713 ]]
+function t_2.allSettled(value)
 	-- upvalues: t_2 (ref)
 	if type(value) ~= "table" then
 		error(string.format("Please pass a list of promises to %s", "Promise.allSettled"), 2)
@@ -422,13 +422,13 @@ function t_2.allSettled(value) --[[ line: 713 ]]
 			error(string.format("Non-promise value passed into %s at index %s", "Promise.allSettled", tostring(i)), 2)
 		end
 	end
-	return if #value == 0 then t_2.resolve({}) else t_2._new(debug.traceback(nil, 2), function(p53, _, p54) --[[ line: 731 ]]
+	return if #value == 0 then t_2.resolve({}) else t_2._new(debug.traceback(nil, 2), function(p53, _, p54)
 		-- upvalues: value (ref)
 		local t = {}
 		local t_1 = {}
 		local var51 = 0
 		
-		local function resolveOne(p55, ...) --[[ line: 741 ]]
+		local function resolveOne(p55, ...)
 			-- upvalues: var51 (write), t (ref), value (copy), p53 (ref)
 			var51 += 1
 			t[p55] = ...
@@ -438,7 +438,7 @@ function t_2.allSettled(value) --[[ line: 713 ]]
 			end
 		end
 		
-		p54(function() --[[ line: 751 ]]
+		p54(function()
 			-- upvalues: t_1 (ref)
 			for i, v in ipairs(t_1) do
 				v:cancel()
@@ -446,7 +446,7 @@ function t_2.allSettled(value) --[[ line: 713 ]]
 		end)
 		
 		for i, v in ipairs(value) do
-			t_1[i] = v:finally(function(...) --[[ line: 760 ]]
+			t_1[i] = v:finally(function(...)
 				-- upvalues: resolveOne (ref), i (ref)
 				resolveOne(i, ...)
 			end)
@@ -454,28 +454,28 @@ function t_2.allSettled(value) --[[ line: 713 ]]
 	end)
 end
 
-function t_2.race(p56) --[[ line: 791 ]]
+function t_2.race(p56)
 	-- upvalues: t_2 (ref)
 	assert(type(p56) == "table", string.format("Please pass a list of promises to %s", "Promise.race"))
 	
 	for i, v in pairs(p56) do
 		assert(t_2.is(v), string.format("Non-promise value passed into %s at index %s", "Promise.race", tostring(i)))
 	end
-	return t_2._new(debug.traceback(nil, 2), function(p57, p58, p59) --[[ line: 798 ]]
+	return t_2._new(debug.traceback(nil, 2), function(p57, p58, p59)
 		-- upvalues: p56 (ref)
 		local t = {}
 		local var54 = false
 		
-		local function _() --[[ line: 802 | named "cancel" ]]
+		local function _()
 			-- upvalues: t (ref)
 			for i, v in ipairs(t) do
 				v:cancel()
 			end
 		end
 		
-		local _ = function(p60) --[[ line: 808 | named "finalize" ]]
+		local _ = function(p60)
 			-- upvalues: t (ref), var54 (write)
-			return function(...) --[[ line: 809 ]]
+			return function(...)
 				-- upvalues: t (copy), var54 (copy), p60 (ref)
 				for i, v in ipairs(t) do
 					v:cancel()
@@ -486,7 +486,7 @@ function t_2.race(p56) --[[ line: 791 ]]
 			end
 		end
 		
-		if p59(function(...) --[[ line: 809 ]]
+		if p59(function(...)
 			-- upvalues: t (ref), var54 (write), p58 (ref)
 			for i, v in ipairs(t) do
 				v:cancel()
@@ -496,7 +496,7 @@ function t_2.race(p56) --[[ line: 791 ]]
 			return p58(...)
 		end) then return end
 		for i, v in ipairs(p56) do
-			t[i] = v:andThen(function(...) --[[ line: 809 ]]
+			t[i] = v:andThen(function(...)
 				-- upvalues: t (ref), var54 (write), p57 (ref)
 				for i, v in ipairs(t) do
 					v:cancel()
@@ -504,7 +504,7 @@ function t_2.race(p56) --[[ line: 791 ]]
 				var54 = true
 				
 				return p57(...)
-			end, function(...) --[[ line: 809 ]]
+			end, function(...)
 				-- upvalues: t (ref), var54 (write), p58 (ref)
 				for i, v in ipairs(t) do
 					v:cancel()
@@ -517,7 +517,7 @@ function t_2.race(p56) --[[ line: 791 ]]
 	end)
 end
 
-function t_2.each(p61, p62) --[[ line: 886 ]]
+function t_2.each(p61, p62)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local isNotFunction
 	assert(type(p61) == "table", string.format("Please pass a list of promises to %s", "Promise.each"))
@@ -533,20 +533,20 @@ function t_2.each(p61, p62) --[[ line: 886 ]]
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise.each"))
 	
-	return t_2._new(debug.traceback(nil, 2), function(p63, p64, p65) --[[ line: 890 ]]
+	return t_2._new(debug.traceback(nil, 2), function(p63, p64, p65)
 		-- upvalues: p61 (ref), t_2 (copy), t_1 (copy), p62 (ref)
 		local t = {}
 		local t_3 = {}
 		local var59 = false
 		
-		local function _() --[[ line: 896 | named "cancel" ]]
+		local function _()
 			-- upvalues: t_3 (ref)
 			for i, v in ipairs(t_3) do
 				v:cancel()
 			end
 		end
 		
-		p65(function() --[[ line: 902 ]]
+		p65(function()
 			-- upvalues: var59 (write), t_3 (ref)
 			var59 = true
 			
@@ -563,7 +563,7 @@ function t_2.each(p61, p62) --[[ line: 886 ]]
 			end
 			if v:getStatus() ~= t_2.Status.Cancelled then
 				if v:getStatus() ~= t_2.Status.Rejected then
-					local var65 = v:andThen(function(...) --[[ line: 935 ]]
+					local var65 = v:andThen(function(...)
 						return ...
 					end)
 					table.insert(t_3, var65)
@@ -616,7 +616,7 @@ function t_2.each(p61, p62) --[[ line: 886 ]]
 	end)
 end
 
-function t_2:is() --[[ line: 985 ]]
+function t_2:is()
 	-- upvalues: t_2 (ref)
 	if type(self) ~= "table" then
 		return false
@@ -652,9 +652,9 @@ function t_2:is() --[[ line: 985 ]]
 	end
 end
 
-function t_2.promisify(p66) --[[ line: 1034 ]]
+function t_2.promisify(p66)
 	-- upvalues: t_2 (ref)
-	return function(...) --[[ line: 1035 ]]
+	return function(...)
 		-- upvalues: t_2 (copy), p66 (ref)
 		return t_2._try(debug.traceback(nil, 2), p66, ...)
 	end
@@ -663,14 +663,14 @@ end
 local awaitHelper = nil
 local expectHelper = nil
 
-function t_2.delay(p67) --[[ line: 1065 ]]
+function t_2.delay(p67)
 	-- upvalues: t_2 (ref), expectHelper (write), awaitHelper (write)
 	assert(type(p67) == "number", "Bad argument #1 to Promise.delay, must be a number.")
 	
 	if p67 < 0.016666666667 or p67 == 1e999 then
 		p67 = 0.016666666667
 	end
-	return t_2._new(debug.traceback(nil, 2), function(p68, _, p69) --[[ line: 1073 ]]
+	return t_2._new(debug.traceback(nil, 2), function(p68, _, p69)
 		-- upvalues: t_2 (copy), p67 (write), expectHelper (copy), awaitHelper (copy)
 		local time = t_2._getTime()
 		local var72 = time + p67
@@ -678,7 +678,7 @@ function t_2.delay(p67) --[[ line: 1065 ]]
 		
 		if expectHelper == nil then
 			awaitHelper = t
-			expectHelper = t_2._timeEvent:Connect(function() --[[ line: 1085 ]]
+			expectHelper = t_2._timeEvent:Connect(function()
 				-- upvalues: t_2 (copy), awaitHelper (copy), expectHelper (copy)
 				local time = t_2._getTime()
 				while awaitHelper ~= nil and awaitHelper.endTime < time do
@@ -713,7 +713,7 @@ function t_2.delay(p67) --[[ line: 1065 ]]
 			awaitHelper.previous = t
 			awaitHelper = t
 		end
-		p69(function() --[[ line: 1130 ]]
+		p69(function()
 			-- upvalues: t (ref), awaitHelper (copy), expectHelper (copy)
 			local next = t.next
 			
@@ -739,12 +739,12 @@ function t_2.delay(p67) --[[ line: 1065 ]]
 	end)
 end
 
-function t_2.prototype.timeout(p70, p71, p72) --[[ line: 1194 ]]
+function t_2.prototype.timeout(p70, p71, p72)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local trac = debug.traceback(nil, 2)
 	
 	return t_2.race({
-		t_2.delay(p71):andThen(function() --[[ line: 1198 ]]
+		t_2.delay(p71):andThen(function()
 			-- upvalues: t_2 (copy), p72 (ref), t_1 (copy), p71 (ref), trac (ref)
 			return t_2.reject(p72 == nil and t_1.new({
 				error = "Timed out",
@@ -756,15 +756,15 @@ function t_2.prototype.timeout(p70, p71, p72) --[[ line: 1194 ]]
 	})
 end
 
-function t_2.prototype.getStatus(p73) --[[ line: 1218 ]]
+function t_2.prototype.getStatus(p73)
 	return p73._status
 end
 
-function t_2.prototype._andThen(p74, p75, p76, p77) --[[ line: 1227 ]]
+function t_2.prototype._andThen(p74, p75, p76, p77)
 	-- upvalues: t_2 (ref), runExecutor (ref), t_1 (write)
 	p74._unhandledRejection = false
 	
-	return t_2._new(p75, function(p78, p79) --[[ line: 1231 ]]
+	return t_2._new(p75, function(p78, p79)
 		-- upvalues: p76 (ref), p75 (ref), runExecutor (copy), p77 (ref), p74 (ref), t_2 (copy), t_1 (copy)
 		local var78 = p78
 		
@@ -772,7 +772,7 @@ function t_2.prototype._andThen(p74, p75, p76, p77) --[[ line: 1227 ]]
 			local var79 = p75
 			local var80 = p76
 			
-			var78 = function(...) --[[ line: 186 ]]
+			var78 = function(...)
 				-- upvalues: runExecutor (copy), var79 (ref), var80 (ref), p78 (ref), p79 (ref)
 				local var20, var21, var22 = runExecutor(var79, var80, ...)
 				
@@ -790,7 +790,7 @@ function t_2.prototype._andThen(p74, p75, p76, p77) --[[ line: 1227 ]]
 			local var82 = p75
 			local var83 = p77
 			
-			var81 = function(...) --[[ line: 186 ]]
+			var81 = function(...)
 				-- upvalues: runExecutor (copy), var82 (ref), var83 (ref), p78 (ref), p79 (ref)
 				local var20, var21, var22 = runExecutor(var82, var83, ...)
 				
@@ -825,7 +825,7 @@ function t_2.prototype._andThen(p74, p75, p76, p77) --[[ line: 1227 ]]
 	end, p74)
 end
 
-function t_2.prototype.andThen(p80, p81, p82) --[[ line: 1288 ]]
+function t_2.prototype.andThen(p80, p81, p82)
 	local isNotFunction = true
 	
 	if p81 ~= nil then
@@ -858,7 +858,7 @@ function t_2.prototype.andThen(p80, p81, p82) --[[ line: 1288 ]]
 	return p80:_andThen(debug.traceback(nil, 2), p81, p82)
 end
 
-function t_2.prototype.andThenAsync(p83, p84, p85) --[[ line: 1316 ]]
+function t_2.prototype.andThenAsync(p83, p84, p85)
 	-- upvalues: pack (ref), t_2 (ref)
 	local isNotFunction = true
 	
@@ -889,26 +889,26 @@ function t_2.prototype.andThenAsync(p83, p84, p85) --[[ line: 1316 ]]
 	end
 	assert(isNotFunction_1, string.format("Please pass a handler function to %s!", "Promise:andThenAsync"))
 	
-	return p83:_andThen(debug.traceback(nil, 2), function(...) --[[ line: 1323 ]]
+	return p83:_andThen(debug.traceback(nil, 2), function(...)
 		-- upvalues: pack (copy), t_2 (copy)
 		local var92, var93 = pack(...)
 		
-		return t_2.defer(function(p86) --[[ line: 1325 ]]
+		return t_2.defer(function(p86)
 			-- upvalues: var93 (ref), var92 (ref)
 			p86(unpack(var93, 1, var92))
 		end)
-	end, function(...) --[[ line: 1329 ]]
+	end, function(...)
 		-- upvalues: pack (copy), t_2 (copy)
 		local var94, var95 = pack(...)
 		
-		return t_2.defer(function(_, p87) --[[ line: 1331 ]]
+		return t_2.defer(function(_, p87)
 			-- upvalues: var95 (ref), var94 (ref)
 			p87(unpack(var95, 1, var94))
 		end)
 	end):andThen(p84, p85)
 end
 
-function t_2.prototype.catch(p88, p89) --[[ line: 1358 ]]
+function t_2.prototype.catch(p88, p89)
 	local isNotFunction = true
 	
 	if p89 ~= nil then
@@ -927,7 +927,7 @@ function t_2.prototype.catch(p88, p89) --[[ line: 1358 ]]
 	return p88:_andThen(debug.traceback(nil, 2), nil, p89)
 end
 
-function t_2.prototype.tap(p90, p91) --[[ line: 1379 ]]
+function t_2.prototype.tap(p90, p91)
 	-- upvalues: t_2 (ref), pack (ref)
 	local isNotFunction
 	if type(p91) == "function" then
@@ -941,14 +941,14 @@ function t_2.prototype.tap(p90, p91) --[[ line: 1379 ]]
 	end
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:tap"))
 	
-	return p90:_andThen(debug.traceback(nil, 2), function(...) --[[ line: 1381 ]]
+	return p90:_andThen(debug.traceback(nil, 2), function(...)
 		-- upvalues: p91 (ref), t_2 (copy), pack (copy)
 		local var100 = p91(...)
 		
 		if t_2.is(var100) then
 			local var101, var102 = pack(...)
 			
-			return var100:andThen(function() --[[ line: 1386 ]]
+			return var100:andThen(function()
 				-- upvalues: var102 (ref), var101 (ref)
 				return unpack(var102, 1, var101)
 			end)
@@ -957,7 +957,7 @@ function t_2.prototype.tap(p90, p91) --[[ line: 1379 ]]
 	end)
 end
 
-function t_2.prototype.andThenCall(p92, p93, ...) --[[ line: 1414 ]]
+function t_2.prototype.andThenCall(p92, p93, ...)
 	-- upvalues: pack (ref)
 	local isNotFunction
 	if type(p93) == "function" then
@@ -972,23 +972,23 @@ function t_2.prototype.andThenCall(p92, p93, ...) --[[ line: 1414 ]]
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:andThenCall"))
 	local var105, var106 = pack(...)
 	
-	return p92:_andThen(debug.traceback(nil, 2), function() --[[ line: 1417 ]]
+	return p92:_andThen(debug.traceback(nil, 2), function()
 		-- upvalues: p93 (ref), var106 (ref), var105 (ref)
 		return p93(unpack(var106, 1, var105))
 	end)
 end
 
-function t_2.prototype.andThenReturn(p94, ...) --[[ line: 1444 ]]
+function t_2.prototype.andThenReturn(p94, ...)
 	-- upvalues: pack (ref)
 	local var107, var108 = pack(...)
 	
-	return p94:_andThen(debug.traceback(nil, 2), function() --[[ line: 1446 ]]
+	return p94:_andThen(debug.traceback(nil, 2), function()
 		-- upvalues: var108 (ref), var107 (ref)
 		return unpack(var108, 1, var107)
 	end)
 end
 
-function t_2.prototype.cancel(p95) --[[ line: 1462 ]]
+function t_2.prototype.cancel(p95)
 	-- upvalues: t_2 (ref)
 	if p95._status ~= t_2.Status.Started then return end
 	p95._status = t_2.Status.Cancelled
@@ -1007,7 +1007,7 @@ function t_2.prototype.cancel(p95) --[[ line: 1462 ]]
 	p95:_finalize()
 end
 
-function t_2.prototype._consumerCancelled(p96, p97) --[[ line: 1490 ]]
+function t_2.prototype._consumerCancelled(p96, p97)
 	-- upvalues: t_2 (ref)
 	if p96._status ~= t_2.Status.Started then return end
 	p96._consumers[p97] = nil
@@ -1017,12 +1017,12 @@ function t_2.prototype._consumerCancelled(p96, p97) --[[ line: 1490 ]]
 	end
 end
 
-function t_2.prototype._finally(p98, p99, p100, p101) --[[ line: 1506 ]]
+function t_2.prototype._finally(p98, p99, p100, p101)
 	-- upvalues: t_2 (ref), runExecutor (ref)
 	if not p101 then
 		p98._unhandledRejection = false
 	end
-	return t_2._new(p99, function(p102, p103) --[[ line: 1512 ]]
+	return t_2._new(p99, function(p102, p103)
 		-- upvalues: p100 (ref), p99 (ref), runExecutor (copy), p101 (ref), p98 (ref), t_2 (copy)
 		local var109 = p102
 		
@@ -1030,7 +1030,7 @@ function t_2.prototype._finally(p98, p99, p100, p101) --[[ line: 1506 ]]
 			local var110 = p99
 			local var111 = p100
 			
-			var109 = function(...) --[[ line: 186 ]]
+			var109 = function(...)
 				-- upvalues: runExecutor (copy), var110 (ref), var111 (ref), p102 (ref), p103 (ref)
 				local var20, var21, var22 = runExecutor(var110, var111, ...)
 				
@@ -1045,7 +1045,7 @@ function t_2.prototype._finally(p98, p99, p100, p101) --[[ line: 1506 ]]
 		if p101 then
 			local var112 = var109
 			
-			var109 = function(...) --[[ line: 1520 ]]
+			var109 = function(...)
 				-- upvalues: p98 (copy), t_2 (copy), p102 (ref), var112 (ref)
 				return if p98._status == t_2.Status.Rejected then p102(p98) else var112(...)
 			end
@@ -1059,7 +1059,7 @@ function t_2.prototype._finally(p98, p99, p100, p101) --[[ line: 1506 ]]
 	end, p98)
 end
 
-function t_2.prototype.finally(p104, p105) --[[ line: 1588 ]]
+function t_2.prototype.finally(p104, p105)
 	local isNotFunction = true
 	
 	if p105 ~= nil then
@@ -1078,7 +1078,7 @@ function t_2.prototype.finally(p104, p105) --[[ line: 1588 ]]
 	return p104:_finally(debug.traceback(nil, 2), p105)
 end
 
-function t_2.prototype.finallyCall(p106, p107, ...) --[[ line: 1602 ]]
+function t_2.prototype.finallyCall(p106, p107, ...)
 	-- upvalues: pack (ref)
 	local isNotFunction
 	if type(p107) == "function" then
@@ -1093,23 +1093,23 @@ function t_2.prototype.finallyCall(p106, p107, ...) --[[ line: 1602 ]]
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:finallyCall"))
 	local var117, var118 = pack(...)
 	
-	return p106:_finally(debug.traceback(nil, 2), function() --[[ line: 1605 ]]
+	return p106:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: p107 (ref), var118 (ref), var117 (ref)
 		return p107(unpack(var118, 1, var117))
 	end)
 end
 
-function t_2.prototype.finallyReturn(p108, ...) --[[ line: 1628 ]]
+function t_2.prototype.finallyReturn(p108, ...)
 	-- upvalues: pack (ref)
 	local var119, var120 = pack(...)
 	
-	return p108:_finally(debug.traceback(nil, 2), function() --[[ line: 1630 ]]
+	return p108:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: var120 (ref), var119 (ref)
 		return unpack(var120, 1, var119)
 	end)
 end
 
-function t_2.prototype.done(p109, p110) --[[ line: 1638 ]]
+function t_2.prototype.done(p109, p110)
 	local isNotFunction = true
 	
 	if p110 ~= nil then
@@ -1128,7 +1128,7 @@ function t_2.prototype.done(p109, p110) --[[ line: 1638 ]]
 	return p109:_finally(debug.traceback(nil, 2), p110, true)
 end
 
-function t_2.prototype.doneCall(p111, p112, ...) --[[ line: 1649 ]]
+function t_2.prototype.doneCall(p111, p112, ...)
 	-- upvalues: pack (ref)
 	local isNotFunction
 	if type(p112) == "function" then
@@ -1143,29 +1143,29 @@ function t_2.prototype.doneCall(p111, p112, ...) --[[ line: 1649 ]]
 	assert(isNotFunction, string.format("Please pass a handler function to %s!", "Promise:doneCall"))
 	local var125, var126 = pack(...)
 	
-	return p111:_finally(debug.traceback(nil, 2), function() --[[ line: 1652 ]]
+	return p111:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: p112 (ref), var126 (ref), var125 (ref)
 		return p112(unpack(var126, 1, var125))
 	end, true)
 end
 
-function t_2.prototype.doneReturn(p113, ...) --[[ line: 1660 ]]
+function t_2.prototype.doneReturn(p113, ...)
 	-- upvalues: pack (ref)
 	local var127, var128 = pack(...)
 	
-	return p113:_finally(debug.traceback(nil, 2), function() --[[ line: 1662 ]]
+	return p113:_finally(debug.traceback(nil, 2), function()
 		-- upvalues: var128 (ref), var127 (ref)
 		return unpack(var128, 1, var127)
 	end, true)
 end
 
-function t_2.prototype.awaitStatus(p114) --[[ line: 1674 ]]
+function t_2.prototype.awaitStatus(p114)
 	-- upvalues: t_2 (ref)
 	p114._unhandledRejection = false
 	
 	if p114._status == t_2.Status.Started then
 		local currentThread = coroutine.running()
-		p114:finally(function() --[[ line: 1680 ]]
+		p114:finally(function()
 			-- upvalues: currentThread (ref)
 			task.spawn(currentThread)
 		end)
@@ -1179,17 +1179,17 @@ function t_2.prototype.awaitStatus(p114) --[[ line: 1674 ]]
 	return p114._status
 end
 
-awaitHelper = function(p115, ...) --[[ line: 1696 | named "awaitHelper" ]]
+awaitHelper = function(p115, ...)
 	-- upvalues: t_2 (ref)
 	return p115 == t_2.Status.Resolved, ...
 end
 
-function t_2.prototype.await(p116) --[[ line: 1721 ]]
+function t_2.prototype.await(p116)
 	-- upvalues: awaitHelper (ref)
 	return awaitHelper(p116:awaitStatus())
 end
 
-expectHelper = function(p117, ...) --[[ line: 1725 | named "expectHelper" ]]
+expectHelper = function(p117, ...)
 	-- upvalues: t_2 (ref)
 	if p117 ~= t_2.Status.Resolved then
 		error(if ... == nil then "Expected Promise rejected with no value." else ..., 3)
@@ -1197,14 +1197,14 @@ expectHelper = function(p117, ...) --[[ line: 1725 | named "expectHelper" ]]
 	return ...
 end
 
-function t_2.prototype.expect(p118) --[[ line: 1758 ]]
+function t_2.prototype.expect(p118)
 	-- upvalues: expectHelper (ref)
 	return expectHelper(p118:awaitStatus())
 end
 
 t_2.prototype.awaitValue = t_2.prototype.expect
 
-function t_2.prototype._unwrap(p119) --[[ line: 1772 ]]
+function t_2.prototype._unwrap(p119)
 	-- upvalues: t_2 (ref)
 	if p119._status == t_2.Status.Started then
 		error("Promise has not resolved or rejected.", 2)
@@ -1212,7 +1212,7 @@ function t_2.prototype._unwrap(p119) --[[ line: 1772 ]]
 	return p119._status == t_2.Status.Resolved, unpack(p119._values, 1, p119._valuesLength)
 end
 
-function t_2.prototype._resolve(p120, ...) --[[ line: 1782 ]]
+function t_2.prototype._resolve(p120, ...)
 	-- upvalues: t_2 (ref), t_1 (write), pack (ref)
 	if p120._status == t_2.Status.Started then
 		if t_2.is(...) then
@@ -1220,10 +1220,10 @@ function t_2.prototype._resolve(p120, ...) --[[ line: 1782 ]]
 				warn(string.format("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s", p120._source))
 			end
 			local var130 = ...
-			local var131 = var130:andThen(function(...) --[[ line: 1803 ]]
+			local var131 = var130:andThen(function(...)
 				-- upvalues: p120 (ref)
 				p120:_resolve(...)
-			end, function(...) --[[ line: 1805 ]]
+			end, function(...)
 				-- upvalues: var130 (ref), t_1 (copy), p120 (ref)
 				local var134 = if var130._error then t_1.new({
 					context = "[No stack trace available as this Promise originated from an older version of the Promise library (< v2)]",
@@ -1268,7 +1268,7 @@ function t_2.prototype._resolve(p120, ...) --[[ line: 1782 ]]
 	end
 end
 
-function t_2.prototype._reject(p121, ...) --[[ line: 1853 ]]
+function t_2.prototype._reject(p121, ...)
 	-- upvalues: t_2 (ref), pack (ref)
 	if p121._status ~= t_2.Status.Started then return end
 	p121._status = t_2.Status.Rejected
@@ -1278,7 +1278,7 @@ function t_2.prototype._reject(p121, ...) --[[ line: 1853 ]]
 	
 	if next(p121._queuedReject) == nil then
 		local var137 = tostring(...)
-		coroutine.wrap(function() --[[ line: 1875 ]]
+		coroutine.wrap(function()
 			-- upvalues: t_2 (copy), p121 (ref), var137 (ref)
 			t_2._timeEvent:Wait()
 			
@@ -1304,7 +1304,7 @@ end
 local t_3 = {}
 local var10 = nil
 
-local function closeThreads() --[[ line: 1906 ]]
+local function closeThreads()
 	-- upvalues: var10 (write), t_3 (write)
 	var10 = nil
 	t_3 = {}
@@ -1314,7 +1314,7 @@ local function closeThreads() --[[ line: 1906 ]]
 	end
 end
 
-function t_2.prototype._finalize(p122) --[[ line: 1920 ]]
+function t_2.prototype._finalize(p122)
 	-- upvalues: t_2 (ref), status (write), t_3 (write), var10 (write), closeThreads (ref)
 	for i, v in ipairs(p122._queuedFinally) do
 		coroutine.wrap(v)(p122._status)
@@ -1342,11 +1342,11 @@ function t_2.prototype._finalize(p122) --[[ line: 1920 ]]
 	end
 end
 
-function t_2.prototype.now(p123, p124) --[[ line: 1965 ]]
+function t_2.prototype.now(p123, p124)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local trac = debug.traceback(nil, 2)
 	
-	return if p123._status == t_2.Status.Resolved then p123:_andThen(trac, function(...) --[[ line: 1968 ]]
+	return if p123._status == t_2.Status.Resolved then p123:_andThen(trac, function(...)
 		return ...
 	end) else t_2.reject(p124 == nil and t_1.new({
 		error = "This Promise was not resolved in time for :now()",
@@ -1355,7 +1355,7 @@ function t_2.prototype.now(p123, p124) --[[ line: 1965 ]]
 	}) or p124)
 end
 
-function t_2.retry(p125, p126, ...) --[[ line: 2010 ]]
+function t_2.retry(p125, p126, ...)
 	-- upvalues: t_2 (ref)
 	local isNotFunction
 	if type(p125) == "function" then
@@ -1372,13 +1372,13 @@ function t_2.retry(p125, p126, ...) --[[ line: 2010 ]]
 	local list = { ... }
 	local var143 = select("#", ...)
 	
-	return t_2.resolve(p125(...)):catch(function(...) --[[ line: 2016 ]]
+	return t_2.resolve(p125(...)):catch(function(...)
 		-- upvalues: p126 (ref), t_2 (copy), p125 (ref), list (ref), var143 (ref)
 		return if p126 > 0 then t_2.retry(p125, p126 - 1, unpack(list, 1, var143)) else t_2.reject(...)
 	end)
 end
 
-function t_2.retryWithDelay(p127, p128, p129, ...) --[[ line: 2038 ]]
+function t_2.retryWithDelay(p127, p128, p129, ...)
 	-- upvalues: t_2 (ref)
 	local isNotFunction
 	if type(p127) == "function" then
@@ -1396,7 +1396,7 @@ function t_2.retryWithDelay(p127, p128, p129, ...) --[[ line: 2038 ]]
 	local list = { ... }
 	local var147 = select("#", ...)
 	
-	return t_2.resolve(p127(...)):catch(function(...) --[[ line: 2045 ]]
+	return t_2.resolve(p127(...)):catch(function(...)
 		-- upvalues: p128 (ref), t_2 (copy), p129 (ref), p127 (ref), list (ref), var147 (ref)
 		if p128 > 0 then
 			t_2.delay(p129):await()
@@ -1407,24 +1407,24 @@ function t_2.retryWithDelay(p127, p128, p129, ...) --[[ line: 2038 ]]
 	end)
 end
 
-function t_2.fromEvent(p130, p131) --[[ line: 2080 ]]
+function t_2.fromEvent(p130, p131)
 	-- upvalues: t_2 (ref)
-	p131 = p131 or function() --[[ line: 2081 ]]
+	p131 = p131 or function()
 		return true
 	end
 	
-	return t_2._new(debug.traceback(nil, 2), function(p132, _, p133) --[[ line: 2085 ]]
+	return t_2._new(debug.traceback(nil, 2), function(p132, _, p133)
 		-- upvalues: p130 (ref), p131 (write)
 		local var148 = nil
 		local var149 = false
 		
-		local function disconnect() --[[ line: 2089 ]]
+		local function disconnect()
 			-- upvalues: var148 (write)
 			var148:Disconnect()
 			var148 = nil
 		end
 		
-		var148 = p130:Connect(function(...) --[[ line: 2098 ]]
+		var148 = p130:Connect(function(...)
 			-- upvalues: p131 (copy), p132 (ref), var148 (write), var149 (write)
 			local var151 = p131(...)
 			
@@ -1448,11 +1448,11 @@ function t_2.fromEvent(p130, p131) --[[ line: 2080 ]]
 	end)
 end
 
-function t_2.onUnhandledRejection(p134) --[[ line: 2132 ]]
+function t_2.onUnhandledRejection(p134)
 	-- upvalues: t_2 (ref)
 	table.insert(t_2._unhandledRejectionCallbacks, p134)
 	
-	return function() --[[ line: 2135 ]]
+	return function()
 		-- upvalues: t_2 (copy), p134 (ref)
 		local index = table.find(t_2._unhandledRejectionCallbacks, p134)
 		

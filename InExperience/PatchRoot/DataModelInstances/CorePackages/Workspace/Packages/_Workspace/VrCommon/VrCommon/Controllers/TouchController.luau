@@ -107,7 +107,7 @@ local granite = Enum.Material.Granite
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p0) --[[ line: 119 ]]
+function t_2.new(p0)
 	-- upvalues: t_2 (ref), create (ref), t (ref), granite (ref), fIntVRTouchControllerTransparencyModule (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.userCFrame = p0
@@ -164,7 +164,7 @@ function t_2.new(p0) --[[ line: 119 ]]
 	return tbl
 end
 
-function t_2:setCFrame(p1) --[[ line: 183 ]]
+function t_2:setCFrame(p1)
 	if self.userCFrame == Enum.UserCFrame.RightHand then
 		self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.349065850399, 0, 0) * CFrame.new(-0.03, 0.08, -0.06))
 		
@@ -173,7 +173,7 @@ function t_2:setCFrame(p1) --[[ line: 183 ]]
 	self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.349065850399, 0, 0) * CFrame.new(0.03, 0.08, -0.06))
 end
 
-function t_2:setCFrameAndScale(p2, p3) --[[ line: 191 ]]
+function t_2:setCFrameAndScale(p2, p3)
 	-- upvalues: t (ref)
 	self.model:SetPrimaryPartCFrame(p2 * CFrame.Angles(0.349065850399, 0, 0) * CFrame.new(-0.03 * p3 * (if self.userCFrame == Enum.UserCFrame.RightHand then 1 else -1), 0.08 * p3, -0.06 * p3))
 	
@@ -206,7 +206,7 @@ function t_2:setCFrameAndScale(p2, p3) --[[ line: 191 ]]
 	end
 end
 
-function t_2:setButtonState(p4, p5) --[[ line: 224 ]]
+function t_2:setButtonState(p4, p5)
 	-- upvalues: t (ref)
 	local var13 = t[self.userCFrame][p4]
 	
@@ -244,7 +244,7 @@ function t_2:setButtonState(p4, p5) --[[ line: 224 ]]
 	end
 end
 
-function t_2:setTriggerState(p6) --[[ line: 261 ]]
+function t_2:setTriggerState(p6)
 	-- upvalues: t (ref)
 	local offset = t[self.userCFrame].Trigger.offset
 	offset = CFrame.new(offset.p * self.scale) * (offset - offset.p)
@@ -259,7 +259,7 @@ function t_2:setTriggerState(p6) --[[ line: 261 ]]
 	end
 end
 
-function t_2:setStickState(p7) --[[ line: 278 ]]
+function t_2:setStickState(p7)
 	-- upvalues: t (ref)
 	local offset = t[self.userCFrame].Stick.offset
 	offset = CFrame.new(offset.p * self.scale) * (offset - offset.p)
@@ -274,7 +274,7 @@ function t_2:setStickState(p7) --[[ line: 278 ]]
 	end
 end
 
-function t_2:onInputPositionChanged(p8) --[[ line: 296 ]]
+function t_2:onInputPositionChanged(p8)
 	if self.userCFrame == Enum.UserCFrame.RightHand and p8.KeyCode == Enum.KeyCode.ButtonR2 or self.userCFrame == Enum.UserCFrame.LeftHand and p8.KeyCode == Enum.KeyCode.ButtonL2 then
 		self:setTriggerState(p8.Position.Z)
 		
@@ -286,33 +286,33 @@ function t_2:onInputPositionChanged(p8) --[[ line: 296 ]]
 	end
 end
 
-function t_2:onButtonInputChanged(p9, p10) --[[ line: 314 ]]
+function t_2:onButtonInputChanged(p9, p10)
 	-- upvalues: t_1 (ref)
 	if self.userCFrame == Enum.UserCFrame.LeftHand and p9.KeyCode == Enum.KeyCode.ButtonL1 or self.userCFrame == Enum.UserCFrame.RightHand and p9.KeyCode == Enum.KeyCode.ButtonR1 or (self.userCFrame == Enum.UserCFrame.LeftHand and p9.KeyCode == Enum.KeyCode.ButtonL3 or self.userCFrame == Enum.UserCFrame.RightHand and p9.KeyCode == Enum.KeyCode.ButtonR3) or (self.userCFrame == Enum.UserCFrame.LeftHand and p9.KeyCode == Enum.KeyCode.ButtonSelect or self.userCFrame == Enum.UserCFrame.RightHand and p9.KeyCode == Enum.KeyCode.ButtonStart or (p9.KeyCode == Enum.KeyCode.ButtonA or p9.KeyCode == Enum.KeyCode.ButtonB or (p9.KeyCode == Enum.KeyCode.ButtonX or p9.KeyCode == Enum.KeyCode.ButtonY))) then
 		self:setButtonState(t_1[p9.KeyCode], p10)
 	end
 end
 
-function t_2:onInputBegan(p11) --[[ line: 335 ]]
+function t_2:onInputBegan(p11)
 	self:onButtonInputChanged(p11, true)
 end
 
-function t_2:onInputChanged(p12) --[[ line: 339 ]]
+function t_2:onInputChanged(p12)
 	self:onInputPositionChanged(p12)
 end
 
-function t_2:onInputEnded(p13) --[[ line: 343 ]]
+function t_2:onInputEnded(p13)
 	self:onInputPositionChanged(p13)
 	self:onButtonInputChanged(p13, false)
 end
 
-function t_2.onTouchpadModeChanged(_, _, _) --[[ line: 348 ]] end
+function t_2.onTouchpadModeChanged(_, _, _) end
 
-function t_2:destroy() --[[ line: 350 ]]
+function t_2:destroy()
 	self.model:Destroy()
 end
 
-function t_2:getButtonPart(p14) --[[ line: 354 ]]
+function t_2:getButtonPart(p14)
 	-- upvalues: t_1 (ref)
 	local var23 = t_1[p14]
 	

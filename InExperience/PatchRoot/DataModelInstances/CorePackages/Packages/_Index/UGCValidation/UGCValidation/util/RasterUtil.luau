@@ -3,20 +3,20 @@ local parent = script.Parent.Parent
 local _ = require(parent.util.Types)
 local tryYieldModule = require(parent.util.tryYield)
 local t = {
-	shouldRenderTriangle_UNIT_TEST = function(vectorA, vectorB) --[[ line: 40 ]]
+	shouldRenderTriangle_UNIT_TEST = function(vectorA, vectorB)
 		return vectorA:Dot(vectorB) < 0
 	end
 }
 
-local function _(p0, p1, p2) --[[ line: 29 | named "orthoProjectCoordinate" ]]
+local function _(p0, p1, p2)
 	return Vector2.new(p0:Dot(p2), p1:Dot(p2))
 end
 
-local _ = function(vectorA, vectorB) --[[ line: 36 | named "shouldRenderTriangle" ]]
+local _ = function(vectorA, vectorB)
 	return vectorA:Dot(vectorB) < 0
 end
 
-local function getScreenCoordinatesForTriangle(vectorA, vectorB, p3, p4, p5) --[[ line: 44 ]]
+local function getScreenCoordinatesForTriangle(vectorA, vectorB, p3, p4, p5)
 	local var4 = vectorA[1]
 	local var5 = vectorA[2]
 	local var6 = vectorA[3]
@@ -31,7 +31,7 @@ local function getScreenCoordinatesForTriangle(vectorA, vectorB, p3, p4, p5) --[
 	return Vector2.new(p3.axis1:Dot(var11), p3.axis2:Dot(var11)) * (vectorB - Vector2.new(1, 1)), Vector2.new(p3.axis1:Dot(var12), p3.axis2:Dot(var12)) * (vectorB - Vector2.new(1, 1)), Vector2.new(p3.axis1:Dot(var13), p3.axis2:Dot(var13)) * (vectorB - Vector2.new(1, 1))
 end
 
-function t.rasterMesh(p6, p7, p8, p9, p10, p11) --[[ line: 71 ]]
+function t.rasterMesh(p6, p7, p8, p9, p10, p11)
 	-- upvalues: assetService (ref), getScreenCoordinatesForTriangle (ref), tryYieldModule (ref)
 	local var14 = assetService:CreateEditableImage({ Size = p7 })
 	

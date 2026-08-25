@@ -11,12 +11,12 @@ local connectIconDropdownModule = require(script.Parent.ConnectIconDropdown)
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
 local var8 = require(corePackagesService.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
 
-local function _() --[[ line: 26 | named "canAccessParty" ]]
+local function _()
 	-- upvalues: universalAppPolicyModule (ref)
 	return universalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty()
 end
 
-local _ = function() --[[ line: 30 | named "shouldEnableIntegrationForParty" ]]
+local _ = function()
 	-- upvalues: getFFlagIsSquadEnabled (ref), universalAppPolicyModule (ref), isConnectDropdownEnabledModule (ref)
 	return getFFlagIsSquadEnabled() and (universalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and isConnectDropdownEnabledModule())
 end
@@ -25,7 +25,7 @@ local var9 = nil
 local var10 = nil
 local var11 = fFlagEnableSideSheet and (fIntSideSheetVariant == 0 and connectIconDropdownModule ~= nil)
 
-local function updateConnectIntegration(p0) --[[ line: 41 ]]
+local function updateConnectIntegration(p0)
 	-- upvalues: var9 (write), registerConnectIntegrationModule (ref), serviceModule (ref), var10 (write), inExperienceAppChatModalModule (ref), var11 (ref), connectIconDropdownModule (ref)
 	if not var9 then
 		var9 = registerConnectIntegrationModule("connect_unibar", if p0 then serviceModule.AvailabilitySignal.Pinned else serviceModule.AvailabilitySignal.Unavailable)
@@ -39,7 +39,7 @@ local function updateConnectIntegration(p0) --[[ line: 41 ]]
 			end
 		end
 		if not var10 then
-			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p1) --[[ line: 72 ]]
+			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p1)
 				-- upvalues: var9 (copy), var11 (copy), connectIconDropdownModule (copy)
 				if p1 == "" then
 					var9.availability:unavailable()
@@ -58,7 +58,7 @@ local function updateConnectIntegration(p0) --[[ line: 41 ]]
 				end
 			end)
 			
-			var10 = function() --[[ line: 85 ]]
+			var10 = function()
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end
@@ -75,7 +75,7 @@ local function updateConnectIntegration(p0) --[[ line: 41 ]]
 	end
 end
 
-local function handlePolicyUpdate() --[[ line: 92 ]]
+local function handlePolicyUpdate()
 	-- upvalues: updateConnectIntegration (ref), getFFlagIsSquadEnabled (ref), universalAppPolicyModule (ref), isConnectDropdownEnabledModule (ref)
 	updateConnectIntegration(getFFlagIsSquadEnabled() and (universalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and isConnectDropdownEnabledModule()))
 end

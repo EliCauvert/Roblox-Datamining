@@ -8,7 +8,7 @@ local localizationProvider = require(parent.Localization).LocalizationProvider
 local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
 local var3 = nil
 
-local var4 = function(p0) --[[ line: 17 ]]
+local var4 = function(p0)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), toast (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
@@ -26,7 +26,7 @@ local var4 = function(p0) --[[ line: 17 ]]
 	})
 end
 
-return function(p1) --[[ line: 37 ]]
+return function(p1)
 	-- upvalues: var3 (write), reactRobloxModule (ref), reactModule (ref), var4 (ref)
 	if not var3 then
 		local UIBloxToast = Instance.new("Folder")

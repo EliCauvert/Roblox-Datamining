@@ -45,17 +45,17 @@ local list_1 = {
 	}
 }
 
-local function _(p0) --[[ line: 77 | named "isResponseUrl" ]]
+local function _(p0)
 	return string.sub(p0, -16) == "/survey/response"
 end
 
-local _ = function(p1, p2) --[[ line: 82 | named "makeRequestImplFor" ]]
+local _ = function(p1, p2)
 	-- upvalues: promiseModule (ref)
-	return function(p3, _, _) --[[ line: 83 ]]
+	return function(p3, _, _)
 		-- upvalues: promiseModule (copy), p1 (ref), p2 (ref)
-		return promiseModule.new(function(p4) --[[ line: 84 ]]
+		return promiseModule.new(function(p4)
 			-- upvalues: p3 (ref), p1 (copy), p2 (copy)
-			task.delay(0.4, function() --[[ line: 85 ]]
+			task.delay(0.4, function()
 				-- upvalues: p3 (copy), p4 (ref), p1 (copy), p2 (copy)
 				if string.sub(p3, -16) == "/survey/response" then
 					p4({
@@ -78,15 +78,15 @@ return {
 	SURVEY_ID = "dev-survey",
 	BRANCHING_SURVEY_ID = "dev-branching-survey",
 	RESPONSE_DELAY_SECONDS = 0.4,
-	makeRequestImpl = function() --[[ line: 108 ]]
+	makeRequestImpl = function()
 		-- upvalues: list (ref), promiseModule (ref)
 		local var5 = "dev-survey"
 		
-		return function(p5, _, _) --[[ line: 83 ]]
+		return function(p5, _, _)
 			-- upvalues: promiseModule (copy), var5 (ref), list (ref)
-			return promiseModule.new(function(p6) --[[ line: 84 ]]
+			return promiseModule.new(function(p6)
 				-- upvalues: p5 (ref), var5 (copy), list (copy)
-				task.delay(0.4, function() --[[ line: 85 ]]
+				task.delay(0.4, function()
 					-- upvalues: p5 (copy), p6 (ref), var5 (copy), list (copy)
 					if string.sub(p5, -16) == "/survey/response" then
 						p6({
@@ -108,15 +108,15 @@ return {
 			end)
 		end
 	end,
-	makeBranchingRequestImpl = function() --[[ line: 112 ]]
+	makeBranchingRequestImpl = function()
 		-- upvalues: list_1 (ref), promiseModule (ref)
 		local var6 = "dev-branching-survey"
 		
-		return function(p7, _, _) --[[ line: 83 ]]
+		return function(p7, _, _)
 			-- upvalues: promiseModule (copy), var6 (ref), list_1 (ref)
-			return promiseModule.new(function(p8) --[[ line: 84 ]]
+			return promiseModule.new(function(p8)
 				-- upvalues: p7 (ref), var6 (copy), list_1 (copy)
-				task.delay(0.4, function() --[[ line: 85 ]]
+				task.delay(0.4, function()
 					-- upvalues: p7 (copy), p8 (ref), var6 (copy), list_1 (copy)
 					if string.sub(p7, -16) == "/survey/response" then
 						p8({

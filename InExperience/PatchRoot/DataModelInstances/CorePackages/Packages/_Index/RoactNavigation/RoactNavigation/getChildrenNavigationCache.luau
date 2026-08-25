@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 3 ]]
+﻿return function(p0)
 	if not p0 then
 		return {}
 	elseif not p0._childrenNavigation then

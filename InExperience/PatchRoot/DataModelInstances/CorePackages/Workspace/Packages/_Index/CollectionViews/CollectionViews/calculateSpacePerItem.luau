@@ -1,6 +1,6 @@
 ﻿local argCheckModule = require(script:FindFirstAncestor("CollectionViews").Parent.ArgCheck)
 
-return function(p0, p1) --[[ line: 15 | named "calculateSpacePerItem" ]]
+return function(p0, p1)
 	-- upvalues: argCheckModule (ref)
 	if p0 <= 1 then
 		return { gapOffsetPerItem = 0, adjustedGap = p1 }

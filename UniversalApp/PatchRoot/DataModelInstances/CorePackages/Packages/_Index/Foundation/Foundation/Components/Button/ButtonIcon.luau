@@ -16,7 +16,7 @@ local useTextSizeOffsetModule = require(foundation.Providers.Style.useTextSizeOf
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
 
-return function(p0) --[[ line: 38 | named "ButtonIcon" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), useTextSizeOffsetModule (ref), getIconScaleModule (ref), usePresentationContext (ref), useButtonVariantsModule (ref), isBuilderOrMigratedIcon (ref), reactModule (ref), textModule (ref), isMigrated (ref), uiblox (ref), builderIconsModule (ref), imageModule (ref)
 	local disabledTransparencyBinding = p0.disabledTransparencyBinding
 	local textTransparencyBinding = p0.textTransparencyBinding
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 38 | named "ButtonIcon" ]]
 			FontSize = var15.icon.size.Y.Offset
 		},
 		Size = var15.icon.size,
-		textStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p2) --[[ line: 71 ]]
+		textStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p2)
 			-- upvalues: var15 (ref)
 			return {
 				Color3 = var15.content.style.Color3,
@@ -48,7 +48,7 @@ return function(p0) --[[ line: 38 | named "ButtonIcon" ]]
 		tag = "position-center-center anchor-center-center",
 		Image = p0.icon,
 		Size = if var12 then UDim2.fromOffset(var12.X, var12.Y) else var15.icon.size,
-		imageStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1) --[[ line: 97 ]]
+		imageStyle = reactModule.joinBindings({ disabledTransparencyBinding, textTransparencyBinding }):map(function(p1)
 			-- upvalues: var15 (ref)
 			return {
 				Color3 = var15.content.style.Color3,

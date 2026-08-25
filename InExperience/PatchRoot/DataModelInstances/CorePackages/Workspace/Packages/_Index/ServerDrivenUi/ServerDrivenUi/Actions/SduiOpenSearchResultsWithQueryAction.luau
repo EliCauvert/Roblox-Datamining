@@ -6,7 +6,7 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local openSearchResultsWithQueryBridge = require(parent.ServerDrivenUi).OpenSearchResultsWithQueryBridge
 local openSearchResultsWithQueryParamsModule = require(serverDrivenUi.Actions.openSearchResultsWithQueryParams)
 
-local function _(p0, p1, p2) --[[ line: 24 | named "reportInvalidParam" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
 	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.OpenSearchResultsWithQuery,
@@ -15,7 +15,7 @@ local function _(p0, p1, p2) --[[ line: 24 | named "reportInvalidParam" ]]
 	}, p0.appPage)
 end
 
-return function(p3, _, p4, _) --[[ line: 32 | named "SduiOpenSearchResultsWithQueryAction" ]]
+return function(p3, _, p4, _)
 	-- upvalues: openSearchResultsWithQueryParamsModule (ref), sduiErrorType (ref), sduiActionType (ref), openSearchResultsWithQueryBridge (ref)
 	local var3 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p3)
 	

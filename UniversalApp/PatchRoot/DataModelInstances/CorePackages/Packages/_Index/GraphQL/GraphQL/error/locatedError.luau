@@ -9,7 +9,7 @@ local _ = require(parent_1.language.ast)
 local graphQLError = require(parent.GraphQLError).GraphQLError
 
 return {
-	locatedError = function(p0, p1, p2) --[[ line: 30 ]]
+	locatedError = function(p0, p1, p2)
 		-- upvalues: instanceof (ref), error (ref), inspect (ref), array (ref), graphQLError (ref)
 		local _ = nil
 		local var1 = if instanceof(p0, error) then p0 elseif typeof(p0) == "table" and typeof(p0.message) == "string" and p0.stack ~= nil then error.new(p0.message) elseif typeof(p0) == "table" and typeof(p0.error) == "string" then error.new("Unexpected error value: " .. inspect(p0.error)) else error.new("Unexpected error value: " .. inspect(p0))

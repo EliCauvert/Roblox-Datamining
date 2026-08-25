@@ -11,7 +11,7 @@ local instance = wrappersModule.Instance
 local signal = wrappersModule.Signal
 local _ = require(script.Parent.paginationSlotsUtils)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimatedHighlight" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: useTokensModule (ref), reactOtterModule (ref), reactModule (ref), signal (ref), instance (ref), connection (ref)
 	local time100 = useTokensModule().Time.Time_100
 	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
@@ -24,7 +24,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 	local var16 = reactModule.useRef(nil)
 	local var17 = reactModule.useRef(nil)
 	
-	local function _(value) --[[ line: 59 | named "resetTransitionState" ]]
+	local function _(value)
 		-- upvalues: var16 (ref), var14 (ref), var15 (ref)
 		if var16.current then
 			task.cancel(var16.current)
@@ -37,13 +37,13 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 		end
 	end
 	
-	local var18 = reactModule.useCallback(function() --[[ line: 70 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), var14 (ref), time100 (ref), var15 (ref), var17 (ref)
 		if var16.current then
 			task.cancel(var16.current)
 		end
 		var14.current = true
-		var16.current = task.delay(time100, function() --[[ line: 76 ]]
+		var16.current = task.delay(time100, function()
 			-- upvalues: var16 (copy), var14 (copy), var15 (copy), var17 (copy)
 			var16.current = nil
 			var14.current = false
@@ -58,7 +58,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 			end
 		end)
 	end, { time100 })
-	local var19 = reactModule.useCallback(function(p5, p6) --[[ line: 90 ]]
+	local var19 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: p1 (ref), var12 (ref), var14 (ref), var15 (ref), var8 (ref), reactOtterModule (copy), var6 (ref), var18 (ref), time100 (ref), var10 (ref)
 		if not p5.current or not p1.current then
 			var12(false)
@@ -95,7 +95,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 		
 		return true
 	end, { time100, p1, var18 })
-	local var20 = reactModule.useCallback(function() --[[ line: 138 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), p2 (ref), var19 (ref)
 		if p0 then
 			local var23 = p2[p0]
@@ -105,7 +105,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 			end
 		end
 	end, { p0, p2, var19 })
-	reactModule.useLayoutEffect(function() --[[ line: 148 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: p0 (ref), p2 (ref), var13 (ref), var16 (ref), var14 (ref), var15 (ref), p1 (ref), var19 (ref), var12 (ref)
 		if not p0 then
 			var12(false)
@@ -137,7 +137,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 		p3,
 		p4
 	})
-	reactModule.useEffect(function() --[[ line: 171 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), p2 (ref), p1 (ref), signal (copy), instance (copy), var20 (ref), connection (copy)
 		if p0 then
 			local var26 = p2[p0]
@@ -148,7 +148,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 				local var29 = signal.Connect(instance.GetPropertyChangedSignal(p1.current, "AbsoluteSize"), var20)
 				local var30 = signal.Connect(instance.GetPropertyChangedSignal(p1.current, "AbsolutePosition"), var20)
 				
-				return function() --[[ line: 193 ]]
+				return function()
 					-- upvalues: connection (copy), var27 (ref), var28 (ref), var29 (ref), var30 (ref)
 					connection.Disconnect(var27)
 					connection.Disconnect(var28)
@@ -157,15 +157,15 @@ return function(p0, p1, p2, p3, p4) --[[ line: 32 | named "usePaginationAnimated
 				end
 			end
 		end
-		return function() --[[ line: 202 ]] end
+		return function() end
 	end, { p0, p2, var20 })
-	reactModule.useEffect(function() --[[ line: 206 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var20 (ref)
 		var17.current = var20
 	end, { var20 })
-	reactModule.useEffect(function() --[[ line: 210 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref)
-		return function() --[[ line: 211 ]]
+		return function()
 			-- upvalues: var16 (copy)
 			if var16.current then
 				task.cancel(var16.current)

@@ -13,7 +13,7 @@ local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReport
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
-return reactModule.memo(function(p0) --[[ line: 39 | named "InExpSceneSelectionNode" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), textWithTranslationModule (ref)
 	local var9, var10 = reactModule.useState(p0.loadingText)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
@@ -24,11 +24,11 @@ return reactModule.memo(function(p0) --[[ line: 39 | named "InExpSceneSelectionN
 	var12.current = p0
 	local var13 = reactModule.useRef(sendEvent)
 	var13.current = sendEvent
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var13 (ref), telemetryEventType (copy), var12 (ref), var10 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
 		if getIsInExpSceneSelectionAvailableModule() then
 			local var14 = nil
-			var14 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1) --[[ line: 77 ]]
+			var14 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1)
 				-- upvalues: var14 (write), var13 (copy), telemetryEventType (copy), var12 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
 				var14 = nil
 				var13.current({
@@ -69,7 +69,7 @@ return reactModule.memo(function(p0) --[[ line: 39 | named "InExpSceneSelectionN
 					var10(current.errorText)
 				end
 			end
-			return function() --[[ line: 122 ]]
+			return function()
 				-- upvalues: var14 (write)
 				if var14 then
 					var14:Disconnect()

@@ -4,17 +4,17 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local userProfilesModule = require(parent.UserProfiles)
 
-return function(p0) --[[ line: 18 | named "useUserNameFromUserId" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), userProfilesModule (ref), signalsModule (ref), signalsReactModule (ref)
 	local var4 = p0 and p0 ~= 0
-	local var5 = reactModule.useMemo(function() --[[ line: 21 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), p0 (ref), userProfilesModule (copy)
 		return if var4 and p0 then userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ tostring(p0) }) else nil
 	end, { var4, p0 })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 30 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: var5 (ref), signalsModule (copy)
-		return if var5 then signalsModule.createComputed(function(p1) --[[ line: 36 ]]
+		return if var5 then signalsModule.createComputed(function(p1)
 			-- upvalues: var5 (copy)
 			local var6 = var5(p1)
 			
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 18 | named "useUserNameFromUserId" ]]
 			local names = var7 and var7.names
 			
 			return if names then names.getDisplayName(false) or (names.getUsername(false) or "") else nil
-		end) else function(_) --[[ line: 32 ]]
+		end) else function(_)
 			return nil
 		end
 	end, { var5 }))

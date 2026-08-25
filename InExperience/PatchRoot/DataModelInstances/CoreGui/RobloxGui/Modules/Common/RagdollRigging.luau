@@ -256,7 +256,7 @@ local list_7 = {
 	{ "Right Hip", "Torso" }
 }
 
-local function indexParts(p0) --[[ line: 238 ]]
+local function indexParts(p0)
 	local t = {}
 	
 	for i, v in ipairs(p0:GetChildren()) do
@@ -271,7 +271,7 @@ local function indexParts(p0) --[[ line: 238 ]]
 	return t
 end
 
-local function createRigJoints(p1, p2, p3) --[[ line: 252 ]]
+local function createRigJoints(p1, p2, p3)
 	if p3 then
 		local root = Instance.new("AnimationConstraint")
 		root.Name = "Root"
@@ -336,7 +336,7 @@ local function createRigJoints(p1, p2, p3) --[[ line: 252 ]]
 	end
 end
 
-local function createAdditionalAttachments(p4, p5) --[[ line: 320 ]]
+local function createAdditionalAttachments(p4, p5)
 	for i, v in ipairs(p5) do
 		local var45, var46, var47, var48 = unpack(v)
 		local var49 = p4[var45]
@@ -365,7 +365,7 @@ local function createAdditionalAttachments(p4, p5) --[[ line: 320 ]]
 	end
 end
 
-local function createNoCollides(p6, p7) --[[ line: 348 ]]
+local function createNoCollides(p6, p7)
 	local t = {}
 	
 	for i, v in ipairs(p7) do
@@ -414,15 +414,15 @@ local function createNoCollides(p6, p7) --[[ line: 348 ]]
 	end
 end
 
-local function _(p8, _) --[[ line: 407 | named "isAttachmetInPart" ]]
+local function _(p8, _)
 	return if p8 then true else false
 end
 
-local _ = function(_, _, p9, p10) --[[ line: 411 | named "checkValidAttachment" ]]
+local _ = function(_, _, p9, p10)
 	return if (if p9 then true else false) and (if p10 then true else false) then true else (if p9 then true else false) and (if p10 then true else false)
 end
 
-local function hasValidConstraint(_, p11) --[[ line: 423 ]]
+local function hasValidConstraint(_, p11)
 	for i, v in ipairs(p11:GetChildren()) do
 		if v:IsA("BallSocketConstraint") then
 			local attachment0 = v.Attachment0
@@ -436,7 +436,7 @@ local function hasValidConstraint(_, p11) --[[ line: 423 ]]
 	return false
 end
 
-local function hasRagdollJoint(p12) --[[ line: 438 ]]
+local function hasRagdollJoint(p12)
 	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), hasValidConstraint (ref)
 	if avatarJointUpgradeFeatureEngineFeature and not p12:IsA("Motor6D") and not p12:IsA("AnimationConstraint") then
 		return false
@@ -456,7 +456,7 @@ local function hasRagdollJoint(p12) --[[ line: 438 ]]
 	return not (not parent or not var63) and (if hasValidConstraint(parent, var63) then true else hasValidConstraint(var63, parent))
 end
 
-local function disableMotorSet(value, p13) --[[ line: 470 ]]
+local function disableMotorSet(value, p13)
 	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), hasRagdollJoint (ref)
 	local t = {}
 	
@@ -475,7 +475,7 @@ local function disableMotorSet(value, p13) --[[ line: 470 ]]
 	return t
 end
 
-function t.createRagdollJoints(p14, p15, p16) --[[ line: 486 ]]
+function t.createRagdollJoints(p14, p15, p16)
 	-- upvalues: indexParts (ref), createAdditionalAttachments (ref), list_4 (ref), createRigJoints (ref), list_5 (ref), createNoCollides (ref), list_6 (ref), list (ref), list_1 (ref), list_2 (ref)
 	local var67 = indexParts(p14)
 	
@@ -495,7 +495,7 @@ function t.createRagdollJoints(p14, p15, p16) --[[ line: 486 ]]
 	error("unknown rig type", 2)
 end
 
-function t.disableMotors(p17, p18) --[[ line: 501 ]]
+function t.disableMotors(p17, p18)
 	-- upvalues: disableMotorSet (ref), list_7 (ref), list_3 (ref)
 	local var68 = nil
 	
@@ -519,7 +519,7 @@ function t.disableMotors(p17, p18) --[[ line: 501 ]]
 	return var68
 end
 
-function t.disableParticleEmittersAndFadeOut(p19, p20) --[[ line: 530 ]]
+function t.disableParticleEmittersAndFadeOut(p19, p20)
 	-- upvalues: runService (ref)
 	if runService:IsServer() then
 		error("disableParticleEmittersAndFadeOut should not be called on the server.", 2)
@@ -544,7 +544,7 @@ function t.disableParticleEmittersAndFadeOut(p19, p20) --[[ line: 530 ]]
 	end
 end
 
-function t.easeNongraphicJointFriction(p21, p22) --[[ line: 558 ]]
+function t.easeNongraphicJointFriction(p21, p22)
 	-- upvalues: runService (ref)
 	local t = {}
 	
@@ -573,7 +573,7 @@ function t.easeNongraphicJointFriction(p21, p22) --[[ line: 558 ]]
 	end
 end
 
-function t.easeJointFriction_OLD(p23, p24) --[[ line: 587 ]]
+function t.easeJointFriction_OLD(p23, p24)
 	-- upvalues: runService (ref)
 	local t = {}
 	

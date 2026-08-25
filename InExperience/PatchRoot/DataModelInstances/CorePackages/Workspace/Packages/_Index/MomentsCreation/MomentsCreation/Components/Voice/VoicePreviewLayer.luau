@@ -7,7 +7,7 @@ local useEffect = reactModule.useEffect
 local useRef = reactModule.useRef
 local useState = reactModule.useState
 
-return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
+return function(p0)
 	-- upvalues: useState (ref), useEffect (ref), signalsModule (ref), useRef (ref)
 	local controller = p0.controller
 	local ttsAudio = controller.ttsAudio
@@ -15,9 +15,9 @@ return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
 	local var3, var4 = useState(controller.getActiveTool(false))
 	local var5, var6 = useState(controller.getEffectiveTTS(false))
 	local var7, var8 = useState(ttsAudio.getIsLoaded(false))
-	useEffect(function() --[[ line: 34 ]]
+	useEffect(function()
 		-- upvalues: signalsModule (copy), var4 (ref), controller (ref), var6 (ref), var8 (ref), ttsAudio (ref)
-		return signalsModule.createEffect(function(p1) --[[ line: 35 ]]
+		return signalsModule.createEffect(function(p1)
 			-- upvalues: var4 (copy), controller (copy), var6 (copy), var8 (copy), ttsAudio (copy)
 			var4(controller.getActiveTool(p1))
 			var6(controller.getEffectiveTTS(p1))
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
 	local var11 = var3 ~= nil and var3.kind == "voice"
 	local var12 = not var11 and var5 ~= nil
 	local var13 = if var5 ~= nil then "" else `{var5.text}:{var5.voiceId}`
-	useEffect(function() --[[ line: 54 ]]
+	useEffect(function()
 		-- upvalues: var12 (ref), var5 (ref), ttsAudio (ref)
 		if var12 and var5 ~= nil then
 			ttsAudio.generate(var5.text, var5.voiceId)
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
 			return
 		end
 	end, { var12, var13 })
-	useEffect(function() --[[ line: 63 ]]
+	useEffect(function()
 		-- upvalues: var11 (ref), var9 (ref), ttsAudio (ref)
 		if var11 and var9.current then
 			ttsAudio.pause()
@@ -45,14 +45,14 @@ return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
 		end
 	end, { var11 })
 	local var14, var15 = useState(controller.preview.playback.getIsPlaying(false))
-	useEffect(function() --[[ line: 72 ]]
+	useEffect(function()
 		-- upvalues: signalsModule (copy), var15 (ref), controller (ref)
-		return signalsModule.createEffect(function(p2) --[[ line: 73 ]]
+		return signalsModule.createEffect(function(p2)
 			-- upvalues: var15 (copy), controller (copy)
 			var15(controller.preview.playback.getIsPlaying(p2))
 		end)
 	end, { controller })
-	useEffect(function() --[[ line: 79 ]]
+	useEffect(function()
 		-- upvalues: var12 (ref), var5 (ref), ttsAudio (ref), var14 (ref), controller (ref), var9 (ref)
 		if not var12 or var5 == nil then return end
 		if not ttsAudio.getIsLoaded(false) then return end
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
 			ttsAudio.pause()
 			var9.current = false
 		end
-		return function() --[[ line: 115 ]]
+		return function()
 			-- upvalues: var9 (copy), ttsAudio (copy)
 			if var9.current then
 				ttsAudio.pause()
@@ -86,12 +86,12 @@ return function(p0) --[[ line: 24 | named "VoicePreviewLayer" ]]
 			end
 		end
 	end, { var12, var13, var14, var7 })
-	useEffect(function() --[[ line: 125 ]]
+	useEffect(function()
 		-- upvalues: var12 (ref), var5 (ref), signalsModule (copy), controller (ref), var10 (ref), ttsAudio (ref), var9 (ref)
 		if var12 and var5 ~= nil then
 			local startTime = var5.startTime or 0
 			
-			return signalsModule.createEffect(function(p3) --[[ line: 132 ]]
+			return signalsModule.createEffect(function(p3)
 				-- upvalues: controller (copy), var10 (copy), ttsAudio (copy), startTime (ref), var9 (copy)
 				local position = controller.preview.playback.getPosition(p3)
 				local current = var10.current

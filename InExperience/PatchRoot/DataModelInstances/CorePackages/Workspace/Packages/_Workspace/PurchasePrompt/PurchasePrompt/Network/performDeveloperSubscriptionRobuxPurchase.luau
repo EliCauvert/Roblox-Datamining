@@ -4,12 +4,12 @@ local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
 local promiseModule = require(purchasePrompt.Promise)
 local parseSubscriptionErrorModule = require(purchasePrompt.Utils.parseSubscriptionError)
 
-return function(p0, p1, p2) --[[ line: 9 | named "performDeveloperSubscriptionRobuxPurchase" ]]
+return function(p0, p1, p2)
 	-- upvalues: promiseModule (ref), parseSubscriptionErrorModule (ref), purchaseErrorModule (ref)
-	return p0.performDeveloperSubscriptionRobuxPurchase(p1, p2):andThen(function() --[[ line: 10 ]]
+	return p0.performDeveloperSubscriptionRobuxPurchase(p1, p2):andThen(function()
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve()
-	end, function(p3) --[[ line: 12 ]]
+	end, function(p3)
 		-- upvalues: promiseModule (copy), parseSubscriptionErrorModule (copy), purchaseErrorModule (copy)
 		return if type(p3) == "string" then promiseModule.reject(parseSubscriptionErrorModule(p3)) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
 	end)

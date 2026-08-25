@@ -6,7 +6,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1, _) --[[ line: 18 | named "SduiJoinCommunityAction" ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), dataHydrationModule (ref), signalsModule (ref), setCurrentToastMessage (ref)
 	local var3 = if p0 then p0.actionParams else nil
 	
@@ -32,7 +32,7 @@ return function(p0, _, p1, _) --[[ line: 18 | named "SduiJoinCommunityAction" ]]
 	local var4 = dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).joinCommunity(communityId)
 	local dispatch = p1.dependencies.dispatch
 	local t = {}
-	t.dispose = signalsModule.createEffect(function(p2) --[[ line: 50 ]]
+	t.dispose = signalsModule.createEffect(function(p2)
 		-- upvalues: var4 (ref), dispatch (ref), setCurrentToastMessage (copy), t (ref)
 		local var6 = var4(p2)
 		

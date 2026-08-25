@@ -37,7 +37,7 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useProfileWrapperContextModule (ref), reactModule (ref), avatarSaveContext (ref), robloxAppHooksModule (ref), enumsModule (ref), useLocalization (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), eventNamesModule (ref), purchaseBulkItemsModule (ref), handlePurchaseItemsSuccessModule (ref), getIsInsufficientRobuxError (ref), setCurrentToastMessage (ref), numberLocalization (ref), localizationService (ref), getIconRichText (ref), iconName (ref), view (ref), text (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), fFlagProfileInspectAndBuyAutoFocusModule (ref), reactFocusNavigationModule (ref), dialog (ref), dialogSize (ref), checkbox (ref), inputSize (ref), orientation (ref), buttonVariant (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
 	local var15 = useNavigation()
 	local var16 = useProfileAnalyticsContextModule()
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 	local wearTypeMap = params.wearTypeMap or {}
 	local var27 = robloxAppHooksModule.useLocalRobuxBalance()
 	local var28 = if var27 ~= nil then params.robuxBalance or 0 else var27
-	local var29 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), enumsModule (copy), totalPrice (ref), var28 (ref)
 		var15.navigate(enumsModule.Screens.InsufficientRobuxDialog, { totalPrice = totalPrice, robuxBalance = var28 })
 	end, { var15, totalPrice, var28 })
@@ -73,7 +73,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 			numItems = #purchasableLineItems
 		}
 	})
-	local var31 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: var30 (ref)
 		return {
 			purchaseSuccessSingular = var30.purchaseSuccessSingular,
@@ -87,14 +87,14 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 	})
 	local var32, var33 = reactModule.useState(false)
 	local var34, var35 = reactModule.useState(true)
-	local var36 = reactModule.useCallback(function() --[[ line: 111 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: var32 (ref), var15 (ref)
 		if var32 then
 			return
 		end
 		var15.goBack()
 	end, { var32, var15 })
-	local var37 = reactModule.useCallback(function() --[[ line: 119 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var32 (ref), purchasableLineItems (ref), var33 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var16 (ref), eventNamesModule (copy), var18 (ref), purchaseBulkItemsModule (copy), userId (ref), handlePurchaseItemsSuccessModule (copy), var34 (ref), purchasedWearIds (ref), ownedAssetIds (ref), wearTypeMap (ref), var19 (ref), var17 (ref), var31 (ref), var15 (ref), getIsInsufficientRobuxError (copy), var29 (ref), setCurrentToastMessage (copy), var30 (ref)
 		if var32 or #purchasableLineItems == 0 then return end
 		var33(true)
@@ -104,7 +104,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 		else
 			var16.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, { btnContext = "InspectAvatarBuyAll" })
 		end
-		purchaseBulkItemsModule({ userId = userId, lineItems = purchasableLineItems }):andThen(function(p2) --[[ line: 140 ]]
+		purchaseBulkItemsModule({ userId = userId, lineItems = purchasableLineItems }):andThen(function(p2)
 			-- upvalues: handlePurchaseItemsSuccessModule (copy), var34 (copy), purchasedWearIds (copy), ownedAssetIds (copy), wearTypeMap (copy), var18 (copy), var19 (copy), var17 (copy), var31 (copy), var15 (copy)
 			handlePurchaseItemsSuccessModule({
 				result = p2,
@@ -118,7 +118,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 				localized = var31
 			})
 			var15.goBack()
-		end):catch(function(p1) --[[ line: 154 ]]
+		end):catch(function(p1)
 			-- upvalues: getIsInsufficientRobuxError (copy), var29 (copy), var17 (copy), setCurrentToastMessage (copy), var30 (copy), var15 (copy)
 			if getIsInsufficientRobuxError(p1) then
 				var29()
@@ -131,7 +131,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 				toastMessage = var30.purchaseFailed
 			}))
 			var15.goBack()
-		end):finally(function() --[[ line: 166 ]]
+		end):finally(function()
 			-- upvalues: var33 (copy)
 			var33(false)
 		end)
@@ -167,7 +167,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 					LayoutOrder = 1,
 					tag = "auto-xy text-title-medium content-emphasis text-align-x-right padding-y-xsmall",
 					RichText = true,
-					Text = reactModule.useMemo(function() --[[ line: 189 ]]
+					Text = reactModule.useMemo(function()
 						-- upvalues: numberLocalization (copy), totalPrice (ref), localizationService (copy), getIconRichText (copy), iconName (copy)
 						return `{getIconRichText(iconName.Robux)} {numberLocalization.localize(totalPrice, localizationService.RobloxLocaleId)}`
 					end, { totalPrice, localizationService.RobloxLocaleId })
@@ -175,9 +175,9 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 			})
 		})
 	})
-	local var39 = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function() --[[ line: 228 ]]
+	local var39 = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
 		-- upvalues: inputHandlersModule (copy), var36 (ref)
-		return inputHandlersModule.onRelease(function(p3) --[[ line: 229 ]]
+		return inputHandlersModule.onRelease(function(p3)
 			-- upvalues: var36 (copy)
 			p3:cancel()
 			var36()
@@ -206,7 +206,7 @@ return function(p0) --[[ line: 58 | named "PurchaseConfirmationModal" ]]
 					label = var30.wearAfterPurchase,
 					size = inputSize.XSmall,
 					isChecked = var34,
-					onActivated = function() --[[ line: 263 ]]
+					onActivated = function()
 						-- upvalues: var35 (ref), var34 (ref)
 						var35(not var34)
 					end,

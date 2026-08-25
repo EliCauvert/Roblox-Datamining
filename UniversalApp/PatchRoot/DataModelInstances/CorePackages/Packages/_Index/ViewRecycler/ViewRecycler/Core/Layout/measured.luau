@@ -8,7 +8,7 @@ local typesModule = require(viewRecycler.Core.Types)
 local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
 local var7 = require(viewRecycler.Internal.createDebugLogger)("Layout.measured")
 
-return function(p0) --[[ line: 45 | named "measured" ]]
+return function(p0)
 	-- upvalues: averagePropagationModule (ref), detachedMeasurementCacheModule (ref), orderStatisticTreeModule (ref), typesModule (ref), var7 (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
 	p0 = p0 or {}
 	local estimatedItemLength = p0.estimatedItemLength or 50
@@ -24,19 +24,19 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 	local var19 = 0
 	local var20 = 0
 	
-	local function _() --[[ line: 62 | named "average" ]]
+	local function _()
 		-- upvalues: var17 (write), var16 (write), estimatedItemLength (ref)
 		return if var17 > 0 then var16 / var17 else estimatedItemLength
 	end
 	
-	local _ = function(p1, p2) --[[ line: 66 | named "addActiveMeasurement" ]]
+	local _ = function(p1, p2)
 		-- upvalues: t (ref), var16 (write), var17 (write)
 		t[p1] = p2
 		var16 += p2
 		var17 += 1
 	end
 	
-	local _ = function(p3) --[[ line: 72 | named "restoreActiveMeasurement" ]]
+	local _ = function(p3)
 		-- upvalues: var11 (ref), t (ref), var16 (write), var17 (write)
 		local var32 = var11.take(p3)
 		
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		end
 	end
 	
-	local _ = function(p4) --[[ line: 79 | named "detachActiveMeasurement" ]]
+	local _ = function(p4)
 		-- upvalues: t (ref), var16 (write), var17 (write), var11 (ref)
 		local var33 = t[p4]
 		
@@ -60,17 +60,17 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		var11.put(p4, var33)
 	end
 	
-	local function getItemCount() --[[ line: 90 ]]
+	local function getItemCount()
 		-- upvalues: var12 (ref)
 		return var12.length()
 	end
 	
-	local function getContentLength() --[[ line: 94 ]]
+	local function getContentLength()
 		-- upvalues: var12 (ref)
 		return var12.totalSum()
 	end
 	
-	local function getItemLayout(p5) --[[ line: 98 ]]
+	local function getItemLayout(p5)
 		-- upvalues: var18 (write), var19 (write), var20 (write), var12 (ref)
 		return if var18 == p5 then { startOffset = var19, length = var20 } else {
 			startOffset = var12.prefixSum(p5),
@@ -78,12 +78,12 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		}
 	end
 	
-	local function getItemLayouts(p6, p7, p8) --[[ line: 111 ]]
+	local function getItemLayouts(p6, p7, p8)
 		-- upvalues: var12 (ref)
 		var12.fillRange(p6, p7, p8)
 	end
 	
-	local function getIntersectingIndexRange(p9, p10) --[[ line: 115 ]]
+	local function getIntersectingIndexRange(p9, p10)
 		-- upvalues: var12 (ref), var18 (write), typesModule (copy), var19 (write), var20 (write)
 		local var34 = var12.length()
 		
@@ -110,7 +110,7 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		return if clampedValue_1 < clampedValue then typesModule.EMPTY_INDEX_RANGE else { firstIndex = clampedValue, lastIndex = clampedValue_1 }
 	end
 	
-	local function updateItemMeasurement(p11) --[[ line: 142 ]]
+	local function updateItemMeasurement(p11)
 		-- upvalues: t_2 (write), var7 (copy), t (ref), var18 (write), var16 (write), var17 (write), var12 (ref), estimationPolicy (ref), estimatedItemLength (ref)
 		local itemIndex = p11.itemIndex
 		local itemKey = p11.itemKey
@@ -147,20 +147,20 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		return { accepted = true, geometryChanged = var41 }
 	end
 	
-	local function requiresItemMeasurement() --[[ line: 195 ]]
+	local function requiresItemMeasurement()
 		return true
 	end
 	
-	local _ = function(p12) --[[ line: 199 | named "rebuildFromKeys" ]]
+	local _ = function(p12)
 		-- upvalues: t_2 (write), var12 (ref), t (ref)
 		t_2 = p12
-		var12.buildFromMeasurements(#p12, function(p13) --[[ line: 201 ]]
+		var12.buildFromMeasurements(#p12, function(p13)
 			-- upvalues: t (copy), p12 (ref)
 			return t[p12[p13]]
 		end)
 	end
 	
-	local function applyReset(value) --[[ line: 206 ]]
+	local function applyReset(value)
 		-- upvalues: t_1 (write), var11 (ref), t (ref), var16 (write), var17 (write), t_2 (write), var12 (ref)
 		local valueCount = #value
 		local list = table.create(valueCount)
@@ -200,13 +200,13 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		end
 		t_1 = t_3
 		t_2 = list
-		var12.buildFromMeasurements(#list, function(p14) --[[ line: 201 ]]
+		var12.buildFromMeasurements(#list, function(p14)
 			-- upvalues: t (copy), list (ref)
 			return t[list[p14]]
 		end)
 	end
 	
-	local function applyInsert(p15, p16) --[[ line: 235 ]]
+	local function applyInsert(p15, p16)
 		-- upvalues: t_1 (write), var11 (ref), t (ref), var16 (write), var17 (write), var12 (ref), t_2 (write)
 		local var50
 		local p16Count = #p16
@@ -247,14 +247,14 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 			end
 			table.move(t_2, p15, t_2Count, p15 + p16Count, list)
 			t_2 = list
-			var12.buildFromMeasurements(#list, function(p17) --[[ line: 201 ]]
+			var12.buildFromMeasurements(#list, function(p17)
 				-- upvalues: t (copy), list (ref)
 				return t[list[p17]]
 			end)
 		end
 	end
 	
-	local function applyRemove(p18, p19) --[[ line: 271 ]]
+	local function applyRemove(p18, p19)
 		-- upvalues: t_2 (write), t_1 (write), t (ref), var16 (write), var17 (write), var11 (ref), var12 (ref)
 		local p19Count = #p19
 		
@@ -283,14 +283,14 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 			table.move(t_2, 1, p18 - 1, 1, list)
 			table.move(t_2, p18 + p19Count, t_2Count, p18, list)
 			t_2 = list
-			var12.buildFromMeasurements(#list, function(p20) --[[ line: 201 ]]
+			var12.buildFromMeasurements(#list, function(p20)
 				-- upvalues: t (copy), list (ref)
 				return t[list[p20]]
 			end)
 		end
 	end
 	
-	local _ = function(p21, p22, p23) --[[ line: 295 | named "applyMove" ]]
+	local _ = function(p21, p22, p23)
 		-- upvalues: t_2 (write), var12 (ref), t (ref)
 		assert(t_2[p21] == p23, "Layout.measured: move key does not match current order")
 		table.remove(t_2, p21)
@@ -299,7 +299,7 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		var12.insert(p22, t[p23])
 	end
 	
-	local function applyReorder(p24) --[[ line: 303 ]]
+	local function applyReorder(p24)
 		-- upvalues: t_2 (write), t_1 (write), var12 (ref), t (ref)
 		assert(#p24 == #t_2, "Layout.measured: reorder must contain every active key")
 		local t_3 = {}
@@ -310,7 +310,7 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		end
 		local cloned = table.clone(p24)
 		t_2 = cloned
-		var12.buildFromMeasurements(#cloned, function(p25) --[[ line: 201 ]]
+		var12.buildFromMeasurements(#cloned, function(p25)
 			-- upvalues: t (copy), cloned (ref)
 			return t[cloned[p25]]
 		end)
@@ -320,7 +320,7 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		getItemCount = getItemCount,
 		getContentLength = getContentLength,
 		getIntersectingIndexRange = getIntersectingIndexRange,
-		expandIndexRange = function(p26, p27, p28) --[[ line: 342 ]]
+		expandIndexRange = function(p26, p27, p28)
 			-- upvalues: staticPartsModule (copy), var12 (ref)
 			return staticPartsModule.expandItemRange(p26, p27, p28 or p27, var12.length())
 		end,
@@ -328,7 +328,7 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 		getItemLayouts = getItemLayouts,
 		updateItemMeasurement = updateItemMeasurement,
 		requiresItemMeasurement = requiresItemMeasurement,
-		applyDataSourceChange = function(p29) --[[ line: 316 ]]
+		applyDataSourceChange = function(p29)
 			-- upvalues: var18 (write), dataSourceChangeTypeModule (copy), applyReset (ref), applyInsert (ref), applyRemove (ref), t_2 (write), var12 (ref), t (ref), applyReorder (ref)
 			var18 = nil
 			local var62 = true
@@ -366,6 +366,6 @@ return function(p0) --[[ line: 45 | named "measured" ]]
 			return var62
 		end,
 		setViewportCrossAxisLength = staticPartsModule.geometryUnchanged,
-		destroy = function() --[[ line: 351 ]] end
+		destroy = function() end
 	}
 end

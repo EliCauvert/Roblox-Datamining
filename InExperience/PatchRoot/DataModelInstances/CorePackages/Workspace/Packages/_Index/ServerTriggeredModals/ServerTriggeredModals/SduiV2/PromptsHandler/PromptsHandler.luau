@@ -37,7 +37,7 @@ local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
 local fFlagSduiDismissPromptAction = sharedFlagsModule.FFlagSduiDismissPromptAction
 local fFlagHomepagePromptsPaddingFix = sharedFlagsModule.FFlagHomepagePromptsPaddingFix
 
-return reactModule.memo(function(p0) --[[ line: 85 | named "PromptsHandler" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), fFlagSduiDismissPromptAction (ref), useStore (ref), useModalSignalStoreModule (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), reactModule (ref), getEntryPointSurfaceConfigModule (ref), signalsReactModule (ref), fFlagSduiAllowNoConfigsBuilt (ref), sduiLoadTimer (ref), fetchPromptsModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), setCentralOverlay (ref), centralOverlayType (ref), fFlagPromptsImpressionUsesTitle (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), fFlagPromptsHandlerCoachmarkEnabled (ref), fFlagSduiSurfaceBannerScrollAwaySticky (ref), fFlagAppIaScrollAway (ref), appNavBarModule (ref), fFlagSduiSurfaceBannerAlwaysMounted (ref), fFlagSduiSystemBannerComponent (ref), surfaceBannerModule (ref), sduiFeatureEntryPoint (ref), fFlagHomepagePromptsPaddingFix (ref), view (ref), coachmarkRendererModule (ref)
 	local entryPoint = p0.entryPoint
 	local promptStyle = p0.promptStyle
@@ -45,13 +45,13 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "PromptsHandler" ]]
 	local var19 = if fFlagSduiDismissPromptAction then useStore() else nil
 	local var20 = useModalSignalStoreModule()
 	local var21 = if fFlagEdpGameLeavePromptsHandlerEnabled and p0.clientAttributes ~= nil then p0.clientAttributes.universeId else nil
-	local var22 = reactModule.useMemo(function() --[[ line: 95 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: fFlagEdpGameLeavePromptsHandlerEnabled (copy), getEntryPointSurfaceConfigModule (copy), entryPoint (ref), var21 (ref)
 		return if fFlagEdpGameLeavePromptsHandlerEnabled then getEntryPointSurfaceConfigModule(entryPoint, var21) else getEntryPointSurfaceConfigModule(entryPoint)
 	end, if fFlagEdpGameLeavePromptsHandlerEnabled then { entryPoint, var21 } else { entryPoint })
 	local var23 = signalsReactModule.useSignalState(var20.getHasShownGetter(entryPoint))
 	local var24 = signalsReactModule.useSignalState(var20.getMetadataGetter(entryPoint))
-	local var25 = reactModule.useMemo(function() --[[ line: 112 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: entryPoint (ref), var22 (ref), fFlagSduiAllowNoConfigsBuilt (copy), sduiLoadTimer (copy), fFlagEdpGameLeavePromptsHandlerEnabled (copy), p0 (ref)
 		return {
 			clearOnEmptyResponse = true,
@@ -63,7 +63,7 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "PromptsHandler" ]]
 			clientAttributes = if fFlagEdpGameLeavePromptsHandlerEnabled then p0.clientAttributes else nil
 		}
 	end, if fFlagEdpGameLeavePromptsHandlerEnabled then { entryPoint, var22, p0.clientAttributes } else { entryPoint, var22 })
-	reactModule.useEffect(function() --[[ line: 128 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fetchPromptsModule (copy), var25 (ref)
 		fetchPromptsModule(var25)
 	end, { var25 })
@@ -71,7 +71,7 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "PromptsHandler" ]]
 	local var27 = var26[1]
 	local var28 = if fFlagSduiDismissPromptAction then reactModule.useRef(nil) else nil
 	local var29 = if fFlagSduiDismissPromptAction then reactModule.useRef(nil) else nil
-	reactModule.useEffect(function() --[[ line: 151 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var23 (ref), var24 (ref), var27 (ref), var20 (ref), entryPoint (ref), var18 (ref), setCentralOverlay (copy), centralOverlayType (copy), var22 (ref), fFlagPromptsImpressionUsesTitle (copy), fFlagSduiDismissPromptAction (copy), var28 (ref), var29 (ref)
 		if var23 then return end
 		if var24 then return end
@@ -93,7 +93,7 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "PromptsHandler" ]]
 	})
 	
 	if fFlagSduiDismissPromptAction then
-		reactModule.useEffect(function() --[[ line: 202 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var28 (ref), var26 (ref), var29 (ref), var19 (ref), centralOverlayType (copy), var18 (ref), setCentralOverlay (copy)
 			local current = var28.current
 			
@@ -120,20 +120,20 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "PromptsHandler" ]]
 	local var36 = if var35 then usePromptEntriesModule(var22.configKey, promptStyleModule.InlineBanner)[1] else nil
 	local var37 = if var36 then var36.identifier else nil
 	local var38 = if var36 then if fFlagPromptsImpressionUsesTitle then var36.title else var36.robloxComponentType else nil
-	reactModule.useEffect(function() --[[ line: 251 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var33 (ref), var34 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
 		if var33 and var34 then
-			reportPromptImpressionModule(var34, var33):catch(function() --[[ line: 253 ]]
+			reportPromptImpressionModule(var34, var33):catch(function()
 				-- upvalues: loggerModule (copy)
 				loggerModule:warning("Failed to report prompt impression")
 			end)
 			sendModalImpressionEvent(var33, var34)
 		end
 	end, { var33, var34 })
-	reactModule.useEffect(function() --[[ line: 260 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var37 (ref), var38 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
 		if var37 and var38 then
-			reportPromptImpressionModule(var38, var37):catch(function() --[[ line: 262 ]]
+			reportPromptImpressionModule(var38, var37):catch(function()
 				-- upvalues: loggerModule (copy)
 				loggerModule:warning("Failed to report prompt impression")
 			end)

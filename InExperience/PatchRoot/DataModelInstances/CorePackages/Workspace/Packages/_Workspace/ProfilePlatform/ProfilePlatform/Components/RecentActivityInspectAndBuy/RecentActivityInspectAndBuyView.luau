@@ -19,7 +19,7 @@ local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
 
-return function(p0) --[[ line: 53 | named "RecentActivityInspectAndBuyView" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), skeleton (ref), sheet (ref), dialogSize (ref), text (ref), view (ref), buyActionBar (ref), buttonVariant (ref), recentActivityPurchaseConfirmationDialogModule (ref), recentActivityInsufficientRobuxDialogModule (ref)
 	local var9 = useLocalization({
 		title = "Feature.Catalog.Label.BuyItems",
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 53 | named "RecentActivityInspectAndBuyView" ]]
 	local var10 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
 	local var11 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
 	local var12 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local var13 = reactModule.useMemo(function() --[[ line: 69 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref), dashModule (copy), var11 (ref), var12 (ref)
 		return {
 			bundleParts = nil,
@@ -74,7 +74,7 @@ return function(p0) --[[ line: 53 | named "RecentActivityInspectAndBuyView" ]]
 				ItemList = if not p0.isLoading then reactModule.createElement(view, {
 					tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
 				}, t) else nil,
-				LoadingShimmer = if p0.isLoading then reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, reactModule.useMemo(function() --[[ line: 93 ]]
+				LoadingShimmer = if p0.isLoading then reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, reactModule.useMemo(function()
 					-- upvalues: reactModule (copy), skeleton (copy)
 					local t = {}
 					

@@ -1,22 +1,22 @@
 ﻿local t = {}
 
-function t:__index(p0) --[[ line: 55 ]]
+function t:__index(p0)
 	-- upvalues: t (ref)
 	return if type(p0) == "number" then self:at(p0) else t[p0]
 end
 
-function t:__len() --[[ line: 63 ]]
+function t:__len()
 	return self:size()
 end
 
-function t:__newindex(p1, p2) --[[ line: 67 ]]
+function t:__newindex(p1, p2)
 	self._indexToValue[p1] = p2
 end
 
-function t:__iter() --[[ line: 71 ]]
+function t:__iter()
 	local var1 = 0
 	
-	return function() --[[ line: 73 ]]
+	return function()
 		-- upvalues: var1 (write), self (ref)
 		var1 += 1
 		
@@ -24,7 +24,7 @@ function t:__iter() --[[ line: 71 ]]
 	end
 end
 
-function t:add(p3) --[[ line: 83 ]]
+function t:add(p3)
 	if self._valueToIndex[p3] then
 		return false
 	end
@@ -36,7 +36,7 @@ function t:add(p3) --[[ line: 83 ]]
 	return true
 end
 
-function t:prependAll(p4) --[[ line: 101 ]]
+function t:prependAll(p4)
 	local t = {}
 	local t_1 = {}
 	
@@ -65,7 +65,7 @@ function t:prependAll(p4) --[[ line: 101 ]]
 	return true
 end
 
-function t:remove(p5) --[[ line: 136 ]]
+function t:remove(p5)
 	if not self._valueToIndex[p5] then
 		return false
 	end
@@ -83,42 +83,42 @@ function t:remove(p5) --[[ line: 136 ]]
 	return true
 end
 
-function t:has(p6) --[[ line: 159 ]]
+function t:has(p6)
 	return self._valueToIndex[p6] ~= nil
 end
 
-function t:clear() --[[ line: 163 ]]
+function t:clear()
 	self._valueToIndex = {}
 	self._indexToValue = {}
 	self._size = 0
 end
 
-function t:size() --[[ line: 169 ]]
+function t:size()
 	return self._size
 end
 
-function t:at(p7) --[[ line: 174 ]]
+function t:at(p7)
 	return if p7 < 1 or self._size < p7 then nil else self._indexToValue[p7]
 end
 
-function t:indexOf(p8) --[[ line: 183 ]]
+function t:indexOf(p8)
 	return self._valueToIndex[p8]
 end
 
-function t:toArray() --[[ line: 188 ]]
+function t:toArray()
 	return table.clone(self._indexToValue)
 end
 
-function t:values() --[[ line: 194 ]]
+function t:values()
 	return self._indexToValue
 end
 
-function t:clone() --[[ line: 199 ]]
+function t:clone()
 	-- upvalues: t (ref)
 	return t.new(self._indexToValue)
 end
 
-function t.new(p9) --[[ line: 203 ]]
+function t.new(p9)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({ _size = 0, _valueToIndex = {}, _indexToValue = {} }, t)
 	

@@ -35,7 +35,7 @@ local socialProfileCurrentlyWearingClickThroughLayer = game:DefineFastString("So
 local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
 local assetsCarouselModule = require(profilePlatform.Components.AssetsCarousel)
 
-return function(p0) --[[ line: 54 | named "CurrentlyWearingCarousel" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformEnableInventory (ref), useLocalization (ref), textKeysModule (ref), useMarketplaceAnalyticsContextModule (ref), fFlagAddIEMProfilePage (ref), fFlagProfileInspectAvatarCWEntryModule (ref), useLocalUserId (ref), enumsModule (ref), useNavigation (ref), reactModule (ref), fFlagProfileInspectAndBuyRefactorTooltipModule (ref), getInspectAvatarTooltipStoreModule (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (ref), eventNamesModule (ref), fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), IXPService (ref), socialProfileCurrentlyWearingClickThroughLayer (ref), fFlagProfilePlatformEnableStore (ref), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (ref), useProfileJsonComponentModule (ref), constantsModule (ref), useSelector (ref), networkingCatalogModule (ref), cryoModule (ref), useEffectOnMount (ref), networkingCurrentlyWearingModule (ref), sortCurrentlyWearingModule (ref), assetsCarouselModule (ref), fFlagAXEnableProfileTab (ref)
 	local var30
 	local var23 = useDispatch()
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 54 | named "CurrentlyWearingCarousel" ]]
 	end
 	local var31 = fFlagProfileInspectAvatarCWEntryModule and (not var30 and var28 ~= enumsModule.Sources.InExperienceProfile)
 	local var32 = if fFlagProfileInspectAvatarCWEntryModule then useNavigation() else nil
-	local var33 = if fFlagProfileInspectAvatarCWEntryModule then reactModule.useCallback(function() --[[ line: 79 ]]
+	local var33 = if fFlagProfileInspectAvatarCWEntryModule then reactModule.useCallback(function()
 		-- upvalues: fFlagProfileInspectAndBuyRefactorTooltipModule (copy), getInspectAvatarTooltipStoreModule (copy), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), var25 (ref), eventNamesModule (copy), var32 (ref), enumsModule (copy)
 		if fFlagProfileInspectAndBuyRefactorTooltipModule then
 			getInspectAvatarTooltipStoreModule(false).permanentlyDismiss()
@@ -67,7 +67,7 @@ return function(p0) --[[ line: 54 | named "CurrentlyWearingCarousel" ]]
 		var32,
 		if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then var25 else nil
 	}) else nil
-	local var34 = reactModule.useCallback(function(p1, p2, _, _, p3) --[[ line: 96 ]]
+	local var34 = reactModule.useCallback(function(p1, p2, _, _, p3)
 		-- upvalues: fFlagAddIEMProfilePage (copy), var28 (ref), enumsModule (copy), var24 (ref), fFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), IXPService (copy), socialProfileCurrentlyWearingClickThroughLayer (copy), fFlagProfilePlatformEnableStore (copy), var25 (ref), eventNamesModule (copy), fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule (copy), var27 (ref)
 		if fFlagAddIEMProfilePage and var28 == enumsModule.Sources.InExperienceProfile then
 			var24.navigateTo.inspectAvatar()
@@ -109,7 +109,7 @@ return function(p0) --[[ line: 54 | named "CurrentlyWearingCarousel" ]]
 	local var37 = nil
 	
 	if fFlagProfilePlatformEnableBundlesInAssetsCarousel then
-		var36 = useSelector(reactModule.useCallback(function(p4) --[[ line: 154 ]]
+		var36 = useSelector(reactModule.useCallback(function(p4)
 			-- upvalues: constantsModule (copy), assets (ref), enumsModule (copy)
 			local bundleDetails = p4[constantsModule.RODUX_KEY].BundleDetails or {}
 			local assetDetails = p4[constantsModule.RODUX_KEY].AssetDetails or {}
@@ -127,28 +127,28 @@ return function(p0) --[[ line: 54 | named "CurrentlyWearingCarousel" ]]
 			end
 			return t
 		end, { assets }))
-		reactModule.useEffect(function() --[[ line: 177 ]]
+		reactModule.useEffect(function()
 			-- upvalues: assets (ref), var23 (ref), networkingCatalogModule (copy)
 			if #assets > 0 then
 				var23(networkingCatalogModule.GetItemAndBundleDetails.API(assets))
 			end
 		end, { assets, var23 })
 	else
-		local var38 = reactModule.useMemo(function() --[[ line: 183 ]]
+		local var38 = reactModule.useMemo(function()
 			-- upvalues: cryoModule (copy), assets (ref)
-			return cryoModule.List.map(assets, function(p5) --[[ line: 184 ]]
+			return cryoModule.List.map(assets, function(p5)
 				return p5.assetId
 			end)
 		end, { assets })
-		useEffectOnMount(function() --[[ line: 189 ]]
+		useEffectOnMount(function()
 			-- upvalues: var23 (ref), networkingCurrentlyWearingModule (copy), var38 (ref)
-			var23(networkingCurrentlyWearingModule.GetItemDetails.API(var38)):andThen(function(_) --[[ line: 191 ]] end):catch(function(_) --[[ line: 192 ]] end)
+			var23(networkingCurrentlyWearingModule.GetItemDetails.API(var38)):andThen(function(_) end):catch(function(_) end)
 		end)
-		local var39 = useSelector(function(p6) --[[ line: 197 ]]
+		local var39 = useSelector(function(p6)
 			-- upvalues: constantsModule (copy)
 			return p6[constantsModule.RODUX_KEY].ItemAssets or {}
 		end)
-		var37 = reactModule.useMemo(function() --[[ line: 201 ]]
+		var37 = reactModule.useMemo(function()
 			-- upvalues: var38 (ref), var39 (ref), cryoModule (copy), sortCurrentlyWearingModule (copy)
 			local t = {}
 			local var46 = 1
@@ -161,7 +161,7 @@ return function(p0) --[[ line: 54 | named "CurrentlyWearingCarousel" ]]
 					var46 += 1
 				end
 			end
-			return cryoModule.List.sort(t, function(p7, p8) --[[ line: 214 ]]
+			return cryoModule.List.sort(t, function(p7, p8)
 				-- upvalues: sortCurrentlyWearingModule (copy)
 				return sortCurrentlyWearingModule(p7, p8)
 			end)

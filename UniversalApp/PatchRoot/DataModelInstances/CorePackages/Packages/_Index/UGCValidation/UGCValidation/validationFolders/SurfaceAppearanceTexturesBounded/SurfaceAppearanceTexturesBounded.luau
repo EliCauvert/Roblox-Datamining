@@ -23,7 +23,7 @@ return {
 	conditionalData = { validationEnumsModule.SharedDataMember.meshTextures },
 	fflag = getFFlagUGCValidateMigrateTextureTransparencyModule,
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 48 ]]
+	run = function(p0, p1)
 		-- upvalues: fetchAllDesiredDataModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), t (ref), UGCValidationService (ref), validationEnumsModule (ref), errorSourceStringsModule (ref)
 		local rootInstance = p1.rootInstance
 		local assetType = p1.uploadEnum.assetType
@@ -56,7 +56,7 @@ return {
 							
 							if var11 and var11.editable then
 								local var12 = if assetType then constantsInterfaceModule.getTextureLimit(assetType, surfaceAppearance, v_1) else t[v_1]
-								local ok, status = pcall(function() --[[ line: 96 ]]
+								local ok, status = pcall(function()
 									-- upvalues: UGCValidationService (copy), var11 (ref)
 									return UGCValidationService:GetEditableImageSize(var11.editable)
 								end)

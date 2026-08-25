@@ -14,7 +14,7 @@ local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagL
 local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 
-local function LoadableVideoFrame(p0, p1) --[[ line: 40 ]]
+local function LoadableVideoFrame(p0, p1)
 	-- upvalues: reactModule (ref), fFlagLuaAppEdpMediaGalleryAutoAdvance (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), argCheckModule (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), videoFrameWrapperModule (ref), fFlagLuaAppSduiVideoThumbnail (ref), loadableImage (ref), skeleton (ref), radius (ref)
 	local var6, var7 = reactModule.useState(false)
 	local var8 = if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then nil else reactModule.useRef(nil)
@@ -28,7 +28,7 @@ local function LoadableVideoFrame(p0, p1) --[[ line: 40 ]]
 	local createElement_1
 	local var10 = p0.thumbnail ~= nil and p0.thumbnail ~= ""
 	local useCallback = reactModule.useCallback
-	useCallback = useCallback(function() --[[ line: 61 ]]
+	useCallback = useCallback(function()
 		-- upvalues: fFlagLuaAppEdpMediaGalleryAutoAdvance (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), fFlagLuaAppEdpConsoleMediaGalleryVideo (copy), fFlagLuaAppEnableHomepageOneByTwoTile (copy), p1 (ref), var8 (ref), argCheckModule (copy), var9 (ref), p0 (ref), var7 (ref)
 		local current = nil
 		
@@ -54,13 +54,13 @@ local function LoadableVideoFrame(p0, p1) --[[ line: 40 ]]
 		if fFlagLuaAppEdpMediaGalleryAutoAdvance or fFlagLuaAppEdpMediaGalleryFullScreen or (fFlagLuaAppEdpConsoleMediaGalleryVideo or fFlagLuaAppEnableHomepageOneByTwoTile) then p1 else var8,
 		var9
 	})
-	local var11 = if fFlagLuaAppEdpMediaGalleryAutoAdvance then reactModule.useCallback(function() --[[ line: 106 ]]
+	local var11 = if fFlagLuaAppEdpMediaGalleryAutoAdvance then reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.onVideoEnded then
 			p0.onVideoEnded()
 		end
 	end, { p0.onVideoEnded }) else nil
-	local var12 = reactModule.useCallback(function() --[[ line: 113 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.onVideoLooped then
 			p0.onVideoLooped()

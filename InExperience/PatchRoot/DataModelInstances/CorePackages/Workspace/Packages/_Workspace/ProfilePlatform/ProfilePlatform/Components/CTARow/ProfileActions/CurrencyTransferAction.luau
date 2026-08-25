@@ -10,12 +10,12 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.CurrencyTransfer] = if sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer then function(p0) --[[ line: 18 ]]
+	[enumsModule.ProfileActions.CurrencyTransfer] = if sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer then function(p0)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), transferDirection (ref), transferOrigination (ref)
 		return {
 			text = p0.localized[enumsModule.ProfileActions.CurrencyTransfer],
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 22 ]]
+				[profileTypes.User] = function()
 					-- upvalues: p0 (ref), enumsModule (copy), eventNamesModule (copy), transferDirection (copy), transferOrigination (copy)
 					if p0.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
 						p0.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCurrencyTransfer, { buttonSurface = p0.buttonSurface })

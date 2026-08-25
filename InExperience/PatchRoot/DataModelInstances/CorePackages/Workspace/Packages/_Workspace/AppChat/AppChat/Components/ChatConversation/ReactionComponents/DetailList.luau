@@ -8,7 +8,7 @@ local reactionListModule = require(script.Parent.ReactionList)
 local white = colors.White
 local arialBold = Enum.Font.ArialBold
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: reactionListModule (ref), reactModule (ref), cryoModule (ref), roactModule (ref), white (ref), arialBold (ref), reactionMapModule (ref)
 	local _ = {}
 	local t = {}
@@ -35,9 +35,9 @@ return function(p0) --[[ line: 23 ]]
 			var7 += 1
 		end
 	end
-	local var8 = reactModule.useMemo(function() --[[ line: 44 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), t (ref), roactModule (copy), white (copy), arialBold (copy), reactionMapModule (copy)
-		return cryoModule.List.map(t, function(p1, _) --[[ line: 45 ]]
+		return cryoModule.List.map(t, function(p1, _)
 			-- upvalues: roactModule (copy), white (copy), arialBold (copy), reactionMapModule (copy)
 			return roactModule.createElement("Frame", {
 				BorderSizePixel = 0,

@@ -24,7 +24,7 @@ local var7 = t.strictInterface({
 	forwardRef = t.optional(t.table)
 })
 
-local function _(p0) --[[ line: 39 | named "isSelectedState" ]]
+local function _(p0)
 	-- upvalues: controlState (ref)
 	return if p0 ~= controlState.Selected then p0 == controlState.SelectedPressed else true
 end
@@ -34,15 +34,15 @@ local _ = nil
 if fFlagCoreUiMigrateUIBloxToFoundation then
 	local var8 = roact.Component:extend("CloseMenuButton")
 	
-	function var8.init(p1) --[[ line: 48 ]]
+	function var8.init(p1)
 		p1.wasSelected = false
 	end
 	
-	function var8.render(p2) --[[ line: 52 ]]
+	function var8.render(p2)
 		-- upvalues: var3 (ref), globalConfigModule (ref), var7 (ref), roact (ref), image (ref), assetsModule (ref), var4 (ref), controlState (ref)
 		local props = p2.props
 		
-		return var3(function(p3) --[[ line: 54 ]]
+		return var3(function(p3)
 			-- upvalues: globalConfigModule (copy), var7 (copy), props (ref), roact (copy), image (copy), assetsModule (copy), var4 (copy), controlState (copy), p2 (ref)
 			if globalConfigModule.propValidation then
 				assert(var7(props))
@@ -56,7 +56,7 @@ if fFlagCoreUiMigrateUIBloxToFoundation then
 				Image = assetsModule.Images.CloseButton,
 				selection = { SelectionImageObject = p3(var4.RoundedRect) },
 				onActivated = props.onActivated,
-				onStateChanged = function(p4) --[[ line: 68 ]]
+				onStateChanged = function(p4)
 					-- upvalues: controlState (copy), p2 (copy), props (copy)
 					local var9 = if p4 ~= controlState.Selected then p4 == controlState.SelectedPressed else true
 					
@@ -74,9 +74,9 @@ if fFlagCoreUiMigrateUIBloxToFoundation then
 		end)
 	end
 else
-	local var8 = function(p5) --[[ line: 86 ]]
+	local var8 = function(p5)
 		-- upvalues: var3 (ref), globalConfigModule (ref), var7 (ref), roact (ref), imageSetButton (ref), assetsModule (ref), var4 (ref)
-		return var3(function(p6) --[[ line: 87 ]]
+		return var3(function(p6)
 			-- upvalues: globalConfigModule (copy), var7 (copy), p5 (ref), roact (copy), imageSetButton (copy), assetsModule (copy), var4 (copy)
 			if globalConfigModule.propValidation then
 				assert(var7(p5))
@@ -97,7 +97,7 @@ else
 		end)
 	end
 end
-return roact.forwardRef(function(p7, p8) --[[ line: 110 ]]
+return roact.forwardRef(function(p7, p8)
 	-- upvalues: roact (ref), var8 (write), cryo (ref)
 	return roact.createElement(var8, cryo.Dictionary.join(p7, { forwardRef = p8 }))
 end)

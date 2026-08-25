@@ -11,17 +11,17 @@ local t = {
 	}
 }
 
-function t.wrap(p0) --[[ line: 23 ]]
+function t.wrap(p0)
 	-- upvalues: roactModule (ref), t (ref), immutable (ref), cryoModule (ref)
 	local var3 = roactModule.PureComponent:extend(("FitChildren(%s)"):format(tostring(p0)))
 	
-	function var3.disconnectSignals(value) --[[ line: 26 ]]
+	function var3.disconnectSignals(value)
 		for i, v in ipairs(value.signals) do
 			v:Disconnect()
 		end
 	end
 	
-	function var3.resize(p1) --[[ line: 32 ]]
+	function var3.resize(p1)
 		-- upvalues: t (copy)
 		local fitFields = p1.props.fitFields or (if p1.props.fitAxis then { Size = p1.props.fitAxis } else { Size = t.FitAxis.Both })
 		p1:disconnectSignals()
@@ -32,7 +32,7 @@ function t.wrap(p0) --[[ line: 23 ]]
 		local UIGridStyleLayout = current:FindFirstChildWhichIsA("UIGridStyleLayout")
 		
 		if UIGridStyleLayout then
-			table.insert(p1.signals, UIGridStyleLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ line: 59 | named "update" ]]
+			table.insert(p1.signals, UIGridStyleLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 				-- upvalues: UIGridStyleLayout (ref), p1 (ref), fitFields (write)
 				local absoluteContentSize = UIGridStyleLayout.AbsoluteContentSize
 				p1:applyFit(fitFields, absoluteContentSize.x, absoluteContentSize.y)
@@ -44,11 +44,11 @@ function t.wrap(p0) --[[ line: 23 ]]
 			
 			for i, v in ipairs(current:GetChildren()) do
 				if v:IsA("GuiBase2d") then
-					table.insert(p1.signals, v:GetPropertyChangedSignal("Size"):Connect(function() --[[ line: 73 ]]
+					table.insert(p1.signals, v:GetPropertyChangedSignal("Size"):Connect(function()
 						-- upvalues: p1 (ref), fitFields (write)
 						p1:resizeFromChildren(fitFields)
 					end))
-					table.insert(p1.signals, v:GetPropertyChangedSignal("Position"):Connect(function() --[[ line: 77 ]]
+					table.insert(p1.signals, v:GetPropertyChangedSignal("Position"):Connect(function()
 						-- upvalues: p1 (ref), fitFields (write)
 						p1:resizeFromChildren(fitFields)
 					end))
@@ -57,7 +57,7 @@ function t.wrap(p0) --[[ line: 23 ]]
 		end
 	end
 	
-	function var3.resizeFromChildren(p2, p3) --[[ line: 86 ]]
+	function var3.resizeFromChildren(p2, p3)
 		local current = p2.ref.current
 		
 		if current == nil then return end
@@ -77,7 +77,7 @@ function t.wrap(p0) --[[ line: 23 ]]
 		p2:applyFit(p3, var7, var8)
 	end
 	
-	function var3.applyFit(p4, p5, p6, p7) --[[ line: 108 ]]
+	function var3.applyFit(p4, p5, p6, p7)
 		-- upvalues: t (copy)
 		local current = p4.ref.current
 		
@@ -87,7 +87,7 @@ function t.wrap(p0) --[[ line: 23 ]]
 		local width = t.FitAxis.Width
 		local height = t.FitAxis.Height
 		
-		local function calculateAxis(p8, p9, p10, p11, p12, p13) --[[ line: 119 ]]
+		local function calculateAxis(p8, p9, p10, p11, p12, p13)
 			-- upvalues: t (copy), UIPadding (ref)
 			local var16 = if p8 ~= p9 then p8 == t.FitAxis.Both else true
 			local _ = nil
@@ -119,7 +119,7 @@ function t.wrap(p0) --[[ line: 23 ]]
 		end
 	end
 	
-	function var3.init(p14) --[[ line: 150 ]]
+	function var3.init(p14)
 		-- upvalues: var3 (ref), roactModule (copy)
 		p14.signals = {}
 		local forwardRef = p14.props.forwardRef
@@ -127,7 +127,7 @@ function t.wrap(p0) --[[ line: 23 ]]
 		p14.ref = forwardRef or roactModule.createRef()
 	end
 	
-	function var3.render(p15) --[[ line: 164 ]]
+	function var3.render(p15)
 		-- upvalues: immutable (copy), roactModule (copy), p0 (ref)
 		local fitAxis = immutable.RemoveFromDictionary(p15.props, "fitAxis", "fitFields", "forwardRef")
 		fitAxis[roactModule.Ref] = p15.ref
@@ -135,19 +135,19 @@ function t.wrap(p0) --[[ line: 23 ]]
 		return roactModule.createElement(p0, fitAxis)
 	end
 	
-	function var3.didMount(p16) --[[ line: 171 ]]
+	function var3.didMount(p16)
 		p16:resize()
 	end
 	
-	function var3.didUpdate(p17) --[[ line: 175 ]]
+	function var3.didUpdate(p17)
 		p17:resize()
 	end
 	
-	function var3.willUnmount(p18) --[[ line: 179 ]]
+	function var3.willUnmount(p18)
 		p18:disconnectSignals()
 	end
 	
-	return roactModule.forwardRef(function(p19, p20) --[[ line: 183 ]]
+	return roactModule.forwardRef(function(p19, p20)
 		-- upvalues: roactModule (copy), var3 (ref), cryoModule (copy)
 		return roactModule.createElement(var3, cryoModule.Dictionary.join(p19, { forwardRef = p20 }))
 	end)

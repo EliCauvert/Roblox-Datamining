@@ -27,7 +27,7 @@ local t = {
 	lastUpdated = { 2026, 5, 6 }
 }
 
-return function(p0, p1, p2) --[[ line: 50 ]]
+return function(p0, p1, p2)
 	-- upvalues: var5 (ref), loggerModule (ref), orientationUseTelemetryService (ref), var4 (ref), t (ref)
 	local var7, var8 = var5(p2)
 	

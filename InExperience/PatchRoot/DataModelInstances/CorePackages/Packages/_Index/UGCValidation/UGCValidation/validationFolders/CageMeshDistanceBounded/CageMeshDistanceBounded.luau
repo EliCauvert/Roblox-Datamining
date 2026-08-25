@@ -16,7 +16,7 @@ return {
 		validationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 24 ]]
+	run = function(p0, p1)
 		-- upvalues: getFFlagUGCValidationEyebrowEyelashSupportModule (ref), UGCValidationService (ref), getFIntUGCValidateCageMeshDistanceThresholdModule (ref), errorSourceStringsModule (ref)
 		local assetType
 		if getFFlagUGCValidationEyebrowEyelashSupportModule() then

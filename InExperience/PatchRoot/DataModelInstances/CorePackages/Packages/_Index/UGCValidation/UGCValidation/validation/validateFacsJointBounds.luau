@@ -7,9 +7,9 @@ local getFIntFacsJointMaximumDistRatioDirectModule = require(parent.flags.getFIn
 local getFIntFacsJointMaximumDistRatioAccumulatedModule = require(parent.flags.getFIntFacsJointMaximumDistRatioAccumulated)
 local _ = require(parent.util.Types)
 
-return function(p0, p1) --[[ line: 10 | named "validateFacsJointBounds" ]]
+return function(p0, p1)
 	-- upvalues: pcallDeferredModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntFacsJointMaximumDistRatioDirectModule (ref), getFIntFacsJointMaximumDistRatioAccumulatedModule (ref)
-	local var6, var7 = pcallDeferredModule(function() --[[ line: 14 ]]
+	local var6, var7 = pcallDeferredModule(function()
 		-- upvalues: getEditableMeshFromContextModule (copy), p0 (ref), p1 (ref), UGCValidationService (copy)
 		local var12, var13 = getEditableMeshFromContextModule(p0, "MeshId", p1)
 		

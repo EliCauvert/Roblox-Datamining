@@ -38,13 +38,13 @@ chatInputBarApp.defaultProps = {
 }
 
 if getFFlagUnreduxLastInputTypeChangedModule() then
-	function chatInputBarApp.init(p0) --[[ line: 53 ]]
+	function chatInputBarApp.init(p0)
 		-- upvalues: userInputService (ref), getInputGroup (ref), inputTypeModule (ref)
 		p0:setState({
 			isUsingTouch = userInputService.TouchEnabled,
 			isUsingGamepad = userInputService.PreferredInput == Enum.PreferredInput.Gamepad
 		})
-		p0.connection = userInputService.LastInputTypeChanged:Connect(function(p1) --[[ line: 58 ]]
+		p0.connection = userInputService.LastInputTypeChanged:Connect(function(p1)
 			-- upvalues: getInputGroup (copy), p0 (ref), inputTypeModule (copy)
 			local var28 = getInputGroup(p1)
 			p0:setState({
@@ -54,21 +54,21 @@ if getFFlagUnreduxLastInputTypeChangedModule() then
 		end)
 	end
 	
-	function chatInputBarApp.getPlaceholderText(p2) --[[ line: 68 ]]
+	function chatInputBarApp.getPlaceholderText(p2)
 		return if p2.state.isUsingGamepad then p2.props.placeholderGamepadText elseif p2.state.isUsingTouch then p2.props.placeholderTouchText else p2.props.placeholderKeyboardText
 	end
 	
-	function chatInputBarApp.willUnmount(p3) --[[ line: 78 ]]
+	function chatInputBarApp.willUnmount(p3)
 		if p3.connection then
 			p3.connection:Disconnect()
 		end
 	end
 else
-	function chatInputBarApp.getPlaceholderText(p4) --[[ line: 84 ]]
+	function chatInputBarApp.getPlaceholderText(p4)
 		return if p4.props.isUsingGamepad then p4.props.placeholderGamepadText elseif p4.props.isUsingTouch then p4.props.placeholderTouchText else p4.props.placeholderKeyboardText
 	end
 end
-function chatInputBarApp.render(p5) --[[ line: 95 ]]
+function chatInputBarApp.render(p5)
 	-- upvalues: reactModule (ref), chatInputBarModule (ref), userInputService (ref), configModule (ref)
 	return reactModule.createElement(chatInputBarModule, {
 		userInputService = userInputService,
@@ -117,7 +117,7 @@ function chatInputBarApp.render(p5) --[[ line: 95 ]]
 	})
 end
 
-local var26 = roactRoduxModule.connect(function(p7) --[[ line: 143 ]]
+local var26 = roactRoduxModule.connect(function(p7)
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), playersService (ref), getFFlagUnreduxLastInputTypeChangedModule (ref), selectSelectedTabNameModule (ref)
 	local channelTabs = p7.ChannelTabs
 	
@@ -138,32 +138,32 @@ local var26 = roactRoduxModule.connect(function(p7) --[[ line: 143 ]]
 		isGlobalChatTabActive = getFFlagTextChatEnableUniverseChatTabs() and selectSelectedTabNameModule(p7) == "RBXGlobal",
 		developerChannelTabsEnabled = if getFFlagTextChatEnableUniverseChatTabs() and channelTabs then channelTabs.channelTabsConfigurationEnabled else false
 	}
-end, function(p8) --[[ line: 167 ]]
+end, function(p8)
 	-- upvalues: getTransparencyStoreModule (ref), focusChatHotKeyActivatedModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), autocompleteDropdownActivatedModule (ref), autocompleteDropdownResultsChangedModule (ref), autocompleteDropdownSelectionChangedModule (ref), autocompleteDropdownTypeChangedModule (ref), autocompleteDropdownDeactivatedModule (ref)
 	local var29 = getTransparencyStoreModule(false)
 	
 	return {
-		focusChatHotKeyActivated = function() --[[ line: 170 ]]
+		focusChatHotKeyActivated = function()
 			-- upvalues: p8 (ref), focusChatHotKeyActivatedModule (copy)
 			return p8(focusChatHotKeyActivatedModule())
 		end,
-		onFocus = function() --[[ line: 174 ]]
+		onFocus = function()
 			-- upvalues: var29 (ref)
 			return var29.setTextboxFocus()
 		end,
-		onUnfocus = function() --[[ line: 178 ]]
+		onUnfocus = function()
 			-- upvalues: var29 (ref)
 			return var29.clearTextboxFocus()
 		end,
-		onHovered = function() --[[ line: 182 ]]
+		onHovered = function()
 			-- upvalues: var29 (ref)
 			return var29.resetAllTransparency()
 		end,
-		onUnhovered = function() --[[ line: 186 ]]
+		onUnhovered = function()
 			-- upvalues: var29 (ref)
 			return var29.resetAllTransparency()
 		end,
-		onDictationActivityChanged = if fFlagExpChatDictationFadeOverrideModule then function(p9) --[[ line: 192 ]]
+		onDictationActivityChanged = if fFlagExpChatDictationFadeOverrideModule then function(p9)
 			-- upvalues: var29 (ref)
 			if p9 then
 				var29.setDictationActive()
@@ -172,28 +172,28 @@ end, function(p8) --[[ line: 167 ]]
 			end
 			var29.clearDictationActive()
 		end else nil,
-		autocompleteDropdownActivated = function(p10) --[[ line: 201 ]]
+		autocompleteDropdownActivated = function(p10)
 			-- upvalues: p8 (ref), autocompleteDropdownActivatedModule (copy)
 			return p8(autocompleteDropdownActivatedModule(p10))
 		end,
-		autocompleteDropdownResultsChanged = function(p11) --[[ line: 205 ]]
+		autocompleteDropdownResultsChanged = function(p11)
 			-- upvalues: p8 (ref), autocompleteDropdownResultsChangedModule (copy)
 			return p8(autocompleteDropdownResultsChangedModule(p11))
 		end,
-		autocompleteDropdownSelectionChanged = function(p12) --[[ line: 209 ]]
+		autocompleteDropdownSelectionChanged = function(p12)
 			-- upvalues: p8 (ref), autocompleteDropdownSelectionChangedModule (copy)
 			return p8(autocompleteDropdownSelectionChangedModule(p12))
 		end,
-		autocompleteDropdownTypeChanged = function(p13) --[[ line: 213 ]]
+		autocompleteDropdownTypeChanged = function(p13)
 			-- upvalues: p8 (ref), autocompleteDropdownTypeChangedModule (copy)
 			return p8(autocompleteDropdownTypeChangedModule(p13))
 		end,
-		autocompleteDropdownDeactivated = function() --[[ line: 217 ]]
+		autocompleteDropdownDeactivated = function()
 			-- upvalues: p8 (ref), autocompleteDropdownDeactivatedModule (copy)
 			return p8(autocompleteDropdownDeactivatedModule())
 		end
 	}
-end)(localizationModule.connect(function(p6) --[[ line: 221 ]]
+end)(localizationModule.connect(function(p6)
 	-- upvalues: userInputService (ref)
 	return {
 		placeholderTouchText = "CoreScripts.TextChat.InputBar.Hint.Touch",
@@ -207,7 +207,7 @@ end)(localizationModule.connect(function(p6) --[[ line: 221 ]]
 	}
 end)(chatInputBarApp))
 
-local var27 = function(p14) --[[ line: 233 ]]
+local var27 = function(p14)
 	-- upvalues: localization (ref), localizationService (ref), fFlagEnableConsoleExpControls (ref), cryoModule (ref), reactModule (ref), var26 (ref)
 	local var30 = localization.new(localizationService.RobloxLocaleId)
 	local _ = nil

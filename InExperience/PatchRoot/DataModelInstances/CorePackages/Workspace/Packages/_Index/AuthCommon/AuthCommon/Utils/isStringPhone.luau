@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	if p0 and p0 ~= "" then
 		assert(p0, "")
 		

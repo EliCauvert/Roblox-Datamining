@@ -298,7 +298,7 @@ local t_8 = {
 	[focusNavigationEventNameEnum.HoldToJoinFriend] = true
 }
 
-local function getLegacyInputBindings(p0, p1, p2) --[[ line: 472 ]]
+local function getLegacyInputBindings(p0, p1, p2)
 	-- upvalues: t (ref), t_3 (ref)
 	if p1.axes then
 		local vertical = p1.axes.vertical
@@ -321,11 +321,11 @@ local function getLegacyInputBindings(p0, p1, p2) --[[ line: 472 ]]
 	end
 end
 
-local function selectRoactGamepadBindings(p3) --[[ line: 505 ]]
+local function selectRoactGamepadBindings(p3)
 	return if p3.GamepadBottomBar then p3.GamepadBottomBar.boundInputs else nil
 end
 
-local function getGamepadItems(p4, p5, p6, p7, p8) --[[ line: 509 ]]
+local function getGamepadItems(p4, p5, p6, p7, p8)
 	-- upvalues: list (ref), t_1 (ref), t_2 (ref), getLegacyInputBindings (ref), t_4 (ref), fFlagLuaAppEnableStickyShortcutBar (ref), fFlagGuacStickyShortcutBarEnabled (ref), var17 (ref), t_6 (ref), t_5 (ref), t_7 (ref), t_8 (ref), focusNavigationEventNameEnum (ref), t_3 (ref)
 	local t = {}
 	
@@ -385,7 +385,7 @@ local function getGamepadItems(p4, p5, p6, p7, p8) --[[ line: 509 ]]
 	return t
 end
 
-local function getKeyboardItems(p9, p10, p11, p12) --[[ line: 613 ]]
+local function getKeyboardItems(p9, p10, p11, p12)
 	-- upvalues: t_1 (ref), list_1 (ref), t_5 (ref), t_7 (ref), t_8 (ref), fFlagLuaAppEnableStickyShortcutBar (ref), fFlagGuacStickyShortcutBarEnabled (ref)
 	local t = {}
 	local t_2 = {}
@@ -426,7 +426,7 @@ local function getKeyboardItems(p9, p10, p11, p12) --[[ line: 613 ]]
 	return t
 end
 
-local function useShortcutBarFrameProps() --[[ line: 667 ]]
+local function useShortcutBarFrameProps()
 	-- upvalues: useUiModeInfo (ref), useDesignTokens (ref), uiMode (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref)
 	local var49 = useUiModeInfo()
 	local var50 = useDesignTokens()
@@ -437,7 +437,7 @@ local function useShortcutBarFrameProps() --[[ line: 667 ]]
 	}
 end
 
-local function useShortcutBarItems() --[[ line: 697 ]]
+local function useShortcutBarItems()
 	-- upvalues: reactFocusNavigationModule (ref), reactModule (ref), localizationRoactContext (ref), useHeldProgressByEvent (ref), useLastInputMethod (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), noShortcutBarWithTvRemote (ref), useIsTvRemoteDevice (ref), useSelector (ref), selectRoactGamepadBindings (ref), fFlagGuacStickyShortcutBarEnabled (ref), useAppPolicy (ref), fFlagLuaAppEnableStickyShortcutBar (ref), useIsStickyShortcutBarEnabled (ref), getGamepadItems (ref), getKeyboardItems (ref)
 	local isGamepad
 	local var51 = reactFocusNavigationModule.useActiveEventMap()
@@ -448,7 +448,7 @@ local function useShortcutBarItems() --[[ line: 697 ]]
 	local var56 = if noShortcutBarWithTvRemote then useIsTvRemoteDevice() else nil
 	local _ = {}
 	local var57 = useSelector(selectRoactGamepadBindings)
-	local var58 = if fFlagGuacStickyShortcutBarEnabled then useAppPolicy(function(p13) --[[ line: 710 ]]
+	local var58 = if fFlagGuacStickyShortcutBarEnabled then useAppPolicy(function(p13)
 		return p13.getStickyShortcutBarEnabled()
 	end) elseif fFlagLuaAppEnableStickyShortcutBar then useIsStickyShortcutBarEnabled() else nil
 	
@@ -461,7 +461,7 @@ local function useShortcutBarItems() --[[ line: 697 ]]
 	return if isGamepad then if var56 then {} else getGamepadItems(var51, var53, var52, var57, if fFlagLuaAppEnableStickyShortcutBar or fFlagGuacStickyShortcutBarEnabled then var58 else nil) else getKeyboardItems(var51, var53, var52, if fFlagLuaAppEnableStickyShortcutBar or fFlagGuacStickyShortcutBarEnabled then var58 else nil)
 end
 
-function useAppShortcutBarProps() --[[ line: 749 ]]
+function useAppShortcutBarProps()
 	-- upvalues: useShortcutBarFrameProps (ref), useShortcutBarItems (ref), cryoModule (ref)
 	return cryoModule.Dictionary.union(useShortcutBarFrameProps(), { items = useShortcutBarItems() })
 end

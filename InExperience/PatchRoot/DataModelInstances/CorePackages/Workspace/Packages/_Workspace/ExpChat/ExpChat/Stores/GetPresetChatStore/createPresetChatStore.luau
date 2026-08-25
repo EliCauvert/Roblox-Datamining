@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function() --[[ line: 57 ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal(false)
 	local var2, var3 = createSignal(true)
@@ -36,7 +36,7 @@ return function() --[[ line: 57 ]]
 		setLayoutModeOverride = var15,
 		setPresetCooldownEndsAt = var17,
 		setChatWindowBottomY = var19,
-		incrementPresetClickCount = function(value) --[[ line: 70 ]]
+		incrementPresetClickCount = function(value)
 			-- upvalues: var20 (ref), var21 (ref)
 			local cloned = table.clone(var20(false))
 			cloned[value] = if cloned[value] then cloned[value] + 1 else 1

@@ -3,7 +3,7 @@ local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local var2 = settings():FindFirstChild("Game Options")
 local userInputService = game:GetService("UserInputService")
 local var4 = nil
-pcall(function() --[[ line: 8 ]]
+pcall(function()
 	-- upvalues: var4 (write)
 	var4 = game:GetService("PlatformService")
 end)
@@ -19,7 +19,7 @@ local vector2_1 = Vector2.new(0.9, 0.9)
 local vector2_2 = Vector2.new(1920, 1080)
 local vector2_3 = Vector2.new(0, 0)
 
-local function EdgeImage(p0) --[[ line: 28 ]]
+local function EdgeImage(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
@@ -33,28 +33,28 @@ end
 
 local edges = reactModule.Component:extend("Edges")
 
-function edges.init(p1) --[[ line: 41 ]]
+function edges.init(p1)
 	-- upvalues: utilityModule (ref), vector2 (ref), vector2_2 (ref), vector2_3 (ref), migrateOverscanToGameBasicSettingsEngineFeature (ref), userGameSettingsService (ref), var2 (ref), vector2_1 (ref), userInputService (ref)
-	local function _(p2) --[[ line: 42 | named "getCurrentEdgePercent" ]]
+	local function _(p2)
 		-- upvalues: utilityModule (copy), vector2 (copy)
 		return utilityModule.ClampVector2(vector2, Vector2.new(1, 1), p2)
 	end
 	
-	local _ = function(p3) --[[ line: 46 | named "getCurrentEdgeSize" ]]
+	local _ = function(p3)
 		-- upvalues: vector2_2 (copy), utilityModule (copy), vector2_3 (copy)
 		local var19 = p3 * vector2_2
 		
 		return utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var19.X / 2), utilityModule.Round(var19.Y / 2)) * 2)
 	end
 	
-	function p1.onAdjustThumbstick(_, _, p4) --[[ line: 52 ]]
+	function p1.onAdjustThumbstick(_, _, p4)
 		-- upvalues: p1 (ref), utilityModule (copy)
 		p1._stickPosition = utilityModule.GamepadLinearToCurve(Vector2.new(p4.Position.X, -p4.Position.Y), 0.2)
 	end
 	
-	function p1.onAccept() --[[ line: 56 ]]
+	function p1.onAccept()
 		-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (ref), var2 (copy)
-		local _, _ = pcall(function() --[[ line: 57 ]]
+		local _, _ = pcall(function()
 			-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (copy), var2 (copy)
 			if migrateOverscanToGameBasicSettingsEngineFeature then
 				userGameSettingsService.Overscan = Vector2.new(math.min(1, p1._edgePercent.X), math.min(1, p1._edgePercent.Y))
@@ -70,7 +70,7 @@ function edges.init(p1) --[[ line: 41 ]]
 		end
 	end
 	
-	function p1.onRenderStep() --[[ line: 73 ]]
+	function p1.onRenderStep()
 		-- upvalues: p1 (ref), vector2_3 (copy), utilityModule (copy), vector2 (copy), vector2_2 (copy)
 		local currentTime = tick()
 		
@@ -91,9 +91,9 @@ function edges.init(p1) --[[ line: 41 ]]
 		p1._lastUpdate = currentTime
 	end
 	
-	function p1.onSuspended() --[[ line: 92 ]]
+	function p1.onSuspended()
 		-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (ref), var2 (copy)
-		pcall(function() --[[ line: 93 ]]
+		pcall(function()
 			-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (copy), var2 (copy)
 			if migrateOverscanToGameBasicSettingsEngineFeature then
 				userGameSettingsService.Overscan = Vector2.new(p1._lastSavedOverscan.X, p1._lastSavedOverscan.Y)
@@ -110,7 +110,7 @@ function edges.init(p1) --[[ line: 41 ]]
 	local var18 = utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var17.X / 2), utilityModule.Round(var17.Y / 2)) * 2)
 	
 	if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-		pcall(function() --[[ line: 106 ]]
+		pcall(function()
 			-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), var16 (write), utilityModule (copy), vector2 (copy), var18 (write), vector2_2 (copy), vector2_3 (copy), p1 (ref), var2 (copy)
 			if migrateOverscanToGameBasicSettingsEngineFeature then
 				if userGameSettingsService.Overscan.x > 0 and userGameSettingsService.Overscan.y > 0 then
@@ -142,7 +142,7 @@ function edges.init(p1) --[[ line: 41 ]]
 	p1.state = { currentSize = var18 }
 end
 
-function edges.render(p5) --[[ line: 145 ]]
+function edges.render(p5)
 	-- upvalues: reactModule (ref), EdgeImage (ref), renderStepModule (ref), contextActionEventModule (ref), var4 (write), externalEventConnection (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

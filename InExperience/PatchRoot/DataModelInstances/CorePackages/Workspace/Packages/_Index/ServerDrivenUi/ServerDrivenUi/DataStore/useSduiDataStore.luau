@@ -4,11 +4,11 @@ local reactModule = require(parent.React)
 local _ = require(parent.SduiCoreSystem)
 local useSduiSocialDataModule = require(serverDrivenUi.DataStore.useSduiSocialData)
 
-return function() --[[ line: 16 | named "useSduiDataStore" ]]
+return function()
 	-- upvalues: useSduiSocialDataModule (ref), reactModule (ref)
 	local var3 = useSduiSocialDataModule()
 	
-	return reactModule.useMemo(function() --[[ line: 19 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var3 (ref)
 		return { social = var3 }
 	end, { var3 })

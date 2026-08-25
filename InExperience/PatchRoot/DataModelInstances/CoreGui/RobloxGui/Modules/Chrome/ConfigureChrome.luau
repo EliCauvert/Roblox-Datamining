@@ -25,17 +25,17 @@ local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFri
 local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 
-local function _() --[[ line: 34 | named "initializeIntegrations" ]]
+local function _()
 	-- upvalues: chrome (ref)
 	require(chrome.Integrations)
 end
 
-local _ = function() --[[ line: 38 ]]
+local _ = function()
 	-- upvalues: configureShortcutsModule (ref)
 	configureShortcutsModule()
 end
 
-local function configureUnibar() --[[ line: 42 ]]
+local function configureUnibar()
 	-- upvalues: fFlagAddMapToNineDot (ref), buildMenuOrderModule (ref), isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), fFlagExpChatCanShowFriendsTab (ref), argoPartyExperimentation (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), constantsModule (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), constantsModule_1 (ref), guiService (ref), fFlagEnableInExperienceShop (ref)
 	local var12
 	local _ = nil

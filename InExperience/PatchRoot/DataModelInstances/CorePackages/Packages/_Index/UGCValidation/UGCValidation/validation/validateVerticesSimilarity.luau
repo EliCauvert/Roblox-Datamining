@@ -5,11 +5,11 @@ local pcallDeferredModule = require(parent.util.pcallDeferred)
 local getFIntUGCLCCageVerticesSimilarityMaximumModule = require(parent.flags.getFIntUGCLCCageVerticesSimilarityMaximum)
 local analyticsModule = require(parent.Analytics)
 
-return function(p0, p1, p2, p3) --[[ line: 14 | named "validateVerticesSimilarity" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntUGCLCCageVerticesSimilarityMaximumModule (ref)
 	local currentTime = tick()
 	local isServer = p1.isServer
-	local var5, var6 = pcallDeferredModule(function() --[[ line: 24 ]]
+	local var5, var6 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p0 (ref), p2 (ref)
 		return UGCValidationService:GetEditableMeshVerticesSimilarityRate(p0.editableMesh, p2)
 	end, p1)

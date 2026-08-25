@@ -1,6 +1,6 @@
 ﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 
-return function() --[[ line: 3 | named "getUserSettings" ]]
+return function()
 	-- upvalues: userGameSettingsService (ref)
 	return userGameSettingsService
 end

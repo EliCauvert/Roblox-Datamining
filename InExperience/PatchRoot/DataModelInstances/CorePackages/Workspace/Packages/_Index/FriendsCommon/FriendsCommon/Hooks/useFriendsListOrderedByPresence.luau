@@ -8,9 +8,9 @@ local usePresenceImpressionEventsModule = require(script.Parent.usePresenceImpre
 local useFriendsListOrderedByIdPresenceImpressionEventsEnabled = game:DefineFastFlag("UseFriendsListOrderedByIdPresenceImpressionEventsEnabled", false)
 local var5 = dataHydrationModule.Friends.FriendsStore.get()
 
-local _ = function(p0) --[[ line: 30 ]]
+local _ = function(p0)
 	-- upvalues: cryoModule (ref), presenceType (ref)
-	return cryoModule.List.map(p0, function(p1) --[[ line: 31 ]]
+	return cryoModule.List.map(p0, function(p1)
 		-- upvalues: presenceType (copy), cryoModule (copy)
 		return if p1.presence and p1.presence.userPresenceType == presenceType.InGame and p1.presence.universeId == "" then cryoModule.Dictionary.join(p1, {
 			presence = cryoModule.Dictionary.join(p1.presence, { userPresenceType = presenceType.Online })
@@ -18,7 +18,7 @@ local _ = function(p0) --[[ line: 30 ]]
 	end)
 end
 
-local var6 = function(p2, p3) --[[ line: 44 ]]
+local var6 = function(p2, p3)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
@@ -27,32 +27,32 @@ local var6 = function(p2, p3) --[[ line: 44 ]]
 	end
 	local _ = nil
 	
-	return cryoModule.List.sort(p2, function(p4, p5) --[[ line: 61 ]]
+	return cryoModule.List.sort(p2, function(p4, p5)
 		return p5.sortScore < p4.sortScore
-	end), cryoModule.List.filter(p3 or {}, function(p6) --[[ line: 54 ]]
+	end), cryoModule.List.filter(p3 or {}, function(p6)
 		-- upvalues: t (ref)
 		return not t[p6.id]
 	end)
 end
 
-return function(_) --[[ line: 70 | named "useFriendsListOrderedByPresence" ]]
+return function(_)
 	-- upvalues: reactModule (ref), var5 (ref), useSignalState (ref), var6 (ref), cryoModule (ref), presenceType (ref), useFriendsListOrderedByIdPresenceImpressionEventsEnabled (ref), usePresenceImpressionEventsModule (ref), dataHydrationModule (ref)
-	local var8 = useSignalState(reactModule.useMemo(function() --[[ line: 78 ]]
+	local var8 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: var5 (copy)
 		return var5.GetOnlineFriends()
 	end, {}))
-	local var9 = useSignalState(reactModule.useMemo(function() --[[ line: 84 ]]
+	local var9 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: var5 (copy)
 		return var5.GetAllFriends()
 	end, {}))
-	local var10 = useSignalState(reactModule.useMemo(function() --[[ line: 90 ]]
+	local var10 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: var5 (copy)
 		return var5.GetAllFriendsStatus()
 	end, {}))
 	local var11 = if var9 then var9.friends else nil
 	local var12 = if var9 then var9.hasMore else nil
 	local var8_1 = var8 or {}
-	local var14 = reactModule.useCallback(function() --[[ line: 101 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var5 (copy)
 		if var12 then
 			var5.FetchMoreFriends()
@@ -61,15 +61,15 @@ return function(_) --[[ line: 70 | named "useFriendsListOrderedByPresence" ]]
 		end
 	end, { var12 })
 	
-	local var15 = function() --[[ line: 109 ]]
+	local var15 = function()
 		-- upvalues: var5 (copy)
 		var5.RefetchOnlineFriends()
 		var5.RefetchAllFriends()
 	end
 	
-	local var16, var17 = reactModule.useMemo(function() --[[ line: 114 ]]
+	local var16, var17 = reactModule.useMemo(function()
 		-- upvalues: var6 (copy), var8_1 (ref), cryoModule (copy), presenceType (copy), var11 (ref)
-		return var6(cryoModule.List.map(var8_1, function(p7) --[[ line: 31 ]]
+		return var6(cryoModule.List.map(var8_1, function(p7)
 			-- upvalues: presenceType (copy), cryoModule (copy)
 			return if p7.presence and p7.presence.userPresenceType == presenceType.InGame and p7.presence.universeId == "" then cryoModule.Dictionary.join(p7, {
 				presence = cryoModule.Dictionary.join(p7.presence, { userPresenceType = presenceType.Online })

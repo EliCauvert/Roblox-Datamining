@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	return {
 		paymentsGateway = {
 			getUpsellProduct = p0.fromString("apis:payments-gateway/v1/products/get-upsell-product"),
@@ -6,7 +6,7 @@
 			checkUserPurchaseSettings = p0.fromString("apis:payments-gateway/v1/check-user-purchase-settings")
 		},
 		purchaseWarning = {
-			getPurchaseWarning = function(p1, p2, p3) --[[ line: 9 ]]
+			getPurchaseWarning = function(p1, p2, p3)
 				-- upvalues: p0 (ref)
 				local var0 = ""
 				

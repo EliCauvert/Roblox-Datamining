@@ -28,7 +28,7 @@ local constantsModule = require(momentsCreationFlow.Constants)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
 
-return function(p0) --[[ line: 53 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useDispatch (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useSelector (ref), constantsModule (ref), useMemo (ref), useAudioPlayback (ref), useEffect (ref), searchMusicModule (ref), useCallback (ref), eventNamesModule (ref), musicEditorModule (ref), view (ref), foundationModule (ref), text (ref), creationFlowLocalizationModule (ref), icon (ref), textInput (ref), magnifyingGlass (ref), scrollView (ref), scrollBarVisibility (ref), dashModule (ref), musicPreviewItemModule (ref)
 	local var13 = useDeviceInsets()
 	local var14 = useDispatch()
@@ -37,26 +37,26 @@ return function(p0) --[[ line: 53 ]]
 	local var18, var19 = reactModule.useState(false)
 	local var20, var21 = reactModule.useState(nil)
 	local var22 = reactModule.useContext(creationFlowContextModule)
-	local var23 = useSelector(function(p1) --[[ line: 62 ]]
+	local var23 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].CreationFlow.musicList
 	end)
-	local var24 = useAudioPlayback(var20 ~= nil, useMemo(function() --[[ line: 66 ]]
+	local var24 = useAudioPlayback(var20 ~= nil, useMemo(function()
 		-- upvalues: var20 (ref)
 		return if var20 then tostring(var20) else nil
 	end, { var20 }), { autoplay = true, looping = false })
-	useEffect(function() --[[ line: 79 ]]
+	useEffect(function()
 		-- upvalues: p0 (ref), var14 (ref), searchMusicModule (copy)
 		p0.playbackController.playback.pause()
 		var14(searchMusicModule("", p0.playbackController.timeline.timeLength))
 	end, { p0.playbackController.timeline.timeLength })
-	useEffect(function() --[[ line: 84 ]]
+	useEffect(function()
 		-- upvalues: var24 (ref), var21 (ref)
 		if not var24.playback.isPlaying then
 			var21(nil)
 		end
 	end, { var24.playback.isPlaying })
-	local var25 = useCallback(function(p2) --[[ line: 90 ]]
+	local var25 = useCallback(function(p2)
 		-- upvalues: p0 (ref), var21 (ref), var19 (ref), var22 (ref), eventNamesModule (copy)
 		p0.onMusicUpdate({ startTime = 0, assetId = p2 })
 		p0.playbackController.timeline.seek(0)
@@ -64,26 +64,26 @@ return function(p0) --[[ line: 53 ]]
 		var19(true)
 		var22.fireEvent(eventNamesModule.EditingFlowMusicSelected, { musicAssetId = tostring(p2) })
 	end, { p0.onMusicUpdate })
-	local var26 = useCallback(function() --[[ line: 101 ]]
+	local var26 = useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onMusicDiscard()
 		p0.playbackController.playback.play()
 		p0.playbackController.volume.unmute()
 	end, { p0.onMusicDiscard })
-	local var27 = useCallback(function() --[[ line: 107 ]]
+	local var27 = useCallback(function()
 		-- upvalues: p0 (ref), var19 (ref)
 		p0.onMusicUpdate(nil)
 		var19(false)
 		p0.playbackController.playback.pause()
 	end, { p0.onMusicUpdate })
-	local var28 = useCallback(function() --[[ line: 113 ]]
+	local var28 = useCallback(function()
 		-- upvalues: p0 (ref), var19 (ref)
 		p0.onMusicSave()
 		var19(false)
 		p0.playbackController.playback.play()
 		p0.playbackController.volume.unmute()
 	end, { p0.onMusicSave })
-	local var29 = useCallback(function(p3) --[[ line: 120 ]]
+	local var29 = useCallback(function(p3)
 		-- upvalues: var20 (ref), var21 (ref), var24 (ref)
 		if var20 and var20 == p3 then
 			var21(nil)
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 53 ]]
 		var21(p3)
 		var24.playback.play()
 	end, { var20 })
-	local var30 = useCallback(function() --[[ line: 129 ]]
+	local var30 = useCallback(function()
 		-- upvalues: var20 (ref), var21 (ref), var14 (ref), searchMusicModule (copy), var16 (ref), p0 (ref)
 		if var20 then
 			var21(nil)
@@ -105,7 +105,7 @@ return function(p0) --[[ line: 53 ]]
 		playbackController = p0.playbackController,
 		musicEdit = p0.musicEdit,
 		onBack = var27,
-		onStartTimeChanged = useCallback(function(p6) --[[ line: 136 ]]
+		onStartTimeChanged = useCallback(function(p6)
 			-- upvalues: p0 (ref)
 			if p0.musicEdit then
 				p0.onMusicUpdate({ assetId = p0.musicEdit.assetId, startTime = p6 })
@@ -117,7 +117,7 @@ return function(p0) --[[ line: 53 ]]
 	}) else reactModule.createElement(view, {
 		tag = "align-x-center align-y-top anchor-bottom-center bg-surface-100 col gap-small position-bottom-center radius-medium size-full-0",
 		ZIndex = 5,
-		onActivated = function() --[[ line: 155 ]] end,
+		onActivated = function() end,
 		Size = UDim2.fromScale(1, 0.666666666667),
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
@@ -184,7 +184,7 @@ return function(p0) --[[ line: 53 ]]
 				scrollBarVisibility = scrollBarVisibility.None,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, if var23 and #var23 > 0 then dashModule.map(var23, function(p4, p5) --[[ line: 232 ]]
+		}, if var23 and #var23 > 0 then dashModule.map(var23, function(p4, p5)
 			-- upvalues: reactModule (copy), musicPreviewItemModule (copy), var25 (ref), var29 (ref), var20 (ref), var24 (ref)
 			return reactModule.createElement(musicPreviewItemModule, {
 				key = p4,

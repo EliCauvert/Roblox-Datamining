@@ -6,9 +6,9 @@ local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local findFriendsFromUserId = require(socialTabsPage.Networking.NetworkingFriends).FindFriendsFromUserId
 local usePageSizeModule = require(socialTabsPage.Hooks.usePageSize)
 
-local function _(p0) --[[ line: 33 | named "mapPageItemsToFriends" ]]
+local function _(p0)
 	-- upvalues: dashModule (ref)
-	return dashModule.map(p0, function(p1) --[[ line: 34 ]]
+	return dashModule.map(p0, function(p1)
 		return {
 			id = tostring(p1.id),
 			hasVerifiedBadge = p1.hasVerifiedBadge or false
@@ -16,7 +16,7 @@ local function _(p0) --[[ line: 33 | named "mapPageItemsToFriends" ]]
 	end)
 end
 
-return function(p2) --[[ line: 42 | named "useFriendsList" ]]
+return function(p2)
 	-- upvalues: useDispatch (ref), usePageSizeModule (ref), reactModule (ref), findFriendsFromUserId (ref), dashModule (ref)
 	local var4 = useDispatch()
 	local var5 = usePageSizeModule()
@@ -28,14 +28,14 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 	local var15 = reactModule.useRef(0)
 	local var16 = reactModule.useRef(false)
 	local var17 = reactModule.useRef(true)
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref)
-		return function() --[[ line: 56 ]]
+		return function()
 			-- upvalues: var17 (copy)
 			var17.current = false
 		end
 	end, {})
-	local var18 = reactModule.useCallback(function(p3, p4, p5) --[[ line: 61 ]]
+	local var18 = reactModule.useCallback(function(p3, p4, p5)
 		-- upvalues: var10 (ref), var16 (ref), var12 (ref), var4 (ref), findFriendsFromUserId (copy), var5 (ref), var15 (ref), var17 (ref), var14 (ref), dashModule (copy), var8 (ref)
 		local var19 = not p4 or p4 == ""
 		
@@ -47,7 +47,7 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 		var4(findFriendsFromUserId.API(p3, {
 			limit = var5,
 			cursor = if p4 and p4 ~= "" then p4 else nil
-		})):andThen(function(p7) --[[ line: 74 ]]
+		})):andThen(function(p7)
 			-- upvalues: var15 (copy), p5 (ref), var17 (copy), var16 (copy), var14 (copy), dashModule (copy), var19 (ref), var8 (copy), var10 (copy)
 			if var15.current ~= p5 or not var17.current then
 				var16.current = false
@@ -59,7 +59,7 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 			var14(if var20 and var20.NextCursor and var20.NextCursor ~= "" then var20.NextCursor else nil)
 			
 			if var21 then
-				local var22 = dashModule.map(var21, function(p8) --[[ line: 34 ]]
+				local var22 = dashModule.map(var21, function(p8)
 					return {
 						id = tostring(p8.id),
 						hasVerifiedBadge = p8.hasVerifiedBadge or false
@@ -69,7 +69,7 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 				if var19 then
 					var8(var22)
 				else
-					var8(function(p9) --[[ line: 94 ]]
+					var8(function(p9)
 						-- upvalues: var22 (ref)
 						local cloned = table.clone(p9)
 						
@@ -86,7 +86,7 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 				var10(false)
 			end
 			var16.current = false
-		end):catch(function(p6) --[[ line: 111 ]]
+		end):catch(function(p6)
 			-- upvalues: var15 (copy), p5 (ref), var17 (copy), var16 (copy), var12 (copy), var19 (ref), var10 (copy)
 			if var15.current ~= p5 or not var17.current then
 				var16.current = false
@@ -101,7 +101,7 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 			var16.current = false
 		end)
 	end, { var4, var5 })
-	reactModule.useEffect(function() --[[ line: 124 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var15 (ref), var14 (ref), var8 (ref), var18 (ref), p2 (ref)
 		if var6 then
 			return nil
@@ -119,14 +119,14 @@ return function(p2) --[[ line: 42 | named "useFriendsList" ]]
 		friends = var7,
 		loading = var9,
 		hasMore = var13 ~= nil,
-		fetchMore = reactModule.useCallback(function() --[[ line: 140 ]]
+		fetchMore = reactModule.useCallback(function()
 			-- upvalues: var16 (ref), var13 (ref), var18 (ref), p2 (ref), var15 (ref)
 			if var16.current or not var13 then
 				return
 			end
 			var18(p2.targetUserId, var13, var15.current)
 		end, { var13, var18, p2.targetUserId }),
-		refresh = reactModule.useCallback(function() --[[ line: 147 ]]
+		refresh = reactModule.useCallback(function()
 			-- upvalues: var15 (ref), var14 (ref), var8 (ref), var18 (ref), p2 (ref)
 			var15.current += 1
 			local current = var15.current

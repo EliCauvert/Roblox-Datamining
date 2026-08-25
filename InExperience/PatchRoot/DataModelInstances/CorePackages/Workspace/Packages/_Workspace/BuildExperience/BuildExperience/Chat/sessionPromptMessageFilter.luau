@@ -1,7 +1,7 @@
 ﻿local list = { "<system_reminder>.-</system_reminder>" }
 
 return {
-	shouldOptimisticallyDisplay = function(p0) --[[ line: 5 ]]
+	shouldOptimisticallyDisplay = function(p0)
 		-- upvalues: list (ref)
 		for i, v in list do
 			if string.find(p0, v) ~= nil then

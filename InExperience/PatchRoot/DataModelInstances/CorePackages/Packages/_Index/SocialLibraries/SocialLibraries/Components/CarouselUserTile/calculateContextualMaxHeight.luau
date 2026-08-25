@@ -2,7 +2,7 @@
 local getTextHeightModule = require(script.Parent.getTextHeight)
 local _ = require(script.Parent.StyleTypes)
 
-return function(p0) --[[ line: 13 ]]
+return function(p0)
 	-- upvalues: constantsModule (ref), getTextHeightModule (ref)
 	local font = p0.font
 	

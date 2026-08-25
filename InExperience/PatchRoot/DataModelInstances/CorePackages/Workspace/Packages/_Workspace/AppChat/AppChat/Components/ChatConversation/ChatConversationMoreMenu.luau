@@ -34,7 +34,7 @@ local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationE
 local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-return reactModule.memo(function(p0) --[[ line: 59 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useDispatch (ref), useTokens (ref), useLocalization (ref), useCurrentSquadId (ref), useCurrentSquadParentChannelId (ref), reactModule (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), eventNamesModule (ref), scheduledSquadActionEnum (ref), scheduledSquadActionSourceEnum (ref), leaveSquad (ref), squadPromptType (ref), squadButtonSourceEnum (ref), squadButtonClickIntentionEnum (ref), chatConversationTelemetryEventsModule (ref), conversationActionTypeModule (ref), iconName (ref), foundationModule (ref), scheduledSquadSheetModule (ref), menu (ref), popoverSide (ref), popoverAlign (ref)
 	local var13 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
 	local var14 = useDispatch()
@@ -58,11 +58,11 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 	local var28 = useAppFocusRoot({
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		isFocusable = var23,
-		customEventHandlers = reactModule.useMemo(function() --[[ line: 83 ]]
+		customEventHandlers = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var24 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p1) --[[ line: 86 ]]
+					handler = inputHandlersModule.onRelease(function(p1)
 						-- upvalues: var24 (copy)
 						p1.cancelled = true
 						var24(false)
@@ -71,7 +71,7 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 			}
 		end, { var24 })
 	})
-	local var29 = reactModule.useCallback(function(p2) --[[ line: 101 ]]
+	local var29 = reactModule.useCallback(function(p2)
 		-- upvalues: var27 (ref), var28 (ref)
 		var27.current = p2
 		
@@ -79,7 +79,7 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 			var28(p2)
 		end
 	end, { var28 })
-	reactModule.useEffect(function() --[[ line: 108 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref)
 		if var27 and var27.current then
 			var27.current.SelectionBehaviorDown = Enum.SelectionBehavior.Stop
@@ -89,11 +89,11 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 			var27.current.SelectionGroup = true
 		end
 	end, { var23 })
-	local var30 = reactModule.useCallback(function() --[[ line: 119 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref)
 		var24(false)
 	end, {})
-	local var31 = reactModule.useCallback(function() --[[ line: 124 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var22 (ref), var19 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p0 (ref), scheduledSquadActionSourceEnum (copy), var17 (ref)
 		var22(true)
 		var19.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
@@ -110,10 +110,10 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 		var19.squadLocation,
 		var19.fireSquadAnalytics
 	})
-	local var32 = reactModule.useCallback(function() --[[ line: 145 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref), p0 (ref), var18 (ref), var14 (ref), leaveSquad (copy), squadPromptType (copy), var19 (ref), var20 (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadButtonClickIntentionEnum (copy)
 		if var17 and p0.conversationId ~= var18 then
-			var14(leaveSquad(squadPromptType.JoinAnotherSquad, var19.setSquadPrompt, function() --[[ line: 148 ]]
+			var14(leaveSquad(squadPromptType.JoinAnotherSquad, var19.setSquadPrompt, function()
 				-- upvalues: p0 (copy)
 				p0.navigateToSquadLobby(p0.conversationId)
 			end, var19.squadLocation, var20))
@@ -143,7 +143,7 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 			},
 			variant = if var23 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Utility,
 			LayoutOrder = p0.layoutOrder,
-			onActivated = reactModule.useCallback(function() --[[ line: 195 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var13 (ref), chatConversationTelemetryEventsModule (copy), var23 (ref), conversationActionTypeModule (copy), var24 (ref)
 				var13.emit(chatConversationTelemetryEventsModule.ConversationMoreMenuBtnClicked, {
 					action = if var23 then conversationActionTypeModule.CloseMoreMenu else conversationActionTypeModule.OpenMoreMenu
@@ -156,14 +156,14 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 		ScheduledSquadSheet = reactModule.createElement(scheduledSquadSheetModule, {
 			conversationId = p0.conversationId,
 			isOpen = var21,
-			onClose = function() --[[ line: 270 ]]
+			onClose = function()
 				-- upvalues: var22 (ref)
 				var22(false)
 			end
 		}),
 		Menu = reactModule.createElement(menu, {
 			anchorRef = var33,
-			items = reactModule.useMemo(function() --[[ line: 208 ]]
+			items = reactModule.useMemo(function()
 				-- upvalues: p0 (ref), var18 (ref), var16 (ref), iconName (copy)
 				local t = {}
 				table.insert(t, {
@@ -188,7 +188,7 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 				var18
 			}),
 			isOpen = var23,
-			onActivated = reactModule.useCallback(function(p3) --[[ line: 180 ]]
+			onActivated = reactModule.useCallback(function(p3)
 				-- upvalues: var32 (ref), var31 (ref), var24 (ref)
 				if p3 == "createJoinViewParty" then
 					var32()
@@ -207,7 +207,7 @@ return reactModule.memo(function(p0) --[[ line: 59 ]]
 				hasArrow = true,
 				align = { offset = 0, position = popoverAlign.Start },
 				backgroundStyle = var15.Inverse.Surface.Surface_0,
-				onPressedOutside = reactModule.useCallback(function() --[[ line: 203 ]]
+				onPressedOutside = reactModule.useCallback(function()
 					-- upvalues: var26 (ref)
 					var26(false)
 				end, {})

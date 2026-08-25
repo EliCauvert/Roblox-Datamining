@@ -3,7 +3,7 @@ local parent = script.Parent.Parent
 local reactGlobalsModule = require(parent.ReactGlobals)
 local var2 = require(parent.SafeFlags).createGetFFlag("ReactTelemetryEnabled", false)()
 
-return function(p0) --[[ line: 19 | named "reportCounter" ]]
+return function(p0)
 	-- upvalues: var2 (ref), telemetryService (ref), reactGlobalsModule (ref)
 	if not var2 then return end
 	local ok, status = pcall(telemetryService.LogCounter, telemetryService, {

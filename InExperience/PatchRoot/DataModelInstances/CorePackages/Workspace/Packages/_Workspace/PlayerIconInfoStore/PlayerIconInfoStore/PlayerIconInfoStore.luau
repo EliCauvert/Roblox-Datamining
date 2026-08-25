@@ -1,7 +1,7 @@
 ﻿local createSignal = require(script.Parent.Parent.Signals).createSignal
 local t = {}
 
-local function _(p0) --[[ line: 25 | named "createDefaultPlayerIconInfo" ]]
+local function _(p0)
 	return {
 		avatarIcon = nil,
 		specialGroupIcon = nil,
@@ -9,7 +9,7 @@ local function _(p0) --[[ line: 25 | named "createDefaultPlayerIconInfo" ]]
 	}
 end
 
-local _ = function(value) --[[ line: 33 | named "getOrCreatePlayerSignal" ]]
+local _ = function(value)
 	-- upvalues: t (write), createSignal (ref)
 	if not t[value] then
 		local var1, var2 = createSignal({
@@ -23,7 +23,7 @@ local _ = function(value) --[[ line: 33 | named "getOrCreatePlayerSignal" ]]
 end
 
 return {
-	getPlayerIconInfoReactive = function(p1) --[[ line: 41 ]]
+	getPlayerIconInfoReactive = function(p1)
 		-- upvalues: t (write), createSignal (ref)
 		if not t[p1] then
 			local var3, var4 = createSignal({
@@ -35,7 +35,7 @@ return {
 		end
 		return t[p1].getter
 	end,
-	setPlayerIconInfo = function(value, p2) --[[ line: 46 ]]
+	setPlayerIconInfo = function(value, p2)
 		-- upvalues: t (write), createSignal (ref)
 		if not t[value] then
 			local var5, var6 = createSignal({
@@ -47,7 +47,7 @@ return {
 		end
 		t[value].setter(p2)
 	end,
-	addPlayer = function(p3) --[[ line: 51 ]]
+	addPlayer = function(p3)
 		-- upvalues: t (write), createSignal (ref)
 		if not t[p3] then
 			local var7, var8 = createSignal({
@@ -59,11 +59,11 @@ return {
 		end
 		local _ = t[p3]
 	end,
-	removePlayer = function(p4) --[[ line: 56 ]]
+	removePlayer = function(p4)
 		-- upvalues: t (write)
 		t[p4] = nil
 	end,
-	cleanUp = function() --[[ line: 60 ]]
+	cleanUp = function()
 		-- upvalues: t (write)
 		t = {}
 	end

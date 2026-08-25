@@ -20,12 +20,12 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0) --[[ line: 48 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p0.changeContentSize(p1) --[[ line: 54 ]]
+	function p0.changeContentSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.contentSize ~= p1.AbsoluteSize then
 			p0:setState({ contentSize = p1.AbsoluteSize })
@@ -33,7 +33,7 @@ function name.init(p0) --[[ line: 48 ]]
 	end
 end
 
-function name.render(p2) --[[ line: 63 ]]
+function name.render(p2)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -49,18 +49,18 @@ function name.render(p2) --[[ line: 63 ]]
 			EquipText = { key = "IAPExperience.PurchaseSuccess.Action.Equip" },
 			BackToShopText = { key = "IAPExperience.PurchaseSuccess.Action.BackToShop" }
 		},
-		render = function(p3) --[[ line: 88 ]]
+		render = function(p3)
 			-- upvalues: p2 (ref)
 			return p2:renderAlert(p3)
 		end
 	})
 end
 
-function name.renderAlert(p4, p5) --[[ line: 94 ]]
+function name.renderAlert(p4, p5)
 	-- upvalues: withStyle (ref), buttonType (ref), roactModule (ref), imageSetLabel (ref), iconSize (ref), imageunavailable (ref), modelViewportModule (ref), interactiveAlert (ref), fitFrameVertical (ref), fitTextLabel (ref)
 	local props = p4.props
 	
-	return withStyle(function(p6) --[[ line: 97 ]]
+	return withStyle(function(p6)
 		-- upvalues: p5 (ref), props (ref), p4 (ref), buttonType (copy), roactModule (copy), imageSetLabel (copy), iconSize (copy), imageunavailable (copy), modelViewportModule (copy), interactiveAlert (copy), fitFrameVertical (copy), fitTextLabel (copy)
 		local theme = p6.Theme
 		local font = p6.Font
@@ -91,7 +91,7 @@ function name.renderAlert(p4, p5) --[[ line: 94 ]]
 			position = props.position,
 			anchorPoint = props.anchorPoint,
 			title = p5.PurchaseSucceededTitle,
-			middleContent = function() --[[ line: 175 ]]
+			middleContent = function()
 				-- upvalues: roactModule (copy), fitFrameVertical (copy), p4 (copy), var7 (write), fitTextLabel (copy), font (ref), text (ref), theme (ref)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,

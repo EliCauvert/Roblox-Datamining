@@ -13,13 +13,13 @@ local signalsReactModule = require(parent.SignalsReact)
 local getLoadingScreenStoreModule = require(progressLoading.Stores.getLoadingScreenStore)
 local loadingScreenTelemetryModule = require(progressLoading.LoadingScreenTelemetry)
 
-return function(p0) --[[ line: 27 | named "AutoTranslateBadge" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), getLoadingScreenStoreModule (ref), signalsReactModule (ref), loadingScreenTelemetryModule (ref), view (ref), badge (ref), badgeVariant (ref), iconName (ref), iconSize (ref), iconPosition (ref)
 	local universeId = p0.universeId
 	local var6 = useLocalization({
 		autoTranslate = "CoreScripts.TopBar.LoadingScreen.AutoTranslate"
 	})
-	local var7 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 33 ]]
+	local var7 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: getLoadingScreenStoreModule (copy), universeId (ref)
 		local var9 = getLoadingScreenStoreModule(p1).getAndFetchPlayerLocalizationChoice(tostring(universeId)).data(p1)
 		
@@ -27,9 +27,9 @@ return function(p0) --[[ line: 27 | named "AutoTranslateBadge" ]]
 	end, { universeId, getLoadingScreenStoreModule }))
 	local var8 = reactModule.useRef(var7)
 	var8.current = var7
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), loadingScreenTelemetryModule (copy)
-		return function() --[[ line: 44 ]]
+		return function()
 			-- upvalues: var8 (copy), loadingScreenTelemetryModule (copy)
 			if var8.current == nil then
 				loadingScreenTelemetryModule.countPlayerLocalizationChoiceNotReady()
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 27 | named "AutoTranslateBadge" ]]
 		testId = "--auto-translate-badge",
 		GroupTransparency = p0.transparencyBinding,
 		AnchorPoint = Vector2.new(0.5, 0),
-		Position = p0.positionBinding:map(function(p2) --[[ line: 60 ]]
+		Position = p0.positionBinding:map(function(p2)
 			return UDim2.new(0.5, 0, 0.5, p2.Y / 2)
 		end),
 		Size = UDim2.fromScale(0, 0)

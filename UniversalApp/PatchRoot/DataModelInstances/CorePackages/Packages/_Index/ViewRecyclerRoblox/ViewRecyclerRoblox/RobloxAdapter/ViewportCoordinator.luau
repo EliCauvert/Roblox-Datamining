@@ -3,7 +3,7 @@ local _ = require(viewRecyclerRoblox.Parent.ViewRecycler).Axis
 local signalsExperimentalModule = require(viewRecyclerRoblox.Parent.SignalsExperimental)
 local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
 
-local function _(p0) --[[ line: 34 | named "disconnectAll" ]]
+local function _(p0)
 	for i, v in p0 do
 		v:Disconnect()
 	end
@@ -11,7 +11,7 @@ local function _(p0) --[[ line: 34 | named "disconnectAll" ]]
 end
 
 return {
-	new = function(p1) --[[ line: 41 ]]
+	new = function(p1)
 		-- upvalues: axisMapModule (ref), signalsExperimentalModule (ref)
 		local axis = p1.axis
 		local activationMargin = p1.activationMargin or 0
@@ -23,7 +23,7 @@ return {
 		local t_1 = {}
 		local var8 = false
 		
-		local function updateTargetGeometry(p2) --[[ line: 53 ]]
+		local function updateTargetGeometry(p2)
 			-- upvalues: var5 (write), axisMapModule (copy), axis (ref)
 			if var5 == nil or not p2.target:IsDescendantOf(var5) then
 				p2.contentStart = nil
@@ -36,12 +36,12 @@ return {
 			p2.contentEnd = var13 + axisMapModule.mainOf(p2.target.AbsoluteSize, axis)
 		end
 		
-		local function _(p3, p4) --[[ line: 69 | named "dispatch" ]]
+		local function _(p3, p4)
 			-- upvalues: signalsExperimentalModule (copy)
 			if p3 == nil and p4 == nil then
 				return
 			end
-			signalsExperimentalModule.batch(function() --[[ line: 73 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: p3 (ref), p4 (ref)
 				if p3 ~= nil then
 					for i, v in p3 do
@@ -56,7 +56,7 @@ return {
 			end)
 		end
 		
-		local function deactivateAll() --[[ line: 87 ]]
+		local function deactivateAll()
 			-- upvalues: t_1 (ref), signalsExperimentalModule (copy)
 			local var14 = nil
 			
@@ -71,7 +71,7 @@ return {
 				return
 			end
 			local var15 = nil
-			signalsExperimentalModule.batch(function() --[[ line: 73 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: var14 (ref), var15 (ref)
 				if var14 ~= nil then
 					for i, v in var14 do
@@ -86,7 +86,7 @@ return {
 			end)
 		end
 		
-		local function evaluate() --[[ line: 99 ]]
+		local function evaluate()
 			-- upvalues: var8 (write), var5 (write), deactivateAll (ref), axisMapModule (copy), axis (ref), t_1 (ref), retentionMargin (ref), activationMargin (ref), signalsExperimentalModule (copy)
 			if var8 then return end
 			if var5 == nil then
@@ -123,7 +123,7 @@ return {
 			if var18 == nil and var19 == nil then
 				return
 			end
-			signalsExperimentalModule.batch(function() --[[ line: 73 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: var18 (ref), var19 (ref)
 				if var18 ~= nil then
 					for i, v in var18 do
@@ -140,7 +140,7 @@ return {
 		
 		local _ = nil
 		
-		local var12 = function(p5) --[[ line: 140 ]]
+		local var12 = function(p5)
 			-- upvalues: var8 (write), var5 (write), t (ref), deactivateAll (ref), evaluate (ref), var12 (write), t_1 (ref), updateTargetGeometry (ref)
 			if var8 or p5 == var5 then return end
 			for i, v in t do
@@ -153,7 +153,7 @@ return {
 			if p5 == nil then return end
 			table.insert(t, p5:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluate))
 			table.insert(t, p5:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(evaluate))
-			table.insert(t, p5.Destroying:Connect(function() --[[ line: 156 ]]
+			table.insert(t, p5.Destroying:Connect(function()
 				-- upvalues: var12 (copy)
 				var12(nil)
 			end))
@@ -166,10 +166,10 @@ return {
 		
 		return {
 			setViewport = var12,
-			register = function(p6, p7) --[[ line: 166 ]]
+			register = function(p6, p7)
 				-- upvalues: var8 (write), t_1 (ref), signalsExperimentalModule (copy), updateTargetGeometry (ref), evaluate (ref)
 				if var8 then
-					return function() --[[ line: 168 ]] end
+					return function() end
 				end
 				assert(t_1[p6] == nil, "target is already registered")
 				local t = {
@@ -183,7 +183,7 @@ return {
 				t_1[p6] = t
 				local var23 = false
 				
-				local function unregister() --[[ line: 183 ]]
+				local function unregister()
 					-- upvalues: var23 (write), t_1 (copy), p6 (ref), t (ref), signalsExperimentalModule (copy)
 					if var23 then return end
 					var23 = true
@@ -203,7 +203,7 @@ return {
 						
 						if list == nil then return end
 						local var27 = nil
-						signalsExperimentalModule.batch(function() --[[ line: 73 ]]
+						signalsExperimentalModule.batch(function()
 							-- upvalues: list (ref), var27 (ref)
 							if list ~= nil then
 								for i, v in list do
@@ -219,7 +219,7 @@ return {
 					end
 				end
 				
-				local function updateGeometry() --[[ line: 199 ]]
+				local function updateGeometry()
 					-- upvalues: updateTargetGeometry (copy), t (ref), evaluate (copy)
 					updateTargetGeometry(t)
 					evaluate()
@@ -233,7 +233,7 @@ return {
 				
 				return unregister
 			end,
-			destroy = function() --[[ line: 211 ]]
+			destroy = function()
 				-- upvalues: var8 (write), t (ref), t_1 (ref), var5 (write), signalsExperimentalModule (copy)
 				if var8 then return end
 				var8 = true
@@ -265,7 +265,7 @@ return {
 					return
 				end
 				local var29 = nil
-				signalsExperimentalModule.batch(function() --[[ line: 73 ]]
+				signalsExperimentalModule.batch(function()
 					-- upvalues: var28 (ref), var29 (ref)
 					if var28 ~= nil then
 						for i, v in var28 do

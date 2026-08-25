@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local impressionsTrackerModule = require(script.Parent.ImpressionsTracker)
 local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: useViewportBounds (ref), reactModule (ref), impressionsTrackerModule (ref)
 	return reactModule.createElement(impressionsTrackerModule, {
 		pageContext = p0.pageContext,

@@ -23,7 +23,7 @@ deviceSelectionEntry.validateProps = t.strictInterface({
 })
 deviceSelectionEntry.defaultProps = { canOpen = true }
 
-function deviceSelectionEntry.init(p0) --[[ line: 41 ]]
+function deviceSelectionEntry.init(p0)
 	-- upvalues: default (ref), soundService (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref)
 	p0:setState({
 		selectedIndex = 0,
@@ -31,20 +31,20 @@ function deviceSelectionEntry.init(p0) --[[ line: 41 ]]
 		deviceNames = {},
 		deviceGuids = {}
 	})
-	default:asyncInit():andThen(function() --[[ line: 50 ]]
+	default:asyncInit():andThen(function()
 		-- upvalues: p0 (ref), default (copy), soundService (copy)
 		p0:setState({ ready = true })
 		default:SetupParticipantListeners()
 		
 		if soundService.DeviceListChanged then
-			soundService.DeviceListChanged:Connect(function() --[[ line: 56 ]]
+			soundService.DeviceListChanged:Connect(function()
 				-- upvalues: p0 (copy)
 				if p0.props.isMenuOpen then
 					p0:pollDevices(p0.props.deviceType)
 				end
 			end)
 		end
-	end):catch(function() --[[ line: 63 ]]
+	end):catch(function()
 		-- upvalues: getFFlagVoiceChatUILoggingModule (copy), name (copy)
 		if getFFlagVoiceChatUILoggingModule() then
 			name:warning("Failed to init VoiceChatServiceManager")
@@ -52,7 +52,7 @@ function deviceSelectionEntry.init(p0) --[[ line: 41 ]]
 	end)
 end
 
-function deviceSelectionEntry.render(p1) --[[ line: 70 ]]
+function deviceSelectionEntry.render(p1)
 	-- upvalues: roact (ref), themedTextLabelModule (ref), deviceSelectionEntry (ref), dropDownSelectionModule (ref), getFFlagTruncateDeviceSelectionModule (ref), default (ref)
 	return if p1.state.ready and p1.state.deviceNames ~= nil and #p1.state.deviceNames ~= 0 then roact.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -86,7 +86,7 @@ function deviceSelectionEntry.render(p1) --[[ line: 70 ]]
 			selectionParentName = p1.props.deviceType .. "DeviceSelectionEntryDropdown",
 			canOpen = p1.props.canOpen,
 			canCaptureFocus = p1.props.canCaptureFocus,
-			selectionChanged = function(p2) --[[ line: 107 ]]
+			selectionChanged = function(p2)
 				-- upvalues: default (copy), p1 (ref)
 				default:SwitchDevice(p1.props.deviceType, p1.state.deviceNames[p2], p1.state.deviceGuids[p2])
 				p1:setState({ selectedIndex = p2 })
@@ -95,9 +95,9 @@ function deviceSelectionEntry.render(p1) --[[ line: 70 ]]
 	}) else nil
 end
 
-function deviceSelectionEntry.pollDevices(p3, p4) --[[ line: 122 ]]
+function deviceSelectionEntry.pollDevices(p3, p4)
 	-- upvalues: default (ref), getFFlagVoiceChatUILoggingModule (ref), name (ref)
-	spawn(function() --[[ line: 123 ]]
+	spawn(function()
 		-- upvalues: default (copy), p4 (ref), p3 (ref), getFFlagVoiceChatUILoggingModule (copy), name (copy)
 		local var11, var12, var13, var14 = default:GetDevices(p4)
 		
@@ -116,7 +116,7 @@ function deviceSelectionEntry.pollDevices(p3, p4) --[[ line: 122 ]]
 	end)
 end
 
-function deviceSelectionEntry.willUpdate(p5, p6) --[[ line: 144 ]]
+function deviceSelectionEntry.willUpdate(p5, p6)
 	if not p5.props.isMenuOpen and p6.isMenuOpen then
 		p5:pollDevices(p6.deviceType)
 	end

@@ -11,7 +11,7 @@ local fFlagFriendsPageAlwaysOpenPPV = require(parent.SharedFlags).FFlagFriendsPa
 local fFlagFriendsPageUnifiedOpenProfileLogic = require(parent.SharedFlags).FFlagFriendsPageUnifiedOpenProfileLogic
 local uDim2 = UDim2.fromOffset(12, 12)
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 18 ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: getCorrectUserPresenceModule (ref), images (ref), presenceType (ref), uDim2 (ref), isUserInGameModule (ref), fFlagFriendsPageAlwaysOpenPPV (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), notLocalizedStringsModule (ref)
 	local t = { icon = if p2 then images[p2] else nil }
 	

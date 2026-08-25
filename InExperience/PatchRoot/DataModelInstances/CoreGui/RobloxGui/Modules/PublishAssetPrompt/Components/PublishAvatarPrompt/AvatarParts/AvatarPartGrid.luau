@@ -8,7 +8,7 @@ local avatarItemCardModule = require(script.Parent.AvatarItemCard)
 local itemTile = UIBloxModule.Tile.ItemTile
 local vector2 = Vector2.new(20, 20)
 
-local function _(p0) --[[ line: 33 | named "createObjectsFolder" ]]
+local function _(p0)
 	local r15ArtistIntent = Instance.new("Folder")
 	r15ArtistIntent.Name = "R15ArtistIntent"
 	
@@ -18,11 +18,11 @@ local function _(p0) --[[ line: 33 | named "createObjectsFolder" ]]
 	return { [1] = r15ArtistIntent }
 end
 
-local _ = function(p1, p2) --[[ line: 43 | named "getPart" ]]
+local _ = function(p1, p2)
 	return p1:FindFirstChild(p2)
 end
 
-local function getItems(p3, _) --[[ line: 47 ]]
+local function getItems(p3, _)
 	local var8 = nil
 	local var9 = nil
 	local var10 = nil
@@ -118,10 +118,10 @@ local function getItems(p3, _) --[[ line: 47 ]]
 	return t
 end
 
-return function(p4) --[[ line: 132 | named "AvatarPartGrid" ]]
+return function(p4)
 	-- upvalues: reactModule (ref), getItems (ref), constantsModule (ref), avatarItemCardModule (ref), itemTile (ref), defaultMetricsGridView (ref), gridMetrics (ref), vector2 (ref)
 	local var28, var29 = reactModule.useState({})
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p4 (ref), var29 (ref), getItems (copy)
 		if p4.humanoidModel then
 			var29(getItems(p4.humanoidModel:Clone(), p4.name))
@@ -135,7 +135,7 @@ return function(p4) --[[ line: 132 | named "AvatarPartGrid" ]]
 		end
 		var29(t)
 	end, { p4.humanoidModel })
-	reactModule.useEffect(function() --[[ line: 150 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref), var29 (ref)
 		if var28[1] and var28[1].asset then
 			local t = {}
@@ -155,11 +155,11 @@ return function(p4) --[[ line: 132 | named "AvatarPartGrid" ]]
 		LayoutOrder = p4.LayoutOrder
 	}, {
 		Grid = reactModule.createElement(defaultMetricsGridView, {
-			getItemHeight = function(p5) --[[ line: 190 ]]
+			getItemHeight = function(p5)
 				return p5 * 1.333333333333
 			end,
 			getItemMetrics = gridMetrics.makeCustomMetricsGetter({ minimumItemsPerRow = 2, minimumItemWidth = var30 }),
-			renderItem = reactModule.useCallback(function(p6) --[[ line: 168 ]]
+			renderItem = reactModule.useCallback(function(p6)
 				-- upvalues: reactModule (copy), avatarItemCardModule (copy), p4 (ref), var30 (ref), itemTile (copy)
 				return if p6.asset then reactModule.createElement(avatarItemCardModule, {
 					asset = p6.asset,

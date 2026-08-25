@@ -1,6 +1,6 @@
 ﻿local radius = require(script.Parent.Parent.Parent.Parent.Foundation).Enums.Radius
 
-return function(p0, p1) --[[ line: 9 | named "getClosestRadius" ]]
+return function(p0, p1)
 	-- upvalues: radius (ref)
 	if not p1 or p1 == UDim.new(0, 0) then
 		return radius.None

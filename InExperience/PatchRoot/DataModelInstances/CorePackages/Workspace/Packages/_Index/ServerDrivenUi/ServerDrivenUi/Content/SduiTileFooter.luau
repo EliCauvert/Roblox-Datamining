@@ -4,7 +4,7 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local textSizeModule = require(parent.TextSize)
 
-return reactModule.memo(function(p0) --[[ line: 59 | named "SduiTileFooter" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: textSizeModule (ref), useTokens (ref), reactModule (ref), imageSetLabel (ref)
 	local layoutOrder = p0.layoutOrder
 	local anchorPoint = p0.anchorPoint

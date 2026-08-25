@@ -23,7 +23,7 @@ local t = {
 	BackgroundTransparency = configModule.ChatWindowBackgroundTransparency
 }
 
-local function createMessageElement(p0) --[[ line: 34 ]]
+local function createMessageElement(p0)
 	-- upvalues: getMessageSettingsModule (ref), t (ref), reactModule (ref), translatedTextMessageV2Module (ref), getMessageTextModule (ref)
 	local t_1 = {
 		text = "Sample text chat message text!",
@@ -59,7 +59,7 @@ local function createMessageElement(p0) --[[ line: 34 ]]
 	return reactModule.createElement(translatedTextMessageV2Module, {
 		chatWindowSettings = t,
 		textTransparency = reactModule.createBinding(0),
-		onTextMessageLabelButtonActivated = function() --[[ line: 71 ]] end,
+		onTextMessageLabelButtonActivated = function() end,
 		isSpatialUIEnabled = t_1.isSpatialUIEnabled,
 		originalBodyText = reactModule.createBinding(getMessageTextModule(t_2.current.useTranslation, var15.translation, var15.text)),
 		originalPrefixText = reactModule.createBinding(var15.prefixText or ""),
@@ -78,7 +78,7 @@ local function createMessageElement(p0) --[[ line: 34 ]]
 	})
 end
 
-local function _(p1) --[[ line: 92 | named "wrapWithProviders" ]]
+local function _(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, p1)
 end
@@ -86,17 +86,17 @@ end
 local var10 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement())
 local var11 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement({ useTranslation = true }))
 local var12 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement({ isUserVerified = true }))
-benchFile(script, function() --[[ line: 103 ]]
+benchFile(script, function()
 	-- upvalues: benchmark (ref), render (ref), var10 (ref), var11 (ref), var12 (ref), mountComponentTimes (ref), scrollComponentTimes (ref)
-	benchmark("Render TranslatedTextMessage", function() --[[ line: 104 ]]
+	benchmark("Render TranslatedTextMessage", function()
 		-- upvalues: render (copy), var10 (copy)
 		render(var10):unmount()
 	end)
-	benchmark("Render TranslatedTextMessage with translation", function() --[[ line: 109 ]]
+	benchmark("Render TranslatedTextMessage with translation", function()
 		-- upvalues: render (copy), var11 (copy)
 		render(var11):unmount()
 	end)
-	benchmark("Render TranslatedTextMessage (verified user)", function() --[[ line: 114 ]]
+	benchmark("Render TranslatedTextMessage (verified user)", function()
 		-- upvalues: render (copy), var12 (copy)
 		render(var12):unmount()
 	end)

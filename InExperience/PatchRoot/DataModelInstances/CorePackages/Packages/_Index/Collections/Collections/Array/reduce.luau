@@ -1,7 +1,7 @@
 ﻿local dEV = _G.__DEV__
 local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2) --[[ line: 26 ]]
+return function(p0, p1, p2)
 	-- upvalues: dEV (ref)
 	if dEV then
 		if typeof(p0) ~= "table" then

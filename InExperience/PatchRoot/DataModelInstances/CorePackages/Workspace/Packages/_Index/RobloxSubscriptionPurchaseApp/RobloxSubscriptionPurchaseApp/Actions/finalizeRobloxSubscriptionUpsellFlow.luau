@@ -8,12 +8,12 @@ local logSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchas
 local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
 
-local _ = function(p0, p1, p2, p3) --[[ line: 29 ]]
+local _ = function(p0, p1, p2, p3)
 	-- upvalues: robloxSubscriptionFlowCompleteReasonModule (ref)
 	return if p0 then if p1 then robloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseSucceeded elseif p2 and not p3 then robloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseFailed else robloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseAttempted else robloxSubscriptionFlowCompleteReasonModule.UpsellDismissed
 end
 
-local function emitCompletionTelemetry(p4) --[[ line: 61 ]]
+local function emitCompletionTelemetry(p4)
 	-- upvalues: robloxSubscriptionFlowCompleteReasonModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref)
 	if p4 == robloxSubscriptionFlowCompleteReasonModule.UpsellDismissed then
 		if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
@@ -36,7 +36,7 @@ local function emitCompletionTelemetry(p4) --[[ line: 61 ]]
 	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellFlowCompletedCounter)
 end
 
-return function(p5) --[[ line: 93 | named "finalizeRobloxSubscriptionUpsellFlow" ]]
+return function(p5)
 	-- upvalues: robloxSubscriptionStoreModule (ref), robloxSubscriptionFlowCompleteReasonModule (ref), promptStateModule (ref), emitCompletionTelemetry (ref), cleanupSubscriptionFlowModule (ref)
 	local var10 = robloxSubscriptionStoreModule.get()
 	local var11 = if not var10.getDidTryPurchasing() then if p5 then robloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseSucceeded elseif var10.getIsNativePurchase() and not (var10.getPurchaseFlowOptions().skipWaitingForPurchaseResult or false) then robloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseFailed else robloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseAttempted else robloxSubscriptionFlowCompleteReasonModule.UpsellDismissed

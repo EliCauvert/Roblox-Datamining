@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function(p0) --[[ line: 17 | named "VideoProgressBar" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var1 = useTokens()
 	local muted = var1.DarkMode.Content.Muted
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 17 | named "VideoProgressBar" ]]
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 		ProgressFill = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = p0.progressBinding:map(function(p1) --[[ line: 37 ]]
+			Size = p0.progressBinding:map(function(p1)
 				return UDim2.fromScale(p1, 1)
 			end),
 			BackgroundColor3 = emphasis.Color3,

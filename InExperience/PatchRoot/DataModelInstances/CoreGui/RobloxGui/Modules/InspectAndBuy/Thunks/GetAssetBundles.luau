@@ -12,15 +12,15 @@ local constantsModule = require(parent.Constants)
 local list = { networkModule }
 local var10 = createInspectAndBuyKeyMapperModule("getAssetBundles")
 
-return function(value) --[[ line: 23 | named "GetAssetBundles" ]]
+return function(value)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var10 (ref), performFetch (ref), bundleInfoModule (ref), getProductInfoModule (ref), setBundlesModule (ref), setAssetToBundlesMappingModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1) --[[ line: 24 ]]
+	return thunkModule.new(script.Name, list, function(p0, p1)
 		-- upvalues: networkModule (copy), var10 (copy), value (ref), performFetch (copy), bundleInfoModule (copy), getProductInfoModule (copy), setBundlesModule (copy), setAssetToBundlesMappingModule (copy), sendCounterModule (copy), constantsModule (copy)
 		local var11 = p1[networkModule]
 		
-		return performFetch.Single(var10(p0:getState().storeId, value), function(_) --[[ line: 29 ]]
+		return performFetch.Single(var10(p0:getState().storeId, value), function(_)
 			-- upvalues: var11 (ref), value (copy), bundleInfoModule (copy), p0 (ref), getProductInfoModule (copy), setBundlesModule (copy), setAssetToBundlesMappingModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var11.getAssetBundles(value):andThen(function(p2) --[[ line: 30 ]]
+			return var11.getAssetBundles(value):andThen(function(p2)
 				-- upvalues: bundleInfoModule (copy), p0 (copy), getProductInfoModule (copy), setBundlesModule (copy), setAssetToBundlesMappingModule (copy), value (copy), sendCounterModule (copy), constantsModule (copy)
 				local var15
 				local t = {}
@@ -41,7 +41,7 @@ return function(value) --[[ line: 23 | named "GetAssetBundles" ]]
 					if not var15 then
 						for i_1, v_1 in pairs(v.items) do
 							if not p0:getState().assets[v_1.id] then
-								coroutine.wrap(function() --[[ line: 54 ]]
+								coroutine.wrap(function()
 									-- upvalues: p0 (copy), getProductInfoModule (copy), v_1 (ref)
 									p0:dispatch(getProductInfoModule(v_1.id))
 								end)()
@@ -52,11 +52,11 @@ return function(value) --[[ line: 23 | named "GetAssetBundles" ]]
 				p0:dispatch(setBundlesModule(t_1))
 				p0:dispatch(setAssetToBundlesMappingModule(tostring(value), t))
 				p0:dispatch(sendCounterModule(constantsModule.Counters.GetAssetBundles .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_) --[[ line: 69 ]]
+			end, function(_)
 				-- upvalues: p0 (copy), sendCounterModule (copy), constantsModule (copy)
 				p0:dispatch(sendCounterModule(constantsModule.Counters.GetAssetBundles .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p0):catch(function(_) --[[ line: 74 ]]
+		end)(p0):catch(function(_)
 			-- upvalues: p0 (ref), sendCounterModule (copy), constantsModule (copy)
 			p0:dispatch(sendCounterModule(constantsModule.Counters.GetAssetBundles .. constantsModule.CounterSuffix.RequestFailed))
 		end)

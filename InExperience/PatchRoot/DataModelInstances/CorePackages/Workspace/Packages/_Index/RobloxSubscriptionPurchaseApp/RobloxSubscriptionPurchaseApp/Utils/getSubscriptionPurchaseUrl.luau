@@ -1,6 +1,6 @@
 ﻿local contentProviderService = game:GetService("ContentProvider")
 
-return function(p0, p1) --[[ line: 3 | named "getSubscriptionPurchaseUrl" ]]
+return function(p0, p1)
 	-- upvalues: contentProviderService (ref)
 	local baseUrl = contentProviderService.BaseUrl
 	

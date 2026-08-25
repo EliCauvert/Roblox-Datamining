@@ -15,18 +15,18 @@ local getHomePageUrlModule = require(home.getHomePageUrl)
 local buildHomePageRequestModule = require(home.buildHomePageRequest)
 local fFlagSduiClientTemplateCache = require(parent.SharedFlags).FFlagSduiClientTemplateCache
 
-local function _(p0, p1) --[[ line: 40 | named "resolveRequestIntent" ]]
+local function _(p0, p1)
 	-- upvalues: homeConstantsModule (ref)
 	return if typeof(p0) == "string" and p0 ~= "" then p0 elseif p1 then homeConstantsModule.RequestIntent.ManualRefresh else homeConstantsModule.RequestIntent.LogIn
 end
 
-local _ = function(p2) --[[ line: 52 | named "readRequestId" ]]
+local _ = function(p2)
 	local var8 = if type(p2) == "table" then p2.request_id else nil
 	
 	return if var8 == nil or var8 == "" then nil else var8
 end
 
-local function commitHomeSession(_, p3) --[[ line: 67 ]]
+local function commitHomeSession(_, p3)
 	-- upvalues: homePageSessionModule (ref), getSduiServiceDependenciesStore (ref), appPage (ref), setPageSessionTimestamp (ref)
 	local var9 = if type(p3) == "table" then p3.request_id else nil
 	
@@ -39,7 +39,7 @@ local function commitHomeSession(_, p3) --[[ line: 67 ]]
 	end
 end
 
-local function fetchHomePage(p4, p5) --[[ line: 77 ]]
+local function fetchHomePage(p4, p5)
 	-- upvalues: homeConstantsModule (ref), getSduiApiStore (ref), homePageSessionModule (ref), parent (ref), sduiCapabilities (ref), sduiResponseType (ref), getHomePageUrlModule (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), buildHomePageRequestModule (ref), fFlagSduiClientTemplateCache (ref), getSduiTemplateStore (ref), sduiSharedUtilitiesModule (ref), commitHomeSession (ref), fetchHomePage (ref)
 	local configKey = homeConstantsModule.ConfigKey
 	local var11 = getSduiApiStore()
@@ -80,7 +80,7 @@ local function fetchHomePage(p4, p5) --[[ line: 77 ]]
 		enableTemplateCache = if fFlagSduiClientTemplateCache then true else nil,
 		mergeStrategy = sduiSharedUtilitiesModule.streamingFeedMergeStrategy,
 		onSuccess = commitHomeSession,
-		refresh = function(p6) --[[ line: 144 ]]
+		refresh = function(p6)
 			-- upvalues: fetchHomePage (copy), var13 (ref)
 			return fetchHomePage(p6, { forceRefresh = true, contextualFeatures = var13 })
 		end

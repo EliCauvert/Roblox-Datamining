@@ -1,7 +1,7 @@
 ﻿local playersService = game:GetService("Players")
 game:DefineFastString("SelectInSceneReportMenuOverrideUserIds", "")
 
-function isInSelectInSceneReportMenuOverrideList() --[[ line: 5 ]]
+function isInSelectInSceneReportMenuOverrideList()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	while not localPlayer do

@@ -3,11 +3,11 @@ local constantsModule = require(parent.Constants)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local t = {}
 
-local function _(value) --[[ line: 16 | named "getRbxAssetId" ]]
+local function _(value)
 	return string.match(value, "^rbxassetid://(%d+)$")
 end
 
-local function getAssetUrlId(value) --[[ line: 22 ]]
+local function getAssetUrlId(value)
 	local var7 = string.match(value, "^https?://www%.(.+)") or string.match(value, "^https?://(.+)")
 	
 	if not var7 then
@@ -18,7 +18,7 @@ local function getAssetUrlId(value) --[[ line: 22 ]]
 	return if var7 then string.match(var7, "^%.com//?asset/%?id=(%d+)$") else nil
 end
 
-local function getAssetDeliveryAssetUrlId(value) --[[ line: 37 ]]
+local function getAssetDeliveryAssetUrlId(value)
 	local match = string.match(value, "^https?://assetdelivery%.(.+)")
 	
 	if not match then
@@ -29,7 +29,7 @@ local function getAssetDeliveryAssetUrlId(value) --[[ line: 37 ]]
 	return if match then string.match(match, "^%.com/v1/asset/%?id=(%d+)$") else nil
 end
 
-local _ = function(value) --[[ line: 51 | named "tryGetAssetIdFromContentIdInternal" ]]
+local _ = function(value)
 	-- upvalues: getAssetUrlId (ref), getAssetDeliveryAssetUrlId (ref)
 	local var9 = tonumber(value)
 	
@@ -51,7 +51,7 @@ local _ = function(value) --[[ line: 51 | named "tryGetAssetIdFromContentIdInter
 	return if var12 == nil then nil else var12
 end
 
-local _ = function(p0, p1, p2) --[[ line: 75 | named "hasInExpCreatedEditableInstance" ]]
+local _ = function(p0, p1, p2)
 	if not p2 then
 		return false
 	elseif not p2.allowEditableInstances then
@@ -67,7 +67,7 @@ local _ = function(p0, p1, p2) --[[ line: 75 | named "hasInExpCreatedEditableIns
 	return var14 and var14[p1] and var14[p1].instance
 end
 
-local function parseContentId(p3, p4, p5, p6, p7, p8, p9) --[[ line: 105 ]]
+local function parseContentId(p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: getAssetUrlId (ref), getAssetDeliveryAssetUrlId (ref)
 	local var17
 	local var15 = p6[p7]
@@ -135,7 +135,7 @@ local function parseContentId(p3, p4, p5, p6, p7, p8, p9) --[[ line: 105 ]]
 	end
 end
 
-local function parseWithErrorCheckInternal(p10, p11, p12, p13, p14, p15, p16) --[[ line: 150 ]]
+local function parseWithErrorCheckInternal(p10, p11, p12, p13, p14, p15, p16)
 	-- upvalues: constantsModule (ref), failureReasonsAccumulatorModule (ref), parseContentId (ref)
 	p14 = p14 or constantsModule.CONTENT_ID_FIELDS
 	local var21 = failureReasonsAccumulatorModule.new()
@@ -156,7 +156,7 @@ local function parseWithErrorCheckInternal(p10, p11, p12, p13, p14, p15, p16) --
 	return var21:getFinalResults()
 end
 
-function t.tryGetAssetIdFromContentId(value) --[[ line: 189 ]]
+function t.tryGetAssetIdFromContentId(value)
 	-- upvalues: getAssetUrlId (ref), getAssetDeliveryAssetUrlId (ref)
 	local var24 = tonumber(value)
 	
@@ -178,12 +178,12 @@ function t.tryGetAssetIdFromContentId(value) --[[ line: 189 ]]
 	return if var27 == nil then nil else var27
 end
 
-function t.parseWithErrorCheck(p17, p18, p19, p20, p21, p22) --[[ line: 193 ]]
+function t.parseWithErrorCheck(p17, p18, p19, p20, p21, p22)
 	-- upvalues: parseWithErrorCheckInternal (ref)
 	return parseWithErrorCheckInternal(p17, p18, nil, p19, p20, p21, p22)
 end
 
-function t.parse(p23, p24, p25) --[[ line: 212 ]]
+function t.parse(p23, p24, p25)
 	-- upvalues: parseWithErrorCheckInternal (ref)
 	local t = {}
 	assert(parseWithErrorCheckInternal({}, {}, t, p23, p24, nil, p25))

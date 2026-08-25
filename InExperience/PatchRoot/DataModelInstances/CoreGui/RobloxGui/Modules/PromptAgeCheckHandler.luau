@@ -7,7 +7,7 @@ local fStringLuaAppPlayButtonAgeCheckAmpNameSpace = sharedFlagsModule.FStringLua
 local logging = require(corePackagesService.Workspace.Packages.AppCommonLib).Logging
 local t = {}
 
-local function onPromptAgeCheckRequested(p0) --[[ line: 24 ]]
+local function onPromptAgeCheckRequested(p0)
 	-- upvalues: playersService (ref), corePackagesService (ref), coreGuiService (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), logging (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -18,10 +18,10 @@ local function onPromptAgeCheckRequested(p0) --[[ line: 24 ]]
 	local ok_1, status_1 = pcall(require, coreGuiService.RobloxGui.Modules.ApolloClient)
 	
 	if ok_1 and status_1 then
-		status.InExpAmpWizardController.OpenAmpWizardContainerInExp(fStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(p1, _) --[[ line: 42 ]]
+		status.InExpAmpWizardController.OpenAmpWizardContainerInExp(fStringLuaAppPlayButtonAgeCheckAmpFeatureName, function(p1, _)
 			-- upvalues: localPlayer (ref), logging (copy)
 			if p1 == "Granted" then
-				local ok, status = pcall(function() --[[ line: 44 ]]
+				local ok, status = pcall(function()
 					-- upvalues: localPlayer (copy)
 					localPlayer:NotifyAgeCheckPassed()
 				end)
@@ -36,7 +36,7 @@ local function onPromptAgeCheckRequested(p0) --[[ line: 24 ]]
 	end
 end
 
-function t.init() --[[ line: 62 ]]
+function t.init()
 	-- upvalues: playersService (ref), onPromptAgeCheckRequested (ref)
 	playersService.PromptAgeCheckRequested:Connect(onPromptAgeCheckRequested)
 end

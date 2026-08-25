@@ -8,7 +8,7 @@ local searchAreaModule = require(shareGame.Components.SearchArea)
 local var6 = require(shareGame.getTranslator)()
 local header = roactModule.PureComponent:extend("Header")
 
-function header.render(p0) --[[ line: 20 ]]
+function header.render(p0)
 	-- upvalues: constantsModule (ref), backButtonModule (ref), roactModule (ref), var6 (ref), themeModule (ref), searchAreaModule (ref)
 	local deviceLayout = p0.props.deviceLayout
 	local size = p0.props.size

@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 47 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		can_join = if p0 == nil or p0.can_join == nil then false else p0.can_join,
@@ -12,7 +12,7 @@ function t_1.new(p0) --[[ line: 47 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 58 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -35,7 +35,7 @@ function t_1:encode() --[[ line: 58 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 77 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var11 = t_1.new()
 	local var12 = 0
@@ -85,7 +85,7 @@ function t_1.decode(p1) --[[ line: 77 ]]
 	return var11
 end
 
-function t_1:jsonEncode() --[[ line: 125 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.can_join then
@@ -97,7 +97,7 @@ function t_1:jsonEncode() --[[ line: 125 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 139 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var31 = t_1.new()
 	

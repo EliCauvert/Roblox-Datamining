@@ -4,7 +4,7 @@ local setGameIconsModule = require(gameIconRodux.GameIcons.SetGameIcons)
 
 return {
 	key = "GameIconsKey",
-	reducer = function(p0, p1) --[[ line: 7 ]]
+	reducer = function(p0, p1)
 		-- upvalues: setGameIconsModule (ref), cryoModule (ref)
 		p0 = p0 or {}
 		

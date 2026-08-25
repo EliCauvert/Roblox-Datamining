@@ -1,4 +1,4 @@
-﻿local function _(p0) --[[ line: 14 | named "unimplemented" ]]
+﻿local function _(p0)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(p0))
@@ -120,7 +120,7 @@ local t = {
 	shouldSuspendRef = nil
 }
 
-local _ = function(p1) --[[ line: 189 | named "shouldSuspend" ]]
+local _ = function(p1)
 	-- upvalues: t (ref)
 	if not t.shouldSuspendRef then
 		t.shouldSuspendRef = require(script.Parent.ReactFiberReconciler).shouldSuspend
@@ -128,14 +128,14 @@ local _ = function(p1) --[[ line: 189 | named "shouldSuspend" ]]
 	return t.shouldSuspendRef(p1)
 end
 
-local _ = function() --[[ line: 198 | named "initReactFiberHooks" ]]
+local _ = function()
 	-- upvalues: t (ref)
 	local unknownModule = require(script.Parent["ReactFiberHooks.new"])
 	t.renderWithHooksRef = unknownModule.renderWithHooks
 	t.bailoutHooksRef = unknownModule.bailoutHooks
 end
 
-local function renderWithHooks(...) --[[ line: 205 ]]
+local function renderWithHooks(...)
 	-- upvalues: t (ref)
 	if not t.renderWithHooksRef then
 		local unknownModule = require(script.Parent["ReactFiberHooks.new"])
@@ -145,7 +145,7 @@ local function renderWithHooks(...) --[[ line: 205 ]]
 	return t.renderWithHooksRef(...)
 end
 
-local function bailoutHooks(...) --[[ line: 213 ]]
+local function bailoutHooks(...)
 	-- upvalues: t (ref)
 	if not t.bailoutHooksRef then
 		local unknownModule = require(script.Parent["ReactFiberHooks.new"])
@@ -225,7 +225,7 @@ if dEV then
 	t_1.didWarnAboutReassigningProps = false
 	t_2.didWarnAboutDefaultPropsOnFunctionComponent = {}
 end
-local _ = function(p2, p3, p4, p5) --[[ line: 314 | named "reconcileChildren" ]]
+local _ = function(p2, p3, p4, p5)
 	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
 	if p2 == nil then
 		p3.child = mountChildFibers(p3, nil, p4, p5)
@@ -235,13 +235,13 @@ local _ = function(p2, p3, p4, p5) --[[ line: 314 | named "reconcileChildren" ]]
 	p3.child = reconcileChildFibers(p3, p2.child, p4, p5)
 end
 
-local _ = function(p6, p7, p8, p9) --[[ line: 343 | named "forceUnmountCurrentAndReconcile" ]]
+local _ = function(p6, p7, p8, p9)
 	-- upvalues: reconcileChildFibers (ref)
 	p7.child = reconcileChildFibers(p7, p6.child, nil, p9)
 	p7.child = reconcileChildFibers(p7, nil, p8, p9)
 end
 
-local function updateForwardRef(p10, p11, p12, p13, p14) --[[ line: 367 ]]
+local function updateForwardRef(p10, p11, p12, p13, p14)
 	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var26 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local propTypes
 	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p11.type ~= p11.elementType then
@@ -295,7 +295,7 @@ local function updateForwardRef(p10, p11, p12, p13, p14) --[[ line: 367 ]]
 	return p11.child
 end
 
-local function updateMemoComponent(p15, p16, p17, p18, p19, p20) --[[ line: 454 ]]
+local function updateMemoComponent(p15, p16, p17, p18, p19, p20)
 	-- upvalues: isSimpleFunctionComponent (ref), dEV (ref), resolveFunctionForHotReloading (ref), simpleMemoComponent (ref), updateSimpleMemoComponent (write), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), createFiberFromTypeAndProps (ref), reactFiberLaneModule (ref), shallowEqual (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), createWorkInProgress (ref)
 	local var52
 	if p15 == nil then
@@ -363,7 +363,7 @@ local function updateMemoComponent(p15, p16, p17, p18, p19, p20) --[[ line: 454 
 	return var52
 end
 
-updateSimpleMemoComponent = function(p21, p22, p23, p24, p25, p26) --[[ line: 575 | named "updateSimpleMemoComponent" ]]
+updateSimpleMemoComponent = function(p21, p22, p23, p24, p25, p26)
 	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), REACT_LAZY_TYPE (ref), describeError (ref), checkPropTypes (ref), getComponentName (ref), shallowEqual (ref), var26 (write), reactFiberLaneModule (ref), bailoutOnAlreadyFinishedWork (write), forceUpdateForLegacySuspense (ref), noFlags (ref), updateFunctionComponent (write)
 	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p22.type ~= p22.elementType then
 		local elementType = p22.elementType
@@ -400,7 +400,7 @@ updateSimpleMemoComponent = function(p21, p22, p23, p24, p25, p26) --[[ line: 57
 	return updateFunctionComponent(p21, p22, p23, p24, p26)
 end
 
-local function updateOffscreenComponent(p27, p28, p29) --[[ line: 677 ]]
+local function updateOffscreenComponent(p27, p28, p29)
 	-- upvalues: concurrentMode (ref), noMode (ref), reactFiberLaneModule (ref), pushRenderLanes (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local pendingProps = p28.pendingProps
 	local children = pendingProps.children
@@ -444,7 +444,7 @@ local function updateOffscreenComponent(p27, p28, p29) --[[ line: 677 ]]
 	return p28.child
 end
 
-function updateFragment(p30, p31, p32) --[[ line: 779 ]]
+function updateFragment(p30, p31, p32)
 	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
 	local pendingProps = p31.pendingProps
 	
@@ -456,7 +456,7 @@ function updateFragment(p30, p31, p32) --[[ line: 779 ]]
 	return p31.child
 end
 
-function updateMode(p33, p34, p35) --[[ line: 785 ]]
+function updateMode(p33, p34, p35)
 	-- upvalues: mountChildFibers (ref), reconcileChildFibers (ref)
 	local children = p34.pendingProps.children
 	
@@ -468,7 +468,7 @@ function updateMode(p33, p34, p35) --[[ line: 785 ]]
 	return p34.child
 end
 
-function updateProfiler(p36, p37, p38) --[[ line: 791 ]]
+function updateProfiler(p36, p37, p38)
 	-- upvalues: enableProfilerTimer (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	if enableProfilerTimer then
 		local stateNode = p37.stateNode
@@ -485,7 +485,7 @@ function updateProfiler(p36, p37, p38) --[[ line: 791 ]]
 	return p37.child
 end
 
-local _ = function(p39, p40) --[[ line: 805 | named "markRef" ]]
+local _ = function(p39, p40)
 	-- upvalues: ref (ref)
 	local ref_1 = p40.ref
 	
@@ -494,7 +494,7 @@ local _ = function(p39, p40) --[[ line: 805 | named "markRef" ]]
 	end
 end
 
-updateFunctionComponent = function(p41, p42, p43, p44, p45) --[[ line: 816 | named "updateFunctionComponent" ]]
+updateFunctionComponent = function(p41, p42, p43, p44, p45)
 	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), prepareToReadContext (ref), t_1 (ref), reactCurrentOwner (ref), setIsRendering (ref), renderWithHooks (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var26 (write), bailoutHooks (ref), bailoutOnAlreadyFinishedWork (write), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local propTypes
 	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(p43) ~= "function" and p42.type ~= p42.elementType) then
@@ -549,7 +549,7 @@ updateFunctionComponent = function(p41, p42, p43, p44, p45) --[[ line: 816 | nam
 	return p42.child
 end
 
-local function updateClassComponent(p46, p47, p48, p49, p50) --[[ line: 995 ]]
+local function updateClassComponent(p46, p47, p48, p49, p50)
 	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), isContextProvider (ref), pushContextProvider (ref), prepareToReadContext (ref), t_1 (ref), placement (ref), constructClassInstance (ref), mountClassInstance (ref), resumeMountClassInstance (ref), updateClassInstance (ref), console (ref)
 	local propTypes
 	if (dEV or dISABLEALLWARNINGSEXCEPTPROPVALIDATION) and p47.type ~= p47.elementType then
@@ -597,7 +597,7 @@ local function updateClassComponent(p46, p47, p48, p49, p50) --[[ line: 995 ]]
 	return var59
 end
 
-function finishClassComponent(p51, p52, p53, p54, p55, p56) --[[ line: 1092 ]]
+function finishClassComponent(p51, p52, p53, p54, p55, p56)
 	-- upvalues: ref (ref), didCapture (ref), noFlags (ref), invalidateContextProvider (ref), bailoutOnAlreadyFinishedWork (write), reactCurrentOwner (ref), enableProfilerTimer (ref), stopProfilerTimerIfRunning (ref), dEV (ref), setIsRendering (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), performedWork (ref), reconcileChildFibers (ref), mountChildFibers (ref)
 	local ref_1 = p52.ref
 	
@@ -662,7 +662,7 @@ function finishClassComponent(p51, p52, p53, p54, p55, p56) --[[ line: 1092 ]]
 	return bailoutOnAlreadyFinishedWork(p51, p52, p56)
 end
 
-local _ = function(p57) --[[ line: 1190 | named "pushHostRootContext" ]]
+local _ = function(p57)
 	-- upvalues: pushTopLevelContextObject (ref), pushHostContainer (ref)
 	local stateNode = p57.stateNode
 	
@@ -674,7 +674,7 @@ local _ = function(p57) --[[ line: 1190 | named "pushHostRootContext" ]]
 	pushHostContainer(p57, stateNode.containerInfo)
 end
 
-local function updateHostRoot(p58, p59, p60) --[[ line: 1206 ]]
+local function updateHostRoot(p58, p59, p60)
 	-- upvalues: pushTopLevelContextObject (ref), pushHostContainer (ref), invariant (ref), cloneUpdateQueue (ref), processUpdateQueue (ref), resetHydrationState (ref), bailoutOnAlreadyFinishedWork (write), enterHydrationState (ref), supportsHydration (ref), setWorkInProgressVersion (ref), mountChildFibers (ref), placement (ref), hydrating (ref), reconcileChildFibers (ref)
 	local stateNode = p59.stateNode
 	
@@ -725,7 +725,7 @@ local function updateHostRoot(p58, p59, p60) --[[ line: 1206 ]]
 	return p59.child
 end
 
-local function updateHostComponent(p61, p62, p63) --[[ line: 1283 ]]
+local function updateHostComponent(p61, p62, p63)
 	-- upvalues: pushHostContext (ref), tryToClaimNextHydratableInstance (ref), shouldSetTextContent (ref), contentReset (ref), performedWork (ref), ref (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	pushHostContext(p62)
 	
@@ -756,7 +756,7 @@ local function updateHostComponent(p61, p62, p63) --[[ line: 1283 ]]
 	return p62.child
 end
 
-local _ = function(p64, p65) --[[ line: 1324 | named "updateHostText" ]]
+local _ = function(p64, p65)
 	-- upvalues: tryToClaimNextHydratableInstance (ref)
 	if p64 == nil then
 		tryToClaimNextHydratableInstance(p65)
@@ -764,7 +764,7 @@ local _ = function(p64, p65) --[[ line: 1324 | named "updateHostText" ]]
 	return nil
 end
 
-local function mountLazyComponent(p66, p67, p68, p69, p70) --[[ line: 1333 ]]
+local function mountLazyComponent(p66, p67, p68, p69, p70)
 	-- upvalues: placement (ref), resolveLazyComponentTag (ref), resolveDefaultProps (ref), functionComponent (ref), dEV (ref), resolveFunctionForHotReloading (ref), updateFunctionComponent (write), classComponent (ref), resolveClassForHotReloading (ref), updateClassComponent (ref), forwardRef (ref), resolveForwardRefForHotReloading (ref), updateForwardRef (ref), memoComponent (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), updateMemoComponent (ref), REACT_LAZY_TYPE (ref), inspect (ref), invariant (ref)
 	if p66 ~= nil then
 		p66.alternate = nil
@@ -825,7 +825,7 @@ local function mountLazyComponent(p66, p67, p68, p69, p70) --[[ line: 1333 ]]
 	end
 end
 
-function mountIncompleteClassComponent(p71, p72, p73, p74, p75) --[[ line: 1464 ]]
+function mountIncompleteClassComponent(p71, p72, p73, p74, p75)
 	-- upvalues: placement (ref), classComponent (ref), isContextProvider (ref), pushContextProvider (ref), prepareToReadContext (ref), t_1 (ref), constructClassInstance (ref), mountClassInstance (ref)
 	if p71 ~= nil then
 		p71.alternate = nil
@@ -849,7 +849,7 @@ function mountIncompleteClassComponent(p71, p72, p73, p74, p75) --[[ line: 1464 
 	return finishClassComponent(nil, p72, p73, true, var69, p75)
 end
 
-local function mountIndeterminateComponent(a, b, p76, p77) --[[ line: 1516 ]]
+local function mountIndeterminateComponent(a, b, p76, p77)
 	-- upvalues: placement (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), prepareToReadContext (ref), t_1 (ref), dEV (ref), getComponentName (ref), t_2 (ref), console (ref), strictMode (ref), unknownModule_1 (ref), setIsRendering (ref), reactCurrentOwner (ref), renderWithHooks (ref), performedWork (ref), disableModulePatternComponents (ref), classComponent (ref), isContextProvider (ref), pushContextProvider (ref), initializeUpdateQueue (ref), applyDerivedStateFromProps (ref), adoptClassInstance (ref), mountClassInstance (ref), functionComponent (ref), debugRenderPhaseSideEffectsForStrictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), mountChildFibers (ref)
 	if a ~= nil then
 		a.alternate = nil
@@ -950,7 +950,7 @@ local function mountIndeterminateComponent(a, b, p76, p77) --[[ line: 1516 ]]
 	return finishClassComponent(nil, b, p76, true, var76, p77)
 end
 
-function validateFunctionComponentInDev(p78, p79) --[[ line: 1733 ]]
+function validateFunctionComponentInDev(p78, p79)
 	-- upvalues: dEV (ref), getCurrentFiberOwnerNameInDevOrNull (ref), t_2 (ref), console (ref), warnAboutDefaultPropsOnFunctionComponents (ref), getComponentName (ref)
 	if dEV then
 		if p78.ref ~= nil then
@@ -1003,23 +1003,23 @@ local t_3 = {
 	retryLane = reactFiberLaneModule.NoLane
 }
 
-local _ = function(p80) --[[ line: 1830 | named "mountSuspenseOffscreenState" ]]
+local _ = function(p80)
 	return { baseLanes = p80 }
 end
 
-local _ = function(p81, p82) --[[ line: 1836 | named "updateSuspenseOffscreenState" ]]
+local _ = function(p81, p82)
 	-- upvalues: reactFiberLaneModule (ref)
 	return {
 		baseLanes = reactFiberLaneModule.mergeLanes(p81.baseLanes, p82)
 	}
 end
 
-local _ = function(p83, p84, _, _) --[[ line: 1846 | named "shouldRemainOnFallback" ]]
+local _ = function(p83, p84, _, _)
 	-- upvalues: hasSuspenseContext (ref), forceSuspenseFallback (ref)
 	return (p84 == nil or p84.memoizedState ~= nil) and hasSuspenseContext(p83, forceSuspenseFallback)
 end
 
-local _ = function(p85, p86) --[[ line: 1870 | named "getRemainingWorkInPrimaryTree" ]]
+local _ = function(p85, p86)
 	-- upvalues: reactFiberLaneModule (ref)
 	return reactFiberLaneModule.removeLanes(p85.childLanes, p86)
 end
@@ -1030,7 +1030,7 @@ local mountSuspensePrimaryChildren = nil
 local updateSuspenseFallbackChildren = nil
 local updateDehydratedSuspenseComponent = nil
 
-local function updateSuspenseComponent(p87, p88, p89) --[[ line: 1882 ]]
+local function updateSuspenseComponent(p87, p88, p89)
 	-- upvalues: dEV (ref), t (ref), didCapture (ref), suspenseStackCursor (ref), noFlags (ref), hasSuspenseContext (ref), forceSuspenseFallback (ref), addSubtreeSuspenseContext (ref), invisibleParentSuspenseContext (ref), setDefaultShallowSuspenseContext (ref), pushSuspenseContext (ref), tryToClaimNextHydratableInstance (ref), enableSuspenseServerRenderer (ref), mountDehydratedSuspenseComponent (write), t_3 (ref), reactFiberLaneModule (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), mountSuspensePrimaryChildren (write), updateDehydratedSuspenseComponent (write), updateSuspenseFallbackChildren (write), updateSuspensePrimaryChildren (write)
 	local pendingProps = p88.pendingProps
 	
@@ -1161,7 +1161,7 @@ local function updateSuspenseComponent(p87, p88, p89) --[[ line: 1882 ]]
 	end
 end
 
-mountSuspensePrimaryChildren = function(p90, p91, p92) --[[ line: 2167 | named "mountSuspensePrimaryChildren" ]]
+mountSuspensePrimaryChildren = function(p90, p91, p92)
 	-- upvalues: createFiberFromOffscreen (ref)
 	local var93 = createFiberFromOffscreen({ mode = "visible", children = p91 }, p90.mode, p92, nil)
 	var93.return_ = p90
@@ -1170,7 +1170,7 @@ mountSuspensePrimaryChildren = function(p90, p91, p92) --[[ line: 2167 | named "
 	return var93
 end
 
-function mountSuspenseFallbackChildren(p93, p94, p95, p96) --[[ line: 2180 ]]
+function mountSuspenseFallbackChildren(p93, p94, p95, p96)
 	-- upvalues: blockingMode (ref), noMode (ref), reactFiberLaneModule (ref), enableProfilerTimer (ref), profileMode (ref), createFiberFromFragment (ref), createFiberFromOffscreen (ref)
 	local var95, var96
 	local mode = p93.mode
@@ -1203,12 +1203,12 @@ function mountSuspenseFallbackChildren(p93, p94, p95, p96) --[[ line: 2180 ]]
 	return var96
 end
 
-local _ = function(p97, p98) --[[ line: 2230 | named "createWorkInProgressOffscreenFiber" ]]
+local _ = function(p97, p98)
 	-- upvalues: createWorkInProgress (ref)
 	return createWorkInProgress(p97, p98)
 end
 
-updateSuspensePrimaryChildren = function(p99, p100, p101, p102) --[[ line: 2239 | named "updateSuspensePrimaryChildren" ]]
+updateSuspensePrimaryChildren = function(p99, p100, p101, p102)
 	-- upvalues: createWorkInProgress (ref), blockingMode (ref), noMode (ref), deletion (ref)
 	local child = p99.child
 	local sibling = child.sibling
@@ -1235,7 +1235,7 @@ updateSuspensePrimaryChildren = function(p99, p100, p101, p102) --[[ line: 2239 
 	return var97
 end
 
-updateSuspenseFallbackChildren = function(p103, p104, p105, p106, p107) --[[ line: 2274 | named "updateSuspenseFallbackChildren" ]]
+updateSuspenseFallbackChildren = function(p103, p104, p105, p106, p107)
 	-- upvalues: blockingMode (ref), noMode (ref), reactFiberLaneModule (ref), enableProfilerTimer (ref), profileMode (ref), createWorkInProgress (ref), staticMask (ref), createFiberFromFragment (ref), placement (ref)
 	local var99
 	local mode = p104.mode
@@ -1277,7 +1277,7 @@ updateSuspenseFallbackChildren = function(p103, p104, p105, p106, p107) --[[ lin
 	return var100
 end
 
-local _ = function(p108, p109, p110) --[[ line: 2357 | named "retrySuspenseComponentWithoutHydrating" ]]
+local _ = function(p108, p109, p110)
 	-- upvalues: reconcileChildFibers (ref), mountSuspensePrimaryChildren (write), placement (ref)
 	reconcileChildFibers(p109, p108.child, nil, p110)
 	local var101 = mountSuspensePrimaryChildren(p109, p109.pendingProps.children, p110)
@@ -1287,7 +1287,7 @@ local _ = function(p108, p109, p110) --[[ line: 2357 | named "retrySuspenseCompo
 	return var101
 end
 
-function mountSuspenseFallbackAfterRetryWithoutHydrating(p111, p112, p113, p114, p115) --[[ line: 2378 ]]
+function mountSuspenseFallbackAfterRetryWithoutHydrating(p111, p112, p113, p114, p115)
 	-- upvalues: createFiberFromOffscreen (ref), reactFiberLaneModule (ref), createFiberFromFragment (ref), placement (ref), blockingMode (ref), noMode (ref), reconcileChildFibers (ref)
 	local mode = p112.mode
 	local var102 = createFiberFromOffscreen(p113, mode, reactFiberLaneModule.NoLanes, nil)
@@ -1304,7 +1304,7 @@ function mountSuspenseFallbackAfterRetryWithoutHydrating(p111, p112, p113, p114,
 	return var103
 end
 
-mountDehydratedSuspenseComponent = function(p116, p117, _) --[[ line: 2408 | named "mountDehydratedSuspenseComponent" ]]
+mountDehydratedSuspenseComponent = function(p116, p117, _)
 	-- upvalues: blockingMode (ref), noMode (ref), dEV (ref), console (ref), reactFiberLaneModule (ref), isSuspenseInstanceFallback (ref), enableSchedulerTracing (ref), markSpawnedWork (ref)
 	if bit32.band(p116.mode, blockingMode) == noMode then
 		if dEV then
@@ -1326,7 +1326,7 @@ mountDehydratedSuspenseComponent = function(p116, p117, _) --[[ line: 2408 | nam
 	return nil
 end
 
-updateDehydratedSuspenseComponent = function(p118, p119, p120, p121, p122) --[[ line: 2455 | named "updateDehydratedSuspenseComponent" ]]
+updateDehydratedSuspenseComponent = function(p118, p119, p120, p121, p122)
 	-- upvalues: warnIfHydrating (ref), getExecutionContext (ref), retryAfterError (ref), noContext (ref), reconcileChildFibers (ref), mountSuspensePrimaryChildren (write), placement (ref), blockingMode (ref), noMode (ref), isSuspenseInstanceFallback (ref), reactFiberLaneModule (ref), var26 (write), getWorkInProgressRoot (ref), scheduleUpdateOnFiber (ref), renderDidSuspendDelayIfPossible (ref), isSuspenseInstancePending (ref), didCapture (ref), retryDehydratedSuspenseBoundary (ref), enableSchedulerTracing (ref), var22 (write), parent (ref), registerSuspenseInstanceRetry (ref), reenterHydrationStateFromDehydratedSuspenseInstance (ref), hydrating (ref)
 	warnIfHydrating()
 	
@@ -1379,7 +1379,7 @@ updateDehydratedSuspenseComponent = function(p118, p119, p120, p121, p122) --[[ 
 	p119.flags = bit32.bor(p119.flags, didCapture)
 	p119.child = p118.child
 	
-	local var110 = function() --[[ line: 2551 ]]
+	local var110 = function()
 		-- upvalues: retryDehydratedSuspenseBoundary (copy), p118 (ref)
 		return retryDehydratedSuspenseBoundary(p118)
 	end
@@ -1395,7 +1395,7 @@ updateDehydratedSuspenseComponent = function(p118, p119, p120, p121, p122) --[[ 
 	return nil
 end
 
-function updatePortalComponent(p123, p124, p125) --[[ line: 2964 ]]
+function updatePortalComponent(p123, p124, p125)
 	-- upvalues: pushHostContainer (ref), reconcileChildFibers (ref), mountChildFibers (ref)
 	pushHostContainer(p124, p124.stateNode.containerInfo)
 	local pendingProps = p124.pendingProps
@@ -1412,7 +1412,7 @@ end
 
 local var44 = false
 
-local function updateContextProvider(p126, p127, p128) --[[ line: 2987 ]]
+local function updateContextProvider(p126, p127, p128)
 	-- upvalues: dEV (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), array (ref), object (ref), var44 (write), console (ref), checkPropTypes (ref), pushProvider (ref), calculateChangedBits (ref), hasContextChanged (ref), bailoutOnAlreadyFinishedWork (write), propagateContextChange (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local propTypes
 	local context = p127.type._context
@@ -1460,7 +1460,7 @@ local t_4 = {
 	usingLegacyConsumer = false
 }
 
-function updateContextConsumer(p129, p130, p131) --[[ line: 3055 ]]
+function updateContextConsumer(p129, p130, p131)
 	-- upvalues: dEV (ref), t_4 (ref), console (ref), cOMPATWARNINGS (ref), prepareToReadContext (ref), t_1 (ref), readContext (ref), reactCurrentOwner (ref), setIsRendering (ref), performedWork (ref), mountChildFibers (ref), reconcileChildFibers (ref)
 	local type = p130.type
 	
@@ -1511,12 +1511,12 @@ function updateContextConsumer(p129, p130, p131) --[[ line: 3055 ]]
 	return p130.child
 end
 
-function t_1.markWorkInProgressReceivedUpdate() --[[ line: 3165 ]]
+function t_1.markWorkInProgressReceivedUpdate()
 	-- upvalues: var26 (write)
 	var26 = true
 end
 
-bailoutOnAlreadyFinishedWork = function(p132, p133, p134) --[[ line: 3169 | named "bailoutOnAlreadyFinishedWork" ]]
+bailoutOnAlreadyFinishedWork = function(p132, p133, p134)
 	-- upvalues: enableProfilerTimer (ref), stopProfilerTimerIfRunning (ref), markSkippedUpdateLanes (ref), reactFiberLaneModule (ref), cloneChildFibers (ref)
 	if p132 then
 		p133.dependencies = p132.dependencies
@@ -1534,7 +1534,7 @@ bailoutOnAlreadyFinishedWork = function(p132, p133, p134) --[[ line: 3169 | name
 	return nil
 end
 
-function remountFiber(p135, p136, p137) --[[ line: 3200 ]]
+function remountFiber(p135, p136, p137)
 	-- upvalues: dEV (ref), deletion (ref), placement (ref)
 	if not dEV then
 		error("Did not expect this call in production. This is a bug in React. Please file an issue.")
@@ -1585,7 +1585,7 @@ function remountFiber(p135, p136, p137) --[[ line: 3200 ]]
 	return p137
 end
 
-function t_1.beginWork(p138, p139, p140) --[[ line: 3269 ]]
+function t_1.beginWork(p138, p139, p140)
 	-- upvalues: dEV (ref), createFiberFromTypeAndProps (ref), hasContextChanged (ref), var26 (write), reactFiberLaneModule (ref), hostRoot (ref), pushTopLevelContextObject (ref), pushHostContainer (ref), resetHydrationState (ref), hostComponent (ref), pushHostContext (ref), classComponent (ref), isContextProvider (ref), pushContextProvider (ref), hostPortal (ref), contextProvider (ref), pushProvider (ref), profiler (ref), enableProfilerTimer (ref), suspenseComponent (ref), enableSuspenseServerRenderer (ref), pushSuspenseContext (ref), setDefaultShallowSuspenseContext (ref), suspenseStackCursor (ref), didCapture (ref), updateSuspenseComponent (ref), bailoutOnAlreadyFinishedWork (write), suspenseListComponent (ref), offscreenComponent (ref), legacyHiddenComponent (ref), updateOffscreenComponent (ref), forceUpdateForLegacySuspense (ref), noFlags (ref), reactWorkTagsModule (ref), mountIndeterminateComponent (ref), lazyComponent (ref), mountLazyComponent (ref), functionComponent (ref), resolveDefaultProps (ref), updateFunctionComponent (write), updateClassComponent (ref), updateHostRoot (ref), updateHostComponent (ref), hostText (ref), tryToClaimNextHydratableInstance (ref), forwardRef (ref), updateForwardRef (ref), fragment (ref), mode (ref), updateContextProvider (ref), contextConsumer (ref), memoComponent (ref), dISABLEALLWARNINGSEXCEPTPROPVALIDATION (ref), checkPropTypes (ref), getComponentName (ref), updateMemoComponent (ref), simpleMemoComponent (ref), updateSimpleMemoComponent (write), incompleteClassComponent (ref), updateOffscreenComponent (ref), invariant (ref)
 	local lanes = p139.lanes
 	

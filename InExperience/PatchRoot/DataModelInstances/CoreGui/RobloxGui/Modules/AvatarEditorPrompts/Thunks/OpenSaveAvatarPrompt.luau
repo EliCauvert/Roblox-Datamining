@@ -2,9 +2,9 @@
 local openPromptModule = require(parent.Actions.OpenPrompt)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	-- upvalues: openPromptModule (ref), promptTypeModule (ref)
-	return function(p2) --[[ line: 7 ]]
+	return function(p2)
 		-- upvalues: openPromptModule (copy), promptTypeModule (copy), p0 (ref), p1 (ref)
 		p2:dispatch(openPromptModule(promptTypeModule.SaveAvatar, { humanoidDescription = p0, rigType = p1 }))
 	end

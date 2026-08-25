@@ -16,17 +16,17 @@ local divider = foundationModule.Divider
 local close = images["icons/navigation/close"]
 local var7 = constantsModule.USER_PROFILE_HEADER_HEIGHT + constantsModule.CTA_BUTTON_HEIGHT + constantsModule.PAGE_PADDING
 
-return function(p0) --[[ line: 35 ]]
+return function(p0)
 	-- upvalues: useLastInputMode (ref), useStyle (ref), useProfileScrollContextModule (ref), reactModule (ref), fFlagProfilePlatformNewProfileHeader (ref), var7 (ref), view (ref), imageSetLabel (ref), close (ref), divider (ref)
 	local isFocus = useLastInputMode() == "Focus"
 	local var9 = useStyle()
 	local var10 = useProfileScrollContextModule()
 	local var11 = if var10 then var10.scrollY else 0
-	local var12 = reactModule.useCallback(function() --[[ line: 43 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.navigateBack()
 	end, { p0.navigateBack })
-	local var13 = reactModule.useMemo(function() --[[ line: 49 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var7 (copy), var11 (ref)
 		if p0.backgroundTransparency ~= nil then
 			return p0.backgroundTransparency

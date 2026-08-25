@@ -4,7 +4,7 @@ local t = {}
 t.__index = t
 local var3 = tModule.tuple(tModule.optional(tModule.strictInterface({ limit = tModule.optional(tModule.numberPositive) })))
 
-function t.new(p0) --[[ line: 48 ]]
+function t.new(p0)
 	-- upvalues: var3 (ref), t (ref)
 	assert(var3(p0))
 	local limit = (p0 or {}).limit or 200
@@ -17,7 +17,7 @@ function t.new(p0) --[[ line: 48 ]]
 	}, t)
 end
 
-function t:addBreadcrumb(p1) --[[ line: 75 ]]
+function t:addBreadcrumb(p1)
 	-- upvalues: breadcrumbModule (ref)
 	self._breadcrumbs[self._writeIndex] = breadcrumbModule.new(p1)
 	
@@ -27,7 +27,7 @@ function t:addBreadcrumb(p1) --[[ line: 75 ]]
 	self._writeIndex = self._writeIndex % self._limit + 1
 end
 
-function t:getBreadcrumbs() --[[ line: 100 ]]
+function t:getBreadcrumbs()
 	local t = {}
 	
 	if self._count == 0 then
@@ -48,17 +48,17 @@ function t:getBreadcrumbs() --[[ line: 100 ]]
 	end
 end
 
-function t:getCount() --[[ line: 130 ]]
+function t:getCount()
 	return self._count
 end
 
-function t:clear() --[[ line: 137 ]]
+function t:clear()
 	self._breadcrumbs = table.create(self._limit)
 	self._writeIndex = 1
 	self._count = 0
 end
 
-function t:isFull() --[[ line: 148 ]]
+function t:isFull()
 	return self._limit <= self._count
 end
 

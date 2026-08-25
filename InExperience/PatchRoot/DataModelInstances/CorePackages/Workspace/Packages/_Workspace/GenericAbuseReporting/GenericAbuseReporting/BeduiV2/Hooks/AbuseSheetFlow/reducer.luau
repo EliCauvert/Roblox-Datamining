@@ -7,7 +7,7 @@ local _ = require(script.Parent.AbuseSheetFlowTypes)
 local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV2
 local fFlagAbuseReportInlineAlertStateOutsideReducerModule = require(genericAbuseReporting.Flags.FFlagAbuseReportInlineAlertStateOutsideReducer)
 
-local function getInitialState(p0, p1, p2) --[[ line: 36 ]]
+local function getInitialState(p0, p1, p2)
 	-- upvalues: localPlayer (ref), fFlagAbuseReportMenuV2 (ref)
 	return {
 		navigationState = "idle",
@@ -28,11 +28,11 @@ end
 
 return {
 	getInitialState = getInitialState,
-	getNewRunId = function() --[[ line: 94 ]]
+	getNewRunId = function()
 		-- upvalues: httpService (ref)
 		return httpService:GenerateGUID(false)
 	end,
-	selectStore = function(p3) --[[ line: 98 ]]
+	selectStore = function(p3)
 		local t = {}
 		
 		for i, v in p3.stack do
@@ -44,7 +44,7 @@ return {
 		end
 		return t
 	end,
-	reducer = function(p4, p5) --[[ line: 110 ]]
+	reducer = function(p4, p5)
 		-- upvalues: dashModule (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (ref), getInitialState (ref)
 		local cloned = nil
 		

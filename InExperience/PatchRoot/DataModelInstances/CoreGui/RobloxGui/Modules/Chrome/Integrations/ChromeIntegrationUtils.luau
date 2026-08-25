@@ -4,7 +4,7 @@ local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local userInputService = game:GetService("UserInputService")
 local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 
-function dismissRobloxMenuAndRun(p0) --[[ line: 10 ]]
+function dismissRobloxMenuAndRun(p0)
 	-- upvalues: fFlagEnableConsoleExpControls (ref), userInputService (ref), guiService (ref), robloxGui (ref)
 	if fFlagEnableConsoleExpControls and userInputService.GamepadEnabled then
 		guiService.SelectedCoreObject = nil
@@ -14,7 +14,7 @@ function dismissRobloxMenuAndRun(p0) --[[ line: 10 ]]
 	if guiService.MenuIsOpen then
 		local var5 = tick() + 3
 		local menuClosedConnection = nil
-		menuClosedConnection = guiService.MenuClosed:Connect(function() --[[ line: 20 ]]
+		menuClosedConnection = guiService.MenuClosed:Connect(function()
 			-- upvalues: menuClosedConnection (write), var5 (ref), p0 (ref)
 			if menuClosedConnection then
 				menuClosedConnection:Disconnect()

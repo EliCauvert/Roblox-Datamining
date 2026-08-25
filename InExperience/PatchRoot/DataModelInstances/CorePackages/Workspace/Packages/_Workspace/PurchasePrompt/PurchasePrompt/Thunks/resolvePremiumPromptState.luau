@@ -15,9 +15,9 @@ local completeRequestModule = require(parent.Thunks.completeRequest)
 local thunkModule = require(parent.Thunk)
 local list = { networkModule, externalSettingsModule, analyticsModule }
 
-return function(p0, p1, p2, p3) --[[ line: 28 | named "resolvePremiumPromptState" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), analyticsModule (ref), premiumInfoRecievedModule (ref), accountInfoReceivedModule (ref), balanceInfoRecievedModule (ref), completeRequestModule (ref), playersService (ref), errorOccurredModule (ref), purchaseErrorModule (ref), postPremiumImpressionModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return thunkModule.new(script.Name, list, function(p4, p5) --[[ line: 29 ]]
+	return thunkModule.new(script.Name, list, function(p4, p5)
 		-- upvalues: networkModule (copy), externalSettingsModule (copy), analyticsModule (copy), premiumInfoRecievedModule (copy), p2 (ref), accountInfoReceivedModule (copy), p0 (ref), balanceInfoRecievedModule (copy), p1 (ref), p3 (ref), completeRequestModule (copy), playersService (copy), errorOccurredModule (copy), purchaseErrorModule (copy), postPremiumImpressionModule (copy), setPromptStateModule (copy), promptStateModule (copy)
 		local var15 = p5[networkModule]
 		local var16 = p5[externalSettingsModule]

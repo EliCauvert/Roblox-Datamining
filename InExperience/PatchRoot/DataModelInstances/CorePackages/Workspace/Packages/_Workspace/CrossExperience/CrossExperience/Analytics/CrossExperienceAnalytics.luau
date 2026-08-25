@@ -1,7 +1,7 @@
 ﻿local telemetryService = game:GetService("TelemetryService")
 local fIntCrossExperienceEventThrottleHunderedthsPercent = game:DefineFastInt("FIntCrossExperienceEventThrottleHunderedthsPercent", 10000)
 
-function logEvent(p0, p1) --[[ line: 7 ]]
+function logEvent(p0, p1)
 	-- upvalues: fIntCrossExperienceEventThrottleHunderedthsPercent (ref), telemetryService (ref)
 	telemetryService:LogEvent({
 		description = "Cross Experience Analytics Events",

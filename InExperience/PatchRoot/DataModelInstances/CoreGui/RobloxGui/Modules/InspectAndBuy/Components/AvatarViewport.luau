@@ -16,7 +16,7 @@ local fFlagEnableInspectAndBuyV2RootFlag = require(corePackagesService.Workspace
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local avatarViewport = roactModule.PureComponent:extend("AvatarViewport")
 
-function avatarViewport.init(p0) --[[ line: 30 ]]
+function avatarViewport.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.viewportFrameRef = roactModule.createRef()
 	p0.worldModelRef = roactModule.createRef()
@@ -36,7 +36,7 @@ function avatarViewport.init(p0) --[[ line: 30 ]]
 	p0.initialHrpPosition = if p0.props.model ~= nil then p0.props.model.HumanoidRootPart.Position else nil
 end
 
-function avatarViewport.didMount(p1) --[[ line: 49 ]]
+function avatarViewport.didMount(p1)
 	-- upvalues: characterModelPoolModule (ref)
 	if p1.props.humanoidDescription and p1.model then
 		p1.viewportCamera.Parent = p1.viewportFrameRef.current
@@ -49,7 +49,7 @@ function avatarViewport.didMount(p1) --[[ line: 49 ]]
 	p1:setUpGamepad()
 end
 
-function avatarViewport.didUpdate(p2, p3, _) --[[ line: 64 ]]
+function avatarViewport.didUpdate(p2, p3, _)
 	-- upvalues: fFlagEnableNewAvatarViewportPropsModule (ref)
 	if p2.props.visible and p2.props.humanoidDescription ~= p3.humanoidDescription and p2.model then
 		if fFlagEnableNewAvatarViewportPropsModule and p2.props.resetCameraAndAutoRotationOnModelChange then
@@ -60,7 +60,7 @@ function avatarViewport.didUpdate(p2, p3, _) --[[ line: 64 ]]
 				p2.lastInputTime = tick()
 			end
 		end
-		coroutine.wrap(function() --[[ line: 75 ]]
+		coroutine.wrap(function()
 			-- upvalues: p2 (ref)
 			p2.characterModelPool:maybeUpdateCharacter(p2.props.humanoidDescription)
 		end)()
@@ -79,7 +79,7 @@ function avatarViewport.didUpdate(p2, p3, _) --[[ line: 64 ]]
 	end
 end
 
-function avatarViewport.setRotation(value) --[[ line: 94 ]]
+function avatarViewport.setRotation(value)
 	-- upvalues: fFlagEnableNewAvatarViewportPropsModule (ref)
 	local model = value.model
 	
@@ -103,7 +103,7 @@ function avatarViewport.setRotation(value) --[[ line: 94 ]]
 	end
 end
 
-function avatarViewport.render(p4) --[[ line: 135 ]]
+function avatarViewport.render(p4)
 	-- upvalues: roactModule (ref), colorsModule (ref), fFlagEnableNewAvatarViewportPropsModule (ref), userInputService (ref)
 	local setScrollingEnabled = p4.props.setScrollingEnabled
 	
@@ -117,7 +117,7 @@ function avatarViewport.render(p4) --[[ line: 135 ]]
 		Active = true,
 		Visible = p4.props.visible,
 		[roactModule.Ref] = p4.viewportFrameRef,
-		[roactModule.Event.InputBegan] = function(_, p5) --[[ line: 152 ]]
+		[roactModule.Event.InputBegan] = function(_, p5)
 			-- upvalues: p4 (ref), fFlagEnableNewAvatarViewportPropsModule (copy), setScrollingEnabled (ref), userInputService (copy)
 			if p5.UserInputState == Enum.UserInputState.Begin then
 				p4.mouseOrTouchDown = true
@@ -128,7 +128,7 @@ function avatarViewport.render(p4) --[[ line: 135 ]]
 				elseif setScrollingEnabled then
 					setScrollingEnabled(false)
 				end
-				local inputEndedConnection = userInputService.InputEnded:connect(function(p6, _) --[[ line: 179 ]]
+				local inputEndedConnection = userInputService.InputEnded:connect(function(p6, _)
 					-- upvalues: p4 (copy), fFlagEnableNewAvatarViewportPropsModule (copy), setScrollingEnabled (copy)
 					if p6.UserInputType == Enum.UserInputType.MouseButton1 or p6.UserInputType == Enum.UserInputType.Touch then
 						if p4.mouseOrTouchDown then
@@ -147,7 +147,7 @@ function avatarViewport.render(p4) --[[ line: 135 ]]
 						end
 					end
 				end)
-				table.insert(p4.connections, userInputService.InputChanged:connect(function(p7, _) --[[ line: 166 ]]
+				table.insert(p4.connections, userInputService.InputChanged:connect(function(p7, _)
 					-- upvalues: p4 (copy)
 					if p7.UserInputType == Enum.UserInputType.MouseMovement and p4.mouseOrTouchDown or p7.UserInputType == Enum.UserInputType.Touch then
 						local var15 = p7.Position - p4.lastPosition
@@ -165,10 +165,10 @@ function avatarViewport.render(p4) --[[ line: 135 ]]
 	})
 end
 
-function avatarViewport.handleSpin(p8) --[[ line: 214 ]]
+function avatarViewport.handleSpin(p8)
 	-- upvalues: fFlagEnableNewAvatarViewportPropsModule (ref), runService (ref)
 	local var16 = false
-	spawn(function() --[[ line: 216 ]]
+	spawn(function()
 		-- upvalues: p8 (ref), fFlagEnableNewAvatarViewportPropsModule (copy), var16 (write), runService (copy)
 		while p8.isMounted do
 			if tick() - p8.lastInputTime <= 2 or p8.mouseOrTouchDown or p8.gamepadRotating then
@@ -176,7 +176,7 @@ function avatarViewport.handleSpin(p8) --[[ line: 214 ]]
 			elseif not fFlagEnableNewAvatarViewportPropsModule or not p8.props.disableAutoRotation then
 				var16 = true
 			end
-			local function _(p9, p10) --[[ line: 231 | named "returnToDefaultPosition" ]]
+			local function _(p9, p10)
 				p9 %= 6.28318530718
 				
 				if p9 > 3.14159265359 then
@@ -219,13 +219,13 @@ function avatarViewport.handleSpin(p8) --[[ line: 214 ]]
 	end)
 end
 
-function avatarViewport.setUpGamepad(value) --[[ line: 261 ]]
+function avatarViewport.setUpGamepad(value)
 	-- upvalues: isInExperienceUIVREnabled (ref), fFlagEnableInExperienceUIPCVRFix (ref), isSpatial (ref), fFlagEnableInspectAndBuyV2RootFlag (ref), userInputService (ref), contextActionService (ref)
 	if isInExperienceUIVREnabled and fFlagEnableInExperienceUIPCVRFix and (isSpatial() and fFlagEnableInspectAndBuyV2RootFlag) then return end
 	if userInputService.GamepadEnabled then
 		local vector2 = Vector2.new(0, 0)
 		contextActionService:UnbindCoreAction("RotateModel")
-		contextActionService:BindCoreAction("RotateModel", function(_, p11, p12) --[[ line: 277 ]]
+		contextActionService:BindCoreAction("RotateModel", function(_, p11, p12)
 			-- upvalues: vector2 (write), value (ref)
 			if p11 == Enum.UserInputState.Change then
 				vector2 = p12.Position or vector2
@@ -245,18 +245,18 @@ function avatarViewport.setUpGamepad(value) --[[ line: 261 ]]
 	end
 end
 
-function avatarViewport.unbindActions(_) --[[ line: 296 ]]
+function avatarViewport.unbindActions(_)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("RotateModel")
 end
 
-function avatarViewport.removeConnections(p13) --[[ line: 300 ]]
+function avatarViewport.removeConnections(p13)
 	for i, v in pairs(p13.connections) do
 		v:disconnect()
 	end
 end
 
-function avatarViewport.willUnmount(p14) --[[ line: 306 ]]
+function avatarViewport.willUnmount(p14)
 	p14.isMounted = false
 	
 	if p14.characterModelPool then
@@ -266,16 +266,16 @@ function avatarViewport.willUnmount(p14) --[[ line: 306 ]]
 	p14:removeConnections()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p17, _) --[[ line: 325 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p17, _)
 	return {
 		view = p17.view,
 		tryingOnInfo = p17.tryingOnInfo,
 		gamepadEnabled = p17.gamepadEnabled
 	}
-end)(function(p15) --[[ line: 316 | named "AvatarViewportWrapper" ]]
+end)(function(p15)
 	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), cryoModule (ref), avatarViewport (ref)
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p16) --[[ line: 318 ]]
+		render = function(p16)
 			-- upvalues: cryoModule (copy), p15 (ref), roactModule (copy), avatarViewport (copy)
 			return roactModule.createElement(avatarViewport, cryoModule.Dictionary.join(p15, { views = p16 }))
 		end

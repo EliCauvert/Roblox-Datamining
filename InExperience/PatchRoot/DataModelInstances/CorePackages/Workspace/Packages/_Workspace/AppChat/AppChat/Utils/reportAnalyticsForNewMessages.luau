@@ -6,7 +6,7 @@ local roactChatAnalyticsModule = require(appChat.LegacyAnalytics.RoactChatAnalyt
 local filterForLinksWithPolicyModule = require(appChat.Components.ChatConversation.Utils.filterForLinksWithPolicy)
 local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumMessageTypes)
 
-return function(p0, p1, p2) --[[ line: 13 ]]
+return function(p0, p1, p2)
 	-- upvalues: analytics (ref), rbxAnalyticsService (ref), playersService (ref), roactChatAnalyticsModule (ref), enumMessageTypesModule (ref), filterForLinksWithPolicyModule (ref)
 	local var6 = p2 or roactChatAnalyticsModule.new(analytics.new(rbxAnalyticsService), tostring(playersService.LocalPlayer.UserId))
 	

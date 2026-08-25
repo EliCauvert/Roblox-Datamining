@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "getGameStatsRatingPercentageText" ]]
+﻿return function(p0, p1)
 	local var0 = "--"
 	
 	if p0 == nil or p0 < 0 then

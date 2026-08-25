@@ -21,7 +21,7 @@ avatarCircle.defaultProps = {
 	overlaySize = avatarCircle.PresetSize.Size48x48
 }
 
-local function createAlignedContainerElement(p0) --[[ line: 43 ]]
+local function createAlignedContainerElement(p0)
 	-- upvalues: roact (ref)
 	return {
 		layout = roact.createElement("UIListLayout", {
@@ -33,7 +33,7 @@ local function createAlignedContainerElement(p0) --[[ line: 43 ]]
 	}
 end
 
-function avatarCircle.generateThumbnails(p1, p2) --[[ line: 54 ]]
+function avatarCircle.generateThumbnails(p1, p2)
 	-- upvalues: roact (ref), imageSetLabel (ref), createAlignedContainerElement (ref)
 	local p2Count = #p2
 	local var5 = p2Count / 2
@@ -150,7 +150,7 @@ function avatarCircle.generateThumbnails(p1, p2) --[[ line: 54 ]]
 	}
 end
 
-function avatarCircle.render(p3) --[[ line: 195 ]]
+function avatarCircle.render(p3)
 	-- upvalues: t (ref), roact (ref)
 	local thumbnails = p3:generateThumbnails(p3.props.thumbnails)
 	

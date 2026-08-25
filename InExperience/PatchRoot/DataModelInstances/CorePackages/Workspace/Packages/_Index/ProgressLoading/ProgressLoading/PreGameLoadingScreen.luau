@@ -16,35 +16,35 @@ local createNetworkingModule = require(script.Parent.createNetworking)
 local url = require(parent.Http).Url
 local engineFeatureEnableDeferredAssetManagerServiceModule = require(progressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
 local var12 = if engineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
-local var13 = roduxModule.Store.new(function(p0) --[[ line: 39 ]]
+local var13 = roduxModule.Store.new(function(p0)
 	return p0 or {}
 end, {})
 
-local function getIsLoadingAssets(value) --[[ line: 46 ]]
+local function getIsLoadingAssets(value)
 	-- upvalues: getDeferredAssetStoreModule (ref)
 	local var16 = getDeferredAssetStoreModule(value)
 	
 	return if var16 then if var16.getDownloadStatus(value) ~= Enum.PrefetchDownloadStatus.InProgress then var16.getPregameLoadingScreenOnly(value) else true else false
 end
 
-local function _() --[[ line: 59 | named "getJoiningPlaceId" ]]
+local function _()
 	-- upvalues: engineFeatureEnableDeferredAssetManagerServiceModule (ref), var12 (ref)
 	return if engineFeatureEnableDeferredAssetManagerServiceModule and var12 then var12.JoiningPlaceId or 0 else 0
 end
 
-local _ = function() --[[ line: 66 | named "getJoiningUniverseId" ]]
+local _ = function()
 	-- upvalues: engineFeatureEnableDeferredAssetManagerServiceModule (ref), var12 (ref)
 	return if engineFeatureEnableDeferredAssetManagerServiceModule and var12 then var12.JoiningUniverseId or 0 else 0
 end
 
-local function onCancel() --[[ line: 73 ]]
+local function onCancel()
 	-- upvalues: var12 (ref)
 	if var12 then
 		var12:CancelPrefetch()
 	end
 end
 
-return reactModule.memo(function(_) --[[ line: 79 | named "PreGameLoadingScreen" ]]
+return reactModule.memo(function(_)
 	-- upvalues: signalsReactModule (ref), getIsLoadingAssets (ref), engineFeatureEnableDeferredAssetManagerServiceModule (ref), var12 (ref), reactModule (ref), responsiveModule (ref), marketplaceService (ref), url (ref), createNetworkingModule (ref), cachedPolicyServiceModule (ref), roactRoduxModule (ref), var13 (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), loadingScreenViewModule (ref), onCancel (ref)
 	local var17 = signalsReactModule.useSignalState(getIsLoadingAssets)
 	local var18 = if not var17 then if engineFeatureEnableDeferredAssetManagerServiceModule and var12 then var12.JoiningPlaceId or 0 else 0 else 0
@@ -52,7 +52,7 @@ return reactModule.memo(function(_) --[[ line: 79 | named "PreGameLoadingScreen"
 	local var20 = reactModule.useRef(nil)
 	var20.current = responsiveModule.usePreferredInput()
 	local var21, var22 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 89 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), var22 (ref), marketplaceService (copy)
 		if var18 <= 0 then
 			var22(nil)
@@ -60,9 +60,9 @@ return reactModule.memo(function(_) --[[ line: 79 | named "PreGameLoadingScreen"
 			return
 		end
 		local var27 = false
-		task.spawn(function() --[[ line: 95 ]]
+		task.spawn(function()
 			-- upvalues: marketplaceService (copy), var18 (copy), var27 (write), var22 (copy)
-			local ok, status = pcall(function() --[[ line: 96 ]]
+			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), var18 (copy)
 				return marketplaceService:GetProductInfo(var18)
 			end)
@@ -72,13 +72,13 @@ return reactModule.memo(function(_) --[[ line: 79 | named "PreGameLoadingScreen"
 			end
 		end)
 		
-		return function() --[[ line: 103 ]]
+		return function()
 			-- upvalues: var27 (write)
 			var27 = true
 		end
 	end, { var18 })
 	local var23, var24 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 110 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), var19 (ref), var24 (ref), url (copy), createNetworkingModule (copy)
 		if var18 <= 0 or var19 > 0 then
 			var24(0)
@@ -86,23 +86,23 @@ return reactModule.memo(function(_) --[[ line: 79 | named "PreGameLoadingScreen"
 			return
 		end
 		local var28 = false
-		createNetworkingModule(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, var18), "GET"):andThen(function(p1) --[[ line: 117 ]]
+		createNetworkingModule(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, var18), "GET"):andThen(function(p1)
 			-- upvalues: var28 (write), var24 (copy)
 			if not var28 and p1 and (p1.responseBody and p1.responseBody.universeId) then
 				var24(p1.responseBody.universeId)
 			end
-		end, function() --[[ line: 121 ]] end)
+		end, function() end)
 		
-		return function() --[[ line: 122 ]]
+		return function()
 			-- upvalues: var28 (write)
 			var28 = true
 		end
 	end, { var18, var19 })
 	local var25, var26 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 129 ]]
+	reactModule.useEffect(function()
 		-- upvalues: cachedPolicyServiceModule (copy), var26 (ref)
 		local var29 = false
-		task.spawn(function() --[[ line: 131 ]]
+		task.spawn(function()
 			-- upvalues: cachedPolicyServiceModule (copy), var29 (write), var26 (copy)
 			local var30 = cachedPolicyServiceModule:IsSubjectToChinaPolicies()
 			
@@ -111,7 +111,7 @@ return reactModule.memo(function(_) --[[ line: 79 | named "PreGameLoadingScreen"
 			end
 		end)
 		
-		return function() --[[ line: 137 ]]
+		return function()
 			-- upvalues: var29 (write)
 			var29 = true
 		end

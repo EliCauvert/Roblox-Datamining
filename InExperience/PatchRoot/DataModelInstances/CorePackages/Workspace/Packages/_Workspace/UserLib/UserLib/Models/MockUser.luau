@@ -1,7 +1,7 @@
 ﻿local userModule = require(script.Parent.User)
 local var1 = 0
 
-local _ = function() --[[ line: 7 ]]
+local _ = function()
 	-- upvalues: var1 (write)
 	var1 += 1
 	
@@ -11,7 +11,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 15 ]]
+function t.new()
 	-- upvalues: userModule (ref), var1 (write)
 	local var3 = userModule.new()
 	var1 += 1
@@ -38,7 +38,7 @@ function t.new() --[[ line: 15 ]]
 	return var3
 end
 
-function t.mockEndpointResponse() --[[ line: 45 ]]
+function t.mockEndpointResponse()
 	return {
 		created = "0001-01-01T06:00:00Z",
 		displayName = "DN+12345",

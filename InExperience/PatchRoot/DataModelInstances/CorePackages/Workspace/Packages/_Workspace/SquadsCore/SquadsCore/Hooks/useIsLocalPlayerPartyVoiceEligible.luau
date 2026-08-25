@@ -1,9 +1,9 @@
 ﻿local useSelector = require(script:FindFirstAncestor("SquadsCore").Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useIsUserPartyVoiceEligibleModule = require(script.Parent.useIsUserPartyVoiceEligible)
 
-function useIsLocalPlayerPartyVoiceEligible() --[[ line: 9 ]]
+function useIsLocalPlayerPartyVoiceEligible()
 	-- upvalues: useSelector (ref), useIsUserPartyVoiceEligibleModule (ref)
-	local var1 = useSelector(function(p0) --[[ line: 10 ]]
+	local var1 = useSelector(function(p0)
 		return if p0 and p0.LocalUserId then tonumber(p0.LocalUserId) or 0 else 0
 	end)
 	

@@ -8,7 +8,7 @@ local default = require(coreScriptsRoactCommon.Traversal.LocalTraversalHistory).
 local getGameInfoStore = dataHydrationModule.Game.getGameInfoStore
 local getVotesStore = dataHydrationModule.Game.getVotesStore
 
-local function getNMostRecentUniqueUniverseIds(p0, _) --[[ line: 24 ]]
+local function getNMostRecentUniqueUniverseIds(p0, _)
 	local t = {}
 	local t_1 = {}
 	
@@ -21,7 +21,7 @@ local function getNMostRecentUniqueUniverseIds(p0, _) --[[ line: 24 ]]
 	return t
 end
 
-local function _(p1, p2) --[[ line: 37 | named "getHistoryInfo" ]]
+local function _(p1, p2)
 	return {
 		name = p1.name,
 		placeId = tonumber(p1.rootPlaceId),
@@ -30,13 +30,13 @@ local function _(p1, p2) --[[ line: 37 | named "getHistoryInfo" ]]
 	}
 end
 
-return function(p3) --[[ line: 47 | named "useHistoryItems" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), signalsModule (ref), default (ref), getNMostRecentUniqueUniverseIds (ref), getGameInfoStore (ref), getVotesStore (ref), signalsReactModule (ref)
 	p3 = p3 or 2
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 49 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), default (copy), p3 (ref), getNMostRecentUniqueUniverseIds (copy), getGameInfoStore (copy), getVotesStore (copy)
-		return signalsModule.createComputed(function(p4) --[[ line: 50 ]]
+		return signalsModule.createComputed(function(p4)
 			-- upvalues: default (copy), p3 (copy), getNMostRecentUniqueUniverseIds (copy), getGameInfoStore (copy), getVotesStore (copy)
 			local t = {}
 			local var10 = getNMostRecentUniqueUniverseIds(default:getUniverseHistorySignal(p3)(p4), p3)

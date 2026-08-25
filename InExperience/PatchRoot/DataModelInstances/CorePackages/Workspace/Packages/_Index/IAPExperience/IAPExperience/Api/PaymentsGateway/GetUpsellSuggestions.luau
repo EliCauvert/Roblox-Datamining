@@ -10,7 +10,7 @@ local fStringIXPLayerMobileUpsellModule = require(parent.Flags.FStringIXPLayerMo
 local text = url.APIS_URL .. "payments-gateway/v1/products/get-upsell-suggestions"
 local enableUpsellVirtualItemBadge = game:DefineFastFlag("EnableUpsellVirtualItemBadge", false)
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 21 ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: enableUpsellVirtualItemBadge (ref), loggerModule (ref), IXPServiceWrapper (ref), fStringIXPLayerMobileUpsellModule (ref), text (ref), httpRbxApiService (ref), httpService (ref)
 	local badgingV2Variant = nil
 	
@@ -49,7 +49,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 21 ]]
 		url = text,
 		data = t
 	})
-	local ok, status = pcall(function() --[[ line: 76 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpRbxApiService (copy), text (copy), httpService (copy), t (ref)
 		return httpRbxApiService:PostAsyncFullUrl(text, httpService:JSONEncode(t))
 	end)

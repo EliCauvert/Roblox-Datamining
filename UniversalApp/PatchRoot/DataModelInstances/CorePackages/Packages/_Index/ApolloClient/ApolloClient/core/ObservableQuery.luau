@@ -31,34 +31,34 @@ local defaultSubscriptionObserverErrorCallback = nil
 local var8 = false
 local tbl = setmetatable({}, { __index = observable })
 
-function tbl:__index(p0) --[[ line: 89 ]]
+function tbl:__index(p0)
 	-- upvalues: tbl (ref)
 	return if p0 == "variables" then self.options.variables elseif rawget(self, p0) then rawget(self, p0) elseif rawget(tbl, p0) then rawget(tbl, p0) else getmetatable(tbl).__index[p0]
 end
 
-function tbl:__newindex(p1, p2) --[[ line: 103 ]]
+function tbl:__newindex(p1, p2)
 	if p1 == "variables" then
 		error("setting getter-only property 'variables'")
 	end
 	rawset(self, p1, p2)
 end
 
-function tbl.new(p3) --[[ line: 110 ]]
+function tbl.new(p3)
 	-- upvalues: observable (ref), boolean (ref), defaultSubscriptionObserverErrorCallback (write), tbl (ref), set (ref), iterateObserversSafely (ref), object (ref), networkStatus (ref), getOperationDefinition (ref)
 	local queryManager = p3.queryManager
 	local queryInfo = p3.queryInfo
 	local options = p3.options
 	local tbl_1 = nil
-	tbl_1 = setmetatable(observable.new(function(p4) --[[ line: 120 ]]
+	tbl_1 = setmetatable(observable.new(function(p4)
 		-- upvalues: boolean (copy), defaultSubscriptionObserverErrorCallback (copy), tbl_1 (write)
-		xpcall(function() --[[ line: 123 ]]
+		xpcall(function()
 			-- upvalues: p4 (ref), boolean (copy), defaultSubscriptionObserverErrorCallback (copy)
 			local observer = p4._subscription._observer
 			
 			if boolean.toJSBoolean(observer) and not boolean.toJSBoolean(observer.error) then
 				observer.error = defaultSubscriptionObserverErrorCallback
 			end
-		end, function() --[[ line: 128 ]] end)
+		end, function() end)
 		local var12 = not boolean.toJSBoolean(tbl_1.observers.size)
 		tbl_1.observers:add(p4)
 		
@@ -70,9 +70,9 @@ function tbl.new(p3) --[[ line: 110 ]]
 			p4:next(tbl_1.lastResult)
 		end
 		if var12 then
-			tbl_1:reobserve():catch(function() --[[ line: 151 ]] end)
+			tbl_1:reobserve():catch(function() end)
 		end
-		return function() --[[ line: 154 ]]
+		return function()
 			-- upvalues: tbl_1 (copy), p4 (ref), boolean (copy)
 			if tbl_1.observers:delete(p4) and not boolean.toJSBoolean(tbl_1.observers.size) then
 				tbl_1:tearDownQuery()
@@ -82,14 +82,14 @@ function tbl.new(p3) --[[ line: 110 ]]
 	tbl_1.observers = set.new()
 	tbl_1.subscriptions = set.new()
 	tbl_1.observer = {
-		next = function(_, p5) --[[ line: 167 ]]
+		next = function(_, p5)
 			-- upvalues: boolean (copy), tbl_1 (write), iterateObserversSafely (copy)
 			if boolean.toJSBoolean(tbl_1.lastError) or tbl_1:isDifferentFromLastResult(p5) then
 				tbl_1:updateLastResult(p5)
 				iterateObserversSafely(tbl_1.observers, "next", p5)
 			end
 		end,
-		error = function(_, p6) --[[ line: 173 ]]
+		error = function(_, p6)
 			-- upvalues: tbl_1 (write), object (copy), networkStatus (copy), iterateObserversSafely (copy)
 			tbl_1:updateLastResult(object.assign({}, tbl_1.lastResult, {
 				error = p6,
@@ -120,14 +120,14 @@ function tbl.new(p3) --[[ line: 110 ]]
 	return tbl_1
 end
 
-function tbl.result(p7) --[[ line: 215 ]]
+function tbl.result(p7)
 	-- upvalues: promiseModule (ref), boolean (ref), setTimeout (ref)
-	return promiseModule.new(function(p8, p9) --[[ line: 216 ]]
+	return promiseModule.new(function(p8, p9)
 		-- upvalues: p7 (ref), boolean (copy), setTimeout (copy)
 		local var13 = nil
 		local var14 = nil
 		var13 = p7:subscribe({
-			next = function(_, p10) --[[ line: 225 ]]
+			next = function(_, p10)
 				-- upvalues: p8 (ref), p7 (copy), var14 (write), boolean (copy), setTimeout (copy), var13 (write)
 				p8(p10)
 				p7.observers:delete(var14)
@@ -135,12 +135,12 @@ function tbl.result(p7) --[[ line: 215 ]]
 				if not boolean.toJSBoolean(p7.observers.size) then
 					p7.queryManager:removeQuery(p7.queryId)
 				end
-				setTimeout(function() --[[ line: 242 ]]
+				setTimeout(function()
 					-- upvalues: var13 (copy)
 					var13:unsubscribe()
 				end, 0)
 			end,
-			error = function(_, p11) --[[ line: 246 ]]
+			error = function(_, p11)
 				-- upvalues: p9 (ref)
 				p9(p11)
 			end
@@ -148,7 +148,7 @@ function tbl.result(p7) --[[ line: 215 ]]
 	end)
 end
 
-function tbl:getCurrentResult(p12) --[[ line: 255 ]]
+function tbl:getCurrentResult(p12)
 	-- upvalues: boolean (ref), networkStatus (ref), object (ref), isNetworkRequestInFlight (ref), apolloError (ref)
 	if p12 == nil then
 		p12 = true
@@ -189,31 +189,31 @@ function tbl:getCurrentResult(p12) --[[ line: 255 ]]
 	return var17
 end
 
-function tbl:isDifferentFromLastResult(p13) --[[ line: 335 ]]
+function tbl:isDifferentFromLastResult(p13)
 	-- upvalues: equalModule (ref)
 	return not equalModule(self.lastResultSnapshot, p13)
 end
 
-function tbl:getLastResult() --[[ line: 341 ]]
+function tbl:getLastResult()
 	return self.lastResult
 end
 
-function tbl:getLastError() --[[ line: 345 ]]
+function tbl:getLastError()
 	return self.lastError
 end
 
-function tbl:resetLastResults() --[[ line: 349 ]]
+function tbl:resetLastResults()
 	self.lastResult = nil
 	self.lastResultSnapshot = nil
 	self.lastError = nil
 	self.isTornDown = false
 end
 
-function tbl:resetQueryStoreErrors() --[[ line: 356 ]]
+function tbl:resetQueryStoreErrors()
 	self.queryManager:resetErrors(self.queryId)
 end
 
-function tbl:refetch(p14) --[[ line: 367 ]]
+function tbl:refetch(p14)
 	-- upvalues: boolean (ref), equalModule (ref), object (ref), networkStatus (ref)
 	local t = { pollInterval = 0 }
 	local fetchPolicy = self.options.fetchPolicy
@@ -232,9 +232,9 @@ function tbl:refetch(p14) --[[ line: 367 ]]
 	return self:reobserve(t, networkStatus.refetch)
 end
 
-function tbl:fetchMore(p15) --[[ line: 393 ]]
+function tbl:fetchMore(p15)
 	-- upvalues: object (ref), boolean (ref), networkStatus (ref), var8 (write), invariant (ref)
-	local var20 = object.assign({}, (function() --[[ line: 398 ]]
+	local var20 = object.assign({}, (function()
 		-- upvalues: boolean (copy), p15 (ref), object (copy), self (ref)
 		return if boolean.toJSBoolean(p15.query) then p15 else object.assign({}, self.options, p15, {
 			variables = object.assign({}, self.options.variables, p15.variables)
@@ -246,7 +246,7 @@ function tbl:fetchMore(p15) --[[ line: 393 ]]
 		self.queryInfo.networkStatus = networkStatus.fetchMore
 		self:observe()
 	end
-	return self.queryManager:fetchQuery(var21, var20, networkStatus.fetchMore):andThen(function(p18) --[[ line: 431 ]]
+	return self.queryManager:fetchQuery(var21, var20, networkStatus.fetchMore):andThen(function(p18)
 		-- upvalues: p15 (ref), boolean (copy), var8 (copy), invariant (copy), self (ref), var20 (ref)
 		local data = p18.data
 		local updateQuery = p15.updateQuery
@@ -264,19 +264,19 @@ function tbl:fetchMore(p15) --[[ line: 393 ]]
 			var8 = true
 			_G.__WARNED_ABOUT_OBSERVABLE_QUERY_UPDATE_QUERY__ = var8
 		end
-		self:updateQuery(function(p19) --[[ line: 456 ]]
+		self:updateQuery(function(p19)
 			-- upvalues: updateQuery (ref), p15 (copy), data (ref), var20 (copy)
 			return updateQuery(p15, p19, { fetchMoreResult = data, variables = var20.variables })
 		end)
 		
 		return p18
-	end):andThen(function(p17) --[[ line: 479 ]]
+	end):andThen(function(p17)
 		-- upvalues: self (ref), var21 (ref)
 		self.queryManager:stopQuery(var21)
 		self:reobserve()
 		
 		return p17
-	end):catch(function(p16) --[[ line: 484 ]]
+	end):catch(function(p16)
 		-- upvalues: self (ref), var21 (ref)
 		self.queryManager:stopQuery(var21)
 		self:reobserve()
@@ -284,25 +284,25 @@ function tbl:fetchMore(p15) --[[ line: 393 ]]
 	end)
 end
 
-function tbl:subscribeToMore(p20) --[[ line: 494 ]]
+function tbl:subscribeToMore(p20)
 	-- upvalues: boolean (ref), invariant (ref)
 	local var22 = self.queryManager:startGraphQLSubscription({
 		query = p20.document,
 		variables = p20.variables,
 		context = p20.context
 	}):subscribe({
-		next = function(_, p21) --[[ line: 508 ]]
+		next = function(_, p21)
 			-- upvalues: p20 (ref), boolean (copy), self (ref)
 			local updateQuery = p20.updateQuery
 			
 			if boolean.toJSBoolean(updateQuery) then
-				self:updateQuery(function(p22, p23) --[[ line: 511 ]]
+				self:updateQuery(function(p22, p23)
 					-- upvalues: updateQuery (ref), p21 (ref)
 					return updateQuery(p22, { subscriptionData = p21, variables = p23.variables })
 				end)
 			end
 		end,
-		error = function(_, p24) --[[ line: 520 ]]
+		error = function(_, p24)
 			-- upvalues: boolean (copy), p20 (ref), invariant (copy)
 			if boolean.toJSBoolean(p20.onError) then
 				p20:onError(p24)
@@ -314,7 +314,7 @@ function tbl:subscribeToMore(p20) --[[ line: 494 ]]
 	})
 	self.subscriptions:add(var22)
 	
-	return function() --[[ line: 531 ]]
+	return function()
 		-- upvalues: boolean (copy), self (ref), var22 (ref)
 		if boolean.toJSBoolean(self.subscriptions:delete(var22)) then
 			var22:unsubscribe()
@@ -322,11 +322,11 @@ function tbl:subscribeToMore(p20) --[[ line: 494 ]]
 	end
 end
 
-function tbl:setOptions(p25) --[[ line: 538 ]]
+function tbl:setOptions(p25)
 	return self:reobserve(p25)
 end
 
-function tbl:setVariables(p26) --[[ line: 564 ]]
+function tbl:setVariables(p26)
 	-- upvalues: equalModule (ref), boolean (ref), promiseModule (ref), networkStatus (ref)
 	if equalModule(self.variables, p26) then
 		return if boolean.toJSBoolean(self.observers.size) then self:result() else promiseModule.resolve()
@@ -336,7 +336,7 @@ function tbl:setVariables(p26) --[[ line: 564 ]]
 	return if boolean.toJSBoolean(self.observers.size) then self:reobserve({ fetchPolicy = self.initialFetchPolicy, variables = p26 }, networkStatus.setVariables) else promiseModule.resolve()
 end
 
-function tbl:updateQuery(p27) --[[ line: 590 ]]
+function tbl:updateQuery(p27)
 	-- upvalues: boolean (ref)
 	local queryManager = self.queryManager
 	local _ = nil
@@ -358,23 +358,23 @@ function tbl:updateQuery(p27) --[[ line: 590 ]]
 	end
 end
 
-function tbl:startPolling(p28) --[[ line: 623 ]]
+function tbl:startPolling(p28)
 	self.options.pollInterval = p28
 	self:updatePolling()
 end
 
-function tbl:stopPolling() --[[ line: 628 ]]
+function tbl:stopPolling()
 	self.options.pollInterval = 0
 	self:updatePolling()
 end
 
-function tbl:fetch(p29, p30) --[[ line: 633 ]]
+function tbl:fetch(p29, p30)
 	self.queryManager:setObservableQuery(self)
 	
 	return self.queryManager:fetchQueryObservable(self.queryId, p29, p30)
 end
 
-function tbl:updatePolling() --[[ line: 642 ]]
+function tbl:updatePolling()
 	-- upvalues: boolean (ref), clearTimeout (ref), invariant (ref), isNetworkRequestInFlight (ref), networkStatus (ref), setTimeout (ref)
 	local var24 = nil
 	
@@ -396,7 +396,7 @@ function tbl:updatePolling() --[[ line: 642 ]]
 			end
 			var25.interval = pollInterval
 			
-			local function maybeFetch() --[[ line: 673 ]]
+			local function maybeFetch()
 				-- upvalues: boolean (copy), self (ref), isNetworkRequestInFlight (copy), networkStatus (copy), var24 (write)
 				if boolean.toJSBoolean(self.pollingInfo) then
 					if not isNetworkRequestInFlight(self.queryInfo.networkStatus) then
@@ -408,7 +408,7 @@ function tbl:updatePolling() --[[ line: 642 ]]
 				end
 			end
 			
-			;(function() --[[ line: 685 | named "poll" ]]
+			;(function()
 				-- upvalues: self (ref), boolean (copy), clearTimeout (copy), setTimeout (copy), maybeFetch (ref)
 				local pollingInfo = self.pollingInfo
 				
@@ -428,7 +428,7 @@ function tbl:updatePolling() --[[ line: 642 ]]
 	end
 end
 
-function tbl:updateLastResult(p31) --[[ line: 699 ]]
+function tbl:updateLastResult(p31)
 	-- upvalues: boolean (ref), cloneDeep (ref), isNonEmptyArray (ref)
 	local lastResult = self.lastResult
 	self.lastResult = p31
@@ -444,7 +444,7 @@ function tbl:updateLastResult(p31) --[[ line: 699 ]]
 	return lastResult
 end
 
-function tbl:reobserve(p32, p33) --[[ line: 715 ]]
+function tbl:reobserve(p32, p33)
 	-- upvalues: networkStatus (ref), compact (ref), object (ref), boolean (ref), equalModule (ref)
 	self.isTornDown = false
 	local var27 = if p33 ~= networkStatus.refetch then if p33 ~= networkStatus.fetchMore then p33 == networkStatus.poll else true else true
@@ -475,15 +475,15 @@ function tbl:reobserve(p32, p33) --[[ line: 715 ]]
 	return var29.promise
 end
 
-function tbl:observe() --[[ line: 785 ]]
+function tbl:observe()
 	self.observer:next(self:getCurrentResult(false))
 end
 
-function tbl:hasObservers() --[[ line: 793 ]]
+function tbl:hasObservers()
 	return self.observers.size > 0
 end
 
-function tbl:tearDownQuery() --[[ line: 797 ]]
+function tbl:tearDownQuery()
 	-- upvalues: boolean (ref)
 	if boolean.toJSBoolean(self.isTornDown) then return end
 	if boolean.toJSBoolean(self.concast) then
@@ -491,7 +491,7 @@ function tbl:tearDownQuery() --[[ line: 797 ]]
 		self.concast = nil
 	end
 	self:stopPolling()
-	self.subscriptions:forEach(function(p34) --[[ line: 809 ]]
+	self.subscriptions:forEach(function(p34)
 		return p34:unsubscribe()
 	end)
 	self.subscriptions:clear()
@@ -503,12 +503,12 @@ end
 fixObservableSubclass(tbl)
 t.ObservableQuery = tbl
 
-defaultSubscriptionObserverErrorCallback = function(_, p35) --[[ line: 825 | named "defaultSubscriptionObserverErrorCallback" ]]
+defaultSubscriptionObserverErrorCallback = function(_, p35)
 	-- upvalues: invariant (ref)
 	invariant.error("Unhandled error", p35.message, p35.stack)
 end
 
-function t.applyNextFetchPolicy(p36) --[[ line: 833 ]]
+function t.applyNextFetchPolicy(p36)
 	-- upvalues: boolean (ref), isCallableModule (ref)
 	local var30 = if p36.fetchPolicy == nil then "cache-first" else p36.fetchPolicy
 	local nextFetchPolicy = p36.nextFetchPolicy

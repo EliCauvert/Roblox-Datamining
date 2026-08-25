@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
-return function(p0) --[[ line: 17 | named "ProviderContainer" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local providers = p0.providers or {}
 	local t = {

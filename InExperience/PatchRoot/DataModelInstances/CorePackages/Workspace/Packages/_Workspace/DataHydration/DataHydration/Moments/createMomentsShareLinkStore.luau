@@ -6,11 +6,11 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
 local fetchShareLinkModule = require(script.Parent.Requests.fetchShareLink)
 
-local function shouldRefreshCachedShareLink(p0) --[[ line: 17 ]]
+local function shouldRefreshCachedShareLink(p0)
 	return p0 == nil
 end
 
-return function(p1) --[[ line: 21 | named "createMomentsShareLinkStore" ]]
+return function(p1)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), httpClientModule (ref), fetchShareLinkModule (ref), shouldRefreshCachedShareLink (ref)
 	p1 = p1 or {}
 	local t = {}
@@ -20,7 +20,7 @@ return function(p1) --[[ line: 21 | named "createMomentsShareLinkStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
-		fetchFn = function(p2, _) --[[ line: 34 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: httpClientModule (copy), fetchShareLinkModule (copy), t_2 (write), t (write), t_1 (write), p1 (ref)
 			return httpClientModule.asPromise(fetchShareLinkModule({
 				momentId = p2,
@@ -31,7 +31,7 @@ return function(p1) --[[ line: 21 | named "createMomentsShareLinkStore" ]]
 		end
 	})
 	
-	local function _(value, p3, p4, p5) --[[ line: 46 | named "setRequestParams" ]]
+	local function _(value, p3, p4, p5)
 		-- upvalues: t (write), t_1 (write), t_2 (write)
 		t[value] = p3
 		t_1[value] = p4
@@ -41,11 +41,11 @@ return function(p1) --[[ line: 21 | named "createMomentsShareLinkStore" ]]
 	end
 	
 	return {
-		getCachedShareLink = function(p6) --[[ line: 53 ]]
+		getCachedShareLink = function(p6)
 			-- upvalues: var10 (ref)
 			return var10.getCachedItem(p6)
 		end,
-		fetchShareLink = function(p7, p8, p9, p10) --[[ line: 57 ]]
+		fetchShareLink = function(p7, p8, p9, p10)
 			-- upvalues: var10 (ref), t (write), t_1 (write), t_2 (write)
 			local fetchItem = var10.fetchItem
 			t[p7] = p8
@@ -54,7 +54,7 @@ return function(p1) --[[ line: 21 | named "createMomentsShareLinkStore" ]]
 			
 			return fetchItem(p7)
 		end,
-		getAndFetchShareLink = function(p11, p12, p13, p14) --[[ line: 66 ]]
+		getAndFetchShareLink = function(p11, p12, p13, p14)
 			-- upvalues: var10 (ref), t (write), t_1 (write), t_2 (write), shouldRefreshCachedShareLink (copy)
 			local getAndFetchItem = var10.getAndFetchItem
 			t[p11] = p12
@@ -63,14 +63,14 @@ return function(p1) --[[ line: 21 | named "createMomentsShareLinkStore" ]]
 			
 			return getAndFetchItem(p11, shouldRefreshCachedShareLink)
 		end,
-		clear = function() --[[ line: 78 ]]
+		clear = function()
 			-- upvalues: t (write), t_1 (write), t_2 (write), var10 (ref)
 			t = {}
 			t_1 = {}
 			t_2 = {}
 			var10.clear()
 		end,
-		dispose = function() --[[ line: 85 ]]
+		dispose = function()
 			-- upvalues: t (write), t_1 (write), t_2 (write), var10 (ref)
 			t = {}
 			t_1 = {}

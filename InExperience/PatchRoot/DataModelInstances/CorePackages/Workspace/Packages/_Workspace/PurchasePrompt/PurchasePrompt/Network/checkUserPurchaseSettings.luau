@@ -2,12 +2,12 @@
 local purchaseErrorModule = require(parent.Enums.PurchaseError)
 local promiseModule = require(parent.Promise)
 
-return function(value) --[[ line: 7 | named "checkUserPurchaseSettings" ]]
+return function(value)
 	-- upvalues: promiseModule (ref), purchaseErrorModule (ref)
-	return value.checkUserPurchaseSettings():andThen(function(p0) --[[ line: 10 ]]
+	return value.checkUserPurchaseSettings():andThen(function(p0)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(p0)
-	end):catch(function(_) --[[ line: 13 ]]
+	end):catch(function(_)
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailure)
 	end)

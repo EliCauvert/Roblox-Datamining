@@ -11,19 +11,19 @@ local AXSendSessionForEvents = game:DefineFastFlag("AXSendSessionForEvents", fal
 return {
 	Diag = var4.Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p0, p1, p2) --[[ line: 17 ]]
+		setRBXEventStream = function(_, p0, p1, p2)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
 			eventIngestService:SetRBXEventStream(getPlatformTarget(), p0, p1, p2 or {})
 		end,
-		sendEventDeferred = function(_, p3, p4, p5) --[[ line: 22 ]]
+		sendEventDeferred = function(_, p3, p4, p5)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
 			eventIngestService:SendEventDeferred(getPlatformTarget(), p3, p4, p5 or {})
 		end,
-		sendEventImmediately = function(_, p6, p7, p8) --[[ line: 27 ]]
+		sendEventImmediately = function(_, p6, p7, p8)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
 			eventIngestService:SendEventImmediately(getPlatformTarget(), p6, p7, p8 or {})
 		end,
-		sendTelemetryEvent = function(_, p9, p10, p11) --[[ line: 32 ]]
+		sendTelemetryEvent = function(_, p9, p10, p11)
 			-- upvalues: default (ref), AXSendSessionForEvents (ref), sessionService (ref)
 			default:logRobloxTelemetryEvent({
 				throttlingPercentage = 10000,

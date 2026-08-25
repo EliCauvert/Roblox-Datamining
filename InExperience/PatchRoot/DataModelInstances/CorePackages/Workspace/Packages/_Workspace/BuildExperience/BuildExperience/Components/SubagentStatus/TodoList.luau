@@ -8,14 +8,14 @@ local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 
-local function createTrailingIndicator(p0, p1) --[[ line: 34 ]]
+local function createTrailingIndicator(p0, p1)
 	-- upvalues: subagentTaskStatus (ref), reactModule (ref), view (ref), loadingIndicatorModule (ref)
 	return if p0.status == nil or p0.status == subagentTaskStatus.Pending then nil else reactModule.createElement(view, { tag = "auto-xy" }, {
 		Indicator = reactModule.createElement(loadingIndicatorModule, { status = p0.status, testId = `{p1}-loading-indicator` })
 	})
 end
 
-return reactModule.memo(function(p2) --[[ line: 49 | named "TodoList" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: reactModule (ref), list (ref), createTrailingIndicator (ref), inputSize (ref)
 	local testId = p2.testId or "subagent-status-list"
 	local t = {}

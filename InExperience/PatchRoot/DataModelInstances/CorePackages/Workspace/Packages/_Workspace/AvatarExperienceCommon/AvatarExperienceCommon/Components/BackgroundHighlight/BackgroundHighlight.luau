@@ -14,7 +14,7 @@ local numberSequence_1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function Gradient(p0) --[[ line: 32 ]]
+local function Gradient(p0)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -26,7 +26,7 @@ local function Gradient(p0) --[[ line: 32 ]]
 	})
 end
 
-return function(value) --[[ line: 48 | named "BackgroundHighlight" ]]
+return function(value)
 	-- upvalues: reactModule (ref), Gradient (ref), numberSequence_1 (ref), numberSequence (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,

@@ -6,7 +6,7 @@ local createPause = require(roduxSquads.Persists.Actions).createPause
 local createPersistAndUpdateState = require(roduxSquads.Persists.Actions).createPersistAndUpdateState
 local t = { isPaused = false }
 
-return function(p0, p1) --[[ line: 13 ]]
+return function(p0, p1)
 	-- upvalues: createPause (ref), createPersistAndUpdateState (ref), createInternalPersistManager (ref), createPersistManager (ref), t (ref), roduxModule (ref)
 	local var3 = false
 	local var4 = createPause(p0)
@@ -18,13 +18,13 @@ return function(p0, p1) --[[ line: 13 ]]
 	local var9 = nil
 	
 	if var6 then
-		var9 = var6.bindToStorage(function(p2) --[[ line: 27 ]]
+		var9 = var6.bindToStorage(function(p2)
 			-- upvalues: var8 (write)
 			var8 = p2
 		end)
 		var8 = var6.get()
 	end
-	return function(p3, p4) --[[ line: 33 ]]
+	return function(p3, p4)
 		-- upvalues: var6 (ref), var3 (write), var8 (write), var5 (ref), isPaused (write), p1 (ref)
 		if var6 and not var3 then
 			p3 = var8 or p3
@@ -45,13 +45,13 @@ return function(p0, p1) --[[ line: 13 ]]
 		end
 		return var10
 	end, roduxModule.createReducer(t, {
-		[var5.name] = function(_, _) --[[ line: 55 ]]
+		[var5.name] = function(_, _)
 			-- upvalues: isPaused (write)
 			isPaused = false
 			
 			return { isPaused = isPaused }
 		end,
-		[var4.name] = function(_, _) --[[ line: 59 ]]
+		[var4.name] = function(_, _)
 			-- upvalues: isPaused (write)
 			isPaused = true
 			

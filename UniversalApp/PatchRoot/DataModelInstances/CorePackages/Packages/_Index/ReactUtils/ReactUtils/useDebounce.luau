@@ -1,11 +1,11 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0, p1) --[[ line: 7 | named "useDebounce" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useState(p0)
-	reactModule.useLayoutEffect(function() --[[ line: 10 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var2 (ref), p0 (ref), p1 (ref)
-		local function updateValue() --[[ line: 11 ]]
+		local function updateValue()
 			-- upvalues: var2 (copy), p0 (copy)
 			var2(p0)
 		end
@@ -17,7 +17,7 @@ return function(p0, p1) --[[ line: 7 | named "useDebounce" ]]
 		end
 		local delayedThread = task.delay(p1, updateValue)
 		
-		return function() --[[ line: 22 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end

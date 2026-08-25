@@ -1,7 +1,7 @@
-﻿return function(p0, p1, p2, p3) --[[ line: 21 | named "sampleVideoFrames" ]]
-	task.spawn(function() --[[ line: 22 ]]
+﻿return function(p0, p1, p2, p3)
+	task.spawn(function()
 		-- upvalues: p0 (ref), p3 (ref), p1 (ref), p2 (ref)
-		local ok, status = pcall(function() --[[ line: 23 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p0 (copy), p3 (copy), p1 (copy)
 			local var0 = game:GetService("VideoService"):CreateVideoSamplerAsync(p0)
 			local p3_1 = p3 or 0

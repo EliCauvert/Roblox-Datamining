@@ -1,13 +1,13 @@
 ﻿local t = {}
 local thunkTag = require(script.Parent.Symbol).named("ThunkTag")
 
-function t.middleware(p0) --[[ line: 15 ]]
+function t.middleware(p0)
 	-- upvalues: thunkTag (ref)
 	p0 = p0 or {}
 	
-	return function(p1, p2) --[[ line: 18 ]]
+	return function(p1, p2)
 		-- upvalues: thunkTag (copy), p0 (write)
-		return function(p3) --[[ line: 23 ]]
+		return function(p3)
 			-- upvalues: thunkTag (copy), p0 (copy), p2 (ref), p1 (ref)
 			if p3[thunkTag] ~= true then
 				return p1(p3)
@@ -27,7 +27,7 @@ function t.middleware(p0) --[[ line: 15 ]]
 	end
 end
 
-function t.new(p4, p5, p6) --[[ line: 51 ]]
+function t.new(p4, p5, p6)
 	-- upvalues: thunkTag (ref)
 	assert(typeof(p4) == "string", "Bad arg #1: name must be a string")
 	assert(if p5 ~= nil then typeof(p5) == "table" else true, "Bad arg #2: requiredServices must be a table or nil")
@@ -38,14 +38,14 @@ function t.new(p4, p5, p6) --[[ line: 51 ]]
 		type = p4,
 		requiredServices = p5 or {}
 	}, {
-		__call = function(_, ...) --[[ line: 66 ]]
+		__call = function(_, ...)
 			-- upvalues: p6 (ref)
 			p6(...)
 		end
 	})
 end
 
-function t.test(p7, p8, p9) --[[ line: 72 ]]
+function t.test(p7, p8, p9)
 	-- upvalues: thunkTag (ref)
 	assert(typeof(p7) == "table" and p7[thunkTag] == true, "Test Error - Bad arg #1: Must provide a valid thunk")
 	

@@ -25,7 +25,7 @@ local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
 local useScheduledSquad = require(parent.SquadsCore.Hooks).useScheduledSquad
 local scheduledSquadJustStartedThreshold = game:DefineFastInt("ScheduledSquadJustStartedThreshold", 300)
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useNavigation (ref), reactModule (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useScheduledSquad (ref), scheduledSquadJustStartedThreshold (ref), cryoModule (ref), getScheduledSquadsStore (ref), userProfileStore (ref), useLocalization (ref), localizationService (ref), eventNamesModule (ref), scheduledSquadActionEnum (ref), scheduledSquadActionSourceEnum (ref), foundationModule (ref), avatarGroup (ref), inputSize (ref), avatarGroupType (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), scheduledSquadsMoreInfoSheet (ref)
 	local var7 = useTokens()
 	local var8 = useNavigation()
@@ -38,37 +38,37 @@ return function(p0) --[[ line: 40 ]]
 	local var18, var19 = reactModule.useState("")
 	local var20 = useScheduledSquad(p0.scheduledGroupUpId)
 	local var14_1 = var14 or var16
-	local var22 = reactModule.useMemo(function() --[[ line: 59 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		return if p0.startTime then DateTime.fromIsoDate(p0.startTime) else nil
 	end, { p0.startTime })
-	local var23 = reactModule.useMemo(function() --[[ line: 62 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var22 (ref)
 		return var22 and var22.UnixTimestamp < DateTime.now().UnixTimestamp
 	end, { var22 })
-	local var24 = reactModule.useMemo(function() --[[ line: 65 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: var22 (ref), scheduledSquadJustStartedThreshold (copy)
 		return var22 and (var22.UnixTimestamp <= DateTime.now().UnixTimestamp and DateTime.now().UnixTimestamp - var22.UnixTimestamp < scheduledSquadJustStartedThreshold)
 	end, { var22 })
-	local var25 = reactModule.useMemo(function() --[[ line: 71 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), p0 (ref), cryoModule (copy)
-		return cryoModule.List.map((var20 or p0).subscribers, function(p1) --[[ line: 73 ]]
+		return cryoModule.List.map((var20 or p0).subscribers, function(p1)
 			return p1.userId
 		end)
 	end, { var20, p0 })
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var23 (ref), getScheduledSquadsStore (copy), p0 (ref), var17 (ref)
 		if var11 or var23 then
 			var17(false)
 			
 			return
 		end
-		getScheduledSquadsStore(false).fetchAndCacheScheduledSquadStatus(p0.scheduledGroupUpId, function() --[[ line: 81 ]]
+		getScheduledSquadsStore(false).fetchAndCacheScheduledSquadStatus(p0.scheduledGroupUpId, function()
 			-- upvalues: var17 (copy)
 			var17(false)
 		end)
 	end, { var11, var23, p0.scheduledGroupUpId })
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var23 (ref), var15 (ref), userProfileStore (copy), var20 (ref), p0 (ref), var19 (ref)
 		if var11 or var23 then
 			var15(false)
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 40 ]]
 		end
 		userProfileStore.get().fetchNamesByUserIds({
 			tostring(if var20 then var20.initiatorId else p0.initiatorId)
-		}, function(p2) --[[ line: 96 ]]
+		}, function(p2)
 			-- upvalues: var19 (copy), var15 (copy)
 			local status = p2.status
 			local data = p2.data
@@ -112,7 +112,7 @@ return function(p0) --[[ line: 40 ]]
 		})
 	}) else reactModule.createElement(foundationModule.View, {
 		tag = "auto-y bg-shift-200 radius-large col padding-y-medium padding-x-large align-x-center gap-medium flex-fill",
-		onActivated = reactModule.useCallback(function() --[[ line: 128 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: var13 (ref), var9 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p0 (ref), var20 (ref), p0 (ref), scheduledSquadActionSourceEnum (copy), var10 (ref)
 			var13(true)
 			var9.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
@@ -173,7 +173,7 @@ return function(p0) --[[ line: 40 ]]
 				layoutOrder = 3,
 				shouldAnimate = false,
 				conversationId = p0.parentChannelId,
-				onActivated = reactModule.useCallback(function() --[[ line: 157 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var8 (ref), p0 (ref)
 					var8.navigate("SquadLobby", {
 						conversationId = p0.parentChannelId,
@@ -186,7 +186,7 @@ return function(p0) --[[ line: 40 ]]
 		}) else nil,
 		Sheet = if not var11 then reactModule.createElement(scheduledSquadsMoreInfoSheet, {
 			isOpen = var12,
-			onClose = reactModule.useCallback(function() --[[ line: 153 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: var13 (ref)
 				var13(false)
 			end, { var13 }),

@@ -184,7 +184,7 @@ local t = {
 	}) else nil
 }
 
-return function(p0, p1, p2) --[[ line: 236 ]]
+return function(p0, p1, p2)
 	-- upvalues: appPage (ref), var10 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var7 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var8 (write)
 	local _ = nil
 	local var12 = if p2.seeAllFlag and (p1 == appPage.Home or p1 == appPage.Games) then var10 else t[p1]

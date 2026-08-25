@@ -1,6 +1,6 @@
 ﻿local iconSize = require(script.Parent.Parent.Parent.Foundation).Enums.IconSize
 
-return function(p0, p1) --[[ line: 15 | named "getLoadingIconSize" ]]
+return function(p0, p1)
 	-- upvalues: iconSize (ref)
 	if p0 == nil then
 		return nil

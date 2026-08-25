@@ -14,11 +14,11 @@ local inputSize = foundationModule.Enums.InputSize
 local radius = foundationModule.Enums.Radius
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-local function _(p0) --[[ line: 44 | named "trim" ]]
+local function _(p0)
 	return string.gsub(p0, "^%s*(.-)%s*$", "%1")
 end
 
-local function renderSkeletonRow(p1, p2) --[[ line: 50 ]]
+local function renderSkeletonRow(p1, p2)
 	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
@@ -45,7 +45,7 @@ local function renderSkeletonRow(p1, p2) --[[ line: 50 ]]
 	})
 end
 
-return function(p3) --[[ line: 79 | named "UserPickerList" ]]
+return function(p3)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), renderSkeletonRow (ref), reactModule (ref), view (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
 	local var7 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		noResults = localizationStringsModule.USER_PICKER_NO_RESULTS
@@ -87,7 +87,7 @@ return function(p3) --[[ line: 79 | named "UserPickerList" ]]
 			userId = v,
 			isSelected = p3.isSelected(v),
 			isDisabled = not p3.canSelect(v),
-			onToggle = function() --[[ line: 128 ]]
+			onToggle = function()
 				-- upvalues: p3 (ref), v (ref)
 				p3.toggleSelected(v)
 			end,

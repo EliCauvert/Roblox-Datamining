@@ -31,7 +31,7 @@ local t_3 = {
 	UPDATE_PROFILE = "Failed to update profile"
 }
 
-local function getErrorType(p0) --[[ line: 37 ]]
+local function getErrorType(p0)
 	-- upvalues: t_1 (ref), t (ref)
 	if typeof(p0) == "table" then
 		if p0.message and string.find(string.lower(p0.message), "timeout") then
@@ -61,7 +61,7 @@ return {
 	ERROR_MESSAGES = t_2,
 	DEFAULT_ERROR_MESSAGES = t_3,
 	getErrorType = getErrorType,
-	getErrorMessage = function(p1, p2) --[[ line: 66 ]]
+	getErrorMessage = function(p1, p2)
 		-- upvalues: getErrorType (ref), t_2 (ref), t_3 (ref)
 		local var6 = t_2[getErrorType(p1)]
 		

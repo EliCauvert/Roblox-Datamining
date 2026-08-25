@@ -10,7 +10,7 @@ local colorTextButtonModule = require(avatarExperienceControlBar.Components.Butt
 local AXDisableControlBarMenuAnimation = game:DefineFastFlag("AXDisableControlBarMenuAnimation", false)
 local t = { dampingRatio = 1, frequency = 5 }
 
-return function(p0) --[[ line: 30 | named "IconTextMenu" ]]
+return function(p0)
 	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), reactOtterModule (ref), t (ref), iconTextButtonModule (ref), colorTextButtonModule (ref), foundationModule (ref), AXDisableControlBarMenuAnimation (ref)
 	local var9 = useSemanticTokensModule()
 	local var10, var11 = reactModule.useBinding(0)
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 30 | named "IconTextMenu" ]]
 	return reactModule.createElement(foundationModule.View, {
 		tag = "clip",
 		Name = "IconTextMenu-Animation-Container",
-		Size = if AXDisableControlBarMenuAnimation then nil else reactModule.joinBindings({ X = var10, Y = var12 }):map(function(p1) --[[ line: 95 ]]
+		Size = if AXDisableControlBarMenuAnimation then nil else reactModule.joinBindings({ X = var10, Y = var12 }):map(function(p1)
 			return UDim2.fromOffset(p1.X, math.round(p1.Y))
 		end),
 		AutomaticSize = if AXDisableControlBarMenuAnimation then Enum.AutomaticSize.XY else nil,
@@ -33,13 +33,13 @@ return function(p0) --[[ line: 30 | named "IconTextMenu" ]]
 			backgroundStyle = var9.menuBackgroundStyle,
 			cornerRadius = UDim.new(0, p0.radius or var9.defaultIconTextMenuRadius),
 			ref = reactModule.useRef(nil),
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2) --[[ line: 41 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var11 (ref), var13 (ref), reactOtterModule (copy), var14 (ref), t (copy)
 				local absoluteSize = p2.AbsoluteSize
 				var11(absoluteSize.X)
 				var13(reactOtterModule.spring(if var14 then absoluteSize.Y else 0, t))
 			end, { var14 })
-		}, reactModule.useMemo(function() --[[ line: 47 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), iconTextButtonModule (copy), colorTextButtonModule (copy)
 			local t = {}
 			
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 30 | named "IconTextMenu" ]]
 						text = v.text,
 						iconSize = v.iconSize,
 						disabled = v.disabled,
-						onActivated = function() --[[ line: 56 ]]
+						onActivated = function()
 							-- upvalues: p0 (copy), v (ref)
 							if p0.onItemActivated then
 								p0.onItemActivated(v.id)
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 30 | named "IconTextMenu" ]]
 						size = v.size,
 						text = v.text,
 						disabled = v.disabled,
-						onActivated = function() --[[ line: 74 ]]
+						onActivated = function()
 							-- upvalues: p0 (copy), v (ref)
 							if p0.onItemActivated then
 								p0.onItemActivated(v.id)

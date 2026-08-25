@@ -25,7 +25,7 @@ toastText.defaultProps = {
 	TextYAlignment = Enum.TextYAlignment.Center
 }
 
-function toastText.render(p0) --[[ line: 39 ]]
+function toastText.render(p0)
 	-- upvalues: roactModule (ref), genericTextLabelModule (ref)
 	return roactModule.createElement(genericTextLabelModule, p0.props)
 end

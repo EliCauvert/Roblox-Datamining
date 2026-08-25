@@ -2,7 +2,7 @@
 local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 local t = { TabSelectionHeight = 6 }
 
-function t.MakeTabSelectionWidget(value) --[[ line: 24 ]]
+function t.MakeTabSelectionWidget(value)
 	-- upvalues: create (ref), t (ref)
 	return create("ImageLabel")({
 		Name = "TabSelection",

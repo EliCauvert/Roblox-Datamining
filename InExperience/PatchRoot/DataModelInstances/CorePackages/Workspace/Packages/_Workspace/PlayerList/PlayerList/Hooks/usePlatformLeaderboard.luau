@@ -2,7 +2,7 @@
 local reactModule = require(parent.Parent.React)
 local platformLeaderboardStoreContextModule = require(parent.Common.PlatformLeaderboardStoreContext)
 
-return function() --[[ line: 8 | named "usePlatformLeaderboard" ]]
+return function()
 	-- upvalues: reactModule (ref), platformLeaderboardStoreContextModule (ref)
 	return reactModule.useContext(platformLeaderboardStoreContextModule)
 end

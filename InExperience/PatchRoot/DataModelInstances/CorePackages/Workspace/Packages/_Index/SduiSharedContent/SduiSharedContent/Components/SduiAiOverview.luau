@@ -14,12 +14,12 @@ local chipVariant = foundationModule.Enums.ChipVariant
 local iconName = foundationModule.Enums.IconName
 local useAiOverviewExpansionModule = require(script.Parent.useAiOverviewExpansion)
 
-return reactModule.memo(function(p0) --[[ line: 48 | named "SduiAiOverview" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), usePreferences (ref), useLocalization (ref), reactModule (ref), cryoModule (ref), useAiOverviewExpansionModule (ref), view (ref), divider (ref), chip (ref), iconName (ref), chipSize (ref), chipVariant (ref)
 	local var4 = useTokens()
 	local var5 = usePreferences()
 	local var6 = useLocalization({ expandButtonText = "CommonUI.Controls.Action.ShowMore" })
-	local var7 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		return {
 			index = p0.index,
@@ -33,7 +33,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "SduiAiOverview" ]]
 		p0.verticalScrollingFrameRef,
 		p0.startRow
 	})
-	local var8 = reactModule.useCallback(function(p1) --[[ line: 67 ]]
+	local var8 = reactModule.useCallback(function(p1)
 		-- upvalues: reactModule (copy), cryoModule (copy), var7 (ref)
 		if not p1 or typeof(p1) ~= "table" then
 			return p1
@@ -47,11 +47,11 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "SduiAiOverview" ]]
 		end
 		return t
 	end, { var7 })
-	local var9 = reactModule.useMemo(function() --[[ line: 82 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), p0 (ref)
 		return var8(p0.content)
 	end, { p0.content, var8 })
-	local var10 = reactModule.useMemo(function() --[[ line: 86 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), p0 (ref)
 		return var8(p0.footer)
 	end, { p0.footer, var8 })
@@ -109,7 +109,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "SduiAiOverview" ]]
 					["auto-none"] = var15.useCompactViewport,
 					["auto-y"] = not var15.useCompactViewport
 				},
-				Size = if var15.useCompactViewport then var15.animatedViewportHeight:map(function(p2) --[[ line: 169 ]]
+				Size = if var15.useCompactViewport then var15.animatedViewportHeight:map(function(p2)
 					return UDim2.new(1, 0, 0, math.ceil(p2))
 				end) else UDim2.fromScale(1, 0)
 			}, {
@@ -147,7 +147,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "SduiAiOverview" ]]
 					tag = "position-bottom-left anchor-bottom-left",
 					ZIndex = 2,
 					backgroundStyle = p0.backgroundStyle or var4.Color.Surface.Surface_0,
-					Size = var15.animatedViewportHeight:map(function(p3) --[[ line: 213 ]]
+					Size = var15.animatedViewportHeight:map(function(p3)
 						return UDim2.new(1, 0, 0, math.ceil(p3 * 0.25))
 					end)
 				}, {

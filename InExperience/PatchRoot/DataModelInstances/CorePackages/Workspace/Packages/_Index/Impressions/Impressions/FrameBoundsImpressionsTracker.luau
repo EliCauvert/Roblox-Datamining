@@ -6,7 +6,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
 local fFlagLuaAppRespectClipAncestorImpressions = sharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref), useViewportBounds (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), reactModule (ref), impressionsTrackerModule (ref)
 	local var6
 	local _ = nil

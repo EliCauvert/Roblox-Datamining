@@ -37,7 +37,7 @@ local t_1 = {
 	[Enum.RigLabel.RightClavicle] = UGCValidationTposeClavicleDegreeOffsetThreshold
 }
 
-local function checkJointTposeAdjustment(p0, p1, p2, p3, p4, p5) --[[ line: 42 ]]
+local function checkJointTposeAdjustment(p0, p1, p2, p3, p4, p5)
 	-- upvalues: UGCValidationService (ref), getDiffBetweenOrientationsModule (ref), errorSourceStringsModule (ref), cFrameUtilsModule (ref), vector3UtilsModule (ref), valueToStringModule (ref)
 	local var18 = UGCValidationService:GetExpectedTposeRotation(p1, p3)
 	
@@ -56,7 +56,7 @@ local function checkJointTposeAdjustment(p0, p1, p2, p3, p4, p5) --[[ line: 42 ]
 	end
 end
 
-function t.run(p6, p7) --[[ line: 69 ]]
+function t.run(p6, p7)
 	-- upvalues: getAllInstancesIsAModule (ref), var15 (ref), checkJointTposeAdjustment (ref), t_1 (ref), UGCValidationTposeGeneralDegreeOffsetThreshold (ref), UGCValidationTposeFingerDegreeOffsetThreshold (ref)
 	local rootInstance = p7.rootInstance
 	

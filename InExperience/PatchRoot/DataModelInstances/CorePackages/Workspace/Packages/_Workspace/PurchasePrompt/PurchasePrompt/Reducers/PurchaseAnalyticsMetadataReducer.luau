@@ -9,7 +9,7 @@ local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPu
 local t = {}
 
 return rodux.createReducer(t, {
-	[setPurchaseAnalyticsMetadataModule.name] = function(_, p0) --[[ line: 18 ]]
+	[setPurchaseAnalyticsMetadataModule.name] = function(_, p0)
 		-- upvalues: fFlagUnifiedPurchaseGamepassAddProductUniverseId (ref)
 		return {
 			purchaseFlowUUID = p0.purchaseAnalyticsMetadata.purchaseFlowUUID,
@@ -24,7 +24,7 @@ return rodux.createReducer(t, {
 			eventMetadata = p0.purchaseAnalyticsMetadata.eventMetadata
 		}
 	end,
-	[completeRequestModule.name] = function(p1, _) --[[ line: 34 ]]
+	[completeRequestModule.name] = function(p1, _)
 		-- upvalues: fFlagPassShopPurchaseSurfaceToBuyModal (ref), t (ref)
 		return if fFlagPassShopPurchaseSurfaceToBuyModal then t else p1
 	end

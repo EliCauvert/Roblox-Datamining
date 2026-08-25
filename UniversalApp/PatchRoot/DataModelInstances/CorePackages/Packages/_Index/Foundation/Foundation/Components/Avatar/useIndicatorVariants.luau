@@ -6,7 +6,7 @@ local indicatorShapeModule = require(foundation.Enums.IndicatorShape)
 local indicatorVariantModule = require(foundation.Enums.IndicatorVariant)
 local _ = require(foundation.Components.Types)
 
-function mapToProps(p0, p1, p2) --[[ line: 29 ]]
+function mapToProps(p0, p1, p2)
 	-- upvalues: indicatorShapeModule (ref)
 	local uDim2 = UDim2.fromOffset(p2, p2)
 	
@@ -25,7 +25,7 @@ function mapToProps(p0, p1, p2) --[[ line: 29 ]]
 	} else { indicator = { imageStyle = p1, Size = uDim2 } }
 end
 
-local function variantsFactory(p3) --[[ line: 61 ]]
+local function variantsFactory(p3)
 	-- upvalues: indicatorVariantModule (ref), indicatorShapeModule (ref)
 	return {
 		shapes = {
@@ -42,7 +42,7 @@ local function variantsFactory(p3) --[[ line: 61 ]]
 	}
 end
 
-return function(p4, p5, p6, p7) --[[ line: 78 ]]
+return function(p4, p5, p6, p7)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local indicator = variantsContextModule.useVariants("Indicator", variantsFactory, p4)
 	

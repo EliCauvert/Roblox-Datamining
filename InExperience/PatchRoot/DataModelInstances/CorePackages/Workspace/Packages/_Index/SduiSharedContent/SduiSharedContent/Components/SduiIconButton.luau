@@ -3,9 +3,9 @@ local reactModule = require(parent.React)
 local _ = require(parent.SduiCompat)
 local iconButton = require(parent.Foundation).IconButton
 
-local var1 = function() --[[ line: 10 ]] end
+local var1 = function() end
 
-return reactModule.memo(function(p0) --[[ line: 31 | named "SduiIconButton" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), iconButton (ref), var1 (ref)
 	return if p0.icon and p0.icon.name then reactModule.createElement(iconButton, {
 		icon = p0.icon,

@@ -7,7 +7,7 @@ local getPlatformTarget = analyticsModule.getPlatformTarget
 return {
 	Diag = analyticsModule.Analytics.new(rbxAnalyticsService).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p0, p1, p2) --[[ line: 15 ]]
+		setRBXEventStream = function(_, p0, p1, p2)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
 			eventIngestService:SetRBXEventStream(getPlatformTarget(), p0, p1, p2 or {})
 		end

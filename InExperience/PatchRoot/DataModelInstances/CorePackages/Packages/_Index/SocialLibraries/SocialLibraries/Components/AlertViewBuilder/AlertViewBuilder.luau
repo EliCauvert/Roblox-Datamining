@@ -20,15 +20,15 @@ alertViewBuilder.defaultProps = {
 	inputLengthExceeded = nil,
 	buttons = {},
 	textboxes = {},
-	onActivated = function() --[[ line: 68 ]] end,
-	onModalClose = function() --[[ line: 69 ]] end,
-	onModalStayOpen = function() --[[ line: 70 ]] end,
-	onModalOpen = function() --[[ line: 71 ]] end,
+	onActivated = function() end,
+	onModalClose = function() end,
+	onModalStayOpen = function() end,
+	onModalOpen = function() end,
 	screenSize = Vector2.new(0, 0),
 	soakAreaColor3 = Color3.fromRGB(255, 0, 255)
 }
 
-function alertViewBuilder.init(p0) --[[ line: 83 ]]
+function alertViewBuilder.init(p0)
 	-- upvalues: roact (ref), text (ref)
 	local var7 = 0
 	p0.refs = {}
@@ -39,19 +39,19 @@ function alertViewBuilder.init(p0) --[[ line: 83 ]]
 	end
 	p0.state = { numTextboxes = var7 }
 	
-	function p0.calcTextboxTextHeight(p1, p2) --[[ line: 93 ]]
+	function p0.calcTextboxTextHeight(p1, p2)
 		-- upvalues: text (copy), p0 (ref)
 		return if p2 and p2 ~= "" then text.GetTextHeight(p2, p1.Font.Body.Font, p1.Font.Body.RelativeSize * p1.Font.BaseSize, p0.props.childComponentWidth) else 0
 	end
 end
 
-function alertViewBuilder.didMount(p3) --[[ line: 105 ]]
+function alertViewBuilder.didMount(p3)
 	if type(p3.props.onModalOpen) == "function" then
 		p3.props.onModalOpen()
 	end
 end
 
-function alertViewBuilder.reset(value) --[[ line: 111 ]]
+function alertViewBuilder.reset(value)
 	for i, v in pairs(value.refs) do
 		if v.current then
 			v.current.Text = ""
@@ -59,7 +59,7 @@ function alertViewBuilder.reset(value) --[[ line: 111 ]]
 	end
 end
 
-function alertViewBuilder.makeButtonTable(p4) --[[ line: 119 ]]
+function alertViewBuilder.makeButtonTable(p4)
 	-- upvalues: cryo (ref)
 	local t = { buttons = {} }
 	
@@ -68,7 +68,7 @@ function alertViewBuilder.makeButtonTable(p4) --[[ line: 119 ]]
 		t.buttons[i] = cryo.Dictionary.join(v, {
 			props = cryo.Dictionary.join(v.props, {
 				layoutOrder = i,
-				onActivated = function() --[[ line: 128 ]]
+				onActivated = function()
 					-- upvalues: p4 (ref), v (ref)
 					p4.props.onActivated()
 					local t = {}
@@ -91,7 +91,7 @@ function alertViewBuilder.makeButtonTable(p4) --[[ line: 119 ]]
 	return t
 end
 
-function alertViewBuilder.makeTextboxList(p5, p6) --[[ line: 153 ]]
+function alertViewBuilder.makeTextboxList(p5, p6)
 	-- upvalues: roact (ref), fitFrameVerticalModule (ref), alertViewTextboxModule (ref), alertViewLabelModule (ref)
 	local t = {}
 	local var11 = if p5.props.inputLengthExceeded then p6.Theme.Alert.Color else p6.Theme.TextDefault.Color
@@ -149,11 +149,11 @@ function alertViewBuilder.makeTextboxList(p5, p6) --[[ line: 153 ]]
 	return t
 end
 
-function alertViewBuilder.makeMiddleContent(p7, p8) --[[ line: 206 ]]
+function alertViewBuilder.makeMiddleContent(p7, p8)
 	-- upvalues: roact (ref), fitFrameVerticalModule (ref)
 	local var21 = p7:makeTextboxList(p8)
 	
-	return if p7.state.numTextboxes == 0 then nil else function() --[[ line: 215 ]]
+	return if p7.state.numTextboxes == 0 then nil else function()
 		-- upvalues: roact (copy), fitFrameVerticalModule (copy), var21 (ref)
 		return roact.createElement(fitFrameVerticalModule, {
 			BorderSizePixel = 0,
@@ -170,11 +170,11 @@ function alertViewBuilder.makeMiddleContent(p7, p8) --[[ line: 206 ]]
 	end
 end
 
-function alertViewBuilder.render(p9) --[[ line: 231 ]]
+function alertViewBuilder.render(p9)
 	-- upvalues: UIBlox (ref), roact (ref), alertViewSoakAreaModule (ref), interactiveAlert (ref)
 	assert(p9.props.displayTextbox or not p9.props.mandatoryInput)
 	
-	return UIBlox.Style.withStyle(function(p10) --[[ line: 234 ]]
+	return UIBlox.Style.withStyle(function(p10)
 		-- upvalues: p9 (ref), roact (copy), alertViewSoakAreaModule (copy), interactiveAlert (copy)
 		return roact.createElement(alertViewSoakAreaModule, {
 			BackgroundColor3 = p9.props.soakAreaColor3,

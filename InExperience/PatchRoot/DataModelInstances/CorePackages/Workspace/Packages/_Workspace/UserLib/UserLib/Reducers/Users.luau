@@ -12,7 +12,7 @@ local setUserPresence = require(userLib.Actions).SetUserPresence
 local receivedDisplayName = require(userLib.Actions).ReceivedDisplayName
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
 
-return function(p0, p1) --[[ line: 20 ]]
+return function(p0, p1)
 	-- upvalues: addUser (ref), immutable (ref), addUsers (ref), setUserIsFriend (ref), setUserPresence (ref), receivedUserPresence (ref), setUserMembershipType (ref), fFlagEnableBlackbirdCheck (ref), setUserHasRobloxSubscription (ref), removeUser (ref), receivedDisplayName (ref)
 	p0 = p0 or {}
 	assert(p0, "")

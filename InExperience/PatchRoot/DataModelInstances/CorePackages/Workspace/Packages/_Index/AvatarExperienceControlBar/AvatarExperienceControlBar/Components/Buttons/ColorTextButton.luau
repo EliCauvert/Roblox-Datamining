@@ -7,7 +7,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
 local colorItemModule = require(avatarExperienceControlBar.Components.Items.ColorItem)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 27 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), useLocalization (ref), reactModule (ref), foundationModule (ref), colorItemModule (ref)
 	local var6 = useSemanticTokensModule()
 	local var7, var8 = useHoverBindingModule()
@@ -19,7 +19,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 27 ]]
 		isDisabled = p0.disabled,
 		ref = p1,
 		onStateChanged = var8,
-		backgroundStyle = var7:map(function(p2) --[[ line: 44 ]]
+		backgroundStyle = var7:map(function(p2)
 			-- upvalues: var6 (ref)
 			return {
 				Color3 = var6.hoverIconBackgroundStyle.Color3,

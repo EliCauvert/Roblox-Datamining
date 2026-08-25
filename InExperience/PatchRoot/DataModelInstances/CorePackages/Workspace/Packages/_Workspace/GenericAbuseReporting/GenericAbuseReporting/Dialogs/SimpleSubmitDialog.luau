@@ -36,16 +36,16 @@ local fFlagChatLineReportingFocusFixesEnabled = sharedFlagsModule.FFlagChatLineR
 local fFlagAddAbuseReportOffsetForLandscape = sharedFlagsModule.FFlagAddAbuseReportOffsetForLandscape
 local fFlagAddTakeItDownReportLinkToSurfaces = sharedFlagsModule.FFlagAddTakeItDownReportLinkToSurfaces
 
-local function _(value) --[[ line: 72 | named "getScreenSizeOffset" ]]
+local function _(value)
 	-- upvalues: fFlagAddAbuseReportOffsetForLandscape (ref)
 	return if fFlagAddAbuseReportOffsetForLandscape then if value.Y < value.X then 180 else 100 else 100
 end
 
-local _ = function(p0, p1) --[[ line: 81 | named "getContentRightPadding" ]]
+local _ = function(p0, p1)
 	return if p1.Y < p0.Y then 16 else 1
 end
 
-return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
+return function(p2)
 	-- upvalues: useAnalyticsDispatchModule (ref), reactFocusNavigationModule (ref), focusNavigationUtilsModule (ref), useTokens (ref), reactModule (ref), useLayerCollector (ref), fFlagChatLineReportingFocusFixesEnabled (ref), onFormReasonSelectedModule (ref), onFormCommentUpdatedModule (ref), useLocalization (ref), useLocalizedStringsModule (ref), createNextOrder (ref), reasonDropdownModule (ref), UIListLayoutModule (ref), view (ref), text (ref), var14 (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref), partialPageModal (ref), MODAL_POSITION_OFFSETModule (ref), buttonType (ref), closeButtonIcon (ref), scrollView (ref), fFlagAddAbuseReportOffsetForLandscape (ref), scrollBarVisibility (ref), frameModule (ref), styledTextLabel (ref), commentTextFieldModule (ref)
 	local var18 = useAnalyticsDispatchModule()
 	local var19 = reactFocusNavigationModule.useFocusGuiObject()
@@ -67,18 +67,18 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 	local var45, var46 = reactModule.useState(96)
 	local var47 = useLayerCollector()
 	local absoluteSize = var47.absoluteSize
-	reactModule.useEffect(function() --[[ line: 108 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var46 (ref), var31 (ref), var40 (ref), var37 (ref), var35 (ref)
 		var46(math.max(96, var31.Y - (var40 - var37) - var35 - 20))
 	end, { var31.Y, var40, var37, var35 })
-	reactModule.useEffect(function() --[[ line: 117 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var39 (ref), var36 (ref), var41 (ref)
 		if var39.current then
 			var36(var39.current.AbsoluteSize.Y)
 			var41(var39.current.AbsolutePosition.Y)
 		end
 	end, { var39.current, absoluteSize })
-	reactModule.useEffect(function() --[[ line: 124 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), var34 (ref), var32 (ref), fFlagChatLineReportingFocusFixesEnabled (copy), var38 (ref)
 		if not var30.current then
 			var32(Vector2.zero)
@@ -88,7 +88,7 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 		local scrollingFrame = var30.current:FindFirstChildWhichIsA("ScrollingFrame")
 		
 		if scrollingFrame then
-			scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ line: 128 ]]
+			scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: var34 (copy), scrollingFrame (ref), var32 (copy)
 				var34(scrollingFrame.AbsoluteWindowSize)
 				var32(scrollingFrame.AbsoluteCanvasSize)
@@ -100,13 +100,13 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 		end
 		var38(var30.current.AbsolutePosition.Y)
 	end, { var30.current, absoluteSize })
-	reactModule.useEffect(function() --[[ line: 142 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var42 (ref), var44 (ref)
 		if var42.current then
 			var44(var42.current.AbsoluteContentSize.Y)
 		end
 	end, { var42.current })
-	local var48 = reactModule.useCallback(function() --[[ line: 148 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), p2 (ref), var28 (ref), var23 (ref)
 		if var24 ~= "" then
 			p2.onSubmit(var24, var28)
@@ -119,7 +119,7 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 		end
 		p2.onSubmit(p2.reportCategoryDefaultKey, var28)
 	end, { p2.onSubmit, var24, var28, var23 })
-	local var49 = reactModule.useCallback(function(p3) --[[ line: 161 ]]
+	local var49 = reactModule.useCallback(function(p3)
 		-- upvalues: var25 (ref), var18 (ref), onFormReasonSelectedModule (copy), fFlagChatLineReportingFocusFixesEnabled (copy), var20 (ref), var39 (ref), var19 (ref)
 		var25(p3)
 		var18(onFormReasonSelectedModule({ reason_selection = p3 }))
@@ -132,7 +132,7 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 			end
 		end
 	end, if fFlagChatLineReportingFocusFixesEnabled then { var18, var19, var20 } else { var18 })
-	local var50 = reactModule.useCallback(function(p4) --[[ line: 183 ]]
+	local var50 = reactModule.useCallback(function(p4)
 		-- upvalues: var29 (ref), var18 (ref), onFormCommentUpdatedModule (copy)
 		var29(p4)
 		var18(onFormCommentUpdatedModule({ comment_added = #p4 > 0 }))
@@ -161,9 +161,9 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 				}
 			}
 		},
-		footerContent = if fFlagAddTakeItDownReportLinkToSurfaces then p2.footerContent or (if fFlagAddTakeItDownReportLinkToSurfaces and (var14 or getTakeItDownReportLinkVisibility()) then if fFlagAddTakeItDownReportLinkToSurfaces then reactModule.useMemo(function() --[[ line: 260 ]]
+		footerContent = if fFlagAddTakeItDownReportLinkToSurfaces then p2.footerContent or (if fFlagAddTakeItDownReportLinkToSurfaces and (var14 or getTakeItDownReportLinkVisibility()) then if fFlagAddTakeItDownReportLinkToSurfaces then reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy), getTakeItDownReportLinkVisibility (copy), takeItDownReportLink (copy)
-			return function() --[[ line: 261 ]]
+			return function()
 				-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy), getTakeItDownReportLinkVisibility (copy), takeItDownReportLink (copy)
 				return reactModule.createElement(view, {
 					tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-top-small"
@@ -172,9 +172,9 @@ return function(p2) --[[ line: 85 | named "SubmitDialog" ]]
 					TakeItDownReportLink = if getTakeItDownReportLinkVisibility() then reactModule.createElement(takeItDownReportLink, { layoutOrder = 2 }) else nil
 				})
 			end
-		end, {}) else nil else nil) else p2.footerContent or (if var14 then reactModule.useMemo(function() --[[ line: 244 ]]
+		end, {}) else nil else nil) else p2.footerContent or (if var14 then reactModule.useMemo(function()
 			-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy)
-			return function() --[[ line: 245 ]]
+			return function()
 				-- upvalues: reactModule (copy), view (copy), var14 (copy), genericReportLink (copy)
 				return reactModule.createElement(view, {
 					tag = "size-full-0 auto-y col padding-x-xlarge padding-top-small"

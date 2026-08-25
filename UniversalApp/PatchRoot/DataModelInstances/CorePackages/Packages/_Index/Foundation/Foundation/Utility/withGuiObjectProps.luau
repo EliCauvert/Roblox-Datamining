@@ -9,7 +9,7 @@ local indexBindableModule = require(foundation.Utility.indexBindable)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local getEngineFeature = flagsModule.FoundationGuiObjectInputSinkProperty and pcall(game.GetEngineFeature, game, "GuiObjectInputSink")
 
-return function(p0, p1) --[[ line: 52 | named "withGuiObjectProps" ]]
+return function(p0, p1)
 	-- upvalues: indexBindableModule (ref), getEngineFeature (ref), reactIsModule (ref), withCommonPropsModule (ref), reactModule (ref), getTestIdTagModule (ref)
 	if type(p1) == "table" then
 		p1.AutoLocalize = p0.AutoLocalize

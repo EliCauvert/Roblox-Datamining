@@ -27,7 +27,7 @@ local getEnableDisableSubPurchaseModule = require(parent.Flags.getEnableDisableS
 local fFlagHideDevSubsPriceIfSubscribed = require(parent.Parent.SharedFlags).FFlagHideDevSubsPriceIfSubscribed
 local fFlagEnableDevSubsFastFollowFixes = require(parent.Parent.SharedFlags).FFlagEnableDevSubsFastFollowFixes
 
-local function generateTestmodeDisclaimer(p0, p1, p2, p3) --[[ line: 88 ]]
+local function generateTestmodeDisclaimer(p0, p1, p2, p3)
 	-- upvalues: textService (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -52,7 +52,7 @@ local function generateTestmodeDisclaimer(p0, p1, p2, p3) --[[ line: 88 ]]
 	})
 end
 
-local function generatePromptText(p4, p5, p6, p7, p8, p9) --[[ line: 118 ]]
+local function generatePromptText(p4, p5, p6, p7, p8, p9)
 	-- upvalues: reactModule (ref), textService (ref)
 	return reactModule.createElement("TextLabel", {
 		LayoutOrder = p9 or 2,
@@ -67,14 +67,14 @@ local function generatePromptText(p4, p5, p6, p7, p8, p9) --[[ line: 118 ]]
 		TextColor3 = p6.TextDefault.Color,
 		TextTransparency = p6.TextDefault.Transparency,
 		RichText = true,
-		[reactModule.Change.AbsoluteSize] = function(p10) --[[ line: 132 ]]
+		[reactModule.Change.AbsoluteSize] = function(p10)
 			-- upvalues: textService (copy), p8 (ref)
 			p8(textService:GetTextSize(p10.Text, p10.TextSize, p10.Font, Vector2.new(p10.AbsoluteSize.X, 1e999)).Y)
 		end
 	})
 end
 
-local function createSubscribeButtonStacks(p11, p12) --[[ line: 140 ]]
+local function createSubscribeButtonStacks(p11, p12)
 	-- upvalues: getEnableDisableSubPurchaseModule (ref), buttonType (ref)
 	if (getEnableDisableSubPurchaseModule() or p11.shouldUseNewModalDesign) and p11.disablePurchase then
 		return {
@@ -83,7 +83,7 @@ local function createSubscribeButtonStacks(p11, p12) --[[ line: 140 ]]
 				props = {
 					isDisabled = true,
 					layoutOrder = 0,
-					onActivated = function() --[[ line: 146 ]] end,
+					onActivated = function() end,
 					text = p11.disablePurchaseText
 				}
 			}
@@ -94,7 +94,7 @@ local function createSubscribeButtonStacks(p11, p12) --[[ line: 140 ]]
 				buttonType = buttonType.PrimarySystem,
 				props = {
 					layoutOrder = 0,
-					onActivated = function() --[[ line: 160 ]]
+					onActivated = function()
 						-- upvalues: p11 (ref)
 						p11.purchaseSubscriptionActivated(p11.primaryPaymentMethod)
 					end,
@@ -115,7 +115,7 @@ local function createSubscribeButtonStacks(p11, p12) --[[ line: 140 ]]
 			buttonType = buttonType.PrimarySystem,
 			props = {
 				layoutOrder = 0,
-				onActivated = function() --[[ line: 181 ]]
+				onActivated = function()
 					-- upvalues: p11 (ref)
 					p11.purchaseSubscriptionActivated(p11.primaryPaymentMethod)
 				end,
@@ -126,7 +126,7 @@ local function createSubscribeButtonStacks(p11, p12) --[[ line: 140 ]]
 			buttonType = buttonType.Secondary,
 			props = {
 				layoutOrder = 1,
-				onActivated = function() --[[ line: 191 ]]
+				onActivated = function()
 					-- upvalues: p11 (ref)
 					p11.purchaseSubscriptionActivated(p11.secondaryPaymentMethod)
 				end,
@@ -136,7 +136,7 @@ local function createSubscribeButtonStacks(p11, p12) --[[ line: 140 ]]
 	}
 end
 
-local function generateDisclosure(p13, p14) --[[ line: 201 ]]
+local function generateDisclosure(p13, p14)
 	-- upvalues: reactModule (ref), view (ref), text (ref)
 	local parts = string.split(p13.DisclosureTermsURL, " {termsofuse} ")
 	
@@ -168,7 +168,7 @@ local function generateDisclosure(p13, p14) --[[ line: 201 ]]
 	})
 end
 
-local function renderNewModalDesign(value, p15, p16, p17, p18, p19, p20, p21, p22) --[[ line: 234 ]]
+local function renderNewModalDesign(value, p15, p16, p17, p18, p19, p20, p21, p22)
 	-- upvalues: verifiedBadgesModule (ref), getIconRichText (ref), enums (ref), reactModule (ref), partialPageModal (ref), createSubscribeButtonStacks (ref), generateTestmodeDisclaimer (ref), fFlagEnableDevSubsFastFollowFixes (ref), generateDisclosure (ref), imageSetLabel (ref), view (ref), text (ref), fFlagHideDevSubsPriceIfSubscribed (ref), foundationModule (ref), generatePromptText (ref)
 	return reactModule.createElement(partialPageModal, {
 		screenSize = value.screenSize,
@@ -179,7 +179,7 @@ local function renderNewModalDesign(value, p15, p16, p17, p18, p19, p20, p21, p2
 			forcedFillDirection = Enum.FillDirection.Vertical
 		},
 		onCloseClicked = value.cancelPurchaseActivated,
-		footerContent = function() --[[ line: 260 ]]
+		footerContent = function()
 			-- upvalues: value (ref), generateTestmodeDisclaimer (copy), p15 (ref), p17 (ref), p16 (ref), p18 (ref), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), p20 (ref)
 			return if value.isTestingMode then generateTestmodeDisclaimer(p15.footerText, p17, p16, p18) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p15, p20)
 		end
@@ -274,13 +274,13 @@ local function renderNewModalDesign(value, p15, p16, p17, p18, p19, p20, p21, p2
 	})
 end
 
-return function(p23) --[[ line: 372 | named "SubscriptionPurchasePrompt" ]]
+return function(p23)
 	-- upvalues: reactModule (ref), useDispatch (ref), useTokens (ref), urlBuilder (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var0 (ref), navigateDown (ref), subscriptionTitleModule (ref), multiTextLocalizerModule (ref), withStyle (ref), getPartialPageModalMiddleContentWidth (ref), renderNewModalDesign (ref), partialPageModal (ref), createSubscribeButtonStacks (ref), generateTestmodeDisclaimer (ref), fFlagEnableDevSubsFastFollowFixes (ref), generateDisclosure (ref), generatePromptText (ref)
 	local var15, var16 = reactModule.useState(0)
 	local var17 = useDispatch()
 	local var18 = useTokens()
 	
-	local function openTermsOfUse() --[[ line: 377 ]]
+	local function openTermsOfUse()
 		-- upvalues: urlBuilder (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var0 (copy), var17 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.GenericWebPage,
@@ -295,7 +295,7 @@ return function(p23) --[[ line: 372 | named "SubscriptionPurchasePrompt" ]]
 		var17(navigateDown(t))
 	end
 	
-	local function calculatePromptHeight(p24) --[[ line: 390 ]]
+	local function calculatePromptHeight(p24)
 		-- upvalues: p23 (ref), var16 (ref), subscriptionTitleModule (copy)
 		if p23.shouldUseNewModalDesign then
 			var16(338 + p24 + 24)
@@ -331,9 +331,9 @@ return function(p23) --[[ line: 372 | named "SubscriptionPurchasePrompt" ]]
 			shareText = { key = "Feature.SocialShare.Action.Share" },
 			reportText = { key = "Feature.GameDetails.Action.Report" }
 		},
-		render = function(p25) --[[ line: 427 ]]
+		render = function(p25)
 			-- upvalues: withStyle (copy), getPartialPageModalMiddleContentWidth (copy), p23 (ref), renderNewModalDesign (copy), var15 (ref), openTermsOfUse (ref), calculatePromptHeight (ref), var18 (ref), reactModule (copy), partialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), subscriptionTitleModule (copy), generatePromptText (copy)
-			return withStyle(function(p26) --[[ line: 428 ]]
+			return withStyle(function(p26)
 				-- upvalues: getPartialPageModalMiddleContentWidth (copy), p23 (copy), renderNewModalDesign (copy), p25 (ref), var15 (copy), openTermsOfUse (copy), calculatePromptHeight (copy), var18 (copy), reactModule (copy), partialPageModal (copy), createSubscribeButtonStacks (copy), generateTestmodeDisclaimer (copy), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), subscriptionTitleModule (copy), generatePromptText (copy)
 				local theme = p26.Theme
 				local font = p26.Font
@@ -349,7 +349,7 @@ return function(p23) --[[ line: 372 | named "SubscriptionPurchasePrompt" ]]
 						forcedFillDirection = Enum.FillDirection.Vertical
 					},
 					onCloseClicked = p23.cancelPurchaseActivated,
-					footerContent = function() --[[ line: 457 ]]
+					footerContent = function()
 						-- upvalues: p23 (copy), generateTestmodeDisclaimer (copy), p25 (copy), font (ref), theme (ref), var22 (ref), fFlagEnableDevSubsFastFollowFixes (copy), generateDisclosure (copy), openTermsOfUse (copy)
 						return if p23.isTestingMode then generateTestmodeDisclaimer(p25.footerText, font, theme, var22) elseif fFlagEnableDevSubsFastFollowFixes then nil else generateDisclosure(p25, openTermsOfUse)
 					end

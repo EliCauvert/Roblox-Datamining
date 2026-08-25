@@ -1,4 +1,4 @@
-﻿return function(value) --[[ line: 1 | named "getGearAssetIdFromEquippedAssets" ]]
+﻿return function(value)
 	local var0 = nil
 	local value_1 = value[tostring(Enum.AssetType.Gear.Value)]
 	

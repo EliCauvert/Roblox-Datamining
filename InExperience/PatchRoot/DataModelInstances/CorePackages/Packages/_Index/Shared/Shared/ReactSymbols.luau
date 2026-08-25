@@ -22,15 +22,15 @@
 	REACT_BINDING_TYPE = 60132
 }
 
-function t.getIteratorFn(p0) --[[ line: 84 ]]
+function t.getIteratorFn(p0)
 	-- upvalues: t (ref)
-	return if typeof(p0) == "table" then if p0["$$typeof"] == t.REACT_PORTAL_TYPE then nil else function() --[[ line: 91 ]]
+	return if typeof(p0) == "table" then if p0["$$typeof"] == t.REACT_PORTAL_TYPE then nil else function()
 		-- upvalues: p0 (ref)
 		local var1 = nil
 		local var2 = nil
 		
 		return {
-			next = function() --[[ line: 94 ]]
+			next = function()
 				-- upvalues: var1 (write), var2 (write), p0 (copy)
 				local var3, var4 = next(p0, var1)
 				var1 = var3

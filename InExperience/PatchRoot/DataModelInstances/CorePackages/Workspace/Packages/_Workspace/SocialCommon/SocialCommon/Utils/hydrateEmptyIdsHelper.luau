@@ -3,7 +3,7 @@ local promiseModule = require(parent.Promise)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.LuauPolyfill)
 
-return function(p0) --[[ line: 18 | named "hydrateEmptyIdsHelper" ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), cryoModule (ref)
 	local ids = p0.ids
 	local selector = p0.selector
@@ -12,7 +12,7 @@ return function(p0) --[[ line: 18 | named "hydrateEmptyIdsHelper" ]]
 	if not ids then
 		return promiseModule.resolve()
 	end
-	local var2 = cryoModule.List.filter(ids, function(p1) --[[ line: 27 ]]
+	local var2 = cryoModule.List.filter(ids, function(p1)
 		-- upvalues: selector (ref)
 		return selector(p1) == nil
 	end)

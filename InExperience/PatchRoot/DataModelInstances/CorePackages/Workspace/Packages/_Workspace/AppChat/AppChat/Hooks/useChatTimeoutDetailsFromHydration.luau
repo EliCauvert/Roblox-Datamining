@@ -9,11 +9,11 @@ local getChatModerationStatusDataHydrationModule = require(appChat.Stores.GetCha
 local getEffectiveChatTimeoutDetailsModule = require(appChat.Utils.getEffectiveChatTimeoutDetails)
 local _ = require(appChat.Utils.serializeChatTimeoutRange)
 
-local function areChatTimeoutDetailsEqual(p0, p1) --[[ line: 25 ]]
+local function areChatTimeoutDetailsEqual(p0, p1)
 	return p0.isTimedOut == p1.isTimedOut and (p0.timeoutEndTimestamp == p1.timeoutEndTimestamp and (p0.decisionEventId == p1.decisionEventId and p0.duration == p1.duration))
 end
 
-local function _(p2) --[[ line: 32 | named "toTimeoutEntry" ]]
+local function _(p2)
 	return if p2 == nil or p2.status ~= "active" then nil else {
 		endTimestamp = p2.endTimestamp,
 		decisionEventId = p2.decisionEventId,
@@ -21,9 +21,9 @@ local function _(p2) --[[ line: 32 | named "toTimeoutEntry" ]]
 	}
 end
 
-return function(p3) --[[ line: 43 | named "useChatTimeoutDetailsFromHydration" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), createCurrentTimeSignal (ref), getChatModerationStatusDataHydrationModule (ref), signalsModule (ref), getEffectiveChatTimeoutDetailsModule (ref), dataHydrationModule (ref), areChatTimeoutDetailsEqual (ref)
-	local var7 = reactModule.useMemo(function() --[[ line: 44 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: createCurrentTimeSignal (copy)
 		return createCurrentTimeSignal(1)
 	end, {})
@@ -32,9 +32,9 @@ return function(p3) --[[ line: 43 | named "useChatTimeoutDetailsFromHydration" ]
 	local var10 = if p3.conversationId then var8.getConversationStatus(p3.conversationId) else userStatus
 	local conversationId = p3.conversationId
 	
-	return reactModule.useMemo(function() --[[ line: 55 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), userStatus (ref), var10 (ref), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (ref), p3 (ref), var7 (ref), areChatTimeoutDetailsEqual (copy)
-		return signalsModule.createComputed(function(p4) --[[ line: 56 ]]
+		return signalsModule.createComputed(function(p4)
 			-- upvalues: userStatus (copy), var10 (copy), getEffectiveChatTimeoutDetailsModule (copy), dataHydrationModule (copy), conversationId (copy), p3 (copy), var7 (copy)
 			local var11 = userStatus.data(p4)
 			local var12 = var10.data(p4)

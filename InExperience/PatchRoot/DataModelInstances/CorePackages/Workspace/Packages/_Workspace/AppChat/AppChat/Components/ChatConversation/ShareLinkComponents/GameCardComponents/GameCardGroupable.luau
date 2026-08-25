@@ -23,7 +23,7 @@ local t = {
 	thumbnailRoundedVariant = roundedVariantModule.Top
 }
 
-function GameCardGroupable(p0) --[[ line: 60 ]]
+function GameCardGroupable(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useAbbreviatedNumberLocalization (ref), useScaledValue (ref), constantsModule (ref), reactModule (ref), view (ref), gameCardThumbnailModule (ref), skeleton (ref), foundationModule (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
 	local var8 = cryoModule.Dictionary.union(t, p0)
 	local var9 = useTokens()

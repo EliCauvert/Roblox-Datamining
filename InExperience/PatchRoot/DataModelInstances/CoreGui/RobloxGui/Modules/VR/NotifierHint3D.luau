@@ -10,12 +10,12 @@ local var3 = require(game:GetService("CorePackages").Workspace.Packages.AppCommo
 	Position = UDim2.new(0.5, -860, 1, -301),
 	Size = UDim2.new(0, 1700, 0, 1000)
 })
-local var4 = (function() --[[ line: 30 | named "CreateNotificationEffect" ]]
+local var4 = (function()
 	-- upvalues: runService (ref), var3 (ref), robloxGui (ref)
 	local t = {}
 	local var6 = nil
 	
-	function t.Init(p0, p1) --[[ line: 39 ]]
+	function t.Init(p0, p1)
 		-- upvalues: var6 (write), runService (copy), var3 (copy), robloxGui (copy)
 		local currentTime = tick()
 		local var8 = currentTime + p1
@@ -24,7 +24,7 @@ local var4 = (function() --[[ line: 30 | named "CreateNotificationEffect" ]]
 			var6:disconnect()
 			var6 = nil
 		end
-		var6 = runService.RenderStepped:connect(function() --[[ line: 47 ]]
+		var6 = runService.RenderStepped:connect(function()
 			-- upvalues: var8 (ref), p0 (ref), var3 (copy), robloxGui (copy), currentTime (ref)
 			if var8 <= tick() then
 				p0:Cancel()
@@ -36,7 +36,7 @@ local var4 = (function() --[[ line: 30 | named "CreateNotificationEffect" ]]
 		end)
 	end
 	
-	function t.Cancel(_) --[[ line: 62 ]]
+	function t.Cancel(_)
 		-- upvalues: var6 (write), var3 (copy)
 		if var6 then
 			var6:disconnect()
@@ -48,13 +48,13 @@ local var4 = (function() --[[ line: 30 | named "CreateNotificationEffect" ]]
 	return t
 end)()
 
-function t.BeginNotification(p2, p3) --[[ line: 75 ]]
+function t.BeginNotification(p2, p3)
 	-- upvalues: var4 (ref)
 	p2:CancelNotification()
 	var4:Init(p3 or p2.DEFAULT_DURATION)
 end
 
-function t.CancelNotification(_) --[[ line: 80 ]]
+function t.CancelNotification(_)
 	-- upvalues: var4 (ref)
 	var4:Cancel()
 end

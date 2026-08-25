@@ -4,7 +4,7 @@ local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 local getFIntUGCValidationPartMaxMassModule = require(parent.flags.getFIntUGCValidationPartMaxMass)
 
-return function(value, p0) --[[ line: 14 | named "resetPhysicsData" ]]
+return function(value, p0)
 	-- upvalues: UGCValidationService (ref), analyticsModule (ref), getFIntUGCValidationPartMaxMassModule (ref)
 	local currentTime = tick()
 	
@@ -19,7 +19,7 @@ return function(value, p0) --[[ line: 14 | named "resetPhysicsData" ]]
 		
 		for i_1, v_1 in descendants do
 			if v_1:IsA("MeshPart") and not var4 then
-				if pcall(function() --[[ line: 31 ]]
+				if pcall(function()
 					-- upvalues: UGCValidationService (copy), v_1 (ref)
 					UGCValidationService:ResetCollisionFidelity(v_1, v_1.CollisionFidelity)
 				end) then

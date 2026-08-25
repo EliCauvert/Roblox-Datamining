@@ -51,7 +51,7 @@ verticalScrollView.defaultProps = {
 	scrollBarType = scrollBarTypeModule.Compact
 }
 
-function verticalScrollView.init(p0) --[[ line: 91 ]]
+function verticalScrollView.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref), userInputService (ref), runService (ref)
 	p0.parentFrameRef = roactModule.createRef()
 	p0.mainCanvasRef = roactModule.createRef()
@@ -70,7 +70,7 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 	p0.lastTimeCanvasPositionChanged = tick()
 	p0.waitToHideSidebarConnection = nil
 	
-	function p0.waitToHideSidebar() --[[ line: 109 ]]
+	function p0.waitToHideSidebar()
 		-- upvalues: p0 (ref), otterModule (copy), t (copy)
 		if tick() - p0.lastTimeCanvasPositionChanged > 0.7 then
 			p0.scrollBarImageTransparencyMotor:setGoal(otterModule.spring(1, t))
@@ -78,7 +78,7 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 		end
 	end
 	
-	function p0.disconnectWaitToHideSidebar() --[[ line: 117 ]]
+	function p0.disconnectWaitToHideSidebar()
 		-- upvalues: p0 (ref)
 		if p0.waitToHideSidebarConnection then
 			p0.waitToHideSidebarConnection:Disconnect()
@@ -86,7 +86,7 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 		end
 	end
 	
-	function p0.inputBegan(_, p1) --[[ line: 123 ]]
+	function p0.inputBegan(_, p1)
 		-- upvalues: p0 (ref), otterModule (copy)
 		if not p0.props.scrollingEnabled then return end
 		if p1.UserInputType == Enum.UserInputType.MouseMovement then
@@ -95,7 +95,7 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 		end
 	end
 	
-	function p0.inputEnded(_, p2) --[[ line: 133 ]]
+	function p0.inputEnded(_, p2)
 		-- upvalues: p0 (ref), otterModule (copy)
 		if not p0.props.scrollingEnabled then return end
 		if p2.UserInputType == Enum.UserInputType.MouseMovement then
@@ -104,7 +104,7 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 		end
 	end
 	
-	function p0.canvasPosition(p3) --[[ line: 143 ]]
+	function p0.canvasPosition(p3)
 		-- upvalues: p0 (ref), userInputService (copy), otterModule (copy), runService (copy), roactModule (copy)
 		p0.lastTimeCanvasPositionChanged = tick()
 		
@@ -119,31 +119,31 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 		end
 	end
 	
-	function p0.onGamepadFocused() --[[ line: 157 ]]
+	function p0.onGamepadFocused()
 		-- upvalues: p0 (ref), otterModule (copy)
 		p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(0))
 	end
 	
-	function p0.onGamepadFocusLost() --[[ line: 161 ]]
+	function p0.onGamepadFocusLost()
 		-- upvalues: p0 (ref), otterModule (copy)
 		p0.scrollBarImageTransparencyMotor:setGoal(otterModule.instant(1))
 	end
 	
-	function p0.getMainCanvasPosition() --[[ line: 165 ]]
+	function p0.getMainCanvasPosition()
 		-- upvalues: p0 (ref)
-		return p0.scrollPosition:map(function(p4) --[[ line: 166 ]]
+		return p0.scrollPosition:map(function(p4)
 			return Vector2.new(0, p4)
 		end)
 	end
 	
-	function p0.onMainCanvasSizeChange(p5) --[[ line: 171 ]]
+	function p0.onMainCanvasSizeChange(p5)
 		-- upvalues: p0 (ref)
 		p0.updateCanvasSize(p5.AbsoluteCanvasSize)
 	end
 	
-	function p0.getMainCanvasSize() --[[ line: 175 ]]
+	function p0.getMainCanvasSize()
 		-- upvalues: p0 (ref)
-		return p0.mainCanvasSize:map(function(p6) --[[ line: 176 ]]
+		return p0.mainCanvasSize:map(function(p6)
 			return UDim2.new(0, 2, 0, p6.Y)
 		end)
 	end
@@ -155,17 +155,17 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 	p0.mainCanvasPosition = var23
 	p0.updateMainCanvasPosition = var24
 	
-	function p0.onScrollBarDragging(p7) --[[ line: 184 ]]
+	function p0.onScrollBarDragging(p7)
 		-- upvalues: p0 (ref)
 		p0.updateMainCanvasPosition(Vector2.new(0, p7))
 	end
 	
-	function p0.onViewSizeChange(p8) --[[ line: 188 ]]
+	function p0.onViewSizeChange(p8)
 		-- upvalues: p0 (ref)
 		p0.updateViewSize(p8.AbsoluteSize)
 	end
 	
-	function p0.onSelectionChanged(p9, p10, _, p11) --[[ line: 192 ]]
+	function p0.onSelectionChanged(p9, p10, _, p11)
 		-- upvalues: p0 (ref)
 		if not p10 and p11 == nil then
 			p0.onGamepadFocusLost()
@@ -180,7 +180,7 @@ function verticalScrollView.init(p0) --[[ line: 91 ]]
 	end
 end
 
-function verticalScrollView.getScrollBarStyleProps(_, p12, p13) --[[ line: 206 ]]
+function verticalScrollView.getScrollBarStyleProps(_, p12, p13)
 	-- upvalues: scrollBarTypeModule (ref), UIBloxConfigModule (ref), imagesModule (ref)
 	local tokens = p12.Tokens
 	
@@ -211,7 +211,7 @@ function verticalScrollView.getScrollBarStyleProps(_, p12, p13) --[[ line: 206 ]
 	}
 end
 
-function verticalScrollView.renderScrollBar(p14, p15) --[[ line: 269 ]]
+function verticalScrollView.renderScrollBar(p14, p15)
 	-- upvalues: roactModule (ref), scrollBarModule (ref), UIBloxConfigModule (ref)
 	local tokens = p15.Tokens
 	local var25 = p14:getScrollBarStyleProps(p15, p14.props.scrollBarType)
@@ -241,7 +241,7 @@ function verticalScrollView.renderScrollBar(p14, p15) --[[ line: 269 ]]
 	})
 end
 
-function verticalScrollView.renderWithProviders(p16, p17, _, p18) --[[ line: 307 ]]
+function verticalScrollView.renderWithProviders(p16, p17, _, p18)
 	-- upvalues: roactModule (ref), focusable (ref)
 	local position = p16.props.position
 	local size = p16.props.size
@@ -294,19 +294,19 @@ function verticalScrollView.renderWithProviders(p16, p17, _, p18) --[[ line: 307
 	})
 end
 
-function verticalScrollView.render(p19) --[[ line: 378 ]]
+function verticalScrollView.render(p19)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p20) --[[ line: 379 ]]
+	return withStyleModule(function(p20)
 		-- upvalues: p19 (ref)
 		return p19:renderWithProviders(p20, nil, p19.props.cursor)
 	end)
 end
 
-function verticalScrollView.willUnmount(p21) --[[ line: 384 ]]
+function verticalScrollView.willUnmount(p21)
 	p21.disconnectWaitToHideSidebar()
 end
 
-return roactModule.forwardRef(function(p22, p23) --[[ line: 388 ]]
+return roactModule.forwardRef(function(p22, p23)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), verticalScrollView (ref), cryoModule (ref)
 	return roactModule.createElement(verticalScrollView, cryoModule.Dictionary.join(p22, {
 		scrollingFrameRef = p23,

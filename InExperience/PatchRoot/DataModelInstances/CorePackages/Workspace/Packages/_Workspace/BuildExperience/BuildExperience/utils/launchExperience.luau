@@ -6,7 +6,7 @@ local gameParams = experienceServiceModule.GameParams
 local buildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local debug = creatorAgentChatModule.debug
 
-return function(p0, p1, p2) --[[ line: 13 | named "launchExperience" ]]
+return function(p0, p1, p2)
 	-- upvalues: buildModeLaunchModule (ref), gameParams (ref), debug (ref), experienceService (ref)
 	buildModeLaunchModule:set()
 	local var3 = gameParams.fromPlaceId(p0, p2)

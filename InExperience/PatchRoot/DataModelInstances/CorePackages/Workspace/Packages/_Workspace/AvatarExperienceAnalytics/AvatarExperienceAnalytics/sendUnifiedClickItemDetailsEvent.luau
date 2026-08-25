@@ -8,7 +8,7 @@ local getUnifiedLoggingSurfaceModule = require(script.Parent.Utils.getUnifiedLog
 local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 local fFlagAXFixClickItemDetailsSurfaceLogging = sharedFlagsModule.FFlagAXFixClickItemDetailsSurfaceLogging
 
-return function(p0) --[[ line: 28 | named "sendUnifiedClickItemDetailsEvent" ]]
+return function(p0)
 	-- upvalues: sendUnifiedEventForDeferredActionModule (ref), unifiedEventLogEnumsModule (ref), getMarketplaceUnifiedItemTypeModule (ref), fFlagAXFixClickItemDetailsSurfaceLogging (ref), getUnifiedLoggingSurfaceModule (ref)
 	sendUnifiedEventForDeferredActionModule({
 		elementName = "CLICK_ITEM_DETAILS",

@@ -12,12 +12,12 @@ local profileTypes = enumsModule.ProfileTypes
 local fFlagProfileAboutDetailsUseSheet = sharedFlagsModule.FFlagProfileAboutDetailsUseSheet
 
 return {
-	[enumsModule.ProfileActions.ViewAbout] = if sharedFlagsModule.FFlagProfilePlatformNewProfileHeader then function(p0) --[[ line: 25 ]]
+	[enumsModule.ProfileActions.ViewAbout] = if sharedFlagsModule.FFlagProfilePlatformNewProfileHeader then function(p0)
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), fFlagProfileAboutDetailsUseSheet (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
 		return {
 			text = p0.localized[enumsModule.ProfileActions.ViewAbout],
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 29 ]]
+				[profileTypes.User] = function()
 					-- upvalues: p0 (ref), eventNamesModule (copy), appPage (copy), fFlagProfileAboutDetailsUseSheet (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), navigateDown (copy)
 					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonViewFullProfile, {
 						buttonSurface = p0.buttonSurface,

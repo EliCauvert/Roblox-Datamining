@@ -8,7 +8,7 @@ local _ = require(robloxSubscriptionPurchaseApp.types)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 local var4 = nil
 
-local var5 = function() --[[ line: 57 ]]
+local var5 = function()
 	-- upvalues: signalsModule (ref), promptStateModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref)
 	local var6, var7 = signalsModule.createSignal(promptStateModule.Unspecified)
 	local var8, var9 = signalsModule.createSignal(nil)
@@ -19,7 +19,7 @@ local var5 = function() --[[ line: 57 ]]
 	local var18, var19 = signalsModule.createSignal({})
 	local var20, var21 = signalsModule.createSignal({})
 	local var22, var23 = signalsModule.createSignal(nil)
-	local var24 = signalsModule.createComputed(function(p0) --[[ line: 69 ]]
+	local var24 = signalsModule.createComputed(function(p0)
 		-- upvalues: var8 (ref)
 		local var29 = var8(p0)
 		
@@ -45,11 +45,11 @@ local var5 = function() --[[ line: 57 ]]
 		setEntryContext = var19,
 		getErrorReason = var22,
 		setErrorReason = var23,
-		setOnFlowComplete = function(value) --[[ line: 81 ]]
+		setOnFlowComplete = function(value)
 			-- upvalues: var25 (write)
 			var25 = value
 		end,
-		triggerOnFlowComplete = function(p1) --[[ line: 85 ]]
+		triggerOnFlowComplete = function(p1)
 			-- upvalues: var25 (write)
 			if var25 then
 				var25(p1)
@@ -60,28 +60,28 @@ local var5 = function() --[[ line: 57 ]]
 		getIsNativePurchase = var16,
 		setIsNativePurchase = var17,
 		getRobloxSubscriptionProductId = var24,
-		setOnUnmountUI = function(value) --[[ line: 115 ]]
+		setOnUnmountUI = function(value)
 			-- upvalues: var26 (write)
 			var26 = value
 		end,
-		triggerUnmountUI = function() --[[ line: 119 ]]
+		triggerUnmountUI = function()
 			-- upvalues: var26 (write)
 			if var26 then
 				var26()
 				var26 = nil
 			end
 		end,
-		setOnBackButtonActivated = function(value) --[[ line: 91 ]]
+		setOnBackButtonActivated = function(value)
 			-- upvalues: var27 (write)
 			var27 = value
 		end,
-		triggerOnBackButtonActivated = function() --[[ line: 95 ]]
+		triggerOnBackButtonActivated = function()
 			-- upvalues: var27 (write)
 			if var27 then
 				var27()
 			end
 		end,
-		setOnCtaOverride = function(value) --[[ line: 101 ]]
+		setOnCtaOverride = function(value)
 			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var28 (write)
 			if fFlagRobloxPlusFAEFreeTrialModule then
 				var28 = value
@@ -89,7 +89,7 @@ local var5 = function() --[[ line: 57 ]]
 				return
 			end
 		end,
-		getOnCtaOverride = function() --[[ line: 108 ]]
+		getOnCtaOverride = function()
 			-- upvalues: fFlagRobloxPlusFAEFreeTrialModule (copy), var28 (write)
 			return if fFlagRobloxPlusFAEFreeTrialModule then var28 else nil
 		end
@@ -97,14 +97,14 @@ local var5 = function() --[[ line: 57 ]]
 end
 
 return {
-	get = function() --[[ line: 159 ]]
+	get = function()
 		-- upvalues: var4 (write), signalsModule (ref), var5 (ref)
 		if var4 == nil then
 			var4 = signalsModule.createComputed(var5)(false)
 		end
 		return var4
 	end,
-	cleanup = function() --[[ line: 166 ]]
+	cleanup = function()
 		-- upvalues: var4 (write)
 		var4 = nil
 	end

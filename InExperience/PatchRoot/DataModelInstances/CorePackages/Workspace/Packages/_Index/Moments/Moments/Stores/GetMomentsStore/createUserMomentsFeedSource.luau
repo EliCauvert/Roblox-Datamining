@@ -17,7 +17,7 @@ local fFlagProfileMomentsOrderingAndReactions = require(parent.SharedFlags).FFla
 local fFlagMomentsRemoveDeletedFromProfile = require(parent.SharedFlags).FFlagMomentsRemoveDeletedFromProfile
 local getFFlagMomentsFilterUnavailableFeedItemsModule = require(moments.Flags.GetFFlagMomentsFilterUnavailableFeedItems)
 
-return function(p0, p1) --[[ line: 39 | named "createUserMomentsFeedSource" ]]
+return function(p0, p1)
 	-- upvalues: momentsGetMomentsUserStoreModule (ref), recommendationSource (ref), fFlagProfileMomentsOrderingAndReactions (ref), getReactionsStoreModule (ref), getShareCountsStoreModule (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), getFFlagMomentsFilterUnavailableFeedItemsModule (ref), shouldShowMomentInFeedModule (ref), reportUnavailableFeedItemModule (ref)
 	p1 = p1 or {}
 	local var10 = if p1.userStore ~= nil then momentsGetMomentsUserStoreModule(false) else p1.userStore
@@ -26,7 +26,7 @@ return function(p0, p1) --[[ line: 39 | named "createUserMomentsFeedSource" ]]
 	return {
 		id = `profile:{p0}`,
 		recommendationSource = recommendationSource.Profile,
-		fetchAsync = function(p2) --[[ line: 48 ]]
+		fetchAsync = function(p2)
 			-- upvalues: var10 (ref), p0 (ref), fFlagProfileMomentsOrderingAndReactions (copy), getReactionsStoreModule (copy), getShareCountsStoreModule (copy), fFlagMomentsRemoveDeletedFromProfile (copy), getDeletedMomentsStoreModule (copy), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (copy), getFFlagMomentsFilterUnavailableFeedItemsModule (copy), shouldShowMomentInFeedModule (copy), reportUnavailableFeedItemModule (copy), initialIndex (ref)
 			local t = {}
 			local var12 = p2

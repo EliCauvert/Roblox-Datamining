@@ -10,7 +10,7 @@ local t = {}
 local t_1 = { MeshPart = { "MeshId" } }
 local t_2 = { MeshPart = { MeshId = true } }
 
-local function validateMeshIds(p0, p1) --[[ line: 34 ]]
+local function validateMeshIds(p0, p1)
 	-- upvalues: parseContentIdsModule (ref), t_1 (ref), t_2 (ref)
 	if parseContentIdsModule.parseWithErrorCheck({}, {}, p0, t_1, t_2, p1) then
 		return true
@@ -18,7 +18,7 @@ local function validateMeshIds(p0, p1) --[[ line: 34 ]]
 	return false, { p0.Name .. " does not have a MeshId" }
 end
 
-local function validateAllMeshParts(p2, p3) --[[ line: 52 ]]
+local function validateAllMeshParts(p2, p3)
 	-- upvalues: constantsModule (ref), validateMeshIds (ref)
 	local t, var20
 	for i, v in constantsModule.ASSET_TYPE_INFO do
@@ -67,13 +67,13 @@ local function validateAllMeshParts(p2, p3) --[[ line: 52 ]]
 	return true
 end
 
-local function _(p4, p5) --[[ line: 107 | named "isWindowValid" ]]
+local function _(p4, p5)
 	return p4 <= p5
 end
 
 local list = { "X", "Y", "Z" }
 
-local function calculateScalingWindow(p6, p7) --[[ line: 116 ]]
+local function calculateScalingWindow(p6, p7)
 	-- upvalues: boundsDataUtilsModule (ref), list (ref)
 	local t = {}
 	local var22, _, var23 = boundsDataUtilsModule.calculateBoundsDimensions(p6)
@@ -99,7 +99,7 @@ local function calculateScalingWindow(p6, p7) --[[ line: 116 ]]
 	return t
 end
 
-local function combineScalingWindows(p8) --[[ line: 144 ]]
+local function combineScalingWindows(p8)
 	local t = {}
 	
 	for i, v in p8 do
@@ -112,7 +112,7 @@ local function combineScalingWindows(p8) --[[ line: 144 ]]
 	return t
 end
 
-local function createFinalResults(p9) --[[ line: 160 ]]
+local function createFinalResults(p9)
 	-- upvalues: list (ref)
 	local t = { meshSize = p9.meshSize, overallSize = p9.overallSize }
 	
@@ -130,7 +130,7 @@ local function createFinalResults(p9) --[[ line: 160 ]]
 	return t
 end
 
-function t.preprocessDataAsync(p10, p11) --[[ line: 180 ]]
+function t.preprocessDataAsync(p10, p11)
 	-- upvalues: validateAllMeshParts (ref), constantsModule (ref), getMeshInfoModule (ref), getMeshVertsModule (ref)
 	local var28, var29 = validateAllMeshParts(p10, p11)
 	
@@ -173,7 +173,7 @@ function t.preprocessDataAsync(p10, p11) --[[ line: 180 ]]
 	return { ok = true, cache = { meshData = t } }
 end
 
-function t.isPreprocessDataCached(p12, p13) --[[ line: 232 ]]
+function t.isPreprocessDataCached(p12, p13)
 	-- upvalues: constantsModule (ref)
 	local meshData = p13.meshData
 	
@@ -201,7 +201,7 @@ function t.isPreprocessDataCached(p12, p13) --[[ line: 232 ]]
 	return true
 end
 
-function t.calculateScaleToValidateBoundsAsync(p14, p15, p16) --[[ line: 268 ]]
+function t.calculateScaleToValidateBoundsAsync(p14, p15, p16)
 	-- upvalues: validateAllMeshParts (ref), boundsCalculatorModule (ref), boundsDataUtilsModule (ref), calculateScalingWindow (ref), constantsModule (ref), combineScalingWindows (ref), createFinalResults (ref)
 	local var43, var44 = validateAllMeshParts(p14, p15)
 	

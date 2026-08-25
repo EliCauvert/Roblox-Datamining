@@ -6,7 +6,7 @@ local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExpe
 local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local fFlagPartyFoundationIconFixEnabled = sharedFlagsModule.FFlagPartyFoundationIconFixEnabled
 
-return function() --[[ line: 13 ]]
+return function()
 	-- upvalues: universalAppPolicyModule (ref), argoPartyExperimentation (ref), getFFlagIsSquadEnabled (ref), fFlagPartyFoundationIconFixEnabled (ref), foundationModule (ref)
 	local getCanSeeChatTerminology = universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology
 	

@@ -3,13 +3,13 @@ local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 
-return reactModule.memo(function(value) --[[ line: 23 | named "CollectionBackgroundMural" ]]
+return reactModule.memo(function(value)
 	-- upvalues: useStyle (ref), useDesignTokens (ref), reactModule (ref)
 	return reactModule.createElement("ImageLabel", {
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
 		Image = value.backgroundMuralUrl,
-		Size = value.containerSizeBinding:map(function(p0) --[[ line: 34 ]]
+		Size = value.containerSizeBinding:map(function(p0)
 			return UDim2.new(1, 0, 0, p0.Y)
 		end),
 		ZIndex = value.ZIndex or -1,

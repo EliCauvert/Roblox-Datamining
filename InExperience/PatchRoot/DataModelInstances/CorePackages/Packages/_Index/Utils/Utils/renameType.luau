@@ -19,7 +19,7 @@ local isObjectType = graphQLModule.isObjectType
 local isScalarType = graphQLModule.isScalarType
 local isUnionType = graphQLModule.isUnionType
 
-function t.renameType(p0, p1) --[[ line: 52 ]]
+function t.renameType(p0, p1)
 	-- upvalues: boolean (ref), isObjectType (ref), graphQLObjectType (ref), object (ref), array (ref), isInterfaceType (ref), graphQLInterfaceType (ref), isUnionType (ref), graphQLUnionType (ref), isInputObjectType (ref), graphQLInputObjectType (ref), isEnumType (ref), graphQLEnumType (ref), isScalarType (ref), graphQLScalarType (ref), error (ref)
 	if boolean.toJSBoolean(isObjectType(p0)) then
 		return graphQLObjectType.new(object.assign({}, p0:toConfig(), {
@@ -27,7 +27,7 @@ function t.renameType(p0, p1) --[[ line: 52 ]]
 			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
 				name = object.assign({}, p0.astNode.name, { value = p1 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p2) --[[ line: 68 ]]
+			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p2)
 				-- upvalues: object (copy), p1 (ref)
 				return object.assign({}, p2, { name = object.assign({}, p2.name, { value = p1 }) })
 			end)
@@ -38,7 +38,7 @@ function t.renameType(p0, p1) --[[ line: 52 ]]
 			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
 				name = object.assign({}, p0.astNode.name, { value = p1 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p3) --[[ line: 88 ]]
+			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p3)
 				-- upvalues: object (copy), p1 (ref)
 				return object.assign({}, p3, { name = object.assign({}, p3.name, { value = p1 }) })
 			end)
@@ -49,7 +49,7 @@ function t.renameType(p0, p1) --[[ line: 52 ]]
 			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
 				name = object.assign({}, p0.astNode.name, { value = p1 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p4) --[[ line: 108 ]]
+			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p4)
 				-- upvalues: object (copy), p1 (ref)
 				return object.assign({}, p4, { name = object.assign({}, p4.name, { value = p1 }) })
 			end)
@@ -60,7 +60,7 @@ function t.renameType(p0, p1) --[[ line: 52 ]]
 			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
 				name = object.assign({}, p0.astNode.name, { value = p1 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p5) --[[ line: 128 ]]
+			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p5)
 				-- upvalues: object (copy), p1 (ref)
 				return object.assign({}, p5, { name = object.assign({}, p5.name, { value = p1 }) })
 			end)
@@ -71,7 +71,7 @@ function t.renameType(p0, p1) --[[ line: 52 ]]
 			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
 				name = object.assign({}, p0.astNode.name, { value = p1 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p6) --[[ line: 148 ]]
+			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p6)
 				-- upvalues: object (copy), p1 (ref)
 				return object.assign({}, p6, { name = object.assign({}, p6.name, { value = p1 }) })
 			end)
@@ -82,7 +82,7 @@ function t.renameType(p0, p1) --[[ line: 52 ]]
 			astNode = if p0.astNode == nil then p0.astNode else object.assign({}, p0.astNode, {
 				name = object.assign({}, p0.astNode.name, { value = p1 })
 			}),
-			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p7) --[[ line: 168 ]]
+			extensionASTNodes = if p0.extensionASTNodes == nil then p0.extensionASTNodes else array.map(p0.extensionASTNodes, function(p7)
 				-- upvalues: object (copy), p1 (ref)
 				return object.assign({}, p7, { name = object.assign({}, p7.name, { value = p1 }) })
 			end)

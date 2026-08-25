@@ -1,14 +1,14 @@
 ﻿local reactModule = require(script:FindFirstAncestor("DiscoveryHeroUnit").Parent.React)
 
-local function _(p0, p1, p2, p3, p4) --[[ line: 99 | named "customEasing" ]]
+local function _(p0, p1, p2, p3, p4)
 	return (1 - p0) ^ 3 * p1 + 3 * (1 - p0) ^ 2 * p0 * p2 + 3 * (1 - p0) * p0 ^ 2 * p3 + p0 ^ 3 * p4
 end
 
 return {
-	useNormalizedVerticalProgress = function(p5, p6) --[[ line: 31 ]]
+	useNormalizedVerticalProgress = function(p5, p6)
 		-- upvalues: reactModule (ref)
 		local var1, var2 = reactModule.useBinding(-1)
-		reactModule.useEffect(function() --[[ line: 38 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p5 (ref), p6 (ref), var2 (ref)
 			local t = {}
 			
@@ -18,14 +18,14 @@ return {
 				local y = current_1.AbsolutePosition.Y
 				local y_1 = current_1.AbsoluteWindowSize.Y
 				
-				local function _() --[[ line: 48 | named "calculateOffset" ]]
+				local function _()
 					-- upvalues: current (ref), current_1 (ref), y (write)
 					return current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y
 				end
 				
 				local var4 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y
 				
-				local function updateBinding() --[[ line: 55 ]]
+				local function updateBinding()
 					-- upvalues: y_1 (write), var4 (write), current_1 (ref), var2 (copy)
 					if y_1 == 0 then
 						return
@@ -33,7 +33,7 @@ return {
 					var2((var4 - current_1.CanvasPosition.Y) / y_1)
 				end
 				
-				local function updateWindowParams() --[[ line: 66 ]]
+				local function updateWindowParams()
 					-- upvalues: y (write), current_1 (ref), y_1 (write), var4 (write), current (ref), var2 (copy)
 					y = current_1.AbsolutePosition.Y
 					y_1 = current_1.AbsoluteWindowSize.Y
@@ -58,7 +58,7 @@ return {
 					current_1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateBinding)
 				}
 			end
-			return function() --[[ line: 82 ]]
+			return function()
 				-- upvalues: t (write)
 				for i, v in t do
 					v:Disconnect()
@@ -68,7 +68,7 @@ return {
 		
 		return var1
 	end,
-	getYPositionOffsetForMotion = function(value, p7, p8, p9) --[[ line: 103 ]]
+	getYPositionOffsetForMotion = function(value, p7, p8, p9)
 		local clampedValue = math.clamp(value, -1, 1)
 		
 		if clampedValue >= 0 then
@@ -81,7 +81,7 @@ return {
 		
 		return p7 * var10 + p9 * (1 - var10)
 	end,
-	getNormalizedTopPosition = function(p10, p11) --[[ line: 8 ]]
+	getNormalizedTopPosition = function(p10, p11)
 		if not p11 or not p10 then
 			return nil
 		end

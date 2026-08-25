@@ -33,14 +33,14 @@ local t = {
 	invitedKey = "Feature.SettingsHub.Label.Invited",
 	LayoutOrder = 0,
 	entries = {},
-	onEntryActivated = function(_, _) --[[ line: 62 ]]
+	onEntryActivated = function(_, _)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onEntryActivated was not passed to ParticipantList")
 	end,
 	sortComparator = presenceSortComparator
 }
 
-function ParticipantList(p0) --[[ line: 75 ]]
+function ParticipantList(p0)
 	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), reactModule (ref), useLocalization (ref), fFlagAppChatPresenceStoreMigrationModule (ref), signalsModule (ref), var16 (ref), var17 (ref), signalsReactModule (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), participantEntryModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), participantEntryRightFrameModule (ref), sortedList (ref)
 	local var19 = cryoModule.Dictionary.join(t, p0)
 	local onEntryActivated = var19.onEntryActivated or t.onEntryActivated
@@ -50,9 +50,9 @@ function ParticipantList(p0) --[[ line: 75 ]]
 		pendingLabelText = var19.pendingKey,
 		invitedLabelText = var19.invitedKey
 	})
-	local var24 = if fFlagAppChatPresenceStoreMigrationModule then signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 92 ]]
+	local var24 = if fFlagAppChatPresenceStoreMigrationModule then signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var19 (ref), var16 (copy), var17 (copy)
-		return signalsModule.createComputed(function(p1) --[[ line: 93 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: var19 (copy), var16 (copy), var17 (copy)
 			local t = {}
 			
@@ -68,7 +68,7 @@ function ParticipantList(p0) --[[ line: 75 ]]
 		end)
 	end, { var19.entries })) else nil
 	
-	local _ = function(p2) --[[ line: 110 ]]
+	local _ = function(p2)
 		-- upvalues: var22 (write), reactModule (copy)
 		if var22 == nil then
 			return nil
@@ -78,7 +78,7 @@ function ParticipantList(p0) --[[ line: 75 ]]
 		return var22.current[p2]
 	end
 	
-	local var25 = function(p3, _) --[[ line: 122 ]]
+	local var25 = function(p3, _)
 		-- upvalues: var23 (ref), var21 (ref), var22 (write), reactModule (copy), var19 (ref), fFlagAppChatParticipantDialogGamepadFocusModule (copy), onEntryActivated (ref), participantEntryModule (copy)
 		local var36 = tostring(p3.id)
 		local t = {
@@ -95,17 +95,17 @@ function ParticipantList(p0) --[[ line: 75 ]]
 			end
 			var38 = var22.current[var36]
 			local var39 = var19.activeParticipantId == var36
-			t.onActivated = if fFlagAppChatParticipantDialogGamepadFocusModule then function() --[[ line: 134 ]]
+			t.onActivated = if fFlagAppChatParticipantDialogGamepadFocusModule then function()
 				-- upvalues: var39 (ref), onEntryActivated (copy), p3 (ref), var38 (ref)
 				if not var39 then
 					onEntryActivated(p3, var38)
 				end
-			end elseif var39 then nil else function() --[[ line: 140 ]]
+			end elseif var39 then nil else function()
 				-- upvalues: onEntryActivated (copy), p3 (ref), var38 (ref)
 				onEntryActivated(p3, var38)
 			end
 		else
-			function t.onActivated() --[[ line: 144 ]]
+			function t.onActivated()
 				-- upvalues: onEntryActivated (copy), p3 (ref)
 				onEntryActivated(p3, nil)
 			end
@@ -146,7 +146,7 @@ function ParticipantList(p0) --[[ line: 75 ]]
 			var32 = var22.current[var31]
 			t_3.dotsRef = var32
 			
-			function t_3.onDotsActivated() --[[ line: 173 ]]
+			function t_3.onDotsActivated()
 				-- upvalues: onEntryActivated (ref), v (ref), var32 (ref)
 				onEntryActivated(v, var32)
 			end

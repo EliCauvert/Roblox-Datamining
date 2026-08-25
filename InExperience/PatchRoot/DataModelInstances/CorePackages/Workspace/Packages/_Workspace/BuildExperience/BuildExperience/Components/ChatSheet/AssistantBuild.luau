@@ -18,7 +18,7 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local view = foundationModule.View
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "AssistantBuild" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
 	local var9 = if fFlagBuildLocalization then useLocalization({
 		disabledTitle = localizationStringsModule.CHAT_ASSISTANT_DISABLED,
@@ -28,7 +28,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "AssistantBuild" ]]
 	local var11 = getPlayButtonStoreModule()
 	local var12 = signalsReactModule.useSignalState(var10.getIsDisabled)
 	local var13 = signalsReactModule.useSignalState(var10.getIsDisabledTooltipOpen)
-	local var14 = reactModule.useCallback(function() --[[ line: 45 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var10 (ref), var13 (ref), var11 (ref)
 		if var12 then
 			var10.setIsDisabledTooltipOpen(not var13)
@@ -38,11 +38,11 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "AssistantBuild" ]]
 		var10.setIsDisabledTooltipOpen(false)
 		var11.setIsActive(true)
 	end, { var10, var12, var13, var11 })
-	local var15 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function() --[[ line: 54 ]]
+	local var15 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
 		var10.setIsDisabledTooltipOpen(false)
 	end, { var10 }) else nil
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var11 (ref), var10 (ref)
 		if var12 then
 			var11.setIsActive(false)

@@ -11,12 +11,12 @@ local t = {
 	BorderPaddingSize = 20,
 	AssetTextMaxSize = 14,
 	ContainerBackgroundColor = require(script.Parent.Colors).Carbon,
-	ContainerSize = function(p0) --[[ line: 10 ]]
+	ContainerSize = function(p0)
 		-- upvalues: constantsModule (ref)
 		return UDim2.new(1, 0, 1, -constantsModule.TopBarHeight * p0)
 	end,
 	ContainerAnchorPoint = Vector2.new(0.5, 0),
-	ContainerPosition = function(p1) --[[ line: 15 ]]
+	ContainerPosition = function(p1)
 		-- upvalues: constantsModule (ref)
 		return UDim2.new(0.5, 0, 0, constantsModule.TopBarHeight * p1)
 	end,
@@ -37,8 +37,8 @@ local t = {
 	TryOnSize = UDim2.new(0.4, 0, 1, -30)
 }
 setmetatable(t, {
-	__newindex = function(_, _, _) --[[ line: 43 ]] end,
-	__index = function(_, p2) --[[ line: 44 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p2)
 		error("WideLandscapeView table has no value: " .. tostring(p2))
 	end
 })

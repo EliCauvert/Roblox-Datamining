@@ -2,7 +2,7 @@
 local tutils = dependenciesModule.tutils
 local llama = dependenciesModule.llama
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: llama (ref), tutils (ref)
 	if llama.isEmpty(p0) then
 		return "{}"

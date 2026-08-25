@@ -25,24 +25,24 @@ local t_2 = {
 }
 local t_3 = { stiffness = 400, damping = 40, mass = 1 }
 
-return reactModule.memo(function(value) --[[ line: 49 | named "InGameAssetIPInfringementErrorModal" ]]
+return reactModule.memo(function(value)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t_3 (ref), t_2 (ref), t_1 (ref), withLocalization (ref), buttonType (ref), interactiveAlert (ref)
 	local var9, var10 = reactModule.useState(true)
-	local var11, var12 = reactOtterModule.useAnimatedBinding(1, function() --[[ line: 52 ]]
+	local var11, var12 = reactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: var9 (ref), value (ref)
 		if not var9 then
 			value.onBack()
 		end
 	end)
-	local var13 = reactModule.useMemo(function() --[[ line: 59 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref)
 		return if var9 then 0 else 1
 	end, { var9 })
-	reactModule.useEffect(function() --[[ line: 63 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), reactOtterModule (copy), var13 (ref), t_3 (copy)
 		var12(reactOtterModule.spring(var13, t_3))
 	end, { var13 })
-	local var14 = reactModule.useCallback(function() --[[ line: 67 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
 		var10(false)
 	end, { var10 })
@@ -53,7 +53,7 @@ return reactModule.memo(function(value) --[[ line: 49 | named "InGameAssetIPInfr
 		reportExperience = "Feature.ReportAbuse.Action.IpReportExperience",
 		title = var15.titleKey,
 		description = var15.descriptionKey
-	})(function(p0) --[[ line: 80 ]]
+	})(function(p0)
 		-- upvalues: var15 (ref), value (ref), buttonType (copy), var14 (ref), reactModule (copy), var11 (ref), interactiveAlert (copy)
 		local t = {}
 		
@@ -80,7 +80,7 @@ return reactModule.memo(function(value) --[[ line: 49 | named "InGameAssetIPInfr
 		return reactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = var11:map(function(p1) --[[ line: 113 ]]
+			BackgroundTransparency = var11:map(function(p1)
 				return p1 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
@@ -96,7 +96,7 @@ return reactModule.memo(function(value) --[[ line: 49 | named "InGameAssetIPInfr
 				title = p0.title,
 				bodyText = p0.description,
 				anchorPoint = Vector2.new(0.5, 0.5),
-				position = var11:map(function(p2) --[[ line: 129 ]]
+				position = var11:map(function(p2)
 					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p2)
 				end),
 				buttonStackInfo = { buttons = t }

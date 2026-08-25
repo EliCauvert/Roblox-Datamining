@@ -2,13 +2,13 @@
 local inspectAvatarTooltipImpressionCacheModule = require(script.Parent.InspectAvatarTooltipImpressionCache)
 local profilePlatformInspectAvatarTooltipMaxImpressions = game:DefineFastInt("ProfilePlatformInspectAvatarTooltipMaxImpressions", 3)
 
-return function() --[[ line: 17 | named "createInspectAvatarTooltipStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), inspectAvatarTooltipImpressionCacheModule (ref), profilePlatformInspectAvatarTooltipMaxImpressions (ref)
 	local var3, var4 = signalsModule.createSignal(false)
 	
 	return {
 		getIsOpen = var3,
-		tryShow = function() --[[ line: 20 ]]
+		tryShow = function()
 			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), profilePlatformInspectAvatarTooltipMaxImpressions (copy), var4 (ref)
 			local value = inspectAvatarTooltipImpressionCacheModule.getValue()
 			
@@ -20,11 +20,11 @@ return function() --[[ line: 17 | named "createInspectAvatarTooltipStore" ]]
 			inspectAvatarTooltipImpressionCacheModule.incrementValue()
 			var4(true)
 		end,
-		hide = function() --[[ line: 32 ]]
+		hide = function()
 			-- upvalues: var4 (ref)
 			var4(false)
 		end,
-		permanentlyDismiss = function() --[[ line: 36 ]]
+		permanentlyDismiss = function()
 			-- upvalues: inspectAvatarTooltipImpressionCacheModule (copy), var4 (ref)
 			inspectAvatarTooltipImpressionCacheModule.dismissValue()
 			var4(false)

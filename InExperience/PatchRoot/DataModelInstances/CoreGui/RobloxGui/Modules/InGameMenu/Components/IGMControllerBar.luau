@@ -27,7 +27,7 @@ IGMControllerBar.validateProps = t.strictInterface({
 	setControllerBarHeight = t.callback
 })
 
-function IGMControllerBar.didMount(p0) --[[ line: 39 ]]
+function IGMControllerBar.didMount(p0)
 	-- upvalues: t_1 (ref), constantsModule (ref)
 	if p0:getHints(t_1) then
 		p0.props.setControllerBarHeight(constantsModule.ControllerBarHeight)
@@ -37,7 +37,7 @@ function IGMControllerBar.didMount(p0) --[[ line: 39 ]]
 	p0.props.setControllerBarHeight(0)
 end
 
-function IGMControllerBar.didUpdate(p1) --[[ line: 48 ]]
+function IGMControllerBar.didUpdate(p1)
 	-- upvalues: t_1 (ref), constantsModule (ref)
 	if p1:getHints(t_1) then
 		p1.props.setControllerBarHeight(constantsModule.ControllerBarHeight)
@@ -47,11 +47,11 @@ function IGMControllerBar.didUpdate(p1) --[[ line: 48 ]]
 	p1.props.setControllerBarHeight(0)
 end
 
-function IGMControllerBar.willUnmount(p2) --[[ line: 57 ]]
+function IGMControllerBar.willUnmount(p2)
 	p2.props.setControllerBarHeight(0)
 end
 
-function IGMControllerBar.getHints(p3, p4) --[[ line: 61 ]]
+function IGMControllerBar.getHints(p3, p4)
 	-- upvalues: constantsModule (ref)
 	if p3.props.inputType == constantsModule.InputType.Gamepad then
 		return if p3.props.respawnDialogOpen then {
@@ -74,9 +74,9 @@ function IGMControllerBar.getHints(p3, p4) --[[ line: 61 ]]
 	end
 end
 
-function IGMControllerBar.render(p5) --[[ line: 111 ]]
+function IGMControllerBar.render(p5)
 	-- upvalues: withLocalizationModule (ref), t_1 (ref), roact (ref), controllerBar (ref)
-	return withLocalizationModule(t_1)(function(p6) --[[ line: 112 ]]
+	return withLocalizationModule(t_1)(function(p6)
 		-- upvalues: p5 (ref), roact (copy), controllerBar (copy)
 		local var7 = p5:getHints(p6)
 		
@@ -84,7 +84,7 @@ function IGMControllerBar.render(p5) --[[ line: 111 ]]
 	end)
 end
 
-return roactRodux.connect(function(p7, _) --[[ line: 122 | named "mapStateToProps" ]]
+return roactRodux.connect(function(p7, _)
 	return {
 		isMenuOpen = p7.isMenuOpen,
 		isMainPageMoreMenuOpen = p7.isMainPageMoreMenuOpen,
@@ -93,10 +93,10 @@ return roactRodux.connect(function(p7, _) --[[ line: 122 | named "mapStateToProp
 		inputType = p7.displayOptions.inputType,
 		screenSize = p7.screenSize
 	}
-end, function(p8) --[[ line: 133 ]]
+end, function(p8)
 	-- upvalues: setControllerBarHeightModule (ref)
 	return {
-		setControllerBarHeight = function(value) --[[ line: 135 ]]
+		setControllerBarHeight = function(value)
 			-- upvalues: p8 (ref), setControllerBarHeightModule (copy)
 			p8(setControllerBarHeightModule(value))
 		end

@@ -9,7 +9,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppDemoModePlayButtonTelemetry = sharedFlagsModule.FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p0) --[[ line: 33 | named "sduiReportGamePlayIntent" ]]
+return function(p0)
 	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), findAnalyticsFieldInAncestors (ref), setGamePlaySession (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), gamePlayIntent (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref)
 	local sduiContext = p0.sduiContext
 	local analyticsContext = p0.analyticsContext

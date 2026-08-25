@@ -6,7 +6,7 @@ local sduiFeatureErrorUiModule = require(sduiSharedUtilities.ui.SduiFeatureError
 local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
 local fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = require(parent.SharedFlags).FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 33 | named "SduiFeatureEntryPointUi" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref), loading (ref), sduiFeatureErrorUiModule (ref)
 	return reactModule.createElement("Frame", {
 		Size = if p0.Size then p0.Size else UDim2.new(1, 0, 0, 0),

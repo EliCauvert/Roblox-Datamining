@@ -5,14 +5,14 @@ local commonUtilModule = require(coreGuiService.RobloxGui.Modules.Common.CommonU
 local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
 local treeViewItemModule = require(coreGuiService.RobloxGui.Modules.Stats.TreeViewItem)
 
-local function _() --[[ line: 19 | named "__GetMemoryPerformanceStatsItem" ]]
+local function _()
 	-- upvalues: statsService (ref), statsUtilsModule (ref)
 	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
 	
 	return if performanceStats == nil then nil else performanceStats:FindFirstChild(statsUtilsModule.StatNames[statsUtilsModule.StatType_Memory])
 end
 
-local function __FillInMemoryUsageTreeRecursive(p0, p1) --[[ line: 30 ]]
+local function __FillInMemoryUsageTreeRecursive(p0, p1)
 	-- upvalues: statsUtilsModule (ref), commonUtilModule (ref), __FillInMemoryUsageTreeRecursive (ref)
 	p0:setLabelAndValue(statsUtilsModule.GetMemoryAnalyzerStatName(p1.Name), p1:GetValue())
 	
@@ -25,7 +25,7 @@ local t = {}
 setmetatable(t, baseMemoryAnalyzerModule)
 t.__index = t
 
-function t.new(p2) --[[ line: 61 ]]
+function t.new(p2)
 	-- upvalues: baseMemoryAnalyzerModule (ref), t (ref)
 	local var9 = baseMemoryAnalyzerModule.new(p2)
 	setmetatable(var9, t)
@@ -36,14 +36,14 @@ function t.new(p2) --[[ line: 61 ]]
 	return var9
 end
 
-function t:startListeningForUpdates() --[[ line: 86 ]]
+function t:startListeningForUpdates()
 	self._shouldListenForUpdates = true
 	
 	if self._spawnedLoopScheduled then
 		return
 	end
 	self._spawnedLoopScheduled = true
-	spawn(function() --[[ line: 95 ]]
+	spawn(function()
 		-- upvalues: self (ref)
 		while self._shouldListenForUpdates do
 			self:refreshMemoryUsageTree()
@@ -54,11 +54,11 @@ function t:startListeningForUpdates() --[[ line: 86 ]]
 	end)
 end
 
-function t:stopListeningForUpdates() --[[ line: 107 ]]
+function t:stopListeningForUpdates()
 	self._shouldListenForUpdates = false
 end
 
-function t:refreshMemoryUsageTree() --[[ line: 112 ]]
+function t:refreshMemoryUsageTree()
 	-- upvalues: treeViewItemModule (ref), statsService (ref), statsUtilsModule (ref), __FillInMemoryUsageTreeRecursive (ref)
 	if self._rootTreeViewItem == nil then
 		self._rootTreeViewItem = treeViewItemModule.new("root", nil)
@@ -72,7 +72,7 @@ function t:refreshMemoryUsageTree() --[[ line: 112 ]]
 	__FillInMemoryUsageTreeRecursive(self._rootTreeViewItem, var11)
 end
 
-function t:getMemoryUsageTree() --[[ line: 125 ]]
+function t:getMemoryUsageTree()
 	return self._rootTreeViewItem
 end
 

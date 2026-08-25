@@ -30,21 +30,21 @@ local builderSans = Enum.Font.BuilderSans
 local uDim2 = UDim2.new(0, 16, 0, 16)
 local code = Enum.Font.Code
 
-local var12 = function(p0) --[[ line: 43 ]]
+local var12 = function(p0)
 	print(`[Default link callback]: URL [{p0}] is clicked`)
 end
 
 local t = { renderers = {} }
 
-local function _(p1, p2) --[[ line: 51 | named "getFontFace" ]]
+local function _(p1, p2)
 	return if p1.fontFace then p1.fontFace elseif p1.font then Font.fromEnum(p1.font) else Font.fromEnum(p2)
 end
 
-local _ = function(value) --[[ line: 60 | named "shouldUseTopPadding" ]]
+local _ = function(value)
 	return value.offset ~= 0
 end
 
-local function render(p3, p4) --[[ line: 65 ]]
+local function render(p3, p4)
 	-- upvalues: t (ref), getNodeTypeConfigModule (ref)
 	if not p3 then
 		return nil
@@ -65,7 +65,7 @@ local function render(p3, p4) --[[ line: 65 ]]
 	return var22
 end
 
-local function processChildren(p5, p6) --[[ line: 85 ]]
+local function processChildren(p5, p6)
 	-- upvalues: getNodeTypeConfigModule (ref), render (ref)
 	local children = p5.children
 	
@@ -97,7 +97,7 @@ local function processChildren(p5, p6) --[[ line: 85 ]]
 	return t
 end
 
-local function renderRoot(p7, p8) --[[ line: 117 ]]
+local function renderRoot(p7, p8)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col",
@@ -106,7 +106,7 @@ local function renderRoot(p7, p8) --[[ line: 117 ]]
 	}, p8.processChildren(p7, p8))
 end
 
-local function renderHeading(p9, p10) --[[ line: 128 ]]
+local function renderHeading(p9, p10)
 	-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref), mergeContextsModule (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
@@ -120,7 +120,7 @@ local function renderHeading(p9, p10) --[[ line: 128 ]]
 	})
 end
 
-local function renderParagraph(p11, p12) --[[ line: 147 ]]
+local function renderParagraph(p11, p12)
 	-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
@@ -132,7 +132,7 @@ local function renderParagraph(p11, p12) --[[ line: 147 ]]
 	})
 end
 
-local function computeLineNumbers(p13) --[[ line: 161 ]]
+local function computeLineNumbers(p13)
 	local p13Count = #p13
 	local t = {}
 	local var30 = 1
@@ -150,26 +150,26 @@ local function computeLineNumbers(p13) --[[ line: 161 ]]
 	return table.concat(t, "\n")
 end
 
-local _ = function(p14) --[[ line: 180 | named "copyToClipboard" ]]
+local _ = function(p14)
 	-- upvalues: messageBusService (ref)
-	pcall(function() --[[ line: 181 ]]
+	pcall(function()
 		-- upvalues: messageBusService (copy), p14 (ref)
 		return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p14 })
 	end)
 end
 
-local var20 = dashModule.memoize(function(p15) --[[ line: 189 ]]
+local var20 = dashModule.memoize(function(p15)
 	-- upvalues: messageBusService (ref)
-	return function() --[[ line: 190 ]]
+	return function()
 		-- upvalues: p15 (ref), messageBusService (copy)
-		pcall(function() --[[ line: 181 ]]
+		pcall(function()
 			-- upvalues: messageBusService (copy), p15 (ref)
 			return messageBusService:Publish(messageBusService:GetMessageId("ExternalContentSharing", "setClipboardText"), { text = p15 })
 		end)
 	end
 end)
 
-local function renderHardBreak() --[[ line: 453 ]]
+local function renderHardBreak()
 	-- upvalues: hardBreakElement (ref)
 	return hardBreakElement
 end
@@ -178,7 +178,7 @@ t.defaultRenderers = {
 	ROOT = renderRoot,
 	HEADING = renderHeading,
 	PARAGRAPH = renderParagraph,
-	CODE_BLOCK = function(p16, p17) --[[ line: 195 ]]
+	CODE_BLOCK = function(p16, p17)
 		-- upvalues: highlighter (ref), getCodeTextStyles (ref), code (ref), computeLineNumbers (ref), reactModule (ref), view (ref), foundationModule (ref), var20 (ref), text (ref), dashModule (ref)
 		local text_1 = p16.text
 		local var33 = if (if p16.attributes then p16.attributes.language else nil) == "lua" then highlighter.highlight(text_1, p17.colorScheme) else text_1
@@ -291,7 +291,7 @@ t.defaultRenderers = {
 			})
 		})
 	end,
-	STYLED_TEXT = function(p18, p19) --[[ line: 413 ]]
+	STYLED_TEXT = function(p18, p19)
 		-- upvalues: dashModule (ref), mergeContextsModule (ref)
 		local var43 = if p18.attributes and p18.attributes.style then p18.attributes.style else nil
 		local t = {}
@@ -307,7 +307,7 @@ t.defaultRenderers = {
 		end
 		return p19.processChildren(p18, mergeContextsModule(p19, { textStyles = t }))
 	end,
-	TEXT = function(p20, p21) --[[ line: 429 ]]
+	TEXT = function(p20, p21)
 		-- upvalues: processSoftBreaksModule (ref), getBaseTextElementEngineTags (ref), builderSans (ref), selectableTextElement (ref), textElement (ref)
 		local t = {
 			LayoutOrder = p20.index,
@@ -327,21 +327,21 @@ t.defaultRenderers = {
 		
 		return if p21.textStyles.selectable then selectableTextElement.new(t) else textElement.new(t)
 	end,
-	LINK = function(p22, p23) --[[ line: 457 ]]
+	LINK = function(p22, p23)
 		-- upvalues: mergeContextsModule (ref), dashModule (ref), isInlineElement (ref), hardBreakElement (ref), linkElement (ref)
 		local var47 = if p22.attributes then p22.attributes.url else p22.url or ""
 		
-		return linkElement.new(dashModule.filter(p23.processChildren(p22, mergeContextsModule(p23, { textStyles = { color = p23.linkStyles.linkColor } })), function(p24) --[[ line: 467 ]]
+		return linkElement.new(dashModule.filter(p23.processChildren(p22, mergeContextsModule(p23, { textStyles = { color = p23.linkStyles.linkColor } })), function(p24)
 			-- upvalues: isInlineElement (copy), hardBreakElement (copy)
 			return isInlineElement(p24) and p24 ~= hardBreakElement
 		end), {
-			onActivated = function() --[[ line: 471 ]]
+			onActivated = function()
 				-- upvalues: p23 (ref), var47 (ref)
 				p23.linkCallback(var47)
 			end
 		})
 	end,
-	LIST = function(p25, p26) --[[ line: 336 ]]
+	LIST = function(p25, p26)
 		-- upvalues: reactModule (ref), view (ref), render (ref), dashModule (ref), bulletList (ref), builderSans (ref)
 		local var50
 		local t = {}
@@ -394,7 +394,7 @@ t.defaultRenderers = {
 			UIPadding = p25.offset ~= 0 and reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 10) })
 		})
 	end,
-	LIST_ITEM = function(p27, p28) --[[ line: 403 ]]
+	LIST_ITEM = function(p27, p28)
 		-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref)
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y",
@@ -402,7 +402,7 @@ t.defaultRenderers = {
 			LayoutOrder = p27.index
 		}, { InlineLayout = renderInlineModule(p27, p28) })
 	end,
-	DIVIDER = function(p29) --[[ line: 477 ]]
+	DIVIDER = function(p29)
 		-- upvalues: reactModule (ref), view (ref), divider (ref)
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y",
@@ -413,7 +413,7 @@ t.defaultRenderers = {
 			Divider = reactModule.createElement(divider)
 		})
 	end,
-	QUOTE = function(p30, p31) --[[ line: 492 ]]
+	QUOTE = function(p30, p31)
 		-- upvalues: reactModule (ref), view (ref), renderInlineModule (ref), mergeContextsModule (ref)
 		return reactModule.createElement(view, {
 			tag = "size-full-0 auto-y padding-small",
@@ -432,7 +432,7 @@ t.defaultRenderers = {
 			})
 		})
 	end,
-	IMAGE = function(p32, p33) --[[ line: 516 ]]
+	IMAGE = function(p32, p33)
 		-- upvalues: imageElement (ref)
 		return imageElement.new({
 			LayoutOrder = p32.index,
@@ -453,7 +453,7 @@ t.defaultRenderers = {
 	LINE_BREAK = renderHardBreak
 }
 
-function t.render(p34, p35) --[[ line: 561 ]]
+function t.render(p34, p35)
 	-- upvalues: t (ref), dashModule (ref), builderSans (ref), code (ref), uDim2 (ref), var12 (ref), processChildren (ref), render (ref)
 	t.renderers = p35.userRenderers
 	local var52 = dashModule.joinDeep({

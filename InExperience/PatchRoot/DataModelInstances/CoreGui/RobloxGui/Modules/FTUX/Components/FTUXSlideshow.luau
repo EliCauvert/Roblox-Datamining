@@ -10,7 +10,7 @@ local descriptionModule = require(parent.Components.Slideshow.Description)
 local endItemModule = require(parent.Components.Slideshow.EndItem)
 local eventHandlerModule = require(parent.Events.EventHandler)
 
-return function(p0) --[[ line: 24 | named "FTUXSlideshow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), FTUXSlideshowDataModule (ref), FTUXConstantsModule (ref), eventHandlerModule (ref), headerModule (ref), titleModule (ref), descriptionModule (ref), stepperModule (ref), endItemModule (ref)
 	local var9, var10 = reactModule.useState(1)
 	local platform = p0.platform
@@ -21,15 +21,15 @@ return function(p0) --[[ line: 24 | named "FTUXSlideshow" ]]
 	local FOOTER_HEIGHT_RATIO = panelConstants.FOOTER_HEIGHT_RATIO
 	local var13 = panelConstants.CONTENT_PADDING / panelConstants.SLIDESHOW_FRAME_WIDTH
 	local var14 = 1 - 2 * var13
-	local var15 = reactModule.useCallback(function() --[[ line: 37 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var9 (ref)
 		var10(var9 + 1)
 	end, { var9 })
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: eventHandlerModule (copy), platform (ref), var9 (ref), var15 (ref)
 		eventHandlerModule.StartEvents(platform, var9, var15)
 		
-		return function() --[[ line: 44 ]]
+		return function()
 			-- upvalues: eventHandlerModule (copy), platform (copy), var9 (copy)
 			eventHandlerModule.StopEvents(platform, var9)
 		end

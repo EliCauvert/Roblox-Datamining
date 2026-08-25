@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-local function kind_of(p0) --[[ line: 5 ]]
+local function kind_of(p0)
 	if type(p0) ~= "table" then
 		return type(p0)
 	end
@@ -15,7 +15,7 @@ local function kind_of(p0) --[[ line: 5 ]]
 	return if var3 == 1 then "table" else "array"
 end
 
-local function escape_str(p1) --[[ line: 24 ]]
+local function escape_str(p1)
 	local list = {
 		"\\", "\"", "/", "b", "f", "n", "r", "t"
 	}
@@ -28,7 +28,7 @@ local function escape_str(p1) --[[ line: 24 ]]
 	return p1
 end
 
-function t.stringify(p2, p3) --[[ line: 33 ]]
+function t.stringify(p2, p3)
 	-- upvalues: kind_of (ref), t (ref), escape_str (ref)
 	local t_1 = {}
 	local var6 = kind_of(p2)

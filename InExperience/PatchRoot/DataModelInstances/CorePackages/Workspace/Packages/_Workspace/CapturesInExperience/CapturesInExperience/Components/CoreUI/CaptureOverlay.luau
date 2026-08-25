@@ -14,22 +14,22 @@ local useTopbarInsetHeightModule = require(parent.Hooks.useTopbarInsetHeight)
 local instant = reactOtterModule.instant
 local spring = reactOtterModule.spring
 
-return function(_) --[[ line: 26 ]]
+return function(_)
 	-- upvalues: useBindCaptureShortcutModule (ref), useTopbarInsetHeightModule (ref), useSelector (ref), constantsModule (ref), useShowFlashOverlayModule (ref), useAnimatedBinding (ref), useEffect (ref), instant (ref), runService (ref), spring (ref), reactModule (ref)
 	useBindCaptureShortcutModule()
 	local var8 = useTopbarInsetHeightModule()
-	local var9 = useSelector(function(p0) --[[ line: 31 ]]
+	local var9 = useSelector(function(p0)
 		-- upvalues: constantsModule (copy)
 		return p0[constantsModule.RoduxKey].IsOverlayActive
 	end)
 	local var10, var11 = useShowFlashOverlayModule()
 	local var12, var13 = useAnimatedBinding(1)
-	useEffect(function() --[[ line: 38 ]]
+	useEffect(function()
 		-- upvalues: var10 (ref), var11 (ref), var13 (ref), instant (copy), runService (copy), spring (copy)
 		if var10 then
 			var11()
 			var13(instant(0))
-			task.defer(function() --[[ line: 48 ]]
+			task.defer(function()
 				-- upvalues: runService (copy), var13 (copy), spring (copy)
 				runService.RenderStepped:Wait()
 				runService.RenderStepped:Wait()

@@ -81,19 +81,19 @@ local t = {
 	visibility = nil,
 	unitTestTouchEnabled = false,
 	Font = Enum.Font.Gotham,
-	openViewProfile = function() --[[ line: 93 ]]
+	openViewProfile = function()
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("openViewProfile was not passed to ChatMessage")
 	end,
-	renderMessage = function() --[[ line: 96 ]]
+	renderMessage = function()
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("renderMessage was not passed to ChatMessage")
 	end,
-	closeKeyboard = function() --[[ line: 99 ]] end
+	closeKeyboard = function() end
 }
 local var45 = if getFFlagDebugAppChatModule() then "TextButton" else "Frame"
 
-function ChatMessageContainer(p0) --[[ line: 114 ]]
+function ChatMessageContainer(p0)
 	-- upvalues: cryoModule (ref), t (ref), messageModelModule (ref), reactModule (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), appChatUseSymmetricSwipe (ref), swipeDirectionModule (ref), uDim2 (ref), uDim2_1 (ref), appChatReplyIconSwipeOffset (ref), vector2 (ref), vector2_1 (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useTriggerFeedback (ref), globalLongPressSignalModule (ref), messageFtuxTooltipDismissSignal (ref), messageFtuxTooltipVariant (ref), chatConversationTelemetryEventsModule (ref), useNavigation (ref), useGetConversationFromIdModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), var39 (ref), useReplyingToMessageDispatchModule (ref), useLocalUserId (ref), hapticFeedbackContext (ref), hapticFeedbackType (ref), useSwipeGestureModule (ref), enumScreensModule (ref), setTimeout (ref), appChatMessageLongPressDistanceThreshold (ref), userInputService (ref), fFlagAppChatEnableMessageContextMenuModule (ref), chatMessageContainerConstantsModule (ref), optionsEnumModule (ref), conversationModule (ref), getReplyLabelDescriptorModule (ref), userProfilesModule (ref), useLocalization (ref), textService (ref), getFFlagDebugAppChatModule (ref), optionsModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), skeleton (ref), messageFtuxTooltip (ref), appChatEnableRepliesUIIxpEnabled2 (ref), IXPService (ref), appChatEnableRepliesUIIxpLayer1 (ref), var45 (ref), systemMessageModule (ref), noticeTextModule (ref)
 	local var47
 	local var46 = cryoModule.Dictionary.join(t, p0)
@@ -104,7 +104,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 	else
 		var47 = false
 	end
-	local var48 = reactModule.useCallback(function() --[[ line: 119 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var46 (ref)
 		if var46.viewProfileOnAvatarPressed then
 			var46.openViewProfile(var46.senderUserId)
@@ -122,7 +122,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 	local _ = nil
 	local _ = nil
 	local var52 = nil
-	local var53 = if fFlagAppChatUseSwipeForRepliesModule then reactModule.useMemo(function() --[[ line: 140 ]]
+	local var53 = if fFlagAppChatUseSwipeForRepliesModule then reactModule.useMemo(function()
 		-- upvalues: appChatUseSymmetricSwipe (copy), var46 (ref), swipeDirectionModule (copy), foundationModule (copy), uDim2 (copy), uDim2_1 (copy), appChatReplyIconSwipeOffset (copy), vector2 (copy), vector2_1 (copy)
 		return if appChatUseSymmetricSwipe then {
 			direction = if var46.isIncoming then swipeDirectionModule.Right else swipeDirectionModule.Left,
@@ -153,19 +153,19 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 	local var61 = var59
 	local var62, var63 = reactModule.useState(false)
 	local var64, var65 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 180 ]]
+	reactModule.useEffect(function()
 		-- upvalues: globalLongPressSignalModule (copy), var65 (ref)
-		local dismissedConnection = globalLongPressSignalModule.dismissed:connect(function() --[[ line: 181 ]]
+		local dismissedConnection = globalLongPressSignalModule.dismissed:connect(function()
 			-- upvalues: var65 (copy)
 			var65(false)
 		end)
 		
-		return function() --[[ line: 184 ]]
+		return function()
 			-- upvalues: dismissedConnection (ref)
 			dismissedConnection:disconnect()
 		end
 	end)
-	local var66 = reactModule.useMemo(function() --[[ line: 190 ]]
+	local var66 = reactModule.useMemo(function()
 		-- upvalues: var46 (ref)
 		return {
 			conversationId = var46.conversationId,
@@ -179,17 +179,17 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		var46.conversationId, var46.senderUserId, var46.messageId, var46.sent,
 		var46.content, var46.visibility
 	})
-	local var67 = reactModule.useMemo(function() --[[ line: 210 ]]
+	local var67 = reactModule.useMemo(function()
 		-- upvalues: var47 (ref), var62 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), var64 (ref)
 		return not var47 and (var62 or not fFlagAppChatUseSwipeForRepliesModule and var64)
 	end, { var62, var64, var47 })
-	reactModule.useEffect(function() --[[ line: 215 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var67 (write), var46 (ref), messageFtuxTooltipDismissSignal (copy), messageFtuxTooltipVariant (copy)
 		if var67 and var46.isLastIncomingChatMessage then
 			messageFtuxTooltipDismissSignal.dismiss(messageFtuxTooltipVariant.Replies)
 		end
 	end, { var67, var46.isLastIncomingChatMessage })
-	local var68 = reactModule.useCallback(function() --[[ line: 220 ]]
+	local var68 = reactModule.useCallback(function()
 		-- upvalues: var57 (ref), chatConversationTelemetryEventsModule (copy), var66 (ref)
 		var57.emit(chatConversationTelemetryEventsModule.ConversationMessageReplyIconImpression, var66)
 	end, { var57, var66 })
@@ -209,13 +209,13 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 	
 	if fFlagAppChatUseSwipeForRepliesModule then
 		var52 = useSwipeGestureModule({
-			onSwipeThresholdReached = reactModule.useCallback(function() --[[ line: 245 ]]
+			onSwipeThresholdReached = reactModule.useCallback(function()
 				-- upvalues: var47 (ref), var58 (ref), hapticFeedbackContext (copy), hapticFeedbackType (copy)
 				if not var47 then
 					var58(hapticFeedbackContext.Default, hapticFeedbackType.Press)
 				end
 			end, {}),
-			onSwipeComplete = reactModule.useCallback(function() --[[ line: 252 ]]
+			onSwipeComplete = reactModule.useCallback(function()
 				-- upvalues: chatConversationTelemetryEventsModule (copy), var57 (ref), var66 (ref), var47 (ref), fFlagAppChatSignalsReplyStoreModule (copy), var71 (ref), var46 (ref), var73 (ref), messageId (write)
 				if chatConversationTelemetryEventsModule.ConversationMessageSwiped then
 					var57.emit(chatConversationTelemetryEventsModule.ConversationMessageSwiped, var66)
@@ -236,7 +236,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 			direction = var53.direction
 		})
 	end
-	local var75 = reactModule.useCallback(function() --[[ line: 282 ]]
+	local var75 = reactModule.useCallback(function()
 		-- upvalues: var69 (write), enumScreensModule (copy), var46 (ref)
 		var69.navigate(enumScreensModule.MessageContextMenu, {
 			messageId = var46.messageId,
@@ -249,19 +249,19 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		var46.conversationId,
 		var46.inputBoxRef
 	})
-	local var76 = reactModule.useCallback(function(p1, p2, p3) --[[ line: 291 ]]
+	local var76 = reactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: var56 (ref), setTimeout (copy), appChatMessageLongPressDistanceThreshold (copy), var54 (write)
 		if p2 then
 			var56.current = Vector2.new(p2.Position.X, p2.Position.Y)
 		end
-		setTimeout(function() --[[ line: 295 ]]
+		setTimeout(function()
 			-- upvalues: p2 (ref), var56 (copy), appChatMessageLongPressDistanceThreshold (copy), var54 (copy), p1 (ref)
 			if p2 and (p2.UserInputState == Enum.UserInputState.Begin or p2.UserInputState == Enum.UserInputState.Change) and (if p2 then (Vector2.new(p2.Position.X, p2.Position.Y) - var56.current).Magnitude else 0) < appChatMessageLongPressDistanceThreshold then
 				var54(p1, p2)
 			end
 		end, p3)
 	end, { var54 })
-	var54 = reactModule.useCallback(function(p4, p5, p6) --[[ line: 318 ]]
+	var54 = reactModule.useCallback(function(p4, p5, p6)
 		-- upvalues: var46 (ref), userInputService (copy), reactModule (copy), var63 (ref), var57 (ref), chatConversationTelemetryEventsModule (copy), var66 (ref), var47 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), var58 (ref), hapticFeedbackContext (copy), hapticFeedbackType (copy), var65 (ref), fFlagAppChatEnableMessageContextMenuModule (copy), var75 (ref), var76 (ref), chatMessageContainerConstantsModule (copy), var64 (ref), globalLongPressSignalModule (copy), optionsEnumModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), var71 (ref), var73 (ref), messageId (write)
 		if var46.isPending then return end
 		if userInputService.MouseEnabled then
@@ -331,7 +331,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		if fFlagAppChatSignalsReplyStoreModule then messageId else nil,
 		if fFlagAppChatSignalsReplyStoreModule then var46.messageId else nil
 	})
-	local var77 = reactModule.useCallback(function(p7, p8) --[[ line: 420 ]]
+	local var77 = reactModule.useCallback(function(p7, p8)
 		-- upvalues: fFlagAppChatUseSwipeForRepliesModule (copy), userInputService (copy), var52 (write), messageFtuxTooltipDismissSignal (copy), messageFtuxTooltipVariant (copy), var76 (ref), reactModule (copy), chatMessageContainerConstantsModule (copy)
 		if fFlagAppChatUseSwipeForRepliesModule and userInputService.TouchEnabled and var52 then
 			var52.onInputBegan(p7, p8)
@@ -339,29 +339,29 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		end
 		var76(reactModule.Event.InputBegan, p8, chatMessageContainerConstantsModule.INPUT_BEGAN_DELAY_MILLISEC)
 	end, { var76, var52 })
-	local var78 = reactModule.useCallback(function(_) --[[ line: 429 ]]
+	local var78 = reactModule.useCallback(function(_)
 		-- upvalues: var54 (write), reactModule (copy)
 		var54(reactModule.Event.InputEnded)
 	end, { var54 })
-	local var79 = reactModule.useCallback(function(_) --[[ line: 433 ]]
+	local var79 = reactModule.useCallback(function(_)
 		-- upvalues: var54 (write), reactModule (copy)
 		var54(reactModule.Event.MouseEnter)
 	end, { var54 })
-	local var80 = reactModule.useCallback(function(_) --[[ line: 437 ]]
+	local var80 = reactModule.useCallback(function(_)
 		-- upvalues: var54 (write), reactModule (copy)
 		var54(reactModule.Event.MouseLeave)
 	end, { var54 })
-	local var81 = reactModule.useCallback(function(_) --[[ line: 441 ]]
+	local var81 = reactModule.useCallback(function(_)
 		-- upvalues: var54 (write), reactModule (copy)
 		var54(reactModule.Event.TouchTap)
 	end, { var54 })
-	local var82 = reactModule.useCallback(function(_) --[[ line: 445 ]]
+	local var82 = reactModule.useCallback(function(_)
 		-- upvalues: var54 (write), reactModule (copy)
 		var54(reactModule.Event.MouseButton1Down)
 	end, { var54 })
 	local senderTargetId = var46.repliesTo and var46.repliesTo.senderTargetId
 	
-	local function getDisplayNameText(p9, p10) --[[ line: 451 ]]
+	local function getDisplayNameText(p9, p10)
 		-- upvalues: var74 (write), var46 (ref), senderTargetId (ref), var70 (write), conversationModule (copy), getReplyLabelDescriptorModule (copy)
 		local var106 = var74 == var46.senderUserId
 		local var107 = var46.senderUserId == var46.repliesTo.senderTargetId
@@ -404,7 +404,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		var89 = nil
 	end
 	local displayName = useLocalization(if senderTargetId then { displayName = var89 } else {}).displayName or var89
-	local var91 = reactModule.useCallback(function() --[[ line: 518 ]]
+	local var91 = reactModule.useCallback(function()
 		-- upvalues: var46 (ref), chatMessageContainerConstantsModule (copy), textService (copy), displayName (write), var49 (ref)
 		local var110 = textService:GetTextSize(displayName, var49.Font.BaseSize * var49.Font.Footer.RelativeSize, var49.Font.Footer.Font, Vector2.new(math.max(1, var46.messageMaxWidth - chatMessageContainerConstantsModule.TAIL_WIDTH), 1e999))
 		
@@ -425,10 +425,10 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 	local var93 = left + var51.Size.Size_700
 	local var94 = if var46.isIncoming then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Right
 	local var95, var96 = reactModule.useState(false)
-	local var97 = reactModule.useCallback(function() --[[ line: 546 ]]
+	local var97 = reactModule.useCallback(function()
 		-- upvalues: getFFlagDebugAppChatModule (copy), var96 (ref)
 		if getFFlagDebugAppChatModule() then
-			var96(function(p11) --[[ line: 548 ]]
+			var96(function(p11)
 				return not p11
 			end)
 		end
@@ -436,7 +436,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 	local var95_1 = var95 or (var46.moderated or (var46.filteredForReceivers or var47))
 	local var99 = if var95 then var46.messageId elseif var47 then var46.messageHiddenNoticeText elseif var46.moderated then var46.messageModeratedNoticeText else var46.messageDefaultNoticeText
 	local _ = nil
-	local var100 = if var46.failed or var46.moderated then reactModule.useMemo(function() --[[ line: 560 ]]
+	local var100 = if var46.failed or var46.moderated then reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), foundationModule (copy), var51 (ref), var46 (ref)
 		return reactModule.createElement(foundationModule.Icon, {
 			name = foundationModule.Enums.IconName.TriangleExclamation,
@@ -451,23 +451,23 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		emitImpressionTelemetryEvent = var68
 	}) else nil
 	local isIncoming = var46.isIncoming
-	local var101 = if fFlagAppChatUseSwipeForRepliesModule and var52 and var52.swipeProgress then var52.swipeProgress:map(function(p12) --[[ line: 588 ]]
+	local var101 = if fFlagAppChatUseSwipeForRepliesModule and var52 and var52.swipeProgress then var52.swipeProgress:map(function(p12)
 		-- upvalues: var51 (ref)
 		return {
 			Color3 = var51.Color.Content.Default.Color3,
 			Transparency = 1 - math.pow(p12, 3)
 		}
 	end) else nil
-	local var102 = if fFlagAppChatUseSwipeForRepliesModule and var52 and var52.swipeOffset then var52.swipeOffset:map(function(p13) --[[ line: 601 ]]
+	local var102 = if fFlagAppChatUseSwipeForRepliesModule and var52 and var52.swipeOffset then var52.swipeOffset:map(function(p13)
 		-- upvalues: var53 (write), swipeDirectionModule (copy)
 		return UDim2.new(0, if var53.direction == swipeDirectionModule.Right then p13 else -p13, 0, 0)
 	end) else nil
-	local var103 = if fFlagAppChatUseSwipeForRepliesModule and var52 and var52.swipeProgress then var52.swipeProgress:map(function(p14) --[[ line: 611 ]]
+	local var103 = if fFlagAppChatUseSwipeForRepliesModule and var52 and var52.swipeProgress then var52.swipeProgress:map(function(p14)
 		-- upvalues: var53 (write)
 		return var53.messagePosition + UDim2.new(0, p14 * var53.iconOffset, 0, 0)
 	end) else nil
 	
-	local function renderMessage() --[[ line: 617 ]]
+	local function renderMessage()
 		-- upvalues: reactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), var102 (ref), var79 (write), var80 (write), var92 (write), var46 (ref), left (ref), var93 (ref), var50 (ref), var94 (ref), foundationModule (copy), userTile (copy), layoutMode (copy), userPresence (copy), var48 (ref), var51 (ref), shouldShowName (ref), chatMessageContainerConstantsModule (copy), isIncoming (ref), senderTargetId (ref), var87 (write), var49 (ref), var91 (ref), displayName (write), skeleton (copy), var77 (write), var78 (write), var81 (write), var82 (write), var61 (write), var100 (write), var55 (ref), var47 (ref), messageFtuxTooltip (copy), messageFtuxTooltipVariant (copy), var53 (write), var103 (ref), var101 (ref)
 		local createElement = reactModule.createElement
 		createElement = createElement("Frame", {
@@ -603,7 +603,7 @@ function ChatMessageContainer(p0) --[[ line: 114 ]]
 		}) else createElement
 	end
 	
-	reactModule.useEffect(function() --[[ line: 775 ]]
+	reactModule.useEffect(function()
 		-- upvalues: appChatEnableRepliesUIIxpEnabled2 (copy), var46 (ref), IXPService (copy), appChatEnableRepliesUIIxpLayer1 (copy)
 		if appChatEnableRepliesUIIxpEnabled2 and var46.isLastIncomingChatMessage then
 			IXPService:LogFlagLinkedUserLayerExposure(appChatEnableRepliesUIIxpLayer1)

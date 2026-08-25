@@ -11,7 +11,7 @@ local localizationService = game:GetService("LocalizationService")
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 local getFFlagCurrencyTransferFixHeaderTouchPaddingModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFixHeaderTouchPadding)
 
-return function(p0) --[[ line: 27 | named "TransferRobuxHeader" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), formatNumberModule (ref), localizationService (ref), getIconRichText (ref), enums (ref), getFFlagCurrencyTransferFixHeaderTouchPaddingModule (ref), userInputService (ref), view (ref), text (ref)
 	return reactModule.createElement(view, { tag = "auto-xy align-y-center align-x-start row" }, {
 		LeftSide = reactModule.createElement(view, {
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 27 | named "TransferRobuxHeader" ]]
 				LayoutOrder = 2,
 				tag = "auto-xy text-label-large content-emphasis text-align-x-right",
 				RichText = true,
-				Text = reactModule.useMemo(function() --[[ line: 28 ]]
+				Text = reactModule.useMemo(function()
 					-- upvalues: formatNumberModule (copy), localizationService (copy), p0 (ref), getIconRichText (copy), enums (copy)
 					return `{getIconRichText(enums.IconName.Robux)} {formatNumberModule(localizationService.RobloxLocaleId, p0.robuxBalanceAmount or 0)}`
 				end, {

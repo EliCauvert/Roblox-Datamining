@@ -19,7 +19,7 @@ local fFlagLuaAppDataHydrationSanitizeItem = require(parent.SharedFlags).FFlagLu
 local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 local var7 = if fFlagLuaAppInExperienceDetailsPrompt then getFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds() else nil
 
-local function sanitizeGameInfo(p0) --[[ line: 38 ]]
+local function sanitizeGameInfo(p0)
 	-- upvalues: trim (ref)
 	if p0.name then
 		p0.name = trim(p0.name)
@@ -27,11 +27,11 @@ local function sanitizeGameInfo(p0) --[[ line: 38 ]]
 	return p0
 end
 
-return function() --[[ line: 45 | named "createGameInfoStore" ]]
+return function()
 	-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (ref), createDataCacheModule (ref), var7 (ref), fFlagLuaAppDataHydrationSanitizeItem (ref), sanitizeGameInfo (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), dashModule (ref), fetchGameDetailsModule (ref), gameInfoStoreTypesModule (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (ref), fFlagMigrateGameInfoToStore (ref), fFlagLuaAppDataHydrationUpdateItem (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local t = {}
 	
-	local function _(p1, p2) --[[ line: 51 | named "indexPlaceId" ]]
+	local function _(p1, p2)
 		-- upvalues: t (ref)
 		if p2 and p2.rootPlaceId then
 			t[tostring(p2.rootPlaceId)] = p1
@@ -41,7 +41,7 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 	local var10 = if fFlagLuaAppInExperienceDetailsPrompt then createDataCacheModule(var7, nil, if fFlagLuaAppDataHydrationSanitizeItem then { sanitizeItem = sanitizeGameInfo } else nil) else createDataCacheModule(nil, nil, if fFlagLuaAppDataHydrationSanitizeItem then { sanitizeItem = sanitizeGameInfo } else nil)
 	local var11 = createDataResolverModule({
 		cache = var10,
-		logError = if fFlagLuaAppInExperienceDetailsPrompt then function(p3) --[[ line: 71 ]]
+		logError = if fFlagLuaAppInExperienceDetailsPrompt then function(p3)
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
 			if type(p3) == "table" then
 				if p3.responseCode then
@@ -56,11 +56,11 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 				discoveryEventErrorLogger.reportError("FetchGameDetailsError", tostring(p3))
 			end
 		end else nil,
-		fetchFn = function(p4) --[[ line: 89 ]]
+		fetchFn = function(p4)
 			-- upvalues: dashModule (copy), fetchGameDetailsModule (copy), fFlagLuaAppInExperienceDetailsPrompt (copy), gameInfoStoreTypesModule (copy), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), fFlagMigrateGameInfoToStore (copy), t (ref)
 			local var12 = dashModule.keys(p4)
 			
-			return fetchGameDetailsModule(var12):andThen(function(p6) --[[ line: 94 ]]
+			return fetchGameDetailsModule(var12):andThen(function(p6)
 				-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var12 (ref), gameInfoStoreTypesModule (copy), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), dashModule (copy), fFlagMigrateGameInfoToStore (copy), t (copy)
 				if not fFlagLuaAppInExperienceDetailsPrompt then
 					if not p6 then
@@ -115,7 +115,7 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 						end
 					end
 				else
-					dashModule.forEach(data, function(p7) --[[ line: 157 ]]
+					dashModule.forEach(data, function(p7)
 						-- upvalues: t_1 (ref), fFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy)
 						t_1[tostring(p7.id)] = {
 							name = p7.name,
@@ -133,7 +133,7 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 					end
 				end
 				return t_1
-			end):catch(function(p5) --[[ line: 177 ]]
+			end):catch(function(p5)
 				error(p5)
 			end)
 		end
@@ -146,7 +146,7 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 		getGameInfos = var11.getCachedItems,
 		getAndFetchGameInfo = var11.getAndFetchItem,
 		getAndFetchGameInfos = var11.getAndFetchItems,
-		updateGameInfo = if fFlagLuaAppDataHydrationUpdateItem then if fFlagMigrateGameInfoToStore then function(p8, p9, p10) --[[ line: 216 | named "updateGameInfo" ]]
+		updateGameInfo = if fFlagLuaAppDataHydrationUpdateItem then if fFlagMigrateGameInfoToStore then function(p8, p9, p10)
 			-- upvalues: t (ref), fFlagMigrateGameInfoToStore (copy), var10 (ref)
 			if p9 and p9.rootPlaceId then
 				t[tostring(p9.rootPlaceId)] = p8
@@ -158,7 +158,7 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 			end
 			var10.updateItem(p8, p9)
 		end else var10.updateItem else nil,
-		updateGameInfos = if fFlagMigrateGameInfoToStore then function(p11, p12) --[[ line: 225 | named "updateGameInfos" ]]
+		updateGameInfos = if fFlagMigrateGameInfoToStore then function(p11, p12)
 			-- upvalues: t (ref), fFlagMigrateGameInfoToStore (copy), var10 (ref)
 			for i, v in p11 do
 				if v and v.rootPlaceId then
@@ -172,11 +172,11 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 			end
 			var10.updateItems(p11)
 		end else var10.updateItems,
-		getUniverseIdForPlaceId = if fFlagMigrateGameInfoToStore then function(p13) --[[ line: 236 | named "getUniverseIdForPlaceId" ]]
+		getUniverseIdForPlaceId = if fFlagMigrateGameInfoToStore then function(p13)
 			-- upvalues: t (ref)
 			return t[tostring(p13)]
 		end else nil,
-		applyVoteChange = if fFlagSduiExperienceDetailsSupport then function(p14, p15, p16) --[[ line: 183 | named "applyVoteChange" ]]
+		applyVoteChange = if fFlagSduiExperienceDetailsSupport then function(p14, p15, p16)
 			-- upvalues: var11 (ref), fFlagMigrateGameInfoToStore (copy), var10 (ref)
 			local cachedItem = var11.getCachedItem(p14)
 			local var17 = cachedItem and cachedItem.data(false)
@@ -208,14 +208,14 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 			
 			return t
 		end else nil,
-		clear = if fFlagLuaAppInExperienceDetailsPrompt then var11.clear else function() --[[ line: 240 | named "clear" ]]
+		clear = if fFlagLuaAppInExperienceDetailsPrompt then var11.clear else function()
 			-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var10 (ref), var11 (ref)
 			if not fFlagLuaAppInExperienceDetailsPrompt then
 				var10.clear()
 				var11.clear()
 			end
 		end,
-		dispose = if fFlagLuaAppInExperienceDetailsPrompt then var11.dispose else function() --[[ line: 247 | named "dispose" ]]
+		dispose = if fFlagLuaAppInExperienceDetailsPrompt then var11.dispose else function()
 			-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var10 (ref), var11 (ref)
 			if not fFlagLuaAppInExperienceDetailsPrompt then
 				var10.dispose()

@@ -7,7 +7,7 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useIndicatorScrollAnimationModule = require(mediaGallery.Hooks.useIndicatorScrollAnimation)
 local MAX_VISIBLE_INDICATORS = require(mediaGallery.MediaGalleryConstants).MAX_VISIBLE_INDICATORS
 
-local function getDotAnchorPointAtIndex(vectorA, vectorB, p0) --[[ line: 30 ]]
+local function getDotAnchorPointAtIndex(vectorA, vectorB, p0)
 	if p0 < vectorB then
 		if vectorA == vectorB then
 			return Vector2.new(1, 0.5)
@@ -19,7 +19,7 @@ local function getDotAnchorPointAtIndex(vectorA, vectorB, p0) --[[ line: 30 ]]
 	end
 end
 
-local function getDotPositionAtIndex(vectorA, vectorB, p1) --[[ line: 48 ]]
+local function getDotPositionAtIndex(vectorA, vectorB, p1)
 	if p1 < vectorB then
 		if vectorA == vectorB then
 			return UDim2.fromScale(1, 0.5)
@@ -31,7 +31,7 @@ local function getDotPositionAtIndex(vectorA, vectorB, p1) --[[ line: 48 ]]
 	end
 end
 
-return reactModule.memo(function(p2) --[[ line: 66 | named "MediaGalleryPageIndicators" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: useTokens (ref), useIndicatorScrollAnimationModule (ref), MAX_VISIBLE_INDICATORS (ref), reactModule (ref), getDotAnchorPointAtIndex (ref), getDotPositionAtIndex (ref)
 	local var5 = useTokens()
 	local size100 = var5.Size.Size_100
@@ -51,12 +51,12 @@ return reactModule.memo(function(p2) --[[ line: 66 | named "MediaGalleryPageIndi
 		indicatorPadding = small
 	})
 	local minValue = math.min(p2.numberOfItems, MAX_VISIBLE_INDICATORS)
-	local var8 = reactModule.useMemo(function() --[[ line: 92 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: minValue (ref), size200 (ref), small (ref), size800 (ref)
 		return (minValue - 1) * (size200 + small) + size800
 	end, { minValue, size200, small, size800 })
 	local var9 = reactModule.useRef({})
-	local var10 = reactModule.useCallback(function(p3) --[[ line: 99 ]]
+	local var10 = reactModule.useCallback(function(p3)
 		-- upvalues: var6 (ref), minValue (ref), p2 (ref), size800 (ref), size200 (ref), size100 (ref), size150 (ref)
 		local minValue_1 = math.min(var6.firstVisibleIndex + minValue - 1, p2.numberOfItems)
 		local var13 = var6.firstVisibleIndex > 1
@@ -79,7 +79,7 @@ return reactModule.memo(function(p2) --[[ line: 66 | named "MediaGalleryPageIndi
 		p2.numberOfItems, minValue, var6.firstVisibleIndex, var6.currentItemIndex,
 		size100, size150, size200, size800
 	})
-	local var11 = reactModule.useMemo(function() --[[ line: 144 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), var9 (ref), var10 (ref), reactModule (copy), var6 (ref), size800 (ref), size200 (ref), getDotAnchorPointAtIndex (copy), getDotPositionAtIndex (copy), muted (ref), emphasis (ref)
 		local t = {}
 		
@@ -96,7 +96,7 @@ return reactModule.memo(function(p2) --[[ line: 66 | named "MediaGalleryPageIndi
 					BorderSizePixel = 0,
 					AnchorPoint = getDotAnchorPointAtIndex(i, var6.previousItemIndex, var6.currentItemIndex),
 					Position = getDotPositionAtIndex(i, var6.previousItemIndex, var6.currentItemIndex),
-					Size = var6.animationProgressBinding:map(function(p4) --[[ line: 178 ]]
+					Size = var6.animationProgressBinding:map(function(p4)
 						-- upvalues: var16 (ref), var17 (ref)
 						return if var16 == nil then var17 else var16:Lerp(var17, p4)
 					end),
@@ -106,7 +106,7 @@ return reactModule.memo(function(p2) --[[ line: 66 | named "MediaGalleryPageIndi
 					UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 					ProgressBar = if i == var6.currentItemIndex and p2.currentItemProgressBinding then reactModule.createElement("Frame", {
 						BorderSizePixel = 0,
-						Size = p2.currentItemProgressBinding:map(function(p5) --[[ line: 196 ]]
+						Size = p2.currentItemProgressBinding:map(function(p5)
 							-- upvalues: size200 (copy), size800 (copy)
 							return UDim2.fromOffset(size200 + p5 * (size800 - size200), size200)
 						end),
@@ -124,7 +124,7 @@ return reactModule.memo(function(p2) --[[ line: 66 | named "MediaGalleryPageIndi
 		var6.currentItemIndex, var10, size200, size800, muted, emphasis,
 		var6.animationProgressBinding
 	})
-	reactModule.useEffect(function() --[[ line: 232 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p2 (ref), var9 (ref), var10 (ref)
 		for i = 1, p2.numberOfItems do
 			var9.current[i] = var10(i)

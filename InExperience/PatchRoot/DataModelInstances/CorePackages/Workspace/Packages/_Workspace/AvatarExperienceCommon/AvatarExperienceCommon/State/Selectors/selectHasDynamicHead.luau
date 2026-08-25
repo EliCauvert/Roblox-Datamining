@@ -1,7 +1,7 @@
 ﻿local dynamicHead = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).ASSET_TYPE_NAME_TO_ID_STRING.DynamicHead
 local AXDHEquippedAssetsNilCheck = game:DefineFastFlag("AXDHEquippedAssetsNilCheck", false)
 
-return function(p0) --[[ line: 7 | named "selectHasDynamicHead" ]]
+return function(p0)
 	-- upvalues: AXDHEquippedAssetsNilCheck (ref), dynamicHead (ref)
 	local equippedAssets = p0.AvatarExperience.AvatarEditor.Character.EquippedAssets
 	

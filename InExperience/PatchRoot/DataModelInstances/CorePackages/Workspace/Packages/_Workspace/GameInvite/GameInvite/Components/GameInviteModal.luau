@@ -54,7 +54,7 @@ if isInExperienceUIVREnabled then
 end
 local t = {
 	[focusNavigationEventNameEnum.NavigateBack] = {
-		handler = inputHandlersModule.onRelease(function(p0) --[[ line: 71 ]]
+		handler = inputHandlersModule.onRelease(function(p0)
 			-- upvalues: gameInviteModalManagerModule (ref)
 			gameInviteModalManagerModule:closeModal()
 			p0:cancel()
@@ -62,7 +62,7 @@ local t = {
 	}
 }
 
-return function(p1) --[[ line: 82 ]]
+return function(p1)
 	-- upvalues: fFlagLuaAppForceVrAppPanelWidthRollout (ref), getFFlagVRPanelWidthIXPEnabled (ref), ixpUtilsModule (ref), VRPanelWidthIXP (ref), reactModule (ref), runService (ref), gameInviteConstantsModule (ref), useDispatch (ref), isInExperienceUIVREnabled (ref), responsiveModule (write), fFlagEnableInExperienceUIPCVRFix (ref), var22 (write), fFlagUseSignalsForGameInvitesStatus (ref), var20 (ref), resetUserInviteStatusModule (ref), gameInviteModalManagerModule (ref), guiService (ref), promiseModule (ref), robloxReplicatedStorageService (ref), getGameNameAndDescription (ref), networkImpl (ref), gameInviteModalWindowModule (ref), gameInviteContentWrapperModule (ref), getFFlagEnableGameInviteModalVRSupport (ref), VRReadyWrapper (ref), VRConstants (ref), gameInviteModalLayoutProviderModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), UIManager (write), panelType (write), reactRobloxModule (ref)
 	if not game:GetFastFlag("LuaEnableGameInviteModal2023V5") then
 		return nil
@@ -85,7 +85,7 @@ return function(p1) --[[ line: 82 ]]
 		var41 = responsiveModule.useIsSpatial()
 		var42 = if fFlagEnableInExperienceUIPCVRFix then var22() else nil
 	end
-	local var43 = function(p2, p3, p4) --[[ line: 117 ]]
+	local var43 = function(p2, p3, p4)
 		-- upvalues: var28 (ref), var30 (ref), var32 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var39 (ref), var20 (copy), var40 (ref), resetUserInviteStatusModule (copy)
 		var28(p2)
 		var30(p3 or false)
@@ -104,46 +104,46 @@ return function(p1) --[[ line: 82 ]]
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function()
 		-- upvalues: gameInviteModalManagerModule (copy), var43 (ref)
 		local eventConnection = gameInviteModalManagerModule.ToggleGameInviteModalEvent.Event:Connect(var43)
 		
-		return function() --[[ line: 136 ]]
+		return function()
 			-- upvalues: eventConnection (ref)
 			eventConnection:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 142 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), guiService (copy), var27 (ref), gameInviteModalManagerModule (copy)
 		if var38 then
-			local menuOpenedConnection = guiService.MenuOpened:Connect(function() --[[ line: 144 ]]
+			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
 				-- upvalues: var27 (copy), gameInviteModalManagerModule (copy)
 				if var27 then
 					gameInviteModalManagerModule:closeModal()
 				end
 			end)
 			
-			return function() --[[ line: 149 ]]
+			return function()
 				-- upvalues: menuOpenedConnection (ref)
 				menuOpenedConnection:Disconnect()
 			end
 		end
-		return function() --[[ line: 153 ]] end
+		return function() end
 	end, { var27, var38 })
-	reactModule.useEffect(function() --[[ line: 158 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var37 (ref), var27 (ref), var38 (ref), var35 (ref), promiseModule (copy), robloxReplicatedStorageService (copy), var36 (ref), getGameNameAndDescription (copy), var33 (ref), networkImpl (copy), var34 (ref)
 		if var37 and var27 and var38 then
 			if var35 == "" then
-				promiseModule.try(function() --[[ line: 162 ]]
+				promiseModule.try(function()
 					-- upvalues: robloxReplicatedStorageService (copy)
 					return robloxReplicatedStorageService:WaitForChild("GetServerType", 2):InvokeServer()
-				end):andThen(function(p5) --[[ line: 165 ]]
+				end):andThen(function(p5)
 					-- upvalues: var36 (copy)
 					var36(p5)
 				end)
 			end
 			if getGameNameAndDescription and not var33.Created then
-				getGameNameAndDescription(networkImpl, game.GameId):andThen(function(p6) --[[ line: 171 ]]
+				getGameNameAndDescription(networkImpl, game.GameId):andThen(function(p6)
 					-- upvalues: var34 (copy)
 					var34(p6)
 				end)

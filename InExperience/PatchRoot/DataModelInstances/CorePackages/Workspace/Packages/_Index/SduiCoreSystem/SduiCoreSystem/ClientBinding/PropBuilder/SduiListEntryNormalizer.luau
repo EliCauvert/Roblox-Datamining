@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").ClientBinding.SduiClientBindingTypes)
 
-local function tryResolveTemplatePair(p0, p1, p2) --[[ line: 69 ]]
+local function tryResolveTemplatePair(p0, p1, p2)
 	if p1 ~= nil then
 		return p1, true
 	elseif p0 and p0 ~= "" then
@@ -13,7 +13,7 @@ local function tryResolveTemplatePair(p0, p1, p2) --[[ line: 69 ]]
 	return nil, false
 end
 
-local function resolveItemOverrides(p3, p4) --[[ line: 98 ]]
+local function resolveItemOverrides(p3, p4)
 	if p3 == nil or next(p3) == nil then
 		return nil
 	end
@@ -50,7 +50,7 @@ local function resolveItemOverrides(p3, p4) --[[ line: 98 ]]
 	return t
 end
 
-local function _(p5, p6, p7, p8, p9) --[[ line: 123 | named "pickTemplate" ]]
+local function _(p5, p6, p7, p8, p9)
 	local var10, var11
 	local var8 = if typeof(p5) == "table" then p5.roblox_component else nil
 	local var9 = if typeof(p5) == "table" then p5.inline_component else nil
@@ -79,7 +79,7 @@ local function _(p5, p6, p7, p8, p9) --[[ line: 123 | named "pickTemplate" ]]
 	return p7, p8
 end
 
-local _ = function(p10, p11) --[[ line: 148 | named "resolveDefaultTemplate" ]]
+local _ = function(p10, p11)
 	-- upvalues: tryResolveTemplatePair (ref)
 	if p10 == nil then
 		return nil, false
@@ -87,7 +87,7 @@ local _ = function(p10, p11) --[[ line: 148 | named "resolveDefaultTemplate" ]]
 	return tryResolveTemplatePair(p10.roblox_component, p10.inline_component, p11)
 end
 
-local function buildBoundEntry(p12, p13, p14, p15, p16, p17, p18, p19) --[[ line: 193 ]]
+local function buildBoundEntry(p12, p13, p14, p15, p16, p17, p18, p19)
 	local var16, var17
 	local var13 = if p18 and p13 then p18[p13] else nil
 	local var14 = if typeof(p12) == "table" then p12.roblox_component else nil
@@ -132,7 +132,7 @@ local function buildBoundEntry(p12, p13, p14, p15, p16, p17, p18, p19) --[[ line
 end
 
 return {
-	normalizeLiteralItems = function(p20, p21, p22) --[[ line: 160 ]]
+	normalizeLiteralItems = function(p20, p21, p22)
 		local var23, var24, robloxComponent
 		local var21 = if p21 then p21.inputs else nil
 		local var22 = if p21 then p21.sort_rank else nil
@@ -209,7 +209,7 @@ return {
 		end
 		return robloxComponent
 	end,
-	normalizeBoundData = function(p23, p24, p25, p26) --[[ line: 227 ]]
+	normalizeBoundData = function(p23, p24, p25, p26)
 		-- upvalues: resolveItemOverrides (ref), buildBoundEntry (ref)
 		if typeof(p23) ~= "table" then
 			return {}

@@ -27,20 +27,20 @@ local t = {
 	isDisabled = false
 }
 
-local function _(p0) --[[ line: 62 | named "getAspectRatio" ]]
+local function _(p0)
 	return p0.X / p0.Y
 end
 
 local var18 = _G.__DEV__ == true
 
-local _ = function(value) --[[ line: 68 | named "getFoundationImageAsset" ]]
+local _ = function(value)
 	-- upvalues: iconImagesDEPRECATED (ref), var18 (ref), images (ref)
 	local var19 = iconImagesDEPRECATED[value]
 	
 	return var19 or (if var18 then images[value] else rawget(images, value))
 end
 
-local _ = function(p1) --[[ line: 84 | named "shouldUseFoundationSlice" ]]
+local _ = function(p1)
 	-- upvalues: isFoundationImageModule (ref), isCloudAssetModule (ref), iconImagesDEPRECATED (ref), var18 (ref), images (ref)
 	if not isFoundationImageModule(p1) then
 		return false
@@ -54,29 +54,29 @@ local _ = function(p1) --[[ line: 84 | named "shouldUseFoundationSlice" ]]
 	return var20
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | named "Image" ]]
+return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), reactIsModule (ref), isCloudAssetModule (ref), isFoundationImageModule (ref), assets (ref), iconImagesDEPRECATED (ref), var18 (ref), images (ref), getScaledSliceModule (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), useOnLoadedModule (ref), flagsModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
 	local var22 = withDefaultsModule(p2, t)
 	local var23 = if var22.onStateChanged == nil then if var22.onActivated == nil then var22.onSecondaryActivated ~= nil else true else true
 	local aspectRatio = var22.aspectRatio
 	local var24, var25 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: reactIsModule (copy), var22 (ref), var25 (ref), isCloudAssetModule (copy), reactModule (copy)
 		if reactIsModule.isBinding(var22.Image) then
 			local image = var22.Image
 			var25(isCloudAssetModule(image:getValue()))
-			local var37 = reactModule.__subscribeToBinding(image, function(p4) --[[ line: 111 ]]
+			local var37 = reactModule.__subscribeToBinding(image, function(p4)
 				-- upvalues: var25 (copy), isCloudAssetModule (copy)
 				var25(isCloudAssetModule(p4))
 			end)
 			
-			return function() --[[ line: 115 ]]
+			return function()
 				-- upvalues: var37 (ref)
 				var37()
 			end
 		end
 	end, { var22.Image, aspectRatio })
-	local var26, var27, var28, var29 = reactModule.useMemo(function() --[[ line: 121 ]]
+	local var26, var27, var28, var29 = reactModule.useMemo(function()
 		-- upvalues: var22 (ref), aspectRatio (ref), reactIsModule (copy), isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), iconImagesDEPRECATED (copy), var18 (copy), images (copy), var24 (ref)
 		local image = var22.Image
 		local var38 = if var22.imageRect then var22.imageRect.offset else nil
@@ -84,9 +84,9 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 		local var40 = aspectRatio
 		
 		if reactIsModule.isBinding(var22.Image) then
-			local function _(p5) --[[ line: 132 | named "getImageBindingValue" ]]
+			local function _(p5)
 				-- upvalues: var22 (copy), isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy)
-				return var22.Image:map(function(p6) --[[ line: 133 ]]
+				return var22.Image:map(function(p6)
 					-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), p5 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
 					if isFoundationImageModule(p6) then
 						local _ = nil
@@ -116,7 +116,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 			
 			if var24 then
 				local var41 = "AspectRatio"
-				var40 = var22.Image:map(function(p7) --[[ line: 133 ]]
+				var40 = var22.Image:map(function(p7)
 					-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var41 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
 					if not isFoundationImageModule(p7) then
 						return if var41 == "Image" then p7 elseif var41 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var41 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
@@ -144,7 +144,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 				var40 = aspectRatio
 			end
 			local var42 = "Image"
-			image = var22.Image:map(function(p8) --[[ line: 133 ]]
+			image = var22.Image:map(function(p8)
 				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var42 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
 				if not isFoundationImageModule(p8) then
 					return if var42 == "Image" then p8 elseif var42 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var42 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
@@ -169,7 +169,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 				return nil
 			end)
 			local var43 = "ImageRectOffset"
-			var38 = var22.Image:map(function(p9) --[[ line: 133 ]]
+			var38 = var22.Image:map(function(p9)
 				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var43 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
 				if not isFoundationImageModule(p9) then
 					return if var43 == "Image" then p9 elseif var43 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var43 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
@@ -194,7 +194,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 				return nil
 			end)
 			local var44 = "ImageRectSize"
-			var39 = var22.Image:map(function(p10) --[[ line: 133 ]]
+			var39 = var22.Image:map(function(p10)
 				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), assets (copy), var44 (ref), iconImagesDEPRECATED (copy), var18 (copy), images (copy), aspectRatio (copy), var22 (copy)
 				if not isFoundationImageModule(p10) then
 					return if var44 == "Image" then p10 elseif var44 == "ImageRectOffset" and var22.imageRect then var22.imageRect.offset elseif var44 == "ImageRectSize" and var22.imageRect then var22.imageRect.size else nil
@@ -253,7 +253,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 	
 	if var22.slice then
 		if reactIsModule.isBinding(var22.Image) then
-			local var30 = var22.Image:map(function(p11) --[[ line: 198 ]]
+			local var30 = var22.Image:map(function(p11)
 				-- upvalues: isFoundationImageModule (copy), isCloudAssetModule (copy), iconImagesDEPRECATED (copy), var18 (copy), images (copy), getScaledSliceModule (copy), var22 (ref)
 				local var50
 				if isFoundationImageModule(p11) then
@@ -268,10 +268,10 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 				end
 				return if var50 then getScaledSliceModule(var22.slice.center, var22.slice.scale) else var22.slice
 			end)
-			center = var30:map(function(p12) --[[ line: 205 ]]
+			center = var30:map(function(p12)
 				return p12.center
 			end)
-			scale = var30:map(function(p13) --[[ line: 208 ]]
+			scale = var30:map(function(p13)
 				return p13.scale
 			end)
 		elseif typeof(var22.Image) == "string" then
@@ -306,9 +306,9 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 95 | 
 	local var35 = withGuiObjectPropsModule(var22, {
 		AutoButtonColor = if var34 == "ImageButton" then var22.AutoButtonColor else nil,
 		Image = var26,
-		ImageContent = if flagsModule.FoundationImageContentSupport then reactModule.useMemo(function() --[[ line: 232 ]]
+		ImageContent = if flagsModule.FoundationImageContentSupport then reactModule.useMemo(function()
 			-- upvalues: reactIsModule (copy), var22 (ref)
-			return if reactIsModule.isBinding(var22.ImageContent) then var22.ImageContent:map(function(p14) --[[ line: 235 ]]
+			return if reactIsModule.isBinding(var22.ImageContent) then var22.ImageContent:map(function(p14)
 				return if typeof(p14) == "string" then Content.fromUri(p14) else p14
 			end) elseif typeof(var22.ImageContent) == "string" then Content.fromUri(var22.ImageContent) else var22.ImageContent
 		end, { var22.ImageContent }) else nil,

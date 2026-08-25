@@ -8,13 +8,13 @@ local fetchGameMediaModule = require(script.Parent.fetchGameMedia)
 local gameMediaStoreTypesModule = require(script.Parent.GameMediaStoreTypes)
 local fFlagMyStatsMediaSelector = require(parent.SharedFlags).FFlagMyStatsMediaSelector
 
-return function() --[[ line: 17 | named "createGameMediaStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fFlagMyStatsMediaSelector (ref), discoveryEventErrorLogger (ref), fetchGameMediaModule (ref), gameMediaStoreTypesModule (ref)
 	local var5 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = createDataCacheModule(),
 		replaceItems = fFlagMyStatsMediaSelector,
-		logError = function(p0) --[[ line: 23 ]]
+		logError = function(p0)
 			-- upvalues: discoveryEventErrorLogger (copy)
 			if type(p0) == "table" and p0.errorType then
 				discoveryEventErrorLogger.reportError(p0.errorType, p0.errorMessage)
@@ -23,9 +23,9 @@ return function() --[[ line: 17 | named "createGameMediaStore" ]]
 			end
 			discoveryEventErrorLogger.reportError("FetchGameMediaError", tostring(p0))
 		end,
-		fetchFn = function(p1, _) --[[ line: 30 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: fetchGameMediaModule (copy), gameMediaStoreTypesModule (copy)
-			return fetchGameMediaModule(p1):andThen(function(p2) --[[ line: 31 ]]
+			return fetchGameMediaModule(p1):andThen(function(p2)
 				-- upvalues: gameMediaStoreTypesModule (copy)
 				if not p2 or not p2.responseBody then
 					error({

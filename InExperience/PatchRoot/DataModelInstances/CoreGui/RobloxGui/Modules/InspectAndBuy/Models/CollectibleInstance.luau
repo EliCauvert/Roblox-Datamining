@@ -1,8 +1,8 @@
 ﻿return {
-	new = function() --[[ line: 13 ]]
+	new = function()
 		return {}
 	end,
-	fromGetCollectibleItemInstances = function(a) --[[ line: 19 ]]
+	fromGetCollectibleItemInstances = function(a)
 		return {
 			collectibleInstanceId = a.collectibleInstanceId,
 			collectibleItemId = a.collectibleItemId,

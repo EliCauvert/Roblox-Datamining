@@ -3,9 +3,9 @@ local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local platform = game:GetService("UserInputService"):GetPlatform()
 local fStringLuaAppEphemeralCounterPrefix = require(parent.SharedFlags).FStringLuaAppEphemeralCounterPrefix
 
-return function(p0, p1) --[[ line: 13 ]]
+return function(p0, p1)
 	-- upvalues: platform (ref), fStringLuaAppEphemeralCounterPrefix (ref), rbxAnalyticsService (ref)
-	pcall(function() --[[ line: 14 ]]
+	pcall(function()
 		-- upvalues: p0 (write), p1 (write), platform (copy), fStringLuaAppEphemeralCounterPrefix (copy), rbxAnalyticsService (copy)
 		assert(type(p0) == "string", "Expected counterName to be a string")
 		p0 = p0 or ""

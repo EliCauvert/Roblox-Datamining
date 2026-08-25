@@ -12,24 +12,24 @@ local enumGameDetailErrorTypes = require(parent.DiscoveryTypes).EnumGameDetailEr
 local loggerModule = require(gameDetailRodux.Logger)
 local t = {}
 
-local var10 = function(p0) --[[ line: 20 ]]
+local var10 = function(p0)
 	return "luaapp.gamesapi.games." .. p0
 end
 
 t.KeyMapper = var10
 
-function t.GetFetchingStatus(p1, p2) --[[ line: 26 ]]
+function t.GetFetchingStatus(p1, p2)
 	-- upvalues: performFetch (ref)
 	return performFetch.GetStatus(p1, "luaapp.gamesapi.games." .. p2)
 end
 
-function t.Fetch(p3, p4) --[[ line: 30 ]]
+function t.Fetch(p3, p4)
 	-- upvalues: argCheckModule (ref), performFetch (ref), var10 (ref), gamesMultigetDetailsModule (ref), gameDetailModelModule (ref), resultModule (ref), setGameDetailErrorModule (ref), enumGameDetailErrorTypes (ref), addGameDetailsModule (ref), loggerModule (ref), promiseModule (ref)
 	argCheckModule.isType(p4, "table", "ApiFetchGameDetails: universeIds")
 	
-	return performFetch.Batch(p4, var10, function(p5, p6) --[[ line: 33 ]]
+	return performFetch.Batch(p4, var10, function(p5, p6)
 		-- upvalues: gamesMultigetDetailsModule (copy), p3 (ref), gameDetailModelModule (copy), resultModule (copy), setGameDetailErrorModule (copy), enumGameDetailErrorTypes (copy), addGameDetailsModule (copy), loggerModule (copy), promiseModule (copy)
-		return gamesMultigetDetailsModule(p3, p6):andThen(function(p7) --[[ line: 34 ]]
+		return gamesMultigetDetailsModule(p3, p6):andThen(function(p7)
 			-- upvalues: gameDetailModelModule (copy), resultModule (copy), p6 (ref), p5 (ref), setGameDetailErrorModule (copy), enumGameDetailErrorTypes (copy), addGameDetailsModule (copy), loggerModule (copy), promiseModule (copy)
 			local t = {}
 			local data = p7 and (p7.responseBody and p7.responseBody.data)
@@ -54,7 +54,7 @@ function t.Fetch(p3, p4) --[[ line: 30 ]]
 				end
 			end
 			return promiseModule.resolve(t)
-		end, function(_) --[[ line: 61 ]]
+		end, function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end)

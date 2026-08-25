@@ -31,41 +31,41 @@ if fFlagEnableDrawerFocusNav then
 	focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 	inputHandlersModule = require(parent.InputHandlers)
 end
-return reactModule.memo(function(p0) --[[ line: 40 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useSetDrawerVisibleModule (ref), useSetDrawerShouldMountModule (ref), fFlagEnableDrawerAnimatingHook (ref), useSetDrawerAnimatingModule (ref), reactModule (ref), drawerPanelStatus (ref), fFlagEnableDrawerFocusNav (ref), reactIsModule (ref), reactOtterModule (ref), constantsModule (ref), getDrawerVisibleStoreModule (ref), signalsModule (ref), userInputService (ref), focusNavigationEventNameEnum (write), inputHandlersModule (write), fFlagFixDrawerNavigateBackWhileClosing (ref), foundationModule (ref), scrimModule (ref), focusNavigableSurfaceWrapper (write), focusNavigableSurfaceIdentifierEnum (write)
 	local var16 = useSetDrawerVisibleModule()
 	local var17 = useSetDrawerShouldMountModule()
-	local var18 = if fFlagEnableDrawerAnimatingHook then useSetDrawerAnimatingModule() else function(_) --[[ line: 45 ]] end
+	local var18 = if fFlagEnableDrawerAnimatingHook then useSetDrawerAnimatingModule() else function(_) end
 	local var19 = reactModule.useRef(nil)
 	local var20 = reactModule.useRef(nil)
 	local var21, var22 = reactModule.useBinding(drawerPanelStatus.Scrollable)
-	local var23 = reactModule.useMemo(function() --[[ line: 49 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var21 (ref), drawerPanelStatus (copy)
-		return var21:map(function(p1) --[[ line: 50 ]]
+		return var21:map(function(p1)
 			-- upvalues: drawerPanelStatus (copy)
 			return p1 == drawerPanelStatus.Scrollable
 		end)
 	end, {})
-	local var24 = reactModule.useMemo(function() --[[ line: 55 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: var21 (ref), drawerPanelStatus (copy)
-		return var21:map(function(p2) --[[ line: 56 ]]
+		return var21:map(function(p2)
 			-- upvalues: drawerPanelStatus (copy)
 			return if p2 == drawerPanelStatus.Movable then 3 else 1
 		end)
 	end, {})
-	local var25 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function() --[[ line: 68 ]]
+	local var25 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function()
 		-- upvalues: p0 (ref), reactIsModule (copy)
 		local backgroundStyle = p0.backgroundStyle
 		
-		return if backgroundStyle == nil then nil elseif reactIsModule.isBinding(backgroundStyle) then backgroundStyle:map(function(p3) --[[ line: 74 ]]
+		return if backgroundStyle == nil then nil elseif reactIsModule.isBinding(backgroundStyle) then backgroundStyle:map(function(p3)
 			return p3.Color3
 		end) else backgroundStyle.Color3
 	end, { p0.backgroundStyle }) else nil
-	local var26 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function() --[[ line: 83 ]]
+	local var26 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function()
 		-- upvalues: p0 (ref), reactIsModule (copy)
 		local backgroundStyle = p0.backgroundStyle
 		
-		return if backgroundStyle == nil then nil elseif reactIsModule.isBinding(backgroundStyle) then backgroundStyle:map(function(p4) --[[ line: 89 ]]
+		return if backgroundStyle == nil then nil elseif reactIsModule.isBinding(backgroundStyle) then backgroundStyle:map(function(p4)
 			return p4.Transparency
 		end) else backgroundStyle.Transparency
 	end, { p0.backgroundStyle }) else nil
@@ -73,7 +73,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 	local bottomOffset = p0.bottomOffset or 0
 	local leftOffset = p0.leftOffset or 0
 	local var30 = p0.menuWidth + leftOffset
-	local var31, var32 = reactOtterModule.useAnimatedBinding(-var30, reactModule.useCallback(function(p5) --[[ line: 102 ]]
+	local var31, var32 = reactOtterModule.useAnimatedBinding(-var30, reactModule.useCallback(function(p5)
 		-- upvalues: fFlagEnableDrawerAnimatingHook (copy), var18 (ref), var21 (ref), drawerPanelStatus (copy), var22 (ref), var30 (ref), var17 (ref)
 		if fFlagEnableDrawerAnimatingHook then
 			var18(false)
@@ -89,7 +89,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 	var33.current = var30
 	local var34 = reactModule.useRef(false)
 	local var35, var36 = reactOtterModule.useAnimatedBinding(1)
-	local var37 = reactModule.useCallback(function(p6) --[[ line: 125 ]]
+	local var37 = reactModule.useCallback(function(p6)
 		-- upvalues: var16 (ref), var22 (ref), drawerPanelStatus (copy), p0 (ref)
 		var16(false)
 		var22(drawerPanelStatus.Closing)
@@ -98,7 +98,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			p0.onDrawerClosedAnalytics({ source = p6 })
 		end
 	end, { p0.onDrawerClosedAnalytics })
-	local var38 = reactModule.useCallback(function(p7) --[[ line: 133 ]]
+	local var38 = reactModule.useCallback(function(p7)
 		-- upvalues: var34 (ref), var21 (ref), drawerPanelStatus (copy), var19 (ref), var20 (ref), var22 (ref)
 		if not var34.current then return end
 		if var21:getValue() == drawerPanelStatus.Closing then
@@ -108,7 +108,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 		var20.current = DateTime.now().UnixTimestampMillis
 		var22(drawerPanelStatus.Static)
 	end, {})
-	local var39 = reactModule.useCallback(function(p8) --[[ line: 145 ]]
+	local var39 = reactModule.useCallback(function(p8)
 		-- upvalues: var34 (ref), var19 (ref), var20 (ref), var21 (ref), drawerPanelStatus (copy), var33 (ref), constantsModule (copy), var37 (ref), fFlagEnableDrawerAnimatingHook (copy), var18 (ref), var32 (ref), reactOtterModule (copy), var22 (ref)
 		if not var34.current then
 			var19.current = nil
@@ -142,7 +142,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 		var19.current = nil
 		var20.current = nil
 	end, if fFlagEnableDrawerAnimatingHook then { var37, var18 } else {})
-	local var40 = reactModule.useCallback(function(p9) --[[ line: 186 ]]
+	local var40 = reactModule.useCallback(function(p9)
 		-- upvalues: var34 (ref), var19 (ref), var21 (ref), drawerPanelStatus (copy), var22 (ref), var32 (ref), reactOtterModule (copy)
 		if not var34.current then return end
 		if var19.current == nil or var21:getValue() == drawerPanelStatus.Closing then return end
@@ -162,11 +162,11 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			var19.current = p9.Position
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 213 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getDrawerVisibleStoreModule (copy), signalsModule (copy), var34 (ref), var33 (ref), fFlagEnableDrawerAnimatingHook (copy), var18 (ref), var32 (ref), reactOtterModule (copy), constantsModule (copy), var36 (ref)
 		local getDrawerVisible = getDrawerVisibleStoreModule(false).getDrawerVisible
 		
-		return signalsModule.createEffect(function(p10) --[[ line: 215 ]]
+		return signalsModule.createEffect(function(p10)
 			-- upvalues: getDrawerVisible (ref), var34 (copy), var33 (copy), fFlagEnableDrawerAnimatingHook (copy), var18 (copy), var32 (copy), reactOtterModule (copy), constantsModule (copy), var36 (copy)
 			local var45 = getDrawerVisible(p10)
 			var34.current = var45
@@ -179,13 +179,13 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			var36(reactOtterModule.ease(if var45 then constantsModule.SCRIM_TRANSPARENCY else 1, constantsModule.DRAWER_ANIM_SETTINGS))
 		end)
 	end, if fFlagEnableDrawerAnimatingHook then { var18 } else {})
-	reactModule.useEffect(function() --[[ line: 230 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var38 (ref), var39 (ref), var40 (ref)
 		local touchStartedConnection = userInputService.TouchStarted:Connect(var38)
 		local touchEndedConnection = userInputService.TouchEnded:Connect(var39)
 		local touchMovedConnection = userInputService.TouchMoved:Connect(var40)
 		
-		return function() --[[ line: 234 ]]
+		return function()
 			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), touchMovedConnection (ref)
 			touchStartedConnection:Disconnect()
 			touchEndedConnection:Disconnect()
@@ -221,13 +221,13 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 	return reactModule.createElement(foundationModule.View, {
 		Size = UDim2.fromScale(1, 1),
 		backgroundStyle = { Transparency = 1 },
-		Visible = var35:map(function(p11) --[[ line: 252 ]]
+		Visible = var35:map(function(p11)
 			return p11 < 1
 		end)
 	}, {
 		Scrim = reactModule.createElement(scrimModule, {
 			zIndex = 1,
-			onActivated = reactModule.useCallback(function() --[[ line: 241 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var21 (ref), drawerPanelStatus (copy), var37 (ref)
 				if var21:getValue() == drawerPanelStatus.Closing then return end
 				if var21:getValue() ~= drawerPanelStatus.Movable then
@@ -244,18 +244,18 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 				ZIndex = 2,
 				BorderSizePixel = 0,
 				Selectable = false,
-				Position = var31:map(function(p13) --[[ line: 319 ]]
+				Position = var31:map(function(p13)
 					return UDim2.fromOffset(p13, 0)
 				end),
 				Size = UDim2.new(0, var30, 1, 0),
 				BackgroundColor3 = var25,
 				BackgroundTransparency = var26
 			},
-			customEventHandlers = reactModule.useMemo(function() --[[ line: 282 ]]
+			customEventHandlers = reactModule.useMemo(function()
 				-- upvalues: fFlagEnableDrawerFocusNav (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), fFlagFixDrawerNavigateBackWhileClosing (copy), var21 (ref), drawerPanelStatus (copy), var37 (ref)
 				return if fFlagEnableDrawerFocusNav then {
 					[focusNavigationEventNameEnum.NavigateBack] = {
-						handler = inputHandlersModule.onRelease(function(p14) --[[ line: 288 ]]
+						handler = inputHandlersModule.onRelease(function(p14)
 							-- upvalues: fFlagFixDrawerNavigateBackWhileClosing (copy), var21 (copy), drawerPanelStatus (copy), var37 (copy)
 							if not fFlagFixDrawerNavigateBackWhileClosing then
 								var37("focus-navigation-back")
@@ -271,7 +271,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Selectable = false,
-			Position = var31:map(function(p12) --[[ line: 333 ]]
+			Position = var31:map(function(p12)
 				return UDim2.fromOffset(p12, 0)
 			end),
 			Size = UDim2.new(0, var30, 1, 0),

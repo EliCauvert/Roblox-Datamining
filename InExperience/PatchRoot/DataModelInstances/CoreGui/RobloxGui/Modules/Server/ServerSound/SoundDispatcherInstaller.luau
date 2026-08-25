@@ -2,7 +2,7 @@
 local starterPlayerService = game:GetService("StarterPlayer")
 local serverUtilModule = require(script.Parent.Parent.ServerUtil)
 
-local function _() --[[ line: 11 | named "HasOldSoundScripts" ]]
+local function _()
 	-- upvalues: serverScriptService (ref), starterPlayerService (ref)
 	if serverScriptService:FindFirstChild("SoundDispatcher") then
 		return true
@@ -12,7 +12,7 @@ local function _() --[[ line: 11 | named "HasOldSoundScripts" ]]
 	return starterCharacterScripts and starterCharacterScripts:FindFirstChild("Sound")
 end
 
-local function LoadScript(p0, p1) --[[ line: 24 ]]
+local function LoadScript(p0, p1)
 	-- upvalues: serverUtilModule (ref)
 	local var5 = script.Parent:WaitForChild(p0)
 	local script = Instance.new("Script")
@@ -28,7 +28,7 @@ local function LoadScript(p0, p1) --[[ line: 24 ]]
 	return script
 end
 
-return function() --[[ line: 37 | named "TryInstall" ]]
+return function()
 	-- upvalues: serverScriptService (ref), starterPlayerService (ref), LoadScript (ref)
 	local var7, starterCharacterScripts
 	if serverScriptService:FindFirstChild("SoundDispatcher") then

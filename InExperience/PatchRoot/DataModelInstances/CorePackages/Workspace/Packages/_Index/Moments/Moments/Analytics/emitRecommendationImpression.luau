@@ -9,7 +9,7 @@ local t = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p0) --[[ line: 27 | named "emitRecommendationImpression" ]]
+return function(p0)
 	-- upvalues: t (ref), constantsModule (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref)
 	game:GetService("TelemetryService"):LogEvent(t, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },

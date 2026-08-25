@@ -1,6 +1,6 @@
 ﻿local assignModule = require(script.Parent.assign)
 
-return function(p0, p1, p2) --[[ line: 43 | named "throttle" ]]
+return function(p0, p1, p2)
 	-- upvalues: assignModule (ref)
 	local var1 = assignModule({ leading = true, trailing = true }, p2)
 	local maxValue = math.max(0, p1)
@@ -10,7 +10,7 @@ return function(p0, p1, p2) --[[ line: 43 | named "throttle" ]]
 	local var4 = nil
 	local t = {}
 	
-	local function _() --[[ line: 59 | named "clearScheduled" ]]
+	local function _()
 		-- upvalues: var4 (write)
 		if var4 then
 			task.cancel(var4)
@@ -18,14 +18,14 @@ return function(p0, p1, p2) --[[ line: 43 | named "throttle" ]]
 		end
 	end
 	
-	local function invoke() --[[ line: 66 ]]
+	local function invoke()
 		-- upvalues: var3 (write), var4 (write), p0 (ref), t (write)
 		var3 = os.clock()
 		var4 = nil
 		p0(table.unpack(t))
 	end
 	
-	return function(...) --[[ line: 73 ]]
+	return function(...)
 		-- upvalues: t (write), var3 (write), leading (ref), maxValue (ref), var4 (write), p0 (ref), trailing (ref), invoke (ref)
 		local processTime = os.clock()
 		t = { ... }

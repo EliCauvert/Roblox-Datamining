@@ -13,10 +13,10 @@ local _ = require(parent.SduiCoreSystem)
 local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 local fFlagLuaAppUseEffectInSignalPreprocessing = require(parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
 
-return function(p0, p1, p2) --[[ line: 30 | named "useSduiContextFromRoduxAndProcessConfigs" ]]
+return function(p0, p1, p2)
 	-- upvalues: useSelector (ref), sduiConfigReducerModule (ref), tutilsModule (ref), useSduiContextModule (ref), fFlagLuaAppLayoutParamsInContext (ref), fFlagLuaAppUseEffectInSignalPreprocessing (ref), reactModule (ref), getSduiFeedStoreModule (ref), getItemCollectionKeyModule (ref), processCollectionConfigModule (ref)
 	p2 = p2 or p0
-	local var9 = useSelector(function(p3) --[[ line: 37 ]]
+	local var9 = useSelector(function(p3)
 		-- upvalues: sduiConfigReducerModule (copy), p2 (ref)
 		local t = {}
 		local var12 = p3.Personalization[sduiConfigReducerModule.key][p2]
@@ -34,7 +34,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "useSduiContextFromRoduxAndPro
 		dataUpdatedTimestamp = var9.dataUpdatedTimestamp,
 		pageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then p1 else nil
 	});
-	(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function() --[[ line: 59 ]]
+	(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function()
 		-- upvalues: getSduiFeedStoreModule (copy), p2 (ref), var9 (ref), getItemCollectionKeyModule (copy), processCollectionConfigModule (copy), var10 (ref)
 		local var13 = getSduiFeedStoreModule(p2)
 		local t = {}
@@ -52,7 +52,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "useSduiContextFromRoduxAndPro
 				dataUpdatedTimestamp = var9.dataUpdatedTimestamp
 			})
 		end
-		return function() --[[ line: 77 ]] end
+		return function() end
 	end, {
 		var10,
 		var9.itemCollections,

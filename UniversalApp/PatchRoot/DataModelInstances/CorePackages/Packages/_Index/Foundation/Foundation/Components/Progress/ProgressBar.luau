@@ -18,7 +18,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Enums.ProgressShape)
 local progressSizeModule = require(foundation.Enums.ProgressSize)
 
-local function getBarSequenceFromProgress(p0) --[[ line: 30 ]]
+local function getBarSequenceFromProgress(p0)
 	p0 = p0 or 0
 	
 	if p0 == 0 then
@@ -38,11 +38,11 @@ local function getBarSequenceFromProgress(p0) --[[ line: 30 ]]
 	return NumberSequence.new(list)
 end
 
-local function getFillSizeFromProgress(p1) --[[ line: 50 ]]
+local function getFillSizeFromProgress(p1)
 	return UDim2.fromScale(p1 or 0, 1)
 end
 
-local function getIndeterminateShimmerTransparency(a, b, p2) --[[ line: 54 ]]
+local function getIndeterminateShimmerTransparency(a, b, p2)
 	return if b then NumberSequence.new(a) else NumberSequence.new({
 		NumberSequenceKeypoint.new(0, 1),
 		NumberSequenceKeypoint.new(0.2, 1),
@@ -52,20 +52,20 @@ local function getIndeterminateShimmerTransparency(a, b, p2) --[[ line: 54 ]]
 	})
 end
 
-local function getIndeterminateShimmerOffset(a, b) --[[ line: 72 ]]
+local function getIndeterminateShimmerOffset(a, b)
 	-- upvalues: constantsModule (ref)
 	return if b then Vector2.new(0, 0) else Vector2.new(a * constantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 end
 
-local function ProgressBarIndeterminateGradient(a) --[[ line: 87 ]]
+local function ProgressBarIndeterminateGradient(a)
 	-- upvalues: useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), reactModule (ref), getIndeterminateShimmerTransparency (ref), getIndeterminateShimmerOffset (ref), getTestIdTagModule (ref)
 	return reactModule.createElement("UIGradient", {
 		Color = ColorSequence.new(a.emphasisColor3),
-		Transparency = usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p3) --[[ line: 93 ]]
+		Transparency = usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p3)
 			-- upvalues: getIndeterminateShimmerTransparency (copy), a (ref)
 			return getIndeterminateShimmerTransparency(p3, a.reducedMotion, a.emphasisTransparency)
 		end),
-		Offset = useRotationModule(1):map(function(p4) --[[ line: 96 ]]
+		Offset = useRotationModule(1):map(function(p4)
 			-- upvalues: getIndeterminateShimmerOffset (copy), a (ref)
 			return getIndeterminateShimmerOffset(p4, a.reducedMotion)
 		end),
@@ -81,7 +81,7 @@ local t = {
 	width = UDim.new(1, 0)
 }
 
-return function(p5) --[[ line: 128 | named "ProgressBar" ]]
+return function(p5)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), useProgressVariantsModule (ref), flagsModule (ref), progressSizeModule (ref), useProgressBindingModule (ref), useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), mapBindableModule (ref), getBarSequenceFromProgress (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), getFillSizeFromProgress (ref), ProgressBarIndeterminateGradient (ref), textModule (ref)
 	local var25 = withDefaultsModule(p5, t)
 	local var26 = useTokensModule()
@@ -143,7 +143,7 @@ return function(p5) --[[ line: 128 | named "ProgressBar" ]]
 		}, {
 			Gradient = reactModule.createElement("UIGradient", {
 				Color = ColorSequence.new(var26.Color.Content.Emphasis.Color3),
-				Transparency = if var30 then usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p6) --[[ line: 215 ]]
+				Transparency = if var30 then usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED):map(function(p6)
 					-- upvalues: var27 (ref), var26 (ref)
 					return if var27.reducedMotion then NumberSequence.new(p6) else NumberSequence.new({
 						NumberSequenceKeypoint.new(0, 1),
@@ -153,7 +153,7 @@ return function(p5) --[[ line: 128 | named "ProgressBar" ]]
 						NumberSequenceKeypoint.new(1, 1)
 					})
 				end) else mapBindableModule(var29, getBarSequenceFromProgress),
-				Offset = if var30 then useRotationModule(1):map(function(p7) --[[ line: 230 ]]
+				Offset = if var30 then useRotationModule(1):map(function(p7)
 					-- upvalues: var27 (ref), constantsModule (copy)
 					return if var27.reducedMotion then Vector2.new(0, 0) else Vector2.new(p7 * constantsModule.INDETERMINATE_SHIMMER_SPEED % 360 / 360 * 2 - 1, 0)
 				end) else nil

@@ -15,27 +15,27 @@ local var9 = textService:GetTextSize("Client Memory Usage:", topBar, topBar_1, V
 local var10 = textService:GetTextSize("Avg. Data Ping:", topBar, topBar_1, Vector2.new(0, 0))
 local liveUpdateElement = roactModule.PureComponent:extend("LiveUpdateElement")
 
-function liveUpdateElement.didMount(p0) --[[ line: 35 ]]
-	p0.totalMemConnector = p0.props.ClientMemoryData:totalMemSignal():Connect(function(p1) --[[ line: 37 ]]
+function liveUpdateElement.didMount(p0)
+	p0.totalMemConnector = p0.props.ClientMemoryData:totalMemSignal():Connect(function(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ totalClientMemory = p1 })
 	end)
-	p0.avgPingConnector = p0.props.ServerStatsData:avgPing():Connect(function(p2) --[[ line: 41 ]]
+	p0.avgPingConnector = p0.props.ServerStatsData:avgPing():Connect(function(p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ averagePing = p2 })
 	end)
-	p0.logWarningErrorConnector = p0.props.ClientLogData:errorWarningSignal():Connect(function(p3, p4) --[[ line: 45 ]]
+	p0.logWarningErrorConnector = p0.props.ClientLogData:errorWarningSignal():Connect(function(p3, p4)
 		-- upvalues: p0 (ref)
 		p0:setState({ numErrors = p3, numWarnings = p4 })
 	end)
 	p0:doSizeCheck()
 end
 
-function liveUpdateElement.didUpdate(p5) --[[ line: 55 ]]
+function liveUpdateElement.didUpdate(p5)
 	p5:doSizeCheck()
 end
 
-function liveUpdateElement.doSizeCheck(p6) --[[ line: 59 ]]
+function liveUpdateElement.doSizeCheck(p6)
 	if p6.ref.current then
 		local var12 = p6.ref.current.AbsoluteSize.X < p6.state.formFactorThreshold
 		
@@ -45,7 +45,7 @@ function liveUpdateElement.doSizeCheck(p6) --[[ line: 59 ]]
 	end
 end
 
-function liveUpdateElement.willUnmount(p7) --[[ line: 72 ]]
+function liveUpdateElement.willUnmount(p7)
 	p7.totalMemConnector:Disconnect()
 	p7.totalMemConnector = nil
 	p7.avgPingConnector:Disconnect()
@@ -54,11 +54,11 @@ function liveUpdateElement.willUnmount(p7) --[[ line: 72 ]]
 	p7.logWarningErrorConnector = nil
 end
 
-function liveUpdateElement.init(p8) --[[ line: 83 ]]
+function liveUpdateElement.init(p8)
 	-- upvalues: msgTypeNamesOrdered (ref), roactModule (ref)
 	local errorWarningCount, errorWarningCount_1 = p8.props.ClientLogData:getErrorWarningCount()
 	
-	function p8.onLogWarningButton() --[[ line: 85 ]]
+	function p8.onLogWarningButton()
 		-- upvalues: msgTypeNamesOrdered (copy), p8 (ref)
 		local t = {}
 		
@@ -70,7 +70,7 @@ function liveUpdateElement.init(p8) --[[ line: 83 ]]
 		p8.props.dispatchChangeTabClientLog()
 	end
 	
-	function p8.onLogErrorButton() --[[ line: 96 ]]
+	function p8.onLogErrorButton()
 		-- upvalues: msgTypeNamesOrdered (copy), p8 (ref)
 		local t = {}
 		
@@ -93,7 +93,7 @@ function liveUpdateElement.init(p8) --[[ line: 83 ]]
 	}
 end
 
-function liveUpdateElement.render(p9) --[[ line: 119 ]]
+function liveUpdateElement.render(p9)
 	-- upvalues: var9 (ref), constantsModule (ref), var8 (ref), textService (ref), topBar (ref), topBar_1 (ref), var10 (ref), roactModule (ref), uDim2 (ref), text (ref)
 	local size = p9.props.size
 	local position = p9.props.position
@@ -229,18 +229,18 @@ function liveUpdateElement.render(p9) --[[ line: 119 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p10) --[[ line: 286 | named "mapDispatchToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(nil, function(p10)
 	-- upvalues: setActiveTabModule (ref)
 	return {
-		dispatchChangeTabClientLog = function() --[[ line: 288 ]]
+		dispatchChangeTabClientLog = function()
 			-- upvalues: p10 (ref), setActiveTabModule (copy)
 			p10(setActiveTabModule("Log", true))
 		end,
-		dispatchChangeTabClientMemory = function() --[[ line: 291 ]]
+		dispatchChangeTabClientMemory = function()
 			-- upvalues: p10 (ref), setActiveTabModule (copy)
 			p10(setActiveTabModule("Memory", true))
 		end,
-		dispatchChangeTabNetworkPing = function() --[[ line: 294 ]]
+		dispatchChangeTabNetworkPing = function()
 			-- upvalues: p10 (ref), setActiveTabModule (copy)
 			p10(setActiveTabModule("ServerStats", true))
 		end

@@ -44,12 +44,12 @@ local _ = require(script.Parent.writeToStore_types)
 getStoreKeyName:setStringify(require(script.Parent["object-canon"]).canonicalStringify)
 local _ = require(script.Parent.policies_types)
 
-local function _(p0) --[[ line: 145 | named "argsFromFieldSpecifier" ]]
+local function _(p0)
 	-- upvalues: argumentsObjectFromField (ref)
 	return if p0.args == nil then if p0.field then argumentsObjectFromField(p0.field, p0.variables) else nil else p0.args
 end
 
-local function defaultDataIdFromObject(_, p1, p2) --[[ line: 159 ]]
+local function defaultDataIdFromObject(_, p1, p2)
 	-- upvalues: httpService (ref)
 	local typename = p1.__typename
 	local id = p1.id
@@ -79,30 +79,30 @@ end
 
 t.defaultDataIdFromObject = defaultDataIdFromObject
 
-local function nullKeyFieldsFn(_) --[[ line: 191 ]]
+local function nullKeyFieldsFn(_)
 	return nil
 end
 
-local function simpleKeyArgsFn(_, p3) --[[ line: 194 ]]
+local function simpleKeyArgsFn(_, p3)
 	return p3.fieldName
 end
 
 local _ = nil
 
-local function mergeTrueFn(_, p4, p5, p6) --[[ line: 201 ]]
+local function mergeTrueFn(_, p4, p5, p6)
 	return p6:mergeObjects(p4, p5)
 end
 
 local _ = nil
 
-local function mergeFalseFn(_, _, p7) --[[ line: 205 ]]
+local function mergeFalseFn(_, _, p7)
 	return p7
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p8) --[[ line: 312 ]]
+function t_1.new(p8)
 	-- upvalues: t_1 (ref), map (ref), object (ref), defaultDataIdFromObject (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.typePolicies = {}
@@ -129,7 +129,7 @@ function t_1.new(p8) --[[ line: 312 ]]
 	return tbl
 end
 
-function t_1:identify(p9, p10, p11) --[[ line: 353 ]]
+function t_1:identify(p9, p10, p11)
 	-- upvalues: getTypenameFromResult (ref), keyFieldsFnFromSpecifier (write)
 	local _ = nil
 	local var25 = if p10 and p11 then getTypenameFromResult(p9, p10, p11) else p9.__typename
@@ -158,9 +158,9 @@ function t_1:identify(p9, p10, p11) --[[ line: 353 ]]
 	return if t.keyObject then { var27, t.keyObject } else { var27 }
 end
 
-function t_1.addTypePolicies(p12, p13) --[[ line: 425 ]]
+function t_1.addTypePolicies(p12, p13)
 	-- upvalues: objectKeysForEachModule (ref), object (ref), hasOwnPropertyModule (ref)
-	objectKeysForEachModule(p13, function(p14) --[[ line: 427 ]]
+	objectKeysForEachModule(p13, function(p14)
 		-- upvalues: p13 (ref), object (copy), p12 (ref), hasOwnPropertyModule (copy)
 		local var31 = p13[p14]
 		local queryType = var31.queryType
@@ -190,13 +190,13 @@ function t_1.addTypePolicies(p12, p13) --[[ line: 425 ]]
 	end)
 end
 
-function t_1:updateTypePolicy(p15, p16) --[[ line: 471 ]]
+function t_1:updateTypePolicy(p15, p16)
 	-- upvalues: isCallableModule (ref), mergeTrueFn (write), mergeFalseFn (write), nullKeyFieldsFn (ref), keyFieldsFnFromSpecifier (write), objectKeysForEachModule (ref), simpleKeyArgsFn (ref), keyArgsFnFromSpecifier (write)
 	local var33 = self:getTypePolicy(p15)
 	local keyFields = p16.keyFields
 	local fields = p16.fields
 	
-	local function _(value, p17) --[[ line: 475 | named "setMerge" ]]
+	local function _(value, p17)
 		-- upvalues: isCallableModule (copy), mergeTrueFn (copy), mergeFalseFn (copy)
 		if isCallableModule(p17) then
 			value.merge = p17
@@ -239,7 +239,7 @@ function t_1:updateTypePolicy(p15, p16) --[[ line: 471 ]]
 		end
 	end
 	if fields then
-		objectKeysForEachModule(fields, function(p18) --[[ line: 530 ]]
+		objectKeysForEachModule(fields, function(p18)
 			-- upvalues: self (ref), p15 (ref), fields (ref), simpleKeyArgsFn (copy), keyArgsFnFromSpecifier (copy), isCallableModule (copy), mergeTrueFn (copy), mergeFalseFn (copy)
 			local var35 = self:getFieldPolicy(p15, p18, true)
 			local var36 = fields[p18]
@@ -284,7 +284,7 @@ function t_1:updateTypePolicy(p15, p16) --[[ line: 471 ]]
 	end
 end
 
-function t_1:setRootTypename(p19, p20) --[[ line: 588 ]]
+function t_1:setRootTypename(p19, p20)
 	-- upvalues: invariant (ref)
 	local var38 = p20
 	
@@ -308,13 +308,13 @@ function t_1:setRootTypename(p19, p20) --[[ line: 588 ]]
 	end
 end
 
-function t_1:addPossibleTypes(p21) --[[ line: 617 ]]
+function t_1:addPossibleTypes(p21)
 	-- upvalues: objectKeysForEachModule (ref), array (ref), typeOrFieldNameRegExp (ref), luauRegExpModule (ref)
 	self.usingPossibleTypes = true
-	objectKeysForEachModule(p21, function(p22) --[[ line: 620 ]]
+	objectKeysForEachModule(p21, function(p22)
 		-- upvalues: self (ref), array (copy), p21 (ref), typeOrFieldNameRegExp (copy), luauRegExpModule (copy)
 		self:getSupertypeSet(p22, true)
-		array.forEach(p21[p22], function(p23) --[[ line: 627 ]]
+		array.forEach(p21[p22], function(p23)
 			-- upvalues: self (copy), p22 (ref), typeOrFieldNameRegExp (copy), luauRegExpModule (copy)
 			self:getSupertypeSet(p23, true):add(p22)
 			local var42 = typeOrFieldNameRegExp:exec(p23)
@@ -326,7 +326,7 @@ function t_1:addPossibleTypes(p21) --[[ line: 617 ]]
 	end)
 end
 
-function t_1:getTypePolicy(p24) --[[ line: 639 ]]
+function t_1:getTypePolicy(p24)
 	-- upvalues: hasOwnPropertyModule (ref), object (ref), array (ref)
 	if not hasOwnPropertyModule(self.typePolicies, p24) then
 		self.typePolicies[p24] = {}
@@ -335,7 +335,7 @@ function t_1:getTypePolicy(p24) --[[ line: 639 ]]
 		local var44 = self.supertypeMap:get(p24)
 		
 		if var44 and var44.size > 0 then
-			var44:forEach(function(p25) --[[ line: 673 ]]
+			var44:forEach(function(p25)
 				-- upvalues: self (ref), object (copy), var43 (ref)
 				local var46 = self:getTypePolicy(p25)
 				local fields = var46.fields
@@ -347,7 +347,7 @@ function t_1:getTypePolicy(p24) --[[ line: 639 ]]
 	local var45 = self.toBeAdded[p24]
 	
 	if var45 and #var45 > 0 then
-		array.forEach(array.splice(var45, 1), function(p26) --[[ line: 690 ]]
+		array.forEach(array.splice(var45, 1), function(p26)
 			-- upvalues: self (ref), p24 (ref)
 			self:updateTypePolicy(p24, p26)
 		end)
@@ -355,7 +355,7 @@ function t_1:getTypePolicy(p24) --[[ line: 639 ]]
 	return self.typePolicies[p24]
 end
 
-function t_1:getFieldPolicy(p27, p28, p29) --[[ line: 698 ]]
+function t_1:getFieldPolicy(p27, p28, p29)
 	if not p27 then
 		return nil
 	end
@@ -371,7 +371,7 @@ function t_1:getFieldPolicy(p27, p28, p29) --[[ line: 698 ]]
 	return nil
 end
 
-function t_1:getSupertypeSet(p30, p31) --[[ line: 725 ]]
+function t_1:getSupertypeSet(p30, p31)
 	-- upvalues: set (ref)
 	local var47 = self.supertypeMap:get(p30)
 	
@@ -382,7 +382,7 @@ function t_1:getSupertypeSet(p30, p31) --[[ line: 725 ]]
 	return var47
 end
 
-function t_1:fragmentMatches(p32, p33, p34, p35) --[[ line: 736 ]]
+function t_1:fragmentMatches(p32, p33, p34, p35)
 	-- upvalues: array (ref), invariant (ref), selectionSetMatchesResult (ref)
 	if not p32.typeCondition then
 		return true
@@ -397,7 +397,7 @@ function t_1:fragmentMatches(p32, p33, p34, p35) --[[ line: 736 ]]
 		local var48 = self:getSupertypeSet(p33, true)
 		local list = { var48 }
 		
-		local function maybeEnqueue(p36) --[[ line: 767 ]]
+		local function maybeEnqueue(p36)
 			-- upvalues: self (ref), array (copy), list (ref)
 			local var54 = self:getSupertypeSet(p36, false)
 			
@@ -418,7 +418,7 @@ function t_1:fragmentMatches(p32, p33, p34, p35) --[[ line: 736 ]]
 				if var51 and i == #list and selectionSetMatchesResult(p32.selectionSet, p34, p35) then
 					var51 = false
 					var52 = true
-					array.forEach(self.fuzzySubtypes:entries(), function(p37) --[[ line: 834 ]]
+					array.forEach(self.fuzzySubtypes:entries(), function(p37)
 						-- upvalues: p33 (ref), self (ref), array (copy), list (ref)
 						local var55 = p37[1]
 						local var56 = p37[2]:exec(p33)
@@ -446,13 +446,13 @@ function t_1:fragmentMatches(p32, p33, p34, p35) --[[ line: 736 ]]
 	return false
 end
 
-function t_1:hasKeyArgs(p38, p39) --[[ line: 852 ]]
+function t_1:hasKeyArgs(p38, p39)
 	local var58 = self:getFieldPolicy(p38, p39, false)
 	
 	return var58 ~= nil and var58.keyFn ~= nil
 end
 
-function t_1:getStoreFieldName(p40) --[[ line: 859 ]]
+function t_1:getStoreFieldName(p40)
 	-- upvalues: argumentsObjectFromField (ref), keyArgsFnFromSpecifier (write), storeKeyNameFromField (ref), getStoreKeyName (ref), fieldNameFromStoreName (ref)
 	local typename = p40.typename
 	local fieldName = p40.fieldName
@@ -486,7 +486,7 @@ function t_1:getStoreFieldName(p40) --[[ line: 859 ]]
 	return if var60 == false then fieldName elseif fieldName == fieldNameFromStoreName(var60) then var60 else fieldName .. ":" .. var60
 end
 
-function t_1:readField(p41, p42) --[[ line: 930 ]]
+function t_1:readField(p41, p42)
 	-- upvalues: fieldNameFromStoreName (ref), makeFieldFunctionOptions (write), cacheSlot (ref)
 	local from = p41.from
 	
@@ -510,7 +510,7 @@ function t_1:readField(p41, p42) --[[ line: 930 ]]
 	}) else var67
 end
 
-function t_1:getMergeFunction(p43, p44, p45) --[[ line: 990 ]]
+function t_1:getMergeFunction(p43, p44, p45)
 	local var70 = self:getFieldPolicy(p43, p44, false)
 	local var71 = var70 and var70.merge
 	
@@ -525,7 +525,7 @@ function t_1:getMergeFunction(p43, p44, p45) --[[ line: 990 ]]
 	return var71
 end
 
-function t_1.runMergeFunction(p46, p47, p48, p49, p50, p51) --[[ line: 1021 ]]
+function t_1.runMergeFunction(p46, p47, p48, p49, p50, p51)
 	-- upvalues: mergeTrueFn (write), makeMergeObjectsFunction (write), mergeFalseFn (write), makeFieldFunctionOptions (write)
 	local field = p49.field
 	local typename = p49.typename
@@ -548,7 +548,7 @@ end
 
 t.Policies = t_1
 
-makeFieldFunctionOptions = function(p52, p53, p54, p55, p56) --[[ line: 1081 | named "makeFieldFunctionOptions" ]]
+makeFieldFunctionOptions = function(p52, p53, p54, p55, p56)
 	-- upvalues: fieldNameFromStoreName (ref), argumentsObjectFromField (ref), isReference (ref), object (ref), hasOwnPropertyModule (ref), invariant (ref), stringifyForDisplay (ref), array (ref), makeMergeObjectsFunction (write)
 	local var73 = p52:getStoreFieldName(p54)
 	local variables = p54.variables or p55.variables
@@ -559,7 +559,7 @@ makeFieldFunctionOptions = function(p52, p53, p54, p55, p56) --[[ line: 1081 | n
 		fieldName = fieldNameFromStoreName(var73),
 		storeFieldName = var73,
 		variables = variables,
-		isReference = function(_, ...) --[[ line: 1101 ]]
+		isReference = function(_, ...)
 			-- upvalues: isReference (copy)
 			return isReference(...)
 		end,
@@ -567,7 +567,7 @@ makeFieldFunctionOptions = function(p52, p53, p54, p55, p56) --[[ line: 1081 | n
 		storage = p56,
 		cache = p52.cache,
 		canRead = p55.store.canRead,
-		readField = function(_, p57, ...) --[[ line: 1108 ]]
+		readField = function(_, p57, ...)
 			-- upvalues: object (copy), p53 (ref), hasOwnPropertyModule (copy), invariant (copy), stringifyForDisplay (copy), array (copy), variables (ref), p52 (ref), p55 (ref)
 			local var75 = type(p57)
 			local list = {
@@ -603,9 +603,9 @@ makeFieldFunctionOptions = function(p52, p53, p54, p55, p56) --[[ line: 1081 | n
 	}
 end
 
-makeMergeObjectsFunction = function(p58) --[[ line: 1175 | named "makeMergeObjectsFunction" ]]
+makeMergeObjectsFunction = function(p58)
 	-- upvalues: array (ref), invariantError (ref), isNonNullObject (ref), isReference (ref), storeValueIsStoreObject (ref), object (ref)
-	return function(_, p59, p60) --[[ line: 1176 ]]
+	return function(_, p59, p60)
 		-- upvalues: array (copy), invariantError (copy), isNonNullObject (copy), p58 (ref), isReference (copy), storeValueIsStoreObject (copy), object (copy)
 		if array.isArray(p59) or array.isArray(p60) then
 			error(invariantError.new("Cannot automatically merge arrays"))
@@ -630,11 +630,11 @@ makeMergeObjectsFunction = function(p58) --[[ line: 1175 | named "makeMergeObjec
 	end
 end
 
-local function keyObjEncode(p61, p62) --[[ line: 1226 ]]
+local function keyObjEncode(p61, p62)
 	-- upvalues: array (ref), keyObjEncode (ref), httpService (ref)
 	assert(typeof(p62) == "table", "specifier must be an array")
 	
-	return if next(p62) then "{" .. array.join(array.filter(array.map(p62, function(p63, p64) --[[ line: 1236 ]]
+	return if next(p62) then "{" .. array.join(array.filter(array.map(p62, function(p63, p64)
 		-- upvalues: array (copy), p61 (ref), p62 (ref), keyObjEncode (copy), httpService (copy)
 		if array.isArray(p63) then
 			return ""
@@ -642,24 +642,24 @@ local function keyObjEncode(p61, p62) --[[ line: 1226 ]]
 		local _ = nil
 		
 		return if p61[p63] then if p64 < #p62 then httpService:JSONEncode(p63) .. ":" .. (if array.isArray(p62[p64 + 1]) then keyObjEncode(p61[p63], p62[p64 + 1]) else httpService:JSONEncode(p61[p63])) else httpService:JSONEncode(p63) .. ":" .. httpService:JSONEncode(p61[p63]) else ""
-	end), function(p65) --[[ line: 1259 ]]
+	end), function(p65)
 		return p65 ~= ""
 	end), ",") .. "}" else "[]"
 end
 
-keyArgsFnFromSpecifier = function(p66) --[[ line: 1268 | named "keyArgsFnFromSpecifier" ]]
+keyArgsFnFromSpecifier = function(p66)
 	-- upvalues: keyObjEncode (ref), computeKeyObject (write)
-	return function(p67, p68) --[[ line: 1269 ]]
+	return function(p67, p68)
 		-- upvalues: keyObjEncode (copy), computeKeyObject (copy), p66 (ref)
 		return if p67 then ("%s:%s"):format(p68.fieldName, keyObjEncode(computeKeyObject(p67, p66, false), p66)) else p68.fieldName
 	end
 end
 
-keyFieldsFnFromSpecifier = function(p69) --[[ line: 1281 | named "keyFieldsFnFromSpecifier" ]]
+keyFieldsFnFromSpecifier = function(p69)
 	-- upvalues: trie (ref), canUseWeakMap (ref), makeAliasMap (write), computeKeyObject (write), keyObjEncode (ref)
 	local var80 = trie.new(canUseWeakMap)
 	
-	return function(_, p70, p71) --[[ line: 1283 ]]
+	return function(_, p70, p71)
 		-- upvalues: var80 (ref), makeAliasMap (copy), computeKeyObject (copy), p69 (ref), keyObjEncode (copy)
 		local aliasMap = nil
 		
@@ -679,13 +679,13 @@ keyFieldsFnFromSpecifier = function(p69) --[[ line: 1281 | named "keyFieldsFnFro
 	end
 end
 
-makeAliasMap = function(p72, p73) --[[ line: 1311 | named "makeAliasMap" ]]
+makeAliasMap = function(p72, p73)
 	-- upvalues: set (ref), array (ref), isField (ref), makeAliasMap (write), getFragmentFromSelection (ref)
 	local t = {}
 	local var83 = set.new({ p72 })
 	
 	for i, v in var83 do
-		array.forEach(v.selections, function(p74) --[[ line: 1316 ]]
+		array.forEach(v.selections, function(p74)
 			-- upvalues: isField (copy), t (ref), makeAliasMap (copy), p73 (ref), getFragmentFromSelection (copy), var83 (ref)
 			if isField(p74) then
 				if p74.alias then
@@ -730,7 +730,7 @@ makeAliasMap = function(p72, p73) --[[ line: 1311 | named "makeAliasMap" ]]
 	return t
 end
 
-computeKeyObject = function(p75, p76, p77, p78) --[[ line: 1361 | named "computeKeyObject" ]]
+computeKeyObject = function(p75, p76, p77, p78)
 	-- upvalues: computeKeyObject (write), hasOwnPropertyModule (ref), invariant (ref)
 	local t = {}
 	local var86 = nil

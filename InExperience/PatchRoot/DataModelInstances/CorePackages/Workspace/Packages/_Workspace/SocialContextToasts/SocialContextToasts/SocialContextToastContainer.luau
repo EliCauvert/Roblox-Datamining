@@ -18,23 +18,23 @@ local displayOrderEnum = displayOrderModule.DisplayOrderEnum
 local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
 local getFFlagSocialContextToastEventStream = require(parent.SharedFlags).GetFFlagSocialContextToastEventStream
 
-local function _(p0) --[[ line: 29 | named "renderWithStyleProvider" ]]
+local function _(p0)
 	-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref)
 	return reactModule.createElement(styleProviderWithDefaultTheme, {}, p0)
 end
 
-return function(p1, p2, p3) --[[ line: 33 | named "SocialContextToastContainer" ]]
+return function(p1, p2, p3)
 	-- upvalues: coreGuiService (ref), toastTypesModule (ref), roduxModule (ref), cryoModule (ref), reactModule (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), displayOrderEnum (ref), socialContextToastDispatcherModule (ref), toastRootModule (ref), getFFlagSocialContextToastEventStream (ref), confirmationModalRootModule (ref), styleProviderWithDefaultTheme (ref), reactRobloxModule (ref)
 	local socialContextToast = Instance.new("Folder")
 	socialContextToast.Name = "SocialContextToast"
 	socialContextToast.Parent = coreGuiService
 	local var14 = reactModule.createElement(roactRoduxModule.StoreProvider, {
 		store = roduxModule.Store.new(roduxModule.createReducer({}, {
-			SetToastContent = function(value, p4) --[[ line: 50 ]]
+			SetToastContent = function(value, p4)
 				-- upvalues: cryoModule (copy)
 				return cryoModule.Dictionary.join(value, { ToastContent = p4.toastContent })
 			end,
-			SetConfirmationModal = function(value, p5) --[[ line: 56 ]]
+			SetConfirmationModal = function(value, p5)
 				-- upvalues: cryoModule (copy)
 				return cryoModule.Dictionary.join(value, {
 					ConfirmationModal = {

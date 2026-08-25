@@ -16,7 +16,7 @@ local useCallback = reactModule.useCallback
 local useState = reactModule.useState
 local createNextOrder = reactUtilsModule.createNextOrder
 
-return function(p0) --[[ line: 37 | named "AudioPlayerActions" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useState (ref), createNextOrder (ref), useCallback (ref), sendAudioPlayerAnalyticsModule (ref), analyticActionsModule (ref), reactModule (ref), foundationModule (ref), getFFlagSongDetailsPageDesignPass (ref), customFoundationChipModule (ref), reactRobloxModule (ref), reportSongDialogModule (ref), coreGuiService (ref)
 	local var11 = useLocalization({
 		favorite = "Feature.SongDetails.Action.Favorite",
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 37 | named "AudioPlayerActions" ]]
 	})
 	local var12, var13 = useState(false)
 	local var14 = createNextOrder()
-	local var15 = useCallback(function(p1) --[[ line: 47 ]]
+	local var15 = useCallback(function(p1)
 		-- upvalues: p0 (ref), sendAudioPlayerAnalyticsModule (copy)
 		sendAudioPlayerAnalyticsModule({
 			action = p1,
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 37 | named "AudioPlayerActions" ]]
 		p0.audio.thumbnailAssetId,
 		p0.analyticsSource
 	})
-	local var16 = useCallback(function() --[[ line: 72 ]]
+	local var16 = useCallback(function()
 		-- upvalues: p0 (ref), var15 (ref), analyticActionsModule (copy)
 		if p0.audio.isLiked then
 			if p0.onUnlike then
@@ -52,12 +52,12 @@ return function(p0) --[[ line: 37 | named "AudioPlayerActions" ]]
 			p0.onLike()
 		end
 	end, { p0.audio.isLiked, p0.onLike, p0.onUnlike, var15 })
-	local var17 = useCallback(function() --[[ line: 93 ]]
+	local var17 = useCallback(function()
 		-- upvalues: var15 (ref), analyticActionsModule (copy), var13 (ref)
 		var15(analyticActionsModule.StartAudioReport)
 		var13(true)
 	end, {})
-	local var18 = useCallback(function() --[[ line: 98 ]]
+	local var18 = useCallback(function()
 		-- upvalues: var13 (ref)
 		var13(false)
 	end, {})

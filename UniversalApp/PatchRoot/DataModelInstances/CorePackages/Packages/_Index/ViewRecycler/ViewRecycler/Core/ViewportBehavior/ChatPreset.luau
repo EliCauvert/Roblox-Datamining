@@ -3,7 +3,7 @@ local autoScrollPolicyModule = require(viewRecycler.Core.Enums.AutoScrollPolicy)
 local scrollAlignmentModule = require(viewRecycler.Core.Enums.ScrollAlignment)
 
 return table.freeze({
-	create = function(p0) --[[ line: 22 ]]
+	create = function(p0)
 		-- upvalues: scrollAlignmentModule (ref), autoScrollPolicyModule (ref)
 		local var3 = p0 ~= nil and ((if p0 ~= nil then p0.startReachedThreshold else nil) or 0)
 		local var4 = p0 ~= nil and ((if p0 ~= nil then p0.endReachedThreshold else nil) or 1)

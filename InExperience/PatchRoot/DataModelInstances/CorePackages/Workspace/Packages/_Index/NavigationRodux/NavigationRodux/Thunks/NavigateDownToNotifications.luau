@@ -4,7 +4,7 @@ local argCheckModule = require(parent.ArgCheck)
 local navigateDownModule = require(navigationRodux.Thunks.NavigateDown)
 local appPage = require(parent.RobloxAppEnums).AppPage
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: argCheckModule (ref), navigateDownModule (ref), appPage (ref)
 	argCheckModule.isTypeOrNil(p0, "function", "onClose")
 	

@@ -45,21 +45,21 @@ toast.defaultProps = {
 	position = UDim2.new(0.5, 0, 0, 20)
 }
 
-local function toastContentEqual(p0, p1) --[[ line: 90 ]]
+local function toastContentEqual(p0, p1)
 	return p0.iconColorStyle == p1.iconColorStyle and p0.iconImage == p1.iconImage and (p0.iconSize == p1.iconSize and p0.iconChildren == p1.iconChildren) and (p0.onActivated == p1.onActivated and p0.onDismissed == p1.onDismissed and (p0.sequenceNumber == p1.sequenceNumber and p0.swipeUpDismiss == p1.swipeUpDismiss)) and (p0.toastSubtitle == p1.toastSubtitle and p0.toastTitle == p1.toastTitle)
 end
 
-function toast.init(p2) --[[ line: 108 ]]
+function toast.init(p2)
 	-- upvalues: animationStateModule (ref), roactModule (ref), interactiveToastModule (ref), informativeToastModule (ref), stateTableModule (ref)
 	p2.isMounted = false
 	p2.currentToastContent = p2.props.toastContent
 	
-	function p2.onActivated() --[[ line: 113 ]]
+	function p2.onActivated()
 		-- upvalues: p2 (ref)
 		p2.stateTable.events.Activated({ activated = true })
 	end
 	
-	function p2.onAppeared() --[[ line: 119 ]]
+	function p2.onAppeared()
 		-- upvalues: p2 (ref)
 		if p2.currentToastContent.onAppeared then
 			p2.currentToastContent.onAppeared()
@@ -68,7 +68,7 @@ function toast.init(p2) --[[ line: 108 ]]
 		
 		if duration and duration > 0 then
 			local currentToastContent = p2.currentToastContent
-			delay(duration, function() --[[ line: 126 ]]
+			delay(duration, function()
 				-- upvalues: currentToastContent (ref), p2 (copy)
 				if currentToastContent == p2.currentToastContent then
 					p2.stateTable.events.AutoDismiss()
@@ -77,7 +77,7 @@ function toast.init(p2) --[[ line: 108 ]]
 		end
 	end
 	
-	function p2.onComplete() --[[ line: 134 ]]
+	function p2.onComplete()
 		-- upvalues: p2 (ref), animationStateModule (copy)
 		local duration = p2.props.duration
 		
@@ -89,7 +89,7 @@ function toast.init(p2) --[[ line: 108 ]]
 		p2.stateTable.events.AnimationComplete()
 	end
 	
-	function p2.onDisappeared() --[[ line: 144 ]]
+	function p2.onDisappeared()
 		-- upvalues: p2 (ref)
 		if p2.state.context.activated then
 			if p2.currentToastContent.onActivated then
@@ -102,7 +102,7 @@ function toast.init(p2) --[[ line: 108 ]]
 		end
 	end
 	
-	function p2.onTouchSwipe(_, p3) --[[ line: 156 ]]
+	function p2.onTouchSwipe(_, p3)
 		-- upvalues: p2 (ref)
 		if p3 == Enum.SwipeDirection.Up then
 			p2.stateTable.events.ForceDismiss()
@@ -113,21 +113,21 @@ function toast.init(p2) --[[ line: 108 ]]
 		end
 	end
 	
-	function p2.renderInteractiveToast(p4) --[[ line: 165 ]]
+	function p2.renderInteractiveToast(p4)
 		-- upvalues: roactModule (copy), interactiveToastModule (copy)
 		return roactModule.createElement(interactiveToastModule, p4)
 	end
 	
-	function p2.renderInformativeToast(p5) --[[ line: 169 ]]
+	function p2.renderInformativeToast(p5)
 		-- upvalues: roactModule (copy), informativeToastModule (copy)
 		return roactModule.createElement(informativeToastModule, p5)
 	end
 	
-	function p2.setContext(_, _, p6) --[[ line: 173 ]]
+	function p2.setContext(_, _, p6)
 		return p6
 	end
 	
-	function p2.updateToastContent() --[[ line: 177 ]]
+	function p2.updateToastContent()
 		-- upvalues: p2 (ref)
 		if p2.currentToastContent ~= p2.props.toastContent then
 			p2.currentToastContent = p2.props.toastContent
@@ -182,7 +182,7 @@ function toast.init(p2) --[[ line: 108 ]]
 			}
 		}
 	})
-	p2.stateTable:onStateChange(function(p7, p8, p9) --[[ line: 220 ]]
+	p2.stateTable:onStateChange(function(p7, p8, p9)
 		-- upvalues: p2 (ref)
 		if p2.isMounted and p7 ~= p8 then
 			p2:setState({ currentState = p8, context = p9 })
@@ -190,12 +190,12 @@ function toast.init(p2) --[[ line: 108 ]]
 	end)
 end
 
-function toast.isShowing(p10) --[[ line: 230 ]]
+function toast.isShowing(p10)
 	-- upvalues: animationStateModule (ref)
 	return if p10.state.currentState ~= animationStateModule.Appearing then p10.state.currentState == animationStateModule.Appeared else true
 end
 
-function toast.render(p11) --[[ line: 234 ]]
+function toast.render(p11)
 	-- upvalues: roactModule (ref), slidingContainerModule (ref), slidingDirectionModule (ref), toastContainerModule (ref)
 	local onActivated = p11.currentToastContent.onActivated
 	local swipeUpDismiss = p11.currentToastContent.swipeUpDismiss
@@ -229,7 +229,7 @@ function toast.render(p11) --[[ line: 234 ]]
 	})
 end
 
-function toast.didMount(p12) --[[ line: 267 ]]
+function toast.didMount(p12)
 	p12.isMounted = true
 	
 	if p12.props.show then
@@ -237,11 +237,11 @@ function toast.didMount(p12) --[[ line: 267 ]]
 	end
 end
 
-function toast.willUnmount(p13) --[[ line: 276 ]]
+function toast.willUnmount(p13)
 	p13.isMounted = false
 end
 
-function toast.didUpdate(p14, p15, p16) --[[ line: 280 ]]
+function toast.didUpdate(p14, p15, p16)
 	-- upvalues: toastContentEqual (ref), animationStateModule (ref)
 	if p15.show ~= p14.props.show then
 		if p14.props.show then

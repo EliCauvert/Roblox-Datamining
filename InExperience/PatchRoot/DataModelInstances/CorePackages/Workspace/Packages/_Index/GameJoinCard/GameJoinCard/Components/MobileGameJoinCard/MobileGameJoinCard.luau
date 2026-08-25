@@ -32,7 +32,7 @@ local mobileGameJoinCardShowExperienceNameOnly = game:DefineFastFlag("MobileGame
 local fFlagMobileGameJoinCardEDPFromTitleModule = require(gameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromTitle)
 local fFlagMobileGameJoinCardEDPFromThumbnailModule = require(gameJoinCard.Flags.FFlagMobileGameJoinCardEDPFromThumbnail)
 
-return function(p0) --[[ line: 73 | named "MobileGameJoinCard" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagMobileGameJoinCardThumbnailModule (ref), foundationModule (ref), guiService (ref), gameJoinCardTTIModule (ref), viewProfileSourceValues (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), viewEDPsourceValues (ref), fFlagMobileGameJoinCardEDPFromTitleModule (ref), fFlagJoinCardAgeCheckUpsell (ref), useJoinCardCtaLoadTimeModule (ref), ctaType (ref), useLocalization (ref), overlayProvider (ref), sheet (ref), view (ref), mobileGameJoinCardHideUserAvatar (ref), image (ref), stateLayerAffordance (ref), skeleton (ref), mobileGameJoinCardShowExperienceNameOnly (ref), text (ref), userTile (ref), layoutMode (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var14 = useTokens()
 	local var15, var16 = reactModule.useState(false)
@@ -56,14 +56,14 @@ return function(p0) --[[ line: 73 | named "MobileGameJoinCard" ]]
 	end
 	local var25 = not (guiService.ViewportDisplaySize == Enum.DisplaySize.Small and not var24)
 	local thumbnailImageUrl = p0.thumbnailImageUrl
-	local var26 = reactModule.useCallback(function(p1) --[[ line: 87 ]]
+	local var26 = reactModule.useCallback(function(p1)
 		-- upvalues: var16 (ref), gameJoinCardTTIModule (copy)
 		if p1 == Enum.AssetFetchStatus.Success then
 			var16(true)
 			gameJoinCardTTIModule.trackBannerLoaded()
 		end
 	end, {})
-	local var27 = if fFlagMobileGameJoinCardThumbnailModule then reactModule.useCallback(function(p2) --[[ line: 95 ]]
+	local var27 = if fFlagMobileGameJoinCardThumbnailModule then reactModule.useCallback(function(p2)
 		-- upvalues: var18 (write)
 		if p2 == Enum.AssetFetchStatus.Success then
 			var18(true)
@@ -71,23 +71,23 @@ return function(p0) --[[ line: 73 | named "MobileGameJoinCard" ]]
 	end, {}) else nil
 	local var28 = fFlagMobileGameJoinCardThumbnailModule and (thumbnailImageUrl ~= nil and not var15)
 	local var29 = if fFlagMobileGameJoinCardThumbnailModule then not var15 and not var17 else not var15
-	reactModule.useEffect(function() --[[ line: 106 ]]
+	reactModule.useEffect(function()
 		-- upvalues: gameJoinCardTTIModule (copy)
 		gameJoinCardTTIModule.trackCardMounted()
 	end, {})
-	local var30 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewProfileSourceValues (copy)
 		p0.onViewProfile(viewProfileSourceValues.UserTile)
 	end, { p0 })
-	local var31 = reactModule.useCallback(function() --[[ line: 114 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewProfileSourceValues (copy)
 		p0.onViewProfile(viewProfileSourceValues.ViewProfileButton)
 	end, { p0 })
-	local var32 = if fFlagMobileGameJoinCardEDPFromThumbnailModule then reactModule.useCallback(function() --[[ line: 119 ]]
+	local var32 = if fFlagMobileGameJoinCardEDPFromThumbnailModule then reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
 		p0.onViewExperienceDetails(viewEDPsourceValues.Thumbnail)
 	end, { p0.onViewExperienceDetails }) else nil
-	local var33 = if fFlagMobileGameJoinCardEDPFromTitleModule then reactModule.useCallback(function() --[[ line: 125 ]]
+	local var33 = if fFlagMobileGameJoinCardEDPFromTitleModule then reactModule.useCallback(function()
 		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
 		p0.onViewExperienceDetails(viewEDPsourceValues.Title)
 	end, { p0.onViewExperienceDetails }) else nil
@@ -218,7 +218,7 @@ return function(p0) --[[ line: 73 | named "MobileGameJoinCard" ]]
 						}, {
 							PrimaryButton = if var37 then reactModule.createElement(ageCheckUpsellCTAModule, {
 								LayoutOrder = 1,
-								onUnlockPressed = p0.onAgeCheckPressed or function() --[[ line: 300 ]] end
+								onUnlockPressed = p0.onAgeCheckPressed or function() end
 							}) else reactModule.createElement(button, {
 								LayoutOrder = 1,
 								text = var38.join,

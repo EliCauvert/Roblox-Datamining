@@ -2,15 +2,15 @@
 local cryoModule = require(corePackagesService.Packages.Cryo)
 
 return require(corePackagesService.Packages.Rodux).createReducer({}, {
-	[require(script.Parent.Parent.Actions.AddMessage).name] = function(p0, p1) --[[ line: 13 ]]
+	[require(script.Parent.Parent.Actions.AddMessage).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, { [p1.message.id] = p1.message })
 	end,
-	[require(script.Parent.Parent.Actions.RemoveMessage).name] = function(p2, p3) --[[ line: 19 ]]
+	[require(script.Parent.Parent.Actions.RemoveMessage).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p2, { [p3.message.id] = cryoModule.None })
 	end,
-	[require(script.Parent.Parent.Actions.SetMessageText).name] = function(p4, p5) --[[ line: 25 ]]
+	[require(script.Parent.Parent.Actions.SetMessageText).name] = function(p4, p5)
 		-- upvalues: cryoModule (ref)
 		local messageId = p4[p5.messageId]
 		

@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.mt = { __index = t }
 
-function t.new(_, p0) --[[ line: 5 ]]
+function t.new(_, p0)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	local var5 = getmetatable(p0) == t.mt or nil
@@ -22,21 +22,21 @@ function t.new(_, p0) --[[ line: 5 ]]
 	return setmetatable(t_1, t.mt)
 end
 
-function t.add(p1, p2) --[[ line: 22 ]]
+function t.add(p1, p2)
 	if p2 ~= nil then
 		p1[p2] = true
 	end
 	return p1
 end
 
-function t.remove(p3, p4) --[[ line: 28 ]]
+function t.remove(p3, p4)
 	if p4 ~= nil then
 		p3[p4] = nil
 	end
 	return p3
 end
 
-function t.tolist(p5) --[[ line: 34 ]]
+function t.tolist(p5)
 	local t = {}
 	
 	for i in pairs(p5) do
@@ -47,7 +47,7 @@ end
 
 t.to_list = t.tolist
 
-function t.mt:__add(p6) --[[ line: 42 ]]
+function t.mt:__add(p6)
 	-- upvalues: t (ref)
 	local var7 = t:new()
 	local var8 = t:new(p6)
@@ -61,7 +61,7 @@ function t.mt:__add(p6) --[[ line: 42 ]]
 	return var7
 end
 
-function t.mt:__sub(p7) --[[ line: 50 ]]
+function t.mt:__sub(p7)
 	-- upvalues: t (ref)
 	local var9 = t:new()
 	local var10 = t:new(p7)
@@ -75,7 +75,7 @@ function t.mt:__sub(p7) --[[ line: 50 ]]
 	return var9
 end
 
-function t.mt:__mul(p8) --[[ line: 58 ]]
+function t.mt:__mul(p8)
 	-- upvalues: t (ref)
 	local var11 = t:new()
 	local var12 = t:new(p8)
@@ -86,7 +86,7 @@ function t.mt:__mul(p8) --[[ line: 58 ]]
 	return var11
 end
 
-function t.mt:__tostring() --[[ line: 65 ]]
+function t.mt:__tostring()
 	local var13 = "{"
 	local var14 = ""
 	
@@ -100,7 +100,7 @@ end
 local t_1 = {}
 t_1.mt = { __index = t_1 }
 
-function t_1.new(_, p9, p10, p11, p12, p13, p14) --[[ line: 77 ]]
+function t_1.new(_, p9, p10, p11, p12, p13, p14)
 	-- upvalues: t (ref), t_1 (ref)
 	local root = {
 		level = 0,
@@ -153,27 +153,27 @@ function t_1.new(_, p9, p10, p11, p12, p13, p14) --[[ line: 77 ]]
 	return setmetatable(root, t_1.mt)
 end
 
-function t_1.text(p15) --[[ line: 128 ]]
+function t_1.text(p15)
 	return string.sub(p15.root._text, p15._openstart, p15._closeend)
 end
 
 t_1.gettext = t_1.text
 
-function t_1.settext(value, p16) --[[ line: 133 ]]
+function t_1.settext(value, p16)
 	value.root._text = p16
 end
 
-function t_1.textonly(p17) --[[ line: 135 ]]
+function t_1.textonly(p17)
 	return p17:text():gsub("<[^>]*>", "")
 end
 
-function t_1.content(p18) --[[ line: 137 ]]
+function t_1.content(p18)
 	return string.sub(p18.root._text, p18._openend + 1, p18._closestart - 1)
 end
 
 t_1.getcontent = t_1.content
 
-function t_1.addattribute(p19, p20, p21) --[[ line: 142 ]]
+function t_1.addattribute(p19, p20, p21)
 	p19.attributes[p20] = p21
 	
 	if string.lower(p20) == "id" then
@@ -187,7 +187,7 @@ function t_1.addattribute(p19, p20, p21) --[[ line: 142 ]]
 	end
 end
 
-function t_1.links(p22) --[[ line: 154 ]]
+function t_1.links(p22)
 	local t = {}
 	
 	for i, v in ipairs(p22:select("a[href]")) do
@@ -198,7 +198,7 @@ function t_1.links(p22) --[[ line: 154 ]]
 	return t
 end
 
-function t_1.absolutelinks(value, p23) --[[ line: 166 ]]
+function t_1.absolutelinks(value, p23)
 	p23 = (p23 or (value.page_url or "")):split("?")[1]:split("#")[1]
 	local var18 = p23:split("://")
 	var18 = var18[#var18]:split("/")[1]
@@ -223,13 +223,13 @@ end
 
 t_1.absolute_links = t_1.absolutelinks
 
-local function _(p24, p25, p26) --[[ line: 208 | named "insert" ]]
+local function _(p24, p25, p26)
 	-- upvalues: t (ref)
 	p24[p25] = p24[p25] or t:new()
 	p24[p25]:add(p26)
 end
 
-function t_1.close(p27, p28, p29) --[[ line: 213 ]]
+function t_1.close(p27, p28, p29)
 	-- upvalues: t (ref)
 	if p28 and p29 then
 		p27._closestart = p28
@@ -264,11 +264,11 @@ function t_1.close(p27, p28, p29) --[[ line: 213 ]]
 	end
 end
 
-local function escape(p30) --[[ line: 234 ]]
+local function escape(p30)
 	return string.gsub(p30, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
 end
 
-local function select(p31, p32) --[[ line: 239 ]]
+local function select(p31, p32)
 	-- upvalues: t (ref), escape (ref)
 	if not p32 or type(p32) ~= "string" or p32 == "" then
 		return t:new()
@@ -281,7 +281,7 @@ local function select(p31, p32) --[[ line: 239 ]]
 		["."] = p31.deeperclasses
 	}
 	
-	local function match(p33, p34) --[[ line: 247 ]]
+	local function match(p33, p34)
 		-- upvalues: t (copy), t_1 (ref), p31 (ref), escape (copy)
 		local var47 = nil
 		local var48 = nil
@@ -396,14 +396,14 @@ local function select(p31, p32) --[[ line: 239 ]]
 		end
 	end
 	local var27 = var25:tolist()
-	table.sort(var27, function(p35, p36) --[[ line: 365 ]]
+	table.sort(var27, function(p35, p36)
 		return p35.index < p36.index
 	end)
 	
 	return var27
 end
 
-function t_1.select(p37, p38) --[[ line: 371 ]]
+function t_1.select(p37, p38)
 	-- upvalues: select (ref)
 	return select(p37, p38)
 end

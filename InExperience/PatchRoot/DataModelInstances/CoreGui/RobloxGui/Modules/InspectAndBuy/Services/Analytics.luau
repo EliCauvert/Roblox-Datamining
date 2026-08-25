@@ -21,11 +21,11 @@ local _ = {
 local t = {}
 t.__index = t
 
-function t.__tostring() --[[ line: 40 ]]
+function t.__tostring()
 	return "Service(Analytics)"
 end
 
-function t.new(p0, p1, p2) --[[ line: 46 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref), eventStreamReporter (ref), default (ref), playersService (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), unifiedEventLogEnums (ref), TIMED_OPTION_BY_DAYS (ref), itemTypeEnum (ref), userInputService (ref), httpService (ref), runService (ref), rbxAnalyticsService (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -37,17 +37,17 @@ function t.new(p0, p1, p2) --[[ line: 46 ]]
 	t_1.ctx = p1
 	t_1.version = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then p2 else nil
 	
-	function t_1.reportOpenInspectMenu() --[[ line: 60 ]]
+	function t_1.reportOpenInspectMenu()
 		-- upvalues: t_1 (ref)
 		t_1:report("inspectUser", {})
 	end
 	
-	function t_1.reportTryOnButtonClicked(p3, p4) --[[ line: 67 ]]
+	function t_1.reportTryOnButtonClicked(p3, p4)
 		-- upvalues: t_1 (ref)
 		t_1:report("tryItem", { itemType = p3, itemID = p4 })
 	end
 	
-	function t_1.reportFavoriteItem(p5, p6, p7, p8, p9, p10) --[[ line: 77 ]]
+	function t_1.reportFavoriteItem(p5, p6, p7, p8, p9, p10)
 		-- upvalues: t_1 (ref)
 		t_1:report("favoriteItem", {
 			itemType = p5,
@@ -59,12 +59,12 @@ function t.new(p0, p1, p2) --[[ line: 46 ]]
 		})
 	end
 	
-	function t_1.reportPurchaseAttempt(p11, p12) --[[ line: 91 ]]
+	function t_1.reportPurchaseAttempt(p11, p12)
 		-- upvalues: t_1 (ref)
 		t_1:report("purchaseAttemptItem", { itemType = p11, itemID = p12 })
 	end
 	
-	function t_1.reportPurchaseAttemptUnifiedEvent(p13, p14, p15) --[[ line: 101 ]]
+	function t_1.reportPurchaseAttemptUnifiedEvent(p13, p14, p15)
 		-- upvalues: t_1 (ref), unifiedEventLogEnums (copy), TIMED_OPTION_BY_DAYS (copy), itemTypeEnum (copy)
 		t_1:reportUnifiedEvent({
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
@@ -78,7 +78,7 @@ function t.new(p0, p1, p2) --[[ line: 46 ]]
 		t_1:report("purchaseAttemptItem", { itemType = p13, itemID = p14 })
 	end
 	
-	function t_1.reportPurchaseSuccessUnifiedEvent(p16, p17, p18) --[[ line: 123 ]]
+	function t_1.reportPurchaseSuccessUnifiedEvent(p16, p17, p18)
 		-- upvalues: t_1 (ref), unifiedEventLogEnums (copy), TIMED_OPTION_BY_DAYS (copy), itemTypeEnum (copy)
 		t_1:reportUnifiedEvent({
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS,
@@ -92,17 +92,17 @@ function t.new(p0, p1, p2) --[[ line: 46 ]]
 		t_1:report("purchaseSuccessItem", { itemType = p16, itemID = p17 })
 	end
 	
-	function t_1.reportPurchaseSuccess(p19, p20) --[[ line: 145 ]]
+	function t_1.reportPurchaseSuccess(p19, p20)
 		-- upvalues: t_1 (ref)
 		t_1:report("purchaseSuccessItem", { itemType = p19, itemID = p20 })
 	end
 	
-	function t_1.reportItemDetailPageOpened(p21, p22) --[[ line: 159 ]]
+	function t_1.reportItemDetailPageOpened(p21, p22)
 		-- upvalues: t_1 (ref)
 		t_1:report("itemDetailView", { itemType = p21, itemID = p22 })
 	end
 	
-	t_1.platformStr = (function() --[[ line: 169 | named "getPlatformString" ]]
+	t_1.platformStr = (function()
 		-- upvalues: userInputService (copy), httpService (copy)
 		local platform = userInputService:GetPlatform()
 		local var11 = "Unknown"
@@ -142,7 +142,7 @@ function t.new(p0, p1, p2) --[[ line: 46 ]]
 		return var11
 	end)()
 	
-	function t_1.sendCounter(p23) --[[ line: 202 ]]
+	function t_1.sendCounter(p23)
 		-- upvalues: runService (copy), t_1 (ref), rbxAnalyticsService (copy)
 		if runService:IsStudio() then
 			return
@@ -153,7 +153,7 @@ function t.new(p0, p1, p2) --[[ line: 46 ]]
 	return t_1
 end
 
-function t:report(p24, p25) --[[ line: 214 ]]
+function t:report(p24, p25)
 	-- upvalues: fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), cryoModule (ref)
 	self.eventStream:sendTelemetryEvent(self.ctx, p24, cryoModule.Dictionary.join({
 		feature = "inspectAndBuy",
@@ -165,7 +165,7 @@ function t:report(p24, p25) --[[ line: 214 ]]
 	}, p25))
 end
 
-function t:reportUnifiedEvent(p26) --[[ line: 228 ]]
+function t:reportUnifiedEvent(p26)
 	-- upvalues: unifiedLoggingSurface (ref), cryoModule (ref), unifiedEventLogConstants (ref)
 	self.eventStream:sendTelemetryEvent(self.ctx, unifiedEventLogConstants.EVENT_NAME, cryoModule.Dictionary.join({
 		surface = unifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY

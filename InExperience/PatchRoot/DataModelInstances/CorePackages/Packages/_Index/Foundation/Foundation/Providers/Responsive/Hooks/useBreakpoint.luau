@@ -10,7 +10,7 @@ local _ = require(foundation.Providers.Responsive.ResponsiveContext)
 local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 
-local function _(p0, p1) --[[ line: 28 | named "calculateBreakpointFromWidth" ]]
+local function _(p0, p1)
 	local var6 = p0.order[#p0.order]
 	
 	for i, v in p0.order do
@@ -23,26 +23,26 @@ local function _(p0, p1) --[[ line: 28 | named "calculateBreakpointFromWidth" ]]
 	return var6
 end
 
-local _ = function(p2, p3) --[[ line: 41 | named "getBreakpointIndex" ]]
+local _ = function(p2, p3)
 	-- upvalues: dashModule (ref)
-	return dashModule.findIndex(p2.order, function(p4) --[[ line: 42 ]]
+	return dashModule.findIndex(p2.order, function(p4)
 		-- upvalues: p3 (ref)
 		return p4 == p3
 	end)
 end
 
-local _ = function(p5, p6, p7, p8) --[[ line: 47 | named "shouldChangeBreakpoint" ]]
+local _ = function(p5, p6, p7, p8)
 	-- upvalues: dashModule (ref)
-	return if p8 then if p7 == p8 then false elseif dashModule.findIndex(p5.order, function(p9) --[[ line: 42 ]]
+	return if p8 then if p7 == p8 then false elseif dashModule.findIndex(p5.order, function(p9)
 		-- upvalues: p8 (ref)
 		return p9 == p8
-	end) < dashModule.findIndex(p5.order, function(p10) --[[ line: 42 ]]
+	end) < dashModule.findIndex(p5.order, function(p10)
 		-- upvalues: p7 (ref)
 		return p10 == p7
 	end) then p5.widths[p8] + 5 < p6 else p6 < p5.widths[p7] - 5 else true
 end
 
-return function(p11, p12) --[[ line: 74 | named "useBreakpoint" ]]
+return function(p11, p12)
 	-- upvalues: withDefaultsModule (ref), constantsModule (ref), useResponsiveModule (ref), reactModule (ref), usePrevious (ref), dashModule (ref), instance (ref)
 	local var7 = withDefaultsModule(p12 or {}, { throttleTime = constantsModule.DEFAULT_DELAY_TIME })
 	local breakpoint = useResponsiveModule().config.breakpoint
@@ -58,29 +58,29 @@ return function(p11, p12) --[[ line: 74 | named "useBreakpoint" ]]
 	end
 	var11, var10 = reactModule.useState(var10)
 	local var12 = usePrevious(var11)
-	local var13 = reactModule.useMemo(function() --[[ line: 87 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var9 (ref), var7 (ref)
 		return dashModule.throttle(var9, var7.throttleTime, { leading = true, trailing = true })
 	end, { var7.throttleTime })
-	reactModule.useEffect(function() --[[ line: 94 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p11 (ref), instance (copy), var13 (ref), var9 (ref)
 		local var14 = nil
 		
 		if p11 then
-			var14 = instance.GetPropertyChangedSignal(p11, "AbsoluteSize"):Connect(function() --[[ line: 98 ]]
+			var14 = instance.GetPropertyChangedSignal(p11, "AbsoluteSize"):Connect(function()
 				-- upvalues: var13 (copy), p11 (copy)
 				var13(p11.AbsoluteSize)
 			end)
 			var9(p11.AbsoluteSize)
 		end
-		return function() --[[ line: 104 ]]
+		return function()
 			-- upvalues: var14 (write)
 			if var14 then
 				var14:Disconnect()
 			end
 		end
 	end, { p11 })
-	reactModule.useEffect(function() --[[ line: 111 ]]
+	reactModule.useEffect(function()
 		-- upvalues: breakpoint (ref), var8 (ref), var10 (ref), var12 (ref), dashModule (copy), var10 (ref)
 		local var16
 		local var15 = breakpoint
@@ -90,10 +90,10 @@ return function(p11, p12) --[[ line: 74 | named "useBreakpoint" ]]
 			var16 = true
 		elseif var10 == var12 then
 			var16 = false
-		elseif dashModule.findIndex(var15.order, function(p13) --[[ line: 42 ]]
+		elseif dashModule.findIndex(var15.order, function(p13)
 			-- upvalues: var12 (ref)
 			return p13 == var12
-		end) < dashModule.findIndex(var15.order, function(p14) --[[ line: 42 ]]
+		end) < dashModule.findIndex(var15.order, function(p14)
 			-- upvalues: var10 (ref)
 			return p14 == var10
 		end) then

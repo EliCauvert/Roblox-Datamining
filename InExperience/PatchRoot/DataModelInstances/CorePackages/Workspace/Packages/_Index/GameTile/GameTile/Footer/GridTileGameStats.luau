@@ -21,7 +21,7 @@ local ratingSmall = images["icons/status/games/rating_small"]
 local var7 = images["icons/status/games/people-playing_small"]
 local vector2 = Vector2.new(1e999, 1e999)
 
-return function(p0) --[[ line: 61 | named "GridTileGameStats" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), textService (ref), vector2 (ref), imageSetLabel (ref), ratingSmall (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var7 (ref)
 	local var12
 	local var9 = useDesignTokens()
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 61 | named "GridTileGameStats" ]]
 	local var19 = var10 > 0 and var13
 	local var20 = fontSize / 1.26
 	local ratingText = p0.ratingText
-	local var21 = reactModule.useMemo(function() --[[ line: 110 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: fFlagLuaAppNarrowTileHideRating (copy), p0 (ref), ratingText (ref), textService (copy), fontSize (ref), font (ref), vector2 (copy)
 		return if fFlagLuaAppNarrowTileHideRating and p0.hideRating or (ratingText == nil or ratingText == "") then 0 else textService:GetTextSize(ratingText, fontSize, font, vector2).X
 	end, {

@@ -23,13 +23,13 @@ local t = {}
 local var7 = false
 local var8 = 0
 
-local function _(p0) --[[ line: 46 | named "positionDialogPanel" ]]
+local function _(p0)
 	-- upvalues: var5 (write), userInputService (ref), dialog (ref), var3 (ref)
 	var5 = p0
 	dialog.localCF = CFrame.new(userInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, p0, 0) * var3
 end
 
-function dialog.CalculateTransparency(_) --[[ line: 53 ]]
+function dialog.CalculateTransparency(_)
 	-- upvalues: userInputService (ref), var8 (write), var5 (write), var7 (write)
 	local headUserCFrame = userInputService:GetUserCFrame(Enum.UserCFrame.Head)
 	local var17 = headUserCFrame.lookVector * Vector3.new(1, 0, 1)
@@ -41,7 +41,7 @@ function dialog.CalculateTransparency(_) --[[ line: 53 ]]
 	return math.min(math.max(0, (math.acos(var17:Dot(vector3)) - 0.654498469498) / 0.11344640138), 1)
 end
 
-local function updatePanelPosition() --[[ line: 69 ]]
+local function updatePanelPosition()
 	-- upvalues: userInputService (ref), var8 (write), var7 (write), var5 (write), dialog (ref), var3 (ref)
 	local var19 = userInputService:GetUserCFrame(Enum.UserCFrame.Head).lookVector * Vector3.new(1, 0, 1)
 	local var20 = (math.atan2(-var19.Z, var19.X) - 1.570796326795) % 6.28318530718
@@ -55,7 +55,7 @@ local function updatePanelPosition() --[[ line: 69 ]]
 	dialog.localCF = CFrame.new(userInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, var21, 0) * var3
 end
 
-function dialogPanelRenderUpdate() --[[ line: 84 ]]
+function dialogPanelRenderUpdate()
 	-- upvalues: dialog (ref), var7 (write), updatePanelPosition (ref), t (write)
 	if dialog.transparency == 1 or var7 then
 		updatePanelPosition()
@@ -79,7 +79,7 @@ local t_1 = {}
 local var11 = nil
 local var12 = nil
 
-local function updatePanel() --[[ line: 107 ]]
+local function updatePanel()
 	-- upvalues: t_1 (ref), var12 (write), dialog (ref), t (write), var11 (write), var7 (write), updatePanelPosition (ref)
 	local var24 = t_1[1]
 	
@@ -96,7 +96,7 @@ local function updatePanel() --[[ line: 107 ]]
 		dialog:SetVisible(true)
 		t = {}
 		
-		local function search(p1) --[[ line: 131 ]]
+		local function search(p1)
 			-- upvalues: t (copy), search (ref)
 			if p1:IsA("ImageLabel") or p1:IsA("ImageButton") then
 				t[p1] = 1 - p1.ImageTransparency
@@ -116,7 +116,7 @@ local function updatePanel() --[[ line: 107 ]]
 			var11:disconnect()
 			var11 = nil
 		end
-		var11 = dialog:GetGUI().DescendantAdded:connect(function(p2) --[[ line: 148 ]]
+		var11 = dialog:GetGUI().DescendantAdded:connect(function(p2)
 			-- upvalues: search (ref)
 			search(p2)
 		end)
@@ -136,7 +136,7 @@ end
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p3) --[[ line: 160 ]]
+function t_2.new(p3)
 	-- upvalues: t_2 (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.content = p3
@@ -144,7 +144,7 @@ function t_2.new(p3) --[[ line: 160 ]]
 	return tbl
 end
 
-function t_2:SetContent(p4) --[[ line: 166 ]]
+function t_2:SetContent(p4)
 	if not p4 and self.content then
 		self.content.Parent = nil
 	end
@@ -153,7 +153,7 @@ end
 
 local var15 = false
 
-function t_2.Show(p5, p6) --[[ line: 174 ]]
+function t_2.Show(p5, p6)
 	-- upvalues: var15 (write), runService (ref), t_1 (ref), updatePanel (ref)
 	if not var15 then
 		var15 = true
@@ -167,7 +167,7 @@ function t_2.Show(p5, p6) --[[ line: 174 ]]
 	updatePanel()
 end
 
-function t_2.Close(p7) --[[ line: 187 ]]
+function t_2.Close(p7)
 	-- upvalues: t_1 (ref), var15 (write), runService (ref), updatePanel (ref)
 	for i, v in pairs(t_1) do
 		if v == p7 then

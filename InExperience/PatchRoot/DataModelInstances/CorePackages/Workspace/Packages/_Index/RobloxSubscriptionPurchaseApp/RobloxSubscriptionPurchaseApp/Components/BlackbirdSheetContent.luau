@@ -36,7 +36,7 @@ local t = {
 	[promptStateModule.SubscriptionStatusPolling] = true
 }
 
-return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
+return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), signalsReactModule (ref), useLocalization (ref), isRobloxSubscriptionProductFreeTrialModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), robloxSubscriptionPriceRowModule (ref), fFlagSupportFreeTrialPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
 	local createElement_2
 	local var22 = robloxSubscriptionStoreModule.get()
@@ -53,7 +53,7 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 	local var29 = if var27 then var26.getFreeTrialText else var26.buttonText
 	local var30 = var24.showLegalDisclosure ~= nil or var24.showLegalDisclosure
 	local var31 = if fFlagRobloxPlusFAEFreeTrialModule and var24.noPurchaseMethodRequired ~= nil then var24.noPurchaseMethodRequired else false
-	local var32 = reactModule.useCallback(function(p0) --[[ line: 90 ]]
+	local var32 = reactModule.useCallback(function(p0)
 		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy)
 		if p0 then
 			if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
@@ -63,7 +63,7 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		end
 	end, {})
 	
-	local function onSubscribe() --[[ line: 101 ]]
+	local function onSubscribe()
 		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy), fFlagRobloxPlusFAEFreeTrialModule (copy), var23 (ref), var22 (ref), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy), performRobloxSubscriptionPurchaseModule (copy)
 		if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 			logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
@@ -72,11 +72,11 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		
 		if fFlagRobloxPlusFAEFreeTrialModule and var23 then
 			var22.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
-			var23(function() --[[ line: 113 ]]
+			var23(function()
 				-- upvalues: var22 (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
 				var22.setDidTryPurchasing(true)
 				finalizeRobloxSubscriptionUpsellFlowModule(true)
-			end, function() --[[ line: 116 ]]
+			end, function()
 				-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
 				completeRobloxSubscriptionUpsellFlowModule()
 			end)

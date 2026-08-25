@@ -1,6 +1,6 @@
 ﻿local _ = script.Parent.Parent
 
-function isCreatorStoreAssetType(value) --[[ line: 3 ]]
+function isCreatorStoreAssetType(value)
 	if value == nil or type(value) ~= "string" then
 		return false
 	end

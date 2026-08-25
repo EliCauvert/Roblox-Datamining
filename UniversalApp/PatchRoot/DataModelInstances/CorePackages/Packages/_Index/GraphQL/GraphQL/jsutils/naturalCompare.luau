@@ -5,7 +5,7 @@ local var1 = nil
 local var2 = nil
 local _ = nil
 
-local function naturalCompare(p0, p1) --[[ line: 23 ]]
+local function naturalCompare(p0, p1)
 	-- upvalues: string (ref), var1 (write), var2 (write)
 	local var7, var8
 	local var5 = 1
@@ -50,7 +50,7 @@ end
 var2 = 48
 local var4 = 57
 
-var1 = function(p2) --[[ line: 71 ]]
+var1 = function(p2)
 	-- upvalues: isNaN (ref), var2 (write), var4 (write)
 	return not isNaN(p2) and (var2 <= p2 and p2 <= var4)
 end

@@ -26,7 +26,7 @@ fullscreenTitleBar.validateProps = tModule.strictInterface({
 	closeRoblox = tModule.optional(tModule.callback)
 })
 
-function fullscreenTitleBar.init(p0) --[[ line: 56 ]]
+function fullscreenTitleBar.init(p0)
 	-- upvalues: roactModule (ref), controlStateModule (ref), uDim2 (ref), uDim2_1 (ref), otterModule (ref)
 	local var16 = if p0.props.isTriggered then 1 else 0
 	local _ = nil
@@ -38,7 +38,7 @@ function fullscreenTitleBar.init(p0) --[[ line: 56 ]]
 	local var21, var22 = roactModule.createBinding(controlStateModule.Default)
 	p0.closeControlState = var21
 	p0.setCloseControlState = var22
-	p0.titleBarPosition = p0.progress:map(function(p1) --[[ line: 64 ]]
+	p0.titleBarPosition = p0.progress:map(function(p1)
 		-- upvalues: uDim2 (copy), uDim2_1 (copy)
 		return uDim2:lerp(uDim2_1, p1)
 	end)
@@ -46,9 +46,9 @@ function fullscreenTitleBar.init(p0) --[[ line: 56 ]]
 	p0.progressMotor:onStep(var18)
 end
 
-function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
+function fullscreenTitleBar.render(p2)
 	-- upvalues: withStyleModule (ref), lerpModule (ref), roactModule (ref), controlStateModule (ref), divideTransparencyModule (ref), iconButtonModule (ref), imagesModule (ref), iconSizeModule (ref), getIconSizeModule (ref), threeSectionBarModule (ref)
-	return withStyleModule(function(p3) --[[ line: 73 ]]
+	return withStyleModule(function(p3)
 		-- upvalues: p2 (ref), lerpModule (copy), roactModule (copy), controlStateModule (copy), divideTransparencyModule (copy), iconButtonModule (copy), imagesModule (copy), iconSizeModule (copy), getIconSizeModule (copy), threeSectionBarModule (copy)
 		local theme = p3.Theme
 		local font = p3.Font
@@ -56,25 +56,25 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 		local textEmphasis = theme.TextEmphasis
 		local header2 = font.Header2
 		local var23 = header2.RelativeSize * font.BaseSize
-		local var24 = p2.progress:map(function(p4) --[[ line: 83 ]]
+		local var24 = p2.progress:map(function(p4)
 			-- upvalues: backgroundUIDefault (ref), lerpModule (copy)
 			return lerpModule(1, backgroundUIDefault.Transparency, p4)
 		end)
 		local var25 = roactModule.joinBindings({
 			progress = p2.progress,
 			controlState = p2.exitControlState
-		}):map(function(p5) --[[ line: 91 ]]
+		}):map(function(p5)
 			-- upvalues: theme (ref), controlStateModule (copy), lerpModule (copy), divideTransparencyModule (copy)
 			return lerpModule(1, divideTransparencyModule(theme.ContextualPrimaryDefault.Transparency, if p5.controlState == controlStateModule.Pressed then 2 else 1), p5.progress)
 		end)
 		local var26 = roactModule.joinBindings({
 			progress = p2.progress,
 			controlState = p2.closeControlState
-		}):map(function(p6) --[[ line: 100 ]]
+		}):map(function(p6)
 			-- upvalues: theme (ref), controlStateModule (copy), lerpModule (copy), divideTransparencyModule (copy)
 			return lerpModule(1, divideTransparencyModule(theme.ContextualPrimaryDefault.Transparency, if p6.controlState == controlStateModule.Pressed then 2 else 1), p6.progress)
 		end)
-		local var27 = p2.progress:map(function(p7) --[[ line: 106 ]]
+		local var27 = p2.progress:map(function(p7)
 			-- upvalues: textEmphasis (ref), lerpModule (copy)
 			return lerpModule(1, textEmphasis.Transparency, p7)
 		end)
@@ -100,7 +100,7 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 					BackgroundColor3 = backgroundUIDefault.Color,
 					BackgroundTransparency = var24,
 					contentPaddingLeft = UDim.new(0, 12),
-					renderLeft = function() --[[ line: 150 ]]
+					renderLeft = function()
 						-- upvalues: getIconSizeModule (copy), iconSizeModule (copy), roactModule (copy)
 						local var28 = getIconSizeModule(iconSizeModule.Medium)
 						
@@ -115,7 +115,7 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 							})
 						})
 					end,
-					renderCenter = function() --[[ line: 111 ]]
+					renderCenter = function()
 						-- upvalues: roactModule (copy), header2 (ref), var23 (ref), p2 (copy), textEmphasis (ref), var27 (ref)
 						return roactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
@@ -130,7 +130,7 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 						})
 					end,
 					contentPaddingRight = UDim.new(0, 12),
-					renderRight = function() --[[ line: 125 ]]
+					renderRight = function()
 						-- upvalues: roactModule (copy), iconButtonModule (copy), imagesModule (copy), iconSizeModule (copy), var25 (ref), p2 (copy), var26 (ref)
 						return roactModule.createFragment({
 							ExitButton = roactModule.createElement(iconButtonModule, {
@@ -139,7 +139,7 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 								iconSize = iconSizeModule.Medium,
 								iconTransparency = var25,
 								onActivated = p2.props.exitFullscreen,
-								onStateChanged = function(_, p8) --[[ line: 133 ]]
+								onStateChanged = function(_, p8)
 									-- upvalues: p2 (copy)
 									p2.setExitControlState(p8)
 								end
@@ -150,7 +150,7 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 								iconSize = iconSizeModule.Medium,
 								iconTransparency = var26,
 								onActivated = p2.props.closeRoblox,
-								onStateChanged = function(_, p9) --[[ line: 143 ]]
+								onStateChanged = function(_, p9)
 									-- upvalues: p2 (copy)
 									p2.setCloseControlState(p9)
 								end
@@ -182,18 +182,18 @@ function fullscreenTitleBar.render(p2) --[[ line: 72 ]]
 	end)
 end
 
-function fullscreenTitleBar.didMount(p10) --[[ line: 214 ]]
+function fullscreenTitleBar.didMount(p10)
 	p10.progressMotor:start()
 end
 
-function fullscreenTitleBar.didUpdate(p11, p12, _) --[[ line: 218 ]]
+function fullscreenTitleBar.didUpdate(p11, p12, _)
 	-- upvalues: otterModule (ref), t (ref)
 	if p12.isTriggered ~= p11.props.isTriggered then
 		p11.progressMotor:setGoal(otterModule.spring(if p11.props.isTriggered then 1 else 0, t))
 	end
 end
 
-function fullscreenTitleBar.willUnmount(p13) --[[ line: 225 ]]
+function fullscreenTitleBar.willUnmount(p13)
 	p13.progressMotor:destroy()
 end
 

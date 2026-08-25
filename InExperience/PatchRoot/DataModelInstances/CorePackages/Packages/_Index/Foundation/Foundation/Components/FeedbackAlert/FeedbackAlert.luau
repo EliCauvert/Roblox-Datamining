@@ -24,7 +24,7 @@ local iconVariant = builderIconsModule.IconVariant
 local useFeedbackAlertVariantsModule = require(script.Parent.useFeedbackAlertVariants)
 local t = { testId = "--foundation-feedback-alert" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | named "FeedbackAlert" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useFeedbackAlertVariantsModule (ref), reactUtilsModule (ref), escapeRichTextModule (ref), reactModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), alertConstantsModule (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), stateLayerAffordanceModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref), alertActionsModule (ref)
 	local var21 = withDefaultsModule(p0, t)
 	local var22 = useFeedbackAlertVariantsModule(useTokensModule(), var21.severity)
@@ -80,7 +80,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 					Text = if var25 then `<u>{var24}</u>` else var24,
 					tag = var22.link.tag,
 					stateLayer = { affordance = stateLayerAffordanceModule.None },
-					onStateChanged = reactModule.useCallback(function(p2) --[[ line: 60 ]]
+					onStateChanged = reactModule.useCallback(function(p2)
 						-- upvalues: var26 (ref), controlStateModule (copy)
 						var26(p2 == controlStateModule.Hover)
 					end, {}),

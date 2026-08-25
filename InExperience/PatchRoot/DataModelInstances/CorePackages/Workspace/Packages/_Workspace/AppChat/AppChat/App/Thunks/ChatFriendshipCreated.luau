@@ -13,10 +13,10 @@ local receiveUsersPresence = userLibModule.Utils.receiveUsersPresence
 local networkingPresenceModule = require(appChat.Http.NetworkingPresence)
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-local function AddNewFriend(p0, p1, p2) --[[ line: 24 ]]
+local function AddNewFriend(p0, p1, p2)
 	-- upvalues: userService (ref), userModel (ref), updateUsers (ref), preloadUsersThumbnail (ref), USER_CAROUSEL_HEAD_SHOT (ref), fFlagAppChatPresenceStoreMigrationModule (ref), networkingPresenceModule (ref), receiveUsersPresence (ref), getConversationMetadata (ref), promiseModule (ref)
 	local var8 = if p2 then p2.UserService else userService
-	local ok, status = pcall(function() --[[ line: 28 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var8 (ref), p1 (ref)
 		return var8:GetUserInfosByUserIdsAsync({ tonumber(p1) })[1]
 	end)
@@ -39,12 +39,12 @@ local function AddNewFriend(p0, p1, p2) --[[ line: 24 ]]
 	}
 	
 	if not fFlagAppChatPresenceStoreMigrationModule then
-		table.insert(list_1, p0:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(list)):andThen(function(p4) --[[ line: 66 ]]
+		table.insert(list_1, p0:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(list)):andThen(function(p4)
 			-- upvalues: receiveUsersPresence (copy), p0 (ref)
 			receiveUsersPresence(p4.responseBody.userPresences, p0)
 			
 			return p4
-		end):catch(function(p3) --[[ line: 71 ]]
+		end):catch(function(p3)
 			warn("NetworkingPresence failure in ChatFriendshipCreated, Status: " .. tostring(p3))
 		end))
 	end
@@ -52,9 +52,9 @@ local function AddNewFriend(p0, p1, p2) --[[ line: 24 ]]
 	promiseModule.all(list_1)
 end
 
-return function(p5) --[[ line: 83 ]]
+return function(p5)
 	-- upvalues: AddNewFriend (ref)
-	return function(p6, p7) --[[ line: 84 ]]
+	return function(p6, p7)
 		-- upvalues: AddNewFriend (copy), p5 (ref)
 		AddNewFriend(p6, p5, p7)
 	end

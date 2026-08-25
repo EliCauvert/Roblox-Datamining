@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local fFlagSduiDividerThemeAwareStroke = require(parent.SharedFlags).FFlagSduiDividerThemeAwareStroke
 
-return reactModule.memo(function(p0) --[[ line: 22 | named "SduiDivider" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagSduiDividerThemeAwareStroke (ref), useTokens (ref), reactModule (ref)
 	local var1 = if fFlagSduiDividerThemeAwareStroke then useTokens() else nil
 	local size = p0.size

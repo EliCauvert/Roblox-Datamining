@@ -5,7 +5,7 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local initialCommandsModule = require(script.Parent.initialCommands)
 local t = {}
 
-local function getCommandKeys() --[[ line: 10 ]]
+local function getCommandKeys()
 	-- upvalues: textChatService (ref), t (ref)
 	local t_1 = {}
 	
@@ -20,9 +20,9 @@ local function getCommandKeys() --[[ line: 10 ]]
 	return t_1
 end
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: getCommandKeys (ref), list (ref), expChatSharedModule (ref), initialCommandsModule (ref), t (ref)
-	list.map(getCommandKeys(), function(p1) --[[ line: 27 ]]
+	list.map(getCommandKeys(), function(p1)
 		-- upvalues: p0 (ref)
 		p0.trie:insert(p1)
 	end)

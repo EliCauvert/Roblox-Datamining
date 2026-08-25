@@ -15,19 +15,19 @@ local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemet
 local _ = require(script.Parent.ShareSheetView)
 local useShareSheetSelectionModule = require(script.Parent.useShareSheetSelection)
 
-local function _(p0) --[[ line: 59 | named "getConversationDisplayName" ]]
+local function _(p0)
 	local titleForViewer = p0.titleForViewer
 	
 	return if titleForViewer and titleForViewer ~= "" then titleForViewer else p0.title or ""
 end
 
-local _ = function(vectorA, vectorB) --[[ line: 64 | named "appendOtherTargets" ]]
+local _ = function(vectorA, vectorB)
 	local var11 = vectorB - 1
 	
 	return if var11 <= 0 then vectorA elseif var11 == 1 then `{vectorA} + 1 other` else `{vectorA} + {var11} others`
 end
 
-return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
+return function(p1)
 	-- upvalues: signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useConversationList (ref), useShareSheetSelectionModule (ref), useExternalChatConversationEligibilityModule (ref), shareSheetConstantsModule (ref), reactModule (ref), useLocalization (ref), fetchConversationListPageToSignalsModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetTelemetryModule (ref), getAppFeaturePolicies (ref)
 	local var24
 	local var12 = signalsReactModule.useSignalState(getExternalChatMessageSenderStoreModule().getSender)
@@ -49,13 +49,13 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 		send = "CommonUI.Features.Action.Send",
 		share = "Feature.SocialShare.Action.Share"
 	})
-	reactModule.useEffect(function() --[[ line: 97 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), fetchConversationListPageToSignalsModule (copy)
 		if var13 then
 			fetchConversationListPageToSignalsModule()
 		end
 	end, { var13 })
-	local var23 = if fFlagShareSheetTelemetryRefactorModule then reactModule.useCallback(function() --[[ line: 104 ]]
+	local var23 = if fFlagShareSheetTelemetryRefactorModule then reactModule.useCallback(function()
 		-- upvalues: p1 (ref), shareSheetTelemetryModule (copy)
 		p1.onCloseWithReason(shareSheetTelemetryModule.CloseReason.UserDismissed)
 	end, { p1.onCloseWithReason }) else p1.onClose
@@ -63,7 +63,7 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 	local onConversationActivated = var15.onConversationActivated
 	
 	if fFlagShareSheetTelemetryRefactorModule then
-		var24 = reactModule.useCallback(function() --[[ line: 111 ]]
+		var24 = reactModule.useCallback(function()
 			-- upvalues: shareSheetTelemetryModule (copy), p1 (ref)
 			shareSheetTelemetryModule.logInteraction({
 				context = p1.context,
@@ -71,7 +71,7 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 				interactionType = shareSheetTelemetryModule.InteractionType.CustomMessageComposerFocused
 			})
 		end, { p1.context, p1.telemetryId })
-		onConversationActivated = reactModule.useCallback(function(p2) --[[ line: 119 ]]
+		onConversationActivated = reactModule.useCallback(function(p2)
 			-- upvalues: var15 (ref), shareSheetTelemetryModule (copy), p1 (ref)
 			shareSheetTelemetryModule.logInteraction({
 				context = p1.context,
@@ -100,7 +100,7 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 		onComposerFocused = var24,
 		onConversationActivated = onConversationActivated,
 		onClose = var23,
-		onSendActivated = reactModule.useCallback(function(p3) --[[ line: 142 ]]
+		onSendActivated = reactModule.useCallback(function(p3)
 			-- upvalues: var21 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy), p1 (ref), var12 (ref), var14 (ref), var15 (ref), var20 (ref)
 			if var21.current then return end
 			if fFlagShareSheetTelemetryRefactorModule and string.find(p3, "%S") ~= nil then
@@ -130,7 +130,7 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 			local t_1 = {}
 			local var30 = if p3 == "" then p1.url else `{p1.url} {p3}`
 			
-			local function finishSending() --[[ line: 180 ]]
+			local function finishSending()
 				-- upvalues: var21 (copy), var20 (copy), var27 (write), var28 (write), p1 (copy), var12 (copy), t (ref), t_1 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
 				var21.current = false
 				var20(false)
@@ -144,7 +144,7 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 					local t_2 = {
 						action = if var28 and navigateToChat then {
 							text = "View",
-							onActivated = function() --[[ line: 196 ]]
+							onActivated = function()
 								-- upvalues: navigateToChat (ref), var35 (ref)
 								navigateToChat(var35)
 							end
@@ -178,11 +178,11 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 				end
 			end
 			
-			local function send(p4) --[[ line: 225 ]]
+			local function send(p4)
 				-- upvalues: var12 (copy), var30 (ref), var28 (write), t_1 (ref), var27 (write), var26 (write)
-				return var12.sendToConversation(p4, var30):catch(function() --[[ line: 228 ]]
+				return var12.sendToConversation(p4, var30):catch(function()
 					return { status = "failure" }
-				end):andThen(function(p5) --[[ line: 233 ]]
+				end):andThen(function(p5)
 					-- upvalues: var28 (copy), t_1 (copy), p4 (ref), var27 (copy), var26 (copy)
 					if p5.status == "success" and p5.conversationId then
 						var28 = true
@@ -208,7 +208,7 @@ return function(p1) --[[ line: 71 | named "useShareSheetViewModel" ]]
 			
 			for i = 2, #t do
 				local var34 = t[i]
-				var33 = var33:andThen(function() --[[ line: 251 ]]
+				var33 = var33:andThen(function()
 					-- upvalues: var26 (write), send (ref), var34 (ref)
 					if var26 then
 						return

@@ -13,11 +13,11 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fFlagHideShortcutsOnReportDropdownModule = require(abuseReportMenu.Flags.FFlagHideShortcutsOnReportDropdown)
 local fFlagReportFocusNavIEMButtonsModule = require(abuseReportMenu.Flags.FFlagReportFocusNavIEMButtons)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 19 | named "getMenuItemsFromConfigs" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: useLocalization (ref), constantsModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reactModule (ref), fFlagReportFocusNavIEMButtonsModule (ref), freeCommentsMenuItemModule (ref), buttonReportMenuItemModule (ref), foundationModule (ref), buttonVariant (ref), dropdownReportMenuItemModule (ref), modalBasedSelectorMenuItemModule (ref)
 	local t = {}
 	local var12 = useLocalization(constantsModule.localizationKeys)
-	local var13 = if fFlagHideShortcutsOnReportDropdownModule then reactModule.useCallback(function(p5) --[[ line: 31 ]]
+	local var13 = if fFlagHideShortcutsOnReportDropdownModule then reactModule.useCallback(function(p5)
 		-- upvalues: p2 (ref)
 		if p2.onDropdownMenuOpenChange then
 			p2.onDropdownMenuOpenChange(p5)
@@ -26,7 +26,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 19 | named "getMenuItemsFromConfi
 	local var14 = if fFlagReportFocusNavIEMButtonsModule then reactModule.useRef(nil) else nil
 	
 	if fFlagReportFocusNavIEMButtonsModule then
-		reactModule.useEffect(function() --[[ line: 42 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p2 (ref), var14 (ref)
 			if p2.setLastSelectableObjects and var14.current then
 				p2.setLastSelectableObjects({ var14.current })
@@ -57,7 +57,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 19 | named "getMenuItemsFromConfi
 						placeholderText = var12.ReportCommentPlaceholder,
 						menuContainerWidth = p2.menuWidth,
 						isSmallPortraitViewport = p4,
-						onUpdate = function(p6) --[[ line: 72 ]]
+						onUpdate = function(p6)
 							-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
 							v.onUpdate(p6, p0, p1, p2)
 						end,
@@ -73,7 +73,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 19 | named "getMenuItemsFromConfi
 							icon = if iconSrc ~= "" then nil else iconSrc,
 							width = UDim.new(1, 0),
 							isDisabled = if v.getIsDisabled ~= nil then false else v.getIsDisabled(p0, p2),
-							onActivated = function() --[[ line: 93 ]]
+							onActivated = function()
 								-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
 								v.onClick(p0, p1, p2)
 							end,
@@ -88,7 +88,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 19 | named "getMenuItemsFromConfi
 						label = var12[v.fieldLabel],
 						placeholderText = var12.ChooseOne,
 						layoutOrder = i,
-						onSelect = function(p7) --[[ line: 109 ]]
+						onSelect = function(p7)
 							-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
 							v.onUpdateSelectedOption(p7, p0, p1, p2)
 						end,
@@ -104,7 +104,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 19 | named "getMenuItemsFromConfi
 					t[componentName] = reactModule.createElement(modalBasedSelectorMenuItemModule, {
 						label = var12[v.fieldLabel],
 						layoutOrder = i,
-						onSelect = function(p8, p9, p10) --[[ line: 126 ]]
+						onSelect = function(p8, p9, p10)
 							-- upvalues: v (ref), p0 (ref), p1 (ref), p2 (ref)
 							v.onUpdateSelectedOption({ label = p8, subLabel = p9, identifier = p10 }, p0, p1, p2)
 						end,

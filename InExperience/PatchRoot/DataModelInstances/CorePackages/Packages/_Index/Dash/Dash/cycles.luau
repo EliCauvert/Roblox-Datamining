@@ -4,11 +4,11 @@ local includesModule = require(parent.includes)
 local keysModule = require(parent.keys)
 local sort = table.sort
 
-local function getDefaultCycles() --[[ line: 19 ]]
+local function getDefaultCycles()
 	return { nextRef = 1, visited = {}, refs = {}, omit = {} }
 end
 
-local function cycles(p0, p1, p2) --[[ line: 41 ]]
+local function cycles(p0, p1, p2)
 	-- upvalues: getDefaultCycles (ref), keysModule (ref), sort (ref), includesModule (ref), cycles (ref)
 	if p1 == -1 then
 		return p2
@@ -26,7 +26,7 @@ local function cycles(p0, p1, p2) --[[ line: 41 ]]
 	else
 		p2.visited[p0] = true
 		local var5 = keysModule(p0)
-		sort(var5, function(p3, p4) --[[ line: 62 ]]
+		sort(var5, function(p3, p4)
 			return if typeof(p3) == "number" and typeof(p4) == "number" then p3 < p4 else tostring(p3) < tostring(p4)
 		end)
 		

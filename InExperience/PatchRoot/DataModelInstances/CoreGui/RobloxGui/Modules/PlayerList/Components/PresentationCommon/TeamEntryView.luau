@@ -14,7 +14,7 @@ local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Worksp
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local cellExtenderModule = require(parent.Presentation.CellExtender)
 
-return reactModule.memo(function(p0) --[[ line: 54 | named "TeamEntryView" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLayoutValues (ref), useStyle (ref), fFlagEnableMobilePlayerListOnConsole (ref), reactModule (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), statEntryContainerModule (ref), entryFrameView (ref), cellExtenderModule (ref)
 	local var7 = useLayoutValues()
 	local var8 = useStyle()
@@ -29,7 +29,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "TeamEntryView" ]]
 		var11 = var7.PlayerNameTextSize
 		font = var7.TeamEntryFont
 	end
-	local var12 = reactModule.useMemo(function() --[[ line: 75 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: isSmallTouchDevice (ref), var8 (ref), p0 (ref), isDirectionalPreferred (ref), var7 (ref)
 		return if isSmallTouchDevice then {
 			Color = p0.teamColor,
@@ -91,7 +91,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "TeamEntryView" ]]
 				end
 			end
 		elseif p0.gameStatsCount and p0.teamStatsCount and (p0.gameStatsCount > 0 and p0.teamStatsCount >= 0) then
-			p0.gameStats.iterateData(function(p1, p2) --[[ line: 159 ]]
+			p0.gameStats.iterateData(function(p1, p2)
 				-- upvalues: maxLeaderstats (ref), p0 (ref), t_1 (ref), reactModule (copy), statEntryContainerModule (copy), textEmphasis (write)
 				if maxLeaderstats < p2.order(false) then
 					return
@@ -177,7 +177,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "TeamEntryView" ]]
 				end
 			end
 		elseif p0.gameStatsCount and p0.teamStatsCount and (p0.gameStatsCount > 0 and p0.teamStatsCount >= 0) then
-			p0.gameStats.iterateData(function(p3, p4) --[[ line: 264 ]]
+			p0.gameStats.iterateData(function(p3, p4)
 				-- upvalues: maxLeaderstats (ref), p0 (ref), t_1 (ref), reactModule (copy), statEntryContainerModule (copy), var12 (ref), t (ref), textEmphasis (write)
 				if maxLeaderstats < p4.order(false) then
 					return

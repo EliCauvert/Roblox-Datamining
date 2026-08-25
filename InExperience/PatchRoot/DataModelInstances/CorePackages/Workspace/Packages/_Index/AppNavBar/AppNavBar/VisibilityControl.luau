@@ -17,7 +17,7 @@ local t = {
 local t_1 = { binding = nil, motor = nil }
 t_1.__index = t_1
 
-function t_1.create(p0) --[[ line: 40 ]]
+function t_1.create(p0)
 	-- upvalues: reactModule (ref), otterModule (ref), t_1 (ref)
 	local var10, var11 = reactModule.createBinding(p0)
 	local var12 = otterModule.createSingleMotor(p0)
@@ -28,30 +28,30 @@ function t_1.create(p0) --[[ line: 40 ]]
 	return t
 end
 
-function t_1.destroy(p1) --[[ line: 54 ]]
+function t_1.destroy(p1)
 	p1.motor:destroy()
 end
 
-function t_1.getBinding(p2) --[[ line: 58 ]]
+function t_1.getBinding(p2)
 	return p2.binding
 end
 
-function t_1.show(p3) --[[ line: 62 ]]
+function t_1.show(p3)
 	-- upvalues: otterModule (ref), t (ref)
 	p3.motor:setGoal(otterModule.spring(1, t))
 end
 
-function t_1.hide(p4) --[[ line: 66 ]]
+function t_1.hide(p4)
 	-- upvalues: otterModule (ref), t (ref)
 	p4.motor:setGoal(otterModule.spring(0, t))
 end
 
-function t_1.update(p5, p6) --[[ line: 70 ]]
+function t_1.update(p5, p6)
 	-- upvalues: otterModule (ref)
 	p5.motor:setGoal(otterModule.instant(math.clamp(p5.binding:getValue() + p6, 0, 1)))
 end
 
-function t_1.finishUp(p7) --[[ line: 76 ]]
+function t_1.finishUp(p7)
 	if p7.binding:getValue() < 0.5 then
 		p7:hide()
 		
@@ -79,7 +79,7 @@ local t_2 = {
 t_2.__index = t_2
 local var9 = nil
 
-function t_2.onTouchMoved(p8, p9) --[[ line: 120 ]]
+function t_2.onTouchMoved(p8, p9)
 	-- upvalues: fFlagEnableScrollAwayContentScrollableFix (ref), fFlagAppIaScrollAwayPinHeader (ref)
 	if fFlagEnableScrollAwayContentScrollableFix and not p8.contentScrollable then return end
 	local var14 = p9 / p8.scrollDistance
@@ -100,7 +100,7 @@ function t_2.onTouchMoved(p8, p9) --[[ line: 120 ]]
 	end
 end
 
-function t_2.onTouchEnded(p10) --[[ line: 139 ]]
+function t_2.onTouchEnded(p10)
 	-- upvalues: fFlagAppIaScrollAwayPinHeader (ref)
 	if p10.footerVisible then
 		p10.footer:finishUp()
@@ -118,11 +118,11 @@ function t_2.onTouchEnded(p10) --[[ line: 139 ]]
 	end
 end
 
-function t_2.connectTouch(p11) --[[ line: 154 ]]
+function t_2.connectTouch(p11)
 	-- upvalues: userInputService (ref), appIaScrollAwayIgnoreHorizontal (ref), appIaScrollAwayThreshold (ref)
 	if p11.connections == nil then
 		p11.connections = {}
-		p11.connections.started = userInputService.TouchStarted:Connect(function(p12) --[[ line: 159 ]]
+		p11.connections.started = userInputService.TouchStarted:Connect(function(p12)
 			-- upvalues: p11 (ref), appIaScrollAwayIgnoreHorizontal (copy)
 			p11.touching = true
 			
@@ -133,7 +133,7 @@ function t_2.connectTouch(p11) --[[ line: 154 ]]
 			end
 			p11.touchPositionY = p12.Position.Y
 		end)
-		p11.connections.moved = userInputService.TouchMoved:Connect(function(p13) --[[ line: 168 ]]
+		p11.connections.moved = userInputService.TouchMoved:Connect(function(p13)
 			-- upvalues: p11 (ref), appIaScrollAwayIgnoreHorizontal (copy), appIaScrollAwayThreshold (copy)
 			if not p11.touching then return end
 			if appIaScrollAwayIgnoreHorizontal and p11.horizontalLocked then return end
@@ -164,7 +164,7 @@ function t_2.connectTouch(p11) --[[ line: 154 ]]
 				p11.touchPositionY = y
 			end
 		end)
-		p11.connections.ended = userInputService.TouchEnded:Connect(function(_) --[[ line: 202 ]]
+		p11.connections.ended = userInputService.TouchEnded:Connect(function(_)
 			-- upvalues: p11 (ref), appIaScrollAwayIgnoreHorizontal (copy)
 			if not p11.touching then return end
 			p11.touching = false
@@ -180,7 +180,7 @@ function t_2.connectTouch(p11) --[[ line: 154 ]]
 	end
 end
 
-function t_2.disconnectTouch(p14) --[[ line: 215 ]]
+function t_2.disconnectTouch(p14)
 	if p14.connections == nil then return end
 	for i, v in pairs(p14.connections) do
 		v:Disconnect()
@@ -188,11 +188,11 @@ function t_2.disconnectTouch(p14) --[[ line: 215 ]]
 	p14.connections = nil
 end
 
-function t_2.isEnabled(p15) --[[ line: 228 ]]
+function t_2.isEnabled(p15)
 	return p15.enabled
 end
 
-function t_2.setEnabled(value, p16) --[[ line: 235 ]]
+function t_2.setEnabled(value, p16)
 	-- upvalues: fFlagAppIaScopedScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref)
 	if value.enabled == p16 then return end
 	value.enabled = p16
@@ -220,7 +220,7 @@ function t_2.setEnabled(value, p16) --[[ line: 235 ]]
 	end
 end
 
-function t_2.setGlobalTouchEnabled(value, p17) --[[ line: 261 ]]
+function t_2.setGlobalTouchEnabled(value, p17)
 	value.globalTouchDisabled = not p17
 	
 	if p17 then
@@ -234,7 +234,7 @@ function t_2.setGlobalTouchEnabled(value, p17) --[[ line: 261 ]]
 	end
 end
 
-function t_2.setContentScrollable(value, p18) --[[ line: 272 ]]
+function t_2.setContentScrollable(value, p18)
 	if value.contentScrollable == p18 then return end
 	if not p18 then
 		value:show()
@@ -242,7 +242,7 @@ function t_2.setContentScrollable(value, p18) --[[ line: 272 ]]
 	value.contentScrollable = p18
 end
 
-function t_2.setFooterVisible(value, p19) --[[ line: 285 ]]
+function t_2.setFooterVisible(value, p19)
 	if value.footerVisible == p19 then return end
 	value.footerVisible = p19
 	
@@ -254,15 +254,15 @@ function t_2.setFooterVisible(value, p19) --[[ line: 285 ]]
 	value.footer:hide()
 end
 
-function t_2.getHeaderBinding(p20) --[[ line: 300 ]]
+function t_2.getHeaderBinding(p20)
 	return p20.header:getBinding()
 end
 
-function t_2.getFooterBinding(p21) --[[ line: 307 ]]
+function t_2.getFooterBinding(p21)
 	return p21.footer:getBinding()
 end
 
-function t_2.setHeaderScrollAwayDisabled(value, p22) --[[ line: 315 ]]
+function t_2.setHeaderScrollAwayDisabled(value, p22)
 	-- upvalues: fFlagAppIaScrollAwayPinHeader (ref)
 	if not fFlagAppIaScrollAwayPinHeader then return end
 	value.headerScrollAwayDisabled = p22
@@ -272,7 +272,7 @@ function t_2.setHeaderScrollAwayDisabled(value, p22) --[[ line: 315 ]]
 	end
 end
 
-function t_2.show(p23) --[[ line: 328 ]]
+function t_2.show(p23)
 	-- upvalues: fFlagEnableScrollAwayContentScrollableFix (ref)
 	if fFlagEnableScrollAwayContentScrollableFix then
 		p23.contentScrollable = true
@@ -284,7 +284,7 @@ function t_2.show(p23) --[[ line: 328 ]]
 	end
 end
 
-function t_2.hide(p24) --[[ line: 341 ]]
+function t_2.hide(p24)
 	-- upvalues: fFlagAppIaScrollAwayPinHeader (ref)
 	if not fFlagAppIaScrollAwayPinHeader then
 		p24.header:hide()
@@ -296,7 +296,7 @@ function t_2.hide(p24) --[[ line: 341 ]]
 	end
 end
 
-function t_2.getInstance() --[[ line: 357 ]]
+function t_2.getInstance()
 	-- upvalues: var9 (write), t_2 (ref)
 	if not var9 then
 		var9 = {}
@@ -306,13 +306,13 @@ function t_2.getInstance() --[[ line: 357 ]]
 	return var9
 end
 
-function t_2.initialize(p25) --[[ line: 367 ]]
+function t_2.initialize(p25)
 	-- upvalues: t_1 (ref)
 	p25.header = t_1.create(1)
 	p25.footer = t_1.create(0)
 end
 
-function t_2.destroy(p26) --[[ line: 377 ]]
+function t_2.destroy(p26)
 	-- upvalues: var9 (write)
 	p26.header:destroy()
 	p26.footer:destroy()
@@ -320,7 +320,7 @@ function t_2.destroy(p26) --[[ line: 377 ]]
 	var9 = nil
 end
 
-function t_2.setScrollDistance(value, p27) --[[ line: 387 ]]
+function t_2.setScrollDistance(value, p27)
 	if p27 == 0 then
 		return
 	end
@@ -328,51 +328,51 @@ function t_2.setScrollDistance(value, p27) --[[ line: 387 ]]
 end
 
 return {
-	isEnabled = function() --[[ line: 399 ]]
+	isEnabled = function()
 		-- upvalues: t_2 (ref)
 		return t_2.getInstance():isEnabled()
 	end,
-	setEnabled = function(value) --[[ line: 402 ]]
+	setEnabled = function(value)
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():setEnabled(value)
 	end,
-	getHeaderBinding = function() --[[ line: 405 ]]
+	getHeaderBinding = function()
 		-- upvalues: t_2 (ref)
 		return t_2.getInstance():getHeaderBinding()
 	end,
-	getFooterBinding = function() --[[ line: 408 ]]
+	getFooterBinding = function()
 		-- upvalues: t_2 (ref)
 		return t_2.getInstance():getFooterBinding()
 	end,
-	setFooterVisible = function(value) --[[ line: 411 ]]
+	setFooterVisible = function(value)
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():setFooterVisible(value)
 	end,
-	setHeaderScrollAwayDisabled = if fFlagAppIaScrollAwayPinHeader then function(p28) --[[ line: 415 ]]
+	setHeaderScrollAwayDisabled = if fFlagAppIaScrollAwayPinHeader then function(p28)
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():setHeaderScrollAwayDisabled(p28)
 	end else nil,
-	show = function() --[[ line: 419 ]]
+	show = function()
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():show()
 	end,
-	hide = function() --[[ line: 422 ]]
+	hide = function()
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():hide()
 	end,
-	destroy = function() --[[ line: 425 ]]
+	destroy = function()
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():destroy()
 	end,
-	setScrollDistance = function(value) --[[ line: 428 ]]
+	setScrollDistance = function(value)
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():setScrollDistance(value)
 	end,
-	setGlobalTouchEnabled = if fFlagAppIaScopedScrollAway then function(p29) --[[ line: 432 ]]
+	setGlobalTouchEnabled = if fFlagAppIaScopedScrollAway then function(p29)
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():setGlobalTouchEnabled(p29)
 	end else nil,
-	onTouchMoved = if fFlagAppIaScopedScrollAway then function(p30) --[[ line: 437 ]]
+	onTouchMoved = if fFlagAppIaScopedScrollAway then function(p30)
 		-- upvalues: t_2 (ref)
 		local instance = t_2.getInstance()
 		
@@ -380,7 +380,7 @@ return {
 			instance:onTouchMoved(p30)
 		end
 	end else nil,
-	onTouchEnded = if fFlagAppIaScopedScrollAway then function() --[[ line: 445 ]]
+	onTouchEnded = if fFlagAppIaScopedScrollAway then function()
 		-- upvalues: t_2 (ref)
 		local instance = t_2.getInstance()
 		
@@ -388,7 +388,7 @@ return {
 			instance:onTouchEnded()
 		end
 	end else nil,
-	setContentScrollable = function(value) --[[ line: 452 ]]
+	setContentScrollable = function(value)
 		-- upvalues: t_2 (ref)
 		t_2.getInstance():setContentScrollable(value)
 	end

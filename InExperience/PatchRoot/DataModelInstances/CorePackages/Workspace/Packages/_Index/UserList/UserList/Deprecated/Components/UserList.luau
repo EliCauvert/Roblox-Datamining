@@ -12,10 +12,10 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local constantsModule = require(userList.Common.Constants)
 local userRowWrapperModule = require(script.Parent.UserRowWrapper)
 
-return function(p0) --[[ line: 26 | named "UserList" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), constantsModule (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateDown (ref), fFlagUserListPresenceStoreMigrationModule (ref), networkingPresenceModule (ref), view (ref), userRowWrapperModule (ref)
 	local var7 = useDispatch()
-	local var8 = reactModule.useCallback(function(p1) --[[ line: 29 ]]
+	local var8 = reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), appPage (copy), constantsModule (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var7 (ref), navigateDown (copy)
 		if p0.onUserSelected then
 			p0.onUserSelected(p1)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 26 | named "UserList" ]]
 		end
 		var7(navigateDown(t))
 	end, { p0.onUserSelected, var7 })
-	reactModule.useEffect(function() --[[ line: 50 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagUserListPresenceStoreMigrationModule (copy), p0 (ref), var7 (ref), networkingPresenceModule (copy)
 		if not fFlagUserListPresenceStoreMigrationModule and #p0.userIds > 0 then
 			var7(networkingPresenceModule.GetPresencesFromUserIds.API(p0.userIds))
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 26 | named "UserList" ]]
 		tag = "size-full-0 auto-y col gap-large",
 		LayoutOrder = p0.layoutOrder or 0
 	}, {
-		UserRows = reactModule.createElement(reactModule.Fragment, {}, unpack(reactModule.useMemo(function() --[[ line: 67 ]]
+		UserRows = reactModule.createElement(reactModule.Fragment, {}, unpack(reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), userRowWrapperModule (copy), var8 (ref)
 			local t = {}
 			

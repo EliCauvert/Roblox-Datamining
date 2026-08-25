@@ -7,14 +7,14 @@ local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local utilAndTabModule = require(components.UtilAndTab)
 local mainViewVoiceChat = roactModule.PureComponent:extend("MainViewVoiceChat")
 
-function mainViewVoiceChat.init(p0) --[[ line: 14 ]]
+function mainViewVoiceChat.init(p0)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1) --[[ line: 15 ]]
+	function p0.onUtilTabHeightChanged(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ utilTabHeight = p1 })
 	end
 	
-	function p0.onStatsUpdated(p2) --[[ line: 21 ]]
+	function p0.onStatsUpdated(p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ stats = p2 })
 	end
@@ -24,11 +24,11 @@ function mainViewVoiceChat.init(p0) --[[ line: 14 ]]
 	p0.state = { utilTabHeight = 0, stats = {} }
 end
 
-function mainViewVoiceChat.didMount(p3) --[[ line: 38 ]]
+function mainViewVoiceChat.didMount(p3)
 	p3:setState({ utilTabHeight = p3.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewVoiceChat.didUpdate(p4) --[[ line: 45 ]]
+function mainViewVoiceChat.didUpdate(p4)
 	local size = p4.utilRef.current.Size
 	
 	if size.Y.Offset ~= p4.state.utilTabHeight then
@@ -36,14 +36,14 @@ function mainViewVoiceChat.didUpdate(p4) --[[ line: 45 ]]
 	end
 end
 
-function mainViewVoiceChat.willUnmount(p5) --[[ line: 54 ]]
+function mainViewVoiceChat.willUnmount(p5)
 	if p5._statsUpdatedConnection then
 		p5._statsUpdatedConnection:Disconnect()
 		p5._statsUpdatedConnection = nil
 	end
 end
 
-function mainViewVoiceChat.render(p6) --[[ line: 61 ]]
+function mainViewVoiceChat.render(p6)
 	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref)
 	local size = p6.props.size
 	local list = {
@@ -92,7 +92,7 @@ function mainViewVoiceChat.render(p6) --[[ line: 61 ]]
 		}),
 		StatsContainer = roactModule.createElement("Frame", { LayoutOrder = 2, BackgroundTransparency = 1 }, {
 			UIListLayout = roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-			Labels = (function() --[[ line: 74 | named "renderStatLabels" ]]
+			Labels = (function()
 				-- upvalues: list (ref), roactModule (copy), p6 (ref), constantsModule (copy)
 				local t = {}
 				

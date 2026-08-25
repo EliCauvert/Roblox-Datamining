@@ -11,35 +11,35 @@ local withLocalization = require(corePackagesService.Workspace.Packages.Localiza
 local helpModal = roactModule.PureComponent:extend("HelpModal")
 local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 
-function helpModal.init(p0) --[[ line: 32 ]]
+function helpModal.init(p0)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
-	function p0.onDismiss() --[[ line: 33 ]]
+	function p0.onDismiss()
 		-- upvalues: p0 (ref)
 		p0.props.showHelpModal(false)
 	end
 	
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p0.disposeScreenSize = signalsModule.createEffect(function(p1) --[[ line: 40 ]]
+		p0.disposeScreenSize = signalsModule.createEffect(function(p1)
 			-- upvalues: p0 (ref), getViewportSize (ref)
 			p0:setState({ screenSize = getViewportSize(p1) })
 		end)
 	end
 end
 
-function helpModal.willUnmount(p2) --[[ line: 48 ]]
+function helpModal.willUnmount(p2)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeScreenSize then
 		p2.disposeScreenSize()
 	end
 end
 
-function helpModal.render(p3) --[[ line: 54 ]]
+function helpModal.render(p3)
 	-- upvalues: withLocalization (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref), themedTextLabelModule (ref)
 	return withLocalization({
 		mainHeader = "CoreScripts.Feedback.Help.MainHeader",
 		instructionLabel = "CoreScripts.Feedback.Help.Instructions"
-	})(function(p4) --[[ line: 58 ]]
+	})(function(p4)
 		-- upvalues: roactModule (copy), modalDialogModule (copy), p3 (ref), fFlagTopBarSignalizeScreenSize (copy), themedTextLabelModule (copy)
 		return roactModule.createElement(modalDialogModule, {
 			maxHeight = 130,
@@ -75,16 +75,16 @@ function helpModal.render(p3) --[[ line: 54 ]]
 	end)
 end
 
-return roactRoduxModule.connect(function(p5) --[[ line: 96 ]]
+return roactRoduxModule.connect(function(p5)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	return {
 		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p5.displayOptions.screenSize,
 		visible = p5.common.showHelpModal
 	}
-end, function(p6) --[[ line: 101 ]]
+end, function(p6)
 	-- upvalues: showHelpModalThunkModule (ref)
 	return {
-		showHelpModal = function(p7) --[[ line: 103 ]]
+		showHelpModal = function(p7)
 			-- upvalues: p6 (ref), showHelpModalThunkModule (copy)
 			p6(showHelpModalThunkModule(p7))
 		end

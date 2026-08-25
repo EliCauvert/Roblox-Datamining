@@ -1,7 +1,7 @@
 ﻿local deepEqualModule = require(script.Parent.deepEqual)
 local deepContainsModule = require(script.Parent.deepContains)
 
-return function(p0, p1, p2) --[[ line: 4 ]]
+return function(p0, p1, p2)
 	-- upvalues: deepContainsModule (ref), deepEqualModule (ref)
 	for i, v in ipairs(p0) do
 		if p2 then

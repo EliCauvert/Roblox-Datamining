@@ -34,14 +34,14 @@ local t = {
 }
 local t_1 = { textSizeOffset = 0 }
 
-function styleProvider.init(p0) --[[ line: 54 ]]
+function styleProvider.init(p0)
 	p0:setState({
 		style = p0.props.style,
 		derivedValues = p0.props.derivedValues
 	})
 end
 
-function styleProvider.updateTextSizeOffset(value, p1) --[[ line: 63 ]]
+function styleProvider.updateTextSizeOffset(value, p1)
 	-- upvalues: getTextSizeOffsetModule (ref)
 	local var13, var14 = getTextSizeOffsetModule(p1)
 	
@@ -50,13 +50,13 @@ function styleProvider.updateTextSizeOffset(value, p1) --[[ line: 63 ]]
 	end
 end
 
-function styleProvider.didUpdate(p2, _, p3) --[[ line: 74 ]]
+function styleProvider.didUpdate(p2, _, p3)
 	if p3.style and p3.style.Settings.PreferredTextSize ~= p2.state.style.Settings.PreferredTextSize then
 		p2:updateTextSizeOffset(p2.state.style.Font.Body.Font)
 	end
 end
 
-function styleProvider.render(p4) --[[ line: 83 ]]
+function styleProvider.render(p4)
 	-- upvalues: object (ref), t (ref), t_1 (ref), themesModule (ref), constantsModule (ref), getTokens (ref), getFoundationTokens (ref), mappers (ref), getFontFromNameModule (ref), roactModule (ref), styleContextModule (ref)
 	local var15 = object.assign({}, t, p4.state.style)
 	local var16 = object.assign({}, t_1, p4.state.derivedValues)
@@ -76,7 +76,7 @@ function styleProvider.render(p4) --[[ line: 83 ]]
 	return roactModule.createElement(styleContextModule.Provider, {
 		value = {
 			style = var15,
-			update = function(_, p5) --[[ line: 108 ]]
+			update = function(_, p5)
 				-- upvalues: p4 (ref)
 				if p4.mounted then
 					p4:setState({ style = p5 })
@@ -87,11 +87,11 @@ function styleProvider.render(p4) --[[ line: 83 ]]
 	}, roactModule.oneChild(p4.props[roactModule.Children]))
 end
 
-function styleProvider.didMount(p6) --[[ line: 121 ]]
+function styleProvider.didMount(p6)
 	p6.mounted = true
 end
 
-function styleProvider.willUnmount(p7) --[[ line: 125 ]]
+function styleProvider.willUnmount(p7)
 	p7.mounted = false
 end
 

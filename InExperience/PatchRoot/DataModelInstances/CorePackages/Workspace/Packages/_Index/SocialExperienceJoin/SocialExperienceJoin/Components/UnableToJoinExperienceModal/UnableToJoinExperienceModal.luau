@@ -7,7 +7,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
 	local var4 = useLocalization({
 		titleText = textKeysModule.UnableToJoin,

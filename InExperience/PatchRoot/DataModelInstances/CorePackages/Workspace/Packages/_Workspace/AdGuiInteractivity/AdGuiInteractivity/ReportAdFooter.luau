@@ -4,7 +4,7 @@ local interactable = require(parent.UIBlox).Core.Control.Interactable
 local linkingProtocol = require(parent.LinkingProtocol).LinkingProtocol
 local var1 = require(parent.RobloxTranslator):FormatByKey("CoreScripts.Ads.Label.IllegalContentReportingLink")
 
-function ReportAdFooter(p0) --[[ line: 18 ]]
+function ReportAdFooter(p0)
 	-- upvalues: linkingProtocol (ref), roactModule (ref), interactable (ref), var1 (ref)
 	local default = linkingProtocol.default
 	local text = "https://www.roblox.com/illegal-content-reporting?contentURL=" .. ("https://create.roblox.com/store/asset/" .. p0.assetId)
@@ -30,7 +30,7 @@ function ReportAdFooter(p0) --[[ line: 18 ]]
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			[roactModule.Event.Activated] = function() --[[ line: 46 ]]
+			[roactModule.Event.Activated] = function()
 				-- upvalues: default (ref), text (ref)
 				default:openURL(text)
 			end

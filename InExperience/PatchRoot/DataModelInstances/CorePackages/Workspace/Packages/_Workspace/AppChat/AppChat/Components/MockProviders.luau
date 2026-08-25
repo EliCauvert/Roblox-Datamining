@@ -27,7 +27,7 @@ local t = {
 	withApolloProvider = true
 }
 
-return function(p0) --[[ line: 57 | named "MockProviders" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), realtimeProvider (ref), foundationProvider (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), signal (ref), layerCollectorProvider (ref), roactRoduxModule (ref), roduxModule (ref), universalAppPolicyModule (ref), socialPoliciesModule (ref), styleModule (ref), mockApolloClient (ref), mockUserDataModule (ref), userProfilesModule (ref), apolloClientModule (ref), interactionFeedbackModule (ref), hapticFeedbackConfig (ref), roactNavigationModule (ref), reactModule (ref), providerContainer (ref)
 	local var14 = cryoModule.Dictionary.union(t, p0)
 	local t_1 = {}
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 57 | named "MockProviders" ]]
 		class = localizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p1) --[[ line: 90 ]]
+				Format = function(_, p1)
 					return p1
 				end,
 				changed = signal.new()
@@ -67,7 +67,7 @@ return function(p0) --[[ line: 57 | named "MockProviders" ]]
 	table.insert(t_1, {
 		class = roactRoduxModule.StoreProvider,
 		props = {
-			store = if var14.rodux then var14.rodux.store else roduxModule.Store.new(function() --[[ line: 108 ]]
+			store = if var14.rodux then var14.rodux.store else roduxModule.Store.new(function()
 				-- upvalues: var14 (ref)
 				return if var14.rodux then var14.rodux.state else {}
 			end, var14.rodux and var14.rodux.state, { roduxModule.thunkMiddleware })
@@ -104,17 +104,17 @@ return function(p0) --[[ line: 57 | named "MockProviders" ]]
 		props = {
 			value = {
 				state = { routeName = "", key = "", params = {} },
-				dispatch = function() --[[ line: 157 ]] end,
-				goBack = function() --[[ line: 158 ]] end,
-				addListener = function() --[[ line: 159 ]]
-					return { remove = function() --[[ line: 160 ]] end }
+				dispatch = function() end,
+				goBack = function() end,
+				addListener = function()
+					return { remove = function() end }
 				end,
-				isFocused = function() --[[ line: 162 ]] end,
-				setParams = function() --[[ line: 163 ]] end,
-				getParam = function() --[[ line: 164 ]] end,
-				replace = function() --[[ line: 165 ]] end,
-				push = function() --[[ line: 166 ]] end,
-				getScreenProps = function() --[[ line: 167 ]] end
+				isFocused = function() end,
+				setParams = function() end,
+				getParam = function() end,
+				replace = function() end,
+				push = function() end,
+				getScreenProps = function() end
 			}
 		}
 	})

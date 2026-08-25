@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local signalsModule = require(script:FindFirstAncestor("Home").Parent.Signals)
 
-local function _() --[[ line: 10 | named "newSessionId" ]]
+local function _()
 	-- upvalues: httpService (ref)
 	return httpService:GenerateGUID(false):lower()
 end
@@ -10,20 +10,20 @@ local var2 = ""
 local var3, var4 = signalsModule.createSignal(nil)
 
 return {
-	Get = function(_) --[[ line: 37 ]]
+	Get = function(_)
 		-- upvalues: var2 (write), httpService (ref)
 		if var2 == "" then
 			var2 = httpService:GenerateGUID(false):lower()
 		end
 		return var2
 	end,
-	Refresh = function(_) --[[ line: 44 ]]
+	Refresh = function(_)
 		-- upvalues: var2 (write), httpService (ref)
 		var2 = httpService:GenerateGUID(false):lower()
 		
 		return var2
 	end,
-	Commit = function(p0, p1) --[[ line: 49 ]]
+	Commit = function(p0, p1)
 		-- upvalues: var3 (ref), var4 (ref)
 		local var5 = p0:Get()
 		local var6 = var3(false)
@@ -35,11 +35,11 @@ return {
 		end
 		return false
 	end,
-	GetCommitted = function(_) --[[ line: 60 ]]
+	GetCommitted = function(_)
 		-- upvalues: var3 (ref)
 		return var3(false)
 	end,
-	GetCommittedSignal = function(_) --[[ line: 64 ]]
+	GetCommittedSignal = function(_)
 		-- upvalues: var3 (ref)
 		return var3
 	end

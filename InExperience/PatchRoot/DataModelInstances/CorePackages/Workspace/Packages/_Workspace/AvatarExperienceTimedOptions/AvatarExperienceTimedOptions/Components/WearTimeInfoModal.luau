@@ -12,7 +12,7 @@ local iconName = foundationModule.Enums.IconName
 local useTokens = foundationModule.Hooks.useTokens
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), useSelector (ref), reactModule (ref), modalWindow (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref)
 	local var2 = useLocalization({
 		modalTitle = "Feature.Durables.InfoModal.Title",
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 26 ]]
 	
 	return reactModule.createElement(modalWindow, {
 		isFullHeight = false,
-		screenSize = useSelector(function(p1) --[[ line: 35 ]]
+		screenSize = useSelector(function(p1)
 			return p1.ScreenSize
 		end)
 	}, {

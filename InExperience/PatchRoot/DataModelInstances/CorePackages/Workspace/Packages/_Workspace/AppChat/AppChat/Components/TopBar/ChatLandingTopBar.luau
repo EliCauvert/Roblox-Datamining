@@ -30,7 +30,7 @@ local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExpe
 local flyoutLeftHeader = require(parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 
-local function SearchTopBarWrapper() --[[ line: 52 ]]
+local function SearchTopBarWrapper()
 	-- upvalues: getTopBarStoreModule (ref), enumScreensModule (ref), useLocalization (ref), reactModule (ref), searchTopBarModule (ref)
 	local var20 = getTopBarStoreModule(false)
 	local setScreenTopBar = var20.setScreenTopBar
@@ -46,7 +46,7 @@ local function SearchTopBarWrapper() --[[ line: 52 ]]
 			cancelText = var22.cancelText,
 			searchPlaceholderText = var22.searchPlaceholderText,
 			captureFocusOnMount = var21.shouldAutoFocusCenter,
-			onSelectCallback = reactModule.useCallback(function() --[[ line: 62 ]]
+			onSelectCallback = reactModule.useCallback(function()
 				-- upvalues: var21 (ref)
 				local closeInputBar = var21.closeInputBar
 				
@@ -54,15 +54,15 @@ local function SearchTopBarWrapper() --[[ line: 52 ]]
 					closeInputBar()
 				end
 			end, { var21.closeInputBar }),
-			resetOnMount = reactModule.useCallback(function() --[[ line: 69 ]]
+			resetOnMount = reactModule.useCallback(function()
 				-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
 				setScreenTopBar(enumScreensModule.ChatLanding, { shouldAutoFocusCenter = false })
 			end, { setScreenTopBar }),
-			cancelCallback = reactModule.useCallback(function() --[[ line: 75 ]]
+			cancelCallback = reactModule.useCallback(function()
 				-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
 				setScreenTopBar(enumScreensModule.ChatLanding, { shouldRenderCenter = false, filterText = "" })
 			end, { setScreenTopBar }),
-			textChangedCallback = reactModule.useCallback(function(p0) --[[ line: 82 ]]
+			textChangedCallback = reactModule.useCallback(function(p0)
 				-- upvalues: setScreenTopBar (ref), enumScreensModule (copy)
 				setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p0 })
 			end, { setScreenTopBar })
@@ -70,12 +70,12 @@ local function SearchTopBarWrapper() --[[ line: 52 ]]
 	})
 end
 
-local var19 = function() --[[ line: 106 ]]
+local var19 = function()
 	-- upvalues: reactModule (ref), SearchTopBarWrapper (ref)
 	return reactModule.createElement(SearchTopBarWrapper)
 end
 
-return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
+return function(p1)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), constantsModule (ref), getTopBarStoreModule (ref), useSignalState (ref), useChatLandingVisibilityModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useLocalization (ref), var19 (ref), reactModule (ref), enumScreensModule (ref), chatLandingTelemetryEventsModule (ref), flyoutLeftHeader (ref), flyoutSidePanelIXP (ref), fFlagEnableHeaderBarButtonsUpdate (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), argoPartyExperimentation (ref), streamNotificationsBellIcon (ref), fFlagStreamNotificationBellEntryPoint (ref), appPage (ref), snoozeToastNotificationsButtonModule (ref), iconButton (ref), images (ref), getFFlagIsSquadEnabled (ref), chatTopBarBaseModule (ref)
 	if not fFlagAppChatTopBarConfigDrivenModule() then
 		return nil
@@ -97,7 +97,7 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 		headerText = if headerText.shouldLocalize then headerText.raw else nil
 	}).headerText else headerText.raw or ""
 	local var32 = if shouldRenderCenter then var19 else nil
-	local var33 = reactModule.useCallback(function() --[[ line: 140 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: setScreenTopBar (ref), enumScreensModule (copy), var29 (ref), chatLandingTelemetryEventsModule (copy)
 		setScreenTopBar(enumScreensModule.ChatLanding, {
 			shouldRenderCenter = true,
@@ -106,7 +106,7 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 		})
 		var29.emit(chatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
 	end, { var29, setScreenTopBar })
-	local var34 = reactModule.useCallback(function() --[[ line: 149 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: navigation (ref), enumScreensModule (copy), var29 (ref), chatLandingTelemetryEventsModule (copy)
 		navigation.navigate(enumScreensModule.CreateNewChat)
 		var29.emit(chatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
@@ -116,7 +116,7 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 	return reactModule.createElement(chatTopBarBaseModule, {
 		screenName = screenName,
 		navigation = navigation,
-		renderRight = if not shouldRenderCenter then function() --[[ line: 164 ]]
+		renderRight = if not shouldRenderCenter then function()
 			-- upvalues: rightHidden (ref), var28 (ref), fFlagEnableHeaderBarButtonsUpdate (copy), reactModule (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), var33 (ref), argoPartyExperimentation (copy), var34 (ref), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var25 (ref), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
 			if rightHidden then
 				return nil
@@ -200,7 +200,7 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 			})
 		end else nil,
 		renderCenter = var32,
-		renderLeft = if var35 then function() --[[ line: 154 ]]
+		renderLeft = if var35 then function()
 			-- upvalues: reactModule (copy), flyoutLeftHeader (copy), var31 (ref), flyoutSidePanelIXP (copy)
 			return reactModule.createElement(flyoutLeftHeader, {
 				titleText = var31,

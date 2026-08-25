@@ -2,9 +2,9 @@
 local reactModule = require(parent.React)
 local IXPUtilsModule = require(parent.IXPUtils)
 
-return function(p0, p1) --[[ line: 7 | named "unifiedImpressionExposer" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), IXPUtilsModule (ref)
-	return reactModule.useCallback(function(p2) --[[ line: 8 ]]
+	return reactModule.useCallback(function(p2)
 		-- upvalues: p0 (ref), IXPUtilsModule (copy), p1 (ref)
 		local current = p0.current
 		

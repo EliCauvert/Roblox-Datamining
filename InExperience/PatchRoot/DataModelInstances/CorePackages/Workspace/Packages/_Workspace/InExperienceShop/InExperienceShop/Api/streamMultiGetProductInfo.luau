@@ -2,7 +2,7 @@
 local getProductInfoModule = require(script.Parent.getProductInfo)
 local _ = require(script.Parent.multiGetProductInfo)
 
-return function(p0, p1) --[[ line: 20 | named "streamMultiGetProductInfo" ]]
+return function(p0, p1)
 	-- upvalues: promiseModule (ref), getProductInfoModule (ref)
 	local p0Count = #p0
 	
@@ -12,16 +12,16 @@ return function(p0, p1) --[[ line: 20 | named "streamMultiGetProductInfo" ]]
 	local list = table.create(p0Count)
 	local var4 = 0
 	
-	return promiseModule.new(function(p2) --[[ line: 32 ]]
+	return promiseModule.new(function(p2)
 		-- upvalues: p0 (ref), getProductInfoModule (copy), list (ref), p1 (ref), var4 (write), p0Count (ref)
 		for i, v in ipairs(p0) do
-			getProductInfoModule(v.id, v.infoType):andThen(function(p5) --[[ line: 35 ]]
+			getProductInfoModule(v.id, v.infoType):andThen(function(p5)
 				-- upvalues: v (ref)
 				return { ok = true, request = v, value = p5 }
-			end):catch(function(p4) --[[ line: 38 ]]
+			end):catch(function(p4)
 				-- upvalues: v (ref)
 				return { ok = false, request = v, err = p4 }
-			end):andThen(function(p3) --[[ line: 41 ]]
+			end):andThen(function(p3)
 				-- upvalues: list (copy), i (ref), p1 (copy), var4 (copy), p0Count (copy), p2 (ref)
 				list[i] = p3
 				p1.onResult(p3)

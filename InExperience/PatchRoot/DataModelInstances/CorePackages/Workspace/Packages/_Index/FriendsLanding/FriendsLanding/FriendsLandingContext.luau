@@ -9,7 +9,7 @@ return {
 	Consumer = contextModule.Consumer,
 	with = context.getWith(contextModule),
 	connect = context.getConnect(contextModule),
-	useContext = function() --[[ line: 14 ]]
+	useContext = function()
 		-- upvalues: react (ref), contextModule (ref)
 		return react.useContext(contextModule)
 	end

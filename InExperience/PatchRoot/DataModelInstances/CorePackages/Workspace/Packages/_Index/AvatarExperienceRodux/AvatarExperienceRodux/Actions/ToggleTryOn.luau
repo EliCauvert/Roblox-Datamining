@@ -7,7 +7,7 @@ local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnab
 local fFlagAXDurablesForMIS = avatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local _ = require(avatarExperienceRodux.Types.OutfitTryOn)
 
-return roduxModule.makeActionCreator(script.Name, function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 40 ]]
+return roduxModule.makeActionCreator(script.Name, function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 	-- upvalues: fFlagAXMISEnableMultiShopping (ref), fFlagAXDurablesForMIS (ref)
 	return {
 		itemType = p0,

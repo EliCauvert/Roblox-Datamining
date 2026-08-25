@@ -1,7 +1,7 @@
 ﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 local clientErrorAdditionalArgs = game:DefineFastFlag("ClientErrorAdditionalArgs", false)
 
-return function(p0, p1, p2, p3) --[[ line: 5 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: clientErrorAdditionalArgs (ref), checkAndSendEventModule (ref)
 	local t = {}
 	

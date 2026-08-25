@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 6 | named "parseApiError" ]]
+return function(p0)
 	if typeof(p0) ~= "table" then
 		return nil
 	end

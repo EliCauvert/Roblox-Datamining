@@ -6,22 +6,22 @@ local useAnimationModule = require(virtualEvents.Hooks.useAnimation)
 local text_1 = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 22 | named "DescriptionExpander" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref), useAnimationModule (ref), text_1 (ref)
 	local var4 = useTokens()
 	local bodyLarge = var4.Typography.BodyLarge
 	local var5, var6 = reactModule.useState(0)
 	
-	local function _(p1, p2) --[[ line: 27 | named "updateDescriptionHeight" ]]
+	local function _(p1, p2)
 		-- upvalues: text (copy), bodyLarge (ref), var6 (ref)
 		var6(text.GetTextHeight(p2, bodyLarge.Font, bodyLarge.FontSize, p1))
 	end
 	
-	local var7 = reactModule.useCallback(function(p3) --[[ line: 32 ]]
+	local var7 = reactModule.useCallback(function(p3)
 		-- upvalues: p0 (ref), text (copy), bodyLarge (ref), var6 (ref)
 		var6(text.GetTextHeight(p0.description, bodyLarge.Font, bodyLarge.FontSize, p3.AbsoluteSize.X))
 	end, { p0.description })
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), text (copy), bodyLarge (ref), var6 (ref)
 		var6(text.GetTextHeight(p0.description, bodyLarge.Font, bodyLarge.FontSize, p0.width))
 	end, { p0.description, p0.width })
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 22 | named "DescriptionExpander" ]]
 		LayoutOrder = p0.layoutOrder,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, var9),
-		[reactModule.Change.AbsoluteSize] = function(p4) --[[ line: 115 ]]
+		[reactModule.Change.AbsoluteSize] = function(p4)
 			-- upvalues: var7 (ref)
 			var7(p4)
 		end
@@ -79,7 +79,7 @@ return function(p0) --[[ line: 22 | named "DescriptionExpander" ]]
 			Active = var5 > 50,
 			AutoButtonColor = false,
 			AutomaticSize = Enum.AutomaticSize.None,
-			[reactModule.Event.Activated] = function() --[[ line: 89 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p0 (ref)
 				p0.setIsExpanded(true)
 			end

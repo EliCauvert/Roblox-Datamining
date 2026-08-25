@@ -5,22 +5,22 @@ local typesModule = require(viewRecycler.Core.Types)
 local frozen = table.freeze({})
 local frozen_1 = table.freeze({ startItems = 0, endItems = 0 })
 
-local function _(p0, p1) --[[ line: 28 | named "sameRange" ]]
+local function _(p0, p1)
 	return p0.firstIndex == p1.firstIndex and p0.lastIndex == p1.lastIndex
 end
 
-local _ = function(p2, p3) --[[ line: 32 | named "sameOptions" ]]
+local _ = function(p2, p3)
 	return p2.startItems == p3.startItems and p2.endItems == p3.endItems
 end
 
-return function(p4) --[[ line: 36 | named "createDataPrefetchController" ]]
+return function(p4)
 	-- upvalues: dataPrefetchModule (ref), typesModule (ref), frozen_1 (ref), frozen (ref)
 	local var5 = false
 	local var6 = nil
 	local var7 = dataPrefetchModule.resolve(p4)
 	local t = {}
 	
-	local function createRequest(p5, p6) --[[ line: 42 ]]
+	local function createRequest(p5, p6)
 		-- upvalues: t (ref), var5 (write)
 		local t_1 = { range = table.freeze(p6) }
 		t[p5] = t_1
@@ -28,14 +28,14 @@ return function(p4) --[[ line: 36 | named "createDataPrefetchController" ]]
 		return table.freeze({
 			edge = p5,
 			range = t_1.range,
-			isCurrent = function() --[[ line: 50 ]]
+			isCurrent = function()
 				-- upvalues: var5 (copy), t (copy), p5 (ref), t_1 (ref)
 				return not var5 and t[p5] == t_1
 			end
 		})
 	end
 	
-	local function desiredRange(p7, p8, p9, p10) --[[ line: 56 ]]
+	local function desiredRange(p7, p8, p9, p10)
 		-- upvalues: dataPrefetchModule (copy), typesModule (copy)
 		local var13 = if p7 == dataPrefetchModule.Edge.Start then p10.startItems else p10.endItems
 		
@@ -53,7 +53,7 @@ return function(p4) --[[ line: 36 | named "createDataPrefetchController" ]]
 		return if typesModule.isIndexRangeEmpty(var14) then nil else var14
 	end
 	
-	local function reconcileEdge(p11, p12, p13) --[[ line: 78 ]]
+	local function reconcileEdge(p11, p12, p13)
 		-- upvalues: t (ref), createRequest (ref)
 		local var15 = t[p11]
 		
@@ -73,7 +73,7 @@ return function(p4) --[[ line: 36 | named "createDataPrefetchController" ]]
 	end
 	
 	return {
-		reconcile = function(p14) --[[ line: 93 ]]
+		reconcile = function(p14)
 			-- upvalues: var5 (write), var6 (write), var7 (write), frozen_1 (copy), t (ref), frozen (copy), dataPrefetchModule (copy), typesModule (copy), desiredRange (ref), reconcileEdge (ref)
 			assert(not var5, "DataPrefetchController: cannot reconcile after destroy")
 			local options = p14.options
@@ -116,7 +116,7 @@ return function(p4) --[[ line: 36 | named "createDataPrefetchController" ]]
 				end
 			end
 		end,
-		destroy = function() --[[ line: 130 ]]
+		destroy = function()
 			-- upvalues: var5 (write), t (ref)
 			if var5 then
 				return

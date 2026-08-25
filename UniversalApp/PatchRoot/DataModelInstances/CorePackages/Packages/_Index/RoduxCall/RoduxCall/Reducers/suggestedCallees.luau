@@ -5,10 +5,10 @@ local clearSuggestedCallees = require(roduxCall.Actions).ClearSuggestedCallees
 local _ = require(script.Parent.Parent.roduxCallTypes)
 local t = { suggestedCallees = {} }
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), t (ref), suggestedCalleeModel (ref), clearSuggestedCallees (ref)
 	return roduxModule.createReducer(t, {
-		[p0.NetworkingCall.GetSuggestedCallees.Succeeded.name] = function(_, p1) --[[ line: 14 ]]
+		[p0.NetworkingCall.GetSuggestedCallees.Succeeded.name] = function(_, p1)
 			-- upvalues: suggestedCalleeModel (copy)
 			local t = {}
 			
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 11 ]]
 			end
 			return { suggestedCallees = t }
 		end,
-		[clearSuggestedCallees.name] = function(_, _) --[[ line: 29 ]]
+		[clearSuggestedCallees.name] = function(_, _)
 			-- upvalues: t (copy)
 			return t
 		end

@@ -34,19 +34,19 @@ local fFlagLuaAppEnableStratusStreamingCheck = require(parent.SharedFlags).FFlag
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local videoService = game:GetService("VideoService")
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 45 ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), appGame (ref), useSelector (ref), useDispatch (ref), fFlagLuaAppEnablePlayButtonThrottle (ref), reactModule (ref), fIntLuaAppPlayButtonThrottleTimeSeconds (ref), getFFlagLuaAppEnableVirtualEventPlaceId (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), gamePlayIntent (ref), joinGamePlayButton (ref), fFlagLuaAppEnableStratusStreamingTestOnly (ref), fFlagLuaAppEnableStratusStreamingCheck (ref), videoService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var7 (ref), navigateToRoute (ref), isVRAppBuild (ref), splashScreenManager (ref), fFlagDeferInExperienceRbxmDownload (ref), dashModule (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref), reasonForNotVoteable (ref), clearUserGameVotes (ref)
 	local var9 = useRoactService(roactAnalytics)
 	local var10 = useRoactService(appEventIngestService)
 	local var11 = useRoactService(appGame)
-	local var12 = useSelector(function(p7) --[[ line: 58 ]]
+	local var12 = useSelector(function(p7)
 		-- upvalues: p0 (ref)
 		return p7.UserGameVotes[p0]
 	end)
 	local var13 = useDispatch()
 	local var14 = if fFlagLuaAppEnablePlayButtonThrottle then reactModule.useRef(0) else nil
 	
-	return reactModule.useCallback(function(p8, p9) --[[ line: 66 ]]
+	return reactModule.useCallback(function(p8, p9)
 		-- upvalues: fFlagLuaAppEnablePlayButtonThrottle (copy), var14 (ref), fIntLuaAppPlayButtonThrottleTimeSeconds (copy), getFFlagLuaAppEnableVirtualEventPlaceId (copy), p1 (ref), p2 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), gamePlayIntent (copy), var10 (ref), p3 (ref), p0 (ref), p6 (write), joinGamePlayButton (copy), var9 (ref), p4 (ref), fFlagLuaAppEnableStratusStreamingTestOnly (copy), fFlagLuaAppEnableStratusStreamingCheck (copy), videoService (copy), appPage (copy), p5 (ref), fFlagSignalsNavP3Dispatch (copy), var7 (copy), var13 (ref), navigateToRoute (copy), isVRAppBuild (copy), splashScreenManager (copy), fFlagDeferInExperienceRbxmDownload (copy), dashModule (copy), fFlagLuaAppFixLaunchGameSourceParam (copy), launchGame (copy), var11 (ref), var12 (ref), reasonForNotVoteable (copy), clearUserGameVotes (copy)
 		if fFlagLuaAppEnablePlayButtonThrottle then
 			local currentTime = tick()

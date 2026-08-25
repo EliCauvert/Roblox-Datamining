@@ -1,4 +1,4 @@
-﻿local function flatten(p0) --[[ line: 2 ]]
+﻿local function flatten(p0)
 	-- upvalues: flatten (ref)
 	local var1 = type(p0)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)

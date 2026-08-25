@@ -10,13 +10,13 @@ local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperi
 local bundleInfoModule = require(parent.Models.BundleInfo)
 
 return roduxModule.createReducer({}, {
-	[setFavoriteBundleModule.name] = function(p0, p1) --[[ line: 32 ]]
+	[setFavoriteBundleModule.name] = function(p0, p1)
 		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
 		p0[p1.id] = cryoModule.Dictionary.join(cryoModule.Dictionary.join({}, p0[p1.id] or {}), bundleInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
 		
 		return p0
 	end,
-	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p2, p3) --[[ line: 43 ]]
+	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p2, p3)
 		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
 		for i, v in p3.result.Items do
 			if v.type == Enum.MarketplaceProductType.AvatarBundle then
@@ -26,7 +26,7 @@ return roduxModule.createReducer({}, {
 		end
 		return p2
 	end else nil,
-	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p4, p5) --[[ line: 59 ]]
+	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p4, p5)
 		-- upvalues: itemTypeEnum (ref), bundleInfoModule (ref), cryoModule (ref)
 		local look = p5.avatarPreviewDetails.look
 		local t = {}
@@ -40,7 +40,7 @@ return roduxModule.createReducer({}, {
 		end
 		return cryoModule.Dictionary.join(p4, t)
 	end else nil,
-	[setBundlesModule.name] = function(p6, p7) --[[ line: 76 ]]
+	[setBundlesModule.name] = function(p6, p7)
 		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
 		local t_1
 		local t = {}

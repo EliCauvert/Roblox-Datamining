@@ -3,17 +3,17 @@ local runService = game:GetService("RunService")
 local chatSettingsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
 local _ = script.Parent
 local _ = nil
-local ok, status = pcall(function() --[[ line: 16 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRemoveMessageOnTextFilterFailures")
 end)
 local status_1 = ok and status
 local _ = false
-local ok_1, status_2 = pcall(function() --[[ line: 24 ]]
+local ok_1, status_2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 local _ = ok_1 and status_2
 
-local function _(p0) --[[ line: 32 | named "ShallowCopy" ]]
+local function _(p0)
 	local t = {}
 	
 	for i, v in pairs(p0) do
@@ -55,7 +55,7 @@ local t_3 = {
 	ChannelNameColorUpdated = "eChannelNameColorUpdated"
 }
 
-function t_1:__index(p1) --[[ line: 76 ]]
+function t_1:__index(p1)
 	-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref)
 	local var8 = rawget(t_1, p1)
 	
@@ -78,7 +78,7 @@ function t_1:__index(p1) --[[ line: 76 ]]
 	return rawget(self, p1)
 end
 
-function t_1.LazyFire(p2, p3, ...) --[[ line: 95 ]]
+function t_1.LazyFire(p2, p3, ...)
 	local var11 = rawget(p2, p3)
 	
 	if var11 then
@@ -86,7 +86,7 @@ function t_1.LazyFire(p2, p3, ...) --[[ line: 95 ]]
 	end
 end
 
-function t_1.SayMessage(p4, p5, p6, p7) --[[ line: 102 ]]
+function t_1.SayMessage(p4, p5, p6, p7)
 	if p4.ChatService:InternalDoProcessCommands(p4.Name, p5, p6) then return end
 	if not p6 then return end
 	local var12 = p4.Channels[p6:lower()]
@@ -95,7 +95,7 @@ function t_1.SayMessage(p4, p5, p6, p7) --[[ line: 102 ]]
 	local var13 = var12:InternalPostMessage(p4, p5, p7)
 	
 	if var13 then
-		pcall(function() --[[ line: 117 ]]
+		pcall(function()
 			-- upvalues: p4 (ref), var13 (ref), p6 (ref)
 			p4:LazyFire("eSaidMessage", var13, p6)
 		end)
@@ -103,7 +103,7 @@ function t_1.SayMessage(p4, p5, p6, p7) --[[ line: 102 ]]
 	return var13
 end
 
-function t_1.JoinChannel(p8, p9) --[[ line: 125 ]]
+function t_1.JoinChannel(p8, p9)
 	if p8.Channels[p9:lower()] then
 		warn("Speaker is already in channel \"" .. p9 .. "\"")
 		
@@ -116,7 +116,7 @@ function t_1.JoinChannel(p8, p9) --[[ line: 125 ]]
 	end
 	p8.Channels[p9:lower()] = var14
 	var14:InternalAddSpeaker(p8)
-	local ok, status = pcall(function() --[[ line: 138 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p8 (ref), var14 (ref)
 		p8.eChannelJoined:Fire(var14.Name, var14:GetWelcomeMessageForSpeaker(p8))
 	end)
@@ -126,7 +126,7 @@ function t_1.JoinChannel(p8, p9) --[[ line: 125 ]]
 	end
 end
 
-function t_1.LeaveChannel(p10, p11) --[[ line: 146 ]]
+function t_1.LeaveChannel(p10, p11)
 	if not p10.Channels[p11:lower()] then
 		warn("Speaker is not in channel \"" .. p11 .. "\"")
 		
@@ -135,7 +135,7 @@ function t_1.LeaveChannel(p10, p11) --[[ line: 146 ]]
 	local var15 = p10.Channels[p11:lower()]
 	p10.Channels[p11:lower()] = nil
 	var15:InternalRemoveSpeaker(p10)
-	local ok, status = pcall(function() --[[ line: 156 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p10 (ref), var15 (ref)
 		p10:LazyFire("eChannelLeft", var15.Name)
 		
@@ -149,11 +149,11 @@ function t_1.LeaveChannel(p10, p11) --[[ line: 146 ]]
 	end
 end
 
-function t_1.IsInChannel(p12, p13) --[[ line: 167 ]]
+function t_1.IsInChannel(p12, p13)
 	return p12.Channels[p13:lower()] ~= nil
 end
 
-function t_1.GetChannelList(p14) --[[ line: 171 ]]
+function t_1.GetChannelList(p14)
 	local t = {}
 	
 	for i, v in pairs(p14.Channels) do
@@ -162,7 +162,7 @@ function t_1.GetChannelList(p14) --[[ line: 171 ]]
 	return t
 end
 
-function t_1.SendMessage(p15, p16, p17, p18, p19) --[[ line: 179 ]]
+function t_1.SendMessage(p15, p16, p17, p18, p19)
 	-- upvalues: runService (ref)
 	local var17 = p15.Channels[p17:lower()]
 	
@@ -175,7 +175,7 @@ function t_1.SendMessage(p15, p16, p17, p18, p19) --[[ line: 179 ]]
 	end
 end
 
-function t_1.SendSystemMessage(p20, p21, p22, p23) --[[ line: 190 ]]
+function t_1.SendSystemMessage(p20, p21, p22, p23)
 	-- upvalues: runService (ref)
 	local var18 = p20.Channels[p22:lower()]
 	
@@ -188,11 +188,11 @@ function t_1.SendSystemMessage(p20, p21, p22, p23) --[[ line: 190 ]]
 	end
 end
 
-function t_1.GetPlayer(p24) --[[ line: 201 ]]
+function t_1.GetPlayer(p24)
 	return p24.PlayerObj
 end
 
-function t_1.GetNameForDisplay(p25) --[[ line: 205 ]]
+function t_1.GetNameForDisplay(p25)
 	-- upvalues: chatSettingsModule (ref)
 	if not chatSettingsModule.PlayerDisplayNamesEnabled then
 		return p25.Name
@@ -202,17 +202,17 @@ function t_1.GetNameForDisplay(p25) --[[ line: 205 ]]
 	return if player then player.DisplayName else p25.Name
 end
 
-function t_1.SetExtraData(value, p26, p27) --[[ line: 219 ]]
+function t_1.SetExtraData(value, p26, p27)
 	value.ExtraData[p26] = p27
 	value:LazyFire("eExtraDataUpdated", p26, p27)
 end
 
-function t_1.GetExtraData(p28, p29) --[[ line: 224 ]]
+function t_1.GetExtraData(p28, p29)
 	return p28.ExtraData[p29]
 end
 
-function t_1.SetMainChannel(value, p30) --[[ line: 228 ]]
-	local ok, status = pcall(function() --[[ line: 229 ]]
+function t_1.SetMainChannel(value, p30)
+	local ok, status = pcall(function()
 		-- upvalues: value (ref), p30 (ref)
 		value:LazyFire("eMainChannelSet", p30)
 		
@@ -226,19 +226,19 @@ function t_1.SetMainChannel(value, p30) --[[ line: 228 ]]
 	end
 end
 
-function t_1.AddMutedSpeaker(p31, p32) --[[ line: 241 ]]
+function t_1.AddMutedSpeaker(p31, p32)
 	p31.MutedSpeakers[p32:lower()] = true
 end
 
-function t_1.RemoveMutedSpeaker(p33, p34) --[[ line: 245 ]]
+function t_1.RemoveMutedSpeaker(p33, p34)
 	p33.MutedSpeakers[p34:lower()] = false
 end
 
-function t_1.IsSpeakerMuted(p35, p36) --[[ line: 249 ]]
+function t_1.IsSpeakerMuted(p35, p36)
 	return p35.MutedSpeakers[p36:lower()]
 end
 
-function t_1.InternalDestroy(p37) --[[ line: 255 ]]
+function t_1.InternalDestroy(p37)
 	for i, v in pairs(p37.Channels) do
 		v:InternalRemoveSpeaker(p37)
 	end
@@ -259,16 +259,16 @@ function t_1.InternalDestroy(p37) --[[ line: 255 ]]
 	p37.eChannelNameColorUpdated:Destroy()
 end
 
-function t_1.InternalAssignPlayerObject(value, p38) --[[ line: 278 ]]
+function t_1.InternalAssignPlayerObject(value, p38)
 	value.PlayerObj = p38
 end
 
-function t_1.InternalAssignEventFolder(value, p39) --[[ line: 282 ]]
+function t_1.InternalAssignEventFolder(value, p39)
 	value.EventFolder = p39
 end
 
-function t_1.InternalSendMessage(p40, p41, p42) --[[ line: 286 ]]
-	local ok, status = pcall(function() --[[ line: 287 ]]
+function t_1.InternalSendMessage(p40, p41, p42)
+	local ok, status = pcall(function()
 		-- upvalues: p40 (ref), p41 (ref), p42 (ref)
 		p40:LazyFire("eReceivedUnfilteredMessage", p41, p42)
 		
@@ -282,8 +282,8 @@ function t_1.InternalSendMessage(p40, p41, p42) --[[ line: 286 ]]
 	end
 end
 
-function t_1.InternalSendFilteredMessage(p43, p44, p45) --[[ line: 298 ]]
-	local ok, status = pcall(function() --[[ line: 299 ]]
+function t_1.InternalSendFilteredMessage(p43, p44, p45)
+	local ok, status = pcall(function()
 		-- upvalues: p43 (ref), p44 (ref), p45 (ref)
 		p43:LazyFire("eReceivedMessage", p44, p45)
 		p43:LazyFire("eMessageDoneFiltering", p44, p45)
@@ -298,7 +298,7 @@ function t_1.InternalSendFilteredMessage(p43, p44, p45) --[[ line: 298 ]]
 	end
 end
 
-function t_1.InternalSendFilteredMessageWithTranslatedFilterResult(p46, p47, p48, p49) --[[ line: 314 ]]
+function t_1.InternalSendFilteredMessageWithTranslatedFilterResult(p46, p47, p48, p49)
 	-- upvalues: status_1 (write)
 	local t = {}
 	
@@ -310,7 +310,7 @@ function t_1.InternalSendFilteredMessageWithTranslatedFilterResult(p46, p47, p48
 	local var22 = if player ~= nil then nil else p49:GetTranslationForLocale(player.LocaleId)
 	local var23 = ""
 	local var24 = nil
-	pcall(function() --[[ line: 324 ]]
+	pcall(function()
 		-- upvalues: t (ref), player (ref), var23 (write), t (ref), var22 (ref), var24 (write)
 		if not t.IsFilterResult then
 			var23 = t
@@ -344,7 +344,7 @@ function t_1.InternalSendFilteredMessageWithTranslatedFilterResult(p46, p47, p48
 	end
 end
 
-function t_1.InternalSendFilteredMessageWithFilterResult(p50, p51, p52) --[[ line: 360 ]]
+function t_1.InternalSendFilteredMessageWithFilterResult(p50, p51, p52)
 	-- upvalues: status_1 (write)
 	local t = {}
 	
@@ -354,7 +354,7 @@ function t_1.InternalSendFilteredMessageWithFilterResult(p50, p51, p52) --[[ lin
 	t = t.FilterResult
 	local player = p50:GetPlayer()
 	local var27 = ""
-	pcall(function() --[[ line: 367 ]]
+	pcall(function()
 		-- upvalues: t (ref), player (ref), var27 (write), t (ref)
 		if not t.IsFilterResult then
 			var27 = t
@@ -379,8 +379,8 @@ function t_1.InternalSendFilteredMessageWithFilterResult(p50, p51, p52) --[[ lin
 	end
 end
 
-function t_1.InternalSendSystemMessage(p53, p54, p55) --[[ line: 396 ]]
-	local ok, status = pcall(function() --[[ line: 397 ]]
+function t_1.InternalSendSystemMessage(p53, p54, p55)
+	local ok, status = pcall(function()
 		-- upvalues: p53 (ref), p54 (ref), p55 (ref)
 		p53:LazyFire("eReceivedSystemMessage", p54, p55)
 		
@@ -394,7 +394,7 @@ function t_1.InternalSendSystemMessage(p53, p54, p55) --[[ line: 396 ]]
 	end
 end
 
-function t_1.UpdateChannelNameColor(p56, p57, p58) --[[ line: 408 ]]
+function t_1.UpdateChannelNameColor(p56, p57, p58)
 	p56:LazyFire("eChannelNameColorUpdated", p57, p58)
 	
 	if p56.PlayerObj then
@@ -402,7 +402,7 @@ function t_1.UpdateChannelNameColor(p56, p57, p58) --[[ line: 408 ]]
 	end
 end
 
-function t.new(p59, p60) --[[ line: 418 ]]
+function t.new(p59, p60)
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.ChatService = p59

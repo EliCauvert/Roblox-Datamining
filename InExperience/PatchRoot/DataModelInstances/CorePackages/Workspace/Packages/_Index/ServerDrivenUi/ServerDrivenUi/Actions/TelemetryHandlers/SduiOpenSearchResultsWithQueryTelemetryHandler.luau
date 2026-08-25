@@ -4,7 +4,7 @@ local openSearchResultsWithQueryDeeplink = require(parent.DiscoveryAnalytics).Ev
 local _ = require(parent.SduiCoreSystem)
 local openSearchResultsWithQueryParamsModule = require(serverDrivenUi.Actions.openSearchResultsWithQueryParams)
 
-return function(p0, _, p1) --[[ line: 18 ]]
+return function(p0, _, p1)
 	-- upvalues: openSearchResultsWithQueryParamsModule (ref), openSearchResultsWithQueryDeeplink (ref)
 	local var2 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p0)
 	local var3 = openSearchResultsWithQueryParamsModule.resolveSearchType(p0)

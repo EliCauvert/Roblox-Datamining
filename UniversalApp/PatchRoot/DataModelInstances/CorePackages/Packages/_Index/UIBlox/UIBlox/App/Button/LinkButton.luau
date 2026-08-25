@@ -63,15 +63,15 @@ linkButton.defaultProps = {
 	debugGetTextSize = getTextSizeModule
 }
 
-function linkButton.init(p0) --[[ line: 109 ]]
+function linkButton.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.applyRichTextUnderline(p1) --[[ line: 114 ]]
+	function p0.applyRichTextUnderline(p1)
 		return "<u>" .. p1 .. "</u>"
 	end
 	
-	function p0.onStateChanged(p2, p3) --[[ line: 118 ]]
+	function p0.onStateChanged(p2, p3)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p3 })
 		
@@ -81,13 +81,13 @@ function linkButton.init(p0) --[[ line: 109 ]]
 	end
 end
 
-function linkButton.render(p4) --[[ line: 128 ]]
+function linkButton.render(p4)
 	return p4:renderWithSelectionCursorProvider(nil, p4.props.cursor)
 end
 
-function linkButton.renderWithSelectionCursorProvider(p5, _, p6) --[[ line: 132 ]]
+function linkButton.renderWithSelectionCursorProvider(p5, _, p6)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), cleanRichTextTagsModule (ref), roactModule (ref), focusable (ref), interactableModule (ref), genericTextLabelModule (ref), hoverButtonBackgroundModule (ref)
-	return withStyleModule(function(p7) --[[ line: 133 ]]
+	return withStyleModule(function(p7)
 		-- upvalues: p5 (ref), controlStateModule (copy), getContentStyleModule (copy), cleanRichTextTagsModule (copy), p6 (ref), roactModule (copy), focusable (copy), interactableModule (copy), genericTextLabelModule (copy), hoverButtonBackgroundModule (copy)
 		local debugControlState = p5.props.debugControlState or p5.state.controlState
 		local var16 = getContentStyleModule({
@@ -136,7 +136,7 @@ function linkButton.renderWithSelectionCursorProvider(p5, _, p6) --[[ line: 132 
 	end)
 end
 
-function LinkButtonFunctionalWrapper(p8) --[[ line: 209 ]]
+function LinkButtonFunctionalWrapper(p8)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), linkButton (ref), cryoModule (ref)
 	return roactModule.createElement(linkButton, cryoModule.Dictionary.join(p8, {
 		cursor = useCursorByTypeModule(cursorTypeModule.RoundedRectNoInset)

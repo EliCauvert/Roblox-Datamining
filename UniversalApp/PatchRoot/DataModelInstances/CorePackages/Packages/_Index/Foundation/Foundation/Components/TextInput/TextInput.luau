@@ -20,7 +20,7 @@ local t = {
 	size = inputSizeModule.Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 51 | named "TextInput" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref), viewModule (ref), iconModule (ref), iconButtonModule (ref)
 	local var14 = withDefaultsModule(p0, t)
 	local var15 = useTextInputVariantsModule(useTokensModule(), var14.size, var14.variant)
@@ -35,7 +35,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 51 | 
 		hasError = var14.hasError,
 		hint = var14.hint,
 		textBoxRef = var14.textBoxRef,
-		input = function(p2) --[[ line: 68 ]]
+		input = function(p2)
 			-- upvalues: reactModule (copy), internalTextInputModule (copy), var14 (ref), var15 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
 			local var17
 			local createElement = reactModule.createElement

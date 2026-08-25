@@ -10,7 +10,7 @@ local hasRobloxSubscriptionStorageKeyEngineFeature = game:GetEngineFeature("HasR
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2, p3, p4, p5, p6) --[[ line: 39 ]]
+function t.new(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: t (ref)
 	local t_1 = {
 		userId = p0,
@@ -26,7 +26,7 @@ function t.new(p0, p1, p2, p3, p4, p5, p6) --[[ line: 39 ]]
 	return t_1
 end
 
-function t:fromRequest() --[[ line: 62 ]]
+function t:fromRequest()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), t (ref)
 	local var8
 	if fFlagEnableBlackbirdCheck then
@@ -38,7 +38,7 @@ function t:fromRequest() --[[ line: 62 ]]
 	return t.new(self.responseBody.UserId, self.responseBody.Username, tonumber(self.responseBody.MembershipType), self.responseBody.AgeBracket == 1, self.responseBody.CountryCode, self.responseBody.DisplayName or nil, var8)
 end
 
-function t:fromUserInfoRequest() --[[ line: 77 ]]
+function t:fromUserInfoRequest()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), t (ref)
 	local var10
 	local var9 = if self.responseBody.isPremium then 4 else 0
@@ -52,12 +52,12 @@ function t:fromUserInfoRequest() --[[ line: 77 ]]
 	return t.new(self.responseBody.id, self.responseBody.name, var9, self.responseBody.ageBracket == 1, self.responseBody.countryCode, self.responseBody.displayName or nil, var10)
 end
 
-function t.fromLocalStorage() --[[ line: 94 ]]
+function t.fromLocalStorage()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), hasRobloxSubscriptionStorageKeyEngineFeature (ref), appStorageService (ref), authLocalStorageKeysModule (ref), logger (ref), t (ref)
 	local var11 = nil
 	
 	if fFlagEnableBlackbirdCheck and hasRobloxSubscriptionStorageKeyEngineFeature then
-		local ok, status = pcall(function() --[[ line: 98 ]]
+		local ok, status = pcall(function()
 			-- upvalues: appStorageService (copy), authLocalStorageKeysModule (copy)
 			return appStorageService:GetItem(authLocalStorageKeysModule.HasRobloxSubscription)
 		end)
@@ -71,7 +71,7 @@ function t.fromLocalStorage() --[[ line: 94 ]]
 	return t.new(tonumber(appStorageService:GetItem(authLocalStorageKeysModule.UserId)) or -1, appStorageService:GetItem(authLocalStorageKeysModule.Username), tonumber(appStorageService:GetItem(authLocalStorageKeysModule.Membership)) or 0, appStorageService:GetItem(authLocalStorageKeysModule.IsUnder13) ~= "true", appStorageService:GetItem(authLocalStorageKeysModule.CountryCode) or nil, appStorageService:GetItem(authLocalStorageKeysModule.DisplayName) or nil, var11)
 end
 
-function t.clearLocalStorage() --[[ line: 118 ]]
+function t.clearLocalStorage()
 	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref), fFlagEnableBlackbirdCheck (ref), hasRobloxSubscriptionStorageKeyEngineFeature (ref), logger (ref)
 	appStorageService:SetItem(authLocalStorageKeysModule.UserId, "-1")
 	appStorageService:SetItem(authLocalStorageKeysModule.Username, "")
@@ -81,7 +81,7 @@ function t.clearLocalStorage() --[[ line: 118 ]]
 	appStorageService:SetItem(authLocalStorageKeysModule.CountryCode, "")
 	
 	if fFlagEnableBlackbirdCheck and hasRobloxSubscriptionStorageKeyEngineFeature then
-		local ok, status = pcall(function() --[[ line: 126 ]]
+		local ok, status = pcall(function()
 			-- upvalues: appStorageService (copy), authLocalStorageKeysModule (copy)
 			appStorageService:SetItem(authLocalStorageKeysModule.HasRobloxSubscription, "")
 		end)
@@ -93,7 +93,7 @@ function t.clearLocalStorage() --[[ line: 118 ]]
 	appStorageService:Flush()
 end
 
-function t:setToLocalPlayer() --[[ line: 136 ]]
+function t:setToLocalPlayer()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), playersService (ref)
 	if fFlagEnableBlackbirdCheck and self.hasRobloxSubscription ~= nil then
 		playersService:SetLocalPlayerInfo(self.userId, self.username, self.displayName or "", self.membershipType, self.isUnder13, self.hasRobloxSubscription)
@@ -103,7 +103,7 @@ function t:setToLocalPlayer() --[[ line: 136 ]]
 	playersService:SetLocalPlayerInfo(self.userId, self.username, self.displayName or "", self.membershipType, self.isUnder13)
 end
 
-function t:setToLocalStorage() --[[ line: 157 ]]
+function t:setToLocalStorage()
 	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref), fFlagEnableBlackbirdCheck (ref), hasRobloxSubscriptionStorageKeyEngineFeature (ref), logger (ref)
 	appStorageService:SetItem(authLocalStorageKeysModule.UserId, tostring(self.userId))
 	appStorageService:SetItem(authLocalStorageKeysModule.Username, self.username)
@@ -113,7 +113,7 @@ function t:setToLocalStorage() --[[ line: 157 ]]
 	appStorageService:SetItem(authLocalStorageKeysModule.CountryCode, tostring(self.countryCode))
 	
 	if fFlagEnableBlackbirdCheck and hasRobloxSubscriptionStorageKeyEngineFeature then
-		local ok, status = pcall(function() --[[ line: 165 ]]
+		local ok, status = pcall(function()
 			-- upvalues: appStorageService (copy), authLocalStorageKeysModule (copy), self (ref)
 			appStorageService:SetItem(authLocalStorageKeysModule.HasRobloxSubscription, tostring(self.hasRobloxSubscription == true))
 		end)
@@ -125,11 +125,11 @@ function t:setToLocalStorage() --[[ line: 157 ]]
 	appStorageService:Flush()
 end
 
-function t:isSame(p7) --[[ line: 178 ]]
+function t:isSame(p7)
 	return self.userId == p7.userId
 end
 
-function t:isEqual(p8) --[[ line: 182 ]]
+function t:isEqual(p8)
 	-- upvalues: fFlagEnableBlackbirdCheck (ref)
 	local var12 = false
 	
@@ -162,7 +162,7 @@ function t:isEqual(p8) --[[ line: 182 ]]
 	return var12
 end
 
-function t:toString() --[[ line: 192 ]]
+function t:toString()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref)
 	local formattedText = string.format("userId:%s, username:%s, membershipType:%s, isUnder13:%s, countryCode:%s", tostring(self.userId), self.username, tostring(self.membershipType), tostring(self.isUnder13), tostring(self.countryCode))
 	
@@ -172,7 +172,7 @@ function t:toString() --[[ line: 192 ]]
 	return formattedText
 end
 
-function t:toJsonData() --[[ line: 207 ]]
+function t:toJsonData()
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), httpService (ref)
 	local t = {
 		userId = self.userId,

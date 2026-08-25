@@ -9,7 +9,7 @@ local useReactionEffects = require(script.Parent.ReactionEffectsContext).useReac
 local EXPLOSION_LAYER_ZINDEX = require(script.Parent.reactionsConstants).EXPLOSION_LAYER_ZINDEX
 local var4 = signalsModule.createSignal({})
 
-return reactModule.memo(function() --[[ line: 32 | named "ReactionExplosionLayer" ]]
+return reactModule.memo(function()
 	-- upvalues: useReactionEffects (ref), var4 (ref), useSignalState (ref), reactModule (ref), reactionExplosionModule (ref), view (ref), EXPLOSION_LAYER_ZINDEX (ref)
 	local var5 = useReactionEffects()
 	local t = {}
@@ -18,7 +18,7 @@ return reactModule.memo(function() --[[ line: 32 | named "ReactionExplosionLayer
 		t[`explosion_{v.id}`] = reactModule.createElement(reactionExplosionModule, {
 			reactionType = v.reactionType,
 			position = UDim2.fromOffset(v.originLocal.X, v.originLocal.Y),
-			onComplete = function() --[[ line: 42 ]]
+			onComplete = function()
 				-- upvalues: var5 (ref), v (ref)
 				if var5 ~= nil then
 					var5.onExplosionComplete(v.id)

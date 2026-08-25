@@ -5,7 +5,7 @@
 }
 
 return {
-	new = function(p0) --[[ line: 44 ]]
+	new = function(p0)
 		-- upvalues: t (ref)
 		local cloned = table.clone(t)
 		

@@ -3,7 +3,7 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local url = require(parent.Http).Url
 
 return {
-	buildBadgeRemoveUrl = function(p0) --[[ line: 13 ]]
+	buildBadgeRemoveUrl = function(p0)
 		-- upvalues: urlBuilder (ref), url (ref)
 		return urlBuilder.new({ path = "v1/user/badges/{assetId}", base = url.BADGES_URL })({ assetId = p0 })
 	end,

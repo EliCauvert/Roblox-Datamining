@@ -10,7 +10,7 @@ local playerNameModule = require(script.Parent.PlayerName)
 local _ = require(script.Parent.StyleTypes)
 local constantsModule = require(script.Parent.Constants)
 
-local var5 = function() --[[ line: 16 ]] end
+local var5 = function() end
 
 local t = {
 	tileSize = constantsModule.TILE_SIZE,
@@ -18,17 +18,17 @@ local t = {
 	contextualTopPadding = constantsModule.CONTEXTUAL_TOP_PADDING
 }
 
-return function(p0) --[[ line: 49 ]]
+return function(p0)
 	-- upvalues: llama (ref), t (ref), roact (ref), playerTile (ref), getUserAvatarImageModule (ref), playerNameModule (ref), interactable (ref), var5 (ref)
 	local var7 = llama.Dictionary.join(t, p0)
 	local tileSize = var7.tileSize
 	
-	local _ = function() --[[ line: 53 ]]
+	local _ = function()
 		-- upvalues: var7 (ref)
 		return if var7.renderButtons then var7.renderButtons() else nil
 	end
 	
-	local _ = function() --[[ line: 70 ]]
+	local _ = function()
 		-- upvalues: var7 (ref)
 		return if var7.renderContextualInfo then var7.renderContextualInfo() else nil
 	end
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 49 ]]
 			BackgroundTransparency = 1,
 			Size = UDim2.fromOffset(tileSize, tileSize)
 		}, {
-			PlayerTile = (function() --[[ line: 59 ]]
+			PlayerTile = (function()
 				-- upvalues: var7 (ref), roact (copy), playerTile (copy), getUserAvatarImageModule (copy)
 				return if var7.renderPlayerTile then var7.renderPlayerTile() else roact.createElement(playerTile, {
 					tileSize = UDim2.fromOffset(var7.tileSize, var7.tileSize),
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 49 ]]
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				PlayerName = (function() --[[ line: 76 ]]
+				PlayerName = (function()
 					-- upvalues: var7 (ref), roact (copy), playerNameModule (copy)
 					return if var7.renderPlayerName then var7.renderPlayerName() else var7.userName and roact.createElement(playerNameModule, { name = var7.userName, width = var7.tileSize }) or nil
 				end)()

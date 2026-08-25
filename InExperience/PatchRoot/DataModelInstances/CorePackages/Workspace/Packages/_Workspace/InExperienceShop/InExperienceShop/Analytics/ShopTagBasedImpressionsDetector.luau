@@ -4,15 +4,15 @@ local reactModule = require(parent.React)
 local unifiedEventLogConstants = require(parent.AvatarExperienceAnalytics).UnifiedEventLogConstants
 local shopScreenSizeImpressionsDetectorModule = require(script.Parent.ShopScreenSizeImpressionsDetector)
 
-return function(p0) --[[ line: 21 | named "ShopTagBasedImpressionsDetector" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstants (ref), shopScreenSizeImpressionsDetectorModule (ref)
 	local var3 = reactModule.useRef({})
 	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useCallback(function(p1) --[[ line: 25 ]]
+	local var5 = reactModule.useCallback(function(p1)
 		-- upvalues: var3 (ref)
 		return not var3.current[p1:GetFullName()]
 	end, {})
-	local var6 = reactModule.useCallback(function(p2) --[[ line: 29 ]]
+	local var6 = reactModule.useCallback(function(p2)
 		-- upvalues: var3 (ref), var4 (ref), p0 (ref)
 		local t = {}
 		
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 21 | named "ShopTagBasedImpressionsDetector" ]]
 				t[fullName] = v
 				
 				if not var4.current[fullName] then
-					var4.current[fullName] = v.AncestryChanged:Connect(function() --[[ line: 39 ]]
+					var4.current[fullName] = v.AncestryChanged:Connect(function()
 						-- upvalues: v (ref), var3 (copy), fullName (ref), var4 (copy)
 						if not v.Parent then
 							var3.current[fullName] = nil
@@ -46,9 +46,9 @@ return function(p0) --[[ line: 21 | named "ShopTagBasedImpressionsDetector" ]]
 			end
 		end
 	end, { p0.extensions })
-	reactModule.useEffect(function() --[[ line: 63 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref)
-		return function() --[[ line: 64 ]]
+		return function()
 			-- upvalues: var4 (copy)
 			for i, v in var4.current do
 				if v then
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 21 | named "ShopTagBasedImpressionsDetector" ]]
 		onRequestImpressionsSignal = p0.requestImpressionsSignal,
 		filterImpressionFunc = var5,
 		onImpressionsDetected = var6,
-		collectObjectsFunc = reactModule.useCallback(function() --[[ line: 74 ]]
+		collectObjectsFunc = reactModule.useCallback(function()
 			-- upvalues: collectionService (copy), unifiedEventLogConstants (copy)
 			return collectionService:GetTagged(unifiedEventLogConstants.TAG_NAME)
 		end, {})

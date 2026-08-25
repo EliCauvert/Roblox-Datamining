@@ -5,7 +5,7 @@ local sduiSurfaceLoadTimeTracker = require(parent.SduiSharedUtilities).SduiSurfa
 local fetchChartsPageModule = require(charts.ChartsPage.fetchChartsPage)
 local chartsConstantsModule = require(charts.ChartsPage.ChartsConstants)
 
-return function(p0) --[[ line: 10 | named "navigateToChartsPage" ]]
+return function(p0)
 	-- upvalues: sduiSurfaceLoadTimeTracker (ref), chartsConstantsModule (ref), fetchChartsPageModule (ref), appPage (ref)
 	local var3 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(chartsConstantsModule.ConfigKey, {
 		eventName = chartsConstantsModule.SurfaceLoadTimeEventName,

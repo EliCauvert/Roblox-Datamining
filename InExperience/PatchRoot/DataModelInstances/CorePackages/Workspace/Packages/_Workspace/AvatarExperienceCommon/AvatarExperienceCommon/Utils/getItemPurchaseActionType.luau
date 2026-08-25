@@ -5,23 +5,23 @@ local salesLocationTypeModule = require(avatarExperienceCommon.Enums.SalesLocati
 local itemRestrictionsModule = require(avatarExperienceCommon.Enums.ItemRestrictions)
 local fFlagAXDurablesForMIS = require(parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
 
-local function _(p0) --[[ line: 30 | named "getExperienceCount" ]]
+local function _(p0)
 	return #(if p0 then p0.experiences or {} else {})
 end
 
-local _ = function(p1) --[[ line: 35 | named "getAvailableInExperienceOnly" ]]
+local _ = function(p1)
 	-- upvalues: salesLocationTypeModule (ref)
 	return p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly
 end
 
-local _ = function(p2) --[[ line: 39 | named "getHasLimitedAmount" ]]
+local _ = function(p2)
 	-- upvalues: itemRestrictionsModule (ref)
 	local itemRestrictions = p2.itemRestrictions
 	
 	return itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
 end
 
-local _ = function(p3, p4, p5) --[[ line: 47 | named "getUserHasReachedQuantityLimit" ]]
+local _ = function(p3, p4, p5)
 	-- upvalues: itemRestrictionsModule (ref)
 	local var4
 	local itemRestrictions = p3.itemRestrictions
@@ -38,7 +38,7 @@ local _ = function(p3, p4, p5) --[[ line: 47 | named "getUserHasReachedQuantityL
 	var4 = false
 end
 
-local _ = function(p6) --[[ line: 65 | named "getOriginalStockAvailable" ]]
+local _ = function(p6)
 	-- upvalues: itemRestrictionsModule (ref)
 	local itemRestrictions = p6.itemRestrictions
 	local limited = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
@@ -46,7 +46,7 @@ local _ = function(p6) --[[ line: 65 | named "getOriginalStockAvailable" ]]
 	return limited and (p6.numberRobloxHasAvailable and p6.numberRobloxHasAvailable > 0) or not limited
 end
 
-local _ = function(p7, p8) --[[ line: 73 | named "getButtonTypeIsPurchaseFromResale" ]]
+local _ = function(p7, p8)
 	-- upvalues: salesLocationTypeModule (ref), itemRestrictionsModule (ref)
 	local var6
 	if not p8 or not p7.hasResellers then
@@ -64,12 +64,12 @@ local _ = function(p7, p8) --[[ line: 73 | named "getButtonTypeIsPurchaseFromRes
 	return var6 or (if limited and (p7.numberRobloxHasAvailable and p7.numberRobloxHasAvailable > 0) or not limited then if p7.isOffSale ~= true then var7 else true else not (limited and (p7.numberRobloxHasAvailable and p7.numberRobloxHasAvailable > 0) or not limited))
 end
 
-local _ = function(p9) --[[ line: 87 | named "getButtonTypeIsFree" ]]
+local _ = function(p9)
 	-- upvalues: salesLocationTypeModule (ref)
 	return if p9.isOffSale then false else not (p9.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly) and p9.priceInRobux == 0
 end
 
-local _ = function(p10, p11) --[[ line: 95 | named "getButtonTypeIsExperienceLink" ]]
+local _ = function(p10, p11)
 	-- upvalues: salesLocationTypeModule (ref), itemRestrictionsModule (ref)
 	if p10.isOffSale then
 		return false
@@ -81,7 +81,7 @@ local _ = function(p10, p11) --[[ line: 95 | named "getButtonTypeIsExperienceLin
 	return var9 and (#(if p11 then p11.experiences or {} else {}) > 0 and (limited and (p10.numberRobloxHasAvailable and p10.numberRobloxHasAvailable > 0) or not limited))
 end
 
-local _ = function(p12, p13) --[[ line: 105 | named "getButtonTypeIsSoldOut" ]]
+local _ = function(p12, p13)
 	-- upvalues: itemRestrictionsModule (ref)
 	local itemRestrictions = p12.itemRestrictions
 	local limited = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
@@ -89,7 +89,7 @@ local _ = function(p12, p13) --[[ line: 105 | named "getButtonTypeIsSoldOut" ]]
 	return not (limited and (p12.numberRobloxHasAvailable and p12.numberRobloxHasAvailable > 0) or not limited) and not (p13 and p12.hasResellers)
 end
 
-local _ = function(p14, p15, p16, p17) --[[ line: 111 | named "getButtonTypeIsCustomizeLink" ]]
+local _ = function(p14, p15, p16, p17)
 	-- upvalues: fFlagAXDurablesForMIS (ref), itemRestrictionsModule (ref)
 	local var13
 	local var12 = if fFlagAXDurablesForMIS then p14.isOwned and not p14.expirationTime else p14.isOwned
@@ -115,16 +115,16 @@ local _ = function(p14, p15, p16, p17) --[[ line: 111 | named "getButtonTypeIsCu
 	return var12 and ((not (limited and (p14.numberRobloxHasAvailable and p14.numberRobloxHasAvailable > 0) or not limited) or (var13 or p14.isOffSale)) and not hasResellers)
 end
 
-local _ = function(p18) --[[ line: 127 | named "getButtonTypeIsPurchasableFromRoblox" ]]
+local _ = function(p18)
 	-- upvalues: salesLocationTypeModule (ref)
 	return if p18.isOffSale then false else not (p18.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly)
 end
 
-local _ = function(_, p19, p20) --[[ line: 134 | named "getButtonTypeIsQuantityLimitExceeded" ]]
+local _ = function(_, p19, p20)
 	return if p19 == nil or p19.quantityLimitPerUser == nil then false else p19.quantityLimitPerUser > 0 and p19.quantityLimitPerUser <= p20
 end
 
-return function(p21, p22, p23, p24) --[[ line: 145 | named "getItemPurchaseActionType" ]]
+return function(p21, p22, p23, p24)
 	-- upvalues: itemPurchaseActionTypeEnumModule (ref), fFlagAXDurablesForMIS (ref), itemRestrictionsModule (ref), salesLocationTypeModule (ref)
 	if not p21 then
 		return itemPurchaseActionTypeEnumModule.Disabled

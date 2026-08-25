@@ -2,7 +2,7 @@
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 
-return reactModule.memo(function(value) --[[ line: 13 | named "PresetCategoryTab" ]]
+return reactModule.memo(function(value)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.Chip, {
 		LayoutOrder = value.layoutOrder or 0,

@@ -6,7 +6,7 @@ local useLocalization = dependenciesModule.Hooks.useLocalization
 local tenFootUiGridCarouselHeader = require(parent.TenFootUiSharedComponents).TenFootUiGridCarouselHeader
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 16 | named "FriendsListHeader" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), tenFootUiGridCarouselHeader (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

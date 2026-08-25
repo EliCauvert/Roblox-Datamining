@@ -22,7 +22,7 @@ local list_1 = {
 	"trustedFriendsChip"
 }
 
-function ChipFilterGroup(p0) --[[ line: 34 ]]
+function ChipFilterGroup(p0)
 	-- upvalues: reactModule (ref), friendsLandingContextModule (ref), useLocalization (ref), list (ref), list_1 (ref), chip (ref), t (ref), dependencyArray (ref)
 	local filter = reactModule.useContext(friendsLandingContextModule.Context).filter
 	local var7 = useLocalization({
@@ -30,7 +30,7 @@ function ChipFilterGroup(p0) --[[ line: 34 ]]
 		online = "Common.Presence.Label.Online",
 		trusted = "Feature.Friends.TrustedConnection.Label.Trusted"
 	})
-	local var8 = reactModule.useMemo(function() --[[ line: 43 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: list (copy), list_1 (copy), reactModule (copy), chip (copy), var7 (ref), t (copy), p0 (ref), filter (ref)
 		local t_1 = {}
 		
@@ -39,7 +39,7 @@ function ChipFilterGroup(p0) --[[ line: 34 ]]
 				id = v,
 				text = var7[t[v]],
 				LayoutOrder = i,
-				onActivated = function() --[[ line: 50 ]]
+				onActivated = function()
 					-- upvalues: p0 (copy), v (ref)
 					p0.onActivated(v)
 				end,

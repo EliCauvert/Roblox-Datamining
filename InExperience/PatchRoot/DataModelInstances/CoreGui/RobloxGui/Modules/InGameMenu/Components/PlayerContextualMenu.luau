@@ -20,19 +20,19 @@ playerContextualMenu.validateProps = t.strictInterface({
 	canCaptureFocus = t.boolean
 })
 
-function playerContextualMenu.init(p0) --[[ line: 36 ]]
+function playerContextualMenu.init(p0)
 	-- upvalues: roact (ref)
 	p0.firstOptionRef = roact.createRef()
 	p0.containerRef = roact.createRef()
 end
 
-function playerContextualMenu.renderContextualMenuFocusHandler(p1, p2, p3) --[[ line: 41 ]]
+function playerContextualMenu.renderContextualMenuFocusHandler(p1, p2, p3)
 	-- upvalues: roact (ref), focusHandlerModule (ref), contextActionService (ref), guiService (ref), getFFlagIGMGamepadSelectionHistoryModule (ref)
 	return roact.createElement(focusHandlerModule, {
 		isFocused = p1.props.canCaptureFocus and p2,
-		didFocus = function(p4) --[[ line: 47 ]]
+		didFocus = function(p4)
 			-- upvalues: contextActionService (copy), p1 (ref), guiService (copy), getFFlagIGMGamepadSelectionHistoryModule (copy)
-			contextActionService:BindCoreAction("player_contextual_menu_close_action", function(_, p5) --[[ line: 48 ]]
+			contextActionService:BindCoreAction("player_contextual_menu_close_action", function(_, p5)
 				-- upvalues: p1 (copy)
 				if p5 == Enum.UserInputState.End and p1.props.onClose then
 					p1.props.onClose()
@@ -51,14 +51,14 @@ function playerContextualMenu.renderContextualMenuFocusHandler(p1, p2, p3) --[[ 
 			end
 			guiService.SelectedCoreObject = p1.firstOptionRef:getValue()
 		end,
-		didBlur = function() --[[ line: 68 ]]
+		didBlur = function()
 			-- upvalues: contextActionService (copy)
 			contextActionService:UnbindCoreAction("player_contextual_menu_close_action")
 		end
 	}, p3)
 end
 
-function playerContextualMenu.render(p6) --[[ line: 74 ]]
+function playerContextualMenu.render(p6)
 	-- upvalues: roact (ref), coreGuiService (ref), rootedConnectionModule (ref), baseMenu (ref)
 	return roact.createElement(roact.Portal, { target = coreGuiService }, {
 		InGameMenuContextGui = roact.createElement("ScreenGui", {
@@ -66,7 +66,7 @@ function playerContextualMenu.render(p6) --[[ line: 74 ]]
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
 			RootedConnection = roact.createElement(rootedConnectionModule, {
-				render = function(p7) --[[ line: 84 ]]
+				render = function(p7)
 					-- upvalues: p6 (ref), roact (copy), baseMenu (copy)
 					return p6:renderContextualMenuFocusHandler(p7, {
 						MoreActionsMenu = roact.createElement("Frame", {

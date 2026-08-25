@@ -1,29 +1,29 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 
-local function _(p0) --[[ line: 22 | named "isPointerInput" ]]
+local function _(p0)
 	return if p0.UserInputType ~= Enum.UserInputType.MouseButton1 then p0.UserInputType == Enum.UserInputType.Touch else true
 end
 
-local _ = function(p1) --[[ line: 26 | named "isGamepadActivation" ]]
+local _ = function(p1)
 	return p1.KeyCode == Enum.KeyCode.ButtonA
 end
 
-local _ = function(p2) --[[ line: 33 | named "isGestureInput" ]]
+local _ = function(p2)
 	-- upvalues: userInputService (ref)
 	return if if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true then true else userInputService.GamepadEnabled and p2.KeyCode == Enum.KeyCode.ButtonA
 end
 
-return function(p3) --[[ line: 53 | named "useLongPress" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), userInputService (ref)
 	local onLongPress = p3.onLongPress
 	local onTap = p3.onTap
 	local thresholdSeconds = p3.thresholdSeconds or 0.5
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref)
-		return function() --[[ line: 68 ]]
+		return function()
 			-- upvalues: var3 (copy)
 			local current = var3.current
 			
@@ -35,7 +35,7 @@ return function(p3) --[[ line: 53 | named "useLongPress" ]]
 	end, {})
 	
 	return if onLongPress == nil then nil else {
-		[reactModule.Event.Activated] = reactModule.useCallback(function() --[[ line: 77 ]]
+		[reactModule.Event.Activated] = reactModule.useCallback(function()
 			-- upvalues: var4 (ref), onTap (ref)
 			if var4.current then
 				var4.current = false
@@ -45,7 +45,7 @@ return function(p3) --[[ line: 53 | named "useLongPress" ]]
 				onTap()
 			end
 		end, { onTap }),
-		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p4) --[[ line: 87 ]]
+		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p4)
 			-- upvalues: onLongPress (ref), userInputService (copy), var3 (ref), var4 (ref), thresholdSeconds (ref)
 			if onLongPress ~= nil then
 				local var5
@@ -62,7 +62,7 @@ return function(p3) --[[ line: 53 | named "useLongPress" ]]
 					var3.current = nil
 				end
 				var4.current = false
-				var3.current = task.delay(thresholdSeconds, function() --[[ line: 100 ]]
+				var3.current = task.delay(thresholdSeconds, function()
 					-- upvalues: var3 (copy), var4 (copy), onLongPress (copy)
 					var3.current = nil
 					var4.current = true
@@ -75,7 +75,7 @@ return function(p3) --[[ line: 53 | named "useLongPress" ]]
 				return
 			end
 		end, { onLongPress, thresholdSeconds }),
-		[reactModule.Event.InputEnded] = reactModule.useCallback(function(_, p5) --[[ line: 109 ]]
+		[reactModule.Event.InputEnded] = reactModule.useCallback(function(_, p5)
 			-- upvalues: onLongPress (ref), userInputService (copy), var3 (ref)
 			if onLongPress ~= nil then
 				local var6

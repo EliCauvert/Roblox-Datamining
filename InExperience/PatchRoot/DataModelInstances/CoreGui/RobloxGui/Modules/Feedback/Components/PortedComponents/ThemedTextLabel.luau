@@ -25,12 +25,12 @@ local var3 = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-return function(p0) --[[ line: 35 | named "ThemedTextLabel" ]]
+return function(p0)
 	-- upvalues: globalConfigModule (ref), var3 (ref), withStyle (ref), cryo (ref), roact (ref)
 	if globalConfigModule.propValidation then
 		assert(var3(p0))
 	end
-	return withStyle(function(p1) --[[ line: 39 ]]
+	return withStyle(function(p1)
 		-- upvalues: p0 (ref), cryo (copy), roact (copy)
 		local var4 = p1.Theme[p0.themeKey or "TextDefault"]
 		local var5 = p1.Font[p0.fontKey or "Body"]

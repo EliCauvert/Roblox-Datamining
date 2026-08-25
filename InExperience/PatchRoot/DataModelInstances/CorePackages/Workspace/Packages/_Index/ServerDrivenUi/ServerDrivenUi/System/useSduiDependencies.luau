@@ -15,7 +15,7 @@ local roactAnalytics = roactServiceTagsModule.RoactAnalytics
 local roactNetworking = roactServiceTagsModule.RoactNetworking
 local sduiLogger = require(parent.SduiCoreSystem).SduiLogger
 
-return function(p0) --[[ line: 27 | named "useSduiDependencies" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useRoactService (ref), roactAnalytics (ref), roactAnalyticsCommonGameEvents (ref), appEventIngestService (ref), appSessionService (ref), reactModule (ref), roactNetworking (ref), localizationRoactContext (ref), useCursor (ref), foundationModule (ref), linkingProtocol (ref), sduiLogger (ref)
 	local var3 = useDispatch()
 	local var4 = useNavigation()
@@ -25,19 +25,19 @@ return function(p0) --[[ line: 27 | named "useSduiDependencies" ]]
 	local var8 = useRoactService(appSessionService)
 	local var9 = reactModule.useRef(var4)
 	var9.current = var4
-	local var10 = reactModule.useCallback(function() --[[ line: 38 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref)
 		return var9.current
 	end, { var9 })
 	local var11 = useRoactService(roactNetworking)
 	local var12 = reactModule.useContext(localizationRoactContext)
 	local var13 = useCursor(foundationModule.Enums.CursorType.RoundedRect)
-	local var14 = reactModule.useMemo(function() --[[ line: 45 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: var13 (ref)
 		return { tileCursor = var13 }
 	end, { var13 })
 	
-	return reactModule.useMemo(function() --[[ line: 52 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var3 (ref), var10 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref), linkingProtocol (copy), sduiLogger (copy), var14 (ref), p0 (ref), var12 (ref), var11 (ref)
 		return {
 			dispatch = var3,

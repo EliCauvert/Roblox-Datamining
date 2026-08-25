@@ -7,9 +7,9 @@ local _ = require(parent.Types)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureServiceModule (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p1) --[[ line: 16 ]]
+	return function(p1)
 		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureServiceModule (copy), p0 (ref), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 			captureServiceModule:SaveCapturesToExternalStorageAsync({ p0 })

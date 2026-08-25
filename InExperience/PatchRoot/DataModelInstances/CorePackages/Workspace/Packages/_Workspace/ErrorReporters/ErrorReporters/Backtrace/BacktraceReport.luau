@@ -51,9 +51,9 @@ local var8 = tModule.strictInterface({
 	debug_file_exists = tModule.optional(tModule.boolean)
 })
 local var9 = tModule.optional(tModule.map(tModule.string, tModule.some(tModule.string, tModule.number, tModule.boolean)))
-local var10 = tModule.optional(tModule.map(tModule.string, function(p0) --[[ line: 76 ]]
+local var10 = tModule.optional(tModule.map(tModule.string, function(p0)
 	-- upvalues: tModule (ref)
-	local function checkTypeRecursive(p1) --[[ line: 77 ]]
+	local function checkTypeRecursive(p1)
 		-- upvalues: checkTypeRecursive (ref), tModule (copy)
 		if type(p1) ~= "table" then
 			return tModule.some(tModule.string, tModule.number, tModule.boolean)(p1)
@@ -89,7 +89,7 @@ local var11 = tModule.intersection(tModule.strictInterface({
 	sourceCode = tModule.optional(tModule.map(tModule.string, var6)),
 	memory = tModule.optional(tModule.array(var7)),
 	modules = tModule.optional(tModule.array(var8))
-}), function(p2) --[[ line: 121 ]]
+}), function(p2)
 	local var16 = false
 	
 	for i, v in pairs(p2.threads) do
@@ -113,7 +113,7 @@ end)
 local t = { IAttributes = var9, IAnnotations = var10 }
 t.__index = t
 
-local _ = function(p3) --[[ line: 154 ]]
+local _ = function(p3)
 	-- upvalues: cryoModule (ref)
 	if p3 and type(p3) == "table" then
 		local var17 = cryoModule.Dictionary.keys(p3)
@@ -126,12 +126,12 @@ local _ = function(p3) --[[ line: 154 ]]
 	end
 end
 
-function t.validate(p4) --[[ line: 167 ]]
+function t.validate(p4)
 	-- upvalues: var11 (ref)
 	return var11(p4)
 end
 
-function t.new() --[[ line: 172 ]]
+function t.new()
 	-- upvalues: httpService (ref), t (ref)
 	local t_1 = {
 		lang = "lua",
@@ -148,7 +148,7 @@ function t.new() --[[ line: 172 ]]
 	return t_1
 end
 
-function t:addAttributes(p5) --[[ line: 189 ]]
+function t:addAttributes(p5)
 	-- upvalues: cryoModule (ref)
 	if type(p5) == "table" then
 		self.attributes = cryoModule.Dictionary.join(self.attributes or {}, p5)
@@ -158,7 +158,7 @@ function t:addAttributes(p5) --[[ line: 189 ]]
 	warn("Cannot add attributes of type: ", type(p5))
 end
 
-function t:addAnnotations(p6) --[[ line: 202 ]]
+function t:addAnnotations(p6)
 	-- upvalues: cryoModule (ref)
 	if type(p6) == "table" then
 		self.annotations = cryoModule.Dictionary.join(self.annotations or {}, p6)
@@ -168,16 +168,16 @@ function t:addAnnotations(p6) --[[ line: 202 ]]
 	warn("Cannot add annotations of type: ", type(p6))
 end
 
-function t:addStackToThread(p7, p8) --[[ line: 215 ]]
+function t:addStackToThread(p7, p8)
 	-- upvalues: cryoModule (ref)
 	self.threads = cryoModule.Dictionary.join(self.threads, { [p8] = { name = p8, stack = p7 } })
 end
 
-function t:addStackToMainThread(p9) --[[ line: 228 ]]
+function t:addStackToMainThread(p9)
 	self:addStackToThread(p9, self.mainThread)
 end
 
-function t.fromMessageAndStack(p10, p11) --[[ line: 232 ]]
+function t.fromMessageAndStack(p10, p11)
 	-- upvalues: t (ref), processErrorStackModule (ref), cryoModule (ref)
 	local var26
 	local var20 = t.new()
@@ -202,7 +202,7 @@ function t.fromMessageAndStack(p10, p11) --[[ line: 232 ]]
 	return var20
 end
 
-function t:fromDetails() --[[ line: 250 ]]
+function t:fromDetails()
 	-- upvalues: t (ref), processErrorStackModule (ref), cryoModule (ref)
 	local var27 = t.new()
 	var27:addAttributes({ ["error.message"] = self.message })

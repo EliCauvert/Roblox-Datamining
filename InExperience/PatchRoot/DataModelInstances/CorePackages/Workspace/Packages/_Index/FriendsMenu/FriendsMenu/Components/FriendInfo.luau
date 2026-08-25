@@ -23,12 +23,12 @@ local t = {
 }
 local studiologoSmall = images["icons/logo/studiologo_small"]
 
-local _ = function(p0, p1) --[[ line: 36 ]]
+local _ = function(p0, p1)
 	-- upvalues: userModel (ref)
 	return if p0.presence == userModel.PresenceType.IN_GAME then p0.lastLocation elseif p0.presence == userModel.PresenceType.ONLINE then p1.online elseif p0.presence == userModel.PresenceType.IN_STUDIO then p1.inStudio else "@" .. p0.name
 end
 
-return function(p2) --[[ line: 57 ]]
+return function(p2)
 	-- upvalues: useStyle (ref), getLocalizedStrings (ref), t (ref), userModel (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), skeleton (ref), radius (ref), foundationModule (ref), imageSetLabel (ref), studiologoSmall (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
 	local var5 = useStyle()
 	local theme = var5.Theme

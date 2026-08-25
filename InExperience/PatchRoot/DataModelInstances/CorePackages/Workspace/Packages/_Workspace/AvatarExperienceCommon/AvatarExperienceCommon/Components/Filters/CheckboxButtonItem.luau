@@ -10,10 +10,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local focusable = require(parent.RoactGamepad).Focusable
 local expandingFrameModule = require(script.Parent.ExpandingFrame)
 
-local function CheckboxButtonItem(p0) --[[ line: 62 ]]
+local function CheckboxButtonItem(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), focusable (ref), checkbox (ref), inputSize (ref), expandingFrameModule (ref)
 	local var5 = useTokens()
-	local var6 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.onActivated then
 			p0.onActivated(p0.id)
@@ -22,7 +22,7 @@ local function CheckboxButtonItem(p0) --[[ line: 62 ]]
 	local itemHeight = p0.itemHeight or var5.Size.Size_900
 	local var8 = reactModule.useRef(nil)
 	local var9, var10 = reactModule.useBinding(itemHeight)
-	local var11 = reactModule.useCallback(function(p1) --[[ line: 76 ]]
+	local var11 = reactModule.useCallback(function(p1)
 		-- upvalues: itemHeight (ref), p0 (ref), var5 (ref), var10 (ref)
 		local var12 = itemHeight
 		
@@ -38,7 +38,7 @@ local function CheckboxButtonItem(p0) --[[ line: 62 ]]
 			p0.onHeightChanged(var12)
 		end
 	end, { itemHeight, p0.hideDivider, var10, p0.onHeightChanged })
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var8 (ref)
 		var11(var8.current)
 	end, {})
@@ -46,7 +46,7 @@ local function CheckboxButtonItem(p0) --[[ line: 62 ]]
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Size = var9:map(function(p2) --[[ line: 97 ]]
+		Size = var9:map(function(p2)
 			return UDim2.new(1, 0, 0, p2)
 		end),
 		LayoutOrder = p0.layoutOrder,
@@ -108,7 +108,7 @@ local function CheckboxButtonItem(p0) --[[ line: 62 ]]
 	})
 end
 
-return reactModule.forwardRef(function(p3, p4) --[[ line: 165 ]]
+return reactModule.forwardRef(function(p3, p4)
 	-- upvalues: reactModule (ref), CheckboxButtonItem (ref), cryoModule (ref)
 	return reactModule.createElement(CheckboxButtonItem, cryoModule.Dictionary.join(p3, { frameRef = p4 }))
 end)

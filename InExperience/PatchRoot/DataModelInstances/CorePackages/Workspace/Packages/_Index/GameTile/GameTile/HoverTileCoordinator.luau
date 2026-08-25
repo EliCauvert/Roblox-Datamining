@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 24 ]]
+function t.new()
 	-- upvalues: signal (ref), t (ref)
 	local t_1 = {
 		hoveredKey = nil,
@@ -14,7 +14,7 @@ function t.new() --[[ line: 24 ]]
 	return t_1
 end
 
-function t:requestHover(p0) --[[ line: 34 ]]
+function t:requestHover(p0)
 	if self.hoveredKey == p0 then return end
 	if self.waitingForHover == p0 then return end
 	if self.hoveredKey == nil or self.waitingForHover ~= nil then
@@ -27,7 +27,7 @@ function t:requestHover(p0) --[[ line: 34 ]]
 	self.waitingForHover = p0
 end
 
-function t:cancelHover(p1) --[[ line: 57 ]]
+function t:cancelHover(p1)
 	if self.hoveredKey == p1 then
 		if self.waitingForHover == nil then
 			self.hoveredKey = nil
@@ -43,7 +43,7 @@ function t:cancelHover(p1) --[[ line: 57 ]]
 	end
 end
 
-function t:reset() --[[ line: 72 ]]
+function t:reset()
 	local hoveredKey = self.hoveredKey
 	self.waitingForHover = nil
 	self.hoveredKey = nil

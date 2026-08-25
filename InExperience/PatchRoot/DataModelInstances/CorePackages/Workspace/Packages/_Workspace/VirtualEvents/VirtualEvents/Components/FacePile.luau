@@ -3,11 +3,11 @@ local cryoModule = require(virtualEvents.Parent.Cryo)
 local reactModule = require(virtualEvents.Parent.React)
 local uDim = UDim.new(0, 12)
 
-return function(p0) --[[ line: 19 | named "FacePile" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref), uDim (ref)
 	local t = {}
 	
-	for i, v in reactModule.useMemo(function() --[[ line: 22 ]]
+	for i, v in reactModule.useMemo(function()
 		-- upvalues: p0 (ref), cryoModule (copy)
 		if p0.desiredFirstUserId then
 			local var5 = cryoModule.List.find(p0.userIds, p0.desiredFirstUserId)

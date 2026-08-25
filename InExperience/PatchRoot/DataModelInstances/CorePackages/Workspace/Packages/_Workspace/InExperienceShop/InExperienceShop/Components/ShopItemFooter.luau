@@ -13,7 +13,7 @@ local t = {
 	buy = "Feature.Catalog.Action.Buy"
 }
 
-return reactModule.memo(function(p0) --[[ line: 31 | named "ShopItemFooter" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var5 = useLocalization(t)
 	
@@ -24,13 +24,13 @@ return reactModule.memo(function(p0) --[[ line: 31 | named "ShopItemFooter" ]]
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
 		LayoutOrder = p0.LayoutOrder,
-		onActivated = function() --[[ line: 47 ]] end
+		onActivated = function() end
 	}) else reactModule.createElement(button, {
 		text = var5.buy,
 		variant = buttonVariant.Standard,
 		size = inputSize.Small,
 		width = UDim.new(1, 0),
-		onActivated = reactModule.useCallback(function() --[[ line: 35 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: initiateShopItemPurchaseModule (copy), p0 (ref)
 			initiateShopItemPurchaseModule(p0.itemId, p0.itemType, p0.shopPageType)
 		end, { p0.itemId, p0.itemType, p0.shopPageType }),

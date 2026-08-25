@@ -1,15 +1,15 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueFragmentNamesRule = function(p0) --[[ line: 19 ]]
+	UniqueFragmentNamesRule = function(p0)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		
 		return {
-			OperationDefinition = function() --[[ line: 23 ]]
+			OperationDefinition = function()
 				return false
 			end,
-			FragmentDefinition = function(_, p1) --[[ line: 26 ]]
+			FragmentDefinition = function(_, p1)
 				-- upvalues: t (ref), p0 (ref), graphQLError (copy)
 				local value = p1.name.value
 				

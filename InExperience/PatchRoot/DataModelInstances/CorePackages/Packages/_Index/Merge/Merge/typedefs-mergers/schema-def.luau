@@ -14,18 +14,18 @@ local t_1 = {
 }
 t.DEFAULT_OPERATION_TYPE_NAME_MAP = t_1
 
-local function mergeOperationTypes(p0, p1) --[[ line: 37 ]]
+local function mergeOperationTypes(p0, p1)
 	-- upvalues: t_1 (ref), array (ref), boolean (ref)
 	local var4 = if p0 ~= nil then {} else p0
 	local var5 = if p1 ~= nil then {} else p1
 	local t = {}
 	
 	for i, v in t_1 do
-		local var7 = array.find(var4, function(p2) --[[ line: 50 ]]
+		local var7 = array.find(var4, function(p2)
 			-- upvalues: v (ref)
 			return p2.operation == v
 		end)
-		local var8 = if boolean.toJSBoolean(var7) then var7 else array.find(var5, function(p3) --[[ line: 54 ]]
+		local var8 = if boolean.toJSBoolean(var7) then var7 else array.find(var5, function(p3)
 			-- upvalues: v (ref)
 			return p3.operation == v
 		end)
@@ -37,7 +37,7 @@ local function mergeOperationTypes(p0, p1) --[[ line: 37 ]]
 	return t
 end
 
-function t.mergeSchemaDefs(p4, p5, p6) --[[ line: 66 ]]
+function t.mergeSchemaDefs(p4, p5, p6)
 	-- upvalues: boolean (ref), kind (ref), mergeDirectives (ref), mergeOperationTypes (ref), object (ref)
 	return if boolean.toJSBoolean(p5) then {
 		kind = if p4.kind == kind.SCHEMA_DEFINITION or p5.kind == kind.SCHEMA_DEFINITION then kind.SCHEMA_DEFINITION else kind.SCHEMA_EXTENSION,

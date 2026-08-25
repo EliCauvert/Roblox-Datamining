@@ -8,16 +8,16 @@ local userProfilesUseIsRobloxSubscriberGetter = game:DefineFastFlag("UserProfile
 local userProfileStoreModule = require(userProfiles.Stores.UserProfileStore)
 local createIsRobloxSubscriberGetterModule = require(script.Parent.createIsRobloxSubscriberGetter)
 
-return function(p0) --[[ line: 20 | named "useIsRobloxSubscriber" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), userProfilesUseIsRobloxSubscriberGetter (ref), createIsRobloxSubscriberGetterModule (ref), fFlagEnableBlackbirdCheck (ref), createComputed (ref), userProfileStoreModule (ref), useSignalState (ref)
-	return useSignalState(reactModule.useMemo(function() --[[ line: 21 ]]
+	return useSignalState(reactModule.useMemo(function()
 		-- upvalues: userProfilesUseIsRobloxSubscriberGetter (copy), createIsRobloxSubscriberGetterModule (copy), p0 (ref), fFlagEnableBlackbirdCheck (copy), createComputed (copy), userProfileStoreModule (copy)
 		if userProfilesUseIsRobloxSubscriberGetter then
 			return createIsRobloxSubscriberGetterModule(p0)
 		elseif fFlagEnableBlackbirdCheck and (p0 ~= nil and p0 ~= "") then
 			local var5 = userProfileStoreModule.get().fetchNamesByUserIds({ p0 })
 			
-			return createComputed(function(p1) --[[ line: 36 ]]
+			return createComputed(function(p1)
 				-- upvalues: var5 (ref)
 				local ok, status = pcall(var5, p1)
 				
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 20 | named "useIsRobloxSubscriber" ]]
 				end
 			end)
 		end
-		return createComputed(function() --[[ line: 28 ]]
+		return createComputed(function()
 			return false
 		end)
 	end, { p0 }))

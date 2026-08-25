@@ -8,16 +8,16 @@ local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspect
 local itemRestrictions = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemRestrictions
 local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local t = {
-	new = function() --[[ line: 57 ]]
+	new = function()
 		return {}
 	end
 }
 
-local _ = function(p0) --[[ line: 53 ]]
+local _ = function(p0)
 	return math.round(p0 * 100) / 100
 end
 
-function t.mock() --[[ line: 63 ]]
+function t.mock()
 	-- upvalues: t (ref), mockIdModule (ref), getFFlagIBEnableCollectiblesSystemSupportModule (ref)
 	local var6 = t.new()
 	var6.name = ""
@@ -50,7 +50,7 @@ function t.mock() --[[ line: 63 ]]
 	return var6
 end
 
-function t.fromBulkPurchaseResult(p1, p2) --[[ line: 105 ]]
+function t.fromBulkPurchaseResult(p1, p2)
 	-- upvalues: t (ref), itemRestrictions (ref)
 	local var7 = t.new()
 	local var8 = if p2 and p2.itemRestrictions then p2.itemRestrictions else {}
@@ -66,7 +66,7 @@ function t.fromBulkPurchaseResult(p1, p2) --[[ line: 105 ]]
 	return var7
 end
 
-function t.fromAvatarPreviewItem(p3) --[[ line: 127 ]]
+function t.fromAvatarPreviewItem(p3)
 	-- upvalues: t (ref)
 	local var9 = t.new()
 	var9.name = p3.name
@@ -97,7 +97,7 @@ function t.fromAvatarPreviewItem(p3) --[[ line: 127 ]]
 	return var9
 end
 
-function t.fromGetProductInfo(p4) --[[ line: 158 ]]
+function t.fromGetProductInfo(p4)
 	-- upvalues: t (ref), constantsModule (ref), getFFlagIBEnableCollectiblesSystemSupportModule (ref)
 	local var11 = t.new()
 	var11.name = p4.Name
@@ -140,7 +140,7 @@ function t.fromGetProductInfo(p4) --[[ line: 158 ]]
 	return var11
 end
 
-function t.fromHumanoidDescription(p5) --[[ line: 203 ]]
+function t.fromHumanoidDescription(p5)
 	-- upvalues: t (ref)
 	local var12 = t.new()
 	var12.assetId = tostring(p5)
@@ -148,7 +148,7 @@ function t.fromHumanoidDescription(p5) --[[ line: 203 ]]
 	return var12
 end
 
-function t.fromHumanoidDescriptionAccessory(p6) --[[ line: 211 ]]
+function t.fromHumanoidDescriptionAccessory(p6)
 	-- upvalues: t (ref)
 	local var13 = t.new()
 	var13.assetId = tostring(p6.AssetId)
@@ -175,7 +175,7 @@ function t.fromHumanoidDescriptionAccessory(p6) --[[ line: 211 ]]
 	return var13
 end
 
-function t.fromGetAssetBundles(value, p7) --[[ line: 241 ]]
+function t.fromGetAssetBundles(value, p7)
 	-- upvalues: t (ref)
 	local var14 = t.new()
 	var14.assetId = tostring(value)
@@ -184,7 +184,7 @@ function t.fromGetAssetBundles(value, p7) --[[ line: 241 ]]
 	return var14
 end
 
-function t.fromGetFavoriteForAsset(value, p8) --[[ line: 251 ]]
+function t.fromGetFavoriteForAsset(value, p8)
 	-- upvalues: t (ref)
 	local var15 = t.new()
 	var15.assetId = tostring(value)
@@ -193,7 +193,7 @@ function t.fromGetFavoriteForAsset(value, p8) --[[ line: 251 ]]
 	return var15
 end
 
-function t.fromBundleInfo(p9, p10) --[[ line: 258 ]]
+function t.fromBundleInfo(p9, p10)
 	-- upvalues: t (ref), constantsModule (ref)
 	local var16 = t.new()
 	var16.assetId = tostring(p9)
@@ -222,7 +222,7 @@ function t.fromBundleInfo(p9, p10) --[[ line: 258 ]]
 	return var16
 end
 
-function t.fromGetAssetFavoriteCount(value, p11) --[[ line: 300 ]]
+function t.fromGetAssetFavoriteCount(value, p11)
 	-- upvalues: t (ref)
 	local var17 = t.new()
 	var17.assetId = tostring(value)
@@ -231,7 +231,7 @@ function t.fromGetAssetFavoriteCount(value, p11) --[[ line: 300 ]]
 	return var17
 end
 
-function t.fromGetEconomyProductInfo(p12, p13, p14, p15, p16) --[[ line: 309 ]]
+function t.fromGetEconomyProductInfo(p12, p13, p14, p15, p16)
 	-- upvalues: t (ref)
 	local var18 = t.new()
 	var18.assetId = tostring(p12.assetId)
@@ -246,7 +246,7 @@ function t.fromGetEconomyProductInfo(p12, p13, p14, p15, p16) --[[ line: 309 ]]
 	return var18
 end
 
-function t.fromGetItemDetailsV2(p17) --[[ line: 323 ]]
+function t.fromGetItemDetailsV2(p17)
 	-- upvalues: t (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref)
 	local var19 = t.new()
 	var19.assetId = tostring(p17.id)
@@ -277,7 +277,7 @@ function t.fromGetItemDetailsV2(p17) --[[ line: 323 ]]
 	return var19
 end
 
-function t.fromGetItemDetails(p18) --[[ line: 356 ]]
+function t.fromGetItemDetails(p18)
 	-- upvalues: t (ref)
 	local var21 = t.new()
 	var21.assetId = tostring(p18.Id)
@@ -307,7 +307,7 @@ function t.fromGetItemDetails(p18) --[[ line: 356 ]]
 	return var21
 end
 
-function t.fromPurchaseSuccess(p19) --[[ line: 388 ]]
+function t.fromPurchaseSuccess(p19)
 	-- upvalues: t (ref)
 	local var23 = t.new()
 	var23.assetId = tostring(p19)
@@ -316,7 +316,7 @@ function t.fromPurchaseSuccess(p19) --[[ line: 388 ]]
 	return var23
 end
 
-function t.fromGetVersionInfo(p20, p21) --[[ line: 401 ]]
+function t.fromGetVersionInfo(p20, p21)
 	-- upvalues: t (ref)
 	local var24 = t.new()
 	var24.assetId = tostring(p20)
@@ -325,7 +325,7 @@ function t.fromGetVersionInfo(p20, p21) --[[ line: 401 ]]
 	return var24
 end
 
-function t.getSaleDetailsForCollectibles(p22) --[[ line: 412 ]]
+function t.getSaleDetailsForCollectibles(p22)
 	-- upvalues: dashModule (ref), constantsModule (ref)
 	local var25 = dashModule.joinDeep({}, p22)
 	local saleLocation = p22.saleLocation

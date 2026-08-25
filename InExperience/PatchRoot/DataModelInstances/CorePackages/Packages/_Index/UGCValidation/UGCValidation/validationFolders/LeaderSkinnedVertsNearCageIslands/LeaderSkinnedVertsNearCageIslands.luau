@@ -14,7 +14,7 @@ local t = {
 }
 local var5 = require(parent.flags.getFIntUGCValidationLeaderVertsNearCageIslandsDistance)() / 10000
 
-function t.run(p0, p1) --[[ line: 21 ]]
+function t.run(p0, p1)
 	-- upvalues: UGCValidationService (ref), eyelashCageUVReferenceValuesModule (ref), var5 (ref), errorSourceStringsModule (ref)
 	if p1.uploadEnum.assetType ~= Enum.AssetType.EyelashAccessory then return end
 	local handle = p1.renderMeshesData.Handle

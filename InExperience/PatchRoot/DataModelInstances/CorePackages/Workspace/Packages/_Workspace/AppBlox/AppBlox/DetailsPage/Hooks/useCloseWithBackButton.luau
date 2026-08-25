@@ -8,11 +8,11 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0, p1) --[[ line: 15 | named "useCloseWithBackButton" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref)
-	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useMemo(function() --[[ line: 16 ]]
+	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useMemo(function()
 		-- upvalues: inputHandlersModule (copy), p1 (ref)
-		return inputHandlersModule.onRelease(function(p2) --[[ line: 17 ]]
+		return inputHandlersModule.onRelease(function(p2)
 			-- upvalues: p1 (copy)
 			if p1 then
 				p1()

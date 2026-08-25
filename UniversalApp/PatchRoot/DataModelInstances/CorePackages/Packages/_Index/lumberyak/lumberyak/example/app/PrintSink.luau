@@ -1,7 +1,7 @@
 ﻿local loggerModule = require(script.Parent.Parent.Parent.Logger)
 local t = {}
 
-function t.new(p0) --[[ line: 5 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { maxLevel = p0 }
 	setmetatable(t_1, t)
@@ -9,7 +9,7 @@ function t.new(p0) --[[ line: 5 ]]
 	return t_1
 end
 
-function t.log(_, p1, p2) --[[ line: 14 ]]
+function t.log(_, p1, p2)
 	-- upvalues: loggerModule (ref)
 	if p2.level == loggerModule.Levels.Error then
 		error(p1, 5)

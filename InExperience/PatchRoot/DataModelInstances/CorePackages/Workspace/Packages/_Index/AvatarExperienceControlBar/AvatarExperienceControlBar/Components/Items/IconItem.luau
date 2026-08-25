@@ -14,7 +14,7 @@ local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverB
 local var7 = if fFlagAXMigrateBuilderIcons then foundationModule.Enums.IconName.X else "icons/navigation/close"
 local t = { dampingRatio = 1, frequency = 5 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), reactOtterModule (ref), fFlagAXMigrateBuilderIcons (ref), var7 (ref), iconVariant (ref), reactModule (ref), t (ref), fFlagAXAddToolTipToIconItemMenu (ref), foundationModule (ref), tooltipModule (ref), isBuilderIcon (ref)
 	local var9 = useSemanticTokensModule()
 	local var10, var11 = useHoverBindingModule()
@@ -25,7 +25,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 	local var17 = if p0.activeIcon then p0.activeIcon else var7
 	local var18 = if fFlagAXMigrateBuilderIcons then if p0.activeIconVariant then p0.activeIconVariant else iconVariant.Regular else nil
 	local var19 = if p0.activeIconSize then p0.activeIconSize elseif var17 == var7 then var9.closeIconSize else var16
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var13 (ref), reactOtterModule (copy), isActive (ref), t (copy)
 		if p0.animate then
 			var13(reactOtterModule.spring(if isActive then 1 else 0, t))
@@ -66,7 +66,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 			Icon = reactModule.createElement(foundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
 				Visible = if p0.isActive and not p0.animate then false else true,
-				backgroundStyle = if p0.disabled then nil else var10:map(function(p2) --[[ line: 98 ]]
+				backgroundStyle = if p0.disabled then nil else var10:map(function(p2)
 					-- upvalues: var9 (ref)
 					return {
 						Color3 = var9.hoverIconBackgroundStyle.Color3,
@@ -81,7 +81,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				IconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(p0.icon) then reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center content-emphasis",
 					name = p0.icon,
-					size = var12:map(function(p4) --[[ line: 114 ]]
+					size = var12:map(function(p4)
 						-- upvalues: var16 (ref)
 						return math.round((1 - p4) * var16)
 					end),
@@ -93,7 +93,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				}) else reactModule.createElement(foundationModule.Image, {
 					tag = "position-center-center anchor-center-center content-emphasis",
 					Image = p0.icon,
-					Size = var12:map(function(p3) --[[ line: 129 ]]
+					Size = var12:map(function(p3)
 						-- upvalues: var16 (ref)
 						local rounded = math.round((1 - p3) * var16)
 						
@@ -111,10 +111,10 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 			var25 = reactModule.createElement
 			var25 = var25(foundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
-				GroupTransparency = var12:map(function(p5) --[[ line: 145 ]]
+				GroupTransparency = var12:map(function(p5)
 					return 1 - p5
 				end),
-				backgroundStyle = if p0.disabled then nil else var10:map(function(p6) --[[ line: 150 ]]
+				backgroundStyle = if p0.disabled then nil else var10:map(function(p6)
 					-- upvalues: var9 (ref)
 					return if p6 then var9.hoverIconBackgroundStyle else var9.activeIconBackgroundStyle
 				end),
@@ -126,7 +126,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				ActiveIconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(var17) then reactModule.createElement(foundationModule.Icon, {
 					tag = "size-full-full position-center-center anchor-center-center content-emphasis",
 					name = var17,
-					size = var12:map(function(p8) --[[ line: 166 ]]
+					size = var12:map(function(p8)
 						-- upvalues: var16 (ref)
 						return math.round(p8 * var16)
 					end),
@@ -138,7 +138,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				}) else reactModule.createElement(foundationModule.Image, {
 					tag = "position-center-center anchor-center-center clip content-emphasis",
 					Image = var17,
-					Size = var12:map(function(p7) --[[ line: 181 ]]
+					Size = var12:map(function(p7)
 						-- upvalues: var19 (ref)
 						local rounded = math.round(p7 * var19)
 						
@@ -173,7 +173,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 			Icon = reactModule.createElement(foundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
 				Visible = if p0.isActive and not p0.animate then false else true,
-				backgroundStyle = if p0.disabled then nil else var10:map(function(p9) --[[ line: 210 ]]
+				backgroundStyle = if p0.disabled then nil else var10:map(function(p9)
 					-- upvalues: var9 (ref)
 					return {
 						Color3 = var9.hoverIconBackgroundStyle.Color3,
@@ -188,7 +188,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				IconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(p0.icon) then reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center content-emphasis",
 					name = p0.icon,
-					size = var12:map(function(p11) --[[ line: 226 ]]
+					size = var12:map(function(p11)
 						-- upvalues: var16 (ref)
 						return math.round((1 - p11) * var16)
 					end),
@@ -200,7 +200,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				}) else reactModule.createElement(foundationModule.Image, {
 					tag = "position-center-center anchor-center-center content-emphasis",
 					Image = p0.icon,
-					Size = var12:map(function(p10) --[[ line: 241 ]]
+					Size = var12:map(function(p10)
 						-- upvalues: var16 (ref)
 						local rounded = math.round((1 - p10) * var16)
 						
@@ -218,10 +218,10 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 			var28 = reactModule.createElement
 			var28 = var28(foundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
-				GroupTransparency = var12:map(function(p12) --[[ line: 257 ]]
+				GroupTransparency = var12:map(function(p12)
 					return 1 - p12
 				end),
-				backgroundStyle = if p0.disabled then nil else var10:map(function(p13) --[[ line: 262 ]]
+				backgroundStyle = if p0.disabled then nil else var10:map(function(p13)
 					-- upvalues: var9 (ref)
 					return if p13 then var9.hoverIconBackgroundStyle else var9.activeIconBackgroundStyle
 				end),
@@ -233,7 +233,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				ActiveIconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(var17) then reactModule.createElement(foundationModule.Icon, {
 					tag = "position-center-center anchor-center-center clip content-emphasis",
 					name = var17,
-					size = var12:map(function(p15) --[[ line: 278 ]]
+					size = var12:map(function(p15)
 						-- upvalues: var16 (ref)
 						return math.round((1 - p15) * var16)
 					end),
@@ -241,7 +241,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "IconItem" 
 				}) else reactModule.createElement(foundationModule.Image, {
 					tag = "position-center-center anchor-center-center clip content-emphasis",
 					Image = var17,
-					Size = var12:map(function(p14) --[[ line: 287 ]]
+					Size = var12:map(function(p14)
 						-- upvalues: var19 (ref)
 						local rounded = math.round(p14 * var19)
 						

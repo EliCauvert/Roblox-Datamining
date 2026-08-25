@@ -1,7 +1,7 @@
-﻿return function() --[[ line: 4 | named "createUniqueKey" ]]
+﻿return function()
 	local t = {}
 	
-	return function(p0) --[[ line: 7 ]]
+	return function(p0)
 		-- upvalues: t (ref)
 		if t[p0] == nil then
 			t[p0] = 1

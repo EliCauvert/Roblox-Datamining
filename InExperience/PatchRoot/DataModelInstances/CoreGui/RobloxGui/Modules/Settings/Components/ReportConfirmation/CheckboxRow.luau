@@ -16,7 +16,7 @@ checkboxRow.defaultProps = {
 	checkboxSelected = false,
 	actionDisabled = false,
 	LayoutOrder = 1,
-	onCheckboxActivated = function() --[[ line: 27 ]] end
+	onCheckboxActivated = function() end
 }
 checkboxRow.validateProps = tModule.interface({
 	height = tModule.number,
@@ -28,9 +28,9 @@ checkboxRow.validateProps = tModule.interface({
 	LayoutOrder = tModule.optional(tModule.number)
 })
 
-function checkboxRow.render(p0) --[[ line: 41 ]]
+function checkboxRow.render(p0)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), imageSetLabel (ref), images (ref), checkbox (ref)
-	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 42 ]]
+	return withFoundationOrUIBloxStyle(function(p1)
 		return {
 			Theme = {
 				IconDefault = {
@@ -58,7 +58,7 @@ function checkboxRow.render(p0) --[[ line: 41 ]]
 				}
 			}
 		}
-	end, function(p2) --[[ line: 70 ]]
+	end, function(p2)
 		-- upvalues: p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), checkbox (copy)
 		local textMuted, iconDefault
 		local baseSize = p2.Font.BaseSize

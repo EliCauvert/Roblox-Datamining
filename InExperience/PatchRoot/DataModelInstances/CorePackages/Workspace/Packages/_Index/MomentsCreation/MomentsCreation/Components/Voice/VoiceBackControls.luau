@@ -16,7 +16,7 @@ local list = {
 	{ id = "keep", text = "Keep editing" }
 }
 
-return function() --[[ line: 38 | named "VoiceBackControls" ]]
+return function()
 	-- upvalues: useCreationController (ref), useTokens (ref), useDeviceInsets (ref), useToggleState (ref), reactModule (ref), view (ref), menu (ref), foundationModule (ref), list (ref), icon (ref), builderIconsModule (ref)
 	local var6 = useCreationController()
 	local var7 = useTokens()
@@ -36,7 +36,7 @@ return function() --[[ line: 38 | named "VoiceBackControls" ]]
 			side = foundationModule.Enums.PopoverSide.Bottom,
 			align = foundationModule.Enums.PopoverAlign.Start,
 			onPressedOutside = var9.disable,
-			onActivated = function(p0) --[[ line: 57 ]]
+			onActivated = function(p0)
 				-- upvalues: var9 (ref), var6 (ref)
 				var9.disable()
 				
@@ -48,7 +48,7 @@ return function() --[[ line: 38 | named "VoiceBackControls" ]]
 		}, {
 			BackButton = reactModule.createElement(view, {
 				tag = "auto-xy padding-small radius-circle",
-				onActivated = function() --[[ line: 66 ]]
+				onActivated = function()
 					-- upvalues: var6 (ref), var9 (ref)
 					local activeSession = var6.getActiveSession(false)
 					

@@ -6,22 +6,22 @@ local signalsUtilsModule = require(parent.SignalsUtils)
 local appTopBannerTypeModule = require(appTopBanner.Enums.AppTopBannerType)
 local constantsModule = require(appTopBanner.Constants)
 
-local function defaultOnAppTopBannerClick() --[[ line: 15 ]] end
+local function defaultOnAppTopBannerClick() end
 
-return function() --[[ line: 17 ]]
+return function()
 	-- upvalues: signalsUtilsModule (ref), appTopBannerTypeModule (ref), defaultOnAppTopBannerClick (ref), signalsModule (ref), signalsExperimentalModule (ref), constantsModule (ref)
 	local var7, var8 = signalsUtilsModule.createSessionScopedSignal(true)
 	local var9, var10 = signalsUtilsModule.createSessionScopedSignal(false)
 	local var11, var12 = signalsUtilsModule.createSessionScopedSignal(appTopBannerTypeModule.None)
 	local var13, var14 = signalsUtilsModule.createSessionScopedSignal(nil)
 	local var15, var16 = signalsUtilsModule.createSessionScopedSignal(0)
-	local var17, var18 = signalsUtilsModule.createSessionScopedSignal({ callback = defaultOnAppTopBannerClick }, function(p0, p1) --[[ line: 38 ]]
+	local var17, var18 = signalsUtilsModule.createSessionScopedSignal({ callback = defaultOnAppTopBannerClick }, function(p0, p1)
 		return p0.callback == p1.callback
 	end)
 	
-	local function _() --[[ line: 46 | named "collapseToDefaults" ]]
+	local function _()
 		-- upvalues: signalsExperimentalModule (copy), var10 (ref), var12 (ref), appTopBannerTypeModule (copy), var14 (ref), var16 (ref), var18 (ref), defaultOnAppTopBannerClick (copy)
-		signalsExperimentalModule.batch(function() --[[ line: 47 ]]
+		signalsExperimentalModule.batch(function()
 			-- upvalues: var10 (copy), var12 (copy), appTopBannerTypeModule (copy), var14 (copy), var16 (copy), var18 (copy), defaultOnAppTopBannerClick (copy)
 			var10(false)
 			var12(appTopBannerTypeModule.None)
@@ -38,14 +38,14 @@ return function() --[[ line: 17 ]]
 		getAppTopBannerContentProps = var13,
 		getAppTopBannerContentHeight = var15,
 		getOnAppTopBannerClick = var17,
-		getIsVisible = signalsModule.createComputed(function(p2) --[[ line: 42 ]]
+		getIsVisible = signalsModule.createComputed(function(p2)
 			-- upvalues: var9 (ref), var7 (ref)
 			return var9(p2) and not var7(p2)
 		end),
-		setAppTopBanner = function(value, p3, p4, p5, p6) --[[ line: 56 ]]
+		setAppTopBanner = function(value, p3, p4, p5, p6)
 			-- upvalues: signalsExperimentalModule (copy), var10 (ref), var12 (ref), var14 (ref), var18 (ref), var16 (ref), constantsModule (copy), var9 (ref), appTopBannerTypeModule (copy), defaultOnAppTopBannerClick (copy)
 			if value then
-				signalsExperimentalModule.batch(function() --[[ line: 64 ]]
+				signalsExperimentalModule.batch(function()
 					-- upvalues: var10 (copy), value (ref), p3 (ref), var12 (copy), p4 (ref), var14 (copy), p5 (ref), var18 (copy), var16 (copy), p6 (ref), constantsModule (copy)
 					var10(value)
 					
@@ -63,7 +63,7 @@ return function() --[[ line: 17 ]]
 				
 				return
 			elseif var9(false) ~= value then
-				signalsExperimentalModule.batch(function() --[[ line: 47 ]]
+				signalsExperimentalModule.batch(function()
 					-- upvalues: var10 (copy), var12 (copy), appTopBannerTypeModule (copy), var14 (copy), var16 (copy), var18 (copy), defaultOnAppTopBannerClick (copy)
 					var10(false)
 					var12(appTopBannerTypeModule.None)
@@ -73,18 +73,18 @@ return function() --[[ line: 17 ]]
 				end)
 			end
 		end,
-		disableAppTopBanner = function(p7) --[[ line: 82 ]]
+		disableAppTopBanner = function(p7)
 			-- upvalues: var7 (ref), var8 (ref)
 			if var7(false) ~= p7 then
 				var8(p7)
 			end
 		end,
-		reset = function() --[[ line: 88 ]]
+		reset = function()
 			-- upvalues: signalsExperimentalModule (copy), var8 (ref), var10 (ref), var12 (ref), appTopBannerTypeModule (copy), var14 (ref), var16 (ref), var18 (ref), defaultOnAppTopBannerClick (copy)
-			signalsExperimentalModule.batch(function() --[[ line: 89 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: var8 (copy), signalsExperimentalModule (copy), var10 (copy), var12 (copy), appTopBannerTypeModule (copy), var14 (copy), var16 (copy), var18 (copy), defaultOnAppTopBannerClick (copy)
 				var8(true)
-				signalsExperimentalModule.batch(function() --[[ line: 47 ]]
+				signalsExperimentalModule.batch(function()
 					-- upvalues: var10 (copy), var12 (copy), appTopBannerTypeModule (copy), var14 (copy), var16 (copy), var18 (copy), defaultOnAppTopBannerClick (copy)
 					var10(false)
 					var12(appTopBannerTypeModule.None)

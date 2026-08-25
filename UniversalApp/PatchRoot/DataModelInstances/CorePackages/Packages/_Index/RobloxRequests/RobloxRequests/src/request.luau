@@ -14,7 +14,7 @@ local cacheModule = require(src.cache)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 26 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref), urlModule (ref), ratelimitModule (ref), cookiesModule (ref)
 	local tbl = setmetatable({}, t)
 	p2 = p2 or {}
@@ -53,7 +53,7 @@ function t.new(p0, p1, p2) --[[ line: 26 ]]
 	return tbl
 end
 
-function t:set_headers(p3) --[[ line: 87 ]]
+function t:set_headers(p3)
 	for i, v in pairs(p3) do
 		self.headers[i] = v
 	end
@@ -62,7 +62,7 @@ end
 
 t.update_headers = utilModule.deprecate(t.set_headers, "0.5", "update_headers")
 
-function t:set_query(p4) --[[ line: 98 ]]
+function t:set_query(p4)
 	for i, v in pairs(p4) do
 		self.query[i] = v
 	end
@@ -73,7 +73,7 @@ end
 
 t.update_query = utilModule.deprecate(t.set_headers, "0.5", "update_query")
 
-function t:set_data(p5) --[[ line: 111 ]]
+function t:set_data(p5)
 	-- upvalues: jsonModule (ref)
 	if type(p5) == "table" then
 		if p5.__FormData then
@@ -89,7 +89,7 @@ function t:set_data(p5) --[[ line: 111 ]]
 	return self
 end
 
-function t:_ratelimit() --[[ line: 129 ]]
+function t:_ratelimit()
 	for i, v in ipairs(self._ratelimits) do
 		if not v:request() then
 			return false
@@ -98,7 +98,7 @@ function t:_ratelimit() --[[ line: 129 ]]
 	return true
 end
 
-function t:_send() --[[ line: 141 ]]
+function t:_send()
 	-- upvalues: cacheModule (ref), responseModule (ref), httpService (ref)
 	local t = {
 		Url = self.url:build(),
@@ -156,9 +156,9 @@ function t:_send() --[[ line: 141 ]]
 	return var24
 end
 
-function t:send(p6) --[[ line: 212 ]]
+function t:send(p6)
 	-- upvalues: promiseModule (ref)
-	return if p6 then promiseModule.new(function(p7, p8) --[[ line: 218 ]]
+	return if p6 then promiseModule.new(function(p7, p8)
 		-- upvalues: self (ref)
 		local ok, status = pcall(self._send, self)
 		
@@ -175,7 +175,7 @@ function t:send(p6) --[[ line: 212 ]]
 	end) else self:_send()
 end
 
-function t:promise() --[[ line: 238 ]]
+function t:promise()
 	return self:send(true)
 end
 

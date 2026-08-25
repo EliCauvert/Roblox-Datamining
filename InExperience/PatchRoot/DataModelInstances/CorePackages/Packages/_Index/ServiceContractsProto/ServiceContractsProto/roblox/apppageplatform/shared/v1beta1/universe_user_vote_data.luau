@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 46 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		user_vote = if p0 == nil or p0.user_vote == nil then nil else p0.user_vote,
@@ -13,7 +13,7 @@ function t_1.new(p0) --[[ line: 46 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 56 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -42,7 +42,7 @@ function t_1:encode() --[[ line: 56 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 80 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var13 = t_1.new()
 	local var14 = 0
@@ -100,7 +100,7 @@ function t_1.decode(p1) --[[ line: 80 ]]
 	return var13
 end
 
-function t_1:jsonEncode() --[[ line: 133 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.user_vote ~= nil then
@@ -115,7 +115,7 @@ function t_1:jsonEncode() --[[ line: 133 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 151 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var35 = t_1.new()
 	

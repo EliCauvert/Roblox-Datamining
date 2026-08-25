@@ -8,7 +8,7 @@ local instanceOfModule = require(parent_1.InstanceOf)
 local _ = require(parent_1.ES7Types)
 local t = {}
 
-function t.new(p0) --[[ line: 39 ]]
+function t.new(p0)
 	-- upvalues: isArrayModule (ref), dEV (ref), instanceOfModule (ref), t (ref)
 	local cloned = nil
 	local cloned_1 = nil
@@ -45,7 +45,7 @@ function t.new(p0) --[[ line: 39 ]]
 	return setmetatable({ size = #cloned, _map = cloned_1, _array = cloned }, t)
 end
 
-function t:set(p1, p2) --[[ line: 88 ]]
+function t:set(p1, p2)
 	if self._map[p1] == nil then
 		self.size += 1
 		table.insert(self._array, p1)
@@ -55,18 +55,18 @@ function t:set(p1, p2) --[[ line: 88 ]]
 	return self
 end
 
-function t:get(p3) --[[ line: 100 ]]
+function t:get(p3)
 	return self._map[p3]
 end
 
-function t:clear() --[[ line: 104 ]]
+function t:clear()
 	local _table = table
 	self.size = 0
 	_table.clear(self._map)
 	_table.clear(self._array)
 end
 
-function t:delete(p4) --[[ line: 111 ]]
+function t:delete(p4)
 	if self._map[p4] == nil then
 		return false
 	end
@@ -80,12 +80,12 @@ function t:delete(p4) --[[ line: 111 ]]
 	return true
 end
 
-function t:forEach(p5, p6) --[[ line: 127 ]]
+function t:forEach(p5, p6)
 	-- upvalues: dEV (ref), forEachModule (ref)
 	if dEV and typeof(p5) ~= "function" then
 		error("callback is not a function")
 	end
-	forEachModule(self._array, function(p7) --[[ line: 134 ]]
+	forEachModule(self._array, function(p7)
 		-- upvalues: self (ref), p6 (ref), p5 (ref)
 		local var11 = self._map[p7]
 		
@@ -98,31 +98,31 @@ function t:forEach(p5, p6) --[[ line: 127 ]]
 	end)
 end
 
-function t:has(p8) --[[ line: 145 ]]
+function t:has(p8)
 	return self._map[p8] ~= nil
 end
 
-function t:keys() --[[ line: 149 ]]
+function t:keys()
 	return self._array
 end
 
-function t:values() --[[ line: 153 ]]
+function t:values()
 	-- upvalues: mapModule (ref)
-	return mapModule(self._array, function(p9) --[[ line: 154 ]]
+	return mapModule(self._array, function(p9)
 		-- upvalues: self (ref)
 		return self._map[p9]
 	end)
 end
 
-function t:entries() --[[ line: 159 ]]
+function t:entries()
 	-- upvalues: mapModule (ref)
-	return mapModule(self._array, function(p10) --[[ line: 160 ]]
+	return mapModule(self._array, function(p10)
 		-- upvalues: self (ref)
 		return { p10, self._map[p10] }
 	end)
 end
 
-function t:ipairs() --[[ line: 165 ]]
+function t:ipairs()
 	-- upvalues: dEV (ref)
 	if dEV then
 		warn(debug.traceback("`for _,_ in myMap:ipairs() do` is deprecated and will be removed in a future release, please use `for _,_ in myMap do` instead\n", 2))
@@ -130,11 +130,11 @@ function t:ipairs() --[[ line: 165 ]]
 	return ipairs(self:entries())
 end
 
-function t:__iter() --[[ line: 177 ]]
+function t:__iter()
 	return next, self:entries()
 end
 
-function t:__index(p11) --[[ line: 181 ]]
+function t:__index(p11)
 	-- upvalues: t (ref), dEV (ref)
 	local var12 = rawget(t, p11)
 	
@@ -146,7 +146,7 @@ function t:__index(p11) --[[ line: 181 ]]
 	return t.get(self, p11)
 end
 
-function t:__newindex(p12, p13) --[[ line: 197 ]]
+function t:__newindex(p12, p13)
 	self:set(p12, p13)
 end
 

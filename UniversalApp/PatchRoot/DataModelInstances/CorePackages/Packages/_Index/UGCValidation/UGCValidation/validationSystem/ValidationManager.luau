@@ -46,7 +46,7 @@ local t_4 = {
 }
 local assetQualityFetchStatus = validationEnumsModule.AssetQualityFetchStatus
 
-local function initRunVariables(p0, p1) --[[ line: 82 ]]
+local function initRunVariables(p0, p1)
 	-- upvalues: getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validationModuleLoaderModule (ref), getFFlagDebugUGCDisableAssetQualityChecksModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -93,7 +93,7 @@ local function initRunVariables(p0, p1) --[[ line: 82 ]]
 	return t, t_1, t_2
 end
 
-local function fetchQualityResults(p2, p3) --[[ line: 158 ]]
+local function fetchQualityResults(p2, p3)
 	-- upvalues: assetQualityService (ref), assetQualityFetchStatus (ref), recreateSceneFromEditablesModule (ref), getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), stripMeshFromGltfModule (ref), getFIntUGCValidationFetchQualityMaxRetryModule (ref), httpService (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), fetchAllDesiredDataModule (ref)
 	if not assetQualityService then
 		p2.aqsFetchMetrics.fetchStatus = assetQualityFetchStatus.assetQualityFetchFailure
@@ -108,7 +108,7 @@ local function fetchQualityResults(p2, p3) --[[ line: 158 ]]
 	local var45 = nil
 	
 	if p2.consumerConfig.aqFetchStage == "scene" then
-		local ok, status = pcall(function() --[[ line: 172 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var45 (write), recreateSceneFromEditablesModule (copy), p2 (ref), var44 (write), assetQualityService (copy)
 			var45 = recreateSceneFromEditablesModule.createModelForGltfExport(p2)
 			var44 = assetQualityService:GenerateAssetQualityGltfFromInstanceAsync(var45)
@@ -119,7 +119,7 @@ local function fetchQualityResults(p2, p3) --[[ line: 158 ]]
 		if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() then
 			if var46 then
 				for i = 1, 1 + getFIntUGCValidationFetchQualityMaxRetryModule() do
-					local ok, status = pcall(function() --[[ line: 196 ]]
+					local ok, status = pcall(function()
 						-- upvalues: p2 (ref), i (ref), assetQualityService (copy), p3 (ref), var44 (write), httpService (copy)
 						p2.aqsFetchMetrics.fetchAttemptCount = i
 						local var47 = if p2.consumerConfig.aqFetchStage == "jobId" then assetQualityService:FetchAssetQualitySummaryFromJobIdAsync(p2.consumerConfig.aqFetchData, p3) else assetQualityService:FetchAssetQualitySummaryFromGltfAsync(var44, p3)
@@ -159,7 +159,7 @@ local function fetchQualityResults(p2, p3) --[[ line: 158 ]]
 	var46 = true
 end
 
-local function getNextLayer(p4, p5) --[[ line: 248 ]]
+local function getNextLayer(p4, p5)
 	local t = {}
 	
 	for i, v in p4 do
@@ -170,9 +170,9 @@ local function getNextLayer(p4, p5) --[[ line: 248 ]]
 	return t
 end
 
-local function populateRelevantSourceStrings(p6) --[[ line: 263 ]]
+local function populateRelevantSourceStrings(p6)
 	-- upvalues: errorSourceStringsModule (ref)
-	local function _(p7) --[[ line: 264 | named "capture" ]]
+	local function _(p7)
 		-- upvalues: errorSourceStringsModule (copy), p6 (ref)
 		local var54 = p7:split(".")
 		local var55 = errorSourceStringsModule.Values[var54[#var54]]
@@ -206,13 +206,13 @@ local function populateRelevantSourceStrings(p6) --[[ line: 263 ]]
 	end
 end
 
-local function _(p8) --[[ line: 285 | named "getDebugLabel" ]]
+local function _(p8)
 	local uploadEnum = p8.uploadEnum
 	
 	return if uploadEnum.assetType then uploadEnum.assetType.Name elseif uploadEnum.bundleType then uploadEnum.bundleType.Name else "?"
 end
 
-local function reportFullResult(p9, p10, p11) --[[ line: 295 ]]
+local function reportFullResult(p9, p10, p11)
 	-- upvalues: assetQualityFetchStatus (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
 	local var56 = p10.aqsFetchMetrics.fetchStatus ~= assetQualityFetchStatus.assetQualityFetchNA
 	telemetryService:LogEvent(t, {
@@ -251,7 +251,7 @@ local function reportFullResult(p9, p10, p11) --[[ line: 295 ]]
 	end
 end
 
-local function updateResultData(p12, p13, p14, _, p15) --[[ line: 347 ]]
+local function updateResultData(p12, p13, p14, _, p15)
 	-- upvalues: validationEnumsModule (ref)
 	local validationEnum = p14.validationEnum
 	
@@ -279,7 +279,7 @@ local function updateResultData(p12, p13, p14, _, p15) --[[ line: 347 ]]
 	p13[validationEnum] = nil
 end
 
-local function createConsumerConfigWithDefaults(p16) --[[ line: 385 ]]
+local function createConsumerConfigWithDefaults(p16)
 	-- upvalues: getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), t_4 (ref)
 	local cloned = table.clone(p16)
 	
@@ -310,7 +310,7 @@ local function createConsumerConfigWithDefaults(p16) --[[ line: 385 ]]
 	return cloned
 end
 
-local function runValidationOnRootInstance(p17) --[[ line: 424 ]]
+local function runValidationOnRootInstance(p17)
 	-- upvalues: getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), getUploadCategoryModule (ref), initRunVariables (ref), assetQualityFetchStatus (ref), validationTestWrapperModule (ref), validationEnumsModule (ref), updateResultData (ref), populateRelevantSourceStrings (ref), reportFullResult (ref), fetchAllDesiredDataModule (ref), t_2 (ref), runService (ref), fetchQualityResults (ref), getNextLayer (ref), t_3 (ref)
 	local processTime = os.clock()
 	local rootInstance = p17.rootInstance
@@ -388,7 +388,7 @@ local function runValidationOnRootInstance(p17) --[[ line: 424 ]]
 	return t
 end
 
-local _ = function(p18) --[[ line: 529 | named "getRootInstance" ]]
+local _ = function(p18)
 	-- upvalues: constantsModule (ref)
 	if #p18 == 0 then
 		return nil
@@ -401,7 +401,7 @@ local _ = function(p18) --[[ line: 529 | named "getRootInstance" ]]
 	return p18[1]
 end
 
-local _ = function(p19, p20, p21) --[[ line: 544 | named "findFolderByName" ]]
+local _ = function(p19, p20, p21)
 	for i, v in p19 do
 		if v.Name == p20 then
 			return v
@@ -410,7 +410,7 @@ local _ = function(p19, p20, p21) --[[ line: 544 | named "findFolderByName" ]]
 	return if p21 then p19[1] else nil
 end
 
-local function synthesizeRootFromFolders(p22, p23, p24) --[[ line: 559 ]]
+local function synthesizeRootFromFolders(p22, p23, p24)
 	local folder = Instance.new("Folder")
 	
 	for i, v in p22 do
@@ -436,7 +436,7 @@ local function synthesizeRootFromFolders(p22, p23, p24) --[[ line: 559 ]]
 	return folder
 end
 
-function t_1.ValidateAsset(value, p25, p26) --[[ line: 586 ]]
+function t_1.ValidateAsset(value, p25, p26)
 	-- upvalues: httpService (ref), constantsModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
 	local var69
 	local t = {
@@ -477,7 +477,7 @@ function t_1.ValidateAsset(value, p25, p26) --[[ line: 586 ]]
 	return runValidationOnRootInstance(t)
 end
 
-function t_1.ValidateFinalizedBundle(p27, p28, p29) --[[ line: 608 ]]
+function t_1.ValidateFinalizedBundle(p27, p28, p29)
 	-- upvalues: getFFlagDebugAllowHRDUploadOnBundleBackendModule (ref), r15plusUtilsModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule (ref), synthesizeRootFromFolders (ref), httpService (ref), createConsumerConfigWithDefaults (ref), runValidationOnRootInstance (ref)
 	if getFFlagDebugAllowHRDUploadOnBundleBackendModule() then
 		r15plusUtilsModule.setIsBackendBundleUpload(if p29.source ~= "Publish" then p29.source == "Backend" else true)

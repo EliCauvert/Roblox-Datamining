@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceSave").Context.AvatarSaveContext)
 
-return function(value, p0, p1) --[[ line: 17 | named "assetOrderRelativeEqual" ]]
+return function(value, p0, p1)
 	local t = {}
 	local equippedAssets = value.equipped.EquippedAssets
 	local equippedAssets_1 = p0.equipped.EquippedAssets
@@ -29,7 +29,7 @@ return function(value, p0, p1) --[[ line: 17 | named "assetOrderRelativeEqual" ]
 		end
 	end
 	local var1
-	table.sort(t, function(p2, p3) --[[ line: 61 ]]
+	table.sort(t, function(p2, p3)
 		return p2.order < p3.order
 	end)
 	local order = nil

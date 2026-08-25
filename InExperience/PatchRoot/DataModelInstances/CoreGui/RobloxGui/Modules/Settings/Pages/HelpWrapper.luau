@@ -26,7 +26,7 @@ end
 local var11 = nil
 local var12, var13 = signalsModule.createSignal(false)
 
-return if fFlagRefactorHelpPage then (function() --[[ line: 45 | named "createHelpPage" ]]
+return if fFlagRefactorHelpPage then (function()
 	-- upvalues: settingsPageFactoryModule (ref), constants (write), uiblox (ref), builderIconsModule (ref), var4 (ref), var11 (write), signalsReactModule (ref), var12 (ref), reactModule (ref), foundationProvider (ref), foundationModule (ref), utils (write), localizationProvider (ref), helpReactView (ref), reactRobloxModule (ref), var13 (ref)
 	local help = settingsPageFactoryModule:CreateNewPage()
 	help.TabHeader.Name = constants.HELP_PAGE.TAB_HEADER.NAME
@@ -37,10 +37,10 @@ return if fFlagRefactorHelpPage then (function() --[[ line: 45 | named "createHe
 	help.TabHeader.TabLabel.Title.Text = var4:Format(constants.HELP_PAGE.TAB_HEADER.TEXT)
 	help.Page:ClearAllChildren()
 	
-	local function _() --[[ line: 59 | named "createReactTree" ]]
+	local function _()
 		-- upvalues: var11 (copy), signalsReactModule (copy), var12 (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utils (copy), localizationProvider (copy), var4 (copy), helpReactView (copy), reactRobloxModule (copy), help (ref)
 		if var11 then return end
-		local var15 = function() --[[ line: 64 ]]
+		local var15 = function()
 			-- upvalues: signalsReactModule (copy), var12 (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utils (copy), localizationProvider (copy), var4 (copy), helpReactView (copy)
 			return if signalsReactModule.useSignalState(var12) then reactModule.createElement(foundationProvider, {
 				colorMode = foundationModule.Enums.ColorMode.Dark,
@@ -57,10 +57,10 @@ return if fFlagRefactorHelpPage then (function() --[[ line: 45 | named "createHe
 		end
 	end
 	
-	help.Displayed.Event:Connect(function() --[[ line: 87 ]]
+	help.Displayed.Event:Connect(function()
 		-- upvalues: var11 (copy), signalsReactModule (copy), var12 (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utils (copy), localizationProvider (copy), var4 (copy), helpReactView (copy), reactRobloxModule (copy), help (ref), var13 (copy)
 		if not var11 then
-			local var16 = function() --[[ line: 64 ]]
+			local var16 = function()
 				-- upvalues: signalsReactModule (copy), var12 (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utils (copy), localizationProvider (copy), var4 (copy), helpReactView (copy)
 				return if signalsReactModule.useSignalState(var12) then reactModule.createElement(foundationProvider, {
 					colorMode = foundationModule.Enums.ColorMode.Dark,
@@ -82,7 +82,7 @@ return if fFlagRefactorHelpPage then (function() --[[ line: 45 | named "createHe
 			help.HubRef.VersionContainer.Visible = true
 		end
 	end)
-	help.Hidden.Event:Connect(function() --[[ line: 96 ]]
+	help.Hidden.Event:Connect(function()
 		-- upvalues: var13 (copy), help (ref)
 		var13(false)
 		

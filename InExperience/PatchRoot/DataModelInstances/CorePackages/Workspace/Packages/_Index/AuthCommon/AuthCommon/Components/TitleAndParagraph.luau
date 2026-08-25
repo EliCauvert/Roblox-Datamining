@@ -20,11 +20,11 @@ titleAndParagraph.defaultProps = {
 	paragraphTextArgs = {}
 }
 
-function titleAndParagraph.init(p0) --[[ line: 35 ]]
+function titleAndParagraph.init(p0)
 	p0.parametersCache = {}
 end
 
-function titleAndParagraph.getCachedParameters(p1, p2, p3) --[[ line: 40 ]]
+function titleAndParagraph.getCachedParameters(p1, p2, p3)
 	if type(p3) ~= "table" then
 		return nil
 	end
@@ -45,15 +45,15 @@ function titleAndParagraph.getCachedParameters(p1, p2, p3) --[[ line: 40 ]]
 	return t
 end
 
-local _ = function(p4) --[[ line: 67 ]]
+local _ = function(p4)
 	return "paragraphText" .. tostring(p4)
 end
 
-local _ = function(p5) --[[ line: 74 ]]
+local _ = function(p5)
 	return "paragraphTextTemplate" .. tostring(p5)
 end
 
-function titleAndParagraph.render(p6) --[[ line: 78 ]]
+function titleAndParagraph.render(p6)
 	-- upvalues: argCheckModule (ref), getFFlagEnableAuditForSso (ref), getFFlagEnableAuditForSinglePageSignUp (ref), withLocalization (ref), withStyle (ref), formFactor (ref), roactModule (ref), fitTextLabelModule (ref), fitChildrenModule (ref), registerAuditContentModule (ref)
 	local formFactor_1 = p6.props.formFactor
 	local layoutOrder = p6.props.layoutOrder
@@ -75,9 +75,9 @@ function titleAndParagraph.render(p6) --[[ line: 78 ]]
 	if not getFFlagEnableAuditForSso() and getFFlagEnableAuditForSinglePageSignUp() and p6.props.enableAuditContentCapture then
 		t.verificationLinkingTextTemplate = "Authentication.SignUp.Description.VerificationLinkingText.VariableButtonName"
 	end
-	return withLocalization(t)(function(p7) --[[ line: 122 ]]
+	return withLocalization(t)(function(p7)
 		-- upvalues: withStyle (copy), formFactor_1 (ref), formFactor (copy), roactModule (copy), fitTextLabelModule (copy), textXAlignment (ref), fitChildrenModule (copy), paragraphTextKeys (ref), getFFlagEnableAuditForSinglePageSignUp (copy), p6 (ref), registerAuditContentModule (copy), getFFlagEnableAuditForSso (copy), layoutOrder (ref), var11 (write)
-		return withStyle(function(p8) --[[ line: 123 ]]
+		return withStyle(function(p8)
 			-- upvalues: formFactor_1 (copy), formFactor (copy), roactModule (copy), p7 (ref), fitTextLabelModule (copy), textXAlignment (copy), fitChildrenModule (copy), paragraphTextKeys (copy), getFFlagEnableAuditForSinglePageSignUp (copy), p6 (copy), registerAuditContentModule (copy), getFFlagEnableAuditForSso (copy), layoutOrder (copy), var11 (copy)
 			local var13 = p8.Font.BaseSize * p8.Font.Title.RelativeSize
 			local font = p8.Font.Title.Font
@@ -154,6 +154,6 @@ function titleAndParagraph.render(p6) --[[ line: 78 ]]
 	end)
 end
 
-return roactRoduxModule.connect(function(p9, _) --[[ line: 223 ]]
+return roactRoduxModule.connect(function(p9, _)
 	return { formFactor = p9.FormFactor }
 end)(titleAndParagraph)

@@ -16,7 +16,7 @@ local t = {
 	lastUpdated = if fFlagLuaAppIedpSendPoints then { 25, 11, 19 } else { 25, 11, 11 }
 }
 
-return function(p0) --[[ line: 26 | named "fireInExperienceDetailsPromptPlayButtonClickedEvent" ]]
+return function(p0)
 	-- upvalues: var2 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
 	local var4, var5 = var2(p0)
 	

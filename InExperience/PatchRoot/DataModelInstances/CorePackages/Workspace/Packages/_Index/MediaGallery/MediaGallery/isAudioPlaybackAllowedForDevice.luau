@@ -3,11 +3,11 @@ local systemInfoProtocol = require(parent.SystemInfoProtocol).SystemInfoProtocol
 local fStringLuaAppEdpAudioManufacturerDenyList = require(parent.SharedFlags).FStringLuaAppEdpAudioManufacturerDenyList
 local var0 = nil
 
-return function() --[[ line: 11 | named "isAudioPlaybackAllowedForDevice" ]]
+return function()
 	-- upvalues: var0 (write), systemInfoProtocol (ref), fStringLuaAppEdpAudioManufacturerDenyList (ref)
 	if var0 == nil then
 		var0 = true
-		pcall(function() --[[ line: 18 ]]
+		pcall(function()
 			-- upvalues: systemInfoProtocol (copy), fStringLuaAppEdpAudioManufacturerDenyList (copy), var0 (copy)
 			local var1 = systemInfoProtocol.default:getSystemInfo({ systemInfoProtocol.InfoNames.MANUFACTURER })
 			

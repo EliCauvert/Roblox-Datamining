@@ -13,9 +13,9 @@ local var6 = if not fFlagEnableNewBackpack then require(parent_1.BackpackScript)
 local showMenuModule = require(actions.ShowMenu)
 local var8 = analyticsModule.new():withEventStream(eventStream.new(rbxAnalyticsService))
 
-return function(_) --[[ line: 23 | named "OpenMenu" ]]
+return function(_)
 	-- upvalues: guiService (ref), VRService (ref), fFlagEnableNewBackpack (ref), var5 (ref), var6 (ref), var8 (ref), showMenuModule (ref)
-	return function(p0) --[[ line: 24 ]]
+	return function(p0)
 		-- upvalues: guiService (copy), VRService (copy), fFlagEnableNewBackpack (copy), var5 (copy), var6 (copy), var8 (copy), showMenuModule (copy)
 		if guiService.MenuIsOpen then
 			if VRService.VREnabled then

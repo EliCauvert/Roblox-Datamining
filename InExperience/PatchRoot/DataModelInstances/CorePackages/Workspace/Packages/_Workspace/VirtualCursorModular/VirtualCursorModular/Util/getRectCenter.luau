@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 2 | named "getRectCenter" ]]
+﻿return function(p0)
 	return (p0.Min + p0.Max) / 2
 end

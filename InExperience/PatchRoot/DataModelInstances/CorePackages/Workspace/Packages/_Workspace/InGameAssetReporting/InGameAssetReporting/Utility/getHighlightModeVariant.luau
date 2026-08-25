@@ -7,14 +7,14 @@ local fStringHighlightModePreciseSelectionIXPField = sharedFlagsModule.FStringHi
 local fStringHighlightModePreciseSelectionForceVariant = sharedFlagsModule.FStringHighlightModePreciseSelectionForceVariant
 local constantsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.Constants)
 
-return function() --[[ line: 15 | named "getHighlightModeVariant" ]]
+return function()
 	-- upvalues: fFlagHighlightModePreciseSelectionEnabled (ref), constantsModule (ref), fStringHighlightModePreciseSelectionForceVariant (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringHighlightModePreciseSelectionIXPField (ref)
 	if not fFlagHighlightModePreciseSelectionEnabled then
 		return constantsModule.HighlightModeVariants.Default
 	elseif fStringHighlightModePreciseSelectionForceVariant ~= "" then
 		return fStringHighlightModePreciseSelectionForceVariant
 	end
-	local ok, status = pcall(function() --[[ line: 24 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 	end)

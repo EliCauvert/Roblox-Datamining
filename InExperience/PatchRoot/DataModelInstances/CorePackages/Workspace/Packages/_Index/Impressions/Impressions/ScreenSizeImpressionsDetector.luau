@@ -16,14 +16,14 @@ screenSizeImpressionsDetector.validateProps = tModule.strictInterface({
 	globalGuiInset = tModule.table,
 	topBarHeight = tModule.number
 })
-local var5 = memoize(function(p0, p1, p2) --[[ line: 26 ]]
+local var5 = memoize(function(p0, p1, p2)
 	return {
 		min = Vector2.new(0, p0),
 		max = Vector2.new(p1.X, p1.Y - p2.bottom)
 	}
 end)
 
-function screenSizeImpressionsDetector.render(p3) --[[ line: 33 ]]
+function screenSizeImpressionsDetector.render(p3)
 	-- upvalues: roactModule (ref), impressionsDetectorModule (ref), var5 (ref)
 	return roactModule.createElement(impressionsDetectorModule, {
 		parentRef = p3.props.parentRef,
@@ -36,7 +36,7 @@ function screenSizeImpressionsDetector.render(p3) --[[ line: 33 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p4, _) --[[ line: 49 ]]
+return roactRoduxModule.connect(function(p4, _)
 	return {
 		topBarHeight = p4.TopBar.topBarHeight,
 		globalGuiInset = p4.GlobalGuiInset,

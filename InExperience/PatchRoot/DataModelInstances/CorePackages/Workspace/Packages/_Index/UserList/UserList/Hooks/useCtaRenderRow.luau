@@ -9,22 +9,22 @@ local useCtaActionHandlersModule = require(script.Parent.useCtaActionHandlers)
 local profileCTAService = profileCtaServiceModule.ProfileCTAService
 local t = {}
 
-return function(p0) --[[ line: 24 | named "useCtaRenderRow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), profileCTAService (ref), useCtaActionHandlersModule (ref), enumsModule (ref), t (ref), ctaRowModule (ref)
-	reactModule.useEffect(function() --[[ line: 25 ]]
+	reactModule.useEffect(function()
 		-- upvalues: profileCTAService (copy)
 		local var8 = profileCTAService.connectRealTimeUpdates()
 		
-		return function() --[[ line: 27 ]]
+		return function()
 			-- upvalues: var8 (ref)
 			var8.Disconnect()
 		end
 	end, {})
 	local var7 = useCtaActionHandlersModule(p0)
 	
-	return reactModule.useMemo(function() --[[ line: 34 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: enumsModule (copy), t (copy), reactModule (copy), ctaRowModule (copy), var7 (ref), p0 (ref)
-		return function(p1, p2, _) --[[ line: 35 ]]
+		return function(p1, p2, _)
 			-- upvalues: enumsModule (copy), t (copy), reactModule (copy), ctaRowModule (copy), var7 (copy), p0 (copy)
 			return if p2.type == enumsModule.EntityType.User then reactModule.createElement(ctaRowModule, {
 				createRow = p1,

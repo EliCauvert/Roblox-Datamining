@@ -2,11 +2,11 @@
 local signalsModule = require(parent.Signals)
 local fFlagMyStatsMediaSelector = require(parent.SharedFlags).FFlagMyStatsMediaSelector
 
-local function _(p0) --[[ line: 45 | named "isCaptureEligible" ]]
+local function _(p0)
 	return p0.CaptureType == Enum.CaptureType.Video and p0.TimeLength ~= nil and p0.TimeLength < 1
 end
 
-return function(p1, p2, p3) --[[ line: 60 | named "createGalleryCaptureSource" ]]
+return function(p1, p2, p3)
 	-- upvalues: signalsModule (ref), fFlagMyStatsMediaSelector (ref)
 	p1 = p1 or game:GetService("CaptureService")
 	p3 = p3 or {}
@@ -14,7 +14,7 @@ return function(p1, p2, p3) --[[ line: 60 | named "createGalleryCaptureSource" ]
 	local var5, var6 = signalsModule.createSignal(false)
 	local var7 = nil
 	
-	local function appendCurrentPage() --[[ line: 76 ]]
+	local function appendCurrentPage()
 		-- upvalues: var3 (ref), var7 (write), var4 (ref), var6 (ref)
 		local cloned = table.clone(var3(false))
 		
@@ -31,11 +31,11 @@ return function(p1, p2, p3) --[[ line: 60 | named "createGalleryCaptureSource" ]
 		var6(var7.IsFinished == true)
 	end
 	
-	local function _() --[[ line: 87 | named "fetchInitial" ]]
+	local function _()
 		-- upvalues: p1 (ref), fFlagMyStatsMediaSelector (copy), p3 (ref), var7 (write), var6 (ref), p2 (ref), appendCurrentPage (ref), var3 (ref)
-		task.spawn(function() --[[ line: 88 ]]
+		task.spawn(function()
 			-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var7 (copy), var6 (copy), p2 (copy), appendCurrentPage (copy), var3 (copy)
-			local ok, status = pcall(function() --[[ line: 89 ]]
+			local ok, status = pcall(function()
 				-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var7 (copy)
 				local var12, var13 = p1:ReadCapturesFromGalleryAsync(if fFlagMyStatsMediaSelector then p3 else {}, true)
 				var7 = var13
@@ -61,14 +61,14 @@ return function(p1, p2, p3) --[[ line: 60 | named "createGalleryCaptureSource" ]
 		end)
 	end
 	
-	local function fetchMore() --[[ line: 111 ]]
+	local function fetchMore()
 		-- upvalues: var7 (write), appendCurrentPage (ref)
 		if var7 == nil or var7.IsFinished == true then
 			return
 		end
-		task.spawn(function() --[[ line: 115 ]]
+		task.spawn(function()
 			-- upvalues: var7 (copy), appendCurrentPage (copy)
-			if pcall(function() --[[ line: 116 ]]
+			if pcall(function()
 				-- upvalues: var7 (copy)
 				var7:AdvanceToNextPageAsync()
 			end) then
@@ -79,9 +79,9 @@ return function(p1, p2, p3) --[[ line: 60 | named "createGalleryCaptureSource" ]
 		end)
 	end
 	
-	task.spawn(function() --[[ line: 88 ]]
+	task.spawn(function()
 		-- upvalues: p1 (ref), fFlagMyStatsMediaSelector (copy), p3 (ref), var7 (write), var6 (ref), p2 (ref), appendCurrentPage (ref), var3 (ref)
-		local ok, status = pcall(function() --[[ line: 89 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (copy), fFlagMyStatsMediaSelector (copy), p3 (copy), var7 (copy)
 			local var12, var13 = p1:ReadCapturesFromGalleryAsync(if fFlagMyStatsMediaSelector then p3 else {}, true)
 			

@@ -8,25 +8,25 @@ game:DefineFastInt("MomentsPreloadMaxDecodeRetries", 2)
 game:DefineFastInt("MomentsScreenshotDurationSeconds", preloadConstantsModule.screenshotDurationSeconds)
 
 return {
-	getDownloadWindow = function() --[[ line: 25 ]]
+	getDownloadWindow = function()
 		return {
 			forward = game:GetFastInt("MomentsPreloadDownloadWindowForward"),
 			back = game:GetFastInt("MomentsPreloadDownloadWindowBack")
 		}
 	end,
-	getDecodeWindow = function() --[[ line: 32 ]]
+	getDecodeWindow = function()
 		return {
 			forward = game:GetFastInt("MomentsPreloadDecodeWindowForward"),
 			back = game:GetFastInt("MomentsPreloadDecodeWindowBack")
 		}
 	end,
-	getDecodeRetryDelayMs = function() --[[ line: 39 ]]
+	getDecodeRetryDelayMs = function()
 		return game:GetFastInt("MomentsPreloadDecodeRetryDelayMs")
 	end,
-	getMaxDecodeRetries = function() --[[ line: 43 ]]
+	getMaxDecodeRetries = function()
 		return game:GetFastInt("MomentsPreloadMaxDecodeRetries")
 	end,
-	getScreenshotDurationSeconds = function() --[[ line: 47 ]]
+	getScreenshotDurationSeconds = function()
 		return game:GetFastInt("MomentsScreenshotDurationSeconds")
 	end
 }

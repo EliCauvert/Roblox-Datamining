@@ -9,7 +9,7 @@ local assetOrderRelativelyEqualModule = require(avatarExperienceSave.Utils.asset
 local constants = avatarExperienceCommonModule.Constants
 local _ = require(parent.AvatarExperienceRodux)
 
-return function(p0, p1) --[[ line: 18 | named "shouldInsertNewHistoryEntry" ]]
+return function(p0, p1)
 	-- upvalues: getSubstateToTrackForChangesModule (ref), tutilsModule (ref), assetOrderRelativelyEqualModule (ref), constants (ref), itemTypeEnum (ref)
 	local var5 = getSubstateToTrackForChangesModule(p1, true)
 	

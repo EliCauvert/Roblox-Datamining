@@ -7,9 +7,9 @@ local nowModule = require(timeToInteractiveTracker.Utils.now)
 local getMemoryMbModule = require(timeToInteractiveTracker.Utils.getMemoryMb)
 local fFlagTTITrackerMemoryTrackingModule = require(timeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(p0, p1) --[[ line: 22 ]]
+return function(p0, p1)
 	-- upvalues: nowModule (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (ref), fFlagDebugTimeToInteractiveTrackerModule (ref), name (ref), fFlagTTITrackerMemoryTrackingModule (ref), getMemoryMbModule (ref)
-	return function(p2, p3, p4) --[[ line: 23 ]]
+	return function(p2, p3, p4)
 		-- upvalues: nowModule (copy), p0 (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), p1 (ref)
 		local var7 = nowModule()
 		local var8 = p0(false)[p2]
@@ -24,7 +24,7 @@ return function(p0, p1) --[[ line: 22 ]]
 				totalMemoryMB = if var9 then var9.totalMemoryMB else nil,
 				luaHeapMB = if var9 then var9.luaHeapMB else nil
 			}
-			p1(function(p5) --[[ line: 52 ]]
+			p1(function(p5)
 				-- upvalues: p2 (ref), t (ref)
 				local var11 = p5[p2]
 				

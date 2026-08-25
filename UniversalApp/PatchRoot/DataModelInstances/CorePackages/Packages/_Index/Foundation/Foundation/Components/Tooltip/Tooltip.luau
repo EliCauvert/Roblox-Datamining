@@ -23,11 +23,11 @@ local t = {
 	hasArrow = if flagsModule.FoundationTooltipBeta then true else nil
 }
 
-local function AnchorWrapper(p0) --[[ line: 52 ]]
+local function AnchorWrapper(p0)
 	-- upvalues: reactModule (ref), popoverContextModule (ref), loggerModule (ref), popoverModule (ref), withCommonPropsModule (ref)
 	local var18 = reactModule.useContext(popoverContextModule)
 	local var19 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), loggerModule (copy), var19 (ref), p0 (ref)
 		if var18.anchor ~= nil then
 			if typeof(var18.anchor) ~= "Instance" then
@@ -35,12 +35,12 @@ local function AnchorWrapper(p0) --[[ line: 52 ]]
 				
 				return
 			end
-			var19.current = var18.anchor:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ line: 62 ]]
+			var19.current = var18.anchor:GetPropertyChangedSignal("GuiState"):Connect(function()
 				-- upvalues: p0 (copy), var18 (copy)
 				p0.onHover(var18.anchor.GuiState == Enum.GuiState.Hover)
 			end)
 		end
-		return function() --[[ line: 67 ]]
+		return function()
 			-- upvalues: var19 (copy)
 			if var19.current ~= nil then
 				var19.current:Disconnect()
@@ -51,7 +51,7 @@ local function AnchorWrapper(p0) --[[ line: 52 ]]
 	return reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(p0, {}), p0.children)
 end
 
-return reactModule.memo(function(p1) --[[ line: 77 | named "Tooltip" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), constantsModule (ref), userInputService (ref), popoverModule (ref), AnchorWrapper (ref), withCommonPropsModule (ref), radiusModule (ref), viewModule (ref), textModule (ref)
 	local var20 = withDefaultsModule(p1, t)
 	local var21, var22 = reactModule.useState(false)
@@ -67,7 +67,7 @@ return reactModule.memo(function(p1) --[[ line: 77 | named "Tooltip" ]]
 			side = { position = var20.side, offset = var23.Size.Size_200 },
 			radius = radiusModule.Small,
 			backgroundStyle = var23.Inverse.Surface.Surface_0,
-			onPressedOutside = if flagsModule.FoundationTooltipPressedOutside then function() --[[ line: 143 ]]
+			onPressedOutside = if flagsModule.FoundationTooltipPressedOutside then function()
 				-- upvalues: var22 (ref)
 				var22(false)
 			end else nil
@@ -110,7 +110,7 @@ return reactModule.memo(function(p1) --[[ line: 77 | named "Tooltip" ]]
 				Shortcut = if var20.shortcut then reactModule.createElement(textModule, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-body-small content-inverse-muted",
-					Text = reactModule.useMemo(function() --[[ line: 100 ]]
+					Text = reactModule.useMemo(function()
 						-- upvalues: var20 (ref), userInputService (copy)
 						if var20.shortcut == nil then
 							return nil

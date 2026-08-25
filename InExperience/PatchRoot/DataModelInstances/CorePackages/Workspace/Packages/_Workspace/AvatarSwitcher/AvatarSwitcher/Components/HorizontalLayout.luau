@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local dividerOrientation = foundationModule.Enums.DividerOrientation
 
-return function(p0) --[[ line: 21 | named "HorizontalLayout" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref), dividerOrientation (ref)
 	return reactModule.createElement(foundationModule.View, { tag = "size-full-full" }, {
 		LeftPanel = reactModule.createElement(foundationModule.View, { tag = "col", Size = UDim2.fromScale(0.67, 1) }, {

@@ -1,11 +1,11 @@
 ﻿local httpService = game:GetService("HttpService")
 local mrRouterEnvName = game:DefineFastString("MrRouterEnvName", "")
 local t = {
-	generateTraceparent = function() --[[ line: 17 ]]
+	generateTraceparent = function()
 		-- upvalues: httpService (ref)
 		return string.format("00-%s-%s-01", httpService:GenerateGUID(false):gsub("-", ""):lower(), httpService:GenerateGUID(false):gsub("-", ""):sub(1, 16):lower())
 	end,
-	mergeMrRouterInTracestate = function(p0, p1) --[[ line: 23 ]]
+	mergeMrRouterInTracestate = function(p0, p1)
 		local text = "mrrouter-env=" .. p1
 		local t = {}
 		
@@ -14,7 +14,7 @@ local t = {
 				table.insert(t, i)
 			end
 		end
-		local function _(p2) --[[ line: 33 | named "isMrRouterEntry" ]]
+		local function _(p2)
 			return p2:sub(1, 13) == "mrrouter-env="
 		end
 		
@@ -44,7 +44,7 @@ local t = {
 	end
 }
 
-function t.injectMrRouterHeaders(p3) --[[ line: 64 ]]
+function t.injectMrRouterHeaders(p3)
 	-- upvalues: mrRouterEnvName (ref), t (ref)
 	if #mrRouterEnvName == 0 then
 		return p3

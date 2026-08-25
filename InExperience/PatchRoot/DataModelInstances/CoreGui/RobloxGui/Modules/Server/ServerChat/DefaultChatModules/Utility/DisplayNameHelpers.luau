@@ -4,7 +4,7 @@ local t = { ChattingToSelf = 1, NoMatches = 2, MultipleMatches = 3 }
 
 return {
 	CommandErrorCodes = t,
-	getUserNameFromChattedName = function(p0, p1, p2) --[[ line: 14 ]]
+	getUserNameFromChattedName = function(p0, p1, p2)
 		-- upvalues: t (ref), playersService (ref), chatSettingsModule (ref)
 		if p1 == p0 then
 			return p1, t.ChattingToSelf
@@ -38,7 +38,7 @@ return {
 			return p0, t.MultipleMatches
 		end
 	end,
-	getUsersWithDisplayNameString = function(p3, p4) --[[ line: 56 ]]
+	getUsersWithDisplayNameString = function(p3, p4)
 		-- upvalues: playersService (ref)
 		local t = {}
 		local var6 = ""

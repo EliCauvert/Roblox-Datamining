@@ -12,7 +12,7 @@ local removedConversationModule = require(appChat.Conversations.Actions.RemovedC
 local conversationModule = require(appChat.Models.Conversation)
 local fFlagAppChatShowOSAOnPageEntry = sharedFlagsModule.FFlagAppChatShowOSAOnPageEntry
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: fFlagAppChatShowOSAOnPageEntry (ref), fetchLatestConversationDetailsModule (ref), shouldShowU13ChatOptInForConversationModule (ref), conversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), getOverlayStoreModule (ref), loggerModule (ref), overlayTypesModule (ref), httpService (ref), removedConversationModule (ref)
 	local conversationId = p0.conversationId
 	local dispatch = p0.dispatch
@@ -24,10 +24,10 @@ return function(p0) --[[ line: 29 ]]
 		
 		return
 	elseif conversationId and conversationId ~= "" then
-		dispatch(fetchLatestConversationDetailsModule(conversationId)):andThen(function() --[[ line: 46 ]]
+		dispatch(fetchLatestConversationDetailsModule(conversationId)):andThen(function()
 			-- upvalues: dispatch (ref), conversationId (ref), shouldShowU13ChatOptInForConversationModule (copy), p0 (ref), conversationModule (copy), constantsModule (copy), shouldShowOSAForConversationModule (copy), onAccepted (ref), getOverlayStoreModule (copy), loggerModule (copy), overlayTypesModule (copy), httpService (copy), removedConversationModule (copy), onDeclined (ref)
 			local var12 = nil
-			dispatch(function(p2) --[[ line: 48 ]]
+			dispatch(function(p2)
 				-- upvalues: var12 (write), conversationId (copy)
 				var12 = p2:getState().ChatAppReducer.Conversations[conversationId]
 			end)
@@ -49,12 +49,12 @@ return function(p0) --[[ line: 29 ]]
 					conversationId = conversationId,
 					impressionId = httpService:GenerateGUID(false),
 					modalVariant = osaContextCard,
-					onJoin = function() --[[ line: 74 ]]
+					onJoin = function()
 						-- upvalues: var14 (ref), onAccepted (copy)
 						var14.dismissOverlay()
 						onAccepted()
 					end,
-					onDecline = function() --[[ line: 78 ]]
+					onDecline = function()
 						-- upvalues: conversationId (copy), var12 (write), conversationModule (copy), dispatch (copy), removedConversationModule (copy), var14 (ref), onDeclined (copy)
 						if conversationId and var12 and var12.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then
 							dispatch(removedConversationModule(conversationId))
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 29 ]]
 							onDeclined()
 						end
 					end,
-					onClose = function() --[[ line: 91 ]]
+					onClose = function()
 						-- upvalues: onDeclined (copy)
 						if onDeclined then
 							onDeclined()
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 29 ]]
 				return
 			end
 			onAccepted()
-		end):catch(function(p1) --[[ line: 98 ]]
+		end):catch(function(p1)
 			-- upvalues: loggerModule (copy), conversationId (ref), p0 (ref)
 			loggerModule:warning("[OSA Gate] Error fetching conversation details for {}: {}", conversationId, tostring(p1))
 			

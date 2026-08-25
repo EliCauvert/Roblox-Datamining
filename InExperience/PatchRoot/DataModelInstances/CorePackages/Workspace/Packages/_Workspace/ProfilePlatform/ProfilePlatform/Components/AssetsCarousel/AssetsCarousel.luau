@@ -34,7 +34,7 @@ local profilePlatformUseNewLayoutForAssetsCarousel = game:DefineFastFlag("Profil
 local useTokens = foundationModule.Hooks.useTokens
 local var18 = 2
 
-return function(value) --[[ line: 78 | named "AssetsCarousel" ]]
+return function(value)
 	-- upvalues: fFlagAXEnableProfileTab (ref), enumsModule (ref), useProfileFormFactorModule (ref), fFlagAddIEMProfilePage (ref), useProfileWrapperContextModule (ref), profilePlatformUseNewLayoutForAssetsCarousel (ref), useTokens (ref), fFlagProfilePlatformEnableVRModule (ref), useIsSpatial (ref), fFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule (ref), usePreferredInput (ref), responsiveModule (ref), useScreenSize (ref), useScreenSize_1 (ref), useDynamicSizeMarginModule (ref), reactModule (ref), fFlagProfilePlatformEnableInventory (ref), useLocalization (ref), textKeysModule (ref), seeMoreCurrentlyWearingCompact (ref), seeMoreCurrentlyWearingWide (ref), useSelector (ref), formFactor (ref), var18 (write), useBreakpointX (ref), marketplaceAssetTileModule (ref), assetTileModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), collectionCarousel (ref), fFlagAssetsCarouselPassActivateHeaderPropModule (ref)
 	local var20
 	local var19 = fFlagAXEnableProfileTab and value.tileVariant == enumsModule.ProfileTabVariants.MeTab
@@ -68,7 +68,7 @@ return function(value) --[[ line: 78 | named "AssetsCarousel" ]]
 	local var32 = if fFlagProfilePlatformEnableInventory then value.title else useLocalization({ currentlyWearing = textKeysModule.CurrentlyWearing })
 	
 	if seeMoreCurrentlyWearingCompact or seeMoreCurrentlyWearingWide then
-		local var33 = useSelector(function(p0) --[[ line: 107 ]]
+		local var33 = useSelector(function(p0)
 			-- upvalues: formFactor (copy)
 			return p0.FormFactor == formFactor.WIDE
 		end)
@@ -98,7 +98,7 @@ return function(value) --[[ line: 78 | named "AssetsCarousel" ]]
 			LayoutOrder = value.layoutOrder,
 			title = if fFlagProfilePlatformEnableInventory then value.title else var32.currentlyWearing,
 			items = value.assets,
-			renderItem = reactModule.useCallback(function(p1, p2, p3) --[[ line: 139 ]]
+			renderItem = reactModule.useCallback(function(p1, p2, p3)
 				-- upvalues: reactModule (copy), var19 (ref), marketplaceAssetTileModule (copy), assetTileModule (copy), fFlagProfilePlatformFixResaleLimitedPriceModule (copy), fFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), var25 (ref), value (ref)
 				return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = p3, LayoutOrder = p2 }, {
 					[`{p1.name}`] = reactModule.createElement(if var19 then marketplaceAssetTileModule else assetTileModule, {
@@ -108,7 +108,7 @@ return function(value) --[[ line: 78 | named "AssetsCarousel" ]]
 						lowestResalePrice = if fFlagProfilePlatformFixResaleLimitedPriceModule then p1.lowestResalePrice else nil,
 						assetId = p1.id,
 						itemType = if fFlagProfilePlatformEnableBundlesInAssetsCarousel then p1.itemType else "Asset",
-						onActivated = function() --[[ line: 161 ]]
+						onActivated = function()
 							-- upvalues: var25 (copy), value (copy), p1 (ref), p2 (ref)
 							if var25 then
 								return
@@ -122,7 +122,7 @@ return function(value) --[[ line: 78 | named "AssetsCarousel" ]]
 				var25,
 				if fFlagAXEnableProfileTab then var19 else nil
 			}),
-			getItemHeight = reactModule.useCallback(function(p4) --[[ line: 176 ]]
+			getItemHeight = reactModule.useCallback(function(p4)
 				-- upvalues: var31 (ref), fFlagAddIEMProfilePage (copy), var21 (ref), enumsModule (copy)
 				var31(p4)
 				

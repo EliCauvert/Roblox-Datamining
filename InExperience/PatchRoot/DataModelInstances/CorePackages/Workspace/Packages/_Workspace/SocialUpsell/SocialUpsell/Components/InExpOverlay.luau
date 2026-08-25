@@ -27,15 +27,15 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-function OverlayContent(_) --[[ line: 52 ]]
+function OverlayContent(_)
 	-- upvalues: useOverlay (ref), signalsReactModule (ref), getOverlayStoreModule (ref), reactModule (ref), OVERLAY_TYPES (ref), createLazyComponent (ref), socialUpsell (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactRobloxModule (ref), focusRoot (ref), t (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var14 = useOverlay()
 	local var15 = signalsReactModule.useSignalState(getOverlayStoreModule(false).getCurrentOverlay)
-	local var16 = reactModule.useMemo(function() --[[ line: 57 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: OVERLAY_TYPES (copy), createLazyComponent (copy), socialUpsell (copy)
 		return {
 			[OVERLAY_TYPES.SocialUpsell] = {
-				Component = createLazyComponent(function() --[[ line: 60 ]]
+				Component = createLazyComponent(function()
 					-- upvalues: socialUpsell (copy)
 					return require(socialUpsell.Components.InAppSocialUpsellOverlayWrapper)
 				end)
@@ -47,11 +47,11 @@ function OverlayContent(_) --[[ line: 52 ]]
 		isAutoFocusRoot = true,
 		isIsolated = true,
 		shouldRestoreFocus = true,
-		eventHandlers = reactModule.useMemo(function() --[[ line: 67 ]]
+		eventHandlers = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), getOverlayStoreModule (copy)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p0) --[[ line: 70 ]]
+					handler = inputHandlersModule.onRelease(function(p0)
 						-- upvalues: getOverlayStoreModule (copy)
 						getOverlayStoreModule(false).dismissCurrentOverlay()
 						p0:cancel()
@@ -66,15 +66,15 @@ function OverlayContent(_) --[[ line: 52 ]]
 	}), var14) else nil
 end
 
-return function(_) --[[ line: 99 ]]
+return function(_)
 	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), roactRoduxModule (ref), roduxModule (ref), localizationProvider (ref), var9 (ref), foundationProvider (ref), provider (ref)
-	local var17 = reactModule.useMemo(function() --[[ line: 108 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: reactFocusNavigationModule (copy)
 		return reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 112 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref)
-		return function() --[[ line: 113 ]]
+		return function()
 			-- upvalues: var17 (copy)
 			if var17 then
 				var17:teardown()

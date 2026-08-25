@@ -6,7 +6,7 @@ local roactServices = require(parent.RoactServices).RoactServices
 local mockProvidersModule = require(genericAbuseReporting.MockProviders)
 local loaderProvider = require(genericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
 
-local function findEventsBySubType(p0, p1, p2) --[[ line: 108 ]]
+local function findEventsBySubType(p0, p1, p2)
 	local t = {}
 	
 	for i, v in p0.mock.calls do
@@ -20,7 +20,7 @@ local function findEventsBySubType(p0, p1, p2) --[[ line: 108 ]]
 end
 
 return {
-	wrapInAbuseReportProviders = function(p3, p4) --[[ line: 19 ]]
+	wrapInAbuseReportProviders = function(p3, p4)
 		-- upvalues: reactModule (ref), roactServices (ref), roactNetworking (ref), mockProvidersModule (ref), loaderProvider (ref)
 		p4 = p4 or {}
 		
@@ -33,7 +33,7 @@ return {
 			})
 		})
 	end,
-	makeMinimalCloseConfig = function() --[[ line: 39 ]]
+	makeMinimalCloseConfig = function()
 		return {
 			version = 1,
 			resources = {},
@@ -51,7 +51,7 @@ return {
 			translations = {}
 		}
 	end,
-	makeListParagraphConfig = function() --[[ line: 60 ]]
+	makeListParagraphConfig = function()
 		return {
 			name = "test_list_paragraph",
 			version = 1,
@@ -81,7 +81,7 @@ return {
 			translations = {}
 		}
 	end,
-	makeMalformedConfig = function() --[[ line: 95 ]]
+	makeMalformedConfig = function()
 		return {
 			version = 1,
 			resources = {},
@@ -92,17 +92,17 @@ return {
 		}
 	end,
 	findEventsBySubType = findEventsBySubType,
-	findRenderErrorEvents = function(p5) --[[ line: 125 ]]
+	findRenderErrorEvents = function(p5)
 		-- upvalues: findEventsBySubType (ref)
-		return findEventsBySubType(p5, "Error", function(p6) --[[ line: 126 ]]
+		return findEventsBySubType(p5, "Error", function(p6)
 			local errorMessage = p6.error_detail and p6.error_detail.error_message
 			
 			return type(errorMessage) == "string" and errorMessage:sub(1, 13) == "Render error:"
 		end)
 	end,
-	findFetchErrorEvents = function(p7) --[[ line: 132 ]]
+	findFetchErrorEvents = function(p7)
 		-- upvalues: findEventsBySubType (ref)
-		return findEventsBySubType(p7, "Error", function(p8) --[[ line: 133 ]]
+		return findEventsBySubType(p7, "Error", function(p8)
 			local errorMessage = p8.error_detail and p8.error_detail.error_message
 			
 			return type(errorMessage) == "string" and errorMessage:sub(1, 23) == "Failed to fetch config:"

@@ -48,7 +48,7 @@ local t_1 = {
 	MODAL_POSITION = 0.4
 }
 
-return function(p0) --[[ line: 77 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), friendRequestNicknameMinChars (ref), friendRequestNicknameMaxChars (ref), useStyle (ref), analytics (ref), appStorageService (ref), friendRequestNicknameMaxHistory (ref), reactModule (ref), t_1 (ref), friendRequestNicknamesUIBugFixes (ref), eventNamesModule (ref), t (ref), getDeepValue (ref), images (ref), interactiveAlert (ref), styledTextLabel (ref), imageSetLabel (ref), callbackInputBox (ref), iconSize (ref), dropdownMenu (ref), utilityActionIcon (ref), buttonType (ref)
 	local ok, status
 	local var13 = useLocalization({
@@ -74,7 +74,7 @@ return function(p0) --[[ line: 77 ]]
 		textboxPlaceholder = textKeysModule.TextboxPlaceholder
 	})
 	
-	local _ = function(p1) --[[ line: 102 ]]
+	local _ = function(p1)
 		-- upvalues: var13 (ref)
 		return if p1 == "Invalid" then var13.errorInvalidText elseif p1 == "TooShort" then var13.errorTooShortText elseif p1 == "TooLong" then var13.errorTooLongText elseif p1 == "InvalidCharacters" then var13.errorInvalidCharactersText elseif p1 == "Moderated" then var13.errorModeratedText elseif p1 == "ModeratedDisplayNameWithNickname" then var13.errorModeratedText elseif p1 == "UpdateThrottled" then var13.errorThrottledText else ""
 	end
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 77 ]]
 	local var17 = ""
 	
 	if game:GetEngineFeature("FriendRequestNicknameHistoryStorageKey") then
-		ok, status = pcall(function() --[[ line: 132 ]]
+		ok, status = pcall(function()
 			-- upvalues: appStorageService (copy)
 			return {
 				nicknames = appStorageService:GetItem("FriendRequestNicknameHistory")
@@ -127,7 +127,7 @@ return function(p0) --[[ line: 77 ]]
 	end
 	local var26 = reactModule.useRef(nil)
 	
-	local var27 = function(p2) --[[ line: 190 ]]
+	local var27 = function(p2)
 		-- upvalues: ok (write), friendRequestNicknameMaxHistory (copy), appStorageService (copy)
 		if game:GetEngineFeature("FriendRequestNicknameHistoryStorageKey") then
 			if p2 == "" then return end
@@ -146,7 +146,7 @@ return function(p0) --[[ line: 77 ]]
 		end
 	end
 	
-	local _ = function(p3) --[[ line: 223 ]]
+	local _ = function(p3)
 		-- upvalues: var25 (ref), t_1 (copy), status (ref)
 		if not p3 then
 			var25(t_1.DROPDOWN_FRAME_HEIGHT_CLOSED)
@@ -168,9 +168,9 @@ return function(p0) --[[ line: 77 ]]
 		var25(t_1.DROPDOWN_FRAME_HEIGHT_CLOSED)
 	end
 	
-	local var28 = function() --[[ line: 240 ]]
+	local var28 = function()
 		-- upvalues: p0 (ref), var18 (ref), var15 (ref), eventNamesModule (copy), var17 (write), var27 (ref), var21 (ref), t (copy), var13 (ref)
-		p0.sendFriendRequestWithNickname(var18):andThen(function(_) --[[ line: 243 ]]
+		p0.sendFriendRequestWithNickname(var18):andThen(function(_)
 			-- upvalues: var15 (copy), eventNamesModule (copy), p0 (copy), var17 (copy), var18 (copy), var27 (copy)
 			var15.fireAnalyticsEvent(eventNamesModule.SetNicknameAddNameClicked, {
 				friendshipOriginSourceType = p0.friendRequestSource,
@@ -179,13 +179,13 @@ return function(p0) --[[ line: 77 ]]
 			})
 			var27(var18)
 			p0.navigateBack()
-		end):catch(function() --[[ line: 252 ]]
+		end):catch(function()
 			-- upvalues: var21 (copy), t (copy), var13 (copy)
 			var21(if t.Invalid == "Invalid" then var13.errorInvalidText elseif t.TooShort == "Invalid" then var13.errorTooShortText elseif t.TooLong == "Invalid" then var13.errorTooLongText elseif t.InvalidCharacters == "Invalid" then var13.errorInvalidCharactersText elseif t.Moderated == "Invalid" then var13.errorModeratedText elseif t.ModeratedDisplayName == "Invalid" then var13.errorModeratedText elseif t.UpdateThrottled == "Invalid" then var13.errorThrottledText else "")
 		end)
 	end
 	
-	local var29 = reactModule.useCallback(function() --[[ line: 257 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var15 (ref), eventNamesModule (copy), var17 (write)
 		p0.sendFriendRequest()
 		var15.fireAnalyticsEvent(eventNamesModule.SetNicknameSkipClicked, {
@@ -194,7 +194,7 @@ return function(p0) --[[ line: 77 ]]
 		})
 		p0.navigateBack()
 	end, { p0.sendFriendRequest, p0.navigateBack })
-	reactModule.useEffect(function() --[[ line: 266 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), eventNamesModule (copy), p0 (ref), var17 (write)
 		var15.fireAnalyticsEvent(eventNamesModule.SetNicknameModalOpened, {
 			friendshipOriginSourceType = p0.friendRequestSource,
@@ -202,7 +202,7 @@ return function(p0) --[[ line: 77 ]]
 		})
 	end, {})
 	
-	local var30 = function(p4) --[[ line: 273 ]]
+	local var30 = function(p4)
 		-- upvalues: p0 (ref), friendRequestNicknameMinChars (ref), var23 (ref), var21 (ref), var13 (ref), friendRequestNicknameMaxChars (ref), var22 (ref), var18 (ref), var26 (ref), getDeepValue (copy), t (copy), var19 (ref)
 		p0.setSaveButtonEnabled(false)
 		local charCount = utf8.len(p4)
@@ -223,7 +223,7 @@ return function(p0) --[[ line: 77 ]]
 				var26.current.Text = p4
 			end
 		end
-		p0.validateNickname(p4):andThen(function(p5) --[[ line: 313 ]]
+		p0.validateNickname(p4):andThen(function(p5)
 			-- upvalues: getDeepValue (copy), var21 (copy), t (copy), var13 (copy), p0 (copy), var19 (copy), p4 (write)
 			local var34 = getDeepValue(p5, "responseBody.status")
 			
@@ -236,7 +236,7 @@ return function(p0) --[[ line: 77 ]]
 			end
 			var21(if var34 == t.Invalid then var13.errorInvalidText elseif var34 == t.TooShort then var13.errorTooShortText elseif var34 == t.TooLong then var13.errorTooLongText elseif var34 == t.InvalidCharacters then var13.errorInvalidCharactersText elseif var34 == t.Moderated then var13.errorModeratedText elseif var34 == t.ModeratedDisplayName then var13.errorModeratedText elseif var34 == t.UpdateThrottled then var13.errorThrottledText else "")
 			p0.setSaveButtonEnabled(false)
-		end):catch(function(_) --[[ line: 325 ]]
+		end):catch(function(_)
 			-- upvalues: var21 (copy), var13 (copy), p0 (copy)
 			var21(var13.errorInvalidText)
 			p0.setSaveButtonEnabled(false)
@@ -245,7 +245,7 @@ return function(p0) --[[ line: 77 ]]
 		var19(p4)
 	end
 	
-	local var31 = function() --[[ line: 335 ]]
+	local var31 = function()
 		-- upvalues: images (copy), var13 (ref), var17 (write), ok (write)
 		local list = {
 			{
@@ -268,7 +268,7 @@ return function(p0) --[[ line: 77 ]]
 		titleIcon = images["icons/status/success_large"],
 		position = UDim2.new(0.5, 0, t_1.MODAL_POSITION, 0),
 		screenSize = p0.screenSize,
-		middleContent = function() --[[ line: 362 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), t_1 (copy), styledTextLabel (copy), var13 (ref), font (ref), theme (ref), p0 (ref), imageSetLabel (copy), var16 (ref), images (copy), var20 (ref), callbackInputBox (copy), var18 (ref), iconSize (copy), var30 (ref), var26 (ref), var17 (write), var24 (ref), dropdownMenu (copy), var19 (ref), ok (write), status (ref), var25 (ref), var31 (ref), utilityActionIcon (copy), var22 (ref), friendRequestNicknameMaxChars (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -423,7 +423,7 @@ return function(p0) --[[ line: 77 ]]
 							layoutOrder = 6,
 							iconSize = iconSize.Small,
 							icon = images["icons/actions/edit/clear"],
-							onActivated = function() --[[ line: 532 ]]
+							onActivated = function()
 								-- upvalues: p0 (copy), var25 (copy), t_1 (copy)
 								p0.setOnTextInput(false)
 								var25(t_1.DROPDOWN_FRAME_HEIGHT_CLOSED)
@@ -441,7 +441,7 @@ return function(p0) --[[ line: 77 ]]
 						dropdownMenuListPositionFixed = true,
 						placeholder = var13.dropdownPlaceholder,
 						height = UDim.new(0, t_1.DROPDOWN_HEIGHT),
-						onChange = function(p6) --[[ line: 456 ]]
+						onChange = function(p6)
 							-- upvalues: p0 (copy), var19 (copy), ok (copy)
 							local var36 = tonumber(string.gsub(p6, "%D", ""))
 							
@@ -455,7 +455,7 @@ return function(p0) --[[ line: 77 ]]
 								p0.setSaveButtonEnabled(true)
 							end
 						end,
-						onMenuOpenChange = function(p7) --[[ line: 470 ]]
+						onMenuOpenChange = function(p7)
 							-- upvalues: status (copy), var25 (copy), t_1 (copy)
 							if not p7 then
 								var25(t_1.DROPDOWN_FRAME_HEIGHT_CLOSED)

@@ -5,7 +5,7 @@ local checkbox = require(parent.Foundation).Checkbox
 local linkButton = UIBloxModule.App.Button.LinkButton
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), checkbox (ref), linkButton (ref)
 	local var2 = useStyle()
 	local baseSize = var2.Font.BaseSize

@@ -28,7 +28,7 @@ local capturePreviewTileModule = require(coreScriptsPlayerFeedback.Components.Ca
 local capturePickerGridModule = require(coreScriptsPlayerFeedback.Components.CapturePickerGrid)
 local capturePickerPreviewModule = require(coreScriptsPlayerFeedback.Components.CapturePickerPreview)
 local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local var13 = reactModule.memo(function(p0) --[[ line: 52 ]]
+local var13 = reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), capturePreviewTileModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var15 = useTokens()
 	local var16 = 0
@@ -67,7 +67,7 @@ local var13 = reactModule.memo(function(p0) --[[ line: 52 ]]
 	for i_1, v in p0.uploadStatuses do
 		table.insert(t_1, { key = i_1, captureStatus = v })
 	end
-	table.sort(t_1, function(p1, p2) --[[ line: 98 ]]
+	table.sort(t_1, function(p1, p2)
 		return (p1.captureStatus.order or 0) < (p2.captureStatus.order or 0)
 	end)
 	local var21 = 0
@@ -80,7 +80,7 @@ local var13 = reactModule.memo(function(p0) --[[ line: 52 ]]
 			status = v_1.captureStatus.status,
 			failureReason = v_1.captureStatus.failureReason,
 			layoutOrder = var21,
-			onRemove = function() --[[ line: 110 ]]
+			onRemove = function()
 				-- upvalues: p0 (ref), key (ref)
 				p0.onCaptureRemoved(key)
 			end
@@ -173,7 +173,7 @@ local t = {
 	TICKET_CATEGORY_PURCHASING_ISSUE = true
 }
 
-return reactModule.memo(function(p3) --[[ line: 256 ]]
+return reactModule.memo(function(p3)
 	-- upvalues: useTokens (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (ref), useCaptureUploadsModule (ref), useGalleryCapturesModule (ref), reactModule (ref), constantsModule (ref), useLocalization (ref), t (ref), getCaptureKeyModule (ref), useEscapeDismissModule (ref), dialog (ref), capturePickerPreviewModule (ref), capturePickerGridModule (ref), view (ref), text (ref), dropdown (ref), inputSize (ref), inputVariant (ref), textArea (ref), var13 (ref), checkbox (ref), buttonVariant (ref)
 	local var23 = useTokens()
 	local description = p3.description
@@ -269,14 +269,14 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 	local var47 = nil
 	
 	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		var45 = reactModule.useCallback(function() --[[ line: 349 ]]
+		var45 = reactModule.useCallback(function()
 			-- upvalues: category (ref), var27 (write)
 			if category == "" then
 				return
 			end
 			var27(true)
 		end, { category })
-		reactModule.useEffect(function() --[[ line: 356 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var26 (write), var29 (write), var31 (write), var24 (write), var25 (write)
 			if not var26 then
 				var29({})
@@ -293,7 +293,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 			var31(nil)
 			var25.load()
 		end, { var26 })
-		local var48 = reactModule.useMemo(function() --[[ line: 372 ]]
+		local var48 = reactModule.useMemo(function()
 			-- upvalues: var25 (write), var28 (write), getCaptureKeyModule (copy)
 			local t = {}
 			
@@ -306,10 +306,10 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 		end, { var25.captures, var28 })
 		var43 = #var48
 		var44 = var43 >= 5
-		var46 = reactModule.useCallback(function(p4) --[[ line: 385 ]]
+		var46 = reactModule.useCallback(function(p4)
 			-- upvalues: getCaptureKeyModule (copy), var29 (write), var44 (write)
 			local var58 = getCaptureKeyModule(p4)
-			var29(function(p5) --[[ line: 387 ]]
+			var29(function(p5)
 				-- upvalues: var58 (ref), var44 (copy)
 				local var59 = p5[var58] == true
 				
@@ -330,7 +330,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 		end, { var44 })
 		local var49 = next(var24.uploadStatuses) ~= nil
 		
-		var47 = function() --[[ line: 403 ]]
+		var47 = function()
 			-- upvalues: var43 (write), var49 (ref), var24 (write), var48 (write), var27 (write)
 			if var43 == 0 and not var49 then
 				return
@@ -353,10 +353,10 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 		})
 	end
 	local var52 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var24 and (not var24.anyUploading and (not var24 or not var24.hasNonModerationFailure)))))
-	local var53 = reactModule.useCallback(function() --[[ line: 432 ]]
+	local var53 = reactModule.useCallback(function()
 		-- upvalues: var52 (ref), description (ref), category (ref), var41_1 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var24 (write), p3 (ref)
 		if var52 then
-			pcall(function() --[[ line: 436 ]]
+			pcall(function()
 				-- upvalues: description (copy), category (copy), var41_1 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var24 (copy)
 				local socialService = game:GetService("SocialService")
 				
@@ -389,9 +389,9 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 	end, {
 		description, category, var41_1, var52, var24 or false, p3.closePrompt
 	})
-	local var54 = reactModule.useCallback(function() --[[ line: 469 ]]
+	local var54 = reactModule.useCallback(function()
 		-- upvalues: p3 (ref)
-		pcall(function() --[[ line: 470 ]]
+		pcall(function()
 			local socialService = game:GetService("SocialService")
 			
 			if socialService.SignalFeedbackSubmissionPermissionDenied then
@@ -401,9 +401,9 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 		p3.onFormAbandoned()
 		p3.closePrompt()
 	end, { p3.closePrompt, p3.onFormAbandoned })
-	local var55 = reactModule.useCallback(function() --[[ line: 485 ]]
+	local var55 = reactModule.useCallback(function()
 		-- upvalues: p3 (ref)
-		pcall(function() --[[ line: 486 ]]
+		pcall(function()
 			local socialService = game:GetService("SocialService")
 			
 			if socialService.SignalFeedbackSubmissionPermissionDenied then
@@ -412,7 +412,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 		end)
 		p3.onFormAbandoned()
 		p3.closePrompt()
-		pcall(function() --[[ line: 494 ]]
+		pcall(function()
 			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
 			local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
 			local settings = modules and modules:FindFirstChild("Settings") or nil
@@ -426,7 +426,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 			end
 		end)
 	end, { p3.closePrompt, p3.onFormAbandoned })
-	useEscapeDismissModule("PlayerSupportPromptCancel", if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.useCallback(function() --[[ line: 509 ]]
+	useEscapeDismissModule("PlayerSupportPromptCancel", if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.useCallback(function()
 		-- upvalues: var30 (write), var31 (write), var26 (write), var27 (write), var54 (ref)
 		if var30 then
 			var31(nil)
@@ -452,7 +452,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 				hasMore = var25.hasMore,
 				selectedKeys = var28,
 				onToggle = var46,
-				onPreview = function(p8) --[[ line: 550 ]]
+				onPreview = function(p8)
 					-- upvalues: var31 (write)
 					var31(p8)
 				end,
@@ -509,7 +509,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 							size = inputSize.Medium,
 							variant = inputVariant.Utility,
 							width = UDim.new(1, 0),
-							onItemChanged = function(p6) --[[ line: 613 ]]
+							onItemChanged = function(p6)
 								-- upvalues: setCategory (ref)
 								setCategory(tostring(p6))
 							end
@@ -577,7 +577,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 						label = if var41 then var38.ShareUserIdLabelRequired else var38.ShareUserIdLabel,
 						isChecked = var41_1,
 						isDisabled = var41,
-						onActivated = function(p7) --[[ line: 689 ]]
+						onActivated = function(p7)
 							-- upvalues: setShareUserId (ref)
 							setShareUserId(p7)
 						end,
@@ -610,12 +610,12 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 				{
 					text = var38.Cancel,
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 751 ]]
+					onActivated = function()
 						-- upvalues: var27 (write)
 						var27(false)
 					end
 				}
-			} else (function() --[[ line: 713 ]]
+			} else (function()
 				-- upvalues: getCaptureKeyModule (copy), var30 (write), var28 (write), var44 (write), var38 (ref), buttonVariant (copy), var46 (write), var31 (write)
 				local var71 = var28[getCaptureKeyModule(var30)] == true
 				local var71_1 = var71 or not var44
@@ -625,7 +625,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 						text = if var71 then var38.Deselect else var38.Select,
 						variant = if var71 then buttonVariant.SoftEmphasis elseif var71_1 then buttonVariant.Emphasis else buttonVariant.Standard,
 						isDisabled = not var71_1 and not var71,
-						onActivated = function() --[[ line: 725 ]]
+						onActivated = function()
 							-- upvalues: var46 (copy), var30 (copy), var31 (copy)
 							var46(var30)
 							var31(nil)
@@ -634,7 +634,7 @@ return reactModule.memo(function(p3) --[[ line: 256 ]]
 					{
 						text = var38.Cancel,
 						variant = buttonVariant.Standard,
-						onActivated = function() --[[ line: 733 ]]
+						onActivated = function()
 							-- upvalues: var31 (copy)
 							var31(nil)
 						end

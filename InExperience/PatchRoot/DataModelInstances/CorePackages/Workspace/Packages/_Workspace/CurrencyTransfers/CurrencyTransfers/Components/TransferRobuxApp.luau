@@ -4,7 +4,7 @@ local transferRobuxContainerModule = require(currencyTransfers.Components.Transf
 local transferContextModule = require(currencyTransfers.Contexts.TransferContext)
 local _ = require(currencyTransfers.Stores.createTransferStore)
 
-return function(p0) --[[ line: 17 | named "TransferRobuxApp" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), transferContextModule (ref), transferRobuxContainerModule (ref)
 	return reactModule.createElement(transferContextModule.Provider, { value = p0.transferStore }, {
 		TransferRobuxSheet = reactModule.createElement(transferRobuxContainerModule, {})

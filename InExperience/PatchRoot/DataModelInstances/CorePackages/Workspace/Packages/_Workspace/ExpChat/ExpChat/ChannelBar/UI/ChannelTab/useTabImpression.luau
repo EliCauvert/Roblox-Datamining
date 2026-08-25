@@ -4,11 +4,11 @@ local reactModule = require(parent.React)
 local analytics = require(parent.ExpChatShared).Analytics
 local var2 = require(parent.Cryo).List.join(analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(expChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
 
-return function(value) --[[ line: 28 | named "useTabImpression" ]]
+return function(value)
 	-- upvalues: reactModule (ref), analytics (ref), var2 (ref)
 	local tabType = value.tabType or "Unknown"
 	local var4 = if value.hasUnreadMessages then 1 else 0
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: value (ref), analytics (copy), tabType (ref), var4 (ref), var2 (copy)
 		if value.enabled then
 			analytics:TelemetryLogEvent(analytics.ExpChatTabImpressionConfig, {

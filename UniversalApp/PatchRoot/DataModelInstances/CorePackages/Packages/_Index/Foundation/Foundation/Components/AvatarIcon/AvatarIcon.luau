@@ -17,7 +17,7 @@ local t = {
 	size = avatarIconSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 37 | named "AvatarIcon" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useAvatarIconVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), mapBindableModule (ref), getRbxThumbModule (ref), thumbnailTypeModule (ref), thumbnailSizeModule (ref)
 	local var14 = withDefaultsModule(p0, t)
 	local var15 = useAvatarIconVariantsModule(useTokensModule(), var14.size, var14.backplateStyle)
@@ -30,7 +30,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 37 | 
 		Size = UDim2.fromOffset(var15.container.size, var15.container.size)
 	}), {
 		Image = reactModule.createElement(imageModule, {
-			Image = mapBindableModule(var14.userId, function(p2) --[[ line: 54 ]]
+			Image = mapBindableModule(var14.userId, function(p2)
 				-- upvalues: getRbxThumbModule (copy), thumbnailTypeModule (copy), thumbnailSizeModule (copy)
 				return getRbxThumbModule(thumbnailTypeModule.AvatarHeadShot, p2, thumbnailSizeModule.Medium)
 			end),

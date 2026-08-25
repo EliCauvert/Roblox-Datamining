@@ -30,7 +30,7 @@ local t = {
 	[sduiDataBindingContentTypeModule.userProfile] = if fFlagSduiExperienceDetailsSupport then { "user_id" } else nil
 }
 
-return function(p0, p1) --[[ line: 102 | named "buildDataBindingSourcesForTemplate" ]]
+return function(p0, p1)
 	-- upvalues: protoVariableMapperModule (ref), fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref), fFlagSduiHydrationFetchIfMissing (ref)
 	local t_1 = {}
 	

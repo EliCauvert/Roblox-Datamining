@@ -4,7 +4,7 @@ local parseContentIdsModule = require(parent.util.ParseContentIds)
 local getFFlagUGCValidateEmptySurfaceAppearanceModule = require(parent.flags.getFFlagUGCValidateEmptySurfaceAppearance)
 local t = {}
 
-local function findSurfaceAppearances(p0, p1) --[[ line: 17 ]]
+local function findSurfaceAppearances(p0, p1)
 	-- upvalues: UGCValidationService (ref), parseContentIdsModule (ref), getFFlagUGCValidateEmptySurfaceAppearanceModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -51,14 +51,14 @@ local function findSurfaceAppearances(p0, p1) --[[ line: 17 ]]
 	return t, t_1
 end
 
-function t.findSurfaceAppearancesMissingTexturePacks(p2, p3) --[[ line: 60 ]]
+function t.findSurfaceAppearancesMissingTexturePacks(p2, p3)
 	-- upvalues: findSurfaceAppearances (ref)
 	local _, var10 = findSurfaceAppearances(p2, p3)
 	
 	return var10
 end
 
-function t.findSurfaceAppearancesWithTexturePacks(p4) --[[ line: 68 ]]
+function t.findSurfaceAppearancesWithTexturePacks(p4)
 	-- upvalues: findSurfaceAppearances (ref)
 	return findSurfaceAppearances(p4, false)
 end

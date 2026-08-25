@@ -8,7 +8,7 @@ local t = {
 	clear = "Feature.Avatar.Action.Clear"
 }
 
-return function(p0) --[[ line: 31 | named "SearchInputView" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), reactModule (ref), foundationModule (ref)
 	local var3 = useTokens()
 	local var4 = useLocalization(t)

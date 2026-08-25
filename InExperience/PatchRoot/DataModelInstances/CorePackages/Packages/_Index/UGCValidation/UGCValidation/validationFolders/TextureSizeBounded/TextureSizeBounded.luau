@@ -19,9 +19,9 @@ local t = {
 	expectedFailures = {}
 }
 
-local function checkEditableImageSize(p0, p1, p2, p3, p4, p5, p6) --[[ line: 32 ]]
+local function checkEditableImageSize(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: UGCValidationService (ref), validationEnumsModule (ref), errorSourceStringsModule (ref)
-	local ok, status = pcall(function() --[[ line: 41 ]]
+	local ok, status = pcall(function()
 		-- upvalues: UGCValidationService (copy), p0 (ref)
 		return UGCValidationService:GetEditableImageSize(p0)
 	end)
@@ -43,7 +43,7 @@ local function checkEditableImageSize(p0, p1, p2, p3, p4, p5, p6) --[[ line: 32 
 	p4:fail(errorSourceStringsModule.Keys.TextureSize_FailedToLoad, { FullName = p2 }, p5)
 end
 
-function t.run(p7, p8) --[[ line: 71 ]]
+function t.run(p7, p8)
 	-- upvalues: fetchAllDesiredDataModule (ref), validationEnumsModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), constantsInterfaceModule (ref), checkEditableImageSize (ref)
 	local rootInstance = p8.rootInstance
 	local assetType = p8.uploadEnum.assetType

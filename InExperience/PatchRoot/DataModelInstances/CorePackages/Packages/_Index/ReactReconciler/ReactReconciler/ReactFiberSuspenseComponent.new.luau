@@ -12,7 +12,7 @@ local isSuspenseInstancePending = reactFiberHostConfigModule.isSuspenseInstanceP
 local isSuspenseInstanceFallback = reactFiberHostConfigModule.isSuspenseInstanceFallback
 
 return {
-	shouldCaptureSuspense = function(p0, p1) --[[ line: 84 ]]
+	shouldCaptureSuspense = function(p0, p1)
 		local memoizedState = p0.memoizedState
 		
 		if memoizedState then
@@ -22,7 +22,7 @@ return {
 		
 		return if memoizedProps.fallback == nil then false elseif memoizedProps.unstable_avoidThisFallback == true then p1 else true
 	end,
-	findFirstSuspended = function(p2) --[[ line: 116 ]]
+	findFirstSuspended = function(p2)
 		-- upvalues: suspenseComponent (ref), isSuspenseInstancePending (ref), isSuspenseInstanceFallback (ref), suspenseListComponent (ref), didCapture (ref), noFlags (ref)
 		local var3 = p2
 		while var3 ~= nil do

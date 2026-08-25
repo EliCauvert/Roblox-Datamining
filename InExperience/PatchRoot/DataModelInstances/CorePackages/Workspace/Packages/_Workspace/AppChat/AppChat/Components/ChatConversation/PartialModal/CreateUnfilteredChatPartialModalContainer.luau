@@ -26,12 +26,12 @@ local t = {
 	networkErrorTextKey = "Feature.Toast.NetworkingError.SomethingIsWrong",
 	actionKey = "Feature.Chat.Action.Create",
 	cancelAlertKey = "Feature.Chat.Action.Cancel",
-	onDismissed = function() --[[ line: 41 ]] end,
-	navigateToConversation = function(_) --[[ line: 42 ]] end,
-	navigateToToast = function(_) --[[ line: 43 ]] end
+	onDismissed = function() end,
+	navigateToConversation = function(_) end,
+	navigateToToast = function(_) end
 }
 
-return memo(function(p0) --[[ line: 53 | named "CreateUnfilteredChatPartialModalContainer" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useScreenSize (ref), useLayerCollector (ref), useState (ref), useDispatch (ref), useAnalyticsModule (ref), useIsLocalPlayerPartyVoiceEligible (ref), useEffectOnMount (ref), eventNamesModule (ref), useLocalization (ref), useCallback (ref), appChatNetworkingModule (ref), reactModule (ref), partialModalModule (ref)
 	local var9 = cryoModule.Dictionary.union(t, p0)
 	local var10 = useStyle()
@@ -45,7 +45,7 @@ return memo(function(p0) --[[ line: 53 | named "CreateUnfilteredChatPartialModal
 	local var15 = useDispatch()
 	local var16 = useAnalyticsModule()
 	local var17 = useIsLocalPlayerPartyVoiceEligible()
-	useEffectOnMount(function() --[[ line: 66 ]]
+	useEffectOnMount(function()
 		-- upvalues: var16 (ref), eventNamesModule (copy), var9 (ref)
 		if var16 then
 			var16.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogRendered, { conversationId = var9.conversationId })
@@ -59,7 +59,7 @@ return memo(function(p0) --[[ line: 53 | named "CreateUnfilteredChatPartialModal
 		actionText = var9.actionKey,
 		cancelAlertText = var9.cancelAlertKey
 	})
-	local var19 = useCallback(function() --[[ line: 83 ]]
+	local var19 = useCallback(function()
 		-- upvalues: var9 (ref), var18 (ref)
 		var9.navigateToToast(var18.networkErrorText)
 	end, { var9.navigateToToast, var18.networkErrorText })
@@ -71,13 +71,13 @@ return memo(function(p0) --[[ line: 53 | named "CreateUnfilteredChatPartialModal
 		cancelAlertText = var18.cancelAlertText,
 		isButtonDisabled = var13,
 		screenSize = var11,
-		onActivated = useCallback(function() --[[ line: 88 ]]
+		onActivated = useCallback(function()
 			-- upvalues: var16 (ref), eventNamesModule (copy), var9 (ref), var14 (ref), var15 (ref), appChatNetworkingModule (copy), var19 (ref)
 			if var16 then
 				var16.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogActionClicked, { conversationId = var9.conversationId })
 			end
 			var14(true)
-			var15(appChatNetworkingModule.rodux.DuplicateConversation.API(var9.conversationId, "trusted_comms")):andThen(function(p1) --[[ line: 96 ]]
+			var15(appChatNetworkingModule.rodux.DuplicateConversation.API(var9.conversationId, "trusted_comms")):andThen(function(p1)
 				-- upvalues: var9 (copy), var19 (copy)
 				local responseBody = p1.responseBody
 				local id = responseBody and (responseBody.conversations and (responseBody.conversations[1] and responseBody.conversations[1].id))
@@ -88,17 +88,17 @@ return memo(function(p0) --[[ line: 53 | named "CreateUnfilteredChatPartialModal
 					return
 				end
 				var19()
-			end):catch(function() --[[ line: 108 ]]
+			end):catch(function()
 				-- upvalues: var19 (copy)
 				var19()
-			end):finally(function() --[[ line: 111 ]]
+			end):finally(function()
 				-- upvalues: var14 (copy)
 				var14(false)
 			end)
 		end, {
 			var15, var14, var19, var9.navigateToConversation, var9.conversationId, var16
 		}),
-		onDismissed = useCallback(function() --[[ line: 117 ]]
+		onDismissed = useCallback(function()
 			-- upvalues: var16 (ref), eventNamesModule (copy), var9 (ref)
 			if var16 then
 				var16.fireAnalyticsEvent(eventNamesModule.ConversationUpgradeDialogDismissed, { conversationId = var9.conversationId })

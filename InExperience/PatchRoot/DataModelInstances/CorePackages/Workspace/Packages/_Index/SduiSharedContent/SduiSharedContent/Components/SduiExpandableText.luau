@@ -7,7 +7,7 @@ local expandableText = appBloxModule.ExpandableText
 local view = foundationModule.View
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "SduiExpandableText" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), reportUnifiedLoggingAction (ref), fFlagSduiExperienceDetailsSupport (ref), view (ref), expandableText (ref)
 	local layoutOrder = p0.layoutOrder
 	local t = {
@@ -19,7 +19,7 @@ return reactModule.memo(function(p0) --[[ line: 26 | named "SduiExpandableText" 
 		pressedTextStyle = p0.pressedTextStyle,
 		expandedInitially = p0.expandedInitially,
 		avoidBlankLineClip = p0.avoidBlankLineClip,
-		onExpandChanged = reactModule.useCallback(function(p1) --[[ line: 29 ]]
+		onExpandChanged = reactModule.useCallback(function(p1)
 			-- upvalues: p0 (ref), reportUnifiedLoggingAction (copy)
 			if p0.onExpandChanged then
 				p0.onExpandChanged(p1)

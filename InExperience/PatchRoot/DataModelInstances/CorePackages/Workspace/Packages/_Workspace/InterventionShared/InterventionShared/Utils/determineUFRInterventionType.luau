@@ -1,6 +1,6 @@
 ﻿local interventionTypes = require(script:FindFirstAncestor("InterventionShared").InterventionAnalytics).Constants.InterventionTypes
 
-return function(p0) --[[ line: 13 ]]
+return function(p0)
 	-- upvalues: interventionTypes (ref)
 	local var0 = if p0 then p0:lower() else ""
 	

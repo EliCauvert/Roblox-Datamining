@@ -19,7 +19,7 @@ return {
 	},
 	fflag = getFFlagUGCValidateMigrateSchemaPropertiesModule,
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 30 ]]
+	run = function(p0, p1)
 		-- upvalues: getFFlagUGCValidateEyebrowEyelashThumbnailSchemaModule (ref), errorSourceStringsModule (ref), UGCValidationAddThumbnailFrustumCheckingv2 (ref), UGCValidationService (ref)
 		local assetType
 		local rootInstance = p1.rootInstance

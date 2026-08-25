@@ -2,10 +2,10 @@
 local _ = require(script.Parent.Parent.types)
 
 return {
-	createSendPrompt = function(p0) --[[ line: 30 ]]
+	createSendPrompt = function(p0)
 		-- upvalues: signalsModule (ref)
 		return {
-			sendPrompt = function(p1) --[[ line: 31 ]]
+			sendPrompt = function(p1)
 				-- upvalues: p0 (ref), signalsModule (copy)
 				local var1 = p0.incrementAssistantTurnSequence()
 				local var2, var3 = signalsModule.createSignal(nil)
@@ -18,7 +18,7 @@ return {
 				local var11 = nil
 				local var12 = nil
 				
-				local function fireCompleted(p2) --[[ line: 45 ]]
+				local function fireCompleted(p2)
 					-- upvalues: var7 (write), var1 (ref), p0 (copy), var12 (write), var11 (write), var10 (write), p1 (ref)
 					if var7 then return end
 					if var1 ~= p0.getAssistantTurnSequence() then return end
@@ -41,13 +41,13 @@ return {
 					end
 				end
 				
-				local function start() --[[ line: 70 ]]
+				local function start()
 					-- upvalues: var6 (write), var9 (write), fireCompleted (ref), p0 (copy), var5 (ref), p1 (ref), var10 (write), var3 (ref), var11 (write), var12 (write), signalsModule (copy), var8 (write)
 					if var6 then
 						return
 					end
 					var6 = true
-					task.spawn(function() --[[ line: 76 ]]
+					task.spawn(function()
 						-- upvalues: var9 (copy), fireCompleted (copy), p0 (copy), var5 (copy), p1 (copy), var10 (copy), var3 (copy), var11 (copy), var12 (copy), signalsModule (copy), var8 (copy)
 						if var9 then
 							fireCompleted(nil)
@@ -95,7 +95,7 @@ return {
 							afterSequenceId = p0.getLatestObservedHistorySequenceId(),
 							onDroppedChatMessage = p1.onDroppedChatMessage
 						})
-						var12 = signalsModule.createEffect(function(p3) --[[ line: 124 ]]
+						var12 = signalsModule.createEffect(function(p3)
 							-- upvalues: var18 (ref), p1 (copy), var8 (copy), fireCompleted (copy)
 							local var20 = var18.state(p3)
 							
@@ -110,7 +110,7 @@ return {
 					end)
 				end
 				
-				local function stop() --[[ line: 141 ]]
+				local function stop()
 					-- upvalues: var7 (write), var9 (write), var10 (write), var12 (write), var11 (write), fireCompleted (ref)
 					if var7 then return end
 					var9 = true

@@ -33,10 +33,10 @@ local circle16 = images["component_assets/circle_16"]
 local t = {
 	forceEnableAudioFocusToggle = false,
 	forceShowVoiceChangerSection = false,
-	openSquadVoiceChangers = function() --[[ line: 64 ]] end
+	openSquadVoiceChangers = function() end
 }
 
-local var11 = function(p0) --[[ line: 74 ]]
+local var11 = function(p0)
 	-- upvalues: useTokens (ref), react (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), contextualSlider (ref)
 	local var13 = useTokens()
 	
@@ -88,7 +88,7 @@ local var11 = function(p0) --[[ line: 74 ]]
 	})
 end
 
-local var12 = function(p1) --[[ line: 153 ]]
+local var12 = function(p1)
 	-- upvalues: useTokens (ref), react (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), imageSetLabel (ref), circle24Stroke1 (ref), circle16 (ref)
 	local var14 = useTokens()
 	local color3 = var14.Color.Content.Emphasis.Color3
@@ -172,7 +172,7 @@ local var12 = function(p1) --[[ line: 153 ]]
 	})
 end
 
-return function(p2) --[[ line: 256 ]]
+return function(p2)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useLocalUserId (ref), useIsVoiceFocused (ref), useEnableAudioFocusToggle (ref), react (ref), squadExternalContractContext (ref), fFlagSquadsPresenceStoreMigration (ref), var8 (ref), useSelector (ref), var9 (ref), presenceType (ref), useCurrentSquadParentChannelId (ref), crossExperienceVoiceManager (ref), partyVoiceVolumeEngineFeature (ref), gameSettings (ref), useLocalization (ref), foundation (ref), fFlagSquadVoiceMenuFoundationRefactorModule (ref), var11 (ref), var12 (ref), images (ref), fFlagEnablePartyVoiceChangersInLua (ref)
 	local var15 = cryoModule.Dictionary.join(t, p2)
 	local var16 = useTokens()
@@ -180,20 +180,20 @@ return function(p2) --[[ line: 256 ]]
 	local var18 = useIsVoiceFocused()
 	local var19 = useEnableAudioFocusToggle()
 	local var20 = react.useContext(squadExternalContractContext)
-	local var21 = if fFlagSquadsPresenceStoreMigration then var8(tostring(var17)) else useSelector(react.useCallback(function(p3) --[[ line: 264 ]]
+	local var21 = if fFlagSquadsPresenceStoreMigration then var8(tostring(var17)) else useSelector(react.useCallback(function(p3)
 		-- upvalues: var17 (ref)
 		return p3.Squad.Presence.byUserId[tostring(var17)]
 	end, { var17 }))
-	local var22 = react.useMemo(function() --[[ line: 272 ]]
+	local var22 = react.useMemo(function()
 		-- upvalues: var21 (ref), fFlagSquadsPresenceStoreMigration (copy), var9 (copy), presenceType (copy)
 		return var21 and var21.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var9.InGame else presenceType.InGame)
 	end, { var21 })
-	local var23 = react.useMemo(function() --[[ line: 278 ]]
+	local var23 = react.useMemo(function()
 		-- upvalues: var21 (ref), var22 (ref)
 		return if var21 and var22 then var21.lastLocation else nil
 	end, { var21, var22 })
 	local var24 = var20.useParentChannelTitleSelector(useCurrentSquadParentChannelId() or "")
-	local var25 = react.useCallback(function() --[[ line: 286 ]]
+	local var25 = react.useCallback(function()
 		-- upvalues: crossExperienceVoiceManager (copy)
 		crossExperienceVoiceManager.default:toggleAudioFocus()
 	end, {})
@@ -256,7 +256,7 @@ return function(p2) --[[ line: 256 ]]
 				LayoutOrder = 2,
 				labelText = if var22_1_1 then var33.partyLabelText else var33.partyVolumeLabelText,
 				sliderValue = var29,
-				onValueChanged = function(p4) --[[ line: 394 ]]
+				onValueChanged = function(p4)
 					-- upvalues: gameSettings (copy), var30 (ref)
 					gameSettings.PartyVoiceVolume = p4
 					var30(p4)
@@ -266,7 +266,7 @@ return function(p2) --[[ line: 256 ]]
 				LayoutOrder = 3,
 				labelText = if partyVoiceVolumeEngineFeature then var33.experienceLabelText else var33.volumeLabelText,
 				sliderValue = var31,
-				onValueChanged = function(p5) --[[ line: 403 ]]
+				onValueChanged = function(p5)
 					-- upvalues: gameSettings (copy), var32 (ref)
 					gameSettings.MasterVolume = p5
 					var32(p5)
@@ -316,7 +316,7 @@ return function(p2) --[[ line: 256 ]]
 				icon = images["icons/menu/platformChatOff"],
 				labelText = var24 or "",
 				isSelected = var18,
-				onActivated = react.useCallback(function() --[[ line: 314 ]]
+				onActivated = react.useCallback(function()
 					-- upvalues: var18 (ref), var25 (ref)
 					if not var18 then
 						var25()
@@ -328,7 +328,7 @@ return function(p2) --[[ line: 256 ]]
 				icon = images["icons/menu/publicChatOff"],
 				labelText = var23 or "",
 				isSelected = not var18,
-				onActivated = react.useCallback(function() --[[ line: 320 ]]
+				onActivated = react.useCallback(function()
 					-- upvalues: var18 (ref), var25 (ref)
 					if var18 then
 						var25()
@@ -345,7 +345,7 @@ return function(p2) --[[ line: 256 ]]
 			OpenVoiceChangerModal = react.createElement(foundation.View, {
 				tag = "size-full-0 auto-y row align-x-left align-y-center gap-large padding-x-large padding-y-xsmall",
 				LayoutOrder = 2,
-				onActivated = react.useCallback(function() --[[ line: 327 ]]
+				onActivated = react.useCallback(function()
 					-- upvalues: var15 (ref)
 					if var15.openSquadVoiceChangers then
 						var15.openSquadVoiceChangers()

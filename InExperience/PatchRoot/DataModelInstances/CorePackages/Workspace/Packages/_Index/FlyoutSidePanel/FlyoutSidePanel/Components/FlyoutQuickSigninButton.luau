@@ -16,7 +16,7 @@ local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestSer
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(value) --[[ line: 29 | named "FlyoutQuickSigninButton" ]]
+return function(value)
 	-- upvalues: useDispatch (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	local var5 = useDispatch()
 	local var6 = useRoactService(appEventIngestService)
@@ -28,7 +28,7 @@ return function(value) --[[ line: 29 | named "FlyoutQuickSigninButton" ]]
 		}).title,
 		variant = buttonVariant.Standard,
 		LayoutOrder = value.layoutOrder,
-		onActivated = reactModule.useCallback(function() --[[ line: 33 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: value (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var6 (ref)
 			value.closeDrawer()
 			local t = { name = appPage.CrossDeviceLogin }

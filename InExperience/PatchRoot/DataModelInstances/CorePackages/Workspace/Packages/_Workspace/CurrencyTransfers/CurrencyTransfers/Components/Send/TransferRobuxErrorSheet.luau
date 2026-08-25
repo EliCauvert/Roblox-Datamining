@@ -34,7 +34,7 @@ local getFFlagEnableLimitHit2SVUpsellModule = require(currencyTransfers.Flags.Ge
 local transferRobuxHeaderModule = require(currencyTransfers.Components.Generic.TransferRobuxHeader)
 local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 
-local function getErrorMessageAndButton(p0, p1, p2, p3, p4, p5) --[[ line: 58 ]]
+local function getErrorMessageAndButton(p0, p1, p2, p3, p4, p5)
 	-- upvalues: getFFlagEnableLimitHit2SVUpsellModule (ref), failureReasonModule (ref), getFFlagCurrencyTransferReceiveLimitExceededErrorModule (ref), transferLocaleFormatModule (ref)
 	if not p0 then
 		return p1.GenericError, p1.TryAgain
@@ -103,7 +103,7 @@ local function getErrorMessageAndButton(p0, p1, p2, p3, p4, p5) --[[ line: 58 ]]
 	return dailyLimitTwoStepVerificationUpsell, OK
 end
 
-return function(_) --[[ line: 163 | named "TransferRobuxErrorSheet" ]]
+return function(_)
 	-- upvalues: useTransferStoreModule (ref), useTokens (ref), signalsReactModule (ref), getFFlagEnableLimitHit2SVUpsellModule (ref), useDispatch (ref), failureReasonModule (ref), useUserNameFromUserIdModule (ref), enums (ref), transferOriginationModule (ref), contentProviderService (ref), webViewServiceWrapperModule (ref), navigateDown (ref), appPage (ref), urlBuilder (ref), reactModule (ref), getBalanceRequestModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), getFIntCurrencyTransferMinAmountModule (ref), getFIntCurrencyTransferMaxAmountModule (ref), getErrorMessageAndButton (ref), sheet (ref), useScaledValue (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var29, var30
 	local var20 = useTransferStoreModule()
@@ -128,7 +128,7 @@ return function(_) --[[ line: 163 | named "TransferRobuxErrorSheet" ]]
 		end
 		local var33 = if var32 then enums.IconName.CircleArrowUp else enums.IconName.TriangleExclamation
 		
-		local function handleButtonActivated() --[[ line: 195 ]]
+		local function handleButtonActivated()
 			-- upvalues: triggerOnClose (ref), var32 (ref), var20 (ref), transferOriginationModule (copy), contentProviderService (copy), webViewServiceWrapperModule (copy), var27 (ref), navigateDown (copy), appPage (copy), urlBuilder (copy)
 			triggerOnClose()
 			
@@ -149,16 +149,16 @@ return function(_) --[[ line: 163 | named "TransferRobuxErrorSheet" ]]
 			end
 		end
 		
-		reactModule.useEffect(function() --[[ line: 224 ]]
+		reactModule.useEffect(function()
 			-- upvalues: balanceReceivedFromApi (ref), getBalanceRequestModule (copy), var20 (ref)
 			if balanceReceivedFromApi then
 				return
 			end
-			getBalanceRequestModule(nil, var20.getNetworkImpl()):andThen(function(p6) --[[ line: 229 ]]
+			getBalanceRequestModule(nil, var20.getNetworkImpl()):andThen(function(p6)
 				-- upvalues: var20 (copy)
 				var20.setRobuxBalanceAmount(p6)
 				var20.setBalanceReceivedFromApi(true)
-			end):catch(function() --[[ line: 233 ]] end)
+			end):catch(function() end)
 		end, { balanceReceivedFromApi })
 		local var35 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxErrorSheet)
 		local var36 = signalsReactModule.useSignalState(var20.getMinimumTransferAmount)
@@ -218,16 +218,16 @@ return function(_) --[[ line: 163 | named "TransferRobuxErrorSheet" ]]
 		local var41 = var40 == failureReasonModule.ReceiverNotAllowed and (not recipient and (recipientUserId and recipientUserId ~= 0))
 		var30 = if var41 and recipientUserId and recipientUserId ~= 0 then recipientUserId else nil
 		var29 = useUserNameFromUserIdModule(var30)
-		reactModule.useEffect(function() --[[ line: 340 ]]
+		reactModule.useEffect(function()
 			-- upvalues: balanceReceivedFromApi (ref), getBalanceRequestModule (copy), var20 (ref)
 			if balanceReceivedFromApi then
 				return
 			end
-			getBalanceRequestModule(nil, var20.getNetworkImpl()):andThen(function(p7) --[[ line: 345 ]]
+			getBalanceRequestModule(nil, var20.getNetworkImpl()):andThen(function(p7)
 				-- upvalues: var20 (copy)
 				var20.setRobuxBalanceAmount(p7)
 				var20.setBalanceReceivedFromApi(true)
-			end):catch(function() --[[ line: 349 ]] end)
+			end):catch(function() end)
 		end, { balanceReceivedFromApi })
 		var30 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxErrorSheet)
 		local var42 = signalsReactModule.useSignalState(var20.getMinimumTransferAmount)

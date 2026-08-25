@@ -9,7 +9,7 @@ return {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p0, p1) --[[ line: 13 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationService (ref), constantsModule (ref), errorSourceStringsModule (ref)
 		local handle = p1.rootInstance:FindFirstChild("Handle")
 		local handle_1 = p1.renderMeshesData.Handle

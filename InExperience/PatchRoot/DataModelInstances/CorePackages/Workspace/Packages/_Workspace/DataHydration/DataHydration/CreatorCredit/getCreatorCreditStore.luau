@@ -2,7 +2,7 @@
 local createCreatorCreditStoreModule = require(script.Parent.createCreatorCreditStore)
 local _ = require(script.Parent.types)
 
-return signalsModule.createComputed(function() --[[ line: 11 | named "createDefaultStore" ]]
+return signalsModule.createComputed(function()
 	-- upvalues: createCreatorCreditStoreModule (ref)
 	return createCreatorCreditStoreModule()
 end)

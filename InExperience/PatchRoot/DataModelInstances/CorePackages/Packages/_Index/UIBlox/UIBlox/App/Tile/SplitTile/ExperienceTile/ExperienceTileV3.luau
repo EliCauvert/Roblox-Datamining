@@ -23,7 +23,7 @@ local verticalTileModule = require(parent_1.VerticalTile.VerticalTile)
 local tileContentPanelModule = require(parent_1.TileContentPanel)
 local verticalTileThumbnailModule = require(parent_1.VerticalTile.VerticalTileThumbnail)
 
-local function renderContentWithPadding(p0, p1, p2, p3) --[[ line: 82 ]]
+local function renderContentWithPadding(p0, p1, p2, p3)
 	-- upvalues: reactModule (ref), cryoModule (ref), roactModule (ref)
 	return reactModule.createElement(p0, cryoModule.Dictionary.join({ BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, p2), {
 		Padding = reactModule.createElement("UIPadding", {
@@ -36,12 +36,12 @@ local function renderContentWithPadding(p0, p1, p2, p3) --[[ line: 82 ]]
 	})
 end
 
-local function _(p4, p5) --[[ line: 106 | named "getFinalAspectRatioMode" ]]
+local function _(p4, p5)
 	-- upvalues: aspectRatioModeModule (ref)
 	return if p4 == nil then if p5 then aspectRatioModeModule.Wide else aspectRatioModeModule.Square elseif p5 then aspectRatioModeModule.Wide else p4
 end
 
-return function(p6) --[[ line: 122 | named "ExperienceTileV3" ]]
+return function(p6)
 	-- upvalues: useStyleModule (ref), setDefaultModule (ref), constantsModule (ref), cryoModule (ref), reactModule (ref), aspectRatioModeModule (ref), getAspectRatioModule (ref), renderContentWithPadding (ref), verticalTileThumbnailModule (ref), roactModule (ref), tileContentPanelModule (ref), experienceActionRowModule (ref), useControlStateModule (ref), useCursorModule (ref), getControlStateColorModule (ref), interactableModule (ref), verticalTileModule (ref)
 	local color, transparency
 	local var17 = useStyleModule()
@@ -59,7 +59,7 @@ return function(p6) --[[ line: 122 | named "ExperienceTileV3" ]]
 	local contentTitlePadding = var21.contentTitlePadding
 	local contentTitleFont = var21.contentTitleFont
 	local var22 = setDefaultModule(p6.contentTextLineCount, constantsModule.DEFAULT_TEXT_LINE_COUNT)
-	local var23 = reactModule.useCallback(function(p7) --[[ line: 140 ]]
+	local var23 = reactModule.useCallback(function(p7)
 		-- upvalues: var17 (ref), p6 (ref), aspectRatioModeModule (copy), getAspectRatioModule (copy), renderContentWithPadding (copy), topContentPadding (ref), reactModule (copy), verticalTileThumbnailModule (copy), border (ref), var20 (ref), roactModule (copy)
 		local var30 = p7 and not var17.Settings.ReducedMotion
 		local thumbnailAspectRatioOverride = p6.thumbnailAspectRatioOverride
@@ -84,7 +84,7 @@ return function(p6) --[[ line: 122 | named "ExperienceTileV3" ]]
 		p6.renderTopContentOverlay, p6.wideThumbnail, p6.thumbnail,
 		p6.thumbnailAspectRatioOverride, topContentPadding, border, var20
 	})
-	local var24 = reactModule.useCallback(function(p8) --[[ line: 174 ]]
+	local var24 = reactModule.useCallback(function(p8)
 		-- upvalues: var22 (ref), contentTitleFont (ref), var17 (ref), contentTitlePadding (ref), var18 (ref), bottomContentPadding (ref), p6 (ref), renderContentWithPadding (copy), border (ref), reactModule (copy), tileContentPanelModule (copy)
 		local var32 = math.floor(var22 * contentTitleFont.RelativeSize * var17.Font.BaseSize + contentTitlePadding) + var18 + bottomContentPadding.Top + bottomContentPadding.Bottom
 		
@@ -104,7 +104,7 @@ return function(p6) --[[ line: 122 | named "ExperienceTileV3" ]]
 		contentTitlePadding, bottomContentPadding, var18, contentTitleFont, border,
 		var17
 	})
-	local var25 = reactModule.useCallback(function(p9) --[[ line: 213 ]]
+	local var25 = reactModule.useCallback(function(p9)
 		-- upvalues: p6 (ref), reactModule (copy), experienceActionRowModule (copy), var18 (ref), bottomContentPadding (ref), renderContentWithPadding (copy)
 		return if p6.renderBottomContent == nil then if p9 then if p6.renderActionRow == nil then reactModule.createElement(experienceActionRowModule, p6.actionRowProps) else p6.renderActionRow() else renderContentWithPadding("Frame", bottomContentPadding, {
 			Size = UDim2.new(1, 0, 0, var18 + bottomContentPadding.Top + bottomContentPadding.Bottom),

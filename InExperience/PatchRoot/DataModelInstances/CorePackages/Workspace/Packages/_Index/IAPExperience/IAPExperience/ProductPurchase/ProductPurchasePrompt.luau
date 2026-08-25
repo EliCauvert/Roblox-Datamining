@@ -63,7 +63,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p0) --[[ line: 99 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.contentRef = roactModule.createRef()
 	p0.footerRef = roactModule.createRef()
@@ -72,14 +72,14 @@ function name.init(p0) --[[ line: 99 ]]
 		footerSize = Vector2.new(0, 0)
 	}
 	
-	function p0.changeContentSize(p1) --[[ line: 107 ]]
+	function p0.changeContentSize(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.contentSize ~= p1.AbsoluteSize then
 			p0:setState({ contentSize = p1.AbsoluteSize })
 		end
 	end
 	
-	function p0.changeFooterSize(p2) --[[ line: 115 ]]
+	function p0.changeFooterSize(p2)
 		-- upvalues: p0 (ref)
 		if p0.state.footerSize ~= p2.AbsoluteSize then
 			p0:setState({ footerSize = p2.AbsoluteSize })
@@ -87,7 +87,7 @@ function name.init(p0) --[[ line: 99 ]]
 	end
 end
 
-function name.render(p3) --[[ line: 124 ]]
+function name.render(p3)
 	-- upvalues: shouldShowNewUpsellModalExperimentModule (ref), desktopUpsellExperimentModule (ref), roactModule (ref), productPurchaseModalModule (ref), multiTextLocalizerModule (ref)
 	return if shouldShowNewUpsellModalExperimentModule() or desktopUpsellExperimentModule.shouldShowNewModal() then roactModule.createElement(productPurchaseModalModule, {
 		product = {
@@ -122,14 +122,14 @@ function name.render(p3) --[[ line: 124 ]]
 			ButtonCancel = { key = "IAPExperience.PurchasePrompt.Action.Cancel" },
 			LoadingText = { key = "IAPExperience.PurchasePrompt.Text.Loading" }
 		},
-		render = function(p4) --[[ line: 177 ]]
+		render = function(p4)
 			-- upvalues: p3 (ref)
 			return p3:renderAlert(p4)
 		end
 	})
 end
 
-function name.renderAlert(p5, p6) --[[ line: 183 ]]
+function name.renderAlert(p5, p6)
 	-- upvalues: loggerModule (ref), getAppContextModule (ref), default (ref), purchaseModalV1ShownCounter (ref), withStyle (ref), char (ref), roactModule (ref), modelViewportModule (ref), imageSetLabel (ref), interactiveAlert (ref), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (ref), fitFrameVertical (ref), fitTextLabel (ref), buttonType (ref), robux (ref)
 	local props = p5.props
 	loggerModule.debug({
@@ -146,7 +146,7 @@ function name.renderAlert(p5, p6) --[[ line: 183 ]]
 		appContext = getAppContextModule()
 	})
 	
-	return withStyle(function(p7) --[[ line: 200 ]]
+	return withStyle(function(p7)
 		-- upvalues: p5 (ref), p6 (ref), char (copy), roactModule (copy), modelViewportModule (copy), imageSetLabel (copy), interactiveAlert (copy), fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule (copy), fitFrameVertical (copy), fitTextLabel (copy), buttonType (copy), robux (copy)
 		local theme = p7.Theme
 		local font = p7.Font
@@ -174,7 +174,7 @@ function name.renderAlert(p5, p6) --[[ line: 183 ]]
 			position = p5.props.position,
 			anchorPoint = p5.props.anchorPoint,
 			title = p6.BuyItemTitle,
-			middleContent = function() --[[ line: 244 ]]
+			middleContent = function()
 				-- upvalues: roactModule (copy), fitFrameVertical (copy), p5 (copy), var18 (ref), fitTextLabel (copy), font (ref), p6 (copy), theme (ref)
 				return roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -228,7 +228,7 @@ function name.renderAlert(p5, p6) --[[ line: 183 ]]
 					}
 				}
 			},
-			footerContent = function() --[[ line: 302 ]]
+			footerContent = function()
 				-- upvalues: p5 (copy), roactModule (copy), fitFrameVertical (copy), var16 (ref), font (ref), formattedText (ref), theme (ref), fitTextLabel (copy), p6 (copy)
 				return if p5.props.currentBalanceValid then if p5.props.testPurchase then roactModule.createElement(fitFrameVertical, {
 					BackgroundTransparency = 1,
@@ -281,7 +281,7 @@ end
 if fFlagAddDefaultFocusNavSelectorsOnBuyPurchasePromptModule then
 	local var15 = name
 	
-	name = function(p8) --[[ line: 363 ]]
+	name = function(p8)
 		-- upvalues: useDefaultFocusBehavior (ref), roactModule (ref), var15 (ref), cryoModule (ref)
 		local var19, var20 = useDefaultFocusBehavior()
 		

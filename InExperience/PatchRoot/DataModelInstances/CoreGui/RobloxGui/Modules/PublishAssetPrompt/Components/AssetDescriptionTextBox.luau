@@ -24,19 +24,19 @@ assetDescriptionTextBox.validateProps = tModule.strictInterface({
 	defaultDescription = tModule.optional(tModule.string)
 })
 
-local function _(p0) --[[ line: 53 | named "getStringLength" ]]
+local function _(p0)
 	local charCount = utf8.len(utf8.nfcnormalize(p0))
 	
 	return if charCount == nil then 0 else charCount
 end
 
-local _ = function(p1, p2) --[[ line: 62 | named "isDescriptionTooLong" ]]
+local _ = function(p1, p2)
 	local charCount = utf8.len(utf8.nfcnormalize(p1))
 	
 	return p2 < (if charCount == nil then 0 else charCount)
 end
 
-function assetDescriptionTextBox.init(p3) --[[ line: 66 ]]
+function assetDescriptionTextBox.init(p3)
 	p3:setState({
 		lastValidDescription = "",
 		descriptionLength = 0,
@@ -50,7 +50,7 @@ function assetDescriptionTextBox.init(p3) --[[ line: 66 ]]
 	})
 	p3.wasInitiallyFocused = false
 	
-	function p3.tryFocusTextBox() --[[ line: 81 ]]
+	function p3.tryFocusTextBox()
 		-- upvalues: p3 (ref)
 		if p3.wasInitiallyFocused then return end
 		local value = p3.props.descriptionTextBoxRef:getValue()
@@ -62,7 +62,7 @@ function assetDescriptionTextBox.init(p3) --[[ line: 66 ]]
 	end
 end
 
-function assetDescriptionTextBox.calculateNeedsRescroll(p4, p5, p6) --[[ line: 95 ]]
+function assetDescriptionTextBox.calculateNeedsRescroll(p4, p5, p6)
 	-- upvalues: textService (ref)
 	if p4.state.cursorPosition == -1 then return end
 	local var13 = p6.RelativeSize * p5.Font.BaseSize
@@ -77,7 +77,7 @@ function assetDescriptionTextBox.calculateNeedsRescroll(p4, p5, p6) --[[ line: 9
 	end
 end
 
-function assetDescriptionTextBox.onTextChanged(p7, p8, p9, p10) --[[ line: 128 ]]
+function assetDescriptionTextBox.onTextChanged(p7, p8, p9, p10)
 	-- upvalues: getFFlagValidateDescriptionModule (ref), textService (ref)
 	local var15
 	local text = p8.Text
@@ -105,7 +105,7 @@ function assetDescriptionTextBox.onTextChanged(p7, p8, p9, p10) --[[ line: 128 ]
 	p7.props.onAssetDescriptionUpdated(text, var15)
 end
 
-function assetDescriptionTextBox.renderWithProviders(p11, p12, p13) --[[ line: 161 ]]
+function assetDescriptionTextBox.renderWithProviders(p11, p12, p13)
 	-- upvalues: getFFlagValidateDescriptionModule (ref), roactModule (ref), imageSetLabel (ref), circle17Stroke1 (ref), rect (ref), focusable (ref), robloxTranslatorModule (ref), cursorKind (ref)
 	local font = p12.Font
 	local captionBody = font.CaptionBody
@@ -133,11 +133,11 @@ function assetDescriptionTextBox.renderWithProviders(p11, p12, p13) --[[ line: 1
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				ScrollBarThickness = 12,
 				BorderSizePixel = 0,
-				[roactModule.Change.CanvasPosition] = function(p14) --[[ line: 191 ]]
+				[roactModule.Change.CanvasPosition] = function(p14)
 					-- upvalues: p11 (ref)
 					p11:setState({ canvasPosition = p14.CanvasPosition.Y })
 				end,
-				[roactModule.Change.AbsoluteSize] = function(p15) --[[ line: 197 ]]
+				[roactModule.Change.AbsoluteSize] = function(p15)
 					-- upvalues: p11 (ref), p12 (ref), captionBody (ref)
 					p11:setState({ scrollingFrameHeight = p15.AbsoluteSize.Y })
 					p11:calculateNeedsRescroll(p12, captionBody)
@@ -165,16 +165,16 @@ function assetDescriptionTextBox.renderWithProviders(p11, p12, p13) --[[ line: 1
 					SelectionImageObject = p13(cursorKind.InputFields),
 					[roactModule.Ref] = p11.props.descriptionTextBoxRef,
 					[roactModule.Event.AncestryChanged] = p11.tryFocusTextBox,
-					[roactModule.Change.Text] = function(p16) --[[ line: 230 ]]
+					[roactModule.Change.Text] = function(p16)
 						-- upvalues: p11 (ref), p12 (ref), captionBody (ref)
 						p11:onTextChanged(p16, p12, captionBody)
 					end,
-					[roactModule.Change.AbsoluteSize] = function(p17) --[[ line: 234 ]]
+					[roactModule.Change.AbsoluteSize] = function(p17)
 						-- upvalues: p11 (ref), p12 (ref), captionBody (ref)
 						p11:setState({ textBoxWidth = p17.AbsoluteSize.X })
 						p11:calculateNeedsRescroll(p12, captionBody)
 					end,
-					[roactModule.Change.CursorPosition] = function(p18) --[[ line: 241 ]]
+					[roactModule.Change.CursorPosition] = function(p18)
 						-- upvalues: p11 (ref), p12 (ref), captionBody (ref)
 						p11:setState({ cursorPosition = p18.CursorPosition })
 						p11:calculateNeedsRescroll(p12, captionBody)
@@ -206,21 +206,21 @@ function assetDescriptionTextBox.renderWithProviders(p11, p12, p13) --[[ line: 1
 	})
 end
 
-function assetDescriptionTextBox.render(p19) --[[ line: 278 ]]
+function assetDescriptionTextBox.render(p19)
 	-- upvalues: withStyle (ref), withSelectionCursorProvider (ref)
-	return withStyle(function(p20) --[[ line: 279 ]]
+	return withStyle(function(p20)
 		-- upvalues: withSelectionCursorProvider (copy), p19 (ref)
-		return withSelectionCursorProvider(function(p21) --[[ line: 280 ]]
+		return withSelectionCursorProvider(function(p21)
 			-- upvalues: p19 (copy), p20 (ref)
 			return p19:renderWithProviders(p20, p21)
 		end)
 	end)
 end
 
-function assetDescriptionTextBox.didMount(p22) --[[ line: 286 ]]
+function assetDescriptionTextBox.didMount(p22)
 	p22.tryFocusTextBox()
 end
 
-return roactRoduxModule.connect(function(p23) --[[ line: 290 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p23)
 	return { assetType = p23.promptRequest.promptInfo.assetType }
 end)(assetDescriptionTextBox)

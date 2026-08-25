@@ -19,7 +19,7 @@ local t = {
 	size = if flagsModule.FoundationOptionSelectorGroupBeta then optionSelectorGroupSizeModule.Medium else nil
 }
 
-local function OptionSelectorGroupInner(p0) --[[ line: 59 ]]
+local function OptionSelectorGroupInner(p0)
 	-- upvalues: useTokensModule (ref), useOptionSelectorGroupVariantsModule (ref), optionSelectorGroupSizeModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputLabelModule (ref), optionSelectorGroupContextModule (ref)
 	local props = p0.props
 	local var14 = useOptionSelectorGroupVariantsModule(useTokensModule(), props.size or optionSelectorGroupSizeModule.Medium, props.orientation)
@@ -37,7 +37,7 @@ local function OptionSelectorGroupInner(p0) --[[ line: 59 ]]
 			testId = `{props.testId}--list`
 		}, {
 			OptionSelectorGroupContext = reactModule.createElement(optionSelectorGroupContextModule.Provider, {
-				value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 67 ]]
+				value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 					-- upvalues: p0 (ref), props (ref)
 					return {
 						value = p0.value,
@@ -65,17 +65,17 @@ local function OptionSelectorGroupInner(p0) --[[ line: 59 ]]
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 132 | named "OptionSelectorGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), OptionSelectorGroupInner (ref), viewModule (ref), withCommonPropsModule (ref), orientationModule (ref), optionSelectorGroupContextModule (ref)
 	local var15 = withDefaultsModule(p1, t)
 	local var16, var17 = reactModule.useState(var15.value)
-	reactModule.useEffect(function() --[[ line: 136 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), var17 (ref)
 		if var15.value ~= nil then
 			var17(var15.value)
 		end
 	end, { var15.value })
-	local var18 = reactModule.useCallback(function(p3) --[[ line: 142 ]]
+	local var18 = reactModule.useCallback(function(p3)
 		-- upvalues: var17 (ref), var15 (ref)
 		var17(p3)
 		var15.onValueChanged(p3)
@@ -98,7 +98,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 132 |
 		ref = p2
 	}), {
 		OptionSelectorGroupContext = reactModule.createElement(optionSelectorGroupContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 159 ]]
+			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 				-- upvalues: var16 (ref), var18 (ref), var15 (ref)
 				return {
 					value = var16,

@@ -6,16 +6,16 @@ local performFetch = require(parent.Http).PerformFetch
 local fetchGamesProductInfo = require(parent.GameProductInfoRodux).FetchGamesProductInfo
 
 return {
-	KeyMapper = function(p0) --[[ line: 9 ]]
+	KeyMapper = function(p0)
 		return "luaapp.playability-and-productinfo." .. p0
 	end,
-	Fetch = function(p1, p2) --[[ line: 17 ]]
+	Fetch = function(p1, p2)
 		-- upvalues: performFetch (ref), apiFetchPlayabilityStatus (ref), playabilityStatusEnum (ref), fetchGamesProductInfo (ref), promiseModule (ref)
 		assert(type(p2) == "string", "FetchPlayabilityAndProductInfo thunk expects universeId to be a string")
 		
-		return performFetch.Single("luaapp.playability-and-productinfo." .. p2, function(p3) --[[ line: 20 ]]
+		return performFetch.Single("luaapp.playability-and-productinfo." .. p2, function(p3)
 			-- upvalues: apiFetchPlayabilityStatus (copy), p1 (ref), p2 (ref), playabilityStatusEnum (copy), fetchGamesProductInfo (copy), promiseModule (copy)
-			return p3:dispatch(apiFetchPlayabilityStatus.Fetch(p1, { p2 })):andThen(function(p4) --[[ line: 23 ]]
+			return p3:dispatch(apiFetchPlayabilityStatus.Fetch(p1, { p2 })):andThen(function(p4)
 				-- upvalues: apiFetchPlayabilityStatus (copy), p2 (copy), p3 (ref), playabilityStatusEnum (copy), fetchGamesProductInfo (copy), p1 (copy), promiseModule (copy)
 				local var1, _ = p4[apiFetchPlayabilityStatus.KeyMapper(p2)]:unwrap()
 				
@@ -24,7 +24,7 @@ return {
 				end
 				local var2 = p3:getState().PlayabilityStatus[p2]
 				
-				return if var2.isPlayable == false and (var2.playabilityStatus == playabilityStatusEnum.PurchaseRequired or var2.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired) then p3:dispatch(fetchGamesProductInfo.Fetch(p1, { p2 })):andThen(function(p5) --[[ line: 39 ]]
+				return if var2.isPlayable == false and (var2.playabilityStatus == playabilityStatusEnum.PurchaseRequired or var2.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired) then p3:dispatch(fetchGamesProductInfo.Fetch(p1, { p2 })):andThen(function(p5)
 					-- upvalues: fetchGamesProductInfo (copy), p2 (copy), promiseModule (copy), var2 (ref)
 					local var3, _ = p5[fetchGamesProductInfo.KeyMapper(p2)]:unwrap()
 					
@@ -33,7 +33,7 @@ return {
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p6, p7) --[[ line: 59 ]]
+	GetFetchingStatus = function(p6, p7)
 		-- upvalues: performFetch (ref)
 		return performFetch.GetStatus(p6, "luaapp.playability-and-productinfo." .. p7)
 	end

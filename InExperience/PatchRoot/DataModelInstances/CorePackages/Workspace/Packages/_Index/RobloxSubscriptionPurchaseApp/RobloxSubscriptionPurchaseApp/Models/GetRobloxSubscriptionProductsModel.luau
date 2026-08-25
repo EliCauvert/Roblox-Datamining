@@ -1,4 +1,4 @@
-﻿local function parseEligibleOffers(p0) --[[ line: 51 ]]
+﻿local function parseEligibleOffers(p0)
 	assert(type(p0) == "table", "Expected EligibleOffers to be a table")
 	local t = {}
 	
@@ -13,7 +13,7 @@
 	return t
 end
 
-local function parseRobloxSubscriptionDiscounts(p1) --[[ line: 65 ]]
+local function parseRobloxSubscriptionDiscounts(p1)
 	if type(p1) ~= "table" then
 		return nil
 	end
@@ -31,7 +31,7 @@ local function parseRobloxSubscriptionDiscounts(p1) --[[ line: 65 ]]
 	return t
 end
 
-local function parseFeatureConfig(p2) --[[ line: 82 ]]
+local function parseFeatureConfig(p2)
 	-- upvalues: parseRobloxSubscriptionDiscounts (ref)
 	assert(type(p2) == "table", "Expected FeatureConfig to be a table")
 	
@@ -44,14 +44,14 @@ local function parseFeatureConfig(p2) --[[ line: 82 ]]
 	}
 end
 
-local function _(p3) --[[ line: 94 | named "parseRobloxSubscriptionProductDetails" ]]
+local function _(p3)
 	-- upvalues: parseFeatureConfig (ref)
 	assert(type(p3) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
 	
 	return { FeatureConfig = parseFeatureConfig(p3.FeatureConfig) }
 end
 
-local _ = function(p4) --[[ line: 101 | named "parseProductTypeDetails" ]]
+local _ = function(p4)
 	-- upvalues: parseFeatureConfig (ref)
 	assert(type(p4) == "table", "Expected ProductTypeDetails to be a table")
 	local t = {}
@@ -64,7 +64,7 @@ local _ = function(p4) --[[ line: 101 | named "parseProductTypeDetails" ]]
 	return t
 end
 
-local function parseLocalizedPrice(p5) --[[ line: 108 ]]
+local function parseLocalizedPrice(p5)
 	assert(type(p5) == "table", "Expected LocalizedPrice to be a table")
 	
 	return {
@@ -74,7 +74,7 @@ local function parseLocalizedPrice(p5) --[[ line: 108 ]]
 	}
 end
 
-local function parseProductKey(p6) --[[ line: 117 ]]
+local function parseProductKey(p6)
 	return if type(p6) == "table" then {
 		Id = tostring(p6.Id or ""),
 		Type = tostring(p6.Type or "")
@@ -82,12 +82,12 @@ local function parseProductKey(p6) --[[ line: 117 ]]
 end
 
 local t = {
-	new = function(p7) --[[ line: 129 ]]
+	new = function(p7)
 		return p7
 	end
 }
 
-function t.format(p8) --[[ line: 134 ]]
+function t.format(p8)
 	-- upvalues: parseEligibleOffers (ref), parseLocalizedPrice (ref), parseProductKey (ref), parseFeatureConfig (ref), t (ref)
 	assert(type(p8) == "table", "Expected products response to be a table")
 	local t_1 = {}
@@ -119,7 +119,7 @@ function t.format(p8) --[[ line: 134 ]]
 	return t_1
 end
 
-function t.mock(p9) --[[ line: 158 ]]
+function t.mock(p9)
 	-- upvalues: t (ref)
 	local t_1 = {
 		LocalizedPriceDisplayString = "$12.99",

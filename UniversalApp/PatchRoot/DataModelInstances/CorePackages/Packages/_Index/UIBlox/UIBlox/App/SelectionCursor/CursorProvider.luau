@@ -10,11 +10,11 @@ local cursorContextModule = require(script.Parent.CursorContext)
 local cursorComponentModule = require(script.Parent.CursorComponent)
 local cursorTypeModule = require(script.Parent.CursorType)
 
-local _ = function(p0, p1, p2) --[[ line: 20 ]]
+local _ = function(p0, p1, p2)
 	return string.format("%f %f %f %f", p0.Scale, p0.Offset, p1, p2)
 end
 
-local var9 = function(p3) --[[ line: 24 ]]
+local var9 = function(p3)
 	local var10 = 1e999
 	local var11 = 1e999
 	local var12 = 1e999
@@ -40,7 +40,7 @@ local var9 = function(p3) --[[ line: 24 ]]
 	return UDim.new(var10, math.max(0, var11 + var12)), var12, var13
 end
 
-return function(p4) --[[ line: 53 ]]
+return function(p4)
 	-- upvalues: reactModule (ref), roactGamepadModule (ref), useStyleModule (ref), cryoModule (ref), cursorTypeModule (ref), var9 (ref), cursorComponentModule (ref), coreGuiService (ref), guiService (ref), cursorContextModule (ref)
 	local var15, var16 = reactModule.useState({})
 	local var17, var18 = reactModule.useState({})
@@ -49,7 +49,7 @@ return function(p4) --[[ line: 53 ]]
 	local var22 = roactGamepadModule.useRefCache()
 	local selectionCursor = useStyleModule().Tokens.Component.SelectionCursor
 	
-	local var23 = function(p5, p6, p7) --[[ line: 61 ]]
+	local var23 = function(p5, p6, p7)
 		-- upvalues: selectionCursor (ref), var15 (ref), var16 (ref), cryoModule (copy), var22 (ref)
 		local var27
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
@@ -70,7 +70,7 @@ return function(p4) --[[ line: 53 ]]
 		return var22[formattedText]
 	end
 	
-	local var24 = function(p8) --[[ line: 96 ]]
+	local var24 = function(p8)
 		-- upvalues: cursorTypeModule (copy), var17 (ref), var18 (ref), cryoModule (copy), var22 (ref)
 		assert(cursorTypeModule.isEnumValue(p8), ("Error! expected a CursorType enum, got %s"):format(tostring(p8)))
 		warn("UIBlox's SelectionCursor is deprecated and should not be used anymore.")
@@ -81,7 +81,7 @@ return function(p4) --[[ line: 53 ]]
 		return var22[p8]
 	end
 	
-	local var25 = function() --[[ line: 112 ]]
+	local var25 = function()
 		-- upvalues: var15 (ref), var22 (ref), var20 (ref), var9 (copy), reactModule (copy), cursorComponentModule (copy), var17 (ref)
 		local t = {}
 		
@@ -105,16 +105,16 @@ return function(p4) --[[ line: 53 ]]
 		return t
 	end
 	
-	reactModule.useEffect(function() --[[ line: 145 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), coreGuiService (copy), guiService (copy), var21 (ref)
 		if var19.current == nil or not var19.current:IsDescendantOf(game) then
 			return
 		end
 		local var34 = var19.current:IsDescendantOf(coreGuiService)
 		
-		local function setUpSelectionImageObjectConnection() --[[ line: 152 ]]
+		local function setUpSelectionImageObjectConnection()
 			-- upvalues: var34 (ref), guiService (copy), var21 (copy)
-			return if var34 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 157 ]]
+			return if var34 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: guiService (copy), var21 (copy)
 				if guiService.SelectedCoreObject == nil then
 					var21(nil)
@@ -122,7 +122,7 @@ return function(p4) --[[ line: 53 ]]
 					return
 				end
 				var21(guiService.SelectedCoreObject.SelectionImageObject)
-			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ line: 165 ]]
+			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
 				-- upvalues: guiService (copy), var21 (copy)
 				if guiService.SelectedObject == nil then
 					var21(nil)
@@ -134,13 +134,13 @@ return function(p4) --[[ line: 53 ]]
 		end
 		
 		local var36 = setUpSelectionImageObjectConnection()
-		local ancestryChangedConnection = var19.current.AncestryChanged:Connect(function() --[[ line: 176 ]]
+		local ancestryChangedConnection = var19.current.AncestryChanged:Connect(function()
 			-- upvalues: var36 (write), setUpSelectionImageObjectConnection (ref)
 			var36:Disconnect()
 			var36 = setUpSelectionImageObjectConnection()
 		end)
 		
-		return function() --[[ line: 186 ]]
+		return function()
 			-- upvalues: var36 (write), ancestryChangedConnection (ref)
 			var36:Disconnect()
 			ancestryChangedConnection:Disconnect()

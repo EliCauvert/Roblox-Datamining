@@ -1,6 +1,6 @@
 ﻿local getFFlagEnableInAppBugReporting = require(script:FindFirstAncestor("TnSScreenshot").Parent.SharedFlags).GetFFlagEnableInAppBugReporting
 
-local _ = function() --[[ line: 6 ]]
+local _ = function()
 	return game:GetEngineFeature("ReportAnythingScreenshot") and game:GetEngineFeature("ReportAnythingScreenshotUploadedSignal")
 end
 
@@ -11,9 +11,9 @@ local t_2 = {}
 local var3 = false
 local _ = { RAABTestReason = "RAABTest" }
 
-local var4 = function(p0) --[[ line: 27 ]]
+local var4 = function(p0)
 	-- upvalues: t_1 (ref), t_2 (ref), var3 (write)
-	p0.ScreenshotUploaded:Connect(function(p1, p2) --[[ line: 28 ]]
+	p0.ScreenshotUploaded:Connect(function(p1, p2)
 		-- upvalues: t_1 (copy)
 		local var5 = t_1[p1]
 		
@@ -24,7 +24,7 @@ local var4 = function(p0) --[[ line: 27 ]]
 			return
 		end
 	end)
-	p0.ScreenshotContentReady:Connect(function(p3, p4) --[[ line: 37 ]]
+	p0.ScreenshotContentReady:Connect(function(p3, p4)
 		-- upvalues: t_2 (copy)
 		local var6 = t_2[p3]
 		
@@ -38,7 +38,7 @@ local var4 = function(p0) --[[ line: 27 ]]
 	var3 = true
 end
 
-function t.TakeScreenshotWithCallback(_, p5, p6, p7) --[[ line: 59 ]]
+function t.TakeScreenshotWithCallback(_, p5, p6, p7)
 	-- upvalues: getFFlagEnableInAppBugReporting (ref), t_1 (ref), t_2 (ref), var3 (write), var4 (ref)
 	if not game:GetEngineFeature("ReportAnythingScreenshot") or not game:GetEngineFeature("ReportAnythingScreenshotUploadedSignal") then
 		return false

@@ -6,14 +6,14 @@ local telemetryService = game:GetService("TelemetryService")
 local deviceTier = require(script:FindFirstAncestor("Memory").Parent.Devices).DeviceTier
 local memoryScopeModule = require(script.Parent.MemoryScope)
 
-local function _() --[[ line: 20 | named "GetMemoryPerformanceStatsItem" ]]
+local function _()
 	-- upvalues: statsService (ref)
 	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
 	
 	return if performanceStats then performanceStats:FindFirstChild("Memory") else nil
 end
 
-local function GetChildValue(p0, p1) --[[ line: 29 ]]
+local function GetChildValue(p0, p1)
 	if p1 == nil then
 		return tostring(p0:GetValue())
 	end
@@ -31,13 +31,13 @@ local function GetChildValue(p0, p1) --[[ line: 29 ]]
 	return tostring(var14:GetValue())
 end
 
-local _ = function() --[[ line: 44 | named "GetLuaHeapMb" ]]
+local _ = function()
 	local ok, status = pcall(gcinfo)
 	
 	return if ok and status then string.format("%.2f", status / 1024) else "-1"
 end
 
-local function GetCorescriptMemory() --[[ line: 52 ]]
+local function GetCorescriptMemory()
 	-- upvalues: statsService (ref)
 	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
 	local var17 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
@@ -80,7 +80,7 @@ local _ = { ACTIVE = 1, PAUSED = 2, STOPPED = 3 }
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p2, p3) --[[ line: 120 ]]
+function t_3.new(p2, p3)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		memoryMb = 0,
@@ -94,10 +94,10 @@ function t_3.new(p2, p3) --[[ line: 120 ]]
 	}, t_3)
 end
 
-function t_3:start() --[[ line: 135 ]]
+function t_3:start()
 	-- upvalues: corescriptMemoryPeriodSeconds (ref), GetCorescriptMemory (ref)
 	self.status = 1
-	self.loggingTask = task.delay(corescriptMemoryPeriodSeconds, function() --[[ line: 137 ]]
+	self.loggingTask = task.delay(corescriptMemoryPeriodSeconds, function()
 		-- upvalues: GetCorescriptMemory (copy), self (ref)
 		local var18 = GetCorescriptMemory()
 		
@@ -113,7 +113,7 @@ function t_3:start() --[[ line: 135 ]]
 	end)
 end
 
-function t_3:pause() --[[ line: 151 ]]
+function t_3:pause()
 	if self.loggingTask then
 		task.cancel(self.loggingTask)
 		self.loggingTask = nil
@@ -121,13 +121,13 @@ function t_3:pause() --[[ line: 151 ]]
 	self.status = 2
 end
 
-function t_3:resume() --[[ line: 159 ]]
+function t_3:resume()
 	if self.status == 2 then
 		self:start()
 	end
 end
 
-function t_3:destroy() --[[ line: 165 ]]
+function t_3:destroy()
 	if self.loggingTask then
 		task.cancel(self.loggingTask)
 		self.loggingTask = nil
@@ -142,7 +142,7 @@ function t_3:destroy() --[[ line: 165 ]]
 	end
 end
 
-function t_3:_buildCustomFields(p4) --[[ line: 179 ]]
+function t_3:_buildCustomFields(p4)
 	-- upvalues: deviceTier (ref)
 	return {
 		deviceTier = deviceTier.GetDeviceMemoryTier(),
@@ -151,12 +151,12 @@ function t_3:_buildCustomFields(p4) --[[ line: 179 ]]
 	}
 end
 
-function t_3:report(p5, p6) --[[ line: 187 ]]
+function t_3:report(p5, p6)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogStat(t, { customFields = self:_buildCustomFields(p5) }, p6)
 end
 
-function t_3:reportMaxMemoryUsed(b, p7) --[[ line: 191 ]]
+function t_3:reportMaxMemoryUsed(b, p7)
 	-- upvalues: memoryScopeModule (ref), telemetryService (ref), t_1 (ref)
 	if self.memoryScope == memoryScopeModule.UniversalApp then
 		return
@@ -164,7 +164,7 @@ function t_3:reportMaxMemoryUsed(b, p7) --[[ line: 191 ]]
 	telemetryService:LogStat(t_1, { customFields = self:_buildCustomFields(b) }, p7)
 end
 
-function t_3:reportAvgMemoryUsed(p8, p9) --[[ line: 202 ]]
+function t_3:reportAvgMemoryUsed(p8, p9)
 	-- upvalues: memoryScopeModule (ref), telemetryService (ref), t_2 (ref)
 	if self.memoryScope == memoryScopeModule.UniversalApp then
 		return
@@ -172,7 +172,7 @@ function t_3:reportAvgMemoryUsed(p8, p9) --[[ line: 202 ]]
 	telemetryService:LogStat(t_2, { customFields = self:_buildCustomFields(p8) }, p9)
 end
 
-function t_3.getSnapshot() --[[ line: 213 ]]
+function t_3.getSnapshot()
 	-- upvalues: statsService (ref), GetChildValue (ref), enableMemorySnapshotCategories (ref)
 	local ok
 	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
@@ -227,7 +227,7 @@ function t_3.getSnapshot() --[[ line: 213 ]]
 	end
 end
 
-function t_3.getLuaHeapOnly() --[[ line: 296 ]]
+function t_3.getLuaHeapOnly()
 	local t = {}
 	local ok, status = pcall(gcinfo)
 	t.luaHeapMb = if ok and status then string.format("%.2f", status / 1024) else "-1"
@@ -237,7 +237,7 @@ end
 
 local var12 = nil
 
-return function(p10, p11) --[[ line: 302 ]]
+return function(p10, p11)
 	-- upvalues: fFlagEnableCorescriptMemoryTrackerModule (ref), var12 (write), t_3 (ref)
 	if not fFlagEnableCorescriptMemoryTrackerModule then
 		return nil

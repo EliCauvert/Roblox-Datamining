@@ -35,7 +35,7 @@ healthBar.validateProps = tModule.strictInterface({
 	removeKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else tModule.callback
 })
 
-local function _(p0) --[[ line: 63 | named "color3ToVector3" ]]
+local function _(p0)
 	return Vector3.new(p0.r, p0.g, p0.b)
 end
 
@@ -49,7 +49,7 @@ t[Vector3.new(healthGreenColor.r, healthGreenColor.g, healthGreenColor.b)] = 0.8
 local healthRedColor_1 = constantsModule.HealthRedColor
 local healthGreenColor_1 = constantsModule.HealthGreenColor
 
-local function getHealthBarColor(p1) --[[ line: 77 ]]
+local function getHealthBarColor(p1)
 	-- upvalues: healthRedColor_1 (ref), healthGreenColor_1 (ref), t (ref)
 	if p1 <= 0.1 then
 		return healthRedColor_1
@@ -75,7 +75,7 @@ local function getHealthBarColor(p1) --[[ line: 77 ]]
 	return Color3.new(var23.x, var23.y, var23.z)
 end
 
-function healthBar.init(p2) --[[ line: 102 ]]
+function healthBar.init(p2)
 	-- upvalues: roactModule (ref), fFlagTopBarSignalizeHealthBar (ref), constantsModule (ref), coreGuiCommonModule (ref), signalsModule (ref), starterGuiService (ref), fFlagTopBarSignalizeKeepOutAreas (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), tenFootInterfaceModule (ref), uDim2_2 (ref), var13 (ref), uDim2 (ref), uDim2_1 (ref), var14 (write)
 	p2.rootRef = roactModule.createRef()
 	
@@ -89,7 +89,7 @@ function healthBar.init(p2) --[[ line: 102 ]]
 		local var30, var31 = roactModule.createBinding(false)
 		p2.isDead = var30
 		p2.setIsDead = var31
-		p2.healthPercent = roactModule.joinBindings({ p2.health, p2.maxHealth, p2.isDead }):map(function(p3) --[[ line: 108 ]]
+		p2.healthPercent = roactModule.joinBindings({ p2.health, p2.maxHealth, p2.isDead }):map(function(p3)
 			local var34 = p3[1]
 			local var35 = p3[2]
 			local var36 = 1
@@ -103,13 +103,13 @@ function healthBar.init(p2) --[[ line: 102 ]]
 			end
 			return var36
 		end)
-		p2.healthVisible = roactModule.joinBindings({ p2.health, p2.maxHealth }):map(function(p4) --[[ line: 122 ]]
+		p2.healthVisible = roactModule.joinBindings({ p2.health, p2.maxHealth }):map(function(p4)
 			return p4[1] < p4[2]
 		end)
 		
 		if coreGuiCommonModule.Stores.GetLocalHumanoidStore then
 			p2.localHumanoidStore = coreGuiCommonModule.Stores.GetLocalHumanoidStore(false)
-			p2.disposeHealthConnection = signalsModule.createEffect(function(p5) --[[ line: 128 ]]
+			p2.disposeHealthConnection = signalsModule.createEffect(function(p5)
 				-- upvalues: p2 (ref), constantsModule (copy)
 				local healthValue = p2.localHumanoidStore.getHealthValue(p5)
 				p2.setHealth(healthValue.health or constantsModule.InitialHealth)
@@ -117,12 +117,12 @@ function healthBar.init(p2) --[[ line: 102 ]]
 				p2.setIsDead(healthValue.isDead)
 			end)
 		end
-		local function _() --[[ line: 137 | named "getHealthEnabled" ]]
+		local function _()
 			-- upvalues: starterGuiService (copy)
 			return starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health)
 		end
 		
-		p2.coreGuiChangedSignalConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p6, p7) --[[ line: 142 ]]
+		p2.coreGuiChangedSignalConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p6, p7)
 			-- upvalues: p2 (ref)
 			if p6 == Enum.CoreGuiType.Health or p6 == Enum.CoreGuiType.All then
 				p2:setState({ mountHealthBar = p7 })
@@ -140,18 +140,18 @@ function healthBar.init(p2) --[[ line: 102 ]]
 		local var32, var33 = roactModule.createBinding(getViewportSize(false))
 		p2.screenSizeBinding = var32
 		p2.setScreenSizeBinding = var33
-		p2.disposeScreenSize = signalsModule.createEffect(function(p8) --[[ line: 162 ]]
+		p2.disposeScreenSize = signalsModule.createEffect(function(p8)
 			-- upvalues: p2 (ref), getViewportSize (ref)
 			p2.setScreenSizeBinding(getViewportSize(p8))
 		end)
-		p2.healthbarSizeBinding = p2.screenSizeBinding:map(function(p9) --[[ line: 166 ]]
+		p2.healthbarSizeBinding = p2.screenSizeBinding:map(function(p9)
 			-- upvalues: tenFootInterfaceModule (copy), uDim2_2 (copy), var13 (copy), uDim2 (copy), uDim2_1 (copy), var14 (copy)
 			return if tenFootInterfaceModule:IsEnabled() then uDim2_2 elseif var13 and p9.X <= 320 then uDim2 elseif var13 and p9.X <= 393 then uDim2_1 else var14
 		end)
 	end
 end
 
-function healthBar.onUnmount(p10) --[[ line: 180 ]]
+function healthBar.onUnmount(p10)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeHealthBar then
 		p10.coreGuiChangedSignalConn:Disconnect()
@@ -162,7 +162,7 @@ function healthBar.onUnmount(p10) --[[ line: 180 ]]
 	end
 end
 
-function healthBar.renderHealth(p11) --[[ line: 189 ]]
+function healthBar.renderHealth(p11)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref), fFlagTopBarSignalizeScreenSize (ref), var13 (ref), uDim2 (ref), uDim2_1 (ref), var14 (write), tenFootInterfaceModule (ref), uDim2_2 (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), getHealthBarColor (ref), roactModule (ref), enabled (ref)
 	local var38 = nil
 	
@@ -200,7 +200,7 @@ function healthBar.renderHealth(p11) --[[ line: 189 ]]
 			rect = Rect.new(8, 8, 9, 9)
 		end
 	end
-	local var45 = function(p12) --[[ line: 249 ]]
+	local var45 = function(p12)
 		-- upvalues: var13 (copy), fFlagTopBarSignalizeHealthBar (copy), p11 (ref), var38 (write), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy)
 		if not var13 then
 			if (fFlagTopBarSignalizeHealthBar and p11.healthVisible or not fFlagTopBarSignalizeHealthBar and var38) and p12 then
@@ -229,7 +229,7 @@ function healthBar.renderHealth(p11) --[[ line: 189 ]]
 		Position = if var13 then UDim2.new(1, 0, 0, 0) else nil,
 		Visible = if fFlagTopBarSignalizeHealthBar then p11.healthVisible else var38,
 		BackgroundTransparency = 1,
-		Size = if fFlagTopBarSignalizeScreenSize then p11.healthbarSizeBinding:map(function(p13) --[[ line: 277 ]]
+		Size = if fFlagTopBarSignalizeScreenSize then p11.healthbarSizeBinding:map(function(p13)
 			return UDim2.new(p13.X, UDim.new(1, 0))
 		end) else UDim2.new(var40.X, UDim.new(1, 0)),
 		LayoutOrder = p11.props.layoutOrder,
@@ -253,7 +253,7 @@ function healthBar.renderHealth(p11) --[[ line: 189 ]]
 				ImageColor3 = if fFlagTopBarSignalizeHealthBar then p11.healthPercent:map(getHealthBarColor) else getHealthBarColor(var39),
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = rect,
-				Size = if fFlagTopBarSignalizeHealthBar then p11.healthPercent:map(function(p14) --[[ line: 305 ]]
+				Size = if fFlagTopBarSignalizeHealthBar then p11.healthPercent:map(function(p14)
 					return UDim2.fromScale(p14, 1)
 				end) else UDim2.fromScale(var39, 1)
 			})
@@ -261,12 +261,12 @@ function healthBar.renderHealth(p11) --[[ line: 189 ]]
 	})
 end
 
-function healthBar.render(p15) --[[ line: 313 ]]
+function healthBar.render(p15)
 	-- upvalues: fFlagTopBarSignalizeHealthBar (ref)
 	return if fFlagTopBarSignalizeHealthBar then if p15.state.mountHealthBar then p15:renderHealth() else nil else p15:renderHealth()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p16) --[[ line: 321 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p16)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), fFlagTopBarSignalizeHealthBar (ref)
 	return {
 		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p16.displayOptions.screenSize,
@@ -274,14 +274,14 @@ return roactRoduxModule.UNSTABLE_connect2(function(p16) --[[ line: 321 | named "
 		maxHealth = if fFlagTopBarSignalizeHealthBar then nil else p16.health.maxHealth,
 		healthEnabled = if fFlagTopBarSignalizeHealthBar then nil else p16.coreGuiEnabled[Enum.CoreGuiType.Health]
 	}
-end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p17) --[[ line: 330 | named "mapDispatchToProps" ]]
+end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p17)
 	-- upvalues: fFlagTopBarSignalizeKeepOutAreas (ref), setKeepOutAreaModule (ref), removeKeepOutAreaModule (ref)
 	return if fFlagTopBarSignalizeKeepOutAreas then {} else {
-		setKeepOutArea = function(value, p18, p19) --[[ line: 335 ]]
+		setKeepOutArea = function(value, p18, p19)
 			-- upvalues: p17 (ref), setKeepOutAreaModule (copy)
 			return p17(setKeepOutAreaModule(value, p18, p19))
 		end,
-		removeKeepOutArea = function(p20) --[[ line: 338 ]]
+		removeKeepOutArea = function(p20)
 			-- upvalues: p17 (ref), removeKeepOutAreaModule (copy)
 			return p17(removeKeepOutAreaModule(p20))
 		end

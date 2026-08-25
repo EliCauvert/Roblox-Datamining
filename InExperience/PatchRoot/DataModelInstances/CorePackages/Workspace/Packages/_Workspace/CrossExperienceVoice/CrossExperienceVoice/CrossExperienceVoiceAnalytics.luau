@@ -10,7 +10,7 @@ local t = {}
 t.__index = t
 local CEV_JOIN_ATTEMPT_ID_KEY = crossExperience.Constants.CEV_JOIN_ATTEMPT_ID_KEY
 
-function t.new() --[[ line: 82 ]]
+function t.new()
 	-- upvalues: analyticsModule (ref), t (ref)
 	local t_1 = {
 		previousStatus = nil,
@@ -24,12 +24,12 @@ function t.new() --[[ line: 82 ]]
 	return t_1
 end
 
-function t:initialize(p0) --[[ line: 94 ]]
+function t:initialize(p0)
 	self.eventManager = p0
 	self.isInitialized = true
 end
 
-function t:fireCEVAnalyticsEvent(p1, p2) --[[ line: 99 ]]
+function t:fireCEVAnalyticsEvent(p1, p2)
 	-- upvalues: getMemStorageKey (ref), CEV_JOIN_ATTEMPT_ID_KEY (ref)
 	p2 = p2 or {}
 	p2.cevJoinAttemptId = getMemStorageKey(CEV_JOIN_ATTEMPT_ID_KEY)
@@ -37,7 +37,7 @@ function t:fireCEVAnalyticsEvent(p1, p2) --[[ line: 99 ]]
 	self.analytics.fireAnalyticsEvent(p1, p2)
 end
 
-function t:logPartyVoiceTimeout(p3) --[[ line: 106 ]]
+function t:logPartyVoiceTimeout(p3)
 	-- upvalues: analyticsModule (ref), crossExperience (ref), playersService (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
@@ -51,7 +51,7 @@ function t:logPartyVoiceTimeout(p3) --[[ line: 106 ]]
 	end
 end
 
-function t:logPartyVoiceStatusChanged(p4, p5, p6) --[[ line: 119 ]]
+function t:logPartyVoiceStatusChanged(p4, p5, p6)
 	-- upvalues: flagsModule (ref), analyticsModule (ref)
 	if not self.isInitialized then return end
 	if self.previousStatus ~= p4.status then
@@ -91,7 +91,7 @@ function t:logPartyVoiceStatusChanged(p4, p5, p6) --[[ line: 119 ]]
 	self.previousStatus = p4.status
 end
 
-function t:logPartyVoiceConnectedState(p7, p8, p9) --[[ line: 171 ]]
+function t:logPartyVoiceConnectedState(p7, p8, p9)
 	-- upvalues: flagsModule (ref), analyticsModule (ref)
 	if not self.isInitialized then return end
 	if flagsModule.FFlagPartyVoiceLogActiveDM then
@@ -122,7 +122,7 @@ function t:logPartyVoiceConnectedState(p7, p8, p9) --[[ line: 171 ]]
 	self:logLaunchFlowEndEvent()
 end
 
-function t:logPartyVoiceJoinAttempt(p10) --[[ line: 209 ]]
+function t:logPartyVoiceJoinAttempt(p10)
 	-- upvalues: flagsModule (ref), analyticsModule (ref)
 	if not self.isInitialized then return end
 	if flagsModule.FFlagPartyVoiceLogActiveDM then
@@ -145,17 +145,17 @@ function t:logPartyVoiceJoinAttempt(p10) --[[ line: 209 ]]
 	self:logLaunchFlowBeginEvent()
 end
 
-function t.logLaunchFlowBeginEvent(_) --[[ line: 234 ]]
+function t.logLaunchFlowBeginEvent(_)
 	-- upvalues: loggingProtocol (ref)
 	loggingProtocol.default:logEvent("party_voice_launch_flow_begin")
 end
 
-function t.logLaunchFlowEndEvent(_) --[[ line: 238 ]]
+function t.logLaunchFlowEndEvent(_)
 	-- upvalues: loggingProtocol (ref)
 	loggingProtocol.default:logEvent("party_voice_launch_flow_end")
 end
 
-function t:logPartyVoiceJoinFailure(p11, p12, p13) --[[ line: 242 ]]
+function t:logPartyVoiceJoinFailure(p11, p12, p13)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinFailure, {
@@ -168,7 +168,7 @@ function t:logPartyVoiceJoinFailure(p11, p12, p13) --[[ line: 242 ]]
 	end
 end
 
-function t:logPartyVoiceUnmuteParticipant(p14, p15) --[[ line: 254 ]]
+function t:logPartyVoiceUnmuteParticipant(p14, p15)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnmuteParticipant, { partyId = p14, userId = p15 or 0 })
@@ -177,7 +177,7 @@ function t:logPartyVoiceUnmuteParticipant(p14, p15) --[[ line: 254 ]]
 	end
 end
 
-function t:logPartyVoiceMuteParticipant(p16, p17) --[[ line: 265 ]]
+function t:logPartyVoiceMuteParticipant(p16, p17)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceMuteParticipant, { partyId = p16, userId = p17 or 0 })
@@ -186,7 +186,7 @@ function t:logPartyVoiceMuteParticipant(p16, p17) --[[ line: 265 ]]
 	end
 end
 
-function t:logPartyVoiceBlockParticipant(p18, p19) --[[ line: 276 ]]
+function t:logPartyVoiceBlockParticipant(p18, p19)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceBlockParticipant, { partyId = p18, userId = p19 or 0 })
@@ -195,7 +195,7 @@ function t:logPartyVoiceBlockParticipant(p18, p19) --[[ line: 276 ]]
 	end
 end
 
-function t:logPartyVoiceUnblockParticipant(p20, p21) --[[ line: 287 ]]
+function t:logPartyVoiceUnblockParticipant(p20, p21)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnblockParticipant, { partyId = p20, userId = p21 or 0 })
@@ -204,7 +204,7 @@ function t:logPartyVoiceUnblockParticipant(p20, p21) --[[ line: 287 ]]
 	end
 end
 
-function t:logPartyVoiceOnCrossExperienceStartedSignalReceived(p22, p23) --[[ line: 298 ]]
+function t:logPartyVoiceOnCrossExperienceStartedSignalReceived(p22, p23)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceOnCrossExperienceStartedSignalReceived, { hasExperienceStarted = p22, isActiveDM = p23 })
@@ -213,7 +213,7 @@ function t:logPartyVoiceOnCrossExperienceStartedSignalReceived(p22, p23) --[[ li
 	end
 end
 
-function t:logPartyVoiceStateChangeHandlerRun(p24, p25) --[[ line: 311 ]]
+function t:logPartyVoiceStateChangeHandlerRun(p24, p25)
 	-- upvalues: analyticsModule (ref)
 	if self.isInitialized then
 		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChangeHandlerRun, {
@@ -226,7 +226,7 @@ function t:logPartyVoiceStateChangeHandlerRun(p24, p25) --[[ line: 311 ]]
 	end
 end
 
-function t:reset() --[[ line: 325 ]]
+function t:reset()
 	self.previousStatus = nil
 end
 

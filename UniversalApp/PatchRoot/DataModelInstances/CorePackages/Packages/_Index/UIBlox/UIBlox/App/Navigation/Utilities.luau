@@ -4,9 +4,9 @@ local inputTypeModule = require(parent_1.Enums.InputType)
 local cryoModule = require(parent_1.Parent.Cryo)
 local _ = require(parent.ShortcutBar.Types)
 
-local _ = function(p0) --[[ line: 10 ]]
+local _ = function(p0)
 	-- upvalues: inputTypeModule (ref), cryoModule (ref)
-	return function(p1, _) --[[ line: 11 ]]
+	return function(p1, _)
 		-- upvalues: p0 (ref), inputTypeModule (copy), cryoModule (copy)
 		local icon = p1.icon
 		
@@ -20,9 +20,9 @@ local _ = function(p0) --[[ line: 10 ]]
 end
 
 return {
-	filterItems = function(p2, p3) --[[ line: 35 ]]
+	filterItems = function(p2, p3)
 		-- upvalues: cryoModule (ref), inputTypeModule (ref)
-		local var2 = cryoModule.List.filter(p2, function(p4, _) --[[ line: 37 ]]
+		local var2 = cryoModule.List.filter(p2, function(p4, _)
 			local icon = p4.icon
 			
 			return if typeof(icon) ~= "string" then typeof(icon) == "table" and icon.Image else true
@@ -31,7 +31,7 @@ return {
 		if p3 then
 			assert(p3, "Assert inputType not nil at this point to silence type checker")
 			
-			return cryoModule.List.join(var2, cryoModule.List.filterMap(p2, function(p5, _) --[[ line: 11 ]]
+			return cryoModule.List.join(var2, cryoModule.List.filterMap(p2, function(p5, _)
 				-- upvalues: p3 (ref), inputTypeModule (copy), cryoModule (copy)
 				local icon = p5.icon
 				

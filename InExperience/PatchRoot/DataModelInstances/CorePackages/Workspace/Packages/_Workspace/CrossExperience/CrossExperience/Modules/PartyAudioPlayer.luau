@@ -7,7 +7,7 @@ local audioPlayerUpdateAssetAPIEngineFeature = game:GetEngineFeature("AudioPlaye
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 17 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {
 		isInitialized = false,
@@ -20,7 +20,7 @@ function t.new() --[[ line: 17 ]]
 	return t_1
 end
 
-function t:addSound(p0, p1) --[[ line: 28 ]]
+function t:addSound(p0, p1)
 	-- upvalues: audioPlayerUpdateAssetAPIEngineFeature (ref)
 	local audioPlayer = Instance.new("AudioPlayer")
 	audioPlayer.Parent = workspace
@@ -37,7 +37,7 @@ function t:addSound(p0, p1) --[[ line: 28 ]]
 	self.audioPlayers[p0] = audioPlayer
 end
 
-function t:initialize() --[[ line: 46 ]]
+function t:initialize()
 	-- upvalues: partyVoiceAudioFaderVolumePerc (ref), replicatedStorageService (ref), partyVoiceVolumeEngineFeature (ref), userGameSettingsService (ref)
 	if partyVoiceAudioFaderVolumePerc ~= 100 then
 		replicatedStorageService:WaitForChild("AudioFader").Volume = partyVoiceAudioFaderVolumePerc / 100
@@ -60,14 +60,14 @@ function t:initialize() --[[ line: 46 ]]
 	self.isInitialized = true
 	
 	if partyVoiceVolumeEngineFeature then
-		self.onPartyVoiceVolumeChangedSignal = userGameSettingsService:GetPropertyChangedSignal("PartyVoiceVolume"):Connect(function() --[[ line: 75 ]]
+		self.onPartyVoiceVolumeChangedSignal = userGameSettingsService:GetPropertyChangedSignal("PartyVoiceVolume"):Connect(function()
 			-- upvalues: self (ref)
 			self:playSound("join")
 		end)
 	end
 end
 
-function t:playSound(p2) --[[ line: 81 ]]
+function t:playSound(p2)
 	if not self.isInitialized then
 		self:initialize()
 	end
@@ -79,7 +79,7 @@ function t:playSound(p2) --[[ line: 81 ]]
 	end
 end
 
-function t:disconnect() --[[ line: 94 ]]
+function t:disconnect()
 	if self.onPartyVoiceVolumeChangedSignal then
 		self.onPartyVoiceVolumeChangedSignal:Disconnect()
 	end

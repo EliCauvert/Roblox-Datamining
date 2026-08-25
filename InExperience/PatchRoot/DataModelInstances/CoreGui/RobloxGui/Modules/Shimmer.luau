@@ -7,7 +7,7 @@ local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection
 local t = {}
 t.__index = t
 local t_1 = {
-	PrimaryButton = function(p0) --[[ line: 16 ]]
+	PrimaryButton = function(p0)
 		-- upvalues: create (ref), constants (ref)
 		return create("ImageLabel")({
 			Name = "ShimmerFrame",
@@ -43,7 +43,7 @@ local t_1 = {
 	end
 }
 
-function t.new(p1, p2) --[[ line: 51 ]]
+function t.new(p1, p2)
 	-- upvalues: t_1 (ref), t (ref), tweenService (ref), tweenInfo (ref)
 	if p2 and t_1[p2] then
 		local tbl = setmetatable({}, t)
@@ -54,12 +54,12 @@ function t.new(p1, p2) --[[ line: 51 ]]
 	end
 end
 
-function t:play() --[[ line: 61 ]]
+function t:play()
 	self._shimmer.Visible = true
 	self._shimmerAnimation:Play()
 end
 
-function t:stop() --[[ line: 66 ]]
+function t:stop()
 	self._shimmerAnimation:Cancel()
 	self._shimmer.Visible = false
 end

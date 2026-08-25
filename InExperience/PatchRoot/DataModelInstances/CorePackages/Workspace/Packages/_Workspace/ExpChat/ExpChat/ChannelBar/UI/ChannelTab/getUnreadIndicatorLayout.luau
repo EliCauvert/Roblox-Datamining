@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 9 ]]
+﻿return function(p0, p1, p2, p3, p4, p5, p6)
 	if p0 and not p1 and (p2 ~= nil and p3 ~= nil) then
 		local maxValue = math.max(0, p2 - p4 * 2)
 		local var1 = p5 + p6

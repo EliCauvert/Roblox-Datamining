@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 49 | named "unindentTags" ]]
+﻿return function(p0, p1)
 	p1 = p1 or 2
 	
 	if not string.find(p0, "<.->") then

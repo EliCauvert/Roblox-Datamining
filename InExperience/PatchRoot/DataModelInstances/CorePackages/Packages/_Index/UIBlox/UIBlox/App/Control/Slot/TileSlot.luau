@@ -37,15 +37,15 @@ local t_5 = { [controlStateModule.Default] = "PlaceHolder" }
 local t_6 = { [controlStateModule.Default] = "PlaceHolder" }
 local t_7 = { [controlStateModule.Default] = "TextEmphasis" }
 
-return function(p0) --[[ line: 97 | named "TileSlot" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), controlStateModule (ref), useStyleModule (ref), getContentStyleModule (ref), t_1 (ref), t (ref), t_3 (ref), t_2 (ref), t_7 (ref), t_5 (ref), t_4 (ref), t_6 (ref), interactableModule (ref), imageSetComponentModule (ref), circle9 (ref), circle9Stroke1 (ref), getIconSizeModule (ref), iconSizeModule (ref), genericTextLabelModule (ref), skeleton (ref)
 	local var19, var20 = reactModule.useState(controlStateModule.Initialize)
 	local var21, var22 = reactModule.useState(false)
-	local var23 = reactModule.useCallback(function() --[[ line: 101 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onActivated(p0.index)
 	end, { p0.onActivated, p0.index })
-	local var24 = reactModule.useCallback(function(p1, p2) --[[ line: 105 ]]
+	local var24 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var20 (ref), controlStateModule (copy), var22 (ref), p0 (ref)
 		var20(p2)
 		

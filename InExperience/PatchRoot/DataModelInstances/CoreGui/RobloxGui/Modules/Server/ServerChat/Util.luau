@@ -9,7 +9,7 @@ local t_1 = {}
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.RebuildProcessCommandsPriorities(p0) --[[ line: 25 ]]
+function t_2.RebuildProcessCommandsPriorities(p0)
 	local var3
 	p0.RegisteredPriorites = {}
 	
@@ -24,23 +24,23 @@ function t_2.RebuildProcessCommandsPriorities(p0) --[[ line: 25 ]]
 			table.insert(p0.RegisteredPriorites, i)
 		end
 	end
-	table.sort(p0.RegisteredPriorites, function(p1, p2) --[[ line: 37 ]]
+	table.sort(p0.RegisteredPriorites, function(p1, p2)
 		return p2 < p1
 	end)
 end
 
-function t_2.HasFunction(p3, p4) --[[ line: 42 ]]
+function t_2.HasFunction(p3, p4)
 	return p3.RegisteredFunctions[p4] ~= nil
 end
 
-function t_2.RemoveFunction(p5, p6) --[[ line: 49 ]]
+function t_2.RemoveFunction(p5, p6)
 	local var4 = p5.RegisteredFunctions[p6]
 	p5.RegisteredFunctions[p6] = nil
 	p5.FunctionMap[var4][p6] = nil
 	p5:RebuildProcessCommandsPriorities()
 end
 
-function t_2.AddFunction(p7, p8, p9, p10) --[[ line: 56 ]]
+function t_2.AddFunction(p7, p8, p9, p10)
 	-- upvalues: standardPriority (write)
 	if p10 == nil then
 		p10 = standardPriority
@@ -57,12 +57,12 @@ function t_2.AddFunction(p7, p8, p9, p10) --[[ line: 56 ]]
 	p7:RebuildProcessCommandsPriorities()
 end
 
-function t_2.GetIterator(p11) --[[ line: 75 ]]
+function t_2.GetIterator(p11)
 	local var5 = 1
 	local var6 = nil
 	local var7 = nil
 	
-	return function() --[[ line: 80 ]]
+	return function()
 		-- upvalues: var5 (write), p11 (ref), var6 (write), var7 (write)
 		while true do
 			if #p11.RegisteredPriorites >= var5 then
@@ -80,7 +80,7 @@ function t_2.GetIterator(p11) --[[ line: 75 ]]
 	end
 end
 
-function t_1.new() --[[ line: 96 ]]
+function t_1.new()
 	-- upvalues: t_2 (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.RegisteredFunctions = {}
@@ -90,7 +90,7 @@ function t_1.new() --[[ line: 96 ]]
 	return tbl
 end
 
-function t.NewSortedFunctionContainer(_) --[[ line: 107 ]]
+function t.NewSortedFunctionContainer(_)
 	-- upvalues: t_1 (ref)
 	return t_1.new()
 end

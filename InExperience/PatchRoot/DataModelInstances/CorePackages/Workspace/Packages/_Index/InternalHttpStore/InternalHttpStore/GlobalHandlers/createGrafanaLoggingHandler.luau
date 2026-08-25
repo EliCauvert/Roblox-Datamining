@@ -4,9 +4,9 @@ local signalsModule = require(parent_1.Signals)
 local greenlistedEndpointsForLogging = require(parent_1.Http).Logger.GreenlistedEndpointsForLogging
 local _ = require(parent.HttpStoreTypes)
 
-return function(p0) --[[ line: 13 | named "createGrafanaLoggingHandler" ]]
+return function(p0)
 	-- upvalues: signalsModule (ref), greenlistedEndpointsForLogging (ref)
-	return signalsModule.createEffect(function(p1) --[[ line: 14 ]]
+	return signalsModule.createEffect(function(p1)
 		-- upvalues: p0 (ref), greenlistedEndpointsForLogging (copy)
 		local var1 = p0(p1)
 		

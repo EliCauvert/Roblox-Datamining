@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local fFlagLuaAppAlignHeroUnitBottomRowCtaButton = require(parent.SharedFlags).FFlagLuaAppAlignHeroUnitBottomRowCtaButton
 
-return reactModule.memo(function(p0) --[[ line: 27 | named "SduiHeroUnitBottomRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagLuaAppAlignHeroUnitBottomRowCtaButton (ref)
 	local layoutOrder = p0.layoutOrder
 	local zIndex = p0.zIndex
@@ -41,7 +41,7 @@ return reactModule.memo(function(p0) --[[ line: 27 | named "SduiHeroUnitBottomRo
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
 			UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Label = reactModule.useMemo(function() --[[ line: 36 ]]
+			Label = reactModule.useMemo(function()
 				-- upvalues: p0 (ref), reactModule (copy), bodySmall (ref), color3 (ref)
 				return if p0.rightLabelContent then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

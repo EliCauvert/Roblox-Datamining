@@ -5,7 +5,7 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXAddTransparencyToItemCardHeader = avatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
 local fFlagAXCatalogItemCardDarkerBackground = avatarExperienceFlagsModule.FFlagAXCatalogItemCardDarkerBackground
 
-local function ItemCardHeader(p0) --[[ line: 21 ]]
+local function ItemCardHeader(p0)
 	-- upvalues: useDesignTokens (ref), fFlagAXCatalogItemCardDarkerBackground (ref), reactModule (ref), fFlagAXAddTransparencyToItemCardHeader (ref)
 	local var3 = useDesignTokens()
 	local var4 = if fFlagAXCatalogItemCardDarkerBackground then var3.Color.Shift.Shift_100 else var3.Color.Common.Shimmer

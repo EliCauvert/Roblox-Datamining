@@ -12,16 +12,16 @@ local _ = require(momentsCommon.Media.mediaNodeRegistry)
 local createSignal = signalsModule.createSignal
 local createEffect = signalsModule.createEffect
 
-local function _(p0, p1, p2) --[[ line: 97 | named "indexInWindow" ]]
+local function _(p0, p1, p2)
 	return p1 - p2.back <= p0 and p0 <= p1 + p2.forward
 end
 
-return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPreloadCoordinator" ]]
+return function(p3, p4, p5, p6, p7, p8)
 	-- upvalues: defaultMediaNodeRegistryModule (ref), createMomentMediaControllerModule (ref), createSignal (ref), fFlagMomentsAutoplayAmpPolicy (ref), fFlagMomentsCarouselVideoHandoff (ref), createEffect (ref)
 	p8 = p8 or {}
 	local now = p7.now or os.clock
 	local registry = p8.registry or defaultMediaNodeRegistryModule()
-	local createController = p8.createController or function(p9) --[[ line: 116 ]]
+	local createController = p8.createController or function(p9)
 		-- upvalues: createMomentMediaControllerModule (copy), p7 (ref), p6 (ref), registry (ref), p8 (ref)
 		return createMomentMediaControllerModule(p9, {
 			services = p7,
@@ -37,7 +37,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 	local var11 = false
 	local var12, var13 = createSignal({})
 	
-	local function _() --[[ line: 136 | named "publishControllerMap" ]]
+	local function _()
 		-- upvalues: t (ref), var13 (ref)
 		local t_1 = {}
 		
@@ -47,13 +47,13 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 		var13(t_1)
 	end
 	
-	local function scheduleDecodeRetry(p10, p11) --[[ line: 147 ]]
+	local function scheduleDecodeRetry(p10, p11)
 		-- upvalues: p4 (ref), var11 (write), t (ref), var10 (write), p3 (ref), scheduleDecodeRetry (ref)
 		if p11.retryScheduled or p4.maxDecodeRetries <= p11.decodeRetries then
 			return
 		end
 		p11.retryScheduled = true
-		task.delay(p4.decodeRetryDelayMs / 1000, function() --[[ line: 152 ]]
+		task.delay(p4.decodeRetryDelayMs / 1000, function()
 			-- upvalues: p11 (ref), var11 (copy), t (copy), p10 (ref), var10 (copy), p3 (copy), scheduleDecodeRetry (copy)
 			p11.retryScheduled = false
 			
@@ -71,7 +71,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 		end)
 	end
 	
-	local function reconcile(p12) --[[ line: 173 ]]
+	local function reconcile(p12)
 		-- upvalues: p3 (ref), fFlagMomentsAutoplayAmpPolicy (copy), fFlagMomentsCarouselVideoHandoff (copy), var10 (write), p4 (ref), t (ref), var9 (write), createController (ref), var11 (write), scheduleDecodeRetry (ref), var13 (ref), now (ref), p5 (ref)
 		local items = p3.getItems(p12)
 		local activeIndex = p3.getActiveIndex(p12)
@@ -126,7 +126,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 				}
 				t[i_2] = t_4
 				var27 = true
-				task.spawn(function() --[[ line: 234 ]]
+				task.spawn(function()
 					-- upvalues: var11 (copy), t (copy), i_2 (ref), t_4 (ref), var32 (ref), fFlagMomentsCarouselVideoHandoff (copy), p4 (copy), var10 (copy), p3 (copy), scheduleDecodeRetry (copy)
 					if var11 or t[i_2] ~= t_4 then return end
 					var32.download()
@@ -138,7 +138,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 						if not var35.retryScheduled then
 							if p4.maxDecodeRetries <= var35.decodeRetries then return end
 							var35.retryScheduled = true
-							task.delay(p4.decodeRetryDelayMs / 1000, function() --[[ line: 152 ]]
+							task.delay(p4.decodeRetryDelayMs / 1000, function()
 								-- upvalues: var35 (ref), var11 (copy), t (copy), var34 (ref), var10 (copy), p3 (copy), scheduleDecodeRetry (copy)
 								var35.retryScheduled = false
 								
@@ -234,7 +234,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 		end
 	end
 	
-	local var16 = createEffect(function(p13) --[[ line: 330 ]]
+	local var16 = createEffect(function(p13)
 		-- upvalues: var11 (write), reconcile (ref)
 		if var11 then
 			return
@@ -243,14 +243,14 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 101 | named "createMediaPrelo
 	end)
 	
 	return {
-		getControllerFor = function(p14) --[[ line: 337 ]]
+		getControllerFor = function(p14)
 			-- upvalues: t (ref)
 			local var36 = t[p14]
 			
 			return if var36 == nil then nil else var36.controller
 		end,
 		getControllerMap = var12,
-		dispose = function() --[[ line: 342 ]]
+		dispose = function()
 			-- upvalues: var11 (write), var16 (ref), t (ref), var9 (write), var13 (ref)
 			if var11 then return end
 			var11 = true

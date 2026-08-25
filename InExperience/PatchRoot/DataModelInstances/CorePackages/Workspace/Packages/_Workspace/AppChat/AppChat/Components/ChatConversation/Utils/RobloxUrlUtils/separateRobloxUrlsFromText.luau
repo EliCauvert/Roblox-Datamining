@@ -15,14 +15,14 @@ local var8 = urlProcessor.new({
 	protocolStrict = false,
 	subdomainStrict = false,
 	trimPunctuation = true,
-	domainsPatterns = cryoModule.List.map(constantsModule.ROBLOX_DOMAIN_PATTERNS, function(p0) --[[ line: 21 ]]
+	domainsPatterns = cryoModule.List.map(constantsModule.ROBLOX_DOMAIN_PATTERNS, function(p0)
 		-- upvalues: var7 (ref)
 		return p0 .. var7
 	end),
 	subdomainPatterns = { constants.ANY_DOMAIN_NAME }
 }, robloxUrlMapModule)
 
-return function(p1) --[[ line: 32 ]]
+return function(p1)
 	-- upvalues: var8 (ref), fFlagAppChatFullPlaintextBeforeGameCardsModule (ref), addMessageModule (ref), text (ref)
 	local t = {}
 	local var10 = var8:process(p1)

@@ -34,7 +34,7 @@ local var10 = nil
 local var11 = nil
 local var12 = false
 
-function t.resetContextDependencies() --[[ line: 74 ]]
+function t.resetContextDependencies()
 	-- upvalues: var9 (write), var10 (write), var11 (write), reactGlobalsModule (ref), var12 (write)
 	var9 = nil
 	var10 = nil
@@ -45,21 +45,21 @@ function t.resetContextDependencies() --[[ line: 74 ]]
 	end
 end
 
-function t.enterDisallowedContextReadInDEV() --[[ line: 85 ]]
+function t.enterDisallowedContextReadInDEV()
 	-- upvalues: reactGlobalsModule (ref), var12 (write)
 	if reactGlobalsModule.__DEV__ then
 		var12 = true
 	end
 end
 
-function t.exitDisallowedContextReadInDEV() --[[ line: 91 ]]
+function t.exitDisallowedContextReadInDEV()
 	-- upvalues: reactGlobalsModule (ref), var12 (write)
 	if reactGlobalsModule.__DEV__ then
 		var12 = false
 	end
 end
 
-function t.pushProvider(p0, p1) --[[ line: 97 ]]
+function t.pushProvider(p0, p1)
 	-- upvalues: isPrimaryRenderer (ref), push (ref), var7 (ref), reactGlobalsModule (ref), var8 (write), console (ref)
 	local context = p0.type._context
 	
@@ -87,7 +87,7 @@ function t.pushProvider(p0, p1) --[[ line: 97 ]]
 	end
 end
 
-function t.popProvider(p2) --[[ line: 135 ]]
+function t.popProvider(p2)
 	-- upvalues: var7 (ref), pop (ref), isPrimaryRenderer (ref)
 	local current = var7.current
 	pop(var7, p2)
@@ -101,12 +101,12 @@ function t.popProvider(p2) --[[ line: 135 ]]
 	context._currentValue2 = current
 end
 
-function t.calculateChangedBits(p3, p4, p5) --[[ line: 148 ]]
+function t.calculateChangedBits(p3, p4, p5)
 	-- upvalues: objectIs (ref), MAX_SIGNED_31_BIT_INT (ref)
 	return if objectIs(p5, p4) then 0 else math.floor(if typeof(p3._calculateChangedBits) == "function" then p3._calculateChangedBits(p5, p4) else MAX_SIGNED_31_BIT_INT)
 end
 
-function t.scheduleWorkOnParentPath(p6, p7) --[[ line: 179 ]]
+function t.scheduleWorkOnParentPath(p6, p7)
 	-- upvalues: isSubsetOfLanes (ref), mergeLanes (ref)
 	local alternate
 	local var13 = p6
@@ -127,7 +127,7 @@ function t.scheduleWorkOnParentPath(p6, p7) --[[ line: 179 ]]
 	end
 end
 
-function t.propagateContextChange(p8, p9, p10, p11) --[[ line: 202 ]]
+function t.propagateContextChange(p8, p9, p10, p11)
 	-- upvalues: classComponent (ref), createUpdate (ref), noTimestamp (ref), pickArbitraryLane (ref), forceUpdate (ref), t (ref), contextProvider (ref)
 	local dependencies, child_1, firstContext
 	local child = p8.child
@@ -202,7 +202,7 @@ function t.propagateContextChange(p8, p9, p10, p11) --[[ line: 202 ]]
 	end
 end
 
-function t.prepareToReadContext(p12, p13, p14) --[[ line: 341 ]]
+function t.prepareToReadContext(p12, p13, p14)
 	-- upvalues: var9 (write), var10 (write), var11 (write), includesSomeLane (ref)
 	var9 = p12
 	var10 = nil
@@ -217,7 +217,7 @@ function t.prepareToReadContext(p12, p13, p14) --[[ line: 341 ]]
 	end
 end
 
-function t.readContext(p15, p16) --[[ line: 364 ]]
+function t.readContext(p15, p16)
 	-- upvalues: reactGlobalsModule (ref), var12 (write), console (ref), var11 (write), number (ref), var10 (write), var9 (write), error (ref), noLanes (ref), isPrimaryRenderer (ref)
 	if reactGlobalsModule.__DEV__ and var12 then
 		console.error("Context can only be read while React is rendering. In classes, you can read it in the render method or getDerivedStateFromProps. In function components, you can read it directly in the function body, but not inside Hooks like useReducer() or useMemo().")

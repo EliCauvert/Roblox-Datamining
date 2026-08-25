@@ -9,12 +9,12 @@ local var2 = nil
 local t_1 = {}
 local var4 = 1
 
-local function makeSlotClass() --[[ line: 62 ]]
+local function makeSlotClass()
 	-- upvalues: array (ref), var4 (write), uuid (ref), var2 (write), t_1 (ref)
 	local t = {}
 	t.__index = t
 	
-	function t.new() --[[ line: 66 ]]
+	function t.new()
 		-- upvalues: t (ref), array (copy), var4 (copy), uuid (copy)
 		local tbl = setmetatable({}, t)
 		tbl.id = array.join({ "slot", var4, DateTime.now().UnixTimestampMillis, uuid() }, ":")
@@ -23,7 +23,7 @@ local function makeSlotClass() --[[ line: 62 ]]
 		return tbl
 	end
 	
-	function t:hasValue() --[[ line: 84 ]]
+	function t:hasValue()
 		-- upvalues: var2 (copy), t_1 (copy)
 		local var10 = var2
 		while var10 do
@@ -45,15 +45,15 @@ local function makeSlotClass() --[[ line: 62 ]]
 		return false
 	end
 	
-	function t:getValue() --[[ line: 120 ]]
+	function t:getValue()
 		-- upvalues: var2 (copy)
 		return if self:hasValue() then var2.slots[self.id] else nil
 	end
 	
-	function t:withValue(p0, p1, p2, p3) --[[ line: 127 ]]
+	function t:withValue(p0, p1, p2, p3)
 		-- upvalues: var2 (copy)
 		var2 = { parent = var2, slots = { [self.id] = p0 } }
-		local ok, status, var11 = pcall(function() --[[ line: 144 ]]
+		local ok, status, var11 = pcall(function()
 			-- upvalues: p1 (ref), p3 (ref), p2 (ref)
 			return p1(p3, table.unpack(p2 or {})), true
 		end)
@@ -67,9 +67,9 @@ local function makeSlotClass() --[[ line: 62 ]]
 		return nil
 	end
 	
-	function t.bind(p4) --[[ line: 162 ]]
+	function t.bind(p4)
 		-- upvalues: var2 (copy)
-		return function(p5, ...) --[[ line: 164 ]]
+		return function(p5, ...)
 			-- upvalues: var2 (copy), var2 (ref), p4 (ref)
 			var2 = var2
 			local ok, status = pcall(p4, p5, table.unpack({ ... }))
@@ -82,13 +82,13 @@ local function makeSlotClass() --[[ line: 62 ]]
 		end
 	end
 	
-	function t.noContext(p6, p7, p8) --[[ line: 178 ]]
+	function t.noContext(p6, p7, p8)
 		-- upvalues: var2 (copy)
 		if not var2 then
 			return p6(p8, table.unpack(p7 or {}))
 		end
 		local var12 = var2
-		local ok, status, var13 = pcall(function() --[[ line: 189 ]]
+		local ok, status, var13 = pcall(function()
 			-- upvalues: var2 (copy), p6 (ref), p8 (ref), p7 (ref)
 			var2 = nil
 			
@@ -112,7 +112,7 @@ if boolean.toJSBoolean(array["@wry/context:Slot"]) then
 	
 	if not var6 then
 		local var7 = makeSlotClass()
-		pcall(function() --[[ line: 227 ]]
+		pcall(function()
 			-- upvalues: array (ref), var7 (ref)
 			array["@wry/context:Slot"] = var7
 		end)

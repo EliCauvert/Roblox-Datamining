@@ -17,7 +17,7 @@ local t = {
 	colorNamespace = colorNamespaceModule.Color
 }
 
-return function(p0) --[[ line: 49 | named "Accessory" ]]
+return function(p0)
 	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
 	local accessory = p0.accessory
 	

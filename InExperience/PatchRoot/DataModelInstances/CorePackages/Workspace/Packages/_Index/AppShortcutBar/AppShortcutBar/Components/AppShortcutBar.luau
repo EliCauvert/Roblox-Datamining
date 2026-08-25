@@ -7,7 +7,7 @@ local shortcutBar = require(parent.UIBlox).App.Navigation.ShortcutBar
 local shortcutBarMinSize = game:DefineFastFlag("ShortcutBarMinSize", false)
 local disableAppShortcutBarAndroidTV = game:DefineFastFlag("DisableAppShortcutBarAndroidTV", false)
 
-function AppShortcutBar(p0) --[[ line: 23 ]]
+function AppShortcutBar(p0)
 	-- upvalues: useFocusedTextBox (ref), responsiveModule (ref), reactModule (ref), userInputService (ref), disableAppShortcutBarAndroidTV (ref), shortcutBarMinSize (ref), shortcutBar (ref)
 	local var5 = if p0.Position then p0.Position else UDim2.fromScale(0.5, 0)
 	local var6 = if p0.AnchorPoint then p0.AnchorPoint else Vector2.new(0.5, 0)
@@ -16,14 +16,14 @@ function AppShortcutBar(p0) --[[ line: 23 ]]
 	local var9, var10 = reactModule.useState(if var8 == responsiveModule.Input.Directional then userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1) else true)
 	
 	if disableAppShortcutBarAndroidTV then
-		reactModule.useEffect(function() --[[ line: 34 ]]
+		reactModule.useEffect(function()
 			-- upvalues: userInputService (copy), var10 (ref), var8 (ref), responsiveModule (copy)
-			local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function() --[[ line: 35 ]]
+			local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function()
 				-- upvalues: var10 (copy), var8 (copy), responsiveModule (copy), userInputService (copy)
 				var10(if var8 == responsiveModule.Input.Directional then userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1) else true)
 			end)
 			
-			return function() --[[ line: 44 ]]
+			return function()
 				-- upvalues: lastInputTypeChangedConnection (ref)
 				lastInputTypeChangedConnection:Disconnect()
 			end

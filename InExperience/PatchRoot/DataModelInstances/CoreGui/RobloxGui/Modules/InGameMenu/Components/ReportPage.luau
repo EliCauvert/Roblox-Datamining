@@ -7,7 +7,7 @@ local pageNavigationWatcherModule = require(parent.Components.PageNavigationWatc
 local pageModule = require(parent.Components.Page)
 local reportListModule = require(script.ReportList)
 
-local function getReportablePlayers() --[[ line: 14 ]]
+local function getReportablePlayers()
 	-- upvalues: playersService (ref)
 	local t = {}
 	
@@ -22,18 +22,18 @@ end
 local reportPage = roact.PureComponent:extend("ReportPage")
 reportPage.validateProps = t.strictInterface({ pageTitle = t.string })
 
-function reportPage.init(p0) --[[ line: 31 ]]
+function reportPage.init(p0)
 	-- upvalues: getReportablePlayers (ref)
 	p0:setState({ players = getReportablePlayers() })
 end
 
-function reportPage.render(p1) --[[ line: 37 ]]
+function reportPage.render(p1)
 	-- upvalues: roact (ref), pageModule (ref), reportListModule (ref), pageNavigationWatcherModule (ref), getReportablePlayers (ref)
 	return roact.createElement(pageModule, { pageTitle = p1.props.pageTitle }, {
 		PlayerList = roact.createElement(reportListModule, { players = p1.state.players }),
 		Watcher = roact.createElement(pageNavigationWatcherModule, {
 			desiredPage = "Report",
-			onNavigateTo = function() --[[ line: 46 ]]
+			onNavigateTo = function()
 				-- upvalues: p1 (ref), getReportablePlayers (copy)
 				p1:setState({ players = getReportablePlayers() })
 			end

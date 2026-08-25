@@ -1,6 +1,6 @@
 ﻿local mapCatalogDiscountInfoToPriceDiscountDetailsModule = require(script:FindFirstAncestor("PurchasePrompt").Utils.mapCatalogDiscountInfoToPriceDiscountDetails)
 
-return function(p0, p1, p2, p3) --[[ line: 11 | named "resolveRefreshedProductInfo" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: mapCatalogDiscountInfoToPriceDiscountDetailsModule (ref)
 	if p2 and p2 ~= "" then
 		local lowestResalePrice = nil

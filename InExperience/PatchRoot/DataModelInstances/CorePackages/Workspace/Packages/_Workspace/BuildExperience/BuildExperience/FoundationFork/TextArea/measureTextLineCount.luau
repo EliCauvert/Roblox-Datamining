@@ -2,7 +2,7 @@
 local getVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
 local chatTextAreaDebugModule = require(script.Parent.chatTextAreaDebug)
 
-return function(p0) --[[ line: 23 | named "measureTextLineCount" ]]
+return function(p0)
 	-- upvalues: getVisibleLineCountModule (ref), chatTextAreaDebugModule (ref), textService (ref)
 	local var3 = getVisibleLineCountModule(p0.text, p0.maxLines)
 	local var4 = 1

@@ -9,7 +9,7 @@ local var2 = false
 local var3 = false
 
 return {
-	startTracking = function(p0) --[[ line: 20 ]]
+	startTracking = function(p0)
 		-- upvalues: var2 (write), var3 (write), timeToInteractiveTracker (ref), EDP_TTI_EVENT_NAME (ref), enableEDPTTIManagerColdWarmDetection (ref)
 		var2 = false
 		var3 = false
@@ -20,11 +20,11 @@ return {
 			timeToInteractiveTracker.updateMetadata(EDP_TTI_EVENT_NAME, { page = p0 })
 		end
 	end,
-	setImplementation = function(value) --[[ line: 37 ]]
+	setImplementation = function(value)
 		-- upvalues: timeToInteractiveTracker (ref), EDP_TTI_EVENT_NAME (ref)
 		timeToInteractiveTracker.updateMetadata(EDP_TTI_EVENT_NAME, { category = value })
 	end,
-	trackFunctionallyReady = function() --[[ line: 43 ]]
+	trackFunctionallyReady = function()
 		-- upvalues: var2 (write), timeToInteractiveTracker (ref), EDP_TTI_EVENT_NAME (ref), milestone (ref), fFlagEnablePLTPrefetchCallbacks (ref), pageGateModule (ref)
 		if var2 then return end
 		var2 = true
@@ -36,7 +36,7 @@ return {
 			pageGateModule.signal(pageGateModule.Page.ExperienceDetail, pageGateModule.Milestone.FunctionallyReady)
 		end
 	end,
-	trackSurfaceReady = function(p1) --[[ line: 57 ]]
+	trackSurfaceReady = function(p1)
 		-- upvalues: var3 (write), timeToInteractiveTracker (ref), EDP_TTI_EVENT_NAME (ref), milestone (ref)
 		if var3 then return end
 		var3 = true

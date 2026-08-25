@@ -5,7 +5,7 @@ local scrollView = foundationModule.ScrollView
 local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 16 | named "ShareSheetRow" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), visibility (ref)
 	local var2 = useTokens()
 	

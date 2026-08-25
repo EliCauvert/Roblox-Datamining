@@ -2,7 +2,7 @@
 local guiService = game:GetService("GuiService")
 local getInstancePropertiesModule = require(script.Parent.getInstanceProperties)
 
-local function hasGuiBase2dChildren(p0) --[[ line: 10 ]]
+local function hasGuiBase2dChildren(p0)
 	-- upvalues: hasGuiBase2dChildren (ref)
 	if p0 == nil then
 		return false
@@ -18,7 +18,7 @@ local function hasGuiBase2dChildren(p0) --[[ line: 10 ]]
 	return false
 end
 
-local function getDataModelNode(p1, p2) --[[ line: 28 ]]
+local function getDataModelNode(p1, p2)
 	-- upvalues: hasGuiBase2dChildren (ref), getDataModelNode (ref), getInstancePropertiesModule (ref)
 	if p1 == nil then
 		return nil
@@ -45,7 +45,7 @@ local function getDataModelNode(p1, p2) --[[ line: 28 ]]
 	}
 end
 
-return function(p3) --[[ line: 58 | named "getDataModelRoot" ]]
+return function(p3)
 	-- upvalues: coreGuiService (ref), getDataModelNode (ref), guiService (ref)
 	local list = { 0, 0 }
 	local currentCamera = game.Workspace.CurrentCamera

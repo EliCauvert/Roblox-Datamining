@@ -6,7 +6,7 @@ local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local roactChatAnalyticsModule = require(script.Parent.RoactChatAnalytics)
 local analyticsContextModule = require(appChat.LegacyAnalytics.AnalyticsContext)
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: analytics (ref), rbxAnalyticsService (ref), roactModule (ref), analyticsContextModule (ref), roactChatAnalyticsModule (ref)
 	return roactModule.createElement(analyticsContextModule.Provider, {
 		value = roactChatAnalyticsModule.new(analytics.new(rbxAnalyticsService), p0.localUserId)

@@ -9,7 +9,7 @@ return rodux.createReducer({
 	shouldSkipOwnershipCheck = false,
 	shouldFetchCartPricing = false
 }, {
-	[setPurchaseOptionsModule.name] = function(_, p0) --[[ line: 18 ]]
+	[setPurchaseOptionsModule.name] = function(_, p0)
 		return p0.purchaseOptions
 	end
 })

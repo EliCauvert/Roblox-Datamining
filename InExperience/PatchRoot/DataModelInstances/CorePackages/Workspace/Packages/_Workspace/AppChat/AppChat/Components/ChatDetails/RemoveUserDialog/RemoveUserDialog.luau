@@ -21,7 +21,7 @@ local t = {
 	width = UDim.new(0.8, 0)
 }
 
-function RemoveUserDialog(p0) --[[ line: 55 ]]
+function RemoveUserDialog(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), warning (ref)
 	return reactModule.createElement(warning, cryoModule.Dictionary.join(t, p0))
 end

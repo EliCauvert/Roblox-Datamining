@@ -4,7 +4,7 @@ local getMutualFriendsTextModule = require(socialCommon.Utils.getMutualFriendsTe
 local recommendationContextTypeModule = require(socialCommon.Enums.RecommendationContextType)
 local images = require(parent.UIBlox).App.ImageSet.Images
 
-return function(p0) --[[ line: 43 ]]
+return function(p0)
 	-- upvalues: recommendationContextTypeModule (ref), getMutualFriendsTextModule (ref), images (ref)
 	local frequents = nil
 	local friend = nil

@@ -19,7 +19,7 @@ local _ = { HUB_BAR_WIDTH = 800, ASPECT_RATIO = 1.333333333333 }
 local _ = { BOTTOM_BUTTON_MAX_SIZE_IN_PIXEL = 233 }
 local var12 = nil
 
-local _ = function() --[[ line: 37 ]]
+local _ = function()
 	-- upvalues: var12 (write), getStyleTokensModule (ref)
 	if var12 == nil then
 		var12 = getStyleTokensModule()
@@ -27,14 +27,14 @@ local _ = function() --[[ line: 37 ]]
 	return var12
 end
 
-local function _(value, p0, p1, p2) --[[ line: 44 | named "setFieldWithBackup" ]]
+local function _(value, p0, p1, p2)
 	if p0 ~= nil then
 		p0[p1] = value[p1]
 		value[p1] = p2
 	end
 end
 
-local _ = function(p3, p4, p5) --[[ line: 57 | named "restoreFieldFromBackup" ]]
+local _ = function(p3, p4, p5)
 	if p4 ~= nil then
 		p3[p5] = p4[p5]
 	end
@@ -43,7 +43,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p6) --[[ line: 66 ]]
+function t.new(p6)
 	-- upvalues: t (ref)
 	local t_1 = {
 		_originalShieldConfig = nil,
@@ -63,7 +63,7 @@ function t.new(p6) --[[ line: 66 ]]
 	return t_1
 end
 
-function t:enableVR() --[[ line: 84 ]]
+function t:enableVR()
 	-- upvalues: panelType (ref), UIManager (ref), observableModule (ref), create (ref), themeModule (ref), corePackagesService (ref), robloxGui (ref)
 	local var17 = UIManager.getInstance():createUI({
 		panelType = panelType.MoreMenu,
@@ -78,7 +78,7 @@ function t:enableVR() --[[ line: 84 ]]
 	if var17 == nil then return end
 	local panelObject = var17.panelObject
 	local var18 = observableModule.ObservableValue.new(self._settingsHub.Visible)
-	self._surfaceGuiEnabledConnection = var18:connect(function() --[[ line: 100 ]]
+	self._surfaceGuiEnabledConnection = var18:connect(function()
 		-- upvalues: panelObject (ref), var18 (ref)
 		panelObject.Enabled = var18:get()
 	end)
@@ -119,13 +119,13 @@ function t:enableVR() --[[ line: 84 ]]
 	if self._topBarConnection == nil then
 		local VRHub = require(corePackagesService.Workspace.Packages.VrCommon).VRHub
 		local var21 = observableModule.ObservableValue.new(VRHub.ShowTopBar)
-		self._topBarConnection = VRHub.ShowTopBarChanged.Event:connect(function() --[[ line: 121 ]]
+		self._topBarConnection = VRHub.ShowTopBarChanged.Event:connect(function()
 			-- upvalues: var21 (ref), VRHub (ref)
 			var21:set(VRHub.ShowTopBar)
 		end)
 		UIManager.getInstance():connectTopBarVisibility(var21)
 		local serviceModule = require(robloxGui.Modules.Chrome.ChromeShared.Service)
-		serviceModule:onTriggerVRToggleButton():connect(function(p7) --[[ line: 128 ]]
+		serviceModule:onTriggerVRToggleButton():connect(function(p7)
 			-- upvalues: VRHub (ref)
 			VRHub:SetShowTopBar(p7)
 		end)
@@ -134,7 +134,7 @@ function t:enableVR() --[[ line: 84 ]]
 	self:setVersionTextSize()
 end
 
-function t:isInputEventNeededBySettings(p8, p9, p10) --[[ line: 136 ]]
+function t:isInputEventNeededBySettings(p8, p9, p10)
 	-- upvalues: robloxGui (ref)
 	if self._vrEnabled then
 		if self._userGui == nil then
@@ -153,7 +153,7 @@ function t:isInputEventNeededBySettings(p8, p9, p10) --[[ line: 136 ]]
 	end
 end
 
-function t:disableVR() --[[ line: 157 ]]
+function t:disableVR()
 	-- upvalues: UIManager (ref), panelType (ref)
 	if not self._vrEnabled then return end
 	local clippingShield = self._settingsHub.ClippingShield
@@ -190,7 +190,7 @@ function t:disableVR() --[[ line: 157 ]]
 	self._vrEnabled = false
 end
 
-function t:getAspectRatio() --[[ line: 179 ]]
+function t:getAspectRatio()
 	-- upvalues: UIManager (ref), panelType (ref)
 	if self._vrEnabled then
 		local moreMenuPanelSizeInPixel = UIManager.getInstance():getPanelSizeInPixel(panelType.MoreMenu)
@@ -200,7 +200,7 @@ function t:getAspectRatio() --[[ line: 179 ]]
 	return 1.333333333333
 end
 
-function t:getHubBarSize() --[[ line: 188 ]]
+function t:getHubBarSize()
 	-- upvalues: themeModule (ref), UIManager (ref), panelType (ref)
 	if not self._vrEnabled then
 		return 800
@@ -217,7 +217,7 @@ function t:getHubBarSize() --[[ line: 188 ]]
 	return UIManager.getInstance():getPanelSizeInPixel(panelType.MoreMenu).X - var25
 end
 
-function t:getMenuContainerPositionOverride() --[[ line: 205 ]]
+function t:getMenuContainerPositionOverride()
 	return if self._vrEnabled then {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -226,12 +226,12 @@ function t:getMenuContainerPositionOverride() --[[ line: 205 ]]
 	} else nil
 end
 
-function t:getFullScreenSize() --[[ line: 218 ]]
+function t:getFullScreenSize()
 	-- upvalues: UIManager (ref), panelType (ref), robloxGui (ref)
 	return if self._vrEnabled then UIManager.getInstance():getPanelSizeInPixel(panelType.MoreMenu).Y else robloxGui.AbsoluteSize.y
 end
 
-function t:getDarkBackgroundTheme() --[[ line: 227 ]]
+function t:getDarkBackgroundTheme()
 	-- upvalues: var12 (write), getStyleTokensModule (ref), spatialUIDarkenBackgroundTransparency (ref), themeModule (ref)
 	if not self._vrEnabled then
 		return {
@@ -247,11 +247,11 @@ function t:getDarkBackgroundTheme() --[[ line: 227 ]]
 	}
 end
 
-function t:getBottomButtonSize(p11) --[[ line: 243 ]]
+function t:getBottomButtonSize(p11)
 	return if self._vrEnabled then math.min(p11, 233) else p11
 end
 
-function t:updatePanelVisibility(p12) --[[ line: 251 ]]
+function t:updatePanelVisibility(p12)
 	-- upvalues: inExperienceUIVRIXP (ref), fFlagSpatialUIFixMenuPanelChatExclusiveModule (ref), chatSelectorModule (ref), panelType (ref)
 	for i, v in self._windowsVisibilityValues do
 		if v then
@@ -269,9 +269,9 @@ function t:updatePanelVisibility(p12) --[[ line: 251 ]]
 	p12:set(false)
 end
 
-local var14 = function(p13) --[[ line: 268 ]]
+local var14 = function(p13)
 	-- upvalues: corePackagesService (ref), inExperienceUIVRIXP (ref), spatialUIFixGameInviteChatExclusive (ref), chatSelectorModule (ref)
-	local eventConnection = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function(p14) --[[ line: 271 ]]
+	local eventConnection = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function(p14)
 		-- upvalues: p13 (ref), inExperienceUIVRIXP (copy), spatialUIFixGameInviteChatExclusive (copy), chatSelectorModule (copy)
 		p13("GameInvite", p14)
 		
@@ -285,7 +285,7 @@ local var14 = function(p13) --[[ line: 268 ]]
 		end
 	end)
 	
-	return function() --[[ line: 283 ]]
+	return function()
 		-- upvalues: eventConnection (write)
 		if eventConnection then
 			eventConnection:Disconnect()
@@ -294,24 +294,24 @@ local var14 = function(p13) --[[ line: 268 ]]
 	end
 end
 
-local var15 = function(p15) --[[ line: 291 ]]
+local var15 = function(p15)
 	local guiService = game:GetService("GuiService")
-	local inspectPlayerFromUserIdWithCtxRequestConnection = guiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function() --[[ line: 294 ]]
+	local inspectPlayerFromUserIdWithCtxRequestConnection = guiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function()
 		-- upvalues: p15 (ref)
 		p15("InspectAndBuy", true)
 	end)
-	local closeInspectMenuRequestConnection = guiService.CloseInspectMenuRequest:Connect(function() --[[ line: 297 ]]
+	local closeInspectMenuRequestConnection = guiService.CloseInspectMenuRequest:Connect(function()
 		-- upvalues: p15 (ref)
 		p15("InspectAndBuy", false)
 	end)
-	local inspectMenuEnabledChangedSignalConnection = guiService.InspectMenuEnabledChangedSignal:Connect(function(p16) --[[ line: 300 ]]
+	local inspectMenuEnabledChangedSignalConnection = guiService.InspectMenuEnabledChangedSignal:Connect(function(p16)
 		-- upvalues: p15 (ref)
 		if not p16 then
 			p15("InspectAndBuy", false)
 		end
 	end)
 	
-	return function() --[[ line: 306 ]]
+	return function()
 		-- upvalues: inspectPlayerFromUserIdWithCtxRequestConnection (write), closeInspectMenuRequestConnection (write), inspectMenuEnabledChangedSignalConnection (write)
 		if inspectPlayerFromUserIdWithCtxRequestConnection then
 			inspectPlayerFromUserIdWithCtxRequestConnection:Disconnect()
@@ -328,23 +328,23 @@ local var15 = function(p15) --[[ line: 291 ]]
 	end
 end
 
-function t:connectWindowsVisibility(p17) --[[ line: 322 ]]
+function t:connectWindowsVisibility(p17)
 	-- upvalues: var14 (ref), var15 (ref)
-	local var31 = function(p18, p19) --[[ line: 323 ]]
+	local var31 = function(p18, p19)
 		-- upvalues: self (ref), p17 (ref)
 		self._windowsVisibilityValues[p18] = p19
 		self:updatePanelVisibility(p17)
 	end
 	
 	for i, v in {
-		function(p20) --[[ line: 328 ]]
+		function(p20)
 			-- upvalues: self (ref)
-			local settingsShowSignalConnection = self._settingsHub.SettingsShowSignal:connect(function(p21) --[[ line: 329 ]]
+			local settingsShowSignalConnection = self._settingsHub.SettingsShowSignal:connect(function(p21)
 				-- upvalues: p20 (ref)
 				p20("SettingsHub", p21)
 			end)
 			
-			return function() --[[ line: 333 ]]
+			return function()
 				-- upvalues: settingsShowSignalConnection (write)
 				if settingsShowSignalConnection then
 					settingsShowSignalConnection:Disconnect()
@@ -359,7 +359,7 @@ function t:connectWindowsVisibility(p17) --[[ line: 322 ]]
 	end
 end
 
-function t:disconnectWindowsVisibility() --[[ line: 353 ]]
+function t:disconnectWindowsVisibility()
 	for i, v in self._windowsDisconnectCallbacks do
 		v()
 	end
@@ -367,11 +367,11 @@ function t:disconnectWindowsVisibility() --[[ line: 353 ]]
 	self._windowsVisibilityValues = {}
 end
 
-function t:isOpenCloseAnimationAllowed() --[[ line: 361 ]]
+function t:isOpenCloseAnimationAllowed()
 	return self._vrEnabled
 end
 
-function t:getMenuContainerExtraSpace() --[[ line: 369 ]]
+function t:getMenuContainerExtraSpace()
 	if self._vrEnabled then
 		local menuContainerPadding = self._settingsHub.MenuContainerPadding
 		
@@ -380,12 +380,12 @@ function t:getMenuContainerExtraSpace() --[[ line: 369 ]]
 	return 0
 end
 
-local _ = function(p22) --[[ line: 378 | named "refreshVersionTextLabelSize" ]]
+local _ = function(p22)
 	-- upvalues: coreScriptVersionEnabledEngineFeature (ref)
 	p22.Size = if coreScriptVersionEnabledEngineFeature then UDim2.new(0, p22.TextBounds.X + 6, 1, 0) else UDim2.new(0.2, -6, 1, 0)
 end
 
-function t:setVersionTextSize() --[[ line: 384 ]]
+function t:setVersionTextSize()
 	-- upvalues: themeModule (ref), spatialUIVersionTextSizeScaled (ref), coreScriptVersionEnabledEngineFeature (ref)
 	for i, v in self._settingsHub.VersionContainer:GetChildren() do
 		if v:IsA("TextLabel") then
@@ -396,7 +396,7 @@ function t:setVersionTextSize() --[[ line: 384 ]]
 	end
 end
 
-function t:restoreVersionTextSize() --[[ line: 395 ]]
+function t:restoreVersionTextSize()
 	-- upvalues: coreScriptVersionEnabledEngineFeature (ref)
 	for i, v in self._settingsHub.VersionContainer:GetChildren() do
 		if v:IsA("TextLabel") and self._originalVersionTextSizes[v] then

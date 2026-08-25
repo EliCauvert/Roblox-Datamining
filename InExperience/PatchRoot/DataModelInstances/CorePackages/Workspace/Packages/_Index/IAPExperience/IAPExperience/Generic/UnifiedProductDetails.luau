@@ -23,13 +23,13 @@ local getFFlagDiscountInfoForSubscriptionPurchaseModalLua = require(parent.Paren
 local default = require(parent_1.LoggingProtocol).default
 local virtualItemBadgeShownCounter = require(parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
 
-local function _(a) --[[ line: 52 | named "withMaxLength" ]]
+local function _(a)
 	return if #a > 50 then a:sub(1, 50) .. "..." else a
 end
 
 local _ = require(parent.ProductPurchase.PricingTypes)
 
-return function(p0) --[[ line: 77 ]]
+return function(p0)
 	-- upvalues: getFFlagDiscountInfoForSubscriptionPurchaseModalLua (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), useLocalization (ref), useTokens (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), useRobuxTextModule (ref), reactModule (ref), modelViewportModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), skeleton (ref), radius (ref), image (ref), virtualItemBadgeTypeModule (ref), yellowBadgeModule (ref), default (ref), virtualItemBadgeShownCounter (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref)
 	local var8 = getFFlagDiscountInfoForSubscriptionPurchaseModalLua()
 	local var9 = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then p0.itemPrice else nil
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 77 ]]
 		Icon = "icons/menu/fire_fill",
 		Text = var11.Popular
 	}) else nil
-	reactModule.useEffect(function() --[[ line: 138 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), default (copy), virtualItemBadgeShownCounter (copy), p0 (ref)
 		if var18 then
 			default:logRobloxTelemetryCounter(virtualItemBadgeShownCounter, 1, { badgeType = p0.badgeType })

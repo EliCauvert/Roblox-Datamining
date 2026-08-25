@@ -7,14 +7,14 @@ local openGameDetails = require(parent.GameDetail).OpenGameDetails
 local experienceTileModule = require(profilePlatform.BaseComponents.Tiles.ExperienceTile)
 local _ = require(profilePlatform.Common.Types)
 
-return function(p0, p1, p2, p3) --[[ line: 19 | named "useRenderExperienceTile" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: useDispatch (ref), useNavigation (ref), reactModule (ref), openGameDetails (ref), experienceTileModule (ref)
 	local var3 = useDispatch()
 	local var4 = useNavigation()
 	p1 = p1 or "ProfileExperienceTile_"
-	local var5 = reactModule.useCallback(function(p4, p5, p6) --[[ line: 29 ]]
+	local var5 = reactModule.useCallback(function(p4, p5, p6)
 		-- upvalues: p2 (ref), var3 (ref), openGameDetails (copy), var4 (ref)
-		return function() --[[ line: 30 ]]
+		return function()
 			-- upvalues: p2 (copy), p4 (ref), p5 (ref), p6 (ref), var3 (copy), openGameDetails (copy), var4 (copy)
 			if p2 then
 				p2(p4, p5, p6)
@@ -23,7 +23,7 @@ return function(p0, p1, p2, p3) --[[ line: 19 | named "useRenderExperienceTile" 
 		end
 	end, { p2, var3, var4 })
 	
-	return reactModule.useCallback(function(p7, p8, _, p9) --[[ line: 51 ]]
+	return reactModule.useCallback(function(p7, p8, _, p9)
 		-- upvalues: reactModule (copy), experienceTileModule (copy), var5 (ref), p0 (ref), p3 (ref), p1 (write)
 		return reactModule.createElement(experienceTileModule, {
 			item = p7,

@@ -21,7 +21,7 @@ local t = {
 	verticalPadding = 16
 }
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 50 | named "useCreateClientBindingSduiContext" ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref)
 	p6 = p6 or p0
 	local _ = nil
@@ -29,9 +29,9 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 50 | named "useCr
 	
 	if not fFlagLuaAppCompositionAlways then
 		local var7 = useCollectionLayoutConfig(p1, p2)
-		var6 = reactModule.useCallback(function(p9) --[[ line: 69 ]]
+		var6 = reactModule.useCallback(function(p9)
 			-- upvalues: signalsModule (copy), p5 (ref), t (copy), var7 (write), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (ref)
-			return signalsModule.createComputed(function(p10) --[[ line: 70 ]]
+			return signalsModule.createComputed(function(p10)
 				-- upvalues: p5 (copy), t (copy), var7 (copy), p9 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (copy)
 				if p5 ~= false then
 					return t
@@ -46,7 +46,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 50 | named "useCr
 			end)
 		end, { var7, p0, p5 })
 	end
-	return reactModule.useMemo(function() --[[ line: 97 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: getSduiServiceDependenciesStore (copy), p0 (ref), p6 (ref), var6 (write), p5 (ref), p3 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), p4 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), p7 (ref), fFlagLuaAppSduiVideoThumbnail (copy), p8 (ref)
 		return {
 			dependencies = getSduiServiceDependenciesStore().getDependencies(p0),

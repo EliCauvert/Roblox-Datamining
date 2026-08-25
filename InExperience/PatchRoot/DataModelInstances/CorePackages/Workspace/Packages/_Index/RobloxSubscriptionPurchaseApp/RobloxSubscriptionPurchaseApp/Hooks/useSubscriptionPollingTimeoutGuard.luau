@@ -9,16 +9,16 @@ local transitionToErrorModule = require(robloxSubscriptionPurchaseApp.Actions.tr
 local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
 local robloxSubscriptionPurchasePollingTimeoutSeconds = game:DefineFastInt("RobloxSubscriptionPurchasePollingTimeoutSeconds", 4)
 
-return function() --[[ line: 20 | named "useSubscriptionPollingTimeoutGuard" ]]
+return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), reactModule (ref), signalsReactModule (ref), promptStateModule (ref), robloxSubscriptionPurchasePollingTimeoutSeconds (ref), transitionToErrorModule (ref), errorReasonModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref)
 	local var9 = robloxSubscriptionStoreModule.get()
 	local var10 = reactModule.useRef(var9)
 	local var11 = signalsReactModule.useSignalState(var9.getPromptState)
-	reactModule.useEffect(function() --[[ line: 28 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), promptStateModule (copy), robloxSubscriptionPurchasePollingTimeoutSeconds (copy), var10 (ref), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
 		if var11 == promptStateModule.SubscriptionStatusPolling then
 			local var12 = false
-			task.delay(robloxSubscriptionPurchasePollingTimeoutSeconds, function() --[[ line: 36 ]]
+			task.delay(robloxSubscriptionPurchasePollingTimeoutSeconds, function()
 				-- upvalues: var12 (write), var10 (copy), promptStateModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
 				if var12 then return end
 				local current = var10.current
@@ -33,7 +33,7 @@ return function() --[[ line: 20 | named "useSubscriptionPollingTimeoutGuard" ]]
 				end
 			end)
 			
-			return function() --[[ line: 55 ]]
+			return function()
 				-- upvalues: var12 (write)
 				var12 = true
 			end

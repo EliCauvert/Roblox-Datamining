@@ -2,7 +2,7 @@
 local dateTimePickerVariantModule = require(script:FindFirstAncestor("Foundation").Enums.DateTimePickerVariant)
 local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
-local function parseTimeFromText(value) --[[ line: 18 ]]
+local function parseTimeFromText(value)
 	local var6 = value:gsub("%s+", "")
 	local match = string.match(var6, "^%d%d?:%d%d[AP]M$")
 	
@@ -38,13 +38,13 @@ local function parseTimeFromText(value) --[[ line: 18 ]]
 	end
 end
 
-local function adjustForDaylightSaving(p0) --[[ line: 68 ]]
+local function adjustForDaylightSaving(p0)
 	local dateString = os.date("*t", p0.UnixTimestamp)
 	
 	return if dateString and dateString.isdst then DateTime.fromUnixTimestamp(p0.UnixTimestamp - 3600) else p0
 end
 
-local function parseDateTimeFromText(p1) --[[ line: 83 ]]
+local function parseDateTimeFromText(p1)
 	-- upvalues: parseTimeFromText (ref), adjustForDaylightSaving (ref)
 	local var17, var18
 	local _ = nil
@@ -68,7 +68,7 @@ local function parseDateTimeFromText(p1) --[[ line: 83 ]]
 		return nil
 	end
 	local var22 = var19:find("[/%.%-]")
-	local ok, status = pcall(function() --[[ line: 105 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var22 (ref), var19 (ref), var20 (ref), var21 (ref)
 		if var22 == 3 then
 			local var23, var24, var25 = var19:match("^(%d%d)[/%.%-](%d%d)[/%.%-](%d%d%d%d)$")
@@ -87,7 +87,7 @@ end
 
 return {
 	adjustForDaylightSaving = adjustForDaylightSaving,
-	formatInputText = function(p2) --[[ line: 176 ]]
+	formatInputText = function(p2)
 		-- upvalues: dateTimePickerVariantModule (ref), dateTimeUtilitiesModule (ref)
 		local var29 = p2.dates[1]
 		
@@ -101,7 +101,7 @@ return {
 		return dateTimeUtilitiesModule.formatLocalTime(var29, p2.variant == dateTimePickerVariantModule.SingleWithTime)
 	end,
 	parseDateTimeFromText = parseDateTimeFromText,
-	parseDualInputEndpoints = function(p3) --[[ line: 132 ]]
+	parseDualInputEndpoints = function(p3)
 		-- upvalues: parseDateTimeFromText (ref)
 		local var31 = p3:split(" - ")
 		local var32 = if var31[1] then parseDateTimeFromText(var31[1]:gsub("^%s*(.-)%s*$", "%1")) else nil
@@ -111,7 +111,7 @@ return {
 		end
 		return var32, nil
 	end,
-	parseInputToDraftDates = function(p4, p5) --[[ line: 145 ]]
+	parseInputToDraftDates = function(p4, p5)
 		-- upvalues: parseDateTimeFromText (ref), dateTimeUtilitiesModule (ref), dateTimeEqualityUtilitiesModule (ref)
 		if #p4:split(" - ") ~= 2 then
 			return nil
@@ -129,7 +129,7 @@ return {
 		end
 		return if p5 and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange({ startDate = var34, endDate = var35 }, p5) then nil else { var34, var35 }
 	end,
-	trimInputText = function(a) --[[ line: 124 ]]
+	trimInputText = function(a)
 		return a:gsub("^%s*(.-)%s*$", "%1")
 	end
 }

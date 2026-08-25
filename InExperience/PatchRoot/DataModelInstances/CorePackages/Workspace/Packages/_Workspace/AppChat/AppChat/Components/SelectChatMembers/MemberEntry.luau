@@ -8,7 +8,7 @@ local useSignalState = require(parent.SignalsReact).useSignalState
 local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
 local useUserDataModule = require(appChat.Hooks.useUserData)
 
-return reactModule.memo(function(p0) --[[ line: 24 | named "MemberEntry" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), useUserDataModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
 	local var6 = useTokens()
 	local var7 = getSelectedUsersStoreModule(false)
@@ -17,7 +17,7 @@ return reactModule.memo(function(p0) --[[ line: 24 | named "MemberEntry" ]]
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy",
-		onActivated = if var8 then reactModule.useCallback(function() --[[ line: 31 ]]
+		onActivated = if var8 then reactModule.useCallback(function()
 			-- upvalues: var8 (ref), var7 (ref)
 			if var8 then
 				var7.removeUserId(var8)

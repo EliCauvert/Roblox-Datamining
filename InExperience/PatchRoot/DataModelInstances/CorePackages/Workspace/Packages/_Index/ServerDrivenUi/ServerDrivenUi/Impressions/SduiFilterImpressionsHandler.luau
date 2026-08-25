@@ -2,7 +2,7 @@
 local filterImpressionsEvent = require(parent.GameFilters).filterImpressionsEvent
 local sduiErrors = require(parent.SduiCoreSystem).SduiErrors
 
-return function(p0, p1, p2, p3, _) --[[ line: 13 | named "SduiFilterImpressionsHandler" ]]
+return function(p0, p1, p2, p3, _)
 	-- upvalues: sduiErrors (ref), filterImpressionsEvent (ref)
 	if not p3 then
 		p0.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogFilterImpressions, {

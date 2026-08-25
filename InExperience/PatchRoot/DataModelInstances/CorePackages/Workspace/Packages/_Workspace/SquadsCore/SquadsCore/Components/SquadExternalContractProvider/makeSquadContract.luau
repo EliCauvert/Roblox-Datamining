@@ -3,7 +3,7 @@ local defaultSquadContractModule = require(script.Parent.DefaultSquadContract)
 local _ = require(script.Parent.SquadContractType)
 local cryoModule = require(parent.Cryo)
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), defaultSquadContractModule (ref)
 	return cryoModule.Dictionary.union(defaultSquadContractModule, p0)
 end

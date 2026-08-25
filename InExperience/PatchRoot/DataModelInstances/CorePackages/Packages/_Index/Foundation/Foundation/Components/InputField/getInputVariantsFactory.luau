@@ -8,7 +8,7 @@ local radiusModule = require(foundation.Enums.Radius)
 local _ = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 
-return function(p0) --[[ line: 39 | named "getInputVariantsFactory" ]]
+return function(p0)
 	-- upvalues: inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
 	return {
 		common = {

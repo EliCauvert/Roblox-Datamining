@@ -18,14 +18,14 @@ local fFlagEnableHomeRobloxLogo = sharedFlagsModule.FFlagEnableHomeRobloxLogo
 local fFlagEnableConsoleRobloxLogo = sharedFlagsModule.FFlagEnableConsoleRobloxLogo
 local fFlagEnableFlyoutOnNavRail = sharedFlagsModule.FFlagEnableFlyoutOnNavRail
 
-return function(p0) --[[ line: 38 | named "FlyoutLeftHeader" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), fFlagEnableFlyoutOnNavRail (ref), useNavBarPlacement (ref), placement (ref), fFlagEnableCoreContentBadge (ref), useAppPolicy (ref), appPage (ref), fFlagAppIaHomeSubTab (ref), navigationRoduxModule (ref), fFlagEnableHomeRobloxLogo (ref), fFlagEnableConsoleRobloxLogo (ref), reactModule (ref), foundationModule (ref), flyoutHamburgerButtonModule (ref), constantsModule (ref), enableHomeBetaBadge (ref)
 	local var11
 	local var8 = useTokens()
 	local size500 = var8.Size.Size_500
 	local _ = nil
 	local var9 = if fFlagEnableFlyoutOnNavRail then useNavBarPlacement() == placement.Bottom else nil
-	local var10 = if fFlagEnableCoreContentBadge then useAppPolicy(function(p1) --[[ line: 50 ]]
+	local var10 = if fFlagEnableCoreContentBadge then useAppPolicy(function(p1)
 		return p1.getCoreContentBadgeText()
 	end) else nil
 	

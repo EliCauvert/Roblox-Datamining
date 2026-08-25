@@ -11,7 +11,7 @@ local var7 = require(parent.Loggers).Logger:new("Moments.DraftStorage")
 local var8 = game:DefineFastInt("MomentDraftTTLDays", 14) * 24 * 60 * 60 * 1000
 
 return {
-	save = function(p0) --[[ line: 46 ]]
+	save = function(p0)
 		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var7 (ref), momentsDraftSerializerModule (ref), appStorageService (ref), httpService (ref)
 		local var9 = getLocalUserIdModule(playersService)
 		
@@ -27,7 +27,7 @@ return {
 			edits = p0.edits,
 			lastSaveTime = DateTime.now().UnixTimestampMillis
 		}
-		local ok, status = pcall(function() --[[ line: 62 ]]
+		local ok, status = pcall(function()
 			-- upvalues: momentsDraftSerializerModule (copy), t (ref), appStorageService (copy), httpService (copy)
 			appStorageService:SetItem("MomentsDraftStorage", httpService:JSONEncode(momentsDraftSerializerModule.serialize(t)))
 			appStorageService:Flush()
@@ -38,7 +38,7 @@ return {
 		end
 		return ok
 	end,
-	load = function() --[[ line: 82 ]]
+	load = function()
 		-- upvalues: getLocalUserIdModule (ref), playersService (ref), var7 (ref), appStorageService (ref), httpService (ref), failureReasonModule (ref), momentsDraftSerializerModule (ref), var8 (ref)
 		local var11 = getLocalUserIdModule(playersService)
 		
@@ -47,7 +47,7 @@ return {
 			
 			return nil, nil
 		end
-		local ok, status = pcall(function() --[[ line: 89 ]]
+		local ok, status = pcall(function()
 			-- upvalues: appStorageService (copy)
 			return appStorageService:GetItem("MomentsDraftStorage")
 		end)
@@ -59,13 +59,13 @@ return {
 		elseif status == nil or status == "" then
 			return nil, nil
 		end
-		local ok_1, status_1 = pcall(function() --[[ line: 103 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: httpService (copy), status (ref)
 			return httpService:JSONDecode(status)
 		end)
 		
 		if not ok_1 or type(status_1) ~= "table" then
-			pcall(function() --[[ line: 76 ]]
+			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
 				appStorageService:Flush()
@@ -76,7 +76,7 @@ return {
 		local var12 = momentsDraftSerializerModule.deserialize(status_1)
 		
 		if var12 == nil then
-			pcall(function() --[[ line: 76 ]]
+			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
 				appStorageService:Flush()
@@ -84,7 +84,7 @@ return {
 			
 			return nil, failureReasonModule.CorruptShape
 		elseif var12.userId ~= var11 then
-			pcall(function() --[[ line: 76 ]]
+			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
 				appStorageService:Flush()
@@ -92,7 +92,7 @@ return {
 			
 			return nil, failureReasonModule.WrongUser
 		elseif var8 < DateTime.now().UnixTimestampMillis - var12.lastSaveTime then
-			pcall(function() --[[ line: 76 ]]
+			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("MomentsDraftStorage", "")
 				appStorageService:Flush()
@@ -102,9 +102,9 @@ return {
 		end
 		return var12, nil
 	end,
-	clear = function() --[[ line: 75 ]]
+	clear = function()
 		-- upvalues: appStorageService (ref)
-		pcall(function() --[[ line: 76 ]]
+		pcall(function()
 			-- upvalues: appStorageService (copy)
 			appStorageService:SetItem("MomentsDraftStorage", "")
 			appStorageService:Flush()

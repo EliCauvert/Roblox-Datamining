@@ -20,9 +20,9 @@ local list = {
 	platformInterfaceModule
 }
 
-return function(value) --[[ line: 26 | named "openSecuritySettings" ]]
+return function(value)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), externalSettingsModule (ref), platformInterfaceModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), hideWindowModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1) --[[ line: 27 ]]
+	return thunkModule.new(script.Name, list, function(p0, p1)
 		-- upvalues: analyticsModule (copy), externalSettingsModule (copy), platformInterfaceModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), value (ref), hideWindowModule (copy)
 		local var9 = p1[analyticsModule]
 		local var10 = p1[externalSettingsModule]

@@ -4,7 +4,7 @@ local navigateToChartsSortDetailPage = require(parent.Charts).navigateToChartsSo
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1, _) --[[ line: 14 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), navigateToChartsSortDetailPage (ref)
 	local var1 = if p0 then p0.actionParams else nil
 	

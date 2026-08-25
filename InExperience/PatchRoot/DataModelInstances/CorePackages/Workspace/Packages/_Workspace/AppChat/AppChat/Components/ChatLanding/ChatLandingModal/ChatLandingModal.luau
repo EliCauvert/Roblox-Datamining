@@ -15,7 +15,7 @@ local foundationModule = require(parent.Foundation)
 local favoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
 local x = foundationModule.Enums.IconName.X
 local t = {
-	[appChatNetworkingModule.Constants.ModalContentType.Link] = function(p0) --[[ line: 32 ]]
+	[appChatNetworkingModule.Constants.ModalContentType.Link] = function(p0)
 		-- upvalues: useStyle (ref), reactModule (ref)
 		local var11 = useStyle()
 		
@@ -35,7 +35,7 @@ local t = {
 			[reactModule.Event.Activated] = p0.content.onActivated
 		})
 	end,
-	[appChatNetworkingModule.Constants.ModalContentType.Text] = function(p1) --[[ line: 50 ]]
+	[appChatNetworkingModule.Constants.ModalContentType.Text] = function(p1)
 		-- upvalues: useStyle (ref), reactModule (ref)
 		local var12 = useStyle()
 		
@@ -62,11 +62,11 @@ local t_1 = {
 	hideActionButton = false,
 	additionalContent = {},
 	buttonType = enum.ButtonType.PrimarySystem,
-	onActivated = function() --[[ line: 99 ]] end,
-	onDismissed = function() --[[ line: 100 ]] end
+	onActivated = function() end,
+	onDismissed = function() end
 }
 
-return reactModule.forwardRef(function(p2, p3) --[[ line: 103 ]]
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), labelModule (ref), favoriteOn (ref), x (ref), buttonStack (ref)
 	local var13 = cryoModule.Dictionary.join(t_1, p2)
 	local style = var13.style or useStyle()
@@ -74,9 +74,9 @@ return reactModule.forwardRef(function(p2, p3) --[[ line: 103 ]]
 	local size200 = style.Tokens.Size.Size_200
 	local size1000 = style.Tokens.Size.Size_1000
 	local size600 = foundationModule.Hooks.useTokens().Size.Size_600
-	local var16, var17 = reactModule.useMemo(function() --[[ line: 114 ]]
+	local var16, var17 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), var13 (ref), t (copy), reactModule (copy), name (copy)
-		local var18 = cryoModule.Dictionary.map(var13.additionalContent, function(p4, p5) --[[ line: 115 ]]
+		local var18 = cryoModule.Dictionary.map(var13.additionalContent, function(p4, p5)
 			-- upvalues: t (copy), reactModule (copy), name (copy)
 			local type = t[p4.type]
 			local var19 = if type then reactModule.createElement(type, { layoutOrder = p5 + 2, content = p4 }) else nil

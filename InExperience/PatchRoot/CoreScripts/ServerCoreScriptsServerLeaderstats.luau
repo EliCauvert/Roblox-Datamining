@@ -7,14 +7,14 @@ local leaderstatsOrder = Instance.new("StringValue")
 leaderstatsOrder.Name = "LeaderstatsOrder"
 leaderstatsOrder.Parent = robloxReplicatedStorageService
 
-function updateStats() --[[ line: 20 ]]
+function updateStats()
 	-- upvalues: leaderstatsOrder (ref), httpService (ref), t (ref)
 	leaderstatsOrder.Value = httpService:JSONEncode(t)
 end
 
 updateStats()
 
-local function _(p0) --[[ line: 26 | named "addLeaderstat" ]]
+local function _(p0)
 	-- upvalues: t (ref), var4 (write)
 	if t[p0] then
 		return
@@ -24,29 +24,29 @@ local function _(p0) --[[ line: 26 | named "addLeaderstat" ]]
 	updateStats()
 end
 
-local function isValidStat(p1) --[[ line: 35 ]]
+local function isValidStat(p1)
 	return p1:IsA("StringValue") or (p1:IsA("IntValue") or (p1:IsA("BoolValue") or (p1:IsA("NumberValue") or (p1:IsA("DoubleConstrainedValue") or p1:IsA("IntConstrainedValue")))))
 end
 
-local _ = function(p2) --[[ line: 44 | named "isValidContainer" ]]
+local _ = function(p2)
 	return p2:IsA("ValueBase") or (p2:IsA("Folder") or (p2:IsA("Configuration") or p2:IsA("Model")))
 end
 
 local t_1 = {}
 
-local _ = function(p3, p4) --[[ line: 62 | named "getLeaderstatConnections" ]]
+local _ = function(p3, p4)
 	-- upvalues: t_1 (ref)
 	return if t_1[p3] then t_1[p3].leaderstats[p4] else nil
 end
 
-local function leaderstatChildAdded(p5, p6, p7) --[[ line: 70 ]]
+local function leaderstatChildAdded(p5, p6, p7)
 	-- upvalues: isValidStat (ref), t_1 (ref), t (ref), var4 (write)
 	if not isValidStat(p7) then return end
 	local var13 = if not t_1[p5] then nil else t_1[p5].leaderstats[p6]
 	
 	if not var13 then return end
 	assert(var13 ~= nil)
-	var13.leaderStatNameChanged[p7] = p7:GetPropertyChangedSignal("Name"):Connect(function() --[[ line: 80 ]]
+	var13.leaderStatNameChanged[p7] = p7:GetPropertyChangedSignal("Name"):Connect(function()
 		-- upvalues: p7 (ref), t (copy), var4 (copy)
 		local name = p7.Name
 		
@@ -67,7 +67,7 @@ local function leaderstatChildAdded(p5, p6, p7) --[[ line: 70 ]]
 	updateStats()
 end
 
-local _ = function(p8, p9, p10) --[[ line: 87 | named "leaderstatChildRemoved" ]]
+local _ = function(p8, p9, p10)
 	-- upvalues: t_1 (ref)
 	local var14 = if not t_1[p8] then nil else t_1[p8].leaderstats[p9]
 	
@@ -82,15 +82,15 @@ local _ = function(p8, p9, p10) --[[ line: 87 | named "leaderstatChildRemoved" ]
 	end
 end
 
-local function leaderstatsAdded(p11, p12) --[[ line: 102 ]]
+local function leaderstatsAdded(p11, p12)
 	-- upvalues: t_1 (ref), leaderstatChildAdded (ref)
 	if not t_1[p11] then return end
 	t_1[p11].leaderstats[p12] = {
-		childAdded = p12.ChildAdded:Connect(function(p13) --[[ line: 107 ]]
+		childAdded = p12.ChildAdded:Connect(function(p13)
 			-- upvalues: leaderstatChildAdded (copy), p11 (ref), p12 (ref)
 			leaderstatChildAdded(p11, p12, p13)
 		end),
-		childRemoved = p12.ChildRemoved:Connect(function(p14) --[[ line: 110 ]]
+		childRemoved = p12.ChildRemoved:Connect(function(p14)
 			-- upvalues: p11 (ref), p12 (ref), t_1 (copy)
 			local var15 = if not t_1[p11] then nil else t_1[p11].leaderstats[p12]
 			
@@ -112,13 +112,13 @@ local function leaderstatsAdded(p11, p12) --[[ line: 102 ]]
 	end
 end
 
-local _ = function(p15) --[[ line: 125 | named "disconnectTableOfConnections" ]]
+local _ = function(p15)
 	for i, v in p15 do
 		v:Disconnect()
 	end
 end
 
-local _ = function(p16, p17) --[[ line: 131 | named "leaderstatsRemoved" ]]
+local _ = function(p16, p17)
 	-- upvalues: t_1 (ref)
 	if not t_1[p16] then return end
 	local var16 = t_1[p16].leaderstats[p17]
@@ -133,7 +133,7 @@ local _ = function(p16, p17) --[[ line: 131 | named "leaderstatsRemoved" ]]
 	t_1[p16].leaderstats[p17] = nil
 end
 
-local _ = function(p18, p19) --[[ line: 147 | named "playerChildNameChanged" ]]
+local _ = function(p18, p19)
 	-- upvalues: leaderstatsAdded (ref), t_1 (ref)
 	if p19.Name == "leaderstats" then
 		leaderstatsAdded(p18, p19)
@@ -152,11 +152,11 @@ local _ = function(p18, p19) --[[ line: 147 | named "playerChildNameChanged" ]]
 	t_1[p18].leaderstats[p19] = nil
 end
 
-local function playerChildAdded(p20, p21) --[[ line: 155 ]]
+local function playerChildAdded(p20, p21)
 	-- upvalues: t_1 (ref), leaderstatsAdded (ref)
 	if not p21:IsA("ValueBase") and (not p21:IsA("Folder") and (not p21:IsA("Configuration") and not p21:IsA("Model"))) then return end
 	if not t_1[p20] then return end
-	t_1[p20].namedChanged[p21] = p21:GetPropertyChangedSignal("Name"):Connect(function() --[[ line: 163 ]]
+	t_1[p20].namedChanged[p21] = p21:GetPropertyChangedSignal("Name"):Connect(function()
 		-- upvalues: p20 (ref), p21 (ref), leaderstatsAdded (copy), t_1 (copy)
 		if p21.Name == "leaderstats" then
 			leaderstatsAdded(p20, p21)
@@ -192,7 +192,7 @@ local function playerChildAdded(p20, p21) --[[ line: 155 ]]
 	t_1[p20].leaderstats[p21] = nil
 end
 
-local _ = function(p22, p23) --[[ line: 171 | named "playerChildRemoved" ]]
+local _ = function(p22, p23)
 	-- upvalues: t_1 (ref)
 	if not t_1[p22] then return end
 	if t_1[p22].namedChanged[p23] then
@@ -214,14 +214,14 @@ local _ = function(p22, p23) --[[ line: 171 | named "playerChildRemoved" ]]
 	end
 end
 
-local function playerAdded(p24) --[[ line: 186 ]]
+local function playerAdded(p24)
 	-- upvalues: t_1 (ref), playerChildAdded (ref)
 	t_1[p24] = {
-		childAdded = p24.ChildAdded:Connect(function(p25) --[[ line: 190 ]]
+		childAdded = p24.ChildAdded:Connect(function(p25)
 			-- upvalues: playerChildAdded (copy), p24 (ref)
 			playerChildAdded(p24, p25)
 		end),
-		childRemoved = p24.ChildRemoved:Connect(function(p26) --[[ line: 187 ]]
+		childRemoved = p24.ChildRemoved:Connect(function(p26)
 			-- upvalues: p24 (ref), t_1 (copy)
 			if not t_1[p24] then return end
 			if t_1[p24].namedChanged[p26] then
@@ -251,7 +251,7 @@ local function playerAdded(p24) --[[ line: 186 ]]
 	end
 end
 
-local function playerRemoving(p27) --[[ line: 205 ]]
+local function playerRemoving(p27)
 	-- upvalues: t_1 (ref)
 	if not t_1[p27] then return end
 	t_1[p27].childAdded:Disconnect()

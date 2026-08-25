@@ -8,7 +8,7 @@ local t = {
 	defaultTitle = "Feature.Moments.Label.MomentsExperienceName"
 }
 
-return function(p0) --[[ line: 30 | named "TopBar" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), momentsHeaderContainerModule (ref)
 	return reactModule.createElement(momentsHeaderContainerModule, {
 		animateWithImmersiveChrome = true,

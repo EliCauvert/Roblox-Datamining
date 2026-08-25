@@ -8,13 +8,13 @@ local var1 = require(parent_1.Lumberyak).Logger.new(nil, RODUX_KEY):new(RODUX_KE
 local var2 = roduxNetworking.config({
 	keyPath = RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 14 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: var1 (ref), httpRequest (ref)
 			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
 			
 			return httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
 		end,
-		postRequestFunction = function(p3, p4) --[[ line: 18 ]]
+		postRequestFunction = function(p3, p4)
 			-- upvalues: var1 (ref)
 			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p4.requestMethod, p4.url, p3.StatusCode, p3.Body))
 		end,

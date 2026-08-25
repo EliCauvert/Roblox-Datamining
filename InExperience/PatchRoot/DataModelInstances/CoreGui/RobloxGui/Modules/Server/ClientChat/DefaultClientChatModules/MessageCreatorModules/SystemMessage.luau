@@ -3,12 +3,12 @@ local chatSettingsModule = require(parent:WaitForChild("ChatSettings"))
 local chatConstantsModule = require(parent:WaitForChild("ChatConstants"))
 local utilModule = require(script.Parent:WaitForChild("Util"))
 local var3 = nil
-pcall(function() --[[ line: 12 ]]
+pcall(function()
 	-- upvalues: var3 (write)
 	var3 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-function CreateSystemMessageLabel(p0, p1) --[[ line: 14 ]]
+function CreateSystemMessageLabel(p0, p1)
 	-- upvalues: var3 (write), chatSettingsModule (ref), utilModule (ref)
 	local message = p0.Message
 	
@@ -30,7 +30,7 @@ function CreateSystemMessageLabel(p0, p1) --[[ line: 14 ]]
 		var11 = utilModule:AddChannelButtonToBaseMessage(var10, channelColor, var12, p0.OriginalChannel)
 		var10.Text = utilModule:CreateLeadingSpaces(utilModule:GetNumberOfSpaces(var12, font, textSize) + 1) .. utilModule:SanitizeForRichText(message)
 	end
-	local function GetHeightFunction(p2) --[[ line: 45 ]]
+	local function GetHeightFunction(p2)
 		-- upvalues: utilModule (copy), var10 (ref), var9 (ref)
 		return utilModule:GetMessageHeight(var10, var9, p2)
 	end

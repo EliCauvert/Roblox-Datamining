@@ -5,10 +5,10 @@ local _ = require(types.ActionTypes)
 local _ = require(types.ReducerTypes)
 local dashModule = require(parent_1.Dash)
 
-return function(p0, p1) --[[ line: 8 ]]
+return function(p0, p1)
 	-- upvalues: dashModule (ref)
 	local t = {}
-	dashModule.forEach(p1.responseBody.userContactsEntities, function(p2) --[[ line: 12 ]]
+	dashModule.forEach(p1.responseBody.userContactsEntities, function(p2)
 		-- upvalues: t (ref)
 		t[p2.id] = {
 			contactName = p2.name,

@@ -16,7 +16,7 @@ local fFlagTopBarSignalizeHealthBar = require(corePackagesService.Workspace.Pack
 local coreGuiConnector = roactModule.PureComponent:extend("CoreGuiConnector")
 coreGuiConnector.validateProps = tModule.strictInterface({ updateCoreGuiEnabled = tModule.callback })
 
-function coreGuiConnector.didMount(p0) --[[ line: 37 ]]
+function coreGuiConnector.didMount(p0)
 	-- upvalues: fFlagMountCoreGuiBackpackModule (ref), fFlagTopBarSignalizeHealthBar (ref), starterGuiService (ref)
 	for i, v in ipairs(Enum.CoreGuiType:GetEnumItems()) do
 		if (not fFlagMountCoreGuiBackpackModule or v ~= Enum.CoreGuiType.Backpack) and (not fFlagTopBarSignalizeHealthBar or v ~= Enum.CoreGuiType.Health) and v ~= Enum.CoreGuiType.All then
@@ -25,12 +25,12 @@ function coreGuiConnector.didMount(p0) --[[ line: 37 ]]
 	end
 end
 
-function coreGuiConnector.render(p1) --[[ line: 50 ]]
+function coreGuiConnector.render(p1)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), starterGuiService (ref), fFlagMountCoreGuiBackpackModule (ref)
 	return roactModule.createFragment({
 		CoreGuiChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = starterGuiService.CoreGuiChangedSignal,
-			callback = function(p2, p3) --[[ line: 54 ]]
+			callback = function(p2, p3)
 				-- upvalues: fFlagMountCoreGuiBackpackModule (copy), p1 (ref)
 				if fFlagMountCoreGuiBackpackModule then
 					if p2 == Enum.CoreGuiType.Backpack then
@@ -48,10 +48,10 @@ function coreGuiConnector.render(p1) --[[ line: 50 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p4) --[[ line: 68 | named "mapDispatchToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(nil, function(p4)
 	-- upvalues: updateCoreGuiEnabledModule (ref)
 	return {
-		updateCoreGuiEnabled = function(p5, p6) --[[ line: 70 ]]
+		updateCoreGuiEnabled = function(p5, p6)
 			-- upvalues: p4 (ref), updateCoreGuiEnabledModule (copy)
 			return p4(updateCoreGuiEnabledModule(p5, p6))
 		end

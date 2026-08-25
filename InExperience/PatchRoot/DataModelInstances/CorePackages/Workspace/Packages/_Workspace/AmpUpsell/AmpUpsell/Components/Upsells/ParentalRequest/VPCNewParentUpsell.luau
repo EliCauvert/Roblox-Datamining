@@ -21,11 +21,11 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local text = foundationModule.Text
 local uDim2 = UDim2.new(1, 0, 0, 0)
 
-local function selectScreenSize(p0) --[[ line: 44 ]]
+local function selectScreenSize(p0)
 	return p0.ScreenSize
 end
 
-return function(p1) --[[ line: 48 | named "VPCNewParentUpsell" ]]
+return function(p1)
 	-- upvalues: useSelector (ref), selectScreenSize (ref), useOnScreenKeyboardHeightModule (ref), getShouldUseFoundationUIVPCUpsellModule (ref), useStyle (ref), useLocalization (ref), cryoModule (ref), getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), uDim2 (ref), text (ref), textField (ref), linkButton (ref), buttonVariant (ref), styledTextLabel (ref), interactiveAlert (ref), buttonType (ref)
 	local onCollectEmailAndSendRequest = p1.onCollectEmailAndSendRequest
 	local onCancel = p1.onCancel
@@ -142,7 +142,7 @@ return function(p1) --[[ line: 48 | named "VPCNewParentUpsell" ]]
 				{
 					text = buttonText,
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 187 ]]
+					onActivated = function()
 						-- upvalues: onCollectEmailAndSendRequest (ref), textInput (ref)
 						onCollectEmailAndSendRequest(textInput)
 					end,
@@ -246,7 +246,7 @@ return function(p1) --[[ line: 48 | named "VPCNewParentUpsell" ]]
 				{
 					text = buttonText,
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 301 ]]
+					onActivated = function()
 						-- upvalues: onCollectEmailAndSendRequest (ref), textInput (ref)
 						onCollectEmailAndSendRequest(textInput)
 					end,
@@ -265,7 +265,7 @@ return function(p1) --[[ line: 48 | named "VPCNewParentUpsell" ]]
 				{
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = function() --[[ line: 321 ]]
+						onActivated = function()
 							-- upvalues: onCollectEmailAndSendRequest (ref), textInput (ref)
 							onCollectEmailAndSendRequest(textInput)
 						end,
@@ -276,7 +276,7 @@ return function(p1) --[[ line: 48 | named "VPCNewParentUpsell" ]]
 			}
 		},
 		onCloseClicked = onCancel,
-		middleContent = function() --[[ line: 332 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), styledTextLabel (copy), var16 (write), var14 (ref), textFieldHeaderText (ref), textField (copy), textInput (ref), var15 (ref), errorText (ref), onTextChange (ref), linkButton (copy), openPrivacyPolicyLink (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

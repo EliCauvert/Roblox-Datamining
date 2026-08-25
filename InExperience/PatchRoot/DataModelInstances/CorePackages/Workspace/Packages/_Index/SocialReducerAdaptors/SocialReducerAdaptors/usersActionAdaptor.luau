@@ -1,8 +1,8 @@
 ﻿local llama = require(script:FindFirstAncestor("SocialReducerAdaptors").dependencies).llama
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: llama (ref)
-	local function userUpdatedFromUser(p1) --[[ line: 17 ]]
+	local function userUpdatedFromUser(p1)
 		-- upvalues: p0 (ref)
 		return p0.Actions.UserUpdated({
 			id = p1.id,
@@ -14,11 +14,11 @@ return function(p0) --[[ line: 16 ]]
 	end
 	
 	return {
-		AddUser = function(p2) --[[ line: 28 ]]
+		AddUser = function(p2)
 			-- upvalues: userUpdatedFromUser (ref)
 			return { userUpdatedFromUser(p2.user) }
 		end,
-		AddUsers = function(p3) --[[ line: 32 ]]
+		AddUsers = function(p3)
 			-- upvalues: llama (copy), userUpdatedFromUser (ref)
 			return llama.Dictionary.values(llama.Dictionary.map(p3.users, userUpdatedFromUser))
 		end

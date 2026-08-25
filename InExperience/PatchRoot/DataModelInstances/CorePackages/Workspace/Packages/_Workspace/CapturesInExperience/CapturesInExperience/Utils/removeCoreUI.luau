@@ -2,17 +2,17 @@
 local constantsModule = require(script.Parent.Parent.Constants)
 local capturesRecursiveCoreUIRemoval = game:DefineFastFlag("CapturesRecursiveCoreUIRemoval", false)
 
-return function() --[[ line: 8 ]]
+return function()
 	-- upvalues: constantsModule (ref), capturesRecursiveCoreUIRemoval (ref), coreGuiService (ref)
 	local t = {}
 	
-	local function _(p0) --[[ line: 11 | named "shouldRemoveUI" ]]
+	local function _(p0)
 		-- upvalues: constantsModule (copy)
 		return if p0:IsA("LayerCollector") then if p0:IsA("BillboardGui") then false elseif p0.Enabled then p0.Name ~= constantsModule.OverlayName else false else false
 	end
 	
 	if capturesRecursiveCoreUIRemoval then
-		local function searchInstance(p1) --[[ line: 34 ]]
+		local function searchInstance(p1)
 			-- upvalues: constantsModule (copy), t (ref), searchInstance (ref)
 			if p1:IsA("Folder") or p1:IsA("CoreGui") then
 				for i, v in p1:GetChildren() do
@@ -42,7 +42,7 @@ return function() --[[ line: 8 ]]
 			end
 		end
 	end
-	return function() --[[ line: 70 | named "restoreCoreUI" ]]
+	return function()
 		-- upvalues: t (ref)
 		for i, v in t do
 			v.Enabled = true

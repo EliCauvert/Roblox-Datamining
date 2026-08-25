@@ -1,16 +1,16 @@
 ﻿game:DefineFastFlag("LoggingRethrowUsingError", false)
 
-local function _() --[[ line: 8 | named "GetFFlagLoggingRethrowUsingError" ]]
+local function _()
 	return game:GetFastFlag("LoggingRethrowUsingError")
 end
 
 local var0 = true
 local t = {}
 
-local function createLogInfo() --[[ line: 15 ]]
+local function createLogInfo()
 	local t = { warnings = {} }
 	setmetatable(t, {
-		__tostring = function(p0) --[[ line: 21 ]]
+		__tostring = function(p0)
 			return ("LogInfo\n\tWarnings (%d):\n\t\t%s"):format(#p0.warnings, table.concat(p0.warnings, "\n\t\t"))
 		end
 	})
@@ -19,7 +19,7 @@ local function createLogInfo() --[[ line: 15 ]]
 end
 
 return {
-	capture = function(p1) --[[ line: 31 ]]
+	capture = function(p1)
 		-- upvalues: createLogInfo (ref), var0 (write), t (ref)
 		local var4 = createLogInfo()
 		var0 = false
@@ -40,7 +40,7 @@ return {
 			assert(ok, status)
 		end
 	end,
-	warn = function(p2) --[[ line: 54 ]]
+	warn = function(p2)
 		-- upvalues: t (ref), var0 (write)
 		for i in pairs(t) do
 			table.insert(i.warnings, p2)

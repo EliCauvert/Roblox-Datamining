@@ -23,11 +23,11 @@ return serviceModule:register({
 	startingWindowPosition = UDim2.new(1, -95, 0, 165),
 	windowSize = var9,
 	components = {
-		Icon = function(_) --[[ line: 35 ]]
+		Icon = function(_)
 			-- upvalues: commonIconModule (ref)
 			return commonIconModule("icons/menu/avatar_on")
 		end,
-		Window = function(_) --[[ line: 38 ]]
+		Window = function(_)
 			-- upvalues: reactModule (ref), constantsModule (ref), iconButton (ref), cycleUp (ref), var8 (write), var9 (ref)
 			return reactModule.createElement("Frame", { BackgroundTransparency = 0, Size = UDim2.new(1, 0, 1, 0) }, {
 				Corner = reactModule.createElement("UICorner", { CornerRadius = constantsModule.CORNER_RADIUS }),
@@ -37,7 +37,7 @@ return serviceModule:register({
 					iconSize = constantsModule.CLOSE_ICON_SIZE,
 					anchorPoint = Vector2.new(0.5, 1),
 					position = UDim2.new(0.5, 0, 1, 0),
-					onActivated = function() --[[ line: 52 ]]
+					onActivated = function()
 						-- upvalues: var8 (copy), var9 (copy), constantsModule (copy)
 						if var8 then
 							var9:requestSize(constantsModule.DEFAULT_WIDTH, constantsModule.DEFAULT_HEIGHT)

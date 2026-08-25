@@ -8,7 +8,7 @@ local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
 
-local function PriceIcon(p0) --[[ line: 19 ]]
+local function PriceIcon(p0)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), images (ref)
 	return reactModule.createElement(imageSetLabel, {
 		ImageTransparency = 0,
@@ -20,7 +20,7 @@ local function PriceIcon(p0) --[[ line: 19 ]]
 	})
 end
 
-return function(p1) --[[ line: 36 | named "Price_DEPRECATED" ]]
+return function(p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), PriceIcon (ref), styledTextLabel (ref), numberLocalization (ref), localizationService (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

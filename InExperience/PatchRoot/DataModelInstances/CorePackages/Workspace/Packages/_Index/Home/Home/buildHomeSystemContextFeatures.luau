@@ -14,7 +14,7 @@ local t = {
 	thermalStatus = "thermal_status"
 }
 
-return function() --[[ line: 35 | named "buildHomeSystemContextFeatures" ]]
+return function()
 	-- upvalues: addSystemInfoToArgs (ref), t (ref)
 	local t_1 = {}
 	addSystemInfoToArgs(t_1)

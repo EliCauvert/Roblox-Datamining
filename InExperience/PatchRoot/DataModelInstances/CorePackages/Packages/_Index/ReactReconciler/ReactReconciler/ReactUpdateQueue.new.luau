@@ -12,7 +12,7 @@ local isSubsetOfLanes = reactFiberLaneModule.isSubsetOfLanes
 local mergeLanes = reactFiberLaneModule.mergeLanes
 local var2 = nil
 
-local function _() --[[ line: 115 | named "enterDisallowedContextReadInDEV" ]]
+local function _()
 	-- upvalues: var2 (write)
 	if not var2 then
 		var2 = require(script.Parent["ReactFiberNewContext.new"])
@@ -20,7 +20,7 @@ local function _() --[[ line: 115 | named "enterDisallowedContextReadInDEV" ]]
 	var2.enterDisallowedContextReadInDEV()
 end
 
-local _ = function() --[[ line: 121 | named "exitDisallowedContextReadInDEV" ]]
+local _ = function()
 	-- upvalues: var2 (write)
 	if not var2 then
 		var2 = require(script.Parent["ReactFiberNewContext.new"])
@@ -53,7 +53,7 @@ if dEV then
 	var6 = false
 	var7 = nil
 	
-	function t.resetCurrentlyProcessingQueue() --[[ line: 181 ]]
+	function t.resetCurrentlyProcessingQueue()
 		-- upvalues: var7 (write)
 		var7 = nil
 	end
@@ -71,7 +71,7 @@ for i = 1, 210 do
 		next = nil
 	}
 end
-function t.initializeUpdateQueue(p0) --[[ line: 202 ]]
+function t.initializeUpdateQueue(p0)
 	p0.updateQueue = {
 		firstBaseUpdate = nil,
 		lastBaseUpdate = nil,
@@ -81,7 +81,7 @@ function t.initializeUpdateQueue(p0) --[[ line: 202 ]]
 	}
 end
 
-function t.cloneUpdateQueue(p1, p2) --[[ line: 216 ]]
+function t.cloneUpdateQueue(p1, p2)
 	local updateQueue = p1.updateQueue
 	
 	if p2.updateQueue == updateQueue then
@@ -89,7 +89,7 @@ function t.cloneUpdateQueue(p1, p2) --[[ line: 216 ]]
 	end
 end
 
-function t.createUpdate(p3, p4, p5, p6) --[[ line: 230 ]]
+function t.createUpdate(p3, p4, p5, p6)
 	-- upvalues: var9 (write), list (ref)
 	if var9 > 0 then
 		local var11 = list[var9]
@@ -113,7 +113,7 @@ function t.createUpdate(p3, p4, p5, p6) --[[ line: 230 ]]
 	}
 end
 
-function t.enqueueUpdate(p7, p8) --[[ line: 280 ]]
+function t.enqueueUpdate(p7, p8)
 	-- upvalues: dEV (ref), var7 (write), var6 (write), console (ref)
 	local updateQueue = p7.updateQueue
 	
@@ -135,7 +135,7 @@ function t.enqueueUpdate(p7, p8) --[[ line: 280 ]]
 	end
 end
 
-function t.enqueueCapturedUpdate(p9, p10) --[[ line: 312 ]]
+function t.enqueueCapturedUpdate(p9, p10)
 	local updateQueue = p9.updateQueue
 	local alternate = p9.alternate
 	
@@ -201,7 +201,7 @@ function t.enqueueCapturedUpdate(p9, p10) --[[ line: 312 ]]
 	end
 end
 
-local function getStateFromUpdate(p11, _, p12, p13, p14, _) --[[ line: 393 ]]
+local function getStateFromUpdate(p11, _, p12, p13, p14, _)
 	-- upvalues: dEV (ref), var2 (write), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), yOLO (ref), describeError (ref), reenableLogs (ref), shouldCapture (ref), didCapture (ref), object (ref), var5 (write)
 	local tag = p12.tag
 	
@@ -302,7 +302,7 @@ end
 
 t.getStateFromUpdate = getStateFromUpdate
 
-function t.processUpdateQueue(p15, p16, p17, p18) --[[ line: 502 ]]
+function t.processUpdateQueue(p15, p16, p17, p18)
 	-- upvalues: var5 (write), dEV (ref), var7 (write), noLanes (ref), isSubsetOfLanes (ref), mergeLanes (ref), noLane (ref), getStateFromUpdate (ref), callback (ref), markSkippedUpdateLanes (ref)
 	local updateQueue = p15.updateQueue
 	var5 = false
@@ -424,24 +424,24 @@ function t.processUpdateQueue(p15, p16, p17, p18) --[[ line: 502 ]]
 	end
 end
 
-local _ = function(p19, p20) --[[ line: 694 | named "callCallback" ]]
+local _ = function(p19, p20)
 	if type(p19) ~= "function" then
 		error(string.format("Invalid argument passed as callback. Expected a function. Instead received: %s", tostring(p19)))
 	end
 	p19(p20)
 end
 
-function t.resetHasForceUpdateBeforeProcessing() --[[ line: 709 ]]
+function t.resetHasForceUpdateBeforeProcessing()
 	-- upvalues: var5 (write)
 	var5 = false
 end
 
-function t.checkHasForceUpdateAfterProcessing() --[[ line: 713 ]]
+function t.checkHasForceUpdateAfterProcessing()
 	-- upvalues: var5 (write)
 	return var5
 end
 
-function t.commitUpdateQueue(_, p21, p22) --[[ line: 717 ]]
+function t.commitUpdateQueue(_, p21, p22)
 	-- upvalues: list (ref), var9 (write)
 	local effects = p21.effects
 	p21.effects = nil

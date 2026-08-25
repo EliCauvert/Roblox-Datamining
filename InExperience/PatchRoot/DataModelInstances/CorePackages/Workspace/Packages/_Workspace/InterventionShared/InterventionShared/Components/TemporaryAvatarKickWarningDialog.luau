@@ -28,7 +28,7 @@ local t = {
 	lastUpdated = { 2026, 6, 8 }
 }
 
-local function sendReportMistakeAnalytics(p0) --[[ line: 48 ]]
+local function sendReportMistakeAnalytics(p0)
 	-- upvalues: playersService (ref), telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		customFields = {
@@ -41,7 +41,7 @@ local function sendReportMistakeAnalytics(p0) --[[ line: 48 ]]
 	})
 end
 
-return reactModule.memo(function(p1) --[[ line: 72 | named "TemporaryAvatarKickWarningDialog" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalization (ref), constantsModule (ref), useTokens (ref), useInterventionPlacementModule (ref), useInterventionFocusRootModule (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), sendReportMistakeAnalytics (ref), notificationModalsManagerModule (ref), accept (ref), dialog (ref), dialogSize (ref), VRService (ref), view (ref), text (ref), buttonVariant (ref), buttonSize (ref)
 	local var12 = useLocalization(constantsModule.localizationKeys)
 	local var13 = useTokens()
@@ -79,7 +79,7 @@ return reactModule.memo(function(p1) --[[ line: 72 | named "TemporaryAvatarKickW
 					variant = buttonVariant.Utility,
 					size = buttonSize.Medium,
 					text = var12.ReportMistakeText,
-					onActivated = reactModule.useCallback(function() --[[ line: 82 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: sendReportMistakeAnalytics (copy), p1 (ref), notificationModalsManagerModule (copy), accept (copy), var12 (ref), var13 (ref)
 						sendReportMistakeAnalytics(p1)
 						p1.onDismiss()

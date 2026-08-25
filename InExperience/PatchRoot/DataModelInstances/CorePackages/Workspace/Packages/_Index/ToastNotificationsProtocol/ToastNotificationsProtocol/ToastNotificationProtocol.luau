@@ -9,12 +9,12 @@ local t = {}
 t.__index = t
 game:DefineFastFlag("LuaAppInitializeToastNotificationEventParams2", false)
 
-function t.new() --[[ line: 18 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({}, t)
 end
 
-function t.setupNotifications(_, p0) --[[ line: 23 ]]
+function t.setupNotifications(_, p0)
 	-- upvalues: getPlatformTarget (ref), playersService (ref), messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
 	if #p0 > 0 then
 		local var4 = nil
@@ -28,33 +28,33 @@ function t.setupNotifications(_, p0) --[[ line: 23 ]]
 	end
 end
 
-function t.updateNotification(_, p1, p2) --[[ line: 39 ]]
+function t.updateNotification(_, p1, p2)
 	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
 	if p1 and p2 then
 		messageBusService:Publish(toastNotificationProtocolConstantsModule.MESSAGE_UPDATE_TOAST_NOTIF, { notificationId = p1, stateName = p2 })
 	end
 end
 
-function t.voltronBroadcast(_, p3, p4) --[[ line: 48 ]]
+function t.voltronBroadcast(_, p3, p4)
 	-- upvalues: messageBusService (ref)
 	if p3 then
 		messageBusService:Publish(p3, p4)
 	end
 end
 
-function t.dismissNotification(_, p5) --[[ line: 54 ]]
+function t.dismissNotification(_, p5)
 	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
 	if p5 then
 		messageBusService:Publish(toastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, { notificationId = p5 })
 	end
 end
 
-function t.listenToDisplayNotification(_, p6) --[[ line: 62 ]]
+function t.listenToDisplayNotification(_, p6)
 	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
 	return messageBusService:Subscribe(toastNotificationProtocolConstantsModule.MESSAGE_DISPLAY_TOAST_NOTIF, p6, false, true)
 end
 
-function t.listenToDismissNotification(_, p7) --[[ line: 66 ]]
+function t.listenToDismissNotification(_, p7)
 	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
 	return messageBusService:Subscribe(toastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, p7, false, true)
 end

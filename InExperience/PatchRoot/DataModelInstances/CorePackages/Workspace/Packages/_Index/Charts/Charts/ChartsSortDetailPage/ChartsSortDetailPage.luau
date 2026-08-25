@@ -18,14 +18,14 @@ local fetchChartsSortDetailModule = require(charts.ChartsSortDetailPage.fetchCha
 local getChartsSortDetailPageKeyModule = require(charts.ChartsSortDetailPage.getChartsSortDetailPageKey)
 local fFlagLuaAppSduiGameSortDropDown = require(parent.SharedFlags).FFlagLuaAppSduiGameSortDropDown
 
-local function _(p0, p1) --[[ line: 36 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1)
 	return p0[p1] or p0.navigation and p0.navigation.getParam(p1)
 end
 
-return reactModule.memo(function(p2) --[[ line: 40 | named "ChartsSortDetailPage" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: reactModule (ref), getSduiClientPageScope (ref), chartsConstantsModule (ref), chartsPageScopeFieldsModule (ref), getChartsSortDetailPageKeyModule (ref), usePageScopeRef (ref), fFlagLuaAppSduiGameSortDropDown (ref), chartsSortDetailScopeFieldsModule (ref), sduiSurfaceLoadTimeTracker (ref), chartsSortDetailConstantsModule (ref), fetchChartsSortDetailModule (ref), sduiPageEntryPoint (ref), appPage (ref), compositionTags (ref)
 	local sortId = p2.sortId or p2.navigation and p2.navigation.getParam("sortId")
-	local var11 = getChartsSortDetailPageKeyModule(sortId, nil, reactModule.useMemo(function() --[[ line: 45 ]]
+	local var11 = getChartsSortDetailPageKeyModule(sortId, nil, reactModule.useMemo(function()
 		-- upvalues: getSduiClientPageScope (copy), chartsConstantsModule (copy), chartsPageScopeFieldsModule (copy)
 		return getSduiClientPageScope(chartsConstantsModule.ConfigKey).get(chartsPageScopeFieldsModule.FilterSelections)
 	end, {}))
@@ -33,12 +33,12 @@ return reactModule.memo(function(p2) --[[ line: 40 | named "ChartsSortDetailPage
 	usePageScopeRef(var11)
 	
 	if fFlagLuaAppSduiGameSortDropDown then
-		reactModule.useMemo(function() --[[ line: 56 ]]
+		reactModule.useMemo(function()
 			-- upvalues: getSduiClientPageScope (copy), var11 (ref), chartsSortDetailScopeFieldsModule (copy), sortId (ref)
 			getSduiClientPageScope(var11).set(chartsSortDetailScopeFieldsModule.SelectedSortId, sortId)
 		end, { var11, sortId })
 	end
-	local var13 = reactModule.useMemo(function() --[[ line: 61 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: pageTimer (ref), sduiSurfaceLoadTimeTracker (copy), var11 (ref), chartsSortDetailConstantsModule (copy), getSduiClientPageScope (copy)
 		local pageTimer_1 = pageTimer or sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(var11, {
 			eventName = chartsSortDetailConstantsModule.SurfaceLoadTimeEventName,
@@ -48,7 +48,7 @@ return reactModule.memo(function(p2) --[[ line: 40 | named "ChartsSortDetailPage
 		
 		return pageTimer_1
 	end, { var11, pageTimer })
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: sortId (ref), fetchChartsSortDetailModule (copy), var13 (ref)
 		if sortId then
 			fetchChartsSortDetailModule(sortId, var13)
@@ -61,7 +61,7 @@ return reactModule.memo(function(p2) --[[ line: 40 | named "ChartsSortDetailPage
 		routeName = appPage.GamesList,
 		configKey = var11,
 		pageTimer = var13,
-		refresh = reactModule.useCallback(function() --[[ line: 79 ]]
+		refresh = reactModule.useCallback(function()
 			-- upvalues: sortId (ref), sduiSurfaceLoadTimeTracker (copy), var11 (ref), chartsSortDetailConstantsModule (copy), fetchChartsSortDetailModule (copy)
 			if sortId then
 				local var15 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(var11, {
@@ -74,7 +74,7 @@ return reactModule.memo(function(p2) --[[ line: 40 | named "ChartsSortDetailPage
 		end, { sortId, var11 }),
 		contentTag = compositionTags.ContentRegion.Body,
 		stickyContentTag = compositionTags.ContentRegion.Header,
-		additionalAnalyticsData = reactModule.useMemo(function() --[[ line: 92 ]]
+		additionalAnalyticsData = reactModule.useMemo(function()
 			-- upvalues: p2 (ref)
 			return if p2.pageContext then { pageContext = p2.pageContext } else nil
 		end, { p2.pageContext }),

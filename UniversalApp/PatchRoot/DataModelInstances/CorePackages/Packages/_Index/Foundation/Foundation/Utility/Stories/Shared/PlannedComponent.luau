@@ -3,7 +3,7 @@ local reactModule = require(foundation.Parent.React)
 local textModule = require(foundation.Components.Text)
 local viewModule = require(foundation.Components.View)
 
-return function(p0) --[[ line: 18 | named "PlannedComponent" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
 	return reactModule.createElement(viewModule, {
 		tag = "col align-x-center align-y-center gap-small size-full auto-xy padding-large"

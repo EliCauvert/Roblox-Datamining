@@ -17,7 +17,7 @@ local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local appPage = require(parent.RobloxAppEnums).AppPage
 local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
 
-local var7 = function(p0) --[[ line: 27 ]]
+local var7 = function(p0)
 	-- upvalues: roact (ref), iconButton (ref), images (ref)
 	return roact.createElement(iconButton, {
 		size = UDim2.fromOffset(0, 0),
@@ -41,11 +41,11 @@ local t = {
 local headerBarRightView = roact.PureComponent:extend("HeaderBarRightView")
 headerBarRightView.defaultProps = { layoutOrder = 1, onActivated = nil }
 
-function headerBarRightView.init(p1) --[[ line: 55 ]]
+function headerBarRightView.init(p1)
 	-- upvalues: memoize (ref), buttonClickEventsModule (ref), enumScreensModule (ref), appPage (ref), sources (ref)
-	p1.goToFriendRequestsPage = memoize(function(_, p2) --[[ line: 57 ]]
+	p1.goToFriendRequestsPage = memoize(function(_, p2)
 		-- upvalues: buttonClickEventsModule (copy), p1 (ref), enumScreensModule (copy), appPage (copy)
-		return function() --[[ line: 58 ]]
+		return function()
 			-- upvalues: p2 (ref), buttonClickEventsModule (copy), p1 (copy), enumScreensModule (copy), appPage (copy)
 			p1.props.analytics:buttonClick(if p2 == 0 then buttonClickEventsModule.AddFriendsNoFriends else buttonClickEventsModule.AddFriends)
 			p1.props.analytics:navigate(enumScreensModule.AddFriends)
@@ -53,9 +53,9 @@ function headerBarRightView.init(p1) --[[ line: 55 ]]
 			return p1.props.navigation.navigate(appPage.AddFriendsPage)
 		end
 	end)
-	p1.goToSearchFriendsPage = memoize(function() --[[ line: 68 ]]
+	p1.goToSearchFriendsPage = memoize(function()
 		-- upvalues: p1 (ref), appPage (copy), sources (copy)
-		return function() --[[ line: 69 ]]
+		return function()
 			-- upvalues: p1 (copy), appPage (copy), sources (copy)
 			p1.props.navigation.navigate(appPage.UserSearch, {
 				shouldShowUserSearchLandingPage = true,
@@ -65,7 +65,7 @@ function headerBarRightView.init(p1) --[[ line: 55 ]]
 	end)
 end
 
-function headerBarRightView.render(p3) --[[ line: 78 ]]
+function headerBarRightView.render(p3)
 	-- upvalues: t (ref), enumScreensModule (ref), roact (ref), var7 (ref), addFriendsIconModule (ref), fFlagConnectionManagementChips (ref)
 	local navigation = p3.props.navigation
 	local var10 = nil
@@ -107,9 +107,9 @@ function headerBarRightView.render(p3) --[[ line: 78 ]]
 	})
 end
 
-return compose(friendsLandingAnalyticsModule.connect(function(p4) --[[ line: 121 ]]
+return compose(friendsLandingAnalyticsModule.connect(function(p4)
 	return { analytics = p4 }
-end), friendsLandingContextModule.connect(function(p5, _) --[[ line: 126 ]]
+end), friendsLandingContextModule.connect(function(p5, _)
 	return {
 		navigateToLuaAppPages = p5.navigateToLuaAppPages,
 		friendRequestCount = p5.friendRequestCount,

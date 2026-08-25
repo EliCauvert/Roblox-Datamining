@@ -3,12 +3,12 @@ local dateTime = require(parent.Time).DateTime
 local getZendeskUrl = require(parent.DiscoveryUtils).getZendeskUrl
 local fFlagLuaAppEdpNonSduiBuildAttribution = require(parent.SharedFlags).FFlagLuaAppEdpNonSduiBuildAttribution
 local t = {
-	new = function() --[[ line: 53 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.mock(p0, p1, p2) --[[ line: 59 ]]
+function t.mock(p0, p1, p2)
 	-- upvalues: t (ref), dateTime (ref)
 	local var1 = t.new()
 	local var2 = dateTime.new()
@@ -42,7 +42,7 @@ function t.mock(p0, p1, p2) --[[ line: 59 ]]
 	return var1
 end
 
-function t.fromJsonData(p3) --[[ line: 93 ]]
+function t.fromJsonData(p3)
 	-- upvalues: t (ref), getZendeskUrl (ref), fFlagLuaAppEdpNonSduiBuildAttribution (ref)
 	local var4 = t.new()
 	var4.id = tostring(p3.id)

@@ -1,4 +1,4 @@
-﻿return function(value, p0) --[[ line: 1 | named "getInvalidAssetIdsToAssetTypeIdMap" ]]
+﻿return function(value, p0)
 	local t = {}
 	
 	for i, v in value do

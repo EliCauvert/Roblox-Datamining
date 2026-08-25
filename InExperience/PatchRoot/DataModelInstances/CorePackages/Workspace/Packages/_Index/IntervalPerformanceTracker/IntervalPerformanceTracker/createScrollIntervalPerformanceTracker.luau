@@ -6,7 +6,7 @@ local list = {
 	"rawFrameTimesMs"
 }
 
-return function(p0, p1, p2, p3) --[[ line: 69 | named "createScrollIntervalPerformanceTracker" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: list (ref), intervalPerformanceTrackerModule (ref), scrollIntervalTrackerModule (ref)
 	local var3 = if p3 and p3.metricsToTrack then p3.metricsToTrack else list
 	local var4 = if p3 and p3.countersEnabled ~= nil then p3.countersEnabled else true
@@ -16,7 +16,7 @@ return function(p0, p1, p2, p3) --[[ line: 69 | named "createScrollIntervalPerfo
 	local var8 = if p3 then p3.extraFields else nil
 	local var9 = false
 	
-	local function _() --[[ line: 88 | named "buildExtraFields" ]]
+	local function _()
 		-- upvalues: var9 (write), var7 (ref), var8 (ref)
 		local var10 = if var9 then "warm" else "cold"
 		
@@ -35,7 +35,7 @@ return function(p0, p1, p2, p3) --[[ line: 69 | named "createScrollIntervalPerfo
 		return t
 	end
 	
-	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(_) --[[ line: 105 | named "tryStart" ]]
+	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(_)
 		-- upvalues: intervalPerformanceTrackerModule (copy), p0 (ref), var3 (ref), var4 (ref), var5 (ref), var9 (write), var7 (ref), var8 (ref)
 		local var14
 		local var12 = nil
@@ -58,7 +58,7 @@ return function(p0, p1, p2, p3) --[[ line: 69 | named "createScrollIntervalPerfo
 		var9 = true
 		
 		return true
-	end, function(_) --[[ line: 118 | named "finish" ]]
+	end, function(_)
 		-- upvalues: intervalPerformanceTrackerModule (copy), p0 (ref)
 		intervalPerformanceTrackerModule:stopAndLogTracking(p0)
 	end, p1, p2, var6)

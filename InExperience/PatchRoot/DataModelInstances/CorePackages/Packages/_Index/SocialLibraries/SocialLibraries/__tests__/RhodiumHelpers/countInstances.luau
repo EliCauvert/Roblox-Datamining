@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 7 ]]
+﻿return function(p0, p1)
 	local var0 = 0
 	
 	for i, v in pairs(p0:GetChildren()) do

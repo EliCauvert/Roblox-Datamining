@@ -2,7 +2,7 @@
 local reactModule = require(corePackagesService.Packages.React)
 local luauPolyfillModule = require(corePackagesService.Packages.LuauPolyfill)
 
-return function(p0) --[[ line: 11 | named "Stepper" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), luauPolyfillModule (ref)
 	local numberOfSteps = p0.numberOfSteps
 	local layoutOrder = p0.layoutOrder
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 11 | named "Stepper" ]]
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Center,
 		SortOrder = Enum.SortOrder.LayoutOrder
-	}), luauPolyfillModule.Array.map(t, function(_, p1) --[[ line: 37 ]]
+	}), luauPolyfillModule.Array.map(t, function(_, p1)
 		-- upvalues: reactModule (copy), numberActivated (ref), numberOfSteps (ref)
 		return reactModule.createElement("Frame", {
 			LayoutOrder = p1,

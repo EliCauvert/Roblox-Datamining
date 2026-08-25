@@ -13,8 +13,8 @@ local uDim2 = UDim2.new(0, clientServerButtonWidth, 0, frameHeight)
 local list = { "Client", "Server" }
 local clientServerButton = roactModule.Component:extend("ClientServerButton")
 
-function clientServerButton.init(p0) --[[ line: 21 ]]
-	function p0.dropDownCallback(p1) --[[ line: 22 ]]
+function clientServerButton.init(p0)
+	function p0.dropDownCallback(p1)
 		-- upvalues: p0 (ref)
 		if p1 == 1 then
 			p0.props.onClientButton()
@@ -26,7 +26,7 @@ function clientServerButton.init(p0) --[[ line: 21 ]]
 	end
 end
 
-function clientServerButton.render(p2) --[[ line: 31 ]]
+function clientServerButton.render(p2)
 	-- upvalues: constantsModule (ref), roactModule (ref), fullScreenDropDownButtonModule (ref), clientServerDropDownWidth (ref), smallFrameHeight (ref), list (ref), dropDownModule (ref), clientServerButtonWidth (ref), frameHeight (ref), utilBar_1 (ref), text (ref), utilBar (ref), uDim2 (ref)
 	local formFactor = p2.props.formFactor
 	local useDropDown = p2.props.useDropDown

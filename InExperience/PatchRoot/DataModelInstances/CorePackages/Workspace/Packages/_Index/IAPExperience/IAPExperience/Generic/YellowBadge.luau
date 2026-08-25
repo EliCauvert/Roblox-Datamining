@@ -6,7 +6,7 @@ local view = foundationModule.View
 local image = foundationModule.Image
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref), text (ref)
 	local emphasis = useTokens().LightMode.Content.Emphasis
 	

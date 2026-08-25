@@ -8,17 +8,17 @@ local useDispatch = momentsCommonModule.Hooks.useDispatch
 local useSelector = momentsCommonModule.Hooks.useSelector
 local constantsModule = require(momentsCreationFlow.Constants)
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useSelector (ref), constantsModule (ref), reactModule (ref), assetService (ref), creationFlowMusicInfoRetrievedModule (ref)
 	local var6 = useDispatch()
-	local var7 = useSelector(function(p1) --[[ line: 21 ]]
+	local var7 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy), p0 (ref)
 		return p1[constantsModule.RoduxKey].Music[p0]
 	end)
-	reactModule.useEffect(function() --[[ line: 25 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), p0 (ref), assetService (copy), var6 (ref), creationFlowMusicInfoRetrievedModule (copy)
 		if not var7 and p0 then
-			task.spawn(function() --[[ line: 27 ]]
+			task.spawn(function()
 				-- upvalues: assetService (copy), p0 (copy), var6 (copy), creationFlowMusicInfoRetrievedModule (copy)
 				var6(creationFlowMusicInfoRetrievedModule({ [p0] = assetService:GetAudioMetadataAsync({ p0 })[1] }))
 			end)

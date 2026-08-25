@@ -6,7 +6,7 @@ local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 local backgroundLayersModule = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 
-return function(value) --[[ line: 17 | named "ItemCardBackgroundsWrapper" ]]
+return function(value)
 	-- upvalues: useTokens (ref), reactModule (ref), backgroundLayersModule (ref), view (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		ItemCardBackgrounds = reactModule.createElement(backgroundLayersModule, {

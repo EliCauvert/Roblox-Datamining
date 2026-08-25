@@ -1,12 +1,12 @@
 ﻿local map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 local t = {}
 
-local function defaultDispose() --[[ line: 21 ]] end
+local function defaultDispose() end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1) --[[ line: 51 ]]
+function t_1.new(p0, p1)
 	-- upvalues: defaultDispose (ref), t_1 (ref), map (ref)
 	local var3 = p0
 	local var4 = p1
@@ -27,17 +27,17 @@ function t_1.new(p0, p1) --[[ line: 51 ]]
 	return tbl
 end
 
-function t_1:has(p2) --[[ line: 73 ]]
+function t_1:has(p2)
 	return self.map:has(p2)
 end
 
-function t_1:get(p3) --[[ line: 77 ]]
+function t_1:get(p3)
 	local var6 = self:getNode(p3)
 	
 	return var6 and var6.value
 end
 
-function t_1:getNode(p4) --[[ line: 87 ]]
+function t_1:getNode(p4)
 	local var7 = self.map:get(p4)
 	
 	if var7 and var7 ~= self.newest then
@@ -62,7 +62,7 @@ function t_1:getNode(p4) --[[ line: 87 ]]
 	return var7
 end
 
-function t_1:set(p5, p6) --[[ line: 121 ]]
+function t_1:set(p5, p6)
 	local var8 = self:getNode(p5)
 	
 	if var8 then
@@ -82,13 +82,13 @@ function t_1:set(p5, p6) --[[ line: 121 ]]
 	return t.value
 end
 
-function t_1:clean() --[[ line: 152 ]]
+function t_1:clean()
 	while self.oldest and self.max < self.map.size do
 		self:delete(self.oldest.key)
 	end
 end
 
-function t_1:delete(p7) --[[ line: 160 ]]
+function t_1:delete(p7)
 	local var10 = self.map:get(p7)
 	
 	if not var10 then

@@ -12,7 +12,7 @@ local buildSduiFeedChildrenModule = require(sduiSharedContent.Components.buildSd
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local sduiStickyHeaderDividerLayoutOrderConstant = game:DefineFastFlag("SduiStickyHeaderDividerLayoutOrderConstant", false)
 
-local function buildWrappedItems(p0) --[[ line: 44 ]]
+local function buildWrappedItems(p0)
 	-- upvalues: buildSduiFeedChildrenModule (ref)
 	return buildSduiFeedChildrenModule({
 		componentType = "StickyHeader",
@@ -27,7 +27,7 @@ local function buildWrappedItems(p0) --[[ line: 44 ]]
 	})
 end
 
-return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p2) --[[ line: 58 | named "SduiStickyHeader" ]]
+return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p2)
 	-- upvalues: buildWrappedItems (ref), reactModule (ref), useScrollAwayHeaderPosition (ref), view (ref), divider (ref), orientation (ref)
 	local var7 = buildWrappedItems(p2)
 	local var8, var9 = reactModule.useBinding(UDim2.new(1, 0, 0, 0))
@@ -38,14 +38,14 @@ return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p
 		scrollAwayHeight = var10,
 		headerHeightBinding = if scrollAway then scrollAway.headerHeightBinding else nil
 	})
-	local var12 = reactModule.useCallback(function(p3) --[[ line: 69 ]]
+	local var12 = reactModule.useCallback(function(p3)
 		-- upvalues: var9 (ref)
 		var9(UDim2.new(1, 0, 0, p3.AbsoluteSize.Y))
 	end, {})
 	local var13 = if var10 then math.max(0, var10) else 0
-	local var14 = reactModule.useMemo(function() --[[ line: 75 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), var13 (ref)
-		return var8:map(function(p4) --[[ line: 76 ]]
+		return var8:map(function(p4)
 			-- upvalues: var13 (copy)
 			return UDim2.new(1, 0, 0, p4.Y.Offset + var13)
 		end)
@@ -113,7 +113,7 @@ return reactModule.memo(if fFlagLuaAppSduiStickyHeaderScrollAway then function(p
 			})
 		})
 	})
-end else function(p1) --[[ line: 158 | named "SduiStickyHeaderLegacy" ]]
+end else function(p1)
 	-- upvalues: buildWrappedItems (ref), reactModule (ref), divider (ref), orientation (ref), sduiStickyHeaderDividerLayoutOrderConstant (ref), view (ref)
 	local var6 = buildWrappedItems(p1)
 	var6.StickyDivider = reactModule.createElement(divider, {

@@ -3,7 +3,7 @@
 return {
 	getBodyContentHeight = var0,
 	setBodyContentHeight = var1,
-	reset = function() --[[ line: 21 ]]
+	reset = function()
 		-- upvalues: var1 (ref)
 		var1(0)
 	end

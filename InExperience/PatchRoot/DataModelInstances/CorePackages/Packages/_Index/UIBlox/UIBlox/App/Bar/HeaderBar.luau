@@ -19,14 +19,14 @@ local t = {
 	hasDivider = false
 }
 
-local function useHeaderBarStyle(p0, p1) --[[ line: 93 ]]
+local function useHeaderBarStyle(p0, p1)
 	-- upvalues: reactModule (ref), UIBloxConfigModule (ref)
 	local tokens = p1.Tokens
 	local theme = p1.Theme
 	local backgroundStyle = p0.backgroundStyle
 	local backgroundTransparency = p0.backgroundTransparency
 	local isOnMedia = p0.isOnMedia
-	local var10 = reactModule.useMemo(function() --[[ line: 100 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: isOnMedia (ref), backgroundStyle (ref), theme (ref), backgroundTransparency (ref)
 		if isOnMedia then
 			return {}
@@ -54,7 +54,7 @@ local function useHeaderBarStyle(p0, p1) --[[ line: 93 ]]
 	
 	return {
 		BackgroundStyle = var10,
-		Padding = reactModule.useMemo(function() --[[ line: 124 ]]
+		Padding = reactModule.useMemo(function()
 			-- upvalues: paddingTop (ref), UIBloxConfigModule (copy), tokens (ref), paddingRight (ref), paddingBottom (ref), paddingLeft (ref), margin (ref)
 			local t = {
 				Top = paddingTop or UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Space_100),
@@ -74,9 +74,9 @@ local function useHeaderBarStyle(p0, p1) --[[ line: 93 ]]
 	}
 end
 
-local function useRenderLeft(p2, p3) --[[ line: 165 ]]
+local function useRenderLeft(p2, p3)
 	-- upvalues: reactModule (ref), cryoModule (ref), UIBloxConfigModule (ref), genericTextLabelModule (ref)
-	return reactModule.useMemo(function() --[[ line: 166 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p2 (ref), reactModule (copy), p3 (ref), cryoModule (copy), UIBloxConfigModule (copy), genericTextLabelModule (copy)
 		local title = p2.title
 		local renderLeft = p2.renderLeft
@@ -88,7 +88,7 @@ local function useRenderLeft(p2, p3) --[[ line: 165 ]]
 		local renderLeft_1 = p2.renderLeft
 		
 		if var13 and string.len(title) > 0 then
-			renderLeft_1 = function(p4) --[[ line: 177 ]]
+			renderLeft_1 = function(p4)
 				-- upvalues: cryoModule (copy), reactModule (copy), UIBloxConfigModule (copy), tokens (ref), genericTextLabelModule (copy), title (ref)
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					Text = reactModule.createElement(genericTextLabelModule, {
@@ -113,7 +113,7 @@ local function useRenderLeft(p2, p3) --[[ line: 165 ]]
 			local header2 = font.Header2
 			local var14 = header2.RelativeSize * font.BaseSize
 			
-			renderLeft_1 = function() --[[ line: 216 ]]
+			renderLeft_1 = function()
 				-- upvalues: reactModule (copy), var14 (ref), renderLeft (ref), theme (ref), genericTextLabelModule (copy), title (ref), header2 (ref)
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					Text = reactModule.createElement("Frame", {
@@ -163,7 +163,7 @@ local function useRenderLeft(p2, p3) --[[ line: 165 ]]
 			local var15 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.HeadingSmall else tokens.Semantic.Typography.Header
 			local fontSize = var15.FontSize
 			
-			renderLeft_1 = function() --[[ line: 267 ]]
+			renderLeft_1 = function()
 				-- upvalues: reactModule (copy), fontSize (ref), UIBloxConfigModule (copy), tokens (ref), renderLeft (ref), genericTextLabelModule (copy), title (ref), var15 (ref)
 				return reactModule.createElement(reactModule.Fragment, nil, {
 					LeftFrame = reactModule.createElement("Frame", {
@@ -213,7 +213,7 @@ local function useRenderLeft(p2, p3) --[[ line: 165 ]]
 	})
 end
 
-return function(p5) --[[ line: 340 | named "HeaderBar" ]]
+return function(p5)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), useRenderLeft (ref), UIBloxConfigModule (ref), genericTextLabelModule (ref), getTextSizeModule (ref), useHeaderBarStyle (ref), threeSectionBarModule (ref)
 	local var16 = cryoModule.Dictionary.join(t, p5)
 	local var17 = useStyleModule()
@@ -231,7 +231,7 @@ return function(p5) --[[ line: 340 | named "HeaderBar" ]]
 	local hasDivider = var16.hasDivider
 	local var18 = if var16.renderLeft ~= nil then var16.renderLeft == reactModule.None else true
 	local var19 = useRenderLeft(var16, var17)
-	local var20 = reactModule.useMemo(function() --[[ line: 360 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: renderCenter (ref), var18 (ref), isSecondary (ref), isTitleCentered (ref), UIBloxConfigModule (copy), tokens (ref), reactModule (copy), genericTextLabelModule (copy), title (ref)
 		local var24 = renderCenter
 		
@@ -239,7 +239,7 @@ return function(p5) --[[ line: 340 | named "HeaderBar" ]]
 			local var25 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Typography.HeadingSmall else tokens.Semantic.Typography.Header
 			local fontSize = var25.FontSize
 			
-			var24 = function() --[[ line: 369 ]]
+			var24 = function()
 				-- upvalues: reactModule (copy), genericTextLabelModule (copy), fontSize (ref), title (copy), var25 (ref), UIBloxConfigModule (copy), tokens (copy)
 				return reactModule.createElement(genericTextLabelModule, {
 					Selectable = false,
@@ -262,7 +262,7 @@ return function(p5) --[[ line: 340 | named "HeaderBar" ]]
 	end, {
 		renderCenter, var18, isSecondary, isTitleCentered, tokens, title
 	})
-	local var21 = reactModule.useMemo(function() --[[ line: 402 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var19 (ref), renderCenter (ref), renderRight (ref), var18 (ref), isSecondary (ref), isTitleCentered (ref), UIBloxConfigModule (copy), tokens (ref), getTextSizeModule (copy), title (ref)
 		if var19 and renderCenter and renderRight then
 			return 0
@@ -276,7 +276,7 @@ return function(p5) --[[ line: 340 | named "HeaderBar" ]]
 		title, isTitleCentered, var18, var19, renderCenter, renderRight, isSecondary,
 		tokens
 	})
-	local var22 = reactModule.useMemo(function() --[[ line: 421 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: contentPaddingRight (ref), var18 (ref), UIBloxConfigModule (copy), tokens (ref)
 		return contentPaddingRight or (if var18 then UDim.new(0, 0) else UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_600 else tokens.Global.Space_300))
 	end, { contentPaddingRight, var18, tokens })

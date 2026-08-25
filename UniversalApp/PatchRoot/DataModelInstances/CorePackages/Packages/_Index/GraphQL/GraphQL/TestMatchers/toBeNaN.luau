@@ -1,6 +1,6 @@
 ﻿local number = require(script.Parent.Parent.Parent.LuauPolyfill).Number
 
-return function(p0) --[[ line: 17 | named "toBeNaN" ]]
+return function(p0)
 	-- upvalues: number (ref)
 	local var0 = number.isNaN(p0)
 	

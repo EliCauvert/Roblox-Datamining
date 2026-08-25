@@ -4,7 +4,7 @@ local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local refreshOmniRecommendationFeedItemModule = require(serverDrivenUi.Actions.refreshOmniRecommendationFeedItem)
 
-local function _(p0, p1, p2) --[[ line: 14 | named "reportInvalidActionParams" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
 	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.RefreshOmniRecommendationFeedItem,
@@ -13,7 +13,7 @@ local function _(p0, p1, p2) --[[ line: 14 | named "reportInvalidActionParams" ]
 	}, p0.appPage)
 end
 
-return function(p3, _, p4) --[[ line: 24 ]]
+return function(p3, _, p4)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), refreshOmniRecommendationFeedItemModule (ref)
 	local var3 = if p3 then p3.actionParams else nil
 	
@@ -72,7 +72,7 @@ return function(p3, _, p4) --[[ line: 24 ]]
 			}, p4.appPage)
 		end
 	end
-	return refreshOmniRecommendationFeedItemModule(p4.dependencies.networking, p4.appPage, topicId, feedItemKey, requestIntent, function(p5, p6) --[[ line: 74 ]]
+	return refreshOmniRecommendationFeedItemModule(p4.dependencies.networking, p4.appPage, topicId, feedItemKey, requestIntent, function(p5, p6)
 		-- upvalues: p4 (ref)
 		p4.dependencies.logger.reportError(p5, p6, p4.appPage)
 	end, { contextFeatures = t })

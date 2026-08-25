@@ -8,7 +8,7 @@ local t = {}
 t.__index = t
 t.__type = inlineElementTypeModule
 
-function t.new(p0, p1, p2) --[[ line: 44 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref), dashModule (ref)
 	local tbl = setmetatable({}, t)
 	tbl.props = p1
@@ -18,16 +18,16 @@ function t.new(p0, p1, p2) --[[ line: 44 ]]
 	return tbl
 end
 
-function t:getWidth() --[[ line: 52 ]]
+function t:getWidth()
 	return self.props.Size.Width.Offset
 end
 
-function t:split() --[[ line: 56 ]]
+function t:split()
 	-- upvalues: t (ref), join (ref)
 	return t.new(self.Element, join(self.props))
 end
 
-function t:render(p3, p4) --[[ line: 60 ]]
+function t:render(p3, p4)
 	-- upvalues: reactModule (ref), dashModule (ref)
 	return reactModule.createElement(self.Element, self.mapProps(dashModule.assign(self.props, { id = p3, key = tostring(p4), LayoutOrder = p4 })))
 end

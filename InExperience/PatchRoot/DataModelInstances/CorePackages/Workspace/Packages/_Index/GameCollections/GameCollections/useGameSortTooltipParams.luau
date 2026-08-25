@@ -9,7 +9,7 @@ local gameTopicIds = require(parent.DiscoveryTypes).GameTopicIds
 local openInfoPeekView = require(parent.DiscoveryRouting).OpenInfoPeekView
 local openCloseOnlyInteractiveAlert = require(parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
 
-local function _(p0, p1) --[[ line: 15 | named "isSponsoredSort" ]]
+local function _(p0, p1)
 	-- upvalues: gameTopicIds (ref)
 	if p1 then
 		if p0 and p0.topicId == gameTopicIds.Sponsored then
@@ -20,7 +20,7 @@ local function _(p0, p1) --[[ line: 15 | named "isSponsoredSort" ]]
 	end
 end
 
-return function(p2, p3, p4) --[[ line: 31 | named "useGameSortTooltipParams" ]]
+return function(p2, p3, p4)
 	-- upvalues: useDispatch (ref), useLocalization (ref), usePreferredInput (ref), gameTopicIds (ref), reactModule (ref), responsiveModule (ref), openInfoPeekView (ref), openCloseOnlyInteractiveAlert (ref), closeCentralOverlay (ref)
 	local isNot27
 	local var2 = useDispatch()
@@ -42,14 +42,14 @@ return function(p2, p3, p4) --[[ line: 31 | named "useGameSortTooltipParams" ]]
 	local var6 = if isNot27 and p4 == nil then sponsoredDisclosure else p4
 	local var7 = if isNot27 then sponsoredTitle elseif p2 then p2.displayName else ""
 	
-	return reactModule.useCallback(function() --[[ line: 44 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: var4 (ref), responsiveModule (copy), var2 (ref), openInfoPeekView (copy), var7 (ref), var6 (ref), openCloseOnlyInteractiveAlert (copy), closeCentralOverlay (copy)
 		if var4 == responsiveModule.Input.Touch then
 			var2(openInfoPeekView(var7, var6))
 			
 			return
 		end
-		var2(openCloseOnlyInteractiveAlert(var7, var6, function() --[[ line: 48 ]]
+		var2(openCloseOnlyInteractiveAlert(var7, var6, function()
 			-- upvalues: var2 (copy), closeCentralOverlay (copy)
 			return var2(closeCentralOverlay())
 		end))

@@ -33,36 +33,36 @@ local t_2 = {
 }
 local var10 = 800 / var3
 
-local function _(p0) --[[ line: 173 | named "pixelToScaledSize" ]]
+local function _(p0)
 	-- upvalues: var10 (ref)
 	return p0 / var10
 end
 
-local _ = function(p1, p2) --[[ line: 177 | named "getScaledResolutionForPart" ]]
+local _ = function(p1, p2)
 	-- upvalues: var10 (ref)
 	return Vector2.new(p1 / var10, p2 / var10)
 end
 
-local _ = function(p3, p4, p5) --[[ line: 181 | named "panelDistanceWithSpacing" ]]
+local _ = function(p3, p4, p5)
 	-- upvalues: var10 (ref)
 	local var49 = p5 / var10
 	
 	return Vector2.new(p3.X * 0.5 + p4.X * 0.5 + var49, p3.Y * 0.5 + p4.Y * 0.5 + var49)
 end
 
-local _ = function(p6, p7) --[[ line: 188 | named "alignPanelLeftToAnchor" ]]
+local _ = function(p6, p7)
 	return p7.X * 0.5 - p6.X * 0.5
 end
 
-local _ = function(p8, p9) --[[ line: 192 | named "alignPanelTopToAnchor" ]]
+local _ = function(p8, p9)
 	return p8.Y * 0.5 - p9.Y * 0.5
 end
 
-local _ = function(p10, p11) --[[ line: 196 | named "alignPanelBottomToAnchor" ]]
+local _ = function(p10, p11)
 	return p11.Y * 0.5 - p10.Y * 0.5
 end
 
-local _ = function() --[[ line: 200 | named "getAdditionalZOffsetIfNeeded" ]]
+local _ = function()
 	-- upvalues: inExperienceUIVRIXP (ref), spatialUIPanelZOffset (ref)
 	return if inExperienceUIVRIXP:isMovePanelToCenter() then spatialUIPanelZOffset / 1000 else 0
 end
@@ -74,7 +74,7 @@ local t_3 = {
 	PANEL_TO_DRAGBAR = spatialUIPanelDragBarDistance
 }
 
-local function getPanelAroundLeftOrRightEdgeRotation(value, p12) --[[ line: 217 ]]
+local function getPanelAroundLeftOrRightEdgeRotation(value, p12)
 	-- upvalues: t_3 (ref), var10 (ref)
 	local var50 = value.X * 0.5 + t_3.PANEL_TO_PANEL / var10 * 0.5
 	local var51 = if p12 > 0 then Vector3.new(var50, 0, 0) else Vector3.new(-1 * var50, 0, 0)
@@ -237,7 +237,7 @@ if isInExperienceUIVREnabled then
 		[t_1.ToolTipsContainer] = var28
 	})
 end
-local function getDragBarOffsetForPanel(value, p13, p14, p15) --[[ line: 451 ]]
+local function getDragBarOffsetForPanel(value, p13, p14, p15)
 	-- upvalues: t_4 (write), vector2 (ref), t_3 (ref), t_7 (write), var19 (ref), var10 (ref)
 	local var52
 	local _ = nil

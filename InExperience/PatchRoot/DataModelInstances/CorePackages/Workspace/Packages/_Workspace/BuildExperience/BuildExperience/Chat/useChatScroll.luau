@@ -3,7 +3,7 @@ local reactModule = require(buildExperience.Parent.React)
 local chatScrollModule = require(script.Parent.chatScroll)
 local fFlagBuildExperienceChatHistoryPrefetchModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryPrefetch)
 
-return function() --[[ line: 31 | named "useChatScroll" ]]
+return function()
 	-- upvalues: reactModule (ref), fFlagBuildExperienceChatHistoryPrefetchModule (ref), chatScrollModule (ref)
 	local var4 = reactModule.useRef(nil)
 	local var5 = reactModule.useRef(nil)
@@ -14,7 +14,7 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 	local var10 = reactModule.useRef(false)
 	local var11 = reactModule.useRef(nil)
 	local var12 = reactModule.useRef(false)
-	local var13 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: fFlagBuildExperienceChatHistoryPrefetchModule (copy), var7 (ref), var11 (ref), var8 (ref), var12 (ref)
 		if fFlagBuildExperienceChatHistoryPrefetchModule then
 			local current = var8.current
@@ -29,7 +29,7 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 			var11.current()
 		end
 	end, {})
-	local var14 = reactModule.useCallback(function() --[[ line: 57 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref), var8 (ref), var12 (ref)
 		local current = var5.current
 		
@@ -42,7 +42,7 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 		var8.current = false
 		var12.current = false
 	end, {})
-	local var15 = reactModule.useCallback(function() --[[ line: 69 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var9 (ref), chatScrollModule (copy), var6 (ref), var7 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var8 (ref)
 		local current = var4.current
 		
@@ -56,7 +56,7 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 			end
 		end
 	end, {})
-	local var16 = reactModule.useCallback(function() --[[ line: 81 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), var10 (ref), var6 (ref), var13 (ref)
 		var15()
 		
@@ -65,13 +65,13 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 		end
 		var13()
 	end, { var13, var15 })
-	local var17 = reactModule.useCallback(function() --[[ line: 89 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		local current = var4.current
 		
 		return current ~= nil and current.AbsoluteCanvasSize.Y <= current.AbsoluteWindowSize.Y
 	end, {})
-	local var18 = reactModule.useCallback(function() --[[ line: 94 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), chatScrollModule (copy), var9 (ref), var15 (ref)
 		local current = var4.current
 		
@@ -80,7 +80,7 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 			var15()
 		end
 	end, { var15 })
-	local var19 = reactModule.useCallback(function() --[[ line: 102 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		local current = var4.current
 		
@@ -88,17 +88,17 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 			current.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
-	local var20 = reactModule.useCallback(function() --[[ line: 109 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), var18 (ref)
 		if var6.current then
 			var18()
 		end
 	end, { var18 })
-	local var21 = reactModule.useCallback(function() --[[ line: 115 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref)
 		var15()
 	end, { var15 })
-	local var22 = reactModule.useCallback(function(p0) --[[ line: 120 ]]
+	local var22 = reactModule.useCallback(function(p0)
 		-- upvalues: var4 (ref), var14 (ref), var10 (ref), var19 (ref), var15 (ref), var18 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var13 (ref), var5 (ref), var16 (ref)
 		if var4.current == p0 then return end
 		var14()
@@ -112,7 +112,7 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 			var18()
 			task.defer(var18)
 		end
-		local function onScrollViewportChanged() --[[ line: 140 ]]
+		local function onScrollViewportChanged()
 			-- upvalues: var10 (copy), var19 (copy), var18 (copy), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var13 (copy)
 			if var10.current then
 				var19()
@@ -137,32 +137,32 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 	end, {
 		var14, var19, var18, var13, var15, var16
 	})
-	local var23 = reactModule.useCallback(function() --[[ line: 177 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), var6 (ref), var10 (ref), var19 (ref)
 		var9.current = 0
 		var6.current = true
 		var10.current = true
 		var19()
 	end, { var19 })
-	local var24 = reactModule.useCallback(function() --[[ line: 184 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref)
 		var15()
 	end, { var15 })
-	local var25 = reactModule.useCallback(function() --[[ line: 188 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), var9 (ref), var18 (ref)
 		if var6.current then
 			var9.current = 0
 			var18()
 		end
 	end, { var18 })
-	local var26 = reactModule.useCallback(function() --[[ line: 195 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), var6 (ref), var18 (ref)
 		var9.current = 0
 		var6.current = true
 		var18()
 		task.defer(var18)
 	end, { var18 })
-	local var27 = reactModule.useCallback(function(p1) --[[ line: 202 ]]
+	local var27 = reactModule.useCallback(function(p1)
 		-- upvalues: var11 (ref), fFlagBuildExperienceChatHistoryPrefetchModule (copy), var12 (ref), var13 (ref)
 		var11.current = p1
 		
@@ -171,12 +171,12 @@ return function() --[[ line: 31 | named "useChatScroll" ]]
 		end
 		task.defer(var13)
 	end, { var13 })
-	reactModule.useEffect(function() --[[ line: 210 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref)
 		return var14
 	end, { var14 })
 	
-	return reactModule.useMemo(function() --[[ line: 215 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var22 (ref), var23 (ref), var20 (ref), var21 (ref), var24 (ref), var25 (ref), var26 (ref), var17 (ref), var6 (ref), var7 (ref), var27 (ref)
 		return {
 			setScrollingFrame = var22,

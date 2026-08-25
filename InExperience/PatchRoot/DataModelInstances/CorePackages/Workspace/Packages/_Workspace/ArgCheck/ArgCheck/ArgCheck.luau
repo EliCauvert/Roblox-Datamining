@@ -1,29 +1,29 @@
 ﻿local debugLuaArgCheck = game:DefineFastFlag("DebugLuaArgCheck", false)
 local var1 = game:GetService("RunService"):IsStudio()
 local t = {
-	isEnabled = function() --[[ line: 7 ]]
+	isEnabled = function()
 		-- upvalues: debugLuaArgCheck (ref), var1 (ref)
 		return debugLuaArgCheck or (_G.__TESTEZ_RUNNING_TEST__ or var1)
 	end
 }
 
-local function _(p0, p1) --[[ line: 11 | named "assert_" ]]
+local function _(p0, p1)
 	-- upvalues: t (ref)
 	if t.isEnabled() then
 		assert(p0, p1)
 	end
 end
 
-local function stubArgCheckFunction() --[[ line: 17 ]]
+local function stubArgCheckFunction()
 	return true
 end
 
-function t.wrap(p2) --[[ line: 43 ]]
+function t.wrap(p2)
 	-- upvalues: t (ref), stubArgCheckFunction (ref)
 	return if t.isEnabled() then p2 else stubArgCheckFunction
 end
 
-function t.isNonNegativeNumber(p3, p4) --[[ line: 47 ]]
+function t.isNonNegativeNumber(p3, p4)
 	-- upvalues: t (ref)
 	local var4 = typeof(p3) == "number" and p3 >= 0
 	local formattedText = string.format("expects %s to be a non-negative number!", p4)
@@ -34,7 +34,7 @@ function t.isNonNegativeNumber(p3, p4) --[[ line: 47 ]]
 	return p3
 end
 
-function t.isType(p5, p6, p7) --[[ line: 54 ]]
+function t.isType(p5, p6, p7)
 	-- upvalues: t (ref)
 	local var6 = typeof(p5) == p6
 	local formattedText = string.format("expects %s to be a %s! it was: %s", p7, p6, typeof(p5))
@@ -45,7 +45,7 @@ function t.isType(p5, p6, p7) --[[ line: 54 ]]
 	return p5
 end
 
-function t.isInTypes(p8, p9, p10) --[[ line: 63 ]]
+function t.isInTypes(p8, p9, p10)
 	-- upvalues: t (ref)
 	for i, v in ipairs(p9) do
 		if typeof(p8) == v then
@@ -60,7 +60,7 @@ function t.isInTypes(p8, p9, p10) --[[ line: 63 ]]
 	return p8
 end
 
-function t.isTypeOrNil(p11, p12, p13) --[[ line: 75 ]]
+function t.isTypeOrNil(p11, p12, p13)
 	-- upvalues: t (ref)
 	local var9 = if p11 ~= nil then typeof(p11) == p12 else true
 	local formattedText = string.format("expects %s to be a %s! it was: %s", p13, p12, typeof(p11))
@@ -71,7 +71,7 @@ function t.isTypeOrNil(p11, p12, p13) --[[ line: 75 ]]
 	return p11
 end
 
-function t.isNotNil(p14, p15) --[[ line: 84 ]]
+function t.isNotNil(p14, p15)
 	-- upvalues: t (ref)
 	local var11 = p14 ~= nil
 	local formattedText = string.format("expects %s to be not nil!", p15)
@@ -82,7 +82,7 @@ function t.isNotNil(p14, p15) --[[ line: 84 ]]
 	return p14
 end
 
-function t.isNonEmptyString(p16, p17) --[[ line: 90 ]]
+function t.isNonEmptyString(p16, p17)
 	-- upvalues: t (ref)
 	local var13 = typeof(p16) == "string" and p16 ~= ""
 	local formattedText = string.format("expects %s to be a non-empty string!", p17)
@@ -93,7 +93,7 @@ function t.isNonEmptyString(p16, p17) --[[ line: 90 ]]
 	return p16
 end
 
-function t.isEqual(p18, p19, p20) --[[ line: 96 ]]
+function t.isEqual(p18, p19, p20)
 	-- upvalues: t (ref)
 	local var15 = p18 == p19
 	local formattedText = string.format("expects %s to equal %s! it was: %s", p20, tostring(p19), tostring(p18))
@@ -104,7 +104,7 @@ function t.isEqual(p18, p19, p20) --[[ line: 96 ]]
 	return p18
 end
 
-function t.representsInteger(p21, p22) --[[ line: 106 ]]
+function t.representsInteger(p21, p22)
 	-- upvalues: t (ref)
 	local var17 = tonumber(p21)
 	local var18 = var17 ~= nil
@@ -122,7 +122,7 @@ function t.representsInteger(p21, p22) --[[ line: 106 ]]
 	return p21
 end
 
-function t.matchesInterface(p23, p24, p25, p26) --[[ line: 137 ]]
+function t.matchesInterface(p23, p24, p25, p26)
 	-- upvalues: t (ref)
 	if t.isEnabled() then
 		local t_1 = {
@@ -171,7 +171,7 @@ function t.matchesInterface(p23, p24, p25, p26) --[[ line: 137 ]]
 	return p23
 end
 
-function t.assert(...) --[[ line: 179 ]]
+function t.assert(...)
 	-- upvalues: t (ref)
 	local var26, var27 = ...
 	

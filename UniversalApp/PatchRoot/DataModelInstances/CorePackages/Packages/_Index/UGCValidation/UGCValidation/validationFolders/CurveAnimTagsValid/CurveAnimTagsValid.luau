@@ -18,11 +18,11 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function _(p0) --[[ line: 26 | named "isTimeStamp" ]]
+local function _(p0)
 	return if #p0 > 30 then false else string.match(p0, "^[0-9]+$") ~= nil
 end
 
-function t.run(p1, p2) --[[ line: 34 ]]
+function t.run(p1, p2)
 	-- upvalues: collectionService (ref), errorSourceStringsModule (ref)
 	for i, v in p2.curveAnimations do
 		for i_1, v_1 in v:GetChildren() do

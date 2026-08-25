@@ -16,7 +16,7 @@ local defaultCardPadding = constantsModule.Padding.DefaultCardPadding
 local defaultContentPadding = constantsModule.DefaultContentPadding
 local defaultCardCornerRadius = constantsModule.DefaultCardCornerRadius
 
-return function(p0) --[[ line: 32 ]]
+return function(p0)
 	-- upvalues: useNotificationCardDataModule (ref), constantsModule (ref), defaultCardPadding (ref), useStyle (ref), useNotificationCardStateModule (ref), reactModule (ref), interactable (ref), defaultCardCornerRadius (ref), defaultContentPadding (ref), notificationContentFrameModule (ref), notificationActionsFrameModule (ref)
 	local var7 = useNotificationCardDataModule()
 	local cardSize = var7.cardSize
@@ -33,9 +33,9 @@ return function(p0) --[[ line: 32 ]]
 		BackgroundTransparency = var8,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onStateChanged = function() --[[ line: 50 ]] end,
+		onStateChanged = function() end,
 		Size = UDim2.new(1, 0, 0, 0),
-		[reactModule.Event.Activated] = function() --[[ line: 52 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: handleActions (ref), var12 (ref)
 			if handleActions and var12 then
 				handleActions(var12)

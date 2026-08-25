@@ -8,7 +8,7 @@ local mergeDirectives = require(script.Parent.directives).mergeDirectives
 local mergeNamedTypeArray = require(script.Parent["merge-named-type-array"]).mergeNamedTypeArray
 local _ = require(script.Parent["merge-typedefs_types"])
 
-function t.mergeUnion(p0, p1, p2) --[[ line: 26 ]]
+function t.mergeUnion(p0, p1, p2)
 	-- upvalues: boolean (ref), mergeDirectives (ref), kind (ref), mergeNamedTypeArray (ref), object (ref)
 	return if p1 then {
 		name = p0.name,

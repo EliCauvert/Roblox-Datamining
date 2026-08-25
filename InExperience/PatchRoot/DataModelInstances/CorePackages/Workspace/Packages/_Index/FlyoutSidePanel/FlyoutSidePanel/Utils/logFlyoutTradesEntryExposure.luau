@@ -2,7 +2,7 @@
 local fFlagFlyoutTradesEntryExposureLoggingModule = require(flyoutSidePanel.Flags.FFlagFlyoutTradesEntryExposureLogging)
 local fStringFlyoutTradesEntryIxpLayerModule = require(flyoutSidePanel.Flags.FStringFlyoutTradesEntryIxpLayer)
 
-return function(p0) --[[ line: 7 | named "logFlyoutTradesEntryExposure" ]]
+return function(p0)
 	-- upvalues: fFlagFlyoutTradesEntryExposureLoggingModule (ref), fStringFlyoutTradesEntryIxpLayerModule (ref)
 	if not fFlagFlyoutTradesEntryExposureLoggingModule then return end
 	if fStringFlyoutTradesEntryIxpLayerModule == "" then return end
@@ -13,7 +13,7 @@ return function(p0) --[[ line: 7 | named "logFlyoutTradesEntryExposure" ]]
 		var3 = game:GetService("IXPService")
 	end
 	assert(var3 ~= nil, "IXPService is required to log layer exposure")
-	pcall(function() --[[ line: 27 ]]
+	pcall(function()
 		-- upvalues: var3 (ref), fStringFlyoutTradesEntryIxpLayerModule (ref)
 		var3:LogFlagLinkedUserLayerExposure(fStringFlyoutTradesEntryIxpLayerModule)
 	end)

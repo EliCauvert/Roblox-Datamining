@@ -19,9 +19,9 @@ cellHeadDetail.validateProps = tModule.strictInterface({
 	openTypeFeatures = tModule.optional(tModule.string)
 })
 
-function cellHeadDetail.render(p0) --[[ line: 30 ]]
+function cellHeadDetail.render(p0)
 	-- upvalues: withStyleModule (ref), roactModule (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p1) --[[ line: 31 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: p0 (ref), roactModule (copy), genericTextLabelModule (copy)
 		local subLabelText = p0.props.subLabelText
 		

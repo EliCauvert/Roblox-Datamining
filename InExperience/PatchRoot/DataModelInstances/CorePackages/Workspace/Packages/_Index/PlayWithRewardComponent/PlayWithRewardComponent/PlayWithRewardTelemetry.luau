@@ -126,7 +126,7 @@ local t_18 = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function _(p0, p1, p2, p3) --[[ line: 237 | named "getCoachmarkCustomFields" ]]
+local function _(p0, p1, p2, p3)
 	return {
 		action = p0,
 		playWithRewardFlowId = p1,
@@ -136,7 +136,7 @@ local function _(p0, p1, p2, p3) --[[ line: 237 | named "getCoachmarkCustomField
 end
 
 return {
-	logPlayWithRewardAdRequested = function(p4, p5) --[[ line: 246 ]]
+	logPlayWithRewardAdRequested = function(p4, p5)
 		-- upvalues: telemetryService (ref), t (ref), list (ref), t_10 (ref), list_1 (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
@@ -144,7 +144,7 @@ return {
 		})
 		telemetryService:LogCounter(t_10, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdReceived = function(p6, p7, p8, p9, p10, p11) --[[ line: 266 ]]
+	logPlayWithRewardAdReceived = function(p6, p7, p8, p9, p10, p11)
 		-- upvalues: telemetryService (ref), t_1 (ref), list (ref), t_11 (ref), list_1 (ref), t_18 (ref)
 		telemetryService:LogEvent(t_1, {
 			standardizedFields = list,
@@ -169,7 +169,7 @@ return {
 			}, p10)
 		end
 	end,
-	logPlayWithRewardBannerShown = function(p12, p13, p14, p15, p16) --[[ line: 309 ]]
+	logPlayWithRewardBannerShown = function(p12, p13, p14, p15, p16)
 		-- upvalues: telemetryService (ref), t_2 (ref), list (ref), t_12 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_2, {
 			standardizedFields = list,
@@ -183,7 +183,7 @@ return {
 		})
 		telemetryService:LogCounter(t_12, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardButtonClicked = function(p17, p18, p19) --[[ line: 338 ]]
+	logPlayWithRewardButtonClicked = function(p17, p18, p19)
 		-- upvalues: telemetryService (ref), t_3 (ref), list (ref), t_13 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_3, {
 			standardizedFields = list,
@@ -195,7 +195,7 @@ return {
 		})
 		telemetryService:LogCounter(t_13, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdPlaybackAttempted = function(p20, p21, p22) --[[ line: 359 ]]
+	logPlayWithRewardAdPlaybackAttempted = function(p20, p21, p22)
 		-- upvalues: telemetryService (ref), t_4 (ref), list (ref), t_14 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_4, {
 			standardizedFields = list,
@@ -207,7 +207,7 @@ return {
 		})
 		telemetryService:LogCounter(t_14, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardAdPlaybackStopped = function(p23, p24, p25, p26) --[[ line: 384 ]]
+	logPlayWithRewardAdPlaybackStopped = function(p23, p24, p25, p26)
 		-- upvalues: telemetryService (ref), t_5 (ref), list (ref), t_15 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_5, {
 			standardizedFields = list,
@@ -223,7 +223,7 @@ return {
 			customFields = { adPlaybackStatus = p25 }
 		}, 1)
 	end,
-	logPlayWithRewardGameJoinInitiated = function(p27, p28, p29) --[[ line: 411 ]]
+	logPlayWithRewardGameJoinInitiated = function(p27, p28, p29)
 		-- upvalues: telemetryService (ref), t_6 (ref), list (ref), t_16 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_6, {
 			standardizedFields = list,
@@ -235,7 +235,7 @@ return {
 		})
 		telemetryService:LogCounter(t_16, { standardizedFields = list_1, customFields = {} }, 1)
 	end,
-	logPlayWithRewardBlackoutCurtainAction = function(p30, p31, p32, p33) --[[ line: 436 ]]
+	logPlayWithRewardBlackoutCurtainAction = function(p30, p31, p32, p33)
 		-- upvalues: telemetryService (ref), t_7 (ref), list (ref)
 		telemetryService:LogEvent(t_7, {
 			standardizedFields = list,
@@ -247,14 +247,14 @@ return {
 			}
 		})
 	end,
-	logPlayWithRewardShimmerShown = function(p34, p35) --[[ line: 455 ]]
+	logPlayWithRewardShimmerShown = function(p34, p35)
 		-- upvalues: telemetryService (ref), t_8 (ref), list (ref)
 		telemetryService:LogEvent(t_8, {
 			standardizedFields = list,
 			customFields = { playWithRewardFlowId = p34, universeId = p35 }
 		})
 	end,
-	logPlayWithRewardCoachmark = function(p36, p37, p38, p39) --[[ line: 467 ]]
+	logPlayWithRewardCoachmark = function(p36, p37, p38, p39)
 		-- upvalues: telemetryService (ref), t_9 (ref), list (ref), t_17 (ref), list_1 (ref)
 		telemetryService:LogEvent(t_9, {
 			standardizedFields = list,

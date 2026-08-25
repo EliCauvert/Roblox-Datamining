@@ -1,18 +1,18 @@
 ﻿local _ = require(script:FindFirstAncestor("RoduxSquads").Persists.PersistStorage.PersistStorage)
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	local storage = p0.storage
 	
 	return if storage then {
-		update = function(p1) --[[ line: 18 ]]
+		update = function(p1)
 			-- upvalues: storage (ref)
 			return storage:setItem(p1)
 		end,
-		get = function() --[[ line: 22 ]]
+		get = function()
 			-- upvalues: storage (ref)
 			return storage:getItem()
 		end,
-		bindToStorage = function(p2) --[[ line: 26 ]]
+		bindToStorage = function(p2)
 			-- upvalues: storage (ref)
 			return storage:bindAndFire(p2)
 		end

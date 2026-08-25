@@ -4,15 +4,15 @@ local httpModule = require(parent.Http)
 local _ = require(parent.HttpClient)
 local fStringArgusApiUrlBaseModule = require(dataHydration.Moments.FStringArgusApiUrlBase)
 
-local function _(p0) --[[ line: 14 | named "normalizeBaseUrl" ]]
+local function _(p0)
 	return if p0:sub(#p0) == "/" then p0:sub(1, #p0 - 1) else p0
 end
 
-local _ = function(p1) --[[ line: 22 | named "normalizePath" ]]
+local _ = function(p1)
 	return if p1:sub(1, 1) == "/" then p1 else `/{p1}`
 end
 
-local _ = function() --[[ line: 30 | named "getFStringApiUrlBase" ]]
+local _ = function()
 	-- upvalues: fStringArgusApiUrlBaseModule (ref)
 	local var3 = fStringArgusApiUrlBaseModule()
 	
@@ -24,7 +24,7 @@ local _ = function() --[[ line: 30 | named "getFStringApiUrlBase" ]]
 	return if var4:match("^https?://") == nil then nil else var4
 end
 
-return function(p2) --[[ line: 44 | named "constructApiUrl" ]]
+return function(p2)
 	-- upvalues: fStringArgusApiUrlBaseModule (ref), httpModule (ref)
 	local var6
 	assert(type(p2) == "string", "path must be a string")

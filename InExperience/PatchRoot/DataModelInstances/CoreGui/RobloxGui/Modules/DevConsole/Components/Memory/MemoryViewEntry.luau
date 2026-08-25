@@ -13,7 +13,7 @@ local entryFrameHeight = constantsModule.GeneralFormatting.EntryFrameHeight
 local depthIndent = constantsModule.MemoryFormatting.DepthIndent
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: depthIndent (ref), valueCellWidth (ref), roactModule (ref), bannerButtonModule (ref), entryFrameHeight (ref), cellLabelModule (ref), cellPadding (ref), lineWidth (ref), lineColor (ref), valuePadding (ref), lineGraphModule (ref), convertTimeStampModule (ref)
 	local size = p0.size
 	local depth = p0.depth

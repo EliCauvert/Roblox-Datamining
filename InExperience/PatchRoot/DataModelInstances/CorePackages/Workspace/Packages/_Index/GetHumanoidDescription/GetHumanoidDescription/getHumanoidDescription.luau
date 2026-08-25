@@ -9,7 +9,7 @@ local _ = {
 	OK = "OK"
 }
 
-local var2 = function(p0) --[[ line: 65 ]]
+local var2 = function(p0)
 	local t = {}
 	
 	for i, v in ipairs(p0) do
@@ -24,7 +24,7 @@ local var2 = function(p0) --[[ line: 65 ]]
 	return t
 end
 
-local var3 = function(p1, p2) --[[ line: 79 ]]
+local var3 = function(p1, p2)
 	local t = {}
 	
 	for i, v in ipairs(p2) do
@@ -39,7 +39,7 @@ local var3 = function(p1, p2) --[[ line: 79 ]]
 	return t
 end
 
-local var4 = function(p3) --[[ line: 93 ]]
+local var4 = function(p3)
 	local t = {}
 	
 	for i, v in p3:GetPlayingAnimationTracks() do
@@ -53,7 +53,7 @@ local var4 = function(p3) --[[ line: 93 ]]
 	return t
 end
 
-return function(p4) --[[ line: 108 ]]
+return function(p4)
 	-- upvalues: playersService (ref), var2 (ref), getHumanoidDescriptionUpdatesV2B (ref), var3 (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), var4 (ref)
 	local var9 = playersService:GetPlayerByUserId(p4)
 	local t = {
@@ -112,7 +112,7 @@ return function(p4) --[[ line: 108 ]]
 	end
 	local _ = nil
 	local _ = nil
-	local ok, status = pcall(function() --[[ line: 167 ]]
+	local ok, status = pcall(function()
 		-- upvalues: humanoid (ref)
 		return humanoid:GetAppliedDescription()
 	end)
@@ -125,7 +125,7 @@ return function(p4) --[[ line: 108 ]]
 	end
 	local var13 = 0
 	
-	local var14 = function(p5) --[[ line: 180 ]]
+	local var14 = function(p5)
 		-- upvalues: var12 (write), t (ref)
 		if typeof(var12[p5]) == "Color3" then
 			t[p5] = { var12[p5].R, var12[p5].G, var12[p5].B }

@@ -1,7 +1,7 @@
 ﻿local sliderStepDirectionModule = require(script.Parent.SliderStepDirection)
 local sliderStepSizeModule = require(script.Parent.SliderStepSize)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 11 | named "calculateDirectionalStepValue" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: sliderStepSizeModule (ref), sliderStepDirectionModule (ref)
 	local var2 = p2.Max - p2.Min
 	local _ = nil

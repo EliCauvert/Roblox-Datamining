@@ -14,24 +14,24 @@ local followingsStoreTypesModule = require(script.Parent.FollowingsStoreTypes)
 local followingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
 local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 
-return function() --[[ line: 22 | named "createFollowingsStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), followingsUrlBuilderModule (ref), fetchFollowingModule (ref), followingsStoreTypesModule (ref), discoveryEventErrorLogger (ref), signalsModule (ref), requestUpdateFollowingModule (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
 	local var9 = createDataCacheModule()
 	local var10 = nil
 	local var11 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var9,
-		logError = function(p0) --[[ line: 30 ]]
+		logError = function(p0)
 			-- upvalues: logResponseError (copy), followingsUrlBuilderModule (copy)
 			logResponseError(followingsUrlBuilderModule.FOLLOWING_STATUS_URL, p0)
 		end,
-		onClear = function() --[[ line: 34 ]]
+		onClear = function()
 			-- upvalues: var10 (write)
 			var10 = nil
 		end,
-		fetchFn = function(p1, _) --[[ line: 38 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: fetchFollowingModule (copy), followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var10 (write)
-			return fetchFollowingModule(p1):andThen(function(p3) --[[ line: 43 ]]
+			return fetchFollowingModule(p1):andThen(function(p3)
 				-- upvalues: followingsStoreTypesModule (copy), discoveryEventErrorLogger (copy), var10 (copy)
 				local responseBody = p3.responseBody
 				
@@ -56,7 +56,7 @@ return function() --[[ line: 22 | named "createFollowingsStore" ]]
 					canFollow = responseBody.CanFollow,
 					isFollowing = responseBody.IsFollowing
 				}
-			end):catch(function(p2) --[[ line: 74 ]]
+			end):catch(function(p2)
 				-- upvalues: discoveryEventErrorLogger (copy), p1 (ref)
 				if type(p2) == "table" and p2.ClientError ~= nil then
 					discoveryEventErrorLogger.reportError("createFollowingsStore", "Client validation error fetching following", {
@@ -78,7 +78,7 @@ return function() --[[ line: 22 | named "createFollowingsStore" ]]
 		getFollowings = var11.getCachedItems,
 		getAndFetchFollowing = var11.getAndFetchItem,
 		getAndFetchFollowings = var11.getAndFetchItems,
-		updateFollowing = function(p4, p5) --[[ line: 95 ]]
+		updateFollowing = function(p4, p5)
 			-- upvalues: signalsModule (copy), var9 (ref), var10 (write), requestUpdateFollowingModule (copy), discoveryEventErrorLogger (copy), logResponseError (copy), followingsUrlBuilderModule (copy)
 			local var12, var13 = signalsModule.createSignal(nil)
 			local item = var9.getItem(p4)
@@ -103,10 +103,10 @@ return function() --[[ line: 22 | named "createFollowingsStore" ]]
 					followingLimitByType = var10.followingLimitByType
 				}
 			end
-			requestUpdateFollowingModule(p4, p5):andThen(function() --[[ line: 143 ]]
+			requestUpdateFollowingModule(p4, p5):andThen(function()
 				-- upvalues: var13 (ref), p5 (ref)
 				var13({ type = "success", isFollowing = p5 })
-			end):catch(function(p6) --[[ line: 149 ]]
+			end):catch(function(p6)
 				-- upvalues: var9 (copy), p4 (ref), var16 (ref), var10 (ref), var10 (copy), var13 (ref), discoveryEventErrorLogger (copy), p5 (ref), logResponseError (copy), followingsUrlBuilderModule (copy)
 				var9.updateItem(p4, { isFollowing = var16 })
 				
@@ -145,16 +145,16 @@ return function() --[[ line: 22 | named "createFollowingsStore" ]]
 			return var12
 		end,
 		updateItem = if fFlagLuaAppDataHydrationUpdateItem then var9.updateItem else nil,
-		updateUserFollowingLimits = if fFlagLuaAppDataHydrationUpdateItem then function(p7) --[[ line: 234 ]]
+		updateUserFollowingLimits = if fFlagLuaAppDataHydrationUpdateItem then function(p7)
 			-- upvalues: var10 (write)
 			var10 = p7
 		end else nil,
-		clear = function() --[[ line: 212 ]]
+		clear = function()
 			-- upvalues: var10 (write), var11 (ref)
 			var10 = nil
 			var11.clear()
 		end,
-		dispose = function() --[[ line: 217 ]]
+		dispose = function()
 			-- upvalues: var11 (ref)
 			var11.dispose()
 		end

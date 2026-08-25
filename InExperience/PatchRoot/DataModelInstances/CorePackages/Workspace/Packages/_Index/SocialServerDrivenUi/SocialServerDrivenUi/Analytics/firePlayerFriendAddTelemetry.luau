@@ -4,7 +4,7 @@ local localizationService = game:GetService("LocalizationService")
 local getActionTelemetryFieldValue = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.SduiCoreSystem).getActionTelemetryFieldValue
 local sduiPlayerFriendAddThrottlingHundredthsPercent = game:DefineFastInt("SduiPlayerFriendAddThrottlingHundredthsPercent", 10000)
 
-return function(p0, p1, p2) --[[ line: 20 | named "firePlayerFriendAddTelemetry" ]]
+return function(p0, p1, p2)
 	-- upvalues: getActionTelemetryFieldValue (ref), telemetryService (ref), sduiPlayerFriendAddThrottlingHundredthsPercent (ref), httpService (ref), localizationService (ref)
 	local var4 = getActionTelemetryFieldValue(nil, p1, "tilePos") or getActionTelemetryFieldValue(nil, p1, "itemPosition")
 	local var5 = getActionTelemetryFieldValue(nil, p1, "pageContext") or (if p2 then p2.appPage else nil)

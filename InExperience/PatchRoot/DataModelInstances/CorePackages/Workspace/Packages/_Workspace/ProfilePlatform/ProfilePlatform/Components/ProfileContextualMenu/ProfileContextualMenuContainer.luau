@@ -19,7 +19,7 @@ local fFlagProfilePlatformAddTC = require(parent.SharedFlags).FFlagProfilePlatfo
 local fFlagProfileContextualMenuDisableFix = require(parent.SharedFlags).FFlagProfileContextualMenuDisableFix
 local fFlagProfileFixMenuNavigation = require(parent.SharedFlags).FFlagProfileFixMenuNavigation
 
-return function(_) --[[ line: 24 | named "ProfileContextualMenuContainer" ]]
+return function(_)
 	-- upvalues: useScreenSize (ref), useNavigation (ref), constantsModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileActionsModule (ref), reactModule (ref), fFlagProfileFixMenuNavigation (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), fFlagProfileContextualMenuDisableFix (ref), fFlagProfilePlatformAddTC (ref), profileContextualMenuModule (ref), focusNavigableSurfaceWrapper (ref)
 	local var10 = useScreenSize()
 	local var11 = useNavigation()
@@ -30,7 +30,7 @@ return function(_) --[[ line: 24 | named "ProfileContextualMenuContainer" ]]
 	local var16 = useProfileActionsModule(enumsModule.ButtonSurface.ContextualMenu)
 	local contextual = (useProfileJsonComponentModule(enumsModule.Components.Actions) or {}).contextual
 	local var17, var18 = reactModule.useState(true)
-	local var19 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref), var11 (ref), param (ref)
 		var18(false)
 		var11.pop()
@@ -41,7 +41,7 @@ return function(_) --[[ line: 24 | named "ProfileContextualMenuContainer" ]]
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		customEventHandlers = {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function() --[[ line: 54 ]]
+				handler = inputHandlersModule.onRelease(function()
 					-- upvalues: var19 (ref)
 					var19()
 				end)
@@ -49,18 +49,18 @@ return function(_) --[[ line: 24 | named "ProfileContextualMenuContainer" ]]
 		},
 		isFocusable = var17
 	}) else nil
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: param_1 (ref), var19 (ref)
 		if param_1 then
 			param_1.current = var19
 			
-			return function() --[[ line: 69 ]]
+			return function()
 				-- upvalues: param_1 (copy)
 				param_1.current = nil
 			end
 		end
 	end, { var19 })
-	local var21 = reactModule.useMemo(function() --[[ line: 74 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: contextual (ref), var16 (ref), fFlagProfileContextualMenuDisableFix (copy), fFlagProfilePlatformAddTC (copy), var19 (ref)
 		if not contextual then
 			return {}
@@ -75,7 +75,7 @@ return function(_) --[[ line: 24 | named "ProfileContextualMenuContainer" ]]
 					text = var23.text,
 					disabled = if fFlagProfileContextualMenuDisableFix then nil elseif fFlagProfilePlatformAddTC then var23.isDisabled else nil,
 					isDisabled = if fFlagProfileContextualMenuDisableFix then var23.isDisabled else nil,
-					onActivated = function() --[[ line: 90 ]]
+					onActivated = function()
 						-- upvalues: var19 (copy), var23 (ref)
 						var19()
 						var23.onActivated()
@@ -99,7 +99,7 @@ return function(_) --[[ line: 24 | named "ProfileContextualMenuContainer" ]]
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p0) --[[ line: 116 ]]
+				handler = inputHandlersModule.onRelease(function(p0)
 					-- upvalues: var19 (ref)
 					var19()
 					p0:cancel()

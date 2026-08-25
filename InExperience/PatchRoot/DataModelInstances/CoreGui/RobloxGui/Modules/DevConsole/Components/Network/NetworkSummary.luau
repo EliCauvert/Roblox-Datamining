@@ -36,7 +36,7 @@ for i_2, v_2 in ipairs(t) do
 end
 local networkSummary = roactModule.Component:extend("NetworkSummary")
 
-function networkSummary.render(p0) --[[ line: 50 ]]
+function networkSummary.render(p0)
 	-- upvalues: roactModule (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref), summaryHeaderNames (ref), headerButtonModule (ref), t_1 (ref), t (ref), cellLabelModule (ref), entryFrameHeight (ref), text (ref)
 	local width = p0.props.width
 	local httpSummaryTable = p0.props.httpSummaryTable or {}

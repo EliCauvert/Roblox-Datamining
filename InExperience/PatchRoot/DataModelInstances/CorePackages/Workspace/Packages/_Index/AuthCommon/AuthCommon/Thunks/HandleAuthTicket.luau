@@ -14,17 +14,17 @@ local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
 local userModule = require(authCommon.Thunks.User)
 local accountSwitcherConstantsModule = require(authCommon.Common.AccountSwitcherConstants)
 
-local function _(p0) --[[ line: 22 | named "castStringToInferredType" ]]
+local function _(p0)
 	local var9 = tonumber(p0)
 	
 	return var9 or (p0 == "true" or (if p0 == "false" then false else p0))
 end
 
-local function parsePlaceLauncherUrl(p1) --[[ line: 41 ]]
+local function parsePlaceLauncherUrl(p1)
 	if not p1 or p1 == "" then
 		return {}
 	end
-	local var10 = p1:gsub("%%(%x%x)", function(p2) --[[ line: 47 ]]
+	local var10 = p1:gsub("%%(%x%x)", function(p2)
 		return string.char(tonumber(p2, 16))
 	end)
 	local t = {}
@@ -43,7 +43,7 @@ local function parsePlaceLauncherUrl(p1) --[[ line: 41 ]]
 	return t
 end
 
-return function(p3, p4, p5, p6, p7) --[[ line: 72 ]]
+return function(p3, p4, p5, p6, p7)
 	-- upvalues: url (ref), httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilitiesModule (ref), parsePlaceLauncherUrl (ref), gameParams (ref), userModule (ref), promiseModule (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (ref), accountSwitcherConstantsModule (ref), guiService (ref), notificationType (ref), experienceService (ref)
 	return p3(string.format("%sv1/authentication-ticket/redeem", url.AUTH_URL), "POST", {
 		postBody = httpService:JSONEncode({
@@ -51,7 +51,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 72 ]]
 			authenticationTicket = p4,
 			accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilitiesModule.getAccountBlob() or nil
 		})
-	}):andThen(function(p8) --[[ line: 81 ]]
+	}):andThen(function(p8)
 		-- upvalues: parsePlaceLauncherUrl (copy), p5 (ref), gameParams (copy), appStorageUtilitiesModule (copy), userModule (copy), fFlagEnableLuaAccountSwitch (copy), promiseModule (copy), p7 (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), accountSwitcherConstantsModule (copy), guiService (copy), notificationType (copy), p6 (ref), experienceService (copy)
 		local var15 = parsePlaceLauncherUrl(p5)
 		local var16 = tonumber(var15.placeId)
@@ -66,25 +66,25 @@ return function(p3, p4, p5, p6, p7) --[[ line: 72 ]]
 				end
 			end
 			if fFlagEnableLuaAccountSwitch and (userModule.fromLocalStorage().userId ~= -1 or appStorageUtilitiesModule.getAccountBlob() ~= "") then
-				promiseModule.resolve(p7()):andThen(function() --[[ line: 98 ]]
+				promiseModule.resolve(p7()):andThen(function()
 					-- upvalues: fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), accountSwitcherConstantsModule (copy), appStorageUtilitiesModule (copy), p8 (ref), var15 (ref), guiService (copy), notificationType (copy)
 					appStorageUtilitiesModule.setAccountSwitchStatus(if fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues then accountSwitcherConstantsModule.AccountSwitcherSwitchedFromLoginStatus else accountSwitcherConstantsModule.AccountSwitcherSwitchedStatus)
 					appStorageUtilitiesModule.setAccountBlob(p8.responseBody.accountBlob)
 					appStorageUtilitiesModule.setAccountSwitchStartupQueryParams(var15)
 					appStorageUtilitiesModule.flush()
 					guiService:BroadcastNotification("", notificationType.DID_SWITCH_ACCOUNT)
-				end, function(p9) --[[ line: 108 ]]
+				end, function(p9)
 					print("error: ", p9)
 				end)
 			else
-				return promiseModule.resolve(p6()):andThen(function() --[[ line: 112 ]]
+				return promiseModule.resolve(p6()):andThen(function()
 					-- upvalues: experienceService (copy), var17 (ref)
 					experienceService:LaunchExperience(var17, "AuthTicket", nil)
 				end)
 			end
 		end
 		return promiseModule.resolve()
-	end, function(p10) --[[ line: 119 ]]
+	end, function(p10)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p10)
 	end)

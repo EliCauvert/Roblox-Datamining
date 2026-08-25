@@ -4,9 +4,9 @@ local debug = require(parent.DataHydration.CreatorAgentChat).debug
 local captureService = game:GetService("CaptureService")
 local t = {}
 
-return function(p0) --[[ line: 20 | named "uploadCaptureAsync" ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), t (ref), debug (ref), captureService (ref)
-	local ok, status = pcall(function() --[[ line: 21 ]]
+	local ok, status = pcall(function()
 		return game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass")
 	end)
 	
@@ -20,9 +20,9 @@ return function(p0) --[[ line: 20 | named "uploadCaptureAsync" ]]
 	end
 	debug.log("info", "capture_upload starting")
 	
-	return promiseModule.new(function(p1, p2) --[[ line: 35 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: captureService (copy), p0 (ref), debug (copy), t (copy)
-		local ok, status, var4 = pcall(function() --[[ line: 36 ]]
+		local ok, status, var4 = pcall(function()
 			-- upvalues: captureService (copy), p0 (copy)
 			return captureService:StartUploadCaptureAsync(p0)
 		end)
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 20 | named "uploadCaptureAsync" ]]
 		end
 		for _ = 1, 30 do
 			task.wait(2)
-			local ok_1, status_1, var5 = pcall(function() --[[ line: 55 ]]
+			local ok_1, status_1, var5 = pcall(function()
 				-- upvalues: captureService (copy), var4 (ref)
 				return captureService:CheckUploadCaptureStatusAsync(var4)
 			end)

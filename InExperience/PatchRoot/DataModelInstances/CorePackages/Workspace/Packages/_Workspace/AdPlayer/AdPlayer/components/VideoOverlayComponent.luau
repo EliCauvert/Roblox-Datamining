@@ -20,7 +20,7 @@ local adDropdownButtonOpen = flagsModule.GetAdDropdownButtonOpen()
 local adPlayerExitButton = flagsModule.GetAdPlayerExitButton()
 local font = Font.new("rbxasset://fonts/families/Inconsolata.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-local function ExitButtonComponent(p0) --[[ line: 30 ]]
+local function ExitButtonComponent(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), image (ref), adPlayerExitButton (ref)
 	return reactModule.createElement(view, {
 		tag = "size-900 radius-circle",
@@ -34,12 +34,12 @@ local function ExitButtonComponent(p0) --[[ line: 30 ]]
 	})
 end
 
-local function TimerComponent(p1) --[[ line: 45 ]]
+local function TimerComponent(p1)
 	-- upvalues: reactModule (ref), text (ref), font (ref)
 	return reactModule.createElement(text, {
 		tag = "size-0-500 auto-x content-emphasis",
 		LayoutOrder = 2,
-		Text = p1.alpha:map(function(p2) --[[ line: 49 ]]
+		Text = p1.alpha:map(function(p2)
 			-- upvalues: p1 (ref)
 			local ceiled = math.ceil((1 - p2) * p1.totalDuration)
 			
@@ -49,24 +49,24 @@ local function TimerComponent(p1) --[[ line: 45 ]]
 	})
 end
 
-local function ScrimComponent(p3) --[[ line: 63 ]]
+local function ScrimComponent(p3)
 	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), view (ref)
 	local var21 = useTokens()
 	local var22, var23 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p3 (ref), var23 (ref), reactOtterModule (copy)
 		if p3.showScrim then
 			var23(reactOtterModule.instant(0))
 		else
 			local var25 = false
-			task.delay(2, function() --[[ line: 72 ]]
+			task.delay(2, function()
 				-- upvalues: var25 (write), var23 (copy), reactOtterModule (copy)
 				if not var25 then
 					var23(reactOtterModule.spring(1))
 				end
 			end)
 			
-			return function() --[[ line: 78 ]]
+			return function()
 				-- upvalues: var25 (write)
 				var25 = true
 			end
@@ -83,14 +83,14 @@ local function ScrimComponent(p3) --[[ line: 63 ]]
 	return reactModule.createElement(view, { tag = "size-full", ZIndex = 0, GroupTransparency = var22 }, cloned)
 end
 
-local function TopContainer(p4) --[[ line: 100 ]]
+local function TopContainer(p4)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-1500 anchor-top-center position-top-center padding-x-medium padding-y-medium"
 	}, p4.children)
 end
 
-local function BottomContainer(p5) --[[ line: 106 ]]
+local function BottomContainer(p5)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-700 anchor-bottom-center padding-x-medium",
@@ -98,7 +98,7 @@ local function BottomContainer(p5) --[[ line: 106 ]]
 	}, p5.children)
 end
 
-local function BottomContainerListContainer(p6) --[[ line: 113 ]]
+local function BottomContainerListContainer(p6)
 	-- upvalues: flagsModule (ref), reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		Position = if flagsModule.GetEnableLuaRewardTimerUI() then UDim2.fromOffset(0, p6.yOffset or 0) else nil,
@@ -106,20 +106,20 @@ local function BottomContainerListContainer(p6) --[[ line: 113 ]]
 	}, p6.children)
 end
 
-return reactModule.forwardRef(function(p7, p8) --[[ line: 142 ]]
+return reactModule.forwardRef(function(p7, p8)
 	-- upvalues: reactModule (ref), useTokens (ref), view (ref), stateLayerAffordance (ref), BottomContainer (ref), adDropdownMenu (ref), BottomContainerListContainer (ref), adLabelComponentModule (ref), adDropdownButtonOpen (ref), adDropdownButtonDefault (ref), flagsModule (ref), getRewardInComponentModule (ref), ScrimComponent (ref), linearProgressComponentModule (ref), TimerComponent (ref), TopContainer (ref), ExitButtonComponent (ref)
 	local var26, var27 = reactModule.useState(false)
 	local var28, var29 = reactModule.useState(false)
 	local var30 = useTokens()
 	
-	local function dismissModals() --[[ line: 147 ]]
+	local function dismissModals()
 		-- upvalues: p7 (ref), var27 (ref)
 		p7.setPaused(false)
 		p7.dismissModals()
 		var27(false)
 	end
 	
-	local function handleToggleAdsModal() --[[ line: 153 ]]
+	local function handleToggleAdsModal()
 		-- upvalues: p7 (ref), var27 (ref), var26 (ref)
 		p7.setPaused(false)
 		p7.dismissModals()
@@ -131,11 +131,11 @@ return reactModule.forwardRef(function(p7, p8) --[[ line: 142 ]]
 		end
 	end
 	
-	reactModule.useImperativeHandle(p8, function() --[[ line: 162 ]]
+	reactModule.useImperativeHandle(p8, function()
 		-- upvalues: dismissModals (ref)
 		return { dismissModals = dismissModals }
 	end)
-	reactModule.useEffect(function() --[[ line: 168 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var28 (ref), var29 (ref)
 		if var28 then
 			var29(false)
@@ -144,7 +144,7 @@ return reactModule.forwardRef(function(p7, p8) --[[ line: 142 ]]
 	
 	return reactModule.createElement(view, {
 		tag = "size-full",
-		onActivated = function() --[[ line: 176 ]]
+		onActivated = function()
 			-- upvalues: p7 (ref), var27 (ref), var29 (ref)
 			p7.setPaused(false)
 			p7.dismissModals()

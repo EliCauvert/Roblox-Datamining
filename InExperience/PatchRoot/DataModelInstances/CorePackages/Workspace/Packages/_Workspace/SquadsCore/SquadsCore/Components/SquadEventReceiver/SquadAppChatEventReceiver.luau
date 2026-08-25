@@ -8,12 +8,12 @@ local realtimeDeliveryModule = require(parent.RealtimeDelivery)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local fFlagSquadAppChatRTNFix = require(parent.SharedFlags).FFlagSquadAppChatRTNFix
 
-return function(p0) --[[ line: 20 | named "SquadAppChatEventReceiver" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), squadExternalContractContextModule (ref), fFlagSquadAppChatRTNFix (ref), useCurrentSquadParentChannelIdModule (ref), realtimeDeliveryModule (ref), constantsModule (ref)
 	local var6 = useDispatch()
 	local var7 = reactModule.useContext(squadExternalContractContextModule)
 	local var8 = if fFlagSquadAppChatRTNFix then useCurrentSquadParentChannelIdModule() else p0.conversationId
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p1) --[[ line: 28 ]]
+	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p1)
 		-- upvalues: fFlagSquadAppChatRTNFix (copy), p0 (ref), constantsModule (copy), var8 (ref), var7 (ref), var6 (ref)
 		local var9 = if fFlagSquadAppChatRTNFix then false else p0.conversationId and p0.conversationId == p1.ChannelId
 		

@@ -46,28 +46,28 @@ local t = {
 	createUnfilteredChatSubTitleText = "All members of this conversation will be invited, but some are not eligible to join.",
 	LayoutOrder = 0,
 	participants = {},
-	navigateBack = function() --[[ line: 84 ]] end,
-	onGroupNameEntryCellActivated = function(_) --[[ line: 99 ]]
+	navigateBack = function() end,
+	onGroupNameEntryCellActivated = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onGroupNameEntryCellActivated was not passed to ChatDetailsPage")
 	end,
-	onAddFriendsCellActivated = function(_) --[[ line: 102 ]]
+	onAddFriendsCellActivated = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onAddFriendsCellActivated was not passed to ChatDetailsPage")
 	end,
-	onLeaveGroupCellActivated = function(_) --[[ line: 105 ]]
+	onLeaveGroupCellActivated = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onLeaveGroupCellActivated was not passed to ChatDetailsPage")
 	end,
-	onParticipantCellActivated = function(_, _) --[[ line: 108 ]]
+	onParticipantCellActivated = function(_, _)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onParticipantCellActivated was not passed to ChatDetailsPage")
 	end,
-	onConversationTypeIconActivated = function(_) --[[ line: 111 ]]
+	onConversationTypeIconActivated = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onConversationTypeIconActivated was not passed to ChatDetailsPage")
 	end,
-	onCreateUnfilteredChatCellActivated = function(_) --[[ line: 114 ]]
+	onCreateUnfilteredChatCellActivated = function(_)
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("onCreateUnfilteredChatCellActivated was not passed to ChatDetailsPage")
 	end,
@@ -76,7 +76,7 @@ local t = {
 	})
 }
 
-function ChatDetailsPage(p0) --[[ line: 133 ]]
+function ChatDetailsPage(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), useTokens (ref), useIsAppChatVerticallyConstrainedModule (ref), loggerModule (ref), useCallback (ref), useIsChatUserMessagesEnabledModule (ref), reactModule (ref), appChatDetailsPageAutomaticCanvasSize (ref), sectionHeaderModule (ref), groupNameEntryCellModule (ref), images (ref), addFriendsEntryModule (ref), participantListModule (ref), leaveGroupCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationTypeCellModule (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), createUnfilteredChatCellModule (ref)
 	local var18 = cryoModule.Dictionary.join(t, p0)
 	local style = var18.style
@@ -94,22 +94,22 @@ function ChatDetailsPage(p0) --[[ line: 133 ]]
 		GroupNameEntryCell = { paddingBottom = style.Tokens.Size.Size_0 }
 	}
 	
-	local var22 = function() --[[ line: 156 ]]
+	local var22 = function()
 		-- upvalues: var18 (ref)
 		var18.onGroupNameEntryCellActivated(var18.conversation)
 	end
 	
-	local var23 = function() --[[ line: 160 ]]
+	local var23 = function()
 		-- upvalues: var18 (ref)
 		var18.onAddFriendsCellActivated(var18.conversation)
 	end
 	
-	local var24 = function() --[[ line: 164 ]]
+	local var24 = function()
 		-- upvalues: var18 (ref)
 		var18.onLeaveGroupCellActivated(var18.conversation)
 	end
 	
-	local var25 = function(p1, p2) --[[ line: 168 ]]
+	local var25 = function(p1, p2)
 		-- upvalues: loggerModule (copy), var18 (ref)
 		loggerModule:info("onParticipantCellActivated: {}", p1.id)
 		
@@ -119,11 +119,11 @@ function ChatDetailsPage(p0) --[[ line: 133 ]]
 		var18.onParticipantCellActivated(p1.id, p2)
 	end
 	
-	local var26 = useCallback(function() --[[ line: 177 ]]
+	local var26 = useCallback(function()
 		-- upvalues: var18 (ref)
 		var18.onCreateUnfilteredChatCellActivated(var18.conversation)
 	end, { var18.conversation })
-	local var27 = useCallback(function(_, p3, p4) --[[ line: 182 ]]
+	local var27 = useCallback(function(_, p3, p4)
 		-- upvalues: var18 (ref)
 		if not var18.wideMode and p3 == Enum.SwipeDirection.Right and p4 == 1 then
 			var18.navigateBack()

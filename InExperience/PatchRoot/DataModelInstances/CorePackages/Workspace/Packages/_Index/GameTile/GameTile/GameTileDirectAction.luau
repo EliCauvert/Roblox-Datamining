@@ -13,11 +13,11 @@ local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local fFlagLuaAppAdjustOverflowMenuVisual = sharedFlagsModule.FFlagLuaAppAdjustOverflowMenuVisual
 
-return function(p0) --[[ line: 30 | named "GameTileDirectAction" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), cryoModule (ref), useGameTileActionsModule (ref), view (ref), fFlagLuaAppAdjustOverflowMenuVisual (ref), iconButton (ref), iconSize (ref), buttonVariant (ref)
 	local var6 = useTokens()
 	local var7 = useGameTileActionsModule(cryoModule.Dictionary.join(p0, {
-		availableMenuItems = reactModule.useMemo(function() --[[ line: 32 ]]
+		availableMenuItems = reactModule.useMemo(function()
 			-- upvalues: p0 (ref)
 			return { [p0.actionId] = true }
 		end, { p0.actionId })
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 30 | named "GameTileDirectAction" ]]
 			isCircular = true,
 			testId = "game-tile-direct-action",
 			icon = iconOverride,
-			onActivated = function() --[[ line: 67 ]]
+			onActivated = function()
 				-- upvalues: onActivated (ref), id (ref)
 				onActivated(id)
 			end,

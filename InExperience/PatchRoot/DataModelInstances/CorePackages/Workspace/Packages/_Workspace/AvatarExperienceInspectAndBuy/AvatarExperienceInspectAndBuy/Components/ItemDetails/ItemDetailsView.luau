@@ -34,7 +34,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-local var21 = function(p0, p1) --[[ line: 70 ]]
+local var21 = function(p0, p1)
 	-- upvalues: viewTypeModule (ref)
 	return if p0 == viewTypeModule.WideLandscape then {
 		PaddingTop = UDim.new(0, p1.Padding.XSmall),
@@ -54,7 +54,7 @@ local var21 = function(p0, p1) --[[ line: 70 ]]
 	}
 end
 
-local var22 = function(p2, p3) --[[ line: 100 ]]
+local var22 = function(p2, p3)
 	-- upvalues: viewTypeModule (ref)
 	return if p2 == viewTypeModule.WideLandscape then {
 		left = UDim.new(0, p3.Padding.Large),
@@ -63,17 +63,17 @@ local var22 = function(p2, p3) --[[ line: 100 ]]
 	} else { bottom = UDim.new(0, p3.Padding.XXLarge) }
 end
 
-local var23 = function(p4, p5, p6) --[[ line: 120 ]]
+local var23 = function(p4, p5, p6)
 	-- upvalues: viewTypeModule (ref)
 	return if p4 == viewTypeModule.Compact then UDim2.new(1, 0, 1, (-p5.buyActionBarOffset) - p5.backButtonOffset - p6.Padding.Small) else UDim2.new(1, 0, 1, (-p5.backButtonOffset) - p6.Padding.Small)
 end
 
-local _ = function(p7) --[[ line: 133 ]]
+local _ = function(p7)
 	-- upvalues: viewTypeModule (ref)
 	return if p7 == viewTypeModule.Wide then 2.5 else 2
 end
 
-return function(p8) --[[ line: 140 | named "ItemDetailsView" ]]
+return function(p8)
 	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), useItemExperienceInfoModule (ref), getPriceStatusModule (ref), viewTypeModule (ref), useItemStatusLocalizationModule (ref), var21 (ref), isCollectible (ref), getQuantitySold (ref), getOriginalPrice (ref), isTradeable (ref), isInExperienceCreationPlayable (ref), reactModule (ref), foundationModule (ref), enums (ref), backButtonModule (ref), var23 (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), itemHeaderModule (ref), var22 (ref), subheaderLabelPriceModule (ref), getCreatorName (ref), formatNumberModule (ref), getPriceInRobux (ref), controlBarModule (ref), numberLocalization (ref), localizationService (ref), isItemAvailableForTryOnModule (ref), resellableInstancesLabelModule (ref), itemInfoLabelsModule (ref), bundleAssetsListModule (ref)
 	local var24 = useTokens()
 	local var25 = useConvertedItemDataModule(p8.item)
@@ -128,7 +128,7 @@ return function(p8) --[[ line: 140 | named "ItemDetailsView" ]]
 			rightLabel = reactModule.createElement(foundationModule.View, {
 				LayoutOrder = 2,
 				tag = "auto-xy",
-				onActivated = function() --[[ line: 197 ]]
+				onActivated = function()
 					-- upvalues: p8 (ref), var26 (ref)
 					if p8.openAttributionOverlay then
 						p8.openAttributionOverlay(var26)
@@ -231,7 +231,7 @@ return function(p8) --[[ line: 140 | named "ItemDetailsView" ]]
 						LayoutOrder = 1,
 						text = if var25 and var25.favoritesDetails and var25.favoritesDetails.numFavorites then numberLocalization.abbreviate(var25.favoritesDetails.numFavorites, localizationService.RobloxLocaleId) else nil,
 						iconVariant = if var25 and var25.favoritesDetails and var25.favoritesDetails.isFavorited then enums.IconVariant.Filled else enums.IconVariant.Regular,
-						onActivated = function() --[[ line: 325 ]]
+						onActivated = function()
 							-- upvalues: var25 (ref), p8 (ref)
 							if var25 and var25.favoritesDetails then
 								p8.onToggleFavorite(p8.item, var25.favoritesDetails.isFavorited or false)
@@ -242,7 +242,7 @@ return function(p8) --[[ line: 140 | named "ItemDetailsView" ]]
 						LayoutOrder = 2,
 						text = var31.tryOn,
 						iconVariant = if p8.tryOnState.isTryOnEnabled then enums.IconVariant.Filled else enums.IconVariant.Regular,
-						onActivated = function() --[[ line: 338 ]]
+						onActivated = function()
 							-- upvalues: var25 (ref), p8 (ref)
 							if var25 then
 								p8.onToggleTryOn({

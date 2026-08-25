@@ -18,7 +18,7 @@ return {
 		RBXUnmuteCommandModule, RBXVersionCommandModule, RBXEmoteCommandModule,
 		RBXTeamCommandModule, RBXWhisperCommand, RBXClearCommandModule
 	},
-	getVirtualLocalEnabledCommands = function() --[[ line: 33 ]]
+	getVirtualLocalEnabledCommands = function()
 		-- upvalues: expChatLocalUserCountEnabledEngineFeature (ref), expChatEnableVirtualLocalOnlineCommand (ref), RBXOnlineCommandModule (ref)
 		local t = {}
 		

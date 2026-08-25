@@ -6,8 +6,8 @@ local t_1 = {
 	Failed = "Failed"
 }
 setmetatable(t, {
-	__newindex = function(_, _, _) --[[ line: 11 ]] end,
-	__index = function(_, p0) --[[ line: 12 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p0)
 		-- upvalues: t_1 (ref)
 		assert(t_1[p0] ~= nil, "RetrievalStatus Enum has no value: " .. tostring(p0))
 		

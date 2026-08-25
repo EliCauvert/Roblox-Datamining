@@ -41,13 +41,13 @@ local getFFlagEnableAppChatInExperience = sharedFlagsModule.GetFFlagEnableAppCha
 local appChatFixChatLandingContainerKeyPropConflict = game:DefineFastFlag("AppChatFixChatLandingContainerKeyPropConflict", false)
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 
-local function LeftContainerTelemetryProviders(p0) --[[ line: 54 ]]
+local function LeftContainerTelemetryProviders(p0)
 	-- upvalues: useGetAndSetRefModule (ref), reactModule (ref), chatLandingTelemetryStateModule (ref), chatLandingTelemetryLayerModule (ref)
 	local var40, var41 = useGetAndSetRefModule({})
 	
 	return reactModule.createElement(chatLandingTelemetryStateModule.Provider, { value = { get = var40, set = var41 } }, {
 		reactModule.createElement(chatLandingTelemetryLayerModule.Provider, {
-			value = reactModule.useCallback(function() --[[ line: 57 ]]
+			value = reactModule.useCallback(function()
 				-- upvalues: var40 (ref)
 				local var42 = var40()
 				
@@ -61,10 +61,10 @@ local function LeftContainerTelemetryProviders(p0) --[[ line: 54 ]]
 	})
 end
 
-local function RightContainerTelemetryProviders(p1) --[[ line: 81 ]]
+local function RightContainerTelemetryProviders(p1)
 	-- upvalues: useGetAndSetRefModule (ref), reactModule (ref), chatDetailsTelemetryStateModule (ref), chatDetailsTelemetryLayerModule (ref), chatConversationTelemetryStateModule (ref), chatConversationTelemetryLayerModule (ref)
 	local var43, var44 = useGetAndSetRefModule({})
-	local var45 = reactModule.useCallback(function() --[[ line: 84 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: var43 (ref)
 		local var48 = var43()
 		
@@ -79,7 +79,7 @@ local function RightContainerTelemetryProviders(p1) --[[ line: 81 ]]
 	
 	return reactModule.createElement(chatConversationTelemetryStateModule.Provider, { value = { get = var43, set = var44 } }, {
 		reactModule.createElement(chatConversationTelemetryLayerModule.Provider, { value = var45 }, reactModule.createElement(chatDetailsTelemetryStateModule.Provider, { value = { get = var46, set = var47 } }, reactModule.createElement(chatDetailsTelemetryLayerModule.Provider, {
-			value = reactModule.useCallback(function() --[[ line: 96 ]]
+			value = reactModule.useCallback(function()
 				-- upvalues: var46 (ref)
 				local var49 = var46()
 				
@@ -97,29 +97,29 @@ local chatLandingScreenWithSwitchNavigator = roactModule.PureComponent:extend("C
 chatLandingScreenWithSwitchNavigator.router = conversationSwitchNavigatorModule.router
 chatLandingScreenWithSwitchNavigator.defaultProps = { navigation = nil }
 
-function chatLandingScreenWithSwitchNavigator.init(p2) --[[ line: 140 ]]
+function chatLandingScreenWithSwitchNavigator.init(p2)
 	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), loggerModule (ref), enumScreensModule (ref), getCurrentRouteModule (ref), fFlagEnablePartyQuickStartButton (ref), resetForSquadLobbyForWideModeModule (ref), roactNavigationModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), argCheckModule (ref), roactModule (ref), reactFocusNavigationModule (ref)
 	p2.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p2.props.navigation, "Party.LandingPage") else nil
 	
-	function p2.navigateToConversation(p3) --[[ line: 145 ]]
+	function p2.navigateToConversation(p3)
 		-- upvalues: loggerModule (copy), p2 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Conversation: {} from {screen}", p3)
 		p2.props.navigation.navigate(enumScreensModule.ChatConversation, { conversationId = p3 })
 	end
 	
-	function p2.navigateToCreateChat() --[[ line: 150 ]]
+	function p2.navigateToCreateChat()
 		-- upvalues: loggerModule (copy), p2 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To CreateNewChat from {screen}")
 		p2.props.navigation.navigate(enumScreensModule.CreateNewChat)
 	end
 	
-	function p2.navigateToToast(p4) --[[ line: 155 ]]
+	function p2.navigateToToast(p4)
 		-- upvalues: loggerModule (copy), p2 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Toast from {screen}")
 		p2.props.navigation.navigate(enumScreensModule.RoactChatToast, p4)
 	end
 	
-	function p2.navigateToNotifications() --[[ line: 160 ]]
+	function p2.navigateToNotifications()
 		-- upvalues: p2 (ref), enumScreensModule (copy), loggerModule (copy)
 		local notifications = p2.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.Notifications]
 		
@@ -132,7 +132,7 @@ function chatLandingScreenWithSwitchNavigator.init(p2) --[[ line: 140 ]]
 		loggerModule:warning("Notifications page was not set in navigateToLuaAppPages screenProps")
 	end
 	
-	function p2.navigateToPrivacy() --[[ line: 171 ]]
+	function p2.navigateToPrivacy()
 		-- upvalues: p2 (ref), enumScreensModule (copy), loggerModule (copy)
 		local privacySettings = p2.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.PrivacySettings]
 		
@@ -145,7 +145,7 @@ function chatLandingScreenWithSwitchNavigator.init(p2) --[[ line: 140 ]]
 		loggerModule:warning("PrivacySettings page was not set in navigateToLuaAppPages screenProps")
 	end
 	
-	function p2.navigateToSquadLobby(p5) --[[ line: 182 ]]
+	function p2.navigateToSquadLobby(p5)
 		-- upvalues: loggerModule (copy), getCurrentRouteModule (copy), p2 (ref), enumScreensModule (copy), fFlagEnablePartyQuickStartButton (copy), resetForSquadLobbyForWideModeModule (copy), roactNavigationModule (copy)
 		loggerModule:info("Navigate To SquadLobby from {screen}")
 		local var50 = getCurrentRouteModule(p2.props.navigation.state)
@@ -174,7 +174,7 @@ function chatLandingScreenWithSwitchNavigator.init(p2) --[[ line: 140 ]]
 		}))
 	end
 	
-	function p2.setScreenTopBar(p6) --[[ line: 219 ]]
+	function p2.setScreenTopBar(p6)
 		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p2 (ref), argCheckModule (copy)
 		if fFlagAppChatTopBarSignalsStoreModule then
 			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatLanding, p6)
@@ -191,7 +191,7 @@ function chatLandingScreenWithSwitchNavigator.init(p2) --[[ line: 140 ]]
 	p2.focusNavigationService = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-function chatLandingScreenWithSwitchNavigator.render(p7) --[[ line: 234 ]]
+function chatLandingScreenWithSwitchNavigator.render(p7)
 	-- upvalues: loggerModule (ref), argCheckModule (ref), withStyle (ref), roactModule (ref), LeftContainerTelemetryProviders (ref), topBarProviderModule (ref), enumScreensModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), chatLandingTopBarModule (ref), createChatTopBarModule (ref), cryoModule (ref), chatLandingScreenModule (ref), chatSearchBoxModule (ref), providerModule (ref), appChatFixChatLandingContainerKeyPropConflict (ref), chatLandingContainerModule (ref), RightContainerTelemetryProviders (ref), conversationSwitchNavigatorModule (ref), conversationStackNavigationFocusListenerModule (ref)
 	loggerModule:info("{screen} render")
 	local var52 = argCheckModule.isNotNil(p7.props.navigation, "navigation in ChatLandingScreenWithSwitchNavigator")
@@ -199,7 +199,7 @@ function chatLandingScreenWithSwitchNavigator.render(p7) --[[ line: 234 ]]
 	local showSearchRow = var52.getScreenProps("showSearchRow", true)
 	local topBarHeight = var52.getScreenProps("topBarHeight", 0)
 	
-	return withStyle(function(p8) --[[ line: 241 ]]
+	return withStyle(function(p8)
 		-- upvalues: roactModule (copy), LeftContainerTelemetryProviders (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), p7 (ref), fFlagAppChatTopBarConfigDrivenModule (copy), chatLandingTopBarModule (copy), var52 (ref), createChatTopBarModule (copy), cryoModule (copy), chatLandingScreenModule (copy), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), providerModule (copy), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (ref), RightContainerTelemetryProviders (copy), conversationSwitchNavigatorModule (copy), conversationStackNavigationFocusListenerModule (copy)
 		return roactModule.createElement(conversationStackNavigationFocusListenerModule, {
 			navigation = var52,
@@ -209,7 +209,7 @@ function chatLandingScreenWithSwitchNavigator.render(p7) --[[ line: 234 ]]
 			LeftContainerProviders = roactModule.createElement(LeftContainerTelemetryProviders, {}, {
 				LeftContainer = roactModule.createElement(topBarProviderModule, {
 					screenName = enumScreensModule.ChatLanding,
-					render = function(p9) --[[ line: 246 ]]
+					render = function(p9)
 						-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), p7 (copy), fFlagAppChatTopBarConfigDrivenModule (copy), chatLandingTopBarModule (copy), var52 (copy), createChatTopBarModule (copy), cryoModule (copy), chatLandingScreenModule (copy), showSearchRow (copy), chatSearchBoxModule (copy), topBarHeight (copy), providerModule (copy), p8 (ref), appChatFixChatLandingContainerKeyPropConflict (copy), chatLandingContainerModule (copy), key (copy)
 						local screenTopBar = p9.getScreenTopBar(enumScreensModule.ChatLanding)
 						argCheckModule.isType(screenTopBar, "table", "screenTopBar")
@@ -233,7 +233,7 @@ function chatLandingScreenWithSwitchNavigator.render(p7) --[[ line: 234 ]]
 							filterBox = if showSearchRow then roactModule.createElement(chatSearchBoxModule, {
 								height = topBarHeight,
 								initialText = screenTopBar.filterText,
-								onFilter = function(p10) --[[ line: 284 ]]
+								onFilter = function(p10)
 									-- upvalues: p9 (ref), enumScreensModule (copy)
 									p9.setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p10 })
 								end
@@ -308,7 +308,7 @@ function chatLandingScreenWithSwitchNavigator.render(p7) --[[ line: 234 ]]
 	end)
 end
 
-function chatLandingScreenWithSwitchNavigator.didMount(p11) --[[ line: 384 ]]
+function chatLandingScreenWithSwitchNavigator.didMount(p11)
 	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getFFlagEnableAppChatInExperience (ref), sharedFlagsModule (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), getFFlagIsSquadEnabled (ref), focusBehaviorsModule (ref)
 	loggerModule:info("{screen} mounted")
 	
@@ -354,7 +354,7 @@ function chatLandingScreenWithSwitchNavigator.didMount(p11) --[[ line: 384 ]]
 	end
 end
 
-function chatLandingScreenWithSwitchNavigator.willUnmount(p12) --[[ line: 446 ]]
+function chatLandingScreenWithSwitchNavigator.willUnmount(p12)
 	if p12.ixpSubscription then
 		p12.ixpSubscription.remove()
 	end

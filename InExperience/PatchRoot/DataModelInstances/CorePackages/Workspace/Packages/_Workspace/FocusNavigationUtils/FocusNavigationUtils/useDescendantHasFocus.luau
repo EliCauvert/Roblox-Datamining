@@ -1,14 +1,14 @@
 ﻿local guiService = game:GetService("GuiService")
 local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 
-local function _(p0) --[[ line: 6 | named "hasFocus" ]]
+local function _(p0)
 	-- upvalues: guiService (ref)
 	local selectedCoreObject = guiService.SelectedCoreObject
 	
 	return not (not p0 or not selectedCoreObject) and ((if selectedCoreObject ~= p0 then selectedCoreObject:IsDescendantOf(p0) else true) and selectedCoreObject:FindFirstAncestorOfClass("CoreGui") ~= nil)
 end
 
-return function(p1) --[[ line: 18 | named "useDescendantHasFocus" ]]
+return function(p1)
 	-- upvalues: guiService (ref), reactModule (ref)
 	local var2
 	local selectedCoreObject = guiService.SelectedCoreObject
@@ -24,7 +24,7 @@ return function(p1) --[[ line: 18 | named "useDescendantHasFocus" ]]
 		var2 = false
 	end
 	local var3, var4 = reactModule.useState(var2)
-	reactModule.useEffect(function() --[[ line: 22 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var4 (ref), guiService (copy)
 		local var5 = nil
 		local var6 = nil
@@ -44,7 +44,7 @@ return function(p1) --[[ line: 18 | named "useDescendantHasFocus" ]]
 				var7 = false
 			end
 			var4(var7)
-			var5 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 28 ]]
+			var5 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: var6 (write), p1 (copy), guiService (copy), var4 (copy)
 				if var6 then
 					var6:Disconnect()
@@ -65,7 +65,7 @@ return function(p1) --[[ line: 18 | named "useDescendantHasFocus" ]]
 				local selectedCoreObject_1 = guiService.SelectedCoreObject
 				
 				if var8 and selectedCoreObject_1 then
-					var6 = selectedCoreObject_1.AncestryChanged:Connect(function() --[[ line: 36 ]]
+					var6 = selectedCoreObject_1.AncestryChanged:Connect(function()
 						-- upvalues: selectedCoreObject_1 (ref), var6 (copy), var4 (copy), p1 (copy), guiService (copy)
 						if selectedCoreObject_1:FindFirstAncestorOfClass("CoreGui") == nil then
 							local var11
@@ -93,7 +93,7 @@ return function(p1) --[[ line: 18 | named "useDescendantHasFocus" ]]
 		else
 			var4(false)
 		end
-		return function() --[[ line: 50 ]]
+		return function()
 			-- upvalues: var5 (write), var6 (write)
 			if var5 then
 				var5:Disconnect()

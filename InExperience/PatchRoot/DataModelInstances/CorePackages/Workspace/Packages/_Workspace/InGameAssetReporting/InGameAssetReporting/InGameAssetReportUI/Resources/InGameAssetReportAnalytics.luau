@@ -11,7 +11,7 @@ local t = {
 	SubmittedAbuseType = game:DefineFastString("InGameAssetReportingSubmittedAbuseTypeStat", "SubmittedAbuseType")
 }
 
-function submitAnalytics(p0, p1) --[[ line: 17 ]]
+function submitAnalytics(p0, p1)
 	-- upvalues: eventIngest (ref), eventIngestService (ref), var3 (ref), cryoModule (ref), t (ref)
 	local var6 = eventIngest.new(eventIngestService)
 	local diag = var3.Diag

@@ -37,7 +37,7 @@ local t = {
 	isLayoutReady = if fFlagExpChatEnableTabsImpressionAnalyticsModule then true else nil
 }
 
-local function createUnreadDot(vectorA, vectorB) --[[ line: 72 ]]
+local function createUnreadDot(vectorA, vectorB)
 	-- upvalues: reactModule (ref), configModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -51,7 +51,7 @@ local function createUnreadDot(vectorA, vectorB) --[[ line: 72 ]]
 	})
 end
 
-return function(p0) --[[ line: 87 | named "ChannelTab" ]]
+return function(p0)
 	-- upvalues: dictionary (ref), t (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), useTabImpressionModule (ref), localizationModule (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), reactModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var10 (ref), getUnreadIndicatorLayoutModule (ref), var15 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
 	local var19 = dictionary.join(t, p0)
 	
@@ -117,25 +117,25 @@ return function(p0) --[[ line: 87 | named "ChannelTab" ]]
 		local var29, var30 = reactModule.useBinding(nil)
 		local var31, var32 = reactModule.useBinding(nil)
 		
-		var26 = function(p1) --[[ line: 164 ]]
+		var26 = function(p1)
 			-- upvalues: var32 (ref)
 			var32(p1.AbsoluteSize.X)
 		end
 		
-		reactModule.useEffect(function() --[[ line: 169 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var30 (ref), var19 (ref), channelName (ref), var10 (copy)
 			var30(nil)
 			
 			if var19.hasUnreadMessages and not var19.isTabCollapsed then
 				local var34 = false
-				task.spawn(function() --[[ line: 176 ]]
+				task.spawn(function()
 					-- upvalues: channelName (copy), var19 (copy), var10 (copy), var34 (write), var30 (copy)
 					local getTextBoundsParams = Instance.new("GetTextBoundsParams")
 					getTextBoundsParams.Text = channelName
 					getTextBoundsParams.Font = var19.channelTabsSettings.FontFace
 					getTextBoundsParams.Size = var19.channelTabsSettings.TextSize
 					getTextBoundsParams.Width = 1e999
-					local ok, status = pcall(function() --[[ line: 183 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var10 (copy), getTextBoundsParams (ref)
 						return var10:GetTextBoundsAsync(getTextBoundsParams)
 					end)
@@ -145,7 +145,7 @@ return function(p0) --[[ line: 87 | named "ChannelTab" ]]
 					end
 				end)
 				
-				return function() --[[ line: 191 ]]
+				return function()
 					-- upvalues: var34 (write)
 					var34 = true
 				end
@@ -159,15 +159,15 @@ return function(p0) --[[ line: 87 | named "ChannelTab" ]]
 		})
 		
 		if var25 then
-			local var33 = reactModule.joinBindings({ naturalTextWidth = var29, tabWidth = var31 }):map(function(p2) --[[ line: 208 ]]
+			local var33 = reactModule.joinBindings({ naturalTextWidth = var29, tabWidth = var31 }):map(function(p2)
 				-- upvalues: getUnreadIndicatorLayoutModule (copy), var19 (ref), var15 (copy)
 				return getUnreadIndicatorLayoutModule(var19.hasUnreadMessages, var19.isTabCollapsed, p2.tabWidth, p2.naturalTextWidth, var15, 8, 8)
 			end)
-			var27 = var33:map(function(p3) --[[ line: 219 ]]
+			var27 = var33:map(function(p3)
 				-- upvalues: var15 (copy)
 				return if p3 then UDim2.new(0, p3.textWidth, 1, 0) else UDim2.new(1, -(var15 * 2 + 8 + 8), 1, 0)
 			end)
-			var28 = var33:map(function(p4) --[[ line: 224 ]]
+			var28 = var33:map(function(p4)
 				-- upvalues: var15 (copy)
 				return if p4 then UDim2.fromOffset(p4.textLeft, 0) else UDim2.fromOffset(var15 + 8 + 8, 0)
 			end)
@@ -179,16 +179,16 @@ return function(p0) --[[ line: 87 | named "ChannelTab" ]]
 		BackgroundColor3 = if var19.isTabCollapsed then var22 else var19.channelTabsSettings.BackgroundColor3,
 		BorderSizePixel = 0,
 		SelectionImageObject = var24,
-		onStateChanged = function() --[[ line: 240 ]] end,
+		onStateChanged = function() end,
 		[reactModule.Change.AbsoluteSize] = var26,
 		[reactModule.Event.Activated] = var19.onTabSelected,
-		[reactModule.Event.MouseEnter] = function() --[[ line: 243 ]]
+		[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var19 (ref), var23 (ref)
 			if var19.isTabCollapsed then
 				var23(var19.channelTabsSettings.HoverBackgroundColor3)
 			end
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 248 ]]
+		[reactModule.Event.MouseLeave] = function()
 			-- upvalues: var19 (ref), var23 (ref)
 			if var19.isTabCollapsed then
 				var23(var19.channelTabsSettings.BackgroundColor3)

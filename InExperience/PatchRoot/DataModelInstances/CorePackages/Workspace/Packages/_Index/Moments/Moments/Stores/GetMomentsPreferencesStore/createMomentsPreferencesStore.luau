@@ -6,7 +6,7 @@ local getFFlagMomentsFeedStartExpandedModule = require(moments.Flags.GetFFlagMom
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 
-return function() --[[ line: 50 | named "createMomentsPreferencesStore" ]]
+return function()
 	-- upvalues: createSignal (ref), getFFlagMomentsFeedStartExpandedModule (ref), createComputed (ref), fFlagEnableArgus (ref)
 	local var3, var4 = createSignal(not getFFlagMomentsFeedStartExpandedModule())
 	local var5, var6 = createSignal(false)
@@ -15,32 +15,32 @@ return function() --[[ line: 50 | named "createMomentsPreferencesStore" ]]
 	
 	return {
 		getMinimized = var3,
-		getMediaScaleType = createComputed(function(p0) --[[ line: 61 ]]
+		getMediaScaleType = createComputed(function(p0)
 			-- upvalues: var3 (ref)
 			return if var3(p0) then Enum.ScaleType.Fit else Enum.ScaleType.Crop
 		end),
-		toggleFeedScaleType = function() --[[ line: 69 ]]
+		toggleFeedScaleType = function()
 			-- upvalues: fFlagEnableArgus (copy), var4 (ref), var3 (ref)
 			if fFlagEnableArgus then
 				var4(not var3(false))
 			end
 		end,
 		getFeedGlobalMute = var5,
-		toggleFeedGlobalMute = function() --[[ line: 75 ]]
+		toggleFeedGlobalMute = function()
 			-- upvalues: fFlagEnableArgus (copy), var6 (ref), var5 (ref)
 			if fFlagEnableArgus then
 				var6(not var5(false))
 			end
 		end,
 		getDebugModeEnabled = var7,
-		toggleFeedDebugMode = function() --[[ line: 81 ]]
+		toggleFeedDebugMode = function()
 			-- upvalues: fFlagEnableArgus (copy), var8 (ref), var7 (ref)
 			if fFlagEnableArgus then
 				var8(not var7(false))
 			end
 		end,
 		getIsTeleporting = var9,
-		setTeleporting = function(value) --[[ line: 65 ]]
+		setTeleporting = function(value)
 			-- upvalues: var10 (ref)
 			var10(value)
 		end

@@ -14,7 +14,7 @@ local useRobloxPlusUpsellBannerNewBadgeInteractionModule = require(robloxSubscri
 local robloxPlusUpsellBannerCTAModule = require(script.Parent.RobloxPlusUpsellBannerCTA)
 local boldBlackbirdUpsellBannerStroke = game:DefineFastFlag("BoldBlackbirdUpsellBannerStroke", false)
 
-return function(p0) --[[ line: 35 | named "BlackbirdUpsellBanner" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), fFlagSupportNewBadgeRobloxPlusModule (ref), useRobloxPlusUpsellBannerNewBadgeInteractionModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), robloxPlusUpsellBannerCTAModule (ref), boldBlackbirdUpsellBannerStroke (ref)
 	local var7 = useTokens()
 	local var8 = useLocalization({
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 35 | named "BlackbirdUpsellBanner" ]]
 			RichText = true,
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, 0, 0.5, 0),
-			Text = "<u>" .. reactModule.useCallback(function() --[[ line: 47 ]]
+			Text = "<u>" .. reactModule.useCallback(function()
 				-- upvalues: p0 (ref), var8 (ref)
 				return if p0.productInfo.isFreeTrial then var8.getFreeTrialText else var8.subscribe
 			end, {

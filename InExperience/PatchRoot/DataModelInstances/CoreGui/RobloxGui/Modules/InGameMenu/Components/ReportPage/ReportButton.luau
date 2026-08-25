@@ -21,20 +21,20 @@ local var8 = t.strictInterface({
 	dispatchOpenReportDialog = t.callback
 })
 
-return roactRodux.UNSTABLE_connect2(nil, function(p2) --[[ line: 78 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p2)
 	-- upvalues: openReportDialogModule (ref)
 	return {
-		dispatchOpenReportDialog = function(p3, p4) --[[ line: 80 ]]
+		dispatchOpenReportDialog = function(p3, p4)
 			-- upvalues: p2 (ref), openReportDialogModule (copy)
 			p2(openReportDialogModule(p3, p4))
 		end
 	}
-end)(function(p0) --[[ line: 37 | named "ReportButton" ]]
+end)(function(p0)
 	-- upvalues: globalConfigModule (ref), var8 (ref), var6 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), assetsModule (ref), var7 (ref), imageSetButton (ref)
 	if globalConfigModule.propValidation then
 		assert(var8(p0))
 	end
-	return var6(function(p1) --[[ line: 42 ]]
+	return var6(function(p1)
 		-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), assetsModule (copy), p0 (ref), var7 (copy), imageSetButton (copy)
 		return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
 			Image = assetsModule.Images.ReportIcon,
@@ -46,7 +46,7 @@ end)(function(p0) --[[ line: 37 | named "ReportButton" ]]
 				Selectable = false,
 				SelectionImageObject = p1(var7.RoundedRectNoInset)
 			},
-			onActivated = function() --[[ line: 57 ]]
+			onActivated = function()
 				-- upvalues: p0 (copy)
 				p0.dispatchOpenReportDialog(p0.userId, p0.userName)
 			end
@@ -58,7 +58,7 @@ end)(function(p0) --[[ line: 37 | named "ReportButton" ]]
 			BackgroundTransparency = 1,
 			LayoutOrder = p0.LayoutOrder,
 			SelectionImageObject = p1(var7.RoundedRectNoInset),
-			[roact.Event.Activated] = function() --[[ line: 70 ]]
+			[roact.Event.Activated] = function()
 				-- upvalues: p0 (copy)
 				p0.dispatchOpenReportDialog(p0.userId, p0.userName)
 			end

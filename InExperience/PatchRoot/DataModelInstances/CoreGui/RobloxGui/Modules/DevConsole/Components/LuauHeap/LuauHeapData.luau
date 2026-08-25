@@ -5,7 +5,7 @@ local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 13 ]]
+function t.new()
 	-- upvalues: t (ref), signalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -16,24 +16,24 @@ function t.new() --[[ line: 13 ]]
 	return t_1
 end
 
-function t:Signal() --[[ line: 23 ]]
+function t:Signal()
 	return self._serverStatsUpdated
 end
 
-function t:getCurrentData() --[[ line: 27 ]]
+function t:getCurrentData()
 	return self._serverStatsData
 end
 
-function t:isRunning() --[[ line: 31 ]]
+function t:isRunning()
 	return self._isRunning
 end
 
-function t:start() --[[ line: 35 ]]
+function t:start()
 	-- upvalues: getClientReplicatorModule (ref), httpService (ref)
 	local var5 = getClientReplicatorModule()
 	
 	if var5 and not self._statsListenerConnection then
-		self._statsListenerConnection = var5.StatsReceived:connect(function(p0) --[[ line: 38 ]]
+		self._statsListenerConnection = var5.StatsReceived:connect(function(p0)
 			-- upvalues: self (ref), httpService (copy)
 			if p0 and p0.ServerLuauHeapData and #p0.ServerLuauHeapData > 0 then
 				self._serverStatsData = httpService:JSONDecode(p0.ServerLuauHeapData)
@@ -45,7 +45,7 @@ function t:start() --[[ line: 35 ]]
 	end
 end
 
-function t:stop() --[[ line: 49 ]]
+function t:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

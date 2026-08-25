@@ -1,6 +1,6 @@
 ﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function(p0, p1, p2, p3, _) --[[ line: 32 ]]
+return function(p0, p1, p2, p3, _)
 	-- upvalues: reactModule (ref)
 	if not p2 then
 		p2 = p1
@@ -9,16 +9,16 @@ return function(p0, p1, p2, p3, _) --[[ line: 32 ]]
 	local var3, var4 = reactModule.useState(false)
 	local var5 = reactModule.useRef(p3 or 0)
 	local var6 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var4 (ref), var3 (ref), var1 (ref), p1 (ref), p0 (ref), var6 (ref), p2 (write)
 		local currentTime = tick()
 		local delayedThread = nil
 		local var9 = false
 		
-		local _ = function(p4, p5, p6) --[[ line: 53 ]]
+		local _ = function(p4, p5, p6)
 			-- upvalues: delayedThread (write), var9 (write), var5 (copy), var4 (copy), var3 (copy)
 			if p4 > 0 then
-				delayedThread = task.delay(p4, function() --[[ line: 55 ]]
+				delayedThread = task.delay(p4, function()
 					-- upvalues: var9 (copy), delayedThread (copy), var5 (copy), p6 (ref), var4 (copy), p5 (ref)
 					var9 = true
 					delayedThread = nil
@@ -39,7 +39,7 @@ return function(p0, p1, p2, p3, _) --[[ line: 32 ]]
 			
 			if var10 > 0 then
 				local var12 = true
-				delayedThread = task.delay(var10, function() --[[ line: 55 ]]
+				delayedThread = task.delay(var10, function()
 					-- upvalues: var9 (write), delayedThread (write), var5 (copy), var11 (ref), var4 (copy), var12 (ref)
 					var9 = true
 					delayedThread = nil
@@ -56,7 +56,7 @@ return function(p0, p1, p2, p3, _) --[[ line: 32 ]]
 			
 			if var13 > 0 then
 				local var15 = false
-				delayedThread = task.delay(var13, function() --[[ line: 55 ]]
+				delayedThread = task.delay(var13, function()
 					-- upvalues: var9 (write), delayedThread (write), var5 (copy), var14 (ref), var4 (copy), var15 (ref)
 					var9 = true
 					delayedThread = nil
@@ -68,7 +68,7 @@ return function(p0, p1, p2, p3, _) --[[ line: 32 ]]
 				var4(false)
 			end
 		end
-		return function() --[[ line: 74 ]]
+		return function()
 			-- upvalues: var9 (write), delayedThread (write), var6 (copy), currentTime (ref), var1 (ref), var5 (copy), p2 (copy)
 			if not var9 then
 				if delayedThread then
@@ -93,7 +93,7 @@ return function(p0, p1, p2, p3, _) --[[ line: 32 ]]
 		p2
 	})
 	
-	return var3, reactModule.useCallback(function(p7, p8) --[[ line: 91 ]]
+	return var3, reactModule.useCallback(function(p7, p8)
 		-- upvalues: var6 (ref), var5 (ref), p2 (write), var2 (ref)
 		var6.current = p8
 		

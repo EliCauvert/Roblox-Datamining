@@ -12,7 +12,7 @@ emptyConversationList.defaultProps = {
 	privacyButtonKey = "Feature.Chat.Label.PrivacySettings",
 	privacyButtonEnabled = true,
 	renameFriendsToConnections = true,
-	navigateToPrivacy = function() --[[ line: 19 ]] end,
+	navigateToPrivacy = function() end,
 	makeFriendsToChatKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.MakeFriendsToParty" else "Feature.Chat.Message.MakeFriendsToChat",
 	turnOnChatKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.TurnOnParty" else "Feature.Chat.Message.TurnOnChat"
 }
@@ -21,13 +21,13 @@ local t = {
 	turnOnChatKey = if getFFlagIsSquadEnabled() then if fFlagConnectionsToFriendsRename then "Feature.Chat.Message.EnableParty.FriendsRename" else "Feature.Chat.Message.EnableParty" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Message.EnableChat.FriendsRename" else "Feature.Chat.Message.EnableChat"
 }
 
-function emptyConversationList.didMount(p0) --[[ line: 45 ]]
+function emptyConversationList.didMount(p0)
 	if p0.props.fireRenderEvent then
 		p0.props.fireRenderEvent()
 	end
 end
 
-function emptyConversationList.render(p1) --[[ line: 51 ]]
+function emptyConversationList.render(p1)
 	-- upvalues: t (ref), withLocalization (ref), withStyle (ref), roactModule (ref), chatDisabledIndicatorModule (ref)
 	local makeFriendsToChatKey = p1.props.makeFriendsToChatKey
 	local turnOnChatKey = p1.props.turnOnChatKey
@@ -39,9 +39,9 @@ function emptyConversationList.render(p1) --[[ line: 51 ]]
 	return withLocalization({
 		privacyButtonText = p1.props.privacyButtonKey,
 		chatDisabledText = if p1.props.chatEnabled then makeFriendsToChatKey else turnOnChatKey
-	})(function(p2) --[[ line: 61 ]]
+	})(function(p2)
 		-- upvalues: withStyle (copy), roactModule (copy), chatDisabledIndicatorModule (copy), p1 (ref)
-		return withStyle(function(p3) --[[ line: 62 ]]
+		return withStyle(function(p3)
 			-- upvalues: roactModule (copy), chatDisabledIndicatorModule (copy), p1 (copy), p2 (ref)
 			return roactModule.createElement("Frame", {
 				BorderSizePixel = 0,
@@ -61,7 +61,7 @@ function emptyConversationList.render(p1) --[[ line: 51 ]]
 	end)
 end
 
-return universalAppPolicy.connect(function(p4) --[[ line: 82 ]]
+return universalAppPolicy.connect(function(p4)
 	return {
 		renameFriendsToConnections = p4.getRenameFriendsToConnections()
 	}

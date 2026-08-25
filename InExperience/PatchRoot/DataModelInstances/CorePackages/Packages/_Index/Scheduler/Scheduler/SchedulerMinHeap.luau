@@ -3,18 +3,18 @@ local var1 = nil
 local var2 = nil
 local var3 = nil
 
-function t.push(p0, p1) --[[ line: 22 ]]
+function t.push(p0, p1)
 	-- upvalues: var2 (write)
 	local var4 = #p0 + 1
 	p0[var4] = p1
 	var2(p0, p1, var4)
 end
 
-function t.peek(p2) --[[ line: 29 ]]
+function t.peek(p2)
 	return p2[1]
 end
 
-function t.pop(p3) --[[ line: 33 ]]
+function t.pop(p3)
 	-- upvalues: var3 (write)
 	local var5 = p3[1]
 	
@@ -31,7 +31,7 @@ function t.pop(p3) --[[ line: 33 ]]
 	return var5
 end
 
-var2 = function(p4, p5, p6) --[[ line: 49 ]]
+var2 = function(p4, p5, p6)
 	-- upvalues: var1 (write)
 	local floored, var8
 	while true do
@@ -46,7 +46,7 @@ var2 = function(p4, p5, p6) --[[ line: 49 ]]
 	end
 end
 
-var3 = function(p7, p8, p9) --[[ line: 65 ]]
+var3 = function(p7, p8, p9)
 	-- upvalues: var1 (write)
 	local var12, var13
 	local p7Count = #p7
@@ -75,7 +75,7 @@ var3 = function(p7, p8, p9) --[[ line: 65 ]]
 	end
 end
 
-var1 = function(p10, p11) --[[ line: 95 ]]
+var1 = function(p10, p11)
 	local var14 = p10.sortIndex - p11.sortIndex
 	
 	return if var14 == 0 then p10.id - p11.id else var14

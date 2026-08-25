@@ -9,7 +9,7 @@ local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.Sdu
 local sduiClientBindingParsersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
 local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
 
-local function buildStringProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 21 ]]
+local function buildStringProp(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: fFlagSduiStringPropToString (ref), sduiClientBindingParsersModule (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
 	p6 = p6 or (if fFlagSduiStringPropToString then sduiClientBindingParsersModule.parseToString else nil)
 	

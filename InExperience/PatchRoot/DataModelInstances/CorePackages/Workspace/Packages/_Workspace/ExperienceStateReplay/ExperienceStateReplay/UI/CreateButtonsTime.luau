@@ -7,9 +7,9 @@ local t = {
 	clickColor = Color3.fromRGB(150, 150, 150)
 }
 
-function t.createButtonsTime(currentTimeLabel) --[[ line: 12 ]]
+function t.createButtonsTime(currentTimeLabel)
 	-- upvalues: t (ref), buttonAssetsModule (ref), secondsToTimeStrModule (ref)
-	function currentTimeLabel.createControlBarButton(p1, p2) --[[ line: 14 ]]
+	function currentTimeLabel.createControlBarButton(p1, p2)
 		-- upvalues: currentTimeLabel (ref), t (copy)
 		local controlBarButton = Instance.new("ImageButton")
 		controlBarButton.Name = "ControlBarButton"
@@ -21,25 +21,25 @@ function t.createButtonsTime(currentTimeLabel) --[[ line: 12 ]]
 		controlBarButton.Size = UDim2.new(0.1, 0, 0.9, 0)
 		controlBarButton.SizeConstraint = Enum.SizeConstraint.RelativeXY
 		controlBarButton:SetAttribute("useHoverColor", true)
-		controlBarButton.MouseEnter:Connect(function() --[[ line: 26 ]]
+		controlBarButton.MouseEnter:Connect(function()
 			-- upvalues: controlBarButton (ref), t (copy)
 			if controlBarButton:GetAttribute("useHoverColor") then
 				controlBarButton.ImageColor3 = t.hoverColor
 			end
 		end)
-		controlBarButton.MouseLeave:Connect(function() --[[ line: 31 ]]
+		controlBarButton.MouseLeave:Connect(function()
 			-- upvalues: controlBarButton (ref), t (copy)
 			if controlBarButton:GetAttribute("useHoverColor") then
 				controlBarButton.ImageColor3 = t.regularColor
 			end
 		end)
-		controlBarButton.MouseButton1Down:Connect(function() --[[ line: 36 ]]
+		controlBarButton.MouseButton1Down:Connect(function()
 			-- upvalues: controlBarButton (ref), t (copy)
 			controlBarButton.ImageColor3 = t.clickColor
 		end)
 		
 		if p2 then
-			controlBarButton.MouseButton1Up:Connect(function() --[[ line: 40 ]]
+			controlBarButton.MouseButton1Up:Connect(function()
 				-- upvalues: controlBarButton (ref), t (copy)
 				controlBarButton.ImageColor3 = t.hoverColor
 			end)

@@ -11,7 +11,7 @@ local list = {
 	}
 }
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: list (ref), privacyType (ref)
 	for i, v in list do
 		if table.find(p0, v.audience) then

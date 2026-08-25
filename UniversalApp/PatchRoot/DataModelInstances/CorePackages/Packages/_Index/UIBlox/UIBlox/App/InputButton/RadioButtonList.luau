@@ -30,7 +30,7 @@ radioButtonList.validateProps = tModule.strictInterface({
 })
 radioButtonList.defaultProps = { isRoactGamepadEnabled = true }
 
-function radioButtonList.init(p0) --[[ line: 57 ]]
+function radioButtonList.init(p0)
 	-- upvalues: roactGamepadModule (ref)
 	p0.state = { currentValue = p0.props.initialValue or 0 }
 	local t = {}
@@ -40,7 +40,7 @@ function radioButtonList.init(p0) --[[ line: 57 ]]
 	end
 	p0.state.disabledIndices = t
 	
-	function p0.doLogic(p1) --[[ line: 68 ]]
+	function p0.doLogic(p1)
 		-- upvalues: p0 (ref)
 		if p0.state.disabledIndices[p1] then
 			return
@@ -52,7 +52,7 @@ function radioButtonList.init(p0) --[[ line: 57 ]]
 	p0.gamepadRefs = p0.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
 end
 
-function radioButtonList.renderWithProviders(p2, _, p3) --[[ line: 81 ]]
+function radioButtonList.renderWithProviders(p2, _, p3)
 	-- upvalues: roactModule (ref), roactGamepadModule (ref), radioButtonModule (ref)
 	local t = {
 		layout = roactModule.createElement("UIListLayout", {
@@ -89,7 +89,7 @@ function radioButtonList.renderWithProviders(p2, _, p3) --[[ line: 81 ]]
 		t_1.NextSelectionDown = if i < #p2.props.radioButtons then p2.gamepadRefs[i + 1] else nil
 		t_1.SelectionImageObject = p3
 		t_1.inputBindings = if p2.props.isRoactGamepadEnabled then {
-			OnActivatedButton = roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ line: 112 ]]
+			OnActivatedButton = roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
 				-- upvalues: p2 (ref), i (ref)
 				p2.doLogic(i)
 			end)
@@ -109,11 +109,11 @@ function radioButtonList.renderWithProviders(p2, _, p3) --[[ line: 81 ]]
 	}, t)
 end
 
-function radioButtonList.render(p4) --[[ line: 134 ]]
+function radioButtonList.render(p4)
 	return p4:renderWithProviders(nil, p4.props.cursor)
 end
 
-return roactModule.forwardRef(function(p5, p6) --[[ line: 138 ]]
+return roactModule.forwardRef(function(p5, p6)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), radioButtonList (ref), cryoModule (ref)
 	return roactModule.createElement(radioButtonList, cryoModule.Dictionary.join(p5, {
 		forwardRef = p6,

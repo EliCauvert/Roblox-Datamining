@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local systemBanner = require(parent.Foundation).SystemBanner
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "SduiSystemBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), systemBanner (ref)
 	return reactModule.createElement(systemBanner, {
 		severity = p0.severity,

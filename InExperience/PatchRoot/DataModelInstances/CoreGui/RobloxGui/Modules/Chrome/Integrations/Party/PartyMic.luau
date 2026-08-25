@@ -15,11 +15,11 @@ local var8 = nil
 local var9 = false
 local var10 = signal.new()
 local var11 = signal.new()
-var10:connect(function(p0) --[[ line: 27 ]]
+var10:connect(function(p0)
 	-- upvalues: var8 (write)
 	var8 = p0
 end)
-var11:connect(function(p1) --[[ line: 31 ]]
+var11:connect(function(p1)
 	-- upvalues: var9 (write)
 	var9 = p1
 end)
@@ -28,11 +28,11 @@ return if getFFlagEnableCrossExpVoice() then serviceModule:register({
 	id = constantsModule.TOGGLE_MIC_INTEGRATION_ID,
 	label = if require(chrome.Flags.FFlagChangeToggleMicText) then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
 	sideSheetPlacement = sideSheetPlacement.Unibar,
-	isActivated = mappedSignal.new(var10, function() --[[ line: 35 ]]
+	isActivated = mappedSignal.new(var10, function()
 		-- upvalues: var9 (write), var8 (write)
 		return var9 and var8 == false
 	end),
-	activated = function() --[[ line: 49 ]]
+	activated = function()
 		-- upvalues: playersService (ref), var9 (write), var8 (write), default (ref)
 		local userId = playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or -1))
 		
@@ -46,7 +46,7 @@ return if getFFlagEnableCrossExpVoice() then serviceModule:register({
 		end
 	end,
 	components = {
-		Icon = function() --[[ line: 60 ]]
+		Icon = function()
 			-- upvalues: partyMicIconModule (ref), var10 (ref), var11 (ref)
 			return partyMicIconModule({
 				isLocalPlayerMutedSignal = var10,

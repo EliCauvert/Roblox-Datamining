@@ -8,7 +8,7 @@ local expChatEnableGlobalOnlineCommand = game:DefineFastFlag("ExpChatEnableGloba
 local _ = require(script.types)
 
 return {
-	getGlobalEnabledCommands = function() --[[ line: 13 ]]
+	getGlobalEnabledCommands = function()
 		-- upvalues: globalClearCommandModule (ref), globalHelpCommandModule (ref), globalMuteCommandModule (ref), globalUnmuteCommandModule (ref), expChatGlobalUserCountEnabledEngineFeature (ref), expChatEnableGlobalOnlineCommand (ref), globalOnlineCommandModule (ref)
 		local t = {}
 		table.insert(t, globalClearCommandModule)

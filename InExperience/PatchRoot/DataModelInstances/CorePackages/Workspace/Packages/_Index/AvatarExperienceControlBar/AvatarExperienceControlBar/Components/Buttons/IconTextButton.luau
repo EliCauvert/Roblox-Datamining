@@ -9,7 +9,7 @@ local isBuilderIcon = foundationModule.Utility.isBuilderIcon
 local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 29 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), useLocalization (ref), fFlagAXMigrateBuilderIcons (ref), isBuilderIcon (ref), reactModule (ref), foundationModule (ref), fFlagAXResetAvatarButton (ref)
 	local var5 = useSemanticTokensModule()
 	local var6, var7 = useHoverBindingModule()
@@ -26,7 +26,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 29 ]]
 		ref = p1,
 		onStateChanged = var7,
 		GroupTransparency = if fFlagAXResetAvatarButton then if p0.disabled then var5.contentDisabledTransparency else var5.contentForegroundStyle.Transparency else nil,
-		backgroundStyle = var6:map(function(p2) --[[ line: 55 ]]
+		backgroundStyle = var6:map(function(p2)
 			-- upvalues: var5 (ref)
 			return {
 				Color3 = var5.hoverIconBackgroundStyle.Color3,

@@ -10,20 +10,20 @@ local t = {
 	INLINE_CODE = { char = "`", length = 1 }
 }
 local t_1 = {
-	getDelimiterInfo = function(p0) --[[ line: 63 ]]
+	getDelimiterInfo = function(p0)
 		-- upvalues: t (ref)
 		return t[p0]
 	end,
-	causesLineBreak = function(p1) --[[ line: 67 ]]
+	causesLineBreak = function(p1)
 		return if p1.name == "TEXT" then string.find(p1.text, "\n", 0, true) ~= nil else true
 	end,
-	getTokenNameFromCharAndLength = function(p2, p3) --[[ line: 71 ]]
+	getTokenNameFromCharAndLength = function(p2, p3)
 		return if p2 == "`" then "INLINE_CODE" elseif p3 == 2 then if p2 == "*" then "BOLD_2" else "ITALIC_2" elseif p2 == "*" then "BOLD" elseif p2 == "~" then "STRIKE" else "ITALIC"
 	end,
-	canDelimitersMatch = function(p4, p5) --[[ line: 81 ]]
+	canDelimitersMatch = function(p4, p5)
 		return if p4.runLength == 0 or p5.runLength == 0 then false elseif if p4.canOpen then p4.canClose else p5.canOpen and p5.canClose then p4.runLength % 3 == 0 and p5.runLength % 3 == 0 or (p4.runLength + p5.runLength) % 3 ~= 0 else true
 	end,
-	addDelimiterMatch = function(p6, p7) --[[ line: 108 ]]
+	addDelimiterMatch = function(p6, p7)
 		local matches = p6.matches or {}
 		p6.matches = matches
 		local var5 = 1
@@ -42,37 +42,37 @@ local t_1 = {
 		end
 		table.insert(matches, var7, p7)
 	end,
-	isWhitespace = function(p8) --[[ line: 134 ]]
+	isWhitespace = function(p8)
 		-- upvalues: constantsModule (ref)
 		return if not (not p8 or #p8 == 0) then if p8:match(constantsModule.ASCII.WHITESPACE_PATTERN) == nil then constantsModule.UNICODE.WHITESPACE[utf8.codepoint(p8)] else true else true
 	end,
-	isPunctuation = function(p9) --[[ line: 156 ]]
+	isPunctuation = function(p9)
 		-- upvalues: constantsModule (ref)
 		return not (not p9 or #p9 == 0) and (if p9:match(constantsModule.ASCII.PUNCTUATION_PATTERN) then true else constantsModule.UNICODE.PUNCTUATION[utf8.codepoint(p9)])
 	end
 }
 
-function t_1.isLeftFlanking(p10, p11) --[[ line: 177 ]]
+function t_1.isLeftFlanking(p10, p11)
 	-- upvalues: t_1 (ref)
 	return if t_1.isWhitespace(p11) then false elseif t_1.isPunctuation(p11) then t_1.isWhitespace(p10) or t_1.isPunctuation(p10) else true
 end
 
-function t_1.isRightFlanking(p12, p13) --[[ line: 199 ]]
+function t_1.isRightFlanking(p12, p13)
 	-- upvalues: t_1 (ref)
 	return if t_1.isWhitespace(p12) then false elseif t_1.isPunctuation(p12) then t_1.isWhitespace(p13) or t_1.isPunctuation(p13) else true
 end
 
-function t_1.canOpenEmphasis(p14) --[[ line: 221 ]]
+function t_1.canOpenEmphasis(p14)
 	-- upvalues: t_1 (ref)
 	return p14.char == "`" or (if t_1.isLeftFlanking(p14.prevChar, p14.nextChar) then if p14.char == "_" then not t_1.isRightFlanking(p14.prevChar, p14.nextChar) or t_1.isPunctuation(p14.prevChar) else true else false)
 end
 
-function t_1.canCloseEmphasis(p15) --[[ line: 246 ]]
+function t_1.canCloseEmphasis(p15)
 	-- upvalues: t_1 (ref)
 	return p15.char == "`" or (if t_1.isRightFlanking(p15.prevChar, p15.nextChar) then if p15.char == "_" then not t_1.isLeftFlanking(p15.prevChar, p15.nextChar) or t_1.isPunctuation(p15.nextChar) else true else false)
 end
 
-function t_1.getCharacterContext(p16, p17, p18) --[[ line: 269 ]]
+function t_1.getCharacterContext(p16, p17, p18)
 	if #p16 == 0 then
 		return {}
 	end
@@ -98,7 +98,7 @@ function t_1.getCharacterContext(p16, p17, p18) --[[ line: 269 ]]
 	return { prevChar = char, nextChar = char_1 }
 end
 
-function t_1.isInsideInlineCode(p19, p20, p21) --[[ line: 303 ]]
+function t_1.isInsideInlineCode(p19, p20, p21)
 	local t = {}
 	local t_1 = nil
 	

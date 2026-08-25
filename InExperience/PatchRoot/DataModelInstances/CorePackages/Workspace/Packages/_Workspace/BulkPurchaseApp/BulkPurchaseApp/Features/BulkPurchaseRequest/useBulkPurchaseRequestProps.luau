@@ -32,7 +32,7 @@ local fixBuyRobuxForAndroid = game:DefineFastFlag("FixBuyRobuxForAndroid", false
 local fixBulkPurchaseStarterGuiRename = game:DefineFastFlag("FixBulkPurchaseStarterGuiRename", false)
 local _ = require(script.Parent.BulkPurchaseRequest)
 
-return function() --[[ line: 43 | named "useBulkPurchaseRequestProps" ]]
+return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), getRobuxStoreUrlModule (ref), browserService (ref), fFlagFixVP8143Module (ref), reactModule (ref), runService (ref), getGuiObjectIsObscuredModule (ref), fixBulkPurchaseStarterGuiRename (ref), starterGuiService (ref)
 	local var28 = useDispatch()
 	local var29 = useSelector(selectBulkPurchaseRequestStateModule)
@@ -43,15 +43,15 @@ return function() --[[ line: 43 | named "useBulkPurchaseRequestProps" ]]
 	local totalCost = var29.totalCost
 	local balance = var29.balance
 	
-	local var34 = function() --[[ line: 53 ]]
+	local var34 = function()
 		-- upvalues: marketplaceService (copy), var30 (ref), var28 (ref), bulkPurchaseEndedModule (copy)
 		marketplaceService:signalPromptBulkPurchaseFinished(2, var30)
 		var28(bulkPurchaseEndedModule())
 	end
 	
-	local var35 = function() --[[ line: 60 ]]
+	local var35 = function()
 		-- upvalues: marketplaceService (copy), var31 (ref), var32 (ref), isErrorReasonContainsEconomicRestrictions (copy), handleEconomicRestrictionErrorModule (copy), var28 (ref), getItemResultsFromResponseModule (copy), var33 (ref), getCommonItemStatusModule (copy), bulkPurchaseSucceededModule (copy), bulkPurchasePromptStateEnumModule (copy), bulkPurchaseFailedModule (copy), itemStatusToErrorCodeMapModule (copy), errorCodeEnumModule (copy)
-		local ok, status = pcall(function() --[[ line: 61 ]]
+		local ok, status = pcall(function()
 			-- upvalues: marketplaceService (copy), var31 (copy), var32 (copy)
 			return marketplaceService:PerformBulkPurchase(var31, var32)
 		end)
@@ -85,7 +85,7 @@ return function() --[[ line: 43 | named "useBulkPurchaseRequestProps" ]]
 		var28(bulkPurchaseFailedModule(errorCodeEnumModule.Generic))
 	end
 	
-	local var36 = function() --[[ line: 98 ]]
+	local var36 = function()
 		-- upvalues: getPaymentPlatformModule (copy), paymentPlatformEnumModule (copy), fixBuyRobuxForAndroid (copy), httpService (copy), getRobuxStoreUrlModule (copy), browserService (copy), var28 (ref), bulkPurchaseEndedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
 		local var44 = getPaymentPlatformModule()
 		
@@ -110,16 +110,16 @@ return function() --[[ line: 43 | named "useBulkPurchaseRequestProps" ]]
 		local var39, var40 = reactModule.useState(true)
 		var38 = var39
 		local var41 = var40
-		reactModule.useEffect(function() --[[ line: 129 ]]
+		reactModule.useEffect(function()
 			-- upvalues: runService (copy), var37 (write), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var41 (write)
-			local heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 130 ]]
+			local heartbeatConnection = runService.Heartbeat:Connect(function()
 				-- upvalues: var37 (copy), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var41 (copy)
 				if var37.current and typeof(var37.current) == "Instance" and var37.current:IsA("GuiObject") then
 					var41(getGuiObjectIsObscuredModule(var37.current) or (if fixBulkPurchaseStarterGuiRename then starterGuiService:GetCore("DevConsoleVisible") else game.StarterGui:GetCore("DevConsoleVisible")))
 				end
 			end)
 			
-			return function() --[[ line: 143 ]]
+			return function()
 				-- upvalues: heartbeatConnection (ref)
 				heartbeatConnection:Disconnect()
 			end

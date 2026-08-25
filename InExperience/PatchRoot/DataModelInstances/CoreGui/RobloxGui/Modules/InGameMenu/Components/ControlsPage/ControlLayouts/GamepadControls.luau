@@ -15,9 +15,9 @@ local image = require(corePackagesService.Packages.Foundation).Image
 local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local var9 = #controlsModule.gamepadLabels.right * 43 + 62
 
-local function verticalControlsList(p0) --[[ line: 47 ]]
+local function verticalControlsList(p0)
 	-- upvalues: withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
-	return withLocalizationModule(p0.controls)(function(p1) --[[ line: 48 ]]
+	return withLocalizationModule(p0.controls)(function(p1)
 		-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref)
 		local t = {
 			ListLayout = roact.createElement("UIListLayout", {
@@ -44,7 +44,7 @@ local function verticalControlsList(p0) --[[ line: 47 ]]
 	end)
 end
 
-return function(p2) --[[ line: 76 | named "GamepadControls" ]]
+return function(p2)
 	-- upvalues: userInputService (ref), roact (ref), controlLayoutContainerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), verticalControlsList (ref), controlsModule (ref), var9 (ref)
 	local platform = userInputService:GetPlatform()
 	

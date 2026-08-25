@@ -11,17 +11,17 @@ local iconSize = foundationModule.Enums.IconSize
 local text = foundationModule.Text
 local view = foundationModule.View
 
-local _ = function(p0) --[[ line: 23 ]]
+local _ = function(p0)
 	return p0 + (1 - p0) * 0.5
 end
 
-return reactModule.memo(function(p1) --[[ line: 37 | named "ShortcutButton" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), view (ref), icon (ref), text (ref)
 	local var3 = useTokens()
 	local var4 = useLocalization({ label = p1.label })
 	local var5 = signalsReactModule.useSignalState(p1.getIsEnabled)
 	local var6 = signalsReactModule.useSignalState(p1.getShortcutIcon)
-	local var7 = reactModule.useCallback(function() --[[ line: 48 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref)
 		p1.getOnActivated()()
 	end, { p1.getOnActivated })

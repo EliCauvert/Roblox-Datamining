@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 | named "getFirstFocusableDescendant" ]]
+﻿return function(p0)
 	for i, v in p0:GetDescendants() do
 		if v:IsA("GuiObject") and v.Selectable and v.Visible then
 			return v

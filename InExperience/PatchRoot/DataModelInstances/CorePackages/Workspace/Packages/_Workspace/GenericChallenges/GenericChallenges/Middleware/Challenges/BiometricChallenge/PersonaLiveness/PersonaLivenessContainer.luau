@@ -29,17 +29,17 @@ local livenessWithCallbackPollMaxRetries = game:DefineFastInt("LivenessWithCallb
 local livenessBackgroundOnlyPollDelay = game:DefineFastInt("LivenessBackgroundOnlyPollDelay", 6)
 local livenessBackgroundOnlyPollMaxRetries = game:DefineFastInt("LivenessBackgroundOnlyPollMaxRetries", 30)
 
-return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useAppPolicy (ref), useRoactService (ref), appLogging (ref), reactModule (ref), getFFlagEnhancedPersonaLivenessEvents (ref), biometricChallengeEventModule (ref), challengeEventConstantsModule (ref), biometricTypeEnum (ref), telemetryReasonsModule (ref), httpService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateDown (ref), personaLivenessServiceWrapperModule (ref), livenessWithCallbackPollDelay (ref), livenessWithCallbackPollMaxRetries (ref), livenessBackgroundOnlyPollDelay (ref), livenessBackgroundOnlyPollMaxRetries (ref), usePollIDVStatus (ref), promiseModule (ref), IDVApiProvider (ref), personaLivenessHostedModule (ref), loading (ref), iconSize (ref)
 	local var16 = useDispatch()
-	local var17 = useAppPolicy(function(p1) --[[ line: 62 ]]
+	local var17 = useAppPolicy(function(p1)
 		return p1.getHasWebViewSupportForFAE()
 	end)
 	local var18 = useRoactService(appLogging)
 	local var19, var20 = reactModule.useState(nil)
 	local persona = reactModule.useRef("Persona")
 	local var22 = reactModule.useRef(nil)
-	local var23 = reactModule.useCallback(function(p2, p3) --[[ line: 76 ]]
+	local var23 = reactModule.useCallback(function(p2, p3)
 		-- upvalues: p0 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy), var22 (ref)
 		p0.onChallengeFailed(p2)
 		
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
 	end, { var18, p0.challengeId, p0.onChallengeFailed })
-	local var24 = reactModule.useCallback(function() --[[ line: 95 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy), var22 (ref)
 		p0.onChallengeAbandoned("")
 		
@@ -81,7 +81,7 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
 	end, { var18, p0.challengeId, p0.onChallengeAbandoned })
-	local var25 = reactModule.useCallback(function() --[[ line: 117 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), httpService (copy), biometricTypeEnum (copy), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), var22 (ref)
 		p0.onChallengeCompleted(httpService:JSONEncode({ biometricType = biometricTypeEnum.PersonaLiveness }))
 		
@@ -102,14 +102,14 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
 	end, { var18, p0.challengeId, p0.onChallengeCompleted })
-	local var26 = reactModule.useCallback(function(p4, p5) --[[ line: 141 ]]
+	local var26 = reactModule.useCallback(function(p4, p5)
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var16 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.GenericWebPage,
 			detail = p4,
 			extraProps = {
 				title = "",
-				onClose = function() --[[ line: 147 ]]
+				onClose = function()
 					-- upvalues: p5 (ref)
 					p5()
 				end
@@ -123,7 +123,7 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 		end
 		var16(navigateDown(t))
 	end, { var16 })
-	local var27 = reactModule.useMemo(function() --[[ line: 159 ]]
+	local var27 = reactModule.useMemo(function()
 		-- upvalues: personaLivenessServiceWrapperModule (copy), var17 (ref), livenessWithCallbackPollDelay (copy), livenessWithCallbackPollMaxRetries (copy), livenessBackgroundOnlyPollDelay (copy), livenessBackgroundOnlyPollMaxRetries (copy)
 		return if personaLivenessServiceWrapperModule.isAvailable() or var17 then {
 			delay = livenessWithCallbackPollDelay,
@@ -134,7 +134,7 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 		}
 	end)
 	local var28, var29 = usePollIDVStatus({ delay = var27.delay, retries = var27.retries })
-	local var30 = reactModule.useCallback(function(p6) --[[ line: 176 ]]
+	local var30 = reactModule.useCallback(function(p6)
 		-- upvalues: var22 (ref), personaLivenessServiceWrapperModule (copy), persona (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var18 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p0 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), var17 (ref), promiseModule (copy), var26 (ref), var20 (ref)
 		local sessionIdentifier = p6.sessionIdentifier
 		local sessionToken = p6.sessionToken
@@ -165,9 +165,9 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 					inquiryId = sessionIdentifier
 				})
 			end
-			return promiseModule.new(function(p7) --[[ line: 208 ]]
+			return promiseModule.new(function(p7)
 				-- upvalues: sessionIdentifier (ref), var26 (copy), p6 (ref)
-				var26(p6.verificationLink, function() --[[ line: 209 ]]
+				var26(p6.verificationLink, function()
 					-- upvalues: p7 (ref), sessionIdentifier (copy)
 					p7(sessionIdentifier)
 				end)
@@ -189,20 +189,20 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 			return promiseModule.resolve(sessionIdentifier)
 		end
 	end, { var17, var26, var18, p0.challengeId })
-	reactModule.useEffect(function() --[[ line: 236 ]]
+	reactModule.useEffect(function()
 		-- upvalues: IDVApiProvider (copy), var30 (ref), var28 (ref), var25 (ref), var24 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), persona (ref), telemetryReasonsModule (copy), var23 (ref), var29 (ref)
-		IDVApiProvider.startLivenessVerification():andThen(function(p11) --[[ line: 238 ]]
+		IDVApiProvider.startLivenessVerification():andThen(function(p11)
 			return p11
-		end):andThen(function(p10) --[[ line: 241 ]]
+		end):andThen(function(p10)
 			-- upvalues: var30 (copy)
 			return var30(p10)
-		end):andThen(function(p9) --[[ line: 244 ]]
+		end):andThen(function(p9)
 			-- upvalues: var28 (copy)
 			return var28(p9)
-		end):andThen(function() --[[ line: 247 ]]
+		end):andThen(function()
 			-- upvalues: var25 (copy)
 			return var25()
-		end):catch(function(p8) --[[ line: 250 ]]
+		end):catch(function(p8)
 			-- upvalues: var24 (copy), getFFlagEnhancedPersonaLivenessEvents (copy), persona (copy), telemetryReasonsModule (copy), var23 (copy)
 			if p8 and p8.resultType == Enum.FacialAgeEstimationResultType.Cancel then
 				var24()
@@ -217,7 +217,7 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 			var23("Persona error", if p8 and p8.sessionStatus ~= nil then if persona.current == "Hosted" then telemetryReasonsModule.HostedPollingTimeout else telemetryReasonsModule.PersonaPollingTimeout else telemetryReasonsModule.StartLivenessFailed)
 		end)
 		
-		return function() --[[ line: 268 ]]
+		return function()
 			-- upvalues: var29 (copy)
 			var29()
 		end
@@ -226,7 +226,7 @@ return function(p0) --[[ line: 58 | named "PersonaLivenessContainer" ]]
 	return if var19 then reactModule.createElement(personaLivenessHostedModule, {
 		sessionId = "",
 		webLink = var19,
-		onCancel = function() --[[ line: 277 ]]
+		onCancel = function()
 			-- upvalues: var24 (ref)
 			var24()
 		end

@@ -5,7 +5,7 @@ local tutilsModule = require(parent.tutils)
 local _ = require(sduiCoreSystem.ClientBinding.SduiPoolStoreTypes)
 local frozen = table.freeze({})
 
-local function getSpanConfigAt(p0, p1) --[[ line: 19 ]]
+local function getSpanConfigAt(p0, p1)
 	local var4 = p0[p1]
 	
 	if var4 == nil then
@@ -27,14 +27,14 @@ end
 return {
 	EMPTY_CELLS = frozen,
 	getSpanConfigAt = getSpanConfigAt,
-	makePoolGetSpanConfig = function(p2) --[[ line: 40 ]]
+	makePoolGetSpanConfig = function(p2)
 		-- upvalues: getSpanConfigAt (ref)
-		return function(_, p3) --[[ line: 41 ]]
+		return function(_, p3)
 			-- upvalues: getSpanConfigAt (copy), p2 (ref)
 			return getSpanConfigAt(p2, p3)
 		end
 	end,
-	layoutToCells = function(p4, p5, p6, p7) --[[ line: 47 ]]
+	layoutToCells = function(p4, p5, p6, p7)
 		-- upvalues: frozen (ref), getSpanConfigAt (ref)
 		if p4 == nil then
 			return frozen, 0
@@ -70,7 +70,7 @@ return {
 		end
 		return t, var8
 	end,
-	cellsEqual = function(p8, p9) --[[ line: 87 ]]
+	cellsEqual = function(p8, p9)
 		-- upvalues: tutilsModule (ref)
 		if p8 == p9 then
 			return true

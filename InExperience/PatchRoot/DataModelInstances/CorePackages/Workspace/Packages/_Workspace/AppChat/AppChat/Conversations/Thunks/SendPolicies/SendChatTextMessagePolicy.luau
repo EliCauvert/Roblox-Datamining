@@ -6,7 +6,7 @@ local sendChatMessagePolicyModule = require(script.Parent.SendChatMessagePolicy)
 local tbl = setmetatable({}, sendChatMessagePolicyModule)
 tbl.__index = tbl
 
-function tbl.new(p0, p1, p2, p3, p4) --[[ line: 13 ]]
+function tbl.new(p0, p1, p2, p3, p4)
 	-- upvalues: name (ref), sendChatMessagePolicyModule (ref)
 	name:info("New policy constructed for conversationId: {} messageText: {}, replyingToId: {}", p1, p2, if p3 then p3.id else nil)
 	local var6 = sendChatMessagePolicyModule:new(p1, p3)
@@ -17,14 +17,14 @@ function tbl.new(p0, p1, p2, p3, p4) --[[ line: 13 ]]
 	return var6
 end
 
-function tbl:sendMessage(_) --[[ line: 31 ]]
+function tbl:sendMessage(_)
 	-- upvalues: name (ref), appChatNetworkingModule (ref)
 	name:info("sendMessage - conversationId: {} messageText: {}, replyingToId: {}", self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
 	return appChatNetworkingModule.http.SendChatTextMessage(nil, self.conversationId, self.messageText, if self.replyingToMessage then self.replyingToMessage.id else nil)
 end
 
-function tbl:sendingMessagePayload() --[[ line: 47 ]]
+function tbl:sendingMessagePayload()
 	-- upvalues: messageModelModule (ref)
 	return {
 		messageType = messageModelModule.MessageTypes.PlainText,

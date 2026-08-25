@@ -19,29 +19,29 @@ resultModal.validateProps = tModule.strictInterface({
 	closeResultModal = tModule.callback
 })
 
-local function _(p0) --[[ line: 38 | named "isGamepadInput" ]]
+local function _(p0)
 	-- upvalues: getInputGroup (ref), inputTypeModule (ref)
 	return getInputGroup(p0) == inputTypeModule.InputTypeConstants.Gamepad
 end
 
-function resultModal.init(p1) --[[ line: 43 ]]
+function resultModal.init(p1)
 	-- upvalues: userInputService (ref), getInputGroup (ref), inputTypeModule (ref)
 	p1:setState({
 		isGamepad = getInputGroup(userInputService:GetLastInputType()) == inputTypeModule.InputTypeConstants.Gamepad
 	})
 end
 
-function resultModal.getLocalizedStringForResultPrompt(_, p2) --[[ line: 49 ]]
+function resultModal.getLocalizedStringForResultPrompt(_, p2)
 	-- upvalues: robloxTranslatorModule (ref)
 	return if p2 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif p2 == Enum.PromptPublishAssetResult.UploadFailed then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif p2 == Enum.PromptPublishAssetResult.NoUserInput then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(p2) })
 end
 
-function resultModal.getLocalizedTitleForResultPrompt(_, p3) --[[ line: 64 ]]
+function resultModal.getLocalizedTitleForResultPrompt(_, p3)
 	-- upvalues: robloxTranslatorModule (ref)
 	return if p3 == Enum.PromptPublishAssetResult.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
 end
 
-function resultModal.render(p4) --[[ line: 72 ]]
+function resultModal.render(p4)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref), getFFlagValidateDescriptionModule (ref), robloxTranslatorModule (ref), xboxA (ref)
 	return roactModule.createElement(interactiveAlert, {
 		title = p4:getLocalizedTitleForResultPrompt(p4.props.resultModalType),
@@ -62,12 +62,12 @@ function resultModal.render(p4) --[[ line: 72 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p5) --[[ line: 94 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p5)
 	return { resultModalType = p5.promptRequest.resultModalType }
-end, function(p6) --[[ line: 100 | named "mapDispatchToProps" ]]
+end, function(p6)
 	-- upvalues: closeResultModalModule (ref)
 	return {
-		closeResultModal = function() --[[ line: 102 ]]
+		closeResultModal = function()
 			-- upvalues: p6 (ref), closeResultModalModule (copy)
 			return p6(closeResultModalModule)
 		end

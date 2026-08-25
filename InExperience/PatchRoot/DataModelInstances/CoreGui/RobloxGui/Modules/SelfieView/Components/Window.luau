@@ -42,7 +42,7 @@ local previewShrink = images["icons/actions/previewShrink"]
 local previewExpand = images["icons/actions/previewExpand"]
 local faceCloneModule = require(script.Parent.FaceClone)
 
-return function(p0) --[[ line: 78 | named "Window" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useAppPolicy (ref), useLocalization (ref), useCameraOnModule (ref), useTrackerMessageModule (ref), useWindowSizeIsLargeModule (ref), useScreenSizeModule (ref), fFlagTopBarSignalizeScreenSize (ref), sizingUtilsModule (ref), useSelector (ref), reactModule (ref), useLocalPlayerModule (ref), faceChatUtilsModule (ref), useTooltipDismissalModule (ref), clearTimeout (ref), setTimeout (ref), modelUtilsModule (ref), var20 (ref), faceCloneModule (ref), controlState (ref), interactable (ref), cameraStatusIconModule (ref), var18 (ref), imageSetLabel (ref), previewShrink (ref), previewExpand (ref), styledTextLabel (ref), reactDevtoolsFixTopbar (ref), withTooltip (ref), coreGuiService (ref), tooltipOrientation (ref), cameraStatusDotModule (ref)
 	local id = p0.id
 	local var22 = useStyle()
@@ -54,23 +54,23 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 		robloxPermissionErrorHeader = "CoreScripts.TopBar.RobloxPermissionErrorHeader",
 		dynamicAvatarMissingErrorHeader = "CoreScripts.TopBar.DynamicAvatarMissingErrorHeader",
 		dynamicAvatarMissingErrorBody = "CoreScripts.TopBar.DynamicAvatarMissingErrorBody",
-		robloxPermissionErrorBody = if useAppPolicy(function(p1) --[[ line: 93 ]]
+		robloxPermissionErrorBody = if useAppPolicy(function(p1)
 			return p1.getShowUpdatedCameraPath()
 		end) then "CoreScripts.TopBar.RobloxPermissionErrorBodyTwo" else "CoreScripts.TopBar.RobloxPermissionErrorBody"
 	})
 	local var25 = useCameraOnModule()
 	local var26 = useTrackerMessageModule()
 	local var27 = useWindowSizeIsLargeModule(p0.windowSize)
-	local var28 = if fFlagTopBarSignalizeScreenSize then sizingUtilsModule.getSize(useScreenSizeModule(), var27) else useSelector(function(p2) --[[ line: 114 ]]
+	local var28 = if fFlagTopBarSignalizeScreenSize then sizingUtilsModule.getSize(useScreenSizeModule(), var27) else useSelector(function(p2)
 		-- upvalues: sizingUtilsModule (copy), var27 (ref)
 		return sizingUtilsModule.getSize(p2.displayOptions.screenSize, var27)
 	end)
-	reactModule.useEffect(function() --[[ line: 117 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var28 (ref)
 		p0.windowSize:requestSize(var28.X, var28.Y)
 	end, { var28 })
 	local var29 = useLocalPlayerModule()
-	local var30 = reactModule.useMemo(function() --[[ line: 123 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: faceChatUtilsModule (copy)
 		return faceChatUtilsModule.getPermissions().userCamEligible and faceChatUtilsModule.getPermissions().placeCamEnabled
 	end)
@@ -81,30 +81,30 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 	local var41, var42 = reactModule.useState(false)
 	local var43 = reactModule.useRef(nil)
 	
-	local var44 = function() --[[ line: 136 ]]
+	local var44 = function()
 		-- upvalues: var43 (ref), clearTimeout (copy), var36 (ref), setTimeout (copy)
 		if var43.current then
 			clearTimeout(var43.current)
 		end
 		var36(true)
-		var43.current = setTimeout(function() --[[ line: 141 ]]
+		var43.current = setTimeout(function()
 			-- upvalues: var36 (copy)
 			var36(false)
 		end, 2000)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 145 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var43 (ref), clearTimeout (copy), var36 (ref), setTimeout (copy)
 		if var43.current then
 			clearTimeout(var43.current)
 		end
 		var36(true)
-		var43.current = setTimeout(function() --[[ line: 141 ]]
+		var43.current = setTimeout(function()
 			-- upvalues: var36 (copy)
 			var36(false)
 		end, 2000)
 		
-		return function() --[[ line: 148 ]]
+		return function()
 			-- upvalues: var43 (copy), clearTimeout (copy)
 			if var43.current then
 				clearTimeout(var43.current)
@@ -112,13 +112,13 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 		end
 	end, { var43 })
 	
-	local var45 = function(p3) --[[ line: 155 ]]
+	local var45 = function(p3)
 		-- upvalues: var43 (ref), clearTimeout (copy), var36 (ref), setTimeout (copy), faceChatUtilsModule (copy), var34 (ref), var24 (ref), var29 (ref), modelUtilsModule (copy), var20 (copy)
 		if var43.current then
 			clearTimeout(var43.current)
 		end
 		var36(true)
-		var43.current = setTimeout(function() --[[ line: 141 ]]
+		var43.current = setTimeout(function()
 			-- upvalues: var36 (copy)
 			var36(false)
 		end, 2000)
@@ -134,37 +134,37 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 		faceChatUtilsModule.toggleVideoAnimation()
 	end
 	
-	local var46 = reactModule.useCallback(function() --[[ line: 173 ]]
+	local var46 = reactModule.useCallback(function()
 		-- upvalues: var45 (ref)
 		var45(false)
 	end, { faceChatUtilsModule, modelUtilsModule, var24, var29 })
-	local var47 = reactModule.useCallback(function() --[[ line: 177 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: var43 (ref), clearTimeout (copy), var36 (ref), setTimeout (copy)
 		if var43.current then
 			clearTimeout(var43.current)
 		end
 		var36(true)
-		var43.current = setTimeout(function() --[[ line: 141 ]]
+		var43.current = setTimeout(function()
 			-- upvalues: var36 (copy)
 			var36(false)
 		end, 2000)
 	end, { var44, var35, p0.windowSize })
 	local var48 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 182 ]]
+	reactModule.useEffect(function()
 		-- upvalues: faceCloneModule (copy), var29 (ref), var48 (ref)
 		if _G.__TESTEZ_RUNNING_TEST__ then
 			return
 		end
 		local var50 = faceCloneModule(var29, var48.current)
 		
-		return function() --[[ line: 193 ]]
+		return function()
 			-- upvalues: var50 (ref)
 			if var50 then
 				var50()
 			end
 		end
 	end, { var29, var48 })
-	local var49 = reactModule.useCallback(function(_, p4) --[[ line: 200 ]]
+	local var49 = reactModule.useCallback(function(_, p4)
 		-- upvalues: var40 (ref), controlState (copy)
 		var40(p4 == controlState.Hover)
 	end, { var40 })
@@ -190,11 +190,11 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 				Size = UDim2.fromOffset(36, 36),
 				BackgroundColor3 = if var37 then var22.Theme.BackgroundOnHover.Color else var22.Theme.BackgroundUIContrast.Color,
 				BackgroundTransparency = 0.8,
-				onStateChanged = reactModule.useCallback(function(_, p5) --[[ line: 204 ]]
+				onStateChanged = reactModule.useCallback(function(_, p5)
 					-- upvalues: var38 (ref), controlState (copy)
 					var38(p5 == controlState.Hover)
 				end, { var38 }),
-				[reactModule.Event.Activated] = if var18 then function() --[[ line: 267 ]]
+				[reactModule.Event.Activated] = if var18 then function()
 					-- upvalues: var18 (copy), id (ref)
 					var18:toggleWindow(id)
 				end else nil
@@ -251,11 +251,11 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 				Size = UDim2.fromOffset(36, 36),
 				BackgroundColor3 = if var41 then var22.Theme.BackgroundOnHover.Color else var22.Theme.BackgroundUIContrast.Color,
 				BackgroundTransparency = 0.8,
-				onStateChanged = reactModule.useCallback(function(_, p6) --[[ line: 208 ]]
+				onStateChanged = reactModule.useCallback(function(_, p6)
 					-- upvalues: var42 (ref), controlState (copy)
 					var42(p6 == controlState.Hover)
 				end, { var42 }),
-				[reactModule.Event.Activated] = if var18 then function() --[[ line: 337 ]]
+				[reactModule.Event.Activated] = if var18 then function()
 					-- upvalues: p0 (ref)
 					p0.windowSize:toggleIsLarge()
 				end else nil
@@ -326,7 +326,7 @@ return function(p0) --[[ line: 78 | named "Window" ]]
 				guiTarget = coreGuiService,
 				active = var33,
 				preferredOrientation = tooltipOrientation.Bottom
-			}, reactModule.useCallback(function(p7) --[[ line: 212 ]]
+			}, reactModule.useCallback(function(p7)
 				-- upvalues: reactModule (copy), interactable (copy), var39 (ref), faceChatUtilsModule (copy), var22 (ref), var49 (ref), var46 (ref), cameraStatusIconModule (copy)
 				return reactModule.createElement(interactable, {
 					Size = UDim2.fromOffset(36, 36),

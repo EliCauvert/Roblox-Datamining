@@ -55,7 +55,7 @@ local t = {
 	[u338] = if fFlagEnableSplitPane then { Size = "$" .. var13 } else nil
 }
 
-local function applyRules(p0, p1) --[[ line: 147 ]]
+local function applyRules(p0, p1)
 	-- upvalues: t (ref)
 	for i, v in t do
 		local styleRule = Instance.new("StyleRule")
@@ -67,18 +67,18 @@ local function applyRules(p0, p1) --[[ line: 147 ]]
 	end
 end
 
-local function setupReactiveAttributes(value, p2) --[[ line: 161 ]]
+local function setupReactiveAttributes(value, p2)
 	-- upvalues: signalsModule (ref), getGlobalViewportBreakpointModule (ref), compositionConfigModule (ref), fFlagEnableSplitPane (ref), appCompositionEnumsModule (ref), luaAppScaleDiscoveryWidth (ref), luaAppScaleDetailWidth (ref), displayModule (ref), var11 (ref), var12 (ref), var13 (ref)
-	local var19 = signalsModule.createComputed(function(p3) --[[ line: 162 ]]
+	local var19 = signalsModule.createComputed(function(p3)
 		-- upvalues: getGlobalViewportBreakpointModule (copy), compositionConfigModule (copy), p2 (ref)
 		return compositionConfigModule.getBaseConfig(getGlobalViewportBreakpointModule(p3), p2).margin
 	end)
-	local var20 = if fFlagEnableSplitPane then signalsModule.createComputed(function(p4) --[[ line: 168 ]]
+	local var20 = if fFlagEnableSplitPane then signalsModule.createComputed(function(p4)
 		-- upvalues: getGlobalViewportBreakpointModule (copy), compositionConfigModule (copy), appCompositionEnumsModule (copy), p2 (ref)
 		return compositionConfigModule.getRegionLayout(appCompositionEnumsModule.RegionName.SupportRegion, getGlobalViewportBreakpointModule(p4), p2)
 	end) else nil
 	
-	return signalsModule.createEffect(function(p5) --[[ line: 174 ]]
+	return signalsModule.createEffect(function(p5)
 		-- upvalues: var19 (ref), value (ref), luaAppScaleDiscoveryWidth (copy), luaAppScaleDetailWidth (copy), displayModule (copy), fFlagEnableSplitPane (copy), var20 (ref), var11 (copy), var12 (copy), var13 (copy)
 		local var25
 		local var21 = var19(p5)
@@ -111,13 +111,13 @@ local function setupReactiveAttributes(value, p2) --[[ line: 161 ]]
 	end)
 end
 
-return function(value, p6) --[[ line: 239 | named "setupCompositionStyleRules" ]]
+return function(value, p6)
 	-- upvalues: applyRules (ref), setupReactiveAttributes (ref)
 	local t = {}
 	applyRules(value, t)
 	local var29 = setupReactiveAttributes(value, p6)
 	
-	return function() --[[ line: 246 ]]
+	return function()
 		-- upvalues: var29 (ref), t (ref)
 		var29()
 		

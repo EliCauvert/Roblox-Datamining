@@ -5,7 +5,7 @@ local images = require(parent_1.UIBlox).App.ImageSet.Images
 local foundationModule = require(parent_1.Foundation)
 local fFlagPlayerListFoundationSubscriptionIconModule = require(parent.Flags.FFlagPlayerListFoundationSubscriptionIcon)
 
-return memoize(function(p0, p1) --[[ line: 165 ]]
+return memoize(function(p0, p1)
 	-- upvalues: images (ref), fFlagPlayerListFoundationSubscriptionIconModule (ref), foundationModule (ref)
 	local t = { IsTenFoot = p0 }
 	

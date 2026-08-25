@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2, ...) --[[ line: 24 ]]
+return function(p0, p1, p2, ...)
 	if #p0 < p1 then
 		for i = 1, select("#", ...) do
 			table.insert(p0, select(i, ...))

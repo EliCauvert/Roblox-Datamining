@@ -23,7 +23,7 @@ local t_1 = nil
 local typeToExtKind = nil
 local extensionKindToTypeName = nil
 
-function t.PossibleTypeExtensionsRule(p0) --[[ line: 45 ]]
+function t.PossibleTypeExtensionsRule(p0)
 	-- upvalues: isTypeDefinitionNode (ref), t_1 (write), typeToExtKind (write), extensionKindToTypeName (write), graphQLError (ref), object (ref), array (ref), suggestionList (ref), didYouMean (ref)
 	local schema = p0:getSchema()
 	local t = {}
@@ -33,7 +33,7 @@ function t.PossibleTypeExtensionsRule(p0) --[[ line: 45 ]]
 			t[v.name.value] = v
 		end
 	end
-	local function checkExtension(p1) --[[ line: 55 ]]
+	local function checkExtension(p1)
 		-- upvalues: t (ref), schema (ref), t_1 (copy), typeToExtKind (copy), extensionKindToTypeName (copy), p0 (ref), graphQLError (copy), object (copy), array (copy), suggestionList (copy), didYouMean (copy)
 		local value = p1.name.value
 		local var10 = t[value]
@@ -63,7 +63,7 @@ function t.PossibleTypeExtensionsRule(p0) --[[ line: 45 ]]
 		end
 	end
 	
-	local var9 = function(_, ...) --[[ line: 100 ]]
+	local var9 = function(_, ...)
 		-- upvalues: checkExtension (ref)
 		return checkExtension(...)
 	end
@@ -87,7 +87,7 @@ t_1 = {
 	[kind.INPUT_OBJECT_TYPE_DEFINITION] = kind.INPUT_OBJECT_TYPE_EXTENSION
 }
 
-typeToExtKind = function(p2) --[[ line: 122 | named "typeToExtKind" ]]
+typeToExtKind = function(p2)
 	-- upvalues: isScalarType (ref), kind (ref), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isInputObjectType (ref), invariant (ref), inspect (ref)
 	if isScalarType(p2) then
 		return kind.SCALAR_TYPE_EXTENSION
@@ -107,7 +107,7 @@ typeToExtKind = function(p2) --[[ line: 122 | named "typeToExtKind" ]]
 	return nil
 end
 
-extensionKindToTypeName = function(p3) --[[ line: 150 | named "extensionKindToTypeName" ]]
+extensionKindToTypeName = function(p3)
 	-- upvalues: kind (ref), invariant (ref), inspect (ref)
 	if p3 == kind.SCALAR_TYPE_EXTENSION then
 		return "scalar"

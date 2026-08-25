@@ -1,9 +1,9 @@
 ﻿local var0 = newproxy(false)
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: var0 (ref)
 	return {
-		setInterval = function(value, p1, ...) --[[ line: 18 ]]
+		setInterval = function(value, p1, ...)
 			-- upvalues: var0 (copy), p0 (ref)
 			local list = { ... }
 			local t = { [var0] = 1 }
@@ -14,9 +14,9 @@ return function(p0) --[[ line: 17 ]]
 			local var3 = p1 / 1000
 			local _ = nil
 			
-			local var4 = function() --[[ line: 33 ]]
+			local var4 = function()
 				-- upvalues: p0 (copy), var3 (ref), t (ref), var0 (copy), value (ref), list (ref), var4 (write)
-				p0(var3, function() --[[ line: 34 ]]
+				p0(var3, function()
 					-- upvalues: t (copy), var0 (copy), value (copy), list (copy), var4 (copy)
 					if t[var0] == 1 then
 						value(unpack(list))
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 17 ]]
 			
 			return t
 		end,
-		clearInterval = function(p2) --[[ line: 47 ]]
+		clearInterval = function(p2)
 			-- upvalues: var0 (copy)
 			if p2[var0] == 1 then
 				p2[var0] = 3

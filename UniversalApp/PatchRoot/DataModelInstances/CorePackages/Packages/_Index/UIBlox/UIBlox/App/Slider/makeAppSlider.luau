@@ -10,7 +10,7 @@ local t = { frequency = 5 }
 local divideTransparencyModule = require(parent_1.Utility.divideTransparency)
 local lerpModule = require(parent_1.Utility.lerp)
 
-return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
+return function(p0, p1)
 	-- upvalues: roactModule (ref), divideTransparencyModule (ref), colorsModule (ref), lerpModule (ref), otterModule (ref), t (ref), imagesModule (ref), genericSliderModule (ref)
 	local var8 = roactModule.PureComponent:extend("AppSliderFor" .. p0)
 	var8.defaultProps = {
@@ -20,7 +20,7 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 		width = UDim.new(1, 0)
 	}
 	
-	function var8.init(p2) --[[ line: 32 ]]
+	function var8.init(p2)
 		-- upvalues: roactModule (copy), divideTransparencyModule (copy), p0 (ref), colorsModule (copy), lerpModule (copy), otterModule (copy), t (copy)
 		local _ = nil
 		local _ = nil
@@ -41,38 +41,38 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 			pressedProgressUpper = p2.pressedProgressUpper,
 			style = p2.style
 		})
-		p2.trackColor = var17:map(function(p3) --[[ line: 48 ]]
+		p2.trackColor = var17:map(function(p3)
 			return p3.style.Theme.UIMuted.Color
 		end)
-		p2.trackTransparency = var17:map(function(p4) --[[ line: 52 ]]
+		p2.trackTransparency = var17:map(function(p4)
 			-- upvalues: divideTransparencyModule (copy)
 			return divideTransparencyModule(p4.style.Theme.UIMuted.Transparency, if p4.disabled then 2 else 1)
 		end)
-		p2.trackFillColor = var17:map(function(p5) --[[ line: 56 ]]
+		p2.trackFillColor = var17:map(function(p5)
 			-- upvalues: p0 (copy)
 			return p5.style.Theme[p0].Color
 		end)
-		p2.trackFillTransparency = var17:map(function(p6) --[[ line: 60 ]]
+		p2.trackFillTransparency = var17:map(function(p6)
 			-- upvalues: divideTransparencyModule (copy), p0 (copy)
 			return divideTransparencyModule(p6.style.Theme[p0].Transparency, if p6.disabled then 2 else 1)
 		end)
-		p2.knobColorLower = var17:map(function(p7) --[[ line: 64 ]]
+		p2.knobColorLower = var17:map(function(p7)
 			-- upvalues: colorsModule (copy), p0 (copy)
 			return if p7.disabled then colorsModule.Pumice else Color3.new(1, 1, 1):lerp(if p0 ~= "SystemPrimaryDefault" then p7.style.Theme[p0].Color else colorsModule.Pumice, p7.pressedProgressLower)
 		end)
-		p2.knobColorUpper = var17:map(function(p8) --[[ line: 79 ]]
+		p2.knobColorUpper = var17:map(function(p8)
 			-- upvalues: colorsModule (copy), p0 (copy)
 			return if p8.disabled then colorsModule.Pumice else Color3.new(1, 1, 1):lerp(if p0 ~= "SystemPrimaryDefault" then p8.style.Theme[p0].Color else colorsModule.Pumice, p8.pressedProgressUpper)
 		end)
-		p2.knobTransparency = var17:map(function(p9) --[[ line: 94 ]]
+		p2.knobTransparency = var17:map(function(p9)
 			-- upvalues: divideTransparencyModule (copy), p0 (copy)
 			return divideTransparencyModule(p9.style.Theme[p0].Transparency, if p9.disabled then 2 else 1)
 		end)
-		p2.knobShadowTransparencyLower = var17:map(function(p10) --[[ line: 98 ]]
+		p2.knobShadowTransparencyLower = var17:map(function(p10)
 			-- upvalues: p2 (ref), lerpModule (copy)
 			return if p10.disabled then 1 else lerpModule(p10.style.Theme.DropShadow.Transparency, p2.props.customPressedKnobShadowTransparencyLower, p10.pressedProgressLower)
 		end)
-		p2.knobShadowTransparencyUpper = var17:map(function(p11) --[[ line: 107 ]]
+		p2.knobShadowTransparencyUpper = var17:map(function(p11)
 			-- upvalues: lerpModule (copy)
 			return if p11.disabled then 1 else lerpModule(p11.style.Theme.DropShadow.Transparency, 1, p11.pressedProgressUpper)
 		end)
@@ -81,7 +81,7 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 		p2.pressedMotorUpper = otterModule.createSingleMotor(0)
 		p2.pressedMotorUpper:onStep(var12)
 		
-		function p2.onDragStartLower() --[[ line: 121 ]]
+		function p2.onDragStartLower()
 			-- upvalues: p2 (ref), otterModule (copy), t (copy)
 			if p2.props.onDragStartLower then
 				p2.props.onDragStartLower()
@@ -91,7 +91,7 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 			end
 		end
 		
-		function p2.onDragStartUpper() --[[ line: 131 ]]
+		function p2.onDragStartUpper()
 			-- upvalues: p2 (ref), otterModule (copy), t (copy)
 			if p2.props.onDragStartUpper then
 				p2.props.onDragStartUpper()
@@ -101,7 +101,7 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 			end
 		end
 		
-		function p2.onDragEnd() --[[ line: 141 ]]
+		function p2.onDragEnd()
 			-- upvalues: p2 (ref), otterModule (copy), t (copy)
 			if p2.props.onDragEnd then
 				p2.props.onDragEnd()
@@ -113,7 +113,7 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 		end
 	end
 	
-	function var8.render(p12) --[[ line: 153 ]]
+	function var8.render(p12)
 		-- upvalues: imagesModule (copy), roactModule (copy), p1 (ref), genericSliderModule (copy)
 		local props = p12.props
 		local t = {
@@ -165,12 +165,12 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 		return roactModule.createElement(genericSliderModule, t)
 	end
 	
-	function var8.didMount(p13) --[[ line: 217 ]]
+	function var8.didMount(p13)
 		p13.pressedMotorLower:start()
 		p13.pressedMotorUpper:start()
 	end
 	
-	function var8.didUpdate(p14, p15) --[[ line: 222 ]]
+	function var8.didUpdate(p14, p15)
 		-- upvalues: otterModule (copy), t (copy)
 		if p15.style ~= p14.props.style then
 			p14.setStyle(p14.props.style)
@@ -185,7 +185,7 @@ return function(p0, p1) --[[ line: 21 | named "makeAppSlider" ]]
 		end
 	end
 	
-	function var8.willUnmount(p16) --[[ line: 237 ]]
+	function var8.willUnmount(p16)
 		p16.wasUnmounted = true
 		p16.pressedMotorLower:destroy()
 		p16.pressedMotorUpper:destroy()

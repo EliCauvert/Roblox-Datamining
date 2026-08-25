@@ -5,7 +5,7 @@ local httpService = game:GetService("HttpService")
 local mimetypesModule = require(lib.mimetypes)
 local b64Module = require(lib.b64)
 
-local function randomString(p0) --[[ line: 16 ]]
+local function randomString(p0)
 	local var6 = ""
 	
 	for _ = 1, p0 do
@@ -17,7 +17,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(...) --[[ line: 30 ]]
+function t.new(...)
 	-- upvalues: t (ref), mimetypesModule (ref)
 	local unknown = setmetatable({}, t)
 	unknown.__IsFile = true
@@ -43,14 +43,14 @@ function t.new(...) --[[ line: 30 ]]
 	return unknown
 end
 
-function t:__tostring() --[[ line: 71 ]]
+function t:__tostring()
 	return ("File('%s', '%s')"):format(self.name, self.content_type)
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p1) --[[ line: 79 ]]
+function t_1.new(p1)
 	-- upvalues: t_1 (ref), randomString (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.__FormData = true
@@ -65,14 +65,14 @@ function t_1.new(p1) --[[ line: 79 ]]
 	return tbl
 end
 
-function t_1:AddField(p2, p3) --[[ line: 96 ]]
+function t_1:AddField(p2, p3)
 	if p3.__IsFile then
 		self.content_type = "multipart/form-data; boundary=\"" .. self.boundary .. "\""
 	end
 	table.insert(self.fields, { Name = p2, Value = p3 })
 end
 
-function t_1:build() --[[ line: 108 ]]
+function t_1:build()
 	-- upvalues: httpService (ref), b64Module (ref)
 	local var12 = ""
 	

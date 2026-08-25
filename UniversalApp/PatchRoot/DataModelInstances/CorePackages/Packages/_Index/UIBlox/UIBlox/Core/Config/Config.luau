@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-function t.new(p0) --[[ line: 19 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { defaultConfig = p0, defaultConfigKeys = {} }
 	
@@ -8,23 +8,23 @@ function t.new(p0) --[[ line: 19 ]]
 		table.insert(t_1.defaultConfigKeys, i)
 	end
 	t_1._currentConfig = setmetatable({}, {
-		__index = function(_, p1) --[[ line: 29 ]]
+		__index = function(_, p1)
 			-- upvalues: t_1 (ref)
 			error(("Invalid global configuration key %q. Valid configuration keys are: %s"):format(tostring(p1), table.concat(t_1.defaultConfigKeys, ", ")), 3)
 		end
 	})
 	
-	function t_1.set(...) --[[ line: 42 ]]
+	function t_1.set(...)
 		-- upvalues: t (copy), t_1 (ref)
 		return t.set(t_1, ...)
 	end
 	
-	function t_1.get(...) --[[ line: 46 ]]
+	function t_1.get(...)
 		-- upvalues: t (copy), t_1 (ref)
 		return t.get(t_1, ...)
 	end
 	
-	function t_1.scoped(...) --[[ line: 50 ]]
+	function t_1.scoped(...)
 		-- upvalues: t (copy), t_1 (ref)
 		return t.scoped(t_1, ...)
 	end
@@ -34,7 +34,7 @@ function t.new(p0) --[[ line: 19 ]]
 	return t_1
 end
 
-function t.set(value, p2) --[[ line: 59 ]]
+function t.set(value, p2)
 	local t = {}
 	local t_1 = {}
 	
@@ -55,7 +55,7 @@ function t.set(value, p2) --[[ line: 59 ]]
 	end
 end
 
-function t.get(p3) --[[ line: 98 ]]
+function t.get(p3)
 	return p3._currentConfig
 end
 

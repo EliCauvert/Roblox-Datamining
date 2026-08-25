@@ -7,7 +7,7 @@ local _ = require(socialLuaAnalytics.Analytics.Enums.Contexts)
 local _ = require(script.Parent.Parent.Types)
 local var4 = nil
 
-local function _() --[[ line: 14 | named "getDefaultTelemetryService" ]]
+local function _()
 	-- upvalues: var4 (write)
 	if var4 == nil then
 		var4 = game:GetService("TelemetryService")
@@ -15,9 +15,9 @@ local function _() --[[ line: 14 | named "getDefaultTelemetryService" ]]
 	return var4
 end
 
-local _ = function(p0, p1) --[[ line: 21 ]]
+local _ = function(p0, p1)
 	-- upvalues: cryoModule (ref), dashModule (ref)
-	return function(p2, p3, p4, p5) --[[ line: 22 ]]
+	return function(p2, p3, p4, p5)
 		-- upvalues: p0 (ref), cryoModule (copy), p1 (ref), dashModule (copy)
 		if p0 then
 			local _ = nil
@@ -32,9 +32,9 @@ local _ = function(p0, p1) --[[ line: 21 ]]
 	end
 end
 
-return function(p6) --[[ line: 43 ]]
+return function(p6)
 	-- upvalues: cryoModule (ref), dashModule (ref), var4 (write), supportedTelemetryBackendsModule (ref)
-	return function(p7, p8, p9, p10) --[[ line: 65 ]]
+	return function(p7, p8, p9, p10)
 		-- upvalues: p6 (ref), cryoModule (copy), dashModule (copy), var4 (copy), supportedTelemetryBackendsModule (copy)
 		local var10
 		local defaults = p6.eventList.defaults
@@ -43,7 +43,7 @@ return function(p6) --[[ line: 43 ]]
 		local var8 = if var7 then "TelemetryService" else "LoggingProtocol"
 		local loggerImpl = p6.loggerImpl
 		
-		local var9 = function(p11, p12, p13, p14) --[[ line: 22 ]]
+		local var9 = function(p11, p12, p13, p14)
 			-- upvalues: loggerImpl (ref), cryoModule (copy), var8 (ref), dashModule (copy)
 			if loggerImpl then
 				local _ = nil

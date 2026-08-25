@@ -4,7 +4,7 @@ local var2 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Wind
 local var3 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.AndroidWithoutDeeplink")
 local var4 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.WindowsWithoutDeeplink")
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: var1 (ref), var3 (ref), var2 (ref), var4 (ref)
 	local platform = p1:GetPlatform()
 	

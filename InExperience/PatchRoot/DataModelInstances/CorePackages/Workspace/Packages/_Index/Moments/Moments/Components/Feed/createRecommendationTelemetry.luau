@@ -24,17 +24,17 @@ local t_1 = {
 	Join = "join"
 }
 
-local function _(value, p0) --[[ line: 64 | named "getSignalValue" ]]
+local function _(value, p0)
 	return if value == "AddReaction" or value == "RemoveReaction" then p0.reactionType or "" else ""
 end
 
-return function(p1) --[[ line: 71 | named "createRecommendationTelemetry" ]]
+return function(p1)
 	-- upvalues: emitRecommendationImpressionModule (ref), t (ref), fFlagMomentsRealtimeSessionTelemetry (ref), t_1 (ref), analytics (ref), emitRecommendationActionModule (ref)
 	local getMomentsSessionId = p1.getMomentsSessionId
 	local signalTracker = p1.signalTracker
 	
 	return {
-		logView = function(p2, p3) --[[ line: 76 ]]
+		logView = function(p2, p3)
 			-- upvalues: emitRecommendationImpressionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
 			emitRecommendationImpressionModule({
 				itemId = p2.itemId,
@@ -48,7 +48,7 @@ return function(p1) --[[ line: 71 | named "createRecommendationTelemetry" ]]
 				signalTracker:recordSignal(p2.itemId, "View", string.format("%.1f", p3.durationSeconds))
 			end
 		end,
-		logAction = function(p4, p5, p6) --[[ line: 90 ]]
+		logAction = function(p4, p5, p6)
 			-- upvalues: t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), t_1 (copy), analytics (copy), emitRecommendationActionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
 			local var7 = t[p4]
 			

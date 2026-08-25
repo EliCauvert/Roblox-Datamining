@@ -5,9 +5,9 @@ local parent = genericChallenges.Parent
 local promiseModule = require(parent.Promise)
 local _ = require(parent.LuauPolyfill)
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), renderChallengeModule (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 22 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: renderChallengeModule (copy), p0 (ref)
 		renderChallengeModule({
 			title = p0.title,

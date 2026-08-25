@@ -27,7 +27,7 @@ local useSignalBinding = signalsReactModule.useSignalBinding
 local t = { isNavigationFocus = true }
 local vector2 = Vector2.new(320, 320)
 
-return function(p0) --[[ line: 62 | named "AudioPlayer" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), createNextOrder (ref), useLocalization (ref), useAudioStore (ref), getFFlagAudioPreviewLua (ref), useSignalState (ref), useSignalBinding (ref), getFFlagAudioPlayerCanSkipTracks (ref), getAudioPlaybackStore (ref), useCallback (ref), sendAudioPlayerAnalyticsModule (ref), analyticActionsModule (ref), useRef (ref), getFFlagLuaAppPersistentMusicPlayer (ref), useStopSongOnPageNavigationModule (ref), usePrevious (ref), useEffect (ref), reactModule (ref), foundationModule (ref), vector2 (ref), audioPlaybackTimelineModule (ref), roundIconButtonModule (ref)
 	local var14 = cryoModule.Dictionary.join(t, p0)
 	local var15 = createNextOrder()
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 62 | named "AudioPlayer" ]]
 	local var23 = if getFFlagAudioPlayerCanSkipTracks() then useSignalState(var22.hasNextSong) else nil
 	local var24 = if getFFlagAudioPlayerCanSkipTracks() then useSignalState(var22.hasPrevSong) else nil
 	local var23_1 = var23 or var24
-	local var26 = useCallback(function(p1) --[[ line: 91 ]]
+	local var26 = useCallback(function(p1)
 		-- upvalues: var14 (ref), sendAudioPlayerAnalyticsModule (copy), var21 (ref)
 		sendAudioPlayerAnalyticsModule({
 			action = p1,
@@ -56,28 +56,28 @@ return function(p0) --[[ line: 62 | named "AudioPlayer" ]]
 		var14.analyticsSource,
 		var21
 	})
-	local var27 = useCallback(function() --[[ line: 118 ]]
+	local var27 = useCallback(function()
 		-- upvalues: var26 (ref), analyticActionsModule (copy)
 		var26(analyticActionsModule.AudioElapsed)
 		var26(analyticActionsModule.AudioStopped)
 	end, { var26 })
 	local var28 = useRef(false)
-	local var29 = useCallback(function() --[[ line: 125 ]]
+	local var29 = useCallback(function()
 		-- upvalues: var28 (ref), var18 (ref), var17 (ref)
 		var28.current = var18
 		var17.pause()
 	end, { var17.pause, var18 })
-	local var30 = useCallback(function(p2) --[[ line: 130 ]]
+	local var30 = useCallback(function(p2)
 		-- upvalues: var17 (ref), var20 (ref)
 		var17.seek(var20 * p2)
 	end, { var17.seek, var20 })
-	local var31 = useCallback(function() --[[ line: 134 ]]
+	local var31 = useCallback(function()
 		-- upvalues: var28 (ref), var17 (ref)
 		if var28.current then
 			var17.play()
 		end
 	end, { var17.play })
-	local var32 = useCallback(function() --[[ line: 141 ]]
+	local var32 = useCallback(function()
 		-- upvalues: var18 (ref), var26 (ref), analyticActionsModule (copy), var17 (ref), getFFlagAudioPlayerCanSkipTracks (copy), var22 (ref), getAudioPlaybackStore (copy)
 		if var18 then
 			var26(analyticActionsModule.AudioPause)
@@ -102,12 +102,12 @@ return function(p0) --[[ line: 62 | named "AudioPlayer" ]]
 	})
 	
 	if not getFFlagLuaAppPersistentMusicPlayer() then
-		useStopSongOnPageNavigationModule(var14.isNavigationFocus, useCallback(function() --[[ line: 165 ]]
+		useStopSongOnPageNavigationModule(var14.isNavigationFocus, useCallback(function()
 			-- upvalues: var26 (ref), analyticActionsModule (copy)
 			var26(analyticActionsModule.AudioStopped)
 		end, { var26 }))
 		local var33 = usePrevious(var19)
-		useEffect(function() --[[ line: 171 ]]
+		useEffect(function()
 			-- upvalues: var19 (ref), var33 (ref), var27 (ref)
 			if var19 and not var33 then
 				var27()

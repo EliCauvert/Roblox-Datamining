@@ -2,7 +2,7 @@
 local itemTypeEnumModule = require(avatarExperienceCommon.Enums.ItemTypeEnum)
 local constantsModule = require(avatarExperienceCommon.Constants)
 
-local function getBodiesInTryOns(p0) --[[ line: 6 ]]
+local function getBodiesInTryOns(p0)
 	-- upvalues: itemTypeEnumModule (ref), constantsModule (ref)
 	local t = {}
 	
@@ -14,7 +14,7 @@ local function getBodiesInTryOns(p0) --[[ line: 6 ]]
 	return t
 end
 
-return function(p1) --[[ line: 19 | named "selectTryOnBodyIds" ]]
+return function(p1)
 	-- upvalues: getBodiesInTryOns (ref)
 	local outfitTryOn = p1.AvatarExperience.AvatarScene.OutfitTryOn
 	

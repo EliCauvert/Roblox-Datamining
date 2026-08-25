@@ -2,7 +2,7 @@
 local reactModule = require(corePackagesService.Packages.React)
 local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyle
 
-return function(p0) --[[ line: 11 | named "ReportTextEntry" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref)
 	local var2 = useStyle()
 	local theme = var2.Theme
@@ -42,10 +42,10 @@ return function(p0) --[[ line: 11 | named "ReportTextEntry" ]]
 			TextWrapped = true,
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
-			[reactModule.Event.FocusLost] = function() --[[ line: 54 ]] end,
-			[reactModule.Event.Focused] = function() --[[ line: 55 ]] end,
-			[reactModule.Change.AbsoluteSize] = function() --[[ line: 56 ]] end,
-			[reactModule.Change.Text] = function(p1) --[[ line: 57 ]]
+			[reactModule.Event.FocusLost] = function() end,
+			[reactModule.Event.Focused] = function() end,
+			[reactModule.Change.AbsoluteSize] = function() end,
+			[reactModule.Change.Text] = function(p1)
 				-- upvalues: p0 (ref)
 				if p0.text ~= p1.Text then
 					p0.onUpdate(p1.Text)

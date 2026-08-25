@@ -21,7 +21,7 @@ local useSelector = dependenciesModule.Hooks.useSelector
 local getFFlagEnableCrossExpVoice = sharedFlags.GetFFlagEnableCrossExpVoice
 local getFFlagEnableCrossExpVoiceAbuseReport = sharedFlags.getFFlagEnableCrossExpVoiceAbuseReport
 
-return function(p0, p1) --[[ line: 33 | named "useSquadUserDropdownMenuButtons" ]]
+return function(p0, p1)
 	-- upvalues: useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useBackgroundExperience (ref), react (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), fFlagSquadsPresenceStoreMigration (ref), var3 (ref), useSelector (ref), var4 (ref), presenceType (ref), constantsModule (ref), getFFlagEnableCrossExpVoiceAbuseReport (ref)
 	local var7 = useLocalUserId()
 	local var8 = tostring(var7) == tostring(p0)
@@ -33,7 +33,7 @@ return function(p0, p1) --[[ line: 33 | named "useSquadUserDropdownMenuButtons" 
 	if getFFlagEnableCrossExpVoice() then
 		local var12 = if p0 then tonumber(p0) else nil
 		local var13 = useBackgroundExperience()
-		var9 = react.useMemo(function() --[[ line: 46 ]]
+		var9 = react.useMemo(function()
 			-- upvalues: var13 (write)
 			return if var13 then var13.voiceChannelId else nil
 		end, { var13 })
@@ -47,12 +47,12 @@ return function(p0, p1) --[[ line: 33 | named "useSquadUserDropdownMenuButtons" 
 		end
 	end
 	local var17 = react.useContext(squadExternalContractContext).useGetConversationFromId(useCurrentSquadParentChannelId() or "")
-	local var18 = if fFlagSquadsPresenceStoreMigration then var3(tostring(p0)) else useSelector(react.useCallback(function(p2) --[[ line: 69 ]]
+	local var18 = if fFlagSquadsPresenceStoreMigration then var3(tostring(p0)) else useSelector(react.useCallback(function(p2)
 		-- upvalues: p0 (ref)
 		return p2.Squad.Presence.byUserId[tostring(p0)]
 	end, { p0 }))
 	
-	return react.useMemo(function() --[[ line: 77 ]]
+	return react.useMemo(function()
 		-- upvalues: var10 (write), var18 (ref), fFlagSquadsPresenceStoreMigration (copy), var4 (copy), presenceType (copy), var17 (ref), constantsModule (copy), var7 (ref), p1 (ref), getFFlagEnableCrossExpVoiceAbuseReport (copy), var9 (write), var8 (ref), var11 (write)
 		local t = { VoiceIneligibleButton = var10 }
 		local var20 = var18

@@ -11,13 +11,13 @@ return serviceModule:register({
 	label = "CoreScripts.TopBar.Traversal.History",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Page,
-	activated = function(_) --[[ line: 18 ]]
+	activated = function(_)
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), traversalHistoryPage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("TraversalHistoryPage", traversalHistoryPage:get())
 	end,
 	isActivated = traversalHistoryPage,
 	components = {
-		Icon = function(_) --[[ line: 23 ]]
+		Icon = function(_)
 			-- upvalues: commonIconModule (ref), traversalHistoryPage (ref)
 			return commonIconModule("Clock", nil, traversalHistoryPage)
 		end

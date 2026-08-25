@@ -10,7 +10,7 @@ local t = {
 	lastUpdated = { 25, 10, 24 }
 }
 
-local function createCounterEventConfig(p0) --[[ line: 23 ]]
+local function createCounterEventConfig(p0)
 	-- upvalues: t (ref), loggingProtocolModule (ref)
 	return {
 		eventName = `{t.eventName}_{p0}`,
@@ -22,7 +22,7 @@ local function createCounterEventConfig(p0) --[[ line: 23 ]]
 	}
 end
 
-return function(p1) --[[ line: 45 | named "sendAudioPlayerAnalytics" ]]
+return function(p1)
 	-- upvalues: createCounterEventConfig (ref), loggingProtocolModule (ref), t (ref)
 	local var4 = createCounterEventConfig(p1.action)
 	loggingProtocolModule.default:logRobloxTelemetryEvent(t, nil, p1)

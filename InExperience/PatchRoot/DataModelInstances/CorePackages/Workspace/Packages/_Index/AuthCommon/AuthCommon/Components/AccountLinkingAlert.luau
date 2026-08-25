@@ -22,7 +22,7 @@ local authButtonClick = authAnalyticsModule.Events.authButtonClick
 local incompatibleAccountsSupportLink = game:DefineFastString("IncompatibleAccountsSupportLink", "https://help.roblox.com/hc/articles/360000334523-Xbox-One-App-Trouble-logging-into-Roblox-account")
 local accountLinkingAlertTypeModule = require(authCommon.Enums.AccountLinkingAlertType)
 
-local function AccountLinkingAlert(p0) --[[ line: 51 ]]
+local function AccountLinkingAlert(p0)
 	-- upvalues: buttonType (ref), useScreenSize (ref), reactModule (ref), text (ref), withStyle (ref), interactiveAlert (ref)
 	local t = {}
 	
@@ -31,7 +31,7 @@ local function AccountLinkingAlert(p0) --[[ line: 51 ]]
 			buttonType = buttonType.Secondary,
 			props = {
 				text = p0.secondaryButtonText,
-				onActivated = function() --[[ line: 59 ]]
+				onActivated = function()
 					-- upvalues: p0 (ref)
 					p0.secondaryButtonCallback()
 				end
@@ -43,7 +43,7 @@ local function AccountLinkingAlert(p0) --[[ line: 51 ]]
 			buttonType = buttonType.PrimarySystem,
 			props = {
 				text = p0.primaryButtonText,
-				onActivated = function() --[[ line: 71 ]]
+				onActivated = function()
 					-- upvalues: p0 (ref)
 					p0.primaryButtonCallback()
 				end
@@ -51,7 +51,7 @@ local function AccountLinkingAlert(p0) --[[ line: 51 ]]
 		})
 	end
 	local var13 = useScreenSize()
-	local var14 = reactModule.useCallback(function() --[[ line: 80 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), reactModule (copy), text (copy)
 		return if p0.footerText and p0.footerCallback then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -68,7 +68,7 @@ local function AccountLinkingAlert(p0) --[[ line: 51 ]]
 		}) else nil
 	end, { p0.footerText, p0.footerCallback })
 	
-	return withStyle(function(_) --[[ line: 99 ]]
+	return withStyle(function(_)
 		-- upvalues: reactModule (copy), interactiveAlert (copy), p0 (ref), t (ref), var14 (ref), var13 (ref)
 		return reactModule.createElement(interactiveAlert, {
 			isRoactGamepadEnabled = false,
@@ -82,11 +82,11 @@ local function AccountLinkingAlert(p0) --[[ line: 51 ]]
 	end)
 end
 
-local function useIncompatibleAccountsAlertProps(p1) --[[ line: 114 ]]
+local function useIncompatibleAccountsAlertProps(p1)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useAppPolicy (ref), useLocalization (ref), reactModule (ref), guiService (ref), notificationType (ref), authButtonClick (ref), eventStreamConstants (ref), appPage (ref), default (ref), incompatibleAccountsSupportLink (ref)
 	local var15 = useDispatch()
 	local var16 = useNavigation()
-	local var17 = useAppPolicy(function(p2) --[[ line: 118 ]]
+	local var17 = useAppPolicy(function(p2)
 		return p2.getPlatformAccountName()
 	end)
 	local var18 = useLocalization({
@@ -108,7 +108,7 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ line: 114 ]]
 		bodyText = if p1.userFacingMessage then p1.userFacingMessage else var18.bodyText,
 		primaryButtonText = var18.primaryButtonText,
 		secondaryButtonText = var18.secondaryButtonText,
-		primaryButtonCallback = reactModule.useCallback(function() --[[ line: 133 ]]
+		primaryButtonCallback = reactModule.useCallback(function()
 			-- upvalues: guiService (copy), notificationType (copy), p1 (ref), var15 (ref), authButtonClick (copy), eventStreamConstants (copy)
 			guiService:BroadcastNotification("", notificationType.NATIVE_EXIT)
 			
@@ -117,7 +117,7 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ line: 114 ]]
 			end
 			authButtonClick(eventStreamConstants.Context.AccountLinking, eventStreamConstants.Button.PrimaryButton)
 		end, { p1.closeCentralOverlayThunk }),
-		secondaryButtonCallback = reactModule.useCallback(function() --[[ line: 141 ]]
+		secondaryButtonCallback = reactModule.useCallback(function()
 			-- upvalues: var16 (ref), appPage (copy), p1 (ref), var15 (ref), authButtonClick (copy), eventStreamConstants (copy)
 			var16.navigate(appPage.Landing)
 			
@@ -127,7 +127,7 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ line: 114 ]]
 			authButtonClick(eventStreamConstants.Context.AccountLinking, eventStreamConstants.Button.SecondaryButton)
 		end, { var16, p1.closeCentralOverlayThunk }),
 		footerText = var18.footerText,
-		footerCallback = reactModule.useCallback(function() --[[ line: 149 ]]
+		footerCallback = reactModule.useCallback(function()
 			-- upvalues: default (copy), incompatibleAccountsSupportLink (copy), authButtonClick (copy), eventStreamConstants (copy)
 			default:openURL(incompatibleAccountsSupportLink)
 			authButtonClick(eventStreamConstants.Context.AccountLinking, eventStreamConstants.Button.Support)
@@ -136,12 +136,12 @@ local function useIncompatibleAccountsAlertProps(p1) --[[ line: 114 ]]
 	}
 end
 
-local function IncompatibleAccountsAlert(p3) --[[ line: 167 ]]
+local function IncompatibleAccountsAlert(p3)
 	-- upvalues: useIncompatibleAccountsAlertProps (ref), reactModule (ref), AccountLinkingAlert (ref)
 	return reactModule.createElement(AccountLinkingAlert, useIncompatibleAccountsAlertProps(p3))
 end
 
-local function useRetryLogInAlertProps(p4) --[[ line: 172 ]]
+local function useRetryLogInAlertProps(p4)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useAppPolicy (ref), accountLinkingAlertTypeModule (ref), useLocalization (ref), reactModule (ref), appPage (ref)
 	local var19 = useDispatch()
 	local var20 = useNavigation()
@@ -150,7 +150,7 @@ local function useRetryLogInAlertProps(p4) --[[ line: 172 ]]
 		primaryButtonText = "Authentication.SignUp.Button.RetryLogIn",
 		bodyText = if p4.alertType == accountLinkingAlertTypeModule.RetryLogInAlreadyLinked then {
 			"Authentication.SignUp.Description.AccountAlreadyLinked",
-			platformAccountName = useAppPolicy(function(p5) --[[ line: 176 ]]
+			platformAccountName = useAppPolicy(function(p5)
 				return p5.getPlatformAccountName()
 			end)
 		} elseif p4.alertType == accountLinkingAlertTypeModule.RetryLogInConnectionFailure then "Authentication.Login.Error.PlatformAccountConnectionFailure" else "Authentication.SignUp.Response.ErrorTryAgain"
@@ -160,7 +160,7 @@ local function useRetryLogInAlertProps(p4) --[[ line: 172 ]]
 		titleText = var21.titleText,
 		bodyText = var21.bodyText,
 		primaryButtonText = var21.primaryButtonText,
-		primaryButtonCallback = reactModule.useCallback(function() --[[ line: 196 ]]
+		primaryButtonCallback = reactModule.useCallback(function()
 			-- upvalues: var20 (ref), appPage (copy), p4 (ref), var19 (ref)
 			var20.navigate(appPage.PlatformAccountRouter)
 			
@@ -172,14 +172,14 @@ local function useRetryLogInAlertProps(p4) --[[ line: 172 ]]
 	}
 end
 
-local function RetryLogInAlert(p6) --[[ line: 212 ]]
+local function RetryLogInAlert(p6)
 	-- upvalues: useRetryLogInAlertProps (ref), reactModule (ref), AccountLinkingAlert (ref)
 	return reactModule.createElement(AccountLinkingAlert, useRetryLogInAlertProps(p6))
 end
 
-return function(p7) --[[ line: 217 | named "AccountLinkingAlertContainer" ]]
+return function(p7)
 	-- upvalues: reactModule (ref), authModalShown (ref), eventStreamConstants (ref), accountLinkingAlertTypeModule (ref), IncompatibleAccountsAlert (ref), RetryLogInAlert (ref)
-	reactModule.useEffect(function() --[[ line: 218 ]]
+	reactModule.useEffect(function()
 		-- upvalues: authModalShown (copy), eventStreamConstants (copy), p7 (ref)
 		authModalShown(eventStreamConstants.Context.AccountLinking, nil, p7.alertType)
 	end, { p7.alertType })

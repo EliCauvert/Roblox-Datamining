@@ -1,6 +1,6 @@
 ﻿local sessionTypeModule = require(script.Parent.SessionType)
 
-return function(p0, p1, p2) --[[ line: 8 ]]
+return function(p0, p1, p2)
 	-- upvalues: sessionTypeModule (ref)
 	assert(p0, "sessionManager can't be nil")
 	p0:RemoveSessionsWithMetadataKey(sessionTypeModule.Metadata.GamePlay.GamePlaySession)

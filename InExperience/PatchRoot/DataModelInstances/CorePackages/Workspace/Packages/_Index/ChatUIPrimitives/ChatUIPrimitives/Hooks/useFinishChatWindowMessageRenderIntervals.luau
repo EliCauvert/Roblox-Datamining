@@ -2,9 +2,9 @@
 local reactModule = require(chatUIPrimitives.Parent.React)
 local expChatPerfTrackerModule = require(chatUIPrimitives.Telemetry.ExpChatPerfTracker)
 
-return function(p0) --[[ line: 29 | named "useFinishChatWindowMessageRenderIntervals" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), expChatPerfTrackerModule (ref)
-	return reactModule.useCallback(function() --[[ line: 30 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: p0 (ref), expChatPerfTrackerModule (copy)
 		local var3 = p0() or "UNKNOWN_MESSAGE_ID"
 		expChatPerfTrackerModule.finish(expChatPerfTrackerModule.Events.MessageReceiveToWindowRenderInterval, { messageId = var3 })

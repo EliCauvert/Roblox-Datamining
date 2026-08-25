@@ -10,7 +10,7 @@ local fFlagCarouselUserTileUseProfileFrameThumbnailModule = require(socialCommon
 local playerNameModule = require(script.Parent.PlayerName)
 local constantsModule = require(script.Parent.Constants)
 
-local var7 = function() --[[ line: 16 ]] end
+local var7 = function() end
 
 local t = {
 	tileSize = constantsModule.TILE_SIZE,
@@ -18,12 +18,12 @@ local t = {
 	contextualTopPadding = constantsModule.CONTEXTUAL_TOP_PADDING
 }
 
-return function(p0) --[[ line: 51 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), playerTile (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagCarouselUserTileUseProfileFrameThumbnailModule (ref), playerNameModule (ref), interactable (ref), var7 (ref)
 	local var9 = cryoModule.Dictionary.join(t, p0)
 	local tileSize = var9.tileSize
 	
-	local _ = function() --[[ line: 72 ]]
+	local _ = function()
 		-- upvalues: var9 (ref)
 		return if var9.renderContextualInfo then var9.renderContextualInfo() else nil
 	end
@@ -74,7 +74,7 @@ return function(p0) --[[ line: 51 ]]
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				PlayerName = (function() --[[ line: 76 ]]
+				PlayerName = (function()
 					-- upvalues: var9 (ref), reactModule (copy), playerNameModule (copy)
 					return if var9.renderPlayerName then var9.renderPlayerName() else var9.userName and reactModule.createElement(playerNameModule, { name = var9.userName, width = var9.tileSize }) or nil
 				end)()

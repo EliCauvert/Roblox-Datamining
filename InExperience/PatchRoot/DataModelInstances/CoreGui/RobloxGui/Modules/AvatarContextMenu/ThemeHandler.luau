@@ -36,7 +36,7 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1:UpdateTheme(p0) --[[ line: 56 ]]
+function t_1:UpdateTheme(p0)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -52,9 +52,9 @@ function t_1:UpdateTheme(p0) --[[ line: 56 ]]
 	self.Theme = t_1
 end
 
-function t_1.RegisterCoreMethods(p1) --[[ line: 75 ]]
+function t_1.RegisterCoreMethods(p1)
 	-- upvalues: t (ref), starterGuiService (ref)
-	starterGuiService:RegisterSetCore("AvatarContextMenuTheme", function(value) --[[ line: 76 | named "setMenuTheme" ]]
+	starterGuiService:RegisterSetCore("AvatarContextMenuTheme", function(value)
 		-- upvalues: t (copy), p1 (ref)
 		if type(value) ~= "table" then
 			error("AvatarContextMenuTheme argument must be a table")
@@ -70,11 +70,11 @@ function t_1.RegisterCoreMethods(p1) --[[ line: 75 ]]
 	end)
 end
 
-function t_1:GetTheme() --[[ line: 93 ]]
+function t_1:GetTheme()
 	return self.Theme
 end
 
-function t_1.new() --[[ line: 97 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), t (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.Theme = t

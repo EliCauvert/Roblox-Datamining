@@ -6,12 +6,12 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.QrCode] = function(p0) --[[ line: 14 ]]
+	[enumsModule.ProfileActions.QrCode] = function(p0)
 		-- upvalues: iconName (ref), profileTypes (ref), eventNamesModule (ref)
 		return {
 			icon = iconName.SquaresGridQr,
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 18 ]]
+				[profileTypes.User] = function()
 					-- upvalues: p0 (ref), eventNamesModule (copy)
 					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonShareProfileQRCode, { buttonSurface = p0.buttonSurface })
 					p0.navigateTo.qRCodePage()

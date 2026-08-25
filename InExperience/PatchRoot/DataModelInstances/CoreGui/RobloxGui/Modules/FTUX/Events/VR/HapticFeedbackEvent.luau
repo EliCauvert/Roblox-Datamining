@@ -3,7 +3,7 @@ local _ = require(script.Parent.Parent.EventType)
 
 return {
 	Name = "HapticFeedbackEvent",
-	StartEvent = function() --[[ line: 10 ]]
+	StartEvent = function()
 		-- upvalues: hapticService (ref)
 		local gamepad1 = Enum.UserInputType.Gamepad1
 		local gamepad2 = Enum.UserInputType.Gamepad2

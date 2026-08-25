@@ -1,7 +1,7 @@
 ﻿local tModule = require(script:FindFirstAncestor("SquadsCore").Parent.t)
 local t = {}
 
-function t.new(p0) --[[ line: 8 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -10,7 +10,7 @@ function t.new(p0) --[[ line: 8 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 20 ]]
+function t.mock(p1)
 	-- upvalues: t (ref)
 	p1 = p1 or {}
 	
@@ -26,7 +26,7 @@ function t.mock(p1) --[[ line: 20 ]]
 	})
 end
 
-function t.format(p2) --[[ line: 37 ]]
+function t.format(p2)
 	-- upvalues: t (ref)
 	return t.new({
 		createdAtTime = p2.scheduledGroupUp.createdAtTime,

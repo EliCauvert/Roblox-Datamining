@@ -75,12 +75,12 @@ local t = {
 	sideMargin = 0
 }
 
-local function _(p0, p1) --[[ line: 220 | named "isScrollingEnabled" ]]
+local function _(p0, p1)
 	-- upvalues: fFlagLuaAppEnableVRCarouselScrolling (ref)
 	return if p0 == nil then if fFlagLuaAppEnableVRCarouselScrolling then true else not p1 else p0
 end
 
-local _ = function(p2, _, p3, p4, p5) --[[ line: 233 | named "areScrollButtonsEnabled" ]]
+local _ = function(p2, _, p3, p4, p5)
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
 	if not p3 then
 		return false
@@ -94,7 +94,7 @@ local _ = function(p2, _, p3, p4, p5) --[[ line: 233 | named "areScrollButtonsEn
 	return p4
 end
 
-return reactModule.memo(function(_) --[[ line: 253 | named "CollectionCarousel" ]]
+return reactModule.memo(function(_)
 	-- upvalues: validateProps (ref), var17 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), fFlagLuaAppFixCarouselPeekInControl (ref), argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), useCollectionSizeBindingsModule (ref), calculateCarouselSpacingMetricsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), useDesignTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
 -- FATAL: Failed to generate AST for `CollectionCarousel` function:
 runtime : [KeyError] :11990: 104

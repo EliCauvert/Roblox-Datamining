@@ -8,7 +8,7 @@ local isSuccess = require(script.Parent.httpStatus).isSuccess
 local statusCodeActionsModule = require(script.Parent.statusCodeActions)
 local var6 = nil
 
-local function _() --[[ line: 16 | named "defaultNetwork" ]]
+local function _()
 	-- upvalues: var6 (write), withRetryModule (ref), createRequestInternalNetworkModule (ref)
 	if var6 == nil then
 		var6 = withRetryModule(createRequestInternalNetworkModule())
@@ -16,7 +16,7 @@ local function _() --[[ line: 16 | named "defaultNetwork" ]]
 	return var6
 end
 
-local _ = function(p0) --[[ line: 23 | named "pickNetwork" ]]
+local _ = function(p0)
 	-- upvalues: withRetryModule (ref), createRequestInternalNetworkModule (ref), var6 (write)
 	local network = p0.network
 	
@@ -32,13 +32,13 @@ local _ = function(p0) --[[ line: 23 | named "pickNetwork" ]]
 	return var6
 end
 
-local function asBuffer(p1) --[[ line: 38 ]]
+local function asBuffer(p1)
 	return if typeof(p1) == "buffer" then p1 else buffer.fromstring(p1 or "")
 end
 
-local _ = function(p2) --[[ line: 45 | named "buildProtobufDecoder" ]]
+local _ = function(p2)
 	-- upvalues: isSuccess (ref), asBuffer (ref)
-	return function(p3) --[[ line: 46 ]]
+	return function(p3)
 		-- upvalues: isSuccess (copy), p2 (ref), asBuffer (copy)
 		if isSuccess(p3.statusCode) then
 			return p2(asBuffer(p3.responseBody)), nil, nil
@@ -47,7 +47,7 @@ local _ = function(p2) --[[ line: 45 | named "buildProtobufDecoder" ]]
 	end
 end
 
-local _ = function(p4) --[[ line: 55 | named "resolveStatusCodeActions" ]]
+local _ = function(p4)
 	-- upvalues: statusCodeActionsModule (ref)
 	local var8 = statusCodeActionsModule.snapshot()
 	
@@ -61,7 +61,7 @@ local _ = function(p4) --[[ line: 55 | named "resolveStatusCodeActions" ]]
 	return var8
 end
 
-return function(p5) --[[ line: 68 | named "fetch" ]]
+return function(p5)
 	-- upvalues: encodersModule (ref), isSuccess (ref), asBuffer (ref), decodersModule (ref), createRequestModule (ref), withRetryModule (ref), createRequestInternalNetworkModule (ref), var6 (write), statusCodeActionsModule (ref)
 	local responseEncoding = p5.responseEncoding or "json"
 	local var10 = if (p5.requestEncoding or "json") == "protobuf" then encodersModule.encodeRaw("application/x-protobuf") else nil
@@ -70,7 +70,7 @@ return function(p5) --[[ line: 68 | named "fetch" ]]
 	if responseEncoding == "protobuf" then
 		local decode = p5.decode
 		
-		local var11 = function(p6) --[[ line: 46 ]]
+		local var11 = function(p6)
 			-- upvalues: isSuccess (copy), decode (ref), asBuffer (copy)
 			if isSuccess(p6.statusCode) then
 				return decode(asBuffer(p6.responseBody)), nil, nil

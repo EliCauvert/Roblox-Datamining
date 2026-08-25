@@ -3,11 +3,11 @@ local roact = inGameMenuDependenciesModule.Roact
 local t = inGameMenuDependenciesModule.t
 local localizationConsumerModule = require(script.Parent.LocalizationConsumer)
 
-return function(p0) --[[ line: 9 | named "withLocalization" ]]
+return function(p0)
 	-- upvalues: t (ref), roact (ref), localizationConsumerModule (ref)
 	assert(t.table(p0))
 	
-	return function(p1) --[[ line: 12 ]]
+	return function(p1)
 		-- upvalues: t (copy), roact (copy), localizationConsumerModule (copy), p0 (ref)
 		assert(t.callback(p1))
 		

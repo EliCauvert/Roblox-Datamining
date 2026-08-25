@@ -3,7 +3,7 @@ local userInputService = game:GetService("UserInputService")
 local VRService = game:GetService("VRService")
 local paymentPlatformEnumModule = require(bulkPurchaseApp.Enums.PaymentPlatformEnum)
 
-return function() --[[ line: 9 | named "getPaymentPlatform" ]]
+return function()
 	-- upvalues: userInputService (ref), paymentPlatformEnumModule (ref), VRService (ref)
 	local platform = userInputService:GetPlatform()
 	

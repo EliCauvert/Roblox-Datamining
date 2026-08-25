@@ -6,7 +6,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention.InExperienceInterventionAnalytics)
 local chatInterventionGenericToastModule = require(inExperienceIntervention.Components.ChatInterventionGenericToast)
 
-function ChatNudgeToast(p0) --[[ line: 14 ]]
+function ChatNudgeToast(p0)
 	-- upvalues: useLocalization (ref), constants (ref), reactModule (ref), chatInterventionGenericToastModule (ref), inExperienceInterventionAnalyticsModule (ref)
 	local var4 = useLocalization(constants.localizationKeys)
 	

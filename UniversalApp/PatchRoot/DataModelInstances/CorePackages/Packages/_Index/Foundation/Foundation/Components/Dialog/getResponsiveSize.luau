@@ -3,7 +3,7 @@ local dialogSizeModule = require(foundation.Enums.DialogSize)
 local _ = require(foundation.Providers.Style.Tokens)
 local DIALOG_SIZES = require(script.Parent.useDialogVariants).DIALOG_SIZES
 
-return function(p0, p1, p2) --[[ line: 11 | named "getResponsiveSize" ]]
+return function(p0, p1, p2)
 	-- upvalues: dialogSizeModule (ref), DIALOG_SIZES (ref)
 	local var2 = ({
 		[dialogSizeModule.Small] = p2.Padding.Large,

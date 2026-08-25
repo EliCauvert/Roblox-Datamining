@@ -7,7 +7,7 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local var5 = nil
 
 return {
-	render = function() --[[ line: 19 ]]
+	render = function()
 		-- upvalues: robloxSubscriptionStoreModule (ref), reactRobloxModule (ref), reactModule (ref), robloxSubscriptionHeadlessListenerHostModule (ref), var5 (write)
 		local var6 = robloxSubscriptionStoreModule.get()
 		var6.triggerUnmountUI()
@@ -17,7 +17,7 @@ return {
 		local var8 = reactRobloxModule.createRoot(robloxSubscriptionPurchaseHeadlessOverlay)
 		var8:render(reactModule.createElement(robloxSubscriptionHeadlessListenerHostModule))
 		
-		local function cleanup() --[[ line: 30 ]]
+		local function cleanup()
 			-- upvalues: var8 (ref), robloxSubscriptionPurchaseHeadlessOverlay (ref)
 			var8:unmount()
 			robloxSubscriptionPurchaseHeadlessOverlay:Destroy()
@@ -28,7 +28,7 @@ return {
 		
 		return cleanup
 	end,
-	close = function() --[[ line: 12 ]]
+	close = function()
 		-- upvalues: var5 (write)
 		if var5 then
 			var5()

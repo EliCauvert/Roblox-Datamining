@@ -19,20 +19,20 @@ local view = foundationModule.View
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
 local t = { offset = 5, position = popoverSide.Bottom }
 
-return reactModule.memo(function(p0) --[[ line: 57 | named "InExpDropdownWithPopover" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), view (ref), text (ref), icon (ref), iconName (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), t (ref), radius (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var7, var8 = reactModule.useState(false)
 	local var9 = reactModule.useRef(nil)
 	local var10, var11 = reactModule.useState(0)
 	local onOpenChange = p0.onOpenChange
-	local var12 = reactModule.useCallback(function(p1) --[[ line: 67 ]]
+	local var12 = reactModule.useCallback(function(p1)
 		-- upvalues: onOpenChange (ref), var8 (ref)
 		if onOpenChange then
 			onOpenChange(p1)
 		end
 		var8(p1)
 	end, { onOpenChange })
-	local var13 = reactModule.useMemo(function() --[[ line: 74 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		if p0.value == nil then
 			return nil
@@ -44,15 +44,15 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "InExpDropdownWithPop
 		end
 		return nil
 	end, { p0.items, p0.value })
-	local var14 = reactModule.useCallback(function() --[[ line: 86 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var7 (ref)
 		var12(not var7)
 	end, { var7, var12 })
-	local var15 = reactModule.useCallback(function() --[[ line: 90 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
 		var12(false)
 	end, { var12 })
-	local var16 = reactModule.useMemo(function() --[[ line: 94 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var15 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var15) }
@@ -66,7 +66,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "InExpDropdownWithPop
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-top-xxsmall",
 		ref = var9,
-		onAbsoluteSizeChanged = function(value) --[[ line: 145 ]]
+		onAbsoluteSizeChanged = function(value)
 			-- upvalues: var11 (ref)
 			var11(value.AbsoluteSize.X)
 		end,
@@ -91,7 +91,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "InExpDropdownWithPop
 				Menu = reactModule.createElement(view, {
 					tag = "col align-x-center align-y-center gap-xsmall auto-y padding-xsmall stroke-default radius-medium",
 					Size = UDim2.new(0, var10 - 2, 0, -2)
-				}, reactModule.useMemo(function() --[[ line: 107 ]]
+				}, reactModule.useMemo(function()
 					-- upvalues: items (ref), value (ref), reactModule (copy), view (copy), var12 (ref), onItemChanged (ref), text (copy), icon (copy), iconName (copy)
 					local t = {}
 					
@@ -100,7 +100,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "InExpDropdownWithPop
 						local var19 = id == value
 						t[`item-{tostring(id)}`] = reactModule.createElement(view, {
 							LayoutOrder = i,
-							onActivated = function() --[[ line: 114 ]]
+							onActivated = function()
 								-- upvalues: var12 (copy), onItemChanged (copy), id (ref)
 								var12(false)
 								onItemChanged(id)

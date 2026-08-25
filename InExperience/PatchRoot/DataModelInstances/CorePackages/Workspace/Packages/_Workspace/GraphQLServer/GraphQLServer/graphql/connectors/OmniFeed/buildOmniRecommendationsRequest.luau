@@ -3,8 +3,8 @@ local makeOmniRecommendationsRequest = require(parent.GraphQlShared).MakeOmniRec
 local _ = require(parent.LuauPolyfill)
 local _ = require(parent.Fetch)
 
-local function _(p0) --[[ line: 11 | named "makeNetworkImpl" ]]
-	return function(p1, _, p2) --[[ line: 12 ]]
+local function _(p0)
+	return function(p1, _, p2)
 		-- upvalues: p0 (ref)
 		return p0(p1, {
 			method = "POST",
@@ -17,9 +17,9 @@ local function _(p0) --[[ line: 11 | named "makeNetworkImpl" ]]
 	end
 end
 
-return function(p3) --[[ line: 24 ]]
+return function(p3)
 	-- upvalues: makeOmniRecommendationsRequest (ref)
-	local var0 = function(p4, _, p5) --[[ line: 12 ]]
+	local var0 = function(p4, _, p5)
 		-- upvalues: p3 (ref)
 		return p3(p4, {
 			method = "POST",
@@ -31,7 +31,7 @@ return function(p3) --[[ line: 24 ]]
 		})
 	end
 	
-	return function(p6, p7, p8, p9) --[[ line: 26 ]]
+	return function(p6, p7, p8, p9)
 		-- upvalues: makeOmniRecommendationsRequest (copy), var0 (ref)
 		return makeOmniRecommendationsRequest(var0, p6, p7, p8, p9)
 	end

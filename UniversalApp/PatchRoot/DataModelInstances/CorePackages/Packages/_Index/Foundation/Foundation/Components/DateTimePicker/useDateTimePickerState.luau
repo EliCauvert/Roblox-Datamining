@@ -10,7 +10,7 @@ local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVaria
 local _ = require(foundation.Components.Types)
 local guiService = require(foundation.Utility.Wrappers.Services).GuiService
 
-return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
+return function(p0)
 	-- upvalues: dateTimePickerVariantModule (ref), reactModule (ref), dateTimeRangeSelectionUtilitiesModule (ref), dateTimeParsingUtilitiesModule (ref), guiService (ref), dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref), dateTimeEqualityUtilitiesModule (ref)
 	local variant = p0.variant or dateTimePickerVariantModule.Single
 	local var9 = if variant ~= dateTimePickerVariantModule.Dual then variant == dateTimePickerVariantModule.DualWithPresets else true
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 	local var11 = variant == dateTimePickerVariantModule.SingleWithTime
 	local var12, var13 = reactModule.useState(false)
 	local var14 = reactModule.useRef(nil)
-	local var15 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), dateTimeRangeSelectionUtilitiesModule (copy), var9 (ref)
 		local defaultDates = p0.defaultDates
 		
@@ -27,32 +27,32 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 	local var16, var17 = reactModule.useState(if var15 then dateTimeParsingUtilitiesModule.formatInputText({ dates = var15, variant = variant }) else "")
 	local var18 = reactModule.useRef(var16)
 	var18.current = var16
-	local var19, var20 = reactModule.useState(function() --[[ line: 97 ]]
+	local var19, var20 = reactModule.useState(function()
 		-- upvalues: var15 (ref)
 		return var15
 	end)
 	local var21 = reactModule.useRef(var19)
 	var21.current = var19
 	local var22, var23 = reactModule.useState(nil)
-	local var24, var25 = reactModule.useState(function() --[[ line: 106 ]]
+	local var24, var25 = reactModule.useState(function()
 		-- upvalues: var15 (ref)
 		return var15
 	end)
-	local var26 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref)
 		var13(false)
 	end, {})
-	local var27 = reactModule.useCallback(function() --[[ line: 114 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref)
 		var13(true)
 	end, {})
-	local var28 = reactModule.useCallback(function() --[[ line: 118 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: guiService (copy), var27 (ref)
 		if guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
 			var27()
 		end
 	end, { var27, guiService.ViewportDisplaySize })
-	local var29 = reactModule.useCallback(function(p1, p2) --[[ line: 125 ]]
+	local var29 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var20 (ref), var21 (ref), var25 (ref), var23 (ref)
 		var20(p1)
 		var21.current = p1
@@ -65,13 +65,13 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 		end
 	end, {})
 	
-	local function _(p3) --[[ line: 137 | named "resolvedViewAnchor" ]]
+	local function _(p3)
 		-- upvalues: dateTimeCalendarViewUtilitiesModule (copy), p0 (ref)
 		return DateTime.fromUnixTimestamp(dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(p3, p0.referenceDate).UnixTimestamp)
 	end
 	
 	local var30 = reactModule.useRef(nil)
-	local var31 = reactModule.useCallback(function(p4) --[[ line: 145 ]]
+	local var31 = reactModule.useCallback(function(p4)
 		-- upvalues: var17 (ref), var30 (ref), var29 (ref), dateTimeCalendarViewUtilitiesModule (copy), p0 (ref), var9 (ref), dateTimeParsingUtilitiesModule (copy), dateTimeUtilitiesModule (copy)
 		var17(p4)
 		
@@ -81,7 +81,7 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 			
 			if p4 == current then return end
 		end
-		local function clearDraftToReference() --[[ line: 157 ]]
+		local function clearDraftToReference()
 			-- upvalues: var29 (copy), dateTimeCalendarViewUtilitiesModule (copy), p0 (copy)
 			var29({}, {
 				asApplied = true,
@@ -122,7 +122,7 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 	end, {
 		p0.onChanged, var9, var11, p0.referenceDate, p0.selectableDateRange, var29
 	})
-	local var32 = reactModule.useCallback(function(_) --[[ line: 206 ]]
+	local var32 = reactModule.useCallback(function(_)
 		-- upvalues: var9 (ref), var18 (ref), dateTimeParsingUtilitiesModule (copy), p0 (ref), variant (ref), var21 (ref), dateTimeEqualityUtilitiesModule (copy), var30 (ref), var17 (ref)
 		if not var9 then return end
 		local current = var18.current
@@ -142,18 +142,18 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 			return
 		end
 	end, { var9, p0.onChanged, p0.selectableDateRange, variant })
-	local var33 = reactModule.useCallback(function(p5) --[[ line: 245 ]]
+	local var33 = reactModule.useCallback(function(p5)
 		-- upvalues: dateTimeRangeSelectionUtilitiesModule (copy), var21 (ref), var29 (ref)
 		var29(dateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(var21.current, p5))
 	end, { var29 })
-	local var34 = reactModule.useCallback(function(p6) --[[ line: 250 ]]
+	local var34 = reactModule.useCallback(function(p6)
 		-- upvalues: p0 (ref), dateTimeEqualityUtilitiesModule (copy), var29 (ref)
 		if p0.selectableDateRange and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(p6, p0.selectableDateRange) then
 			return
 		end
 		var29({ p6.startDate, p6.endDate }, { anchor = p6.startDate })
 	end, { p0.selectableDateRange, var29 })
-	local var35 = reactModule.useCallback(function(p7) --[[ line: 261 ]]
+	local var35 = reactModule.useCallback(function(p7)
 		-- upvalues: var21 (ref), var29 (ref)
 		local current = var21.current
 		local var51 = if current then current[1] else nil
@@ -166,22 +166,22 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 		end
 		var29(p7)
 	end, { var29 })
-	local var36 = reactModule.useCallback(function() --[[ line: 284 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: var29 (ref), var24 (ref), dateTimeCalendarViewUtilitiesModule (copy), p0 (ref)
 		var29(var24, {
 			anchor = DateTime.fromUnixTimestamp(dateTimeCalendarViewUtilitiesModule.resolveAnchorDate(var24, p0.referenceDate).UnixTimestamp)
 		})
 	end, { var24, p0.referenceDate, var29 })
-	local var37 = reactModule.useCallback(function() --[[ line: 290 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var36 (ref), var26 (ref)
 		var36()
 		var26()
 	end, { var36, var26 })
-	local var38 = reactModule.useCallback(function() --[[ line: 295 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: var36 (ref)
 		var36()
 	end, { var36 })
-	local var39 = reactModule.useCallback(function(p8) --[[ line: 299 ]]
+	local var39 = reactModule.useCallback(function(p8)
 		-- upvalues: var29 (ref), var9 (ref), dateTimeUtilitiesModule (copy), var30 (ref), var17 (ref), p0 (ref), var11 (ref)
 		local var55 = p8[1]
 		
@@ -203,7 +203,7 @@ return function(p0) --[[ line: 65 | named "useDateTimePickerState" ]]
 		var17(var58)
 		p0.onChanged(var55)
 	end, { p0.onChanged, var9, var11, var29 })
-	local var40 = reactModule.useCallback(function() --[[ line: 323 ]]
+	local var40 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref), var10 (ref), var26 (ref), var25 (ref), var39 (ref)
 		local current = var21.current
 		

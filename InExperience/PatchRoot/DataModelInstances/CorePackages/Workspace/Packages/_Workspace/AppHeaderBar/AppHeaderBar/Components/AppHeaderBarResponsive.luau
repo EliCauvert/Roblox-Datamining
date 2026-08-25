@@ -10,7 +10,7 @@ local useBreakpointXOrLarger = responsiveModule.useBreakpointXOrLarger
 local usePreferredInput = responsiveModule.usePreferredInput
 local _ = require(parent.Types)
 
-return function(p0) --[[ line: 20 | named "AppHeaderBarResponsive" ]]
+return function(p0)
 	-- upvalues: useBreakpointXOrLarger (ref), responsiveModule (ref), usePreferredInput (ref), useStyle (ref), reactModule (ref), cryoModule (ref), appHeaderBarComponentModule (ref)
 	local var5 = useBreakpointXOrLarger(responsiveModule.Keys.Medium)
 	local var6 = useBreakpointXOrLarger(responsiveModule.Keys.Large)
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 20 | named "AppHeaderBarResponsive" ]]
 	local paddingBottom = p0.paddingBottom
 	local onMedia = p0.onMedia
 	
-	return reactModule.createElement(appHeaderBarComponentModule, cryoModule.Dictionary.join(p0, reactModule.useMemo(function() --[[ line: 37 ]]
+	return reactModule.createElement(appHeaderBarComponentModule, cryoModule.Dictionary.join(p0, reactModule.useMemo(function()
 		-- upvalues: var6 (ref), var7 (ref), cryoModule (copy), shouldRenderCenter (ref), paddingTop (ref), tokens (ref), paddingBottom (ref), onMedia (ref), shouldRenderTitle (ref), var5 (ref), isTitleCentered (ref), titleFontStyle (ref), utilitiesGap (ref)
 		local t = {
 			title = if var6 and var7 then cryoModule.None else nil,

@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new() --[[ line: 4 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -9,11 +9,11 @@ function t.new() --[[ line: 4 ]]
 	return t_1
 end
 
-local function _(value) --[[ line: 10 | named "isRbxAssetId" ]]
+local function _(value)
 	return value:find("rbxassetid://")
 end
 
-function t:addPlay(p0, p1, p2) --[[ line: 14 ]]
+function t:addPlay(p0, p1, p2)
 	if not p0:find("rbxassetid://") then return end
 	local var2 = p0:sub(14)
 	

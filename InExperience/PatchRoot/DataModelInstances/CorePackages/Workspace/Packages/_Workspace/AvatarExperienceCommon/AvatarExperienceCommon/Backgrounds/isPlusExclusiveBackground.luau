@@ -1,6 +1,6 @@
 ﻿local getTemporaryPlusBackgroundIdsModule = require(script.Parent.getTemporaryPlusBackgroundIds)
 
-return function(value, p0) --[[ line: 3 | named "isPlusExclusiveBackground" ]]
+return function(value, p0)
 	-- upvalues: getTemporaryPlusBackgroundIdsModule (ref)
 	if p0 ~= nil then
 		return p0

@@ -40,17 +40,17 @@ local authFormInteraction = authAnalyticsModule.Events.authFormInteraction
 local var18 = getFIntIDVPollDelay()
 local var19 = getFIntIDVMaxRetries()
 
-local function _(p0) --[[ line: 65 | named "isFailure" ]]
+local function _(p0)
 	-- upvalues: IDVSessionStatusEnum (ref)
 	return if p0 ~= IDVSessionStatusEnum.Failure then if p0 ~= IDVSessionStatusEnum.RequiresManualReview then if p0 ~= IDVSessionStatusEnum.RequiresRetry then p0 == IDVSessionStatusEnum.Expired else true else true else true
 end
 
-local _ = function(p1, p2) --[[ line: 72 | named "getErrorDescription" ]]
+local _ = function(p1, p2)
 	-- upvalues: IDVSessionStatusEnum (ref)
 	return if p1 == IDVSessionStatusEnum.Failure or p1 == IDVSessionStatusEnum.RequiresManualReview then p2.declined elseif p1 == IDVSessionStatusEnum.RequiresRetry then p2.retry elseif p1 == IDVSessionStatusEnum.Expired then p2.timeout else p2.retry
 end
 
-return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
+return function(p3)
 	-- upvalues: IDVApiProvider (ref), useDeviceType (ref), useNavigation (ref), useLocalization (ref), idvErrorScreenStrings (ref), idvWithQRCodeUpsellStrings (ref), reactModule (ref), actionStatusEnum (ref), getFFlagEnableNativePersonaInquiryForAmpIDVUpsellModule (ref), facialAgeEstimationServiceWrapperModule (ref), getFFlagEnableDirectLinkForTabletsModule (ref), deviceType (ref), useRoactService (ref), appLinking (ref), roactNetworking (ref), appScreensModule (ref), getFStringBiometricPrivacyPolicyLinkModule (ref), IDVSessionStatusEnum (ref), IDVStep (ref), getFFlagEnableAmpIDVUpsellAnalyticsModule (ref), authModalShown (ref), authMsgShown (ref), var18 (ref), var19 (ref), promiseModule (ref), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (ref), authFormInteraction (ref), IDVErrorScreenModule (ref), loading (ref), iconSize (ref), IDVDirectLinkUpsellModule (ref), IDVWithQRCodeUpsellModule (ref)
 	local featureName = p3.featureName
 	local onSuccess = p3.onSuccess
@@ -73,19 +73,19 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 	local var39 = if getFFlagEnableDirectLinkForTabletsModule() then true else deviceType_1 == deviceType.Phone
 	local var40 = useRoactService(appLinking)
 	local var41 = useRoactService(roactNetworking)
-	local schedulePoll = p3.schedulePoll or function(p4, p5) --[[ line: 111 ]]
-		spawn(function() --[[ line: 112 ]]
+	local schedulePoll = p3.schedulePoll or function(p4, p5)
+		spawn(function()
 			-- upvalues: p5 (ref), p4 (ref)
 			wait(p5)
 			p4()
 		end)
 	end
-	local openIdvLink = p3.openIdvLink or function(p6) --[[ line: 118 ]]
+	local openIdvLink = p3.openIdvLink or function(p6)
 		-- upvalues: var40 (ref)
 		var40:openURL(p6)
 	end
 	
-	local var44 = function() --[[ line: 122 ]]
+	local var44 = function()
 		-- upvalues: var22 (ref), appScreensModule (copy), getFStringBiometricPrivacyPolicyLinkModule (copy), var24 (ref)
 		var22.navigate(appScreensModule.GenericWebPage, {
 			detail = getFStringBiometricPrivacyPolicyLinkModule(),
@@ -96,7 +96,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 		})
 	end
 	
-	local function updateChecklist(p7) --[[ line: 132 ]]
+	local function updateChecklist(p7)
 		-- upvalues: IDVSessionStatusEnum (copy), var37 (ref), IDVStep (copy)
 		if p7 == IDVSessionStatusEnum.Stored then
 			var37(IDVStep.UpdatedRobloxProfile)
@@ -115,14 +115,14 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 		end
 	end
 	
-	local function _(p8) --[[ line: 146 | named "reportErrorShown" ]]
+	local function _(p8)
 		-- upvalues: getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), authModalShown (copy), entryPointEventCtx (ref)
 		if getFFlagEnableAmpIDVUpsellAnalyticsModule() then
 			authModalShown(entryPointEventCtx, p8, "idvFailed")
 		end
 	end
 	
-	local function pollIDVStatus(p9, p10, p11) --[[ line: 152 ]]
+	local function pollIDVStatus(p9, p10, p11)
 		-- upvalues: var33 (ref), var35 (ref), var23 (ref), getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), authModalShown (copy), entryPointEventCtx (ref), var20 (ref), updateChecklist (ref), IDVSessionStatusEnum (copy), authMsgShown (copy), var31 (ref), actionStatusEnum (copy), schedulePoll (ref), var29 (ref), pollIDVStatus (ref), var18 (copy)
 		if p10 == 0 then
 			var33(true)
@@ -134,7 +134,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 				return
 			end
 		else
-			var20.getVerifiedStatus(p9):andThen(function(p12) --[[ line: 160 ]]
+			var20.getVerifiedStatus(p9):andThen(function(p12)
 				-- upvalues: updateChecklist (copy), IDVSessionStatusEnum (copy), getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), authMsgShown (copy), entryPointEventCtx (copy), p11 (ref), var31 (copy), actionStatusEnum (copy), var33 (copy), var35 (copy), var23 (copy), authModalShown (copy), schedulePoll (copy), var29 (copy), pollIDVStatus (copy), p9 (ref), p10 (ref), var18 (copy)
 				local isVerified = p12.isVerified
 				local sessionStatus = p12.sessionStatus
@@ -163,7 +163,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 							return
 						end
 					else
-						schedulePoll(function() --[[ line: 176 ]]
+						schedulePoll(function()
 							-- upvalues: var29 (copy), pollIDVStatus (copy), p9 (copy), p10 (copy), p11 (copy)
 							if var29.current then
 								pollIDVStatus(p9, p10 - 1, p11)
@@ -171,7 +171,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 						end, var18)
 					end
 				end
-			end):catch(function(_) --[[ line: 183 ]]
+			end):catch(function(_)
 				-- upvalues: var33 (copy), var35 (copy), var23 (copy), p11 (ref), getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), authModalShown (copy), entryPointEventCtx (copy)
 				var33(true)
 				var35(var23.retry)
@@ -183,13 +183,13 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 191 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (ref), getFFlagEnableNativePersonaInquiryForAmpIDVUpsellModule (copy), facialAgeEstimationServiceWrapperModule (copy), getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), var26 (ref), authModalShown (copy), entryPointEventCtx (ref), pollIDVStatus (ref), var19 (copy), var39 (ref), var28 (ref), promiseModule (copy), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (copy), var20 (ref), var41 (ref), authFormInteraction (copy), var31 (ref), actionStatusEnum (copy), var33 (ref), var35 (ref), var23 (ref)
 		var29.current = true
 		local var49 = getFFlagEnableNativePersonaInquiryForAmpIDVUpsellModule() and facialAgeEstimationServiceWrapperModule.isAvailable()
 		local var50 = getFFlagEnableAmpIDVUpsellAnalyticsModule()
 		local var51 = var26;
-		(if getFFlagEnableRoactNetworkingForChallengeInteceptionModule() then var20.startVerificationWithWrappedNetworking(var41) else var20.startVerification()):andThen(function(p14) --[[ line: 198 | named "afterStartVerification" ]]
+		(if getFFlagEnableRoactNetworkingForChallengeInteceptionModule() then var20.startVerificationWithWrappedNetworking(var41) else var20.startVerification()):andThen(function(p14)
 			-- upvalues: var50 (ref), var51 (write), var26 (copy), var49 (ref), authModalShown (copy), entryPointEventCtx (copy), facialAgeEstimationServiceWrapperModule (copy), pollIDVStatus (copy), var19 (copy), var39 (copy), var28 (copy), promiseModule (copy)
 			local sessionIdentifier = p14.sessionIdentifier
 			
@@ -200,7 +200,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 				if var50 then
 					authModalShown(entryPointEventCtx, var51, "nativeIDV")
 				end
-				return facialAgeEstimationServiceWrapperModule.startFlow(sessionIdentifier, p14.sessionToken):andThen(function() --[[ line: 209 ]]
+				return facialAgeEstimationServiceWrapperModule.startFlow(sessionIdentifier, p14.sessionToken):andThen(function()
 					-- upvalues: pollIDVStatus (copy), sessionIdentifier (ref), var19 (copy), var51 (copy)
 					pollIDVStatus(sessionIdentifier, var19, var51)
 				end)
@@ -211,7 +211,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 			var28(p14.verificationLink)
 			
 			return promiseModule.resolve()
-		end):catch(function(p13) --[[ line: 227 ]]
+		end):catch(function(p13)
 			-- upvalues: var49 (ref), var50 (ref), authFormInteraction (copy), entryPointEventCtx (copy), var51 (write), var31 (copy), actionStatusEnum (copy), var33 (copy), var35 (copy), var23 (copy), authModalShown (copy)
 			if var49 and p13 and p13.resultType == Enum.FacialAgeEstimationResultType.Cancel then
 				if var50 then
@@ -230,12 +230,12 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 			end
 		end)
 		
-		return function() --[[ line: 242 ]]
+		return function()
 			-- upvalues: var29 (copy)
 			var29.current = false
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 248 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), actionStatusEnum (copy), onSuccess (ref), onCancelled (ref)
 		if var30 == actionStatusEnum.Success then
 			onSuccess()
@@ -250,7 +250,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 		errorTitle = var23.title,
 		errorDescription = var34,
 		buttonText = var23.close,
-		onClose = function() --[[ line: 261 ]]
+		onClose = function()
 			-- upvalues: onFailure (ref)
 			onFailure()
 		end
@@ -262,7 +262,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 		featureName = featureName,
 		idvLink = var27,
 		openIdvLink = openIdvLink,
-		onClose = function() --[[ line: 283 ]]
+		onClose = function()
 			-- upvalues: getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), authFormInteraction (copy), entryPointEventCtx (ref), var26 (ref), var31 (ref), actionStatusEnum (copy)
 			if getFFlagEnableAmpIDVUpsellAnalyticsModule() then
 				authFormInteraction(entryPointEventCtx, var26, "idvCancelled")
@@ -276,7 +276,7 @@ return function(p3) --[[ line: 84 | named "IDVUpsellContainer" ]]
 		featureName = featureName,
 		openPrivacyPolicyLink = var44,
 		latestStepCompleted = var36,
-		onClose = function() --[[ line: 298 ]]
+		onClose = function()
 			-- upvalues: getFFlagEnableAmpIDVUpsellAnalyticsModule (copy), authFormInteraction (copy), entryPointEventCtx (ref), var26 (ref), var31 (ref), actionStatusEnum (copy)
 			if getFFlagEnableAmpIDVUpsellAnalyticsModule() then
 				authFormInteraction(entryPointEventCtx, var26, "idvCancelled")

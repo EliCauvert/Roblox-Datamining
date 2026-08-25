@@ -1,6 +1,6 @@
 ﻿game:DefineFastString("PCGDKFilteredNotificationTypes", "ExperienceInvitation,SquadExperienceInvitation")
 
-return function() --[[ line: 3 ]]
+return function()
 	local PCGDKFilteredNotificationTypesFastString = game:GetFastString("PCGDKFilteredNotificationTypes")
 	
 	if PCGDKFilteredNotificationTypesFastString == "" then

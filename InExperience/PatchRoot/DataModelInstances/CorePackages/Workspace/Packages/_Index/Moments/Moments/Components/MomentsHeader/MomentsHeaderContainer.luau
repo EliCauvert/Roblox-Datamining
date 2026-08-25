@@ -8,7 +8,7 @@ local momentsHeaderViewModule = require(script.Parent.MomentsHeaderView)
 local momentsLegacyHeaderViewModule = require(script.Parent.MomentsLegacyHeaderView)
 local useMomentsHeaderViewModelModule = require(script.Parent.useMomentsHeaderViewModel)
 
-return function(p0) --[[ line: 18 | named "MomentsHeaderContainer" ]]
+return function(p0)
 	-- upvalues: fFlagMomentsImmersiveChromeModule (ref), fFlagMomentsUseCompositionLibraryModule (ref), fFlagMomentsUseFoundationHeaderBarModule (ref), useMomentsHeaderViewModelModule (ref), reactModule (ref), momentsHeaderViewModule (ref), momentsLegacyHeaderViewModule (ref), immersiveHeaderChromeModule (ref)
 	local var11
 	local var9 = p0.animateWithImmersiveChrome == true and fFlagMomentsImmersiveChromeModule

@@ -6,7 +6,7 @@ local constantsModule = require(script.Parent.Parent.Constants)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local wheelText = roactModule.PureComponent:extend("WheelText")
 
-function wheelText.getWheelText(p0) --[[ line: 15 ]]
+function wheelText.getWheelText(p0)
 	-- upvalues: starterPlayerService (ref), robloxTranslatorModule (ref), constantsModule (ref)
 	local currentEmotes = p0.props.emotesPage.currentEmotes
 	local locale = p0.props.locale
@@ -20,7 +20,7 @@ function wheelText.getWheelText(p0) --[[ line: 15 ]]
 	return focusedSegmentIndex or robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.SelectAnEmote, locale)
 end
 
-function wheelText.render(p1) --[[ line: 38 ]]
+function wheelText.render(p1)
 	-- upvalues: constantsModule (ref), roactModule (ref)
 	local layout = constantsModule.Layouts[p1.props.layout]
 	
@@ -40,7 +40,7 @@ function wheelText.render(p1) --[[ line: 38 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p2) --[[ line: 65 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p2)
 	return {
 		emotesWheel = p2.emotesWheel,
 		emotesPage = p2.emotesPage,

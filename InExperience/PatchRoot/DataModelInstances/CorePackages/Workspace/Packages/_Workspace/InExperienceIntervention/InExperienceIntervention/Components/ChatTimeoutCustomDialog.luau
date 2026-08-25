@@ -25,7 +25,7 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local var8 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 
-function ChatTimeoutCustomDialog(p0) --[[ line: 39 ]]
+function ChatTimeoutCustomDialog(p0)
 	-- upvalues: useLayerCollector (ref), reactModule (ref), useTokens (ref), useStyle (ref), useLocalization (ref), constants (ref), useProperty (ref), inExperienceInterventionAnalyticsModule (ref), partialPageModal (ref), scrollView (ref), scrollBarVisibility (ref), reactFocusNavigationModule (ref), var8 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref), interventionContestFeedbackFooterModule (ref)
 	local var9 = useLayerCollector()
 	local var10 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
@@ -35,16 +35,16 @@ function ChatTimeoutCustomDialog(p0) --[[ line: 39 ]]
 	local var15 = useStyle()
 	local var16 = useLocalization(constants.localizationKeys)
 	local var17 = useProperty(var11, "AbsoluteSize")
-	local var18 = reactModule.useCallback(function() --[[ line: 53 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
 		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.CtaClicked, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, var10.current, p0.eventId, p0.violatingChatLine, p0.duration)
 		p0.onDismiss()
 	end, { var10 })
-	reactModule.useEffect(function() --[[ line: 65 ]]
+	reactModule.useEffect(function()
 		-- upvalues: inExperienceInterventionAnalyticsModule (copy), var10 (ref), p0 (ref)
 		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalAppeared, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Timeout, var10.current, p0.eventId, p0.violatingChatLine, p0.duration)
 	end, { var10 })
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var9 (ref), constants (copy), var13 (ref)
 		var13(math.min(var9.absoluteSize.Y - constants.UNIBAR_HEIGHT - constants.DIALOG_HEADER_HEIGHT, if var17 then var17.Y else 0))
 	end, { var9.absoluteSize.Y, var17 })

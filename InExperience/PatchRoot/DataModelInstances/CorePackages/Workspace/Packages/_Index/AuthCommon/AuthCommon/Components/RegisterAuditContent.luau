@@ -3,7 +3,7 @@ local useMemo = require(authCommon.Parent.React).useMemo
 local useCapturedAuditContent = require(authCommon.Stores.AuditContentContext.AuditContentContext).useCapturedAuditContent
 local getFFlagEnableAuditSystemModule = require(authCommon.Flags.GetFFlagEnableAuditSystem)
 
-local function parseTranslationKey(value) --[[ line: 45 ]]
+local function parseTranslationKey(value)
 	if not value or value == "" then
 		return "", ""
 	end
@@ -21,13 +21,13 @@ local function parseTranslationKey(value) --[[ line: 45 ]]
 	return text, table.concat(t, ".")
 end
 
-return function(p0) --[[ line: 70 | named "RegisterAuditContent" ]]
+return function(p0)
 	-- upvalues: getFFlagEnableAuditSystemModule (ref), useMemo (ref), parseTranslationKey (ref), useCapturedAuditContent (ref)
 	if getFFlagEnableAuditSystemModule() then
 		local translationKey = p0.translationKey
 		local translatedSourceString = p0.translatedSourceString
 		local parameters = p0.parameters
-		useCapturedAuditContent(translationKey, useMemo(function() --[[ line: 79 ]]
+		useCapturedAuditContent(translationKey, useMemo(function()
 			-- upvalues: translationKey (ref), translatedSourceString (ref), parseTranslationKey (copy), parameters (ref)
 			if not translationKey or not translatedSourceString then
 				return nil

@@ -18,26 +18,26 @@ local fFlagLuaAppFixSearchImpressions = require(parent.SharedFlags).FFlagLuaAppF
 local fFlagLuaAppEnableNxMRoduxApportioning = require(parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local fFlagLuaAppEnableNxMApportioningExtraLogging = require(parent.SharedFlags).FFlagLuaAppEnableNxMApportioningExtraLogging
 
-local function _(value, p0) --[[ line: 32 | named "getGameSetTypeId" ]]
+local function _(value, p0)
 	return if value == nil then nil elseif p0 then value.topicId else value.gameSetTypeId
 end
 
-local _ = function(value, p1) --[[ line: 44 | named "getGameSetTargetId" ]]
+local _ = function(value, p1)
 	return if p1 or value == nil then nil else value.gameSetTargetId
 end
 
-local _ = function(p2, p3) --[[ line: 54 | named "getAppliedFilters" ]]
+local _ = function(p2, p3)
 	return if p3 or not p2 then nil else p2.appliedFilters
 end
 
-return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ line: 70 | named "useGameSortImpressionsParams" ]]
+return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), gameCollectionItemTypes (ref), apportioningDiagnosticTelemetry (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), reportWarning (ref), loggingProtocolModule (ref), sendGameImpressionsModule (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagLuaAppFixSearchImpressions (ref), signal (ref)
 	local var4 = useRoactService(appEventIngestService)
 	local var5 = useRoactService(roactAnalytics)
 	local var6 = if p7 == appPage.Home and p4 and p4.topicId then gameSortLoadSource.getSortLoadSource(p4.topicId) else nil
 	local var7 = if p4 then p4.sortSubId else nil
 	local var8 = if p4 then p4.analyticsData else nil
-	local var9 = reactModule.useCallback(function(p17) --[[ line: 98 ]]
+	local var9 = reactModule.useCallback(function(p17)
 		-- upvalues: p15 (ref), discoveryEventErrorLogger (copy), p7 (ref), p11 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), gameCollectionItemTypes (copy), apportioningDiagnosticTelemetry (copy), p6 (ref), p4 (ref), fFlagLuaAppEnableNxMRoduxApportioning (copy), appPage (copy), p16 (ref), reportWarning (copy), loggingProtocolModule (copy), sendGameImpressionsModule (copy), var4 (ref), var5 (ref), p13 (ref), p14 (ref), p8 (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (copy), p9 (ref), p5 (ref), p10 (ref), var6 (ref), var7 (ref), var8 (ref)
 		if p15 == nil or #p15 == 0 then
 			discoveryEventErrorLogger.reportError("useGameSortImpressionsParams_MissingEntries", "useGameSortImpressionsParams: entries is nil or empty for game sort impressions", { pageContext = p7, gameSortId = p11 })
@@ -109,15 +109,15 @@ return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ 
 		var10.current = signal.new()
 	end
 	local current = var10.current
-	reactModule.useEffect(function() --[[ line: 234 ]]
+	reactModule.useEffect(function()
 		-- upvalues: current (ref), p12 (ref)
 		current:fire()
-		local var17 = if p12 then p12:connect(function() --[[ line: 243 ]]
+		local var17 = if p12 then p12:connect(function()
 			-- upvalues: current (copy)
 			current:fire()
 		end) else nil
 		
-		return function() --[[ line: 248 ]]
+		return function()
 			-- upvalues: var17 (write)
 			if var17 then
 				var17:disconnect()
@@ -125,7 +125,7 @@ return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ 
 		end
 	end, { p12, current })
 	
-	return var9, current, reactModule.useCallback(function() --[[ line: 255 ]]
+	return var9, current, reactModule.useCallback(function()
 		-- upvalues: current (ref)
 		current:fire()
 	end, { current })

@@ -3,7 +3,7 @@ local tokensModule = require(foundation.Providers.Style.Tokens)
 local attributeRulesModule = require(foundation.StyleSheet.Rules.attributeRules)
 local formatTokensModule = require(foundation.StyleSheet.formatTokens)
 
-return function() --[[ line: 8 | named "getLayoutTags" ]]
+return function()
 	-- upvalues: tokensModule (ref), formatTokensModule (ref), attributeRulesModule (ref)
 	local t = {}
 	local defaultTokens = tokensModule.defaultTokens

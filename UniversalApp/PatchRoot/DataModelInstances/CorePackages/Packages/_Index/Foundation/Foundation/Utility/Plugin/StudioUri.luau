@@ -1,18 +1,18 @@
 ﻿local join = require(script:FindFirstAncestor("Foundation").Parent.Dash).join
 local t = {}
 local t_1 = {
-	equals = function(p0, p1) --[[ line: 26 ]]
+	equals = function(p0, p1)
 		return if rawequal(p0, p1) then true else p0.DataModel == p1.DataModel and (p0.PluginType == p1.PluginType and (p0.PluginId == p1.PluginId and (p0.Category == p1.Category and p0.ItemId == p1.ItemId)))
 	end
 }
 t_1.RESTRICTED_Mt = table.freeze({
-	__eq = function(p2, p3) --[[ line: 39 ]]
+	__eq = function(p2, p3)
 		-- upvalues: t_1 (ref)
 		return t_1.equals(p2, p3)
 	end
 })
 
-function t_1.wrap(p4) --[[ line: 45 ]]
+function t_1.wrap(p4)
 	-- upvalues: t_1 (ref)
 	if table.isfrozen(p4) and getmetatable(p4) == t_1.RESTRICTED_Mt then
 		return p4
@@ -22,12 +22,12 @@ function t_1.wrap(p4) --[[ line: 45 ]]
 	return table.freeze(setmetatable(p4, t_1.RESTRICTED_Mt))
 end
 
-function t_1.join(p5, p6) --[[ line: 57 ]]
+function t_1.join(p5, p6)
 	-- upvalues: t_1 (ref), join (ref)
 	return t_1.wrap(join(p5, p6))
 end
 
-function t_1.toString(p7) --[[ line: 61 ]]
+function t_1.toString(p7)
 	-- upvalues: t (ref)
 	local list = table.create(5)
 	p7 = p7 or t
@@ -52,24 +52,24 @@ function t_1.toString(p7) --[[ line: 61 ]]
 	return table.concat(list, ", ")
 end
 
-function t_1.child(p8, p9) --[[ line: 89 ]]
+function t_1.child(p8, p9)
 	-- upvalues: t_1 (ref)
 	return t_1.join(p8, { ItemId = if p8.ItemId then `{p8.ItemId}/{p9}` else p9 })
 end
 
-function t_1.isNull(p10) --[[ line: 95 ]]
+function t_1.isNull(p10)
 	return p10.DataModel == "Null"
 end
 
-function t_1.isValid(p11) --[[ line: 99 ]]
+function t_1.isValid(p11)
 	return type(p11) == "table"
 end
 
-function t_1.isStudioUri(p12) --[[ line: 105 ]]
+function t_1.isStudioUri(p12)
 	return type(p12) == "table" and (if p12.DataModel == nil then if p12.PluginType == nil then if p12.PluginId == nil then if p12.Category == nil then p12.ItemId ~= nil else true else true else true else true)
 end
 
-function t_1.fromAction(p13, p14) --[[ line: 116 ]]
+function t_1.fromAction(p13, p14)
 	-- upvalues: t_1 (ref)
 	return t_1.wrap({
 		DataModel = "Standalone",
@@ -79,7 +79,7 @@ function t_1.fromAction(p13, p14) --[[ line: 116 ]]
 	})
 end
 
-function t_1.fromSetting(value, p15) --[[ line: 125 ]]
+function t_1.fromSetting(value, p15)
 	-- upvalues: t_1 (ref)
 	return t_1.wrap({
 		DataModel = "Standalone",
@@ -89,7 +89,7 @@ function t_1.fromSetting(value, p15) --[[ line: 125 ]]
 	})
 end
 
-function t_1.fromWidget(p16, p17) --[[ line: 134 ]]
+function t_1.fromWidget(p16, p17)
 	-- upvalues: t_1 (ref)
 	return t_1.wrap({
 		DataModel = "Standalone",
@@ -99,7 +99,7 @@ function t_1.fromWidget(p16, p17) --[[ line: 134 ]]
 	})
 end
 
-function t_1.fromPanel(p18, p19) --[[ line: 143 ]]
+function t_1.fromPanel(p18, p19)
 	-- upvalues: t_1 (ref)
 	return t_1.wrap({
 		DataModel = "Standalone",

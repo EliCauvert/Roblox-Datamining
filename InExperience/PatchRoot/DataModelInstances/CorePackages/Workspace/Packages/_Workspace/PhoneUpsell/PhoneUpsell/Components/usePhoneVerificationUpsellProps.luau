@@ -35,7 +35,7 @@ local t = {
 	localizedName = "United States"
 }
 
-local var15 = function() --[[ line: 117 ]] end
+local var15 = function() end
 
 local t_1 = {
 	origin = "",
@@ -51,33 +51,33 @@ local t_1 = {
 	onCancelled = var15,
 	onExtraButtonClick = var15,
 	closeUpsell = var15,
-	showWebpage = function(_) --[[ line: 133 ]] end
+	showWebpage = function(_) end
 }
 
-return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
+return function(p0)
 	-- upvalues: mergePropsModule (ref), t_1 (ref), fFlagUseSignalsForCountryCodeList (ref), useSignalState (ref), getCountryCodeListStore (ref), useSelector (ref), useDispatch (ref), setPhoneNumberModule (ref), verifyPhoneCodeModule (ref), resendPhoneCodeModule (ref), setIsPhoneVerified (ref), useRoactService (ref), roactNetworking (ref), roactAnalyticsAuthEventsModule (ref), useUserExperiment (ref), getFStringAndroidPhoneVerificationLayer (ref), getFStringIOSPhoneVerificationLayer (ref), reactModule (ref), phoneVerificationUpsellStateModule (ref), t (ref), useLocalization (ref), identityProtocol (ref), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (ref), userInputService (ref), getFFlagAddMorePhoneUpsellEvents (ref), eventStreamConstantsModule (ref), constantsModule (ref), debounceModule (ref), getFFlagPhoneUseParentSizeForScreenSizeModule (ref)
 	local var17 = mergePropsModule(t_1, p0)
-	local var18 = if fFlagUseSignalsForCountryCodeList then useSignalState(getCountryCodeListStore(false).getCountryCodeList) else useSelector(function(p1) --[[ line: 141 ]]
+	local var18 = if fFlagUseSignalsForCountryCodeList then useSignalState(getCountryCodeListStore(false).getCountryCodeList) else useSelector(function(p1)
 		return p1.CountryCodeList
 	end)
 	local var19 = useDispatch()
 	
-	local _ = function(p2, p3, p4, p5) --[[ line: 146 ]]
+	local _ = function(p2, p3, p4, p5)
 		-- upvalues: var19 (ref), setPhoneNumberModule (copy)
 		return var19(setPhoneNumberModule(p2, p3, p4, p5, nil))
 	end
 	
-	local _ = function(p6, p7) --[[ line: 149 ]]
+	local _ = function(p6, p7)
 		-- upvalues: var19 (ref), verifyPhoneCodeModule (copy)
 		return var19(verifyPhoneCodeModule(p6, p7))
 	end
 	
-	local _ = function(p8) --[[ line: 152 ]]
+	local _ = function(p8)
 		-- upvalues: var19 (ref), resendPhoneCodeModule (copy)
 		return var19(resendPhoneCodeModule(p8))
 	end
 	
-	local _ = function(p9) --[[ line: 155 ]]
+	local _ = function(p9)
 		-- upvalues: var19 (ref), setIsPhoneVerified (copy)
 		return var19(setIsPhoneVerified(p9))
 	end
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 	local var22, var23, var24, var25 = useUserExperiment({
 		getFStringAndroidPhoneVerificationLayer(),
 		getFStringIOSPhoneVerificationLayer()
-	}, function(p10) --[[ line: 164 ]]
+	}, function(p10)
 		-- upvalues: getFStringAndroidPhoneVerificationLayer (copy), getFStringIOSPhoneVerificationLayer (copy)
 		local var71 = p10[getFStringAndroidPhoneVerificationLayer()] or {}
 		local var72 = p10[getFStringIOSPhoneVerificationLayer()] or {}
@@ -119,7 +119,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		genericErrorKey = "Feature.VerificationUpsell.Response.ErrorTryAgain"
 	})
 	local var55 = nil
-	reactModule.useEffect(function() --[[ line: 205 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), var18 (ref), var31 (ref), var33 (ref)
 		if not var32 and var18 and #var18 > 0 then
 			for i, v in var18 do
@@ -131,10 +131,10 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end
 	end, { var18, var32 })
 	
-	local _ = function() --[[ line: 217 ]]
+	local _ = function()
 		-- upvalues: identityProtocol (copy), var21 (ref), var17 (ref), var26 (ref), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (ref), t (copy), var29 (ref)
 		local default = identityProtocol.default
-		default:supportsGetPhoneNumber():andThen(function(p11) --[[ line: 219 ]]
+		default:supportsGetPhoneNumber():andThen(function(p11)
 			-- upvalues: var21 (copy), var17 (copy), var26 (copy), default (ref), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (copy), t (copy), var29 (copy)
 			print("PhoneVerification: Autofill phone number supported: {}!", p11)
 			
@@ -143,7 +143,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 			local phoneNumber = default:getPhoneNumber()
 			
 			if phoneNumber then
-				phoneNumber:andThen(function(p12) --[[ line: 235 ]]
+				phoneNumber:andThen(function(p12)
 					-- upvalues: getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (copy), t (copy), var21 (copy), var17 (copy), var26 (copy), var29 (copy)
 					if not p12 or p12 == "" then
 						var21.reportModalActionWithSection(var17.eventContext, "phoneAutofillNull", "autofill", var17.origin, var26)
@@ -164,10 +164,10 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end)
 	end
 	
-	local _ = function() --[[ line: 271 ]]
+	local _ = function()
 		-- upvalues: identityProtocol (copy), var21 (ref), var17 (ref), var26 (ref), var35 (ref), var37 (ref)
 		local default = identityProtocol.default
-		default:supportsGetSMSOTP():andThen(function(p13) --[[ line: 273 ]]
+		default:supportsGetSMSOTP():andThen(function(p13)
 			-- upvalues: var21 (copy), var17 (copy), var26 (copy), default (ref), var35 (copy), var37 (copy)
 			print("PhoneVerification: Autofill OTP supported: {}!", p13)
 			
@@ -176,7 +176,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 				local SMSOTP = default:getSMSOTP()
 				
 				if SMSOTP then
-					SMSOTP:andThen(function(p14) --[[ line: 285 ]]
+					SMSOTP:andThen(function(p14)
 						-- upvalues: var35 (copy), var37 (copy), var21 (copy), var17 (copy), var26 (copy)
 						if p14 and p14 ~= "" then
 							var35(p14)
@@ -189,16 +189,16 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 303 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var53 (ref), var43 (ref)
-		return function() --[[ line: 304 ]]
+		return function()
 			-- upvalues: var53 (copy), var43 (copy)
 			var53.current = var43
 		end
 	end, { var43 })
-	reactModule.useEffect(function() --[[ line: 309 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var55 (write), userInputService (copy), var48 (ref), var50 (ref), var21 (ref), var17 (ref), getFFlagAddMorePhoneUpsellEvents (copy), var26 (ref), phoneVerificationUpsellStateModule (copy), var22 (ref), identityProtocol (copy), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (ref), t (copy), var29 (ref), var53 (ref)
-		var55 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ line: 311 ]]
+		var55 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
 			-- upvalues: var48 (copy), userInputService (copy), var50 (copy)
 			var48(userInputService.OnScreenKeyboardVisible)
 			var50(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
@@ -207,7 +207,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		
 		if var22 then
 			local default = identityProtocol.default
-			default:supportsGetPhoneNumber():andThen(function(p15) --[[ line: 219 ]]
+			default:supportsGetPhoneNumber():andThen(function(p15)
 				-- upvalues: var21 (copy), var17 (copy), var26 (copy), default (ref), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (copy), t (copy), var29 (copy)
 				print("PhoneVerification: Autofill phone number supported: {}!", p15)
 				
@@ -216,7 +216,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 				local phoneNumber = default:getPhoneNumber()
 				
 				if phoneNumber then
-					phoneNumber:andThen(function(p16) --[[ line: 235 ]]
+					phoneNumber:andThen(function(p16)
 						-- upvalues: getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (copy), t (copy), var21 (copy), var17 (copy), var26 (copy), var29 (copy)
 						if not p16 or p16 == "" then
 							var21.reportModalActionWithSection(var17.eventContext, "phoneAutofillNull", "autofill", var17.origin, var26)
@@ -236,7 +236,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 				end
 			end)
 		end
-		return function() --[[ line: 326 ]]
+		return function()
 			-- upvalues: var55 (copy), var53 (copy), var17 (copy)
 			if var55 then
 				var55:Disconnect()
@@ -248,28 +248,28 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 			end
 		end
 	end, {})
-	local var56 = useSelector(function(p17) --[[ line: 337 ]]
+	local var56 = useSelector(function(p17)
 		return p17.ScreenSize
 	end)
 	
-	local function handleCloseClick() --[[ line: 341 ]]
+	local function handleCloseClick()
 		-- upvalues: var21 (ref), var17 (ref), var26 (ref)
 		var21.reportModalDismissedWithSection(var17.eventContext, var17.origin, var26)
 		var17.closeUpsell()
 	end
 	
-	local function _(p18) --[[ line: 346 | named "handlePhoneErrors" ]]
+	local function _(p18)
 		-- upvalues: var54 (ref)
 		return if p18 == 2 then var54.invalidPhoneFormatKey elseif p18 == 6 then var54.tooManyAttemptsKey elseif p18 == 7 then var54.invalidVerificationCodeKey elseif p18 == 8 then var54.invalidPhoneNumberKey elseif p18 == 9 then var54.tooManyAccountsKey else var54.genericErrorKey
 	end
 	
-	local function handleSetPhone() --[[ line: 362 ]]
+	local function handleSetPhone()
 		-- upvalues: var46 (ref), var20 (ref), var30 (ref), var28 (ref), var19 (ref), setPhoneNumberModule (copy), var27 (ref), phoneVerificationUpsellStateModule (copy), var21 (ref), var17 (ref), var23 (ref), identityProtocol (copy), var26 (ref), var35 (ref), var37 (ref), eventStreamConstantsModule (copy), var39 (ref), var54 (ref)
 		var46(true)
 		local var77 = var19(setPhoneNumberModule(var20, var30.code, var30.prefix, var28, nil))
 		
 		if var77 then
-			var77:andThen(function() --[[ line: 367 ]]
+			var77:andThen(function()
 				-- upvalues: var27 (copy), phoneVerificationUpsellStateModule (copy), var46 (copy), var21 (copy), var17 (copy), var23 (copy), identityProtocol (copy), var26 (copy), var35 (copy), var37 (copy)
 				var27(phoneVerificationUpsellStateModule.VerifyPhone)
 				var46(false)
@@ -277,7 +277,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 				
 				if var23 then
 					local default = identityProtocol.default
-					default:supportsGetSMSOTP():andThen(function(p20) --[[ line: 273 ]]
+					default:supportsGetSMSOTP():andThen(function(p20)
 						-- upvalues: var21 (copy), var17 (copy), var26 (copy), default (ref), var35 (copy), var37 (copy)
 						print("PhoneVerification: Autofill OTP supported: {}!", p20)
 						
@@ -286,7 +286,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 							local SMSOTP = default:getSMSOTP()
 							
 							if SMSOTP then
-								SMSOTP:andThen(function(p21) --[[ line: 285 ]]
+								SMSOTP:andThen(function(p21)
 									-- upvalues: var35 (copy), var37 (copy), var21 (copy), var17 (copy), var26 (copy)
 									if p21 and p21 ~= "" then
 										var35(p21)
@@ -298,7 +298,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 						end
 					end)
 				end
-			end):catch(function(p19) --[[ line: 381 ]]
+			end):catch(function(p19)
 				-- upvalues: var21 (copy), var17 (copy), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy), var39 (copy), var54 (copy), var46 (copy)
 				if not p19 then
 					var21.reportModalShownWithSectionAndError(var17.eventContext, eventStreamConstantsModule.Field.ErrorMessage, var17.origin, phoneVerificationUpsellStateModule.AddPhone, "")
@@ -317,16 +317,16 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		var21.reportInteractWithActionAndSection(var17.eventContext, "", "", var17.origin, eventStreamConstantsModule.Button.Continue, phoneVerificationUpsellStateModule.AddPhone)
 	end
 	
-	local function handleVerifyPhone() --[[ line: 423 ]]
+	local function handleVerifyPhone()
 		-- upvalues: var46 (ref), var20 (ref), var36 (ref), var19 (ref), verifyPhoneCodeModule (copy), var44 (ref), var21 (ref), var17 (ref), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy), var41 (ref), var54 (ref)
 		var46(true)
 		local var78 = var19(verifyPhoneCodeModule(var20, var36))
 		
 		if var78 then
-			var78:andThen(function() --[[ line: 428 ]]
+			var78:andThen(function()
 				-- upvalues: var44 (copy)
 				var44(true)
-			end):catch(function(p22) --[[ line: 431 ]]
+			end):catch(function(p22)
 				-- upvalues: var21 (copy), var17 (copy), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy), var41 (copy), var54 (copy), var46 (copy)
 				if p22 then
 					var21.reportModalShownWithSectionAndError(var17.eventContext, eventStreamConstantsModule.Field.ErrorMessage, var17.origin, phoneVerificationUpsellStateModule.VerifyPhone, p22.ErrorCode)
@@ -342,13 +342,13 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		var21.reportInteractWithActionAndSection(var17.eventContext, "", "", var17.origin, eventStreamConstantsModule.Button.AutoSubmit, phoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	local function handleResendCode() --[[ line: 464 ]]
+	local function handleResendCode()
 		-- upvalues: var41 (ref), var20 (ref), var19 (ref), resendPhoneCodeModule (copy), var21 (ref), var17 (ref), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy), var54 (ref)
 		var41("")
 		local var79 = var19(resendPhoneCodeModule(var20))
 		
 		if var79 then
-			var79:andThen(function() --[[ line: 468 ]] end):catch(function(p23) --[[ line: 468 ]]
+			var79:andThen(function() end):catch(function(p23)
 				-- upvalues: var21 (copy), var17 (copy), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy), var41 (copy), var54 (copy)
 				if p23 then
 					var21.reportModalShownWithSectionAndError(var17.eventContext, eventStreamConstantsModule.Field.ErrorMessage, var17.origin, phoneVerificationUpsellStateModule.VerifyPhone, p23.ErrorCode)
@@ -364,19 +364,19 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		var21.reportInteractWithActionAndSection(var17.eventContext, "", "", var17.origin, eventStreamConstantsModule.Button.ResendCode, phoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	local function returnToAddPhone() --[[ line: 500 ]]
+	local function returnToAddPhone()
 		-- upvalues: var27 (ref), phoneVerificationUpsellStateModule (copy), var21 (ref), var17 (ref), eventStreamConstantsModule (copy)
 		var27(phoneVerificationUpsellStateModule.AddPhone)
 		var21.reportInteractWithActionAndSection(var17.eventContext, "", "", var17.origin, eventStreamConstantsModule.Button.ChangePhoneNumber, phoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	local function proceedToAddPhone() --[[ line: 512 ]]
+	local function proceedToAddPhone()
 		-- upvalues: var27 (ref), phoneVerificationUpsellStateModule (copy), var21 (ref), var17 (ref), eventStreamConstantsModule (copy)
 		var27(phoneVerificationUpsellStateModule.AddPhone)
 		var21.reportInteractWithActionAndSection(var17.eventContext, "", "", var17.origin, eventStreamConstantsModule.Button.Continue, phoneVerificationUpsellStateModule.Entry)
 	end
 	
-	local function navigateToSMSTerms() --[[ line: 524 ]]
+	local function navigateToSMSTerms()
 		-- upvalues: var45 (ref), var21 (ref), var17 (ref), eventStreamConstantsModule (copy), var26 (ref), constantsModule (copy)
 		if not var45 then
 			var21.reportModalActionWithSection(var17.eventContext, eventStreamConstantsModule.Field.TermsOfService, "", var17.origin, var26)
@@ -384,7 +384,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local function navigateToPrivacy() --[[ line: 537 ]]
+	local function navigateToPrivacy()
 		-- upvalues: var45 (ref), var21 (ref), var17 (ref), eventStreamConstantsModule (copy), var26 (ref), constantsModule (copy)
 		if not var45 then
 			var21.reportModalActionWithSection(var17.eventContext, eventStreamConstantsModule.Field.PrivacyPolicy, "", var17.origin, var26)
@@ -392,7 +392,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local var65 = function(p24) --[[ line: 551 ]]
+	local var65 = function(p24)
 		-- upvalues: var45 (ref), var39 (ref), var29 (ref)
 		if not var45 then
 			var39("")
@@ -400,18 +400,18 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local var66 = function() --[[ line: 558 ]]
+	local var66 = function()
 		-- upvalues: var21 (ref), var17 (ref), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy)
 		var21.reportInteractWithActionAndSection(var17.eventContext, eventStreamConstantsModule.Field.CountryPrefix, eventStreamConstantsModule.ActionType.Focus, var17.origin, "", phoneVerificationUpsellStateModule.AddPhone)
 	end
 	
-	local var67 = function() --[[ line: 569 ]]
+	local var67 = function()
 		-- upvalues: var21 (ref), var17 (ref), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy), identityProtocol (copy), var26 (ref), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (ref), t (copy), var29 (ref)
 		var21.reportInteractWithActionAndSection(var17.eventContext, eventStreamConstantsModule.Field.PhoneNumber, eventStreamConstantsModule.ActionType.Focus, var17.origin, "", phoneVerificationUpsellStateModule.AddPhone)
 		
 		if not var17.shouldAutofillAndroidPhoneNumberAtLaunch then
 			local default = identityProtocol.default
-			default:supportsGetPhoneNumber():andThen(function(p25) --[[ line: 219 ]]
+			default:supportsGetPhoneNumber():andThen(function(p25)
 				-- upvalues: var21 (copy), var17 (copy), var26 (copy), default (ref), getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (copy), t (copy), var29 (copy)
 				print("PhoneVerification: Autofill phone number supported: {}!", p25)
 				
@@ -420,7 +420,7 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 				local phoneNumber = default:getPhoneNumber()
 				
 				if phoneNumber then
-					phoneNumber:andThen(function(p26) --[[ line: 235 ]]
+					phoneNumber:andThen(function(p26)
 						-- upvalues: getPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule (copy), var30 (copy), t (copy), var21 (copy), var17 (copy), var26 (copy), var29 (copy)
 						if not p26 or p26 == "" then
 							var21.reportModalActionWithSection(var17.eventContext, "phoneAutofillNull", "autofill", var17.origin, var26)
@@ -442,12 +442,12 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		end
 	end
 	
-	local var68 = debounceModule(function(p27) --[[ line: 583 ]]
+	local var68 = debounceModule(function(p27)
 		-- upvalues: var37 (ref)
 		var37(p27)
 	end, 0.5)
 	
-	local var69 = function(p28) --[[ line: 587 ]]
+	local var69 = function(p28)
 		-- upvalues: var34 (ref), var41 (ref), var35 (ref), var68 (ref)
 		local substring = string.sub(p28.Text, 1, 6)
 		
@@ -458,18 +458,18 @@ return function(p0) --[[ line: 136 | named "usePhoneVerificationUpsellProps" ]]
 		var68(substring)
 	end
 	
-	local var70 = function() --[[ line: 596 ]]
+	local var70 = function()
 		-- upvalues: var21 (ref), var17 (ref), eventStreamConstantsModule (copy), phoneVerificationUpsellStateModule (copy)
 		var21.reportInteractWithActionAndSection(var17.eventContext, eventStreamConstantsModule.Field.VerificationCode, eventStreamConstantsModule.ActionType.Focus, var17.origin, "", phoneVerificationUpsellStateModule.VerifyPhone)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 608 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var36 (ref), handleVerifyPhone (ref)
 		if string.len(var36) == 6 then
 			handleVerifyPhone()
 		end
 	end, { var36 })
-	reactModule.useEffect(function() --[[ line: 615 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var43 (ref), var19 (ref), setIsPhoneVerified (copy), var21 (ref), var17 (ref), phoneVerificationUpsellStateModule (copy)
 		if var43 then
 			local _ = var19(setIsPhoneVerified({ isPhoneVerified = true }))

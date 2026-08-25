@@ -285,7 +285,7 @@ local var1 = if require(collectionViews.Parent.SharedFlags).FFlagLuaAppCompositi
 }
 
 return {
-	resolveBreakpoint = function(p0) --[[ line: 53 ]]
+	resolveBreakpoint = function(p0)
 		-- upvalues: var1 (ref)
 		for i, v in var1 do
 			if p0 <= v.maxWidth then
@@ -294,7 +294,7 @@ return {
 		end
 		return #var1
 	end,
-	getItemsPerRow = function(p1, p2) --[[ line: 62 ]]
+	getItemsPerRow = function(p1, p2)
 		-- upvalues: var1 (ref)
 		local var2 = var1[p1]
 		

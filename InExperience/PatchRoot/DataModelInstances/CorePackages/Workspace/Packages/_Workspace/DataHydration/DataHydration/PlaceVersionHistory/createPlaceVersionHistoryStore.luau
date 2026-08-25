@@ -4,7 +4,7 @@ local createSingleEntityResolverModule = require(dataHydration.createSingleEntit
 local fetchPlaceVersionHistoryModule = require(script.Parent.fetchPlaceVersionHistory)
 local _ = require(script.Parent.PlaceVersionHistoryStoreTypes)
 
-return function(p0) --[[ line: 20 | named "createPlaceVersionHistoryStore" ]]
+return function(p0)
 	-- upvalues: createSingleEntityResolverModule (ref), fetchPlaceVersionHistoryModule (ref)
 	p0 = p0 or {}
 	local t = {
@@ -12,7 +12,7 @@ return function(p0) --[[ line: 20 | named "createPlaceVersionHistoryStore" ]]
 		baseUrl = p0.baseUrl,
 		developBaseUrl = p0.developBaseUrl
 	}
-	local var5 = createSingleEntityResolverModule(function(p1) --[[ line: 28 ]]
+	local var5 = createSingleEntityResolverModule(function(p1)
 		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref)
 		return fetchPlaceVersionHistoryModule.fetchHistory(p1, t)
 	end)
@@ -22,41 +22,41 @@ return function(p0) --[[ line: 20 | named "createPlaceVersionHistoryStore" ]]
 		fetchHistory = var5.fetch,
 		getAndFetchHistory = var5.getAndFetch,
 		updateHistory = var5.update,
-		fetchPageHistory = function(p2, p3) --[[ line: 32 ]]
+		fetchPageHistory = function(p2, p3)
 			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.fetchHistory(p2, t, p3):andThen(function(p4) --[[ line: 38 ]]
+			return fetchPlaceVersionHistoryModule.fetchHistory(p2, t, p3):andThen(function(p4)
 				-- upvalues: var5 (copy), p2 (ref)
 				var5.update(p2, p4)
 				
 				return p4
 			end)
 		end,
-		revertVersion = function(p5, p6, p7) --[[ line: 44 ]]
+		revertVersion = function(p5, p6, p7)
 			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.revertVersion(p6, p7, t):andThen(function(_) --[[ line: 51 ]]
+			return fetchPlaceVersionHistoryModule.revertVersion(p6, p7, t):andThen(function(_)
 				-- upvalues: p6 (ref), p7 (ref), var5 (copy), p5 (ref)
 				local t = { assetId = p6, assetVersionNumber = p7 }
 				var5.fetch(p5)
 				
 				return t
-			end):catch(function(p8) --[[ line: 60 ]]
+			end):catch(function(p8)
 				error(p8)
 			end)
 		end,
-		rollbackPlace = function(p9, p10, p11, p12) --[[ line: 65 ]]
+		rollbackPlace = function(p9, p10, p11, p12)
 			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.rollbackPlace(p9, p10, p11, p12, t):andThen(function(p14) --[[ line: 73 ]]
+			return fetchPlaceVersionHistoryModule.rollbackPlace(p9, p10, p11, p12, t):andThen(function(p14)
 				-- upvalues: var5 (copy), p9 (ref)
 				var5.fetch(p9)
 				
 				return p14
-			end):catch(function(p13) --[[ line: 77 ]]
+			end):catch(function(p13)
 				error(p13)
 			end)
 		end,
-		addVersionNote = function(p15, p16, p17) --[[ line: 82 ]]
+		addVersionNote = function(p15, p16, p17)
 			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var5 (ref)
-			return fetchPlaceVersionHistoryModule.addVersionNote(p15, p16, p17, t):andThen(function(p18) --[[ line: 89 ]]
+			return fetchPlaceVersionHistoryModule.addVersionNote(p15, p16, p17, t):andThen(function(p18)
 				-- upvalues: var5 (copy), p15 (ref), p16 (ref), p17 (ref)
 				local var7 = var5.get(p15).data(false)
 				

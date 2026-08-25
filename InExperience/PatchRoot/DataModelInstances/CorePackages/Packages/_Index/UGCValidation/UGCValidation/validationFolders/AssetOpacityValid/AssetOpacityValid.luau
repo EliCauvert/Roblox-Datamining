@@ -17,7 +17,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function getViews() --[[ line: 31 ]]
+local function getViews()
 	-- upvalues: constantsTransparencyValidationModule (ref)
 	return {
 		{
@@ -59,12 +59,12 @@ local function getViews() --[[ line: 31 ]]
 	}
 end
 
-local function _(p0, p1) --[[ line: 72 | named "getAspectRatio" ]]
+local function _(p0, p1)
 	-- upvalues: constantsTransparencyValidationModule (ref)
 	return if p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Front or p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Back then p0.X / p0.Y elseif p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Left or p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Right then p0.Z / p0.Y else p0.X / p0.Z
 end
 
-local function getScaleFactor(p2, p3) --[[ line: 88 ]]
+local function getScaleFactor(p2, p3)
 	-- upvalues: constantsTransparencyValidationModule (ref)
 	local var15, ASSET_TRANSPARENCY_RASTER_SIZE
 	local var14 = if p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Front or p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Back then p2.X / p2.Y elseif p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Left or p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Right then p2.Z / p2.Y else p2.X / p2.Z
@@ -87,7 +87,7 @@ local function getScaleFactor(p2, p3) --[[ line: 88 ]]
 	return if maxValue > 1 then vector2 / maxValue else vector2
 end
 
-local function addTransformedTriangle(vectorA, vectorB, p4, p5, p6) --[[ line: 115 ]]
+local function addTransformedTriangle(vectorA, vectorB, p4, p5, p6)
 	-- upvalues: transparencyUtilModule (ref)
 	local t = { orderedVerts = {} }
 	local var19 = vectorA:GetFaceVertices(p4)
@@ -101,7 +101,7 @@ local function addTransformedTriangle(vectorA, vectorB, p4, p5, p6) --[[ line: 1
 	return t
 end
 
-local function updateMinMaxBounds(a, b) --[[ line: 138 ]]
+local function updateMinMaxBounds(a, b)
 	local x = a.min.X
 	local x_1 = a.max.X
 	local y = a.min.Y
@@ -120,7 +120,7 @@ local function updateMinMaxBounds(a, b) --[[ line: 138 ]]
 	a.max = Vector3.new(maxValue, maxValue_1, maxValue_2)
 end
 
-local function getOpacity(p7) --[[ line: 161 ]]
+local function getOpacity(p7)
 	local var32 = p7:ReadPixelsBuffer(Vector2.new(0, 0), p7.Size)
 	local var33 = 0
 	local var34 = 0
@@ -144,7 +144,7 @@ local t_1 = {
 	[Enum.AssetType.RightLeg] = true
 }
 
-function t.run(p8, p9) --[[ line: 191 ]]
+function t.run(p8, p9)
 	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref), assetCalculatorModule (ref), t_1 (ref), addTransformedTriangle (ref), updateMinMaxBounds (ref), tryYieldModule (ref), getViews (ref), constantsTransparencyValidationModule (ref), getScaleFactor (ref), rasterUtilModule (ref), getOpacity (ref)
 	local rootInstance = p9.rootInstance
 	local assetType = p9.uploadEnum.assetType
@@ -180,7 +180,7 @@ function t.run(p8, p9) --[[ line: 191 ]]
 		local var38 = assetCalculatorModule.calculateAllTransformsForAsset(assetType, rootInstance)
 		
 		if t_1[assetType] then
-			for i_1, v_1 in assetCalculatorModule.calculateStraightenedLimb(assetType, var38, function(p10) --[[ line: 236 | named "findMeshHandle" ]]
+			for i_1, v_1 in assetCalculatorModule.calculateStraightenedLimb(assetType, var38, function(p10)
 				-- upvalues: rootInstance (ref)
 				return rootInstance:FindFirstChild(p10)
 			end) do

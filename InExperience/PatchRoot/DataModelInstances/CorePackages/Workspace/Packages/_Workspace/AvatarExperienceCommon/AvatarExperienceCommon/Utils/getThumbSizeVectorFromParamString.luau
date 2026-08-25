@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 9 | named "getThumbSizeVectorFromParamString" ]]
+﻿return function(p0)
 	local parts = string.split(p0, "&")
 	
 	if #parts == 2 then

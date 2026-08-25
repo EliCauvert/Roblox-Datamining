@@ -38,7 +38,7 @@ local partyVoiceBannerErrorUserNotEligibleURL = game:DefineFastString("PartyVoic
 local disallowSquadLobbyBannersInlineButtons = game:DefineFastFlag("DisallowSquadLobbyBannersInlineButtons", false)
 local disablePartyVoiceEligibilityBanner = game:DefineFastFlag("DisablePartyVoiceEligibilityBanner", false)
 
-function openWebview(p0, p1) --[[ line: 67 ]]
+function openWebview(p0, p1)
 	-- upvalues: httpService (ref), guiService (ref)
 	guiService:BroadcastNotification(httpService:JSONEncode({
 		presentationStyle = 0,
@@ -48,7 +48,7 @@ function openWebview(p0, p1) --[[ line: 67 ]]
 	}), 20)
 end
 
-local var12 = function(p2) --[[ line: 80 ]]
+local var12 = function(p2)
 	-- upvalues: useTokens (ref), disallowSquadLobbyBannersInlineButtons (ref), react (ref), foundation (ref)
 	local var18 = useTokens()
 	local var19 = p2.isButtonInline and not disallowSquadLobbyBannersInlineButtons
@@ -76,7 +76,7 @@ local var12 = function(p2) --[[ line: 80 ]]
 			HorizontalFlex = if var19 then Enum.UIFlexAlignment.SpaceBetween else Enum.UIFlexAlignment.Fill,
 			VerticalFlex = if var19 then Enum.UIFlexAlignment.Fill else Enum.UIFlexAlignment.None
 		}),
-		TextFrame = react.createElement(foundation.View, { tag = "col auto-xy gap-small wrap", LayoutOrder = 1 }, react.useMemo(function() --[[ line: 84 ]]
+		TextFrame = react.createElement(foundation.View, { tag = "col auto-xy gap-small wrap", LayoutOrder = 1 }, react.useMemo(function()
 			-- upvalues: react (copy), foundation (copy), var18 (ref), p2 (ref)
 			local list = {
 				react.createElement(foundation.Text, {
@@ -132,7 +132,7 @@ local var12 = function(p2) --[[ line: 80 ]]
 	})
 end
 
-local var13 = function(p3) --[[ line: 179 ]]
+local var13 = function(p3)
 	-- upvalues: useLocalUserId (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), getTableAppStorageKey (ref), SQUAD_VOICE_EU_MODAL_SEEN_KEY (ref), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (ref), httpService (ref), default (ref), var12 (ref), displayEuConsentPromptModule (ref)
 	local var21 = useLocalUserId()
 	local var22 = useDispatch()
@@ -140,7 +140,7 @@ local var13 = function(p3) --[[ line: 179 ]]
 	local var24, var25 = react.useState(false)
 	local var26 = getTableAppStorageKey(SQUAD_VOICE_EU_MODAL_SEEN_KEY)
 	local var27 = getTableAppStorageKey(SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY)
-	react.useEffect(function() --[[ line: 188 ]]
+	react.useEffect(function()
 		-- upvalues: var26 (ref), var21 (ref), var27 (ref), var25 (ref)
 		if var26[tostring(var21)] and not var27[tostring(var21)] then
 			var25(true)
@@ -149,18 +149,18 @@ local var13 = function(p3) --[[ line: 179 ]]
 		httpService:JSONEncode(var26),
 		httpService:JSONEncode(var27)
 	})
-	react.useEffect(function() --[[ line: 195 ]]
+	react.useEffect(function()
 		-- upvalues: default (copy), var25 (ref)
-		local eventConnection = default.VoiceEuModalConsented.Event:Connect(function() --[[ line: 196 ]]
+		local eventConnection = default.VoiceEuModalConsented.Event:Connect(function()
 			-- upvalues: var25 (copy)
 			var25(false)
 		end)
-		local eventConnection_1 = default.VoiceEuModalRefused.Event:Connect(function() --[[ line: 201 ]]
+		local eventConnection_1 = default.VoiceEuModalRefused.Event:Connect(function()
 			-- upvalues: var25 (copy)
 			var25(true)
 		end)
 		
-		return function() --[[ line: 205 ]]
+		return function()
 			-- upvalues: eventConnection (ref), eventConnection_1 (ref)
 			eventConnection:Disconnect()
 			eventConnection_1:Disconnect()
@@ -172,14 +172,14 @@ local var13 = function(p3) --[[ line: 179 ]]
 		buttonLabel = "Connect",
 		isButtonInline = true,
 		LayoutOrder = p3.LayoutOrder,
-		onActivated = function() --[[ line: 217 ]]
+		onActivated = function()
 			-- upvalues: var22 (ref), displayEuConsentPromptModule (copy), var23 (ref), var21 (ref), var26 (ref), var27 (ref)
 			var22(displayEuConsentPromptModule(var23.setSquadPrompt, tostring(var21), var26, var27))
 		end
 	}) else nil
 end
 
-local var14 = function(p4) --[[ line: 231 ]]
+local var14 = function(p4)
 	-- upvalues: useDispatch (ref), useStore (ref), react (ref), squadExternalContractContext (ref), useCurrentSquadId (ref), useVoiceStatus (ref), crossExperienceModule (ref), voiceStatus (ref), useLocalization (ref), voiceStatusChanged (ref), default (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), squadPromptType (ref), var12 (ref)
 	local var30 = useDispatch()
 	local var31 = useStore()
@@ -197,9 +197,9 @@ local var14 = function(p4) --[[ line: 231 ]]
 		LayoutOrder = p4.LayoutOrder,
 		label = var36.errorText,
 		buttonLabel = var36.errorButton,
-		onActivated = if var33 ~= "" then nil else react.useCallback(function() --[[ line: 246 ]]
+		onActivated = if var33 ~= "" then nil else react.useCallback(function()
 			-- upvalues: var30 (ref), voiceStatusChanged (copy), crossExperienceModule (copy), default (copy), var33 (ref), getFFlagEnableCrossExpVoiceMemoryCheck (copy), var35 (ref), var32 (ref), var31 (ref), squadPromptType (copy), voiceStatus (copy), var34 (ref)
-			local var37 = function(p5) --[[ line: 247 ]]
+			local var37 = function(p5)
 				-- upvalues: var30 (copy), voiceStatusChanged (copy), crossExperienceModule (copy), default (copy), var33 (copy)
 				var30(voiceStatusChanged({
 					status = crossExperienceModule.Constants.VOICE_STATUS.RCC_CONNECTING
@@ -220,8 +220,8 @@ local var14 = function(p4) --[[ line: 231 ]]
 				var32.setSquadPrompt(var31, {
 					hideCancelButton = false,
 					promptType = squadPromptType.ConnectVoiceWithLowMemory,
-					onConfirm = function() --[[ line: 268 ]] end,
-					onCancel = function() --[[ line: 269 ]]
+					onConfirm = function() end,
+					onCancel = function()
 						-- upvalues: var37 (ref)
 						var37(true)
 					end
@@ -247,7 +247,7 @@ local var14 = function(p4) --[[ line: 231 ]]
 	}) else nil
 end
 
-local var15 = function(p6) --[[ line: 309 ]]
+local var15 = function(p6)
 	-- upvalues: useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsAnyOtherUserPartyVoiceEligibleModule (ref), useLocalization (ref), useAppPolicy (ref), react (ref), partyVoiceBannerErrorUserNotEligibleURL (ref), var12 (ref)
 	local var38 = useLocalization({
 		errorText = "Feature.Squads.Label.VoiceErrorUserIneligible",
@@ -259,9 +259,9 @@ local var15 = function(p6) --[[ line: 309 ]]
 		LayoutOrder = p6.LayoutOrder,
 		label = var38.errorText,
 		buttonLabel = var38.errorButton,
-		onActivated = if useAppPolicy(function(p7) --[[ line: 317 ]]
+		onActivated = if useAppPolicy(function(p7)
 			return p7.getWebViewSupport()
-		end) and partyVoiceBannerErrorUserNotEligibleURL ~= "" then react.useCallback(function() --[[ line: 325 ]]
+		end) and partyVoiceBannerErrorUserNotEligibleURL ~= "" then react.useCallback(function()
 			-- upvalues: partyVoiceBannerErrorUserNotEligibleURL (copy), var38 (ref)
 			if partyVoiceBannerErrorUserNotEligibleURL ~= "" then
 				openWebview(var38.errorButton, partyVoiceBannerErrorUserNotEligibleURL)
@@ -270,25 +270,25 @@ local var15 = function(p6) --[[ line: 309 ]]
 	}) else nil
 end
 
-local var16 = function(p8) --[[ line: 346 ]]
+local var16 = function(p8)
 	-- upvalues: useVoiceStatus (ref), useCurrentSquadId (ref), react (ref), voiceChatModule (ref), useAppPolicy (ref), useLocalization (ref), voiceStatus (ref), var12 (ref)
 	local var39 = useVoiceStatus()
 	local var40 = useCurrentSquadId() or ""
-	local var41 = react.useMemo(function() --[[ line: 349 ]]
+	local var41 = react.useMemo(function()
 		-- upvalues: voiceChatModule (copy)
 		return voiceChatModule.Utils.GetSettingsAppAvailable()
 	end, {})
-	local var42 = useAppPolicy(function(p9) --[[ line: 353 ]]
+	local var42 = useAppPolicy(function(p9)
 		return p9
 	end)
 	local var43 = useLocalization({
 		errorText = "Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess",
 		errorButton = "Feature.SettingsHub.Action.OpenSettings",
-		errorSubtext1 = react.useMemo(function() --[[ line: 357 ]]
+		errorSubtext1 = react.useMemo(function()
 			-- upvalues: var41 (ref), var42 (ref)
 			return (if var41 then var42.getMicSettingsDeeplinkDirectionsLocaleKey() else var42.getMicSettingsDirectionsLocaleKey()) or nil
 		end, { var42, var41 }),
-		errorSubtext2 = react.useMemo(function() --[[ line: 365 ]]
+		errorSubtext2 = react.useMemo(function()
 			-- upvalues: var42 (ref)
 			return if var42.getRequiresAppRestartOnMicAccessChange() then "Feature.SettingsHub.Prompt.RestartOnMicAccessChange" else nil
 		end, { var42, var41 })
@@ -300,9 +300,9 @@ local var16 = function(p8) --[[ line: 346 ]]
 		label = var43.errorText,
 		sublabels = { var43.errorSubtext1, var43.errorSubtext2 },
 		buttonLabel = var43.errorButton,
-		onActivated = if var40 == "" or not var41 then nil else react.useCallback(function() --[[ line: 383 ]]
+		onActivated = if var40 == "" or not var41 then nil else react.useCallback(function()
 			-- upvalues: voiceChatModule (copy)
-			pcall(function() --[[ line: 384 ]]
+			pcall(function()
 				-- upvalues: voiceChatModule (copy)
 				voiceChatModule.Utils.SwitchToMicrophoneSettings()
 			end)
@@ -310,7 +310,7 @@ local var16 = function(p8) --[[ line: 346 ]]
 	}) else nil
 end
 
-local var17 = function(p10) --[[ line: 405 ]]
+local var17 = function(p10)
 	-- upvalues: useNavigation (ref), useCurrentSquadParentChannelId (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsLocalPlayerPartyVoiceEligible (ref), useLocalization (ref), react (ref), var12 (ref)
 	local var44 = useNavigation()
 	local var45 = useCurrentSquadParentChannelId() or ""
@@ -324,10 +324,10 @@ local var17 = function(p10) --[[ line: 405 ]]
 		LayoutOrder = p10.LayoutOrder,
 		label = var46.errorText,
 		buttonLabel = var46.errorButton,
-		onActivated = react.useCallback(function() --[[ line: 416 ]]
+		onActivated = react.useCallback(function()
 			-- upvalues: var45 (ref), var44 (ref)
 			if var45 ~= "" then
-				pcall(function() --[[ line: 418 ]]
+				pcall(function()
 					-- upvalues: var44 (copy), var45 (copy)
 					var44.navigate("CreateUnfilteredChatPartialModal", { conversationId = var45 })
 				end)
@@ -336,7 +336,7 @@ local var17 = function(p10) --[[ line: 405 ]]
 	}) else nil
 end
 
-return function(p11) --[[ line: 443 ]]
+return function(p11)
 	-- upvalues: useTokens (ref), react (ref), getFFlagEnableCrossExpVoice (ref), var14 (ref), disablePartyVoiceEligibilityBanner (ref), var17 (ref), var15 (ref), var16 (ref), fFlagEnableVoiceEuConsentPrompt (ref), var13 (ref)
 	local var47 = useTokens()
 	
@@ -344,7 +344,7 @@ return function(p11) --[[ line: 443 ]]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
 		BackgroundTransparency = 1,
-		[react.Change.AbsoluteSize] = react.useCallback(function(p12) --[[ line: 445 ]]
+		[react.Change.AbsoluteSize] = react.useCallback(function(p12)
 			-- upvalues: p11 (ref)
 			if p12 then
 				p11.onAbsoluteSizeChanged(p12.AbsoluteSize)

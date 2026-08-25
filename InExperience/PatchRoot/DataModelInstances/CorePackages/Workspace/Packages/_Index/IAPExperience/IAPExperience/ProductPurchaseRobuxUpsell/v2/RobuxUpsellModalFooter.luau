@@ -5,7 +5,7 @@ local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function() --[[ line: 16 | named "RobuxUpsellModalFooter" ]]
+return function()
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), text (ref)
 	local var2 = useLocalization({
 		DisclosurePayment = "IAPExperience.RobuxUpsell.Text.DisclosurePayment",

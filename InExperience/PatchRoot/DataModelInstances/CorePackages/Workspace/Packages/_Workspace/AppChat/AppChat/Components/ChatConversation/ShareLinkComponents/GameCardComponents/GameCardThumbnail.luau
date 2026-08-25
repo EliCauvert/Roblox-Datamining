@@ -16,7 +16,7 @@ local list = {
 	NumberSequenceKeypoint.new(1, 0)
 }
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "GameCardThumbnail" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), reactModule (ref), image (ref), getGameCardThumbnailCornerRadiiModule (ref), roundedVariantModule (ref), list (ref)
 	local var9 = cryoModule.Dictionary.union(t, p0)
 	local size500 = useTokens().Size.Size_500
@@ -37,7 +37,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GameCardThumbnail" ]
 			Visible = var9.Visible
 		})
 	end
-	local var10 = reactModule.useMemo(function() --[[ line: 63 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref), roundedVariantModule (copy)
 		local degrees = math.deg(math.atan(var9.aspectRatio))
 		
@@ -72,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GameCardThumbnail" ]
 			Image = var9.gameThumbnail,
 			Visible = var9.Visible
 		}, {
-			TransparencyGradient = reactModule.useMemo(function() --[[ line: 78 ]]
+			TransparencyGradient = reactModule.useMemo(function()
 				-- upvalues: reactModule (copy), var9 (ref), var10 (ref), list (copy)
 				return reactModule.createElement("UIGradient", {
 					Rotation = if var9.roundedVariant then var10[var9.roundedVariant] else 0,

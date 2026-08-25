@@ -13,7 +13,7 @@ local useVariableItemWidthScrollHandlersModule = require(variableItemWidthCarous
 local fFlagLuaAppEnableVRCarouselScrolling = require(parent.SharedFlags).FFlagLuaAppEnableVRCarouselScrolling
 local fFlagLuaAppHideEmptyCarouselHeader = require(parent.SharedFlags).FFlagLuaAppHideEmptyCarouselHeader
 
-local function _(p0, p1, p2, p3) --[[ line: 50 | named "areScrollButtonsEnabled" ]]
+local function _(p0, p1, p2, p3)
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
 	local var5
 	if not p2 then
@@ -24,7 +24,7 @@ local function _(p0, p1, p2, p3) --[[ line: 50 | named "areScrollButtonsEnabled"
 	return var5
 end
 
-function VariableItemWidthCarousel(p4, p5) --[[ line: 68 ]]
+function VariableItemWidthCarousel(p4, p5)
 	-- upvalues: useDesignTokens (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), fFlagLuaAppHideEmptyCarouselHeader (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), responsiveModule (ref), reactModule (ref), useVariableItemWidthScrollHandlersModule (ref), collectionHeader (ref), carouselScrollButtons (ref)
 	local var12
 	local var6 = useDesignTokens()
@@ -66,7 +66,7 @@ function VariableItemWidthCarousel(p4, p5) --[[ line: 68 ]]
 		end
 	end
 	local var24
-	local var14 = reactModule.useMemo(function() --[[ line: 93 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: items (ref), renderItem (ref)
 		local t = {}
 		
@@ -76,7 +76,7 @@ function VariableItemWidthCarousel(p4, p5) --[[ line: 68 ]]
 		return t
 	end, { items, renderItem })
 	local var15, var16, var17, var18, var19 = useVariableItemWidthScrollHandlersModule(items, itemPadding, calculateItemWidth, scrollingFrameRef, p4.scrollSpeed)
-	local var20 = reactModule.useCallback(function(p6) --[[ line: 105 ]]
+	local var20 = reactModule.useCallback(function(p6)
 		-- upvalues: var19 (ref), p4 (ref)
 		var19()
 		

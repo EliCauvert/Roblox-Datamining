@@ -8,11 +8,11 @@ local view = foundationModule.View
 local loadableVideoModule = require(profilePlatform.Components.Videos.LoadableVideo)
 local timeDurationOverlayModule = require(profilePlatform.Components.Videos.TimeDurationOverlay)
 
-return function(p0) --[[ line: 33 | named "MediaPlayer" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), stateLayerAffordance (ref), loadableVideoModule (ref), image (ref), timeDurationOverlayModule (ref)
 	return reactModule.createElement(view, {
 		tag = "shrink size-full",
-		onActivated = reactModule.useCallback(function() --[[ line: 34 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.onExpandCallback then
 				p0.onExpandCallback()
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 33 | named "MediaPlayer" ]]
 		stateLayer = { affordance = stateLayerAffordance.None },
 		ZIndex = p0.ZIndex
 	}, {
-		VideoPreview = if reactModule.useMemo(function() --[[ line: 40 ]]
+		VideoPreview = if reactModule.useMemo(function()
 			-- upvalues: p0 (ref)
 			return p0.Video or not p0.thumbnailImage
 		end, { p0.Video, p0.thumbnailImage }) then reactModule.createElement(loadableVideoModule, {

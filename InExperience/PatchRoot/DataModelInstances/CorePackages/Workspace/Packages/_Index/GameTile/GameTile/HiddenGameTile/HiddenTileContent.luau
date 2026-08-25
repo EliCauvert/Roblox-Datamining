@@ -32,7 +32,7 @@ local userSignalTypes = userSignalsModule.UserSignalTypes
 local notInterestedUserSignalTelemetryEventConfigsModule = require(gameTile.NotInterestedUserSignalTelemetryEventConfigs)
 local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
 
-return reactModule.memo(function(p0) --[[ line: 49 | named "HiddenTileContent" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), useTokens (ref), useFocusGuiObject (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), guiService (ref), postSendUserSignal (ref), userSignalTypes (ref), mutedError (ref), view (ref), fFlagLuaAppEnableSponsoredReportAd (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	local var15 = useDispatch()
 	local var16 = reactModule.useRef(nil)
@@ -58,7 +58,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "HiddenTileContent" ]
 		}),
 		UndoButton = reactModule.createElement(button, {
 			LayoutOrder = 2,
-			onActivated = reactModule.useCallback(function() --[[ line: 61 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: p0 (ref), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), var15 (ref), setNetworkingErrorToast (copy), guiService (copy), var16 (ref), var18 (ref), postSendUserSignal (copy), var19 (ref), userSignalTypes (copy), mutedError (copy)
 				if not p0.appPage then
 					default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
@@ -69,14 +69,14 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "HiddenTileContent" ]
 				p0.setGameHidden(p0.universeId, false)
 				
 				if guiService.SelectedCoreObject == var16.current then
-					task.delay(0, function() --[[ line: 74 ]]
+					task.delay(0, function()
 						-- upvalues: p0 (copy), var18 (copy)
 						if p0.parentRef then
 							var18(p0.parentRef.current)
 						end
 					end)
 				end
-				local ok, status = pcall(function() --[[ line: 81 ]]
+				local ok, status = pcall(function()
 					-- upvalues: postSendUserSignal (copy), var19 (copy), p0 (copy), userSignalTypes (copy), var15 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
 					postSendUserSignal(var19, { boolValue = false }, {
 						id = p0.universeId,
@@ -86,7 +86,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "HiddenTileContent" ]
 							topicId = p0.collectionId or "",
 							subIds = { p0.collectionId or "" }
 						}
-					}, userSignalTypes.SignalValueType.Bool, userSignalTypes.SignalType.NotInterested):catch(function(p1) --[[ line: 95 ]]
+					}, userSignalTypes.SignalValueType.Bool, userSignalTypes.SignalType.NotInterested):catch(function(p1)
 						-- upvalues: p0 (copy), var15 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
 						p0.setGameHidden(p0.universeId, true)
 						var15(setNetworkingErrorToast(p1))

@@ -5,7 +5,7 @@ local cryoModule = require(parent.Cryo)
 local enumsModule = require(roduxCall.Enums)
 local t = {}
 
-function t.new(p0) --[[ line: 9 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -14,7 +14,7 @@ function t.new(p0) --[[ line: 9 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 21 ]]
+function t.mock(p1)
 	-- upvalues: t (ref)
 	p1 = p1 or {}
 	
@@ -25,7 +25,7 @@ function t.mock(p1) --[[ line: 21 ]]
 	})
 end
 
-function t.format(p2) --[[ line: 33 ]]
+function t.format(p2)
 	-- upvalues: cryoModule (ref), enumsModule (ref)
 	return cryoModule.Dictionary.join(p2, {
 		userPresenceType = enumsModule.PresenceType[p2.userPresenceType]
@@ -34,7 +34,7 @@ end
 
 t.isValid = tModule.strictInterface({
 	userId = tModule.number,
-	userPresenceType = function(p3) --[[ line: 41 ]]
+	userPresenceType = function(p3)
 		-- upvalues: enumsModule (ref)
 		return enumsModule.PresenceType[p3] ~= nil
 	end,

@@ -15,7 +15,7 @@ local var4 = tModule.strictInterface({
 	contentType = if sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then tModule.optional(tModule.string) else nil
 })
 
-return function(p0, p1) --[[ line: 25 ]]
+return function(p0, p1)
 	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var4 (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
 	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
 		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")

@@ -6,7 +6,7 @@ local UIBloxModule = require(parent.UIBlox)
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
 	return reactModule.createElement(interactiveAlert, {
 		screenSize = useScreenSize(),

@@ -4,9 +4,9 @@ local signalsModule = require(parent_1.Signals)
 local networkProfiler = require(parent_1.Http).NetworkProfiler
 local _ = require(parent.HttpStoreTypes)
 
-return function(p0) --[[ line: 13 | named "createNetworkStatsHandler" ]]
+return function(p0)
 	-- upvalues: signalsModule (ref), networkProfiler (ref)
-	return signalsModule.createEffect(function(p1) --[[ line: 14 ]]
+	return signalsModule.createEffect(function(p1)
 		-- upvalues: p0 (ref), networkProfiler (copy)
 		local var1 = p0(p1)
 		

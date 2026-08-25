@@ -3,7 +3,7 @@ local screenshotFlowStepHandlerModule = require(script.Parent.ScreenshotFlowStep
 local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Parent.Parent.Common.renderWithCoreScriptsStyleProvider)
 local screenshotFlowStepHandlerContainer = roactModule.PureComponent:extend("ScreenshotFlowStepHandlerContainer")
 
-function screenshotFlowStepHandlerContainer.render(p0) --[[ line: 13 ]]
+function screenshotFlowStepHandlerContainer.render(p0)
 	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref), roactModule (ref), screenshotFlowStepHandlerModule (ref)
 	return renderWithCoreScriptsStyleProviderModule({
 		ScreenshotFlowStepHandlerContainer = roactModule.createElement(screenshotFlowStepHandlerModule, p0.props)

@@ -27,13 +27,13 @@ local t = {
 	[userModel.PresenceType.IN_STUDIO] = { Image = "icons/logo/studiologo_small" }
 }
 
-return function(p0) --[[ line: 56 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), constants (ref), size150x150 (ref), getRbxthumbWithTypeSizeAndOptions (ref), avatarHeadShot (ref), fFlagFriendsMenuUseProfileFrameThumbnailModule (ref), userModel (ref), t (ref), skeleton (ref), radius (ref), imageSetLabel (ref), images (ref), iconSize (ref)
 	local var13
 	local friend = p0.friend
 	assert(friend, "friend should be non-nil. Silence type checker.")
 	local var7 = useStyle()
-	local var8 = reactModule.useMemo(function() --[[ line: 61 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: friend (ref), constants (copy), size150x150 (copy), getRbxthumbWithTypeSizeAndOptions (copy), avatarHeadShot (copy), fFlagFriendsMenuUseProfileFrameThumbnailModule (copy)
 		return (if friend then getRbxthumbWithTypeSizeAndOptions(friend.id, avatarHeadShot, constants.RbxThumbnailSizeToNumberSize[size150x150], nil, nil, fFlagFriendsMenuUseProfileFrameThumbnailModule) else nil) or "rbxasset://textures/ui/LuaApp/graphic/ph-avatar-portrait.png"
 	end, { friend })

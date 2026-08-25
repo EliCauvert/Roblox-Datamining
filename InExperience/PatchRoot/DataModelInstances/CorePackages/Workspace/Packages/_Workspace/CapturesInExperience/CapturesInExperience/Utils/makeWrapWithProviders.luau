@@ -13,14 +13,14 @@ local capturesPolicyModule = require(parent.App.CapturesPolicy)
 local constantsModule = require(parent.Constants)
 local _ = require(parent.Types)
 
-return function(p0, p1) --[[ line: 20 | named "makeWrapWithProviders" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), roactModule (ref), roactRoduxModule (ref), capturesPolicyModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), capturesContextModule (ref), foundationProvider (ref), foundationModule (ref), constantsModule (ref)
-	local var7 = function(p2, p3) --[[ line: 23 ]]
+	local var7 = function(p2, p3)
 		-- upvalues: reactModule (copy)
 		return if p2 then reactModule.createElement("Folder", { Name = p2 }, p3) else p3
 	end
 	
-	return function(p4, p5, p6, p7) --[[ line: 33 ]]
+	return function(p4, p5, p6, p7)
 		-- upvalues: roactModule (copy), reactModule (copy), roactRoduxModule (copy), p0 (ref), capturesPolicyModule (copy), styleProviderWithDefaultTheme (copy), localizationProvider (copy), localization (copy), p1 (ref), capturesContextModule (copy), var7 (ref), foundationProvider (copy), foundationModule (copy), constantsModule (copy)
 		return roactModule.mount(reactModule.createElement(roactRoduxModule.StoreProvider, { store = p0 }, {
 			PolicyProvider = roactModule.createElement(capturesPolicyModule.Provider, { policy = { capturesPolicyModule.Mapper } }, {

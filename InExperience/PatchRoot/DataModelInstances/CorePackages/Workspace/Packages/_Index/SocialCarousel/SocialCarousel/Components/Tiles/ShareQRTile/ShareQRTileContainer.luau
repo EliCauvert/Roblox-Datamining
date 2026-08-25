@@ -19,16 +19,16 @@ local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnect
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var10 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0) --[[ line: 32 | named "ShareQRTileContainer" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useDispatch (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselContextModule (ref), reactModule (ref), fFlagSocialCarouselShareQRBackToAddFriends (ref), fFlagSignalsNavP3Dispatch (ref), var10 (ref), navigateBack (ref), fFlagCreateConnectionsHub (ref), appPage (ref), navigateDown (ref), constantsModule (ref), shareQRTileModule (ref), cryoModule (ref)
 	local var11 = useNavigation()
 	local var12 = useDispatch()
 	local var13 = useSocialCarouselAnalyticsModule()
 	local var14 = useSocialCarouselContextModule()
-	local var15 = reactModule.useCallback(function() --[[ line: 39 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), p0 (ref), fFlagSocialCarouselShareQRBackToAddFriends (copy), fFlagSignalsNavP3Dispatch (copy), var10 (copy), var12 (ref), navigateBack (copy), fFlagCreateConnectionsHub (copy), var11 (ref), appPage (copy), navigateDown (copy), var14 (ref), constantsModule (copy)
 		var13.shareQRPressed(p0.index)
-		local var16 = if fFlagSocialCarouselShareQRBackToAddFriends then function() --[[ line: 43 ]]
+		local var16 = if fFlagSocialCarouselShareQRBackToAddFriends then function()
 			-- upvalues: fFlagSignalsNavP3Dispatch (copy), var10 (copy), var12 (copy), navigateBack (copy), fFlagCreateConnectionsHub (copy), var11 (copy), appPage (copy), navigateDown (copy)
 			if fFlagSignalsNavP3Dispatch then
 				var10.back(true)
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 32 | named "ShareQRTileContainer" ]]
 		var13.shareQRPressed,
 		var14.navigateToQRCodePage
 	})
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), constantsModule (copy)
 		var14.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.SHARE_QR)
 	end, {})

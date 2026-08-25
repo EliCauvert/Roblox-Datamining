@@ -19,20 +19,20 @@ local mapCheckUserPurchaseSettingsFailureReasonToViolationType = IAPExperienceMo
 local economicRestrictionsViolationType = IAPExperienceModule.Enums.EconomicRestrictionsViolationType
 local list = { analyticsModule, networkModule, externalSettingsModule }
 
-local function _(p0) --[[ line: 32 | named "validateResult" ]]
+local function _(p0)
 	-- upvalues: mapCheckUserPurchaseSettingsFailureReasonToViolationType (ref), economicRestrictionsViolationType (ref)
 	return if p0 == nil then false else (if p0.isEligible ~= nil then p0.failureReason == nil else true) and not (mapCheckUserPurchaseSettingsFailureReasonToViolationType(p0.failureReason) ~= economicRestrictionsViolationType.None and p0.expirationTimeInMinutes ~= nil)
 end
 
-return function() --[[ line: 55 | named "initiateUserPurchaseSettingsPrecheck" ]]
+return function()
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), externalSettingsModule (ref), initiatePurchasePrecheckModule (ref), getUpsellFlowModule (ref), upsellFlowModule (ref), checkUserPurchaseSettingsModule (ref), mapCheckUserPurchaseSettingsFailureReasonToViolationType (ref), economicRestrictionsViolationType (ref), errorOccurredModule (ref), purchaseErrorModule (ref), checkUserPurchaseSettingsFailureReason (ref), setPromptStateModule (ref), promptStateModule (ref), setEconomicRestrictionErrorModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2) --[[ line: 56 ]]
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: networkModule (copy), analyticsModule (copy), externalSettingsModule (copy), initiatePurchasePrecheckModule (copy), getUpsellFlowModule (copy), upsellFlowModule (copy), checkUserPurchaseSettingsModule (copy), mapCheckUserPurchaseSettingsFailureReasonToViolationType (copy), economicRestrictionsViolationType (copy), errorOccurredModule (copy), purchaseErrorModule (copy), checkUserPurchaseSettingsFailureReason (copy), setPromptStateModule (copy), promptStateModule (copy), setEconomicRestrictionErrorModule (copy)
 		local var16 = p2[networkModule]
 		local var17 = p2[analyticsModule]
 		local var18 = p2[externalSettingsModule]
 		
-		return if var18.isStudio() then p1:dispatch(initiatePurchasePrecheckModule()) elseif getUpsellFlowModule(var18.getPlatform()) == upsellFlowModule.Web then p1:dispatch(initiatePurchasePrecheckModule()) else checkUserPurchaseSettingsModule(var16):andThen(function(p3) --[[ line: 75 ]]
+		return if var18.isStudio() then p1:dispatch(initiatePurchasePrecheckModule()) elseif getUpsellFlowModule(var18.getPlatform()) == upsellFlowModule.Web then p1:dispatch(initiatePurchasePrecheckModule()) else checkUserPurchaseSettingsModule(var16):andThen(function(p3)
 			-- upvalues: mapCheckUserPurchaseSettingsFailureReasonToViolationType (copy), economicRestrictionsViolationType (copy), p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), initiatePurchasePrecheckModule (copy), checkUserPurchaseSettingsFailureReason (copy), var17 (ref), setPromptStateModule (copy), promptStateModule (copy), setEconomicRestrictionErrorModule (copy)
 			local var19, var20
 			if p3 == nil then
@@ -62,7 +62,7 @@ return function() --[[ line: 55 | named "initiateUserPurchaseSettingsPrecheck" ]
 				return p1:dispatch(errorOccurredModule(purchaseErrorModule.EconomicRestriction))
 			end
 			return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
-		end):catch(function(_) --[[ line: 116 ]]
+		end):catch(function(_)
 			-- upvalues: p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy)
 			return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
 		end)

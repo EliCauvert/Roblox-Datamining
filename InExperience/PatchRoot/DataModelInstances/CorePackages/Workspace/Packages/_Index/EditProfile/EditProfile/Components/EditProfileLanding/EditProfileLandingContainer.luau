@@ -29,14 +29,14 @@ local roactNavigationModule = require(parent.RoactNavigation)
 local navigationEvents = roactNavigationModule.NavigationEvents
 local editProfileIXPLayer = game:DefineFastString("EditProfileIXPLayer", "Social.EditProfilePage")
 
-local function _(p0) --[[ line: 51 | named "getHostRoute" ]]
+local function _(p0)
 	local var20 = p0._dangerouslyGetParent()
 	local state = var20 and var20.state
 	
 	return if state and state.routeName then state else nil
 end
 
-local function getCoveredPage(p1, p2) --[[ line: 58 ]]
+local function getCoveredPage(p1, p2)
 	local var22 = p1
 	local var23 = var22._dangerouslyGetParent()
 	while var23 do
@@ -59,12 +59,12 @@ local function getCoveredPage(p1, p2) --[[ line: 58 ]]
 	return nil, nil
 end
 
-return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
+return function(p3)
 	-- upvalues: useLocalUserId (ref), useRealNamesInDisplayNamesEnabledModule (ref), profileRefreshSignal (ref), reactModule (ref), focusNavigationUtilsModule (ref), reactFocusNavigationModule (ref), useEffect (ref), fFlagAXEnableProfileTab (ref), analyticsServiceV2Module (ref), enumsModule (ref), constantsModule (ref), useLocalRobuxBalance (ref), fFlagAXPPEReturnToEntrySurface (ref), fFlagEditProfilePPEStartOnEmotesPageModule (ref), getCoveredPage (ref), roactNavigationModule (ref), var6 (ref), useSignalState (ref), var12 (ref), editProfileStoreModule (ref), dataHydrationTypes (ref), focusNavigatorWrapperModule (ref), navigationEvents (ref), IXPService (ref), editProfileIXPLayer (ref), fFlagEditProfileLandingV2EnabledModule (ref), editProfileLandingV2Module (ref), editProfileLandingModule (ref)
 	local var26 = useLocalUserId()
 	local var27 = useRealNamesInDisplayNamesEnabledModule()
 	
-	local var28 = function() --[[ line: 85 ]]
+	local var28 = function()
 		-- upvalues: profileRefreshSignal (copy), p3 (ref)
 		profileRefreshSignal.notifyProfileRefresh()
 		p3.navigation.pop()
@@ -74,12 +74,12 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 	local t = {}
 	local var31 = focusNavigationUtilsModule.useAutoFocus(t, 0.1)
 	local var32 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	useEffect(function() --[[ line: 95 ]]
+	useEffect(function()
 		-- upvalues: t (ref), var29 (ref), var32 (ref), var31 (ref)
 		t[1] = var29.current
 		local var48 = if var32 and var32.focusedGuiObject:getValue() ~= nil and var31 then var31() else nil
 		
-		return function() --[[ line: 101 ]]
+		return function()
 			-- upvalues: var48 (write)
 			if var48 then
 				var48.cancel()
@@ -88,7 +88,7 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 	end, { var31 })
 	local var33 = fFlagAXEnableProfileTab and p3.navigation.getParam("fullBleed") == true
 	
-	local var34 = function() --[[ line: 113 ]]
+	local var34 = function()
 		-- upvalues: analyticsServiceV2Module (copy), p3 (ref), enumsModule (copy), var33 (ref)
 		analyticsServiceV2Module.sendDisplayNameModalOpened()
 		p3.navigation.navigate(enumsModule.Screens.EditProfileSubScreen, {
@@ -97,7 +97,7 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 		})
 	end
 	
-	local function showToast(p4) --[[ line: 121 ]]
+	local function showToast(p4)
 		-- upvalues: p3 (ref), enumsModule (copy)
 		p3.navigation.goBack()
 		p3.navigation.navigate(enumsModule.Screens.EditProfileToast, { text = p4 })
@@ -105,14 +105,14 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 	
 	local param = p3.navigation.getParam(constantsModule.EditUserNameWebView)
 	
-	local var37 = function() --[[ line: 128 ]]
+	local var37 = function()
 		-- upvalues: p3 (ref), enumsModule (copy)
 		p3.navigation.navigate(enumsModule.Screens.UsernameInsufficientFundsModal)
 	end
 	
 	local var38 = useLocalRobuxBalance()
 	
-	local var39 = function() --[[ line: 133 ]]
+	local var39 = function()
 		-- upvalues: var38 (ref), constantsModule (copy), param (ref), showToast (ref), p3 (ref), enumsModule (copy), var37 (ref), analyticsServiceV2Module (copy)
 		if constantsModule.ChangeUsernamePrice <= var38 then
 			param(showToast)
@@ -125,12 +125,12 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 		analyticsServiceV2Module.sendEditUsernameOpened()
 	end
 	
-	local var40 = function() --[[ line: 145 ]]
+	local var40 = function()
 		-- upvalues: p3 (ref), enumsModule (copy), var33 (ref)
 		p3.navigation.navigate(enumsModule.Screens.EditProfileSubScreen, { screen = enumsModule.Screens.EditBio, fullBleed = var33 })
 	end
 	
-	local var41 = function() --[[ line: 152 ]]
+	local var41 = function()
 		-- upvalues: analyticsServiceV2Module (copy), fFlagAXPPEReturnToEntrySurface (copy), fFlagEditProfilePPEStartOnEmotesPageModule (copy), enumsModule (copy), p3 (ref), getCoveredPage (copy), roactNavigationModule (copy)
 		analyticsServiceV2Module.sendOpenAvatarMarketplace()
 		
@@ -165,11 +165,11 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 		end
 	end
 	
-	local var42 = reactModule.useMemo(function() --[[ line: 185 ]]
+	local var42 = reactModule.useMemo(function()
 		-- upvalues: var6 (copy), var26 (ref)
 		return var6.fetchNamesByUserIds({ tostring(var26) })
 	end, { var26 })
-	useEffect(function() --[[ line: 188 ]]
+	useEffect(function()
 		-- upvalues: analyticsServiceV2Module (copy)
 		analyticsServiceV2Module.sendEditProfileOpened()
 	end, {})
@@ -198,7 +198,7 @@ return function(p3) --[[ line: 82 | named "EditProfileLandingContainer" ]]
 	
 	return focusNavigatorWrapperModule({ onClose = var28 }, {
 		EditProfileLandingExposureLogger = reactModule.createElement(navigationEvents, {
-			onDidFocus = function() --[[ line: 233 ]]
+			onDidFocus = function()
 				-- upvalues: IXPService (copy), editProfileIXPLayer (copy)
 				IXPService:LogUserLayerExposure(editProfileIXPLayer)
 			end

@@ -27,7 +27,7 @@ local standardButtonSizeModule = require(parent.Enum.StandardButtonSize)
 local validateImageModule = require(parent_1.ImageSet.Validator.validateImage)
 local genericButton = roactModule.PureComponent:extend("GenericButton")
 
-function genericButton.init(p0) --[[ line: 48 ]]
+function genericButton.init(p0)
 	-- upvalues: controlStateModule (ref), runService (ref), roactModule (ref)
 	p0:setState({
 		targetLoadingProgress = 1,
@@ -36,7 +36,7 @@ function genericButton.init(p0) --[[ line: 48 ]]
 		isButtonUnfocused = runService:GetRobloxGuiFocused()
 	})
 	
-	function p0.onStateChanged(p1, p2) --[[ line: 56 ]]
+	function p0.onStateChanged(p1, p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p2 })
 		
@@ -45,7 +45,7 @@ function genericButton.init(p0) --[[ line: 48 ]]
 		end
 	end
 	
-	function p0.onAbsoluteSizeChanged(p3) --[[ line: 65 ]]
+	function p0.onAbsoluteSizeChanged(p3)
 		-- upvalues: p0 (ref), roactModule (copy)
 		p0:setState({ absoluteSize = p3.AbsoluteSize })
 		
@@ -54,7 +54,7 @@ function genericButton.init(p0) --[[ line: 48 ]]
 		end
 	end
 	
-	function p0.onRobloxGuiFocusedChanged(p4) --[[ line: 74 ]]
+	function p0.onRobloxGuiFocusedChanged(p4)
 		-- upvalues: p0 (ref)
 		if p4 then
 			p0:setState({ targetLoadingProgress = 1, isButtonUnfocused = true })
@@ -112,15 +112,15 @@ genericButton.defaultProps = {
 	SliceCenter = Rect.new(8, 8, 9, 9)
 }
 
-function genericButton.didMount(p5) --[[ line: 200 ]]
+function genericButton.didMount(p5)
 	p5:setState({
 		targetLoadingProgress = if p5.state.isButtonUnfocused or not p5.props.enableInputDelayed then 1 else 0
 	})
 end
 
-function genericButton.render(p6) --[[ line: 208 ]]
+function genericButton.render(p6)
 	-- upvalues: withAnimationModule (ref)
-	return if p6.props.isDelayedInput and not p6.state.isButtonUnfocused then withAnimationModule({ loadingProgress = p6.state.targetLoadingProgress }, function(p7) --[[ line: 221 ]]
+	return if p6.props.isDelayedInput and not p6.state.isButtonUnfocused then withAnimationModule({ loadingProgress = p6.state.targetLoadingProgress }, function(p7)
 		-- upvalues: p6 (ref)
 		return p6:renderButton(math.clamp(p7.loadingProgress, 0, 1))
 	end, {
@@ -129,9 +129,9 @@ function genericButton.render(p6) --[[ line: 208 ]]
 	}) elseif p6.state.isButtonUnfocused then p6:renderButton(1) else p6:renderButton()
 end
 
-function genericButton.renderButton(p8, p9) --[[ line: 241 ]]
+function genericButton.renderButton(p8, p9)
 	-- upvalues: withStyleModule (ref), tModule (ref), var22 (ref), getContentStyleModule (ref), controlStateModule (ref), standardButtonSizeModule (ref), roactModule (ref), skeleton (ref), getClosestRadiusModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), cryoModule (ref), interactableModule (ref), hoverButtonBackgroundModule (ref), eventConnection (ref), runService (ref)
-	return withStyleModule(function(p10) --[[ line: 242 ]]
+	return withStyleModule(function(p10)
 		-- upvalues: tModule (copy), p8 (ref), var22 (copy), p9 (ref), getContentStyleModule (copy), controlStateModule (copy), standardButtonSizeModule (copy), roactModule (copy), skeleton (copy), getClosestRadiusModule (copy), UIBloxConfigModule (copy), getIconSizeModule (copy), iconSizeModule (copy), imageSetComponentModule (copy), genericTextLabelModule (copy), cryoModule (copy), interactableModule (copy), hoverButtonBackgroundModule (copy), eventConnection (copy), runService (copy)
 		assert(tModule.table(p10), "Style provider is missing.")
 		local controlState = p8.state.controlState
@@ -374,7 +374,7 @@ function genericButton.renderButton(p8, p9) --[[ line: 241 ]]
 	end)
 end
 
-function genericButton.didUpdate(p11, p12, p13) --[[ line: 529 ]]
+function genericButton.didUpdate(p11, p12, p13)
 	if p11.props.enableInputDelayed ~= p12.enableInputDelayed then
 		p11:setState({
 			targetLoadingProgress = if p11.props.enableInputDelayed then 0 else 1
@@ -385,7 +385,7 @@ function genericButton.didUpdate(p11, p12, p13) --[[ line: 529 ]]
 	end
 end
 
-return roactModule.forwardRef(function(p14, p15) --[[ line: 547 ]]
+return roactModule.forwardRef(function(p14, p15)
 	-- upvalues: roactModule (ref), genericButton (ref), cryoModule (ref)
 	return roactModule.createElement(genericButton, cryoModule.Dictionary.join(p14, { forwardedRef = p15 }))
 end)

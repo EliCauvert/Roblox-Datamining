@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
 
-return function(p0) --[[ line: 14 | named "SocialCountsRow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), horizontalPageMargin (ref)
 	return reactModule.createElement(horizontalPageMargin, {
 		backgroundTransparency = 1,

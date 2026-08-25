@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.Parent.Parent.React)
 
-return function(value) --[[ line: 57 | named "setAndForwardRef" ]]
+return function(value)
 	local getForwardedRef = value.getForwardedRef
 	local setLocalRef = value.setLocalRef
 	
-	return function(p0) --[[ line: 59 ]]
+	return function(p0)
 		-- upvalues: getForwardedRef (ref), setLocalRef (ref)
 		local var0 = getForwardedRef()
 		setLocalRef(p0)

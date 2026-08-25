@@ -7,10 +7,10 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local enumsModule = require(profilePlatform.Common.Enums)
 
-return function() --[[ line: 18 ]]
+return function()
 	-- upvalues: useSelector (ref), useProfileWrapperContextModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), reactModule (ref), formFactor (ref)
 	local var8
-	local var4 = useSelector(function(p0) --[[ line: 19 ]]
+	local var4 = useSelector(function(p0)
 		return p0.FormFactor
 	end)
 	local var5 = useProfileWrapperContextModule()
@@ -25,7 +25,7 @@ return function() --[[ line: 18 ]]
 	end
 	local var8_1 = var8 or var6 and var7
 	
-	return reactModule.useMemo(function() --[[ line: 32 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var4 (ref), formFactor (copy), enumsModule (copy), var8_1 (ref)
 		return if var4 == formFactor.WIDE then {
 			formFactor = enumsModule.ProfileFormFactor.Wide,

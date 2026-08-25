@@ -16,7 +16,7 @@ local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagSupportSubmissionOnAllReportNodes = sharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
-return reactModule.memo(function(p0) --[[ line: 44 | named "ParagraphNode" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useArTranslation (ref), useLayoutSlots (ref), fFlagAbuseReportMenuV2 (ref), reactModule (ref), eyebrowModule (ref), textWithTranslationModule (ref), footerModule (ref), button (ref), buttonVariant (ref), foundationModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	local var8 = useLayoutSlots()

@@ -43,16 +43,16 @@ local t_4 = {
 	ingameStatusLabel = "Common.Presence.Label.InExperience"
 }
 
-return function(p0) --[[ line: 65 | named "useFoundationPresence" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t_4 (ref), reactModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), useGetPresenceByUserId (ref), useSelector (ref), roduxPresenceModule (ref), var5 (ref), presenceType (ref), t_3 (ref), t_2 (ref), t_1 (ref), t (ref)
 	local var11 = useLocalization(t_4)
 	local var12, var13 = reactModule.useBinding(var11.offlinePresenceText)
 	local none, none_1 = reactModule.useState("None")
-	local var16 = if fFlagAppChatPresenceStoreMigrationModule then useGetPresenceByUserId(p0) else useSelector(function(p1) --[[ line: 75 ]]
+	local var16 = if fFlagAppChatPresenceStoreMigrationModule then useGetPresenceByUserId(p0) else useSelector(function(p1)
 		-- upvalues: p0 (ref), roduxPresenceModule (copy)
 		return if not (not p0 or p0 == "") then if p1 == nil or p1.ChatAppReducer == nil or (p1.ChatAppReducer.Presence == nil or p1.ChatAppReducer.Presence.byUserId == nil) then nil else roduxPresenceModule.Selectors.getUserPresenceByUserId(p1, p0) else nil
 	end)
-	reactModule.useEffect(function() --[[ line: 91 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), fFlagAppChatPresenceStoreMigrationModule (copy), var5 (copy), presenceType (copy), var16 (write), t_3 (copy), t_2 (copy), t_1 (copy), t (copy), none_1 (ref), var13 (ref)
 		local offlinePresenceText = var11.offlinePresenceText
 		local var17 = if fFlagAppChatPresenceStoreMigrationModule then var5.Offline else presenceType.Offline
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 65 | named "useFoundationPresence" ]]
 		var13(offlinePresenceText)
 	end, { var16, var11 })
 	
-	return reactModule.useMemo(function() --[[ line: 119 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: none (ref), var12 (ref)
 		return { presence = none, presenceText = var12 }
 	end, { none, var12 })

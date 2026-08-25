@@ -4,7 +4,7 @@ local _ = require(momentsCreation.Types.CreationFlowTypes)
 local getFFlagMomentsCreationAccurateDirtyTrackingModule = require(momentsCreation.Flags.GetFFlagMomentsCreationAccurateDirtyTracking)
 local createSignal = signalsModule.createSignal
 
-local function draftsEqual(p0, p1) --[[ line: 28 ]]
+local function draftsEqual(p0, p1)
 	if p0 == p1 then
 		return true
 	elseif type(p0) ~= "table" or type(p1) ~= "table" then
@@ -23,7 +23,7 @@ local function draftsEqual(p0, p1) --[[ line: 28 ]]
 	return true
 end
 
-return function() --[[ line: 48 | named "createEditSession" ]]
+return function()
 	-- upvalues: createSignal (ref), getFFlagMomentsCreationAccurateDirtyTrackingModule (ref), draftsEqual (ref)
 	local var4, var5 = createSignal(nil)
 	local var6, var7 = createSignal(false)
@@ -32,13 +32,13 @@ return function() --[[ line: 48 | named "createEditSession" ]]
 	return {
 		getDraft = var4,
 		getIsDirty = var6,
-		begin = function(p2) --[[ line: 53 ]]
+		begin = function(p2)
 			-- upvalues: var8 (write), var5 (ref), var7 (ref)
 			var8 = p2
 			var5(p2)
 			var7(false)
 		end,
-		update = function(p3) --[[ line: 61 ]]
+		update = function(p3)
 			-- upvalues: var5 (ref), getFFlagMomentsCreationAccurateDirtyTrackingModule (copy), var7 (ref), draftsEqual (copy), var8 (write)
 			var5(p3)
 			
@@ -49,7 +49,7 @@ return function() --[[ line: 48 | named "createEditSession" ]]
 			end
 			var7(true)
 		end,
-		commit = function() --[[ line: 70 ]]
+		commit = function()
 			-- upvalues: var4 (ref), var8 (write), var7 (ref)
 			local var9 = var4(false)
 			var8 = var9
@@ -57,7 +57,7 @@ return function() --[[ line: 48 | named "createEditSession" ]]
 			
 			return var9
 		end,
-		discard = function() --[[ line: 77 ]]
+		discard = function()
 			-- upvalues: var5 (ref), var8 (write), var7 (ref)
 			var5(var8)
 			var7(false)

@@ -8,7 +8,7 @@ local scrollView = foundationModule.ScrollView
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function GridItems(p0) --[[ line: 24 ]]
+local function GridItems(p0)
 	-- upvalues: reactModule (ref), view (ref)
 	local t = {}
 	
@@ -34,33 +34,33 @@ local function GridItems(p0) --[[ line: 24 ]]
 	})
 end
 
-return function(p1) --[[ line: 79 ]]
+return function(p1)
 	-- upvalues: reactModule (ref), useTokens (ref), dashModule (ref), view (ref), scrollView (ref), scrollBarVisibility (ref), GridItems (ref), button (ref), foundationModule (ref)
 	local var5, var6 = reactModule.useState(Vector2.new(0, 0))
 	local var7, var8 = reactModule.useState(0)
 	local var9 = useTokens()
-	local var10 = reactModule.useCallback(function(p2) --[[ line: 85 ]]
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: var6 (ref)
 		var6(p2.AbsoluteSize)
 	end, {})
-	local var11 = reactModule.useMemo(function() --[[ line: 89 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref), p1 (ref)
 		return math.clamp(math.floor(var5.X / p1.itemConfig.minItemWidth), 1, p1.itemConfig.maxItemsPerRow)
 	end, { var5, p1.itemConfig })
-	local var12 = reactModule.useMemo(function() --[[ line: 97 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref), p1 (ref), var11 (ref)
 		local var16 = var5.X - p1.itemConfig.padding * (var11 - 1)
 		local minValue = math.min(var16 / var11, var16)
 		
 		return Vector2.new(math.floor(minValue), math.floor(minValue * p1.aspectRatio))
 	end, { var5, var11, p1.aspectRatio, p1.itemConfig })
-	local var13 = reactModule.useMemo(function() --[[ line: 107 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref), var12 (ref), var11 (ref), p1 (ref)
 		return if var5.Y <= 0 then 0 else math.max(math.floor(var5.Y / var12.Y) * var11, p1.itemConfig.minItemsPerPage)
 	end, { var5, var12, var11, p1.itemConfig })
 	local var14 = var5.X > 0 and var5.Y > 0
 	local shouldShowShowMoreButton = p1.shouldShowShowMoreButton or var7 < #p1.items
-	reactModule.useEffect(function() --[[ line: 121 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var13 (ref), var8 (ref)
 		if var7 < var13 then
 			var8(var13)
@@ -96,7 +96,7 @@ return function(p1) --[[ line: 79 ]]
 				GridView = if #p1.items > 0 and var14 then reactModule.createElement(GridItems, {
 					LayoutOrder = 1,
 					itemPadding = Vector2.new(p1.itemConfig.padding, p1.itemConfig.padding),
-					items = reactModule.useMemo(function() --[[ line: 136 ]]
+					items = reactModule.useMemo(function()
 						-- upvalues: shouldShowShowMoreButton (ref), p1 (ref), var7 (ref), dashModule (copy)
 						return if shouldShowShowMoreButton then dashModule.slice(p1.items, 1, math.min(#p1.items, var7)) else p1.items
 					end, { p1.items, shouldShowShowMoreButton, var7 }),
@@ -106,7 +106,7 @@ return function(p1) --[[ line: 79 ]]
 				}) else nil,
 				ShowMore = if shouldShowShowMoreButton then reactModule.createElement(button, {
 					LayoutOrder = 2,
-					onActivated = reactModule.useCallback(function() --[[ line: 127 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var7 (ref), var13 (ref), p1 (ref), var8 (ref)
 						if #p1.items < var7 + var13 and p1.shouldShowShowMoreButton then
 							p1.onShowMoreCallback()

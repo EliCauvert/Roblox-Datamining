@@ -4,11 +4,11 @@ local expChat = script:FindFirstAncestor("ExpChat")
 local _ = require(expChat.Stores.GetPresetChatStore.createPresetChatStore)
 local initializePresetChat = require(expChat.Parent.ExpChatShared).Logger:new("ExpChat/PresetChat/initializePresetChat")
 
-local function _(value, p0) --[[ line: 16 | named "fetchPresets" ]]
+local function _(value, p0)
 	-- upvalues: textChatService (ref), initializePresetChat (ref)
-	task.spawn(function() --[[ line: 17 ]]
+	task.spawn(function()
 		-- upvalues: textChatService (copy), p0 (ref), initializePresetChat (copy), value (ref)
-		local ok, status = pcall(function() --[[ line: 18 ]]
+		local ok, status = pcall(function()
 			-- upvalues: textChatService (copy)
 			return textChatService:GetPresetsAsync()
 		end)
@@ -53,11 +53,11 @@ local function _(value, p0) --[[ line: 16 | named "fetchPresets" ]]
 	end)
 end
 
-return function(value, p1) --[[ line: 64 | named "initializePresetChat" ]]
+return function(value, p1)
 	-- upvalues: textChatService (ref), initializePresetChat (ref), gameSettings (ref)
-	task.spawn(function() --[[ line: 17 ]]
+	task.spawn(function()
 		-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-		local ok, status = pcall(function() --[[ line: 18 ]]
+		local ok, status = pcall(function()
 			-- upvalues: textChatService (copy)
 			return textChatService:GetPresetsAsync()
 		end)
@@ -100,14 +100,14 @@ return function(value, p1) --[[ line: 64 | named "initializePresetChat" ]]
 		end
 		value.setIsLoading(false)
 	end)
-	gameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function() --[[ line: 67 ]]
+	gameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(function()
 		-- upvalues: p1 (ref), value (ref), textChatService (copy), initializePresetChat (copy)
 		if not p1 then
 			value.setIsLoading(true)
 		end
-		task.spawn(function() --[[ line: 17 ]]
+		task.spawn(function()
 			-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-			local ok, status = pcall(function() --[[ line: 18 ]]
+			local ok, status = pcall(function()
 				-- upvalues: textChatService (copy)
 				return textChatService:GetPresetsAsync()
 			end)
@@ -151,14 +151,14 @@ return function(value, p1) --[[ line: 64 | named "initializePresetChat" ]]
 			value.setIsLoading(false)
 		end)
 	end)
-	gameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function() --[[ line: 74 ]]
+	gameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(function()
 		-- upvalues: p1 (ref), value (ref), textChatService (copy), initializePresetChat (copy)
 		if not p1 then
 			value.setIsLoading(true)
 		end
-		task.spawn(function() --[[ line: 17 ]]
+		task.spawn(function()
 			-- upvalues: textChatService (copy), p1 (ref), initializePresetChat (copy), value (ref)
-			local ok, status = pcall(function() --[[ line: 18 ]]
+			local ok, status = pcall(function()
 				-- upvalues: textChatService (copy)
 				return textChatService:GetPresetsAsync()
 			end)

@@ -5,12 +5,12 @@ local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspect
 local itemRestrictions = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemRestrictions
 local mockIdModule = require(script.Parent.Parent.MockId)
 local t = {
-	new = function() --[[ line: 38 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.mock() --[[ line: 44 ]]
+function t.mock()
 	-- upvalues: t (ref), mockIdModule (ref)
 	local var5 = t.new()
 	var5.name = ""
@@ -40,7 +40,7 @@ function t.mock() --[[ line: 44 ]]
 	return var5
 end
 
-function t.fromBulkPurchaseResult(p0, p1) --[[ line: 77 ]]
+function t.fromBulkPurchaseResult(p0, p1)
 	-- upvalues: t (ref), itemRestrictions (ref)
 	local var6 = t.new()
 	local var7 = if p1 and p1.itemRestrictions then p1.itemRestrictions else {}
@@ -56,7 +56,7 @@ function t.fromBulkPurchaseResult(p0, p1) --[[ line: 77 ]]
 	return var6
 end
 
-function t.fromGetFavoriteForAsset(value, p2) --[[ line: 106 ]]
+function t.fromGetFavoriteForAsset(value, p2)
 	-- upvalues: t (ref)
 	local var8 = t.new()
 	var8.bundleId = tostring(value)
@@ -65,7 +65,7 @@ function t.fromGetFavoriteForAsset(value, p2) --[[ line: 106 ]]
 	return var8
 end
 
-function t.fromAvatarPreviewItem(p3) --[[ line: 113 ]]
+function t.fromAvatarPreviewItem(p3)
 	-- upvalues: t (ref)
 	local var9 = t.new()
 	var9.name = p3.name
@@ -108,7 +108,7 @@ function t.fromAvatarPreviewItem(p3) --[[ line: 113 ]]
 	return var9
 end
 
-function t.fromGetAssetBundles(value) --[[ line: 158 ]]
+function t.fromGetAssetBundles(value)
 	-- upvalues: t (ref), constantsModule (ref)
 	local var12 = t.new()
 	var12.name = value.name
@@ -145,7 +145,7 @@ function t.fromGetAssetBundles(value) --[[ line: 158 ]]
 	return var12
 end
 
-function t.fromGetItemDetailsV2(p4) --[[ line: 205 ]]
+function t.fromGetItemDetailsV2(p4)
 	-- upvalues: t (ref)
 	local var13 = t.new()
 	var13.bundleId = tostring(p4.id)
@@ -172,7 +172,7 @@ function t.fromGetItemDetailsV2(p4) --[[ line: 205 ]]
 	return var13
 end
 
-function t.fromGetItemDetails(p5) --[[ line: 237 ]]
+function t.fromGetItemDetails(p5)
 	-- upvalues: t (ref)
 	local var15 = t.new()
 	var15.bundleId = tostring(p5.Id)
@@ -200,7 +200,7 @@ function t.fromGetItemDetails(p5) --[[ line: 237 ]]
 	return var15
 end
 
-function t.fromGetBundleFavoriteCount(p6, p7) --[[ line: 270 ]]
+function t.fromGetBundleFavoriteCount(p6, p7)
 	-- upvalues: t (ref)
 	local var17 = t.new()
 	var17.bundleId = tostring(p6)
@@ -209,7 +209,7 @@ function t.fromGetBundleFavoriteCount(p6, p7) --[[ line: 270 ]]
 	return var17
 end
 
-function t.fromGetEconomyProductInfo(p8, p9, p10, p11) --[[ line: 277 ]]
+function t.fromGetEconomyProductInfo(p8, p9, p10, p11)
 	-- upvalues: t (ref)
 	local var18 = t.new()
 	var18.bundleId = tostring(p9)
@@ -220,7 +220,7 @@ function t.fromGetEconomyProductInfo(p8, p9, p10, p11) --[[ line: 277 ]]
 	return var18
 end
 
-function t.fromPurchaseSuccess(p12) --[[ line: 286 ]]
+function t.fromPurchaseSuccess(p12)
 	-- upvalues: t (ref)
 	local var19 = t.new()
 	var19.bundleId = tostring(p12)
@@ -229,7 +229,7 @@ function t.fromPurchaseSuccess(p12) --[[ line: 286 ]]
 	return var19
 end
 
-function t.getSaleDetailsForCollectibles(p13) --[[ line: 293 ]]
+function t.getSaleDetailsForCollectibles(p13)
 	-- upvalues: dashModule (ref), constantsModule (ref)
 	local var20 = dashModule.joinDeep({}, p13)
 	

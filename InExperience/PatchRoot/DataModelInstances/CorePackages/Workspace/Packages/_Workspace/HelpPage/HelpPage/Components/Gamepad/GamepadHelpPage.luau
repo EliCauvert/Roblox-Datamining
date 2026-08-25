@@ -13,7 +13,7 @@ local deviceOrientationMode = require(parent_1.RobloxAppEnums).DeviceOrientation
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p0) --[[ line: 29 | named "GamepadHelpPage" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: userInputService (ref), useDeviceOrientation (ref), useKeybindsModule (ref), useTokens (ref), reactModule (ref), signalsReactModule (ref), displayModule (ref), constantsModule (ref), deviceOrientationMode (ref), view (ref), gamepadListModule (ref)
 	local platform = userInputService:GetPlatform()
 	local var9 = useDeviceOrientation()
@@ -23,7 +23,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "GamepadHelpPage" ]]
 	local var13, var14 = reactModule.useState(nil)
 	local var15, var16 = reactModule.useState(nil)
 	local var17 = signalsReactModule.useSignalState(signalsReactModule.useSignalState(displayModule.GetDisplayStore).getViewportSize)
-	local var18, var19, var20 = reactModule.useMemo(function() --[[ line: 42 ]]
+	local var18, var19, var20 = reactModule.useMemo(function()
 		-- upvalues: controls (ref), p0 (ref), constantsModule (copy), platform (ref)
 		local t = {}
 		local t_1 = {}
@@ -61,11 +61,11 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "GamepadHelpPage" ]]
 		Position = UDim2.fromScale(0.5, 0.5),
 		Image = if p0.isSpatial then "rbxasset://textures/ui/Gamepad/VRController.png" else "rbxasset://textures/ui/Gamepad/Controller@3x.png"
 	})
-	local var22 = reactModule.useMemo(function() --[[ line: 101 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var17 (ref), constantsModule (copy), var10 (ref)
 		return if p0.isSpatial or var17.X >= constantsModule.HELP_PAGE.TOUCH_OFFSETS.SMALL_SCREEN_CUTOFF_X and var17.Y >= constantsModule.HELP_PAGE.GAMEPAD_SIZES.NO_PADDING_CUTOFF_Y then UDim.new(0, var10.Size.Size_2400) else UDim.new(0, 0)
 	end, { var17 })
-	local var23, var24, var25, var26, var27, var28 = reactModule.useMemo(function() --[[ line: 116 ]]
+	local var23, var24, var25, var26, var27, var28 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), constantsModule (copy), var11 (ref), var17 (ref), var9 (ref), deviceOrientationMode (copy), var13 (ref), var15 (ref)
 		if p0.isSpatial then
 			return Vector2.new(1, 0.5), UDim2.new(constantsModule.HELP_PAGE.GAMEPAD_SIZES.LEFT_COL_SCALE, 0, 0, var11 * constantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_MULTIPLIER_VR * 0.5 / constantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_ASPECT_RATIO), Vector2.new(0, 0.5), UDim2.new(constantsModule.HELP_PAGE.GAMEPAD_SIZES.RIGHT_COL_SCALE_VR, 0, 0, var11 * constantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_MULTIPLIER_VR * 0.5 / constantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_ASPECT_RATIO), constantsModule.HELP_PAGE.GAMEPAD_SIZES.COL_SCALE_VR, constantsModule.HELP_PAGE.GAMEPAD_SIZES.IMAGE_MULTIPLIER_VR
@@ -81,7 +81,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "GamepadHelpPage" ]]
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		padding = { top = var22 },
-		onAbsoluteSizeChanged = function(value) --[[ line: 193 ]]
+		onAbsoluteSizeChanged = function(value)
 			-- upvalues: var12 (ref)
 			var12(value.AbsoluteSize.X)
 		end
@@ -91,7 +91,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "GamepadHelpPage" ]]
 			AnchorPoint = var23,
 			Position = var24,
 			scale = var27,
-			onAbsoluteSizeChanged = function(value) --[[ line: 202 ]]
+			onAbsoluteSizeChanged = function(value)
 				-- upvalues: var13 (ref), var14 (ref)
 				if var13 == nil then
 					var14(value.AbsoluteSize)
@@ -117,7 +117,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "GamepadHelpPage" ]]
 			AnchorPoint = var25,
 			Position = var26,
 			scale = var27,
-			onAbsoluteSizeChanged = function(value) --[[ line: 233 ]]
+			onAbsoluteSizeChanged = function(value)
 				-- upvalues: var15 (ref), var16 (ref)
 				if var15 == nil then
 					var16(value.AbsoluteSize)

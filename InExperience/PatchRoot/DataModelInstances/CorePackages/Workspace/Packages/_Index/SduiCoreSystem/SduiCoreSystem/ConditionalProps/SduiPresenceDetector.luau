@@ -6,16 +6,16 @@ local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local _ = require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
 local checkPresenceConditionsModule = require(sduiCoreSystem.ConditionalProps.checkPresenceConditions)
 
-return reactModule.memo(function(p0) --[[ line: 17 | named "SduiPresenceDetector" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), checkPresenceConditionsModule (ref), signalsModule (ref)
 	local allConditionalProps = p0.allConditionalProps
 	local setFailedPresencePropIndexes = p0.setFailedPresencePropIndexes
 	local getInGameFriendsByGame = p0.sduiContext.dataStore.social.getInGameFriendsByGame
-	reactModule.useLayoutEffect(function() --[[ line: 28 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: checkPresenceConditionsModule (copy), allConditionalProps (ref), setFailedPresencePropIndexes (ref), getInGameFriendsByGame (ref), signalsModule (copy)
 		local t = {}
 		
-		local function checkConditions(p1) --[[ line: 31 ]]
+		local function checkConditions(p1)
 			-- upvalues: checkPresenceConditionsModule (copy), allConditionalProps (copy), t (write), setFailedPresencePropIndexes (copy)
 			local var6 = checkPresenceConditionsModule(allConditionalProps, p1)
 			local var7 = nil
@@ -42,7 +42,7 @@ return reactModule.memo(function(p0) --[[ line: 17 | named "SduiPresenceDetector
 		
 		checkConditions(getInGameFriendsByGame(false))
 		
-		return signalsModule.createEffect(function(p2) --[[ line: 58 ]]
+		return signalsModule.createEffect(function(p2)
 			-- upvalues: checkConditions (ref), getInGameFriendsByGame (copy)
 			checkConditions(getInGameFriendsByGame(p2))
 		end)

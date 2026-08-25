@@ -91,7 +91,7 @@
 			universeId = "789"
 		}
 	},
-	convertGraphQlOnlineFriendsToPresenceApiFormat = function(p0) --[[ line: 100 ]]
+	convertGraphQlOnlineFriendsToPresenceApiFormat = function(p0)
 		local t = {}
 		local t_1 = {}
 		
@@ -112,7 +112,7 @@
 		end
 		return t, t_1
 	end,
-	convertGraphQlOnlineFriendsToExectedSignalFormat = function(value) --[[ line: 123 ]]
+	convertGraphQlOnlineFriendsToExectedSignalFormat = function(value)
 		local t = {}
 		
 		for i, v in value do

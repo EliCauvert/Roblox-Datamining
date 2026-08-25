@@ -6,14 +6,14 @@ local _ = require(parent.SduiSharedUtilities)
 local milestone = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker.Milestone
 local pageGateModule = require(parent.PageGate)
 
-return function(p0, p1) --[[ line: 18 | named "useEdpFunctionallyReadyLogger" ]]
+return function(p0, p1)
 	-- upvalues: useSelector (ref), fetchGamePlayButtonData (ref), pageGateModule (ref), reactModule (ref), milestone (ref)
-	local var2 = useSelector(function(p2) --[[ line: 19 ]]
+	local var2 = useSelector(function(p2)
 		-- upvalues: p1 (ref), fetchGamePlayButtonData (copy)
 		return if p1 then fetchGamePlayButtonData.IsLoading(p2, p1) else true
 	end)
 	local var3 = if pageGateModule.FFlagEnablePLTPrefetchCallbacks then reactModule.useRef(false) else nil
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var2 (ref), p1 (ref), p0 (ref), milestone (copy), pageGateModule (copy), var3 (write)
 		if not var2 and p1 and p0.trackOnce then
 			p0.trackOnce(milestone.FunctionallyReady)

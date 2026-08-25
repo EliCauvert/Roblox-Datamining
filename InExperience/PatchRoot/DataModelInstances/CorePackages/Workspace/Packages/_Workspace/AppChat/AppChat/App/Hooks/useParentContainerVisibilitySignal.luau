@@ -8,17 +8,17 @@ local parentContainerContextModule = require(appChat.Contexts.ParentContainer.Pa
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 
-return function() --[[ line: 16 ]]
+return function()
 	-- upvalues: reactModule (ref), parentContainerContextModule (ref), useDispatch (ref), setAppChatVisible (ref), fFlagExpChatEnableFriendsTab (ref), enteredChatFromEntryPointModule (ref)
 	local var5 = reactModule.useContext(parentContainerContextModule)
 	local visibilitySignal = var5.visibilitySignal
 	local getShouldSetAppChatVisible = var5.getShouldSetAppChatVisible
 	local entryPoint = var5.entryPoint
 	local var6 = useDispatch()
-	reactModule.useEffect(function() --[[ line: 23 ]]
+	reactModule.useEffect(function()
 		-- upvalues: visibilitySignal (ref), getShouldSetAppChatVisible (ref), setAppChatVisible (copy), fFlagExpChatEnableFriendsTab (copy), entryPoint (ref), var6 (ref), enteredChatFromEntryPointModule (copy)
 		local _ = nil
-		local var7 = visibilitySignal:connect(function(p0, p1) --[[ line: 26 ]]
+		local var7 = visibilitySignal:connect(function(p0, p1)
 			-- upvalues: getShouldSetAppChatVisible (copy), setAppChatVisible (copy), fFlagExpChatEnableFriendsTab (copy), entryPoint (copy), var6 (copy), enteredChatFromEntryPointModule (copy)
 			if getShouldSetAppChatVisible(p0) then
 				setAppChatVisible(true)
@@ -29,7 +29,7 @@ return function() --[[ line: 16 ]]
 			setAppChatVisible(false)
 		end)
 		
-		return function() --[[ line: 38 ]]
+		return function()
 			-- upvalues: var7 (write)
 			if var7 then
 				var7:disconnect()

@@ -1,4 +1,4 @@
-﻿local function _(p0) --[[ line: 13 | named "unimplemented" ]]
+﻿local function _(p0)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(p0))
@@ -26,7 +26,7 @@ local updateProperties = reactRobloxComponentModule.updateProperties
 local cleanupHostComponent = reactRobloxComponentModule.cleanupHostComponent
 local enableCreateEventHandleAPI = require(parent.Shared).ReactFeatureFlags.enableCreateEventHandleAPI
 
-local _ = function(p1) --[[ line: 206 | named "recursivelyUncacheFiberNode" ]]
+local _ = function(p1)
 	-- upvalues: uncacheFiberNode (ref)
 	if typeof(p1) ~= "Instance" then return end
 	uncacheFiberNode(p1)
@@ -39,19 +39,19 @@ end
 local t = {}
 object.assign(t, require(parent.Shared).ReactFiberHostConfig.WithNoPersistence)
 
-function t.getRootHostContext(p2) --[[ line: 224 ]]
+function t.getRootHostContext(p2)
 	return p2.ClassName
 end
 
-function t.getChildHostContext(p3, _, _) --[[ line: 262 ]]
+function t.getChildHostContext(p3, _, _)
 	return p3
 end
 
-function t.getPublicInstance(p4) --[[ line: 283 ]]
+function t.getPublicInstance(p4)
 	return p4
 end
 
-function t.prepareForCommit(_) --[[ line: 287 ]]
+function t.prepareForCommit(_)
 	-- upvalues: enableCreateEventHandleAPI (ref)
 	if enableCreateEventHandleAPI then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -62,7 +62,7 @@ function t.prepareForCommit(_) --[[ line: 287 ]]
 	return nil
 end
 
-function t.beforeActiveInstanceBlur() --[[ line: 302 ]]
+function t.beforeActiveInstanceBlur()
 	-- upvalues: enableCreateEventHandleAPI (ref)
 	if enableCreateEventHandleAPI then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -72,7 +72,7 @@ function t.beforeActiveInstanceBlur() --[[ line: 302 ]]
 	end
 end
 
-function t.afterActiveInstanceBlur() --[[ line: 311 ]]
+function t.afterActiveInstanceBlur()
 	-- upvalues: enableCreateEventHandleAPI (ref)
 	if enableCreateEventHandleAPI then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -82,9 +82,9 @@ function t.afterActiveInstanceBlur() --[[ line: 311 ]]
 	end
 end
 
-function t.resetAfterCommit(_) --[[ line: 320 ]] end
+function t.resetAfterCommit(_) end
 
-function t.createInstance(p5, p6, _, _, p7) --[[ line: 328 ]]
+function t.createInstance(p5, p6, _, _, p7)
 	-- upvalues: precacheFiberNode (ref), updateFiberProps (ref)
 	local var7 = Instance.new(p5)
 	
@@ -107,27 +107,27 @@ function t.createInstance(p5, p6, _, _, p7) --[[ line: 328 ]]
 	return var7
 end
 
-function t.appendInitialChild(p8, p9) --[[ line: 395 ]]
+function t.appendInitialChild(p8, p9)
 	p9.Parent = p8
 end
 
-function t.finalizeInitialChildren(p10, p11, p12, p13, _) --[[ line: 400 ]]
+function t.finalizeInitialChildren(p10, p11, p12, p13, _)
 	-- upvalues: setInitialProperties (ref)
 	setInitialProperties(p10, p11, p12, p13)
 	
 	return false
 end
 
-function t.prepareUpdate(p14, p15, p16, p17, p18, _) --[[ line: 412 ]]
+function t.prepareUpdate(p14, p15, p16, p17, p18, _)
 	-- upvalues: diffProperties (ref)
 	return diffProperties(p14, p15, p16, p17, p18)
 end
 
-function t.shouldSetTextContent(_, _) --[[ line: 439 ]]
+function t.shouldSetTextContent(_, _)
 	return false
 end
 
-function t.createTextInstance(_, _, _, _) --[[ line: 455 ]]
+function t.createTextInstance(_, _, _, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("createTextInstance"))
@@ -143,20 +143,20 @@ t.cancelTimeout = clearTimeout
 t.noTimeout = -1
 t.supportsMutation = true
 
-function t.commitMount(_, _, _, _) --[[ line: 481 ]]
+function t.commitMount(_, _, _, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("commitMount"))
 	error("FIXME (roblox): commitMount is unimplemented", 2)
 end
 
-function t.commitUpdate(p19, p20, _, p21, p22, _) --[[ line: 503 ]]
+function t.commitUpdate(p19, p20, _, p21, p22, _)
 	-- upvalues: updateFiberProps (ref), updateProperties (ref)
 	updateFiberProps(p19, p22)
 	updateProperties(p19, p20, p21)
 end
 
-local function checkTags(p23) --[[ line: 532 ]]
+local function checkTags(p23)
 	-- upvalues: console (ref), inspect (ref), collectionService (ref)
 	if typeof(p23) ~= "Instance" then
 		console.warn("Could not check tags on non-instance %s.", inspect(p23))
@@ -167,7 +167,7 @@ local function checkTags(p23) --[[ line: 532 ]]
 	end
 end
 
-function t.appendChild(p24, p25) --[[ line: 551 ]]
+function t.appendChild(p24, p25)
 	-- upvalues: reactGlobalsModule (ref), checkTags (ref)
 	p25.Parent = p24
 	
@@ -176,12 +176,12 @@ function t.appendChild(p24, p25) --[[ line: 551 ]]
 	end
 end
 
-function t.appendChildToContainer(p26, p27) --[[ line: 560 ]]
+function t.appendChildToContainer(p26, p27)
 	-- upvalues: t (ref)
 	t.appendChild(p26, p27)
 end
 
-function t.insertBefore(p28, p29, _) --[[ line: 589 ]]
+function t.insertBefore(p28, p29, _)
 	-- upvalues: reactGlobalsModule (ref), checkTags (ref)
 	p29.Parent = p28
 	
@@ -190,12 +190,12 @@ function t.insertBefore(p28, p29, _) --[[ line: 589 ]]
 	end
 end
 
-function t.insertInContainerBefore(p30, p31, p32) --[[ line: 602 ]]
+function t.insertInContainerBefore(p30, p31, p32)
 	-- upvalues: t (ref)
 	t.insertBefore(p30, p31, p32)
 end
 
-function t.removeChild(_, p33) --[[ line: 644 ]]
+function t.removeChild(_, p33)
 	-- upvalues: uncacheFiberNode (ref), cleanupHostComponent (ref)
 	if typeof(p33) == "Instance" then
 		uncacheFiberNode(p33)
@@ -209,60 +209,60 @@ function t.removeChild(_, p33) --[[ line: 644 ]]
 	p33:Destroy()
 end
 
-function t.removeChildFromContainer(p34, p35) --[[ line: 656 ]]
+function t.removeChildFromContainer(p34, p35)
 	-- upvalues: t (ref)
 	t.removeChild(p34, p35)
 end
 
-function t.clearSuspenseBoundary(_, _) --[[ line: 667 ]]
+function t.clearSuspenseBoundary(_, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("clearSuspenseBoundary"))
 	error("FIXME (roblox): clearSuspenseBoundary is unimplemented", 2)
 end
 
-function t.clearSuspenseBoundaryFromContainer(_, _) --[[ line: 707 ]]
+function t.clearSuspenseBoundaryFromContainer(_, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("clearSuspenseBoundaryFromContainer"))
 	error("FIXME (roblox): clearSuspenseBoundaryFromContainer is unimplemented", 2)
 end
 
-function t.hideInstance(_) --[[ line: 724 ]]
+function t.hideInstance(_)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("hideInstance"))
 	error("FIXME (roblox): hideInstance is unimplemented", 2)
 end
 
-function t.hideTextInstance(_) --[[ line: 738 ]]
+function t.hideTextInstance(_)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("hideTextInstance"))
 	error("FIXME (roblox): hideTextInstance is unimplemented", 2)
 end
 
-function t.unhideInstance(_, _) --[[ line: 743 ]]
+function t.unhideInstance(_, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("unhideInstance"))
 	error("FIXME (roblox): unhideInstance is unimplemented", 2)
 end
 
-function t.unhideTextInstance(_, _) --[[ line: 757 ]]
+function t.unhideTextInstance(_, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("unhideTextInstance"))
 	error("FIXME (roblox): unhideTextInstance is unimplemented", 2)
 end
 
-function t.clearContainer(p36) --[[ line: 762 ]]
+function t.clearContainer(p36)
 	-- upvalues: t (ref)
 	for i, v in p36:GetChildren() do
 		t.removeChild(p36, v)
 	end
 end
 
-function t.preparePortalMount(_) --[[ line: 1205 ]] end
+function t.preparePortalMount(_) end
 
 return t

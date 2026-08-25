@@ -18,7 +18,7 @@ local fFlagLuaAppGameDetailsAttributionFix = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local t = {}
 
-local function _(p0, p1) --[[ line: 29 | named "mergeAnalyticsData" ]]
+local function _(p0, p1)
 	-- upvalues: cryoModule (ref), t (ref)
 	if not p0 and not p1 then
 		return nil
@@ -30,19 +30,19 @@ end
 
 local var3 = if fFlagLuaAppLogGameAttributionError then { GameDetail = "GameDetail", PlayIntent = "PlayIntent" } else nil
 
-local _ = function(value, p2, p3) --[[ line: 50 | named "getGameSetTypeId" ]]
+local _ = function(value, p2, p3)
 	return if value == nil then nil elseif p2 or p3 then value.topicId else value.gameSetTypeId
 end
 
-local _ = function(value, p4) --[[ line: 62 | named "getGameSetTargetId" ]]
+local _ = function(value, p4)
 	return if p4 or value == nil then nil else value.gameSetTargetId
 end
 
-local _ = function(p5, p6) --[[ line: 72 | named "getAppliedFilters" ]]
+local _ = function(p5, p6)
 	return if p6 or not p5 then nil else p5.appliedFilters
 end
 
-return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useGameSortAnalytics" ]]
+return function(p7, p8, p9, p10, p11, p12, p13, p14)
 	-- upvalues: useStore (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), appEventIngestService (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), fFlagLuaAppGameDetailsAttributionFix (ref), reportGameAttributionError (ref), var3 (ref), mutedError (ref), calculateRowPositionFields (ref), cryoModule (ref), t (ref), gameCollectionItemTypes (ref), fFlagLuaAppLogGameAttributionError (ref), gamePlayIntent (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), feedScroll (ref)
 	local var5 = useStore()
 	local var6 = useRoactService(roactAnalyticsCommonGameEvents)
@@ -54,7 +54,7 @@ return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useG
 	local var12 = if p7 then p7.sortSubId else nil
 	local var13 = if p7 then p7.analyticsData else nil
 	
-	return reactModule.useCallback(function(p15, p16) --[[ line: 115 ]]
+	return reactModule.useCallback(function(p15, p16)
 		-- upvalues: fFlagLuaAppGameDetailsAttributionFix (copy), p12 (ref), reportGameAttributionError (copy), p10 (ref), var3 (copy), var8 (ref), var9 (ref), p9 (ref), mutedError (copy), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), var6 (ref), var10 (ref), var11 (ref), gameCollectionItemTypes (copy), var12 (ref)
 		if fFlagLuaAppGameDetailsAttributionFix then
 			local var15
@@ -99,7 +99,7 @@ return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useG
 		end
 	end, {
 		var6, p9, p10, var8, var9, p12, p13, p14, var11, var12, var13
-	}), reactModule.useCallback(function(p17, p18, _, p19, p20, p21) --[[ line: 193 ]]
+	}), reactModule.useCallback(function(p17, p18, _, p19, p20, p21)
 		-- upvalues: fFlagLuaAppLogGameAttributionError (copy), p12 (ref), reportGameAttributionError (copy), var3 (copy), var8 (ref), var9 (ref), p9 (ref), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), gamePlayIntent (copy), var7 (ref), var10 (ref), p10 (ref), var11 (ref), var12 (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
 		if fFlagLuaAppLogGameAttributionError then
 			local var21
@@ -160,10 +160,10 @@ return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useG
 	end, {
 		p9, var7, var8, var9, if fFlagLuaAppLogGameAttributionError then p12 else nil,
 		p10, p13, p14, var11, var12, var13
-	}), reactModule.useCallback(function() --[[ line: 274 ]]
+	}), reactModule.useCallback(function()
 		-- upvalues: var6 (ref), var8 (ref), var9 (ref), p9 (ref)
 		var6.reportSeeAllWithId(var8, var9, p9)
-	end, { var6, var8, var9, p9 }), reactModule.useCallback(function(p22, p23, p24) --[[ line: 287 ]]
+	end, { var6, var8, var9, p9 }), reactModule.useCallback(function(p22, p23, p24)
 		-- upvalues: p11 (ref), mutedError (copy), var5 (ref), p9 (ref), var8 (ref), var9 (ref), feedScroll (copy), var7 (ref), p10 (ref)
 		if p11 and p11.current ~= nil then
 			local scrollingDirection = p11.current.ScrollingDirection

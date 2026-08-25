@@ -14,7 +14,7 @@ local buttonStack = UIBloxModule.App.Button.ButtonStack
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local refinedFeedbackBar = roactModule.PureComponent:extend("RefinedFeedbackBar")
 
-local function GetTextSize(...) --[[ line: 41 ]]
+local function GetTextSize(...)
 	-- upvalues: textService (ref)
 	return textService:GetTextSize(...) + Vector2.new(2, 2)
 end
@@ -23,7 +23,7 @@ refinedFeedbackBar.validateProps = tModule.strictInterface({
 	leftHint = tModule.strictInterface({ text = tModule.string })
 })
 
-function refinedFeedbackBar.init(p0) --[[ line: 55 ]]
+function refinedFeedbackBar.init(p0)
 	-- upvalues: experienceStateCaptureService (ref)
 	p0.state = {
 		barWidth = 0,
@@ -32,18 +32,18 @@ function refinedFeedbackBar.init(p0) --[[ line: 55 ]]
 		hintRatios = nil
 	}
 	
-	function p0.onExitFeedbackMode() --[[ line: 63 ]]
+	function p0.onExitFeedbackMode()
 		-- upvalues: experienceStateCaptureService (copy)
 		experienceStateCaptureService:ToggleCaptureMode()
 	end
 	
-	function p0.openHelpModal() --[[ line: 67 ]]
+	function p0.openHelpModal()
 		-- upvalues: p0 (ref)
 		p0.props.showHelpModal(true)
 	end
 end
 
-function refinedFeedbackBar.calculateHintRatios(p1) --[[ line: 73 ]]
+function refinedFeedbackBar.calculateHintRatios(p1)
 	-- upvalues: cryoModule (ref), GetTextSize (ref)
 	local var12 = 84
 	local var13 = ""
@@ -63,7 +63,7 @@ function refinedFeedbackBar.calculateHintRatios(p1) --[[ line: 73 ]]
 	return t, var12 + math.max(#var16 - 2, 0) * 40, var13
 end
 
-function refinedFeedbackBar.getDerivedStateFromProps(p2) --[[ line: 105 ]]
+function refinedFeedbackBar.getDerivedStateFromProps(p2)
 	-- upvalues: refinedFeedbackBar (ref)
 	local var17, var18, var19 = refinedFeedbackBar.calculateHintRatios(p2.leftHint)
 	
@@ -74,7 +74,7 @@ function refinedFeedbackBar.getDerivedStateFromProps(p2) --[[ line: 105 ]]
 	}
 end
 
-function refinedFeedbackBar.calculateHintSize(p3, p4, p5) --[[ line: 116 ]]
+function refinedFeedbackBar.calculateHintSize(p3, p4, p5)
 	-- upvalues: GetTextSize (ref)
 	local var20 = p4 - p3.state.requiredSpace
 	local var21 = p5.Header2.RelativeSize * p5.BaseSize
@@ -95,9 +95,9 @@ function refinedFeedbackBar.calculateHintSize(p3, p4, p5) --[[ line: 116 ]]
 	return t
 end
 
-function refinedFeedbackBar.render(p6) --[[ line: 155 ]]
+function refinedFeedbackBar.render(p6)
 	-- upvalues: withStyle (ref), roactModule (ref), feedbackBarHintModule (ref), withLocalization (ref), buttonStack (ref), buttonType (ref)
-	return withStyle(function(p7) --[[ line: 156 ]]
+	return withStyle(function(p7)
 		-- upvalues: roactModule (copy), feedbackBarHintModule (copy), p6 (ref), withLocalization (copy), buttonStack (copy), buttonType (copy)
 		local theme = p7.Theme
 		
@@ -108,11 +108,11 @@ function refinedFeedbackBar.render(p6) --[[ line: 155 ]]
 			Size = UDim2.new(1, 0, 0, 72),
 			Position = UDim2.fromScale(0, 1),
 			AnchorPoint = Vector2.new(0, 1),
-			[roactModule.Change.AbsoluteSize] = function(p8) --[[ line: 169 ]]
+			[roactModule.Change.AbsoluteSize] = function(p8)
 				-- upvalues: p6 (copy)
 				p6:setState({ barWidth = p8.AbsoluteSize.X })
 			end,
-			[roactModule.Event.AncestryChanged] = function(p9) --[[ line: 174 ]]
+			[roactModule.Event.AncestryChanged] = function(p9)
 				-- upvalues: p6 (copy)
 				p6:setState({ barWidth = p9.AbsoluteSize.X })
 			end
@@ -133,7 +133,7 @@ function refinedFeedbackBar.render(p6) --[[ line: 155 ]]
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 40)
 				}),
-				(function(p10) --[[ line: 158 | named "makeHint" ]]
+				(function(p10)
 					-- upvalues: roactModule (copy), feedbackBarHintModule (copy)
 					return roactModule.createElement(feedbackBarHintModule, p10)
 				end)(p6.props.leftHint)
@@ -154,7 +154,7 @@ function refinedFeedbackBar.render(p6) --[[ line: 155 ]]
 				Buttons = withLocalization({
 					helpButtonText = "CoreScripts.Feedback.FeedbackBar.HelpButton",
 					exitFeedbackButtonText = "CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton"
-				})(function(p11) --[[ line: 217 ]]
+				})(function(p11)
 					-- upvalues: roactModule (copy), buttonStack (copy), buttonType (copy), p6 (copy)
 					return roactModule.createElement(buttonStack, {
 						buttonHeight = 50,
@@ -183,12 +183,12 @@ function refinedFeedbackBar.render(p6) --[[ line: 155 ]]
 	end)
 end
 
-return roactRoduxModule.connect(function() --[[ line: 245 ]]
+return roactRoduxModule.connect(function()
 	return {}
-end, function(p12) --[[ line: 247 ]]
+end, function(p12)
 	-- upvalues: showHelpModalThunkModule (ref)
 	return {
-		showHelpModal = function(p13) --[[ line: 249 ]]
+		showHelpModal = function(p13)
 			-- upvalues: p12 (ref), showHelpModalThunkModule (copy)
 			p12(showHelpModalThunkModule(p13))
 		end

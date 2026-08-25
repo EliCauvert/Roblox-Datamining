@@ -3,13 +3,13 @@ local dataStoreService = game:GetService("DataStoreService")
 local jsonModule = require(script.Parent.json)
 local var3 = game:GetService("RunService"):IsStudio()
 
-local function dlog(...) --[[ line: 10 ]]
+local function dlog(...)
 	print("[http]", ...)
 end
 
 local t = { settings = {}, max_size = 1e999, data = {} }
 
-function t.update_settings(value, p0) --[[ line: 22 ]]
+function t.update_settings(value, p0)
 	-- upvalues: t (ref)
 	local var9
 	local var7 = if type(value) == "table" then value else { value }
@@ -42,21 +42,21 @@ function t.update_settings(value, p0) --[[ line: 22 ]]
 	end
 end
 
-function t.cache_locally(p1, p2) --[[ line: 59 ]]
+function t.cache_locally(p1, p2)
 	-- upvalues: t (ref)
 	p2 = p2 or {}
 	p2.cache_globally = false
 	t.update_settings(p1, p2)
 end
 
-function t.cache_globally(p3, p4) --[[ line: 66 ]]
+function t.cache_globally(p3, p4)
 	-- upvalues: t (ref)
 	p4 = p4 or {}
 	p4.cache_globally = true
 	t.update_settings(p3, p4)
 end
 
-function t.should_cache(p5) --[[ line: 77 ]]
+function t.should_cache(p5)
 	-- upvalues: t (ref)
 	p5 = p5:split("?")[1]
 	
@@ -68,7 +68,7 @@ function t.should_cache(p5) --[[ line: 77 ]]
 	return false
 end
 
-function t.is_cached(p6, p7) --[[ line: 91 ]]
+function t.is_cached(p6, p7)
 	-- upvalues: t (ref)
 	local var12 = t.should_cache(p6)
 	local var13 = t.settings[var12]
@@ -78,13 +78,13 @@ end
 
 t.global_cache_index = {}
 local t_1 = {}
-local ok, status = pcall(function() --[[ line: 127 ]]
+local ok, status = pcall(function()
 	-- upvalues: dataStoreService (ref)
 	return dataStoreService:GetDataStore("HttpRequestsCache")
 end)
 
 if ok then
-	local ok_1, status_1 = pcall(function() --[[ line: 132 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: status (ref)
 		return status:GetAsync("index") or {}
 	end)
@@ -92,10 +92,10 @@ if ok then
 	if ok_1 then
 		t.global_cache_index = status_1
 		t.global_cache_update_interval = 20
-		coroutine.wrap(function() --[[ line: 140 ]]
+		coroutine.wrap(function()
 			-- upvalues: t (ref), t_1 (write), status (ref), dlog (ref), var3 (ref), messagingService (ref), jsonModule (ref)
 			while wait(t.global_cache_update_interval) do
-				pcall(function() --[[ line: 142 ]]
+				pcall(function()
 					-- upvalues: t_1 (copy), status (copy), dlog (copy), t (copy), var3 (copy), messagingService (copy), jsonModule (copy)
 					local var14 = 0
 					
@@ -107,7 +107,7 @@ if ok then
 						dlog(("pushing %s requests to global cache index"):format(var14))
 					end
 					local t_2 = {}
-					status:UpdateAsync("index", function(p8) --[[ line: 155 ]]
+					status:UpdateAsync("index", function(p8)
 						-- upvalues: t_1 (copy), t_2 (ref), t (copy)
 						p8 = p8 or {}
 						
@@ -128,7 +128,7 @@ if ok then
 		end)()
 		
 		if not var3 then
-			messagingService:SubscribeAsync("RequestsCacheIndex", function(p9) --[[ line: 177 ]]
+			messagingService:SubscribeAsync("RequestsCacheIndex", function(p9)
 				-- upvalues: jsonModule (ref), t (ref)
 				for i, v in ipairs(jsonModule.dec(p9.Data)) do
 					t.global_cache_index[v] = true
@@ -137,12 +137,12 @@ if ok then
 		end
 	end
 end
-function t.get_expire(p10) --[[ line: 192 ]]
+function t.get_expire(p10)
 	-- upvalues: t (ref)
 	return t.settings[t.should_cache(p10)].expires or 1e999
 end
 
-function t.get_cached(p11, p12) --[[ line: 198 ]]
+function t.get_cached(p11, p12)
 	-- upvalues: t (ref), ok (ref), dlog (ref), status (ref)
 	local var17 = t.should_cache(p11)
 	local var18 = t.data[p12]
@@ -156,7 +156,7 @@ function t.get_cached(p11, p12) --[[ line: 198 ]]
 	end
 end
 
-function t.update_cache(p13, p14, p15) --[[ line: 214 ]]
+function t.update_cache(p13, p14, p15)
 	-- upvalues: t (ref), ok (ref), dlog (ref), t_1 (write)
 	print(("[http] %s added to cache"):format(p13))
 	p15.timestamp = tick()

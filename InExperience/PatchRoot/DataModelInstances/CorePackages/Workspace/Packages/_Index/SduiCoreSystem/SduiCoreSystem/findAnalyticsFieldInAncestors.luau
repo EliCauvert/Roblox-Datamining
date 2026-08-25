@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").SduiBuilderTypes)
 
-return function(p0, p1, p2) --[[ line: 9 | named "findAnalyticsFieldInAncestors" ]]
+return function(p0, p1, p2)
 	if not p1 then
 		return nil
 	end

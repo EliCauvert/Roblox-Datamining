@@ -10,19 +10,19 @@ local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
 local teamListViewModule = require(parent.Components.PresentationCommon.TeamListView)
 local fFlagPlayerListUseFocusNavHook = playerListModule.Flags.FFlagPlayerListUseFocusNavHook
 
-return reactModule.memo(roactRoduxModule.connect(function(p1) --[[ line: 127 | named "mapStateToProps" ]]
+return reactModule.memo(roactRoduxModule.connect(function(p1)
 	return {
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice,
 		isDirectionalPreferred = p1.displayOptions.isTenFootInterface,
 		playerIconInfo = p1.playerIconInfo,
 		playerRelationship = p1.playerRelationship
 	}
-end)(function(p0) --[[ line: 60 | named "TeamListContainer" ]]
+end)(function(p0)
 	-- upvalues: useLeaderboardStore (ref), signalsReactModule (ref), reactModule (ref), leaderboardStoreModule (ref), fFlagPlayerListUseFocusNavHook (ref), teamListViewModule (ref)
 	local var7 = signalsReactModule.useSignalState(useLeaderboardStore().getTeamList().getCount)
 	local var8 = signalsReactModule.useSignalState(p0.teamData.players.getCount)
 	local var9 = signalsReactModule.useSignalBinding(p0.teamData.order)
-	local var10 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), leaderboardStoreModule (copy), var7 (ref), var8 (ref)
 		if p0.teamData.name(false) == leaderboardStoreModule.SpecialNeutralTeamName then
 			return if var7 == 1 then false else var8 ~= 0
@@ -32,7 +32,7 @@ end)(function(p0) --[[ line: 60 | named "TeamListContainer" ]]
 	local var12 = nil
 	
 	if fFlagPlayerListUseFocusNavHook then
-		local var13, var14 = reactModule.useMemo(function() --[[ line: 86 ]]
+		local var13, var14 = reactModule.useMemo(function()
 			-- upvalues: p0 (ref)
 			if p0.registerTeamInstance and p0.teamId then
 				local var15 = p0.registerTeamInstance(p0.teamId, p0.teamData.order)
@@ -45,9 +45,9 @@ end)(function(p0) --[[ line: 60 | named "TeamListContainer" ]]
 		var12 = var14
 	end
 	if fFlagPlayerListUseFocusNavHook then
-		reactModule.useEffect(function() --[[ line: 97 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref)
-			return function() --[[ line: 98 ]]
+			return function()
 				-- upvalues: p0 (copy)
 				if p0.unregisterTeamInstance and p0.teamId then
 					p0.unregisterTeamInstance(p0.teamId)

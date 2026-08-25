@@ -4,7 +4,7 @@ local responsiveModule = require(parent.Responsive)
 local fFlagEnableLuaCommunityList = require(parent.SharedFlags).FFlagEnableLuaCommunityList
 
 return {
-	getShouldUseLuaCommunityList = function() --[[ line: 8 ]]
+	getShouldUseLuaCommunityList = function()
 		-- upvalues: fFlagEnableLuaCommunityList (ref), displayModule (ref), responsiveModule (ref)
 		return if fFlagEnableLuaCommunityList then responsiveModule.getIsCompactTouch(displayModule.GetDisplayStore(false).getViewportSize(false), responsiveModule.GetInputModeStore(false).getPreferredInputType(false)) else false
 	end

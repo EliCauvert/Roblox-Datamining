@@ -12,7 +12,7 @@ local t = {
 if require(parent.SharedFlags).FFlagSduiPoolBackedFeed then
 	t.extraLocalPropSignals = true
 end
-return function(p0, p1) --[[ line: 25 ]]
+return function(p0, p1)
 	-- upvalues: t (ref), tutilsModule (ref)
 	if p0 == p1 then
 		return true

@@ -19,18 +19,18 @@ local t_1 = {
 	studio_save_and_publish = true
 }
 
-local function _(p0) --[[ line: 46 | named "normalizeToolIdentifier" ]]
+local function _(p0)
 	return string.lower(string.gsub(p0, "[_%-%s]", ""))
 end
 
-local _ = function(p1) --[[ line: 51 | named "identifierMatchesPublish" ]]
+local _ = function(p1)
 	-- upvalues: t (ref)
 	local lowerText = string.lower(string.gsub(p1, "[_%-%s]", ""))
 	
 	return if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
 end
 
-i = function(p2) --[[ line: 59 | named "valueLooksLikePublishTool" ]]
+i = function(p2)
 	-- upvalues: t (ref)
 	local var11 = false
 	
@@ -49,12 +49,12 @@ i = function(p2) --[[ line: 59 | named "valueLooksLikePublishTool" ]]
 	return var11
 end
 
-local _ = function(p3) --[[ line: 63 | named "isSaveAndPublishValue" ]]
+local _ = function(p3)
 	-- upvalues: t_1 (ref)
 	return typeof(p3) == "string" and t_1[string.lower(p3)] == true
 end
 
-local function toolCallMatchesPublishPlace(p4) --[[ line: 70 ]]
+local function toolCallMatchesPublishPlace(p4)
 	-- upvalues: t (ref)
 	local kind = p4.kind
 	local rawInput = false
@@ -113,7 +113,7 @@ local function toolCallMatchesPublishPlace(p4) --[[ line: 70 ]]
 	end
 end
 
-local function isSaveAndPublishToolCall(p5) --[[ line: 89 ]]
+local function isSaveAndPublishToolCall(p5)
 	-- upvalues: t_1 (ref)
 	local title = p5.title
 	
@@ -145,7 +145,7 @@ local function isSaveAndPublishToolCall(p5) --[[ line: 89 ]]
 	end
 end
 
-local function includesPublishPlaceTool(p6) --[[ line: 106 ]]
+local function includesPublishPlaceTool(p6)
 	-- upvalues: toolCallMatchesPublishPlace (ref)
 	for i, v in p6.toolCalls do
 		if v.status ~= "failed" and toolCallMatchesPublishPlace(v) then
@@ -155,20 +155,20 @@ local function includesPublishPlaceTool(p6) --[[ line: 106 ]]
 	return false
 end
 
-local _ = function(p7) --[[ line: 118 | named "parsePublishedVersionNumber" ]]
+local _ = function(p7)
 	local match = string.match(p7, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
 	
 	return if match == nil then nil else tonumber(match)
 end
 
-local _ = function(value) --[[ line: 126 | named "parseTextResult" ]]
+local _ = function(value)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, value)
 	
 	return if not (not ok or typeof(status) ~= "table") then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
 end
 
-local function getToolCallPublishedVersionNumber(p8) --[[ line: 137 ]]
+local function getToolCallPublishedVersionNumber(p8)
 	-- upvalues: httpService (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref)
 	local content = p8.content
 	
@@ -200,7 +200,7 @@ return {
 	PUBLISH_PLACE_TOOL_IDENTIFIERS = list,
 	includesPublishPlaceTool = includesPublishPlaceTool,
 	toolCallMatchesPublishPlace = toolCallMatchesPublishPlace,
-	getLatestSuccessfulResult = function(p9) --[[ line: 168 ]]
+	getLatestSuccessfulResult = function(p9)
 		-- upvalues: isSaveAndPublishToolCall (ref), getToolCallPublishedVersionNumber (ref), fFlagCreatorAgentChatParseDirectPublishVersion (ref), debugModule (ref)
 		if p9 == nil then
 			return nil

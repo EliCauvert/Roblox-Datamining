@@ -7,7 +7,7 @@ local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
 local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
 local _ = require(expChat.Stores.GetChatTooltipStore.createChatTooltipStore)
 
-return function(p0) --[[ line: 49 | named "useChatTooltipLifecycle" ]]
+return function(p0)
 	-- upvalues: getChatTooltipStoreModule (ref), getTransparencyStoreModule (ref), signalsReactModule (ref), reactModule (ref), configModule (ref)
 	local tooltipKey = p0.tooltipKey
 	local targetTextChannel = p0.targetTextChannel
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 49 | named "useChatTooltipLifecycle" ]]
 	local var18 = reactModule.useRef(targetTextChannel)
 	local setIsDismissed = var6.setIsDismissed
 	local reportImpression = var6.reportImpression
-	local var19 = reactModule.useCallback(function() --[[ line: 71 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), reportImpression (ref), tooltipKey (ref), setIsDismissed (ref)
 		if not var16.current then
 			var16.current = true
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 49 | named "useChatTooltipLifecycle" ]]
 		end
 		setIsDismissed(tooltipKey, true)
 	end, { tooltipKey, setIsDismissed, reportImpression })
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var13 (ref), configModule (copy), var10 (ref)
 		if var11 then
 			var13(true)
@@ -47,26 +47,26 @@ return function(p0) --[[ line: 49 | named "useChatTooltipLifecycle" ]]
 			return nil
 		end
 		var13(true)
-		local delayedThread = task.delay(var20, function() --[[ line: 93 ]]
+		local delayedThread = task.delay(var20, function()
 			-- upvalues: var13 (copy)
 			var13(false)
 		end)
 		
-		return function() --[[ line: 96 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
 	end, { var10, var11 })
-	reactModule.useEffect(function() --[[ line: 105 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var9 (ref), var14 (ref), var8 (ref), var17 (ref), var15 (ref)
 		if var12 and var9 and not var14 and var8 then
 			local processTime = os.clock()
-			local delayedThread = task.delay(math.max(0, 10 - var17.current), function() --[[ line: 112 ]]
+			local delayedThread = task.delay(math.max(0, 10 - var17.current), function()
 				-- upvalues: var15 (copy)
 				var15(true)
 			end)
 			
-			return function() --[[ line: 115 ]]
+			return function()
 				-- upvalues: var17 (copy), processTime (ref), delayedThread (ref)
 				var17.current += os.clock() - processTime
 				task.cancel(delayedThread)
@@ -74,22 +74,22 @@ return function(p0) --[[ line: 49 | named "useChatTooltipLifecycle" ]]
 		end
 		return nil
 	end, { var12, var9, var14, var8 })
-	reactModule.useEffect(function() --[[ line: 122 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), var19 (ref)
 		if var14 then
-			local delayedThread = task.delay(1, function() --[[ line: 126 ]]
+			local delayedThread = task.delay(1, function()
 				-- upvalues: var19 (copy)
 				var19()
 			end)
 			
-			return function() --[[ line: 129 ]]
+			return function()
 				-- upvalues: delayedThread (ref)
 				task.cancel(delayedThread)
 			end
 		end
 		return nil
 	end, { var14, var19 })
-	reactModule.useEffect(function() --[[ line: 135 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), targetTextChannel (ref), var8 (ref), var14 (ref), var15 (ref)
 		local current = var18.current
 		var18.current = targetTextChannel

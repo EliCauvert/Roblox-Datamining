@@ -17,7 +17,7 @@ local t = {
 	labelText = "",
 	tileSize = 100,
 	borderThickness = 0,
-	onActivated = function() --[[ line: 62 ]] end,
+	onActivated = function() end,
 	iconSize = iconSize.Large,
 	cornerRadius = UDim.new(0, 8),
 	styleProps = {
@@ -26,7 +26,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 73 ]]
+return function(p0)
 	-- upvalues: dashModule (ref), t (ref), useStyle (ref), text (ref), reactModule (ref), useImpressionsTagger (ref), imageSetButton (ref), imageSetLabel (ref), colors (ref), badge (ref), styledTextLabel (ref)
 	local var4 = dashModule.join(t, p0 or {})
 	local var5 = useStyle()

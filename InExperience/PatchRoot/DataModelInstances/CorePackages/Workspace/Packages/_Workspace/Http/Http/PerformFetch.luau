@@ -8,16 +8,16 @@ local batchUpdateFetchingStatus = require(http.Actions).BatchUpdateFetchingStatu
 local t = {}
 local t_1 = {}
 
-function t.ClearOutstandingPromiseStatus() --[[ line: 37 ]]
+function t.ClearOutstandingPromiseStatus()
 	-- upvalues: t_1 (write)
 	t_1 = {}
 end
 
-local function singleFetchKeymapper(p0) --[[ line: 41 ]]
+local function singleFetchKeymapper(p0)
 	return p0
 end
 
-function t.GetStatus(p1, p2) --[[ line: 50 ]]
+function t.GetStatus(p1, p2)
 	-- upvalues: retrievalStatus (ref)
 	assert(typeof(p1) == "table")
 	assert(typeof(p2) == "string")
@@ -26,32 +26,32 @@ function t.GetStatus(p1, p2) --[[ line: 50 ]]
 	return p1.FetchingStatus[p2] or retrievalStatus.NotStarted
 end
 
-function t.Single(p3, p4) --[[ line: 81 ]]
+function t.Single(p3, p4)
 	-- upvalues: t (ref), singleFetchKeymapper (ref), promiseModule (ref), resultModule (ref)
 	assert(typeof(p3) == "string")
 	assert(typeof(p4) == "function")
 	assert(#p3 > 0)
 	
-	return function(p5) --[[ line: 86 ]]
+	return function(p5)
 		-- upvalues: t (copy), p3 (ref), singleFetchKeymapper (copy), p4 (ref), promiseModule (copy), resultModule (copy)
-		return t.Batch({ p3 }, singleFetchKeymapper, function(p7, p8) --[[ line: 88 ]]
+		return t.Batch({ p3 }, singleFetchKeymapper, function(p7, p8)
 			-- upvalues: p4 (copy), promiseModule (copy), p3 (copy), resultModule (copy)
 			assert(#p8 == 1)
 			local var8 = p4(p7)
 			assert(promiseModule.is(var8))
 			
-			return var8:andThen(function(...) --[[ line: 94 ]]
+			return var8:andThen(function(...)
 				-- upvalues: promiseModule (copy), p3 (copy), resultModule (copy)
 				assert(#{ ... } <= 1)
 				
 				return promiseModule.resolve({ [p3] = resultModule.new(true, ...) })
-			end, function(...) --[[ line: 97 ]]
+			end, function(...)
 				-- upvalues: promiseModule (copy), p3 (copy), resultModule (copy)
 				assert(#{ ... } <= 1)
 				
 				return promiseModule.resolve({ [p3] = resultModule.new(false, ...) })
 			end)
-		end)(p5):andThen(function(p6) --[[ line: 101 ]]
+		end)(p5):andThen(function(p6)
 			-- upvalues: p3 (copy), promiseModule (copy)
 			local var6, var7 = p6[p3]:unwrap()
 			
@@ -60,13 +60,13 @@ function t.Single(p3, p4) --[[ line: 81 ]]
 	end
 end
 
-function t.Batch(p9, p10, p11) --[[ line: 154 ]]
+function t.Batch(p9, p10, p11)
 	-- upvalues: t_1 (write), promiseModule (ref), retrievalStatus (ref), batchUpdateFetchingStatus (ref), promiseUtilities (ref), resultModule (ref)
 	assert(typeof(p9) == "table")
 	assert(typeof(p10) == "function")
 	assert(typeof(p11) == "function")
 	
-	return function(p12) --[[ line: 159 ]]
+	return function(p12)
 		-- upvalues: p9 (ref), p10 (ref), t_1 (copy), promiseModule (copy), retrievalStatus (copy), batchUpdateFetchingStatus (copy), p11 (ref), promiseUtilities (copy), resultModule (copy)
 		local t = {}
 		local t_2 = {}
@@ -85,7 +85,7 @@ function t.Batch(p9, p10, p11) --[[ line: 154 ]]
 		end
 		local var15
 		local var12 = nil
-		local var13 = promiseModule.new(function(p13) --[[ line: 178 ]]
+		local var13 = promiseModule.new(function(p13)
 			-- upvalues: var12 (write)
 			var12 = p13
 		end)
@@ -106,11 +106,11 @@ function t.Batch(p9, p10, p11) --[[ line: 154 ]]
 		else
 			var15 = promiseModule.resolve({})
 		end
-		var15:andThen(function(p17) --[[ line: 209 ]]
+		var15:andThen(function(p17)
 			-- upvalues: promiseUtilities (copy), t_3 (ref)
 			p17 = p17 or {}
 			
-			return promiseUtilities.Batch(t_3):andThen(function(p18) --[[ line: 212 ]]
+			return promiseUtilities.Batch(t_3):andThen(function(p18)
 				-- upvalues: p17 (write)
 				local t = {}
 				
@@ -120,9 +120,9 @@ function t.Batch(p9, p10, p11) --[[ line: 154 ]]
 				end
 				return p17, t
 			end)
-		end, function() --[[ line: 222 ]]
+		end, function()
 			assert(false, "PerformFetch fetchFunctor should never reject")
-		end):andThen(function(p15, p16) --[[ line: 225 ]]
+		end):andThen(function(p15, p16)
 			-- upvalues: t_2 (ref), resultModule (copy), retrievalStatus (copy), t_1 (copy), p12 (ref), batchUpdateFetchingStatus (copy)
 			local t = {}
 			
@@ -144,7 +144,7 @@ function t.Batch(p9, p10, p11) --[[ line: 154 ]]
 				p12:dispatch(batchUpdateFetchingStatus(t))
 			end
 			return p16
-		end):andThen(function(p14) --[[ line: 255 ]]
+		end):andThen(function(p14)
 			-- upvalues: var12 (write)
 			var12(p14)
 		end)

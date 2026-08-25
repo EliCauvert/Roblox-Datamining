@@ -11,11 +11,11 @@ local t = {
 	enableTestingTheme = false
 }
 
-function SquadVoiceChangerOverlay(p0) --[[ line: 25 ]]
+function SquadVoiceChangerOverlay(p0)
 	-- upvalues: cryoModule (ref), t (ref), useNavigation (ref), reactModule (ref), foundationModule (ref), squadVoiceChangersModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local var8 = useNavigation()
-	local var9 = reactModule.useCallback(function() --[[ line: 29 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref)
 		if var8 and var8.pop then
 			var8.pop()
@@ -48,7 +48,7 @@ function SquadVoiceChangerOverlay(p0) --[[ line: 25 ]]
 				["anchor-bottom-center position-bottom-center"] = not wideMode
 			},
 			Size = if wideMode then UDim2.new(0.75, 0, 0.9, 0) else UDim2.new(1, 0, 0.9, 0),
-			onActivated = function() --[[ line: 62 ]] end
+			onActivated = function() end
 		}, {
 			SquadVoiceChangers = reactModule.createElement(squadVoiceChangersModule, {
 				closeSquadVoiceChangers = var9,

@@ -7,7 +7,7 @@ local loading = foundationModule.Loading
 local iconSize = foundationModule.Enums.IconSize
 local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-return reactModule.memo(function(p0) --[[ line: 19 | named "LoadingStateImpl" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref)
 	local var3 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
 	

@@ -7,12 +7,12 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-return function(p0) --[[ line: 22 | named "PopoverShadow" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), reactModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref)
 	return reactModule.createElement(imageModule, {
 		AnchorPoint = p0.AnchorPoint,
 		Image = SHADOW_IMAGE,
-		Size = p0.contentSize:map(function(p1) --[[ line: 28 ]]
+		Size = p0.contentSize:map(function(p1)
 			-- upvalues: SHADOW_SIZE (copy)
 			return p1 + UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE)
 		end),

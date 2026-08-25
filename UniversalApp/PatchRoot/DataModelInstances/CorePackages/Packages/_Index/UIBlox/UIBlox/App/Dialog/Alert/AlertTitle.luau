@@ -33,11 +33,11 @@ alertTitle.defaultProps = {
 	margin = { top = 0, bottom = 24, left = 24, right = 24 }
 }
 
-function alertTitle.render(p0) --[[ line: 58 ]]
+function alertTitle.render(p0)
 	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), imagesModule (ref), genericTextLabelModule (ref)
 	local var11 = math.clamp(p0.props.screenSize.X - p0.props.margin.left - p0.props.margin.right, p0.props.minWidth, p0.props.maxWidth) - p0.props.margin.left - p0.props.margin.right
 	
-	return withStyleModule(function(p1) --[[ line: 66 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: UIBloxConfigModule (copy), roactModule (copy), fitFrameOnAxis (copy), p0 (ref), imageSetComponentModule (copy), imagesModule (copy), genericTextLabelModule (copy), var11 (ref)
 		local theme = p1.Theme
 		local var12 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Typography.HeadingSmall else p1.Tokens.Semantic.Typography.Header
@@ -111,7 +111,7 @@ function alertTitle.render(p0) --[[ line: 58 ]]
 	end)
 end
 
-return function(p2) --[[ line: 152 | named "AlertTitleFunctionalWrapper" ]]
+return function(p2)
 	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), alertTitle (ref), cryoModule (ref)
 	return roactModule.createElement(alertTitle, cryoModule.Dictionary.join(p2, { closeCursor = useCursorModule(uDim) }))
 end

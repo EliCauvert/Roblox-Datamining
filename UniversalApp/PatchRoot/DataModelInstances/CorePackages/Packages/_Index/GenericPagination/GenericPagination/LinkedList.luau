@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.createNode(p0) --[[ line: 4 ]]
+function t.createNode(p0)
 	-- upvalues: t (ref)
 	local t_1 = { previous = nil, next = nil, value = p0 }
 	setmetatable(t_1, t)
@@ -9,7 +9,7 @@ function t.createNode(p0) --[[ line: 4 ]]
 	return t_1
 end
 
-function t.CreateNext(p1, p2) --[[ line: 17 ]]
+function t.CreateNext(p1, p2)
 	-- upvalues: t (ref)
 	local t_1 = { previous = p1, next = p1.next, value = p2 or {} }
 	
@@ -22,7 +22,7 @@ function t.CreateNext(p1, p2) --[[ line: 17 ]]
 	return t_1
 end
 
-function t.CreatePrevious(p3, p4) --[[ line: 34 ]]
+function t.CreatePrevious(p3, p4)
 	-- upvalues: t (ref)
 	local t_1 = { previous = p3.previous, next = p3, value = p4 or {} }
 	

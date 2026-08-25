@@ -1,6 +1,6 @@
 ﻿local gameIconReducerModule = require(script:FindFirstAncestor("GameIconRodux").GameIcons.GameIconReducer)
 
-return function(p0, p1) --[[ line: 4 ]]
+return function(p0, p1)
 	-- upvalues: gameIconReducerModule (ref)
 	local var1 = p0[gameIconReducerModule.key][p1]
 	

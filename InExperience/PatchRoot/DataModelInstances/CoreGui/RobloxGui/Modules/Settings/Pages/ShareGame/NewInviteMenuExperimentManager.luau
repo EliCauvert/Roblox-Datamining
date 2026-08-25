@@ -7,7 +7,7 @@ local getFFlagInviteListRerank = require(corePackagesService.Workspace.Packages.
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 20 ]]
+function t.new(p0)
 	-- upvalues: IXPServiceWrapper (ref), getFFlagInviteListRerank (ref), t (ref)
 	local t_1 = {
 		_styleEnabled = false,
@@ -21,27 +21,27 @@ function t.new(p0) --[[ line: 20 ]]
 	return t_1
 end
 
-function t:getStyleEnabled() --[[ line: 32 ]]
+function t:getStyleEnabled()
 	return self._styleEnabled
 end
 
-function t:getCustomizationEnabled() --[[ line: 36 ]]
+function t:getCustomizationEnabled()
 	return self._customizationEnabled
 end
 
-function t:getNewSendEndpointEnabled() --[[ line: 40 ]]
+function t:getNewSendEndpointEnabled()
 	return self._newSendEndpointEnabled
 end
 
 if getFFlagInviteListRerank() then
-	function t:getInviteListSortOrder() --[[ line: 45 ]]
+	function t:getInviteListSortOrder()
 		return self._inviteListSortOrder
 	end
 end
-function t.initialize(p1) --[[ line: 50 ]]
+function t.initialize(p1)
 	-- upvalues: getFFlagEnableNewInviteMenuIXPModule (ref), getFStringInExperienceNotificationsLayerModule (ref), getFFlagInviteListRerank (ref)
 	if getFFlagEnableNewInviteMenuIXPModule() then
-		task.spawn(function() --[[ line: 55 ]]
+		task.spawn(function()
 			-- upvalues: p1 (ref), getFStringInExperienceNotificationsLayerModule (copy), getFFlagInviteListRerank (copy)
 			p1._ixpServiceWrapper:WaitForInitialization()
 			local var5 = p1._ixpServiceWrapper:GetLayerData(getFStringInExperienceNotificationsLayerModule())

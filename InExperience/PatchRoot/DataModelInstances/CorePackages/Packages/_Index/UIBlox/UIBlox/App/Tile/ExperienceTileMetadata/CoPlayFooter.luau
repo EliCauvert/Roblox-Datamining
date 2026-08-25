@@ -29,11 +29,11 @@ local t_1 = {
 	badgeHeight = 24
 }
 
-local function _(p0) --[[ line: 136 | named "getAvatarImage" ]]
+local function _(p0)
 	return string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150", tostring(p0))
 end
 
-local function renderCornerStroke(p1) --[[ line: 140 ]]
+local function renderCornerStroke(p1)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.borderRadius) }),
@@ -46,7 +46,7 @@ local function renderCornerStroke(p1) --[[ line: 140 ]]
 	})
 end
 
-local function renderEmphasisBorder(p2, p3, p4, p5) --[[ line: 154 ]]
+local function renderEmphasisBorder(p2, p3, p4, p5)
 	-- upvalues: reactModule (ref), renderCornerStroke (ref)
 	local theme = p4.Theme
 	local var12 = p2 - 1
@@ -66,7 +66,7 @@ local function renderEmphasisBorder(p2, p3, p4, p5) --[[ line: 154 ]]
 	})
 end
 
-local function renderBadge(p6, p7, p8) --[[ line: 177 ]]
+local function renderBadge(p6, p7, p8)
 	-- upvalues: reactModule (ref), renderCornerStroke (ref), renderEmphasisBorder (ref)
 	local var14 = if p6.maxDisplayNumber < p6.usersCount then tostring(p6.maxDisplayNumber) .. "+" else tostring(p6.usersCount)
 	local theme = p8.Theme
@@ -128,7 +128,7 @@ local function renderBadge(p6, p7, p8) --[[ line: 177 ]]
 	})
 end
 
-local function renderFaceImage(p9, p10, p11) --[[ line: 251 ]]
+local function renderFaceImage(p9, p10, p11)
 	-- upvalues: reactModule (ref), label (ref), renderCornerStroke (ref), renderEmphasisBorder (ref)
 	local faceBackgroundColor = p10.faceBackgroundColor or p11.Theme.TextDefault
 	local faceBorderWidth = p10.faceBorderWidth
@@ -151,7 +151,7 @@ local function renderFaceImage(p9, p10, p11) --[[ line: 251 ]]
 	})
 end
 
-local function renderFaces(p12, p13, p14, p15, p16, p17) --[[ line: 278 ]]
+local function renderFaces(p12, p13, p14, p15, p16, p17)
 	-- upvalues: reactModule (ref), renderBadge (ref), renderFaceImage (ref)
 	local users = p12.users
 	local faceGroupGap = p13.faceGroupGap
@@ -195,7 +195,7 @@ local function renderFaces(p12, p13, p14, p15, p16, p17) --[[ line: 278 ]]
 	}, t)
 end
 
-return function(p18) --[[ line: 332 | named "CoPlayFooter" ]]
+return function(p18)
 	-- upvalues: cryoModule (ref), t (ref), UIBloxConfigModule (ref), useStyleModule (ref), reactModule (ref), t_1 (ref), renderFaces (ref), genericTextLabelModule (ref)
 	local var21 = cryoModule.Dictionary.join(t, p18)
 	
@@ -208,7 +208,7 @@ return function(p18) --[[ line: 332 | named "CoPlayFooter" ]]
 	local var26 = nil
 	
 	if UIBloxConfigModule.fixCoplayFooterConditionalHooks then
-		var26 = reactModule.useCallback(function(p19) --[[ line: 346 ]]
+		var26 = reactModule.useCallback(function(p19)
 			-- upvalues: var24 (ref)
 			var24(p19.AbsoluteSize)
 		end, { var24 })
@@ -228,7 +228,7 @@ return function(p18) --[[ line: 332 | named "CoPlayFooter" ]]
 	local var29 = faceGroupCount + 1
 	
 	if not UIBloxConfigModule.fixCoplayFooterConditionalHooks then
-		var26 = reactModule.useCallback(function(p20) --[[ line: 367 ]]
+		var26 = reactModule.useCallback(function(p20)
 			-- upvalues: var24 (ref)
 			var24(p20.AbsoluteSize)
 		end, { var24 })
@@ -259,7 +259,7 @@ return function(p18) --[[ line: 332 | named "CoPlayFooter" ]]
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var23:map(function(p21) --[[ line: 397 ]]
+			Size = var23:map(function(p21)
 				-- upvalues: containerGap (ref)
 				return UDim2.new(1, (-p21.X) - containerGap, 1, 0)
 			end)

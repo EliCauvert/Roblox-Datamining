@@ -21,7 +21,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateHSRStructure(p0, p1, p2) --[[ line: 29 ]]
+local function validateHSRStructure(p0, p1, p2)
 	-- upvalues: errorSourceStringsModule (ref)
 	if #p0 ~= 1 then
 		p2:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p1:GetFullName() })
@@ -42,7 +42,7 @@ local function validateHSRStructure(p0, p1, p2) --[[ line: 29 ]]
 	return var8
 end
 
-function t.run(p3, p4) --[[ line: 59 ]]
+function t.run(p3, p4)
 	-- upvalues: validationEnumsModule (ref), getFFlagUGCValidateHSRMeshIdsModule (ref), errorSourceStringsModule (ref), parseContentIdsModule (ref), validateHSRStructure (ref), pcallDeferredModule (ref), UGCValidationService (ref)
 	if p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
 	local var9 = p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
@@ -64,7 +64,7 @@ function t.run(p3, p4) --[[ line: 59 ]]
 						local var14 = validateHSRStructure(var13, v, p3)
 						
 						if var14 and var10 then
-							local var15, var16 = pcallDeferredModule(function() --[[ line: 109 ]]
+							local var15, var16 = pcallDeferredModule(function()
 								-- upvalues: UGCValidationService (copy), v (ref), var14 (ref)
 								return UGCValidationService:ValidateHSRMeshIds(v, var14)
 							end, {})

@@ -18,7 +18,7 @@ local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).i
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local var11 = if isInExperienceUIVREnabled then require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
 local var12 = if isInExperienceUIVREnabled then require(robloxGui.Modules.Settings.Resources.HelpConstants) else nil
-local var13 = (function() --[[ line: 66 | named "Initialize" ]]
+local var13 = (function()
 	-- upvalues: robloxGui (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), userInputService (ref), create (ref), themeModule (ref), robloxTranslatorModule (ref), cachedPolicyServiceModule (ref), var10 (ref), textService (ref), utilityModule (ref), guiService (ref), var12 (ref), var11 (write), gameSettings (ref), uiblox (ref), builderIconsModule (ref)
 	local help_1 = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	help_1.HelpPages = {}
@@ -26,7 +26,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 	help_1.ActiveHelpScheme = nil
 	local var15 = nil
 	
-	function help_1.GetCurrentInputType(_) --[[ line: 75 ]]
+	function help_1.GetCurrentInputType(_)
 		-- upvalues: isInExperienceUIVREnabled (copy), isSpatial (copy), var15 (write), userInputService (copy)
 		if isInExperienceUIVREnabled and isSpatial() then
 			return "SpatialGamepad"
@@ -38,9 +38,9 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		return if var15 == Enum.UserInputType.Keyboard or var15 == Enum.UserInputType.MouseMovement or (var15 == Enum.UserInputType.MouseButton1 or var15 == Enum.UserInputType.MouseButton2) or (var15 == Enum.UserInputType.MouseButton3 or var15 == Enum.UserInputType.MouseWheel) then "KeyboardMouse" elseif var15 == Enum.UserInputType.Touch then "Touch" elseif var15 == Enum.UserInputType.Gamepad1 or var15 == Enum.UserInputType.Gamepad2 or (var15 == Enum.UserInputType.Gamepad3 or var15 == Enum.UserInputType.Gamepad4) then "Gamepad" else "KeyboardMouse"
 	end
 	
-	local function createPCHelp(p0) --[[ line: 107 ]]
+	local function createPCHelp(p0)
 		-- upvalues: create (copy), themeModule (copy), userInputService (copy), robloxTranslatorModule (copy), cachedPolicyServiceModule (copy)
-		local function createPCGroup(p1, p2) --[[ line: 108 ]]
+		local function createPCGroup(p1, p2)
 			-- upvalues: create (copy), themeModule (copy)
 			local var36 = create("Frame")({
 				BackgroundTransparency = 1,
@@ -218,7 +218,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		p0.Size = UDim2.new(p0.Size.X.Scale, p0.Size.X.Offset, 0, var35.Size.Y.Offset + var35.Position.Y.Offset)
 	end
 	
-	local function createGamepadHelp(p3) --[[ line: 312 ]]
+	local function createGamepadHelp(p3)
 		-- upvalues: help_1 (ref), create (copy), var10 (copy), themeModule (copy), textService (copy), robloxTranslatorModule (copy)
 		local maxValue = math.max(help_1.Page.AbsoluteSize.X * 0.58, 270)
 		local uDim2 = UDim2.new(0, maxValue, 0, maxValue * 0.64)
@@ -235,7 +235,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		local size36 = var10 and themeModule.fontSize(Enum.FontSize.Size36) or themeModule.fontSize(Enum.FontSize.Size24)
 		local var44 = size36 == themeModule.fontSize(Enum.FontSize.Size36) and themeModule.textSize(36) or themeModule.textSize(24)
 		
-		local function createGamepadLabel(p4, p5, p6, p7) --[[ line: 332 ]]
+		local function createGamepadLabel(p4, p5, p6, p7)
 			-- upvalues: create (copy), themeModule (copy), size36 (ref), var42 (ref), textService (copy), var44 (ref), p3 (ref)
 			local var49 = create("TextLabel")({
 				BackgroundTransparency = 1,
@@ -256,7 +256,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 			local x = textService:GetTextSize(p4, var44, themeModule.font(Enum.Font.SourceSansBold, "Bold"), Vector2.new(0, 0)).X
 			local absValue = math.abs(p5.X.Offset)
 			
-			local function updateNameLabelSize() --[[ line: 356 ]]
+			local function updateNameLabelSize()
 				-- upvalues: p7 (ref), p3 (ref), absValue (ref), var49 (ref), var44 (copy), x (ref), size36 (copy)
 				local var52 = if p7 then p3.AbsoluteSize.X / 2 + 30 - absValue else p3.AbsoluteSize.X / 2 - 30 - absValue
 				var49.Size = UDim2.new(var49.Size.X.Scale, var52, var49.Size.Y.Scale, var44 * 2)
@@ -267,7 +267,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 				end
 			end
 			
-			local _ = p3:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ line: 369 ]]
+			local _ = p3:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
 				-- upvalues: updateNameLabelSize (ref)
 				updateNameLabelSize()
 			end)
@@ -289,7 +289,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		createGamepadLabel("Camera Zoom", UDim2.new(0.5, var48, 0.77, -10), UDim2.new(0, 122, 0, var44))
 	end
 	
-	local function updateTouchLayout(p8) --[[ line: 401 ]]
+	local function updateTouchLayout(p8)
 		-- upvalues: help_1 (ref), utilityModule (copy)
 		help_1.ActiveHelpScheme = p8
 		local var53 = utilityModule:IsPortrait()
@@ -298,7 +298,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 			local t
 			local touch = help_1.HelpPageContents.Touch
 			
-			local function _(p9) --[[ line: 409 | named "hideUneeded" ]]
+			local function _(p9)
 				-- upvalues: touch (ref)
 				if p9 then
 					for i, v in pairs(touch) do
@@ -347,13 +347,13 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		end
 	end
 	
-	local function createTouchHelp(p10) --[[ line: 457 ]]
+	local function createTouchHelp(p10)
 		-- upvalues: utilityModule (copy), guiService (copy), create (copy), themeModule (copy)
 		local t = {}
 		local var57 = utilityModule:IsSmallTouchScreen()
 		p10.Size = UDim2.new(1, 0, 0, if var57 then guiService:GetScreenResolution().y - 100 else guiService:GetScreenResolution().y - 350)
 		
-		local function createTouchLabel(p11, p12, p13, p14) --[[ line: 466 ]]
+		local function createTouchLabel(p11, p12, p13, p14)
 			-- upvalues: create (copy), themeModule (copy), var57 (ref)
 			local var60 = create("TextLabel")({
 				BackgroundTransparency = 1,
@@ -397,7 +397,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 			return var60
 		end
 		
-		local function _(p15, p16, p17, p18, p19) --[[ line: 516 | named "createTouchGestureImage" ]]
+		local function _(p15, p16, p17, p18, p19)
 			-- upvalues: create (copy)
 			return create("ImageLabel")({
 				BackgroundTransparency = 1,
@@ -475,7 +475,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		return t
 	end
 	
-	local function createSpatialGamepadHelp(p20) --[[ line: 556 ]]
+	local function createSpatialGamepadHelp(p20)
 		-- upvalues: var12 (copy), create (copy), help_1 (ref), var11 (copy), themeModule (copy)
 		local gamepadQuest = var12.Images.GamepadQuest
 		local questGamepadLabels = var12.Labels.QuestGamepadLabels
@@ -516,7 +516,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		end
 	end
 	
-	local function createHelpDisplay(p21) --[[ line: 608 ]]
+	local function createHelpDisplay(p21)
 		-- upvalues: create (copy), createPCHelp (ref), createGamepadHelp (ref), createTouchHelp (ref), isInExperienceUIVREnabled (copy), createSpatialGamepadHelp (ref)
 		local var64 = nil
 		local var65 = create("Frame")({
@@ -547,7 +547,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		return var65, var64
 	end
 	
-	local function displayHelp(p22) --[[ line: 642 ]]
+	local function displayHelp(p22)
 		-- upvalues: help_1 (ref), var10 (copy), userInputService (copy)
 		for i, v in pairs(help_1.HelpPages) do
 			if v == p22 then
@@ -567,7 +567,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		end
 	end
 	
-	local function switchToHelp(p23) --[[ line: 660 ]]
+	local function switchToHelp(p23)
 		-- upvalues: help_1 (ref), displayHelp (ref), gameSettings (copy), updateTouchLayout (ref), createHelpDisplay (ref), switchToHelp (ref)
 		local var66 = help_1.HelpPages[p23]
 		
@@ -595,15 +595,15 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		end
 	end
 	
-	local function _() --[[ line: 677 | named "showTypeOfHelp" ]]
+	local function _()
 		-- upvalues: switchToHelp (ref), help_1 (ref)
 		switchToHelp(help_1:GetCurrentInputType())
 	end
 	
-	function help_1.PageDisplayed(_) --[[ line: 681 ]]
+	function help_1.PageDisplayed(_)
 		-- upvalues: help_1 (ref), userInputService (copy), var15 (write), switchToHelp (ref)
 		if not help_1.LastInputTypeChangedConnection then
-			help_1.LastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p24) --[[ line: 683 ]]
+			help_1.LastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p24)
 				-- upvalues: var15 (copy), switchToHelp (copy), help_1 (copy)
 				if p24 ~= Enum.UserInputType.Focus and p24 ~= Enum.UserInputType.None then
 					var15 = p24
@@ -615,7 +615,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		switchToHelp(help_1:GetCurrentInputType())
 	end
 	
-	function help_1.PageHidden(_) --[[ line: 694 ]]
+	function help_1.PageHidden(_)
 		-- upvalues: help_1 (ref)
 		if help_1.LastInputTypeChangedConnection then
 			help_1.LastInputTypeChangedConnection:Disconnect()
@@ -623,7 +623,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 		end
 	end
 	
-	local function adjustForScreenLayout(p25) --[[ line: 701 ]]
+	local function adjustForScreenLayout(p25)
 		-- upvalues: help_1 (ref), gameSettings (copy), utilityModule (copy), guiService (copy), updateTouchLayout (ref)
 		if help_1:GetCurrentInputType() == "Touch" then
 			local touchMovementMode = gameSettings.TouchMovementMode
@@ -639,7 +639,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 	help_1.TabHeader.TabLabel.Icon.Text = help.name
 	help_1.TabHeader.TabLabel.Title.Text = "Help"
 	help_1.Page.Name = "Help"
-	utilityModule:OnResized(help_1, function(p26, _) --[[ line: 725 ]]
+	utilityModule:OnResized(help_1, function(p26, _)
 		-- upvalues: help_1 (ref), adjustForScreenLayout (ref)
 		if help_1.HelpPages.Touch then
 			adjustForScreenLayout(p26)
@@ -648,7 +648,7 @@ local var13 = (function() --[[ line: 66 | named "Initialize" ]]
 	
 	return help_1
 end)()
-var13.Displayed.Event:connect(function() --[[ line: 739 ]]
+var13.Displayed.Event:connect(function()
 	-- upvalues: var13 (write)
 	var13:PageDisplayed()
 	
@@ -656,7 +656,7 @@ var13.Displayed.Event:connect(function() --[[ line: 739 ]]
 		var13.HubRef.VersionContainer.Visible = true
 	end
 end)
-var13.Hidden.Event:connect(function() --[[ line: 746 ]]
+var13.Hidden.Event:connect(function()
 	-- upvalues: var13 (write)
 	var13:PageHidden()
 	var13.HubRef.PageViewClipper.ClipsDescendants = true

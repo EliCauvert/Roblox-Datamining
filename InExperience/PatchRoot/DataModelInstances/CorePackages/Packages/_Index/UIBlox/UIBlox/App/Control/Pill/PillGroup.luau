@@ -17,13 +17,13 @@ local useIsGamepadModule = require(parent_3.Utility.useIsGamepad)
 local scrollingListWithArrowsAndGradientModule = require(parent_1.HorizontalNav.ScrollingListWithArrowsAndGradient)
 local pillv2Module = require(parent.Pillv2)
 
-local function PillGroup(p0) --[[ line: 60 ]]
+local function PillGroup(p0)
 	-- upvalues: useIsGamepadModule (ref), reactModule (ref), useStyleModule (ref), roactGamepadModule (ref), cryoModule (ref), iconButtonModule (ref), iconSizeModule (ref), imagesModule (ref), focusable (ref), pillv2Module (ref), fitFrameHorizontal (ref), fitFrameModule (ref), scrollingListWithArrowsAndGradientModule (ref)
 	local var12 = p0.isRoactGamepadEnabled ~= nil or p0.isRoactGamepadEnabled
 	local var12_1 = useIsGamepadModule() and var12
 	local var14 = reactModule.useRef(nil)
 	
-	local function _() --[[ line: 66 | named "scrollToStart" ]]
+	local function _()
 		-- upvalues: var14 (ref)
 		local current = var14.current
 		
@@ -36,20 +36,20 @@ local function PillGroup(p0) --[[ line: 60 ]]
 	local rightPadding = p0.rightPadding or 15
 	local selectedPills = p0.selectedPills or {}
 	local theme = useStyleModule().Theme
-	local var18 = reactModule.useCallback(function(p1) --[[ line: 81 ]]
+	local var18 = reactModule.useCallback(function(p1)
 		-- upvalues: var14 (ref)
 		if var14.current then
 			var14.current.CanvasSize = UDim2.new(0, p1.AbsoluteSize.X, 1, 0)
 		end
 	end)
 	local var19 = var12 and roactGamepadModule.useRefCache() or reactModule.useRef({}).current
-	local var20 = reactModule.useCallback(function() --[[ line: 90 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.onSelectionChanged then
 			p0.onSelectionChanged({})
 		end
 	end)
-	local var21 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), cryoModule (copy), selectedPills (ref)
 		local t = {}
 		
@@ -76,7 +76,7 @@ local function PillGroup(p0) --[[ line: 60 ]]
 	local isLoading = p0.isLoading
 	
 	for i, v in var21 do
-		local function onActivated() --[[ line: 124 ]]
+		local function onActivated()
 			-- upvalues: cryoModule (copy), selectedPills (ref), v (ref), var14 (ref), p0 (ref)
 			local var29 = cryoModule.List.find(selectedPills, v) ~= nil
 			local var30 = if var29 then cryoModule.List.removeValue(selectedPills, v) else cryoModule.List.join(selectedPills, { v })
@@ -116,7 +116,7 @@ local function PillGroup(p0) --[[ line: 60 ]]
 	if isLoading and var12_1 and var12 then
 		t[1] = reactModule.createElement(focusable[pillv2Module], { layoutOrder = 2, key = "1", text = "", ref = var19[1] })
 	end
-	local function getScrollingListChildren() --[[ line: 176 ]]
+	local function getScrollingListChildren()
 		-- upvalues: reactModule (copy), fitFrameHorizontal (copy), fitFrameModule (copy), rightPadding (ref), leftPadding (ref), var18 (ref), t (ref)
 		return {
 			SubNavFrame = reactModule.createElement(fitFrameHorizontal, {
@@ -159,7 +159,7 @@ local function PillGroup(p0) --[[ line: 60 ]]
 	})
 end
 
-return reactModule.forwardRef(function(p2, p3) --[[ line: 221 ]]
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: reactModule (ref), PillGroup (ref), cryoModule (ref)
 	return reactModule.createElement(PillGroup, cryoModule.Dictionary.join(p2, { forwardRef = p3 }))
 end)

@@ -22,14 +22,14 @@ local listenForTeleportFailureModule = require(script.Parent.listenForTeleportFa
 local getFFlagMomentsPauseAudioThroughTeleportModule = require(moments.Flags.GetFFlagMomentsPauseAudioThroughTeleport)
 local t = { joining = constantsModule_1.LocalizationKeys.joining }
 
-return function() --[[ line: 59 | named "useJoinExperience" ]]
+return function()
 	-- upvalues: useLocalization (ref), t (ref), useMomentsSession (ref), reactModule (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsPauseAudioThroughTeleportModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), fireAnalyticsEvent (ref), eventNames (ref), analytics (ref), emitRecommendationActionModule (ref), constantsModule (ref), getToastStoreModule (ref), sessionUtilModule (ref), listenForTeleportFailureModule (ref), launchGame (ref), constantsModule_1 (ref)
 	local var14 = useLocalization(t)
 	local var15 = useMomentsSession()
 	local var16 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref)
-		return function() --[[ line: 68 ]]
+		return function()
 			-- upvalues: var16 (copy)
 			if var16.current ~= nil then
 				var16.current()
@@ -38,7 +38,7 @@ return function() --[[ line: 59 | named "useJoinExperience" ]]
 		end
 	end, {})
 	
-	return reactModule.useCallback(function(p0, p1) --[[ line: 76 ]]
+	return reactModule.useCallback(function(p0, p1)
 		-- upvalues: getMomentsPreferencesStoreModule (copy), getFFlagMomentsPauseAudioThroughTeleportModule (copy), var16 (ref), var15 (ref), getFFlagMomentsAnalyticsSchemaIdentity (copy), fireAnalyticsEvent (copy), eventNames (copy), analytics (copy), emitRecommendationActionModule (copy), constantsModule (copy), getToastStoreModule (copy), var14 (ref), sessionUtilModule (copy), listenForTeleportFailureModule (copy), launchGame (copy), constantsModule_1 (copy)
 		local var17 = getMomentsPreferencesStoreModule(false)
 		local var18 = getFFlagMomentsPauseAudioThroughTeleportModule()
@@ -85,7 +85,7 @@ return function() --[[ line: 59 | named "useJoinExperience" ]]
 			sessionUtilModule.setPlayIntent(var24)
 		end
 		if var18 then
-			var16.current = listenForTeleportFailureModule(function() --[[ line: 152 ]]
+			var16.current = listenForTeleportFailureModule(function()
 				-- upvalues: var16 (copy), var17 (ref)
 				var16.current = nil
 				var17.setTeleporting(false)
@@ -94,7 +94,7 @@ return function() --[[ line: 59 | named "useJoinExperience" ]]
 		launchGame(tostring(p1), constantsModule_1.JoinReferralPage, { moments_play_intent_id = var24 }, nil, constantsModule_1.JoinLaunchSource)
 		
 		if not var18 then
-			task.delay(6, function() --[[ line: 169 ]]
+			task.delay(6, function()
 				-- upvalues: var17 (ref)
 				var17.setTeleporting(false)
 			end)

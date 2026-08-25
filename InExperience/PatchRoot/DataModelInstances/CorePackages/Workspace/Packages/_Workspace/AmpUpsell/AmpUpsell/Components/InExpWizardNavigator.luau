@@ -26,38 +26,38 @@ local _ = {
 	VPCUpsell = "VPCUpsell"
 }
 
-local var12 = function(p0) --[[ line: 45 ]]
+local var12 = function(p0)
 	-- upvalues: useNavigation (ref), reactModule (ref), appScreensModule (ref), urlBuilder (ref), cryoModule (ref), actionTypeEnum (ref), wizardContainerModule (ref)
 	local var13 = useNavigation()
 	
 	return reactModule.createElement(wizardContainerModule, cryoModule.Dictionary.join(p0 or {}, {
 		openUpsells = {
-			[actionTypeEnum.AgeEstimation] = reactModule.useCallback(function(p1) --[[ line: 67 ]]
+			[actionTypeEnum.AgeEstimation] = reactModule.useCallback(function(p1)
 				-- upvalues: var13 (ref)
 				var13.push("FAEUpsell", { extraProps = p1 })
 			end, { var13 }),
-			[actionTypeEnum.GovernmentId] = reactModule.useCallback(function(p2) --[[ line: 62 ]]
+			[actionTypeEnum.GovernmentId] = reactModule.useCallback(function(p2)
 				-- upvalues: var13 (ref)
 				var13.push("IDVUpsell", { extraProps = p2 })
 			end, { var13 }),
-			[actionTypeEnum.Subscription] = reactModule.useCallback(function(p3) --[[ line: 71 ]]
+			[actionTypeEnum.Subscription] = reactModule.useCallback(function(p3)
 				-- upvalues: var13 (ref)
 				var13.push("SubscriptionUpsell", { extraProps = p3 })
 			end, { var13 }),
-			[actionTypeEnum.ParentConsent] = reactModule.useCallback(function(p4) --[[ line: 74 ]]
+			[actionTypeEnum.ParentConsent] = reactModule.useCallback(function(p4)
 				-- upvalues: var13 (ref)
 				var13.push("VPCUpsell", { extraProps = p4 })
 			end, { var13 }),
-			[actionTypeEnum.ParentLink] = reactModule.useCallback(function(p5) --[[ line: 77 ]]
+			[actionTypeEnum.ParentLink] = reactModule.useCallback(function(p5)
 				-- upvalues: var13 (ref)
 				var13.push("VPCUpsell", { extraProps = p5 })
 			end, { var13 })
 		},
-		openAccountSettingsUpsell = reactModule.useCallback(function(p6) --[[ line: 48 ]]
+		openAccountSettingsUpsell = reactModule.useCallback(function(p6)
 			-- upvalues: var13 (ref), appScreensModule (copy), urlBuilder (copy), cryoModule (copy)
 			var13.push("AccountSettingsUpsell", {
 				extraProps = cryoModule.Dictionary.join(p6 or {}, {
-					openAccountSettings = function(p7) --[[ line: 49 ]]
+					openAccountSettings = function(p7)
 						-- upvalues: var13 (copy), appScreensModule (copy), urlBuilder (copy)
 						var13.push(appScreensModule.GenericWebPage, {
 							detail = urlBuilder.static.settings.account(),
@@ -73,7 +73,7 @@ end
 return roactNavigationModule.createAppContainer(roactNavigationModule.createRobloxStackNavigator({
 	{
 		Wizard = {
-			screen = function(p8) --[[ line: 93 ]]
+			screen = function(p8)
 				-- upvalues: useNavigation (ref), reactModule (ref), var12 (ref)
 				local extraProps = useNavigation().getParam("extraProps")
 				
@@ -87,7 +87,7 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		FAEUpsell = {
-			screen = createLazyComponent(function() --[[ line: 110 ]]
+			screen = createLazyComponent(function()
 				-- upvalues: FAEUpsellContainerModule (ref)
 				return FAEUpsellContainerModule
 			end),
@@ -96,9 +96,9 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		IDVUpsell = {
-			screen = createLazyComponent(function() --[[ line: 121 ]]
+			screen = createLazyComponent(function()
 				-- upvalues: useNavigation (ref), reactModule (ref), IDVUpsellContainerModule (ref)
-				return function() --[[ line: 122 ]]
+				return function()
 					-- upvalues: useNavigation (copy), reactModule (copy), IDVUpsellContainerModule (copy)
 					return reactModule.createElement(IDVUpsellContainerModule, useNavigation().getParam("extraProps"))
 				end
@@ -108,13 +108,13 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		SubscriptionUpsell = {
-			screen = function(p9) --[[ line: 136 ]]
+			screen = function(p9)
 				-- upvalues: reactModule (ref), robloxSubscriptionPurchaseAppModule (ref), robloxSubscriptionFlowCompleteReason (ref), surfaceName (ref)
 				local extraProps = p9.navigation.getParam("extraProps") or {}
-				reactModule.useEffect(function() --[[ line: 152 ]]
+				reactModule.useEffect(function()
 					-- upvalues: robloxSubscriptionPurchaseAppModule (copy), extraProps (ref), robloxSubscriptionFlowCompleteReason (copy), surfaceName (copy)
 					local var16 = robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase(extraProps.purchaseUIOptions, {
-						onFlowComplete = function(p10) --[[ line: 156 ]]
+						onFlowComplete = function(p10)
 							-- upvalues: robloxSubscriptionFlowCompleteReason (copy), extraProps (copy)
 							if p10 == robloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded then
 								if extraProps.onSuccess then
@@ -138,7 +138,7 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 						end
 					}, nil, extraProps.surfaceName or surfaceName.Unspecified, extraProps.surfaceContext or robloxSubscriptionPurchaseAppModule.SurfaceContext.Unspecified, nil, extraProps.analyticsContext)
 					
-					return function() --[[ line: 186 ]]
+					return function()
 						-- upvalues: var16 (ref)
 						if var16 then
 							var16()
@@ -157,9 +157,9 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		AccountSettingsUpsell = {
-			screen = createLazyComponent(function() --[[ line: 214 ]]
+			screen = createLazyComponent(function()
 				-- upvalues: useNavigation (ref), reactModule (ref), accountSettingsUpsellModule (ref)
-				return function() --[[ line: 215 ]]
+				return function()
 					-- upvalues: useNavigation (copy), reactModule (copy), accountSettingsUpsellModule (copy)
 					return reactModule.createElement(accountSettingsUpsellModule, useNavigation().getParam("extraProps"))
 				end
@@ -169,9 +169,9 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		VPCUpsell = {
-			screen = createLazyComponent(function() --[[ line: 229 ]]
+			screen = createLazyComponent(function()
 				-- upvalues: useNavigation (ref), reactModule (ref), VPCUpsellContainerModule (ref)
-				return function() --[[ line: 230 ]]
+				return function()
 					-- upvalues: useNavigation (copy), reactModule (copy), VPCUpsellContainerModule (copy)
 					return reactModule.createElement(VPCUpsellContainerModule, useNavigation().getParam("extraProps"))
 				end
@@ -181,14 +181,14 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	},
 	{
 		[appScreensModule.GenericWebPage] = {
-			screen = function() --[[ line: 245 ]]
+			screen = function()
 				-- upvalues: useNavigation (ref), webViewServiceWrapperModule (ref)
 				local var17 = useNavigation()
 				local extraProps = var17.getParam("extraProps")
 				webViewServiceWrapperModule.new({
 					url = var17.getParam("detail"),
 					title = extraProps.title or "",
-					closeCallback = function() --[[ line: 252 ]]
+					closeCallback = function()
 						-- upvalues: var17 (ref), extraProps (ref)
 						var17.pop()
 						
@@ -203,7 +203,7 @@ return roactNavigationModule.createAppContainer(roactNavigationModule.createRobl
 	}
 }, {
 	initialRouteName = "Wizard",
-	transitionConfig = function() --[[ line: 272 ]]
+	transitionConfig = function()
 		return {
 			transitionSpec = { frequency = 100000, dampingRatio = 1 }
 		}

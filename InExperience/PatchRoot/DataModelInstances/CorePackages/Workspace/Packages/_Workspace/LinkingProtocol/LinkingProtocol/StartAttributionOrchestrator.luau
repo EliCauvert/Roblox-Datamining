@@ -35,12 +35,12 @@ local t_1 = {
 	CH = true
 }
 
-local function _(p0) --[[ line: 83 | named "isSubjectToGdpr" ]]
+local function _(p0)
 	-- upvalues: t_1 (ref)
 	return p0 == nil or t_1[string.upper(p0)] == true
 end
 
-local _ = function(p1, p2) --[[ line: 93 | named "toDmaConsent" ]]
+local _ = function(p1, p2)
 	-- upvalues: t_1 (ref)
 	return {
 		isSubjectToGdpr = p2 == nil or t_1[string.upper(p2)] == true,
@@ -48,7 +48,7 @@ local _ = function(p1, p2) --[[ line: 93 | named "toDmaConsent" ]]
 	}
 end
 
-function t.computeDecision(p3, p4) --[[ line: 109 ]]
+function t.computeDecision(p3, p4)
 	-- upvalues: t_1 (ref)
 	return if p3 == nil then { applySharingFilter = true, dmaConsent = nil } else {
 		applySharingFilter = not p3,
@@ -59,15 +59,15 @@ function t.computeDecision(p3, p4) --[[ line: 109 ]]
 	}
 end
 
-local _ = function(_, _) --[[ line: 122 | named "shouldPublish" ]]
+local _ = function(_, _)
 	return true
 end
 
-local _ = function(p5) --[[ line: 129 | named "isAwaitingConsent" ]]
+local _ = function(p5)
 	return p5 == nil
 end
 
-function t.resolveAndPublish(p6, _, p7, p8) --[[ line: 145 ]]
+function t.resolveAndPublish(p6, _, p7, p8)
 	-- upvalues: t (ref)
 	if p7 == nil then
 		return

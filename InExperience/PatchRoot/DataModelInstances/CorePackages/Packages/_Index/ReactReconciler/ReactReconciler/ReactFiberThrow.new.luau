@@ -44,7 +44,7 @@ local var8 = nil
 local var9 = nil
 local var10 = nil
 
-local var11 = function(...) --[[ line: 89 ]]
+local var11 = function(...)
 	-- upvalues: var8 (write), var7 (write)
 	if not var8 then
 		var7 = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -53,7 +53,7 @@ local var11 = function(...) --[[ line: 89 ]]
 	return var8(...)
 end
 
-local var12 = function(...) --[[ line: 104 ]]
+local var12 = function(...)
 	-- upvalues: var7 (write), var10 (write)
 	if var7 == nil then
 		var7 = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -63,7 +63,7 @@ local var12 = function(...) --[[ line: 104 ]]
 	return var10(...)
 end
 
-local var13 = function(...) --[[ line: 111 ]]
+local var13 = function(...)
 	-- upvalues: var7 (write), var9 (write)
 	if var7 == nil then
 		var7 = require(script.Parent["ReactFiberWorkLoop.new"])
@@ -82,14 +82,14 @@ local includesSomeLane = reactFiberLaneModule.includesSomeLane
 local mergeLanes = reactFiberLaneModule.mergeLanes
 local pickArbitraryLane = reactFiberLaneModule.pickArbitraryLane
 
-function createRootErrorUpdate(p0, p1, p2, p3) --[[ line: 133 ]]
+function createRootErrorUpdate(p0, p1, p2, p3)
 	-- upvalues: createUpdate (ref), noTimestamp (ref), captureUpdate (ref), object (ref), logCapturedError (ref)
 	local var15 = createUpdate(noTimestamp, p2)
 	var15.tag = captureUpdate
 	var15.payload = { element = object.None }
 	local value = p1.value
 	
-	function var15.callback() --[[ line: 147 ]]
+	function var15.callback()
 		-- upvalues: p3 (ref), value (ref), logCapturedError (copy), p0 (ref), p1 (ref)
 		if p3 ~= nil then
 			p3(value)
@@ -100,7 +100,7 @@ function createRootErrorUpdate(p0, p1, p2, p3) --[[ line: 133 ]]
 	return var15
 end
 
-function createClassErrorUpdate(p4, p5, p6) --[[ line: 156 ]]
+function createClassErrorUpdate(p4, p5, p6)
 	-- upvalues: createUpdate (ref), noTimestamp (ref), captureUpdate (ref), logCapturedError (ref), reactGlobalsModule (ref), markFailedErrorBoundaryForHotReloading (ref), var11 (ref), includesSomeLane (ref), syncLane (ref), console (ref), getComponentName (ref)
 	local var16 = createUpdate(noTimestamp, p6)
 	var16.tag = captureUpdate
@@ -109,7 +109,7 @@ function createClassErrorUpdate(p4, p5, p6) --[[ line: 156 ]]
 	if typeof(getDerivedStateFromError) == "function" then
 		local value = p5.value
 		
-		function var16.payload() --[[ line: 166 ]]
+		function var16.payload()
 			-- upvalues: logCapturedError (copy), p4 (ref), p5 (ref), getDerivedStateFromError (ref), value (ref)
 			logCapturedError(p4, p5)
 			
@@ -119,7 +119,7 @@ function createClassErrorUpdate(p4, p5, p6) --[[ line: 156 ]]
 	local stateNode = p4.stateNode
 	
 	if stateNode ~= nil and typeof(stateNode.componentDidCatch) == "function" then
-		function var16.callback() --[[ line: 174 ]]
+		function var16.callback()
 			-- upvalues: reactGlobalsModule (copy), markFailedErrorBoundaryForHotReloading (copy), p4 (ref), getDerivedStateFromError (ref), var11 (copy), stateNode (ref), logCapturedError (copy), p5 (ref), includesSomeLane (copy), syncLane (copy), console (copy), getComponentName (copy)
 			if reactGlobalsModule.__DEV__ then
 				markFailedErrorBoundaryForHotReloading(p4)
@@ -137,7 +137,7 @@ function createClassErrorUpdate(p4, p5, p6) --[[ line: 156 ]]
 		
 		return var16
 	elseif reactGlobalsModule.__DEV__ then
-		function var16.callback() --[[ line: 212 ]]
+		function var16.callback()
 			-- upvalues: markFailedErrorBoundaryForHotReloading (copy), p4 (ref)
 			markFailedErrorBoundaryForHotReloading(p4)
 		end
@@ -145,7 +145,7 @@ function createClassErrorUpdate(p4, p5, p6) --[[ line: 156 ]]
 	return var16
 end
 
-local function attachPingListener(p7, p8, p9) --[[ line: 219 ]]
+local function attachPingListener(p7, p8, p9)
 	-- upvalues: var12 (ref)
 	local t
 	local pingCache = p7.pingCache
@@ -166,7 +166,7 @@ local function attachPingListener(p7, p8, p9) --[[ line: 219 ]]
 	if not t[p9] then
 		t[p9] = true
 		
-		local var18 = function() --[[ line: 247 ]]
+		local var18 = function()
 			-- upvalues: var12 (copy), p7 (ref), p8 (ref), p9 (ref)
 			return var12(p7, p8, p9)
 		end
@@ -175,7 +175,7 @@ local function attachPingListener(p7, p8, p9) --[[ line: 219 ]]
 	end
 end
 
-function throwException(p10, p11, p12, p13, p14, p15, p16) --[[ line: 254 ]]
+function throwException(p10, p11, p12, p13, p14, p15, p16)
 	-- upvalues: incomplete (ref), reactGlobalsModule (ref), enableDebugTracing (ref), debugTracingMode (ref), getComponentName (ref), logComponentSuspended (ref), enableSchedulingProfiler (ref), markComponentSuspended (ref), blockingMode (ref), noMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), suspenseComponent (ref), shouldCaptureSuspense (ref), didCapture (ref), forceUpdateForLegacySuspense (ref), lifecycleEffectMask (ref), classComponent (ref), incompleteClassComponent (ref), createUpdate (ref), noTimestamp (ref), syncLane (ref), forceUpdate (ref), enqueueUpdate (ref), mergeLanes (ref), attachPingListener (ref), shouldCapture (ref), createCapturedValue (ref), hostRoot (ref), pickArbitraryLane (ref), enqueueCapturedUpdate (ref), noFlags (ref), var13 (ref)
 	local var20, var21
 	p12.flags = bit32.bor(p12.flags, incomplete)

@@ -4,7 +4,7 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
 local contactProfileHeaderModule = require(profilePlatform.Components.ContactProfileHeader.ContactProfileHeader)
 
-return function(p0) --[[ line: 18 | named "ContactProfileHeaderContainer" ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), contactProfileHeaderModule (ref)
 	local var5 = useProfileJsonComponentModule(enumsModule.Components.ContactProfileHeader)
 	

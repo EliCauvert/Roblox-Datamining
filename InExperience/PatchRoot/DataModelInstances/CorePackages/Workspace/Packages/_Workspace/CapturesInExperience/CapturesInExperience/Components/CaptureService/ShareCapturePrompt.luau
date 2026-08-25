@@ -20,7 +20,7 @@ local shareCapturePromptFinishedModule = require(parent.Thunks.ShareCapturePromp
 local _ = require(parent.Types)
 local fFlagCapturePermissionsPromptFreeMouseModule = require(parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useScreenSize (ref), reactModule (ref), useLocalization (ref), usePinInputStateWhileOpenModule (ref), fFlagCapturePermissionsPromptFreeMouseModule (ref), eventNamesModule (ref), shareCapturePromptFinishedModule (ref), buttonType (ref), view (ref), capturePromptItemModule (ref), interactiveAlert (ref)
 	local var12 = useAnalyticsModule()
 	local var13 = useDispatch()
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 40 ]]
 	local var25 = if isU13LocalSavePrompt then var23.saveTitle else var23.shareTitle
 	local var26 = if isU13LocalSavePrompt then var23.saveYes else var23.shareYes
 	usePinInputStateWhileOpenModule(fFlagCapturePermissionsPromptFreeMouseModule)
-	reactModule.useEffect(function() --[[ line: 71 ]]
+	reactModule.useEffect(function()
 		-- upvalues: isU13LocalSavePrompt (ref), var12 (ref), eventNamesModule (copy), var22 (ref)
 		if not isU13LocalSavePrompt then
 			var12.fireEvent(eventNamesModule.ShareCapturePromptViewed)
@@ -55,15 +55,15 @@ return function(p0) --[[ line: 40 ]]
 			end
 		end
 	end, { var12.fireEvent, isU13LocalSavePrompt, var22 })
-	local var27 = reactModule.useCallback(function(p1) --[[ line: 80 ]]
+	local var27 = reactModule.useCallback(function(p1)
 		-- upvalues: var16 (ref)
 		var16(p1.AbsoluteSize)
 	end, { var16 })
-	local var28 = reactModule.useCallback(function(p2) --[[ line: 84 ]]
+	local var28 = reactModule.useCallback(function(p2)
 		-- upvalues: var18 (ref)
 		var18(p2.AbsoluteSize)
 	end, { var18 })
-	local var29 = reactModule.useCallback(function() --[[ line: 89 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: isU13LocalSavePrompt (ref), var12 (ref), eventNamesModule (copy), var22 (ref), var13 (ref), shareCapturePromptFinishedModule (copy), p0 (ref)
 		if not isU13LocalSavePrompt then
 			var12.fireEvent(eventNamesModule.ShareCapturePromptAccepted)
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 40 ]]
 	end, {
 		var12.fireEvent, var13, isU13LocalSavePrompt, var22, p0.promptData, p0.promptId
 	})
-	local var30 = reactModule.useCallback(function() --[[ line: 103 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: isU13LocalSavePrompt (ref), var12 (ref), eventNamesModule (copy), var22 (ref), var13 (ref), shareCapturePromptFinishedModule (copy), p0 (ref)
 		if not isU13LocalSavePrompt then
 			var12.fireEvent(eventNamesModule.ShareCapturePromptRejected)
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 40 ]]
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
 		bodyText = var24,
-		buttonStackInfo = reactModule.useMemo(function() --[[ line: 120 ]]
+		buttonStackInfo = reactModule.useMemo(function()
 			-- upvalues: var30 (ref), var23 (ref), buttonType (copy), var21 (ref), var29 (ref), var26 (ref)
 			return {
 				buttons = {
@@ -121,7 +121,7 @@ return function(p0) --[[ line: 40 ]]
 			var30,
 			var26
 		}),
-		middleContent = reactModule.useCallback(function() --[[ line: 146 ]]
+		middleContent = reactModule.useCallback(function()
 			-- upvalues: var15 (ref), var17 (ref), var14 (ref), reactModule (copy), view (copy), var28 (ref), capturePromptItemModule (copy), content (ref)
 			return reactModule.createElement(view, {
 				Size = UDim2.new(1, 0, 0, 200),
@@ -134,14 +134,14 @@ return function(p0) --[[ line: 40 ]]
 					isSelected = true,
 					showCheckbox = false,
 					content = content,
-					updateSelected = function() --[[ line: 161 ]] end
+					updateSelected = function() end
 				})
 			})
 		end, {
 			var15,
 			content,
 			var17,
-			reactModule.useCallback(function(p3) --[[ line: 116 ]]
+			reactModule.useCallback(function(p3)
 				-- upvalues: var20 (ref)
 				var20(p3.Resolution)
 			end, { var20 }),

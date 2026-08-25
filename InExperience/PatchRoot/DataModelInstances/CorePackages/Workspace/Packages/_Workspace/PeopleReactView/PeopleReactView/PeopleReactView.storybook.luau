@@ -27,17 +27,17 @@ local t_1 = {
 	["Feature.SettingsHub.Action.Ok"] = "Ok"
 }
 local t_2 = {
-	Format = function(_, p0) --[[ line: 40 ]]
+	Format = function(_, p0)
 		-- upvalues: t_1 (ref)
 		return t_1[p0] or p0
 	end,
 	changed = signal.new(),
-	GetLocale = function() --[[ line: 44 ]]
+	GetLocale = function()
 		return "en-us"
 	end
 }
 
-local function StyleLinkPortal(p1) --[[ line: 49 ]]
+local function StyleLinkPortal(p1)
 	-- upvalues: useStyleSheet (ref), reactRobloxModule (ref), reactModule (ref)
 	return reactRobloxModule.createPortal(reactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() }), p1.overlay)
 end
@@ -47,16 +47,16 @@ return {
 	storyRoot = peopleReactView,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2) --[[ line: 60 ]]
+	mapStory = function(p2)
 		-- upvalues: reactModule (ref), localizationProvider (ref), t_2 (ref), foundationProvider (ref), foundationModule (ref), t (ref), StyleLinkPortal (ref)
-		return function(p3) --[[ line: 61 ]]
+		return function(p3)
 			-- upvalues: reactModule (copy), localizationProvider (copy), t_2 (copy), foundationProvider (copy), foundationModule (copy), t (copy), p2 (ref), StyleLinkPortal (copy)
 			local var8 = reactModule.useRef(Instance.new("Frame"))
 			
 			if var8.current.Parent ~= p3.focus then
 				var8.current.Parent = p3.focus
 			end
-			reactModule.useLayoutEffect(function() --[[ line: 67 ]]
+			reactModule.useLayoutEffect(function()
 				-- upvalues: var8 (ref)
 				var8.current.Size = UDim2.fromScale(1, 1)
 				var8.current.BackgroundTransparency = 1

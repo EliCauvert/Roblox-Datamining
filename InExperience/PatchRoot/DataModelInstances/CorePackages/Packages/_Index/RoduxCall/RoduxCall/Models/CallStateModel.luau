@@ -3,7 +3,7 @@ local status = require(roduxCall.Enums).Status
 local tModule = require(roduxCall.Parent.t)
 local t = {}
 
-function t.new(p0) --[[ line: 10 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -12,7 +12,7 @@ function t.new(p0) --[[ line: 10 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 22 ]]
+function t.mock(p1)
 	-- upvalues: t (ref), status (ref)
 	p1 = p1 or {}
 	
@@ -31,7 +31,7 @@ function t.mock(p1) --[[ line: 22 ]]
 	})
 end
 
-function t.format(p2) --[[ line: 42 ]]
+function t.format(p2)
 	-- upvalues: t (ref)
 	return t.new({
 		status = p2.status,

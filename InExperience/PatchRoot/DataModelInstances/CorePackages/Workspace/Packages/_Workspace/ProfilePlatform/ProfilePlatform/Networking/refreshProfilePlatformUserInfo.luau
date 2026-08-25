@@ -3,7 +3,7 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local _ = require(profilePlatform.Types.Component)
 local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
 
-function GetProfilePlatform(p0) --[[ line: 10 ]]
+function GetProfilePlatform(p0)
 	-- upvalues: enumsModule (ref), getProfilePlatformModule (ref)
 	local list = {
 		{ component = enumsModule.Components.UserProfileHeader },

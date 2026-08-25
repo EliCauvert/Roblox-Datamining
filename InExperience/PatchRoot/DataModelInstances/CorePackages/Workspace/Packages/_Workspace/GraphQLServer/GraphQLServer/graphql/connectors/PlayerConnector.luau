@@ -15,11 +15,11 @@ local var2 = require(parent.UrlBuilder).UrlBuilder.new({
 	}
 })
 
-function t.findAvatarHeadshotById(p0, p1) --[[ line: 25 ]]
+function t.findAvatarHeadshotById(p0, p1)
 	-- upvalues: fetch (ref), promiseModule (ref), var2 (ref), graphQLError (ref)
 	local var3 = p1 or fetch
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 28 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: var2 (copy), p0 (ref), var3 (ref), graphQLError (copy)
 		local var4 = var3(var2({ userIds = p0 }), { method = "GET" }):expect()
 		
@@ -28,7 +28,7 @@ function t.findAvatarHeadshotById(p0, p1) --[[ line: 25 ]]
 			
 			return
 		end
-		local var5 = var4:json():catch(function() --[[ line: 48 ]]
+		local var5 = var4:json():catch(function()
 			return nil
 		end):expect()
 		

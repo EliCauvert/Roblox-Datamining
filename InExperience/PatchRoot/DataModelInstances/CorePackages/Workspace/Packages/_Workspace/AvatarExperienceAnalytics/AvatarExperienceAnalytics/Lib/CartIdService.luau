@@ -2,11 +2,11 @@
 local var1 = httpService:GenerateGUID(false)
 
 return {
-	getCartId = function() --[[ line: 5 ]]
+	getCartId = function()
 		-- upvalues: var1 (write)
 		return var1
 	end,
-	refreshCartId = function() --[[ line: 9 ]]
+	refreshCartId = function()
 		-- upvalues: var1 (write), httpService (ref)
 		var1 = httpService:GenerateGUID(false)
 	end

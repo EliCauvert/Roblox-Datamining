@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
 
-return function(p0, p1) --[[ line: 6 | named "migrateFontSize" ]]
+return function(p0, p1)
 	local size100 = p1.Size.Size_100
 	local size600 = p1.Size.Size_600
 	

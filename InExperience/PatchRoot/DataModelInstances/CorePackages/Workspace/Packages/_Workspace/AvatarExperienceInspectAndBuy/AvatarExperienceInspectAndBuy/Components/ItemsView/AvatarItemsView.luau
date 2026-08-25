@@ -8,7 +8,7 @@ local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 local itemCardRowContainerModule = require(avatarExperienceInspectAndBuy.Components.ItemsView.ItemCardRowContainer)
 
-local var5 = function(p0, p1) --[[ line: 45 ]]
+local var5 = function(p0, p1)
 	-- upvalues: viewTypeModule (ref)
 	return if p0 == viewTypeModule.WideLandscape then {
 		left = UDim.new(0, p1.Padding.XLarge),
@@ -26,12 +26,12 @@ local var5 = function(p0, p1) --[[ line: 45 ]]
 	}
 end
 
-return reactModule.forwardRef(function(p2, p3) --[[ line: 68 ]]
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: useTokens (ref), reactModule (ref), viewTypeModule (ref), var5 (ref), itemCardRowContainerModule (ref), skeleton (ref)
 	local var6 = useTokens()
 	local headerHeightOffset = p2.headerHeightOffset or 0
 	local actionBarHeightOffset = p2.actionBarHeightOffset or 0
-	local var9 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), viewTypeModule (copy), var6 (ref)
 		return if p2.view == viewTypeModule.Wide then var6.Size.Size_2500 else var6.Size.Size_2000
 	end, { p2.view, var6 })
@@ -41,7 +41,7 @@ return reactModule.forwardRef(function(p2, p3) --[[ line: 68 ]]
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		LayoutOrder = 2,
-		Size = reactModule.useMemo(function() --[[ line: 130 ]]
+		Size = reactModule.useMemo(function()
 			-- upvalues: p2 (ref), viewTypeModule (copy), headerHeightOffset (ref), var6 (ref), actionBarHeightOffset (ref)
 			return if p2.view == viewTypeModule.Compact then UDim2.new(1, 0, 1, (-headerHeightOffset) - var6.Padding.Small - actionBarHeightOffset) else UDim2.new(1, 0, 1, (-headerHeightOffset) - var6.Padding.Small)
 		end, { p2.view, headerHeightOffset, var6, actionBarHeightOffset }),
@@ -50,7 +50,7 @@ return reactModule.forwardRef(function(p2, p3) --[[ line: 68 ]]
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		ScrollingDirection = Enum.ScrollingDirection.Y,
 		ref = p3
-	}, reactModule.useCallback(function() --[[ line: 81 ]]
+	}, reactModule.useCallback(function()
 		-- upvalues: var5 (copy), p2 (ref), var6 (ref), reactModule (copy), itemCardRowContainerModule (copy), var9 (ref), skeleton (copy)
 		local var10 = var5(p2.view, var6)
 		local t = {

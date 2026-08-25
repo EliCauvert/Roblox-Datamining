@@ -7,7 +7,7 @@ local bulkPurchaseEndedModule = require(bulkPurchaseApp.Store.Actions.BulkPurcha
 local selectPurchaseResultsModule = require(bulkPurchaseApp.Store.Selectors.selectPurchaseResults)
 local _ = require(script.Parent.BulkPurchaseSuccess)
 
-return function() --[[ line: 12 | named "useBulkPurchaseSuccessProps" ]]
+return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectPurchaseResultsModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
 	local var4 = useDispatch()
 	local var5 = useSelector(selectPurchaseResultsModule)
@@ -19,7 +19,7 @@ return function() --[[ line: 12 | named "useBulkPurchaseSuccessProps" ]]
 		end
 	end
 	return {
-		onDismiss = function() --[[ line: 23 ]]
+		onDismiss = function()
 			-- upvalues: marketplaceService (copy), var5 (ref), var4 (ref), bulkPurchaseEndedModule (copy)
 			marketplaceService:signalPromptBulkPurchaseFinished(1, var5)
 			var4(bulkPurchaseEndedModule())

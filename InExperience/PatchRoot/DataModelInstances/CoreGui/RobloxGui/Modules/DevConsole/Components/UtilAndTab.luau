@@ -17,7 +17,7 @@ local tabRowContainerModule = require(parent.TabRowContainer)
 local searchBarModule = require(parent.SearchBar)
 local utilAndTab = roactModule.Component:extend("UtilAndTab")
 
-function utilAndTab.init(p0) --[[ line: 29 ]]
+function utilAndTab.init(p0)
 	-- upvalues: textService (ref), constantsModule (ref), roactModule (ref)
 	local tabList = p0.props.tabList
 	local var8 = 0
@@ -27,12 +27,12 @@ function utilAndTab.init(p0) --[[ line: 29 ]]
 		var8 += textService:GetTextSize(i, constantsModule.DefaultFontSize.TabBar, constantsModule.Font.TabBar, Vector2.new(0, 0)).X
 		var9 += 1
 	end
-	function p0.showSearchBar() --[[ line: 41 ]]
+	function p0.showSearchBar()
 		-- upvalues: p0 (ref)
 		p0:setState({ activeSearchTerm = true })
 	end
 	
-	function p0.cancelInput(_, p1) --[[ line: 47 ]]
+	function p0.cancelInput(_, p1)
 		-- upvalues: p0 (ref)
 		if p1.UserInputType == Enum.UserInputType.MouseButton1 or p1.UserInputType == Enum.UserInputType.Touch and p1.UserInputState == Enum.UserInputState.End then
 			if p0.searchRef.current then
@@ -47,7 +47,7 @@ function utilAndTab.init(p0) --[[ line: 29 ]]
 		end
 	end
 	
-	function p0.focusLost(p2, p3, _) --[[ line: 68 ]]
+	function p0.focusLost(p2, p3, _)
 		-- upvalues: p0 (ref)
 		if p3 then
 			local text = p2.text
@@ -73,7 +73,7 @@ function utilAndTab.init(p0) --[[ line: 29 ]]
 	p0.searchRef = roactModule.createRef()
 end
 
-function utilAndTab.render(p4) --[[ line: 94 ]]
+function utilAndTab.render(p4)
 	-- upvalues: tabOverlapThreshold (ref), constantsModule (ref), smallFrameHeight (ref), frameHeight_1 (ref), roactModule (ref), clientServerButtonWidth (ref), mainRowPadding (ref), smallUtilPadding (ref), tabDropDownWidth (ref), clientServerDropDownWidth (ref), textService (ref), tabRowContainerModule (ref), clientServerButtonModule (ref), checkboxContainerModule (ref), searchBarModule (ref), frameHeight (ref)
 	local windowWidth = p4.props.windowWidth
 	local formFactor = p4.props.formFactor

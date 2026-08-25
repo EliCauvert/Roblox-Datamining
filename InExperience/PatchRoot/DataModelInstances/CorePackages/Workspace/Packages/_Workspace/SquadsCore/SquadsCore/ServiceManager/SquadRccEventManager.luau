@@ -6,18 +6,18 @@ local t = {}
 t.__index = t
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-function t.new() --[[ line: 29 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({ isLeaveSquadPending = false, lastFiredSquadId = "" }, t)
 end
 
-function t:setLeaveSquadPendingAndFireEvent(p0, p1) --[[ line: 40 ]]
+function t:setLeaveSquadPendingAndFireEvent(p0, p1)
 	if self:_setLeaveSquadPending(p0) then
 		self:fireSquadChangeEvent(nil, p1)
 	end
 end
 
-function t:fireSquadChangeEvent(p2, p3) --[[ line: 46 ]]
+function t:fireSquadChangeEvent(p2, p3)
 	-- upvalues: validateSquadIdModule (ref), socialService (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref)
 	p2 = p2 or ""
 	assert(if p2 ~= "" then validateSquadIdModule(p2) else true, "Try to fire with wrong squadId")
@@ -31,7 +31,7 @@ function t:fireSquadChangeEvent(p2, p3) --[[ line: 46 ]]
 	end
 end
 
-function t:_setLeaveSquadPending(p4) --[[ line: 63 ]]
+function t:_setLeaveSquadPending(p4)
 	if self.isLeaveSquadPending == p4 then
 		return false
 	end

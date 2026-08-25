@@ -13,13 +13,13 @@ local shopViewModule = require(script.Parent.ShopView)
 local useShopViewModelModule = require(script.Parent.useShopViewModel)
 local var12 = false
 
-return function(p0) --[[ line: 25 | named "ShopContainer" ]]
+return function(p0)
 	-- upvalues: signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), fFlagEnableShopPrefetchModule (ref), var12 (write), shopDebugLoggerModule (ref), logCounterModule (ref), openCounterModule (ref), firstOpenCounterModule (ref), firstOpenPrefetchHitCounterModule (ref), useShopViewModelModule (ref), shopViewModule (ref)
 	local var13 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableShopPrefetchModule (copy), var12 (copy), shopDebugLoggerModule (copy), logCounterModule (copy), openCounterModule (copy), firstOpenCounterModule (copy), var13 (ref), firstOpenPrefetchHitCounterModule (copy)
 		local var14 = fFlagEnableShopPrefetchModule and not var12
-		shopDebugLoggerModule.logLazy(function() --[[ line: 51 ]]
+		shopDebugLoggerModule.logLazy(function()
 			-- upvalues: var14 (ref)
 			return "ShopContainer: mount isFirstOpen=" .. tostring(var14)
 		end)
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 25 | named "ShopContainer" ]]
 			var12 = true
 			logCounterModule(firstOpenCounterModule)
 			local var15 = #var13.getCategories(false) > 0
-			shopDebugLoggerModule.logLazy(function() --[[ line: 61 ]]
+			shopDebugLoggerModule.logLazy(function()
 				-- upvalues: var15 (ref)
 				return "ShopContainer: prefetch cache hit=" .. tostring(var15)
 			end)
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 25 | named "ShopContainer" ]]
 				logCounterModule(firstOpenPrefetchHitCounterModule)
 			end
 		end
-		task.spawn(function() --[[ line: 68 ]]
+		task.spawn(function()
 			-- upvalues: shopDebugLoggerModule (copy), var13 (copy)
 			shopDebugLoggerModule.log("ShopContainer: calling onShopOpened")
 			var13.onShopOpened()

@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function(p0) --[[ line: 16 | named "LinearProgressComponent" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var1 = useTokens()
 	
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 16 | named "LinearProgressComponent" ]]
 	}, {
 		progressFill = reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = p0.alpha:map(function(p1) --[[ line: 31 ]]
+			Size = p0.alpha:map(function(p1)
 				return UDim2.fromScale(p1, 1)
 			end),
 			BackgroundColor3 = var1.Color.Extended.White.White_100.Color3

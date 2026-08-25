@@ -1,11 +1,11 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-return function(p0) --[[ line: 13 | named "useInputConnections" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(false)
 	local var2 = reactModule.useRef(nil)
 	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useCallback(function() --[[ line: 18 ]]
+	local var4 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref), var3 (ref), var1 (ref)
 		if var2.current then
 			var2.current:Disconnect()
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 13 | named "useInputConnections" ]]
 		end
 		var1.current = false
 	end, {})
-	local var5 = reactModule.useCallback(function(p1) --[[ line: 32 ]]
+	local var5 = reactModule.useCallback(function(p1)
 		-- upvalues: var1 (ref), var2 (ref), p0 (ref), var3 (ref), var4 (ref)
 		if p1 and not var1.current then
 			var2.current = p0.userInputService.InputBegan:Connect(p0.onInputBegan)
@@ -33,9 +33,9 @@ return function(p0) --[[ line: 13 | named "useInputConnections" ]]
 			end
 		end
 	end, { p0.onInputBegan, p0.onInputEnded, var4, p0.onFocusLost })
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), var4 (ref)
-		return function() --[[ line: 54 ]]
+		return function()
 			-- upvalues: var1 (copy), var4 (copy)
 			if var1.current then
 				var4()

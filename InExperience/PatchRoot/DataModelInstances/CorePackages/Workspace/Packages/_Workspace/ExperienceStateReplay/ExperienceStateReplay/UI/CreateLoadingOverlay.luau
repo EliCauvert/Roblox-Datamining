@@ -1,5 +1,5 @@
 ﻿return {
-	createLoadingOverlay = function(loadingLabel) --[[ line: 4 ]]
+	createLoadingOverlay = function(loadingLabel)
 		loadingLabel.LoadingOverlay = Instance.new("Frame")
 		loadingLabel.LoadingOverlay.Name = "LoadingOverlay"
 		loadingLabel.LoadingOverlay.BackgroundColor3 = loadingLabel.defaultBackgroundColor3

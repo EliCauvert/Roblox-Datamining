@@ -14,9 +14,9 @@ local url = require(game:GetService("CorePackages").Workspace.Packages.CoreScrip
 local serverUtilModule = require(robloxGui.Modules.Server.ServerUtil)
 local fFlagUserPresenceTokenRccCheckPermissionsLuaModule = require(robloxGui.Modules.Common.Flags.FFlagUserPresenceTokenRccCheckPermissionsLua)
 
-return function() --[[ line: 35 | named "Install" ]]
+return function()
 	-- upvalues: playerScriptStatusProperty (ref), starterPlayerService (ref), serverUtilModule (ref), runService (ref), luaGetCanManageAsync (ref), url (ref), httpService (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (ref), httpRbxApiService (ref), list (ref), allowLuobuFreecamGroup (ref), policyService (ref), list_1 (ref), playersService (ref)
-	local function WaitForChildOfClass(p0, p1) --[[ line: 36 ]]
+	local function WaitForChildOfClass(p0, p1)
 		local var18 = p0:FindFirstChildOfClass(p1)
 		while not var18 or var18.ClassName ~= p1 do
 			var18 = p0.ChildAdded:Wait()
@@ -24,7 +24,7 @@ return function() --[[ line: 35 | named "Install" ]]
 		return var18
 	end
 	
-	local function AddFreeCamera(p2) --[[ line: 44 ]]
+	local function AddFreeCamera(p2)
 		-- upvalues: WaitForChildOfClass (ref), playerScriptStatusProperty (copy), starterPlayerService (copy), serverUtilModule (copy)
 		local var20
 		local var19 = WaitForChildOfClass(p2, "PlayerGui")
@@ -51,7 +51,7 @@ return function() --[[ line: 35 | named "Install" ]]
 		freecam.Parent = var19
 	end
 	
-	local function ShouldAddFreeCam(p3) --[[ line: 73 ]]
+	local function ShouldAddFreeCam(p3)
 		-- upvalues: runService (copy), luaGetCanManageAsync (copy), url (copy), httpService (copy), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy), list (copy), allowLuobuFreecamGroup (copy), policyService (copy), list_1 (copy)
 		if runService:IsStudio() then
 			return true
@@ -64,7 +64,7 @@ return function() --[[ line: 35 | named "Install" ]]
 				return true
 			end
 		else
-			local ok, status = pcall(function() --[[ line: 88 ]]
+			local ok, status = pcall(function()
 				-- upvalues: url (copy), httpService (copy), p3 (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy)
 				local formattedText = string.format(url.APIS_URL .. "asset-permissions-api/v1/rcc/assets/check-permissions")
 				local var24 = httpService:JSONEncode({
@@ -108,7 +108,7 @@ return function() --[[ line: 35 | named "Install" ]]
 		return false
 	end
 	
-	local function PlayerAdded(p4) --[[ line: 144 ]]
+	local function PlayerAdded(p4)
 		-- upvalues: ShouldAddFreeCam (ref), AddFreeCamera (ref)
 		if ShouldAddFreeCam(p4) then
 			AddFreeCamera(p4)

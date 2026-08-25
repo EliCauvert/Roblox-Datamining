@@ -11,7 +11,7 @@ local guiService = game:GetService("GuiService")
 local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p0) --[[ line: 28 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useScreenSize (ref), useStyle (ref), reactModule (ref), useLastInputMethod (ref), useLocalization (ref), useEscapeDismissModule (ref), guiService (ref), buttonType (ref), interactiveAlert (ref)
 	local headerUnder13, hintUnder13
 	local var5 = useScreenSize()
@@ -19,7 +19,7 @@ return reactModule.memo(function(p0) --[[ line: 28 ]]
 	local var7 = reactModule.useRef(nil)
 	local var8 = useLastInputMethod()
 	local var9, var10 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var8 (ref), var10 (ref)
 		if not var9 and (var8 == "Keyboard" or var8 == "Gamepad") then
 			var10(true)
@@ -49,7 +49,7 @@ return reactModule.memo(function(p0) --[[ line: 28 ]]
 		headerUnder13 = var11.HeaderDefault
 		hintUnder13 = var11.HintDefault
 	end
-	local var12 = reactModule.useCallback(function() --[[ line: 68 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), reactModule (copy), headerUnder13 (write), hintUnder13 (write)
 		local body = var6.Font.Body
 		local header2 = var6.Font.Header2 or var6.Font.Body
@@ -96,29 +96,29 @@ return reactModule.memo(function(p0) --[[ line: 28 ]]
 			})
 		})
 	end, { var6, headerUnder13, hintUnder13 })
-	local var13 = reactModule.useCallback(function() --[[ line: 116 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.closePrompt()
 	end, { p0.closePrompt })
 	useEscapeDismissModule("UnavailablePromptCancel", var13)
-	local var14 = reactModule.useCallback(function(p1) --[[ line: 122 ]]
+	local var14 = reactModule.useCallback(function(p1)
 		-- upvalues: var7 (ref), var9 (ref), guiService (copy)
 		var7.current = p1
 		
 		if var9 and p1 then
-			pcall(function() --[[ line: 125 ]]
+			pcall(function()
 				-- upvalues: guiService (copy), p1 (ref)
 				guiService:Select(p1)
 			end)
 		end
 	end, { var9 })
-	reactModule.useEffect(function() --[[ line: 131 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var7 (ref), guiService (copy)
 		if not var9 then return end
 		local current = var7.current
 		
 		if current then
-			pcall(function() --[[ line: 137 ]]
+			pcall(function()
 				-- upvalues: guiService (copy), current (ref)
 				guiService:Select(current)
 			end)
@@ -128,7 +128,7 @@ return reactModule.memo(function(p0) --[[ line: 28 ]]
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
 		title = var11.Title,
-		buttonStackInfo = reactModule.useMemo(function() --[[ line: 143 ]]
+		buttonStackInfo = reactModule.useMemo(function()
 			-- upvalues: buttonType (copy), var13 (ref), var11 (ref), var14 (ref), var9 (ref)
 			return {
 				buttons = {

@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 4 | named "cleanRichTextTags" ]]
+﻿return function(p0)
 	local var0 = ""
 	local var1 = 0
 	

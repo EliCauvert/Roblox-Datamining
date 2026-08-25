@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 
-return function(value) --[[ line: 21 | named "useStableSignal" ]]
+return function(value)
 	-- upvalues: reactModule (ref), signalsModule (ref)
 	local var2 = reactModule.useRef(nil)
 	

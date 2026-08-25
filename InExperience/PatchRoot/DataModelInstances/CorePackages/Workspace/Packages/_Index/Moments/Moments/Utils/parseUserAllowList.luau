@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 7 | named "parseUserAllowList" ]]
+﻿return function(p0, p1)
 	if not p0 or p0 == "" then
 		return false
 	end

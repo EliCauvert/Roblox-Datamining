@@ -1,7 +1,7 @@
 ﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
 
 return dependenciesModule.Rodux.createReducer({}, {
-	[dependenciesModule.FriendsNetworking.GetUserFollowers.Succeeded.name] = function(_, p0) --[[ line: 10 ]]
+	[dependenciesModule.FriendsNetworking.GetUserFollowers.Succeeded.name] = function(_, p0)
 		local t = {}
 		
 		for i, v in ipairs(p0.responseBody.data) do

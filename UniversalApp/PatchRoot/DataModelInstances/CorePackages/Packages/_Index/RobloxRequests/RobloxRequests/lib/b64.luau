@@ -1,5 +1,5 @@
-﻿function enc(p0) --[[ line: 6 ]]
-	return (p0:gsub(".", function(p2) --[[ line: 7 ]]
+﻿function enc(p0)
+	return (p0:gsub(".", function(p2)
 		local var1 = ""
 		local var2 = p2:byte()
 		
@@ -7,7 +7,7 @@
 			var1 ..= if var2 % 2 ^ i - var2 % 2 ^ (i - 1) > 0 then "1" else "0"
 		end
 		return var1
-	end) .. "0000"):gsub("%d%d%d?%d?%d?%d?", function(p1) --[[ line: 11 ]]
+	end) .. "0000"):gsub("%d%d%d?%d?%d?%d?", function(p1)
 		if #p1 < 6 then
 			return ""
 		end
@@ -20,8 +20,8 @@
 	end) .. ({ "", "==", "=" })[#p0 % 3 + 1]
 end
 
-function dec(p3) --[[ line: 20 ]]
-	return string.gsub(p3, "[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]", ""):gsub(".", function(p5) --[[ line: 22 ]]
+function dec(p3)
+	return string.gsub(p3, "[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]", ""):gsub(".", function(p5)
 		if p5 == "=" then
 			return ""
 		end
@@ -32,7 +32,7 @@ function dec(p3) --[[ line: 20 ]]
 			var4 ..= if var5 % 2 ^ i - var5 % 2 ^ (i - 1) > 0 then "1" else "0"
 		end
 		return var4
-	end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(p4) --[[ line: 27 ]]
+	end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(p4)
 		if #p4 ~= 8 then
 			return ""
 		end
@@ -45,7 +45,7 @@ function dec(p3) --[[ line: 20 ]]
 	end)
 end
 
-function safe_enc(p6, p7) --[[ line: 35 ]]
+function safe_enc(p6, p7)
 	if p7 == nil then
 		p7 = true
 	end

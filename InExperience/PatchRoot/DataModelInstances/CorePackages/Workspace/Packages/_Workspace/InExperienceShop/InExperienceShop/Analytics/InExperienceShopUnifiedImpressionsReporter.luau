@@ -7,9 +7,9 @@ local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.U
 local constantsModule = require(script.Parent.Constants)
 local inExperienceShopUnifiedEventFilterModule = require(script.Parent.InExperienceShopUnifiedEventFilter)
 
-return function(p0) --[[ line: 14 | named "InExperienceShopUnifiedImpressionsReporter" ]]
+return function(p0)
 	-- upvalues: constantsModule (ref), unifiedLoggingSurface (ref), fFlagAllowCustomUnifiedEventFilter (ref), inExperienceShopUnifiedEventFilterModule (ref), sendUnifiedEventLogForInstance (ref), unifiedEventLogEnums (ref)
-	return function(p1) --[[ line: 15 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), constantsModule (copy), unifiedLoggingSurface (copy), fFlagAllowCustomUnifiedEventFilter (copy), inExperienceShopUnifiedEventFilterModule (copy), sendUnifiedEventLogForInstance (copy), unifiedEventLogEnums (copy)
 		sendUnifiedEventLogForInstance(p1.visibleInstance, {
 			action = unifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_IMPRESSION,

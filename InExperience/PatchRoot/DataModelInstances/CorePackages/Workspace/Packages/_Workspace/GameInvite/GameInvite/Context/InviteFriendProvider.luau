@@ -21,17 +21,17 @@ local getFFlagFriendsMenuDummyLoadingFriendsFix = sharedFlagsModule.GetFFlagFrie
 local fFlagUseSignalsForGameInvitesStatus = sharedFlagsModule.FFlagUseSignalsForGameInvitesStatus
 local var9 = if fFlagUseSignalsForGameInvitesStatus then require(parent_1.NotificationsCommon).GetGameInvitesStatusStore else nil
 
-return function(p0) --[[ line: 46 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), fFlagUseSignalsForGameInvitesStatus (ref), useSignalState (ref), var9 (ref), useSelector (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (ref), inviteStatus (ref), receivedUserInviteStatusModule (ref), gameInviteAnalyticsManagerModule (ref), postSendExperienceInviteModule (ref), networkImpl (ref), playersService (ref), throttle (ref), inviteFriendContext (ref)
 	local var10 = useDispatch()
 	local var11 = reactModule.useRef(0)
-	local var12 = if fFlagUseSignalsForGameInvitesStatus then useSignalState(var9(false).getGameInvitesStatus) else useSelector(function(p1) --[[ line: 53 ]]
+	local var12 = if fFlagUseSignalsForGameInvitesStatus then useSignalState(var9(false).getGameInvitesStatus) else useSelector(function(p1)
 		return p1.GameInvitesStatus
 	end)
 	
 	return reactModule.createElement(inviteFriendContext.Provider, {
 		value = {
-			inviteSingleFriend = throttle(function(p2, p3) --[[ line: 61 ]]
+			inviteSingleFriend = throttle(function(p2, p3)
 				-- upvalues: var11 (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (copy), var12 (ref), inviteStatus (copy), p0 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var9 (copy), var10 (ref), receivedUserInviteStatusModule (copy), gameInviteAnalyticsManagerModule (copy), postSendExperienceInviteModule (copy), networkImpl (copy), playersService (copy)
 				var11.current = math.max(p3, var11.current)
 				
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 46 ]]
 					else
 						var10(receivedUserInviteStatusModule(p2, inviteStatus.Pending))
 					end
-					postSendExperienceInviteModule(networkImpl, p2, var13, p0.trigger, p0.inviteMessageId, p0.launchData):andThen(function(p4) --[[ line: 116 ]]
+					postSendExperienceInviteModule(networkImpl, p2, var13, p0.trigger, p0.inviteMessageId, p0.launchData):andThen(function(p4)
 						-- upvalues: playersService (copy), p2 (ref), gameInviteAnalyticsManagerModule (copy), p0 (copy), fFlagUseSignalsForGameInvitesStatus (copy), var9 (copy), inviteStatus (copy), var10 (copy), receivedUserInviteStatusModule (copy)
 						gameInviteAnalyticsManagerModule:onActivatedInviteSent(playersService.LocalPlayer.UserId, p4.conversationId, { p2 }, p0.rootPlaceId, p0.universeId)
 						
@@ -79,7 +79,7 @@ return function(p0) --[[ line: 46 ]]
 							return
 						end
 						var10(receivedUserInviteStatusModule(p2, inviteStatus.Success))
-					end, function() --[[ line: 132 ]]
+					end, function()
 						-- upvalues: gameInviteAnalyticsManagerModule (copy), p0 (copy), var14 (ref), var15 (ref), var16 (ref), p2 (ref), p3 (ref), fFlagUseSignalsForGameInvitesStatus (copy), var9 (copy), inviteStatus (copy), var10 (copy), receivedUserInviteStatusModule (copy)
 						gameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p0.trigger, {
 							action_type = gameInviteAnalyticsManagerModule.ActionType.InviteFailure,
@@ -99,7 +99,7 @@ return function(p0) --[[ line: 46 ]]
 					end)
 				end
 			end),
-			getMaxRecipientRowNum = function() --[[ line: 57 ]]
+			getMaxRecipientRowNum = function()
 				-- upvalues: var11 (ref)
 				return var11.current
 			end

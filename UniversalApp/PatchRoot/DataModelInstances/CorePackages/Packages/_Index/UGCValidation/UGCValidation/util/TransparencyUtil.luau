@@ -1,5 +1,5 @@
 ﻿return {
-	transformTriangleToWorld = function(vectorA, vectorB, p0, p1, p2) --[[ line: 10 ]]
+	transformTriangleToWorld = function(vectorA, vectorB, p0, p1, p2)
 		local var0 = p1 * (vectorA * p2)
 		local var1 = p1 * (vectorB * p2)
 		local var2 = p1 * (p0 * p2)

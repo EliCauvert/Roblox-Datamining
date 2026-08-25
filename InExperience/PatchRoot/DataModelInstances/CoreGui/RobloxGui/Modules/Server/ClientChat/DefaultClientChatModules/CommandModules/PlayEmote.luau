@@ -2,14 +2,14 @@
 local playersService = game:GetService("Players")
 local utilModule = require(script.Parent:WaitForChild("Util"))
 local t = nil
-pcall(function() --[[ line: 13 ]]
+pcall(function()
 	-- upvalues: t (write), chatService (ref)
 	t = require(chatService.ClientChatModules.ChatLocalization)
 end)
 
 if t == nil then
 	t = {
-		Get = function(_, _, p0) --[[ line: 14 ]]
+		Get = function(_, _, p0)
 			return p0
 		end
 	}
@@ -42,18 +42,18 @@ local t_2 = {
 }
 local color = Color3.fromRGB(245, 50, 50)
 
-local function _(p1) --[[ line: 48 | named "getEmoteName" ]]
+local function _(p1)
 	return if string.sub(p1, 1, 3) == "/e " then string.sub(p1, 4) elseif string.sub(p1, 1, 7) == "/emote " then string.sub(p1, 8) else nil
 end
 
-local _ = function(p2, p3) --[[ line: 58 | named "sendErrorMessage" ]]
+local _ = function(p2, p3)
 	-- upvalues: t (write), t_2 (ref), color (ref), utilModule (ref)
 	utilModule:SendSystemMessageToSelf(t:Get(p3, t_2[p3]), p2, { ChatColor = color })
 end
 
 return {
 	[utilModule.KEY_COMMAND_PROCESSOR_TYPE] = utilModule.COMPLETED_MESSAGE_PROCESSOR,
-	[utilModule.KEY_PROCESSOR_FUNCTION] = function(p4, p5, _) --[[ line: 67 ]]
+	[utilModule.KEY_PROCESSOR_FUNCTION] = function(p4, p5, _)
 		-- upvalues: t_1 (ref), localPlayer (ref), t (write), t_2 (ref), color (ref), utilModule (ref)
 		local var7 = if string.sub(p4, 1, 3) == "/e " then string.sub(p4, 4) elseif string.sub(p4, 1, 7) == "/emote " then string.sub(p4, 8) else nil
 		
@@ -120,9 +120,9 @@ return {
 		var7 = t_3[string.lower(var7)]
 		
 		if var7 then
-			spawn(function() --[[ line: 143 ]]
+			spawn(function()
 				-- upvalues: humanoid (ref), var7 (write), currentChannel (ref), t (copy), t_2 (copy), color (copy), utilModule (copy)
-				local ok, status = pcall(function() --[[ line: 144 ]]
+				local ok, status = pcall(function()
 					-- upvalues: humanoid (copy), var7 (copy)
 					return humanoid:PlayEmote(var7)
 				end)

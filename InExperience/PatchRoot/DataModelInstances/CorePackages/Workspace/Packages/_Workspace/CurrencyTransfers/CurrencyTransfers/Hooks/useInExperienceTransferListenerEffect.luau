@@ -10,14 +10,14 @@ local transferDirectionModule = require(currencyTransfers.Enums.TransferDirectio
 local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
 local _ = require(currencyTransfers.Flows.InExperienceTransferFlow)
 
-return function(p0) --[[ line: 19 | named "useInExperienceTransferListenerEffect" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), marketplaceService (ref), playersService (ref), httpService (ref), loggingProtocolModule (ref), currencyTransferTelemetryModule (ref), transferDirectionModule (ref), transferOriginationModule (ref)
-	reactModule.useEffect(function() --[[ line: 20 ]]
+	reactModule.useEffect(function()
 		-- upvalues: marketplaceService (copy), playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p0 (ref)
-		local promptRobuxTransferRequestedConnection = marketplaceService.PromptRobuxTransferRequested:Connect(function(p1, p2) --[[ line: 22 ]]
+		local promptRobuxTransferRequestedConnection = marketplaceService.PromptRobuxTransferRequested:Connect(function(p1, p2)
 			-- upvalues: playersService (copy), httpService (copy), loggingProtocolModule (copy), currencyTransferTelemetryModule (copy), transferDirectionModule (copy), transferOriginationModule (copy), p0 (copy)
 			if p1 == playersService.LocalPlayer then
-				local ok, status = pcall(function() --[[ line: 24 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p2 (ref)
 					return httpService:JSONDecode(p2)
 				end)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 19 | named "useInExperienceTransferListenerEffect
 			end
 		end)
 		
-		return function() --[[ line: 47 ]]
+		return function()
 			-- upvalues: promptRobuxTransferRequestedConnection (write)
 			if promptRobuxTransferRequestedConnection then
 				promptRobuxTransferRequestedConnection:Disconnect()

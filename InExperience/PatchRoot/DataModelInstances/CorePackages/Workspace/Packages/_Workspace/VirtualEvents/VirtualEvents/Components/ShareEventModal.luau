@@ -15,16 +15,16 @@ local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-local function selectScreenSize(p0) --[[ line: 28 ]]
+local function selectScreenSize(p0)
 	return p0.ScreenSize
 end
 
-return function(p1) --[[ line: 32 | named "ShareEventModal" ]]
+return function(p1)
 	-- upvalues: useStyle (ref), useSelector (ref), selectScreenSize (ref), useNavigation (ref), reactModule (ref), urlBuilder (ref), useLocalization (ref), partialPageModal (ref), uDim (ref), styledTextLabel (ref), uDim_2 (ref), uDim_1 (ref), selectableTextLabelModule (ref), button (ref), buttonType (ref)
 	local var8 = useStyle()
 	local var9 = useSelector(selectScreenSize)
 	local var10 = useNavigation()
-	local var11 = reactModule.useMemo(function() --[[ line: 37 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: urlBuilder (copy), p1 (ref)
 		return urlBuilder.virtualevents.appsflyer({ eventId = p1.virtualEventId })
 	end, { p1.virtualEventId })
@@ -39,7 +39,7 @@ return function(p1) --[[ line: 32 | named "ShareEventModal" ]]
 		title = var12.title,
 		screenSize = var9,
 		contentPadding = uDim,
-		onCloseClicked = reactModule.useCallback(function() --[[ line: 50 ]]
+		onCloseClicked = reactModule.useCallback(function()
 			-- upvalues: var10 (ref), p1 (ref)
 			var10.goBack()
 			
@@ -102,7 +102,7 @@ return function(p1) --[[ line: 32 | named "ShareEventModal" ]]
 					buttonType = buttonType.PrimarySystem,
 					text = var12.copyLink,
 					size = UDim2.new(0.2, 0, 0, 32),
-					onActivated = reactModule.useCallback(function() --[[ line: 58 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: p1 (ref), var11 (ref)
 						if p1.onCopy then
 							p1.onCopy(var11)

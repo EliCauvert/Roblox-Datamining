@@ -3,12 +3,12 @@ local reactModule = require(parent.Parent.Parent.Parent.React)
 local emojiModule = require(parent.Enum.Emoji)
 local constantsModule = require(parent.constants)
 
-local function _(p0) --[[ line: 20 | named "getEmojiString" ]]
+local function _(p0)
 	-- upvalues: emojiModule (ref), constantsModule (ref)
 	return if emojiModule.isEnumValue(p0) then constantsModule[p0.rawValue()] else ""
 end
 
-return function(p1) --[[ line: 28 | named "Emoji" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), emojiModule (ref), constantsModule (ref)
 	local createElement = reactModule.createElement
 	local var3 = if p1.onActivated then "TextButton" else "TextLabel"

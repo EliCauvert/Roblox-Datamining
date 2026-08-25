@@ -17,7 +17,7 @@ local t = {
 local var9 = require(shareGame.getTranslator)()
 local inviteButton = roactModule.PureComponent:extend("InviteButton")
 
-function inviteButton.render(p0) --[[ line: 30 ]]
+function inviteButton.render(p0)
 	-- upvalues: inviteStatus (ref), immutable (ref), roactModule (ref), rectangleButtonModule (ref), semibold (ref), var9 (ref), var7 (ref), constantsModule (ref), t (ref)
 	local anchorPoint = p0.props.anchorPoint
 	local position = p0.props.position
@@ -39,7 +39,7 @@ function inviteButton.render(p0) --[[ line: 30 ]]
 		TextXAlignment = Enum.TextXAlignment.Center,
 		LayoutOrder = layoutOrder,
 		ZIndex = zIndex
-	}) else roactModule.createElement(rectangleButtonModule, immutable.Set(p0.props, "onClick", function() --[[ line: 41 ]]
+	}) else roactModule.createElement(rectangleButtonModule, immutable.Set(p0.props, "onClick", function()
 		-- upvalues: onInvite (ref)
 		onInvite()
 	end), {

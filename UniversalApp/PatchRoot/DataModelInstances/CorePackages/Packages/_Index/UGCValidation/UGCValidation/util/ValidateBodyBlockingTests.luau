@@ -8,7 +8,7 @@ local getExpectedPartSizeModule = require(util.getExpectedPartSize)
 local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local t = {
-	validateMeshMin = function(a, b) --[[ line: 21 ]]
+	validateMeshMin = function(a, b)
 		-- upvalues: floatEqualsModule (ref)
 		local var7 = true
 		local var8 = ""
@@ -28,7 +28,7 @@ local t = {
 	end
 }
 
-function t.validateInternal(p0, p1, p2) --[[ line: 40 ]]
+function t.validateInternal(p0, p1, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), getExpectedPartSizeModule (ref), t (ref), analyticsModule (ref), r15plusUtilsModule (ref)
 	local var9 = failureReasonsAccumulatorModule.new()
 	local var10, var11 = t.validateMeshMin(getExpectedPartSizeModule(p0, p1, true), p0.Name)
@@ -47,7 +47,7 @@ function t.validateInternal(p0, p1, p2) --[[ line: 40 ]]
 	return var9:getFinalResults()
 end
 
-function t.validateAll(p3, p4) --[[ line: 68 ]]
+function t.validateAll(p3, p4)
 	-- upvalues: t (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local var13 = true
@@ -65,7 +65,7 @@ function t.validateAll(p3, p4) --[[ line: 68 ]]
 	return var13
 end
 
-function t.validate(p5, p6) --[[ line: 88 ]]
+function t.validate(p5, p6)
 	-- upvalues: failureReasonsAccumulatorModule (ref), constantsModule (ref), t (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local assetTypeEnum = p6.assetTypeEnum

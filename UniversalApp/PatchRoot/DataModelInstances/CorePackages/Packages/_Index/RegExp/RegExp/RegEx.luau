@@ -5,7 +5,7 @@ local t_1 = {}
 local t_2 = {}
 local var4 = nil
 
-local function to_str_arr(p0, p1) --[[ line: 54 ]]
+local function to_str_arr(p0, p1)
 	if p1 then
 		p0 = string.sub(p0, utf8.offset(p0, p1))
 	end
@@ -29,7 +29,7 @@ local function to_str_arr(p0, p1) --[[ line: 54 ]]
 	return list
 end
 
-local function from_str_arr(p2) --[[ line: 74 ]]
+local function from_str_arr(p2)
 	local n = p2.n or #p2
 	
 	if n <= 7997 then
@@ -44,7 +44,7 @@ local function from_str_arr(p2) --[[ line: 74 ]]
 	return table.concat(list)
 end
 
-local function _(p3, p4, p5) --[[ line: 87 | named "utf8_sub" ]]
+local function _(p3, p4, p5)
 	local byteOffset = utf8.offset(p3, p5)
 	
 	return string.sub(p3, utf8.offset(p3, p4), byteOffset and byteOffset - 1)
@@ -185,9 +185,9 @@ local list_1 = { 46 }
 local list_2 = { 94 }
 local list_3 = { 124 }
 
-local _ = function(p6, p7, p8) --[[ line: 150 | named "check_re" ]]
+local _ = function(p6, p7, p8)
 	-- upvalues: tbl (ref), t (ref)
-	return if p6 == "Match" then function(...) --[[ line: 152 ]]
+	return if p6 == "Match" then function(...)
 		-- upvalues: tbl (copy), p7 (ref), p8 (ref)
 		if select("#", ...) < 1 then
 			error("missing argument #1 (Match expected)", 2)
@@ -203,7 +203,7 @@ local _ = function(p6, p7, p8) --[[ line: 150 | named "check_re" ]]
 			var73 = 0
 		end
 		return p8(var72, var73)
-	end else function(...) --[[ line: 171 ]]
+	end else function(...)
 		-- upvalues: tbl (copy), p7 (ref), t (copy), p8 (ref)
 		local var64 = select("#", ...)
 		
@@ -254,7 +254,7 @@ local _ = function(p6, p7, p8) --[[ line: 150 | named "check_re" ]]
 	end
 end
 
-local function match_tostr(p9) --[[ line: 219 ]]
+local function match_tostr(p9)
 	-- upvalues: tbl (ref)
 	local spans = tbl[p9].spans
 	local var74 = spans[0][1]
@@ -272,7 +272,7 @@ local function match_tostr(p9) --[[ line: 219 ]]
 	return format(var76, var74, var77, string.sub(input, utf8.offset(input, var74), byteOffset and byteOffset - 1))
 end
 
-local function new_match(p10, p11, p12, p13) --[[ line: 228 ]]
+local function new_match(p10, p11, p12, p13)
 	-- upvalues: var4 (write), t_2 (write), match_tostr (ref), tbl (ref)
 	p10.source = p12
 	p10.input = p13
@@ -286,7 +286,7 @@ local function new_match(p10, p11, p12, p13) --[[ line: 228 ]]
 	return var79
 end
 
-local var18 = function(p14, p15) --[[ line: 240 ]]
+local var18 = function(p14, p15)
 	local var81 = p14.spans[if type(p15) == "number" then p15 else p14.group_id[p15]]
 	
 	if var81 then
@@ -300,7 +300,7 @@ end
 
 local var19 = "group"
 
-function t_2.group(...) --[[ line: 152 ]]
+function t_2.group(...)
 	-- upvalues: tbl (ref), var19 (ref), var18 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -318,7 +318,7 @@ function t_2.group(...) --[[ line: 152 ]]
 	return var18(var72, var73)
 end
 
-local var20 = function(p16, p17) --[[ line: 248 ]]
+local var20 = function(p16, p17)
 	local var83 = p16.spans[if type(p17) == "number" then p17 else p16.group_id[p17]]
 	
 	if var83 then
@@ -329,7 +329,7 @@ end
 
 local var21 = "span"
 
-function t_2.span(...) --[[ line: 152 ]]
+function t_2.span(...)
 	-- upvalues: tbl (ref), var21 (ref), var20 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -347,7 +347,7 @@ function t_2.span(...) --[[ line: 152 ]]
 	return var20(var72, var73)
 end
 
-local var22 = function(p18) --[[ line: 256 ]]
+local var22 = function(p18)
 	local spans = p18.spans
 	
 	if spans.n <= 0 then
@@ -372,7 +372,7 @@ end
 
 local var23 = "groups"
 
-function t_2.groups(...) --[[ line: 152 ]]
+function t_2.groups(...)
 	-- upvalues: tbl (ref), var23 (ref), var22 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -390,7 +390,7 @@ function t_2.groups(...) --[[ line: 152 ]]
 	return var22(var72, var73)
 end
 
-local var24 = function(p19) --[[ line: 271 ]]
+local var24 = function(p19)
 	local spans = p19.spans
 	local t = {}
 	
@@ -408,7 +408,7 @@ end
 
 local var25 = "groupdict"
 
-function t_2.groupdict(...) --[[ line: 152 ]]
+function t_2.groupdict(...)
 	-- upvalues: tbl (ref), var25 (ref), var24 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -426,7 +426,7 @@ function t_2.groupdict(...) --[[ line: 152 ]]
 	return var24(var72, var73)
 end
 
-local var26 = function(p20) --[[ line: 283 ]]
+local var26 = function(p20)
 	local spans = p20.spans
 	local list = table.create(spans.n)
 	
@@ -446,7 +446,7 @@ end
 
 local var27 = "groupdict"
 
-function t_2.grouparr(...) --[[ line: 152 ]]
+function t_2.grouparr(...)
 	-- upvalues: tbl (ref), var27 (ref), var26 (ref)
 	if select("#", ...) < 1 then
 		error("missing argument #1 (Match expected)", 2)
@@ -473,14 +473,14 @@ local t_8 = {
 	NUL = 5
 }
 
-local function is_newline(p21, p22, p23) --[[ line: 300 ]]
+local function is_newline(p21, p22, p23)
 	local newline = p23.newline
 	local var93 = p21[p22]
 	
 	return if newline == 0 then var93 == 13 elseif newline == 2 then var93 == 10 and p21[p22 - 1] == 32 elseif newline == 3 then if var93 ~= 10 then var93 == 13 else true elseif newline == 4 then if var93 ~= 10 then if var93 ~= 11 then if var93 ~= 12 then if var93 ~= 13 then if var93 ~= 133 then if var93 ~= 8232 then var93 == 8233 else true else true else true else true else true else true elseif newline == 5 then var93 == 0 else var93 == 10
 end
 
-local function tkn_char_match(p24, p25, p26, p27, p28) --[[ line: 324 ]]
+local function tkn_char_match(p24, p25, p26, p27, p28)
 	-- upvalues: tkn_char_match (ref), t_7 (ref), is_newline (ref)
 	local v
 	local var94 = p25[p26]
@@ -601,7 +601,7 @@ local function tkn_char_match(p24, p25, p26, p27, p28) --[[ line: 324 ]]
 	end
 end
 
-local function find_alternation(p29, p30, p31) --[[ line: 449 ]]
+local function find_alternation(p29, p30, p31)
 	-- upvalues: list_3 (ref)
 	while true do
 		local var104 = p29[p30]
@@ -630,7 +630,7 @@ local function find_alternation(p29, p30, p31) --[[ line: 449 ]]
 	end
 end
 
-local function re_rawfind(p32, p33, p34, p35, p36, p37) --[[ line: 478 ]]
+local function re_rawfind(p32, p33, p34, p35, p36, p37)
 	-- upvalues: find_alternation (ref), tkn_char_match (ref), is_newline (ref)
 	local var110, var111, var112, var113, isTable, var115, v, i, substring, v_1
 	local var106 = 0
@@ -1012,14 +1012,14 @@ local function re_rawfind(p32, p33, p34, p35, p36, p37) --[[ line: 478 ]]
 	return var111
 end
 
-local var33 = function(p38, p39, p40) --[[ line: 775 ]]
+local var33 = function(p38, p39, p40)
 	-- upvalues: re_rawfind (ref), to_str_arr (ref)
 	return re_rawfind(p38.token, to_str_arr(p39, p40), 1, p38.flags, p38.verb_flags, true)
 end
 
 local var34 = "test"
 
-function t_1.test(...) --[[ line: 171 ]]
+function t_1.test(...)
 	-- upvalues: tbl (ref), var34 (ref), t (ref), var33 (ref)
 	local var64 = select("#", ...)
 	
@@ -1069,7 +1069,7 @@ function t_1.test(...) --[[ line: 171 ]]
 	return var33(var65, var66, var67, var68, var69, var70)
 end
 
-local var35 = function(p41, p42, p43, p44) --[[ line: 779 ]]
+local var35 = function(p41, p42, p43, p44)
 	-- upvalues: re_rawfind (ref), to_str_arr (ref), new_match (ref)
 	local var121 = re_rawfind(p41.token, to_str_arr(p42, p43), 1, p41.flags, p41.verb_flags, false)
 	
@@ -1078,7 +1078,7 @@ end
 
 local var36 = "match"
 
-function t_1.match(...) --[[ line: 171 ]]
+function t_1.match(...)
 	-- upvalues: tbl (ref), var36 (ref), t (ref), var35 (ref)
 	local var64 = select("#", ...)
 	
@@ -1128,12 +1128,12 @@ function t_1.match(...) --[[ line: 171 ]]
 	return var35(var65, var66, var67, var68, var69, var70)
 end
 
-local var37 = function(p45, p46, p47, p48) --[[ line: 787 ]]
+local var37 = function(p45, p46, p47, p48)
 	-- upvalues: to_str_arr (ref), re_rawfind (ref), new_match (ref)
 	p46 = to_str_arr(p46, p47)
 	local var122 = 1
 	
-	return function() --[[ line: 790 ]]
+	return function()
 		-- upvalues: var122 (write), p46 (write), re_rawfind (copy), p45 (ref), new_match (copy), p48 (ref)
 		local var123 = var122 <= p46.n + 1 and re_rawfind(p45.token, p46, var122, p45.flags, p45.verb_flags, false)
 		
@@ -1148,7 +1148,7 @@ end
 
 local var38 = "matchall"
 
-function t_1.matchall(...) --[[ line: 171 ]]
+function t_1.matchall(...)
 	-- upvalues: tbl (ref), var38 (ref), t (ref), var37 (ref)
 	local var64 = select("#", ...)
 	
@@ -1198,7 +1198,7 @@ function t_1.matchall(...) --[[ line: 171 ]]
 	return var37(var65, var66, var67, var68, var69, var70)
 end
 
-local function insert_tokenized_sub(p49, p50, p51, p52) --[[ line: 800 ]]
+local function insert_tokenized_sub(p49, p50, p51, p52)
 	-- upvalues: insert_tokenized_sub (ref)
 	for i, v in ipairs(p52) do
 		if type(v) == "table" then
@@ -1222,7 +1222,7 @@ local function insert_tokenized_sub(p49, p50, p51, p52) --[[ line: 800 ]]
 	return p49
 end
 
-local var40 = function(p53, p54, p55, p56, p57, p58) --[[ line: 824 ]]
+local var40 = function(p53, p54, p55, p56, p57, p58)
 	-- upvalues: to_str_arr (ref), t_5 (ref), re_rawfind (ref), insert_tokenized_sub (ref), new_match (ref), from_str_arr (ref)
 	if p57 ~= nil and type(p57) ~= "number" and type(p57) ~= "string" then
 		error(string.format("invalid argument #5 to 'sub' (string expected, got %s)", typeof(p57)), 3)
@@ -1496,7 +1496,7 @@ end
 
 local var41 = "sub"
 
-function t_1.sub(...) --[[ line: 171 ]]
+function t_1.sub(...)
 	-- upvalues: tbl (ref), var41 (ref), t (ref), var40 (ref)
 	local var64 = select("#", ...)
 	
@@ -1546,7 +1546,7 @@ function t_1.sub(...) --[[ line: 171 ]]
 	return var40(var65, var66, var67, var68, var69, var70)
 end
 
-local var42 = function(p59, p60, p61) --[[ line: 1062 ]]
+local var42 = function(p59, p60, p61)
 	-- upvalues: to_str_arr (ref), re_rawfind (ref)
 	if tonumber(p61) then
 		p61 = tonumber(p61)
@@ -1582,7 +1582,7 @@ end
 
 local var43 = "split"
 
-function t_1.split(...) --[[ line: 171 ]]
+function t_1.split(...)
 	-- upvalues: tbl (ref), var43 (ref), t (ref), var42 (ref)
 	local var64 = select("#", ...)
 	
@@ -1632,12 +1632,12 @@ function t_1.split(...) --[[ line: 171 ]]
 	return var42(var65, var66, var67, var68, var69, var70)
 end
 
-local _ = function(p62, p63) --[[ line: 1092 | named "re_index" ]]
+local _ = function(p62, p63)
 	-- upvalues: t_1 (write), tbl (ref)
 	return t_1[p63] or tbl[p62].flags[p63]
 end
 
-local function re_tostr(p64) --[[ line: 1096 ]]
+local function re_tostr(p64)
 	-- upvalues: tbl (ref)
 	return tbl[p64].pattern_repr .. tbl[p64].flag_repr
 end
@@ -1650,7 +1650,7 @@ local t_9 = {
 	[124] = true
 }
 
-local function tokenize_ptn(p65, p66) --[[ line: 1112 ]]
+local function tokenize_ptn(p65, p66)
 	-- upvalues: t_8 (ref), t_9 (ref), list_3 (ref), list_1 (ref), t_5 (ref), t_4 (ref), t_6 (ref), list_2 (ref), list (ref)
 	if p66.unicode then
 		return "options.unicodeData cannot be turned off while having unicode flag"
@@ -2538,13 +2538,13 @@ if var47 then
 	end
 end
 if var47 then
-	function t.pruge() --[[ line: 1902 ]]
+	function t.pruge()
 		-- upvalues: list_5 (write), list_4 (write)
 		table.clear(list_5)
 		table.clear(list_4)
 	end
 end
-local function new_re(p67, p68, p69, p70) --[[ line: 1908 ]]
+local function new_re(p67, p68, p69, p70)
 	-- upvalues: var47 (ref), list_4 (write), list_5 (write), tokenize_ptn (ref), tbl (ref), t_1 (write), re_tostr (ref), var4 (write)
 	local var173, var174, var175
 	local _ = nil
@@ -2595,15 +2595,15 @@ local function new_re(p67, p68, p69, p70) --[[ line: 1908 ]]
 	return var179
 end
 
-local function escape_fslash(p71) --[[ line: 1939 ]]
+local function escape_fslash(p71)
 	return (if #p71 % 2 == 0 then "\\" else "") .. p71 .. "."
 end
 
-local function sort_flag_chr(p72, p73) --[[ line: 1943 ]]
+local function sort_flag_chr(p72, p73)
 	return p72:lower() < p73:lower()
 end
 
-function t.new(...) --[[ line: 1947 ]]
+function t.new(...)
 	-- upvalues: t_3 (ref), sort_flag_chr (ref), new_re (ref), to_str_arr (ref), escape_fslash (ref)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
@@ -2641,7 +2641,7 @@ function t.new(...) --[[ line: 1947 ]]
 	return new_re(to_str_arr(var181), t, table.concat(t_1), string.format("/%s/", var181:gsub("(\\*)/", escape_fslash)))
 end
 
-function t.fromstring(...) --[[ line: 1977 ]]
+function t.fromstring(...)
 	-- upvalues: to_str_arr (ref), t_3 (ref), sort_flag_chr (ref), new_re (ref)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
@@ -2711,7 +2711,7 @@ local t_10 = {
 	["\f"] = "\\f"
 }
 
-function t.escape(...) --[[ line: 2033 ]]
+function t.escape(...)
 	-- upvalues: t_10 (ref)
 	if select("#", ...) == 0 then
 		error("missing argument #1 (string expected)", 2)
@@ -2736,7 +2736,7 @@ function t.escape(...) --[[ line: 2033 ]]
 	return string.gsub(var194, "[\0\f\n\r\t]", t_10):gsub(string.format("[\\%s#()%%%%*+.?[%%]^{|%s]", if var195 then "%s" else "", (if var196:find("^[%%%]]$") then "%" else "") .. var196), "\\%1")
 end
 
-function t.type(...) --[[ line: 2056 ]]
+function t.type(...)
 	-- upvalues: tbl (ref)
 	if select("#", ...) == 0 then
 		error("missing argument #1", 2)
@@ -2751,7 +2751,7 @@ t_1 = { __index = t_1 }
 var4 = t.fromstring("/The\\s*metatable\\s*is\\s*(?:locked|inaccessible)(?#Nice try :])/i")
 getmetatable(var4).__metatable = var4
 
-local function readonly_table() --[[ line: 2072 ]]
+local function readonly_table()
 	error("Attempt to modify a readonly table", 2)
 end
 

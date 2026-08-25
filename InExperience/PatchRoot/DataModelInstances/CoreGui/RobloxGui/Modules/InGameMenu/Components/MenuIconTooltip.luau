@@ -15,9 +15,9 @@ local tooltip = UIBlox.App.Dialog.Tooltip
 local menuIconTooltip = roact.PureComponent:extend("MenuIconTooltip")
 menuIconTooltip.validateProps = t.strictInterface({ isTooltipOpen = t.boolean, onDismiss = t.callback })
 
-function menuIconTooltip.init(p0) --[[ line: 28 ]]
+function menuIconTooltip.init(p0)
 	-- upvalues: signalsModule (ref), displayModule (ref)
-	p0.disposeUiScaleEffect = signalsModule.createEffect(function(p1) --[[ line: 29 ]]
+	p0.disposeUiScaleEffect = signalsModule.createEffect(function(p1)
 		-- upvalues: displayModule (copy), p0 (ref)
 		p0:setState({
 			UiScale = displayModule.GetDisplayStore(p1).getUIScale(p1)
@@ -25,11 +25,11 @@ function menuIconTooltip.init(p0) --[[ line: 28 ]]
 	end)
 end
 
-function menuIconTooltip.render(p2) --[[ line: 37 ]]
+function menuIconTooltip.render(p2)
 	-- upvalues: withLocalizationModule (ref), constantsModule (ref), roact (ref), coreGuiService (ref), tooltip (ref)
 	return withLocalizationModule({
 		bodyText = "CoreScripts.InGameMenu.EducationalPopup.MenuIconTooltip"
-	})(function(p3) --[[ line: 40 ]]
+	})(function(p3)
 		-- upvalues: constantsModule (copy), p2 (ref), roact (copy), coreGuiService (copy), tooltip (copy)
 		return p2.props.isTooltipOpen and roact.createElement(roact.Portal, { target = coreGuiService }, {
 			TooltipScreenGui = roact.createElement("ScreenGui", {
@@ -48,18 +48,18 @@ function menuIconTooltip.render(p2) --[[ line: 37 ]]
 	end)
 end
 
-function menuIconTooltip.willUnmount(p4) --[[ line: 65 ]]
+function menuIconTooltip.willUnmount(p4)
 	if p4.disposeUiScaleEffect then
 		p4.disposeUiScaleEffect()
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p5, _) --[[ line: 72 ]]
+return roactRodux.UNSTABLE_connect2(function(p5, _)
 	return { isTooltipOpen = p5.nativeClosePrompt.menuIconTooltipOpen }
-end, function(p6) --[[ line: 76 ]]
+end, function(p6)
 	-- upvalues: setMenuIconTooltipOpenModule (ref)
 	return {
-		onDismiss = function() --[[ line: 78 ]]
+		onDismiss = function()
 			-- upvalues: p6 (ref), setMenuIconTooltipOpenModule (copy)
 			p6(setMenuIconTooltipOpenModule(false))
 		end

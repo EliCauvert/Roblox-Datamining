@@ -17,14 +17,14 @@ local t = {
 	placement = inputPlacementModule.Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 29 | named "InternalInputGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputGroupVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputGroupContextModule (ref), textModule (ref)
 	local var12 = withDefaultsModule(p0, t)
 	local var13 = useInputGroupVariantsModule(useTokensModule(), var12.size)
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var12, { tag = var13.container.tag, ref = p1 }), {
 		InputGroupContext = reactModule.createElement(inputGroupContextModule.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 34 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: var12 (ref)
 				return { size = var12.size, placement = var12.placement }
 			end, { var12.size, var12.placement })

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaEnableScreenTimeSignalR", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaEnableScreenTimeSignalR")
 end

@@ -16,16 +16,16 @@ local t = {
 	borderRadius = UDim.new(0, 8)
 }
 
-return function(p0) --[[ line: 40 | named "MediaGalleryCarousel" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), button (ref), buttonType (ref), uDim2 (ref), imageSetLabel (ref), uDim2_1 (ref), images (ref)
 	local var6 = cryoModule.Dictionary.join(t, p0)
 	local var7, var8 = reactModule.useState(Vector2.zero)
-	local var9 = reactModule.useCallback(function(p1) --[[ line: 44 ]]
+	local var9 = reactModule.useCallback(function(p1)
 		-- upvalues: var6 (ref), var8 (ref)
 		local var12 = (p1.AbsoluteSize.X - var6.itemPadding * (var6.numItemsShown - 1)) / var6.numItemsShown
 		var8(Vector2.new(var12, var12 / var6.itemAspectRatio))
 	end, { var6.itemAspectRatio, var6.numItemsShown })
-	local var10 = reactModule.useCallback(function(p2) --[[ line: 55 ]]
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: var6 (ref)
 		if var6.onVideoPlayActivated and var6.items[p2].isYouTubeVideo then
 			return var6.onVideoPlayActivated(p2)
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 40 | named "MediaGalleryCarousel" ]]
 			ScaleType = Enum.ScaleType.Crop,
 			BackgroundTransparency = 1,
 			AutoButtonColor = false,
-			[reactModule.Event.Activated] = function() --[[ line: 82 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: var10 (ref), i (ref)
 				var10(i)
 			end
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 40 | named "MediaGalleryCarousel" ]]
 				size = uDim2,
 				anchorPoint = Vector2.new(0.5, 0.5),
 				position = UDim2.fromScale(0.5, 0.5),
-				onActivated = function() --[[ line: 95 ]]
+				onActivated = function()
 					-- upvalues: var10 (ref), i (ref)
 					var10(i)
 				end

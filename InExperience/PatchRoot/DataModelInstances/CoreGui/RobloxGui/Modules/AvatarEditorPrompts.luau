@@ -17,7 +17,7 @@ local connectAvatarEditorServiceEventsModule = require(script.ConnectAvatarEdito
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 30 ]]
+function t.new()
 	-- upvalues: t (ref), roactGlobalConfigModule (ref), roactModule (ref), roduxModule (ref), reducerModule (ref), getGameNameModule (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationModule (ref), avatarEditorPromptsPolicyModule (ref), renderWithCoreScriptsStyleProviderModule (ref), avatarEditorPromptsAppModule (ref), coreGuiService (ref), connectAvatarEditorServiceEventsModule (ref)
 	local tbl = setmetatable({}, t)
 	

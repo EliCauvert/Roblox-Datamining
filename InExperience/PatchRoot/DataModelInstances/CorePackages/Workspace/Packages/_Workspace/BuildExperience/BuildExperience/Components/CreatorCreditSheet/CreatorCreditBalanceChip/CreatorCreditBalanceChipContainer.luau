@@ -2,7 +2,7 @@
 local creatorCreditBalanceChipViewModule = require(script.Parent.CreatorCreditBalanceChipView)
 local useCreatorCreditBalanceChipViewModelModule = require(script.Parent.useCreatorCreditBalanceChipViewModel)
 
-return function() --[[ line: 9 | named "CreatorCreditBalanceChipContainer" ]]
+return function()
 	-- upvalues: useCreatorCreditBalanceChipViewModelModule (ref), reactModule (ref), creatorCreditBalanceChipViewModule (ref)
 	return reactModule.createElement(creatorCreditBalanceChipViewModule, useCreatorCreditBalanceChipViewModelModule())
 end

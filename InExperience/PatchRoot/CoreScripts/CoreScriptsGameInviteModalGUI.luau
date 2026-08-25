@@ -9,7 +9,7 @@ local gameInviteModule = require(corePackagesService.Workspace.Packages.GameInvi
 local renderCoreScriptGameInviteModalContainer = gameInviteModule.renderCoreScriptGameInviteModalContainer
 local gameInviteModalManager = gameInviteModule.GameInviteModalManager
 
-local var6 = function(p0) --[[ line: 19 ]]
+local var6 = function(p0)
 	-- upvalues: playerListManagerModule (ref), fFlagGameInviteModalUnlockMouse (ref), userInputService (ref), VRService (ref), mouseIconOverrideService (ref)
 	if p0 then
 		playerListManagerModule:HideTemp("GameInviteMenu", true)

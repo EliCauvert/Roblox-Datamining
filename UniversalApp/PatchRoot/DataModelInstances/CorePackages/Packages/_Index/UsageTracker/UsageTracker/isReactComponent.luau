@@ -1,6 +1,6 @@
 ﻿local reactIsModule = require(script:FindFirstAncestor("UsageTracker").Parent.ReactIs)
 
-return function(p0) --[[ line: 5 | named "isReactComponent" ]]
+return function(p0)
 	-- upvalues: reactIsModule (ref)
 	local ok, status = pcall(reactIsModule.isValidElementType, p0)
 	

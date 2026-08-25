@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local drawerScrimCanBeModal = game:DefineFastFlag("DrawerScrimCanBeModal", false)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 18 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), reactModule (ref), drawerScrimCanBeModal (ref)
 	return reactModule.createElement("TextButton", {
 		ref = p1,

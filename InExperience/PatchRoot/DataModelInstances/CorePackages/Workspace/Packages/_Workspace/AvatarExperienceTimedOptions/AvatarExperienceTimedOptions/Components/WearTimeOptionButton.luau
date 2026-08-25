@@ -9,7 +9,7 @@ local text = foundationModule.Text
 local enums = foundationModule.Enums
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
 
-return reactModule.forwardRef(function(p0, _) --[[ line: 28 ]]
+return reactModule.forwardRef(function(p0, _)
 	-- upvalues: useTokens (ref), useLocalization (ref), fFlagAXDurables2Option (ref), reactModule (ref), foundationModule (ref), enums (ref), text (ref)
 	local var3 = useTokens()
 	local var4 = useLocalization({

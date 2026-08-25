@@ -5,7 +5,7 @@ local contentPluginModule = require(script.Parent.ContentPlugin)
 local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
 local usePluginModule = require(foundation.Providers.Plugin.usePlugin)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 13 | named "PopoverContentProxy" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: usePluginModule (ref), isPluginSecurityModule (ref), reactModule (ref), contentPluginModule (ref), contentModule (ref)
 	local _, var6 = usePluginModule()
 	local var7 = p0

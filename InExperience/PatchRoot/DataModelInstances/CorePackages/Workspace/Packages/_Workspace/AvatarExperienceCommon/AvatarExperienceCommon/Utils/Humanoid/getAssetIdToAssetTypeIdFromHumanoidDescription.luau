@@ -1,6 +1,6 @@
 ﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(value) --[[ line: 5 | named "getAssetIdToAssetTypeIdFromHumanoidDescription" ]]
+return function(value)
 	-- upvalues: constantsModule (ref)
 	local v_1
 	local t = {}

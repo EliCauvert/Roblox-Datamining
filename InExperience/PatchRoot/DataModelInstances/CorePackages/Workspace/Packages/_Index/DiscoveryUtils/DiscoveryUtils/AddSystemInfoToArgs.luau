@@ -8,10 +8,10 @@ local t = {
 	[systemInfoProtocol.InfoNames.CPU_CORE_COUNT] = "cpuCores"
 }
 
-return function(p0, p1) --[[ line: 16 ]]
+return function(p0, p1)
 	-- upvalues: systemInfoProtocol (ref), t (ref), argCheckModule (ref)
 	local var2 = p1 or systemInfoProtocol.ALL_INFO_NAMES
-	local ok, status = pcall(function() --[[ line: 19 ]]
+	local ok, status = pcall(function()
 		-- upvalues: systemInfoProtocol (copy), var2 (ref)
 		return systemInfoProtocol.default:getSystemInfo(var2)
 	end)

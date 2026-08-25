@@ -5,14 +5,14 @@ local common = coreGuiService:FindFirstChild("RobloxGui"):FindFirstChild("Module
 local avatarJointUpgradeFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeFeature")
 local avatarJointUpgradeDefaultOnFeatureEngineFeature = game:GetEngineFeature("AvatarJointUpgradeDefaultOnFeature")
 
-local function _() --[[ line: 11 | named "jointUpgradeActive" ]]
+local function _()
 	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), avatarJointUpgradeDefaultOnFeatureEngineFeature (ref)
 	return avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature
 end
 
 local ragdollRiggingModule = require(common:FindFirstChild("RagdollRigging"))
 local humanoidReadyUtilModule = require(common:FindFirstChild("HumanoidReadyUtil"))
-local var7 = (function() --[[ line: 23 | named "getDefaultDeathType" ]]
+local var7 = (function()
 	if not game:GetEngineFeature("PolicyInfoForServerRobloxOnlyAsyncEnabled") then
 		return game:DefineFastString("DeathTypeValue", "Classic")
 	end
@@ -34,7 +34,7 @@ local t = {}
 if not avatarJointUpgradeFeatureEngineFeature then
 	local onRagdoll = Instance.new("RemoteEvent")
 	onRagdoll.Name = "OnRagdoll"
-	onRagdoll.OnServerEvent:Connect(function(p0, p1) --[[ line: 62 ]]
+	onRagdoll.OnServerEvent:Connect(function(p0, p1)
 		-- upvalues: t (ref), ragdollRiggingModule (ref)
 		if p1 and t[p0] == p1 then
 			local parent = p1 and p1.Parent
@@ -47,7 +47,7 @@ if not avatarJointUpgradeFeatureEngineFeature then
 	end)
 	onRagdoll.Parent = robloxReplicatedStorageService
 end
-humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4) --[[ line: 75 ]]
+humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4)
 	-- upvalues: avatarJointUpgradeFeatureEngineFeature (ref), avatarJointUpgradeDefaultOnFeatureEngineFeature (ref), ragdollRiggingModule (ref), var7 (ref), t (ref)
 	if avatarJointUpgradeFeatureEngineFeature then
 		if p4.RigType == Enum.HumanoidRigType.R15 and (avatarJointUpgradeFeatureEngineFeature and avatarJointUpgradeDefaultOnFeatureEngineFeature) then
@@ -59,7 +59,7 @@ humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4) --[[ line: 75
 	if var7 ~= "Ragdoll" then return end
 	local characterRemovingConnection = nil
 	
-	local function _() --[[ line: 89 | named "disconnect" ]]
+	local function _()
 		-- upvalues: characterRemovingConnection (write), t (copy), p2 (ref), p4 (ref)
 		characterRemovingConnection:Disconnect()
 		
@@ -68,7 +68,7 @@ humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4) --[[ line: 75
 		end
 	end
 	
-	characterRemovingConnection = p2.CharacterRemoving:Connect(function(p5) --[[ line: 97 ]]
+	characterRemovingConnection = p2.CharacterRemoving:Connect(function(p5)
 		-- upvalues: p3 (ref), characterRemovingConnection (write), t (copy), p2 (ref), p4 (ref)
 		if p5 == p3 then
 			characterRemovingConnection:Disconnect()
@@ -86,7 +86,7 @@ humanoidReadyUtilModule.registerHumanoidReady(function(p2, p3, p4) --[[ line: 75
 	t[p2] = p4
 	
 	if avatarJointUpgradeFeatureEngineFeature then
-		p4.Died:Connect(function() --[[ line: 114 ]]
+		p4.Died:Connect(function()
 			-- upvalues: t (copy), p2 (ref), p4 (ref), ragdollRiggingModule (copy), avatarJointUpgradeFeatureEngineFeature (copy), avatarJointUpgradeDefaultOnFeatureEngineFeature (copy)
 			t[p2] = nil
 			local parent = p4.Parent

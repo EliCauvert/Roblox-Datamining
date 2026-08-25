@@ -17,7 +17,7 @@ local var3 = tModule.strictInterface({
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 50 ]]
+function t.new(p0)
 	-- upvalues: var3 (ref), playersService (ref), t (ref)
 	assert(var3(p0))
 	
@@ -31,7 +31,7 @@ function t.new(p0) --[[ line: 50 ]]
 	}, t)
 end
 
-function t:_addPlayerToEraseMap(p1) --[[ line: 75 ]]
+function t:_addPlayerToEraseMap(p1)
 	local userId = self._disambiguationIdentifiers[p1.UserId]
 	
 	if userId == nil then
@@ -44,21 +44,21 @@ function t:_addPlayerToEraseMap(p1) --[[ line: 75 ]]
 	self._trackedPii[tostring(p1.DisplayName)] = string.format("DisplayName(%d)", userId)
 end
 
-function t:_removePlayerFromEraseMap(p2) --[[ line: 88 ]]
+function t:_removePlayerFromEraseMap(p2)
 	self._trackedPii[tostring(p2.UserId)] = nil
 	self._trackedPii[tostring(p2.Name)] = nil
 	self._trackedPii[tostring(p2.DisplayName)] = nil
 end
 
-function t:startTracking() --[[ line: 94 ]]
+function t:startTracking()
 	for i, v in ipairs(self._players:GetPlayers()) do
 		self:_addPlayerToEraseMap(v)
 	end
-	self._playerAddedConnection = self._players.PlayerAdded:Connect(function(p3) --[[ line: 99 ]]
+	self._playerAddedConnection = self._players.PlayerAdded:Connect(function(p3)
 		-- upvalues: self (ref)
 		self:_addPlayerToEraseMap(p3)
 	end)
-	self._playerRemovingConnection = self._players.PlayerRemoving:Connect(function(p4) --[[ line: 103 ]]
+	self._playerRemovingConnection = self._players.PlayerRemoving:Connect(function(p4)
 		-- upvalues: self (ref)
 		self._waitFn(self._eraseTimeout)
 		
@@ -68,12 +68,12 @@ function t:startTracking() --[[ line: 94 ]]
 	end)
 end
 
-function t:stopTracking() --[[ line: 116 ]]
+function t:stopTracking()
 	self._playerAddedConnection:Disconnect()
 	self._playerRemovingConnection:Disconnect()
 end
 
-function t:cleanPii(p5) --[[ line: 121 ]]
+function t:cleanPii(p5)
 	for i, v in pairs(self._trackedPii) do
 		p5 = string.gsub(p5, i, v)
 	end

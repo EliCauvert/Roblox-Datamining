@@ -9,7 +9,7 @@ local getFFlagMomentsTileSkeletonPosterModule = require(momentsCommon.Flags.GetF
 local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 
-return function(p0) --[[ line: 42 | named "MomentMediaTile" ]]
+return function(p0)
 	-- upvalues: useVideoPosterFrameModule (ref), getFFlagMomentsTileSkeletonPosterModule (ref), reactModule (ref), momentMediaViewModule (ref), skeleton (ref), radius (ref)
 	local mediaItem = p0.mediaItem
 	local cornerRadius = mediaItem.cornerRadius

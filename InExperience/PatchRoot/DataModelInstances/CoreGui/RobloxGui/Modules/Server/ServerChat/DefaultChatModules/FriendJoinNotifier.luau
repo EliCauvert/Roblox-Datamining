@@ -5,7 +5,7 @@ local clientChatModules = chatService:WaitForChild("ClientChatModules")
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 local _ = require(clientChatModules:WaitForChild("ChatConstants"))
 local var4 = false
-local ok, status = pcall(function() --[[ line: 16 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserHandleFriendJoinNotifierOnClient")
 end)
 
@@ -13,7 +13,7 @@ if ok then
 	var4 = status
 end
 local t = nil
-pcall(function() --[[ line: 26 ]]
+pcall(function()
 	-- upvalues: t (write)
 	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -22,20 +22,20 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0) --[[ line: 29 ]]
+	function t.FormatMessageToSend(_, _, p0)
 		return p0
 	end
 end
 local t_1 = { ChatColor = Color3.fromRGB(255, 255, 255) }
 
-return function(p1) --[[ line: 35 | named "Run" ]]
+return function(p1)
 	-- upvalues: var4 (write), chatSettingsModule (ref), t (write), t_1 (ref), playersService (ref)
-	local function _() --[[ line: 37 | named "ShowFriendJoinNotification" ]]
+	local function _()
 		-- upvalues: var4 (copy), chatSettingsModule (copy)
 		return var4 == false and chatSettingsModule.ShowFriendJoinNotification ~= nil and chatSettingsModule.ShowFriendJoinNotification
 	end
 	
-	local function SendFriendJoinNotification(p2, p3) --[[ line: 46 ]]
+	local function SendFriendJoinNotification(p2, p3)
 		-- upvalues: p1 (ref), chatSettingsModule (copy), t (copy), t_1 (copy)
 		local nameSpeaker = p1:GetSpeaker(p2.Name)
 		
@@ -45,10 +45,10 @@ return function(p1) --[[ line: 35 | named "Run" ]]
 		end
 	end
 	
-	local _ = function(p4, p5) --[[ line: 62 | named "TrySendFriendNotification" ]]
+	local _ = function(p4, p5)
 		-- upvalues: SendFriendJoinNotification (ref)
 		if p4 ~= p5 then
-			coroutine.wrap(function() --[[ line: 64 ]]
+			coroutine.wrap(function()
 				-- upvalues: p4 (ref), p5 (ref), SendFriendJoinNotification (copy)
 				if p4:IsFriendsWith(p5.UserId) then
 					SendFriendJoinNotification(p4, p5)
@@ -58,7 +58,7 @@ return function(p1) --[[ line: 35 | named "Run" ]]
 	end
 	
 	if var4 == false and chatSettingsModule.ShowFriendJoinNotification ~= nil and chatSettingsModule.ShowFriendJoinNotification then
-		playersService.PlayerAdded:connect(function(p6) --[[ line: 73 ]]
+		playersService.PlayerAdded:connect(function(p6)
 			-- upvalues: playersService (copy), SendFriendJoinNotification (ref)
 			local players = playersService:GetPlayers()
 			
@@ -66,7 +66,7 @@ return function(p1) --[[ line: 35 | named "Run" ]]
 				local var11 = players[i]
 				
 				if var11 ~= p6 then
-					coroutine.wrap(function() --[[ line: 64 ]]
+					coroutine.wrap(function()
 						-- upvalues: var11 (ref), p6 (ref), SendFriendJoinNotification (copy)
 						if var11:IsFriendsWith(p6.UserId) then
 							SendFriendJoinNotification(var11, p6)

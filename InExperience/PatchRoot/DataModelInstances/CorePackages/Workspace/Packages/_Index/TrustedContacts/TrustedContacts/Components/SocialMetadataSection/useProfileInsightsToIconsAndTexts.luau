@@ -19,7 +19,7 @@ local t = {
 	noMutualFriends = if fFlagTFNonFriendsPermittedModule then icon.TriangleExclamation else nil
 }
 
-local _ = function(p0, p1) --[[ line: 40 ]]
+local _ = function(p0, p1)
 	-- upvalues: friendRequestOriginSource (ref), t (ref)
 	if p0 ~= "friendRequestOriginSource" then
 		return t[p0]
@@ -36,7 +36,7 @@ local _ = function(p0, p1) --[[ line: 40 ]]
 	return t[var6]
 end
 
-local var5 = function(p2, p3, p4) --[[ line: 56 ]]
+local var5 = function(p2, p3, p4)
 	-- upvalues: friendRequestOriginSource (ref)
 	local joinedInYear = nil
 	
@@ -76,7 +76,7 @@ local var5 = function(p2, p3, p4) --[[ line: 56 ]]
 	return joinedInYear
 end
 
-return function(p5) --[[ line: 85 | named "useProfileInsightsToIconsAndTexts" ]]
+return function(p5)
 	-- upvalues: reactModule (ref), fFlagConnectionsToFriendsRename (ref), localizationService (ref), useLocalization (ref), fFlagTFNonFriendsPermittedModule (ref), friendRequestOriginSource (ref), t (ref), var5 (ref)
 	local var7 = useLocalization({
 		singularMutualConnection = "Feature.Friends.Label.MutualFriendTitle",
@@ -91,7 +91,7 @@ return function(p5) --[[ line: 85 | named "useProfileInsightsToIconsAndTexts" ]]
 			"Feature.Friends.Label.JoinedInYear",
 			year = DateTime.fromUnixTimestamp(p5.accountCreationDateUnixSeconds or 0):FormatLocalTime("YYYY", localizationService.RobloxLocaleId)
 		},
-		connectedDuration = reactModule.useMemo(function() --[[ line: 88 ]]
+		connectedDuration = reactModule.useMemo(function()
 			-- upvalues: p5 (ref), fFlagConnectionsToFriendsRename (copy)
 			if not p5.friendshipAgeUnixSeconds then
 				return nil
@@ -115,7 +115,7 @@ return function(p5) --[[ line: 85 | named "useProfileInsightsToIconsAndTexts" ]]
 	})
 	local t_1 = {}
 	
-	return reactModule.useMemo(function() --[[ line: 140 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p5 (ref), friendRequestOriginSource (copy), t (copy), var5 (copy), var7 (ref), t_1 (ref), fFlagTFNonFriendsPermittedModule (copy)
 		for i, v in p5 do
 			local var14

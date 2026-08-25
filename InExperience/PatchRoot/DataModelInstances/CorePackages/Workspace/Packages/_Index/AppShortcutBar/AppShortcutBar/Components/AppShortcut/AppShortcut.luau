@@ -14,7 +14,7 @@ local shortcut = UIBloxModule.App.Navigation.Shortcut
 local iconWithHoldAnimationModule = require(script.Parent.IconWithHoldAnimation)
 local shortcutUseDispatchSyntheticEvent = game:DefineFastFlag("ShortcutUseDispatchSyntheticEvent", false)
 
-local function _(p0, p1) --[[ line: 25 | named "getKeyLabelsWidth" ]]
+local function _(p0, p1)
 	-- upvalues: keyLabelUtilities (ref)
 	local var8 = 0
 	
@@ -24,13 +24,13 @@ local function _(p0, p1) --[[ line: 25 | named "getKeyLabelsWidth" ]]
 	return var8
 end
 
-local function useOnShortcutActivated(p2) --[[ line: 33 ]]
+local function useOnShortcutActivated(p2)
 	-- upvalues: shortcutUseDispatchSyntheticEvent (ref), reactModule (ref), reactFocusNavigationModule (ref)
 	if shortcutUseDispatchSyntheticEvent then
 		local var9 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
 		local var10 = reactFocusNavigationModule.useDispatchSyntheticEvent()
 		
-		return reactModule.useCallback(function() --[[ line: 38 ]]
+		return reactModule.useCallback(function()
 			-- upvalues: p2 (ref), var10 (ref), var9 (ref)
 			if p2.hasProgress then
 				var10(p2.eventName, var9.focusedGuiObject:getValue(), {
@@ -58,9 +58,9 @@ local function useOnShortcutActivated(p2) --[[ line: 33 ]]
 	end
 	local var11 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
 	
-	return reactModule.useMemo(function() --[[ line: 59 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var11 (ref), p2 (ref)
-		return function() --[[ line: 60 ]]
+		return function()
 			-- upvalues: var11 (copy), p2 (copy)
 			local selection = var11._engineInterface.getSelection()
 			
@@ -84,7 +84,7 @@ local function useOnShortcutActivated(p2) --[[ line: 33 ]]
 	end, { var11, p2.inputKeyCode, p2.eventName })
 end
 
-function AppShortcut(p3) --[[ line: 83 ]]
+function AppShortcut(p3)
 	-- upvalues: useStyle (ref), useTokens (ref), keyLabelUtilities (ref), reactModule (ref), textService (ref), keyLabel (ref), iconWithHoldAnimationModule (ref), icon (ref), useOnShortcutActivated (ref), shortcut (ref), stateLayer (ref)
 	local var17, size900
 	local layoutOrder = p3.layoutOrder
@@ -112,13 +112,13 @@ function AppShortcut(p3) --[[ line: 83 ]]
 		var17 = var14.Size.Size_600
 		size900 = var14.Size.Size_600
 	end
-	local var18 = reactModule.useMemo(function() --[[ line: 105 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), textService (copy), item (ref), var17 (write)
 		local labelMedium = var14.Typography.LabelMedium
 		
 		return UDim2.new(0, var17 + var14.Gap.XSmall + textService:GetTextSize(item.text, math.floor(labelMedium.FontSize), labelMedium.Font, Vector2.new(1e999, 1e999)).X, 1, 0)
 	end, { var14, var17, item.text })
-	local var19 = reactModule.useMemo(function() --[[ line: 122 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: isTable (ref), reactModule (copy), item (ref), keyLabel (copy)
 		if not isTable then
 			return nil
@@ -159,7 +159,7 @@ function AppShortcut(p3) --[[ line: 83 ]]
 				labelTextSize = var14.Typography.LabelMedium.FontSize,
 				labelColorStyle = var14.Color.Label,
 				labelFontStyle = var14.Typography.LabelMedium,
-				renderIcon = reactModule.useCallback(function(p4) --[[ line: 144 ]]
+				renderIcon = reactModule.useCallback(function(p4)
 					-- upvalues: item (ref), reactModule (copy), iconWithHoldAnimationModule (copy), var17 (write), size900 (write), var14 (ref), isTable (ref), var19 (ref), icon (copy)
 					return if item.hasProgress then reactModule.createElement(iconWithHoldAnimationModule, {
 						layoutOrder = p4.layoutOrder,
@@ -187,7 +187,7 @@ function AppShortcut(p3) --[[ line: 83 ]]
 			selectable = false,
 			zIndex = 1,
 			cornerRadius = UDim.new(0, var14.Radius.Medium),
-			size = reactModule.useMemo(function() --[[ line: 118 ]]
+			size = reactModule.useMemo(function()
 				-- upvalues: var18 (ref), var14 (ref)
 				return var18 + UDim2.fromOffset(var14.Size.Size_100 * 2, 0)
 			end, { var18, var14 }),

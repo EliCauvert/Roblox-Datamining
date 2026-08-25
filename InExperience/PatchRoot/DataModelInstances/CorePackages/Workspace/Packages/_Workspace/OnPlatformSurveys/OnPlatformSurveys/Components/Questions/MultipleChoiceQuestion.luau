@@ -13,7 +13,7 @@ local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 local t = {}
 local t_1 = {}
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "MultipleChoiceQuestion" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: inlineQuestionTypeModule (ref), t_1 (ref), reactModule (ref), t (ref), list (ref), fFlagInlineSurveyChoiceTextEntry (ref), inlineSurveyHelpersModule (ref), listItemInputType (ref), textInput (ref), view (ref)
 	local question = p0.question
 	local answer = p0.answer
@@ -21,7 +21,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "MultipleChoiceQuesti
 	local var7 = p0.isDisabled == true
 	local var8 = question.type == inlineQuestionTypeModule.MultipleChoiceMulti
 	local choices = question.choices or t_1
-	local var10 = reactModule.useMemo(function() --[[ line: 41 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: answer (ref), t (copy)
 		local t_1 = {}
 		
@@ -41,7 +41,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "MultipleChoiceQuesti
 			LayoutOrder = 1,
 			hasDivider = { hasDivider = true, isInset = false },
 			isContained = { isContained = false, hasMargin = false }
-		}, reactModule.useMemo(function() --[[ line: 53 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: choices (ref), reactModule (copy), list (copy), fFlagInlineSurveyChoiceTextEntry (copy), var7 (ref), onAnswerChanged (ref), inlineSurveyHelpersModule (copy), answer (ref), var8 (ref), listItemInputType (copy), var10 (ref), textInput (copy), var11 (ref)
 			local t = {}
 			
@@ -51,7 +51,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "MultipleChoiceQuesti
 					title = v.label,
 					LayoutOrder = if fFlagInlineSurveyChoiceTextEntry then i * 2 else i,
 					onActivated = {
-						onActivated = function() --[[ line: 63 ]]
+						onActivated = function()
 							-- upvalues: var7 (copy), onAnswerChanged (copy), inlineSurveyHelpersModule (copy), answer (copy), id (ref), var8 (copy), fFlagInlineSurveyChoiceTextEntry (copy)
 							if var7 then
 								return
@@ -73,7 +73,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "MultipleChoiceQuesti
 						width = UDim.new(1, 0),
 						isDisabled = var7,
 						LayoutOrder = i * 2 + 1,
-						onChanged = function(p1) --[[ line: 85 ]]
+						onChanged = function(p1)
 							-- upvalues: var7 (copy), var11 (copy), id (ref), onAnswerChanged (copy)
 							if var7 then
 								return

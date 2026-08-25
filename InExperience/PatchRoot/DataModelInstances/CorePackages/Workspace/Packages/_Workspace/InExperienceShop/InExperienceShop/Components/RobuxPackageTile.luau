@@ -20,11 +20,11 @@ local t = {
 	robux = "Feature.Home.Robux"
 }
 
-local function _(p0, p1, p2) --[[ line: 44 | named "getTitleText" ]]
+local function _(p0, p1, p2)
 	return if p0 then `{p1} + {p2}` else p1
 end
 
-local function renderMediaContent(p3) --[[ line: 52 ]]
+local function renderMediaContent(p3)
 	-- upvalues: formatPriceModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), image (ref), uDim2 (ref)
 	local var7 = p3.hasBonusItem == true
 	
@@ -64,7 +64,7 @@ local function renderMediaContent(p3) --[[ line: 52 ]]
 	}
 end
 
-return reactModule.memo(function(p4) --[[ line: 97 | named "RobuxPackageTile" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: useLocalization (ref), t (ref), MEDIA_HEIGHT_SCALE_FALLBACK (ref), reactModule (ref), view (ref), renderMediaContent (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var8 = useLocalization(t)
 	local robux = var8.robux
@@ -113,7 +113,7 @@ return reactModule.memo(function(p4) --[[ line: 97 | named "RobuxPackageTile" ]]
 				variant = if p4.isPrimaryRobuxPackage == true then buttonVariant.SoftEmphasis else buttonVariant.Standard,
 				size = inputSize.Small,
 				width = UDim.new(1, 0),
-				onActivated = p4.onBuyActivated or function() --[[ line: 150 ]] end
+				onActivated = p4.onBuyActivated or function() end
 			})
 		})
 	})

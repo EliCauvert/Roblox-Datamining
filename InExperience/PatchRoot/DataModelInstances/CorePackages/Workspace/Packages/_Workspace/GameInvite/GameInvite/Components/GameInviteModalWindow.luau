@@ -11,7 +11,7 @@ local imageSet = UIBloxModule.Core.ImageSet
 local images = UIBloxModule.App.ImageSet.Images
 local rect = Rect.new(8, 8, 9, 9)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), gameInviteModalLayoutContextModule (ref), imageSet (ref), fFlagGameInviteModalUnlockMouse (ref), gameInviteModalManagerModule (ref), images (ref), rect (ref)
 	local vector2, var9, uDim2
 	local var6 = useStyle()
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 22 ]]
 		AutoButtonColor = false,
 		Modal = if fFlagGameInviteModalUnlockMouse then true else nil,
 		ZIndex = 0,
-		[reactModule.Event.Activated] = function() --[[ line: 52 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: gameInviteModalManagerModule (copy)
 			gameInviteModalManagerModule:closeModal()
 		end

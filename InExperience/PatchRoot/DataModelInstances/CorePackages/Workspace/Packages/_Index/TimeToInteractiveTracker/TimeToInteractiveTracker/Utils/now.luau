@@ -1,3 +1,3 @@
-﻿return function() --[[ line: 3 ]]
+﻿return function()
 	return os.clock()
 end

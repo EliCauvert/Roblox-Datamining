@@ -13,7 +13,7 @@ local fFlagGetGameIconsFromThumbnailsDeliveryApiIxp = sharedFlagsModule.FFlagGet
 local fFlagForceGetGameIconsFromThumbnailsDeliveryApi = sharedFlagsModule.FFlagForceGetGameIconsFromThumbnailsDeliveryApi
 local fIntGameIconSmallSizePx = gameIconConstantsModule.FIntGameIconSmallSizePx
 
-local function _() --[[ line: 27 | named "resolveThumbnailHost" ]]
+local function _()
 	-- upvalues: fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), url (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref)
 	if fFlagForceGetGameIconsFromThumbnailsDeliveryApi then
 		return url.THUMBNAILSDELIVERY_URL
@@ -24,7 +24,7 @@ local function _() --[[ line: 27 | named "resolveThumbnailHost" ]]
 	end
 end
 
-return function(p0, p1, p2) --[[ line: 39 | named "fetchGameIcons" ]]
+return function(p0, p1, p2)
 	-- upvalues: urlBuilder (ref), fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), url (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref), sizeString (ref), fIntGameIconSmallSizePx (ref), fetch (ref), asPromise (ref)
 	local var7
 	p2 = p2 or {}
@@ -47,7 +47,7 @@ return function(p0, p1, p2) --[[ line: 39 | named "fetchGameIcons" ]]
 			universeIds = table.concat(p0, ","),
 			size = p1 or sizeString(fIntGameIconSmallSizePx)
 		}),
-		decode = function(p3) --[[ line: 56 ]]
+		decode = function(p3)
 			return p3.data or {}
 		end
 	}))

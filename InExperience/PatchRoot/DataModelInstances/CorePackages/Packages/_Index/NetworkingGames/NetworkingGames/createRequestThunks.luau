@@ -4,7 +4,7 @@ local createGetExperiencesProductInfoModule = require(networkRequests.createGetE
 local createGetExperiencesDetailsModule = require(networkRequests.createGetExperiencesDetails)
 local createGetExperienceMediaModule = require(networkRequests.createGetExperienceMedia)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: createGetExperiencesPlayabilityStatusModule (ref), createGetExperiencesProductInfoModule (ref), createGetExperiencesDetailsModule (ref), createGetExperienceMediaModule (ref)
 	return {
 		GetExperiencesPlayabilityStatus = createGetExperiencesPlayabilityStatusModule(p0),

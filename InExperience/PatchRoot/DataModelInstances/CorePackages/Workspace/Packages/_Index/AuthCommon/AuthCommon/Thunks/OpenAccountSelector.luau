@@ -9,9 +9,9 @@ local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3D
 local var2 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local getFFlagEnableAccountSwitcherFoundationDesign = dependenciesModule.SharedFlags.GetFFlagEnableAccountSwitcherFoundationDesign
 
-return function(p0, p1, p2) --[[ line: 16 ]]
+return function(p0, p1, p2)
 	-- upvalues: getFFlagEnableAccountSwitcherFoundationDesign (ref), setCentralOverlay (ref), centralOverlayType (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
-	return function(p3) --[[ line: 17 ]]
+	return function(p3)
 		-- upvalues: p1 (ref), getFFlagEnableAccountSwitcherFoundationDesign (copy), p2 (ref), setCentralOverlay (copy), centralOverlayType (copy), p0 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), navigateDown (copy)
 		if not p1 then
 			p3:dispatch(setCentralOverlay(centralOverlayType.AccountSelector, p0))

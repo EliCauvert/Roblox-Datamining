@@ -29,7 +29,7 @@ saveTile.defaultProps = {
 	thumbnailSize = UDim2.new(0, 36, 0, 36)
 }
 
-function saveTile.render(p0) --[[ line: 54 ]]
+function saveTile.render(p0)
 	-- upvalues: roactModule (ref), tileModule (ref)
 	return roactModule.createElement(tileModule, {
 		hasRoundedCorners = p0.props.hasRoundedCorners,
@@ -48,7 +48,7 @@ function saveTile.render(p0) --[[ line: 54 ]]
 	})
 end
 
-return roactModule.forwardRef(function(p1, p2) --[[ line: 79 ]]
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), saveTile (ref), cryoModule (ref)
 	return roactModule.createElement(saveTile, cryoModule.Dictionary.join(p1, { thumbnailRef = p2 }))
 end)

@@ -7,7 +7,7 @@ local enums = foundationModule.Enums
 local buttonVariant = enums.ButtonVariant
 local buttonSize = enums.ButtonSize
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	local text
 	local _ = nil
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 19 ]]
 		text = p0.text
 	end
 	return reactModule.createElement(button, {
-		onActivated = reactModule.useCallback(function() --[[ line: 30 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.onActivated then
 				p0.onActivated:signal():fire()

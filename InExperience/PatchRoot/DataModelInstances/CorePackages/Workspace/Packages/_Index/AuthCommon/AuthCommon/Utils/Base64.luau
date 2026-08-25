@@ -1,5 +1,5 @@
 ﻿local t = {
-	MakeEncoder = function(p0, p1, p2) --[[ line: 8 ]]
+	MakeEncoder = function(p0, p1, p2)
 		local t = {}
 		
 		for i, v in pairs({
@@ -75,7 +75,7 @@
 	end
 }
 
-function t.MakeDecoder(p3, p4, p5) --[[ line: 82 ]]
+function t.MakeDecoder(p3, p4, p5)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -91,7 +91,7 @@ local char = string.char
 local concat = table.concat
 local extract = bit32.extract
 
-function t.Encode(p6, p7, p8) --[[ line: 97 ]]
+function t.Encode(p6, p7, p8)
 	-- upvalues: var1 (ref), extract (ref), char (ref), concat (ref)
 	p7 = p7 or var1
 	local t = {}
@@ -130,12 +130,12 @@ function t.Encode(p6, p7, p8) --[[ line: 97 ]]
 	return concat(t)
 end
 
-function t.EncodeUrl(p9, p10) --[[ line: 152 ]]
+function t.EncodeUrl(p9, p10)
 	-- upvalues: t (ref)
 	return t.ToUrlSafeBase64(t.Encode(p9, nil, p10))
 end
 
-function t.Decode(p11, p12, p13) --[[ line: 158 ]]
+function t.Decode(p11, p12, p13)
 	-- upvalues: var2 (ref), char (ref), extract (ref), concat (ref)
 	p12 = p12 or var2
 	local var21 = nil
@@ -187,16 +187,16 @@ function t.Decode(p11, p12, p13) --[[ line: 158 ]]
 	return concat(t_1)
 end
 
-function t.DecodeUrl(p14, p15) --[[ line: 213 ]]
+function t.DecodeUrl(p14, p15)
 	-- upvalues: t (ref)
 	return t.Decode(t.FromUrlSafeBase64(p14), nil, p15)
 end
 
-function t.ToUrlSafeBase64(p16) --[[ line: 218 ]]
+function t.ToUrlSafeBase64(p16)
 	return string.gsub(string.gsub(string.gsub(p16, "+", "-"), "/", "_"), "=", "")
 end
 
-function t.FromUrlSafeBase64(p17) --[[ line: 225 ]]
+function t.FromUrlSafeBase64(p17)
 	local var43 = p17:gsub("[^%w%-_]", "")
 	
 	return string.gsub(string.gsub(var43 .. string.rep("=", (4 - #var43 % 4) % 4), "_", "/"), "-", "+")

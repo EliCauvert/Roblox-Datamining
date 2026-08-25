@@ -14,17 +14,17 @@ local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableM
 local fFlagPlayerListUseMobileOnSmallDisplay = playerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay
 local fFlagPlayerListReskin = playerListModule.Flags.FFlagPlayerListReskin
 
-local function _() --[[ line: 20 | named "isTouchOrGamepad" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	return if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
 end
 
-local _ = function() --[[ line: 32 | named "isReskinConsoleMobileRoute" ]]
+local _ = function()
 	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref)
 	return fFlagPlayerListReskin and (fFlagEnableMobilePlayerListOnConsole and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))
 end
 
-local function isSmallTouchScreen() --[[ line: 39 ]]
+local function isSmallTouchScreen()
 	-- upvalues: fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), fFlagPlayerListUseMobileOnSmallDisplay (ref), utilityModule (ref), fStringPlayerListOverrideTypeModule (ref)
 	local var12
 	if _G.__TESTEZ_RUNNING_TEST__ then
@@ -57,7 +57,7 @@ local function isSmallTouchScreen() --[[ line: 39 ]]
 	return utilityModule:IsSmallTouchScreen() or fFlagEnableMobilePlayerListOnConsole and (var13 and (var14 or fFlagPlayerListUseMobileOnSmallDisplay and (var12 and (var14 or fStringPlayerListOverrideTypeModule == "mobile"))))
 end
 
-return function() --[[ line: 62 ]]
+return function()
 	-- upvalues: isSmallTouchScreen (ref), VRService (ref), fFlagPlayerListReskin (ref), fFlagEnableMobilePlayerListOnConsole (ref), guiService (ref), userInputService (ref), tenFootInterfaceModule (ref), fFlagPlayerListPersistVisibilityModule (ref)
 	local var15 = not isSmallTouchScreen()
 	

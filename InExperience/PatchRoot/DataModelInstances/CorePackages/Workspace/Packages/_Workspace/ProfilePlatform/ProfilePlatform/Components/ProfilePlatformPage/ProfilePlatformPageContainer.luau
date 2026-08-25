@@ -49,7 +49,7 @@ local avatarModelPrefetch = require(parent.EditProfileBackground).AvatarModelPre
 local profilePlatformPageModule = require(script.Parent.ProfilePlatformPage)
 local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
 
-return function() --[[ line: 67 ]]
+return function()
 	-- upvalues: reactModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), useLocalUserId (ref), useDispatch (ref), fFlagProfilePlatformTrustedConnectionsMVP (ref), navigationModule (ref), useProfileJsonModule (ref), useAvailableComponentsModule (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), useActionsComponentRequestModule (ref), socialStopwatchModule (ref), eventNamesModule (ref), loadingStages (ref), getProfilePlatformModule (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref), fFlagProfilePlatformEnableVRModule (ref), getDeepValueModule (ref), enumsModule (ref), getFriendStatusFromProfileResponseModule (ref), getIsTrustedConnectionsStatusFromProfileResponseModule (ref), checkQrSessionModule (ref), robloxAppEnumsModule (ref), refreshProfilePlatformActionInfoModule (ref), loadingStagesExtensionModule (ref), useEffectOnMount (ref), avatarModelPrefetch (ref), profilePlatformEnableRefreshSignal (ref), useSignalState (ref), profileRefreshSignal (ref), enableSocialProfilePeekViewExposureEvents (ref), IXPService (ref), socialProfilePeekViewLayer (ref), socialProfilePeekViewSecondaryLayer (ref), socialSelfProfileViewLayer (ref), profilePlatformEnableSessionization (ref), var36 (ref), var37 (ref), fFlagProfilePlatformEnableMomentsModule (ref), cryoModule (ref), parseComponentsFromJsonModule (ref), profilePlatformEventReceiverModule (ref), profilePlatformPageModule (ref)
 	local var40, var41 = reactModule.useState(true)
 	local var42 = useProfileWrapperContextModule()
@@ -65,7 +65,7 @@ return function() --[[ line: 67 ]]
 	local var50 = if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then useActionsComponentRequestModule() else nil
 	local var51 = reactModule.useRef(0)
 	
-	local var52 = function(p0) --[[ line: 92 ]]
+	local var52 = function(p0)
 		-- upvalues: socialStopwatchModule (copy), var43 (ref), eventNamesModule (copy), loadingStages (copy), var46 (ref), getProfilePlatformModule (copy), profileId (ref), profileType (ref), var49 (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (copy), var41 (ref), fFlagProfilePlatformEnableVRModule (copy), getDeepValueModule (copy), enumsModule (copy), fFlagProfilePlatformTrustedConnectionsMVP (copy), getFriendStatusFromProfileResponseModule (copy), getIsTrustedConnectionsStatusFromProfileResponseModule (copy), var42 (ref), checkQrSessionModule (copy), var47 (ref), robloxAppEnumsModule (copy), refreshProfilePlatformActionInfoModule (copy), var50 (ref), loadingStagesExtensionModule (copy)
 		local var56 = socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.ProfileOpened)
 		var43.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
@@ -79,7 +79,7 @@ return function() --[[ line: 67 ]]
 			profileType = profileType,
 			components = var49,
 			onlyEssentialComponents = if fFlagProfilePlatformEnableLazyLoadingComponentsModule then true else nil
-		})):andThen(function(p1) --[[ line: 108 ]]
+		})):andThen(function(p1)
 			-- upvalues: fFlagProfilePlatformEnableLazyLoadingComponentsModule (copy), var41 (copy), fFlagProfilePlatformEnableVRModule (copy), p0 (ref), var43 (copy), eventNamesModule (copy), getDeepValueModule (copy), enumsModule (copy), fFlagProfilePlatformTrustedConnectionsMVP (copy), getFriendStatusFromProfileResponseModule (copy), getIsTrustedConnectionsStatusFromProfileResponseModule (copy), var42 (copy), var46 (copy), checkQrSessionModule (copy), profileId (copy), var47 (copy), robloxAppEnumsModule (copy), refreshProfilePlatformActionInfoModule (copy), var50 (copy)
 			if fFlagProfilePlatformEnableLazyLoadingComponentsModule then
 				var41(false)
@@ -93,14 +93,14 @@ return function() --[[ line: 67 ]]
 			local var58 = if var57 and var57[1] then var57[1].type else nil
 			
 			if fFlagProfilePlatformTrustedConnectionsMVP and getFriendStatusFromProfileResponseModule(p1) == enumsModule.FriendStatus.Friends and (not getIsTrustedConnectionsStatusFromProfileResponseModule(p1) and var42.sourceInfo.source == enumsModule.Sources.QrCode) then
-				var46(checkQrSessionModule.API(profileId)):andThen(function(p2) --[[ line: 130 ]]
+				var46(checkQrSessionModule.API(profileId)):andThen(function(p2)
 					-- upvalues: var47 (copy), robloxAppEnumsModule (copy), profileId (copy), var46 (copy), refreshProfilePlatformActionInfoModule (copy), var50 (copy)
 					if p2.responseBody == true then
 						var47.push(robloxAppEnumsModule.AppPage.TrustedContactsModal, {
 							props = {
 								sentFromQrCode = true,
 								userId = profileId,
-								onRequestSent = function() --[[ line: 136 ]]
+								onRequestSent = function()
 									-- upvalues: var46 (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var50 (copy)
 									return var46(refreshProfilePlatformActionInfoModule(profileId, var50))
 								end
@@ -121,7 +121,7 @@ return function() --[[ line: 67 ]]
 				shareLinkId = var42.sourceInfo.shareLinkId,
 				primaryAction = var58
 			})
-		end):catch(function(_) --[[ line: 162 ]]
+		end):catch(function(_)
 			-- upvalues: var43 (copy), eventNamesModule (copy), var56 (ref), loadingStages (copy)
 			var43.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
 				isProfilePlatform = true,
@@ -137,14 +137,14 @@ return function() --[[ line: 67 ]]
 				profileId = profileId,
 				profileType = profileType,
 				components = var49
-			})):andThen(function(_) --[[ line: 178 ]]
+			})):andThen(function(_)
 				-- upvalues: var43 (copy), eventNamesModule (copy), var56 (ref), loadingStagesExtensionModule (copy)
 				var43.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
 					isProfilePlatform = true,
 					statValue = if var56 then var56.timeElapsed else nil,
 					status = loadingStagesExtensionModule.LazyLoaded
 				})
-			end):catch(function(_) --[[ line: 185 ]]
+			end):catch(function(_)
 				-- upvalues: var43 (copy), eventNamesModule (copy), var56 (ref), loadingStages (copy)
 				var43.fireAnalyticsEvent(eventNamesModule.ProfileLoadingStage, {
 					isProfilePlatform = true,
@@ -155,7 +155,7 @@ return function() --[[ line: 67 ]]
 		end
 	end
 	
-	useEffectOnMount(function() --[[ line: 194 ]]
+	useEffectOnMount(function()
 		-- upvalues: profileType (ref), enumsModule (copy), profileId (ref), avatarModelPrefetch (copy)
 		if profileType ~= enumsModule.ProfileTypes.User then return end
 		local var59 = tonumber(profileId)
@@ -168,7 +168,7 @@ return function() --[[ line: 67 ]]
 	if profilePlatformEnableRefreshSignal then
 		local var53 = useSignalState(profileRefreshSignal.getProfileRefreshSignal)
 		local var54 = reactModule.useRef(0)
-		reactModule.useEffect(function() --[[ line: 208 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var45 (ref), var53 (ref), var54 (ref), var52 (ref)
 			if var45 and var54.current < var53 then
 				var54.current = var53
@@ -177,21 +177,21 @@ return function() --[[ line: 67 ]]
 		end, { var53, var45, profileId, var52 })
 	end
 	if fFlagProfilePlatformEnableVRModule then
-		reactModule.useEffect(function() --[[ line: 217 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var51 (ref), var52 (ref)
 			local var60 = var51.current + 1
 			var51.current = var60
 			var52(var60)
 		end, { var49 })
 	else
-		useEffectOnMount(function() --[[ line: 223 ]]
+		useEffectOnMount(function()
 			-- upvalues: var52 (ref)
 			var52()
 		end)
 	end
-	reactModule.useEffect(function() --[[ line: 228 ]]
+	reactModule.useEffect(function()
 		-- upvalues: socialStopwatchModule (copy), var43 (ref), eventNamesModule (copy)
-		return function() --[[ line: 229 ]]
+		return function()
 			-- upvalues: socialStopwatchModule (copy), var43 (copy), eventNamesModule (copy)
 			socialStopwatchModule.Stopwatch.stop(socialStopwatchModule.Events.ProfileOpened)
 			var43.fireAnalyticsEvent(eventNamesModule.ProfileClosed)
@@ -199,7 +199,7 @@ return function() --[[ line: 67 ]]
 	end, {})
 	
 	if enableSocialProfilePeekViewExposureEvents then
-		useEffectOnMount(function() --[[ line: 237 ]]
+		useEffectOnMount(function()
 			-- upvalues: IXPService (copy), socialProfilePeekViewLayer (copy), socialProfilePeekViewSecondaryLayer (copy), var45 (ref), socialSelfProfileViewLayer (copy)
 			IXPService:LogFlagLinkedUserLayerExposure(socialProfilePeekViewLayer)
 			IXPService:LogFlagLinkedUserLayerExposure(socialProfilePeekViewSecondaryLayer)
@@ -210,7 +210,7 @@ return function() --[[ line: 67 ]]
 		end)
 	end
 	if profilePlatformEnableSessionization then
-		reactModule.useEffect(function() --[[ line: 247 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var36 (copy), var37 (copy), var42 (ref)
 			local profilePlatformPageMetadata = nil
 			
@@ -221,7 +221,7 @@ return function() --[[ line: 67 ]]
 			end
 			var36:SetMetadata(var37.StructuralIdentifier.ProfilePlatformPage, var37.Metadata.ProfilePlatformPage.ProfileSessionId, var42.profileSessionId)
 			
-			return function() --[[ line: 267 ]]
+			return function()
 				-- upvalues: profilePlatformPageMetadata (write), var36 (copy), var37 (copy)
 				if profilePlatformPageMetadata == nil then
 					var36:RemoveSession(var37.StructuralIdentifier.ProfilePlatformPage)
@@ -235,7 +235,7 @@ return function() --[[ line: 67 ]]
 	local var55 = if fFlagProfilePlatformEnableMomentsModule then var42.sourceInfo.source else nil
 	
 	return reactModule.createElement(profilePlatformPageModule, {
-		children = if fFlagProfilePlatformEnableLazyLoadingComponentsModule and var40 then {} else reactModule.useMemo(function() --[[ line: 283 ]]
+		children = if fFlagProfilePlatformEnableLazyLoadingComponentsModule and var40 then {} else reactModule.useMemo(function()
 			-- upvalues: cryoModule (copy), parseComponentsFromJsonModule (copy), var48 (ref), profileType (ref), var55 (ref), fFlagAXEnableProfileTab (copy), var44 (ref), reactModule (copy), profilePlatformEventReceiverModule (copy)
 			return cryoModule.Dictionary.union(parseComponentsFromJsonModule(var48.components, var48.componentOrdering, profileType, var55, if fFlagAXEnableProfileTab then var44 else nil), {
 				ProfilePlatformEventReceiver = reactModule.createElement(profilePlatformEventReceiverModule)

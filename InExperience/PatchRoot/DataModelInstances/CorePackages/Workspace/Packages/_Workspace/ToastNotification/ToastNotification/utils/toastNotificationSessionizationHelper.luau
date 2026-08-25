@@ -3,7 +3,7 @@ local parent = script.Parent.Parent
 local constantsModule = require(parent.constants)
 local typeModule = require(parent.type)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: typeModule (ref), sessionService (ref), constantsModule (ref)
 	if p0 == typeModule.ToastNotificationActionsEnum.Display then
 		sessionService:SetSession(constantsModule.ToastStructuralIdentifier.Level1, constantsModule.ToastStructuralIdentifier.ToastNotification, constantsModule.ToastStructuralIdentifier.ToastNotification)

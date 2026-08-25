@@ -27,13 +27,13 @@ local dEV = reactGlobalsModule.__DEV__
 local var4 = nil
 local var5 = nil
 local t = {
-	setRefreshHandler = function(value) --[[ line: 92 ]]
+	setRefreshHandler = function(value)
 		-- upvalues: dEV (ref), var4 (write)
 		if dEV then
 			var4 = value
 		end
 	end,
-	resolveFunctionForHotReloading = function(p0) --[[ line: 99 ]]
+	resolveFunctionForHotReloading = function(p0)
 		-- upvalues: dEV (ref), var4 (write)
 		if not dEV then
 			return p0
@@ -44,7 +44,7 @@ local t = {
 		
 		return if var11 == nil then p0 else var11.current
 	end,
-	resolveClassForHotReloading = function(p1) --[[ line: 117 ]]
+	resolveClassForHotReloading = function(p1)
 		-- upvalues: dEV (ref), var4 (write)
 		if not dEV then
 			return p1
@@ -55,7 +55,7 @@ local t = {
 		
 		return if var12 == nil then p1 else var12.current
 	end,
-	resolveForwardRefForHotReloading = function(p2) --[[ line: 123 ]]
+	resolveForwardRefForHotReloading = function(p2)
 		-- upvalues: dEV (ref), var4 (write), REACT_FORWARD_REF_TYPE (ref)
 		if not dEV then
 			return p2
@@ -93,7 +93,7 @@ local t = {
 			return t
 		end
 	end,
-	isCompatibleFamilyForHotReloading = function(p3, p4) --[[ line: 160 ]]
+	isCompatibleFamilyForHotReloading = function(p3, p4)
 		-- upvalues: dEV (ref), var4 (write), classComponent (ref), functionComponent (ref), REACT_LAZY_TYPE (ref), forwardRef (ref), REACT_FORWARD_REF_TYPE (ref), memoComponent (ref), simpleMemoComponent (ref), REACT_MEMO_TYPE (ref)
 		if not dEV then
 			return false
@@ -135,7 +135,7 @@ local t = {
 			return tag == nil or tag ~= var4(type)
 		end
 	end,
-	markFailedErrorBoundaryForHotReloading = function(p5) --[[ line: 247 ]]
+	markFailedErrorBoundaryForHotReloading = function(p5)
 		-- upvalues: dEV (ref), var4 (write), var5 (write), set (ref)
 		if dEV then
 			if var4 == nil then return end
@@ -152,7 +152,7 @@ local findHostInstancesForMatchingFibersRecursively = nil
 local scheduleFibersWithFamiliesRecursively = nil
 local _ = nil
 
-function t.scheduleRefresh(p6, p7) --[[ line: 267 ]]
+function t.scheduleRefresh(p6, p7)
 	-- upvalues: dEV (ref), var4 (write), scheduleFibersWithFamiliesRecursively (write)
 	if dEV then
 		if var4 == nil then return end
@@ -161,7 +161,7 @@ function t.scheduleRefresh(p6, p7) --[[ line: 267 ]]
 		local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
 		local flushSync = unknownModule.flushSync
 		unknownModule.flushPassiveEffects()
-		flushSync(function() --[[ line: 279 ]]
+		flushSync(function()
 			-- upvalues: scheduleFibersWithFamiliesRecursively (copy), p6 (ref), updatedFamilies (ref), staleFamilies (ref)
 			scheduleFibersWithFamiliesRecursively(p6.current, updatedFamilies, staleFamilies)
 		end)
@@ -170,21 +170,21 @@ end
 
 local _ = nil
 
-function t.scheduleRoot(p8, p9) --[[ line: 291 ]]
+function t.scheduleRoot(p8, p9)
 	-- upvalues: dEV (ref)
 	if dEV then
 		if p8.context ~= require(script.Parent["ReactFiberContext.new"]).emptyContextObject then return end
 		local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
 		local flushSync = unknownModule.flushSync
 		unknownModule.flushPassiveEffects()
-		flushSync(function() --[[ line: 306 ]]
+		flushSync(function()
 			-- upvalues: p9 (ref), p8 (ref)
 			require(script.Parent["ReactFiberReconciler.new"]).updateContainer(p9, p8, nil, nil)
 		end)
 	end
 end
 
-scheduleFibersWithFamiliesRecursively = function(p10, p11, p12) --[[ line: 316 | named "scheduleFibersWithFamiliesRecursively" ]]
+scheduleFibersWithFamiliesRecursively = function(p10, p11, p12)
 	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), var4 (write), error (ref), var5 (write), syncLane (ref), noTimestamp (ref), scheduleFibersWithFamiliesRecursively (write)
 	if dEV then
 		local alternate = p10.alternate
@@ -240,11 +240,11 @@ end
 
 local _ = nil
 
-function t.findHostInstancesForRefresh(p13, p14) --[[ line: 383 ]]
+function t.findHostInstancesForRefresh(p13, p14)
 	-- upvalues: dEV (ref), set (ref), array (ref), findHostInstancesForMatchingFibersRecursively (write), error (ref)
 	if dEV then
 		local var24 = set.new()
-		findHostInstancesForMatchingFibersRecursively(p13.current, set.new(array.map(p14, function(p15) --[[ line: 389 ]]
+		findHostInstancesForMatchingFibersRecursively(p13.current, set.new(array.map(p14, function(p15)
 			return p15.current
 		end)), var24)
 		
@@ -253,7 +253,7 @@ function t.findHostInstancesForRefresh(p13, p14) --[[ line: 383 ]]
 	error(error.new("Did not expect findHostInstancesForRefresh to be called in production."))
 end
 
-findHostInstancesForMatchingFibersRecursively = function(p16, p17, p18) --[[ line: 404 | named "findHostInstancesForMatchingFibersRecursively" ]]
+findHostInstancesForMatchingFibersRecursively = function(p16, p17, p18)
 	-- upvalues: dEV (ref), functionComponent (ref), simpleMemoComponent (ref), classComponent (ref), forwardRef (ref), findHostInstancesForFiberShallowly (write), findHostInstancesForMatchingFibersRecursively (write)
 	if dEV then
 		local child = p16.child
@@ -278,7 +278,7 @@ findHostInstancesForMatchingFibersRecursively = function(p16, p17, p18) --[[ lin
 	end
 end
 
-findHostInstancesForFiberShallowly = function(p19, p20) --[[ line: 448 | named "findHostInstancesForFiberShallowly" ]]
+findHostInstancesForFiberShallowly = function(p19, p20)
 	-- upvalues: dEV (ref), findChildHostInstancesForFiberShallowly (write), hostComponent (ref), hostPortal (ref), hostRoot (ref), error (ref)
 	if dEV then
 		if findChildHostInstancesForFiberShallowly(p19, p20) then return end
@@ -308,7 +308,7 @@ findHostInstancesForFiberShallowly = function(p19, p20) --[[ line: 448 | named "
 	end
 end
 
-findChildHostInstancesForFiberShallowly = function(p21, p22) --[[ line: 480 | named "findChildHostInstancesForFiberShallowly" ]]
+findChildHostInstancesForFiberShallowly = function(p21, p22)
 	-- upvalues: dEV (ref), hostComponent (ref)
 	if dEV then
 		local var26 = p21

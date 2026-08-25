@@ -43,7 +43,7 @@ local fFlagEnablePartyVoiceChangersInLua = sharedFlags.FFlagEnablePartyVoiceChan
 local fFlagEnableBlackbirdCheck = sharedFlags.FFlagEnableBlackbirdCheck
 local useIsRobloxSubscriber = userProfilesModule.Hooks.useIsRobloxSubscriber
 
-return function(p0) --[[ line: 84 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useTokens (ref), useAnimatedTransparency (ref), partyVoiceActivityIndicatorAnimationMs (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), userProfilesModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), react (ref), fFlagSquadsPresenceStoreMigration (ref), var7 (ref), useSelector (ref), var8 (ref), presenceType (ref), useLocalUserId (ref), getFFlagEnableCrossExpVoice (ref), useIsVoiceConnected (ref), useIsMicPermissionsError (ref), useParticipant (ref), useIsVoiceConnecting (ref), useIsActiveParticipant (ref), useIsLocalPlayerPartyVoiceEligible (ref), useIsUserPartyVoiceEligible (ref), useIsCurrentSquadPartyVoiceEligible (ref), useIsParticipantMutedLocally (ref), useIsParticipantMuted (ref), useIsParticipantInOtherAudioContext (ref), fFlagEnablePartyVoiceChangersInLua (ref), crossExperienceVoiceModule (ref), partyVoiceActivityIndicatorDebounceMs (ref), squadUserPartyStatusModule (ref), foundation (ref), iconSize (ref), builderIconsModule (ref), fFlagEnableSquadUserCardHoverFix (ref), useSquadUserDropdownMenuButtonsModule (ref), imageSetLabel (ref)
 	local var23, onlinePresenceText
 	local var13 = useLocalization({
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 84 ]]
 	})
 	local var19 = if var18.data then userProfilesModule.Selectors.getCombinedNameFromId(var18.data, p0.user.userId) else ""
 	local var20 = getStandardSizeAvatarHeadShotRbxthumb(tostring(p0.user.userId))
-	local var21 = if fFlagSquadsPresenceStoreMigration then var7(tostring(p0.user.userId)) else useSelector(react.useCallback(function(p1) --[[ line: 111 ]]
+	local var21 = if fFlagSquadsPresenceStoreMigration then var7(tostring(p0.user.userId)) else useSelector(react.useCallback(function(p1)
 		-- upvalues: p0 (ref)
 		return p1.Squad.Presence.byUserId[tostring(p0.user.userId)]
 	end, { p0.user.userId }))
@@ -108,14 +108,14 @@ return function(p0) --[[ line: 84 ]]
 		var28 = var38 and (var36 and not var37)
 		var32 = if fFlagEnablePartyVoiceChangersInLua and var35 then var35.isVoiceChangerActive else false
 	end
-	local var39 = react.useMemo(function() --[[ line: 186 ]]
+	local var39 = react.useMemo(function()
 		-- upvalues: crossExperienceVoiceModule (copy), var16 (ref), partyVoiceActivityIndicatorDebounceMs (copy)
-		return crossExperienceVoiceModule.Utils.debounce(function(p2) --[[ line: 187 ]]
+		return crossExperienceVoiceModule.Utils.debounce(function(p2)
 			-- upvalues: var16 (copy)
 			var16(p2)
 		end, partyVoiceActivityIndicatorDebounceMs)
 	end, {})
-	react.useEffect(function() --[[ line: 192 ]]
+	react.useEffect(function()
 		-- upvalues: getFFlagEnableCrossExpVoice (copy), var26 (write), var39 (ref), var16 (ref)
 		if getFFlagEnableCrossExpVoice() then
 			if var26 then
@@ -127,14 +127,14 @@ return function(p0) --[[ line: 84 ]]
 			var39.call(1)
 		end
 	end, { var26 })
-	local var40 = react.useMemo(function() --[[ line: 204 ]]
+	local var40 = react.useMemo(function()
 		-- upvalues: p0 (ref), squadUserPartyStatusModule (copy), var13 (ref), var23 (ref), var25_1 (write), onlinePresenceText (write)
 		return if p0.user.partyStatus == squadUserPartyStatusModule.NoResponse then var13.noResponseText elseif p0.user.partyStatus == squadUserPartyStatusModule.Invited then var13.invitedText elseif var23 or var25_1 then var13.connectingText else onlinePresenceText
 	end, {
 		p0.user and p0.user.partyStatus, onlinePresenceText, var23, var25_1,
 		var13.noResponse, var13.invitedText, var13.connectingText
 	})
-	local var41 = react.useMemo(function() --[[ line: 226 ]]
+	local var41 = react.useMemo(function()
 		-- upvalues: p0 (ref), squadUserPartyStatusModule (copy), react (copy), foundation (copy), iconSize (copy), var14 (ref), var23 (ref), var25_1 (write), var22 (ref)
 		return if p0.user.partyStatus == squadUserPartyStatusModule.Invited then react.createElement(foundation.View, { tag = "auto-xy" }, {
 			LoadingIcon = react.createElement(foundation.Loading, {
@@ -163,7 +163,7 @@ return function(p0) --[[ line: 84 ]]
 		backgroundStyle = var14.Color.Surface.Surface_200,
 		cornerRadius = UDim.new(0, var14.Radius.Medium),
 		isDisabled = var23 or (var25_1 or (if p0.user.partyStatus ~= squadUserPartyStatusModule.Invited then p0.user.partyStatus == squadUserPartyStatusModule.NoResponse else true)),
-		onActivated = if p0.onActivated and (if fFlagEnableSquadUserCardHoverFix then not var25 and not (#useSquadUserDropdownMenuButtonsModule(p0.user.userId, p0.isInExperience) < 1) else not var25) then react.useCallback(function() --[[ line: 447 ]]
+		onActivated = if p0.onActivated and (if fFlagEnableSquadUserCardHoverFix then not var25 and not (#useSquadUserDropdownMenuButtonsModule(p0.user.userId, p0.isInExperience) < 1) else not var25) then react.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.onActivated then
 				p0.onActivated(tostring(p0.user.userId))
@@ -225,7 +225,7 @@ return function(p0) --[[ line: 84 ]]
 				PaddingRight = UDim.new(0, var14.Padding.Medium),
 				PaddingTop = UDim.new(0, var14.Padding.Medium)
 			}),
-			Name = react.useMemo(function() --[[ line: 258 ]]
+			Name = react.useMemo(function()
 				-- upvalues: var19 (write), react (copy), var14 (ref), p0 (ref), foundation (copy), iconSize (copy), var31 (write), var29 (write), var27 (write), var28 (write), fFlagEnablePartyVoiceChangersInLua (copy), var32 (write), builderIconsModule (copy), fFlagEnableBlackbirdCheck (copy), var17 (ref)
 				return if var19 == "" then nil else react.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -329,7 +329,7 @@ return function(p0) --[[ line: 84 ]]
 				if fFlagEnablePartyVoiceChangersInLua then var32 else nil,
 				if fFlagEnableBlackbirdCheck then var17 else nil
 			}),
-			Presence = if not p0.isBlocked then react.useMemo(function() --[[ line: 394 ]]
+			Presence = if not p0.isBlocked then react.useMemo(function()
 				-- upvalues: react (copy), var14 (ref), var41 (ref), foundation (copy), var40 (ref)
 				return react.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -389,7 +389,7 @@ return function(p0) --[[ line: 84 ]]
 			UIStroke = react.createElement("UIStroke", {
 				Thickness = 1,
 				Color = var14.Color.Stroke.Default.Color3,
-				Transparency = var15:map(function(p3) --[[ line: 571 ]]
+				Transparency = var15:map(function(p3)
 					-- upvalues: var14 (ref)
 					return if p3 < 0.9 then 1 else var14.Color.Stroke.Default.Transparency
 				end)

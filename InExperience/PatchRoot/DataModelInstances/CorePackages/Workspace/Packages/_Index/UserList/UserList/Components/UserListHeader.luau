@@ -11,7 +11,7 @@ local iconSize = enums.IconSize
 local iconVariant = enums.IconVariant
 local fFlagAddFriendsIgnoreAllFoundationMenu = require(parent.SharedFlags).FFlagAddFriendsIgnoreAllFoundationMenu
 
-return function(p0) --[[ line: 29 | named "UserListHeader" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), text (ref), enums (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), iconButton (ref), fFlagAddFriendsIgnoreAllFoundationMenu (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col gap-xxsmall align-x-left",

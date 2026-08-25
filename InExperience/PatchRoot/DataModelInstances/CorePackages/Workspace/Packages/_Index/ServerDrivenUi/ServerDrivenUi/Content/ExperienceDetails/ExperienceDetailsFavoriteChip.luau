@@ -17,13 +17,13 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useOptimisticUpdateStatusModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 local fFlagSduiFavoritesHydrationStructured = require(parent.SharedFlags).FFlagSduiFavoritesHydrationStructured
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "ExperienceDetailsFavoriteChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), game (ref), signalsReactModule (ref), fFlagSduiFavoritesHydrationStructured (ref), useLocalization (ref), reactModule (ref), playersService (ref), gameFavorite (ref), setCurrentToastMessage (ref), toastType (ref), useOptimisticUpdateStatusModule (ref), sduiChip (ref), foundationModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId
 	local var9 = useDispatch()
 	local andFetchFavorite = game.getFavoritesStore(false).getAndFetchFavorite(universeId)
-	local var11 = signalsReactModule.useSignalState(function(p1) --[[ line: 43 ]]
+	local var11 = signalsReactModule.useSignalState(function(p1)
 		-- upvalues: andFetchFavorite (ref), fFlagSduiFavoritesHydrationStructured (copy)
 		local var14 = andFetchFavorite.data(p1)
 		
@@ -36,7 +36,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "ExperienceDetailsFav
 		text = useLocalization({ favorite = "Feature.Favorites.Label.Favorite" }).favorite,
 		leadingIconName = foundationModule.Enums.IconName.Star,
 		leadingIconVariant = if var11 then foundationModule.Enums.IconVariant.Filled else nil,
-		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function() --[[ line: 60 ]]
+		onActivated = useOptimisticUpdateStatusModule(reactModule.useCallback(function()
 			-- upvalues: var11 (ref), var13 (ref), playersService (copy), gameFavorite (copy), game (copy), universeId (ref)
 			local var15 = not var11
 			
@@ -49,7 +49,7 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "ExperienceDetailsFav
 				}, "ExperienceDetailsFavoriteChip")
 			end
 			return game.getFavoritesStore(false).updateFavorite(universeId, var15)
-		end, { universeId, var13, var11 }), reactModule.useCallback(function(p2) --[[ line: 76 ]]
+		end, { universeId, var13, var11 }), reactModule.useCallback(function(p2)
 			-- upvalues: var9 (ref), setCurrentToastMessage (copy), toastType (copy)
 			if p2 and p2.type == "error" then
 				var9(setCurrentToastMessage({

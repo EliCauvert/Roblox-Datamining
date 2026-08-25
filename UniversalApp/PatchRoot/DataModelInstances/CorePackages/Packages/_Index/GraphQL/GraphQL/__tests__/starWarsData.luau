@@ -65,29 +65,29 @@ local t_7 = {
 }
 local t_8 = { [t_6.id] = t_6, [t_7.id] = t_7 }
 
-local function getCharacter(p0) --[[ line: 135 ]]
+local function getCharacter(p0)
 	-- upvalues: promiseModule (ref), t_5 (ref), t_8 (ref)
 	return promiseModule.resolve(t_5[p0] or t_8[p0])
 end
 
 return {
-	getHuman = function(p1) --[[ line: 165 ]]
+	getHuman = function(p1)
 		-- upvalues: t_5 (ref)
 		return t_5[p1]
 	end,
 	getCharacter = getCharacter,
-	getDroid = function(p2) --[[ line: 172 ]]
+	getDroid = function(p2)
 		-- upvalues: t_8 (ref)
 		return t_8[p2]
 	end,
-	getFriends = function(p3) --[[ line: 143 ]]
+	getFriends = function(p3)
 		-- upvalues: array (ref), getCharacter (ref)
-		return array.map(p3.friends, function(p4) --[[ line: 145 ]]
+		return array.map(p3.friends, function(p4)
 			-- upvalues: getCharacter (copy)
 			return getCharacter(p4)
 		end)
 	end,
-	getHero = function(p5) --[[ line: 153 ]]
+	getHero = function(p5)
 		-- upvalues: t (ref), t_7 (ref)
 		return if p5 == 5 then t else t_7
 	end

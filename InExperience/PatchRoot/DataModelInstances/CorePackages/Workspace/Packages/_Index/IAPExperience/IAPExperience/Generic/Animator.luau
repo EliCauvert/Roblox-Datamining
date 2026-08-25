@@ -10,7 +10,7 @@ local otterModule = require(parent_1.Otter)
 local name = roactModule.Component:extend(script.Name)
 local t = { dampingRatio = 1, frequency = 1.6 }
 
-function name.init(p0) --[[ line: 36 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), t (ref)
 	p0.state = { shouldRenderChildren = p0.props.shouldShow }
 	local var6, var7 = roactModule.createBinding(1)
@@ -18,7 +18,7 @@ function name.init(p0) --[[ line: 36 ]]
 	p0.motor:start()
 	p0.motor:onStep(var7)
 	p0.animationProgress = var6
-	p0.motor:onComplete(function() --[[ line: 49 ]]
+	p0.motor:onComplete(function()
 		-- upvalues: p0 (ref)
 		local props = p0.props
 		
@@ -48,7 +48,7 @@ function name.init(p0) --[[ line: 36 ]]
 	p0.motor:setGoal(otterModule.spring(var8, t))
 end
 
-function name.didUpdate(p1, p2, _) --[[ line: 73 ]]
+function name.didUpdate(p1, p2, _)
 	-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (ref), otterModule (ref), t (ref)
 	local props = p1.props
 	
@@ -67,11 +67,11 @@ function name.didUpdate(p1, p2, _) --[[ line: 73 ]]
 	end
 end
 
-function name.willUnmount(p3) --[[ line: 91 ]]
+function name.willUnmount(p3)
 	p3.motor:destroy()
 end
 
-function name.renderWithoutLocale(p4) --[[ line: 95 ]]
+function name.renderWithoutLocale(p4)
 	-- upvalues: roactModule (ref)
 	local props = p4.props
 	
@@ -79,7 +79,7 @@ function name.renderWithoutLocale(p4) --[[ line: 95 ]]
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Position = p4.animationProgress:map(function(p5) --[[ line: 103 ]]
+		Position = p4.animationProgress:map(function(p5)
 			-- upvalues: props (ref)
 			return if props.animateDown then UDim2.new(0, 0, -1 * p5, 0) else UDim2.new(0, 0, 1 * p5, 0)
 		end),
@@ -87,7 +87,7 @@ function name.renderWithoutLocale(p4) --[[ line: 95 ]]
 	}, p4.state.shouldRenderChildren and props.renderChildren() or nil) elseif props.shouldShow then props.renderChildren() else nil
 end
 
-function name.render(p6) --[[ line: 121 ]]
+function name.render(p6)
 	-- upvalues: roactModule (ref), localeProviderModule (ref), localizationService (ref), localizationProvider (ref), localization (ref)
 	return roactModule.createElement(localeProviderModule, {
 		locale = localizationService and localizationService.RobloxLocaleId

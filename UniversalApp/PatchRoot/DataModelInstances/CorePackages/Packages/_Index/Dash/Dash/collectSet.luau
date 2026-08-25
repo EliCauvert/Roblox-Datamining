@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(value, p0) --[[ line: 16 | named "collectSet" ]]
+return function(value, p0)
 	local t = {}
 	
 	for i, v in value do

@@ -5,7 +5,7 @@ local signalsModule = require(parent.Signals)
 local _ = require(script.Parent.FeedTypes)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 
-return function(p0, p1) --[[ line: 67 | named "useFeedTelemetry" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), signalsModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref)
 	local active = p1.active
 	local var4 = reactModule.useRef(nil)
@@ -24,7 +24,7 @@ return function(p0, p1) --[[ line: 67 | named "useFeedTelemetry" ]]
 	var12.current = p1.onEndStateReached
 	local var13 = reactModule.useRef(active)
 	var13.current = active
-	local var14 = reactModule.useCallback(function() --[[ line: 101 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var6 (ref), var7 (ref), var8 (ref), var5 (ref), var9 (ref)
 		local current = var4.current
 		
@@ -47,9 +47,9 @@ return function(p0, p1) --[[ line: 67 | named "useFeedTelemetry" ]]
 			recommendationSource = var9.current
 		})
 	end, {})
-	reactModule.useEffect(function() --[[ line: 133 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), p0 (ref), var14 (ref), var13 (ref), var12 (ref), var10 (ref), var4 (ref), var5 (ref), var6 (ref), var7 (ref), var11 (ref)
-		local var15 = signalsModule.createEffect(function(p2) --[[ line: 134 ]]
+		local var15 = signalsModule.createEffect(function(p2)
 			-- upvalues: p0 (copy), var14 (copy), var13 (copy), var12 (copy), var10 (copy), var4 (copy), var5 (copy), var6 (copy), var7 (copy), var11 (copy)
 			local currentItem = p0.getCurrentItem(p2)
 			var14()
@@ -71,13 +71,13 @@ return function(p0, p1) --[[ line: 67 | named "useFeedTelemetry" ]]
 			end
 		end)
 		
-		return function() --[[ line: 165 ]]
+		return function()
 			-- upvalues: var15 (ref), var14 (copy)
 			var15()
 			var14()
 		end
 	end, { p0, var14 })
-	reactModule.useEffect(function() --[[ line: 176 ]]
+	reactModule.useEffect(function()
 		-- upvalues: active (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var4 (ref), p0 (ref), var10 (ref), var5 (ref), var6 (ref), var7 (ref), var14 (ref)
 		if active then
 			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var4.current == nil then

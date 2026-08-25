@@ -1,19 +1,19 @@
 ﻿local httpService = game:GetService("HttpService")
 
-local function _(p0) --[[ line: 11 | named "replaceLeadingQuote" ]]
+local function _(p0)
 	local replaced = string.gsub(p0, "\n\"", "\n`")
 	
 	return if replaced:sub(1, 1) == "\"" then "`" .. string.sub(replaced, 2) else replaced
 end
 
-local _ = function(p1) --[[ line: 19 | named "replaceTrailingQuote" ]]
+local _ = function(p1)
 	local replaced = string.gsub(p1, "\"\n", "`\n")
 	
 	return if replaced:sub(-1) == "\"" then string.sub(replaced, 1, -2) .. "`" else replaced
 end
 
 return {
-	inspectStr = function(p2) --[[ line: 30 ]]
+	inspectStr = function(p2)
 		-- upvalues: httpService (ref)
 		if p2 == nil then
 			return "nil"

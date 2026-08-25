@@ -1,10 +1,10 @@
 ﻿local t = {
-	new = function() --[[ line: 16 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.fromGameCache(p0) --[[ line: 21 ]]
+function t.fromGameCache(p0)
 	-- upvalues: t (ref)
 	local var1 = t.new()
 	var1.universeId = p0.UniverseId
@@ -18,7 +18,7 @@ function t.fromGameCache(p0) --[[ line: 21 ]]
 	return var1
 end
 
-function t.fromJsonData(p1) --[[ line: 33 ]]
+function t.fromJsonData(p1)
 	-- upvalues: t (ref)
 	local var2 = t.new()
 	var2.universeId = p1.universeId

@@ -93,7 +93,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 100 | named "getAnimationData" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return t[p0]
 end

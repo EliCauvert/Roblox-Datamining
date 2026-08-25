@@ -8,7 +8,7 @@ local inlineLayout = inlineLayoutModule.Components.InlineLayout
 local mergeContextsModule = require(markdown.Utils.mergeContexts)
 local isInlineElement = inlineLayoutModule.Utils.isInlineElement
 
-return function(p0, p1) --[[ line: 13 | named "renderInline" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), inlineLayout (ref), dashModule (ref), mergeContextsModule (ref), isInlineElement (ref)
 	return reactModule.createElement(inlineLayout, {
 		VerticalPadding = UDim.new(0, 0),

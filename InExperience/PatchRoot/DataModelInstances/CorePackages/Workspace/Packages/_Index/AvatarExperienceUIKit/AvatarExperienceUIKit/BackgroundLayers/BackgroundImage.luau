@@ -9,7 +9,7 @@ local t = {
 	scaleType = Enum.ScaleType.Fit
 }
 
-return function(value) --[[ line: 27 | named "BackgroundImage" ]]
+return function(value)
 	-- upvalues: dashModule (ref), t (ref), reactModule (ref)
 	local var3 = dashModule.join(t, value)
 	

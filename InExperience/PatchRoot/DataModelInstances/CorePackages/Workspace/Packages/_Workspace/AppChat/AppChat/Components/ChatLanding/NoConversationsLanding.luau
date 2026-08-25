@@ -32,11 +32,11 @@ local t = {
 	}
 }
 
-local function _(p0) --[[ line: 72 | named "getEmptyStateFromProps" ]]
+local function _(p0)
 	return if p0.chatEnabled then "friends" elseif p0.globalRulesEnabled then if p0.privacySettingsEnabled then if p0.thirdPartyPrivacySettingsEnabled then "fallback" else "thirdParty" else "privacy" else "regional"
 end
 
-return function(p1) --[[ line: 87 | named "NoConversationsLanding" ]]
+return function(p1)
 	-- upvalues: t (ref), useLocalization (ref), reactModule (ref), foundationModule (ref)
 	local var3 = if p1.chatEnabled then "friends" elseif not p1.globalRulesEnabled then "regional" elseif not p1.privacySettingsEnabled then "privacy" elseif not p1.thirdPartyPrivacySettingsEnabled then "thirdParty" else "fallback"
 	local var4 = t[var3]
@@ -51,7 +51,7 @@ return function(p1) --[[ line: 87 | named "NoConversationsLanding" ]]
 		callToAction = var4.cta or "Feature.Chat.Label.PrivacySettings",
 		copy = var4.copy
 	})
-	reactModule.useEffect(function() --[[ line: 102 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var3 (ref)
 		if p1.fireRenderEvent then
 			p1.fireRenderEvent(var3)
@@ -64,7 +64,7 @@ return function(p1) --[[ line: 87 | named "NoConversationsLanding" ]]
 		button = if var5 then {
 			icon = "icons/navigation/externallink_medium",
 			text = var6.callToAction,
-			onActivated = function() --[[ line: 118 ]]
+			onActivated = function()
 				-- upvalues: p1 (ref), var3 (ref)
 				p1.onCallToAction(var3)
 			end

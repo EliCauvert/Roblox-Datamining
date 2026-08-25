@@ -15,7 +15,7 @@ local t = {
 }
 
 return {
-	logServeEnhancedVideoError = function(p0) --[[ line: 19 ]]
+	logServeEnhancedVideoError = function(p0)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t, { standardizedFields = list, customFields = { error = p0 } })
 	end

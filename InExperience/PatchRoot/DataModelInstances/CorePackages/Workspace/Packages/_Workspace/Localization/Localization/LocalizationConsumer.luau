@@ -7,7 +7,7 @@ local localizationRoactContextModule = require(script.Parent.LocalizationRoactCo
 local localizeStringsModule = require(script.Parent.localizeStrings)
 local localizationConsumer = reactModule.Component:extend("LocalizationConsumer")
 
-function localizationConsumer.init(p0) --[[ line: 14 ]]
+function localizationConsumer.init(p0)
 	-- upvalues: localizationService (ref)
 	local localization = p0.props.localization
 	
@@ -16,7 +16,7 @@ function localizationConsumer.init(p0) --[[ line: 14 ]]
 	end
 	p0.state = { locale = localizationService.RobloxLocaleId }
 	
-	function p0.updateLocalization(_) --[[ line: 25 ]]
+	function p0.updateLocalization(_)
 		-- upvalues: localization (ref), p0 (ref)
 		local locale = localization:GetLocale()
 		
@@ -28,13 +28,13 @@ function localizationConsumer.init(p0) --[[ line: 14 ]]
 	p0.connections = { localization.changed:connect(p0.updateLocalization) }
 end
 
-function localizationConsumer.willUnmount(p1) --[[ line: 39 ]]
+function localizationConsumer.willUnmount(p1)
 	for i, v in pairs(p1.connections) do
 		v:disconnect()
 	end
 end
 
-function localizationConsumer.render(p2) --[[ line: 45 ]]
+function localizationConsumer.render(p2)
 	-- upvalues: argCheckModule (ref), localizeStringsModule (ref), robloxLocaleIdKeyModule (ref)
 	local localization = p2.props.localization
 	local render = p2.props.render
@@ -47,10 +47,10 @@ function localizationConsumer.render(p2) --[[ line: 45 ]]
 	return render(var8)
 end
 
-return function(p3) --[[ line: 60 | named "LocalizationContextConsumer" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), localizationRoactContextModule (ref), localizationConsumer (ref)
 	return reactModule.createElement(localizationRoactContextModule.Consumer, {
-		render = function(p4) --[[ line: 62 ]]
+		render = function(p4)
 			-- upvalues: reactModule (copy), localizationConsumer (copy), p3 (ref)
 			return reactModule.createElement(localizationConsumer, {
 				localization = p4,

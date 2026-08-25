@@ -34,7 +34,7 @@ local t_1 = {
 	settings = constantsModule.DefaultSettings
 }
 
-return function(p0) --[[ line: 84 | named "AppStyleProvider" ]]
+return function(p0)
 	-- upvalues: object (ref), t_1 (ref), reactModule (ref), getTokens (ref), getThemeFromNameModule (ref), useTokens (ref), getFoundationTokens (ref), cryoModule (ref), mappers (ref), getFontFromNameModule (ref), constantsModule (ref), getTextSizeOffsetModule (ref), UIBloxConfigModule (ref), styleContextModule (ref), foundationSurfaceTokensDifferModule (ref), roactModule (ref), var5 (ref), loggerModule (ref), foundationProvider (ref), t (ref)
 	local var17 = object.assign({}, t_1, p0.style)
 	local var18, var19 = reactModule.useState(var17.themeName)
@@ -57,17 +57,17 @@ return function(p0) --[[ line: 84 | named "AppStyleProvider" ]]
 		} else constantsModule.DefaultSettings
 	}
 	local var29 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 127 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (ref), var19 (ref), var17 (ref)
 		var29.current = true
 		var19(var17.themeName)
 		
-		return function() --[[ line: 130 ]]
+		return function()
 			-- upvalues: var29 (copy)
 			var29.current = false
 		end
 	end, { var29, var17.themeName, var19 })
-	reactModule.useEffect(function() --[[ line: 135 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getTextSizeOffsetModule (copy), UIBloxConfigModule (copy), var27 (ref), var22 (ref)
 		local var31, var32 = getTextSizeOffsetModule(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var27.Typography.BodyLarge.Font else var27.Semantic.Typography.Body.Font)
 		
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 84 | named "AppStyleProvider" ]]
 	local var30 = reactModule.createElement(styleContextModule.Provider, {
 		value = {
 			style = t_2,
-			updateTheme = reactModule.useCallback(function(_, p1) --[[ line: 146 ]]
+			updateTheme = reactModule.useCallback(function(_, p1)
 				-- upvalues: var29 (ref), var19 (ref)
 				if var29.current then
 					var19(p1)
@@ -86,7 +86,7 @@ return function(p0) --[[ line: 84 | named "AppStyleProvider" ]]
 			end, { var29, var19 }),
 			derivedValues = { textSizeOffset = var21 },
 			styleMetadata = {
-				ThemeName = reactModule.useMemo(function() --[[ line: 152 ]]
+				ThemeName = reactModule.useMemo(function()
 					-- upvalues: var18 (ref), constantsModule (copy)
 					return if var18:lower() == constantsModule.ThemeName.Dark:lower() then constantsModule.ThemeName.Dark elseif var18:lower() == constantsModule.ThemeName.Light:lower() then constantsModule.ThemeName.Light else constantsModule.DefaultThemeName
 				end, { var18 }),

@@ -4,16 +4,16 @@ local IAFlyoutDailyTooltipMaxShownCount = game:DefineFastInt("IAFlyoutDailyToolt
 local t = {}
 t.__index = t
 
-local function _(p0, p1) --[[ line: 23 | named "isSameDate" ]]
+local function _(p0, p1)
 	local dateString = os.date("*t", p0)
 	local dateString_1 = os.date("*t", p1)
 	
 	return dateString.year == dateString_1.year and (dateString.month == dateString_1.month and dateString.day == dateString_1.day)
 end
 
-local function readStorage() --[[ line: 29 ]]
+local function readStorage()
 	-- upvalues: appStorageService (ref)
-	local ok, status = pcall(function() --[[ line: 30 ]]
+	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy)
 		return appStorageService:GetItem("IAFlyoutEntryPointTooltip")
 	end)
@@ -35,23 +35,23 @@ local function readStorage() --[[ line: 29 ]]
 	return 0, 0, 0
 end
 
-function t.new() --[[ line: 51 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({
 		_hasChecked = false,
 		_dailyCount = 0,
 		_totalCount = 0,
-		_getTime = function() --[[ line: 56 ]]
+		_getTime = function()
 			return os.time()
 		end
 	}, t)
 end
 
-function t:setTimeProvider(p2) --[[ line: 63 ]]
+function t:setTimeProvider(p2)
 	self._getTime = p2
 end
 
-function t:flyoutSidePanelOpened() --[[ line: 67 ]]
+function t:flyoutSidePanelOpened()
 	-- upvalues: IAFlyoutTooltipMaxShownCount (ref), appStorageService (ref)
 	if self._dailyCount < IAFlyoutTooltipMaxShownCount then
 		self._dailyCount = IAFlyoutTooltipMaxShownCount
@@ -60,11 +60,11 @@ function t:flyoutSidePanelOpened() --[[ line: 67 ]]
 	end
 end
 
-function t:getTooltipCount() --[[ line: 78 ]]
+function t:getTooltipCount()
 	return self._totalCount
 end
 
-function t:tooltipSeenTimeHelper(p3) --[[ line: 82 ]]
+function t:tooltipSeenTimeHelper(p3)
 	-- upvalues: IAFlyoutDailyTooltipMaxShownCount (ref), IAFlyoutTooltipMaxShownCount (ref)
 	local dateString = os.date("*t", self:_getTime())
 	local dateString_1 = os.date("*t", p3)
@@ -75,7 +75,7 @@ function t:tooltipSeenTimeHelper(p3) --[[ line: 82 ]]
 	return self._dailyCount < IAFlyoutDailyTooltipMaxShownCount and self._totalCount < IAFlyoutTooltipMaxShownCount
 end
 
-function t:updateTooltipAppStorageValue() --[[ line: 92 ]]
+function t:updateTooltipAppStorageValue()
 	-- upvalues: appStorageService (ref)
 	self._dailyCount += 1
 	self._totalCount += 1
@@ -83,7 +83,7 @@ function t:updateTooltipAppStorageValue() --[[ line: 92 ]]
 	appStorageService:Flush()
 end
 
-function t:isTooltipActive() --[[ line: 101 ]]
+function t:isTooltipActive()
 	-- upvalues: readStorage (ref), IAFlyoutTooltipMaxShownCount (ref)
 	if self._hasChecked then
 		return false

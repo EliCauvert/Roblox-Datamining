@@ -26,7 +26,7 @@ local fFlagLuaAppFixNotificationBadgeCountsSync = require(parent.SharedFlags).FF
 local fFlagEnableFlyoutOnNavRail = require(parent.SharedFlags).FFlagEnableFlyoutOnNavRail
 local fFlagFlyoutUseOpenHook = require(parent.SharedFlags).FFlagFlyoutUseOpenHook
 
-local function getTotalNotificationCount(p0, p1, p2) --[[ line: 40 ]]
+local function getTotalNotificationCount(p0, p1, p2)
 	-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (ref)
 	local var11 = 0
 	
@@ -51,12 +51,12 @@ local function getTotalNotificationCount(p0, p1, p2) --[[ line: 40 ]]
 	return var11
 end
 
-return function(p3) --[[ line: 67 | named "FlyoutHamburgerButton" ]]
+return function(p3)
 	-- upvalues: useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), getTotalNotificationCount (ref), useTokens (ref), fFlagFlyoutUseOpenHook (ref), useOpenFlyoutSidePanelModule (ref), useSetDrawerVisible (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), flyoutTooltipManagerModule (ref), useLocalization (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), fFlagEnableFlyoutOnNavRail (ref), foundationModule (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), flyoutAlternateEntryPointModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), withTooltip (ref)
 	local var14
-	local var12 = getTotalNotificationCount(useSelector(function(p4) --[[ line: 68 ]]
+	local var12 = getTotalNotificationCount(useSelector(function(p4)
 		return p4.NotificationBadgeCounts or {}
-	end), useSelector(function(p5) --[[ line: 71 ]]
+	end), useSelector(function(p5)
 		-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (copy)
 		if fFlagLuaAppFixNotificationBadgeCountsSync then
 			local friendsCarousel = p5.FriendsCarousel
@@ -65,7 +65,7 @@ return function(p3) --[[ line: 67 | named "FlyoutHamburgerButton" ]]
 			return if requests then requests.receivedCount else 0
 		end
 		return 0
-	end), useSelector(function(p6) --[[ line: 79 ]]
+	end), useSelector(function(p6)
 		-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (copy)
 		return if fFlagLuaAppFixNotificationBadgeCountsSync then if p6.SocialTab then p6.SocialTab.UnreadConversationCount else 0 else 0
 	end))
@@ -77,7 +77,7 @@ return function(p3) --[[ line: 67 | named "FlyoutHamburgerButton" ]]
 	else
 		local var15 = useSetDrawerVisible()
 		local var16 = useRoactService(appEventIngestService)
-		var14 = reactModule.useCallback(function() --[[ line: 95 ]]
+		var14 = reactModule.useCallback(function()
 			-- upvalues: flyoutAnalyticsModule (copy), var16 (ref), p3 (ref), var15 (ref), flyoutTooltipManagerModule (copy)
 			flyoutAnalyticsModule.sendPageLoadEvent(var16, p3.titleText)
 			var15(true)
@@ -110,14 +110,14 @@ return function(p3) --[[ line: 67 | named "FlyoutHamburgerButton" ]]
 			textAlignment = Enum.TextXAlignment.Left
 		}
 	end
-	local var22 = reactModule.useCallback(function(_) --[[ line: 128 ]]
+	local var22 = reactModule.useCallback(function(_)
 		-- upvalues: var17 (ref), var18 (ref), flyoutAnalyticsModule (copy)
 		if var17 then
 			var18(false)
 			flyoutAnalyticsModule.onFlyoutTooltipDismissed({ source = "click" })
 		end
 	end, { var17 })
-	reactModule.useEffect(function() --[[ line: 136 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), flyoutTooltipManagerModule (copy), flyoutAnalyticsModule (copy), userInputService (copy), var22 (ref)
 		local inputBeganConnection = nil
 		
@@ -125,7 +125,7 @@ return function(p3) --[[ line: 67 | named "FlyoutHamburgerButton" ]]
 			flyoutAnalyticsModule.onFlyoutTooltipShown({ count = flyoutTooltipManagerModule:getTooltipCount() })
 			inputBeganConnection = userInputService.InputBegan:Connect(var22)
 		end
-		return function() --[[ line: 143 ]]
+		return function()
 			-- upvalues: inputBeganConnection (write)
 			if inputBeganConnection then
 				inputBeganConnection:Disconnect()
@@ -163,7 +163,7 @@ return function(p3) --[[ line: 67 | named "FlyoutHamburgerButton" ]]
 				name = builderIconsModule.Icon.ThreeBarsHorizontal,
 				size = iconSize.Large
 			}),
-			Tooltip = if var17 then withTooltip(t_1, t, function(p7) --[[ line: 202 ]]
+			Tooltip = if var17 then withTooltip(t_1, t, function(p7)
 				-- upvalues: reactModule (copy)
 				return reactModule.createElement("Frame", {
 					Visible = false,

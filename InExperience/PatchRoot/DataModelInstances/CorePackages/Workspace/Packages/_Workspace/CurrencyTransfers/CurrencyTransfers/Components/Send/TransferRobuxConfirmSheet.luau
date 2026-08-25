@@ -31,11 +31,11 @@ local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTrans
 local getFIntCurrencyTransferDeveloperCommissionRateModule = require(currencyTransfers.Flags.GetFIntCurrencyTransferDeveloperCommissionRate)
 local getFIntCurrencyTransferPlatformFeeRateModule = require(currencyTransfers.Flags.GetFIntCurrencyTransferPlatformFeeRate)
 
-return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
+return function(_)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), transferOriginationModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (ref), getFIntCurrencyTransferPlatformFeeRateModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), transferProfileThumbnailModule (ref), text (ref), getIconRichText (ref), enums (ref), iconVariant (ref), robuxTextModule (ref), button (ref), setTransferPromptStateModule (ref), promptStateModule (ref), processTransferModule (ref), buttonVariant (ref), fillBehavior (ref), foundationModule (ref)
 	local var21 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxConfirmSheet)
 	local var22 = useTransferStoreModule()
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: logCurrencyTransferCounterModule (copy), var22 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		logCurrencyTransferCounterModule(var22, currencyTransferTelemetryModule.CurrencyTransferConfirmSheetShownCounter)
 		
@@ -53,19 +53,19 @@ return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
 	local year = os.date("*t").year
 	local var28, var29 = reactModule.useState(userRelationshipDetail)
 	local var30, var31 = reactModule.useState(recipient)
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userRelationshipDetail (ref), var29 (ref)
 		if userRelationshipDetail then
 			var29(userRelationshipDetail)
 		end
 	end, { userRelationshipDetail })
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: recipient (ref), var31 (ref)
 		if recipient then
 			var31(recipient)
 		end
 	end, { recipient })
-	local var32 = reactModule.useMemo(function() --[[ line: 95 ]]
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var28 (ref), var21 (ref), year (ref)
 		if getFFlagCurrencyTransferFlowUIImprovementFixModule() then
 			if not var28 or not var28.friendSinceDate then
@@ -103,7 +103,7 @@ return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
 		var21.ConnectedMonthsSingular, var21.ConnectedDays,
 		var21.ConnectedDaysSingular, var21.NewConnection
 	})
-	local var33 = reactModule.useMemo(function() --[[ line: 158 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var21 (ref)
 		local mutualFriendsCount = var28.mutualFriendsCount
 		
@@ -114,11 +114,11 @@ return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
 		var21.MutualConnection,
 		var21.MutualConnectionSingular
 	})
-	local var34 = reactModule.useMemo(function() --[[ line: 177 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: var21 (ref), var28 (ref)
 		return string.gsub(var21.JoinedInYear, "{year}", tostring(var28.userAccountSinceYear))
 	end, { var28.userAccountSinceYear })
-	local var35 = reactModule.useMemo(function() --[[ line: 182 ]]
+	local var35 = reactModule.useMemo(function()
 		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var27 (ref), getSelectedAmount (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (copy), getFIntCurrencyTransferPlatformFeeRateModule (copy), var21 (ref)
 		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() then if var27 and getSelectedAmount then string.gsub(string.gsub(var21.RecipientWillGetInGame, "{amount}", tostring(math.ceil(getSelectedAmount * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))), "{commissionPercentage}", tostring(getFIntCurrencyTransferDeveloperCommissionRateModule())) elseif getSelectedAmount then string.gsub(var21.RecipientWillGetInApp, "{amount}", tostring(getSelectedAmount)) else nil elseif var27 and getSelectedAmount then string.gsub(var21.RecipientWillGet, "{amount}", tostring(math.ceil(getSelectedAmount * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))) else nil
 	end, {
@@ -220,7 +220,7 @@ return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
 					SendButton = reactModule.createElement(button, {
 						LayoutOrder = 1,
 						text = var21.Send,
-						onActivated = function() --[[ line: 361 ]]
+						onActivated = function()
 							-- upvalues: getSelectedAmount (ref), getRobuxBalanceAmount (ref), setTransferPromptStateModule (copy), var22 (ref), promptStateModule (copy), processTransferModule (copy)
 							if getSelectedAmount and getRobuxBalanceAmount < getSelectedAmount then
 								setTransferPromptStateModule(var22, promptStateModule.TransferInsufficientBalance)
@@ -236,7 +236,7 @@ return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
 					EditButton = if not var27 then reactModule.createElement(button, {
 						LayoutOrder = 2,
 						text = var21.Edit,
-						onActivated = function() --[[ line: 376 ]]
+						onActivated = function()
 							-- upvalues: setTransferPromptStateModule (copy), var22 (ref), promptStateModule (copy)
 							setTransferPromptStateModule(var22, promptStateModule.TransferInput)
 						end,

@@ -11,7 +11,7 @@ local t = {
 	cancel = "Feature.Moments.Action.Cancel"
 }
 
-return function(p0) --[[ line: 24 | named "DeletionConfirmationDialog" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref)
 	local var4 = useLocalization(t)
 	

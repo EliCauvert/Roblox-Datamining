@@ -25,27 +25,27 @@ local t = {
 	size = require(foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(function(p0) --[[ line: 48 | named "Knob" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorNamespaceModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
 	local var16 = withDefaultsModule(p0, t)
 	local var17 = useTokensModule()
 	local var18 = usePresentationContext()
 	local var19 = useKnobVariantsModule(var17, var16.size, var18 and var18.colorNamespace == colorNamespaceModule.Inverse)
 	local style = var16.style or var19.knob.style
-	local var21 = reactModule.useCallback(function(p1) --[[ line: 59 ]]
+	local var21 = reactModule.useCallback(function(p1)
 		-- upvalues: var17 (ref)
 		return {
 			Color3 = var17.Color.Extended.White.White_100.Color3,
 			Transparency = p1.Transparency
 		}
 	end, { var17 })
-	local var22 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: var19 (ref), var16 (ref), reactIsModule (copy)
 		local size = var19.knob.size
 		
 		if var16.stroke and var16.stroke.Thickness then
 			if reactIsModule.isBinding(var16.stroke.Thickness) then
-				return var16.stroke.Thickness:map(function(p2) --[[ line: 74 ]]
+				return var16.stroke.Thickness:map(function(p2)
 					-- upvalues: size (write)
 					return size - UDim2.fromOffset(p2 * 2, p2 * 2)
 				end)
@@ -65,7 +65,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "Knob" ]]
 		}, reactModule.createElement(iconModule, {
 			name = var16.icon.name,
 			variant = var16.icon.variant,
-			style = if var16.isDisabled then useBindableModule(var19.knob.style):map(function(p5) --[[ line: 106 ]]
+			style = if var16.isDisabled then useBindableModule(var19.knob.style):map(function(p5)
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
 					Color3 = p5.Color3,
@@ -77,7 +77,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "Knob" ]]
 		})) else reactModule.createElement(viewModule, {
 			ZIndex = 4,
 			tag = var19.knob.tag,
-			backgroundStyle = if var16.isDisabled then useBindableModule(style):map(function(p3) --[[ line: 123 ]]
+			backgroundStyle = if var16.isDisabled then useBindableModule(style):map(function(p3)
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
 					Color3 = p3.Color3,
@@ -85,7 +85,7 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "Knob" ]]
 				}
 			end) else style,
 			Size = var22,
-			stroke = useBindableModule(if var16.stroke then var16.stroke.Transparency else nil):map(function(p4) --[[ line: 132 ]]
+			stroke = useBindableModule(if var16.stroke then var16.stroke.Transparency else nil):map(function(p4)
 				-- upvalues: var16 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
 				local stroke = var16.stroke
 				

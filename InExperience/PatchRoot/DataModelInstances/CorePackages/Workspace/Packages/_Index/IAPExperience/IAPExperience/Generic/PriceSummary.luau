@@ -11,14 +11,14 @@ local useRobuxTextModule = require(parent.Generic.Hooks.useRobuxText)
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local _ = require(parent.ProductPurchase.PricingTypes)
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), reactModule (ref), formatNumberModule (ref), localizationService (ref), useRobuxTextModule (ref), view (ref), text (ref)
 	local var5 = if p0.itemPrice then p0.itemPrice.priceInRobux else p0.amount
 	local var6 = useLocalization({
 		Total = "Feature.Catalog.Label.TotalUnformatted",
 		TotalPrice = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then "IAPExperience.PurchasePrompt.Label.TotalPriceV2" else nil
 	})
-	local var7 = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(var5) else reactModule.useMemo(function() --[[ line: 38 ]]
+	local var7 = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(var5) else reactModule.useMemo(function()
 		-- upvalues: formatNumberModule (copy), localizationService (copy), var5 (ref)
 		return utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, var5 or 0)
 	end, { var5, localizationService.RobloxLocaleId })

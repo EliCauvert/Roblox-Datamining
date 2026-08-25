@@ -6,11 +6,11 @@ local displayModule = require(parent.Display)
 local createSignal = signalsModule.createSignal
 local createEffect = signalsModule.createEffect
 
-return function() --[[ line: 41 ]]
+return function()
 	-- upvalues: createSignal (ref), cryoModule (ref), guiService (ref), displayModule (ref), createEffect (ref)
 	local var4, var5 = createSignal({}, cryoModule.Dictionary.equals)
 	
-	local var6 = function(p0, p1, p2) --[[ line: 44 ]]
+	local var6 = function(p0, p1, p2)
 		local t = {}
 		local x = p0.X
 		local y = p0.Y
@@ -37,7 +37,7 @@ return function() --[[ line: 41 ]]
 		return t
 	end
 	
-	local var7 = function(p3) --[[ line: 96 ]]
+	local var7 = function(p3)
 		-- upvalues: guiService (copy), displayModule (copy), var6 (ref)
 		local _ = {}
 		local t = {}
@@ -45,7 +45,7 @@ return function() --[[ line: 41 ]]
 		for i, v in pairs(p3) do
 			table.insert(t, { id = v.id, size = v.size, position = v.position })
 		end
-		table.sort(t, function(p4, p5) --[[ line: 111 ]]
+		table.sort(t, function(p4, p5)
 			return p4.position.X < p5.position.X and p4.position.X + p4.size.X < p5.size.X + p5.position.X
 		end)
 		local guiInset, _ = guiService:GetGuiInset()
@@ -59,7 +59,7 @@ return function() --[[ line: 41 ]]
 		return rect
 	end
 	
-	local var8 = createEffect(function(p6) --[[ line: 157 ]]
+	local var8 = createEffect(function(p6)
 		-- upvalues: displayModule (copy), var7 (ref), var4 (ref), guiService (copy)
 		local _ = displayModule.GetDisplayStore(p6).getViewportSize(p6)
 		local var18 = var7(var4(p6))
@@ -71,17 +71,17 @@ return function() --[[ line: 41 ]]
 	
 	return {
 		getKeepOutAreas = var4,
-		setKeepOutArea = function(value, p7, p8) --[[ line: 140 ]]
+		setKeepOutArea = function(value, p7, p8)
 			-- upvalues: var5 (ref), cryoModule (copy), var4 (ref)
 			var5(cryoModule.Dictionary.join(var4(false), { [value] = { id = value, position = p7, size = p8 } }))
 		end,
-		removeKeepOutArea = function(p9) --[[ line: 151 ]]
+		removeKeepOutArea = function(p9)
 			-- upvalues: var4 (ref), var5 (ref)
 			local var19 = var4(false)
 			var19[p9] = nil
 			var5(var19)
 		end,
-		cleanup = function() --[[ line: 165 ]]
+		cleanup = function()
 			-- upvalues: var8 (ref)
 			var8()
 		end

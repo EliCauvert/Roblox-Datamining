@@ -6,7 +6,7 @@ local t = {
 	xbox = platformModule.Xbox
 }
 
-return function() --[[ line: 10 | named "getInputPlatform" ]]
+return function()
 	-- upvalues: userInputService (ref), t (ref), platformModule (ref)
 	local buttonStartImageForKeyCode = userInputService:GetImageForKeyCode(Enum.KeyCode.ButtonStart)
 	

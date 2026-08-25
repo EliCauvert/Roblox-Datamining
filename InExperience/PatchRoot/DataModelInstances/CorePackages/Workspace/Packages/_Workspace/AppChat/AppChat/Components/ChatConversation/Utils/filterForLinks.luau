@@ -6,7 +6,7 @@ local enumMessageTypesModule = require(appChat.Components.ChatConversation.EnumM
 local formatMessagesModule = require(script.Parent.formatMessages)
 local separateRobloxUrlsFromTextModule = require(script.Parent.RobloxUrlUtils.separateRobloxUrlsFromText)
 
-return function(p0, p1) --[[ line: 15 ]]
+return function(p0, p1)
 	-- upvalues: argCheckModule (ref), enumMessageTypesModule (ref), cryoModule (ref), formatMessagesModule (ref), separateRobloxUrlsFromTextModule (ref)
 	argCheckModule.isType(p0, "table", "filterForLinks.text")
 	argCheckModule.isType(p1, "table", "filterForLinks.whitelistedDomains")

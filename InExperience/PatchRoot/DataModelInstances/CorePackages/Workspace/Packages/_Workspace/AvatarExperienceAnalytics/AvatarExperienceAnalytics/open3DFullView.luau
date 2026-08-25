@@ -1,3 +1,3 @@
-﻿return function(p0, p1) --[[ line: 3 ]]
+﻿return function(p0, p1)
 	p0:sendTelemetryEvent(p1, "open3DFullView")
 end

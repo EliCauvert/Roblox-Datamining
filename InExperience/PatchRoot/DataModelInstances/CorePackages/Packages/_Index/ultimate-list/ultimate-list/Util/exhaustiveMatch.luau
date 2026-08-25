@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 1 | named "exhaustiveMatch" ]]
+﻿return function(p0)
 	error(`Unknown value in exhaustive match: {p0}`)
 end

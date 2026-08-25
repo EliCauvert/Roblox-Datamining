@@ -1,6 +1,6 @@
 ﻿local controlStateModule = require(script.Parent.Parent.Control.Enum.ControlState)
 
-return function(p0, p1, p2) --[[ line: 6 ]]
+return function(p0, p1, p2)
 	-- upvalues: controlStateModule (ref)
 	local var1 = p0[p1] or p0[controlStateModule.Default]
 	local t = {

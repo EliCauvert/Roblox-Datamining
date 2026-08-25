@@ -5,10 +5,10 @@ local connection = wrappersModule.Connection
 local instance = wrappersModule.Instance
 local signal = wrappersModule.Signal
 
-return function(p0) --[[ line: 17 | named "useClippingRect" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signal (ref), instance (ref), connection (ref)
 	local var3, var4 = reactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
-	reactModule.useEffect(function() --[[ line: 20 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var4 (ref), signal (copy), instance (copy), connection (copy)
 		local current = p0.current
 		
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 17 | named "useClippingRect" ]]
 				var5 = layerCollector
 			end
 		end
-		local function update() --[[ line: 43 ]]
+		local function update()
 			-- upvalues: var5 (write), current (ref), var4 (copy)
 			if var5 then
 				local absolutePosition = current.AbsolutePosition
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 17 | named "useClippingRect" ]]
 			local absolutePosition = current.AbsolutePosition
 			var4(Rect.new(var5.AbsolutePosition - absolutePosition, var5.AbsolutePosition + var5.AbsoluteSize - absolutePosition))
 		end
-		return function() --[[ line: 71 ]]
+		return function()
 			-- upvalues: list (ref), connection (copy)
 			for i, v in list do
 				connection.Disconnect(v)

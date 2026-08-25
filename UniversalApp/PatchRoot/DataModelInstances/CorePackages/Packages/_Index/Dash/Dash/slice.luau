@@ -1,6 +1,6 @@
 ﻿local insert = table.insert
 
-return function(p0, p1, p2) --[[ line: 19 | named "slice" ]]
+return function(p0, p1, p2)
 	-- upvalues: insert (ref)
 	local t = {}
 	p1 = p1 or 1

@@ -3,18 +3,18 @@ local memStorageService = game:GetService("MemStorageService")
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 19 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({ cachedResult = nil }, t)
 end
 
-function t:set() --[[ line: 26 ]]
+function t:set()
 	-- upvalues: memStorageService (ref), httpService (ref)
 	self.cachedResult = nil
 	memStorageService:SetItem("BuildExperienceLaunchData", httpService:JSONEncode({ hasBuildMode = true }))
 end
 
-function t:hasBuildMode() --[[ line: 31 ]]
+function t:hasBuildMode()
 	-- upvalues: memStorageService (ref), httpService (ref)
 	if self.cachedResult ~= nil then
 		return self.cachedResult

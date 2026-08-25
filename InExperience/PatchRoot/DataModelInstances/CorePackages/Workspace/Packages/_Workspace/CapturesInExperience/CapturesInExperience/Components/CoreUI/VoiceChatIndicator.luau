@@ -18,7 +18,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local captureTriggerTypeModule = require(parent.Enums.CaptureTriggerType)
 local constantsModule = require(parent.Constants)
 
-return function(p0) --[[ line: 33 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useScaledValue (ref), useTokens (ref), reactModule (ref), useSelector (ref), constantsModule (ref), controlState (ref), default (ref), captureTriggerTypeModule (ref), view (ref), popover (ref), icon (ref), foundationModule (ref), popoverAlign (ref), text (ref)
 	local var6 = useLocalization({
 		voiceChatMutedLabel = "Feature.Captures.Label.VideoCaptureVoiceChatMutedTooltip",
@@ -27,7 +27,7 @@ return function(p0) --[[ line: 33 ]]
 	local var7 = useScaledValue(320)
 	local var8 = useTokens()
 	local var9, var10 = reactModule.useState(false)
-	local var11 = useSelector(function(p1) --[[ line: 43 ]]
+	local var11 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 33 ]]
 	return if not (not default:UserVoiceEnabled() or not default:IsInitialized()) then if not (var11 ~= captureTriggerTypeModule.UserCapture and var11 ~= captureTriggerTypeModule.DeveloperCapture) then if game:GetEngineFeature("ReenableMomentsVoice") then nil else reactModule.createElement(view, {
 		tag = "anchor-center-center clip position-center-center radius-circle size-700-700",
 		LayoutOrder = p0.layoutOrder,
-		onStateChanged = reactModule.useCallback(function(p2) --[[ line: 47 ]]
+		onStateChanged = reactModule.useCallback(function(p2)
 			-- upvalues: controlState (copy), var10 (ref), var9 (ref)
 			if p2 == controlState.Pressed then
 				var10(not var9)
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 33 ]]
 			Content = reactModule.createElement(popover.Content, {
 				hasArrow = false,
 				align = popoverAlign.Center,
-				onPressedOutside = reactModule.useCallback(function() --[[ line: 53 ]]
+				onPressedOutside = reactModule.useCallback(function()
 					-- upvalues: var10 (ref)
 					var10(false)
 				end, {}),

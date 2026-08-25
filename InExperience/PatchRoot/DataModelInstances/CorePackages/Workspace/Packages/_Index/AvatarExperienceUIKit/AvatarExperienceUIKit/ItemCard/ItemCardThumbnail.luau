@@ -12,12 +12,12 @@ local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FF
 local fFlagAXTestSkeletonInCatalog = require(parent.AvatarExperienceFlags).FFlagAXTestSkeletonInCatalog
 local fFlagAXTestSkeletonInCatalog_1 = game:DefineFastFlag("AXTestDontUseSkeletonOnloadInCatalog", false) and fFlagAXTestSkeletonInCatalog
 
-local function ItemCardThumbnail(p0, p1) --[[ line: 35 ]]
+local function ItemCardThumbnail(p0, p1)
 	-- upvalues: reactModule (ref), useDesignTokens (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), runService (ref), fFlagAXTestSkeletonInCatalog (ref), fFlagAXTestSkeletonInCatalog_1 (ref), itemCardThumbnailSkeletonModule (ref), radius (ref), image (ref), skeleton (ref)
 	local var6, var7 = reactModule.useState(false)
 	local var8 = useDesignTokens()
 	local var9 = if fFlagAXMigrateAXToGlobalAutofocus then p0.tag else nil
-	local var10 = reactModule.useCallback(function(p2) --[[ line: 44 ]]
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (copy), p1 (ref), var7 (ref), p0 (ref), runService (copy)
 		if fFlagAXMigrateAXToGlobalAutofocus then
 			if typeof(p1) == "function" then
@@ -31,7 +31,7 @@ local function ItemCardThumbnail(p0, p1) --[[ line: 35 ]]
 		if p2 and p0.url then
 			local heartbeatConnection = nil
 			local currentTime = tick()
-			heartbeatConnection = runService.Heartbeat:Connect(function(p3) --[[ line: 56 ]]
+			heartbeatConnection = runService.Heartbeat:Connect(function(p3)
 				-- upvalues: currentTime (write), p2 (ref), var7 (copy), p0 (copy), heartbeatConnection (write)
 				currentTime += p3
 				

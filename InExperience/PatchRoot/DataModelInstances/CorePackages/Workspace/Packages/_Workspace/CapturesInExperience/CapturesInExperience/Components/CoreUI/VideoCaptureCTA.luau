@@ -12,7 +12,7 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local eventNamesModule = require(parent.Analytics.EventNames)
 local capturesAddLegacyVideoRecordingLoggingV2 = game:DefineFastFlag("CapturesAddLegacyVideoRecordingLogging_v2", false)
 
-return function(p0) --[[ line: 32 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useLocalization (ref), reactModule (ref), capturesAddLegacyVideoRecordingLoggingV2 (ref), eventNamesModule (ref), coreGuiService (ref), button (ref), buttonType (ref)
 	local var7 = useAnalyticsModule()
 	local var8 = useStyle()
@@ -24,13 +24,13 @@ return function(p0) --[[ line: 32 ]]
 	})
 	local var10, var11 = reactModule.useState(false)
 	local var12 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: capturesAddLegacyVideoRecordingLoggingV2 (copy), var12 (ref), var7 (ref), eventNamesModule (copy), var11 (ref)
 		local videoRecordingChangeRequestConnection = nil
 		local var14 = settings():FindFirstChild("Game Options")
 		
 		if var14 then
-			videoRecordingChangeRequestConnection = var14.VideoRecordingChangeRequest:connect(function(p1) --[[ line: 50 ]]
+			videoRecordingChangeRequestConnection = var14.VideoRecordingChangeRequest:connect(function(p1)
 				-- upvalues: capturesAddLegacyVideoRecordingLoggingV2 (copy), var12 (copy), var7 (copy), eventNamesModule (copy), var11 (copy)
 				if capturesAddLegacyVideoRecordingLoggingV2 then
 					if p1 then
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 32 ]]
 				var11(p1)
 			end)
 		end
-		return function() --[[ line: 70 ]]
+		return function()
 			-- upvalues: videoRecordingChangeRequestConnection (write)
 			if videoRecordingChangeRequestConnection then
 				videoRecordingChangeRequestConnection:disconnect()
@@ -101,7 +101,7 @@ return function(p0) --[[ line: 32 ]]
 		}, {
 			RecordButton = reactModule.createElement(button, {
 				buttonType = buttonType.Secondary,
-				onActivated = reactModule.useCallback(function() --[[ line: 77 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var10 (ref), p0 (ref), var7 (ref), eventNamesModule (copy), coreGuiService (copy)
 					if var10 then
 						var7.fireEvent(eventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated)

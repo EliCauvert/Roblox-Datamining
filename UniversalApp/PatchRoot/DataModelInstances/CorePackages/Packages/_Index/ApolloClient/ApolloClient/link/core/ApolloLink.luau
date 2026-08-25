@@ -16,17 +16,17 @@ local transformOperation = utilsModule.transformOperation
 local t_1 = {}
 t_1.__index = t_1
 
-local function passthrough(_, p0, p1) --[[ line: 53 ]]
+local function passthrough(_, p0, p1)
 	-- upvalues: boolean (ref), observable (ref)
 	return if boolean.toJSBoolean(p1) then p1(p0) else observable.of()
 end
 
-local function toLink(p2) --[[ line: 61 ]]
+local function toLink(p2)
 	-- upvalues: t_1 (ref)
 	return if typeof(p2) == "function" then t_1.new(p2) else p2
 end
 
-local function _(a) --[[ line: 69 | named "isTerminating" ]]
+local function _(a)
 	local debugInfo, _ = debug.info(a.request, "a")
 	
 	return debugInfo <= 2
@@ -35,7 +35,7 @@ end
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function tbl.new(p3, p4) --[[ line: 79 ]]
+function tbl.new(p3, p4)
 	-- upvalues: error (ref), tbl (ref)
 	local var9 = error.new(p3)
 	var9.link = p4
@@ -43,22 +43,22 @@ function tbl.new(p3, p4) --[[ line: 79 ]]
 	return setmetatable(var9, tbl)
 end
 
-function t_1.empty() --[[ line: 86 ]]
+function t_1.empty()
 	-- upvalues: t_1 (ref), observable (ref)
-	return t_1.new(function(_) --[[ line: 87 ]]
+	return t_1.new(function(_)
 		-- upvalues: observable (copy)
 		return observable.of()
 	end)
 end
 
-function t_1.from(p5) --[[ line: 92 ]]
+function t_1.from(p5)
 	-- upvalues: t_1 (ref), array (ref), toLink (ref)
-	return if #p5 == 0 then t_1.empty() else array.reduce(array.map(p5, toLink, nil), function(p6, p7) --[[ line: 96 ]]
+	return if #p5 == 0 then t_1.empty() else array.reduce(array.map(p5, toLink, nil), function(p6, p7)
 		return p6:concat(p7)
 	end)
 end
 
-function t_1.split_(p8, p9, p10) --[[ line: 101 ]]
+function t_1.split_(p8, p9, p10)
 	-- upvalues: t_1 (ref), boolean (ref), passthrough (ref), observable (ref)
 	local var12
 	local var10 = if typeof(p9) == "function" then t_1.new(p9) else p9
@@ -75,7 +75,7 @@ function t_1.split_(p8, p9, p10) --[[ line: 101 ]]
 	if debugInfo <= 2 then
 		local debugInfo_1, _ = debug.info(var12.request, "a")
 		
-		return if debugInfo_1 <= 2 then t_1.new(function(_, p13) --[[ line: 115 ]]
+		return if debugInfo_1 <= 2 then t_1.new(function(_, p13)
 			-- upvalues: p8 (ref), var10 (ref), boolean (copy), observable (copy), var12 (write)
 			if p8(p13) then
 				local var17 = var10:request(p13)
@@ -85,7 +85,7 @@ function t_1.split_(p8, p9, p10) --[[ line: 101 ]]
 			local var18 = var12:request(p13)
 			
 			return if boolean.toJSBoolean(var18) then var18 else observable.of()
-		end) else t_1.new(function(_, p11, p12) --[[ line: 125 ]]
+		end) else t_1.new(function(_, p11, p12)
 			-- upvalues: p8 (ref), var10 (ref), boolean (copy), observable (copy), var12 (write)
 			if p8(p11) then
 				local var15 = var10:request(p11, p12)
@@ -99,14 +99,14 @@ function t_1.split_(p8, p9, p10) --[[ line: 101 ]]
 	end
 end
 
-function t_1:execute(p14) --[[ line: 137 ]]
+function t_1:execute(p14)
 	-- upvalues: createOperation (ref), transformOperation (ref), validateOperation (ref), boolean (ref), observable (ref)
 	local context = self:request(createOperation(p14.context, transformOperation(validateOperation(p14))))
 	
 	return if boolean.toJSBoolean(context) then context else observable.of()
 end
 
-function t_1.concat_(p15, p16) --[[ line: 142 ]]
+function t_1.concat_(p15, p16)
 	-- upvalues: t_1 (ref), invariant (ref), tbl (ref), boolean (ref), observable (ref)
 	local var20 = if typeof(p15) == "function" then t_1.new(p15) else p15
 	local debugInfo, _ = debug.info(var20.request, "a")
@@ -119,9 +119,9 @@ function t_1.concat_(p15, p16) --[[ line: 142 ]]
 	local var22 = if typeof(p16) == "function" then t_1.new(p16) else p16
 	local debugInfo_1, _ = debug.info(var22.request, "a")
 	
-	return if debugInfo_1 <= 2 then t_1.new(function(_, p20) --[[ line: 153 ]]
+	return if debugInfo_1 <= 2 then t_1.new(function(_, p20)
 		-- upvalues: var20 (ref), var22 (ref), boolean (copy), observable (copy)
-		local var26 = var20:request(p20, function(p21) --[[ line: 154 ]]
+		local var26 = var20:request(p20, function(p21)
 			-- upvalues: var22 (copy), boolean (copy), observable (copy)
 			local var27 = var22:request(p21)
 			
@@ -129,9 +129,9 @@ function t_1.concat_(p15, p16) --[[ line: 142 ]]
 		end)
 		
 		return if boolean.toJSBoolean(var26) then var26 else observable.of()
-	end) else t_1.new(function(_, p17, p18) --[[ line: 161 ]]
+	end) else t_1.new(function(_, p17, p18)
 		-- upvalues: var20 (ref), var22 (ref), boolean (copy), observable (copy)
-		local var24 = var20:request(p17, function(p19) --[[ line: 162 ]]
+		local var24 = var20:request(p17, function(p19)
 			-- upvalues: var22 (copy), p18 (ref), boolean (copy), observable (copy)
 			local var25 = var22:request(p19, p18)
 			
@@ -142,7 +142,7 @@ function t_1.concat_(p15, p16) --[[ line: 142 ]]
 	end)
 end
 
-function t_1.new(p22) --[[ line: 171 ]]
+function t_1.new(p22)
 	-- upvalues: boolean (ref), t_1 (ref)
 	local t = {}
 	
@@ -152,22 +152,22 @@ function t_1.new(p22) --[[ line: 171 ]]
 	return setmetatable(t, t_1)
 end
 
-function t_1:split(p23, p24, p25) --[[ line: 179 ]]
+function t_1:split(p23, p24, p25)
 	-- upvalues: t_1 (ref), boolean (ref), passthrough (ref)
 	return self:concat(t_1.split_(p23, p24, if boolean.toJSBoolean(p25) then p25 else t_1.new(passthrough)))
 end
 
-function t_1.concat(p26, p27) --[[ line: 189 ]]
+function t_1.concat(p26, p27)
 	-- upvalues: t_1 (ref)
 	return t_1.concat_(p26, p27)
 end
 
-function t_1.request(_, _, _) --[[ line: 193 ]]
+function t_1.request(_, _, _)
 	-- upvalues: invariantError (ref)
 	error(invariantError.new("request is not implemented"))
 end
 
-function t_1.onError(_, p28, p29) --[[ line: 197 ]]
+function t_1.onError(_, p28, p29)
 	-- upvalues: boolean (ref)
 	if boolean.toJSBoolean(p29) and p29 ~= nil and boolean.toJSBoolean(p29.error) then
 		p29:error(p28)
@@ -177,7 +177,7 @@ function t_1.onError(_, p28, p29) --[[ line: 197 ]]
 	error(p28)
 end
 
-function t_1:setOnError(p30) --[[ line: 213 ]]
+function t_1:setOnError(p30)
 	self.onError = p30
 	
 	return self

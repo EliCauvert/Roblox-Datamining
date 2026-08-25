@@ -34,18 +34,18 @@ showMoreWrapper.defaultProps = {
 	sectionType = showMoreSectionTypeEnumModule.Friends
 }
 
-function showMoreWrapper.init(p0) --[[ line: 49 ]]
+function showMoreWrapper.init(p0)
 	-- upvalues: dictionary (ref), filterStatesModule (ref), updateFriendsWithWidthModule (ref), friendsPerLoadGroupModule (ref), buttonClickEventsModule (ref), friendsPerRowModule (ref), loadFriendGroupModule (ref), memoize (ref), limitFriendsModule (ref), roact (ref), showMoreButtonModule (ref)
 	p0.state = {
 		width = 100,
 		selectedItemIndex = nil,
-		filterFriendCounts = dictionary.map(filterStatesModule, function() --[[ line: 52 ]]
+		filterFriendCounts = dictionary.map(filterStatesModule, function()
 			-- upvalues: p0 (ref)
 			return p0.props.visibleRows
 		end)
 	}
 	
-	function p0.updateWidth(p1) --[[ line: 58 ]]
+	function p0.updateWidth(p1)
 		-- upvalues: p0 (ref), updateFriendsWithWidthModule (copy)
 		p0:setState(updateFriendsWithWidthModule(p1.AbsoluteSize.X))
 		
@@ -54,9 +54,9 @@ function showMoreWrapper.init(p0) --[[ line: 49 ]]
 		end
 	end
 	
-	function p0.reset() --[[ line: 66 ]]
+	function p0.reset()
 		-- upvalues: p0 (ref), dictionary (copy), friendsPerLoadGroupModule (copy)
-		p0:setState(function(p2, p3) --[[ line: 67 ]]
+		p0:setState(function(p2, p3)
 			-- upvalues: dictionary (copy), p0 (copy), friendsPerLoadGroupModule (copy)
 			return {
 				filterFriendCounts = dictionary.join(p0.state.filterFriendCounts, { [p0.props.filter] = friendsPerLoadGroupModule(p2, p3) })
@@ -64,7 +64,7 @@ function showMoreWrapper.init(p0) --[[ line: 49 ]]
 		end)
 	end
 	
-	function p0.showMore() --[[ line: 77 ]]
+	function p0.showMore()
 		-- upvalues: p0 (ref), buttonClickEventsModule (copy), friendsPerRowModule (copy), dictionary (copy), loadFriendGroupModule (copy)
 		if p0.props.analytics then
 			p0.props.analytics:buttonClick(buttonClickEventsModule.LoadMoreUsers, { sectionType = p0.props.sectionType })
@@ -77,16 +77,16 @@ function showMoreWrapper.init(p0) --[[ line: 49 ]]
 			
 			return
 		end
-		p0:setState(function(p4, p5) --[[ line: 95 ]]
+		p0:setState(function(p4, p5)
 			-- upvalues: dictionary (copy), loadFriendGroupModule (copy)
 			return dictionary.join(loadFriendGroupModule(p4, p5), { selectedItemIndex = p4.filterFriendCounts[p5.filter] + 1 })
 		end)
 	end
 	
 	p0.limitFriends = memoize(limitFriendsModule)
-	p0.renderShowMore = memoize(function(p6, p7, p8) --[[ line: 108 ]]
+	p0.renderShowMore = memoize(function(p6, p7, p8)
 		-- upvalues: roact (copy), showMoreButtonModule (copy), p0 (ref)
-		return function(p9) --[[ line: 109 ]]
+		return function(p9)
 			-- upvalues: p8 (ref), p7 (ref), p6 (ref), roact (copy), showMoreButtonModule (copy), p0 (copy)
 			return if p7 < p6 or p8 and p8(p7) then roact.createElement(showMoreButtonModule, {
 				layoutOrder = p9,
@@ -101,7 +101,7 @@ function showMoreWrapper.init(p0) --[[ line: 49 ]]
 		end
 	end)
 	
-	function p0.checkAndResetIfNeeded(p10) --[[ line: 130 ]]
+	function p0.checkAndResetIfNeeded(p10)
 		-- upvalues: p0 (ref)
 		if #p0.props.friends ~= #p10.friends or p10.visibleRows ~= p0.props.visibleRows then
 			p0.reset()
@@ -109,11 +109,11 @@ function showMoreWrapper.init(p0) --[[ line: 49 ]]
 	end
 end
 
-function showMoreWrapper.didUpdate(p11, p12) --[[ line: 137 ]]
+function showMoreWrapper.didUpdate(p11, p12)
 	p11.checkAndResetIfNeeded(p12)
 end
 
-function showMoreWrapper.render(p13) --[[ line: 141 ]]
+function showMoreWrapper.render(p13)
 	-- upvalues: roact (ref), dictionary (ref)
 	local filter = p13.state.filterFriendCounts[p13.props.filter]
 	
@@ -128,14 +128,14 @@ function showMoreWrapper.render(p13) --[[ line: 141 ]]
 	}))
 end
 
-return function(p14) --[[ line: 159 | named "ShowMoreWrapperFn" ]]
+return function(p14)
 	-- upvalues: useDesignTokens (ref), useUiModeInfo (ref), uiMode (ref), react (ref), gridMetrics (ref), showMoreWrapper (ref), llama (ref)
 	local var13 = useDesignTokens()
 	local var14 = useUiModeInfo().uiMode == uiMode.TenFoot
 	local gridViewItemMetrics = var13.LuaApps.FriendsLanding.FriendsLandingPage.GridViewItemMetrics
 	local gridHorizontalSpacing = var13.LuaApps.FriendsLanding.FriendsLandingPage.GridHorizontalSpacing
 	local gridVerticalSpacing = var13.LuaApps.FriendsLanding.FriendsLandingPage.GridVerticalSpacing
-	local var15 = react.useMemo(function() --[[ line: 168 ]]
+	local var15 = react.useMemo(function()
 		-- upvalues: var14 (ref), gridMetrics (copy), gridViewItemMetrics (ref)
 		return if var14 then gridMetrics.makeCustomMetricsGetter(gridViewItemMetrics) else nil
 	end, { var14, gridViewItemMetrics })
@@ -143,7 +143,7 @@ return function(p14) --[[ line: 159 | named "ShowMoreWrapperFn" ]]
 	
 	return react.createElement(showMoreWrapper, llama.Dictionary.join({
 		onWidthUpdated = if var14 then var17 else nil,
-		itemSize = react.useMemo(function() --[[ line: 177 ]]
+		itemSize = react.useMemo(function()
 			-- upvalues: var14 (ref), var15 (ref), gridHorizontalSpacing (ref), var16 (ref)
 			return if var14 and var15 and gridHorizontalSpacing then var15(var16, gridHorizontalSpacing).itemWidth else nil
 		end, { var14, var15, var16, gridHorizontalSpacing }),

@@ -23,7 +23,7 @@ local fFlagEnableDeepLinkHistoryWithModalAPI = sharedFlagsModule.FFlagEnableDeep
 local serverTriggeredModalTrafficPercent = game:DefineFastInt("ServerTriggeredModalTrafficPercent", 0)
 local luaAppAvoidPushUpsellConflicts = game:DefineFastFlag("LuaAppAvoidPushUpsellConflicts", false)
 
-return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p0) --[[ line: 36 | named "CheckForSduiModal" ]]
+return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p0)
 	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useDispatch (ref), useModalSignalStoreModule (ref), useSignalState (ref), entryPointModule (ref), fFlagEnableDeepLinkHistoryWithModalAPI (ref), deepLinkModule (ref), luaAppAvoidPushUpsellConflicts (ref), reactModule (ref), fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (ref), useHandleCustomModalCallbackModule (ref), notificationsUpsellModule (ref), loggerModule (ref), serverTriggeredModalTrafficPercent (ref), fetchModalMetadataModule (ref), setCentralOverlay (ref), centralOverlayType (ref)
 	local var16 = useRoactService(roactServiceTagsModule.RoactNetworking)
 	local var17 = useDispatch()
@@ -52,37 +52,37 @@ return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p0) -
 	local var30 = if fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then useHandleCustomModalCallbackModule(entryPointModule.HomepageLaunch, var16) else nil
 	
 	if luaAppAvoidPushUpsellConflicts then
-		reactModule.useEffect(function() --[[ line: 67 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var27 (write), notificationsUpsellModule (copy), var23 (write), loggerModule (copy)
 			var27(true)
-			notificationsUpsellModule.setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellModule.NotificationsUpsellConstants.ModalKey.PushUpsellHome, false):andThen(function(p2) --[[ line: 71 ]]
+			notificationsUpsellModule.setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellModule.NotificationsUpsellConstants.ModalKey.PushUpsellHome, false):andThen(function(p2)
 				-- upvalues: var23 (copy)
 				if p2 then
 					var23(true)
 					
 					return
 				end
-			end):catch(function(p1) --[[ line: 77 ]]
+			end):catch(function(p1)
 				-- upvalues: loggerModule (copy)
 				loggerModule:error(`Failed to evaluate push upsell: {p1}`)
-			end):finally(function() --[[ line: 80 ]]
+			end):finally(function()
 				-- upvalues: var27 (copy)
 				var27(false)
 			end)
 		end, {})
 	end
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: serverTriggeredModalTrafficPercent (copy), fFlagEnableDeepLinkHistoryWithModalAPI (copy), var21 (write), deepLinkModule (copy), fetchModalMetadataModule (copy), var16 (ref), entryPointModule (copy), loggerModule (copy)
 		if serverTriggeredModalTrafficPercent <= math.random(0, 99) then return end
 		if fFlagEnableDeepLinkHistoryWithModalAPI and var21 ~= deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Ready then
 			return
 		end
-		local var31 = fetchModalMetadataModule(var16, entryPointModule.HomepageLaunch):catch(function(p3) --[[ line: 97 ]]
+		local var31 = fetchModalMetadataModule(var16, entryPointModule.HomepageLaunch):catch(function(p3)
 			-- upvalues: loggerModule (copy)
 			loggerModule:error(`Failed to fetch modal metadata for home page launch: {p3}`)
 		end)
 		
-		return function() --[[ line: 101 ]]
+		return function()
 			-- upvalues: var31 (ref)
 			var31:cancel()
 		end
@@ -90,7 +90,7 @@ return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p0) -
 		var16,
 		if fFlagEnableDeepLinkHistoryWithModalAPI then var21 else nil
 	})
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), var19 (ref), isFocused (ref), luaAppAvoidPushUpsellConflicts (copy), var26 (write), var22 (write), var18 (ref), entryPointModule (copy), fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (copy), var30 (ref), var17 (ref), setCentralOverlay (copy), centralOverlayType (copy)
 		if var20 then return end
 		if not var19 then return end

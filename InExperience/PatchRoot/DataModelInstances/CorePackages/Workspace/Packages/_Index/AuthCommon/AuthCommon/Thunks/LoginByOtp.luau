@@ -13,11 +13,11 @@ local getFFlagEnableLoginAccountSelector = require(parent.SharedFlags).GetFFlagE
 local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnableLastLoginMethodTracking
 local enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByOtp", false)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 23 | named "loginByOtp" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), httpService (ref), loginErrorCodesModule (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), getFFlagEnableLoginAccountSelector (ref), getMultipleUsersPerCredentialErrorDataModule (ref), promiseModule (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (ref)
-	return function() --[[ line: 31 ]]
+	return function()
 		-- upvalues: loginRequestsModule (copy), p0 (ref), p1 (ref), p2 (ref), p4 (ref), p5 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), httpService (copy), loginErrorCodesModule (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (copy), p3 (ref)
-		return loginRequestsModule.logByOtp(p0, p1, p2, p4, p5):andThen(function(p6) --[[ line: 33 ]]
+		return loginRequestsModule.logByOtp(p0, p1, p2, p4, p5):andThen(function(p6)
 			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy)
 			assert(p6, "no login attempt result")
 			assert(#p6 == 1, "no result or more than one result")
@@ -27,7 +27,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 23 | named "loginByOtp" ]]
 				appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.EmailOtp)
 			end
 			return loginResultModule.fromJsonData(p6[1])
-		end, function(p7) --[[ line: 41 ]]
+		end, function(p7)
 			-- upvalues: httpService (copy), loginErrorCodesModule (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByOtp (copy), p3 (copy)
 			local body = httpService:JSONDecode(p7.Body)
 			local var11 = nil

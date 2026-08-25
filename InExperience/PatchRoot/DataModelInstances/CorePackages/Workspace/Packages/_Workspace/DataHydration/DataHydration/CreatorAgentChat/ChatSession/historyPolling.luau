@@ -4,9 +4,9 @@ local historyPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryPolling = function(p0) --[[ line: 23 ]]
+	createHistoryPolling = function(p0)
 		-- upvalues: historyPageUtilsModule (ref), constantsModule (ref)
-		local function pollSessionHistory(p1, p2, p3, p4) --[[ line: 24 ]]
+		local function pollSessionHistory(p1, p2, p3, p4)
 			-- upvalues: p0 (ref), historyPageUtilsModule (copy)
 			if p4() then
 				return false
@@ -39,7 +39,7 @@ return {
 			return if p4() then false else #var7 > 0
 		end
 		
-		local function startPollingTurnFromHistory(p5, p6, p7) --[[ line: 66 ]]
+		local function startPollingTurnFromHistory(p5, p6, p7)
 			-- upvalues: historyPageUtilsModule (copy), constantsModule (copy), p0 (ref), pollSessionHistory (ref)
 			p7 = p7 or {}
 			local var9 = historyPageUtilsModule.resolveNonNegativeNumber(p7.rtnIdleFallbackSeconds, constantsModule.getRtnIdleFallbackSeconds())
@@ -68,14 +68,14 @@ return {
 			local var22 = 0
 			local var23 = 0
 			
-			local function shouldStopPolling() --[[ line: 110 ]]
+			local function shouldStopPolling()
 				-- upvalues: var13 (write), p6 (ref), p0 (copy), p5 (ref)
 				return var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)
 			end
 			
 			local var25 = nil
 			
-			local function _() --[[ line: 116 | named "stopPolling" ]]
+			local function _()
 				-- upvalues: var14 (write), var18 (write), var11 (ref), var23 (write)
 				if var14 then
 					var14 = false
@@ -86,7 +86,7 @@ return {
 				end
 			end
 			
-			local _ = function() --[[ line: 125 | named "startPolling" ]]
+			local _ = function()
 				-- upvalues: var14 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var18 (write), var11 (ref), var25 (write)
 				if var14 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) then
 					return
@@ -96,7 +96,7 @@ return {
 				var25(0)
 			end
 			
-			local _ = function() --[[ line: 134 | named "updatePollingState" ]]
+			local _ = function()
 				-- upvalues: var13 (write), p6 (ref), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var15 (write), var17 (write), var25 (write)
 				if var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5) then
 					if var14 then
@@ -123,7 +123,7 @@ return {
 				var23 += 1
 			end
 			
-			local function refreshSequenceGapState() --[[ line: 144 ]]
+			local function refreshSequenceGapState()
 				-- upvalues: p6 (ref), var16 (write), var17 (write), var22 (write), var10 (ref), var13 (write), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var15 (write), var25 (write)
 				local hasSequenceGap = p6.hasSequenceGap
 				local var29 = hasSequenceGap ~= nil and hasSequenceGap()
@@ -135,7 +135,7 @@ return {
 				local var30 = var22
 				
 				if var29 then
-					task.delay(var10, function() --[[ line: 156 ]]
+					task.delay(var10, function()
 						-- upvalues: var30 (ref), var22 (copy), var13 (copy), p6 (copy), p0 (copy), p5 (copy), var16 (copy), var17 (copy), var14 (copy), var18 (copy), var11 (copy), var23 (copy), var15 (copy), var25 (copy)
 						if var30 ~= var22 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) or not var16 then return end
 						var17 = true
@@ -187,13 +187,13 @@ return {
 			
 			local _ = nil
 			
-			local var27 = function(p8) --[[ line: 168 ]]
+			local var27 = function(p8)
 				-- upvalues: var20 (write), var21 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var9 (ref), processTime (write), var27 (write), var15 (write), var14 (write), var18 (write), var11 (ref), var23 (write), var17 (write), var25 (write)
 				if var20 then
 					return
 				end
 				var20 = true
-				task.delay(p8, function() --[[ line: 174 ]]
+				task.delay(p8, function()
 					-- upvalues: var20 (copy), var21 (ref), var21 (copy), var13 (copy), p6 (copy), p0 (copy), p5 (copy), var9 (copy), processTime (copy), var27 (copy), var15 (copy), var14 (copy), var18 (copy), var11 (copy), var23 (copy), var17 (copy), var25 (copy)
 					var20 = false
 					
@@ -226,7 +226,7 @@ return {
 				end)
 			end
 			
-			local _ = function() --[[ line: 190 | named "noteRtnActivity" ]]
+			local _ = function()
 				-- upvalues: processTime (write), var15 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var17 (write), var25 (write), var27 (write), var9 (ref)
 				processTime = os.clock()
 				var15 = false
@@ -251,11 +251,11 @@ return {
 				var27(var9)
 			end
 			
-			var25 = function(p9) --[[ line: 197 ]]
+			var25 = function(p9)
 				-- upvalues: var23 (write), var14 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), pollSessionHistory (copy), afterSequenceId (ref), p7 (ref), shouldStopPolling (ref), var18 (write), var11 (ref), refreshSequenceGapState (ref), var15 (write), var17 (write), var25 (write), var12 (write), constantsModule (copy)
 				var23 += 1
 				local var32 = var23
-				task.delay(p9, function() --[[ line: 200 ]]
+				task.delay(p9, function()
 					-- upvalues: var32 (ref), var23 (copy), var14 (copy), var13 (copy), p6 (copy), p0 (copy), p5 (copy), pollSessionHistory (copy), afterSequenceId (copy), p7 (copy), shouldStopPolling (copy), var18 (copy), var11 (copy), refreshSequenceGapState (copy), var15 (copy), var17 (copy), var25 (copy), var12 (copy), constantsModule (copy)
 					if var32 ~= var23 or not var14 or (var13 or (p6.state(false).isDone or p0.getCasSessionId() ~= p5)) then return end
 					local var33 = pollSessionHistory(p5, afterSequenceId, p7.onDroppedChatMessage, shouldStopPolling)
@@ -299,7 +299,7 @@ return {
 				end)
 			end
 			
-			local var28 = p6.onNotification(function() --[[ line: 232 ]]
+			local var28 = p6.onNotification(function()
 				-- upvalues: processTime (write), var15 (write), var13 (write), p6 (ref), p0 (copy), p5 (ref), var14 (write), var18 (write), var11 (ref), var23 (write), var17 (write), var25 (write), var27 (write), var9 (ref), refreshSequenceGapState (ref)
 				processTime = os.clock()
 				var15 = false
@@ -329,7 +329,7 @@ return {
 			var15 = false
 			var27(var9)
 			
-			return function() --[[ line: 240 ]]
+			return function()
 				-- upvalues: var13 (write), var21 (write), var22 (write), var23 (write), var28 (ref)
 				var13 = true
 				var21 += 1
@@ -341,11 +341,11 @@ return {
 		
 		return {
 			startPollingTurnFromHistory = startPollingTurnFromHistory,
-			startPollingActiveTurn = function(p10, p11) --[[ line: 249 ]]
+			startPollingActiveTurn = function(p10, p11)
 				-- upvalues: p0 (ref), startPollingTurnFromHistory (ref)
 				local activeTurnHandle = p0.deps.getActiveTurnHandle(p10)
 				
-				return if activeTurnHandle == nil then function() --[[ line: 252 ]] end else startPollingTurnFromHistory(p10, activeTurnHandle, p11)
+				return if activeTurnHandle == nil then function() end else startPollingTurnFromHistory(p10, activeTurnHandle, p11)
 			end
 		}
 	end

@@ -197,18 +197,18 @@ local t = {
 	ModalSequence = { ConversationListOverlay = "conversation_list_overlay" }
 }
 
-function t.GetFormFactorSpecific(_, p0) --[[ line: 246 ]]
+function t.GetFormFactorSpecific(_, p0)
 	-- upvalues: formFactor (ref), t (ref)
 	return if p0 == formFactor.WIDE then t.FormFactor.WIDE else t.FormFactor.COMPACT
 end
 
-function t.GetPresenceIndicatorSizeKey(p1, p2) --[[ line: 254 ]]
+function t.GetPresenceIndicatorSizeKey(p1, p2)
 	local _ = nil
 	
 	return if p2 == 6 then p1.PresenceIndicatorSize.Size6x6 elseif p2 == 8 then p1.PresenceIndicatorSize.Size8x8 elseif p2 == 10 then p1.PresenceIndicatorSize.Size10x10 elseif p2 == 12 then p1.PresenceIndicatorSize.Size12x12 elseif p2 == 14 then p1.PresenceIndicatorSize.Size14x14 else p1.PresenceIndicatorSize.DEFAULT
 end
 
-function t.GetIconButtonWidth(_, p3) --[[ line: 272 ]]
+function t.GetIconButtonWidth(_, p3)
 	return if p3 then 44 else 34
 end
 

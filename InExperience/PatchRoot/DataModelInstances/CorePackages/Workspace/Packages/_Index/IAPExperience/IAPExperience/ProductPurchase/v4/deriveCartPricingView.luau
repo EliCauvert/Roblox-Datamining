@@ -2,7 +2,7 @@
 local fFlagPurchasePromptFixOfferMarginUpsell = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 local _ = require(script.Parent.Parent.PricingTypes)
 
-return function(p0) --[[ line: 47 | named "deriveCartPricingView" ]]
+return function(p0)
 	-- upvalues: cartPricingResponseLineItemModule (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref)
 	if type(p0) ~= "table" then
 		return nil

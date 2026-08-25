@@ -21,7 +21,7 @@ local sampleVideoFramesModule = require(momentsCreation.Capture.sampleVideoFrame
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local UIDragDetectorFixEventPositionEnabledEngineFeature = game:GetEngineFeature("UIDragDetectorFixEventPositionEnabled")
 
-return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useSignalState (ref), reactModule (ref), useDeviceInsets (ref), useCallback (ref), computeSeekFractionModule (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), useEffect (ref), useState (ref), getCaptureVideoContentModule (ref), sampleVideoFramesModule (ref), useMemo (ref), view (ref), signalsModule (ref), useSignalBinding (ref)
 	local playback = p0.playback
 	local var11 = useTokens()
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 	local var18 = reactModule.useRef(false)
 	local var19 = reactModule.useRef(false)
 	local var20 = useDeviceInsets()
-	local var21 = useCallback(function(p1) --[[ line: 78 ]]
+	local var21 = useCallback(function(p1)
 		-- upvalues: var16 (ref), computeSeekFractionModule (copy), playback (ref), p0 (ref)
 		local current = var16.current
 		
@@ -46,11 +46,11 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 			p0.onSeek(var28)
 		end
 	end, { playback, p0.onSeek })
-	local var22 = useCallback(function(p2) --[[ line: 96 ]]
+	local var22 = useCallback(function(p2)
 		-- upvalues: UIDragDetectorFixEventPositionEnabledEngineFeature (copy), guiService (copy), var20 (ref)
 		return if UIDragDetectorFixEventPositionEnabledEngineFeature then p2.X else p2.X - (guiService:GetGuiInset().X + var20.left)
 	end, { var20 })
-	local var23 = useCallback(function(p3) --[[ line: 104 ]]
+	local var23 = useCallback(function(p3)
 		-- upvalues: var18 (ref), playback (ref), var19 (ref), var21 (ref), var22 (ref)
 		var18.current = true
 		
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 		end
 		var21(var22(p3))
 	end, { playback, var21, var22 })
-	local var24 = useCallback(function(p4) --[[ line: 113 ]]
+	local var24 = useCallback(function(p4)
 		-- upvalues: var18 (ref), var21 (ref), var22 (ref)
 		if var18.current then
 			var21(var22(p4))
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 			return
 		end
 	end, { var21, var22 })
-	local var25 = useCallback(function() --[[ line: 120 ]]
+	local var25 = useCallback(function()
 		-- upvalues: var18 (ref), var19 (ref), playback (ref)
 		if not var18.current then return end
 		var18.current = false
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 		end
 		var19.current = false
 	end, { playback })
-	useEffect(function() --[[ line: 131 ]]
+	useEffect(function()
 		-- upvalues: var13 (ref), var17 (ref), var23 (ref), var24 (ref), var25 (ref)
 		if not var13 then return end
 		local current = var17.current
@@ -92,7 +92,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 			current.DragEnd:Connect(var25)
 		}
 		
-		return function() --[[ line: 144 ]]
+		return function()
 			-- upvalues: list (ref)
 			for i, v in list do
 				v:Disconnect()
@@ -100,7 +100,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 		end
 	end, { var13, var23, var24, var25 })
 	local var26, var27 = useState({})
-	useEffect(function() --[[ line: 153 ]]
+	useEffect(function()
 		-- upvalues: p0 (ref), var14 (ref), getCaptureVideoContentModule (copy), var15 (ref), sampleVideoFramesModule (copy), var27 (ref)
 		if p0.capture == nil or var14 <= 0 then return end
 		local var30 = getCaptureVideoContentModule(p0.capture)
@@ -141,7 +141,7 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 					Padding = UDim.new(0, var11.Size.Size_50),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}
-			}, useMemo(function() --[[ line: 170 ]]
+			}, useMemo(function()
 				-- upvalues: var14 (ref), var26 (ref), reactModule (copy), view (copy)
 				local t = {}
 				
@@ -166,15 +166,15 @@ return function(p0) --[[ line: 58 | named "VideoTimeline" ]]
 		Playhead = reactModule.createElement(view, {
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = useSignalBinding(useMemo(function() --[[ line: 190 ]]
+			Position = useSignalBinding(useMemo(function()
 				-- upvalues: signalsModule (copy), playback (ref)
-				return signalsModule.createComputed(function(p6) --[[ line: 191 ]]
+				return signalsModule.createComputed(function(p6)
 					-- upvalues: playback (copy)
 					local duration = playback.getDuration(p6)
 					
 					return if duration <= 0 then 0 else math.clamp(playback.getPosition(p6) / duration, 0, 1)
 				end)
-			end, { playback })):map(function(p5) --[[ line: 242 ]]
+			end, { playback })):map(function(p5)
 				return UDim2.fromScale(p5, 0.5)
 			end),
 			Size = UDim2.new(0, 4, 1, 20),

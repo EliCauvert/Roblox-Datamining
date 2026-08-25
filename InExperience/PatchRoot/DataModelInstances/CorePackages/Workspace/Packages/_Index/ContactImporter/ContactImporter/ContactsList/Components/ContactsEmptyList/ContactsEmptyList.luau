@@ -8,11 +8,11 @@ local contactsInformationModalModule = require(parent.ContactsList.Components.Co
 local contactsEmptyList = roact.PureComponent:extend("ContactsEmptyList")
 contactsEmptyList.defaultProps = { errorTextKey = textKeysModule.EMPTY_STATE }
 
-function contactsEmptyList.render(p0) --[[ line: 23 ]]
+function contactsEmptyList.render(p0)
 	-- upvalues: withLocalization (ref), roact (ref), contactsInformationModalModule (ref), images (ref)
 	local props = p0.props
 	
-	return withLocalization({ emptyState = props.errorTextKey })(function(p1) --[[ line: 28 ]]
+	return withLocalization({ emptyState = props.errorTextKey })(function(p1)
 		-- upvalues: roact (copy), contactsInformationModalModule (copy), images (copy), props (ref)
 		return roact.createElement(contactsInformationModalModule, {
 			image = images["icons/status/oof_xlarge"],

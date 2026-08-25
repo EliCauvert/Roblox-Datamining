@@ -4,26 +4,26 @@ local enumsModule = require(whatsNew.Enums)
 local _ = require(whatsNew.Types)
 local scopeActionsModule = require(script.Parent.ScopeActions)
 
-local function _(p0, p1, p2) --[[ line: 21 | named "appendError" ]]
+local function _(p0, p1, p2)
 	table.insert(p0, `{p1}:{p2}`)
 end
 
-local _ = function(p3) --[[ line: 25 | named "isNonEmptyString" ]]
+local _ = function(p3)
 	return p3 ~= nil and p3 ~= ""
 end
 
-local _ = function(p4) --[[ line: 29 | named "isoDateToUnix" ]]
+local _ = function(p4)
 	local dateTime = DateTime.fromIsoDate(p4)
 	
 	return if dateTime then dateTime.UnixTimestamp else nil
 end
 
-local _ = function(p5, p6) --[[ line: 34 | named "getRegistryEntries" ]]
+local _ = function(p5, p6)
 	-- upvalues: enumsModule (ref)
 	return if p6 == enumsModule.TourType.WhatsNew then p5.whatsNew else p5.onboarding
 end
 
-local function validateConstants(p7, p8) --[[ line: 41 ]]
+local function validateConstants(p7, p8)
 	-- upvalues: constantsModule (ref)
 	local constants = p7.constants
 	
@@ -38,7 +38,7 @@ local function validateConstants(p7, p8) --[[ line: 41 ]]
 	end
 end
 
-local function validateScopeKeys(p9, p10) --[[ line: 56 ]]
+local function validateScopeKeys(p9, p10)
 	-- upvalues: constantsModule (ref)
 	for i, v in p9.scopeTours do
 		if v.id ~= i then
@@ -47,7 +47,7 @@ local function validateScopeKeys(p9, p10) --[[ line: 56 ]]
 	end
 end
 
-local function validateEntrySchedule(p11, p12, p13) --[[ line: 64 ]]
+local function validateEntrySchedule(p11, p12, p13)
 	-- upvalues: constantsModule (ref), enumsModule (ref)
 	local id = `{p11.id} ({p12})`
 	local var14 = nil
@@ -94,9 +94,9 @@ local function validateEntrySchedule(p11, p12, p13) --[[ line: 64 ]]
 	end
 end
 
-local function validateEntryScopes(p14, p15) --[[ line: 99 ]]
+local function validateEntryScopes(p14, p15)
 	-- upvalues: constantsModule (ref), validateEntrySchedule (ref), enumsModule (ref)
-	local function validateEntries(p16, p17) --[[ line: 100 ]]
+	local function validateEntries(p16, p17)
 		-- upvalues: p14 (ref), p15 (ref), constantsModule (copy), validateEntrySchedule (copy)
 		for i, v in p16 do
 			if p14.scopeTours[v.scopeId] == nil then
@@ -125,7 +125,7 @@ local function validateEntryScopes(p14, p15) --[[ line: 99 ]]
 	end
 end
 
-local function validateUniqueEntryIds(p18, p19) --[[ line: 123 ]]
+local function validateUniqueEntryIds(p18, p19)
 	-- upvalues: enumsModule (ref), constantsModule (ref)
 	for i, v in enumsModule.TourTypeList do
 		local whatsNew, var22, var23
@@ -150,7 +150,7 @@ local function validateUniqueEntryIds(p18, p19) --[[ line: 123 ]]
 	end
 end
 
-local function scopeHasEntries(p20, p21) --[[ line: 136 ]]
+local function scopeHasEntries(p20, p21)
 	-- upvalues: enumsModule (ref)
 	for i, v in enumsModule.TourTypeList do
 		local whatsNew, var24, var25
@@ -172,7 +172,7 @@ local function scopeHasEntries(p20, p21) --[[ line: 136 ]]
 	return false
 end
 
-local function validateNestedScopeActions(p22, p23) --[[ line: 148 ]]
+local function validateNestedScopeActions(p22, p23)
 	-- upvalues: scopeHasEntries (ref), constantsModule (ref)
 	for i, v in p22.scopeTours do
 		if v.parentScopeId ~= nil and scopeHasEntries(i, p22) then
@@ -191,7 +191,7 @@ local function validateNestedScopeActions(p22, p23) --[[ line: 148 ]]
 	end
 end
 
-local function validateKnownActionKeys(p24, p25, p26) --[[ line: 164 ]]
+local function validateKnownActionKeys(p24, p25, p26)
 	-- upvalues: scopeActionsModule (ref), constantsModule (ref)
 	if p25 == nil then return end
 	for i, v in scopeActionsModule.collectRegistryActionKeys(p24) do
@@ -201,7 +201,7 @@ local function validateKnownActionKeys(p24, p25, p26) --[[ line: 164 ]]
 	end
 end
 
-return function(p27, p28) --[[ line: 180 | named "validateRegistry" ]]
+return function(p27, p28)
 	-- upvalues: validateConstants (ref), validateScopeKeys (ref), validateEntryScopes (ref), validateUniqueEntryIds (ref), validateNestedScopeActions (ref), validateKnownActionKeys (ref)
 	local t = {}
 	local t_1 = {}

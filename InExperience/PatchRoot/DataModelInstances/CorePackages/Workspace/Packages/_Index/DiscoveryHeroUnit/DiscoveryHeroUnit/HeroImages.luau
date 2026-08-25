@@ -10,11 +10,11 @@ local getYPositionOffsetForMotion = parallaxUtilsModule.getYPositionOffsetForMot
 local getNormalizedTopPosition = parallaxUtilsModule.getNormalizedTopPosition
 local _ = require(discoveryHeroUnit.HeroUnitTypes)
 
-local function _(p0, p1, p2) --[[ line: 71 | named "calculateModifiedNormalizedPosition" ]]
+local function _(p0, p1, p2)
 	return if p0 < 0 and p2 and p2 > 0 then math.clamp(p0 / p2, -1, 0) elseif p1 == nil or p1 <= 0 or p1 >= 1 then p0 else math.clamp(p0 / p1, 0, 1)
 end
 
-local _ = function(p3, p4) --[[ line: 87 | named "computeNormalizedHeroUnitHeight" ]]
+local _ = function(p3, p4)
 	if p3 == nil then
 		return nil
 	end
@@ -23,19 +23,19 @@ local _ = function(p3, p4) --[[ line: 87 | named "computeNormalizedHeroUnitHeigh
 	return if y <= 0 then nil else p4 / y
 end
 
-return reactModule.memo(function(p5) --[[ line: 99 | named "HeroImages" ]]
+return reactModule.memo(function(p5)
 	-- upvalues: argCheckModule (ref), reactModule (ref), getNormalizedTopPosition (ref), useNormalizedVerticalProgress (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), getYPositionOffsetForMotion (ref)
 	argCheckModule.assert(p5.foregroundAspectRatio > 0, "HeroImages: foregroundAspectRatio must be > 0")
 	local var4 = reactModule.useRef(nil)
 	local var5 = reactModule.useRef(nil)
 	local var6, var7 = reactModule.useBinding(Vector2.new(0, 0))
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var7 (ref)
 		if var4 and var4.current then
 			var7(var4.current.AbsoluteSize)
 		end
 	end, {})
-	local var8 = reactModule.useCallback(function(p6) --[[ line: 113 ]]
+	local var8 = reactModule.useCallback(function(p6)
 		-- upvalues: var5 (ref), getNormalizedTopPosition (copy), p5 (ref), var7 (ref)
 		if p6 then
 			var5.current = getNormalizedTopPosition(p5.verticalScrollingFrameRef.current, p6)
@@ -44,7 +44,7 @@ return reactModule.memo(function(p5) --[[ line: 99 | named "HeroImages" ]]
 	end, { p5.verticalScrollingFrameRef })
 	local var9 = useNormalizedVerticalProgress(p5.verticalScrollingFrameRef, var4)
 	local var10, var11 = reactModule.useBinding(Vector2.new(0, 0))
-	local var12 = reactModule.useCallback(function(p7, p8, p9, p10, p11) --[[ line: 124 ]]
+	local var12 = reactModule.useCallback(function(p7, p8, p9, p10, p11)
 		-- upvalues: argCheckModule (copy)
 		argCheckModule.assert(p10 > 0)
 		argCheckModule.assert(p11 > 0)
@@ -81,7 +81,7 @@ return reactModule.memo(function(p5) --[[ line: 99 | named "HeroImages" ]]
 				normalizedPosition = var9,
 				imageSize = var10,
 				frameSize = var6
-			}):map(function(p12) --[[ line: 190 ]]
+			}):map(function(p12)
 				-- upvalues: var5 (ref), getNormalizedTopPosition (copy), p5 (ref), var4 (ref), getYPositionOffsetForMotion (copy), var14 (ref), backgroundOverflow (ref), var12 (ref)
 				if var5.current == nil then
 					var5.current = getNormalizedTopPosition(p5.verticalScrollingFrameRef.current, var4.current)
@@ -109,7 +109,7 @@ return reactModule.memo(function(p5) --[[ line: 99 | named "HeroImages" ]]
 				end
 				return Vector2.new(0, 0)
 			end) else nil,
-			ImageRectSize = if p5.enableBackgroundAnimation then reactModule.joinBindings({ imageSize = var10, frameSize = var6 }):map(function(p13) --[[ line: 233 ]]
+			ImageRectSize = if p5.enableBackgroundAnimation then reactModule.joinBindings({ imageSize = var10, frameSize = var6 }):map(function(p13)
 				-- upvalues: var4 (ref), var12 (ref), p5 (ref)
 				local imageSize = p13.imageSize
 				
@@ -121,7 +121,7 @@ return reactModule.memo(function(p5) --[[ line: 99 | named "HeroImages" ]]
 				end
 				return Vector2.new(0, 0)
 			end) else nil,
-			[reactModule.Change.ContentImageSize] = function(p14) --[[ line: 262 ]]
+			[reactModule.Change.ContentImageSize] = function(p14)
 				-- upvalues: var11 (ref)
 				if p14 then
 					var11(p14.ContentImageSize)
@@ -134,7 +134,7 @@ return reactModule.memo(function(p5) --[[ line: 99 | named "HeroImages" ]]
 			AnchorPoint = Vector2.new(0.5, 0),
 			Size = UDim2.new(1, -p5.foregroundOverflow, 1 / p5.foregroundAspectRatio, -p5.foregroundOverflow / p5.foregroundAspectRatio),
 			SizeConstraint = Enum.SizeConstraint.RelativeYY,
-			Position = if p5.enableForegroundAnimation then reactModule.joinBindings({ normalizedPosition = var9, frameSize = var6 }):map(function(p15) --[[ line: 287 ]]
+			Position = if p5.enableForegroundAnimation then reactModule.joinBindings({ normalizedPosition = var9, frameSize = var6 }):map(function(p15)
 				-- upvalues: var5 (ref), getNormalizedTopPosition (copy), p5 (ref), var4 (ref), getYPositionOffsetForMotion (copy), var13 (ref)
 				if var5.current == nil then
 					var5.current = getNormalizedTopPosition(p5.verticalScrollingFrameRef.current, var4.current)

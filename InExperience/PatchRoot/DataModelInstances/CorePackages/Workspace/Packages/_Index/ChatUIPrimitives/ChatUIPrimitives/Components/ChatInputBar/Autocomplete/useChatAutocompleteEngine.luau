@@ -13,17 +13,17 @@ local t = {
 	results = {}
 }
 
-local function _(p0, p1, p2, p3) --[[ line: 44 | named "spliceInto" ]]
+local function _(p0, p1, p2, p3)
 	local text = p0.Text
 	p0.Text = string.sub(text, 1, p1 - 1) .. p3 .. string.sub(text, p2 + 1)
 	p0.CursorPosition = p1 + #p3
 end
 
-return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
+return function(p4, p5)
 	-- upvalues: reactModule (ref), internalProvidersModule (ref), t (ref), userInputService (ref), contextActionService (ref), fFlagExpChatEmojiInputParity (ref), cryoModule (ref)
 	local var6 = if p5 then p5.commands else nil
 	local var7 = if p5 and p5.emojis then true else false
-	local var8 = reactModule.useMemo(function() --[[ line: 58 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: var6 (ref), var7 (ref), internalProvidersModule (copy)
 		return if var6 or var7 then internalProvidersModule.buildTrie(var6, var7) else nil
 	end, { var6 or false, var7 })
@@ -37,12 +37,12 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 	local var15 = reactModule.useRef(var7)
 	var15.current = var7
 	local text = "ChatAutocompleteSink_" .. tostring(p4)
-	reactModule.useEffect(function() --[[ line: 81 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p4 (ref), p5 (ref), var11 (ref)
 		local current = p4.current
 		
 		if current and p5 then
-			local var18 = current:GetPropertyChangedSignal("CursorPosition"):Connect(function() --[[ line: 86 ]]
+			local var18 = current:GetPropertyChangedSignal("CursorPosition"):Connect(function()
 				-- upvalues: current (ref), var11 (copy)
 				local cursorPosition = current.CursorPosition
 				
@@ -51,14 +51,14 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 				end
 			end)
 			
-			return function() --[[ line: 92 ]]
+			return function()
 				-- upvalues: var18 (ref)
 				var18:Disconnect()
 			end
 		end
 	end, { p4.current, p5 })
 	
-	local function _(p6) --[[ line: 97 | named "spliceResult" ]]
+	local function _(p6)
 		-- upvalues: var13 (ref), p4 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
 		local current = var13.current
 		local var19 = current.results[p6]
@@ -78,7 +78,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 		end
 	end
 	
-	local function commitSelection(p7) --[[ line: 110 ]]
+	local function commitSelection(p7)
 		-- upvalues: var12 (ref), var13 (ref), p4 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
 		var12.current = true
 		local current = var13.current
@@ -95,7 +95,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 			current_1.CursorPosition = replaceStart + #var22
 			var10(t)
 		end
-		task.defer(function() --[[ line: 113 ]]
+		task.defer(function()
 			-- upvalues: var12 (copy), p4 (copy)
 			var12.current = false
 			local current = p4.current
@@ -106,16 +106,16 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 		end)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 125 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), userInputService (copy), var13 (ref), var10 (ref), t (copy), p4 (ref), var11 (ref)
 		if p5 then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p8) --[[ line: 129 ]]
+			local inputBeganConnection = userInputService.InputBegan:Connect(function(p8)
 				-- upvalues: var13 (copy), var10 (copy), t (copy), p4 (copy), var11 (copy)
 				local current = var13.current
 				
 				if not current.activated or #current.results == 0 then return end
 				if p8.KeyCode == Enum.KeyCode.Up then
-					var10(function(p9) --[[ line: 136 ]]
+					var10(function(p9)
 						local var24 = if p9.selectedIndex <= 0 then 1 elseif p9.selectedIndex == 1 then #p9.results else p9.selectedIndex - 1
 						
 						return {
@@ -129,7 +129,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 					
 					return
 				elseif p8.KeyCode == Enum.KeyCode.Down then
-					var10(function(p10) --[[ line: 154 ]]
+					var10(function(p10)
 						local var25 = p10.selectedIndex + 1
 						
 						if #p10.results < var25 then
@@ -148,7 +148,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 				elseif p8.KeyCode == Enum.KeyCode.Escape then
 					var10(t)
 					local current_1 = p4.current
-					task.defer(function() --[[ line: 170 ]]
+					task.defer(function()
 						-- upvalues: current_1 (ref), var11 (copy)
 						if current_1 then
 							current_1:CaptureFocus()
@@ -158,20 +158,20 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 				end
 			end)
 			
-			return function() --[[ line: 178 ]]
+			return function()
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
 		end
 	end, { p5 })
-	reactModule.useEffect(function() --[[ line: 183 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), contextActionService (copy), text (ref)
 		if var9.activated and #var9.results ~= 0 then
-			contextActionService:BindCoreAction(text, function() --[[ line: 187 ]]
+			contextActionService:BindCoreAction(text, function()
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.Up, Enum.KeyCode.Down, Enum.KeyCode.Escape)
 			
-			return function() --[[ line: 190 ]]
+			return function()
 				-- upvalues: contextActionService (copy), text (copy)
 				contextActionService:UnbindCoreAction(text)
 			end
@@ -184,7 +184,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 		selectedIndex = var9.selectedIndex,
 		keyboardIndex = var9.keyboardIndex,
 		renderEntry = internalProvidersModule.renderEntry,
-		onTextChanged = reactModule.useCallback(function(p11) --[[ line: 195 ]]
+		onTextChanged = reactModule.useCallback(function(p11)
 			-- upvalues: var12 (ref), var14 (ref), p4 (ref), var11 (ref), fFlagExpChatEmojiInputParity (copy), var15 (ref), internalProvidersModule (copy), var13 (ref), var10 (ref), t (copy), cryoModule (copy)
 			if var12.current then return end
 			local current = var14.current
@@ -204,7 +204,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 					local text = current_1.Text
 					current_1.Text = string.sub(text, 1, replaceStart - 1) .. replacement .. string.sub(text, replaceFinish + 1)
 					current_1.CursorPosition = replaceStart + #replacement
-					task.defer(function() --[[ line: 213 ]]
+					task.defer(function()
 						-- upvalues: var12 (copy), p4 (copy)
 						var12.current = false
 						local current = p4.current
@@ -242,9 +242,9 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 				end
 			end
 		end, {}),
-		setSelectedIndex = reactModule.useCallback(function(p12) --[[ line: 281 ]]
+		setSelectedIndex = reactModule.useCallback(function(p12)
 			-- upvalues: var10 (ref)
-			var10(function(p13) --[[ line: 282 ]]
+			var10(function(p13)
 				-- upvalues: p12 (ref)
 				return {
 					activated = p13.activated,
@@ -256,7 +256,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 			end)
 		end, {}),
 		commitSelection = commitSelection,
-		interceptSend = reactModule.useCallback(function(p14, p15) --[[ line: 248 ]]
+		interceptSend = reactModule.useCallback(function(p14, p15)
 			-- upvalues: var13 (ref), var12 (ref), p4 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
 			if not p15 then
 				return false
@@ -283,7 +283,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 				current_2.CursorPosition = replaceStart + #var30
 				var10(t)
 			end
-			task.defer(function() --[[ line: 261 ]]
+			task.defer(function()
 				-- upvalues: var12 (copy), p14 (ref)
 				var12.current = false
 				
@@ -294,7 +294,7 @@ return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
 			
 			return true
 		end, {}),
-		dismiss = reactModule.useCallback(function() --[[ line: 274 ]]
+		dismiss = reactModule.useCallback(function()
 			-- upvalues: var10 (ref), t (copy)
 			var10(t)
 		end, {})

@@ -47,7 +47,7 @@ local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFl
 local fFlagMockDevSubPurchaseInStudioModule = require(purchasePrompt.Flags.FFlagMockDevSubPurchaseInStudio)
 local list = { networkModule, analyticsModule, externalSettingsModule }
 
-function isLuaPurchase(p0) --[[ line: 77 ]]
+function isLuaPurchase(p0)
 	-- upvalues: productTypeEnum (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref)
 	local var38
 	if p0 == nil then
@@ -62,9 +62,9 @@ function isLuaPurchase(p0) --[[ line: 77 ]]
 	end
 end
 
-return function() --[[ line: 90 | named "purchaseItem" ]]
+return function()
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), analyticsModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), startPurchaseModule (ref), workspaceService (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), requestTypeModule (ref), experienceAuthService (ref), completePurchaseModule (ref), purchaseFlowModule (ref), setPromptStateModule (ref), promptStateModule (ref), httpService (ref), fFlagPurchasePromptPriceShouldUseProductInfoPriceModule (ref), selectProductPriceModule (ref), getPlayerPriceModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), derivePurchaseOptionsFromCartPricingResponseModule (ref), fFlagMockDevSubPurchaseInStudioModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref), performLuaPurchaseModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), isCreatorStoreAssetTypeModule (ref), performCreatorStorePurchaseModule (ref), promiseModule (ref), errorOccurredModule (ref), performPurchaseV2Module (ref), isEconomicRestrictionResponse (ref), parseEconomicRestrictionsFailureReason (ref), parseEconomicRestrictionsExpirationTimeInMinutes (ref), setEconomicRestrictionErrorModule (ref), purchaseErrorModule (ref), handlePriceChangedErrorModule (ref), fFlagEnablePurchasePayloadInExperienceShop (ref), performPurchaseModule (ref), itemTypeModule (ref), getToolAssetModule (ref), playersService (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2) --[[ line: 91 ]]
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: networkModule (copy), externalSettingsModule (copy), analyticsModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), startPurchaseModule (copy), workspaceService (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), requestTypeModule (copy), experienceAuthService (copy), completePurchaseModule (copy), purchaseFlowModule (copy), setPromptStateModule (copy), promptStateModule (copy), httpService (copy), fFlagPurchasePromptPriceShouldUseProductInfoPriceModule (copy), selectProductPriceModule (copy), getPlayerPriceModule (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), derivePurchaseOptionsFromCartPricingResponseModule (copy), fFlagMockDevSubPurchaseInStudioModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), productTypeEnum (copy), performLuaPurchaseModule (copy), getFFlagEnableCreatorStorePurchasingCutoverModule (copy), isCreatorStoreAssetTypeModule (copy), performCreatorStorePurchaseModule (copy), promiseModule (copy), errorOccurredModule (copy), performPurchaseV2Module (copy), isEconomicRestrictionResponse (copy), parseEconomicRestrictionsFailureReason (copy), parseEconomicRestrictionsExpirationTimeInMinutes (copy), setEconomicRestrictionErrorModule (copy), purchaseErrorModule (copy), handlePriceChangedErrorModule (copy), fFlagEnablePurchasePayloadInExperienceShop (copy), performPurchaseModule (copy), itemTypeModule (copy), getToolAssetModule (copy), playersService (copy)
 		local var39 = p2[networkModule]
 		local var40 = p2[externalSettingsModule]
@@ -135,18 +135,18 @@ return function() --[[ line: 90 | named "purchaseItem" ]]
 			
 			return
 		elseif getFFlagEnableCreatorStorePurchasingCutoverModule() and isCreatorStoreAssetTypeModule(assetType) then
-			return performCreatorStorePurchaseModule(var39, productId, assetType):andThen(function(p4) --[[ line: 243 ]]
+			return performCreatorStorePurchaseModule(var39, productId, assetType):andThen(function(p4)
 				-- upvalues: p1 (ref), completePurchaseModule (copy), var41 (ref), id (ref), infoType (ref), var46 (write), promiseModule (copy)
 				p1:dispatch(completePurchaseModule())
 				var41.signalPurchaseSuccess(id, infoType, var46, p4)
 				
 				return promiseModule.resolve()
-			end):catch(function(p3) --[[ line: 252 ]]
+			end):catch(function(p3)
 				-- upvalues: p1 (ref), errorOccurredModule (copy)
 				p1:dispatch(errorOccurredModule(p3))
 			end)
 		elseif var48 or collectibleItemInstanceId and collectibleItemInstanceId ~= "" then
-			return performPurchaseV2Module(var39, infoType, productId, var46, var45, isRobloxPurchase, collectibleItemId, collectibleProductId, idempotencyKey, purchaseAuthToken, collectibleItemInstanceId, if fFlagPurchasePromptCartPricingEnabledModule then var47 else nil):andThen(function(p6) --[[ line: 270 ]]
+			return performPurchaseV2Module(var39, infoType, productId, var46, var45, isRobloxPurchase, collectibleItemId, collectibleProductId, idempotencyKey, purchaseAuthToken, collectibleItemInstanceId, if fFlagPurchasePromptCartPricingEnabledModule then var47 else nil):andThen(function(p6)
 				-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), completePurchaseModule (copy), var41 (ref), id (ref), infoType (ref), var46 (write), promiseModule (copy)
 				if fFlagEnableUnifiedProductPurchaseFlow then
 					p1:dispatch(completePurchaseModule(p6))
@@ -156,7 +156,7 @@ return function() --[[ line: 90 | named "purchaseItem" ]]
 				var41.signalPurchaseSuccess(id, infoType, var46, p6)
 				
 				return promiseModule.resolve()
-			end):catch(function(p5) --[[ line: 285 ]]
+			end):catch(function(p5)
 				-- upvalues: isEconomicRestrictionResponse (copy), parseEconomicRestrictionsFailureReason (copy), parseEconomicRestrictionsExpirationTimeInMinutes (copy), p1 (ref), setEconomicRestrictionErrorModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), handlePriceChangedErrorModule (copy), state_1 (ref), var41 (ref), productId (ref), infoType (ref), platform (ref)
 				if isEconomicRestrictionResponse(p5) then
 					p1:dispatch(setEconomicRestrictionErrorModule(parseEconomicRestrictionsFailureReason(p5), parseEconomicRestrictionsExpirationTimeInMinutes(p5)))
@@ -184,7 +184,7 @@ return function() --[[ line: 90 | named "purchaseItem" ]]
 		if fFlagEnablePurchasePayloadInExperienceShop then
 			var50 = state_1.productPayload and state_1.productPayload.purchasePayload
 		end
-		return performPurchaseModule(var39, infoType, productId, var46, var45, isRobloxPurchase, collectibleItemId_1, collectibleProductId_1, idempotencyKey, purchaseAuthToken, if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then var49 else nil, if fFlagEnablePurchasePayloadInExperienceShop then var50 else nil, if fFlagPurchasePromptCartPricingEnabledModule then var47 else nil):andThen(function(p8) --[[ line: 334 ]]
+		return performPurchaseModule(var39, infoType, productId, var46, var45, isRobloxPurchase, collectibleItemId_1, collectibleProductId_1, idempotencyKey, purchaseAuthToken, if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then var49 else nil, if fFlagEnablePurchasePayloadInExperienceShop then var50 else nil, if fFlagPurchasePromptCartPricingEnabledModule then var47 else nil):andThen(function(p8)
 			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), p1 (ref), completePurchaseModule (copy), itemType (ref), itemTypeModule (copy), var41 (ref), id (ref), infoType (ref), var46 (write), equipIfPurchased (ref), assetTypeId (ref), getToolAssetModule (copy), var39 (ref), playersService (copy), promiseModule (copy)
 			if fFlagEnableUnifiedProductPurchaseFlow then
 				p1:dispatch(completePurchaseModule(p8))
@@ -194,13 +194,13 @@ return function() --[[ line: 90 | named "purchaseItem" ]]
 			if itemType ~= itemTypeModule.Bundle then
 				var41.signalPurchaseSuccess(id, infoType, var46, p8)
 			end
-			return if equipIfPurchased and assetTypeId == 19 then getToolAssetModule(var39, id):andThen(function(p9) --[[ line: 352 ]]
+			return if equipIfPurchased and assetTypeId == 19 then getToolAssetModule(var39, id):andThen(function(p9)
 				-- upvalues: playersService (copy)
 				if p9 then
 					p9.Parent = playersService.LocalPlayer.Backpack
 				end
 			end) else promiseModule.resolve()
-		end):catch(function(p7) --[[ line: 361 ]]
+		end):catch(function(p7)
 			-- upvalues: isEconomicRestrictionResponse (copy), parseEconomicRestrictionsFailureReason (copy), parseEconomicRestrictionsExpirationTimeInMinutes (copy), p1 (ref), setEconomicRestrictionErrorModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), handlePriceChangedErrorModule (copy), state_1 (ref), var41 (ref), productId (ref), infoType (ref), platform (ref)
 			if isEconomicRestrictionResponse(p7) then
 				p1:dispatch(setEconomicRestrictionErrorModule(parseEconomicRestrictionsFailureReason(p7), parseEconomicRestrictionsExpirationTimeInMinutes(p7)))

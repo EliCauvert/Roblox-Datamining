@@ -31,17 +31,17 @@ local t = {
 }
 t.__index = t
 
-function t.new() --[[ line: 55 ]]
+function t.new()
 	-- upvalues: messageBus (ref), t (ref)
 	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
 end
 
-function t:getContacts() --[[ line: 68 ]]
+function t:getContacts()
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var3 = promiseModule.new(function(p0, _) --[[ line: 69 ]]
+	local var3 = promiseModule.new(function(p0, _)
 		-- upvalues: self (ref)
 		local GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p1) --[[ line: 71 ]]
+		self.subscriber:subscribeProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p1)
 			-- upvalues: self (copy), GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p0 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p0(p1)
@@ -52,12 +52,12 @@ function t:getContacts() --[[ line: 68 ]]
 	return var3
 end
 
-function t:supportsContacts() --[[ line: 96 ]]
+function t:supportsContacts()
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var4 = promiseModule.new(function(p2, _) --[[ line: 97 ]]
+	local var4 = promiseModule.new(function(p2, _)
 		-- upvalues: self (ref)
 		local SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p3) --[[ line: 99 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p3)
 			-- upvalues: self (copy), SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p2 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p2(p3.support)

@@ -12,11 +12,11 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 24 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationBodyPartCollisionFidelity (ref), errorSourceStringsModule (ref)
 		local rootInstance = p1.rootInstance
 		local default = Enum.CollisionFidelity.Default
-		pcall(function() --[[ line: 32 ]]
+		pcall(function()
 			-- upvalues: default (write), UGCValidationBodyPartCollisionFidelity (copy)
 			default = Enum.CollisionFidelity[UGCValidationBodyPartCollisionFidelity]
 		end)

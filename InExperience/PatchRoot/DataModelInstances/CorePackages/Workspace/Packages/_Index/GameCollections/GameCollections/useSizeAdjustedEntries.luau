@@ -2,9 +2,9 @@
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 
-return function(p0, p1, p2) --[[ line: 7 ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), cryoModule (ref)
-	return reactModule.useMemo(function() --[[ line: 8 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p0 (ref), cryoModule (copy), p1 (ref), p2 (ref)
 		local t = {}
 		local var3 = false

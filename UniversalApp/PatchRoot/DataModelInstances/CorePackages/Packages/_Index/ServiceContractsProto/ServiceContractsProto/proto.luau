@@ -3,7 +3,7 @@ local _ = require(script.message)
 local _ = require(script.typeRegistry)
 local t = {}
 
-local function readVarIntBytes(p0, p1) --[[ line: 21 ]]
+local function readVarIntBytes(p0, p1)
 	local var4 = 0
 	local var5 = 0
 	local var6 = 0
@@ -18,7 +18,7 @@ local function readVarIntBytes(p0, p1) --[[ line: 21 ]]
 	return var4, var5, p1
 end
 
-function t.readVarIntU64(p2, p3) --[[ line: 38 ]]
+function t.readVarIntU64(p2, p3)
 	-- upvalues: readVarIntBytes (ref)
 	local _ = nil
 	local _ = nil
@@ -27,7 +27,7 @@ function t.readVarIntU64(p2, p3) --[[ line: 38 ]]
 	return var10 * 4294967296 + var9, var11
 end
 
-function t.readVarIntU32(p4, p5) --[[ line: 45 ]]
+function t.readVarIntU32(p4, p5)
 	-- upvalues: readVarIntBytes (ref)
 	local _ = nil
 	local _ = nil
@@ -36,7 +36,7 @@ function t.readVarIntU32(p4, p5) --[[ line: 45 ]]
 	return var12, var13
 end
 
-function t.readVarIntI64(p6, p7) --[[ line: 52 ]]
+function t.readVarIntI64(p6, p7)
 	-- upvalues: readVarIntBytes (ref)
 	local _ = nil
 	local _ = nil
@@ -55,7 +55,7 @@ function t.readVarIntI64(p6, p7) --[[ line: 52 ]]
 	return -(bits * 4294967296 + var17), var16
 end
 
-function t.readVarIntI32(p8, p9) --[[ line: 71 ]]
+function t.readVarIntI32(p8, p9)
 	-- upvalues: readVarIntBytes (ref)
 	local _ = nil
 	local _ = nil
@@ -67,7 +67,7 @@ function t.readVarIntI32(p8, p9) --[[ line: 71 ]]
 	return var19 - 4294967296, var20
 end
 
-function t.readVarIntS64(p10, p11) --[[ line: 82 ]]
+function t.readVarIntS64(p10, p11)
 	-- upvalues: readVarIntBytes (ref)
 	local _ = nil
 	local _ = nil
@@ -96,7 +96,7 @@ function t.readVarIntS64(p10, p11) --[[ line: 82 ]]
 	return shifted * 4294967296 + bits, var23
 end
 
-function t.readVarIntS32(p12, p13) --[[ line: 113 ]]
+function t.readVarIntS32(p12, p13)
 	-- upvalues: readVarIntBytes (ref)
 	local _ = nil
 	local _ = nil
@@ -110,38 +110,38 @@ end
 
 t.readVarInt = t.readVarIntI64
 
-function t.readFloat(p14, p15) --[[ line: 126 ]]
+function t.readFloat(p14, p15)
 	return buffer.readf32(p14, p15), p15 + 4
 end
 
-function t.readDouble(p16, p17) --[[ line: 130 ]]
+function t.readDouble(p16, p17)
 	return buffer.readf64(p16, p17), p17 + 8
 end
 
-function t.readFixed32(p18, p19) --[[ line: 134 ]]
+function t.readFixed32(p18, p19)
 	return buffer.readu32(p18, p19), p19 + 4
 end
 
-function t.readSignedFixed32(value, p20) --[[ line: 138 ]]
+function t.readSignedFixed32(value, p20)
 	return buffer.readi32(value, p20), p20 + 4
 end
 
-function t.readFixed64(p21, p22) --[[ line: 143 ]]
+function t.readFixed64(p21, p22)
 	return assert(tonumber(string.format("%08x", buffer.readu32(p21, p22 + 4)) .. string.format("%08x", buffer.readu32(p21, p22)), 16), "Couldn't parse created hex"), p22 + 8
 end
 
-function t.readSignedFixed64(_, _) --[[ line: 151 ]]
+function t.readSignedFixed64(_, _)
 	error("TODO: Read sfixed64")
 end
 
-function t.readTag(p23, p24) --[[ line: 155 ]]
+function t.readTag(p23, p24)
 	-- upvalues: t (ref)
 	local var31, var32 = t.readVarInt(p23, p24)
 	
 	return bit32.rshift(var31, 3), bit32.band(var31, 7), var32
 end
 
-function t.readBuffer(p25, p26) --[[ line: 160 ]]
+function t.readBuffer(p25, p26)
 	-- upvalues: t (ref)
 	local var33, var34 = t.readVarInt(p25, p26)
 	local buff = buffer.create(var33)
@@ -150,7 +150,7 @@ function t.readBuffer(p25, p26) --[[ line: 160 ]]
 	return buff, var34 + var33
 end
 
-local function reserveBuffer(p27, p28, p29) --[[ line: 167 ]]
+local function reserveBuffer(p27, p28, p29)
 	if buffer.len(p27) - p28 < p29 then
 		local buff = buffer.create(3 ^ math.ceil(math.log(buffer.len(p27) + p29, 3)))
 		buffer.copy(buff, 0, p27, 0, p28)
@@ -169,7 +169,7 @@ t.wireTypes = {
 	i32 = 5
 }
 
-function t.writeVarInt(p30, p31, p32) --[[ line: 186 ]]
+function t.writeVarInt(p30, p31, p32)
 	-- upvalues: reserveBuffer (ref)
 	if p32 >= 0 then
 		while true do
@@ -207,7 +207,7 @@ function t.writeVarInt(p30, p31, p32) --[[ line: 186 ]]
 	end
 end
 
-function t.writeVarIntZigZag(p33, p34, p35) --[[ line: 225 ]]
+function t.writeVarIntZigZag(p33, p34, p35)
 	-- upvalues: reserveBuffer (ref)
 	local var41 = p35 < 0
 	local absValue = math.abs(p35)
@@ -237,7 +237,7 @@ function t.writeVarIntZigZag(p33, p34, p35) --[[ line: 225 ]]
 	return p33, p34
 end
 
-function t.writeFloat(p36, p37, p38) --[[ line: 259 ]]
+function t.writeFloat(p36, p37, p38)
 	-- upvalues: reserveBuffer (ref)
 	local var47 = reserveBuffer(p36, p37, 4)
 	buffer.writef32(var47, p37, p38)
@@ -245,7 +245,7 @@ function t.writeFloat(p36, p37, p38) --[[ line: 259 ]]
 	return var47, p37 + 4
 end
 
-function t.writeDouble(p39, p40, p41) --[[ line: 265 ]]
+function t.writeDouble(p39, p40, p41)
 	-- upvalues: reserveBuffer (ref)
 	local var48 = reserveBuffer(p39, p40, 8)
 	buffer.writef64(var48, p40, p41)
@@ -253,7 +253,7 @@ function t.writeDouble(p39, p40, p41) --[[ line: 265 ]]
 	return var48, p40 + 8
 end
 
-function t.writeFixed32(p42, p43, p44) --[[ line: 271 ]]
+function t.writeFixed32(p42, p43, p44)
 	-- upvalues: reserveBuffer (ref)
 	local var49 = reserveBuffer(p42, p43, 4)
 	buffer.writeu32(var49, p43, p44)
@@ -261,7 +261,7 @@ function t.writeFixed32(p42, p43, p44) --[[ line: 271 ]]
 	return var49, p43 + 4
 end
 
-function t.writeSignedFixed32(value, p45, p46) --[[ line: 277 ]]
+function t.writeSignedFixed32(value, p45, p46)
 	-- upvalues: reserveBuffer (ref)
 	local var50 = reserveBuffer(value, p45, 4)
 	buffer.writei32(var50, p45, p46)
@@ -269,7 +269,7 @@ function t.writeSignedFixed32(value, p45, p46) --[[ line: 277 ]]
 	return var50, p45 + 4
 end
 
-function t.writeFixed64(p47, p48, p49) --[[ line: 283 ]]
+function t.writeFixed64(p47, p48, p49)
 	-- upvalues: reserveBuffer (ref)
 	local var51 = reserveBuffer(p47, p48, 8)
 	local formattedText = string.format("%016x", p49)
@@ -279,16 +279,16 @@ function t.writeFixed64(p47, p48, p49) --[[ line: 283 ]]
 	return var51, p48 + 8
 end
 
-function t.writeSignedFixed64(_, _, _) --[[ line: 294 ]]
+function t.writeSignedFixed64(_, _, _)
 	error("TODO: Write sfixed64")
 end
 
-function t.writeTag(p50, p51, p52, p53) --[[ line: 298 ]]
+function t.writeTag(p50, p51, p52, p53)
 	-- upvalues: t (ref)
 	return t.writeVarInt(p50, p51, bit32.lshift(p52, 3) + p53)
 end
 
-function t.writeBuffer(p54, p55, p56, p57) --[[ line: 302 ]]
+function t.writeBuffer(p54, p55, p56, p57)
 	-- upvalues: t (ref), reserveBuffer (ref)
 	local var53, var54 = t.writeVarInt(p54, p55, p57)
 	var53 = reserveBuffer(var53, var54, p57)
@@ -297,18 +297,18 @@ function t.writeBuffer(p54, p55, p56, p57) --[[ line: 302 ]]
 	return var53, var54 + p57
 end
 
-function t.writeString(p58, p59, p60) --[[ line: 311 ]]
+function t.writeString(p58, p59, p60)
 	-- upvalues: t (ref)
 	return t.writeBuffer(p58, p59, buffer.fromstring(p60), #p60)
 end
 
 t.json = {}
 
-function t.json.serializeNumber(p61) --[[ line: 317 ]]
+function t.json.serializeNumber(p61)
 	return if p61 == 1e999 then "Infinity" elseif p61 == -1e999 then "-Infinity" elseif p61 == p61 then p61 else "NaN"
 end
 
-function t.json.deserializeNumber(p62) --[[ line: 325 ]]
+function t.json.deserializeNumber(p62)
 	if p62 == "Infinity" then
 		return 1e999
 	elseif p62 == "-Infinity" then
@@ -324,12 +324,12 @@ function t.json.deserializeNumber(p62) --[[ line: 325 ]]
 	return p62
 end
 
-function t.json.serializeBuffer(p63) --[[ line: 341 ]]
+function t.json.serializeBuffer(p63)
 	-- upvalues: base64Module (ref)
 	return base64Module.encode(buffer.tostring(p63))
 end
 
-function t.json.deserializeBuffer(p64) --[[ line: 345 ]]
+function t.json.deserializeBuffer(p64)
 	-- upvalues: base64Module (ref)
 	return buffer.fromstring(base64Module.decode(p64))
 end

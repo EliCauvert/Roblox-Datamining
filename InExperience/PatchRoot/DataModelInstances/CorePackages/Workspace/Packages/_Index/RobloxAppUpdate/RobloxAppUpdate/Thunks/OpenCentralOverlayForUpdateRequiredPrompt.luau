@@ -2,9 +2,9 @@
 local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
 local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 
-return function(p0, p1, p2) --[[ line: 7 ]]
+return function(p0, p1, p2)
 	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p3) --[[ line: 8 ]]
+	return function(p3)
 		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p0 (ref), p1 (ref), p2 (ref)
 		p3:dispatch(setCentralOverlay(centralOverlayType.UpdateRequiredPrompt, {
 			canPerformBinaryUpdate = p0,

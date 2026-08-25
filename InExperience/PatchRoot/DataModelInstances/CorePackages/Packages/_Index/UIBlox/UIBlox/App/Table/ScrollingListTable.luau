@@ -7,9 +7,9 @@ local cryoModule = require(parent_1.Cryo)
 local withStyleModule = require(core.Style.withStyle)
 local t = { selectable = true, size = UDim2.fromScale(1, 1) }
 
-return function(p0) --[[ line: 39 | named "ScrollingListTable" ]]
+return function(p0)
 	-- upvalues: withStyleModule (ref), cryoModule (ref), t (ref), reactModule (ref), virtualizedList (ref)
-	return withStyleModule(function(p1) --[[ line: 40 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: cryoModule (copy), t (copy), p0 (ref), reactModule (copy), virtualizedList (copy)
 		local var4 = cryoModule.Dictionary.join(t, p0)
 		local t_1 = {}
@@ -39,17 +39,17 @@ return function(p0) --[[ line: 39 | named "ScrollingListTable" ]]
 		return reactModule.createElement(virtualizedList, {
 			Size = var4.size,
 			data = t_1,
-			renderItem = function(p2) --[[ line: 70 ]]
+			renderItem = function(p2)
 				return p2.item
 			end,
-			getItemCount = function(_) --[[ line: 73 ]]
+			getItemCount = function(_)
 				-- upvalues: cells (ref)
 				return #cells
 			end,
-			getItem = function(p3, p4) --[[ line: 76 ]]
+			getItem = function(p3, p4)
 				return p3["Cell " .. tostring(p4)]
 			end,
-			keyExtractor = function(_, p5) --[[ line: 80 ]]
+			keyExtractor = function(_, p5)
 				return "Cell " .. tostring(p5)
 			end,
 			style = {

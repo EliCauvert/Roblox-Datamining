@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local chatComposerModule = require(script.Parent.ChatComposer)
 local view = foundationModule.View
 
-return function(p0) --[[ line: 28 | named "ChatActions" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), chatComposerModule (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y",

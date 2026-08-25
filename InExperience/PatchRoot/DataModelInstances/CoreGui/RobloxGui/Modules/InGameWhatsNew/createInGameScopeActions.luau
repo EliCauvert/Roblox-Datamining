@@ -2,15 +2,15 @@
 local whatsNewModule = require(corePackagesService.Workspace.Packages.WhatsNew)
 local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
 
-return function() --[[ line: 17 | named "createInGameScopeActions" ]]
+return function()
 	-- upvalues: inExperienceSideSheetModule (ref), whatsNewModule (ref)
 	local toggleSideSheet = inExperienceSideSheetModule.toggleSideSheet
 	local var3 = whatsNewModule.scopeActions.createScopeActions()
-	var3:register("OpenTiltMenu", function() --[[ line: 21 ]]
+	var3:register("OpenTiltMenu", function()
 		-- upvalues: toggleSideSheet (ref)
 		toggleSideSheet(true)
 	end)
-	var3:register("CloseTiltMenu", function() --[[ line: 24 ]]
+	var3:register("CloseTiltMenu", function()
 		-- upvalues: toggleSideSheet (ref)
 		toggleSideSheet(false)
 	end)

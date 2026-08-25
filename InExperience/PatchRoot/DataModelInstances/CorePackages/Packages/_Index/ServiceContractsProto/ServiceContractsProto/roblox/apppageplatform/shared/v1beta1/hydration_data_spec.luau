@@ -5,7 +5,7 @@ local hydrationContentTypeModule = require(script.Parent.hydration_content_type)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 75 ]]
+function t_1.new(p0)
 	-- upvalues: hydrationContentTypeModule (ref), t_1 (ref)
 	return setmetatable({
 		content_type = if p0 == nil or p0.content_type == nil then assert(hydrationContentTypeModule.HydrationContentType.fromNumber(0), "Enum has no 0 default") else p0.content_type,
@@ -18,7 +18,7 @@ function t_1.new(p0) --[[ line: 75 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 92 ]]
+function t_1:encode()
 	-- upvalues: hydrationContentTypeModule (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var7 = 0
@@ -76,7 +76,7 @@ function t_1:encode() --[[ line: 92 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 154 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), hydrationContentTypeModule (ref), t (ref)
 	local var24 = t_1.new()
 	local var25 = 0
@@ -155,7 +155,7 @@ function t_1.decode(p1) --[[ line: 154 ]]
 	return var24
 end
 
-function t_1:jsonEncode() --[[ line: 231 ]]
+function t_1:jsonEncode()
 	-- upvalues: hydrationContentTypeModule (ref)
 	local t = {}
 	
@@ -193,7 +193,7 @@ function t_1:jsonEncode() --[[ line: 231 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 284 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), hydrationContentTypeModule (ref), t (ref)
 	local var57 = t_1.new()
 	
@@ -265,14 +265,14 @@ typeRegistryModule.default:register(t.HydrationDataSpec)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 384 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		kind = if p2 == nil or p2.kind == nil then nil else p2.kind
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 390 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var63 = 0
@@ -296,7 +296,7 @@ function t_2:encode() --[[ line: 390 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 409 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref)
 	local var69 = t_2.new()
 	local var70 = 0
@@ -348,7 +348,7 @@ function t_2.decode(p3) --[[ line: 409 ]]
 	return var69
 end
 
-function t_2:jsonEncode() --[[ line: 457 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -363,7 +363,7 @@ function t_2:jsonEncode() --[[ line: 457 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 471 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref)
 	local var89 = t_2.new()
 	

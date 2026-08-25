@@ -4,13 +4,13 @@ local validationManagerModule = require(parent.validationSystem.ValidationManage
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local t = {
 	LegacyValidator = "LegacyValidator",
-	getPrecomputedEditables = function(p0, p1) --[[ line: 56 ]]
+	getPrecomputedEditables = function(p0, p1)
 		local list = { {}, {} }
 		
 		for i, v in { p0, p1 } do
 			for i_1, v_1 in v do
 				for i_2, v_2 in v_1 do
-					pcall(function() --[[ line: 65 ]]
+					pcall(function()
 						-- upvalues: i_1 (ref), i_2 (ref), list (ref), i (ref), v_2 (ref)
 						local var6 = i_1[i_2]
 						
@@ -25,7 +25,7 @@ local t = {
 	end
 }
 
-local function fallbackLocalizationFunction(p2, p3) --[[ line: 12 ]]
+local function fallbackLocalizationFunction(p2, p3)
 	-- upvalues: errorSourceStringsModule (ref)
 	local var7 = if p3 then p3[p2.key] else nil
 	
@@ -64,7 +64,7 @@ local function fallbackLocalizationFunction(p2, p3) --[[ line: 12 ]]
 	return table.concat(t)
 end
 
-local function fetchString(p4, p5, p6) --[[ line: 78 ]]
+local function fetchString(p4, p5, p6)
 	-- upvalues: t (ref), fallbackLocalizationFunction (ref)
 	if p5.key == t.LegacyValidator then
 		return p5.params.Message or ""
@@ -73,7 +73,7 @@ local function fetchString(p4, p5, p6) --[[ line: 78 ]]
 	local var14 = nil
 	
 	if p4 then
-		local ok, status = pcall(function() --[[ line: 89 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p4 (ref), p5 (ref)
 			return p4(p5)
 		end)
@@ -83,7 +83,7 @@ local function fetchString(p4, p5, p6) --[[ line: 78 ]]
 	return if var13 and var14 ~= p5.key then var14 else fallbackLocalizationFunction(p5, p6)
 end
 
-function t.combineResultsIntoLegacy(p7, p8, p9, p10) --[[ line: 102 ]]
+function t.combineResultsIntoLegacy(p7, p8, p9, p10)
 	-- upvalues: fetchString (ref), errorSourceStringsModule (ref)
 	local var15 = p8
 	local pass = p7 and p9.pass
@@ -113,7 +113,7 @@ function t.combineResultsIntoLegacy(p7, p8, p9, p10) --[[ line: 102 ]]
 	return pass, var15
 end
 
-function t.mergeLegacyIntoModern(p11, p12, p13) --[[ line: 146 ]]
+function t.mergeLegacyIntoModern(p11, p12, p13)
 	-- upvalues: t (ref)
 	p13.pass = p13.pass and p11
 	
@@ -136,7 +136,7 @@ function t.mergeLegacyIntoModern(p11, p12, p13) --[[ line: 146 ]]
 	end
 end
 
-function t.studioRFUAssetValidation(value, p14, p15, p16) --[[ line: 173 ]]
+function t.studioRFUAssetValidation(value, p14, p15, p16)
 	-- upvalues: t (ref), validationManagerModule (ref)
 	local var18 = "Toolbox"
 	local var19 = if value.bypassFlags then value.bypassFlags.enforceShadowValidations else false
@@ -158,7 +158,7 @@ function t.studioRFUAssetValidation(value, p14, p15, p16) --[[ line: 173 ]]
 	}), if value.bypassFlags ~= nil then nil else value.bypassFlags.localizationCallback)
 end
 
-function t.studioRFUBundleValidation(p17, p18, p19, p20, p21, p22) --[[ line: 222 ]]
+function t.studioRFUBundleValidation(p17, p18, p19, p20, p21, p22)
 	-- upvalues: t (ref), validationManagerModule (ref)
 	local var22 = if p19.bypassFlags and p19.bypassFlags.studioPluginName then p19.bypassFlags.studioPluginName else "Toolbox"
 	local var23 = if p19.bypassFlags then p19.bypassFlags.enforceShadowValidations else false

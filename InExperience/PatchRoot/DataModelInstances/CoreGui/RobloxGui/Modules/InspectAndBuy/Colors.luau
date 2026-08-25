@@ -16,8 +16,8 @@ local t = {
 	DisabledGreen = color.Color3FromHex(10273956)
 }
 setmetatable(t, {
-	__newindex = function(_, _, _) --[[ line: 25 ]] end,
-	__index = function(_, p0) --[[ line: 26 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p0)
 		error("Colors table has no value: " .. tostring(p0))
 	end
 })

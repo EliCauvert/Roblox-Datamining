@@ -8,22 +8,22 @@ local requestsModule = require(dataHydration.Profile.Requests)
 local _ = require(dataHydration.Profile.Enums.ProfileCTAEnums)
 game:DefineFastInt("ProfileCTAStoreProcessDelaySec", 1)
 
-local _ = function() --[[ line: 36 ]]
+local _ = function()
 	return game:GetFastInt("ProfileCTAStoreProcessDelaySec")
 end
 
-return function() --[[ line: 40 | named "createProfileCTAStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref)
 	local var5 = createDataCacheModule()
 	local var6 = createDataResolverModule({
 		requestBatchSize = 25,
 		cache = var5,
 		queueProcessDelaySec = game:GetFastInt("ProfileCTAStoreProcessDelaySec"),
-		fetchFn = function(p0) --[[ line: 47 ]]
+		fetchFn = function(p0)
 			-- upvalues: cryoModule (copy), requestsModule (copy)
 			local var7 = cryoModule.Dictionary.keys(p0)
 			
-			return requestsModule.GetUserProfileCTA(var7):andThen(function(p1) --[[ line: 50 ]]
+			return requestsModule.GetUserProfileCTA(var7):andThen(function(p1)
 				-- upvalues: var7 (ref)
 				local t = {}
 				
@@ -35,35 +35,35 @@ return function() --[[ line: 40 | named "createProfileCTAStore" ]]
 					end
 				end
 				return t
-			end):catch(function(_) --[[ line: 64 ]]
+			end):catch(function(_)
 				return {}
 			end)
 		end
 	})
 	
 	return {
-		getCTA = function(p2, p3) --[[ line: 70 ]]
+		getCTA = function(p2, p3)
 			-- upvalues: var6 (ref)
 			local var11 = nil
 			
 			if p3 ~= nil then
 				local var12 = p3 == true
 				
-				var11 = function(_) --[[ line: 74 ]]
+				var11 = function(_)
 					-- upvalues: var12 (ref)
 					return var12
 				end
 			end
 			return var6.getAndFetchItem(p2, var11)
 		end,
-		getBatchCTAs = function(p4, p5) --[[ line: 81 ]]
+		getBatchCTAs = function(p4, p5)
 			-- upvalues: var6 (ref)
 			local var13 = nil
 			
 			if p5 then
 				local var14 = 0
 				
-				var13 = function(_) --[[ line: 88 ]]
+				var13 = function(_)
 					-- upvalues: var14 (write), p4 (ref), p5 (ref)
 					var14 += 1
 					local var15 = p4[var14]
@@ -73,12 +73,12 @@ return function() --[[ line: 40 | named "createProfileCTAStore" ]]
 			end
 			return var6.getAndFetchItems(p4, var13)
 		end,
-		clear = function() --[[ line: 100 ]]
+		clear = function()
 			-- upvalues: var5 (ref), var6 (ref)
 			var5.clear()
 			var6.clear()
 		end,
-		dispose = function() --[[ line: 105 ]]
+		dispose = function()
 			-- upvalues: var6 (ref)
 			var6.dispose()
 		end

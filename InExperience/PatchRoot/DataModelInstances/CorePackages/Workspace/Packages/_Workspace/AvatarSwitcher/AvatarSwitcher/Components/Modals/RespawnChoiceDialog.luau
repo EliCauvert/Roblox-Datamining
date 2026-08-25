@@ -12,7 +12,7 @@ local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLo
 local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 
-return function(p0) --[[ line: 31 | named "RespawnChoiceDialog" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useLocalization (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
 	local var4 = reactModule.useRef(nil)
 	local var5 = reactModule.useRef(nil)
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 31 | named "RespawnChoiceDialog" ]]
 		respawnText = "Feature.AvatarSwitcher.Action.Respawn",
 		respawnLaterText = "Feature.AvatarSwitcher.Action.RespawnLater"
 	})
-	reactModule.useEffect(function() --[[ line: 42 ]]
+	reactModule.useEffect(function()
 		-- upvalues: addUnifiedEventLogging (copy), var4 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy), var5 (ref)
 		addUnifiedEventLogging(var4, {
 			elementName = "CONFIRM_SWITCH_AVATAR_BUTTON",

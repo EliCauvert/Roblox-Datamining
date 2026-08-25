@@ -15,7 +15,7 @@ local t = {
 	widthPercentage = 0.5
 }
 
-return function(p0) --[[ line: 39 | named "PendingShimmerBubble" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useChatPagePaddingModule (ref), reactModule (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local style = var5.style or useStyle()

@@ -16,7 +16,7 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local accessoryType = foundationModule.Enums.AccessoryType
 
-return function(p0) --[[ line: 38 | named "PickedUserRow" ]]
+return function(p0)
 	-- upvalues: useUserProfileInfoModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref), iconButton (ref), iconName (ref), list (ref), accessoryType (ref)
 	local PRIVATE_INVITES_UNKNOWN_USER, var8
 	local var6 = useUserProfileInfoModule(p0.userId)
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 38 | named "PickedUserRow" ]]
 			Spinner = reactModule.createElement(loading, { size = iconSize.Small })
 		}) else reactModule.createElement(iconButton, {
 			icon = iconName.TrashCan,
-			onActivated = function() --[[ line: 77 ]]
+			onActivated = function()
 				-- upvalues: p0 (ref)
 				p0.onRemove(p0.userId)
 			end,

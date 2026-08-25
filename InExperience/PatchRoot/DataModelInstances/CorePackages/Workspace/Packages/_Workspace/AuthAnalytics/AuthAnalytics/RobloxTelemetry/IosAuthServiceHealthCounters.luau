@@ -5,12 +5,12 @@ local default = require(parent.LoggingProtocol).default
 local telemetryConfigsModule = require(script.Parent.TelemetryConfigs)
 local getFFlagEnableIosAuthServiceLuaIXP = require(parent.SharedFlags).GetFFlagEnableIosAuthServiceLuaIXP
 
-local function _() --[[ line: 33 | named "isIos" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	return userInputService:GetPlatform() == Enum.Platform.IOS
 end
 
-local _ = function(a) --[[ line: 42 | named "majorMinor" ]]
+local _ = function(a)
 	if a == nil or a == "" then
 		return nil
 	end
@@ -19,7 +19,7 @@ local _ = function(a) --[[ line: 42 | named "majorMinor" ]]
 	return if #parts == 0 then nil elseif #parts == 1 then parts[1] else parts[1] .. "." .. parts[2]
 end
 
-local function buildCustomFields(p0, p1, p2, p3) --[[ line: 57 ]]
+local function buildCustomFields(p0, p1, p2, p3)
 	-- upvalues: runService (ref)
 	local t = {
 		source = "lua",
@@ -48,7 +48,7 @@ local function buildCustomFields(p0, p1, p2, p3) --[[ line: 57 ]]
 	return t
 end
 
-local _ = function(p4, p5, p6, p7, p8) --[[ line: 84 | named "logCounter" ]]
+local _ = function(p4, p5, p6, p7, p8)
 	-- upvalues: getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 	if not getFFlagEnableIosAuthServiceLuaIXP() then return end
 	if userInputService:GetPlatform() == Enum.Platform.IOS then
@@ -59,7 +59,7 @@ local _ = function(p4, p5, p6, p7, p8) --[[ line: 84 | named "logCounter" ]]
 end
 
 return {
-	reportLoginSuccess = function(p9) --[[ line: 108 ]]
+	reportLoginSuccess = function(p9)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceLoginSuccessConfig = telemetryConfigsModule.IosAuthServiceLoginSuccessConfig
 		local credentialType = p9.credentialType
@@ -72,7 +72,7 @@ return {
 			return
 		end
 	end,
-	reportLoginFailure = function(p10) --[[ line: 118 ]]
+	reportLoginFailure = function(p10)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceLoginFailureConfig = telemetryConfigsModule.IosAuthServiceLoginFailureConfig
 		local credentialType = p10.credentialType
@@ -86,7 +86,7 @@ return {
 			return
 		end
 	end,
-	reportLoginTwoStepRequired = function(p11) --[[ line: 130 ]]
+	reportLoginTwoStepRequired = function(p11)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceLoginTwoStepRequiredConfig = telemetryConfigsModule.IosAuthServiceLoginTwoStepRequiredConfig
 		local credentialType = p11.credentialType
@@ -99,7 +99,7 @@ return {
 			return
 		end
 	end,
-	reportSignupSuccess = function(value) --[[ line: 140 ]]
+	reportSignupSuccess = function(value)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceSignupSuccessConfig = telemetryConfigsModule.IosAuthServiceSignupSuccessConfig
 		local credentialType = value.credentialType
@@ -112,7 +112,7 @@ return {
 			return
 		end
 	end,
-	reportSignupFailure = function(value) --[[ line: 150 ]]
+	reportSignupFailure = function(value)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServiceSignupFailureConfig = telemetryConfigsModule.IosAuthServiceSignupFailureConfig
 		local credentialType = value.credentialType
@@ -126,7 +126,7 @@ return {
 			return
 		end
 	end,
-	reportPasswordSaveSuccess = function(p12) --[[ line: 160 ]]
+	reportPasswordSaveSuccess = function(p12)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServicePasswordSaveSuccessConfig = telemetryConfigsModule.IosAuthServicePasswordSaveSuccessConfig
 		local credentialType = p12.credentialType
@@ -139,7 +139,7 @@ return {
 			return
 		end
 	end,
-	reportPasswordSaveFailure = function(p13) --[[ line: 170 ]]
+	reportPasswordSaveFailure = function(p13)
 		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
 		local iosAuthServicePasswordSaveFailureConfig = telemetryConfigsModule.IosAuthServicePasswordSaveFailureConfig
 		local credentialType = p13.credentialType

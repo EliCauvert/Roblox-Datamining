@@ -5,14 +5,14 @@ local appStoreAgeSignalsProviderModule = require(appStoreAgeSignalsManager.Utils
 local appAgeSignalsTelemetryConfigsModule = require(appStoreAgeSignalsManager.Telemetry.AppAgeSignalsTelemetryConfigs)
 
 return {
-	requestAppAgeSignals = function() --[[ line: 10 ]]
+	requestAppAgeSignals = function()
 		-- upvalues: appAgeSignalsServiceWrapperModule (ref), promiseModule (ref), appStoreAgeSignalsProviderModule (ref), appAgeSignalsTelemetryConfigsModule (ref)
-		return if appAgeSignalsServiceWrapperModule.isAvailable() then appStoreAgeSignalsProviderModule.checkEligibility():andThen(function(p0) --[[ line: 15 ]]
+		return if appAgeSignalsServiceWrapperModule.isAvailable() then appStoreAgeSignalsProviderModule.checkEligibility():andThen(function(p0)
 			-- upvalues: promiseModule (copy), appAgeSignalsServiceWrapperModule (copy), appStoreAgeSignalsProviderModule (copy), appAgeSignalsTelemetryConfigsModule (copy)
-			return if p0.eligible then appAgeSignalsServiceWrapperModule.getAppAgeSignalsAsync():andThen(function(p2) --[[ line: 21 ]]
+			return if p0.eligible then appAgeSignalsServiceWrapperModule.getAppAgeSignalsAsync():andThen(function(p2)
 				-- upvalues: appStoreAgeSignalsProviderModule (copy), p0 (ref)
 				return appStoreAgeSignalsProviderModule.publishResult(p0.signalSource, p2, "Complete")
-			end):catch(function(p1) --[[ line: 24 ]]
+			end):catch(function(p1)
 				-- upvalues: appAgeSignalsTelemetryConfigsModule (copy), p0 (ref), promiseModule (copy)
 				appAgeSignalsTelemetryConfigsModule.reportError({ error = tostring(p1), signalSource = p0.signalSource })
 				

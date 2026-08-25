@@ -8,10 +8,10 @@ local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
 local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
 local getAppFeaturePolicies = universalAppPolicyModule.getAppFeaturePolicies
 
-return function(p0, p1, p2, p3) --[[ line: 19 | named "openYouTubeVideoWithAgeCheck" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: httpService (ref), guiService (ref), getAppFeaturePolicies (ref), setCentralOverlay (ref), centralOverlayType (ref)
 	if not p0 or #p0 == 0 then return end
-	local function doOpen() --[[ line: 29 ]]
+	local function doOpen()
 		-- upvalues: p0 (ref), httpService (copy), p1 (ref), guiService (copy), p3 (ref)
 		guiService:BroadcastNotification(httpService:JSONEncode({
 			animated = true,

@@ -1,6 +1,6 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("AppBlox").Parent.Cryo)
 
-return function(p0) --[[ line: 6 | named "getShowItems" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	local t_1 = {}

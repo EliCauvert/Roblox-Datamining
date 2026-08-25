@@ -8,7 +8,7 @@ local t = {
 	[voteStatusModule.NotVoted] = "null"
 }
 
-return function(p0, p1, p2) --[[ line: 22 ]]
+return function(p0, p1, p2)
 	-- upvalues: t (ref), url (ref), httpService (ref)
 	assert(type(p1) == "string", "GamesPatchUserVotes request expects universeId to be a string")
 	local var4 = t[p2]

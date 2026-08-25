@@ -18,7 +18,7 @@ local t = {
 	isDisabled = false
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | named "Text" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), reactIsModule (ref), fontScalesModule (ref), withGuiObjectPropsModule (ref), indexBindableModule (ref), interactableModule (ref), guiObjectChildrenModule (ref)
 	local var12 = withDefaultsModule(p0, t)
 	local var13 = if var12.onStateChanged == nil then if var12.onActivated == nil then var12.onSecondaryActivated ~= nil else true else true
@@ -28,13 +28,13 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 		var14 ..= " x-default-text-size"
 	end
 	local var15 = useStyleTagsModule(useDefaultTagsModule(var12.tag, var14))
-	local var16 = reactModule.useMemo(function() --[[ line: 63 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref), reactIsModule (copy)
 		local var21 = if var12.fontStyle ~= nil then nil else var12.fontStyle.Font
 		
 		return if typeof(var21) == "table" and not reactIsModule.isBinding(var21) then Font.new(var21.Family, var21.Weight, var21.Style) elseif typeof(var21) == "EnumItem" then Font.fromEnum(var21) else var21
 	end, { var12.fontStyle })
-	local var17 = reactModule.useMemo(function() --[[ line: 77 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref), var16 (ref), reactIsModule (copy), fontScalesModule (copy)
 		if var12.fontStyle == nil or var12.fontStyle.LineHeight == nil or (var12.fontStyle.FontSize == nil or var16 == nil) then
 			return 0

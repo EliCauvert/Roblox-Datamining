@@ -13,7 +13,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p0) --[[ line: 20 ]]
+					status = function(p0)
 						return p0
 					end
 				}
@@ -27,7 +27,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1) --[[ line: 34 ]]
+					status = function(p1)
 						return p1
 					end
 				}

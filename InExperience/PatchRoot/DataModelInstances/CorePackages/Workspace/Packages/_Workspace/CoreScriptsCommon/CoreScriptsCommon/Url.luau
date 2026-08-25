@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-local function _(p0) --[[ line: 7 | named "getBaseDomain" ]]
+local function _(p0)
 	local _, var4 = p0:find("%.")
 	local var5 = p0:sub(var4 + 1)
 	
@@ -29,8 +29,8 @@ local t_1 = {
 	CREATE_URL = string.format("https://create.%s", var2)
 }
 setmetatable(t, {
-	__newindex = function(_, _, _) --[[ line: 43 ]] end,
-	__index = function(_, p1) --[[ line: 44 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p1)
 		-- upvalues: t_1 (ref)
 		return t_1[p1]
 	end

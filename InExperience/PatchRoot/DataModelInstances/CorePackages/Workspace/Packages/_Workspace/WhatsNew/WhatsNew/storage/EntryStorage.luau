@@ -5,7 +5,7 @@ local appStorageService = game:GetService("AppStorageService")
 local httpService = game:GetService("HttpService")
 local var4 = appCommonLibModule.Utils.AppStorageJsonCacheUtils.new(appStorageService)
 
-local function _(p0, p1) --[[ line: 34 | named "getOrCreateStoredEntry" ]]
+local function _(p0, p1)
 	local var9 = p0[p1]
 	
 	if type(var9) ~= "table" then
@@ -15,18 +15,18 @@ local function _(p0, p1) --[[ line: 34 | named "getOrCreateStoredEntry" ]]
 	return var9
 end
 
-local _ = function() --[[ line: 43 | named "emptyDeviceData" ]]
+local _ = function()
 	return { entries = {} }
 end
 
-local _ = function(p2) --[[ line: 49 | named "normalizeDeviceData" ]]
+local _ = function(p2)
 	if type(p2.entries) ~= "table" then
 		p2.entries = {}
 	end
 	return p2
 end
 
-local function deepClone(p3) --[[ line: 56 ]]
+local function deepClone(p3)
 	-- upvalues: deepClone (ref)
 	local t = {}
 	
@@ -42,14 +42,14 @@ local function deepClone(p3) --[[ line: 56 ]]
 	return t
 end
 
-local _ = function() --[[ line: 70 | named "readDeviceData" ]]
+local _ = function()
 	-- upvalues: var4 (ref)
 	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
 	
 	return if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 end
 
-local _ = function(p4) --[[ line: 78 | named "cloneStoredDeviceData" ]]
+local _ = function(p4)
 	-- upvalues: deepClone (ref)
 	local t = { entries = deepClone(p4.entries) }
 	
@@ -59,9 +59,9 @@ local _ = function(p4) --[[ line: 78 | named "cloneStoredDeviceData" ]]
 	return t
 end
 
-local function writeDeviceData(p5) --[[ line: 84 ]]
+local function writeDeviceData(p5)
 	-- upvalues: httpService (ref), appStorageService (ref), var4 (ref)
-	local ok, status = pcall(function() --[[ line: 85 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p5 (ref)
 		return httpService:JSONEncode(p5)
 	end)
@@ -71,7 +71,7 @@ local function writeDeviceData(p5) --[[ line: 84 ]]
 		
 		return false
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 93 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: appStorageService (copy), status (ref)
 		appStorageService:SetItem("WhatsNewEntries", status)
 		appStorageService:Flush()
@@ -87,7 +87,7 @@ local function writeDeviceData(p5) --[[ line: 84 ]]
 	return false
 end
 
-local _ = function() --[[ line: 106 | named "getDeviceData" ]]
+local _ = function()
 	-- upvalues: var4 (ref), deepClone (ref)
 	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
 	local var14 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
@@ -103,7 +103,7 @@ local _ = function() --[[ line: 106 | named "getDeviceData" ]]
 	return t
 end
 
-local function updateDeviceData(p6) --[[ line: 115 ]]
+local function updateDeviceData(p6)
 	-- upvalues: var4 (ref), deepClone (ref), writeDeviceData (ref)
 	local t
 	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
@@ -131,7 +131,7 @@ local function updateDeviceData(p6) --[[ line: 115 ]]
 	writeDeviceData(var20)
 end
 
-local function toSnapshot(p7) --[[ line: 129 ]]
+local function toSnapshot(p7)
 	local t = {}
 	
 	if type(p7) ~= "table" then
@@ -147,16 +147,16 @@ end
 
 return {
 	STORAGE_KEY = "WhatsNewEntries",
-	clearJsonCacheForTests = function() --[[ line: 150 ]]
+	clearJsonCacheForTests = function()
 		-- upvalues: var4 (ref)
 		var4._jsonDecodeCache = {}
 	end,
-	clearForTests = function() --[[ line: 153 ]]
+	clearForTests = function()
 		-- upvalues: writeDeviceData (ref), var4 (ref)
 		writeDeviceData({ entries = {} })
 		var4._jsonDecodeCache = {}
 	end,
-	getEntries = function() --[[ line: 157 ]]
+	getEntries = function()
 		-- upvalues: var4 (ref), deepClone (ref), toSnapshot (ref)
 		local t
 		local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
@@ -174,9 +174,9 @@ return {
 		end
 		return toSnapshot(t.entries)
 	end,
-	markSeen = function(p8, p9) --[[ line: 162 ]]
+	markSeen = function(p8, p9)
 		-- upvalues: updateDeviceData (ref)
-		updateDeviceData(function(p10) --[[ line: 163 ]]
+		updateDeviceData(function(p10)
 			-- upvalues: p8 (ref), p9 (ref)
 			local entries = p10.entries
 			local var26 = entries[p8]

@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 4 | named "foldRight" ]]
+﻿return function(p0, p1, p2)
 	local var0 = p2
 	
 	for i = #p0, 1, -1 do

@@ -21,22 +21,22 @@ local t = {
 	edits = { music = nil, trim = nil }
 }
 
-return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
+return function(p0, p1)
 	-- upvalues: cryoModule (ref), t (ref), useToggleStateModule (ref), useRef (ref), signalModule (ref), useMemo (ref), constantsModule (ref), useAudioPlaybackModule (ref), useVideoPlaybackModule (ref), useImageDisplayModule (ref), useCallback (ref), useEffect (ref)
 	local var10 = cryoModule.Dictionary.union(t, p1)
 	local var11 = useToggleStateModule(false)
 	local var12 = useToggleStateModule(false)
 	local var13 = useRef(signalModule.new())
-	local var14 = useMemo(function() --[[ line: 49 ]]
+	local var14 = useMemo(function()
 		-- upvalues: var10 (ref)
 		return if var10.edits.music then var10.edits.music.assetId else nil
 	end, { var10.edits })
-	local var15 = useMemo(function() --[[ line: 57 ]]
+	local var15 = useMemo(function()
 		-- upvalues: var10 (ref), constantsModule (copy)
 		return if var10.captureType == Enum.CaptureType.Screenshot then NumberRange.new(0, constantsModule.ScreenshotMusicDuration) elseif var10.edits.trim then NumberRange.new(var10.edits.trim.startTime, var10.edits.trim.endTime) else NumberRange.new(0, 1e999)
 	end, { var10.edits, var10.captureType })
 	local var16 = useAudioPlaybackModule(p0, var14, {
-		playbackRegion = useMemo(function() --[[ line: 69 ]]
+		playbackRegion = useMemo(function()
 			-- upvalues: var10 (ref), var15 (ref)
 			return if var10.edits.music then NumberRange.new(var10.edits.music.startTime, var10.edits.music.startTime + (var15.Max - var15.Min)) else NumberRange.new(0, 1e999)
 		end, { var10.edits, var15 }),
@@ -44,7 +44,7 @@ return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
 	})
 	local var17 = useVideoPlaybackModule(p0, if var10.captureType == Enum.CaptureType.Screenshot then nil else var10.content, { playbackRegion = var15, looping = p1.looping })
 	local var18 = useImageDisplayModule(p0, if var10.captureType == Enum.CaptureType.Screenshot then var10.content else nil)
-	local var19 = useCallback(function(p2) --[[ line: 94 ]]
+	local var19 = useCallback(function(p2)
 		-- upvalues: var17 (ref), var16 (ref)
 		if var17.ref.current and var17.ref.current.IsLoaded then
 			var17.timeline.seek(p2)
@@ -53,7 +53,7 @@ return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
 			return
 		end
 	end, { var17.timeline.seek, var16.timeline.seek })
-	useEffect(function() --[[ line: 103 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), var18 (ref), p0 (ref), var11 (ref)
 		if (not var17.ref.current or not var17.ref.current.IsLoaded) and (not var18.ref.current or not var18.isLoadedRef.current) then return end
 		if p0 then
@@ -63,7 +63,7 @@ return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
 		end
 		var11.disable()
 	end, { p0 })
-	useEffect(function() --[[ line: 118 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), var18 (ref), var11 (ref), var16 (ref)
 		if (not var17.ref.current or not var17.ref.current.IsLoaded) and (not var18.ref.current or not var18.isLoadedRef.current) then return end
 		if var11.enabled then
@@ -75,7 +75,7 @@ return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
 		var17.playback.pause()
 		var16.playback.pause()
 	end, { var11.enabled })
-	useEffect(function() --[[ line: 135 ]]
+	useEffect(function()
 		-- upvalues: var12 (ref), var16 (ref), var14 (ref), var17 (ref)
 		if var12.enabled then
 			var16.volume.mute()
@@ -89,26 +89,26 @@ return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
 		end
 		var17.volume.unmute()
 	end, { var12.enabled, var14 })
-	local var20 = useCallback(function(p3) --[[ line: 149 ]]
+	local var20 = useCallback(function(p3)
 		-- upvalues: p0 (ref), var10 (ref), var11 (ref), var13 (ref)
 		if p0 and var10.autoplay then
 			var11.enable()
 		end
 		var13.current:fire(p3)
 	end, { p0, var10.autoplay })
-	local var21 = useCallback(function() --[[ line: 156 ]]
+	local var21 = useCallback(function()
 		-- upvalues: var20 (ref)
 		var20(Enum.AssetType.Image)
 	end, { var20 })
-	local var22 = useCallback(function() --[[ line: 160 ]]
+	local var22 = useCallback(function()
 		-- upvalues: var20 (ref)
 		var20(Enum.AssetType.Video)
 	end, { var20 })
-	local var23 = useCallback(function() --[[ line: 164 ]]
+	local var23 = useCallback(function()
 		-- upvalues: var16 (ref)
 		var16.timeline.seek(0)
 	end, { var16.timeline.seek })
-	useEffect(function() --[[ line: 168 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), var23 (ref), var22 (ref), var18 (ref), var21 (ref)
 		local t = {}
 		
@@ -121,7 +121,7 @@ return function(p0, p1) --[[ line: 40 | named "useUnifiedPlayback" ]]
 		if var18.onImageLoadedSignalRef.current then
 			table.insert(t, var18.onImageLoadedSignalRef.current:connect(var21))
 		end
-		return function() --[[ line: 183 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v.disconnect()

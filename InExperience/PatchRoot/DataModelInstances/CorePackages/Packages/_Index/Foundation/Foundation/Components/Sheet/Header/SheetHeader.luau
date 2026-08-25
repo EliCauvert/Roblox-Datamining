@@ -8,7 +8,7 @@ local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
 local viewModule = require(foundation.Components.View)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | named "SheetHeader" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), sheetTypeModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref)
 	local var9 = useTokensModule()
 	local var10 = reactModule.useContext(sheetContextModule)
@@ -22,11 +22,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | 
 	local contentStartRef = var10.contentStartRef
 	assert(innerScrollY and (setHasHeader and (closeSheet and testId)), "SheetHeader must be used within a Sheet")
 	local var11 = sheetType == sheetTypeModule.Bottom
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: setHasHeader (ref)
 		setHasHeader(true)
 		
-		return function() --[[ line: 37 ]]
+		return function()
 			-- upvalues: setHasHeader (copy)
 			setHasHeader(false)
 		end
@@ -57,7 +57,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | 
 		}),
 		BottomBorder = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			backgroundStyle = innerScrollY:map(function(p2) --[[ line: 71 ]]
+			backgroundStyle = innerScrollY:map(function(p2)
 				-- upvalues: var9 (ref)
 				return {
 					Color3 = var9.Color.Stroke.Default.Color3,

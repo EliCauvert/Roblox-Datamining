@@ -3,7 +3,7 @@ local newInviteMenuExperimentManagerModule = require(game:GetService("CoreGui").
 game:DefineFastFlag("EnableNewInviteSendEndpoint", false)
 game:DefineFastFlag("EnableNewInviteSendEndpointIXP", false)
 
-return function() --[[ line: 10 ]]
+return function()
 	-- upvalues: newInviteMenuExperimentManagerModule (ref)
 	return game:GetFastFlag("EnableNewInviteSendEndpoint") or game:GetFastFlag("EnableNewInviteSendEndpointIXP") and newInviteMenuExperimentManagerModule.default:getCustomizationEnabled()
 end

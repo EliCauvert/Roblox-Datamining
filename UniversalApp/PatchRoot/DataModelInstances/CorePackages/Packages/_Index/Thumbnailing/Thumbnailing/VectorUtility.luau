@@ -1,10 +1,10 @@
 ﻿local t = {
-	Vector3FromXYRotPlusDistance = function(p0, p1, p2) --[[ line: 5 ]]
+	Vector3FromXYRotPlusDistance = function(p0, p1, p2)
 		return CFrame.fromEulerAnglesXYZ(math.rad(p0), math.rad(p1), 0).LookVector * p2
 	end
 }
 
-function t.Vector3FromJson(p3) --[[ line: 11 ]]
+function t.Vector3FromJson(p3)
 	-- upvalues: t (ref)
 	local var1, var2, var3 = unpack(p3:split("/"))
 	local var4 = tonumber(var1)

@@ -6,7 +6,7 @@ local replaced = string.gsub(contentProviderService.BaseUrl:lower(), "https?://m
 local text = replaced .. "thumbs/asset.ashx?assetid="
 local text_1 = replaced .. "outfit-thumbnail/image?userOutfitId=%s&width=100&height=100&format=png"
 
-return function(p0, p1) --[[ line: 15 | named "getPreviewImageUrl" ]]
+return function(p0, p1)
 	-- upvalues: itemTypeModule (ref), text_1 (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), text (ref)
 	local iconImageAssetId = nil
 	

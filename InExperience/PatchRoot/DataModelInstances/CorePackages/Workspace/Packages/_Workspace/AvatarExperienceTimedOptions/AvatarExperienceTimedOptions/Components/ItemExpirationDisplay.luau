@@ -8,14 +8,14 @@ local text = foundationModule.Text
 local enums = foundationModule.Enums
 local localizationService = game:GetService("LocalizationService")
 
-local function _(p0) --[[ line: 23 | named "formatExpirationDateTime" ]]
+local function _(p0)
 	-- upvalues: localizationService (ref)
 	local dateTime = DateTime.fromIsoDate(p0)
 	
 	return if dateTime then dateTime:FormatLocalTime("MMM DD, LT", localizationService.RobloxLocaleId) else p0
 end
 
-return function(p1) --[[ line: 34 | named "ItemExpirationDisplay" ]]
+return function(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), foundationModule (ref), enums (ref), text (ref), localizationService (ref)
 	local var4 = useTokens()
 	local var5 = useLocalization({ itemExpires = "Feature.Durables.Label.ItemExpires" })

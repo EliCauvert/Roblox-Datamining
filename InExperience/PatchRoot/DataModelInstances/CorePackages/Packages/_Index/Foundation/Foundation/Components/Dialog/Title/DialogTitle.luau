@@ -8,7 +8,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local useDialogModule = require(script.Parent.Parent.useDialog)
 local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
 
-return function(p0) --[[ line: 21 | named "DialogTitle" ]]
+return function(p0)
 	-- upvalues: useTokensModule (ref), useDialogModule (ref), useDialogVariants (ref), reactModule (ref), viewModule (ref), constantsModule (ref), textModule (ref)
 	local var7 = useTokensModule()
 	local var8 = useDialogModule()

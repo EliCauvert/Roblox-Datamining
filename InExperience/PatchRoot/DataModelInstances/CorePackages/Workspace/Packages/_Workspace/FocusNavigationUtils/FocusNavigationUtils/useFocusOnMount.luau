@@ -8,12 +8,12 @@ local usePreferredInput = responsiveModule.usePreferredInput
 local input = responsiveModule.Input
 local useDescendantHasFocusModule = require(script.Parent.useDescendantHasFocus)
 
-return function(p0, p1) --[[ line: 30 | named "useFocusOnMount" ]]
+return function(p0, p1)
 	-- upvalues: useFocusGuiObject (ref), reactModule (ref), usePreferredInput (ref), input (ref), useIsSpatial (ref), coreGuiService (ref), useDescendantHasFocusModule (ref)
 	local var4 = p1 == nil or p1
 	local var5 = useFocusGuiObject()
 	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useCallback(function(p2) --[[ line: 38 ]]
+	local var8 = reactModule.useCallback(function(p2)
 		-- upvalues: p0 (ref), var7 (ref)
 		if p0 then
 			if type(p0) == "function" then
@@ -35,7 +35,7 @@ return function(p0, p1) --[[ line: 30 | named "useFocusOnMount" ]]
 	end, { p0 })
 	local var9 = usePreferredInput() == input.Directional
 	local var10 = useIsSpatial()
-	local var11 = reactModule.useCallback(function(p3) --[[ line: 61 ]]
+	local var11 = reactModule.useCallback(function(p3)
 		-- upvalues: coreGuiService (copy), var9 (ref), var10 (ref), var5 (ref)
 		if not p3:IsDescendantOf(coreGuiService) then return end
 		if var9 and not var10 then
@@ -46,7 +46,7 @@ return function(p0, p1) --[[ line: 30 | named "useFocusOnMount" ]]
 	local var13 = reactModule.useRef(false)
 	local var14 = useDescendantHasFocusModule(var6)
 	local var15 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var12 (ref), var13 (ref), var11 (ref), var4 (ref), var14 (ref), var15 (ref)
 		if not var6 then
 			var12.current = false
@@ -60,10 +60,10 @@ return function(p0, p1) --[[ line: 30 | named "useFocusOnMount" ]]
 		if var4 and not var13.current and var14 then
 			var13.current = true
 		end
-		local var16 = if var4 and not var13.current then var6.DescendantAdded:Connect(function(p4) --[[ line: 98 ]]
+		local var16 = if var4 and not var13.current then var6.DescendantAdded:Connect(function(p4)
 			-- upvalues: var15 (copy), var11 (copy), var6 (copy)
 			if not var15.current and p4:IsA("GuiObject") and p4.Selectable then
-				var15.current = task.delay(0.1, function() --[[ line: 100 ]]
+				var15.current = task.delay(0.1, function()
 					-- upvalues: var11 (copy), var6 (copy), var15 (copy)
 					var11(var6)
 					var15.current = nil
@@ -71,7 +71,7 @@ return function(p0, p1) --[[ line: 30 | named "useFocusOnMount" ]]
 			end
 		end) else nil
 		
-		return function() --[[ line: 107 ]]
+		return function()
 			-- upvalues: var16 (ref), var15 (copy)
 			if var16 then
 				var16:Disconnect()

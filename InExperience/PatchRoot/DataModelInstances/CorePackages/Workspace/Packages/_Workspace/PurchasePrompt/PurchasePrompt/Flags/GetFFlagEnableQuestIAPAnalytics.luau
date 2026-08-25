@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableQuestIAPAnalytics", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableQuestIAPAnalytics")
 end

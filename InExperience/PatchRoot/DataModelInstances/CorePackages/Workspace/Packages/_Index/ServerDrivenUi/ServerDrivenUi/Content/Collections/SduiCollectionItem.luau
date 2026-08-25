@@ -4,7 +4,7 @@ local cryoModule = require(parent.Cryo)
 local impressionsTagUtility = require(parent.Impressions).ImpressionsTagUtility
 local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 
-return reactModule.memo(function(p0) --[[ line: 34 | named "SduiCollectionItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagSduiPoolBackedFeed (ref), reactModule (ref), impressionsTagUtility (ref), cryoModule (ref)
 	local layoutOrder = p0.layoutOrder
 	local size = p0.size
@@ -14,16 +14,16 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SduiCollectionItem" 
 	local automaticSize = p0.automaticSize
 	local var2 = if fFlagSduiPoolBackedFeed then p0.innerWrapperSize else nil
 	local var3 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: impressionsTagUtility (copy), var3 (ref), p0 (ref)
 		impressionsTagUtility.AddTag(var3, p0.impressionsTag, p0.index)
 		
-		return function() --[[ line: 46 ]]
+		return function()
 			-- upvalues: impressionsTagUtility (copy), var3 (copy), p0 (copy)
 			impressionsTagUtility.RemoveTag(var3, p0.impressionsTag, p0.index)
 		end
 	end, { var3, p0.impressionsTag, p0.index })
-	local var4 = reactModule.useCallback(function(p1) --[[ line: 51 ]]
+	local var4 = reactModule.useCallback(function(p1)
 		-- upvalues: var3 (ref), impressionsTagUtility (copy), p0 (ref)
 		var3.current = p1
 		
@@ -31,7 +31,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SduiCollectionItem" 
 			impressionsTagUtility.AddTag(var3, p0.impressionsTag, p0.index)
 		end
 	end, { p0.impressionsTag, p0.index })
-	local var5 = reactModule.useCallback(function(p2) --[[ line: 58 ]]
+	local var5 = reactModule.useCallback(function(p2)
 		-- upvalues: p0 (ref)
 		if p0.onItemSizeChanged then
 			p0.onItemSizeChanged(p0.index, p2)
@@ -50,7 +50,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SduiCollectionItem" 
 	if p0.minHeightBinding then
 		var6 = cryoModule.Dictionary.join(var6 or {}, {
 			SizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MinSize = p0.minHeightBinding:map(function(p3) --[[ line: 85 ]]
+				MinSize = p0.minHeightBinding:map(function(p3)
 					return Vector2.new(0, if p3 and p3 > 0 then p3 else 0)
 				end)
 			})

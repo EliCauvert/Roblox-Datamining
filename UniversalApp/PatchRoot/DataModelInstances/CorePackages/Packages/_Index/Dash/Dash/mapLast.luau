@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 12 | named "mapLast" ]]
+﻿return function(p0, p1)
 	for i = #p0, 1, -1 do
 		local var0 = p1(p0[i], i)
 		

@@ -1,5 +1,5 @@
 ﻿local expChat = require(script:FindFirstAncestor("ExpChatShared").Parent.Lumberyak).Logger.new(nil, "ExpChat")
-local ok, status = pcall(function() --[[ line: 29 ]]
+local ok, status = pcall(function()
 	return {
 		level = game:DefineFastString("DebugLuaLogLevel", ""),
 		pattern = game:DefineFastString("DebugLuaLogPattern", "")
@@ -12,7 +12,7 @@ end
 expChat:setContext({ prefix = "[{loggerName} ({level})] - " })
 expChat:addSink({
 	maxLevel = expChat.Levels.fromString(status.level),
-	log = function(_, p0, _) --[[ line: 46 ]]
+	log = function(_, p0, _)
 		-- upvalues: status (write)
 		if string.match(p0, status.pattern) then
 			print(p0)

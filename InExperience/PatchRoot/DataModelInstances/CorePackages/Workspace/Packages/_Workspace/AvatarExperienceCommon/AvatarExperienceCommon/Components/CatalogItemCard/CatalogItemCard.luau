@@ -60,12 +60,12 @@ local t_2 = {
 	[catalogItemCardItemInfoEnumModule.DynamicHead] = "icons/menu/clothing/dynamicHead"
 }
 
-local function selectIsPortrait(p0) --[[ line: 137 ]]
+local function selectIsPortrait(p0)
 	-- upvalues: responsiveModule (ref)
 	return p0.DeviceOrientation == responsiveModule.Keys.Portrait
 end
 
-local function buildBadgeStatusContent(p1, p2) --[[ line: 141 ]]
+local function buildBadgeStatusContent(p1, p2)
 	local list = { { type = "icon", icon = p1 } }
 	
 	if p2 then
@@ -74,7 +74,7 @@ local function buildBadgeStatusContent(p1, p2) --[[ line: 141 ]]
 	return list
 end
 
-local function buildSelectedOverlayBadge(p3, p4, p5) --[[ line: 154 ]]
+local function buildSelectedOverlayBadge(p3, p4, p5)
 	-- upvalues: fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), var14 (ref), fFlagAXInventoryDurablesSupport (ref), var13 (ref)
 	local iconType = p3 and p3.iconType
 	local text = p3 and p3.text
@@ -82,7 +82,7 @@ local function buildSelectedOverlayBadge(p3, p4, p5) --[[ line: 154 ]]
 	return if fFlagAXShowFaeUpsell and iconType == catalogItemCardStatusIconTypeEnumModule.FAE then { icon = var14 } elseif p4 and text then { icon = p4, text = text } elseif fFlagAXInventoryDurablesSupport and p5 and iconType ~= catalogItemCardStatusIconTypeEnumModule.Moderated then { icon = var13, text = p5 } else nil
 end
 
-return reactModule.forwardRef(function(p6, p7) --[[ line: 178 ]]
+return reactModule.forwardRef(function(p6, p7)
 	-- upvalues: fFlagAXModeratedItemIconUpdates (ref), useTokens (ref), t_2 (ref), t_1 (ref), useSelector (ref), selectIsPortrait (ref), t (ref), fFlagAXSelectedBorderWrapsBackground (ref), reactModule (ref), foundationModule (ref), icon (ref), iconSize (ref), itemCard (ref), fFlagAXMISEnableMultiShopping (ref), itemCardHeader (ref), catalogItemCardSelectedOverlayModule (ref), fFlagAXFixBadgeStatusConfigOptions (ref), buildSelectedOverlayBadge (ref), fFlagAXShowFaeUpsell (ref), catalogItemCardStatusIconTypeEnumModule (ref), var14 (ref), fFlagAXInventoryDurablesSupport (ref), var13 (ref), itemCardHeaderCornersOverlay (ref), itemCardStatus (ref), itemCardBadge (ref), buildBadgeStatusContent (ref), itemCardIcon (ref), moveLimitedBadgeToTopLeft (ref), itemCardFooter (ref), fFlagAXRootSlotBasedEditorFlag (ref)
 	local var30
 	local var24 = if fFlagAXModeratedItemIconUpdates then useTokens() else nil
@@ -103,7 +103,7 @@ return reactModule.forwardRef(function(p6, p7) --[[ line: 178 ]]
 		var30 = nil
 	end
 	local createElement_2
-	local function renderPresentationSlot() --[[ line: 198 ]]
+	local function renderPresentationSlot()
 		-- upvalues: p6 (ref), reactModule (copy), foundationModule (copy), fFlagAXModeratedItemIconUpdates (copy), icon (copy), t (copy), var24 (ref), var28 (ref), iconSize (copy)
 		return if not (not p6.itemStatus or p6.itemStatus.type ~= "placeholder") then if p6.itemStatus.iconType then reactModule.createElement(foundationModule.View, {
 			tag = "size-full clip radius-medium row align-x-center align-y-center"

@@ -16,7 +16,7 @@ local t = {
 	[enumsModule.DisabledReasons.InsufficientVerificationLevelLow] = nil
 }
 
-return function(p0) --[[ line: 24 ]]
+return function(p0)
 	-- upvalues: t (ref), useLocalization (ref)
 	return useLocalization({ disabledReasonText = if p0 then t[p0] else nil }).disabledReasonText
 end

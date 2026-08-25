@@ -9,7 +9,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local t = { bodyText = "" }
 
-return memo(function(p0) --[[ line: 32 | named "Label" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), imageSetLabel (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local style = var5.style or useStyle()

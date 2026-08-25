@@ -8,7 +8,7 @@ local parseContentIdsModule = require(parent.util.ParseContentIds)
 local getEditableImageFromContextModule = require(parent.util.getEditableImageFromContext)
 local getFFlagUGCValidateBodyAssetTextureLimitsModule = require(parent.flags.getFFlagUGCValidateBodyAssetTextureLimits)
 
-return function(p0, p1) --[[ line: 20 | named "validateDescendantTextureMetrics" ]]
+return function(p0, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getEditableImageFromContextModule (ref), getFFlagUGCValidateBodyAssetTextureLimitsModule (ref), constantsInterfaceModule (ref), validateTextureSizeModule (ref)
 	local var7 = failureReasonsAccumulatorModule.new()
 	local t = {}

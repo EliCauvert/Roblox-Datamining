@@ -10,7 +10,7 @@ local modelsModule = require(script.Models)
 local enumsModule = require(script.Enums)
 
 return {
-	config = function(p0) --[[ line: 14 ]]
+	config = function(p0)
 		-- upvalues: llamaModule (ref), friendsNetworkingModule (ref), roduxNetworkingModule (ref), networkingBlockingModule (ref), friendsReducerModule (ref), actionsModule (ref), selectorsModule (ref), modelsModule (ref), enumsModule (ref)
 		p0 = llamaModule.Dictionary.join(p0, {
 			friendsNetworking = friendsNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() }),
@@ -18,7 +18,7 @@ return {
 		})
 		
 		return {
-			installReducer = function() --[[ line: 25 ]]
+			installReducer = function()
 				-- upvalues: friendsReducerModule (copy), p0 (write)
 				return friendsReducerModule(p0)
 			end,

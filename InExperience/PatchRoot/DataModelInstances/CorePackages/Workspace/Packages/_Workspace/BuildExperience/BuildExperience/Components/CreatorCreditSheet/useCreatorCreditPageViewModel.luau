@@ -12,14 +12,14 @@ local useOpenBuyRobuxWebViewModule = require(script.Parent.useOpenBuyRobuxWebVie
 local useRefreshCreatorCreditOnUnhideModule = require(script.Parent.useRefreshCreatorCreditOnUnhide)
 local dataStatus = dataHydrationModule.DataStatus
 
-return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
+return function()
 	-- upvalues: creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), dataStatus (ref), useOpenBuyRobuxWebViewModule (ref), useRefreshCreatorCreditOnUnhideModule (ref), getHoursUntilResetModule (ref), creatorCreditConfigModule (ref)
 	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var10 = reactModule.useMemo(function() --[[ line: 29 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getDailyLimit()
 	end, { creatorCreditStore })
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 26 ]]
+	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: creatorCreditStore (ref)
 		return creatorCreditStore.getQuotaSummary()
 	end, { creatorCreditStore }).data)
@@ -36,7 +36,7 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 	local var23, var24 = reactModule.useState(false)
 	local var25, var26 = reactModule.useState(false)
 	local var27 = reactModule.useRef(0)
-	local var28 = reactModule.useCallback(function() --[[ line: 48 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: var27 (ref), var24 (ref), var26 (ref)
 		var27.current += 1
 		var24(true)
@@ -44,7 +44,7 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 		
 		return var27.current
 	end, {})
-	local var29 = reactModule.useCallback(function(p0, p1) --[[ line: 54 ]]
+	local var29 = reactModule.useCallback(function(p0, p1)
 		-- upvalues: var27 (ref), var24 (ref), var26 (ref)
 		if var27.current == p0 then
 			var24(false)
@@ -53,7 +53,7 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 			return
 		end
 	end, {})
-	local var30 = reactModule.useCallback(function(p2) --[[ line: 62 ]]
+	local var30 = reactModule.useCallback(function(p2)
 		-- upvalues: var20 (ref), var23 (ref), var12_1 (ref), var28 (ref), creatorCreditStore (ref), var29 (ref)
 		if var20 and not var23 and var12_1 ~= nil then
 			local var36 = var28()
@@ -61,10 +61,10 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 				additionalUsageEnabled = p2,
 				dailyLimitSet = var12_1.dailyLimitSet,
 				dailyLimit = var12_1.dailyLimit
-			}):andThen(function() --[[ line: 73 ]]
+			}):andThen(function()
 				-- upvalues: var29 (copy), var36 (ref)
 				var29(var36, false)
-			end):catch(function() --[[ line: 76 ]]
+			end):catch(function()
 				-- upvalues: var29 (copy), var36 (ref)
 				var29(var36, true)
 			end)
@@ -74,14 +74,14 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 	end, {
 		var28, creatorCreditStore, var29, var23, var12_1, var20
 	})
-	local var31 = reactModule.useCallback(function() --[[ line: 80 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), var23 (ref), var26 (ref), var22 (ref)
 		if var20 and not var23 then
 			var26(false)
 			var22(true)
 		end
 	end, { var23, var20 })
-	local var32 = reactModule.useCallback(function(p3) --[[ line: 86 ]]
+	local var32 = reactModule.useCallback(function(p3)
 		-- upvalues: var20 (ref), var23 (ref), var12_1 (ref), var28 (ref), creatorCreditStore (ref), var27 (ref), var29 (ref), var22 (ref)
 		if var20 and not var23 and var12_1 ~= nil then
 			local var37 = var28()
@@ -89,13 +89,13 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 				additionalUsageEnabled = var12_1.additionalUsageEnabled,
 				dailyLimitSet = p3 ~= nil,
 				dailyLimit = p3 or 0
-			}):andThen(function() --[[ line: 97 ]]
+			}):andThen(function()
 				-- upvalues: var27 (copy), var37 (ref), var29 (copy), var22 (copy)
 				if var27.current == var37 then
 					var29(var37, false)
 					var22(false)
 				end
-			end):catch(function() --[[ line: 103 ]]
+			end):catch(function()
 				-- upvalues: var29 (copy), var37 (ref)
 				var29(var37, true)
 			end)
@@ -105,13 +105,13 @@ return function() --[[ line: 23 | named "useCreatorCreditPageViewModel" ]]
 	end, {
 		var28, creatorCreditStore, var29, var23, var12_1, var20
 	})
-	local var33 = reactModule.useCallback(function() --[[ line: 107 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: var22 (ref)
 		var22(false)
 	end, {})
-	local var34 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: creatorCreditStore (ref)
-		creatorCreditStore.refreshQuotaSummary():catch(function() --[[ line: 111 ]] end)
+		creatorCreditStore.refreshQuotaSummary():catch(function() end)
 	end, { creatorCreditStore })
 	local var35 = useOpenBuyRobuxWebViewModule(var34)
 	useRefreshCreatorCreditOnUnhideModule(var34)

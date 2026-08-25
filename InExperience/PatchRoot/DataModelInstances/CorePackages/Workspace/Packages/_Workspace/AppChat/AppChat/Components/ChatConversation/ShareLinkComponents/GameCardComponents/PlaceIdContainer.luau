@@ -17,7 +17,7 @@ local fFlagAppChatInvalidGameLinkCardModule = require(appChat.Flags.FFlagAppChat
 local httpRequestModule = require(parent.HttpRequest)
 local t = {
 	networkImpl = httpRequestModule.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 32 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: placeIdContainer (ref), httpRequestModule (ref)
 			placeIdContainer:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
 			
@@ -27,19 +27,19 @@ local t = {
 	})
 }
 
-local function _(p3, p4) --[[ line: 52 | named "getPlaceInfo" ]]
+local function _(p3, p4)
 	return p3.ChatAppReducer.PlaceInfos[p4] or {}
 end
 
-function PlaceIdContainer(p5) --[[ line: 56 ]]
+function PlaceIdContainer(p5)
 	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useCallback (ref), apiFetchPlaceInfos (ref), useSelector (ref), fFlagAppChatInvalidGameLinkCardModule (ref), reactModule (ref), useEffect (ref), gameCardErrorModule (ref), gameCardGroupableModule (ref), gameCardContainerModule (ref)
 	local var10 = cryoModule.Dictionary.join(t, p5)
 	local var11 = useDispatch()
-	local var12 = useCallback(function(p6, p7) --[[ line: 60 ]]
+	local var12 = useCallback(function(p6, p7)
 		-- upvalues: var11 (ref), apiFetchPlaceInfos (copy)
 		return var11(apiFetchPlaceInfos(p6, { p7 }))
 	end, { var11 })
-	local var13 = useSelector(function(p8) --[[ line: 64 ]]
+	local var13 = useSelector(function(p8)
 		-- upvalues: var10 (ref)
 		local universeId = (p8.ChatAppReducer.PlaceInfos[var10.placeId] or {}).universeId
 		
@@ -54,10 +54,10 @@ function PlaceIdContainer(p5) --[[ line: 56 ]]
 		var15 = var17
 		var16 = var18
 	end
-	useEffect(function() --[[ line: 78 ]]
+	useEffect(function()
 		-- upvalues: var10 (ref), var12 (ref), fFlagAppChatInvalidGameLinkCardModule (copy), cryoModule (copy), var13 (ref), var14 (ref), var16 (write)
 		local var19 = false
-		var12(var10.networkImpl, var10.placeId):andThen(function(p9) --[[ line: 82 ]]
+		var12(var10.networkImpl, var10.placeId):andThen(function(p9)
 			-- upvalues: fFlagAppChatInvalidGameLinkCardModule (copy), var19 (write), cryoModule (copy)
 			if fFlagAppChatInvalidGameLinkCardModule then
 				var19 = not cryoModule.isEmpty(p9)
@@ -69,7 +69,7 @@ function PlaceIdContainer(p5) --[[ line: 56 ]]
 			if var14.current then
 				task.cancel(var14.current)
 			end
-			var14.current = task.delay(1, function() --[[ line: 94 ]]
+			var14.current = task.delay(1, function()
 				-- upvalues: var19 (write), var16 (copy), var14 (copy)
 				if not var19 then
 					var16(true)
@@ -77,7 +77,7 @@ function PlaceIdContainer(p5) --[[ line: 56 ]]
 				var14.current = nil
 			end)
 		end
-		return function() --[[ line: 102 ]]
+		return function()
 			-- upvalues: var14 (copy)
 			if var14.current then
 				task.cancel(var14.current)
@@ -87,7 +87,7 @@ function PlaceIdContainer(p5) --[[ line: 56 ]]
 	end, {})
 	
 	if fFlagAppChatInvalidGameLinkCardModule then
-		useEffect(function() --[[ line: 114 ]]
+		useEffect(function()
 			-- upvalues: var13 (ref), var14 (ref)
 			if var13 and var14.current then
 				task.cancel(var14.current)

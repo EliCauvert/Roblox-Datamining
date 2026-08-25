@@ -19,7 +19,7 @@ local isValidElementType = require(parent.Shared).isValidElementType
 local REACT_BINDING_TYPE = reactSymbols.REACT_BINDING_TYPE
 local var2 = require(parent.SafeFlags).createGetFFlag("ReactIsProtectedTypeOf", false)()
 
-local function typeOf(p0) --[[ line: 50 ]]
+local function typeOf(p0)
 	-- upvalues: var2 (ref), REACT_ELEMENT_TYPE (ref), REACT_FRAGMENT_TYPE (ref), REACT_PROFILER_TYPE (ref), REACT_STRICT_MODE_TYPE (ref), REACT_SUSPENSE_TYPE (ref), REACT_SUSPENSE_LIST_TYPE (ref), REACT_CONTEXT_TYPE (ref), REACT_FORWARD_REF_TYPE (ref), REACT_LAZY_TYPE (ref), REACT_MEMO_TYPE (ref), REACT_PROVIDER_TYPE (ref), REACT_PORTAL_TYPE (ref), REACT_BINDING_TYPE (ref)
 	if typeof(p0) == "table" and p0 ~= nil then
 		local var6
@@ -27,7 +27,7 @@ local function typeOf(p0) --[[ line: 50 ]]
 		
 		if var2 then
 			local _ = nil
-			local ok, status = pcall(function() --[[ line: 58 ]]
+			local ok, status = pcall(function()
 				-- upvalues: p0 (ref)
 				return p0["$$typeof"]
 			end)
@@ -70,7 +70,7 @@ t.isValidElementType = isValidElementType
 local var4 = false
 local var5 = false
 
-function t.isAsyncMode(_) --[[ line: 183 ]]
+function t.isAsyncMode(_)
 	-- upvalues: reactGlobalsModule (ref), var4 (write), console (ref)
 	if reactGlobalsModule.__DEV__ and not var4 then
 		var4 = true
@@ -79,7 +79,7 @@ function t.isAsyncMode(_) --[[ line: 183 ]]
 	return false
 end
 
-function t.isConcurrentMode(_) --[[ line: 200 ]]
+function t.isConcurrentMode(_)
 	-- upvalues: reactGlobalsModule (ref), var5 (write), console (ref)
 	if reactGlobalsModule.__DEV__ and not var5 then
 		var5 = true
@@ -88,62 +88,62 @@ function t.isConcurrentMode(_) --[[ line: 200 ]]
 	return false
 end
 
-function t.isContextConsumer(p1) --[[ line: 217 ]]
+function t.isContextConsumer(p1)
 	-- upvalues: typeOf (ref), REACT_CONTEXT_TYPE (ref)
 	return typeOf(p1) == REACT_CONTEXT_TYPE
 end
 
-function t.isContextProvider(p2) --[[ line: 221 ]]
+function t.isContextProvider(p2)
 	-- upvalues: typeOf (ref), REACT_PROVIDER_TYPE (ref)
 	return typeOf(p2) == REACT_PROVIDER_TYPE
 end
 
-function t.isElement(p3) --[[ line: 225 ]]
+function t.isElement(p3)
 	-- upvalues: REACT_ELEMENT_TYPE (ref)
 	return typeof(p3) == "table" and (p3 ~= nil and p3["$$typeof"] == REACT_ELEMENT_TYPE)
 end
 
-function t.isForwardRef(p4) --[[ line: 231 ]]
+function t.isForwardRef(p4)
 	-- upvalues: typeOf (ref), REACT_FORWARD_REF_TYPE (ref)
 	return typeOf(p4) == REACT_FORWARD_REF_TYPE
 end
 
-function t.isFragment(p5) --[[ line: 235 ]]
+function t.isFragment(p5)
 	-- upvalues: typeOf (ref), REACT_FRAGMENT_TYPE (ref)
 	return typeOf(p5) == REACT_FRAGMENT_TYPE
 end
 
-function t.isLazy(p6) --[[ line: 239 ]]
+function t.isLazy(p6)
 	-- upvalues: typeOf (ref), REACT_LAZY_TYPE (ref)
 	return typeOf(p6) == REACT_LAZY_TYPE
 end
 
-function t.isMemo(p7) --[[ line: 243 ]]
+function t.isMemo(p7)
 	-- upvalues: typeOf (ref), REACT_MEMO_TYPE (ref)
 	return typeOf(p7) == REACT_MEMO_TYPE
 end
 
-function t.isPortal(p8) --[[ line: 247 ]]
+function t.isPortal(p8)
 	-- upvalues: typeOf (ref), REACT_PORTAL_TYPE (ref)
 	return typeOf(p8) == REACT_PORTAL_TYPE
 end
 
-function t.isProfiler(p9) --[[ line: 251 ]]
+function t.isProfiler(p9)
 	-- upvalues: typeOf (ref), REACT_PROFILER_TYPE (ref)
 	return typeOf(p9) == REACT_PROFILER_TYPE
 end
 
-function t.isStrictMode(p10) --[[ line: 255 ]]
+function t.isStrictMode(p10)
 	-- upvalues: typeOf (ref), REACT_STRICT_MODE_TYPE (ref)
 	return typeOf(p10) == REACT_STRICT_MODE_TYPE
 end
 
-function t.isSuspense(p11) --[[ line: 259 ]]
+function t.isSuspense(p11)
 	-- upvalues: typeOf (ref), REACT_SUSPENSE_TYPE (ref)
 	return typeOf(p11) == REACT_SUSPENSE_TYPE
 end
 
-function t.isBinding(p12) --[[ line: 264 ]]
+function t.isBinding(p12)
 	-- upvalues: typeOf (ref), REACT_BINDING_TYPE (ref)
 	return typeOf(p12) == REACT_BINDING_TYPE
 end

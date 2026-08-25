@@ -24,7 +24,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 43 | named "IconTabGroup" ]]
+return function(p0)
 	-- upvalues: object (ref), t (ref), useCursorModule (ref), horizontalContainerModule (ref), constantsModule (ref), reactModule (ref), interactableListModule (ref), cryoModule (ref), iconTabModule (ref), selectionModeModule (ref)
 	local var9 = object.assign({}, t, p0)
 	local var10 = useCursorModule(UDim.new(0.5, 0), 0)
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 43 | named "IconTabGroup" ]]
 			sortOrder = Enum.SortOrder.LayoutOrder,
 			itemList = var9.items,
 			itemSize = UDim2.fromScale(0, 0),
-			renderItem = function(p1, p2, p3) --[[ line: 60 ]]
+			renderItem = function(p1, p2, p3)
 				-- upvalues: cryoModule (copy), var9 (ref), var10 (ref), reactModule (copy), iconTabModule (copy)
 				return reactModule.createElement(iconTabModule, {
 					item = p1,
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 43 | named "IconTabGroup" ]]
 					SelectionImageObject = var10
 				}
 			end,
-			onSelectionChanged = function(p4) --[[ line: 75 ]]
+			onSelectionChanged = function(p4)
 				-- upvalues: var9 (ref)
 				local var11 = var9.items[p4[1]]
 				

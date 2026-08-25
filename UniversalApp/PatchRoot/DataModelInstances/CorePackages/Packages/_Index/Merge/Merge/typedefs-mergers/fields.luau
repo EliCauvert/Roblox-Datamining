@@ -18,9 +18,9 @@ local mergeArguments = require(script.Parent.arguments).mergeArguments
 local preventConflicts = nil
 local safeChangeForFieldType = nil
 
-local function fieldAlreadyExists(p0, p1, p2) --[[ line: 48 ]]
+local function fieldAlreadyExists(p0, p1, p2)
 	-- upvalues: array (ref), boolean (ref), extractType (ref), error (ref)
-	local var6 = array.find(p0, function(p3) --[[ line: 51 ]]
+	local var6 = array.find(p0, function(p3)
 		-- upvalues: p1 (ref)
 		return p3.name.value == p1.name.value
 	end)
@@ -36,7 +36,7 @@ local function fieldAlreadyExists(p0, p1, p2) --[[ line: 48 ]]
 	return not not boolean.toJSBoolean(var6)
 end
 
-function t.mergeFields(p4, p5, p6, p7) --[[ line: 83 ]]
+function t.mergeFields(p4, p5, p6, p7)
 	-- upvalues: array (ref), boolean (ref), fieldAlreadyExists (ref), preventConflicts (write), isNonNullTypeNode (ref), mergeArguments (ref), mergeDirectives (ref), compareNodes (ref)
 	local t = {}
 	
@@ -46,7 +46,7 @@ function t.mergeFields(p4, p5, p6, p7) --[[ line: 83 ]]
 	if p5 ~= nil then
 		for i, v in p5 do
 			if boolean.toJSBoolean(fieldAlreadyExists(t, v, p7)) then
-				local var10 = array.find(t, function(p8) --[[ line: 115 ]]
+				local var10 = array.find(t, function(p8)
 					-- upvalues: v (ref)
 					return p8.name.value == v.name.value
 				end)
@@ -77,7 +77,7 @@ function t.mergeFields(p4, p5, p6, p7) --[[ line: 83 ]]
 	if p7 and p7.exclusions then
 		local exclusions = p7.exclusions
 		
-		return array.filter(t, function(p9) --[[ line: 183 ]]
+		return array.filter(t, function(p9)
 			-- upvalues: boolean (copy), array (copy), exclusions (ref), p4 (ref)
 			return not boolean.toJSBoolean(array.includes(exclusions, ("%s.%s"):format(tostring(p4.name.value), tostring(p9.name.value))))
 		end)
@@ -85,7 +85,7 @@ function t.mergeFields(p4, p5, p6, p7) --[[ line: 83 ]]
 	return t
 end
 
-preventConflicts = function(p10, p11, p12, p13) --[[ line: 194 | named "preventConflicts" ]]
+preventConflicts = function(p10, p11, p12, p13)
 	-- upvalues: printTypeNode (ref), boolean (ref), safeChangeForFieldType (write), error (ref)
 	local var12 = if p13 ~= nil then false else p13
 	local var13 = printTypeNode(p11.type)
@@ -96,7 +96,7 @@ preventConflicts = function(p10, p11, p12, p13) --[[ line: 194 | named "preventC
 	end
 end
 
-safeChangeForFieldType = function(p14, p15, p16) --[[ line: 223 | named "safeChangeForFieldType" ]]
+safeChangeForFieldType = function(p14, p15, p16)
 	-- upvalues: boolean (ref), isWrappingTypeNode (ref), isNonNullTypeNode (ref), safeChangeForFieldType (write), isListTypeNode (ref)
 	return if boolean.toJSBoolean(isWrappingTypeNode(p14)) or boolean.toJSBoolean(isWrappingTypeNode(p15)) then if boolean.toJSBoolean(isNonNullTypeNode(p15)) then safeChangeForFieldType(if boolean.toJSBoolean(isNonNullTypeNode(p14)) then p14.type else p14, p15.type) elseif boolean.toJSBoolean(isNonNullTypeNode(p14)) then safeChangeForFieldType(p15, p14, if p16 ~= nil then false else p16) elseif boolean.toJSBoolean(isListTypeNode(p14)) then isListTypeNode(p15) and safeChangeForFieldType(p14.type, p15.type) or isNonNullTypeNode(p15) and safeChangeForFieldType(p14, p15.type) else false else typeof(p14) == "table" and #p14 == 0 and (typeof(p15) == "table" and #p15 == 0) or tostring(p14) == tostring(p15)
 end

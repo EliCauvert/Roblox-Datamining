@@ -1,12 +1,12 @@
 ﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
 local jest = require(parent.Dev.JestGlobals).jest
 
-return function() --[[ line: 22 | named "mockUseLocalization" ]]
+return function()
 	-- upvalues: jest (ref), parent (ref)
-	jest.mock(parent.Localization, function() --[[ line: 23 ]]
+	jest.mock(parent.Localization, function()
 		return {
 			Hooks = {
-				useLocalization = function(p0) --[[ line: 26 ]]
+				useLocalization = function(p0)
 					local t = {}
 					
 					for i, v in p0 do
@@ -20,7 +20,7 @@ return function() --[[ line: 22 | named "mockUseLocalization" ]]
 				end
 			},
 			NumberLocalization = {
-				localize = function(p1, _) --[[ line: 39 ]]
+				localize = function(p1, _)
 					return p1
 				end
 			}

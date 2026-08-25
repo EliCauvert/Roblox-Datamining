@@ -25,7 +25,7 @@ local getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = re
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 local getFFlagUGCValidateMigrateMeshGeometryModule = require(parent.flags.getFFlagUGCValidateMigrateMeshGeometry)
 
-local function validateIsSkinned(p0, p1, p2, p3) --[[ line: 40 ]]
+local function validateIsSkinned(p0, p1, p2, p3)
 	-- upvalues: constantsModule (ref), analyticsModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref)
 	local alternateMeshIdAttributeNameAttribute = p0:GetAttribute(constantsModule.AlternateMeshIdAttributeName)
 	
@@ -36,7 +36,7 @@ local function validateIsSkinned(p0, p1, p2, p3) --[[ line: 40 ]]
 			`Missing skinning data for {p0.Name}.MeshId. You need to skin your model.`
 		}
 	end
-	local ok, status = pcall(function() --[[ line: 58 ]]
+	local ok, status = pcall(function()
 		-- upvalues: getEditableMeshFromContextModule (copy), p0 (ref), p3 (ref), UGCValidationService (copy)
 		local var29, var30 = getEditableMeshFromContextModule(p0, "MeshId", p3)
 		
@@ -66,11 +66,11 @@ local function validateIsSkinned(p0, p1, p2, p3) --[[ line: 40 ]]
 	return false, { "Failed to retrieve mesh data to validate skinned mesh" }
 end
 
-local function validateTotalAssetTriangles(vectorA, vectorB, p4) --[[ line: 101 ]]
+local function validateTotalAssetTriangles(vectorA, vectorB, p4)
 	-- upvalues: constantsModule (ref), getEditableMeshFromContextModule (ref), analyticsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), getFIntUGCValidateTriangleLimitToleranceModule (ref)
 	local isServer = p4.isServer
 	local var31 = assert(constantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[vectorB.Name])
-	local var32, var33, var34 = (function() --[[ line: 109 | named "calculateTotalAssetTriangles" ]]
+	local var32, var33, var34 = (function()
 		-- upvalues: vectorA (ref), getEditableMeshFromContextModule (copy), p4 (ref), analyticsModule (copy), pcallDeferredModule (copy), UGCValidationService (copy)
 		local var35 = 0
 		
@@ -80,7 +80,7 @@ local function validateTotalAssetTriangles(vectorA, vectorB, p4) --[[ line: 101 
 				local var36, var37 = getEditableMeshFromContextModule(v.instance, v.fieldName, p4)
 				
 				if var36 then
-					local var38, var39 = pcallDeferredModule(function() --[[ line: 132 ]]
+					local var38, var39 = pcallDeferredModule(function()
 						-- upvalues: UGCValidationService (copy), var37 (ref)
 						return UGCValidationService:GetEditableMeshTriCount(var37)
 					end, p4)
@@ -116,7 +116,7 @@ local function validateTotalAssetTriangles(vectorA, vectorB, p4) --[[ line: 101 
 	return false, { var33 }
 end
 
-local function validateMeshIsAtOrigin(p5, p6, p7, p8) --[[ line: 187 ]]
+local function validateMeshIsAtOrigin(p5, p6, p7, p8)
 	-- upvalues: analyticsModule (ref)
 	if (p6 + (p7 - p6) / 2).Magnitude > 0.001 then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooFarFromOrigin, nil, p8)
@@ -128,7 +128,7 @@ local function validateMeshIsAtOrigin(p5, p6, p7, p8) --[[ line: 187 ]]
 	return true
 end
 
-return function(p9, p10) --[[ line: 218 | named "validateDescendantMeshMetrics" ]]
+return function(p9, p10)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getFFlagUGCValidateMigrateMeshGeometryModule (ref), validateTotalAssetTriangles (ref), analyticsModule (ref), getEditableMeshFromContextModule (ref), getMeshMinMaxModule (ref), validateMeshIsAtOrigin (ref), floatEqualsModule (ref), getExpectedPartSizeModule (ref), validateTotalSurfaceAreaModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), getFFlagUGCValidateCoplanarTriTestBodyModule (ref), validateCoplanarIntersectionModule (ref), validateMeshVertColorsModule (ref), validateIsSkinned (ref), getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), validateSkinningTransferModule (ref), validateMeshTriangleAreaModule (ref), getFFlagUGCValidateMigrateCageUVModule (ref), validateCageUVsModule (ref), validateCageUVTriangleAreaModule (ref), validateCageUVValuesModule (ref)
 	local isServer = p10.isServer
 	assert(p10.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateDescendantMeshMetrics")

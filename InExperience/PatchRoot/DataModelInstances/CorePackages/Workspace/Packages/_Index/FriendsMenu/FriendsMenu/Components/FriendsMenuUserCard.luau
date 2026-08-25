@@ -14,7 +14,7 @@ local constantsModule = require(friendsMenu.Constants)
 local selectedUsersContextModule = require(context.SelectedUsersContext)
 local uDim = UDim.new(1, 0)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 24 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFriendsMenuUseProfileFrameThumbnailModule (ref), interactable (ref), constantsModule (ref), uDim (ref), imageSetLabel (ref), images (ref)
 	local var7 = reactModule.useContext(selectedUsersContextModule)
 	local var8 = useStyle()
@@ -25,7 +25,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 24 ]]
 		Size = UDim2.new(0, constantsModule.FRIEND_MENU_CARD_SIZE, 0, constantsModule.FRIEND_MENU_CARD_SIZE),
 		BackgroundTransparency = 1,
 		LayoutOrder = p0.layoutOrder,
-		[reactModule.Event.Activated] = if p0.unremovable then nil else reactModule.useCallback(function() --[[ line: 34 ]]
+		[reactModule.Event.Activated] = if p0.unremovable then nil else reactModule.useCallback(function()
 			-- upvalues: p0 (ref), var7 (ref)
 			if p0.onRemoved then
 				p0.onRemoved()

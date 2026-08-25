@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 5 | named "getPartNamesInHierarchyOrder" ]]
+﻿return function(p0)
 	if Enum.AssetType.LeftArm == p0 then
 		return { "LeftUpperArm", "LeftLowerArm", "LeftHand" }
 	elseif Enum.AssetType.RightArm == p0 then

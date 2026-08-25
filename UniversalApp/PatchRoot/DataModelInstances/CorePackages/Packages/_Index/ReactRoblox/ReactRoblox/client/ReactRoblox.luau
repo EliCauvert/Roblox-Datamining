@@ -21,7 +21,7 @@ local enableNewReconciler = require(parent.Shared).ReactFeatureFlags.enableNewRe
 local reactRobloxComponentTreeModule = require(script.Parent.ReactRobloxComponentTree)
 local getClosestInstanceFromNode = reactRobloxComponentTreeModule.getClosestInstanceFromNode
 local t = {
-	createPortal = function(p0, p1, p2) --[[ line: 135 ]]
+	createPortal = function(p0, p1, p2)
 		-- upvalues: invariant (ref), isValidContainer (ref), createPortal (ref)
 		invariant(isValidContainer(p1), "Target container is not a Roblox Instance.")
 		
@@ -46,7 +46,7 @@ local t = {
 	Change = require(parent.Shared).Change,
 	Tag = require(parent.Shared).Tag,
 	unstable_isNewReconciler = enableNewReconciler,
-	act = function(_) --[[ line: 276 ]]
+	act = function(_)
 		error("ReactRoblox.act is only available in testing environments, not production. Enable the `__ROACT_17_MOCK_SCHEDULER__` global in your test configuration in order to use `act`.")
 	end
 }

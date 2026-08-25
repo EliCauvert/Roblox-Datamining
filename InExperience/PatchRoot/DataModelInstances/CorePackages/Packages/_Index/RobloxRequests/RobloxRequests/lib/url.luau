@@ -52,50 +52,50 @@ local t_1 = {
 	[";"] = true
 }
 
-local function _(p0, p1) --[[ line: 60 | named "decode" ]]
+local function _(p0, p1)
 	local var5 = p0
 	
 	if not p1 then
 		var5 = var5:gsub("+", " ")
 	end
-	return var5:gsub("%%(%x%x)", function(p2) --[[ line: 65 ]]
+	return var5:gsub("%%(%x%x)", function(p2)
 		return string.char(tonumber(p2, 16))
 	end)
 end
 
-local _ = function(p3) --[[ line: 70 | named "encode" ]]
-	return p3:gsub("([^A-Za-z0-9%_%.%-%~])", function(p4) --[[ line: 71 ]]
+local _ = function(p3)
+	return p3:gsub("([^A-Za-z0-9%_%.%-%~])", function(p4)
 		return string.upper(string.format("%%%02x", string.byte(p4)))
 	end)
 end
 
-local _ = function(p5) --[[ line: 77 | named "encodeValue" ]]
-	return p5:gsub("([^A-Za-z0-9%_%.%-%~])", function(p6) --[[ line: 71 ]]
+local _ = function(p5)
+	return p5:gsub("([^A-Za-z0-9%_%.%-%~])", function(p6)
 		return string.upper(string.format("%%%02x", string.byte(p6)))
 	end):gsub("%%20", "+")
 end
 
-local function encodeSegment(p7) --[[ line: 82 ]]
+local function encodeSegment(p7)
 	-- upvalues: t_1 (ref)
-	return p7:gsub("([^a-zA-Z0-9])", function(p8) --[[ line: 83 ]]
+	return p7:gsub("([^a-zA-Z0-9])", function(p8)
 		-- upvalues: t_1 (copy)
-		return if t_1[p8] then p8 else p8:gsub("([^A-Za-z0-9%_%.%-%~])", function(p9) --[[ line: 71 ]]
+		return if t_1[p8] then p8 else p8:gsub("([^A-Za-z0-9%_%.%-%~])", function(p9)
 			return string.upper(string.format("%%%02x", string.byte(p9)))
 		end)
 	end)
 end
 
-local function concat(p10, p11) --[[ line: 92 ]]
+local function concat(p10, p11)
 	return p10 .. p11:build()
 end
 
-function t.build(p12) --[[ line: 98 ]]
+function t.build(p12)
 	-- upvalues: encodeSegment (ref), t (ref)
 	local var6 = ""
 	
 	if p12.path then
 		local path = p12.path
-		path:gsub("([^/]+)", function(p13) --[[ line: 102 ]]
+		path:gsub("([^/]+)", function(p13)
 			-- upvalues: encodeSegment (copy)
 			return encodeSegment(p13)
 		end)
@@ -139,7 +139,7 @@ function t.build(p12) --[[ line: 98 ]]
 	return var6
 end
 
-function t.buildQuery(_, _, _) --[[ line: 148 ]]
+function t.buildQuery(_, _, _)
 	-- upvalues: t (ref)
 -- FATAL: Failed to generate AST for `buildQuery` function:
 runtime : [KeyError] :11990: 60
@@ -149,7 +149,7 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-function t.parseQuery(_, _) --[[ line: 185 ]]
+function t.parseQuery(_, _)
 	-- upvalues: t (ref)
 -- FATAL: Failed to generate AST for `parseQuery` function:
 runtime : [KeyError] :11990: 86
@@ -159,7 +159,7 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-function t.setQuery(value, p14) --[[ line: 241 ]]
+function t.setQuery(value, p14)
 	-- upvalues: t (ref)
 	local var9 = p14
 	
@@ -171,24 +171,24 @@ function t.setQuery(value, p14) --[[ line: 241 ]]
 	return var9
 end
 
-function t.setAuthority(value, p15) --[[ line: 254 ]]
+function t.setAuthority(value, p15)
 	value.authority = p15
 	value.port = nil
 	value.host = nil
 	value.userinfo = nil
 	value.user = nil
 	value.password = nil
-	local var10 = p15:gsub("^([^@]*)@", function(p18) --[[ line: 262 ]]
+	local var10 = p15:gsub("^([^@]*)@", function(p18)
 		-- upvalues: value (ref)
 		value.userinfo = p18
 		
 		return ""
-	end):gsub("^%[[^%]]+%]", function(p17) --[[ line: 266 ]]
+	end):gsub("^%[[^%]]+%]", function(p17)
 		-- upvalues: value (ref)
 		value.host = p17
 		
 		return ""
-	end):gsub(":([^:]*)$", function(p16) --[[ line: 271 ]]
+	end):gsub(":([^:]*)$", function(p16)
 		-- upvalues: value (ref)
 		value.port = tonumber(p16)
 		
@@ -199,7 +199,7 @@ function t.setAuthority(value, p15) --[[ line: 254 ]]
 		value.host = var10:lower()
 	end
 	if value.userinfo then
-		value.user = value.userinfo:gsub(":([^:]*)$", function(p19) --[[ line: 280 ]]
+		value.user = value.userinfo:gsub(":([^:]*)$", function(p19)
 			-- upvalues: value (ref)
 			value.password = p19
 			
@@ -209,32 +209,32 @@ function t.setAuthority(value, p15) --[[ line: 254 ]]
 	return var10
 end
 
-function t.parse(p20) --[[ line: 295 ]]
+function t.parse(p20)
 	-- upvalues: t (ref), concat (ref)
 	local t_1 = {}
 	t.setAuthority(t_1, "")
 	t.setQuery(t_1, "")
-	t_1.path = tostring(p20 or ""):gsub("#(.*)$", function(p25) --[[ line: 301 ]]
+	t_1.path = tostring(p20 or ""):gsub("#(.*)$", function(p25)
 		-- upvalues: t_1 (ref)
 		t_1.fragment = p25
 		
 		return ""
-	end):gsub("^([%w][%w%+%-%.]*)%:", function(p24) --[[ line: 305 ]]
+	end):gsub("^([%w][%w%+%-%.]*)%:", function(p24)
 		-- upvalues: t_1 (ref)
 		t_1.scheme = p24:lower()
 		
 		return ""
-	end):gsub("%?(.*)", function(p23) --[[ line: 309 ]]
+	end):gsub("%?(.*)", function(p23)
 		-- upvalues: t (copy), t_1 (ref)
 		t.setQuery(t_1, p23)
 		
 		return ""
-	end):gsub("^//([^/]*)", function(p22) --[[ line: 313 ]]
+	end):gsub("^//([^/]*)", function(p22)
 		-- upvalues: t (copy), t_1 (ref)
 		t.setAuthority(t_1, p22)
 		
 		return ""
-	end):gsub("%%(%x%x)", function(p21) --[[ line: 65 ]]
+	end):gsub("%%(%x%x)", function(p21)
 		return string.char(tonumber(p21, 16))
 	end)
 	setmetatable(t_1, { __index = t, __concat = concat, __tostring = t.build })
@@ -242,7 +242,7 @@ function t.parse(p20) --[[ line: 295 ]]
 	return t_1
 end
 
-function t.removeDotSegments(vectorA) --[[ line: 331 ]]
+function t.removeDotSegments(vectorA)
 	local t = {}
 	
 	if string.len(vectorA) == 0 then
@@ -257,7 +257,7 @@ function t.removeDotSegments(vectorA) --[[ line: 331 ]]
 	if (string.len(vectorA) > 1 or var13 == false) and string.sub(vectorA, -1) == "/" then
 		var14 = true
 	end
-	vectorA:gsub("[^/]+", function(p26) --[[ line: 345 ]]
+	vectorA:gsub("[^/]+", function(p26)
 		-- upvalues: t (ref)
 		table.insert(t, p26)
 	end)
@@ -286,7 +286,7 @@ function t.removeDotSegments(vectorA) --[[ line: 331 ]]
 	return var17
 end
 
-local function absolutePath(value, p27) --[[ line: 375 ]]
+local function absolutePath(value, p27)
 	if string.sub(p27, 1, 1) == "/" then
 		return "/" .. string.gsub(p27, "^[%./]+", "")
 	end
@@ -295,17 +295,17 @@ local function absolutePath(value, p27) --[[ line: 375 ]]
 	if p27 ~= "" then
 		var18 = "/" .. var18:gsub("[^/]*$", "")
 	end
-	var18 = string.gsub((var18 .. p27):gsub("([^/]*%./)", function(p28) --[[ line: 384 ]]
+	var18 = string.gsub((var18 .. p27):gsub("([^/]*%./)", function(p28)
 		return if p28 == "./" then "" else p28
 	end), "/%.$", "/")
 	local var19 = nil
 	while var19 ~= var18 do
 		var19 = var18
-		var18 = string.gsub(var19, "([^/]*/%.%./)", function(p29) --[[ line: 391 ]]
+		var18 = string.gsub(var19, "([^/]*/%.%./)", function(p29)
 			return if p29 == "../../" then p29 else ""
 		end)
 	end
-	var18 = string.gsub(var18, "([^/]*/%.%.?)$", function(p30) --[[ line: 395 ]]
+	var18 = string.gsub(var18, "([^/]*/%.%.?)$", function(p30)
 		return if p30 == "../.." then p30 else ""
 	end)
 	local var20 = nil
@@ -316,7 +316,7 @@ local function absolutePath(value, p27) --[[ line: 375 ]]
 	return "/" .. var18
 end
 
-function t.resolve(p31, p32) --[[ line: 409 ]]
+function t.resolve(p31, p32)
 	-- upvalues: t (ref), absolutePath (ref)
 	if type(p31) == "string" then
 		p31 = t.parse(p31)
@@ -349,7 +349,7 @@ function t.resolve(p31, p32) --[[ line: 409 ]]
 	end
 end
 
-function t.normalize(p33) --[[ line: 439 ]]
+function t.normalize(p33)
 	-- upvalues: t (ref), absolutePath (ref)
 	if type(p33) == "string" then
 		p33 = t.parse(p33)

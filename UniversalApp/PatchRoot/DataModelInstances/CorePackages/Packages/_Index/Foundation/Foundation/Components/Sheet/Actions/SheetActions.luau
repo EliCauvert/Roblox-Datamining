@@ -9,7 +9,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local viewModule = require(foundation.Components.View)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | named "SheetActions" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), reactRobloxModule (ref)
 	local var9 = useTokensModule()
 	local var10 = reactModule.useContext(sheetContextModule)
@@ -40,12 +40,12 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | 
 		stroke = {
 			Color = var9.Color.Stroke.Default.Color3,
 			Transparency = var9.Color.Stroke.Default.Transparency,
-			Thickness = hasActionsDivider:map(function(p2) --[[ line: 60 ]]
+			Thickness = hasActionsDivider:map(function(p2)
 				-- upvalues: var9 (ref)
 				return if p2 then var9.Stroke.Standard else 0
 			end)
 		},
-		onAbsoluteSizeChanged = if var11 then function(p3) --[[ line: 69 ]]
+		onAbsoluteSizeChanged = if var11 then function(p3)
 			-- upvalues: setActionsHeight (ref), bottomPadding (ref)
 			setActionsHeight(p3.AbsoluteSize.Y - bottomPadding)
 		end else nil,
@@ -53,11 +53,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | 
 		Position = if var11 then reactModule.joinBindings({
 			sheetHeightAvailable = sheetHeightAvailable,
 			actionsHeight = actionsHeight
-		}):map(function(p4) --[[ line: 79 ]]
+		}):map(function(p4)
 			return UDim2.new(0, 0, 1, -math.min(p4.sheetHeightAvailable, p4.actionsHeight))
 		end) else nil,
 		ref = p1,
-		onActivated = function() --[[ line: 89 ]] end,
+		onActivated = function() end,
 		selection = { Selectable = false },
 		stateLayer = { affordance = stateLayerAffordanceModule.None }
 	}, p0.children)

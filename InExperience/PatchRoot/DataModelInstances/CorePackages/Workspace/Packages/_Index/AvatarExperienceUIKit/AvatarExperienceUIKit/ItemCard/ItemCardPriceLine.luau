@@ -16,7 +16,7 @@ local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnab
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = avatarExperienceFlagsModule.FFlagAXEnableIaBTimedOptionsBulkPurchase
 local fFlagAXItemCardComponentsMemo = avatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
 
-local function renderIconTextPair(p0) --[[ line: 88 ]]
+local function renderIconTextPair(p0)
 	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), text (ref)
 	local t = {}
 	
@@ -43,7 +43,7 @@ local function renderIconTextPair(p0) --[[ line: 88 ]]
 	return t
 end
 
-local function renderContentChildren(p1, p2, p3, p4, p5, p6, p7) --[[ line: 115 ]]
+local function renderContentChildren(p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: getLocalizedPriceModule (ref), renderIconTextPair (ref)
 	local icon = nil
 	local text = nil
@@ -80,7 +80,7 @@ local function renderContentChildren(p1, p2, p3, p4, p5, p6, p7) --[[ line: 115 
 	})
 end
 
-local function ItemCardPriceLine(p8) --[[ line: 160 ]]
+local function ItemCardPriceLine(p8)
 	-- upvalues: useTokens (ref), useDesignTokens (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), reactModule (ref), badge (ref), badgeVariant (ref), fFlagAXMISEnableMultiShopping (ref), iconSize (ref), fFlagAXDurablesFooter (ref), renderContentChildren (ref), icon (ref), text (ref), getLocalizedPriceModule (ref)
 	local var11 = useTokens()
 	local var12 = useDesignTokens()

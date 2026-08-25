@@ -1,7 +1,7 @@
 ﻿local images = require(script:FindFirstAncestor("PlayerContextualMenu").Parent.UIBlox).App.ImageSet.Images
 local _ = require(script.Parent.Types)
 
-return function(p0, p1) --[[ line: 9 | named "getPresenceIcon" ]]
+return function(p0, p1)
 	-- upvalues: images (ref)
 	if p0 then
 		if p0.status == "InGame" then

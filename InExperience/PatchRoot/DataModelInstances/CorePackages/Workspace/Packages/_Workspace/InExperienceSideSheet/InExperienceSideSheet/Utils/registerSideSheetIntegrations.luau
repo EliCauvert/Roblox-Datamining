@@ -2,7 +2,7 @@
 local _ = require(inExperienceSideSheet.Parent.Chrome)
 local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: getIntegrationsStoreModule (ref)
 	local var2 = getIntegrationsStoreModule()
 	var2.setUnibarIntegrations(p0.unibarIntegrations)

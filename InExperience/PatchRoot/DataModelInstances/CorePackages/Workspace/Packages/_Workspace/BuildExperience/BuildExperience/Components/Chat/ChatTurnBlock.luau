@@ -39,13 +39,13 @@ local t_1 = {
 	onPlanAcceptedByToolCallId = {}
 }
 
-local function constantSource() --[[ line: 85 ]]
+local function constantSource()
 	return 0
 end
 
-local function useReactiveValue(p0) --[[ line: 89 ]]
+local function useReactiveValue(p0)
 	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 90 ]]
+	return signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), constantSource (copy)
 		if typeof(p0) == "function" then
 			return p0(p1)
@@ -56,11 +56,11 @@ local function useReactiveValue(p0) --[[ line: 89 ]]
 	end, { p0 }))
 end
 
-local function _(p2) --[[ line: 103 | named "hasSelectedOptions" ]]
+local function _(p2)
 	return typeof(p2) == "string" or (typeof(p2) == "table" and #p2 > 0)
 end
 
-local function AnswerStackSection(p3) --[[ line: 113 ]]
+local function AnswerStackSection(p3)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), optionSelectorModule (ref), answerStackModule (ref)
 	local var37
 	local var31 = if fFlagBuildLocalization then useLocalization({
@@ -95,7 +95,7 @@ local function AnswerStackSection(p3) --[[ line: 113 ]]
 			title = if fFlagBuildLocalization then var31.customAnswer else localizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
 			description = customResponseText,
 			testId = `AnswerStack.{question.id}.CustomAnswer`,
-			onActivated = function() --[[ line: 149 ]] end
+			onActivated = function() end
 		})
 	elseif #question.options > 0 then
 		var37 = reactModule.createElement
@@ -112,7 +112,7 @@ local function AnswerStackSection(p3) --[[ line: 113 ]]
 		t_2.onConfirm = if isMultiSelect and var32 then p3.onAnswerConfirmed else nil
 		t_2.testId = `AnswerStack.{question.id}`
 		
-		function t_2.onOptionSelected(p4) --[[ line: 160 ]]
+		function t_2.onOptionSelected(p4)
 			-- upvalues: p3 (ref), isMultiSelect (ref), var32 (ref), question (ref), prompt (ref)
 			if p3.onAnswerSelected == nil then return end
 			if isMultiSelect then
@@ -134,7 +134,7 @@ local function AnswerStackSection(p3) --[[ line: 113 ]]
 	return createElement(view, t, t_1)
 end
 
-local function PlanProposalSection(p5) --[[ line: 179 ]]
+local function PlanProposalSection(p5)
 	-- upvalues: reactModule (ref), agentPlanCardModule (ref), view (ref), chatUserMessageModule (ref)
 	local planProposal = p5.planProposal
 	local var40 = reactModule.createElement(agentPlanCardModule, {
@@ -143,7 +143,7 @@ local function PlanProposalSection(p5) --[[ line: 179 ]]
 		title = planProposal.title,
 		textContent = planProposal.textContent,
 		summary = planProposal.summary,
-		onBuild = p5.onPlanAccepted or function() --[[ line: 187 ]] end,
+		onBuild = p5.onPlanAccepted or function() end,
 		isBuildDisabled = not (planProposal.isAccepted ~= true and planProposal.feedbackText == nil)
 	})
 	
@@ -162,7 +162,7 @@ local function PlanProposalSection(p5) --[[ line: 179 ]]
 	})
 end
 
-local function AgentMessageSegment(p6) --[[ line: 216 ]]
+local function AgentMessageSegment(p6)
 	-- upvalues: useReactiveValue (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), foundationModule (ref), getMarkdownRendererPropsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), iconSize (ref), text (ref), markdownViewer (ref)
 	local var44
 	local var41 = useReactiveValue(p6.segment.text)
@@ -208,14 +208,14 @@ local function AgentMessageSegment(p6) --[[ line: 216 ]]
 			tag = "size-full-0 auto-y text-body-medium content-emphasis",
 			LayoutOrder = p6.LayoutOrder
 		},
-		MarkdownRendererProps = reactModule.useMemo(function() --[[ line: 241 ]]
+		MarkdownRendererProps = reactModule.useMemo(function()
 			-- upvalues: getMarkdownRendererPropsModule (copy), var45 (ref), p6 (ref)
 			return getMarkdownRendererPropsModule(var45, p6.markdownTextStyle)
 		end, { var45, p6.markdownTextStyle })
 	})
 end
 
-local function renderClientToolSegment(p7, p8, p9) --[[ line: 283 ]]
+local function renderClientToolSegment(p7, p8, p9)
 	-- upvalues: reactModule (ref), AnswerStackSection (ref), PlanProposalSection (ref)
 	return if p7.answerStackPrompt == nil then if p7.planProposal == nil then nil else reactModule.createElement(PlanProposalSection, {
 		LayoutOrder = p8,
@@ -230,7 +230,7 @@ local function renderClientToolSegment(p7, p8, p9) --[[ line: 283 ]]
 	})
 end
 
-local function renderWorkSegment(p10, p11, p12, p13, p14) --[[ line: 313 ]]
+local function renderWorkSegment(p10, p11, p12, p13, p14)
 	-- upvalues: reactModule (ref), AgentMessageSegment (ref), turnActivitySummaryModule (ref), renderClientToolSegment (ref)
 	return if p10.kind == "agent_message" then reactModule.createElement(AgentMessageSegment, {
 		LayoutOrder = p11,
@@ -239,7 +239,7 @@ local function renderWorkSegment(p10, p11, p12, p13, p14) --[[ line: 313 ]]
 	}) elseif p10.kind == "activity_summary" then reactModule.createElement(turnActivitySummaryModule, { LayoutOrder = p11, segment = p10, clockBinding = p13 }) elseif p10.kind == "client_tool" then renderClientToolSegment(p10, p11, p14) else nil
 end
 
-local function TurnWorkSegment(p15) --[[ line: 339 ]]
+local function TurnWorkSegment(p15)
 	-- upvalues: fFlagBuildLocalization (ref), useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), foundationModule (ref), renderWorkSegment (ref), view (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local var47, var50
 	local _ = nil
@@ -272,9 +272,9 @@ local function TurnWorkSegment(p15) --[[ line: 339 ]]
 	local var53 = foundationModule.Hooks.useTokens()
 	local isDone = p15.isDone
 	local var54 = not p15.isDone or var52
-	local var55 = reactModule.useCallback(function() --[[ line: 383 ]]
+	local var55 = reactModule.useCallback(function()
 		-- upvalues: var47 (ref)
-		var47(function(p16) --[[ line: 384 ]]
+		var47(function(p16)
 			return not p16
 		end)
 	end, {})
@@ -327,7 +327,7 @@ local function TurnWorkSegment(p15) --[[ line: 339 ]]
 	})
 end
 
-return reactModule.memo(function(p17) --[[ line: 446 | named "ChatTurnBlock" ]]
+return reactModule.memo(function(p17)
 	-- upvalues: reactModule (ref), turnProjectionModule (ref), reportTurnActivityGapModule (ref), useReactiveValue (ref), t (ref), t_1 (ref), foundationModule (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), renderWorkSegment (ref), TurnWorkSegment (ref), playtestCompletedCardModule (ref), view (ref), agentTurnFeedbackModule (ref)
 	local turn = p17.turn
 	local turnState = turn.turnState
@@ -340,7 +340,7 @@ return reactModule.memo(function(p17) --[[ line: 446 | named "ChatTurnBlock" ]]
 	local sessionId = turn.sessionId
 	local isDone = turn.isDone
 	local isLatestPublishTurn = turn.isLatestPublishTurn
-	local var59 = reactModule.useMemo(function() --[[ line: 461 ]]
+	local var59 = reactModule.useMemo(function()
 		-- upvalues: turnState (ref), turnProjectionModule (copy), turnKey (ref), universeId (ref), sessionId (ref), startSequenceId (ref), endSequenceId (ref), optimisticLocalTools (ref), isLatestPublishTurn (ref), setupErrorText (ref)
 		return if turnState == nil then if setupErrorText == nil then turnProjectionModule.projectLoadingTurnSegments({ turnKey = turnKey }) else turnProjectionModule.projectSetupErrorSegments(setupErrorText, { turnKey = turnKey }) else turnProjectionModule.projectActiveTurnSegments(turnState, {
 			turnKey = turnKey,
@@ -356,7 +356,7 @@ return reactModule.memo(function(p17) --[[ line: 446 | named "ChatTurnBlock" ]]
 		setupErrorText, universeId, sessionId, isLatestPublishTurn
 	})
 	local var60 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 492 ]]
+	reactModule.useEffect(function()
 		-- upvalues: isDone (ref), var60 (ref), reportTurnActivityGapModule (copy), universeId (ref)
 		if isDone then
 			var60.current = nil
@@ -372,7 +372,7 @@ return reactModule.memo(function(p17) --[[ line: 446 | named "ChatTurnBlock" ]]
 	local emphasis = foundationModule.Hooks.useTokens().Color.Content.Emphasis
 	local var63 = if fFlagBuildExperienceCopyChatMessagesModule and turnState ~= nil then turnProjectionModule.getFinalAssistantMessageText(turnState) else nil
 	local onPlaytest = p17.onPlaytest
-	local var64 = reactModule.useCallback(function() --[[ line: 514 ]]
+	local var64 = reactModule.useCallback(function()
 		-- upvalues: sendBuildExperienceEventModule (copy), var61 (ref), fFlagBuildEventsUpdate1Module (copy), onPlaytest (ref)
 		sendBuildExperienceEventModule("PLAYTEST_CLICK", {
 			universeId = var61.universeId,
@@ -386,7 +386,7 @@ return reactModule.memo(function(p17) --[[ line: 446 | named "ChatTurnBlock" ]]
 		end
 	end, { onPlaytest, var61 })
 	local var65 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 527 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var65 (ref), onPlaytest (ref), var59 (ref), sendBuildExperienceEventModule (copy), var61 (ref)
 		if var65.current or onPlaytest == nil then return end
 		local var70 = false

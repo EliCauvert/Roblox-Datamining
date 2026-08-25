@@ -40,12 +40,12 @@ local t = {
 	[snapDirectionModule.Top] = popoverSide.Bottom
 }
 
-return capturesPolicyModule.connect(function(p5) --[[ line: 226 ]]
+return capturesPolicyModule.connect(function(p5)
 	-- upvalues: captureService (ref), debugOverrideCaptureControlsVideoGuacPolicy (ref)
 	return {
 		hasVideoCaptureCapability = p5.hasVideoCaptureCapability() and captureService:CanCaptureVideo() or debugOverrideCaptureControlsVideoGuacPolicy
 	}
-end)(function(p0) --[[ line: 65 ]]
+end)(function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useTopbarInsetModule (ref), useSelector (ref), constantsModule (ref), useEffect (ref), capturesLayerExposureLoggingEnabled (ref), IXPServiceWrapper (ref), fStringSocialCaptureIXPLayer (ref), usePlayShutterSoundModule (ref), reactModule (ref), useCaptureControlsControllerModule (ref), eventNamesModule (ref), useCallback (ref), socialStopwatchModule (ref), takeCaptureModule (ref), view (ref), foundationModule (ref), videoCaptureControlModule (ref), t (ref), tooltip (ref), popoverAlign (ref), icon (ref), voiceChatIndicatorModule (ref), image (ref)
 	local var20 = useAnalyticsModule()
 	local var21 = useDispatch()
@@ -54,22 +54,22 @@ end)(function(p0) --[[ line: 65 ]]
 	})
 	local var23 = useTokens()
 	local var24 = useTopbarInsetModule()
-	local var25 = useSelector(function(p1) --[[ line: 75 ]]
+	local var25 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsActive
 	end)
-	local var26 = useSelector(function(p2) --[[ line: 79 ]]
+	local var26 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
-	useEffect(function() --[[ line: 83 ]]
+	useEffect(function()
 		-- upvalues: capturesLayerExposureLoggingEnabled (copy), var25 (ref), IXPServiceWrapper (copy), fStringSocialCaptureIXPLayer (copy)
 		if capturesLayerExposureLoggingEnabled and var25 then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringSocialCaptureIXPLayer)
 		end
 	end, { var25 })
 	local var27 = usePlayShutterSoundModule()
-	local var28 = useCaptureControlsControllerModule(var25, reactModule.useMemo(function() --[[ line: 91 ]]
+	local var28 = useCaptureControlsControllerModule(var25, reactModule.useMemo(function()
 		-- upvalues: var24 (ref), var23 (ref)
 		return Vector2.new(var24.Min.X - var23.Padding.Small, var24.Height - var23.Padding.XSmall - var23.Padding.XXSmall)
 	end, { var24, var23 }))
@@ -81,7 +81,7 @@ end)(function(p0) --[[ line: 65 ]]
 	local isItemHorizontal = var28.isItemHorizontal
 	local screenshotButtonRef = var28.screenshotButtonRef
 	local snapDirection = var28.snapDirection
-	useEffect(function() --[[ line: 109 ]]
+	useEffect(function()
 		-- upvalues: var25 (ref), var20 (ref), eventNamesModule (copy)
 		if var25 then
 			var20.fireEvent(eventNamesModule.CapturesEntrypointViewed)
@@ -99,11 +99,11 @@ end)(function(p0) --[[ line: 65 ]]
 			ref = dragContainerRef
 		}, {
 			CaptureControls = if var25 then reactModule.createElement(view, {
-				AnchorPoint = dragItemAnchorPointBinding:map(function(p3) --[[ line: 138 ]]
+				AnchorPoint = dragItemAnchorPointBinding:map(function(p3)
 					return Vector2.new(p3.x, p3.y)
 				end),
-				onActivated = function() --[[ line: 141 ]] end,
-				Position = dragItemPositionBinding:map(function(p4) --[[ line: 142 ]]
+				onActivated = function() end,
+				Position = dragItemPositionBinding:map(function(p4)
 					return UDim2.fromOffset(p4.xOffset, p4.yOffset)
 				end),
 				ref = dragItemRef,
@@ -129,7 +129,7 @@ end)(function(p0) --[[ line: 65 ]]
 						["size-1200-1200"] = true,
 						["anchor-center-center auto-xy clip position-center-center radius-circle"] = true
 					},
-					onActivated = useCallback(function() --[[ line: 115 ]]
+					onActivated = useCallback(function()
 						-- upvalues: socialStopwatchModule (copy), var20 (ref), eventNamesModule (copy), var27 (ref), var21 (ref), takeCaptureModule (copy)
 						if not socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureTaken) then
 							socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureTaken)

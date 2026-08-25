@@ -29,7 +29,7 @@ local t_3 = {
 	[Enum.AssetType.RightLeg] = true
 }
 
-local function validateBasedOnBBoxes(p0, p1, p2, p3, p4) --[[ line: 45 ]]
+local function validateBasedOnBBoxes(p0, p1, p2, p3, p4)
 	-- upvalues: errorSourceStringsModule (ref)
 	local boundsData = p2[p0.Name].boundsData
 	local boundsData_1 = p2[p1.Name].boundsData
@@ -54,7 +54,7 @@ local function validateBasedOnBBoxes(p0, p1, p2, p3, p4) --[[ line: 45 ]]
 	return var12
 end
 
-local function validateBasedOnAttachmentYPos(p5, p6, p7, p8) --[[ line: 77 ]]
+local function validateBasedOnAttachmentYPos(p5, p6, p7, p8)
 	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), errorSourceStringsModule (ref)
 	local var13 = p6:FindFirstChild(p7, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	local var14 = p5:FindFirstChild(p7, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
@@ -84,7 +84,7 @@ local function validateBasedOnAttachmentYPos(p5, p6, p7, p8) --[[ line: 77 ]]
 	end
 end
 
-function t.run(p9, p10) --[[ line: 117 ]]
+function t.run(p9, p10)
 	-- upvalues: t_1 (ref), constantsModule (ref), boundsCalculatorModule (ref), t_2 (ref), validateBasedOnBBoxes (ref), t_3 (ref), validateBasedOnAttachmentYPos (ref)
 	local rootInstance = p10.rootInstance
 	local assetType = p10.uploadEnum.assetType

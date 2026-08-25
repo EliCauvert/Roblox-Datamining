@@ -10,7 +10,7 @@ local useResponsiveModule = require(foundation.Providers.Responsive.useResponsiv
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { containerWidth = 0 }
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "GridStyleSheet" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useResponsiveModule (ref), useStyleSheet (ref), createGridStyleRulesModule (ref), dashModule (ref), getGridMetricsModule (ref)
 	local var8 = withDefaultsModule(p0, t)
 	local var9 = reactModule.useRef(nil)
@@ -22,15 +22,15 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "GridStyleSheet" ]]
 	local var13 = grid.columns[var12]
 	local breakpoint_1 = var8.breakpoint or var12
 	local maxValue = math.max(1, var8.containerWidth)
-	local var16 = reactModule.useMemo(function() --[[ line: 39 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: createGridStyleRulesModule (copy), var10 (ref)
 		return createGridStyleRulesModule(var10.config)
 	end, { var10.config })
-	local var17 = reactModule.useMemo(function() --[[ line: 43 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var16 (ref), breakpoint_1 (ref)
 		return dashModule.join(var16.baseRules, var16.rulesByBreakpoint[breakpoint_1])
 	end, { var16, breakpoint_1 })
-	reactModule.useLayoutEffect(function() --[[ line: 47 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var9 (ref), grid (ref), breakpoint_1 (ref), var13 (ref), getGridMetricsModule (copy), var10 (ref), maxValue (ref)
 		if var9.current then
 			local var18 = grid.columns[breakpoint_1]
@@ -45,7 +45,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "GridStyleSheet" ]]
 			end
 		end
 	end, { var10.config, maxValue, breakpoint_1 })
-	reactModule.useLayoutEffect(function() --[[ line: 70 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var9 (ref), var11 (ref)
 		if var9.current then
 			var9.current:SetDerives({ var11 })

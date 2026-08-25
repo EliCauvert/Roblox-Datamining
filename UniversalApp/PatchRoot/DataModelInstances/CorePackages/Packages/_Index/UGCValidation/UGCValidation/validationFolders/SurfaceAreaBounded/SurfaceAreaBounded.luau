@@ -15,7 +15,7 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 24 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationService (ref), getFIntMaxTotalSurfaceAreaModule (ref), errorSourceStringsModule (ref)
 		for i, v in p1.renderMeshesData do
 			local editable = UGCValidationService:CalculateEditableMeshTotalSurfaceArea(v.editable, v.scale)

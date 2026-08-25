@@ -11,7 +11,7 @@ local t_1 = { Query = 0, Mutation = 1, Subscription = 2 }
 t.DocumentType = t_1
 local var3 = map.new(nil)
 
-function t.operationName(p0) --[[ line: 36 ]]
+function t.operationName(p0)
 	-- upvalues: t_1 (ref)
 	local var4 = nil
 	
@@ -29,7 +29,7 @@ function t.operationName(p0) --[[ line: 36 ]]
 	return var4
 end
 
-function t.parser(p1) --[[ line: 51 ]]
+function t.parser(p1)
 	-- upvalues: var3 (ref), invariant (ref), boolean (ref), array (ref), t_1 (ref)
 	local var5 = var3:get(p1)
 	
@@ -40,16 +40,16 @@ function t.parser(p1) --[[ line: 51 ]]
 	local _ = nil
 	local _ = nil
 	invariant(boolean.toJSBoolean(p1) and boolean.toJSBoolean(p1.kind), ("Argument of %s passed to parser was not a valid GraphQL "):format(tostring(p1)) .. "DocumentNode. You may need to use 'graphql-tag' or another method " .. "to convert your operation into a document")
-	local var6 = array.filter(p1.definitions, function(p2) --[[ line: 63 ]]
+	local var6 = array.filter(p1.definitions, function(p2)
 		return p2.kind == "FragmentDefinition"
 	end)
-	local var7 = array.filter(p1.definitions, function(p3) --[[ line: 67 ]]
+	local var7 = array.filter(p1.definitions, function(p3)
 		return p3.kind == "OperationDefinition" and p3.operation == "query"
 	end)
-	local var8 = array.filter(p1.definitions, function(p4) --[[ line: 72 ]]
+	local var8 = array.filter(p1.definitions, function(p4)
 		return p4.kind == "OperationDefinition" and p4.operation == "mutation"
 	end)
-	local var9 = array.filter(p1.definitions, function(p5) --[[ line: 77 ]]
+	local var9 = array.filter(p1.definitions, function(p5)
 		return p5.kind == "OperationDefinition" and p5.operation == "subscription"
 	end)
 	invariant(if #var6 ~= 0 then if #var7 == 0 then if #var8 == 0 then #var9 ~= 0 else true else true else true, "Passing only a fragment to 'graphql' is not yet supported. You must include a query, subscription or mutation as well")

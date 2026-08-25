@@ -11,23 +11,23 @@ local roduxModule = require(parent.Rodux)
 local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
 local t = {
 	state = { routeName = "", key = "", params = {} },
-	dispatch = function() --[[ line: 34 ]] end,
-	goBack = function() --[[ line: 35 ]] end,
-	addListener = function() --[[ line: 36 ]]
-		return { remove = function() --[[ line: 38 ]] end }
+	dispatch = function() end,
+	goBack = function() end,
+	addListener = function()
+		return { remove = function() end }
 	end,
-	isFocused = function() --[[ line: 41 ]] end,
-	setParams = function() --[[ line: 42 ]] end,
-	getParam = function() --[[ line: 43 ]] end,
-	replace = function() --[[ line: 44 ]] end,
-	push = function() --[[ line: 45 ]] end
+	isFocused = function() end,
+	setParams = function() end,
+	getParam = function() end,
+	replace = function() end,
+	push = function() end
 }
 
-local function reducer(p0) --[[ line: 48 ]]
+local function reducer(p0)
 	return p0
 end
 
-return function(p1) --[[ line: 52 | named "MockProviders" ]]
+return function(p1)
 	-- upvalues: roduxModule (ref), reducer (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), layerCollectorProvider (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), reactModule (ref), providerContainer (ref)
 	local t_1 = {}
 	local var7 = roduxModule.Store.new(reducer, {}, { roduxModule.thunkMiddleware })
@@ -39,7 +39,7 @@ return function(p1) --[[ line: 52 | named "MockProviders" ]]
 		class = localizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2) --[[ line: 70 ]]
+				Format = function(_, p2)
 					return p2
 				end
 			}

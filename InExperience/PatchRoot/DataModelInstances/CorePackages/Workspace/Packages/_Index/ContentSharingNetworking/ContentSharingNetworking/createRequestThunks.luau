@@ -10,7 +10,7 @@ local createGetPostsByUserIdModule = require(networkRequests.createGetPostsByUse
 local createGetThumbnailByAssetIdModule = require(networkRequests.createGetThumbnailByAssetId)
 local createRemoveReactionModule = require(networkRequests.createRemoveReaction)
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: fFlagContentFeedEnableReactions (ref), createAddReactionModule (ref), createCheckMomentsEligibilityModule (ref), createDeletePostModule (ref), networkRequests (ref), createGetPostsByCursorModule (ref), createGetPostsByPostIdModule (ref), createGetPostsByUserIdModule (ref), createGetThumbnailByAssetIdModule (ref), createRemoveReactionModule (ref)
 	return {
 		AddReaction = if fFlagContentFeedEnableReactions then createAddReactionModule(p0) else nil,

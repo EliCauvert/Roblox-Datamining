@@ -24,22 +24,22 @@ contactsListEntry.defaultProps = {
 	hasDivider = false
 }
 
-function contactsListEntry.init(p0) --[[ line: 60 ]]
+function contactsListEntry.init(p0)
 	-- upvalues: appPage (ref), constantsModule (ref)
 	p0:setState({ clicked = false, contactNameOffset = 0 })
 	
-	function p0.addButtonSizeChanged(p1) --[[ line: 66 ]]
+	function p0.addButtonSizeChanged(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ contactNameOffset = 0 - (p1.AbsoluteSize.X + 10) })
 	end
 	
-	function p0.requestContactFriendship() --[[ line: 72 ]]
+	function p0.requestContactFriendship()
 		-- upvalues: p0 (ref)
 		local props = p0.props
 		props.requestFriendship(props.contactId)
 	end
 	
-	function p0.openProfilePeekView() --[[ line: 77 ]]
+	function p0.openProfilePeekView()
 		-- upvalues: p0 (ref), appPage (copy), constantsModule (copy)
 		p0.props.navigateToProfile({
 			name = appPage.ProfilePlatform,
@@ -49,12 +49,12 @@ function contactsListEntry.init(p0) --[[ line: 60 ]]
 	end
 end
 
-function contactsListEntry.render(p2) --[[ line: 91 ]]
+function contactsListEntry.render(p2)
 	-- upvalues: withStyle (ref), roact (ref), loadableImage (ref), getFFlagContactsListEntryUpdatedTruncationFixModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), images (ref)
 	local props = p2.props
 	local var7 = not props.hasSentRequest
 	
-	return withStyle(function(p3) --[[ line: 95 ]]
+	return withStyle(function(p3)
 		-- upvalues: roact (copy), props (ref), p2 (ref), loadableImage (copy), getFFlagContactsListEntryUpdatedTruncationFixModule (copy), styledTextLabel (copy), var7 (ref), button (copy), buttonType (copy), images (copy)
 		return roact.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -86,7 +86,7 @@ function contactsListEntry.render(p2) --[[ line: 91 ]]
 							showFailedStateWhenLoadingFailed = true,
 							Size = UDim2.new(0, 64, 0, 64),
 							Image = props.headshotThumbnailUrl,
-							onLoaded = function() --[[ line: 126 ]] end
+							onLoaded = function() end
 						})
 					})
 				}),
@@ -141,7 +141,7 @@ function contactsListEntry.render(p2) --[[ line: 91 ]]
 					buttonType = buttonType.Secondary,
 					icon = images["icons/actions/friends/friendpending"],
 					size = UDim2.fromOffset(44, 36),
-					onActivated = function() --[[ line: 196 ]] end,
+					onActivated = function() end,
 					isDisabled = true,
 					layoutOrder = 4,
 					[roact.Change.AbsoluteSize] = if getFFlagContactsListEntryUpdatedTruncationFixModule() then p2.addButtonSizeChanged else nil
@@ -158,10 +158,10 @@ function contactsListEntry.render(p2) --[[ line: 91 ]]
 	end)
 end
 
-return roactRodux.connect(nil, function(p4) --[[ line: 218 | named "mapDispatchToProps" ]]
+return roactRodux.connect(nil, function(p4)
 	-- upvalues: fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref)
 	return {
-		navigateToProfile = function(p5) --[[ line: 220 ]]
+		navigateToProfile = function(p5)
 			-- upvalues: fFlagSignalsNavP3Dispatch (copy), var5 (copy), p4 (ref), navigateDown (copy)
 			if fFlagSignalsNavP3Dispatch then
 				var5.down(var5.fromLegacyPage(p5))

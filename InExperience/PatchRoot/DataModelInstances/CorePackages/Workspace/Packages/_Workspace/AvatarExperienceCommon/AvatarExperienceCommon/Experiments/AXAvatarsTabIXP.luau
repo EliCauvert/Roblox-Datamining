@@ -9,22 +9,22 @@ return IXPUtilsModule.defineIXPTest({
 	name = "AvatarExperience.UA.MarketplaceView.AvatarsTab",
 	recordExposure = false,
 	layer = appUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p0) --[[ line: 27 ]]
+	getIsUserInExperiment = function(p0)
 		return p0.IsAvatarsTabEnabled ~= nil
 	end,
-	getDependentFlagsEnabled = function() --[[ line: 31 ]]
+	getDependentFlagsEnabled = function()
 		return true
 	end,
-	getEnabledFlag = function() --[[ line: 35 ]]
+	getEnabledFlag = function()
 		-- upvalues: fFlagAXAvatarsTabIXP (ref)
 		return fFlagAXAvatarsTabIXP
 	end,
-	getEnabledForAllFlag = function() --[[ line: 39 ]]
+	getEnabledForAllFlag = function()
 		-- upvalues: fFlagAXAvatarsTabIXPEnabledForAll (ref)
 		return fFlagAXAvatarsTabIXPEnabledForAll
 	end,
 	variables = {
-		EnabledForUser = function(p1, p2) --[[ line: 44 ]]
+		EnabledForUser = function(p1, p2)
 			return p2 or (p1.IsAvatarsTabEnabled or false)
 		end
 	}

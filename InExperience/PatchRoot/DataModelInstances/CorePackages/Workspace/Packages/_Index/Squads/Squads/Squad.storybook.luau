@@ -17,19 +17,19 @@ local t = {
 }
 local t_1 = { language = "en-us" }
 
-local function useCreateOverlay(p0) --[[ line: 44 ]]
+local function useCreateOverlay(p0)
 	-- upvalues: reactModule (ref)
 	local var7 = reactModule.useRef(Instance.new("Frame"))
 	
 	if var7.current.Parent ~= p0.focus then
 		var7.current.Parent = p0.focus
 	end
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref)
 		var7.current.Size = UDim2.fromScale(1, 1)
 		var7.current.BackgroundTransparency = 1
 		
-		return function() --[[ line: 56 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			var7.current:Destroy()
 		end
@@ -42,13 +42,13 @@ return {
 	name = "Squads",
 	storyRoot = squads,
 	roact = roact,
-	mapDefinition = function(p1) --[[ line: 68 ]]
+	mapDefinition = function(p1)
 		-- upvalues: cryo (ref), t_1 (ref)
 		return cryo.Dictionary.join(p1, { controls = cryo.Dictionary.join(t_1, p1.controls or {}) })
 	end,
-	mapStory = function(p2) --[[ line: 72 ]]
+	mapStory = function(p2)
 		-- upvalues: useCreateOverlay (ref), t (ref), roact (ref), foundation (ref), appStyleProvider (ref), mockLocale (ref)
-		return function(p3) --[[ line: 73 ]]
+		return function(p3)
 			-- upvalues: useCreateOverlay (copy), t (copy), roact (copy), foundation (copy), appStyleProvider (copy), mockLocale (copy), p2 (ref)
 			local var8 = if p3 then t[p3.theme] else t.Default
 			

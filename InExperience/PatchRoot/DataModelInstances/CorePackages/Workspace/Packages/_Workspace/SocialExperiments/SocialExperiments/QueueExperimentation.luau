@@ -6,7 +6,7 @@ local forceEnableQueueAutoJoinNewServer2 = game:DefineFastFlag("ForceEnableQueue
 local forceEnableQueueJoinNewServerButton2 = game:DefineFastFlag("ForceEnableQueueJoinNewServerButton2", false)
 local placeJoinStateEnabled = game:DefineFastFlag("EnableQueueExperimentation2", false) and game:GetEngineFeature("PlaceJoinStateEnabled")
 
-local function _(p0) --[[ line: 17 | named "getIsUserInTreatment" ]]
+local function _(p0)
 	-- upvalues: experimentCacheManager (ref), fStringQueueExpLayer (ref)
 	local var6 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
 	
@@ -14,7 +14,7 @@ local function _(p0) --[[ line: 17 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getIsJoinNewServerButtonEnabled = function() --[[ line: 32 ]]
+	getIsJoinNewServerButtonEnabled = function()
 		-- upvalues: forceEnableQueueJoinNewServerButton2 (ref), placeJoinStateEnabled (ref), queueEnableJoinNewServerVariant (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
 		local var7 = forceEnableQueueJoinNewServerButton2
 		
@@ -33,7 +33,7 @@ return {
 		end
 		return var7
 	end,
-	getIsAutoJoinNewServerEnabled = function() --[[ line: 27 ]]
+	getIsAutoJoinNewServerEnabled = function()
 		-- upvalues: forceEnableQueueAutoJoinNewServer2 (ref), placeJoinStateEnabled (ref), queueEnableAutoJoinNewServerVariant (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
 		local var10 = forceEnableQueueAutoJoinNewServer2
 		
@@ -52,11 +52,11 @@ return {
 		end
 		return var10
 	end,
-	isInExperiment = function() --[[ line: 37 ]]
+	isInExperiment = function()
 		-- upvalues: placeJoinStateEnabled (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
 		return if placeJoinStateEnabled then experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer) ~= nil else false
 	end,
-	logExposure = function() --[[ line: 45 ]]
+	logExposure = function()
 		-- upvalues: placeJoinStateEnabled (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
 		if placeJoinStateEnabled and experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(fStringQueueExpLayer)

@@ -12,9 +12,9 @@ local fFlagEnableUnifiedProductPurchaseFlow = require(parent_1.SharedFlags).FFla
 local getAppFeaturePolicies = require(parent_1.UniversalAppPolicy).getAppFeaturePolicies
 local list = { externalSettingsModule, platformInterfaceModule }
 
-return function(p0) --[[ line: 23 | named "openTermsOfUse" ]]
+return function(p0)
 	-- upvalues: thunkModule (ref), list (ref), externalSettingsModule (ref), platformInterfaceModule (ref), getUpsellFlowModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), getAppFeaturePolicies (ref), appContextModule (ref), appPage (ref), termsOfUse (ref), upsellFlowModule (ref)
-	return thunkModule.new(script.Name, list, function(_, p1) --[[ line: 24 ]]
+	return thunkModule.new(script.Name, list, function(_, p1)
 		-- upvalues: externalSettingsModule (copy), platformInterfaceModule (copy), getUpsellFlowModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), getAppFeaturePolicies (copy), appContextModule (copy), p0 (ref), appPage (copy), termsOfUse (copy), upsellFlowModule (copy)
 		local var7 = p1[platformInterfaceModule]
 		local var8 = getUpsellFlowModule(p1[externalSettingsModule].getPlatform())

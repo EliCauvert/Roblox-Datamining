@@ -1,6 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: httpService (ref)
 	local var1 = if type(p0) == "table" then p0.StatusCode else nil
 	local code = nil

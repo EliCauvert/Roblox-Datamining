@@ -23,10 +23,10 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local inputHandlersModule = require(parent.InputHandlers)
 local t = {
-	Success = function() --[[ line: 42 ]]
+	Success = function()
 		return { visible = false, isLoading = false, warningTextKey = nil }
 	end,
-	Moderated = function() --[[ line: 51 ]]
+	Moderated = function()
 		-- upvalues: getFFlagIsSquadEnabled (ref)
 		return {
 			visible = true,
@@ -34,7 +34,7 @@ local t = {
 			warningTextKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Response.ChatNameFullyModerated.V2" else "Feature.Chat.Response.ChatNameFullyModerated"
 		}
 	end,
-	Default = function(p0, p1) --[[ line: 60 ]]
+	Default = function(p0, p1)
 		-- upvalues: getFFlagIsSquadEnabled (ref)
 		return {
 			visible = true,
@@ -46,28 +46,28 @@ local t = {
 			}
 		}
 	end,
-	Waiting = function() --[[ line: 73 ]]
+	Waiting = function()
 		return { visible = true, isLoading = true }
 	end
 }
 local t_1 = {
 	cancelTitleKey = "Feature.Chat.Action.Cancel",
 	confirmationTitleKey = "Feature.Chat.Action.Save",
-	onModalClose = function() --[[ line: 92 ]] end,
+	onModalClose = function() end,
 	titleKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Label.GroupName" else "Feature.Chat.Label.ChatGroupName",
 	placeholderTextKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Description.NameGroup" else "Feature.Chat.Description.NameGroupChat"
 }
 
-function EditChatGroupNameDialogContainer(p2) --[[ line: 103 ]]
+function EditChatGroupNameDialogContainer(p2)
 	-- upvalues: cryoModule (ref), t_1 (ref), useState (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), loggerModule (ref), t (ref), responseStatus (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useLocalization (ref), responseIndicator (ref), editChatGroupNameDialogModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var11 = cryoModule.Dictionary.join(t_1, p2)
 	local var12, var13 = useState({ visible = true, isLoading = false })
 	local var14 = useDispatch()
-	local var15 = useCallback(function(p3, p4) --[[ line: 111 ]]
+	local var15 = useCallback(function(p3, p4)
 		-- upvalues: var14 (ref), appChatNetworkingModule (copy)
 		return var14(appChatNetworkingModule.rodux.UpdateConversationTitle.API(p3, p4))
 	end, { var14 })
-	local var16 = useSelector(function(p5) --[[ line: 115 ]]
+	local var16 = useSelector(function(p5)
 		-- upvalues: var11 (ref)
 		local conversationId = p5.ChatAppReducer.Conversations[var11.conversationId]
 		
@@ -79,11 +79,11 @@ function EditChatGroupNameDialogContainer(p2) --[[ line: 103 ]]
 		isAutoFocusRoot = true,
 		isFocusable = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		customEventHandlers = reactModule.useMemo(function() --[[ line: 165 ]]
+		customEventHandlers = reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var11 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p6) --[[ line: 169 ]]
+					handler = inputHandlersModule.onRelease(function(p6)
 						-- upvalues: var11 (copy)
 						var11.onModalClose()
 						p6:cancel()
@@ -103,11 +103,11 @@ function EditChatGroupNameDialogContainer(p2) --[[ line: 103 ]]
 			confirmText = var11.confirmationTitleKey,
 			warningText = var12.warningTextKey
 		}), {
-			onActivated = useCallback(function(p7) --[[ line: 130 ]]
+			onActivated = useCallback(function(p7)
 				-- upvalues: var11 (ref), var13 (ref), var15 (ref), loggerModule (copy), t (copy), var16 (ref), responseStatus (copy), getFFlagIsSquadEnabled (copy)
 				if var11.conversationId then
 					var13({ visible = true, isLoading = true })
-					var15(var11.conversationId, p7.InputBox):andThen(function(p8) --[[ line: 134 ]]
+					var15(var11.conversationId, p7.InputBox):andThen(function(p8)
 						-- upvalues: loggerModule (copy), var13 (copy), t (copy), var16 (copy), p7 (ref), responseStatus (copy), var11 (copy), getFFlagIsSquadEnabled (copy)
 						if not p8 or not p8.responseBody or (not p8.responseBody.conversations or not p8.responseBody.conversations[1]) then
 							loggerModule.error("Conversation rename response is invalid.")
@@ -131,7 +131,7 @@ function EditChatGroupNameDialogContainer(p2) --[[ line: 103 ]]
 						end
 						loggerModule.error("Conversation rename request failed.")
 						var13(t.Default(var16, p7.InputBox))
-					end):catch(function(_) --[[ line: 157 ]]
+					end):catch(function(_)
 						-- upvalues: var13 (copy), t (copy), var16 (copy), p7 (ref)
 						var13(t.Default(var16, p7.InputBox))
 					end)

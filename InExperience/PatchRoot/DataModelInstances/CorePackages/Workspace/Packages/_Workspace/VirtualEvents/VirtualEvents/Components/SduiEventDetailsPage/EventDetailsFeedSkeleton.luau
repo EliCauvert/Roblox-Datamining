@@ -8,7 +8,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local eventDetailsActionBarSkeletonModule = require(script.Parent.EventDetailsActionBarSkeleton)
 local fFlagLuaAppSduiEventDetailsActionBarInFeed = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsActionBarInFeed
 
-return reactModule.memo(function() --[[ line: 19 | named "EventDetailsFeedSkeleton" ]]
+return reactModule.memo(function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), fFlagLuaAppSduiEventDetailsActionBarInFeed (ref), eventDetailsActionBarSkeletonModule (ref)
 	local var3 = useTokens()
 	local size1400 = var3.Size.Size_1400

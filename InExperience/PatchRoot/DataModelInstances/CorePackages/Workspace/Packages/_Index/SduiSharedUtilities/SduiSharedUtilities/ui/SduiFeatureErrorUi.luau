@@ -8,7 +8,7 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0) --[[ line: 17 | named "SduiFeatureErrorUi" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), text (ref), button (ref), buttonSize (ref), buttonVariant (ref)
 	local var2 = useLocalization({
 		errorMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",

@@ -10,12 +10,12 @@ local userPresence = foundationModule.Enums.UserPresence
 local presenceType = dataHydrationModule.Presence.PresenceEnums.PresenceType
 local var7 = dataHydrationModule.Presence.PresenceStore.get()
 
-local function _(p0) --[[ line: 33 | named "toUserPresence" ]]
+local function _(p0)
 	-- upvalues: presenceType (ref), userPresence (ref)
 	return if p0 == presenceType.InGame then userPresence.InExperience elseif p0 == presenceType.InStudio or p0 == presenceType.Online then userPresence.Active else userPresence.None
 end
 
-local function aggregateGroupPresence(p1, p2) --[[ line: 50 ]]
+local function aggregateGroupPresence(p1, p2)
 	-- upvalues: var7 (ref), presenceType (ref), userPresence (ref)
 	local var9 = false
 	local var10 = false
@@ -36,14 +36,14 @@ local function aggregateGroupPresence(p1, p2) --[[ line: 50 ]]
 	return if var9 then userPresence.InExperience elseif var10 then userPresence.Active else userPresence.None
 end
 
-return function(p3) --[[ line: 74 | named "useFacePilePresence" ]]
+return function(p3)
 	-- upvalues: fFlagFriendsChatFacePileGroupPresenceModule (ref), reactModule (ref), signalsModule (ref), aggregateGroupPresence (ref), userPresence (ref), var7 (ref), presenceType (ref), signalsReactModule (ref)
 	local var12 = p3[1]
 	local var13 = fFlagFriendsChatFacePileGroupPresenceModule and #p3 >= 2
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 91 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var13 (ref), aggregateGroupPresence (copy), p3 (ref), var12 (ref), userPresence (copy), var7 (copy), presenceType (copy)
-		return signalsModule.createComputed(function(p4) --[[ line: 92 ]]
+		return signalsModule.createComputed(function(p4)
 			-- upvalues: var13 (copy), aggregateGroupPresence (copy), p3 (copy), var12 (copy), userPresence (copy), var7 (copy), presenceType (copy)
 			if var13 then
 				return aggregateGroupPresence(p3, p4)

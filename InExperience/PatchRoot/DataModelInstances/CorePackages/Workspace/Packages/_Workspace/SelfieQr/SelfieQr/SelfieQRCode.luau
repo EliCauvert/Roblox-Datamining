@@ -30,7 +30,7 @@ local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
 }
 
-local function SelfieQRCodeView(p0) --[[ line: 60 ]]
+local function SelfieQRCodeView(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), enableTimeoutUI (ref), adoptStyleTokens (ref), displayQRCode (ref), QRCodeDisplayModule (ref), image (ref)
 	local var19 = useTokens()
 	
@@ -86,11 +86,11 @@ local function SelfieQRCodeView(p0) --[[ line: 60 ]]
 	})
 end
 
-local function getJobStatus(p1, p2) --[[ line: 133 ]]
+local function getJobStatus(p1, p2)
 	-- upvalues: debugAvatarGenerationStaticApiKey (ref), promiseModule (ref)
 	return p1(p2, "GET", {
 		headers = { ["X-Static-Api-Key"] = debugAvatarGenerationStaticApiKey }
-	}):andThen(function(p3) --[[ line: 135 ]]
+	}):andThen(function(p3)
 		-- upvalues: promiseModule (copy)
 		local responseBody = p3.responseBody
 		
@@ -98,7 +98,7 @@ local function getJobStatus(p1, p2) --[[ line: 133 ]]
 	end)
 end
 
-return function(p4) --[[ line: 146 ]]
+return function(p4)
 	-- upvalues: reactModule (ref), responsiveModule (ref), useRoactService (ref), roactNetworking (ref), useTokens (ref), useLocalization (ref), selfieQrTimeoutSeconds (ref), enableTimeoutUI (ref), avatarCreationService (ref), getJobStatus (ref), url (ref), dialogSize (ref), consoleCloseAffordanceFix (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), adoptStyleTokens (ref), allowQrEnlargeUniversally (ref), SelfieQRCodeView (ref), dialog (ref), icon (ref), foundationModule (ref)
 	local var20, var21 = reactModule.useState(false)
 	local var22 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
@@ -129,17 +129,17 @@ return function(p4) --[[ line: 146 ]]
 		}
 	})
 	
-	local function _() --[[ line: 178 | named "handleError" ]]
+	local function _()
 		-- upvalues: var26 (ref), var21 (ref), var24 (ref)
 		var26(true)
 		var21(false)
 		var24(false)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 185 ]]
+	reactModule.useEffect(function()
 		-- upvalues: selfieQrTimeoutSeconds (copy), enableTimeoutUI (copy), var26 (ref), var21 (ref), var24 (ref), p4 (ref), avatarCreationService (copy), getJobStatus (copy), var27 (ref), url (copy)
 		local var32 = nil
-		local delayedThread = task.delay(selfieQrTimeoutSeconds, function() --[[ line: 187 ]]
+		local delayedThread = task.delay(selfieQrTimeoutSeconds, function()
 			-- upvalues: enableTimeoutUI (copy), var26 (copy), var21 (copy), var24 (copy), p4 (copy), avatarCreationService (copy)
 			if enableTimeoutUI then
 				var26(true)
@@ -152,9 +152,9 @@ return function(p4) --[[ line: 146 ]]
 			avatarCreationService:HandleSelfieQRResult(false, "job not completed within time limit")
 		end)
 		
-		local function poll(p5) --[[ line: 196 ]]
+		local function poll(p5)
 			-- upvalues: getJobStatus (copy), var27 (copy), p4 (copy), avatarCreationService (copy), enableTimeoutUI (copy), var26 (copy), var21 (copy), var24 (copy), var32 (write), poll (ref)
-			getJobStatus(var27, p5):andThen(function(p6) --[[ line: 198 ]]
+			getJobStatus(var27, p5):andThen(function(p6)
 				-- upvalues: p4 (copy), avatarCreationService (copy), enableTimeoutUI (copy), var26 (copy), var21 (copy), var24 (copy), var32 (copy), poll (copy), p5 (ref)
 				if p6.status == "done" then
 					local var35 = p6.fileIds and p6.fileIds[1]
@@ -163,7 +163,7 @@ return function(p4) --[[ line: 146 ]]
 					
 					return
 				elseif p6.status ~= "cancelled" and p6.status ~= "error" then
-					var32 = task.delay(1, function() --[[ line: 211 ]]
+					var32 = task.delay(1, function()
 						-- upvalues: poll (copy), p5 (copy)
 						poll(p5)
 					end)
@@ -178,7 +178,7 @@ return function(p4) --[[ line: 146 ]]
 				end
 				p4.displaySelfieQRCode(false)
 				avatarCreationService:HandleSelfieQRResult(false, "job polling failed")
-			end):catch(function(_) --[[ line: 216 ]]
+			end):catch(function(_)
 				-- upvalues: enableTimeoutUI (copy), var26 (copy), var21 (copy), var24 (copy), p4 (copy), avatarCreationService (copy)
 				if enableTimeoutUI then
 					var26(true)
@@ -194,7 +194,7 @@ return function(p4) --[[ line: 146 ]]
 		
 		poll(string.format("%sml-runtime-gateway/v0.2/jobs/%s", url.APIS_URL, p4.jobId))
 		
-		return function() --[[ line: 229 ]]
+		return function()
 			-- upvalues: var32 (write), delayedThread (ref)
 			if var32 then
 				task.cancel(var32)
@@ -207,7 +207,7 @@ return function(p4) --[[ line: 146 ]]
 	local t_1 = { ZIndex = 2, size = dialogSize.Medium }
 	
 	if not var22 then
-		function t_1.onClose(_) --[[ line: 245 ]]
+		function t_1.onClose(_)
 			-- upvalues: p4 (ref), enableTimeoutUI (copy), avatarCreationService (copy)
 			p4.displaySelfieQRCode(false)
 			
@@ -219,7 +219,7 @@ return function(p4) --[[ line: 146 ]]
 			avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
 		end
 	end
-	local var31 = if consoleCloseAffordanceFix then reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(function(p7) --[[ line: 259 ]]
+	local var31 = if consoleCloseAffordanceFix then reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(function(p7)
 		-- upvalues: var20 (ref), var21 (ref), p4 (ref), enableTimeoutUI (copy), avatarCreationService (copy)
 		local eventData = p7.eventData
 		
@@ -254,7 +254,7 @@ return function(p4) --[[ line: 146 ]]
 			BackgroundTransparency = if adoptStyleTokens then var28.Color.ActionUtility.Background.Transparency else 1,
 			Text = "",
 			ZIndex = if not consoleCloseAffordanceFix then 5 else nil,
-			[reactModule.Event.Activated] = if allowQrEnlargeUniversally and not var22 or not consoleCloseAffordanceFix then function() --[[ line: 311 ]]
+			[reactModule.Event.Activated] = if allowQrEnlargeUniversally and not var22 or not consoleCloseAffordanceFix then function()
 				-- upvalues: var21 (ref)
 				var21(false)
 			end else nil
@@ -277,7 +277,7 @@ return function(p4) --[[ line: 146 ]]
 			BackgroundTransparency = if adoptStyleTokens then var28.Color.ActionUtility.Background.Transparency else 1,
 			Text = "",
 			ZIndex = 1,
-			[reactModule.Event.Activated] = function() --[[ line: 344 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p4 (ref), avatarCreationService (copy)
 				p4.displaySelfieQRCode(false)
 				avatarCreationService:HandleSelfieQRResult(false, "QR code closed before job completed")
@@ -310,18 +310,18 @@ return function(p4) --[[ line: 146 ]]
 						Size = UDim2.new(0.65, 0, 0, 0),
 						BackgroundTransparency = if adoptStyleTokens then var28.Color.ActionUtility.Background.Transparency else 1,
 						AutoButtonColor = false,
-						[reactModule.Event.MouseEnter] = function() --[[ line: 386 ]]
+						[reactModule.Event.MouseEnter] = function()
 							-- upvalues: enableTimeoutUI (copy), var25 (ref), allowQrEnlargeUniversally (copy), var22 (ref), var24 (ref)
 							if enableTimeoutUI and var25 then return end
 							if allowQrEnlargeUniversally or var22 then
 								var24(true)
 							end
 						end,
-						[reactModule.Event.MouseLeave] = function() --[[ line: 394 ]]
+						[reactModule.Event.MouseLeave] = function()
 							-- upvalues: var24 (ref)
 							var24(false)
 						end,
-						[reactModule.Event.Activated] = function() --[[ line: 397 ]]
+						[reactModule.Event.Activated] = function()
 							-- upvalues: enableTimeoutUI (copy), var25 (ref), allowQrEnlargeUniversally (copy), var22 (ref), var21 (ref), var24 (ref)
 							if enableTimeoutUI and var25 then return end
 							if allowQrEnlargeUniversally or var22 then

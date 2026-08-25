@@ -2,7 +2,7 @@
 local _ = require(viewRecyclerRoblox.Parent.ViewRecycler)
 local slotGeometryModule = require(viewRecyclerRoblox.RobloxAdapter.SlotGeometry)
 local t = {
-	createState = function() --[[ line: 26 ]]
+	createState = function()
 		return {
 			unpinnedZIndex = nil,
 			parent = nil,
@@ -14,7 +14,7 @@ local t = {
 			zIndex = nil
 		}
 	end,
-	getGeometry = function(p0, p1, p2, p3, p4, p5) --[[ line: 48 ]]
+	getGeometry = function(p0, p1, p2, p3, p4, p5)
 		-- upvalues: slotGeometryModule (ref)
 		if p1.mainAxisOffset ~= nil then
 			p0 = {
@@ -32,7 +32,7 @@ local t = {
 		
 		return p5
 	end,
-	place = function(p6, p7, p8, p9, p10) --[[ line: 72 ]]
+	place = function(p6, p7, p8, p9, p10)
 		local var6 = 0
 		
 		if p6.Parent ~= p7 or p9.parent ~= p7 then
@@ -98,13 +98,13 @@ local t = {
 			return var6
 		end
 	end,
-	hide = function(p11, p12) --[[ line: 135 ]]
+	hide = function(p11, p12)
 		if p12.visible ~= false then
 			p11.Visible = false
 			p12.visible = false
 		end
 	end,
-	detach = function(p13, p14) --[[ line: 142 ]]
+	detach = function(p13, p14)
 		local var7 = 0
 		
 		if p14.unpinnedZIndex ~= nil then
@@ -134,7 +134,7 @@ local t = {
 	end
 }
 
-local function _(value) --[[ line: 39 | named "resetAppliedState" ]]
+local function _(value)
 	value.anchorPointInitialized = false
 	value.position = nil
 	value.size = nil
@@ -143,7 +143,7 @@ local function _(value) --[[ line: 39 | named "resetAppliedState" ]]
 	value.zIndex = nil
 end
 
-function t.detachForTransfer(p15, p16) --[[ line: 164 ]]
+function t.detachForTransfer(p15, p16)
 	-- upvalues: t (ref)
 	local var8 = t.detach(p15, p16)
 	

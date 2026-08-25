@@ -13,9 +13,9 @@ local var7 = httpRequestModule.config({
 	maxRetryCount = platformLeaderboardFetcherHttpRetryCount
 })
 
-local function get(p0) --[[ line: 30 ]]
+local function get(p0)
 	-- upvalues: var7 (ref), fFlagPlatformLeaderboardDebugLogging (ref), httpService (ref)
-	local ok, status, var14 = pcall(function() --[[ line: 31 ]]
+	local ok, status, var14 = pcall(function()
 		-- upvalues: var7 (copy), p0 (ref)
 		return var7(p0, "GET"):await()
 	end)
@@ -45,7 +45,7 @@ local function get(p0) --[[ line: 30 ]]
 	return false, nil
 end
 
-local function formatEntry(p1) --[[ line: 61 ]]
+local function formatEntry(p1)
 	-- upvalues: platformLeaderboardDisplayNameEnabled (ref)
 	if typeof(p1) ~= "table" then
 		return nil
@@ -72,7 +72,7 @@ local function formatEntry(p1) --[[ line: 61 ]]
 	}
 end
 
-local function formatEntries(p2) --[[ line: 92 ]]
+local function formatEntries(p2)
 	-- upvalues: formatEntry (ref)
 	local t = {}
 	
@@ -86,7 +86,7 @@ local function formatEntries(p2) --[[ line: 92 ]]
 	return t
 end
 
-local function formatConfig(p3) --[[ line: 103 ]]
+local function formatConfig(p3)
 	if p3 == nil or p3.leaderboardId == nil then
 		return nil
 	end
@@ -104,7 +104,7 @@ local function formatConfig(p3) --[[ line: 103 ]]
 end
 
 local t = {
-	fetchConfig = function() --[[ line: 120 ]]
+	fetchConfig = function()
 		-- upvalues: var3 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatConfig (ref)
 		local var20, var21 = get(`{var3}/config`)
 		
@@ -126,7 +126,7 @@ local t = {
 	end
 }
 
-local function fetchLeaderboard(_, p4, p5, p6) --[[ line: 143 ]]
+local function fetchLeaderboard(_, p4, p5, p6)
 	-- upvalues: platformLeaderboardFetcherDefaultCount (ref), leaderboardType (ref), var3 (ref), fFlagPlatformLeaderboardDebugLogging (ref), get (ref), formatConfig (ref), formatEntries (ref)
 	p6 = p6 or platformLeaderboardFetcherDefaultCount
 	local var23 = nil
@@ -168,17 +168,17 @@ local function fetchLeaderboard(_, p4, p5, p6) --[[ line: 143 ]]
 	return false, nil
 end
 
-function t.fetchGlobalLeaderboard(p7, p8) --[[ line: 192 ]]
+function t.fetchGlobalLeaderboard(p7, p8)
 	-- upvalues: fetchLeaderboard (ref), leaderboardType (ref)
 	return fetchLeaderboard(p7, leaderboardType.Global, nil, p8)
 end
 
-function t.fetchFriendsLeaderboard(p9, p10, p11) --[[ line: 199 ]]
+function t.fetchFriendsLeaderboard(p9, p10, p11)
 	-- upvalues: fetchLeaderboard (ref), leaderboardType (ref)
 	return fetchLeaderboard(p9, leaderboardType.Friends, p10, p11)
 end
 
-function t.fetchUserScore(_, p12) --[[ line: 207 ]]
+function t.fetchUserScore(_, p12)
 	-- upvalues: var3 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatEntry (ref)
 	local var26, var27 = get(`{var3}/{p12}/score`)
 	

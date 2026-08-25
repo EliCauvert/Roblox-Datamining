@@ -14,10 +14,10 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 27 | named "createFriendshipEventListener" ]]
+return function(p0)
 	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var3 (ref), t (ref), trustedConnectionStatusModule (ref)
 	local var6 = getLocalPlayerUserId()
-	local var7 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ line: 32 ]]
+	local var7 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: getLocalPlayerUserId (copy), var6 (write)
 		local var9 = getLocalPlayerUserId()
 		
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 27 | named "createFriendshipEventListener" ]]
 			var6 = var9
 		end
 	end)
-	local namespace = var3:observeEvent(t.Namespace, function(p1) --[[ line: 41 ]]
+	local namespace = var3:observeEvent(t.Namespace, function(p1)
 		-- upvalues: var6 (write), t (copy), p0 (ref), trustedConnectionStatusModule (copy)
 		if not p1.EventArgs or not p1.EventArgs.UserId1 or (not p1.EventArgs.UserId2 or not var6) then return end
 		local userId2 = tostring(var6) == tostring(p1.EventArgs.UserId1) and tostring(p1.EventArgs.UserId2) or tostring(p1.EventArgs.UserId1)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 27 | named "createFriendshipEventListener" ]]
 		end
 	end)
 	
-	return function() --[[ line: 66 ]]
+	return function()
 		-- upvalues: var7 (write), namespace (write)
 		if var7 then
 			var7:Disconnect()

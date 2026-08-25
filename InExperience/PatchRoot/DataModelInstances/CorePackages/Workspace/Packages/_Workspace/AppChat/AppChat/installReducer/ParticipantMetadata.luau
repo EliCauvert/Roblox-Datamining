@@ -3,7 +3,7 @@ local parent = appChat.Parent
 local cryoModule = require(parent.Cryo)
 
 return require(parent.Rodux).createReducer({}, {
-	[require(parent.AppChatNetworking).rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p0, p1) --[[ line: 24 ]]
+	[require(parent.AppChatNetworking).rodux.GetConversationsParticipantsMetadata.Succeeded.name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		for i, v in p1.responseBody.conversation_participants_metadata do
 			local t = {}
@@ -20,7 +20,7 @@ return require(parent.Rodux).createReducer({}, {
 		end
 		return p0
 	end,
-	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3) --[[ line: 46 ]]
+	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		local conversationId = p3.conversationId
 		

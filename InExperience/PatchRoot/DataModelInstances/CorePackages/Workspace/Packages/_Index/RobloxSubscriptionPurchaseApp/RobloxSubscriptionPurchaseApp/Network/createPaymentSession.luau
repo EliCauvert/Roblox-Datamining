@@ -14,7 +14,7 @@ local fFlagSubscriptionUpsellCounterWithErrorReasonModule = require(robloxSubscr
 local httpService = game:GetService("HttpService")
 local text = url.APIS_URL .. "payments-gateway/v1/payment-sessions"
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: surfaceContextModule (ref), surfaceNameModule (ref), httpRequestModule (ref), text (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), fFlagSubscriptionUpsellCounterWithErrorReasonModule (ref), logRobloxSubscriptionUpsellTelemetryEventModule (ref), httpService (ref), promiseModule (ref)
 	p0 = p0 or {
 		context = surfaceContextModule.Unspecified,
@@ -27,12 +27,12 @@ return function(p0) --[[ line: 25 ]]
 	if universeId ~= nil then
 		t.universeId = universeId
 	end
-	return httpRequestModule.new():post(text, t):andThen(function(p2) --[[ line: 44 ]]
+	return httpRequestModule.new():post(text, t):andThen(function(p2)
 		local paymentSession = p2.paymentSession
 		local id = paymentSession and paymentSession.id
 		
 		return if type(id) == "string" then id else ""
-	end):catch(function(p1) --[[ line: 50 ]]
+	end):catch(function(p1)
 		-- upvalues: logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy), fFlagSubscriptionUpsellCounterWithErrorReasonModule (copy), logRobloxSubscriptionUpsellTelemetryEventModule (copy), httpService (copy), promiseModule (copy)
 		logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionCreatePaymentSessionFailedCounter)
 		

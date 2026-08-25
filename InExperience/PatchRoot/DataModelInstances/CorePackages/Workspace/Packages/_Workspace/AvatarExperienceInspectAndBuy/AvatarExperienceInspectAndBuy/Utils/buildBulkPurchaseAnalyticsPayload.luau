@@ -8,7 +8,7 @@ local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPric
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
 
-return function(p0) --[[ line: 47 | named "buildBulkPurchaseAnalyticsPayload" ]]
+return function(p0)
 	-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), getPriceStatusModule (ref), getPriceInRobux (ref), convertBundleInfoToItemDataModule (ref)
 	local var6, assetTypeId
 	local itemId = p0.itemId

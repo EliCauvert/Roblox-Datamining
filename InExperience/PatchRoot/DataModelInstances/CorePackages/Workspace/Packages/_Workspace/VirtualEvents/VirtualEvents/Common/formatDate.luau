@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "formatDate" ]]
+﻿return function(p0, p1)
 	local _ = nil
 	local var0 = if DateTime.now():ToLocalTime().Year < p0:ToLocalTime().Year then "ll" else "ddd, MMM DD"
 	

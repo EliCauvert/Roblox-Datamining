@@ -63,11 +63,11 @@ textButton.defaultProps = {
 	debugGetTextSize = getTextSizeModule
 }
 
-function textButton.init(p0) --[[ line: 107 ]]
+function textButton.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.onStateChanged(p1, p2) --[[ line: 112 ]]
+	function p0.onStateChanged(p1, p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p2 })
 		
@@ -77,15 +77,15 @@ function textButton.init(p0) --[[ line: 107 ]]
 	end
 end
 
-function textButton.render(p3) --[[ line: 122 ]]
+function textButton.render(p3)
 	-- upvalues: withStyleModule (ref)
-	return withStyleModule(function(p4) --[[ line: 123 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: p3 (ref)
 		return p3:renderWithProviders(p4, nil, nil)
 	end)
 end
 
-function textButton.renderWithProviders(p5, p6, p7, p8) --[[ line: 128 ]]
+function textButton.renderWithProviders(p5, p6, p7, p8)
 	-- upvalues: controlStateModule (ref), getContentStyleModule (ref), cleanRichTextTagsModule (ref), roactModule (ref), interactableModule (ref), reactModule (ref), uDim (ref), cursorKindModule (ref), genericTextLabelModule (ref)
 	local debugControlState = p5.props.debugControlState or p5.state.controlState
 	local var21 = getContentStyleModule({
@@ -137,7 +137,7 @@ function textButton.renderWithProviders(p5, p6, p7, p8) --[[ line: 128 ]]
 	})
 end
 
-local function TextButtonFunctionalWrapper(p9) --[[ line: 203 ]]
+local function TextButtonFunctionalWrapper(p9)
 	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), textButton (ref), cryoModule (ref)
 	return roactModule.createElement(textButton, cryoModule.Dictionary.join(p9, { cursor = useCursorModule(uDim) }))
 end
@@ -145,7 +145,7 @@ end
 local textButtonOuterWrapper = roactModule.PureComponent:extend("TextButtonOuterWrapper")
 textButtonOuterWrapper.validateProps = textButton.validateProps
 
-function textButtonOuterWrapper.render(p10) --[[ line: 217 ]]
+function textButtonOuterWrapper.render(p10)
 	-- upvalues: roactModule (ref), TextButtonFunctionalWrapper (ref)
 	return roactModule.createElement(TextButtonFunctionalWrapper, p10.props)
 end

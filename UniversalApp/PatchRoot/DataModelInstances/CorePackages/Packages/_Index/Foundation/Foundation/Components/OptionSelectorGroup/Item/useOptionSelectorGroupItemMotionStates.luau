@@ -5,7 +5,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local motionModule = require(parent.Motion)
 local transitionPreset = motionModule.TransitionPreset
 
-return function(p0, p1) --[[ line: 27 | named "useOptionSelectorGroupItemMotionStates" ]]
+return function(p0, p1)
 	-- upvalues: useTokensModule (ref), motionModule (ref), transitionPreset (ref)
 	local var3 = useTokensModule()
 	

@@ -28,18 +28,18 @@ chatMessageContainer.defaultProps = {
 	messageModeratedNoticeText = "PLACEHOLDER Your message was moderated and not sent.",
 	unknownUserText = "PLACEHOLDER unknown user",
 	Font = Enum.Font.Gotham,
-	openViewProfile = function() --[[ line: 41 ]]
+	openViewProfile = function()
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("openViewProfile was not passed to ChatMessage")
 	end,
-	renderMessage = function() --[[ line: 44 ]]
+	renderMessage = function()
 		-- upvalues: loggerModule (ref)
 		loggerModule:warning("renderMessage was not passed to ChatMessage")
 	end
 }
 
-function chatMessageContainer.init(p0) --[[ line: 56 ]]
-	function p0.onAvatarActivated() --[[ line: 57 ]]
+function chatMessageContainer.init(p0)
+	function p0.onAvatarActivated()
 		-- upvalues: p0 (ref)
 		if p0.props.viewProfileOnAvatarPressed then
 			p0.props.openViewProfile(p0.props.senderUserId)
@@ -47,9 +47,9 @@ function chatMessageContainer.init(p0) --[[ line: 56 ]]
 	end
 end
 
-function chatMessageContainer.render(p1) --[[ line: 64 ]]
+function chatMessageContainer.render(p1)
 	-- upvalues: withStyle (ref), roactModule (ref), roactFitComponents (ref), systemMessageModule (ref), avatarCircle (ref), noticeTextModule (ref)
-	return withStyle(function(p2) --[[ line: 65 ]]
+	return withStyle(function(p2)
 		-- upvalues: p1 (ref), roactModule (copy), roactFitComponents (copy), systemMessageModule (copy), avatarCircle (copy), noticeTextModule (copy)
 		local imageLabel
 		local var6 = if not p1.props.showDateTime then (if p1.props.isNewSender then 10 else 2) + p1.props.messageTypePaddingOffset else 0

@@ -24,7 +24,7 @@ local isNillish = isNillishModule.isNillish
 local isNotNillish = isNillishModule.isNotNillish
 local var5 = nil
 
-local function astFromValue(p0, p1) --[[ line: 70 ]]
+local function astFromValue(p0, p1)
 	-- upvalues: isNonNullType (ref), astFromValue (ref), nullModule (ref), kind (ref), isListType (ref), isIteratableObject (ref), isNotNillish (ref), isInputObjectType (ref), isObjectLike (ref), isLeafType (ref), isNillish (ref), number (ref), var5 (write), isEnumType (ref), graphQLID (ref), error (ref), inspect (ref), invariant (ref)
 	if isNonNullType(p1) then
 		local var7 = astFromValue(p0, p1.ofType)

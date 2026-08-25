@@ -4,7 +4,7 @@ local controlStateModule = require(parent.Enum.ControlState)
 local controlStateEventModule = require(parent.Enum.ControlStateEvent)
 local stateTableModule = require(parent_1.StateTable.StateTable)
 
-return function(p0) --[[ line: 17 | named "createGuiControlStateTable" ]]
+return function(p0)
 	-- upvalues: stateTableModule (ref), controlStateModule (ref), controlStateEventModule (ref)
 	local _ = nil
 	local guiStateTable = stateTableModule.new("GuiStateTable", controlStateModule.Initialize, {}, {

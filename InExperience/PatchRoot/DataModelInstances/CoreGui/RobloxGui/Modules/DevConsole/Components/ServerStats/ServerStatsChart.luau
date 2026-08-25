@@ -18,24 +18,24 @@ local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
 local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 local serverStats = roactModule.Component:extend("ServerStats")
 
-local function formatData(p0) --[[ line: 29 ]]
+local function formatData(p0)
 	return string.format("%.3f", p0)
 end
 
-local function getX(p1) --[[ line: 32 ]]
+local function getX(p1)
 	return p1.time
 end
 
-local function getY(p2) --[[ line: 36 ]]
+local function getY(p2)
 	return p2.value
 end
 
-function serverStats.init(p3) --[[ line: 40 ]]
+function serverStats.init(p3)
 	local currentData = p3.props.ServerStatsData:getCurrentData()
 	
-	function p3.getOnButtonPress(p4) --[[ line: 43 ]]
+	function p3.getOnButtonPress(p4)
 		-- upvalues: p3 (ref)
-		return function(_, _) --[[ line: 44 ]]
+		return function(_, _)
 			-- upvalues: p3 (copy), p4 (ref)
 			p3:setState({ expandedEntry = p3.state.expandedEntry ~= p4 and p4 })
 		end
@@ -44,19 +44,19 @@ function serverStats.init(p3) --[[ line: 40 ]]
 	p3.state = { serverStatsData = currentData }
 end
 
-function serverStats.didMount(p5) --[[ line: 56 ]]
-	p5.statsConnector = p5.props.ServerStatsData:Signal():Connect(function(p6) --[[ line: 57 ]]
+function serverStats.didMount(p5)
+	p5.statsConnector = p5.props.ServerStatsData:Signal():Connect(function(p6)
 		-- upvalues: p5 (ref)
 		p5:setState({ serverStatsData = p6 })
 	end)
 end
 
-function serverStats.willUnmount(p7) --[[ line: 64 ]]
+function serverStats.willUnmount(p7)
 	p7.statsConnector:Disconnect()
 	p7.statsConnector = nil
 end
 
-function serverStats.render(p8) --[[ line: 69 ]]
+function serverStats.render(p8)
 	-- upvalues: entryFrameHeight (ref), lineGraphHeight (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), valueCellWidth (ref), cellPadding (ref), expandArrowPadding (ref), lineWidth (ref), lineColor (ref), lineGraphModule (ref), getX (ref), getY (ref), convertTimeStampModule (ref), formatData (ref), constantsModule (ref), noResultSearchStr (ref), headerFrameHeight (ref), chartHeaderNames (ref)
 	local t = {}
 	local searchTerm = p8.props.searchTerm

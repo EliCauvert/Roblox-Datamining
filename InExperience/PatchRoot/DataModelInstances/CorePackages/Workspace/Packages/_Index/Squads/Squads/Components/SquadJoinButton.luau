@@ -33,7 +33,7 @@ local appChatSquadButtonColorUpdateIxpLayer = game:DefineFastString("AppChatSqua
 local appChatSquadButtonHideGamepadIconOnTvRemote = game:DefineFastFlag("AppChatSquadButtonHideGamepadIconOnTvRemote", false)
 local t = { dampingRatio = 1, frequency = 1 }
 
-return function(p0) --[[ line: 70 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useDispatch (ref), usePreferredInput (ref), appChatSquadButtonHideGamepadIconOnTvRemote (ref), useIsTvRemoteDevice (ref), useTokens (ref), react (ref), squadExternalContractContext (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), useSquadState (ref), reactOtterModule (ref), t (ref), useSelector (ref), squadButtonClickIntentionEnumModule (ref), eventNamesModule (ref), leaveSquad (ref), squadPromptType (ref), appChatSquadButtonColorVariantB (ref), appChatSquadButtonColorUpdateIxpEnabled (ref), IXPService (ref), appChatSquadButtonColorUpdateIxpLayer (ref), foundation (ref), appChatSquadButtonColorUpdate (ref), squadState (ref), fFlagDebugAppChatEnableDomLocators (ref), appChatNewSquadJoinButtonLookIconless (ref), responsiveModule (ref), userInputService (ref)
 	local createElement_1
 	local var16 = useLocalization({
@@ -51,17 +51,17 @@ return function(p0) --[[ line: 70 ]]
 	local var24 = useSquadState()
 	local _ = nil
 	local var25 = nil
-	local var26, var27 = reactOtterModule.useAnimatedBinding(1, function(p1) --[[ line: 93 ]]
+	local var26, var27 = reactOtterModule.useAnimatedBinding(1, function(p1)
 		-- upvalues: p0 (ref), var25 (write), reactOtterModule (copy), t (copy)
 		if p0.shouldAnimate then
-			task.delay(0.5, function() --[[ line: 95 ]]
+			task.delay(0.5, function()
 				-- upvalues: var25 (copy), reactOtterModule (copy), p1 (ref), t (copy)
 				var25(reactOtterModule.spring(if p1 == 1 then 0 else 1, t))
 			end)
 		end
 	end)
 	var25 = var27
-	react.useEffect(function() --[[ line: 101 ]]
+	react.useEffect(function()
 		-- upvalues: p0 (ref), var25 (write), reactOtterModule (copy), t (copy)
 		if p0.shouldAnimate then
 			var25(reactOtterModule.spring(1, t))
@@ -70,18 +70,18 @@ return function(p0) --[[ line: 70 ]]
 		end
 		var25(reactOtterModule.instant(1))
 	end, { p0.shouldAnimate, var25 })
-	local var28 = useSelector(react.useCallback(function(p2) --[[ line: 109 ]]
+	local var28 = useSelector(react.useCallback(function(p2)
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentSquad else nil
 	end, {}))
-	local var29 = react.useMemo(function() --[[ line: 118 ]]
+	local var29 = react.useMemo(function()
 		-- upvalues: var28 (ref), p0 (ref)
 		return var28 and var28.parentChannelId == p0.conversationId
 	end, { var28, p0.conversationId })
-	local var30 = react.useMemo(function() --[[ line: 122 ]]
+	local var30 = react.useMemo(function()
 		-- upvalues: var29 (ref), squadButtonClickIntentionEnumModule (copy), var22 (ref)
 		return if var29 then squadButtonClickIntentionEnumModule.View elseif var22 then squadButtonClickIntentionEnumModule.Join else squadButtonClickIntentionEnumModule.Create
 	end, { var29, var22 })
-	local var31 = react.useMemo(function() --[[ line: 132 ]]
+	local var31 = react.useMemo(function()
 		-- upvalues: var29 (ref), var16 (ref), var22 (ref)
 		return if var29 then var16.viewButtonText elseif var22 then var16.joinButtonText else var16.startButtonText
 	end, {
@@ -91,7 +91,7 @@ return function(p0) --[[ line: 70 ]]
 		var16.startButtonText,
 		var16.viewButtonText
 	})
-	local var32 = react.useCallback(function() --[[ line: 148 ]]
+	local var32 = react.useCallback(function()
 		-- upvalues: var21 (ref), eventNamesModule (copy), p0 (ref), var28 (ref), var30 (ref)
 		var21.fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
 			conversationId = p0.conversationId,
@@ -104,7 +104,7 @@ return function(p0) --[[ line: 70 ]]
 		var30, var28, p0.conversationId, p0.squadButtonSource, p0.squadLocation,
 		var21.fireSquadAnalytics
 	})
-	local var33 = react.useCallback(function() --[[ line: 165 ]]
+	local var33 = react.useCallback(function()
 		-- upvalues: var32 (ref), var29 (ref), var28 (ref), var17 (ref), leaveSquad (copy), squadPromptType (copy), var21 (ref), p0 (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), var23 (ref)
 		var32()
 		
@@ -113,7 +113,7 @@ return function(p0) --[[ line: 70 ]]
 			
 			return
 		end
-		var17(leaveSquad(squadPromptType.JoinAnotherSquad, var21.setSquadPrompt, function() --[[ line: 172 ]]
+		var17(leaveSquad(squadPromptType.JoinAnotherSquad, var21.setSquadPrompt, function()
 			-- upvalues: p0 (copy)
 			p0.onActivated(p0.conversationId)
 		end, var21.squadLocation, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var23 else true))
@@ -121,13 +121,13 @@ return function(p0) --[[ line: 70 ]]
 		var28, var29, p0.onActivated, var32, var21.setSquadPrompt, var21.squadLocation,
 		if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var23 else nil
 	})
-	local var34 = react.useMemo(function() --[[ line: 192 ]]
+	local var34 = react.useMemo(function()
 		-- upvalues: var20 (ref), p0 (ref)
 		return if var20.Config.ColorMode.IsLight == "true" then if p0.isInCard then var20.Color.Extended.Gray.Gray_300 else var20.Color.Extended.Gray.Gray_200 elseif p0.isInCard then var20.Color.Extended.Gray.Gray_800 else var20.Color.Extended.Gray.Gray_900
 	end, { p0.isInCard, var20.Config.ColorMode.IsLight })
 	local var35 = var30 == squadButtonClickIntentionEnumModule.View
 	local var36 = not appChatSquadButtonColorVariantB
-	react.useEffect(function() --[[ line: 214 ]]
+	react.useEffect(function()
 		-- upvalues: appChatSquadButtonColorUpdateIxpEnabled (copy), IXPService (copy), appChatSquadButtonColorUpdateIxpLayer (copy)
 		if appChatSquadButtonColorUpdateIxpEnabled then
 			IXPService:LogFlagLinkedUserLayerExposure(appChatSquadButtonColorUpdateIxpLayer)
@@ -171,7 +171,7 @@ return function(p0) --[[ line: 70 ]]
 				tag = "radius-circle anchor-top-right",
 				ZIndex = 2,
 				Size = UDim2.fromOffset(var20.Size.Size_200, var20.Size.Size_200),
-				backgroundStyle = var26:map(function(p3) --[[ line: 258 ]]
+				backgroundStyle = var26:map(function(p3)
 					-- upvalues: var20 (ref)
 					return {
 						Color3 = var20.Color.Extended.Green.Green_500.Color3,
@@ -181,7 +181,7 @@ return function(p0) --[[ line: 70 ]]
 				Position = UDim2.new(1, var20.Size.Size_50, 0, -var20.Size.Size_50),
 				stroke = {
 					Color = var34.Color3,
-					Transparency = var26:map(function(p4) --[[ line: 267 ]]
+					Transparency = var26:map(function(p4)
 						-- upvalues: var34 (ref)
 						return 1 + (var34.Transparency - 1) * p4
 					end),

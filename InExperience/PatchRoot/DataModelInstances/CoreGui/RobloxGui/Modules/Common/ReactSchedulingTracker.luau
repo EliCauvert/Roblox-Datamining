@@ -15,7 +15,7 @@ local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeatur
 local enableCorescriptExecutionTime = game:DefineFastFlag("EnableCorescriptExecutionTime", false)
 local scriptPlusExecutionTimeEnabledEngineFeature = game:GetEngineFeature("ScriptPlusExecutionTimeEnabled")
 
-function applicationId() --[[ line: 22 ]]
+function applicationId()
 	local appStorageService = game:GetService("AppStorageService")
 	
 	if not appStorageService then
@@ -61,7 +61,7 @@ local _ = {
 	PassiveEffects = "PassiveEffects"
 }
 
-local function _() --[[ line: 98 | named "getCurrentTimeMs" ]]
+local function _()
 	return os.clock() * 1000
 end
 
@@ -69,7 +69,7 @@ local deviceMemoryTier = deviceTier.GetDeviceMemoryTier()
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 141 ]]
+function t.new(p0, p1)
 	-- upvalues: reactSchedulingTrackerLayoutEffects (ref), profilerEventTypes (ref), mutedError (ref), t (ref)
 	return setmetatable({
 		currentState = "Idle",
@@ -88,7 +88,7 @@ function t.new(p0, p1) --[[ line: 141 ]]
 		},
 		rootPassiveEffectsTime = { tag = "RootPassiveEffectsTime", PassiveEffectsMs = 0 },
 		states = {
-			Idle = function(p2, p3) --[[ line: 165 ]]
+			Idle = function(p2, p3)
 				-- upvalues: profilerEventTypes (copy), reactSchedulingTrackerLayoutEffects (copy)
 				if p3 == profilerEventTypes.RenderStart then
 					p2.timerStartMs = os.clock() * 1000
@@ -116,7 +116,7 @@ function t.new(p0, p1) --[[ line: 141 ]]
 				end
 				return nil
 			end,
-			Render = function(p4, p5) --[[ line: 194 ]]
+			Render = function(p4, p5)
 				-- upvalues: profilerEventTypes (copy), mutedError (copy)
 				if p5 == profilerEventTypes.RenderYield or p5 == profilerEventTypes.RenderStop then
 					local var40 = os.clock() * 1000 - p4.timerStartMs
@@ -129,7 +129,7 @@ function t.new(p0, p1) --[[ line: 141 ]]
 				
 				return "Idle"
 			end,
-			Commit = function(p6, p7, p8) --[[ line: 206 ]]
+			Commit = function(p6, p7, p8)
 				-- upvalues: profilerEventTypes (copy), reactSchedulingTrackerLayoutEffects (copy), mutedError (copy)
 				if p7 == profilerEventTypes.CommitStop then
 					if p6.renderLevel > 0 then
@@ -172,7 +172,7 @@ function t.new(p0, p1) --[[ line: 141 ]]
 				end
 				return nil
 			end,
-			PassiveEffects = function(p9, p10, p11) --[[ line: 253 ]]
+			PassiveEffects = function(p9, p10, p11)
 				-- upvalues: profilerEventTypes (copy), mutedError (copy)
 				if p10 == profilerEventTypes.PassiveEffectsStop then
 					local var42 = os.clock() * 1000 - p9.timerStartMs
@@ -190,7 +190,7 @@ function t.new(p0, p1) --[[ line: 141 ]]
 	}, t)
 end
 
-function t:transition(p12, p13) --[[ line: 276 ]]
+function t:transition(p12, p13)
 	local var43 = self.states[self.currentState](self, p12, p13)
 	
 	if var43 then
@@ -289,7 +289,7 @@ local t_7 = {
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 464 ]]
+function t_8.new(p14)
 	-- upvalues: kllSketch (ref), reactSchedulingKllSketchMaxSize (ref), debugReactSchedulingEnableErrorEvents (ref), t_8 (ref), t (ref), var17 (write)
 	local t_1 = { all = kllSketch.new(reactSchedulingKllSketchMaxSize) }
 	local t_2 = { all = kllSketch.new(reactSchedulingKllSketchMaxSize) }
@@ -345,10 +345,10 @@ function t_8.new(p14) --[[ line: 464 ]]
 		},
 		context = p14
 	}, t_8)
-	tbl.schedulerStateMachine = t.new(function(p15) --[[ line: 519 ]]
+	tbl.schedulerStateMachine = t.new(function(p15)
 		-- upvalues: tbl (ref)
 		tbl:addToFrame(p15)
-	end, function(p16, p17) --[[ line: 521 ]]
+	end, function(p16, p17)
 		-- upvalues: tbl (ref), var17 (copy)
 		tbl:trackSessionSketches(p16, p17)
 		
@@ -360,15 +360,15 @@ function t_8.new(p14) --[[ line: 464 ]]
 	return tbl
 end
 
-function t_8:start() --[[ line: 531 ]]
+function t_8:start()
 	-- upvalues: schedulingProfiler (ref), runService (ref), reactSchedulingTrackerPeriodMs (ref), var16 (write)
 	self.started = true
 	self:resetState()
-	schedulingProfiler.registerProfilerEventCallback(function(p18, p19) --[[ line: 535 ]]
+	schedulingProfiler.registerProfilerEventCallback(function(p18, p19)
 		-- upvalues: self (ref)
 		self.schedulerStateMachine:transition(p18, p19)
 	end)
-	runService.Heartbeat:Connect(function(p20) --[[ line: 539 ]]
+	runService.Heartbeat:Connect(function(p20)
 		-- upvalues: self (ref), reactSchedulingTrackerPeriodMs (copy), var16 (copy)
 		self:processFrame(p20 * 1000)
 		self.reactFrameTimeMs = 0
@@ -382,7 +382,7 @@ function t_8:start() --[[ line: 531 ]]
 	end)
 end
 
-function t_8:resetState() --[[ line: 554 ]]
+function t_8:resetState()
 	self.periodStartMs = os.clock() * 1000
 	self.frameMetrics = {
 		totalFrameCount = 0,
@@ -397,7 +397,7 @@ function t_8:resetState() --[[ line: 554 ]]
 	self.rootsMetrics = {}
 end
 
-function t_8.getRootName(_, p21) --[[ line: 571 ]]
+function t_8.getRootName(_, p21)
 	local var51 = "Unknown"
 	
 	if p21 then
@@ -418,11 +418,11 @@ function t_8.getRootName(_, p21) --[[ line: 571 ]]
 	return var51
 end
 
-function t_8:addToFrame(p22) --[[ line: 588 ]]
+function t_8:addToFrame(p22)
 	self.reactFrameTimeMs += p22
 end
 
-function t_8:trackSessionSketches(p23, p24) --[[ line: 592 ]]
+function t_8:trackSessionSketches(p23, p24)
 	-- upvalues: debugReactSchedulingEnableErrorEvents (ref), kllSketch (ref), reactSchedulingKllSketchMaxSize (ref)
 	if not self.sessionMetrics then return end
 	local var52 = self:getRootName(p24)
@@ -481,7 +481,7 @@ function t_8:trackSessionSketches(p23, p24) --[[ line: 592 ]]
 	end
 end
 
-function t_8:reportRoot(p25, p26) --[[ line: 652 ]]
+function t_8:reportRoot(p25, p26)
 	-- upvalues: reactSchedulingTrackerLayoutEffects (ref), reactSchedulingTrackerDataModelUpdate (ref), telemetryService (ref), t_7 (ref), deviceMemoryTier (ref)
 	local var54 = self:getRootName(p26)
 	
@@ -612,11 +612,11 @@ function t_8:reportRoot(p25, p26) --[[ line: 652 ]]
 	end
 end
 
-function t_8.getFrameBucket(_, p27) --[[ line: 791 ]]
+function t_8.getFrameBucket(_, p27)
 	return math.min(4, math.floor(math.max(0, p27 - 2) / 16.666666666667) + 1)
 end
 
-function t_8:processFrame(p28) --[[ line: 798 ]]
+function t_8:processFrame(p28)
 	-- upvalues: scriptPlusExecutionTimeEnabledEngineFeature (ref), enableCorescriptExecutionTime (ref), runService (ref), debugReactSchedulingEnableErrorEvents (ref)
 	local frameMetrics = self.frameMetrics
 	local reactFrameTimeMs = self.reactFrameTimeMs
@@ -653,7 +653,7 @@ function t_8:processFrame(p28) --[[ line: 798 ]]
 	end
 end
 
-function t_8:reportPeriod() --[[ line: 837 ]]
+function t_8:reportPeriod()
 	-- upvalues: telemetryService (ref), t_2 (ref), var25 (write), t_3 (ref), deviceMemoryTier (ref), scriptPlusExecutionTimeEnabledEngineFeature (ref), enableCorescriptExecutionTime (ref), t_4 (ref), reactSchedulingTrackerLayoutEffects (ref), reactSchedulingTrackerDataModelUpdate (ref), t_5 (ref), disableReactSchedulingTimePctStats (ref), var32 (write), t_6 (ref), disableReactSchedulingAvgMaxMsStats (ref), var34 (write)
 	local frameMetrics = self.frameMetrics
 	local var59 = os.clock() * 1000 - self.periodStartMs
@@ -932,7 +932,7 @@ function t_8:reportPeriod() --[[ line: 837 ]]
 	end
 end
 
-function generatePercentilesFromSingleSketch(p29) --[[ line: 1141 ]]
+function generatePercentilesFromSingleSketch(p29)
 	-- upvalues: parts (ref)
 	local var62 = "{"
 	
@@ -946,7 +946,7 @@ function generatePercentilesFromSingleSketch(p29) --[[ line: 1141 ]]
 	return var62 .. "}"
 end
 
-function generatePercentilesFromSketches(p30, p31) --[[ line: 1155 ]]
+function generatePercentilesFromSketches(p30, p31)
 	-- upvalues: parts (ref)
 	local var63 = "{"
 	
@@ -968,7 +968,7 @@ function generatePercentilesFromSketches(p30, p31) --[[ line: 1155 ]]
 	return var63 .. "}"
 end
 
-function t_8:reportPercentError(p32, p33, p34, p35) --[[ line: 1175 ]]
+function t_8:reportPercentError(p32, p33, p34, p35)
 	-- upvalues: parts (ref), telemetryService (ref), var27 (write), var25 (write)
 	table.sort(p32)
 	local p32Count = #p32
@@ -998,7 +998,7 @@ function t_8:reportPercentError(p32, p33, p34, p35) --[[ line: 1175 ]]
 	end
 end
 
-function t_8:reportSession() --[[ line: 1215 ]]
+function t_8:reportSession()
 	-- upvalues: debugReactSchedulingEnableErrorEvents (ref), telemetryService (ref), t_1 (ref), var25 (write)
 	if not self.started then return end
 	local t = {

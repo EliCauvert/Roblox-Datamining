@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsCreationPersistEditSession", false)
 
-return function() --[[ line: 11 ]]
+return function()
 	return game:GetFastFlag("MomentsCreationPersistEditSession")
 end

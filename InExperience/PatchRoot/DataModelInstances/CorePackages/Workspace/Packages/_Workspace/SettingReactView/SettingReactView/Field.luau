@@ -6,7 +6,7 @@ local fields = parent.Fields
 local toggleModule = require(fields.Toggle)
 local textButtonModule = require(fields.TextButton)
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: settingEnum (ref), reactModule (ref), toggleModule (ref), textButtonModule (ref)
 	local t = {}
 	

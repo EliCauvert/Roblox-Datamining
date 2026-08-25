@@ -1,4 +1,4 @@
-﻿function getUpdatedSelectedCapturesArray(p0, p1) --[[ line: 1 ]]
+﻿function getUpdatedSelectedCapturesArray(p0, p1)
 	local t = {}
 	local var1 = false
 	

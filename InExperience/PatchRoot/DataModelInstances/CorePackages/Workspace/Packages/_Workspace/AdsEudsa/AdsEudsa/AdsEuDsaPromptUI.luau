@@ -14,11 +14,11 @@ local var5 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.WhyThisAd
 local var6 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Action.Close")
 local interactiveAlert_1 = roactModule.Component:extend("InteractiveAlert")
 
-function interactiveAlert_1.init(p0) --[[ line: 28 ]]
+function interactiveAlert_1.init(p0)
 	p0.state = { animating = false, screenSize = Vector2.new(0, 0) }
 end
 
-function interactiveAlert_1.renderWithStyle(p1, _) --[[ line: 35 ]]
+function interactiveAlert_1.renderWithStyle(p1, _)
 	-- upvalues: buttonType (ref), var6 (ref), roactModule (ref), interactiveAlert (ref), var5 (ref)
 	return roactModule.createFragment({
 		Frame = roactModule.createElement("Frame", {
@@ -28,7 +28,7 @@ function interactiveAlert_1.renderWithStyle(p1, _) --[[ line: 35 ]]
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			[roactModule.Change.AbsoluteSize] = function(p2) --[[ line: 55 ]]
+			[roactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: p1 (ref)
 				p1:setState({ screenSize = p2.AbsoluteSize })
 			end
@@ -43,7 +43,7 @@ function interactiveAlert_1.renderWithStyle(p1, _) --[[ line: 35 ]]
 							isDefaultChild = true,
 							buttonType = buttonType.PrimarySystem,
 							props = {
-								onActivated = function() --[[ line: 39 ]]
+								onActivated = function()
 									-- upvalues: p1 (ref)
 									p1.props.handler:hidePrompt()
 								end,
@@ -57,11 +57,11 @@ function interactiveAlert_1.renderWithStyle(p1, _) --[[ line: 35 ]]
 	})
 end
 
-function interactiveAlert_1.render(p3) --[[ line: 76 ]]
+function interactiveAlert_1.render(p3)
 	return p3:renderWithStyle(p3.props.style)
 end
 
-return function(p4) --[[ line: 81 ]]
+return function(p4)
 	-- upvalues: useStyle (ref), cryoModule (ref), roactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert_1 (ref)
 	return roactModule.createElement(coreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = roactModule.createElement(focusRoot, {

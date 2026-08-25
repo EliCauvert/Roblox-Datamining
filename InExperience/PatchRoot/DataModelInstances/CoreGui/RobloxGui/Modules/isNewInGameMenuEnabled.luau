@@ -9,7 +9,7 @@ local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local _ = sharedFlagsModule.isSubjectToDesktopPolicies
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 
-return function() --[[ line: 20 ]]
+return function()
 	-- upvalues: VRService (ref), isInExperienceUIVREnabled (ref), playersService (ref)
 	if VRService.VREnabled then
 		return isInExperienceUIVREnabled

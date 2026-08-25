@@ -3,12 +3,12 @@ local experienceStateCaptureService = game:GetService("ExperienceStateCaptureSer
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local isInSelectInSceneReportMenuOverrideListModule = require(abuseReportMenu.Utility.isInSelectInSceneReportMenuOverrideList)
 local var4 = false
-task.defer(function() --[[ line: 8 ]]
+task.defer(function()
 	-- upvalues: var4 (write), isInSelectInSceneReportMenuOverrideListModule (ref)
 	var4 = isInSelectInSceneReportMenuOverrideListModule()
 end)
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: experienceStateCaptureService (ref), constantsModule (ref), var4 (write)
 	if not game:GetEngineFeature("SafetyServiceCaptureModeReportProp") then
 		return false

@@ -2,11 +2,11 @@
 local signalsModule = require(parent.Signals)
 local dataHydrationModule = require(parent.DataHydration)
 
-local function _(p0) --[[ line: 27 | named "toId" ]]
+local function _(p0)
 	return if p0 == nil then nil else tostring(p0)
 end
 
-return function(p1) --[[ line: 39 | named "subscribeGameIcon" ]]
+return function(p1)
 	-- upvalues: dataHydrationModule (ref), signalsModule (ref)
 	local gameIconStore = dataHydrationModule.Game.getGameIconStore(false)
 	local universeId = p1.universeId
@@ -15,15 +15,15 @@ return function(p1) --[[ line: 39 | named "subscribeGameIcon" ]]
 	local var5 = true
 	
 	return {
-		getCurrent = function() --[[ line: 66 ]]
+		getCurrent = function()
 			-- upvalues: var4 (write)
 			return var4
 		end,
-		update = function(p2) --[[ line: 69 ]]
+		update = function(p2)
 			-- upvalues: var3 (ref)
 			var3(if p2 ~= nil then nil else tostring(p2))
 		end,
-		dispose = signalsModule.createEffect(function(p3) --[[ line: 47 ]]
+		dispose = signalsModule.createEffect(function(p3)
 			-- upvalues: universeId (ref), var4 (write), gameIconStore (ref), p1 (ref), var5 (write)
 			local var6 = universeId(p3)
 			var4 = if var6 == nil then nil else gameIconStore.getGameIcon(var6, p1.size).data(p3)

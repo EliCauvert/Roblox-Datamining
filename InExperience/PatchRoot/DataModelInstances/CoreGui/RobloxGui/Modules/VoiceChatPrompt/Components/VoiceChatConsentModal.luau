@@ -28,7 +28,7 @@ local var13 = argCheckModule.wrap(tModule.strictInterface({
 	showPrompt = tModule.optional(tModule.boolean)
 }))
 
-local function VoiceChatConsentModal(p0, p1) --[[ line: 66 ]]
+local function VoiceChatConsentModal(p0, p1)
 	-- upvalues: var13 (ref), reactModule (ref), textService (ref), var12 (ref), getFFlagSupportGamepadNavInVoiceModals (ref), roactModule (ref), UIBloxModule (ref), assetsModule (ref), getFFlagDisablePVUpsellDataConsent (ref), checkbox (ref), button (ref), buttonType (ref), var11 (ref), var10 (ref)
 	assert(var13(p0))
 	local var15, var16 = reactModule.useState(false)
@@ -139,7 +139,7 @@ local function VoiceChatConsentModal(p0, p1) --[[ line: 66 ]]
 					isDisabled = false,
 					LayoutOrder = 1,
 					isChecked = var15,
-					onActivated = function(p2) --[[ line: 221 ]]
+					onActivated = function(p2)
 						-- upvalues: var16 (ref)
 						var16(p2)
 					end

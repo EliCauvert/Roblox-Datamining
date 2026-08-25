@@ -3,9 +3,9 @@ local reactModule = require(roactUtils.Parent.React)
 local _ = require(roactUtils.types)
 local luaAppLazyComponentAsyncChunkLoad = game:DefineFastFlag("LuaAppLazyComponentAsyncChunkLoad", false)
 
-return function(p0) --[[ line: 17 | named "createLazyComponent" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), luaAppLazyComponentAsyncChunkLoad (ref)
-	local var3 = reactModule.memo(function(p1) --[[ line: 18 ]]
+	local var3 = reactModule.memo(function(p1)
 		-- upvalues: luaAppLazyComponentAsyncChunkLoad (copy), reactModule (copy), p0 (ref)
 		if not luaAppLazyComponentAsyncChunkLoad then
 			return reactModule.createElement(reactModule.useMemo(p0, {}), p1)
@@ -13,7 +13,7 @@ return function(p0) --[[ line: 17 | named "createLazyComponent" ]]
 		local var4, var5 = reactModule.useState({ state = "idle" })
 		
 		if var4.state == "idle" then
-			task.spawn(function() --[[ line: 23 ]]
+			task.spawn(function()
 				-- upvalues: var5 (ref), p0 (copy)
 				var5({ state = "pending" })
 				local ok, status = pcall(p0)
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 17 | named "createLazyComponent" ]]
 		end
 	end)
 	
-	return function(p2) --[[ line: 45 ]]
+	return function(p2)
 		-- upvalues: reactModule (copy), var3 (ref)
 		return reactModule.createElement(var3, p2)
 	end

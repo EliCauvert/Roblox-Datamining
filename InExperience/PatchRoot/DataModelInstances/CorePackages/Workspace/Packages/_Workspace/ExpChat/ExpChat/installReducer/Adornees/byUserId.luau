@@ -5,7 +5,7 @@ local dictionary = require(parent.llama).Dictionary
 local expChatSharedModule = require(parent.ExpChatShared)
 local actions = expChat.Actions
 
-local function findFirstChildByNameAndClass(p0, p1, p2) --[[ line: 16 ]]
+local function findFirstChildByNameAndClass(p0, p1, p2)
 	for i, v in ipairs(p0:GetChildren()) do
 		if v.Name == p1 and v:IsA(p2) then
 			return v
@@ -15,13 +15,13 @@ local function findFirstChildByNameAndClass(p0, p1, p2) --[[ line: 16 ]]
 end
 
 return roduxModule.createReducer({}, {
-	[require(actions.AdorneeAdded).name] = function(p3, p4) --[[ line: 27 ]]
+	[require(actions.AdorneeAdded).name] = function(p3, p4)
 		-- upvalues: findFirstChildByNameAndClass (ref), dictionary (ref)
 		return dictionary.join(p3, {
 			[p4.userId] = if p4.humanoid.Health == 0 then findFirstChildByNameAndClass(p4.character, "Head", "BasePart") else p4.character
 		})
 	end,
-	[require(actions.HumanoidDied).name] = function(p5, p6) --[[ line: 36 ]]
+	[require(actions.HumanoidDied).name] = function(p5, p6)
 		-- upvalues: findFirstChildByNameAndClass (ref), dictionary (ref)
 		local userId = p5[p6.userId]
 		
@@ -29,7 +29,7 @@ return roduxModule.createReducer({}, {
 			[p6.userId] = if userId then findFirstChildByNameAndClass(userId, "Head", "BasePart") or userId else nil
 		})
 	end,
-	[expChatSharedModule.Actions.PlayerRemoved.name] = function(p7, p8) --[[ line: 48 ]]
+	[expChatSharedModule.Actions.PlayerRemoved.name] = function(p7, p8)
 		-- upvalues: dictionary (ref)
 		return dictionary.removeKey(p7, p8.userId)
 	end

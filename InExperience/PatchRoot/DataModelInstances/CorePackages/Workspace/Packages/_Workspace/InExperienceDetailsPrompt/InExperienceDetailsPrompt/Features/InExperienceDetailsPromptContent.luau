@@ -11,7 +11,7 @@ local visibility = foundationModule.Enums.Visibility
 local useTokens = foundationModule.Hooks.useTokens
 local luaAppIedpSwitchChipToBadge = game:DefineFastFlag("LuaAppIedpSwitchChipToBadge", false)
 
-return function(p0) --[[ line: 22 | named "InExperienceDetailsPromptContent" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), scrollView (ref), visibility (ref), luaAppIedpSwitchChipToBadge (ref), badge (ref), badgeVariant (ref), chip (ref), enums (ref)
 	return reactModule.createElement(scrollView, {
 		tag = "size-full-0 auto-y",
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 22 | named "InExperienceDetailsPromptContent" ]]
 			LayoutOrder = 1,
 			Selectable = false,
 			text = p0.ageRecommendation.displayNameWithHeaderShort,
-			onActivated = function() --[[ line: 49 ]] end
+			onActivated = function() end
 		}) else nil,
 		Rating = if p0.rating then if luaAppIedpSwitchChipToBadge then reactModule.createElement(badge, {
 			LayoutOrder = 2,
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 22 | named "InExperienceDetailsPromptContent" ]]
 				iconName = enums.IconName.ThumbUp,
 				iconVariant = enums.IconVariant.Filled
 			},
-			onActivated = function() --[[ line: 72 ]] end
+			onActivated = function() end
 		}) else nil
 	})
 end

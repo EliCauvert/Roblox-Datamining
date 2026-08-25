@@ -11,11 +11,11 @@ local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local images = UIBloxModule.App.ImageSet.Images
 local withStyle = UIBloxModule.Style.withStyle
 
-local function _(p0) --[[ line: 32 | named "renderHeaderBarCenter" ]]
+local function _(p0)
 	-- upvalues: withStyle (ref), reactModule (ref)
-	return function() --[[ line: 33 ]]
+	return function()
 		-- upvalues: withStyle (copy), reactModule (copy), p0 (ref)
-		return withStyle(function(p1) --[[ line: 34 ]]
+		return withStyle(function(p1)
 			-- upvalues: reactModule (copy), p0 (copy)
 			local theme = p1.Theme
 			
@@ -35,9 +35,9 @@ local function _(p0) --[[ line: 32 | named "renderHeaderBarCenter" ]]
 	end
 end
 
-local _ = function(p2) --[[ line: 54 | named "renderHeaderBarLeft" ]]
+local _ = function(p2)
 	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function() --[[ line: 55 ]]
+	return function()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -59,9 +59,9 @@ local _ = function(p2) --[[ line: 54 | named "renderHeaderBarLeft" ]]
 	end
 end
 
-local _ = function(p3, p4, p5, p6, p7, p8) --[[ line: 76 | named "renderHeaderBarRight" ]]
+local _ = function(p3, p4, p5, p6, p7, p8)
 	-- upvalues: reactModule (ref), foundationModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	return function() --[[ line: 84 ]]
+	return function()
 		-- upvalues: reactModule (copy), foundationModule (copy), p5 (ref), p6 (ref), p7 (ref), p8 (ref), button (copy), buttonVariant (copy), inputSize (copy), p3 (ref), p4 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -92,7 +92,7 @@ local _ = function(p3, p4, p5, p6, p7, p8) --[[ line: 76 | named "renderHeaderBa
 	end
 end
 
-return function(p9) --[[ line: 114 | named "LandscapeModeHeader" ]]
+return function(p9)
 	-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), foundationModule (ref), button (ref), buttonVariant (ref), inputSize (ref), withStyle (ref)
 	local createElement = reactModule.createElement
 	local var3 = "Frame"
@@ -109,7 +109,7 @@ return function(p9) --[[ line: 114 | named "LandscapeModeHeader" ]]
 	local t_2 = { backgroundTransparency = 1, barHeight = 72 }
 	local backAction = p9.backAction
 	
-	function t_2.renderLeft() --[[ line: 55 ]]
+	function t_2.renderLeft()
 		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -137,7 +137,7 @@ return function(p9) --[[ line: 114 | named "LandscapeModeHeader" ]]
 	local isCoachmarkOpen = p9.isCoachmarkOpen
 	local onCoachmarkClose = p9.onCoachmarkClose
 	
-	function t_2.renderRight() --[[ line: 84 ]]
+	function t_2.renderRight()
 		-- upvalues: reactModule (copy), foundationModule (copy), coachmarkTitle (ref), coachmarkText (ref), isCoachmarkOpen (ref), onCoachmarkClose (ref), button (copy), buttonVariant (copy), inputSize (copy), nextAction (ref), nextText (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -169,9 +169,9 @@ return function(p9) --[[ line: 114 | named "LandscapeModeHeader" ]]
 	
 	local titleText = p9.titleText
 	
-	function t_2.renderCenter() --[[ line: 33 ]]
+	function t_2.renderCenter()
 		-- upvalues: withStyle (copy), reactModule (copy), titleText (ref)
-		return withStyle(function(p10) --[[ line: 34 ]]
+		return withStyle(function(p10)
 			-- upvalues: reactModule (copy), titleText (copy)
 			local theme = p10.Theme
 			

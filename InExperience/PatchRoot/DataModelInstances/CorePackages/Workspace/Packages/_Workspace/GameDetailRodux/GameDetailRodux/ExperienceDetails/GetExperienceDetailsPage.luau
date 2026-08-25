@@ -5,7 +5,7 @@ local var0 = require(parent.UrlBuilder).UrlBuilder.new({
 	query = { universeId = "{universeId}" }
 })
 
-return function(p0, p1) --[[ line: 23 ]]
+return function(p0, p1)
 	-- upvalues: var0 (ref)
 	assert(type(p1) == "string", "GetExperienceDetailsPage request expects universeId to be a string")
 	

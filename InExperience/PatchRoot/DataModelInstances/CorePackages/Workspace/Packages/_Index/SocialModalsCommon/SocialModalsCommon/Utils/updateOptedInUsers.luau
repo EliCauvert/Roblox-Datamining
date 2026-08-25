@@ -2,10 +2,10 @@
 local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineFeature(constantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	clearLocalStorage = function(_, p0) --[[ line: 6 ]]
+	clearLocalStorage = function(_, p0)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if universal_app_contact_importer_storage_keysEngineFeature then
-			pcall(function() --[[ line: 10 ]]
+			pcall(function()
 				-- upvalues: p0 (ref), constantsModule (copy)
 				p0:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, "")
 				p0:Flush()
@@ -14,10 +14,10 @@ return {
 			return
 		end
 	end,
-	addUserToLocalStorage = function(_, p1, p2) --[[ line: 16 ]]
+	addUserToLocalStorage = function(_, p1, p2)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function() --[[ line: 21 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (ref), constantsModule (copy)
 			return p1:GetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS)
 		end)
@@ -38,7 +38,7 @@ return {
 				end
 			end
 			local var4 = table.concat(t, ","):gsub("%s+", "")
-			pcall(function() --[[ line: 41 ]]
+			pcall(function()
 				-- upvalues: p1 (ref), constantsModule (copy), var4 (write)
 				p1:SetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS, var4)
 				p1:Flush()

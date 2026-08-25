@@ -7,17 +7,17 @@ local setFriendStatusModule = require(parent.Actions.SetFriendStatus)
 local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
 local friendStatusConnector = roact.PureComponent:extend("FriendStatusConnector")
 
-function friendStatusConnector.init(p0) --[[ line: 15 ]]
+function friendStatusConnector.init(p0)
 	-- upvalues: playersService (ref)
 	p0.state = { localPlayer = playersService.LocalPlayer }
 end
 
-function friendStatusConnector.render(p1) --[[ line: 21 ]]
+function friendStatusConnector.render(p1)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), playersService (ref)
 	local t = {
 		PlayerAdded = roact.createElement(externalEventConnectionModule, {
 			event = playersService.PlayerAdded,
-			callback = function(p2) --[[ line: 25 ]]
+			callback = function(p2)
 				-- upvalues: playersService (copy), p1 (ref)
 				if p2 == playersService.LocalPlayer then
 					p1:setState({ localPlayer = p2 })
@@ -29,7 +29,7 @@ function friendStatusConnector.render(p1) --[[ line: 21 ]]
 		}),
 		PlayerRemoving = roact.createElement(externalEventConnectionModule, {
 			event = playersService.PlayerRemoving,
-			callback = function(p3) --[[ line: 38 ]]
+			callback = function(p3)
 				-- upvalues: p1 (ref)
 				p1.props.setFriendStatus(p3.UserId, nil)
 			end
@@ -39,7 +39,7 @@ function friendStatusConnector.render(p1) --[[ line: 21 ]]
 	if p1.state.localPlayer then
 		t.FriendStatusChanged = roact.createElement(externalEventConnectionModule, {
 			event = playersService.LocalPlayer.FriendStatusChanged,
-			callback = function(p4, p5) --[[ line: 47 ]]
+			callback = function(p4, p5)
 				-- upvalues: p1 (ref)
 				p1.props.setFriendStatus(p4.UserId, p5)
 			end
@@ -48,10 +48,10 @@ function friendStatusConnector.render(p1) --[[ line: 21 ]]
 	return roact.createFragment(t)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p6) --[[ line: 56 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p6)
 	-- upvalues: setFriendStatusModule (ref)
 	return {
-		setFriendStatus = function(value, p7) --[[ line: 58 ]]
+		setFriendStatus = function(value, p7)
 			-- upvalues: p6 (ref), setFriendStatusModule (copy)
 			return p6(setFriendStatusModule(value, p7))
 		end

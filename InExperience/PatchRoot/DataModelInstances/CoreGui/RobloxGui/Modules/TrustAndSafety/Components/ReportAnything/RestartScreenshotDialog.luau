@@ -11,7 +11,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 local dividerModule = require(dependenciesModule.Divider)
 
-return function(p0) --[[ line: 27 | named "RestartScreenshotDialog" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), reactModule (ref), headerBar (ref), robloxTranslatorModule (ref), dividerModule (ref), buttonStack (ref), buttonType (ref)
 	local var7 = useStyle()
 	local theme = var7.Theme
@@ -43,8 +43,8 @@ return function(p0) --[[ line: 27 | named "RestartScreenshotDialog" ]]
 				backgroundTransparency = 1,
 				barHeight = 48,
 				LayoutOrder = 1,
-				renderLeft = function() --[[ line: 64 ]] end,
-				renderRight = function() --[[ line: 66 ]] end,
+				renderLeft = function() end,
+				renderRight = function() end,
 				title = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.RetakeScene") else "Retake Scene"
 			}),
 			Divider = reactModule.createElement(dividerModule, { LayoutOrder = 2 }),

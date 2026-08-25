@@ -7,7 +7,7 @@ local invariantModule = require(parent.jsUtils.invariant)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 36 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref), invariantModule (ref)
 	local tbl = setmetatable({}, t_1)
 	invariantModule(p0 >= 0, "CellRenderMask must contain a non-negative number os cells")
@@ -23,11 +23,11 @@ function t_1.new(p0) --[[ line: 36 ]]
 	return tbl
 end
 
-function t_1:enumerateRegions() --[[ line: 47 ]]
+function t_1:enumerateRegions()
 	return self._regions
 end
 
-function t_1:addCells(p1) --[[ line: 50 ]]
+function t_1:addCells(p1)
 	-- upvalues: invariantModule (ref), object (ref), array (ref)
 	invariantModule(p1.first >= 0 and (p1.first < self._numCells and (p1.last >= 0 and (p1.last < self._numCells and p1.first <= p1.last))), "CellRenderMask.addCells called with invalid cell range")
 	local first, first_1 = self:_findRegion(p1.first)
@@ -63,15 +63,15 @@ function t_1:addCells(p1) --[[ line: 50 ]]
 	array.splice(self._regions, first_1, last_1 - first_1 + 1, table.unpack(array.concat(t, { var11 }, t_1)))
 end
 
-function t_1:equals(p2) --[[ line: 95 ]]
+function t_1:equals(p2)
 	-- upvalues: array (ref)
-	return self._numCells == p2._numCells and (#self._regions == #p2._regions and array.every(self._regions, function(p3, p4) --[[ line: 98 ]]
+	return self._numCells == p2._numCells and (#self._regions == #p2._regions and array.every(self._regions, function(p3, p4)
 		-- upvalues: p2 (ref)
 		return p3.first == p2._regions[p4].first and (p3.last == p2._regions[p4].last and p3.isSpacer == p2._regions[p4].isSpacer)
 	end))
 end
 
-function t_1:_findRegion(p5) --[[ line: 105 ]]
+function t_1:_findRegion(p5)
 	-- upvalues: invariantModule (ref)
 	local var12 = 1
 	local regionsCount = #self._regions

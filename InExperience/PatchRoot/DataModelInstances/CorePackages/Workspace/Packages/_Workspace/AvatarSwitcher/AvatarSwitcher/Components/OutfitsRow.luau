@@ -5,7 +5,7 @@ local foundationModule = require(parent.Foundation)
 local outfitTileModule = require(avatarSwitcher.Components.OutfitTile)
 local _ = require(avatarSwitcher.types)
 
-return reactModule.memo(function(p0) --[[ line: 22 | named "OutfitsRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), outfitTileModule (ref), foundationModule (ref)
 	local t = {}
 	

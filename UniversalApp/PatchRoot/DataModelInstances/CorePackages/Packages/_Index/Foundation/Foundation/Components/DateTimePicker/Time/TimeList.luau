@@ -10,7 +10,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { testId = "--foundation-time-list" }
 
-return function(p0) --[[ line: 34 | named "TimeList" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), dateTimeLayoutUtilitiesModule (ref), reactModule (ref), dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref), textModule (ref), stateLayerModeModule (ref), scrollViewModule (ref)
 	local var11 = withDefaultsModule(p0, t)
 	local var12 = useTokensModule()
@@ -20,13 +20,13 @@ return function(p0) --[[ line: 34 | named "TimeList" ]]
 	local var15 = reactModule.useRef(false)
 	local var16 = reactModule.useRef(true)
 	local var17 = reactModule.useRef(nil)
-	local var18, var19 = reactModule.useMemo(function() --[[ line: 45 ]]
+	local var18, var19 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref), dateTimeCalendarViewUtilitiesModule (copy)
 		return dateTimeCalendarViewUtilitiesModule.getTimeSlotsForDay(var11.dateTime or (var11.dayAnchor or DateTime.now()))
 	end, { var11.dateTime, var11.dayAnchor })
 	local var20 = if var11.dateTime then var19 else nil
 	
-	local function _(p1) --[[ line: 52 | named "getTimeKey" ]]
+	local function _(p1)
 		-- upvalues: dateTimeUtilitiesModule (copy)
 		if p1 == nil then
 			return nil
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 34 | named "TimeList" ]]
 		return string.format("%02d:%02d", var23.Hour, var23.Minute)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 63 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), dateTimeUtilitiesModule (copy), var15 (ref), var17 (ref), var16 (ref), var14 (ref), dateTimeCalendarViewUtilitiesModule (copy), var18 (ref), size900 (ref), var11 (ref)
 		local formattedText
 		if var20 == nil then
@@ -91,7 +91,7 @@ return function(p0) --[[ line: 34 | named "TimeList" ]]
 			stateLayer = {
 				mode = if var22 then stateLayerModeModule.Inverse else stateLayerModeModule.Default
 			},
-			onActivated = function() --[[ line: 120 ]]
+			onActivated = function()
 				-- upvalues: var15 (ref), var11 (ref), v (ref)
 				var15.current = true
 				var11.onItemChanged(v.id)

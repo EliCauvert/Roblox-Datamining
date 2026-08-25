@@ -6,7 +6,7 @@ local ITEM_WIDTH = waveformAudioModule.ITEM_WIDTH
 local RENDER_INTERVAL = waveformAudioModule.RENDER_INTERVAL
 local t = { itemIdx = 0, height = 0.2, age = nil }
 
-return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), ITEM_WIDTH (ref), waveformAudioModule (ref), useTickClock (ref), RENDER_INTERVAL (ref), t (ref), BAR_WIDTH (ref)
 	local var3 = p0.normalize == nil or p0.normalize
 	local bindBarStyle = p0.bindBarStyle
@@ -18,7 +18,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 	local var11 = waveformAudioModule.useAudioAnalyzer(p0.audioDeviceInput)
 	local var12 = reactModule.useRef(0)
 	local var13 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var12 (ref), var8 (ref), var10 (ref)
 		table.clear(var13.current)
 		var12.current = 0
@@ -28,7 +28,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 	useTickClock({
 		intervalSec = RENDER_INTERVAL,
 		enabled = p0.isActive and var6 > 0,
-		onTick = function() --[[ line: 92 ]]
+		onTick = function()
 			-- upvalues: var7 (ref), waveformAudioModule (copy), var11 (ref), var12 (ref), var3 (ref), var13 (ref), var6 (ref), var8 (ref), onSample (ref)
 			local var14 = var7:getValue() + 1
 			local var15 = 0.2 + waveformAudioModule.sampleVolume(var11.current, var12, var3) * 0.8
@@ -41,7 +41,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 				onSample(var14, var15)
 			end
 		end,
-		onFrame = function(p1) --[[ line: 108 ]]
+		onFrame = function(p1)
 			-- upvalues: var10 (ref)
 			var10(p1)
 		end
@@ -52,7 +52,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
-		[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 165 ]]
+		[reactModule.Change.AbsoluteSize] = function(p2)
 			-- upvalues: var4 (ref), var5 (ref)
 			local x = p2.AbsoluteSize.X
 			
@@ -60,7 +60,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 				var5(x)
 			end
 		end
-	}, reactModule.useMemo(function() --[[ line: 113 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: var13 (ref), var6 (ref), ITEM_WIDTH (copy), var7 (ref), t (copy), bindBarStyle (ref), reactModule (copy), var9 (ref), BAR_WIDTH (copy)
 		local t_1 = {}
 		local current = var13.current
@@ -68,7 +68,7 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 		for i = 1, var6 do
 			local var17 = var6 - i
 			local var18 = (i - 1) * ITEM_WIDTH
-			local var19 = var7:map(function(p3) --[[ line: 120 ]]
+			local var19 = var7:map(function(p3)
 				-- upvalues: var17 (ref), t (copy), current (ref)
 				local var21 = p3 - var17
 				
@@ -82,19 +82,19 @@ return reactModule.memo(function(p0) --[[ line: 66 | named "Waveform" ]]
 			local var20 = bindBarStyle(var19)
 			t_1["Bar" .. i] = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Position = var9:map(function(p4) --[[ line: 139 ]]
+				Position = var9:map(function(p4)
 					-- upvalues: var18 (ref), ITEM_WIDTH (copy)
 					return UDim2.new(0, var18 - p4 * ITEM_WIDTH, 0.5, 0)
 				end),
 				AnchorPoint = Vector2.new(0, 0.5),
-				Size = var19:map(function(p5) --[[ line: 143 ]]
+				Size = var19:map(function(p5)
 					-- upvalues: BAR_WIDTH (copy)
 					return UDim2.new(0, BAR_WIDTH, p5.height, 0)
 				end),
-				BackgroundColor3 = var20:map(function(p6) --[[ line: 146 ]]
+				BackgroundColor3 = var20:map(function(p6)
 					return p6.color
 				end),
-				BackgroundTransparency = var20:map(function(p7) --[[ line: 149 ]]
+				BackgroundTransparency = var20:map(function(p7)
 					return p7.transparency
 				end)
 			}, {

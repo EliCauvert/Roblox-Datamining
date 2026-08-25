@@ -2,7 +2,7 @@
 local reactModule = require(parent.Parent.Parent.Parent.React)
 local constantsModule = require(parent.Constants)
 
-local function GetUserCFrameWorldSpace(p0, p1) --[[ line: 12 ]]
+local function GetUserCFrameWorldSpace(p0, p1)
 	local var3 = p1:GetUserCFrame(p0)
 	local currentCamera = workspace.CurrentCamera
 	
@@ -12,7 +12,7 @@ local function GetUserCFrameWorldSpace(p0, p1) --[[ line: 12 ]]
 	return currentCamera.CFrame * (CFrame.new(var3.p * currentCamera.HeadScale) * (var3 - var3.p))
 end
 
-return function(p2, p3) --[[ line: 24 | named "usePanel3DRenderStep" ]]
+return function(p2, p3)
 	-- upvalues: constantsModule (ref), reactModule (ref), GetUserCFrameWorldSpace (ref)
 	if p2.anchoring == constantsModule.AnchoringTypes.PanelManaged and p2.connectPanelManagerFunction then
 		return
@@ -21,11 +21,11 @@ return function(p2, p3) --[[ line: 24 | named "usePanel3DRenderStep" ]]
 	local var5 = reactModule.useRef(nil)
 	local var6 = reactModule.useRef(false)
 	local vrService = p2.vrService
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), p2 (ref)
 		var4.current = p2.offset
 	end, {})
-	local var7 = reactModule.useCallback(function(p4) --[[ line: 39 ]]
+	local var7 = reactModule.useCallback(function(p4)
 		-- upvalues: p2 (ref), constantsModule (copy), vrService (ref), GetUserCFrameWorldSpace (copy), var5 (ref), var6 (ref), var4 (ref), p3 (ref)
 		local currentCamera = workspace.CurrentCamera
 		local var8 = nil
@@ -100,22 +100,22 @@ return function(p2, p3) --[[ line: 24 | named "usePanel3DRenderStep" ]]
 		p2.anchoring, p2.faceCamera, p2.lerp, p2.offset, p2.partSize, p2.alignedPanel,
 		p2.offsetCallback, p2.tiltCallback
 	})
-	reactModule.useEffect(function() --[[ line: 161 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p2 (ref), constantsModule (copy), var7 (ref)
 		if p2.anchoring == constantsModule.AnchoringTypes.World then
-			return function() --[[ line: 205 ]] end
+			return function() end
 		end
 		local var16 = nil
 		local var17 = nil
 		local _ = nil
 		
-		local function onCurrentCameraChanged() --[[ line: 166 ]]
+		local function onCurrentCameraChanged()
 			-- upvalues: var16 (write), var7 (copy)
 			if var16 then
 				var16:Disconnect()
 			end
 			if workspace.CurrentCamera then
-				var16 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function() --[[ line: 173 ]]
+				var16 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(function()
 					-- upvalues: var7 (copy)
 					var7(0)
 				end)
@@ -129,7 +129,7 @@ return function(p2, p3) --[[ line: 24 | named "usePanel3DRenderStep" ]]
 			local part = p2.alignedPanel:GetPart()
 			
 			if part then
-				var17 = part:GetPropertyChangedSignal("CFrame"):Connect(function() --[[ line: 186 ]]
+				var17 = part:GetPropertyChangedSignal("CFrame"):Connect(function()
 					-- upvalues: var7 (copy)
 					var7(0)
 				end)
@@ -137,7 +137,7 @@ return function(p2, p3) --[[ line: 24 | named "usePanel3DRenderStep" ]]
 		end
 		local movementUpdateEventConnection = p2.movementUpdateEvent:Connect(var7)
 		
-		return function() --[[ line: 194 ]]
+		return function()
 			-- upvalues: movementUpdateEventConnection (ref), var19 (write), var16 (write), var17 (write)
 			movementUpdateEventConnection:Disconnect()
 			var19:Disconnect()

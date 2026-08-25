@@ -7,7 +7,7 @@ local colorsModule = require(parent.Colors)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local noInventoryNotice = roactModule.PureComponent:extend("NoInventoryNotice")
 
-function noInventoryNotice.render(p0) --[[ line: 13 ]]
+function noInventoryNotice.render(p0)
 	-- upvalues: roactModule (ref), colorsModule (ref), appFonts (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -49,7 +49,7 @@ function noInventoryNotice.render(p0) --[[ line: 13 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ line: 62 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return {
 		assets = p1.assets,
 		locale = p1.locale,

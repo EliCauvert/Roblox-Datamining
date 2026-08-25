@@ -5,7 +5,7 @@ local _ = require(gameProductInfoRodux.GameProductInfo)
 
 return {
 	key = "GamesProductInfoKey",
-	reducer = function(p0, p1) --[[ line: 13 ]]
+	reducer = function(p0, p1)
 		-- upvalues: setGamesProductInfoModule (ref), immutable (ref)
 		p0 = p0 or {}
 		assert(p0, "")

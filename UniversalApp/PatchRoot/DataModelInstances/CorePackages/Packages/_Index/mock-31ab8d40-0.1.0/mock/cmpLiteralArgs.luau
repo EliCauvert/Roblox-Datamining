@@ -1,6 +1,6 @@
 ﻿local fmtArgsModule = require(script.Parent.fmtArgs)
 
-return function(p0, p1) --[[ line: 4 ]]
+return function(p0, p1)
 	-- upvalues: fmtArgsModule (ref)
 	if p0.n ~= p1.n then
 		return false, "number of literals in " .. fmtArgsModule(p0) .. " does not match number of args in " .. fmtArgsModule(p1)

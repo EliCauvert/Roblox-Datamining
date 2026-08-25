@@ -13,13 +13,13 @@ local t = {
 	padding = 0,
 	hasTail = false,
 	imageColor = Color3.new(0, 0, 0),
-	onAbsoluteSizeChanged = function(_) --[[ line: 35 ]] end,
-	setContentWidth = function(_) --[[ line: 36 ]] end,
-	handleEvent = function(_) --[[ line: 37 ]] end,
+	onAbsoluteSizeChanged = function(_) end,
+	setContentWidth = function(_) end,
+	handleEvent = function(_) end,
 	containerChildren = {}
 }
 
-function ChatBubble(p0) --[[ line: 49 ]]
+function ChatBubble(p0)
 	-- upvalues: useCursor (ref), foundationModule (ref), cryoModule (ref), t (ref), chatBubbleEnumModule (ref), reactModule (ref), object (ref)
 	local var5 = useCursor(foundationModule.Enums.CursorType.RoundedRect)
 	local var6 = cryoModule.Dictionary.union(t, p0)
@@ -39,7 +39,7 @@ function ChatBubble(p0) --[[ line: 49 ]]
 		Position = if var6.isIncoming then UDim2.new(0, var8, 0, 0) else UDim2.new(1, -var8, 0, 0),
 		Selectable = not var6.hasTail,
 		SelectionImageObject = var5,
-		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1) --[[ line: 70 ]]
+		[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
 			-- upvalues: var6 (ref)
 			var6.onAbsoluteSizeChanged(p1)
 		end, { var6.onAbsoluteSizeChanged })
@@ -51,7 +51,7 @@ function ChatBubble(p0) --[[ line: 49 ]]
 			PaddingLeft = uDim
 		}),
 		["$layout"] = reactModule.createElement("UIListLayout", {
-			[reactModule.Change.AbsoluteContentSize] = reactModule.useCallback(function(p2) --[[ line: 74 ]]
+			[reactModule.Change.AbsoluteContentSize] = reactModule.useCallback(function(p2)
 				-- upvalues: var6 (ref), uDim (ref)
 				var6.setContentWidth(p2.AbsoluteContentSize.X + uDim.Offset * 2)
 			end, { var6.setContentWidth })

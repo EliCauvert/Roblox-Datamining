@@ -7,7 +7,7 @@ local list = {
 	512
 }
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: argCheckModule (ref), list (ref)
 	argCheckModule.isNonNegativeNumber(p0, "Game Icon Size")
 	local listCount = #list

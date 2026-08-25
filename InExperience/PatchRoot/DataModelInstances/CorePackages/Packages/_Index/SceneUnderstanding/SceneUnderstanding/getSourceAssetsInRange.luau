@@ -4,7 +4,7 @@ local getSourceAssetsFromDescendantsModule = require(sceneUnderstanding.getSourc
 local isSourceAssetModule = require(sceneUnderstanding.isSourceAsset)
 local rangeQueryOptionsModule = require(sceneUnderstanding.options.RangeQueryOptions)
 
-return function(value, p0) --[[ line: 30 | named "getSourceAssetsInRange" ]]
+return function(value, p0)
 	-- upvalues: rangeQueryOptionsModule (ref), isSourceAssetModule (ref), findSourceAssetsFromDescendantModule (ref), getSourceAssetsFromDescendantsModule (ref)
 	local t = {}
 	

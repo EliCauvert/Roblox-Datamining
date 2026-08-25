@@ -1,7 +1,7 @@
 ﻿local textChatService = game:GetService("TextChatService")
 local constantsModule = require(script:FindFirstAncestor("ChatLineReporting").Common.Constants)
 
-local function findTextChannel(p0) --[[ line: 8 ]]
+local function findTextChannel(p0)
 	-- upvalues: textChatService (ref)
 	local var3 = textChatService:FindFirstChild(p0, true)
 	while not var3 do
@@ -11,7 +11,7 @@ local function findTextChannel(p0) --[[ line: 8 ]]
 	return var3
 end
 
-function sendSystemMessage(p1) --[[ line: 17 ]]
+function sendSystemMessage(p1)
 	-- upvalues: findTextChannel (ref), constantsModule (ref)
 	if p1 then
 		findTextChannel(constantsModule.ChannelTypes.System):DisplaySystemMessage(p1)

@@ -1,11 +1,11 @@
 ﻿local appCommonLibModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.AppCommonLib)
 
-return function() --[[ line: 26 | named "createSduiFocusActivationStore" ]]
+return function()
 	-- upvalues: appCommonLibModule (ref)
 	local tbl = setmetatable({}, { __mode = "v" })
 	
 	return {
-		register = function(p0, p1) --[[ line: 34 ]]
+		register = function(p0, p1)
 			-- upvalues: tbl (ref), appCommonLibModule (copy)
 			local var2 = tbl[p0]
 			
@@ -15,12 +15,12 @@ return function() --[[ line: 26 | named "createSduiFocusActivationStore" ]]
 			end
 			local var3 = var2:connect(p1)
 			
-			return function() --[[ line: 41 ]]
+			return function()
 				-- upvalues: var3 (ref)
 				var3.disconnect()
 			end
 		end,
-		activate = function(p2) --[[ line: 46 ]]
+		activate = function(p2)
 			-- upvalues: tbl (ref)
 			local var4 = tbl[p2]
 			

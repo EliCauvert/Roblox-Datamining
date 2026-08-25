@@ -9,13 +9,13 @@ local joinAndMapBindingsModule = require(var0.Util.joinAndMapBindings)
 local createElement = reactModule.createElement
 local var6 = createDebugLoggerModule("ReactBindingsRenderer")
 
-local function getKeyDefault(_, p0) --[[ line: 15 ]]
+local function getKeyDefault(_, p0)
 	return tostring(p0)
 end
 
-return reactModule.memo(function(p1) --[[ line: 35 | named "ReactBindingsRenderer" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), dimensionsMethodsModule (ref), getKeyDefault (ref), var6 (ref), createElement (ref), joinAndMapBindingsModule (ref), adjustPositionToScrollAxisModule (ref)
-	local var8, var9 = reactModule.useState(function() --[[ line: 48 ]]
+	local var8, var9 = reactModule.useState(function()
 		-- upvalues: dimensionsMethodsModule (copy), p1 (ref), reactModule (copy)
 		local t = {}
 		local var14 = dimensionsMethodsModule.elementsDisplayedHint(p1.dimensions, p1.virtualizedListController.getWindowSize(), p1.direction)
@@ -30,9 +30,9 @@ return reactModule.memo(function(p1) --[[ line: 35 | named "ReactBindingsRendere
 		return t
 	end)
 	local getKey = p1.getKey or getKeyDefault
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), getKey (ref), var8 (ref), var6 (copy), reactModule (copy), var9 (ref)
-		return p1.virtualizedListController.bindToUpdate(function() --[[ line: 80 ]]
+		return p1.virtualizedListController.bindToUpdate(function()
 			-- upvalues: p1 (copy), getKey (copy), var8 (copy), var6 (copy), reactModule (copy), var9 (copy)
 			local var17 = p1.virtualizedListController.get()
 			local range = p1.virtualizedListController.getRange()
@@ -106,7 +106,7 @@ return reactModule.memo(function(p1) --[[ line: 35 | named "ReactBindingsRendere
 			end
 			if #t_3 > 0 then
 				var6("Needed to create %d more bindings to fit, there will be %d setters", #t_3, #t_3 + #var8)
-				var9(function(p2) --[[ line: 177 ]]
+				var9(function(p2)
 					-- upvalues: t_3 (ref)
 					local cloned = table.clone(p2)
 					table.move(t_3, 1, #t_3, #cloned + 1, cloned)
@@ -123,24 +123,24 @@ return reactModule.memo(function(p1) --[[ line: 35 | named "ReactBindingsRendere
 	
 	for i, v in var8 do
 		local binding = v.binding
-		local var12 = binding:map(function(p3) --[[ line: 199 ]]
+		local var12 = binding:map(function(p3)
 			-- upvalues: dimensionsMethodsModule (copy), p1 (ref)
 			return if p3.contents.type == "vacant" then { size = UDim2.new(), position = UDim2.new() } else dimensionsMethodsModule.getUDimRect(p1.dimensions, p3.contents.value, p3.contents.index, p1.virtualizedListController.getWindowSize(), p1.direction)
 		end)
 		t[`Item{i}`] = createElement("Frame", {
 			BackgroundTransparency = 1,
-			Position = joinAndMapBindingsModule(function(p4, p5) --[[ line: 219 ]]
+			Position = joinAndMapBindingsModule(function(p4, p5)
 				-- upvalues: adjustPositionToScrollAxisModule (copy), p1 (ref)
 				return adjustPositionToScrollAxisModule(p4.position, p5, p1.direction)
 			end, var12, p1.scrollAxisBinding),
-			Size = var12:map(function(p6) --[[ line: 223 ]]
+			Size = var12:map(function(p6)
 				return p6.size
 			end),
-			Visible = binding:map(function(p7) --[[ line: 227 ]]
+			Visible = binding:map(function(p7)
 				return p7.contents.type == "full"
 			end)
 		}, {
-			Content = p1.callback(binding:map(function(p8) --[[ line: 231 ]]
+			Content = p1.callback(binding:map(function(p8)
 				return if p8.contents.type == "full" then p8.contents.value else nil
 			end))
 		})

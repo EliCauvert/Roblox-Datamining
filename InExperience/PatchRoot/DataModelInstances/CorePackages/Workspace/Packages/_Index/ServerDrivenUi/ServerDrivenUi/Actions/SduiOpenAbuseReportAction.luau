@@ -15,7 +15,7 @@ local fFlagCloseBadgeSheetOnAbuseReport = require(parent.SharedFlags).FFlagClose
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var3 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0, _, p1, _) --[[ line: 28 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagCloseBadgeSheetOnAbuseReport (ref), getIsBadgeDetailsSheetOpen (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateBack (ref), openDynamicAbuseReportModule (ref), closeCentralOverlay (ref), sduiLoadTimer (ref), fetchBadgeDetailsPage (ref), appPage (ref), navigateDown (ref)
 	local var4 = if p0 then p0.actionParams else nil
 	
@@ -63,7 +63,7 @@ return function(p0, _, p1, _) --[[ line: 28 ]]
 		abuseVector = abuseVector,
 		targetId = targetId,
 		custom = { assetTypeName = assetTypeName, universeId = universeId },
-		onClose = function() --[[ line: 94 ]]
+		onClose = function()
 			-- upvalues: dispatch (ref), closeCentralOverlay (copy), var6 (ref), sduiLoadTimer (copy), fetchBadgeDetailsPage (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), navigateDown (copy)
 			dispatch(closeCentralOverlay())
 			

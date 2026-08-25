@@ -26,7 +26,7 @@ local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local useTokens = foundationModule.Hooks.useTokens
 local fillBehavior = foundationModule.Enums.FillBehavior
 
-return reactModule.memo(function(p0) --[[ line: 79 | named "BaseRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), userListUseActionAddTranslation (ref), useLocalization (ref), textKeysModule (ref), enumsModule (ref), fFlagFriendsPageViewBtnEnabled (ref), fFlagUserListCtaIntegrationEnabled (ref), reactModule (ref), view (ref), constantsModule (ref), userTile (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagAddStatusIndicatorToBaseRow (ref), statusIndicator (ref), statusIndicatorVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), skeleton (ref), radius (ref), iconButton (ref), iconSize (ref)
 	local var13
 	local var7 = useTokens()

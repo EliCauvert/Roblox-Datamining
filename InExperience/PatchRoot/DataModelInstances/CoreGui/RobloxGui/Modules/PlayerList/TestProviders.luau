@@ -16,16 +16,16 @@ local mockApolloClient = require(corePackagesService.Workspace.Packages.GraphQLS
 local array = require(corePackagesService.Packages.LuauPolyfill).Array
 local createLayoutValuesModule = require(parent.CreateLayoutValues)
 
-return function(p0) --[[ line: 37 | named "TestProviders" ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), reducerModule (ref), mockApolloClient (ref), array (ref), roactModule (ref), roactRoduxModule (ref), apolloProvider (ref), provider (ref), createLayoutValuesModule (ref), UIBloxModule (ref), foundationModule (ref), layoutValuesContext (ref), leaderboardStoreContext (ref), var8 (ref)
 	return roactModule.createElement(roactRoduxModule.StoreProvider, { store = p0.store or roduxModule.Store.new(reducerModule) }, {
 		ApolloProvider = roactModule.createElement(apolloProvider, {
 			client = p0.client or mockApolloClient({
 				mockResolvers = {
 					Query = {
-						userProfiles = function(_, p1, _, _) --[[ line: 42 ]]
+						userProfiles = function(_, p1, _, _)
 							-- upvalues: array (copy)
-							return array.map(p1.userIds, function(p2) --[[ line: 43 ]]
+							return array.map(p1.userIds, function(p2)
 								return {
 									userId = p2,
 									names = {
@@ -42,10 +42,10 @@ return function(p0) --[[ line: 37 | named "TestProviders" ]]
 						end
 					},
 					UserProfile = {
-						id = function(p3) --[[ line: 61 ]]
+						id = function(p3)
 							return tostring(p3.userId)
 						end,
-						names = function(p4) --[[ line: 64 ]]
+						names = function(p4)
 							return p4.names
 						end
 					}

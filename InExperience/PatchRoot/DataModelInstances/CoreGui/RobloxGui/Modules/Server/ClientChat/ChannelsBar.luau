@@ -8,7 +8,7 @@ local curveUtilModule = require(parent:WaitForChild("CurveUtil"))
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.CreateGuiObjects(p0, p1) --[[ line: 24 ]]
+function t_1.CreateGuiObjects(p0, p1)
 	-- upvalues: chatSettingsModule (ref), messageSenderModule (ref)
 	local frame = Instance.new("Frame")
 	frame.Selectable = false
@@ -90,12 +90,12 @@ function t_1.CreateGuiObjects(p0, p1) --[[ line: 24 ]]
 	leaveTarget.Name = "LeaveTarget"
 	leaveTarget.Parent = leaveConfirmationFrame
 	local position = leaveConfirmationFrame.Position
-	textButton_1.MouseButton1Click:connect(function() --[[ line: 116 ]]
+	textButton_1.MouseButton1Click:connect(function()
 		-- upvalues: messageSenderModule (copy), leaveTarget (ref), leaveConfirmationFrame (ref), position (ref)
 		messageSenderModule:SendMessage(string.format("/leave %s", leaveTarget.Value), nil)
 		leaveConfirmationFrame:TweenPosition(position, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
 	end)
-	var15.MouseButton1Click:connect(function() --[[ line: 120 ]]
+	var15.MouseButton1Click:connect(function()
 		-- upvalues: leaveConfirmationFrame (ref), position (ref)
 		leaveConfirmationFrame:TweenPosition(position, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.2, true)
 	end)
@@ -145,18 +145,18 @@ function t_1.CreateGuiObjects(p0, p1) --[[ line: 24 ]]
 	p0.GuiObjects.PageLeftButtonArrow = pageLeftButton.ArrowLabel
 	p0.GuiObjects.PageRightButtonArrow = pageRightButton.ArrowLabel
 	p0:AnimGuiObjects()
-	pageLeftButton.MouseButton1Click:connect(function() --[[ line: 188 ]]
+	pageLeftButton.MouseButton1Click:connect(function()
 		-- upvalues: p0 (ref)
 		p0:ScrollChannelsFrame(-1)
 	end)
-	pageRightButton.MouseButton1Click:connect(function() --[[ line: 189 ]]
+	pageRightButton.MouseButton1Click:connect(function()
 		-- upvalues: p0 (ref)
 		p0:ScrollChannelsFrame(1)
 	end)
 	p0:ScrollChannelsFrame(0)
 end
 
-function t_1.UpdateMessagePostedInChannel(p2, p3) --[[ line: 195 ]]
+function t_1.UpdateMessagePostedInChannel(p2, p3)
 	local var25 = p2:GetChannelTab(p3)
 	
 	if var25 then
@@ -167,7 +167,7 @@ function t_1.UpdateMessagePostedInChannel(p2, p3) --[[ line: 195 ]]
 	warn("ChannelsTab '" .. p3 .. "' does not exist!")
 end
 
-function t_1.AddChannelTab(p4, p5) --[[ line: 204 ]]
+function t_1.AddChannelTab(p4, p5)
 	-- upvalues: channelsTabModule (ref), chatSettingsModule (ref)
 	if p4:GetChannelTab(p5) then
 		error("Channel tab '" .. p5 .. "'already exists!")
@@ -179,7 +179,7 @@ function t_1.AddChannelTab(p4, p5) --[[ line: 204 ]]
 	p4:OrganizeChannelTabs()
 	
 	if chatSettingsModule.RightClickToLeaveChannelEnabled then
-		var26.NameTag.MouseButton2Click:connect(function() --[[ line: 217 ]]
+		var26.NameTag.MouseButton2Click:connect(function()
 			-- upvalues: p4 (ref), var26 (ref)
 			p4.LeaveConfirmationNotice.Text = string.format("Leave channel %s?", var26.ChannelName)
 			p4.LeaveConfirmationFrame.LeaveTarget.Value = var26.ChannelName
@@ -189,7 +189,7 @@ function t_1.AddChannelTab(p4, p5) --[[ line: 204 ]]
 	return var26
 end
 
-function t_1.RemoveChannelTab(p6, p7) --[[ line: 227 ]]
+function t_1.RemoveChannelTab(p6, p7)
 	if not p6:GetChannelTab(p7) then
 		error("Channel tab '" .. p7 .. "'does not exist!")
 	end
@@ -200,11 +200,11 @@ function t_1.RemoveChannelTab(p6, p7) --[[ line: 227 ]]
 	p6:OrganizeChannelTabs()
 end
 
-function t_1.GetChannelTab(p8, p9) --[[ line: 240 ]]
+function t_1.GetChannelTab(p8, p9)
 	return p8.ChannelTabs[p9:lower()]
 end
 
-function t_1.OrganizeChannelTabs(value) --[[ line: 244 ]]
+function t_1.OrganizeChannelTabs(value)
 	-- upvalues: chatSettingsModule (ref)
 	local t = {}
 	table.insert(t, value:GetChannelTab(chatSettingsModule.GeneralChannelName))
@@ -222,13 +222,13 @@ function t_1.OrganizeChannelTabs(value) --[[ line: 244 ]]
 	value:ScrollChannelsFrame(0)
 end
 
-function t_1.ResizeChannelTabText(p10, p11) --[[ line: 266 ]]
+function t_1.ResizeChannelTabText(p10, p11)
 	for i, v in pairs(p10.ChannelTabs) do
 		v:SetTextSize(p11)
 	end
 end
 
-function t_1.ScrollChannelsFrame(p12, p13) --[[ line: 272 ]]
+function t_1.ScrollChannelsFrame(p12, p13)
 	-- upvalues: chatSettingsModule (ref)
 	if p12.ScrollChannelsFrameLock then return end
 	p12.ScrollChannelsFrameLock = true
@@ -250,7 +250,7 @@ function t_1.ScrollChannelsFrame(p12, p13) --[[ line: 272 ]]
 		
 		return
 	end
-	local function UnlockFunc() --[[ line: 298 ]]
+	local function UnlockFunc()
 		-- upvalues: p12 (ref)
 		p12.ScrollChannelsFrameLock = false
 	end
@@ -259,7 +259,7 @@ function t_1.ScrollChannelsFrame(p12, p13) --[[ line: 272 ]]
 	p12.GuiObjects.ScrollerFrame:TweenPosition(uDim2, Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.15, true, UnlockFunc)
 end
 
-function t_1.FadeOutBackground(value, p14) --[[ line: 307 ]]
+function t_1.FadeOutBackground(value, p14)
 	-- upvalues: curveUtilModule (ref)
 	for i, v in pairs(value.ChannelTabs) do
 		v:FadeOutBackground(p14)
@@ -268,7 +268,7 @@ function t_1.FadeOutBackground(value, p14) --[[ line: 307 ]]
 	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p14)
 end
 
-function t_1.FadeInBackground(value, p15) --[[ line: 316 ]]
+function t_1.FadeInBackground(value, p15)
 	-- upvalues: curveUtilModule (ref)
 	for i, v in pairs(value.ChannelTabs) do
 		v:FadeInBackground(p15)
@@ -277,33 +277,33 @@ function t_1.FadeInBackground(value, p15) --[[ line: 316 ]]
 	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p15)
 end
 
-function t_1.FadeOutText(p16, p17) --[[ line: 325 ]]
+function t_1.FadeOutText(p16, p17)
 	for i, v in pairs(p16.ChannelTabs) do
 		v:FadeOutText(p17)
 	end
 end
 
-function t_1.FadeInText(p18, p19) --[[ line: 331 ]]
+function t_1.FadeInText(p18, p19)
 	for i, v in pairs(p18.ChannelTabs) do
 		v:FadeInText(p19)
 	end
 end
 
-function t_1.AnimGuiObjects(p20) --[[ line: 337 ]]
+function t_1.AnimGuiObjects(p20)
 	p20.GuiObjects.PageLeftButton.ImageTransparency = p20.AnimParams.Background_CurrentTransparency
 	p20.GuiObjects.PageRightButton.ImageTransparency = p20.AnimParams.Background_CurrentTransparency
 	p20.GuiObjects.PageLeftButtonArrow.ImageTransparency = p20.AnimParams.Background_CurrentTransparency
 	p20.GuiObjects.PageRightButtonArrow.ImageTransparency = p20.AnimParams.Background_CurrentTransparency
 end
 
-function t_1.InitializeAnimParams(p21) --[[ line: 344 ]]
+function t_1.InitializeAnimParams(p21)
 	-- upvalues: curveUtilModule (ref)
 	p21.AnimParams.Background_TargetTransparency = 0.6
 	p21.AnimParams.Background_CurrentTransparency = 0.6
 	p21.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
 end
 
-function t_1.Update(p22, p23) --[[ line: 350 ]]
+function t_1.Update(p22, p23)
 	-- upvalues: curveUtilModule (ref)
 	for i, v in pairs(p22.ChannelTabs) do
 		v:Update(p23)
@@ -312,13 +312,13 @@ function t_1.Update(p22, p23) --[[ line: 350 ]]
 	p22:AnimGuiObjects()
 end
 
-function t_1.WaitUntilParentedCorrectly(p24) --[[ line: 366 ]]
+function t_1.WaitUntilParentedCorrectly(p24)
 	while not p24.GuiObject:IsDescendantOf(game:GetService("Players").LocalPlayer) do
 		p24.GuiObject.AncestryChanged:wait()
 	end
 end
 
-function t.new() --[[ line: 375 ]]
+function t.new()
 	-- upvalues: t_1 (ref), chatSettingsModule (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.GuiObject = nil
@@ -329,7 +329,7 @@ function t.new() --[[ line: 375 ]]
 	tbl.ScrollChannelsFrameLock = false
 	tbl.AnimParams = {}
 	tbl:InitializeAnimParams()
-	chatSettingsModule.SettingsChanged:connect(function(p25, p26) --[[ line: 391 ]]
+	chatSettingsModule.SettingsChanged:connect(function(p25, p26)
 		-- upvalues: tbl (ref)
 		if p25 == "ChatChannelsTabTextSize" then
 			tbl:ResizeChannelTabText(p26)

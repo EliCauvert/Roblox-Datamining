@@ -5,11 +5,11 @@ local var2 = reactModule.createContext(nil)
 
 return {
 	AbuseReportAnalyticsContext = var2,
-	AbuseReportAnalyticsProvider = function(p0) --[[ line: 25 ]]
+	AbuseReportAnalyticsProvider = function(p0)
 		-- upvalues: reactModule (ref), var2 (ref)
 		return reactModule.createElement(var2.Provider, { value = p0.analytics }, p0.children)
 	end,
-	useAbuseReportAnalytics = function() --[[ line: 36 ]]
+	useAbuseReportAnalytics = function()
 		-- upvalues: reactModule (ref), var2 (ref)
 		local var3 = reactModule.useContext(var2)
 		
@@ -18,7 +18,7 @@ return {
 		end
 		return var3
 	end,
-	useOptionalAbuseReportAnalytics = function() --[[ line: 52 ]]
+	useOptionalAbuseReportAnalytics = function()
 		-- upvalues: reactModule (ref), var2 (ref)
 		return reactModule.useContext(var2)
 	end

@@ -6,7 +6,7 @@ local changeDevConsoleSizeModule = require(script.Parent.Parent.Actions.ChangeDe
 local setDevConsolePositionModule = require(script.Parent.Parent.Actions.SetDevConsolePosition)
 local setActiveTabModule = require(script.Parent.Parent.Actions.SetActiveTab)
 
-return function(p0, p1) --[[ line: 19 ]]
+return function(p0, p1)
 	-- upvalues: constantsModule (ref), setDevConsoleVisibilityModule (ref), immutableModule (ref), setDevConsolePositionModule (ref), setDevConsoleMinimizedModule (ref), changeDevConsoleSizeModule (ref), setActiveTabModule (ref)
 	p0 = p0 or {
 		isVisible = false,

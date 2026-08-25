@@ -15,7 +15,7 @@ t.requiredData = {}
 t.fflag = getFFlagUGCValidateMigrateCurveAnimModule
 t.expectedFailures = {}
 
-function t.run(p0, p1) --[[ line: 21 ]]
+function t.run(p0, p1)
 	-- upvalues: fetchAllDesiredDataModule (ref), errorSourceStringsModule (ref)
 	local curveAnimations = p1.curveAnimations
 	

@@ -14,15 +14,15 @@ local constantsModule = require(parent.Constants)
 local list = { networkModule }
 local var12 = createInspectAndBuyKeyMapperModule("getItemDetails")
 
-return function(p0, p1) --[[ line: 25 | named "GetItemDetails" ]]
+return function(p0, p1)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var12 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), bundleInfoModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref), getExperiencePlayabilityModule (ref), getExperienceInfoModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3) --[[ line: 26 ]]
+	return thunkModule.new(script.Name, list, function(p2, p3)
 		-- upvalues: networkModule (copy), var12 (copy), p0 (ref), p1 (ref), performFetch (copy), assetInfoModule (copy), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
 		local var13 = p3[networkModule]
 		
-		return performFetch.Single(var12(p2:getState().storeId, p0, p1), function() --[[ line: 31 ]]
+		return performFetch.Single(var12(p2:getState().storeId, p0, p1), function()
 			-- upvalues: var13 (ref), p0 (copy), p1 (copy), assetInfoModule (copy), p2 (ref), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
-			return var13.getItemDetails(p0, p1):andThen(function(p4) --[[ line: 32 ]]
+			return var13.getItemDetails(p0, p1):andThen(function(p4)
 				-- upvalues: p1 (copy), assetInfoModule (copy), p2 (copy), setAssetsModule (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy)
 				if p1 == Enum.AvatarItemType.Asset then
 					p2:dispatch(setAssetsModule({ assetInfoModule.fromGetItemDetails(p4) }))
@@ -36,11 +36,11 @@ return function(p0, p1) --[[ line: 25 | named "GetItemDetails" ]]
 					p2:dispatch(getExperienceInfoModule(p4.CreatingUniverseId))
 				end
 				p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_) --[[ line: 51 ]]
+			end, function(_)
 				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
 				p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_) --[[ line: 56 ]]
+		end)(p2):catch(function(_)
 			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
 			p2:dispatch(sendCounterModule(constantsModule.Counters.GetItemDetails .. constantsModule.CounterSuffix.RequestFailed))
 		end)

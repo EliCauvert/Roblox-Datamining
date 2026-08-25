@@ -5,9 +5,9 @@ local text = require(parent.AppCommonLib).Text
 local systemButton = roactModule.PureComponent:extend("SystemButton")
 systemButton.defaultProps = { text = "Text", enabled = false, onActivated = nil }
 
-function systemButton.render(p0) --[[ line: 17 ]]
+function systemButton.render(p0)
 	-- upvalues: UIBloxModule (ref), text (ref), roactModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 18 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: p0 (ref), text (copy), roactModule (copy)
 		local text_1 = p0.props.text
 		local font = p1.Font.Header1.Font

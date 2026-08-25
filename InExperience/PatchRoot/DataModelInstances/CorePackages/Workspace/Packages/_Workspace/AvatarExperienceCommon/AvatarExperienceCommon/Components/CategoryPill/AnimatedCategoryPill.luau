@@ -5,20 +5,20 @@ local foundationModule = require(parent.Foundation)
 local reactOtterModule = require(parent.ReactOtter)
 local animationConstantsModule = require(avatarExperienceCommon.AnimationConstants)
 
-local function useCategoryPillAnimation(p0, p1, p2) --[[ line: 21 ]]
+local function useCategoryPillAnimation(p0, p1, p2)
 	-- upvalues: reactOtterModule (ref), reactModule (ref), animationConstantsModule (ref)
 	local var6 = p2 and not p1
 	local var7 = if var6 then 1 else 0
 	local var8, var9 = reactOtterModule.useAnimatedBinding(p0)
 	local var10, var11 = reactOtterModule.useAnimatedBinding(var7)
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), reactOtterModule (copy), p0 (ref), animationConstantsModule (copy)
 		var9(reactOtterModule.spring(p0, {
 			frequency = animationConstantsModule.FIntAXCategoryPillPositionAnimationFrequency,
 			dampingRatio = animationConstantsModule.FIntAXCategoryPillPositionAnimationDampingRatio
 		}))
 	end, { p0, var9 })
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var11 (ref), reactOtterModule (copy), animationConstantsModule (copy)
 		if var7 == 1 then
 			var11(reactOtterModule.instant(var7))
@@ -34,7 +34,7 @@ local function useCategoryPillAnimation(p0, p1, p2) --[[ line: 21 ]]
 	return var8, var10, var6
 end
 
-return function(p3) --[[ line: 52 | named "AnimatedCategoryPill" ]]
+return function(p3)
 	-- upvalues: useCategoryPillAnimation (ref), reactModule (ref), foundationModule (ref)
 	local catInfo = p3.catInfo
 	local pillIndex = p3.pillIndex
@@ -48,7 +48,7 @@ return function(p3) --[[ line: 52 | named "AnimatedCategoryPill" ]]
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy anchor-center-left padding-x-xxsmall",
 		BackgroundTransparency = 1,
-		Position = var12:map(function(p4) --[[ line: 68 ]]
+		Position = var12:map(function(p4)
 			return UDim2.new(0, p4, 0.5, 0)
 		end),
 		GroupTransparency = var13,

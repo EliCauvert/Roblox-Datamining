@@ -6,7 +6,7 @@ local argCheckModule = require(parent.ArgCheck)
 local videoPlayerWrapperModule = require(script.Parent.VideoPlayerWrapper)
 local videoLoadingStateModule = require(script.Parent.VideoLoadingState)
 
-return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), videoLoadingStateModule (ref), userGameSettingsService (ref), argCheckModule (ref), runService (ref), videoPlayerWrapperModule (ref)
 	local var6 = reactModule.useRef(nil)
 	local videoPlayerRef = p0.videoPlayerRef or reactModule.useRef(nil)
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 	var18.current = p0.onAspectRatioChanged
 	local var19 = reactModule.useRef(nil)
 	var19.current = p0.onVideoProgressChanged
-	local var20 = reactModule.useCallback(function(p1) --[[ line: 75 ]]
+	local var20 = reactModule.useCallback(function(p1)
 		-- upvalues: var14 (ref), var16 (ref)
 		var14(p1)
 		
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 			var16.current(p1)
 		end
 	end, {})
-	local var21 = reactModule.useCallback(function() --[[ line: 82 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref), p0 (ref)
 		var8.current += 1
 		
@@ -40,20 +40,20 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 			p0.onVideoLooped()
 		end
 	end, { p0.onVideoLooped })
-	reactModule.useEffect(function() --[[ line: 89 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var9 (ref), var10 (ref)
 		var8.current = 0
 		var9.current = 0
 		var10.current = false
 	end, { p0.video })
-	reactModule.useEffect(function() --[[ line: 95 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), videoPlayerRef (ref), var8 (ref), var9 (ref), userGameSettingsService (copy)
 		local videoPlaybackStateRef = p0.videoPlaybackStateRef
 		
 		if videoPlaybackStateRef == nil then
 			return
 		end
-		local var23 = function() --[[ line: 101 ]]
+		local var23 = function()
 			-- upvalues: videoPlayerRef (copy), var8 (copy), var9 (copy), userGameSettingsService (copy)
 			local current = videoPlayerRef.current
 			
@@ -69,14 +69,14 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 		
 		videoPlaybackStateRef.current = var23
 		
-		return function() --[[ line: 118 ]]
+		return function()
 			-- upvalues: videoPlaybackStateRef (ref), var23 (ref)
 			if videoPlaybackStateRef.current == var23 then
 				videoPlaybackStateRef.current = nil
 			end
 		end
 	end, { p0.videoPlaybackStateRef })
-	reactModule.useEffect(function() --[[ line: 127 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), shouldStartPlayback (ref), var20 (ref), videoLoadingStateModule (copy), videoPlayerRef (ref), argCheckModule (copy), p0 (ref), var17 (ref), var18 (ref)
 		var12(false)
 		
@@ -85,10 +85,10 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 			argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before loading")
 			var20(videoLoadingStateModule.Loading)
 			local var24 = false
-			task.spawn(function() --[[ line: 137 ]]
+			task.spawn(function()
 				-- upvalues: current (ref), var24 (write), var20 (copy), videoLoadingStateModule (copy), p0 (copy), var17 (copy), var18 (copy), var12 (copy)
 				local currentTime = tick()
-				local ok, status = pcall(function() --[[ line: 139 ]]
+				local ok, status = pcall(function()
 					-- upvalues: current (copy)
 					return current:LoadAsync()
 				end)
@@ -113,14 +113,14 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 				var20(videoLoadingStateModule.Loaded)
 			end)
 			
-			return function() --[[ line: 162 ]]
+			return function()
 				-- upvalues: var24 (write)
 				var24 = true
 			end
 		end
 		var20(videoLoadingStateModule.Idle)
 	end, { p0.video, shouldStartPlayback })
-	local var22 = reactModule.useCallback(function() --[[ line: 167 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var9 (ref), p0 (ref)
 		var10.current = true
 		var9.current += 1
@@ -129,7 +129,7 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 			p0.onVideoEnded()
 		end
 	end, { p0.onVideoEnded })
-	reactModule.useEffect(function() --[[ line: 176 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), videoPlayerRef (ref), argCheckModule (copy), var10 (ref), p0 (ref)
 		if not var11 then return end
 		local current = videoPlayerRef.current
@@ -152,12 +152,12 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 		p0.preservePlaybackPosition,
 		p0.shouldStartPlayback
 	})
-	reactModule.useEffect(function() --[[ line: 202 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), videoPlayerRef (ref), argCheckModule (copy), runService (copy), var19 (ref)
 		if var11 then
 			local current = videoPlayerRef.current
 			argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before reporting progress")
-			local renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 208 ]]
+			local renderSteppedConnection = runService.RenderStepped:Connect(function()
 				-- upvalues: var19 (copy), current (ref)
 				local current_1 = var19.current
 				
@@ -166,7 +166,7 @@ return function(p0) --[[ line: 55 | named "VideoDisplay" ]]
 				end
 			end)
 			
-			return function() --[[ line: 216 ]]
+			return function()
 				-- upvalues: renderSteppedConnection (ref)
 				renderSteppedConnection:Disconnect()
 			end

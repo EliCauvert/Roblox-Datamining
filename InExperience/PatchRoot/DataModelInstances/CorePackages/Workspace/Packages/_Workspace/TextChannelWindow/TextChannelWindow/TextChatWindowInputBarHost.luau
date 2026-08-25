@@ -14,13 +14,13 @@ local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpC
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local chatInputBarView = chatUIPrimitivesModule.ChatInputBarView
 
-return function(p0) --[[ line: 33 | named "TextChatWindowInputBarHost" ]]
+return function(p0)
 	-- upvalues: foundationModule (ref), useCanSendToChannel (ref), useInExperienceLocalization (ref), reactModule (ref), messageWriterContextModule (ref), getFFlagExpChatUseChatMuteStoreModule (ref), runVirtualChatCommandsModule (ref), messageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), textChannelWindowAnalyticsModule (ref), loggerModule (ref), chatInputBarView (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref)
 	local targetChannel = p0.targetChannel
 	local var10 = foundationModule.Hooks.useTokens()
 	local var11 = useCanSendToChannel(targetChannel, p0.localUserId)
 	local var12 = useInExperienceLocalization()
-	local var13 = reactModule.useMemo(function() --[[ line: 40 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref)
 		return {
 			placeholder = var12("CoreScripts.TextChat.InputBar.Hint.Touch"),
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 33 | named "TextChatWindowInputBarHost" ]]
 	
 	return reactModule.createElement(chatInputBarView, {
 		maximumCharacterLimit = 200,
-		onSend = reactModule.useCallback(function(p1) --[[ line: 53 ]]
+		onSend = reactModule.useCallback(function(p1)
 			-- upvalues: var11 (ref), targetChannel (ref), getFFlagExpChatUseChatMuteStoreModule (copy), p0 (ref), runVirtualChatCommandsModule (copy), var14 (ref), messageModule (copy), var12 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowAnalyticsModule (copy), var15 (ref), loggerModule (copy)
 			if not var11 then return end
 			if targetChannel and p1 ~= "" then
@@ -47,9 +47,9 @@ return function(p0) --[[ line: 33 | named "TextChatWindowInputBarHost" ]]
 						end
 						return
 					else
-						task.spawn(function() --[[ line: 74 ]]
+						task.spawn(function()
 							-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), targetChannel (copy), p1 (ref), textChannelWindowAnalyticsModule (copy), var15 (copy), loggerModule (copy)
-							local ok, status = pcall(function() --[[ line: 75 ]]
+							local ok, status = pcall(function()
 								-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), targetChannel (copy), p1 (copy)
 								if getFFlagExpChatProtectedChatInternalAPIs() then
 									targetChannel:SendInternalAsync(p1)
@@ -86,7 +86,7 @@ return function(p0) --[[ line: 33 | named "TextChatWindowInputBarHost" ]]
 		fontFace = p0.fontFace,
 		placeholderText = var13.placeholder,
 		disabledChatPlaceholderText = if targetChannel == nil then var13.chatUnavailable elseif not var11 then var13.readOnly else var13.disabled,
-		autocomplete = reactModule.useMemo(function() --[[ line: 121 ]]
+		autocomplete = reactModule.useMemo(function()
 			return { commands = nil, emojis = true }
 		end, {}),
 		themedColors = fFlagExpChatTextChannelWindowThemeByBackgroundModule

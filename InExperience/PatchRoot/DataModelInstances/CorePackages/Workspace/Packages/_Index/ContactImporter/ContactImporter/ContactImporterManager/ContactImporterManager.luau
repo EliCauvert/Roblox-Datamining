@@ -43,11 +43,11 @@ local t = {
 	}
 }
 
-return universalAppPolicy.connect(function(p2) --[[ line: 204 ]]
+return universalAppPolicy.connect(function(p2)
 	return {
 		isContactImporterPolicyEnabled = p2.getContactImporterEnabled()
 	}
-end)(function(p0) --[[ line: 89 | named "Container" ]]
+end)(function(p0)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), reactModule (ref), var11 (ref), useSignalState (ref), prefetchProfileNamesOnStartupV2 (ref), userIdExists (ref), var15 (ref), fFlagSocialCarouselMigrateRecommendations (ref), friendsRecommendationsStore (ref), dataSource (ref), useAutoSyncContacts (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), networkingFriends (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var13 (ref), permissionsProtocol (ref)
 	local var17 = useDispatch()
 	local var18 = useLocalUserId()
@@ -57,19 +57,19 @@ end)(function(p0) --[[ line: 89 | named "Container" ]]
 	local var19 = nil
 	
 	if earlierFetchTimeForFriendsCarouselV1 then
-		local var20 = useSignalState(reactModule.useMemo(function() --[[ line: 102 ]]
+		local var20 = useSignalState(reactModule.useMemo(function()
 			-- upvalues: var11 (copy)
 			return var11.GetAllFriends()
 		end, {}))
 		var19 = if var20 then var20.friends else nil
-		reactModule.useEffect(function() --[[ line: 109 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var11 (copy)
 			var11.GetOnlineFriends()
 		end, {})
 	end
 	if prefetchProfileNamesOnStartupV2 then
 		local var21 = var19
-		reactModule.useEffect(function() --[[ line: 118 ]]
+		reactModule.useEffect(function()
 			-- upvalues: userIdExists (copy), var18 (ref), var21 (ref), var15 (copy)
 			if userIdExists(var18) then
 				local list = { tostring(var18) }
@@ -86,7 +86,7 @@ end)(function(p0) --[[ line: 89 | named "Container" ]]
 		end, { var18, var21 })
 	end
 	if fFlagSocialCarouselMigrateRecommendations then
-		reactModule.useEffect(function() --[[ line: 136 ]]
+		reactModule.useEffect(function()
 			-- upvalues: getAppFeaturePolicies (copy), friendsRecommendationsStore (copy), dataSource (copy)
 			if getAppFeaturePolicies().getSocialGraphSyncEnabled() then
 				friendsRecommendationsStore.get().getFriendsRecommendations(dataSource.HomepageFriendsCarousel)
@@ -94,7 +94,7 @@ end)(function(p0) --[[ line: 89 | named "Container" ]]
 		end, { var18 })
 	end
 	useAutoSyncContacts()
-	reactModule.useEffect(function() --[[ line: 146 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userIdExists (copy), var18 (ref), fFlagFriendsCountDataHydrationMigrationEnabled (copy), var11 (copy), var17 (ref), networkingFriends (copy)
 		if userIdExists(var18) then
 			if fFlagFriendsCountDataHydrationMigrationEnabled then
@@ -105,33 +105,33 @@ end)(function(p0) --[[ line: 89 | named "Container" ]]
 			var17(networkingFriends.GetFriendsCountFromUserId.API(var18))
 		end
 	end, { var18 })
-	reactModule.useEffect(function() --[[ line: 156 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userIdExists (copy), var18 (ref), var17 (ref), networkingFriends (copy), messageBusService (copy), realtimeMessageId (copy)
 		if userIdExists(var18) then
 			var17(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var18 }))
-			local var24 = messageBusService:Subscribe(realtimeMessageId, function() --[[ line: 161 ]]
+			local var24 = messageBusService:Subscribe(realtimeMessageId, function()
 				-- upvalues: var17 (copy), networkingFriends (copy), var18 (copy)
 				var17(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var18 }))
 			end, false, true)
 			
-			return function() --[[ line: 166 ]]
+			return function()
 				-- upvalues: var24 (ref)
 				var24:Disconnect()
 			end
 		end
-		return function() --[[ line: 170 ]] end
+		return function() end
 	end, { var18 })
-	local var22 = reactModule.useMemo(function() --[[ line: 173 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: analyticsFactory (copy), t (copy), defaultAnalyticsService (copy)
 		return analyticsFactory.setUpAnalyticsFactory({
 			eventLists = { EventStream = t },
 			analyticsImpl = { EventStream = defaultAnalyticsService.EventStream }
 		})()
 	end, {})
-	reactModule.useEffect(function() --[[ line: 183 ]]
+	reactModule.useEffect(function()
 		-- upvalues: appStorageService (copy), var13 (copy), permissionsProtocol (copy), var22 (ref)
 		if appStorageService:GetItem(var13) == "true" then
-			permissionsProtocol.default:checkOrRequestPermissions({ permissionsProtocol.Permissions.CAMERA_ACCESS }):andThen(function(p1) --[[ line: 191 ]]
+			permissionsProtocol.default:checkOrRequestPermissions({ permissionsProtocol.Permissions.CAMERA_ACCESS }):andThen(function(p1)
 				-- upvalues: var22 (copy)
 				var22.fireAnalyticsEvent("ProfileQRCodeCameraSettingsModalSeen", { cameraPermissionResponseStatus = p1 })
 			end)

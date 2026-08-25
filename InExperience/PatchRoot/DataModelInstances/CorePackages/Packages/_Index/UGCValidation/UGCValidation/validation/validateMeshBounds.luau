@@ -8,29 +8,29 @@ local analyticsModule = require(parent.Analytics)
 local UGCValidationScaleMinimumThousandths = game:DefineFastInt("UGCValidationScaleMinimumThousandths", 10)
 local fIntUGCValidationScaleMaximumThousandths = game:DefineFastInt("FIntUGCValidationScaleMaximumThousandths", 10000)
 
-local function pointInBounds(p0, p1, p2) --[[ line: 17 ]]
+local function pointInBounds(p0, p1, p2)
 	local var9 = p1:PointToObjectSpace(p0)
 	
 	return -p2.X / 2 <= var9.X and (var9.X <= p2.X / 2 and (-p2.Y / 2 <= var9.Y and (var9.Y <= p2.Y / 2 and (-p2.Z / 2 <= var9.Z and var9.Z <= p2.Z / 2))))
 end
 
-local function _(p3, p4, p5) --[[ line: 27 | named "isSizeWithinBounds" ]]
+local function _(p3, p4, p5)
 	local var10 = (p5 * p3.Size):Abs()
 	
 	return var10.X <= p4.X and (var10.Y <= p4.Y and var10.Z <= p4.Z)
 end
 
-local _ = function(p6) --[[ line: 34 | named "truncate" ]]
+local _ = function(p6)
 	return math.floor(p6 * 100) / 100
 end
 
-local function getErrors(p7, p8, p9) --[[ line: 38 ]]
+local function getErrors(p7, p8, p9)
 	return {
 		string.format("%s has size larger than max allowed bounding size. The max size for type %s is [%.2f, %.2f, %.2f]", p7, p8, math.floor(p9.X * 100) / 100, math.floor(p9.Y * 100) / 100, math.floor(p9.Z * 100) / 100)
 	}
 end
 
-return function(p10, p11, p12, p13, p14, p15, p16) --[[ line: 51 | named "validateMeshBounds" ]]
+return function(p10, p11, p12, p13, p14, p15, p16)
 	-- upvalues: UGCValidationScaleMinimumThousandths (ref), getFFlagUGCValidateMeshMaxScaleModule (ref), fIntUGCValidationScaleMaximumThousandths (ref), UGCValidationService (ref), analyticsModule (ref), pointInBounds (ref), getErrors (ref), getMeshMinMaxModule (ref), getFIntUGCValidateMeshCenteringHundredsThresholdModule (ref)
 	local isServer = p16.isServer
 	local size = p14.size
@@ -45,7 +45,7 @@ return function(p10, p11, p12, p13, p14, p15, p16) --[[ line: 51 | named "valida
 	elseif getFFlagUGCValidateMeshMaxScaleModule() and (fIntUGCValidationScaleMaximumThousandths / 1000 < p13.X or fIntUGCValidationScaleMaximumThousandths / 1000 < p13.Y or fIntUGCValidationScaleMaximumThousandths / 1000 < p13.Z) then
 		return false, { `{p10.Name} mesh scale is too large` }
 	end
-	local ok, status = pcall(function() --[[ line: 104 ]]
+	local ok, status = pcall(function()
 		-- upvalues: UGCValidationService (copy), p12 (ref)
 		return UGCValidationService:GetEditableMeshVerts(p12.editableMesh)
 	end)

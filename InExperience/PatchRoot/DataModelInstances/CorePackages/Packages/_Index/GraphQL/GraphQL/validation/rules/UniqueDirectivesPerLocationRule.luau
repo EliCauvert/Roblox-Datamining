@@ -8,7 +8,7 @@ local isTypeExtensionNode = predicatesModule.isTypeExtensionNode
 local specifiedDirectives = require(parent.type.directives).specifiedDirectives
 
 return {
-	UniqueDirectivesPerLocationRule = function(p0) --[[ line: 27 ]]
+	UniqueDirectivesPerLocationRule = function(p0)
 		-- upvalues: specifiedDirectives (ref), kind (ref), isTypeDefinitionNode (ref), isTypeExtensionNode (ref), graphQLError (ref)
 		local t = {}
 		local schema = p0:getSchema()
@@ -25,7 +25,7 @@ return {
 		local t_2 = {}
 		
 		return {
-			enter = function(_, p1) --[[ line: 50 ]]
+			enter = function(_, p1)
 				-- upvalues: kind (copy), t_1 (ref), isTypeDefinitionNode (copy), isTypeExtensionNode (copy), t_2 (ref), t (ref), p0 (ref), graphQLError (copy)
 				if p1.directives == nil then return end
 				local t_3

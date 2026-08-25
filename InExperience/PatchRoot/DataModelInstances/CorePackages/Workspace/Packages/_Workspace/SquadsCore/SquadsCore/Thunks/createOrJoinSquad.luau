@@ -7,9 +7,9 @@ local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
 local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
 local fFlagEnableSquadCoplayAnalytic = require(parent.SharedFlags).FFlagEnableSquadCoplayAnalytic
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 16 ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: networkingSquadsModule (ref), fFlagEnableSquadCoplayAnalytic (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoinModule (ref), squadPromptTypeModule (ref)
-	return function(p7) --[[ line: 25 ]]
+	return function(p7)
 		-- upvalues: networkingSquadsModule (copy), p0 (ref), fFlagEnableSquadCoplayAnalytic (copy), p3 (ref), p4 (ref), p6 (ref), logInExpCoplayTelemetryModule (copy), squadCoplayJoinModule (copy), p2 (ref), p1 (ref), squadPromptTypeModule (copy), p5 (ref)
 		local var5 = p7:dispatch(networkingSquadsModule.CreateOrJoinSquad.API({
 			leaveExisting = true,
@@ -20,7 +20,7 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 16 ]]
 		}))
 		
 		if fFlagEnableSquadCoplayAnalytic then
-			var5 = var5:andThen(function(p8) --[[ line: 35 ]]
+			var5 = var5:andThen(function(p8)
 				-- upvalues: logInExpCoplayTelemetryModule (copy), p3 (copy), squadCoplayJoinModule (copy), p2 (copy)
 				local groupUpId = p8.responseBody.groupUp.groupUpId
 				local members = p8.responseBody.groupUp.members
@@ -30,7 +30,7 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 16 ]]
 				end
 			end)
 		end
-		return var5:catch(function(_) --[[ line: 51 ]]
+		return var5:catch(function(_)
 			-- upvalues: p1 (copy), p7 (ref), squadPromptTypeModule (copy), p5 (copy)
 			p1(p7, {
 				hideCancelButton = true,

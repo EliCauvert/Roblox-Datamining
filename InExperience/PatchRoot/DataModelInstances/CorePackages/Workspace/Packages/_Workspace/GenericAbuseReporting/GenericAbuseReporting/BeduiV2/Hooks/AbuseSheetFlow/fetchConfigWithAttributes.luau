@@ -7,7 +7,7 @@ local url = require(parent.Http).Url
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
 local var4 = if require(parent.SharedFlags).FFlagAbuseReportSubmissionTargetV4 then "&version=4" elseif require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3 then "&version=3" else "&version=2"
 
-return function(p0, p1, p2) --[[ line: 23 ]]
+return function(p0, p1, p2)
 	-- upvalues: argCheckModule (ref), localizationService (ref), httpService (ref), url (ref), var4 (ref)
 	argCheckModule.assert(p1, "abuseVector is required")
 	argCheckModule.isType(p1, "string", "fetchConfigWithAttributes expects abuseVector as a string")

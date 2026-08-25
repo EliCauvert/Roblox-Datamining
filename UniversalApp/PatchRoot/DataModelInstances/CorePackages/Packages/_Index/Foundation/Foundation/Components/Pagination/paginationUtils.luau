@@ -11,26 +11,26 @@ local t_1 = {
 }
 
 return {
-	getCircularSlotTag = function(p0) --[[ line: 21 ]]
+	getCircularSlotTag = function(p0)
 		-- upvalues: t (ref)
 		return t[p0]
 	end,
-	getPageLabelTag = function(p1) --[[ line: 25 ]]
+	getPageLabelTag = function(p1)
 		-- upvalues: t_1 (ref)
 		return `auto-xy {t_1[p1]} content-default text-align-x-center text-align-y-center`
 	end,
-	getPageLabelTextTag = function(p2) --[[ line: 29 ]]
+	getPageLabelTextTag = function(p2)
 		-- upvalues: t_1 (ref)
 		return `auto-xy {t_1[p2]} text-align-x-center text-align-y-center`
 	end,
-	getSlotCursor = function(p3) --[[ line: 37 ]]
+	getSlotCursor = function(p3)
 		return {
 			radius = UDim.new(0, p3.Radius.Circle),
 			offset = p3.Size.Size_150,
 			borderWidth = math.floor(p3.Stroke.Thicker)
 		}
 	end,
-	needsWidePageSlot = function(p4) --[[ line: 33 ]]
+	needsWidePageSlot = function(p4)
 		return p4 > 999
 	end
 }

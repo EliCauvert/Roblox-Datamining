@@ -10,7 +10,7 @@ local var3 = tModule.strictInterface({
 	stamp = tModule.optional(tModule.string)
 })
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), gameCopyExperienceLinkThrottleHundrethsPercent (ref), telemetryService (ref)
 	local var4, var5 = var3(p0)
 	

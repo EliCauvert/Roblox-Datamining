@@ -36,7 +36,7 @@ local var24 = 0
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.UpdateInspectMenuEnabled(_) --[[ line: 72 ]]
+function t_2.UpdateInspectMenuEnabled(_)
 	-- upvalues: guiService (ref), t (ref)
 	local inspectMenuEnabled = guiService:GetInspectMenuEnabled()
 	
@@ -45,7 +45,7 @@ function t_2.UpdateInspectMenuEnabled(_) --[[ line: 72 ]]
 	end
 end
 
-function t_2:ClearMenuItems() --[[ line: 80 ]]
+function t_2:ClearMenuItems()
 	local children = self.MenuItemFrame:GetChildren()
 	
 	for i = 1, #children do
@@ -55,18 +55,18 @@ function t_2:ClearMenuItems() --[[ line: 80 ]]
 	end
 end
 
-function t_2.AddCustomAvatarMenuItem(_, p0, p1) --[[ line: 89 ]]
+function t_2.AddCustomAvatarMenuItem(_, p0, p1)
 	-- upvalues: var24 (write), t_1 (ref)
 	var24 += 1
 	t_1[p0] = { event = p1, layoutOrder = var24 }
 end
 
-function t_2.RemoveCustomAvatarMenuItem(_, p2) --[[ line: 97 ]]
+function t_2.RemoveCustomAvatarMenuItem(_, p2)
 	-- upvalues: t_1 (ref)
 	t_1[p2] = nil
 end
 
-function t_2.IsContextAvatarEnumItem(_, p3) --[[ line: 101 ]]
+function t_2.IsContextAvatarEnumItem(_, p3)
 	local enumItems = Enum.AvatarContextMenuOption:GetEnumItems()
 	
 	for i = 1, #enumItems do
@@ -78,19 +78,19 @@ function t_2.IsContextAvatarEnumItem(_, p3) --[[ line: 101 ]]
 	return false
 end
 
-function t_2.EnableDefaultMenuItem(_, p4) --[[ line: 111 ]]
+function t_2.EnableDefaultMenuItem(_, p4)
 	-- upvalues: t (ref)
 	t[p4] = true
 end
 
-function t_2.RemoveDefaultMenuItem(_, p5) --[[ line: 115 ]]
+function t_2.RemoveDefaultMenuItem(_, p5)
 	-- upvalues: t (ref)
 	t[p5] = false
 end
 
-function t_2.RegisterCoreMethods(p6) --[[ line: 119 ]]
+function t_2.RegisterCoreMethods(p6)
 	-- upvalues: starterGuiService (ref)
-	starterGuiService:RegisterSetCore("AddAvatarContextMenuOption", function(p7) --[[ line: 120 | named "addMenuItemFunc" ]]
+	starterGuiService:RegisterSetCore("AddAvatarContextMenuOption", function(p7)
 		-- upvalues: p6 (ref)
 		if type(p7) == "table" then
 			local var36 = ""
@@ -119,7 +119,7 @@ function t_2.RegisterCoreMethods(p6) --[[ line: 119 ]]
 		end
 		error("AddAvatarContextMenuOption given EnumItem is not valid")
 	end)
-	starterGuiService:RegisterSetCore("RemoveAvatarContextMenuOption", function(p8) --[[ line: 145 | named "removeMenuItemFunc" ]]
+	starterGuiService:RegisterSetCore("RemoveAvatarContextMenuOption", function(p8)
 		-- upvalues: p6 (ref)
 		if type(p8) == "string" then
 			p6:RemoveCustomAvatarMenuItem(p8)
@@ -138,11 +138,11 @@ function t_2.RegisterCoreMethods(p6) --[[ line: 119 ]]
 	end)
 end
 
-function t_2:CreateCustomMenuItems() --[[ line: 161 ]]
+function t_2:CreateCustomMenuItems()
 	-- upvalues: t_1 (ref), rbxAnalyticsService (ref), gameTranslatorModule (ref), contextMenuUtilModule (ref), themeHandlerModule (ref)
 	for i, v in pairs(t_1) do
 		rbxAnalyticsService:TrackEvent("Game", "AvatarContextMenuCustomButton", "name: " .. tostring(i))
-		local customButton_1 = contextMenuUtilModule:MakeStyledButton("CustomButton", gameTranslatorModule:TranslateGameText(self.MenuItemFrame, i), UDim2.new(0.96, 0, 0, 52), function() --[[ line: 164 | named "customButtonFunc" ]]
+		local customButton_1 = contextMenuUtilModule:MakeStyledButton("CustomButton", gameTranslatorModule:TranslateGameText(self.MenuItemFrame, i), UDim2.new(0.96, 0, 0, 52), function()
 			-- upvalues: self (ref), v (ref)
 			if self.CloseMenuFunc then
 				self:CloseMenuFunc()
@@ -161,7 +161,7 @@ local var28 = "Friend Request Pending"
 local var29 = "Accept Friend Request"
 local var30 = "Player Blocked"
 
-function t_2:CreateFriendButton(p9, p10) --[[ line: 195 ]]
+function t_2:CreateFriendButton(p9, p10)
 	-- upvalues: var26 (write), robloxTranslatorModule (ref), var27 (write), var28 (write), var29 (write), var30 (write), rbxAnalyticsService (ref), localPlayer (write), contextMenuUtilModule (ref), themeHandlerModule (ref), var24 (write)
 	var26 = robloxTranslatorModule:FormatByKey("Corescripts.AvatarContextMenu.AddFriend")
 	var27 = robloxTranslatorModule:FormatByKey("Corescripts.AvatarContextMenu.Friends")
@@ -175,7 +175,7 @@ function t_2:CreateFriendButton(p9, p10) --[[ line: 195 ]]
 		friendStatus = nil
 	end
 	local var39 = nil
-	local friendStatus_1, friendStatus_2 = contextMenuUtilModule:MakeStyledButton("FriendStatus", var26, UDim2.new(0.96, 0, 0, 52), function() --[[ line: 212 ]]
+	local friendStatus_1, friendStatus_2 = contextMenuUtilModule:MakeStyledButton("FriendStatus", var26, UDim2.new(0.96, 0, 0, 52), function()
 		-- upvalues: var39 (write), friendStatus (write), var28 (copy), rbxAnalyticsService (copy), localPlayer (copy), self (ref)
 		if var39 and friendStatus.Selectable then
 			friendStatus.Selectable = false
@@ -211,15 +211,15 @@ function t_2:CreateFriendButton(p9, p10) --[[ line: 195 ]]
 	friendStatus.Parent = self.MenuItemFrame
 end
 
-function t_2:UpdateFriendButton(p11, p12) --[[ line: 254 ]]
+function t_2:UpdateFriendButton(p11, p12)
 	if self.MenuItemFrame:FindFirstChild("FriendStatus") then
 		self:CreateFriendButton(p11, p12)
 	end
 end
 
-function t_2:CreateInspectAndBuyButton() --[[ line: 261 ]]
+function t_2:CreateInspectAndBuyButton()
 	-- upvalues: t (ref), guiService (ref), contextMenuUtilModule (ref), robloxTranslatorModule (ref), themeHandlerModule (ref), var24 (write)
-	local view = contextMenuUtilModule:MakeStyledButton("View", robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.View"), UDim2.new(0.96, 0, 0, 52), function() --[[ line: 262 | named "browseItems" ]]
+	local view = contextMenuUtilModule:MakeStyledButton("View", robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.View"), UDim2.new(0.96, 0, 0, 52), function()
 		-- upvalues: self (ref), t (copy), guiService (copy)
 		if self.CloseMenuFunc then
 			self:CloseMenuFunc()
@@ -235,7 +235,7 @@ function t_2:CreateInspectAndBuyButton() --[[ line: 261 ]]
 	view.Parent = self.MenuItemFrame
 end
 
-local function findFirstTextChannel() --[[ line: 287 ]]
+local function findFirstTextChannel()
 	-- upvalues: textChatService (ref), playersService (ref)
 	local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
 	
@@ -254,17 +254,17 @@ local function findFirstTextChannel() --[[ line: 287 ]]
 	return nil
 end
 
-local function _(p13) --[[ line: 308 | named "isExperienceChatOn" ]]
-	local ok, _ = pcall(function() --[[ line: 309 ]]
+local function _(p13)
+	local ok, _ = pcall(function()
 		local _ = Enum.ChatVersion.LegacyChatService
 	end)
 	
 	return ok and p13.ChatVersion == Enum.ChatVersion.TextChatService
 end
 
-function t_2:CreateEmoteButton() --[[ line: 321 ]]
+function t_2:CreateEmoteButton()
 	-- upvalues: rbxAnalyticsService (ref), playersService (ref), findFirstTextChannel (ref), robloxTranslatorModule (ref), contextMenuUtilModule (ref), themeHandlerModule (ref), var24 (write)
-	local wave = contextMenuUtilModule:MakeStyledButton("Wave", robloxTranslatorModule:FormatByKey("Corescripts.AvatarContextMenu.Wave"), UDim2.new(0.96, 0, 0, 52), function() --[[ line: 322 | named "wave" ]]
+	local wave = contextMenuUtilModule:MakeStyledButton("Wave", robloxTranslatorModule:FormatByKey("Corescripts.AvatarContextMenu.Wave"), UDim2.new(0.96, 0, 0, 52), function()
 		-- upvalues: self (ref), rbxAnalyticsService (copy), playersService (copy), findFirstTextChannel (copy)
 		if self.CloseMenuFunc then
 			self:CloseMenuFunc()
@@ -274,7 +274,7 @@ function t_2:CreateEmoteButton() --[[ line: 321 ]]
 		rbxAnalyticsService:TrackEvent("Game", "AvatarContextMenuWave", "placeId: " .. tostring(game.PlaceId))
 		playersService:Chat("/e wave")
 		local textChatService = self.TextChatService
-		local ok, _ = pcall(function() --[[ line: 309 ]]
+		local ok, _ = pcall(function()
 			local _ = Enum.ChatVersion.LegacyChatService
 		end)
 		
@@ -298,12 +298,12 @@ local var32 = tModule.interface({
 	localPlayerCanChatWithSelectedPlayer = tModule.boolean
 })
 
-function t_2:CreateChatButton(p14) --[[ line: 357 ]]
+function t_2:CreateChatButton(p14)
 	-- upvalues: fFlagWhisperEmoteOnAvatarContextMenuWithExpChatModule (ref), rbxAnalyticsService (ref), findFirstTextChannel (ref), expChatModule (ref), robloxGui (ref), localPlayer (write), robloxTranslatorModule (ref), contextMenuUtilModule (ref), themeHandlerModule (ref), var24 (write), fFlagAvatarContextMenuItemsChatButtonRefactorModule (ref), argCheckModule (ref), var32 (ref), chatService (ref), runService (ref)
 	if not fFlagWhisperEmoteOnAvatarContextMenuWithExpChatModule then
 		local var46
 		local textChatService = self.TextChatService
-		local ok, _ = pcall(function() --[[ line: 309 ]]
+		local ok, _ = pcall(function()
 			local _ = Enum.ChatVersion.LegacyChatService
 		end)
 		
@@ -314,7 +314,7 @@ function t_2:CreateChatButton(p14) --[[ line: 357 ]]
 	end
 	local localPlayerChatEnabled
 	local var47 = false
-	local chatStatus, chatStatus_1 = contextMenuUtilModule:MakeStyledButton("ChatStatus", robloxTranslatorModule:FormatByKey("Corescripts.AvatarContextMenu.Chat"), UDim2.new(0.96, 0, 0, 52), function() --[[ line: 364 | named "chatFunc" ]]
+	local chatStatus, chatStatus_1 = contextMenuUtilModule:MakeStyledButton("ChatStatus", robloxTranslatorModule:FormatByKey("Corescripts.AvatarContextMenu.Chat"), UDim2.new(0.96, 0, 0, 52), function()
 		-- upvalues: var47 (write), self (ref), rbxAnalyticsService (copy), fFlagWhisperEmoteOnAvatarContextMenuWithExpChatModule (ref), findFirstTextChannel (copy), expChatModule (copy), robloxGui (copy), localPlayer (copy)
 		if var47 then return end
 		if self.CloseMenuFunc then
@@ -326,7 +326,7 @@ function t_2:CreateChatButton(p14) --[[ line: 357 ]]
 		
 		if fFlagWhisperEmoteOnAvatarContextMenuWithExpChatModule then
 			local textChatService = self.TextChatService
-			local ok, _ = pcall(function() --[[ line: 309 ]]
+			local ok, _ = pcall(function()
 				local _ = Enum.ChatVersion.LegacyChatService
 			end)
 			
@@ -337,7 +337,7 @@ function t_2:CreateChatButton(p14) --[[ line: 357 ]]
 				var50 = findFirstTextChannel()
 				
 				if var50 then
-					task.spawn(function() --[[ line: 379 ]]
+					task.spawn(function()
 						-- upvalues: var50 (ref), self (copy)
 						var50:SendAsync("/w @" .. self.SelectedPlayer.Name)
 					end)
@@ -354,7 +354,7 @@ function t_2:CreateChatButton(p14) --[[ line: 357 ]]
 				
 				if not var50:EnterWhisperState(self.SelectedPlayer) then
 					local var51 = nil
-					pcall(function() --[[ line: 393 ]]
+					pcall(function()
 						-- upvalues: var51 (write), localPlayer (copy)
 						var51 = localPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar
 					end)
@@ -370,7 +370,7 @@ function t_2:CreateChatButton(p14) --[[ line: 357 ]]
 		argCheckModule.assert(var32(p14))
 		localPlayerChatEnabled = p14.localPlayerChatEnabled
 	else
-		local ok, status = pcall(function() --[[ line: 419 ]]
+		local ok, status = pcall(function()
 			-- upvalues: chatService (copy), localPlayer (copy)
 			return chatService:CanUserChatAsync(localPlayer.UserId)
 		end)
@@ -390,7 +390,7 @@ function t_2:CreateChatButton(p14) --[[ line: 357 ]]
 	end
 end
 
-function t_2:RemoveLastButtonUnderline() --[[ line: 446 ]]
+function t_2:RemoveLastButtonUnderline()
 	local children = self.MenuItemFrame:GetChildren()
 	local var53 = nil
 	local var54 = -1
@@ -410,7 +410,7 @@ function t_2:RemoveLastButtonUnderline() --[[ line: 446 ]]
 	end
 end
 
-function t_2:BuildContextMenuItems(p15, p16) --[[ line: 464 ]]
+function t_2:BuildContextMenuItems(p15, p16)
 	-- upvalues: contextMenuUtilModule (ref), blockingUtilityModule (ref), t (ref)
 	if not p15 then return end
 	local var56 = contextMenuUtilModule:GetFriendStatus(p15)
@@ -434,15 +434,15 @@ function t_2:BuildContextMenuItems(p15, p16) --[[ line: 464 ]]
 	self:RemoveLastButtonUnderline()
 end
 
-function t_2:SetSelectedPlayer(p17) --[[ line: 491 ]]
+function t_2:SetSelectedPlayer(p17)
 	self.SelectedPlayer = p17
 end
 
-function t_2:SetCloseMenuFunc(p18) --[[ line: 495 ]]
+function t_2:SetCloseMenuFunc(p18)
 	self.CloseMenuFunc = p18
 end
 
-function t_2.new(p19, p20) --[[ line: 499 ]]
+function t_2.new(p19, p20)
 	-- upvalues: t_2 (ref), textChatService (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.MenuItemFrame = p19
@@ -454,7 +454,7 @@ function t_2.new(p19, p20) --[[ line: 499 ]]
 	return tbl
 end
 
-guiService.InspectMenuEnabledChangedSignal:Connect(function(p21) --[[ line: 513 ]]
+guiService.InspectMenuEnabledChangedSignal:Connect(function(p21)
 	-- upvalues: t_2 (ref)
 	if p21 then
 		t_2:EnableDefaultMenuItem(Enum.AvatarContextMenuOption.InspectMenu)

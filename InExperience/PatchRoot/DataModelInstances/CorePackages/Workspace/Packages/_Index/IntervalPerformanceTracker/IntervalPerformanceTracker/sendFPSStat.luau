@@ -8,7 +8,7 @@ local dashModule = require(parent.Dash)
 local default = require(parent.LoggingProtocol).default
 local isSpatial = require(parent.AppCommonLib).isSpatial
 
-local function getDefaultMetadata(p0) --[[ line: 18 ]]
+local function getDefaultMetadata(p0)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
 	return dashModule.assign({
 		appVersion = runService:GetRobloxVersion(),
@@ -18,7 +18,7 @@ local function getDefaultMetadata(p0) --[[ line: 18 ]]
 	}, p0)
 end
 
-return function(p1) --[[ line: 43 | named "sendFPSStat" ]]
+return function(p1)
 	-- upvalues: getDefaultMetadata (ref), default (ref), var4 (ref)
 	local var7 = p1.excludeEventStream ~= false
 	local var8 = getDefaultMetadata(p1.metaData)

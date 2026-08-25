@@ -6,7 +6,7 @@ local fFlagPromoteRobuxInTopPicksModule = require(inExperienceShop.Flags.FFlagPr
 local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
 local bonusPromotionEligibilityModule = require(inExperienceShop.Api.BonusPromotionEligibility)
 
-local function findFirstBonusRobuxPackageWithPaymentSession(p0) --[[ line: 16 ]]
+local function findFirstBonusRobuxPackageWithPaymentSession(p0)
 	for i, v in p0 do
 		local robuxPackages = v.robuxPackages
 		
@@ -21,14 +21,14 @@ local function findFirstBonusRobuxPackageWithPaymentSession(p0) --[[ line: 16 ]]
 	return nil, nil
 end
 
-local function findFirstBonusRobuxPackage(p1) --[[ line: 31 ]]
+local function findFirstBonusRobuxPackage(p1)
 	-- upvalues: findFirstBonusRobuxPackageWithPaymentSession (ref)
 	local var8, _ = findFirstBonusRobuxPackageWithPaymentSession(p1)
 	
 	return var8
 end
 
-local function withoutFeaturedPromotion(p2) --[[ line: 36 ]]
+local function withoutFeaturedPromotion(p2)
 	-- upvalues: findTopPicksSectionIndexModule (ref)
 	local var9 = findTopPicksSectionIndexModule(p2)
 	
@@ -52,7 +52,7 @@ local function withoutFeaturedPromotion(p2) --[[ line: 36 ]]
 	return cloned
 end
 
-local function _(p3, p4) --[[ line: 66 | named "canPromoteBonusPackage" ]]
+local function _(p3, p4)
 	-- upvalues: bonusPromotionEligibilityModule (ref)
 	local bonusItem = p3.bonusItem
 	local var12 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
@@ -62,13 +62,13 @@ end
 
 return {
 	findFirstBonusRobuxPackage = findFirstBonusRobuxPackage,
-	getBonusGamePassId = function(p5) --[[ line: 58 ]]
+	getBonusGamePassId = function(p5)
 		local bonusItem = p5.bonusItem
 		
 		return if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
 	end,
 	withoutFeaturedPromotion = withoutFeaturedPromotion,
-	promoteBonusRobuxPackageToTopPicks = function(p6, p7) --[[ line: 89 ]]
+	promoteBonusRobuxPackageToTopPicks = function(p6, p7)
 		-- upvalues: fFlagEnableRobuxInExperienceShop (ref), fFlagPromoteRobuxInTopPicksModule (ref), withoutFeaturedPromotion (ref), findFirstBonusRobuxPackageWithPaymentSession (ref), findTopPicksSectionIndexModule (ref), bonusPromotionEligibilityModule (ref)
 		if not fFlagEnableRobuxInExperienceShop or not fFlagPromoteRobuxInTopPicksModule then
 			return withoutFeaturedPromotion(p6)

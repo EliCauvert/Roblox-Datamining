@@ -14,7 +14,7 @@ local parseDevProductPurchaseErrorModule = require(purchasePrompt.Utils.parseDev
 local fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase = require(parent.SharedFlags).FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase
 local _ = require(purchasePrompt.types)
 local t = {
-	new = function() --[[ line: 32 ]]
+	new = function()
 		return {
 			price = 0,
 			productId = 0,
@@ -26,7 +26,7 @@ local t = {
 	end
 }
 
-function t.fromJsonData(p0) --[[ line: 43 ]]
+function t.fromJsonData(p0)
 	-- upvalues: t (ref), argCheckModule (ref)
 	local var8 = t.new()
 	argCheckModule.isType(p0, "table", "PurchaseDeveloperProductModel.fromJsonData's jsonData")
@@ -46,9 +46,9 @@ function t.fromJsonData(p0) --[[ line: 43 ]]
 	return var8
 end
 
-return function(p1, p2, p3) --[[ line: 68 | named "performDevProductEdpPurchase" ]]
+return function(p1, p2, p3)
 	-- upvalues: logging (ref), promiseModule (ref), purchaseErrorModule (ref), isEconomicRestrictionResponse (ref), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), parseDevProductPurchaseErrorModule (ref), t (ref)
-	return p1.performDevProductEdpPurchase(p2, p3):andThen(function(p4) --[[ line: 69 ]]
+	return p1.performDevProductEdpPurchase(p2, p3):andThen(function(p4)
 		-- upvalues: logging (copy), promiseModule (copy), purchaseErrorModule (copy), isEconomicRestrictionResponse (copy), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (copy), parseDevProductPurchaseErrorModule (copy), t (copy)
 		if type(p4) ~= "table" then
 			logging.warn("Response from PurchaseDeveloperProduct is malformed!")
@@ -66,7 +66,7 @@ return function(p1, p2, p3) --[[ line: 68 | named "performDevProductEdpPurchase"
 		local var10 = t.fromJsonData(p4)
 		
 		return if var10.purchased then promiseModule.resolve(var10) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
-	end, function(p5) --[[ line: 94 ]]
+	end, function(p5)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p5)
 	end)

@@ -5,7 +5,7 @@ local object = luauPolyfillModule.Object
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 34 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.any_blank_count = 0
@@ -28,7 +28,7 @@ local var4 = nil
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p0) --[[ line: 98 ]]
+function t_2.new(p0)
 	-- upvalues: t_2 (ref), t (ref), var4 (write)
 	local tbl = setmetatable({}, t_2)
 	tbl._anyBlankStartTime = nil
@@ -48,7 +48,7 @@ function t_2.new(p0) --[[ line: 98 ]]
 	return tbl
 end
 
-function t_2.addListener(p1) --[[ line: 115 ]]
+function t_2.addListener(p1)
 	-- upvalues: var4 (write), console (ref), t_1 (write), array (ref)
 	if var4 == nil then
 		console.warn("Call `FillRateHelper.setSampleRate` before `addListener`.")
@@ -56,9 +56,9 @@ function t_2.addListener(p1) --[[ line: 115 ]]
 	table.insert(t_1, p1)
 	
 	return {
-		remove = function() --[[ line: 121 ]]
+		remove = function()
 			-- upvalues: t_1 (copy), array (copy), p1 (ref)
-			t_1 = array.filter(t_1, function(p2) --[[ line: 122 ]]
+			t_1 = array.filter(t_1, function(p2)
 				-- upvalues: p1 (copy)
 				return p1 ~= p2
 			end)
@@ -66,23 +66,23 @@ function t_2.addListener(p1) --[[ line: 115 ]]
 	}
 end
 
-function t_2.setSampleRate(value) --[[ line: 129 ]]
+function t_2.setSampleRate(value)
 	-- upvalues: var4 (write)
 	var4 = value
 end
 
-function t_2.setMinSampleCount(a) --[[ line: 133 ]]
+function t_2.setMinSampleCount(a)
 	-- upvalues: var3 (write)
 	var3 = a
 end
 
-function t_2:activate() --[[ line: 137 ]]
+function t_2:activate()
 	if self._enabled and self._samplesStartTime == nil then
 		self._samplesStartTime = os.clock()
 	end
 end
 
-function t_2:deactivateAndFlush() --[[ line: 146 ]]
+function t_2:deactivateAndFlush()
 	-- upvalues: var3 (write), object (ref), array (ref), t_1 (write)
 	if not self._enabled then return end
 	local samplesStartTime = self._samplesStartTime
@@ -94,14 +94,14 @@ function t_2:deactivateAndFlush() --[[ line: 146 ]]
 		return
 	end
 	local var8 = object.assign({}, self._info, { total_time_spent = os.clock() - samplesStartTime })
-	array.forEach(t_1, function(p3) --[[ line: 179 ]]
+	array.forEach(t_1, function(p3)
 		-- upvalues: var8 (ref)
 		return p3(var8)
 	end)
 	self:_resetData()
 end
 
-function t_2:computeBlankness(p4, p5, p6) --[[ line: 185 ]]
+function t_2:computeBlankness(p4, p5, p6)
 	if not self._enabled or p4.getItemCount(p4.data) == 0 or self._samplesStartTime == nil then
 		return 0
 	end
@@ -165,11 +165,11 @@ function t_2:computeBlankness(p4, p5, p6) --[[ line: 185 ]]
 	return var16
 end
 
-function t_2:enabled() --[[ line: 271 ]]
+function t_2:enabled()
 	return self._enabled
 end
 
-function t_2:_resetData() --[[ line: 275 ]]
+function t_2:_resetData()
 	-- upvalues: t (ref)
 	self._anyBlankStartTime = nil
 	self._info = t.new()

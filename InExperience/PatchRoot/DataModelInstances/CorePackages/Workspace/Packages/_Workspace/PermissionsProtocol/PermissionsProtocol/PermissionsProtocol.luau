@@ -85,7 +85,7 @@ local t_3 = {
 }
 t_3.__index = t_3
 
-local function getPermissionRequestTelemetryData(p0) --[[ line: 145 ]]
+local function getPermissionRequestTelemetryData(p0)
 	-- upvalues: t_3 (ref)
 	local t = {}
 	
@@ -106,15 +106,15 @@ local function getPermissionRequestTelemetryData(p0) --[[ line: 145 ]]
 	return t
 end
 
-local function createSequencedProtocolMethodCall(p1, p2, p3, p4, p5) --[[ line: 164 ]]
+local function createSequencedProtocolMethodCall(p1, p2, p3, p4, p5)
 	-- upvalues: promiseModule (ref), messageBus (ref)
 	assert(p3.validateParams(p4))
-	local var13 = (p1[p2] or promiseModule.resolve()):finally(function() --[[ line: 175 ]]
+	local var13 = (p1[p2] or promiseModule.resolve()):finally(function()
 		-- upvalues: promiseModule (copy), messageBus (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref)
-		return promiseModule.new(function(p6) --[[ line: 176 ]]
+		return promiseModule.new(function(p6)
 			-- upvalues: messageBus (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy)
 			local var14 = messageBus.Subscriber.new()
-			var14:subscribeProtocolMethodResponse(p2, function(p7) --[[ line: 178 ]]
+			var14:subscribeProtocolMethodResponse(p2, function(p7)
 				-- upvalues: var14 (ref), p2 (copy), p6 (ref)
 				var14:unsubscribeToProtocolMethodResponse(p2)
 				p6(p7)
@@ -127,7 +127,7 @@ local function createSequencedProtocolMethodCall(p1, p2, p3, p4, p5) --[[ line: 
 	return var13
 end
 
-function t_3.new() --[[ line: 190 ]]
+function t_3.new()
 	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), messageBus (ref), t_3 (ref)
 	return setmetatable({
 		activeCalls = if scopedSubscribersForPermissionsProtocol2 then {} else nil,
@@ -135,15 +135,15 @@ function t_3.new() --[[ line: 190 ]]
 	}, t_3)
 end
 
-function t_3:hasPermissions(p8) --[[ line: 208 ]]
+function t_3:hasPermissions(p8)
 	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), promiseModule (ref), messageBus (ref)
 	if scopedSubscribersForPermissionsProtocol2 then
 		return createSequencedProtocolMethodCall(self.activeCalls, self.HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.HAS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p8 }, getPermissionRequestTelemetryData(p8))
 	end
-	local var15 = promiseModule.new(function(p9, _) --[[ line: 217 ]]
+	local var15 = promiseModule.new(function(p9, _)
 		-- upvalues: self (ref)
 		local HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p10) --[[ line: 219 ]]
+		self.subscriber:subscribeProtocolMethodResponse(HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p10)
 			-- upvalues: self (copy), HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p9 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(HAS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p9(p10)
@@ -154,17 +154,17 @@ function t_3:hasPermissions(p8) --[[ line: 208 ]]
 	return var15
 end
 
-function t_3:requestPermissions(p11) --[[ line: 239 ]]
+function t_3:requestPermissions(p11)
 	-- upvalues: t_3 (ref), promiseModule (ref), scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), messageBus (ref)
 	if game:GetFastFlag("DebugRomarkAudioPermissionsBypass") then
 		return promiseModule.resolve({ missingPermissions = {}, status = t_3.Status.AUTHORIZED })
 	elseif scopedSubscribersForPermissionsProtocol2 then
 		return createSequencedProtocolMethodCall(self.activeCalls, self.PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.PERMISSION_REQUEST_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p11 }, getPermissionRequestTelemetryData(p11))
 	end
-	local var16 = promiseModule.new(function(p12, _) --[[ line: 256 ]]
+	local var16 = promiseModule.new(function(p12, _)
 		-- upvalues: self (ref)
 		local PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p13) --[[ line: 258 ]]
+		self.subscriber:subscribeProtocolMethodResponse(PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p13)
 			-- upvalues: self (copy), PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p12 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(PERMISSION_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p12(p13)
@@ -175,15 +175,15 @@ function t_3:requestPermissions(p11) --[[ line: 239 ]]
 	return var16
 end
 
-function t_3:getSupportedPermissionsList() --[[ line: 276 ]]
+function t_3:getSupportedPermissionsList()
 	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), promiseModule (ref), messageBus (ref)
 	if scopedSubscribersForPermissionsProtocol2 then
 		return createSequencedProtocolMethodCall(self.activeCalls, self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
 	end
-	local var17 = promiseModule.new(function(p14, _) --[[ line: 285 ]]
+	local var17 = promiseModule.new(function(p14, _)
 		-- upvalues: self (ref)
 		local SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p15) --[[ line: 287 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p15)
 			-- upvalues: self (copy), SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p14 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_PERMISSIONS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p14(p15)
@@ -194,11 +194,11 @@ function t_3:getSupportedPermissionsList() --[[ line: 276 ]]
 	return var17
 end
 
-function t_3:supportsPermissions(p16) --[[ line: 306 ]]
+function t_3:supportsPermissions(p16)
 	-- upvalues: var6 (ref), promiseModule (ref)
 	assert(var6(p16))
 	
-	return self:getSupportedPermissionsList():andThen(function(p17) --[[ line: 309 ]]
+	return self:getSupportedPermissionsList():andThen(function(p17)
 		-- upvalues: p16 (ref), promiseModule (copy)
 		local permissions = p17 and p17.permissions
 		
@@ -223,36 +223,36 @@ function t_3:supportsPermissions(p16) --[[ line: 306 ]]
 	end)
 end
 
-function t_3:checkOrRequestPermissions(p18) --[[ line: 348 ]]
+function t_3:checkOrRequestPermissions(p18)
 	-- upvalues: var6 (ref), promiseModule (ref), t_3 (ref)
 	assert(var6(p18))
 	
-	return self:supportsPermissions(p18):andThen(function(p19) --[[ line: 351 ]]
+	return self:supportsPermissions(p18):andThen(function(p19)
 		-- upvalues: promiseModule (copy), t_3 (copy), self (ref), p18 (ref)
-		return if p19 then self:hasPermissions(p18):andThen(function(p20) --[[ line: 358 ]]
+		return if p19 then self:hasPermissions(p18):andThen(function(p20)
 			-- upvalues: t_3 (copy), promiseModule (copy), self (copy), p18 (copy)
-			return if p20.status == t_3.Status.AUTHORIZED then promiseModule.resolve(p20.status) else self:requestPermissions(p18):andThen(function(p21) --[[ line: 364 ]]
+			return if p20.status == t_3.Status.AUTHORIZED then promiseModule.resolve(p20.status) else self:requestPermissions(p18):andThen(function(p21)
 				-- upvalues: promiseModule (copy)
 				return promiseModule.resolve(p21.status)
 			end)
 		end) else promiseModule.resolve(t_3.Status.UNSUPPORTED)
-	end, function(_) --[[ line: 370 ]]
+	end, function(_)
 		-- upvalues: promiseModule (copy), t_3 (copy)
 		return promiseModule.resolve(t_3.Status.UNSUPPORTED)
 	end)
 end
 
-function t_3:shouldShowUpsell(p22) --[[ line: 385 ]]
+function t_3:shouldShowUpsell(p22)
 	-- upvalues: getFFlagLuaEnableShowUpsellMethod (ref), promiseModule (ref), scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), messageBus (ref)
 	if not getFFlagLuaEnableShowUpsellMethod() then
 		return promiseModule.resolve({})
 	elseif scopedSubscribersForPermissionsProtocol2 then
 		return createSequencedProtocolMethodCall(self.activeCalls, self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p22 }, getPermissionRequestTelemetryData(p22))
 	end
-	local var20 = promiseModule.new(function(p23, _) --[[ line: 398 ]]
+	local var20 = promiseModule.new(function(p23, _)
 		-- upvalues: self (ref)
 		local SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p24) --[[ line: 400 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p24)
 			-- upvalues: self (copy), SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p23 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SHOULD_SHOW_PERMISSION_UPSELL_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p23(p24)
@@ -263,15 +263,15 @@ function t_3:shouldShowUpsell(p22) --[[ line: 385 ]]
 	return var20
 end
 
-function t_3:shouldShowRationale(p25) --[[ line: 421 ]]
+function t_3:shouldShowRationale(p25)
 	-- upvalues: scopedSubscribersForPermissionsProtocol2 (ref), createSequencedProtocolMethodCall (ref), getPermissionRequestTelemetryData (ref), promiseModule (ref), messageBus (ref)
 	if scopedSubscribersForPermissionsProtocol2 then
 		return createSequencedProtocolMethodCall(self.activeCalls, self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { permissions = p25 }, getPermissionRequestTelemetryData(p25))
 	end
-	local var21 = promiseModule.new(function(p26, _) --[[ line: 430 ]]
+	local var21 = promiseModule.new(function(p26, _)
 		-- upvalues: self (ref)
 		local SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p27) --[[ line: 432 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p27)
 			-- upvalues: self (copy), SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p26 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SHOULD_SHOW_PERMISSION_RATIONALE_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p26(p27)

@@ -37,7 +37,7 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 60 | named "getPlatformConfig" ]]
+return function(p0)
 	-- upvalues: t (ref), deviceType (ref)
 	local var1 = t[p0]
 	

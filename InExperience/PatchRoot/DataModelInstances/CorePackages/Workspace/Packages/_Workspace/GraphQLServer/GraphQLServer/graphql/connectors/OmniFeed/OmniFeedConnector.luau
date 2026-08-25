@@ -11,13 +11,13 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local buildOmniRecommendationsRequestModule = require(script.Parent.buildOmniRecommendationsRequest)
 local _ = require(script.Parent.Parent.Parent.generatedTypes)
 
-local function findOmniFeedBySessionId(p0, p1) --[[ line: 52 ]]
+local function findOmniFeedBySessionId(p0, p1)
 	-- upvalues: fetch (ref), buildOmniRecommendationsRequestModule (ref), promiseModule (ref), response (ref), graphQLError (ref), object (ref)
 	local var8 = buildOmniRecommendationsRequestModule(p1 or fetch)
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 59 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: var8 (ref), p0 (ref), response (copy), graphQLError (copy), object (copy)
-		local var9 = var8(p0.pageType, p0.sessionId, p0.nextPageToken, p0.supportedTreatmentTypes):catch(function() --[[ line: 65 ]]
+		local var9 = var8(p0.pageType, p0.sessionId, p0.nextPageToken, p0.supportedTreatmentTypes):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -27,7 +27,7 @@ local function findOmniFeedBySessionId(p0, p1) --[[ line: 52 ]]
 			
 			return nil
 		end
-		local var10 = var9:json():catch(function() --[[ line: 80 ]]
+		local var10 = var9:json():catch(function()
 			return nil
 		end):expect()
 		
@@ -42,11 +42,11 @@ end
 
 local var6 = urlBuilder.fromString("apis:discovery-api/omni-recommendation-metadata")
 
-local function fetchMoreOmniRecommendationMetadata(p4, p5) --[[ line: 100 ]]
+local function fetchMoreOmniRecommendationMetadata(p4, p5)
 	-- upvalues: fetch (ref), promiseModule (ref), var6 (ref), httpService (ref), response (ref), graphQLError (ref), object (ref)
 	local var11 = p5 or fetch
 	
-	return promiseModule.new(function(p6, p7) --[[ line: 103 ]]
+	return promiseModule.new(function(p6, p7)
 		-- upvalues: var6 (copy), var11 (ref), httpService (copy), p4 (ref), response (copy), graphQLError (copy), object (copy)
 		local var12 = var11(var6(), {
 			method = "POST",
@@ -55,7 +55,7 @@ local function fetchMoreOmniRecommendationMetadata(p4, p5) --[[ line: 100 ]]
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):catch(function() --[[ line: 117 ]]
+		}):catch(function()
 			-- upvalues: response (copy)
 			return response.error()
 		end):expect()
@@ -65,7 +65,7 @@ local function fetchMoreOmniRecommendationMetadata(p4, p5) --[[ line: 100 ]]
 			
 			return
 		end
-		local var13 = var12:json():catch(function() --[[ line: 129 ]]
+		local var13 = var12:json():catch(function()
 			return nil
 		end):expect()
 		

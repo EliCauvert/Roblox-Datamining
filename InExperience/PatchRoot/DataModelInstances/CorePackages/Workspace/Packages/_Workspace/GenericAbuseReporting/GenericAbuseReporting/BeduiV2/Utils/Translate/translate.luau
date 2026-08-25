@@ -6,7 +6,7 @@ local iconName = foundationModule.Enums.IconName
 local fFlagUpdateTranslateInReportRevamp = sharedFlagsModule.FFlagUpdateTranslateInReportRevamp
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
-local function mergeTranslationParams(p0, p1) --[[ line: 38 ]]
+local function mergeTranslationParams(p0, p1)
 	if type(p0) == "string" then
 		return p0
 	end
@@ -27,7 +27,7 @@ local function mergeTranslationParams(p0, p1) --[[ line: 38 ]]
 	}
 end
 
-local function getWrappedText(p2, p3, p4) --[[ line: 66 ]]
+local function getWrappedText(p2, p3, p4)
 	-- upvalues: fFlagAbuseReportMenuV2 (ref), getIconRichText (ref), iconName (ref)
 	local text = "{" .. p2.type .. "Start}"
 	local text_1 = "{" .. p2.type .. "End}"
@@ -47,7 +47,7 @@ end
 
 local var4 = nil
 
-local function resolveParams(p5, p6) --[[ line: 100 ]]
+local function resolveParams(p5, p6)
 	-- upvalues: var4 (write)
 	if p6 == nil then
 		return nil
@@ -66,7 +66,7 @@ end
 
 return {
 	mergeTranslationParams = mergeTranslationParams,
-	translateIntoString = function(p7, p8) --[[ line: 181 ]]
+	translateIntoString = function(p7, p8)
 		-- upvalues: fFlagUpdateTranslateInReportRevamp (ref), resolveParams (ref)
 		if p8 == nil then
 			return ""
@@ -85,7 +85,7 @@ return {
 		end
 		return var12:gsub("{%w+Start}(.-)({%w+End})", "%1"):gsub("{%w+Start}", ""):gsub("{%w+End}", "")
 	end,
-	translateIntoRichTextString = function(p9, p10, p11) --[[ line: 125 ]]
+	translateIntoRichTextString = function(p9, p10, p11)
 		-- upvalues: fFlagUpdateTranslateInReportRevamp (ref), resolveParams (ref), getWrappedText (ref)
 		if p10 == nil then
 			return "", nil

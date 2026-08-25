@@ -7,7 +7,7 @@ local t_1 = {
 	RoughnessMap = true
 }
 
-return function(p0) --[[ line: 15 | named "preloadEditablesFromRootInstance" ]]
+return function(p0)
 	-- upvalues: t (ref), UGCValidationService (ref), t_1 (ref)
 	local t_2 = {}
 	local t_3 = {}

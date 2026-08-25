@@ -21,15 +21,15 @@ local t = {
 	rowBackground = Color3.fromRGB(28, 28, 28)
 }
 
-local function _(startValue, endValue, alpha) --[[ line: 66 | named "lerp" ]]
+local function _(startValue, endValue, alpha)
 	return startValue + (endValue - startValue) * alpha
 end
 
-local _ = function(p0) --[[ line: 71 | named "smooth" ]]
+local _ = function(p0)
 	return p0 * p0 * (3 - 2 * p0)
 end
 
-local function renderTypeLabel(p1) --[[ line: 75 ]]
+local function renderTypeLabel(p1)
 	-- upvalues: roactModule (ref), t (ref), mono (ref)
 	return roactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -44,13 +44,13 @@ local function renderTypeLabel(p1) --[[ line: 75 ]]
 	})
 end
 
-local _ = function(a) --[[ line: 90 | named "resolveMaxSize" ]]
+local _ = function(a)
 	local observedMaxBatchSize = a.observedMaxBatchSize
 	
 	return if observedMaxBatchSize and observedMaxBatchSize > 0 then observedMaxBatchSize else nil
 end
 
-local function renderBatchOutline(p2, p3) --[[ line: 99 ]]
+local function renderBatchOutline(p2, p3)
 	-- upvalues: roactModule (ref), t (ref), mono (ref)
 	local minValue = math.min(p3, 30)
 	local panelWidth = p2.panelWidth
@@ -87,7 +87,7 @@ local function renderBatchOutline(p2, p3) --[[ line: 99 ]]
 	})
 end
 
-local function renderIdleQueue() --[[ line: 143 ]]
+local function renderIdleQueue()
 	-- upvalues: roactModule (ref), t (ref), mono (ref)
 	return roactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -100,7 +100,7 @@ local function renderIdleQueue() --[[ line: 143 ]]
 	})
 end
 
-local function renderCacheChildren(p4, p5) --[[ line: 155 ]]
+local function renderCacheChildren(p4, p5)
 	-- upvalues: roactModule (ref), t (ref), mono (ref)
 	local t_1 = {}
 	local var12 = if p4 then p4.items else {}
@@ -140,7 +140,7 @@ local function renderCacheChildren(p4, p5) --[[ line: 155 ]]
 	return t_1
 end
 
-local function renderTimelineChildren(p6, p7) --[[ line: 207 ]]
+local function renderTimelineChildren(p6, p7)
 	-- upvalues: t (ref), roactModule (ref)
 	local var14 = p7 - 30
 	local t_1 = {}
@@ -182,11 +182,11 @@ end
 
 local orchestratorRow = roactModule.Component:extend("OrchestratorRow")
 
-function orchestratorRow.init(p8) --[[ line: 255 ]]
+function orchestratorRow.init(p8)
 	p8.opAnim = {}
 end
 
-function orchestratorRow.renderQueueChildren(p9, p10, p11, p12) --[[ line: 260 ]]
+function orchestratorRow.renderQueueChildren(p9, p10, p11, p12)
 	-- upvalues: roactModule (ref), t (ref), mono (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -264,7 +264,7 @@ function orchestratorRow.renderQueueChildren(p9, p10, p11, p12) --[[ line: 260 ]
 	return t_1
 end
 
-function orchestratorRow.render(p13) --[[ line: 346 ]]
+function orchestratorRow.render(p13)
 	-- upvalues: renderTypeLabel (ref), roactModule (ref), renderCacheChildren (ref), renderBatchOutline (ref), renderIdleQueue (ref), t (ref), renderTimelineChildren (ref)
 	local orchestratorType = p13.props.orchestratorType
 	local batches = p13.props.batches

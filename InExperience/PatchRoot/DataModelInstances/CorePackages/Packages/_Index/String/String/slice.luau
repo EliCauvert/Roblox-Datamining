@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 16 | named "slice" ]]
+﻿return function(p0, p1, p2)
 	local charCount, charCount_1 = utf8.len(p0)
 	assert(charCount ~= nil, ("string `%s` has an invalid byte at position %s"):format(p0, tostring(charCount_1)))
 	local var2 = tonumber(p1)

@@ -1,10 +1,10 @@
 ﻿local reactModule = require(script.Parent.Parent.React)
 
-return function(p0, p1) --[[ line: 8 | named "useEventLifecycleRef" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p2) --[[ line: 10 ]]
+	return reactModule.useCallback(function(p2)
 		-- upvalues: var1 (ref), p1 (ref), p0 (ref)
 		if var1.current and p1 then
 			p1(var1.current)

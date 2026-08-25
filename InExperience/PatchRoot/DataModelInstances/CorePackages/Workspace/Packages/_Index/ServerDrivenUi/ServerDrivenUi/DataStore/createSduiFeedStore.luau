@@ -9,7 +9,7 @@ local luaAppNilApportionedItems = game:DefineFastFlag("LuaAppNilApportionedItems
 local fFlagLuaAppAddRequestIdToRfySignalApportioning = require(parent.SharedFlags).FFlagLuaAppAddRequestIdToRfySignalApportioning
 local var3 = game:DefineFastInt("SduiCreateSduiFeedStoreLogDelayMs", 1000) / 1000
 
-return function() --[[ line: 29 | named "createSduiFeedStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), fFlagSduiGetItemCollectionKeys (ref), fFlagLuaAppRfySignalApportioning (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (ref), var3 (ref), discoveryEventErrorLogger (ref), luaAppNilApportionedItems (ref)
 	local t = {}
 	local t_1 = {}
@@ -24,7 +24,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 		var11 = var13
 		var12 = var14
 	end
-	local function _(value, p0) --[[ line: 61 | named "createItemCollectionSignal" ]]
+	local function _(value, p0)
 		-- upvalues: signalsModule (copy), t (ref)
 		local var26, var27 = signalsModule.createSignal(p0)
 		t[value] = { get = var26, set = var27 }
@@ -32,7 +32,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 		return t[value]
 	end
 	
-	local function getItemCollection(p1, p2) --[[ line: 70 ]]
+	local function getItemCollection(p1, p2)
 		-- upvalues: t (ref), signalsModule (copy)
 		local var28 = t[p1]
 		
@@ -48,7 +48,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 		return var28.get
 	end
 	
-	local function getFirstItemCollectionWithFilter(p3) --[[ line: 85 ]]
+	local function getFirstItemCollectionWithFilter(p3)
 		-- upvalues: t (ref)
 		for i, v in t do
 			if p3(v.get(false)) then
@@ -58,7 +58,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 		return nil
 	end
 	
-	local function setItemCollections(value) --[[ line: 97 ]]
+	local function setItemCollections(value)
 		-- upvalues: t (ref), signalsModule (copy)
 		for i, v in value do
 			if t[i] then
@@ -77,11 +77,11 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 	local getApportionedItems = nil
 	
 	if fFlagLuaAppRfySignalApportioning then
-		local var22 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then function(p4, p5) --[[ line: 110 ]]
+		local var22 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then function(p4, p5)
 			return if p5 then p4 .. "_" .. p5 else p4
 		end else nil
 		
-		local function createApportioningDataSignals(value, p6, p7) --[[ line: 119 ]]
+		local function createApportioningDataSignals(value, p6, p7)
 			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var22 (ref), signalsModule (copy), t_1 (ref), t_2 (ref)
 			local var33 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(value, p7) else value
 			local var34, var35 = signalsModule.createSignal(p6.items)
@@ -108,7 +108,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			end
 		end
 		
-		local var24 = function(p8, p9) --[[ line: 167 ]]
+		local var24 = function(p8, p9)
 			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var22 (ref), t_1 (ref), createApportioningDataSignals (ref)
 			local var42 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(p8, p9) else p8
 			
@@ -118,7 +118,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			return t_1[var42].get
 		end
 		
-		setApportioningData = function(value, p10) --[[ line: 185 | named "setApportioningData" ]]
+		setApportioningData = function(value, p10)
 			-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var22 (ref), t_1 (ref), createApportioningDataSignals (ref)
 			for i, v in value do
 				local var43 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(i, p10) else i
@@ -140,7 +140,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			end
 		end
 		
-		local function updateGridApportioningMetadata(p11, p12) --[[ line: 220 ]]
+		local function updateGridApportioningMetadata(p11, p12)
 			-- upvalues: var24 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var22 (ref), var3 (copy), t_1 (ref), discoveryEventErrorLogger (copy)
 			local var45 = var24(p11, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p12 else nil)(false)
 			local gridApportioningMetadata = var45.getGridApportioningMetadata(false)
@@ -148,7 +148,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			
 			if #gridApportioningMetadata == 0 then
 				local var47 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(p11, p12) else p11
-				task.delay(var3, function() --[[ line: 236 ]]
+				task.delay(var3, function()
 					-- upvalues: t_1 (copy), var47 (ref), discoveryEventErrorLogger (copy)
 					local var51 = t_1[var47].get(false)
 					
@@ -174,14 +174,14 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			var45.setGridApportioningMetadata(t)
 		end
 		
-		updateApportioningCapacity = function(p13, p14, p15, p16) --[[ line: 276 | named "updateApportioningCapacity" ]]
+		updateApportioningCapacity = function(p13, p14, p15, p16)
 			-- upvalues: var24 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), updateGridApportioningMetadata (ref)
 			local var52 = var24(p13, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p16 else nil)(false)
 			var52.scheduledCapacityUpdates[p14] = p15
 			
 			if not var52.isCapacityUpdateScheduled then
 				var52.isCapacityUpdateScheduled = true
-				var52.capacityUpdateCoroutine = task.defer(function() --[[ line: 291 ]]
+				var52.capacityUpdateCoroutine = task.defer(function()
 					-- upvalues: updateGridApportioningMetadata (copy), p13 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p16 (ref), var52 (ref)
 					updateGridApportioningMetadata(p13, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p16 else nil)
 					var52.scheduledCapacityUpdates = {}
@@ -191,14 +191,14 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			end
 		end
 		
-		getSingleGridApportioningMetadata = function(p17, p18, p19) --[[ line: 303 | named "getSingleGridApportioningMetadata" ]]
+		getSingleGridApportioningMetadata = function(p17, p18, p19)
 			-- upvalues: signalsModule (copy), var24 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var3 (copy), var22 (ref), t_1 (ref), discoveryEventErrorLogger (copy)
-			return signalsModule.createComputed(function(p20) --[[ line: 304 ]]
+			return signalsModule.createComputed(function(p20)
 				-- upvalues: var24 (copy), p17 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p19 (ref), var3 (copy), var22 (copy), t_1 (copy), discoveryEventErrorLogger (copy), p18 (ref)
 				local gridApportioningMetadata = var24(p17, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p19 else nil)(p20).getGridApportioningMetadata(p20)
 				
 				if #gridApportioningMetadata == 0 then
-					task.delay(var3, function() --[[ line: 315 ]]
+					task.delay(var3, function()
 						-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var22 (copy), p17 (copy), p19 (copy), t_1 (copy), discoveryEventErrorLogger (copy), p18 (copy)
 						local var54 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(p17, p19) else p17
 						local var55 = t_1[var54].get(false)
@@ -219,9 +219,9 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 			end)
 		end
 		
-		getApportionedItems = function(p21, p22, p23) --[[ line: 346 | named "getApportionedItems" ]]
+		getApportionedItems = function(p21, p22, p23)
 			-- upvalues: signalsModule (copy), var24 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), getSingleGridApportioningMetadata (write), var22 (ref), var3 (copy), t_1 (ref), discoveryEventErrorLogger (copy), luaAppNilApportionedItems (copy)
-			return signalsModule.createComputed(function(p24) --[[ line: 347 ]]
+			return signalsModule.createComputed(function(p24)
 				-- upvalues: var24 (copy), p21 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), p23 (ref), getSingleGridApportioningMetadata (copy), p22 (ref), var22 (copy), var3 (copy), t_1 (copy), discoveryEventErrorLogger (copy), luaAppNilApportionedItems (copy)
 				local startingItemIndex
 				local var56 = var24(p21, if fFlagLuaAppAddRequestIdToRfySignalApportioning then p23 else nil)(p24)
@@ -230,7 +230,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 				
 				if #items == 0 and #var56.getGridApportioningMetadata(false) == 0 then
 					local var60 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(p21, p23) else p21
-					task.delay(var3, function() --[[ line: 365 ]]
+					task.delay(var3, function()
 						-- upvalues: t_1 (copy), var60 (ref), discoveryEventErrorLogger (copy), p22 (copy)
 						local var61 = t_1[var60].get(false)
 						
@@ -242,7 +242,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 					return if luaAppNilApportionedItems then nil else {}
 				elseif not var58 then
 					startingItemIndex = nil
-					task.delay(var3, function() --[[ line: 386 ]]
+					task.delay(var3, function()
 						-- upvalues: fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var22 (copy), p21 (copy), p23 (copy), getSingleGridApportioningMetadata (copy), p22 (copy), t_1 (copy), startingItemIndex (write), discoveryEventErrorLogger (copy)
 						local var62 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then var22(p21, p23) else p21
 						
@@ -283,7 +283,7 @@ return function() --[[ line: 29 | named "createSduiFeedStore" ]]
 		updateApportioningCapacity = if fFlagLuaAppRfySignalApportioning then updateApportioningCapacity else nil,
 		getSingleGridApportioningMetadata = if fFlagLuaAppRfySignalApportioning then getSingleGridApportioningMetadata else nil,
 		getApportionedItems = if fFlagLuaAppRfySignalApportioning then getApportionedItems else nil,
-		updateData = function(p25, p26) --[[ line: 435 ]]
+		updateData = function(p25, p26)
 			-- upvalues: var8 (ref), var10 (ref), setItemCollections (ref), fFlagSduiGetItemCollectionKeys (copy), var12 (write), fFlagLuaAppRfySignalApportioning (copy), setApportioningData (write), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy)
 			if p25.templates then
 				var8(p25.templates)

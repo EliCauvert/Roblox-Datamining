@@ -9,7 +9,7 @@ local buyActionBarLayoutModule = require(avatarExperienceInspectAndBuy.Component
 local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-return function(p0) --[[ line: 64 | named "ViewportLayout" ]]
+return function(p0)
 	-- upvalues: viewTypeModule (ref), useTokens (ref), reactModule (ref), backButtonModule (ref), foundationModule (ref), buyActionBarLayoutModule (ref)
 	local var6 = p0.view == viewTypeModule.WideLandscape
 	local var7 = useTokens()

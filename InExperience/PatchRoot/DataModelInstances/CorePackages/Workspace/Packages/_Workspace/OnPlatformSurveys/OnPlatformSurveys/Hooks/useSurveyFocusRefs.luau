@@ -18,11 +18,11 @@ local t = {
 	[Enum.KeyCode.RightBracket] = focusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(p0) --[[ line: 38 | named "getScrollableAncestor" ]]
+local function _(p0)
 	return if p0 == nil then nil elseif p0:IsA("ScrollingFrame") then p0 else p0:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(p1, p2) --[[ line: 48 | named "scrollTo" ]]
+local _ = function(p1, p2)
 	local var6 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
 	
 	if p2 > 0 and var6 - 350 <= p1.CanvasPosition.Y then
@@ -37,8 +37,8 @@ local _ = function(p1, p2) --[[ line: 48 | named "scrollTo" ]]
 	p1.CanvasPosition += Vector2.new(0, p2)
 end
 
-local _ = function(p3, p4) --[[ line: 61 | named "mergeRefs" ]]
-	return function(p5) --[[ line: 62 ]]
+local _ = function(p3, p4)
+	return function(p5)
 		-- upvalues: p3 (ref), p4 (ref)
 		if type(p3) == "function" then
 			p3(p5)
@@ -55,7 +55,7 @@ local _ = function(p3, p4) --[[ line: 61 | named "mergeRefs" ]]
 	end
 end
 
-return function(p6, p7) --[[ line: 77 | named "useSurveyFocusRefs" ]]
+return function(p6, p7)
 	-- upvalues: useDefaultFocusBehavior (ref), inlineSurveyFocusRoot (ref), useFocusedGuiObject (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), t (ref), useAppFocusRoot (ref)
 	local var10
 	local var7 = useDefaultFocusBehavior()
@@ -67,7 +67,7 @@ return function(p6, p7) --[[ line: 77 | named "useSurveyFocusRefs" ]]
 		var10 = useFocusRoot({
 			isAutoFocusRoot = true,
 			surfaceIdentifier = p6,
-			eventHandlers = reactModule.useMemo(function() --[[ line: 85 ]]
+			eventHandlers = reactModule.useMemo(function()
 				-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p7 (ref), var9 (ref)
 				local t = {
 					[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p7) }
@@ -75,7 +75,7 @@ return function(p6, p7) --[[ line: 77 | named "useSurveyFocusRefs" ]]
 				
 				if var9 then
 					t[focusNavigationEventNameEnum.ScrollUp] = {
-						handler = inputHandlersModule.onRelease(function() --[[ line: 94 ]]
+						handler = inputHandlersModule.onRelease(function()
 							-- upvalues: var9 (copy)
 							local _ = var9.AbsoluteCanvasSize.Y - var9.AbsoluteWindowSize.Y
 							
@@ -88,7 +88,7 @@ return function(p6, p7) --[[ line: 77 | named "useSurveyFocusRefs" ]]
 						end)
 					}
 					t[focusNavigationEventNameEnum.ScrollDown] = {
-						handler = inputHandlersModule.onRelease(function() --[[ line: 99 ]]
+						handler = inputHandlersModule.onRelease(function()
 							-- upvalues: var9 (copy)
 							local var12 = var9.AbsoluteCanvasSize.Y - var9.AbsoluteWindowSize.Y
 							
@@ -114,9 +114,9 @@ return function(p6, p7) --[[ line: 77 | named "useSurveyFocusRefs" ]]
 			}
 		})
 	end
-	return reactModule.useMemo(function() --[[ line: 126 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var10 (write), var7 (ref)
-		return function(p8) --[[ line: 62 ]]
+		return function(p8)
 			-- upvalues: var10 (ref), var7 (ref)
 			if type(var10) == "function" then
 				var10(p8)

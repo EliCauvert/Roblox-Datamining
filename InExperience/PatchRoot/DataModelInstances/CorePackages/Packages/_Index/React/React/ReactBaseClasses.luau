@@ -14,18 +14,18 @@ end
 local uninitializedState = require(parent.Shared).UninitializedState
 local t_1 = { isReactComponent = true }
 
-local function _(p0) --[[ line: 51 | named "trimPath" ]]
+local function _(p0)
 	local match = string.match(p0, "%.%u[%.%w]-$")
 	
 	return if match then string.gsub(match, "^%.", "") else p0
 end
 
-local _ = function(p1, p2, p3) --[[ line: 65 | named "warnAboutExistingLifecycle" ]]
+local _ = function(p1, p2, p3)
 	-- upvalues: console (ref)
 	console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", p1, p3, p2, p1)
 end
 
-local _ = function(p4, p5, p6) --[[ line: 75 | named "warnAboutDeprecatedLifecycleName" ]]
+local _ = function(p4, p5, p6)
 	-- upvalues: dEV (ref), cOMPATWARNINGS (ref), console (ref)
 	if dEV and cOMPATWARNINGS then
 		local debugInfo, debugInfo_1 = debug.info(3, "sln")
@@ -42,7 +42,7 @@ local t_2 = {
 	willUnmount = "componentWillUnmount"
 }
 
-local function handleNewLifecycle(p7, p8, p9) --[[ line: 97 ]]
+local function handleNewLifecycle(p7, p8, p9)
 	-- upvalues: t_2 (ref), console (ref), dEV (ref), cOMPATWARNINGS (ref)
 	if t_2[p8] ~= nil then
 		if p7[t_2[p8]] ~= nil then
@@ -70,7 +70,7 @@ end
 local tbl = setmetatable({ __componentName = "Component" }, {
 	__newindex = handleNewLifecycle,
 	__index = t_1,
-	__tostring = function(p10) --[[ line: 127 ]]
+	__tostring = function(p10)
 		return p10.__componentName
 	end
 })
@@ -87,7 +87,7 @@ for i = 1, var7 do
 		__updater = reactNoopUpdateQueueModule
 	})
 end
-local function setStateInInit(value, p11, p12) --[[ line: 163 ]]
+local function setStateInInit(value, p11, p12)
 	-- upvalues: dEV (ref), console (ref), object (ref)
 	if dEV and p12 ~= nil then
 		console.warn("Received a `callback` argument to `setState` during initialization of \"%s\". The callback behavior is not supported when using `setState` in `init`.\n\nConsider defining similar behavior in a `compontentDidMount` method instead.", value.__componentName)
@@ -101,7 +101,7 @@ local function setStateInInit(value, p11, p12) --[[ line: 163 ]]
 	value.state = object.assign({}, state, if var23 == "function" then p11(state, value.props) else p11)
 end
 
-function tbl.extend(p13, p14) --[[ line: 203 ]]
+function tbl.extend(p13, p14)
 	-- upvalues: cOMPATWARNINGS (ref), console (ref), var8 (write), var7 (ref), list (ref), uninitializedState (ref), t (ref), reactNoopUpdateQueueModule (ref), setStateInInit (ref)
 	if p14 == nil then
 		if cOMPATWARNINGS then
@@ -119,7 +119,7 @@ function tbl.extend(p13, p14) --[[ line: 203 ]]
 	}
 	t_1.__index = t_1
 	
-	function t_1.__ctor(p15, p16, p17) --[[ line: 237 ]]
+	function t_1.__ctor(p15, p16, p17)
 		-- upvalues: var8 (copy), var7 (copy), list (copy), uninitializedState (copy), t (copy), reactNoopUpdateQueueModule (copy), t_1 (ref), setStateInInit (copy)
 		local var25
 		local _ = nil
@@ -154,14 +154,14 @@ function tbl.extend(p13, p14) --[[ line: 203 ]]
 	return t_1
 end
 
-function tbl.setState(value, p18, p19) --[[ line: 329 ]]
+function tbl.setState(value, p18, p19)
 	if p18 ~= nil and type(p18) ~= "table" and type(p18) ~= "function" then
 		error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.")
 	end
 	value.__updater.enqueueSetState(value, p18, p19, "setState")
 end
 
-function tbl.forceUpdate(p20, p21) --[[ line: 358 ]]
+function tbl.forceUpdate(p20, p21)
 	p20.__updater.enqueueForceUpdate(p20, p21, "forceUpdate")
 end
 
@@ -177,9 +177,9 @@ if dEV then
 		}
 	}
 	
-	i = function(p22, p23) --[[ line: 382 ]]
+	i = function(p22, p23)
 		-- upvalues: tbl (ref), console (ref)
-		tbl[p22] = function() --[[ line: 383 ]]
+		tbl[p22] = function()
 			-- upvalues: console (copy), p23 (ref)
 			console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", p23[1], p23[2])
 			
@@ -191,7 +191,7 @@ if dEV then
 		if t_3[i_1] ~= nil then
 			local var12 = t_3[i_1]
 			
-			tbl[i_1] = function() --[[ line: 383 ]]
+			tbl[i_1] = function()
 				-- upvalues: console (ref), var12 (ref)
 				console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", var12[1], var12[2])
 				
@@ -205,7 +205,7 @@ pureComponent.extend = tbl.extend
 setmetatable(pureComponent, {
 	__newindex = handleNewLifecycle,
 	__index = { isReactComponent = true, isPureReactComponent = true },
-	__tostring = function(p24) --[[ line: 430 ]]
+	__tostring = function(p24)
 		return p24.__componentName
 	end
 })

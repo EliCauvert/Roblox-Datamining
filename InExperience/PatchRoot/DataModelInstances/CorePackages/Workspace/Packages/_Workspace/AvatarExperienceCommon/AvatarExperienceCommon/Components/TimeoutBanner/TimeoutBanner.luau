@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(script.Parent.useTimeoutBannerProps)
 
-return function(p0) --[[ line: 17 | named "TimeoutBanner" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return if p0.shouldShow then reactModule.createElement(foundationModule.View, {
 		tag = "auto-y size-full-0 padding-x-medium padding-y-small row align-x-center align-y-center gap-small",

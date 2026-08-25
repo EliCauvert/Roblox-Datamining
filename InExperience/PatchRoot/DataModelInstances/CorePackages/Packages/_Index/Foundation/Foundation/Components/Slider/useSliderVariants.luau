@@ -6,7 +6,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local _ = require(foundation.Components.Types)
 
-local function variantsFactory(p0) --[[ line: 38 ]]
+local function variantsFactory(p0)
 	-- upvalues: sliderVariantModule (ref), inputSizeModule (ref)
 	return {
 		common = {
@@ -56,7 +56,7 @@ local function variantsFactory(p0) --[[ line: 38 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ line: 91 ]]
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local slider = variantsContextModule.useVariants("Slider", variantsFactory, p1)
 	

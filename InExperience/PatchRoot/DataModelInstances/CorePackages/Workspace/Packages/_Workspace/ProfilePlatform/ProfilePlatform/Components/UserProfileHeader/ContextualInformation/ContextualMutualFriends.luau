@@ -10,24 +10,24 @@ local playerContext = UIBloxModule.App.Indicator.PlayerContext
 local userProfilesModule = require(parent.UserProfiles)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 
-local function truncateSomeNames(p0, p1) --[[ line: 31 ]]
+local function truncateSomeNames(p0, p1)
 	return if p1.shouldTruncateLongNames and #p0 >= 13 then string.format("%s%s", string.sub(p0, 1, 12), "\226\128\166") else p0
 end
 
-local function getNamesListText(p2, p3) --[[ line: 38 ]]
+local function getNamesListText(p2, p3)
 	-- upvalues: cryoModule (ref), truncateSomeNames (ref)
 	local t = {}
 	
 	for i = 1, math.min(#p2, 3) do
 		table.insert(t, p2[i])
 	end
-	return table.concat(cryoModule.List.map(t, function(p4) --[[ line: 46 ]]
+	return table.concat(cryoModule.List.map(t, function(p4)
 		-- upvalues: truncateSomeNames (copy), p3 (ref)
 		return truncateSomeNames(p4, p3)
 	end), ", ")
 end
 
-local function _(p5, p6, p7) --[[ line: 53 | named "getOthersText" ]]
+local function _(p5, p6, p7)
 	local oneMutualFriendText = p7.oneMutualFriendText
 	local pluralMutualFriendsText = p7.pluralMutualFriendsText
 	local oneOtherMutualFriendText = p7.oneOtherMutualFriendText
@@ -43,7 +43,7 @@ local function _(p5, p6, p7) --[[ line: 53 | named "getOthersText" ]]
 	return `+ {var9} {if var9 == 1 then oneOtherMutualFriendText else pluralOtherMutualFriendsText}`
 end
 
-local _ = function(p8, p9, p10, p11) --[[ line: 76 | named "getText" ]]
+local _ = function(p8, p9, p10, p11)
 	-- upvalues: getNamesListText (ref)
 	local var12
 	local var10 = getNamesListText(p9, p10)
@@ -64,7 +64,7 @@ local _ = function(p8, p9, p10, p11) --[[ line: 76 | named "getText" ]]
 	return `{var10} {var12}`
 end
 
-return function(p12) --[[ line: 85 | named "contextualPresence" ]]
+return function(p12)
 	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), cryoModule (ref), userProfilesModule (ref), getNamesListText (ref), reactModule (ref), playerContext (ref), images (ref)
 	local var14 = useLocalization({
 		oneMutualFriendText = if fFlagConnectionsToFriendsRename then textKeysModule.OneMutualFriend else textKeysModule.OneMutualConnection,
@@ -73,7 +73,7 @@ return function(p12) --[[ line: 85 | named "contextualPresence" ]]
 		pluralOtherMutualFriendsText = if fFlagConnectionsToFriendsRename then textKeysModule.PluralOtherMutualFriends else textKeysModule.PluralOtherMutualConnections
 	})
 	local mutualFriendsCount = p12.mutualFriendsCount
-	local var15 = cryoModule.List.map(p12.mutualFriends, function(p13) --[[ line: 103 ]]
+	local var15 = cryoModule.List.map(p12.mutualFriends, function(p13)
 		return tostring(p13)
 	end)
 	local var16 = userProfilesModule.Hooks.useUserProfilesFetch({

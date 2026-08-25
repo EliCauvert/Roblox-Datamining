@@ -4,16 +4,16 @@ local t = {
 	["Feature.Build.Analytics.DurationHours"] = "{number} hrs"
 }
 
-return function() --[[ line: 16 | named "createMockAnalyticsLocalization" ]]
+return function()
 	-- upvalues: robloxAppLocalesModule (ref), t (ref)
 	local var2 = robloxAppLocalesModule.Localization.new("en-us")
 	
-	function var2.Format(_, p0, p1) --[[ line: 18 ]]
+	function var2.Format(_, p0, p1)
 		-- upvalues: t (copy)
 		local var3 = t[p0] or p0
 		
 		if p1 ~= nil then
-			var3 = string.gsub(var3, "{(%w+)}", function(p2) --[[ line: 22 ]]
+			var3 = string.gsub(var3, "{(%w+)}", function(p2)
 				-- upvalues: p1 (ref)
 				local var4 = p1[p2]
 				

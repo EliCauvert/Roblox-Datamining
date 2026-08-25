@@ -8,7 +8,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local withCommonProps = foundationModule.Utility.withCommonProps
 local withDefaults = foundationModule.Utility.withDefaults
 
-local function _(startValue, endValue, alpha) --[[ line: 28 | named "lerp" ]]
+local function _(startValue, endValue, alpha)
 	return (1 - alpha) * startValue + endValue * alpha
 end
 
@@ -18,14 +18,14 @@ local t = {
 	Size = UDim2.fromScale(1, 1)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 43 | named "ItemCardThumbnailSkeleton" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaults (ref), t (ref), usePulseBinding (ref), useTokens (ref), radius (ref), reactModule (ref), view (ref), withCommonProps (ref)
 	local var3 = withDefaults(p0, t)
 	local var4 = useTokens()
 	
 	return reactModule.createElement(view, withCommonProps(var3, {
 		cornerRadius = if var3.radius ~= radius.None then nil else UDim.new(0, var4.Radius[var3.radius]),
-		backgroundStyle = usePulseBinding(2):map(function(p2) --[[ line: 54 ]]
+		backgroundStyle = usePulseBinding(2):map(function(p2)
 			-- upvalues: var4 (ref)
 			return {
 				Color3 = var4.Color.Shift.Shift_300.Color3,

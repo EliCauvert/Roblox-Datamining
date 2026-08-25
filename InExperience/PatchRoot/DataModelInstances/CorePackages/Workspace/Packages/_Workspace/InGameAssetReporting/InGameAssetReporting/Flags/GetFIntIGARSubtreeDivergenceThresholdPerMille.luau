@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("IGARSubtreeDivergenceThresholdPerMille", 800)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastInt("IGARSubtreeDivergenceThresholdPerMille")
 end

@@ -7,14 +7,14 @@ local chatInterventionGenericToastModule = require(inExperienceIntervention.Comp
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local determineToastDuration = require(parent.InterventionShared).Utils.determineToastDuration
 
-function ChatTimeoutToast(p0) --[[ line: 21 ]]
+function ChatTimeoutToast(p0)
 	-- upvalues: reactModule (ref), useLocalization (ref), constants (ref), determineToastDuration (ref), chatInterventionGenericToastModule (ref), inExperienceInterventionAnalyticsModule (ref)
 	local var4, var5 = reactModule.useState(0)
 	local var6 = useLocalization({
 		cannotSend1MinText = constants.localizationKeys.CannotSend1MinText,
 		beRespectfulText = constants.localizationKeys.BeRespectfulText
 	})
-	reactModule.useEffect(function() --[[ line: 29 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var5 (ref)
 		if p0.endTime then
 			var5(math.ceil((p0.endTime - DateTime.now().UnixTimestamp) / 60))

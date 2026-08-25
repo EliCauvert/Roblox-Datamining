@@ -4,45 +4,45 @@ local reactModule = require(parent.React)
 local signal = require(parent.AppCommonLib).Signal
 local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 
-local var3 = function() --[[ line: 22 ]] end
+local var3 = function() end
 
-return function(p0) --[[ line: 24 | named "useShopImpressionsDetector" ]]
+return function(p0)
 	-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (ref), var3 (ref), reactModule (ref), signal (ref), inExperienceShop (ref)
 	if fFlagEnableInExperienceShopUnifiedLoggingModule then
-		local var4 = reactModule.useMemo(function() --[[ line: 33 ]]
+		local var4 = reactModule.useMemo(function()
 			-- upvalues: signal (copy)
 			return signal.new()
 		end, {})
 		local var5 = reactModule.useRef(nil)
-		reactModule.useEffect(function() --[[ line: 39 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), var4 (ref)
 			local externalScrollSignal = p0.externalScrollSignal
 			
 			if externalScrollSignal == nil then
-				return function() --[[ line: 42 ]] end
+				return function() end
 			end
-			local var7 = externalScrollSignal:connect(function() --[[ line: 45 ]]
+			local var7 = externalScrollSignal:connect(function()
 				-- upvalues: var4 (copy)
 				var4:fire()
 			end)
 			
-			return function() --[[ line: 49 ]]
+			return function()
 				-- upvalues: var7 (ref)
 				var7:disconnect()
 			end
 		end, { p0.externalScrollSignal, var4 })
-		local var6 = reactModule.useCallback(function() --[[ line: 58 ]]
+		local var6 = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			return p0.isPageActive
 		end, { p0.isPageActive })
 		
 		return {
 			gridRef = var5,
-			onLayoutChange = reactModule.useCallback(function() --[[ line: 54 ]]
+			onLayoutChange = reactModule.useCallback(function()
 				-- upvalues: var4 (ref)
 				var4:fire()
 			end, { var4 }),
-			impressionsDetector = reactModule.useMemo(function() --[[ line: 62 ]]
+			impressionsDetector = reactModule.useMemo(function()
 				-- upvalues: inExperienceShop (copy), reactModule (copy), var5 (ref), var6 (ref), var4 (ref), p0 (ref)
 				local analyticsModule = require(inExperienceShop.Analytics)
 				

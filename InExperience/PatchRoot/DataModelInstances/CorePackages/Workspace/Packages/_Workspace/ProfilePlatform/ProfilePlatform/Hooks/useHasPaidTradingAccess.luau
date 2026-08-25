@@ -7,9 +7,9 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
 
-return function(p0) --[[ line: 15 | named "useHasPaidTradingAccess" ]]
+return function(p0)
 	-- upvalues: useIsRobloxSubscriber (ref), useSelector (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagEnableBlackbirdCheck (ref)
-	return useSelector(function(p1) --[[ line: 17 ]]
+	return useSelector(function(p1)
 		-- upvalues: p0 (ref)
 		if not p0 then
 			return false

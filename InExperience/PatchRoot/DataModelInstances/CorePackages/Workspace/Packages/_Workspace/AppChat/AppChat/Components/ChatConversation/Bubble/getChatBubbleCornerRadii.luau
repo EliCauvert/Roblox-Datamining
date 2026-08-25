@@ -1,6 +1,6 @@
 ﻿local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
 
-return function(p0, p1, p2) --[[ line: 10 | named "getChatBubbleCornerRadii" ]]
+return function(p0, p1, p2)
 	-- upvalues: chatBubbleEnumModule (ref)
 	if p0 == chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE then
 		return {

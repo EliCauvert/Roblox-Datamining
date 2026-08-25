@@ -11,16 +11,16 @@ local robloxAppSessionizationModule = require(parent.RobloxAppSessionization)
 local setGamePlaySession = robloxAppSessionizationModule.SetGamePlaySession
 local sessionType = robloxAppSessionizationModule.SessionType
 
-return function(p0) --[[ line: 30 | named "InstantPlayLauncher" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), appSessionService (ref), usePlayButtonState (ref), reactModule (ref), useOnPlayButtonCallback (ref), playButtonStates (ref), setGamePlaySession (ref), sessionType (ref)
 	local var3 = useRoactService(appSessionService)
 	local var4 = usePlayButtonState(useRoactService(roactNetworking), p0.universeId, nil, true)
 	local var5 = reactModule.useRef(false)
-	local var6 = useOnPlayButtonCallback(p0.universeId, p0.referralSource, p0.eventContext, nil, p0.launchSource, reactModule.useMemo(function() --[[ line: 36 ]]
+	local var6 = useOnPlayButtonCallback(p0.universeId, p0.referralSource, p0.eventContext, nil, p0.launchSource, reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		return { launchData = p0.launchData }
 	end, { p0.launchData }), p0.placeId)
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var4 (ref), playButtonStates (copy), setGamePlaySession (copy), var3 (ref), sessionType (copy), var6 (ref), p0 (ref)
 		if var5.current or var4.playButtonState == playButtonStates.Loading then return end
 		var5.current = true

@@ -20,7 +20,7 @@ local _ = require(groups.Common.Types)
 local useMembersFollowersLabelModule = require(groups.Hooks.useMembersFollowersLabel)
 local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "GroupListItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useGroupsWrapperContextModule (ref), useAbbreviatedNumberLocalization (ref), useMembersFollowersLabelModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), chip (ref), chipSize (ref), view (ref), image (ref), emojiWrapper (ref), verifiedBadgesModule (ref), text (ref)
 	local var9 = useGroupsWrapperContextModule()
 	local group = p0.group
@@ -44,7 +44,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GroupListItem" ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p0.layoutOrder,
-		onActivated = reactModule.useCallback(function() --[[ line: 73 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: id (ref), var9 (ref)
 			if id then
 				var9.navigateTo.groupDetails(id)
@@ -54,7 +54,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GroupListItem" ]]
 		Thumbnail = reactModule.createElement(image, {
 			LayoutOrder = 1,
 			tag = "radius-medium bg-surface-100",
-			Image = reactModule.useMemo(function() --[[ line: 62 ]]
+			Image = reactModule.useMemo(function()
 				-- upvalues: group (ref), getRbxthumbWithTypeSizeAndOptions (copy), id (ref), constants (copy)
 				return if group.thumbnail and group.thumbnail ~= "" then group.thumbnail else getRbxthumbWithTypeSizeAndOptions(tostring(id), constants.RbxthumbTypes.GroupIcon, 150)
 			end, { id, group.thumbnail }),
@@ -85,7 +85,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GroupListItem" ]]
 				Text = var13
 			}) or nil
 		}),
-		RoleChip = reactModule.useMemo(function() --[[ line: 81 ]]
+		RoleChip = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), group (ref), reactModule (copy), chip (copy), var12 (ref), chipSize (copy)
 			if not p0.showRank then
 				return nil
@@ -95,7 +95,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GroupListItem" ]]
 					isChecked = true,
 					text = var12.owned,
 					size = chipSize.Small,
-					onActivated = function() --[[ line: 92 ]] end
+					onActivated = function() end
 				})
 			end
 			local var14 = if group.role and group.role.name and group.role.name ~= "" then group.role.name else nil
@@ -104,7 +104,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GroupListItem" ]]
 				LayoutOrder = 3,
 				text = var14,
 				size = chipSize.Small,
-				onActivated = function() --[[ line: 101 ]] end
+				onActivated = function() end
 			}) else nil
 		end, { p0.showRank, group.isOwner, group.role, var12.owned })
 	})

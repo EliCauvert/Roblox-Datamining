@@ -20,14 +20,14 @@ local t = {
 	placement = inputPlacementModule.Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | named "RadioGroupItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t (ref), withDefaultsModule (ref), useRadioGroupModule (ref), useTokensModule (ref), reactModule (ref), useRadioGroupItemVariantsModule (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), viewModule (ref)
 	local var15 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p0, t) else withDefaultsModule(p0, t)
 	local isDisabled = var15.isDisabled
 	local var16 = useRadioGroupModule()
 	local var17 = var16.value == var15.value
 	local label = var15.label or var15.value
-	local var19 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), var15 (ref)
 		var16.onValueChanged(var15.value)
 	end, { isDisabled, var15.value, var16.onValueChanged })

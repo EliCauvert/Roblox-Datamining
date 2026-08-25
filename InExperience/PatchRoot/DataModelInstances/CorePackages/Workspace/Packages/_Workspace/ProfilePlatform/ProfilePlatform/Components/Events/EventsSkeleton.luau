@@ -12,7 +12,7 @@ local collectionCarousel = require(parent.CollectionViews).CollectionCarousel
 local useGetGameTileHeight = require(parent.GameCollections).useGetGameTileHeight
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0) --[[ line: 21 | named "EventsSkeleton" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), useTextSizeOffset (ref), useDesignTokens (ref), useGetGameTileHeight (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), collectionCarousel (ref)
 	local var4 = useDesignTokens()
 	
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 21 | named "EventsSkeleton" ]]
 		fractionalItemAmount = 0.33,
 		sideMargin = 0,
 		title = useLocalization({ events = textKeysModule.EventsListTitle }).events,
-		items = reactModule.useMemo(function() --[[ line: 63 ]]
+		items = reactModule.useMemo(function()
 			-- upvalues: p0 (ref)
 			local t = {}
 			
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 21 | named "EventsSkeleton" ]]
 			end
 			return t
 		end, { p0.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p1, p2) --[[ line: 38 ]]
+		renderItem = reactModule.useCallback(function(_, p1, p2)
 			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
 			return reactModule.createElement(view, {
 				tag = "col gap-medium radius-medium",

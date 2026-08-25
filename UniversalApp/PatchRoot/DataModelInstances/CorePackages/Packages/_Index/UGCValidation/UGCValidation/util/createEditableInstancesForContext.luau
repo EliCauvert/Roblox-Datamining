@@ -5,7 +5,7 @@ local UGCValidationService = game:GetService("UGCValidationService")
 local _ = require(parent.util.Types)
 local destroyEditableInstancesModule = require(parent.util.destroyEditableInstances)
 
-local function _(p0, p1, p2, p3, p4) --[[ line: 13 | named "addEditableInstance" ]]
+local function _(p0, p1, p2, p3, p4)
 	local var7 = if p4 == "EditableImage" then p0.editableImages else p0.editableMeshes
 	
 	if not var7[p1] then
@@ -14,9 +14,9 @@ local function _(p0, p1, p2, p3, p4) --[[ line: 13 | named "addEditableInstance"
 	var7[p1][p2] = p3
 end
 
-local function createEditableInstanceFromId(p5, p6, p7) --[[ line: 26 ]]
+local function createEditableInstanceFromId(p5, p6, p7)
 	-- upvalues: assetService (ref), UGCValidationService (ref)
-	local ok, status = pcall(function() --[[ line: 27 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p7 (ref), assetService (copy), p5 (ref), UGCValidationService (copy)
 		return if p7 == "EditableMesh" then assetService:CreateEditableMeshAsync(p5) else UGCValidationService:CreateEditableImageOriginalSizeAsync(p5.Uri)
 	end)
@@ -29,7 +29,7 @@ local function createEditableInstanceFromId(p5, p6, p7) --[[ line: 26 ]]
 	return ok, status
 end
 
-function t.getEditableInstanceInfo(p8, p9, p10, p11) --[[ line: 46 ]]
+function t.getEditableInstanceInfo(p8, p9, p10, p11)
 	-- upvalues: createEditableInstanceFromId (ref)
 	local var8 = if p11 then p8.Object else nil
 	
@@ -48,11 +48,11 @@ function t.getEditableInstanceInfo(p8, p9, p10, p11) --[[ line: 46 ]]
 	end
 end
 
-local _ = function(p12, p13, p14, p15) --[[ line: 72 | named "addContent" ]]
+local _ = function(p12, p13, p14, p15)
 	p12[p13] = { content = p14, contentType = p15 }
 end
 
-local function getTextureContentMap(p16, p17) --[[ line: 79 ]]
+local function getTextureContentMap(p16, p17)
 	if p16:IsA("MeshPart") then
 		p17.TextureID = {
 			contentType = "EditableImage",
@@ -87,11 +87,11 @@ local function getTextureContentMap(p16, p17) --[[ line: 79 ]]
 	end
 end
 
-local _ = function(p18) --[[ line: 118 | named "getCageMeshContent" ]]
+local _ = function(p18)
 	return p18.CageMeshContent
 end
 
-local function getMeshContentMap(p19, p20) --[[ line: 122 ]]
+local function getMeshContentMap(p19, p20)
 	if p19:IsA("MeshPart") then
 		p20.MeshId = { contentType = "EditableMesh", content = p19.MeshContent }
 		
@@ -129,7 +129,7 @@ local function getMeshContentMap(p19, p20) --[[ line: 122 ]]
 	end
 end
 
-function t.getOrCreateEditableInstances(p21, p22, p23, p24) --[[ line: 143 ]]
+function t.getOrCreateEditableInstances(p21, p22, p23, p24)
 	-- upvalues: getMeshContentMap (ref), getTextureContentMap (ref), t (ref)
 	local t_1 = {}
 	getMeshContentMap(p21, t_1)
@@ -152,7 +152,7 @@ function t.getOrCreateEditableInstances(p21, p22, p23, p24) --[[ line: 143 ]]
 	return true
 end
 
-function t.processAll(p25, p26) --[[ line: 171 ]]
+function t.processAll(p25, p26)
 	-- upvalues: t (ref), destroyEditableInstancesModule (ref)
 	local t_1 = { editableMeshes = {}, editableImages = {} }
 	local t_2 = {}

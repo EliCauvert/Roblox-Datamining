@@ -35,7 +35,7 @@ local t_1 = {
 	component = hiddenMessageModule
 }
 
-local function _(p0) --[[ line: 49 | named "getMessageComponent" ]]
+local function _(p0)
 	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref)
 	return if p0 and p0.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[p0.messageType]
 end
@@ -48,8 +48,8 @@ chatMessage.defaultProps = {
 		placeId = nil,
 		universeId = nil,
 		senderUserId = nil,
-		onDetailsOpened = function() --[[ line: 67 ]] end,
-		openGameDetailsPage = function() --[[ line: 68 ]] end
+		onDetailsOpened = function() end,
+		openGameDetailsPage = function() end
 	},
 	conversationId = nil,
 	BackgroundColor3 = nil,
@@ -74,7 +74,7 @@ chatMessage.defaultProps = {
 	Transparency = nil,
 	wideMode = false,
 	viewProfileOnAvatarPressed = true,
-	closeKeyboard = function() --[[ line: 93 ]] end,
+	closeKeyboard = function() end,
 	inputBoxRef = nil,
 	repliesTo = nil,
 	translatedText = nil,
@@ -85,14 +85,14 @@ chatMessage.defaultProps = {
 	unknownUserText = "PLACEHOLDER unknown user"
 }
 
-function chatMessage.init(p1) --[[ line: 105 ]]
+function chatMessage.init(p1)
 	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), fFlagAppChatEnableAutotranslationModule (ref), memoize (ref), text (ref)
-	function p1.getModeratedText(p2) --[[ line: 106 ]]
+	function p1.getModeratedText(p2)
 		-- upvalues: fFlagChatModeratedMaskRandomLength (copy), getModeratedMaskTextModule (copy), p1 (ref)
 		return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.props.messageId or p2) else string.gsub(p2, "[^%s]", "#")
 	end
 	
-	function p1.messageMaxWidth(p3, p4) --[[ line: 113 ]]
+	function p1.messageMaxWidth(p3, p4)
 		local var16 = 128
 		
 		if p3 then
@@ -102,20 +102,20 @@ function chatMessage.init(p1) --[[ line: 105 ]]
 	end
 	
 	if fFlagAppChatEnableAutotranslationModule then
-		p1.getBubbleMaxWidth = memoize(function(p5, p6, p7, p8, p9) --[[ line: 124 ]]
+		p1.getBubbleMaxWidth = memoize(function(p5, p6, p7, p8, p9)
 			-- upvalues: text (copy), p1 (ref)
 			return if p9 then math.max(text.GetTextBounds(p6, p8, p1.props.autotranslationOriginalTextFontSize, Vector2.new(p5, 10000)).X, text.GetTextBounds(p9, p8, p7, Vector2.new(p5, 10000)).X) + 20 else text.GetTextBounds(p6, p8, p7, Vector2.new(p5, 10000)).X + 20
 		end)
 		
 		return
 	end
-	p1.getBubbleMaxWidth = memoize(function(p10, p11, p12, p13) --[[ line: 141 ]]
+	p1.getBubbleMaxWidth = memoize(function(p10, p11, p12, p13)
 		-- upvalues: text (copy)
 		return text.GetTextBounds(p11, p13, p12, Vector2.new(p10, 10000)).X + 20
 	end)
 end
 
-function chatMessage.render(p14) --[[ line: 148 ]]
+function chatMessage.render(p14)
 	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerAutomaticSizeModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatEnableAutotranslationModule (ref)
 	local props = p14.props
 	local var17 = if props and props.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[props.messageType]
@@ -126,7 +126,7 @@ function chatMessage.render(p14) --[[ line: 148 ]]
 		var18 = p14.props.moderated and p14.getModeratedText(var18) or var18
 		local content = p14.props.repliesTo and (p14.props.repliesTo.messageType and p14.props.repliesTo.content)
 		
-		return withStyle(function(p15) --[[ line: 167 ]]
+		return withStyle(function(p15)
 			-- upvalues: roactModule (copy), chatMessageContainerAutomaticSizeModule (copy), cryoModule (copy), p14 (ref), props (ref), var17 (ref), reactModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var18 (ref)
 			local body = p15.Font.Body
 			local var20 = p15.Font.BaseSize * body.RelativeSize
@@ -138,7 +138,7 @@ function chatMessage.render(p14) --[[ line: 148 ]]
 				messageId = p14.props.messageId,
 				isPending = p14.props.isSending or (p14.props.moderated or p14.props.failed),
 				visibility = p14.props.visibility,
-				renderMessage = function(p16, p17) --[[ line: 187 ]]
+				renderMessage = function(p16, p17)
 					-- upvalues: reactModule (copy), cryoModule (copy), p14 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), body (ref), props (copy), var21 (ref), p15 (ref), var17 (copy), fFlagAppChatEnableAutotranslationModule (copy), var18 (copy), var20 (ref)
 					local var25
 					local createElement = reactModule.createElement
@@ -233,7 +233,7 @@ function chatMessage.render(p14) --[[ line: 148 ]]
 	return nil
 end
 
-return if fFlagAppChatEnableAutotranslationModule then function(p18) --[[ line: 289 ]]
+return if fFlagAppChatEnableAutotranslationModule then function(p18)
 	-- upvalues: useTokens (ref), reactModule (ref), chatMessage (ref), cryoModule (ref)
 	return reactModule.createElement(chatMessage, cryoModule.Dictionary.union(p18, {
 		autotranslationOriginalTextFontSize = useTokens().Typography.BodySmall.FontSize

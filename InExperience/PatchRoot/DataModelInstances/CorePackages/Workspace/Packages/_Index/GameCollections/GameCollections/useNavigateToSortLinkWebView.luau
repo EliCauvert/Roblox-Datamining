@@ -17,7 +17,7 @@ local var2 = tModule.strictInterface({
 	durationInSeconds = tModule.optional(tModule.number)
 })
 
-local function _(p0) --[[ line: 28 | named "validateEventSchema" ]]
+local function _(p0)
 	-- upvalues: var2 (ref), mutedError (ref)
 	local var3, var4 = var2(p0)
 	
@@ -26,17 +26,17 @@ local function _(p0) --[[ line: 28 | named "validateEventSchema" ]]
 	end
 end
 
-return function() --[[ line: 36 | named "useNavigateToSortLinkWebView" ]]
+return function()
 	-- upvalues: useNavigation (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), var2 (ref), mutedError (ref), urlBuilder (ref), default (ref), appPage (ref)
 	local var5 = useNavigation()
-	local var6 = useAppPolicy(function(p1) --[[ line: 38 ]]
+	local var6 = useAppPolicy(function(p1)
 		return p1.getWebViewSupport()
 	end)
 	local var7 = useRoactService(appEventIngestService)
 	
-	return reactModule.useCallback(function(p2, p3, p4, p5, p6) --[[ line: 44 ]]
+	return reactModule.useCallback(function(p2, p3, p4, p5, p6)
 		-- upvalues: var6 (ref), var2 (copy), mutedError (copy), var7 (ref), urlBuilder (copy), default (copy), var5 (ref), appPage (copy)
-		local _ = function(p7, p8) --[[ line: 45 ]]
+		local _ = function(p7, p8)
 			-- upvalues: p2 (ref), p5 (ref), var6 (copy), var2 (copy), mutedError (copy), var7 (copy), p3 (ref)
 			local t = {
 				linkPath = p2,
@@ -87,7 +87,7 @@ return function() --[[ line: 36 | named "useNavigateToSortLinkWebView" ]]
 			mutedError(var15)
 		end
 		var7:sendEventDeferred(p3, "navigateToSortLink", t_1)
-		default:isURLRegistered(var11):andThen(function(p9) --[[ line: 69 ]]
+		default:isURLRegistered(var11):andThen(function(p9)
 			-- upvalues: default (copy), var11 (ref), var5 (copy), appPage (copy), p4 (ref), processTime (ref), p2 (ref), p5 (ref), var6 (copy), var2 (copy), mutedError (copy), var7 (copy), p3 (ref), p6 (ref)
 			if p9 then
 				default:detectURL(var11)
@@ -98,7 +98,7 @@ return function() --[[ line: 36 | named "useNavigateToSortLinkWebView" ]]
 				detail = var11,
 				extraProps = {
 					title = p4,
-					onClose = function() --[[ line: 77 ]]
+					onClose = function()
 						-- upvalues: processTime (copy), p2 (copy), p5 (copy), var6 (copy), var2 (copy), mutedError (copy), var7 (copy), p3 (copy), p6 (copy)
 						local t = {
 							action = "close",

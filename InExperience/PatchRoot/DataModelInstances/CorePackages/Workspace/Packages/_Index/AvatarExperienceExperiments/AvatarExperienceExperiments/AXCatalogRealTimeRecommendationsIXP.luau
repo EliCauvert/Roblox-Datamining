@@ -8,25 +8,25 @@ return IXPUtilsModule.defineIXPTest({
 	name = "AvatarMarketplace.UA.PerfCatalogRealTimeRecommendations",
 	recordExposure = false,
 	layer = appUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p0) --[[ line: 26 ]]
+	getIsUserInExperiment = function(p0)
 		return p0.catalogRealTimeRecommendations ~= nil
 	end,
-	getDependentFlagsEnabled = function() --[[ line: 30 ]]
+	getDependentFlagsEnabled = function()
 		return true
 	end,
-	getEnabledFlag = function() --[[ line: 34 ]]
+	getEnabledFlag = function()
 		-- upvalues: AXCatalogRealTimeRecommendationsIXPV2 (ref)
 		return AXCatalogRealTimeRecommendationsIXPV2
 	end,
-	getEnabledForAllFlag = function() --[[ line: 38 ]]
+	getEnabledForAllFlag = function()
 		-- upvalues: AXCatalogRealTimeRecommendationsIXPEnabledForAllV2 (ref)
 		return AXCatalogRealTimeRecommendationsIXPEnabledForAllV2
 	end,
 	variables = {
-		UserIsInExperiment = function(p1, p2) --[[ line: 43 ]]
+		UserIsInExperiment = function(p1, p2)
 			return p2 or p1.catalogRealTimeRecommendations ~= nil
 		end,
-		EnabledForUser = function(p3, p4) --[[ line: 46 ]]
+		EnabledForUser = function(p3, p4)
 			return p4 or (p3.catalogRealTimeRecommendations or false)
 		end
 	}

@@ -23,29 +23,29 @@ local t = {
 	Size = UDim2.new(1, 0, 0, 48),
 	BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 	onPressedBackgroundColor3 = Color3.fromRGB(242, 242, 242),
-	onActivated = function() --[[ line: 51 ]]
+	onActivated = function()
 		print("BaseCell onActivated")
 	end,
 	dividerColor3 = Color3.fromRGB(227, 227, 227)
 }
 
-return memo(function(p0) --[[ line: 61 | named "BaseCell" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useState (ref), controlState (ref), reactModule (ref), useMemo (ref), useCursor (ref), foundationModule (ref), var5 (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref)
 	local var8 = cryoModule.Dictionary.join(t, p0)
 	local var9, var10 = useState(controlState.Initialize)
-	local var11 = reactModule.useCallback(function(_, p1) --[[ line: 65 ]]
+	local var11 = reactModule.useCallback(function(_, p1)
 		-- upvalues: var8 (ref), var10 (ref)
 		if not var8.isDisabled then
 			var10(p1)
 		end
 	end, { var8.isDisabled })
-	local var12 = reactModule.useCallback(function() --[[ line: 71 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref)
 		if not var8.isDisabled then
 			var8.onActivated()
 		end
 	end, { var8.isDisabled, var8.onActivated })
-	local var13 = useMemo(function() --[[ line: 77 ]]
+	local var13 = useMemo(function()
 		-- upvalues: var9 (ref), controlState (copy), reactModule (copy), var8 (ref)
 		return if var9 == controlState.Pressed then reactModule.createElement("ImageLabel", {
 			BorderSizePixel = 0,
@@ -58,7 +58,7 @@ return memo(function(p0) --[[ line: 61 | named "BaseCell" ]]
 		var8.onPressedBackground3,
 		var8.onPressedBackgroundTransparency
 	})
-	local var14 = useMemo(function() --[[ line: 87 ]]
+	local var14 = useMemo(function()
 		-- upvalues: var8 (ref), reactModule (copy)
 		return if var8.showDivider then reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 			layout = reactModule.createElement("UIListLayout", {
@@ -92,7 +92,7 @@ return memo(function(p0) --[[ line: 61 | named "BaseCell" ]]
 		BackgroundTransparency = var8.BackgroundTransparency,
 		LayoutOrder = var8.LayoutOrder,
 		BorderSizePixel = 0
-	}, useMemo(function() --[[ line: 113 ]]
+	}, useMemo(function()
 		-- upvalues: cryoModule (copy), var8 (ref), var13 (ref), var14 (ref)
 		return cryoModule.Dictionary.join(var8.children or {}, { overlay = var13, divider = var14 })
 	end, { var8.children, var13, var14 }))

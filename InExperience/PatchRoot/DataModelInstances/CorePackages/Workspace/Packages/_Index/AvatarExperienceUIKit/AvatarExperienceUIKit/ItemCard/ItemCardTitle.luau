@@ -6,7 +6,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 local fFlagAXRootSlotBasedEditorFlag = require(parent.AvatarExperienceFlags).FFlagAXRootSlotBasedEditorFlag
 
-local function ItemCardTitle(p0) --[[ line: 20 ]]
+local function ItemCardTitle(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), text (ref), fFlagAXRootSlotBasedEditorFlag (ref), fFlagAXAddTextXAlignmentProp (ref)
 	local var3 = useTokens()
 	

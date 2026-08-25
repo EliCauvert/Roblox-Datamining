@@ -1,5 +1,5 @@
-﻿return function(p0) --[[ line: 21 | named "create" ]]
-	return function(p1) --[[ line: 22 ]]
+﻿return function(p0)
+	return function(p1)
 		-- upvalues: p0 (ref)
 		local var0 = Instance.new(p0)
 		local var1 = nil

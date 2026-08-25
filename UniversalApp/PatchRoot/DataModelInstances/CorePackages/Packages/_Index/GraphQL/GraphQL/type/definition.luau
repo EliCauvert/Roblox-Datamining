@@ -85,12 +85,12 @@ local t_5 = {}
 local t_6 = {}
 local t_7 = {}
 
-local function isType(p0) --[[ line: 167 ]]
+local function isType(p0)
 	-- upvalues: isScalarType (write), isObjectType (write), isInterfaceType (write), isUnionType (write), isEnumType (write), isInputObjectType (write), isListType (write), isNonNullType (write)
 	return isScalarType(p0) or (isObjectType(p0) or (isInterfaceType(p0) or (isUnionType(p0) or (isEnumType(p0) or (isInputObjectType(p0) or (isListType(p0) or isNonNullType(p0)))))))
 end
 
-local function assertType(p1) --[[ line: 178 ]]
+local function assertType(p1)
 	-- upvalues: isType (write), error (ref), inspect (ref)
 	if not isType(p1) then
 		error(error.new(("Expected %s to be a GraphQL type."):format(inspect(p1))))
@@ -98,12 +98,12 @@ local function assertType(p1) --[[ line: 178 ]]
 	return p1
 end
 
-isScalarType = function(p2) --[[ line: 190 | named "isScalarType" ]]
+isScalarType = function(p2)
 	-- upvalues: instanceOfModule (ref), t_2 (ref)
 	return instanceOfModule(p2, t_2)
 end
 
-local function assertScalarType(p3) --[[ line: 194 ]]
+local function assertScalarType(p3)
 	-- upvalues: isScalarType (write), error (ref), inspect (ref)
 	if not isScalarType(p3) then
 		error(error.new(("Expected %s to be a GraphQL Scalar type."):format(inspect(p3))))
@@ -111,12 +111,12 @@ local function assertScalarType(p3) --[[ line: 194 ]]
 	return p3
 end
 
-isObjectType = function(p4) --[[ line: 202 | named "isObjectType" ]]
+isObjectType = function(p4)
 	-- upvalues: instanceOfModule (ref), t_3 (ref)
 	return instanceOfModule(p4, t_3)
 end
 
-local function assertObjectType(p5) --[[ line: 206 ]]
+local function assertObjectType(p5)
 	-- upvalues: isObjectType (write), error (ref), inspect (ref)
 	if not isObjectType(p5) then
 		error(error.new(("Expected %s to be a GraphQL Object type."):format(inspect(p5))))
@@ -124,12 +124,12 @@ local function assertObjectType(p5) --[[ line: 206 ]]
 	return p5
 end
 
-isInterfaceType = function(p6) --[[ line: 214 | named "isInterfaceType" ]]
+isInterfaceType = function(p6)
 	-- upvalues: instanceOfModule (ref), t_4 (ref)
 	return instanceOfModule(p6, t_4)
 end
 
-local function assertInterfaceType(p7) --[[ line: 218 ]]
+local function assertInterfaceType(p7)
 	-- upvalues: isInterfaceType (write), error (ref), inspect (ref)
 	if not isInterfaceType(p7) then
 		error(error.new(("Expected %s to be a GraphQL Interface type."):format(inspect(p7))))
@@ -137,12 +137,12 @@ local function assertInterfaceType(p7) --[[ line: 218 ]]
 	return p7
 end
 
-isUnionType = function(p8) --[[ line: 226 | named "isUnionType" ]]
+isUnionType = function(p8)
 	-- upvalues: instanceOfModule (ref), t_5 (ref)
 	return instanceOfModule(p8, t_5)
 end
 
-local function assertUnionType(p9) --[[ line: 230 ]]
+local function assertUnionType(p9)
 	-- upvalues: isUnionType (write), error (ref), inspect (ref)
 	if not isUnionType(p9) then
 		error(error.new(("Expected %s to be a GraphQL Union type."):format(inspect(p9))))
@@ -150,12 +150,12 @@ local function assertUnionType(p9) --[[ line: 230 ]]
 	return p9
 end
 
-isEnumType = function(p10) --[[ line: 238 | named "isEnumType" ]]
+isEnumType = function(p10)
 	-- upvalues: instanceOfModule (ref), t_6 (ref)
 	return instanceOfModule(p10, t_6)
 end
 
-local function assertEnumType(p11) --[[ line: 242 ]]
+local function assertEnumType(p11)
 	-- upvalues: isEnumType (write), error (ref), inspect (ref)
 	if not isEnumType(p11) then
 		error(error.new(("Expected %s to be a GraphQL Enum type."):format(inspect(p11))))
@@ -163,12 +163,12 @@ local function assertEnumType(p11) --[[ line: 242 ]]
 	return p11
 end
 
-isInputObjectType = function(p12) --[[ line: 250 | named "isInputObjectType" ]]
+isInputObjectType = function(p12)
 	-- upvalues: instanceOfModule (ref), t_7 (ref)
 	return instanceOfModule(p12, t_7)
 end
 
-local function assertInputObjectType(p13) --[[ line: 254 ]]
+local function assertInputObjectType(p13)
 	-- upvalues: isInputObjectType (write), error (ref), inspect (ref)
 	if not isInputObjectType(p13) then
 		error(error.new(("Expected %s to be a GraphQL Input Object type."):format(inspect(p13))))
@@ -176,12 +176,12 @@ local function assertInputObjectType(p13) --[[ line: 254 ]]
 	return p13
 end
 
-isListType = function(p14) --[[ line: 262 | named "isListType" ]]
+isListType = function(p14)
 	-- upvalues: instanceOfModule (ref), t (write)
 	return instanceOfModule(p14, t)
 end
 
-local function assertListType(p15) --[[ line: 266 ]]
+local function assertListType(p15)
 	-- upvalues: isListType (write), error (ref), inspect (ref)
 	if not isListType(p15) then
 		error(error.new(("Expected %s to be a GraphQL List type."):format(inspect(p15))))
@@ -189,12 +189,12 @@ local function assertListType(p15) --[[ line: 266 ]]
 	return p15
 end
 
-isNonNullType = function(p16) --[[ line: 274 | named "isNonNullType" ]]
+isNonNullType = function(p16)
 	-- upvalues: instanceOfModule (ref), t_1 (write)
 	return instanceOfModule(p16, t_1)
 end
 
-local function assertNonNullType(p17) --[[ line: 278 ]]
+local function assertNonNullType(p17)
 	-- upvalues: isNonNullType (write), error (ref), inspect (ref)
 	if not isNonNullType(p17) then
 		error(error.new(("Expected %s to be a GraphQL Non-Null type."):format(inspect(p17))))
@@ -202,12 +202,12 @@ local function assertNonNullType(p17) --[[ line: 278 ]]
 	return p17
 end
 
-local function isInputType(p18) --[[ line: 324 ]]
+local function isInputType(p18)
 	-- upvalues: isScalarType (write), isEnumType (write), isInputObjectType (write), isWrappingType (write), isInputType (write)
 	return isScalarType(p18) or (isEnumType(p18) or (isInputObjectType(p18) or isWrappingType(p18) and isInputType(p18.ofType)))
 end
 
-local function assertInputType(p19) --[[ line: 331 ]]
+local function assertInputType(p19)
 	-- upvalues: isInputType (write), error (ref), inspect (ref)
 	if not isInputType(p19) then
 		error(error.new(("Expected %s to be a GraphQL input type."):format(inspect(p19))))
@@ -215,12 +215,12 @@ local function assertInputType(p19) --[[ line: 331 ]]
 	return p19
 end
 
-local function isOutputType(p20) --[[ line: 358 ]]
+local function isOutputType(p20)
 	-- upvalues: isScalarType (write), isObjectType (write), isInterfaceType (write), isUnionType (write), isEnumType (write), isWrappingType (write), isOutputType (write)
 	return isScalarType(p20) or (isObjectType(p20) or (isInterfaceType(p20) or (isUnionType(p20) or (isEnumType(p20) or isWrappingType(p20) and isOutputType(p20.ofType)))))
 end
 
-local function assertOutputType(p21) --[[ line: 367 ]]
+local function assertOutputType(p21)
 	-- upvalues: isOutputType (write), error (ref), inspect (ref)
 	if not isOutputType(p21) then
 		error(error.new(("Expected %s to be a GraphQL output type."):format(inspect(p21))))
@@ -228,12 +228,12 @@ local function assertOutputType(p21) --[[ line: 367 ]]
 	return p21
 end
 
-local function isLeafType(p22) --[[ line: 380 ]]
+local function isLeafType(p22)
 	-- upvalues: isScalarType (write), isEnumType (write)
 	return isScalarType(p22) or isEnumType(p22)
 end
 
-local function assertLeafType(p23) --[[ line: 384 ]]
+local function assertLeafType(p23)
 	-- upvalues: isLeafType (write), error (ref), inspect (ref)
 	if not isLeafType(p23) then
 		error(error.new(("Expected %s to be a GraphQL leaf type."):format(inspect(p23))))
@@ -241,12 +241,12 @@ local function assertLeafType(p23) --[[ line: 384 ]]
 	return p23
 end
 
-local function isCompositeType(p24) --[[ line: 397 ]]
+local function isCompositeType(p24)
 	-- upvalues: isObjectType (write), isInterfaceType (write), isUnionType (write)
 	return isObjectType(p24) or (isInterfaceType(p24) or isUnionType(p24))
 end
 
-local function assertCompositeType(p25) --[[ line: 401 ]]
+local function assertCompositeType(p25)
 	-- upvalues: isCompositeType (write), error (ref), inspect (ref)
 	if not isCompositeType(p25) then
 		error(error.new(("Expected %s to be a GraphQL composite type."):format(inspect(p25))))
@@ -254,12 +254,12 @@ local function assertCompositeType(p25) --[[ line: 401 ]]
 	return p25
 end
 
-local function isAbstractType(value) --[[ line: 414 ]]
+local function isAbstractType(value)
 	-- upvalues: isInterfaceType (write), isUnionType (write)
 	return isInterfaceType(value) or isUnionType(value)
 end
 
-local function assertAbstractType(value) --[[ line: 418 ]]
+local function assertAbstractType(value)
 	-- upvalues: isAbstractType (write), error (ref), inspect (ref)
 	if not isAbstractType(value) then
 		error(error.new(("Expected %s to be a GraphQL abstract type."):format(inspect(value))))
@@ -270,7 +270,7 @@ end
 t = {}
 t.__index = t
 
-function t.new(p26) --[[ line: 452 ]]
+function t.new(p26)
 	-- upvalues: devAssert (ref), isType (write), inspect (ref), t (write)
 	local t_1 = {}
 	devAssert(isType(p26), ("Expected %s to be a GraphQL type."):format(inspect(p26)))
@@ -279,22 +279,22 @@ function t.new(p26) --[[ line: 452 ]]
 	return setmetatable(t_1, t)
 end
 
-function t:__tostring() --[[ line: 462 ]]
+function t:__tostring()
 	return self:toString()
 end
 
-function t:toString() --[[ line: 466 ]]
+function t:toString()
 	return "[" .. tostring(self.ofType) .. "]"
 end
 
-function t:toJSON() --[[ line: 470 ]]
+function t:toJSON()
 	return self:toString()
 end
 
 t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p27) --[[ line: 509 ]]
+function t_1.new(p27)
 	-- upvalues: devAssert (ref), isNullableType (write), inspect (ref), t_1 (write)
 	local t = {}
 	devAssert(isNullableType(p27), ("Expected %s to be a GraphQL nullable type."):format(inspect(p27)))
@@ -303,24 +303,24 @@ function t_1.new(p27) --[[ line: 509 ]]
 	return setmetatable(t, t_1)
 end
 
-function t_1:__tostring() --[[ line: 520 ]]
+function t_1:__tostring()
 	return self:toString()
 end
 
-function t_1:toString() --[[ line: 524 ]]
+function t_1:toString()
 	return tostring(self.ofType) .. "!"
 end
 
-function t_1:toJSON() --[[ line: 528 ]]
+function t_1:toJSON()
 	return self:toString()
 end
 
-isWrappingType = function(p28) --[[ line: 545 | named "isWrappingType" ]]
+isWrappingType = function(p28)
 	-- upvalues: isListType (write), isNonNullType (write)
 	return isListType(p28) or isNonNullType(p28)
 end
 
-local function assertWrappingType(p29) --[[ line: 549 ]]
+local function assertWrappingType(p29)
 	-- upvalues: isWrappingType (write), error (ref), inspect (ref)
 	if not isWrappingType(p29) then
 		error(error.new(("Expected %s to be a GraphQL wrapping type."):format(inspect(p29))))
@@ -328,12 +328,12 @@ local function assertWrappingType(p29) --[[ line: 549 ]]
 	return p29
 end
 
-isNullableType = function(p30) --[[ line: 569 | named "isNullableType" ]]
+isNullableType = function(p30)
 	-- upvalues: isType (write), isNonNullType (write)
 	return isType(p30) and not isNonNullType(p30)
 end
 
-local function assertNullableType(p31) --[[ line: 573 ]]
+local function assertNullableType(p31)
 	-- upvalues: isNullableType (write), error (ref), inspect (ref)
 	if not isNullableType(p31) then
 		error(error.new(("Expected %s to be a GraphQL nullable type."):format(inspect(p31))))
@@ -341,17 +341,17 @@ local function assertNullableType(p31) --[[ line: 573 ]]
 	return p31
 end
 
-local function getNullableType(p32) --[[ line: 581 ]]
+local function getNullableType(p32)
 	-- upvalues: isNonNullType (write)
 	return if p32 then if isNonNullType(p32) then p32.ofType else p32 else nil
 end
 
-local function isNamedType(p33) --[[ line: 604 ]]
+local function isNamedType(p33)
 	-- upvalues: isScalarType (write), isObjectType (write), isInterfaceType (write), isUnionType (write), isEnumType (write), isInputObjectType (write)
 	return isScalarType(p33) or (isObjectType(p33) or (isInterfaceType(p33) or (isUnionType(p33) or (isEnumType(p33) or isInputObjectType(p33)))))
 end
 
-local function assertNamedType(p34) --[[ line: 613 ]]
+local function assertNamedType(p34)
 	-- upvalues: isNamedType (write), error (ref), inspect (ref)
 	if not isNamedType(p34) then
 		error(error.new(("Expected %s to be a GraphQL named type."):format(inspect(p34))))
@@ -359,7 +359,7 @@ local function assertNamedType(p34) --[[ line: 613 ]]
 	return p34
 end
 
-local function getNamedType(p35) --[[ line: 621 ]]
+local function getNamedType(p35)
 	-- upvalues: isWrappingType (write)
 	if not p35 then
 		return nil
@@ -371,17 +371,17 @@ local function getNamedType(p35) --[[ line: 621 ]]
 	return var61
 end
 
-local function _(p36) --[[ line: 643 | named "resolveThunk" ]]
+local function _(p36)
 	return if typeof(p36) == "function" then p36() else p36
 end
 
-local _ = function(p37) --[[ line: 647 | named "undefineIfEmpty" ]]
+local _ = function(p37)
 	return if p37 and #p37 > 0 then p37 else nil
 end
 
 t_2.__index = t_2
 
-function t_2.new(p38) --[[ line: 702 ]]
+function t_2.new(p38)
 	-- upvalues: identityFunc (ref), valueFromASTUntyped (ref), toObjMap (ref), devAssert (ref), isNillish (ref), inspect (ref), t_2 (ref)
 	local t = {
 		name = p38.name,
@@ -391,22 +391,22 @@ function t_2.new(p38) --[[ line: 702 ]]
 	local var63 = if p38.parseValue then p38.parseValue else identityFunc
 	local var64 = if p38.serialize then p38.serialize else identityFunc
 	
-	function t.serialize(_, ...) --[[ line: 716 ]]
+	function t.serialize(_, ...)
 		-- upvalues: var64 (ref)
 		return var64(...)
 	end
 	
-	function t.parseValue(_, ...) --[[ line: 720 ]]
+	function t.parseValue(_, ...)
 		-- upvalues: var63 (ref)
 		return var63(...)
 	end
 	
-	local var65 = if p38.parseLiteral then p38.parseLiteral else function(p39, p40) --[[ line: 725 ]]
+	local var65 = if p38.parseLiteral then p38.parseLiteral else function(p39, p40)
 		-- upvalues: var63 (ref), valueFromASTUntyped (copy)
 		return var63(valueFromASTUntyped(p39, p40))
 	end
 	
-	function t.parseLiteral(_, ...) --[[ line: 729 ]]
+	function t.parseLiteral(_, ...)
 		-- upvalues: var65 (ref)
 		return var65(...)
 	end
@@ -426,7 +426,7 @@ function t_2.new(p38) --[[ line: 702 ]]
 	return setmetatable(t, t_2)
 end
 
-function t_2:toConfig() --[[ line: 761 ]]
+function t_2:toConfig()
 	return {
 		name = self.name,
 		description = self.description,
@@ -440,21 +440,21 @@ function t_2:toConfig() --[[ line: 761 ]]
 	}
 end
 
-function t_2:__tostring() --[[ line: 775 ]]
+function t_2:__tostring()
 	return self:toString()
 end
 
-function t_2:toString() --[[ line: 779 ]]
+function t_2:toString()
 	return self.name
 end
 
-function t_2:toJSON() --[[ line: 783 ]]
+function t_2:toJSON()
 	return self:toString()
 end
 
 t_3.__index = t_3
 
-function t_3.new(p41) --[[ line: 917 ]]
+function t_3.new(p41)
 	-- upvalues: toObjMap (ref), defineFieldMap (write), defineInterfaces (write), devAssert (ref), inspect (ref), t_3 (ref)
 	local t = {
 		name = p41.name,
@@ -466,12 +466,12 @@ function t_3.new(p41) --[[ line: 917 ]]
 	local extensionASTNodes = p41.extensionASTNodes
 	t.extensionASTNodes = if extensionASTNodes and #extensionASTNodes > 0 then extensionASTNodes else nil
 	
-	function t._fields() --[[ line: 928 ]]
+	function t._fields()
 		-- upvalues: defineFieldMap (copy), p41 (ref)
 		return defineFieldMap(p41)
 	end
 	
-	function t._interfaces() --[[ line: 931 ]]
+	function t._interfaces()
 		-- upvalues: defineInterfaces (copy), p41 (ref)
 		return defineInterfaces(p41)
 	end
@@ -483,21 +483,21 @@ function t_3.new(p41) --[[ line: 917 ]]
 	return setmetatable(t, t_3)
 end
 
-function t_3:getFields() --[[ line: 946 ]]
+function t_3:getFields()
 	if typeof(self._fields) == "function" then
 		self._fields = self._fields()
 	end
 	return self._fields
 end
 
-function t_3:getInterfaces() --[[ line: 953 ]]
+function t_3:getInterfaces()
 	if typeof(self._interfaces) == "function" then
 		self._interfaces = self._interfaces()
 	end
 	return self._interfaces
 end
 
-function t_3:toConfig() --[[ line: 960 ]]
+function t_3:toConfig()
 	-- upvalues: fieldsToFieldsConfig (write)
 	return {
 		name = self.name,
@@ -511,19 +511,19 @@ function t_3:toConfig() --[[ line: 960 ]]
 	}
 end
 
-function t_3:__tostring() --[[ line: 973 ]]
+function t_3:__tostring()
 	return self:toString()
 end
 
-function t_3:toString() --[[ line: 977 ]]
+function t_3:toString()
 	return self.name
 end
 
-function t_3:toJSON() --[[ line: 981 ]]
+function t_3:toJSON()
 	return self:toString()
 end
 
-defineInterfaces = function(p42) --[[ line: 992 | named "defineInterfaces" ]]
+defineInterfaces = function(p42)
 	-- upvalues: devAssert (ref), array (ref)
 	local interfaces = p42.interfaces
 	local var67 = if typeof(interfaces) == "function" then interfaces() else interfaces
@@ -533,13 +533,13 @@ defineInterfaces = function(p42) --[[ line: 992 | named "defineInterfaces" ]]
 	return var68
 end
 
-defineFieldMap = function(p43) --[[ line: 1006 | named "defineFieldMap" ]]
+defineFieldMap = function(p43)
 	-- upvalues: devAssert (ref), isPlainObj (write), instanceOfModule (ref), map (ref), coerceToMap (ref), mapValueOrdered (ref), inspect (ref), array (ref), toObjMap (ref)
 	local fields = p43.fields
 	local var69 = if typeof(fields) == "function" then fields() else fields
 	devAssert(isPlainObj(var69) or instanceOfModule(var69, map), ("%s fields must be an object with field names as keys or a function which returns such an object."):format(p43.name))
 	
-	return mapValueOrdered(coerceToMap(var69), function(p44, p45) --[[ line: 1022 ]]
+	return mapValueOrdered(coerceToMap(var69), function(p44, p45)
 		-- upvalues: devAssert (copy), isPlainObj (copy), p43 (ref), inspect (copy), instanceOfModule (copy), map (copy), array (copy), coerceToMap (copy), toObjMap (copy)
 		devAssert(isPlainObj(p44), ("%s.%s field config must be an object."):format(p43.name, p45))
 		devAssert(if p44.resolve ~= nil then typeof(p44.resolve) == "function" else true, ("%s.%s field resolver must be a function if "):format(p43.name, p45) .. ("provided, but got: %s."):format(inspect(p44.resolve)))
@@ -550,7 +550,7 @@ defineFieldMap = function(p43) --[[ line: 1006 | named "defineFieldMap" ]]
 			name = p45,
 			description = p44.description,
 			type = p44.type,
-			args = array.map(coerceToMap(var70):entries(), function(p46) --[[ line: 1043 ]]
+			args = array.map(coerceToMap(var70):entries(), function(p46)
 				-- upvalues: toObjMap (copy)
 				local var71 = p46[2]
 				
@@ -573,14 +573,14 @@ defineFieldMap = function(p43) --[[ line: 1006 | named "defineFieldMap" ]]
 	end)
 end
 
-isPlainObj = function(p47) --[[ line: 1071 | named "isPlainObj" ]]
+isPlainObj = function(p47)
 	-- upvalues: nullModule (ref), isObjectLike (ref), array (ref)
 	return p47 ~= nullModule and (isObjectLike(p47) and (not array.isArray(p47) or next(p47) == nil))
 end
 
-fieldsToFieldsConfig = function(p48) --[[ line: 1080 | named "fieldsToFieldsConfig" ]]
+fieldsToFieldsConfig = function(p48)
 	-- upvalues: mapValueOrdered (ref), argsToArgsConfig (write)
-	return mapValueOrdered(p48, function(p49) --[[ line: 1084 ]]
+	return mapValueOrdered(p48, function(p49)
 		-- upvalues: argsToArgsConfig (copy)
 		return {
 			description = p49.description,
@@ -595,11 +595,11 @@ fieldsToFieldsConfig = function(p48) --[[ line: 1080 | named "fieldsToFieldsConf
 	end)
 end
 
-argsToArgsConfig = function(p50) --[[ line: 1101 | named "argsToArgsConfig" ]]
+argsToArgsConfig = function(p50)
 	-- upvalues: keyValMap (ref)
-	return keyValMap(p50, function(p51) --[[ line: 1102 ]]
+	return keyValMap(p50, function(p51)
 		return p51.name
-	end, function(p52) --[[ line: 1104 ]]
+	end, function(p52)
 		return {
 			description = p52.description,
 			type = p52.type,
@@ -611,14 +611,14 @@ argsToArgsConfig = function(p50) --[[ line: 1101 | named "argsToArgsConfig" ]]
 	end)
 end
 
-local function isRequiredArgument(p53) --[[ line: 1228 ]]
+local function isRequiredArgument(p53)
 	-- upvalues: isNonNullType (write)
 	return isNonNullType(p53.type) and p53.defaultValue == nil
 end
 
 t_4.__index = t_4
 
-function t_4.new(p54) --[[ line: 1277 ]]
+function t_4.new(p54)
 	-- upvalues: toObjMap (ref), defineFieldMap (write), defineInterfaces (write), devAssert (ref), inspect (ref), t_4 (ref)
 	local t = {
 		name = p54.name,
@@ -630,12 +630,12 @@ function t_4.new(p54) --[[ line: 1277 ]]
 	local extensionASTNodes = p54.extensionASTNodes
 	t.extensionASTNodes = if extensionASTNodes and #extensionASTNodes > 0 then extensionASTNodes else nil
 	
-	function t._fields() --[[ line: 1288 ]]
+	function t._fields()
 		-- upvalues: defineFieldMap (copy), p54 (ref)
 		return defineFieldMap(p54)
 	end
 	
-	function t._interfaces() --[[ line: 1291 ]]
+	function t._interfaces()
 		-- upvalues: defineInterfaces (copy), p54 (ref)
 		return defineInterfaces(p54)
 	end
@@ -647,21 +647,21 @@ function t_4.new(p54) --[[ line: 1277 ]]
 	return setmetatable(t, t_4)
 end
 
-function t_4:getFields() --[[ line: 1306 ]]
+function t_4:getFields()
 	if typeof(self._fields) == "function" then
 		self._fields = self._fields()
 	end
 	return self._fields
 end
 
-function t_4:getInterfaces() --[[ line: 1313 ]]
+function t_4:getInterfaces()
 	if typeof(self._interfaces) == "function" then
 		self._interfaces = self._interfaces()
 	end
 	return self._interfaces
 end
 
-function t_4:toConfig() --[[ line: 1320 ]]
+function t_4:toConfig()
 	-- upvalues: fieldsToFieldsConfig (write)
 	return {
 		name = self.name,
@@ -675,21 +675,21 @@ function t_4:toConfig() --[[ line: 1320 ]]
 	}
 end
 
-function t_4:__tostring() --[[ line: 1333 ]]
+function t_4:__tostring()
 	return self:toString()
 end
 
-function t_4:toString() --[[ line: 1337 ]]
+function t_4:toString()
 	return self.name
 end
 
-function t_4:toJSON() --[[ line: 1341 ]]
+function t_4:toJSON()
 	return self:toString()
 end
 
 t_5.__index = t_5
 
-function t_5.new(p55) --[[ line: 1452 ]]
+function t_5.new(p55)
 	-- upvalues: toObjMap (ref), defineTypes (write), devAssert (ref), inspect (ref), t_5 (ref)
 	local t = {
 		name = p55.name,
@@ -701,7 +701,7 @@ function t_5.new(p55) --[[ line: 1452 ]]
 	local extensionASTNodes = p55.extensionASTNodes
 	t.extensionASTNodes = if extensionASTNodes and #extensionASTNodes > 0 then extensionASTNodes else nil
 	
-	function t._types() --[[ line: 1461 ]]
+	function t._types()
 		-- upvalues: defineTypes (copy), p55 (ref)
 		return defineTypes(p55)
 	end
@@ -713,14 +713,14 @@ function t_5.new(p55) --[[ line: 1452 ]]
 	return setmetatable(t, t_5)
 end
 
-function t_5:getTypes() --[[ line: 1476 ]]
+function t_5:getTypes()
 	if typeof(self._types) == "function" then
 		self._types = self._types()
 	end
 	return self._types
 end
 
-function t_5:toConfig() --[[ line: 1483 ]]
+function t_5:toConfig()
 	return {
 		name = self.name,
 		description = self.description,
@@ -732,19 +732,19 @@ function t_5:toConfig() --[[ line: 1483 ]]
 	}
 end
 
-function t_5:__tostring() --[[ line: 1495 ]]
+function t_5:__tostring()
 	return self:toString()
 end
 
-function t_5:toString() --[[ line: 1499 ]]
+function t_5:toString()
 	return self.name
 end
 
-function t_5:toJSON() --[[ line: 1503 ]]
+function t_5:toJSON()
 	return self:toString()
 end
 
-defineTypes = function(p56) --[[ line: 1514 | named "defineTypes" ]]
+defineTypes = function(p56)
 	-- upvalues: devAssert (ref), array (ref)
 	local types = p56.types
 	local var74 = if typeof(types) == "function" then types() else types
@@ -755,7 +755,7 @@ end
 
 t_6.__index = t_6
 
-function t_6.new(p57) --[[ line: 1601 ]]
+function t_6.new(p57)
 	-- upvalues: toObjMap (ref), defineEnumValues (write), array (ref), var2 (ref), keyMap (ref), devAssert (ref), t_6 (ref)
 	local t = {
 		name = p57.name,
@@ -767,7 +767,7 @@ function t_6.new(p57) --[[ line: 1601 ]]
 	t.extensionASTNodes = if extensionASTNodes and #extensionASTNodes > 0 then extensionASTNodes else nil
 	t._values = defineEnumValues(t.name, p57.values)
 	t._valueLookup = {}
-	array.forEach(t._values, function(p58) --[[ line: 1612 ]]
+	array.forEach(t._values, function(p58)
 		-- upvalues: t (ref), var2 (copy)
 		if p58.value == p58.value then
 			t._valueLookup[p58.value] = p58
@@ -776,7 +776,7 @@ function t_6.new(p57) --[[ line: 1601 ]]
 		end
 		t._valueLookup[var2] = p58
 	end)
-	t._nameLookup = keyMap(t._values, function(p59) --[[ line: 1624 ]]
+	t._nameLookup = keyMap(t._values, function(p59)
 		return p59.name
 	end)
 	devAssert(typeof(p57.name) == "string", "Must provide name.")
@@ -784,15 +784,15 @@ function t_6.new(p57) --[[ line: 1601 ]]
 	return setmetatable(t, t_6)
 end
 
-function t_6:getValues() --[[ line: 1633 ]]
+function t_6:getValues()
 	return self._values
 end
 
-function t_6:getValue(p60) --[[ line: 1637 ]]
+function t_6:getValue(p60)
 	return self._nameLookup[p60]
 end
 
-function t_6:serialize(p61) --[[ line: 1641 ]]
+function t_6:serialize(p61)
 	-- upvalues: var2 (ref), graphQLError (ref), inspect (ref)
 	local var76 = if p61 == p61 then self._valueLookup[p61] else self._valueLookup[var2]
 	
@@ -802,7 +802,7 @@ function t_6:serialize(p61) --[[ line: 1641 ]]
 	return var76.name
 end
 
-function t_6:parseValue(p62) --[[ line: 1663 ]]
+function t_6:parseValue(p62)
 	-- upvalues: inspect (ref), graphQLError (ref), didYouMeanEnumValue (write)
 	if typeof(p62) ~= "string" then
 		local var77 = inspect(p62)
@@ -816,7 +816,7 @@ function t_6:parseValue(p62) --[[ line: 1663 ]]
 	return var78.value
 end
 
-function t_6:parseLiteral(p63, _) --[[ line: 1688 ]]
+function t_6:parseLiteral(p63, _)
 	-- upvalues: kind (ref), print (ref), graphQLError (ref), didYouMeanEnumValue (write)
 	if p63.kind ~= kind.ENUM then
 		local var79 = print(p63)
@@ -831,14 +831,14 @@ function t_6:parseLiteral(p63, _) --[[ line: 1688 ]]
 	return value.value
 end
 
-function t_6:toConfig() --[[ line: 1715 ]]
+function t_6:toConfig()
 	-- upvalues: keyValMap (ref)
 	return {
 		name = self.name,
 		description = self.description,
-		values = keyValMap(self:getValues(), function(p64) --[[ line: 1717 ]]
+		values = keyValMap(self:getValues(), function(p64)
 			return p64.name
-		end, function(p65) --[[ line: 1719 ]]
+		end, function(p65)
 			return {
 				description = p65.description,
 				value = p65.value,
@@ -853,30 +853,30 @@ function t_6:toConfig() --[[ line: 1715 ]]
 	}
 end
 
-function t_6:__tostring() --[[ line: 1741 ]]
+function t_6:__tostring()
 	return self:toString()
 end
 
-function t_6:toString() --[[ line: 1745 ]]
+function t_6:toString()
 	return self.name
 end
 
-function t_6:toJSON() --[[ line: 1749 ]]
+function t_6:toJSON()
 	return self:toString()
 end
 
-didYouMeanEnumValue = function(p66, p67) --[[ line: 1760 | named "didYouMeanEnumValue" ]]
+didYouMeanEnumValue = function(p66, p67)
 	-- upvalues: array (ref), suggestionList (ref), didYouMean (ref)
-	return didYouMean("the enum value", suggestionList(p67, array.map(p66:getValues(), function(p68) --[[ line: 1761 ]]
+	return didYouMean("the enum value", suggestionList(p67, array.map(p66:getValues(), function(p68)
 		return p68.name
 	end)))
 end
 
-defineEnumValues = function(p69, p70) --[[ line: 1770 | named "defineEnumValues" ]]
+defineEnumValues = function(p69, p70)
 	-- upvalues: devAssert (ref), isPlainObj (write), instanceOfModule (ref), map (ref), coerceToMap (ref), array (ref), inspect (ref), toObjMap (ref)
 	devAssert(isPlainObj(p70) or instanceOfModule(p70, map), ("%s values must be an object with value names as keys."):format(tostring(p69)))
 	
-	return array.map(coerceToMap(p70):entries(), function(p71) --[[ line: 1781 ]]
+	return array.map(coerceToMap(p70):entries(), function(p71)
 		-- upvalues: devAssert (copy), isPlainObj (copy), p69 (ref), inspect (copy), toObjMap (copy)
 		local var82 = p71[1]
 		local var83 = p71[2]
@@ -895,7 +895,7 @@ end
 
 t_7.__index = t_7
 
-function t_7.new(p72) --[[ line: 1883 ]]
+function t_7.new(p72)
 	-- upvalues: toObjMap (ref), defineInputFieldMap (write), devAssert (ref), t_7 (ref)
 	local t = {
 		name = p72.name,
@@ -906,7 +906,7 @@ function t_7.new(p72) --[[ line: 1883 ]]
 	local extensionASTNodes = p72.extensionASTNodes
 	t.extensionASTNodes = if extensionASTNodes and #extensionASTNodes > 0 then extensionASTNodes else nil
 	
-	function t._fields() --[[ line: 1891 ]]
+	function t._fields()
 		-- upvalues: defineInputFieldMap (copy), p72 (ref)
 		return defineInputFieldMap(p72)
 	end
@@ -916,19 +916,19 @@ function t_7.new(p72) --[[ line: 1883 ]]
 	return setmetatable(t, t_7)
 end
 
-function t_7:getFields() --[[ line: 1898 ]]
+function t_7:getFields()
 	if typeof(self._fields) == "function" then
 		self._fields = self._fields()
 	end
 	return self._fields
 end
 
-function t_7:toConfig() --[[ line: 1905 ]]
+function t_7:toConfig()
 	-- upvalues: mapValueOrdered (ref)
 	return {
 		name = self.name,
 		description = self.description,
-		fields = mapValueOrdered(self:getFields(), function(p73) --[[ line: 1907 ]]
+		fields = mapValueOrdered(self:getFields(), function(p73)
 			return {
 				description = p73.description,
 				type = p73.type,
@@ -943,25 +943,25 @@ function t_7:toConfig() --[[ line: 1905 ]]
 	}
 end
 
-function t_7:__tostring() --[[ line: 1927 ]]
+function t_7:__tostring()
 	return self:toString()
 end
 
-function t_7:toString() --[[ line: 1931 ]]
+function t_7:toString()
 	return self.name
 end
 
-function t_7:toJSON() --[[ line: 1935 ]]
+function t_7:toJSON()
 	return self:toString()
 end
 
-defineInputFieldMap = function(p74) --[[ line: 1946 | named "defineInputFieldMap" ]]
+defineInputFieldMap = function(p74)
 	-- upvalues: devAssert (ref), isPlainObj (write), instanceOfModule (ref), map (ref), coerceToMap (ref), mapValueOrdered (ref), toObjMap (ref)
 	local fields = p74.fields
 	local var85 = if typeof(fields) == "function" then fields() else fields
 	devAssert(isPlainObj(var85) or instanceOfModule(var85, map), ("%s fields must be an object with field names as keys or a function which returns such an object."):format(p74.name))
 	
-	return mapValueOrdered(coerceToMap(var85), function(p75, p76) --[[ line: 1960 ]]
+	return mapValueOrdered(coerceToMap(var85), function(p75, p76)
 		-- upvalues: devAssert (copy), p74 (ref), toObjMap (copy)
 		devAssert(p75.resolve == nil, ("%s.%s field has a resolve property, but Input Types cannot define resolvers."):format(p74.name, p76))
 		
@@ -977,12 +977,12 @@ defineInputFieldMap = function(p74) --[[ line: 1946 | named "defineInputFieldMap
 	end)
 end
 
-local function isRequiredInputField(p77) --[[ line: 2020 ]]
+local function isRequiredInputField(p77)
 	-- upvalues: isNonNullType (write)
 	return isNonNullType(p77.type) and p77.defaultValue == nil
 end
 
-({}).new = function() --[[ line: 2030 ]]
+({}).new = function()
 	return {}
 end
 

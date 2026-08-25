@@ -6,16 +6,16 @@ local useEffect = reactModule.useEffect
 local useRef = reactModule.useRef
 local usePrevious = roactUtilsModule.Hooks.usePrevious
 
-function ExternalNavigationHandler(p0) --[[ line: 24 ]]
+function ExternalNavigationHandler(p0)
 	-- upvalues: useRef (ref), useEffect (ref), usePrevious (ref)
-	local _ = function() --[[ line: 25 ]]
+	local _ = function()
 		-- upvalues: p0 (ref)
 		return p0.requestId ~= p0.completedRequestId and p0.screen
 	end
 	
 	local var2 = useRef({})
 	
-	local var3 = function() --[[ line: 31 ]]
+	local var3 = function()
 		-- upvalues: p0 (ref), var2 (ref)
 		local screen = p0.screen
 		local var5 = p0.navigationByScreen[screen]
@@ -31,14 +31,14 @@ function ExternalNavigationHandler(p0) --[[ line: 24 ]]
 		p0.completeExternalNavigation(p0.requestId)
 	end
 	
-	useEffect(function() --[[ line: 49 ]]
+	useEffect(function()
 		-- upvalues: p0 (ref), var3 (ref)
 		if p0.requestId ~= p0.completedRequestId and p0.screen then
 			var3()
 		end
 	end, { p0.requestId, p0.completedRequestId, p0.screen })
 	local var4 = usePrevious(p0.navigationByScreen)
-	useEffect(function() --[[ line: 57 ]]
+	useEffect(function()
 		-- upvalues: var2 (ref), var4 (ref), p0 (ref)
 		assert(var2.current, "Queue for ExternalNavigationHandler can't be nil")
 		

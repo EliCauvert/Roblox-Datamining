@@ -9,7 +9,7 @@ local view = foundationModule.View
 local musicNote = builderIconsModule.Icon.MusicNote
 local useMusicInfoModule = require(momentsCreation.Hooks.useMusicInfo)
 
-return function(p0) --[[ line: 29 | named "MusicChip" ]]
+return function(p0)
 	-- upvalues: useMusicInfoModule (ref), reactModule (ref), view (ref), icon (ref), musicNote (ref), foundationModule (ref), text (ref)
 	local var5 = useMusicInfoModule(p0.musicAssetId)
 	

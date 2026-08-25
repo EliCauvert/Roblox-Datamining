@@ -6,7 +6,7 @@ local llamaModule = require(parent.llama)
 local recommendationContextTypeModule = require(roduxFriends.Enums.RecommendationContextType)
 local t = {}
 
-function t.new(p0) --[[ line: 10 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -25,7 +25,7 @@ function t.new(p0) --[[ line: 10 ]]
 	return t_1
 end
 
-function t.mock(p1) --[[ line: 31 ]]
+function t.mock(p1)
 	-- upvalues: mockIdModule (ref), recommendationContextTypeModule (ref), llamaModule (ref), t (ref)
 	local var6 = llamaModule.Dictionary.join({
 		id = mockIdModule(),
@@ -41,7 +41,7 @@ function t.mock(p1) --[[ line: 31 ]]
 	})
 end
 
-function t.isValid(p2) --[[ line: 48 ]]
+function t.isValid(p2)
 	-- upvalues: recommendationContextTypeModule (ref)
 	if not p2 then
 		return false, "Expected recommendation information to be given"
@@ -61,12 +61,12 @@ function t.isValid(p2) --[[ line: 48 ]]
 	return true, "Valid Recommendation"
 end
 
-function t.isEqual(p3, p4) --[[ line: 74 ]]
+function t.isEqual(p3, p4)
 	-- upvalues: llamaModule (ref)
 	return p3.id == p4.id and (llamaModule.List.equals(p3.mutualFriendsList, p4.mutualFriendsList) and (p3.rank == p4.rank and (p3.contextType == p4.contextType and p3.mutualFriendsCount == p4.mutualFriendsCount)))
 end
 
-function t.format(p5) --[[ line: 85 ]]
+function t.format(p5)
 	-- upvalues: recommendationContextTypeModule (ref), t (ref), llamaModule (ref)
 	local var7 = if p5.contextType then recommendationContextTypeModule.fromRawValue(p5.contextType) or recommendationContextTypeModule.None else recommendationContextTypeModule.None
 	

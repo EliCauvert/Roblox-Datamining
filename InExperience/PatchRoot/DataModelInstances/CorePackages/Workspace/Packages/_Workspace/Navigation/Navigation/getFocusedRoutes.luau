@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.types)
 local array = require(script:FindFirstAncestor("Navigation").Parent.LuauPolyfill).Array
 
-local function getFocusedRoutes(p0) --[[ line: 10 ]]
+local function getFocusedRoutes(p0)
 	-- upvalues: array (ref), getFocusedRoutes (ref)
 	local t = {}
 	

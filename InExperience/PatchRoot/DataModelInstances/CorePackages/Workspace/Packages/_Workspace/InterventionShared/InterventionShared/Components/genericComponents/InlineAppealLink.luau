@@ -12,7 +12,7 @@ local textElement = inlineLayoutModule.Components.InlineLayoutElements.TextEleme
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local t = { name = "u", attributes = {} }
 
-return reactModule.memo(function(p0) --[[ line: 31 | named "InlineAppealLink" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), textElement (ref), linkElement (ref), t (ref), reactModule (ref), view (ref), inlineLayout (ref)
 	local var6 = useTokens()
 	local disclaimer = useLocalization({

@@ -5,7 +5,7 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local drawerModule = require(script.Parent.Drawer)
 local _ = require(script.Parent.Parent.Types)
 
-return reactModule.memo(function(p0) --[[ line: 9 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactRobloxModule (ref), reactModule (ref), drawerModule (ref), coreGuiService (ref)
 	return reactRobloxModule.createPortal({
 		Drawer = reactModule.createElement("ScreenGui", {

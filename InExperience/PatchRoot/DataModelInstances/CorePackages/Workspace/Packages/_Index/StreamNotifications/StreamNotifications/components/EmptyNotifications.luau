@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: useStyle (ref), useLocalization (ref), constantsModule (ref), reactModule (ref)
 	local var3 = useStyle()
 	local font = var3.Font

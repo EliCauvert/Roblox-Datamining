@@ -1,10 +1,10 @@
 ﻿local t = {
-	new = function() --[[ line: 12 ]]
+	new = function()
 		return {}
 	end
 }
 
-function t.fromThumbnailData(p0, p1) --[[ line: 18 ]]
+function t.fromThumbnailData(p0, p1)
 	-- upvalues: t (ref)
 	local var1 = t.new()
 	var1.universeId = tostring(p0.targetId)
@@ -15,11 +15,11 @@ function t.fromThumbnailData(p0, p1) --[[ line: 18 ]]
 	return var1
 end
 
-function t.isCompleteThumbnailData(p2) --[[ line: 29 ]]
+function t.isCompleteThumbnailData(p2)
 	return type(p2) == "table" and (type(p2.targetId) == "number" and (type(p2.state) == "string" and (if type(p2.imageUrl) ~= "string" then p2.imageUrl == nil else true)))
 end
 
-function t.checkStateIsFinal(p3) --[[ line: 36 ]]
+function t.checkStateIsFinal(p3)
 	return p3 ~= "Pending"
 end
 

@@ -13,18 +13,18 @@ local t = {
 	stderr = {
 		isTTY = false,
 		columns = 0,
-		hasColors = function(...) --[[ line: 48 ]]
+		hasColors = function(...)
 			return true
 		end
 	}
 }
 
-function ErrorCaptureStackTrace(p0, ...) --[[ line: 55 ]]
+function ErrorCaptureStackTrace(p0, ...)
 	-- upvalues: errorModule (ref)
 	errorModule.captureStackTrace(p0, ...)
 end
 
-local function _(p1) --[[ line: 60 | named "removeColors" ]]
+local function _(p1)
 	return p1
 end
 
@@ -45,7 +45,7 @@ local t_1 = {
 	notDeepEqualUnequal = "Expected values not to be loosely deep-equal:"
 }
 
-local _ = function(p2) --[[ line: 88 | named "copyError" ]]
+local _ = function(p2)
 	-- upvalues: object (ref)
 	local t = {}
 	
@@ -57,7 +57,7 @@ local _ = function(p2) --[[ line: 88 | named "copyError" ]]
 	return t
 end
 
-local _ = function(p3) --[[ line: 99 | named "inspectValue" ]]
+local _ = function(p3)
 	-- upvalues: inspect (ref)
 	return inspect(p3, {
 		compact = false,
@@ -71,7 +71,7 @@ local _ = function(p3) --[[ line: 99 | named "inspectValue" ]]
 	})
 end
 
-local function createErrDiff(p4, p5, p6) --[[ line: 114 ]]
+local function createErrDiff(p4, p5, p6)
 	-- upvalues: inspect (ref), stringModule (ref), booleanModule (ref), t_1 (ref), t (ref), var6 (write), var9 (write), array (ref), var7 (write), var8 (write)
 	local var14 = ""
 	local var15 = ""
@@ -255,11 +255,11 @@ end
 local assertionError = setmetatable({}, { __index = errorModule })
 assertionError.__index = assertionError
 
-function assertionError:__tostring() --[[ line: 394 ]]
+function assertionError:__tostring()
 	return self:toString()
 end
 
-function assertionError.new(p7) --[[ line: 407 ]]
+function assertionError.new(p7)
 	-- upvalues: errorModule (ref), assertionError (ref), t (ref), var6 (write), var7 (write), var9 (write), var8 (write), array (ref), object (ref), instanceOfModule (ref), createErrDiff (ref), t_1 (ref), stringModule (ref), inspect (ref), booleanModule (ref)
 	local assertionError_1
 	local _ = nil
@@ -389,7 +389,7 @@ function assertionError.new(p7) --[[ line: 407 ]]
 	return assertionError_1
 end
 
-function assertionError:toString() --[[ line: 576 ]]
+function assertionError:toString()
 	return ("%s [%s]: %s"):format(self.name, self.code, self.message)
 end
 

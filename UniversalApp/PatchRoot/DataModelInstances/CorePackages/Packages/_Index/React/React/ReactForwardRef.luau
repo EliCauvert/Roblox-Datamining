@@ -7,7 +7,7 @@ local REACT_FORWARD_REF_TYPE = reactSymbols.REACT_FORWARD_REF_TYPE
 local REACT_MEMO_TYPE = reactSymbols.REACT_MEMO_TYPE
 
 return {
-	forwardRef = function(p0) --[[ line: 33 ]]
+	forwardRef = function(p0)
 		-- upvalues: reactGlobalsModule (ref), REACT_MEMO_TYPE (ref), console (ref), REACT_FORWARD_REF_TYPE (ref)
 		if reactGlobalsModule.__DEV__ then
 			if typeof(p0) == "table" and p0["$$typeof"] == REACT_MEMO_TYPE then
@@ -27,11 +27,11 @@ return {
 		if reactGlobalsModule.__DEV__ then
 			local var3 = nil
 			setmetatable(t, {
-				__index = function(p1, p2) --[[ line: 96 ]]
+				__index = function(p1, p2)
 					-- upvalues: var3 (write)
 					return if p2 == "displayName" then var3 else rawget(p1, p2)
 				end,
-				__newindex = function(p3, p4, p5) --[[ line: 102 ]]
+				__newindex = function(p3, p4, p5)
 					-- upvalues: var3 (write)
 					if p4 == "displayName" then
 						var3 = p5

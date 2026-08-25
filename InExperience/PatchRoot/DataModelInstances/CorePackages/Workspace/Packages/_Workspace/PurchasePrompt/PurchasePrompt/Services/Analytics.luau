@@ -11,16 +11,16 @@ local getFFlagUsePlatformNameForUnknownModule = require(parent.Flags.GetFFlagUse
 local getFFlagEnableQuestIAPAnalyticsModule = require(parent.Flags.GetFFlagEnableQuestIAPAnalytics)
 
 return {
-	new = function() --[[ line: 18 ]]
+	new = function()
 		-- upvalues: userInputService (ref), getFFlagUsePlatformNameForUnknownModule (ref), httpService (ref), getFFlagEnableQuestIAPAnalyticsModule (ref), getFFlagEnableLuobuInGameUpsellModule (ref), runService (ref), rbxAnalyticsService (ref), marketplaceService (ref), playersService (ref)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function() --[[ line: 22 ]]
+			__tostring = function()
 				return "Service(Analytics)"
 			end
 		})
 		
-		local function GetPlatformString() --[[ line: 27 ]]
+		local function GetPlatformString()
 			-- upvalues: userInputService (copy), getFFlagUsePlatformNameForUnknownModule (copy), httpService (copy), getFFlagEnableQuestIAPAnalyticsModule (copy), getFFlagEnableLuobuInGameUpsellModule (copy)
 			local platform = userInputService:GetPlatform()
 			local var12 = if getFFlagUsePlatformNameForUnknownModule() then tostring(platform) else "UNKNOWN"
@@ -47,7 +47,7 @@ return {
 			return var12
 		end
 		
-		local function _(p0) --[[ line: 65 | named "ReportPlatformCounter" ]]
+		local function _(p0)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			if runService:IsStudio() then
 				return
@@ -55,7 +55,7 @@ return {
 			rbxAnalyticsService:ReportCounter(p0 .. GetPlatformString())
 		end
 		
-		function t.sendCounter(p1) --[[ line: 72 ]]
+		function t.sendCounter(p1)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			if runService:IsStudio() then
 				return
@@ -63,7 +63,7 @@ return {
 			rbxAnalyticsService:ReportCounter(p1)
 		end
 		
-		local _ = function(p2, p3) --[[ line: 79 | named "ReportEvent" ]]
+		local _ = function(p2, p3)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			if runService:IsStudio() then
 				return
@@ -71,7 +71,7 @@ return {
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", p2, p3 or {})
 		end
 		
-		function t.signalEvent(value, p4) --[[ line: 86 ]]
+		function t.signalEvent(value, p4)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			if runService:IsStudio() then
 				return
@@ -79,12 +79,12 @@ return {
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", value, p4 or {})
 		end
 		
-		function t.reportRobuxUpsellStarted() --[[ line: 90 ]]
+		function t.reportRobuxUpsellStarted()
 			-- upvalues: marketplaceService (copy)
 			return marketplaceService:ReportRobuxUpsellStarted()
 		end
 		
-		function t.signalPurchaseSuccess(value, p5, p6, p7) --[[ line: 94 ]]
+		function t.signalPurchaseSuccess(value, p5, p6, p7)
 			-- upvalues: marketplaceService (copy), playersService (copy)
 			if p5 == Enum.InfoType.Product then
 				marketplaceService:SignalClientPurchaseSuccess(p7.receipt, playersService.LocalPlayer.UserId, value)
@@ -94,7 +94,7 @@ return {
 			marketplaceService:ReportAssetSale(value, p6)
 		end
 		
-		function t.signalPremiumUpsellShownPremium() --[[ line: 102 ]]
+		function t.signalPremiumUpsellShownPremium()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "PremiumUpsellShownPremium", { gameID = game.GameId })
 			
@@ -104,7 +104,7 @@ return {
 			rbxAnalyticsService:ReportCounter("PremiumUpsellShownPremium" .. GetPlatformString())
 		end
 		
-		function t.signalPremiumUpsellShownNonPremium() --[[ line: 107 ]]
+		function t.signalPremiumUpsellShownNonPremium()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "PremiumUpsellShownNonPremium", { gameID = game.GameId })
 			
@@ -114,7 +114,7 @@ return {
 			rbxAnalyticsService:ReportCounter("PremiumUpsellShownNonPremium" .. GetPlatformString())
 		end
 		
-		function t.signalPremiumUpsellConfirmed() --[[ line: 112 ]]
+		function t.signalPremiumUpsellConfirmed()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "PremiumUpsellConfirmed", { gameID = game.GameId })
 			
@@ -124,7 +124,7 @@ return {
 			rbxAnalyticsService:ReportCounter("PremiumUpsellConfirmed" .. GetPlatformString())
 		end
 		
-		function t.signalPremiumUpsellPrecheckFail() --[[ line: 117 ]]
+		function t.signalPremiumUpsellPrecheckFail()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "PremiumUpsellPrecheckFail", { gameID = game.GameId })
 			
@@ -134,7 +134,7 @@ return {
 			rbxAnalyticsService:ReportCounter("PremiumUpsellPrecheckFail" .. GetPlatformString())
 		end
 		
-		function t.signalPremiumUpsellInvalidProducts() --[[ line: 122 ]]
+		function t.signalPremiumUpsellInvalidProducts()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "PremiumUpsellInvalidProducts", { gameID = game.GameId })
 			
@@ -144,7 +144,7 @@ return {
 			rbxAnalyticsService:ReportCounter("PremiumUpsellInvalidProducts" .. GetPlatformString())
 		end
 		
-		function t.signalPremiumUpsellInvalidPlatform() --[[ line: 127 ]]
+		function t.signalPremiumUpsellInvalidPlatform()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "PremiumUpsellInvalidPlatform", { gameID = game.GameId })
 			
@@ -154,12 +154,12 @@ return {
 			rbxAnalyticsService:ReportCounter("PremiumUpsellInvalidPlatform" .. GetPlatformString())
 		end
 		
-		function t.signalAdultLegalTextShown() --[[ line: 132 ]]
+		function t.signalAdultLegalTextShown()
 			-- upvalues: rbxAnalyticsService (copy)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "AdultLegalTextShown", { gameID = game.GameId })
 		end
 		
-		function t.signalFailedPurchasePostUpsell() --[[ line: 136 ]]
+		function t.signalFailedPurchasePostUpsell()
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			if runService:IsStudio() then
 				return
@@ -167,7 +167,7 @@ return {
 			rbxAnalyticsService:ReportCounter("FailedBalanceCheckPostUpsell" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseShown(value, p8) --[[ line: 140 ]]
+		function t.signalProductPurchaseShown(value, p8)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -184,7 +184,7 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseShown" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseUpsellShown(value, p9, p10) --[[ line: 149 ]]
+		function t.signalProductPurchaseUpsellShown(value, p9, p10)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -202,7 +202,7 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseUpsellShown" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseConfirmed(value, p11) --[[ line: 159 ]]
+		function t.signalProductPurchaseConfirmed(value, p11)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -219,7 +219,7 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseConfirmed" .. GetPlatformString())
 		end
 		
-		function t.signalProductPurchaseUpsellConfirmed(value, p12, p13) --[[ line: 168 ]]
+		function t.signalProductPurchaseUpsellConfirmed(value, p12, p13)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -237,7 +237,7 @@ return {
 			rbxAnalyticsService:ReportCounter("ProductPurchaseUpsellConfirmed" .. GetPlatformString())
 		end
 		
-		function t.signalScaryModalShown(value, p14, p15) --[[ line: 178 ]]
+		function t.signalScaryModalShown(value, p14, p15)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -257,7 +257,7 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalScaryModalConfirmed(value, p16, p17) --[[ line: 188 ]]
+		function t.signalScaryModalConfirmed(value, p16, p17)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -277,7 +277,7 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalScaryModalCanceled(value, p18, p19) --[[ line: 198 ]]
+		function t.signalScaryModalCanceled(value, p18, p19)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -297,7 +297,7 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalXboxInGamePurchaseCanceled(value, p20, p21) --[[ line: 208 ]]
+		function t.signalXboxInGamePurchaseCanceled(value, p20, p21)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
@@ -314,7 +314,7 @@ return {
 			end
 		end
 		
-		function t.signalXboxInGamePurchaseSuccess(value, p22, p23) --[[ line: 220 ]]
+		function t.signalXboxInGamePurchaseSuccess(value, p22, p23)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
@@ -331,7 +331,7 @@ return {
 			end
 		end
 		
-		function t.signalXboxInGamePurchaseFailure(value, p24, p25) --[[ line: 232 ]]
+		function t.signalXboxInGamePurchaseFailure(value, p24, p25)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,
@@ -348,7 +348,7 @@ return {
 			end
 		end
 		
-		function t.signalTwoSVSettingsErrorShown(value, p26) --[[ line: 244 ]]
+		function t.signalTwoSVSettingsErrorShown(value, p26)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -365,7 +365,7 @@ return {
 			rbxAnalyticsService:ReportCounter("2SVSettingsErrorShown" .. GetPlatformString())
 		end
 		
-		function t.signalTwoSVSettingsErrorConfirmed(value, p27) --[[ line: 253 ]]
+		function t.signalTwoSVSettingsErrorConfirmed(value, p27)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {
 				gameID = game.GameId,
@@ -382,7 +382,7 @@ return {
 			rbxAnalyticsService:ReportCounter("2SVSettingsErrorConfirmed" .. GetPlatformString())
 		end
 		
-		function t.signalRobuxUpsellInGameIXP(value) --[[ line: 262 ]]
+		function t.signalRobuxUpsellInGameIXP(value)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = {}
 			
@@ -395,7 +395,7 @@ return {
 			end
 		end
 		
-		function t.signalAvatarCreationPurchaseSubmit() --[[ line: 269 ]]
+		function t.signalAvatarCreationPurchaseSubmit()
 			-- upvalues: rbxAnalyticsService (copy), runService (copy), GetPlatformString (ref)
 			rbxAnalyticsService:SetRBXEvent("client", "InGamePrompt", "AvatarCreationPurchaseSubmit", { gameID = game.GameId })
 			
@@ -405,7 +405,7 @@ return {
 			rbxAnalyticsService:ReportCounter("AvatarCreationPurchaseSubmit" .. GetPlatformString())
 		end
 		
-		function t.signalUserSettingEligibilityModal(value) --[[ line: 274 ]]
+		function t.signalUserSettingEligibilityModal(value)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy), GetPlatformString (ref)
 			local t = { gameID = game.GameId, requestType = value }
 			
@@ -420,7 +420,7 @@ return {
 			rbxAnalyticsService:ReportCounter(text .. GetPlatformString())
 		end
 		
-		function t.signalEconomicRestrictionError(value, p28) --[[ line: 282 ]]
+		function t.signalEconomicRestrictionError(value, p28)
 			-- upvalues: runService (copy), rbxAnalyticsService (copy)
 			local t = {
 				gameID = game.GameId,

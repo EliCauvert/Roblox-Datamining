@@ -6,7 +6,7 @@ local experienceInviteVoteTypeModule = require(roduxSquads.Enums.ExperienceInvit
 local experienceInviteTypeModule = require(roduxSquads.Enums.ExperienceInviteType)
 local fFlagEnablePrivatePartyAcceptInvite = require(parent.SharedFlags).FFlagEnablePrivatePartyAcceptInvite
 
-local function _(p0) --[[ line: 12 | named "getSpotsTaken" ]]
+local function _(p0)
 	-- upvalues: experienceInviteVoteTypeModule (ref)
 	local var6 = 0
 	
@@ -20,7 +20,7 @@ end
 
 local t = {}
 
-function t.new(p1) --[[ line: 32 ]]
+function t.new(p1)
 	-- upvalues: t (ref)
 	assert(t.isValid(p1))
 	t.__index = t
@@ -29,7 +29,7 @@ function t.new(p1) --[[ line: 32 ]]
 	return p1
 end
 
-function t.mock(p2) --[[ line: 44 ]]
+function t.mock(p2)
 	-- upvalues: experienceInviteVoteTypeModule (ref), t (ref), experienceInviteStateModule (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteTypeModule (ref)
 	p2 = p2 or {}
 	p2 = p2.votes or {
@@ -65,7 +65,7 @@ function t.mock(p2) --[[ line: 44 ]]
 	return var8
 end
 
-function t.format(p3) --[[ line: 79 ]]
+function t.format(p3)
 	-- upvalues: t (ref), experienceInviteVoteTypeModule (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteTypeModule (ref)
 	local votes = p3.votes
 	local new = t.new

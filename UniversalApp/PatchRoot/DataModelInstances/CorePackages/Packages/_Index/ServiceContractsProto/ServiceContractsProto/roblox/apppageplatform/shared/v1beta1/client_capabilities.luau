@@ -5,7 +5,7 @@ local capabilityModule = require(script.Parent.capability)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 49 ]]
+function t_1.new(p0)
 	-- upvalues: t (ref), t_1 (ref)
 	return setmetatable({
 		enabled_capabilities = if p0 == nil or p0.enabled_capabilities == nil then {} else p0.enabled_capabilities,
@@ -14,7 +14,7 @@ function t_1.new(p0) --[[ line: 49 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 61 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref), capabilityModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -45,7 +45,7 @@ function t_1:encode() --[[ line: 61 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 94 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), capabilityModule (ref), t (ref)
 	local var14 = t_1.new()
 	local var15 = 0
@@ -105,7 +105,7 @@ function t_1.decode(p1) --[[ line: 94 ]]
 	return var14
 end
 
-function t_1:jsonEncode() --[[ line: 150 ]]
+function t_1:jsonEncode()
 	-- upvalues: capabilityModule (ref), t (ref)
 	local t_1 = {}
 	
@@ -126,7 +126,7 @@ function t_1:jsonEncode() --[[ line: 150 ]]
 	return t_1
 end
 
-function t_1:jsonDecode() --[[ line: 182 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), capabilityModule (ref), t (ref)
 	local var39 = t_1.new()
 	
@@ -165,13 +165,13 @@ t_1.descriptor = {
 t.ClientCapabilities = t_1
 typeRegistryModule.default:register(t.ClientCapabilities)
 t.Platform = {
-	fromNumber = function(p2) --[[ line: 241 ]]
+	fromNumber = function(p2)
 		return if p2 == 0 then "PLATFORM_INVALID" elseif p2 == 1 then "PLATFORM_WEB" elseif p2 == 2 then "PLATFORM_APP" else nil
 	end,
-	toNumber = function(p3) --[[ line: 253 ]]
+	toNumber = function(p3)
 		return if p3 == "PLATFORM_INVALID" then 0 elseif p3 == "PLATFORM_WEB" then 1 elseif p3 == "PLATFORM_APP" then 2 else p3
 	end,
-	fromName = function(p4) --[[ line: 265 ]]
+	fromName = function(p4)
 		return if p4 == "PLATFORM_INVALID" then "PLATFORM_INVALID" elseif p4 == "PLATFORM_WEB" then "PLATFORM_WEB" elseif p4 == "PLATFORM_APP" then "PLATFORM_APP" else nil
 	end
 }

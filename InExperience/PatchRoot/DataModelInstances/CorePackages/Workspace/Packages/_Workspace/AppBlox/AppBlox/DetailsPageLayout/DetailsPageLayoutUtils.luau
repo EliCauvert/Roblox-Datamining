@@ -1,13 +1,13 @@
 ﻿local fFlagLuaAppClampBannerPaddingToViewport = require(script:FindFirstAncestor("AppBlox").Parent.SharedFlags).FFlagLuaAppClampBannerPaddingToViewport
 
 return {
-	computeContentTopOffset = function(value, p0, p1) --[[ line: 16 ]]
+	computeContentTopOffset = function(value, p0, p1)
 		return if value <= 0 then 0 else math.max(0, value / p0 - p1)
 	end,
-	computeInitialScrollY = function(p2, p3, p4, p5) --[[ line: 32 ]]
+	computeInitialScrollY = function(p2, p3, p4, p5)
 		return math.max(0, (if p2 <= 0 then 0 else math.max(0, p2 / p3 - p4)) - p5)
 	end,
-	computeInitialScrollYForSize = function(p6, p7) --[[ line: 114 ]]
+	computeInitialScrollYForSize = function(p6, p7)
 		-- upvalues: fFlagLuaAppClampBannerPaddingToViewport (ref)
 		local maxValue
 		local fullBleedAspectRatio = p7.fullBleedAspectRatio
@@ -37,7 +37,7 @@ return {
 		end
 		return math.min(maxValue, math.max(0, var3 - headerBarHeight))
 	end,
-	computeCanvasPaddingTop = function(p8, p9, p10, p11) --[[ line: 68 ]]
+	computeCanvasPaddingTop = function(p8, p9, p10, p11)
 		local maxValue = math.max(0, p8 - (if p9 then p10 else 0))
 		
 		if maxValue == 0 then
@@ -45,15 +45,15 @@ return {
 		end
 		return maxValue
 	end,
-	getNoBannerFadeParams = function(p12) --[[ line: 46 ]]
+	getNoBannerFadeParams = function(p12)
 		return math.max(60, p12 * 1.5)
 	end,
-	getHeaderFadeParams = function(p13, p14, p15) --[[ line: 86 ]]
+	getHeaderFadeParams = function(p13, p14, p15)
 		local maxValue = math.max(0, p13 - p15)
 		
 		return maxValue, if p14 > 0 and p14 < p13 then math.max(1, p14 - maxValue) else math.max(1, (p13 - maxValue) / 3)
 	end,
-	shouldShowStickyBar = function(p16, p17, p18, p19) --[[ line: 54 ]]
+	shouldShowStickyBar = function(p16, p17, p18, p19)
 		return if p17 >= p16 then p18 + p19 <= p16 else true
 	end
 }

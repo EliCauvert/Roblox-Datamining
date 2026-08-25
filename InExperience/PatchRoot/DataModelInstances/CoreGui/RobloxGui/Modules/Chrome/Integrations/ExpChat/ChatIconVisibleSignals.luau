@@ -8,7 +8,7 @@ local expChatOnShowIconChatAvailabilityStatus = game:DefineFastFlag("ExpChatOnSh
 local var4 = if expChatOnShowIconChatAvailabilityStatus then require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetChatStatusStore else nil
 local var5 = if getFFlagExpChatGuacChatDisabledReason() then require(corePackagesService.Workspace.Packages.UniversalAppPolicy) else nil
 
-local function new(p0) --[[ line: 23 ]]
+local function new(p0)
 	-- upvalues: signalsModule (ref), fFlagExpChatWindowSyncUnibar (ref), getFFlagExpChatGuacChatDisabledReason (ref), var5 (write), fFlagEnableAEGIS2CommsFAEUpsell (ref), expChatOnShowIconChatAvailabilityStatus (ref)
 	local var7, var8 = signalsModule.createSignal(true)
 	local var9, var10 = signalsModule.createSignal(false)
@@ -24,14 +24,14 @@ local function new(p0) --[[ line: 23 ]]
 	end
 	local var19 = if getFFlagExpChatGuacChatDisabledReason() and var5 then var5.getAppFeaturePolicies().getExperienceChatAvailability() == "regionLocked" else false
 	local expChatOnShowIconChatAvailabilityStatus_1 = fFlagEnableAEGIS2CommsFAEUpsell and expChatOnShowIconChatAvailabilityStatus
-	local var21 = signalsModule.createComputed(function(p1) --[[ line: 41 ]]
+	local var21 = signalsModule.createComputed(function(p1)
 		-- upvalues: var7 (ref), expChatOnShowIconChatAvailabilityStatus_1 (ref), var9 (ref), fFlagExpChatWindowSyncUnibar (copy), var13 (ref), var11 (ref), var15 (write), p0 (ref), getFFlagExpChatGuacChatDisabledReason (copy), var19 (write)
 		return if var7(p1) then if not (not expChatOnShowIconChatAvailabilityStatus_1 and var9(p1)) then if not (not fFlagExpChatWindowSyncUnibar and var13(p1)) then if not (not fFlagExpChatWindowSyncUnibar and var11(p1)) then if fFlagExpChatWindowSyncUnibar and var15(p1) then true elseif expChatOnShowIconChatAvailabilityStatus_1 and p0.getChatStatus(p1) ~= "NoOne" then true else getFFlagExpChatGuacChatDisabledReason() and var19 else true else true else true else false
 	end)
 	
 	return {
 		getIsChatIconVisible = var21,
-		getIsChatWindowVisible = if fFlagExpChatWindowSyncUnibar then signalsModule.createComputed(function(p2) --[[ line: 73 ]]
+		getIsChatWindowVisible = if fFlagExpChatWindowSyncUnibar then signalsModule.createComputed(function(p2)
 			-- upvalues: var21 (ref), var15 (write)
 			return var21(p2) and var15(p2)
 		end) else nil,

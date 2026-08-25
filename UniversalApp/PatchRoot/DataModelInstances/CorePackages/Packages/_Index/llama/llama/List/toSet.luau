@@ -1,4 +1,4 @@
-﻿return function(value) --[[ line: 2 | named "toSet" ]]
+﻿return function(value)
 	local var0 = type(value)
 	assert(var0 == "table", "expected a table for first argument, got " .. var0)
 	local t = {}

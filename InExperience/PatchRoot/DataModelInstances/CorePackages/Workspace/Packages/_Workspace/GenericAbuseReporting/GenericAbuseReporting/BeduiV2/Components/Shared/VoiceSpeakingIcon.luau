@@ -9,22 +9,22 @@ local iconVariant = foundationModule.Enums.IconVariant
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 
-local function useDelayedFalse(p0, p1) --[[ line: 22 ]]
+local function useDelayedFalse(p0, p1)
 	-- upvalues: reactModule (ref)
 	local var5, var6 = reactModule.useState(p0)
-	reactModule.useEffect(function() --[[ line: 25 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var6 (ref), p1 (ref)
 		if p0 then
 			var6(true)
 			
 			return
 		end
-		local delayedThread = task.delay(p1, function() --[[ line: 31 ]]
+		local delayedThread = task.delay(p1, function()
 			-- upvalues: var6 (copy)
 			var6(false)
 		end)
 		
-		return function() --[[ line: 35 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
@@ -33,30 +33,30 @@ local function useDelayedFalse(p0, p1) --[[ line: 22 ]]
 	return var5
 end
 
-local function useOscillatingWidth(p2, p3, p4) --[[ line: 46 ]]
+local function useOscillatingWidth(p2, p3, p4)
 	-- upvalues: reactModule (ref)
 	local var8, var9 = reactModule.useState(p4)
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p2 (ref), var9 (ref), p4 (ref), p3 (ref)
 		if p2 then
 			local delayedThread = nil
 			
-			local function scheduleNext() --[[ line: 56 ]]
+			local function scheduleNext()
 				-- upvalues: delayedThread (write), p3 (copy), p4 (copy), var9 (copy), scheduleNext (ref)
-				delayedThread = task.delay(0.15, function() --[[ line: 57 ]]
+				delayedThread = task.delay(0.15, function()
 					-- upvalues: p3 (copy), p4 (copy), var9 (copy), scheduleNext (copy)
 					var9(p3 + math.random() * (p4 - p3))
 					scheduleNext()
 				end)
 			end
 			
-			delayedThread = task.delay(0.15, function() --[[ line: 57 ]]
+			delayedThread = task.delay(0.15, function()
 				-- upvalues: p3 (copy), p4 (copy), var9 (copy), scheduleNext (ref)
 				var9(p3 + math.random() * (p4 - p3))
 				scheduleNext()
 			end)
 			
-			return function() --[[ line: 65 ]]
+			return function()
 				-- upvalues: delayedThread (write)
 				if delayedThread then
 					task.cancel(delayedThread)
@@ -69,7 +69,7 @@ local function useOscillatingWidth(p2, p3, p4) --[[ line: 46 ]]
 	return if p2 then var8 else p4
 end
 
-return reactModule.memo(function(p5) --[[ line: 80 | named "VoiceSpeakingIcon" ]]
+return reactModule.memo(function(p5)
 	-- upvalues: useTokens (ref), signalsReactModule (ref), useDelayedFalse (ref), useOscillatingWidth (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref)
 	local var12 = useTokens()
 	local var13 = useDelayedFalse(signalsReactModule.useSignalState(p5.isSpeakingSignal), var12.Time.Time_1000)

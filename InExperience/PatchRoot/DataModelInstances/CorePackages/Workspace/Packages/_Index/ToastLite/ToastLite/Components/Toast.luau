@@ -25,29 +25,29 @@ local t_2 = {
 	springOptions = { frequency = 4, damping = 1 }
 }
 
-local function selectCurrentMessage(p0) --[[ line: 49 ]]
+local function selectCurrentMessage(p0)
 	return p0.currentToastMessages[1]
 end
 
-return function(p1) --[[ line: 53 | named "Toast" ]]
+return function(p1)
 	-- upvalues: cryoModule (ref), t_2 (ref), useDispatch (ref), useSelector (ref), selectCurrentMessage (ref), useStyle (ref), reactModule (ref), toastRoduxModule (ref), toastType (ref), t_1 (ref), toast (ref)
 	local var9 = cryoModule.Dictionary.join(t_2, p1)
 	local var10 = useDispatch()
 	local var11 = useSelector(selectCurrentMessage)
 	local tokens = useStyle().Tokens
-	local var12 = reactModule.useCallback(function() --[[ line: 61 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), toastRoduxModule (copy)
 		var10(toastRoduxModule.Actions.RemoveCurrentToastMessage())
 	end, { var10 })
 	
-	local var13 = function() --[[ line: 66 ]]
+	local var13 = function()
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11 then
 			var12()
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11 and (not next(var11) or not var11.toastTitle) then
 			var12()

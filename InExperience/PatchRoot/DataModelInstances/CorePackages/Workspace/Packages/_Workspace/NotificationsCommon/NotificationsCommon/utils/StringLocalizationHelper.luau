@@ -6,7 +6,7 @@ local _ = require(script:FindFirstAncestor("NotificationsCommon").type)
 local robloxTranslatorModule = require(parent.RobloxTranslator)
 
 return {
-	getLocalizedStrings = function(p0) --[[ line: 13 ]]
+	getLocalizedStrings = function(p0)
 		-- upvalues: reactModule (ref), localizationRoactContext (ref), useLocalization (ref), robloxTranslatorModule (ref)
 		if reactModule.useContext(localizationRoactContext) ~= nil then
 			return useLocalization(p0)
@@ -14,7 +14,7 @@ return {
 		local t = {}
 		
 		for i, v in pairs(p0) do
-			local ok, status = pcall(function() --[[ line: 24 ]]
+			local ok, status = pcall(function()
 				-- upvalues: robloxTranslatorModule (copy), v (ref)
 				return robloxTranslatorModule:FormatByKey(v)
 			end)

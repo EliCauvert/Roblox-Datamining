@@ -21,7 +21,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function _(p0) --[[ line: 29 | named "hasEmissiveInMeshTextures" ]]
+local function _(p0)
 	for i, v in p0 do
 		if v.EmissiveMask then
 			return true
@@ -30,7 +30,7 @@ local function _(p0) --[[ line: 29 | named "hasEmissiveInMeshTextures" ]]
 	return false
 end
 
-local function checkEmissivePermission(p1) --[[ line: 38 ]]
+local function checkEmissivePermission(p1)
 	-- upvalues: APIUtilModule (ref), httpService (ref)
 	if not p1.assetType then
 		return false, "Unable to determine asset type for emissive permission check"
@@ -40,7 +40,7 @@ local function checkEmissivePermission(p1) --[[ line: 38 ]]
 	if not var6 then
 		return false, "Failed to check emissive map permission: " .. tostring(var7)
 	end
-	local ok, status = pcall(function() --[[ line: 54 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), var7 (ref)
 		return httpService:JSONDecode(var7)
 	end)
@@ -56,7 +56,7 @@ local function checkEmissivePermission(p1) --[[ line: 38 ]]
 	return false, nil
 end
 
-function t.run(p2, p3) --[[ line: 69 ]]
+function t.run(p2, p3)
 	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref), checkEmissivePermission (ref)
 	local var8
 	for i, v in p3.meshTextures do

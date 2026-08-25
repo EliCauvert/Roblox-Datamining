@@ -18,11 +18,11 @@ local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagL
 local fFlagLuaAppBroadenVideoAnalytics = require(parent.SharedFlags).FFlagLuaAppBroadenVideoAnalytics
 local omniRecommendationsContentType = discoveryTypesModule.OmniRecommendationsContentType
 
-local function _(p0, p1) --[[ line: 33 | named "getGameSortId" ]]
+local function _(p0, p1)
 	return if p0 == nil then nil elseif p1 then p0.topicId else p0.gameSetTypeId
 end
 
-local _ = function(value, p2) --[[ line: 45 | named "getVideoAssetId" ]]
+local _ = function(value, p2)
 	-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (ref), getGameTileLayoutDataModule (ref)
 	if value and value.primaryWideVideoAssetId then
 		return value.primaryWideVideoAssetId
@@ -34,10 +34,10 @@ local _ = function(value, p2) --[[ line: 45 | named "getVideoAssetId" ]]
 	return var5 and (var5.primaryMediaAsset and var5.primaryMediaAsset.wideVideoAssetId)
 end
 
-return function(p3, p4, p5, p6, p7) --[[ line: 62 | named "useVideoAnalytics" ]]
+return function(p3, p4, p5, p6, p7)
 	-- upvalues: reactModule (ref), mutedError (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), getGameTileLayoutDataModule (ref), discoveryVideoPlayEvent (ref), fFlagLuaAppBroadenVideoAnalytics (ref), omniRecommendationsContentType (ref), discoveryEventErrorLogger (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref), fFlagLuaAppHomeReduceRenders (ref)
 	local var6 = if p3 ~= nil then nil elseif p4 then p3.topicId else p3.gameSetTypeId
-	local var7 = reactModule.useCallback(function(p8, p9) --[[ line: 71 ]]
+	local var7 = reactModule.useCallback(function(p8, p9)
 		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoPlayEvent (copy), p5 (ref), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
 		if p8 ~= nil and p7 ~= nil then
 			local var11 = p7[p8]
@@ -72,7 +72,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 62 | named "useVideoAnalytics" ]]
 			})
 		end
 	end, { p5, p7, var6, p6 })
-	local var8 = reactModule.useCallback(function(p10, p11, p12, p13) --[[ line: 98 ]]
+	local var8 = reactModule.useCallback(function(p10, p11, p12, p13)
 		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), omniRecommendationsContentType (copy), discoveryEventErrorLogger (copy), p5 (ref), discoveryVideoLoadEvent (copy), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy), videoLogger (copy), videoActions (copy)
 		if p10 ~= nil and p7 ~= nil then
 			local var15 = p7[p10]
@@ -145,7 +145,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 62 | named "useVideoAnalytics" ]]
 			end
 		end
 	end, { p5, p7, var6, p6 })
-	local var9 = reactModule.useCallback(function(p14, p15) --[[ line: 167 ]]
+	local var9 = reactModule.useCallback(function(p14, p15)
 		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoLoopEvent (copy), p5 (ref), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
 		if p14 ~= nil and p7 ~= nil then
 			local var20 = p7[p14]
@@ -180,7 +180,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 62 | named "useVideoAnalytics" ]]
 			})
 		end
 	end, { p5, p7, var6, p6 })
-	local var10 = reactModule.useCallback(function(p16, p17, p18, p19, p20) --[[ line: 194 ]]
+	local var10 = reactModule.useCallback(function(p16, p17, p18, p19, p20)
 		-- upvalues: p7 (ref), mutedError (copy), var6 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), getGameTileLayoutDataModule (copy), discoveryVideoEndEvent (copy), p5 (ref), p6 (ref), fFlagLuaAppBroadenVideoAnalytics (copy)
 		if p16 ~= nil and p7 ~= nil then
 			local var24 = p7[p16]
@@ -219,7 +219,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 62 | named "useVideoAnalytics" ]]
 		end
 	end, { p5, p7, var6, p6 })
 	
-	return if fFlagLuaAppHomeReduceRenders then reactModule.useMemo(function() --[[ line: 232 ]]
+	return if fFlagLuaAppHomeReduceRenders then reactModule.useMemo(function()
 		-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref)
 		return {
 			reportVideoPlay = var7,

@@ -24,13 +24,13 @@ local surveyModalModule = require(onPlatformSurveys.Components.SurveyModal)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 local useInlineSurveyFlowModule = require(onPlatformSurveys.Hooks.useInlineSurveyFlow)
 
-local function noop() --[[ line: 48 ]] end
+local function noop() end
 
-return reactModule.memo(function(p0) --[[ line: 50 | named "InlineSurvey" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), inlineEventTypeModule (ref), reactModule (ref), makeDevSurveyRequestImplModule (ref), useTokens (ref), useLocalization (ref), inlineSurveyLocalizationKeysModule (ref), fFlagInlineSurveyEnhancements (ref), inlineSurveyPresetsModule (ref), useInlineSurveyFlowModule (ref), phaseModule (ref), surfaceWrapperModule (ref), surfaceModule (ref), noop (ref), surveyModalModule (ref), surveyPhaseSlotsModule (ref), button (ref), fillBehavior (ref), inviteBannerModule (ref), surveyCardModule (ref)
 	local var16 = useRoactService(roactNetworking)
 	local var17 = p0.eventType == inlineEventTypeModule.DevDoNotPushToProd
-	local var18 = reactModule.useMemo(function() --[[ line: 53 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), makeDevSurveyRequestImplModule (copy), var16 (ref)
 		return if var17 then makeDevSurveyRequestImplModule.makeRequestImpl() else var16
 	end, { var17, var16 })
@@ -59,7 +59,7 @@ return reactModule.memo(function(p0) --[[ line: 50 | named "InlineSurvey" ]]
 	local var23 = reactModule.useRef(false)
 	local dismiss = var22.dismiss
 	local errorType = var22.state.errorType
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: phase (ref), phaseModule (copy), errorType (ref), dismiss (ref)
 		if phase == phaseModule.Error and errorType == "fetch" then
 			dismiss()

@@ -8,7 +8,7 @@ local default = require(corePackagesService.Workspace.Packages.PermissionsProtoc
 local var5 = not cryoModule.isEmpty(require(coreGuiService.RobloxGui.Modules.Settings.cameraDevicesHelper).GetDevices())
 
 if var5 then
-	getCamMicPermissionsModule(function(p0) --[[ line: 14 ]]
+	getCamMicPermissionsModule(function(p0)
 		-- upvalues: rbxAnalyticsService (ref), var5 (ref)
 		rbxAnalyticsService:SendEventDeferred("client", "avatarChat", "CameraDevicePermissionResponse", {
 			hasAccessToCamera = p0.hasCameraPermissions,

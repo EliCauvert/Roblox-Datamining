@@ -4,7 +4,7 @@ local var0 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function(p0) --[[ line: 12 | named "getDevStoreSeeAllUrl" ]]
+return function(p0)
 	-- upvalues: var0 (ref)
 	return var0({ universeId = p0 })
 end

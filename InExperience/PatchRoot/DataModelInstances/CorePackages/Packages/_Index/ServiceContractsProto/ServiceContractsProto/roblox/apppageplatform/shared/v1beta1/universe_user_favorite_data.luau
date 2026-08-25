@@ -4,14 +4,14 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 42 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		is_favorited = if p0 == nil or p0.is_favorited == nil then false else p0.is_favorited
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 48 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -28,7 +28,7 @@ function t_1:encode() --[[ line: 48 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 62 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var9 = t_1.new()
 	local var10 = 0
@@ -73,7 +73,7 @@ function t_1.decode(p1) --[[ line: 62 ]]
 	return var9
 end
 
-function t_1:jsonEncode() --[[ line: 105 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.is_favorited then
@@ -82,7 +82,7 @@ function t_1:jsonEncode() --[[ line: 105 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 115 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var27 = t_1.new()
 	

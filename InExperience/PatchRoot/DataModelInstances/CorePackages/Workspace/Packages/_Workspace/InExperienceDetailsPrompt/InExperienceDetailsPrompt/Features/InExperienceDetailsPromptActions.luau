@@ -16,7 +16,7 @@ local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local fFlagLuaAppIedpFixPlayButton = require(parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 
-return function(p0) --[[ line: 29 | named "InExperienceDetailsPromptActions" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), launchErrorLocalizationKeys (ref), useLocalization (ref), reactModule (ref), sheet (ref), view (ref), fFlagLuaAppIedpFixPlayButton (ref), inExperienceDetailsPromptPlayButtonModule (ref), text (ref), dataHydrationModule (ref), button (ref), iconName (ref), buttonVariant (ref), skeleton (ref), radius (ref)
 	local var4 = useLocalization({
 		playButtonUnavailable = "Feature.ExperienceDetails.PlayButtonText.Unavailable",

@@ -8,10 +8,10 @@ local getDisplayStore = require(parent.Display).GetDisplayStore
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local fixIsWideModeCheck = game:DefineFastFlag("FixIsWideModeCheck", false)
 
-return function() --[[ line: 19 ]]
+return function()
 	-- upvalues: useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fixIsWideModeCheck (ref), getDisplayStore (ref), useNavBarSize (ref), fFlagProfilePlatformNewProfileHeader (ref)
 	local var3
-	local var2 = getSafeAreaSize(useScreenSize(), useSelector(function(p0) --[[ line: 21 ]]
+	local var2 = getSafeAreaSize(useScreenSize(), useSelector(function(p0)
 		return p0.GlobalGuiInset
 	end))
 	local _ = nil

@@ -1,8 +1,8 @@
-﻿local function _(p0, p1) --[[ line: 1 | named "calculateRowOnPage" ]]
+﻿local function _(p0, p1)
 	return if p1 and typeof(p1) == "number" then p1 + p0 - 1 else -1
 end
 
-return function(p2, p3, p4) --[[ line: 15 | named "calculateRowPositionFields" ]]
+return function(p2, p3, p4)
 	if not p2 or typeof(p2) ~= "number" or (p2 <= 0 or not p3) or (typeof(p3) ~= "number" or p3 <= 0) then
 		return { positionInRow = -1, rowInSort = -1, rowOnPage = -1 }
 	end

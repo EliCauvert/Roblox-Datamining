@@ -2,7 +2,7 @@
 local _ = require(script.Parent.Parent.core.types)
 
 return {
-	selectURI = function(p0, p1) --[[ line: 19 ]]
+	selectURI = function(p0, p1)
 		-- upvalues: boolean (ref)
 		local uri = p0:getContext().uri
 		

@@ -2,7 +2,7 @@
 local var1, var2 = require(script.Parent.Parent.Parent.Signals).createSignal("")
 
 return {
-	Get = function(_) --[[ line: 15 ]]
+	Get = function(_)
 		-- upvalues: var1 (ref), httpService (ref), var2 (ref)
 		local var3 = var1(false)
 		
@@ -12,14 +12,14 @@ return {
 		end
 		return var3
 	end,
-	Refresh = function(_) --[[ line: 24 ]]
+	Refresh = function(_)
 		-- upvalues: httpService (ref), var2 (ref)
 		local var4 = httpService:GenerateGUID(false)
 		var2(var4)
 		
 		return var4
 	end,
-	GetSignal = function(_) --[[ line: 30 ]]
+	GetSignal = function(_)
 		-- upvalues: var1 (ref)
 		return var1
 	end

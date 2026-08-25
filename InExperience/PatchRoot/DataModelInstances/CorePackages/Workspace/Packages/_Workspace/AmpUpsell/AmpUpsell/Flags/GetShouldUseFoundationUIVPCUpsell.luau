@@ -2,7 +2,7 @@
 local getFFlagEnableVPCUpsellFoundationDialogHardeningModule = require(ampUpsell.Flags.GetFFlagEnableVPCUpsellFoundationDialogHardening)
 local getFFlagEnableFoundationUIVPCUpsellForInExperienceModule = require(ampUpsell.Flags.GetFFlagEnableFoundationUIVPCUpsellForInExperience)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), getFFlagEnableFoundationUIVPCUpsellForInExperienceModule (ref)
 	return getFFlagEnableVPCUpsellFoundationDialogHardeningModule() or getFFlagEnableFoundationUIVPCUpsellForInExperienceModule() and p0
 end

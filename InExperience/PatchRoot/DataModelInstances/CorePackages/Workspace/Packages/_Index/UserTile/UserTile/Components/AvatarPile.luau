@@ -9,7 +9,7 @@ local useCumulativeBackground = foundationModule.Hooks.useCumulativeBackground
 local userPresence = foundationModule.Enums.UserPresence
 local getStandardSizeAvatarHeadShotRbxthumb = userLibModule.Utils.getStandardSizeAvatarHeadShotRbxthumb
 
-return function(p0) --[[ line: 24 | named "AvatarPile" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), useCumulativeBackground (ref), reactModule (ref), view (ref), image (ref), userPresence (ref)
 	local var3 = useTokens()
 	local var4 = useCumulativeBackground(p0.altSurfaceBackground or var3.Color.Surface.Surface_0, if p0.hover then var3.Color.Shift.Shift_400 else var3.Color.Shift.Shift_300)

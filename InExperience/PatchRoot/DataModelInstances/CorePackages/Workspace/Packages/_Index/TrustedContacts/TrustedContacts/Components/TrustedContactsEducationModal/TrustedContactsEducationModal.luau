@@ -24,7 +24,7 @@ local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnect
 local consoleFriendsPageNavigation = game:DefineFastFlag("ConsoleFriendsPageNavigation", false)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 
-local function TextWithIcon(p0) --[[ line: 39 ]]
+local function TextWithIcon(p0)
 	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), text (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -48,18 +48,18 @@ local function TextWithIcon(p0) --[[ line: 39 ]]
 	})
 end
 
-return function(_) --[[ line: 66 | named "TrustedContactsEducationModal" ]]
+return function(_)
 	-- upvalues: useScreenSize (ref), useNavigation (ref), useTokens (ref), reactModule (ref), accessResponseEnum (ref), ampApiProvider (ref), fStringIsVerified18PlusAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), useTCAnalytics (ref), eventNames (ref), fFlagCreateConnectionsHub (ref), appPage (ref), consoleFriendsPageNavigation (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), partialPageModal (ref), buttonType (ref), skeleton (ref), text (ref), TextWithIcon (ref)
 	local var6 = useScreenSize()
 	local var7 = useNavigation()
 	local var8 = useTokens()
 	local var9, var10 = reactModule.useState(accessResponseEnum.Pending)
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: ampApiProvider (copy), fStringIsVerified18PlusAmpFeature (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), var10 (ref)
 		var10(ampApiProvider.upsellFeatureAccess(fStringIsVerified18PlusAmpFeature, {}, fStringCanAccessTrustedContactsAmpNameSpace).access)
 	end, {})
 	local fireAnalyticsEvent = useTCAnalytics().fireAnalyticsEvent
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
 		fireAnalyticsEvent(eventNames.TCEducationModalSeen)
 	end, {})
@@ -79,7 +79,7 @@ return function(_) --[[ line: 66 | named "TrustedContactsEducationModal" ]]
 	return reactModule.createElement(partialPageModal, {
 		title = var11.title,
 		screenSize = var6,
-		onCloseClicked = reactModule.useCallback(function() --[[ line: 83 ]]
+		onCloseClicked = reactModule.useCallback(function()
 			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var7 (ref)
 			fireAnalyticsEvent(eventNames.TCEducationCloseClicked)
 			var7.pop()
@@ -89,7 +89,7 @@ return function(_) --[[ line: 66 | named "TrustedContactsEducationModal" ]]
 				{
 					buttonType = buttonType.PrimaryContextual,
 					props = {
-						onActivated = reactModule.useCallback(function() --[[ line: 88 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var7 (ref)
 							fireAnalyticsEvent(eventNames.TCEducationGotItClicked)
 							var7.pop()
@@ -100,7 +100,7 @@ return function(_) --[[ line: 66 | named "TrustedContactsEducationModal" ]]
 				{
 					buttonType = buttonType.Secondary,
 					props = {
-						onActivated = reactModule.useCallback(function() --[[ line: 93 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagCreateConnectionsHub (copy), var7 (ref), appPage (copy), consoleFriendsPageNavigation (copy)
 							fireAnalyticsEvent(eventNames.TCEducationManageConnectionsClicked)
 							

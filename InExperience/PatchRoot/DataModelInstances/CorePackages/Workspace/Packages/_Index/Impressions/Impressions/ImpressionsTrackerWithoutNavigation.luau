@@ -7,7 +7,7 @@ local impressionsVisualizerModule = require(script.Parent.ImpressionsVisualizer)
 local luaAppFixImpressionsHookDependencies = game:DefineFastFlag("LuaAppFixImpressionsHookDependencies", false)
 local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signal (ref), impressionsVisualizerModule (ref), luaAppFixImpressionsHookDependencies (ref), impressionsDetectorModule (ref), impressionDetectorWithoutNavigationModule (ref), fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref)
 	local var5 = reactModule.useRef({})
 	local var6 = reactModule.useRef(signal.new())
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 34 ]]
 	local var10, var11 = reactModule.useState(p0.dataUpdatedTimestamp)
 	local var12 = reactModule.useRef(p0.impressionsTag)
 	local viewPortBounds = p0.viewPortBounds
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), p0 (ref), var11 (ref), var5 (ref), var7 (write), var6 (ref)
 		if var12.current ~= p0.impressionsTag then
 			var12.current = p0.impressionsTag
@@ -36,22 +36,22 @@ return function(p0) --[[ line: 34 ]]
 		p0.impressionsTag,
 		if luaAppFixImpressionsHookDependencies then p0.dataUpdatedTimestamp else nil
 	})
-	reactModule.useEffect(function() --[[ line: 63 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), p0 (ref)
 		var6.current:fire()
-		local var13 = if p0.scrollViewPositionChangedSignal then p0.scrollViewPositionChangedSignal:connect(function() --[[ line: 67 ]]
+		local var13 = if p0.scrollViewPositionChangedSignal then p0.scrollViewPositionChangedSignal:connect(function()
 			-- upvalues: var6 (copy)
 			var6.current:fire()
 		end) else nil
 		
-		return function() --[[ line: 72 ]]
+		return function()
 			-- upvalues: var13 (write)
 			if var13 ~= nil then
 				var13:disconnect()
 			end
 		end
 	end, { p0.scrollViewPositionChangedSignal })
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var6 (ref), var10 (ref), var11 (ref), var5 (ref), var7 (write)
 		if p0.pageContext and p0.routeName == p0.pageContext then
 			var6.current:fire()
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 34 ]]
 		var10,
 		viewPortBounds
 	})
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), p0 (ref), var7 (write), var9 (ref)
 		if var8 ~= nil and #var8 > 0 then
 			p0.sendImpressions(var8)
@@ -80,9 +80,9 @@ return function(p0) --[[ line: 34 ]]
 		var8,
 		if luaAppFixImpressionsHookDependencies then p0.sendImpressions else nil
 	})
-	reactModule.useEffect(function() --[[ line: 114 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (write)
-		return function() --[[ line: 115 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			var7.current:destroy()
 		end
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 34 ]]
 		viewPortBounds = viewPortBounds,
 		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then p0.viewPortFillBounds else nil,
 		onRequestImpressionsSignal = var6.current,
-		filterImpressionFunc = reactModule.useCallback(function(p1) --[[ line: 120 ]]
+		filterImpressionFunc = reactModule.useCallback(function(p1)
 			-- upvalues: var5 (ref)
 			if var5.current[p1] == nil then
 				var5.current[p1] = true
@@ -102,7 +102,7 @@ return function(p0) --[[ line: 34 ]]
 			end
 			return false
 		end, {}),
-		onImpressionsDetected = reactModule.useCallback(function(p2) --[[ line: 129 ]]
+		onImpressionsDetected = reactModule.useCallback(function(p2)
 			-- upvalues: var9 (ref)
 			if p2 and #p2 ~= 0 then
 				var9(p2)

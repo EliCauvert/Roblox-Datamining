@@ -1,6 +1,6 @@
 ﻿local filterStatesModule = require(script:FindFirstAncestor("FriendsLanding").Friends.filterStates)
 
-return function(p0, _) --[[ line: 4 ]]
+return function(p0, _)
 	-- upvalues: filterStatesModule (ref)
 	return {
 		{ text = p0.all, id = filterStatesModule.All },

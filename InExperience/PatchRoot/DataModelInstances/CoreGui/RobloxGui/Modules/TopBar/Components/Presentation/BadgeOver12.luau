@@ -10,7 +10,7 @@ local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedF
 local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), fFlagShowGameAgeRating (ref), fFlagEnableSideSheet (ref), reactModule (ref), getAgeRecommendationStore (ref), dataStatus (ref), signalsReactModule (ref), appFonts (ref)
 	local var5 = useStyle()
 	local var6 = if fFlagShowGameAgeRating then if fFlagEnableSideSheet then UDim2.fromOffset(-6, -2) else UDim2.fromOffset(0, 2) else p0.position
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 23 ]]
 	
 	if fFlagShowGameAgeRating then
 		local var8 = tostring(game.GameId)
-		var7 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 33 ]]
+		var7 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 			-- upvalues: getAgeRecommendationStore (copy), var8 (ref), dataStatus (copy)
 			local andFetchAgeRecommendation = getAgeRecommendationStore(p1).getAndFetchAgeRecommendation(var8)
 			local var10 = andFetchAgeRecommendation.status(p1)

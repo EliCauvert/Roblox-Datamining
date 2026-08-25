@@ -23,12 +23,12 @@ local var13 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(p
 local refreshProfileOnTrustedFriendsRtn = game:DefineFastFlag("RefreshProfileOnTrustedFriendsRtn", false)
 local t = { skipFetch = true }
 
-return function() --[[ line: 40 ]]
+return function()
 	-- upvalues: useProfileWrapperContextModule (ref), useRoactService (ref), appNotificationService (ref), reactModule (ref), robloxEventReceiver (ref), useDispatch (ref), useLocalUserId (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), useActionsComponentRequestModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), var13 (ref), t (ref), convertPresenceEnumModule (ref), presenceType (ref), useSelector (ref), presenceModule (ref), enumsModule (ref), refreshProfilePlatformActionInfoModule (ref), refreshProfilePlatformUserInfoModule (ref), refreshProfileOnTrustedFriendsRtn (ref)
 	local var24, var23
 	local var16 = useProfileWrapperContextModule()
 	local var17 = useRoactService(appNotificationService)
-	local var18 = reactModule.useMemo(function() --[[ line: 43 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: robloxEventReceiver (copy), var17 (ref)
 		return robloxEventReceiver.new(var17)
 	end, { var17 })
@@ -43,7 +43,7 @@ return function() --[[ line: 40 ]]
 		var24 = var13(profileId, t)
 		var23 = convertPresenceEnumModule(if var24 then var24.userPresenceType else presenceType.Offline, if var24 and var24.universeId ~= "" then tonumber(var24.universeId) else nil)
 	else
-		local var22 = useSelector(function(p0) --[[ line: 62 ]]
+		local var22 = useSelector(function(p0)
 			-- upvalues: presenceModule (copy), profileId (ref), presenceType (copy)
 			return presenceModule.Selectors.getUserPresenceByUserId(p0, profileId) or {
 				lastLocation = "",
@@ -53,7 +53,7 @@ return function() --[[ line: 40 ]]
 		var23 = convertPresenceEnumModule(var22.userPresenceType, var22.universeId)
 	end
 	var24 = reactModule.useRef(var23)
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: profileType (ref), enumsModule (copy), var24 (ref), var23 (write), var19 (ref), refreshProfilePlatformActionInfoModule (copy), profileId (ref), var21 (ref)
 		if profileType ~= enumsModule.ProfileTypes.User then return end
 		if var24.current ~= var23 then
@@ -69,10 +69,10 @@ return function() --[[ line: 40 ]]
 		profileType,
 		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then var21 else nil
 	})
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function()
 		-- upvalues: profileType (ref), enumsModule (copy), var18 (ref), profileId (ref), var19 (ref), refreshProfilePlatformUserInfoModule (copy)
 		if profileType == enumsModule.ProfileTypes.User then
-			local userProfileNotifications = var18:observeEvent("UserProfileNotifications", function(p1) --[[ line: 98 ]]
+			local userProfileNotifications = var18:observeEvent("UserProfileNotifications", function(p1)
 				-- upvalues: profileId (copy), enumsModule (copy), var19 (copy), refreshProfilePlatformUserInfoModule (copy)
 				local var26 = tostring(p1.VieweeUserId)
 				local type = p1.Type
@@ -82,23 +82,23 @@ return function() --[[ line: 40 ]]
 				end
 			end)
 			
-			return function() --[[ line: 113 ]]
+			return function()
 				-- upvalues: userProfileNotifications (ref)
 				userProfileNotifications:disconnect()
 			end
 		end
 	end, { var18, var19, profileId, profileType })
-	reactModule.useEffect(function() --[[ line: 123 ]]
+	reactModule.useEffect(function()
 		-- upvalues: profileType (ref), enumsModule (copy), var18 (ref), var20 (ref), profileId (ref), var19 (ref), refreshProfilePlatformActionInfoModule (copy), var21 (ref)
 		if profileType == enumsModule.ProfileTypes.User then
-			local friendshipNotifications = var18:observeEvent("FriendshipNotifications", function(p2) --[[ line: 128 ]]
+			local friendshipNotifications = var18:observeEvent("FriendshipNotifications", function(p2)
 				-- upvalues: var20 (copy), profileId (copy), var19 (copy), refreshProfilePlatformActionInfoModule (copy), var21 (copy)
 				if profileId == (if tostring(var20) == tostring(p2.EventArgs.UserId1) then tostring(p2.EventArgs.UserId2) else tostring(p2.EventArgs.UserId1)) then
 					var19(refreshProfilePlatformActionInfoModule(profileId, var21))
 				end
 			end)
 			
-			return function() --[[ line: 138 ]]
+			return function()
 				-- upvalues: friendshipNotifications (ref)
 				friendshipNotifications:disconnect()
 			end
@@ -109,17 +109,17 @@ return function() --[[ line: 40 ]]
 	})
 	
 	if refreshProfileOnTrustedFriendsRtn then
-		reactModule.useEffect(function() --[[ line: 151 ]]
+		reactModule.useEffect(function()
 			-- upvalues: profileType (ref), enumsModule (copy), var18 (ref), var20 (ref), profileId (ref), var19 (ref), refreshProfilePlatformActionInfoModule (copy), var21 (ref)
 			if profileType == enumsModule.ProfileTypes.User then
-				local trustedConnectionNotifications = var18:observeEvent("TrustedConnectionNotifications", function(p3) --[[ line: 156 ]]
+				local trustedConnectionNotifications = var18:observeEvent("TrustedConnectionNotifications", function(p3)
 					-- upvalues: var20 (copy), profileId (copy), var19 (copy), refreshProfilePlatformActionInfoModule (copy), var21 (copy)
 					if profileId == (if tostring(var20) == tostring(p3.Actor) then tostring(p3.Target) else tostring(p3.Actor)) then
 						var19(refreshProfilePlatformActionInfoModule(profileId, var21))
 					end
 				end)
 				
-				return function() --[[ line: 166 ]]
+				return function()
 					-- upvalues: trustedConnectionNotifications (ref)
 					trustedConnectionNotifications:disconnect()
 				end

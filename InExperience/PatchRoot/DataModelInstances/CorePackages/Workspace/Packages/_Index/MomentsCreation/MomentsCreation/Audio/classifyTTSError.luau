@@ -7,7 +7,7 @@ local t = {
 	Timeout = "timeout"
 }
 
-return function(p0) --[[ line: 33 | named "classifyTTSError" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return if p0 == nil then "failure" else t[p0] or "failure"
 end

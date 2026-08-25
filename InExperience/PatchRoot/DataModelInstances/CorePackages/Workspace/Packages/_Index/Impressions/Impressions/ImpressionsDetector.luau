@@ -24,13 +24,13 @@ impressionsDetector.validateProps = tModule.strictInterface({
 })
 impressionsDetector.defaultProps = { scanDebounceSeconds = 1, viewFillPercent = 0.25 }
 
-function impressionsDetector.init(p0) --[[ line: 55 ]]
+function impressionsDetector.init(p0)
 	p0.isMounted = false
 	p0.lastImpressionTick = nil
 	p0.nextImpressionTick = nil
 end
 
-function impressionsDetector._boundingBoxIntersectsView(p1, p2) --[[ line: 61 ]]
+function impressionsDetector._boundingBoxIntersectsView(p1, p2)
 	-- upvalues: argCheckModule (ref)
 	if not p2 then
 		return false
@@ -47,7 +47,7 @@ function impressionsDetector._boundingBoxIntersectsView(p1, p2) --[[ line: 61 ]]
 	return (viewPortBounds.min.X < var7.X and absolutePosition.X < viewPortBounds.max.X) and (viewPortBounds.min.Y < var7.Y and absolutePosition.Y < viewPortBounds.max.Y)
 end
 
-function impressionsDetector._isInstanceVisible(p3, p4) --[[ line: 86 ]]
+function impressionsDetector._isInstanceVisible(p3, p4)
 	-- upvalues: argCheckModule (ref), fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref)
 	if not p3:_boundingBoxIntersectsView(p4) then
 		return false
@@ -92,7 +92,7 @@ function impressionsDetector._isInstanceVisible(p3, p4) --[[ line: 86 ]]
 	return if var13 and var17 then true else var16 and var17
 end
 
-function impressionsDetector._calculateImpressions(p5) --[[ line: 159 ]]
+function impressionsDetector._calculateImpressions(p5)
 	-- upvalues: collectionService (ref), constantsModule (ref), argCheckModule (ref)
 	if not p5.isMounted then return end
 	if not p5.props.isFocused then return end
@@ -118,7 +118,7 @@ function impressionsDetector._calculateImpressions(p5) --[[ line: 159 ]]
 	end
 end
 
-function impressionsDetector._requestImpressions(p6) --[[ line: 198 ]]
+function impressionsDetector._requestImpressions(p6)
 	-- upvalues: argCheckModule (ref)
 	if not p6.isMounted then return end
 	if not p6.props.isFocused then return end
@@ -131,7 +131,7 @@ function impressionsDetector._requestImpressions(p6) --[[ line: 198 ]]
 		var20 = p6.nextImpressionTick - tick()
 	end
 	if var20 > 0 then
-		task.delay(var20, function() --[[ line: 221 ]]
+		task.delay(var20, function()
 			-- upvalues: argCheckModule (copy), p6 (ref)
 			argCheckModule.assert(p6.nextImpressionTick ~= nil and p6.nextImpressionTick < tick())
 			p6.nextImpressionTick = nil
@@ -144,23 +144,23 @@ function impressionsDetector._requestImpressions(p6) --[[ line: 198 ]]
 	p6:_calculateImpressions()
 end
 
-function impressionsDetector.render(_) --[[ line: 233 ]]
+function impressionsDetector.render(_)
 	return nil
 end
 
-function impressionsDetector.didMount(p7) --[[ line: 237 ]]
+function impressionsDetector.didMount(p7)
 	p7.isMounted = true
 	p7:_requestImpressions()
 	
 	if p7.props.onRequestImpressionsSignal then
-		p7.onRequestImpressionsConnection = p7.props.onRequestImpressionsSignal:connect(function() --[[ line: 241 ]]
+		p7.onRequestImpressionsConnection = p7.props.onRequestImpressionsSignal:connect(function()
 			-- upvalues: p7 (ref)
 			p7:_requestImpressions()
 		end)
 	end
 end
 
-function impressionsDetector.willUnmount(p8) --[[ line: 247 ]]
+function impressionsDetector.willUnmount(p8)
 	p8.isMounted = false
 	
 	if p8.onRequestImpressionsConnection ~= nil then
@@ -169,7 +169,7 @@ function impressionsDetector.willUnmount(p8) --[[ line: 247 ]]
 	end
 end
 
-function impressionsDetector.didUpdate(p9, _, _) --[[ line: 255 ]]
+function impressionsDetector.didUpdate(p9, _, _)
 	p9:_requestImpressions()
 end
 

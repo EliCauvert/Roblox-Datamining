@@ -13,7 +13,7 @@ local t_1 = {
 	[4] = t.Completed
 }
 
-function t.fromValue(p0) --[[ line: 21 ]]
+function t.fromValue(p0)
 	-- upvalues: t_1 (ref), t (ref)
 	if p0 == nil then
 		return nil

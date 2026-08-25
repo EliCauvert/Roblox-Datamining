@@ -23,7 +23,7 @@ local fFlagEnableMenuTrailingBadge = require(corePackagesService.Workspace.Packa
 local fFlagExperienceShopNewIconography = inExperienceShopModule.FFlagExperienceShopNewIconography
 local shopCoreGuiToggleSupportedEngineFeature = game:GetEngineFeature("ShopCoreGuiToggleSupported")
 local enableOpenShopSignalEngineFeature = game:GetEngineFeature("EnableOpenShopSignal")
-local var17 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function() --[[ line: 31 ]]
+local var17 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	return serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID)
 end)
@@ -36,7 +36,7 @@ local fFlagEnableMenuTrailingBadge_1 = game:DefineFastFlag("EnableNewBadgeInExpe
 local var22 = if shopCoreGuiToggleSupportedEngineFeature then starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop) else false
 local var23 = true
 
-local function _() --[[ line: 67 | named "getInitialAvailability" ]]
+local function _()
 	-- upvalues: var22 (write), fFlagHideShopMenuOnFailure (ref), var23 (write), serviceModule (ref)
 	if var22 and not fFlagHideShopMenuOnFailure then
 		return serviceModule.AvailabilitySignal.Available
@@ -46,7 +46,7 @@ local function _() --[[ line: 67 | named "getInitialAvailability" ]]
 	return serviceModule.AvailabilitySignal.Unavailable
 end
 
-local _ = function() --[[ line: 75 | named "toggleShopWindow" ]]
+local _ = function()
 	-- upvalues: fFlagCenterInExperienceShopWindow (ref), shopWindowLayoutModule (ref), serviceModule (ref), constantsModule (ref)
 	if fFlagCenterInExperienceShopWindow then
 		shopWindowLayoutModule.toggleInExperienceShopWindow()
@@ -74,7 +74,7 @@ t.sideSheetPlacement = sideSheetPlacement.Page
 t.windowSize = var18
 t.startingWindowPosition = shopWindowLayoutModule.getStartingWindowPosition()
 
-function t.activated(_) --[[ line: 93 ]]
+function t.activated(_)
 	-- upvalues: fFlagCenterInExperienceShopWindow (ref), shopWindowLayoutModule (ref), serviceModule (ref), constantsModule (ref)
 	if fFlagCenterInExperienceShopWindow then
 		shopWindowLayoutModule.toggleInExperienceShopWindow()
@@ -90,11 +90,11 @@ t.menuTrailingBadgeConfig = if fFlagEnableMenuTrailingBadge_1 then {
 } else nil
 t.isActivated = var17
 t.components = {
-	Icon = function() --[[ line: 104 ]]
+	Icon = function()
 		-- upvalues: commonIconModule (ref), fFlagExperienceShopNewIconography (ref), var17 (ref)
 		return commonIconModule(if fFlagExperienceShopNewIconography then "ShoppingBasket" else "BuildingStore", nil, var17)
 	end,
-	Window = function() --[[ line: 111 ]]
+	Window = function()
 		-- upvalues: reactModule (ref), shopChromeWrapperModule (ref), var18 (ref), MAX_WINDOW_WIDTH (ref), MAX_WINDOW_HEIGHT (ref)
 		return reactModule.createElement(shopChromeWrapperModule, {
 			windowSize = var18,
@@ -109,7 +109,7 @@ if fFlagEnableShopPrefetch then
 	local prefetchShopDataOnGameJoinModule = require(corePackagesService.Workspace.Packages.InExperienceShop.prefetchShopDataOnGameJoin)
 	
 	if fFlagHideShopMenuOnFailure then
-		task.spawn(prefetchShopDataOnGameJoinModule, function(p0) --[[ line: 129 ]]
+		task.spawn(prefetchShopDataOnGameJoinModule, function(p0)
 			-- upvalues: var23 (write), var22 (write), var25 (ref)
 			if not p0 then return end
 			var23 = true
@@ -123,7 +123,7 @@ if fFlagEnableShopPrefetch then
 	end
 end
 if enableOpenShopSignalEngineFeature then
-	marketplaceService.OpenShopRequested:Connect(function(p1) --[[ line: 153 ]]
+	marketplaceService.OpenShopRequested:Connect(function(p1)
 		-- upvalues: playersService (ref), fFlagHideShopMenuOnFailure (ref), var23 (write), serviceModule (ref), constantsModule (ref), fFlagCenterInExperienceShopWindow (ref), shopWindowLayoutModule (ref)
 		if p1 == playersService.LocalPlayer then
 			if fFlagHideShopMenuOnFailure and not var23 then return end
@@ -139,7 +139,7 @@ if enableOpenShopSignalEngineFeature then
 	end)
 end
 if shopCoreGuiToggleSupportedEngineFeature then
-	local _ = function() --[[ line: 171 | named "updateShopAvailability" ]]
+	local _ = function()
 		-- upvalues: var22 (write), fFlagHideShopMenuOnFailure (ref), var23 (write), var25 (ref), serviceModule (ref), constantsModule (ref)
 		if var22 and (not fFlagHideShopMenuOnFailure or var23) then
 			var25.availability:available()
@@ -151,7 +151,7 @@ if shopCoreGuiToggleSupportedEngineFeature then
 		var25.availability:unavailable()
 	end
 	
-	chromeUtilsModule.setCoreGuiAvailability(var25, Enum.CoreGuiType.ExperienceShop, function(p2) --[[ line: 183 ]]
+	chromeUtilsModule.setCoreGuiAvailability(var25, Enum.CoreGuiType.ExperienceShop, function(p2)
 		-- upvalues: var22 (write), fFlagHideShopMenuOnFailure (ref), var23 (write), var25 (ref), serviceModule (ref), constantsModule (ref)
 		var22 = p2
 		

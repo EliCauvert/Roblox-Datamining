@@ -10,15 +10,15 @@ local createVirtualizedListControllerModule = require(var1.createVirtualizedList
 local exhaustiveMatchModule = require(var1.Util.exhaustiveMatch)
 local createElement = reactModule.createElement
 
-return function(p0) --[[ line: 15 | named "ScrollingFrame" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), createVirtualizedListControllerModule (ref), exhaustiveMatchModule (ref), runService (ref), createElement (ref), reactStateRendererModule (ref), reactBindingsRendererModule (ref)
-	local var7 = reactModule.useState(function() --[[ line: 34 ]]
+	local var7 = reactModule.useState(function()
 		-- upvalues: createVirtualizedListControllerModule (copy), p0 (ref)
 		return createVirtualizedListControllerModule(p0.dataSource, p0.dimensions, p0.direction)
 	end)
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref)
-		return function() --[[ line: 39 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			return var7.destroy()
 		end
@@ -26,14 +26,14 @@ return function(p0) --[[ line: 15 | named "ScrollingFrame" ]]
 	local var8, var9 = reactModule.useBinding(var7.getCanvasSize())
 	local var10, var11 = reactModule.useBinding(Vector2.zero)
 	local var12, var13 = reactModule.useBinding(0)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var9 (ref)
-		return var7.bindToUpdate(function() --[[ line: 49 ]]
+		return var7.bindToUpdate(function()
 			-- upvalues: var9 (copy), var7 (copy)
 			var9(var7.getCanvasSize())
 		end)
 	end, {})
-	local var14 = reactModule.useCallback(function(p1) --[[ line: 54 ]]
+	local var14 = reactModule.useCallback(function(p1)
 		-- upvalues: var11 (ref), var7 (ref), p0 (ref)
 		var11(p1.AbsoluteWindowSize)
 		var7.setWindowSize(p1.AbsoluteWindowSize)
@@ -42,10 +42,10 @@ return function(p0) --[[ line: 15 | named "ScrollingFrame" ]]
 			p0.onAbsoluteWindowSizeChanged(p1.AbsoluteWindowSize)
 		end
 	end, { p0.direction, p0.onAbsoluteWindowSizeChanged })
-	local var15 = reactModule.useCallback(function(p2) --[[ line: 63 ]]
+	local var15 = reactModule.useCallback(function(p2)
 		-- upvalues: p0 (ref), exhaustiveMatchModule (copy), runService (copy), var7 (ref), var13 (ref)
 		local var17 = if p0.direction == "x" then p2.CanvasPosition.X elseif p0.direction == "y" then p2.CanvasPosition.Y else exhaustiveMatchModule(p0.direction)
-		runService.Heartbeat:Once(function() --[[ line: 71 ]]
+		runService.Heartbeat:Once(function()
 			-- upvalues: var7 (copy), var17 (ref), var13 (copy), p0 (copy)
 			var7.setScrollAxis(var17)
 			var13(var17)
@@ -55,11 +55,11 @@ return function(p0) --[[ line: 15 | named "ScrollingFrame" ]]
 			end
 		end)
 	end, { p0.direction, p0.onScrollAxisChanged })
-	reactModule.useEffect(function() --[[ line: 81 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		var7.setDataSource(p0.dataSource)
 	end, { p0.dataSource })
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		var7.setDimensions(p0.dimensions)
 	end, { p0.dimensions })
@@ -86,7 +86,7 @@ return function(p0) --[[ line: 15 | named "ScrollingFrame" ]]
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			ZIndex = 2,
-			Size = var10:map(function(p3) --[[ line: 124 ]]
+			Size = var10:map(function(p3)
 				return UDim2.fromOffset(p3.X, p3.Y)
 			end)
 		}, {

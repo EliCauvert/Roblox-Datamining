@@ -13,7 +13,7 @@ local orientation = foundationModule.Enums.Orientation
 local iconName = foundationModule.Enums.IconName
 local getIconRichText = foundationModule.Utility.getIconRichText
 
-return function(p0) --[[ line: 28 | named "RecentActivityPurchaseConfirmationDialog" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), numberLocalization (ref), localizationService (ref), getIconRichText (ref), iconName (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), orientation (ref), buttonVariant (ref)
 	local var3 = useLocalization({
 		buyTitle = "IAPExperience.PurchasePrompt.Header.BuyAvatar",
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 28 | named "RecentActivityPurchaseConfirmationDia
 		hasBackdrop = true,
 		disablePortal = false,
 		size = dialogSize.Small,
-		onClose = reactModule.useCallback(function() --[[ line: 40 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.isPurchasing then
 				return
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 28 | named "RecentActivityPurchaseConfirmationDia
 							LayoutOrder = 1,
 							tag = "auto-xy padding-y-xsmall text-title-medium text-align-x-right content-emphasis",
 							RichText = true,
-							Text = reactModule.useMemo(function() --[[ line: 35 ]]
+							Text = reactModule.useMemo(function()
 								-- upvalues: numberLocalization (copy), p0 (ref), localizationService (copy), getIconRichText (copy), iconName (copy)
 								return `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p0.totalPrice, localizationService.RobloxLocaleId)}`
 							end, { p0.totalPrice, localizationService.RobloxLocaleId })

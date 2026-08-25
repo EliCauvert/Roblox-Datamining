@@ -17,7 +17,7 @@ local t = {
 	retrievalStatus = retrievalStatus.NotStarted
 }
 
-local function checkRetrievals(p0) --[[ line: 35 ]]
+local function checkRetrievals(p0)
 	-- upvalues: cryoModule (ref), retrievalStatus (ref)
 	return if p0.accountChatRetrieved and p0.thirdPartyPrivacySettingsRetrieved then cryoModule.Dictionary.union(p0, {
 		chatEnabled = p0.accountChatEnabled and p0.thirdPartyPrivacySettingsEnabled,
@@ -25,7 +25,7 @@ local function checkRetrievals(p0) --[[ line: 35 ]]
 	}) else p0
 end
 
-local function handleGetMetadataSucceeded(p1, p2) --[[ line: 52 ]]
+local function handleGetMetadataSucceeded(p1, p2)
 	-- upvalues: checkRetrievals (ref), cryoModule (ref)
 	local responseBody = p2.responseBody
 	
@@ -40,18 +40,18 @@ local function handleGetMetadataSucceeded(p1, p2) --[[ line: 52 ]]
 end
 
 return roduxModule.createReducer(t, {
-	[thirdPartyChatSettingsLoadedModule.name] = function(value, p3) --[[ line: 45 ]]
+	[thirdPartyChatSettingsLoadedModule.name] = function(value, p3)
 		-- upvalues: checkRetrievals (ref), cryoModule (ref)
 		return checkRetrievals(cryoModule.Dictionary.union(value, {
 			thirdPartyPrivacySettingsRetrieved = p3.status ~= Enum.ChatRestrictionStatus.Unknown,
 			thirdPartyPrivacySettingsEnabled = p3.status == Enum.ChatRestrictionStatus.NotRestricted
 		}))
 	end,
-	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p4, p5) --[[ line: 66 ]]
+	[appChatNetworkingModule.rodux.GetMetadata.Succeeded.name] = function(p4, p5)
 		-- upvalues: handleGetMetadataSucceeded (ref)
 		return handleGetMetadataSucceeded(p4, p5)
 	end,
-	Debug_GroupChatEnabledToggled = function(p6, _) --[[ line: 70 ]]
+	Debug_GroupChatEnabledToggled = function(p6, _)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.union(p6, { groupChatEnabled = not p6.groupChatEnabled })
 	end

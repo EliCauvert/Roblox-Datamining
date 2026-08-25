@@ -10,9 +10,9 @@ chatNameInputBox.defaultProps = {
 	placeholderText = "(PLACEHOLDER) Name your chat group"
 }
 
-function chatNameInputBox.render(p0) --[[ line: 18 ]]
+function chatNameInputBox.render(p0)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), inputBoxWithCharacterCounter (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 19 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: roactModule (copy), inputBoxWithCharacterCounter (copy), p0 (ref)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

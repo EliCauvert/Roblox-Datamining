@@ -4,7 +4,7 @@ local useTileModule = require(foundation.Components.Tile.useTile)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 
-return function(p0) --[[ line: 17 | named "TileActions" ]]
+return function(p0)
 	-- upvalues: useTileModule (ref), reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
 		LayoutOrder = 3,

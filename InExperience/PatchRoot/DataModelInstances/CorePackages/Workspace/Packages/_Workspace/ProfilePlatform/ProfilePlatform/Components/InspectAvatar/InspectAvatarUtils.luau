@@ -25,17 +25,17 @@ for i, v in Enum.AvatarAssetType:GetEnumItems() do
 		t_1[v.Value] = true
 	end
 end
-local function getPriceStatusForProfile(p0) --[[ line: 45 ]]
+local function getPriceStatusForProfile(p0)
 	-- upvalues: getPriceStatusInShop (ref)
 	return getPriceStatusInShop(p0)
 end
 
-local function isWearableAssetType(value) --[[ line: 49 ]]
+local function isWearableAssetType(value)
 	-- upvalues: t_1 (ref)
 	return t_1[value] == true
 end
 
-local function expandBundleToAssetIds(value) --[[ line: 53 ]]
+local function expandBundleToAssetIds(value)
 	local t = {}
 	
 	if value.bundledItems then
@@ -48,7 +48,7 @@ local function expandBundleToAssetIds(value) --[[ line: 53 ]]
 	return t
 end
 
-local function collectBundleComponentIds(p1, p2) --[[ line: 69 ]]
+local function collectBundleComponentIds(p1, p2)
 	local t = {}
 	
 	for i, v in p1 do
@@ -63,12 +63,12 @@ local function collectBundleComponentIds(p1, p2) --[[ line: 69 ]]
 	return t
 end
 
-local function isPurchasableStatus(p3) --[[ line: 85 ]]
+local function isPurchasableStatus(p3)
 	-- upvalues: priceStatus (ref)
 	return if p3 ~= priceStatus.Free then if p3 ~= priceStatus.PurchaseFromRoblox then p3 == priceStatus.PurchaseFromResale else true else true
 end
 
-local function isItemPurchasable(p4) --[[ line: 91 ]]
+local function isItemPurchasable(p4)
 	-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
 	if p4.isOwned then
 		return false
@@ -78,21 +78,21 @@ local function isItemPurchasable(p4) --[[ line: 91 ]]
 	return (if var17 ~= priceStatus.Free then if var17 ~= priceStatus.PurchaseFromRoblox then var17 == priceStatus.PurchaseFromResale else true else true) and p4.collectibleProductId ~= nil
 end
 
-local function getEffectivePrice(p5) --[[ line: 98 ]]
+local function getEffectivePrice(p5)
 	-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
 	return if getPriceStatusInShop(p5) == priceStatus.PurchaseFromResale then if p5.collectibleItemDetails then p5.collectibleItemDetails.lowestResalePrice or 0 else 0 else p5.priceInRobux or 0
 end
 
-local function _(p6) --[[ line: 113 | named "normalizeSaleLocationType" ]]
+local function _(p6)
 	-- upvalues: salesLocationType (ref)
 	return if p6.saleLocationType == salesLocationType.ShopOnly then salesLocationType.ShopAndAllExperiences else p6.saleLocationType
 end
 
-local _ = function(p7, p8, p9) --[[ line: 122 | named "resolveIsOwned" ]]
+local _ = function(p7, p8, p9)
 	return if p8 and p8.quantityOwned ~= nil then p8.quantityOwned > 0 elseif p9 == nil then p7.owned == true else p9
 end
 
-local _ = function(p10) --[[ line: 135 | named "buildItemRestrictions" ]]
+local _ = function(p10)
 	local itemRestrictions = p10.itemRestrictions
 	
 	if not itemRestrictions or #itemRestrictions == 0 then
@@ -106,7 +106,7 @@ local _ = function(p10) --[[ line: 135 | named "buildItemRestrictions" ]]
 	return t
 end
 
-local function buildCollectibleItemDetails(p11, p12, p13) --[[ line: 147 ]]
+local function buildCollectibleItemDetails(p11, p12, p13)
 	return if p11.hasResellers or (p11.unitsAvailableForConsumption or (p11.totalQuantity or (p11.lowestResalePrice or p12 and p12.quantityOwned))) then {
 		hasResellers = p11.hasResellers,
 		unitsAvailableForConsumption = p11.unitsAvailableForConsumption,
@@ -117,7 +117,7 @@ local function buildCollectibleItemDetails(p11, p12, p13) --[[ line: 147 ]]
 	} else nil
 end
 
-local function buildAssetsInBundle(value, p14) --[[ line: 173 ]]
+local function buildAssetsInBundle(value, p14)
 	local var19 = nil
 	
 	if p14 and p14.assetsInBundle then
@@ -148,7 +148,7 @@ local function buildAssetsInBundle(value, p14) --[[ line: 173 ]]
 	return var19
 end
 
-local function computeBundleParts(p15, p16, p17) --[[ line: 204 ]]
+local function computeBundleParts(p15, p16, p17)
 	-- upvalues: t_1 (ref)
 	local var22 = 0
 	local t = {}
@@ -178,7 +178,7 @@ local function computeBundleParts(p15, p16, p17) --[[ line: 204 ]]
 	return var22, t
 end
 
-local _ = function(p18) --[[ line: 233 | named "extractTaxonomyName" ]]
+local _ = function(p18)
 	return if p18.taxonomy and #p18.taxonomy > 0 then p18.taxonomy[1].taxonomyName else nil
 end
 
@@ -186,7 +186,7 @@ return {
 	isWearableAssetType = isWearableAssetType,
 	expandBundleToAssetIds = expandBundleToAssetIds,
 	collectBundleComponentIds = collectBundleComponentIds,
-	buildItemData = function(p19, p20, p21, p22, p23, p24) --[[ line: 240 ]]
+	buildItemData = function(p19, p20, p21, p22, p23, p24)
 		-- upvalues: computeBundleParts (ref), salesLocationType (ref), buildCollectibleItemDetails (ref), buildAssetsInBundle (ref)
 		local var28
 		local assetType = p19.assetType or p19.bundleType
@@ -242,11 +242,11 @@ return {
 	isPurchasableStatus = isPurchasableStatus,
 	isItemPurchasable = isItemPurchasable,
 	getEffectivePrice = getEffectivePrice,
-	sortDisplayItems = function(p25) --[[ line: 279 ]]
+	sortDisplayItems = function(p25)
 		-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
-		table.sort(p25, function(p26, p27) --[[ line: 280 ]]
+		table.sort(p25, function(p26, p27)
 			-- upvalues: getPriceStatusInShop (copy), priceStatus (copy)
-			local function _(p28) --[[ line: 281 | named "sortKey" ]]
+			local function _(p28)
 				-- upvalues: getPriceStatusInShop (copy), priceStatus (copy)
 				local var34 = getPriceStatusInShop(p28)
 				

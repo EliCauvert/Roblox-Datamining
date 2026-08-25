@@ -1,6 +1,6 @@
 ﻿local toSetModule = require(script.Parent.Parent.List.toSet)
 
-return function(p0, ...) --[[ line: 4 | named "removeValue" ]]
+return function(p0, ...)
 	-- upvalues: toSetModule (ref)
 	local var1 = type(p0)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)

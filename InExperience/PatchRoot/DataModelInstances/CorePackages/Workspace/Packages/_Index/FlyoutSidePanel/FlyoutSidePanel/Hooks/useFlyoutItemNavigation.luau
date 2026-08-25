@@ -25,22 +25,22 @@ local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutCo
 local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
 local flyoutGiftCardSourceParam = game:DefineFastString("FlyoutGiftCardSourceParam", "flyout-side-panel")
 
-return function(p0, p1, p2) --[[ line: 34 | named "useFlyoutItemNavigation" ]]
+return function(p0, p1, p2)
 	-- upvalues: useDispatch (ref), fFlagCreateConnectionsHub (ref), fFlagEnableArgus (ref), useNavigation (ref), useSelector (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), fFlagFlyoutResolveItemContextOnActivationModule (ref), appPage (ref), fFlagEnableArgusImmersiveNav (ref), fFlagMomentsEntryImmersiveNav (ref), fFlagEnableArgusFlyoutEntry (ref), fFlagArgusTabImpliesFlyout (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), default (ref), flyoutContentSettingsModule (ref), flyoutGiftCardSourceParam (ref), flyoutAnalyticsModule (ref)
 	local var9 = useDispatch()
 	local var10 = if fFlagCreateConnectionsHub or fFlagEnableArgus then useNavigation() else nil
-	local var11 = useSelector(function(p3) --[[ line: 41 ]]
+	local var11 = useSelector(function(p3)
 		return p3.LocalUserId
 	end)
-	local var12 = useAppPolicy(function(p4) --[[ line: 44 ]]
+	local var12 = useAppPolicy(function(p4)
 		return p4.getGiftCardSourceRefOverride()
 	end)
-	local var13 = useAppPolicy(function(p5) --[[ line: 47 ]]
+	local var13 = useAppPolicy(function(p5)
 		return p5
 	end)
 	local var14 = useRoactService(appEventIngestService)
 	
-	return reactModule.useCallback(function() --[[ line: 53 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: p1 (ref), fFlagFlyoutResolveItemContextOnActivationModule (copy), p0 (ref), fFlagCreateConnectionsHub (copy), appPage (copy), var10 (ref), fFlagEnableArgus (copy), fFlagEnableArgusImmersiveNav (copy), fFlagMomentsEntryImmersiveNav (copy), fFlagEnableArgusFlyoutEntry (copy), fFlagArgusTabImpliesFlyout (copy), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var9 (ref), navigateDown (copy), default (copy), flyoutContentSettingsModule (copy), var11 (ref), var12 (ref), flyoutGiftCardSourceParam (copy), p2 (ref), var13 (ref), flyoutAnalyticsModule (copy), var14 (ref)
 		local appPage_1
 		p1()
@@ -76,7 +76,7 @@ return function(p0, p1, p2) --[[ line: 34 | named "useFlyoutItemNavigation" ]]
 				end
 			elseif var16.appUri then
 				local appUri = var16.appUri
-				default:isURLRegistered(appUri):andThen(function(p6) --[[ line: 104 ]]
+				default:isURLRegistered(appUri):andThen(function(p6)
 					-- upvalues: default (copy), appUri (ref)
 					if p6 then
 						default:detectURL(appUri)

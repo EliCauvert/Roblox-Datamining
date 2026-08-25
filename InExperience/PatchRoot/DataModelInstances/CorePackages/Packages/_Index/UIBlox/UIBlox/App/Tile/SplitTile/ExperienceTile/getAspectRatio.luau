@@ -4,7 +4,7 @@ local t = {
 	[aspectRatioModeModule.Square] = 1
 }
 
-return function(p0) --[[ line: 14 | named "getAspectRatio" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	local var2 = t[p0]
 	

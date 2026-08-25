@@ -8,7 +8,7 @@ local gameCollectionItemType = discoveryTypesModule.GameCollectionItemTypes.Game
 local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
 local t = {
-	new = function() --[[ line: 17 ]]
+	new = function()
 		return {
 			entries = {},
 			rowsRequested = 0,
@@ -20,7 +20,7 @@ local t = {
 	end
 }
 
-function t.mock() --[[ line: 31 ]]
+function t.mock()
 	-- upvalues: t (ref), topicContentsEntryModelModule (ref)
 	local var5 = t.new()
 	var5.entries = { topicContentsEntryModelModule.mock() }
@@ -33,7 +33,7 @@ function t.mock() --[[ line: 31 ]]
 	return var5
 end
 
-function t.fromData(p0) --[[ line: 45 ]]
+function t.fromData(p0)
 	return {
 		entries = p0.entries,
 		rowsRequested = p0.rowsRequested,
@@ -44,7 +44,7 @@ function t.fromData(p0) --[[ line: 45 ]]
 	}
 end
 
-function t.fromContentList(p1, p2, p3, p4) --[[ line: 59 ]]
+function t.fromContentList(p1, p2, p3, p4)
 	-- upvalues: t (ref), topicContentsEntryModelModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameCollectionItemType (ref), discoveryEventErrorLogger (ref), omniRecommendationsContentType (ref)
 	local var6 = t.new()
 	var6.updatedTimestamp = p4
@@ -54,7 +54,7 @@ function t.fromContentList(p1, p2, p3, p4) --[[ line: 59 ]]
 	if p1 then
 		for i, v in ipairs(p1) do
 			if not var6.hasMoreRows then
-				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p6) --[[ line: 78 ]]
+				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p6)
 					-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameCollectionItemType (copy), discoveryEventErrorLogger (copy), omniRecommendationsContentType (copy), var6 (ref), v (ref), p2 (ref), p3 (ref)
 					if fFlagLuaAppEnableHomepageOneByTwoTile and p6.componentType == gameCollectionItemType.OneByTwoTile and (not p6.primaryVideoAssetId or not p6.primaryImageAssetId) then
 						discoveryEventErrorLogger.reportError("TopicContentsModel_OneByTwoTileMissingAssets", "OneByTwoTile entry dropped: missing primaryVideoAssetId or primaryImageAssetId", {
@@ -89,7 +89,7 @@ function t.fromContentList(p1, p2, p3, p4) --[[ line: 59 ]]
 							var6.hasMoreRows = true
 						end
 					end
-				end):matchError(function(p5) --[[ line: 129 ]]
+				end):matchError(function(p5)
 					warn(p5)
 				end)
 				continue

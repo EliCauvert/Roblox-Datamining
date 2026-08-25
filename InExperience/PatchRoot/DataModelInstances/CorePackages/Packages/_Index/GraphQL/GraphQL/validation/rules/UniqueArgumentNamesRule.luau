@@ -1,20 +1,20 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueArgumentNamesRule = function(p0) --[[ line: 20 ]]
+	UniqueArgumentNamesRule = function(p0)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		
 		return {
-			Field = function() --[[ line: 24 ]]
+			Field = function()
 				-- upvalues: t (write)
 				t = {}
 			end,
-			Directive = function() --[[ line: 27 ]]
+			Directive = function()
 				-- upvalues: t (write)
 				t = {}
 			end,
-			Argument = function(_, p1) --[[ line: 30 ]]
+			Argument = function(_, p1)
 				-- upvalues: t (write), p0 (ref), graphQLError (copy)
 				local value = p1.name.value
 				

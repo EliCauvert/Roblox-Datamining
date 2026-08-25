@@ -6,15 +6,15 @@ local tutilsModule = require(parent.tutils)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 
-local function selectView(p0) --[[ line: 32 ]]
+local function selectView(p0)
 	return p0.view
 end
 
-return function(p1) --[[ line: 44 | named "useViewBreakpoints" ]]
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), viewTypeModule (ref), useSelector (ref), selectView (ref), tutilsModule (ref)
 	local var5 = useTokens()
 	
-	return reactModule.useMemo(function() --[[ line: 46 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: viewTypeModule (copy), p1 (ref), var5 (ref)
 		return {
 			[viewTypeModule.Wide] = {

@@ -7,7 +7,7 @@ local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceNam
 local _ = require(robloxSubscriptionPurchaseApp.types)
 local fFlagRobloxPlusFAEFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusFAEFreeTrial)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 18 | named "initiateRobloxSubscriptionPurchase" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagRobloxPlusFAEFreeTrialModule (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
 	local var7 = robloxSubscriptionStoreModule.get()
 	

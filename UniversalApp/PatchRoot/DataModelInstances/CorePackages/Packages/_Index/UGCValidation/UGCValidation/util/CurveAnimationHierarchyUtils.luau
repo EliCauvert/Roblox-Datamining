@@ -7,7 +7,7 @@ local getFIntUGCValidateMaxTotalFaceControlsModule = require(flags.getFIntUGCVal
 local t = {}
 local var5 = nil
 
-function t.getBodyPartToParentMap() --[[ line: 14 ]]
+function t.getBodyPartToParentMap()
 	-- upvalues: var5 (write), assetCalculatorModule (ref)
 	if not var5 then
 		var5 = assetCalculatorModule.getBodyPartsToParents()
@@ -18,7 +18,7 @@ end
 t.humanoidRootPartName = "HumanoidRootPart"
 t.FaceControlsName = "FaceControls"
 
-function t.folderHasAnimationTracks(p0) --[[ line: 24 ]]
+function t.folderHasAnimationTracks(p0)
 	local vector3Curve
 	local position = p0:FindFirstChild("Position")
 	local rotation = p0:FindFirstChild("Rotation")
@@ -33,12 +33,12 @@ function t.folderHasAnimationTracks(p0) --[[ line: 24 ]]
 	end
 end
 
-function t.isBodyPartFolderNameValid(p1) --[[ line: 31 ]]
+function t.isBodyPartFolderNameValid(p1)
 	-- upvalues: t (ref)
 	return if t.getBodyPartToParentMap()[p1] == nil then p1 == t.humanoidRootPartName else true
 end
 
-function t.getBodyPartFolderRoot(p2) --[[ line: 36 ]]
+function t.getBodyPartFolderRoot(p2)
 	-- upvalues: t (ref)
 	for i, v in p2:GetChildren() do
 		if v:IsA("Folder") and t.isBodyPartFolderNameValid(v.Name) then
@@ -48,11 +48,11 @@ function t.getBodyPartFolderRoot(p2) --[[ line: 36 ]]
 	return nil
 end
 
-function t.areChildrenAcceptable(p3, p4) --[[ line: 45 ]]
+function t.areChildrenAcceptable(p3, p4)
 	if not p3 then
 		return true
 	end
-	local function findAndRemoveMatching(p5) --[[ line: 50 ]]
+	local function findAndRemoveMatching(p5)
 		-- upvalues: p4 (ref)
 		for i, v in p4 do
 			if v.ClassName == p5.ClassName and v.Name == p5.Name then
@@ -72,7 +72,7 @@ function t.areChildrenAcceptable(p3, p4) --[[ line: 45 ]]
 	return true
 end
 
-function t.calculateAcceptableChildBodyPartFolders(p6) --[[ line: 70 ]]
+function t.calculateAcceptableChildBodyPartFolders(p6)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -84,7 +84,7 @@ function t.calculateAcceptableChildBodyPartFolders(p6) --[[ line: 70 ]]
 	return t_1
 end
 
-function t.calculateAcceptableBodyPartFolderChildrenArray(p7, p8) --[[ line: 83 ]]
+function t.calculateAcceptableBodyPartFolderChildrenArray(p7, p8)
 	-- upvalues: t (ref)
 	local var11 = t.calculateAcceptableChildBodyPartFolders(p7.Name)
 	
@@ -105,7 +105,7 @@ function t.calculateAcceptableBodyPartFolderChildrenArray(p7, p8) --[[ line: 83 
 	return var11
 end
 
-function t.calculateAcceptableCurveChildrenArray() --[[ line: 114 ]]
+function t.calculateAcceptableCurveChildrenArray()
 	return {
 		{ ClassName = "FloatCurve", Name = "X" },
 		{ ClassName = "FloatCurve", Name = "Y" },
@@ -113,11 +113,11 @@ function t.calculateAcceptableCurveChildrenArray() --[[ line: 114 ]]
 	}
 end
 
-function t.containsGrandChildren(p9) --[[ line: 131 ]]
+function t.containsGrandChildren(p9)
 	return if p9 then #p9:GetChildren() < #p9:GetDescendants() else false
 end
 
-function t.validateBodyPartFolderChildren(p10) --[[ line: 138 ]]
+function t.validateBodyPartFolderChildren(p10)
 	-- upvalues: t (ref), getFFlagUGCValidateRestrictNumFaceControlsModule (ref), getFIntUGCValidateMaxTotalFaceControlsModule (ref)
 	if not t.areChildrenAcceptable(p10, t.calculateAcceptableBodyPartFolderChildrenArray(p10, true)) then
 		return false
@@ -143,9 +143,9 @@ function t.validateBodyPartFolderChildren(p10) --[[ line: 138 ]]
 	return if t.containsGrandChildren(p10:FindFirstChild("Position")) then false elseif t.containsGrandChildren(p10:FindFirstChild("Rotation")) then false else t.containsGrandChildren(faceControlsName)
 end
 
-function t.validateCurveAnimationBodyPartFolder(p11) --[[ line: 198 ]]
+function t.validateCurveAnimationBodyPartFolder(p11)
 	-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (ref), t (ref)
-	local function validateBodyPartFolderInternal(p12) --[[ line: 199 ]]
+	local function validateBodyPartFolderInternal(p12)
 		-- upvalues: getFFlagUGCValidateDuplicatesInAnimationModule (copy), t (copy), validateBodyPartFolderInternal (ref)
 		if getFFlagUGCValidateDuplicatesInAnimationModule() then
 			if not t.validateBodyPartFolderChildren(p12) then

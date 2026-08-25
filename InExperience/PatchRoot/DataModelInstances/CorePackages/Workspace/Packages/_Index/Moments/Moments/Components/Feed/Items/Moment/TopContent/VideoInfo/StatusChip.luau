@@ -17,9 +17,9 @@ local t = {
 	partnerContent = "Feature.Moments.Label.RobloxPartnerContent"
 }
 
-local function noop() --[[ line: 45 ]] end
+local function noop() end
 
-return reactModule.memo(function(p0) --[[ line: 51 | named "StatusChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), t (ref), momentContextModule (ref), reactModule (ref), view (ref), chip (ref), chipSize (ref), chipVariant (ref), builderIconsModule (ref), noop (ref), badge (ref), badgeVariant (ref), badgeSize (ref), badgeShape (ref)
 	local var7 = useLocalization(t)
 	local data = momentContextModule.useMoment().store.getData(false)

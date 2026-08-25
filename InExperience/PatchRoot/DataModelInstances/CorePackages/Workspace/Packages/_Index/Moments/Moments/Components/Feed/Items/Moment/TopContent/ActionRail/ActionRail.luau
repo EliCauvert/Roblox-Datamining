@@ -23,7 +23,7 @@ local useShareMomentModule = require(moments.Share.useShareMoment)
 local paperAirplane = builderIconsModule.Icon.PaperAirplane
 local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 
-return reactModule.memo(function(p0) --[[ line: 54 | named "ActionRail" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), useShareMomentModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), fFlagMomentsFixFeedShareArrowIconModule (ref), arrowThickToRight (ref), paperAirplane (ref), contextualMenuModule (ref), view (ref)
 	local var15 = reactUtilsModule.createNextOrder()
 	local var16 = momentContextModule.useMoment()
@@ -40,7 +40,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "ActionRail" ]]
 	local var25 = getMomentsPreferencesStoreModule(false)
 	local var26 = useSignalState(useMomentsSession().getHideDetails)
 	local var27 = useSignalState(var25.getFeedGlobalMute)
-	local var28 = reactModule.useMemo(function() --[[ line: 90 ]]
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: var27 (ref), var25 (ref)
 		return { isMuted = var27, toggle = var25.toggleFeedGlobalMute }
 	end, { var27, var25.toggleFeedGlobalMute })

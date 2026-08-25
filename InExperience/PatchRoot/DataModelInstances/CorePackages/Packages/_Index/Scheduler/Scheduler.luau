@@ -1,7 +1,7 @@
 ﻿local reactGlobalsModule = require(script.Parent.ReactGlobals)
 
-local function _(p0) --[[ line: 17 | named "onlyInTestError" ]]
-	return function() --[[ line: 18 ]]
+local function _(p0)
+	return function()
 		-- upvalues: p0 (ref)
 		error(p0 .. " is only available in tests, not in production")
 	end
@@ -38,56 +38,56 @@ local t = {
 }
 local var5 = "unstable_flushAllWithoutAsserting"
 
-function t.unstable_flushAllWithoutAsserting() --[[ line: 18 ]]
+function t.unstable_flushAllWithoutAsserting()
 	-- upvalues: var5 (ref)
 	error(var5 .. " is only available in tests, not in production")
 end
 
 local var6 = "unstable_flushAll"
 
-function t.unstable_flushAll() --[[ line: 18 ]]
+function t.unstable_flushAll()
 	-- upvalues: var6 (ref)
 	error(var6 .. " is only available in tests, not in production")
 end
 
 local var7 = "unstable_flushNumberOfYields"
 
-function t.unstable_flushNumberOfYields() --[[ line: 18 ]]
+function t.unstable_flushNumberOfYields()
 	-- upvalues: var7 (ref)
 	error(var7 .. " is only available in tests, not in production")
 end
 
 local var8 = "unstable_clearYields"
 
-function t.unstable_clearYields() --[[ line: 18 ]]
+function t.unstable_clearYields()
 	-- upvalues: var8 (ref)
 	error(var8 .. " is only available in tests, not in production")
 end
 
 local var9 = "unstable_clearYields"
 
-function t.unstable_flushUntilNextPaint() --[[ line: 18 ]]
+function t.unstable_flushUntilNextPaint()
 	-- upvalues: var9 (ref)
 	error(var9 .. " is only available in tests, not in production")
 end
 
 local var10 = "unstable_advanceTime"
 
-function t.unstable_advanceTime() --[[ line: 18 ]]
+function t.unstable_advanceTime()
 	-- upvalues: var10 (ref)
 	error(var10 .. " is only available in tests, not in production")
 end
 
 local var11 = "unstable_flushExpired"
 
-function t.unstable_flushExpired() --[[ line: 18 ]]
+function t.unstable_flushExpired()
 	-- upvalues: var11 (ref)
 	error(var11 .. " is only available in tests, not in production")
 end
 
 local var12 = "unstable_yieldValue"
 
-function t.unstable_yieldValue() --[[ line: 18 ]]
+function t.unstable_yieldValue()
 	-- upvalues: var12 (ref)
 	error(var12 .. " is only available in tests, not in production")
 end
@@ -95,7 +95,7 @@ end
 local t_1 = {}
 local var14 = "unstable_wrap"
 
-function t_1.unstable_wrap() --[[ line: 18 ]]
+function t_1.unstable_wrap()
 	-- upvalues: var14 (ref)
 	error(var14 .. " is only available in tests, not in production")
 end

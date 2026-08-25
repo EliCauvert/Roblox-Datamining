@@ -20,23 +20,23 @@ local setIsBadgeDetailsSheetOpen = badgeDetailsSheetStateModule.setIsBadgeDetail
 local fFlagSduiPageEntryUseSharedHooks = require(parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
 local luaAppBadgeDetailsLargeSideSheetSize2 = game:DefineFastFlag("LuaAppBadgeDetailsLargeSideSheetSize2", false)
 
-local function _(p0, p1) --[[ line: 41 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1)
 	local extraProps = p0.navigation and p0.navigation.getParam("extraProps")
 	
 	return p0[p1] or extraProps and extraProps[p1]
 end
 
-local _ = function(p2, p3) --[[ line: 53 ]]
+local _ = function(p2, p3)
 	return p2 .. "_" .. p3
 end
 
-return reactModule.memo(function(p4) --[[ line: 57 | named "BadgeDetailsPage" ]]
+return reactModule.memo(function(p4)
 	-- upvalues: useTokens (ref), getBadgeDetailsPageKeyModule (ref), reactModule (ref), sduiLoadTimer (ref), useNavigation (ref), useRouteName (ref), useNavigationFocus (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), fetchBadgeDetailsPageModule (ref), setIsBadgeDetailsSheetOpen (ref), sduiFeatureEntryPoint (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), foundationModule (ref), luaAppBadgeDetailsLargeSideSheetSize2 (ref)
 	local var9 = useTokens()
 	local extraProps = p4.navigation and p4.navigation.getParam("extraProps")
 	local badgeId = p4.badgeId or extraProps and extraProps.badgeId
 	local var12 = getBadgeDetailsPageKeyModule(badgeId)
-	local var13 = reactModule.useMemo(function() --[[ line: 63 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p4 (ref), sduiLoadTimer (copy)
 		local var21 = p4
 		local extraProps = var21.navigation and var21.navigation.getParam("extraProps")
@@ -47,29 +47,29 @@ return reactModule.memo(function(p4) --[[ line: 57 | named "BadgeDetailsPage" ]]
 	local var15 = useRouteName()
 	local var16 = useNavigationFocus()
 	local var17 = useBreakpointXOrSmaller(responsiveModule.Keys.Small)
-	local var18 = reactModule.useCallback(function() --[[ line: 72 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), var16 (ref), var14 (ref)
 		if var15 == "BadgeDetails" and var16 then
 			var14.goBack()
 		end
 	end, { var14, var15, var16 })
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function()
 		-- upvalues: badgeId (ref), fetchBadgeDetailsPageModule (copy), var13 (ref)
 		if badgeId then
 			fetchBadgeDetailsPageModule(badgeId, var13)
 		end
 	end, { badgeId, var13 })
-	reactModule.useEffect(function() --[[ line: 84 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var16 (ref), setIsBadgeDetailsSheetOpen (copy)
 		setIsBadgeDetailsSheetOpen(not var17 and var16)
 		
-		return function() --[[ line: 88 ]]
+		return function()
 			-- upvalues: setIsBadgeDetailsSheetOpen (copy)
 			setIsBadgeDetailsSheetOpen(false)
 		end
 	end, { var17, var16 })
 	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useCallback(function() --[[ line: 97 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), sduiFeatureEntryPoint (copy), var12 (ref), var13 (ref)
 		return reactModule.createElement(sduiFeatureEntryPoint, {
 			appPage = "BadgeDetails",

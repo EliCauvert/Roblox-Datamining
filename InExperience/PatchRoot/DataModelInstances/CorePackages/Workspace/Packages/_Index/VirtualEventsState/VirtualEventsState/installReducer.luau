@@ -2,7 +2,7 @@
 local roduxModule = require(virtualEventsState.Parent.Rodux)
 local roduxNetworking = require(virtualEventsState.network).RoduxNetworking
 
-return function() --[[ line: 7 | named "installReducer" ]]
+return function()
 	-- upvalues: roduxModule (ref), roduxNetworking (ref), virtualEventsState (ref)
 	return roduxModule.combineReducers({
 		networkStatus = roduxNetworking.installReducer(),

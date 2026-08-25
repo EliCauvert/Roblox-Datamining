@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
-return function(p0) --[[ line: 7 ]]
-	return function(p1) --[[ line: 8 ]]
+return function(p0)
+	return function(p1)
 		-- upvalues: p0 (ref)
-		p0(function(p2) --[[ line: 9 ]]
+		p0(function(p2)
 			-- upvalues: p1 (ref)
 			local var0 = p2[p1]
 			

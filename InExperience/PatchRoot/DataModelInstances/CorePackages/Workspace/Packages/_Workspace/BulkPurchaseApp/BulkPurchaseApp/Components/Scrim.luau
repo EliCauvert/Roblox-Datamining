@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 10 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useDesignTokens (ref), reactModule (ref)
 	local var1 = useDesignTokens()
 	

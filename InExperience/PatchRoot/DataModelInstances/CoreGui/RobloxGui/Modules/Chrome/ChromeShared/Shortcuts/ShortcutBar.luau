@@ -18,7 +18,7 @@ local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpCon
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local fFlagGamepadIconSupportCheck = sharedFlagsModule.FFlagGamepadIconSupportCheck
 
-function ChromeShortcutBar(_) --[[ line: 28 ]]
+function ChromeShortcutBar(_)
 	-- upvalues: reactModule (ref), useTokens (ref), useObservableValueModule (ref), viewportUtilModule (ref), fFlagGamepadIconSupportCheck (ref), gamepadConnectorModule (ref), serviceModule (ref), userInputService (ref), isSpatial (ref), fFlagEnableConsoleExpControls (ref), reactRobloxModule (ref), constantsModule (ref), shortcutBar (ref), coreGuiService (ref)
 	local var13, var14 = reactModule.useState({})
 	local var15, var16 = reactModule.useState({})
@@ -27,7 +27,7 @@ function ChromeShortcutBar(_) --[[ line: 28 ]]
 	local var20 = useObservableValueModule(viewportUtilModule.screenSize)
 	local var21 = reactModule.useRef(0)
 	
-	local function checkOverflow() --[[ line: 37 ]]
+	local function checkOverflow()
 		-- upvalues: var21 (ref), var20 (ref), var13 (ref), var16 (ref)
 		if var20.X < var21.current then
 			local var25 = 1
@@ -43,14 +43,14 @@ function ChromeShortcutBar(_) --[[ line: 28 ]]
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), checkOverflow (ref)
 		var16({})
 		checkOverflow()
 	end, { var20 })
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagGamepadIconSupportCheck (copy), gamepadConnectorModule (copy), serviceModule (copy), var14 (ref), var16 (ref), userInputService (copy), isSpatial (copy), fFlagEnableConsoleExpControls (copy), var18 (ref)
-		local function updateShortcuts() --[[ line: 60 ]]
+		local function updateShortcuts()
 			-- upvalues: fFlagGamepadIconSupportCheck (copy), gamepadConnectorModule (copy), serviceModule (copy), var14 (copy), var16 (copy)
 			if fFlagGamepadIconSupportCheck and not gamepadConnectorModule:getGamepadActive():get() then
 				return
@@ -69,7 +69,7 @@ function ChromeShortcutBar(_) --[[ line: 28 ]]
 			local gamepadActive = gamepadConnectorModule:getGamepadActive()
 			
 			if fFlagEnableConsoleExpControls then
-				local function shouldHideShortcutBar() --[[ line: 79 ]]
+				local function shouldHideShortcutBar()
 					-- upvalues: showTopBar (ref), gamepadActive (ref), serviceModule (copy)
 					serviceModule:setHideShortcutBar("TopBar", not showTopBar:get() or not gamepadActive:get())
 				end
@@ -80,7 +80,7 @@ function ChromeShortcutBar(_) --[[ line: 28 ]]
 				
 				return
 			end
-			local function shouldShowShortcutBar() --[[ line: 87 ]]
+			local function shouldShowShortcutBar()
 				-- upvalues: showTopBar (ref), gamepadActive (ref), var18 (copy)
 				var18(showTopBar:get() and gamepadActive:get())
 			end
@@ -116,7 +116,7 @@ function ChromeShortcutBar(_) --[[ line: 28 ]]
 				AnchorPoint = Vector2.new(0.5, 1),
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				[reactModule.Change.AbsoluteSize] = function(p0) --[[ line: 128 ]]
+				[reactModule.Change.AbsoluteSize] = function(p0)
 					-- upvalues: var21 (ref), checkOverflow (ref)
 					var21.current = p0.AbsoluteSize.X
 					checkOverflow()

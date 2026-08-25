@@ -28,12 +28,12 @@ local list = {
 	trustedConnectionStatus.TrustedFriends
 }
 
-local function _(p0) --[[ line: 53 | named "normalizeModalOverride" ]]
+local function _(p0)
 	-- upvalues: sources (ref), trustedConnectionStatus (ref), fFlagTFNonFriendsPermittedModule (ref)
 	return if p0 == sources.ShareLinkSender then trustedConnectionStatus.Friends elseif p0 == sources.ShareLinkReceiver then trustedConnectionStatus.RequestReceived elseif p0 == trustedConnectionStatus.RequestIgnored then trustedConnectionStatus.RequestReceived elseif p0 == trustedConnectionStatus.NotFriends and fFlagTFNonFriendsPermittedModule then trustedConnectionStatus.Friends else p0
 end
 
-return function(p1) --[[ line: 66 ]]
+return function(p1)
 	-- upvalues: fFlagTFWithActionsCheck (ref), reactModule (ref), normalizeTFActionsEnumToModalVariantModule (ref), sources (ref), trustedConnectionStatus (ref), fFlagTFNonFriendsPermittedModule (ref), getTCStatusModule (ref), useTCAnalytics (ref), fFlagTFUpdateAnalyticsModule (ref), eventNames (ref), useLocalization (ref), fFlagTCLearnMoreLinkModule (ref), list (ref), roactUtilsModule (ref), useModalTextsModule (ref), useModalButtonActionsModule (ref), fFlagEnableTrustedFriendsWizardVPCPrologueModule (ref), fFlagTrustedFriendsUseEnumCTA (ref), trustedConnectionsLearnMoreLink (ref), trustedContactsModalModule (ref)
 	local var15
 	local _ = nil
@@ -42,7 +42,7 @@ return function(p1) --[[ line: 66 ]]
 	
 	if fFlagTFWithActionsCheck then
 		tfActionsEnum = p1.tfActionsEnum
-		var15 = reactModule.useMemo(function() --[[ line: 71 ]]
+		var15 = reactModule.useMemo(function()
 			-- upvalues: tfActionsEnum (write), normalizeTFActionsEnumToModalVariantModule (copy)
 			return if tfActionsEnum then normalizeTFActionsEnumToModalVariantModule(tfActionsEnum) else nil
 		end, { tfActionsEnum })
@@ -50,13 +50,13 @@ return function(p1) --[[ line: 66 ]]
 		local var16, var17 = reactModule.useState(nil)
 		var15 = var16
 		local var18 = var17
-		reactModule.useEffect(function() --[[ line: 80 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p1 (ref), var18 (write), sources (copy), trustedConnectionStatus (copy), fFlagTFNonFriendsPermittedModule (copy), getTCStatusModule (copy)
 			if not p1.modalVariantOverride then
-				getTCStatusModule(p1.userId):andThen(function(p2) --[[ line: 87 ]]
+				getTCStatusModule(p1.userId):andThen(function(p2)
 					-- upvalues: var18 (copy), sources (copy), trustedConnectionStatus (copy), fFlagTFNonFriendsPermittedModule (copy)
 					var18(if p2 == sources.ShareLinkSender then trustedConnectionStatus.Friends elseif p2 == sources.ShareLinkReceiver then trustedConnectionStatus.RequestReceived elseif p2 == trustedConnectionStatus.RequestIgnored then trustedConnectionStatus.RequestReceived elseif p2 == trustedConnectionStatus.NotFriends and fFlagTFNonFriendsPermittedModule then trustedConnectionStatus.Friends else p2)
-				end):catch(function() --[[ line: 90 ]]
+				end):catch(function()
 					-- upvalues: var18 (copy), trustedConnectionStatus (copy)
 					var18(trustedConnectionStatus.Friends)
 				end)
@@ -73,7 +73,7 @@ return function(p1) --[[ line: 66 ]]
 		source = p1.source,
 		tfActionsEnum = if fFlagTFUpdateAnalyticsModule then tfActionsEnum else nil
 	}).fireAnalyticsEvent
-	local var19 = reactModule.useCallback(function() --[[ line: 108 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p1 (ref)
 		fireAnalyticsEvent(eventNames.TCUpsellCloseClicked)
 		p1.externalNavigation.closeModal()
@@ -83,19 +83,19 @@ return function(p1) --[[ line: 66 ]]
 		linkCopiedToast = "Feature.Catalog.Toast.LinkCopied",
 		learnMoreText = if fFlagTCLearnMoreLinkModule then "Feature.Friends.LinkText.LearnMore" else nil
 	})
-	reactModule.useEffect(function() --[[ line: 119 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (write), fireAnalyticsEvent (ref), eventNames (copy)
 		if var15 then
 			fireAnalyticsEvent(eventNames.TCUpsellModalSeen)
 		end
 	end, { var15, fireAnalyticsEvent })
-	local var21 = reactModule.useCallback(function() --[[ line: 125 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var20 (ref)
 		p1.externalNavigation.showToast(var20.somethingIsWrongToast)
 	end, { var20.somethingIsWrongToast, p1.externalNavigation })
 	
 	if fFlagTFWithActionsCheck then
-		roactUtilsModule.Hooks.useEffectOnce(function() --[[ line: 132 ]]
+		roactUtilsModule.Hooks.useEffectOnce(function()
 			-- upvalues: fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var19 (ref), var21 (ref)
 			if fFlagTFUpdateAnalyticsModule then
 				fireAnalyticsEvent(eventNames.TCUpsellInvalidTrustedFriendState)
@@ -104,7 +104,7 @@ return function(p1) --[[ line: 66 ]]
 			var21()
 		end, not (var15 and table.find(list, var15)))
 	else
-		reactModule.useEffect(function() --[[ line: 140 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var15 (write), list (copy), fFlagTFUpdateAnalyticsModule (copy), fireAnalyticsEvent (ref), eventNames (copy), var19 (ref), var21 (ref)
 			if var15 and not table.find(list, var15) then
 				if fFlagTFUpdateAnalyticsModule then
@@ -140,7 +140,7 @@ return function(p1) --[[ line: 66 ]]
 		}),
 		onCloseModal = var19,
 		learnMoreText = if fFlagTCLearnMoreLinkModule then var20.learnMoreText else nil,
-		onLearnMoreClick = if fFlagTCLearnMoreLinkModule then if fFlagTCLearnMoreLinkModule then reactModule.useCallback(function() --[[ line: 179 ]]
+		onLearnMoreClick = if fFlagTCLearnMoreLinkModule then if fFlagTCLearnMoreLinkModule then reactModule.useCallback(function()
 			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), p1 (ref), trustedConnectionsLearnMoreLink (copy)
 			fireAnalyticsEvent(eventNames.TCUpsellLearnMoreClicked)
 			p1.externalNavigation.openWebView(trustedConnectionsLearnMoreLink, "")

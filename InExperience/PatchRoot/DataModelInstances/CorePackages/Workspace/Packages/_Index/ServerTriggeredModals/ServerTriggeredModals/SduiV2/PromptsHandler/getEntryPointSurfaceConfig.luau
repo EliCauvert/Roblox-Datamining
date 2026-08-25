@@ -30,7 +30,7 @@ local t = {
 	} else nil
 }
 
-return function(p0, p1) --[[ line: 80 | named "getEntryPointSurfaceConfig" ]]
+return function(p0, p1)
 	-- upvalues: t (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref)
 	local var3 = t[p0]
 	assert(var3 ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)

@@ -4,7 +4,7 @@ local helpPageThrottleHundredthsPercent = game:DefineFastInt("HelpPageThrottleHu
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 35 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({}, t)
 end
@@ -27,7 +27,7 @@ t.telemetryConfigs = {
 	}
 }
 
-function t.logHelpPageInteraction(_, p0, p1) --[[ line: 59 ]]
+function t.logHelpPageInteraction(_, p0, p1)
 	-- upvalues: t (ref), telemetryService (ref)
 	telemetryService:LogEvent(t.telemetryConfigs.helpPageInteraction.eventConfig, {
 		eventContext = p0,

@@ -19,7 +19,7 @@
 	["tr-tr"] = "."
 }
 
-local function addGroupDelimiters(p0, p1) --[[ line: 35 ]]
+local function addGroupDelimiters(p0, p1)
 	local formattedText = string.format("%%1%s%%2", p1)
 	local _ = nil
 	repeat
@@ -29,7 +29,7 @@ local function addGroupDelimiters(p0, p1) --[[ line: 35 ]]
 	return p0
 end
 
-return function(p2, p3) --[[ line: 47 ]]
+return function(p2, p3)
 	-- upvalues: t (ref), addGroupDelimiters (ref)
 	return addGroupDelimiters(p3, t[p2] or ",")
 end

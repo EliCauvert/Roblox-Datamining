@@ -1,13 +1,13 @@
 ﻿local enableCaptureUploadForSupportTicketEngineFeature = game:GetEngineFeature("EnableCaptureUploadForSupportTicket")
 local enableCheckUploadCaptureStatusForSupportTicketEngineFeature = game:GetEngineFeature("EnableCheckUploadCaptureStatusForSupportTicket")
 
-return function(value, p0) --[[ line: 15 | named "uploadCaptureAsset" ]]
+return function(value, p0)
 	-- upvalues: enableCaptureUploadForSupportTicketEngineFeature (ref), enableCheckUploadCaptureStatusForSupportTicketEngineFeature (ref)
 	if not enableCaptureUploadForSupportTicketEngineFeature or not enableCheckUploadCaptureStatusForSupportTicketEngineFeature then
 		return nil, Enum.UploadCaptureResult.UploadFailed
 	end
 	p0 = p0 or game:GetService("CaptureService")
-	local ok, status, var3 = pcall(function() --[[ line: 25 ]]
+	local ok, status, var3 = pcall(function()
 		-- upvalues: p0 (ref), value (ref)
 		return p0:StartUploadCaptureForSupportTicketAsync(value)
 	end)
@@ -15,7 +15,7 @@ return function(value, p0) --[[ line: 15 | named "uploadCaptureAsset" ]]
 	if ok and status == Enum.UploadCaptureResult.Success then
 		for _ = 1, 120 do
 			task.wait(5)
-			local ok_1, status_1, var4 = pcall(function() --[[ line: 38 ]]
+			local ok_1, status_1, var4 = pcall(function()
 				-- upvalues: p0 (ref), var3 (ref)
 				return p0:CheckUploadCaptureStatusForSupportTicketAsync(var3)
 			end)

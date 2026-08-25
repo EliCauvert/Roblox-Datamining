@@ -7,7 +7,7 @@ local enums = foundationModule.Enums
 local iconSize = enums.IconSize
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-return function(p0) --[[ line: 26 | named "ResellableInstancesLabel" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), enums (ref), iconSize (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy size-full-0",

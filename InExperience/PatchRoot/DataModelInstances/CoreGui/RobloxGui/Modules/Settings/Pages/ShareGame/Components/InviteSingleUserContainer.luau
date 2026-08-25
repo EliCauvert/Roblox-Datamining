@@ -31,19 +31,19 @@ local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local color = Color3.fromRGB(41, 41, 41)
 
-local var22 = function(p0) --[[ line: 52 ]]
+local var22 = function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), constantsModule (ref), gameInviteEvents (ref), inviteStatus (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), playersService (ref), getFFlagSingleUserInvitePageKeybindModule (ref), contextActionService (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), retrievalStatus (ref), color (ref), styledTextLabel (ref), var9 (ref), COLORS (ref), singleUserThumbnailModule (ref), button (ref), buttonType (ref)
 	local inviteUserId = p0.friends[tostring(p0.inviteUserId)]
 	local id = inviteUserId and p0.invites[inviteUserId.id]
 	local var24 = useStyle()
 	local var25, var26 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), constantsModule (copy), gameInviteEvents (copy)
 		if p0.promptMessage and p0.analytics then
 			p0.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CustomTextShown)
 		end
 	end, {})
-	local var27 = reactModule.useCallback(function() --[[ line: 66 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.closePage()
 		
@@ -51,12 +51,12 @@ local var22 = function(p0) --[[ line: 52 ]]
 			p0.onAfterClosePage()
 		end
 	end, { p0.closePage, p0.onAfterClosePage })
-	local var28 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), constantsModule (copy), gameInviteEvents (copy), var27 (ref)
 		p0.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CancelInvite)
 		var27()
 	end, { var27 })
-	local var29 = reactModule.useCallback(function() --[[ line: 86 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: var26 (ref), p0 (ref), id (ref), inviteStatus (copy), constantsModule (copy), gameInviteEvents (copy), inviteUserId (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), playersService (copy), var27 (ref)
 		var26(true)
 		local inviteUser = p0.inviteUser
@@ -67,7 +67,7 @@ local var22 = function(p0) --[[ line: 52 ]]
 			recipient = inviteUserId.id,
 			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p0.launchData ~= nil and p0.launchData ~= "" else nil
 		})
-		inviteUser(tostring(inviteUserId.id), analytics, p0.inviteMessageId, p0.launchData):andThen(function(p1) --[[ line: 102 ]]
+		inviteUser(tostring(inviteUserId.id), analytics, p0.inviteMessageId, p0.launchData):andThen(function(p1)
 			-- upvalues: var26 (copy), inviteUserId (copy), playersService (copy), analytics (ref), var27 (copy)
 			var26(false)
 			
@@ -85,23 +85,23 @@ local var22 = function(p0) --[[ line: 52 ]]
 	})
 	
 	if getFFlagSingleUserInvitePageKeybindModule() then
-		reactModule.useEffect(function() --[[ line: 136 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), contextActionService (copy), var29 (write), var28 (ref)
 			if p0.isVisible then
-				contextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, p2, _) --[[ line: 138 ]]
+				contextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, p2, _)
 					-- upvalues: var29 (copy)
 					if p2 == Enum.UserInputState.Begin then
 						var29()
 					end
 				end, false, Enum.KeyCode.ButtonA)
-				contextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, p3, _) --[[ line: 143 ]]
+				contextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, p3, _)
 					-- upvalues: var28 (copy)
 					if p3 == Enum.UserInputState.Begin then
 						var28()
 					end
 				end, false, Enum.KeyCode.ButtonB)
 				
-				return function() --[[ line: 148 ]]
+				return function()
 					-- upvalues: contextActionService (copy)
 					contextActionService:UnbindCoreAction("ProductPurchaseConfirmButtonBind")
 					contextActionService:UnbindCoreAction("ProductPurchaseCancelButtonBind")
@@ -205,17 +205,17 @@ local var22 = function(p0) --[[ line: 52 ]]
 	end
 end
 
-return roactRoduxModule.connect(function(p5) --[[ line: 280 ]]
+return roactRoduxModule.connect(function(p5)
 	-- upvalues: playersService (ref)
 	return {
 		friends = p5.Users,
 		friendsRetrievalStatus = playersService.LocalPlayer and p5.Friends.retrievalStatus[tostring(playersService.LocalPlayer.UserId)],
 		invites = p5.Invites
 	}
-end, function(p6) --[[ line: 287 ]]
+end, function(p6)
 	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), inviteUserIdToPlaceIdCustomizedModule (ref), constantsModule (ref), inviteUserIdToPlaceIdModule (ref)
 	return {
-		inviteUser = function(p7, p8, p9, p10) --[[ line: 289 ]]
+		inviteUser = function(p7, p8, p9, p10)
 			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), p6 (ref), inviteUserIdToPlaceIdCustomizedModule (copy), constantsModule (copy), inviteUserIdToPlaceIdModule (copy)
 			local var32 = httpRequestModule(httpRbxApiService)
 			local var33 = tostring(game.PlaceId)
@@ -223,7 +223,7 @@ end, function(p6) --[[ line: 287 ]]
 			return if getFFlagEnableNewInviteSendEndpointModule() then p6(inviteUserIdToPlaceIdCustomizedModule(var32, p7, var33, p8, constantsModule.Triggers.DeveloperSingle, p9, p10)) else p6(inviteUserIdToPlaceIdModule(var32, p7, var33))
 		end
 	}
-end)(function(p4) --[[ line: 310 ]]
+end)(function(p4)
 	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref), reactModule (ref), var22 (ref)
 	return renderWithCoreScriptsStyleProviderModule({ SingleUserInvite = reactModule.createElement(var22, p4) })
 end)

@@ -3,7 +3,7 @@ local resultModule = require(parent.Result)
 local promiseModule = require(parent.Promise)
 
 return {
-	Batch = function(p0, p1) --[[ line: 30 ]]
+	Batch = function(p0, p1)
 		-- upvalues: promiseModule (ref), resultModule (ref)
 		assert(type(p0) == "table", "PromiseUtilities expects a list of Promises!")
 		local var2 = 0
@@ -12,12 +12,12 @@ return {
 			assert(promiseModule.is(v), "PromiseUtilities expects a list of Promises!")
 			var2 += 1
 		end
-		return promiseModule.new(function(p2, _) --[[ line: 40 ]]
+		return promiseModule.new(function(p2, _)
 			-- upvalues: resultModule (copy), var2 (write), p0 (ref), p1 (ref)
 			local var3 = 0
 			local t = {}
 			
-			local function _(p3, p4, p5) --[[ line: 44 | named "promiseCompleted" ]]
+			local function _(p3, p4, p5)
 				-- upvalues: t (ref), resultModule (copy), var3 (write), var2 (copy), p2 (ref)
 				t[p3] = resultModule.new(p4, p5)
 				var3 += 1
@@ -31,7 +31,7 @@ return {
 				p2(t)
 			end
 			for i, v in pairs(p0) do
-				v:andThen(function(p6, ...) --[[ line: 58 ]]
+				v:andThen(function(p6, ...)
 					-- upvalues: i (ref), t (ref), resultModule (copy), var3 (write), var2 (copy), p2 (ref)
 					if select("#", ...) > 0 then
 						warn("Promises in PromiseUtilities.Batch should not return tuple")
@@ -42,7 +42,7 @@ return {
 					if var3 == var2 then
 						p2(t)
 					end
-				end, function(p7) --[[ line: 63 ]]
+				end, function(p7)
 					-- upvalues: i (ref), t (ref), resultModule (copy), var3 (write), var2 (copy), p2 (ref), p1 (copy)
 					t[i] = resultModule.new(false, p7)
 					var3 += 1
@@ -57,7 +57,7 @@ return {
 			end
 		end)
 	end,
-	CountResults = function(p8) --[[ line: 73 ]]
+	CountResults = function(p8)
 		local var5 = 0
 		local var6 = 0
 		

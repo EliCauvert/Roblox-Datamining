@@ -3,7 +3,7 @@ local receivedUserPresenceModule = require(userLib.Actions.ReceivedUserPresence)
 local updateFriendPresenceCounts = require(userLib.Parent.LegacyFriendsRodux).Actions.UpdateFriendPresenceCounts
 local webPresenceMapModule = require(userLib.Enum.WebPresenceMap)
 
-return function(p0, p1) --[[ line: 8 ]]
+return function(p0, p1)
 	-- upvalues: receivedUserPresenceModule (ref), webPresenceMapModule (ref), updateFriendPresenceCounts (ref)
 	for i, v in pairs(p0) do
 		local userId = p1:getState().Users[tostring(v.userId)]

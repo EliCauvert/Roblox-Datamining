@@ -10,10 +10,10 @@ local mergeFields = require(script.Parent.fields).mergeFields
 local mergeDirectives = require(script.Parent.directives).mergeDirectives
 local mergeNamedTypeArray = require(script.Parent["merge-named-type-array"]).mergeNamedTypeArray
 
-function t.mergeType(p0, p1, p2) --[[ line: 29 ]]
+function t.mergeType(p0, p1, p2)
 	-- upvalues: boolean (ref), mergeFields (ref), mergeDirectives (ref), mergeNamedTypeArray (ref), error (ref), object (ref), kind (ref)
 	if p1 then
-		local ok, status = pcall(function() --[[ line: 41 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p0 (ref), boolean (copy), p1 (ref), p2 (ref), mergeFields (copy), mergeDirectives (copy), mergeNamedTypeArray (copy)
 			return {
 				name = p0.name,

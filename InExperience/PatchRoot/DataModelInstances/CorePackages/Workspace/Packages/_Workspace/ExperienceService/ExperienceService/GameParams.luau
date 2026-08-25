@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.GameProtocolTypes)
 local t = {
-	new = function() --[[ line: 9 ]]
+	new = function()
 		return { referralPage = "LuaChat" }
 	end
 }
 
-function t.fromPlaceId(p0, p1) --[[ line: 17 ]]
+function t.fromPlaceId(p0, p1)
 	-- upvalues: t (ref)
 	local var1 = t.new()
 	var1.placeId = p0
@@ -14,7 +14,7 @@ function t.fromPlaceId(p0, p1) --[[ line: 17 ]]
 	return var1
 end
 
-function t.fromUserId(p2, p3) --[[ line: 26 ]]
+function t.fromUserId(p2, p3)
 	-- upvalues: t (ref)
 	local var2 = t.new()
 	var2.userId = p2
@@ -23,7 +23,7 @@ function t.fromUserId(p2, p3) --[[ line: 26 ]]
 	return var2
 end
 
-function t.fromPlaceInstance(p4, p5) --[[ line: 33 ]]
+function t.fromPlaceInstance(p4, p5)
 	-- upvalues: t (ref)
 	local var3 = t.new()
 	var3.placeId = p4
@@ -32,7 +32,7 @@ function t.fromPlaceInstance(p4, p5) --[[ line: 33 ]]
 	return var3
 end
 
-function t.fromConversationId(p6, p7) --[[ line: 42 ]]
+function t.fromConversationId(p6, p7)
 	-- upvalues: t (ref)
 	local var4 = t.new()
 	var4.placeId = p6
@@ -41,7 +41,7 @@ function t.fromConversationId(p6, p7) --[[ line: 42 ]]
 	return var4
 end
 
-function t.fromParams(p8) --[[ line: 51 ]]
+function t.fromParams(p8)
 	-- upvalues: t (ref)
 	local var5 = t.new()
 	

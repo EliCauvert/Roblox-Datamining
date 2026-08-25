@@ -7,17 +7,17 @@ local t = {}
 local var4 = 0
 
 return {
-	bind = function(p0, p1) --[[ line: 23 ]]
+	bind = function(p0, p1)
 		-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), var4 (write), t (ref), constantsModule (ref), collectionService (ref)
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
 			local isVideo = p1.mediaType == "video"
 			
 			if p1.mediaType ~= "image" and not isVideo then
-				return function() --[[ line: 28 ]] end
+				return function() end
 			elseif isVideo ~= (p1.videoPlaybackStateRef ~= nil) then
-				return function() --[[ line: 31 ]] end
+				return function() end
 			elseif p1.isFullscreen == true and not isVideo then
-				return function() --[[ line: 34 ]] end
+				return function() end
 			end
 		end
 		var4 += 1
@@ -26,7 +26,7 @@ return {
 		p0:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, var6)
 		collectionService:AddTag(p0, constantsModule.CandidateTag)
 		
-		return function() --[[ line: 43 ]]
+		return function()
 			-- upvalues: p0 (ref), constantsModule (copy), var6 (ref), collectionService (copy), t (copy)
 			if p0:GetAttribute(constantsModule.ViewabilityTargetIdAttribute) == var6 then
 				collectionService:RemoveTag(p0, constantsModule.CandidateTag)
@@ -35,17 +35,17 @@ return {
 			t[var6] = nil
 		end
 	end,
-	get = function(p2) --[[ line: 53 ]]
+	get = function(p2)
 		-- upvalues: t (ref)
 		return t[p2]
 	end,
-	_clear = function() --[[ line: 57 ]]
+	_clear = function()
 		-- upvalues: t (ref)
 		for i in t do
 			t[i] = nil
 		end
 	end,
-	_size = function() --[[ line: 63 ]]
+	_size = function()
 		-- upvalues: t (ref)
 		local var7 = 0
 		

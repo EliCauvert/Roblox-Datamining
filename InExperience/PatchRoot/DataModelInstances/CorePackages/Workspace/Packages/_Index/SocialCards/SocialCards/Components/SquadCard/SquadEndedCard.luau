@@ -18,7 +18,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 local useCanAccessPartyModule = require(parent.Squads.useCanAccessParty)
 
-return function(p0) --[[ line: 33 | named "SquadEndedCard" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useLocalization (ref), useNavigation (ref), useTokens (ref), useCurrentSquadId (ref), useCurrentSquadParentChannelId (ref), reactModule (ref), squadExternalContractContext (ref), useCanAccessPartyModule (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), squadButtonClickIntentionEnum (ref), eventNamesModule (ref), squadButtonSourceEnum (ref), foundationModule (ref), leaveSquad (ref), squadPromptType (ref)
 	local var6 = useDispatch()
 	local var7 = useLocalization({
@@ -33,15 +33,15 @@ return function(p0) --[[ line: 33 | named "SquadEndedCard" ]]
 	local var13 = var12.useParentChannelHasGroupUp(p0.conversationId)
 	local conversationId = useCanAccessPartyModule() and var12.useParentChannelHasSquadAccess(p0.conversationId)
 	local var15 = if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var12.useIsChatEnabled() else true
-	local var16 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref), p0 (ref)
 		return var11 == p0.conversationId
 	end, { var11, p0.conversationId })
-	local var17 = reactModule.useMemo(function() --[[ line: 60 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), squadButtonClickIntentionEnum (copy), var13 (ref)
 		return if var16 then squadButtonClickIntentionEnum.View elseif var13 then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
 	end, { var16, var13 })
-	local var18 = reactModule.useCallback(function() --[[ line: 72 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), eventNamesModule (copy), p0 (ref), squadButtonSourceEnum (copy), var10 (ref), var17 (ref)
 		var12.fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
 			conversationId = p0.conversationId,
@@ -69,12 +69,12 @@ return function(p0) --[[ line: 33 | named "SquadEndedCard" ]]
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		selection = { Selectable = true },
-		onActivated = if conversationId then function() --[[ line: 104 ]]
+		onActivated = if conversationId then function()
 			-- upvalues: var18 (ref), var10 (ref), p0 (ref), var11 (ref), var6 (ref), leaveSquad (copy), squadPromptType (copy), var12 (ref), var8 (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), var15 (ref)
 			var18()
 			
 			if var10 and p0.conversationId ~= var11 then
-				var6(leaveSquad(squadPromptType.JoinAnotherSquad, var12.setSquadPrompt, function() --[[ line: 112 ]]
+				var6(leaveSquad(squadPromptType.JoinAnotherSquad, var12.setSquadPrompt, function()
 					-- upvalues: var8 (copy), p0 (copy)
 					var8.navigate("SquadLobby", { conversationId = p0.conversationId })
 				end, var12.squadLocation, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var15 else true))

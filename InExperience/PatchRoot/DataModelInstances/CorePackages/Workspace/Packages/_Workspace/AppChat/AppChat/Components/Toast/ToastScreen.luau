@@ -8,11 +8,11 @@ local loggerModule = require(script.Parent.Logger)
 local toastScreen = roactModule.PureComponent:extend("ToastScreen")
 toastScreen.defaultProps = { navigation = nil }
 
-function toastScreen.init(p0) --[[ line: 17 ]]
+function toastScreen.init(p0)
 	-- upvalues: images (ref), iconSize (ref)
 	p0.hasToastChanged = false
 	
-	function p0.getToastProps(p1) --[[ line: 20 ]]
+	function p0.getToastProps(p1)
 		-- upvalues: images (copy), iconSize (copy), p0 (ref)
 		local toastContent = p1.toastContent
 		
@@ -24,7 +24,7 @@ function toastScreen.init(p0) --[[ line: 17 ]]
 				iconImage = if p1.shouldHideIcon then nil else toastContent.iconImage or images["icons/status/alert"],
 				iconSize = toastContent.iconSize or Vector2.new(iconSize.Regular, iconSize.Regular),
 				swipeUpDismiss = toastContent.swipeUpDismiss,
-				onAppeared = function() --[[ line: 33 ]]
+				onAppeared = function()
 					-- upvalues: toastContent (ref), p0 (copy)
 					if toastContent.onAppeared then
 						toastContent.onAppeared()
@@ -32,7 +32,7 @@ function toastScreen.init(p0) --[[ line: 17 ]]
 					p0.hasToastChanged = false
 				end,
 				onActivated = toastContent.onActivated,
-				onDismissed = function() --[[ line: 40 ]]
+				onDismissed = function()
 					-- upvalues: toastContent (ref), p0 (copy)
 					if toastContent.onDismissed then
 						toastContent.onDismissed()
@@ -52,18 +52,18 @@ function toastScreen.init(p0) --[[ line: 17 ]]
 	end
 end
 
-function toastScreen.render(p2) --[[ line: 61 ]]
+function toastScreen.render(p2)
 	-- upvalues: roactModule (ref), toast (ref)
 	assert(type(p2.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
 	return roactModule.createElement(toast, p2.getToastProps(p2.props.navigation.getParam("toastProps", {})))
 end
 
-function toastScreen.didUpdate(p3, _, _) --[[ line: 69 ]]
+function toastScreen.didUpdate(p3, _, _)
 	p3.hasToastChanged = true
 end
 
-function toastScreen.didMount(_) --[[ line: 73 ]]
+function toastScreen.didMount(_)
 	-- upvalues: loggerModule (ref)
 	loggerModule:info("{screen} mounted")
 end

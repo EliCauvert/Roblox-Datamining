@@ -6,7 +6,7 @@ local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packag
 local textButton = UIBloxModule.App.Button.TextButton
 local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
 
-local var5 = function() --[[ line: 22 ]] end
+local var5 = function() end
 
 reportActionSelection.defaultProps = {
 	isMuted = true,
@@ -33,13 +33,13 @@ reportActionSelection.validateProps = tModule.strictInterface({
 	uiScale = tModule.optional(tModule.number)
 })
 
-function reportActionSelection.init(p0) --[[ line: 50 ]]
-	function p0.onCancelActivated() --[[ line: 51 ]]
+function reportActionSelection.init(p0)
+	function p0.onCancelActivated()
 		-- upvalues: p0 (ref)
 		p0.props.onCancelActivated()
 	end
 	
-	function p0.onConfirmActivated() --[[ line: 55 ]]
+	function p0.onConfirmActivated()
 		-- upvalues: p0 (ref)
 		p0.props.onConfirmActivated()
 	end
@@ -63,9 +63,9 @@ function reportActionSelection.init(p0) --[[ line: 50 ]]
 	})
 end
 
-function reportActionSelection.render(p1) --[[ line: 79 ]]
+function reportActionSelection.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), roactModule (ref), textButton (ref), UIBloxModule (ref)
-	return withFoundationOrUIBloxStyle(function(p2) --[[ line: 80 ]]
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				SystemPrimaryContent = {
@@ -89,7 +89,7 @@ function reportActionSelection.render(p1) --[[ line: 79 ]]
 				}
 			}
 		}
-	end, function(p3) --[[ line: 104 ]]
+	end, function(p3)
 		-- upvalues: roactModule (copy), p1 (ref), textButton (copy), UIBloxModule (copy)
 		local baseSize = p3.Font.BaseSize
 		

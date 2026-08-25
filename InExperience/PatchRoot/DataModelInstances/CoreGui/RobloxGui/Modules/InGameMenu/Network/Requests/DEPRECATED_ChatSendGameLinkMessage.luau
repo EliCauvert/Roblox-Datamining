@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local urlModule = require(script.Parent.Parent.Parent.Network.Url)
 
-return function(p0, p1, p2, p3) --[[ line: 7 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: httpService (ref), urlModule (ref)
 	assert(p0, "requestImpl is required")
 	assert(p1, "conversationId is required")

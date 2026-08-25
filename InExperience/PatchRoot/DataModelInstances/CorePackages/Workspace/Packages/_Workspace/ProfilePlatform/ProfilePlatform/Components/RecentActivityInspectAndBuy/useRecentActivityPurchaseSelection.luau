@@ -8,11 +8,11 @@ local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
 local getPriceStatus = inspectAvatarUtilsModule.getPriceStatus
 local priceStatusEnum = inspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p0) --[[ line: 33 | named "useRecentActivityPurchaseSelection" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), isItemPurchasable (ref), dashModule (ref), inspectAvatarUtilsModule (ref), getPriceStatus (ref), priceStatusEnum (ref)
 	local var4, var5 = reactModule.useState({})
 	local var6 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), isItemPurchasable (copy), var6 (ref), var5 (ref), dashModule (copy)
 		if #p0 == 0 then return end
 		local t = {}
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 33 | named "useRecentActivityPurchaseSelection" ]
 			end
 		end
 		if var8 then
-			var5(function(p1) --[[ line: 56 ]]
+			var5(function(p1)
 				-- upvalues: dashModule (copy), t (ref)
 				return dashModule.join(p1, t)
 			end)
@@ -39,14 +39,14 @@ return function(p0) --[[ line: 33 | named "useRecentActivityPurchaseSelection" ]
 	
 	return {
 		selectedItems = var4,
-		onToggleItem = reactModule.useCallback(function(p2) --[[ line: 61 ]]
+		onToggleItem = reactModule.useCallback(function(p2)
 			-- upvalues: var5 (ref), dashModule (copy)
-			var5(function(p3) --[[ line: 62 ]]
+			var5(function(p3)
 				-- upvalues: dashModule (copy), p2 (ref)
 				return dashModule.join(p3, { [p2] = not p3[p2] })
 			end)
 		end, {}),
-		purchaseData = reactModule.useMemo(function() --[[ line: 67 ]]
+		purchaseData = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), var4 (ref), isItemPurchasable (copy), inspectAvatarUtilsModule (copy), getPriceStatus (copy), priceStatusEnum (copy)
 			local t = {}
 			local var10 = 0

@@ -9,13 +9,13 @@ local commonIconModule = require(chrome.Integrations.CommonIcon)
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local var5 = if isSpatial() then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
 local var6 = signal.new()
-local var7 = mappedSignal.new(var6, function() --[[ line: 22 ]]
+local var7 = mappedSignal.new(var6, function()
 	-- upvalues: VRHub (ref)
 	return VRHub.SafetyBubble and VRHub.SafetyBubble.enabled
 end)
 
 if VRHub.SafetyBubble then
-	VRHub.SafetyBubble.Toggled.Event:Connect(function() --[[ line: 27 ]]
+	VRHub.SafetyBubble.Toggled.Event:Connect(function()
 		-- upvalues: var6 (ref)
 		var6:fire()
 	end)
@@ -25,13 +25,13 @@ return serviceModule:register({
 	label = "CoreScripts.VRFTUX.Heading.SafetyBubble.Title",
 	initialAvailability = var5,
 	isActivated = var7,
-	activated = function() --[[ line: 37 ]]
+	activated = function()
 		-- upvalues: VRHub (ref), rbxAnalyticsService (ref)
 		VRHub:ToggleSafetyBubble()
 		rbxAnalyticsService:ReportCounter("VR-BottomBar-Safety")
 	end,
 	components = {
-		Icon = function() --[[ line: 42 ]]
+		Icon = function()
 			-- upvalues: commonIconModule (ref), var7 (ref)
 			return commonIconModule("rbxasset://textures/ui/MenuBar/icon_safety_off.png", "rbxasset://textures/ui/MenuBar/icon_safety_on.png", var7)
 		end

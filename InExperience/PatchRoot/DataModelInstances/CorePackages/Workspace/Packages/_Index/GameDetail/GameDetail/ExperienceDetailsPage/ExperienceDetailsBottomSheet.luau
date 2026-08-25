@@ -58,17 +58,17 @@ local fFlagLuaAppSduiEdpRouteAwareSessionRemoval = sharedFlagsModule.FFlagLuaApp
 local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
 local fFlagLuaAppEdpBottomSheetPeekViewEvents = sharedFlagsModule.FFlagLuaAppEdpBottomSheetPeekViewEvents
 
-local function _(p0) --[[ line: 79 | named "snapPointIndexFor" ]]
+local function _(p0)
 	return if p0 then 2 else 1
 end
 
-return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBottomSheet" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: experienceDetailsPageUtilsModule (ref), getExperienceDetailsPageKeyModule (ref), usePageScopeRef (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), EDPTTIConstants (ref), getSduiClientPageScope (ref), useEdpFunctionallyReadyLoggerModule (ref), useTokens (ref), useNavigation (ref), useRoactService (ref), appSessionService (ref), useDispatch (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), appEventIngestService (ref), fFlagLuaAppSduiEdpRouteAwareSessionRemoval (ref), useGetCurrentLegacyRoute (ref), setTabBarVisible (ref), fFlagEnableExperienceDetailsBottomSheetTopBar (ref), useTopBarHeight (ref), useScreenSize (ref), useDeviceInsets (ref), getSafeAreaSize (ref), discoveryTypesModule (ref), useEntrySurfacing (ref), experienceDetailsPageConstantsModule (ref), useStore (ref), peekViewState (ref), gameDetailsPeekViewEvents (ref), setGameDetailsPeekViewStateModule (ref), hasPageInCurrentRoute (ref), appPage (ref), fFlagEnableMotionJitterMetric (ref), useMotionJitterMetricModule (ref), removeGameDetailSessionIfDepartedModule (ref), sessionType (ref), fetchExperienceDetailsPageModule (ref), useUiStatus (ref), uiStatus (ref), dataHydrationModule (ref), overlayProvider (ref), experienceDetailsBottomSheetTopBarModule (ref), sheet (ref), foundationModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), compositionTags (ref), experienceDetailsFallbackFeedModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), experienceDetailsPersistentActionBarModule (ref), sduiFeatureEntryPoint (ref), experienceDetailsFallbackActionBarModule (ref)
 	local universeId = experienceDetailsPageUtilsModule.getUniverseId(p1)
 	local onPeekViewClosed = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "onPeekViewClosed")
 	local var24 = getExperienceDetailsPageKeyModule(universeId)
 	usePageScopeRef(var24)
-	local var25 = reactModule.useMemo(function() --[[ line: 91 ]]
+	local var25 = reactModule.useMemo(function()
 		-- upvalues: experienceDetailsPageUtilsModule (copy), p1 (ref), sduiSurfaceLoadTimeTracker (copy), var24 (ref), EDPTTIConstants (copy), getSduiClientPageScope (copy)
 		local var63 = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "pageTimer") or sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(var24, {
 			manualSurfaceReady = true,
@@ -89,14 +89,14 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 	local var29 = useDispatch()
 	local var30 = if fFlagLuaAppEdpBottomSheetPeekViewEvents then useRoactService(appEventIngestService) else nil
 	local var31 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval or fFlagLuaAppEdpBottomSheetPeekViewEvents then useGetCurrentLegacyRoute() else nil
-	reactModule.useEffect(function() --[[ line: 122 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (ref), setTabBarVisible (copy)
 		var29(setTabBarVisible(false))
 	end, { var29 })
 	local referralSource = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "referralSource")
 	local experienceJoinData = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "experienceJoinData")
 	local placeIdOverride = experienceDetailsPageUtilsModule.getFromPropsOrNavigationParams(p1, "placeIdOverride")
-	reactModule.useEffect(function() --[[ line: 130 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getSduiClientPageScope (copy), var24 (ref), referralSource (ref), experienceJoinData (ref), placeIdOverride (ref)
 		local var64 = getSduiClientPageScope(var24)
 		var64.set("referralSource", referralSource)
@@ -118,7 +118,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 	local var41 = reactModule.useRef(nil)
 	local var42, var43 = reactModule.useState(nil)
 	local var44, var45 = reactModule.useState(discoveryTypesModule.Constants.GAME_DETAILS_ACTION_BAR_HEIGHT)
-	local var46 = reactModule.useCallback(function(p2) --[[ line: 154 ]]
+	local var46 = reactModule.useCallback(function(p2)
 		-- upvalues: var45 (ref)
 		local y = p2.AbsoluteSize.Y
 		
@@ -128,7 +128,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 	end, {})
 	local var47 = useEntrySurfacing(var24, experienceDetailsPageConstantsModule.EDP_FEED_IDENTIFIER, "peekView")
 	local var48 = if var47 then var47.heightOffset else 0
-	local var49 = reactModule.useMemo(function() --[[ line: 165 ]]
+	local var49 = reactModule.useMemo(function()
 		-- upvalues: minValue (ref), var44 (ref), var48 (ref), fFlagEnableExperienceDetailsBottomSheetTopBar (copy), var36 (ref), var37 (ref), var35 (write), var38 (ref)
 		return {
 			minValue + var44 + var48 + 25,
@@ -145,7 +145,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 		local var53 = useStore()
 		local analyticsSource = experienceDetailsPageUtilsModule.getAnalyticsSource(p1)
 		local tilePositionIndex = experienceDetailsPageUtilsModule.getTilePositionIndex(p1)
-		local var56 = reactModule.useMemo(function() --[[ line: 201 ]]
+		local var56 = reactModule.useMemo(function()
 			-- upvalues: var53 (ref)
 			return var53:getState().GameDetailsPeekView.viewState
 		end, {})
@@ -155,7 +155,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 		else
 			local _ = mountAsFullView == true
 		end
-		reactModule.useEffect(function() --[[ line: 210 ]]
+		reactModule.useEffect(function()
 			-- upvalues: universeId (ref), var51 (write), var56 (ref), peekViewState (copy), gameDetailsPeekViewEvents (copy), var30 (write), analyticsSource (ref), tilePositionIndex (ref), experienceDetailsPageConstantsModule (copy), var29 (ref), setGameDetailsPeekViewStateModule (copy), hasPageInCurrentRoute (copy), var31 (write), appPage (copy)
 			if universeId and not var51 then
 				local var65 = if var56 == peekViewState.Brief then "SwitchGame" elseif var56 == peekViewState.Closed then "OpenPeekView" else nil
@@ -166,7 +166,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 			end
 			var29(setGameDetailsPeekViewStateModule(if var51 then peekViewState.Full else peekViewState.Brief))
 			
-			return function() --[[ line: 233 ]]
+			return function()
 				-- upvalues: hasPageInCurrentRoute (copy), var31 (copy), appPage (copy), var29 (copy), setGameDetailsPeekViewStateModule (copy), peekViewState (copy)
 				if not hasPageInCurrentRoute(var31(), appPage.GameDetail) then
 					var29(setGameDetailsPeekViewStateModule(peekViewState.Closed))
@@ -174,7 +174,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 			end
 		end, {})
 		local var57 = reactModule.useRef(if var51 then 2 else 1)
-		var52 = reactModule.useCallback(function(_, p3) --[[ line: 243 ]]
+		var52 = reactModule.useCallback(function(_, p3)
 			-- upvalues: var57 (ref), var27 (ref), var29 (ref), setGameDetailsPeekViewStateModule (copy), peekViewState (copy), universeId (ref), gameDetailsPeekViewEvents (copy), var30 (write), analyticsSource (ref), tilePositionIndex (ref), experienceDetailsPageConstantsModule (copy)
 			local current = var57.current
 			var57.current = p3
@@ -194,7 +194,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 	if fFlagEnableMotionJitterMetric then
 		useMotionJitterMetricModule(var41, experienceDetailsPageConstantsModule.EDP_BOTTOM_SHEET_SURFACE, false, "AbsolutePosition")
 	end
-	local var59 = reactModule.useCallback(function() --[[ line: 279 ]]
+	local var59 = reactModule.useCallback(function()
 		-- upvalues: var27 (ref), fFlagLuaAppSduiEdpRouteAwareSessionRemoval (copy), var31 (write), onPeekViewClosed (ref), removeGameDetailSessionIfDepartedModule (copy), var28 (ref), sessionType (copy)
 		if var27.isFocused() then
 			local var66 = if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var31() else nil
@@ -218,7 +218,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 		onPeekViewClosed,
 		if fFlagLuaAppSduiEdpRouteAwareSessionRemoval then var31 else nil
 	})
-	local var60 = reactModule.useCallback(function() --[[ line: 301 ]]
+	local var60 = reactModule.useCallback(function()
 		-- upvalues: var27 (ref), onPeekViewClosed (ref), appPage (copy), var28 (ref), sessionType (copy)
 		if var27.isFocused() then
 			if onPeekViewClosed and typeof(onPeekViewClosed) == "function" then
@@ -232,17 +232,17 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 		end
 	end, { var27, var28, onPeekViewClosed })
 	local var61 = if fFlagLuaAppEdpBottomSheetPeekViewEvents then var60 elseif var51 then var59 else var60
-	reactModule.useEffect(function() --[[ line: 322 ]]
+	reactModule.useEffect(function()
 		-- upvalues: universeId (ref), var25 (ref), fetchExperienceDetailsPageModule (copy)
 		if universeId and var25 then
 			fetchExperienceDetailsPageModule(universeId, var25)
 		end
 	end, { universeId, var25 })
 	local var62 = useUiStatus(var24)
-	reactModule.useEffect(function() --[[ line: 329 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var62 (ref), uiStatus (copy), universeId (ref), dataHydrationModule (copy)
 		if var62 == uiStatus.Error and universeId then
-			dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId, function(p4) --[[ line: 331 ]]
+			dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId, function(p4)
 				return if p4 ~= nil then p4.creator == nil else true
 			end)
 			dataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(universeId)
@@ -301,7 +301,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "ExperienceDetailsBot
 								isSmallScreen = true,
 								launchSource = "LuaGameCard",
 								universeId = universeId,
-								refresh = reactModule.useCallback(function() --[[ line: 338 ]]
+								refresh = reactModule.useCallback(function()
 									-- upvalues: universeId (ref), var25 (ref), fetchExperienceDetailsPageModule (copy)
 									if universeId and var25 then
 										fetchExperienceDetailsPageModule(universeId, var25, true)

@@ -13,13 +13,13 @@ itemTileFooter.validateProps = tModule.strictInterface({
 	isOwned = tModule.optional(tModule.boolean)
 })
 
-function itemTileFooter.render(p0) --[[ line: 30 ]]
+function itemTileFooter.render(p0)
 	-- upvalues: imagesModule (ref), withStyleModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref)
 	local priceText = p0.props.priceText
 	local isOwned = p0.props.isOwned
 	local var7 = if isOwned then imagesModule["icons/status/item/owned"] else imagesModule["icons/common/robux_small"]
 	
-	return withStyleModule(function(p1) --[[ line: 38 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: var7 (write), imagesModule (copy), priceText (ref), isOwned (ref), roactModule (copy), skeleton (copy), imageSetComponentModule (copy)
 		local font = p1.Font.SubHeader1.Font
 		local var8 = p1.Font.BaseSize * p1.Font.SubHeader1.RelativeSize

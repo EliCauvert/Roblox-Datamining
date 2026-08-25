@@ -18,9 +18,9 @@ local list = {
 	Enum.AssetType.EyelashAccessory
 }
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 56 | named "validateBundleReadyForUpload" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: promiseModule (ref), fixUpPreValidationModule (ref), createUGCBodyPartFoldersModule (ref), list (ref), httpService (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref), constantsInterfaceModule (ref), validateFullBodyModule (ref)
-	p3 = p3 or function() --[[ line: 64 ]] end
+	p3 = p3 or function() end
 	assert(p3 ~= nil, "Luau")
 	
 	if not p0:IsA("Model") then
@@ -64,7 +64,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 56 | named "validateBundleRea
 			end
 		end
 	end
-	table.sort(t_1, function(p6, p7) --[[ line: 141 ]]
+	table.sort(t_1, function(p6, p7)
 		-- upvalues: list (copy)
 		return (table.find(list, p6.assetType) or 1e999) < (table.find(list, p7.assetType) or 1e999)
 	end)
@@ -72,7 +72,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 56 | named "validateBundleRea
 	p3(t_2)
 	local var15 = httpService:GenerateGUID()
 	
-	return promiseModule.each(t_1, function(p9, p10) --[[ line: 157 ]]
+	return promiseModule.each(t_1, function(p9, p10)
 		-- upvalues: p4 (ref), p5 (ref), createEditableInstancesForContextModule (copy), validateInternalModule (copy), legacyValidationAdapterModule (copy), var15 (ref), destroyEditableInstancesModule (copy), t_2 (write), p3 (write)
 		if p9.status == "finished" then return end
 		local var34, var35
@@ -121,10 +121,10 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 56 | named "validateBundleRea
 		t_2.pieces = table.clone(t_2.pieces)
 		t_2.pieces[p10].status = "finished"
 		p3(t_2)
-	end):andThen(function() --[[ line: 222 ]]
+	end):andThen(function()
 		-- upvalues: p2 (ref), constantsInterfaceModule (copy), t_2 (write), p4 (ref), p5 (ref), createEditableInstancesForContextModule (copy), validateFullBodyModule (copy), legacyValidationAdapterModule (copy), var15 (ref), destroyEditableInstancesModule (copy), p3 (write)
 		if p2 == "Body" then
-			local function createFullBodyData(p8) --[[ line: 224 ]]
+			local function createFullBodyData(p8)
 				-- upvalues: constantsInterfaceModule (copy)
 				local t = {}
 				
@@ -186,7 +186,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 56 | named "validateBundleRea
 			end
 			p3(t_2)
 		end
-	end):andThen(function() --[[ line: 303 ]]
+	end):andThen(function()
 		-- upvalues: t_2 (write)
 		return t_2
 	end)

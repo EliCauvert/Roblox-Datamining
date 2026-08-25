@@ -5,7 +5,7 @@
 	["'"] = "&apos;"
 }
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: t (ref)
 	local var1 = p0:gsub("&", "&amp;")
 	

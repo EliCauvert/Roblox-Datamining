@@ -6,7 +6,7 @@ local var3 = observableValue.new(Vector2.new(0, 0))
 local var4 = observableValue.new(false)
 local var5 = nil
 
-function createViewportInfo(p0) --[[ line: 25 ]]
+function createViewportInfo(p0)
 	-- upvalues: userInputService (ref)
 	local var7 = p0.X < p0.Y
 	local platform = userInputService:GetPlatform()
@@ -22,17 +22,17 @@ end
 
 local var6 = observableValue.new(createViewportInfo(Vector2.zero))
 
-function updateViewportSize(p1) --[[ line: 39 ]]
+function updateViewportSize(p1)
 	-- upvalues: var3 (ref), var6 (ref)
 	local vector2 = Vector2.new(p1.X, p1.Y)
 	var3:set(vector2)
 	var6:set(createViewportInfo(vector2))
 end
 
-function setCurrentCamera(value) --[[ line: 45 ]]
+function setCurrentCamera(value)
 	-- upvalues: var5 (write), userInputService (ref), var4 (ref)
 	if var5 then
-		pcall(function() --[[ line: 47 ]]
+		pcall(function()
 			-- upvalues: var5 (copy)
 			var5:Disconnect()
 		end)
@@ -41,7 +41,7 @@ function setCurrentCamera(value) --[[ line: 45 ]]
 	if value then
 		local platform = userInputService:GetPlatform()
 		var4:set(if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true)
-		var5 = value:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 56 ]]
+		var5 = value:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 			-- upvalues: value (ref)
 			updateViewportSize(value.ViewportSize)
 		end)
@@ -49,7 +49,7 @@ function setCurrentCamera(value) --[[ line: 45 ]]
 	end
 end
 
-workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 63 ]]
+workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	-- upvalues: workspaceService (ref)
 	setCurrentCamera(workspaceService.CurrentCamera)
 end)
@@ -59,7 +59,7 @@ return {
 	screenSize = var3,
 	mobileDevice = var4,
 	viewport = var6,
-	isSmallTouchScreen = function() --[[ line: 72 ]]
+	isSmallTouchScreen = function()
 		-- upvalues: var3 (ref), userInputService (ref)
 		local var12 = var3:get()
 		

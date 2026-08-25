@@ -6,21 +6,21 @@ local inExperienceTransferFlowModule = require(currencyTransfers.Flows.InExperie
 local inExperienceTransferUpsellAppModule = require(currencyTransfers.Components.InExperienceTransferUpsellApp)
 local useInExperienceTransferListenerEffectModule = require(currencyTransfers.Hooks.useInExperienceTransferListenerEffect)
 
-return function() --[[ line: 10 | named "InExperienceTransferApp" ]]
+return function()
 	-- upvalues: reactModule (ref), useInExperienceTransferListenerEffectModule (ref), inExperienceTransferFlowModule (ref), sharedFlagsModule (ref), inExperienceTransferUpsellAppModule (ref)
 	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useCallback(function() --[[ line: 24 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		var7(nil)
 	end, {})
-	useInExperienceTransferListenerEffectModule(reactModule.useCallback(function(p0) --[[ line: 13 ]]
+	useInExperienceTransferListenerEffectModule(reactModule.useCallback(function(p0)
 		-- upvalues: var7 (ref)
-		var7(function(p1) --[[ line: 16 ]]
+		var7(function(p1)
 			-- upvalues: p0 (ref)
 			return if p1 == nil then p0 else p1
 		end)
 	end, {}))
-	local var9 = reactModule.useMemo(function() --[[ line: 33 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: var6 (ref), inExperienceTransferFlowModule (copy), var8 (ref)
 		return if var6 == nil then nil else inExperienceTransferFlowModule({ initiateResponse = var6, onClose = var8 })
 	end, { var6, var8 })

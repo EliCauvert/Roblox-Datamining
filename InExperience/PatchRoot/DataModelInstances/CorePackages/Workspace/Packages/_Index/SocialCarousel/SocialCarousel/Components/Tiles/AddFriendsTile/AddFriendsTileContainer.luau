@@ -20,14 +20,14 @@ local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnect
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var13 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0) --[[ line: 31 | named "AddFriendsTileContainer" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useDispatch (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselContextModule (ref), useNewFriendRequestsCountModule (ref), reactModule (ref), socialStopwatchModule (ref), fFlagCreateConnectionsHub (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var13 (ref), navigateDown (ref), constantsModule (ref), addFriendsTileModule (ref), cryoModule (ref)
 	local var14 = useNavigation()
 	local var15 = useDispatch()
 	local var16 = useSocialCarouselAnalyticsModule()
 	local var17 = useSocialCarouselContextModule()
 	local var18 = useNewFriendRequestsCountModule()
-	local var19 = reactModule.useCallback(function() --[[ line: 37 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), p0 (ref), socialStopwatchModule (copy), fFlagCreateConnectionsHub (copy), var14 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var13 (copy), var15 (ref), navigateDown (copy)
 		var16.addFriendsPressed(p0.index)
 		socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.AFPUserTileLoadFromHomeCarousel)
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 31 | named "AddFriendsTileContainer" ]]
 		end
 		var15(navigateDown({ name = appPage.AddFriendsPage }))
 	end, { var15, var14 })
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), constantsModule (copy)
 		var17.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.ADD_FRIENDS)
 	end, {})

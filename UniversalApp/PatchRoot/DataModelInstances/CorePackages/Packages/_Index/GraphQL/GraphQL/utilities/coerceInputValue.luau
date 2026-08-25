@@ -28,12 +28,12 @@ local isNonNullType = definitionModule.isNonNullType
 local coerceInputValueImpl = nil
 local defaultOnError = nil
 
-local function coerceInputValue(p0, p1, p2) --[[ line: 55 ]]
+local function coerceInputValue(p0, p1, p2)
 	-- upvalues: defaultOnError (write), coerceInputValueImpl (write)
 	return coerceInputValueImpl(p0, p1, p2 or defaultOnError)
 end
 
-defaultOnError = function(p3, p4, p5) --[[ line: 60 | named "defaultOnError" ]]
+defaultOnError = function(p3, p4, p5)
 	-- upvalues: inspect (ref), printPathArray (ref)
 	local text = "Invalid value " .. inspect(p4)
 	
@@ -44,7 +44,7 @@ defaultOnError = function(p3, p4, p5) --[[ line: 60 | named "defaultOnError" ]]
 	error(p5)
 end
 
-coerceInputValueImpl = function(p6, p7, p8, p9) --[[ line: 69 | named "coerceInputValueImpl" ]]
+coerceInputValueImpl = function(p6, p7, p8, p9)
 	-- upvalues: isNonNullType (ref), isNotNillish (ref), coerceInputValueImpl (write), pathToArray (ref), graphQLError (ref), inspect (ref), isNillish (ref), nullModule (ref), isListType (ref), isIteratableObject (ref), array (ref), addPath (ref), isInputObjectType (ref), isObjectLike (ref), object (ref), suggestionList (ref), didYouMean (ref), isLeafType (ref), instanceOfModule (ref), invariant (ref)
 	if isNonNullType(p7) then
 		if isNotNillish(p6) then
@@ -58,7 +58,7 @@ coerceInputValueImpl = function(p6, p7, p8, p9) --[[ line: 69 | named "coerceInp
 	elseif isListType(p7) then
 		local ofType = p7.ofType
 		
-		return if isIteratableObject(p6) then array.from(p6, function(p10, p11) --[[ line: 97 ]]
+		return if isIteratableObject(p6) then array.from(p6, function(p10, p11)
 			-- upvalues: addPath (copy), p9 (ref), coerceInputValueImpl (copy), ofType (ref), p8 (ref)
 			return coerceInputValueImpl(p10, ofType, p8, addPath(p9, p11, nil))
 		end) else { coerceInputValueImpl(p6, ofType, p8, p9) }

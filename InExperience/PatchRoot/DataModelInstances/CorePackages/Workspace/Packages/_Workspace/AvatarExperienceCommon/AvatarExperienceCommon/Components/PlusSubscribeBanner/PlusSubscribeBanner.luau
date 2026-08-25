@@ -8,7 +8,7 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p0) --[[ line: 27 | named "PlusSubscribeBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local testId = p0.testId or "PlusSubscribeBanner"
 	

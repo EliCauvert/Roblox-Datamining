@@ -26,17 +26,17 @@ local fFlagEnableFlyoutUncheckedBadge = sharedFlagsModule.FFlagEnableFlyoutUnche
 local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
 local fFlagFlyoutSidePanelUseProfileFrameThumbnailModule = require(flyoutSidePanel.Flags.FFlagFlyoutSidePanelUseProfileFrameThumbnail)
 
-return function(p0) --[[ line: 43 | named "FlyoutProfileCard" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), fFlagEnableFlyoutUncheckedBadge (ref), useLocalization (ref), useAppPolicy (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutAnalyticsModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFlyoutSidePanelUseProfileFrameThumbnailModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), foundationModule (ref), fFlagEnableDrawerFocusNav (ref), loadableImage (ref), text (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconName (ref), badge (ref), badgeVariant (ref), chevronSmallDownButtonModule (ref)
 	local var19
 	local var9 = useTokens()
 	local var10 = if fFlagEnableFlyoutUncheckedBadge then useLocalization({ Unchecked = "CommonUI.Features.Label.Unchecked" }) else nil
-	local var11 = if fFlagEnableFlyoutUncheckedBadge then useAppPolicy(function(p1) --[[ line: 53 ]]
+	local var11 = if fFlagEnableFlyoutUncheckedBadge then useAppPolicy(function(p1)
 		return p1.getShowUncheckedBadge()
 	end) else nil
 	local var12 = useRoactService(appEventIngestService)
 	local localUserModel = p0.localUserModel
-	local var13 = reactModule.useCallback(function() --[[ line: 60 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), localUserModel (ref), flyoutAnalyticsModule (copy), var12 (ref)
 		p0.closeDrawer()
 		
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 43 | named "FlyoutProfileCard" ]]
 		p0.closeDrawer,
 		var12
 	})
-	local var14 = reactModule.useCallback(function() --[[ line: 68 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.closeDrawer()
 		
@@ -58,11 +58,11 @@ return function(p0) --[[ line: 43 | named "FlyoutProfileCard" ]]
 			p0.onSwitchAccountActivated()
 		end
 	end, { p0.onSwitchAccountActivated, p0.closeDrawer })
-	local var15 = reactModule.useMemo(function() --[[ line: 75 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: localUserModel (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), fFlagFlyoutSidePanelUseProfileFrameThumbnailModule (copy)
 		return if localUserModel and localUserModel.id then getStandardSizeAvatarHeadShotRbxthumb(localUserModel.id, fFlagFlyoutSidePanelUseProfileFrameThumbnailModule) else nil
 	end, { localUserModel })
-	local var16 = reactModule.useMemo(function() --[[ line: 85 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: localUserModel (ref)
 		return localUserModel and localUserModel.membership == Enum.MembershipType.Premium
 	end, { localUserModel })

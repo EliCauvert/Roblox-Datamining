@@ -2,18 +2,18 @@
 local reactModule = require(parent.Parent.React)
 local panelContentHeightStoreModule = require(parent.Common.PanelContentHeightStore)
 
-return function(p0) --[[ line: 25 | named "useReportPanelContentHeight" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), panelContentHeightStoreModule (ref)
 	local var2 = reactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p1) --[[ line: 28 ]]
+	return reactModule.useCallback(function(p1)
 		-- upvalues: var2 (ref), panelContentHeightStoreModule (copy), p0 (ref)
 		if var2.current then
 			var2.current:Disconnect()
 			var2.current = nil
 		end
 		if p1 == nil then return end
-		local function report() --[[ line: 37 ]]
+		local function report()
 			-- upvalues: p1 (ref), panelContentHeightStoreModule (copy), p0 (copy)
 			local UIListLayout = p1:FindFirstChildOfClass("UIListLayout")
 			

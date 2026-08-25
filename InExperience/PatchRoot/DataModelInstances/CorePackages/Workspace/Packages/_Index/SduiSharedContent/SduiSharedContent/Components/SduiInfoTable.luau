@@ -6,7 +6,7 @@ local view = require(parent.Foundation).View
 local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "SduiInfoTable" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), getSduiComponentWrapper (ref), reactModule (ref), view (ref), infoTable (ref)
 	local layoutOrder = p0.layoutOrder
 	local t = {}

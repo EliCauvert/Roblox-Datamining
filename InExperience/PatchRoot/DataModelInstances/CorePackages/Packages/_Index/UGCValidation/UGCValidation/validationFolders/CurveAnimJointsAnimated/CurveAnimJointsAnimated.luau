@@ -20,7 +20,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 24 ]]
+function t.run(p0, p1)
 	-- upvalues: errorSourceStringsModule (ref)
 	for i, v in p1.curveAnimComputedFrames.tracks do
 		if v.pos or v.rot then return end

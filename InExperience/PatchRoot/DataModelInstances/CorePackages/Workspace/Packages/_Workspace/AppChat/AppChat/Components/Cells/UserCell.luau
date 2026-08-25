@@ -18,7 +18,7 @@ local t = {
 	style = cryoModule.Dictionary.join(testStyle, { Tokens = { Color = { None = {} } } })
 }
 
-return reactModule.memo(function(p0) --[[ line: 49 | named "UserCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), presenceBubbleCellStyledModule (ref), userModel (ref), circle25 (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local user = var5.user
@@ -26,7 +26,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "UserCell" ]]
 	return reactModule.createElement(presenceBubbleCellStyledModule, {
 		style = var5.style,
 		childWidth = var5.childWidth,
-		onActivated = reactModule.useCallback(function() --[[ line: 51 ]]
+		onActivated = reactModule.useCallback(function()
 			-- upvalues: var5 (ref)
 			if var5.onActivated then
 				var5.onActivated(var5.user)
@@ -40,7 +40,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "UserCell" ]]
 		avatarCirclePresenceImage = if user.presence == userModel.PresenceType.OFFLINE or user.presence == nil then nil else circle25,
 		titleText = user.displayName,
 		secondaryTitleText = user.alias,
-		thumbnails = reactModule.useMemo(function() --[[ line: 65 ]]
+		thumbnails = reactModule.useMemo(function()
 			-- upvalues: user (ref)
 			return { user.thumbnail }
 		end, { user.thumbnail })

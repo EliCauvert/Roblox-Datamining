@@ -7,7 +7,7 @@ local genericChallengeService = game:GetService("GenericChallengeService")
 local fFlagEnableMutexOnGenericChallengeInterceptorMount = game:DefineFastFlag("FFlagEnableMutexOnGenericChallengeInterceptorMount", false)
 local var6 = false
 
-function challengeRequiredEventHandler(p0, p1, p2) --[[ line: 15 ]]
+function challengeRequiredEventHandler(p0, p1, p2)
 	-- upvalues: renderChallengeModule (ref), challengeTypeModule (ref), genericChallengeService (ref), base64 (ref), httpService (ref)
 	renderChallengeModule({
 		renderWebViewInModal = true,
@@ -18,33 +18,33 @@ function challengeRequiredEventHandler(p0, p1, p2) --[[ line: 15 ]]
 			genericChallengeMetadata = p2
 		},
 		callbacks = {
-			OnChallengeLoadFailed = function(_) --[[ line: 24 ]]
+			OnChallengeLoadFailed = function(_)
 				-- upvalues: genericChallengeService (copy), p0 (ref)
 				genericChallengeService:SignalChallengeLoaded(p0, false)
 			end,
-			OnChallengeCompleted = function(p3) --[[ line: 29 ]]
+			OnChallengeCompleted = function(p3)
 				-- upvalues: base64 (copy), httpService (copy), genericChallengeService (copy), p0 (ref), p1 (ref)
 				if p3.data.metadata ~= nil then
 					genericChallengeService:SignalChallengeCompleted(p0, p1, base64.Encode(httpService:JSONEncode(p3.data.metadata)))
 				end
 			end,
-			OnChallengeInvalidated = function(_) --[[ line: 35 ]]
+			OnChallengeInvalidated = function(_)
 				-- upvalues: genericChallengeService (copy), p0 (ref)
 				genericChallengeService:SignalChallengeInvalidated(p0)
 			end,
-			OnChallengeAbandoned = function() --[[ line: 38 ]]
+			OnChallengeAbandoned = function()
 				-- upvalues: genericChallengeService (copy), p0 (ref)
 				genericChallengeService:SignalChallengeAbandoned(p0)
 			end
 		},
-		onWebViewOpen = function() --[[ line: 43 ]]
+		onWebViewOpen = function()
 			-- upvalues: genericChallengeService (copy), p0 (ref)
 			genericChallengeService:SignalChallengeLoaded(p0, true)
 		end
 	})
 end
 
-return function() --[[ line: 49 ]]
+return function()
 	-- upvalues: fFlagEnableMutexOnGenericChallengeInterceptorMount (ref), var6 (write), genericChallengeService (ref)
 	if fFlagEnableMutexOnGenericChallengeInterceptorMount then
 		if var6 then

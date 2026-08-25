@@ -6,22 +6,22 @@ local cryoModule = require(parent.Cryo)
 
 return {
 	ExperienceDetailsLink = {
-		linkType = function() --[[ line: 14 ]]
+		linkType = function()
 			-- upvalues: generatedTypesModule (ref)
 			return generatedTypesModule.ShareLinkType.ExperienceDetails
 		end,
-		linkId = function(p0) --[[ line: 17 ]]
+		linkId = function(p0)
 			return p0.linkId
 		end,
-		shortUrl = function(p1) --[[ line: 20 ]]
+		shortUrl = function(p1)
 			return p1.shortUrl
 		end,
-		universeId = function(_, _, _, p2) --[[ line: 23 ]]
+		universeId = function(_, _, _, p2)
 			return p2.variableValues.universeId
 		end
 	},
 	Query = {
-		experienceDetailsLinkByUniverseId = function(_, p3, p4, _) --[[ line: 28 ]]
+		experienceDetailsLinkByUniverseId = function(_, p3, p4, _)
 			-- upvalues: shareLinkConnectorModule (ref), cryoModule (ref), generatedTypesModule (ref)
 			return shareLinkConnectorModule.fetchShareLink(cryoModule.Dictionary.join({
 				linkType = generatedTypesModule.ShareLinkType.ExperienceDetails,

@@ -13,7 +13,7 @@ local videoTimelineModule = require(momentsCreation.Components.VideoTimeline)
 local voiceActionBarModule = require(momentsCreation.Components.Voice.VoiceActionBar)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 
-return function(p0) --[[ line: 67 | named "VoiceEditorView" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), view (ref), videoTimelineModule (ref), audioWaveformOverlayModule (ref), text (ref), voiceActionBarModule (ref), foundationModule (ref), button (ref)
 	local var11
 	local var7 = useDeviceInsets()
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 67 | named "VoiceEditorView" ]]
 		onAbsoluteSizeChanged = p0.onContainerMeasured,
 		padding = {
 			top = UDim.new(0, var8.Padding.XLarge),
-			bottom = if typeof(keyboardInset) == "number" then UDim.new(0, math.max(var7.bottom, var8.Padding.XLarge) + keyboardInset) else keyboardInset:map(function(p1) --[[ line: 83 ]]
+			bottom = if typeof(keyboardInset) == "number" then UDim.new(0, math.max(var7.bottom, var8.Padding.XLarge) + keyboardInset) else keyboardInset:map(function(p1)
 				-- upvalues: var7 (ref), var8 (ref)
 				return UDim.new(0, math.max(var7.bottom, var8.Padding.XLarge) + p1)
 			end),

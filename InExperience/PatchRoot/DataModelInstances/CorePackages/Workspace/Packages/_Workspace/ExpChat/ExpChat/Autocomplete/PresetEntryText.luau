@@ -1,16 +1,16 @@
 ﻿local getPresetIconRichText = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).getPresetIconRichText
 
-local function _(p0) --[[ line: 16 | named "getIconSuffix" ]]
+local function _(p0)
 	-- upvalues: getPresetIconRichText (ref)
 	return ` {getPresetIconRichText(p0)}`
 end
 
 return {
-	decorate = function(p1, p2) --[[ line: 20 ]]
+	decorate = function(p1, p2)
 		-- upvalues: getPresetIconRichText (ref)
 		return p1 .. ` {getPresetIconRichText(p2)}`
 	end,
-	undecorate = function(p3, p4) --[[ line: 32 ]]
+	undecorate = function(p3, p4)
 		-- upvalues: getPresetIconRichText (ref)
 		local var0 = ` {getPresetIconRichText(p4)}`
 		

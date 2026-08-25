@@ -126,22 +126,22 @@ t["en-gb"] = t["en-us"]
 t["es-mx"] = t["es-es"]
 t["th-th"] = t["en-us"]
 
-local function _(p0) --[[ line: 172 | named "findDecimalPointIndex" ]]
+local function _(p0)
 	return string.find(p0, "%.") or #p0 + 1
 end
 
-local _ = function(value) --[[ line: 177 | named "findDecimalOffset" ]]
+local _ = function(value)
 	return if value == 0 then 0 else -(math.floor(math.log10(math.abs(value))) + 1)
 end
 
-local _ = function(value, p1, p2) --[[ line: 186 | named "roundToSignificantDigits" ]]
+local _ = function(value, p1, p2)
 	-- upvalues: roundingBehaviourModule (ref)
 	local var5 = 10 ^ (p1 + (if value == 0 then 0 else -(math.floor(math.log10(math.abs(value))) + 1)))
 	
 	return (if p2 == roundingBehaviourModule.Truncate then math.modf(value * var5) else math.floor(value * var5 + 0.5)) / var5
 end
 
-local function addGroupDelimiters(p3, p4) --[[ line: 198 ]]
+local function addGroupDelimiters(p3, p4)
 	local var6 = p3
 	local formattedText = string.format("%%1%s%%2", p4)
 	repeat
@@ -151,7 +151,7 @@ local function addGroupDelimiters(p3, p4) --[[ line: 198 ]]
 	return var6
 end
 
-local function findDenominationEntry(a, b, p5) --[[ line: 211 ]]
+local function findDenominationEntry(a, b, p5)
 	-- upvalues: roundingBehaviourModule (ref)
 	local var10 = a[1]
 	local absValue = math.abs(b)
@@ -170,7 +170,7 @@ local function findDenominationEntry(a, b, p5) --[[ line: 211 ]]
 end
 
 return {
-	localize = function(p6, p7) --[[ line: 232 ]]
+	localize = function(p6, p7)
 		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
 		if p6 == 0 then
 			return "0"
@@ -183,7 +183,7 @@ return {
 		end
 		return if var13.groupDelimiter then addGroupDelimiters(p6, var13.groupDelimiter) else p6
 	end,
-	abbreviate = function(p8, p9, p10, p11) --[[ line: 257 ]]
+	abbreviate = function(p8, p9, p10, p11)
 		-- upvalues: roundingBehaviourModule (ref), t (ref), loggerModule (ref), findDenominationEntry (ref), addGroupDelimiters (ref)
 		if p8 == 0 then
 			return "0"
@@ -216,7 +216,7 @@ return {
 		end
 		return if #substring_1 > 0 then substring .. var14.decimalSeparator .. substring_1 .. var16 else substring .. var16
 	end,
-	localizeDecimal = function(p12, p13, p14) --[[ line: 327 ]]
+	localizeDecimal = function(p12, p13, p14)
 		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
 		if p12 == 0 then
 			return "0"

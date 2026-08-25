@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 6 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.lastInputTimeSec = -1
@@ -12,42 +12,42 @@ function t.new() --[[ line: 6 ]]
 	return tbl
 end
 
-function t:getCurrentProgress() --[[ line: 15 ]]
+function t:getCurrentProgress()
 	local var3 = os.clock() - self.lastInputTimeSec
 	
 	return if var3 < self.dwellTimeSec then 1 elseif var3 < self.dwellTimeSec + self.fadeDurationSec then 1 - (var3 - self.dwellTimeSec) / self.fadeDurationSec else 0
 end
 
-function t:inProgress() --[[ line: 26 ]]
+function t:inProgress()
 	return self:getCurrentProgress() > 0
 end
 
-function t:isFading() --[[ line: 30 ]]
+function t:isFading()
 	local var4 = os.clock() - self.lastInputTimeSec
 	
 	return self.dwellTimeSec <= var4 and var4 < self.dwellTimeSec + self.fadeDurationSec
 end
 
-function t:updateLastInputTime() --[[ line: 35 ]]
+function t:updateLastInputTime()
 	self.lastInputTimeSec = os.clock()
 end
 
-function t:skipToFade() --[[ line: 39 ]]
+function t:skipToFade()
 	if not self:isFading() then
 		self.lastInputTimeSec = os.clock() - self.dwellTimeSec
 	end
 end
 
-function t:zeroOut() --[[ line: 45 ]]
+function t:zeroOut()
 	self.lastInputTimeSec = -1
 end
 
-function t:subscribe(p0) --[[ line: 49 ]]
+function t:subscribe(p0)
 	-- upvalues: runService (ref)
 	table.insert(self.subscriptions, p0)
 	
 	if not self.heartbeatConnection then
-		self.heartbeatConnection = runService.RenderStepped:Connect(function() --[[ line: 53 ]]
+		self.heartbeatConnection = runService.RenderStepped:Connect(function()
 			-- upvalues: self (ref)
 			local currentProgress = self:getCurrentProgress()
 			
@@ -62,7 +62,7 @@ function t:subscribe(p0) --[[ line: 49 ]]
 	end
 end
 
-function t:unsubscribe(p1) --[[ line: 65 ]]
+function t:unsubscribe(p1)
 	for i, v in ipairs(self.subscriptions) do
 		if v == p1 then
 			table.remove(self.subscriptions, i)

@@ -8,7 +8,7 @@ local reactModule = require(parent.React)
 local dialog = foundationModule.Dialog
 local useLocalization = localizationModule.Hooks.useLocalization
 
-function HeadsetDisconnectDialog(value) --[[ line: 30 ]]
+function HeadsetDisconnectDialog(value)
 	-- upvalues: guiService (ref), VRService (ref), useLocalization (ref), reactModule (ref), contextActionService (ref), dialog (ref), foundationModule (ref)
 	local mockGuiService = value.mockGuiService or guiService
 	local mockVRService = value.mockVRService or VRService
@@ -18,19 +18,19 @@ function HeadsetDisconnectDialog(value) --[[ line: 30 ]]
 		buttonText = "InGame.ConnectionError.Action.Restart"
 	})
 	local var9, var10 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: mockVRService (ref), var10 (ref)
-		local var12 = mockVRService:GetPropertyChangedSignal("VRDeviceAvailable"):Connect(function(p0) --[[ line: 44 ]]
+		local var12 = mockVRService:GetPropertyChangedSignal("VRDeviceAvailable"):Connect(function(p0)
 			-- upvalues: var10 (copy)
 			var10(not p0)
 		end)
 		
-		return function() --[[ line: 48 ]]
+		return function()
 			-- upvalues: var12 (ref)
 			var12:Disconnect()
 		end
 	end, {})
-	local var11 = reactModule.useCallback(function() --[[ line: 53 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: mockGuiService (ref)
 		local notificationTypeList = mockGuiService:GetNotificationTypeList()
 		
@@ -41,14 +41,14 @@ function HeadsetDisconnectDialog(value) --[[ line: 30 ]]
 		end
 		mockGuiService:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 63 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), mockGuiService (ref), contextActionService (copy), var11 (ref)
 		if var9 then
 			mockGuiService:SetMenuIsOpen(true, "HeadsetDisconnectedDialog")
-			contextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function() --[[ line: 67 ]]
+			contextActionService:BindCoreAction("TopBarGamepadDisableMenuShortcut", function()
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.ButtonStart, Enum.KeyCode.Escape)
-			contextActionService:BindCoreAction("TopBarDialogConfirm", function(_, p1, _) --[[ line: 71 ]]
+			contextActionService:BindCoreAction("TopBarDialogConfirm", function(_, p1, _)
 				-- upvalues: var11 (copy)
 				if p1 == Enum.UserInputState.Begin then
 					var11()
@@ -62,7 +62,7 @@ function HeadsetDisconnectDialog(value) --[[ line: 30 ]]
 			contextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")
 			contextActionService:UnbindCoreAction("TopBarDialogConfirm")
 		end
-		return function() --[[ line: 85 ]]
+		return function()
 			-- upvalues: mockGuiService (copy), contextActionService (copy)
 			mockGuiService:SetMenuIsOpen(false, "HeadsetDisconnectedDialog")
 			contextActionService:UnbindCoreAction("TopBarGamepadDisableMenuShortcut")

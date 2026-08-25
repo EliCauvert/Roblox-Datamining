@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 
-return function(p0) --[[ line: 22 | named "SduiDefaultTileImage" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), loadableImage (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref)
 	return reactModule.createElement(loadableImage, {
 		showFailedStateWhenLoadingFailed = true,

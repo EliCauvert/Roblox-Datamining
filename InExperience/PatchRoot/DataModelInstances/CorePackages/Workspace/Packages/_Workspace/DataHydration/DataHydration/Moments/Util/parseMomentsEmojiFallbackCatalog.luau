@@ -4,7 +4,7 @@ local decodeEmojiSetsModule = require(script.Parent.decodeEmojiSets)
 local validateMomentsEmojiCatalogModule = require(script.Parent.validateMomentsEmojiCatalog)
 
 return {
-	parseMomentsEmojiFallbackCatalogJson = function(p0) --[[ line: 13 ]]
+	parseMomentsEmojiFallbackCatalogJson = function(p0)
 		-- upvalues: httpService (ref), validateMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref)
 		if p0 == "" then
 			return nil

@@ -1,4 +1,4 @@
-﻿return function(a) --[[ line: 30 | named "determineAppealsState" ]]
+﻿return function(a)
 	local var0 = if a.beginDate and a.beginDate ~= "" then DateTime.fromIsoDate(a.beginDate) else nil
 	local var1 = if a.endDate and a.endDate ~= "" then DateTime.fromIsoDate(a.endDate) else nil
 	

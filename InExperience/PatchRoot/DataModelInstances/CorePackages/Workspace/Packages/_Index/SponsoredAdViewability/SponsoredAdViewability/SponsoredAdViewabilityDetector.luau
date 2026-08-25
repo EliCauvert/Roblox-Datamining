@@ -11,10 +11,10 @@ local t = {
 	FeedRefresh = "FeedRefresh"
 }
 
-local function invokeCallback(p0, p1, ...) --[[ line: 59 ]]
+local function invokeCallback(p0, p1, ...)
 	local var15 = nil
 	
-	if not xpcall(p1, function(p2) --[[ line: 61 ]]
+	if not xpcall(p1, function(p2)
 		-- upvalues: var15 (write)
 		var15 = p2
 	end, ...) then
@@ -26,7 +26,7 @@ local var8 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then table.freeze(
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p3) --[[ line: 111 ]]
+function t_1.new(p3)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		_surfaceScope = nil,
@@ -39,12 +39,12 @@ function t_1.new(p3) --[[ line: 111 ]]
 	}, t_1)
 end
 
-local function _(p4) --[[ line: 123 | named "isVideoMetadata" ]]
+local function _(p4)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	return fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p4.mediaType == "video"
 end
 
-local _ = function(p5) --[[ line: 127 | named "readVideoPlaybackState" ]]
+local _ = function(p5)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	if not fFlagLuaAppSponsoredAdVideoViewabilityEnabled or p5.mediaType ~= "video" then
 		return nil
@@ -60,7 +60,7 @@ local _ = function(p5) --[[ line: 127 | named "readVideoPlaybackState" ]]
 	return if ok then status else nil
 end
 
-local function getLayerCollectorAndVisibility(p6) --[[ line: 140 ]]
+local function getLayerCollectorAndVisibility(p6)
 	local var17 = p6
 	local var18 = true
 	while var17 do
@@ -76,7 +76,7 @@ local function getLayerCollectorAndVisibility(p6) --[[ line: 140 ]]
 	return nil, false
 end
 
-local function getRegisteredTile(p7, p8) --[[ line: 155 ]]
+local function getRegisteredTile(p7, p8)
 	-- upvalues: constantsModule (ref), sponsoredAdViewabilityRegistryModule (ref)
 	if not p7:IsA("GuiObject") then
 		return nil, nil, nil
@@ -96,14 +96,14 @@ local function getRegisteredTile(p7, p8) --[[ line: 155 ]]
 	return nil, nil, nil
 end
 
-local function measureRegisteredTile(p9, p10, p11, p12) --[[ line: 177 ]]
+local function measureRegisteredTile(p9, p10, p11, p12)
 	-- upvalues: getLayerCollectorAndVisibility (ref), calculateIntersectionRatioModule (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local var21 = p11.isFullscreen == true
 	local var22 = nil
 	local var23 = nil
 	local var24 = p12
 	
-	if not pcall(function() --[[ line: 187 ]]
+	if not pcall(function()
 		-- upvalues: var21 (ref), getLayerCollectorAndVisibility (copy), p9 (ref), var24 (write), var22 (write), var23 (write)
 		if var21 then
 			local var28, var29 = getLayerCollectorAndVisibility(p9)
@@ -146,7 +146,7 @@ local function measureRegisteredTile(p9, p10, p11, p12) --[[ line: 177 ]]
 	return t
 end
 
-local function measureTile_deprecated(p13, p14, p15) --[[ line: 215 ]]
+local function measureTile_deprecated(p13, p14, p15)
 	-- upvalues: constantsModule (ref), sponsoredAdViewabilityRegistryModule (ref), calculateIntersectionRatioModule (ref)
 	if not p13:IsA("GuiObject") then
 		return nil
@@ -172,7 +172,7 @@ local function measureTile_deprecated(p13, p14, p15) --[[ line: 215 ]]
 	}
 end
 
-local function shouldReplaceCandidate(p16, p17) --[[ line: 247 ]]
+local function shouldReplaceCandidate(p16, p17)
 	if p16.isFullscreen == p17.isFullscreen then
 		if p16.ratio ~= p17.ratio then
 			return p16.ratio < p17.ratio
@@ -188,7 +188,7 @@ local function shouldReplaceCandidate(p16, p17) --[[ line: 247 ]]
 	end
 end
 
-local _ = function(p18, p19) --[[ line: 271 | named "selectBetterMeasurement" ]]
+local _ = function(p18, p19)
 	-- upvalues: shouldReplaceCandidate (ref)
 	local encryptedAdTrackingData = p19.metadata.encryptedAdTrackingData
 	local var34 = p18[encryptedAdTrackingData]
@@ -199,15 +199,15 @@ local _ = function(p18, p19) --[[ line: 271 | named "selectBetterMeasurement" ]]
 	end
 end
 
-local _ = function(p20, p21) --[[ line: 283 | named "canStartOrContinueSession" ]]
+local _ = function(p20, p21)
 	return if p20.isFullscreen then p21 ~= nil and p21.video ~= nil else not p20.isFullscreen
 end
 
-local _ = function(p22) --[[ line: 287 | named "canMeasureViewport" ]]
+local _ = function(p22)
 	return p22.min.X < p22.max.X and p22.min.Y < p22.max.Y
 end
 
-local _ = function(p23) --[[ line: 291 | named "hasVideoSession" ]]
+local _ = function(p23)
 	for i, v in p23 do
 		if v.video ~= nil then
 			return true
@@ -216,7 +216,7 @@ local _ = function(p23) --[[ line: 291 | named "hasVideoSession" ]]
 	return false
 end
 
-function t_1:_advanceSession(p24, p25, p26, p27, p28, p29, p30) --[[ line: 300 ]]
+function t_1:_advanceSession(p24, p25, p26, p27, p28, p29, p30)
 	-- upvalues: invokeCallback (ref)
 	local var35, var36 = p24.state:advance(p25, p26, p27, p28, p29)
 	p30 = p30 or p24.metadata
@@ -233,7 +233,7 @@ function t_1:_advanceSession(p24, p25, p26, p27, p28, p29, p30) --[[ line: 300 ]
 	end
 end
 
-function t_1:_processMeasurement(p31, p32, p33) --[[ line: 324 ]]
+function t_1:_processMeasurement(p31, p32, p33)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), sponsoredAdViewabilityStateModule (ref), invokeCallback (ref)
 	local metadata = p32.metadata
 	local var38 = fFlagLuaAppSponsoredAdVideoViewabilityEnabled and metadata.mediaType == "video"
@@ -262,7 +262,7 @@ function t_1:_processMeasurement(p31, p32, p33) --[[ line: 324 ]]
 	end
 end
 
-function t_1:_applySelectedVideoMeasurement(p34, p35, p36) --[[ line: 363 ]]
+function t_1:_applySelectedVideoMeasurement(p34, p35, p36)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local video = p34.video
 	
@@ -284,7 +284,7 @@ function t_1:_applySelectedVideoMeasurement(p34, p35, p36) --[[ line: 363 ]]
 	self:_advanceSession(p34, p36, p35.ratio, p35.geometry, p35.videoStateSnapshot, p35.isFullscreen)
 end
 
-function t_1:_collectCurrentVideoMeasurements() --[[ line: 400 ]]
+function t_1:_collectCurrentVideoMeasurements()
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), var8 (ref), collectionService (ref), constantsModule (ref), getRegisteredTile (ref), measureRegisteredTile (ref), shouldReplaceCandidate (ref)
 	if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
 		local var40
@@ -329,15 +329,15 @@ function t_1:_collectCurrentVideoMeasurements() --[[ line: 400 ]]
 	end
 end
 
-function t_1:setSurfaceScope(p37) --[[ line: 429 ]]
+function t_1:setSurfaceScope(p37)
 	self._surfaceScope = p37
 end
 
-function t_1:setViewportBounds(p38) --[[ line: 433 ]]
+function t_1:setViewportBounds(p38)
 	self._viewportBounds = p38
 end
 
-function t_1:start() --[[ line: 440 ]]
+function t_1:start()
 	if self._running then return end
 	self._running = true
 	
@@ -346,7 +346,7 @@ function t_1:start() --[[ line: 440 ]]
 	end
 end
 
-function t_1:_cancelScheduledScan() --[[ line: 450 ]]
+function t_1:_cancelScheduledScan()
 	local scanThread = self._scanThread
 	
 	if scanThread ~= nil and coroutine.status(scanThread) == "suspended" then
@@ -355,11 +355,11 @@ function t_1:_cancelScheduledScan() --[[ line: 450 ]]
 	self._scanThread = nil
 end
 
-function t_1:_scheduleNextScan() --[[ line: 458 ]]
+function t_1:_scheduleNextScan()
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
 		if self._scanThread == nil then
-			self._scanThread = task.delay(0.2, function() --[[ line: 466 ]]
+			self._scanThread = task.delay(0.2, function()
 				-- upvalues: self (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy)
 				self._scanThread = nil
 				
@@ -393,7 +393,7 @@ function t_1:_scheduleNextScan() --[[ line: 458 ]]
 	end
 end
 
-function t_1:_scanTick(p39) --[[ line: 492 ]]
+function t_1:_scanTick(p39)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), collectionService (ref), constantsModule (ref), getRegisteredTile (ref), measureRegisteredTile (ref), shouldReplaceCandidate (ref)
 	if not fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
 		self:_scanTick_deprecated(p39)
@@ -453,7 +453,7 @@ function t_1:_scanTick(p39) --[[ line: 492 ]]
 	end
 end
 
-function t_1:_scanTick_deprecated(p40) --[[ line: 556 ]]
+function t_1:_scanTick_deprecated(p40)
 	-- upvalues: collectionService (ref), constantsModule (ref), measureTile_deprecated (ref), sponsoredAdViewabilityStateModule (ref)
 	local surfaceScope = self._surfaceScope
 	local viewportBounds = self._viewportBounds
@@ -491,7 +491,7 @@ function t_1:_scanTick_deprecated(p40) --[[ line: 556 ]]
 	end
 end
 
-function t_1:pause(p41) --[[ line: 597 ]]
+function t_1:pause(p41)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	if self._paused then return end
 	p41 = p41 or DateTime.now().UnixTimestampMillis
@@ -514,7 +514,7 @@ function t_1:pause(p41) --[[ line: 597 ]]
 	self:_cancelScheduledScan()
 end
 
-function t_1:resume(p42) --[[ line: 619 ]]
+function t_1:resume(p42)
 	if not self._paused then return end
 	p42 = p42 or DateTime.now().UnixTimestampMillis
 	
@@ -528,7 +528,7 @@ function t_1:resume(p42) --[[ line: 619 ]]
 	end
 end
 
-function t_1:_terminateAllSessions(b, p43) --[[ line: 634 ]]
+function t_1:_terminateAllSessions(b, p43)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), invokeCallback (ref)
 	local sessions = self._sessions
 	
@@ -552,12 +552,12 @@ function t_1:_terminateAllSessions(b, p43) --[[ line: 634 ]]
 	end
 end
 
-function t_1:onFeedRefresh(p44) --[[ line: 662 ]]
+function t_1:onFeedRefresh(p44)
 	-- upvalues: t (ref)
 	self:_terminateAllSessions(p44 or DateTime.now().UnixTimestampMillis, t.FeedRefresh)
 end
 
-function t_1:reset(p45) --[[ line: 667 ]]
+function t_1:reset(p45)
 	-- upvalues: t (ref)
 	self._running = false
 	self:_cancelScheduledScan()

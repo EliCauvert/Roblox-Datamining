@@ -7,14 +7,14 @@ local argCheckModule = require(parent.ArgCheck)
 local roactNavigationModule = require(parent.RoactNavigation)
 local RNAdapterThunkModule = require(navigationRodux.Thunks.RNAdapterThunk)
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: argCheckModule (ref), fFlagSignalsNavP2NavigationPrimitives (ref), var1 (ref), RNAdapterThunkModule (ref), setNavigationLockedModule (ref), roactNavigationModule (ref)
 	argCheckModule.isTypeOrNil(p0, "boolean", "bypassNavigationLock")
 	
-	return if fFlagSignalsNavP2NavigationPrimitives then function(_) --[[ line: 21 ]]
+	return if fFlagSignalsNavP2NavigationPrimitives then function(_)
 		-- upvalues: var1 (copy), p0 (ref)
 		var1.back(p0)
-	end else RNAdapterThunkModule.new("NavigateBack", function(p1, p2) --[[ line: 26 ]]
+	end else RNAdapterThunkModule.new("NavigateBack", function(p1, p2)
 		-- upvalues: p0 (ref), setNavigationLockedModule (copy), roactNavigationModule (copy)
 		if p1:getState().Navigation.lockNavigationActions and not p0 then
 			return

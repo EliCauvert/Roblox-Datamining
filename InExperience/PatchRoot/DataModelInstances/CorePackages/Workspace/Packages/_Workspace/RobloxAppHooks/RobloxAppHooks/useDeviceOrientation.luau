@@ -5,7 +5,7 @@ local useProperty = require(parent.GuiObjectUtils).useProperty
 local deviceOrientationMode = require(parent.RobloxAppEnums).DeviceOrientationMode
 local fixUseDeviceOrientationNilViewportSize = game:DefineFastFlag("FixUseDeviceOrientationNilViewportSize", true)
 
-return function() --[[ line: 12 | named "useDeviceOrientation" ]]
+return function()
 	-- upvalues: useCurrentCameraModule (ref), useProperty (ref), fixUseDeviceOrientationNilViewportSize (ref), deviceOrientationMode (ref)
 	local var3 = useProperty(useCurrentCameraModule(), "ViewportSize")
 	

@@ -6,7 +6,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0) --[[ line: 29 ]]
+local function variantsFactory(p0)
 	-- upvalues: flagsModule (ref), inputSizeModule (ref)
 	local ceiled = math.ceil(p0.Stroke.Standard)
 	
@@ -31,7 +31,7 @@ local function variantsFactory(p0) --[[ line: 29 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ line: 56 ]]
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local internalInput = variantsContextModule.useVariants("InternalInput", variantsFactory, p1)
 	

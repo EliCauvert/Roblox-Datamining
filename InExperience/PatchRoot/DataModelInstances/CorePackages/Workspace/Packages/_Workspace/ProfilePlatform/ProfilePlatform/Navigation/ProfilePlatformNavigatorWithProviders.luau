@@ -12,7 +12,7 @@ local httpService = game:GetService("HttpService")
 local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 local profilePlatformNavigatorModule = require(script.Parent.ProfilePlatformNavigator)
 
-local var10 = function(p0) --[[ line: 18 ]]
+local var10 = function(p0)
 	-- upvalues: fFlagProfilePlatformEnableImpressions (ref), reactModule (ref), useProfileWrapperContextModule (ref), appCommonLibModule (ref), httpService (ref), initializeProfileAnalyticsModule (ref), subPages (ref), cryoModule (ref), profileAnalyticsContextModule (ref), profileScrollContextProviderModule (ref), profilePlatformNavigatorModule (ref)
 	local var12 = if fFlagProfilePlatformEnableImpressions then nil else reactModule.createRef()
 	local var13 = useProfileWrapperContextModule()
@@ -20,7 +20,7 @@ local var10 = function(p0) --[[ line: 18 ]]
 	local var14 = if fFlagProfilePlatformEnableImpressions then appCommonLibModule.Signal.new() else nil
 	
 	return reactModule.createElement(profileAnalyticsContextModule.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 27 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: fFlagProfilePlatformEnableImpressions (copy), var12 (ref), httpService (copy), initializeProfileAnalyticsModule (copy), var13 (ref), profileId (ref), subPages (copy), cryoModule (copy), var14 (ref)
 			if not fFlagProfilePlatformEnableImpressions and var12.current == nil then
 				var12.current = httpService:GenerateGUID(false)
@@ -44,7 +44,7 @@ end
 
 local profilePlatformNavigatorWithProviders = reactModule.PureComponent:extend("ProfilePlatformNavigatorWithProviders")
 
-function profilePlatformNavigatorWithProviders.render(p1) --[[ line: 61 ]]
+function profilePlatformNavigatorWithProviders.render(p1)
 	-- upvalues: reactModule (ref), var10 (ref)
 	return reactModule.createElement(var10, p1.props)
 end

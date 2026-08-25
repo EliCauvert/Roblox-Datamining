@@ -6,7 +6,7 @@ local inExperienceLocalesModule = require(parent.InExperienceLocales)
 local localizationService = game:GetService("LocalizationService")
 
 return {
-	makeAnimationBindings = function() --[[ line: 11 ]]
+	makeAnimationBindings = function()
 		-- upvalues: reactModule (ref)
 		return {
 			keyart = {
@@ -30,7 +30,7 @@ return {
 			verified = { reveal = reactModule.createBinding(1) }
 		}
 	end,
-	makeStatusPanelProps = function(p0) --[[ line: 37 ]]
+	makeStatusPanelProps = function(p0)
 		local t = {
 			status = "",
 			statusText = "",
@@ -38,10 +38,10 @@ return {
 			queueTreatment = nil,
 			followUserId = 0,
 			isSubjectToChinaPolicies = false,
-			onAutoJoinNewServer = function() --[[ line: 45 ]] end,
-			onJoinNewServer = function() --[[ line: 46 ]] end,
-			onJoinTheLine = function() --[[ line: 47 ]] end,
-			onShowConnectionHealth = function() --[[ line: 48 ]] end
+			onAutoJoinNewServer = function() end,
+			onJoinNewServer = function() end,
+			onJoinTheLine = function() end,
+			onShowConnectionHealth = function() end
 		}
 		
 		if p0 then
@@ -51,7 +51,7 @@ return {
 		end
 		return t
 	end,
-	renderWithFoundation = function(p1, p2) --[[ line: 58 ]]
+	renderWithFoundation = function(p1, p2)
 		-- upvalues: reactModule (ref), foundationModule (ref), localizationModule (ref), inExperienceLocalesModule (ref), localizationService (ref)
 		return p1(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			Localization = reactModule.createElement(localizationModule.LocalizationProvider, {

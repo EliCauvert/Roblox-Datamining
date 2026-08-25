@@ -15,7 +15,7 @@ local fFlagPurchasePromptFetchCartPricing = require(parent.Parent.SharedFlags).F
 local _ = require(parent.ProductPurchase.PricingTypes)
 local priceSummaryV2UseLocalizedBreakdown = game:DefineFastFlag("PriceSummaryV2UseLocalizedBreakdown", false)
 
-local function _(p0) --[[ line: 45 | named "shouldShowPriceBreakdown" ]]
+local function _(p0)
 	if p0 then
 		local basePriceInRobux = p0.basePriceInRobux
 		local priceInRobux = p0.priceInRobux
@@ -25,7 +25,7 @@ local function _(p0) --[[ line: 45 | named "shouldShowPriceBreakdown" ]]
 	return false
 end
 
-return function(p1) --[[ line: 56 | named "PriceSummaryV2" ]]
+return function(p1)
 	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), usePlaceholderLocalizationModule (ref), priceSummaryV2UseLocalizedBreakdown (ref), useRobuxTextModule (ref), reactModule (ref), priceLineItemModule (ref), discountRowModule (ref), fFlagPurchasePromptFetchCartPricing (ref), view (ref), divider (ref), text (ref)
 	local var8
 	local itemPrice = p1.itemPrice

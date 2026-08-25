@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 2 ]]
+﻿return function(p0, p1)
 	for i = 1, #p1 do
 		p0:sendText(p1:sub(i, i))
 	end

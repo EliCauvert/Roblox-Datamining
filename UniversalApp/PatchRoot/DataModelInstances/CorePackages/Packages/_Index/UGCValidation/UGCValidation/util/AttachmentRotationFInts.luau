@@ -21,64 +21,64 @@ game:DefineFastInt("UGCValidationAttRotLimitRightGripAttachment", 30)
 
 return {
 	thresholdGetters = {
-		RigAttachment = function() --[[ line: 27 ]]
+		RigAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotRigAttachmentMaxThousandthsDegrees") / 1000
 		end,
-		RootAttachment = function() --[[ line: 30 ]]
+		RootAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitRootAttachment")
 		end,
-		FaceFrontAttachment = function() --[[ line: 33 ]]
+		FaceFrontAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitFaceFrontAttachment")
 		end,
-		HatAttachment = function() --[[ line: 36 ]]
+		HatAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitHatAttachment")
 		end,
-		HairAttachment = function() --[[ line: 39 ]]
+		HairAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitHairAttachment")
 		end,
-		FaceCenterAttachment = function() --[[ line: 42 ]]
+		FaceCenterAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitFaceCenterAttachment")
 		end,
-		RightFootAttachment = function() --[[ line: 45 ]]
+		RightFootAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitRightFootAttachment")
 		end,
-		LeftFootAttachment = function() --[[ line: 48 ]]
+		LeftFootAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitLeftFootAttachment")
 		end,
-		BodyFrontAttachment = function() --[[ line: 51 ]]
+		BodyFrontAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitBodyFrontAttachment")
 		end,
-		BodyBackAttachment = function() --[[ line: 54 ]]
+		BodyBackAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitBodyBackAttachment")
 		end,
-		LeftCollarAttachment = function() --[[ line: 57 ]]
+		LeftCollarAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitLeftCollarAttachment")
 		end,
-		RightCollarAttachment = function() --[[ line: 60 ]]
+		RightCollarAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitRightCollarAttachment")
 		end,
-		NeckAttachment = function() --[[ line: 63 ]]
+		NeckAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitNeckAttachment")
 		end,
-		WaistCenterAttachment = function() --[[ line: 66 ]]
+		WaistCenterAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitWaistCenterAttachment")
 		end,
-		WaistFrontAttachment = function() --[[ line: 69 ]]
+		WaistFrontAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitWaistFrontAttachment")
 		end,
-		WaistBackAttachment = function() --[[ line: 72 ]]
+		WaistBackAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitWaistBackAttachment")
 		end,
-		LeftShoulderAttachment = function() --[[ line: 75 ]]
+		LeftShoulderAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitLeftShoulderAttachment")
 		end,
-		LeftGripAttachment = function() --[[ line: 78 ]]
+		LeftGripAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitLeftGripAttachment")
 		end,
-		RightShoulderAttachment = function() --[[ line: 81 ]]
+		RightShoulderAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitRightShoulderAttachment")
 		end,
-		RightGripAttachment = function() --[[ line: 84 ]]
+		RightGripAttachment = function()
 			return game:GetFastInt("UGCValidationAttRotLimitRightGripAttachment")
 		end
 	}

@@ -12,7 +12,7 @@ local t_1 = {
 t.UserActionType = enumerate(script.Name, t_1)
 addRawValueMethodToEnumModule(t.UserActionType, t_1)
 
-function t.Post(p0, p1) --[[ line: 21 ]]
+function t.Post(p0, p1)
 	-- upvalues: t (ref)
 	return p0.postPurchaseWarningAcknowledge(t.UserActionType.toRawValue(p1))
 end

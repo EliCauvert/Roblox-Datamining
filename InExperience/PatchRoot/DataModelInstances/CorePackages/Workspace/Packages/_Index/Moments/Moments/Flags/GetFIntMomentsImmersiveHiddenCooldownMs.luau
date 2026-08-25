@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("MomentsImmersiveHiddenCooldownMs", 350)
 
-return function() --[[ line: 8 ]]
+return function()
 	return game:GetFastInt("MomentsImmersiveHiddenCooldownMs")
 end

@@ -5,7 +5,7 @@ local abortSignal = require(script.Parent.AbortSignal).AbortSignal
 local tbl = setmetatable({}, { __index = body })
 tbl.__index = tbl
 
-function tbl.new(p0, p1) --[[ line: 92 ]]
+function tbl.new(p0, p1)
 	-- upvalues: instanceof (ref), tbl (ref), body (ref), headers (ref), abortSignal (ref)
 	p1 = p1 or {}
 	local url = nil
@@ -46,7 +46,7 @@ function tbl.new(p0, p1) --[[ line: 92 ]]
 	return tbl_1
 end
 
-function tbl.clone(p2) --[[ line: 137 ]]
+function tbl.clone(p2)
 	-- upvalues: tbl (ref)
 	return tbl.new(p2)
 end

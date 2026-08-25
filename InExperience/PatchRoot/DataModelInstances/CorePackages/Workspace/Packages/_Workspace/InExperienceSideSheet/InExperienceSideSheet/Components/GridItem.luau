@@ -14,9 +14,9 @@ local useMappedSignal = chromeModule.Hooks.useMappedSignal
 local keepSideSheetOpenFromGrid = game:DefineFastFlag("KeepSideSheetOpenFromGrid", false)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 36 | named "GridItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), keepSideSheetOpenFromGrid (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), useMappedSignal (ref), view (ref), iconHostModule (ref), text (ref)
-	local var10 = reactModule.useCallback(function() --[[ line: 37 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), keepSideSheetOpenFromGrid (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 		p0.onActivated()
 		
@@ -54,7 +54,7 @@ return reactModule.memo(function(p0) --[[ line: 36 | named "GridItem" ]]
 					Selectable = true,
 					NextSelectionRight = if p0.disableGamepadDirections and p0.disableGamepadDirections.right then var11 else nil
 				} else nil,
-				ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1) --[[ line: 48 ]]
+				ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1)
 					-- upvalues: var11 (ref), p0 (ref)
 					if var11 then
 						var11.current = p1

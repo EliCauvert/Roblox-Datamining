@@ -14,29 +14,29 @@ local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagEx
 local flyOutWidth = configModule.PresetTray.FlyOutWidth
 local flyOutHeight = configModule.PresetTray.FlyOutHeight
 
-return reactModule.memo(function(value) --[[ line: 27 | named "PresetChatFlyOut" ]]
+return reactModule.memo(function(value)
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref), guiService (ref), foundationModule (ref), presetChatButtonModule (ref), flyOutWidth (ref), flyOutHeight (ref), presetChatContainerModule (ref)
 	local var12 = getPresetChatStoreModule(false)
 	local var13 = signalsReactModule.useSignalState(var12.getIsTrayOpen)
-	local var14 = reactModule.useCallback(function() --[[ line: 31 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: setIsPresetTrayOpenModule (copy), var12 (ref)
 		setIsPresetTrayOpenModule(var12, false)
 	end, { var12 })
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), userInputService (copy), setIsPresetTrayOpenModule (copy), var12 (ref), guiService (copy)
 		if var13 then
-			local var15 = if fFlagExpChatPresetChatGamepadEnabledModule then userInputService.InputBegan:Connect(function(p0, _) --[[ line: 42 ]]
+			local var15 = if fFlagExpChatPresetChatGamepadEnabledModule then userInputService.InputBegan:Connect(function(p0, _)
 				-- upvalues: setIsPresetTrayOpenModule (copy), var12 (copy)
 				if p0.KeyCode == Enum.KeyCode.Escape or p0.KeyCode == Enum.KeyCode.ButtonB then
 					setIsPresetTrayOpenModule(var12, false)
 				end
 			end) else nil
-			local menuOpenedConnection = guiService.MenuOpened:Connect(function() --[[ line: 49 ]]
+			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
 				-- upvalues: var12 (copy)
 				var12.setIsTrayOpen(false)
 			end)
 			
-			return function() --[[ line: 53 ]]
+			return function()
 				-- upvalues: var15 (write), menuOpenedConnection (ref)
 				if var15 then
 					var15:Disconnect()

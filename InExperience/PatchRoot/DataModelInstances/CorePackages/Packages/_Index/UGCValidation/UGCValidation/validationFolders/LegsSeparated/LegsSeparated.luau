@@ -22,7 +22,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateAttachmentPosition(p0, p1, p2) --[[ line: 39 ]]
+local function validateAttachmentPosition(p0, p1, p2)
 	-- upvalues: getFStringUGCValidateLegHipAttachmentRangeModule (ref), errorSourceStringsModule (ref)
 	if p2 == Enum.AssetType.RightLeg then
 		local var15 = p1.RightUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
@@ -51,7 +51,7 @@ local function validateAttachmentPosition(p0, p1, p2) --[[ line: 39 ]]
 	end
 end
 
-local function calculateBounds(p3, p4) --[[ line: 70 ]]
+local function calculateBounds(p3, p4)
 	-- upvalues: boundsDataUtilsModule (ref)
 	local t = {}
 	
@@ -61,7 +61,7 @@ local function calculateBounds(p3, p4) --[[ line: 70 ]]
 	return t
 end
 
-local function buildEditableMeshesFromSharedData(p5) --[[ line: 78 ]]
+local function buildEditableMeshesFromSharedData(p5)
 	local t = {}
 	
 	for i, v in p5.renderMeshesData do
@@ -74,7 +74,7 @@ local function buildEditableMeshesFromSharedData(p5) --[[ line: 78 ]]
 	return t
 end
 
-local function createAllBodyPartsFromRootInstance(p6) --[[ line: 90 ]]
+local function createAllBodyPartsFromRootInstance(p6)
 	local t = {}
 	
 	for i, v in p6:GetChildren() do
@@ -85,7 +85,7 @@ local function createAllBodyPartsFromRootInstance(p6) --[[ line: 90 ]]
 	return t
 end
 
-local function validateFullBodySeparation(p7, p8) --[[ line: 100 ]]
+local function validateFullBodySeparation(p7, p8)
 	-- upvalues: getFFlagUGCValidateLegFullBodySeparationModule (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref), calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref)
 	if not getFFlagUGCValidateLegFullBodySeparationModule() then return end
 	local var21, var22, var23 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p8.rootInstance), {
@@ -131,11 +131,11 @@ local function validateFullBodySeparation(p7, p8) --[[ line: 100 ]]
 	end
 end
 
-local function _(value) --[[ line: 161 | named "getAssetTypeFromUploadEnum" ]]
+local function _(value)
 	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
 end
 
-function t.run(p9, p10) --[[ line: 168 ]]
+function t.run(p9, p10)
 	-- upvalues: validationEnumsModule (ref), validateFullBodySeparation (ref), validateAttachmentPosition (ref)
 	if p10.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
 		validateFullBodySeparation(p9, p10)

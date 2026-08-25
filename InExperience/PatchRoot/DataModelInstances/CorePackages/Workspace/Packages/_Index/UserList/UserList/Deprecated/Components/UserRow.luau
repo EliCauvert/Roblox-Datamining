@@ -7,7 +7,7 @@ local avatar = foundationModule.Avatar
 local inputSize = foundationModule.Enums.InputSize
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 26 | named "UserRow" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), avatar (ref), inputSize (ref), foundationModule (ref), skeleton (ref), radius (ref)
 	local var2 = if p0.displayName ~= "" then p0.username == "" else true
 	local displayName = p0.displayName

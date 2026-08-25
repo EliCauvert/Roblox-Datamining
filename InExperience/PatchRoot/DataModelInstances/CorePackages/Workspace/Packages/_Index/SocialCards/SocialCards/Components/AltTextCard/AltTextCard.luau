@@ -3,7 +3,7 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 13 | named "AltTextCard" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref)
 	local var2 = useTokens()
 	

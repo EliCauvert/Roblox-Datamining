@@ -9,7 +9,7 @@ local playtestersOnlyShareDialogModule = require(buildExperience.Components.Shar
 local _ = require(buildExperience.utils.useExperienceShareFlow)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 30 | named "ExperienceShareOverlays" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), friendsOnlyShareDialogModule (ref), playtestersOnlyShareDialogModule (ref)
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		FriendsOnlyShareDialog = if p0.activeDialog == "friends" then reactModule.createElement(friendsOnlyShareDialogModule, { onCancel = p0.onCancel, onShare = p0.onConfirmFriends }) else nil,

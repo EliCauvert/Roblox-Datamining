@@ -1,10 +1,10 @@
-﻿return function(p0) --[[ line: 9 | named "extractAndStyleRichTextLinks" ]]
+﻿return function(p0)
 	if p0 == nil then
 		return {}, ""
 	end
 	local t = {}
 	
-	return t, string.gsub(p0, "<a%s+href=\"([^\"]+)\">([^<]*)</a>", function(p1, p2) --[[ line: 21 ]]
+	return t, string.gsub(p0, "<a%s+href=\"([^\"]+)\">([^<]*)</a>", function(p1, p2)
 		-- upvalues: t (ref)
 		table.insert(t, p1)
 		

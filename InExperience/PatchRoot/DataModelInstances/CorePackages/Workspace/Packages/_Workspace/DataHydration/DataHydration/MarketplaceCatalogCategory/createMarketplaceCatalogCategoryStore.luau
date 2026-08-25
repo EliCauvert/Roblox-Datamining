@@ -9,12 +9,12 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceCatalogCategoryStoreTypes)
 local fFlagMarketplaceCatalogCategoryTrackLastReceived = sharedFlagsModule.FFlagMarketplaceCatalogCategoryTrackLastReceived
 
-return function() --[[ line: 22 | named "createMarketplaceCatalogCategoryStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagMarketplaceCatalogCategoryTrackLastReceived (ref), signalsModule (ref)
 	local var6 = createDataCacheModule()
 	local var7 = createDataResolverModule({
 		cache = var6,
-		fetchFn = function(_) --[[ line: 26 ]]
+		fetchFn = function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end
@@ -30,14 +30,14 @@ return function() --[[ line: 22 | named "createMarketplaceCatalogCategoryStore" 
 	return {
 		getMarketplaceCatalogCategory = var7.getCachedItem,
 		getMarketplaceCatalogCategories = var7.getCachedItems,
-		updateMarketplaceCatalogCategories = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function(p0) --[[ line: 41 | named "updateMarketplaceCatalogCategories" ]]
+		updateMarketplaceCatalogCategories = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function(p0)
 			-- upvalues: var9 (write), var6 (ref)
 			var9(p0)
 			var6.updateItems(p0)
 		end else var6.updateItems,
 		updateMarketplaceCatalogCategory = var6.updateItem,
 		getLastReceivedCategories = var8,
-		clear = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function() --[[ line: 51 | named "clear" ]]
+		clear = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function()
 			-- upvalues: var9 (write), var7 (ref)
 			if var9 then
 				var9({})

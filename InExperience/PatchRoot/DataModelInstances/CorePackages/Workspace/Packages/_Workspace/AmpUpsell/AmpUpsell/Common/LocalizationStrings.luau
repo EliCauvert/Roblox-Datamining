@@ -39,7 +39,7 @@ local t_1 = {
 }
 
 return {
-	accountSettingsUpsellStringsFn = function(value) --[[ line: 53 ]]
+	accountSettingsUpsellStringsFn = function(value)
 		-- upvalues: actionTypeEnum (ref), t_1 (ref), t (ref)
 		local action = value.action
 		

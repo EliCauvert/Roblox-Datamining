@@ -2,10 +2,10 @@
 local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineFeature(constantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	addSeenCount = function(_, p0, p1) --[[ line: 9 ]]
+	addSeenCount = function(_, p0, p1)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function() --[[ line: 13 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p0 (ref), constantsModule (copy)
 			return p0:GetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT)
 		end)
@@ -34,17 +34,17 @@ return {
 					var2 ..= "," .. p1 .. ":" .. "1"
 				end
 			end
-			pcall(function() --[[ line: 44 ]]
+			pcall(function()
 				-- upvalues: p0 (ref), constantsModule (copy), var2 (write)
 				p0:SetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT, var2)
 				p0:Flush()
 			end)
 		end
 	end,
-	updateTimestamp = function(_, p2, p3, p4) --[[ line: 51 ]]
+	updateTimestamp = function(_, p2, p3, p4)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then return end
-		local ok, status = pcall(function() --[[ line: 60 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p2 (ref), constantsModule (copy)
 			return p2:GetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP)
 		end)
@@ -73,7 +73,7 @@ return {
 					var8 ..= "," .. p3 .. ":" .. tostring(p4)
 				end
 			end
-			pcall(function() --[[ line: 92 ]]
+			pcall(function()
 				-- upvalues: p2 (ref), constantsModule (copy), var8 (write)
 				p2:SetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP, var8)
 				p2:Flush()

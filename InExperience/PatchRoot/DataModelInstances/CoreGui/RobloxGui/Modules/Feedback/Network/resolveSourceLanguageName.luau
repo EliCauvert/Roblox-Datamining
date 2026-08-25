@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 19 ]]
+﻿return function(p0, p1)
 	if p0 == nil or p1 == nil then
 		return nil
 	end

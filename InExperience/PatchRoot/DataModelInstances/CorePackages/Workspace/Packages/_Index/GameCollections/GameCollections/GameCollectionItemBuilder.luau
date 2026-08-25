@@ -29,7 +29,7 @@ end
 local var9 = if fFlagLuaAppEnableNxMRoduxApportioning then gameCollectionItemTypes.SpanForItemType else nil
 
 return {
-	BuildCollectionEntries = function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 49 ]]
+	BuildCollectionEntries = function(p0, p1, p2, p3, p4, p5, p6, p7, p8)
 		-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (ref), t (ref), var9 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), calculateGridLayoutModule (ref), fFlagLuaAppFixTotalColsBound (ref), gridLayoutTelemetryModule (ref), discoveryEventErrorLogger (ref), gameCollectionItemTypes (ref), renderBlankTileModule (ref), cryoModule (ref)
 		local var13, var14
 		local t_1 = {}

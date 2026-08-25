@@ -4,21 +4,21 @@ local reactModule = require(parent.React)
 local useRefCache = require(parent.ReactUtils).useRefCache
 local _ = require(foundation.Components.Types)
 
-return function(p0, p1, p2) --[[ line: 22 | named "usePaginationSelectionChain" ]]
+return function(p0, p1, p2)
 	-- upvalues: useRefCache (ref), reactModule (ref)
 	local var2 = useRefCache()
 	local var3 = p0[1]
-	local var4 = reactModule.useCallback(function(p3) --[[ line: 30 ]]
+	local var4 = reactModule.useCallback(function(p3)
 		-- upvalues: var2 (ref), var3 (ref), p2 (ref)
 		local var6 = var2[p3]
 		
-		return if var3 == p3 and p2 ~= nil then function(p4) --[[ line: 36 ]]
+		return if var3 == p3 and p2 ~= nil then function(p4)
 			-- upvalues: var6 (ref), p2 (copy)
 			var6.current = p4
 			p2(p4)
 		end else var6
 	end, { var3, p2, var2 })
-	local var5 = reactModule.useCallback(function(p5) --[[ line: 42 ]]
+	local var5 = reactModule.useCallback(function(p5)
 		-- upvalues: p0 (ref), var2 (ref), p1 (ref)
 		local index = table.find(p0, p5)
 		
@@ -32,7 +32,7 @@ return function(p0, p1, p2) --[[ line: 22 | named "usePaginationSelectionChain" 
 		}
 	end, { p0, var2, p1 })
 	
-	return reactModule.useMemo(function() --[[ line: 61 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var3 (ref), var5 (ref), var4 (ref)
 		return {
 			firstSlotId = var3,

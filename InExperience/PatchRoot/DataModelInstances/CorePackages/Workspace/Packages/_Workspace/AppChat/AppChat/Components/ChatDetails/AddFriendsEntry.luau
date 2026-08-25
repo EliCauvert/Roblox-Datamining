@@ -17,7 +17,7 @@ local t = {
 	style = nil
 }
 
-function AddFriendsEntry(p0) --[[ line: 36 ]]
+function AddFriendsEntry(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	

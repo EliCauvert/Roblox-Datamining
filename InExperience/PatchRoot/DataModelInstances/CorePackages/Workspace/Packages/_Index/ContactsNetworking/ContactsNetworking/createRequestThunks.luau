@@ -5,7 +5,7 @@ local createFindContactFriendsModule = require(networkRequests.createFindContact
 local createGetContactEntitiesByContactIdModule = require(networkRequests.createGetContactEntitiesByContactId)
 local _ = require(parent.Types.networkRequestsTypes)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: createUploadContactsByUserModule (ref), createFindContactFriendsModule (ref), createGetContactEntitiesByContactIdModule (ref)
 	return {
 		UploadContactsByUser = createUploadContactsByUserModule(p0),

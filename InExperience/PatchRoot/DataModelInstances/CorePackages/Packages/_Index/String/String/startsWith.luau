@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 16 | named "startsWith" ]]
+﻿return function(p0, p1, p2)
 	if string.len(p1) == 0 then
 		return true
 	end

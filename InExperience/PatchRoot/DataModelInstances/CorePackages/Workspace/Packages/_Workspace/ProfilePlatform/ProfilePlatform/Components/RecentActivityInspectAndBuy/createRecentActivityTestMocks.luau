@@ -8,7 +8,7 @@ local t = {
 	dialogActionsProps = nil
 }
 
-local function resetCaptured() --[[ line: 24 ]]
+local function resetCaptured()
 	-- upvalues: t (ref)
 	t.sheetRootProps = nil
 	t.dialogRootProps = nil
@@ -16,16 +16,16 @@ local function resetCaptured() --[[ line: 24 ]]
 	t.dialogActionsProps = nil
 end
 
-local function renderChildren(p0) --[[ line: 31 ]]
+local function renderChildren(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", nil, p0.children or p0[reactModule.Children])
 end
 
-local function createFoundationMock(p1) --[[ line: 35 ]]
+local function createFoundationMock(p1)
 	-- upvalues: t (ref), renderChildren (ref), reactModule (ref)
 	return setmetatable({
 		Sheet = {
-			Root = function(p2) --[[ line: 36 ]]
+			Root = function(p2)
 				-- upvalues: t (copy), renderChildren (copy)
 				t.sheetRootProps = p2
 				
@@ -36,20 +36,20 @@ local function createFoundationMock(p1) --[[ line: 35 ]]
 			Actions = renderChildren
 		},
 		Dialog = {
-			Root = function(p3) --[[ line: 41 ]]
+			Root = function(p3)
 				-- upvalues: t (copy), renderChildren (copy)
 				t.dialogRootProps = p3
 				
 				return renderChildren(p3)
 			end,
-			Title = function(p4) --[[ line: 46 ]]
+			Title = function(p4)
 				-- upvalues: t (copy), reactModule (copy)
 				t.dialogTitleProps = p4
 				
 				return reactModule.createElement("Frame")
 			end,
 			Content = renderChildren,
-			Actions = function(p5) --[[ line: 51 ]]
+			Actions = function(p5)
 				-- upvalues: t (copy), reactModule (copy)
 				t.dialogActionsProps = p5
 				
@@ -71,11 +71,11 @@ local t_1 = {
 	["IAPExperience.InsufficientRobux.Action.BuyRobux"] = "Buy Robux"
 }
 
-local function createLocalizationMock() --[[ line: 86 ]]
+local function createLocalizationMock()
 	-- upvalues: t_1 (ref)
 	return {
 		Hooks = {
-			useLocalization = function(p6) --[[ line: 89 ]]
+			useLocalization = function(p6)
 				-- upvalues: t_1 (copy)
 				local t = {}
 				
@@ -87,7 +87,7 @@ local function createLocalizationMock() --[[ line: 86 ]]
 			end
 		},
 		NumberLocalization = {
-			localize = function(p7, _) --[[ line: 99 ]]
+			localize = function(p7, _)
 				return tostring(p7)
 			end
 		}
@@ -106,7 +106,7 @@ local t_2 = {
 	QuantityLimitReached = "QuantityLimitReached"
 }
 
-local function getPriceStatusInShop(p8) --[[ line: 118 ]]
+local function getPriceStatusInShop(p8)
 	-- upvalues: t_2 (ref)
 	return if p8 then if p8.isOwned then t_2.Owned elseif p8.isOffSale then t_2.OffSale elseif p8.collectibleItemDetails then t_2.PurchaseFromResale elseif p8.priceInRobux == 0 then t_2.Free elseif p8.priceInRobux then t_2.PurchaseFromRoblox else t_2.Unavailable else t_2.Unavailable
 end
@@ -116,13 +116,13 @@ return {
 	resetCaptured = resetCaptured,
 	createFoundationMock = createFoundationMock,
 	createLocalizationMock = createLocalizationMock,
-	createInspectAndBuyMock = function(p9) --[[ line: 140 ]]
+	createInspectAndBuyMock = function(p9)
 		-- upvalues: getPriceStatusInShop (ref), t_2 (ref)
 		return {
 			Components = p9 or {},
 			Utils = {
 				getPriceStatusInShop = getPriceStatusInShop,
-				getPriceLineContent = function(_, _, _) --[[ line: 145 ]]
+				getPriceLineContent = function(_, _, _)
 					return {}
 				end
 			},
@@ -134,16 +134,16 @@ return {
 			}
 		}
 	end,
-	createMockStore = function() --[[ line: 160 ]]
+	createMockStore = function()
 		-- upvalues: roduxModule (ref)
-		return roduxModule.Store.new(function() --[[ line: 161 ]]
+		return roduxModule.Store.new(function()
 			return {
 				ScreenSize = Vector2.new(800, 600),
 				TopBar = { statusBarHeight = 0 }
 			}
 		end, {}, { roduxModule.thunkMiddleware })
 	end,
-	makeDisplayItem = function(p10) --[[ line: 169 ]]
+	makeDisplayItem = function(p10)
 		local t = {
 			id = "1",
 			name = "Test Item",

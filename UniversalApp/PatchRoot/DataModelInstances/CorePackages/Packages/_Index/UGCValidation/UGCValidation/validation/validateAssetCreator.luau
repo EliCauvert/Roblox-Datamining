@@ -13,7 +13,7 @@ local constantsModule = require(parent.Constants)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local getFStringUGCValidationReferenceMeshIdWhitelistForIECModule = require(parent.flags.getFStringUGCValidationReferenceMeshIdWhitelistForIEC)
 
-local function getWhitelistIds() --[[ line: 34 ]]
+local function getWhitelistIds()
 	-- upvalues: getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref)
 	local t = {}
 	local var12 = getFStringUGCValidationReferenceMeshIdWhitelistForIECModule()
@@ -27,9 +27,9 @@ local function getWhitelistIds() --[[ line: 34 ]]
 	return t
 end
 
-local function _(p0, p1, p2, p3, p4) --[[ line: 48 | named "createCanPublishPromise" ]]
+local function _(p0, p1, p2, p3, p4)
 	-- upvalues: promiseModule (ref), httpService (ref), constantsModule (ref)
-	return if #p1 == 0 then promiseModule.resolve() else promiseModule.new(function(p5, p6) --[[ line: 52 ]]
+	return if #p1 == 0 then promiseModule.resolve() else promiseModule.new(function(p5, p6)
 		-- upvalues: httpService (copy), p1 (ref), p2 (ref), p4 (ref), p0 (ref), constantsModule (copy), p3 (ref)
 		httpService:RequestInternal({
 			Method = "POST",
@@ -39,7 +39,7 @@ local function _(p0, p1, p2, p3, p4) --[[ line: 48 | named "createCanPublishProm
 				[constantsModule.ExperienceAuthHeaderKey] = p3,
 				[constantsModule.ContentType] = constantsModule.ApplicationJson
 			}
-		}):Start(function(p7, p8) --[[ line: 69 ]]
+		}):Start(function(p7, p8)
 			-- upvalues: httpService (copy), p5 (ref), p6 (ref)
 			if p7 and p8.StatusCode == 200 then
 				p5(httpService:JSONDecode(p8.Body))
@@ -51,7 +51,7 @@ local function _(p0, p1, p2, p3, p4) --[[ line: 48 | named "createCanPublishProm
 	end)
 end
 
-return function(value, p9) --[[ line: 81 | named "validateAssetCreator" ]]
+return function(value, p9)
 	-- upvalues: formattedText (ref), failureReasonsAccumulatorModule (ref), UGCValidationMaxAssetSizeAllowedFastInt (ref), analyticsModule (ref), UGCValidationCanPublishRequestPageSizeFastInt (ref), promiseModule (ref), httpService (ref), constantsModule (ref), getFStringUGCValidationReferenceMeshIdWhitelistForIECModule (ref), getWhitelistIds (ref)
 	local isServer = p9.isServer
 	local var13 = if p9.restrictedUserIds then p9.restrictedUserIds else {}
@@ -86,7 +86,7 @@ return function(value, p9) --[[ line: 81 | named "validateAssetCreator" ]]
 		table.insert(t_3, i_2)
 		
 		if UGCValidationCanPublishRequestPageSizeFastInt <= #t_3 then
-			table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p10, p11) --[[ line: 52 ]]
+			table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p10, p11)
 				-- upvalues: httpService (copy), t_3 (ref), var13 (ref), universeId (ref), text (ref), constantsModule (copy), token (ref)
 				httpService:RequestInternal({
 					Method = "POST",
@@ -100,7 +100,7 @@ return function(value, p9) --[[ line: 81 | named "validateAssetCreator" ]]
 						[constantsModule.ExperienceAuthHeaderKey] = token,
 						[constantsModule.ContentType] = constantsModule.ApplicationJson
 					}
-				}):Start(function(p12, p13) --[[ line: 69 ]]
+				}):Start(function(p12, p13)
 					-- upvalues: httpService (copy), p10 (ref), p11 (ref)
 					if p12 and p13.StatusCode == 200 then
 						p10(httpService:JSONDecode(p13.Body))
@@ -114,7 +114,7 @@ return function(value, p9) --[[ line: 81 | named "validateAssetCreator" ]]
 		end
 	end
 	if #t_3 > 0 then
-		table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p14, p15) --[[ line: 52 ]]
+		table.insert(t_2, if #t_3 == 0 then promiseModule.resolve() else promiseModule.new(function(p14, p15)
 			-- upvalues: httpService (copy), t_3 (ref), var13 (ref), universeId (ref), text (ref), constantsModule (copy), token (ref)
 			httpService:RequestInternal({
 				Method = "POST",
@@ -128,7 +128,7 @@ return function(value, p9) --[[ line: 81 | named "validateAssetCreator" ]]
 					[constantsModule.ExperienceAuthHeaderKey] = token,
 					[constantsModule.ContentType] = constantsModule.ApplicationJson
 				}
-			}):Start(function(p16, p17) --[[ line: 69 ]]
+			}):Start(function(p16, p17)
 				-- upvalues: httpService (copy), p14 (ref), p15 (ref)
 				if p16 and p17.StatusCode == 200 then
 					p14(httpService:JSONDecode(p17.Body))

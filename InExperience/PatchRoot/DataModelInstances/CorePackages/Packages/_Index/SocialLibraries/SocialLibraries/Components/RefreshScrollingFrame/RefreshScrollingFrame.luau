@@ -15,7 +15,7 @@ local _ = { Start = -240, End = 0 }
 local _ = { Start = 1, End = 0 }
 local t_1 = { dampingRatio = 1, frequency = 3.5 }
 
-local function _(startValue, endValue, alpha) --[[ line: 37 | named "lerp" ]]
+local function _(startValue, endValue, alpha)
 	local minValue = math.min(1, math.max(0, alpha))
 	
 	return startValue * (1 - minValue) + endValue * minValue
@@ -39,7 +39,7 @@ refreshScrollingFrameNew.validateProps = t.interface({
 	[roact.Children] = t.optional(t.any)
 })
 
-function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
+function refreshScrollingFrameNew.init(p0)
 	-- upvalues: refreshScrollingFrameNew (ref), roact (ref), otter (ref), t_1 (ref), userGameSettingsService (ref)
 	p0.state = { isRefreshing = false }
 	p0.startHeight = 0
@@ -50,7 +50,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 	p0.spinnerFrameRef = roact.createRef()
 	p0.spinnerRef = roact.createRef()
 	
-	function p0.updateSpinner(p1) --[[ line: 88 ]]
+	function p0.updateSpinner(p1)
 		-- upvalues: p0 (ref)
 		if p0.spinnerFrameRef.current then
 			p0.spinnerFrameRef.current.Size = UDim2.new(1, 0, 0, p1)
@@ -73,12 +73,12 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 	p0.motor = otter.createSingleMotor(0)
 	p0.motor:onStep(p0.updateSpinner)
 	
-	function p0.resetSpinner() --[[ line: 119 ]]
+	function p0.resetSpinner()
 		-- upvalues: p0 (ref), otter (copy), t_1 (copy)
 		p0.motor:setGoal(otter.spring(0, t_1))
 	end
 	
-	function p0.scrollBack() --[[ line: 123 ]]
+	function p0.scrollBack()
 		-- upvalues: p0 (ref), userGameSettingsService (copy)
 		if p0.scrollingFrameRef.current then
 			if userGameSettingsService.ReducedMotion then
@@ -90,7 +90,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 		end
 	end
 	
-	function p0.dispatchRefresh() --[[ line: 133 ]]
+	function p0.dispatchRefresh()
 		-- upvalues: p0 (ref), otter (copy), t_1 (copy)
 		local refresh = p0.props.refresh
 		local refreshThreshold = p0.props.refreshThreshold
@@ -101,7 +101,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 			p0:setState({ isRefreshing = true })
 			p0.motor:setGoal(otter.spring(refreshThreshold, t_1))
 			
-			local function onRefreshComplete() --[[ line: 149 ]]
+			local function onRefreshComplete()
 				-- upvalues: p0 (copy)
 				if p0.isMounted then
 					p0:setState({ isRefreshing = false })
@@ -113,7 +113,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 		end
 	end
 	
-	function p0.onInputBegan(_) --[[ line: 162 ]]
+	function p0.onInputBegan(_)
 		-- upvalues: p0 (ref)
 		if not p0.isUserInteracting then
 			p0.startHeight = p0.scrollingFrameRef.current.CanvasPosition.Y
@@ -121,7 +121,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 		p0.isUserInteracting = true
 	end
 	
-	function p0.onInputEnded(_) --[[ line: 171 ]]
+	function p0.onInputEnded(_)
 		-- upvalues: p0 (ref)
 		p0.isUserInteracting = false
 		local startHeight = p0.startHeight
@@ -140,7 +140,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 		end
 	end
 	
-	function p0.statusBarTapCallback() --[[ line: 191 ]]
+	function p0.statusBarTapCallback()
 		-- upvalues: p0 (ref)
 		if p0.props.onStatusBarTapped then
 			p0.props.onStatusBarTapped()
@@ -148,7 +148,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 		p0.scrollBack()
 	end
 	
-	function p0.onCanvasPositionChanged(p2) --[[ line: 198 ]]
+	function p0.onCanvasPositionChanged(p2)
 		-- upvalues: p0 (ref), otter (copy)
 		if p0.props.onCanvasPositionChangedCallback ~= nil then
 			p0.props.onCanvasPositionChangedCallback(p2)
@@ -162,7 +162,7 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 		end
 	end
 	
-	function p0.onCanvasSizeChanged(p3) --[[ line: 213 ]]
+	function p0.onCanvasSizeChanged(p3)
 		-- upvalues: p0 (ref)
 		if p0.props.onCanvasSizeChangedCallback ~= nil then
 			p0.props.onCanvasSizeChangedCallback(p3)
@@ -170,23 +170,23 @@ function refreshScrollingFrameNew.init(p0) --[[ line: 67 ]]
 	end
 end
 
-function refreshScrollingFrameNew.didMount(p4) --[[ line: 220 ]]
+function refreshScrollingFrameNew.didMount(p4)
 	p4.isMounted = true
 	p4.resetSpinner()
 end
 
-function refreshScrollingFrameNew.willUnmount(p5) --[[ line: 225 ]]
+function refreshScrollingFrameNew.willUnmount(p5)
 	p5.isMounted = false
 	p5.motor:destroy()
 	p5.motor = nil
 end
 
-function refreshScrollingFrameNew.render(p6) --[[ line: 232 ]]
+function refreshScrollingFrameNew.render(p6)
 	-- upvalues: roact (ref), withStyle (ref), cryo (ref), spinnerModule (ref), var5 (ref), externalEventConnectionModule (ref), userInputService (ref)
 	local children = p6.props[roact.Children]
 	local isRefreshing = p6.state.isRefreshing
 	
-	return withStyle(function(_) --[[ line: 236 ]]
+	return withStyle(function(_)
 		-- upvalues: roact (copy), p6 (ref), cryo (copy), spinnerModule (copy), var5 (copy), isRefreshing (ref), children (ref), externalEventConnectionModule (copy), userInputService (copy)
 		return roact.createElement(p6.props.ScrollingElement, cryo.Dictionary.join({
 			[roact.Change.CanvasPosition] = p6.onCanvasPositionChanged,
@@ -235,7 +235,7 @@ function refreshScrollingFrameNew.render(p6) --[[ line: 232 ]]
 	end)
 end
 
-return roact.forwardRef(function(p7, p8) --[[ line: 289 ]]
+return roact.forwardRef(function(p7, p8)
 	-- upvalues: roact (ref), refreshScrollingFrameNew (ref), cryo (ref)
 	return roact.createElement(refreshScrollingFrameNew, cryo.Dictionary.join(p7, { forwardRef = p8 }))
 end)

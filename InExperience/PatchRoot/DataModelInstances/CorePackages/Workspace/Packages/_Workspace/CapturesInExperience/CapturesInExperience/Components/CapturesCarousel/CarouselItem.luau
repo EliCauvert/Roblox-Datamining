@@ -17,7 +17,7 @@ local _ = require(parent.Types)
 local fFlagUseMediaPlayerInCarousel = require(parent_1.SharedFlags).FFlagUseMediaPlayerInCarousel
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local var10 = memoize(function(p0, p1) --[[ line: 33 ]]
+local var10 = memoize(function(p0, p1)
 	local var13 = p0.X / p0.Y
 	local x = p1.X
 	local floored = math.floor(x / var13)
@@ -29,28 +29,28 @@ local var10 = memoize(function(p0, p1) --[[ line: 33 ]]
 	return Vector2.new(x, floored)
 end)
 
-local function _(p2) --[[ line: 47 | named "getDeleteTransitionSize" ]]
+local function _(p2)
 	return UDim2.fromScale(p2, p2)
 end
 
-local function getDeleteTransitionTransparency(p3) --[[ line: 51 ]]
+local function getDeleteTransitionTransparency(p3)
 	-- upvalues: userGameSettingsService (ref)
 	return if userGameSettingsService.ReducedMotion then p3 else 1
 end
 
-local function getCapturesItemSize(p4) --[[ line: 55 ]]
+local function getCapturesItemSize(p4)
 	-- upvalues: userGameSettingsService (ref)
 	return if userGameSettingsService.ReducedMotion then UDim2.fromScale(1, 1) else UDim2.fromScale(p4, p4)
 end
 
-local _ = function(p5, p6) --[[ line: 59 | named "getFullScreenSize" ]]
+local _ = function(p5, p6)
 	local var15 = p5.X / p5.Y
 	local var16 = p6.X / var15
 	
 	return if var16 <= p6.Y then UDim2.fromOffset(p6.X, var16) else UDim2.fromOffset(p6.Y * var15, p6.Y)
 end
 
-return function(p7) --[[ line: 85 ]]
+return function(p7)
 	-- upvalues: useStyle (ref), reactModule (ref), useScreenSize (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), getCaptureSizeModule (ref), var10 (ref), userGameSettingsService (ref), getContentFromObject (ref), getCapturesItemSize (ref), fFlagUseMediaPlayerInCarousel (ref), mediaPlayer (ref), fFlagUseRbxstorageInGalleryModule (ref), getDeleteTransitionTransparency (ref)
 	local var37
 	local var17 = useStyle()
@@ -63,20 +63,20 @@ return function(p7) --[[ line: 85 ]]
 	local var25, var26 = reactModule.useState(false)
 	local imagePadding = p7.imagePadding
 	local itemIndex = p7.itemIndex
-	local var27 = reactModule.useCallback(function(p8) --[[ line: 99 ]]
+	local var27 = reactModule.useCallback(function(p8)
 		-- upvalues: var19 (ref)
 		var19(p8.AbsolutePosition.X)
 	end, { var19 })
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var24 (ref)
-		return function() --[[ line: 104 ]]
+		return function()
 			-- upvalues: var24 (copy)
 			if var24.current then
 				var24.current.Video = ""
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 111 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), p7 (ref), var21 (ref), itemSize (ref), captureTypeModule (copy), getCaptureSizeModule (copy)
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
 			if p7.capture.CaptureType == Enum.CaptureType.Screenshot then
@@ -86,7 +86,7 @@ return function(p7) --[[ line: 85 ]]
 		elseif p7.capture.type == captureTypeModule.Video then
 			return
 		end
-		task.spawn(function() --[[ line: 123 ]]
+		task.spawn(function()
 			-- upvalues: getCaptureSizeModule (copy), p7 (copy), var21 (copy), itemSize (copy)
 			local var49 = getCaptureSizeModule(p7.capture.contentId)
 			
@@ -98,13 +98,13 @@ return function(p7) --[[ line: 85 ]]
 			var21(itemSize)
 		end)
 	end, { itemSize, p7.capture })
-	local var28 = reactModule.useCallback(function(p9) --[[ line: 134 ]]
+	local var28 = reactModule.useCallback(function(p9)
 		-- upvalues: var24 (ref), var21 (ref)
 		var24.current = p9
 		local resolution = p9.Resolution
 		var21(Vector2.new(resolution.X, resolution.Y))
 	end, {})
-	local var29 = reactModule.useCallback(function(p10) --[[ line: 140 ]]
+	local var29 = reactModule.useCallback(function(p10)
 		-- upvalues: itemSize (ref), var22 (ref)
 		local var50 = var22.X / 2
 		local var51 = p10 + itemSize.X / 2
@@ -112,7 +112,7 @@ return function(p7) --[[ line: 85 ]]
 		
 		return math.sign(var50 - var51), math.min(1, (if absValue < 25 then 0 else absValue - 25) / (itemSize.X - 25))
 	end, { itemSize, itemIndex, var22 })
-	local var30 = reactModule.useCallback(function(p11) --[[ line: 158 ]]
+	local var30 = reactModule.useCallback(function(p11)
 		-- upvalues: var29 (ref), var10 (copy), var20 (ref), itemSize (ref), p7 (ref)
 		local _, var53 = var29(p11)
 		local var54 = var10(var20, itemSize)
@@ -124,7 +124,7 @@ return function(p7) --[[ line: 85 ]]
 		
 		return UDim2.fromOffset(math.floor(var54.X * var55), math.floor(var54.Y * var55))
 	end, { var20, itemSize, p7.unfocusedSizeMultiplier, var29 })
-	local var31 = reactModule.useCallback(function(p12) --[[ line: 177 ]]
+	local var31 = reactModule.useCallback(function(p12)
 		-- upvalues: var29 (ref), var30 (ref), itemSize (ref), imagePadding (ref)
 		local var56, var57 = var29(p12)
 		
@@ -133,33 +133,33 @@ return function(p7) --[[ line: 85 ]]
 		var20, imagePadding, itemSize, var22, var29, var30
 	})
 	local transparency = var17.Theme.Overlay.Transparency
-	local var32 = reactModule.useCallback(function(p13) --[[ line: 198 ]]
+	local var32 = reactModule.useCallback(function(p13)
 		-- upvalues: var29 (ref), transparency (ref)
 		local _, var58 = var29(p13)
 		
 		return 1 - (1 - transparency) * var58
 	end, { transparency, var29 })
-	local var33 = reactModule.useCallback(function(p14) --[[ line: 203 ]]
+	local var33 = reactModule.useCallback(function(p14)
 		-- upvalues: userGameSettingsService (copy), var32 (ref)
 		local absoluteXPosition = p14.absoluteXPosition
 		local fadeOutBinding = p14.fadeOutBinding
 		
 		return if userGameSettingsService.ReducedMotion and fadeOutBinding then 1 elseif fadeOutBinding then math.min(var32(absoluteXPosition), fadeOutBinding) else var32(absoluteXPosition)
 	end, { var32 })
-	local var34 = reactModule.useCallback(function() --[[ line: 217 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: p7 (ref), var26 (ref), var25 (ref)
 		if p7.onExpandCallback then
 			p7.onExpandCallback(p7.itemIndex)
 		end
 		var26(not var25)
 	end, { var25, p7.onExpandCallback, p7.itemIndex })
-	local var35 = reactModule.useCallback(function() --[[ line: 224 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: p7 (ref)
 		if p7.onMuteCallback then
 			p7.onMuteCallback()
 		end
 	end, { p7.onMuteCallback })
-	local var36 = reactModule.useCallback(function() --[[ line: 230 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy)
 		return reactModule.createElement("Frame", { Size = UDim2.fromScale(1, 1) })
 	end, {})
@@ -233,7 +233,7 @@ return function(p7) --[[ line: 85 ]]
 			onExpandCallback = var34,
 			onMuteCallback = var35,
 			onLoaded = var28,
-			Playing = p7.isSelected and var18:map(function(p16) --[[ line: 305 ]]
+			Playing = p7.isSelected and var18:map(function(p16)
 				-- upvalues: var29 (ref)
 				local _, var60 = var29(p16)
 				
@@ -248,7 +248,7 @@ return function(p7) --[[ line: 85 ]]
 		}) else reactModule.createElement("VideoFrame", {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
-			Playing = var18:map(function(p15) --[[ line: 321 ]]
+			Playing = var18:map(function(p15)
 				-- upvalues: var29 (ref)
 				local _, var59 = var29(p15)
 				

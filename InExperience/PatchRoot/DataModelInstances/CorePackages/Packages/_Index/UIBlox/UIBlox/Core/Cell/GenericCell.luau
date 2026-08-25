@@ -39,7 +39,7 @@ genericCell.defaultProps = {
 	isDisabled = false
 }
 
-function genericCell.render(p0) --[[ line: 84 ]]
+function genericCell.render(p0)
 	-- upvalues: roactModule (ref), interactableModule (ref), genericTextLabelModule (ref)
 	assert(p0.validateProps(p0.props))
 	
@@ -121,7 +121,7 @@ function genericCell.render(p0) --[[ line: 84 ]]
 	})
 end
 
-return roactModule.forwardRef(function(p1, p2) --[[ line: 165 ]]
+return roactModule.forwardRef(function(p1, p2)
 	-- upvalues: roactModule (ref), genericCell (ref), cryoModule (ref)
 	return roactModule.createElement(genericCell, cryoModule.Dictionary.join(p1, { controlRef = p2 }))
 end)

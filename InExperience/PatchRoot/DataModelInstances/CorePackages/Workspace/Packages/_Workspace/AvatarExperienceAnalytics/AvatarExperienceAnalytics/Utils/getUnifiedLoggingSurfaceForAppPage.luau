@@ -1,6 +1,6 @@
 ﻿local avatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 
-return function(p0) --[[ line: 21 | named "getUnifiedLoggingSurfaceForAppPage" ]]
+return function(p0)
 	-- upvalues: avatarScreenProperties (ref)
 	if typeof(p0) ~= "string" or p0 == "" then
 		return nil

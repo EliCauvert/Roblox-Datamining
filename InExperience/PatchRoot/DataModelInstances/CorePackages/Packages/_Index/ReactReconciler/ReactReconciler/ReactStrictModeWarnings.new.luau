@@ -8,15 +8,15 @@ local setCurrentFiber = reactCurrentFiberModule.setCurrentFiber
 local getComponentName = require(parent.Shared).getComponentName
 local strictMode = require(script.Parent.ReactTypeOfMode).StrictMode
 local t = {
-	recordUnsafeLifecycleWarnings = function(_, _) --[[ line: 32 ]] end,
-	flushPendingUnsafeLifecycleWarnings = function() --[[ line: 33 ]] end,
-	recordLegacyContextWarning = function(_, _) --[[ line: 34 ]] end,
-	flushLegacyContextWarning = function() --[[ line: 35 ]] end,
-	discardPendingWarnings = function() --[[ line: 36 ]] end
+	recordUnsafeLifecycleWarnings = function(_, _) end,
+	flushPendingUnsafeLifecycleWarnings = function() end,
+	recordLegacyContextWarning = function(_, _) end,
+	flushLegacyContextWarning = function() end,
+	discardPendingWarnings = function() end
 }
 
 if reactGlobalsModule.__DEV__ then
-	local _ = function(p0) --[[ line: 40 ]]
+	local _ = function(p0)
 		-- upvalues: strictMode (ref)
 		local var13 = nil
 		local var14 = p0
@@ -29,7 +29,7 @@ if reactGlobalsModule.__DEV__ then
 		return var13
 	end
 	
-	local var3 = function(p1) --[[ line: 55 ]]
+	local var3 = function(p1)
 		local t = {}
 		
 		for i, v in p1 do
@@ -48,7 +48,7 @@ if reactGlobalsModule.__DEV__ then
 	local t_6 = {}
 	local t_7 = {}
 	
-	function t.recordUnsafeLifecycleWarnings(p2, p3) --[[ line: 74 ]]
+	function t.recordUnsafeLifecycleWarnings(p2, p3)
 		-- upvalues: t_7 (ref), t_1 (ref), strictMode (ref), t_2 (ref), t_3 (ref), t_4 (ref), t_5 (ref), t_6 (ref)
 		if t_7[p2.type] then return end
 		if typeof(p3.componentWillMount) == "function" then
@@ -71,7 +71,7 @@ if reactGlobalsModule.__DEV__ then
 		end
 	end
 	
-	function t.flushPendingUnsafeLifecycleWarnings() --[[ line: 130 ]]
+	function t.flushPendingUnsafeLifecycleWarnings()
 		-- upvalues: t_1 (ref), getComponentName (ref), t_7 (ref), t_2 (ref), t_3 (ref), t_4 (ref), t_5 (ref), t_6 (ref), var3 (ref), console (ref)
 		local t = {}
 		
@@ -150,7 +150,7 @@ if reactGlobalsModule.__DEV__ then
 	local t_8 = {}
 	local t_9 = {}
 	
-	function t.recordLegacyContextWarning(p4, p5) --[[ line: 303 ]]
+	function t.recordLegacyContextWarning(p4, p5)
 		-- upvalues: strictMode (ref), console (ref), t_9 (ref), t_8 (ref)
 		local t = nil
 		local var23 = p4
@@ -176,7 +176,7 @@ if reactGlobalsModule.__DEV__ then
 		end
 	end
 	
-	function t.flushLegacyContextWarning() --[[ line: 342 ]]
+	function t.flushLegacyContextWarning()
 		-- upvalues: t_8 (ref), getComponentName (ref), t_9 (ref), var3 (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
 		for i, v in t_8 do
 			if #v ~= 0 then
@@ -188,7 +188,7 @@ if reactGlobalsModule.__DEV__ then
 					t_9[v_1.type] = true
 				end
 				local var26 = var3(t)
-				local ok, status = pcall(function() --[[ line: 357 ]]
+				local ok, status = pcall(function()
 					-- upvalues: setCurrentFiber (copy), var24 (ref), console (copy), var26 (ref)
 					setCurrentFiber(var24)
 					console.error("Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://reactjs.org/link/legacy-context", var26)
@@ -203,7 +203,7 @@ if reactGlobalsModule.__DEV__ then
 		end
 	end
 	
-	function t.discardPendingWarnings() --[[ line: 378 ]]
+	function t.discardPendingWarnings()
 		-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), t_5 (ref), t_6 (ref), t_8 (ref)
 		table.clear(t_1)
 		table.clear(t_2)

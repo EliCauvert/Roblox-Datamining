@@ -1,6 +1,6 @@
 ﻿local getFFlagUseCommunitiesTranslation = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).GetFFlagUseCommunitiesTranslation
 
-return function() --[[ line: 13 ]]
+return function()
 	-- upvalues: getFFlagUseCommunitiesTranslation (ref)
 	return {
 		icon = "icons/menu/groups",

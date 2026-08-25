@@ -9,7 +9,7 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 47 | named "VoiceActionBar" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), button (ref), fillBehavior (ref), inputSize (ref), iconButton (ref), iconName (ref), buttonVariant (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",

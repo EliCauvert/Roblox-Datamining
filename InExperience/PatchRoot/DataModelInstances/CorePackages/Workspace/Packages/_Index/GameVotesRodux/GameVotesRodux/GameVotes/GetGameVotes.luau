@@ -1,6 +1,6 @@
 ﻿local url = require(script:FindFirstAncestor("GameVotesRodux").Parent.Http).Url
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: url (ref)
 	assert(type(p1) == "string", "GetGameVotes request expects universeId to be a string")
 	

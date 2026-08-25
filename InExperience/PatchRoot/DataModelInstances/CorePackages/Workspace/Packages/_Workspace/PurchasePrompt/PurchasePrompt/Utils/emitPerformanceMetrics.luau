@@ -14,7 +14,7 @@ local t = {
 	[enums.ProductPurchaseSurface.EDP] = true
 }
 
-function emitPerformanceMetrics(p0, p1) --[[ line: 22 ]]
+function emitPerformanceMetrics(p0, p1)
 	-- upvalues: t (ref)
 	if p1 ~= nil and t[p1] then
 		emitFPSMetrics(p0, p1)
@@ -22,13 +22,13 @@ function emitPerformanceMetrics(p0, p1) --[[ line: 22 ]]
 	end
 end
 
-function emitFPSMetrics(p2, p3) --[[ line: 30 ]]
+function emitFPSMetrics(p2, p3)
 	-- upvalues: intervalPerformanceTracker (ref), constantsModule (ref), productPurchaseContainerFPSDuration (ref)
 	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.UnifiedPurchaseModal .. "_" .. p2 .. "_" .. p3, productPurchaseContainerFPSDuration, nil, true, true)
 	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.PurchaseModal .. "_" .. p2 .. "_" .. p3, productPurchaseContainerFPSDuration, nil, true, true)
 end
 
-function emitTTIMetrics(p4) --[[ line: 51 ]]
+function emitTTIMetrics(p4)
 	-- upvalues: getTTIEventName (ref), timeToInteractiveTracker (ref), fIntTTIUnifiedPurchaseSamplingRate (ref)
 	timeToInteractiveTracker.trackEnd(getTTIEventName(p4), {
 		samplingRateOverride = fIntTTIUnifiedPurchaseSamplingRate

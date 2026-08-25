@@ -40,17 +40,17 @@ for i_2, v_2 in ipairs(t) do
 end
 local networkChart = roactModule.Component:extend("NetworkChart")
 
-function networkChart.init(p0) --[[ line: 57 ]]
+function networkChart.init(p0)
 	-- upvalues: roactModule (ref)
-	function p0.getOnExpandEntry(p1) --[[ line: 58 ]]
+	function p0.getOnExpandEntry(p1)
 		-- upvalues: p0 (ref)
-		return function(_, _) --[[ line: 59 ]]
+		return function(_, _)
 			-- upvalues: p0 (copy), p1 (ref)
 			p0:setState({ expandIndex = p0.state.expandIndex ~= p1 and p1 })
 		end
 	end
 	
-	function p0.onCanvasPosChanged() --[[ line: 66 ]]
+	function p0.onCanvasPosChanged()
 		-- upvalues: p0 (ref)
 		local canvasPosition = p0.scrollingRef.current.CanvasPosition
 		
@@ -67,13 +67,13 @@ function networkChart.init(p0) --[[ line: 57 ]]
 	p0.state = { expandIndex = false }
 end
 
-function networkChart.willUpdate(p2) --[[ line: 84 ]]
+function networkChart.willUpdate(p2)
 	if p2.canvasPosConnector then
 		p2.canvasPosConnector:Disconnect()
 	end
 end
 
-function networkChart.didUpdate(p3) --[[ line: 90 ]]
+function networkChart.didUpdate(p3)
 	if p3.scrollingRef.current then
 		p3.canvasPosConnector = p3.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p3.onCanvasPosChanged)
 		local absoluteSize = p3.scrollingRef.current.AbsoluteSize
@@ -84,7 +84,7 @@ function networkChart.didUpdate(p3) --[[ line: 90 ]]
 	end
 end
 
-function networkChart.didMount(p4) --[[ line: 104 ]]
+function networkChart.didMount(p4)
 	if p4.scrollingRef.current then
 		p4.canvasPosConnector = p4.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p4.onCanvasPosChanged)
 		p4:setState({
@@ -94,7 +94,7 @@ function networkChart.didMount(p4) --[[ line: 104 ]]
 	end
 end
 
-function networkChart.render(p5) --[[ line: 116 ]]
+function networkChart.render(p5)
 	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), t_3 (ref), lineWidth (ref), headerFrameHeight (ref), lineColor (ref), entryFrameHeight (ref), responseStrHeight (ref), responseWidthRatio (ref), textService (ref), mainWindow (ref), mainWindow_1 (ref), networkChartEntryModule (ref), t_2 (ref), constantsModule (ref)
 	local httpEntryList = p5.props.httpEntryList or {}
 	local chartHeight = p5.props.chartHeight

@@ -17,7 +17,7 @@ itemRestrictionStatus.validateProps = tModule.strictInterface({
 	restrictionInfo = tModule.optional(tModule.table)
 })
 
-local function _(p0, p1) --[[ line: 34 | named "getAdditionalText" ]]
+local function _(p0, p1)
 	-- upvalues: itemTileEnumsModule (ref)
 	local var11 = if p0[itemTileEnumsModule.Restriction.LimitedUnique] then "#" else ""
 	
@@ -29,14 +29,14 @@ local function _(p0, p1) --[[ line: 34 | named "getAdditionalText" ]]
 	return var11
 end
 
-local _ = function(p2) --[[ line: 52 | named "getRestrictionIcon" ]]
+local _ = function(p2)
 	-- upvalues: itemTileEnumsModule (ref), imagesModule (ref)
 	return if p2[itemTileEnumsModule.Restriction.Collectible] then imagesModule["icons/status/item/limited"] elseif p2[itemTileEnumsModule.Restriction.Limited] or p2[itemTileEnumsModule.Restriction.LimitedUnique] then imagesModule["icons/status/item/limited"] else nil
 end
 
-function itemRestrictionStatus.render(p3) --[[ line: 67 ]]
+function itemRestrictionStatus.render(p3)
 	-- upvalues: withStyleModule (ref), itemTileEnumsModule (ref), getTextSizeModule (ref), vector2 (ref), imagesModule (ref), vector2_1 (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
-	return withStyleModule(function(p4) --[[ line: 68 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: p3 (ref), itemTileEnumsModule (copy), getTextSizeModule (copy), vector2 (copy), imagesModule (copy), vector2_1 (copy), roactModule (copy), imageSetComponentModule (copy), UIBloxConfigModule (copy)
 		local var13
 		local theme = p4.Theme

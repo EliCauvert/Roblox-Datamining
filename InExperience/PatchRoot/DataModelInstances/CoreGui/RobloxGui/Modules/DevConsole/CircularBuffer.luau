@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 5 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(p0, "Cannot initialize CircularBuffer with nil")
 	assert(p0 > 0, "Cannot initialize CircularBuffer to size < 1")
@@ -14,20 +14,20 @@ function t.new(p0) --[[ line: 5 ]]
 	return t_1
 end
 
-function t:reset() --[[ line: 19 ]]
+function t:reset()
 	self._data = {}
 	self._backIndex = 0
 end
 
-function t:getSize() --[[ line: 24 ]]
+function t:getSize()
 	return #self._data
 end
 
-function t:getMaxSize() --[[ line: 28 ]]
+function t:getMaxSize()
 	return self._maxSize
 end
 
-function t:setSize(p1) --[[ line: 32 ]]
+function t:setSize(p1)
 	assert(p1, "Cannot set CircularBuffer with nil")
 	assert(p1 > 0, "Cannot set CircularBuffer to size < 1")
 	
@@ -51,26 +51,26 @@ function t:setSize(p1) --[[ line: 32 ]]
 	self._maxSize = p1
 end
 
-function t:getFrontIndex() --[[ line: 63 ]]
+function t:getFrontIndex()
 	local var7 = self._backIndex + 1
 	
 	return if self._data[var7] then var7 else 1
 end
 
-function t:front() --[[ line: 71 ]]
+function t:front()
 	local frontIndex = self:getFrontIndex()
 	
 	return if self._data[frontIndex] then self._data[frontIndex].entry else nil
 end
 
-function t:back() --[[ line: 79 ]]
+function t:back()
 	return if self._data[self._backIndex] then self._data[self._backIndex].entry else nil
 end
 
-function t:iterator() --[[ line: 86 ]]
+function t:iterator()
 	return {
 		data = self._data[self:getFrontIndex()],
-		next = function(p2) --[[ line: 91 ]]
+		next = function(p2)
 			local data = p2.data
 			
 			if data then
@@ -81,24 +81,24 @@ function t:iterator() --[[ line: 86 ]]
 	}
 end
 
-function t:getData() --[[ line: 103 ]]
+function t:getData()
 	return self._data
 end
 
-function t:at(p3) --[[ line: 107 ]]
+function t:at(p3)
 	assert(p3, "Cannot index CircularBuffer with nil")
 	local var9 = (self:getFrontIndex() + p3 - 2) % self._maxSize + 1
 	
 	return if self._data[var9] then self._data[var9].entry else nil
 end
 
-function t:reverseAt(p4) --[[ line: 118 ]]
+function t:reverseAt(p4)
 	local var10 = (self._backIndex - p4) % self._maxSize + 1
 	
 	return if self._data[var10] then self._data[var10].entry else nil
 end
 
-function t:push_back(p5) --[[ line: 129 ]]
+function t:push_back(p5)
 	local backIndex = self._backIndex
 	local var11 = self._backIndex + 1
 	

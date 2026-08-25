@@ -13,7 +13,7 @@ local iconVariant = foundationModule.Enums.IconVariant
 local circleI = builderIconsModule.Icon.CircleI
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return function(p0) --[[ line: 24 | named "JoinYear" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), text (ref), icon (ref), circleI (ref), inputSize (ref), iconVariant (ref)
 	if not p0.joinDateTime or p0.joinDateTime == "" then
 		return nil

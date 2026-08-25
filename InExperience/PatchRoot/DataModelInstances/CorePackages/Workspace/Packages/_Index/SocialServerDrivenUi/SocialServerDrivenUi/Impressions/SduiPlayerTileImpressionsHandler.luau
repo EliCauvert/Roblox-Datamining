@@ -3,7 +3,7 @@ local localizationService = game:GetService("LocalizationService")
 local sduiErrors = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.SduiCoreSystem).SduiErrors
 local sduiPlayerTileImpressionsThrottlingHundredthsPercent = game:DefineFastInt("SduiPlayerTileImpressionsThrottlingHundredthsPercent", 10000)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 18 | named "SduiPlayerTileImpressionsHandler" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: sduiErrors (ref), telemetryService (ref), sduiPlayerTileImpressionsThrottlingHundredthsPercent (ref), localizationService (ref)
 	if not p3 then
 		p0.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogPlayerTileImpressions, {

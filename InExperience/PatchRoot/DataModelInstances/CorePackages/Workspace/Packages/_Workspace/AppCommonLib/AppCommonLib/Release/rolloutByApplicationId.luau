@@ -1,6 +1,6 @@
 ﻿local getNumericalApplicationIdModule = require(script.Parent.getNumericalApplicationId)
 
-local function _(p0, p1) --[[ line: 9 | named "getRolloutEnabledForUser" ]]
+local function _(p0, p1)
 	-- upvalues: getNumericalApplicationIdModule (ref)
 	local var1 = p0()
 	local var2 = getNumericalApplicationIdModule(p1)
@@ -8,7 +8,7 @@ local function _(p0, p1) --[[ line: 9 | named "getRolloutEnabledForUser" ]]
 	return if var2 == nil then var1 >= 100 else var2 % 100 + 1 <= var1
 end
 
-return function(p2, p3) --[[ line: 28 ]]
+return function(p2, p3)
 	-- upvalues: getNumericalApplicationIdModule (ref)
 	local var5
 	local var3 = p2()
@@ -20,7 +20,7 @@ return function(p2, p3) --[[ line: 28 ]]
 	else
 		var5 = var4 % 100 + 1 <= var3
 	end
-	return function() --[[ line: 34 ]]
+	return function()
 		-- upvalues: var5 (ref)
 		return var5
 	end

@@ -1,29 +1,29 @@
 ﻿local isSubjectToDesktopPolicies = require(script.Parent.Parent.SharedFlags).isSubjectToDesktopPolicies
 
-return function(p0) --[[ line: 5 | named "SharePolicies" ]]
+return function(p0)
 	-- upvalues: isSubjectToDesktopPolicies (ref)
 	return {
-		getAccountProviderName = function() --[[ line: 7 ]]
+		getAccountProviderName = function()
 			-- upvalues: p0 (ref)
 			return p0.AccountProviderName or ""
 		end,
-		shouldShowGameDetailsShareButton = function() --[[ line: 10 ]]
+		shouldShowGameDetailsShareButton = function()
 			-- upvalues: isSubjectToDesktopPolicies (copy), p0 (ref)
 			return if isSubjectToDesktopPolicies() then false else p0.GameDetailsShareButton or false
 		end,
-		shouldShowCatalogShareButton = function() --[[ line: 17 ]]
+		shouldShowCatalogShareButton = function()
 			-- upvalues: isSubjectToDesktopPolicies (copy), p0 (ref)
 			return if isSubjectToDesktopPolicies() then false else p0.CatalogShareButton or false
 		end,
-		shouldShareToAccountProvider = function() --[[ line: 24 ]]
+		shouldShareToAccountProvider = function()
 			-- upvalues: p0 (ref)
 			return p0.ShareToAccountProvider or false
 		end,
-		shouldInviteFromAccountProvider = function() --[[ line: 27 ]]
+		shouldInviteFromAccountProvider = function()
 			-- upvalues: p0 (ref)
 			return p0.InviteFromAccountProvider or false
 		end,
-		getShareToAccountProviderTimeout = function() --[[ line: 30 ]]
+		getShareToAccountProviderTimeout = function()
 			-- upvalues: p0 (ref)
 			return p0.ShareToAccountProviderTimeout or 5
 		end

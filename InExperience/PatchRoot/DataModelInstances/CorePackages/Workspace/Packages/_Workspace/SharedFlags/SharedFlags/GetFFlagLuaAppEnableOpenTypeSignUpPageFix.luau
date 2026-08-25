@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppEnableOpenTypeSignUpPageFix", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaAppEnableOpenTypeSignUpPageFix")
 end

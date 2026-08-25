@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsPushedFeedSafeArea", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("MomentsPushedFeedSafeArea")
 end

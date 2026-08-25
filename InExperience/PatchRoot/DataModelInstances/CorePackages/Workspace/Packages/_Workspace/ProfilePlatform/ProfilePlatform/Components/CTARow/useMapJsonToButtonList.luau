@@ -28,7 +28,7 @@ local var15 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(p
 local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 
-local function profileMenuItemFromResolvedAction(p0, p1, p2) --[[ line: 52 ]]
+local function profileMenuItemFromResolvedAction(p0, p1, p2)
 	local var20 = p1.onActivated[p2]
 	
 	if var20 then
@@ -44,7 +44,7 @@ local function profileMenuItemFromResolvedAction(p0, p1, p2) --[[ line: 52 ]]
 	return nil
 end
 
-local function contextualMenuItemsFromJsonActions(p3, p4, p5) --[[ line: 70 ]]
+local function contextualMenuItemsFromJsonActions(p3, p4, p5)
 	-- upvalues: profileMenuItemFromResolvedAction (ref)
 	local t = {}
 	
@@ -69,7 +69,7 @@ local function contextualMenuItemsFromJsonActions(p3, p4, p5) --[[ line: 70 ]]
 	return t
 end
 
-local function _(p6) --[[ line: 98 | named "hasJoinExperience" ]]
+local function _(p6)
 	-- upvalues: enumsModule (ref)
 	for i, v in p6 do
 		if v.type == enumsModule.ProfileActions.JoinExperience then
@@ -79,20 +79,20 @@ local function _(p6) --[[ line: 98 | named "hasJoinExperience" ]]
 	return false
 end
 
-return function(p7) --[[ line: 107 | named "useMapJsonToButtonList" ]]
+return function(p7)
 	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileActionsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), var15 (ref), useEffectOnce (ref), contextualMenuItemsFromJsonActions (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref), buttonVariant (ref), profileMenuItemFromResolvedAction (ref), eventNamesModule (ref)
 	local var25 = useDispatch()
 	local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
 	local var27 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
 	local profileType = useProfileWrapperContextModule().profileType
 	local var28 = useProfileAnalyticsContextModule()
-	local var29 = if fFlagProfilePlatformPresenceStoreMigrationModule then nil else useSelector(function(p8) --[[ line: 116 ]]
+	local var29 = if fFlagProfilePlatformPresenceStoreMigrationModule then nil else useSelector(function(p8)
 		-- upvalues: networkingPresenceModule (copy), p7 (ref), networkStatus (copy)
 		return networkingPresenceModule.GetPresencesFromUserIds.getStatus(p8, p7) == networkStatus.NotStarted
 	end)
 	
 	if fFlagProfilePlatformAddCurrentlyPlayingModule then
-		reactModule.useEffect(function() --[[ line: 121 ]]
+		reactModule.useEffect(function()
 			-- upvalues: actions (ref), enumsModule (copy), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var15 (copy), p7 (ref), var25 (ref), networkingPresenceModule (copy)
 			if actions.buttons then
 				local var33
@@ -115,7 +115,7 @@ return function(p7) --[[ line: 107 | named "useMapJsonToButtonList" ]]
 	else
 		local var30 = useEffectOnce
 		
-		local var31 = function() --[[ line: 132 ]]
+		local var31 = function()
 			-- upvalues: fFlagProfilePlatformPresenceStoreMigrationModule (copy), var15 (copy), p7 (ref), var25 (ref), networkingPresenceModule (copy)
 			if fFlagProfilePlatformPresenceStoreMigrationModule then
 				var15.RefreshPresenceByUserId(p7)
@@ -138,7 +138,7 @@ return function(p7) --[[ line: 107 | named "useMapJsonToButtonList" ]]
 		end
 		var30(var31, var32)
 	end
-	return reactModule.useMemo(function() --[[ line: 145 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: actions (ref), var27 (ref), contextualMenuItemsFromJsonActions (copy), profileType (ref), fFlagEnableProfilePlatformDisabledActions (copy), fFlagEnableCommunityVerificationModalModule (copy), enumsModule (copy), fFlagPortEnableCommunityVerificationModalModule (copy), iconName (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var25 (ref), navigateDown (copy), fFlagEnableProfilePlatformDisabledReasonTextModule (copy), buttonVariant (copy), profileMenuItemFromResolvedAction (copy), var28 (ref), eventNamesModule (copy)
 		local t = {}
 		
@@ -156,7 +156,7 @@ return function(p7) --[[ line: 107 | named "useMapJsonToButtonList" ]]
 				if fFlagEnableCommunityVerificationModalModule and v.type == enumsModule.ProfileActions.JoinCommunity and (v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelLow or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelMedium or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelHigh) then
 					cloned.icon = if fFlagEnableCommunityVerificationModalModule and fFlagPortEnableCommunityVerificationModalModule then iconName.LockClosed else nil
 					cloned.onActivated = {
-						[profileType] = function() --[[ line: 173 ]]
+						[profileType] = function()
 							-- upvalues: enumsModule (copy), v (ref), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var25 (copy), navigateDown (copy)
 							local t = {
 								name = enumsModule.Screens.CommunityVerificationModal,
@@ -192,7 +192,7 @@ return function(p7) --[[ line: 107 | named "useMapJsonToButtonList" ]]
 				menuItem = {
 					id = enumsModule.ProfileActions.ContextualOverflow,
 					displayValue = { icon = iconName.ThreeDotsHorizontal },
-					onActivated = function() --[[ line: 223 ]]
+					onActivated = function()
 						-- upvalues: var28 (copy), eventNamesModule (copy)
 						var28.fireAnalyticsEvent(eventNamesModule.ContextualMenuButton)
 					end

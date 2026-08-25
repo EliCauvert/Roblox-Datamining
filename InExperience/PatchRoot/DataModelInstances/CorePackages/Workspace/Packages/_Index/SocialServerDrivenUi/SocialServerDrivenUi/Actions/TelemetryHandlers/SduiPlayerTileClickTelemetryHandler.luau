@@ -6,7 +6,7 @@ local getActionTelemetryFieldValue = require(parent.SduiCoreSystem).getActionTel
 local calculateRowPositionFields = require(parent.UnifiedLogging).calculateRowPositionFields
 local sduiPlayerTileClickThrottlingHundredthsPercent = game:DefineFastInt("SduiPlayerTileClickThrottlingHundredthsPercent", 10000)
 
-return function(p0, p1, p2) --[[ line: 22 | named "SduiPlayerTileClickTelemetryHandler" ]]
+return function(p0, p1, p2)
 	-- upvalues: getActionTelemetryFieldValue (ref), calculateRowPositionFields (ref), telemetryService (ref), sduiPlayerTileClickThrottlingHundredthsPercent (ref), httpService (ref), localizationService (ref)
 	local var4 = getActionTelemetryFieldValue(p0, p1, "profileType")
 	

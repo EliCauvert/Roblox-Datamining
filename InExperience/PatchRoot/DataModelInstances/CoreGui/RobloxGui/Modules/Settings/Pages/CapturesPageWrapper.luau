@@ -35,25 +35,25 @@ local UIPadding = captures.Page:FindFirstChildWhichIsA("UIPadding")
 if UIPadding then
 	UIPadding:Destroy()
 end
-function captures.ConnectHubToApp(_, p0, p1, p2) --[[ line: 66 ]]
+function captures.ConnectHubToApp(_, p0, p1, p2)
 	-- upvalues: captures (ref), getFFlagFixIGMTabTransitionsModule (ref)
 	captures:SetHub(p0)
 	local var13 = p1.AbsoluteSize.Y - 20
 	captures.Page.Size = UDim2.new(1, 0, 0, var13)
-	p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 71 ]]
+	p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: var13 (write), p1 (ref), captures (copy)
 		var13 = p1.AbsoluteSize.Y - 20
 		captures.Page.Size = UDim2.new(1, 0, 0, var13)
 	end)
 	local display = captures.Display
 	
-	function captures.Display(_, ...) --[[ line: 77 ]]
+	function captures.Display(_, ...)
 		-- upvalues: p2 (ref), display (ref), captures (copy)
 		p2.openMenu()
 		display(captures, ...)
 	end
 	
-	captures.Hidden.Event:Connect(function() --[[ line: 82 ]]
+	captures.Hidden.Event:Connect(function()
 		-- upvalues: getFFlagFixIGMTabTransitionsModule (copy), p2 (ref)
 		if not getFFlagFixIGMTabTransitionsModule() then
 			p2.closeMenu()
@@ -61,7 +61,7 @@ function captures.ConnectHubToApp(_, p0, p1, p2) --[[ line: 66 ]]
 	end)
 	local hide = captures.Hide
 	
-	function captures.Hide(_, ...) --[[ line: 91 ]]
+	function captures.Hide(_, ...)
 		-- upvalues: getFFlagFixIGMTabTransitionsModule (copy), p2 (ref), hide (ref), captures (copy)
 		if getFFlagFixIGMTabTransitionsModule() then
 			p2.closeMenu()

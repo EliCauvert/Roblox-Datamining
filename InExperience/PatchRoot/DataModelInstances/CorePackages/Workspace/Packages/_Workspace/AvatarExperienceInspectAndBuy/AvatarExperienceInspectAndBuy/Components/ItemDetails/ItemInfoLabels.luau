@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local twoPanelLabelWithDividerModule = require(avatarExperienceInspectAndBuy.Components.Common.TwoPanelLabelWithDivider)
 
-return function(a) --[[ line: 39 | named "ItemInfoLabels" ]]
+return function(a)
 	-- upvalues: reactModule (ref), twoPanelLabelWithDividerModule (ref), foundationModule (ref)
 	local t = {}
 	

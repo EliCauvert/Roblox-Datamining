@@ -1,7 +1,7 @@
 ﻿local var0 = 1
 local tbl = setmetatable({}, { __mode = "k" })
 
-return function(p0) --[[ line: 15 | named "idFor" ]]
+return function(p0)
 	-- upvalues: tbl (ref), var0 (write)
 	if p0 == nil then
 		return 0

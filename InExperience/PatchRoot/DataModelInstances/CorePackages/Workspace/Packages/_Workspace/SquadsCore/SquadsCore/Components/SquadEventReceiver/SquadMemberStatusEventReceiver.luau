@@ -10,7 +10,7 @@ local userProfileStore = require(parent.UserProfiles).Stores.UserProfileStore
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useCurrentSquadSelector = roduxSquadsModule.Hooks.useCurrentSquadSelector
 
-return function() --[[ line: 18 ]]
+return function()
 	-- upvalues: useCurrentSquadSelector (ref), useLocalUserId (ref), reactModule (ref), useLocalization (ref), useSelector (ref), cryoModule (ref), guiService (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), userProfileStore (ref)
 	local var4 = useCurrentSquadSelector()
 	local var5 = useLocalUserId()
@@ -20,15 +20,15 @@ return function() --[[ line: 18 ]]
 		multiplePeopleJoinedYourPartyText = "Feature.Squads.Label.MultiplePeopleJoinedYourParty",
 		twoFriendsJoinedYourPartyText = "Feature.Squads.Label.TwoFriendsJoinedYourParty"
 	})
-	local var8 = useSelector(reactModule.useCallback(function(p0) --[[ line: 29 ]]
+	local var8 = useSelector(reactModule.useCallback(function(p0)
 		return p0.Squad.UserBlocking.isBlockedByMe
 	end, {}))
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var6 (ref), cryoModule (copy), var5 (ref), var8 (ref), guiService (copy), var7 (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), userProfileStore (copy)
 		local var9 = if var4 then var4.members else nil
 		
 		if var6.current and var9 then
-			local var10 = cryoModule.List.toSet(cryoModule.List.map(var6.current, function(p1) --[[ line: 39 ]]
+			local var10 = cryoModule.List.toSet(cryoModule.List.map(var6.current, function(p1)
 				return tostring(p1.userId)
 			end))
 			local t = {}
@@ -49,7 +49,7 @@ return function() --[[ line: 18 ]]
 						Icon = getStandardSizeAvatarHeadShotRbxthumb(t[1])
 					})
 				else
-					userProfileStore.get().fetchNamesByUserIds(t, function(p2) --[[ line: 63 ]]
+					userProfileStore.get().fetchNamesByUserIds(t, function(p2)
 						-- upvalues: tCount (ref), var7 (copy), getStandardSizeAvatarHeadShotRbxthumb (copy), t (ref), guiService (copy)
 						if #p2.data > 0 and p2.status == "success" then
 							guiService:SendNotification({

@@ -21,7 +21,7 @@ local useScrollbarOffsetModule = require(genericAbuseReporting.Common.useScrollb
 local sendAnalyticsEvent = beduiAnalyticsModule.sendAnalyticsEvent
 local telemetryEventType = beduiAnalyticsModule.TelemetryEventType
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLayerCollector (ref), reactModule (ref), useScrollbarOffsetModule (ref), useOnScreenKeyboardHeightModule (ref), useLocalization (ref), useAnalyticsContextModule (ref), useSelector (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), partialPageModal (ref), view (ref), scrollView (ref), fFlagAddThumbnailSelectorReport (ref), reportFlowHandlerModule (ref)
 	local absoluteSize = useLayerCollector().absoluteSize
 	local var10, var11 = reactModule.useBinding(Vector2.new(0, 0))
@@ -35,10 +35,10 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
 	local var18 = useLocalization({ reportTitle = "Feature.ReportAbuse.Label.Report" })
 	local var19 = useAnalyticsContextModule()
 	local isReportSubmitted = var19.isReportSubmitted
-	local var20 = useSelector(function(p1) --[[ line: 64 ]]
+	local var20 = useSelector(function(p1)
 		return if p1.GlobalGuiInset then p1.GlobalGuiInset.top else 0
 	end)
-	local var21 = reactModule.useMemo(function() --[[ line: 69 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: isKeyboardShowing (ref), keyboardPositionY (ref), var20 (ref), absoluteSize (ref), onScreenKeyboardHeight (ref)
 		if not isKeyboardShowing then
 			return 0
@@ -53,11 +53,11 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
 		absoluteSize.Y,
 		var20
 	})
-	local var22 = reactModule.useMemo(function() --[[ line: 92 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: isKeyboardShowing (ref), var21 (ref)
 		return if isKeyboardShowing then -var21 else 0
 	end, { isKeyboardShowing, var21 })
-	reactModule.useEffect(function() --[[ line: 100 ]]
+	reactModule.useEffect(function()
 		-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), p0 (ref)
 		sendAnalyticsEvent({
 			eventType = telemetryEventType.Rendered,
@@ -70,7 +70,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
 		screenSize = Vector2.new(absoluteSize.X, absoluteSize.Y),
 		position = if isKeyboardShowing then UDim2.new(0.5, 0, 1, var22) else nil,
 		anchorPoint = if isKeyboardShowing then Vector2.new(0.5, 1) else nil,
-		onCloseClicked = reactModule.useCallback(function() --[[ line: 109 ]]
+		onCloseClicked = reactModule.useCallback(function()
 			-- upvalues: isReportSubmitted (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var19 (ref), p0 (ref)
 			if not isReportSubmitted then
 				sendAnalyticsEvent({
@@ -83,7 +83,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
 	}, {
 		View = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, {
 			ScrollView = reactModule.createElement(scrollView, {
-				Size = var10:map(function(p2) --[[ line: 130 ]]
+				Size = var10:map(function(p2)
 					-- upvalues: absoluteSize (ref), var21 (ref)
 					return UDim2.new(1, 0, 0, math.min(absoluteSize.Y - var21 - 100, math.ceil(p2.Y)))
 				end),
@@ -93,11 +93,11 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					VerticalScrollBarInset = if fFlagAddThumbnailSelectorReport then Enum.ScrollBarInset.ScrollBar else nil
 				},
-				onAbsoluteCanvasSizeChanged = function(value) --[[ line: 146 ]]
+				onAbsoluteCanvasSizeChanged = function(value)
 					-- upvalues: var13 (ref)
 					var13(value.AbsoluteCanvasSize)
 				end,
-				onAbsoluteWindowSizeChanged = function(value) --[[ line: 149 ]]
+				onAbsoluteWindowSizeChanged = function(value)
 					-- upvalues: var15 (ref)
 					var15(value.AbsoluteWindowSize)
 				end
@@ -105,7 +105,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "DynamicReport" ]]
 				Content = reactModule.createElement(view, {
 					tag = "auto-xy padding-x-xxsmall padding-top-medium",
 					Size = if fFlagAddThumbnailSelectorReport then UDim2.new(0, 0, 0, 0) else UDim2.new(0, -var16, 0, 0),
-					onAbsoluteSizeChanged = function(value) --[[ line: 157 ]]
+					onAbsoluteSizeChanged = function(value)
 						-- upvalues: var11 (ref)
 						var11(value.AbsoluteSize)
 					end

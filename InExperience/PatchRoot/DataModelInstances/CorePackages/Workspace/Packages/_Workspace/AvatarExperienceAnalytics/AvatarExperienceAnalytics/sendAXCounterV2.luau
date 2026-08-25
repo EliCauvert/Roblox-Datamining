@@ -6,7 +6,7 @@ local default = require(parent.LoggingProtocol).default
 local dashModule = require(parent.Dash)
 local isSpatial = require(parent.AppCommonLib).isSpatial
 
-local function getAXCounterV2Metadata(p0) --[[ line: 15 ]]
+local function getAXCounterV2Metadata(p0)
 	-- upvalues: userInputService (ref), isSpatial (ref), runService (ref), httpService (ref), dashModule (ref)
 	local t = {
 		AppVersion = runService:GetRobloxVersion(),
@@ -21,7 +21,7 @@ local function getAXCounterV2Metadata(p0) --[[ line: 15 ]]
 	return t
 end
 
-return function(p1, p2) --[[ line: 35 | named "sendAXCounterV2" ]]
+return function(p1, p2)
 	-- upvalues: default (ref), getAXCounterV2Metadata (ref)
 	default:logRobloxTelemetryCounter({
 		description = "Counter to track various Avatar Experience events.",

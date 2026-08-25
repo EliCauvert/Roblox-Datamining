@@ -8,7 +8,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return function(p0) --[[ line: 18 | named "NameHistory" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), text (ref)
 	local var5 = useLocalization({
 		previousNames = textKeysModule.PreviousNames,

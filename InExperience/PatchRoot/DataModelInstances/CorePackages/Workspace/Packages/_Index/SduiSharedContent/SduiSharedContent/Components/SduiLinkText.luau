@@ -7,7 +7,7 @@ local checkAndFormatPossibleLink = require(parent.CollectionViews).checkAndForma
 local sduiTextModule = require(script.Parent.SduiText)
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 24 | named "SduiLinkText" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), checkAndFormatPossibleLink (ref), reactModule (ref), sduiTextModule (ref), cryoModule (ref)
 	local var4 = useTokens()
 	local text = p0.text

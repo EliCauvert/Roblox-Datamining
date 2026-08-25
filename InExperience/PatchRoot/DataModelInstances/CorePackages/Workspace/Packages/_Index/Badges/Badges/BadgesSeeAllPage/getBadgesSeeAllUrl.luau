@@ -7,7 +7,7 @@ local var0 = urlBuilder.new({
 })
 local luaAppBadgesSeeAllRequestPageSize = game:DefineFastInt("LuaAppBadgesSeeAllRequestPageSize", 50)
 
-return function(p0, p1) --[[ line: 16 | named "getBadgesSeeAllUrl" ]]
+return function(p0, p1)
 	-- upvalues: urlBuilder (ref), var0 (ref), luaAppBadgesSeeAllRequestPageSize (ref), fFlagSduiUniversalPageEntry (ref)
 	return urlBuilder.addQueryString(var0(), {
 		universeId = p0,

@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 12 ]]
+﻿return function(p0)
 	local parent = script.Parent.Parent
 	local reactGlobalsModule = require(parent.ReactGlobals)
 	local sharedModule = require(parent.Shared)
@@ -22,18 +22,18 @@
 	local var6 = nil
 	local var7 = nil
 	
-	local _ = function(p1, p2) --[[ line: 51 ]]
+	local _ = function(p1, p2)
 		-- upvalues: var6 (write)
 		local var23 = #p1 + 1
 		p1[var23] = p2
 		var6(p1, p2, var23)
 	end
 	
-	local _ = function(p3) --[[ line: 58 ]]
+	local _ = function(p3)
 		return p3[1]
 	end
 	
-	local _ = function(p4) --[[ line: 62 ]]
+	local _ = function(p4)
 		-- upvalues: var7 (write)
 		local var24 = p4[1]
 		
@@ -50,7 +50,7 @@
 		return var24
 	end
 	
-	var6 = function(p5, p6, p7) --[[ line: 78 ]]
+	var6 = function(p5, p6, p7)
 		-- upvalues: var5 (write)
 		local floored, var27
 		while true do
@@ -65,7 +65,7 @@
 		end
 	end
 	
-	var7 = function(p8, p9, p10) --[[ line: 94 ]]
+	var7 = function(p8, p9, p10)
 		-- upvalues: var5 (write)
 		local var31, var32
 		local p8Count = #p8
@@ -94,7 +94,7 @@
 		end
 	end
 	
-	var5 = function(p11, p12) --[[ line: 124 ]]
+	var5 = function(p11, p12)
 		local var33 = p11.sortIndex - p12.sortIndex
 		
 		return if var33 == 0 then p11.id - p12.id else var33
@@ -130,7 +130,7 @@
 	local var19 = nil
 	local var20 = nil
 	
-	local function advanceTimers(p13) --[[ line: 191 ]]
+	local function advanceTimers(p13)
 		-- upvalues: t_1 (ref), var7 (write), t (ref), var6 (write), enableProfiling (ref), markTaskStart (ref)
 		local var34 = t_1[1]
 		while var34 ~= nil do
@@ -176,7 +176,7 @@
 		end
 	end
 	
-	local var22 = function(p14) --[[ line: 217 ]]
+	local var22 = function(p14)
 		-- upvalues: var18 (write), advanceTimers (ref), var17 (write), t (ref), requestHostCallback (ref), var19 (write), t_1 (ref), requestHostTimeout (ref), var22 (write)
 		var18 = false
 		advanceTimers(p14)
@@ -196,7 +196,7 @@
 		end
 	end
 	
-	var19 = function(p15, p16) --[[ line: 234 ]]
+	var19 = function(p15, p16)
 		-- upvalues: enableProfiling (ref), markSchedulerUnsuspended (ref), var17 (write), var18 (write), cancelHostTimeout (ref), var16 (write), var15 (write), reactGlobalsModule (ref), var20 (write), describeError (ref), var14 (write), getCurrentTime (ref), markTaskErrored (ref), markSchedulerSuspended (ref)
 		if enableProfiling then
 			markSchedulerUnsuspended(p16)
@@ -241,7 +241,7 @@
 		return var44
 	end
 	
-	var20 = function(p17, p18) --[[ line: 291 ]]
+	var20 = function(p17, p18)
 		-- upvalues: reactGlobalsModule (ref), reactFeatureFlags (ref), advanceTimers (ref), var14 (write), t (ref), enableSchedulerDebugging (ref), var13 (write), shouldYieldToHost (ref), var15 (write), markTaskRun (ref), noYieldModule (ref), getCurrentTime (ref), markTaskYield (ref), enableProfiling (ref), markTaskCompleted (ref), var7 (write), t_1 (ref), requestHostTimeout (ref), var22 (write)
 		local catchYieldingInDEV = reactGlobalsModule.__DEV__ and reactFeatureFlags.catchYieldingInDEV
 		local var46 = p18
@@ -312,7 +312,7 @@
 		unstable_NormalPriority = normalPriority,
 		unstable_IdlePriority = idlePriority,
 		unstable_LowPriority = lowPriority,
-		unstable_runWithPriority = function(p19, p20) --[[ line: 358 ]]
+		unstable_runWithPriority = function(p19, p20)
 			-- upvalues: immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), lowPriority (ref), idlePriority (ref), var15 (write), reactGlobalsModule (ref), describeError (ref)
 			if p19 ~= immediatePriority and p19 ~= userBlockingPriority and (p19 ~= normalPriority and p19 ~= lowPriority) and p19 ~= idlePriority then
 				p19 = normalPriority
@@ -337,7 +337,7 @@
 			end
 			return var57
 		end,
-		unstable_next = function(p21) --[[ line: 393 ]]
+		unstable_next = function(p21)
 			-- upvalues: var15 (write), immediatePriority (ref), userBlockingPriority (ref), normalPriority (ref), reactGlobalsModule (ref), describeError (ref)
 			local var58, var59
 			local _ = nil
@@ -360,7 +360,7 @@
 			end
 			return var59
 		end,
-		unstable_scheduleCallback = function(p22, p23, p24) --[[ line: 457 ]]
+		unstable_scheduleCallback = function(p22, p23, p24)
 			-- upvalues: getCurrentTime (ref), immediatePriority (ref), userBlockingPriority (ref), idlePriority (ref), lowPriority (ref), var12 (write), enableProfiling (ref), t_1 (ref), var6 (write), t (ref), var18 (write), cancelHostTimeout (ref), requestHostTimeout (ref), var22 (write), markTaskStart (ref), var17 (write), var16 (write), requestHostCallback (ref), var19 (write)
 			local var61
 			local var60 = getCurrentTime()
@@ -419,7 +419,7 @@
 				end
 			end
 		end,
-		unstable_cancelCallback = function(p25) --[[ line: 553 ]]
+		unstable_cancelCallback = function(p25)
 			-- upvalues: enableProfiling (ref), getCurrentTime (ref), markTaskCanceled (ref)
 			if enableProfiling and p25.isQueued then
 				markTaskCanceled(p25, getCurrentTime())
@@ -427,9 +427,9 @@
 			end
 			p25.callback = nil
 		end,
-		unstable_wrapCallback = function(p26) --[[ line: 429 ]]
+		unstable_wrapCallback = function(p26)
 			-- upvalues: var15 (write), reactGlobalsModule (ref), describeError (ref)
-			return function(...) --[[ line: 432 ]]
+			return function(...)
 				-- upvalues: var15 (copy), var15 (ref), reactGlobalsModule (copy), p26 (ref), describeError (copy)
 				local var66, var67
 				var15 = var15
@@ -452,13 +452,13 @@
 				return var67
 			end
 		end,
-		unstable_getCurrentPriorityLevel = function() --[[ line: 568 ]]
+		unstable_getCurrentPriorityLevel = function()
 			-- upvalues: var15 (write)
 			return var15
 		end,
 		unstable_shouldYield = shouldYieldToHost,
 		unstable_requestPaint = requestPaint,
-		unstable_continueExecution = function() --[[ line: 541 ]]
+		unstable_continueExecution = function()
 			-- upvalues: var13 (write), var17 (write), var16 (write), requestHostCallback (ref), var19 (write)
 			var13 = false
 			
@@ -467,11 +467,11 @@
 				requestHostCallback(var19)
 			end
 		end,
-		unstable_pauseExecution = function() --[[ line: 537 ]]
+		unstable_pauseExecution = function()
 			-- upvalues: var13 (write)
 			var13 = true
 		end,
-		unstable_getFirstCallbackNode = function() --[[ line: 549 ]]
+		unstable_getFirstCallbackNode = function()
 			-- upvalues: t (ref)
 			return t[1]
 		end,

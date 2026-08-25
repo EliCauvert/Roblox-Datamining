@@ -19,7 +19,7 @@ local t = {
 	onActivated = dash.noop
 }
 
-return function(p0) --[[ line: 36 ]]
+return function(p0)
 	-- upvalues: dash (ref), t (ref), useState (ref), getDeepValue (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), react (ref), iconButton (ref), images (ref), badge (ref), tooltip (ref)
 	local var4 = dash.join(t, p0)
 	local var5, var6 = useState(240)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 36 ]]
 		ImagesContainer = react.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
-			[react.Change.AbsoluteSize] = function(p1) --[[ line: 40 ]]
+			[react.Change.AbsoluteSize] = function(p1)
 				-- upvalues: var6 (ref), getDeepValue (copy)
 				if p1 and p1:FindFirstChild("CallToActionTooltip", true) then
 					var6(getDeepValue(p1, "CallToActionTooltip.TooltipContainer.AbsoluteSize.X") or 240)

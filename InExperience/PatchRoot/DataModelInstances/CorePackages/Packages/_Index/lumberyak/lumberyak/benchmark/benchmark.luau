@@ -1,6 +1,6 @@
 ﻿local loggerModule = require(game.LoadedCode.Packages.Lumberyak.Logger)
 
-local function timeit(p0, p1) --[[ line: 5 ]]
+local function timeit(p0, p1)
 	local var15 = p0()
 	local currentTime = tick()
 	
@@ -10,20 +10,20 @@ local function timeit(p0, p1) --[[ line: 5 ]]
 	return (tick() - currentTime) / 2000000
 end
 
-local function callSimple(p2) --[[ line: 15 ]]
+local function callSimple(p2)
 	p2:info("foo")
 end
 
-local function callInterp(p3) --[[ line: 19 ]]
+local function callInterp(p3)
 	p3:info("foo {}", 2)
 end
 
-local function simple() --[[ line: 23 ]]
+local function simple()
 	-- upvalues: loggerModule (ref)
 	local var17 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p4) --[[ line: 27 ]]
+		log = function(_, _, p4)
 			-- upvalues: var17 (write)
 			var17 += p4.number
 		end
@@ -35,16 +35,16 @@ local function simple() --[[ line: 23 ]]
 	return var19
 end
 
-local function empty() --[[ line: 38 ]]
-	return { info = function() --[[ line: 40 ]] end }
+local function empty()
+	return { info = function() end }
 end
 
-local function off() --[[ line: 44 ]]
+local function off()
 	-- upvalues: loggerModule (ref)
 	local var20 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Error,
-		log = function(_, _, p5) --[[ line: 48 ]]
+		log = function(_, _, p5)
 			-- upvalues: var20 (write)
 			var20 += p5.number
 		end
@@ -56,12 +56,12 @@ local function off() --[[ line: 44 ]]
 	return var22
 end
 
-local function short() --[[ line: 59 ]]
+local function short()
 	-- upvalues: loggerModule (ref)
 	local var23 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p6) --[[ line: 63 ]]
+		log = function(_, _, p6)
 			-- upvalues: var23 (write)
 			var23 += p6.number
 		end
@@ -74,12 +74,12 @@ local function short() --[[ line: 59 ]]
 	return var26
 end
 
-local function long() --[[ line: 75 ]]
+local function long()
 	-- upvalues: loggerModule (ref)
 	local var27 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p7) --[[ line: 79 ]]
+		log = function(_, _, p7)
 			-- upvalues: var27 (write)
 			var27 += p7.number
 		end
@@ -91,40 +91,40 @@ local function long() --[[ line: 75 ]]
 	return var29:new():new():new():new()
 end
 
-local function many() --[[ line: 94 ]]
+local function many()
 	-- upvalues: loggerModule (ref)
 	local var30 = 0
 	local t = {
 		maxLevel = loggerModule.Levels.Error,
-		log = function(_, _, p8) --[[ line: 98 ]]
+		log = function(_, _, p8)
 			-- upvalues: var30 (write)
 			var30 += p8.number
 		end
 	}
 	local t_1 = {
 		maxLevel = loggerModule.Levels.Warning,
-		log = function(_, _, p9) --[[ line: 104 ]]
+		log = function(_, _, p9)
 			-- upvalues: var30 (write)
 			var30 += p9.number
 		end
 	}
 	local t_2 = {
 		maxLevel = loggerModule.Levels.Info,
-		log = function(_, _, p10) --[[ line: 110 ]]
+		log = function(_, _, p10)
 			-- upvalues: var30 (write)
 			var30 += p10.number
 		end
 	}
 	local t_3 = {
 		maxLevel = loggerModule.Levels.Debug,
-		log = function(_, _, p11) --[[ line: 116 ]]
+		log = function(_, _, p11)
 			-- upvalues: var30 (write)
 			var30 += p11.number
 		end
 	}
 	local t_4 = {
 		maxLevel = loggerModule.Levels.Trace,
-		log = function(_, _, p12) --[[ line: 122 ]]
+		log = function(_, _, p12)
 			-- upvalues: var30 (write)
 			var30 += p12.number
 		end
@@ -150,7 +150,7 @@ local t = {
 	["Many sinks"] = many
 }
 
-local function _(p13, p14, p15) --[[ line: 148 | named "fmt" ]]
+local function _(p13, p14, p15)
 	-- upvalues: var10 (ref)
 	print(string.format("%-40s %0.3e [%0.4fx]", p13 .. " - " .. p14, p15, p15 / var10))
 end

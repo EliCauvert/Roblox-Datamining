@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 5 | named "filter" ]]
+﻿return function(p0, p1)
 	local t = {}
 	local var1 = 1
 	

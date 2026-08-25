@@ -12,12 +12,12 @@ local t = {
 	[deviceType.VR] = uiMode.VR
 }
 
-return function() --[[ line: 36 | named "useUiModeInfo" ]]
+return function()
 	-- upvalues: useDeviceTypeModule (ref), t (ref), uiMode (ref), reactModule (ref)
 	local var4 = useDeviceTypeModule()
 	local var5 = t[var4] or uiMode.Unknown
 	
-	return reactModule.useMemo(function() --[[ line: 40 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var4 (ref), var5 (ref)
 		return { deviceType = var4, uiMode = var5 }
 	end, { var4, var5 })

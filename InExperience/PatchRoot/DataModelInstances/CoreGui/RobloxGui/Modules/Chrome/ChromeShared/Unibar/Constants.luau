@@ -19,7 +19,7 @@ local _ = {
 }
 local var4 = getStyleTokensModule()
 
-local function _(p0) --[[ line: 34 | named "withUIScale" ]]
+local function _(p0)
 	-- upvalues: tenFootInterfaceModule (ref)
 	return (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p0
 end

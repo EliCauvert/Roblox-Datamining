@@ -3,7 +3,7 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local dialog = foundationModule.Dialog
 
-return function(p0) --[[ line: 26 | named "VoiceoverErrorDialog" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), dialog (ref), foundationModule (ref)
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,

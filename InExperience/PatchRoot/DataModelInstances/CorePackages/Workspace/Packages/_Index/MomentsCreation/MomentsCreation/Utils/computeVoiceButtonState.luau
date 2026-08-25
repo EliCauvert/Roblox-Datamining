@@ -1,8 +1,8 @@
-﻿local function _(p0) --[[ line: 12 | named "trimWhitespace" ]]
+﻿local function _(p0)
 	return p0:gsub("^%s*(.-)%s*$", "%1")
 end
 
-return function(p1) --[[ line: 41 | named "computeVoiceButtonState" ]]
+return function(p1)
 	local var8
 	local isLoading = p1.ttsState == "loading"
 	local isError = p1.ttsState == "error"

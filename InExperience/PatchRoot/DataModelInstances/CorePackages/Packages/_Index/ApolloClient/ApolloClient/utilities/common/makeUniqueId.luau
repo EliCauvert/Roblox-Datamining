@@ -9,7 +9,7 @@ local list = {
 }
 math.randomseed(os.clock())
 
-local function uuid() --[[ line: 59 ]]
+local function uuid()
 	-- upvalues: list (ref)
 	local var6 = ""
 	
@@ -19,7 +19,7 @@ local function uuid() --[[ line: 59 ]]
 	return var6
 end
 
-local function makeUniqueId(p0) --[[ line: 68 ]]
+local function makeUniqueId(p0)
 	-- upvalues: uuid (ref), boolean (ref), var2 (ref)
 	local var7 = uuid()
 	local var8 = boolean.toJSBoolean(var2:get(p0)) and var2:get(p0) or 1

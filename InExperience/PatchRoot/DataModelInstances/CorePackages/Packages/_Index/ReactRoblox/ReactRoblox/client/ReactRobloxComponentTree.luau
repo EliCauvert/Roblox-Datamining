@@ -17,33 +17,33 @@ local substring = string.sub(tostring(math.random()), 3)
 local text = "__reactFiber$" .. substring
 local text_1 = "__reactContainer$" .. substring
 
-function t.precacheFiberNode(p0, p1) --[[ line: 66 ]]
+function t.precacheFiberNode(p0, p1)
 	-- upvalues: t_2 (ref)
 	t_2[p1] = p0
 end
 
-function t.uncacheFiberNode(p2) --[[ line: 73 ]]
+function t.uncacheFiberNode(p2)
 	-- upvalues: t_2 (ref), t_3 (ref)
 	t_2[p2] = nil
 	t_3[p2] = nil
 end
 
-function t.markContainerAsRoot(p3, p4) --[[ line: 80 ]]
+function t.markContainerAsRoot(p3, p4)
 	-- upvalues: t_1 (ref)
 	t_1[p4] = p3
 end
 
-function t.unmarkContainerAsRoot(p5) --[[ line: 86 ]]
+function t.unmarkContainerAsRoot(p5)
 	-- upvalues: t_1 (ref)
 	t_1[p5] = nil
 end
 
-function t.isContainerMarkedAsRoot(p6) --[[ line: 92 ]]
+function t.isContainerMarkedAsRoot(p6)
 	-- upvalues: t_1 (ref)
 	return not not t_1[p6]
 end
 
-function t.getClosestInstanceFromNode(p7) --[[ line: 106 ]]
+function t.getClosestInstanceFromNode(p7)
 	-- upvalues: t_2 (ref), var6 (write)
 	local var14 = t_2[p7]
 	
@@ -81,7 +81,7 @@ function t.getClosestInstanceFromNode(p7) --[[ line: 106 ]]
 	return nil
 end
 
-function t.getInstanceFromNode(p8) --[[ line: 190 ]]
+function t.getInstanceFromNode(p8)
 	-- upvalues: var1 (write), var2 (write), var3 (write), var4 (write), var5 (write), text (ref), text_1 (ref)
 	if var1 == nil then
 		var1 = require(script.Parent.Parent["ReactReconciler.roblox"]).ReactWorkTags
@@ -95,7 +95,7 @@ function t.getInstanceFromNode(p8) --[[ line: 190 ]]
 	return if var18 then if var18.tag == var2 or var18.tag == var3 or (var18.tag == var5 or var18.tag == var4) then var18 else nil else nil
 end
 
-function t.getNodeFromInstance(p9) --[[ line: 224 ]]
+function t.getNodeFromInstance(p9)
 	-- upvalues: var2 (write), var3 (write), invariant (ref)
 	if p9.tag == var2 or p9.tag == var3 then
 		return p9.stateNode
@@ -104,12 +104,12 @@ function t.getNodeFromInstance(p9) --[[ line: 224 ]]
 	error("getNodeFromInstance: Invalid argument.")
 end
 
-function t.getFiberCurrentPropsFromNode(p10) --[[ line: 238 ]]
+function t.getFiberCurrentPropsFromNode(p10)
 	-- upvalues: t_3 (ref)
 	return t_3[p10]
 end
 
-function t.updateFiberProps(p11, p12) --[[ line: 244 ]]
+function t.updateFiberProps(p11, p12)
 	-- upvalues: t_3 (ref)
 	t_3[p11] = p12
 end

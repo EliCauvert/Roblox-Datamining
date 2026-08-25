@@ -18,12 +18,12 @@ local fFlagPlayerListTwoTabsOnLegacy = playerListModule.Flags.FFlagPlayerListTwo
 local platformLeaderboardContainer = playerListModule.Container.PlatformLeaderboardContainer
 local playerListSwitcher = roactModule.PureComponent:extend("PlayerListSwitcher")
 
-function playerListSwitcher.didMount(p0) --[[ line: 30 ]]
+function playerListSwitcher.didMount(p0)
 	-- upvalues: playerListInitialVisibleStateModule (ref)
 	p0.props.setPlayerListVisible(playerListInitialVisibleStateModule())
 end
 
-function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2) --[[ line: 34 ]]
+function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2)
 	-- upvalues: roactModule (ref), uiModeStyleProvider (ref)
 	return {
 		ThemeProvider = roactModule.createElement(uiModeStyleProvider, {
@@ -35,7 +35,7 @@ function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2) --[[ line: 34 ]]
 	}
 end
 
-function playerListSwitcher.render(p3) --[[ line: 45 ]]
+function playerListSwitcher.render(p3)
 	-- upvalues: roactModule (ref), provider (ref), createLayoutValuesModule (ref), fFlagEnableMobilePlayerListOnConsole (ref), tenFootInterfaceModule (ref), playerListAppModule_1 (ref), playerListAppModule (ref), fFlagPlayerListTwoTabsOnLegacy (ref), platformLeaderboardContainer (ref)
 	local var12 = roactModule.createElement(provider, {
 		layoutValues = createLayoutValuesModule(if fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled())
@@ -50,18 +50,18 @@ function playerListSwitcher.render(p3) --[[ line: 45 ]]
 	return if fFlagPlayerListTwoTabsOnLegacy then roactModule.createElement(platformLeaderboardContainer, {}, var12) else var12
 end
 
-function playerListSwitcher.didUpdate(p4) --[[ line: 67 ]]
+function playerListSwitcher.didUpdate(p4)
 	p4.props.setPlayerListVisible(not p4.props.isSmallTouchDevice)
 end
 
-return roactRoduxModule.connect(function(p5) --[[ line: 71 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p5)
 	return {
 		isSmallTouchDevice = p5.displayOptions.isSmallTouchDevice
 	}
-end, function(p6) --[[ line: 77 | named "mapDispatchToProps" ]]
+end, function(p6)
 	-- upvalues: setPlayerListVisibilityModule (ref)
 	return {
-		setPlayerListVisible = function(value) --[[ line: 79 ]]
+		setPlayerListVisible = function(value)
 			-- upvalues: p6 (ref), setPlayerListVisibilityModule (copy)
 			return p6(setPlayerListVisibilityModule(value))
 		end

@@ -25,9 +25,9 @@ return {
 	name = "AppHeaderBar",
 	storyRoots = { appHeaderBar },
 	roact = roactCompatModule,
-	mapStory = function(p0) --[[ line: 48 ]]
+	mapStory = function(p0)
 		-- upvalues: t (ref), reactModule (ref), appStyleProvider (ref), t_1 (ref)
-		return function(p1) --[[ line: 49 ]]
+		return function(p1)
 			-- upvalues: t (copy), reactModule (copy), appStyleProvider (copy), t_1 (copy), p0 (ref)
 			local theme = t[p1.theme]
 			

@@ -6,11 +6,11 @@ local withStyleModule = require(parent.Core.Style.withStyle)
 local tileBanner = roactModule.PureComponent:extend("TileBanner")
 tileBanner.validateProps = tModule.strictInterface({ bannerText = tModule.string })
 
-function tileBanner.render(p0) --[[ line: 21 ]]
+function tileBanner.render(p0)
 	-- upvalues: withStyleModule (ref), roactModule (ref)
 	local bannerText = p0.props.bannerText
 	
-	return withStyleModule(function(p1) --[[ line: 24 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: roactModule (copy), bannerText (ref)
 		local font = p1.Font
 		local theme = p1.Theme

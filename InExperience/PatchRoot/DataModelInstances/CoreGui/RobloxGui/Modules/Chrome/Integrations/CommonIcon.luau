@@ -17,12 +17,12 @@ local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
 local useMappedSignal = chromeModule.Hooks.useMappedSignal
 local unibarStyle = chromeModule.UnibarStyle
 
-local function _(p0) --[[ line: 27 | named "isFoundationIconName" ]]
+local function _(p0)
 	-- upvalues: iconName (ref)
 	return iconName[p0] ~= nil
 end
 
-function CommonIconComponent(p1) --[[ line: 33 ]]
+function CommonIconComponent(p1)
 	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useMappedSignal (ref), useStyle (ref), reactModule (ref), subMenuContextModule (ref), iconName (ref), foundationModule (ref), iconSize (ref), iconVariant (ref), images (ref), imageSetLabel (ref)
 	local _ = nil
 	local var8 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else constantsModule.ICON_SIZE
@@ -37,7 +37,7 @@ function CommonIconComponent(p1) --[[ line: 33 ]]
 		return reactModule.createElement(foundationModule.Icon, {
 			name = iconName[p1.icon],
 			size = iconSize.Large,
-			style = if var12 then var12:map(function(p2) --[[ line: 56 ]]
+			style = if var12 then var12:map(function(p2)
 				-- upvalues: color (ref), transparency (ref)
 				return {
 					Color3 = color,
@@ -54,14 +54,14 @@ function CommonIconComponent(p1) --[[ line: 33 ]]
 		Image = var10,
 		Size = UDim2.new(0, var8, 0, var8),
 		ImageColor3 = color,
-		ImageTransparency = if var12 then var12:map(function(p3) --[[ line: 87 ]]
+		ImageTransparency = if var12 then var12:map(function(p3)
 			-- upvalues: transparency (ref)
 			return transparency + (1 - transparency) * (1 - p3)
 		end) else transparency
 	})
 end
 
-function CommonIcon(p4, p5, p6) --[[ line: 94 ]]
+function CommonIcon(p4, p5, p6)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement(CommonIconComponent, { icon = p4, iconOn = p5, activeSignalValue = p6 })
 end

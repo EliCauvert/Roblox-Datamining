@@ -8,11 +8,11 @@ local var2 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigatio
 local appPage = require(parent.RobloxAppEnums).AppPage
 local enumsModule = require(userList.Common.Enums)
 
-return function(p0) --[[ line: 21 | named "useEntitySelectionHandler" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), enumsModule (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
 	local var4 = useDispatch()
 	
-	return reactModule.useCallback(function(p1, p2) --[[ line: 26 ]]
+	return reactModule.useCallback(function(p1, p2)
 		-- upvalues: p0 (ref), appPage (copy), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), var2 (copy), var4 (ref), navigateDown (copy)
 		if p0 then
 			p0(p1, p2)

@@ -12,7 +12,7 @@ local device = foundationModule.Enums.Device
 local t = { Dark = colorMode.Dark, Light = colorMode.Light }
 local useStyleSheet = foundationModule.Hooks.useStyleSheet
 
-local function StyleLinkPortal(p0) --[[ line: 26 ]]
+local function StyleLinkPortal(p0)
 	-- upvalues: useStyleSheet (ref), reactRobloxModule (ref), reactModule (ref)
 	return reactRobloxModule.createPortal(reactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() }), p0.overlay)
 end
@@ -21,23 +21,23 @@ return {
 	name = "ShareSheet",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p1) --[[ line: 36 ]]
+	mapStory = function(p1)
 		-- upvalues: reactModule (ref), localization (ref), localizationService (ref), localizationProvider (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref), StyleLinkPortal (ref)
-		return function(p2) --[[ line: 37 ]]
+		return function(p2)
 			-- upvalues: reactModule (copy), localization (copy), localizationService (copy), localizationProvider (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p1 (ref), StyleLinkPortal (copy)
 			local var7 = reactModule.useRef(Instance.new("Frame"))
 			
 			if var7.current.Parent ~= p2.focus then
 				var7.current.Parent = p2.focus
 			end
-			reactModule.useLayoutEffect(function() --[[ line: 43 ]]
+			reactModule.useLayoutEffect(function()
 				-- upvalues: var7 (ref)
 				var7.current.Size = UDim2.fromScale(1, 1)
 				var7.current.BackgroundTransparency = 1
 			end, {})
 			
 			return reactModule.createElement(localizationProvider, {
-				localization = reactModule.useMemo(function() --[[ line: 48 ]]
+				localization = reactModule.useMemo(function()
 					-- upvalues: localization (copy), localizationService (copy)
 					return localization.new(localizationService.RobloxLocaleId)
 				end, {})

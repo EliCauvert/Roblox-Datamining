@@ -14,7 +14,7 @@ local fFlagUseSignalsForSquadExperienceInviteStatus = require(parent.SharedFlags
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p0) --[[ line: 24 ]]
+	config = function(p0)
 		-- upvalues: cryoModule (ref), networkingSquadsModule (ref), roduxNetworkingModule (ref), reducersModule (ref), roduxModule (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
 		p0 = cryoModule.Dictionary.join(p0, {
 			NetworkingSquads = networkingSquadsModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
@@ -22,7 +22,7 @@ return {
 		local var11, var12, var13 = reducersModule.currentSquad(p0)
 		
 		return {
-			installReducer = function() --[[ line: 33 ]]
+			installReducer = function()
 				-- upvalues: roduxModule (copy), var11 (ref), var12 (ref), reducersModule (copy), p0 (write), fFlagUseSignalsForSquadExperienceInviteStatus (copy)
 				return roduxModule.combineReducers({
 					currentSquad = var11,

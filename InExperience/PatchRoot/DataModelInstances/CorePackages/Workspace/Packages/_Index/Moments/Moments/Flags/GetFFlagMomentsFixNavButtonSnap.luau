@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsFixNavButtonSnap", false)
 
-return function() --[[ line: 21 ]]
+return function()
 	return game:GetFastFlag("MomentsFixNavButtonSnap")
 end

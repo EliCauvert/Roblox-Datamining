@@ -1,4 +1,4 @@
-﻿return function(value, p0, p1) --[[ line: 7 | named "getZoomedSizeAndOffset" ]]
+﻿return function(value, p0, p1)
 	local var0 = if p1 then p1.X else 0.5
 	local var1 = if p1 then p1.Y else 0.5
 	local var2 = if p0 == 0 then value.X else value.X / p0

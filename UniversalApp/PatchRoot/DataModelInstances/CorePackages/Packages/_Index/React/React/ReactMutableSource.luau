@@ -2,7 +2,7 @@
 local reactGlobalsModule = require(parent.ReactGlobals)
 local _ = require(parent.Shared)
 
-return function(p0, p1) --[[ line: 18 | named "createMutableSource" ]]
+return function(p0, p1)
 	-- upvalues: reactGlobalsModule (ref)
 	local t = {
 		_workInProgressVersionPrimary = nil,

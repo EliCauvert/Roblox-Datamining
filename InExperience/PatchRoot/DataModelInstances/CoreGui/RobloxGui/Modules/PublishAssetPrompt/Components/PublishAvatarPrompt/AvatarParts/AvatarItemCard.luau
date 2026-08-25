@@ -4,7 +4,7 @@ local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyl
 local avatarPartViewportModule = require(script.Parent.AvatarPartViewport)
 local getFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 
-return function(p0) --[[ line: 25 | named "AvatarItemCard" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), getFFlagSingleUploadMakeupSupportModule (ref), reactModule (ref), avatarPartViewportModule (ref)
 	local var4 = useStyle()
 	local font = var4.Font

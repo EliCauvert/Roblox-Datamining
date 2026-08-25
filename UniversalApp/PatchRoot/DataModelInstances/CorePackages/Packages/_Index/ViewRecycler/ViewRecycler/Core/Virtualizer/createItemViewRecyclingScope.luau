@@ -2,18 +2,18 @@
 local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
 local recyclingScopeModule = require(viewRecycler.Core.RecyclingScope)
 
-local function directBatch(p0) --[[ line: 20 ]]
+local function directBatch(p0)
 	p0()
 end
 
-return function(p1) --[[ line: 24 | named "createItemViewRecyclingScope" ]]
+return function(p1)
 	-- upvalues: directBatch (ref), recyclingScopeModule (ref), diagnosticsModule (ref)
 	local itemViewAdapter = p1.itemViewAdapter
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	
-	local function flushLifecycleNotifications() --[[ line: 35 ]]
+	local function flushLifecycleNotifications()
 		-- upvalues: t_2 (write), itemViewAdapter (ref), t_1 (write), t (ref)
 		if #t_2 > 0 and itemViewAdapter.onEvicted ~= nil then
 			itemViewAdapter.onEvicted(t_2)
@@ -39,7 +39,7 @@ return function(p1) --[[ line: 24 | named "createItemViewRecyclingScope" ]]
 	
 	return recyclingScopeModule({
 		adapter = {
-			create = function(p2) --[[ line: 66 ]]
+			create = function(p2)
 				-- upvalues: itemViewAdapter (ref), t (ref), t_1 (write)
 				local var10 = itemViewAdapter.create(p2)
 				t[var10] = true
@@ -47,12 +47,12 @@ return function(p1) --[[ line: 24 | named "createItemViewRecyclingScope" ]]
 				
 				return var10
 			end,
-			destroy = function(p3) --[[ line: 72 ]]
+			destroy = function(p3)
 				-- upvalues: t (ref), t_2 (write)
 				t[p3] = nil
 				table.insert(t_2, p3)
 			end,
-			batch = function(p4) --[[ line: 55 ]]
+			batch = function(p4)
 				-- upvalues: batch (ref), flushLifecycleNotifications (ref)
 				local ok, status = pcall(batch, p4)
 				flushLifecycleNotifications()
@@ -63,7 +63,7 @@ return function(p1) --[[ line: 24 | named "createItemViewRecyclingScope" ]]
 			end
 		},
 		maxPoolSize = p1.maxPoolSize,
-		onPoolChanged = if diagnostics == nil then nil else function(p5) --[[ line: 81 ]]
+		onPoolChanged = if diagnostics == nil then nil else function(p5)
 			-- upvalues: diagnostics (ref), diagnosticsModule (copy)
 			diagnostics({
 				kind = diagnosticsModule.EventKind.PoolChanged,

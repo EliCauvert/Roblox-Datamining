@@ -8,7 +8,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local getLocalizedStrings = localizationHelper.getLocalizedStrings
 local friendsLarge = UIBloxModule.App.ImageSet.Images["icons/menu/friends_large"]
 
-return function() --[[ line: 21 ]]
+return function()
 	-- upvalues: useStyle (ref), fFlagConnectionsToFriendsRename (ref), getLocalizedStrings (ref), reactModule (ref), imageSetLabel (ref), friendsLarge (ref)
 	local var2 = useStyle()
 	local theme = var2.Theme

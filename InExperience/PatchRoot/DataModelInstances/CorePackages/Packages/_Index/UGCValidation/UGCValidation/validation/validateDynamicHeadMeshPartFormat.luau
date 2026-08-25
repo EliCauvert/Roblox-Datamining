@@ -5,7 +5,7 @@ local validateDynamicHeadDataModule = require(parent.validation.validateDynamicH
 local _ = require(parent.util.Types)
 local createDynamicHeadMeshPartSchemaModule = require(parent.util.createDynamicHeadMeshPartSchema)
 
-return function(p0) --[[ line: 10 | named "validateDynamicHeadMeshPartFormat" ]]
+return function(p0)
 	-- upvalues: validateSingleInstanceModule (ref), validateMeshPartBodyPartModule (ref), createDynamicHeadMeshPartSchemaModule (ref), validateDynamicHeadDataModule (ref)
 	assert(p0.instances ~= nil, "instances required in validationContext for validateDynamicHeadMeshPartFormat")
 	local instances = p0.instances

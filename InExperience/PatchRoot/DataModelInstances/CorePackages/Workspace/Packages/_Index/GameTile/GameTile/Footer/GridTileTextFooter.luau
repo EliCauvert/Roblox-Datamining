@@ -6,11 +6,11 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useTextSizeOffset = require(parent.UIBlox).Core.Style.useTextSizeOffset
 local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
 
-local _ = function(p0, p1) --[[ line: 43 ]]
+local _ = function(p0, p1)
 	return p0 * (p1 or 1)
 end
 
-return function(p2) --[[ line: 47 | named "GridTileTextFooter" ]]
+return function(p2)
 	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref)
 	local var3 = useDesignTokens()
 	local var4 = useTextSizeOffset()

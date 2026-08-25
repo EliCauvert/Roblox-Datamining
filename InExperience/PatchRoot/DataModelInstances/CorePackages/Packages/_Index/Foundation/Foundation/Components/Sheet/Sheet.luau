@@ -12,7 +12,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(script.Parent.Types)
 local t = { testId = "--foundation-sheet" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 23 | named "Sheet" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useScreenModule (ref), guiService (ref), reactUtilsModule (ref), bottomSheetModule (ref), centerSheetModule (ref), sideSheetModule (ref)
 	local var14
 	local var9 = withDefaultsModule(p0, t)
@@ -29,11 +29,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 23 | 
 	end
 	useState, var14 = useState(var14)
 	local var15, var16 = reactModule.useState(guiService.ViewportDisplaySize)
-	reactModule.useImperativeHandle(var9.sheetRef, function() --[[ line: 32 ]]
+	reactModule.useImperativeHandle(var9.sheetRef, function()
 		-- upvalues: var12 (ref)
 		return var12.current
 	end, {})
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var12 (ref), var11 (ref)
 		if var9.isOpen == false and var12.current then
 			var12.current.close()
@@ -43,28 +43,28 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 23 | 
 			var11(true)
 		end
 	end, { var9.isOpen })
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var9 (ref), var11 (ref)
 		if not var10 and var9.isOpen then
 			var11(true)
 		end
 	end, { var10 })
-	reactUtilsModule.useEventConnection(guiService:GetPropertyChangedSignal("ViewportDisplaySize"), function() --[[ line: 50 ]]
+	reactUtilsModule.useEventConnection(guiService:GetPropertyChangedSignal("ViewportDisplaySize"), function()
 		-- upvalues: var16 (ref), guiService (copy)
 		var16(guiService.ViewportDisplaySize)
 	end, {})
-	reactModule.useLayoutEffect(function() --[[ line: 54 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var13 (ref), var14 (ref)
 		local var18 = nil
 		
 		if var13 then
 			var14(var13.AbsoluteSize.Y < var13.AbsoluteSize.X)
-			var18 = var13:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 58 ]]
+			var18 = var13:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var14 (copy), var13 (copy)
 				var14(var13.AbsoluteSize.Y < var13.AbsoluteSize.X)
 			end)
 		end
-		return function() --[[ line: 63 ]]
+		return function()
 			-- upvalues: var18 (write)
 			if var18 then
 				var18:Disconnect()
@@ -81,7 +81,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 23 | 
 	cloned.sheetRef = var12
 	cloned.displaySize = var15
 	
-	function cloned.onClose() --[[ line: 79 ]]
+	function cloned.onClose()
 		-- upvalues: var9 (ref), var11 (ref)
 		if var9.onClose then
 			var9.onClose()

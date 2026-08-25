@@ -4,7 +4,7 @@ local openCloudService = game:GetService("OpenCloudService")
 local playersService = game:GetService("Players")
 local runService = game:GetService("RunService")
 
-function returnInvalidArgumentError(p0) --[[ line: 23 ]]
+function returnInvalidArgumentError(p0)
 	-- upvalues: httpService (ref)
 	return {
 		StatusCode = 400,
@@ -12,7 +12,7 @@ function returnInvalidArgumentError(p0) --[[ line: 23 ]]
 	}
 end
 
-function verifyPlayerOnServer(p1) --[[ line: 33 ]]
+function verifyPlayerOnServer(p1)
 	-- upvalues: playersService (ref)
 	local var5 = verifyPlayer(p1)
 	
@@ -27,24 +27,24 @@ function verifyPlayerOnServer(p1) --[[ line: 33 ]]
 	return returnInvalidArgumentError("Player not found on server.")
 end
 
-function verifyPlayer(p2) --[[ line: 49 ]]
+function verifyPlayer(p2)
 	return if typeof(p2) == "Instance" and p2.ClassName == "Player" then nil else returnInvalidArgumentError("user argument not a Player instance.")
 end
 
-function verifyString(p3) --[[ line: 56 ]]
+function verifyString(p3)
 	return if typeof(p3) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
 end
 
-function verifyNumber(p4) --[[ line: 63 ]]
+function verifyNumber(p4)
 	return if typeof(p4) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
 end
 
-function getUrlPrefix() --[[ line: 70 ]]
+function getUrlPrefix()
 	-- upvalues: runService (ref)
 	return if runService:IsStudio() then "user" else "rcc"
 end
 
-function createListInventoryItemsUrl(p5, p6, p7, p8) --[[ line: 77 ]]
+function createListInventoryItemsUrl(p5, p6, p7, p8)
 	-- upvalues: contentProviderService (ref)
 	local formattedText = string.format("%s%s/cloud/v2/users/%d/inventory-items", string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p5)
 	
@@ -65,7 +65,7 @@ function createListInventoryItemsUrl(p5, p6, p7, p8) --[[ line: 77 ]]
 	return string.format("%s?%s", formattedText, table.concat(t, "&"))
 end
 
-function listInventoryItems(p9) --[[ line: 102 ]]
+function listInventoryItems(p9)
 	-- upvalues: openCloudService (ref)
 	if p9.user == nil then
 		return returnInvalidArgumentError("user argument was not provided.")

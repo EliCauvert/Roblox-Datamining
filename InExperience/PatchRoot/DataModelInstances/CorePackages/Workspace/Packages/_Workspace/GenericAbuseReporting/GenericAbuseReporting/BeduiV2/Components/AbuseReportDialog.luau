@@ -14,18 +14,18 @@ local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
 local useFocusNavigationRefsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
 
-return reactModule.memo(function(p0) --[[ line: 35 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), sheet (ref), view (ref), iconButton (ref), inputSize (ref), foundationModule (ref), buttonVariant (ref), abuseReportTooltipModule (ref)
 	local abuseReportFlow = p0.abuseReportFlow
 	local config = abuseReportFlow.config
 	local currentPageElement = abuseReportFlow.currentPageElement
 	local canGoBack = abuseReportFlow.canGoBack
 	local var6, var7 = reactModule.useState(if config.display.titleDisclosure then config.display.titleDisclosure.openByDefault else false)
-	local var8 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ line: 44 ]]
+	local var8 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
 		-- upvalues: var7 (ref)
 		var7(false)
 	end)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), p0 (ref)
 		if var6 then
 			p0.takeoverFocus(true)
@@ -34,9 +34,9 @@ return reactModule.memo(function(p0) --[[ line: 35 ]]
 		end
 		p0.takeoverFocus(false)
 	end, { p0.takeoverFocus, var6 })
-	local var9 = reactModule.useCallback(function() --[[ line: 56 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
-		var7(function(p1) --[[ line: 57 ]]
+		var7(function(p1)
 			return not p1
 		end)
 	end, {})

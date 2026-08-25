@@ -6,7 +6,7 @@ local UIBloxConfigModule = require(parent.UIBloxConfig)
 local typesModule = require(script.Types)
 local constantsModule = require(script.Parent.Constants)
 
-local function _(p0, p1) --[[ line: 16 | named "getPlatformScale" ]]
+local function _(p0, p1)
 	-- upvalues: UIBloxConfigModule (ref), constantsModule (ref)
 	if UIBloxConfigModule.disableTokenScaling then
 		return 1
@@ -17,7 +17,7 @@ local function _(p0, p1) --[[ line: 16 | named "getPlatformScale" ]]
 end
 
 return {
-	getTokens = function(p2, p3, p4) --[[ line: 36 ]]
+	getTokens = function(p2, p3, p4)
 		-- upvalues: getTokenGenerators (ref), constantsModule (ref), UIBloxConfigModule (ref)
 		local var6
 		local var4 = getTokenGenerators(p3) or getTokenGenerators(constantsModule.DefaultThemeName)
@@ -36,7 +36,7 @@ return {
 		}
 	end,
 	Types = typesModule,
-	getFoundationTokens = function(p5, p6, p7) --[[ line: 47 ]]
+	getFoundationTokens = function(p5, p6, p7)
 		-- upvalues: getFoundationTokens (ref), constantsModule (ref), UIBloxConfigModule (ref)
 		local var9
 		local var7 = getFoundationTokens(p6) or getFoundationTokens(constantsModule.DefaultThemeName)
@@ -50,7 +50,7 @@ return {
 		var9 = (if p5 == constantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(var8, 0, 1e999)
 		return var7(var9)
 	end,
-	getFoundationTokensDefaultScale = function(p8) --[[ line: 57 ]]
+	getFoundationTokensDefaultScale = function(p8)
 		-- upvalues: getFoundationTokens (ref), constantsModule (ref)
 		return (getFoundationTokens(p8) or getFoundationTokens(constantsModule.DefaultThemeName))(1)
 	end,

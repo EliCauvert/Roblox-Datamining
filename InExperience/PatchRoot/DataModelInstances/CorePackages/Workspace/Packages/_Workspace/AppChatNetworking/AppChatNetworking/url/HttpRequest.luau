@@ -14,7 +14,7 @@ local var5 = require(parent.SocialLuaAnalytics).Telemetry.new({
 	backendsList = {
 		{
 			type = "RobloxTelemetryCounter",
-			format = function(p0) --[[ line: 23 ]]
+			format = function(p0)
 				return {
 					endpoint = string.match(string.match(p0.url, ".%w+/(.*)") or "", "([^?#]+)") or "unknown",
 					statusCode = tostring(p0.statusCode),
@@ -25,7 +25,7 @@ local var5 = require(parent.SocialLuaAnalytics).Telemetry.new({
 	}
 })
 
-local function chunkAndLogString(p1) --[[ line: 41 ]]
+local function chunkAndLogString(p1)
 	-- upvalues: var3 (ref)
 	local t = {}
 	
@@ -39,7 +39,7 @@ end
 
 return {
 	default = challengeRequestWrapper(httpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ line: 53 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: var3 (ref), getFFlagDebugUnfilteredThreads (ref), chunkAndLogString (ref), httpRequestModule (ref)
 			var3:info(`Fetching: [ requestMethod = "{p3}", url = "{p2}" ]`)
 			
@@ -61,7 +61,7 @@ return {
 			end
 			return httpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
 		end,
-		postRequestFunction = function(p5, p6) --[[ line: 78 ]]
+		postRequestFunction = function(p5, p6)
 			-- upvalues: var3 (ref), appChatNetworkingTelemetryModule (ref), var5 (ref), getFFlagDebugUnfilteredThreads (ref), httpService (ref), chunkAndLogString (ref)
 			var3:debug(`Returned: [ requestMethod = "{p6.requestMethod}", url = "{p6.url}", statusCode = {p5.StatusCode}{if p5.HttpError ~= Enum.HttpError.OK then `, HttpError = {p5.HttpError}` else ""}]`)
 			appChatNetworkingTelemetryModule.emit(var5, {
@@ -71,7 +71,7 @@ return {
 			})
 			
 			if getFFlagDebugUnfilteredThreads() then
-				local ok, status = pcall(function() --[[ line: 90 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p5 (ref)
 					return httpService:JSONDecode(p5.Body)
 				end)

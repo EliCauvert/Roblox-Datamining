@@ -9,7 +9,7 @@ local mergeDirectives = require(script.Parent.directives).mergeDirectives
 local _ = require(script.Parent["merge-typedefs_types"])
 local compareNodes = require(parent.Utils).compareNodes
 
-function t.mergeEnumValues(p0, p1, p2) --[[ line: 30 ]]
+function t.mergeEnumValues(p0, p1, p2)
 	-- upvalues: boolean (ref), array (ref), map (ref), mergeDirectives (ref), compareNodes (ref)
 	if boolean.toJSBoolean(if typeof(p2) == "table" then p2.consistentEnumMerge else nil) then
 		local t = {}

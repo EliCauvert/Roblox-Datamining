@@ -20,7 +20,7 @@ local creationFlowStateModule = require(momentsCreationFlow.Enums.CreationFlowSt
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useDispatch (ref), creationFlowStateUpdatedModule (ref), creationFlowStateModule (ref), eventNamesModule (ref), view (ref), gradientBackdrop (ref), icon (ref), threeBarsVerticalTrianglesHorizontal (ref), foundationModule (ref), text (ref), creationFlowLocalizationModule (ref), musicNote (ref), textUppercaseALowercaseA (ref)
 	local var10 = useDeviceInsets()
 	local var11 = useTokens()
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 40 ]]
 		}),
 		EditCTABar = reactModule.createElement(view, {
 			tag = "align-x-right align-y-center anchor-center-right auto-x col gap-small position-center-right size-0-full",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p1) --[[ line: 48 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
 				-- upvalues: var15 (ref)
 				var15(UDim2.new(0, 1.5 * p1.AbsoluteSize.X, 1, 0))
 			end, {})
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 40 ]]
 			TrimCTAButton = if p0.captureType == Enum.CaptureType.Video then reactModule.createElement(view, {
 				LayoutOrder = 1,
 				tag = "align-x-right align-y-center auto-xy row gap-medium padding-xsmall radius-medium",
-				onActivated = reactModule.useCallback(function() --[[ line: 52 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var13 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var12 (ref), eventNamesModule (copy)
 					var13(creationFlowStateUpdatedModule(creationFlowStateModule.Trimming))
 					var12.fireEvent(eventNamesModule.EditingFlowTrimButtonPressed)
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 40 ]]
 			MusicCTAButton = if p0.captureType == Enum.CaptureType.Video or p0.captureType == Enum.CaptureType.Screenshot then reactModule.createElement(view, {
 				LayoutOrder = 2,
 				tag = "align-x-right align-y-center auto-xy row gap-medium padding-xsmall radius-medium",
-				onActivated = reactModule.useCallback(function() --[[ line: 57 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var13 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var12 (ref), eventNamesModule (copy)
 					var13(creationFlowStateUpdatedModule(creationFlowStateModule.Music))
 					var12.fireEvent(eventNamesModule.EditingFlowMusicButtonPressed)
@@ -91,7 +91,7 @@ return function(p0) --[[ line: 40 ]]
 			TextOverlayCTAButton = if p0.captureType == Enum.CaptureType.Video then reactModule.createElement(view, {
 				LayoutOrder = 3,
 				tag = "align-x-right align-y-center auto-xy row gap-medium padding-xsmall radius-medium",
-				onActivated = reactModule.useCallback(function() --[[ line: 62 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var13 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var12 (ref), eventNamesModule (copy)
 					var13(creationFlowStateUpdatedModule(creationFlowStateModule.TextOverlay))
 					var12.fireEvent(eventNamesModule.EditingFlowTextOverlayButtonPressed)

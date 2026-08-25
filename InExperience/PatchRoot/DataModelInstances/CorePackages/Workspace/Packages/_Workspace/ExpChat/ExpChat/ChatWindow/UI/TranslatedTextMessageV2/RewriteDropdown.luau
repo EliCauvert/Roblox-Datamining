@@ -10,7 +10,7 @@ local localizationModule = require(expChat.Localization)
 local fStringInExpChatRewriteReasonKeyModule = require(expChat.Flags.FStringInExpChatRewriteReasonKey)
 local mergeBindableScalarModule = require(expChat.ChatWindow.Helpers.mergeBindableScalar)
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "RewriteDropdown" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: foundationModule (ref), localizationModule (ref), fStringInExpChatRewriteReasonKeyModule (ref), getMessagesStoreModule (ref), getRewriteDropdownStoreModule (ref), reactModule (ref), signalsModule (ref), useSignalBinding (ref), mergeBindableScalarModule (ref)
 	local var9 = foundationModule.Hooks.useTokens()
 	local var10 = localizationModule.useLocalization({
@@ -20,9 +20,9 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "RewriteDropdown" ]]
 	local var11 = if var10.rewrittenReasonLabelText and var10.rewrittenReasonLabelText ~= "" then var10.rewrittenReasonLabelText else var10.defaultRewrittenReasonLabelText
 	local var12 = getMessagesStoreModule(false)
 	local var13 = getRewriteDropdownStoreModule(false)
-	local var14 = reactModule.useMemo(function() --[[ line: 40 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var13 (ref), var12 (ref)
-		local var19 = signalsModule.createComputed(function(p1) --[[ line: 41 ]]
+		local var19 = signalsModule.createComputed(function(p1)
 			-- upvalues: var13 (copy), var12 (copy)
 			local componentId = var13.getComponentId(p1)
 			
@@ -50,13 +50,13 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "RewriteDropdown" ]]
 		end)
 		
 		return {
-			getVisible = signalsModule.createComputed(function(p2) --[[ line: 69 ]]
+			getVisible = signalsModule.createComputed(function(p2)
 				-- upvalues: var19 (ref)
 				local var25 = var19(p2)
 				
 				return if var25 then var25.wasRewritten else false
 			end),
-			getLayoutOrder = signalsModule.createComputed(function(p3) --[[ line: 77 ]]
+			getLayoutOrder = signalsModule.createComputed(function(p3)
 				-- upvalues: var13 (copy), var12 (copy)
 				local componentId = var13.getComponentId(p3)
 				
@@ -67,7 +67,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "RewriteDropdown" ]]
 				
 				return if layoutOrderSignal then layoutOrderSignal(p3) + 1 else 0
 			end),
-			getOriginalText = signalsModule.createComputed(function(p4) --[[ line: 89 ]]
+			getOriginalText = signalsModule.createComputed(function(p4)
 				-- upvalues: var19 (ref)
 				local var28 = var19(p4)
 				
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "RewriteDropdown" ]]
 	local var15 = useSignalBinding(var14.getVisible)
 	local var16 = useSignalBinding(var14.getLayoutOrder)
 	local var17 = useSignalBinding(var14.getOriginalText)
-	local var18 = var17:map(function(p5) --[[ line: 107 ]]
+	local var18 = var17:map(function(p5)
 		return p5 ~= nil and p5 ~= ""
 	end)
 	
@@ -120,7 +120,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "RewriteDropdown" ]]
 			Divider = reactModule.createElement(foundationModule.Divider, {
 				LayoutOrder = 2,
 				orientation = foundationModule.Enums.Orientation.Horizontal,
-				Visible = reactModule.joinBindings({ p0.textTransparency, var18 }):map(function(p6) --[[ line: 150 ]]
+				Visible = reactModule.joinBindings({ p0.textTransparency, var18 }):map(function(p6)
 					return p6[1] < 1 and p6[2]
 				end),
 				DividerVariant = foundationModule.Enums.DividerVariant.Default

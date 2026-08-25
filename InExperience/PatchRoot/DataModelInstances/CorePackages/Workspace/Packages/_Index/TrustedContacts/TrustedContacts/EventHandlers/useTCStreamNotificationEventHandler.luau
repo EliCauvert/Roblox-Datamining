@@ -9,14 +9,14 @@ local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function() --[[ line: 22 ]]
+return function()
 	-- upvalues: useDispatch (ref), useLocalization (ref), reactModule (ref), appPage (ref), sources (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), setCurrentToastMessage (ref)
 	local var2 = useDispatch()
 	local var3 = useLocalization({
 		somethingIsWrongToast = "Feature.Toast.NetworkingError.SomethingIsWrong"
 	})
 	
-	return reactModule.useCallback(function(p0) --[[ line: 30 ]]
+	return reactModule.useCallback(function(p0)
 		-- upvalues: appPage (copy), sources (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), setCurrentToastMessage (copy), var3 (ref)
 		local callback = p0 and p0.callback
 		local senderUserid = p0 and (p0.clientEventsPayload and p0.clientEventsPayload.sender_userid)

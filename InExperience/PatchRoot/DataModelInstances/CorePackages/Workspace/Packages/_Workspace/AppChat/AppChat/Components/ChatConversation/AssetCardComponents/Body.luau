@@ -12,14 +12,14 @@ var3.defaultProps = {
 	contentLoadedCallback = nil
 }
 
-function var3.init(p0) --[[ line: 21 ]]
+function var3.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.iconRef = roactModule.createRef()
 end
 
-function var3.render(p1) --[[ line: 25 ]]
+function var3.render(p1)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), skeleton (ref), radius (ref)
-	return UIBloxModule.Style.withStyle(function(p2) --[[ line: 26 ]]
+	return UIBloxModule.Style.withStyle(function(p2)
 		-- upvalues: roactModule (copy), p1 (ref), UIBloxModule (copy), skeleton (copy), radius (copy)
 		return roactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 0, 64),

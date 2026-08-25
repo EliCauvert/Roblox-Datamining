@@ -8,7 +8,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, _) --[[ line: 21 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref), enableAdConsentUserSettingsPublish (ref), adConsentAttributionAdapter (ref), linkingProtocol (ref)
 	local var3 = if p0 then p0.actionParams else nil
 	
@@ -41,24 +41,24 @@ return function(p0, _, p1, _) --[[ line: 21 ]]
 		
 		return
 	end
-	local ok, status = pcall(function() --[[ line: 55 ]]
+	local ok, status = pcall(function()
 		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), enableAdConsentUserSettingsPublish (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p1 (ref), sduiErrorType (copy), sduiActionType (copy)
 		local var4 = updateUserSettings(settings, auditData)
 		
 		if enableAdConsentUserSettingsPublish then
-			var4 = var4:andThen(function() --[[ line: 61 ]]
+			var4 = var4:andThen(function()
 				-- upvalues: settings (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy)
 				local allowSellShareData = settings.allowSellShareData
 				
 				if allowSellShareData ~= nil then
-					adConsentAttributionAdapter.resolveAndPublish(linkingProtocol.default, "ConsentChanged", function() --[[ line: 64 ]]
+					adConsentAttributionAdapter.resolveAndPublish(linkingProtocol.default, "ConsentChanged", function()
 						-- upvalues: allowSellShareData (ref)
 						return allowSellShareData
 					end)
 				end
 			end)
 		end
-		var4:catch(function(p2) --[[ line: 70 ]]
+		var4:catch(function(p2)
 			-- upvalues: p1 (copy), sduiErrorType (copy), sduiActionType (copy)
 			p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 				name = sduiActionType.UpdateUserSettings,

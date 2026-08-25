@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Rodux).makeActionCreator(script.Name, function(p0) --[[ line: 25 ]]
+﻿return require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Rodux).makeActionCreator(script.Name, function(p0)
 	return {
 		type = script.Name,
 		isUndo = p0.isUndo,

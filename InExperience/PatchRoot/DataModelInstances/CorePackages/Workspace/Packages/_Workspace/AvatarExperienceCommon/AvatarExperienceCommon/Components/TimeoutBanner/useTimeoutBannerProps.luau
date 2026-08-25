@@ -8,7 +8,7 @@ local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScre
 local getTimeoutStatusStoreModule = require(avatarExperienceCommon.Stores.TimeoutStatusStore.getTimeoutStatusStore)
 local formatTimeoutEndTimeModule = require(avatarExperienceCommon.Utils.formatTimeoutEndTime)
 
-return function(value) --[[ line: 28 | named "useTimeoutBannerProps" ]]
+return function(value)
 	-- upvalues: getTimeoutStatusStoreModule (ref), useSignalState (ref), useNavigation (ref), reactModule (ref), formatTimeoutEndTimeModule (ref), useLocalization (ref), avatarScreen (ref)
 	local var4 = if value and value.shouldFetch ~= nil then value.shouldFetch else false
 	local var5 = if value and value.shouldNavigateOnClick ~= nil then value.shouldNavigateOnClick else true
@@ -16,7 +16,7 @@ return function(value) --[[ line: 28 | named "useTimeoutBannerProps" ]]
 	local var7 = useSignalState(var6.getStatus)
 	local var8 = useSignalState(var6.getIsTimedOut)
 	local var9 = useNavigation()
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var6 (ref)
 		if var4 then
 			var6.fetchStatus()
@@ -31,7 +31,7 @@ return function(value) --[[ line: 28 | named "useTimeoutBannerProps" ]]
 				time = var10
 			} else "Feature.Timeout.WarningBanner.DisabledMessage"
 		}).messageText,
-		onBannerActivated = if var5 then reactModule.useCallback(function() --[[ line: 54 ]]
+		onBannerActivated = if var5 then reactModule.useCallback(function()
 			-- upvalues: var9 (ref), avatarScreen (copy)
 			var9.navigate(avatarScreen.TimeoutStatusPrompt)
 		end, { var9 }) else nil,

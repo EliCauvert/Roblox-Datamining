@@ -12,7 +12,7 @@ local useToggleStateModule = require(momentsCommon.Hooks.useToggleState)
 local _ = require(momentsCommon.Types)
 local localPlayer = playersService.LocalPlayer
 
-local function _(value) --[[ line: 22 | named "assetIdAsContent" ]]
+local function _(value)
 	return if value then `rbxassetid://{value}` else nil
 end
 
@@ -22,7 +22,7 @@ local t = {
 	playbackRegion = NumberRange.new(0, 1e999)
 }
 
-return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
+return function(p0, p1, p2)
 	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useToggleStateModule (ref), useState (ref), useCallback (ref), useMemo (ref), useEffect (ref), localPlayer (ref)
 	local var6 = cryoModule.Dictionary.union(t, p2 or {})
 	local var7 = useRef(nil)
@@ -32,7 +32,7 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 	local var12, var13 = useState(0)
 	local var14, var15 = useState(0)
 	local var16, var17 = useState(0)
-	local var18 = useCallback(function(p3) --[[ line: 64 ]]
+	local var18 = useCallback(function(p3)
 		-- upvalues: var7 (ref), var6 (ref), var10 (ref)
 		local current = var7.current
 		
@@ -40,7 +40,7 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			current.TimePosition = math.clamp(p3 + var6.playbackRegion.Min, 0, var10)
 		end
 	end, { var10, var6.playbackRegion })
-	local var19 = useCallback(function() --[[ line: 72 ]]
+	local var19 = useCallback(function()
 		-- upvalues: p0 (ref), var7 (ref), var17 (ref), var6 (ref), var13 (ref)
 		if not p0 then return end
 		local current = var7.current
@@ -50,11 +50,11 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			var13(current.TimePosition)
 		end
 	end, { p0, p1, var6.playbackRegion })
-	p1 = useMemo(function() --[[ line: 87 ]]
+	p1 = useMemo(function()
 		-- upvalues: p1 (write)
 		return if p1 then `rbxassetid://{p1}` else nil
 	end, { p1 })
-	useEffect(function() --[[ line: 91 ]]
+	useEffect(function()
 		-- upvalues: p1 (write), var6 (ref), var11 (ref), var7 (ref), localPlayer (copy)
 		if p1 then
 			local folder = Instance.new("Folder")
@@ -65,7 +65,7 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			audioPlayer.Looping = var6.looping or false
 			audioPlayer.Parent = folder
 			audioPlayer.Volume = 0.2
-			audioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ line: 106 | named "updateTimeLength" ]]
+			audioPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function()
 				-- upvalues: var11 (copy), audioPlayer (ref)
 				var11(audioPlayer.TimeLength)
 			end)
@@ -77,18 +77,18 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			wire.TargetInstance = audioDeviceOutput
 			wire.Parent = folder
 			var7.current = audioPlayer
-			task.spawn(function() --[[ line: 123 ]]
+			task.spawn(function()
 				-- upvalues: folder (ref), localPlayer (copy)
 				folder.Parent = localPlayer:WaitForChild("PlayerGui")
 			end)
 			
-			return function() --[[ line: 127 ]]
+			return function()
 				-- upvalues: folder (ref)
 				folder:Destroy()
 			end
 		end
 	end, { p1 })
-	useEffect(function() --[[ line: 132 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var6 (ref)
 		local current = var7.current
 		
@@ -97,11 +97,11 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			current.TimePosition = 0
 		end
 	end, { var6.playbackRegion })
-	useEffect(function() --[[ line: 140 ]]
+	useEffect(function()
 		-- upvalues: var6 (ref), var15 (ref), var10 (ref)
 		var15(math.min(var6.playbackRegion.Max - var6.playbackRegion.Min, var10))
 	end, { var10, var6.playbackRegion })
-	useEffect(function() --[[ line: 145 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var8 (ref)
 		local current = var7.current
 		
@@ -125,7 +125,7 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			end
 		end
 	end, { p1, var8.enabled })
-	useEffect(function() --[[ line: 163 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var9 (ref), var8 (ref)
 		local current = var7.current
 		
@@ -138,11 +138,11 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			current.Volume = 0.2
 		end
 	end, { var9.enabled, var8.enabled })
-	local var20 = useCallback(function() --[[ line: 180 ]]
+	local var20 = useCallback(function()
 		-- upvalues: var8 (ref)
 		var8.disable()
 	end, {})
-	useEffect(function() --[[ line: 184 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var19 (ref), var20 (ref)
 		local t = {}
 		
@@ -150,7 +150,7 @@ return function(p0, p1, p2) --[[ line: 46 | named "useAudioPlayback" ]]
 			table.insert(t, game:GetService("RunService").RenderStepped:Connect(var19))
 			table.insert(t, var7.current.Ended:Connect(var20))
 		end
-		return function() --[[ line: 192 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

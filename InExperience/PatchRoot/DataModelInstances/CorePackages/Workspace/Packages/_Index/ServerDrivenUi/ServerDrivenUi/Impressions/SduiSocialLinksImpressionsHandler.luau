@@ -3,7 +3,7 @@ local sendSocialLinksImpressionsEvent = require(parent.DiscoveryAnalytics).Event
 local sduiErrors = require(parent.SduiCoreSystem).SduiErrors
 local t = {}
 
-return function(p0, p1, p2, p3, _) --[[ line: 15 | named "SduiSocialLinksImpressionsHandler" ]]
+return function(p0, p1, p2, p3, _)
 	-- upvalues: sduiErrors (ref), t (ref), sendSocialLinksImpressionsEvent (ref)
 	if not p3 then
 		p0.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {

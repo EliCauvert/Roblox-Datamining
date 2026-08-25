@@ -4,7 +4,7 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local getSupportedActionsForProfileTypeModule = require(profilePlatform.Hooks.getSupportedActionsForProfileType)
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
-return function() --[[ line: 8 ]]
+return function()
 	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref)
 	return {
 		{ component = enumsModule.Components.ContactProfileHeader },

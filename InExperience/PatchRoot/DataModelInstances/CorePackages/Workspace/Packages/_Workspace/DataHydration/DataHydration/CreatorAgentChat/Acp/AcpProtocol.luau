@@ -4,7 +4,7 @@ local myStatsExperienceStatsPath = game:DefineFastString("MyStatsExperienceStats
 return {
 	ProtocolVersion = 2,
 	CapRtnNamespace = "AssistantPlugin",
-	acpUrl = function() --[[ line: 12 ]]
+	acpUrl = function()
 		-- upvalues: urlBase (ref), myStatsExperienceStatsPath (ref)
 		return urlBase.APIS .. myStatsExperienceStatsPath
 	end,
@@ -38,7 +38,7 @@ return {
 		OutOfCredits = -32006
 	},
 	AskTool = { Name = "ask_tool" },
-	extractSessionNewProject = function(p0) --[[ line: 52 ]]
+	extractSessionNewProject = function(p0)
 		if typeof(p0) ~= "table" then
 			return nil
 		end
@@ -46,7 +46,7 @@ return {
 		
 		return if typeof(roblox) == "table" and typeof(roblox.universeId) == "number" and typeof(roblox.placeId) == "number" then roblox else nil
 	end,
-	buildSessionNewWireParams = function(p1) --[[ line: 63 ]]
+	buildSessionNewWireParams = function(p1)
 		local t = {
 			universeId = p1.project.universeId,
 			placeId = p1.project.placeId

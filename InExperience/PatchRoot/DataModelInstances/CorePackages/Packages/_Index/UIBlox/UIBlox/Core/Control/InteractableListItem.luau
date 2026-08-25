@@ -6,20 +6,20 @@ local interactableModule = require(parent.Core.Control.Interactable)
 local selectionModeModule = require(script.Parent.Enum.SelectionMode)
 local interactableListItem = roactModule.PureComponent:extend("InteractableListItem")
 
-function interactableListItem.init(p0) --[[ line: 20 ]]
+function interactableListItem.init(p0)
 	-- upvalues: selectionModeModule (ref), cryoModule (ref)
-	function p0.onStateChanged(_, p1) --[[ line: 21 ]]
+	function p0.onStateChanged(_, p1)
 		-- upvalues: p0 (ref)
 		p0.props.setInteractableState(p0.props.id, p1)
 	end
 	
-	function p0.onActivated() --[[ line: 24 ]]
+	function p0.onActivated()
 		-- upvalues: p0 (ref), selectionModeModule (copy), cryoModule (copy)
 		local selection = p0.props.selection
 		local list = { p0.props.id }
 		
 		if p0.props.selectionMode == selectionModeModule.Multiple then
-			list = cryoModule.List.filter(selection, function(p2) --[[ line: 28 ]]
+			list = cryoModule.List.filter(selection, function(p2)
 				-- upvalues: p0 (copy)
 				return p2 ~= p0.props.id
 			end)
@@ -37,7 +37,7 @@ function interactableListItem.init(p0) --[[ line: 20 ]]
 	end
 end
 
-function interactableListItem.render(p3) --[[ line: 44 ]]
+function interactableListItem.render(p3)
 	-- upvalues: cryoModule (ref), roactModule (ref), interactableModule (ref)
 	local var6, var7 = p3.props.renderItem(p3.props.item, p3.props.interactableState, cryoModule.List.find(p3.props.selection, p3.props.id) ~= nil, p3.props.id)
 	

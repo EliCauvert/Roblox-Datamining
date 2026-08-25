@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsPauseAudioThroughTeleport", false)
 
-return function() --[[ line: 12 ]]
+return function()
 	return game:GetFastFlag("MomentsPauseAudioThroughTeleport")
 end

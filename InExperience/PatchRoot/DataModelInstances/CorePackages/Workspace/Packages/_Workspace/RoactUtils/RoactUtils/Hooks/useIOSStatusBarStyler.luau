@@ -6,21 +6,21 @@ local notificationType = require(parent.RobloxAppEnums).NotificationType
 local reactModule = require(parent.React)
 local _ = { LIGHT = "lightcontent", DEFAULT = "default" }
 
-local var4 = function(p0) --[[ line: 19 ]]
+local var4 = function(p0)
 	-- upvalues: userInputService (ref), guiService (ref), httpService (ref), notificationType (ref)
 	if userInputService:GetPlatform() == Enum.Platform.IOS then
 		guiService:BroadcastNotification(httpService:JSONEncode({ style = p0 }), notificationType.SET_STATUS_BAR_STYLE)
 	end
 end
 
-return function(p1, p2) --[[ line: 31 | named "useIOSStatusBarStyler" ]]
+return function(p1, p2)
 	-- upvalues: var4 (ref), reactModule (ref)
 	p2 = p2 or var4
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), p2 (ref)
 		p2(if p1 then "lightcontent" else "default")
 		
-		return function() --[[ line: 37 ]]
+		return function()
 			-- upvalues: p2 (copy)
 			p2("default")
 		end

@@ -5,7 +5,7 @@ local luaTypeDefsModule = require(script.luaTypeDefs)
 
 return {
 	typeDefs = "",
-	generateTypeDefs = function() --[[ line: 35 ]]
+	generateTypeDefs = function()
 		-- upvalues: mergeTypeDefs (ref), luaTypeDefsModule (ref), graphQLModule (ref)
 		return graphQLModule.print(mergeTypeDefs(luaTypeDefsModule))
 	end,

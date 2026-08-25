@@ -8,7 +8,7 @@ local tModule = require(parent.t)
 local appPage = robloxAppEnumsModule.AppPage
 local urlBuilder = urlBuilderModule.UrlBuilder
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: tModule (ref), navigateDownModule (ref), appPage (ref), urlBuilder (ref), getFFlagUseCommunitiesTranslation (ref)
 	assert(tModule.callback(p0) or tModule.none(p0), "")
 	

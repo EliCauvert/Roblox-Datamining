@@ -26,7 +26,7 @@ local t_1 = {
 	}
 }
 
-return function(p0) --[[ line: 39 | named "CommercePurchaseError" ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), fFlagAddCommerceErrorsModule (ref), t_1 (ref), t (ref), reactModule (ref), interactiveAlert (ref), images (ref)
 	local var7 = useLocalization({
 		dismissCTA = "CoreScripts.CommercePurchasePrompt.ErrorPrompt.DismissCTA",

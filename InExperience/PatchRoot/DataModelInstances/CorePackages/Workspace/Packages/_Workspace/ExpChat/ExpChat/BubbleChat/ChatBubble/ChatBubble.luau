@@ -24,18 +24,18 @@ local getPresetIconSize = expChatSharedModule.getPresetIconSize
 local isPresetMessage = expChatSharedModule.isPresetMessage
 local chatBubble = roactModule.Component:extend("ChatBubble")
 chatBubble.defaultProps = { isMostRecent = true, text = "", timestamp = 0 }
-local var18 = memoizeModule(function(p0, p1) --[[ line: 43 ]]
+local var18 = memoizeModule(function(p0, p1)
 	-- upvalues: dictionary (ref), getDictFromBubbleChatMessagePropertiesModule (ref)
 	return if p1 then dictionary.join(p0, getDictFromBubbleChatMessagePropertiesModule(p1)) else p0
 end)
 
-function chatBubble.init(p2) --[[ line: 54 ]]
+function chatBubble.init(p2)
 	-- upvalues: roactModule (ref), otterModule (ref)
 	local var19, var20 = roactModule.createBinding(0)
 	p2.width = var19
 	p2.updateWidth = var20
 	p2.widthMotor = otterModule.createSingleMotor(0)
-	p2.widthMotor:onStep(function(p3) --[[ line: 57 ]]
+	p2.widthMotor:onStep(function(p3)
 		-- upvalues: p2 (ref)
 		p2.updateWidth(math.round(p3))
 	end)
@@ -43,7 +43,7 @@ function chatBubble.init(p2) --[[ line: 54 ]]
 	p2.height = var21
 	p2.updateHeight = var22
 	p2.heightMotor = otterModule.createSingleMotor(0)
-	p2.heightMotor:onStep(function(p4) --[[ line: 63 ]]
+	p2.heightMotor:onStep(function(p4)
 		-- upvalues: p2 (ref)
 		p2.updateHeight(math.round(p4))
 	end)
@@ -57,12 +57,12 @@ function chatBubble.init(p2) --[[ line: 54 ]]
 	p2.updateBackgroundTransparency = var26
 	p2.backgroundTransparencyMotor = otterModule.createSingleMotor(1)
 	p2.backgroundTransparencyMotor:onStep(p2.updateBackgroundTransparency)
-	p2.size = roactModule.joinBindings({ p2.width, p2.height }):map(function(p5) --[[ line: 75 ]]
+	p2.size = roactModule.joinBindings({ p2.width, p2.height }):map(function(p5)
 		return UDim2.fromOffset(p5[1], p5[2])
 	end)
 end
 
-function chatBubble.render(p6) --[[ line: 80 ]]
+function chatBubble.render(p6)
 	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var18 (ref), configModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var14 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), textChatService (ref), getPresetIconRichText (ref), roactModule (ref), dictionary (ref)
 	local backgroundImage, backgroundGradient, var29
 	local var27 = if getEnablePerBubbleCustomizationModule() then var18(p6.props.chatSettings, p6.props.bubbleChatMessageProperties) else p6.props.chatSettings
@@ -196,13 +196,13 @@ function chatBubble.render(p6) --[[ line: 80 ]]
 	return createElement(var34, t_1, t_2)
 end
 
-function chatBubble.fadeOut(p7) --[[ line: 246 ]]
+function chatBubble.fadeOut(p7)
 	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var18 (ref), getSpringFromSettingsModule (ref)
 	local var39 = if getEnablePerBubbleCustomizationModule() then var18(p7.props.chatSettings, p7.props.bubbleChatMessageProperties) else p7.props.chatSettings
 	
 	if not p7.isFadingOut then
 		p7.isFadingOut = true
-		p7.transparencyMotor:onComplete(function() --[[ line: 254 ]]
+		p7.transparencyMotor:onComplete(function()
 			-- upvalues: p7 (ref)
 			if p7.props.onFadeOut then
 				p7.props.onFadeOut(p7.props.messageId)
@@ -214,7 +214,7 @@ function chatBubble.fadeOut(p7) --[[ line: 246 ]]
 	end
 end
 
-function chatBubble.didUpdate(p8, p9) --[[ line: 266 ]]
+function chatBubble.didUpdate(p8, p9)
 	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var18 (ref), getTextBoundsModule (ref), getSpringFromSettingsModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconSize (ref)
 	if p8.props.fadingOut then
 		p8:fadeOut()
@@ -242,7 +242,7 @@ function chatBubble.didUpdate(p8, p9) --[[ line: 266 ]]
 	end
 end
 
-function chatBubble.didMount(p10) --[[ line: 311 ]]
+function chatBubble.didMount(p10)
 	-- upvalues: getEnablePerBubbleCustomizationModule (ref), var18 (ref), getTextBoundsModule (ref), getSpringFromSettingsModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconSize (ref), otterModule (ref), clientSettingsUtilityModule (ref)
 	p10.isMounted = true
 	local var45 = if getEnablePerBubbleCustomizationModule() then var18(p10.props.chatSettings, p10.props.bubbleChatMessageProperties) else p10.props.chatSettings
@@ -283,7 +283,7 @@ function chatBubble.didMount(p10) --[[ line: 311 ]]
 	p10.backgroundTransparencyMotor:setGoal(var48(backgroundTransparency))
 end
 
-function chatBubble.willUnmount(p11) --[[ line: 370 ]]
+function chatBubble.willUnmount(p11)
 	p11.isMounted = false
 	p11.transparencyMotor:destroy()
 	p11.backgroundTransparencyMotor:destroy()

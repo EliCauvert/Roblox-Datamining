@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 1 | named "getBadgesSeeAllPageKey" ]]
+﻿return function(p0)
 	return `BadgesSeeAll_{p0}`
 end

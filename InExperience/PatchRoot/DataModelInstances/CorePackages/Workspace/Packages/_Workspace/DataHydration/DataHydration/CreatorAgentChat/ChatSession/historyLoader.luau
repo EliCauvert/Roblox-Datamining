@@ -5,17 +5,17 @@ local historyPageUtilsModule = require(script.Parent.historyPageUtils)
 local _ = require(script.Parent.sessionDeps)
 
 return {
-	createHistoryLoader = function(p0) --[[ line: 38 ]]
+	createHistoryLoader = function(p0)
 		-- upvalues: historyPageUtilsModule (ref), sessionHistoryMergeModule (ref), constantsModule (ref)
 		local var3 = 0
 		local var4 = nil
 		
-		local function _(p1) --[[ line: 42 | named "isRefreshGenerationStale" ]]
+		local function _(p1)
 			-- upvalues: p0 (ref)
 			return p1 ~= p0.getRefreshGeneration()
 		end
 		
-		local _ = function(p2) --[[ line: 46 | named "clearHistoryLoadInFlightIfOwned" ]]
+		local _ = function(p2)
 			-- upvalues: var4 (write), p0 (ref)
 			if var4 == p2 then
 				p0.setHistoryLoadInFlight(false)
@@ -23,7 +23,7 @@ return {
 			end
 		end
 		
-		local _ = function(p3) --[[ line: 53 | named "tryAcquireHistoryLoad" ]]
+		local _ = function(p3)
 			-- upvalues: p0 (ref), var4 (write)
 			if p0.getHistoryLoadInFlight() then
 				if var4 == p3 then
@@ -38,7 +38,7 @@ return {
 			return true
 		end
 		
-		local function loadHistoryPage(p4, p5, p6) --[[ line: 66 ]]
+		local function loadHistoryPage(p4, p5, p6)
 			-- upvalues: p0 (ref), historyPageUtilsModule (copy)
 			local var7 = historyPageUtilsModule.awaitRequestStateCancelled(p0.deps.sessionLoad(p4, { historyPageToken = p5 }).state, p6)
 			
@@ -48,17 +48,17 @@ return {
 			return true, historyPageUtilsModule.getSessionLoadHistory(var7.result), historyPageUtilsModule.getNextHistoryPageToken(var7.result)
 		end
 		
-		local _ = function(p7, p8, p9) --[[ line: 84 | named "isSessionLoadStale" ]]
+		local _ = function(p7, p8, p9)
 			-- upvalues: p0 (ref)
 			return p9() or (if p0.getCasSessionId() == p7 then p8 ~= p0.getRefreshGeneration() else true)
 		end
 		
-		local _ = function(p10, p11, p12, p13) --[[ line: 92 | named "isPrefetchStale" ]]
+		local _ = function(p10, p11, p12, p13)
 			-- upvalues: p0 (ref), var3 (write)
 			return p13() or (if p0.getCasSessionId() == p10 then p12 ~= p0.getRefreshGeneration() else true) or p11 ~= var3
 		end
 		
-		local function commitRefreshedHistory(p14, p15, p16, p17, p18) --[[ line: 102 ]]
+		local function commitRefreshedHistory(p14, p15, p16, p17, p18)
 			-- upvalues: p0 (ref), sessionHistoryMergeModule (copy)
 			if p18() or (if p0.getCasSessionId() == p14 then p15 ~= p0.getRefreshGeneration() else true) then
 				return false
@@ -82,9 +82,9 @@ return {
 			return true
 		end
 		
-		local _ = function(value, p19, p20, p21, p22) --[[ line: 132 | named "prefetchOlderHistoryPagesInBackground" ]]
+		local _ = function(value, p19, p20, p21, p22)
 			-- upvalues: constantsModule (copy), p0 (ref), var3 (write), loadHistoryPage (ref)
-			task.spawn(function() --[[ line: 139 ]]
+			task.spawn(function()
 				-- upvalues: p19 (ref), constantsModule (copy), value (ref), p21 (ref), p22 (ref), p20 (ref), p0 (copy), var3 (copy), loadHistoryPage (copy)
 				local var10 = p19
 				local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()
@@ -105,7 +105,7 @@ return {
 			end)
 		end
 		
-		local _ = function() --[[ line: 157 | named "beginPrefetchGeneration" ]]
+		local _ = function()
 			-- upvalues: var3 (write)
 			var3 += 1
 			
@@ -113,7 +113,7 @@ return {
 		end
 		
 		return {
-			refreshSession = function(p23) --[[ line: 162 ]]
+			refreshSession = function(p23)
 				-- upvalues: p0 (ref), var4 (write), historyPageUtilsModule (copy), loadHistoryPage (ref), constantsModule (copy), commitRefreshedHistory (ref), var3 (write)
 				local casSessionId = p0.getCasSessionId()
 				
@@ -173,9 +173,9 @@ return {
 						if not var20 and nextHistoryPageToken ~= nil then
 							var3 += 1
 							var26 = var3
-							task.defer(function() --[[ line: 223 ]]
+							task.defer(function()
 								-- upvalues: casSessionId (ref), nextHistoryPageToken (write), p23 (ref), var26 (ref), refreshGeneration (ref), constantsModule (copy), p0 (copy), var3 (copy), loadHistoryPage (copy)
-								task.spawn(function() --[[ line: 139 ]]
+								task.spawn(function()
 									-- upvalues: nextHistoryPageToken (ref), constantsModule (copy), casSessionId (ref), var26 (ref), refreshGeneration (ref), p23 (ref), p0 (copy), var3 (copy), loadHistoryPage (copy)
 									local var10 = nextHistoryPageToken
 									local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()
@@ -210,7 +210,7 @@ return {
 				p0.setHistoryLoadInFlight(true)
 				var17 = true
 			end,
-			loadOlderHistory = function(p24) --[[ line: 237 ]]
+			loadOlderHistory = function(p24)
 				-- upvalues: p0 (ref), var4 (write), loadHistoryPage (ref), var3 (write), constantsModule (copy)
 				local casSessionId = p0.getCasSessionId()
 				local nextHistoryPageToken = p0.getNextHistoryPageToken()
@@ -245,9 +245,9 @@ return {
 						elseif var35 ~= nil then
 							var3 += 1
 							local var36 = var3
-							task.defer(function() --[[ line: 263 ]]
+							task.defer(function()
 								-- upvalues: casSessionId (ref), var35 (ref), p24 (ref), var36 (ref), refreshGeneration (ref), constantsModule (copy), p0 (copy), var3 (copy), loadHistoryPage (copy)
-								task.spawn(function() --[[ line: 139 ]]
+								task.spawn(function()
 									-- upvalues: var35 (ref), constantsModule (copy), casSessionId (ref), var36 (ref), refreshGeneration (ref), p24 (ref), p0 (copy), var3 (copy), loadHistoryPage (copy)
 									local var10 = var35
 									local prefetchHistoryPagesOnRefresh = constantsModule.getPrefetchHistoryPagesOnRefresh()

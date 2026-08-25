@@ -10,7 +10,7 @@ local _ = require(parent.util.Types)
 local validateCanLoadModule = require(parent.validation.validateCanLoad)
 local validateAssetCreatorModule = require(parent.validation.validateAssetCreator)
 
-local function validateExistance(p0, p1) --[[ line: 23 ]]
+local function validateExistance(p0, p1)
 	-- upvalues: validateCanLoadModule (ref)
 	for i, v in pairs(p0) do
 		if not validateCanLoadModule(v.instance[v.fieldName], p1) then
@@ -24,7 +24,7 @@ local t = {
 	MODERATION_STATE_APPROVED = { MODERATION_STATE_APPROVED = true, Approved = true }
 }
 
-local function validateCreatorId(p2, p3, p4, p5, p6, p7) --[[ line: 44 ]]
+local function validateCreatorId(p2, p3, p4, p5, p6, p7)
 	-- upvalues: analyticsModule (ref)
 	if p2[tonumber(p3)] then
 		return true
@@ -36,7 +36,7 @@ local function validateCreatorId(p2, p3, p4, p5, p6, p7) --[[ line: 44 ]]
 	}
 end
 
-local function validateModerationState(p8, p9, p10, p11, p12) --[[ line: 62 ]]
+local function validateModerationState(p8, p9, p10, p11, p12)
 	-- upvalues: t (ref), analyticsModule (ref)
 	if t.MODERATION_STATE_REVIEWING[p8] then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDependencies_IsReviewing, nil, p12)
@@ -52,7 +52,7 @@ local function validateModerationState(p8, p9, p10, p11, p12) --[[ line: 62 ]]
 	}
 end
 
-local function validateModerationRCC(p13, p14, p15) --[[ line: 91 ]]
+local function validateModerationRCC(p13, p14, p15)
 	-- upvalues: failureReasonsAccumulatorModule (ref), getAssetCreationDetailsRCCModule (ref), validateCreatorId (ref), validateModerationState (ref)
 	if not p13 or #p13 == 0 then
 		return true
@@ -77,14 +77,14 @@ local function validateModerationRCC(p13, p14, p15) --[[ line: 91 ]]
 	return var16:getFinalResults()
 end
 
-local function validateAssetCreatorsRCC(value, p16) --[[ line: 136 ]]
+local function validateAssetCreatorsRCC(value, p16)
 	-- upvalues: validateAssetCreatorModule (ref)
 	assert(p16.isServer, "isServer must be true for validateAssetCreatorsRCC")
 	
 	return validateAssetCreatorModule(value, p16)
 end
 
-return function(p17, p18, p19) --[[ line: 149 | named "validateDependencies" ]]
+return function(p17, p18, p19)
 	-- upvalues: parseContentIdsModule (ref), constantsModule (ref), analyticsModule (ref), validateExistance (ref), failureReasonsAccumulatorModule (ref), noStudioOwnershipCheck (ref), runService (ref), validateAssetCreatorsRCC (ref), validateModerationRCC (ref)
 	local currentTime = tick()
 	local var20 = if p18 then p18.isServer else nil

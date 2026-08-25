@@ -4,7 +4,7 @@ local loggerModule = require(momentsCreation.Logger)
 local getFFlagMomentsUseBackendPostStatusNotificationModule = require(momentsCreation.Flags.GetFFlagMomentsUseBackendPostStatusNotification)
 local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
-return function(p0, p1) --[[ line: 40 | named "completeMomentUpload" ]]
+return function(p0, p1)
 	-- upvalues: fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), getFFlagMomentsUseBackendPostStatusNotificationModule (ref), loggerModule (ref)
 	p1.uploadStore.setSuccess(p0)
 	

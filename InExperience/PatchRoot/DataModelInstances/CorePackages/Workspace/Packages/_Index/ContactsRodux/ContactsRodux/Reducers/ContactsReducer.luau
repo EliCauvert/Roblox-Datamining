@@ -12,14 +12,14 @@ local t = {
 	deviceContactToRobloxContact = {}
 }
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: byContactIdModule (ref), byDeviceContactIdModule (ref), hasSentRequestModule (ref), deviceContactToRobloxContactModule (ref), t (ref)
 	local var5 = byContactIdModule(p0)
 	local var6 = byDeviceContactIdModule(p0)
 	local var7 = hasSentRequestModule(p0)
 	local var8 = deviceContactToRobloxContactModule(p0)
 	
-	return function(p1, p2) --[[ line: 22 ]]
+	return function(p1, p2)
 		-- upvalues: t (copy), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
 		p1 = p1 or t
 		

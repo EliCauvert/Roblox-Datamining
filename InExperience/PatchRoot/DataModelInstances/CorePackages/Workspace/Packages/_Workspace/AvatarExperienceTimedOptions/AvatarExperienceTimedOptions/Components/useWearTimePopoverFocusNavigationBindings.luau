@@ -17,12 +17,12 @@ local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0, p1, p2) --[[ line: 27 | named "useWearTimePopoverFocusNavigationBindings" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), popoverFocusRestorationContextModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagAXTimedOptionsPopoverSkipFocusOnCursor (ref), useLastInputMode (ref), getFirstFocusableDescendant (ref), guiService (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
 	local var8 = reactModule.useRef(nil)
 	local var9, var10 = reactModule.useState(false)
 	local var11 = if fFlagAXFixIaBTimedOptionsPopoverFocus then reactModule.useContext(popoverFocusRestorationContextModule) else nil
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), p1 (ref)
 		var10(p1)
 	end, { p1 })
@@ -31,7 +31,7 @@ return function(p0, p1, p2) --[[ line: 27 | named "useWearTimePopoverFocusNaviga
 	
 	if fFlagAXFixIaBTimedOptionsPopoverFocus then
 		local var13 = reactModule.useRef(false)
-		reactModule.useEffect(function() --[[ line: 62 ]]
+		reactModule.useEffect(function()
 			-- upvalues: fFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), var12 (ref), var9 (ref), var13 (ref), var8 (ref), getFirstFocusableDescendant (copy), guiService (copy), var11 (ref), p2 (ref)
 			local var14 = not fFlagAXTimedOptionsPopoverSkipFocusOnCursor or var12 == "Focus"
 			
@@ -57,11 +57,11 @@ return function(p0, p1, p2) --[[ line: 27 | named "useWearTimePopoverFocusNaviga
 			var13.current = var9
 		end, { var9, var11, p2, var12 })
 	end
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 90 ]]
+	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p0 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p3) --[[ line: 93 ]]
+				handler = inputHandlersModule.onRelease(function(p3)
 					-- upvalues: p0 (copy)
 					p3.cancelled = true
 					p0()

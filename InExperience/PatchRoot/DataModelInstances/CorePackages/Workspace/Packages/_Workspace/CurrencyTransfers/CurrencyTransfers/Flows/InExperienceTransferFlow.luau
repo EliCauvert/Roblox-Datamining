@@ -20,7 +20,7 @@ local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTr
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p0) --[[ line: 80 | named "InExperienceTransferFlow" ]]
+return function(p0)
 	-- upvalues: createTransferStoreModule (ref), sharedFlagsModule (ref), httpService (ref), transferDirectionModule (ref), transferOriginationModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), errorTransferModelModule (ref), failureReasonModule (ref), ampWizardTransferConstantsModule (ref), handleTransferBlockModule (ref), transferRetryOriginModule (ref), handleTransferErrorModule (ref), reactModule (ref), transferRobuxAppModule (ref), promptStateModule (ref)
 	local initiateResponse = p0.initiateResponse
 	assert(type(initiateResponse) == "table", "[InExperienceTransferFlow] initiateResponse must be a table")

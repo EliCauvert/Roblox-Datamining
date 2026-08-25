@@ -7,7 +7,7 @@ local var2 = 0
 local var3 = 0
 local t = {}
 
-local function createL3Session(p0) --[[ line: 23 ]]
+local function createL3Session(p0)
 	-- upvalues: sessionType (ref), appChatSessionName (ref), string (ref)
 	local level2a = sessionType.StructuralIdentifier.Level2a
 	
@@ -20,14 +20,14 @@ local function createL3Session(p0) --[[ line: 23 ]]
 	end
 end
 
-local function _(p1) --[[ line: 39 | named "destroyL3Session" ]]
+local function _(p1)
 	-- upvalues: appChatSessionName (ref)
 	if p1:SessionExists(appChatSessionName) then
 		p1:RemoveSession(appChatSessionName)
 	end
 end
 
-function t.acquire(p2) --[[ line: 45 ]]
+function t.acquire(p2)
 	-- upvalues: sessionService (ref), var3 (write), var2 (write), createL3Session (ref)
 	p2 = p2 or sessionService
 	
@@ -43,7 +43,7 @@ function t.acquire(p2) --[[ line: 45 ]]
 	end
 end
 
-function t.release(p3) --[[ line: 57 ]]
+function t.release(p3)
 	-- upvalues: sessionService (ref), var2 (write), appChatSessionName (ref)
 	p3 = p3 or sessionService
 	var2 -= 1
@@ -53,7 +53,7 @@ function t.release(p3) --[[ line: 57 ]]
 	end
 end
 
-function t.reserve(p4) --[[ line: 68 ]]
+function t.reserve(p4)
 	-- upvalues: sessionService (ref), var3 (write), var2 (write), createL3Session (ref)
 	p4 = p4 or sessionService
 	var3 += 1
@@ -64,17 +64,17 @@ function t.reserve(p4) --[[ line: 68 ]]
 	end
 end
 
-function t.getCount() --[[ line: 77 ]]
+function t.getCount()
 	-- upvalues: var2 (write)
 	return var2
 end
 
-function t.getReservations() --[[ line: 81 ]]
+function t.getReservations()
 	-- upvalues: var3 (write)
 	return var3
 end
 
-function t._resetForTesting() --[[ line: 85 ]]
+function t._resetForTesting()
 	-- upvalues: var2 (write), var3 (write)
 	var2 = 0
 	var3 = 0

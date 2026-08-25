@@ -14,7 +14,7 @@ local var8 = tModule.interface({
 	isDismissed = tModule.boolean
 })
 
-local function _() --[[ line: 49 | named "getDefaultState" ]]
+local function _()
 	return {
 		windowStartTime = 0,
 		impressionCount = 0,
@@ -22,7 +22,7 @@ local function _() --[[ line: 49 | named "getDefaultState" ]]
 	}
 end
 
-local _ = function(p0) --[[ line: 57 | named "parseState" ]]
+local _ = function(p0)
 	-- upvalues: var8 (ref)
 	return if var8(p0) then p0 else {
 		windowStartTime = 0,
@@ -31,12 +31,12 @@ local _ = function(p0) --[[ line: 57 | named "parseState" ]]
 	}
 end
 
-local function readStateLookup() --[[ line: 66 ]]
+local function readStateLookup()
 	-- upvalues: playWithRewardCoachmarkStorageKeyEngineFeature (ref), appStorageService (ref), httpService (ref)
 	if not playWithRewardCoachmarkStorageKeyEngineFeature then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 71 ]]
+	local ok, status = pcall(function()
 		-- upvalues: appStorageService (copy)
 		return appStorageService:GetItem("PlayWithRewardCoachmark")
 	end)
@@ -46,7 +46,7 @@ local function readStateLookup() --[[ line: 66 ]]
 	elseif status == "" then
 		return {}
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 82 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: httpService (copy), status (ref)
 		return httpService:JSONDecode(status)
 	end)
@@ -54,21 +54,21 @@ local function readStateLookup() --[[ line: 66 ]]
 	return if ok_1 and type(status_1) == "table" then status_1 else {}
 end
 
-local function writeStateLookup(p1) --[[ line: 92 ]]
+local function writeStateLookup(p1)
 	-- upvalues: httpService (ref), appStorageService (ref)
-	local ok, status = pcall(function() --[[ line: 93 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p1 (ref)
 		return httpService:JSONEncode(p1)
 	end)
 	
-	return if ok and type(status) == "string" then pcall(function() --[[ line: 100 ]]
+	return if ok and type(status) == "string" then pcall(function()
 		-- upvalues: appStorageService (copy), status (ref)
 		appStorageService:SetItem("PlayWithRewardCoachmark", status)
 		appStorageService:Flush()
 	end) else false
 end
 
-local _ = function(p2, p3) --[[ line: 107 | named "mutateStateLookup" ]]
+local _ = function(p2, p3)
 	-- upvalues: readStateLookup (ref), var8 (ref), writeStateLookup (ref)
 	local var11 = readStateLookup()
 	
@@ -91,13 +91,13 @@ local _ = function(p2, p3) --[[ line: 107 | named "mutateStateLookup" ]]
 	return writeStateLookup(var11)
 end
 
-local _ = function(p4, p5) --[[ line: 126 | named "hasWindowExpired" ]]
+local _ = function(p4, p5)
 	-- upvalues: var7 (ref)
 	return p4.windowStartTime > 0 and var7 <= p5 - p4.windowStartTime
 end
 
 return {
-	consumeImpressionIfEligible = function(p6) --[[ line: 132 ]]
+	consumeImpressionIfEligible = function(p6)
 		-- upvalues: fFlagPlayWithRewardCoachmarkOverlayFix (ref), playWithRewardCoachmarkMaxImpressions2 (ref), playWithRewardCoachmarkMaxImpressions (ref), playWithRewardCoachmarkStorageKeyEngineFeature (ref), var7 (ref), playWithRewardCoachmarkWindowResets (ref), readStateLookup (ref), var8 (ref), writeStateLookup (ref)
 		local var15 = if fFlagPlayWithRewardCoachmarkOverlayFix then playWithRewardCoachmarkMaxImpressions2 else playWithRewardCoachmarkMaxImpressions
 		
@@ -111,7 +111,7 @@ return {
 			windowStartTime = timestamp
 		}
 		
-		local _ = function(p7) --[[ line: 148 ]]
+		local _ = function(p7)
 			-- upvalues: t (ref), timestamp (ref), var7 (copy), playWithRewardCoachmarkWindowResets (copy), var15 (ref)
 			if p7.windowStartTime == 0 then
 				return t
@@ -156,9 +156,9 @@ return {
 		
 		return writeStateLookup(var18)
 	end,
-	dismissCurrentWindow = function(p8) --[[ line: 166 ]]
+	dismissCurrentWindow = function(p8)
 		-- upvalues: readStateLookup (ref), var8 (ref), writeStateLookup (ref)
-		local _ = function(p9) --[[ line: 167 ]]
+		local _ = function(p9)
 			if p9.windowStartTime == 0 or p9.isDismissed then
 				return nil
 			end

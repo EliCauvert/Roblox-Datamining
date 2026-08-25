@@ -36,7 +36,7 @@ local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableM
 local fFlagPlayerListFixLeaderstatsStacking = require(sharedFlags).FFlagPlayerListFixLeaderstatsStacking
 local fFlagPlayerListUseFocusNavHook = playerListModule.Flags.FFlagPlayerListUseFocusNavHook
 local t = { Transparency = 1, Color = Color3.new(1, 1, 1) }
-local var16 = reactModule.memo(function(p0) --[[ line: 118 | named "IconAndName" ]]
+local var16 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), playerIconModule (ref), playerNameTagModule (ref)
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		Layout = reactModule.createElement("UIListLayout", {
@@ -64,7 +64,7 @@ local var16 = reactModule.memo(function(p0) --[[ line: 118 | named "IconAndName"
 		})
 	})
 end)
-local var17 = reactModule.memo(function(p1) --[[ line: 173 | named "PlayerEntryChildren" ]]
+local var17 = reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), var16 (write), entryFrameView (ref), fFlagRemoveNewPlayerListOverlay (ref), fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), signalsModule (ref), statEntryContainerModule (ref), cryoModule (ref), cellExtenderModule (ref)
 	local isSmallTouchDevice = p1.isSmallTouchDevice or false
 	local isDirectionalPreferred = p1.isDirectionalPreferred or false
@@ -139,12 +139,12 @@ local var17 = reactModule.memo(function(p1) --[[ line: 173 | named "PlayerEntryC
 		end
 	end
 	if fFlagPlayerListFixLeaderstatsStacking then
-		local var25 = signalsReactModule.useSignalState(signalsModule.createComputed(function(p2) --[[ line: 269 ]]
+		local var25 = signalsReactModule.useSignalState(signalsModule.createComputed(function(p2)
 			-- upvalues: playerStats (ref)
 			return if playerStats then playerStats.getAllData(p2) else {}
 		end))
 		
-		for i, v in signalsReactModule.useSignalState(signalsModule.createComputed(function(p3) --[[ line: 265 ]]
+		for i, v in signalsReactModule.useSignalState(signalsModule.createComputed(function(p3)
 			-- upvalues: gameStats (ref)
 			return if gameStats then gameStats.getAllData(p3) else {}
 		end)) do
@@ -153,7 +153,7 @@ local var17 = reactModule.memo(function(p1) --[[ line: 173 | named "PlayerEntryC
 			end
 		end
 	elseif gameStats and gameStatsCount and (gameStatsCount > 0 and playerStats) and (playerStatsCount and playerStatsCount >= 0) then
-		gameStats.iterateData(function(p4, p5) --[[ line: 288 ]]
+		gameStats.iterateData(function(p4, p5)
 			-- upvalues: maxLeaderstats (ref), playerStats (ref), t (ref), reactModule (copy), statEntryContainerModule (copy), cryoModule (copy), t_3 (ref)
 			if maxLeaderstats < p5.order(false) then
 				return
@@ -173,18 +173,18 @@ local var17 = reactModule.memo(function(p1) --[[ line: 173 | named "PlayerEntryC
 	return reactModule.createElement(reactModule.Fragment, {}, t)
 end)
 
-return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
+return reactModule.memo(function(p6)
 	-- upvalues: fFlagPlayerListFixLeaderstatsStacking (ref), signalsReactModule (ref), signalsModule (ref), reactModule (ref), fFlagPlayerListUseFocusNavHook (ref), useFocusGuiObject (ref), enabled (ref), useLayoutValues (ref), useStyle (ref), playersService (ref), constants (ref), getFFlagGateLeaderboardPlayerDropdownViaGUAC (ref), inExperienceCapabilities (ref), controlState (ref), t (ref), fFlagEnableMobilePlayerListOnConsole (ref), fFlagRemoveNewPlayerListOverlay (ref), fFlagAddNewPlayerListFocusNav (ref), guiService (ref), fFlagAddNewPlayerListMobileFocusNav (ref), view (ref), var17 (write), entryFrameView (ref), cryoModule (ref)
 	local var26 = if fFlagPlayerListFixLeaderstatsStacking then nil else signalsReactModule.useSignalState(p6.playerData.stats.getCount)
-	local var27 = signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p7) --[[ line: 332 ]]
+	local var27 = signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p7)
 		-- upvalues: p6 (ref)
 		return p6.playerData.order(p7) * 2 - 1
 	end))
-	local var28 = reactModule.useMemo(function() --[[ line: 336 ]]
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: p6 (ref), var27 (ref)
 		return if p6.layoutOrder then p6.layoutOrder else var27
 	end, { p6.layoutOrder, var27 })
-	local var29 = reactModule.useMemo(function() --[[ line: 340 ]]
+	local var29 = reactModule.useMemo(function()
 		-- upvalues: p6 (ref)
 		return if p6.playerData.order(false) == 1 then p6.firstPlayerRef else nil
 	end, { p6.playerData.order, p6.firstPlayerRef })
@@ -200,7 +200,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 	local isSmallTouchDevice = p6.isSmallTouchDevice
 	local isTenFoot = var38.IsTenFoot
 	local var41 = p6.player == playersService.LocalPlayer
-	local var42 = reactModule.useCallback(function() --[[ line: 362 ]]
+	local var42 = reactModule.useCallback(function()
 		-- upvalues: p6 (ref), fFlagPlayerListUseFocusNavHook (copy), constants (copy), getFFlagGateLeaderboardPlayerDropdownViaGUAC (copy), inExperienceCapabilities (copy), var34 (ref)
 		if not p6.openDropdown or not p6.closeDropdown then return end
 		if p6.dropdownOpen and p6.selectedPlayer == p6.player then
@@ -242,7 +242,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 		p6.closeDropdown, p6.setDropDownPlayerDimensionY, p6.titlePlayerEntry,
 		p6.setSelectedPlayerId, var34.current
 	})
-	local var43 = reactModule.useCallback(function(p8) --[[ line: 403 ]]
+	local var43 = reactModule.useCallback(function(p8)
 		-- upvalues: controlState (copy), var33 (ref), var31 (ref)
 		if p8 == controlState.Pressed or p8 == controlState.SelectedPressed then
 			var33(true)
@@ -257,22 +257,22 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 			var33(false)
 		end
 	end, {})
-	local var44 = reactModule.useMemo(function() --[[ line: 414 ]]
+	local var44 = reactModule.useMemo(function()
 		-- upvalues: var37 (ref), var39 (ref)
 		return {
 			Transparency = 1,
 			Color = if var37 then var39.Theme.BackgroundUIContrast.Color else var39.Theme.BackgroundContrast.Color
 		}
 	end, { var37, isTenFoot })
-	local var45 = reactModule.useMemo(function() --[[ line: 424 ]]
+	local var45 = reactModule.useMemo(function()
 		-- upvalues: var38 (ref)
 		return { Transparency = 0.8, Color = var38.RowHoverColor }
 	end, { var38 })
-	local var46 = reactModule.useMemo(function() --[[ line: 431 ]]
+	local var46 = reactModule.useMemo(function()
 		-- upvalues: var38 (ref)
 		return { Transparency = 0.8, Color = var38.RowDefaultColor }
 	end, { var38 })
-	local var47 = reactModule.useCallback(function() --[[ line: 439 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: isSmallTouchDevice (ref), var30 (ref), var32 (ref), var45 (ref), var46 (ref), isTenFoot (ref), var44 (ref), p6 (ref), var38 (ref)
 		if isSmallTouchDevice then
 			return if var30 or var32 then var45 else var46
@@ -288,7 +288,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 		var44, isSmallTouchDevice, p6.dropdownOpen, p6.selectedPlayer, p6.player,
 		p6.titlePlayerEntry, var30, var32
 	})
-	local var48 = reactModule.useCallback(function() --[[ line: 484 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: isTenFoot (ref), var30 (ref), var38 (ref), var41 (ref), var39 (ref)
 		if isTenFoot then
 			if var30 then
@@ -306,7 +306,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 		var38,
 		var39
 	})
-	local var49 = reactModule.useCallback(function() --[[ line: 505 ]]
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: isTenFoot (ref), p6 (ref), var32 (ref), var39 (ref), var30 (ref), t (copy)
 		if not isTenFoot then
 			return if var32 then var39.Theme.BackgroundOnPress elseif p6.dropdownOpen and p6.selectedPlayer == p6.player then var39.Theme.BackgroundOnPress elseif var30 then var39.Theme.BackgroundOnHover else t
@@ -314,7 +314,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 	end, {
 		var30, var32, p6.dropdownOpen, p6.selectedPlayer, p6.player, var39, isTenFoot
 	})
-	local var50 = reactModule.useMemo(function() --[[ line: 528 ]]
+	local var50 = reactModule.useMemo(function()
 		-- upvalues: isSmallTouchDevice (ref), var41 (ref), var39 (ref), fFlagEnableMobilePlayerListOnConsole (copy), var38 (ref), isTenFoot (ref), p6 (ref)
 		return if isSmallTouchDevice then if var41 then {
 			Font = var39.Font.CaptionHeader.Font,
@@ -351,7 +351,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 	local var51 = var47()
 	local var52 = var48()
 	local var53 = if not fFlagRemoveNewPlayerListOverlay then var49() else nil
-	local var54 = reactModule.useMemo(function() --[[ line: 581 ]]
+	local var54 = reactModule.useMemo(function()
 		-- upvalues: p6 (ref), var38 (ref), var51 (ref), fFlagRemoveNewPlayerListOverlay (copy), var53 (write), var32 (ref), var29 (ref), fFlagPlayerListUseFocusNavHook (copy), fFlagAddNewPlayerListFocusNav (copy), var35 (ref), var42 (ref), var43 (ref)
 		return {
 			isTeamFrame = false,
@@ -367,7 +367,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 	end, {
 		p6.entrySizeX, var38.PlayerEntrySizeY, var51, var53, var32, var35, var42, var43
 	})
-	local var55 = reactModule.useMemo(function() --[[ line: 605 ]]
+	local var55 = reactModule.useMemo(function()
 		-- upvalues: isSmallTouchDevice (ref), isTenFoot (ref), var38 (ref), var52 (ref), var50 (ref), var30 (ref), var51 (ref), fFlagRemoveNewPlayerListOverlay (copy), var53 (write), var32 (ref), p6 (ref), var26 (ref), var54 (ref)
 		return {
 			isSmallTouchDevice = isSmallTouchDevice,
@@ -398,18 +398,18 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 	})
 	
 	if not fFlagPlayerListUseFocusNavHook then
-		reactModule.useEffect(function() --[[ line: 650 ]]
+		reactModule.useEffect(function()
 			-- upvalues: fFlagAddNewPlayerListFocusNav (copy), var35 (ref), p6 (ref), guiService (copy), var36 (ref)
 			local selectionLostConnection = nil
 			local destroyingConnection = nil
 			
 			if fFlagAddNewPlayerListFocusNav and var35.current and (p6.prevFocusedEntry and p6.destroyedFocusedPlayerId) then
 				local current = var35.current
-				selectionLostConnection = var35.current.SelectionLost:Connect(function() --[[ line: 658 ]]
+				selectionLostConnection = var35.current.SelectionLost:Connect(function()
 					-- upvalues: p6 (copy), current (ref)
 					p6.prevFocusedEntry.current = current
 				end)
-				destroyingConnection = var35.current.Destroying:Connect(function() --[[ line: 663 ]]
+				destroyingConnection = var35.current.Destroying:Connect(function()
 					-- upvalues: selectionLostConnection (write), guiService (copy), current (ref), p6 (copy), var36 (copy), destroyingConnection (write)
 					selectionLostConnection:Disconnect()
 					
@@ -420,7 +420,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 					destroyingConnection:Disconnect()
 				end)
 			end
-			return function() --[[ line: 677 ]]
+			return function()
 				-- upvalues: selectionLostConnection (write)
 				if selectionLostConnection then
 					selectionLostConnection:Disconnect()
@@ -435,9 +435,9 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 		})
 	end
 	if fFlagPlayerListUseFocusNavHook then
-		reactModule.useEffect(function() --[[ line: 686 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p6 (ref)
-			return function() --[[ line: 687 ]]
+			return function()
 				-- upvalues: p6 (copy)
 				if p6.unregisterPlayerInstance then
 					p6.unregisterPlayerInstance(p6.player.UserId)
@@ -445,7 +445,7 @@ return reactModule.memo(function(p6) --[[ line: 328 | named "PlayerEntryView" ]]
 			end
 		end, { p6.unregisterPlayerInstance, p6.player })
 	end
-	local var56 = reactModule.useCallback(function(p9) --[[ line: 695 ]]
+	local var56 = reactModule.useCallback(function(p9)
 		-- upvalues: fFlagPlayerListUseFocusNavHook (copy), p6 (ref), fFlagAddNewPlayerListMobileFocusNav (copy), var35 (ref), var34 (ref)
 		if fFlagPlayerListUseFocusNavHook and p6.registerPlayerInstance then
 			p6.registerPlayerInstance(p6.player.UserId, p9, p6.playerData.order)

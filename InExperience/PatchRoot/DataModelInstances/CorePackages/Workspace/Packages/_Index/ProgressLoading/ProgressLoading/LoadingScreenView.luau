@@ -42,12 +42,12 @@ local var26 = nil
 local var27 = 0
 local var28 = 1e999
 
-local function _(p0) --[[ line: 99 | named "getPadding" ]]
+local function _(p0)
 	-- upvalues: var24 (ref), t (ref), var22 (ref)
 	return if var24 then if p0 then t.MOBILE_PORTRAIT else t.MOBILE_LANDSCAPE elseif var22 then t.CONSOLE else t.DESKTOP
 end
 
-local _ = function(startValue, endValue) --[[ line: 109 | named "lerp" ]]
+local _ = function(startValue, endValue)
 	if type(startValue) == "table" and #startValue >= 2 then
 		local clampedValue = math.clamp(endValue, 0, 1)
 		
@@ -57,7 +57,7 @@ local _ = function(startValue, endValue) --[[ line: 109 | named "lerp" ]]
 end
 
 local t_1 = {
-	FadeIn = function(p1, _, p2, p3) --[[ line: 118 ]]
+	FadeIn = function(p1, _, p2, p3)
 		local list = { 1, 1 }
 		local list_1 = { 1, 0 }
 		local list_2 = { 1, 0.2 }
@@ -158,7 +158,7 @@ local t_1 = {
 			p3()
 		end
 	end,
-	FadeOut = function(p4, _, p5, p6) --[[ line: 147 ]]
+	FadeOut = function(p4, _, p5, p6)
 		-- upvalues: runService (ref)
 		local list = { 1, 0.6 }
 		local list_1 = { 0, 1 }
@@ -263,7 +263,7 @@ local t_1 = {
 	end
 }
 
-local _ = function() --[[ line: 180 | named "disconnectAndCloseHealthStat" ]]
+local _ = function()
 	-- upvalues: var26 (write), guiService (ref)
 	if var26 then
 		var26:disconnect()
@@ -274,15 +274,15 @@ end
 
 local loadingScreenView = roactModule.Component:extend("LoadingScreenView")
 
-function loadingScreenView.playAnimation(p7, p8, p9, p10) --[[ line: 191 ]]
+function loadingScreenView.playAnimation(p7, p8, p9, p10)
 	-- upvalues: runService (ref)
 	p7.animationStartTime = tick()
 	p7.animationFunction = p8
 	
 	if not p7.renderSteppedConnection then
-		p7.renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 196 ]]
+		p7.renderSteppedConnection = runService.RenderStepped:Connect(function()
 			-- upvalues: p7 (ref), p9 (ref), p10 (ref)
-			p7.animationFunction(tick() - p7.animationStartTime, p9, p7.updateBindings, function() --[[ line: 197 ]]
+			p7.animationFunction(tick() - p7.animationStartTime, p9, p7.updateBindings, function()
 				-- upvalues: p7 (copy), p10 (copy)
 				p7:stopAnimation()
 				
@@ -294,14 +294,14 @@ function loadingScreenView.playAnimation(p7, p8, p9, p10) --[[ line: 191 ]]
 	end
 end
 
-function loadingScreenView.stopAnimation(p11) --[[ line: 207 ]]
+function loadingScreenView.stopAnimation(p11)
 	if p11.renderSteppedConnection then
 		p11.renderSteppedConnection:Disconnect()
 		p11.renderSteppedConnection = nil
 	end
 end
 
-function loadingScreenView.renderBackground(value, p12) --[[ line: 214 ]]
+function loadingScreenView.renderBackground(value, p12)
 	-- upvalues: roactModule (ref), var18 (write), externalEventConnection (ref), runService (ref)
 	return roactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
@@ -335,7 +335,7 @@ function loadingScreenView.renderBackground(value, p12) --[[ line: 214 ]]
 	})
 end
 
-function loadingScreenView.showConnnectionHealthDebugMenu(_, _) --[[ line: 256 ]]
+function loadingScreenView.showConnnectionHealthDebugMenu(_, _)
 	-- upvalues: var27 (write), var28 (write), var24 (ref), guiService (ref)
 	if var27 == 0 then
 		var27 = 1
@@ -349,7 +349,7 @@ function loadingScreenView.showConnnectionHealthDebugMenu(_, _) --[[ line: 256 ]
 	var28 = 1e999
 end
 
-function loadingScreenView.renderPlaceIcon(p13, p14) --[[ line: 273 ]]
+function loadingScreenView.renderPlaceIcon(p13, p14)
 	-- upvalues: roactModule (ref), color (ref), externalEventConnection (ref), runService (ref)
 	local shimPos = p13.state.shimPos
 	local value = p13.bindings.iconTransparency:getValue()
@@ -451,7 +451,7 @@ function loadingScreenView.renderPlaceIcon(p13, p14) --[[ line: 273 ]]
 	return createElement(var74, t, t_1)
 end
 
-function loadingScreenView.renderInfoFrame(p15, p16) --[[ line: 334 ]]
+function loadingScreenView.renderInfoFrame(p15, p16)
 	-- upvalues: verifiedBadgesModule (ref), list (ref), roactModule (ref), var24 (ref)
 	local productInfo = p15.props.productInfo
 	local var93 = if productInfo then productInfo.Name else ""
@@ -470,7 +470,7 @@ function loadingScreenView.renderInfoFrame(p15, p16) --[[ line: 334 ]]
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = p15.isPortrait and UDim2.fromScale(1, 0) or UDim2.fromScale(0.6, 0),
 		Active = true,
-		[roactModule.Change.AbsoluteSize] = function(p17) --[[ line: 357 ]]
+		[roactModule.Change.AbsoluteSize] = function(p17)
 			-- upvalues: p15 (ref)
 			p15.updateBindings.updateInfoFrameAbsoluteSize(p17.AbsoluteSize)
 		end
@@ -544,7 +544,7 @@ function loadingScreenView.renderInfoFrame(p15, p16) --[[ line: 334 ]]
 	})
 end
 
-function loadingScreenView.renderMain(p18, p19) --[[ line: 430 ]]
+function loadingScreenView.renderMain(p18, p19)
 	-- upvalues: var24 (ref), t (ref), var22 (ref), roactModule (ref), var18 (write), loading (ref), iconSize (ref)
 	local var95 = if var24 then if p18.isPortrait then t.MOBILE_PORTRAIT else t.MOBILE_LANDSCAPE elseif var22 then t.CONSOLE else t.DESKTOP
 	
@@ -603,7 +603,7 @@ function loadingScreenView.renderMain(p18, p19) --[[ line: 430 ]]
 	})
 end
 
-function loadingScreenView.renderCloseBtn(p20, _) --[[ line: 489 ]]
+function loadingScreenView.renderCloseBtn(p20, _)
 	-- upvalues: responsiveModule (ref), roactModule (ref)
 	if p20.props.preferredInputRef.current ~= responsiveModule.Input.Directional and not p20.state.showCloseBtn and tick() - p20.startTime > 5 then
 		p20:setState({ showCloseBtn = true })
@@ -617,7 +617,7 @@ function loadingScreenView.renderCloseBtn(p20, _) --[[ line: 489 ]]
 		Size = UDim2.fromOffset(if p20.isQueueTreatmentEnabled then 32 else 32, if p20.isQueueTreatmentEnabled then 32 else 32),
 		Active = false,
 		ZIndex = 10,
-		[roactModule.Event.MouseButton1Click] = function() --[[ line: 512 ]]
+		[roactModule.Event.MouseButton1Click] = function()
 			-- upvalues: p20 (ref)
 			if p20.props.onCloseButtonActivated then
 				p20.props.onCloseButtonActivated()
@@ -626,7 +626,7 @@ function loadingScreenView.renderCloseBtn(p20, _) --[[ line: 489 ]]
 	})
 end
 
-function loadingScreenView.renderServerFrame(p21, p22) --[[ line: 520 ]]
+function loadingScreenView.renderServerFrame(p21, p22)
 	-- upvalues: var22 (ref), roactModule (ref), var17 (ref), coreGuiService (ref)
 	local serverStatusText = p21.state.serverStatusText
 	local isSubjectToChinaPolicies = p21.props.isSubjectToChinaPolicies
@@ -679,7 +679,7 @@ function loadingScreenView.renderServerFrame(p21, p22) --[[ line: 520 ]]
 	})
 end
 
-function loadingScreenView.renderGamepadCancelBtn(p23, p24) --[[ line: 573 ]]
+function loadingScreenView.renderGamepadCancelBtn(p23, p24)
 	-- upvalues: responsiveModule (ref), roactModule (ref), var17 (ref)
 	return p23.props.preferredInputRef.current == responsiveModule.Input.Directional and (not p23.state.gamepadCancelPressed and roactModule.createElement("Frame", {
 		Name = "GamepadCancelFrame",
@@ -724,7 +724,7 @@ function loadingScreenView.renderGamepadCancelBtn(p23, p24) --[[ line: 573 ]]
 	}))
 end
 
-function loadingScreenView.init(p25) --[[ line: 619 ]]
+function loadingScreenView.init(p25)
 	-- upvalues: vector2 (ref), var22 (ref), queueExperimentation (ref), roactModule (ref), list (ref), var24 (ref), guiService (ref), contextActionService (ref)
 	local var98
 	p25.thumbnailMoveSpd = 0.05
@@ -752,7 +752,7 @@ function loadingScreenView.init(p25) --[[ line: 619 ]]
 	end
 	p25.isQueueTreatmentEnabled = var98
 	
-	function p25.onAbsoluteSizeChange(p26) --[[ line: 649 ]]
+	function p25.onAbsoluteSizeChange(p26)
 		-- upvalues: p25 (ref)
 		p25:setState({ absoluteSize = p26.AbsoluteSize })
 		p25.isPortrait = p26.AbsoluteSize.X < p26.AbsoluteSize.Y
@@ -771,19 +771,19 @@ function loadingScreenView.init(p25) --[[ line: 619 ]]
 	p25.bindings = {
 		thumbnailTransparency = var99,
 		iconTransparency = var101,
-		iconSize = var103:map(function(p27) --[[ line: 671 ]]
+		iconSize = var103:map(function(p27)
 			-- upvalues: p25 (ref), list (copy)
 			local clampedValue = math.clamp(math.max(p25.state.absoluteSize.X, p25.state.absoluteSize.Y) / 1024 * list[1], list[1], list[2])
 			
 			return UDim2.fromOffset(clampedValue * p27, clampedValue * p27)
 		end),
 		placeTextTransparency = var105,
-		placeTextSize = var107:map(function(p28) --[[ line: 677 ]]
+		placeTextSize = var107:map(function(p28)
 			-- upvalues: var24 (copy)
 			return (if var24 then 20 else 36) * p28
 		end),
 		creatorTextTransparency = var109,
-		creatorTextSize = var111:map(function(p29) --[[ line: 681 ]]
+		creatorTextSize = var111:map(function(p29)
 			return 20 * p29
 		end),
 		infoFrameTransparency = var113,
@@ -801,7 +801,7 @@ function loadingScreenView.init(p25) --[[ line: 619 ]]
 		updateInfoFrameAbsoluteSize = var116
 	}
 	
-	function p25.renderBackgroundSteppedCallback(p30) --[[ line: 701 ]]
+	function p25.renderBackgroundSteppedCallback(p30)
 		-- upvalues: p25 (ref), vector2 (copy)
 		local absoluteSize = p25.state.absoluteSize
 		local var119 = absoluteSize.x * 1.5
@@ -827,7 +827,7 @@ function loadingScreenView.init(p25) --[[ line: 619 ]]
 		})
 	end
 	
-	function p25.renderShimmerCallback(p31) --[[ line: 728 ]]
+	function p25.renderShimmerCallback(p31)
 		-- upvalues: p25 (ref)
 		local var125 = p25.state.shimPos + p31 * 1
 		
@@ -840,14 +840,14 @@ function loadingScreenView.init(p25) --[[ line: 619 ]]
 	if guiService:GetUiMessage() ~= "" then
 		p25:setState({ serverStatusText = guiService:GetUiMessage() })
 	end
-	guiService.UiMessageChanged:Connect(function(p32, p33) --[[ line: 745 ]]
+	guiService.UiMessageChanged:Connect(function(p32, p33)
 		-- upvalues: p25 (ref)
 		if p32 == Enum.UiMessageType.UiMessageInfo then
 			p25:setState({ serverStatusText = p33 })
 		end
 	end)
 	local var117 = false
-	contextActionService:BindCoreAction("CancelGameLoad", function(_, p34, _) --[[ line: 753 ]]
+	contextActionService:BindCoreAction("CancelGameLoad", function(_, p34, _)
 		-- upvalues: var117 (write), p25 (ref), contextActionService (copy)
 		if p34 == Enum.UserInputState.Begin then
 			var117 = true
@@ -865,7 +865,7 @@ function loadingScreenView.init(p25) --[[ line: 619 ]]
 	end, false, Enum.KeyCode.ButtonB)
 end
 
-function loadingScreenView.renderAutoTranslate(p35) --[[ line: 772 ]]
+function loadingScreenView.renderAutoTranslate(p35)
 	-- upvalues: loadingScreenTelemetryModule (ref), roactModule (ref), autoTranslateBadgeModule (ref)
 	if p35.props.universeId <= 0 then
 		loadingScreenTelemetryModule.countAutoTranslateZeroUniverseId()
@@ -879,12 +879,12 @@ function loadingScreenView.renderAutoTranslate(p35) --[[ line: 772 ]]
 	})
 end
 
-function loadingScreenView.renderPolicyContainer(p36) --[[ line: 784 ]]
+function loadingScreenView.renderPolicyContainer(p36)
 	-- upvalues: reactModule (ref), policyContainerModule (ref)
 	return if p36.props.isSubjectToChinaPolicies then reactModule.createElement(policyContainerModule, { position = UDim2.new(0, 0, 0, 32) }) else nil
 end
 
-function loadingScreenView.renderServerStatus(p37) --[[ line: 793 ]]
+function loadingScreenView.renderServerStatus(p37)
 	-- upvalues: queueExperimentation (ref), roactModule (ref), serverStatusWithCountdownModule (ref), serverStatusModule (ref)
 	return if queueExperimentation.getIsAutoJoinNewServerEnabled() then roactModule.createElement(serverStatusWithCountdownModule, {
 		anchorPoint = Vector2.new(0.5, 1),
@@ -903,16 +903,16 @@ function loadingScreenView.renderServerStatus(p37) --[[ line: 793 ]]
 	}) else nil
 end
 
-function loadingScreenView.renderMainWithProviders(p38, p39) --[[ line: 817 ]]
+function loadingScreenView.renderMainWithProviders(p38, p39)
 	-- upvalues: roactModule (ref), foundationProvider (ref), foundationModule (ref), localizationProvider (ref), var17 (ref)
 	return roactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
 		roactModule.createElement(localizationProvider, { localization = var17 }, p38:renderMain(p39))
 	})
 end
 
-function loadingScreenView.render(p40) --[[ line: 827 ]]
+function loadingScreenView.render(p40)
 	-- upvalues: withStyle (ref), roactModule (ref)
-	return withStyle(function(p41) --[[ line: 830 ]]
+	return withStyle(function(p41)
 		-- upvalues: p40 (ref), roactModule (copy)
 		return p40.state.visible and roactModule.createElement("Folder", {}, {
 			BackgroundScreen = p40:renderBackground(p41),
@@ -921,9 +921,9 @@ function loadingScreenView.render(p40) --[[ line: 827 ]]
 	end)
 end
 
-function loadingScreenView.willUpdate(_, _, _) --[[ line: 839 ]] end
+function loadingScreenView.willUpdate(_, _, _) end
 
-function loadingScreenView.maybeStartFadeOut(p42) --[[ line: 842 ]]
+function loadingScreenView.maybeStartFadeOut(p42)
 	-- upvalues: var22 (ref), contextActionService (ref), t_1 (ref)
 	if p42.props.shouldStartFadeOut and not p42.fadeOutTriggered then
 		p42.fadeOutTriggered = true
@@ -931,13 +931,13 @@ function loadingScreenView.maybeStartFadeOut(p42) --[[ line: 842 ]]
 		if var22 then
 			contextActionService:UnbindCoreAction("CancelGameLoad")
 		end
-		task.spawn(function() --[[ line: 848 ]]
+		task.spawn(function()
 			-- upvalues: p42 (ref), t_1 (copy)
 			while not p42.fadeinComplete do
 				wait()
 			end
 			p42:stopAnimation()
-			p42:playAnimation(t_1.FadeOut, {}, function() --[[ line: 853 ]]
+			p42:playAnimation(t_1.FadeOut, {}, function()
 				-- upvalues: p42 (copy)
 				p42:setState({ visible = false })
 			end)
@@ -945,23 +945,23 @@ function loadingScreenView.maybeStartFadeOut(p42) --[[ line: 842 ]]
 	end
 end
 
-function loadingScreenView.didUpdate(p43, _, _) --[[ line: 862 ]]
+function loadingScreenView.didUpdate(p43, _, _)
 	p43:maybeStartFadeOut()
 end
 
-function loadingScreenView.didMount(p44) --[[ line: 866 ]]
+function loadingScreenView.didMount(p44)
 	-- upvalues: runService (ref), t_1 (ref)
 	if p44.props.manageRobloxGuiFocus then
 		runService:SetRobloxGuiFocused(true)
 	end
-	p44:playAnimation(t_1.FadeIn, {}, function() --[[ line: 871 ]]
+	p44:playAnimation(t_1.FadeIn, {}, function()
 		-- upvalues: p44 (ref)
 		p44.fadeinComplete = true
 	end)
 	p44:maybeStartFadeOut()
 end
 
-function loadingScreenView.willUnmount(p45) --[[ line: 878 ]]
+function loadingScreenView.willUnmount(p45)
 	-- upvalues: contextActionService (ref), runService (ref), var26 (write), userInputService (ref), guiService (ref)
 	contextActionService:UnbindCoreAction("CancelGameLoad")
 	
@@ -969,7 +969,7 @@ function loadingScreenView.willUnmount(p45) --[[ line: 878 ]]
 		runService:SetRobloxGuiFocused(false)
 	end
 	if not var26 then
-		var26 = userInputService.InputBegan:Connect(function() --[[ line: 884 ]]
+		var26 = userInputService.InputBegan:Connect(function()
 			-- upvalues: var26 (copy), guiService (copy)
 			if var26 then
 				var26:disconnect()

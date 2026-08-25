@@ -16,9 +16,9 @@ controllerBarHint.validateProps = tModule.strictInterface({
 	hintTextSize = tModule.optional(tModule.number)
 })
 
-function controllerBarHint.render(p0) --[[ line: 34 ]]
+function controllerBarHint.render(p0)
 	-- upvalues: withStyleModule (ref), roactModule (ref), controllerBarHintInternalPadding (ref), keyLabelModule (ref), genericTextLabelModule (ref)
-	return withStyleModule(function(p1) --[[ line: 35 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: roactModule (copy), p0 (ref), controllerBarHintInternalPadding (copy), keyLabelModule (copy), genericTextLabelModule (copy)
 		local theme = p1.Theme
 		

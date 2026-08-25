@@ -7,9 +7,9 @@ local getFFlagMomentsCreationMusicSearchStateFixModule = require(momentsCreation
 local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 
-local function makeDefaultSource() --[[ line: 71 ]]
+local function makeDefaultSource()
 	-- upvalues: dashModule (ref), constantsModule (ref)
-	local function formatMusic(p0) --[[ line: 72 ]]
+	local function formatMusic(p0)
 		local t = {}
 		
 		for i, v in p0 do
@@ -30,7 +30,7 @@ local function makeDefaultSource() --[[ line: 71 ]]
 	end
 	
 	return {
-		searchMusic = function(p1, p2) --[[ line: 94 ]]
+		searchMusic = function(p1, p2)
 			-- upvalues: dashModule (copy), constantsModule (copy), formatMusic (ref)
 			local assetService = game:GetService("AssetService")
 			local audioSearchParams = Instance.new("AudioSearchParams")
@@ -46,14 +46,14 @@ local function makeDefaultSource() --[[ line: 71 ]]
 			end
 			return if #t == 0 then {} else formatMusic(assetService:GetAudioMetadataAsync(t))
 		end,
-		getMetadata = function(p3) --[[ line: 114 ]]
+		getMetadata = function(p3)
 			-- upvalues: formatMusic (ref)
 			return formatMusic(game:GetService("AssetService"):GetAudioMetadataAsync(p3))
 		end
 	}
 end
 
-return function(p4) --[[ line: 121 | named "createMusicStore" ]]
+return function(p4)
 	-- upvalues: makeDefaultSource (ref), createSignal (ref), createComputed (ref), getFFlagMomentsCreationMusicSearchStateFixModule (ref)
 	p4 = p4 or makeDefaultSource()
 	local var13, var14 = createSignal({})
@@ -61,7 +61,7 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 	local var17, var18 = createSignal("idle")
 	local var19 = 0
 	local t = {}
-	local var21 = createComputed(function(p5) --[[ line: 134 ]]
+	local var21 = createComputed(function(p5)
 		-- upvalues: var13 (ref), var15 (ref)
 		local var22 = var13(p5)
 		local t = {}
@@ -76,7 +76,7 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 		return t
 	end)
 	
-	local function _(p6) --[[ line: 146 | named "mergeInfo" ]]
+	local function _(p6)
 		-- upvalues: var13 (ref), var14 (ref)
 		if #p6 == 0 then return end
 		local cloned = table.clone(var13(false))
@@ -87,7 +87,7 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 		var14(cloned)
 	end
 	
-	local _ = function(p7) --[[ line: 157 | named "extractIds" ]]
+	local _ = function(p7)
 		local t = {}
 		
 		for i, v in p7 do
@@ -100,14 +100,14 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 		getInfoMap = var13,
 		getResults = var21,
 		getSearchStatus = var17,
-		search = function(p8, p9) --[[ line: 165 ]]
+		search = function(p8, p9)
 			-- upvalues: getFFlagMomentsCreationMusicSearchStateFixModule (copy), p4 (ref), var13 (ref), var14 (ref), var16 (ref), var19 (write), var18 (ref)
 			if getFFlagMomentsCreationMusicSearchStateFixModule() then
 				var19 += 1
 				local var27 = var19
 				var18("loading")
 				var16({})
-				task.spawn(function() --[[ line: 185 ]]
+				task.spawn(function()
 					-- upvalues: p4 (copy), p8 (ref), p9 (ref), var27 (ref), var19 (copy), var18 (copy), var13 (copy), var14 (copy), var16 (copy)
 					local ok, status = pcall(p4.searchMusic, p8, p9 or 30)
 					
@@ -135,7 +135,7 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 				
 				return
 			end
-			task.spawn(function() --[[ line: 167 ]]
+			task.spawn(function()
 				-- upvalues: p4 (copy), p8 (ref), p9 (ref), var13 (copy), var14 (copy), var16 (copy)
 				local ok, status = pcall(p4.searchMusic, p8, p9 or 30)
 				
@@ -156,11 +156,11 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 				var16(t)
 			end)
 		end,
-		fetchInfo = function(p10) --[[ line: 201 ]]
+		fetchInfo = function(p10)
 			-- upvalues: var13 (ref), getFFlagMomentsCreationMusicSearchStateFixModule (copy), t (ref), p4 (ref), var14 (ref)
 			if var13(false)[p10] ~= nil then return end
 			if not getFFlagMomentsCreationMusicSearchStateFixModule() then
-				task.spawn(function() --[[ line: 220 ]]
+				task.spawn(function()
 					-- upvalues: p4 (copy), p10 (ref), var13 (copy), var14 (copy)
 					local ok, status = pcall(p4.getMetadata, { p10 })
 					
@@ -180,7 +180,7 @@ return function(p4) --[[ line: 121 | named "createMusicStore" ]]
 				return
 			end
 			t[p10] = true
-			task.spawn(function() --[[ line: 211 ]]
+			task.spawn(function()
 				-- upvalues: p4 (copy), p10 (ref), t (copy), var13 (copy), var14 (copy)
 				local ok, status = pcall(p4.getMetadata, { p10 })
 				t[p10] = nil

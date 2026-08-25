@@ -5,7 +5,7 @@ local fFlagLuaAppEmphasisGameTileVideo = require(parent.SharedFlags).FFlagLuaApp
 local reactModule = require(parent.React)
 local emphasisGameTile = require(parent.GameTile).EmphasisGameTile
 local _ = require(parent.VideoUtils)
-local var1 = reactModule.memo(function(p0) --[[ line: 53 ]]
+local var1 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), emphasisGameTile (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), fFlagLuaAppEmphasisGameTileVideo (ref)
 	return reactModule.createElement(emphasisGameTile, {
 		size = p0.item.sizeOverride,
@@ -40,7 +40,7 @@ local var1 = reactModule.memo(function(p0) --[[ line: 53 ]]
 	})
 end)
 
-return function(p1) --[[ line: 88 ]]
+return function(p1)
 	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
 	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.EmphasisTile
 end

@@ -7,16 +7,16 @@ local t = {
 	GOLDEN_RATIO = game:DefineFastInt("AvatarGoldenRatio", 618) / 1000,
 	UPVECTOR_ORENTATION_TRESHOLD = game:DefineFastInt("UpVectorOrentationThreshold1", -60) / 100,
 	AVATAR_ROTATION_DEGREE = game:DefineFastInt("LookAvatarRotationDegree1", 23),
-	GetCharacterTorsoCFrame = function(p0) --[[ line: 43 ]]
+	GetCharacterTorsoCFrame = function(p0)
 		return (p0:FindFirstChild("Torso") or p0:FindFirstChild("UpperTorso")).CFrame
 	end
 }
 
-local function _(p1) --[[ line: 18 | named "getTorsoOrUpperTorso" ]]
+local function _(p1)
 	return p1:FindFirstChild("Torso") or p1:FindFirstChild("UpperTorso")
 end
 
-local function getMannequinBodyParts(p2, p3) --[[ line: 22 ]]
+local function getMannequinBodyParts(p2, p3)
 	-- upvalues: mannequinUtilityModule (ref)
 	local t = {}
 	
@@ -37,7 +37,7 @@ local function getMannequinBodyParts(p2, p3) --[[ line: 22 ]]
 	return t
 end
 
-function t.GetFullBodyCameraCFrame(p4, p5, p6, p7, p8) --[[ line: 61 ]]
+function t.GetFullBodyCameraCFrame(p4, p5, p6, p7, p8)
 	-- upvalues: t (ref), getMannequinBodyParts (ref), characterUtilityModule (ref), cameraUtilityModule (ref)
 	p7 = p7 or 56
 	p8 = p8 or t.GetCharacterTorsoCFrame(p4)
@@ -83,7 +83,7 @@ end
 
 t.GetCameraCFrame_ForAvatarR15Action_LookAtGoldenRatioOfTheHumanoid = t.GetFullBodyCameraCFrame
 
-function t.GetHeadshotCameraCFrame(p9, p10, p11, p12) --[[ line: 163 ]]
+function t.GetHeadshotCameraCFrame(p9, p10, p11, p12)
 	-- upvalues: t (ref), cFrameUtilityModule (ref), characterUtilityModule (ref), cameraUtilityModule (ref), cameraPresetHeadshotExtentScaleHundredths (ref)
 	p12 = p12 or 30
 	

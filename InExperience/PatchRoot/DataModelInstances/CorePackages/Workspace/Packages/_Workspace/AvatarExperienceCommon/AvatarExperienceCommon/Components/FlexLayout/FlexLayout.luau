@@ -3,13 +3,13 @@ local reactModule = require(parent.React)
 local dashModule = require(parent.Dash)
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0) --[[ line: 23 | named "FlexLayout" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), dashModule (ref)
 	local var2 = if p0.flexSlot and p0.rigidSlot then p0.margin or useDesignTokens().Size.Size_400 else 0
 	local flexDirection = p0.flexDirection or Enum.FillDirection.Horizontal
 	local reverse = p0.reverse or false
 	local var5, var6 = reactModule.useBinding(Vector2.new(0, 0))
-	local var7 = reactModule.useCallback(function(p1) --[[ line: 31 ]]
+	local var7 = reactModule.useCallback(function(p1)
 		-- upvalues: flexDirection (ref), var2 (ref)
 		return if flexDirection == Enum.FillDirection.Horizontal then UDim2.new(1, -(p1.X + var2), 1, 0) else UDim2.new(1, 0, 1, -(p1.Y + var2))
 	end, { flexDirection, var2 })
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 23 | named "FlexLayout" ]]
 			BorderSizePixel = 0,
 			Size = if flexDirection == Enum.FillDirection.Horizontal then UDim2.new(0, 0, 1, 0) else UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 90 ]]
+			[reactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: var6 (ref)
 				var6(p2.AbsoluteSize)
 			end

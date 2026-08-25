@@ -18,37 +18,37 @@ local setupPushNotificationsUpsell = notificationsUpsellModule.setupPushNotifica
 local notificationsUpsellConstants = notificationsUpsellModule.NotificationsUpsellConstants
 local getFStringPushUpsellChatVariantName = require(parent.SharedFlags).GetFStringPushUpsellChatVariantName
 
-return function() --[[ line: 27 | named "CheckAndOpenChatPushUpsell" ]]
+return function()
 	-- upvalues: useNavigationFocus (ref), useNavigation (ref), useChatIsVisibleModule (ref), useIsInExperienceModule (ref), reactModule (ref), useUserExperiment (ref), appUserLayers (ref), getFStringPushUpsellChatVariantName (ref), roactNavigationModule (ref), setupPushNotificationsUpsell (ref), notificationsUpsellConstants (ref), IXPService (ref), default (ref), pushUpsellEventConfig (ref), modalEventConstants (ref), appPage (ref)
 	local var7 = useNavigationFocus()
 	local var8 = useNavigation()
 	local var9 = useChatIsVisibleModule()
 	local var10 = useIsInExperienceModule()
 	local var11, var12 = reactModule.useState(false)
-	local var13 = useUserExperiment({ appUserLayers.SocialAppChat }, function(p0) --[[ line: 36 ]]
+	local var13 = useUserExperiment({ appUserLayers.SocialAppChat }, function(p0)
 		-- upvalues: appUserLayers (copy), getFStringPushUpsellChatVariantName (copy)
 		return {
 			pushUpsellChatVariant = (p0[appUserLayers.SocialAppChat] or {})[getFStringPushUpsellChatVariantName()] or -1
 		}
 	end)
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), roactNavigationModule (copy), var12 (ref)
-		local var14 = var8.addListener(roactNavigationModule.Events.WillBlur, function(p1) --[[ line: 46 ]]
+		local var14 = var8.addListener(roactNavigationModule.Events.WillBlur, function(p1)
 			-- upvalues: var12 (copy)
 			if p1.action.routeName == "ChatConversation" then
 				var12(true)
 			end
 		end)
 		
-		return function() --[[ line: 53 ]]
+		return function()
 			-- upvalues: var14 (ref)
 			var14.remove()
 		end
 	end, {})
 	
-	local function _() --[[ line: 58 | named "showUpsellOnChatLanding" ]]
+	local function _()
 		-- upvalues: setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy), IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy)
-		setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p2) --[[ line: 59 ]]
+		setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p2)
 			-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
 			if p2 then
 				IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
@@ -63,11 +63,11 @@ return function() --[[ line: 27 | named "CheckAndOpenChatPushUpsell" ]]
 		end)
 	end
 	
-	local _ = function() --[[ line: 73 | named "showUpsellWhenReturnFromConversation" ]]
+	local _ = function()
 		-- upvalues: var11 (ref), var12 (ref), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy), IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy)
 		if var11 then
 			var12(false)
-			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p3) --[[ line: 79 ]]
+			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p3)
 				-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
 				if p3 then
 					IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
@@ -85,11 +85,11 @@ return function() --[[ line: 27 | named "CheckAndOpenChatPushUpsell" ]]
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var7 (ref), var10 (ref), var13 (ref), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy), IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy), var11 (ref), var12 (ref)
 		if not var9 or not var7 or (var10 or var13.pushUpsellChatVariant == nil) or var13.pushUpsellChatVariant < 0 then return end
 		if var13.pushUpsellChatVariant == 1 then
-			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p4) --[[ line: 59 ]]
+			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p4)
 				-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
 				if p4 then
 					IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
@@ -107,7 +107,7 @@ return function() --[[ line: 27 | named "CheckAndOpenChatPushUpsell" ]]
 		elseif var13.pushUpsellChatVariant == 2 then
 			if not var11 then return end
 			var12(false)
-			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p5) --[[ line: 79 ]]
+			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p5)
 				-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
 				if p5 then
 					IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)

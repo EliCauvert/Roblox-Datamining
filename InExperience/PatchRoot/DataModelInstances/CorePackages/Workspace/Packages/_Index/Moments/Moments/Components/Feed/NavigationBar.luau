@@ -14,7 +14,7 @@ local usePreferredInputModule = require(moments.Hooks.usePreferredInput)
 local useTokens = foundationModule.Hooks.useTokens
 local formFactor = momentsCommonModule.Enums.FormFactor
 
-return function(p0) --[[ line: 38 | named "NavigationBar" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), formFactor (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
 	local var6 = usePreferredInputModule()
 	

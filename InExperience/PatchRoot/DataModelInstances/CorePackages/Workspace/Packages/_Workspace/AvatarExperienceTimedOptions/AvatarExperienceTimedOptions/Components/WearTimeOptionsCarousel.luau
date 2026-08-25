@@ -10,7 +10,7 @@ local _ = require(parent.AvatarExperienceCommon)
 local wearTimeOptionButtonModule = require(script.Parent.WearTimeOptionButton)
 local AXTooltip = require(parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
 
-return function(p0) --[[ line: 27 | named "WearTimeOptionsCarousel" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), wearTimeOptionButtonModule (ref), view (ref), text (ref), foundationModule (ref), enums (ref), AXTooltip (ref)
 	local var3 = useTokens()
 	local var4 = useLocalization({
@@ -18,19 +18,19 @@ return function(p0) --[[ line: 27 | named "WearTimeOptionsCarousel" ]]
 		tooltipText = "Feature.Durables.FTUX.Tooltip"
 	})
 	local var5, var6 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref)
-		local delayedThread = task.delay(5, function() --[[ line: 37 ]]
+		local delayedThread = task.delay(5, function()
 			-- upvalues: var6 (copy)
 			var6(false)
 		end)
 		
-		return function() --[[ line: 41 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
 	end, {})
-	local var7, var8 = reactModule.useState(function() --[[ line: 46 ]]
+	local var7, var8 = reactModule.useState(function()
 		-- upvalues: p0 (ref)
 		for i, v in p0.options do
 			if v.selected then
@@ -39,14 +39,14 @@ return function(p0) --[[ line: 27 | named "WearTimeOptionsCarousel" ]]
 		end
 		return 1
 	end)
-	local var9 = reactModule.useMemo(function() --[[ line: 57 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), reactModule (copy), wearTimeOptionButtonModule (copy), var7 (ref), var8 (ref)
 		local t = {}
 		
 		for i, v in p0.options do
 			t[i] = reactModule.createElement(wearTimeOptionButtonModule, {
 				option = { days = v.days, price = v.price, selected = i == var7 },
-				onActivated = function() --[[ line: 66 ]]
+				onActivated = function()
 					-- upvalues: var8 (copy), i (ref), p0 (copy)
 					var8(i)
 					
@@ -82,7 +82,7 @@ return function(p0) --[[ line: 27 | named "WearTimeOptionsCarousel" ]]
 				InfoIcon = reactModule.createElement(foundationModule.IconButton, {
 					icon = enums.IconName.CircleI,
 					size = enums.IconSize.Small,
-					onActivated = function() --[[ line: 144 ]]
+					onActivated = function()
 						-- upvalues: var6 (ref)
 						var6(true)
 					end
@@ -92,7 +92,7 @@ return function(p0) --[[ line: 27 | named "WearTimeOptionsCarousel" ]]
 					isOpen = var5,
 					tooltipText = var4.tooltipText,
 					maxWidth = var3.Size.Size_1200 * 3,
-					onTooltipActivated = function() --[[ line: 153 ]]
+					onTooltipActivated = function()
 						-- upvalues: var6 (ref)
 						var6(false)
 					end

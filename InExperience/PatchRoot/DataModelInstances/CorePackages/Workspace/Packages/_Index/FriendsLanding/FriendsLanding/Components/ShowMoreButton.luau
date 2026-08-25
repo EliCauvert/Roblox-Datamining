@@ -10,7 +10,7 @@ local cryoModule = require(parent.Cryo)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local showMoreButton = roact.PureComponent:extend("ShowMoreButton")
 
-local var4 = function() --[[ line: 18 ]] end
+local var4 = function() end
 
 showMoreButton.defaultProps = {
 	layoutOrder = 1,
@@ -20,12 +20,12 @@ showMoreButton.defaultProps = {
 }
 showMoreButton.MAX_WIDTH = 640
 
-function showMoreButton.init(p0) --[[ line: 30 ]]
+function showMoreButton.init(p0)
 	-- upvalues: showMoreButton (ref)
 	p0.state = { width = 100 }
 	p0.localization = { showMore = "Feature.Friends.Action.ShowMore" }
 	
-	function p0.onChangeSize(p1) --[[ line: 39 ]]
+	function p0.onChangeSize(p1)
 		-- upvalues: p0 (ref), showMoreButton (copy)
 		p0:setState({
 			width = math.min(p0.props.maxWidth or showMoreButton.MAX_WIDTH, p1.AbsoluteSize.X)
@@ -34,9 +34,9 @@ function showMoreButton.init(p0) --[[ line: 30 ]]
 	end
 end
 
-function showMoreButton.render(p2) --[[ line: 49 ]]
+function showMoreButton.render(p2)
 	-- upvalues: withLocalization (ref), roact (ref), button (ref), buttonType (ref)
-	return withLocalization(p2.localization)(function(p3) --[[ line: 50 ]]
+	return withLocalization(p2.localization)(function(p3)
 		-- upvalues: p2 (ref), roact (copy), button (copy), buttonType (copy)
 		local buttonHeight = p2.props.buttonHeight
 		
@@ -64,7 +64,7 @@ function showMoreButton.render(p2) --[[ line: 49 ]]
 	end)
 end
 
-return function(p4) --[[ line: 78 | named "ShowMoreButtonWrapper" ]]
+return function(p4)
 	-- upvalues: useDesignTokens (ref), roact (ref), showMoreButton (ref), cryoModule (ref)
 	local var5 = useDesignTokens()
 	

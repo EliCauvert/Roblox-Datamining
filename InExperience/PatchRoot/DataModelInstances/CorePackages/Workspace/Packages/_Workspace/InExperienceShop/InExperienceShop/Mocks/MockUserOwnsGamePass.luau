@@ -1,6 +1,6 @@
 ﻿local promiseModule = require(script:FindFirstAncestor("InExperienceShop").Parent.Promise)
 
-return function(_) --[[ line: 15 | named "userOwnsGamePass" ]]
+return function(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(false)
 end

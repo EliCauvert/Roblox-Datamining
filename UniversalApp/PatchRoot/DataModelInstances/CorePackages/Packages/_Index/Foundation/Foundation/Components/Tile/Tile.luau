@@ -14,7 +14,7 @@ local t = {
 	FillDirection = Enum.FillDirection.Vertical
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 37 | named "Tile" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), tileContextModule (ref)
 	local var9 = withDefaultsModule(p0, t)
 	
@@ -34,7 +34,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 37 | named "Tile" ]]
 		ref = p1
 	}), {
 		TileContext = if var9.children then reactModule.createElement(tileContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 41 ]]
+			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 				-- upvalues: var9 (ref)
 				return {
 					isContained = var9.isContained,

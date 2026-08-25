@@ -10,19 +10,19 @@ local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeM
 local useCurrentlyPlayingSectionHeightModule = require(profilePlatform.Hooks.useCurrentlyPlayingSectionHeight)
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 
-return function(p0, p1) --[[ line: 19 ]]
+return function(p0, p1)
 	-- upvalues: useTokens (ref), useDynamicSizeMarginModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), useAboutSectionHeightModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), useCurrentlyPlayingSectionHeightModule (ref), constantsModule (ref)
 	local var9 = useTokens()
 	local var10, _ = useDynamicSizeMarginModule()
 	local var11 = useProfileJsonComponentModule(enumsModule.Components.About)
-	local var12, _ = useAboutSectionHeightModule(reactModule.useMemo(function() --[[ line: 25 ]]
+	local var12, _ = useAboutSectionHeightModule(reactModule.useMemo(function()
 		-- upvalues: var11 (ref)
 		return var11.description
 	end, { var11, var11.description }), p0, var10)
 	local _ = nil
 	local var13 = if fFlagProfilePlatformAddCurrentlyPlayingModule then useCurrentlyPlayingSectionHeightModule(useProfileJsonComponentModule(enumsModule.Components.CurrentlyPlaying)) else nil
 	
-	return reactModule.useMemo(function() --[[ line: 40 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: constantsModule (copy), var9 (ref), p1 (ref), var12 (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (copy), var13 (write), p0 (ref)
 		local var14 = constantsModule.AVATAR_HEADSHOT_HEIGHT / 2 + var9.Gap.Large
 		local var15 = if p1 then constantsModule.CONTEXTUAL_INFORMATION_HEIGHT + var9.Gap.XXLarge else 0

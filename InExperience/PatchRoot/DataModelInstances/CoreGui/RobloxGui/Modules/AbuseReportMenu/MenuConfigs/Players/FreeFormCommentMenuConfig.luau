@@ -5,10 +5,10 @@ local constantsModule = require(abuseReportMenu.Components.Constants)
 return {
 	componentType = "freeComments",
 	componentName = "FreeComments",
-	getIsVisible = function(_) --[[ line: 7 ]]
+	getIsVisible = function(_)
 		return true
 	end,
-	onUpdate = function(p0, _, p1, p2) --[[ line: 10 ]]
+	onUpdate = function(p0, _, p1, p2)
 		-- upvalues: constantsModule (ref)
 		p2.analyticsDispatch({
 			type = constantsModule.AnalyticsActions.SetCommentAdded,

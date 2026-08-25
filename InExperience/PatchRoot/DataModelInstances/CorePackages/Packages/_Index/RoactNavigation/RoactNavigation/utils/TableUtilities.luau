@@ -1,22 +1,22 @@
 ﻿local t = {}
 local t_1 = {}
 
-local function _(p0) --[[ line: 8 | named "makeKeyString" ]]
+local function _(p0)
 	return if type(p0) == "string" then string.format("%s", p0) else string.format("[%s]", tostring(p0))
 end
 
-local function makeValueString(p1) --[[ line: 16 ]]
+local function makeValueString(p1)
 	local var5 = type(p1)
 	
 	return if var5 == "string" then string.format("%q", p1) elseif var5 == "function" or var5 == "table" then string.format("<%s>", tostring(p1)) else string.format("%s", tostring(p1))
 end
 
-local function printKeypair(p2, p3, p4, p5) --[[ line: 27 ]]
+local function printKeypair(p2, p3, p4, p5)
 	-- upvalues: makeValueString (ref)
 	print(string.format("%s%s = %s,%s", p4, if type(p2) == "string" then string.format("%s", p2) else string.format("[%s]", tostring(p2)), makeValueString(p3), if p5 then string.format(" -- %s", p5) else ""))
 end
 
-function t.ShallowEqual(p6, p7, p8) --[[ line: 39 ]]
+function t.ShallowEqual(p6, p7, p8)
 	-- upvalues: t_1 (ref)
 	if not p6 or not p7 then
 		return false
@@ -38,11 +38,11 @@ function t.ShallowEqual(p6, p7, p8) --[[ line: 39 ]]
 	return true
 end
 
-local function formatDeepEqualMessage(p9, p10) --[[ line: 64 ]]
+local function formatDeepEqualMessage(p9, p10)
 	return if p10 == 0 then p9:gsub("{1}", "first"):gsub("{2}", "second") else p9
 end
 
-function t.DeepEqual(p11, p12, p13) --[[ line: 75 ]]
+function t.DeepEqual(p11, p12, p13)
 	-- upvalues: formatDeepEqualMessage (ref), t (ref)
 	p13 = p13 or 0
 	
@@ -76,11 +76,11 @@ function t.DeepEqual(p11, p12, p13) --[[ line: 75 ]]
 	return true
 end
 
-function t.EqualKey(p14, p15, p16) --[[ line: 127 ]]
+function t.EqualKey(p14, p15, p16)
 	return p14 and p15 and (p16 and p16 ~= "") and (p14[p16] and p15[p16] and p14[p16] == p15[p16])
 end
 
-function t.TableDifference(p17, p18) --[[ line: 138 ]]
+function t.TableDifference(p17, p18)
 	local t = {}
 	
 	for i, v in p17 do
@@ -91,7 +91,7 @@ function t.TableDifference(p17, p18) --[[ line: 138 ]]
 	return t
 end
 
-local _ = function(p19) --[[ line: 155 | named "membershipTable" ]]
+local _ = function(p19)
 	local t = {}
 	
 	for i = 1, #p19 do
@@ -100,7 +100,7 @@ local _ = function(p19) --[[ line: 155 | named "membershipTable" ]]
 	return t
 end
 
-local _ = function(p20) --[[ line: 166 | named "listOfKeys" ]]
+local _ = function(p20)
 	local t = {}
 	
 	for i, v in p20 do
@@ -109,7 +109,7 @@ local _ = function(p20) --[[ line: 166 | named "listOfKeys" ]]
 	return t
 end
 
-function t.ListDifference(p21, p22) --[[ line: 178 ]]
+function t.ListDifference(p21, p22)
 	-- upvalues: t (ref)
 	local tableDifference = t.TableDifference
 	local t_1 = {}
@@ -130,7 +130,7 @@ function t.ListDifference(p21, p22) --[[ line: 178 ]]
 	return t_3
 end
 
-function t.CheckListConsistency(p23) --[[ line: 188 ]]
+function t.CheckListConsistency(p23)
 	local var16 = false
 	local var17 = false
 	local var18 = true
@@ -155,7 +155,7 @@ function t.CheckListConsistency(p23) --[[ line: 188 ]]
 	return if var16 then var18 else true
 end
 
-function t.RecursiveToString(p24, p25) --[[ line: 223 ]]
+function t.RecursiveToString(p24, p25)
 	-- upvalues: t (ref)
 	p25 = p25 or ""
 	
@@ -180,7 +180,7 @@ function t.RecursiveToString(p24, p25) --[[ line: 223 ]]
 	return var20 .. p25 .. "}"
 end
 
-function t.Print(p26, p27) --[[ line: 257 ]]
+function t.Print(p26, p27)
 	-- upvalues: makeValueString (ref), printKeypair (ref)
 	p27 = p27 or "  "
 	
@@ -189,7 +189,7 @@ function t.Print(p26, p27) --[[ line: 257 ]]
 	end
 	local t = {}
 	
-	local function recurse(p28, p29, p30) --[[ line: 267 ]]
+	local function recurse(p28, p29, p30)
 		-- upvalues: t (ref), p27 (write), makeValueString (copy), printKeypair (copy), recurse (ref)
 		t[p28] = true
 		local repeated = string.rep(p27, p30)
@@ -215,7 +215,7 @@ function t.Print(p26, p27) --[[ line: 257 ]]
 	recurse(p26, nil, 0)
 end
 
-function t.FieldCount(p31) --[[ line: 301 ]]
+function t.FieldCount(p31)
 	local var25 = 0
 	
 	for i in p31 do

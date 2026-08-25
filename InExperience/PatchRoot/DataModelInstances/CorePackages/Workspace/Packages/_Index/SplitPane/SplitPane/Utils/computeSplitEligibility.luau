@@ -6,14 +6,14 @@ local splitPaneSlot = require(parent.AppSplitView).Enums.SplitPaneSlot
 local viewState = navigationModule.ViewState
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
-local function _(p0) --[[ line: 15 | named "getUpdatedNavigation" ]]
+local function _(p0)
 	local var3 = if p0._dangerouslyGetParent then p0._dangerouslyGetParent() else nil
 	local var4 = if p0.state ~= nil then nil else p0.state.key
 	
 	return if var3 and var4 then var3.getChildNavigation(var4) or p0 else p0
 end
 
-local function resolveOptions(p1) --[[ line: 24 ]]
+local function resolveOptions(p1)
 	-- upvalues: tempRnSwitchNavigatorName (ref), roactNavigationModule (ref)
 	local descriptor = p1.descriptor
 	local state = descriptor.state
@@ -28,7 +28,7 @@ local function resolveOptions(p1) --[[ line: 24 ]]
 	return roactNavigationModule.getActiveChildNavigationOptions(if var5 and var6 then var5.getChildNavigation(var6) or navigation else navigation) or {}
 end
 
-return function(p2) --[[ line: 34 | named "computeSplitEligibility" ]]
+return function(p2)
 	-- upvalues: viewState (ref), resolveOptions (ref), splitPaneSlot (ref)
 	for i = #p2, 1, -1 do
 		local var7 = p2[i]

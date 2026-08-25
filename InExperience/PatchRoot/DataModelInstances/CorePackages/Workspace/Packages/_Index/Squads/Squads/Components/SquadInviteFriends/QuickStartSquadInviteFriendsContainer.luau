@@ -20,7 +20,7 @@ local squadInviteFriendsModule = require(script.Parent.SquadInviteFriends)
 local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
-return function(p0) --[[ line: 38 | named "QuickStartSquadInviteFriendsContainer" ]]
+return function(p0)
 	-- upvalues: react (ref), squadExternalContractContext (ref), useDispatch (ref), useStore (ref), useCurrentSquadSelector (ref), useCurrentSquadParentChannelId (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), useLocalUserId (ref), useLocalization (ref), eventNamesModule (ref), squadButtonSourceEnumModule (ref), squadButtonClickIntentionEnumModule (ref), createConversation (ref), cryo (ref), leaveSquad (ref), squadPromptType (ref), squadInviteFriendsModule (ref)
 	local var7 = react.useContext(squadExternalContractContext)
 	local var8 = useDispatch()
@@ -32,12 +32,12 @@ return function(p0) --[[ line: 38 | named "QuickStartSquadInviteFriendsContainer
 	local var14 = useLocalUserId()
 	local var15 = useLocalization({ startPartyText = "Feature.Squads.Action.Start" })
 	local var16 = react.useRef(false)
-	local var17 = react.useCallback(function(p1) --[[ line: 59 ]]
+	local var17 = react.useCallback(function(p1)
 		-- upvalues: var16 (ref), p0 (ref)
 		var16.current = true
 		p0.navigateIntoSquadLobby(p1)
 	end, { p0.navigateIntoSquadLobby })
-	local var18 = react.useCallback(function(p2) --[[ line: 64 ]]
+	local var18 = react.useCallback(function(p2)
 		-- upvalues: var7 (ref), eventNamesModule (copy), p0 (ref), squadButtonSourceEnumModule (copy), squadButtonClickIntentionEnumModule (copy), var8 (ref), createConversation (copy), var17 (ref)
 		local var19 = if #p2 == 1 then "one_to_one" else "group"
 		var7.fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 38 | named "QuickStartSquadInviteFriendsContainer
 			source = "conversationCreatedFromPartyQuickStart",
 			conversationType = var19,
 			userIds = p2,
-			onSuccessCallback = function(p3) --[[ line: 78 ]]
+			onSuccessCallback = function(p3)
 				-- upvalues: var17 (copy)
 				var17(p3)
 			end,
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 38 | named "QuickStartSquadInviteFriendsContainer
 	})
 	
 	return react.createElement(squadInviteFriendsModule, {
-		onMultiInvite = react.useCallback(function(p4) --[[ line: 94 ]]
+		onMultiInvite = react.useCallback(function(p4)
 			-- upvalues: cryo (copy), var10 (ref), var12 (ref), var17 (ref), var11 (ref), var8 (ref), leaveSquad (copy), squadPromptType (copy), var7 (ref), var18 (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), var13 (ref)
 			local var20 = cryo.Dictionary.keys(p4)
 			
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 38 | named "QuickStartSquadInviteFriendsContainer
 				end
 			end
 			if var10 then
-				var8(leaveSquad(squadPromptType.JoinAnotherSquad, var7.setSquadPrompt, function() --[[ line: 115 ]]
+				var8(leaveSquad(squadPromptType.JoinAnotherSquad, var7.setSquadPrompt, function()
 					-- upvalues: var18 (copy), var20 (ref)
 					var18(var20)
 				end, var7.squadLocation, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var13 else true))
@@ -94,7 +94,7 @@ return function(p0) --[[ line: 38 | named "QuickStartSquadInviteFriendsContainer
 		buttonText = var15.startPartyText,
 		participants = if var14 and var14 ~= "" then { var14 } else nil,
 		partyStartedRef = var16,
-		analyticsInfo = react.useMemo(function() --[[ line: 142 ]]
+		analyticsInfo = react.useMemo(function()
 			-- upvalues: p0 (ref)
 			return {
 				selectionPageType = "QuickStartInvite",

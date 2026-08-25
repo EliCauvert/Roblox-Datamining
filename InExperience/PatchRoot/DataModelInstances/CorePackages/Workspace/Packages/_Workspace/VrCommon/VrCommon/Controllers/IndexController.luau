@@ -5,7 +5,7 @@ local var1 = if openXrForWin32EngineFeature then Vector3.new(3.400000095367, 3.4
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 15 ]]
+function t.new(p0)
 	-- upvalues: t (ref), create (ref), granite (ref), var1 (ref)
 	local tbl = setmetatable({}, t)
 	tbl.userCFrame = p0
@@ -52,7 +52,7 @@ function t.new(p0) --[[ line: 15 ]]
 	return tbl
 end
 
-function t:setCFrame(p1) --[[ line: 70 ]]
+function t:setCFrame(p1)
 	-- upvalues: openXrForWin32EngineFeature (ref)
 	if openXrForWin32EngineFeature then
 		if self.userCFrame == Enum.UserCFrame.RightHand then
@@ -71,7 +71,7 @@ function t:setCFrame(p1) --[[ line: 70 ]]
 	self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.349065850399, 3.14159265359, 0) * CFrame.new(0.1, -0.03, -0.4))
 end
 
-function t:setCFrameAndScale(p2, p3) --[[ line: 94 ]]
+function t:setCFrameAndScale(p2, p3)
 	-- upvalues: openXrForWin32EngineFeature (ref), var1 (ref)
 	local var5 = if self.userCFrame == Enum.UserCFrame.RightHand then 1 else -1
 	
@@ -83,18 +83,18 @@ function t:setCFrameAndScale(p2, p3) --[[ line: 94 ]]
 	self.mesh.Scale = var1 * p3
 end
 
-function t.onButtonInputChanged(_, _, _) --[[ line: 112 ]] end
+function t.onButtonInputChanged(_, _, _) end
 
-function t:onInputBegan(p4) --[[ line: 114 ]]
+function t:onInputBegan(p4)
 	self:onButtonInputChanged(p4, true)
 end
 
-function t.onInputChanged(_, _) --[[ line: 118 ]] end
+function t.onInputChanged(_, _) end
 
-function t:onInputEnded(p5) --[[ line: 120 ]]
+function t:onInputEnded(p5)
 	self:onButtonInputChanged(p5, false)
 end
 
-function t.onTouchpadModeChanged(_, _, _) --[[ line: 124 ]] end
+function t.onTouchpadModeChanged(_, _, _) end
 
 return t

@@ -2,7 +2,7 @@
 local chatSettingsModule = require(script.Parent.Parent:WaitForChild("ChatSettings"))
 local playersService = game:GetService("Players")
 local var3 = nil
-pcall(function() --[[ line: 13 ]]
+pcall(function()
 	-- upvalues: var3 (write)
 	var3 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -14,7 +14,7 @@ end
 local t = {}
 t.__index = t
 local t_1 = {
-	new = function(p0, p1, p2, p3) --[[ line: 182 ]]
+	new = function(p0, p1, p2, p3)
 		-- upvalues: t (ref)
 		local tbl = setmetatable({}, t)
 		tbl.Destroyed = false
@@ -25,7 +25,7 @@ local t_1 = {
 		tbl.MessageModeButton = p1:GetMessageModeTextButton()
 		tbl.OriginalWhisperText = ""
 		tbl.PlayerNameEntered = false
-		tbl.MessageModeConnection = tbl.MessageModeButton.MouseButton1Click:connect(function() --[[ line: 193 ]]
+		tbl.MessageModeConnection = tbl.MessageModeButton.MouseButton1Click:connect(function()
 			-- upvalues: tbl (ref)
 			local text = tbl.TextBox.Text
 			
@@ -48,20 +48,20 @@ local t_1 = {
 	end
 }
 
-function t.TrimWhisperCommand(_, p4) --[[ line: 26 ]]
+function t.TrimWhisperCommand(_, p4)
 	return if string.sub(p4, 1, 3):lower() == "/w " then string.sub(p4, 4) elseif string.sub(p4, 1, 9):lower() == "/whisper " then string.sub(p4, 10) else nil
 end
 
-function t.TrimWhiteSpace(_, p5) --[[ line: 35 ]]
+function t.TrimWhiteSpace(_, p5)
 	return string.gsub(p5, "%s+", ""), p5[#p5] == " "
 end
 
-function t.ShouldAutoCompleteNames(_) --[[ line: 41 ]]
+function t.ShouldAutoCompleteNames(_)
 	-- upvalues: chatSettingsModule (ref)
 	return chatSettingsModule.WhisperCommandAutoCompletePlayerNames == nil or chatSettingsModule.WhisperCommandAutoCompletePlayerNames
 end
 
-function t.GetWhisperingPlayer(p6, p7) --[[ line: 48 ]]
+function t.GetWhisperingPlayer(p6, p7)
 	-- upvalues: playersService (ref), localPlayer (write), chatSettingsModule (ref)
 	local var7 = p6:TrimWhisperCommand(p7:lower())
 	
@@ -115,11 +115,11 @@ function t.GetWhisperingPlayer(p6, p7) --[[ line: 48 ]]
 	end
 end
 
-function t.GetWhisperChanneNameColor(p8) --[[ line: 106 ]]
+function t.GetWhisperChanneNameColor(p8)
 	return if p8.ChatSettings.WhisperChannelNameColor then p8.ChatSettings.WhisperChannelNameColor else Color3.fromRGB(102, 14, 102)
 end
 
-function t.EnterWhisperState(p9, p10) --[[ line: 113 ]]
+function t.EnterWhisperState(p9, p10)
 	-- upvalues: chatSettingsModule (ref), var3 (write)
 	p9.PlayerNameEntered = true
 	p9.PlayerName = p10.Name
@@ -140,7 +140,7 @@ function t.EnterWhisperState(p9, p10) --[[ line: 113 ]]
 	p9.TextBox.Text = " "
 end
 
-function t.TextUpdated(p11) --[[ line: 142 ]]
+function t.TextUpdated(p11)
 	local text = p11.TextBox.Text
 	
 	if not p11.PlayerNameEntered then
@@ -163,25 +163,25 @@ function t.TextUpdated(p11) --[[ line: 142 ]]
 	end
 end
 
-function t.GetMessage(p12) --[[ line: 166 ]]
+function t.GetMessage(p12)
 	return if p12.PlayerNameEntered then "/w " .. p12.PlayerName .. " " .. p12.TextBox.Text else p12.TextBox.Text
 end
 
-function t.ProcessCompletedMessage(_) --[[ line: 173 ]]
+function t.ProcessCompletedMessage(_)
 	return false
 end
 
-function t.Destroy(p13) --[[ line: 177 ]]
+function t.Destroy(p13)
 	p13.MessageModeConnection:disconnect()
 	p13.Destroyed = true
 end
 
-function ProcessMessage(p14, p15, p16, p17) --[[ line: 212 ]]
+function ProcessMessage(p14, p15, p16, p17)
 	-- upvalues: t_1 (ref)
 	return if string.sub(p14, 1, 3):lower() == "/w " or string.sub(p14, 1, 9):lower() == "/whisper " then t_1.new(p15, p16, p17) else nil
 end
 
-function CreateCustomState(p18, p19, p20, p21) --[[ line: 219 ]]
+function CreateCustomState(p18, p19, p20, p21)
 	-- upvalues: t_1 (ref)
 	return t_1.new(p19, p20, p21, p18)
 end

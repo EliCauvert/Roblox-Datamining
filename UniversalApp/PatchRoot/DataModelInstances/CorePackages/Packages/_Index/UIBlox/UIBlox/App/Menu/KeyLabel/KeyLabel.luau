@@ -11,7 +11,7 @@ local useStyleModule = require(parent_2.Core.Style.useStyle)
 local imagesModule = require(parent_1.ImageSet.Images)
 local label = require(parent_2.Core.ImageSet.ImageSetComponent).Label
 
-return function(p0) --[[ line: 40 | named "KeyLabel" ]]
+return function(p0)
 	-- upvalues: useStyleModule (ref), constantsModule (ref), utilitiesModule (ref), reactModule (ref), imagesModule (ref), label (ref), luauPolyfillModule (ref)
 	local var6 = useStyleModule()
 	local var7 = var6.Theme[p0.iconThemeKey or constantsModule.DEFAULT_ICON_THEME]

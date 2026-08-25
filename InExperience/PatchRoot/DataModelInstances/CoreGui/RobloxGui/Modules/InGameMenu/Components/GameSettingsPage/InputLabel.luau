@@ -13,12 +13,12 @@ local var4 = t.strictInterface({
 	LayoutOrder = t.optional(t.number)
 })
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: globalConfigModule (ref), var4 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
 	if globalConfigModule.propValidation then
 		assert(var4(p0))
 	end
-	return withLocalizationModule({ text = p0.localizationKey })(function(p1) --[[ line: 29 ]]
+	return withLocalizationModule({ text = p0.localizationKey })(function(p1)
 		-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref)
 		return roact.createElement(themedTextLabelModule, {
 			fontKey = "Body",

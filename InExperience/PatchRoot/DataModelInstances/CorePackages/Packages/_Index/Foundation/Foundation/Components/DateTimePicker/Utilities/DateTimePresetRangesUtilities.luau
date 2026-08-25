@@ -2,14 +2,14 @@
 local dateTimePickerDateRangePresetModule = require(script:FindFirstAncestor("Foundation").Enums.DateTimePickerDateRangePreset)
 local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
-local function toStartOfDay(p0) --[[ line: 16 ]]
+local function toStartOfDay(p0)
 	-- upvalues: dateTimeUtilitiesModule (ref)
 	local var4 = dateTimeUtilitiesModule.toLocalTime(p0)
 	
 	return DateTime.fromLocalTime(var4.Year, var4.Month, var4.Day)
 end
 
-local function _(p1, p2) --[[ line: 25 | named "shiftDays" ]]
+local function _(p1, p2)
 	-- upvalues: dateTimeUtilitiesModule (ref), toStartOfDay (ref)
 	local var5 = dateTimeUtilitiesModule.toLocalTime(p1)
 	
@@ -17,7 +17,7 @@ local function _(p1, p2) --[[ line: 25 | named "shiftDays" ]]
 end
 
 return {
-	resolvePresetRange = function(value, p3) --[[ line: 35 ]]
+	resolvePresetRange = function(value, p3)
 		-- upvalues: dateTimeUtilitiesModule (ref), dateTimePickerDateRangePresetModule (ref), dateTimeCalendarViewUtilitiesModule (ref)
 		p3 = p3 or DateTime.now()
 		local var7 = dateTimeUtilitiesModule.toLocalTime(p3)

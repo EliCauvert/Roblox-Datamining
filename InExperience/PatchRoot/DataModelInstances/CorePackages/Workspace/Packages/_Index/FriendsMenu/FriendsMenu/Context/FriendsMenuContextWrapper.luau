@@ -7,7 +7,7 @@ local selectedUsersContextProviderModule = require(parent.SelectedUsersContextPr
 local cryoModule = require(parent_2.Cryo)
 local reactModule = require(parent_2.React)
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), reactModule (ref), var0 (ref), inviteCallbackProviderModule (ref), selectedUsersContextProviderModule (ref)
 	local excludedFriendsSet = p0.excludedFriendsSet
 	

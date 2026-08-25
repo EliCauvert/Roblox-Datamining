@@ -5,7 +5,7 @@ local expChatEnablePresetChatBadgeFTUXExperimentation = game:DefineFastFlag("Exp
 local expChatPresetChatIconBadgeOverride = game:DefineFastInt("ExpChatPresetChatIconBadgeOverride", 0)
 local var4 = false
 
-local function _() --[[ line: 19 | named "getChatIconBadged" ]]
+local function _()
 	-- upvalues: experimentCacheManager (ref), expChatPresetChatBadgeFTUXExperimentLayer (ref), expChatPresetChatBadgeFTUXVariable (ref)
 	local var5 = experimentCacheManager.default:getLayerVariables(expChatPresetChatBadgeFTUXExperimentLayer)
 	
@@ -13,7 +13,7 @@ local function _() --[[ line: 19 | named "getChatIconBadged" ]]
 end
 
 return {
-	getShouldShowPresetChatIconBadge = function() --[[ line: 30 ]]
+	getShouldShowPresetChatIconBadge = function()
 		-- upvalues: expChatPresetChatIconBadgeOverride (ref), expChatEnablePresetChatBadgeFTUXExperimentation (ref), experimentCacheManager (ref), expChatPresetChatBadgeFTUXExperimentLayer (ref), expChatPresetChatBadgeFTUXVariable (ref)
 		if expChatPresetChatIconBadgeOverride == 1 then
 			return true
@@ -27,7 +27,7 @@ return {
 		
 		return var7 == nil or var7 == 1
 	end,
-	logExposure = function() --[[ line: 49 ]]
+	logExposure = function()
 		-- upvalues: expChatEnablePresetChatBadgeFTUXExperimentation (ref), var4 (write), experimentCacheManager (ref), expChatPresetChatBadgeFTUXExperimentLayer (ref), expChatPresetChatBadgeFTUXVariable (ref)
 		if not expChatEnablePresetChatBadgeFTUXExperimentation or var4 then return end
 		local var8 = experimentCacheManager.default:getLayerVariables(expChatPresetChatBadgeFTUXExperimentLayer)

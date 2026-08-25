@@ -4,7 +4,7 @@ local _ = require(viewRecycler.Core.Layout.LayoutRuntime)
 local typesModule = require(viewRecycler.Core.Types)
 local staticPartsModule = require(viewRecycler.Core.Layout.staticParts)
 
-return function(p0) --[[ line: 21 | named "uniform" ]]
+return function(p0)
 	-- upvalues: typesModule (ref), dataSourceChangeTypeModule (ref), staticPartsModule (ref)
 	assert(p0.itemLength > 0, "Layout.uniform: itemLength must be positive")
 	local itemLength = p0.itemLength
@@ -15,15 +15,15 @@ return function(p0) --[[ line: 21 | named "uniform" ]]
 	local var8 = 0
 	
 	return {
-		getItemCount = function() --[[ line: 32 ]]
+		getItemCount = function()
 			-- upvalues: var8 (write)
 			return var8
 		end,
-		getContentLength = function() --[[ line: 36 ]]
+		getContentLength = function()
 			-- upvalues: var8 (write), paddingBefore (ref), itemLength (ref), spacing (ref), paddingAfter (ref)
 			return if var8 == 0 then 0 else paddingBefore + var8 * itemLength + (var8 - 1) * spacing + paddingAfter
 		end,
-		getIntersectingIndexRange = function(p1, p2) --[[ line: 50 ]]
+		getIntersectingIndexRange = function(p1, p2)
 			-- upvalues: var8 (write), typesModule (copy), paddingBefore (ref), var7 (ref), itemLength (ref)
 			if var8 == 0 or p2 <= p1 then
 				return typesModule.EMPTY_INDEX_RANGE
@@ -53,11 +53,11 @@ return function(p0) --[[ line: 21 | named "uniform" ]]
 			
 			return if minValue < maxValue then typesModule.EMPTY_INDEX_RANGE else { firstIndex = maxValue, lastIndex = minValue }
 		end,
-		expandIndexRange = function(p3, p4, p5) --[[ line: 103 ]]
+		expandIndexRange = function(p3, p4, p5)
 			-- upvalues: staticPartsModule (copy), var8 (write)
 			return staticPartsModule.expandItemRange(p3, p4, p5 or p4, var8)
 		end,
-		getItemLayout = function(p6) --[[ line: 43 ]]
+		getItemLayout = function(p6)
 			-- upvalues: paddingBefore (ref), var7 (ref), itemLength (ref)
 			return {
 				startOffset = paddingBefore + (p6 - 1) * var7,
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 21 | named "uniform" ]]
 		end,
 		updateItemMeasurement = staticPartsModule.updateItemMeasurementNoop,
 		requiresItemMeasurement = staticPartsModule.requiresItemMeasurementFalse,
-		applyDataSourceChange = function(p7) --[[ line: 86 ]]
+		applyDataSourceChange = function(p7)
 			-- upvalues: var8 (write), dataSourceChangeTypeModule (copy)
 			if p7.type == dataSourceChangeTypeModule.Reset then
 				var8 = #p7.keys

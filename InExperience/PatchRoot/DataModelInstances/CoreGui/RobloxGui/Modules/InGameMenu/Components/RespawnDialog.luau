@@ -10,27 +10,27 @@ local confirmationDialogModule = require(script.Parent.ConfirmationDialog)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local constantsModule = require(parent.Resources.Constants)
 
-return roactRodux.UNSTABLE_connect2(function(p2, _) --[[ line: 55 ]]
+return roactRodux.UNSTABLE_connect2(function(p2, _)
 	return {
 		isRespawning = p2.respawn.dialogOpen,
 		inputType = p2.displayOptions.inputType
 	}
-end, function(p3) --[[ line: 60 ]]
+end, function(p3)
 	-- upvalues: setRespawningModule (ref), sendAnalyticsModule (ref), constantsModule (ref), respawnPlayerModule (ref)
 	return {
-		onCancel = function() --[[ line: 62 ]]
+		onCancel = function()
 			-- upvalues: p3 (ref), setRespawningModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			p3(setRespawningModule(false))
 			sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsRespawnCharacterName, { confirmed = constantsModule.AnalyticsCancelledName })
 		end,
-		onConfirm = function() --[[ line: 70 ]]
+		onConfirm = function()
 			-- upvalues: p3 (ref), respawnPlayerModule (copy)
 			p3(respawnPlayerModule)
 		end
 	}
-end)(function(p0) --[[ line: 22 | named "RespawnDialog" ]]
+end)(function(p0)
 	-- upvalues: roact (ref), IGMRespawnControllerBarModule (ref), withLocalizationModule (ref), confirmationDialogModule (ref)
-	local function _() --[[ line: 23 | named "renderRespawnDialogControllerBar" ]]
+	local function _()
 		-- upvalues: roact (copy), IGMRespawnControllerBarModule (copy), p0 (ref)
 		return roact.createElement(IGMRespawnControllerBarModule, { inputType = p0.inputType })
 	end
@@ -40,7 +40,7 @@ end)(function(p0) --[[ line: 22 | named "RespawnDialog" ]]
 		bodyText = "CoreScripts.InGameMenu.RespawnCharacterDialogBody",
 		confirmText = "CoreScripts.InGameMenu.RespawnCharacterDialogConfirm",
 		cancelText = "CoreScripts.InGameMenu.Cancel"
-	})(function(p1) --[[ line: 34 ]]
+	})(function(p1)
 		-- upvalues: roact (copy), p0 (ref), IGMRespawnControllerBarModule (copy), confirmationDialogModule (copy)
 		return roact.createFragment({
 			RespawnDialogControllerBar = p0.isRespawning and roact.createElement(IGMRespawnControllerBarModule, { inputType = p0.inputType }) or nil,

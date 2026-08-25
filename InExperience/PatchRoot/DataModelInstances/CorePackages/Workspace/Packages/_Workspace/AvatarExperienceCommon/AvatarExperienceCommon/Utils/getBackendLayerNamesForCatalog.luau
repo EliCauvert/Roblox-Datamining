@@ -1,6 +1,6 @@
 ﻿local fStringAXBackendDrivenCatalogLayersNames = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXBackendDrivenCatalogLayersNames
 
-return function() --[[ line: 6 ]]
+return function()
 	-- upvalues: fStringAXBackendDrivenCatalogLayersNames (ref)
 	local var0 = fStringAXBackendDrivenCatalogLayersNames()
 	

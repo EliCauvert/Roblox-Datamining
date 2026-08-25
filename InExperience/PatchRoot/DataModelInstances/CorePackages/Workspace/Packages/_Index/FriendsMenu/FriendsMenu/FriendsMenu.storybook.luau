@@ -17,15 +17,15 @@ return {
 	name = "FriendsMenu",
 	storyRoot = friendsMenu,
 	roact = roactModule,
-	mapDefinition = function(p0) --[[ line: 39 ]]
+	mapDefinition = function(p0)
 		-- upvalues: cryoModule (ref), t_1 (ref)
 		return cryoModule.Dictionary.join(p0, {
 			controls = cryoModule.Dictionary.join(t_1, p0.controls or {})
 		})
 	end,
-	mapStory = function(p1) --[[ line: 43 ]]
+	mapStory = function(p1)
 		-- upvalues: roactModule (ref), appStyleProvider (ref), t (ref), mockLocale (ref)
-		return function(p2) --[[ line: 44 ]]
+		return function(p2)
 			-- upvalues: roactModule (copy), appStyleProvider (copy), t (copy), mockLocale (copy), p1 (ref)
 			return roactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = mockLocale(p1, p2) })
 		end

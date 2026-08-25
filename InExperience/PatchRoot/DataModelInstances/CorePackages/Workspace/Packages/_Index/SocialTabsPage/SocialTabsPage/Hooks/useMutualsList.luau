@@ -4,19 +4,19 @@ local reactModule = require(parent.React)
 local useSignalProfileInsightsByUserId = require(parent.ProfileInsights).useSignalProfileInsightsByUserId
 local usePageSizeModule = require(socialTabsPage.Hooks.usePageSize)
 
-return function(p0) --[[ line: 24 | named "useMutualsList" ]]
+return function(p0)
 	-- upvalues: usePageSizeModule (ref), useSignalProfileInsightsByUserId (ref), reactModule (ref)
 	local var3 = usePageSizeModule()
 	local var4, var5 = useSignalProfileInsightsByUserId({ rankingStrategy = "tc_info_boost", userId = p0 })
 	local var6 = if var4 and var4.mutualFriends then var4.mutualFriends else {}
 	local var7, var8 = reactModule.useState(var3)
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var3 (ref)
 		var8(var3)
 	end, { p0, var3 })
 	
 	return {
-		mutualFriends = reactModule.useMemo(function() --[[ line: 42 ]]
+		mutualFriends = reactModule.useMemo(function()
 			-- upvalues: var7 (ref), var6 (ref)
 			local t = {}
 			
@@ -27,9 +27,9 @@ return function(p0) --[[ line: 24 | named "useMutualsList" ]]
 		end, { var6, var7 }),
 		isLoading = var5,
 		hasMore = var7 < #var6,
-		loadMore = reactModule.useCallback(function() --[[ line: 52 ]]
+		loadMore = reactModule.useCallback(function()
 			-- upvalues: var8 (ref), var3 (ref), var6 (ref)
-			var8(function(p1) --[[ line: 53 ]]
+			var8(function(p1)
 				-- upvalues: var3 (copy), var6 (copy)
 				return math.min(p1 + var3, #var6)
 			end)

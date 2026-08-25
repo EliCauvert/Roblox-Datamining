@@ -8,20 +8,20 @@ local NUM_ELEMENTS_IN_DATES_GRID = dateTimeCalendarConstantsModule.NUM_ELEMENTS_
 local NUM_NON_DAY_ELEMENTS = dateTimeCalendarConstantsModule.NUM_NON_DAY_ELEMENTS
 local NUM_WEEKDAY_HEADERS = dateTimeCalendarConstantsModule.NUM_WEEKDAY_HEADERS
 
-local function _(p0, p1) --[[ line: 51 | named "countLeadingPadDays" ]]
+local function _(p0, p1)
 	-- upvalues: dateTimeUtilitiesModule (ref), DAYS_PER_WEEK (ref)
 	local firstDayOfWeek = dateTimeUtilitiesModule.getFirstDayOfWeek(p0, p1)
 	
 	return if firstDayOfWeek == 0 then DAYS_PER_WEEK else firstDayOfWeek
 end
 
-local _ = function(p2, p3) --[[ line: 57 | named "countTrailingEmptyDays" ]]
+local _ = function(p2, p3)
 	-- upvalues: DAYS_PER_WEEK (ref)
 	return (DAYS_PER_WEEK - (p2 + p3) % DAYS_PER_WEEK) % DAYS_PER_WEEK
 end
 
 return {
-	buildCalendarDayConfigs = function(p4) --[[ line: 61 ]]
+	buildCalendarDayConfigs = function(p4)
 		-- upvalues: NUM_WEEKDAY_HEADERS (ref), dateTimeUtilitiesModule (ref), DAYS_PER_WEEK (ref), dateTimePickerCalendarDayKeyPrefixModule (ref), NUM_NON_DAY_ELEMENTS (ref), NUM_ELEMENTS_IN_DATES_GRID (ref)
 		local t = {}
 		local var6 = NUM_WEEKDAY_HEADERS + 1
@@ -71,7 +71,7 @@ return {
 		end
 		return t
 	end,
-	buildTwoMonthPaneCellConfigs = function(p5, p6) --[[ line: 116 ]]
+	buildTwoMonthPaneCellConfigs = function(p5, p6)
 		-- upvalues: NUM_WEEKDAY_HEADERS (ref), dateTimeUtilitiesModule (ref), DAYS_PER_WEEK (ref)
 		local t = {}
 		local var18 = NUM_WEEKDAY_HEADERS + 1

@@ -6,7 +6,7 @@ local constants = require(corePackagesService.Workspace.Packages.UserLib).Utils.
 local getRbxthumbWithTypeSizeAndOptions = require(corePackagesService.Workspace.Packages.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions
 local inviteAvatarThumbnailSize = constantsModule.InviteAvatarThumbnailSize
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: constants (ref), inviteAvatarThumbnailSize (ref), getRbxthumbWithTypeSizeAndOptions (ref), constantsModule (ref), reactModule (ref), COLORS (ref)
 	local user = p0.user
 	

@@ -17,17 +17,17 @@ local t_2 = {
 	[userModel.PresenceType.OFFLINE] = 0
 }
 
-local _ = function(p0) --[[ line: 43 ]]
+local _ = function(p0)
 	-- upvalues: t (ref), t_1 (ref), presenceType (ref)
 	return if t.number(p0) then t_1[p0] else t_1[presenceType.Offline]
 end
 
-local _ = function(p1) --[[ line: 48 ]]
+local _ = function(p1)
 	-- upvalues: t (ref), t_2 (ref), userModel (ref)
 	return if t.string(p1) then t_2[p1] else t_2[userModel.PresenceType.OFFLINE]
 end
 
-local var3 = function(p2, p3) --[[ line: 53 ]]
+local var3 = function(p2, p3)
 	-- upvalues: t (ref), t_1 (ref), presenceType (ref), t_2 (ref), userModel (ref)
 	local var4 = 0
 	local var5 = 0
@@ -56,11 +56,11 @@ local var3 = function(p2, p3) --[[ line: 53 ]]
 	end
 end
 
-local _ = function(p4, p5) --[[ line: 68 ]]
+local _ = function(p4, p5)
 	return p4.username or (p4.name or ""), p5.username or (p5.name or "")
 end
 
-return function(p6, p7) --[[ line: 72 ]]
+return function(p6, p7)
 	-- upvalues: var3 (ref), t (ref)
 	local var8, var9 = var3(p6, p7)
 	

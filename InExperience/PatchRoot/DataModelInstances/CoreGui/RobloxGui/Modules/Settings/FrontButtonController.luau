@@ -20,15 +20,15 @@ end
 if teleportHistoryButtonsEngineFeature and var10 > 0 then
 	var9 = var10
 end
-local function _(p0, p1) --[[ line: 30 | named "truncateWithEllipsis" ]]
+local function _(p0, p1)
 	return if p1 < #p0 then string.sub(p0, 1, p1 - 3) .. "..." else p0
 end
 
 local var14 = nil
-local var15 = promiseModule.defer(function(p2) --[[ line: 39 ]]
+local var15 = promiseModule.defer(function(p2)
 	-- upvalues: var9 (write), getGameNameAndDescription (ref), var6 (ref), var14 (write)
 	if var9 > 0 then
-		getGameNameAndDescription(var6, var9):andThen(function(p3) --[[ line: 41 ]]
+		getGameNameAndDescription(var6, var9):andThen(function(p3)
 			-- upvalues: var14 (copy)
 			local name = p3.Name
 			var14 = if #name > 30 then string.sub(name, 1, 27) .. "..." else name
@@ -40,13 +40,13 @@ local var15 = promiseModule.defer(function(p2) --[[ line: 39 ]]
 	p2()
 end)
 local t = {
-	getTooltipText = function() --[[ line: 51 ]]
+	getTooltipText = function()
 		-- upvalues: var14 (write), robloxTranslatorModule (ref)
 		return if var14 == nil then robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = var14 })
 	end
 }
 
-function t.getTooltipTextTimeout() --[[ line: 61 ]]
+function t.getTooltipTextTimeout()
 	-- upvalues: var14 (write), promiseModule (ref), var15 (ref), t (ref)
 	if var14 == nil then
 		promiseModule.any({ var15, promiseModule.delay(1) }):await()
@@ -54,14 +54,14 @@ function t.getTooltipTextTimeout() --[[ line: 61 ]]
 	return t.getTooltipText()
 end
 
-function t.getMenuText() --[[ line: 67 ]]
+function t.getMenuText()
 	-- upvalues: roactModule (ref), t (ref), var14 (write), var15 (ref)
 	local var17, var18 = roactModule.createBinding(t.getTooltipText())
 	
 	if var14 == nil then
-		pcall(function() --[[ line: 70 ]]
+		pcall(function()
 			-- upvalues: var15 (copy), var18 (ref), t (copy)
-			var15:andThen(function() --[[ line: 71 ]]
+			var15:andThen(function()
 				-- upvalues: var18 (copy), t (copy)
 				var18(t.getTooltipText())
 			end)
@@ -70,14 +70,14 @@ function t.getMenuText() --[[ line: 67 ]]
 	return var17
 end
 
-function t.initiateFrontButtonTeleport() --[[ line: 78 ]]
+function t.initiateFrontButtonTeleport()
 	-- upvalues: teleportHistoryButtonsEngineFeature (ref), teleportService (ref)
 	if teleportHistoryButtonsEngineFeature then
 		teleportService:TeleportTrustedBackForth(true)
 	end
 end
 
-function t.hasReturnUniverse() --[[ line: 83 ]]
+function t.hasReturnUniverse()
 	-- upvalues: var9 (write)
 	return var9 > 0
 end

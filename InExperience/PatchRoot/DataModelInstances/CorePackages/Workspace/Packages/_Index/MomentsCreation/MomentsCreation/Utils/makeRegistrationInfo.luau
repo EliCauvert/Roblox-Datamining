@@ -7,7 +7,7 @@ local _ = {
 	Sticker = "Sticker"
 }
 
-return function(p0, p1) --[[ line: 36 | named "makeRegistrationInfo" ]]
+return function(p0, p1)
 	-- upvalues: getFFlagMomentsStickerButton (ref)
 	local assetTotalDuration
 	local edits = p1.edits

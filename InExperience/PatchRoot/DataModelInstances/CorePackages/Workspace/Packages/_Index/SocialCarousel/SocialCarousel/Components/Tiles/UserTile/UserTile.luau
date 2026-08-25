@@ -10,7 +10,7 @@ local view = foundationModule.View
 local convertToFoundationPresenceEnum = socialCommonModule.Utils.convertToFoundationPresenceEnum
 local fFlagFriendsCarouselProfileFrameEnabledModule = require(socialCarousel.Flags.FFlagFriendsCarouselProfileFrameEnabled)
 
-return function(p0) --[[ line: 36 | named "UserTile" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), fFlagFriendsCarouselProfileFrameEnabledModule (ref)
 	local var5 = useTokens()
 	

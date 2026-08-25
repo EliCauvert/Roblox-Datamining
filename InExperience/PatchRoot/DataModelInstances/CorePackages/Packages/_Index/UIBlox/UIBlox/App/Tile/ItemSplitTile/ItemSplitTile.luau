@@ -31,17 +31,17 @@ itemSplitTile.defaultProps = {
 	isHovered = false
 }
 
-function itemSplitTile.init(p0) --[[ line: 68 ]]
+function itemSplitTile.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0:setState({ controlState = controlStateModule.Initialize })
 	
-	function p0.onStateChanged(_, p1) --[[ line: 73 ]]
+	function p0.onStateChanged(_, p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p1 })
 	end
 end
 
-function itemSplitTile.renderImageFrame(_, p2, p3, p4, p5) --[[ line: 80 ]]
+function itemSplitTile.renderImageFrame(_, p2, p3, p4, p5)
 	-- upvalues: roactModule (ref), imageSetComponentModule (ref), uDim (ref), loadableImageModule (ref)
 	local theme = p5.Theme
 	p4 = p4 or not p3
@@ -74,7 +74,7 @@ function itemSplitTile.renderImageFrame(_, p2, p3, p4, p5) --[[ line: 80 ]]
 	})
 end
 
-function itemSplitTile.renderTopContent(p6, p7) --[[ line: 119 ]]
+function itemSplitTile.renderTopContent(p6, p7)
 	-- upvalues: imagesModule (ref), roactModule (ref), imageSetComponentModule (ref)
 	local hasBackground = p6.props.hasBackground
 	local isHovered = p6.props.isHovered
@@ -111,7 +111,7 @@ function itemSplitTile.renderTopContent(p6, p7) --[[ line: 119 ]]
 	})
 end
 
-function itemSplitTile.renderBottomContent(p8, p9) --[[ line: 169 ]]
+function itemSplitTile.renderBottomContent(p8, p9)
 	-- upvalues: controlStateModule (ref), uDim_2 (ref), uDim_1 (ref), roactModule (ref), itemSplitTileFooterModule (ref)
 	local itemName = p8.props.itemName
 	local hasBackground = p8.props.hasBackground
@@ -161,7 +161,7 @@ function itemSplitTile.renderBottomContent(p8, p9) --[[ line: 169 ]]
 	})
 end
 
-function itemSplitTile.renderTileContent(p10, p11) --[[ line: 237 ]]
+function itemSplitTile.renderTileContent(p10, p11)
 	-- upvalues: roactModule (ref), uDim (ref), interactableModule (ref)
 	local hasBackground = p10.props.hasBackground
 	local theme = p11.Theme
@@ -213,12 +213,12 @@ function itemSplitTile.renderTileContent(p10, p11) --[[ line: 237 ]]
 	})
 end
 
-function itemSplitTile.render(p12) --[[ line: 300 ]]
+function itemSplitTile.render(p12)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local hasBackground = p12.props.hasBackground
 	local isHovered = p12.props.isHovered
 	
-	return withStyleModule(function(p13) --[[ line: 304 ]]
+	return withStyleModule(function(p13)
 		-- upvalues: roactModule (copy), p12 (ref), isHovered (ref), hasBackground (ref), imageSetComponentModule (copy), imagesModule (copy)
 		local theme = p13.Theme
 		

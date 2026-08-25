@@ -30,16 +30,16 @@ local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurr
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 local getTransferRequestInternalIdModule = require(currencyTransfers.Utils.getTransferRequestInternalId)
 
-local function _(p0) --[[ line: 58 | named "isVpcRequestSubmitted" ]]
+local function _(p0)
 	-- upvalues: actionTypeEnum (ref), actionStatusEnum (ref)
 	return type(p0) == "table" and (if p0[actionTypeEnum.ParentConsent] ~= actionStatusEnum.Success then p0[actionTypeEnum.ParentLink] == actionStatusEnum.Success else true)
 end
 
-local function WizardPrologueOpener(p1) --[[ line: 67 ]]
+local function WizardPrologueOpener(p1)
 	-- upvalues: reactModule (ref)
 	local openAmpWizard = p1.openAmpWizard
 	local var22 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 71 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref), openAmpWizard (ref)
 		if not var22.current then
 			var22.current = true
@@ -51,7 +51,7 @@ local function WizardPrologueOpener(p1) --[[ line: 67 ]]
 	return nil
 end
 
-return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
+return function(p2)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), transferDirectionModule (ref), fFlagEnableCurrencyTransferWizardVPCPrologueModule (ref), ampUpsellModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), promptStateModule (ref), getTransferRequestInternalIdModule (ref), getCounterUserIdModule (ref), inExpAmpWizardController (ref), actionTypeEnum (ref), actionStatusEnum (ref), accessResponseEnum (ref), transferRetryOriginModule (ref), acceptTransferModule (ref), initiateTransferModule (ref), processTransferModule (ref), ampWizardTransferConstantsModule (ref), WizardPrologueOpener (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
 	local var23 = useLocalization(transferLocalizationKeysModule.Presets.VPCBlockContainer)
 	local var24 = useTransferStoreModule()
@@ -62,7 +62,7 @@ return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
 	local transferRequestId = var24.getTransferRequestId(false)
 	local var28 = if direction == transferDirectionModule.Send then var23.AskParentBodySend else var23.AskParentBodyReceive
 	local var29 = fFlagEnableCurrencyTransferWizardVPCPrologueModule and (ampUpsellModule.GetFFlagEnableAmpVPCPrologue() and ampUpsellModule.GetFFlagEnableReusableVPCPrologue())
-	reactModule.useEffect(function() --[[ line: 101 ]]
+	reactModule.useEffect(function()
 		-- upvalues: logCurrencyTransferCounterModule (copy), var24 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		logCurrencyTransferCounterModule(var24, currencyTransferTelemetryModule.CurrencyTransferVPCBlockDialogShownCounter, { recourseSurface = "vpc" })
 		
@@ -72,7 +72,7 @@ return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
 		return nil
 	end, { var24 })
 	
-	local function logAskClicked() --[[ line: 111 ]]
+	local function logAskClicked()
 		-- upvalues: logCurrencyTransferCounterModule (copy), var24 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		logCurrencyTransferCounterModule(var24, currencyTransferTelemetryModule.CurrencyTransferVPCBlockAskClickedCounter, { recourseSurface = "vpc" })
 		
@@ -81,7 +81,7 @@ return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
 		end
 	end
 	
-	local function logCancelClicked() --[[ line: 120 ]]
+	local function logCancelClicked()
 		-- upvalues: logCurrencyTransferCounterModule (copy), var24 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		logCurrencyTransferCounterModule(var24, currencyTransferTelemetryModule.CurrencyTransferVPCBlockCancelClickedCounter, { recourseSurface = "vpc" })
 		
@@ -90,7 +90,7 @@ return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
 		end
 	end
 	
-	local function openAmpWizard() --[[ line: 134 ]]
+	local function openAmpWizard()
 		-- upvalues: var29 (ref), logCurrencyTransferCounterModule (copy), var24 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), p2 (ref), triggerOnClose (ref), promptStateModule (copy), getTransferRequestInternalIdModule (copy), transferRequestId (ref), selectedAmount (ref), getCounterUserIdModule (copy), direction (ref), inExpAmpWizardController (copy), actionTypeEnum (copy), actionStatusEnum (copy), transferDirectionModule (copy), accessResponseEnum (copy), transferRetryOrigin (ref), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), ampWizardTransferConstantsModule (copy), var23 (ref), var28 (ref), logAskClicked (ref), logCancelClicked (ref)
 		if not var29 then
 			logCurrencyTransferCounterModule(var24, currencyTransferTelemetryModule.CurrencyTransferVPCBlockAskClickedCounter, { recourseSurface = "vpc" })
@@ -103,7 +103,7 @@ return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
 			var24.setPreviousPromptState(var24.getPromptState(false))
 			var24.setPromptState(promptStateModule.Hidden)
 			local var33 = getCounterUserIdModule(var24, direction)
-			inExpAmpWizardController.OpenAmpWizardContainerInExp(p2.ampFeatureCheck, function(p3, p4) --[[ line: 164 ]]
+			inExpAmpWizardController.OpenAmpWizardContainerInExp(p2.ampFeatureCheck, function(p3, p4)
 				-- upvalues: actionTypeEnum (copy), actionStatusEnum (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), var24 (copy), robuxTransferFlowEventNameModule (copy), direction (copy), transferDirectionModule (copy), accessResponseEnum (copy), transferRetryOrigin (copy), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), selectedAmount (copy), triggerOnClose (copy)
 				local var34 = type(p4) == "table" and (if p4[actionTypeEnum.ParentConsent] ~= actionStatusEnum.Success then p4[actionTypeEnum.ParentLink] == actionStatusEnum.Success else true)
 				
@@ -175,7 +175,7 @@ return function(p2) --[[ line: 82 | named "VPCBlockContainer" ]]
 		hasBackdrop = true,
 		closeOnClickOutside = true,
 		size = dialogSize.Small,
-		onClose = function() --[[ line: 129 ]]
+		onClose = function()
 			-- upvalues: logCurrencyTransferCounterModule (copy), var24 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), triggerOnClose (ref)
 			logCurrencyTransferCounterModule(var24, currencyTransferTelemetryModule.CurrencyTransferVPCBlockCancelClickedCounter, { recourseSurface = "vpc" })
 			

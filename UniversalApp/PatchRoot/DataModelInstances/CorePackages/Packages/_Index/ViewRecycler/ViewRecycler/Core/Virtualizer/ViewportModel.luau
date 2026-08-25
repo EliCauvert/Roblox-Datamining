@@ -4,20 +4,20 @@ local scrollAlignmentModule = require(viewRecycler.Core.Enums.ScrollAlignment)
 local signalsModule = require(viewRecycler.Parent.Signals)
 local _ = require(viewRecycler.Core.Types)
 
-local function _(p0) --[[ line: 40 | named "validateAlignment" ]]
+local function _(p0)
 	-- upvalues: scrollAlignmentModule (ref)
 	assert(if p0 ~= scrollAlignmentModule.Start then if p0 ~= scrollAlignmentModule.Center then p0 == scrollAlignmentModule.End else true else true, "ViewportModel: invalid content alignment")
 end
 
-local _ = function(value) --[[ line: 47 | named "validateInset" ]]
+local _ = function(value)
 	assert(value >= 0 and value < 1e999, "ViewportModel: content insets must be finite non-negative numbers")
 end
 
-local _ = function(p1) --[[ line: 51 | named "validateEndThreshold" ]]
+local _ = function(p1)
 	assert(p1 >= 0 and p1 < 1e999, "ViewportModel: end threshold must be a finite non-negative number")
 end
 
-return function(p2) --[[ line: 55 | named "createViewportModel" ]]
+return function(p2)
 	-- upvalues: scrollAlignmentModule (ref), signalsModule (ref)
 	local contentAlignment = p2.contentAlignment or scrollAlignmentModule.Start
 	local contentInsetStart = p2.contentInsetStart or 0
@@ -38,7 +38,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 	local var15, var16 = signalsModule.createSignal(0)
 	local var17, var18 = signalsModule.createSignal(0)
 	
-	local function _() --[[ line: 72 | named "getCurrentContentMetrics" ]]
+	local function _()
 		-- upvalues: p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), contentAlignment (write), scrollAlignmentModule (copy)
 		local contentLength = p2.getLayout().getContentLength()
 		local maxValue = math.max(0, var12 - contentInsetStart - contentInsetEnd - contentLength)
@@ -46,7 +46,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return contentInsetStart + contentLength + contentInsetEnd, contentInsetStart + (if contentAlignment == scrollAlignmentModule.End then maxValue elseif contentAlignment == scrollAlignmentModule.Center then maxValue / 2 else 0)
 	end
 	
-	local function refreshContentMetrics() --[[ line: 84 ]]
+	local function refreshContentMetrics()
 		-- upvalues: p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), contentAlignment (write), scrollAlignmentModule (copy), var16 (ref), var18 (ref)
 		local contentLength = p2.getLayout().getContentLength()
 		local var38 = contentInsetStart + contentLength + contentInsetEnd
@@ -56,7 +56,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		var18(var40)
 	end
 	
-	local function setScrollOffset(value) --[[ line: 90 ]]
+	local function setScrollOffset(value)
 		-- upvalues: var11 (write), var14 (write)
 		if var11 == value then
 			return false
@@ -67,7 +67,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return true
 	end
 	
-	local function clampScrollOffset(value) --[[ line: 99 ]]
+	local function clampScrollOffset(value)
 		-- upvalues: p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), contentAlignment (write), scrollAlignmentModule (copy)
 		local contentLength = p2.getLayout().getContentLength()
 		local var42 = contentInsetStart + contentLength + contentInsetEnd
@@ -77,7 +77,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return math.clamp(value, 0, math.max(0, var42 - var12))
 	end
 	
-	local function scrollToOffset(value) --[[ line: 104 ]]
+	local function scrollToOffset(value)
 		-- upvalues: p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), contentAlignment (write), scrollAlignmentModule (copy), var11 (write), var14 (write)
 		assert(math.abs(value) < 1e999, "ViewportModel: scroll offset must be finite")
 		local contentLength = p2.getLayout().getContentLength()
@@ -95,7 +95,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return clampedValue
 	end
 	
-	local function setViewportSize(value, p3) --[[ line: 111 ]]
+	local function setViewportSize(value, p3)
 		-- upvalues: var12 (write), var13 (write), p2 (ref), contentInsetStart (write), contentInsetEnd (write), contentAlignment (write), scrollAlignmentModule (copy), var16 (ref), var18 (ref)
 		if var12 == value and var13 == p3 then
 			return false
@@ -112,7 +112,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return true
 	end
 	
-	local function setContentAlignment(value) --[[ line: 121 ]]
+	local function setContentAlignment(value)
 		-- upvalues: scrollAlignmentModule (copy), contentAlignment (write), p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), var16 (ref), var18 (ref)
 		local value_1 = value or scrollAlignmentModule.Start
 		assert(if value_1 ~= scrollAlignmentModule.Start then if value_1 ~= scrollAlignmentModule.Center then value_1 == scrollAlignmentModule.End else true else true, "ViewportModel: invalid content alignment")
@@ -131,7 +131,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return true
 	end
 	
-	local function setContentInsets(value, p4) --[[ line: 132 ]]
+	local function setContentInsets(value, p4)
 		-- upvalues: contentInsetStart (write), contentInsetEnd (write), p2 (ref), var12 (write), contentAlignment (write), scrollAlignmentModule (copy), var16 (ref), var18 (ref)
 		assert(value >= 0 and value < 1e999, "ViewportModel: content insets must be finite non-negative numbers")
 		assert(p4 >= 0 and p4 < 1e999, "ViewportModel: content insets must be finite non-negative numbers")
@@ -151,7 +151,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return true
 	end
 	
-	local function getLayoutViewport(p5, p6) --[[ line: 144 ]]
+	local function getLayoutViewport(p5, p6)
 		-- upvalues: var11 (write), var12 (write), var17 (ref), contentInsetStart (write), contentInsetEnd (write)
 		p5 = p5 or var11
 		p6 = p6 or p5 + var12
@@ -161,7 +161,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return var64, math.max(var64, p6 - contentInsetEnd - var63)
 	end
 	
-	local function getVisibleRange(p7, p8) --[[ line: 152 ]]
+	local function getVisibleRange(p7, p8)
 		-- upvalues: var11 (write), var12 (write), var17 (ref), contentInsetStart (write), contentInsetEnd (write), p2 (ref)
 		p7 = p7 or var11
 		p8 = p8 or p7 + var12
@@ -171,7 +171,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		return p2.getLayout().getIntersectingIndexRange(var68, math.max(var68, p8 - contentInsetEnd - var67))
 	end
 	
-	local function getPlacedItemLayout(p9) --[[ line: 157 ]]
+	local function getPlacedItemLayout(p9)
 		-- upvalues: p2 (ref), var17 (ref)
 		local itemLayout = p2.getLayout().getItemLayout(p9)
 		
@@ -183,7 +183,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		}
 	end
 	
-	local function getScrollState() --[[ line: 167 ]]
+	local function getScrollState()
 		-- upvalues: var15 (ref), var12 (write), var11 (write), endThreshold (write)
 		local var70 = var15(false)
 		local maxValue = math.max(0, var70 - var12 - var11)
@@ -198,7 +198,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		}
 	end
 	
-	local function getScrollOffsetForItem(value, p10) --[[ line: 180 ]]
+	local function getScrollOffsetForItem(value, p10)
 		-- upvalues: p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), contentAlignment (write), scrollAlignmentModule (copy)
 		local layout = p2.getLayout()
 		local itemCount = layout.getItemCount()
@@ -226,7 +226,7 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		setScrollOffset = setScrollOffset,
 		clampScrollOffset = clampScrollOffset,
 		scrollToOffset = scrollToOffset,
-		scrollBy = function(p11) --[[ line: 210 ]]
+		scrollBy = function(p11)
 			-- upvalues: var11 (write), p2 (ref), contentInsetStart (write), contentInsetEnd (write), var12 (write), contentAlignment (write), scrollAlignmentModule (copy), var14 (write)
 			assert(math.abs(p11) < 1e999, "ViewportModel: scroll delta must be finite")
 			local var79 = var11 + p11
@@ -246,30 +246,30 @@ return function(p2) --[[ line: 55 | named "createViewportModel" ]]
 		setViewportSize = setViewportSize,
 		setContentAlignment = setContentAlignment,
 		setContentInsets = setContentInsets,
-		setEndThreshold = function(value) --[[ line: 217 ]]
+		setEndThreshold = function(value)
 			-- upvalues: endThreshold (write)
 			local value_1 = value or 1
 			assert(value_1 >= 0 and value_1 < 1e999, "ViewportModel: end threshold must be a finite non-negative number")
 			endThreshold = value_1
 		end,
 		refreshContentMetrics = refreshContentMetrics,
-		getScrollOffset = function() --[[ line: 223 ]]
+		getScrollOffset = function()
 			-- upvalues: var11 (write)
 			return var11
 		end,
-		getScrollDirection = function() --[[ line: 226 ]]
+		getScrollDirection = function()
 			-- upvalues: var14 (write)
 			return var14
 		end,
-		getScrollAxisLength = function() --[[ line: 229 ]]
+		getScrollAxisLength = function()
 			-- upvalues: var12 (write)
 			return var12
 		end,
-		getCrossAxisLength = function() --[[ line: 232 ]]
+		getCrossAxisLength = function()
 			-- upvalues: var13 (write)
 			return var13
 		end,
-		getContentInsets = function() --[[ line: 235 ]]
+		getContentInsets = function()
 			-- upvalues: contentInsetStart (write), contentInsetEnd (write)
 			return { start = contentInsetStart, finish = contentInsetEnd }
 		end,

@@ -7,7 +7,7 @@ local playtestersRequestsModule = require(script.Parent.playtestersRequests)
 local _ = require(script.Parent.PrivatePlaytestersStoreTypes)
 local createPlayersGetterCacheModule = require(script.Parent.createPlayersGetterCache)
 
-return function(p0) --[[ line: 38 | named "createPrivatePlaytestersStore" ]]
+return function(p0)
 	-- upvalues: createDataCacheModule (ref), createPlayersGetterCacheModule (ref), createDataResolverModule (ref), playtestersRequestsModule (ref), promiseModule (ref)
 	p0 = p0 or {}
 	local t = { network = p0.network, baseUrl = p0.baseUrl }
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 38 | named "createPrivatePlaytestersStore" ]]
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = var8,
-		fetchFn = function(p1, _) --[[ line: 57 ]]
+		fetchFn = function(p1, _)
 			-- upvalues: playtestersRequestsModule (copy), t (ref)
 			return playtestersRequestsModule.fetchPlaytesters(tonumber(p1), t)
 		end,
@@ -26,7 +26,7 @@ return function(p0) --[[ line: 38 | named "createPrivatePlaytestersStore" ]]
 	
 	return {
 		MAX_INVITES = 10,
-		getAndFetchInvitedPlayers = function(p2) --[[ line: 66 ]]
+		getAndFetchInvitedPlayers = function(p2)
 			-- upvalues: var10 (ref), var9 (ref)
 			local andFetchItem = var10.getAndFetchItem(tostring(p2))
 			
@@ -35,9 +35,9 @@ return function(p0) --[[ line: 38 | named "createPrivatePlaytestersStore" ]]
 				status = andFetchItem.status
 			}
 		end,
-		sendInvites = function(p3, p4, _) --[[ line: 77 ]]
+		sendInvites = function(p3, p4, _)
 			-- upvalues: playtestersRequestsModule (copy), t (ref), var8 (ref), promiseModule (copy)
-			return playtestersRequestsModule.fetchPlaytesters(p3, t):andThen(function(p5) --[[ line: 78 ]]
+			return playtestersRequestsModule.fetchPlaytesters(p3, t):andThen(function(p5)
 				-- upvalues: p4 (ref), var8 (copy), p3 (ref), promiseModule (copy), playtestersRequestsModule (copy), t (copy)
 				local maxValue = math.max(0, 10 - #p5)
 				local t_1 = {}
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 38 | named "createPrivatePlaytestersStore" ]]
 					
 					return promiseModule.resolve(p5)
 				end
-				return playtestersRequestsModule.addPlaytester(p3, t_1, t):andThen(function(p6) --[[ line: 104 ]]
+				return playtestersRequestsModule.addPlaytester(p3, t_1, t):andThen(function(p6)
 					-- upvalues: var8 (copy), p3 (copy)
 					var8.replaceItem(tostring(p3), p6)
 					
@@ -61,9 +61,9 @@ return function(p0) --[[ line: 38 | named "createPrivatePlaytestersStore" ]]
 				end)
 			end)
 		end,
-		removeInvite = function(p7, p8) --[[ line: 111 ]]
+		removeInvite = function(p7, p8)
 			-- upvalues: playtestersRequestsModule (copy), t (ref), var8 (ref)
-			return playtestersRequestsModule.removePlaytester(p7, p8, t):andThen(function(p9) --[[ line: 114 ]]
+			return playtestersRequestsModule.removePlaytester(p7, p8, t):andThen(function(p9)
 				-- upvalues: var8 (copy), p7 (ref)
 				var8.replaceItem(tostring(p7), p9)
 				

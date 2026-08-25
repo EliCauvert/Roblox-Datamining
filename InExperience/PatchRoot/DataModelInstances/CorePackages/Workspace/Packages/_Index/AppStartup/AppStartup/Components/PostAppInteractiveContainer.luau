@@ -4,17 +4,17 @@ local _ = require(appStartup.AppStartupSequence)
 local _ = require(parent.AppCommonLib)
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local var2, var3 = reactModule.useState(p0.appStartupSequence.isInteractive)
-	reactModule.useEffect(function() --[[ line: 17 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var3 (ref)
 		local changedConnection = nil
 		
 		if p0.appStartupSequence.isInteractive then
 			var3(true)
 		else
-			changedConnection = p0.appStartupSequence.changed:connect(function() --[[ line: 23 ]]
+			changedConnection = p0.appStartupSequence.changed:connect(function()
 				-- upvalues: var3 (copy), p0 (copy), changedConnection (write)
 				var3(p0.appStartupSequence.isInteractive)
 				

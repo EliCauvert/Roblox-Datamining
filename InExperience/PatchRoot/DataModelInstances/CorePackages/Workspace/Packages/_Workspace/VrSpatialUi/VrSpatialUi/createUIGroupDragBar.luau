@@ -3,7 +3,7 @@ local dragBarModule = require(vrSpatialUi.DragBar)
 local constantsModule = require(vrSpatialUi.Constants)
 local coreGuiService = game:GetService("CoreGui")
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: coreGuiService (ref), constantsModule (ref), dragBarModule (ref)
 	local part = Instance.new("Part")
 	part.Size = if p0.dragBarPartSize then Vector3.new(p0.dragBarPartSize.X, p0.dragBarPartSize.Y, 0.00001) else Vector3.new(0.600000023842, 0.119999997318, 0.00001)

@@ -19,16 +19,16 @@ local appHeaderBarModule = require(parent.AppHeaderBar)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 local useSignalState = require(parent.SignalsReact).useSignalState
 
-local function noOp() --[[ line: 35 ]]
+local function noOp()
 	return nil
 end
 
-return function(p0) --[[ line: 51 | named "ChatTopBarBase" ]]
+return function(p0)
 	-- upvalues: fFlagAppChatTopBarConfigDrivenModule (ref), reactModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), getTopBarStoreModule (ref), useSignalState (ref), fFlagAppIaScrollAway (ref), appHeaderBarModule (ref), useLocalization (ref), useStyle (ref), useTokens (ref), noOp (ref), createBackFuncModule (ref), appNavBarModule (ref), visibilityControl (ref), foundationModule (ref), headerBar (ref), fFlagAppChatAddTopBarDividerModule (ref)
 	if not fFlagAppChatTopBarConfigDrivenModule() then
 		return nil
 	end
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), appChatPerfTrackerModule (copy)
 		if fFlagAppChatPerfTrackingModule then
 			appChatPerfTrackerModule.finish(appChatPerfTrackerModule.Events.TopBarRenderInterval)
@@ -90,7 +90,7 @@ return function(p0) --[[ line: 51 | named "ChatTopBarBase" ]]
 		LayoutOrder = -1,
 		Size = UDim2.new(1, 0, 0, topBarHeight),
 		ZIndex = if fFlagAppIaScrollAway then 2 else nil,
-		Position = if fFlagAppIaScrollAway then if fFlagAppIaScrollAway and not var14 and appNavBarModule.getScrollAwayEnabled() then visibilityControl.getHeaderBinding():map(function(p1) --[[ line: 138 ]]
+		Position = if fFlagAppIaScrollAway then if fFlagAppIaScrollAway and not var14 and appNavBarModule.getScrollAwayEnabled() then visibilityControl.getHeaderBinding():map(function(p1)
 			-- upvalues: topBarHeight (ref)
 			return UDim2.new(0, 0, 0, (p1 - 1) * (topBarHeight + 36))
 		end) else nil else nil

@@ -5,7 +5,7 @@ local var0 = t.interface({
 	minimumItemsPerRow = t.optional(t.number)
 })
 
-return function(p0) --[[ line: 13 ]]
+return function(p0)
 	-- upvalues: var0 (ref)
 	assert(var0(p0))
 	

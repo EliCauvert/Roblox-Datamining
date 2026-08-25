@@ -44,7 +44,7 @@ alert.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function alert.init(p0) --[[ line: 79 ]]
+function alert.init(p0)
 	-- upvalues: roactModule (ref)
 	local var11, var12 = roactModule.createBinding(Vector2.new(0, 0))
 	p0.contentSize = var11
@@ -54,20 +54,20 @@ function alert.init(p0) --[[ line: 79 ]]
 	p0.buttonStackRef = roactModule.createRef()
 end
 
-function alert.didMount(p1) --[[ line: 87 ]]
+function alert.didMount(p1)
 	if p1.props.onMounted then
 		p1.props.onMounted()
 	end
 end
 
-function alert.render(p2) --[[ line: 93 ]]
+function alert.render(p2)
 	-- upvalues: withStyleModule (ref), alertTypeModule (ref), cryoModule (ref), roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref), imagesModule (ref), fitFrameOnAxis (ref), alertTitleModule (ref), buttonStackModule (ref)
 	local isMiddleContentFocusable = p2.props.isMiddleContentFocusable
 	local isFooterContentFocusable = p2.props.isFooterContentFocusable
 	local isRoactGamepadEnabled = p2.props.isRoactGamepadEnabled
 	local clampedValue = math.clamp(p2.props.screenSize.X - p2.props.margin.left - p2.props.margin.right, p2.props.minWidth, p2.props.maxWidth)
 	
-	return withStyleModule(function(p3) --[[ line: 104 ]]
+	return withStyleModule(function(p3)
 		-- upvalues: p2 (ref), alertTypeModule (copy), cryoModule (copy), roactModule (copy), isRoactGamepadEnabled (ref), isMiddleContentFocusable (ref), isFooterContentFocusable (ref), roactGamepadModule (copy), imageSetComponentModule (copy), imagesModule (copy), fitFrameOnAxis (copy), clampedValue (ref), alertTitleModule (copy), buttonStackModule (copy)
 		local transparency, var14
 		local theme = p3.Theme
@@ -94,7 +94,7 @@ function alert.render(p2) --[[ line: 93 ]]
 		return roactModule.createElement(if isRoactGamepadEnabled then roactGamepadModule.Focusable[imageSetComponentModule.Button] else imageSetComponentModule.Button, {
 			Position = p2.props.position,
 			AnchorPoint = p2.props.anchorPoint,
-			Size = p2.contentSize:map(function(p4) --[[ line: 138 ]]
+			Size = p2.contentSize:map(function(p4)
 				return UDim2.new(0, p4.X, 0, p4.Y)
 			end),
 			BackgroundColor3 = theme.BackgroundUIDefault.Color,
@@ -118,7 +118,7 @@ function alert.render(p2) --[[ line: 93 ]]
 				minimumSize = UDim2.new(0, clampedValue, 0, 0),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				[roactModule.Change.AbsoluteSize] = function(p5) --[[ line: 164 ]]
+				[roactModule.Change.AbsoluteSize] = function(p5)
 					-- upvalues: p2 (copy)
 					p2.changeContentSize(p5.AbsoluteSize)
 				end

@@ -57,7 +57,7 @@ end
 for i_1, v in pairs(t.CharacterPartNames.R15) do
 	t.CharacterPartNames.All[i_1] = true
 end
-local function _(p0, p1) --[[ line: 95 | named "loadMannequin" ]]
+local function _(p0, p1)
 	-- upvalues: insertService (ref)
 	if p1 == nil then
 		p1 = true
@@ -73,7 +73,7 @@ local function _(p0, p1) --[[ line: 95 | named "loadMannequin" ]]
 	return var3
 end
 
-function t.LoadR15Mannequin(p2) --[[ line: 112 ]]
+function t.LoadR15Mannequin(p2)
 	-- upvalues: insertService (ref)
 	local var5 = p2
 	
@@ -91,7 +91,7 @@ function t.LoadR15Mannequin(p2) --[[ line: 112 ]]
 	return var6
 end
 
-function t.LoadR6Mannequin(p3) --[[ line: 116 ]]
+function t.LoadR6Mannequin(p3)
 	-- upvalues: insertService (ref)
 	local var8 = p3
 	
@@ -109,7 +109,7 @@ function t.LoadR6Mannequin(p3) --[[ line: 116 ]]
 	return var9
 end
 
-function t.LoadRthroMannequin(p4) --[[ line: 120 ]]
+function t.LoadRthroMannequin(p4)
 	-- upvalues: insertService (ref)
 	local var11 = p4
 	
@@ -127,7 +127,7 @@ function t.LoadRthroMannequin(p4) --[[ line: 120 ]]
 	return var12
 end
 
-function t.LoadR15PlusMannequin(p5) --[[ line: 124 ]]
+function t.LoadR15PlusMannequin(p5)
 	-- upvalues: insertService (ref)
 	if game:GetEngineFeature("R15PlusMannequinContent") then
 		local var14 = p5
@@ -162,12 +162,12 @@ function t.LoadR15PlusMannequin(p5) --[[ line: 124 ]]
 	end
 end
 
-function t.LoadMannequinForScaleType(p6, p7) --[[ line: 131 ]]
+function t.LoadMannequinForScaleType(p6, p7)
 	-- upvalues: t (ref)
 	return if p6 == "Classic" then t.LoadR15Mannequin(p7) else t.LoadRthroMannequin(p7)
 end
 
-function t.AssertObjectsFormat(p8) --[[ line: 144 ]]
+function t.AssertObjectsFormat(p8)
 	-- upvalues: t_1 (ref), t (ref)
 	local var20 = false
 	
@@ -185,7 +185,7 @@ function t.AssertObjectsFormat(p8) --[[ line: 144 ]]
 	assert(var20, "objects does not have at least one of R15ArtistIntent, R15, and R6 folders")
 end
 
-function t.CreateBodyPartMannequin(p9, p10) --[[ line: 175 ]]
+function t.CreateBodyPartMannequin(p9, p10)
 	-- upvalues: t (ref)
 	local var21 = false
 	local var22 = false
@@ -237,7 +237,7 @@ function t.CreateBodyPartMannequin(p9, p10) --[[ line: 175 ]]
 	return var21, var22, var25
 end
 
-function t.SetupBodyPartMannequin(value, p11, p12, p13, p14) --[[ line: 257 ]]
+function t.SetupBodyPartMannequin(value, p11, p12, p13, p14)
 	-- upvalues: t (ref)
 	t.AssertObjectsFormat(p13)
 	local var29 = false
@@ -245,7 +245,7 @@ function t.SetupBodyPartMannequin(value, p11, p12, p13, p14) --[[ line: 257 ]]
 	if p14 then
 		game:GetObjects(p14)[1].Parent = p12
 	end
-	local function addFolderChildren(p15, p16, p17) --[[ line: 272 ]]
+	local function addFolderChildren(p15, p16, p17)
 		-- upvalues: var29 (write), p12 (ref), t (copy)
 		for i, v in pairs(p15:GetChildren()) do
 			assert(v:IsA("BasePart"), "Only BaseParts should be in Folders")
@@ -280,7 +280,7 @@ function t.SetupBodyPartMannequin(value, p11, p12, p13, p14) --[[ line: 257 ]]
 	return var29, t_2
 end
 
-function t.CreateHeadModel(head) --[[ line: 322 ]]
+function t.CreateHeadModel(head)
 	local model = Instance.new("Model")
 	head.Name = "Head"
 	head.Parent = model

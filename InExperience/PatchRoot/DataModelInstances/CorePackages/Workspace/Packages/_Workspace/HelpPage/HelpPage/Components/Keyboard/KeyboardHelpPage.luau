@@ -7,11 +7,11 @@ local keyboardGroupModule = require(script.Parent.KeyboardGroup)
 local _ = require(parent.Configs.ConfigTypes)
 local view = foundationModule.View
 
-return reactModule.memo(function() --[[ line: 18 | named "KeyboardHelpPage" ]]
+return reactModule.memo(function()
 	-- upvalues: useKeybindsModule (ref), reactModule (ref), view (ref), keyboardGroupModule (ref)
 	local controls = useKeybindsModule().controls
 	local groups = useKeybindsModule().groups
-	local var4 = reactModule.useMemo(function() --[[ line: 22 ]]
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: controls (ref), groups (ref), reactModule (copy), view (copy), keyboardGroupModule (copy)
 		if controls == nil or groups == nil then
 			return nil

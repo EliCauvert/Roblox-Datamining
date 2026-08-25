@@ -15,7 +15,7 @@ local t = {
 	lineWidth = constantsModule.TILE_SIZE
 }
 
-function CarouselUserContextualInfo(p0) --[[ line: 51 ]]
+function CarouselUserContextualInfo(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTextSizeOffset (ref), iconSize (ref), reactModule (ref), text (ref), imageSetLabel (ref), images (ref), styledTextLabel (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local icon = var5.icon
@@ -63,7 +63,7 @@ function CarouselUserContextualInfo(p0) --[[ line: 51 ]]
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			size = UDim2.fromOffset(var9, reactModule.useMemo(function() --[[ line: 64 ]]
+			size = UDim2.fromOffset(var9, reactModule.useMemo(function()
 				-- upvalues: font (ref), font_1 (ref), var7 (ref), var5 (ref), text (copy), text_1 (ref), var9 (ref)
 				return math.min((font.BaseSize * font_1.RelativeSize + var7) * var5.maxNumberOfLines, text.GetTextHeight(text_1 or "", font_1.Font, font.BaseSize * font_1.RelativeSize, var9))
 			end, {

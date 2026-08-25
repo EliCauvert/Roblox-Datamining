@@ -11,15 +11,15 @@ local object = require(parent.LuauPolyfill).Object
 local _ = require(script.ApolloClientTestUtilsTypes)
 
 return {
-	mockApolloClient = function(p0) --[[ line: 53 ]]
+	mockApolloClient = function(p0)
 		-- upvalues: httpService (ref), serverModule (ref), buildFetch (ref), apolloClient (ref), inMemoryCache (ref), typePolicies (ref), httpLink (ref)
 		local var3 = serverModule.new({
 			mockResolvers = p0.mockResolvers,
 			fetchImpl = buildFetch({
-				RequestInternal = function(_, p1) --[[ line: 25 ]]
+				RequestInternal = function(_, p1)
 					-- upvalues: p0 (ref), httpService (copy)
 					return {
-						Start = function(_, p2) --[[ line: 27 ]]
+						Start = function(_, p2)
 							-- upvalues: p0 (copy), p1 (ref), httpService (copy)
 							local _ = nil
 							local var4 = if p0.responseMap and p0.responseMap[p1.Url] then p0.responseMap[p1.Url] else p0.defaultResponse or {}
@@ -44,20 +44,20 @@ return {
 			cache = inMemoryCache.new({ typePolicies = typePolicies }),
 			link = httpLink.new({
 				uri = "/api",
-				fetch = function(_, p3) --[[ line: 65 ]]
+				fetch = function(_, p3)
 					-- upvalues: var3 (ref)
 					return var3:fetchLocal(p3)
 				end
 			})
 		})
 	end,
-	mockHttpService = function(p4) --[[ line: 23 ]]
+	mockHttpService = function(p4)
 		-- upvalues: httpService (ref)
 		return {
-			RequestInternal = function(_, p5) --[[ line: 25 ]]
+			RequestInternal = function(_, p5)
 				-- upvalues: p4 (ref), httpService (copy)
 				return {
-					Start = function(_, p6) --[[ line: 27 ]]
+					Start = function(_, p6)
 						-- upvalues: p4 (copy), p5 (ref), httpService (copy)
 						local _ = nil
 						local var4 = if p4.responseMap and p4.responseMap[p5.Url] then p4.responseMap[p5.Url] else p4.defaultResponse or {}
@@ -77,9 +77,9 @@ return {
 			end
 		}
 	end,
-	appendApolloClientToReducer = function(p7, p8) --[[ line: 74 ]]
+	appendApolloClientToReducer = function(p7, p8)
 		-- upvalues: object (ref)
-		return function(p9, p10) --[[ line: 75 ]]
+		return function(p9, p10)
 			-- upvalues: p7 (ref), object (copy), p8 (ref)
 			return object.assign(table.clone(p7(p9 or {}, p10)), { ApolloClient = { apolloClient = p8 } })
 		end

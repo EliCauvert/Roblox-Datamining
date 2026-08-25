@@ -9,18 +9,18 @@ local loggerModule = require(crossExperience.Logger)
 local _ = require(crossExperience.Types)
 local fFlagFixCrossExperienceVoiceExecutePrint = require(crossExperience.dependencies).SharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
 
-local var7 = function() --[[ line: 21 ]] end
+local var7 = function() end
 
-local var8 = function(p0, p1, p2, p3) --[[ line: 23 ]]
+local var8 = function(p0, p1, p2, p3)
 	-- upvalues: experienceService (ref), fFlagFixCrossExperienceVoiceExecutePrint (ref), loggerModule (ref)
-	local ok, status = pcall(function() --[[ line: 24 ]]
+	local ok, status = pcall(function()
 		-- upvalues: experienceService (copy), p0 (ref), p1 (ref), p2 (ref), fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p3 (ref)
-		experienceService:ExecuteCrossExperienceCall(p0, p1, function(p4) --[[ line: 25 ]]
+		experienceService:ExecuteCrossExperienceCall(p0, p1, function(p4)
 			-- upvalues: p2 (copy)
 			if p2 then
 				p2(p4)
 			end
-		end, function(p5) --[[ line: 29 ]]
+		end, function(p5)
 			-- upvalues: fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p3 (copy)
 			if fFlagFixCrossExperienceVoiceExecutePrint then
 				loggerModule:warning("Error executing call: {}", p5)
@@ -45,7 +45,7 @@ local var8 = function(p0, p1, p2, p3) --[[ line: 23 ]]
 	end
 end
 
-local var9 = function(p6, p7, p8, p9) --[[ line: 54 ]]
+local var9 = function(p6, p7, p8, p9)
 	-- upvalues: getMemStorageKeyModule (ref), constantsModule (ref), logEvent (ref), eventNamesModule (ref), var8 (ref)
 	logEvent(eventNamesModule.NotifyObserver, {
 		eventName = p6.NOTIFY,
@@ -55,12 +55,12 @@ local var9 = function(p6, p7, p8, p9) --[[ line: 54 ]]
 	var8(p6.NOTIFY, p7, p8, p9)
 end
 
-local var10 = function(p10, p11) --[[ line: 70 ]]
+local var10 = function(p10, p11)
 	-- upvalues: var9 (ref), var7 (ref)
 	var9(p10, p11, var7, var7)
 end
 
-local var11 = function(p12, p13, p14, _, p15) --[[ line: 74 ]]
+local var11 = function(p12, p13, p14, _, p15)
 	-- upvalues: httpService (ref), logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var8 (ref)
 	local var13 = httpService:GenerateGUID(false)
 	logEvent(eventNamesModule.AddObserver, {
@@ -73,7 +73,7 @@ local var11 = function(p12, p13, p14, _, p15) --[[ line: 74 ]]
 	return var13
 end
 
-local var12 = function(p16, p17, p18, p19, p20) --[[ line: 99 ]]
+local var12 = function(p16, p17, p18, p19, p20)
 	-- upvalues: logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var8 (ref)
 	logEvent(eventNamesModule.RemoveObserver, {
 		eventName = p17.REMOVE_OBSERVER,
@@ -87,12 +87,12 @@ return {
 	execute = var8,
 	notify = var10,
 	notifyWithCallbacks = var9,
-	addObserver = function(p21, p22, p23) --[[ line: 95 ]]
+	addObserver = function(p21, p22, p23)
 		-- upvalues: var11 (ref), var7 (ref)
 		return var11(p21, p22, p23, var7, var7)
 	end,
 	addObserverWithCallbacks = var11,
-	removeObserver = function(p24, p25, p26) --[[ line: 117 ]]
+	removeObserver = function(p24, p25, p26)
 		-- upvalues: var12 (ref), var7 (ref)
 		return var12(p24, p25, p26, var7, var7)
 	end,

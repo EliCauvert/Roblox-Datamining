@@ -7,7 +7,7 @@ local toolTipModule = require(script.Parent.ToolTip)
 local luauPolyfillModule = require(corePackagesService.Packages.LuauPolyfill)
 local t = {}
 
-local function onRenderStepped(_) --[[ line: 28 ]]
+local function onRenderStepped(_)
 	-- upvalues: isVRAppBuild (ref), t (ref), VRHub (ref)
 	if isVRAppBuild() then
 		for i, v in pairs(t) do
@@ -25,7 +25,7 @@ local function onRenderStepped(_) --[[ line: 28 ]]
 	end
 end
 
-function spawnTooltipPart() --[[ line: 49 ]]
+function spawnTooltipPart()
 	local tooltipPart = Instance.new("Part")
 	tooltipPart.Name = "TooltipPart"
 	tooltipPart.Position = Vector3.new(0, -100, 0)
@@ -44,7 +44,7 @@ function spawnTooltipPart() --[[ line: 49 ]]
 	return tooltipPart
 end
 
-function showTooltipText(p0) --[[ line: 69 ]]
+function showTooltipText(p0)
 	for i, v in ipairs(p0.Part:GetDescendants()) do
 		if v:IsA("TextLabel") and v.Name == "Body" then
 			v.ZIndex = 10
@@ -52,12 +52,12 @@ function showTooltipText(p0) --[[ line: 69 ]]
 	end
 end
 
-function Tooltips(p1) --[[ line: 77 ]]
+function Tooltips(p1)
 	-- upvalues: t (ref), reactModule (ref), runService (ref), onRenderStepped (ref), luauPolyfillModule (ref), toolTipModule (ref)
 	for i, v in pairs(p1.tooltipButtons) do
 		t[i] = { Button = v, Part = spawnTooltipPart() }
 	end
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: t (copy)
 		for i, v in pairs(t) do
 			showTooltipText(v)
@@ -65,7 +65,7 @@ function Tooltips(p1) --[[ line: 77 ]]
 	end, {})
 	runService.RenderStepped:Connect(onRenderStepped)
 	
-	return reactModule.createElement("Frame", {}, luauPolyfillModule.Array.map(t, function(p2, p3) --[[ line: 96 ]]
+	return reactModule.createElement("Frame", {}, luauPolyfillModule.Array.map(t, function(p2, p3)
 		-- upvalues: reactModule (copy), toolTipModule (copy), p1 (ref)
 		return reactModule.createElement(toolTipModule, {
 			controllerPart = p2.Part,

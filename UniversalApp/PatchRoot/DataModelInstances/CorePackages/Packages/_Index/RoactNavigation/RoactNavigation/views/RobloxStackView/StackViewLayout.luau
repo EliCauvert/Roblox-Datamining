@@ -15,7 +15,7 @@ local t = {
 	overlayTransparency = 0.7,
 	transparent = false,
 	overlayColor3 = Color3.new(0, 0, 0),
-	renderOverlay = function(p0, p1, p2) --[[ line: 22 ]]
+	renderOverlay = function(p0, p1, p2)
 		-- upvalues: reactModule (ref), stackViewOverlayFrameModule (ref)
 		return reactModule.createElement(stackViewOverlayFrameModule, {
 			navigationOptions = p0,
@@ -25,35 +25,35 @@ local t = {
 	end
 }
 
-local function _(p3, p4) --[[ line: 34 | named "calculateTransitionValue" ]]
+local function _(p3, p4)
 	return math.max(math.min(1 + p4 - p3, 1), 0)
 end
 
 local stackViewLayout = reactModule.Component:extend("StackViewLayout")
 
-function stackViewLayout.init(p5) --[[ line: 40 ]]
+function stackViewLayout.init(p5)
 	p5:setState({})
 	local index = p5.props.transitionProps.navigation.state.index
 	p5._isMounted = false
 	p5._positionLastValue = index
 	
-	function p5._renderScene(p6) --[[ line: 47 ]]
+	function p5._renderScene(p6)
 		-- upvalues: p5 (ref)
 		return p5:_renderInnerScene(p6)
 	end
 	
-	function p5._subscribeToOverlayUpdates(p7) --[[ line: 51 ]]
+	function p5._subscribeToOverlayUpdates(p7)
 		-- upvalues: p5 (ref)
 		local index = p5.props.transitionProps.scene.index
 		
-		return p5.props.transitionProps.position:onStep(function(p8) --[[ line: 55 ]]
+		return p5.props.transitionProps.position:onStep(function(p8)
 			-- upvalues: p7 (ref), index (ref)
 			p7(math.max(math.min(1 + p8 - index, 1), 0))
 		end)
 	end
 end
 
-function stackViewLayout._renderCard(p9, p10, p11) --[[ line: 61 ]]
+function stackViewLayout._renderCard(p9, p10, p11)
 	-- upvalues: object (ref), reactModule (ref), stackViewCardModule (ref)
 	local transitionProps = p9.props.transitionProps
 	local lastTransitionProps = p9.props.lastTransitionProps
@@ -76,7 +76,7 @@ function stackViewLayout._renderCard(p9, p10, p11) --[[ line: 61 ]]
 	}))
 end
 
-function stackViewLayout._renderInnerScene(p12, p13) --[[ line: 96 ]]
+function stackViewLayout._renderInnerScene(p12, p13)
 	-- upvalues: reactModule (ref), sceneViewModule (ref)
 	return reactModule.createElement(sceneViewModule, {
 		screenProps = p12.props.screenProps,
@@ -85,7 +85,7 @@ function stackViewLayout._renderInnerScene(p12, p13) --[[ line: 96 ]]
 	})
 end
 
-function stackViewLayout.render(p14) --[[ line: 109 ]]
+function stackViewLayout.render(p14)
 	-- upvalues: object (ref), t (ref), reactModule (ref)
 	local topMostOpaqueSceneIndex = p14.state.topMostOpaqueSceneIndex
 	local t_1 = {}
@@ -139,7 +139,7 @@ function stackViewLayout.render(p14) --[[ line: 109 ]]
 	}, t_1)
 end
 
-function stackViewLayout.getDerivedStateFromProps(p15, _) --[[ line: 204 ]]
+function stackViewLayout.getDerivedStateFromProps(p15, _)
 	-- upvalues: stackPresentationStyleModule (ref), object (ref), t (ref), stackViewTransitionConfigsModule (ref)
 	local transitionProps = p15.transitionProps
 	local scenes = transitionProps.scenes
@@ -164,15 +164,15 @@ function stackViewLayout.getDerivedStateFromProps(p15, _) --[[ line: 204 ]]
 	}
 end
 
-function stackViewLayout.didMount(p16) --[[ line: 243 ]]
+function stackViewLayout.didMount(p16)
 	p16._isMounted = true
-	p16._positionDisconnector = p16.props.transitionProps.position:onStep(function(...) --[[ line: 246 ]]
+	p16._positionDisconnector = p16.props.transitionProps.position:onStep(function(...)
 		-- upvalues: p16 (ref)
 		p16:_onPositionStep(...)
 	end)
 end
 
-function stackViewLayout.willUnmount(p17) --[[ line: 251 ]]
+function stackViewLayout.willUnmount(p17)
 	p17._isMounted = false
 	
 	if p17._positionDisconnector then
@@ -181,19 +181,19 @@ function stackViewLayout.willUnmount(p17) --[[ line: 251 ]]
 	end
 end
 
-function stackViewLayout.didUpdate(p18, p19) --[[ line: 260 ]]
+function stackViewLayout.didUpdate(p18, p19)
 	local position = p18.props.transitionProps.position
 	
 	if position ~= p19.transitionProps.position then
 		p18._positionDisconnector()
-		p18._positionDisconnector = position:onStep(function(...) --[[ line: 265 ]]
+		p18._positionDisconnector = position:onStep(function(...)
 			-- upvalues: p18 (ref)
 			p18:_onPositionStep(...)
 		end)
 	end
 end
 
-function stackViewLayout._onPositionStep(p20, p21) --[[ line: 271 ]]
+function stackViewLayout._onPositionStep(p20, p21)
 	if p20._isMounted then
 		p20._positionLastValue = p21
 	end

@@ -4,7 +4,7 @@ local appStyleProviderModule = require(parent.App.Style.AppStyleProvider)
 local foundationProvider = require(parent.Parent.Foundation).FoundationProvider
 local _ = require(parent.App.Style.StyleTypes)
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: roactModule (ref), foundationProvider (ref), appStyleProviderModule (ref)
 	return roactModule.createElement(foundationProvider, {
 		theme = "Dark",

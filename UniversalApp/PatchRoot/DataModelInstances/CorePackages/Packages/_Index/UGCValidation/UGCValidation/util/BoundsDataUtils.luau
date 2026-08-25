@@ -3,7 +3,7 @@ local _ = require(parent.util.Types)
 local calculateMinMaxModule = require(parent.util.calculateMinMax)
 local t = {}
 
-function t.combineBounds(p0, p1) --[[ line: 23 ]]
+function t.combineBounds(p0, p1)
 	-- upvalues: calculateMinMaxModule (ref), t (ref)
 	local t_1 = {}
 	local var3, var4 = calculateMinMaxModule(p0.minMeshCorner, p0.maxMeshCorner, p1.minMeshCorner, p1.maxMeshCorner)
@@ -17,28 +17,28 @@ function t.combineBounds(p0, p1) --[[ line: 23 ]]
 	return t_1
 end
 
-function t.expandMeshBounds(p2, p3) --[[ line: 36 ]]
+function t.expandMeshBounds(p2, p3)
 	-- upvalues: calculateMinMaxModule (ref)
 	local var7, var8 = calculateMinMaxModule(p2.minMeshCorner, p2.maxMeshCorner, p3, p3)
 	p2.minMeshCorner = var7
 	p2.maxMeshCorner = var8
 end
 
-function t.expandRigAttachmentBounds(p4, p5) --[[ line: 41 ]]
+function t.expandRigAttachmentBounds(p4, p5)
 	-- upvalues: calculateMinMaxModule (ref)
 	local var9, var10 = calculateMinMaxModule(p4.minRigAttachment, p4.maxRigAttachment, p5, p5)
 	p4.minRigAttachment = var9
 	p4.maxRigAttachment = var10
 end
 
-function t.setOverallBounds(value) --[[ line: 46 ]]
+function t.setOverallBounds(value)
 	-- upvalues: calculateMinMaxModule (ref)
 	local var11, var12 = calculateMinMaxModule(value.minMeshCorner, value.maxMeshCorner, value.minRigAttachment, value.maxRigAttachment)
 	value.minOverall = var11
 	value.maxOverall = var12
 end
 
-function t.calculateBoundsCenters(p6) --[[ line: 52 ]]
+function t.calculateBoundsCenters(p6)
 	local var13 = if p6.minMeshCorner and p6.maxMeshCorner then (p6.minMeshCorner + p6.maxMeshCorner) / 2 else nil
 	local var14 = if p6.minRigAttachment and p6.maxRigAttachment then (p6.minRigAttachment + p6.maxRigAttachment) / 2 else nil
 	
@@ -48,7 +48,7 @@ function t.calculateBoundsCenters(p6) --[[ line: 52 ]]
 	return var13, var14, nil
 end
 
-function t.calculateBoundsDimensions(p7) --[[ line: 66 ]]
+function t.calculateBoundsDimensions(p7)
 	local var15 = if p7.minMeshCorner and p7.maxMeshCorner then p7.maxMeshCorner - p7.minMeshCorner else nil
 	local var16 = if p7.minRigAttachment and p7.maxRigAttachment then p7.maxRigAttachment - p7.minRigAttachment else nil
 	

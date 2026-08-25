@@ -7,7 +7,7 @@ local useTokens = foundation.Hooks.useTokens
 local image = foundation.Image
 local view = foundation.View
 
-function HorizontalFacepileGroup(p0) --[[ line: 25 ]]
+function HorizontalFacepileGroup(p0)
 	-- upvalues: useTokens (ref), cryoModule (ref), react (ref), image (ref), view (ref)
 	local var3 = useTokens()
 	local _ = p0
@@ -24,7 +24,7 @@ function HorizontalFacepileGroup(p0) --[[ line: 25 ]]
 	
 	return react.createElement(view, {
 		BackgroundTransparency = 1,
-		Size = UDim2.fromOffset(react.useMemo(function() --[[ line: 43 ]]
+		Size = UDim2.fromOffset(react.useMemo(function()
 			-- upvalues: var4 (write)
 			local imagesCount = #var4.images
 			
@@ -40,7 +40,7 @@ function HorizontalFacepileGroup(p0) --[[ line: 25 ]]
 		end, { #var4.images, var4.avatarSize }), var4.avatarSize),
 		LayoutOrder = if var4.layoutOrder then var4.layoutOrder else nil
 	}, {
-		react.useMemo(function() --[[ line: 58 ]]
+		react.useMemo(function()
 			-- upvalues: var4 (write), react (copy), image (copy), var3 (ref)
 			local imagesCount = #var4.images
 			local t = {}

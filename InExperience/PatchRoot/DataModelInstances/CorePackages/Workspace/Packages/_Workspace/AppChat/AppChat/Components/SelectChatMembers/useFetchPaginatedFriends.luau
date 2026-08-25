@@ -5,7 +5,7 @@ local useFriendsListOrderedByPresence = require(parent.FriendsCommon).Hooks.useF
 local userModel = require(parent.UserLib).Models.UserModel
 local convertPresenceTypeToUserPresenceModule = require(script.Parent.Utils.convertPresenceTypeToUserPresence)
 
-function useFetchPaginatedFriends() --[[ line: 14 ]]
+function useFetchPaginatedFriends()
 	-- upvalues: useLocalUserId (ref), useLocalization (ref), useFriendsListOrderedByPresence (ref), convertPresenceTypeToUserPresenceModule (ref), userModel (ref)
 	local var1 = useLocalization({
 		offlinePresenceText = "Common.Presence.Label.Offline",

@@ -8,29 +8,29 @@ local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signal
 local getContainsChatSettingModule = require(appChat.Utils.getContainsChatSetting)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(_) --[[ line: 15 | named "AppChatInterventionEventReceiver" ]]
+return function(_)
 	-- upvalues: useDispatch (ref), realtimeDeliveryModule (ref), getContainsChatSettingModule (ref), appChatNetworkingModule (ref), name (ref), reactModule (ref), partyChatTimeoutReceivedSignal (ref)
 	local var6 = useDispatch()
-	realtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p0) --[[ line: 17 ]]
+	realtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p0)
 		-- upvalues: getContainsChatSettingModule (copy), var6 (ref), appChatNetworkingModule (copy), name (copy)
 		if p0.SettingsChanged and getContainsChatSettingModule(p0.SettingsChanged) then
-			var6(appChatNetworkingModule.rodux.GetChatModerationStatuses.API()):catch(function(p1) --[[ line: 20 ]]
+			var6(appChatNetworkingModule.rodux.GetChatModerationStatuses.API()):catch(function(p1)
 				-- upvalues: name (copy)
 				name:warning("NetworkingChat failure in UserSettingsChanged->GetChatModerationStatuses, Status: " .. tostring(p1))
 			end)
 		end
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 29 ]]
+	reactModule.useEffect(function()
 		-- upvalues: partyChatTimeoutReceivedSignal (copy), var6 (ref), appChatNetworkingModule (copy), name (copy)
-		local var7 = partyChatTimeoutReceivedSignal:connect(function(p2) --[[ line: 30 ]]
+		local var7 = partyChatTimeoutReceivedSignal:connect(function(p2)
 			-- upvalues: var6 (copy), appChatNetworkingModule (copy), name (copy)
-			var6(appChatNetworkingModule.rodux.GetChatModerationStatuses.API(if p2 then { p2 } else {})):catch(function(p3) --[[ line: 33 ]]
+			var6(appChatNetworkingModule.rodux.GetChatModerationStatuses.API(if p2 then { p2 } else {})):catch(function(p3)
 				-- upvalues: name (copy)
 				name:warning("NetworkingChat failure in partyChatTimeoutReceivedSignal->GetChatModerationStatuses, Status: " .. tostring(p3))
 			end)
 		end)
 		
-		return function() --[[ line: 40 ]]
+		return function()
 			-- upvalues: var7 (ref)
 			if var7 then
 				var7:disconnect()

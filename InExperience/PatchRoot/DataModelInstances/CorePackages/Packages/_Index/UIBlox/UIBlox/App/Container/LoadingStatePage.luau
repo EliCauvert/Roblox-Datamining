@@ -5,7 +5,7 @@ local loading = foundationModule.Loading
 local iconSize = foundationModule.Enums.IconSize
 local loadingStatePage = roactModule.PureComponent:extend("LoadingStatePage")
 
-function loadingStatePage.render(_) --[[ line: 13 ]]
+function loadingStatePage.render(_)
 	-- upvalues: roactModule (ref), loading (ref), iconSize (ref)
 	return roactModule.createElement(loading, {
 		size = iconSize.Medium,

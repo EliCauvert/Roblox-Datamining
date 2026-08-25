@@ -10,75 +10,75 @@ local t = {
 }
 
 return {
-	createDataHydrationMock = function(p0) --[[ line: 30 ]]
+	createDataHydrationMock = function(p0)
 		-- upvalues: t (ref)
 		local t_1 = {
 			Badges = if p0 then p0.Badges else {
-				getBadgeInfoStore = function() --[[ line: 48 ]]
+				getBadgeInfoStore = function()
 					return {
-						getBadgeInfo = function() --[[ line: 50 ]]
+						getBadgeInfo = function()
 							return {
-								data = function() --[[ line: 52 ]]
+								data = function()
 									return nil
 								end,
-								status = function() --[[ line: 55 ]]
+								status = function()
 									return "NotReady"
 								end
 							}
 						end,
-						getBadgeInfos = function() --[[ line: 60 ]]
+						getBadgeInfos = function()
 							return {}
 						end,
-						clear = function() --[[ line: 63 ]] end,
-						dispose = function() --[[ line: 64 ]] end
+						clear = function() end,
+						dispose = function() end
 					}
 				end
 			},
 			Game = if p0 then p0.Game else nil,
 			SocialLink = if p0 then p0.SocialLink else nil,
 			MarketplaceCatalogCategory = if p0 then p0.MarketplaceCatalogCategory else {
-				getMarketplaceCatalogCategoryStore = function() --[[ line: 71 ]]
+				getMarketplaceCatalogCategoryStore = function()
 					return {
-						getMarketplaceCatalogCategory = function() --[[ line: 73 ]]
+						getMarketplaceCatalogCategory = function()
 							return {
-								data = function() --[[ line: 75 ]]
+								data = function()
 									return nil
 								end,
-								status = function() --[[ line: 78 ]]
+								status = function()
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogCategories = function() --[[ line: 83 ]]
+						getMarketplaceCatalogCategories = function()
 							return {}
 						end,
-						updateMarketplaceCatalogCategories = function() --[[ line: 86 ]] end,
-						updateMarketplaceCatalogCategory = function() --[[ line: 87 ]] end,
-						clear = function() --[[ line: 88 ]] end,
-						dispose = function() --[[ line: 89 ]] end
+						updateMarketplaceCatalogCategories = function() end,
+						updateMarketplaceCatalogCategory = function() end,
+						clear = function() end,
+						dispose = function() end
 					}
 				end
 			},
 			MarketplaceCatalogSort = if p0 then p0.MarketplaceCatalogSort else {
-				getMarketplaceCatalogSortStore = function() --[[ line: 94 ]]
+				getMarketplaceCatalogSortStore = function()
 					return {
-						getMarketplaceCatalogSort = function() --[[ line: 96 ]]
+						getMarketplaceCatalogSort = function()
 							return {
-								data = function() --[[ line: 98 ]]
+								data = function()
 									return nil
 								end,
-								status = function() --[[ line: 101 ]]
+								status = function()
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogSorts = function() --[[ line: 106 ]]
+						getMarketplaceCatalogSorts = function()
 							return {}
 						end,
-						updateMarketplaceCatalogSorts = function() --[[ line: 109 ]] end,
-						updateMarketplaceCatalogSort = function() --[[ line: 110 ]] end,
-						clear = function() --[[ line: 111 ]] end,
-						dispose = function() --[[ line: 112 ]] end
+						updateMarketplaceCatalogSorts = function() end,
+						updateMarketplaceCatalogSort = function() end,
+						clear = function() end,
+						dispose = function() end
 					}
 				end
 			},
@@ -100,7 +100,7 @@ return {
 		end
 		return t_1
 	end,
-	createSduiDataBinderTransformUtilsMock = function() --[[ line: 141 ]]
+	createSduiDataBinderTransformUtilsMock = function()
 		-- upvalues: snakeToCamel (ref), protobufTimestampToLocalTimeString (ref)
 		return {
 			snakeToCamel = snakeToCamel,

@@ -28,7 +28,7 @@ local fFlagLuaAppMakeDisclaimerOptInForFeedbackForm = sharedFlagsModule.FFlagLua
 local fFlagLuaAppNotInterestedFeedbackFormTelemetry = sharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 local luaAppCheckboxFeedbackFormTitleTextWrapping = game:DefineFastFlag("LuaAppCheckboxFeedbackFormTitleTextWrapping", false)
 
-return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackFormModal" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), closeCentralOverlay (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (ref), cryoModule (ref), checkbox (ref), useAppPolicy (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateDown (ref), dialog (ref), text (ref), luaAppCheckboxFeedbackFormTitleTextWrapping (ref), buttonVariant (ref), fFlagLuaAppMakeDisclaimerOptInForFeedbackForm (ref)
 	local var13 = useDispatch()
 	local var14 = useTokens()
@@ -41,7 +41,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 			underlineEnd = "</u>"
 		}
 	})
-	local var16 = reactModule.useCallback(function(p1) --[[ line: 70 ]]
+	local var16 = reactModule.useCallback(function(p1)
 		-- upvalues: var13 (ref), closeCentralOverlay (copy), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), p0 (ref)
 		var13(closeCentralOverlay())
 		
@@ -50,9 +50,9 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 		end
 	end, { var13, p0.onClose })
 	local var17, var18 = reactModule.useState({})
-	local var19 = reactModule.useMemo(function() --[[ line: 79 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), p0 (ref), reactModule (copy), checkbox (copy), var17 (ref), var18 (ref)
-		return cryoModule.List.map(p0.checkboxItems, function(p2, p3) --[[ line: 80 ]]
+		return cryoModule.List.map(p0.checkboxItems, function(p2, p3)
 			-- upvalues: reactModule (copy), checkbox (copy), var17 (copy), var18 (copy)
 			local id = p2.id
 			
@@ -60,7 +60,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 				label = p2.text,
 				isChecked = if var17[id] then true else false,
 				LayoutOrder = p3,
-				onActivated = function() --[[ line: 86 ]]
+				onActivated = function()
 					-- upvalues: var17 (copy), id (ref), var18 (copy)
 					local cloned = table.clone(var17)
 					
@@ -76,7 +76,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 			})
 		end)
 	end, { p0.checkboxItems, var17 })
-	local var20, var21 = reactModule.useMemo(function() --[[ line: 100 ]]
+	local var20, var21 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var17 (ref)
 		local var27 = false
 		local var28 = false
@@ -98,7 +98,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 	
 	return reactModule.createElement(dialog.Root, {
 		hasBackdrop = true,
-		onClose = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then if fFlagLuaAppNotInterestedFeedbackFormTelemetry then reactModule.useCallback(function() --[[ line: 168 ]]
+		onClose = if fFlagLuaAppNotInterestedFeedbackFormTelemetry then if fFlagLuaAppNotInterestedFeedbackFormTelemetry then reactModule.useCallback(function()
 			-- upvalues: var16 (ref)
 			var16(false)
 		end, { var16 }) else nil else var16
@@ -156,7 +156,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = reactModule.useCallback(function(p4) --[[ line: 122 ]]
+					[reactModule.Change.Text] = reactModule.useCallback(function(p4)
 						-- upvalues: var22 (ref), var24 (ref)
 						if not p4 then return end
 						if p4.Text:len() > 500 then
@@ -189,7 +189,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 			actions = {
 				{
 					isDisabled = not var25,
-					onActivated = reactModule.useCallback(function() --[[ line: 133 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var25 (ref), var16 (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), p0 (ref), var17 (ref), var22 (ref)
 						if var25 then
 							var16(if fFlagLuaAppNotInterestedFeedbackFormTelemetry then true else nil)
@@ -203,7 +203,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 				}
 			}
 		}),
-		DisclaimerText = if fFlagLuaAppMakeDisclaimerOptInForFeedbackForm and not p0.showTermsOfUseDisclaimer or not useAppPolicy(function(p5) --[[ line: 141 ]]
+		DisclaimerText = if fFlagLuaAppMakeDisclaimerOptInForFeedbackForm and not p0.showTermsOfUseDisclaimer or not useAppPolicy(function(p5)
 			return p5.getWebViewSupport()
 		end) then nil else reactModule.createElement("TextButton", {
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -220,7 +220,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CheckboxFeedbackForm
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			[reactModule.Event.Activated] = reactModule.useCallback(function() --[[ line: 146 ]]
+			[reactModule.Event.Activated] = reactModule.useCallback(function()
 				-- upvalues: appPage (copy), urlBuilder (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var13 (ref), navigateDown (copy), var16 (ref), fFlagLuaAppNotInterestedFeedbackFormTelemetry (copy)
 				local t = {
 					name = appPage.GenericWebPage,

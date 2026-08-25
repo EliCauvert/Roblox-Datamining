@@ -16,10 +16,10 @@ shareGameDummy.IsPageClipped = false
 shareGameDummy.Page.Name = "ShareGameDummy"
 shareGameDummy.Page.Size = UDim2.new(1, 0, 0, 0)
 
-function shareGameDummy.ConnectHubToApp(_, p0, p1) --[[ line: 37 ]]
+function shareGameDummy.ConnectHubToApp(_, p0, p1)
 	-- upvalues: shareGameDummy (ref), constantsModule (ref), openPageModule (ref), fFlagEnableConsoleExpControls (ref), var5 (ref), robloxGui (ref), closePageModule (ref)
 	shareGameDummy:SetHub(p0)
-	p1.store.changed:connect(function(p2, p3) --[[ line: 40 ]]
+	p1.store.changed:connect(function(p2, p3)
 		-- upvalues: constantsModule (copy), shareGameDummy (copy)
 		local page = p2.Page
 		
@@ -27,7 +27,7 @@ function shareGameDummy.ConnectHubToApp(_, p0, p1) --[[ line: 37 ]]
 			shareGameDummy.HubRef:PopMenu(nil, true)
 		end
 	end)
-	shareGameDummy.Displayed.Event:Connect(function() --[[ line: 52 ]]
+	shareGameDummy.Displayed.Event:Connect(function()
 		-- upvalues: p1 (ref), openPageModule (copy), constantsModule (copy), fFlagEnableConsoleExpControls (copy), var5 (copy), robloxGui (copy)
 		if not p1.store:getState().Page.IsOpen then
 			p1.store:dispatch(openPageModule(constantsModule.PageRoute.SETTINGS_HUB))
@@ -37,7 +37,7 @@ function shareGameDummy.ConnectHubToApp(_, p0, p1) --[[ line: 37 ]]
 			end
 		end
 	end)
-	shareGameDummy.Hidden.Event:Connect(function() --[[ line: 64 ]]
+	shareGameDummy.Hidden.Event:Connect(function()
 		-- upvalues: p1 (ref), closePageModule (copy), constantsModule (copy), fFlagEnableConsoleExpControls (copy), var5 (copy), robloxGui (copy)
 		if p1.store:getState().Page.IsOpen then
 			p1.store:dispatch(closePageModule(constantsModule.PageRoute.SETTINGS_HUB))
@@ -50,7 +50,7 @@ function shareGameDummy.ConnectHubToApp(_, p0, p1) --[[ line: 37 ]]
 	p1.store:dispatch(closePageModule(constantsModule.PageRoute.SETTINGS_HUB))
 end
 
-function shareGameDummy.ClearShareInviteLink(_, p4) --[[ line: 81 ]]
+function shareGameDummy.ClearShareInviteLink(_, p4)
 	-- upvalues: clearShareInviteLink (ref)
 	if p4.store:getState().ShareLinks.Invites.ShareInviteLink ~= nil then
 		p4.store:dispatch(clearShareInviteLink())

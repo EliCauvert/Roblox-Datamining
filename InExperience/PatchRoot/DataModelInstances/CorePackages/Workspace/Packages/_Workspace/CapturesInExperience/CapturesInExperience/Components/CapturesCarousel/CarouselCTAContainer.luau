@@ -26,27 +26,27 @@ local uDim = UDim.new(0.12, 0)
 local uDim2 = UDim2.fromOffset(36, 36)
 local uDim_1 = UDim.new(0, 8)
 
-return capturesPolicyModule.connect(function(p2) --[[ line: 214 ]]
+return capturesPolicyModule.connect(function(p2)
 	return { enableShareCaptureCTA = p2.enableShareCaptureCTA() }
-end)(function(p0) --[[ line: 48 ]]
+end)(function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useRef (ref), useSelector (ref), constantsModule (ref), reactModule (ref), getSaveToStoragePermissionModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), eventNamesModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref), getIsDeleteWarningModalOptedOutModule (ref), deleteWarningModalOpenedModule (ref), uDim_1 (ref), uDim (ref), iconButton (ref), images (ref), uDim2 (ref)
 	local var18 = useAnalyticsModule()
 	local var19 = useDispatch()
 	local var20 = useStyle()
 	local var21 = useRef(0)
-	local var22 = useSelector(function(p1) --[[ line: 55 ]]
+	local var22 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].Captures[p1[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex]
 	end)
-	local var23 = reactModule.useCallback(function() --[[ line: 60 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var21 (ref)
 		return if p0.isDisabled then true else DateTime.now().UnixTimestampMillis - var21.current < 500
 	end, { p0.isDisabled })
-	local var24 = reactModule.useCallback(function() --[[ line: 74 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref)
 		var21.current = DateTime.now().UnixTimestampMillis
 	end, {})
-	local var25 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: var23 (ref), getSaveToStoragePermissionModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), p0 (ref), var19 (ref), var24 (ref), captureTypeModule (copy), var18 (ref), eventNamesModule (copy)
 		if var23() then return end
 		local var26
@@ -108,7 +108,7 @@ end)(function(p0) --[[ line: 48 ]]
 			showBackground = false,
 			backgroundColor = var20.Theme.BackgroundUIContrast,
 			icon = images["icons/actions/share"],
-			onActivated = reactModule.useCallback(function() --[[ line: 101 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var23 (ref), var24 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), captureTypeModule (copy), var18 (ref), eventNamesModule (copy), socialStopwatchModule (copy), var19 (ref), shareCaptureModule (copy), externalShareSourceTypeModule (copy)
 				if var23() then return end
 				local var27
@@ -136,7 +136,7 @@ end)(function(p0) --[[ line: 48 ]]
 			layoutOrder = 4,
 			showBackground = false,
 			icon = images["icons/actions/edit/delete"],
-			onActivated = reactModule.useCallback(function() --[[ line: 125 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var23 (ref), var24 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), captureTypeModule (copy), var18 (ref), eventNamesModule (copy), getIsDeleteWarningModalOptedOutModule (copy), p0 (ref), var19 (ref), deleteWarningModalOpenedModule (copy)
 				if var23() then return end
 				local var28

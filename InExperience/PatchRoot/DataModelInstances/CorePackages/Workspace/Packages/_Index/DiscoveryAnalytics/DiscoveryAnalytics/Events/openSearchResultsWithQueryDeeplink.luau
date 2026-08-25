@@ -11,7 +11,7 @@ local t = {
 }
 local var3 = tModule.strictInterface({ kwd = tModule.string, searchType = tModule.string })
 
-return function(p0, p1) --[[ line: 24 ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
 	local var4, var5 = var3(p1)
 	

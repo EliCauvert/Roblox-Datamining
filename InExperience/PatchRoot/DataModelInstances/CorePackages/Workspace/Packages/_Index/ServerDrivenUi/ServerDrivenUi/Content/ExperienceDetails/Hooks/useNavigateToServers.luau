@@ -13,23 +13,23 @@ local default = linkingProtocolModule.LinkingProtocol.default
 local fFlagEnableBlackbirdPageCloseCallback = require(parent.SharedFlags).FFlagEnableBlackbirdPageCloseCallback
 local getSubscriptionPurchaseCloseCallback = require(parent.RobloxSubscriptionPurchaseApp).Utils.getSubscriptionPurchaseCloseCallback
 
-return function(p0) --[[ line: 24 | named "useNavigateToServers" ]]
+return function(p0)
 	-- upvalues: useAppPolicy (ref), useNavigation (ref), fFlagEnableBlackbirdPageCloseCallback (ref), reactModule (ref), getSubscriptionPurchaseCloseCallback (ref), urlBuilder (ref), default (ref), appPage (ref)
-	local var6 = useAppPolicy(function(p1) --[[ line: 25 ]]
+	local var6 = useAppPolicy(function(p1)
 		return p1.getWebViewSupport()
 	end)
 	local var7 = useNavigation()
-	local var8 = if fFlagEnableBlackbirdPageCloseCallback then reactModule.useMemo(function() --[[ line: 32 ]]
+	local var8 = if fFlagEnableBlackbirdPageCloseCallback then reactModule.useMemo(function()
 		-- upvalues: getSubscriptionPurchaseCloseCallback (copy)
 		return if getSubscriptionPurchaseCloseCallback then getSubscriptionPurchaseCloseCallback() else nil
 	end, {}) else nil
 	
-	return reactModule.useCallback(function() --[[ line: 37 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: urlBuilder (copy), p0 (ref), default (copy), var6 (ref), var7 (ref), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var8 (write)
 		local var9 = urlBuilder.game.info.servers({ universeId = p0 })
-		pcall(function() --[[ line: 42 ]]
+		pcall(function()
 			-- upvalues: default (copy), var9 (ref), var6 (copy), var7 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var8 (copy)
-			default:isURLRegistered(var9):andThen(function(p2) --[[ line: 43 ]]
+			default:isURLRegistered(var9):andThen(function(p2)
 				-- upvalues: default (copy), var9 (copy), var6 (copy), var7 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var8 (copy)
 				if p2 then
 					default:detectURL(var9)

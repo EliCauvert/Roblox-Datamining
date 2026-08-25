@@ -9,7 +9,7 @@ local default = require(parent.LoggingProtocol).default
 local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
 local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 
-return function(p0, p1) --[[ line: 14 | named "handleEconomicRestrictionError" ]]
+return function(p0, p1)
 	-- upvalues: parseErrorReasonToEconomicRestriction (ref), default (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
 	local var4 = parseErrorReasonToEconomicRestriction(p0)
 	default:logRobloxTelemetryCounter(universalEconomicRestrictionsCounter, 1, {

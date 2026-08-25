@@ -9,12 +9,12 @@ local t = {
 	lastUpdated = { 2026, 7, 7 }
 }
 
-local function defaultEmit(p0, p1, p2) --[[ line: 66 ]]
+local function defaultEmit(p0, p1, p2)
 	-- upvalues: loggingProtocolModule (ref)
 	loggingProtocolModule.default:logRobloxTelemetryCounter(p0, p1, p2)
 end
 
-return function(p3, p4, p5, p6) --[[ line: 80 | named "reportMomentSkip" ]]
+return function(p3, p4, p5, p6)
 	-- upvalues: getFFlagMomentsAnalyticsSchemaIdentityModule (ref), defaultEmit (ref), t (ref)
 	if not getFFlagMomentsAnalyticsSchemaIdentityModule() then return end
 	local t_1 = { surface = p3, reason = p4 }

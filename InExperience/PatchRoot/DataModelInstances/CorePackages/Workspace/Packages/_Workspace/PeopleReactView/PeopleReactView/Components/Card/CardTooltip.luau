@@ -16,14 +16,14 @@ local view = foundationModule.View
 local constantsModule = require(peopleReactView.Constants)
 local getFFlagFixPeoplePageCardTooltip = peopleServiceModule.getService("Flags").GetFFlagFixPeoplePageCardTooltip
 
-return function(p0) --[[ line: 33 | named "CardTooltip" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), getFFlagFixPeoplePageCardTooltip (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), view (ref), stateLayerMode (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	local var6 = useTokens()
 	local uDim2 = UDim2.fromScale(1.75, 0)
 	
 	if getFFlagFixPeoplePageCardTooltip() then
 		local var8 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
-		uDim2 = reactModule.useMemo(function() --[[ line: 41 ]]
+		uDim2 = reactModule.useMemo(function()
 			-- upvalues: var8 (ref)
 			return if var8 then UDim2.fromScale(1, 0) else UDim2.fromScale(1.75, 0)
 		end, { var8 })

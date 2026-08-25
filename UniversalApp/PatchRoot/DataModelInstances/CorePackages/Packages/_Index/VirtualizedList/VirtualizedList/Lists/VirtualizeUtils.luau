@@ -4,7 +4,7 @@ local httpService = game:GetService("HttpService")
 local t = {}
 local invariantModule = require(parent.jsUtils.invariant)
 
-local function elementsThatOverlapOffsets(value, p0, p1) --[[ line: 26 ]]
+local function elementsThatOverlapOffsets(value, p0, p1)
 	-- upvalues: invariantModule (ref), httpService (ref)
 	local t = {}
 	local var5 = 0
@@ -33,11 +33,11 @@ end
 
 t.elementsThatOverlapOffsets = elementsThatOverlapOffsets
 
-function t.newRangeCount(p2, p3) --[[ line: 65 ]]
+function t.newRangeCount(p2, p3)
 	return p3.last - p3.first + 1 - math.max(0, math.min(p3.last, p2.last) + 1 - math.max(p3.first, p2.first))
 end
 
-function t.computeWindowedRenderLimits(p4, p5, p6, p7, p8, p9, p10) --[[ line: 82 ]]
+function t.computeWindowedRenderLimits(p4, p5, p6, p7, p8, p9, p10)
 	-- upvalues: elementsThatOverlapOffsets (ref), error (ref), httpService (ref)
 	local var8 = p5(p4)
 	
@@ -106,7 +106,7 @@ function t.computeWindowedRenderLimits(p4, p5, p6, p7, p8, p9, p10) --[[ line: 8
 	return { first = unpacked_1, last = unpacked_2 }
 end
 
-function t.keyExtractor(p11, p12) --[[ line: 204 ]]
+function t.keyExtractor(p11, p12)
 	return if typeof(p11) == "table" and p11.key ~= nil then p11.key elseif typeof(p11) == "table" and p11.id ~= nil then p11.id else tostring(p12)
 end
 

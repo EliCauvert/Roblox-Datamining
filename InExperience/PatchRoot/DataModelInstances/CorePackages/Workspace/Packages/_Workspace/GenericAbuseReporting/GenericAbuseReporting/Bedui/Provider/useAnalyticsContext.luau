@@ -2,7 +2,7 @@
 local reactModule = require(genericAbuseReporting.Parent.React)
 local abuseReportAnalyticsContextModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsContext)
 
-return function() --[[ line: 7 | named "useAnalyticsContext" ]]
+return function()
 	-- upvalues: reactModule (ref), abuseReportAnalyticsContextModule (ref)
 	return reactModule.useContext(abuseReportAnalyticsContextModule)
 end

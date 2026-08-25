@@ -37,7 +37,7 @@ local var6 = graphQLEnumType.new({
 var3 = graphQLInterfaceType.new({
 	name = "Character",
 	description = "A character in the Star Wars Trilogy",
-	fields = function() --[[ line: 127 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var3 (write), var6 (ref)
 		return map.new({
 			{
@@ -77,7 +77,7 @@ var3 = graphQLInterfaceType.new({
 			}
 		})
 	end,
-	resolveType = function(p0) --[[ line: 166 ]]
+	resolveType = function(p0)
 		-- upvalues: var4 (write), var5 (write)
 		if p0.type == "Human" then
 			return var4.name
@@ -90,7 +90,7 @@ var3 = graphQLInterfaceType.new({
 var4 = graphQLObjectType.new({
 	name = "Human",
 	description = "A humanoid creature in the Star Wars universe.",
-	fields = function() --[[ line: 195 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var3 (write), getFriends (ref), var6 (ref), error (ref)
 		return map.new({
 			{
@@ -112,7 +112,7 @@ var4 = graphQLObjectType.new({
 				{
 					description = "The friends of the human, or an empty list if they have none.",
 					type = graphQLList.new(var3),
-					resolve = function(p1) --[[ line: 216 ]]
+					resolve = function(p1)
 						-- upvalues: getFriends (copy)
 						return getFriends(p1)
 					end
@@ -137,7 +137,7 @@ var4 = graphQLObjectType.new({
 				{
 					description = "Where are they from and how they came to be who they are.",
 					type = graphQLString,
-					resolve = function() --[[ line: 240 ]]
+					resolve = function()
 						-- upvalues: error (copy)
 						error(error("secretBackstory is secret."))
 					end
@@ -150,7 +150,7 @@ var4 = graphQLObjectType.new({
 var5 = graphQLObjectType.new({
 	name = "Droid",
 	description = "A mechanical creature in the Star Wars universe.",
-	fields = function() --[[ line: 266 ]]
+	fields = function()
 		-- upvalues: map (ref), graphQLNonNull (ref), graphQLString (ref), graphQLList (ref), var3 (write), getFriends (ref), var6 (ref), error (ref)
 		return map.new({
 			{
@@ -172,7 +172,7 @@ var5 = graphQLObjectType.new({
 				{
 					description = "The friends of the droid, or an empty list if they have none.",
 					type = graphQLList.new(var3),
-					resolve = function(p2) --[[ line: 287 ]]
+					resolve = function(p2)
 						-- upvalues: getFriends (copy)
 						return getFriends(p2)
 					end
@@ -190,7 +190,7 @@ var5 = graphQLObjectType.new({
 				{
 					description = "Construction date and the name of the designer.",
 					type = graphQLString,
-					resolve = function() --[[ line: 304 ]]
+					resolve = function()
 						-- upvalues: error (copy)
 						error(error("secretBackstory is secret."))
 					end
@@ -212,7 +212,7 @@ return {
 	StarWarsSchema = graphQLSchema.new({
 		query = graphQLObjectType.new({
 			name = "Query",
-			fields = function() --[[ line: 337 ]]
+			fields = function()
 				-- upvalues: map (ref), var3 (write), var6 (ref), getHero (ref), var4 (write), graphQLNonNull (ref), graphQLString (ref), getHuman (ref), var5 (write), getDroid (ref)
 				return map.new({
 					{
@@ -225,7 +225,7 @@ return {
 									type = var6
 								}
 							},
-							resolve = function(_, p3) --[[ line: 349 ]]
+							resolve = function(_, p3)
 								-- upvalues: getHero (copy)
 								return getHero(p3.episode)
 							end
@@ -241,7 +241,7 @@ return {
 									type = graphQLNonNull.new(graphQLString)
 								}
 							},
-							resolve = function(_, p4) --[[ line: 364 ]]
+							resolve = function(_, p4)
 								-- upvalues: getHuman (copy)
 								return getHuman(p4.id)
 							end
@@ -257,7 +257,7 @@ return {
 									type = graphQLNonNull.new(graphQLString)
 								}
 							},
-							resolve = function(_, p5) --[[ line: 379 ]]
+							resolve = function(_, p5)
 								-- upvalues: getDroid (copy)
 								return getDroid(p5.id)
 							end

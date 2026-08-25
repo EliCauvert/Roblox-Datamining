@@ -12,7 +12,7 @@ local components = coreGuiCommonModule.Components
 local view = foundationModule.View
 local fFlagEnableUISelector = coreGuiCommonModule.Flags.FFlagEnableUISelector
 
-return function() --[[ line: 24 | named "renderInExperienceOverlay" ]]
+return function()
 	-- upvalues: coreGuiService (ref), reactModule (ref), foundationModule (ref), localizationModule (ref), localization (ref), localizationService (ref), view (ref), components (ref), fFlagEnableUISelector (ref), songbirdModule (ref), reactRobloxModule (ref)
 	local inExperienceOverlay = Instance.new("ScreenGui")
 	inExperienceOverlay.Name = "InExperienceOverlay"

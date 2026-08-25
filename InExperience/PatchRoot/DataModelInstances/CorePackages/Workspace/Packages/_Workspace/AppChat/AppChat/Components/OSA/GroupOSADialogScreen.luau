@@ -9,7 +9,7 @@ local enumScreensModule = require(appChat.EnumScreens)
 local groupOSADialogModule = require(script.Parent.GroupOSADialog)
 local appChatGroupOsaDisablePortal = game:DefineFastFlag("AppChatGroupOsaDisablePortal", false)
 
-return function() --[[ line: 17 | named "GroupOSADialogScreen" ]]
+return function()
 	-- upvalues: useNavigation (ref), useDispatch (ref), reactModule (ref), API (ref), enumScreensModule (ref), removedConversationModule (ref), groupOSADialogModule (ref), appChatGroupOsaDisablePortal (ref)
 	local var6 = useNavigation()
 	local var7 = useDispatch()
@@ -17,13 +17,13 @@ return function() --[[ line: 17 | named "GroupOSADialogScreen" ]]
 	
 	return reactModule.createElement(groupOSADialogModule, {
 		conversationId = conversationId,
-		onClose = reactModule.useCallback(function() --[[ line: 24 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: var6 (ref)
 			if var6.isFocused() then
 				var6.goBack()
 			end
 		end, { var6 }),
-		onJoin = reactModule.useCallback(function() --[[ line: 30 ]]
+		onJoin = reactModule.useCallback(function()
 			-- upvalues: conversationId (ref), var7 (ref), API (copy), var6 (ref), enumScreensModule (copy)
 			if conversationId then
 				var7(API(conversationId))
@@ -33,7 +33,7 @@ return function() --[[ line: 17 | named "GroupOSADialogScreen" ]]
 				conversationId = conversationId
 			})
 		end, { var6, conversationId, var7 }),
-		onDecline = reactModule.useCallback(function() --[[ line: 41 ]]
+		onDecline = reactModule.useCallback(function()
 			-- upvalues: conversationId (ref), var7 (ref), removedConversationModule (copy), var6 (ref)
 			if conversationId then
 				var7(removedConversationModule(conversationId))

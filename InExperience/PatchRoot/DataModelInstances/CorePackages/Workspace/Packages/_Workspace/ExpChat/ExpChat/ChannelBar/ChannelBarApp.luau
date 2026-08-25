@@ -25,7 +25,7 @@ local channelBarModule = require(script.Parent.UI.ChannelBar)
 local channelBarApp = roactModule.Component:extend("ChannelBarApp")
 
 if fFlagExpChatUseChatConfigStore then
-	function channelBarApp.init(p0) --[[ line: 34 ]]
+	function channelBarApp.init(p0)
 		-- upvalues: getChatConfigurationStoreModule (ref)
 		p0.chatConfigStore = getChatConfigurationStoreModule(false)
 		p0.state = {
@@ -33,9 +33,9 @@ if fFlagExpChatUseChatConfigStore then
 		}
 	end
 	
-	function channelBarApp.didMount(p1) --[[ line: 41 ]]
+	function channelBarApp.didMount(p1)
 		-- upvalues: createEffect (ref)
-		p1.updateChannelTabsSettingsEffect = createEffect(function(p2) --[[ line: 43 ]]
+		p1.updateChannelTabsSettingsEffect = createEffect(function(p2)
 			-- upvalues: p1 (ref)
 			p1:setState({
 				channelTabsSettings = p1.chatConfigStore.getChannelTabsSettings(p2)
@@ -43,12 +43,12 @@ if fFlagExpChatUseChatConfigStore then
 		end)
 	end
 	
-	function channelBarApp.willUnmount(p3) --[[ line: 51 ]]
+	function channelBarApp.willUnmount(p3)
 		p3.updateChannelTabsSettingsEffect()
 		p3.updateChannelTabsSettingsEffect = nil
 	end
 end
-function channelBarApp.render(p4) --[[ line: 57 ]]
+function channelBarApp.render(p4)
 	-- upvalues: fFlagExpChatUseChatConfigStore (ref), reactModule (ref), channelBarModule (ref), fFlagExpChatLogGlobalChatTabClickedModule (ref), analytics (ref), fFlagGlobalTextChatAddPlaySessionFieldModule (ref)
 	return reactModule.createElement(channelBarModule, {
 		channelTabsSettings = if fFlagExpChatUseChatConfigStore then p4.state.channelTabsSettings else p4.props.channelTabsSettings,
@@ -56,7 +56,7 @@ function channelBarApp.render(p4) --[[ line: 57 ]]
 		allChannelTabs = p4.props.allChannelTabs,
 		allTextChannels = p4.props.allTextChannels,
 		selectedTabName = p4.props.selectedTabName,
-		onTabSelected = function(value, p5, p6, p7) --[[ line: 72 ]]
+		onTabSelected = function(value, p5, p6, p7)
 			-- upvalues: fFlagExpChatLogGlobalChatTabClickedModule (copy), p4 (ref), analytics (copy), fFlagGlobalTextChatAddPlaySessionFieldModule (copy)
 			if p7 == "UniverseChat" and fFlagExpChatLogGlobalChatTabClickedModule and p6 ~= p4.props.selectedTabName then
 				local cloned = table.clone(analytics.DefaultStandardizedFields)
@@ -77,7 +77,7 @@ function channelBarApp.render(p4) --[[ line: 57 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p8) --[[ line: 100 ]]
+return roactRoduxModule.connect(function(p8)
 	-- upvalues: fFlagExpChatUseChatConfigStore (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), configModule (ref)
 	return {
 		channelTabsSettings = if fFlagExpChatUseChatConfigStore then nil elseif getFFlagExpChatEnableChannelTabsUIModule() then p8.ChatLayout.ChannelTabsSettings else {
@@ -95,10 +95,10 @@ return roactRoduxModule.connect(function(p8) --[[ line: 100 ]]
 		selectedTabName = if getFFlagExpChatEnableChannelTabsUIModule() then p8.ChannelTabs.selectedTabName else "",
 		allTextChannels = p8.TextChannels.allTextChannels
 	}
-end, function(p9) --[[ line: 119 ]]
+end, function(p9)
 	-- upvalues: universeChatChannelSelected (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatChannelSelected (ref), fFlagExpChatSelectTextChatTabByName (ref), textChatChannelSelected (ref), targetTextChannelPropertyChanged (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
 	return {
-		onTabSelected = function(value, p10, p11, p12) --[[ line: 121 ]]
+		onTabSelected = function(value, p10, p11, p12)
 			-- upvalues: p9 (ref), universeChatChannelSelected (copy), fFlagExpChatEnableFriendsTab (copy), friendsChatChannelSelected (copy), fFlagExpChatSelectTextChatTabByName (copy), textChatChannelSelected (copy), targetTextChannelPropertyChanged (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy)
 			if p12 == "UniverseChat" then
 				p9(universeChatChannelSelected(p11))

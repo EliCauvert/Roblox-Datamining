@@ -4,7 +4,7 @@ local entryStorageModule = require(script.Parent.EntryStorage)
 local _ = require(whatsNew.Types)
 local playersService = game:GetService("Players")
 
-local function _() --[[ line: 18 | named "getAccountAgeDays" ]]
+local function _()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -12,7 +12,7 @@ local function _() --[[ line: 18 | named "getAccountAgeDays" ]]
 end
 
 return {
-	createResolveDeps = function(p0) --[[ line: 26 ]]
+	createResolveDeps = function(p0)
 		-- upvalues: playersService (ref), entryStorageModule (ref), constantsModule (ref)
 		p0 = p0 or {}
 		local accountAgeDays = p0.accountAgeDays

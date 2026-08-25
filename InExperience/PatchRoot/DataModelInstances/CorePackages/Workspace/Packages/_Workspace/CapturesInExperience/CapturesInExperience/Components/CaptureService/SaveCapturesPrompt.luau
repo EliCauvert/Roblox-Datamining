@@ -23,11 +23,11 @@ local saveCapturesPromptFinishedModule = require(parent.Thunks.SaveCapturesPromp
 local _ = require(parent.Types)
 local fFlagCapturePermissionsPromptFreeMouseModule = require(parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-local _ = function(p0) --[[ line: 54 ]]
+local _ = function(p0)
 	return typeof(p0) == "Content" and (p0.Object ~= nil and p0.Object:IsA("VideoCapture"))
 end
 
-local _ = function(p1) --[[ line: 58 ]]
+local _ = function(p1)
 	for i, v in p1 do
 		if typeof(v) == "Content" and (v.Object ~= nil and v.Object:IsA("VideoCapture")) then
 			return true
@@ -36,7 +36,7 @@ local _ = function(p1) --[[ line: 58 ]]
 	return false
 end
 
-return function(p2) --[[ line: 69 ]]
+return function(p2)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useScreenSize (ref), reactModule (ref), useLocalization (ref), usePinInputStateWhileOpenModule (ref), fFlagCapturePermissionsPromptFreeMouseModule (ref), eventNamesModule (ref), useEffectOnce (ref), saveCapturesPromptFinishedModule (ref), buttonType (ref), view (ref), capturePromptItemModule (ref), text (ref), icon (ref), interactiveAlert (ref)
 	local var25, var24
 	local var12 = useAnalyticsModule()
@@ -61,17 +61,17 @@ return function(p2) --[[ line: 69 ]]
 				yes = "Feature.Captures.Action.Save"
 			})
 			usePinInputStateWhileOpenModule(fFlagCapturePermissionsPromptFreeMouseModule)
-			reactModule.useEffect(function() --[[ line: 93 ]]
+			reactModule.useEffect(function()
 				-- upvalues: var12 (ref), eventNamesModule (copy)
 				var12.fireEvent(eventNamesModule.SaveCapturesPromptViewed)
 			end, {})
-			reactModule.useEffect(function() --[[ line: 97 ]]
+			reactModule.useEffect(function()
 				-- upvalues: var24 (ref), var12 (ref), eventNamesModule (copy)
 				if var24 then
 					var12.fireEvent(eventNamesModule.SaveCapturesPromptVideoPrompted)
 				end
 			end, { var24 })
-			useEffectOnce(function() --[[ line: 103 ]]
+			useEffectOnce(function()
 				-- upvalues: contents (ref), var22 (ref)
 				local t = {}
 				
@@ -80,9 +80,9 @@ return function(p2) --[[ line: 69 ]]
 				end
 				var22(t)
 			end, { contents })
-			local var27 = reactModule.useCallback(function(p3) --[[ line: 111 ]]
+			local var27 = reactModule.useCallback(function(p3)
 				-- upvalues: var22 (ref), var19 (ref)
-				var22(function(p4) --[[ line: 112 ]]
+				var22(function(p4)
 					-- upvalues: var19 (copy), p3 (ref)
 					local cloned = table.clone(p4)
 					cloned[var19] = p3
@@ -90,15 +90,15 @@ return function(p2) --[[ line: 69 ]]
 					return cloned
 				end)
 			end, { var19 })
-			local var28 = reactModule.useCallback(function(p5) --[[ line: 119 ]]
+			local var28 = reactModule.useCallback(function(p5)
 				-- upvalues: var16 (ref)
 				var16(p5.AbsoluteSize)
 			end, { var16 })
-			local var29 = reactModule.useCallback(function(p6) --[[ line: 123 ]]
+			local var29 = reactModule.useCallback(function(p6)
 				-- upvalues: var18 (ref)
 				var18(p6.AbsoluteSize)
 			end, { var18 })
-			local var30 = reactModule.useCallback(function() --[[ line: 127 ]]
+			local var30 = reactModule.useCallback(function()
 				-- upvalues: var21 (ref), contents (ref), var12 (ref), eventNamesModule (copy), var13 (ref), saveCapturesPromptFinishedModule (copy), p2 (ref)
 				local var35 = 0
 				local var36 = 0
@@ -124,7 +124,7 @@ return function(p2) --[[ line: 69 ]]
 				var12.fireEvent(eventNamesModule.SaveCapturesPromptAccepted, { savedCaptures = var35, totalCaptures = var36 })
 				var13(saveCapturesPromptFinishedModule(p2.promptId, t))
 			end, { p2.promptData, p2.promptId, var21 })
-			var25 = reactModule.useCallback(function() --[[ line: 156 ]]
+			var25 = reactModule.useCallback(function()
 				-- upvalues: p2 (ref), var12 (ref), eventNamesModule (copy), var13 (ref), saveCapturesPromptFinishedModule (copy)
 				local var40
 				for i, v in p2.promptData.contents do
@@ -146,11 +146,11 @@ return function(p2) --[[ line: 69 ]]
 				end
 				var40 = false
 			end, { p2.promptData, p2.promptId })
-			local var31 = reactModule.useCallback(function() --[[ line: 170 ]]
+			local var31 = reactModule.useCallback(function()
 				-- upvalues: var20 (ref), var19 (ref)
 				var20(math.max(1, var19 - 1))
 			end, { var19 })
-			local var32 = reactModule.useCallback(function() --[[ line: 174 ]]
+			local var32 = reactModule.useCallback(function()
 				-- upvalues: var20 (ref), contents (ref), var19 (ref)
 				var20(math.min(#contents, var19 + 1))
 			end, { contents, var19 })
@@ -158,7 +158,7 @@ return function(p2) --[[ line: 69 ]]
 			return reactModule.createElement(interactiveAlert, {
 				isMiddleContentFocusable = false,
 				bodyText = var26.bodyText,
-				buttonStackInfo = reactModule.useMemo(function() --[[ line: 178 ]]
+				buttonStackInfo = reactModule.useMemo(function()
 					-- upvalues: var25 (ref), var26 (ref), buttonType (copy), var23 (ref), var30 (ref)
 					return {
 						buttons = {
@@ -180,7 +180,7 @@ return function(p2) --[[ line: 69 ]]
 						}
 					}
 				end, { var26, var30, var25 }),
-				middleContent = reactModule.useCallback(function() --[[ line: 204 ]]
+				middleContent = reactModule.useCallback(function()
 					-- upvalues: var15 (ref), var17 (ref), var14 (ref), reactModule (copy), view (copy), var29 (ref), capturePromptItemModule (copy), contents (ref), var19 (ref), var21 (ref), var27 (ref), text (copy), var31 (ref), icon (copy), var32 (ref)
 					return reactModule.createElement(view, {
 						Size = UDim2.new(1, 0, 0, 200),

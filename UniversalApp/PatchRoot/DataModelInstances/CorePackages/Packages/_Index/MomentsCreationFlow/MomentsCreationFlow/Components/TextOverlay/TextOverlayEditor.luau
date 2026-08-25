@@ -18,7 +18,7 @@ local slider = foundationModule.Slider
 local view = foundationModule.View
 local textOverlay = momentsCommonModule.TextOverlay
 
-return function(p0) --[[ line: 41 | named "TextOverlayEditor" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useRef (ref), useBinding (ref), useState (ref), useOnScreenKeyboardHeightModule (ref), useCallback (ref), dashModule (ref), useEffectOnceModule (ref), reactModule (ref), textService (ref), view (ref), foundationModule (ref), slider (ref), knob (ref), textOverlay (ref)
 	local var8 = useDeviceInsets()
 	local var9 = useTokens()
@@ -27,13 +27,13 @@ return function(p0) --[[ line: 41 | named "TextOverlayEditor" ]]
 	local var13, var14 = useState(Vector2.new(0, 0))
 	local var15 = useOnScreenKeyboardHeightModule()
 	local var16 = p0.textOverlayEdits and p0.textOverlayEdits[1]
-	local var17 = useCallback(function() --[[ line: 51 ]]
+	local var17 = useCallback(function()
 		-- upvalues: var10 (ref)
 		if var10.current then
 			var10.current:CaptureFocus()
 		end
 	end, {})
-	local var18 = useCallback(function(p1) --[[ line: 57 ]]
+	local var18 = useCallback(function(p1)
 		-- upvalues: p0 (ref), dashModule (copy), var16 (ref)
 		local charCount = utf8.len(p1.Text)
 		
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 41 | named "TextOverlayEditor" ]]
 		end
 		p0.onTextOverlayUpdated({ dashModule.joinDeep(var16, { text = p1.Text }) })
 	end, { var16, p0.onTextOverlayUpdated })
-	local var19 = useCallback(function(p2) --[[ line: 69 ]]
+	local var19 = useCallback(function(p2)
 		-- upvalues: p0 (ref), dashModule (copy), var16 (ref)
 		if p0.textOverlayEdits then
 			p0.onTextOverlayUpdated({
@@ -52,15 +52,15 @@ return function(p0) --[[ line: 41 | named "TextOverlayEditor" ]]
 			return
 		end
 	end, { p0.onTextOverlayUpdated, var16 })
-	local var20 = useCallback(function(p3) --[[ line: 82 ]]
+	local var20 = useCallback(function(p3)
 		-- upvalues: var14 (ref)
 		var14(p3.AbsoluteSize)
 	end, {})
-	useEffectOnceModule(function() --[[ line: 86 ]]
+	useEffectOnceModule(function()
 		-- upvalues: var17 (ref)
 		var17()
 	end, var10.current ~= nil and p0.textOverlayEdits ~= nil)
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var15 (ref), var12 (ref), textService (copy), var13 (ref)
 		if not var16 then return end
 		if var15 == 0 then

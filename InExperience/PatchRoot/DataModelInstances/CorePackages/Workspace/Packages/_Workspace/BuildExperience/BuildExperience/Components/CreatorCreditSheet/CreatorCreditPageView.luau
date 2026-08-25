@@ -21,18 +21,18 @@ local inputSize = foundationModule.Enums.InputSize
 local progressShape = foundationModule.Enums.ProgressShape
 local progressSize = foundationModule.Enums.ProgressSize
 
-local function noop() --[[ line: 30 ]] end
+local function noop() end
 
-local function _(value) --[[ line: 50 | named "clampPct" ]]
+local function _(value)
 	return if value < 0 then 0 elseif value > 100 then 100 else value
 end
 
-local _ = function(p0) --[[ line: 59 | named "formatNumber" ]]
+local _ = function(p0)
 	-- upvalues: numberLocalization (ref), localizationService (ref)
 	return numberLocalization.localize(string.format("%.0f", math.floor(p0)), localizationService.RobloxLocaleId)
 end
 
-local function FreeUsageCard(p1) --[[ line: 63 ]]
+local function FreeUsageCard(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), progress (ref), progressShape (ref), progressSize (ref)
 	local CREATOR_CREDIT_FREE_USAGE_LABEL, var12, var13
 	local pctUsed = p1.pctUsed
@@ -99,7 +99,7 @@ local function FreeUsageCard(p1) --[[ line: 63 ]]
 	})
 end
 
-local function RobuxLine(p2) --[[ line: 140 ]]
+local function RobuxLine(p2)
 	-- upvalues: numberLocalization (ref), localizationService (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	local var14 = numberLocalization.localize(string.format("%.0f", math.floor(p2.amount)), localizationService.RobloxLocaleId)
 	local usedOf = p2.usedOf
@@ -150,7 +150,7 @@ local function RobuxLine(p2) --[[ line: 140 ]]
 	})
 end
 
-local function AdditionalUsageCard(p3) --[[ line: 214 ]]
+local function AdditionalUsageCard(p3)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), toggle (ref), inputSize (ref), RobuxLine (ref), button (ref), buttonVariant (ref), noop (ref)
 	local CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL, CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL, CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION, CREATOR_CREDIT_SET_DAILY_LIMIT, CREATOR_CREDIT_MANAGE_LIMIT, CREATOR_CREDIT_SETTINGS_SAVE_ERROR, CREATOR_CREDIT_BUY_ROBUX_BUTTON
 	local var17 = if fFlagBuildLocalization then useLocalization({
@@ -212,7 +212,7 @@ local function AdditionalUsageCard(p3) --[[ line: 214 ]]
 				size = inputSize.Medium,
 				isChecked = p3.additionalEnabled,
 				isDisabled = p3.settingsDisabled == true,
-				onActivated = function(p4) --[[ line: 290 ]]
+				onActivated = function(p4)
 					-- upvalues: p3 (ref)
 					if not p3.settingsDisabled then
 						p3.onToggleAdditional(p4)
@@ -296,7 +296,7 @@ local function AdditionalUsageCard(p3) --[[ line: 214 ]]
 	}, t)
 end
 
-return function(p5) --[[ line: 383 | named "CreatorCreditPageView" ]]
+return function(p5)
 	-- upvalues: reactModule (ref), view (ref), FreeUsageCard (ref), AdditionalUsageCard (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-y-xlarge",

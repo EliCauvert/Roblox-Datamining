@@ -8,7 +8,7 @@ local t = {
 	[presenceType.Online] = presenceTypes.Online
 }
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: presenceTypes (ref), t (ref)
 	return if p0 then if type(p0) == "string" and p0 ~= "" then presenceTypes[p0] else t[p0] else nil
 end

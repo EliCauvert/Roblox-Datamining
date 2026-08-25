@@ -40,9 +40,9 @@ local t = {
 }
 local disclaimerLinks = roactModule.PureComponent:extend("DisclaimerLinks")
 
-function disclaimerLinks.init(p0) --[[ line: 62 ]]
+function disclaimerLinks.init(p0)
 	-- upvalues: openExternalBrowserModule (ref), appPage (ref), transitionAnimationModule (ref), urlBuilder (ref), authFormInteraction (ref), eventStreamConstants (ref)
-	function p0.openDisclaimerLink(p1) --[[ line: 63 ]]
+	function p0.openDisclaimerLink(p1)
 		-- upvalues: p0 (ref), openExternalBrowserModule (copy), appPage (copy), transitionAnimationModule (copy)
 		if p0.props.useExternalBrowserForDisclaimerLinks then
 			openExternalBrowserModule(p0.props.linking, p1)
@@ -59,7 +59,7 @@ function disclaimerLinks.init(p0) --[[ line: 62 ]]
 		})
 	end
 	
-	function p0.openTermsLink() --[[ line: 78 ]]
+	function p0.openTermsLink()
 		-- upvalues: urlBuilder (copy), p0 (ref), authFormInteraction (copy), eventStreamConstants (copy)
 		local var16 = urlBuilder.static.about.terms()
 		
@@ -69,7 +69,7 @@ function disclaimerLinks.init(p0) --[[ line: 62 ]]
 		p0.openDisclaimerLink(var16)
 	end
 	
-	function p0.openPrivacyLink() --[[ line: 86 ]]
+	function p0.openPrivacyLink()
 		-- upvalues: urlBuilder (copy), p0 (ref), authFormInteraction (copy), eventStreamConstants (copy)
 		local var17 = urlBuilder.static.about.privacy()
 		
@@ -80,7 +80,7 @@ function disclaimerLinks.init(p0) --[[ line: 62 ]]
 	end
 end
 
-function disclaimerLinks.render(p2) --[[ line: 95 ]]
+function disclaimerLinks.render(p2)
 	-- upvalues: withLocalization (ref), withStyle (ref), uiMode (ref), fFlagFoundationStylingOnSignUp (ref), t (ref), text (ref), fitChildrenModule (ref), roactModule (ref), imageSetLabel (ref), getFFlagEnableAuditForSinglePageSignUp (ref), registerAuditContentModule (ref), registerAdditionalAuditContentModule (ref), urlBuilder (ref), contextualMenu (ref), menuDirection (ref), linkButton (ref), cryoModule (ref), disclaimerLinkButtonsModule (ref)
 	local isDualLayout = p2.props.isDualLayout
 	local loginView = p2.props.tokens.LuaApps.LoginView
@@ -91,9 +91,9 @@ function disclaimerLinks.render(p2) --[[ line: 95 ]]
 		termsOfUseTextLong = "CommonUI.Features.Label.TermsOfUse",
 		privacyPolicyText = "CommonUI.Features.Label.Privacy",
 		privacyPolicyTextLong = "CommonUI.Features.Label.PrivacyPolicy"
-	})(function(p3) --[[ line: 106 ]]
+	})(function(p3)
 		-- upvalues: withStyle (copy), p2 (ref), uiMode (copy), fFlagFoundationStylingOnSignUp (copy), t (copy), isDualLayout (ref), text (copy), var18 (ref), fitChildrenModule (copy), roactModule (copy), imageSetLabel (copy), loginView (ref), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy), contextualMenu (copy), menuDirection (copy), linkButton (copy), cryoModule (copy), disclaimerLinkButtonsModule (copy)
-		return withStyle(function(p4) --[[ line: 107 ]]
+		return withStyle(function(p4)
 			-- upvalues: p2 (copy), uiMode (copy), fFlagFoundationStylingOnSignUp (copy), t (copy), isDualLayout (copy), p3 (ref), text (copy), var18 (copy), fitChildrenModule (copy), roactModule (copy), imageSetLabel (copy), loginView (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy), contextualMenu (copy), menuDirection (copy), linkButton (copy), cryoModule (copy), disclaimerLinkButtonsModule (copy)
 			local var19 = p2.props.uiModeInfo.uiMode == uiMode.TenFoot
 			local layoutOrder = p2.props.LayoutOrder
@@ -109,7 +109,7 @@ function disclaimerLinks.render(p2) --[[ line: 95 ]]
 			local var27 = if isDualLayout then 2 * (text.GetTextHeight(p3.privacyPolicyText, font, baseSize) + 2 * var18) else text.GetTextHeight(p3.privacyPolicyText, font, baseSize) + var18
 			local var28 = if isDualLayout then "Frame" else fitChildrenModule.FitFrame
 			
-			local var29 = function() --[[ line: 141 ]]
+			local var29 = function()
 				-- upvalues: roactModule (copy), imageSetLabel (copy), loginView (copy), p4 (ref)
 				return {
 					Image = roactModule.createElement(imageSetLabel, {
@@ -125,7 +125,7 @@ function disclaimerLinks.render(p2) --[[ line: 95 ]]
 				}
 			end
 			
-			local var30 = function() --[[ line: 156 ]]
+			local var30 = function()
 				-- upvalues: p2 (copy), getFFlagEnableAuditForSinglePageSignUp (copy), registerAuditContentModule (copy), var23 (ref), roactModule (copy), var21 (ref), var24 (ref), var22 (ref), isDualLayout (copy), p3 (copy), registerAdditionalAuditContentModule (copy), urlBuilder (copy)
 				return if p2.props.enableAuditContentCapture and getFFlagEnableAuditForSinglePageSignUp() then {
 					TermsAuditContent = registerAuditContentModule and (var23 and roactModule.createElement(registerAuditContentModule, { translationKey = var21, translatedSourceString = var23 })),
@@ -144,7 +144,7 @@ function disclaimerLinks.render(p2) --[[ line: 95 ]]
 				} else {}
 			end
 			
-			local var31 = function() --[[ line: 189 ]]
+			local var31 = function()
 				-- upvalues: roactModule (copy), var25 (ref), isDualLayout (copy), contextualMenu (copy), var23 (ref), p4 (ref), p2 (copy), loginView (copy), var29 (ref), var24 (ref), menuDirection (copy), linkButton (copy), var20 (ref), textWidth (ref), font (ref), baseSize (ref)
 				return {
 					UIListLayout = roactModule.createElement("UIListLayout", {

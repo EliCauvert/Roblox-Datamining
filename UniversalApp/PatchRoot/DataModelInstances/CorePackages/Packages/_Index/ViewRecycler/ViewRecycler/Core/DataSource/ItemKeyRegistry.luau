@@ -1,13 +1,13 @@
 ﻿local var0 = 0
 
 return {
-	create = function(p0, p1) --[[ line: 22 ]]
+	create = function(p0, p1)
 		-- upvalues: var0 (write)
 		local t = {}
 		local var2 = `{p1}: keys must be strings`
 		local var3 = `{p1}: setItem must preserve the existing key`
 		
-		local function _(p2, p3) --[[ line: 27 | named "resolve" ]]
+		local function _(p2, p3)
 			-- upvalues: p0 (ref), var0 (copy), var2 (ref)
 			local var4
 			if p0 == nil then
@@ -22,7 +22,7 @@ return {
 		end
 		
 		return {
-			claim = function(p4, p5) --[[ line: 33 ]]
+			claim = function(p4, p5)
 				-- upvalues: p0 (ref), var0 (copy), var2 (ref), t (write), p1 (ref)
 				local var5
 				if p0 == nil then
@@ -40,7 +40,7 @@ return {
 				
 				return var5
 			end,
-			assertPreserved = function(p6, p7, p8) --[[ line: 74 ]]
+			assertPreserved = function(p6, p7, p8)
 				-- upvalues: p0 (ref), var0 (copy), var2 (ref), var3 (ref)
 				if p0 ~= nil then
 					local var6
@@ -54,14 +54,14 @@ return {
 					assert(var6 == p6, var3)
 				end
 			end,
-			release = function(p9) --[[ line: 79 ]]
+			release = function(p9)
 				-- upvalues: t (write), p1 (ref)
 				if t[p9] == nil then
 					assert(false, `{p1}: cannot release missing key "{p9}"`)
 				end
 				t[p9] = nil
 			end,
-			replace = function(p10, p11, p12) --[[ line: 42 ]]
+			replace = function(p10, p11, p12)
 				-- upvalues: p0 (ref), var0 (copy), var2 (ref), t (write), p1 (ref)
 				local var7
 				if p0 == nil then
@@ -84,7 +84,7 @@ return {
 				end
 				return var7
 			end,
-			rebuild = function(p13) --[[ line: 57 ]]
+			rebuild = function(p13)
 				-- upvalues: p0 (ref), var0 (copy), var2 (ref), p1 (ref), t (write)
 				local list = table.create(#p13)
 				local t_1 = {}
@@ -110,21 +110,21 @@ return {
 				
 				return list
 			end,
-			clear = function() --[[ line: 87 ]]
+			clear = function()
 				-- upvalues: t (write)
 				t = {}
 			end,
-			snapshot = function() --[[ line: 90 ]]
+			snapshot = function()
 				-- upvalues: t (write)
 				return table.clone(t)
 			end,
-			restore = function(p14) --[[ line: 93 ]]
+			restore = function(p14)
 				-- upvalues: t (write)
 				t = table.clone(p14)
 			end
 		}
 	end,
-	generatedKey = function() --[[ line: 17 ]]
+	generatedKey = function()
 		-- upvalues: var0 (write)
 		var0 += 1
 		

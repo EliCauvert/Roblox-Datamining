@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "verifySummaryFormat" ]]
+﻿return function(p0, p1)
 	if p0 == nil or typeof(p0) ~= "table" then
 		return false
 	end

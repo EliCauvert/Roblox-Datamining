@@ -6,7 +6,7 @@ local _ = require(parent.Style.Fonts)
 return {
 	DEFAULT_FOOTER_HEIGHT = 22,
 	DEFAULT_TEXT_LINE_COUNT = 2,
-	getDefaultStyleProps = function(p0) --[[ line: 35 ]]
+	getDefaultStyleProps = function(p0)
 		-- upvalues: UIBloxConfigModule (ref)
 		assert(p0.Tokens ~= nil, "Design token support is not enabled!")
 		

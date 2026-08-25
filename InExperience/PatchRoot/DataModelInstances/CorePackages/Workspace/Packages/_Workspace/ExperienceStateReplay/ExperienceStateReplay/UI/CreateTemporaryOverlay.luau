@@ -1,7 +1,7 @@
 ﻿local t = {}
 local var1 = nil
 
-function t.hideOverlay() --[[ line: 12 ]]
+function t.hideOverlay()
 	-- upvalues: var1 (write)
 	if var1 then
 		var1:Destroy()
@@ -9,7 +9,7 @@ function t.hideOverlay() --[[ line: 12 ]]
 	end
 end
 
-function t.showOverlay(p0, p1, p2) --[[ line: 25 ]]
+function t.showOverlay(p0, p1, p2)
 	-- upvalues: t (ref), var1 (write)
 	t.hideOverlay()
 	local textOverlay = Instance.new("Frame")
@@ -35,7 +35,7 @@ function t.showOverlay(p0, p1, p2) --[[ line: 25 ]]
 	overlayLabel.ZIndex = 200
 	textOverlay.Parent = p2
 	var1 = textOverlay
-	task.spawn(function() --[[ line: 66 ]]
+	task.spawn(function()
 		-- upvalues: p1 (ref), var1 (copy), textOverlay (ref), t (copy)
 		task.wait(p1)
 		

@@ -12,7 +12,7 @@ local _ = require(collectionViews.CollectionViewTypes)
 local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
 local luaAppUseDisplayStoreForCollectionLayoutParams = game:DefineFastFlag("LuaAppUseDisplayStoreForCollectionLayoutParams", false)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 35 | named "useCollectionLayoutParams" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: useStore (ref), luaAppUseDisplayStoreForCollectionLayoutParams (ref), displayModule (ref), collectionLayoutCalculatorsModule (ref), fFlagLuaAppLayoutParamsInContext (ref), useTokens (ref), useDesignTokens (ref), usePreferredInput (ref), reactModule (ref), calculateItemWidthModule (ref)
 	local var6 = useStore()
 	local var7 = if luaAppUseDisplayStoreForCollectionLayoutParams then displayModule.GetDisplayStore(false).getViewportSize(false) or Vector2.new(0, 0) else var6:getState().ScreenSize or Vector2.new(0, 0)
@@ -33,31 +33,31 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 35 | named "useCollectionLayo
 		var19.current = p5 or var7
 	end
 	local x = var19.current.X
-	local var20, var21 = reactModule.useState(function() --[[ line: 80 ]]
+	local var20, var21 = reactModule.useState(function()
 		-- upvalues: var9 (ref), p4 (ref), x (ref), var15 (ref), var7 (ref)
 		return var9 or p4.calculateSideMargin(x, var15, var7.X)
 	end)
-	local var22, var23 = reactModule.useState(function() --[[ line: 83 ]]
+	local var22, var23 = reactModule.useState(function()
 		-- upvalues: var10 (ref), p4 (ref), x (ref), var15 (ref), var7 (ref)
 		return var10 or p4.calculateColumnGap(x, var15, var7.X)
 	end)
-	local var24, var25 = reactModule.useState(function() --[[ line: 86 ]]
+	local var24, var25 = reactModule.useState(function()
 		-- upvalues: var12 (ref), p4 (ref), p0 (ref), var16 (ref)
 		return var12 or p4.calculateFractionalItemAmount(p0, var16)
 	end)
-	local var26, var27 = reactModule.useState(function() --[[ line: 90 ]]
+	local var26, var27 = reactModule.useState(function()
 		-- upvalues: var11 (ref), p4 (ref), x (ref), var20 (ref), var22 (ref), p0 (ref), var15 (ref)
 		return var11 or p4.calculateNumColumns(x, var20, var22, p0, var15)
 	end)
-	local var28, var29 = reactModule.useState(function() --[[ line: 94 ]]
+	local var28, var29 = reactModule.useState(function()
 		-- upvalues: var13 (ref), p4 (ref), x (ref)
 		return var13 or p4.calculateLoadMoreThreshold(x)
 	end)
-	local var30, var31 = reactModule.useState(function() --[[ line: 99 ]]
+	local var30, var31 = reactModule.useState(function()
 		-- upvalues: p2 (ref), calculateItemWidthModule (copy), var26 (ref), var22 (ref), var20 (ref), x (ref), var24 (ref)
 		return if p2 then calculateItemWidthModule(var26, var22, var20, x, var24) else 1
 	end)
-	local var32 = reactModule.useCallback(function(p6) --[[ line: 108 ]]
+	local var32 = reactModule.useCallback(function(p6)
 		-- upvalues: luaAppUseDisplayStoreForCollectionLayoutParams (copy), displayModule (copy), var6 (ref), var9 (ref), p4 (ref), var15 (ref), var21 (ref), var10 (ref), var23 (ref), var11 (ref), p0 (ref), var27 (ref), var12 (ref), var16 (ref), var25 (ref), var13 (ref), var29 (ref), var19 (ref), p2 (ref), calculateItemWidthModule (copy), var31 (ref)
 		local x = p6.X
 		local var33 = if luaAppUseDisplayStoreForCollectionLayoutParams then displayModule.GetDisplayStore(false).getViewportSize(false) and displayModule.GetDisplayStore(false).getViewportSize(false).X or 0 else var6:getState().ScreenSize and var6:getState().ScreenSize.X or 0
@@ -78,18 +78,18 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 35 | named "useCollectionLayo
 	end, {
 		p0, p2, var10, var9, var11, var12, var13, var15, var6
 	})
-	reactModule.useEffect(function() --[[ line: 168 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var32 (ref)
 		local var38 = nil
 		
 		if p1 then
 			var32(p1.AbsoluteSize)
-			var38 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 172 ]]
+			var38 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var32 (copy), p1 (copy)
 				var32(p1.AbsoluteSize)
 			end)
 		end
-		return function() --[[ line: 176 ]]
+		return function()
 			-- upvalues: var38 (write)
 			if var38 then
 				var38:Disconnect()

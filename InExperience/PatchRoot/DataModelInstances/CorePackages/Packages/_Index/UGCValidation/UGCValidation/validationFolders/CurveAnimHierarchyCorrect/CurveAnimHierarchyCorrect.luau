@@ -22,7 +22,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 27 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidateMaxTotalInstancesModule (ref), errorSourceStringsModule (ref), curveAnimationHierarchyUtilsModule (ref), getFFlagUGCValidateDuplicatesInAnimationModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref)
 	for i, v in p1.curveAnimations do
 		local count = #v:GetDescendants()

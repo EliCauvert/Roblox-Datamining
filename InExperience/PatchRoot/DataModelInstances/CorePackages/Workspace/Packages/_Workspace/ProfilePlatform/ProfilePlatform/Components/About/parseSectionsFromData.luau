@@ -22,7 +22,7 @@ local list = {
 }
 local list_1 = { "description" }
 
-return function(p0, p1, p2) --[[ line: 37 ]]
+return function(p0, p1, p2)
 	-- upvalues: enumsModule (ref), list_1 (ref), list (ref), t (ref), reactModule (ref)
 	local t_1 = {}
 	

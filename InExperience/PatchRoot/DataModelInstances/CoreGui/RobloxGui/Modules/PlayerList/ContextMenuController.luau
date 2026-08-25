@@ -19,9 +19,9 @@ local var12 = builderIcon("circle-slash")
 local var13 = builderIcon("speech-bubble-exclamation")
 local var14 = builderIcon("magnifying-glass-plus")
 
-local function _(p0, p1) --[[ line: 45 | named "translate" ]]
+local function _(p0, p1)
 	-- upvalues: robloxTranslatorModule (ref)
-	local ok, status = pcall(function() --[[ line: 46 ]]
+	local ok, status = pcall(function()
 		-- upvalues: robloxTranslatorModule (copy), p0 (ref)
 		return robloxTranslatorModule:FormatByKey(p0)
 	end)
@@ -29,12 +29,12 @@ local function _(p0, p1) --[[ line: 45 | named "translate" ]]
 	return if ok and status and status ~= "" then status else p1
 end
 
-local function getFriendLabelAndIcon(p2) --[[ line: 55 ]]
+local function getFriendLabelAndIcon(p2)
 	-- upvalues: robloxTranslatorModule (ref), var11 (ref), var10 (ref)
 	local ok, status
 	if p2 == Enum.FriendStatus.Friend then
 		local var18 = "InGame.PlayerDropDown.Unfriend"
-		ok, status = pcall(function() --[[ line: 46 ]]
+		ok, status = pcall(function()
 			-- upvalues: robloxTranslatorModule (copy), var18 (ref)
 			return robloxTranslatorModule:FormatByKey(var18)
 		end)
@@ -42,7 +42,7 @@ local function getFriendLabelAndIcon(p2) --[[ line: 55 ]]
 		return if ok and status and status ~= "" then status else "Unfriend", var11
 	elseif p2 == Enum.FriendStatus.FriendRequestSent then
 		local var19 = "InGame.PlayerDropDown.CancelRequest"
-		ok, status = pcall(function() --[[ line: 46 ]]
+		ok, status = pcall(function()
 			-- upvalues: robloxTranslatorModule (copy), var19 (ref)
 			return robloxTranslatorModule:FormatByKey(var19)
 		end)
@@ -50,7 +50,7 @@ local function getFriendLabelAndIcon(p2) --[[ line: 55 ]]
 		return if ok and status and status ~= "" then status else "Cancel request", var10
 	elseif p2 == Enum.FriendStatus.FriendRequestReceived then
 		local var20 = "InGame.PlayerDropDown.Accept"
-		ok, status = pcall(function() --[[ line: 46 ]]
+		ok, status = pcall(function()
 			-- upvalues: robloxTranslatorModule (copy), var20 (ref)
 			return robloxTranslatorModule:FormatByKey(var20)
 		end)
@@ -58,7 +58,7 @@ local function getFriendLabelAndIcon(p2) --[[ line: 55 ]]
 		return if ok and status and status ~= "" then status else "Accept request", var10
 	end
 	local var21 = "InGame.PlayerDropDown.Action.ConnectionRequest"
-	ok, status = pcall(function() --[[ line: 46 ]]
+	ok, status = pcall(function()
 		-- upvalues: robloxTranslatorModule (copy), var21 (ref)
 		return robloxTranslatorModule:FormatByKey(var21)
 	end)
@@ -66,11 +66,11 @@ local function getFriendLabelAndIcon(p2) --[[ line: 55 ]]
 	return if ok and status and status ~= "" then status else "Friend request", var10
 end
 
-local _ = function(p3) --[[ line: 69 | named "getFriendTelemetryAction" ]]
+local _ = function(p3)
 	return if p3 == Enum.FriendStatus.Friend then "friend_remove" elseif p3 == Enum.FriendStatus.FriendRequestSent then "friend_cancel" elseif p3 == Enum.FriendStatus.FriendRequestReceived then "friend_accept" else "friend_send"
 end
 
-local function openReportDialog(p4) --[[ line: 80 ]]
+local function openReportDialog(p4)
 	-- upvalues: robloxGui (ref)
 	if require(robloxGui.Modules.isNewInGameMenuEnabled)() then
 		require(robloxGui.Modules.InGameMenuInit).openReportDialog(p4, "PlayerListReskin")
@@ -80,7 +80,7 @@ local function openReportDialog(p4) --[[ line: 80 ]]
 	require(robloxGui.Modules.Settings.Pages.ReportAbuseMenuNewContainerPage):ReportPlayer(p4, "PlayerListReskin")
 end
 
-local function assembleMenuItems(p5) --[[ line: 99 ]]
+local function assembleMenuItems(p5)
 	-- upvalues: getFriendLabelAndIcon (ref), robloxTranslatorModule (ref), var11 (ref), var14 (ref), var12 (ref), var13 (ref)
 	local t = {}
 	
@@ -100,7 +100,7 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 		
 		if var25 then
 			local var28 = "InGame.PlayerDropDown.ConfirmUnfriend"
-			ok, status = pcall(function() --[[ line: 46 ]]
+			ok, status = pcall(function()
 				-- upvalues: robloxTranslatorModule (copy), var28 (ref)
 				return robloxTranslatorModule:FormatByKey(var28)
 			end)
@@ -115,7 +115,7 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 		if p5.friendStatus == Enum.FriendStatus.FriendRequestReceived then
 			local t_2 = { key = "decline", telemetryAction = "friend_decline" }
 			local var30 = "InGame.PlayerDropDown.Decline"
-			ok, status = pcall(function() --[[ line: 46 ]]
+			ok, status = pcall(function()
 				-- upvalues: robloxTranslatorModule (copy), var30 (ref)
 				return robloxTranslatorModule:FormatByKey(var30)
 			end)
@@ -128,7 +128,7 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 	if p5.inspectMenuEnabled then
 		local t_1 = { key = "examine", telemetryAction = "avatar_examine" }
 		local var32 = "InGame.PlayerDropDown.Examine"
-		ok, status = pcall(function() --[[ line: 46 ]]
+		ok, status = pcall(function()
 			-- upvalues: robloxTranslatorModule (copy), var32 (ref)
 			return robloxTranslatorModule:FormatByKey(var32)
 		end)
@@ -143,14 +143,14 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 		
 		if p5.isBlocked then
 			local var34 = "InGame.PlayerDropDown.UnBlock"
-			ok, status = pcall(function() --[[ line: 46 ]]
+			ok, status = pcall(function()
 				-- upvalues: robloxTranslatorModule (copy), var34 (ref)
 				return robloxTranslatorModule:FormatByKey(var34)
 			end)
 			var35 = if ok and status and status ~= "" then status else "Unblock"
 		else
 			local var36 = "InGame.PlayerDropDown.Block"
-			ok, status = pcall(function() --[[ line: 46 ]]
+			ok, status = pcall(function()
 				-- upvalues: robloxTranslatorModule (copy), var36 (ref)
 				return robloxTranslatorModule:FormatByKey(var36)
 			end)
@@ -163,7 +163,7 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 		table.insert(t, t_1)
 		local t_2 = { key = "report", telemetryAction = "user_report" }
 		local var38 = "InGame.PlayerDropDown.Report"
-		ok, status = pcall(function() --[[ line: 46 ]]
+		ok, status = pcall(function()
 			-- upvalues: robloxTranslatorModule (copy), var38 (ref)
 			return robloxTranslatorModule:FormatByKey(var38)
 		end)
@@ -176,7 +176,7 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 end
 
 return {
-	buildMenuData = function(p6, p7, p8) --[[ line: 167 ]]
+	buildMenuData = function(p6, p7, p8)
 		-- upvalues: localPlayer (ref), blockingUtilityModule (ref), assembleMenuItems (ref), guiService (ref), rbxAnalyticsService (ref), requestFriendshipModule (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), robloxGui (ref), openReportDialog (ref), buildMenuHeader (ref)
 		local userId = p6.UserId
 		local var39 = localPlayer ~= nil and p6 == localPlayer
@@ -184,11 +184,11 @@ return {
 		local unknown = Enum.FriendStatus.Unknown
 		
 		if not var39 then
-			pcall(function() --[[ line: 174 ]]
+			pcall(function()
 				-- upvalues: var40 (write), blockingUtilityModule (copy), userId (ref)
 				var40 = blockingUtilityModule:IsPlayerBlockedByUserId(userId)
 			end)
-			pcall(function() --[[ line: 178 ]]
+			pcall(function()
 				-- upvalues: unknown (write), localPlayer (copy), p6 (ref)
 				unknown = localPlayer:GetFriendStatus(p6)
 			end)
@@ -202,7 +202,7 @@ return {
 				friendStatus = unknown,
 				inspectMenuEnabled = guiService:GetInspectMenuEnabled(),
 				actions = {
-					onFriend = function() --[[ line: 190 ]]
+					onFriend = function()
 						-- upvalues: unknown (write), rbxAnalyticsService (copy), localPlayer (copy), p6 (ref), requestFriendshipModule (copy), p7 (ref)
 						if unknown == Enum.FriendStatus.Friend or unknown == Enum.FriendStatus.FriendRequestSent then
 							rbxAnalyticsService:TrackEvent("Game", "RevokeFriendship", "PlayerDropDown")
@@ -214,13 +214,13 @@ return {
 						end
 						p7()
 					end,
-					onDecline = function() --[[ line: 201 ]]
+					onDecline = function()
 						-- upvalues: rbxAnalyticsService (copy), localPlayer (copy), p6 (ref), p7 (ref)
 						rbxAnalyticsService:TrackEvent("Game", "DeclineFriendship", "PlayerDropDown")
 						localPlayer:RevokeFriendship(p6)
 						p7()
 					end,
-					onExamine = function() --[[ line: 206 ]]
+					onExamine = function()
 						-- upvalues: p8 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), guiService (copy), userId (ref), p7 (ref)
 						if p8 then
 							playerContextualMenuStore.setSuppressNextDismissRestore(true)
@@ -229,14 +229,14 @@ return {
 						guiService:InspectPlayerFromUserIdWithCtx(userId, "leaderBoard")
 						p7()
 					end,
-					onBlock = function() --[[ line: 214 ]]
+					onBlock = function()
 						-- upvalues: p8 (ref), var40 (write), playerContextualMenuStore (copy), playerListVisibilityStore (copy), blockingUtilityModule (copy), p6 (ref), robloxGui (copy), p7 (ref)
 						if p8 and not var40 then
 							playerContextualMenuStore.setSuppressNextDismissRestore(true)
 							playerListVisibilityStore.setVisible(false)
 						end
 						if var40 then
-							coroutine.wrap(function() --[[ line: 220 ]]
+							coroutine.wrap(function()
 								-- upvalues: blockingUtilityModule (copy), p6 (copy)
 								blockingUtilityModule:UnblockPlayerAsync(p6)
 							end)()
@@ -245,7 +245,7 @@ return {
 						end
 						p7()
 					end,
-					onReport = function() --[[ line: 229 ]]
+					onReport = function()
 						-- upvalues: p8 (ref), playerContextualMenuStore (copy), playerListVisibilityStore (copy), openReportDialog (copy), p6 (ref), p7 (ref)
 						if p8 then
 							playerContextualMenuStore.setSuppressNextDismissRestore(true)

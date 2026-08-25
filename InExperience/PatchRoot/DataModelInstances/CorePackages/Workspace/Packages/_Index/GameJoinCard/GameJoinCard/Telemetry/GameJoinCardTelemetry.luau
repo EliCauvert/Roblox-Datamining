@@ -14,7 +14,7 @@ local t_1 = {
 }
 
 return {
-	logBannerLoadResult = function(p0) --[[ line: 44 ]]
+	logBannerLoadResult = function(p0)
 		-- upvalues: t_1 (ref), loggingProtocolModule (ref), t (ref)
 		if t_1[p0] then
 			loggingProtocolModule.default:logRobloxTelemetryCounter(t, nil, { status = p0 })

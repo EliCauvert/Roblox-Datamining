@@ -3,7 +3,7 @@ local fireDiagModule = require(script.Parent.fireDiag)
 local fireTelemetryModule = require(script.Parent.fireTelemetry)
 local _ = require(script.Parent.Parent.Types)
 
-local function setupFireEvent(value, p0) --[[ line: 23 ]]
+local function setupFireEvent(value, p0)
 	-- upvalues: fireEventStreamModule (ref), fireDiagModule (ref), fireTelemetryModule (ref)
 	local var4 = if value.analytics.EventStream and p0.EventStream then fireEventStreamModule({
 		eventStreamImpl = value.analytics.EventStream,
@@ -24,7 +24,7 @@ local function setupFireEvent(value, p0) --[[ line: 23 ]]
 		loggerImpl = value.loggerImpl
 	}) else nil
 	
-	return function(p1, p2) --[[ line: 51 ]]
+	return function(p1, p2)
 		-- upvalues: var5 (ref), p0 (ref), var4 (ref), var6 (ref)
 		if var5 and p0.Diag and p0.Diag[p1] then
 			var5(p1, p2)
@@ -39,9 +39,9 @@ local function setupFireEvent(value, p0) --[[ line: 23 ]]
 	end
 end
 
-return function(p3) --[[ line: 72 | named "createFireEvent" ]]
+return function(p3)
 	-- upvalues: setupFireEvent (ref)
-	return function(p4) --[[ line: 73 ]]
+	return function(p4)
 		-- upvalues: setupFireEvent (copy), p3 (ref)
 		return setupFireEvent(p4, p3)
 	end

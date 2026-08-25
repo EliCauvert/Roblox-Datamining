@@ -22,12 +22,12 @@ local argsToArgsConfig = definitionModule.argsToArgsConfig
 local graphQLNonNull = definitionModule.GraphQLNonNull
 local t = nil
 
-function isDirective(p0) --[[ line: 53 ]]
+function isDirective(p0)
 	-- upvalues: instanceOfModule (ref), t (write)
 	return instanceOfModule(p0, t)
 end
 
-function assertDirective(p1) --[[ line: 57 ]]
+function assertDirective(p1)
 	-- upvalues: error (ref), inspect (ref)
 	if not isDirective(p1) then
 		error(error.new(("Expected %s to be a GraphQL directive."):format(inspect(p1))))
@@ -38,7 +38,7 @@ end
 t = {}
 t.__index = t
 
-function t.new(p2) --[[ line: 87 ]]
+function t.new(p2)
 	-- upvalues: toObjMap (ref), devAssert (ref), array (ref), isObjectLike (ref), instanceOfModule (ref), map (ref), coerceToMap (ref), t (write)
 	local t_1 = {
 		name = p2.name,
@@ -52,7 +52,7 @@ function t.new(p2) --[[ line: 87 ]]
 	devAssert(array.isArray(p2.locations), ("@%s locations must be an Array."):format(p2.name))
 	local var11 = if p2.args then p2.args else {}
 	devAssert(isObjectLike(var11) and (not (array.isArray(var11) and next(var11) ~= nil) or instanceOfModule(var11, map)), ("@%s args must be an object with argument names as keys."):format(p2.name))
-	t_1.args = array.map(coerceToMap(var11):entries(), function(p3) --[[ line: 112 ]]
+	t_1.args = array.map(coerceToMap(var11):entries(), function(p3)
 		-- upvalues: toObjMap (copy)
 		local var12 = p3[2]
 		
@@ -70,7 +70,7 @@ function t.new(p2) --[[ line: 87 ]]
 	return setmetatable(t_1, t)
 end
 
-function t:toConfig() --[[ line: 129 ]]
+function t:toConfig()
 	-- upvalues: argsToArgsConfig (ref)
 	return {
 		name = self.name,
@@ -83,15 +83,15 @@ function t:toConfig() --[[ line: 129 ]]
 	}
 end
 
-function t:__tostring() --[[ line: 141 ]]
+function t:__tostring()
 	return self:toString()
 end
 
-function t:toString() --[[ line: 145 ]]
+function t:toString()
 	return "@" .. self.name
 end
 
-function t:toJSON() --[[ line: 149 ]]
+function t:toJSON()
 	return self:toString()
 end
 
@@ -177,9 +177,9 @@ return {
 	GraphQLDeprecatedDirective = var7,
 	GraphQLSpecifiedByDirective = var8,
 	specifiedDirectives = var9,
-	isSpecifiedDirective = function(p4) --[[ line: 277 ]]
+	isSpecifiedDirective = function(p4)
 		-- upvalues: array (ref), var9 (ref)
-		return array.some(var9, function(p5) --[[ line: 278 ]]
+		return array.some(var9, function(p5)
 			-- upvalues: p4 (ref)
 			return p5.name == p4.name
 		end)

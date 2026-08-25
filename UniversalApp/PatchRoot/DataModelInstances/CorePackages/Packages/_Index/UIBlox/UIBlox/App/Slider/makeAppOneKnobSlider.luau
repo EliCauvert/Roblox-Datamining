@@ -10,18 +10,18 @@ local sliderTextInputModule = require(parent.SliderTextInput)
 local withStyleModule = require(parent_2.Core.Style.withStyle)
 local validateStyleModule = require(parent_1.Style.Validator.validateStyle)
 
-local function wrapStyleAndRef(p0) --[[ line: 15 ]]
+local function wrapStyleAndRef(p0)
 	-- upvalues: roactModule (ref), withStyleModule (ref), cryoModule (ref)
-	return roactModule.forwardRef(function(p1, p2) --[[ line: 16 ]]
+	return roactModule.forwardRef(function(p1, p2)
 		-- upvalues: withStyleModule (copy), cryoModule (copy), roactModule (copy), p0 (ref)
-		return withStyleModule(function(p3) --[[ line: 17 ]]
+		return withStyleModule(function(p3)
 			-- upvalues: cryoModule (copy), p1 (ref), p2 (ref), roactModule (copy), p0 (copy)
 			return roactModule.createElement(p0, cryoModule.Dictionary.join(p1, { style = p3, forwardedRef = p2 }))
 		end)
 	end)
 end
 
-return function(p4) --[[ line: 28 | named "makeAppOneKnobSlider" ]]
+return function(p4)
 	-- upvalues: roactModule (ref), makeAppSliderModule (ref), tModule (ref), validateStyleModule (ref), sliderTextInputModule (ref), wrapStyleAndRef (ref)
 	local var8 = roactModule.PureComponent:extend("OneKnobAppSliderFor" .. p4)
 	local var9 = makeAppSliderModule(p4, false)
@@ -57,7 +57,7 @@ return function(p4) --[[ line: 28 | named "makeAppOneKnobSlider" ]]
 		width = UDim.new(1, 0)
 	}
 	
-	function var8.render(p5) --[[ line: 86 ]]
+	function var8.render(p5)
 		-- upvalues: roactModule (copy), var9 (ref), sliderTextInputModule (copy)
 		local props = p5.props
 		local t = {

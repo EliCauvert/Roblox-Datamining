@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 4 ]]
+﻿return function(p0)
 	local assetId = p0.detailsInformation.assetId
 	
 	if assetId == nil then

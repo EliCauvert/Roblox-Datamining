@@ -1,11 +1,11 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0, p1, p2) --[[ line: 6 | named "useDelayedActionHandler" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
 	local var2 = reactModule.useRef(0)
 	
-	local function handleAction() --[[ line: 15 ]]
+	local function handleAction()
 		-- upvalues: p1 (ref), var2 (ref), var1 (ref), p0 (ref), p2 (ref)
 		local processTime = os.clock()
 		
@@ -16,15 +16,15 @@ return function(p0, p1, p2) --[[ line: 6 | named "useDelayedActionHandler" ]]
 		if current ~= nil then
 			task.cancel(current)
 		end
-		var1.current = task.delay(p0, function() --[[ line: 33 ]]
+		var1.current = task.delay(p0, function()
 			-- upvalues: p2 (copy)
 			p2()
 		end)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var1 (ref)
-		return function() --[[ line: 39 ]]
+		return function()
 			-- upvalues: var1 (copy)
 			local current = var1.current
 			

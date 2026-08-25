@@ -6,7 +6,7 @@ local filterImpressionsEventModule = require(gameFilters.Analytics.filterImpress
 local getOptionContextTagModule = require(gameFilters.Analytics.getOptionContextTag)
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 
-return function(p0, p1, p2, p3, p4) --[[ line: 12 | named "sendFilterImpressions" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (ref), getOptionContextTagModule (ref), argCheckModule (ref), filterImpressionsEventModule (ref)
 	if not p0 then return end
 	if not p1 or #p1 == 0 then return end

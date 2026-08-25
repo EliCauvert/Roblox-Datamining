@@ -13,7 +13,7 @@ local fFlagLuaAppUseFrameBoundsImpressions = require(parent.SharedFlags).FFlagLu
 local fFlagLuaAppHideEmptyCarouselHeader = require(parent.SharedFlags).FFlagLuaAppHideEmptyCarouselHeader
 local _ = require(gameFilters.FilterCallbackTypes)
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), useCollectionImpressionsSignal (ref), fFlagLuaAppHideEmptyCarouselHeader (ref), filterPillModule (ref), cryoModule (ref), variableItemWidthCarousel (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
 	local var4 = useTokens()
 	local var5, var6 = reactModule.useState({})
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 40 ]]
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		FilterCarousel = reactModule.createElement(variableItemWidthCarousel, {
 			scrollButtonEnabled = true,
-			title = if fFlagLuaAppHideEmptyCarouselHeader and (not p0.title or p0.title == "") then "" elseif fFlagLuaAppHideEmptyCarouselHeader or p0.title then reactModule.useCallback(function() --[[ line: 59 ]]
+			title = if fFlagLuaAppHideEmptyCarouselHeader and (not p0.title or p0.title == "") then "" elseif fFlagLuaAppHideEmptyCarouselHeader or p0.title then reactModule.useCallback(function()
 				-- upvalues: var4 (ref), reactModule (copy), p0 (ref)
 				local bodyMedium = var4.Typography.BodyMedium
 				local muted = var4.Color.Content.Muted
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 40 ]]
 				})
 			end, { p0.title, var4 }) else "",
 			items = p0.filters,
-			renderItem = reactModule.useCallback(function(p1, p2) --[[ line: 84 ]]
+			renderItem = reactModule.useCallback(function(p1, p2)
 				-- upvalues: reactModule (copy), filterPillModule (copy), p0 (ref), text (ref), var6 (ref), cryoModule (copy), var5 (ref)
 				return reactModule.createElement(filterPillModule, {
 					analyticsInfo = p0.analyticsInfo,
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 40 ]]
 					impressionsTag = text,
 					index = p2,
 					onFilterApplied = p0.onFilterApplied,
-					onAbsoluteSizeChanged = function(value) --[[ line: 91 ]]
+					onAbsoluteSizeChanged = function(value)
 						-- upvalues: var6 (copy), cryoModule (copy), var5 (copy), p2 (ref)
 						if value then
 							var6(cryoModule.Dictionary.join(var5, { [p2] = value.AbsoluteSize.X }))
@@ -67,7 +67,7 @@ return function(p0) --[[ line: 40 ]]
 				p0.sendFilterClick
 			}),
 			onCanvasPositionChanged = var10,
-			calculateItemWidth = reactModule.useCallback(function(p3) --[[ line: 110 ]]
+			calculateItemWidth = reactModule.useCallback(function(p3)
 				-- upvalues: var5 (ref)
 				return var5[p3] or 0
 			end, { var5 }),

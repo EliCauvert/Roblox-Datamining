@@ -21,11 +21,11 @@ local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnab
 local fFlagEnableRecordLogin = require(parent.SharedFlags).FFlagEnableRecordLogin
 local enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByPhone", false)
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 32 | named "loginByPhone" ]]
+return function(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), httpService (ref), loginErrorCodesModule (ref), getDxBlobModule (ref), getCaptchaDataJsonModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateDown (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), getFFlagEnableLoginAccountSelector (ref), getMultipleUsersPerCredentialErrorDataModule (ref), promiseModule (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (ref)
-	return function(p8) --[[ line: 42 ]]
+	return function(p8)
 		-- upvalues: loginRequestsModule (copy), p0 (ref), p1 (ref), p2 (ref), p4 (ref), p6 (ref), p7 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p3 (ref), fFlagSignalsNavP3Dispatch (copy), var4 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (copy), p5 (ref)
-		return loginRequestsModule.logByPhone(p0, p1, p2, p4, p6, p7):andThen(function(p9) --[[ line: 51 ]]
+		return loginRequestsModule.logByPhone(p0, p1, p2, p4, p6, p7):andThen(function(p9)
 			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), p1 (copy)
 			assert(p9, "no login attempt result")
 			assert(#p9 == 1, "no result or more than one result")
@@ -37,13 +37,13 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 32 | named "loginByPh
 			local var14 = loginResultModule.fromJsonData(p9[1])
 			
 			if fFlagEnableRecordLogin then
-				pcall(function() --[[ line: 60 ]]
+				pcall(function()
 					-- upvalues: recordLoginModule (copy), var14 (ref), loginMethodsModule (copy), p1 (copy)
 					recordLoginModule(var14, loginMethodsModule.Phone, p1)
 				end)
 			end
 			return var14
-		end, function(p10) --[[ line: 65 ]]
+		end, function(p10)
 			-- upvalues: httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p3 (copy), p1 (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), p8 (ref), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), getFFlagEnableLoginAccountSelector (copy), getMultipleUsersPerCredentialErrorDataModule (copy), promiseModule (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByPhone (copy), p5 (copy)
 			local body = httpService:JSONDecode(p10.Body)
 			local var16 = nil

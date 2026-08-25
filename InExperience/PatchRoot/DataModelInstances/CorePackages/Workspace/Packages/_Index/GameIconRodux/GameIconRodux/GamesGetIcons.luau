@@ -5,7 +5,7 @@ local fFlagGetGameIconsFromThumbnailsDeliveryApiIxp = require(parent.SharedFlags
 local fFlagForceGetGameIconsFromThumbnailsDeliveryApi = require(parent.SharedFlags).FFlagForceGetGameIconsFromThumbnailsDeliveryApi
 local url = require(parent.Http).Url
 
-return function(p0, p1, p2) --[[ line: 25 ]]
+return function(p0, p1, p2)
 	-- upvalues: url (ref), fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref)
 	local var0 = url:makeQueryString({
 		format = "png",

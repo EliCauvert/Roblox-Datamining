@@ -6,7 +6,7 @@ local chipSize = foundationModule.Enums.ChipSize
 local chipVariant = foundationModule.Enums.ChipVariant
 local iconName = foundationModule.Enums.IconName
 
-return function(p0) --[[ line: 18 | named "CreatorCreditBalanceChipView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref)
 	return if p0.balanceText == nil then nil else reactModule.createElement(chip, {
 		testId = "creator-credit-balance-chip",

@@ -3,7 +3,7 @@ local dateTimePickerRangeBandRoleModule = require(script:FindFirstAncestor("Foun
 local dateTimeRangeSelectionUtilitiesModule = require(script.Parent.DateTimeRangeSelectionUtilities)
 local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
-local function isDaySelected(p0, p1, p2) --[[ line: 19 ]]
+local function isDaySelected(p0, p1, p2)
 	-- upvalues: dateTimeUtilitiesModule (ref)
 	local var6 = dateTimeUtilitiesModule.toLocalTime(p0)
 	
@@ -15,7 +15,7 @@ local function isDaySelected(p0, p1, p2) --[[ line: 19 ]]
 	return false
 end
 
-local function getRangeBand(p3, p4, p5, p6) --[[ line: 69 ]]
+local function getRangeBand(p3, p4, p5, p6)
 	-- upvalues: dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref), dateTimePickerRangeBandRoleModule (ref)
 	local var7 = p4[1]
 	local var8 = p4[2]
@@ -32,7 +32,7 @@ local function getRangeBand(p3, p4, p5, p6) --[[ line: 69 ]]
 	local var12 = dateTimeUtilitiesModule.roundToStartOfDay(p3)
 	local var13 = p6 ~= false
 	
-	local function fullCellBand() --[[ line: 89 ]]
+	local function fullCellBand()
 		-- upvalues: dateTimeCalendarViewUtilitiesModule (copy), p3 (ref), t (ref), dateTimePickerRangeBandRoleModule (copy)
 		return nil, nil, dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p3, t, dateTimePickerRangeBandRoleModule.Full)
 	end
@@ -54,7 +54,7 @@ local function getRangeBand(p3, p4, p5, p6) --[[ line: 69 ]]
 end
 
 return {
-	getDayCellAppearance = function(p7, p8, p9, p10, p11) --[[ line: 130 ]]
+	getDayCellAppearance = function(p7, p8, p9, p10, p11)
 		-- upvalues: isDaySelected (ref), getRangeBand (ref), dateTimeUtilitiesModule (ref)
 		local var15 = isDaySelected(p7, p8, p10)
 		local var16, var17, var18 = getRangeBand(p7, p9, p10, var15)
@@ -69,16 +69,16 @@ return {
 		}
 	end,
 	getRangeBand = getRangeBand,
-	isDayHighlighted = function(p12, p13, p14) --[[ line: 59 ]]
+	isDayHighlighted = function(p12, p13, p14)
 		-- upvalues: dateTimeUtilitiesModule (ref)
 		return if p14 then if p13[1] and p13[2] then dateTimeUtilitiesModule.isDateWithinRange(p12, { startDate = p13[1], endDate = p13[2] }) else false else false
 	end,
-	isDaySelectable = function(p15, p16) --[[ line: 123 ]]
+	isDaySelectable = function(p15, p16)
 		-- upvalues: dateTimeUtilitiesModule (ref)
 		return p16 and not dateTimeUtilitiesModule.isDateWithinRange(p15, p16)
 	end,
 	isDaySelected = isDaySelected,
-	resolveHighlightDates = function(p17, p18) --[[ line: 49 ]]
+	resolveHighlightDates = function(p17, p18)
 		-- upvalues: dateTimeRangeSelectionUtilitiesModule (ref)
 		return if not (not p17 or not p17[1]) then if p17[2] or not p18 then p17 else dateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(p17, p18) else p17 or {}
 	end

@@ -7,10 +7,10 @@ local gamepadService = game:GetService("GamepadService")
 local fFlagUseAnimateScrollViewToSelectionHelper = require(parent.SharedFlags).FFlagUseAnimateScrollViewToSelectionHelper
 local animateScrollViewToSelectionHelperModule = require(appBlox.AnimateScrollViewToSelectionHelper)
 
-return function(p0, p1) --[[ line: 15 | named "useAnimateScrollViewToSelection" ]]
+return function(p0, p1)
 	-- upvalues: fFlagUseAnimateScrollViewToSelectionHelper (ref), reactModule (ref), animateScrollViewToSelectionHelperModule (ref), gamepadService (ref), userGameSettingsService (ref), tweenService (ref)
 	if fFlagUseAnimateScrollViewToSelectionHelper then
-		reactModule.useEffect(function() --[[ line: 20 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), animateScrollViewToSelectionHelperModule (copy), p1 (ref)
 			local var6 = nil
 			local t = {}
@@ -20,7 +20,7 @@ return function(p0, p1) --[[ line: 15 | named "useAnimateScrollViewToSelection" 
 				t = var8
 				var6 = var9
 			end
-			return function() --[[ line: 27 ]]
+			return function()
 				-- upvalues: t (write), var6 (write)
 				for i, v in t do
 					v:Disconnect()
@@ -33,7 +33,7 @@ return function(p0, p1) --[[ line: 15 | named "useAnimateScrollViewToSelection" 
 		
 		return
 	end
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), gamepadService (copy), userGameSettingsService (copy), tweenService (copy), p1 (ref)
 		local t = {}
 		local var11 = nil
@@ -44,15 +44,15 @@ return function(p0, p1) --[[ line: 15 | named "useAnimateScrollViewToSelection" 
 			local current = p0.current
 			local y = current.AbsolutePosition.Y
 			local y_1 = current.AbsoluteWindowSize.Y
-			table.insert(t, current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 49 ]]
+			table.insert(t, current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 				-- upvalues: y (write), current (ref)
 				y = current.AbsolutePosition.Y
 			end))
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ line: 55 ]]
+			table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: y_1 (write), current (ref)
 				y_1 = current.AbsoluteWindowSize.Y
 			end))
-			table.insert(t, current.SelectionChanged:Connect(function(_, _, p2) --[[ line: 61 ]]
+			table.insert(t, current.SelectionChanged:Connect(function(_, _, p2)
 				-- upvalues: current (ref), gamepadService (copy), var11 (write), y_1 (write), y (write), userGameSettingsService (copy), tweenService (copy), p1 (copy)
 				if p2 == nil or not p2:IsDescendantOf(current) or gamepadService.GamepadCursorEnabled then return end
 				if var11 then
@@ -74,7 +74,7 @@ return function(p0, p1) --[[ line: 15 | named "useAnimateScrollViewToSelection" 
 				end
 			end))
 		end
-		return function() --[[ line: 101 ]]
+		return function()
 			-- upvalues: t (ref), var11 (write)
 			for i, v in t do
 				v:Disconnect()

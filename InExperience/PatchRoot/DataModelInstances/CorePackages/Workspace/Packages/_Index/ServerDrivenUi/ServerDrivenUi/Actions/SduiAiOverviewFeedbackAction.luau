@@ -22,7 +22,7 @@ local t = {
 	[aiOverviewSentiment_1.ThumbsDown] = true
 }
 
-local function _(p0, p1, p2) --[[ line: 43 | named "reportInvalidParam" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
 	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 		name = sduiActionType.AiOverviewFeedback,
@@ -31,9 +31,9 @@ local function _(p0, p1, p2) --[[ line: 43 | named "reportInvalidParam" ]]
 	}, p0.appPage)
 end
 
-local function sendUserSignal(value, p3, p4, p5, p6, p7) --[[ line: 51 ]]
+local function sendUserSignal(value, p3, p4, p5, p6, p7)
 	-- upvalues: postSendUserSignal (ref), httpService (ref), userSignalTypes (ref), sduiErrorType (ref), sduiActionType (ref)
-	local ok, status = pcall(function() --[[ line: 59 ]]
+	local ok, status = pcall(function()
 		-- upvalues: postSendUserSignal (copy), p3 (ref), httpService (copy), p7 (ref), p4 (ref), userSignalTypes (copy), p5 (ref), p6 (ref), value (ref), sduiErrorType (copy), sduiActionType (copy)
 		postSendUserSignal(p3, { stringValue = httpService:JSONEncode(p7) }, {
 			id = p4,
@@ -43,7 +43,7 @@ local function sendUserSignal(value, p3, p4, p5, p6, p7) --[[ line: 51 ]]
 				productSurface = p5,
 				subIds = { "PowerSearch" }
 			}
-		}, userSignalTypes.SignalValueType.String, p6):catch(function(p8) --[[ line: 70 ]]
+		}, userSignalTypes.SignalValueType.String, p6):catch(function(p8)
 			-- upvalues: value (copy), sduiErrorType (copy), sduiActionType (copy)
 			value.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
 				name = sduiActionType.AiOverviewFeedback,
@@ -60,7 +60,7 @@ local function sendUserSignal(value, p3, p4, p5, p6, p7) --[[ line: 51 ]]
 	end
 end
 
-return function(p9, p10, p11, _) --[[ line: 86 | named "SduiAiOverviewFeedbackAction" ]]
+return function(p9, p10, p11, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), t (ref), findAnalyticsFieldInAncestors (ref), sendUserSignal (ref), userSignalTypes (ref), setCentralOverlay (ref), centralOverlayType (ref), buttonVariant (ref), aiOverviewExplicitFeedback (ref), aiOverviewSentiment (ref)
 	local var9 = if p9 then p9.actionParams else nil
 	
@@ -102,7 +102,7 @@ return function(p9, p10, p11, _) --[[ line: 86 | named "SduiAiOverviewFeedbackAc
 		dialogText = var9.dialogText,
 		placeholderText = var9.placeholderText,
 		buttonVariant = buttonVariant.Emphasis,
-		onSubmit = function(p12) --[[ line: 135 ]]
+		onSubmit = function(p12)
 			-- upvalues: sendUserSignal (copy), p11 (ref), networking (ref), searchSessionId (ref), var10 (ref), userSignalTypes (copy), sentiment (ref), searchQuery (ref), aiOverviewExplicitFeedback (copy), appPage (ref)
 			sendUserSignal(p11, networking, searchSessionId, var10, userSignalTypes.SignalType.AiOverviewExplicitFeedback, {
 				sentiment = sentiment,
@@ -117,7 +117,7 @@ return function(p9, p10, p11, _) --[[ line: 86 | named "SduiAiOverviewFeedbackAc
 				feedbackText = p12
 			}, appPage)
 		end,
-		onClose = function(p13) --[[ line: 157 ]]
+		onClose = function(p13)
 			-- upvalues: sendUserSignal (copy), p11 (ref), networking (ref), searchSessionId (ref), var10 (ref), userSignalTypes (copy), sentiment (ref), searchQuery (ref), aiOverviewExplicitFeedback (copy), appPage (ref)
 			if p13 then
 				return

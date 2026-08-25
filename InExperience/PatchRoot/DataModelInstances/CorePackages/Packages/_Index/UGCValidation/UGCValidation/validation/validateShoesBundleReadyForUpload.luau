@@ -13,9 +13,9 @@ local validateFullShoesBundleStudio = game:DefineFastFlag("ValidateFullShoesBund
 local legacyValidationAdapterModule = require(parent.util.LegacyValidationAdapter)
 local httpService = game:GetService("HttpService")
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 25 | named "validateShoesBundleReadyForUpload" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: promiseModule (ref), fixUpPreValidationModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref), validateFullShoesBundleStudio (ref), validateShoesModule (ref)
-	p3 = p3 or function() --[[ line: 33 ]] end
+	p3 = p3 or function() end
 	assert(p3 ~= nil, "Luau")
 	
 	if not p0:IsA("Model") then
@@ -81,7 +81,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 25 | named "validateShoesBund
 	p3(t_4)
 	local var16 = httpService:GenerateGUID()
 	
-	return promiseModule.each(t_3, function(p7, p8) --[[ line: 124 ]]
+	return promiseModule.each(t_3, function(p7, p8)
 		-- upvalues: p4 (ref), p5 (ref), createEditableInstancesForContextModule (copy), validateInternalModule (copy), legacyValidationAdapterModule (copy), var16 (ref), destroyEditableInstancesModule (copy), t_4 (write), p3 (write)
 		if p7.status == "finished" then return end
 		local var35, var36
@@ -125,10 +125,10 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 25 | named "validateShoesBund
 		t_4.pieces = table.clone(t_4.pieces)
 		t_4.pieces[p8].status = "finished"
 		p3(t_4)
-	end):andThen(function() --[[ line: 184 ]]
+	end):andThen(function()
 		-- upvalues: validateFullShoesBundleStudio (copy), t_4 (write), p4 (ref), p5 (ref), createEditableInstancesForContextModule (copy), validateShoesModule (copy), legacyValidationAdapterModule (copy), var16 (ref), destroyEditableInstancesModule (copy), p3 (write)
 		if validateFullShoesBundleStudio then
-			local function createFullBodyData(p6) --[[ line: 186 ]]
+			local function createFullBodyData(p6)
 				local t = {}
 				
 				for i, v in p6 do
@@ -185,7 +185,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 25 | named "validateShoesBund
 			end
 		end
 		p3(t_4)
-	end):andThen(function() --[[ line: 259 ]]
+	end):andThen(function()
 		-- upvalues: t_4 (write)
 		return t_4
 	end)

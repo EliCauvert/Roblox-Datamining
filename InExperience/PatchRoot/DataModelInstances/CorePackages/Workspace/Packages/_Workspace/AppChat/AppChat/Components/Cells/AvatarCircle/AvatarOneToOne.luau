@@ -6,7 +6,7 @@ local avatarThumbnailModule = require(script.Parent.AvatarThumbnail)
 local circleMaskModule = require(script.Parent.CircleMask)
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 
-return function(p0) --[[ line: 30 | named "AvatarOneToOne" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), circleMaskModule (ref), frameModule (ref), avatarThumbnailModule (ref)
 	return reactModule.createElement(circleMaskModule, {
 		circleColor3 = p0.circleColor3,

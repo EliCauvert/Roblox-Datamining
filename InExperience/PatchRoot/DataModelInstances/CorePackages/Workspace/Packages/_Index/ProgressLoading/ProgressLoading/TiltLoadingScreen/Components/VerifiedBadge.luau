@@ -5,7 +5,7 @@ local view = foundationModule.View
 local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 
-return function(p0) --[[ line: 22 | named "VerifiedBadge" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), icon (ref), enums (ref)
 	return reactModule.createElement(view, {
 		tag = "auto-xy",

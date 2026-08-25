@@ -18,7 +18,7 @@ local captureTypeModule = require(parent.Enums.CaptureType)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local captureServiceEnableXExperiencePostingApisEngineFeature = game:GetEngineFeature("CaptureServiceEnableXExperiencePostingApis")
 
-local function triggerDefaultToast(p0, p1, p2, p3, p4) --[[ line: 33 ]]
+local function triggerDefaultToast(p0, p1, p2, p3, p4)
 	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref), eventNamesModule (ref)
 	if p1 then
 		p0:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureTaken, { captureInfo = p2 }))
@@ -31,9 +31,9 @@ local function triggerDefaultToast(p0, p1, p2, p3, p4) --[[ line: 33 ]]
 	p4(eventNamesModule.CapturesShareToastViewed)
 end
 
-return function(p5, _, p6) --[[ line: 55 | named "makeCaptureSavedHandler" ]]
+return function(p5, _, p6)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), triggerSourceTypeModule (ref), fFlagEnableUpdatedCaptureControlsModule (ref), socialStopwatchModule (ref), eventNamesModule (ref), retrieveCapturesModule (ref), waitForFlashOverlayModule (ref), capturesPolicyModule (ref), getCaptureObjectModule (ref), fFlagCreateMomentsToastModule (ref), captureServiceEnableXExperiencePostingApisEngineFeature (ref), triggerDefaultToast (ref), constantsModule (ref), fetchCapturesFromGalleryModule (ref), findMatchingCaptureModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p7, p8) --[[ line: 56 | named "captureSavedHandler" ]]
+	return function(p7, p8)
 		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureTypeModule (copy), triggerSourceTypeModule (copy), fFlagEnableUpdatedCaptureControlsModule (copy), socialStopwatchModule (copy), p6 (ref), eventNamesModule (copy), p5 (ref), retrieveCapturesModule (copy), waitForFlashOverlayModule (copy), capturesPolicyModule (copy), getCaptureObjectModule (copy), fFlagCreateMomentsToastModule (copy), captureServiceEnableXExperiencePostingApisEngineFeature (copy), triggerDefaultToast (copy), constantsModule (copy), fetchCapturesFromGalleryModule (copy), findMatchingCaptureModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
 		local var18
 		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then

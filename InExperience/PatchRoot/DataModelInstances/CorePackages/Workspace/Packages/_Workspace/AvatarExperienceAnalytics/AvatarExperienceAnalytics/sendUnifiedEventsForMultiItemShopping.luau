@@ -11,7 +11,7 @@ local unifiedEventLogEnumsModule = require(avatarExperienceAnalytics.UnifiedEven
 local AXAddV1CountersForMISPurchaseSuccess = game:DefineFastFlag("AXAddV1CountersForMISPurchaseSuccess", false)
 local fFlagAXFixSearchPurchaseSurface = require(parent.AvatarExperienceFlags).FFlagAXFixSearchPurchaseSurface
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: unifiedSelectionListStoreModule (ref), unifiedEventLogConstantsModule (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), fFlagAXFixSearchPurchaseSurface (ref), AXAddV1CountersForMISPurchaseSuccess (ref), unifiedEventLogEnumsModule (ref), reportAvatarEventCounterV1Module (ref), constantsModule (ref), sendUnifiedEventLogModule (ref)
 	local var13
 	local selectionList = unifiedSelectionListStoreModule.getSelectionList()

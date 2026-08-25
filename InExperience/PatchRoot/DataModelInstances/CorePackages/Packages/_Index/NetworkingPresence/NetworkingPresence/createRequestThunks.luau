@@ -3,7 +3,7 @@ local createGetPresencesFromUserIdsModule = require(networkRequests.createGetPre
 local createSetInvisibilityStatusModule = require(networkRequests.createSetInvisibilityStatus)
 local _ = require(script.Parent.networkingPresenceTypes)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: createGetPresencesFromUserIdsModule (ref), createSetInvisibilityStatusModule (ref)
 	return {
 		GetPresencesFromUserIds = createGetPresencesFromUserIdsModule(p0),

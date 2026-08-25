@@ -7,13 +7,13 @@ local loggerModule = require(virtualEventsState.logger)
 local var6 = roduxNetworkingModule.config({
 	keyPath = "VirtualEvents.networkStatus",
 	networkImpl = httpRequestModule.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 12 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: loggerModule (ref), httpRequestModule (ref)
 			loggerModule:debug("GET {}", p0)
 			
 			return httpRequestModule.requestFunctions.RequestInternal(p0, p1, p2)
 		end,
-		postRequestFunction = function(p3, p4) --[[ line: 21 ]]
+		postRequestFunction = function(p3, p4)
 			-- upvalues: loggerModule (ref)
 			loggerModule:debug("{} {} {}", p3.StatusCode, p4.url, p3.Body)
 		end,

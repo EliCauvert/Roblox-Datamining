@@ -10,7 +10,7 @@ local t = {
 	lastUpdated = { 25, 6, 10 }
 }
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref)
 	local list, t_1
 	local _ = nil

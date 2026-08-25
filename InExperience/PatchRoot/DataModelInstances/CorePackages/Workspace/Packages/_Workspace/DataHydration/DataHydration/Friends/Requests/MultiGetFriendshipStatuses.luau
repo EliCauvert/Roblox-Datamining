@@ -5,11 +5,11 @@ local url = require(parent.Http).Url
 local myHttpRequestModule = require(dataHydration.Friends.Networking.myHttpRequest)
 local fFlagEnableGetFriendshipStatus = require(parent.SharedFlags).FFlagEnableGetFriendshipStatus
 
-local function _(p0) --[[ line: 23 | named "isNumericUserId" ]]
+local function _(p0)
 	return string.match(p0, "^%d+$") ~= nil
 end
 
-return function(p1, p2) --[[ line: 27 ]]
+return function(p1, p2)
 	-- upvalues: fFlagEnableGetFriendshipStatus (ref), httpService (ref), url (ref), myHttpRequestModule (ref)
 	local var3 = p2
 	
@@ -22,7 +22,7 @@ return function(p1, p2) --[[ line: 27 ]]
 			end
 		end
 	end
-	return myHttpRequestModule(string.format("%s/users/%s/friends/statuses?userIds=%s", url.FRIEND_URL, tostring(p1), httpService:UrlEncode(table.concat(var3, ","))), "GET"):andThen(function(p3) --[[ line: 42 ]]
+	return myHttpRequestModule(string.format("%s/users/%s/friends/statuses?userIds=%s", url.FRIEND_URL, tostring(p1), httpService:UrlEncode(table.concat(var3, ","))), "GET"):andThen(function(p3)
 		return if p3 then p3.responseBody else nil
 	end)
 end

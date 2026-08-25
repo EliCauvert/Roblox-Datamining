@@ -42,17 +42,17 @@ local t = {
 }
 local buildExperienceAudienceTooltipMaxWidth = game:DefineFastInt("BuildExperienceAudienceTooltipMaxWidth", 220)
 
-local function _(p0) --[[ line: 74 | named "getSelectedAudience" ]]
+local function _(p0)
 	-- upvalues: t (ref), universeConfigurationModule (ref)
 	return if p0 == nil then nil else t[universeConfigurationModule.getPrivacyTypeForAudiences(p0)]
 end
 
-local _ = function(p1) --[[ line: 80 | named "isVisibilityAudience" ]]
+local _ = function(p1)
 	-- upvalues: universeActivationModule (ref)
 	return if p1 ~= universeActivationModule.Audience.Public then p1 == universeActivationModule.Audience.Friends else true
 end
 
-local function getAudiencesForValue(p2, p3) --[[ line: 84 ]]
+local function getAudiencesForValue(p2, p3)
 	-- upvalues: universeActivationModule (ref)
 	local t = {}
 	
@@ -71,12 +71,12 @@ local function getAudiencesForValue(p2, p3) --[[ line: 84 ]]
 	return t
 end
 
-local function AudienceRow(p4) --[[ line: 115 ]]
+local function AudienceRow(p4)
 	-- upvalues: reactModule (ref), icon (ref), iconName (ref), iconSize (ref), view (ref), list (ref), radioGroup (ref), inputSize (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y radius-medium",
 		LayoutOrder = p4.LayoutOrder,
-		onActivated = if p4.isDisabled then nil else reactModule.useCallback(function() --[[ line: 116 ]]
+		onActivated = if p4.isDisabled then nil else reactModule.useCallback(function()
 			-- upvalues: p4 (ref)
 			p4.onActivated(p4.value)
 		end, { p4.onActivated, p4.value }),
@@ -107,7 +107,7 @@ local function AudienceRow(p4) --[[ line: 115 ]]
 	})
 end
 
-local _ = function(p5, p6, p7) --[[ line: 185 | named "getSelectedAudienceFromState" ]]
+local _ = function(p5, p6, p7)
 	-- upvalues: t (ref), universeConfigurationModule (ref)
 	if p5 ~= nil then
 		return p5
@@ -119,26 +119,26 @@ local _ = function(p5, p6, p7) --[[ line: 185 | named "getSelectedAudienceFromSt
 	return if audiences == nil then nil else t[universeConfigurationModule.getPrivacyTypeForAudiences(audiences)]
 end
 
-local _ = function(p8, p9, p10) --[[ line: 197 | named "getIsNonPrivateLocked" ]]
+local _ = function(p8, p9, p10)
 	return p9 and (if p8.eligibility ~= "Required" then p10 else true)
 end
 
-local function getUniverseActivationStore(p11) --[[ line: 205 ]]
+local function getUniverseActivationStore(p11)
 	-- upvalues: universeActivationModule (ref)
 	return universeActivationModule.getUniverseActivationStore(p11)
 end
 
-local function getQuestionnaireStore(p12) --[[ line: 209 ]]
+local function getQuestionnaireStore(p12)
 	-- upvalues: experienceQuestionnaireModule (ref)
 	return experienceQuestionnaireModule.getExperienceQuestionnaireStore(p12)
 end
 
-local function getUniverseConfigurationStore(p13) --[[ line: 213 ]]
+local function getUniverseConfigurationStore(p13)
 	-- upvalues: universeConfigurationModule (ref)
 	return universeConfigurationModule.getUniverseConfigurationStore(p13)
 end
 
-local function useAudienceStores() --[[ line: 217 ]]
+local function useAudienceStores()
 	-- upvalues: signalsReactModule (ref), getUniverseActivationStore (ref), getQuestionnaireStore (ref), getUniverseConfigurationStore (ref)
 	return {
 		universeActivationStore = signalsReactModule.useSignalState(getUniverseActivationStore),
@@ -147,41 +147,41 @@ local function useAudienceStores() --[[ line: 217 ]]
 	}
 end
 
-local function useAudienceData(p14, p15, p16, p17, p18) --[[ line: 229 ]]
+local function useAudienceData(p14, p15, p16, p17, p18)
 	-- upvalues: reactModule (ref), fFlagBuildRehydrateOnPublishModule (ref), debug (ref), formatErrorModule (ref), signalsReactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), contentMaturityUtilsModule (ref), t (ref), universeConfigurationModule (ref)
-	local var33 = reactModule.useMemo(function() --[[ line: 236 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: p17 (ref), p14 (ref)
 		return p17.getAndFetchConfiguration(p14)
 	end, { p14, p17 })
 	local var34, var35 = reactModule.useState(fFlagBuildRehydrateOnPublishModule)
 	
 	if fFlagBuildRehydrateOnPublishModule then
-		reactModule.useEffect(function() --[[ line: 243 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var35 (ref), p17 (ref), p14 (ref), debug (copy), formatErrorModule (copy)
 			local var59 = true
 			var35(true)
-			p17.refreshConfiguration(p14):catch(function(p19) --[[ line: 248 ]]
+			p17.refreshConfiguration(p14):catch(function(p19)
 				-- upvalues: debug (copy), formatErrorModule (copy), p14 (copy)
 				debug.log("warn", "AudienceConfigurationContent configuration refresh failed", { errorMessage = formatErrorModule(p19), universeId = p14 })
-			end):finally(function() --[[ line: 254 ]]
+			end):finally(function()
 				-- upvalues: var59 (write), var35 (copy)
 				if var59 then
 					var35(false)
 				end
 			end)
 			
-			return function() --[[ line: 260 ]]
+			return function()
 				-- upvalues: var59 (write)
 				var59 = false
 			end
 		end, { p17, p14 })
 	end
 	local var49, var50
-	local var36 = reactModule.useMemo(function() --[[ line: 265 ]]
+	local var36 = reactModule.useMemo(function()
 		-- upvalues: p15 (ref), p14 (ref)
 		return p15.getAndFetchEligibility(p14)
 	end, { p15, p14 })
-	local var37 = reactModule.useMemo(function() --[[ line: 268 ]]
+	local var37 = reactModule.useMemo(function()
 		-- upvalues: p15 (ref), p14 (ref)
 		return p15.getAndFetchLatestSubmission(p14)
 	end, { p15, p14 })
@@ -200,7 +200,7 @@ local function useAudienceData(p14, p15, p16, p17, p18) --[[ line: 229 ]]
 	local var48 = nil
 	
 	if fFlagBuildRehydrateOnPublishModule then
-		local var51 = reactModule.useMemo(function() --[[ line: 289 ]]
+		local var51 = reactModule.useMemo(function()
 			-- upvalues: p16 (ref), p14 (ref)
 			return p16.getAndFetchEligibility(p14)
 		end, { p16, p14 })
@@ -215,7 +215,7 @@ local function useAudienceData(p14, p15, p16, p17, p18) --[[ line: 229 ]]
 		else
 			local var56
 			local var55 = var45 and (if var40.eligibility ~= "Required" then isFailed else true)
-			var50 = reactModule.useMemo(function() --[[ line: 315 ]]
+			var50 = reactModule.useMemo(function()
 				-- upvalues: contentMaturityUtilsModule (copy), p14 (ref), var55 (ref)
 				return if contentMaturityUtilsModule.isSealBroken(p14) then contentMaturityUtilsModule.isContentUnrated(p14) or var55 else false
 			end, { var52, var55, p14 })
@@ -256,13 +256,13 @@ local function useAudienceData(p14, p15, p16, p17, p18) --[[ line: 229 ]]
 	return t_1
 end
 
-local function useQuestionnaireHandler(p20, p21) --[[ line: 344 ]]
+local function useQuestionnaireHandler(p20, p21)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), reactModule (ref), fFlagBuildRehydrateOnPublishModule (ref), refreshPublishEligibilityModule (ref), gameConfigurationActionsModule (ref)
 	local var60 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
 		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	}) else nil).creatorHub else localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	local var61 = useOpenWebView()
-	local var62 = reactModule.useCallback(function() --[[ line: 355 ]]
+	local var62 = reactModule.useCallback(function()
 		-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), refreshPublishEligibilityModule (copy), p20 (ref), p21 (ref)
 		if fFlagBuildRehydrateOnPublishModule then
 			refreshPublishEligibilityModule(p20)
@@ -273,13 +273,13 @@ local function useQuestionnaireHandler(p20, p21) --[[ line: 344 ]]
 		p21.fetchLatestSubmission(p20)
 	end, { p21, p20 })
 	
-	return reactModule.useCallback(function() --[[ line: 366 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: var61 (ref), gameConfigurationActionsModule (copy), p20 (ref), var60 (ref), var62 (ref)
 		var61(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p20), var60, var62)
 	end, { var60, var61, var62, p20 })
 end
 
-local _ = function(p22) --[[ line: 375 | named "cancelEligibilityRecheck" ]]
+local _ = function(p22)
 	local current = p22.current
 	p22.current = nil
 	
@@ -288,7 +288,7 @@ local _ = function(p22) --[[ line: 375 | named "cancelEligibilityRecheck" ]]
 	end
 end
 
-local function useAudienceController(p23) --[[ line: 383 ]]
+local function useAudienceController(p23)
 	-- upvalues: useAudienceStores (ref), reactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), useAudienceData (ref), useQuestionnaireHandler (ref), getAudiencesForValue (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), universeConfigurationModule (ref), debug (ref), formatErrorModule (ref), contentMaturityUtilsModule (ref)
 	local var63 = useAudienceStores()
 	local var64, var65 = reactModule.useState(nil)
@@ -298,9 +298,9 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 	if fFlagBuildAudiencePublishPromptModule then
 		local var69 = reactModule.useRef(nil)
 		var68 = var69
-		reactModule.useEffect(function() --[[ line: 391 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var69 (ref)
-			return function() --[[ line: 392 ]]
+			return function()
 				-- upvalues: var69 (copy)
 				local current = var69.current
 				var69.current = nil
@@ -312,7 +312,7 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 		end, { var69, p23 })
 	end
 	local var70, var71 = reactModule.useState(nil)
-	local var72 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function() --[[ line: 400 ]]
+	local var72 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
 		-- upvalues: var71 (ref)
 		var71(nil)
 	end, {}) else nil
@@ -326,17 +326,17 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 	local var75 = not isAudiencesReady or (var66 or isConfigurationRefreshPending)
 	
 	return {
-		handleAudienceActivated = reactModule.useCallback(function(p24) --[[ line: 421 ]]
+		handleAudienceActivated = reactModule.useCallback(function(p24)
 			-- upvalues: var71 (ref), var75 (ref), getAudiencesForValue (copy), configurationData (ref), var65 (ref), var67 (ref), var63 (ref), p23 (ref), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy), fFlagBuildAudiencePublishPromptModule (copy), isNonPrivateLocked (ref), var68 (write), contentMaturityUtilsModule (copy), isEligibilityResolved (ref)
-			local function _() --[[ line: 422 | named "showLockedTooltip" ]]
+			local function _()
 				-- upvalues: var71 (copy), p24 (ref)
-				var71(function(p25) --[[ line: 423 ]]
+				var71(function(p25)
 					-- upvalues: p24 (copy)
 					return if p25 == p24 then nil else p24
 				end)
 			end
 			
-			local function applyAudienceChange() --[[ line: 428 ]]
+			local function applyAudienceChange()
 				-- upvalues: var75 (copy), getAudiencesForValue (copy), p24 (ref), configurationData (copy), var71 (copy), var65 (copy), var67 (copy), var63 (copy), p23 (copy), fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), universeConfigurationModule (copy), debug (copy), formatErrorModule (copy)
 				if var75 then
 					return
@@ -345,7 +345,7 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 				var71(nil)
 				var65(p24)
 				var67(true)
-				var63.universeActivationStore.setAudiences(p23, var80):andThen(function(p27) --[[ line: 444 ]]
+				var63.universeActivationStore.setAudiences(p23, var80):andThen(function(p27)
 					-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), p23 (copy), var63 (copy), universeConfigurationModule (copy), var80 (ref), debug (copy), formatErrorModule (copy), var65 (copy), var67 (copy)
 					if fFlagBuildRehydrateOnPublishModule then
 						gameConfigurationActionsModule.updateCachedAudience(p23, p27.audiences)
@@ -355,20 +355,20 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 							audiences = var80
 						})
 					end
-					var63.universeActivationStore.activate(p23):andThen(function() --[[ line: 455 ]]
+					var63.universeActivationStore.activate(p23):andThen(function()
 						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var63 (copy), p23 (copy)
 						if not fFlagBuildRehydrateOnPublishModule then
 							var63.universeConfigurationStore.fetchConfiguration(p23)
 						end
-					end):catch(function(p28) --[[ line: 460 ]]
+					end):catch(function(p28)
 						-- upvalues: debug (copy), formatErrorModule (copy), p23 (copy), var65 (copy)
 						debug.log("warn", "AudienceConfigurationContent activate after audience update failed", { errorMessage = formatErrorModule(p28), universeId = p23 })
 						var65(nil)
-					end):finally(function() --[[ line: 471 ]]
+					end):finally(function()
 						-- upvalues: var67 (copy)
 						var67(false)
 					end)
-				end):catch(function(p26) --[[ line: 475 ]]
+				end):catch(function(p26)
 					-- upvalues: debug (copy), formatErrorModule (copy), p23 (copy), var65 (copy), var67 (copy)
 					debug.log("warn", "AudienceConfigurationContent set audiences failed", { errorMessage = formatErrorModule(p26), universeId = p23 })
 					var65(nil)
@@ -380,7 +380,7 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 				local var77 = isNonPrivateLocked and p24 ~= "Private"
 				
 				if var77 then
-					var71(function(p29) --[[ line: 423 ]]
+					var71(function(p29)
 						-- upvalues: p24 (ref)
 						return if p29 == p24 then nil else p24
 					end)
@@ -405,12 +405,12 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 				end
 				local var79 = var63.universeActivationStore.refreshEligibility(p23)
 				var78.current = var79
-				var79:catch(function(p31) --[[ line: 513 ]]
+				var79:catch(function(p31)
 					-- upvalues: var78 (ref), var79 (ref), debug (copy), formatErrorModule (copy), p23 (copy)
 					if var78.current == var79 then
 						debug.log("warn", "AudienceConfigurationContent eligibility recheck failed", { errorMessage = formatErrorModule(p31), universeId = p23 })
 					end
-				end):finally(function() --[[ line: 521 ]]
+				end):finally(function()
 					-- upvalues: var78 (ref), var79 (ref), contentMaturityUtilsModule (copy), p23 (copy), var77 (ref), var65 (copy), var67 (copy), var71 (copy), p24 (ref), applyAudienceChange (ref)
 					if var78.current ~= var79 then return end
 					var78.current = nil
@@ -422,7 +422,7 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 					elseif not var77 then
 						var65(nil)
 						var67(false)
-						var71(function(p30) --[[ line: 423 ]]
+						var71(function(p30)
 							-- upvalues: p24 (copy)
 							return if p30 == p24 then nil else p24
 						end)
@@ -431,7 +431,7 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 				
 				return
 			elseif isNonPrivateLocked and p24 ~= "Private" then
-				var71(function(p32) --[[ line: 423 ]]
+				var71(function(p32)
 					-- upvalues: p24 (ref)
 					return if p32 == p24 then nil else p24
 				end)
@@ -456,7 +456,7 @@ local function useAudienceController(p23) --[[ line: 383 ]]
 	}
 end
 
-local function AudienceHeader() --[[ line: 576 ]]
+local function AudienceHeader()
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref)
 	local GAME_CONFIGURATION_AUDIENCE_BODY, GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE
 	local var81 = if fFlagBuildLocalization then useLocalization({
@@ -490,7 +490,7 @@ local function AudienceHeader() --[[ line: 576 ]]
 	})
 end
 
-local function AudienceList(p33) --[[ line: 620 ]]
+local function AudienceList(p33)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), radioGroup (ref), list (ref), inputSize (ref), AudienceRow (ref)
 	local GAME_CONFIGURATION_AUDIENCE_FRIENDS, GAME_CONFIGURATION_AUDIENCE_PRIVATE, GAME_CONFIGURATION_AUDIENCE_PUBLIC
 	local var82 = if fFlagBuildLocalization then useLocalization({
@@ -515,7 +515,7 @@ local function AudienceList(p33) --[[ line: 620 ]]
 		LayoutOrder = 2,
 		Selectable = false,
 		tag = "size-full-0 auto-y",
-		onValueChanged = reactModule.useCallback(function(p34) --[[ line: 640 ]]
+		onValueChanged = reactModule.useCallback(function(p34)
 			-- upvalues: p33 (ref)
 			p33.onAudienceActivated(p34)
 		end, { p33.onAudienceActivated }),
@@ -561,7 +561,7 @@ local function AudienceList(p33) --[[ line: 620 ]]
 	})
 end
 
-local function EligibilityTooltip(p35) --[[ line: 702 ]]
+local function EligibilityTooltip(p35)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useScaledValue (ref), buildExperienceAudienceTooltipMaxWidth (ref), fFlagBuildAudiencePublishPromptModule (ref), reactModule (ref), popover (ref), popoverAlign (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), radius (ref), popoverSide (ref), view (ref), text (ref)
 	local GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE, GAME_CONFIGURATION_AUDIENCE_NOT_ELIGIBLE_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED, GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION
 	local var83 = if fFlagBuildLocalization then useLocalization({
@@ -626,7 +626,7 @@ local function EligibilityTooltip(p35) --[[ line: 702 ]]
 	})
 end
 
-local function EligibilityBanner(p36) --[[ line: 783 ]]
+local function EligibilityBanner(p36)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	return reactModule.createElement(view, {
 		LayoutOrder = 3,
@@ -657,7 +657,7 @@ local function EligibilityBanner(p36) --[[ line: 783 ]]
 	})
 end
 
-return function(p37) --[[ line: 820 | named "AudienceConfigurationContent" ]]
+return function(p37)
 	-- upvalues: useAudienceController (ref), reactModule (ref), fFlagBuildAudiencePublishPromptModule (ref), view (ref), AudienceHeader (ref), AudienceList (ref), EligibilityTooltip (ref), EligibilityBanner (ref)
 	local testId = p37.testId or "audience-configuration-content"
 	local var86 = useAudienceController(p37.universeId)

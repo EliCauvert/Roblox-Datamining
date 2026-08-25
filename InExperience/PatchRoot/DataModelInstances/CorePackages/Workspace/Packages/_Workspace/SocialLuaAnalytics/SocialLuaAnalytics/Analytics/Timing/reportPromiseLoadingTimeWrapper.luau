@@ -6,15 +6,15 @@ local eventTypes = require(socialLuaAnalytics.Analytics.Enums).EventTypes
 local _ = require(parent.LuauPolyfill)
 local timersModule = require(script.Parent.Timers)
 
-return function(p0, p1, p2) --[[ line: 54 | named "reportPromiseLoadingTimeWrapper" ]]
+return function(p0, p1, p2)
 	-- upvalues: timersModule (ref), eventTypes (ref), retrievalStatus (ref), promiseModule (ref)
-	return function(...) --[[ line: 59 | named "reportPromiseLoadingTime" ]]
+	return function(...)
 		-- upvalues: timersModule (copy), p2 (ref), p1 (ref), eventTypes (copy), p0 (ref), retrievalStatus (copy), promiseModule (copy)
 		local list = { ... }
 		local var4 = timersModule()
 		local var5 = var4.start()
 		
-		local var6 = function(p3, p4) --[[ line: 65 ]]
+		local var6 = function(p3, p4)
 			-- upvalues: p2 (copy), var4 (ref), var5 (ref), p1 (copy), list (ref), eventTypes (copy)
 			if p2 and p2.fireEvent then
 				local var7 = p1(unpack(list)) or {}
@@ -27,17 +27,17 @@ return function(p0, p1, p2) --[[ line: 54 | named "reportPromiseLoadingTimeWrapp
 			end
 		end
 		
-		return p0(...):andThen(function(p6) --[[ line: 80 ]]
+		return p0(...):andThen(function(p6)
 			-- upvalues: var6 (ref), retrievalStatus (copy)
-			pcall(function() --[[ line: 81 ]]
+			pcall(function()
 				-- upvalues: var6 (copy), retrievalStatus (copy), p6 (ref)
 				var6(retrievalStatus.Done, p6)
 			end)
 			
 			return p6
-		end):catch(function(p5) --[[ line: 86 ]]
+		end):catch(function(p5)
 			-- upvalues: var6 (ref), retrievalStatus (copy), promiseModule (copy)
-			pcall(function() --[[ line: 87 ]]
+			pcall(function()
 				-- upvalues: var6 (copy), retrievalStatus (copy)
 				var6(retrievalStatus.Failed)
 			end)

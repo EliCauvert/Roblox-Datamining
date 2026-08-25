@@ -38,7 +38,7 @@ fullscreenTitleBar_1.defaultProps = {
 	appStorageService = appStorageService
 }
 
-function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
+function fullscreenTitleBar_1.init(p0)
 	-- upvalues: getFFlagFullscreenTitleBarInjectGameServicesModule (ref), userGameSettingsService (ref), guiService (ref), appStorageService (ref), getFIntFullscreenTitleBarTriggerDelayMillisModule (ref), promise (ref), userLocalStoreModule (ref), getFFlagFixFullscreenTitleBarPromiseCancelModule (ref)
 	p0.userGameSettings = if getFFlagFullscreenTitleBarInjectGameServicesModule() then p0.props.userGameSettings else userGameSettingsService
 	p0.guiService = if getFFlagFullscreenTitleBarInjectGameServicesModule() then p0.props.guiService else guiService
@@ -48,17 +48,17 @@ function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
 		fullscreenEnabled = p0.userGameSettings:InFullScreen()
 	})
 	
-	function p0.onFullscreenChanged(p1) --[[ line: 67 ]]
+	function p0.onFullscreenChanged(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ isTriggered = false, fullscreenEnabled = p1 })
 	end
 	
-	function p0.triggerTitleBar() --[[ line: 74 ]]
+	function p0.triggerTitleBar()
 		-- upvalues: getFIntFullscreenTitleBarTriggerDelayMillisModule (copy), p0 (ref), promise (copy)
 		local var15 = getFIntFullscreenTitleBarTriggerDelayMillisModule() / 1000
 		
 		if var15 > 0 then
-			p0.triggerTitleBarPromise = promise.delay(var15):andThenCall(function() --[[ line: 77 ]]
+			p0.triggerTitleBarPromise = promise.delay(var15):andThenCall(function()
 				-- upvalues: p0 (copy)
 				p0.triggerTitleBarPromise = nil
 				
@@ -73,7 +73,7 @@ function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
 		end
 	end
 	
-	function p0.cancelTriggerTitleBar() --[[ line: 94 ]]
+	function p0.cancelTriggerTitleBar()
 		-- upvalues: p0 (ref)
 		if p0.triggerTitleBarPromise then
 			p0.triggerTitleBarPromise:cancel()
@@ -81,20 +81,20 @@ function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
 		end
 	end
 	
-	function p0.hideTitleBar() --[[ line: 101 ]]
+	function p0.hideTitleBar()
 		-- upvalues: p0 (ref)
 		if p0.state.isTriggered then
 			p0:setState({ isTriggered = false })
 		end
 	end
 	
-	function p0.exitFullscreen() --[[ line: 109 ]]
+	function p0.exitFullscreen()
 		-- upvalues: p0 (ref)
 		p0.hideTitleBar()
 		p0.guiService:ToggleFullscreen()
 	end
 	
-	function p0.closeRoblox() --[[ line: 114 ]]
+	function p0.closeRoblox()
 		-- upvalues: p0 (ref), userLocalStoreModule (copy)
 		p0.hideTitleBar()
 		
@@ -106,7 +106,7 @@ function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
 		p0.props.startLeavingGame()
 	end
 	
-	function p0.onDisappear() --[[ line: 125 ]]
+	function p0.onDisappear()
 		-- upvalues: p0 (ref), getFFlagFixFullscreenTitleBarPromiseCancelModule (copy), promise (copy)
 		if p0.hideTitleBarPromise then
 			if getFFlagFixFullscreenTitleBarPromiseCancelModule() then
@@ -116,14 +116,14 @@ function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
 			end
 			p0.hideTitleBarPromise = nil
 		end
-		p0.hideTitleBarPromise = promise.delay(0.5):andThenCall(function() --[[ line: 135 ]]
+		p0.hideTitleBarPromise = promise.delay(0.5):andThenCall(function()
 			-- upvalues: p0 (copy)
 			p0.hideTitleBarPromise = nil
 			p0.hideTitleBar()
 		end)
 	end
 	
-	function p0.mouseReenter() --[[ line: 141 ]]
+	function p0.mouseReenter()
 		-- upvalues: p0 (ref)
 		if p0.state.isTriggered and p0.hideTitleBarPromise then
 			p0.hideTitleBarPromise:cancel()
@@ -132,7 +132,7 @@ function fullscreenTitleBar_1.init(p0) --[[ line: 55 ]]
 	end
 end
 
-function fullscreenTitleBar_1.render(p2) --[[ line: 149 ]]
+function fullscreenTitleBar_1.render(p2)
 	-- upvalues: roact (ref), externalEventConnectionModule (ref), coreGuiService (ref), fullscreenTitleBar (ref)
 	return roact.createFragment({
 		FullscreenChangedEvent = roact.createElement(externalEventConnectionModule, {
@@ -166,13 +166,13 @@ function fullscreenTitleBar_1.render(p2) --[[ line: 149 ]]
 	})
 end
 
-function fullscreenTitleBar_1.didUpdate(p3, p4) --[[ line: 184 ]]
+function fullscreenTitleBar_1.didUpdate(p3, p4)
 	if not p4.isMenuOpen and p3.props.isMenuOpen then
 		p3.hideTitleBar()
 	end
 end
 
-function fullscreenTitleBar_1.willUnmount(p5) --[[ line: 190 ]]
+function fullscreenTitleBar_1.willUnmount(p5)
 	if p5.hideTitleBarPromise then
 		p5.hideTitleBarPromise:cancel()
 	end
@@ -181,21 +181,21 @@ function fullscreenTitleBar_1.willUnmount(p5) --[[ line: 190 ]]
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p7, _) --[[ line: 207 ]]
+return roactRodux.UNSTABLE_connect2(function(p7, _)
 	return { isMenuOpen = p7.isMenuOpen }
-end, function(p8) --[[ line: 211 ]]
+end, function(p8)
 	-- upvalues: openEducationalPopupModule (ref), startLeavingGameModule (ref)
 	return {
-		openEducationalPopup = function(p9, p10, p11) --[[ line: 213 ]]
+		openEducationalPopup = function(p9, p10, p11)
 			-- upvalues: p8 (ref), openEducationalPopupModule (copy)
 			return p8(openEducationalPopupModule(p9, p10, p11))
 		end,
-		startLeavingGame = function() --[[ line: 216 ]]
+		startLeavingGame = function()
 			-- upvalues: p8 (ref), startLeavingGameModule (copy)
 			p8(startLeavingGameModule())
 		end
 	}
-end)(inGameMenuPolicyModule.connect(function(p6, _) --[[ line: 200 ]]
+end)(inGameMenuPolicyModule.connect(function(p6, _)
 	return {
 		isEducationalPopupEnabled = p6.enableEducationalPopup(),
 		maxDisplayCount = p6.educationalPopupMaxDisplayCount()

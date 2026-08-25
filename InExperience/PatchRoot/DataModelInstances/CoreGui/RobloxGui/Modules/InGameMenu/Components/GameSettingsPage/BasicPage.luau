@@ -61,7 +61,7 @@ basicPage.validateProps = t.strictInterface({
 basicPage.defaultProps = { vrService = VRService, isVRAppBuild = isVRAppBuild }
 local VREnabled = userGameSettingsService.VREnabled
 
-function basicPage.init(p0) --[[ line: 101 ]]
+function basicPage.init(p0)
 	-- upvalues: localPlayer (ref), userGameSettingsService (ref), roact (ref)
 	p0:setState({
 		voiceChatEnabled = false,
@@ -78,7 +78,7 @@ function basicPage.init(p0) --[[ line: 101 ]]
 	p0.volumeButton = roact.createRef()
 end
 
-function basicPage.didUpdate(p1, p2) --[[ line: 117 ]]
+function basicPage.didUpdate(p1, p2)
 	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), guiService (ref)
 	if not getFFlagIGMGamepadSelectionHistoryModule() and p1.props.canCaptureFocus and p1.props.canGamepadCaptureFocus and (not p2.canCaptureFocus or not p2.canGamepadCaptureFocus) then
 		if not p1.state.vrActive then
@@ -90,10 +90,10 @@ function basicPage.didUpdate(p1, p2) --[[ line: 117 ]]
 	end
 end
 
-local function _() --[[ line: 134 | named "createLayoutOrderGenerator" ]]
+local function _()
 	local var41 = 0
 	
-	return function() --[[ line: 136 ]]
+	return function()
 		-- upvalues: var41 (write)
 		var41 += 1
 		
@@ -101,12 +101,12 @@ local function _() --[[ line: 134 | named "createLayoutOrderGenerator" ]]
 	end
 end
 
-function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
+function basicPage.renderWithSelectionCursor(p3, p4)
 	-- upvalues: getFFlagAlwaysShowVRToggleModule (ref), platform (ref), userGameSettingsService (ref), roact (ref), pageModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref), categoryHeaderModule (ref), VRMoreComfortSettingsEngineFeature (ref), autoPropertyToggleEntryModule (ref), var20 (write), withLocalizationModule (ref), themedTextLabelModule (ref), imageSetLabel (ref), assetsModule (ref), VREnabled (ref), safetyBubbleModeEntryModule (ref), dividerModule (ref), cameraModeEntryModule (ref), cameraSensitivityEntryModule (ref), movementModeEntryModule (ref), volumeEntryModule (ref), deviceSelectionEntryModule (ref), graphicsQualityEntryModule (ref), toggleEntryModule (ref), sendAnalyticsModule (ref), var33 (ref), externalEventConnectionModule (ref), devEnableMouseLockPropertyChangedSignal (ref), localPlayer (ref), isUsingCameraYInvertedPropertyChangedSignal (ref), VREnabledPropertyChangedSignal (ref)
 	local var45
 	local var42 = 0
 	
-	local var43 = function() --[[ line: 136 ]]
+	local var43 = function()
 		-- upvalues: var42 (write)
 		var42 += 1
 		
@@ -137,7 +137,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		createElement_1 = createElement_1(focusHandlerModule, {
 			isFocused = p3.props.canCaptureFocus and p3.props.canGamepadCaptureFocus,
 			shouldForgetPreviousSelection = if p3.props.currentPage ~= constantsModule.MainPagePageKey then p3.props.currentZone == 0 else true,
-			didFocus = function(p5) --[[ line: 157 ]]
+			didFocus = function(p5)
 				-- upvalues: guiService (copy), p3 (ref)
 				if p5 then
 					guiService.SelectedCoreObject = p5
@@ -165,7 +165,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			[roact.Change.AbsoluteContentSize] = function(p6) --[[ line: 179 ]]
+			[roact.Change.AbsoluteContentSize] = function(p6)
 				-- upvalues: p3 (ref)
 				p3.setPageSize(UDim2.new(0, 0, 0, p6.AbsoluteContentSize.Y))
 			end
@@ -196,7 +196,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		}, {
 			Text = withLocalizationModule({
 				text = "CoreScripts.InGameMenu.GameSettings.SwitchToVRComfortSettings"
-			})(function(p7) --[[ line: 220 ]]
+			})(function(p7)
 				-- upvalues: roact (copy), themedTextLabelModule (copy)
 				return roact.createElement(themedTextLabelModule, {
 					fontKey = "Body",
@@ -308,7 +308,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 			labelKey = "CoreScripts.InGameMenu.GameSettings.FullScreen",
 			LayoutOrder = var43(),
 			checked = p3.state.fullScreenEnabled,
-			onToggled = function() --[[ line: 362 ]]
+			onToggled = function()
 				-- upvalues: guiService (copy), sendAnalyticsModule (copy), constantsModule (copy)
 				guiService:ToggleFullscreen()
 				sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
@@ -325,7 +325,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		}, {
 			Text = withLocalizationModule({
 				text = "CoreScripts.InGameMenu.GameSettings.SwitchToAdvancedSettings"
-			})(function(p8) --[[ line: 381 ]]
+			})(function(p8)
 				-- upvalues: roact (copy), themedTextLabelModule (copy)
 				return roact.createElement(themedTextLabelModule, {
 					fontKey = "Body",
@@ -348,14 +348,14 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		AdvancedDivider = roact.createElement(dividerModule, { LayoutOrder = var43(), Size = UDim2.new(1, -24, 0, 1) }),
 		ShiftLockEnabledListener = roact.createElement(externalEventConnectionModule, {
 			event = devEnableMouseLockPropertyChangedSignal,
-			callback = function() --[[ line: 412 ]]
+			callback = function()
 				-- upvalues: p3 (ref), localPlayer (copy)
 				p3:setState({ shiftLockEnabled = localPlayer.DevEnableMouseLock })
 			end
 		}),
 		FullScreenListener = roact.createElement(externalEventConnectionModule, {
 			event = userGameSettingsService.FullscreenChanged,
-			callback = function(p9) --[[ line: 420 ]]
+			callback = function(p9)
 				-- upvalues: p3 (ref), sendAnalyticsModule (copy), constantsModule (copy)
 				p3:setState({ fullScreenEnabled = p9 })
 				sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsFullscreenModeName, { enabled = p9 })
@@ -363,7 +363,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		}),
 		CameraYInvertedListener = roact.createElement(externalEventConnectionModule, {
 			event = isUsingCameraYInvertedPropertyChangedSignal,
-			callback = function() --[[ line: 432 ]]
+			callback = function()
 				-- upvalues: p3 (ref), userGameSettingsService (copy)
 				p3:setState({
 					invertedCameraEnabled = userGameSettingsService.IsUsingCameraYInverted
@@ -372,7 +372,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		}),
 		VRActiveListener = roact.createElement(externalEventConnectionModule, {
 			event = p3.props.vrService:GetPropertyChangedSignal("VREnabled"),
-			callback = function() --[[ line: 440 ]]
+			callback = function()
 				-- upvalues: p3 (ref), userGameSettingsService (copy)
 				if p3.props.vrService.VREnabled then
 					userGameSettingsService.HasEverUsedVR = true
@@ -382,7 +382,7 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 		}),
 		VREnabledListener = roact.createElement(externalEventConnectionModule, {
 			event = VREnabledPropertyChangedSignal,
-			callback = function() --[[ line: 451 ]]
+			callback = function()
 				-- upvalues: p3 (ref), userGameSettingsService (copy)
 				p3:setState({ vrEnabled = userGameSettingsService.VREnabled })
 			end
@@ -392,26 +392,26 @@ function basicPage.renderWithSelectionCursor(p3, p4) --[[ line: 142 ]]
 	return createElement(pageModule, t, t_1)
 end
 
-function basicPage.render(p10) --[[ line: 461 ]]
+function basicPage.render(p10)
 	-- upvalues: var32 (ref)
-	return var32(function(p11) --[[ line: 462 ]]
+	return var32(function(p11)
 		-- upvalues: p10 (ref)
 		return p10:renderWithSelectionCursor(p11)
 	end)
 end
 
-function basicPage.didMount(p12) --[[ line: 467 ]]
+function basicPage.didMount(p12)
 	-- upvalues: robloxGui (ref)
-	spawn(function() --[[ line: 468 ]]
+	spawn(function()
 		-- upvalues: robloxGui (copy), p12 (ref)
-		require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default:asyncInit():andThen(function() --[[ line: 473 ]]
+		require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default:asyncInit():andThen(function()
 			-- upvalues: p12 (copy)
 			p12:setState({ voiceChatEnabled = true })
-		end):catch(function() --[[ line: 478 ]] end)
+		end):catch(function() end)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p13) --[[ line: 482 ]]
+return roactRodux.UNSTABLE_connect2(function(p13)
 	-- upvalues: constantsModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref)
 	return {
 		isMenuOpen = p13.isMenuOpen,
@@ -420,14 +420,14 @@ return roactRodux.UNSTABLE_connect2(function(p13) --[[ line: 482 ]]
 		canCaptureFocus = p13.menuPage == "GameSettings" and (p13.isMenuOpen and not p13.respawn.dialogOpen),
 		canGamepadCaptureFocus = p13.displayOptions.inputType == constantsModule.InputType.Gamepad and p13.currentZone == 1
 	}
-end, function(p14) --[[ line: 500 ]]
+end, function(p14)
 	-- upvalues: setCurrentPageModule (ref), constantsModule (ref)
 	return {
-		switchToAdvancedPage = function() --[[ line: 502 ]]
+		switchToAdvancedPage = function()
 			-- upvalues: p14 (ref), setCurrentPageModule (copy), constantsModule (copy)
 			p14(setCurrentPageModule(constantsModule.advancedSettingsPageKey))
 		end,
-		switchToVRComfortSettingsPage = function() --[[ line: 505 ]]
+		switchToVRComfortSettingsPage = function()
 			-- upvalues: p14 (ref), setCurrentPageModule (copy), constantsModule (copy)
 			p14(setCurrentPageModule(constantsModule.vrComfortSettingsPageKey))
 		end

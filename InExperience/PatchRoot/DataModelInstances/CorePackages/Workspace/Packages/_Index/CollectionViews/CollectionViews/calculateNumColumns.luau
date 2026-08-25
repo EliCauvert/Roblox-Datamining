@@ -1,6 +1,6 @@
 ﻿local argCheckModule = require(script:FindFirstAncestor("CollectionViews").Parent.ArgCheck)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 9 | named "calculateNumColumns" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: argCheckModule (ref)
 	argCheckModule.assert(p0 >= 1)
 	argCheckModule.assert(p1 >= 0)

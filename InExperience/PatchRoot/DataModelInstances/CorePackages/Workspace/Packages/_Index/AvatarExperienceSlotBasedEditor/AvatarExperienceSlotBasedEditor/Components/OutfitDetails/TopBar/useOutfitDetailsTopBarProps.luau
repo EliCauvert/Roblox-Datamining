@@ -1,7 +1,7 @@
 ﻿local useStatusBarHeight = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.RobloxAppHooks).useStatusBarHeight
 local _ = require(script.Parent.OutfitDetailsTopBar)
 
-return function(p0) --[[ line: 14 | named "useOutfitDetailsTopBarProps" ]]
+return function(p0)
 	-- upvalues: useStatusBarHeight (ref)
 	return {
 		statusBarHeight = useStatusBarHeight(),

@@ -2,9 +2,9 @@
 local reactModule = require(friendsCommon.Parent.React)
 local handleFriendshipEventModule = require(friendsCommon.EventHandlers.handleFriendshipEvent)
 
-return function() --[[ line: 8 | named "useHandleFriendshipEvent" ]]
+return function()
 	-- upvalues: reactModule (ref), handleFriendshipEventModule (ref)
-	return reactModule.useCallback(function(p0) --[[ line: 9 ]]
+	return reactModule.useCallback(function(p0)
 		-- upvalues: handleFriendshipEventModule (copy)
 		handleFriendshipEventModule({ friendshipUpdate = p0 })
 	end, {})

@@ -4,18 +4,18 @@ local fFlagIEMFocusNavPeoplePageToButtons = require(parent.SharedFlags).FFlagIEM
 local var1 = nil
 local var2, var3 = signalsModule.createSignal(false)
 
-return (function() --[[ line: 14 | named "createSettingsHubService" ]]
+return (function()
 	-- upvalues: var1 (write), fFlagIEMFocusNavPeoplePageToButtons (ref), var2 (ref), var3 (ref)
 	return {
-		register = function(p0) --[[ line: 17 ]]
+		register = function(p0)
 			-- upvalues: var1 (copy)
 			var1 = p0
 		end,
-		hubRef = function() --[[ line: 22 ]]
+		hubRef = function()
 			-- upvalues: var1 (copy)
 			return if var1 then var1.HubRef else nil
 		end,
-		pageRef = if fFlagIEMFocusNavPeoplePageToButtons then function() --[[ line: 26 ]]
+		pageRef = if fFlagIEMFocusNavPeoplePageToButtons then function()
 			-- upvalues: var1 (copy)
 			return if var1 then var1.Page else nil
 		end else nil,

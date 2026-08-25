@@ -1,6 +1,6 @@
 ﻿local llama = require(script:FindFirstAncestor("FriendsLanding").dependencies).llama
 
-return function(p0) --[[ line: 5 ]]
+return function(p0)
 	-- upvalues: llama (ref)
 	local t = {}
 	local t_1 = {}
@@ -8,7 +8,7 @@ return function(p0) --[[ line: 5 ]]
 	local t_3 = {}
 	
 	for i, v in pairs(p0.responseBody.data) do
-		table.insert(t, table.concat(llama.List.map(v.mutualFriendsList, function(p1) --[[ line: 14 ]]
+		table.insert(t, table.concat(llama.List.map(v.mutualFriendsList, function(p1)
 			return p1
 		end), ","))
 		table.insert(t_1, if v.friendRequest.sourceUniverseId then v.friendRequest.sourceUniverseId else 0)

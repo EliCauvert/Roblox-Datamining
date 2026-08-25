@@ -12,7 +12,7 @@ local view = foundationModule.View
 local constantsModule = require(chatLineReporting.Common.Constants)
 local chatLineReportEyebrowModule = require(chatLineReporting.Components.ChatLineReportEyebrow)
 
-return function(p0) --[[ line: 33 | named "ChatLineReportSelectableLine" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), getMessageTextModule (ref), view (ref), constantsModule (ref), chatLineReportEyebrowModule (ref), text (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref)
 	local var7, var8 = reactModule.useState(nil)
 	local var9 = getMessageTextModule(p0.message.useTranslation, p0.message.translation, p0.message.text)

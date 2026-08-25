@@ -4,7 +4,7 @@ local reactOtterModule = require(parent.ReactOtter)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local mutedError = require(parent.Loggers).mutedError
 
-local function interpolateColors(p0, p1, p2) --[[ line: 19 ]]
+local function interpolateColors(p0, p1, p2)
 	-- upvalues: mutedError (ref)
 	local color3 = p1.Color3
 	local color3_1 = p2.Color3
@@ -22,11 +22,11 @@ local function interpolateColors(p0, p1, p2) --[[ line: 19 ]]
 	}
 end
 
-return function(p3) --[[ line: 38 | named "useCategoryPillColorAnimation" ]]
+return function(p3)
 	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), interpolateColors (ref)
 	local var3 = useTokens()
 	local var4, var5 = reactOtterModule.useAnimatedBinding(if p3 then 1 else 0)
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p3 (ref), var5 (ref), reactOtterModule (copy)
 		local var6 = if p3 then 1 else 0
 		
@@ -39,11 +39,11 @@ return function(p3) --[[ line: 38 | named "useCategoryPillColorAnimation" ]]
 	end, { p3 })
 	
 	return {
-		animatedBackgroundStyle = var4:map(function(p4) --[[ line: 60 ]]
+		animatedBackgroundStyle = var4:map(function(p4)
 			-- upvalues: interpolateColors (copy), var3 (ref)
 			return interpolateColors(p4, var3.Color.ActionStandard.Background, var3.Color.ActionSubEmphasis.Background)
 		end),
-		animatedTextStyle = var4:map(function(p5) --[[ line: 68 ]]
+		animatedTextStyle = var4:map(function(p5)
 			-- upvalues: interpolateColors (copy), var3 (ref)
 			return interpolateColors(p5, var3.Color.ActionStandard.Foreground, var3.Color.ActionSubEmphasis.Foreground)
 		end)

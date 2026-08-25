@@ -10,7 +10,7 @@ local isListType = graphQLModule.isListType
 local isInputObjectType = graphQLModule.isInputObjectType
 local _ = require(script.Parent.types)
 
-local function transformInputValue(a, b, p0, p1) --[[ line: 34 ]]
+local function transformInputValue(a, b, p0, p1)
 	-- upvalues: getNullableType (ref), boolean (ref), isLeafType (ref), isListType (ref), array (ref), transformInputValue (ref), isInputObjectType (ref)
 	local var4 = if p0 ~= nil then nil else p0
 	local var5 = if p1 ~= nil then nil else p1
@@ -23,7 +23,7 @@ local function transformInputValue(a, b, p0, p1) --[[ line: 34 ]]
 	if boolean.toJSBoolean(isLeafType(var6)) then
 		return if var4 == nil then b else var4(var6, b)
 	elseif boolean.toJSBoolean(isListType(var6)) then
-		return array.map(b, function(p2) --[[ line: 61 ]]
+		return array.map(b, function(p2)
 			-- upvalues: transformInputValue (copy), var6 (ref), var4 (ref), var5 (ref)
 			return transformInputValue(var6.ofType, p2, var4, var5)
 		end)
@@ -45,27 +45,27 @@ end
 
 t.transformInputValue = transformInputValue
 
-function t.serializeInputValue(p3, p4) --[[ line: 95 ]]
+function t.serializeInputValue(p3, p4)
 	-- upvalues: transformInputValue (ref)
-	return transformInputValue(p3, p4, function(p5, p6) --[[ line: 96 ]]
+	return transformInputValue(p3, p4, function(p5, p6)
 		local ok, status = pcall(p5.serialize, p5, p6)
 		
 		return if ok then status else p6
 	end)
 end
 
-function t.parseInputValue(p7, p8) --[[ line: 117 ]]
+function t.parseInputValue(p7, p8)
 	-- upvalues: transformInputValue (ref)
-	return transformInputValue(p7, p8, function(p9, p10) --[[ line: 118 ]]
+	return transformInputValue(p7, p8, function(p9, p10)
 		local ok, status = pcall(p9.parseValue, p9, p10)
 		
 		return if ok then status else p10
 	end)
 end
 
-function t.parseInputValueLiteral(p11, p12) --[[ line: 139 ]]
+function t.parseInputValueLiteral(p11, p12)
 	-- upvalues: transformInputValue (ref)
-	return transformInputValue(p11, p12, function(p13, p14) --[[ line: 140 ]]
+	return transformInputValue(p11, p12, function(p13, p14)
 		return p13:parseLiteral(p14, {})
 	end)
 end

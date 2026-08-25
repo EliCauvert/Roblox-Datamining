@@ -5,7 +5,7 @@ local motionModule = require(parent.Motion)
 local transitionPreset = motionModule.TransitionPreset
 local _ = require(foundation.Components.Types)
 
-return function(p0, p1) --[[ line: 28 | named "useSliderMotionStates" ]]
+return function(p0, p1)
 	-- upvalues: motionModule (ref), transitionPreset (ref)
 	return {
 		Hidden = motionModule.createState({

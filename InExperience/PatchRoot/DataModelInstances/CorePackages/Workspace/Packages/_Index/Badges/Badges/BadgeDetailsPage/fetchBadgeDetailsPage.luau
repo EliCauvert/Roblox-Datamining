@@ -9,7 +9,7 @@ local getBadgeDetailsUrlModule = require(badges.BadgesSeeAllPage.getBadgeDetails
 local getBadgeDetailsPageKeyModule = require(script.Parent.getBadgeDetailsPageKey)
 local fFlagSduiUniversalPageEntry = require(parent.SharedFlags).FFlagSduiUniversalPageEntry
 
-local function _() --[[ line: 15 | named "getLocalPlayerUserId" ]]
+local function _()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -21,7 +21,7 @@ local function _() --[[ line: 15 | named "getLocalPlayerUserId" ]]
 	return if userId <= 0 then nil else tostring(userId)
 end
 
-return function(p0, p1) --[[ line: 27 | named "fetchBadgeDetailsPage" ]]
+return function(p0, p1)
 	-- upvalues: playersService (ref), getBadgeDetailsUrlModule (ref), parent (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getBadgeDetailsPageKeyModule (ref), fFlagSduiUniversalPageEntry (ref)
 	local var5
 	local localPlayer = playersService.LocalPlayer

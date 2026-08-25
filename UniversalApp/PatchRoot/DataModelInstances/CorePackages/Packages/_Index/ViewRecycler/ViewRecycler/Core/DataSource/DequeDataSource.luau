@@ -4,7 +4,7 @@ local _ = require(viewRecycler.Core.Types)
 local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 local mutationControllerModule = require(script.Parent.MutationController)
 
-local function getItems(p0, p1, p2, p3) --[[ line: 28 ]]
+local function getItems(p0, p1, p2, p3)
 	local list = table.create(math.max(0, p3 - p2 + 1))
 	
 	for i = p2, math.min(p3, p0) do
@@ -13,7 +13,7 @@ local function getItems(p0, p1, p2, p3) --[[ line: 28 ]]
 	return list
 end
 
-return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
+return function(p4, p5)
 	-- upvalues: itemKeyRegistryModule (ref), mutationControllerModule (ref), getItems (ref), dataSourceChangeTypeModule (ref)
 	p4 = p4 or {}
 	local t = {}
@@ -28,10 +28,10 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 		t[i] = v
 		t_1[i] = var10[i]
 	end
-	local var14 = mutationControllerModule(function() --[[ line: 50 ]]
+	local var14 = mutationControllerModule(function()
 		-- upvalues: p4Count (write)
 		return p4Count
-	end, function() --[[ line: 52 ]]
+	end, function()
 		-- upvalues: t (write), t_1 (write), maxValue (write), var12 (write), p4Count (write), var9 (ref)
 		return {
 			values = table.clone(t),
@@ -41,7 +41,7 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 			count = p4Count,
 			keyRegistry = var9.snapshot()
 		}
-	end, function(p6) --[[ line: 61 ]]
+	end, function(p6)
 		-- upvalues: t (write), t_1 (write), maxValue (write), var12 (write), p4Count (write), var9 (ref)
 		t = p6.values
 		t_1 = p6.keys
@@ -51,12 +51,12 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 		var9.restore(p6.keyRegistry)
 	end)
 	
-	local function _(p7) --[[ line: 70 | named "physical" ]]
+	local function _(p7)
 		-- upvalues: var12 (write), maxValue (write)
 		return (var12 + p7 - 2) % maxValue + 1
 	end
 	
-	local function ensureCapacity() --[[ line: 74 ]]
+	local function ensureCapacity()
 		-- upvalues: p4Count (write), maxValue (write), t (write), var12 (write), t_1 (write)
 		if p4Count < maxValue then return end
 		local var17 = maxValue * 2
@@ -76,25 +76,25 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 	local var16 = nil
 	
 	return {
-		getItemCount = function() --[[ line: 93 ]]
+		getItemCount = function()
 			-- upvalues: p4Count (write)
 			return p4Count
 		end,
-		getItem = function(p8) --[[ line: 96 ]]
+		getItem = function(p8)
 			-- upvalues: t (write), var12 (write), maxValue (write)
 			return t[(var12 + p8 - 2) % maxValue + 1]
 		end,
-		getItemKey = function(p9) --[[ line: 99 ]]
+		getItemKey = function(p9)
 			-- upvalues: t_1 (write), var12 (write), maxValue (write)
 			return t_1[(var12 + p9 - 2) % maxValue + 1]
 		end,
-		getItems = function(p10, p11) --[[ line: 102 ]]
+		getItems = function(p10, p11)
 			-- upvalues: getItems (copy), p4Count (write), var16 (write)
 			return getItems(p4Count, var16.getItem, p10, p11)
 		end,
 		subscribe = var14.subscribe,
 		transaction = var14.transaction,
-		pushFront = function(p12) --[[ line: 109 ]]
+		pushFront = function(p12)
 			-- upvalues: p4Count (write), var9 (ref), ensureCapacity (ref), var12 (write), maxValue (write), t (write), t_1 (write), var14 (ref), dataSourceChangeTypeModule (copy)
 			local var20 = var9.claim(p12, 1)
 			ensureCapacity()
@@ -108,7 +108,7 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 				keys = { var20 }
 			}, p4Count)
 		end,
-		pushBack = function(p13) --[[ line: 120 ]]
+		pushBack = function(p13)
 			-- upvalues: p4Count (write), var9 (ref), ensureCapacity (ref), var12 (write), maxValue (write), t (write), t_1 (write), var14 (ref), dataSourceChangeTypeModule (copy)
 			local var21 = var9.claim(p13, p4Count + 1)
 			ensureCapacity()
@@ -122,7 +122,7 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 				keys = { var21 }
 			}, p4Count)
 		end,
-		popFront = function() --[[ line: 131 ]]
+		popFront = function()
 			-- upvalues: p4Count (write), t (write), var12 (write), t_1 (write), var9 (ref), maxValue (write), var14 (ref), dataSourceChangeTypeModule (copy)
 			if p4Count == 0 then
 				return nil
@@ -142,7 +142,7 @@ return function(p4, p5) --[[ line: 36 | named "createDequeDataSource" ]]
 			
 			return var23
 		end,
-		popBack = function() --[[ line: 147 ]]
+		popBack = function()
 			-- upvalues: p4Count (write), var12 (write), maxValue (write), t (write), t_1 (write), var9 (ref), var14 (ref), dataSourceChangeTypeModule (copy)
 			if p4Count == 0 then
 				return nil

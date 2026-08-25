@@ -16,12 +16,12 @@ local fFlagAppNavBarPerItemThemeOverride = require(parent.SharedFlags).FFlagAppN
 local var8 = if fFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeTokenOverridesContext) else nil
 local t = { dark = colorMode.Dark, light = colorMode.Light }
 
-local function _() --[[ line: 55 | named "useTokenScale" ]]
+local function _()
 	-- upvalues: signalsReactModule (ref), getUIScale (ref)
 	return signalsReactModule.useSignalState(getUIScale)
 end
 
-local function UiModeStyleProvider(p0) --[[ line: 60 ]]
+local function UiModeStyleProvider(p0)
 	-- upvalues: useDeviceType (ref), enableDisplaySize (ref), signalsReactModule (ref), getUIScale (ref), reactModule (ref), userGameSettingsService (ref), cryoModule (ref), foundationProvider (ref), t (ref), sceneOverridesRegistryModule (ref), appStyleProvider (ref)
 	local var11 = useDeviceType()
 	local var12 = if enableDisplaySize then signalsReactModule.useSignalState(getUIScale) else nil
@@ -30,9 +30,9 @@ local function UiModeStyleProvider(p0) --[[ line: 60 ]]
 		reducedMotion = userGameSettingsService.ReducedMotion,
 		preferredTextSize = userGameSettingsService.PreferredTextSize
 	})
-	reactModule.useEffect(function() --[[ line: 74 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), userGameSettingsService (copy)
-		local function updateSettings() --[[ line: 75 ]]
+		local function updateSettings()
 			-- upvalues: var14 (copy), userGameSettingsService (copy)
 			var14({
 				preferredTransparency = userGameSettingsService.PreferredTransparency,
@@ -45,7 +45,7 @@ local function UiModeStyleProvider(p0) --[[ line: 60 ]]
 		local var18 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(updateSettings)
 		local var19 = userGameSettingsService:GetPropertyChangedSignal("PreferredTextSize"):Connect(updateSettings)
 		
-		return function() --[[ line: 89 ]]
+		return function()
 			-- upvalues: var17 (ref), var18 (ref), var19 (ref)
 			var17:Disconnect()
 			var18:Disconnect()
@@ -53,7 +53,7 @@ local function UiModeStyleProvider(p0) --[[ line: 60 ]]
 		end
 	end, {})
 	local style = p0.style
-	local var15 = reactModule.useMemo(function() --[[ line: 97 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), style (ref), var11 (ref), enableDisplaySize (copy), var13 (ref), var12 (write)
 		return cryoModule.Dictionary.join({ deviceType = style.deviceType or var11 }, style, {
 			settings = if enableDisplaySize then cryoModule.Dictionary.join(var13, { scale = var12 }) else var13
@@ -68,7 +68,7 @@ local function UiModeStyleProvider(p0) --[[ line: 60 ]]
 	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var15.tokenOverrides ~= nil }, reactModule.createElement(appStyleProvider, { style = var15 }, p0.children)))
 end
 
-return function(p1) --[[ line: 135 | named "ThemeProvider" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), fFlagAppNavBarPerItemThemeOverride (ref), t (ref), cryoModule (ref), appearanceContextModule (ref), UiModeStyleProvider (ref), var8 (ref)
 	local var20, var21 = reactModule.useState(p1.style.themeName)
 	local var22 = if fFlagAppNavBarPerItemThemeOverride and p1.syncThemeFromProps then p1.style.themeName else var20

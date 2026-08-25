@@ -4,29 +4,29 @@ local foundationModule = require(parent.Foundation)
 local textInput = foundationModule.TextInput
 local iconName = foundationModule.Enums.IconName
 
-return function(p0) --[[ line: 24 | named "SearchBar" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), textInput (ref), iconName (ref)
 	local var2, var3 = reactModule.useState("")
 	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useCallback(function() --[[ line: 28 ]]
+	local var5 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref)
 		if var4.current then
 			task.cancel(var4.current)
 			var4.current = nil
 		end
 	end, {})
-	local var6 = reactModule.useCallback(function(p1) --[[ line: 35 ]]
+	local var6 = reactModule.useCallback(function(p1)
 		-- upvalues: var3 (ref), var5 (ref), var4 (ref), p0 (ref)
 		var3(p1)
 		var5()
-		var4.current = task.delay(0.4, function() --[[ line: 39 ]]
+		var4.current = task.delay(0.4, function()
 			-- upvalues: p0 (copy), p1 (ref)
 			if p0.onTextChanged then
 				p0.onTextChanged(p1)
 			end
 		end)
 	end, { p0.onTextChanged, var5 })
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref)
 		return var5
 	end, {})
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 24 | named "SearchBar" ]]
 		onChanged = var6,
 		iconTrailing = if var2 ~= "" then nil else {
 			name = iconName.CircleX,
-			onActivated = reactModule.useCallback(function() --[[ line: 50 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var5 (ref), var3 (ref), p0 (ref)
 				var5()
 				var3("")

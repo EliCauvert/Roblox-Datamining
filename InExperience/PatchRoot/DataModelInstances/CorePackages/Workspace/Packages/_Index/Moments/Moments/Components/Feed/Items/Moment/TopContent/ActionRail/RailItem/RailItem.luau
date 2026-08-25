@@ -10,16 +10,16 @@ local view = foundationModule.View
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 
-local function formatCount(p0) --[[ line: 31 ]]
+local function formatCount(p0)
 	return if p0 == nil then "" elseif p0 >= 1000000 then string.format("%.1fM", p0 / 1000000) elseif p0 >= 1000 then string.format("%.1fK", p0 / 1000) else tostring(p0)
 end
 
-return reactModule.memo(function(p1) --[[ line: 43 | named "RailItem" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactUtilsModule (ref), useTokens (ref), getColorStyleWithTransparencyModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), formatCount (ref)
 	local count = p1.count
 	local var6 = reactUtilsModule.createNextOrder()
 	local var7 = useTokens()
-	local var8 = p1.animationRatio:map(function(p2) --[[ line: 49 ]]
+	local var8 = p1.animationRatio:map(function(p2)
 		-- upvalues: getColorStyleWithTransparencyModule (copy), var7 (ref)
 		return getColorStyleWithTransparencyModule(var7.Color.Content.Emphasis, p2)
 	end)
@@ -45,7 +45,7 @@ return reactModule.memo(function(p1) --[[ line: 43 | named "RailItem" ]]
 			tag = "auto-xy text-caption-large text-align-x-center content-emphasis",
 			LayoutOrder = var6(),
 			Text = count:map(formatCount),
-			Visible = count:map(function(p3) --[[ line: 78 ]]
+			Visible = count:map(function(p3)
 				return p3 ~= nil
 			end),
 			textStyle = var8

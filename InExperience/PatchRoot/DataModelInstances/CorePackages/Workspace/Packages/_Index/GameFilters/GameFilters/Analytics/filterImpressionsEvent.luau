@@ -14,7 +14,7 @@ local t = {
 	})
 }
 
-return function(p0, p1, p2) --[[ line: 27 | named "filterImpressionsEvent" ]]
+return function(p0, p1, p2)
 	-- upvalues: t (ref), mutedError (ref)
 	local var2 = t[p1]
 	

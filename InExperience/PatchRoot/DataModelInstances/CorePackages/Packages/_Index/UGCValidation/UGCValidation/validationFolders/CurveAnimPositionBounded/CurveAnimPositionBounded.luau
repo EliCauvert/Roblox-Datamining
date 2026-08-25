@@ -22,7 +22,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 27 ]]
+function t.run(p0, p1)
 	-- upvalues: constantsModule (ref), getFStringUGCValidateMaxAnimationMovementPerPartModule (ref), errorSourceStringsModule (ref)
 	local t = {}
 	

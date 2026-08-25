@@ -13,12 +13,12 @@ local liveUpdateElementModule = require(script.Parent.Parent.Components.LiveUpda
 local setDevConsolePositionModule = require(script.Parent.Parent.Actions.SetDevConsolePosition)
 local devConsoleTopBar = roactModule.Component:extend("DevConsoleTopBar")
 
-function devConsoleTopBar.init(p0) --[[ line: 24 ]]
+function devConsoleTopBar.init(p0)
 	-- upvalues: userInputService (ref), roactModule (ref)
 	p0.inputChangedConnection = nil
 	p0.inputChangedDisconnectRetries = 0
 	
-	function p0.inputBegan(_, p1) --[[ line: 29 ]]
+	function p0.inputBegan(_, p1)
 		-- upvalues: p0 (ref), userInputService (copy)
 		if p0.props.isMinimized then return end
 		if p1.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -29,7 +29,7 @@ function devConsoleTopBar.init(p0) --[[ line: 24 ]]
 				p0.inputChangedConnection:Disconnect()
 				p0.inputChangedConnection = nil
 			end
-			p0.inputChangedConnection = userInputService.InputChanged:Connect(function(p2) --[[ line: 44 ]]
+			p0.inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
 				-- upvalues: p0 (copy)
 				p0.inputChanged(nil, p2)
 			end)
@@ -42,7 +42,7 @@ function devConsoleTopBar.init(p0) --[[ line: 24 ]]
 		end
 	end
 	
-	function p0.inputChanged(_, p3) --[[ line: 58 ]]
+	function p0.inputChanged(_, p3)
 		-- upvalues: p0 (ref)
 		if p0.state.moving then
 			if p3.UserInputType == Enum.UserInputType.MouseMovement then
@@ -62,7 +62,7 @@ function devConsoleTopBar.init(p0) --[[ line: 24 ]]
 		end
 	end
 	
-	function p0.inputEnded(_, p4) --[[ line: 75 ]]
+	function p0.inputEnded(_, p4)
 		-- upvalues: p0 (ref)
 		if p4.UserInputType == Enum.UserInputType.MouseButton1 and p4.UserInputState == Enum.UserInputState.End then
 			if p0.inputChangedConnection then
@@ -76,7 +76,7 @@ function devConsoleTopBar.init(p0) --[[ line: 24 ]]
 	p0.ref = roactModule.createRef()
 end
 
-function devConsoleTopBar.render(p5) --[[ line: 95 ]]
+function devConsoleTopBar.render(p5)
 	-- upvalues: roactModule (ref), constantsModule (ref), var8 (ref), frameHeight (ref), liveUpdateElementModule (ref), var5 (ref), var6 (ref)
 	local isMinimized = p5.props.isMinimized
 	local formFactor = p5.props.formFactor
@@ -159,10 +159,10 @@ function devConsoleTopBar.render(p5) --[[ line: 95 ]]
 	}, t)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p6) --[[ line: 191 | named "mapDispatchToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(nil, function(p6)
 	-- upvalues: setDevConsolePositionModule (ref)
 	return {
-		dispatchSetDevConsolePosition = function(value) --[[ line: 193 ]]
+		dispatchSetDevConsolePosition = function(value)
 			-- upvalues: p6 (ref), setDevConsolePositionModule (copy)
 			p6(setDevConsolePositionModule(value))
 		end

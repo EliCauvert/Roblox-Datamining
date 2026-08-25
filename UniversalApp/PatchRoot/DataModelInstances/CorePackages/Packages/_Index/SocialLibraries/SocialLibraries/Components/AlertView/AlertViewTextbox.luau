@@ -8,9 +8,9 @@ local rect = Rect.new(7, 8, 7, 8)
 local alertViewTextbox = roact.PureComponent:extend("AlertViewTextbox")
 alertViewTextbox.defaultProps = { LayoutOrder = 0, Text = "", PlaceholderText = nil }
 
-function alertViewTextbox.render(p0) --[[ line: 19 ]]
+function alertViewTextbox.render(p0)
 	-- upvalues: UIBlox (ref), rect (ref), roact (ref), imagesModule (ref), color (ref)
-	return UIBlox.Style.withStyle(function(p1) --[[ line: 20 ]]
+	return UIBlox.Style.withStyle(function(p1)
 		-- upvalues: p0 (ref), rect (copy), roact (copy), imagesModule (copy), color (copy)
 		local vector2 = Vector2.new(0, 0)
 		local vector2_1 = Vector2.new(0, 0)
@@ -43,7 +43,7 @@ function alertViewTextbox.render(p0) --[[ line: 19 ]]
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextWrapped = true,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				[roact.Change.Text] = function(p2) --[[ line: 57 ]]
+				[roact.Change.Text] = function(p2)
 					-- upvalues: p0 (copy)
 					if p0.props.onTextChanged then
 						p0.props.onTextChanged(p2.Text)
@@ -55,7 +55,7 @@ function alertViewTextbox.render(p0) --[[ line: 19 ]]
 	end)
 end
 
-return roact.forwardRef(function(p3, p4) --[[ line: 69 ]]
+return roact.forwardRef(function(p3, p4)
 	-- upvalues: roact (ref), alertViewTextbox (ref), cryo (ref)
 	return roact.createElement(alertViewTextbox, cryo.Dictionary.join(p3, { forwardRef = p4 }))
 end)

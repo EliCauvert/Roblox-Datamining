@@ -10,11 +10,11 @@ local useTokens = foundationModule.Hooks.useTokens
 local interventionTreatmentShownSignalModule = require(interventionShared.Signals.interventionTreatmentShownSignal)
 local interventionDialogModule = require(interventionShared.Components.InterventionDialog)
 
-return reactModule.memo(function(p0) --[[ line: 21 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), reactModule (ref), interventionTreatmentShownSignalModule (ref), interventionDialogModule (ref), iconSize (ref), interventionAnalyticsModule (ref)
 	local var7 = useTokens()
 	local var8 = useLocalization(constantsModule.localizationKeys)
-	reactModule.useEffect(function() --[[ line: 24 ]]
+	reactModule.useEffect(function()
 		-- upvalues: interventionTreatmentShownSignalModule (copy), constantsModule (copy)
 		interventionTreatmentShownSignalModule:fire(constantsModule.TreatmentType.PartyChatNudgeDialog)
 	end, {})

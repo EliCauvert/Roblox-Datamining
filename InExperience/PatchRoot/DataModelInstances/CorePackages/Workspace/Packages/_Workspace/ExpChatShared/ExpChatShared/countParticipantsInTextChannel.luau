@@ -1,8 +1,8 @@
 ﻿local list = require(script:FindFirstAncestor("ExpChatShared").Parent.llama).List
 
-return function(p0) --[[ line: 5 | named "getNumberOfParticipants" ]]
+return function(p0)
 	-- upvalues: list (ref)
-	return list.count(p0:GetChildren(), function(p1) --[[ line: 6 ]]
+	return list.count(p0:GetChildren(), function(p1)
 		return p1:IsA("TextSource")
 	end)
 end

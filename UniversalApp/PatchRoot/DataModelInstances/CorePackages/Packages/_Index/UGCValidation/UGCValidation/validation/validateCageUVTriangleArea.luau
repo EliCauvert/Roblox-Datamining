@@ -4,11 +4,11 @@ local _ = require(parent.util.Types)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local analyticsModule = require(parent.Analytics)
 
-return function(vectorA, vectorB) --[[ line: 12 | named "validateCageUVTriangleArea" ]]
+return function(vectorA, vectorB)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local isServer = vectorB.isServer
-	local var4, var5 = pcallDeferredModule(function() --[[ line: 20 ]]
+	local var4, var5 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), vectorA (ref)
 		return UGCValidationService:ValidateEditableMeshCageUVTriangleArea(vectorA.editableMesh)
 	end, vectorB)

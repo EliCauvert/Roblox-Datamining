@@ -13,7 +13,7 @@ local isSpecifiedScalarType = graphQLModule.isSpecifiedScalarType
 local _ = require(script.Parent.Interfaces)
 local string = luauPolyfillModule.String
 
-function t.getResolversFromSchema(p0, p1) --[[ line: 37 ]]
+function t.getResolversFromSchema(p0, p1)
 	-- upvalues: string (ref), boolean (ref), isScalarType (ref), isSpecifiedScalarType (ref), graphQLScalarType (ref), isEnumType (ref), isInterfaceType (ref), isUnionType (ref), isObjectType (ref)
 	local t = {}
 	local typeMap = p0:getTypeMap()
@@ -33,19 +33,19 @@ function t.getResolversFromSchema(p0, p1) --[[ line: 37 ]]
 					local parseLiteral = var7.parseLiteral
 					
 					if serialize then
-						function var7.serialize(...) --[[ line: 73 ]]
+						function var7.serialize(...)
 							-- upvalues: serialize (ref), var7 (ref)
 							return serialize(var7, ...)
 						end
 					end
 					if parseValue then
-						function var7.parseValue(...) --[[ line: 79 ]]
+						function var7.parseValue(...)
 							-- upvalues: parseValue (ref), var7 (ref)
 							return parseValue(var7, ...)
 						end
 					end
 					if parseLiteral then
-						function var7.parseLiteral(...) --[[ line: 85 ]]
+						function var7.parseLiteral(...)
 							-- upvalues: parseLiteral (ref), var7 (ref)
 							return parseLiteral(var7, ...)
 						end

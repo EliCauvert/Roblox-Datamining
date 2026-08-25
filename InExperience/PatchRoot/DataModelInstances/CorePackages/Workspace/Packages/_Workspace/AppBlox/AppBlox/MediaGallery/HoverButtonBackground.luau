@@ -12,11 +12,11 @@ hoverButtonBackground.validateProps = tModule.strictInterface({
 	sliceCenter = tModule.optional(tModule.Rect)
 })
 
-function hoverButtonBackground.render(p0) --[[ line: 31 ]]
+function hoverButtonBackground.render(p0)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref)
 	local var4 = if p0.props.sidePadding then UDim2.new(p0.props.sidePadding, UDim.new()) + UDim2.new(p0.props.sidePadding, UDim.new()) else UDim2.new()
 	
-	return withStyle(function(p1) --[[ line: 36 ]]
+	return withStyle(function(p1)
 		-- upvalues: roactModule (copy), imageSetLabel (copy), var4 (ref), p0 (ref)
 		local backgroundOnHover = p1.Theme.BackgroundOnHover
 		

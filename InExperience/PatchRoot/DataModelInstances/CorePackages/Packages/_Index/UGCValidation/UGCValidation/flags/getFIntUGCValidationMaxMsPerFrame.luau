@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationMaxMsPerFrame", 3)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastInt("UGCValidationMaxMsPerFrame")
 end

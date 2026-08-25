@@ -6,7 +6,7 @@ local _ = require(buildExperience.Chat.chatTypes)
 local publishExperienceTitleModule = require(script.Parent.PublishExperienceTitle)
 local view = foundationModule.View
 
-return function(p0) --[[ line: 21 | named "PublishLatestPreviewCard" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), publishExperienceTitleModule (ref)
 	local testId = p0.testId or "publish-latest-preview-card"
 	

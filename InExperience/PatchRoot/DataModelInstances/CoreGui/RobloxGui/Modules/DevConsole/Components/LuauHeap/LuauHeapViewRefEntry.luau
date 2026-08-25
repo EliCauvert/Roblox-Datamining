@@ -14,7 +14,7 @@ local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewPathEntryModule = require(script.Parent.LuauHeapViewPathEntry)
 local luauHeapViewRefEntry = roactModule.PureComponent:extend("LuauHeapViewRefEntry")
 
-local function BorderedCellLabel(p0) --[[ line: 33 ]]
+local function BorderedCellLabel(p0)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
 		Label = roactModule.createElement(cellLabelModule, {
@@ -33,18 +33,18 @@ local function BorderedCellLabel(p0) --[[ line: 33 ]]
 	})
 end
 
-function luauHeapViewRefEntry.init(p1) --[[ line: 51 ]]
+function luauHeapViewRefEntry.init(p1)
 	p1.state = { expanded = false }
 	
-	function p1.onButtonPress() --[[ line: 56 ]]
+	function p1.onButtonPress()
 		-- upvalues: p1 (ref)
-		p1:setState(function(p2) --[[ line: 57 ]]
+		p1:setState(function(p2)
 			return { expanded = not p2.expanded }
 		end)
 	end
 end
 
-function luauHeapViewRefEntry.renderValues(_, p3) --[[ line: 65 ]]
+function luauHeapViewRefEntry.renderValues(_, p3)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), refEntryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, refEntryFrameHeight)
@@ -60,7 +60,7 @@ function luauHeapViewRefEntry.renderValues(_, p3) --[[ line: 65 ]]
 	return t
 end
 
-function luauHeapViewRefEntry.renderChildren(p4, p5) --[[ line: 80 ]]
+function luauHeapViewRefEntry.renderChildren(p4, p5)
 	-- upvalues: roactModule (ref), luauHeapViewPathEntryModule (ref)
 	local t = {}
 	
@@ -72,7 +72,7 @@ function luauHeapViewRefEntry.renderChildren(p4, p5) --[[ line: 80 ]]
 	return t
 end
 
-function luauHeapViewRefEntry.render(p6) --[[ line: 97 ]]
+function luauHeapViewRefEntry.render(p6)
 	-- upvalues: refEntryFrameHeight (ref), valueCellWidth (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
 	local props = p6.props
 	local size = props.size or UDim2.new(1, 0, 0, refEntryFrameHeight)

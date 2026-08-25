@@ -4,7 +4,7 @@ local watermarkComponentModule = require(script.WatermarkComponent)
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 11 ]]
+function t.new()
 	-- upvalues: t (ref), roactModule (ref), watermarkComponentModule (ref), coreGuiService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.root = roactModule.createElement(watermarkComponentModule)

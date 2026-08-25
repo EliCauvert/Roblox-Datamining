@@ -2,7 +2,7 @@
 local UIManagerModule = require(parent.UIManager)
 local constantsModule = require(parent.Constants)
 
-return function(p0, p1) --[[ line: 7 ]]
+return function(p0, p1)
 	-- upvalues: constantsModule (ref), UIManagerModule (ref)
 	local t = nil
 	local var3 = constantsModule.ROACT_PANEL_UIGROUP_MAP[p1]

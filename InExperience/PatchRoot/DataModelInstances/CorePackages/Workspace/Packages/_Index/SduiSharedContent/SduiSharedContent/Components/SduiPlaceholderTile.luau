@@ -4,7 +4,7 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local _ = require(parent.SduiCompat)
 local sduiPlaceholderModule = require(script.Parent.SduiPlaceholder)
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "SduiPlaceholderTile" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), sduiPlaceholderModule (ref)
 	local var2 = useTokens()
 	local scale = var2.Config.UI.Scale

@@ -7,13 +7,13 @@ local replicateDeviceCameraCFrame = robloxReplicatedStorageService:WaitForChild(
 local playerViewRemoteEventSupportEngineFeature = game:GetEngineFeature("PlayerViewRemoteEventSupport")
 
 if requestDeviceCameraCFrame and replicateDeviceCameraCFrame then
-	replicateDeviceCameraCFrame.OnClientEvent:Connect(function(p0, p1, p2) --[[ line: 19 ]]
+	replicateDeviceCameraCFrame.OnClientEvent:Connect(function(p0, p1, p2)
 		-- upvalues: playerViewRemoteEventSupportEngineFeature (ref), playerViewService (ref)
 		if playerViewRemoteEventSupportEngineFeature then
 			playerViewService:UpdateDeviceCFrame(p0, p1, p2)
 		end
 	end)
-	requestDeviceCameraCFrame.OnClientEvent:Connect(function() --[[ line: 24 ]]
+	requestDeviceCameraCFrame.OnClientEvent:Connect(function()
 		-- upvalues: playerViewRemoteEventSupportEngineFeature (ref), playerViewService (ref)
 		if playerViewRemoteEventSupportEngineFeature then
 			playerViewService:OnCameraCFrameReplicationRequest()

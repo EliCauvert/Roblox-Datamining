@@ -18,7 +18,7 @@ local t = {
 	}
 }
 
-local function collectTaggedPaths(p0, p1) --[[ line: 24 ]]
+local function collectTaggedPaths(p0, p1)
 	-- upvalues: collectionService (ref)
 	local descendants = p0:GetDescendants()
 	table.insert(descendants, p0)
@@ -30,7 +30,7 @@ local function collectTaggedPaths(p0, p1) --[[ line: 24 ]]
 	end
 end
 
-function t.run(p2, p3) --[[ line: 34 ]]
+function t.run(p2, p3)
 	-- upvalues: collectTaggedPaths (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule (ref), errorSourceStringsModule (ref)
 	local t = {}
 	collectTaggedPaths(p3.rootInstance, t)

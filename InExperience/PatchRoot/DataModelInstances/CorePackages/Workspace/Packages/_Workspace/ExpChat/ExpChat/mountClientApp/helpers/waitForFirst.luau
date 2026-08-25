@@ -1,8 +1,8 @@
-﻿return function(...) --[[ line: 1 | named "waitForFirst" ]]
+﻿return function(...)
 	local bindableEvent = Instance.new("BindableEvent")
 	local list = { ... }
 	
-	local function fire(...) --[[ line: 5 ]]
+	local function fire(...)
 		-- upvalues: list (ref), bindableEvent (ref)
 		for i = 1, #list do
 			list[i]:Disconnect()

@@ -4,21 +4,21 @@ local foundationModule = require(parent.Foundation)
 local snackbar = foundationModule.Snackbar
 local enums = foundationModule.Enums
 
-return function(p0) --[[ line: 12 | named "EditProfileToast" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), snackbar (ref), enums (ref)
 	local var2, var3 = reactModule.useState(true)
 	local var4 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var3 (ref)
 		if var4.current then
 			task.cancel(var4.current)
 		end
-		var4.current = task.delay(5, function() --[[ line: 25 ]]
+		var4.current = task.delay(5, function()
 			-- upvalues: var3 (copy)
 			var3(false)
 		end)
 		
-		return function() --[[ line: 30 ]]
+		return function()
 			-- upvalues: var4 (copy)
 			if var4.current then
 				task.cancel(var4.current)

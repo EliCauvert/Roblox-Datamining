@@ -22,7 +22,7 @@ local useMomentsGating = momentsCommonModule.Hooks.useMomentsGating
 local canRenderNativeMoments = momentsCommonModule.canRenderNativeMoments
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 
-local function updateNotifications(p0, p1, p2, p3) --[[ line: 28 ]]
+local function updateNotifications(p0, p1, p2, p3)
 	-- upvalues: flyoutContentSettingsModule (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref)
 	local var8 = 0
 	
@@ -38,13 +38,13 @@ local function updateNotifications(p0, p1, p2, p3) --[[ line: 28 ]]
 	end
 end
 
-return function() --[[ line: 48 | named "useFlyoutNavigationItems" ]]
+return function()
 	-- upvalues: constantsModule (ref), useSelector (ref), fFlagLuaAppFixNotificationBadgeCountsSync (ref), reactModule (ref), useAppPolicy (ref), fFlagFlyoutSidePanelTradesEntryModule (ref), fFlagEnableBlackbirdCheck (ref), flyoutGateMomentsTile (ref), fFlagFixMomentsExperienceFallback (ref), useMomentsGating (ref), fFlagEnableRMOnMorePageGUAC (ref), flyoutContentSettingsModule (ref), fFlagEnableTradesEntryForNonPremium (ref), fFlagEnableBlackbird (ref), fFlagEnableBlackbirdOnFlyoutMenu (ref), updateNotifications (ref), getFFlagPlatformEventEnabled (ref), getFStringPlatformEventUrl (ref), fFlagEnableRMOnMorePageForAll (ref), canRenderNativeMoments (ref), appPage (ref)
 	local FLYOUT_DEFAULT_POLICY = constantsModule.FLYOUT_DEFAULT_POLICY
-	local var9 = useSelector(function(p4) --[[ line: 52 ]]
+	local var9 = useSelector(function(p4)
 		return p4.NotificationBadgeCounts
 	end)
-	local var10 = useSelector(function(p5) --[[ line: 56 ]]
+	local var10 = useSelector(function(p5)
 		-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (copy)
 		if fFlagLuaAppFixNotificationBadgeCountsSync then
 			local friendsCarousel = p5.FriendsCarousel
@@ -54,15 +54,15 @@ return function() --[[ line: 48 | named "useFlyoutNavigationItems" ]]
 		end
 		return 0
 	end)
-	local var11 = useSelector(function(p6) --[[ line: 65 ]]
+	local var11 = useSelector(function(p6)
 		-- upvalues: fFlagLuaAppFixNotificationBadgeCountsSync (copy)
 		return if fFlagLuaAppFixNotificationBadgeCountsSync then if p6.SocialTab then p6.SocialTab.UnreadConversationCount else 0 else 0
 	end)
-	local var12 = useSelector(function(p7) --[[ line: 72 ]]
+	local var12 = useSelector(function(p7)
 		return p7.OmniRecommendations and p7.OmniRecommendations.Home
 	end)
 	local var13 = if var12 then var12.sorts else {}
-	local var14, var15 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var14, var15 = reactModule.useMemo(function()
 		-- upvalues: var13 (ref), constantsModule (copy)
 		local var25 = nil
 		local var26 = nil
@@ -76,31 +76,31 @@ return function() --[[ line: 48 | named "useFlyoutNavigationItems" ]]
 		end
 		return var25, var26
 	end, { var13 })
-	local var16 = useAppPolicy(function(p8) --[[ line: 88 ]]
+	local var16 = useAppPolicy(function(p8)
 		return p8.getDisablePremiumEntrypoint() or false
 	end)
-	local var17 = useAppPolicy(function(p9) --[[ line: 91 ]]
+	local var17 = useAppPolicy(function(p9)
 		return p9.getDisableBlackbirdEntrypoints() or false
 	end)
-	local var18 = useAppPolicy(function(p10) --[[ line: 94 ]]
+	local var18 = useAppPolicy(function(p10)
 		return p10.getGiftCardSourceRefOverride()
 	end)
-	local var19 = useAppPolicy(function(p11) --[[ line: 97 ]]
+	local var19 = useAppPolicy(function(p11)
 		return p11.getRedeemTileEnabled()
 	end)
-	local var20 = if fFlagFlyoutSidePanelTradesEntryModule then useSelector(function(p12) --[[ line: 102 ]]
+	local var20 = if fFlagFlyoutSidePanelTradesEntryModule then useSelector(function(p12)
 		-- upvalues: fFlagEnableBlackbirdCheck (copy)
 		local localUserId = p12.Users[p12.LocalUserId]
 		
 		return if localUserId then localUserId.membership == Enum.MembershipType.Premium or fFlagEnableBlackbirdCheck and localUserId.hasRobloxSubscription == true else false
 	end) else false
 	local var21 = if flyoutGateMomentsTile or fFlagFixMomentsExperienceFallback then useMomentsGating() else nil
-	local var22 = if flyoutGateMomentsTile and fFlagEnableRMOnMorePageGUAC then if flyoutGateMomentsTile then useAppPolicy(function(p13) --[[ line: 116 ]]
+	local var22 = if flyoutGateMomentsTile and fFlagEnableRMOnMorePageGUAC then if flyoutGateMomentsTile then useAppPolicy(function(p13)
 		return p13.getDisplayMomentsMoreTabTile()
 	end) else false else true
 	local var23 = not var18 or var18 == ""
 	
-	return reactModule.useMemo(function() --[[ line: 126 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: FLYOUT_DEFAULT_POLICY (ref), flyoutContentSettingsModule (copy), var15 (ref), var14 (ref), var16 (ref), var23 (ref), var19 (ref), var20 (ref), fFlagEnableTradesEntryForNonPremium (copy), fFlagEnableBlackbird (copy), fFlagEnableBlackbirdOnFlyoutMenu (copy), var17 (ref), updateNotifications (copy), var9 (ref), var10 (ref), var11 (ref), getFFlagPlatformEventEnabled (copy), getFStringPlatformEventUrl (copy), flyoutGateMomentsTile (copy), var21 (ref), fFlagEnableRMOnMorePageForAll (copy), var22 (ref), fFlagFixMomentsExperienceFallback (copy), canRenderNativeMoments (copy), appPage (copy)
 		local t = {}
 		local t_1 = {}

@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createSignal
 
-return function() --[[ line: 14 ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal(false)
 	

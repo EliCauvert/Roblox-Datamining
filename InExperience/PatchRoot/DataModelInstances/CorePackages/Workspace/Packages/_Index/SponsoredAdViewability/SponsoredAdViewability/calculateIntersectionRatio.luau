@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 8 | named "calculateIntersectionRatio" ]]
+﻿return function(p0, p1, p2)
 	local var0 = p1.X * p1.Y
 	
 	if var0 <= 0 then

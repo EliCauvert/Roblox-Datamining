@@ -1,7 +1,7 @@
 ﻿local foundationModule = require(script:FindFirstAncestor("ExpChat").Parent.Foundation)
 
 return {
-	deriveMicSendButton = function(p0, p1) --[[ line: 56 ]]
+	deriveMicSendButton = function(p0, p1)
 		-- upvalues: foundationModule (ref)
 		local idleSendIcon = p1.idleSendIcon
 		local idleSendVariant = p1.idleSendVariant
@@ -38,7 +38,7 @@ return {
 			useLongPressOverlay = var2 and p0.micGestureHandlers ~= nil
 		}
 	end,
-	deriveBackgroundColors = function(value, p2) --[[ line: 115 ]]
+	deriveBackgroundColors = function(value, p2)
 		return if value.isListening then {
 			color3 = p2.listeningColor3,
 			baseTransparency = p2.listeningTransparency
@@ -47,7 +47,7 @@ return {
 			baseTransparency = p2.defaultTransparency
 		}
 	end,
-	shouldPreventFade = function(p3) --[[ line: 131 ]]
+	shouldPreventFade = function(p3)
 		return p3.isRecording or (p3.isTranscribing or p3.isListening)
 	end
 }

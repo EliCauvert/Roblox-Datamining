@@ -25,9 +25,9 @@ local t_2 = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 }
 
-local function _(p0, p1, p2) --[[ line: 43 | named "useWrappedFrameProps" ]]
+local function _(p0, p1, p2)
 	-- upvalues: reactModule (ref), t_1 (ref), cryoModule (ref), t_2 (ref), t (ref)
-	return reactModule.useMemo(function() --[[ line: 45 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p1 (ref), t_1 (copy), p0 (ref), cryoModule (copy), t_2 (copy), t (copy), p2 (ref)
 		local var15 = p1 or t_1
 		
@@ -38,7 +38,7 @@ local function _(p0, p1, p2) --[[ line: 43 | named "useWrappedFrameProps" ]]
 	end, { p0, p1, p2 })
 end
 
-return function(p3) --[[ line: 74 | named "FocusRoot" ]]
+return function(p3)
 	-- upvalues: fFlagFocusRootUseHooksModule (ref), useFocusRootModule (ref), reactModule (ref), baseFocusRootModule (ref), t_1 (ref), reactFocusNavigationModule (ref), useFocusNavigableSurfaceRegistryConnectionModule (ref), useDescendantHasFocusModule (ref), useAutoFocusModule (ref), useLastInputModeModule (ref), guiService (ref), cryoModule (ref), t_2 (ref), t (ref)
 	if fFlagFocusRootUseHooksModule then
 		return reactModule.createElement(baseFocusRootModule, {
@@ -59,11 +59,11 @@ return function(p3) --[[ line: 74 | named "FocusRoot" ]]
 	useFocusNavigableSurfaceRegistryConnectionModule(var19, p3.surfaceIdentifier, var21)
 	local var23 = useAutoFocusModule({ var19 }, 0.1)
 	local var24 = p3.isAutoFocusRoot and (var21 and (useLastInputModeModule() == "Focus" and (var19 and not useDescendantHasFocusModule(var19))))
-	reactModule.useEffect(function() --[[ line: 113 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var24 (ref), var23 (ref)
 		local var26 = if var24 then var23() else nil
 		
-		return function() --[[ line: 118 ]]
+		return function()
 			-- upvalues: var26 (write)
 			if var26 then
 				var26.cancel()
@@ -71,15 +71,15 @@ return function(p3) --[[ line: 74 | named "FocusRoot" ]]
 		end
 	end, { var24, var23 })
 	local var25 = reactModule.useRef(var19)
-	reactModule.useEffect(function() --[[ line: 126 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (write), var25 (ref)
 		if var19 then
 			var25.current = var19
 		end
 	end, { var19 })
-	reactModule.useEffect(function() --[[ line: 132 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), guiService (copy)
-		return function() --[[ line: 133 ]]
+		return function()
 			-- upvalues: var25 (copy), guiService (copy)
 			if not var25.current then return end
 			local selectedCoreObject = guiService.SelectedCoreObject
@@ -93,7 +93,7 @@ return function(p3) --[[ line: 74 | named "FocusRoot" ]]
 	local isIsolated = p3.isIsolated
 	local frameProps = p3.frameProps
 	
-	return reactModule.createElement("Frame", reactModule.useMemo(function() --[[ line: 45 ]]
+	return reactModule.createElement("Frame", reactModule.useMemo(function()
 		-- upvalues: frameProps (ref), t_1 (copy), isIsolated (ref), cryoModule (copy), t_2 (copy), t (copy), var22 (ref)
 		local var15 = frameProps or t_1
 		

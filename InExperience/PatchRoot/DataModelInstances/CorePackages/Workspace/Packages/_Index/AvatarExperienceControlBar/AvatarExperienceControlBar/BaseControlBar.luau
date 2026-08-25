@@ -8,7 +8,7 @@ local iconTextMenuModule = require(avatarExperienceControlBar.Components.IconTex
 local externalEventConnection = require(parent.RoactUtils).ExternalEventConnection
 local _ = require(avatarExperienceControlBar.ControlBarTypes)
 
-return reactModule.memo(function(p0) --[[ line: 14 | named "BaseControlBar" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref), iconOnlyMenuModule (ref), iconTextMenuModule (ref), externalEventConnection (ref), userInputService (ref)
 	local var6, var7 = reactModule.useBinding(UDim2.new(0, 0, 0, 0))
 	
@@ -23,7 +23,7 @@ return reactModule.memo(function(p0) --[[ line: 14 | named "BaseControlBar" ]]
 			activeItemId = p0.activeMenuItemId,
 			onItemActivated = p0.onMenuItemActivated,
 			ref = p0.iconMenuRef,
-			onAbsoluteSizeChanged = function(value) --[[ line: 27 ]]
+			onAbsoluteSizeChanged = function(value)
 				-- upvalues: var7 (ref)
 				var7(UDim2.fromOffset(value.AbsoluteSize.X, value.AbsoluteSize.Y))
 			end

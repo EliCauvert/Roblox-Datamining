@@ -4,7 +4,7 @@ local buildSduiCollectionInfo = require(parent.SduiSharedUtilities).buildSduiCol
 local fFlagSduiChartsRequestPlaceholders = require(parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
 local uDim = UDim.new(1, 72)
 
-return function(p0, p1) --[[ line: 34 | named "buildChartsPageRequest" ]]
+return function(p0, p1)
 	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsRequestPlaceholders (ref), buildSduiCollectionInfo (ref), uDim (ref)
 	local t = {}
 	local t_1 = {}

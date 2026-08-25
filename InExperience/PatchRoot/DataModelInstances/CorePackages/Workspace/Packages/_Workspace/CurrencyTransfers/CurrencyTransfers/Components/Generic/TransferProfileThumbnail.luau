@@ -13,7 +13,7 @@ local constants = userLibModule.Utils.Constants
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local size100x100 = Enum.ThumbnailSize.Size100x100
 
-return function(p0) --[[ line: 34 | named "UserProfileThumbnail" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), size100x100 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), fFlagCurrencyTransferUseProfileFrameThumbnailModule (ref), reactModule (ref), view (ref), image (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), text (ref)
 	local var6 = useTokens()
 	

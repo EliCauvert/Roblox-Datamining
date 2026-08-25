@@ -2,7 +2,7 @@
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 
-return function(value) --[[ line: 26 | named "getSingleSignOnUrls" ]]
+return function(value)
 	-- upvalues: getAppFeaturePolicies (ref), urlBuilder (ref)
 	local var0 = value or getAppFeaturePolicies()
 	local urlAuthRoutes = var0.getUrlAuthRoutes()

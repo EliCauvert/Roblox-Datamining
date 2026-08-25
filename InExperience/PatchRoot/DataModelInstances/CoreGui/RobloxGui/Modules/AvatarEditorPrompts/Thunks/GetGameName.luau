@@ -5,14 +5,14 @@ local var3 = require(coreGuiService:WaitForChild("RobloxGui").Modules.Common.htt
 local gameNameFetchedModule = require(script.Parent.Parent.Actions.GameNameFetched)
 local getGameNameAndDescription = require(corePackagesService.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), getGameNameAndDescription (ref), var3 (ref), gameNameFetchedModule (ref)
-	return if game.GameId == 0 then promiseModule.resolve() else getGameNameAndDescription(var3, game.GameId):andThen(function(p1) --[[ line: 25 ]]
+	return if game.GameId == 0 then promiseModule.resolve() else getGameNameAndDescription(var3, game.GameId):andThen(function(p1)
 		-- upvalues: p0 (ref), gameNameFetchedModule (copy)
 		p0:dispatch(gameNameFetchedModule(p1.Name))
 		
 		return p1.Name
-	end, function() --[[ line: 29 ]]
+	end, function()
 		-- upvalues: promiseModule (copy)
 		warn("Unable to get game name for Avatar Editor Prompts")
 		

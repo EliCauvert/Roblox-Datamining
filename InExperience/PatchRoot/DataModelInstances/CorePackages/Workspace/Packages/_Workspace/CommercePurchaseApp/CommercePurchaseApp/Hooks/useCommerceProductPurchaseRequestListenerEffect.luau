@@ -10,23 +10,23 @@ local selectPromptStateModule = require(commercePurchaseApp.Store.Selectors.sele
 local initiateCommercePurchaseFlowModule = require(commercePurchaseApp.Store.Thunks.InitiateCommercePurchaseFlow)
 local fFlagAddCommerceErrorsModule = require(commercePurchaseApp.Flags.FFlagAddCommerceErrors)
 
-return function() --[[ line: 15 | named "useCommercePurchaseRequestListenerEffect" ]]
+return function()
 	-- upvalues: useDispatch (ref), useSelector (ref), selectPromptStateModule (ref), useLocalization (ref), fFlagAddCommerceErrorsModule (ref), reactModule (ref), commerceService (ref), commercePurchasePromptStateEnumModule (ref), initiateCommercePurchaseFlowModule (ref)
 	local var7 = useDispatch()
 	local var8 = useSelector(selectPromptStateModule)
 	local var9 = useLocalization({
 		genericError = if fFlagAddCommerceErrorsModule then "CoreScripts.CommercePurchasePrompt.ErrorPrompt.Body.ErrorLoading" else "CoreScripts.CommercePurchasePrompt.ErrorPrompt.GenericError"
 	})
-	reactModule.useEffect(function() --[[ line: 24 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), commerceService (copy), var8 (ref), commercePurchasePromptStateEnumModule (copy), initiateCommercePurchaseFlowModule (copy), var9 (ref)
-		local var10 = if var7 then commerceService.PromptCommerceProductPurchaseRequested:Connect(function(p0) --[[ line: 28 ]]
+		local var10 = if var7 then commerceService.PromptCommerceProductPurchaseRequested:Connect(function(p0)
 			-- upvalues: var8 (copy), commercePurchasePromptStateEnumModule (copy), var7 (copy), initiateCommercePurchaseFlowModule (copy), var9 (copy)
 			if var8 == commercePurchasePromptStateEnumModule.None then
 				var7(initiateCommercePurchaseFlowModule(p0, var9.genericError))
 			end
 		end) else nil
 		
-		return function() --[[ line: 35 ]]
+		return function()
 			-- upvalues: var10 (write)
 			if var10 then
 				var10:Disconnect()

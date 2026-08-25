@@ -3,7 +3,7 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local isRobloxSubscriptionProductFreeTrialModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
 local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 
-return function(p0) --[[ line: 13 | named "buildSubscriptionPurchaseFlowPayload" ]]
+return function(p0)
 	-- upvalues: robloxSubscriptionStoreModule (ref), isRobloxSubscriptionProductFreeTrialModule (ref)
 	local var3 = robloxSubscriptionStoreModule.get()
 	local entryContext = var3.getEntryContext()

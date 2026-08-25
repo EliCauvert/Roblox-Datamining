@@ -3,7 +3,7 @@ local _ = require(script.Parent.Parent.Types)
 local slotTypeModule = require(script.Parent.Parent.Enums.SlotType)
 local fFlagEnableSlotsHeadShapeThumbnail = require(parent.AvatarExperienceFlags).FFlagEnableSlotsHeadShapeThumbnail
 
-local function _(p0, p1, p2) --[[ line: 21 | named "buildSlotSubcategory" ]]
+local function _(p0, p1, p2)
 	return {
 		nameTranslationKey = p0.nameTranslationKey,
 		icon = p0.icon,
@@ -17,7 +17,7 @@ local function _(p0, p1, p2) --[[ line: 21 | named "buildSlotSubcategory" ]]
 	}
 end
 
-local _ = function(p3, p4, p5, p6) --[[ line: 35 | named "buildLayeredSlotSubcategory" ]]
+local _ = function(p3, p4, p5, p6)
 	-- upvalues: slotTypeModule (ref)
 	return {
 		nameTranslationKey = p3.nameTranslationKey,
@@ -35,7 +35,7 @@ local _ = function(p3, p4, p5, p6) --[[ line: 35 | named "buildLayeredSlotSubcat
 	}
 end
 
-local _ = function(value) --[[ line: 50 | named "getHeadShapeFromEquippedAssets" ]]
+local _ = function(value)
 	local value_1 = value[tostring(Enum.AvatarAssetType.DynamicHead.Value)]
 	
 	if value_1 then
@@ -46,7 +46,7 @@ local _ = function(value) --[[ line: 50 | named "getHeadShapeFromEquippedAssets"
 	return nil
 end
 
-local function getClassicFaceOrDynamicHeadThumbnail(p7, p8) --[[ line: 63 ]]
+local function getClassicFaceOrDynamicHeadThumbnail(p7, p8)
 	local var2 = p7[if p8 then tostring(Enum.AvatarAssetType.DynamicHead.Value) else tostring(Enum.AvatarAssetType.Face.Value)]
 	
 	if var2 then
@@ -57,7 +57,7 @@ local function getClassicFaceOrDynamicHeadThumbnail(p7, p8) --[[ line: 63 ]]
 	return nil
 end
 
-return function(p9, p10) --[[ line: 80 | named "buildSlots" ]]
+return function(p9, p10)
 	-- upvalues: slotTypeModule (ref), fFlagEnableSlotsHeadShapeThumbnail (ref), getClassicFaceOrDynamicHeadThumbnail (ref)
 	local var6, i_3
 	local t = {}

@@ -28,13 +28,13 @@ local VOICE_VOLUME = peopleServiceModule.getService("Constants").VOICE_CHAT.VOIC
 local ENTRY_POINT = peopleServiceModule.getService("Constants").ANALYTICS.ENTRY_POINT
 local var12 = signalsModule.createSignal(false)
 
-return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), peopleServiceModule (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), ENTRY_POINT (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (ref), useSignalState (ref), var12 (ref), useScaledValue (ref), fFlagPeoplePageFlipVolumePopoverToFitViewport (ref), VOICE_VOLUME (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), fFlagVoiceChatVolumePerUserMuteVolumeSyncModule (ref), fFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (ref), useDismissWhenOutOfViewModule (ref), usePopoverSideToFitScrollingViewportModule (ref), popoverSide (ref), popover (ref), view (ref), popoverAlign (ref), radius (ref), text (ref), foundationModule (ref)
 	local var13 = useTokens()
 	local var14 = useLocalization({
 		voiceChatVolume = "CoreScripts.InGameMenu.VoiceChatVolumeLower"
 	})
-	local var15 = reactModule.useMemo(function() --[[ line: 72 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleVoiceChatStore")
 	end, {})
@@ -44,13 +44,13 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 	local var19 = nil
 	
 	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
-		var16 = reactModule.useMemo(function() --[[ line: 81 ]]
+		var16 = reactModule.useMemo(function()
 			-- upvalues: peopleServiceModule (copy)
 			return peopleServiceModule.getService("PeopleAnalyticsManager")
 		end, {})
 		entryPoint = p0.entryPoint or ENTRY_POINT.PEOPLE_LIST
 		local getPlayerIsLocalMuted = var15.getPlayerIsLocalMuted
-		var18 = reactModule.useCallback(function() --[[ line: 86 ]]
+		var18 = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), getPlayerIsLocalMuted (ref)
 			return if p0.userId and getPlayerIsLocalMuted then getPlayerIsLocalMuted(p0.userId)(false) else false
 		end, { p0.userId, getPlayerIsLocalMuted })
@@ -65,18 +65,18 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 	local var22 = useScaledValue(260)
 	local var23 = if fFlagPeoplePageFlipVolumePopoverToFitViewport then var13.Size.Size_2800 else nil
 	local var24 = reactModule.useRef(false)
-	local var25 = reactModule.useCallback(function() --[[ line: 109 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var15 (ref), VOICE_VOLUME (copy)
 		return if p0.userId and var15.getPlayerVoiceVolume then var15.getPlayerVoiceVolume(p0.userId) else VOICE_VOLUME.DEFAULT
 	end, { p0.userId, var15 })
 	local var26, var27 = reactModule.useBinding(var25())
-	reactModule.useEffect(function() --[[ line: 118 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var24 (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var19 (write), var27 (ref), var25 (ref), var15 (ref)
 		if p0.isOpen and p0.userId then
 			var27(var25())
 			
 			if var15.subscribePlayerVoiceVolume then
-				return var15.subscribePlayerVoiceVolume(p0.userId, function(p1) --[[ line: 129 ]]
+				return var15.subscribePlayerVoiceVolume(p0.userId, function(p1)
 					-- upvalues: var24 (copy), var27 (copy)
 					if not var24.current then
 						var27(p1)
@@ -92,7 +92,7 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 			end
 		end
 	end, { p0.isOpen, p0.userId, var25, var15 })
-	local var28 = reactModule.useCallback(function(p2) --[[ line: 138 ]]
+	local var28 = reactModule.useCallback(function(p2)
 		-- upvalues: var27 (ref), p0 (ref), var15 (ref)
 		var27(p2)
 		
@@ -100,7 +100,7 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 			var15.setPlayerVoiceVolume(p0.userId, p2)
 		end
 	end, { p0.userId, var15 })
-	local var29 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function() --[[ line: 147 ]]
+	local var29 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function()
 		-- upvalues: var24 (ref), var16 (write), var19 (write), var18 (write), entryPoint (write), var25 (ref)
 		var24.current = true
 		
@@ -118,11 +118,11 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 		var16,
 		entryPoint,
 		var19
-	}) else reactModule.useCallback(function() --[[ line: 159 ]]
+	}) else reactModule.useCallback(function()
 		-- upvalues: var24 (ref)
 		var24.current = true
 	end, {})
-	local var30 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function() --[[ line: 167 ]]
+	local var30 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function()
 		-- upvalues: var24 (ref), var16 (write), p0 (ref), var19 (write), entryPoint (write), var25 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var15 (ref), fFlagVoiceChatVolumePerUserMuteVolumeSyncModule (copy), var27 (ref)
 		var24.current = false
 		
@@ -149,7 +149,7 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 		var27(var25())
 	end, {
 		var25, var16, p0.userId, entryPoint, var19, var15
-	}) else reactModule.useCallback(function() --[[ line: 211 ]]
+	}) else reactModule.useCallback(function()
 		-- upvalues: var24 (ref), fFlagVoiceChatVolumePerUserMuteVolumeSyncModule (copy), var27 (ref), var25 (ref)
 		var24.current = false
 		
@@ -158,7 +158,7 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 		end
 		var27(var25())
 	end, { var25 })
-	local var31 = reactModule.useCallback(function() --[[ line: 220 ]]
+	local var31 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.onClose then
 			p0.onClose()
@@ -180,7 +180,7 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 		local var36, var37 = reactModule.useState(0)
 		local var38 = var36
 		local var39 = var37
-		var33 = reactModule.useCallback(function(p3) --[[ line: 245 ]]
+		var33 = reactModule.useCallback(function(p3)
 			-- upvalues: var35 (write), var39 (write)
 			if var35.current then
 				var35.current:Disconnect()
@@ -192,14 +192,14 @@ return function(p0) --[[ line: 66 | named "VoiceVolumePopover" ]]
 				return
 			end
 			var39(p3.AbsoluteSize.Y)
-			var35.current = p3:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 259 ]]
+			var35.current = p3:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var39 (ref), p3 (ref)
 				var39(p3.AbsoluteSize.Y)
 			end)
 		end, {})
-		reactModule.useEffect(function() --[[ line: 264 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var35 (write)
-			return function() --[[ line: 265 ]]
+			return function()
 				-- upvalues: var35 (copy)
 				if var35.current then
 					var35.current:Disconnect()

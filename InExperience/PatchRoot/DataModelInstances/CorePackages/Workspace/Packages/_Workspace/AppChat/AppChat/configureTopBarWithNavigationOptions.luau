@@ -10,7 +10,7 @@ local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 local topBarContextModule = require(appChat.TopBarContext)
 local fFlagAppChatTopBarSignalsStoreModule = require(appChat.Flags.FFlagAppChatTopBarSignalsStore)
 
-local function TopBarFromStore(p0) --[[ line: 64 ]]
+local function TopBarFromStore(p0)
 	-- upvalues: roactNavigationModule (ref), getTopBarStoreModule (ref), signalsReactModule (ref), argCheckModule (ref), cryoModule (ref), createChatTopBarModule (ref)
 	local navigation = p0.navigation
 	local activeChildNavigationOptions = roactNavigationModule.getActiveChildNavigationOptions(navigation)
@@ -28,13 +28,13 @@ local function TopBarFromStore(p0) --[[ line: 64 ]]
 	return createChatTopBarModule(cryoModule.Dictionary.join(var14, activeChildNavigationOptions, { navigation = navigation }))
 end
 
-local function TopBarFromContext(p1) --[[ line: 95 ]]
+local function TopBarFromContext(p1)
 	-- upvalues: roactNavigationModule (ref), roactModule (ref), topBarContextModule (ref), argCheckModule (ref), cryoModule (ref), createChatTopBarModule (ref)
 	local navigation = p1.navigation
 	local activeChildNavigationOptions = roactNavigationModule.getActiveChildNavigationOptions(navigation)
 	
 	return roactModule.createElement(topBarContextModule.Consumer, {
-		render = function(p2) --[[ line: 100 ]]
+		render = function(p2)
 			-- upvalues: navigation (ref), argCheckModule (copy), cryoModule (copy), createChatTopBarModule (copy), activeChildNavigationOptions (ref)
 			local state = navigation.state
 			local index = state.routes[state.index]
@@ -52,7 +52,7 @@ local function TopBarFromContext(p1) --[[ line: 95 ]]
 	})
 end
 
-return function(p3) --[[ line: 128 ]]
+return function(p3)
 	-- upvalues: fFlagAppChatTopBarSignalsStoreModule (ref), TopBarFromStore (ref), TopBarFromContext (ref), roactModule (ref)
 	return roactModule.createElement(if fFlagAppChatTopBarSignalsStoreModule then TopBarFromStore else TopBarFromContext, { navigation = p3 })
 end

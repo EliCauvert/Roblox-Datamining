@@ -21,7 +21,7 @@ local t_1 = {
 	[validationEnumsModule.UploadCategory.RIGID_ACCESSORY] = require(parent.flags.getFIntUGCValidateMaxSerializedAssetSizeBytesRigidAccessory)
 }
 
-function t.run(p0, p1) --[[ line: 51 ]]
+function t.run(p0, p1)
 	-- upvalues: validationEnumsModule (ref), serializationService (ref), t_1 (ref), getFIntUGCValidateMaxSerializedAssetSizeBytesDefaultModule (ref), errorSourceStringsModule (ref)
 	if p1.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.Backend then return end
 	local byteLength = buffer.len(serializationService:SerializeInstancesAsync(p1.entrypointInput))

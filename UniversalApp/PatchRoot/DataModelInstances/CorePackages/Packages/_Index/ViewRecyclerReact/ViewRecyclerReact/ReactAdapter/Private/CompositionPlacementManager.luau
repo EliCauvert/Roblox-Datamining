@@ -7,12 +7,12 @@ local reparentableHost = require(viewRecyclerReact.Parent.ViewRecyclerRoblox).Re
 local record = viewRecyclerModule.Adapter._Private.Record
 local frozen = table.freeze({ "key", "generation" })
 
-local function _(p0, p1) --[[ line: 128 | named "compositeKey" ]]
+local function _(p0, p1)
 	return `{#p0}:{p0}:{p1}`
 end
 
 return {
-	new = function(p2, p3) --[[ line: 132 ]]
+	new = function(p2, p3)
 		-- upvalues: reparentableHost (ref), record (ref), frozen (ref)
 		local t = {}
 		local tbl = setmetatable({}, { __mode = "k" })
@@ -24,7 +24,7 @@ return {
 		local var10 = nil
 		local tbl_1 = setmetatable({}, { __mode = "k" })
 		
-		local function getPortState(p4) --[[ line: 143 ]]
+		local function getPortState(p4)
 			-- upvalues: tbl_1 (ref), t (ref), reparentableHost (copy), record (copy), frozen (copy)
 			local var14 = tbl_1[p4]
 			
@@ -40,7 +40,7 @@ return {
 					record = p4
 				}
 				t_1.port = {
-					apply = function(p5) --[[ line: 158 ]]
+					apply = function(p5)
 						-- upvalues: t_1 (write), t (copy), p4 (ref), reparentableHost (copy), record (copy), frozen (copy)
 						if p5 == nil then
 							t_1.pendingAssignment = nil
@@ -108,7 +108,7 @@ return {
 			return var14
 		end
 		
-		local function _(p6, p7) --[[ line: 226 | named "preparePlacement" ]]
+		local function _(p6, p7)
 			-- upvalues: getPortState (ref)
 			if p7 == nil then
 				p6.bindPlacement(nil, nil)
@@ -121,7 +121,7 @@ return {
 			p6.bindPlacement("composition", var22.port)
 		end
 		
-		local _ = function(p8) --[[ line: 237 | named "markDirty" ]]
+		local _ = function(p8)
 			-- upvalues: t_2 (ref), var8 (write), var9 (write), p3 (ref)
 			t_2[p8] = true
 			
@@ -132,14 +132,14 @@ return {
 			p3()
 		end
 		
-		local function ensureReconciler() --[[ line: 246 ]]
+		local function ensureReconciler()
 			-- upvalues: var10 (write), p2 (ref), getPortState (ref)
 			if var10 == nil then
 				local t = {}
 				local t_1 = {}
 				local var25 = 1
 				
-				local function assignmentFor(value, p9) --[[ line: 255 ]]
+				local function assignmentFor(value, p9)
 					-- upvalues: var25 (write)
 					local var28 = p9
 					
@@ -157,7 +157,7 @@ return {
 				end
 				
 				local t_2 = {
-					update = function(p10) --[[ line: 270 ]]
+					update = function(p10)
 						-- upvalues: t (write), assignmentFor (ref), p2 (copy), t_1 (ref), getPortState (copy)
 						local t_2 = {}
 						
@@ -233,7 +233,7 @@ return {
 							v_6.record.set(v_6.assignment)
 						end
 					end,
-					getRecords = function() --[[ line: 338 ]]
+					getRecords = function()
 						-- upvalues: t (write)
 						local t_1 = {}
 						
@@ -251,7 +251,7 @@ return {
 		end
 		
 		return {
-			register = function(p11, p12, p13, p14, p15) --[[ line: 390 ]]
+			register = function(p11, p12, p13, p14, p15)
 				-- upvalues: var9 (write), tbl (ref), var5 (write), t (ref), t_2 (ref), var8 (write), p3 (ref), getPortState (ref), t_1 (ref)
 				assert(not var9, "CompositionPlacementManager: cannot register after destroy")
 				local var41 = tbl[p12]
@@ -278,7 +278,7 @@ return {
 				local var42 = true
 				
 				return {
-					setPlaceholder = function(value) --[[ line: 411 ]]
+					setPlaceholder = function(value)
 						-- upvalues: var42 (write), var9 (copy), t (copy), var41 (write), getPortState (copy), t_2 (copy), var8 (copy), p3 (copy)
 						if not var42 or var9 then return end
 						local var43 = t[var41]
@@ -299,7 +299,7 @@ return {
 							p3()
 						end
 					end,
-					setProps = function(value) --[[ line: 429 ]]
+					setProps = function(value)
 						-- upvalues: var42 (write), var9 (copy), t (copy), var41 (write), t_2 (copy), var8 (copy), p3 (copy)
 						if not var42 or var9 then return end
 						local var44 = t[var41]
@@ -314,7 +314,7 @@ return {
 							p3()
 						end
 					end,
-					unregister = function() --[[ line: 440 ]]
+					unregister = function()
 						-- upvalues: var42 (write), var9 (copy), t (copy), var41 (write), getPortState (copy), t_1 (copy), t_2 (copy), var8 (copy), p3 (copy)
 						if not var42 then return end
 						var42 = false
@@ -338,7 +338,7 @@ return {
 					end
 				}
 			end,
-			flush = function() --[[ line: 350 ]]
+			flush = function()
 				-- upvalues: var8 (write), var9 (write), t (ref), t_1 (ref), t_2 (ref), var10 (write), ensureReconciler (ref)
 				if not var8 or var9 then return end
 				var8 = false
@@ -378,7 +378,7 @@ return {
 					ensureReconciler().update(t_3)
 				end
 			end,
-			destroy = function() --[[ line: 462 ]]
+			destroy = function()
 				-- upvalues: var9 (write), var8 (write), var10 (write), t (ref), t_1 (ref), t_2 (ref), tbl_1 (ref)
 				if var9 then return end
 				var9 = true

@@ -43,7 +43,7 @@ local t_1 = {
 	[19] = t.ReceiveLimitExceeded
 }
 
-function t.fromValue(p0) --[[ line: 71 ]]
+function t.fromValue(p0)
 	-- upvalues: t_1 (ref), t (ref)
 	if p0 == nil then
 		return nil

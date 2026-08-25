@@ -11,7 +11,7 @@ local t = {
 	include_messages = true
 }
 
-return function(p0, p1, p2) --[[ line: 25 ]]
+return function(p0, p1, p2)
 	-- upvalues: default (ref), object (ref), t (ref), httpService (ref), getFFlagEnableSocialCards (ref), CHAT_PLATFORM_BASE_URLModule (ref)
 	local var4 = object.assign({}, t, p2 or {})
 	

@@ -19,11 +19,11 @@ local t = {
 	bodyText = "",
 	isButtonDisabled = false,
 	screenSize = Vector2.new(1000, 1000),
-	onActivated = function() --[[ line: 41 ]] end,
-	onDismissed = function() --[[ line: 42 ]] end
+	onActivated = function() end,
+	onDismissed = function() end
 }
 
-return memo(function(p0) --[[ line: 45 | named "PartialModal" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useIsInExperienceModule (ref), warning (ref), info (ref), reactModule (ref), partialPageModal (ref), enum (ref), styledTextLabel (ref)
 	local var7 = cryoModule.Dictionary.union(t, p0)
 	local style = var7.style or useStyle()

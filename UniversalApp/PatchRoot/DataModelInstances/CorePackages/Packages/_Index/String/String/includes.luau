@@ -1,6 +1,6 @@
 ﻿local text = "([" .. ("$%^()-[].?"):gsub("(.)", "%%%1") .. "])"
 
-return function(p0, p1, p2) --[[ line: 20 | named "includes" ]]
+return function(p0, p1, p2)
 	-- upvalues: text (ref)
 	local charCount, charCount_1 = utf8.len(p0)
 	assert(charCount ~= nil, ("string `%s` has an invalid byte at position %s"):format(p0, tostring(charCount_1)))

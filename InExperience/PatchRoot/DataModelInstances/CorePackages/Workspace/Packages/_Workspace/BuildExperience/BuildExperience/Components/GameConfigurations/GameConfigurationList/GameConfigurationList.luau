@@ -8,7 +8,7 @@ local view = foundationModule.View
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
 
-local function GameConfigurationListItem(p0) --[[ line: 41 ]]
+local function GameConfigurationListItem(p0)
 	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), list (ref)
 	local row = p0.row
 	local var3 = row.isDisabled == true
@@ -24,7 +24,7 @@ local function GameConfigurationListItem(p0) --[[ line: 41 ]]
 			size = iconSize.Large,
 			testId = `{p0.testId}-trailing-icon`
 		}) else nil,
-		onActivated = if onActivated == nil or var3 then nil else reactModule.useCallback(function() --[[ line: 45 ]]
+		onActivated = if onActivated == nil or var3 then nil else reactModule.useCallback(function()
 			-- upvalues: onActivated (ref)
 			if onActivated ~= nil then
 				onActivated()
@@ -42,7 +42,7 @@ local function GameConfigurationListItem(p0) --[[ line: 41 ]]
 	}, { Item = createElement }) else createElement
 end
 
-return function(p1) --[[ line: 86 | named "GameConfigurationList" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), GameConfigurationListItem (ref), view (ref), text (ref), list (ref), inputSize (ref)
 	local testId = p1.testId or "game-configuration-list"
 	
@@ -73,7 +73,7 @@ return function(p1) --[[ line: 86 | named "GameConfigurationList" ]]
 			isContained = true,
 			hasDivider = { hasDivider = true, isInset = false },
 			size = inputSize.Medium
-		}, reactModule.useMemo(function() --[[ line: 88 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: p1 (ref), reactModule (copy), GameConfigurationListItem (copy), testId (ref)
 			local t = {}
 			

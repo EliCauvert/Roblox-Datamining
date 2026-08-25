@@ -5,7 +5,7 @@ local reactModule = require(parent_1.React)
 local eventConnection = require(parent_1.ReactUtils).EventConnection
 local useStyleModule = require(parent.Core.Style.useStyle)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 22 ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useStyleModule (ref), reactModule (ref), eventConnection (ref), runService (ref)
 	local var3 = useStyleModule()
 	local selectionCursor = var3.Tokens.Component.SelectionCursor
@@ -38,7 +38,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 22 ]]
 		}),
 		HeartbeatConnection = p0.isVisible and reactModule.createElement(eventConnection, {
 			event = runService.Heartbeat,
-			callback = function(_) --[[ line: 60 ]]
+			callback = function(_)
 				-- upvalues: var6 (ref), colorSequence (ref), numberSequence (ref), reducedMotion (ref), var7 (ref), var9 (ref), var11 (ref)
 				local var12 = var6:getValue() + 2
 				local var13 = colorSequence

@@ -4,12 +4,12 @@ local useStyle = dependenciesModule.UIBlox.Core.Style.useStyle
 local _ = require(parent.type)
 local react = dependenciesModule.React
 local t = {
-	highlight = function(p0) --[[ line: 44 ]]
+	highlight = function(p0)
 		return "<b>" .. p0 .. "</b>"
 	end
 }
 
-local function formatString(p1) --[[ line: 49 ]]
+local function formatString(p1)
 	-- upvalues: t (ref)
 	local text = p1.text
 	local styledElements = p1.styledElements
@@ -36,7 +36,7 @@ local function formatString(p1) --[[ line: 49 ]]
 			})
 		end
 	end
-	table.sort(list, function(p2, p3) --[[ line: 84 ]]
+	table.sort(list, function(p2, p3)
 		return p2.Position < p3.Position
 	end)
 	local t_1 = {}
@@ -68,7 +68,7 @@ local function formatString(p1) --[[ line: 49 ]]
 	return var5
 end
 
-return function(p4) --[[ line: 115 ]]
+return function(p4)
 	-- upvalues: useStyle (ref), formatString (ref), react (ref)
 	local var9 = useStyle()
 	

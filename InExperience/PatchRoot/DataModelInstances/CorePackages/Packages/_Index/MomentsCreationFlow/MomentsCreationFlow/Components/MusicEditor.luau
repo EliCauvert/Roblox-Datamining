@@ -19,33 +19,33 @@ local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.Creatio
 local segmentSelectorWidth = require(momentsCreationFlow.Constants).AudioWaveform.SegmentSelectorWidth
 local uDim2 = UDim2.new(0, 48, 1, 0)
 
-return function(p0) --[[ line: 43 | named "MusicEditor" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useDeviceInsets (ref), reactModule (ref), creationFlowContextModule (ref), useToggleState (ref), useCallback (ref), useMusicEditorControllerModule (ref), view (ref), button (ref), foundationModule (ref), creationFlowLocalizationModule (ref), gradientBackdrop (ref), uDim2 (ref), segmentSelectorWidth (ref), waveformModule (ref), loading (ref), musicPreviewItemModule (ref)
 	local var10 = useTokens()
 	local var11 = useDeviceInsets()
 	local var12 = reactModule.useContext(creationFlowContextModule)
 	local var13 = useToggleState(false)
 	local var14 = useToggleState(false)
-	local var15 = useCallback(function() --[[ line: 51 ]]
+	local var15 = useCallback(function()
 		-- upvalues: p0 (ref), var14 (ref)
 		p0.playbackController.volume.mute()
 		p0.playbackController.timeline.seek(0)
 		p0.playbackController.playback.pause()
 		var14.enable()
 	end, { p0.playbackController.timeline.seek })
-	local var16 = useCallback(function() --[[ line: 58 ]]
+	local var16 = useCallback(function()
 		-- upvalues: p0 (ref), var14 (ref)
 		p0.playbackController.volume.unmute()
 		p0.playbackController.playback.play()
 		var14.disable()
 	end, {})
-	local var17 = useCallback(function() --[[ line: 64 ]]
+	local var17 = useCallback(function()
 		-- upvalues: p0 (ref), var13 (ref)
 		p0.playbackController.volume.unmute()
 		p0.playbackController.playback.play()
 		var13.enable()
 	end, {})
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref)
 		var13.disable()
 	end, { p0.musicEdit.assetId })
@@ -114,7 +114,7 @@ return function(p0) --[[ line: 43 | named "MusicEditor" ]]
 					WaveformDisplay = reactModule.createElement(waveformModule, {
 						zIndex = 1,
 						audioAssetId = p0.musicEdit.assetId,
-						position = var18.waveformPosition:map(function(p1) --[[ line: 161 ]]
+						position = var18.waveformPosition:map(function(p1)
 							return UDim2.fromScale(p1, 0.5)
 						end),
 						onWaveformReady = var17,

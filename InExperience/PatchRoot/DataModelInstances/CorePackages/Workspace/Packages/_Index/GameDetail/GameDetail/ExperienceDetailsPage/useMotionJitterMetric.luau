@@ -12,11 +12,11 @@ local t = {
 	lastUpdated = { 2026, 6, 18 }
 }
 
-local function _(p0, p1) --[[ line: 32 | named "readPositionY" ]]
+local function _(p0, p1)
 	return p0[p1].Y
 end
 
-local function logMotionJitter(p2, p3, p4) --[[ line: 36 ]]
+local function logMotionJitter(p2, p3, p4)
 	-- upvalues: logger (ref), telemetryService (ref), t (ref)
 	logger:info("[useMotionJitterMetric] Logging motion jitter")
 	
@@ -31,9 +31,9 @@ local function logMotionJitter(p2, p3, p4) --[[ line: 36 ]]
 	logger:warning("[useMotionJitterMetric] Should only log motion jitter for reason: settled")
 end
 
-return function(p5, p6, p7, p8) --[[ line: 52 | named "useMotionJitterMetric" ]]
+return function(p5, p6, p7, p8)
 	-- upvalues: reactModule (ref), experienceDetailsMotionJitterHundredthsPercent (ref), logger (ref), logMotionJitter (ref), runService (ref)
-	reactModule.useEffect(function() --[[ line: 58 ]]
+	reactModule.useEffect(function()
 		-- upvalues: experienceDetailsMotionJitterHundredthsPercent (copy), logger (copy), logMotionJitter (copy), p6 (ref), runService (copy), p5 (ref), p8 (ref), p7 (ref)
 		if experienceDetailsMotionJitterHundredthsPercent <= 0 then
 			return
@@ -41,7 +41,7 @@ return function(p5, p6, p7, p8) --[[ line: 52 | named "useMotionJitterMetric" ]]
 		local var6 = nil
 		local var7 = nil
 		
-		local function _(p9) --[[ line: 66 | named "flushMotion" ]]
+		local function _(p9)
 			-- upvalues: logger (copy), var7 (write), logMotionJitter (copy), p6 (copy)
 			logger:info("[useMotionJitterMetric] Flushing motion metric for reason: " .. p9)
 			
@@ -52,7 +52,7 @@ return function(p5, p6, p7, p8) --[[ line: 52 | named "useMotionJitterMetric" ]]
 		end
 		
 		local renderSteppedConnection = nil
-		renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 75 ]]
+		renderSteppedConnection = runService.RenderStepped:Connect(function()
 			-- upvalues: p5 (copy), logger (copy), var7 (write), p6 (copy), var6 (write), p8 (copy), logMotionJitter (copy), renderSteppedConnection (write), p7 (copy)
 			local current = p5.current
 			
@@ -110,7 +110,7 @@ return function(p5, p6, p7, p8) --[[ line: 52 | named "useMotionJitterMetric" ]]
 			end
 		end)
 		
-		return function() --[[ line: 122 ]]
+		return function()
 			-- upvalues: logger (copy), var7 (write), p6 (copy), renderSteppedConnection (write)
 			logger:info("[useMotionJitterMetric] Flushing motion metric for reason: unmount")
 			

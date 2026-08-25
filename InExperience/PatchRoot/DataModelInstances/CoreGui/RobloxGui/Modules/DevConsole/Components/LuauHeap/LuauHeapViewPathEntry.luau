@@ -13,18 +13,18 @@ local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
 local _ = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewPathEntry = roactModule.PureComponent:extend("LuauHeapViewPathEntry")
 
-function luauHeapViewPathEntry.init(p0) --[[ line: 25 ]]
+function luauHeapViewPathEntry.init(p0)
 	p0.state = { expanded = false }
 	
-	function p0.onButtonPress() --[[ line: 30 ]]
+	function p0.onButtonPress()
 		-- upvalues: p0 (ref)
-		p0:setState(function(p1) --[[ line: 31 ]]
+		p0:setState(function(p1)
 			return { expanded = not p1.expanded }
 		end)
 	end
 end
 
-function luauHeapViewPathEntry.renderChildren(p2, p3) --[[ line: 39 ]]
+function luauHeapViewPathEntry.renderChildren(p2, p3)
 	-- upvalues: depthIndent (ref), cellPadding (ref), roactModule (ref), cellLabelModule (ref), pathEntryFrameHeight (ref)
 	local t = {}
 	local var6 = 2 * depthIndent + cellPadding
@@ -42,7 +42,7 @@ function luauHeapViewPathEntry.renderChildren(p2, p3) --[[ line: 39 ]]
 	return t
 end
 
-function luauHeapViewPathEntry.render(p4) --[[ line: 58 ]]
+function luauHeapViewPathEntry.render(p4)
 	-- upvalues: pathEntryFrameHeight (ref), depthIndent (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
 	local props = p4.props
 	local size = props.size or UDim2.new(1, 0, 0, pathEntryFrameHeight)

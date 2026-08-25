@@ -8,7 +8,7 @@ local var4, var5 = signalsModule.createSignal({})
 
 return {
 	getCache = var4,
-	fetchAndCache = function(p0, p1) --[[ line: 14 ]]
+	fetchAndCache = function(p0, p1)
 		-- upvalues: var4 (ref), promiseModule (ref), fetchItemDetailsModule (ref), var5 (ref)
 		local var6 = var4(false)
 		local t = {}
@@ -18,7 +18,7 @@ return {
 				table.insert(t, v)
 			end
 		end
-		return if #t == 0 then promiseModule.resolve() else fetchItemDetailsModule(p0, t):andThen(function(p2) --[[ line: 26 ]]
+		return if #t == 0 then promiseModule.resolve() else fetchItemDetailsModule(p0, t):andThen(function(p2)
 			-- upvalues: var4 (copy), var5 (copy)
 			if p2 and p2.data then
 				local cloned = table.clone(var4(false))
@@ -30,11 +30,11 @@ return {
 			end
 		end)
 	end,
-	getItem = function(p3) --[[ line: 37 ]]
+	getItem = function(p3)
 		-- upvalues: var4 (ref)
 		return var4(false)[p3]
 	end,
-	clear = function() --[[ line: 41 ]]
+	clear = function()
 		-- upvalues: var5 (ref)
 		var5({})
 	end

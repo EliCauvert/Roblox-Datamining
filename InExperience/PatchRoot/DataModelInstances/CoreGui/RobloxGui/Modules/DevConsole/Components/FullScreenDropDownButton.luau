@@ -9,14 +9,14 @@ local var3 = dropDownArrowHeight / 2
 local downArrow = constantsModule.Image.DownArrow
 local fullScreenDropDownButton = roactModule.Component:extend("FullScreenDropDownButton")
 
-function fullScreenDropDownButton.init(p0) --[[ line: 19 ]]
+function fullScreenDropDownButton.init(p0)
 	-- upvalues: robloxGui (ref)
-	function p0.startDropDownView() --[[ line: 20 ]]
+	function p0.startDropDownView()
 		-- upvalues: p0 (ref)
 		p0:setState({ selectionScreenExpanded = true })
 	end
 	
-	function p0.noSelection(_, p1) --[[ line: 26 ]]
+	function p0.noSelection(_, p1)
 		-- upvalues: p0 (ref)
 		if p1.UserInputType == Enum.UserInputType.MouseButton1 or p1.UserInputType == Enum.UserInputType.Touch and p1.UserInputState == Enum.UserInputState.End then
 			p0:setState({ selectionScreenExpanded = false })
@@ -29,7 +29,7 @@ function fullScreenDropDownButton.init(p0) --[[ line: 19 ]]
 	}
 end
 
-function fullScreenDropDownButton.render(p2) --[[ line: 43 ]]
+function fullScreenDropDownButton.render(p2)
 	-- upvalues: roactModule (ref), constantsModule (ref), dropDownEntryHeight (ref), externalEventConnection (ref), robloxGui (ref), dropDownArrowHeight (ref), var3 (ref), downArrow (ref)
 	local buttonSize = p2.props.buttonSize
 	local dropDownList = p2.props.dropDownList
@@ -61,7 +61,7 @@ function fullScreenDropDownButton.render(p2) --[[ line: 43 ]]
 					BackgroundColor3 = if i == selectedIndex then constantsModule.Color.SelectedGray else constantsModule.Color.UnselectedGray,
 					LayoutOrder = i,
 					BorderSizePixel = 0,
-					[roactModule.Event.Activated] = function(_) --[[ line: 80 ]]
+					[roactModule.Event.Activated] = function(_)
 						-- upvalues: p2 (ref), onSelection (ref), i (ref)
 						p2:setState({ selectionScreenExpanded = false })
 						onSelection(i)
@@ -81,7 +81,7 @@ function fullScreenDropDownButton.render(p2) --[[ line: 43 ]]
 	}, {
 		SizeChangeEvent = roactModule.createElement(externalEventConnection, {
 			event = robloxGui:GetPropertyChangedSignal("AbsoluteSize"),
-			callback = function() --[[ line: 106 ]]
+			callback = function()
 				-- upvalues: p2 (ref), robloxGui (copy)
 				p2:setState({ guiSizeY = robloxGui.AbsoluteSize.Y })
 			end

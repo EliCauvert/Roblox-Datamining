@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 3 | named "StringTrim" ]]
+﻿return function(p0, p1, p2)
 	if not p1 then
 		p1 = "%s"
 	end

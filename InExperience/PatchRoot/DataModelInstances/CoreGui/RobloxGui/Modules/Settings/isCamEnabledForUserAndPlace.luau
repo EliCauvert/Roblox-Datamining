@@ -20,12 +20,12 @@ local debugAlwaysShowDisableCameraToast = game:DefineFastFlag("DebugAlwaysShowDi
 local onlyShowToastOnceInLifetime2 = game:DefineFastFlag("OnlyShowToastOnceInLifetime2", false)
 local disableCameraToastShownStorageKeyEngineFeature = game:GetEngineFeature("DisableCameraToastShownStorageKey")
 
-local function ShouldCheckDeviceSpecs() --[[ line: 28 ]]
+local function ShouldCheckDeviceSpecs()
 	-- upvalues: disableCameraOnLowSpecDevices2 (ref), IXPService (ref), disableCameraOnLowSpecDevicesIXPLayer (ref), disableCameraOnLowSpecDevicesIXPField (ref)
 	if not disableCameraOnLowSpecDevices2 then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 31 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), disableCameraOnLowSpecDevicesIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(disableCameraOnLowSpecDevicesIXPLayer)
 	end)
@@ -38,7 +38,7 @@ local function ShouldCheckDeviceSpecs() --[[ line: 28 ]]
 	return false
 end
 
-return function() --[[ line: 46 ]]
+return function()
 	-- upvalues: getFFlagAvatarChatServiceEnabled (ref), avatarChatService (ref), disableCameraOnLowSpecDevices2 (ref), ShouldCheckDeviceSpecs (ref), onlyShowToastOnceInLifetime2 (ref), disableCameraToastShownStorageKeyEngineFeature (ref), appStorageService (ref), debugAlwaysShowDisableCameraToast (ref), trackerMenuModule (ref), trackerPromptTypeModule (ref), onlyShowToastOnce2 (ref), memStorageService (ref), getFFlagUseCameraDevicesListenerModule (ref), cameraDevicesHelperModule (ref), videoCaptureService (ref), cryoModule (ref)
 	if not getFFlagAvatarChatServiceEnabled() or _G.__TESTEZ_RUNNING_TEST__ then
 		return false
@@ -57,14 +57,14 @@ return function() --[[ line: 46 ]]
 	if not disableCameraOnLowSpecDevices2 or not var21 or (not var22 or not var23) or (avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.DeviceCapture) or not ShouldCheckDeviceSpecs()) then
 		return var21 and (var23 and (var22 and not cryoModule.isEmpty(if getFFlagUseCameraDevicesListenerModule() then cameraDevicesHelperModule.GetDevices() else videoCaptureService:GetCameraDevices())))
 	elseif onlyShowToastOnceInLifetime2 and disableCameraToastShownStorageKeyEngineFeature then
-		local ok_1, status_1 = pcall(function() --[[ line: 68 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: appStorageService (copy)
 			return appStorageService:GetItem("DisableCameraToastShown")
 		end)
 		
 		if not ok_1 or (not (status_1 == "true") or debugAlwaysShowDisableCameraToast) then
 			trackerMenuModule:showPrompt(trackerPromptTypeModule.CameraUnavailable)
-			pcall(function() --[[ line: 77 ]]
+			pcall(function()
 				-- upvalues: appStorageService (copy)
 				appStorageService:SetItem("DisableCameraToastShown", "true")
 				appStorageService:Flush()

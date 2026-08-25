@@ -33,7 +33,7 @@ local var22 = game:DefineFastInt("UGCValidationDrdJointSizeHundredthsLimit", 150
 local vector3_4 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinZHundredths", 0) / 100)
 local vector3_5 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxZHundredths", 0) / 100)
 
-local function checkVectorRange(p0, p1, p2, p3, p4, p5) --[[ line: 45 ]]
+local function checkVectorRange(p0, p1, p2, p3, p4, p5)
 	-- upvalues: vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
 	if not vector3UtilsModule.isInRange(p3, p4, p5) then
 		p0:fail(errorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
@@ -46,7 +46,7 @@ local function checkVectorRange(p0, p1, p2, p3, p4, p5) --[[ line: 45 ]]
 	end
 end
 
-local function checkSize(p6, p7, p8, p9, p10) --[[ line: 64 ]]
+local function checkSize(p6, p7, p8, p9, p10)
 	-- upvalues: errorSourceStringsModule (ref), valueToStringModule (ref)
 	if p9 < 0 or p10 < p9 then
 		p6:fail(errorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
@@ -59,7 +59,7 @@ local function checkSize(p6, p7, p8, p9, p10) --[[ line: 64 ]]
 	end
 end
 
-function t.run(p11, p12) --[[ line: 82 ]]
+function t.run(p11, p12)
 	-- upvalues: getAllInstancesIsAModule (ref), validationRulesUtilModule (ref), cFrameUtilsModule (ref), vector3UtilsModule (ref), vector3_2 (ref), vector3_3 (ref), errorSourceStringsModule (ref), valueToStringModule (ref), r15plusUtilsModule (ref), checkSize (ref), var9 (ref), checkVectorRange (ref), vector3 (ref), vector3_1 (ref), var22 (ref), vector3_4 (ref), vector3_5 (ref)
 	for i, v in getAllInstancesIsAModule(p12.rootInstance, "MeshPart") do
 		local humanoidRigDescription = v:FindFirstChildWhichIsA("HumanoidRigDescription")

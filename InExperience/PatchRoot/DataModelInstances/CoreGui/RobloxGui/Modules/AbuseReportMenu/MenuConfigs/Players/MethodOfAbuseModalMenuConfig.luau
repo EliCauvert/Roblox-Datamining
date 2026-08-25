@@ -12,18 +12,18 @@ return {
 	componentType = "modalSelector",
 	fieldLabel = "MethodOfAbuse",
 	componentName = "MethodOfAbuse",
-	getIsVisible = function(p0) --[[ line: 15 ]]
+	getIsVisible = function(p0)
 		-- upvalues: tnSIXPWrapperModule (ref)
 		return p0.isVoiceEnabled or tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
 	end,
-	getMenuItems = function(p1) --[[ line: 18 ]]
+	getMenuItems = function(p1)
 		-- upvalues: cryoModule (ref), default (ref), getAvailableMethodsOfAbuseModule (ref), tnSIXPWrapperModule (ref)
 		return getAvailableMethodsOfAbuseModule(p1.isVoiceEnabled and not cryoModule.isEmpty(default:getRecentUsersInteractionData()), tnSIXPWrapperModule.getReportAnythingAvatarEnabled())
 	end,
-	getSelectedValue = function(p2) --[[ line: 24 ]]
+	getSelectedValue = function(p2)
 		return p2.methodOfAbuse
 	end,
-	onUpdateSelectedOption = function(p3, p4, p5, p6) --[[ line: 27 ]]
+	onUpdateSelectedOption = function(p3, p4, p5, p6)
 		-- upvalues: constantsModule (ref)
 		p5({
 			type = constantsModule.PlayerMenuActions.UpdateMethodOfAbuse,

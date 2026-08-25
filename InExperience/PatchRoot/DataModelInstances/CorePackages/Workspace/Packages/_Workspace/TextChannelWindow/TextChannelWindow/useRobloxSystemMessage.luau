@@ -4,13 +4,13 @@ local messageModule = require(script.Parent.Message)
 local messageWriterContextModule = require(script.Parent.MessageWriterContext)
 local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 
-return function() --[[ line: 17 | named "useRobloxSystemMessage" ]]
+return function()
 	-- upvalues: messageWriterContextModule (ref), useInExperienceLocalization (ref), reactModule (ref), messageModule (ref)
 	local var3 = messageWriterContextModule.useMessageWriter()
 	local var4 = useInExperienceLocalization()
 	
 	return {
-		displayRobloxSystemMessage = reactModule.useCallback(function(p0, p1) --[[ line: 21 ]]
+		displayRobloxSystemMessage = reactModule.useCallback(function(p0, p1)
 			-- upvalues: var3 (ref), var4 (ref), messageModule (copy)
 			if not var3 then return end
 			local var5 = var4(p0)
@@ -23,7 +23,7 @@ return function() --[[ line: 17 | named "useRobloxSystemMessage" ]]
 			end
 			var3.write(messageModule.createSystemMessage(var5, "Roblox.ChatDisabled.Info"))
 		end, { var3, var4 }),
-		clearAvailabilityMessage = reactModule.useCallback(function() --[[ line: 35 ]]
+		clearAvailabilityMessage = reactModule.useCallback(function()
 			-- upvalues: var3 (ref)
 			if var3 then
 				var3.remove("Roblox.ChatDisabled.Info")

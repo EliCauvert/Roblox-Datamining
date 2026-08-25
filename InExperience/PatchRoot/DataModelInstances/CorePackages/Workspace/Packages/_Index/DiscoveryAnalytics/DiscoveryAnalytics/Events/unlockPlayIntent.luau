@@ -8,7 +8,7 @@ local var1 = tModule.strictInterface({
 	pageName = tModule.optional(tModule.string)
 })
 
-return function(p0, p1) --[[ line: 14 ]]
+return function(p0, p1)
 	-- upvalues: var1 (ref), flaggedMutedError (ref)
 	local var2, var3 = var1(p1)
 	

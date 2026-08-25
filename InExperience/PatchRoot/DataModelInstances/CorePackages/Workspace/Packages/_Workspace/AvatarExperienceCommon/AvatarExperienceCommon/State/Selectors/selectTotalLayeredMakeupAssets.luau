@@ -5,7 +5,7 @@ local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
 local selectEquippedLayeredMakeupAssetsModule = require(script.Parent.selectEquippedLayeredMakeupAssets)
 local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquipping
 
-return function(value) --[[ line: 15 | named "selectTotalLayeredMakeupAssets" ]]
+return function(value)
 	-- upvalues: fFlagAXMakeupEquipping (ref), selectEquippedLayeredMakeupAssetsModule (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
 	if not fFlagAXMakeupEquipping then
 		return 0

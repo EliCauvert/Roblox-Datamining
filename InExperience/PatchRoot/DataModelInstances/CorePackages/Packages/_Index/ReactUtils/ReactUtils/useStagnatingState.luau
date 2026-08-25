@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-local function shallowEqual(p0, p1) --[[ line: 22 ]]
+local function shallowEqual(p0, p1)
 	if p0 == p1 then
 		return true
 	elseif typeof(p0) ~= typeof(p1) then
@@ -26,7 +26,7 @@ local function shallowEqual(p0, p1) --[[ line: 22 ]]
 	return true
 end
 
-return function(p2, p3) --[[ line: 57 | named "useStagnatingState" ]]
+return function(p2, p3)
 	-- upvalues: reactModule (ref), shallowEqual (ref)
 	local var2 = reactModule.useRef(p3)
 	local var3 = reactModule.useRef(0)
@@ -37,10 +37,10 @@ return function(p2, p3) --[[ line: 57 | named "useStagnatingState" ]]
 	end
 	local var4, var5 = reactModule.useState({ tick = var3.current, value = p2 })
 	
-	return if var4.tick == var3.current then var4.value else p2, reactModule.useCallback(function(p4) --[[ line: 71 ]]
+	return if var4.tick == var3.current then var4.value else p2, reactModule.useCallback(function(p4)
 		-- upvalues: var5 (ref), var3 (ref), p2 (ref)
 		if typeof(p4) == "function" then
-			var5(function(p5) --[[ line: 73 ]]
+			var5(function(p5)
 				-- upvalues: var3 (copy), p2 (copy), p4 (ref)
 				return {
 					tick = var3.current,

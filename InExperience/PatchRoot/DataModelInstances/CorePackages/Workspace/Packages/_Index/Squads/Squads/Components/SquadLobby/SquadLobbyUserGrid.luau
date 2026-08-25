@@ -16,21 +16,21 @@ local squadLobbyUserCardModule = require(script.Parent.SquadLobbyUserCard)
 local squadLobbyUpsellCardModule = require(script.Parent.SquadLobbyUpsellCard)
 local fFlagEnableSquadRegroupExperimentationSmallScreenFix = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentationSmallScreenFix
 
-return function(p0) --[[ line: 45 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalUserId (ref), useSquadState (ref), reactModule (ref), squadState (ref), cryo (ref), squadUserPartyStatusModule (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), useSelector (ref), squadLobbyUserCardModule (ref), squadLobbyUpsellCardModule (ref), roact (ref)
 	local var6 = useTokens()
 	local var7 = tonumber(useLocalUserId()) or 0
 	local var8 = useSquadState()
 	local medium = var6.Gap.Medium
 	local xLarge = var6.Padding.XLarge
-	local var9, var10, var11 = reactModule.useMemo(function() --[[ line: 52 ]]
+	local var9, var10, var11 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), xLarge (ref), var8 (ref), squadState (copy), cryo (copy), squadUserPartyStatusModule (copy), medium (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (copy)
 		if p0.containerSize.Y == 0 or p0.containerSize.X == 0 then
 			return Vector2.new(0, 0), 0, 0
 		end
 		local var16
 		local var14 = p0.containerSize.X - xLarge * 2
-		local var15 = if var8 ~= squadState.Active then math.max(#cryo.List.filter(p0.users, function(p1) --[[ line: 64 ]]
+		local var15 = if var8 ~= squadState.Active then math.max(#cryo.List.filter(p0.users, function(p1)
 			-- upvalues: squadUserPartyStatusModule (copy)
 			return p1.partyStatus ~= squadUserPartyStatusModule.Inactive
 		end), 2) else 1
@@ -59,17 +59,17 @@ return function(p0) --[[ line: 45 ]]
 		
 		return Vector2.new((var14 + medium) / var18 - medium, if fFlagEnableSquadRegroupExperimentationSmallScreenFix then math.max(120, p0.containerSize.Y + medium) / minValue - medium else (p0.containerSize.Y + medium) / minValue - medium), var17, var18
 	end, { medium, p0.containerSize, p0.users, xLarge })
-	local var12 = useSelector(reactModule.useCallback(function(p2) --[[ line: 101 ]]
+	local var12 = useSelector(reactModule.useCallback(function(p2)
 		return p2.Squad.UserBlocking.isBlockedByMe
 	end, {}))
-	local var13 = reactModule.useMemo(function() --[[ line: 107 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: var9 (ref), reactModule (copy), squadLobbyUserCardModule (copy), var12 (ref), p0 (ref), squadUserPartyStatusModule (copy), var7 (ref), var8 (ref), squadState (copy), squadLobbyUpsellCardModule (copy), var10 (ref), var11 (ref), medium (ref)
 		if var9.X == 0 or var9.Y == 0 then
 			return {}
 		end
 		local t = {}
 		
-		local var21 = function(p3, p4, p5) --[[ line: 113 ]]
+		local var21 = function(p3, p4, p5)
 			-- upvalues: reactModule (copy), squadLobbyUserCardModule (copy), var9 (copy), var12 (copy), p0 (copy)
 			return reactModule.createElement(squadLobbyUserCardModule, {
 				size = UDim2.fromOffset(var9.X, var9.Y),

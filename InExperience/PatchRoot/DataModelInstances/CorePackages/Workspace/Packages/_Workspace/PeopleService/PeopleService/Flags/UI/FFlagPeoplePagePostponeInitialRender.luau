@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("PeoplePagePostponeInitialRender", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("PeoplePagePostponeInitialRender")
 end

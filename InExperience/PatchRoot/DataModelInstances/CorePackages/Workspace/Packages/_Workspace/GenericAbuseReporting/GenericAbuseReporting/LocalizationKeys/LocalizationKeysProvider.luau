@@ -3,10 +3,10 @@ local reactModule = require(genericAbuseReporting.Parent.React)
 local localizationKeysContextModule = require(genericAbuseReporting.LocalizationKeys.LocalizationKeysContext)
 local defaultLocalizationKeysModule = require(genericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)
 
-return function(p0) --[[ line: 25 | named "LocalizationKeysProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), defaultLocalizationKeysModule (ref), localizationKeysContextModule (ref)
 	return reactModule.createElement(localizationKeysContextModule.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 26 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), defaultLocalizationKeysModule (copy)
 			local localizationKeys = p0.localizationKeys
 			

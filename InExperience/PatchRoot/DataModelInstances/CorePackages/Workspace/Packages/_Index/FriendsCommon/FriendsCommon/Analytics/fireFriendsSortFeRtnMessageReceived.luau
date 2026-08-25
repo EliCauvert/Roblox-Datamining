@@ -7,7 +7,7 @@ local var2 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function() --[[ line: 27 ]]
+	getSharedInfo = function()
 		return {}
 	end
 })
@@ -18,19 +18,19 @@ local var3 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
-			format = function(p0, _) --[[ line: 39 ]]
+			format = function(p0, _)
 				return p0
 			end
 		}
 	}
 })
 
-return function(p1, p2) --[[ line: 46 | named "fireFriendsSortFeRtnMessageReceived" ]]
+return function(p1, p2)
 	-- upvalues: var2 (ref), var3 (ref), playersService (ref)
 	if p1 == nil or not p2 then
 		return
 	end
-	pcall(function() --[[ line: 51 ]]
+	pcall(function()
 		-- upvalues: p2 (ref), var2 (copy), var3 (copy), p1 (ref), playersService (copy)
 		local t = {}
 		

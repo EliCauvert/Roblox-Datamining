@@ -14,7 +14,7 @@ local imageSetLabel = core.ImageSet.ImageSetLabel
 local getIconSize = app.ImageSet.getIconSize
 local close = images["icons/navigation/close"]
 
-return function(p0) --[[ line: 54 | named "InlinePrompt" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), getIconSize (ref), iconSize (ref), reactModule (ref), responsiveModule (ref), imageSetLabel (ref), button (ref), cryoModule (ref), iconButton (ref), close (ref)
 	local var4 = useStyle()
 	local tokens = var4.Tokens

@@ -11,7 +11,7 @@ local t = {
 	Large = "padding-small"
 }
 
-return function(p0) --[[ line: 27 | named "BaseMenuGroup" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), baseMenuContextModule (ref), baseMenuDividerModule (ref), viewModule (ref), t (ref), baseMenuTitleItemModule (ref)
 	local var7 = reactModule.useContext(baseMenuContextModule)
 	local layoutOrder = p0.LayoutOrder

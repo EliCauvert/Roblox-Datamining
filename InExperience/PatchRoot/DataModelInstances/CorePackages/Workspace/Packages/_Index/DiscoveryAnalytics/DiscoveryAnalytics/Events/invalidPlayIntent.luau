@@ -17,7 +17,7 @@ local var3 = tModule.strictInterface({
 	pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then tModule.optional(tModule.string) else nil
 })
 
-return function(p0, p1) --[[ line: 30 ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref)
 	local var4, var5 = var3(p1)
 	

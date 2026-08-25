@@ -34,12 +34,12 @@ local t = {
 }
 local t_1 = { colorNamespace = colorNamespaceModule.Inverse }
 
-local function _(p0, p1) --[[ line: 86 | named "stepsText" ]]
+local function _(p0, p1)
 	-- upvalues: translatorModule (ref)
 	return translatorModule:FormatByKey("CommonUI.Controls.Label.PageCount", { current = p0, total = p1 })
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 90 | named "Coachmark" ]]
+return reactModule.memo(reactModule.forwardRef(function(p2, p3)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), constantsModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), radiusModule (ref), presentationContextModule (ref), t_1 (ref), colorNamespaceModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref), buttonGroupModule (ref), orientationModule (ref)
 	local var28 = withDefaultsModule(p2, t)
 	local var29 = useTokensModule()
@@ -48,7 +48,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 90 | 
 	local var32 = if var28.onClose then {
 		MaxSize = Vector2.new(var30 - var29.Size.Size_1200, 1e999)
 	} else nil
-	local var33 = reactModule.useMemo(function() --[[ line: 104 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref), flagsModule (copy), loggerModule (copy), inputSizeModule (copy), fillBehaviorModule (copy), dashModule (copy), reactModule (copy), buttonModule (copy)
 		local t = {}
 		

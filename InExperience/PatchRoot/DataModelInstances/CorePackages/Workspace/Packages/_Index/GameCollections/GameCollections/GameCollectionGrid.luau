@@ -99,10 +99,10 @@ local var23 = tModule.strictInterface({
 	videoPlaybackContext = tModule.optional(tModule.table)
 })
 
-return reactModule.memo(function(p0) --[[ line: 174 | named "GameCollectionGrid" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: validateProps (ref), var23 (ref), useAppPolicy (ref), usePreferredInput (ref), fFlagLuaAppHomeReduceRenders (ref), luaAppGameGridBufferRowsBelowScreen (ref), responsiveModule (ref), luaAppGameGridBufferRowsAboveScreen (ref), fFlagLuaAppCompositionAlways (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), useBreakpointXOrSmaller (ref), getGameTileCollectionItemSize (ref), reactModule (ref), fFlagLuaAppRfyRevealRowsFocusFix (ref), composeRefs (ref), useGameSortDataModule (ref), cryoModule (ref), useGameCollectionLayoutParamsModule (ref), fFlagLuaAppFixCompositionSizeOverrideGap (ref), useCollectionLayout (ref), useSizeAdjustedEntriesModule (ref), useGameSortAnalyticsModule (ref), gameTileModule (ref), useGameSortTooltipParamsModule (ref), useGameSortImpressionsParamsModule (ref), fFlagLuaAppFixSearchImpressions (ref), useIsHoldToPlayEnabledForGamesModule (ref), useHoldToPlayStateAndCallbacks (ref), useControllerBarFocusNavigationBindings (ref), useTextSizeOffset (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), getGameTileHiddenStore (ref), signalsReactModule (ref), useRenderGameCollectionItemModule (ref), appPage (ref), discoveryAnalyticsModule (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), gameSortImpressionsDetectorModule (ref), collectionGrid (ref), fFlagLuaAppRfyRevealRows (ref), fFlagLuaAppSortHeaderAnchorTag (ref), waitForPropWrapperModule (ref), holdToPlayLauncher (ref)
 	validateProps(var23, p0)
-	local var24 = useAppPolicy(function(p1) --[[ line: 178 ]]
+	local var24 = useAppPolicy(function(p1)
 		return p1.useGridPageLayout()
 	end)
 	local var25 = usePreferredInput()
@@ -126,12 +126,12 @@ return reactModule.memo(function(p0) --[[ line: 174 | named "GameCollectionGrid"
 	local var36, var37 = reactModule.useState(nil)
 	local var38 = reactModule.useRef(var36)
 	var38.current = var36
-	local var39 = if fFlagLuaAppRfyRevealRowsFocusFix then reactModule.useMemo(function() --[[ line: 225 ]]
+	local var39 = if fFlagLuaAppRfyRevealRowsFocusFix then reactModule.useMemo(function()
 		-- upvalues: composeRefs (copy), var37 (ref), p0 (ref)
 		return composeRefs(var37, p0.gridContainerRef)
 	end, { p0.gridContainerRef }) else nil
 	local var40 = useGameSortDataModule(p0.gameSortId, p0.pageContext, p0.searchParams and p0.searchParams.searchUuid)
-	local var41 = useGameCollectionLayoutParamsModule(gameTileLayoutType, var36, false, reactModule.useMemo(function() --[[ line: 237 ]]
+	local var41 = useGameCollectionLayoutParamsModule(gameTileLayoutType, var36, false, reactModule.useMemo(function()
 		-- upvalues: var24 (ref), p0 (ref), cryoModule (copy)
 		local var67 = if var24 then nil else p0.sideMargin
 		
@@ -156,7 +156,7 @@ return reactModule.memo(function(p0) --[[ line: 174 | named "GameCollectionGrid"
 	local var48, var49 = useGameSortTooltipParamsModule(var40.sort, var40.isOmni, p0.infoText)
 	local var50, var51, var52 = useGameSortImpressionsParamsModule(var40.sort, var40.isOmni, p0.sortIndex, p0.pageContext, p0.useGridTiles, p0.componentType, var40.gamesApiSortPageId, p0.gameSortId, p0.scrollViewPositionChangedSignal, var44, p0.startRow, var42, p0.searchParams)
 	local var53 = if fFlagLuaAppFixSearchImpressions and p0.searchParams then p0.searchParams.searchUuid else nil
-	local var54 = if fFlagLuaAppFixSearchImpressions then reactModule.useMemo(function() --[[ line: 317 ]]
+	local var54 = if fFlagLuaAppFixSearchImpressions then reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var53 (ref)
 		local pageContext = `GameGrid_{p0.pageContext}`
 		
@@ -168,7 +168,7 @@ return reactModule.memo(function(p0) --[[ line: 174 | named "GameCollectionGrid"
 	local var55 = useIsHoldToPlayEnabledForGamesModule()
 	local var56 = useHoldToPlayStateAndCallbacks()
 	local var57 = useControllerBarFocusNavigationBindings(nil, if var55 then var56.holdToPlayEventHandler else nil)
-	reactModule.useEffect(function() --[[ line: 344 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var57 (ref), var36 (ref)
 		if var57 then
 			var57(var36)
@@ -186,7 +186,7 @@ return reactModule.memo(function(p0) --[[ line: 174 | named "GameCollectionGrid"
 	
 	if not fFlagLuaAppCompositionAlways then
 		local var66 = reactModule.useRef(0)
-		reactModule.useEffect(function() --[[ line: 443 ]]
+		reactModule.useEffect(function()
 			-- upvalues: fFlagLuaAppCompositionAlways_1 (ref), var41 (ref), var66 (ref), p0 (ref)
 			if not fFlagLuaAppCompositionAlways_1 and var41.numColumns ~= var66.current then
 				var66.current = var41.numColumns

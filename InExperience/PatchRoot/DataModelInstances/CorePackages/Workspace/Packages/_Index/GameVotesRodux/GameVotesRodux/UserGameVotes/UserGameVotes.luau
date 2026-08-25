@@ -3,7 +3,7 @@ local immutable = require(gameVotesRodux.Parent.AppCommonLib).Immutable
 local setUserGameVotesModule = require(gameVotesRodux.UserGameVotes.SetUserGameVotes)
 local clearUserGameVotesModule = require(gameVotesRodux.UserGameVotes.ClearUserGameVotes)
 
-return function(p0, p1) --[[ line: 7 ]]
+return function(p0, p1)
 	-- upvalues: setUserGameVotesModule (ref), immutable (ref), clearUserGameVotesModule (ref)
 	p0 = p0 or {}
 	

@@ -29,7 +29,7 @@ local t_1 = {
 	}
 }
 
-function t.run(p0, p1) --[[ line: 36 ]]
+function t.run(p0, p1)
 	-- upvalues: getAllInstancesWithNameModule (ref), r15plusUtilsModule (ref), errorSourceStringsModule (ref), t_1 (ref), getDiffBetweenOrientationsModule (ref), UGCValidationJointRotationMaximumDegreeOrientationOffset (ref), valueToStringModule (ref), UGCValidationJointRotationMaximumHundredthPositionOffset (ref)
 	local t = {
 		LeftShoulderRigAttachment = 0,

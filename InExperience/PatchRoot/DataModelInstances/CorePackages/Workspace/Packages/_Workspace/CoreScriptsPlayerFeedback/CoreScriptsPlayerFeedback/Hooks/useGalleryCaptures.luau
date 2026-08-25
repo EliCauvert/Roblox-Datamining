@@ -3,7 +3,7 @@ local reactModule = require(coreScriptsPlayerFeedback.Parent.React)
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 local fetchGalleryCapturesModule = require(coreScriptsPlayerFeedback.Utils.fetchGalleryCaptures)
 
-return function() --[[ line: 28 | named "useGalleryCaptures" ]]
+return function()
 	-- upvalues: reactModule (ref), fetchGalleryCapturesModule (ref)
 	local var3, var4 = reactModule.useState({})
 	local var5, var6 = reactModule.useState(false)
@@ -11,7 +11,7 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 	local var8 = reactModule.useRef(nil)
 	local var9 = reactModule.useRef({})
 	local var10, var11 = reactModule.useState(true)
-	local var12 = reactModule.useCallback(function() --[[ line: 36 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), var4 (ref)
 		local current = var9.current
 		
@@ -27,7 +27,7 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 			table.insert(t_1, current[i_1])
 		end
 		var9.current = t_1
-		var4(function(p0) --[[ line: 50 ]]
+		var4(function(p0)
 			-- upvalues: t (ref)
 			local cloned = table.clone(p0)
 			
@@ -37,7 +37,7 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 			return cloned
 		end)
 	end, {})
-	local var13 = reactModule.useCallback(function() --[[ line: 59 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref), var11 (ref), var6 (ref), var9 (ref), var12 (ref)
 		local current = var8.current
 		
@@ -48,12 +48,12 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 			return
 		end
 		var6(true)
-		task.spawn(function() --[[ line: 67 ]]
+		task.spawn(function()
 			-- upvalues: var9 (copy), current (ref), var6 (copy), var11 (copy), var12 (copy)
 			local gameId = game.GameId
 			repeat
 				if #var9.current ~= 0 then break end
-				if pcall(function() --[[ line: 71 ]]
+				if pcall(function()
 					-- upvalues: current (copy)
 					current:AdvanceToNextPageAsync()
 				end) then
@@ -78,14 +78,14 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 		captures = var3,
 		isLoading = var5,
 		hasMore = var10,
-		load = reactModule.useCallback(function() --[[ line: 95 ]]
+		load = reactModule.useCallback(function()
 			-- upvalues: var7 (ref), var5 (ref), var6 (ref), fetchGalleryCapturesModule (copy), var11 (ref), var8 (ref), var9 (ref), var12 (ref)
 			if var7.current or var5 then
 				return
 			end
 			var7.current = true
 			var6(true)
-			task.spawn(function() --[[ line: 101 ]]
+			task.spawn(function()
 				-- upvalues: fetchGalleryCapturesModule (copy), var6 (copy), var11 (copy), var8 (copy), var9 (copy), var12 (copy)
 				local var17 = fetchGalleryCapturesModule()
 				
@@ -103,7 +103,7 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 							table.insert(var9.current, v)
 						end
 					end
-				until #var9.current >= 30 or var17.IsFinished or not pcall(function() --[[ line: 121 ]]
+				until #var9.current >= 30 or var17.IsFinished or not pcall(function()
 					-- upvalues: var17 (ref)
 					var17:AdvanceToNextPageAsync()
 				end)
@@ -112,7 +112,7 @@ return function() --[[ line: 28 | named "useGalleryCaptures" ]]
 				var6(false)
 			end)
 		end, { var5, var12 }),
-		loadMore = reactModule.useCallback(function() --[[ line: 134 ]]
+		loadMore = reactModule.useCallback(function()
 			-- upvalues: var5 (ref), var9 (ref), var12 (ref), var8 (ref), var11 (ref), var13 (ref)
 			if var5 then return end
 			if #var9.current <= 0 then

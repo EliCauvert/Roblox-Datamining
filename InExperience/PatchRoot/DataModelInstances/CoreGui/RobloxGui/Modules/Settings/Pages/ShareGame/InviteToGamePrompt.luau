@@ -19,7 +19,7 @@ local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 40 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { isActive = false, mountTarget = p0 }
 	setmetatable(t_1, t)
@@ -27,26 +27,26 @@ function t.new(p0) --[[ line: 40 ]]
 	return t_1
 end
 
-function t:withSocialServiceAndLocalPlayer(p1, p2) --[[ line: 50 ]]
+function t:withSocialServiceAndLocalPlayer(p1, p2)
 	self.socialService = p1
 	self.localPlayer = p2
 	
 	return self
 end
 
-function t:withAnalytics(p3) --[[ line: 56 ]]
+function t:withAnalytics(p3)
 	self.analytics = p3
 	
 	return self
 end
 
-function t:withRequestImpl(p4) --[[ line: 61 ]]
+function t:withRequestImpl(p4)
 	self.requestImpl = p4
 	
 	return self
 end
 
-function t:_createTree(p5, p6) --[[ line: 66 ]]
+function t:_createTree(p5, p6)
 	-- upvalues: getFFlagEnableSharedInviteStoreModule (ref), inviteStoreModule (ref), roduxModule (ref), appReducerModule (ref), renderWithCoreScriptsStyleProviderModule (ref), roactModule (ref), fullModalShareGameComponentModule (ref)
 	return renderWithCoreScriptsStyleProviderModule({
 		FullModalShareGame = roactModule.createElement(fullModalShareGameComponentModule, {
@@ -59,7 +59,7 @@ function t:_createTree(p5, p6) --[[ line: 66 ]]
 			launchData = p6 and p6.launchData,
 			isLoading = p6 and p6.isLoading,
 			requestImpl = self.requestImpl,
-			onAfterClosePage = function(_) --[[ line: 81 ]]
+			onAfterClosePage = function(_)
 				-- upvalues: self (ref)
 				self:hide({})
 			end
@@ -67,7 +67,7 @@ function t:_createTree(p5, p6) --[[ line: 66 ]]
 	})
 end
 
-function t:show(p7) --[[ line: 95 ]]
+function t:show(p7)
 	-- upvalues: constantsModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), roactModule (ref), contextActionService (ref)
 	if self.isActive then return end
 	self.isLoading = p7 and p7.isLoading
@@ -86,7 +86,7 @@ function t:show(p7) --[[ line: 95 ]]
 	if self.analytics and not self.isLoading then
 		self.analytics:inputShareGameEntryPoint()
 	end
-	contextActionService:BindCoreAction("hideInvitePrompt", function(_, p8, _) --[[ line: 124 ]]
+	contextActionService:BindCoreAction("hideInvitePrompt", function(_, p8, _)
 		-- upvalues: self (ref)
 		if p8 == Enum.UserInputState.Begin then
 			self:hide()
@@ -94,7 +94,7 @@ function t:show(p7) --[[ line: 95 ]]
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
 end
 
-function t:hide(_) --[[ line: 131 ]]
+function t:hide(_)
 	-- upvalues: roactModule (ref), contextActionService (ref), guiService (ref)
 	if not self.isActive and not self.isLoading then return end
 	self.isLoading = false
@@ -109,7 +109,7 @@ function t:hide(_) --[[ line: 131 ]]
 	guiService:RemoveSelectionGroup("invitePrompt")
 end
 
-function t:destruct() --[[ line: 148 ]]
+function t:destruct()
 	-- upvalues: roactModule (ref)
 	if self.instance then
 		roactModule.unmount(self.instance)

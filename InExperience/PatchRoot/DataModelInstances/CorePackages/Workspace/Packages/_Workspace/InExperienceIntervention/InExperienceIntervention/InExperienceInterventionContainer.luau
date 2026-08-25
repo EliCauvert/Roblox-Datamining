@@ -8,10 +8,10 @@ local inExperienceInterventionDialogManagerModule = require(inExperienceInterven
 local constants = require(parent.InterventionShared).Utils.Constants
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-function InExperienceInterventionContainer() --[[ line: 12 ]]
+function InExperienceInterventionContainer()
 	-- upvalues: reactModule (ref), inExperienceInterventionUIStateReducerModule (ref), constants (ref), useLocalization (ref), cryoModule (ref), inExperienceInterventionEventReceiverModule (ref), inExperienceInterventionDialogManagerModule (ref)
 	local var6, var7 = reactModule.useReducer(inExperienceInterventionUIStateReducerModule, constants.InitialUIState)
-	local var8 = reactModule.useCallback(function(p0) --[[ line: 18 ]]
+	local var8 = reactModule.useCallback(function(p0)
 		-- upvalues: cryoModule (copy), var7 (ref)
 		var7(cryoModule.Dictionary.join(p0, { dispatchTimestamp = DateTime.now().UnixTimestamp }))
 	end, { var7 })

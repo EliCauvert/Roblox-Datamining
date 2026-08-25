@@ -26,11 +26,11 @@ local t = {
 	variant = require(foundation.Enums.ChipVariant).Standard
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 72 | named "Chip" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), iconVariant (ref), useChipVariantsModule (ref), flagsModule (ref), colorNamespaceModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerModeModule (ref), constantsModule (ref), presentationContextModule (ref), accessoryModule (ref), textModule (ref)
 	local var16 = withDefaultsModule(p0, t)
 	local var17 = useTokensModule()
-	local var18, var19 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var18, var19 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), iconPositionModule (copy), iconVariant (copy)
 		local leading = var16.leading
 		local trailing = var16.trailing
@@ -81,7 +81,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 72 | 
 		ref = p1,
 		GroupTransparency = if var16.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0
 	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 113 ]]
+		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 			-- upvalues: var16 (ref), colorNamespaceModule (copy)
 			return {
 				isIconSize = true,

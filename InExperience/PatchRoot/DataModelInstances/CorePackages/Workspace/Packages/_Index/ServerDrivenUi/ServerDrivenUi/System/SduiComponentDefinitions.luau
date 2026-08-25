@@ -54,7 +54,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 89 ]]
+function t_1.new()
 	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagLuaAppSduiPlaceholderSupport (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagSduiTileBottomButton (ref), fFlagSduiTileHoldAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiEnableAssociatedItemsRow (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiChartsSupport (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
 	local t = {
 		anchorPoint = parseVector2Prop,
@@ -869,7 +869,7 @@ function t_1.new() --[[ line: 89 ]]
 	return t_3
 end
 
-function t_1:getComponentDefinition(p0) --[[ line: 964 ]]
+function t_1:getComponentDefinition(p0)
 	-- upvalues: fFlagSduiGlobalRegistryFallback (ref), getSduiComponentRegistry (ref)
 	local var14 = self._registeredComponents[p0]
 	
@@ -882,26 +882,26 @@ function t_1:getComponentDefinition(p0) --[[ line: 964 ]]
 	return var14
 end
 
-function t_1:doesComponentManageChildren(p1) --[[ line: 976 ]]
+function t_1:doesComponentManageChildren(p1)
 	local var15 = self:getComponentDefinition(p1)
 	
 	return if var15 then var15.doesManageChildren else false
 end
 
-function t_1:getComponent(p2) --[[ line: 984 ]]
+function t_1:getComponent(p2)
 	local var16 = self:getComponentDefinition(p2)
 	
 	return var16 and var16.component
 end
 
-function t_1:getPropParsers(p3) --[[ line: 989 ]]
+function t_1:getPropParsers(p3)
 	-- upvalues: t (ref)
 	local var17 = self:getComponentDefinition(p3)
 	
 	return if var17 then var17.propParsers else t
 end
 
-function t_1:getPropInterface(p4) --[[ line: 997 ]]
+function t_1:getPropInterface(p4)
 	local var18 = self:getComponentDefinition(p4)
 	
 	return if var18 then var18.propInterface else nil
@@ -913,12 +913,12 @@ local t_2 = {
 	[parseFocusNavActionsProp] = true
 }
 
-function t_1.doesParserRequireRenderContext(_, p5) --[[ line: 1008 ]]
+function t_1.doesParserRequireRenderContext(_, p5)
 	-- upvalues: t_2 (ref)
 	return if p5 and t_2[p5] then true else typeof(p5) == "table"
 end
 
-function t_1:registerComponent(p6, p7) --[[ line: 1023 ]]
+function t_1:registerComponent(p6, p7)
 	self._registeredComponents[p6] = p7
 end
 

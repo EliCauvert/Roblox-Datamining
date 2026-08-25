@@ -15,13 +15,13 @@ local t = {
 	lineWidth = constantsModule.TILE_SIZE
 }
 
-return function(p0) --[[ line: 46 ]]
+return function(p0)
 	-- upvalues: llama (ref), t (ref), style (ref), roact (ref), iconSize (ref), imageSetLabel (ref), images (ref), styledTextLabel (ref), getTextHeightModule (ref)
 	local var4 = llama.Dictionary.join(t, p0)
 	local icon = var4.icon
 	local label = var4.label
 	
-	return style.withStyle(function(p1) --[[ line: 51 ]]
+	return style.withStyle(function(p1)
 		-- upvalues: label (ref), roact (copy), var4 (ref), icon (ref), iconSize (copy), imageSetLabel (copy), images (copy), styledTextLabel (copy), getTextHeightModule (copy)
 		local theme = p1.Theme
 		local font = p1.Font

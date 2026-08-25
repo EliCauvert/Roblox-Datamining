@@ -1,6 +1,6 @@
 ﻿local buildHomeSystemContextFeaturesModule = require(script:FindFirstAncestor("Home").buildHomeSystemContextFeatures)
 
-local function buildContextualFeatures(p0) --[[ line: 22 ]]
+local function buildContextualFeatures(p0)
 	-- upvalues: buildHomeSystemContextFeaturesModule (ref)
 	local var2 = buildHomeSystemContextFeaturesModule()
 	
@@ -17,7 +17,7 @@ local function buildContextualFeatures(p0) --[[ line: 22 ]]
 	return if next(var2) == nil then nil else var2
 end
 
-return function(p1, p2) --[[ line: 43 | named "buildHomePageRequest" ]]
+return function(p1, p2)
 	-- upvalues: buildContextualFeatures (ref)
 	local t = {}
 	

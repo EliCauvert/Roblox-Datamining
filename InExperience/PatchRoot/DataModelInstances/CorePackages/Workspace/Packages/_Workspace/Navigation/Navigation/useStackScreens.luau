@@ -15,9 +15,9 @@ local _ = {
 	SetClosed = "SetClosed"
 }
 
-local function RouteViewStatesReducer(p0, p1) --[[ line: 73 ]]
+local function RouteViewStatesReducer(p0, p1)
 	-- upvalues: array (ref), RouteViewStatesReducer (ref), viewStateModule (ref), object (ref)
-	local var4 = array.findIndex(p0, function(p2) --[[ line: 74 ]]
+	local var4 = array.findIndex(p0, function(p2)
 		-- upvalues: p1 (ref)
 		return p2.descriptor.key == p1.key
 	end)
@@ -83,7 +83,7 @@ local function RouteViewStatesReducer(p0, p1) --[[ line: 73 ]]
 	end
 end
 
-return function(p3) --[[ line: 147 | named "useStackScreens" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), RouteViewStatesReducer (ref), fFlagLuaAppDerivedStackAndSwitchState (ref), stackActions (ref), array (ref), object (ref)
 	local navigation = p3.navigation
 	local state = navigation.state
@@ -91,7 +91,7 @@ return function(p3) --[[ line: 147 | named "useStackScreens" ]]
 	local var5, var6 = reactModule.useReducer(RouteViewStatesReducer, {})
 	
 	if fFlagLuaAppDerivedStackAndSwitchState then
-		reactModule.useMemo(function() --[[ line: 158 ]]
+		reactModule.useMemo(function()
 			-- upvalues: var6 (ref), state (ref), descriptors (ref)
 			var6({
 				type = "SetCurrent",
@@ -100,7 +100,7 @@ return function(p3) --[[ line: 147 | named "useStackScreens" ]]
 			})
 		end, { state, descriptors })
 	else
-		reactModule.useLayoutEffect(function() --[[ line: 166 ]]
+		reactModule.useLayoutEffect(function()
 			-- upvalues: var6 (ref), state (ref), descriptors (ref)
 			var6({
 				type = "SetCurrent",
@@ -109,32 +109,32 @@ return function(p3) --[[ line: 147 | named "useStackScreens" ]]
 			})
 		end, { state, descriptors })
 	end
-	local var7 = reactModule.useCallback(function(p4) --[[ line: 175 ]]
+	local var7 = reactModule.useCallback(function(p4)
 		-- upvalues: navigation (ref), stackActions (copy)
 		if navigation.state.isTransitioning then
 			navigation.dispatch(stackActions.completeTransition({ key = navigation.state.key, toChildKey = p4 }))
 		end
 	end, { navigation })
-	local var8 = reactModule.useCallback(function(p5) --[[ line: 184 ]]
+	local var8 = reactModule.useCallback(function(p5)
 		-- upvalues: var6 (ref), var7 (ref)
 		var6({ type = "SetOpened", key = p5.descriptor.key })
 		var7(p5.descriptor.key)
 	end, { var7 })
-	local var9 = reactModule.useCallback(function(p6) --[[ line: 192 ]]
+	local var9 = reactModule.useCallback(function(p6)
 		-- upvalues: var6 (ref)
 		var6({ type = "SetClosed", key = p6.descriptor.key })
 	end, {})
 	
-	return reactModule.useMemo(function() --[[ line: 199 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: array (copy), var5 (ref), object (copy), var8 (ref), var9 (ref)
-		return array.map(var5, function(p7) --[[ line: 200 ]]
+		return array.map(var5, function(p7)
 			-- upvalues: object (copy), var8 (copy), var9 (copy)
 			return object.assign({}, p7, {
-				setOpened = function() --[[ line: 202 ]]
+				setOpened = function()
 					-- upvalues: var8 (copy), p7 (ref)
 					var8(p7)
 				end,
-				setClosed = function() --[[ line: 205 ]]
+				setClosed = function()
 					-- upvalues: var9 (copy), p7 (ref)
 					var9(p7)
 				end

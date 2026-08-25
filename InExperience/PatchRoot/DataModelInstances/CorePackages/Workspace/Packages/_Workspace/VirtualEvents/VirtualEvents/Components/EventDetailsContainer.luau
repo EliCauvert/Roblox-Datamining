@@ -9,7 +9,7 @@ local _ = require(virtualEvents.Parent.VirtualEventsState)
 local constantsModule = require(virtualEvents.constants)
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 31 | named "EventDetailsContainer" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useScreenSize (ref), reactModule (ref), eventDetailsBodyModule (ref), constantsModule (ref), eventActionBarModule (ref)
 	local var6 = useTokens()
 	local var7 = useScreenSize()
@@ -17,21 +17,21 @@ return function(p0) --[[ line: 31 | named "EventDetailsContainer" ]]
 	local var8, var9 = reactModule.useState(false)
 	local var10, var11 = reactModule.useState(0.99)
 	local var12 = reactModule.useRef(0)
-	local var13 = reactModule.useCallback(function() --[[ line: 40 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), p0 (ref), var11 (ref)
 		if not var12.current or not p0.bottomHeight then return end
 		if p0.bottomHeight > 0 and p0.bottomHeight < var12.current then
 			var11(1 - p0.bottomHeight / var12.current)
 		end
 	end, { p0.bottomHeight })
-	local var14 = reactModule.useCallback(function(p1) --[[ line: 49 ]]
+	local var14 = reactModule.useCallback(function(p1)
 		-- upvalues: var12 (ref), var13 (ref)
 		if var12.current and var12.current ~= p1.AbsoluteSize.Y then
 			var12.current = p1.AbsoluteSize.Y
 			var13()
 		end
 	end, { var13 })
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref)
 		var13()
 	end, { p0.bottomHeight, var13 })
@@ -42,11 +42,11 @@ return function(p0) --[[ line: 31 | named "EventDetailsContainer" ]]
 		BorderSizePixel = 0,
 		Text = "",
 		AutoButtonColor = false,
-		[reactModule.Event.TouchTap] = function() --[[ line: 66 ]]
+		[reactModule.Event.TouchTap] = function()
 			-- upvalues: var9 (ref)
 			var9(false)
 		end,
-		[reactModule.Event.Activated] = function() --[[ line: 69 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: var9 (ref)
 			var9(false)
 		end

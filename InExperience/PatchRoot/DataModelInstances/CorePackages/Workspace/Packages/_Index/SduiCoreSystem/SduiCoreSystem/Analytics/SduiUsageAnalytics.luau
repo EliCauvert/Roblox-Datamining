@@ -14,7 +14,7 @@ local t_1 = {
 	backends = { "Points", "EventIngest" }
 }
 
-local function joinSet(value) --[[ line: 40 ]]
+local function joinSet(value)
 	local t = {}
 	
 	for i, v in value do
@@ -26,7 +26,7 @@ local function joinSet(value) --[[ line: 40 ]]
 end
 
 return {
-	sendTypeUsageEvent = function(p0) --[[ line: 63 ]]
+	sendTypeUsageEvent = function(p0)
 		-- upvalues: telemetryService (ref), t (ref), joinSet (ref)
 		telemetryService:LogEvent(t, {
 			customFields = {
@@ -38,7 +38,7 @@ return {
 			standardizedFields = { "addOSInfo" }
 		})
 	end,
-	sendParamUsageEvent = function(p1) --[[ line: 75 ]]
+	sendParamUsageEvent = function(p1)
 		-- upvalues: telemetryService (ref), t_1 (ref), joinSet (ref)
 		telemetryService:LogEvent(t_1, {
 			customFields = {

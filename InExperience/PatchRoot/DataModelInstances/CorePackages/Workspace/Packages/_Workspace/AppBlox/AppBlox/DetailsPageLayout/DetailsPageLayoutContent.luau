@@ -13,7 +13,7 @@ local t = { Selectable = false }
 local var7 = if fFlagLuaAppClampBannerPaddingToViewport then reactModule.createBinding(0) else nil
 local _ = nil
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | named "DetailsPageLayoutContent" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), reactUtilsModule (ref), fFlagLuaAppClampBannerPaddingToViewport (ref), var7 (ref), detailsPageLayoutUtilsModule (ref), view (ref), scrollView (ref), fFlagSduiExperienceDetailsSupport (ref), t (ref)
 	local var8 = reactModule.useContext(detailsPageLayoutContextModule)
 	local contentTopOffset = var8.contentTopOffset
@@ -33,7 +33,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 	local testId = var8.testId
 	local gradientTopBleedOffset = var8.gradientTopBleedOffset
 	assert(testId, "DetailsPageLayout.Content must be used within DetailsPageLayout.Root")
-	local var9 = reactUtilsModule.useComposedRef(p0.scrollingFrameRef, reactModule.useCallback(function(p2) --[[ line: 61 ]]
+	local var9 = reactUtilsModule.useComposedRef(p0.scrollingFrameRef, reactModule.useCallback(function(p2)
 		-- upvalues: initialScrollY (ref)
 		if p2 and initialScrollY > 0 then
 			p2.CanvasPosition = Vector2.new(0, initialScrollY)
@@ -41,7 +41,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 	end, { initialScrollY }))
 	local var10, var11 = reactModule.useBinding(initialScrollY)
 	local var12, var13 = reactModule.useBinding(0)
-	local var14 = reactModule.useCallback(function(p3) --[[ line: 74 ]]
+	local var14 = reactModule.useCallback(function(p3)
 		-- upvalues: var11 (ref), onCanvasPositionChanged (ref)
 		var11(p3.CanvasPosition.Y)
 		
@@ -49,23 +49,23 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 			onCanvasPositionChanged(p3)
 		end
 	end, { onCanvasPositionChanged })
-	local var15 = reactModule.useMemo(function() --[[ line: 84 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: hasHeader (ref), hasActions (ref), actionBarHeight (ref), reactModule (copy), headerBarHeight (ref)
-		return if hasHeader and hasActions and actionBarHeight then reactModule.joinBindings({ hasHeader, hasActions, actionBarHeight }):map(function(p4) --[[ line: 88 ]]
+		return if hasHeader and hasActions and actionBarHeight then reactModule.joinBindings({ hasHeader, hasActions, actionBarHeight }):map(function(p4)
 			-- upvalues: headerBarHeight (copy)
 			return UDim2.new(1, 0, 1, -((if p4[1] then headerBarHeight else 0) + (if p4[2] then p4[3] else 0)))
 		end) else nil
 	end, { hasHeader, hasActions, actionBarHeight, headerBarHeight })
-	local var16 = reactModule.useMemo(function() --[[ line: 98 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: hasHeader (ref), headerBarHeight (ref)
-		return if hasHeader then hasHeader:map(function(p5) --[[ line: 102 ]]
+		return if hasHeader then hasHeader:map(function(p5)
 			-- upvalues: headerBarHeight (copy)
 			return UDim2.new(0, 0, 0, if p5 then headerBarHeight else 0)
 		end) else nil
 	end, { hasHeader, headerBarHeight })
-	local var17 = reactModule.useMemo(function() --[[ line: 111 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: contentTopOffset (ref), fFlagLuaAppClampBannerPaddingToViewport (copy), reactModule (copy), containerHeight (ref), var7 (copy), detailsPageLayoutUtilsModule (copy), hasFullBleed (ref), fullBleedOverlapOffset (ref), headerBarHeight (ref)
-		return if contentTopOffset then if fFlagLuaAppClampBannerPaddingToViewport then reactModule.joinBindings({ contentTopOffset, containerHeight or var7 }):map(function(p7) --[[ line: 117 ]]
+		return if contentTopOffset then if fFlagLuaAppClampBannerPaddingToViewport then reactModule.joinBindings({ contentTopOffset, containerHeight or var7 }):map(function(p7)
 			-- upvalues: detailsPageLayoutUtilsModule (copy), hasFullBleed (copy), fullBleedOverlapOffset (copy), headerBarHeight (copy)
 			local var21 = p7[2]
 			local var22 = detailsPageLayoutUtilsModule.computeCanvasPaddingTop(p7[1], hasFullBleed, fullBleedOverlapOffset, headerBarHeight)
@@ -74,7 +74,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 				var22 = math.min(var22, var21 * 0.75)
 			end
 			return UDim.new(0, var22)
-		end) else contentTopOffset:map(function(p6) --[[ line: 132 ]]
+		end) else contentTopOffset:map(function(p6)
 			-- upvalues: detailsPageLayoutUtilsModule (copy), hasFullBleed (copy), fullBleedOverlapOffset (copy), headerBarHeight (copy)
 			return UDim.new(0, detailsPageLayoutUtilsModule.computeCanvasPaddingTop(p6, hasFullBleed, fullBleedOverlapOffset, headerBarHeight))
 		end) else nil
@@ -85,22 +85,22 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 		fullBleedOverlapOffset,
 		headerBarHeight
 	})
-	local var18 = reactModule.useMemo(function() --[[ line: 151 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: hasActions (ref), actionBarHeight (ref), reactModule (copy)
-		return if hasActions and actionBarHeight then reactModule.joinBindings({ hasActions, actionBarHeight }):map(function(p8) --[[ line: 155 ]]
+		return if hasActions and actionBarHeight then reactModule.joinBindings({ hasActions, actionBarHeight }):map(function(p8)
 			return if p8[1] then UDim.new(0, p8[2]) else UDim.new(0, 0)
 		end) else nil
 	end, { hasActions, actionBarHeight })
-	local var19 = reactModule.useMemo(function() --[[ line: 164 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), reactModule (copy), var10 (ref), gradientTopBleedOffset (ref)
-		return if var17 then reactModule.joinBindings({ var17, var10 }):map(function(p9) --[[ line: 168 ]]
+		return if var17 then reactModule.joinBindings({ var17, var10 }):map(function(p9)
 			-- upvalues: gradientTopBleedOffset (copy)
 			return UDim2.new(0, 0, 0, p9[1].Offset - p9[2] - gradientTopBleedOffset)
 		end) else nil
 	end, { var17, var10, gradientTopBleedOffset })
-	local var20 = reactModule.useMemo(function() --[[ line: 175 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: containerHeight (ref), reactModule (copy), var12 (ref), gradientTopBleedOffset (ref)
-		return if containerHeight then reactModule.joinBindings({ var12, containerHeight }):map(function(p10) --[[ line: 179 ]]
+		return if containerHeight then reactModule.joinBindings({ var12, containerHeight }):map(function(p10)
 			-- upvalues: gradientTopBleedOffset (copy)
 			local var23 = p10[1]
 			
@@ -139,7 +139,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 			GradientBar = if hasFullBleed and contentTopOffset then reactModule.createElement(view, {
 				tag = "bg-surface-0",
 				LayoutOrder = 0,
-				Size = contentTopOffset:map(function(p11) --[[ line: 229 ]]
+				Size = contentTopOffset:map(function(p11)
 					-- upvalues: fullBleedOverlapOffset (ref), gradientTopBleedOffset (ref)
 					return UDim2.new(1, 0, 0, math.min(p11, fullBleedOverlapOffset) + gradientTopBleedOffset)
 				end)
@@ -166,7 +166,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				ScrollingEnabled = not isFullscreenOverlay
 			},
-			onAbsoluteCanvasSizeChanged = function(value) --[[ line: 271 ]]
+			onAbsoluteCanvasSizeChanged = function(value)
 				-- upvalues: var13 (ref), onCanvasSizeChanged (ref)
 				var13(value.AbsoluteCanvasSize.Y)
 				
@@ -180,7 +180,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 			ContentSection = reactModule.createElement(view, {
 				tag = "auto-y",
 				LayoutOrder = 1,
-				Size = containerHeight:map(function(p12) --[[ line: 291 ]]
+				Size = containerHeight:map(function(p12)
 					return UDim2.new(1, 0, 0, p12)
 				end)
 			}, {

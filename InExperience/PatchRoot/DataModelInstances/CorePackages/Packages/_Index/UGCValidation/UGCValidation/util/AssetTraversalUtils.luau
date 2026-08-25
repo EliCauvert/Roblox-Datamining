@@ -7,7 +7,7 @@ local getPartNamesInHierarchyOrderModule = require(parent.util.getPartNamesInHie
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
 local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
 local t = {
-	calculateBounds = function(p0, p1, p2, p3, p4) --[[ line: 25 ]]
+	calculateBounds = function(p0, p1, p2, p3, p4)
 		-- upvalues: getExpectedPartSizeModule (ref), calculateMinMaxModule (ref), constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
 		if p4 then
 			local var9 = getExpectedPartSizeModule(p1, p4)
@@ -45,7 +45,7 @@ local t = {
 	end
 }
 
-function t.traverseHierarchy(p5, p6, p7, p8, p9, p10, p11, p12, p13) --[[ line: 98 ]]
+function t.traverseHierarchy(p5, p6, p7, p8, p9, p10, p11, p12, p13)
 	-- upvalues: constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), t (ref)
 	local cFrame
 	assert(p5 ~= nil ~= ((p6 and p7) ~= nil))
@@ -75,7 +75,7 @@ end
 
 local var7 = nil
 
-local function initRigParentToChild() --[[ line: 163 ]]
+local function initRigParentToChild()
 	-- upvalues: var7 (write), getPartNamesInHierarchyOrderModule (ref)
 	if var7 then return end
 	var7 = {}
@@ -95,7 +95,7 @@ local function initRigParentToChild() --[[ line: 163 ]]
 	end
 end
 
-function t.getAssetRigChild(value, p14) --[[ line: 179 ]]
+function t.getAssetRigChild(value, p14)
 	-- upvalues: initRigParentToChild (ref), var7 (write)
 	initRigParentToChild()
 	

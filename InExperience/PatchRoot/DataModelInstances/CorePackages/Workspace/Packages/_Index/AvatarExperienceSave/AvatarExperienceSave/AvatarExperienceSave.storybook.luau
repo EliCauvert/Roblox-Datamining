@@ -17,9 +17,9 @@ return {
 	name = "AvatarExperienceSave",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0) --[[ line: 36 ]]
+	mapStory = function(p0)
 		-- upvalues: t (ref), reactModule (ref), foundationProvider (ref), t_2 (ref), t_1 (ref)
-		return function(p1) --[[ line: 37 ]]
+		return function(p1)
 			-- upvalues: t (copy), reactModule (copy), foundationProvider (copy), t_2 (copy), t_1 (copy), p0 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

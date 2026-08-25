@@ -43,7 +43,7 @@ local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.usePro
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local t = { skipFetch = true }
 
-return function(p0) --[[ line: 80 | named "UserProfileHeader" ]]
+return function(p0)
 	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), useLocalUserId (ref), useNavigation (ref), reactModule (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), useProfileAnalyticsContextModule (ref), useProfileWrapperContextModule (ref), eventNamesModule (ref), enumsModule (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var23 (ref), var22 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useSelector (ref), useShouldShowContextualInformationModule (ref), fFlagProfilePlatformMeTabMobileProfileHero (ref), useShouldResizeAvatarModule (ref), constantsModule (ref), view (ref), userProfileAvatarModule (ref), inspectAvatarTooltipModule (ref), avatarHeadshotComponentModule (ref), fFlagAddPlatformNameToProfileHeader (ref), contextualInformationModule (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref), socialIdentityContainerModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), disableStreamerModeToggle (ref), userProfileSettingsToggleModule (ref)
 	local var33
 	local userThumbnail = p0.userThumbnail
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 80 | named "UserProfileHeader" ]]
 	local var36 = if fFlagSocialEnableProfileInspectAndBuy then reactModule.useRef(nil) else nil
 	local var37 = if fFlagSocialEnableProfileInspectAndBuyAnalytics then useProfileAnalyticsContextModule() else nil
 	local var38 = if fFlagSocialEnableProfileInspectAndBuyAnalytics then useProfileWrapperContextModule().profileSessionId else nil
-	local var39 = if fFlagSocialEnableProfileInspectAndBuy then reactModule.useCallback(function() --[[ line: 111 ]]
+	local var39 = if fFlagSocialEnableProfileInspectAndBuy then reactModule.useCallback(function()
 		-- upvalues: fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var37 (ref), eventNamesModule (copy), var38 (ref), var36 (ref), var34 (ref), enumsModule (copy)
 		if fFlagSocialEnableProfileInspectAndBuyAnalytics then
 			var37.fireAnalyticsEvent(eventNamesModule.InspectAvatarOpened, { profileSessionId = var38 })
@@ -84,7 +84,7 @@ return function(p0) --[[ line: 80 | named "UserProfileHeader" ]]
 		local profileId = useProfileWrapperContextModule().profileId
 		
 		if fFlagProfilePlatformPresenceStoreMigrationModule then
-			useEffectOnMount(function() --[[ line: 138 ]]
+			useEffectOnMount(function()
 				-- upvalues: var23 (copy), profileId (ref)
 				var23.RefreshPresenceByUserId(tostring(profileId))
 			end)
@@ -92,11 +92,11 @@ return function(p0) --[[ line: 80 | named "UserProfileHeader" ]]
 			var31 = convertPresenceEnumModule(if var44 then var44.userPresenceType else presenceModule.Enums.PresenceType.Offline, if var44 and var44.universeId ~= "" then tonumber(var44.universeId) else nil)
 		else
 			local var42 = useDispatch()
-			useEffectOnMount(function() --[[ line: 149 ]]
+			useEffectOnMount(function()
 				-- upvalues: var42 (ref), networkingPresenceModule (copy), profileId (ref)
-				var42(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) --[[ line: 150 ]] end)
+				var42(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) end)
 			end)
-			local var43 = useSelector(function(p1) --[[ line: 153 ]]
+			local var43 = useSelector(function(p1)
 				-- upvalues: presenceModule (copy), profileId (ref)
 				return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
 					lastLocation = "",

@@ -3,7 +3,7 @@ local useWearTimeSelectedOptionViewModelModule = require(script.Parent.useWearTi
 local wearTimeSelectedOptionViewModule = require(script.Parent.WearTimeSelectedOptionView)
 local _ = require(parent.AvatarExperienceCommon)
 
-return function(p0) --[[ line: 18 | named "WearTimeSelectedOptionContainer" ]]
+return function(p0)
 	-- upvalues: useWearTimeSelectedOptionViewModelModule (ref), wearTimeSelectedOptionViewModule (ref)
 	return wearTimeSelectedOptionViewModule(useWearTimeSelectedOptionViewModelModule(p0))
 end

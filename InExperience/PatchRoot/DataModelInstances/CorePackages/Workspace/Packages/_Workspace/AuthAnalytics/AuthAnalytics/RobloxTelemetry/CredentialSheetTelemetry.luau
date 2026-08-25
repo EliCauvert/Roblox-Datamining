@@ -13,7 +13,7 @@ local t = {
 }
 
 return {
-	report = function(p0, p1) --[[ line: 27 ]]
+	report = function(p0, p1)
 		-- upvalues: default (ref), luaAppCredentialSheetEventStream (ref), t (ref)
 		default:logRobloxTelemetryCounter(p0, 1, p1)
 		

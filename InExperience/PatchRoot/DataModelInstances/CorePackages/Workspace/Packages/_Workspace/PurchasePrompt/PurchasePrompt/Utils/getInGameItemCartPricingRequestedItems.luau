@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
 
-return function(p0) --[[ line: 16 | named "getInGameItemCartPricingRequestedItems" ]]
+return function(p0)
 	if type(p0) ~= "table" then
 		return nil
 	end

@@ -3,7 +3,7 @@ local httpService = game:GetService("HttpService")
 local t = {}
 t.__index = t
 
-function t:observeEvent(p0, p1) --[[ line: 14 ]]
+function t:observeEvent(p0, p1)
 	-- upvalues: signal (ref)
 	assert(type(p0) == "string", "Expected namespace to be a string")
 	assert(type(p1) == "function", "Expected callback to be a function")
@@ -16,12 +16,12 @@ function t:observeEvent(p0, p1) --[[ line: 14 ]]
 	return var2:connect(p1)
 end
 
-function t.new(p2) --[[ line: 27 ]]
+function t.new(p2)
 	-- upvalues: t (ref), httpService (ref)
 	local t_1 = { namespaceTable = {} }
 	setmetatable(t_1, t)
 	t_1.connections = {
-		p2.RobloxEventReceived:Connect(function(p3) --[[ line: 34 ]]
+		p2.RobloxEventReceived:Connect(function(p3)
 			-- upvalues: t_1 (ref), httpService (copy)
 			local namespace = t_1.namespaceTable[p3.namespace]
 			
@@ -30,7 +30,7 @@ function t.new(p2) --[[ line: 27 ]]
 			local _ = nil
 			
 			if p3.detail and p3.detail ~= "" then
-				local ok, status = pcall(function() --[[ line: 43 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p3 (ref)
 					return httpService:JSONDecode(p3.detail)
 				end)
@@ -40,7 +40,7 @@ function t.new(p2) --[[ line: 27 ]]
 			end
 			namespace:fire(t, p3.detailType)
 		end),
-		p2.RobloxConnectionChanged:Connect(function(p4, p5, p6, p7) --[[ line: 60 ]]
+		p2.RobloxConnectionChanged:Connect(function(p4, p5, p6, p7)
 			-- upvalues: t_1 (ref), httpService (copy)
 			local var5 = t_1.namespaceTable[p4]
 			
@@ -48,7 +48,7 @@ function t.new(p2) --[[ line: 27 ]]
 			local var6 = nil
 			
 			if p7 then
-				local ok, status = pcall(function() --[[ line: 69 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p7 (ref)
 					return httpService:JSONDecode(p7)
 				end)

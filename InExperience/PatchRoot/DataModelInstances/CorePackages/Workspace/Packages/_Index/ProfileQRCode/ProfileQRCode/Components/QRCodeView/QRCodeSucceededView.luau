@@ -18,7 +18,7 @@ local getStandardSizeAvatarHeadShotRbxthumb = userLibModule.Utils.getStandardSiz
 local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local dropshadow568 = images["component_assets/dropshadow_56_8"]
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: useLocalUserId (ref), useLocalUserInfoModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), reactModule (ref), lightTheme (ref), displayQRCode (ref), QRCodeDisplayModule (ref), imageSetLabel (ref), dropshadow568 (ref), styledTextLabel (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
 	local var7 = useLocalUserId()
 	local var8 = useLocalUserInfoModule(var7)

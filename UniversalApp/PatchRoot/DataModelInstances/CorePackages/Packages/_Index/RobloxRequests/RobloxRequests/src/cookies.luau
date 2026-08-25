@@ -2,11 +2,11 @@
 local jsonModule = require(parent.src.json)
 local urlModule = require(parent.lib.url)
 
-local function _(p0) --[[ line: 12 | named "maybe_number" ]]
+local function _(p0)
 	return tonumber(p0) or p0
 end
 
-local function trim(p1) --[[ line: 20 ]]
+local function trim(p1)
 	p1 = p1 or ""
 	while p1:sub(1, 1) == " " do
 		p1 = p1:sub(2)
@@ -20,7 +20,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p2, p3, p4) --[[ line: 38 ]]
+function t.new(p2, p3, p4)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	p4 = p4 or {}
@@ -32,7 +32,7 @@ function t.new(p2, p3, p4) --[[ line: 38 ]]
 	return tbl
 end
 
-function t:fromSet() --[[ line: 52 ]]
+function t:fromSet()
 	-- upvalues: trim (ref), t (ref)
 	local t_1 = {}
 	local var8 = self:split(";")
@@ -47,7 +47,7 @@ function t:fromSet() --[[ line: 52 ]]
 	return t.new(var10, var11, t_1)
 end
 
-function t:matches(p5) --[[ line: 72 ]]
+function t:matches(p5)
 	-- upvalues: urlModule (ref)
 	if not self.domain then
 		return true
@@ -66,7 +66,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 104 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.__cookiejar = true
@@ -75,24 +75,24 @@ function t_1.new() --[[ line: 104 ]]
 	return tbl
 end
 
-function t_1:insert(p6, p7, p8) --[[ line: 114 ]]
+function t_1:insert(p6, p7, p8)
 	-- upvalues: t (ref)
 	self.cookies[p6] = t.new(p6, p7, p8)
 	
 	return self
 end
 
-function t_1:SetCookie(p9) --[[ line: 122 ]]
+function t_1:SetCookie(p9)
 	-- upvalues: t (ref)
 	local var15 = t.fromSet(p9)
 	self.cookies[var15.name] = var15
 end
 
-function t_1:delete(p10) --[[ line: 130 ]]
+function t_1:delete(p10)
 	self.cookies[p10] = nil
 end
 
-function t_1:string(_) --[[ line: 134 ]]
+function t_1:string(_)
 	local var16 = ""
 	
 	for i, v in pairs(self.cookies) do
@@ -104,7 +104,7 @@ function t_1:string(_) --[[ line: 134 ]]
 	return var16
 end
 
-function t_1:__tostring() --[[ line: 149 ]]
+function t_1:__tostring()
 	-- upvalues: jsonModule (ref)
 	return jsonModule.enc(self.domains)
 end

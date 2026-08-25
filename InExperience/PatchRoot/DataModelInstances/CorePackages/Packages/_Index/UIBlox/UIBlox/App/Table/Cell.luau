@@ -43,7 +43,7 @@ cell.defaultProps = {
 	horizontalPadding = 24
 }
 
-function cell.init(p0) --[[ line: 79 ]]
+function cell.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0:setState({ controlState = controlStateModule.Initialize })
 	p0.stateStyleMap = {
@@ -52,7 +52,7 @@ function cell.init(p0) --[[ line: 79 ]]
 		[controlStateModule.Pressed] = "BackgroundOnPress"
 	}
 	
-	function p0.getBackgroundStyle(p1, p2) --[[ line: 90 ]]
+	function p0.getBackgroundStyle(p1, p2)
 		-- upvalues: p0 (ref), controlStateModule (copy)
 		local var12 = p0.stateStyleMap[p1] or p0.stateStyleMap[controlStateModule.Default]
 		local t = {
@@ -66,7 +66,7 @@ function cell.init(p0) --[[ line: 79 ]]
 		return t
 	end
 	
-	function p0.onStateChanged(p3, p4) --[[ line: 106 ]]
+	function p0.onStateChanged(p3, p4)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p4 })
 		
@@ -76,18 +76,18 @@ function cell.init(p0) --[[ line: 79 ]]
 	end
 end
 
-function cell.render(p5) --[[ line: 116 ]]
+function cell.render(p5)
 	-- upvalues: withStyleModule (ref), withSelectionCursorProviderModule (ref)
-	return withStyleModule(function(p6) --[[ line: 117 ]]
+	return withStyleModule(function(p6)
 		-- upvalues: withSelectionCursorProviderModule (copy), p5 (ref)
-		return withSelectionCursorProviderModule(function(p7) --[[ line: 118 ]]
+		return withSelectionCursorProviderModule(function(p7)
 			-- upvalues: p5 (copy), p6 (ref)
 			return p5:renderWithProviders(p6, p7)
 		end)
 	end)
 end
 
-function cell.renderWithProviders(p8, p9, _) --[[ line: 124 ]]
+function cell.renderWithProviders(p8, p9, _)
 	-- upvalues: cell (ref), roactModule (ref), interactableModule (ref), controlStateModule (ref)
 	local anchorPoint = p8.props.anchorPoint
 	local layoutOrder = p8.props.layoutOrder
@@ -97,7 +97,7 @@ function cell.renderWithProviders(p8, p9, _) --[[ line: 124 ]]
 	local tail = p8.props.tail
 	local background = p8.props.background
 	local isDisabled = p8.props.isDisabled
-	local var15 = if p8.props.onActivated then function(...) --[[ line: 139 ]]
+	local var15 = if p8.props.onActivated then function(...)
 		-- upvalues: p8 (ref)
 		if p8.props.tail and p8.props.userInteractionEnabled and p8.props.onActivated then
 			p8.props.onActivated(...)
@@ -181,7 +181,7 @@ function cell.renderWithProviders(p8, p9, _) --[[ line: 124 ]]
 	})
 end
 
-return roactModule.forwardRef(function(p10, p11) --[[ line: 233 ]]
+return roactModule.forwardRef(function(p10, p11)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), cryoModule (ref), roactModule (ref), cell (ref)
 	return roactModule.createElement(cell, cryoModule.Dictionary.join(cryoModule.Dictionary.join({
 		selectionCursor = useCursorByTypeModule(cursorTypeModule.RoundedRectNoInset)

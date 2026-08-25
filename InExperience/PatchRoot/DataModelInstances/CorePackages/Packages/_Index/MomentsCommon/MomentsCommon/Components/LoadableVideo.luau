@@ -9,24 +9,24 @@ local loadingStateModule = require(momentsCommon.Enums.LoadingState)
 local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
 local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
 
-return function(p0) --[[ line: 38 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), loadingStateModule (ref), contentProviderService (ref), view (ref), getFitSizeModule (ref), getCropSizeModule (ref), skeleton (ref)
 	local var7, var8 = reactModule.useState(Vector2.new(0, 0))
 	local var9, var10 = reactModule.useState(loadingStateModule.Loading)
 	local var11, var12 = reactModule.useState(Vector2.new(0, 0))
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), contentProviderService (copy), var10 (ref), loadingStateModule (copy)
 		if p0.Video == nil or p0.Video == "" then
 			return
 		end
-		local var13 = contentProviderService:GetAssetFetchStatusChangedSignal(p0.Video):Connect(function(p1) --[[ line: 49 ]]
+		local var13 = contentProviderService:GetAssetFetchStatusChangedSignal(p0.Video):Connect(function(p1)
 			-- upvalues: var10 (copy), loadingStateModule (copy)
 			if p1 == Enum.AssetFetchStatus.Failure then
 				var10(loadingStateModule.Failed)
 			end
 		end)
 		
-		return function() --[[ line: 55 ]]
+		return function()
 			-- upvalues: var13 (ref), var10 (copy), loadingStateModule (copy)
 			var13:Disconnect()
 			var10(loadingStateModule.Loading)
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 38 ]]
 		AnchorPoint = p0.AnchorPoint,
 		BackgroundTransparency = p0.BackgroundTransparency,
 		ClipsDescendants = p0.ClipsDescendants ~= false,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p2) --[[ line: 61 ]]
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 			-- upvalues: var8 (ref), p0 (ref)
 			var8(p2.AbsoluteSize)
 			
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 38 ]]
 			Video = p0.Video,
 			VideoContent = p0.VideoContent,
 			Visible = var11.X > 0 and var11.Y > 0,
-			[reactModule.Change.Resolution] = reactModule.useCallback(function(p3) --[[ line: 69 ]]
+			[reactModule.Change.Resolution] = reactModule.useCallback(function(p3)
 				-- upvalues: var12 (ref), p0 (ref)
 				local resolution = p3.Resolution
 				var12(resolution)
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 38 ]]
 					p0.onResolutionChanged(resolution)
 				end
 			end, { p0.onResolutionChanged, var12 }),
-			[reactModule.Event.Loaded] = reactModule.useCallback(function(p4) --[[ line: 78 ]]
+			[reactModule.Event.Loaded] = reactModule.useCallback(function(p4)
 				-- upvalues: var9 (ref), loadingStateModule (copy), var10 (ref), p0 (ref)
 				if var9 == loadingStateModule.Loading then
 					var10(loadingStateModule.Finished)

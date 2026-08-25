@@ -7,7 +7,7 @@ local reactionListModule = require(script.Parent.ReactionList)
 local color = Color3.fromRGB(57, 59, 61)
 local color_1 = Color3.fromRGB(100, 102, 104)
 
-return function(p0) --[[ line: 15 | named "ReactionPicker" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reactionListModule (ref), cryoModule (ref), roactModule (ref), reactionMapModule (ref), color (ref), color_1 (ref)
 	if p0.numReactionsToShow == nil then
 		p0.numReactionsToShow = 6
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 15 | named "ReactionPicker" ]]
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 11)
 			})
-		}, reactModule.useMemo(function() --[[ line: 23 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: reactionListModule (copy), p0 (ref), cryoModule (copy), roactModule (copy), reactionMapModule (copy), reactModule (copy), color (copy)
 			local t = {}
 			
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 15 | named "ReactionPicker" ]]
 				if p0.numReactionsToShow < i then break end
 				t[i] = reactionListModule[i]
 			end
-			return cryoModule.List.map(t, function(p1, _) --[[ line: 31 ]]
+			return cryoModule.List.map(t, function(p1, _)
 				-- upvalues: p0 (copy), roactModule (copy), reactionMapModule (copy), reactModule (copy), color (copy)
 				return roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 15 | named "ReactionPicker" ]]
 						BorderSizePixel = 0,
 						BackgroundTransparency = 1,
 						ScaleType = Enum.ScaleType.Fit,
-						[reactModule.Event.Activated] = function() --[[ line: 45 ]]
+						[reactModule.Event.Activated] = function()
 							-- upvalues: p0 (copy), p1 (ref)
 							p0.onReactionSelected(p1)
 						end

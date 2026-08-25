@@ -18,37 +18,37 @@ local toastTriggeredModule = require(parent.Actions.ToastTriggered)
 local fStringSocialCaptureTakenIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local debugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
 
-local function _(p0) --[[ line: 25 | named "hideGui" ]]
+local function _(p0)
 	-- upvalues: guiService (ref)
 	if guiService:GetGuiIsVisible(p0) then
 		guiService:ToggleGuiIsVisibleForCaptures(p0)
 	end
 end
 
-local _ = function(p1) --[[ line: 31 | named "showGui" ]]
+local _ = function(p1)
 	-- upvalues: guiService (ref)
 	if not guiService:GetGuiIsVisible(p1) then
 		guiService:ToggleGuiIsVisibleForCaptures(p1)
 	end
 end
 
-local _ = function() --[[ line: 37 | named "hidePlayerGui" ]]
+local _ = function()
 	-- upvalues: guiService (ref)
 	if guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
 		guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 	end
 end
 
-local _ = function() --[[ line: 43 | named "showPlayerGui" ]]
+local _ = function()
 	-- upvalues: guiService (ref)
 	if not guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
 		guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 	end
 end
 
-return function() --[[ line: 49 ]]
+return function()
 	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref), userInputService (ref), getScreenshotHudModule (ref), debugAPPEXP4747B (ref), guiService (ref), removeCoreUIModule (ref), overlayActivatedModule (ref), captureService (ref), getAvatarAssetsModule (ref), getUserMetadataModule (ref), httpService (ref), overlayFlashActivatedModule (ref), overlayFlashDeactivatedModule (ref), overlayDeactivatedModule (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref)
-	return function(p2) --[[ line: 50 ]]
+	return function(p2)
 		-- upvalues: toastTriggeredModule (copy), capturesToastTypeModule (copy), userInputService (copy), getScreenshotHudModule (copy), debugAPPEXP4747B (copy), guiService (copy), removeCoreUIModule (copy), overlayActivatedModule (copy), captureService (copy), getAvatarAssetsModule (copy), getUserMetadataModule (copy), httpService (copy), overlayFlashActivatedModule (copy), overlayFlashDeactivatedModule (copy), overlayDeactivatedModule (copy), IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
 		local var15 = false
 		local var16 = false

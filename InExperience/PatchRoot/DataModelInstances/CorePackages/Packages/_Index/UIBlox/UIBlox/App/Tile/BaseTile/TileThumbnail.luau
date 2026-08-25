@@ -33,7 +33,7 @@ tileThumbnail.defaultProps = {
 	scaleType = Enum.ScaleType.Stretch
 }
 
-function tileThumbnail.render(p0) --[[ line: 67 ]]
+function tileThumbnail.render(p0)
 	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), loadableImageModule (ref), tileSelectionOverlayModule (ref), tileUnselectedOverlayModule (ref)
 	local hasRoundedCorners = p0.props.hasRoundedCorners
 	local image = p0.props.Image
@@ -48,7 +48,7 @@ function tileThumbnail.render(p0) --[[ line: 67 ]]
 	local scaleType = p0.props.scaleType
 	local isTable = typeof(image) == "table"
 	
-	return withStyleModule(function(p1) --[[ line: 82 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: p0 (ref), roactModule (copy), imageSetComponentModule (copy), backgroundImage (ref), isTable (ref), image (ref), imageColor (ref), imageTransparency (ref), imageSize (ref), scaleType (ref), hasRoundedCorners (ref), cornerRadius (ref), loadableImageModule (copy), overlayComponents (ref), isSelected (ref), tileSelectionOverlayModule (copy), multiSelect (ref), tileUnselectedOverlayModule (copy)
 		local theme = p1.Theme
 		
@@ -112,7 +112,7 @@ function tileThumbnail.render(p0) --[[ line: 67 ]]
 	end)
 end
 
-return function(p2) --[[ line: 165 | named "TileThumbnailFunctionalWrapper" ]]
+return function(p2)
 	-- upvalues: useStyleMetadataModule (ref), roactModule (ref), tileThumbnail (ref), cryoModule (ref)
 	local var11 = useStyleMetadataModule()
 	

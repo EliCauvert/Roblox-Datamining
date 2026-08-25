@@ -5,7 +5,7 @@ local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM
 local default = require(appChatNetworking.url.HttpRequest).default
 local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
 
-return function(p0, p1, p2) --[[ line: 12 ]]
+return function(p0, p1, p2)
 	-- upvalues: default (ref), httpService (ref), getFFlagEnableSocialCards (ref), CHAT_PLATFORM_BASE_URLModule (ref)
 	p0 = p0 or default
 	local var4 = `conversation_id={httpService:UrlEncode(p1)}`

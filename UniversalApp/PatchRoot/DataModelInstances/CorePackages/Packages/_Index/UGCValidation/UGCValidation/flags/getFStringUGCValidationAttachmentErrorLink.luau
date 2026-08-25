@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("UGCValidationAttachmentErrorLink", "")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("UGCValidationAttachmentErrorLink")
 end

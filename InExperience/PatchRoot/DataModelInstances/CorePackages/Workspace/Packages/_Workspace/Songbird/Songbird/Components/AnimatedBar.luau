@@ -14,19 +14,19 @@ local t = {
 }
 local random = Random.new()
 
-return function(p0) --[[ line: 34 | named "AnimatedBar" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useCallback (ref), random (ref), reactOtterModule (ref), useEffect (ref), reactModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local var8 = useTokens()
-	local var9 = useCallback(function() --[[ line: 38 ]]
+	local var9 = useCallback(function()
 		-- upvalues: random (copy), var7 (ref)
 		return random:NextNumber(var7.heightRange.Min, var7.heightRange.Max)
 	end, { var7.heightRange })
 	local var10, var11 = reactOtterModule.useAnimatedBinding(var9())
-	useEffect(function() --[[ line: 44 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref), var9 (ref), var11 (ref), reactOtterModule (copy)
 		local var12 = true
-		task.spawn(function() --[[ line: 47 ]]
+		task.spawn(function()
 			-- upvalues: var12 (write), var7 (copy), var9 (copy), var11 (copy), reactOtterModule (copy)
 			while var12 do
 				var11(reactOtterModule.ease(if var7.isMoving then var9() else var7.staticHeight, { duration = 0.25, easingStyle = Enum.EasingStyle.Linear }))
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 34 | named "AnimatedBar" ]]
 			end
 		end)
 		
-		return function() --[[ line: 60 ]]
+		return function()
 			-- upvalues: var12 (write)
 			var12 = false
 		end
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 34 | named "AnimatedBar" ]]
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		LayoutOrder = var7.layoutOrder,
-		Size = var10:map(function(p1) --[[ line: 67 ]]
+		Size = var10:map(function(p1)
 			-- upvalues: var7 (ref)
 			return UDim2.new(var7.width, UDim.new(p1, 0))
 		end),

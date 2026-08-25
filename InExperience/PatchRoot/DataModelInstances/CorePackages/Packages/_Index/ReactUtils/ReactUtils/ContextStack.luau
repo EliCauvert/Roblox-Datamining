@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0) --[[ line: 12 | named "ContextStack" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local children = p0.children
 	

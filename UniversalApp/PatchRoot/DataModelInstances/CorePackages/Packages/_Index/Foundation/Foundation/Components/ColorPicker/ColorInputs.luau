@@ -17,13 +17,13 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Providers.Style.Tokens)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-local function createNumberInputElement(p0, p1, p2) --[[ line: 38 ]]
+local function createNumberInputElement(p0, p1, p2)
 	-- upvalues: reactModule (ref), numberInputModule (ref), dashModule (ref)
 	local value = p0.value:getValue()
 	
 	return if value == nil then reactModule.createElement(numberInputModule, dashModule.join({
 		value = -1,
-		onChanged = function(p4) --[[ line: 51 ]]
+		onChanged = function(p4)
 			-- upvalues: p0 (ref)
 			if p4 ~= -1 then
 				p0.handler(p4, p0.component)
@@ -34,12 +34,12 @@ local function createNumberInputElement(p0, p1, p2) --[[ line: 38 ]]
 		maximum = p0.maximum or 255,
 		step = p0.step or 1,
 		precision = p0.precision or 0,
-		formatAsString = function(_) --[[ line: 61 ]]
+		formatAsString = function(_)
 			return ""
 		end
 	}, p2)) else reactModule.createElement(numberInputModule, dashModule.join({
 		value = value,
-		onChanged = function(p3) --[[ line: 72 ]]
+		onChanged = function(p3)
 			-- upvalues: p0 (ref)
 			p0.handler(p3, p0.component)
 		end,
@@ -51,13 +51,13 @@ local function createNumberInputElement(p0, p1, p2) --[[ line: 38 ]]
 	}, p2))
 end
 
-local function renderInput(_, p5, p6, p7, p8) --[[ line: 84 ]]
+local function renderInput(_, p5, p6, p7, p8)
 	-- upvalues: inputSizeModule (ref), colorInputModeModule (ref), reactModule (ref), viewModule (ref), textInputModule (ref), createNumberInputElement (ref), numberInputControlsVariantModule (ref)
 	return if p5.key == colorInputModeModule.Hex then reactModule.createElement(viewModule, { tag = "grow-1 size-0-full", LayoutOrder = p6 }, {
 		Input = reactModule.createElement(textInputModule, {
 			label = "",
 			text = p5.value:getValue(),
-			onChanged = function(p9) --[[ line: 109 ]]
+			onChanged = function(p9)
 				-- upvalues: p5 (ref)
 				p5.handler(p9, p5.component)
 			end,
@@ -79,7 +79,7 @@ end
 
 local t = { alpha = reactModule.createBinding(1) }
 
-return function(p10) --[[ line: 143 | named "ColorInputs" ]]
+return function(p10)
 	-- upvalues: colorInputModeModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), colorUtilsModule (ref), viewModule (ref), textInputModule (ref), inputSizeModule (ref), colorInputUtilsModule (ref), renderInput (ref), withCommonPropsModule (ref), dashModule (ref), dropdownModule (ref)
 	local availableModes = p10.availableModes or {
 		colorInputModeModule.RGB,
@@ -92,7 +92,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 	local mode = var20.mode or colorInputModeModule.RGB
 	local color = var20.color
 	local alpha = var20.alpha
-	local var23 = reactModule.useCallback(function(p11) --[[ line: 153 ]]
+	local var23 = reactModule.useCallback(function(p11)
 		-- upvalues: var20 (ref)
 		if var20.onColorChanged then
 			var20.onColorChanged(p11)
@@ -100,7 +100,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 	end, { var20.onColorChanged })
 	local onAlphaChanged = var20.onAlphaChanged
 	local var24 = var20.onAlphaChanged ~= nil
-	local var25 = color:map(function(p12) --[[ line: 163 ]]
+	local var25 = color:map(function(p12)
 		-- upvalues: colorUtilsModule (copy)
 		if colorUtilsModule.isPartialHSV(p12) then
 			return { r = nil, g = nil, b = nil }
@@ -113,7 +113,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 			b = math.round(var33.B * 255)
 		}
 	end)
-	local var26 = color:map(function(p13) --[[ line: 176 ]]
+	local var26 = color:map(function(p13)
 		if type(p13) == "table" then
 			return { h = p13.H, s = p13.S, v = p13.V }
 		end
@@ -125,10 +125,10 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 			v = math.round(var36 * 100)
 		}
 	end)
-	local var27 = var25:map(function(p14) --[[ line: 189 ]]
+	local var27 = var25:map(function(p14)
 		return if p14.r == nil or p14.g == nil or p14.b == nil then "" else string.format("#%02X%02X%02X", p14.r, p14.g, p14.b)
 	end)
-	local var28 = reactModule.useCallback(function(p15, p16) --[[ line: 197 ]]
+	local var28 = reactModule.useCallback(function(p15, p16)
 		-- upvalues: var25 (ref), var23 (ref)
 		local cloned = table.clone(var25:getValue())
 		cloned[p16] = math.clamp(p15, 0, 255)
@@ -138,13 +138,13 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 		end
 		var23(Color3.fromRGB(cloned.r, cloned.g, cloned.b))
 	end, { var25, var23 })
-	local var29 = reactModule.useCallback(function(p17) --[[ line: 213 ]]
+	local var29 = reactModule.useCallback(function(p17)
 		-- upvalues: onAlphaChanged (ref)
 		if onAlphaChanged then
 			onAlphaChanged(p17)
 		end
 	end, { onAlphaChanged })
-	local var30 = reactModule.useCallback(function(p18, p19) --[[ line: 219 ]]
+	local var30 = reactModule.useCallback(function(p18, p19)
 		-- upvalues: var26 (ref), var23 (ref)
 		local cloned = table.clone(var26:getValue())
 		
@@ -154,7 +154,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 		cloned[p19] = math.clamp(p18, 0, if p19 == "h" then 360 else 100)
 		var23(Color3.fromHSV(cloned.h / 360, (cloned.s or 100) / 100, (cloned.v or 100) / 100))
 	end, { var26, var23 })
-	local var31 = reactModule.useCallback(function(p20) --[[ line: 233 ]]
+	local var31 = reactModule.useCallback(function(p20)
 		-- upvalues: var23 (ref)
 		local var39 = p20:gsub("#", ""):upper()
 		
@@ -168,7 +168,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 			end
 		end
 	end, { var23 })
-	local var32 = reactModule.useMemo(function() --[[ line: 249 ]]
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: colorInputModeModule (copy), var24 (ref), availableModes (ref)
 		local list = {
 			{
@@ -212,7 +212,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 		end
 		return t
 	end, { var24 })
-	reactModule.useEffect(function() --[[ line: 284 ]]
+	reactModule.useEffect(function()
 		-- upvalues: mode (ref), colorInputModeModule (copy), var24 (ref), var20 (ref)
 		if mode == colorInputModeModule.RGBA and not var24 and var20.onModeChanged then
 			var20.onModeChanged(colorInputModeModule.RGB)
@@ -224,7 +224,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 			label = "",
 			items = var32,
 			value = mode,
-			onItemChanged = function(p21) --[[ line: 344 ]]
+			onItemChanged = function(p21)
 				-- upvalues: var20 (ref)
 				if var20.onModeChanged then
 					var20.onModeChanged(p21)
@@ -234,7 +234,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 			width = UDim.new(0, var21.Size.Size_1600),
 			testId = `{var20.testId}--mode-dropdown`
 		}) else nil
-	}, (function() --[[ line: 292 ]]
+	}, (function()
 		-- upvalues: mode (ref), colorInputModeModule (copy), reactModule (copy), viewModule (copy), textInputModule (copy), color (ref), inputSizeModule (copy), var20 (ref), colorInputUtilsModule (copy), var25 (ref), var26 (ref), var27 (ref), alpha (ref), var28 (ref), var30 (ref), var31 (ref), var29 (ref), var21 (ref), renderInput (copy)
 		if mode == colorInputModeModule.Brick then
 			return {
@@ -243,7 +243,7 @@ return function(p10) --[[ line: 143 | named "ColorInputs" ]]
 						isDisabled = true,
 						label = "",
 						text = BrickColor.new(color:getValue()).Name,
-						onChanged = function() --[[ line: 301 ]] end,
+						onChanged = function() end,
 						size = inputSizeModule.XSmall,
 						width = UDim.new(1, 0),
 						testId = `{var20.testId}-brick-name`

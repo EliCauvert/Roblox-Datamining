@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local checkbox = require(parent.Foundation).Checkbox
 local _ = require(script.Parent.useCartPricing)
 
-return function(p0) --[[ line: 17 | named "buildCartPricingOfferCheckboxes" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), checkbox (ref)
 	local cartPricing = p0.cartPricing
 	local t = {}
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 17 | named "buildCartPricingOfferCheckboxes" ]]
 			label = v.localizedDescription,
 			isChecked = v.selected,
 			isDisabled = p0.isDisabled,
-			onActivated = function() --[[ line: 33 ]]
+			onActivated = function()
 				-- upvalues: cartPricing (ref), offerId (ref)
 				cartPricing.toggleCartPricingOffer(offerId)
 			end

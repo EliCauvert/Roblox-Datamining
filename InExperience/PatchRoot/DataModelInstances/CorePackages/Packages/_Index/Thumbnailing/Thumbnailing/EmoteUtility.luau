@@ -14,50 +14,50 @@ local t = {
 }
 local t_1 = {}
 
-local function _() --[[ line: 75 | named "clearJointBlacklist" ]]
+local function _()
 	-- upvalues: t_1 (write)
 	t_1 = {}
 end
 
-local _ = function(p0) --[[ line: 79 | named "blacklistJoint" ]]
+local _ = function(p0)
 	-- upvalues: t_1 (write)
 	t_1[p0] = true
 end
 
-local _ = function(p1) --[[ line: 83 | named "jointIsBlacklisted" ]]
+local _ = function(p1)
 	-- upvalues: t_1 (write)
 	return t_1[p1]
 end
 
-local _ = function(value, p2) --[[ line: 90 | named "getCameraOffset" ]]
+local _ = function(value, p2)
 	return math.sqrt(p2.X ^ 2 + p2.Y ^ 2 + p2.Z ^ 2) / 2 * (1 / math.tan(math.rad(value) / 2))
 end
 
-local _ = function() --[[ line: 100 | named "isOnRCC" ]]
-	local ok, status = pcall(function() --[[ line: 106 ]]
+local _ = function()
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
 	return ok and status
 end
 
-local _ = function() --[[ line: 115 | named "getAnalyticsTarget" ]]
-	local ok, status = pcall(function() --[[ line: 106 ]]
+local _ = function()
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
 	return if ok and status then "RCC" else "Client"
 end
 
-local _ = function(p3, p4) --[[ line: 124 | named "reportCounter" ]]
+local _ = function(p3, p4)
 	-- upvalues: rbxAnalyticsService (ref)
-	local ok, status = pcall(function() --[[ line: 106 ]]
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	rbxAnalyticsService:ReportCounter((if ok and status then "RCC" else "Client") .. "_" .. p3 .. "_" .. (if p4 then "Success" else "Failure"))
 end
 
-local function getAnimationAndIsIdle(p5) --[[ line: 142 ]]
+local function getAnimationAndIsIdle(p5)
 	-- upvalues: t (ref), rbxAnalyticsService (ref)
 	local var29, var31
 	assert(if typeof(p5) ~= "number" then typeof(p5) == "string" else true, "getAnimationAndIsIdle expects animationAssetIdOrUrl to be a number or string")
@@ -77,7 +77,7 @@ local function getAnimationAndIsIdle(p5) --[[ line: 142 ]]
 		var31 = "EmoteUtility_LoadAsset"
 	else
 		local _ = nil
-		local ok, status = pcall(function() --[[ line: 161 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p5 (ref)
 			return game:GetObjects(p5)[1]
 		end)
@@ -91,14 +91,14 @@ local function getAnimationAndIsIdle(p5) --[[ line: 142 ]]
 	end
 	local var33 = var31
 	local var34 = var29
-	local ok, status = pcall(function() --[[ line: 106 ]]
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	rbxAnalyticsService:ReportCounter((if ok and status then "RCC" else "Client") .. "_" .. var33 .. "_" .. (if var34 then "Success" else "Failure"))
 	
 	if not var29 or not var26 then
 		local text = var31 .. "_Failed"
-		local ok_1, status_1 = pcall(function() --[[ line: 106 ]]
+		local ok_1, status_1 = pcall(function()
 			return game.GetService(game, "ThumbnailGenerator") ~= nil
 		end)
 		rbxAnalyticsService:SendEventDeferred(if ok_1 and status_1 then "RCC" else "Client", "EmoteUtility_getPoseAsset", text, { animationAssetIdOrUrl = p5 })
@@ -120,7 +120,7 @@ local function getAnimationAndIsIdle(p5) --[[ line: 142 ]]
 	return var26, var36
 end
 
-local function getAnimationClipByAssetId(value) --[[ line: 207 ]]
+local function getAnimationClipByAssetId(value)
 	-- upvalues: t (ref), animationClipProviderService (ref), rbxAnalyticsService (ref)
 	local var43
 	local _ = nil
@@ -144,7 +144,7 @@ local function getAnimationClipByAssetId(value) --[[ line: 207 ]]
 			var38 = var44
 		end
 	else
-		local ok, status = pcall(function() --[[ line: 224 ]]
+		local ok, status = pcall(function()
 			-- upvalues: animationClipProviderService (copy), value (ref)
 			return animationClipProviderService:GetAnimationClipAsync(value)
 		end)
@@ -152,7 +152,7 @@ local function getAnimationClipByAssetId(value) --[[ line: 207 ]]
 		var38 = status
 	end
 	local var45 = var43
-	local ok, status = pcall(function() --[[ line: 106 ]]
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	rbxAnalyticsService:ReportCounter((if ok and status then "RCC" else "Client") .. "_" .. "EmoteUtility_GetAnimationClipAsync" .. "_" .. (if var45 then "Success" else "Failure"))
@@ -160,7 +160,7 @@ local function getAnimationClipByAssetId(value) --[[ line: 207 ]]
 	if var43 then
 		return var38
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 106 ]]
+	local ok_1, status_1 = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	rbxAnalyticsService:SendEventDeferred(if ok_1 and status_1 then "RCC" else "Client", "EmoteUtility_GetAnimationClip", "EmoteUtility_GetAnimationClip_GetAnimationClipAsyncFailed", { keyframeSequenceId = value })
@@ -168,7 +168,7 @@ local function getAnimationClipByAssetId(value) --[[ line: 207 ]]
 	return nil
 end
 
-local function getThumbnailKeyframeFromAnimationOrUrl(p6, p7, p8) --[[ line: 243 ]]
+local function getThumbnailKeyframeFromAnimationOrUrl(p6, p7, p8)
 	-- upvalues: getAnimationClipByAssetId (ref), t (ref)
 	local var48
 	local var46 = p8
@@ -194,14 +194,14 @@ local function getThumbnailKeyframeFromAnimationOrUrl(p6, p7, p8) --[[ line: 243
 	return nil
 end
 
-local _ = function(value, p9, p10) --[[ line: 275 | named "trySetProperty" ]]
-	pcall(function() --[[ line: 276 ]]
+local _ = function(value, p9, p10)
+	pcall(function()
 		-- upvalues: value (ref), p9 (ref), p10 (ref)
 		value[p9] = p10
 	end)
 end
 
-local function applyControlsFolder(p11, p12, p13) --[[ line: 284 ]]
+local function applyControlsFolder(p11, p12, p13)
 	if not p12 then return end
 	assert(p12, "parentPose is non-nil. Silence type checker.")
 	local name = p11:FindFirstChild(p12.Name)
@@ -214,7 +214,7 @@ local function applyControlsFolder(p11, p12, p13) --[[ line: 284 ]]
 		if v:IsA("NumberPose") then
 			local name_2 = v.Name
 			local value = v.Value
-			pcall(function() --[[ line: 276 ]]
+			pcall(function()
 				-- upvalues: name_1 (ref), name_2 (ref), value (ref)
 				name_1[name_2] = value
 			end)
@@ -222,9 +222,9 @@ local function applyControlsFolder(p11, p12, p13) --[[ line: 284 ]]
 	end
 end
 
-local function applyKeyframeInner(p14, p15) --[[ line: 313 ]]
+local function applyKeyframeInner(p14, p15)
 	-- upvalues: t (ref), t_1 (write), applyControlsFolder (ref)
-	local function recurApplyPoses(p16, p17) --[[ line: 314 ]]
+	local function recurApplyPoses(p16, p17)
 		-- upvalues: p14 (ref), t (copy), t_1 (copy), applyControlsFolder (copy), recurApplyPoses (ref)
 		if p16 and p17:IsA("Pose") then
 			local jointBetween = t.GetJointBetween(p14:FindFirstChild(p16.Name), p14:FindFirstChild(p17.Name))
@@ -256,7 +256,7 @@ local function applyKeyframeInner(p14, p15) --[[ line: 313 ]]
 	end
 end
 
-local function getRotatedKeyframe(p18, p19) --[[ line: 351 ]]
+local function getRotatedKeyframe(p18, p19)
 	if not p19 or p19 == 0 then
 		return p18
 	end
@@ -274,7 +274,7 @@ local function getRotatedKeyframe(p18, p19) --[[ line: 351 ]]
 	return var53
 end
 
-local function getRotationCFrame(p20, p21) --[[ line: 372 ]]
+local function getRotationCFrame(p20, p21)
 	if p20:IsA("EulerRotationCurve") then
 		return p20:GetRotationAtTime(p21)
 	elseif p20:IsA("RotationCurve") then
@@ -285,7 +285,7 @@ local function getRotationCFrame(p20, p21) --[[ line: 372 ]]
 	return nil
 end
 
-local function findAttachmentsRecur(p22, p23) --[[ line: 383 ]]
+local function findAttachmentsRecur(p22, p23)
 	-- upvalues: findAttachmentsRecur (ref)
 	for i, v in pairs(p22:GetChildren()) do
 		if v:IsA("Attachment") then
@@ -296,7 +296,7 @@ local function findAttachmentsRecur(p22, p23) --[[ line: 383 ]]
 	end
 end
 
-local _ = function(p24) --[[ line: 394 | named "findAttachmentsInTool" ]]
+local _ = function(p24)
 	-- upvalues: findAttachmentsRecur (ref)
 	local t = {}
 	findAttachmentsRecur(p24, t)
@@ -304,7 +304,7 @@ local _ = function(p24) --[[ line: 394 | named "findAttachmentsInTool" ]]
 	return t
 end
 
-local _ = function(p25) --[[ line: 400 | named "findAttachmentsInCharacter" ]]
+local _ = function(p25)
 	-- upvalues: findAttachmentsRecur (ref)
 	local t = {}
 	findAttachmentsRecur(p25, t)
@@ -312,7 +312,7 @@ local _ = function(p25) --[[ line: 400 | named "findAttachmentsInCharacter" ]]
 	return t
 end
 
-local _ = function(p26, p27) --[[ line: 406 | named "weldAttachments" ]]
+local _ = function(p26, p27)
 	local weld = Instance.new("Weld")
 	weld.Part0 = p26.Parent
 	weld.Part1 = p27.Parent
@@ -323,7 +323,7 @@ local _ = function(p26, p27) --[[ line: 406 | named "weldAttachments" ]]
 	return weld
 end
 
-local function attachToolToCharacter(p28, p29, p30) --[[ line: 416 ]]
+local function attachToolToCharacter(p28, p29, p30)
 	-- upvalues: findAttachmentsRecur (ref)
 	local t = {}
 	findAttachmentsRecur(p28, t)
@@ -363,7 +363,7 @@ local function attachToolToCharacter(p28, p29, p30) --[[ line: 416 ]]
 	p29:EquipTool(p30)
 end
 
-local function applyR15KeyframeWithTool(p31, p32, p33, p34, p35, p36, p37) --[[ line: 448 ]]
+local function applyR15KeyframeWithTool(p31, p32, p33, p34, p35, p36, p37)
 	-- upvalues: applyKeyframeInner (ref), attachToolToCharacter (ref)
 	if p37 then
 		applyKeyframeInner(p31, p37)
@@ -378,7 +378,7 @@ local function applyR15KeyframeWithTool(p31, p32, p33, p34, p35, p36, p37) --[[ 
 	attachToolToCharacter(p31, p32, p33)
 end
 
-local function getMainThumbnailKeyframe(p38, p39, p40, p41) --[[ line: 502 ]]
+local function getMainThumbnailKeyframe(p38, p39, p40, p41)
 	-- upvalues: getAnimationAndIsIdle (ref), t (ref), getThumbnailKeyframeFromAnimationOrUrl (ref), emoteUtilityUseIdleAnimationFallback (ref)
 	local var64 = nil
 	local var65 = false
@@ -425,7 +425,7 @@ local function getMainThumbnailKeyframe(p38, p39, p40, p41) --[[ line: 502 ]]
 	return var64, var65, animationId
 end
 
-local _ = function(p42) --[[ line: 570 | named "getMoodThumbnailKeyframe" ]]
+local _ = function(p42)
 	-- upvalues: getAnimationAndIsIdle (ref), getThumbnailKeyframeFromAnimationOrUrl (ref)
 	if not p42 then
 		return nil
@@ -441,7 +441,7 @@ local _ = function(p42) --[[ line: 570 | named "getMoodThumbnailKeyframe" ]]
 	return getThumbnailKeyframeFromAnimationOrUrl(var71, 0)
 end
 
-local function getToolKeyframes(p43, p44) --[[ line: 602 ]]
+local function getToolKeyframes(p43, p44)
 	-- upvalues: t (ref)
 	local thumbnailPose = nil
 	local thumbnailKeyframe = nil
@@ -495,7 +495,7 @@ local function getToolKeyframes(p43, p44) --[[ line: 602 ]]
 	end
 end
 
-local function getAttachmentCFrame(p45) --[[ line: 661 ]]
+local function getAttachmentCFrame(p45)
 	local cFrame = p45.CFrame
 	local parent = p45.Parent
 	while parent and parent:IsA("Bone") do
@@ -505,7 +505,7 @@ local function getAttachmentCFrame(p45) --[[ line: 661 ]]
 	return cFrame
 end
 
-local function getJointParts(p46) --[[ line: 671 ]]
+local function getJointParts(p46)
 	if p46:IsA("JointInstance") then
 		return p46.Part0, p46.Part1
 	elseif p46:IsA("Constraint") then
@@ -517,7 +517,7 @@ local function getJointParts(p46) --[[ line: 671 ]]
 	return nil, nil
 end
 
-local function applyCFrame(p47, p48, p49, p50) --[[ line: 684 ]]
+local function applyCFrame(p47, p48, p49, p50)
 	-- upvalues: getAttachmentCFrame (ref)
 	if p49:IsA("AnimationConstraint") then
 		p48.CFrame = p47.CFrame * getAttachmentCFrame(p49.Attachment0) * p50 * getAttachmentCFrame(p49.Attachment1):Inverse()
@@ -531,7 +531,7 @@ local function applyCFrame(p47, p48, p49, p50) --[[ line: 684 ]]
 	end
 end
 
-local function getJointPose(p51) --[[ line: 697 ]]
+local function getJointPose(p51)
 	if p51:IsA("AnimationConstraint") then
 		return p51.Transform
 	elseif not p51:IsA("Motor6D") then
@@ -547,7 +547,7 @@ local function getJointPose(p51) --[[ line: 697 ]]
 	return transform
 end
 
-function t.ForceAnimationToStep(p52) --[[ line: 717 ]]
+function t.ForceAnimationToStep(p52)
 	-- upvalues: getJointParts (ref), getJointPose (ref), applyCFrame (ref)
 	local v
 	local list = { p52:FindFirstChild("HumanoidRootPart") }
@@ -584,9 +584,9 @@ function t.ForceAnimationToStep(p52) --[[ line: 717 ]]
 	end
 end
 
-function t.LoadAsset(p53) --[[ line: 763 ]]
+function t.LoadAsset(p53)
 	-- upvalues: t (ref), insertService (ref)
-	local ok, status = pcall(function() --[[ line: 764 ]]
+	local ok, status = pcall(function()
 		-- upvalues: t (copy), p53 (ref), insertService (copy)
 		return if t.debugLoadAssetsFromFiles and t.mapAssetIdToFileName then insertService:LoadLocalAsset("rbxasset://" .. t.mapAssetIdToFileName(p53)) else insertService:LoadAsset(p53)
 	end)
@@ -594,13 +594,13 @@ function t.LoadAsset(p53) --[[ line: 763 ]]
 	return ok, status
 end
 
-function t.SetDebugLoadAssetsFromFiles(p54, p55) --[[ line: 785 ]]
+function t.SetDebugLoadAssetsFromFiles(p54, p55)
 	-- upvalues: t (ref)
 	t.debugLoadAssetsFromFiles = p54
 	t.mapAssetIdToFileName = p55
 end
 
-function t.GetJointBetween(p56, p57) --[[ line: 793 ]]
+function t.GetJointBetween(p56, p57)
 	if not p56 or not p57 then
 		return nil
 	end
@@ -620,13 +620,13 @@ end
 
 t.GetMotor6DBetween = t.GetJointBetween
 
-function t.PoseKeyframeHasFaceAnimation(p58) --[[ line: 817 ]]
+function t.PoseKeyframeHasFaceAnimation(p58)
 	if not p58 then
 		return false
 	end
 	assert(p58, "poseKeyframe is non-nil. Silence type checker.")
 	
-	local function recurHasFaceAnimation(p59) --[[ line: 823 ]]
+	local function recurHasFaceAnimation(p59)
 		-- upvalues: recurHasFaceAnimation (ref)
 		if p59:IsA("Folder") then
 			return true
@@ -647,12 +647,12 @@ function t.PoseKeyframeHasFaceAnimation(p58) --[[ line: 817 ]]
 	return false
 end
 
-function t.ApplyKeyframe(p60, p61) --[[ line: 848 ]]
+function t.ApplyKeyframe(p60, p61)
 	-- upvalues: t_1 (write), applyKeyframeInner (ref), t (ref)
 	t_1 = {}
 	applyKeyframeInner(p60, p61)
 	t_1 = {}
-	local ok, status = pcall(function() --[[ line: 106 ]]
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
@@ -661,7 +661,7 @@ function t.ApplyKeyframe(p60, p61) --[[ line: 848 ]]
 	end
 end
 
-function t.GetNumberValueWithDefault(p62, p63, p64) --[[ line: 857 ]]
+function t.GetNumberValueWithDefault(p62, p63, p64)
 	local var87 = p64
 	local var88 = p62:FindFirstChild(p63)
 	
@@ -671,7 +671,7 @@ function t.GetNumberValueWithDefault(p62, p63, p64) --[[ line: 857 ]]
 	return var87
 end
 
-function t.GetAnimationClip(p65) --[[ line: 870 ]]
+function t.GetAnimationClip(p65)
 	-- upvalues: getAnimationClipByAssetId (ref)
 	if p65:IsA("KeyframeSequence") then
 		return p65
@@ -685,7 +685,7 @@ function t.GetAnimationClip(p65) --[[ line: 870 ]]
 	return nil
 end
 
-function t.GetThumbnailKeyframe(p66, p67, p68) --[[ line: 886 ]]
+function t.GetThumbnailKeyframe(p66, p67, p68)
 	-- upvalues: getRotatedKeyframe (ref)
 	local keyframes = p67:GetKeyframes()
 	local _ = nil
@@ -693,7 +693,7 @@ function t.GetThumbnailKeyframe(p66, p67, p68) --[[ line: 886 ]]
 	return getRotatedKeyframe(if p66 and p66 > 0 and p66 <= #keyframes then keyframes[p66] else keyframes[math.ceil(#keyframes / 2)], p68)
 end
 
-function t.GetCurveAnimationTimeLength(p69) --[[ line: 904 ]]
+function t.GetCurveAnimationTimeLength(p69)
 	local var90 = 0
 	
 	for i, v in p69:GetDescendants() do
@@ -704,7 +704,7 @@ function t.GetCurveAnimationTimeLength(p69) --[[ line: 904 ]]
 	return var90
 end
 
-function t.GetThumbnailKeyframeFromCurve(p70, p71, p72) --[[ line: 922 ]]
+function t.GetThumbnailKeyframeFromCurve(p70, p71, p72)
 	-- upvalues: t (ref), getRotationCFrame (ref), getRotatedKeyframe (ref)
 	local curveAnimationTimeLength = t.GetCurveAnimationTimeLength(p71)
 	
@@ -714,7 +714,7 @@ function t.GetThumbnailKeyframeFromCurve(p70, p71, p72) --[[ line: 922 ]]
 	assert(p70, "thumbnailTime should be non-nil. Silence type checker")
 	local t_1 = { Position = true, Rotation = true }
 	
-	local function _(p73) --[[ line: 940 | named "hasSubFolders" ]]
+	local function _(p73)
 		for i, v in p73:GetChildren() do
 			if v:IsA("Folder") then
 				return true
@@ -723,7 +723,7 @@ function t.GetThumbnailKeyframeFromCurve(p70, p71, p72) --[[ line: 922 ]]
 		return false
 	end
 	
-	local function recurGenerateKeyframe(p74, p75) --[[ line: 949 ]]
+	local function recurGenerateKeyframe(p74, p75)
 		-- upvalues: getRotationCFrame (copy), p70 (write), t_1 (ref), recurGenerateKeyframe (ref)
 		local v
 		local var95 = nil
@@ -787,7 +787,7 @@ function t.GetThumbnailKeyframeFromCurve(p70, p71, p72) --[[ line: 922 ]]
 	return getRotatedKeyframe(keyframe, p72)
 end
 
-function t.ClearPlayerCharacterFace(p76) --[[ line: 1015 ]]
+function t.ClearPlayerCharacterFace(p76)
 	local faceControls = p76:FindFirstChildWhichIsA("FaceControls", true)
 	
 	if faceControls then
@@ -803,7 +803,7 @@ function t.ClearPlayerCharacterFace(p76) --[[ line: 1015 ]]
 	end
 end
 
-function t.AdjustArmOnR6ForTool(p77) --[[ line: 1032 ]]
+function t.AdjustArmOnR6ForTool(p77)
 	local tool = p77:FindFirstChildOfClass("Tool")
 	local torso = p77:FindFirstChild("Torso")
 	
@@ -823,7 +823,7 @@ function t.AdjustArmOnR6ForTool(p77) --[[ line: 1032 ]]
 	end
 end
 
-function t.SetPlayerCharacterFace(p78, p79) --[[ line: 1054 ]]
+function t.SetPlayerCharacterFace(p78, p79)
 	-- upvalues: getAnimationAndIsIdle (ref), getThumbnailKeyframeFromAnimationOrUrl (ref), t (ref)
 	if not p79 then return end
 	if p79 == "" then return end
@@ -853,7 +853,7 @@ function t.SetPlayerCharacterFace(p78, p79) --[[ line: 1054 ]]
 	end
 end
 
-function t.SetPlayerCharacterNeutralPose(p80) --[[ line: 1095 ]]
+function t.SetPlayerCharacterNeutralPose(p80)
 	-- upvalues: t (ref)
 	local humanoid = p80:FindFirstChildOfClass("Humanoid")
 	
@@ -864,7 +864,7 @@ function t.SetPlayerCharacterNeutralPose(p80) --[[ line: 1095 ]]
 	if humanoid.RigType == Enum.HumanoidRigType.R15 then
 		t.ClearPlayerCharacterFace(p80)
 		
-		local function recurResetJoint(value) --[[ line: 1110 ]]
+		local function recurResetJoint(value)
 			-- upvalues: recurResetJoint (ref)
 			if value:IsA("Motor6D") then
 				value.Transform = CFrame.new()
@@ -882,7 +882,7 @@ function t.SetPlayerCharacterNeutralPose(p80) --[[ line: 1095 ]]
 	end
 end
 
-function t.FindDefaultMoodAnimationId(p81) --[[ line: 1127 ]]
+function t.FindDefaultMoodAnimationId(p81)
 	local animate = p81:FindFirstChild("Animate")
 	
 	if not animate then
@@ -898,7 +898,7 @@ function t.FindDefaultMoodAnimationId(p81) --[[ line: 1127 ]]
 	return if animation and animation.AnimationId ~= "" then animation.AnimationId else nil
 end
 
-local function loadKeyframesForPoseR15(p82, p83, p84, p85, p86) --[[ line: 1146 ]]
+local function loadKeyframesForPoseR15(p82, p83, p84, p85, p86)
 	-- upvalues: getMainThumbnailKeyframe (ref), getToolKeyframes (ref), emoteUtilityDefaultMoodFromCharacter (ref), t (ref), getAnimationAndIsIdle (ref), getThumbnailKeyframeFromAnimationOrUrl (ref), getAnimationClipByAssetId (ref)
 	local t_1 = { originalAnimationAssetId = p83 }
 	local var117, var118, var119 = getMainThumbnailKeyframe(p82, p83, not p85, if p86 then false else true)
@@ -971,7 +971,7 @@ local function loadKeyframesForPoseR15(p82, p83, p84, p85, p86) --[[ line: 1146 
 	return t_1
 end
 
-function t.LoadKeyframesForPose(p87, p88, p89, p90, p91) --[[ line: 1247 ]]
+function t.LoadKeyframesForPose(p87, p88, p89, p90, p91)
 	-- upvalues: loadKeyframesForPoseR15 (ref)
 	assert(p87, "character should be non-nil")
 	
@@ -992,7 +992,7 @@ function t.LoadKeyframesForPose(p87, p88, p89, p90, p91) --[[ line: 1247 ]]
 	return if humanoid.RigType == Enum.HumanoidRigType.R15 then loadKeyframesForPoseR15(p87, p88, p89, p90, p91) else { originalAnimationAssetId = p88 }
 end
 
-function t.ApplyKeyframesForPose(p92, p93) --[[ line: 1295 ]]
+function t.ApplyKeyframesForPose(p92, p93)
 	-- upvalues: t (ref), t_1 (write), applyR15KeyframeWithTool (ref), applyKeyframeInner (ref)
 	assert(p92, "character should be non-nil")
 	
@@ -1017,7 +1017,7 @@ function t.ApplyKeyframesForPose(p92, p93) --[[ line: 1295 ]]
 		applyKeyframeInner(p92, p93.moodKeyframe)
 	end
 	t_1 = {}
-	local ok, status = pcall(function() --[[ line: 106 ]]
+	local ok, status = pcall(function()
 		return game.GetService(game, "ThumbnailGenerator") ~= nil
 	end)
 	
@@ -1026,7 +1026,7 @@ function t.ApplyKeyframesForPose(p92, p93) --[[ line: 1295 ]]
 	end
 end
 
-function t.SetPlayerCharacterPoseWithMoodFallback(p94, p95, p96, p97, p98) --[[ line: 1361 ]]
+function t.SetPlayerCharacterPoseWithMoodFallback(p94, p95, p96, p97, p98)
 	-- upvalues: t (ref), emoteUtilityReportPoseAnimationDownloadFailure (ref)
 	local humanoid = p94:FindFirstChildOfClass("Humanoid")
 	
@@ -1038,7 +1038,7 @@ function t.SetPlayerCharacterPoseWithMoodFallback(p94, p95, p96, p97, p98) --[[ 
 	return if not (not emoteUtilityReportPoseAnimationDownloadFailure or not var134) then if humanoid.RigType == Enum.HumanoidRigType.R15 and p95 ~= nil and var134.poseKeyframe == nil then "Failed to download requested pose animation" else nil else nil
 end
 
-function t.ThumbnailZoomExtents(p99, p100, p101, p102, p103) --[[ line: 1394 ]]
+function t.ThumbnailZoomExtents(p99, p100, p101, p102, p103)
 	local modelCFrame = p99:GetModelCFrame()
 	local lookVector = modelCFrame.LookVector
 	local humanoidRootPart = p99:FindFirstChild("HumanoidRootPart")

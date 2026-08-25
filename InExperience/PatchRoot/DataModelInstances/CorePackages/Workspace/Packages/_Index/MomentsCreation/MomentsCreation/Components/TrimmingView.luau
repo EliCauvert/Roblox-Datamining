@@ -32,7 +32,7 @@ local dragHandleModule_1 = require(momentsCreation.Enums.DragHandle)
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 
-return function(p0) --[[ line: 70 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), useSignalState (ref), useMemo (ref), signalsModule (ref), useRef (ref), useState (ref), useEffect (ref), getCaptureVideoContentModule (ref), sampleVideoFramesModule (ref), useCallback (ref), useTrimDragControllerModule (ref), useSignalBinding (ref), reactModule (ref), view (ref), button (ref), foundationModule (ref), trimTooltipModule (ref), dragHandleModule (ref), dragHandleModule_1 (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), text (ref), speakerSlash (ref), speaker (ref)
 	local controller = p0.controller
 	local playback = controller.preview.playback
@@ -43,9 +43,9 @@ return function(p0) --[[ line: 70 ]]
 	local var18 = useSignalState(playback.getTimeLength)
 	local var19 = useSignalState(playback.getIsPlaying)
 	local var20 = useSignalState(playback.getIsMuted)
-	local var21 = useSignalState(useMemo(function() --[[ line: 85 ]]
+	local var21 = useSignalState(useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 86 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: controller (copy)
 			local activeSession = controller.getActiveSession(p1)
 			
@@ -56,7 +56,7 @@ return function(p0) --[[ line: 70 ]]
 	local var23 = useRef(false)
 	local var24, var25 = useState(nil)
 	local var26, var27 = useState({})
-	useEffect(function() --[[ line: 98 ]]
+	useEffect(function()
 		-- upvalues: var17 (ref), var18 (ref), getCaptureVideoContentModule (copy), sampleVideoFramesModule (copy), var27 (ref)
 		if var17 == nil or var18 <= 0 then return end
 		local var30 = getCaptureVideoContentModule(var17)
@@ -72,7 +72,7 @@ return function(p0) --[[ line: 70 ]]
 			sampleVideoFramesModule(var30, var18, var27)
 		end
 	end, { var17, var18 })
-	local var28 = useTrimDragControllerModule(true, useCallback(function() --[[ line: 124 ]]
+	local var28 = useTrimDragControllerModule(true, useCallback(function()
 		-- upvalues: var22 (ref), playback (ref), var23 (ref), var25 (ref)
 		if var22.current then
 			playback.play()
@@ -83,14 +83,14 @@ return function(p0) --[[ line: 70 ]]
 		var22.current = false
 		var23.current = false
 		var25(nil)
-	end, { playback }), useCallback(function(p2) --[[ line: 116 ]]
+	end, { playback }), useCallback(function(p2)
 		-- upvalues: var22 (ref), playback (ref), var23 (ref), var25 (ref)
 		var22.current = playback.getIsPlaying(false)
 		var23.current = playback.getIsMuted(false)
 		playback.setMuted(true)
 		playback.pause()
 		var25(p2)
-	end, { playback }), useCallback(function(p3, p4) --[[ line: 136 ]]
+	end, { playback }), useCallback(function(p3, p4)
 		-- upvalues: controller (ref), playback (ref)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -104,7 +104,7 @@ return function(p0) --[[ line: 70 ]]
 			endTime = math.clamp(p4 or (if draft then draft.endTime else timeLength), 0, timeLength)
 		})
 		playback.seek(0)
-	end, { controller, playback }), useCallback(function(p5) --[[ line: 153 ]]
+	end, { controller, playback }), useCallback(function(p5)
 		-- upvalues: playback (ref)
 		playback.seek(p5 * playback.getDuration(false))
 	end, { playback }), var21, var18)
@@ -136,7 +136,7 @@ return function(p0) --[[ line: 70 ]]
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
 				text = var16.GeneralCtaBack,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function() --[[ line: 169 ]]
+				onActivated = useCallback(function()
 					-- upvalues: controller (ref)
 					controller.discardActiveTool()
 				end, { controller }),
@@ -147,7 +147,7 @@ return function(p0) --[[ line: 70 ]]
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
 				text = var16.GeneralCtaDone,
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function() --[[ line: 173 ]]
+				onActivated = useCallback(function()
 					-- upvalues: controller (ref)
 					controller.commitActiveTool()
 				end, { controller }),
@@ -173,7 +173,7 @@ return function(p0) --[[ line: 70 ]]
 					}),
 					LeftHandle = reactModule.createElement(dragHandleModule, {
 						anchorPoint = Vector2.new(1, 0.5),
-						position = leftHandlePosition:map(function(p6) --[[ line: 281 ]]
+						position = leftHandlePosition:map(function(p6)
 							return UDim2.fromScale(p6, 0.5)
 						end),
 						dragDetectorRef = leftHandleRef
@@ -181,7 +181,7 @@ return function(p0) --[[ line: 70 ]]
 					RightHandle = reactModule.createElement(dragHandleModule, {
 						isFlipped = true,
 						anchorPoint = Vector2.new(0, 0.5),
-						position = rightHandlePosition:map(function(p7) --[[ line: 290 ]]
+						position = rightHandlePosition:map(function(p7)
 							return UDim2.fromScale(p7, 0.5)
 						end),
 						dragDetectorRef = rightHandleRef
@@ -189,13 +189,13 @@ return function(p0) --[[ line: 70 ]]
 					Outline = reactModule.createElement(view, {
 						tag = "anchor-center-left",
 						ZIndex = 2,
-						Position = leftHandlePosition:map(function(p8) --[[ line: 297 ]]
+						Position = leftHandlePosition:map(function(p8)
 							return UDim2.fromScale(p8, 0.5)
 						end),
 						Size = reactModule.joinBindings({
 							leftHandlePosition = leftHandlePosition,
 							rightHandlePosition = rightHandlePosition
-						}):map(function(p9) --[[ line: 303 ]]
+						}):map(function(p9)
 							return UDim2.fromScale(p9.rightHandlePosition - p9.leftHandlePosition, 1)
 						end),
 						stroke = {
@@ -208,15 +208,15 @@ return function(p0) --[[ line: 70 ]]
 							tag = "anchor-center-center size-100-1400 radius-circle bg-system-contrast",
 							ref = scrubberDisplayRef,
 							Visible = not var24 or var24 == dragHandleModule_1.Scrubber,
-							Position = useSignalBinding(useMemo(function() --[[ line: 187 ]]
+							Position = useSignalBinding(useMemo(function()
 								-- upvalues: signalsModule (copy), playback (ref)
-								return signalsModule.createComputed(function(p11) --[[ line: 188 ]]
+								return signalsModule.createComputed(function(p11)
 									-- upvalues: playback (copy)
 									local duration = playback.getDuration(p11)
 									
 									return if duration <= 0 then 0 else math.clamp(playback.getPosition(p11) / duration, 0, 1)
 								end)
-							end, { playback })):map(function(p10) --[[ line: 321 ]]
+							end, { playback })):map(function(p10)
 								return UDim2.fromScale(p10, 0.5)
 							end)
 						}, {
@@ -236,7 +236,7 @@ return function(p0) --[[ line: 70 ]]
 						tag = "position-center-left anchor-center-left",
 						ZIndex = 0,
 						backgroundStyle = var15.Color.Extended.Black.Black_50,
-						Size = leftHandlePosition:map(function(p12) --[[ line: 341 ]]
+						Size = leftHandlePosition:map(function(p12)
 							return UDim2.fromScale(p12, 1)
 						end)
 					}),
@@ -244,7 +244,7 @@ return function(p0) --[[ line: 70 ]]
 						tag = "position-center-right anchor-center-right",
 						ZIndex = 0,
 						backgroundStyle = var15.Color.Extended.Black.Black_50,
-						Size = rightHandlePosition:map(function(p13) --[[ line: 350 ]]
+						Size = rightHandlePosition:map(function(p13)
 							return UDim2.fromScale(1 - p13, 1)
 						end)
 					})
@@ -266,7 +266,7 @@ return function(p0) --[[ line: 70 ]]
 						Padding = UDim.new(0, var15.Size.Size_50),
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}
-				}, useMemo(function() --[[ line: 208 ]]
+				}, useMemo(function()
 					-- upvalues: var18 (ref), var26 (ref), reactModule (copy), view (copy)
 					local t = {}
 					
@@ -292,7 +292,7 @@ return function(p0) --[[ line: 70 ]]
 			PlaybackToggle = reactModule.createElement(iconButton, {
 				LayoutOrder = 1,
 				icon = if var19 then pauseLarge else playLarge,
-				onActivated = useCallback(function() --[[ line: 177 ]]
+				onActivated = useCallback(function()
 					-- upvalues: playback (ref)
 					playback.toggle()
 				end, { playback }),
@@ -301,9 +301,9 @@ return function(p0) --[[ line: 70 ]]
 			DurationDisplay = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-label-medium content-default",
-				Text = useSignalBinding(useMemo(function() --[[ line: 198 ]]
+				Text = useSignalBinding(useMemo(function()
 					-- upvalues: signalsModule (copy), playback (ref)
-					return signalsModule.createComputed(function(p14) --[[ line: 199 ]]
+					return signalsModule.createComputed(function(p14)
 						-- upvalues: playback (copy)
 						return `{string.format("%.1f", math.max(0, playback.getPosition(p14)))} / {string.format("%.1f", playback.getDuration(p14))}`
 					end)
@@ -312,7 +312,7 @@ return function(p0) --[[ line: 70 ]]
 			MuteToggle = reactModule.createElement(iconButton, {
 				LayoutOrder = 3,
 				icon = if var20 then speakerSlash else speaker,
-				onActivated = useCallback(function() --[[ line: 181 ]]
+				onActivated = useCallback(function()
 					-- upvalues: playback (ref)
 					playback.toggleMute()
 				end, { playback }),

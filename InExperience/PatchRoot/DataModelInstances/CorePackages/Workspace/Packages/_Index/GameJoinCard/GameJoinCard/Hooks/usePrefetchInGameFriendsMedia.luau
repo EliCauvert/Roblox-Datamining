@@ -2,9 +2,9 @@
 local reactModule = require(gameJoinCard.Parent.React)
 local prefetchGameJoinCardMediaModule = require(gameJoinCard.prefetchGameJoinCardMedia)
 
-return function(p0) --[[ line: 21 | named "usePrefetchInGameFriendsMedia" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), prefetchGameJoinCardMediaModule (ref)
-	local var3 = reactModule.useMemo(function() --[[ line: 24 ]]
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		if not p0 then
 			return ""
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 21 | named "usePrefetchInGameFriendsMedia" ]]
 		
 		return table.concat(t_1, ",")
 	end, { p0 })
-	reactModule.useEffect(function() --[[ line: 45 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), prefetchGameJoinCardMediaModule (copy)
 		if var3 == "" then return end
 		local t = {}

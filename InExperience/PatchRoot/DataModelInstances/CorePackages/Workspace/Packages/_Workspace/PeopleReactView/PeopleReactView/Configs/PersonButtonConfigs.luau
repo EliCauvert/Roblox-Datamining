@@ -23,12 +23,12 @@ local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
 local fFlagStandardizeSafetyIcon = require(parent.SharedFlags).FFlagStandardizeSafetyIcon
 
-local function getPlaySessionId() --[[ line: 42 ]]
+local function getPlaySessionId()
 	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref)
 	return if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
 end
 
-return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
+return function(p0)
 	-- upvalues: peopleServiceModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), useLocalization (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), getPlaySessionId (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), constants (ref), getFFlagNewPeopleButtonOrder (ref), getFFlagNewPeoplePageIcons (ref), buttonVariant (ref), fFlagStandardizeSafetyIcon (ref), guiService (ref)
 	local peopleVoiceChatStore = peopleServiceModule.getService("PeopleVoiceChatStore")
 	local peopleReportAbuseMenu = peopleServiceModule.getService("PeopleReportAbuseMenu")
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 		addConnection = if fFlagConnectionsToFriendsRename then nil else constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.ADD_CONNECTION,
 		unblock = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.UNBLOCK
 	})
-	local var23 = reactModule.useMemo(function() --[[ line: 101 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: fFlagConnectionsToFriendsRename (copy), var22 (ref)
 		return {
 			isFriend = if fFlagConnectionsToFriendsRename then var22.friend else var22.connection,
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 			requestSent = var22.requestSent
 		}
 	end, { var22 })
-	local var24 = reactModule.useMemo(function() --[[ line: 111 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), playersService (copy)
 		return if p0 then playersService:GetPlayerByUserId(p0) else nil
 	end, { p0 })
@@ -64,28 +64,28 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 	local playerIsLocalMuted = peopleVoiceChatStore.getPlayerIsLocalMuted(p0)
 	local var29 = useSignalState(peopleVoiceChatStore.getPlayerShouldShowMuteButton(p0))
 	local var30 = useSignalState(friendStatusStore.getShouldShowFriendButton(p0, var24))
-	local var31 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function() --[[ line: 125 ]]
+	local var31 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function()
 		-- upvalues: friendStatusStore (ref), p0 (ref)
 		return friendStatusStore.getFriendStatus(p0)
 	end, { p0 }) else friendStatusStore.getFriendStatus(p0)
-	local var32 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function() --[[ line: 132 ]]
+	local var32 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function()
 		-- upvalues: friendStatusStore (ref), p0 (ref), var23 (ref)
 		return friendStatusStore.getFriendButtonText(p0, var23)
 	end, { p0, var23 }) else friendStatusStore.getFriendButtonText(p0, var23)
-	local var33 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function() --[[ line: 139 ]]
+	local var33 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function()
 		-- upvalues: friendStatusStore (ref), p0 (ref)
 		return friendStatusStore.getFriendButtonVariant(p0)
 	end, { p0 }) else friendStatusStore.getFriendButtonVariant(p0)
-	local var34 = useSignalState(reactModule.useMemo(function() --[[ line: 145 ]]
+	local var34 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: p0 (ref), peopleBlockStatusStore (ref)
 		return if p0 then peopleBlockStatusStore.getPlayerBlockStatus(p0) else nil
 	end, { p0 }))
-	local var35 = reactModule.useMemo(function() --[[ line: 150 ]]
+	local var35 = reactModule.useMemo(function()
 		-- upvalues: peopleUtility (ref), var24 (ref), p0 (ref)
 		return peopleUtility.showPersonButtons(var24, p0)
 	end, { p0 })
 	
-	return reactModule.useMemo(function() --[[ line: 155 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: constants (copy), playerAnimatedIcon (ref), playerMuteState (ref), var29 (ref), peopleAnalyticsManager (ref), p0 (ref), playerIsLocalMuted (ref), getFFlagAddPeoplePageCardLayout (copy), peopleVoiceChatStore (ref), getFFlagNewPeopleButtonOrder (copy), var34 (ref), var22 (ref), getFFlagNewPeoplePageIcons (copy), constantsModule (copy), var35 (ref), var24 (ref), peopleBlockStatusStore (ref), buttonVariant (copy), var21 (ref), var32 (ref), var31 (ref), var33 (ref), var30 (ref), friendStatusStore (ref), fFlagStandardizeSafetyIcon (copy), peopleReportAbuseMenu (ref), guiService (copy), var25 (ref), settingsHubService (ref)
 		local t = {}
 		local t_1 = {
@@ -93,11 +93,11 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 			id = constants.PERSON_BUTTONS.MUTE_PLAYER,
 			animatedIcon = playerAnimatedIcon,
 			buttonState = playerMuteState,
-			shouldShow = function() --[[ line: 163 ]]
+			shouldShow = function()
 				-- upvalues: var29 (copy)
 				return var29
 			end,
-			onActivated = function(p1) --[[ line: 166 ]]
+			onActivated = function(p1)
 				-- upvalues: peopleAnalyticsManager (copy), p0 (copy), playerIsLocalMuted (copy), getFFlagAddPeoplePageCardLayout (copy), peopleVoiceChatStore (copy)
 				peopleAnalyticsManager:trackToggleMutePlayer(p0, playerIsLocalMuted(false), if getFFlagAddPeoplePageCardLayout() then p1 else nil)
 				peopleVoiceChatStore.togglePlayerMute(p0)
@@ -115,11 +115,11 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 			id = constants.PERSON_BUTTONS.BLOCK_PLAYER,
 			text = if var34 then var22.unblock else nil,
 			onIcon = if var34 then nil elseif getFFlagNewPeoplePageIcons() then constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.BLOCK_NEW else constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.BLOCK_LEGACY,
-			shouldShow = function() --[[ line: 196 ]]
+			shouldShow = function()
 				-- upvalues: var35 (copy)
 				return var35
 			end,
-			onActivated = function(p2) --[[ line: 199 ]]
+			onActivated = function(p2)
 				-- upvalues: var24 (copy), var34 (copy), peopleBlockStatusStore (copy), getFFlagAddPeoplePageCardLayout (copy)
 				if var24 then
 					if var34 then
@@ -148,11 +148,11 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 			offIcon = if not var21 then nil elseif getFFlagNewPeoplePageIcons() then constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.FRIEND_NEW else constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.FRIEND_LEGACY,
 			buttonState = var31,
 			buttonVariant = if var21 then nil else var33,
-			shouldShow = function() --[[ line: 239 ]]
+			shouldShow = function()
 				-- upvalues: var30 (copy)
 				return var30
 			end,
-			onActivated = function(p3) --[[ line: 242 ]]
+			onActivated = function(p3)
 				-- upvalues: peopleAnalyticsManager (copy), getFFlagAddPeoplePageCardLayout (copy), friendStatusStore (copy), var24 (copy)
 				peopleAnalyticsManager:trackRequestFriendship(if getFFlagAddPeoplePageCardLayout() then p3 else nil)
 				friendStatusStore.sendFriendRequest(var24)
@@ -170,11 +170,11 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 		local t_4 = {
 			id = constants.PERSON_BUTTONS.REPORT_PLAYER,
 			onIcon = if fFlagStandardizeSafetyIcon then constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_FLAG elseif getFFlagNewPeoplePageIcons() then constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_NEW else constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.REPORT_PLAYER_LEGACY,
-			shouldShow = function() --[[ line: 270 ]]
+			shouldShow = function()
 				-- upvalues: var35 (copy)
 				return var35
 			end,
-			onActivated = function(p4) --[[ line: 273 ]]
+			onActivated = function(p4)
 				-- upvalues: var24 (copy), peopleReportAbuseMenu (copy), getFFlagAddPeoplePageCardLayout (copy)
 				if var24 then
 					peopleReportAbuseMenu:ReportPlayer(var24, if getFFlagAddPeoplePageCardLayout() then p4 else "MenuPlayerList")
@@ -193,11 +193,11 @@ return function(p0) --[[ line: 67 | named "usePersonButtonConfigs" ]]
 			layoutOrder = 20,
 			id = constants.PERSON_BUTTONS.INSPECT,
 			onIcon = if getFFlagNewPeoplePageIcons() then constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.INSPECT_NEW else constantsModule.PEOPLEPAGE.PERSON_BUTTONS.ICON.INSPECT_LEGACY,
-			shouldShow = function() --[[ line: 297 ]]
+			shouldShow = function()
 				-- upvalues: guiService (copy)
 				return guiService:GetInspectMenuEnabled()
 			end,
-			onActivated = function(p5) --[[ line: 300 ]]
+			onActivated = function(p5)
 				-- upvalues: var24 (copy), getFFlagAddPeoplePageCardLayout (copy), peopleAnalyticsManager (copy), var25 (copy), guiService (copy), settingsHubService (copy)
 				if var24 then
 					if getFFlagAddPeoplePageCardLayout() then

@@ -8,7 +8,7 @@ local nodeConfigModule = require(inlineRichText.NodeConfig)
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 42 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.__stack = {}
@@ -17,7 +17,7 @@ function t.new() --[[ line: 42 ]]
 	return tbl
 end
 
-function t:push(p0) --[[ line: 51 ]]
+function t:push(p0)
 	-- upvalues: nodeConfigModule (ref), name (ref), nodeTypeModule (ref), cryoModule (ref)
 	if not nodeConfigModule.getByNode(p0) then
 		return {}, false
@@ -73,7 +73,7 @@ function t:push(p0) --[[ line: 51 ]]
 	return var14, false
 end
 
-function t:pushDefault(p1) --[[ line: 102 ]]
+function t:pushDefault(p1)
 	-- upvalues: nodeConfigModule (ref), name (ref)
 	local byType = nodeConfigModule.getByType(p1)
 	
@@ -85,7 +85,7 @@ function t:pushDefault(p1) --[[ line: 102 ]]
 	return {}, false
 end
 
-function t:findAndClose(p2) --[[ line: 112 ]]
+function t:findAndClose(p2)
 	-- upvalues: name (ref)
 	if not self:__has(p2) then
 		return {}, false
@@ -110,7 +110,7 @@ function t:findAndClose(p2) --[[ line: 112 ]]
 	return t, var17
 end
 
-function t:buildRoot() --[[ line: 135 ]]
+function t:buildRoot()
 	-- upvalues: name (ref), nodeTypeModule (ref)
 	while self:__canCloseTop() do
 		if self:__closeTopAndReduce() then continue end
@@ -135,11 +135,11 @@ function t:buildRoot() --[[ line: 135 ]]
 	}
 end
 
-function t:peek() --[[ line: 162 ]]
+function t:peek()
 	return self.__stack[#self.__stack]
 end
 
-function t:__push(p3) --[[ line: 169 ]]
+function t:__push(p3)
 	-- upvalues: cryoModule (ref)
 	table.insert(self.__stack, cryoModule.Dictionary.join(p3, { index = self.__index }))
 	self.__index += 1
@@ -147,7 +147,7 @@ function t:__push(p3) --[[ line: 169 ]]
 	return nil
 end
 
-function t:__closeTopAndReduce() --[[ line: 179 ]]
+function t:__closeTopAndReduce()
 	-- upvalues: name (ref), cryoModule (ref)
 	local var20 = self.__stack[#self.__stack]
 	local var21 = self.__stack[#self.__stack - 1]
@@ -173,13 +173,13 @@ function t:__closeTopAndReduce() --[[ line: 179 ]]
 	return nil
 end
 
-function t:__canCloseTop() --[[ line: 202 ]]
+function t:__canCloseTop()
 	return #self.__stack > 1
 end
 
-function t:__has(p4) --[[ line: 206 ]]
+function t:__has(p4)
 	-- upvalues: cryoModule (ref)
-	return cryoModule.List.findWhere(self.__stack, function(p5) --[[ line: 207 ]]
+	return cryoModule.List.findWhere(self.__stack, function(p5)
 		-- upvalues: p4 (ref)
 		return p5.name == p4
 	end) ~= nil

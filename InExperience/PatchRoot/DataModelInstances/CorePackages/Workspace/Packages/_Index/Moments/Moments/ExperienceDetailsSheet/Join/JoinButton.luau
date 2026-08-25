@@ -10,7 +10,7 @@ local useJoinExperienceModule = require(script.Parent.useJoinExperience)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 
-return reactModule.memo(function(p0) --[[ line: 34 | named "JoinButton" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
 	local var7 = useJoinExperienceModule()
 	local var8 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
@@ -24,7 +24,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "JoinButton" ]]
 		variant = foundationModule.Enums.ButtonVariant.Emphasis,
 		isDisabled = if p0.isDisabled ~= true then var8 else true,
 		testId = p0.testId,
-		onActivated = function() --[[ line: 51 ]]
+		onActivated = function()
 			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var9 (write), var7 (ref), context (ref)
 			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var9 ~= nil then
 				var9.flushView()

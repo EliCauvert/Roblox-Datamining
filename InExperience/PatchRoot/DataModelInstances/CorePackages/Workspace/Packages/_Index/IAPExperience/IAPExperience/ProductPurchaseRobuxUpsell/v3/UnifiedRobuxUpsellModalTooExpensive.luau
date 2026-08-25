@@ -26,7 +26,7 @@ local useInitialButtonDisableDelayModule = require(parent.Generic.Hooks.useIniti
 local UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS = require(parent.Generic.Constants).UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 
-local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 76 ]]
+local function UnifiedRobuxUpsellModalTooExpensive(p0)
 	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), useInitialButtonDisableDelayModule (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), tooExpensiveUnifiedUpsellShownCounter (ref), sheet (ref), useScaledValue (ref), UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalHeaderModule (ref), view (ref), unifiedPurchaseModalTypeEnumModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), foundationModule (ref)
 	local var13 = useLocalization({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
@@ -35,7 +35,7 @@ local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 76 ]]
 	})
 	local var14, var15 = useFocusNavigationRefsModule(p0.buttons.cancelPurchaseActivated, nil)
 	local var16 = useInitialButtonDisableDelayModule()
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: loggerModule (copy), p0 (ref), getAppContextModule (copy), default (copy), tooExpensiveUnifiedUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Too Expensive Unified Upsell Modal Shown",
@@ -103,7 +103,7 @@ local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 76 ]]
 	})
 end
 
-return function(p1) --[[ line: 163 | named "UnifiedRobuxUpsellModalTooExpensiveContainer" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedRobuxUpsellModalTooExpensive (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

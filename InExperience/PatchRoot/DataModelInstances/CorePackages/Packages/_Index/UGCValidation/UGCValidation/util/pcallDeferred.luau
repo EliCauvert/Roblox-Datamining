@@ -2,7 +2,7 @@
 local _ = require(parent.util.Types)
 local tryYieldModule = require(parent.util.tryYield)
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: tryYieldModule (ref)
 	tryYieldModule(p1)
 	

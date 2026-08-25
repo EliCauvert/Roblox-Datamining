@@ -2,7 +2,7 @@
 local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 
-return function(value, p0, p1) --[[ line: 7 | named "validateLegacyAccessoryMeshPartAssetFormatMatch" ]]
+return function(value, p0, p1)
 	-- upvalues: analyticsModule (ref)
 	local handle = value:FindFirstChild("Handle")
 	assert(handle and handle:IsA("MeshPart"))

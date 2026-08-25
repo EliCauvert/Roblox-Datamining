@@ -49,17 +49,17 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local mouseIconOverrideService = coreScriptsCommonModule.MouseIconOverrideService
 local usePreferredInput = responsiveModule.usePreferredInput
 
-local function getDeviceSafePadding(p0) --[[ line: 103 ]]
+local function getDeviceSafePadding(p0)
 	-- upvalues: displayModule (ref)
 	return displayModule.GetDisplayStore(p0).getDeviceSafePadding(p0)
 end
 
-local function getToggleIntegrations(p1) --[[ line: 107 ]]
+local function getToggleIntegrations(p1)
 	-- upvalues: getIntegrationsStoreModule (ref)
 	return getIntegrationsStoreModule(p1).getToggleIntegrations(p1)
 end
 
-local var31 = function(p2) --[[ line: 111 ]]
+local var31 = function(p2)
 	-- upvalues: getIntegrationsStoreModule (ref)
 	return getIntegrationsStoreModule(p2).getPageIntegrations(p2)
 end
@@ -73,7 +73,7 @@ if fFlagSideSheetFocusNav then
 end
 local var33 = nil
 
-local function SideSheetContent(p3) --[[ line: 126 ]]
+local function SideSheetContent(p3)
 	-- upvalues: useTokens (ref), useStyleSheet (ref), useBackgroundStyleModule (ref), signalsReactModule (ref), getDeviceSafePadding (ref), fFlagMountUnmountSideSheet (ref), useDrawerShouldMount (ref), getToggleIntegrations (ref), reactModule (ref), sidesheetAnalyticsModule (ref), fFlagSideSheetFocusNav (ref), useFocusGuiObject (write), useLastInputMode (ref), getSideSheetConfigStoreModule (ref), usePreferredInput (ref), signalsModule (ref), getSideSheetVisibilityModule (ref), responsiveModule (ref), mouseIconOverrideService (ref), contextActionService (ref), list (ref), toggleSideSheetModule (ref), fFlagUseAnimateScrollViewToSelectionHelper (ref), useSideSheetFocusNavScrollViewAnimationModule (ref), fIntSideSheetVariant (ref), t_1 (write), experienceDetailsRowModule (ref), view (ref), divider (ref), gridListModule (ref), verticalListModule (ref), var31 (ref), scrollView (ref), footerModule (ref), fFlagEnableWhatsNew (ref), var26 (ref), drawerContainer (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var35 = useTokens()
 	local var36 = useStyleSheet()
@@ -81,7 +81,7 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 	local var38 = signalsReactModule.useSignalState(getDeviceSafePadding)
 	local var39 = if fFlagMountUnmountSideSheet then useDrawerShouldMount() else true
 	local var40 = signalsReactModule.useSignalState(getToggleIntegrations)
-	local var41 = reactModule.useCallback(function(p4) --[[ line: 134 ]]
+	local var41 = reactModule.useCallback(function(p4)
 		-- upvalues: sidesheetAnalyticsModule (copy)
 		sidesheetAnalyticsModule.logSidesheetClosed(p4.source)
 	end, {})
@@ -94,7 +94,7 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 		var42 = reactModule.useRef(nil)
 		local var44 = useFocusGuiObject()
 		local var45 = useLastInputMode()
-		var43 = reactModule.useCallback(function(p5) --[[ line: 143 ]]
+		var43 = reactModule.useCallback(function(p5)
 			-- upvalues: var45 (write), var42 (write), var44 (write)
 			if var45 == "Focus" and var42 and var42.current == false then
 				var42.current = true
@@ -102,16 +102,16 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 			end
 		end, { var44, var45 })
 	end
-	local var46 = reactModule.useCallback(function(p6) --[[ line: 151 ]]
+	local var46 = reactModule.useCallback(function(p6)
 		-- upvalues: getSideSheetConfigStoreModule (copy)
 		return getSideSheetConfigStoreModule().onHeightChanged(p6.AbsoluteSize.Y)
 	end, {})
 	local var47 = reactModule.useRef(false)
 	local var48 = reactModule.useRef(false)
 	local var49 = usePreferredInput()
-	reactModule.useEffect(function() --[[ line: 159 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), getSideSheetVisibilityModule (copy), p3 (ref), var47 (ref), var49 (ref), responsiveModule (copy), var48 (ref), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var42 (write)
-		local var55 = signalsModule.createEffect(function(p7) --[[ line: 160 ]]
+		local var55 = signalsModule.createEffect(function(p7)
 			-- upvalues: getSideSheetVisibilityModule (copy), p3 (copy), var47 (copy), var49 (copy), responsiveModule (copy), var48 (copy), mouseIconOverrideService (copy), fFlagSideSheetFocusNav (copy), var42 (copy)
 			local var57 = getSideSheetVisibilityModule(p7)
 			
@@ -142,14 +142,14 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 				var42.current = nil
 			end
 		end)
-		local var56 = if p3.ChatSelector then p3.ChatSelector.VisibilityStateChanged:connect(function(p8) --[[ line: 196 ]]
+		local var56 = if p3.ChatSelector then p3.ChatSelector.VisibilityStateChanged:connect(function(p8)
 			-- upvalues: getSideSheetVisibilityModule (copy), var47 (copy)
 			if getSideSheetVisibilityModule() and p8 then
 				var47.current = false
 			end
 		end) else nil
 		
-		return function() --[[ line: 203 ]]
+		return function()
 			-- upvalues: var55 (ref), var56 (write)
 			var55()
 			
@@ -160,17 +160,17 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 	end, { p3.ChatSelector, var49 })
 	
 	if fFlagSideSheetFocusNav then
-		reactModule.useEffect(function() --[[ line: 212 ]]
+		reactModule.useEffect(function()
 			-- upvalues: contextActionService (copy), var42 (write), list (copy), getSideSheetVisibilityModule (copy), toggleSideSheetModule (copy)
-			contextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, p9, _) --[[ line: 213 ]]
+			contextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, p9, _)
 				-- upvalues: var42 (copy)
 				return if p9 == Enum.UserInputState.Begin then if var42.current == nil then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 			end, false, unpack(list))
-			contextActionService:BindCoreAction("SideSheetSinkR2Action", function(_, _, _) --[[ line: 223 ]]
+			contextActionService:BindCoreAction("SideSheetSinkR2Action", function(_, _, _)
 				-- upvalues: getSideSheetVisibilityModule (copy)
 				return if getSideSheetVisibilityModule() then Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonR2)
-			contextActionService:BindCoreAction("SideSheetCloseAction", function(_, _, _) --[[ line: 230 ]]
+			contextActionService:BindCoreAction("SideSheetCloseAction", function(_, _, _)
 				-- upvalues: getSideSheetVisibilityModule (copy), toggleSideSheetModule (copy)
 				if getSideSheetVisibilityModule() then
 					toggleSideSheetModule(false)
@@ -180,7 +180,7 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ line: 238 ]]
+			return function()
 				-- upvalues: contextActionService (copy)
 				contextActionService:UnbindCoreAction("SideSheetBlockInputAction")
 				contextActionService:UnbindCoreAction("SideSheetSinkR2Action")
@@ -282,7 +282,7 @@ local function SideSheetContent(p3) --[[ line: 126 ]]
 	})
 end
 
-function t.createSideSheet(p10, p11, p12) --[[ line: 380 ]]
+function t.createSideSheet(p10, p11, p12)
 	-- upvalues: var33 (write), coreGuiService (ref), wrapWithProvidersModule (ref), reactModule (ref), SideSheetContent (ref), reactRobloxModule (ref)
 	if not var33 then
 		local inExperienceSideSheet = Instance.new("Folder")

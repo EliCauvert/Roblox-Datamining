@@ -18,7 +18,7 @@ local useSignalState = signalsReactModule.useSignalState
 local voiceVolumePopoverModule = require(peopleReactView.Components.Buttons.VoiceVolumePopover)
 local var7 = signalsModule.createSignal("")
 local var8 = signalsModule.createSignal(false)
-local var9 = reactModule.memo(function(p0) --[[ line: 46 ]]
+local var9 = reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useSignalState (ref), var7 (ref), var8 (ref), reactModule (ref), foundationModule (ref), iconSize (ref)
 	local var10 = useSignalState(p0.animatedIcon or var7)
 	
@@ -31,7 +31,7 @@ local var9 = reactModule.memo(function(p0) --[[ line: 46 ]]
 	})
 end)
 
-return function(p1) --[[ line: 65 | named "MuteVolumeButton" ]]
+return function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), controlState (ref), useCursor (ref), peopleServiceModule (ref), ENTRY_POINT (ref), view (ref), stateLayerAffordance (ref), var9 (ref), foundationModule (ref), iconName (ref), iconSize (ref), voiceVolumePopoverModule (ref)
 	local var11 = useTokens()
 	local XXSmall = var11.Gap.XXSmall
@@ -45,11 +45,11 @@ return function(p1) --[[ line: 65 | named "MuteVolumeButton" ]]
 		offset = var11.Size.Size_150,
 		borderWidth = var11.Stroke.Thicker
 	})
-	local var20 = reactModule.useCallback(function() --[[ line: 84 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: config (ref), p1 (ref)
 		config.onActivated(p1.entryPoint)
 	end, { config.onActivated, p1.entryPoint })
-	local var21 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function() --[[ line: 90 ]]
+	local var21 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var14 (write), peopleServiceModule (copy), ENTRY_POINT (copy), var13 (ref)
 		if p1.userId == nil or not var14 then return end
 		local var31 = not var14.current
@@ -59,36 +59,36 @@ return function(p1) --[[ line: 65 | named "MuteVolumeButton" ]]
 			peopleServiceModule.getService("PeopleAnalyticsManager"):recordPerUserVoiceVolumeUiOpened(p1.entryPoint or ENTRY_POINT.PEOPLE_LIST)
 		end
 		var13(var31)
-	end, { p1.entryPoint, p1.userId }) else reactModule.useCallback(function() --[[ line: 104 ]]
+	end, { p1.entryPoint, p1.userId }) else reactModule.useCallback(function()
 		-- upvalues: var13 (ref)
-		var13(function(p2) --[[ line: 105 ]]
+		var13(function(p2)
 			return not p2
 		end)
 	end, {})
-	local var22 = reactModule.useCallback(function() --[[ line: 111 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var14 (write), var13 (ref)
 		if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry and var14 then
 			var14.current = false
 		end
 		var13(false)
 	end, {})
-	local var23 = reactModule.useCallback(function(p3) --[[ line: 118 ]]
+	local var23 = reactModule.useCallback(function(p3)
 		-- upvalues: p1 (ref)
 		if p1.onButtonMount then
 			p1.onButtonMount(p3, p1.muteButtonName)
 		end
 	end, { p1.onButtonMount, p1.muteButtonName })
-	local var24 = reactModule.useCallback(function(p4) --[[ line: 124 ]]
+	local var24 = reactModule.useCallback(function(p4)
 		-- upvalues: p1 (ref)
 		if p1.onButtonMount then
 			p1.onButtonMount(p4, p1.volumeButtonName)
 		end
 	end, { p1.onButtonMount, p1.volumeButtonName })
-	local var25 = reactModule.useCallback(function(p5) --[[ line: 130 ]]
+	local var25 = reactModule.useCallback(function(p5)
 		-- upvalues: var16 (ref)
 		var16(p5)
 	end, {})
-	local var26 = reactModule.useCallback(function(p6) --[[ line: 134 ]]
+	local var26 = reactModule.useCallback(function(p6)
 		-- upvalues: var18 (ref)
 		var18(p6)
 	end, {})
@@ -97,7 +97,7 @@ return function(p1) --[[ line: 65 | named "MuteVolumeButton" ]]
 	local size1000_1 = var11.Size.Size_1000
 	local layoutOrder = p1.LayoutOrder or config.layoutOrder
 	
-	local function _(p7) --[[ line: 144 | named "getInteractionOverlayStyle" ]]
+	local function _(p7)
 		-- upvalues: controlState (copy), var11 (ref)
 		return if p7 == controlState.Pressed then var11.Color.State.Press elseif p7 == controlState.Hover then var11.Color.State.Hover else nil
 	end

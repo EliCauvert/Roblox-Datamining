@@ -10,7 +10,7 @@ local getEnableChatInputBarConfigurationAutocompleteEnabledModule = require(expC
 local extendedStandardizedFields = constantsModule.Analytics.ExtendedStandardizedFields
 local t = {}
 
-return function(value) --[[ line: 74 | named "usePresetAutocompleteAnalytics" ]]
+return function(value)
 	-- upvalues: t (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), reactModule (ref), expChatSharedModule (ref), constantsModule (ref), httpService (ref), extendedStandardizedFields (ref), presetSearchModule (ref), getPresetChatStoreModule (ref)
 	local autocompleteDropdownReducer = value.autocompleteDropdownReducer
 	local var9 = if autocompleteDropdownReducer ~= nil then t else autocompleteDropdownReducer.results
@@ -20,7 +20,7 @@ return function(value) --[[ line: 74 | named "usePresetAutocompleteAnalytics" ]]
 	local var13 = reactModule.useRef({})
 	local var14 = reactModule.useRef({})
 	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useCallback(function() --[[ line: 103 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), var14 (ref), var12 (ref), var15 (ref), var13 (ref), expChatSharedModule (copy), constantsModule (copy), httpService (copy), extendedStandardizedFields (copy)
 		local current = var11.current
 		
@@ -52,7 +52,7 @@ return function(value) --[[ line: 74 | named "usePresetAutocompleteAnalytics" ]]
 			preset_items = httpService:JSONEncode(t_1)
 		}, extendedStandardizedFields)
 	end, {})
-	local var17 = reactModule.useCallback(function(p0) --[[ line: 150 ]]
+	local var17 = reactModule.useCallback(function(p0)
 		-- upvalues: var11 (ref), presetSearchModule (copy), getPresetChatStoreModule (copy), var15 (ref)
 		if var11.current == nil then return end
 		local presetIdForValue = presetSearchModule.getPresetIdForValue(getPresetChatStoreModule(false), p0)
@@ -62,7 +62,7 @@ return function(value) --[[ line: 74 | named "usePresetAutocompleteAnalytics" ]]
 		end
 		var15.current = presetIdForValue
 	end, {})
-	reactModule.useEffect(function() --[[ line: 163 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), getPresetChatStoreModule (copy), var9 (ref), presetSearchModule (copy), var13 (ref), var12 (ref), var14 (ref)
 		if not var10 then return end
 		local var22 = getPresetChatStoreModule(false)
@@ -82,7 +82,7 @@ return function(value) --[[ line: 74 | named "usePresetAutocompleteAnalytics" ]]
 		end
 		var14.current = t
 	end, { var10, var9 })
-	reactModule.useEffect(function() --[[ line: 183 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var16 (ref), var11 (ref), httpService (copy), expChatSharedModule (copy), constantsModule (copy), extendedStandardizedFields (copy)
 		if not var10 then
 			var16()
@@ -100,9 +100,9 @@ return function(value) --[[ line: 74 | named "usePresetAutocompleteAnalytics" ]]
 			return
 		end
 	end, { var10, var16 })
-	reactModule.useEffect(function() --[[ line: 205 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref)
-		return function() --[[ line: 206 ]]
+		return function()
 			-- upvalues: var16 (copy)
 			var16()
 		end

@@ -3,7 +3,7 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local url = require(parent.Http).Url
 
 return {
-	buildRsvpUpdateUrl = function(p0) --[[ line: 14 ]]
+	buildRsvpUpdateUrl = function(p0)
 		-- upvalues: urlBuilder (ref), url (ref)
 		return urlBuilder.new({
 			path = "virtual-events/v1/virtual-events/{id}/rsvps",

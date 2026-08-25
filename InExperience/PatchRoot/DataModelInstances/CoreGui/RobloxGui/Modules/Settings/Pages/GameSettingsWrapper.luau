@@ -18,7 +18,7 @@ end
 local foundationProvider = foundationModule.FoundationProvider
 local migration = builderIconsModule.Migration
 
-return if fFlagRefactorInExpSettingsInDevelopment then (function() --[[ line: 27 | named "createGameSettings" ]]
+return if fFlagRefactorInExpSettingsInDevelopment then (function()
 	-- upvalues: settingsPageFactoryModule (ref), constants (write), migration (ref), builderIconsModule (ref), reactModule (ref), foundationProvider (ref), foundationModule (ref), utils (write), reactRobloxModule (ref)
 	local var7 = settingsPageFactoryModule:CreateNewPage()
 	var7.TabHeader.Name = constants.GAMESETTINGS.TAB_HEADER.NAME
@@ -29,12 +29,12 @@ return if fFlagRefactorInExpSettingsInDevelopment then (function() --[[ line: 27
 	var7.Page:ClearAllChildren()
 	var7.PageOpen = false
 	
-	function var7.OpenSettingsPage() --[[ line: 41 ]]
+	function var7.OpenSettingsPage()
 		-- upvalues: var7 (ref)
 		var7.PageOpen = true
 	end
 	
-	function var7.CloseSettingsPage() --[[ line: 44 ]]
+	function var7.CloseSettingsPage()
 		-- upvalues: var7 (ref)
 		var7.PageOpen = false
 	end

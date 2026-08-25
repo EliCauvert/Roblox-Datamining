@@ -4,7 +4,7 @@ local contexts = enums.Contexts
 local subPages = enums.SubPages
 local eventTypes = enums.EventTypes
 
-local var1 = function(p0) --[[ line: 11 ]]
+local var1 = function(p0)
 	return p0
 end
 

@@ -12,20 +12,20 @@ local getFontFaceModule = require(parent.Utils.getFontFace)
 local join = dashModule.join
 local t = {}
 
-local function _(p0, p1) --[[ line: 61 | named "formatTextWithEngineTag" ]]
+local function _(p0, p1)
 	-- upvalues: dashModule (ref)
-	return `<{p1.name}{dashModule.reduce(p1.attributes, function(p2, p3, p4) --[[ line: 62 ]]
+	return `<{p1.name}{dashModule.reduce(p1.attributes, function(p2, p3, p4)
 		local var10 = if string.find(p3, "\"") then "'" else "\""
 		
 		return `{p2} {p4}={var10}{p3}{var10}`
 	end, "")}>{p0}</{p1.name}>`
 end
 
-local _ = function(p5, p6) --[[ line: 70 | named "getRichText" ]]
+local _ = function(p5, p6)
 	-- upvalues: escape (ref), dashModule (ref)
-	return dashModule.reduce(p6, function(p7, p8) --[[ line: 72 ]]
+	return dashModule.reduce(p6, function(p7, p8)
 		-- upvalues: dashModule (copy)
-		return `<{p8.name}{dashModule.reduce(p8.attributes, function(p9, p10, p11) --[[ line: 62 ]]
+		return `<{p8.name}{dashModule.reduce(p8.attributes, function(p9, p10, p11)
 			local var10 = if string.find(p10, "\"") then "'" else "\""
 			
 			return `{p9} {p11}={var10}{p10}{var10}`
@@ -37,7 +37,7 @@ local t_1 = {}
 t_1.__index = t_1
 t_1.__type = inlineElementTypeModule
 
-function t_1.new(p12, p13, p14) --[[ line: 82 ]]
+function t_1.new(p12, p13, p14)
 	-- upvalues: t_1 (ref), dashModule (ref), textSplitByModule (ref), escape (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.props = p13
@@ -53,7 +53,7 @@ function t_1.new(p12, p13, p14) --[[ line: 82 ]]
 	return tbl
 end
 
-function t_1:_clone(p15) --[[ line: 116 ]]
+function t_1:_clone(p15)
 	-- upvalues: t_1 (ref)
 	return t_1.new(self.Element, p15 or self.props, self.mapProps)
 end
@@ -65,15 +65,15 @@ if isCli() then
 	t_2.__index = t_2
 	textService = setmetatable({}, t_2)
 	
-	function t_2.GetTextBoundsAsync(_) --[[ line: 127 ]]
+	function t_2.GetTextBoundsAsync(_)
 		return { X = 100 }
 	end
 end
-function t_1:getWidth() --[[ line: 132 ]]
+function t_1:getWidth()
 	return self:_getWidth(self.props.Text)
 end
 
-function t_1:_getWidth(p16) --[[ line: 136 ]]
+function t_1:_getWidth(p16)
 	-- upvalues: getFontFaceModule (ref), escape (ref), dashModule (ref), textService (write), t (ref)
 	local getTextBoundsParams = Instance.new("GetTextBoundsParams")
 	getTextBoundsParams.Font = getFontFaceModule(self.props.fontStyle)
@@ -81,9 +81,9 @@ function t_1:_getWidth(p16) --[[ line: 136 ]]
 	getTextBoundsParams.Text = p16
 	
 	if self.hasRichText then
-		getTextBoundsParams.Text = dashModule.reduce(self.props.EngineTags, function(p17, p18) --[[ line: 72 ]]
+		getTextBoundsParams.Text = dashModule.reduce(self.props.EngineTags, function(p17, p18)
 			-- upvalues: dashModule (copy)
-			return `<{p18.name}{dashModule.reduce(p18.attributes, function(p19, p20, p21) --[[ line: 62 ]]
+			return `<{p18.name}{dashModule.reduce(p18.attributes, function(p19, p20, p21)
 				local var10 = if string.find(p20, "\"") then "'" else "\""
 				
 				return `{p19} {p21}={var10}{p20}{var10}`
@@ -91,7 +91,7 @@ function t_1:_getWidth(p16) --[[ line: 136 ]]
 		end, escape.escapeRichFormatting(p16))
 		getTextBoundsParams.RichText = true
 	end
-	local ok, status = pcall(function() --[[ line: 148 ]]
+	local ok, status = pcall(function()
 		-- upvalues: textService (copy), getTextBoundsParams (ref)
 		return textService:GetTextBoundsAsync(getTextBoundsParams).X
 	end)
@@ -107,9 +107,9 @@ function t_1:_getWidth(p16) --[[ line: 136 ]]
 	return textService:GetTextBoundsAsync(getTextBoundsParams).X
 end
 
-function t_1:split(p22, p23) --[[ line: 166 ]]
+function t_1:split(p22, p23)
 	-- upvalues: splitTextModule (ref), textSplitByModule (ref), join (ref)
-	local var13, var14 = splitTextModule(if self.canForceSplit and p23 then textSplitByModule.Symbol else self.splitBy, function(p24) --[[ line: 168 ]]
+	local var13, var14 = splitTextModule(if self.canForceSplit and p23 then textSplitByModule.Symbol else self.splitBy, function(p24)
 		-- upvalues: self (ref)
 		return self:_getWidth(p24)
 	end, self.props.Text, p22)
@@ -121,13 +121,13 @@ function t_1:split(p22, p23) --[[ line: 166 ]]
 	return props, nil
 end
 
-function t_1:render(p25, p26) --[[ line: 179 ]]
+function t_1:render(p25, p26)
 	-- upvalues: escape (ref), dashModule (ref), reactModule (ref), join (ref)
 	return reactModule.createElement(self.Element, self.mapProps(join(self.props, {
 		id = p25,
-		Text = if self.hasRichText and self.props.Text and self.props.EngineTags then dashModule.reduce(self.props.EngineTags, function(p27, p28) --[[ line: 72 ]]
+		Text = if self.hasRichText and self.props.Text and self.props.EngineTags then dashModule.reduce(self.props.EngineTags, function(p27, p28)
 			-- upvalues: dashModule (copy)
-			return `<{p28.name}{dashModule.reduce(p28.attributes, function(p29, p30, p31) --[[ line: 62 ]]
+			return `<{p28.name}{dashModule.reduce(p28.attributes, function(p29, p30, p31)
 				local var10 = if string.find(p30, "\"") then "'" else "\""
 				
 				return `{p29} {p31}={var10}{p30}{var10}`

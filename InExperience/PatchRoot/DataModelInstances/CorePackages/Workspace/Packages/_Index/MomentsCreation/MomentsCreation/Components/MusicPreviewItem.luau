@@ -17,11 +17,11 @@ local useEffect = reactModule.useEffect
 local useMusicInfoModule = require(momentsCreation.Hooks.useMusicInfo)
 local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
 
-return function(p0) --[[ line: 41 | named "MusicPreviewItem" ]]
+return function(p0)
 	-- upvalues: useMusicInfoModule (ref), useBinding (ref), useEffect (ref), reactModule (ref), skeleton (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), text (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), foundationModule (ref), radialProgressBarModule (ref)
 	local var7 = useMusicInfoModule(p0.musicAssetId)
 	local var8, var9 = useBinding(p0.progress or 0)
-	useEffect(function() --[[ line: 45 ]]
+	useEffect(function()
 		-- upvalues: var9 (ref), p0 (ref)
 		var9(p0.progress or 0)
 	end, { p0.progress })
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 41 | named "MusicPreviewItem" ]]
 	return if var7 == nil then reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 64) }) else reactModule.createElement(view, {
 		tag = "row align-x-left align-y-center gap-medium auto-y padding-x-xsmall padding-y-small radius-medium",
 		LayoutOrder = p0.layoutOrder,
-		onActivated = if p0.onMusicSelected then reactModule.useCallback(function() --[[ line: 49 ]]
+		onActivated = if p0.onMusicSelected then reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.onMusicSelected then
 				p0.onMusicSelected(p0.musicAssetId)
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 41 | named "MusicPreviewItem" ]]
 			PlaybackIndicator = reactModule.createElement(iconButton, {
 				isCircular = true,
 				icon = if p0.isPreviewing then pauseLarge else playLarge,
-				onActivated = reactModule.useCallback(function() --[[ line: 55 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: p0 (ref)
 					if p0.togglePreviewMusic then
 						p0.togglePreviewMusic(p0.musicAssetId)

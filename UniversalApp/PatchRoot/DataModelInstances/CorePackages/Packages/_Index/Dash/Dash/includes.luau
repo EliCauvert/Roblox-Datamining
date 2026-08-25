@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 10 | named "includes" ]]
+﻿return function(p0, p1)
 	if p1 == nil then
 		return false
 	end

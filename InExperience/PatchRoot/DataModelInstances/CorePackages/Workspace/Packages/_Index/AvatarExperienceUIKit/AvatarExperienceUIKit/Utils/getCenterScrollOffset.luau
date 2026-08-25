@@ -1,4 +1,4 @@
-﻿return function(value, p0, p1, p2) --[[ line: 15 | named "getCenterScrollOffset" ]]
+﻿return function(value, p0, p1, p2)
 	if p2 <= 0 then
 		return nil
 	end

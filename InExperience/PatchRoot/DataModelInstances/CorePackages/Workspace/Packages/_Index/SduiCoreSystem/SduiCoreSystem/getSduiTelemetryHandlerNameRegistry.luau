@@ -1,10 +1,10 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiCoreSystem").SduiBuilderTypes)
 
-local function createSduiTelemetryHandlerNameRegistry() --[[ line: 23 ]]
+local function createSduiTelemetryHandlerNameRegistry()
 	local t = {}
 	
 	return {
-		getTelemetryHandler = function(p0) --[[ line: 26 ]]
+		getTelemetryHandler = function(p0)
 			-- upvalues: t (ref)
 			local var3 = t[p0]
 			
@@ -15,21 +15,21 @@ local function createSduiTelemetryHandlerNameRegistry() --[[ line: 23 ]]
 			end
 			return var3.handler
 		end,
-		registerTelemetryHandler = function(p1, p2) --[[ line: 38 ]]
+		registerTelemetryHandler = function(p1, p2)
 			-- upvalues: t (ref)
 			t[p1] = p2
 		end,
-		registerTelemetryHandlers = function(p3) --[[ line: 42 ]]
+		registerTelemetryHandlers = function(p3)
 			-- upvalues: t (ref)
 			for i, v in p3 do
 				t[i] = v
 			end
 		end,
-		debug_clear = function() --[[ line: 48 ]]
+		debug_clear = function()
 			-- upvalues: t (ref)
 			table.clear(t)
 		end,
-		debug_getRegisteredConfigs = function() --[[ line: 52 ]]
+		debug_getRegisteredConfigs = function()
 			-- upvalues: t (ref)
 			return t
 		end
@@ -38,7 +38,7 @@ end
 
 local var1 = nil
 
-return function() --[[ line: 67 | named "getSduiTelemetryHandlerNameRegistry" ]]
+return function()
 	-- upvalues: var1 (write), createSduiTelemetryHandlerNameRegistry (ref)
 	if var1 == nil then
 		var1 = createSduiTelemetryHandlerNameRegistry()

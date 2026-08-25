@@ -8,12 +8,12 @@ local leftPad = nil
 local printSourceLocation = nil
 local printPrefixedLines = nil
 
-local function printLocation(p0) --[[ line: 27 ]]
+local function printLocation(p0)
 	-- upvalues: printSourceLocation (write), getLocation (ref)
 	return printSourceLocation(p0.source, getLocation(p0.source, p0.start))
 end
 
-printSourceLocation = function(p1, p2) --[[ line: 34 | named "printSourceLocation" ]]
+printSourceLocation = function(p1, p2)
 	-- upvalues: whitespace (write), string (ref), printPrefixedLines (write), array (ref)
 	local var6 = p1.locationOffset.column - 1
 	local text = whitespace(var6) .. p1.body
@@ -39,21 +39,21 @@ printSourceLocation = function(p1, p2) --[[ line: 34 | named "printSourceLocatio
 	for i = 1, string.len(var13), 80 do
 		table.insert(t, string.slice(var13, i, i + 80))
 	end
-	return text_1 .. printPrefixedLines(array.concat({ { tostring(var9), t[1] } }, array.map(array.slice(t, 2, var14 + 1), function(p3) --[[ line: 61 ]]
+	return text_1 .. printPrefixedLines(array.concat({ { tostring(var9), t[1] } }, array.map(array.slice(t, 2, var14 + 1), function(p3)
 		return { "", p3 }
 	end), { { " ", whitespace(var15 - 1) .. "^" } }, { { "", t[var14 + 1] } }))
 end
 
-printPrefixedLines = function(p4) --[[ line: 83 | named "printPrefixedLines" ]]
+printPrefixedLines = function(p4)
 	-- upvalues: array (ref), leftPad (write)
-	local var17 = array.filter(p4, function(p5) --[[ line: 84 ]]
+	local var17 = array.filter(p4, function(p5)
 		return p5[2] ~= nil
 	end)
-	local maxValue = math.max(table.unpack(array.map(var17, function(p6) --[[ line: 89 ]]
+	local maxValue = math.max(table.unpack(array.map(var17, function(p6)
 		return string.len(p6[1])
 	end)))
 	
-	return array.join(array.map(var17, function(p7) --[[ line: 94 ]]
+	return array.join(array.map(var17, function(p7)
 		-- upvalues: leftPad (copy), maxValue (ref)
 		local var21
 		local var19 = p7[2]
@@ -66,11 +66,11 @@ printPrefixedLines = function(p4) --[[ line: 83 | named "printPrefixedLines" ]]
 	end), "\n")
 end
 
-whitespace = function(p8) --[[ line: 103 | named "whitespace" ]]
+whitespace = function(p8)
 	return string.rep(" ", p8)
 end
 
-leftPad = function(p9, p10) --[[ line: 107 | named "leftPad" ]]
+leftPad = function(p9, p10)
 	-- upvalues: whitespace (write)
 	return whitespace(p9 - string.len(p10)) .. p10
 end

@@ -11,13 +11,13 @@ local default = require(coreGuiService.RobloxGui.Modules.VoiceChat.VoiceChatServ
 local cameraDevicePermissionGrantedSignalModule = require(coreGuiService.RobloxGui.Modules.Settings.cameraDevicePermissionGrantedSignal)
 local flashingDot = roactModule.PureComponent:extend("FlashingDot")
 
-local function _(startValue, endValue, alpha) --[[ line: 29 | named "lerpNum" ]]
+local function _(startValue, endValue, alpha)
 	return startValue + (endValue - startValue) * alpha
 end
 
 flashingDot.validateProps = tModule.strictInterface({})
 
-function flashingDot.init(p0) --[[ line: 35 ]]
+function flashingDot.init(p0)
 	-- upvalues: roactModule (ref), default (ref), faceAnimatorService (ref), cameraDevicePermissionGrantedSignalModule (ref)
 	p0:setState({ Visible = false, isUsingMic = false })
 	p0.prevTime = 1.570796326795
@@ -26,7 +26,7 @@ function flashingDot.init(p0) --[[ line: 35 ]]
 	p0.transparencyBinding = var8
 	p0.updateTransparencyBinding = var9
 	
-	function p0.checkNewVisibility() --[[ line: 45 ]]
+	function p0.checkNewVisibility()
 		-- upvalues: default (copy), faceAnimatorService (copy), p0 (ref)
 		local var10 = default.localMuted ~= nil and not default.localMuted
 		local var10_1 = var10 or faceAnimatorService:IsStarted() and faceAnimatorService.VideoAnimationEnabled
@@ -36,7 +36,7 @@ function flashingDot.init(p0) --[[ line: 35 ]]
 		end
 	end
 	
-	function p0.animationConnection(p1) --[[ line: 61 ]]
+	function p0.animationConnection(p1)
 		-- upvalues: p0 (ref)
 		local var12 = p0.prevTime + p1
 		local var13 = math.sin(var12 * 3)
@@ -45,7 +45,7 @@ function flashingDot.init(p0) --[[ line: 35 ]]
 		p0.prevSinTime = var13
 	end
 	
-	function p0.teardownCameraPermissionGrantedListener() --[[ line: 71 ]]
+	function p0.teardownCameraPermissionGrantedListener()
 		-- upvalues: p0 (ref)
 		if p0.cameraPermissionGrantedListener then
 			p0.cameraPermissionGrantedListener:disconnect()
@@ -53,23 +53,23 @@ function flashingDot.init(p0) --[[ line: 35 ]]
 		end
 	end
 	
-	p0.cameraPermissionGrantedListener = cameraDevicePermissionGrantedSignalModule:connect(function() --[[ line: 79 ]]
+	p0.cameraPermissionGrantedListener = cameraDevicePermissionGrantedSignalModule:connect(function()
 		-- upvalues: p0 (ref)
 		p0.checkNewVisibility()
 	end)
 end
 
-function flashingDot.didMount(p2) --[[ line: 84 ]]
+function flashingDot.didMount(p2)
 	p2.checkNewVisibility()
 end
 
-function flashingDot.willUnmount(p3) --[[ line: 88 ]]
+function flashingDot.willUnmount(p3)
 	if p3.teardownCameraPermissionGrantedListener then
 		p3.teardownCameraPermissionGrantedListener()
 	end
 end
 
-function flashingDot.render(p4) --[[ line: 94 ]]
+function flashingDot.render(p4)
 	-- upvalues: roactModule (ref), eventConnection (ref), default (ref), faceAnimatorService (ref), runService (ref)
 	return roactModule.createElement("Frame", {
 		ZIndex = 2,

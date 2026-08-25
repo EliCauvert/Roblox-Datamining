@@ -20,7 +20,7 @@ game:DefineFastInt("CEVBacktraceRepeatedErrorRateLimitPeriod", 60)
 game:DefineFastInt("CEVBacktraceRepeatedErrorRateLimitProcessIntervalTenths", 10)
 game:DefineFastInt("CEVBacktraceErrorReportPercentage", 100)
 
-local function _() --[[ line: 41 | named "CanReportCEVBacktrace" ]]
+local function _()
 	return math.random(1, 100) <= math.clamp(game:GetFastInt("CEVBacktraceErrorReportPercentage"), 0, 100)
 end
 
@@ -46,7 +46,7 @@ if not game:GetFastFlag("DisableCEVBacktraceReporting") and game:GetFastString("
 	local var15 = backtraceReporter.new({
 		httpService = httpService,
 		token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-		processErrorReportMethod = function(p0) --[[ line: 76 ]]
+		processErrorReportMethod = function(p0)
 			-- upvalues: t (ref), playersService (ref), runService (ref)
 			p0:addAttributes(t)
 			p0:addAttributes({
@@ -58,7 +58,7 @@ if not game:GetFastFlag("DisableCEVBacktraceReporting") and game:GetFastString("
 		end
 	})
 	
-	local function handleErrorDetailed(p1, p2, p3, p4) --[[ line: 94 ]]
+	local function handleErrorDetailed(p1, p2, p3, p4)
 		-- upvalues: coreGuiService (ref), corePackagesService (ref), var12 (ref), CEVBacktraceRepeatedErrorRateLimitingFastFlag (ref), var14 (write), var15 (ref)
 		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService)) then
 			local var17 = var12:cleanPii(p1)
@@ -77,7 +77,7 @@ if not game:GetFastFlag("DisableCEVBacktraceReporting") and game:GetFastString("
 		end
 	end
 	
-	scriptContextService.ErrorDetailed:Connect(function(...) --[[ line: 121 ]]
+	scriptContextService.ErrorDetailed:Connect(function(...)
 		-- upvalues: handleErrorDetailed (ref)
 		local ok, status = pcall(handleErrorDetailed, ...)
 		

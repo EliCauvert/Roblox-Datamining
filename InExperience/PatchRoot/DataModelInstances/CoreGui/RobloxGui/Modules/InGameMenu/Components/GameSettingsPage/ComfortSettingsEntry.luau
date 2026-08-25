@@ -21,12 +21,12 @@ local t_1 = {
 }
 local enumItems = Enum.VRComfortSetting:GetEnumItems()
 
-local function _(value) --[[ line: 40 | named "getComfortSettingIndex" ]]
+local function _(value)
 	-- upvalues: luauPolyfillModule (ref), enumItems (ref)
 	return luauPolyfillModule.Array.indexOf(enumItems, value)
 end
 
-local _ = function(value) --[[ line: 44 | named "setComfortSettingByIndex" ]]
+local _ = function(value)
 	-- upvalues: enumItems (ref), gameSettings (ref), sendAnalyticsModule (ref), constantsModule (ref)
 	local var13 = enumItems[value]
 	gameSettings.VRComfortSetting = var13
@@ -36,21 +36,21 @@ end
 local comfortSettingsEntry = roactModule.PureComponent:extend("ComfortSettingsEntry")
 comfortSettingsEntry.validateProps = t.strictInterface({ LayoutOrder = t.optional(t.integer) })
 
-function comfortSettingsEntry.init(p0) --[[ line: 57 ]]
+function comfortSettingsEntry.init(p0)
 	-- upvalues: gameSettings (ref), luauPolyfillModule (ref), enumItems (ref)
 	p0:setState({
 		selectedMode = luauPolyfillModule.Array.indexOf(enumItems, gameSettings.VRComfortSetting)
 	})
 end
 
-function comfortSettingsEntry.render(p1) --[[ line: 63 ]]
+function comfortSettingsEntry.render(p1)
 	-- upvalues: withLocalizationModule (ref), t_1 (ref), roactModule (ref), externalEventConnectionModule (ref), VRComfortSettingPropertyChangedSignal (ref), gameSettings (ref), luauPolyfillModule (ref), enumItems (ref), themedTextLabelModule (ref), segmentedControl (ref), sendAnalyticsModule (ref), constantsModule (ref)
-	return withLocalizationModule(t_1)(function(p2) --[[ line: 64 ]]
+	return withLocalizationModule(t_1)(function(p2)
 		-- upvalues: roactModule (copy), externalEventConnectionModule (copy), VRComfortSettingPropertyChangedSignal (copy), p1 (ref), gameSettings (copy), luauPolyfillModule (copy), enumItems (copy), themedTextLabelModule (copy), segmentedControl (copy), sendAnalyticsModule (copy), constantsModule (copy)
 		return roactModule.createFragment({
 			VRComfortSettingListener = roactModule.createElement(externalEventConnectionModule, {
 				event = VRComfortSettingPropertyChangedSignal,
-				callback = function() --[[ line: 68 ]]
+				callback = function()
 					-- upvalues: p1 (copy), gameSettings (copy), luauPolyfillModule (copy), enumItems (copy)
 					p1:setState({
 						selectedMode = luauPolyfillModule.Array.indexOf(enumItems, gameSettings.VRComfortSetting)
@@ -95,13 +95,13 @@ function comfortSettingsEntry.render(p1) --[[ line: 63 ]]
 					SegmentedControl = roactModule.createElement(segmentedControl, {
 						width = UDim.new(1, 0),
 						selectedTabIndex = p1.state.selectedMode,
-						onTabActivated = function(p3) --[[ line: 113 ]]
+						onTabActivated = function(p3)
 							-- upvalues: enumItems (copy), gameSettings (copy), sendAnalyticsModule (copy), constantsModule (copy)
 							local var14 = enumItems[p3]
 							gameSettings.VRComfortSetting = var14
 							sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsVRComfortSettingChangeName, { mode = tostring(var14) })
 						end,
-						tabs = luauPolyfillModule.Array.map(enumItems, function(p4, _) --[[ line: 116 ]]
+						tabs = luauPolyfillModule.Array.map(enumItems, function(p4, _)
 							-- upvalues: p2 (ref)
 							return { tabName = p2[tostring(p4)] }
 						end)

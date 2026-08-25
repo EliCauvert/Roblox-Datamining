@@ -15,7 +15,7 @@ local useEffectOnce = require(parent.RoactUtils).Hooks.useEffectOnce
 local eventNamesModule = require(profileQRCode.Analytics.EventNames)
 local useHasFailedToLoadModule = require(script.Parent.useHasFailedToLoad)
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useLoadingStateModule (ref), useGetProfileShareUrlModule (ref), useRefreshQrSessionModule (ref), useShortUrlModule (ref), networkStatus (ref), reactModule (ref), eventNamesModule (ref), useEffectOnce (ref), useHasLoadedSuccessfullyModule (ref), useHasFailedToLoadModule (ref), QRCodeSucceededViewModule (ref), QRCodeFailedViewModule (ref), QRCodeLoadingViewModule (ref)
 	local var13 = useAnalyticsModule()
 	local var14 = useLoadingStateModule()
@@ -24,9 +24,9 @@ return function(p0) --[[ line: 30 ]]
 	local var17 = useShortUrlModule()
 	local var18 = var17 ~= nil
 	local var19 = var14 == networkStatus.Failed
-	reactModule.useEffect(function() --[[ line: 40 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var13 (ref), eventNamesModule (copy)
-		var16():andThen(function(p1) --[[ line: 41 ]]
+		var16():andThen(function(p1)
 			-- upvalues: var13 (copy), eventNamesModule (copy)
 			var13.fireEvent(eventNamesModule.RefreshQrSession, {
 				success = (if p1 then p1.responseBody else {}).Success,

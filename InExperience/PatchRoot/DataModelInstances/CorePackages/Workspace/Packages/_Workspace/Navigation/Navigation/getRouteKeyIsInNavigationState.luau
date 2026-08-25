@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-local function getRouteKeyIsInNavigationState(p0, p1) --[[ line: 6 ]]
+local function getRouteKeyIsInNavigationState(p0, p1)
 	-- upvalues: getRouteKeyIsInNavigationState (ref)
 	if p1.key == p0 then
 		return true

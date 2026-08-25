@@ -16,7 +16,7 @@ local var3 = tModule.strictInterface({
 	feedComponentTypes = tModule.string
 })
 
-return function(p0, p1, p2, p3) --[[ line: 26 | named "sendSduiFeedImpressions" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: discoveryEventErrorLogger (ref), var3 (ref), telemetryService (ref), t (ref)
 	if #p0 == 0 then return end
 	if #p0 ~= #p1 or #p0 ~= #p2 then

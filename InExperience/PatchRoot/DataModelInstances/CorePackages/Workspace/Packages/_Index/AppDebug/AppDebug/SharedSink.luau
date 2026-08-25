@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 14 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { lastContext = nil, log = p0 }
 	setmetatable(t_1, t)
@@ -9,10 +9,10 @@ function t.new(p0) --[[ line: 14 ]]
 	return t_1
 end
 
-function t.newSink(p1, p2) --[[ line: 23 ]]
+function t.newSink(p1, p2)
 	return {
 		maxLevel = p2,
-		log = function(p3, p4, p5) --[[ line: 26 ]]
+		log = function(p3, p4, p5)
 			-- upvalues: p1 (ref)
 			if p5 ~= p1.lastContext then
 				p1.lastContext = p5

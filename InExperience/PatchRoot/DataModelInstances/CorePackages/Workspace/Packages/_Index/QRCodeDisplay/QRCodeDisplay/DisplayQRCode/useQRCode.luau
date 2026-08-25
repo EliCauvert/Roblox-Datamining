@@ -5,9 +5,9 @@ local QRCodeModule = require(parent.QRCode)
 local ecToNumberModule = require(script.Parent.ecToNumber)
 local _ = require(QRCodeDisplay.Common.ECLevels)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), QRCodeModule (ref), ecToNumberModule (ref)
-	return reactModule.useMemo(function() --[[ line: 9 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: QRCodeModule (copy), p0 (ref), ecToNumberModule (copy)
 		local _, var4 = QRCodeModule.qrcode(p0.toEncode, ecToNumberModule(p0.ecLevel))
 		

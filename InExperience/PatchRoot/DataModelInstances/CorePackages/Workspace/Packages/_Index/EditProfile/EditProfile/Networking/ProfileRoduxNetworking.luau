@@ -5,7 +5,7 @@ local httpRequest = require(parent.LuaSocialLibrariesDeps).httpRequest
 return require(parent.RoduxNetworking).config({
 	keyPath = require(editProfile.Common.Constants).RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 11 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: httpRequest (ref)
 			return httpRequest.requestFunctions.RequestInternal(p0, p1, p2)
 		end,

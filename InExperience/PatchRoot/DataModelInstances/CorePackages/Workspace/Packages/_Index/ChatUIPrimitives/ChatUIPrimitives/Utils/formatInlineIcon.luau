@@ -1,6 +1,6 @@
 ﻿local escapeRichTextModule = require(script:FindFirstAncestor("ChatUIPrimitives").Utils.escapeRichText)
 
-return function(p0, p1) --[[ line: 24 | named "formatInlineIcon" ]]
+return function(p0, p1)
 	-- upvalues: escapeRichTextModule (ref)
 	local list = { "family" }
 	local t = {

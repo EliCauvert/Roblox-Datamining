@@ -9,7 +9,7 @@ local textFrameHeight = constantsModule.LogFormatting.TextFrameHeight
 local textFramePadding = constantsModule.LogFormatting.TextFramePadding
 local maxStringSize = constantsModule.LogFormatting.MaxStringSize
 
-local function countContextLines(p0, p1) --[[ line: 23 ]]
+local function countContextLines(p0, p1)
 	-- upvalues: countContextLines (ref)
 	local var6 = 0
 	
@@ -27,11 +27,11 @@ end
 
 local logOutput = roactModule.Component:extend("LogOutput")
 
-function logOutput.init(p2, p3) --[[ line: 38 ]]
+function logOutput.init(p2, p3)
 	-- upvalues: roactModule (ref)
 	local var7 = p3.initLogOutput and p3.initLogOutput()
 	
-	function p2.onCanvasChange() --[[ line: 41 ]]
+	function p2.onCanvasChange()
 		-- upvalues: p2 (ref)
 		local current = p2.ref.current
 		
@@ -59,12 +59,12 @@ function logOutput.init(p2, p3) --[[ line: 38 ]]
 	}
 end
 
-function logOutput.willUpdate(p4, _, _) --[[ line: 71 ]]
+function logOutput.willUpdate(p4, _, _)
 	p4._canvasSignal:Disconnect()
 	p4._absSizeSignal:Disconnect()
 end
 
-function logOutput.didUpdate(p5) --[[ line: 76 ]]
+function logOutput.didUpdate(p5)
 	p5._canvasSignal = p5.ref.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p5.onCanvasChange)
 	p5._absSizeSignal = p5.ref.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(p5.onCanvasChange)
 	
@@ -77,9 +77,9 @@ function logOutput.didUpdate(p5) --[[ line: 76 ]]
 	end
 end
 
-function logOutput.didMount(p6) --[[ line: 92 ]]
+function logOutput.didMount(p6)
 	-- upvalues: textFrameHeight (ref), textFramePadding (ref)
-	p6.logConnector = p6.props.targetSignal:Connect(function(p7) --[[ line: 93 ]]
+	p6.logConnector = p6.props.targetSignal:Connect(function(p7)
 		-- upvalues: p6 (ref), textFrameHeight (copy), textFramePadding (copy)
 		if p6.state.autoScroll or p7:getSize() ~= p7:getMaxSize() then
 			p6:setState({ logData = p7 })
@@ -109,12 +109,12 @@ function logOutput.didMount(p6) --[[ line: 92 ]]
 	end
 end
 
-function logOutput.willUnmount(p8) --[[ line: 137 ]]
+function logOutput.willUnmount(p8)
 	p8.logConnector:Disconnect()
 	p8.logConnector = nil
 end
 
-function logOutput.render(p9) --[[ line: 142 ]]
+function logOutput.render(p9)
 	-- upvalues: textFrameHeight (ref), roactModule (ref), bannerButtonModule (ref), mainWindow (ref), log (ref), textFramePadding (ref), countContextLines (ref), constantsModule (ref), iconHeight (ref), maxStringSize (ref), textService (ref)
 	local layoutOrder = p9.props.layoutOrder
 	local size = p9.props.size
@@ -131,16 +131,16 @@ function logOutput.render(p9) --[[ line: 142 ]]
 		local var14 = -1
 		local var15 = 0
 		
-		local function _(p10) --[[ line: 161 | named "createOnButtonPress" ]]
+		local function _(p10)
 			-- upvalues: p9 (ref)
-			return function() --[[ line: 162 ]]
+			return function()
 				-- upvalues: p10 (ref), p9 (copy)
 				p10.Expanded = not p10.Expanded
 				p9:setState({})
 			end
 		end
 		
-		local function addContextEntries(p11, p12, p13, p14, p15) --[[ line: 168 ]]
+		local function addContextEntries(p11, p12, p13, p14, p15)
 			-- upvalues: roactModule (copy), bannerButtonModule (copy), mainWindow (copy), p9 (ref), log (copy), addContextEntries (ref)
 			if p14 >= 3 then return end
 			local t = {}
@@ -150,7 +150,7 @@ function logOutput.render(p9) --[[ line: 142 ]]
 					table.insert(t, i)
 				end
 			end
-			table.sort(t, function(p16, p17) --[[ line: 176 ]]
+			table.sort(t, function(p16, p17)
 				return tostring(p16) < tostring(p17)
 			end)
 			local var27 = p14 * 20 + 20
@@ -168,7 +168,7 @@ function logOutput.render(p9) --[[ line: 142 ]]
 						size = UDim2.new(1, 0, 0, mainWindow),
 						isExpanded = var28._expanded,
 						layoutOrder = i_2,
-						onButtonPress = function() --[[ line: 194 ]]
+						onButtonPress = function()
 							-- upvalues: var28 (ref), p9 (copy)
 							var28._expanded = not var28._expanded
 							p9:setState({})
@@ -255,7 +255,7 @@ function logOutput.render(p9) --[[ line: 142 ]]
 							hideLines = true,
 							size = UDim2.new(1, 0, 0, mainWindow),
 							isExpanded = var19.Expanded,
-							onButtonPress = function() --[[ line: 162 ]]
+							onButtonPress = function()
 								-- upvalues: var19 (ref), p9 (ref)
 								var19.Expanded = not var19.Expanded
 								p9:setState({})

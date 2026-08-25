@@ -1,6 +1,6 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0, p1) --[[ line: 4 | named "getOtherDisplayNameInWhisperChannel" ]]
+return function(p0, p1)
 	-- upvalues: playersService (ref)
 	for i, v in ipairs(p0:GetChildren()) do
 		if v:IsA("TextSource") then

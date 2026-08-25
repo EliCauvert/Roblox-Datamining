@@ -28,7 +28,7 @@ local fFlagPlayerListRemoveTopStatModule = require(parent_1.Flags.FFlagPlayerLis
 local t = { dampingRatio = 1, frequency = 7 }
 local playerListApp = roactModule.PureComponent:extend("PlayerListApp")
 
-local function _(p0) --[[ line: 54 | named "shouldShowNeutralTeam" ]]
+local function _(p0)
 	for i, v in ipairs(p0) do
 		if v.Team == nil then
 			return true
@@ -37,7 +37,7 @@ local function _(p0) --[[ line: 54 | named "shouldShowNeutralTeam" ]]
 	return false
 end
 
-local function getTeamCount(p1, p2) --[[ line: 63 ]]
+local function getTeamCount(p1, p2)
 	local t = {}
 	local var23 = 0
 	
@@ -62,24 +62,24 @@ local function getTeamCount(p1, p2) --[[ line: 63 ]]
 	return var23
 end
 
-function playerListApp.init(p3) --[[ line: 78 ]]
+function playerListApp.init(p3)
 	-- upvalues: roactModule (ref), otterModule (ref), signalsModule (ref), displayModule (ref)
 	p3.state = { visible = true }
 	local var25, var26 = roactModule.createBinding(UDim2.new(0, 0, 0, 0))
 	p3.positionOffset = var25
 	p3.updatePositionOffset = var26
 	p3.positionMotor = otterModule.createSingleMotor(0)
-	p3.positionMotor:onStep(function(p4) --[[ line: 86 ]]
+	p3.positionMotor:onStep(function(p4)
 		-- upvalues: p3 (ref)
 		p3.updatePositionOffset(UDim2.new(p4, 0, 0, 0))
 	end)
-	p3.positionMotor:onComplete(function(_) --[[ line: 89 ]]
+	p3.positionMotor:onComplete(function(_)
 		-- upvalues: p3 (ref)
 		if not p3.props.displayOptions.isVisible then
 			p3:setState({ visible = false })
 		end
 	end)
-	p3.disposeUiScaleEffect = signalsModule.createEffect(function(p5) --[[ line: 96 ]]
+	p3.disposeUiScaleEffect = signalsModule.createEffect(function(p5)
 		-- upvalues: displayModule (copy), p3 (ref)
 		p3:setState({
 			UiScale = displayModule.GetDisplayStore(p5).getUIScale(p5)
@@ -87,9 +87,9 @@ function playerListApp.init(p3) --[[ line: 78 ]]
 	end)
 end
 
-function playerListApp.render(p6) --[[ line: 104 ]]
+function playerListApp.render(p6)
 	-- upvalues: roactModule (ref), contextActionsBinderModule (ref), fFlagAddNewPlayerListFocusNav (ref), eventConnectionsModule (ref), withLayoutValues (ref), statsUtilsModule (ref), playersService (ref), getTeamCount (ref), playerEntryContainerModule (ref), playerListDisplayContainerModule (ref), fFlagPlayerListRemoveTopStatModule (ref), topStatConnectorModule (ref), tenFootSideBarModule (ref)
-	return if p6.state.visible then withLayoutValues(function(p7) --[[ line: 112 ]]
+	return if p6.state.visible then withLayoutValues(function(p7)
 		-- upvalues: p6 (ref), statsUtilsModule (copy), playersService (copy), getTeamCount (copy), roactModule (copy), playerEntryContainerModule (copy), playerListDisplayContainerModule (copy), fFlagAddNewPlayerListFocusNav (copy), eventConnectionsModule (copy), contextActionsBinderModule (copy), fFlagPlayerListRemoveTopStatModule (copy), topStatConnectorModule (copy), tenFootSideBarModule (copy)
 		local containerPosition = p7.ContainerPosition
 		local containerSize = p7.ContainerSize
@@ -182,11 +182,11 @@ function playerListApp.render(p6) --[[ line: 104 ]]
 	})
 end
 
-function playerListApp.didMount(p8) --[[ line: 224 ]]
+function playerListApp.didMount(p8)
 	p8:setState({ visible = p8.props.displayOptions.isVisible })
 end
 
-function playerListApp.didUpdate(p9, p10, _) --[[ line: 230 ]]
+function playerListApp.didUpdate(p9, p10, _)
 	-- upvalues: otterModule (ref), t (ref)
 	if p9.props.displayOptions.isVisible ~= p10.displayOptions.isVisible then
 		if p9.props.displayOptions.isTenFootInterface then
@@ -205,7 +205,7 @@ function playerListApp.didUpdate(p9, p10, _) --[[ line: 230 ]]
 	end
 end
 
-function playerListApp.willUnmount(p11) --[[ line: 251 ]]
+function playerListApp.willUnmount(p11)
 	p11.positionMotor:destroy()
 	p11.positionMotor = nil
 	
@@ -214,7 +214,7 @@ function playerListApp.willUnmount(p11) --[[ line: 251 ]]
 	end
 end
 
-return roactRoduxModule.connect(function(p14) --[[ line: 260 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p14)
 	return {
 		screenSizeX = p14.screenSize.X,
 		screenSizeY = p14.screenSize.Y,
@@ -226,12 +226,12 @@ return roactRoduxModule.connect(function(p14) --[[ line: 260 | named "mapStateTo
 		gameStats = p14.gameStats,
 		teams = p14.teams
 	}
-end, nil)(function(p12) --[[ line: 276 | named "PlayerListAppWithLeaderboardStore" ]]
+end, nil)(function(p12)
 	-- upvalues: useLeaderboardStore (ref), signalsModule (ref), signalsReactModule (ref), roactModule (ref), playerListApp (ref), cryoModule (ref)
 	local var31 = useLeaderboardStore()
 	
 	return roactModule.createElement(playerListApp, cryoModule.Dictionary.join(p12, {
-		gameStatsCount = signalsReactModule.useSignalState(signalsModule.createComputed(function(p13) --[[ line: 279 ]]
+		gameStatsCount = signalsReactModule.useSignalState(signalsModule.createComputed(function(p13)
 			-- upvalues: var31 (ref), p12 (ref)
 			return if var31 then var31.getGameStatsList().getCount(p13) else #p12.gameStats
 		end))

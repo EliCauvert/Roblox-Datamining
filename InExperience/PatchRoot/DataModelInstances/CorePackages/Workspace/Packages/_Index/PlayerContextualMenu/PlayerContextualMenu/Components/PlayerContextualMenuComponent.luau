@@ -8,11 +8,11 @@ local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local playerContextualMenuHeaderModule = require(script.Parent.PlayerContextualMenuHeader)
 local t = { width = UDim.new(1, 0) }
 
-return function(p0) --[[ line: 28 ]]
+return function(p0)
 	-- upvalues: dashModule (ref), t (ref), useCursor (ref), useDesignTokens (ref), reactModule (ref), playerContextualMenuHeaderModule (ref), baseMenu (ref)
 	local var5 = dashModule.join(t, p0)
 	local var6 = useCursor()
-	local var7 = useDesignTokens(function(p1) --[[ line: 31 ]]
+	local var7 = useDesignTokens(function(p1)
 		return {
 			overlayBackgroundColor3 = p1.Color.Common.Scrim.Color3,
 			overlayBackgroundTransparency = p1.Color.Common.Scrim.Transparency,
@@ -48,7 +48,7 @@ return function(p0) --[[ line: 28 ]]
 				enableTokenOverride = true,
 				buttonProps = var5.buttonProps,
 				width = var5.width,
-				renderHeader = reactModule.useCallback(function() --[[ line: 43 ]]
+				renderHeader = reactModule.useCallback(function()
 					-- upvalues: reactModule (copy), playerContextualMenuHeaderModule (copy), dashModule (copy), var5 (ref), var9 (ref)
 					return reactModule.createElement(playerContextualMenuHeaderModule, dashModule.join(var5.headerProps, { onHeaderHeightChanged = var9 }))
 				end, { var5.headerProps }),

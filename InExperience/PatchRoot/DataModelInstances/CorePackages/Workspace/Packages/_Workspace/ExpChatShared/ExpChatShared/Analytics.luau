@@ -7,7 +7,7 @@ local var4 = require(expChatShared.Logger):new("ExpChat/" .. script.Name)
 local t = {}
 local var6 = rbxAnalyticsService
 
-local function withDefaultArgs(p0) --[[ line: 17 ]]
+local function withDefaultArgs(p0)
 	-- upvalues: dictionary (ref)
 	return dictionary.join(p0, {
 		gameId = tostring(game.GameId),
@@ -15,7 +15,7 @@ local function withDefaultArgs(p0) --[[ line: 17 ]]
 	})
 end
 
-local function setRbxEventStream(value, p1, p2, p3) --[[ line: 24 ]]
+local function setRbxEventStream(value, p1, p2, p3)
 	-- upvalues: var6 (write), var4 (ref), withDefaultArgs (ref)
 	if var6 then
 		var4:debug("Event: {}", p2)
@@ -23,7 +23,7 @@ local function setRbxEventStream(value, p1, p2, p3) --[[ line: 24 ]]
 	end
 end
 
-local function sendEventDeferred(p4, p5, p6, p7) --[[ line: 31 ]]
+local function sendEventDeferred(p4, p5, p6, p7)
 	-- upvalues: var6 (write), var4 (ref), withDefaultArgs (ref)
 	if var6 then
 		var4:debug("SendEventDeferred: {}", p6)
@@ -31,22 +31,22 @@ local function sendEventDeferred(p4, p5, p6, p7) --[[ line: 31 ]]
 	end
 end
 
-function t.with(p8) --[[ line: 38 ]]
+function t.with(p8)
 	-- upvalues: var6 (write), rbxAnalyticsService (ref)
 	var6 = p8 or rbxAnalyticsService
 end
 
-function t.FireRccAnalyticsWithEventName(p9, p10) --[[ line: 42 ]]
+function t.FireRccAnalyticsWithEventName(p9, p10)
 	-- upvalues: setRbxEventStream (ref)
 	setRbxEventStream("rcc", "experienceChat", p9, p10)
 end
 
-function t.FireClientAnalyticsWithEventName(p11, p12) --[[ line: 46 ]]
+function t.FireClientAnalyticsWithEventName(p11, p12)
 	-- upvalues: setRbxEventStream (ref)
 	setRbxEventStream("client", "experienceChat", p11, p12)
 end
 
-function t.reportCounter(p13, p14) --[[ line: 50 ]]
+function t.reportCounter(p13, p14)
 	-- upvalues: var6 (write), var4 (ref)
 	if var6 then
 		var4:debug("Counter: {}", p13)
@@ -62,19 +62,19 @@ t.ExpChatChatEnabledUserCountFetchConfig = {
 	lastUpdated = { 2026, 7, 22 }
 }
 
-function t.reportChatEnabledUserCountFetchResult(p15) --[[ line: 65 ]]
+function t.reportChatEnabledUserCountFetchResult(p15)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogCounter(t.ExpChatChatEnabledUserCountFetchConfig, {
 		customFields = { result = if p15 then "success" else "failure" }
 	}, 1)
 end
 
-function t.FireRccAnalyticsDeferred(p16, p17) --[[ line: 73 ]]
+function t.FireRccAnalyticsDeferred(p16, p17)
 	-- upvalues: sendEventDeferred (ref)
 	sendEventDeferred("RCC", "experienceChat", p16, p17)
 end
 
-function t.TelemetryLogEvent(_, p18, p19, p20) --[[ line: 77 ]]
+function t.TelemetryLogEvent(_, p18, p19, p20)
 	-- upvalues: telemetryService (ref)
 	telemetryService:LogEvent(p18, { customFields = p19, standardizedFields = p20 })
 end
@@ -86,7 +86,7 @@ t.DefaultStandardizedFields = {
 	"addPlaceId"
 }
 
-function t.reportTextChatCommandClientSent(p21, p22) --[[ line: 83 ]]
+function t.reportTextChatCommandClientSent(p21, p22)
 	-- upvalues: textChatService (ref)
 	textChatService:SendTextChatCommandClientSent(p22)
 	p21.FireClientAnalyticsWithEventName("CommandSent", { commandName = p22 })

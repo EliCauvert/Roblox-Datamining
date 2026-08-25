@@ -14,9 +14,9 @@ local getFFlagSocialContextToastEventStream = require(parent.SharedFlags).GetFFl
 local vector2 = Vector2.new(48, 48)
 local vector2_1 = Vector2.new(36, 36)
 
-local function _(p0, p1, p2) --[[ line: 34 | named "makeCoPlayFooter" ]]
+local function _(p0, p1, p2)
 	-- upvalues: reactModule (ref), coPlayFooter (ref), colors (ref)
-	return function(p3) --[[ line: 35 ]]
+	return function(p3)
 		-- upvalues: p0 (ref), reactModule (copy), coPlayFooter (copy), p2 (ref), p1 (ref), colors (copy)
 		local offset = p3.Size.X.Offset
 		local var9 = if #p0 == 1 then offset else (offset - -9) / 2
@@ -42,14 +42,14 @@ end
 
 local t = { areUsersActive = true }
 
-return function(p4) --[[ line: 62 | named "ToastWrapper" ]]
+return function(p4)
 	-- upvalues: cryoModule (ref), t (ref), getFFlagSocialContextToastEventStream (ref), reactModule (ref), socialContextToastEventsModule (ref), socialContextToastAnalyticsActionTypesModule (ref), useStyle (ref), getLocalizedStrings (ref), toast (ref), coPlayFooter (ref), colors (ref), vector2 (ref), vector2_1 (ref)
 	local var10 = cryoModule.Dictionary.join(t, p4)
 	local var11 = nil
 	
 	if getFFlagSocialContextToastEventStream() then
 		local analyticsProps = var10.analyticsProps
-		var11 = reactModule.useCallback(function() --[[ line: 68 ]]
+		var11 = reactModule.useCallback(function()
 			-- upvalues: var10 (ref), socialContextToastEventsModule (copy), analyticsProps (ref), socialContextToastAnalyticsActionTypesModule (copy)
 			socialContextToastEventsModule(analyticsProps.eventIngest, {
 				toastType = analyticsProps.toastType,
@@ -64,7 +64,7 @@ return function(p4) --[[ line: 62 | named "ToastWrapper" ]]
 		if getFFlagSocialContextToastEventStream() then
 			var10.onActivated = var11
 		else
-			function var10.onActivated() --[[ line: 89 ]] end
+			function var10.onActivated() end
 		end
 	end
 	local var12 = useStyle()
@@ -74,7 +74,7 @@ return function(p4) --[[ line: 62 | named "ToastWrapper" ]]
 	local t_1 = { duration = 6 }
 	local t_2 = {}
 	local areUsersActive = var10.areUsersActive
-	t_2.iconImage = if userIdList then function(p5) --[[ line: 35 ]]
+	t_2.iconImage = if userIdList then function(p5)
 		-- upvalues: userIdList (ref), reactModule (copy), coPlayFooter (copy), areUsersActive (ref), var12 (ref), colors (copy)
 		local offset = p5.Size.X.Offset
 		local var9 = if #userIdList == 1 then offset else (offset - -9) / 2

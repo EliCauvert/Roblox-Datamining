@@ -12,15 +12,15 @@ local eventNamesModule = require(parent.Analytics.EventNames)
 local onToggleActivationModule = require(parent.Utils.onToggleActivation)
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), onToggleActivationModule (ref), eventNamesModule (ref), segmentedControl (ref)
 	local var7 = useAnalyticsModule()
 	local var8 = useDispatch()
-	local var9 = useSelector(function(p1) --[[ line: 29 ]]
+	local var9 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	local var10 = useSelector(function(p2) --[[ line: 33 ]]
+	local var10 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].IsActive
 	end)
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 25 ]]
 	}, {
 		Control = reactModule.createElement(segmentedControl, {
 			height = p0.height,
-			onTabActivated = reactModule.useCallback(function(p3) --[[ line: 42 ]]
+			onTabActivated = reactModule.useCallback(function(p3)
 				-- upvalues: onToggleActivationModule (copy), var10 (ref), var7 (ref), var8 (ref), eventNamesModule (copy)
 				onToggleActivationModule(var10, p3, var7.fireEvent, var8, eventNamesModule.CapturesActivatedInGameMenu, eventNamesModule.CapturesDeactivatedInGameMenu)
 			end, { var10 }),

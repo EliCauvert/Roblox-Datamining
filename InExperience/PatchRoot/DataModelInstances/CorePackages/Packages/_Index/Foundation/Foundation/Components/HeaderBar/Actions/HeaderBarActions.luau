@@ -10,11 +10,11 @@ local constantsModule = require(foundation.Components.HeaderBar.constants)
 local useHeaderBarContextModule = require(foundation.Components.HeaderBar.useHeaderBarContext)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return reactModule.memo(function(p0) --[[ line: 28 | named "HeaderBarActions" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useHeaderBarContextModule (ref), useTokensModule (ref), reactModule (ref), headerBarSlotModule (ref), constantsModule (ref), iconButtonModule (ref), viewModule (ref)
 	local var8 = useHeaderBarContextModule()
 	local var9 = useTokensModule()
-	local var10, var11 = reactModule.useMemo(function() --[[ line: 32 ]]
+	local var10, var11 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), headerBarSlotModule (copy), constantsModule (copy), var9 (ref)
 		if var8.slot == headerBarSlotModule.Leading then
 			return constantsModule.LEADING_ACTIONS_LAYOUT_ORDER, { left = UDim.new(0, -var9.Size.Size_200) }

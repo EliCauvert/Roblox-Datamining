@@ -16,9 +16,9 @@ menuHeader.validateProps = tModule.strictInterface({
 	height = tModule.numberPositive
 })
 
-function menuHeader.render(p0) --[[ line: 38 ]]
+function menuHeader.render(p0)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), circle17 (ref), rect (ref), imageUnavailable (ref)
-	return withStyle(function(p1) --[[ line: 39 ]]
+	return withStyle(function(p1)
 		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17 (copy), rect (copy), imageUnavailable (copy), p0 (ref)
 		local theme = p1.Theme
 		local font = p1.Font
@@ -97,6 +97,6 @@ function menuHeader.render(p0) --[[ line: 38 ]]
 	end)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2) --[[ line: 138 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p2)
 	return { gameName = p2.gameInfo.name }
 end, nil)(menuHeader)

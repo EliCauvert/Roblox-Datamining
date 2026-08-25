@@ -31,7 +31,7 @@ local t = {
 	variant = alertVariantModule.Standard
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | named "SystemBanner" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), breakpointModule (ref), alertActionsModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
 	local var23 = withDefaultsModule(p0, t)
 	local var24 = useTokensModule()
@@ -39,7 +39,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | 
 	local var26, var27 = reactModule.useState(nil)
 	local var28 = reactUtilsModule.useComposedRef(p1, var27)
 	local var29 = useBreakpointModule(var26) == breakpointModule.XSmall
-	local var30 = reactModule.useMemo(function() --[[ line: 69 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), alertActionsModule (copy), var23 (ref), var29 (ref), var24 (ref)
 		return reactModule.createElement(alertActionsModule, {
 			LayoutOrder = 3,
@@ -62,7 +62,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | 
 		},
 		ref = var28
 	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 84 ]]
+		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 			-- upvalues: var25 (ref)
 			return { colorNamespace = var25.container.colorNamespace }
 		end, { var25.container.colorNamespace }) else nil else { colorNamespace = var25.container.colorNamespace }

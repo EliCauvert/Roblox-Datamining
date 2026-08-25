@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableCreatorEarlyAccessBannerInShop", false)
 
-return function() --[[ line: 8 ]]
+return function()
 	return game:GetFastFlag("EnableCreatorEarlyAccessBannerInShop")
 end

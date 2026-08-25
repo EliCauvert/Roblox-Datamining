@@ -13,7 +13,7 @@ local hoverContextModule = require(parent.Components.InlineLayout.InlineLayoutEl
 local view = foundationModule.View
 local fFlagDebugInlineLayout = game:DefineFastFlag("FFlagDebugInlineLayout", false)
 
-local function layoutElements(p0, p1) --[[ line: 34 ]]
+local function layoutElements(p0, p1)
 	-- upvalues: hardBreakElementModule (ref), fFlagDebugInlineLayout (ref), map (ref), reactModule (ref), view (ref)
 	if #p0 == 0 then
 		return {}
@@ -26,7 +26,7 @@ local function layoutElements(p0, p1) --[[ line: 34 ]]
 	local var11 = 0
 	local _ = nil
 	
-	local function _() --[[ line: 47 | named "flushRow" ]]
+	local function _()
 		-- upvalues: t (ref), t_1 (write), var8 (write), p1 (ref)
 		table.insert(t, t_1)
 		t_1 = {}
@@ -79,7 +79,7 @@ local function layoutElements(p0, p1) --[[ line: 34 ]]
 	if #t_1 > 0 then
 		table.insert(t, t_1)
 	end
-	return map(t, function(p2, p3) --[[ line: 112 ]]
+	return map(t, function(p2, p3)
 		-- upvalues: reactModule (copy), view (copy)
 		return reactModule.createElement(view, {
 			tag = "auto-xy row align-x-left",
@@ -89,12 +89,12 @@ local function layoutElements(p0, p1) --[[ line: 34 ]]
 	end)
 end
 
-return function(p4) --[[ line: 121 | named "InlineLayout" ]]
+return function(p4)
 	-- upvalues: useRef (ref), foundationModule (ref), useState (ref), useCallback (ref), layoutElements (ref), useEffect (ref), reactModule (ref), hoverContextModule (ref), view (ref)
 	local var19 = useRef(nil)
 	local var20 = foundationModule.Hooks.useTokens()
 	local var21, var22 = useState({})
-	local var23 = useCallback(function() --[[ line: 126 ]]
+	local var23 = useCallback(function()
 		-- upvalues: var19 (ref), var22 (ref), layoutElements (copy), p4 (ref)
 		if var19.current == nil then return end
 		if var19.current.AbsoluteSize.X == 0 then

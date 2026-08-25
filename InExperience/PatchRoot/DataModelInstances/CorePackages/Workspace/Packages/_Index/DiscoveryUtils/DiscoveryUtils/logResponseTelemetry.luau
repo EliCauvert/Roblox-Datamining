@@ -8,7 +8,7 @@ local t = {
 	lastUpdated = { 24, 8, 2 }
 }
 
-return function(value, p0, p1) --[[ line: 23 | named "logResponseTelemetry" ]]
+return function(value, p0, p1)
 	-- upvalues: default (ref), t (ref)
 	if p1 == nil then
 		p1 = default

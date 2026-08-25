@@ -24,7 +24,7 @@ local t_1 = {
 	SortOrder = Enum.SortOrder.LayoutOrder
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "Grid" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useResponsiveModule (ref), reactModule (ref), useBreakpointModule (ref), getGridMetricsModule (ref), breakpointModule (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), gridStyleSheetModule (ref)
 	local var12 = withDefaultsModule(p0, t_1)
 	local var13 = useResponsiveModule()

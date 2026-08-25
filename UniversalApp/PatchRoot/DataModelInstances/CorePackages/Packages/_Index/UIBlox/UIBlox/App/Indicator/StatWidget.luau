@@ -18,7 +18,7 @@ local t = {
 	iconSize = getIconSizeModule(iconSizeModule.Large)
 }
 
-return function(p0) --[[ line: 65 | named "StatWidget" ]]
+return function(p0)
 	-- upvalues: useStyleModule (ref), cryoModule (ref), t (ref), reactModule (ref), label (ref), genericTextLabelModule (ref)
 	local var8 = useStyleModule()
 	local var9 = cryoModule.Dictionary.join(t, p0.styleProps or {})

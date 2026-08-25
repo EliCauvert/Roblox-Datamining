@@ -13,13 +13,13 @@
 }
 local name = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
 
-local function _(p0) --[[ line: 21 | named "clearConnection" ]]
+local function _(p0)
 	if p0 then
 		p0:Disconnect()
 	end
 end
 
-function t.getAnyActiveDefaultChatTriggeredEmoteTrack(p1) --[[ line: 30 ]]
+function t.getAnyActiveDefaultChatTriggeredEmoteTrack(p1)
 	-- upvalues: t (ref)
 	if not p1.Character then
 		return nil
@@ -42,13 +42,13 @@ function t.getAnyActiveDefaultChatTriggeredEmoteTrack(p1) --[[ line: 30 ]]
 	return nil
 end
 
-local function waitForEmoteEventInternal(p2, p3, p4, p5) --[[ line: 63 ]]
+local function waitForEmoteEventInternal(p2, p3, p4, p5)
 	-- upvalues: name (ref), t (ref), waitForEmoteEventInternal (ref)
 	local bindableEvent = Instance.new("BindableEvent")
 	local processTime = os.clock()
 	local var7 = true
 	
-	local _ = function() --[[ line: 72 ]]
+	local _ = function()
 		-- upvalues: var7 (write), bindableEvent (ref)
 		if var7 and bindableEvent then
 			var7 = false
@@ -56,7 +56,7 @@ local function waitForEmoteEventInternal(p2, p3, p4, p5) --[[ line: 63 ]]
 		end
 	end
 	
-	local stoppedConnection = p3.Stopped:Connect(function() --[[ line: 80 ]]
+	local stoppedConnection = p3.Stopped:Connect(function()
 		-- upvalues: name (copy), var7 (write), bindableEvent (ref)
 		name:trace("EmoteHelper.waitForEmoteEventInternal: Stopped")
 		
@@ -65,7 +65,7 @@ local function waitForEmoteEventInternal(p2, p3, p4, p5) --[[ line: 63 ]]
 			bindableEvent:Fire()
 		end
 	end)
-	local keyframeReachedConnection = p3.KeyframeReached:Connect(function(p6) --[[ line: 90 ]]
+	local keyframeReachedConnection = p3.KeyframeReached:Connect(function(p6)
 		-- upvalues: p3 (ref), p4 (ref), name (copy), var7 (write), bindableEvent (ref), processTime (write)
 		if p6 == "End" and (not p3.Looped or p4) then
 			name:trace("EmoteHelper.waitForEmoteEventInternal: KeyframeReached")
@@ -80,7 +80,7 @@ local function waitForEmoteEventInternal(p2, p3, p4, p5) --[[ line: 63 ]]
 			processTime = os.clock()
 		end
 	end)
-	task.spawn(function() --[[ line: 101 ]]
+	task.spawn(function()
 		-- upvalues: processTime (write), var7 (write), t (copy), name (copy), bindableEvent (ref)
 		local var11 = os.clock() - processTime
 		while var7 and var11 < t.EMOTE_LOOP_WAIT_TIMEOUT do
@@ -119,10 +119,10 @@ local function waitForEmoteEventInternal(p2, p3, p4, p5) --[[ line: 63 ]]
 	end
 end
 
-function t.createEmoteFinishEvent(p7, p8, p9) --[[ line: 139 ]]
+function t.createEmoteFinishEvent(p7, p8, p9)
 	-- upvalues: waitForEmoteEventInternal (ref)
 	local bindableEvent = Instance.new("BindableEvent")
-	task.spawn(waitForEmoteEventInternal, p7, p8, p9, function() --[[ line: 144 ]]
+	task.spawn(waitForEmoteEventInternal, p7, p8, p9, function()
 		-- upvalues: bindableEvent (ref)
 		bindableEvent:Fire()
 		bindableEvent:Destroy()

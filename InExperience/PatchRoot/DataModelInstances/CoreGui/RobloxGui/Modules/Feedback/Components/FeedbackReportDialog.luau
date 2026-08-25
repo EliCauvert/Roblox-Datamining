@@ -36,7 +36,7 @@ feedbackReportDialog.validateProps = tModule.strictInterface({
 	reportCategory = tModule.optional(tModule.string)
 })
 
-function feedbackReportDialog.init(p0) --[[ line: 70 ]]
+function feedbackReportDialog.init(p0)
 	-- upvalues: enableFeedbackSelectionUpdate (ref), experienceStateCaptureService (ref), constantsModule (ref), getFFlagEnableSendImageFeedbackToBackendModule (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
 	if enableFeedbackSelectionUpdate then
 		p0.state = {
@@ -62,11 +62,11 @@ function feedbackReportDialog.init(p0) --[[ line: 70 ]]
 			feedbackImageUri = ""
 		}
 	end
-	function p0.calculateFieldHeight(p1, p2, p3) --[[ line: 97 ]]
+	function p0.calculateFieldHeight(p1, p2, p3)
 		return if p1 < 180 and p3 then p2 * 5 else p2 * (p1 / 45 + 2)
 	end
 	
-	function p0.resetLocalState() --[[ line: 106 ]]
+	function p0.resetLocalState()
 		-- upvalues: enableFeedbackSelectionUpdate (copy), p0 (ref), experienceStateCaptureService (copy)
 		if enableFeedbackSelectionUpdate then
 			p0:setState({ isGenericSelection = false })
@@ -84,7 +84,7 @@ function feedbackReportDialog.init(p0) --[[ line: 70 ]]
 		experienceStateCaptureService:ResetHighlight()
 	end
 	
-	function p0.setInstanceRelatedReportDialogState(p4) --[[ line: 127 ]]
+	function p0.setInstanceRelatedReportDialogState(p4)
 		-- upvalues: p0 (ref), enableFeedbackSelectionUpdate (copy)
 		if p4:IsA("TextBox") then
 			p0:setState({
@@ -160,24 +160,24 @@ function feedbackReportDialog.init(p0) --[[ line: 70 ]]
 		end
 	end
 	
-	experienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p5) --[[ line: 195 ]]
+	experienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p5)
 		-- upvalues: p0 (ref), constantsModule (copy)
 		p0.resetLocalState()
 		p0.setInstanceRelatedReportDialogState(p5)
 		p0.props.setFeedbackFlowState(constantsModule.State.CurrentlyLeavingFeedback)
 	end)
 	
-	function p0.onCorrectTranslationTextChanged(p6) --[[ line: 202 ]]
+	function p0.onCorrectTranslationTextChanged(p6)
 		-- upvalues: p0 (ref)
 		p0:setState({ correctTranslationText = p6 })
 	end
 	
-	function p0.onAdditionalCommentsTextChanged(p7) --[[ line: 208 ]]
+	function p0.onAdditionalCommentsTextChanged(p7)
 		-- upvalues: p0 (ref)
 		p0:setState({ additionalCommentsText = p7 })
 	end
 	
-	function p0.onSubmitFeedback() --[[ line: 214 ]]
+	function p0.onSubmitFeedback()
 		-- upvalues: p0 (ref), constantsModule (copy), getFFlagEnableSendImageFeedbackToBackendModule (copy)
 		p0:setState({
 			numFeedbackSubmissionAttempts = p0.state.numFeedbackSubmissionAttempts + 1
@@ -204,7 +204,7 @@ function feedbackReportDialog.init(p0) --[[ line: 70 ]]
 		p0.resetLocalState()
 	end
 	
-	function p0.onCancel() --[[ line: 253 ]]
+	function p0.onCancel()
 		-- upvalues: p0 (ref), constantsModule (copy)
 		p0.props.setFeedbackFlowState(constantsModule.State.Default)
 		p0.resetLocalState()
@@ -212,16 +212,16 @@ function feedbackReportDialog.init(p0) --[[ line: 70 ]]
 	
 	if fFlagTopBarSignalizeScreenSize then
 		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p0.disposeScreenSize = signalsModule.createEffect(function(p8) --[[ line: 261 ]]
+		p0.disposeScreenSize = signalsModule.createEffect(function(p8)
 			-- upvalues: p0 (ref), getViewportSize (ref)
 			p0:setState({ screenSize = getViewportSize(p8) })
 		end)
 	end
 end
 
-function feedbackReportDialog.renderContents(p9, p10) --[[ line: 269 ]]
+function feedbackReportDialog.renderContents(p9, p10)
 	-- upvalues: withStyle (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref), reactUtilsModule (ref), roactModule (ref), styledTextLabel (ref), themedTextLabelModule (ref), enableFeedbackSelectionUpdate (ref), textEntryFieldModule (ref), radioButtonList (ref)
-	return withStyle(function(p11) --[[ line: 270 ]]
+	return withStyle(function(p11)
 		-- upvalues: p9 (ref), p10 (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), reactUtilsModule (copy), roactModule (copy), styledTextLabel (copy), themedTextLabelModule (copy), enableFeedbackSelectionUpdate (copy), textEntryFieldModule (copy), radioButtonList (copy)
 		local t
 		local theme = p11.Theme
@@ -361,7 +361,7 @@ function feedbackReportDialog.renderContents(p9, p10) --[[ line: 269 ]]
 			}, {
 				RadioButtonList = roactModule.createElement(radioButtonList, {
 					radioButtons = list,
-					onActivated = function(p12) --[[ line: 457 ]]
+					onActivated = function(p12)
 						-- upvalues: p9 (copy)
 						p9.props.setFeedbackReason(p12)
 					end,
@@ -396,7 +396,7 @@ function feedbackReportDialog.renderContents(p9, p10) --[[ line: 269 ]]
 	end)
 end
 
-function feedbackReportDialog.render(p13) --[[ line: 492 ]]
+function feedbackReportDialog.render(p13)
 	-- upvalues: getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref), withLocalization (ref), roactModule (ref), modalDialogModule (ref), constantsModule (ref), fFlagTopBarSignalizeScreenSize (ref), verticalScrollView (ref), buttonStack (ref), buttonType (ref)
 	local t = {
 		mainHeader = "CoreScripts.Feedback.FeedbackReportDialog.MainHeader",
@@ -425,7 +425,7 @@ function feedbackReportDialog.render(p13) --[[ line: 492 ]]
 			SourceLanguage = p13.props.sourceLanguageName
 		}
 	end
-	return withLocalization(t)(function(p14) --[[ line: 521 ]]
+	return withLocalization(t)(function(p14)
 		-- upvalues: roactModule (copy), modalDialogModule (copy), p13 (ref), constantsModule (copy), fFlagTopBarSignalizeScreenSize (copy), verticalScrollView (copy), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), buttonStack (copy), buttonType (copy)
 		local var35
 		local createElement = roactModule.createElement
@@ -475,21 +475,21 @@ function feedbackReportDialog.render(p13) --[[ line: 492 ]]
 	end)
 end
 
-function feedbackReportDialog.didMount(p15) --[[ line: 588 ]]
+function feedbackReportDialog.didMount(p15)
 	-- upvalues: getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref)
 	if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and p15.props.sourceLanguageName == "" then
 		p15.props.getSourceLanguageName()
 	end
 end
 
-function feedbackReportDialog.willUnmount(p16) --[[ line: 595 ]]
+function feedbackReportDialog.willUnmount(p16)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
 	if fFlagTopBarSignalizeScreenSize then
 		p16.disposeScreenSize()
 	end
 end
 
-return roactRoduxModule.connect(function(p17) --[[ line: 602 ]]
+return roactRoduxModule.connect(function(p17)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref)
 	return {
 		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p17.displayOptions.screenSize,
@@ -497,28 +497,28 @@ return roactRoduxModule.connect(function(p17) --[[ line: 602 ]]
 		feedbackReason = p17.feedbackFlowState.feedbackReason,
 		sourceLanguageName = if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then p17.common.sourceLanguageName else nil
 	}
-end, function(p18) --[[ line: 611 ]]
+end, function(p18)
 	-- upvalues: sendFeedbackThunkModule (ref), setFeedbackFlowStateModule (ref), setFeedbackReasonModule (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref), getSourceLanguageThunkModule (ref)
 	return {
-		sendFeedback = function(p19, p20, p21, p22, p23, p24, p25, p26) --[[ line: 613 ]]
+		sendFeedback = function(p19, p20, p21, p22, p23, p24, p25, p26)
 			-- upvalues: p18 (ref), sendFeedbackThunkModule (copy)
 			p18(sendFeedbackThunkModule(p19, p20, p21, p22, p23, p24, p25, p26))
 		end,
-		setFeedbackFlowState = function(value) --[[ line: 636 ]]
+		setFeedbackFlowState = function(value)
 			-- upvalues: p18 (ref), setFeedbackFlowStateModule (copy)
-			p18(function(p27) --[[ line: 637 ]]
+			p18(function(p27)
 				-- upvalues: setFeedbackFlowStateModule (copy), value (ref)
 				p27:dispatch(setFeedbackFlowStateModule(value))
 			end)
 		end,
-		setFeedbackReason = function(value) --[[ line: 641 ]]
+		setFeedbackReason = function(value)
 			-- upvalues: p18 (ref), setFeedbackReasonModule (copy)
-			p18(function(p28) --[[ line: 642 ]]
+			p18(function(p28)
 				-- upvalues: setFeedbackReasonModule (copy), value (ref)
 				p28:dispatch(setFeedbackReasonModule(value))
 			end)
 		end,
-		getSourceLanguageName = function() --[[ line: 646 ]]
+		getSourceLanguageName = function()
 			-- upvalues: getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), p18 (ref), getSourceLanguageThunkModule (copy)
 			if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
 				p18(getSourceLanguageThunkModule())

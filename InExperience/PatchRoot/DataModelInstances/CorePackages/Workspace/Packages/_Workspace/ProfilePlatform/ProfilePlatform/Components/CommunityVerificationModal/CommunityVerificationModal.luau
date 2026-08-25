@@ -23,7 +23,7 @@ local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePl
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
 local getAvailableCommunityComponentsModule = require(profilePlatform.Hooks.getAvailableCommunityComponents)
 
-return function() --[[ line: 31 ]]
+return function()
 	-- upvalues: useStyle (ref), useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), useScreenSize (ref), useLocalization (ref), textKeysModule (ref), useNavigationProps (ref), reactModule (ref), appPage (ref), urlBuilder (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), enumsModule (ref), interactiveAlert (ref), styledTextLabel (ref), buttonType (ref)
 	local var10 = useStyle()
 	local var11 = useDispatch()
@@ -40,7 +40,7 @@ return function() --[[ line: 31 ]]
 		contentTextMedium = textKeysModule.ContentTextMedium,
 		contentTextLow = textKeysModule.ContentTextLow
 	})
-	local var16 = useNavigationProps(function(_, p0) --[[ line: 50 ]]
+	local var16 = useNavigationProps(function(_, p0)
 		return { disabledReason = p0.disabledReason }
 	end)
 	local t = {
@@ -52,7 +52,7 @@ return function() --[[ line: 31 ]]
 	return reactModule.createElement(interactiveAlert, {
 		title = var15.verificationRequired,
 		screenSize = var14,
-		middleContent = function() --[[ line: 94 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), styledTextLabel (copy), t (ref), var16 (ref), var10 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -74,7 +74,7 @@ return function() --[[ line: 31 ]]
 				{
 					buttonType = buttonType.Secondary,
 					props = {
-						onActivated = reactModule.useCallback(function() --[[ line: 80 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: var12 (ref)
 							var12.goBack()
 						end, { var12 }),
@@ -84,14 +84,14 @@ return function() --[[ line: 31 ]]
 				{
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = reactModule.useCallback(function() --[[ line: 56 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: appPage (copy), urlBuilder (copy), var15 (ref), var12 (ref), var11 (ref), getProfilePlatformModule (copy), profileType (ref), profileId (ref), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var6 (copy), navigateDown (copy)
 							local t = {
 								name = appPage.GenericWebPage,
 								detail = urlBuilder.static.settings.account(),
 								extraProps = {
 									title = var15.verificationRequired,
-									onClose = function() --[[ line: 62 ]]
+									onClose = function()
 										-- upvalues: var12 (copy), var11 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 										var12.goBack()
 										var11(getProfilePlatformModule.API({

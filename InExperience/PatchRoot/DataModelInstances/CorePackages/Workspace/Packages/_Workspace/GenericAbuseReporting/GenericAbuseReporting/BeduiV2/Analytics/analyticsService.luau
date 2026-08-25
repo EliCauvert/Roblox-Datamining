@@ -35,7 +35,7 @@ local t = {
 local t_1 = { Footer = "footer", NextAction = "next_action" }
 local t_2 = { Flow = "flow", SceneSelection = "sceneSelection" }
 
-local function formatHttpErrorMessageForAnalytics(p0, p1) --[[ line: 85 ]]
+local function formatHttpErrorMessageForAnalytics(p0, p1)
 	-- upvalues: dashModule (ref)
 	local t = {}
 	
@@ -58,7 +58,7 @@ local function formatHttpErrorMessageForAnalytics(p0, p1) --[[ line: 85 ]]
 	return p0 .. " " .. table.concat(t, " ")
 end
 
-local function _(p2) --[[ line: 131 | named "isArray" ]]
+local function _(p2)
 	local var13 = 0
 	
 	for i in p2 do
@@ -67,7 +67,7 @@ local function _(p2) --[[ line: 131 | named "isArray" ]]
 	return var13 == #p2 and var13 > 0
 end
 
-local function flattenForTelemetry(p3) --[[ line: 144 ]]
+local function flattenForTelemetry(p3)
 	local t = {}
 	
 	for i, v in p3 do
@@ -105,12 +105,12 @@ local t_3 = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportV2ThrottleHundredthsPercent", 0)
 }
 
-local _ = function() --[[ line: 186 | named "getCoreScriptVersion" ]]
+local _ = function()
 	-- upvalues: runService (ref)
 	if not game:GetEngineFeature("CoreScriptVersionEnabled") then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 191 ]]
+	local ok, status = pcall(function()
 		-- upvalues: runService (copy)
 		return runService:GetCoreScriptVersion()
 	end)
@@ -121,7 +121,7 @@ end
 if not fFlagAbuseReportClientVersionModule then
 	var11 = nil
 elseif game:GetEngineFeature("CoreScriptVersionEnabled") then
-	local ok, status = pcall(function() --[[ line: 191 ]]
+	local ok, status = pcall(function()
 		-- upvalues: runService (ref)
 		return runService:GetCoreScriptVersion()
 	end)
@@ -130,7 +130,7 @@ else
 	var11 = nil
 end
 return {
-	sendAnalyticsEvent = function(p4, p5) --[[ line: 200 ]]
+	sendAnalyticsEvent = function(p4, p5)
 		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var11 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
 		local t = {
 			user_id = if localPlayer then localPlayer.UserId else nil

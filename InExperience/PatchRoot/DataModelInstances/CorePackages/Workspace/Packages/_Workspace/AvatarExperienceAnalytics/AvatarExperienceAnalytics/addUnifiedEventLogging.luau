@@ -10,7 +10,7 @@ local t = {
 	boolean = true
 }
 
-return function(p0, p1, p2) --[[ line: 25 ]]
+return function(p0, p1, p2)
 	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), t (ref)
 	if not p0.current then return end
 	collectionService:AddTag(p0.current, unifiedEventLogConstantsModule.TAG_NAME)

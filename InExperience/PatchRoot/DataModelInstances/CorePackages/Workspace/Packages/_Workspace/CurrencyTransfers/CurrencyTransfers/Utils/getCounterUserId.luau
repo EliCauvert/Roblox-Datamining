@@ -2,7 +2,7 @@
 local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
 local _ = require(currencyTransfers.Stores.createTransferStore)
 
-return function(p0, p1) --[[ line: 10 | named "getCounterUserId" ]]
+return function(p0, p1)
 	-- upvalues: transferDirectionModule (ref)
 	if p1 == transferDirectionModule.Send then
 		local recipient = p0.getRecipient(false)

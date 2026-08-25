@@ -11,13 +11,13 @@ local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
 local teamEntryViewModule = require(parent.Components.PresentationCommon.TeamEntryView)
 local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return reactModule.memo(function(p0) --[[ line: 44 | named "TeamEntryContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLeaderboardStore (ref), signalsReactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), fFlagPlayerListFixLeaderstatsStacking (ref), reactModule (ref), teamEntryViewModule (ref)
 	local gameStatsList = useLeaderboardStore().getGameStatsList()
 	local stats = p0.teamData.stats
 	
 	return reactModule.createElement(teamEntryViewModule, {
-		teamName = signalsReactModule.useSignalBinding(function(p1) --[[ line: 50 ]]
+		teamName = signalsReactModule.useSignalBinding(function(p1)
 			-- upvalues: gameTranslatorModule (copy), coreGuiService (copy), p0 (ref)
 			return gameTranslatorModule:TranslateGameText(coreGuiService, p0.teamData.name(p1))
 		end),

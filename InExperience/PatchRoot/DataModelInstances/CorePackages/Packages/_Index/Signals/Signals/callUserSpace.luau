@@ -1,4 +1,4 @@
-﻿local function handleNoYieldValidation(p0, p1, ...) --[[ line: 3 ]]
+﻿local function handleNoYieldValidation(p0, p1, ...)
 	if not p1 then
 		local var1 = ...
 		
@@ -14,11 +14,11 @@
 	return ...
 end
 
-return if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p3, ...) --[[ line: 20 | named "callWithValidation" ]]
+return if _G.__SIGNALS_VALIDATION_ENABLED__ or _G.__DEV__ then function(p3, ...)
 	-- upvalues: handleNoYieldValidation (ref)
 	local thread = coroutine.create(p3)
 	
 	return handleNoYieldValidation(thread, coroutine.resume(thread, ...))
-end else function(p2, ...) --[[ line: 25 | named "callWithoutValidation" ]]
+end else function(p2, ...)
 	return p2(...)
 end

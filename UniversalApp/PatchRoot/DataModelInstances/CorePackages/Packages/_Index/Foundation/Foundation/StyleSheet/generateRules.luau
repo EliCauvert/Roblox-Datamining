@@ -4,7 +4,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 local formatTokensModule = require(script.Parent.formatTokens)
 
-return function(p0, p1) --[[ line: 11 | named "generateRules" ]]
+return function(p0, p1)
 	-- upvalues: formatTokensModule (ref), dashModule (ref)
 	local var3, var4, var5 = p1(p0, formatTokensModule(p0))
 	

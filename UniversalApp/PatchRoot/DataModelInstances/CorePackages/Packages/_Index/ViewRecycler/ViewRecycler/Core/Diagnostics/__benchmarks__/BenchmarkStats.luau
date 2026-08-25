@@ -1,29 +1,29 @@
-﻿local function _(p0, p1, p2) --[[ line: 49 | named "positiveInteger" ]]
+﻿local function _(p0, p1, p2)
 	p0 = p0 or p1
 	assert(p0 >= 1 and p0 % 1 == 0, `{p2} must be a positive integer`)
 	
 	return p0
 end
 
-local _ = function(p3, p4, p5) --[[ line: 55 | named "nonNegativeInteger" ]]
+local _ = function(p3, p4, p5)
 	p3 = p3 or p4
 	assert(p3 >= 0 and p3 % 1 == 0, `{p5} must be a non-negative integer`)
 	
 	return p3
 end
 
-local _ = function(p6) --[[ line: 61 | named "median" ]]
+local _ = function(p6)
 	local p6Count = #p6
 	local floored = math.floor(p6Count / 2)
 	
 	return if p6Count % 2 == 1 then p6[floored + 1] else (p6[floored] + p6[floored + 1]) / 2
 end
 
-local _ = function(p7, p8) --[[ line: 70 | named "percentile" ]]
+local _ = function(p7, p8)
 	return p7[math.clamp(math.ceil(#p7 * p8), 1, #p7)]
 end
 
-local _ = function(p9) --[[ line: 75 | named "medianConfidenceInterval" ]]
+local _ = function(p9)
 	local p9Count = #p9
 	
 	if p9Count < 2 then
@@ -35,7 +35,7 @@ local _ = function(p9) --[[ line: 75 | named "medianConfidenceInterval" ]]
 	return p9[math.clamp(math.floor(var8 - var9), 1, p9Count)], p9[math.clamp(math.ceil(var8 + var9), 1, p9Count)]
 end
 
-local function bootstrapMedianConfidenceInterval(p10, p11, p12) --[[ line: 87 ]]
+local function bootstrapMedianConfidenceInterval(p10, p11, p12)
 	if #p10 < 2 or p11 == 0 then
 		local var10 = p10[1] or 0
 		
@@ -60,7 +60,7 @@ local function bootstrapMedianConfidenceInterval(p10, p11, p12) --[[ line: 87 ]]
 	return list[math.clamp(math.ceil(#list * 0.025), 1, #list)], list[math.clamp(math.ceil(#list * 0.975), 1, #list)]
 end
 
-local function distribution(p13) --[[ line: 110 ]]
+local function distribution(p13)
 	local cloned = table.clone(p13)
 	table.sort(cloned)
 	local var16 = 0
@@ -88,7 +88,7 @@ local function distribution(p13) --[[ line: 110 ]]
 	return cloned, var17, var19, var22
 end
 
-local function run(p14, p15) --[[ line: 136 ]]
+local function run(p14, p15)
 	-- upvalues: distribution (ref), bootstrapMedianConfidenceInterval (ref)
 	p15 = p15 or {}
 	local sampleCount = p15.sampleCount
@@ -183,7 +183,7 @@ end
 
 return {
 	run = run,
-	measure = function(p16, p17) --[[ line: 213 ]]
+	measure = function(p16, p17)
 		-- upvalues: run (ref)
 		p17 = p17 or {}
 		local targetSampleMs = p17.targetSampleMs or 10
@@ -203,7 +203,7 @@ return {
 			assert(iterationsPerSample_1 >= 1 and iterationsPerSample_1 % 1 == 0, "iterationsPerSample must be a positive integer")
 			iterationsPerSample = iterationsPerSample_1
 		end
-		local var62 = run(function() --[[ line: 231 ]]
+		local var62 = run(function()
 			-- upvalues: clock (ref), iterationsPerSample (write), p16 (ref)
 			local var63 = clock()
 			

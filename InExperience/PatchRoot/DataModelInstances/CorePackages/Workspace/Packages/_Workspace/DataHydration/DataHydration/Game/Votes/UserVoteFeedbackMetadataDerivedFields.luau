@@ -4,7 +4,7 @@ local getFFlagEdpPlayerFeedbackEnabled = require(parent.SharedFlags).GetFFlagEdp
 local _ = require(script.Parent.UserVoteFeedbackMetadataStoreTypes)
 
 return {
-	calculateDerivedField = function(p0, p1, _) --[[ line: 13 ]]
+	calculateDerivedField = function(p0, p1, _)
 		-- upvalues: getFFlagEdpPlayerFeedbackEnabled (ref)
 		return if p0 == "isHidden" then getFFlagEdpPlayerFeedbackEnabled() and p1 and p1.canSubmitReview else nil
 	end

@@ -7,7 +7,7 @@ local UGCValidationMeshIslandMLMinScore = game:DefineFastInt("UGCValidationMeshI
 return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshIslandML),
-	run = function(p0, p1) --[[ line: 19 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationMeshIslandMLMinScore (ref), errorSourceStringsModule (ref)
 		local measureMeshIslandML = p1.aqsSummaryData.Measure_Mesh_Island_ML
 		

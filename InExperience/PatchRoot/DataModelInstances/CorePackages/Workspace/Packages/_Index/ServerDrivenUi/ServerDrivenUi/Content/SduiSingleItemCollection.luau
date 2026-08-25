@@ -20,7 +20,7 @@ local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
 local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSduiEdpStoreImpressionsLogging
 local t = {}
 
-return reactModule.memo(function(p0) --[[ line: 74 | named "SduiSingleItemCollection" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref), t (ref), findAnalyticsField (ref), sduiBuilder (ref), sduiCollectionAnalyticsBuilder (ref), getImpressionsTagModule (ref), impressionsTagUtility (ref), reportUnifiedLoggingImpressions (ref), fFlagSduiEdpStoreImpressionsLogging (ref), sduiParsers (ref), sendGameImpressions (ref), getSduiComponentWrapper (ref), screenSizeImpressionsTracker (ref), waitForPropWrapper (ref)
 	local layoutOrder = p0.layoutOrder
 	local anchorPoint = p0.anchorPoint
@@ -31,11 +31,11 @@ return reactModule.memo(function(p0) --[[ line: 74 | named "SduiSingleItemCollec
 	local children = p0.children
 	local var7 = reactModule.useRef(nil)
 	local var8 = reactModule.useRef({})
-	local var9 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		return var7.current
 	end, { var7 })
-	local var10 = reactModule.useMemo(function() --[[ line: 97 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var9 (ref), cryoModule (copy), t (copy)
 		if p0.componentConfig.__isClientBinding then
 			p0.analyticsContext.getCollectionData = var9
@@ -46,7 +46,7 @@ return reactModule.memo(function(p0) --[[ line: 74 | named "SduiSingleItemCollec
 		p0.analyticsContext,
 		p0.componentConfig.__isClientBinding
 	})
-	var7.current = reactModule.useMemo(function() --[[ line: 117 ]]
+	var7.current = reactModule.useMemo(function()
 		-- upvalues: findAnalyticsField (copy), p0 (ref), t (copy), sduiBuilder (copy), sduiContext (ref), sduiCollectionAnalyticsBuilder (copy)
 		return sduiCollectionAnalyticsBuilder.buildAndValidateCollectionAnalyticsData(sduiContext, p0.analyticsContext.ancestorAnalyticsData, p0.analyticsContext.analyticsData, findAnalyticsField("componentType", p0.analyticsContext.analyticsData or t) or sduiBuilder.getComponentType(p0.componentConfig, sduiContext), 1, 1, nil, `SingleItemCollection_{p0.index}`, p0.startRow)
 	end, {
@@ -58,11 +58,11 @@ return reactModule.memo(function(p0) --[[ line: 74 | named "SduiSingleItemCollec
 	})
 	local var11 = getImpressionsTagModule(p0.index, var7.current, sduiContext, p0.debugName)
 	local var12 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 149 ]]
+	reactModule.useEffect(function()
 		-- upvalues: impressionsTagUtility (copy), var12 (ref), var11 (ref)
 		impressionsTagUtility.AddTag(var12, var11, 1)
 		
-		return function() --[[ line: 152 ]]
+		return function()
 			-- upvalues: impressionsTagUtility (copy), var12 (copy), var11 (copy)
 			impressionsTagUtility.RemoveTag(var12, var11, 1)
 		end
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 74 | named "SduiSingleItemCollec
 			AnchorPoint = anchorPoint,
 			BackgroundTransparency = 1,
 			[reactModule.Tag] = "data-testid=--sdui-single-item-collection"
-		}, reactModule.useMemo(function() --[[ line: 248 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), var10 (ref), findAnalyticsField (copy), t (copy), sduiBuilder (copy), sduiContext (ref), var8 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy)
 			local t_1 = {}
 			
@@ -123,7 +123,7 @@ return reactModule.memo(function(p0) --[[ line: 74 | named "SduiSingleItemCollec
 				pageContext = sduiContext.routeName or sduiContext.appPage,
 				impressionsTag = var11,
 				scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
-				sendImpressions = reactModule.useCallback(function(p1) --[[ line: 159 ]]
+				sendImpressions = reactModule.useCallback(function(p1)
 					-- upvalues: p0 (ref), var7 (ref), reportUnifiedLoggingImpressions (copy), sduiContext (ref), var8 (ref), fFlagSduiEdpStoreImpressionsLogging (copy), var11 (ref), t (copy), cryoModule (copy), sduiParsers (copy), var10 (ref), sendGameImpressions (copy)
 					if p0.item == nil then return end
 					assert(p0.item, "props.item must exist")

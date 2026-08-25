@@ -19,7 +19,7 @@ local t_1 = {
 	[controlStateModule.Pressed] = "IconDefault"
 }
 
-local function getCellStyle(p0, p1, p2) --[[ line: 30 ]]
+local function getCellStyle(p0, p1, p2)
 	-- upvalues: controlStateModule (ref)
 	local var12 = p0[p1] or p0[controlStateModule.Default]
 	local t = {
@@ -33,7 +33,7 @@ local function getCellStyle(p0, p1, p2) --[[ line: 30 ]]
 	return t
 end
 
-local function getIconStyle(p3, p4, p5) --[[ line: 47 ]]
+local function getIconStyle(p3, p4, p5)
 	-- upvalues: controlStateModule (ref)
 	local var14 = p3[p4] or p3[controlStateModule.Default]
 	local t = {
@@ -47,7 +47,7 @@ local function getIconStyle(p3, p4, p5) --[[ line: 47 ]]
 	return t
 end
 
-local function _(p6, p7) --[[ line: 63 | named "getTextStyle" ]]
+local function _(p6, p7)
 	-- upvalues: controlStateModule (ref)
 	local t = { Color = p6.Color, Transparency = p6.Transparency }
 	
@@ -77,21 +77,21 @@ genericSelectionCell.validateProps = tModule.strictInterface({
 })
 genericSelectionCell.defaultProps = { isSelected = false }
 
-function genericSelectionCell.init(p8) --[[ line: 121 ]]
+function genericSelectionCell.init(p8)
 	-- upvalues: controlStateModule (ref)
 	p8.state = { controlState = controlStateModule.Default }
 	
-	function p8.onStateChanged(_, p9) --[[ line: 126 ]]
+	function p8.onStateChanged(_, p9)
 		-- upvalues: p8 (ref)
 		p8:setState({ controlState = p9 })
 	end
 end
 
-function genericSelectionCell.render(p10) --[[ line: 133 ]]
+function genericSelectionCell.render(p10)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getIconStyle (ref), t_1 (ref), getCellStyle (ref), t (ref), roactModule (ref), genericCellModule (ref), imageSetComponentModule (ref)
 	assert(p10.validateProps(p10.props))
 	
-	return withStyleModule(function(p11) --[[ line: 136 ]]
+	return withStyleModule(function(p11)
 		-- upvalues: p10 (ref), controlStateModule (copy), getIconStyle (copy), t_1 (copy), getCellStyle (copy), t (copy), roactModule (copy), genericCellModule (copy), imageSetComponentModule (copy)
 		local font = p11.Font
 		local theme = p11.Theme
@@ -134,7 +134,7 @@ function genericSelectionCell.render(p10) --[[ line: 133 ]]
 			NextSelectionLeft = p10.props.NextSelectionLeft,
 			NextSelectionRight = p10.props.NextSelectionRight,
 			SelectionImageObject = p10.props.SelectionImageObject,
-			renderRightContent = function() --[[ line: 166 ]]
+			renderRightContent = function()
 				-- upvalues: roactModule (copy), p10 (copy), imageSetComponentModule (copy), var18 (ref)
 				return roactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -167,7 +167,7 @@ function genericSelectionCell.render(p10) --[[ line: 133 ]]
 	end)
 end
 
-return roactModule.forwardRef(function(p12, p13) --[[ line: 198 ]]
+return roactModule.forwardRef(function(p12, p13)
 	-- upvalues: roactModule (ref), genericSelectionCell (ref), cryoModule (ref)
 	return roactModule.createElement(genericSelectionCell, cryoModule.Dictionary.join(p12, { controlRef = p13 }))
 end)

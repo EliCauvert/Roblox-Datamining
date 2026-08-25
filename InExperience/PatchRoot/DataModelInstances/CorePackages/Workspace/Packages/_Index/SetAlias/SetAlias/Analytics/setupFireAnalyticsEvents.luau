@@ -4,7 +4,7 @@ local diagActionListModule = require(script.Parent.DiagActionList)
 local eventStreamActionListModule = require(script.Parent.EventStreamActionList)
 local analyticsFactory = socialLuaAnalytics.Analytics.AnalyticsFactory
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: analyticsFactory (ref), eventStreamActionListModule (ref), diagActionListModule (ref), telemetryActionListModule (ref)
 	return analyticsFactory.setUpAnalyticsFactory({
 		eventLists = {

@@ -1,4 +1,4 @@
-﻿local function splitStringWithMarks(p0, p1) --[[ line: 19 ]]
+﻿local function splitStringWithMarks(p0, p1)
 	if type(p0) ~= "string" or type(p1) ~= "table" then
 		return p0, ""
 	end
@@ -12,11 +12,11 @@
 	return p0, ""
 end
 
-local function _(p2) --[[ line: 37 | named "findFileNameFromPath" ]]
+local function _(p2)
 	return if type(p2) == "string" then string.match(p2, "([^.]*)$") else ""
 end
 
-return function(p3, p4) --[[ line: 45 | named "ProcessErrorStack" ]]
+return function(p3, p4)
 	-- upvalues: splitStringWithMarks (ref)
 	local t = {}
 	local t_1 = {}

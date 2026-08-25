@@ -18,7 +18,7 @@ local fillBehaviorModule = require(foundation.Enums.FillBehavior)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local t = { testId = "--foundation-toast" }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | named "Toast" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useCursorModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), useScaledValueModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), textModule (ref)
 	local var16 = withDefaultsModule(p0, t)
 	local var17 = useTokensModule()
@@ -28,7 +28,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 		borderWidth = var17.Stroke.Thicker
 	})
 	local actions = var16.actions
-	local var19 = reactModule.useMemo(function() --[[ line: 54 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: actions (ref), loggerModule (copy), inputSizeModule (copy), fillBehaviorModule (copy), dashModule (copy), reactModule (copy), buttonModule (copy)
 		local t = {}
 		

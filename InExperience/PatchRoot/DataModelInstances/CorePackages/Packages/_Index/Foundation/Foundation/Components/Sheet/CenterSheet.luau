@@ -32,7 +32,7 @@ local t = {
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | named "CenterSheet" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePreferencesModule (ref), useScaledValueModule (ref), DIALOG_SIZES (ref), reactModule (ref), useAnimatedBinding (ref), childrenHasFullBleedModule (ref), otterModule (ref), dashModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), sheetContextModule (ref), elevationOwnerScope (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), reactRobloxModule (ref)
 	local var24 = withDefaultsModule(p0, t)
 	local var25 = useOverlayModule()
@@ -43,7 +43,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 	local var29 = useScaledValueModule(600)
 	local size800 = var26.Size.Size_800
 	local var30, var31 = reactModule.useBinding(var29)
-	local var32 = if var30 then var30:map(function(p2) --[[ line: 67 ]]
+	local var32 = if var30 then var30:map(function(p2)
 		-- upvalues: var24 (ref)
 		if var24.centerSheetHeight then
 			return if var24.centerSheetHeight > 0 and var24.centerSheetHeight <= 1 then p2 * var24.centerSheetHeight elseif var24.centerSheetHeight > 1 then math.min(var24.centerSheetHeight, p2) else nil
@@ -51,13 +51,13 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 	end) else nil
 	local var33, var34 = reactModule.useState(true)
 	local var35 = reactModule.useRef(false)
-	local var36, var37 = useAnimatedBinding(1, function() --[[ line: 82 ]]
+	local var36, var37 = useAnimatedBinding(1, function()
 		-- upvalues: var35 (ref), var24 (ref)
 		if var35.current then
 			var24.onClose()
 		end
 	end)
-	local var38, var39 = useAnimatedBinding(size800, function() --[[ line: 88 ]]
+	local var38, var39 = useAnimatedBinding(size800, function()
 		-- upvalues: var34 (ref)
 		var34(false)
 	end)
@@ -74,7 +74,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 	local var51, var52 = reactModule.useBinding(0)
 	local var53 = reactModule.useRef(nil)
 	local var54, var55 = reactModule.useState(nil)
-	local var56 = reactModule.useMemo(function() --[[ line: 107 ]]
+	local var56 = reactModule.useMemo(function()
 		local frame = Instance.new("Frame")
 		frame.BackgroundTransparency = 1
 		frame.BorderSizePixel = 0
@@ -82,14 +82,14 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 		
 		return frame
 	end, {})
-	reactModule.useEffect(function() --[[ line: 114 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var56 (ref)
-		return function() --[[ line: 115 ]]
+		return function()
 			-- upvalues: var56 (copy)
 			var56:Destroy()
 		end
 	end, {})
-	local var57 = reactModule.useCallback(function(p3) --[[ line: 121 ]]
+	local var57 = reactModule.useCallback(function(p3)
 		-- upvalues: var56 (ref)
 		if p3 then
 			var56.Parent = p3
@@ -98,7 +98,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 		end
 		var56.Parent = nil
 	end, {})
-	reactModule.useEffect(function() --[[ line: 132 ]]
+	reactModule.useEffect(function()
 		-- upvalues: reducedMotion (ref), var39 (ref), otterModule (copy), var37 (ref), var26 (ref)
 		if reducedMotion then
 			var39(otterModule.instant(0))
@@ -112,7 +112,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 		}))
 		var37(otterModule.ease(0, { duration = var26.Time.Time_100 }))
 	end, {})
-	local var58 = reactModule.useCallback(function() --[[ line: 148 ]]
+	local var58 = reactModule.useCallback(function()
 		-- upvalues: var35 (ref), reducedMotion (ref), var39 (ref), otterModule (copy), size800 (ref), var37 (ref), var26 (ref), var34 (ref)
 		if var35.current then return end
 		if reducedMotion then
@@ -130,7 +130,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 		var34(true)
 		var35.current = true
 	end, { size800, reducedMotion })
-	reactModule.useImperativeHandle(var24.sheetRef, function() --[[ line: 169 ]]
+	reactModule.useImperativeHandle(var24.sheetRef, function()
 		-- upvalues: var58 (ref)
 		return { close = var58 }
 	end, {})
@@ -138,17 +138,17 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 	createElement = createElement(viewModule, {
 		ClipsDescendants = true,
 		ZIndex = 2,
-		Size = if var24.centerSheetHeight and var32 then var32:map(function(p4) --[[ line: 211 ]]
+		Size = if var24.centerSheetHeight and var32 then var32:map(function(p4)
 			return if p4 then UDim2.new(1, 0, 0, p4) else nil
 		end) else nil,
 		sizeConstraint = if var24.centerSheetHeight and var30 then {
-			MaxSize = var30:map(function(p5) --[[ line: 217 ]]
+			MaxSize = var30:map(function(p5)
 				return Vector2.new(1e999, p5)
 			end)
 		} else nil,
 		stateLayer = { affordance = stateLayerAffordanceModule.None },
 		onActivated = dashModule.noop,
-		onAbsoluteSizeChanged = function(value) --[[ line: 228 ]]
+		onAbsoluteSizeChanged = function(value)
 			-- upvalues: var52 (ref)
 			var52(value.AbsoluteSize.Y)
 		end,
@@ -163,11 +163,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 	}, {
 		Content = reactModule.createElement(viewModule, {
 			tag = "col items-center size-full-0 auto-y clip",
-			Size = if var24.centerSheetHeight and var32 then var32:map(function(p6) --[[ line: 244 ]]
+			Size = if var24.centerSheetHeight and var32 then var32:map(function(p6)
 				return if p6 then UDim2.new(1, 0, 0, p6) else nil
 			end) else nil
 		}, reactModule.createElement(sheetContextModule.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 176 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: dashModule (copy), var40 (ref), var41 (ref), var32 (ref), var49 (ref), var50 (ref), var42 (ref), var43 (ref), var44 (write), var47 (write), var48 (write), var58 (ref), sheetTypeModule (copy), var24 (ref), var53 (ref), var54 (ref), var55 (ref)
 				return {
 					actionsHeight = 0,
@@ -207,7 +207,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 			variant = if var44 then closeAffordanceVariantModule.OverMedia else closeAffordanceVariantModule.Utility,
 			Position = UDim2.new(1, -var26.Margin.Small, 0, var26.Margin.Small),
 			AnchorPoint = Vector2.new(1, 0),
-			Visible = var42:map(function(p7) --[[ line: 261 ]]
+			Visible = var42:map(function(p7)
 				return not p7
 			end),
 			testId = `{var24.testId}--close-affordance`
@@ -217,7 +217,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 		ZIndex = 1,
 		tag = "anchor-center-left",
 		Image = SHADOW_IMAGE,
-		Size = var51:map(function(p8) --[[ line: 270 ]]
+		Size = var51:map(function(p8)
 			-- upvalues: SHADOW_SIZE (copy)
 			return UDim2.new(1, SHADOW_SIZE * 2, 0, p8 + SHADOW_SIZE * 2)
 		end),
@@ -243,15 +243,15 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 					tag = "col align-y-center anchor-center-center size-full padding-medium",
 					ref = var57,
 					sizeConstraint = { MaxSize = Vector2.new(var28, var29) },
-					Position = var38:map(function(p9) --[[ line: 297 ]]
+					Position = var38:map(function(p9)
 						return UDim2.new(0.5, 0, 0.5, p9)
 					end),
 					testId = `{var24.testId}--center-sheet-container`,
-					GroupTransparency = if var33 then var38:map(function(p10) --[[ line: 303 ]]
+					GroupTransparency = if var33 then var38:map(function(p10)
 						-- upvalues: size800 (ref)
 						return p10 / size800
 					end) else nil,
-					onAbsoluteSizeChanged = if var24.centerSheetHeight and var31 then function(p11) --[[ line: 308 ]]
+					onAbsoluteSizeChanged = if var24.centerSheetHeight and var31 then function(p11)
 						-- upvalues: var26 (ref), var31 (ref), var29 (ref)
 						var31(math.min(p11.AbsoluteSize.Y - var26.Margin.Medium * 2, var29))
 					end else nil
@@ -261,7 +261,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 50 | 
 					Size = UDim2.fromScale(2, 2),
 					Position = UDim2.fromScale(-0.5, -0.5),
 					stateLayer = { affordance = stateLayerAffordanceModule.None },
-					backgroundStyle = var36:map(function(p12) --[[ line: 321 ]]
+					backgroundStyle = var36:map(function(p12)
 						-- upvalues: var26 (ref)
 						return {
 							Color3 = var26.Color.Common.Backdrop.Color3,

@@ -1,5 +1,5 @@
 ﻿local t = {
-	new = function() --[[ line: 17 ]]
+	new = function()
 		return {
 			now = tick(),
 			allTypes = {},
@@ -11,7 +11,7 @@
 			cacheByType = {}
 		}
 	end,
-	observeType = function(p0, p1) --[[ line: 37 ]]
+	observeType = function(p0, p1)
 		if p0.typeSeen[p1] then
 			return nil
 		end
@@ -22,7 +22,7 @@
 	end
 }
 
-local function _(p2) --[[ line: 9 | named "closeAttempt" ]]
+local function _(p2)
 	local attempts = p2.attempts
 	local var1 = attempts and attempts[#attempts]
 	
@@ -31,7 +31,7 @@ local function _(p2) --[[ line: 9 | named "closeAttempt" ]]
 	end
 end
 
-function t.observeTypes(p3, p4) --[[ line: 47 ]]
+function t.observeTypes(p3, p4)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -45,14 +45,14 @@ function t.observeTypes(p3, p4) --[[ line: 47 ]]
 	return t_1
 end
 
-function t.batchesFor(p5, p6) --[[ line: 58 ]]
+function t.batchesFor(p5, p6)
 	if not p5.batchesByType[p6] then
 		p5.batchesByType[p6] = {}
 	end
 	return p5.batchesByType[p6]
 end
 
-function t.registerBatch(p7, p8, p9) --[[ line: 65 ]]
+function t.registerBatch(p7, p8, p9)
 	-- upvalues: t (ref)
 	t.batchesFor(p7, p8)[tostring(p9.batchId)] = {
 		state = "pending",
@@ -63,7 +63,7 @@ function t.registerBatch(p7, p8, p9) --[[ line: 65 ]]
 	}
 end
 
-function t.openSendAttempt(p10, p11, p12) --[[ line: 77 ]]
+function t.openSendAttempt(p10, p11, p12)
 	-- upvalues: t (ref)
 	local var4 = t.batchesFor(p10, p11)
 	local var5 = tostring(p12.batchId)
@@ -81,7 +81,7 @@ function t.openSendAttempt(p10, p11, p12) --[[ line: 77 ]]
 	var6.operationCount = p12.operationCount or 0
 end
 
-function t.settleBatch(value, p13, p14) --[[ line: 93 ]]
+function t.settleBatch(value, p13, p14)
 	local var8 = value.batchesByType[p13]
 	
 	if not var8 then return end
@@ -99,7 +99,7 @@ function t.settleBatch(value, p13, p14) --[[ line: 93 ]]
 	batchId.httpStatus = p14.httpStatus
 end
 
-function t.reclassifyOnRetry(p15, p16, p17) --[[ line: 108 ]]
+function t.reclassifyOnRetry(p15, p16, p17)
 	local var10 = p15.batchesByType[p16]
 	
 	if not var10 then return end
@@ -123,7 +123,7 @@ function t.reclassifyOnRetry(p15, p16, p17) --[[ line: 108 ]]
 	batchId.attemptNumber = p17.attemptNumber
 end
 
-function t.markExhausted(p18, p19, p20) --[[ line: 130 ]]
+function t.markExhausted(p18, p19, p20)
 	local var13 = p18.batchesByType[p19]
 	
 	if not var13 then return end
@@ -141,7 +141,7 @@ function t.markExhausted(p18, p19, p20) --[[ line: 130 ]]
 	end
 end
 
-function t.trackQueueOnCreated(p21, p22, p23) --[[ line: 143 ]]
+function t.trackQueueOnCreated(p21, p22, p23)
 	if p23.maxBatchSize then
 		p21.observedMaxByType[p22] = p23.maxBatchSize
 	end
@@ -160,7 +160,7 @@ function t.trackQueueOnCreated(p21, p22, p23) --[[ line: 143 ]]
 	}
 end
 
-function t.drainQueueOnSent(p24, p25, p26) --[[ line: 162 ]]
+function t.drainQueueOnSent(p24, p25, p26)
 	local var16 = p24.queues[p25]
 	local operationCount = p26.operationCount or (if var16 then #var16.retryOps + #var16.ops else 0)
 	p24.lastBatchSizeByType[p25] = operationCount
@@ -182,7 +182,7 @@ function t.drainQueueOnSent(p24, p25, p26) --[[ line: 162 ]]
 	end
 end
 
-function t.requeueRetryOps(p27, p28, p29) --[[ line: 184 ]]
+function t.requeueRetryOps(p27, p28, p29)
 	local var18 = p27.queues[p28]
 	
 	if not var18 then
@@ -202,7 +202,7 @@ function t.requeueRetryOps(p27, p28, p29) --[[ line: 184 ]]
 	end
 end
 
-function t.clearQueueOnExhausted(p30, p31) --[[ line: 203 ]]
+function t.clearQueueOnExhausted(p30, p31)
 	local var20 = p30.queues[p31]
 	
 	if var20 then
@@ -214,7 +214,7 @@ function t.clearQueueOnExhausted(p30, p31) --[[ line: 203 ]]
 	end
 end
 
-function t.enqueueOperation(p32, p33, p34) --[[ line: 214 ]]
+function t.enqueueOperation(p32, p33, p34)
 	local var21 = p32.queues[p33]
 	
 	if not var21 then
@@ -229,7 +229,7 @@ function t.enqueueOperation(p32, p33, p34) --[[ line: 214 ]]
 	table.insert(var21.ops, p34.message or "?")
 end
 
-function t.recordCacheItemAdded(p35, p36, p37) --[[ line: 224 ]]
+function t.recordCacheItemAdded(p35, p36, p37)
 	local var22 = p35.cacheByType[p36]
 	
 	if not var22 then
@@ -248,7 +248,7 @@ function t.recordCacheItemAdded(p35, p36, p37) --[[ line: 224 ]]
 	end
 end
 
-function t.recordCacheHit(p38, p39, p40) --[[ line: 242 ]]
+function t.recordCacheHit(p38, p39, p40)
 	local var24 = p38.cacheByType[p39]
 	
 	if not var24 then
@@ -272,7 +272,7 @@ function t.recordCacheHit(p38, p39, p40) --[[ line: 242 ]]
 	end
 end
 
-function t.advanceTime(p41) --[[ line: 263 ]]
+function t.advanceTime(p41)
 	p41.now = tick()
 	local var26 = p41.now - 30
 	

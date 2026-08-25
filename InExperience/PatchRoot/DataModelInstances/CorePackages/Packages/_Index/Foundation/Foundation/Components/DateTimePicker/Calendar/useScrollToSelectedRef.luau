@@ -2,10 +2,10 @@
 local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Components.Dropdown)
 
-return function(p0, p1) --[[ line: 13 | named "useScrollToSelectedRef" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref)
 	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function() --[[ line: 15 ]]
+	local var3 = reactModule.useCallback(function()
 		-- upvalues: var2 (ref)
 		if var2.current then
 			for i, v in var2.current do
@@ -14,12 +14,12 @@ return function(p0, p1) --[[ line: 13 | named "useScrollToSelectedRef" ]]
 			var2.current = nil
 		end
 	end, {})
-	local var4 = reactModule.useCallback(function(p2) --[[ line: 24 ]]
+	local var4 = reactModule.useCallback(function(p2)
 		-- upvalues: var3 (ref), p0 (ref), p1 (ref), var2 (ref)
 		var3()
 		
 		if not p2 then return end
-		local function scrollToSelected() --[[ line: 31 ]]
+		local function scrollToSelected()
 			-- upvalues: p0 (copy), p2 (ref), p1 (copy)
 			local p0Count = #p0
 			local y = p2.AbsoluteCanvasSize.Y
@@ -43,7 +43,7 @@ return function(p0, p1) --[[ line: 13 | named "useScrollToSelectedRef" ]]
 		end
 		
 		if not scrollToSelected() then
-			local function onSizeChanged() --[[ line: 52 ]]
+			local function onSizeChanged()
 				-- upvalues: scrollToSelected (ref), var3 (copy)
 				if scrollToSelected() then
 					var3()
@@ -56,7 +56,7 @@ return function(p0, p1) --[[ line: 13 | named "useScrollToSelectedRef" ]]
 			}
 		end
 	end, { p0, p1, var3 })
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref)
 		return var3
 	end, { var3 })

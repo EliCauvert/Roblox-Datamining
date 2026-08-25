@@ -1,7 +1,7 @@
 ﻿local toRectModule = require(script.Parent.toRect)
 local returnValueModule = require(script.Parent.returnValue)
 
-return function(p0, p1) --[[ line: 24 | named "intersect" ]]
+return function(p0, p1)
 	-- upvalues: toRectModule (ref), returnValueModule (ref)
 	local var2 = toRectModule(p0)
 	local var3 = toRectModule(p1)

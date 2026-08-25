@@ -7,7 +7,7 @@ local text = foundationModule.Text
 local image = foundationModule.Image
 local playerVerifiedBadgeModule = require(parent.Components.Presentation.PlayerVerifiedBadge)
 
-return reactModule.memo(function(p0) --[[ line: 13 | named "PlayerContextMenuHeader" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), text (ref), playerVerifiedBadgeModule (ref), view (ref), image (ref)
 	local header = p0.header
 	local t = {

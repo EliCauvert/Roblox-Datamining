@@ -5,7 +5,7 @@ local UIListLayoutModule = require(appChat.Components.Common.UIListLayout)
 local avatarThumbnailModule = require(script.Parent.AvatarThumbnail)
 local circleMaskModule = require(script.Parent.CircleMask)
 
-return function(p0) --[[ line: 26 | named "AvatarGroup" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), frameModule (ref), avatarThumbnailModule (ref), UIListLayoutModule (ref), circleMaskModule (ref)
 	local thumbnailsCount = #p0.thumbnails
 	local var7 = thumbnailsCount / 2

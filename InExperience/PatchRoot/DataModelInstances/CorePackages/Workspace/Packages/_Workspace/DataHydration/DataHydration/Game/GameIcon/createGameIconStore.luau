@@ -11,11 +11,11 @@ local sizeString = gameIconConstantsModule.sizeString
 local fIntGameIconSmallSizePx = gameIconConstantsModule.FIntGameIconSmallSizePx
 local fIntGameIconLargeSizePx = gameIconConstantsModule.FIntGameIconLargeSizePx
 
-local function _(p0) --[[ line: 31 | named "toId" ]]
+local function _(p0)
 	return tostring(p0)
 end
 
-local _ = function(p1) --[[ line: 35 | named "toIds" ]]
+local _ = function(p1)
 	local t = {}
 	
 	for i, v in p1 do
@@ -24,7 +24,7 @@ local _ = function(p1) --[[ line: 35 | named "toIds" ]]
 	return t
 end
 
-local function createResolver(p2) --[[ line: 43 ]]
+local function createResolver(p2)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), dashModule (ref), fetchGameIconsModule (ref)
 	local var9 = createDataCacheModule()
 	
@@ -32,9 +32,9 @@ local function createResolver(p2) --[[ line: 43 ]]
 		queueProcessDelaySec = 0,
 		requestBatchSize = 100,
 		cache = var9,
-		fetchFn = function(p3) --[[ line: 49 ]]
+		fetchFn = function(p3)
 			-- upvalues: dashModule (copy), fetchGameIconsModule (copy), p2 (ref)
-			return fetchGameIconsModule(dashModule.keys(p3), p2):andThen(function(p4) --[[ line: 53 ]]
+			return fetchGameIconsModule(dashModule.keys(p3), p2):andThen(function(p4)
 				-- upvalues: p2 (copy)
 				local t = {}
 				
@@ -55,27 +55,27 @@ local function createResolver(p2) --[[ line: 43 ]]
 	})
 end
 
-return function() --[[ line: 80 | named "createGameIconStore" ]]
+return function()
 	-- upvalues: createResolver (ref), sizeString (ref), fIntGameIconSmallSizePx (ref), fIntGameIconLargeSizePx (ref), gameIconSizeModule (ref)
 	local var12, var13 = createResolver(sizeString(fIntGameIconSmallSizePx))
 	local var14, var15 = createResolver(sizeString(fIntGameIconLargeSizePx))
 	
-	local function _(p5) --[[ line: 84 | named "resolverFor" ]]
+	local function _(p5)
 		-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 		return if p5 == gameIconSizeModule.Large then var15 else var13
 	end
 	
-	local _ = function(p6) --[[ line: 91 | named "cacheFor" ]]
+	local _ = function(p6)
 		-- upvalues: gameIconSizeModule (copy), var14 (ref), var12 (ref)
 		return if p6 == gameIconSizeModule.Large then var14 else var12
 	end
 	
 	return {
-		fetchGameIcon = function(p7, p8) --[[ line: 99 ]]
+		fetchGameIcon = function(p7, p8)
 			-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 			return (if p8 == gameIconSizeModule.Large then var15 else var13).fetchItem(tostring(p7))
 		end,
-		fetchGameIcons = function(p9, p10) --[[ line: 102 ]]
+		fetchGameIcons = function(p9, p10)
 			-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 			local fetchItems = (if p10 == gameIconSizeModule.Large then var15 else var13).fetchItems
 			local t = {}
@@ -85,11 +85,11 @@ return function() --[[ line: 80 | named "createGameIconStore" ]]
 			end
 			return fetchItems(t)
 		end,
-		getGameIcon = function(p11, p12) --[[ line: 105 ]]
+		getGameIcon = function(p11, p12)
 			-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 			return (if p12 == gameIconSizeModule.Large then var15 else var13).getCachedItem(tostring(p11))
 		end,
-		getGameIcons = function(p13, p14) --[[ line: 108 ]]
+		getGameIcons = function(p13, p14)
 			-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 			local getCachedItems = (if p14 == gameIconSizeModule.Large then var15 else var13).getCachedItems
 			local t = {}
@@ -99,11 +99,11 @@ return function() --[[ line: 80 | named "createGameIconStore" ]]
 			end
 			return getCachedItems(t)
 		end,
-		getAndFetchGameIcon = function(p15, p16, p17) --[[ line: 111 ]]
+		getAndFetchGameIcon = function(p15, p16, p17)
 			-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 			return (if p16 == gameIconSizeModule.Large then var15 else var13).getAndFetchItem(tostring(p15), p17)
 		end,
-		getAndFetchGameIcons = function(p18, p19, p20) --[[ line: 114 ]]
+		getAndFetchGameIcons = function(p18, p19, p20)
 			-- upvalues: gameIconSizeModule (copy), var15 (ref), var13 (ref)
 			local getAndFetchItems = (if p19 == gameIconSizeModule.Large then var15 else var13).getAndFetchItems
 			local t = {}
@@ -113,16 +113,16 @@ return function() --[[ line: 80 | named "createGameIconStore" ]]
 			end
 			return getAndFetchItems(t, p20)
 		end,
-		updateGameIcons = function(p21, p22) --[[ line: 118 ]]
+		updateGameIcons = function(p21, p22)
 			-- upvalues: gameIconSizeModule (copy), var14 (ref), var12 (ref)
 			;(if p22 == gameIconSizeModule.Large then var14 else var12).updateItems(p21)
 		end,
-		clear = function() --[[ line: 122 ]]
+		clear = function()
 			-- upvalues: var13 (ref), var15 (ref)
 			var13.clear()
 			var15.clear()
 		end,
-		dispose = function() --[[ line: 126 ]]
+		dispose = function()
 			-- upvalues: var13 (ref), var15 (ref)
 			var13.dispose()
 			var15.dispose()

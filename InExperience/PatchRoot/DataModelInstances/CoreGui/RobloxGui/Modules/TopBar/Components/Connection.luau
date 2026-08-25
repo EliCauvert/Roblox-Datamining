@@ -18,7 +18,7 @@ local openUIConnectorModule = require(script.OpenUIConnector)
 local _ = require(script.LastInputTypeConnector)
 local connection = roactModule.PureComponent:extend("Connection")
 
-function connection.render(_) --[[ line: 26 ]]
+function connection.render(_)
 	-- upvalues: roactModule (ref), fFlagTopBarDeprecateCoreGuiRoduxModule (ref), coreGuiConnectorModule (ref), fFlagTopBarSignalizeMenuOpen (ref), fFlagTopBarDeprecateRespawnRoduxModule (ref), menuConnectorModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), chatConnectorModule (ref), fFlagTopBarSignalizeHealthBar (ref), healthConnectorModule (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), enabledNotifierModule (ref), fFlagTopBarDeprecateMoreMenuRoduxModule (ref), openUIConnectorModule (ref)
 	return roactModule.createFragment({
 		CoreGuiConnector = if fFlagTopBarDeprecateCoreGuiRoduxModule then nil else roactModule.createElement(coreGuiConnectorModule),

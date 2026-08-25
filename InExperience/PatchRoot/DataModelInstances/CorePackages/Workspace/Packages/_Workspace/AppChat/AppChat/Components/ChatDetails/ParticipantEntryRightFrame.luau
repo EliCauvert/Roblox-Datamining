@@ -19,10 +19,10 @@ local t = {
 	shouldShowDots = false,
 	dotsSize = UDim2.new(0, 36, 0, 36),
 	image = images["icons/common/more"],
-	onDotsActivated = function() --[[ line: 42 ]] end
+	onDotsActivated = function() end
 }
 
-function ParticipantEntryRightFrame(p0) --[[ line: 48 ]]
+function ParticipantEntryRightFrame(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), reactModule (ref), labelModule (ref), iconButton (ref), iconName (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), iconSize (ref), buttonVariant (ref), imageSetLabel (ref)
 	local var15
 	local var9 = cryoModule.Dictionary.join(t, p0)

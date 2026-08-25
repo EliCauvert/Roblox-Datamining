@@ -13,28 +13,28 @@ local abuseReportMenuScreenshotReduceMotionWaitFrames = game:DefineFastInt("Abus
 local abuseReportMenuScreenshotWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotWaitFrames", 10)
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 
-local function defaultGetWaitFrames() --[[ line: 62 ]]
+local function defaultGetWaitFrames()
 	-- upvalues: userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
 	return if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames
 end
 
-local function defaultGetWaitTime() --[[ line: 69 ]]
+local function defaultGetWaitTime()
 	-- upvalues: userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
 	return (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames) / 60
 end
 
-local function defaultDeps() --[[ line: 73 ]]
+local function defaultDeps()
 	-- upvalues: screenshotManager (ref), avatarIdentification (ref), adIdentification (ref), runService (ref), defaultGetWaitFrames (ref), defaultGetWaitTime (ref)
 	return {
-		takeScreenshot = function(p0) --[[ line: 75 ]]
+		takeScreenshot = function(p0)
 			-- upvalues: screenshotManager (copy)
 			return screenshotManager:TakeScreenshotWithCallback(p0)
 		end,
-		getVisibleAvatars = function() --[[ line: 78 ]]
+		getVisibleAvatars = function()
 			-- upvalues: avatarIdentification (copy)
 			return avatarIdentification.getVisibleAvatars()
 		end,
-		getVisibleAds = function() --[[ line: 81 ]]
+		getVisibleAds = function()
 			-- upvalues: adIdentification (copy)
 			return adIdentification.getVisibleAds()
 		end,
@@ -44,7 +44,7 @@ local function defaultDeps() --[[ line: 73 ]]
 	}
 end
 
-local function _(p1) --[[ line: 90 | named "runIdentification" ]]
+local function _(p1)
 	local visibleAvatars, visibleAvatars_1 = p1.getVisibleAvatars()
 	local visibleAds, visibleAds_1 = p1.getVisibleAds()
 	
@@ -56,7 +56,7 @@ local function _(p1) --[[ line: 90 | named "runIdentification" ]]
 	}
 end
 
-return function(p2, p3) --[[ line: 101 | named "runScreenshotCaptureSequence" ]]
+return function(p2, p3)
 	-- upvalues: defaultDeps (ref), fFlagIEMTabFocusNav (ref), guiService (ref)
 	p3 = p3 or defaultDeps()
 	local var17 = if fFlagIEMTabFocusNav then guiService.SelectedCoreObject else nil
@@ -65,7 +65,7 @@ return function(p2, p3) --[[ line: 101 | named "runScreenshotCaptureSequence" ]]
 	local processTime = os.clock()
 	local var20 = false
 	local heartbeatConnection = nil
-	heartbeatConnection = p3.runService.Heartbeat:Connect(function() --[[ line: 116 ]]
+	heartbeatConnection = p3.runService.Heartbeat:Connect(function()
 		-- upvalues: var20 (write), var18 (write), p3 (ref), p2 (ref), processTime (ref), heartbeatConnection (write), fFlagIEMTabFocusNav (copy), var17 (write), guiService (copy)
 		if not var20 and var18 >= 1 then
 			var20 = true

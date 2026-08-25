@@ -2,10 +2,10 @@
 local httpService = game:GetService("HttpService")
 local badgesUrlBuilderModule = require(script.Parent.BadgesUrlBuilder)
 
-return function(p0) --[[ line: 10 | named "requestRemoveBadge" ]]
+return function(p0)
 	-- upvalues: badgesUrlBuilderModule (ref), httpRequestModule (ref), httpService (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p1, p2, p3) --[[ line: 14 ]]
+		requestFunction = function(p1, p2, p3)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 		end

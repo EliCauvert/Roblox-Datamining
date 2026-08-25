@@ -18,7 +18,7 @@ local t_1 = {
 }
 local var9 = game:DefineFastInt("LCPostDeformSizeMultiplierGeneralHundredths", 100) / 100
 
-function t.run(p0, p1) --[[ line: 28 ]]
+function t.run(p0, p1)
 	-- upvalues: validationRulesUtilModule (ref), t_1 (ref), var9 (ref), UGCValidationService (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
 	local handle = p1.rootInstance:FindFirstChild("Handle")
 	local handle_1 = p1.renderMeshesData.Handle

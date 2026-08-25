@@ -4,11 +4,11 @@ local _ = require(viewRecycler.Core.Types)
 local keyUtilsModule = require(script.Parent.KeyUtils)
 local translatedDataSourceModule = require(script.Parent.TranslatedDataSource)
 
-return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
+return function(...)
 	-- upvalues: translatedDataSourceModule (ref), keyUtilsModule (ref), dataSourceChangeTypeModule (ref)
 	local list = { ... }
 	
-	local function resolve(p0) --[[ line: 29 ]]
+	local function resolve(p0)
 		-- upvalues: list (ref)
 		for i, v in list do
 			if p0 > v.getItemCount() then
@@ -20,7 +20,7 @@ return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
 		error("DataSource.concat: index out of range")
 	end
 	
-	local var6 = translatedDataSourceModule(function() --[[ line: 21 | named "getItemCount" ]]
+	local var6 = translatedDataSourceModule(function()
 		-- upvalues: list (ref)
 		local var8 = 0
 		
@@ -28,17 +28,17 @@ return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
 			var8 += v.getItemCount()
 		end
 		return var8
-	end, function(p1) --[[ line: 39 ]]
+	end, function(p1)
 		-- upvalues: resolve (ref)
 		local var9, var10 = resolve(p1)
 		
 		return var9.getItem(var10)
-	end, function(p2) --[[ line: 42 ]]
+	end, function(p2)
 		-- upvalues: resolve (ref)
 		local var11, var12 = resolve(p2)
 		
 		return var11.getItemKey(var12)
-	end, function(p3) --[[ line: 45 ]]
+	end, function(p3)
 		-- upvalues: list (ref), keyUtilsModule (copy), dataSourceChangeTypeModule (copy)
 		local t = {}
 		
@@ -50,7 +50,7 @@ return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
 			end
 			t[i] = list_1
 		end
-		local function collectAllKeys() --[[ line: 54 ]]
+		local function collectAllKeys()
 			-- upvalues: t (ref)
 			local t_1 = {}
 			
@@ -62,7 +62,7 @@ return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
 			return t_1
 		end
 		
-		local function _() --[[ line: 63 | named "validateCurrentKeys" ]]
+		local function _()
 			-- upvalues: keyUtilsModule (copy), collectAllKeys (ref)
 			keyUtilsModule.validateUnique(collectAllKeys(), "DataSource.concat")
 		end
@@ -70,7 +70,7 @@ return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
 		local t_1 = {}
 		
 		for i_1, v_1 in list do
-			table.insert(t_1, v_1.subscribe(function(p4) --[[ line: 70 ]]
+			table.insert(t_1, v_1.subscribe(function(p4)
 				-- upvalues: i_1 (ref), t (ref), dataSourceChangeTypeModule (copy), collectAllKeys (ref), keyUtilsModule (copy), p3 (ref)
 				local var18 = 0
 				
@@ -143,7 +143,7 @@ return function(...) --[[ line: 18 | named "createConcatDataSource" ]]
 				})
 			end))
 		end
-		return function() --[[ line: 136 ]]
+		return function()
 			-- upvalues: t_1 (ref)
 			for i, v in t_1 do
 				v()

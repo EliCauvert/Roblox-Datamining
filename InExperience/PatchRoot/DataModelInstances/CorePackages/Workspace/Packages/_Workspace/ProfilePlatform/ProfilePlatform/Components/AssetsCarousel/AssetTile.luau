@@ -11,7 +11,7 @@ local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedF
 local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
 local itemTile = UIBloxModule.Tile.ItemTile
 
-return function(value) --[[ line: 36 | named "AssetTile" ]]
+return function(value)
 	-- upvalues: fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), enumsModule (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), reactModule (ref), itemTile (ref), priceFooterModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref)
 	return reactModule.createElement(itemTile, {
 		useMaxTitleHeight = false,

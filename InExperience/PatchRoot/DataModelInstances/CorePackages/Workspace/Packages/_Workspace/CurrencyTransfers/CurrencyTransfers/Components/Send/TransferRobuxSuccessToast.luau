@@ -13,28 +13,28 @@ local handleTransferCompleteModule = require(currencyTransfers.Actions.Send.hand
 local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ line: 31 | named "TransferRobuxSuccessToast" ]]
+return function(_)
 	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), signalsReactModule (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), transferLocaleFormatModule (ref), handleTransferCompleteModule (ref), snackbar (ref), enums (ref)
 	local var10 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxSuccessToast)
 	local var11 = useTransferStoreModule()
 	local var12 = signalsReactModule.useSignalState(var11.getSelectedAmount)
 	local var13 = if var12 then formatNumberModule(localizationService.RobloxLocaleId, var12) else "0"
-	local var14 = reactModule.useMemo(function() --[[ line: 40 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: transferLocaleFormatModule (copy), var10 (ref), var13 (ref)
 		return transferLocaleFormatModule.substituteAmount(var10.SuccessNotification, tostring(var13))
 	end, { var13, var10.SuccessNotification })
 	local var15 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), handleTransferCompleteModule (copy), var11 (ref)
 		if var15.current then
 			task.cancel(var15.current)
 		end
-		var15.current = task.delay(5, function() --[[ line: 53 ]]
+		var15.current = task.delay(5, function()
 			-- upvalues: handleTransferCompleteModule (copy), var11 (copy)
 			handleTransferCompleteModule(var11)
 		end)
 		
-		return function() --[[ line: 59 ]]
+		return function()
 			-- upvalues: var15 (copy)
 			if var15.current then
 				task.cancel(var15.current)
@@ -54,7 +54,7 @@ return function(_) --[[ line: 31 | named "TransferRobuxSuccessToast" ]]
 		AnchorPoint = Vector2.new(0.5, 0),
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		onClose = function() --[[ line: 81 ]]
+		onClose = function()
 			-- upvalues: handleTransferCompleteModule (copy), var11 (ref)
 			handleTransferCompleteModule(var11)
 		end

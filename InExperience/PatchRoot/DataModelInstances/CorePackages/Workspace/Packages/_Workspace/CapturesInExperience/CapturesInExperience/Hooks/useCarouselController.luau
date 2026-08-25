@@ -22,11 +22,11 @@ local getClosestItemToCenterModule = require(parent.Utils.getClosestItemToCenter
 local fFlagUseMediaPlayerInCarousel = require(parent_1.SharedFlags).FFlagUseMediaPlayerInCarousel
 local t = { dampingRatio = 1, frequency = 4 }
 
-local function _(p0, p1, p2) --[[ line: 75 | named "isWithinEpsilon" ]]
+local function _(p0, p1, p2)
 	return math.abs(p0 - p1) < p2
 end
 
-local function createController(p3, p4, p5) --[[ line: 79 ]]
+local function createController(p3, p4, p5)
 	-- upvalues: otterModule (ref), t (ref), userGameSettingsService (ref), getClosestItemToCenterModule (ref), runService (ref)
 	local var15 = nil
 	local var16 = false
@@ -35,23 +35,23 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 	local var19 = 0
 	local var20 = false
 	
-	local function getWasTouched() --[[ line: 91 ]]
+	local function getWasTouched()
 		-- upvalues: var20 (write)
 		return var20
 	end
 	
-	local function resetTouchState() --[[ line: 95 ]]
+	local function resetTouchState()
 		-- upvalues: var16 (write), var20 (write)
 		var16 = false
 		var20 = false
 	end
 	
-	local function getIsNavigationLocked() --[[ line: 100 ]]
+	local function getIsNavigationLocked()
 		-- upvalues: var18 (write)
 		return var18
 	end
 	
-	local function setIsNavigationLocked(value) --[[ line: 104 ]]
+	local function setIsNavigationLocked(value)
 		-- upvalues: var16 (write), var20 (write), var18 (write)
 		if value == true then
 			var16 = false
@@ -60,7 +60,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 		var18 = value
 	end
 	
-	local function resetMotor(value, p6, p7) --[[ line: 111 ]]
+	local function resetMotor(value, p6, p7)
 		-- upvalues: var17 (write), otterModule (copy), var16 (write), var19 (write), p3 (ref)
 		if var17 then
 			var17:destroy()
@@ -68,7 +68,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 		end
 		local var28 = otterModule.createSingleMotor(value)
 		var17 = var28
-		var28:onStep(function(p8) --[[ line: 123 ]]
+		var28:onStep(function(p8)
 			-- upvalues: var17 (copy), var28 (ref), var16 (copy), var19 (copy), p6 (ref), value (ref), p3 (copy)
 			if var17 ~= var28 then
 				var28:destroy()
@@ -94,7 +94,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 		var28:start()
 	end
 	
-	local function setGoal(value, p9, p10) --[[ line: 156 ]]
+	local function setGoal(value, p9, p10)
 		-- upvalues: var17 (write), var19 (write), otterModule (copy), t (copy)
 		if not var17 then return end
 		assert(var17 ~= nil, "setGoal called before resetMotor")
@@ -112,7 +112,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 		carouselRef = p3,
 		getWasTouched = getWasTouched,
 		getIsNavigationLocked = getIsNavigationLocked,
-		handleDeleteTransition = function(p11, p12, p13, p14, p15, p16) --[[ line: 171 ]]
+		handleDeleteTransition = function(p11, p12, p13, p14, p15, p16)
 			-- upvalues: p3 (ref), p4 (ref), var16 (write), var20 (write), var18 (write), resetMotor (ref), setGoal (ref), userGameSettingsService (copy), otterModule (copy), var17 (write), var19 (write)
 			local current = p3.current
 			local current_1 = p4.current
@@ -127,14 +127,14 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 			var20 = false
 			var18 = true
 			
-			local function handleDeleteNextImageMovement() --[[ line: 194 ]]
+			local function handleDeleteNextImageMovement()
 				-- upvalues: p13 (ref), current_1 (ref), p14 (ref), resetMotor (copy), current (ref), p16 (ref), p11 (ref), var18 (copy), scrollingEnabled (ref), setGoal (copy), p15 (ref), userGameSettingsService (copy)
-				resetMotor(current.CanvasPosition.X, function(p17, p18) --[[ line: 195 | named "onStep" ]]
+				resetMotor(current.CanvasPosition.X, function(p17, p18)
 					-- upvalues: p13 (copy), current_1 (copy), p14 (copy)
 					current_1.Size = UDim2.fromOffset(math.round(p13.X - math.abs(p17 - p18)), p13.Y)
 					
 					return p14 == 1
-				end, function() --[[ line: 205 ]]
+				end, function()
 					-- upvalues: p16 (copy), current_1 (copy), p11 (copy), var18 (copy), current (copy), scrollingEnabled (copy)
 					p16()
 					current_1.Visible = false
@@ -145,24 +145,24 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 				setGoal(p13, p14 - 1, p15 or userGameSettingsService.ReducedMotion)
 			end
 			
-			local function handleDeleteImagesFadeIn() --[[ line: 216 ]]
+			local function handleDeleteImagesFadeIn()
 				-- upvalues: p12 (ref), p14 (ref), resetMotor (copy), current (ref), p16 (ref), current_1 (ref), otterModule (copy), p11 (ref), var18 (copy), scrollingEnabled (ref), p13 (ref), var17 (copy), var19 (copy)
 				if not p12 then return end
 				assert(p12 ~= nil, "setPostDeletionItemBinding should exist")
-				resetMotor(current.CanvasPosition.X, function(_, _) --[[ line: 221 ]]
+				resetMotor(current.CanvasPosition.X, function(_, _)
 					-- upvalues: p14 (copy)
 					return p14 == 1
-				end, function() --[[ line: 225 ]]
+				end, function()
 					-- upvalues: p16 (copy), current_1 (copy), otterModule (copy), p11 (copy), p12 (copy), var18 (copy), current (copy), scrollingEnabled (copy)
 					p16()
 					current_1.Visible = false
 					local var36 = otterModule.createSingleMotor(0)
-					var36:onStep(function(p19) --[[ line: 229 ]]
+					var36:onStep(function(p19)
 						-- upvalues: p11 (copy), p12 (copy)
 						p11(p19)
 						p12(1)
 					end)
-					var36:onComplete(function() --[[ line: 233 ]]
+					var36:onComplete(function()
 						-- upvalues: var18 (copy), current (copy), scrollingEnabled (copy)
 						var18 = false
 						current.ScrollingEnabled = scrollingEnabled
@@ -180,7 +180,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 				end
 			end
 			
-			local function handleDeleteNextImageFadeOut() --[[ line: 243 ]]
+			local function handleDeleteNextImageFadeOut()
 				-- upvalues: p12 (ref), otterModule (copy), handleDeleteImagesFadeIn (ref)
 				if p12 then
 					assert(p12 ~= nil, "setPostDeletionItemBinding should exist")
@@ -206,7 +206,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 			end
 			var33:setGoal(otterModule.spring(0, { frequency = var34 }))
 		end,
-		handleInertialMove = function(p20, p21) --[[ line: 267 ]]
+		handleInertialMove = function(p20, p21)
 			-- upvalues: p3 (ref), var16 (write), getClosestItemToCenterModule (copy), var17 (write), otterModule (copy), var19 (write), t (copy), var15 (write), runService (copy), p5 (ref)
 			local _ = nil
 			local current = p3.current
@@ -228,7 +228,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 					local var41 = otterModule.createSingleMotor(x)
 					var17 = var41
 					local var42 = nil
-					var41:onStep(function(p22) --[[ line: 123 ]]
+					var41:onStep(function(p22)
 						-- upvalues: var17 (copy), var41 (ref), var16 (copy), var19 (copy), var42 (ref), x (ref), p3 (copy)
 						if var17 ~= var41 then
 							var41:destroy()
@@ -260,7 +260,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 				var15:Disconnect()
 				var15 = nil
 			end
-			var15 = runService.RenderStepped:Connect(function(p23) --[[ line: 297 ]]
+			var15 = runService.RenderStepped:Connect(function(p23)
 				-- upvalues: p3 (copy), var16 (copy), var15 (copy), getClosestItemToCenterModule (copy), p20 (ref), var38 (write), p21 (ref), var17 (copy), otterModule (copy), var19 (copy), t (copy), p5 (copy)
 				local current = p3.current
 				
@@ -298,7 +298,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 				local var45 = otterModule.createSingleMotor(x)
 				var17 = var45
 				local var46 = nil
-				var45:onStep(function(p24) --[[ line: 123 ]]
+				var45:onStep(function(p24)
 					-- upvalues: var17 (copy), var45 (ref), var16 (copy), var19 (copy), var46 (ref), x (ref), p3 (copy)
 					if var17 ~= var45 then
 						var45:destroy()
@@ -330,7 +330,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 				end
 			end)
 		end,
-		onInputBegan = function(_, p25) --[[ line: 343 ]]
+		onInputBegan = function(_, p25)
 			-- upvalues: var18 (write), var16 (write), var20 (write)
 			if var18 then return end
 			if p25.UserInputType == Enum.UserInputType.Touch then
@@ -348,7 +348,7 @@ local function createController(p3, p4, p5) --[[ line: 79 ]]
 	return t_1
 end
 
-return function(p26, p27, p28) --[[ line: 372 ]]
+return function(p26, p27, p28)
 	-- upvalues: useAnalyticsModule (ref), useBinding (ref), reactModule (ref), useIsHovered (ref), useIsTouchDown (ref), useLastInput (ref), createController (ref), userGameSettingsService (ref), useEffectOnce (ref), getClosestItemToCenterModule (ref), useEventConnection (ref), userInputService (ref), contextActionService (ref), eventNamesModule (ref), fFlagUseMediaPlayerInCarousel (ref)
 	local var49 = useAnalyticsModule()
 	local var50, var51 = useBinding(1)
@@ -365,7 +365,7 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 	end
 	local current = var61.current
 	assert(current ~= nil, "carouselController should exist")
-	reactModule.useEffect(function() --[[ line: 392 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var54 (ref), userGameSettingsService (copy), current (ref), p26 (ref), p27 (ref)
 		local current_1 = var54.current
 		
@@ -378,22 +378,22 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 			return
 		end
 	end, { p27 })
-	useEffectOnce(function() --[[ line: 410 ]]
+	useEffectOnce(function()
 		-- upvalues: current (ref), p26 (ref), p27 (ref)
 		current.setGoal(p26, p27, true)
 	end, p27 ~= nil)
-	reactModule.useEffect(function() --[[ line: 416 ]]
+	reactModule.useEffect(function()
 		-- upvalues: current (ref), p26 (ref), p27 (ref)
 		current.setGoal(p26, p27, true)
 	end, { p26 })
-	reactModule.useEffect(function() --[[ line: 421 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var58 (ref), current (ref), p26 (ref), p27 (ref)
 		if not var58 and current.getWasTouched() then
 			current.resetTouchState()
 			current.handleInertialMove(p26, p27)
 		end
 	end, { var58 })
-	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p29) --[[ line: 428 ]]
+	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p29)
 		-- upvalues: var54 (ref), current (ref), getClosestItemToCenterModule (copy), p26 (ref), var55 (ref), p28 (ref)
 		local current_1 = var54.current
 		
@@ -411,7 +411,7 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 			p28(var62 + 1)
 		end
 	end, { var55, p26 }))
-	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p30) --[[ line: 449 ]]
+	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p30)
 		-- upvalues: userGameSettingsService (copy), var54 (ref), current (ref), getClosestItemToCenterModule (copy), p26 (ref), p28 (ref)
 		if not userGameSettingsService.ReducedMotion then return end
 		local current_1 = var54.current
@@ -430,9 +430,9 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 			p28(var63 - 1)
 		end
 	end, {}))
-	reactModule.useEffect(function() --[[ line: 473 ]]
+	reactModule.useEffect(function()
 		-- upvalues: contextActionService (copy), var54 (ref), current (ref), var49 (ref), eventNamesModule (copy), getClosestItemToCenterModule (copy), p26 (ref), p28 (ref)
-		contextActionService:BindCoreAction("CapturesCarouselNavigateShortcutAction", function(_, p31, p32) --[[ line: 474 ]]
+		contextActionService:BindCoreAction("CapturesCarouselNavigateShortcutAction", function(_, p31, p32)
 			-- upvalues: var54 (copy), current (copy), var49 (copy), eventNamesModule (copy), getClosestItemToCenterModule (copy), p26 (copy), p28 (copy)
 			local current_1 = var54.current
 			
@@ -454,14 +454,14 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 			end
 		end, false, Enum.KeyCode.Left, Enum.KeyCode.Right)
 		
-		return function() --[[ line: 496 ]]
+		return function()
 			-- upvalues: contextActionService (copy)
 			contextActionService:UnbindCoreAction("CapturesCarouselNavigateShortcutAction")
 		end
 	end, {})
 	
 	return {
-		carouselInputBegan = reactModule.useCallback(function(p33, p34) --[[ line: 501 ]]
+		carouselInputBegan = reactModule.useCallback(function(p33, p34)
 			-- upvalues: current (ref), userGameSettingsService (copy), var56 (ref)
 			if current.getIsNavigationLocked() then return end
 			if userGameSettingsService.ReducedMotion then
@@ -472,7 +472,7 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 			current.onInputBegan(p33, p34)
 			var56(p33, p34)
 		end, { current.onInputBegan, var56 }),
-		carouselInputEnded = reactModule.useCallback(function(p35, p36) --[[ line: 515 ]]
+		carouselInputEnded = reactModule.useCallback(function(p35, p36)
 			-- upvalues: fFlagUseMediaPlayerInCarousel (copy), var60 (ref), current (ref), var57 (ref)
 			if fFlagUseMediaPlayerInCarousel and var60 == "Touch" and not current.getWasTouched() then
 				current.onInputBegan(p35, p36)
@@ -480,7 +480,7 @@ return function(p26, p27, p28) --[[ line: 372 ]]
 			var57(p35, p36)
 		end, { var57 }),
 		carouselRef = var54,
-		deleteSelectedItem = reactModule.useCallback(function(p37) --[[ line: 522 ]]
+		deleteSelectedItem = reactModule.useCallback(function(p37)
 			-- upvalues: current (ref), var51 (ref), var53 (ref), p26 (ref), p27 (ref)
 			current.handleDeleteTransition(var51, var53, p26, p27, false, p37)
 		end, { p26, p27, var51 }),

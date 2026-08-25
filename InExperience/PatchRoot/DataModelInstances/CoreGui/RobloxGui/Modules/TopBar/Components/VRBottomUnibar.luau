@@ -13,11 +13,11 @@ local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreG
 local fFlagTopBarSignalizeKeepOutAreas = coreGuiCommonModule.Flags.FFlagTopBarSignalizeKeepOutAreas
 local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
 
-local function MenuIconWrapper(p0) --[[ line: 27 ]]
+local function MenuIconWrapper(p0)
 	-- upvalues: fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref), useSelector (ref), fFlagTopBarRefactor (ref), reactModule (ref), menuIconModule_1 (ref), menuIconModule (ref)
 	return if fFlagTopBarRefactor then reactModule.createElement(menuIconModule_1, { showBadgeOver12 = p0.showBadgeOver12 }) else reactModule.createElement(menuIconModule, {
 		layout = p0.layout,
-		iconScale = if useSelector(function(p1) --[[ line: 33 ]]
+		iconScale = if useSelector(function(p1)
 			return if p1 and p1.displayOptions then p1.displayOptions.menuOpen else false
 		end) then 1.5 else 1,
 		showBadgeOver12 = p0.showBadgeOver12,
@@ -25,12 +25,12 @@ local function MenuIconWrapper(p0) --[[ line: 27 ]]
 	})
 end
 
-return reactModule.memo(function(p2) --[[ line: 49 | named "VRBottomUnibar" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: panel3DInSpatialUI (ref), reactModule (ref), panelType (ref), fFlagTopBarRefactor (ref), foundationModule (ref), MenuIconWrapper (ref), unibarModule (ref)
 	return if panel3DInSpatialUI then reactModule.createElement(panel3DInSpatialUI, {
 		requireCanvasGroup = true,
 		panelType = panelType.BottomBar,
-		renderFunction = function() --[[ line: 55 ]]
+		renderFunction = function()
 			-- upvalues: reactModule (copy), fFlagTopBarRefactor (copy), foundationModule (copy), MenuIconWrapper (copy), p2 (ref), unibarModule (copy)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -70,8 +70,8 @@ return reactModule.memo(function(p2) --[[ line: 49 | named "VRBottomUnibar" ]]
 				}, {
 					Unibar = reactModule.createElement(unibarModule, {
 						layoutOrder = 1,
-						onAreaChanged = function() --[[ line: 102 ]] end,
-						onMinWidthChanged = function() --[[ line: 103 ]] end
+						onAreaChanged = function() end,
+						onMinWidthChanged = function() end
 					})
 				})
 			})

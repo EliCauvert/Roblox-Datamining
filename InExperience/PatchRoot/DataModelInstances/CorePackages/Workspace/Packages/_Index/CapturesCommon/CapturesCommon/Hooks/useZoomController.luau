@@ -13,7 +13,7 @@ local useRef = reactModule.useRef
 local useState = reactModule.useState
 local t = { dampingRatio = 1, frequency = 4 }
 
-return function(p0) --[[ line: 28 | named "useZoomController" ]]
+return function(p0)
 	-- upvalues: useState (ref), useRef (ref), useCallback (ref), useMotor (ref), useEffect (ref), reactOtterModule (ref), t (ref), isPointWithinBoundsModule (ref), useEventConnection (ref), userInputService (ref)
 	local var6, var7 = useState(false)
 	local var8 = useRef(nil)
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 28 | named "useZoomController" ]]
 		yAnchor = 0.5,
 		xPos = 0.5,
 		yPos = 0.5
-	}, useCallback(function(p1) --[[ line: 35 ]]
+	}, useCallback(function(p1)
 		-- upvalues: var8 (ref)
 		if var8.current then
 			var8.current.AnchorPoint = Vector2.new(p1.xAnchor, p1.yAnchor)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 28 | named "useZoomController" ]]
 			return
 		end
 	end, {}))
-	useEffect(function() --[[ line: 53 ]]
+	useEffect(function()
 		-- upvalues: var8 (ref), p0 (ref), var9 (ref), var10 (ref)
 		if not var8.current then return end
 		if p0 then
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 28 | named "useZoomController" ]]
 		var8.current.Position = UDim2.fromScale(0.5, 0.5)
 		var8.current.Size = UDim2.fromScale(1, 1)
 	end, { p0 })
-	useEventConnection(userInputService.TouchPinch, useCallback(function(p2, p3, _, p4, _) --[[ line: 71 ]]
+	useEventConnection(userInputService.TouchPinch, useCallback(function(p2, p3, _, p4, _)
 		-- upvalues: p0 (ref), var8 (ref), var6 (ref), var11 (ref), reactOtterModule (copy), t (copy), var9 (ref), var10 (ref), var7 (ref), isPointWithinBoundsModule (copy)
 		local absolutePosition
 		if not p0 or not var8.current then return end

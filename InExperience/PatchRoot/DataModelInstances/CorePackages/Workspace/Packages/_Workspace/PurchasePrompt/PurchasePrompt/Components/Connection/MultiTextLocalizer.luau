@@ -5,7 +5,7 @@ local localizationContextConsumerModule = require(script.Parent.LocalizationCont
 local var2 = t.strictInterface({ locKeys = t.table, render = t.callback })
 local var3 = t.strictInterface({ key = t.string, params = t.optional(t.table) })
 
-return function(p0) --[[ line: 20 | named "MultiTextLocalizer" ]]
+return function(p0)
 	-- upvalues: var2 (ref), var3 (ref), roact (ref), localizationContextConsumerModule (ref)
 	assert(var2(p0))
 	
@@ -15,7 +15,7 @@ return function(p0) --[[ line: 20 | named "MultiTextLocalizer" ]]
 	local render = p0.render
 	
 	return roact.createElement(localizationContextConsumerModule, {
-		render = function(p1) --[[ line: 29 ]]
+		render = function(p1)
 			-- upvalues: p0 (ref), render (ref)
 			local t = {}
 			

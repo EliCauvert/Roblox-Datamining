@@ -17,7 +17,7 @@ local widgetsProviderModule = require(parent.StudioWidgets.WidgetsProvider)
 local elevationProvider = require(parent.Elevation.ElevationProvider).ElevationProvider
 local isPluginElevatedModule = require(parent.Plugin.isPluginElevated)
 
-return function(p0) --[[ line: 35 | named "FoundationProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), pluginProviderModule (ref), elevationProvider (ref), preferencesProviderModule (ref), styleProviderModule (ref), flagsModule (ref), responsiveProviderModule (ref), overlayModule (ref), cursorModule (ref), isPluginElevatedModule (ref), widgetsProviderModule (ref), panelsProviderModule (ref), contextStack (ref)
 	local var11 = if p0.preferences then p0.preferences else {}
 	local list = {

@@ -11,7 +11,7 @@ local context = expChatSharedModule.context
 local globalCommands = expChatSharedModule.GlobalCommands
 local var6 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: context (ref), var6 (ref), globalCommands (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
 	if not context.translator then
 		var6:warning("context.translator is nil, cannot execute command")

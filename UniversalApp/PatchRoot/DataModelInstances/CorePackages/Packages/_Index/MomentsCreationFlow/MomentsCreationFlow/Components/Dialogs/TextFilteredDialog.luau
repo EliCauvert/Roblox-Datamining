@@ -6,7 +6,7 @@ local dialog = foundationModule.Dialog
 local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), creationFlowContextModule (ref), dialog (ref), foundationModule (ref), creationFlowLocalizationModule (ref)
 	local var5 = reactModule.useContext(creationFlowContextModule)
 	

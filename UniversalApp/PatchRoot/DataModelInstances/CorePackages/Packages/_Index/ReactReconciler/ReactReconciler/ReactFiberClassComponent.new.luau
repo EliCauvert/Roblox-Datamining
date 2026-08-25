@@ -84,7 +84,7 @@ if dEV then
 	t_8 = {}
 	local t_9 = {}
 	
-	warnOnInvalidCallback = function(p0, p1) --[[ line: 140 | named "warnOnInvalidCallback" ]]
+	warnOnInvalidCallback = function(p0, p1)
 		-- upvalues: t_9 (ref), console (ref)
 		if p0 == nil or type(p0) == "function" then return end
 		local text = p1 .. "_" .. tostring(p0)
@@ -95,9 +95,9 @@ if dEV then
 		end
 	end
 	
-	warnOnUndefinedDerivedState = function(_, _) --[[ line: 156 | named "warnOnUndefinedDerivedState" ]] end
+	warnOnUndefinedDerivedState = function(_, _) end
 end
-local function applyDerivedStateFromProps(p2, p3, p4, p5) --[[ line: 199 ]]
+local function applyDerivedStateFromProps(p2, p3, p4, p5)
 	-- upvalues: dEV (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), warnOnUndefinedDerivedState (write), object (ref), noLanes (ref)
 	local memoizedState = p2.memoizedState
 	
@@ -125,7 +125,7 @@ end
 
 local var22 = nil
 
-local function initializeClassComponentUpdater() --[[ line: 247 ]]
+local function initializeClassComponentUpdater()
 	-- upvalues: var22 (write), isMounted (ref), get (ref), createUpdate (ref), dEV (ref), warnOnInvalidCallback (write), enqueueUpdate (ref), enableDebugTracing (ref), debugTracingMode (ref), getComponentName (ref), logStateUpdateScheduled (ref), enableSchedulingProfiler (ref), markStateUpdateScheduled (ref), replaceState (ref), forceUpdate (ref), logForceUpdateScheduled (ref), markForceUpdateScheduled (ref)
 	local unknownModule = require(script.Parent["ReactFiberWorkLoop.new"])
 	local requestEventTime = unknownModule.requestEventTime
@@ -133,7 +133,7 @@ local function initializeClassComponentUpdater() --[[ line: 247 ]]
 	local scheduleUpdateOnFiber = unknownModule.scheduleUpdateOnFiber
 	var22 = {
 		isMounted = isMounted,
-		enqueueSetState = function(value, p6, p7) --[[ line: 255 ]]
+		enqueueSetState = function(value, p6, p7)
 			-- upvalues: get (copy), requestEventTime (ref), requestUpdateLane (ref), createUpdate (copy), dEV (copy), warnOnInvalidCallback (copy), enqueueUpdate (copy), scheduleUpdateOnFiber (ref), enableDebugTracing (copy), debugTracingMode (copy), getComponentName (copy), logStateUpdateScheduled (copy), enableSchedulingProfiler (copy), markStateUpdateScheduled (copy)
 			local var33 = get(value)
 			local var34 = requestEventTime()
@@ -153,7 +153,7 @@ local function initializeClassComponentUpdater() --[[ line: 247 ]]
 				markStateUpdateScheduled(var33, var35)
 			end
 		end,
-		enqueueReplaceState = function(p8, p9, p10) --[[ line: 285 ]]
+		enqueueReplaceState = function(p8, p9, p10)
 			-- upvalues: get (copy), requestEventTime (ref), requestUpdateLane (ref), createUpdate (copy), replaceState (copy), dEV (copy), warnOnInvalidCallback (copy), enqueueUpdate (copy), scheduleUpdateOnFiber (ref), enableDebugTracing (copy), debugTracingMode (copy), getComponentName (copy), logStateUpdateScheduled (copy), enableSchedulingProfiler (copy), markStateUpdateScheduled (copy)
 			local var37 = get(p8)
 			local var38 = requestEventTime()
@@ -174,7 +174,7 @@ local function initializeClassComponentUpdater() --[[ line: 247 ]]
 				markStateUpdateScheduled(var37, var39)
 			end
 		end,
-		enqueueForceUpdate = function(p11, p12) --[[ line: 317 ]]
+		enqueueForceUpdate = function(p11, p12)
 			-- upvalues: get (copy), requestEventTime (ref), requestUpdateLane (ref), createUpdate (copy), forceUpdate (copy), dEV (copy), warnOnInvalidCallback (copy), enqueueUpdate (copy), scheduleUpdateOnFiber (ref), enableDebugTracing (copy), debugTracingMode (copy), getComponentName (copy), logForceUpdateScheduled (copy), enableSchedulingProfiler (copy), markForceUpdateScheduled (copy)
 			local var41 = get(p11)
 			local var42 = requestEventTime()
@@ -198,7 +198,7 @@ local function initializeClassComponentUpdater() --[[ line: 247 ]]
 	}
 end
 
-local function _() --[[ line: 351 | named "getClassComponentUpdater" ]]
+local function _()
 	-- upvalues: var22 (write), initializeClassComponentUpdater (ref)
 	if var22 == nil then
 		initializeClassComponentUpdater()
@@ -206,7 +206,7 @@ local function _() --[[ line: 351 | named "getClassComponentUpdater" ]]
 	return var22
 end
 
-function checkShouldComponentUpdate(p13, p14, p15, p16, p17, p18, p19) --[[ line: 358 ]]
+function checkShouldComponentUpdate(p13, p14, p15, p16, p17, p18, p19)
 	-- upvalues: dEV (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), console (ref), getComponentName (ref), shallowEqual (ref)
 	local stateNode = p13.stateNode
 	
@@ -229,7 +229,7 @@ function checkShouldComponentUpdate(p13, p14, p15, p16, p17, p18, p19) --[[ line
 	return var45
 end
 
-local function checkClassInstance(p20, p21, p22) --[[ line: 423 ]]
+local function checkClassInstance(p20, p21, p22)
 	-- upvalues: dEV (ref), getComponentName (ref), console (ref), disableLegacyContext (ref), t_7 (write), t_3 (write)
 	local stateNode = p20.stateNode
 	
@@ -308,7 +308,7 @@ local function checkClassInstance(p20, p21, p22) --[[ line: 423 ]]
 	end
 end
 
-local function adoptClassInstance(p23, p24) --[[ line: 657 ]]
+local function adoptClassInstance(p23, p24)
 	-- upvalues: var22 (write), initializeClassComponentUpdater (ref), set (ref), dEV (ref), t (ref)
 	if var22 == nil then
 		initializeClassComponentUpdater()
@@ -322,7 +322,7 @@ local function adoptClassInstance(p23, p24) --[[ line: 657 ]]
 	end
 end
 
-local function constructClassInstance(p25, p26, p27) --[[ line: 668 ]]
+local function constructClassInstance(p25, p26, p27)
 	-- upvalues: emptyContextObject (ref), dEV (ref), REACT_CONTEXT_TYPE (ref), t_8 (write), REACT_PROVIDER_TYPE (ref), console (ref), getComponentName (ref), readContext (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), debugRenderPhaseSideEffectsForStrictMode (ref), strictMode (ref), disableLogs (ref), describeError (ref), reenableLogs (ref), var22 (write), initializeClassComponentUpdater (ref), set (ref), t (ref), uninitializedState (ref), t_2 (write), t_4 (write), cacheContext (ref)
 	local var47 = false
 	local var48 = emptyContextObject
@@ -433,7 +433,7 @@ local function constructClassInstance(p25, p26, p27) --[[ line: 668 ]]
 	return var51
 end
 
-local function callComponentWillMount(p28, p29) --[[ line: 881 ]]
+local function callComponentWillMount(p28, p29)
 	-- upvalues: dEV (ref), console (ref), getComponentName (ref), var22 (write), initializeClassComponentUpdater (ref)
 	local state = p29.state
 	
@@ -454,7 +454,7 @@ local function callComponentWillMount(p28, p29) --[[ line: 881 ]]
 	end
 end
 
-function callComponentWillReceiveProps(p30, p31, p32, p33) --[[ line: 913 ]]
+function callComponentWillReceiveProps(p30, p31, p32, p33)
 	-- upvalues: dEV (ref), getComponentName (ref), t_1 (write), console (ref), var22 (write), initializeClassComponentUpdater (ref)
 	local state = p31.state
 	
@@ -480,7 +480,7 @@ function callComponentWillReceiveProps(p30, p31, p32, p33) --[[ line: 913 ]]
 	end
 end
 
-local function mountClassInstance(p34, p35, p36, p37) --[[ line: 948 ]]
+local function mountClassInstance(p34, p35, p36, p37)
 	-- upvalues: dEV (ref), checkClassInstance (ref), refs (ref), initializeUpdateQueue (ref), readContext (ref), disableLegacyContext (ref), emptyContextObject (ref), getUnmaskedContext (ref), getMaskedContext (ref), getComponentName (ref), t_6 (write), console (ref), strictMode (ref), unknownModule_1 (ref), warnAboutDeprecatedLifecycles (ref), processUpdateQueue (ref), applyDerivedStateFromProps (ref), callComponentWillMount (ref), enableDoubleInvokingEffects (ref), mountLayoutDev (ref), update (ref)
 	if dEV then
 		checkClassInstance(p34, p35, p36)
@@ -539,7 +539,7 @@ local function mountClassInstance(p34, p35, p36, p37) --[[ line: 948 ]]
 	end
 end
 
-function resumeMountClassInstance(p38, p39, p40, p41) --[[ line: 1059 ]]
+function resumeMountClassInstance(p38, p39, p40, p41)
 	-- upvalues: emptyContextObject (ref), readContext (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), resetHasForceUpdateBeforeProcessing (ref), processUpdateQueue (ref), hasContextChanged (ref), checkHasForceUpdateAfterProcessing (ref), dEV (ref), enableDoubleInvokingEffects (ref), mountLayoutDev (ref), update (ref), applyDerivedStateFromProps (ref)
 	local stateNode = p38.stateNode
 	local memoizedProps = p38.memoizedProps
@@ -617,7 +617,7 @@ return {
 	constructClassInstance = constructClassInstance,
 	mountClassInstance = mountClassInstance,
 	resumeMountClassInstance = resumeMountClassInstance,
-	updateClassInstance = function(p42, p43, p44, p45, p46) --[[ line: 1207 ]]
+	updateClassInstance = function(p42, p43, p44, p45, p46)
 		-- upvalues: cloneUpdateQueue (ref), resolveDefaultProps (ref), emptyContextObject (ref), readContext (ref), disableLegacyContext (ref), getUnmaskedContext (ref), getMaskedContext (ref), resetHasForceUpdateBeforeProcessing (ref), processUpdateQueue (ref), hasContextChanged (ref), checkHasForceUpdateAfterProcessing (ref), update (ref), snapshot (ref), applyDerivedStateFromProps (ref)
 		local stateNode = p43.stateNode
 		cloneUpdateQueue(p42, p43)

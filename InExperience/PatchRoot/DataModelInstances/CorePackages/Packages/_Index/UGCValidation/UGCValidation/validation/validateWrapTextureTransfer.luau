@@ -7,14 +7,14 @@ local _ = require(parent.util.Types)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
 
-local function validateReferenceCageMeshContent(p0, p1) --[[ line: 17 ]]
+local function validateReferenceCageMeshContent(p0, p1)
 	-- upvalues: getEditableMeshFromContextModule (ref), analyticsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref)
 	local referenceCageMeshContent = p0.ReferenceCageMeshContent
 	local var7 = referenceCageMeshContent.Uri ~= nil and referenceCageMeshContent.Uri ~= ""
 	local var8, var9 = getEditableMeshFromContextModule(p0, "ReferenceCageMeshContent", p1)
 	
 	if var8 then
-		local var11, var12 = pcallDeferredModule(function() --[[ line: 41 ]]
+		local var11, var12 = pcallDeferredModule(function()
 			-- upvalues: UGCValidationService (copy), wrapTargetCageUVReferenceValuesModule (copy), var9 (ref)
 			return UGCValidationService:ValidateEditableMeshUVValuesInReference(wrapTargetCageUVReferenceValuesModule.Head, var9)
 		end, p1)
@@ -53,7 +53,7 @@ local function validateReferenceCageMeshContent(p0, p1) --[[ line: 17 ]]
 	end
 end
 
-return function(p2, p3) --[[ line: 75 | named "validateWrapTextureTransfer" ]]
+return function(p2, p3)
 	-- upvalues: constantsModule (ref), validateReferenceCageMeshContent (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local MAKEUP_INFO = constantsModule.MAKEUP_INFO

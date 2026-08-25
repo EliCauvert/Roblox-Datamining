@@ -12,7 +12,7 @@ local fFlagEnableReportingFlowForDevSubs = sharedFlagsModule.FFlagEnableReportin
 local fFlagEnableReportingFlowForExperienceShop = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop
 local fFlagGenericAbuseReportingUnifyReportTagsModule = require(genericAbuseReporting.Flags.FFlagGenericAbuseReportingUnifyReportTags)
 
-local var7 = function(p0) --[[ line: 39 ]]
+local var7 = function(p0)
 	-- upvalues: fFlagGenericAbuseReportingUnifyReportTagsModule (ref), valueToAbuseCategoryModule (ref), abuseCategoryModule (ref)
 	local t = {
 		ENTRY_POINT = "in-app",
@@ -29,7 +29,7 @@ local var7 = function(p0) --[[ line: 39 ]]
 	return t
 end
 
-local var8 = function(p1) --[[ line: 62 ]]
+local var8 = function(p1)
 	-- upvalues: dashModule (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppEnableReportBadge (ref)
 	local var10 = dashModule.copy(p1.tags)
 	local targetId = p1.targetId
@@ -81,7 +81,7 @@ local var8 = function(p1) --[[ line: 62 ]]
 	return var10
 end
 
-return function(p2) --[[ line: 122 ]]
+return function(p2)
 	-- upvalues: var7 (ref), var8 (ref), dashModule (ref)
 	local var11 = var8({
 		abuseVector = p2.abuseVector,
@@ -92,7 +92,7 @@ return function(p2) --[[ line: 122 ]]
 			localPlayerUserId = p2.localPlayerUserId
 		})
 	})
-	dashModule.forEach(p2.additionalReportTags or {}, function(p3) --[[ line: 136 ]]
+	dashModule.forEach(p2.additionalReportTags or {}, function(p3)
 		-- upvalues: var11 (write)
 		if not p3.tagKey or p3.tagKey == "" or (not p3.tagValue or p3.tagValue == "") then return end
 		if var11[p3.tagKey] == nil then

@@ -9,7 +9,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local QRCodeDisplayModule = require(parent.QRCodeDisplay)
 local ECLevels = QRCodeDisplayModule.ECLevels
 
-return function(p0) --[[ line: 28 | named "QRDeepLinkDialog" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), QRCodeDisplayModule (ref), ECLevels (ref)
 	local var3 = useTokens()
 	

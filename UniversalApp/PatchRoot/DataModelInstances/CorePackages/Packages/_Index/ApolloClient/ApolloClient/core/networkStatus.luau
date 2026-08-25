@@ -8,7 +8,7 @@
 		ready = 7,
 		error = 8
 	},
-	isNetworkRequestInFlight = function(p0) --[[ line: 65 ]]
+	isNetworkRequestInFlight = function(p0)
 		return if p0 then p0 < 7 else false
 	end
 }

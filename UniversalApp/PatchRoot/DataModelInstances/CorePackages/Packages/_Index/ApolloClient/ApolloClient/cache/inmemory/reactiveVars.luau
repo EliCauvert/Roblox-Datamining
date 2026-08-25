@@ -13,7 +13,7 @@ local var3 = slot.new()
 t.cacheSlot = var3
 local var4 = weakMap.new()
 
-local function getCacheInfo(p0) --[[ line: 57 ]]
+local function getCacheInfo(p0)
 	-- upvalues: var4 (ref), set (ref), dep (ref)
 	local var6 = var4:get(p0)
 	
@@ -24,44 +24,44 @@ local function getCacheInfo(p0) --[[ line: 57 ]]
 	return var6
 end
 
-function t.forgetCache(p1) --[[ line: 73 ]]
+function t.forgetCache(p1)
 	-- upvalues: getCacheInfo (ref)
-	getCacheInfo(p1).vars:forEach(function(p2) --[[ line: 74 ]]
+	getCacheInfo(p1).vars:forEach(function(p2)
 		-- upvalues: p1 (ref)
 		return p2:forgetCache(p1)
 	end)
 end
 
-function t.recallCache(p3) --[[ line: 88 ]]
+function t.recallCache(p3)
 	-- upvalues: getCacheInfo (ref)
-	getCacheInfo(p3).vars:forEach(function(p4) --[[ line: 89 ]]
+	getCacheInfo(p3).vars:forEach(function(p4)
 		-- upvalues: p3 (ref)
 		return p4:attachCache(p3)
 	end)
 end
 
-function t.makeVar(p5) --[[ line: 95 ]]
+function t.makeVar(p5)
 	-- upvalues: set (ref), getCacheInfo (ref), broadcast (write), array (ref), var3 (ref)
 	local var7 = set.new()
 	local var8 = set.new()
 	local tbl = nil
 	local var10 = nil
 	tbl = setmetatable({}, {
-		__call = function(_, ...) --[[ line: 104 ]]
+		__call = function(_, ...)
 			-- upvalues: p5 (write), var7 (ref), getCacheInfo (copy), tbl (write), broadcast (copy), array (copy), var8 (ref), var3 (copy), var10 (write)
 			if select("#", ...) >= 1 then
 				local var11 = ({ ... })[1]
 				
 				if p5 ~= var11 then
 					p5 = var11
-					var7:forEach(function(p6) --[[ line: 110 ]]
+					var7:forEach(function(p6)
 						-- upvalues: getCacheInfo (copy), tbl (copy), broadcast (copy)
 						getCacheInfo(p6).dep:dirty(tbl)
 						broadcast(p6)
 					end)
 					local var12 = array.from(var8)
 					var8:clear()
-					array.forEach(var12, function(p7) --[[ line: 122 ]]
+					array.forEach(var12, function(p7)
 						-- upvalues: p5 (copy)
 						p7(p5)
 					end)
@@ -78,17 +78,17 @@ function t.makeVar(p5) --[[ line: 95 ]]
 		end
 	})
 	
-	function tbl.onNextChange(_, p8) --[[ line: 142 ]]
+	function tbl.onNextChange(_, p8)
 		-- upvalues: var8 (ref)
 		var8:add(p8)
 		
-		return function() --[[ line: 144 ]]
+		return function()
 			-- upvalues: var8 (copy), p8 (ref)
 			var8:delete(p8)
 		end
 	end
 	
-	var10 = function(p9) --[[ line: 150 ]]
+	var10 = function(p9)
 		-- upvalues: var7 (ref), getCacheInfo (copy), tbl (write)
 		var7:add(p9)
 		getCacheInfo(p9).vars:add(tbl)
@@ -96,12 +96,12 @@ function t.makeVar(p5) --[[ line: 95 ]]
 		return tbl
 	end
 	
-	function tbl.attachCache(_, p10) --[[ line: 155 ]]
+	function tbl.attachCache(_, p10)
 		-- upvalues: var10 (write)
 		return var10(p10)
 	end
 	
-	function tbl.forgetCache(_, p11) --[[ line: 160 ]]
+	function tbl.forgetCache(_, p11)
 		-- upvalues: var7 (ref)
 		return var7:delete(p11)
 	end
@@ -109,7 +109,7 @@ function t.makeVar(p5) --[[ line: 95 ]]
 	return tbl
 end
 
-broadcast = function(p12) --[[ line: 174 | named "broadcast" ]]
+broadcast = function(p12)
 	if p12.broadcastWatches ~= nil then
 		p12:broadcastWatches()
 	end

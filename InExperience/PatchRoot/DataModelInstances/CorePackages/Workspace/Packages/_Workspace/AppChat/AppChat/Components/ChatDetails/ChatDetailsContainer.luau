@@ -52,15 +52,15 @@ local t = {
 	isGroupOwner = nil,
 	conversationId = nil,
 	conversation = nil,
-	navigateBack = function() --[[ line: 68 ]] end,
-	navigateToEditChatMembers = function() --[[ line: 69 ]] end,
-	navigateToDialog = function() --[[ line: 70 ]] end,
-	navigateToToast = function() --[[ line: 71 ]] end,
-	navigateToConversation = function() --[[ line: 72 ]] end,
-	navigateToChatLanding = function() --[[ line: 73 ]] end
+	navigateBack = function() end,
+	navigateToEditChatMembers = function() end,
+	navigateToDialog = function() end,
+	navigateToToast = function() end,
+	navigateToConversation = function() end,
+	navigateToChatLanding = function() end
 }
 
-return function(p0) --[[ line: 76 ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), useStyle (ref), useLocalization (ref), getFFlagIsSquadEnabled (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), luaAppNavigationContextModule (ref), useDispatch (ref), useState (ref), useNavigation (ref), useIsGroupChatEnabledModule (ref), useIsChatEnabledModule (ref), useEffect (ref), useSelector (ref), getDeepValueModule (ref), conversationModule (ref), appChatNetworkingModule (ref), useUserProfilesFetch (ref), userProfilesCombinedNameAndUsernameByUserIds (ref), useTelemetryModule (ref), chatDetailsTelemetryLayerModule (ref), fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule (ref), selectChatUserEntryModelListModule (ref), getConversationTitleModule (ref), useIsUserPendingModule (ref), conversationChannelsModule (ref), promiseModule (ref), genericDialogTypeModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), chatDetailsTelemetryEventsModule (ref), useCallback (ref), fFlagHideConversationTypeInfoIfNoWebViewModule (ref), useAppPolicy (ref), useChatPlacementContext (ref), isPlacementInExperience (ref), chatConversationTelemetryStateModule (ref), chatDetailsTelemetryStateModule (ref), useEffectOnMount (ref), chatDetailsPageModule (ref), participantDialogContainerModule (ref)
 	local var30 = cryoModule.Dictionary.join(t, p0 or {})
 	local var31 = getFFlagAppChatParticipantDialogFoundationMenuModule()
@@ -106,25 +106,25 @@ return function(p0) --[[ line: 76 ]]
 	local var46 = useNavigation()
 	local var47 = useIsGroupChatEnabledModule()
 	local var48 = useIsChatEnabledModule()
-	useEffect(function() --[[ line: 129 ]]
+	useEffect(function()
 		-- upvalues: var48 (ref), var30 (ref)
 		if not var48 then
 			var30.navigateToChatLanding()
 		end
 	end, { var48, var30.navigateToChatLanding })
-	local var49 = useSelector(function(p1) --[[ line: 135 ]]
+	local var49 = useSelector(function(p1)
 		-- upvalues: getDeepValueModule (copy), var30 (ref), conversationModule (copy)
 		return getDeepValueModule(p1, `ChatAppReducer.Conversations.{var30.conversationId or ""}`) or conversationModule.empty()
 	end)
-	local var50 = useSelector(function(p2) --[[ line: 139 ]]
+	local var50 = useSelector(function(p2)
 		-- upvalues: getDeepValueModule (copy), var30 (ref)
 		return getDeepValueModule(p2, `ChatAppReducer.ParticipantMetadata.{var30.conversationId or ""}`)
 	end)
 	local source = var49 and var49.source
-	useEffect(function() --[[ line: 144 ]]
+	useEffect(function()
 		-- upvalues: source (ref), var35 (ref), appChatNetworkingModule (copy), var30 (ref)
 		if source == "channels" then
-			var35(appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ var30.conversationId })):catch(function() --[[ line: 150 ]]
+			var35(appChatNetworkingModule.rodux.GetConversationsParticipantsMetadata.API({ var30.conversationId })):catch(function()
 				warn("Error in ChatDetailsContainer -> GetConversationsParticipantsMetadata")
 			end)
 			
@@ -145,12 +145,12 @@ return function(p0) --[[ line: 76 ]]
 	local var59 = nil
 	
 	if var49 then
-		var54 = useSelector(function(p3) --[[ line: 169 ]]
+		var54 = useSelector(function(p3)
 			-- upvalues: fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule (copy), selectChatUserEntryModelListModule (copy), var49 (ref), var52 (ref)
 			return if fFlagAppChatAlwaysDisplayUserCardsInChatDetailsModule then selectChatUserEntryModelListModule(p3, var49.participants, if var52 and var52.data then var52.data.userProfiles else nil) elseif var52.data then selectChatUserEntryModelListModule(p3, var49.participants, var52.data.userProfiles) else {}
 		end)
 		var56 = var49.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
-		var55 = useSelector(function(p4) --[[ line: 189 ]]
+		var55 = useSelector(function(p4)
 			-- upvalues: var56 (write), var49 (ref)
 			return var56 and var49.initiator == p4.LocalUserId
 		end)
@@ -175,9 +175,9 @@ return function(p0) --[[ line: 76 ]]
 	if var49.isDefaultTitle then
 		titleNotSetText = var33.titleNotSetText
 	end
-	local _ = function(p5) --[[ line: 216 ]]
+	local _ = function(p5)
 		-- upvalues: promiseModule (copy)
-		return promiseModule.new(function(p6, p7) --[[ line: 217 ]]
+		return promiseModule.new(function(p6, p7)
 			-- upvalues: p5 (ref)
 			if #p5.participants > 5 then
 				p7()
@@ -188,12 +188,12 @@ return function(p0) --[[ line: 76 ]]
 		end)
 	end
 	
-	local var62 = function() --[[ line: 227 ]]
+	local var62 = function()
 		-- upvalues: var30 (ref), genericDialogTypeModule (copy)
 		var30.navigateToDialog(genericDialogTypeModule.EditChatGroupNameDialog, { conversationId = var30.conversationId })
 	end
 	
-	local var63 = function() --[[ line: 232 ]]
+	local var63 = function()
 		-- upvalues: getFFlagAppChatEnableRootedNavigationModule (copy), var46 (ref), var30 (ref), genericDialogTypeModule (copy), var53 (ref), chatDetailsTelemetryEventsModule (copy)
 		var30.navigateToDialog(genericDialogTypeModule.LeaveGroupDialog, {
 			conversationId = var30.conversationId,
@@ -202,7 +202,7 @@ return function(p0) --[[ line: 76 ]]
 		var53.emit(chatDetailsTelemetryEventsModule.ChatDetailsLeaveGroupBtnClicked, {})
 	end
 	
-	local var64 = useCallback(function() --[[ line: 243 ]]
+	local var64 = useCallback(function()
 		-- upvalues: var46 (ref), var34 (ref)
 		if var46 then
 			var34.navigateToUnfilteredThreadsLearnMore(var46.navigate)
@@ -211,11 +211,11 @@ return function(p0) --[[ line: 76 ]]
 		end
 		var34.navigateToUnfilteredThreadsLearnMore()
 	end, { var34, var46 })
-	local var65 = useCallback(function() --[[ line: 251 ]]
+	local var65 = useCallback(function()
 		-- upvalues: var53 (ref), chatDetailsTelemetryEventsModule (copy), var37 (ref), var35 (ref), appChatNetworkingModule (copy), var30 (ref), var33 (ref)
 		var53.emit(chatDetailsTelemetryEventsModule.ChatDetailsCreateUnfilteredChatCellClicked, {})
 		var37(true)
-		var35(appChatNetworkingModule.rodux.DuplicateConversation.API(var30.conversationId, "trusted_comms")):andThen(function(p8) --[[ line: 255 ]]
+		var35(appChatNetworkingModule.rodux.DuplicateConversation.API(var30.conversationId, "trusted_comms")):andThen(function(p8)
 			-- upvalues: var30 (copy), var33 (copy)
 			local responseBody = p8.responseBody
 			local id = responseBody and (responseBody.conversations and (responseBody.conversations[1] and responseBody.conversations[1].id))
@@ -230,14 +230,14 @@ return function(p0) --[[ line: 76 ]]
 					toastContent = { toastTitle = var33.networkErrorToastText }
 				}
 			})
-		end):catch(function() --[[ line: 273 ]]
+		end):catch(function()
 			-- upvalues: var30 (copy), var33 (copy)
 			var30.navigateToToast({
 				toastProps = {
 					toastContent = { toastTitle = var33.networkErrorToastText }
 				}
 			})
-		end):finally(function() --[[ line: 282 ]]
+		end):finally(function()
 			-- upvalues: var37 (copy)
 			var37(false)
 		end)
@@ -246,7 +246,7 @@ return function(p0) --[[ line: 76 ]]
 		var30.conversationId, var60, var55, var53
 	})
 	
-	local var66 = function() --[[ line: 298 ]]
+	local var66 = function()
 		-- upvalues: var39 (write), var41 (write)
 		if var39 and var41 then
 			var39(nil)
@@ -254,7 +254,7 @@ return function(p0) --[[ line: 76 ]]
 		end
 	end
 	
-	local var67 = function(p9, p10) --[[ line: 305 ]]
+	local var67 = function(p9, p10)
 		-- upvalues: var31 (ref), var39 (write), var41 (write), var38 (write), var30 (ref), genericDialogTypeModule (copy), var58 (write), var56 (write), var55 (write)
 		local var77 = tostring(p9)
 		
@@ -279,14 +279,14 @@ return function(p0) --[[ line: 76 ]]
 		end
 	end
 	
-	local var68 = function(p11) --[[ line: 325 ]]
+	local var68 = function(p11)
 		-- upvalues: var30 (ref)
 		var30.navigateToToast({ toastProps = { toastContent = { toastTitle = p11 } } })
 	end
 	
-	local var69 = function(p12) --[[ line: 335 ]]
+	local var69 = function(p12)
 		-- upvalues: var49 (ref), promiseModule (copy), var30 (ref), var68 (ref), var53 (ref), chatDetailsTelemetryEventsModule (copy)
-		promiseModule.new(function(p13, p14) --[[ line: 217 ]]
+		promiseModule.new(function(p13, p14)
 			-- upvalues: var49 (ref)
 			if #var49.participants > 5 then
 				p14()
@@ -294,23 +294,23 @@ return function(p0) --[[ line: 76 ]]
 				return
 			end
 			p13()
-		end):andThen(function() --[[ line: 336 ]]
+		end):andThen(function()
 			-- upvalues: var30 (copy), var49 (copy)
 			var30.navigateToEditChatMembers(var49)
-		end, function() --[[ line: 339 ]]
+		end, function()
 			-- upvalues: var68 (copy), p12 (ref)
 			var68(p12)
 		end)
 		var53.emit(chatDetailsTelemetryEventsModule.ChatDetailsAddFriendsBtnClicked, {})
 	end
 	
-	local var70 = if fFlagHideConversationTypeInfoIfNoWebViewModule then useAppPolicy(function(p15) --[[ line: 348 ]]
+	local var70 = if fFlagHideConversationTypeInfoIfNoWebViewModule then useAppPolicy(function(p15)
 		return p15.getWebViewSupport()
 	end) or isPlacementInExperience(useChatPlacementContext().chatPlacement) else nil
 	local var71 = if var49 then var49.moderationType else cryoModule.None
 	local var72 = if var49 then var49.userPendingStatus else cryoModule.None
 	local var73 = chatConversationTelemetryStateModule.useMergeState()
-	useEffect(function() --[[ line: 359 ]]
+	useEffect(function()
 		-- upvalues: var73 (ref), var30 (ref), var71 (ref), var72 (ref)
 		var73({
 			conversationId = var30.conversationId,
@@ -319,14 +319,14 @@ return function(p0) --[[ line: 76 ]]
 		})
 	end, { var30.conversationId, var71, var72 })
 	local var74 = chatDetailsTelemetryStateModule.useMergeState()
-	useEffect(function() --[[ line: 367 ]]
+	useEffect(function()
 		-- upvalues: var74 (ref), var49 (ref), var55 (write)
 		var74({
 			participantsCount = #var49.participants,
 			isGroupOwner = var55
 		})
 	end, { #var49.participants, var55 })
-	useEffectOnMount(function() --[[ line: 374 ]]
+	useEffectOnMount(function()
 		-- upvalues: var53 (ref), chatDetailsTelemetryEventsModule (copy), var56 (write)
 		var53.emit(chatDetailsTelemetryEventsModule.ScreenRendered, { isGroupConversation = var56 })
 	end)
@@ -337,7 +337,7 @@ return function(p0) --[[ line: 76 ]]
 		onGroupNameEntryCellActivated = var62,
 		onLeaveGroupCellActivated = var63,
 		onParticipantCellActivated = var67,
-		onAddFriendsCellActivated = function() --[[ line: 385 ]]
+		onAddFriendsCellActivated = function()
 			-- upvalues: var69 (ref), var33 (ref)
 			return var69(var33.tooManyPeopleText)
 		end,

@@ -4,7 +4,7 @@ local clientChatModules = chatService:WaitForChild("ClientChatModules")
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstants"))
 local t = nil
-pcall(function() --[[ line: 14 ]]
+pcall(function()
 	-- upvalues: t (write)
 	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -13,7 +13,7 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0) --[[ line: 17 ]]
+	function t.FormatMessageToSend(_, _, p0)
 		return p0
 	end
 end
@@ -25,17 +25,17 @@ local var6 = if chatSettingsModule.DisallowedWhiteSpace then chatSettingsModule.
 	"\f"
 }
 
-local function isMessageValidServer(p1) --[[ line: 27 ]]
+local function isMessageValidServer(p1)
 	-- upvalues: chatSettingsModule (ref)
 	return if chatSettingsModule.MaximumMessageLength * 6 < p1:len() then false elseif utf8.len(p1) == nil then false else chatSettingsModule.MaximumMessageLength >= utf8.len(utf8.nfcnormalize(p1))
 end
 
-local function _(p2) --[[ line: 47 | named "CanUserChat" ]]
+local function _(p2)
 	-- upvalues: runService (ref), chatService (ref)
 	if runService:IsStudio() then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 51 ]]
+	local ok, status = pcall(function()
 		-- upvalues: chatService (copy), p2 (ref)
 		return chatService:CanUserChatAsync(p2.UserId)
 	end)
@@ -43,9 +43,9 @@ local function _(p2) --[[ line: 47 | named "CanUserChat" ]]
 	return ok and status
 end
 
-return function(p3) --[[ line: 57 | named "Run" ]]
+return function(p3)
 	-- upvalues: runService (ref), chatService (ref), t (write), isMessageValidServer (ref), var6 (write), chatConstantsModule (ref)
-	p3:RegisterProcessCommandsFunction("message_validation", function(p4, p5, p6) --[[ line: 58 | named "ValidateChatFunction" ]]
+	p3:RegisterProcessCommandsFunction("message_validation", function(p4, p5, p6)
 		-- upvalues: p3 (ref), runService (copy), chatService (copy), t (copy), isMessageValidServer (copy), var6 (copy)
 		local var10
 		local var8 = p3:GetSpeaker(p4)
@@ -60,7 +60,7 @@ return function(p3) --[[ line: 57 | named "Run" ]]
 		elseif runService:IsStudio() then
 			var10 = true
 		else
-			local ok, status = pcall(function() --[[ line: 51 ]]
+			local ok, status = pcall(function()
 				-- upvalues: chatService (copy), player (ref)
 				return chatService:CanUserChatAsync(player.UserId)
 			end)

@@ -3,7 +3,7 @@ local tutilsModule = require(sduiCoreSystem.Parent.tutils)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local t = { analyticsData = true, ancestorAnalyticsData = true }
 
-return function(p0, p1) --[[ line: 17 ]]
+return function(p0, p1)
 	-- upvalues: t (ref), tutilsModule (ref)
 	if p0 == p1 then
 		return true

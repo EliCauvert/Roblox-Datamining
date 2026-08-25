@@ -33,7 +33,7 @@ local useCarouselGamepadInputModule = require(mediaGallery.Hooks.useCarouselGame
 local isAudioPlaybackAllowedForDeviceModule = require(mediaGallery.isAudioPlaybackAllowedForDevice)
 local SLIDING_WINDOW_SIZE = mediaGalleryConstantsModule.SLIDING_WINDOW_SIZE
 
-local function getVisibleIndices(p0, p1) --[[ line: 52 ]]
+local function getVisibleIndices(p0, p1)
 	-- upvalues: SLIDING_WINDOW_SIZE (ref)
 	local t = {}
 	
@@ -47,7 +47,7 @@ local function getVisibleIndices(p0, p1) --[[ line: 52 ]]
 	return t
 end
 
-return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarousel" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: useTokens (ref), mediaGalleryConstantsModule (ref), reactModule (ref), isValidIdentifierModule (ref), isYouTubeVideoModule (ref), isAudioPlaybackAllowedForDeviceModule (ref), enableAudioPlaybackInApp (ref), useSnapScrollModule (ref), getVisibleIndices (ref), signal (ref), videoPlaybackCoordinator (ref), useAutoAdvanceModule (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), useLastInput (ref), luaAppMediaGalleryGamepadSupportsPagingIcons (ref), useGamepadSupports (ref), list (ref), useCursor (ref), cursorType (ref), useCarouselGamepadInputModule (ref), useTouchDragScrollModule (ref), fFlagSduiExperienceDetailsSupport (ref), mediaGalleryVideoItemModule (ref), mediaGalleryImageItemModule (ref), userInputService (ref), mediaGalleryPageIndicatorsModule (ref), carouselScrollButtons (ref), roundIconButton (ref)
 	local t_2
 	local var22 = useTokens()
@@ -55,7 +55,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 	local aspectRatio = p2.aspectRatio or mediaGalleryConstantsModule.ITEM_ASPECT_RATIO
 	local cornerRadius = p2.cornerRadius or var22.Radius.Medium
 	local itemsCount = #p2.items
-	local var27 = reactModule.useMemo(function() --[[ line: 122 ]]
+	local var27 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), isValidIdentifierModule (copy), isYouTubeVideoModule (copy)
 		for i, v in p2.items do
 			if isValidIdentifierModule(v.videoId) and not isYouTubeVideoModule(v.assetTypeId) then
@@ -64,7 +64,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 		end
 		return false
 	end, { p2.items })
-	reactModule.useEffect(function() --[[ line: 131 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref), isAudioPlaybackAllowedForDeviceModule (copy), enableAudioPlaybackInApp (copy)
 		if var27 and isAudioPlaybackAllowedForDeviceModule() then
 			task.delay(0, enableAudioPlaybackInApp)
@@ -75,7 +75,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 		itemPadding = itemPadding,
 		springConfig = mediaGalleryConstantsModule.SPRING_CONFIG,
 		targetIndex = p2.startIndex,
-		onScrollComplete = reactModule.useCallback(function(p3, p4) --[[ line: 137 ]]
+		onScrollComplete = reactModule.useCallback(function(p3, p4)
 			-- upvalues: p2 (ref)
 			if p2.onMediaChanged then
 				p2.onMediaChanged(p3, p4)
@@ -83,17 +83,17 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 		end, { p2.onMediaChanged })
 	})
 	local var29 = getVisibleIndices(itemsCount, var28.currentIndex)
-	local var30 = reactModule.useMemo(function() --[[ line: 154 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
-	local var31 = reactModule.useMemo(function() --[[ line: 157 ]]
+	local var31 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
 	local var32, var33 = reactModule.useState(true)
 	local var34, var35 = reactModule.useState(false)
-	local videoPlaybackCoordinator_1 = p2.videoPlaybackCoordinator or reactModule.useMemo(function() --[[ line: 164 ]]
+	local videoPlaybackCoordinator_1 = p2.videoPlaybackCoordinator or reactModule.useMemo(function()
 		-- upvalues: videoPlaybackCoordinator (copy)
 		return videoPlaybackCoordinator.new()
 	end, {})
@@ -103,26 +103,26 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 		galleryRef = var28.scrollingFrameRef,
 		isMediaGalleryOccluded = p2.isMediaGalleryOccluded,
 		isAutoAdvanceTimerSuspended = var34,
-		scrollRight = reactModule.useCallback(function() --[[ line: 169 ]]
+		scrollRight = reactModule.useCallback(function()
 			-- upvalues: var28 (ref)
 			var28.scrollInDirection("Right", true)
 		end, { var28.scrollInDirection })
 	})
-	local var38 = reactModule.useCallback(function(p5, p6) --[[ line: 182 ]]
+	local var38 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: var37 (ref), var28 (ref)
 		var37.resetProgress()
 		var28.scrollInDirection(p5, p6)
 	end, { var37.resetProgress, var28.scrollInDirection })
 	local var39 = if useBreakpointXOrSmaller(responsiveModule.Keys.Small) then var22.Size.Size_400 else var22.Size.Size_700
 	local gradientOverlayHeight = p2.gradientOverlayHeight or var22.Size.Size_200 + var39 + var22.Size.Size_1000
-	local var41 = reactModule.useMemo(function() --[[ line: 196 ]]
+	local var41 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), videoPlaybackCoordinator_1 (ref)
 		return {
 			videoAnalyticsData = {
 				source = p2.analyticsSource or "MediaGallery",
 				sourceId = p2.analyticsSourceId or nil
 			},
-			getPlaybackSessionId = function() --[[ line: 207 ]]
+			getPlaybackSessionId = function()
 				-- upvalues: videoPlaybackCoordinator_1 (copy)
 				return videoPlaybackCoordinator_1.currentPlaybackSessionId
 			end
@@ -133,7 +133,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 		videoPlaybackCoordinator_1
 	})
 	local var42 = if p2.fullscreenEnabled == false then nil else p2.onFullscreenToggle
-	local var43 = reactModule.useCallback(function() --[[ line: 215 ]]
+	local var43 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref), var28 (ref)
 		if var42 then
 			var42(var28.currentIndex)
@@ -144,16 +144,16 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 	local var46 = if luaAppMediaGalleryGamepadSupportsPagingIcons then useGamepadSupports(list, var44) else false
 	local var47 = if luaAppMediaGalleryGamepadSupportsPagingIcons then var45 and var46 else var45
 	local var48 = if var44 ~= responsiveModule.Input.Pointer then luaAppMediaGalleryGamepadSupportsPagingIcons and not var46 else true
-	local var49 = reactModule.useCallback(function() --[[ line: 233 ]]
+	local var49 = reactModule.useCallback(function()
 		-- upvalues: var38 (ref)
 		var38("Left")
 	end, { var38 })
-	local var50 = reactModule.useCallback(function() --[[ line: 237 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: var38 (ref)
 		var38("Right")
 	end, { var38 })
 	local var51 = useCursor(cursorType.Invisible)
-	local var52 = reactModule.useCallback(function() --[[ line: 243 ]]
+	local var52 = reactModule.useCallback(function()
 		-- upvalues: var34 (ref), var30 (ref)
 		if var34 then
 			var30:fire()
@@ -224,7 +224,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = v,
-					Size = var28.absoluteSizeBinding:map(function(p7) --[[ line: 339 ]]
+					Size = var28.absoluteSizeBinding:map(function(p7)
 						-- upvalues: aspectRatio (ref)
 						return UDim2.new(1, 0, 0, p7.X / aspectRatio)
 					end)
@@ -275,7 +275,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.fromScale(0, 0.5),
-			Size = var28.absoluteSizeBinding:map(function(p8) --[[ line: 369 ]]
+			Size = var28.absoluteSizeBinding:map(function(p8)
 				-- upvalues: aspectRatio (ref)
 				return UDim2.new(1, 0, 0, p8.X / aspectRatio)
 			end),
@@ -352,7 +352,7 @@ return reactModule.memo(function(p2) --[[ line: 115 | named "MediaGalleryCarouse
 			Size = UDim2.fromScale(1, 1)
 		}, { Overlay = p2.overlay }) else nil,
 		SizeConstraint = reactModule.createElement("UISizeConstraint", {
-			MinSize = var28.absoluteSizeBinding:map(function(p9) --[[ line: 464 ]]
+			MinSize = var28.absoluteSizeBinding:map(function(p9)
 				-- upvalues: aspectRatio (ref)
 				return Vector2.new(0, p9.X / aspectRatio)
 			end)

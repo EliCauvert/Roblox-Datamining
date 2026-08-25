@@ -9,7 +9,7 @@ local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 22 | named "InExperienceDetailsPromptPlayButton" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), dataHydrationModule (ref), reactModule (ref), skeleton (ref), radius (ref), button (ref), iconName (ref), buttonVariant (ref)
 	return if not (not p0.rootPlaceId or not p0.playability and p0.playabilityRetrievalStatus ~= dataHydrationModule.DataStatus.Failed) then if p0.playability then reactModule.createElement(button, {
 		LayoutOrder = 1,

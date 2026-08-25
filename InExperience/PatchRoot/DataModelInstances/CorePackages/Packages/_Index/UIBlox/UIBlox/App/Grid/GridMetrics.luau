@@ -2,7 +2,7 @@
 local t = { minimumItemsPerRow = 2, minimumItemWidth = 160 }
 local t_1 = { minimumItemsPerRow = 1, minimumItemWidth = 332 }
 
-local function _(p0, p1, p2) --[[ line: 24 | named "getItemMetrics" ]]
+local function _(p0, p1, p2)
 	local maxValue = math.max(p2.minimumItemsPerRow, math.floor((p0 + p1) / (p2.minimumItemWidth + p1)))
 	
 	return {
@@ -18,11 +18,11 @@ local var4 = tModule.strictInterface({
 })
 local var5 = tModule.tuple(tModule.numberMin(0), tModule.number)
 
-function t_2.makeCustomMetricsGetter(p3) --[[ line: 48 ]]
+function t_2.makeCustomMetricsGetter(p3)
 	-- upvalues: var4 (ref), var5 (ref)
 	assert(var4(p3))
 	
-	return function(p4, p5) --[[ line: 51 ]]
+	return function(p4, p5)
 		-- upvalues: var5 (copy), p3 (ref)
 		assert(var5(p4, p5))
 		local maxValue = math.max(p3.minimumItemsPerRow, math.floor((p4 + p5) / (p3.minimumItemWidth + p5)))
@@ -37,7 +37,7 @@ end
 t_2.getLargeMetrics = t_2.makeCustomMetricsGetter(t_1)
 t_2.getMediumMetrics = t_2.makeCustomMetricsGetter(t)
 
-function t_2.getSmallMetrics(p6, p7) --[[ line: 60 ]]
+function t_2.getSmallMetrics(p6, p7)
 	-- upvalues: t_2 (ref)
 	local var8 = t_2.getMediumMetrics(p6, p7).itemsPerRow + 1
 	
@@ -47,7 +47,7 @@ function t_2.getSmallMetrics(p6, p7) --[[ line: 60 ]]
 	}
 end
 
-function t_2.getMetricsForFixedColumns(p8, p9, p10) --[[ line: 73 ]]
+function t_2.getMetricsForFixedColumns(p8, p9, p10)
 	return {
 		itemsPerRow = p10,
 		itemWidth = math.floor((p8 - (p10 - 1) * p9) / p10)

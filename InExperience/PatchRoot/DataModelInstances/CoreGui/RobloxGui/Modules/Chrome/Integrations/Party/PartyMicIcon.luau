@@ -15,12 +15,12 @@ local fFlagTokenizeUnibarConstantsWithStyleProvider = require(script.Parent.Pare
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local partyMicVoiceIndicatorFrameBuffer = game:DefineFastInt("PartyMicVoiceIndicatorFrameBuffer", 3)
 
-local function getLoadingIndicatorIcon(p0, p1, p2, p3, p4) --[[ line: 28 ]]
+local function getLoadingIndicatorIcon(p0, p1, p2, p3, p4)
 	-- upvalues: voiceChatModule (ref)
 	return if not (not p2 or not p0 or p1) then if p3 then voiceChatModule.Utils.GetIcon("Unmuted", "MicLight", p4) else voiceChatModule.Utils.GetIcon("Unmuted0", "MicLight") else voiceChatModule.Utils.GetIcon("Muted", "MicLight")
 end
 
-function PartyMicIcon(p5) --[[ line: 44 ]]
+function PartyMicIcon(p5)
 	-- upvalues: playersService (ref), useIsVoiceConnected (ref), useParticipant (ref), useIsActiveParticipant (ref), reactModule (ref), useIsParticipantMuted (ref), httpService (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), partyMicVoiceIndicatorFrameBuffer (ref), runService (ref), getLoadingIndicatorIcon (ref), imageSetLabel (ref)
 	local userId = playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or -1))
 	local var11 = useIsVoiceConnected()
@@ -30,23 +30,23 @@ function PartyMicIcon(p5) --[[ line: 44 ]]
 	local var15 = useIsParticipantMuted(userId) == true
 	local var16 = reactModule.useRef(0)
 	local var17, var18 = reactModule.useState(0)
-	local var19 = reactModule.useMemo(function() --[[ line: 53 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: httpService (copy)
 		return httpService:GenerateGUID()
 	end, {})
 	local _ = nil
 	local var20 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else 36
-	reactModule.useEffect(function() --[[ line: 66 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), p5 (ref)
 		if var12 then
 			p5.isLocalPlayerMutedSignal:fire(var12.isMuted)
 		end
 	end, { var12 })
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), var11 (ref)
 		p5.isVoiceConnectedSignal:fire(var11)
 	end, { var11 })
-	local var21 = reactModule.useCallback(function() --[[ line: 76 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), var16 (ref), partyMicVoiceIndicatorFrameBuffer (copy), var18 (ref)
 		if var14.current then
 			if partyMicVoiceIndicatorFrameBuffer < var16.current then
@@ -58,15 +58,15 @@ function PartyMicIcon(p5) --[[ line: 44 ]]
 			var16.current += 1
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 87 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref), var13 (ref)
 		var14.current = var13
 	end, { var13 })
-	reactModule.useEffect(function() --[[ line: 91 ]]
+	reactModule.useEffect(function()
 		-- upvalues: runService (copy), var19 (ref), var21 (ref)
 		runService:BindToRenderStep(var19, 1, var21)
 		
-		return function() --[[ line: 94 ]]
+		return function()
 			-- upvalues: runService (copy), var19 (copy)
 			runService:UnbindFromRenderStep(var19)
 		end
@@ -83,7 +83,7 @@ function PartyMicIcon(p5) --[[ line: 44 ]]
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromOffset(var20, var20),
-			Image = reactModule.useMemo(function() --[[ line: 99 ]]
+			Image = reactModule.useMemo(function()
 				-- upvalues: getLoadingIndicatorIcon (copy), var12 (ref), var15 (ref), var11 (ref), var13 (ref), var17 (ref)
 				return getLoadingIndicatorIcon(var12, var15, var11, var13, var17)
 			end, {

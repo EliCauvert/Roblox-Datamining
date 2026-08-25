@@ -19,12 +19,12 @@ local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlag
 local fFlagLuaAppIedpFixPlayButton = require(parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 local var7 = if fFlagLuaAppIedpOverlayAndNavigationFix then "InExperienceDetailsPromptClose" else nil
 
-local function _(p0, p1) --[[ line: 43 | named "getGameDetailErrorType" ]]
+local function _(p0, p1)
 	-- upvalues: dataHydrationModule (ref), enumGameDetailErrorTypes (ref)
 	return if p0 == dataHydrationModule.DataStatus.Failed then enumGameDetailErrorTypes.NetworkError elseif p1 and p1.isUnavailable == true then enumGameDetailErrorTypes.ExperienceUnavailable else nil
 end
 
-return function(p2) --[[ line: 58 | named "InExperienceDetailsPromptContainer" ]]
+return function(p2)
 	-- upvalues: game (ref), signalsReactModule (ref), dataHydrationModule (ref), enumGameDetailErrorTypes (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reactModule (ref), fireInExperienceDetailsPromptClosedEvent (ref), fireInExperienceDetailsPromptPlayButtonClickedEvent (ref), fFlagLuaAppIedpOverlayAndNavigationFix (ref), var7 (ref), discoveryEventErrorLogger (ref), contextActionService (ref), fireInExperienceDetailsPromptLoadedEvent (ref), inExperienceDetailsPromptModule (ref), votesUtils (ref), fFlagLuaAppIedpFixPlayButton (ref)
 	local gameInfoStore = game.getGameInfoStore(false)
 	local ageRecommendationStore = game.getAgeRecommendationStore(false)
@@ -47,7 +47,7 @@ return function(p2) --[[ line: 58 | named "InExperienceDetailsPromptContainer" ]
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
 	})
-	local var25 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), var22 (ref), fireInExperienceDetailsPromptClosedEvent (copy), var20 (ref), dataHydrationModule (copy), var21 (ref), var18 (ref), var23 (ref), fireInExperienceDetailsPromptPlayButtonClickedEvent (copy)
 		if p2.onJoin then
 			p2.onJoin(var22)
@@ -73,7 +73,7 @@ return function(p2) --[[ line: 58 | named "InExperienceDetailsPromptContainer" ]
 	})
 	local isPlayable = var18 and var18.isPlayable
 	local playabilityStatus = var18 and var18.playabilityStatus
-	local var28 = reactModule.useCallback(function() --[[ line: 130 ]]
+	local var28 = reactModule.useCallback(function()
 		-- upvalues: p2 (ref), fireInExperienceDetailsPromptClosedEvent (copy), var22 (ref), var23 (ref), isPlayable (ref), playabilityStatus (ref), var20 (ref), dataHydrationModule (copy), var21 (ref)
 		p2.onClose()
 		fireInExperienceDetailsPromptClosedEvent({
@@ -93,9 +93,9 @@ return function(p2) --[[ line: 58 | named "InExperienceDetailsPromptContainer" ]
 	
 	if fFlagLuaAppIedpOverlayAndNavigationFix then
 		var29 = reactModule.useRef(nil)
-		reactModule.useEffect(function() --[[ line: 159 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var7 (copy), var29 (write), discoveryEventErrorLogger (copy), p2 (ref), contextActionService (copy)
-			contextActionService:BindCoreAction(var7, function(p3, p4) --[[ line: 160 ]]
+			contextActionService:BindCoreAction(var7, function(p3, p4)
 				-- upvalues: var7 (copy), var29 (copy), discoveryEventErrorLogger (copy), p2 (copy)
 				if p3 == var7 and p4 == Enum.UserInputState.Begin then
 					if var29.current and var29.current.close then
@@ -107,14 +107,14 @@ return function(p2) --[[ line: 58 | named "InExperienceDetailsPromptContainer" ]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape, Enum.KeyCode.ButtonStart)
 			
-			return function() --[[ line: 185 ]]
+			return function()
 				-- upvalues: contextActionService (copy), var7 (copy)
 				contextActionService:UnbindCoreAction(var7)
 			end
 		end, { p2.universeId })
 	end
 	local var30 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 193 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var30 (ref), var20 (ref), dataHydrationModule (copy), var21 (ref), fireInExperienceDetailsPromptLoadedEvent (copy), p2 (ref), var22 (ref), isPlayable (ref), playabilityStatus (ref), var23 (ref)
 		if not var30.current and var20 ~= dataHydrationModule.DataStatus.NotReady and var21 ~= dataHydrationModule.DataStatus.NotReady then
 			fireInExperienceDetailsPromptLoadedEvent({

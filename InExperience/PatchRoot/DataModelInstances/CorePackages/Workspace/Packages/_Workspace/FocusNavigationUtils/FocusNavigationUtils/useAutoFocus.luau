@@ -5,13 +5,13 @@ local reactModule = require(parent.React)
 local focusNavigationContext = require(parent.ReactFocusNavigation).FocusNavigationContext
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-local var3 = function(p0, p1, p2) --[[ line: 19 ]]
+local var3 = function(p0, p1, p2)
 	-- upvalues: fFlagLuaAppsDefaultSelection (ref), guiService (ref), coreGuiService (ref)
 	local var4 = #p1 == 0
 	local t = {}
 	local t_1 = {}
 	
-	local function _() --[[ line: 24 | named "disconnect" ]]
+	local function _()
 		-- upvalues: var4 (write), t (ref)
 		if not var4 then
 			var4 = true
@@ -22,7 +22,7 @@ local var3 = function(p0, p1, p2) --[[ line: 19 ]]
 		end
 	end
 	
-	local function onFocusChange(_, _, p3) --[[ line: 33 ]]
+	local function onFocusChange(_, _, p3)
 		-- upvalues: var4 (write), t (ref)
 		if p3 and not var4 then
 			var4 = true
@@ -33,9 +33,9 @@ local var3 = function(p0, p1, p2) --[[ line: 19 ]]
 		end
 	end
 	
-	local function focus(p4) --[[ line: 39 ]]
+	local function focus(p4)
 		-- upvalues: p0 (ref), var4 (write), fFlagLuaAppsDefaultSelection (copy), guiService (copy), p1 (ref), t (ref), coreGuiService (copy), p2 (ref), focus (ref), t_1 (ref)
-		table.insert(t_1, task.delay(p0, function() --[[ line: 40 ]]
+		table.insert(t_1, task.delay(p0, function()
 			-- upvalues: var4 (copy), fFlagLuaAppsDefaultSelection (copy), guiService (copy), p1 (copy), t (copy), p4 (ref), coreGuiService (copy), p2 (copy), focus (copy)
 			if not var4 then
 				local selectedCoreObject
@@ -71,7 +71,7 @@ local var3 = function(p0, p1, p2) --[[ line: 19 ]]
 		table.insert(t, v.SelectionChanged:Connect(onFocusChange))
 	end
 	local var9 = 1
-	table.insert(t_1, task.delay(p0, function() --[[ line: 40 ]]
+	table.insert(t_1, task.delay(p0, function()
 		-- upvalues: var4 (write), fFlagLuaAppsDefaultSelection (copy), guiService (copy), p1 (ref), t (ref), var9 (ref), coreGuiService (copy), p2 (ref), focus (ref)
 		if not var4 then
 			local selectedCoreObject
@@ -103,7 +103,7 @@ local var3 = function(p0, p1, p2) --[[ line: 19 ]]
 	end))
 	
 	return {
-		cancel = function() --[[ line: 71 ]]
+		cancel = function()
 			-- upvalues: t_1 (ref), var4 (write), t (ref)
 			for i, v in t_1 do
 				task.cancel(v)
@@ -121,11 +121,11 @@ local var3 = function(p0, p1, p2) --[[ line: 19 ]]
 	}
 end
 
-return function(p5, p6) --[[ line: 99 ]]
+return function(p5, p6)
 	-- upvalues: reactModule (ref), focusNavigationContext (ref), var3 (ref)
 	local var10 = reactModule.useContext(focusNavigationContext)
 	
-	return reactModule.useCallback(function() --[[ line: 102 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var3 (copy), p6 (ref), p5 (ref)
 		return if var10 then var3(p6, p5, var10) else nil
 	end, { var10, p5, p6 })

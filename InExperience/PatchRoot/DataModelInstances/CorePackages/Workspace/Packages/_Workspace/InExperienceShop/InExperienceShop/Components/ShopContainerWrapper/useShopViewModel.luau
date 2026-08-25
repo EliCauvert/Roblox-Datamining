@@ -16,7 +16,7 @@ local resolveItemForSelection = shopItemSelectionModule.resolveItemForSelection
 local t = { homeLabel = "CommonUI.Features.Label.Home" }
 local _ = require(script.Parent.ShopView)
 
-local function _(p0) --[[ line: 43 | named "isQueryValid" ]]
+local function _(p0)
 	-- upvalues: constantsModule (ref)
 	local _, replaced = string.gsub(p0, " ", "")
 	
@@ -25,7 +25,7 @@ end
 
 local var11 = nil
 
-local function useShopViewModel(p1) --[[ line: 63 ]]
+local function useShopViewModel(p1)
 	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), getFixRobuxTileClickInShopModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), var11 (write), resolveItemForSelection (ref), shopItemSelectionModule (ref), constantsModule (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref)
 	local var14 = useTokens()
 	local var15 = useLocalization(t)
@@ -34,12 +34,12 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 	local var18 = signalsReactModule.useSignalState(var17.getCategories)
 	local var19 = signalsReactModule.useSignalState(var17.getSections)
 	local var20 = signalsReactModule.useSignalState(var17.getItemsPerRow)
-	local var21 = reactModule.useMemo(function() --[[ line: 72 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var11 (copy), var18 (ref), var19 (ref)
 		return var11(var18, var19)
 	end, { var18, var19 })
 	local homeLabel = var15.homeLabel
-	local var22 = reactModule.useMemo(function() --[[ line: 80 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: var21 (ref), homeLabel (ref)
 		local list = table.create(#var21.categories)
 		
@@ -51,24 +51,24 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 		end
 		return list
 	end, { var21.categories, homeLabel })
-	local var23, var24 = reactModule.useState(function() --[[ line: 90 ]]
+	local var23, var24 = reactModule.useState(function()
 		-- upvalues: var21 (ref)
 		return if #var21.categories > 0 then var21.categories[1].id else ""
 	end)
-	local var25, var26 = reactModule.useState(function() --[[ line: 97 ]]
+	local var25, var26 = reactModule.useState(function()
 		return nil
 	end)
-	local var27, var28 = reactModule.useState(function() --[[ line: 100 ]]
+	local var27, var28 = reactModule.useState(function()
 		return nil
 	end)
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var21 (ref), var24 (ref)
 		local categories = var21.categories
 		
 		if #categories == 0 then
 			return
 		end
-		var24(function(p2) --[[ line: 108 ]]
+		var24(function(p2)
 			-- upvalues: categories (ref)
 			for i, v in categories do
 				if v.id == p2 then
@@ -78,7 +78,7 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 			return categories[1].id
 		end)
 	end, { var21.categories })
-	reactModule.useEffect(function() --[[ line: 120 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var25 (ref), var27 (ref), resolveItemForSelection (copy), var21 (ref), var16 (ref), var26 (ref), var28 (ref)
 		if var25 == nil or var27 == nil then return end
 		if resolveItemForSelection(var21.sections, var25, var27, var16) == nil then
@@ -86,28 +86,28 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 			var28(nil)
 		end
 	end, { var21.sections, var25, var27, var16 })
-	local var29 = reactModule.useMemo(function() --[[ line: 137 ]]
+	local var29 = reactModule.useMemo(function()
 		-- upvalues: resolveItemForSelection (copy), var21 (ref), var25 (ref), var27 (ref), var16 (ref)
 		return resolveItemForSelection(var21.sections, var25, var27, var16)
 	end, { var21.sections, var25, var27, var16 })
-	local var30 = reactModule.useMemo(function() --[[ line: 146 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: shopItemSelectionModule (copy), var21 (ref), var25 (ref), var27 (ref), var16 (ref)
 		return shopItemSelectionModule.isRobuxBonusOnlySelection(var21.sections, var25, var27, var16)
 	end, { var21.sections, var25, var27, var16 })
-	local var31 = reactModule.useCallback(function(p3) --[[ line: 156 ]]
+	local var31 = reactModule.useCallback(function(p3)
 		-- upvalues: var24 (ref)
 		var24(p3)
 	end, {})
 	local var32, var33 = reactModule.useState("")
 	local var34, var35 = reactModule.useState("")
-	reactModule.useEffect(function() --[[ line: 168 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), constantsModule (copy), var35 (ref)
 		local var46 = var32
 		local _, replaced = string.gsub(var46, " ", "")
 		
 		if constantsModule.SEARCH_MIN_LENGTH <= #var46 - replaced then
 			local var48 = false
-			task.delay(constantsModule.SEARCH_DEBOUNCE_SECONDS, function() --[[ line: 179 ]]
+			task.delay(constantsModule.SEARCH_DEBOUNCE_SECONDS, function()
 				-- upvalues: var48 (write), var35 (copy), var32 (copy)
 				if var48 then
 					return
@@ -115,18 +115,18 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 				var35(var32)
 			end)
 			
-			return function() --[[ line: 185 ]]
+			return function()
 				-- upvalues: var48 (write)
 				var48 = true
 			end
 		end
 		var35("")
 	end, { var32 })
-	local var36 = reactModule.useCallback(function(p4) --[[ line: 190 ]]
+	local var36 = reactModule.useCallback(function(p4)
 		-- upvalues: var33 (ref)
 		var33(p4)
 	end, {})
-	local var37 = reactModule.useCallback(function(p5) --[[ line: 196 ]]
+	local var37 = reactModule.useCallback(function(p5)
 		-- upvalues: var33 (ref), constantsModule (copy), var35 (ref)
 		var33(p5)
 		local _, replaced = string.gsub(p5, " ", "")
@@ -138,7 +138,7 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 		end
 		var35("")
 	end, {})
-	local var38 = reactModule.useCallback(function(p6, p7) --[[ line: 208 ]]
+	local var38 = reactModule.useCallback(function(p6, p7)
 		-- upvalues: resolveItemForSelection (copy), var21 (ref), var16 (ref), var26 (ref), var28 (ref)
 		if p7 == nil then return end
 		if resolveItemForSelection(var21.sections, p6, p7, var16) == nil then
@@ -147,17 +147,17 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 		var26(p6)
 		var28(p7)
 	end, { var21.sections, var16 })
-	local var39 = reactModule.useCallback(function() --[[ line: 219 ]]
+	local var39 = reactModule.useCallback(function()
 		-- upvalues: var26 (ref), var28 (ref)
 		var26(nil)
 		var28(nil)
 	end, {})
 	local var40, var41 = reactModule.useState(false)
-	local var42 = reactModule.useCallback(function() --[[ line: 226 ]]
+	local var42 = reactModule.useCallback(function()
 		-- upvalues: var41 (ref)
 		var41(true)
 	end, {})
-	local var43 = reactModule.useCallback(function() --[[ line: 234 ]]
+	local var43 = reactModule.useCallback(function()
 		-- upvalues: var41 (ref), var33 (ref), var35 (ref)
 		var41(false)
 		var33("")
@@ -166,7 +166,7 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 	local setItemsPerRow = var17.setItemsPerRow
 	local var44 = useShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
-		buildReportSession = reactModule.useCallback(function() --[[ line: 260 ]]
+		buildReportSession = reactModule.useCallback(function()
 			-- upvalues: abuseVectorModule (copy)
 			return {
 				abuseVector = abuseVectorModule.InExperienceShop,
@@ -196,7 +196,7 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 		onItemActivated = var38,
 		onDetailsClose = var39,
 		itemsPerRow = var20,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p8) --[[ line: 245 ]]
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p8)
 			-- upvalues: constantsModule (copy), setItemsPerRow (ref)
 			local x = p8.AbsoluteSize.X
 			
@@ -215,7 +215,7 @@ local function useShopViewModel(p1) --[[ line: 63 ]]
 	}
 end
 
-var11 = function(p9, p10) --[[ line: 308 ]]
+var11 = function(p9, p10)
 	local t = {}
 	
 	for i, v in p10 do

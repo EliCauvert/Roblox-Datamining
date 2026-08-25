@@ -6,7 +6,7 @@ local constantsModule = require(parent.Constants)
 local getFIntUniqueUVToleranceModule = require(parent.flags.getFIntUniqueUVTolerance)
 local UGCValidationService = game:GetService("UGCValidationService")
 
-return function(p0, p1, p2) --[[ line: 17 | named "validateCageUVs" ]]
+return function(p0, p1, p2)
 	-- upvalues: constantsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), getFIntUniqueUVToleranceModule (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local isServer = p2.isServer
@@ -14,7 +14,7 @@ return function(p0, p1, p2) --[[ line: 17 | named "validateCageUVs" ]]
 	local _ = nil
 	local _ = nil
 	local var7 = nil
-	local var8, var9 = pcallDeferredModule(function() --[[ line: 34 ]]
+	local var8, var9 = pcallDeferredModule(function()
 		-- upvalues: var7 (write), UGCValidationService (copy), p0 (ref), var6 (ref), getFIntUniqueUVToleranceModule (copy)
 		var7 = UGCValidationService:CalculateEditableMeshUniqueUVCount(p0.editableMesh)
 		

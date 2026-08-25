@@ -2,11 +2,11 @@
 local boolean = luauPolyfillModule.Boolean
 local weakMap = luauPolyfillModule.WeakMap
 local t = {
-	memoize1 = function(p0) --[[ line: 13 ]]
+	memoize1 = function(p0)
 		-- upvalues: weakMap (ref)
 		local var3 = weakMap.new()
 		
-		return function(p1) --[[ line: 18 ]]
+		return function(p1)
 			-- upvalues: var3 (ref), p0 (ref)
 			local var4 = var3:get(p1)
 			
@@ -19,11 +19,11 @@ local t = {
 			return var4
 		end
 	end,
-	memoize2 = function(p2) --[[ line: 37 ]]
+	memoize2 = function(p2)
 		-- upvalues: weakMap (ref), boolean (ref)
 		local var6 = weakMap.new()
 		
-		return function(p3, p4) --[[ line: 42 ]]
+		return function(p3, p4)
 			-- upvalues: var6 (ref), boolean (copy), weakMap (copy), p2 (ref)
 			local var7 = var6:get(p3)
 			
@@ -46,11 +46,11 @@ local t = {
 			return var9
 		end
 	end,
-	memoize3 = function(p5) --[[ line: 72 ]]
+	memoize3 = function(p5)
 		-- upvalues: weakMap (ref), boolean (ref)
 		local var11 = weakMap.new()
 		
-		return function(p6, p7, p8) --[[ line: 77 ]]
+		return function(p6, p7, p8)
 			-- upvalues: var11 (ref), boolean (copy), weakMap (copy), p5 (ref)
 			local var12 = var11:get(p6)
 			
@@ -85,11 +85,11 @@ local t = {
 			return var17
 		end
 	end,
-	memoize4 = function(p9) --[[ line: 120 ]]
+	memoize4 = function(p9)
 		-- upvalues: weakMap (ref), boolean (ref)
 		local var19 = weakMap.new()
 		
-		return function(p10, p11, p12, p13) --[[ line: 125 ]]
+		return function(p10, p11, p12, p13)
 			-- upvalues: var19 (ref), boolean (copy), weakMap (copy), p9 (ref)
 			local var20 = var19:get(p10)
 			
@@ -138,11 +138,11 @@ local t = {
 			return var29
 		end
 	end,
-	memoize5 = function(p14) --[[ line: 186 ]]
+	memoize5 = function(p14)
 		-- upvalues: weakMap (ref), boolean (ref)
 		local var31 = weakMap.new()
 		
-		return function(p15, p16, p17, p18, p19) --[[ line: 191 ]]
+		return function(p15, p16, p17, p18, p19)
 			-- upvalues: var31 (ref), boolean (copy), weakMap (copy), p14 (ref)
 			local var32 = var31:get(p15)
 			
@@ -210,9 +210,9 @@ local t = {
 }
 local var2 = weakMap.new()
 
-function t.memoize2of4(p20) --[[ line: 267 ]]
+function t.memoize2of4(p20)
 	-- upvalues: var2 (ref), boolean (ref), weakMap (ref)
-	return function(p21, p22, p23, p24) --[[ line: 271 ]]
+	return function(p21, p22, p23, p24)
 		-- upvalues: var2 (copy), boolean (copy), weakMap (copy), p20 (ref)
 		local var48 = var2:get(p21)
 		

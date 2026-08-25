@@ -1,10 +1,10 @@
 ﻿local bindableEventQueueModule = require(script.Parent.bindableEventQueue)
 
-return function(p0) --[[ line: 3 ]]
+return function(p0)
 	-- upvalues: bindableEventQueueModule (ref)
-	return function(p1) --[[ line: 4 | named "createEvent" ]]
+	return function(p1)
 		-- upvalues: p0 (ref), bindableEventQueueModule (copy)
-		return function(...) --[[ line: 5 ]]
+		return function(...)
 			-- upvalues: p1 (ref), p0 (copy), bindableEventQueueModule (copy)
 			local var1 = p1(...)
 			

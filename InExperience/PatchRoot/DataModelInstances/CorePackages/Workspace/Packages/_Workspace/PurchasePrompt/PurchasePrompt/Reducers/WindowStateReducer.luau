@@ -10,26 +10,26 @@ local windowStateModule = require(purchasePrompt.Enums.WindowState)
 local promptStateModule = require(purchasePrompt.Enums.PromptState)
 
 return rodux.createReducer(windowStateModule.Hidden, {
-	[setPromptStateModule.name] = function(_, p0) --[[ line: 18 ]]
+	[setPromptStateModule.name] = function(_, p0)
 		-- upvalues: promptStateModule (ref), windowStateModule (ref)
 		return if p0.promptState == promptStateModule.None then windowStateModule.Hidden else windowStateModule.Shown
 	end,
-	[setWindowStateModule.name] = function(_, p1) --[[ line: 25 ]]
+	[setWindowStateModule.name] = function(_, p1)
 		return p1.state
 	end,
-	[errorOccurredModule.name] = function(_, _) --[[ line: 28 ]]
+	[errorOccurredModule.name] = function(_, _)
 		-- upvalues: windowStateModule (ref)
 		return windowStateModule.Shown
 	end,
-	[startPurchaseModule.name] = function(_, _) --[[ line: 31 ]]
+	[startPurchaseModule.name] = function(_, _)
 		-- upvalues: windowStateModule (ref)
 		return windowStateModule.Shown
 	end,
-	[promptNativeUpsellSuggestionsModule.name] = function(_, _) --[[ line: 34 ]]
+	[promptNativeUpsellSuggestionsModule.name] = function(_, _)
 		-- upvalues: windowStateModule (ref)
 		return windowStateModule.Shown
 	end,
-	[completeRequestModule.name] = function(_, _) --[[ line: 37 ]]
+	[completeRequestModule.name] = function(_, _)
 		-- upvalues: windowStateModule (ref)
 		return windowStateModule.Hidden
 	end

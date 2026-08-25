@@ -9,17 +9,17 @@ local reactModule = require(parent.React)
 local isSpatial = require(parent.AppCommonLib).isSpatial
 local fFlagLuaAppHapticTriggeredTelemetry = sharedFlagsModule.FFlagLuaAppHapticTriggeredTelemetry
 
-local function useHapticPositionAndRadius() --[[ line: 18 ]]
+local function useHapticPositionAndRadius()
 	-- upvalues: useInputType (ref), useLaserPointerHand (ref), reactModule (ref), isSpatial (ref)
 	local var6 = useLaserPointerHand()
 	
-	return reactModule.useMemo(function() --[[ line: 21 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: isSpatial (copy), var6 (ref)
 		return if isSpatial() then if var6 == "Right" then { Vector3.new(1, 0, 0), 0.1 } else { Vector3.new(-1, 0, 0), 0.1 } else { Vector3.new(0, 0, 0), 100 }
 	end, { useInputType(), var6 })
 end
 
-return function() --[[ line: 38 | named "useTriggerFeedback" ]]
+return function()
 	-- upvalues: reactModule (ref), interactionFeedbackContextModule (ref), useHapticPositionAndRadius (ref), triggerFeedbackModule (ref), fFlagLuaAppHapticTriggeredTelemetry (ref)
 	local var7 = reactModule.useContext(interactionFeedbackContextModule)
 	local _ = nil
@@ -31,7 +31,7 @@ return function() --[[ line: 38 | named "useTriggerFeedback" ]]
 	if not var7 then
 		error("useTriggerFeedback must be used within an InteractionFeedbackProvider")
 	end
-	return reactModule.useCallback(function(p0, p1, p2, p3) --[[ line: 52 ]]
+	return reactModule.useCallback(function(p0, p1, p2, p3)
 		-- upvalues: triggerFeedbackModule (copy), var7 (ref), var9 (write), var10 (write), fFlagLuaAppHapticTriggeredTelemetry (copy)
 		return triggerFeedbackModule(p0, p1, var7, var9, var10, if fFlagLuaAppHapticTriggeredTelemetry then p2 else nil, if fFlagLuaAppHapticTriggeredTelemetry then p3 else nil)
 	end, { var7, var9, var10 })

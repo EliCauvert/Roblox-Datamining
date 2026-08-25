@@ -18,7 +18,7 @@ VRComfortAutoToggleEntry.validateProps = t.strictInterface({
 })
 VRComfortAutoToggleEntry.defaultProps = { checkedValue = true }
 
-function VRComfortAutoToggleEntry.init(p0, p1) --[[ line: 45 ]]
+function VRComfortAutoToggleEntry.init(p0, p1)
 	-- upvalues: userGameSettingsService (ref), sendAnalyticsModule (ref), constantsModule (ref)
 	p0.derivedValueChangeEvent = userGameSettingsService:GetPropertyChangedSignal(p1.derivedValueKey)
 	p0:setState({
@@ -26,14 +26,14 @@ function VRComfortAutoToggleEntry.init(p0, p1) --[[ line: 45 ]]
 		vrComfortSetting = userGameSettingsService.VRComfortSetting
 	})
 	
-	function p0.onExternalChange() --[[ line: 53 ]]
+	function p0.onExternalChange()
 		-- upvalues: userGameSettingsService (copy), p1 (ref), p0 (ref)
 		p0:setState({
 			checked = userGameSettingsService[p1.derivedValueKey] == p1.checkedValue
 		})
 	end
 	
-	function p0.onToggled() --[[ line: 60 ]]
+	function p0.onToggled()
 		-- upvalues: p0 (ref), userGameSettingsService (copy), p1 (ref), sendAnalyticsModule (copy), constantsModule (copy)
 		if p0.state.vrComfortSetting == Enum.VRComfortSetting.Custom then
 			if userGameSettingsService[p1.customValueKey] == p1.checkedValue then
@@ -46,7 +46,7 @@ function VRComfortAutoToggleEntry.init(p0, p1) --[[ line: 45 ]]
 	end
 end
 
-function VRComfortAutoToggleEntry.render(p2) --[[ line: 73 ]]
+function VRComfortAutoToggleEntry.render(p2)
 	-- upvalues: roact (ref), toggleEntryModule (ref), externalEventConnectionModule (ref), VRComfortSettingPropertyChangedSignal (ref), userGameSettingsService (ref)
 	local props = p2.props
 	
@@ -64,7 +64,7 @@ function VRComfortAutoToggleEntry.render(p2) --[[ line: 73 ]]
 		}),
 		VRComfortSettingListener = roact.createElement(externalEventConnectionModule, {
 			event = VRComfortSettingPropertyChangedSignal,
-			callback = function() --[[ line: 91 ]]
+			callback = function()
 				-- upvalues: p2 (ref), userGameSettingsService (copy)
 				p2:setState({
 					vrComfortSetting = userGameSettingsService.VRComfortSetting

@@ -9,7 +9,7 @@ local getFFlagUGCValidateTexturePackModule = require(parent.flags.getFFlagUGCVal
 local getFFlagUGCValidateTexturePackOnRCCOnlyModule = require(parent.flags.getFFlagUGCValidateTexturePackOnRCCOnly)
 local t = {}
 
-local function validateTexturePackURL(p0, p1, p2) --[[ line: 21 ]]
+local function validateTexturePackURL(p0, p1, p2)
 	-- upvalues: failureReasonsAccumulatorModule (ref), texturePackUtilsModule (ref), analyticsModule (ref)
 	local var9 = failureReasonsAccumulatorModule.new()
 	local var10 = texturePackUtilsModule.findSurfaceAppearancesMissingTexturePacks(p0, p1)
@@ -25,14 +25,14 @@ local function validateTexturePackURL(p0, p1, p2) --[[ line: 21 ]]
 	return var9:getFinalResults()
 end
 
-local function validateSurfaceAppearanceTexturePackMatch(p3, p4) --[[ line: 41 ]]
+local function validateSurfaceAppearanceTexturePackMatch(p3, p4)
 	-- upvalues: failureReasonsAccumulatorModule (ref), texturePackUtilsModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	local var11 = failureReasonsAccumulatorModule.new()
 	local var12 = false
 	local var13 = false
 	
 	for i, v in texturePackUtilsModule.findSurfaceAppearancesWithTexturePacks(p3) do
-		local ok, status = pcall(function() --[[ line: 49 ]]
+		local ok, status = pcall(function()
 			-- upvalues: UGCValidationService (copy), v (ref)
 			return UGCValidationService:DoesSurfaceAppearanceMatchTexturePackAsync(v)
 		end)
@@ -64,7 +64,7 @@ local function validateSurfaceAppearanceTexturePackMatch(p3, p4) --[[ line: 41 ]
 	return var11:getFinalResults()
 end
 
-function t.validate(p5, p6, p7) --[[ line: 82 ]]
+function t.validate(p5, p6, p7)
 	-- upvalues: getFFlagUGCValidateTexturePackModule (ref), getFFlagUGCValidateTexturePackOnRCCOnlyModule (ref), failureReasonsAccumulatorModule (ref), validateTexturePackURL (ref), validateSurfaceAppearanceTexturePackMatch (ref), analyticsModule (ref)
 	if not getFFlagUGCValidateTexturePackModule() then
 		return true

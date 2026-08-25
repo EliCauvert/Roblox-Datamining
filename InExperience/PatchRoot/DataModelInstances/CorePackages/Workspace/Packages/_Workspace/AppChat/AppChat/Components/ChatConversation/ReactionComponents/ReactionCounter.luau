@@ -8,7 +8,7 @@ local arialBold = Enum.Font.ArialBold
 local color3 = Color3.new(1, 1, 1)
 local color = Color3.fromRGB(100, 102, 104)
 
-return function(p0) --[[ line: 20 | named "ReactionCounter" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reactionListModule (ref), cryoModule (ref), roactModule (ref), reactionMapModule (ref), color (ref), color3 (ref), arialBold (ref)
 	local var7 = 0
 	local var8 = false
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 20 | named "ReactionCounter" ]]
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 4)
 			})
-		}, reactModule.useMemo(function() --[[ line: 36 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: reactionListModule (copy), p0 (ref), cryoModule (copy), roactModule (copy), reactionMapModule (copy)
 			local var10 = 1
 			local t = {}
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 20 | named "ReactionCounter" ]]
 					var10 += 1
 				end
 			end
-			return cryoModule.List.map(t, function(p1, p2) --[[ line: 49 ]]
+			return cryoModule.List.map(t, function(p1, p2)
 				-- upvalues: roactModule (copy), reactionMapModule (copy)
 				return roactModule.createElement("ImageLabel", {
 					BorderSizePixel = 0,

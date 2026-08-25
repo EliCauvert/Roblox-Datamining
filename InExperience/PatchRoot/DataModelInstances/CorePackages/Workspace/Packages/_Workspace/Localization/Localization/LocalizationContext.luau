@@ -1,11 +1,11 @@
 ﻿local t = {}
 t.__index = t
 
-function t:getBaseLanguage() --[[ line: 47 ]]
+function t:getBaseLanguage()
 	return self:match("^(%w+)[-_]")
 end
 
-function t.new(p0) --[[ line: 51 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { _translations = p0 }
 	setmetatable(t_1, t)
@@ -13,11 +13,11 @@ function t.new(p0) --[[ line: 51 ]]
 	return t_1
 end
 
-function t:addTranslations(p1) --[[ line: 65 ]]
+function t:addTranslations(p1)
 	self._translations = p1
 end
 
-function t.getRelevantLanguages(p2) --[[ line: 75 ]]
+function t.getRelevantLanguages(p2)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	table.insert(t_1, p2)
@@ -31,13 +31,13 @@ function t.getRelevantLanguages(p2) --[[ line: 75 ]]
 	return t_1
 end
 
-function t:_getSourceString(p3, p4) --[[ line: 92 ]]
+function t:_getSourceString(p3, p4)
 	local var4 = self._translations[p3]
 	
 	return if var4 then var4[p4] else nil
 end
 
-function t:getString(p5, p6, p7) --[[ line: 107 ]]
+function t:getString(p5, p6, p7)
 	-- upvalues: t (ref)
 	local baseLanguage = t.getBaseLanguage(p5)
 	local var6 = self:_getSourceString(p5, p6) or ((if baseLanguage then self:_getSourceString(baseLanguage, p6) else nil) or self:_getSourceString("en-us", p6))

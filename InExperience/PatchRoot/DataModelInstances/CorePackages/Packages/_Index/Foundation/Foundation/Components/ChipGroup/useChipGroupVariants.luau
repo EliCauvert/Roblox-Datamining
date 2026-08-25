@@ -4,7 +4,7 @@ local chipGroupVariantModule = require(foundation.Enums.ChipGroupVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 27 ]]
+local function variantsFactory(p0)
 	-- upvalues: chipSizeModule (ref), chipGroupVariantModule (ref)
 	return {
 		scrimWidth = {
@@ -22,7 +22,7 @@ local function variantsFactory(p0) --[[ line: 27 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ line: 56 ]]
+return function(p1, p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref)
 	local chipGroup = variantsContextModule.useVariants("ChipGroup", variantsFactory, p1)
 	local var6 = chipGroup.variants[p2]

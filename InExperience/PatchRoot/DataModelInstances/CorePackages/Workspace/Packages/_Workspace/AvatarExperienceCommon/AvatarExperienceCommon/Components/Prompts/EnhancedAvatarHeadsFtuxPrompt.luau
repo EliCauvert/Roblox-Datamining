@@ -18,7 +18,7 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0) --[[ line: 29 | named "EnhancedAvatarHeadsFtuxPrompt" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useLocalization (ref), reactModule (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusOnMountEffectModule (ref), view (ref), text (ref), AXPartialPageModalModule (ref), buttonVariant (ref), inputSize (ref)
 	local var8 = useNavigation()
 	local var9 = useLocalization({
@@ -27,11 +27,11 @@ return function(p0) --[[ line: 29 | named "EnhancedAvatarHeadsFtuxPrompt" ]]
 		enhancedAvatarHeadsMessage = "Feature.Avatar.Message.EnhancedAvatarHeads"
 	})
 	local onConfirm = p0.onConfirm or (var8.state.params or {}).onConfirm
-	local var11 = reactModule.useCallback(function() --[[ line: 40 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref)
 		var8.goBack()
 	end, { var8 })
-	local var12 = reactModule.useCallback(function() --[[ line: 44 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), onConfirm (ref)
 		var11()
 		
@@ -41,11 +41,11 @@ return function(p0) --[[ line: 29 | named "EnhancedAvatarHeadsFtuxPrompt" ]]
 	end, { onConfirm, var11 })
 	local var13, var14 = reactModule.useState(false)
 	local var15 = reactModule.useRef(nil)
-	reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 55 ]]
+	reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var12 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1) --[[ line: 58 ]]
+				handler = inputHandlersModule.onRelease(function(p1)
 					-- upvalues: var12 (copy)
 					p1.cancelled = true
 					var12()
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 29 | named "EnhancedAvatarHeadsFtuxPrompt" ]]
 			}
 		}
 	end, { var12 }), reactFocusNavigationModule.useEventMap(t, var15))
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14 (ref)
 		var14(true)
 	end, {})

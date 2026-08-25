@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local colors = require(parent.Style).Colors
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "SduiTextPill" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), colors (ref)
 	if p0.text and p0.text ~= "" then
 		local layoutOrder = p0.layoutOrder

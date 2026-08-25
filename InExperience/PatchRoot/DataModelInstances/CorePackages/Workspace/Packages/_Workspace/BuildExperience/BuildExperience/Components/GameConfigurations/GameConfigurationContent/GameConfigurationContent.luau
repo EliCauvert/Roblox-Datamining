@@ -34,7 +34,7 @@ local fFlagEnableProvisionalRatingModule = require(buildExperience.Flags.FFlagEn
 local fFlagBuildRehydrateOnPublishModule = require(buildExperience.Flags.FFlagBuildRehydrateOnPublish)
 local privacyType = universeConfigurationModule.PrivacyType
 
-return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationModule (ref), useOpenWebView (ref), useArchiveGameFlowModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), useExperienceShareFlowModule (ref), universeConfigurationModule (ref), experienceGuidelinesModule (ref), signalsReactModule (ref), gameConfigurationLabelsModule (ref), privacyType (ref), fFlagEnableProvisionalRatingModule (ref), universeActivationModule (ref), contentMaturityUtilsModule (ref), fFlagBuildRehydrateOnPublishModule (ref), gameConfigurationActionsModule (ref), refreshPublishEligibilityModule (ref), captureServiceStartUploadCoreScriptBypass (ref), iconName (ref), getPrivatePlaytestersStore (ref), signalsModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref), text (ref), archiveGameDialogModule (ref), experienceShareOverlaysModule (ref)
 	local GAME_CONFIGURATION_ACCESS, GAME_CONFIGURATION_ACCESS_AND_SHARING, GAME_CONFIGURATION_ACCESS_BODY, GAME_CONFIGURATION_ARCHIVE_GAME, GAME_CONFIGURATION_AUDIENCE, GAME_CONFIGURATION_CONTENT_RATING, GAME_CONFIGURATION_CREATOR_HUB, GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY, GAME_CONFIGURATION_GAME_DETAILS, GAME_CONFIGURATION_GAME_DETAILS_BODY, GAME_CONFIGURATION_ICON_AND_THUMBNAILS, GAME_CONFIGURATION_LOADING, GAME_CONFIGURATION_AUDIENCE_PRIVATE, PRIVATE_INVITES_ROW_DESCRIPTION, PRIVATE_INVITES_ROW_LOAD_ERROR, PRIVATE_INVITES_ROW_TITLE, PRIVATE_INVITES_ROW_TITLE_EMPTY, PRIVATE_INVITES_SHARE_LINK, GAME_CONFIGURATION_AUDIENCE_PUBLIC, GAME_CONFIGURATION_QUESTIONNAIRE_REQUIRED_BANNER, GAME_CONFIGURATION_TITLE_AND_DESCRIPTION, GAME_CONFIGURATION_AUDIENCE_UNKNOWN
 	local testId = p0.testId or "game-configuration-content"
@@ -141,11 +141,11 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 	local var30 = useArchiveGameFlowModule()
 	local var31 = if fFlagBuildExperiencePrivateInvitesModule then useExperienceShareFlowModule(p0.universeId, p0.placeId) else nil
 	local var32 = if var31 ~= nil then nil else var31.onShare
-	local var33 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 182 ]]
+	local var33 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: universeConfigurationModule (copy), p0 (ref)
 		return universeConfigurationModule.getUniverseConfigurationStore().getAndFetchConfiguration(p0.universeId)
 	end, { p0.universeId }).data)
-	local var34 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 185 ]]
+	local var34 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: experienceGuidelinesModule (copy), p0 (ref)
 		return experienceGuidelinesModule.getExperienceGuidelinesStore().getAndFetchDetailedGuidelines(p0.universeId)
 	end, { p0.universeId }).data)
@@ -157,15 +157,15 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 	local var39 = false
 	
 	if fFlagEnableProvisionalRatingModule then
-		local var40 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 213 ]]
+		local var40 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: universeActivationModule (copy), p0 (ref)
 			return universeActivationModule.getUniverseActivationStore().getAndFetchEligibility(p0.universeId)
 		end, { p0.universeId }).data)
-		local var41 = reactModule.useMemo(function() --[[ line: 217 ]]
+		local var41 = reactModule.useMemo(function()
 			-- upvalues: contentMaturityUtilsModule (copy), p0 (ref)
 			return contentMaturityUtilsModule.isSealBroken(p0.universeId)
 		end, { var40, p0.universeId })
-		local var42 = reactModule.useMemo(function() --[[ line: 220 ]]
+		local var42 = reactModule.useMemo(function()
 			-- upvalues: contentMaturityUtilsModule (copy), p0 (ref)
 			return contentMaturityUtilsModule.isContentUnrated(p0.universeId)
 		end, { var40, p0.universeId })
@@ -179,14 +179,14 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 		end
 	end
 	local var43 = gameConfigurationLabelsModule.getContentMaturityText(var34, var38, var39) or GAME_CONFIGURATION_LOADING
-	local var44 = reactModule.useCallback(function() --[[ line: 238 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: var29 (ref), gameConfigurationActionsModule (copy), p0 (ref), GAME_CONFIGURATION_CREATOR_HUB (write)
 		var29(gameConfigurationActionsModule.getCreatorHubConfigureUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB)
 	end, { GAME_CONFIGURATION_CREATOR_HUB, var29, p0.universeId })
-	local var45 = reactModule.useCallback(function() --[[ line: 242 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var29 (ref), gameConfigurationActionsModule (copy), p0 (ref), GAME_CONFIGURATION_CREATOR_HUB (write), refreshPublishEligibilityModule (copy)
 		if fFlagBuildRehydrateOnPublishModule then
-			var29(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB, function() --[[ line: 244 ]]
+			var29(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB, function()
 				-- upvalues: refreshPublishEligibilityModule (copy), p0 (copy)
 				refreshPublishEligibilityModule(p0.universeId)
 			end)
@@ -195,7 +195,7 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 		end
 		var29(gameConfigurationActionsModule.getExperienceQuestionnaireUrl(p0.universeId), GAME_CONFIGURATION_CREATOR_HUB)
 	end, { GAME_CONFIGURATION_CREATOR_HUB, var29, p0.universeId })
-	local var46 = reactModule.useMemo(function() --[[ line: 253 ]]
+	local var46 = reactModule.useMemo(function()
 		-- upvalues: GAME_CONFIGURATION_ICON_AND_THUMBNAILS (write), captureServiceStartUploadCoreScriptBypass (copy), iconName (copy), p0 (ref), var44 (ref), GAME_CONFIGURATION_TITLE_AND_DESCRIPTION (write)
 		return {
 			{
@@ -220,20 +220,20 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 	local onOpenPlaytestPicker = p0.onOpenPlaytestPicker
 	local onOpenPlaytestManagement = p0.onOpenPlaytestManagement
 	local var47 = fFlagBuildExperiencePrivateInvitesModule and (onOpenPlaytestPicker ~= nil and onOpenPlaytestManagement ~= nil)
-	local var48 = reactModule.useMemo(function() --[[ line: 288 ]]
+	local var48 = reactModule.useMemo(function()
 		-- upvalues: var47 (ref), getPrivatePlaytestersStore (copy), p0 (ref)
 		return if var47 then getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p0.universeId) else nil
 	end, { var47, p0.universeId })
-	local var49 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 295 ]]
+	local var49 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var48 (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 296 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: var48 (copy)
 			return if var48 == nil then 0 else #var48.players(p1)
 		end)
 	end, { var48 }))
-	local var50 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 302 ]]
+	local var50 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var48 (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 303 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: var48 (copy)
 			return if var48 == nil then "NotReady" else var48.status(p2)
 		end)
@@ -279,7 +279,7 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 				layoutOrder = 1,
 				title = if var47 then GAME_CONFIGURATION_ACCESS_AND_SHARING else GAME_CONFIGURATION_ACCESS,
 				body = GAME_CONFIGURATION_ACCESS_BODY,
-				rows = reactModule.useMemo(function() --[[ line: 355 ]]
+				rows = reactModule.useMemo(function()
 					-- upvalues: GAME_CONFIGURATION_AUDIENCE (write), var36 (write), p0 (ref), var51 (write), PRIVATE_INVITES_SHARE_LINK (write), var32 (ref), GAME_CONFIGURATION_CONTENT_RATING (write), var43 (ref), iconName (copy), var45 (ref)
 					local list = {
 						{
@@ -321,7 +321,7 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 		CreatorHub = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 3,
 			title = GAME_CONFIGURATION_CREATOR_HUB,
-			rows = reactModule.useMemo(function() --[[ line: 399 ]]
+			rows = reactModule.useMemo(function()
 				-- upvalues: GAME_CONFIGURATION_CREATOR_HUB (write), GAME_CONFIGURATION_CREATOR_HUB_DESCRIPTION (write), iconName (copy), var44 (ref)
 				return {
 					{
@@ -342,7 +342,7 @@ return function(p0) --[[ line: 68 | named "GameConfigurationContent" ]]
 		ArchiveGame = reactModule.createElement(view, {
 			LayoutOrder = 4,
 			tag = "row align-y-center size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0",
-			onActivated = reactModule.useCallback(function() --[[ line: 411 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var30 (ref), p0 (ref)
 				var30.requestArchive(p0.universeId)
 			end, { var30.requestArchive, p0.universeId }),

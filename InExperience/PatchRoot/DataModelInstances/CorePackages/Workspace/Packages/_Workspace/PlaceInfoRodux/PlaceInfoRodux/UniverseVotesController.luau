@@ -7,12 +7,12 @@ local url = httpModule.Url
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 66 ]]
+function t.new(p0)
 	-- upvalues: httpRequestModule (ref), t (ref)
 	return setmetatable({
 		_universeVotes = {},
 		_requestImpl = p0 or httpRequestModule.config({
-			requestFunction = function(p1, p2, p3) --[[ line: 70 ]]
+			requestFunction = function(p1, p2, p3)
 				-- upvalues: httpRequestModule (copy)
 				return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 			end
@@ -20,28 +20,28 @@ function t.new(p0) --[[ line: 66 ]]
 	}, t)
 end
 
-function t:upVotes(p4) --[[ line: 81 ]]
+function t:upVotes(p4)
 	return self:_getVotes(p4, "upVotes")
 end
 
-function t:downVotes(p5) --[[ line: 85 ]]
+function t:downVotes(p5)
 	return self:_getVotes(p5, "downVotes")
 end
 
-function t:rating(p6) --[[ line: 89 ]]
+function t:rating(p6)
 	return self:_getVotes(p6, "rating")
 end
 
-function t:_fetchUniversesVotes(p7) --[[ line: 95 ]]
+function t:_fetchUniversesVotes(p7)
 	-- upvalues: url (ref)
 	return self._requestImpl(string.format("%sv1/games/votes?%s", url.GAME_URL, url:makeQueryString({ universeIds = p7 })), "GET")
 end
 
-function t:getUniversesVotes(p8) --[[ line: 108 ]]
+function t:getUniversesVotes(p8)
 	-- upvalues: promiseModule (ref)
-	local var4 = promiseModule.new(function(p9, p10) --[[ line: 111 ]]
+	local var4 = promiseModule.new(function(p9, p10)
 		-- upvalues: self (ref), p8 (ref)
-		self:_fetchUniversesVotes(p8):andThen(function(p12) --[[ line: 113 ]]
+		self:_fetchUniversesVotes(p8):andThen(function(p12)
 			-- upvalues: p9 (ref), self (copy)
 			if not p12 or not p12.responseBody then
 				p9(nil)
@@ -61,7 +61,7 @@ function t:getUniversesVotes(p8) --[[ line: 108 ]]
 				self._universeVotes[v.id] = t_1
 			end
 			p9(t)
-		end):catch(function(p11) --[[ line: 140 ]]
+		end):catch(function(p11)
 			-- upvalues: p10 (ref)
 			p10(p11)
 		end)
@@ -72,7 +72,7 @@ function t:getUniversesVotes(p8) --[[ line: 108 ]]
 		if self._universeVotes[v] then
 			t[v] = promiseModule.resolve(self._universeVotes[v])
 		else
-			self._universeVotes[v] = var4:andThen(function(p13) --[[ line: 152 ]]
+			self._universeVotes[v] = var4:andThen(function(p13)
 				-- upvalues: v (ref)
 				return p13[v]
 			end)
@@ -82,12 +82,12 @@ function t:getUniversesVotes(p8) --[[ line: 108 ]]
 	return t
 end
 
-function t:_getVotes(p14, p15) --[[ line: 162 ]]
+function t:_getVotes(p14, p15)
 	-- upvalues: promiseModule (ref)
-	return if self._universeVotes[p14] and self._universeVotes[p14][p15] then promiseModule.resolve(self._universeVotes[p14][p15]) elseif self._universeVotes[p14] then self._universeVotes[p14]:andThen(function(_) --[[ line: 169 ]]
+	return if self._universeVotes[p14] and self._universeVotes[p14][p15] then promiseModule.resolve(self._universeVotes[p14][p15]) elseif self._universeVotes[p14] then self._universeVotes[p14]:andThen(function(_)
 		-- upvalues: self (ref), p14 (ref), p15 (ref)
 		return self._universeVotes[p14][p15]
-	end) else self:getUniversesVotes({ p14 })[p14]:andThen(function(p16) --[[ line: 174 ]]
+	end) else self:getUniversesVotes({ p14 })[p14]:andThen(function(p16)
 		-- upvalues: p15 (ref)
 		return p16[p15]
 	end)

@@ -23,7 +23,7 @@ local view = foundationModule.View
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
 local useScrollbarOffsetModule = require(genericAbuseReporting.Common.useScrollbarOffset)
 
-return reactModule.memo(function(p0) --[[ line: 44 | named "DropdownWithPopover" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLayerCollector (ref), useTokens (ref), reactModule (ref), useScrollbarOffsetModule (ref), reactFocusNavigationModule (ref), coreGuiService (ref), view (ref), text (ref), overlayProvider (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), popoverSide (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var10 = useTokens()
 	local absoluteSize = useLayerCollector().absoluteSize
@@ -39,7 +39,7 @@ return reactModule.memo(function(p0) --[[ line: 44 | named "DropdownWithPopover"
 	local var26 = reactModule.useRef(nil)
 	local VRCentralOverlay = coreGuiService:FindFirstChild("VRCentralOverlay")
 	local var28 = if VRCentralOverlay then VRCentralOverlay:FindFirstChild("CentralOverlay_SurfaceGui") else nil
-	local var29 = reactModule.useCallback(function() --[[ line: 68 ]]
+	local var29 = reactModule.useCallback(function()
 		-- upvalues: var28 (ref), var24 (ref), var25 (ref), var12 (ref)
 		if not var28 then
 			var24(var25.current)
@@ -51,7 +51,7 @@ return reactModule.memo(function(p0) --[[ line: 44 | named "DropdownWithPopover"
 		DropdownWithPopover = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y",
 			ref = var25,
-			onAbsoluteSizeChanged = function(value) --[[ line: 126 ]]
+			onAbsoluteSizeChanged = function(value)
 				-- upvalues: var16 (ref)
 				var16(value.AbsoluteSize)
 			end,
@@ -60,7 +60,7 @@ return reactModule.memo(function(p0) --[[ line: 44 | named "DropdownWithPopover"
 			Popover = reactModule.createElement(popover.Root, { isOpen = var11 }, {
 				Anchor = reactModule.createElement(popover.Anchor, nil, reactModule.createElement(view, { Size = UDim2.new(0, var15.X, 0, var15.Y) }, {
 					DropdownButton = reactModule.createElement(sideModalDropdownButtonModule, {
-						onActivated = reactModule.useCallback(function() --[[ line: 116 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: var12 (ref), var11 (ref)
 							var12(not var11)
 						end, { var11 }),
@@ -92,11 +92,11 @@ return reactModule.memo(function(p0) --[[ line: 44 | named "DropdownWithPopover"
 									ScrollingDirection = Enum.ScrollingDirection.Y,
 									scrollBarVisibility = scrollBarVisibility.Always
 								},
-								onAbsoluteCanvasSizeChanged = function(value) --[[ line: 194 ]]
+								onAbsoluteCanvasSizeChanged = function(value)
 									-- upvalues: var20 (ref)
 									var20(value.AbsoluteCanvasSize)
 								end,
-								onAbsoluteWindowSizeChanged = function(value) --[[ line: 197 ]]
+								onAbsoluteWindowSizeChanged = function(value)
 									-- upvalues: var22 (ref)
 									var22(value.AbsoluteWindowSize)
 								end
@@ -104,18 +104,18 @@ return reactModule.memo(function(p0) --[[ line: 44 | named "DropdownWithPopover"
 								BaseMenu = reactModule.createElement(view, {
 									tag = "auto-y col align-y-center gap-xsmall padding-xsmall",
 									Size = UDim2.new(0, var15.X + var10.Stroke.Standard * 2, 0, 0),
-									onAbsoluteSizeChanged = function(value) --[[ line: 204 ]]
+									onAbsoluteSizeChanged = function(value)
 										-- upvalues: var18 (ref)
 										var18(value.AbsoluteSize)
 									end,
 									ref = var26
-								}, reactModule.useMemo(function() --[[ line: 76 ]]
+								}, reactModule.useMemo(function()
 									-- upvalues: p0 (ref), var14 (ref), var29 (ref), reactModule (copy), view (copy), var13 (ref), text (copy)
 									local t = {}
 									
 									for i, v in ipairs(p0.cellDatas) do
 										table.insert(t, reactModule.createElement(view, {
-											onActivated = function() --[[ line: 79 ]]
+											onActivated = function()
 												-- upvalues: p0 (copy), v (ref), var14 (copy), var29 (copy)
 												p0.onChange(if v.value == nil then v.text else v.value)
 												var14(v)

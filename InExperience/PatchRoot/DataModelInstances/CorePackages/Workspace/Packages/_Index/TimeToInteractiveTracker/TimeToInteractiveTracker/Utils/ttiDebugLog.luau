@@ -2,14 +2,14 @@
 local _ = require(script.Parent.Parent.Stores.types)
 local fFlagDebugTimeToInteractiveTrackerModule = require(script.Parent.FFlagDebugTimeToInteractiveTracker)
 
-local function _(p0) --[[ line: 9 | named "formatPayload" ]]
+local function _(p0)
 	-- upvalues: httpService (ref)
 	if p0 == nil then
 		return ""
 	elseif type(p0) ~= "table" then
 		return tostring(p0)
 	end
-	local ok, status = pcall(function() --[[ line: 18 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p0 (ref)
 		return httpService:JSONEncode(p0)
 	end)
@@ -17,7 +17,7 @@ local function _(p0) --[[ line: 9 | named "formatPayload" ]]
 	return if ok then status else tostring(p0)
 end
 
-local function formatMilestones(p1) --[[ line: 28 ]]
+local function formatMilestones(p1)
 	if not p1 or #p1 == 0 then
 		return ""
 	end
@@ -40,7 +40,7 @@ local function formatMilestones(p1) --[[ line: 28 ]]
 	return "\n" .. table.concat(t, "\n")
 end
 
-return function(p2, p3, p4, p5, p6) --[[ line: 57 ]]
+return function(p2, p3, p4, p5, p6)
 	-- upvalues: fFlagDebugTimeToInteractiveTrackerModule (ref), httpService (ref), formatMilestones (ref)
 	if not fFlagDebugTimeToInteractiveTrackerModule then return end
 	local var5
@@ -49,7 +49,7 @@ return function(p2, p3, p4, p5, p6) --[[ line: 57 ]]
 	if p5 == nil then
 		var5 = ""
 	elseif type(p5) == "table" then
-		local ok, status = pcall(function() --[[ line: 18 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p5 (ref)
 			return httpService:JSONEncode(p5)
 		end)

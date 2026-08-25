@@ -1,14 +1,14 @@
 ﻿local t = {}
 t.__index = t
 
-local function _(p0) --[[ line: 13 | named "log" ]]
+local function _(p0)
 	return p0
 end
 
 if not t.ratelimit then
 	t.ratelimit = {}
 end
-function t.get(p1, p2, p3) --[[ line: 22 ]]
+function t.get(p1, p2, p3)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	
@@ -26,15 +26,15 @@ function t.get(p1, p2, p3) --[[ line: 22 ]]
 	return tbl
 end
 
-function t.window(p4) --[[ line: 44 ]]
+function t.window(p4)
 	return math.floor(tick() / p4.window_size)
 end
 
-function t.progress(p5) --[[ line: 48 ]]
+function t.progress(p5)
 	return tick() % p5.window_size / p5.window_size
 end
 
-function t.increment(p6) --[[ line: 54 ]]
+function t.increment(p6)
 	-- upvalues: t (ref)
 	local var2 = p6:window()
 	
@@ -46,7 +46,7 @@ function t.increment(p6) --[[ line: 54 ]]
 	return t.ratelimit[p6.id].windows[var2]
 end
 
-function t.weighted(p7, p8) --[[ line: 70 ]]
+function t.weighted(p7, p8)
 	-- upvalues: t (ref)
 	p8 = p8 or 0
 	local var3 = p7:progress()
@@ -55,11 +55,11 @@ function t.weighted(p7, p8) --[[ line: 70 ]]
 	return ((t.ratelimit[p7.id].windows[var4] or 0) + p8) * var3 + (t.ratelimit[p7.id].windows[var4 - 1] or 0) * (1 - var3)
 end
 
-function t.consumption(p9) --[[ line: 84 ]]
+function t.consumption(p9)
 	return p9:weighted() / p9.rate
 end
 
-function t.request(p10) --[[ line: 90 ]]
+function t.request(p10)
 	if p10.rate < p10:weighted(1) then
 		return false
 	end

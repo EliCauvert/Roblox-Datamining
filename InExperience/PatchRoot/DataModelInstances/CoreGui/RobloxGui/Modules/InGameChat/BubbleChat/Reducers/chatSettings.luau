@@ -4,7 +4,7 @@ local roduxModule = require(corePackagesService.Packages.Rodux)
 local updateChatSettingsModule = require(script.Parent.Parent.Actions.UpdateChatSettings)
 local chatSettingsModule = require(script.Parent.Parent.ChatSettings)
 
-local function deepCopy(p0) --[[ line: 9 ]]
+local function deepCopy(p0)
 	-- upvalues: deepCopy (ref)
 	if type(p0) ~= "table" then
 		return p0
@@ -17,7 +17,7 @@ local function deepCopy(p0) --[[ line: 9 ]]
 	return t
 end
 
-local function mergeInto(p1, p2) --[[ line: 22 ]]
+local function mergeInto(p1, p2)
 	-- upvalues: mergeInto (ref)
 	for i, v in pairs(p2) do
 		if type(v) ~= "table" then
@@ -29,7 +29,7 @@ local function mergeInto(p1, p2) --[[ line: 22 ]]
 end
 
 return roduxModule.createReducer(chatSettingsModule, {
-	[updateChatSettingsModule.name] = function(_, p3) --[[ line: 33 ]]
+	[updateChatSettingsModule.name] = function(_, p3)
 		-- upvalues: deepCopy (ref), chatSettingsModule (ref), mergeInto (ref)
 		local var7 = deepCopy(chatSettingsModule)
 		mergeInto(var7, p3.settings)

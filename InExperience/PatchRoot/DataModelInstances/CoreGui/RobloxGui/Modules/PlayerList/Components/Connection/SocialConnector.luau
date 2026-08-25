@@ -6,16 +6,16 @@ local setPlayerFriendStatusModule = require(script.Parent.Parent.Parent.Actions.
 local eventConnectionModule = require(script.Parent.EventConnection)
 local socialConnector = roactModule.PureComponent:extend("SocialConnector")
 
-function socialConnector.didMount(p0) --[[ line: 17 ]]
+function socialConnector.didMount(p0)
 	p0.mounted = true
 end
 
-function socialConnector.render(p1) --[[ line: 21 ]]
+function socialConnector.render(p1)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), playersService (ref)
 	return roactModule.createFragment({
 		FriendStatusChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = playersService.LocalPlayer.FriendStatusChanged,
-			callback = function(p2, p3) --[[ line: 25 ]]
+			callback = function(p2, p3)
 				-- upvalues: p1 (ref)
 				p1.props.setPlayerFriendStatus(p2, p3)
 			end
@@ -23,14 +23,14 @@ function socialConnector.render(p1) --[[ line: 21 ]]
 	})
 end
 
-function socialConnector.willUnmount(p4) --[[ line: 32 ]]
+function socialConnector.willUnmount(p4)
 	p4.mounted = false
 end
 
-return roactRoduxModule.connect(nil, function(p5) --[[ line: 36 | named "mapDispatchToProps" ]]
+return roactRoduxModule.connect(nil, function(p5)
 	-- upvalues: setPlayerFriendStatusModule (ref)
 	return {
-		setPlayerFriendStatus = function(value, p6) --[[ line: 38 ]]
+		setPlayerFriendStatus = function(value, p6)
 			-- upvalues: p5 (ref), setPlayerFriendStatusModule (copy)
 			return p5(setPlayerFriendStatusModule(value, p6))
 		end

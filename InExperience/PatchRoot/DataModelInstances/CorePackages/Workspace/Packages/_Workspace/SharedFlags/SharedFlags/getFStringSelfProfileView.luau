@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("SelfProfileView", "Social.SelfProfileView")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("SelfProfileView")
 end

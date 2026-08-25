@@ -4,7 +4,7 @@ local name = require(inlineRichText.Logger):new(script.Name)
 local _ = require(inlineRichText.Types)
 local cryoModule = require(parent.Cryo)
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: name (ref), cryoModule (ref)
 	local name_1 = p1.inlineCustomRenderers[p0.name]
 	

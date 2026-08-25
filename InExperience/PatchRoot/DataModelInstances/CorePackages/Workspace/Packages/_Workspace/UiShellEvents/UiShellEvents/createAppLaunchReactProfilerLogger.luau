@@ -7,7 +7,7 @@ local supportTerminalMilestoneInReactProfilerLogger = game:DefineFastFlag("Suppo
 local appLaunchReactProfilerLoggerCollectionTimeoutSec = game:DefineFastInt("AppLaunchReactProfilerLoggerCollectionTimeoutSec", 30)
 local supportedAppLaunchMilestonesForReactProfilerLogger = game:DefineFastString("SupportedAppLaunchMilestonesForReactProfilerLogger", "lua_app_starter_script_requires_end,fetch_homepage_data_begin,fetch_homepage_data_end,home_page_interactive")
 
-local function _() --[[ line: 20 | named "getSupportedMilestones" ]]
+local function _()
 	-- upvalues: supportedAppLaunchMilestonesForReactProfilerLogger (ref)
 	local t = {}
 	
@@ -48,7 +48,7 @@ local t_4 = {
 	lastUpdated = { 2025, 2, 25 }
 }
 
-local function logProfilerData(p0) --[[ line: 81 ]]
+local function logProfilerData(p0)
 	-- upvalues: telemetryService (ref), t (ref), t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref)
 	if next(p0) == nil then return end
 	for i, v in p0 do
@@ -85,7 +85,7 @@ local function logProfilerData(p0) --[[ line: 81 ]]
 	end
 end
 
-local _ = function(p1, p2) --[[ line: 120 | named "createProfilerData" ]]
+local _ = function(p1, p2)
 	return {
 		updateCount = 0,
 		renderDuration = 0,
@@ -97,7 +97,7 @@ local _ = function(p1, p2) --[[ line: 120 | named "createProfilerData" ]]
 	}
 end
 
-local _ = function(p3, p4) --[[ line: 133 | named "updateProfilerData" ]]
+local _ = function(p3, p4)
 	p3.updateCount += 1
 	p3.renderDuration += p4.render.duration
 	p3.commitDuration += p4.commit.duration
@@ -105,13 +105,13 @@ local _ = function(p3, p4) --[[ line: 133 | named "updateProfilerData" ]]
 	p3.exclusiveCommitDuration += p4.commit.exclusiveDuration
 end
 
-return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogger" ]]
+return function(p5, p6)
 	-- upvalues: isReactProfilingEnabled (ref), supportTerminalMilestoneInReactProfilerLogger (ref), supportedAppLaunchMilestonesForReactProfilerLogger (ref), loggingProtocolModule (ref), appLaunchReactProfilerLoggerCollectionTimeoutSec (ref), logProfilerData (ref)
 	if not isReactProfilingEnabled then return end
 	local t = {}
 	local t_1 = {}
 	
-	local function correlateProfilerData() --[[ line: 153 ]]
+	local function correlateProfilerData()
 		-- upvalues: t (write), t_1 (write)
 		local t_2 = {}
 		
@@ -137,7 +137,7 @@ return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogg
 		return t_2
 	end
 	
-	local function _(p7) --[[ line: 208 | named "getOrCreateEventsForProfiler" ]]
+	local function _(p7)
 		-- upvalues: t (write)
 		local var29 = t[p7]
 		
@@ -148,7 +148,7 @@ return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogg
 		return var29
 	end
 	
-	local onRenderConnection = p5.onRender:connect(function(p8) --[[ line: 218 ]]
+	local onRenderConnection = p5.onRender:connect(function(p8)
 		-- upvalues: t (write)
 		local profilerId = p8.profilerId
 		local var30 = t[profilerId]
@@ -167,7 +167,7 @@ return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogg
 			}
 		})
 	end)
-	local onCommitConnection = p5.onCommit:connect(function(p9) --[[ line: 234 ]]
+	local onCommitConnection = p5.onCommit:connect(function(p9)
 		-- upvalues: t (write)
 		local profilerId = p9.profilerId
 		local var31 = t[profilerId]
@@ -194,7 +194,7 @@ return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogg
 			t_2[v] = true
 		end
 		local var19 = t_2
-		var17 = loggingProtocolModule.default:setDurationLoggerListener(function(p10) --[[ line: 249 ]]
+		var17 = loggingProtocolModule.default:setDurationLoggerListener(function(p10)
 			-- upvalues: var19 (ref), t_1 (write), p6 (ref), var17 (write)
 			if var19[p10] then
 				table.insert(t_1, { eventName = p10, eventTime = os.clock() * 1000 })
@@ -205,12 +205,12 @@ return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogg
 			end
 		end)
 	else
-		var17 = loggingProtocolModule.default:setDurationLoggerListener(function(p11) --[[ line: 266 ]]
+		var17 = loggingProtocolModule.default:setDurationLoggerListener(function(p11)
 			-- upvalues: t_1 (write)
 			table.insert(t_1, { eventName = p11, eventTime = os.clock() * 1000 })
 		end)
 	end
-	local _ = function() --[[ line: 275 | named "disconnectListeners" ]]
+	local _ = function()
 		-- upvalues: onRenderConnection (write), onCommitConnection (write), var17 (write)
 		if onRenderConnection ~= nil then
 			onRenderConnection:disconnect()
@@ -226,7 +226,7 @@ return function(p5, p6) --[[ line: 141 | named "createAppLaunchReactProfilerLogg
 		end
 	end
 	
-	task.delay(appLaunchReactProfilerLoggerCollectionTimeoutSec, function() --[[ line: 290 ]]
+	task.delay(appLaunchReactProfilerLoggerCollectionTimeoutSec, function()
 		-- upvalues: onRenderConnection (write), onCommitConnection (write), var17 (write), correlateProfilerData (ref), logProfilerData (copy)
 		if onRenderConnection ~= nil then
 			onRenderConnection:disconnect()

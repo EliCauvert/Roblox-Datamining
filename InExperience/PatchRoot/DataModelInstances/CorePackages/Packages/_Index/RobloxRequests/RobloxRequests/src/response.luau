@@ -9,7 +9,7 @@ local list = { "text/html", "application/xhtml+xml" }
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 20 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref), nocasetableModule (ref), cookiesModule (ref)
 	local tbl = setmetatable({}, t)
 	tbl.request = p0
@@ -39,15 +39,15 @@ function t.new(p0, p1, p2) --[[ line: 20 ]]
 	return tbl
 end
 
-function t.expand(_) --[[ line: 68 ]] end
+function t.expand(_) end
 
-function t:__tostring() --[[ line: 70 ]]
+function t:__tostring()
 	return self.text
 end
 
-function t:json() --[[ line: 74 ]]
+function t:json()
 	-- upvalues: jsonModule (ref)
-	local ok, status = pcall(function() --[[ line: 77 ]]
+	local ok, status = pcall(function()
 		-- upvalues: jsonModule (copy), self (ref)
 		return jsonModule.dec(self.text)
 	end)
@@ -58,7 +58,7 @@ function t:json() --[[ line: 74 ]]
 	return status
 end
 
-function t:html(p3) --[[ line: 88 ]]
+function t:html(p3)
 	-- upvalues: list (ref), htmlModule (ref)
 	if p3 or table.find(list, self.content_type) then
 		return htmlModule.parse(self.text, 100000, tostring(self.url))
@@ -66,7 +66,7 @@ function t:html(p3) --[[ line: 88 ]]
 	error("[http] Response is not specified as HTML.")
 end
 
-function t:xml(p4) --[[ line: 96 ]]
+function t:xml(p4)
 	-- upvalues: htmlModule (ref)
 	if p4 or self.content_type:find("+xml") or self.content_type:find("/xml") then
 		return htmlModule.parse(self.text, 100000)

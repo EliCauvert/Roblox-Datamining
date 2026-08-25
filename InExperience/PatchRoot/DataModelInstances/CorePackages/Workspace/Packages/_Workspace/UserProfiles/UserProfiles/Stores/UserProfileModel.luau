@@ -5,7 +5,7 @@ local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadge
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 
 return {
-	update = function(p0, p1) --[[ line: 61 ]]
+	update = function(p0, p1)
 		-- upvalues: fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref)
 		if not p1 or type(p1) ~= "table" then return end
 		local names = p1.names
@@ -63,7 +63,7 @@ return {
 			p0.setHasRobloxSubscription(var2)
 		end
 	end,
-	create = function(p2) --[[ line: 114 ]]
+	create = function(p2)
 		-- upvalues: createSignal (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref)
 		local var3, var4 = createSignal("")
 		local var5, var6 = createSignal("")

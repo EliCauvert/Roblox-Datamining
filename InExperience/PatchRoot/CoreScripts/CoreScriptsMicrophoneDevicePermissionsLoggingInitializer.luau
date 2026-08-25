@@ -1,6 +1,6 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
 local microphoneDevicePermissionsLoggingModule = require(coreGuiService.RobloxGui.Modules.Settings.Resources.MicrophoneDevicePermissionsLogging)
-require(coreGuiService.RobloxGui.Modules.Settings.getCamMicPermissions)(function(p0) --[[ line: 13 ]]
+require(coreGuiService.RobloxGui.Modules.Settings.getCamMicPermissions)(function(p0)
 	-- upvalues: microphoneDevicePermissionsLoggingModule (ref)
 	microphoneDevicePermissionsLoggingModule:init(p0.hasMicPermissions)
 end, {

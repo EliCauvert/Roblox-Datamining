@@ -3,21 +3,21 @@ local reactModule = require(momentsCreation.Parent.React)
 local userInputService = game:GetService("UserInputService")
 local computeKeyboardInsetModule = require(momentsCreation.Utils.computeKeyboardInset)
 
-return function(value) --[[ line: 31 | named "useDescriptionKeyboardInset" ]]
+return function(value)
 	-- upvalues: reactModule (ref), computeKeyboardInsetModule (ref), userInputService (ref)
 	local var4, var5 = reactModule.useBinding(0)
 	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useCallback(function() --[[ line: 35 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), computeKeyboardInsetModule (copy), value (ref), userInputService (copy), var5 (ref)
 		local current = var6.current
 		var5(computeKeyboardInsetModule(value, userInputService.OnScreenKeyboardVisible, userInputService.OnScreenKeyboardPosition.Y, if current ~= nil then 0 else current.AbsolutePosition.Y + current.AbsoluteSize.Y, userInputService.OnScreenKeyboardSize.Y))
 	end, { value })
-	local var8 = reactModule.useCallback(function(p0) --[[ line: 48 ]]
+	local var8 = reactModule.useCallback(function(p0)
 		-- upvalues: var6 (ref), var7 (ref)
 		var6.current = p0
 		var7()
 	end, { var7 })
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), value (ref), userInputService (copy)
 		var7()
 		
@@ -28,7 +28,7 @@ return function(value) --[[ line: 31 | named "useDescriptionKeyboardInset" ]]
 				userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(var7)
 			}
 			
-			return function() --[[ line: 65 ]]
+			return function()
 				-- upvalues: list (ref)
 				for i, v in list do
 					v:Disconnect()

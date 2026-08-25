@@ -2,19 +2,19 @@
 local versionModule = require(script.Parent.Version)
 local var2 = game:GetService("RunService"):IsStudio()
 
-local function _() --[[ line: 8 | named "isBundled" ]]
+local function _()
 	return type(_G.LUAUFORGE_BUNDLED_FILE_PATH) == "string"
 end
 
-local _ = function(p0) --[[ line: 13 | named "isTableEmpty" ]]
+local _ = function(p0)
 	return next(p0) == nil
 end
 
-local _ = function(p1, p2) --[[ line: 18 | named "parseJSON" ]]
+local _ = function(p1, p2)
 	if type(p2) ~= "string" then
 		return nil, "Input is not a string"
 	end
-	local ok, status = pcall(function() --[[ line: 23 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p1 (ref), p2 (ref)
 		return p1:JSONDecode(p2)
 	end)
@@ -25,8 +25,8 @@ local _ = function(p1, p2) --[[ line: 18 | named "parseJSON" ]]
 	return nil, tostring(status)
 end
 
-local _ = function(p3, p4) --[[ line: 35 | named "createCallbackWithEventId" ]]
-	return if p4 then function(p5, p6) --[[ line: 46 ]]
+local _ = function(p3, p4)
+	return if p4 then function(p5, p6)
 		-- upvalues: p3 (ref), p4 (ref)
 		local id = nil
 		local var4 = nil
@@ -38,7 +38,7 @@ local _ = function(p3, p4) --[[ line: 35 | named "createCallbackWithEventId" ]]
 				local body = p6.body.Body
 				
 				if type(body) == "string" then
-					local ok, status = pcall(function() --[[ line: 23 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var5 (ref), body (ref)
 						return var5:JSONDecode(body)
 					end)
@@ -69,7 +69,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(_, p7, p8) --[[ line: 148 ]]
+function t.new(_, p7, p8)
 	-- upvalues: robloxTransportModule (ref), t (ref)
 	if not p7.dsn then
 		error("DSN is required")
@@ -85,7 +85,7 @@ function t.new(_, p7, p8) --[[ line: 148 ]]
 	}, t)
 end
 
-function t._buildDebugMeta(_) --[[ line: 179 ]]
+function t._buildDebugMeta(_)
 	local LUAUFORGE_SENTRY_DEBUG_IDS = _G.LUAUFORGE_SENTRY_DEBUG_IDS
 	
 	if type(LUAUFORGE_SENTRY_DEBUG_IDS) ~= "table" then
@@ -99,7 +99,7 @@ function t._buildDebugMeta(_) --[[ line: 179 ]]
 	return if #t == 0 then nil else { images = t }
 end
 
-function t:capture_message(p9, p10, p11) --[[ line: 205 ]]
+function t:capture_message(p9, p10, p11)
 	-- upvalues: versionModule (ref)
 	local httpService = self.httpService
 	self.transport:send({
@@ -122,7 +122,7 @@ function t:capture_message(p9, p10, p11) --[[ line: 205 ]]
 				job_id = game.JobId or "unknown"
 			}
 		}
-	}, if not p11 then nil else function(p12, p13) --[[ line: 46 ]]
+	}, if not p11 then nil else function(p12, p13)
 		-- upvalues: httpService (ref), p11 (ref)
 		local id = nil
 		local var4 = nil
@@ -134,7 +134,7 @@ function t:capture_message(p9, p10, p11) --[[ line: 205 ]]
 				local body = p13.body.Body
 				
 				if type(body) == "string" then
-					local ok, status = pcall(function() --[[ line: 23 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var5 (ref), body (ref)
 						return var5:JSONDecode(body)
 					end)
@@ -162,7 +162,7 @@ function t:capture_message(p9, p10, p11) --[[ line: 205 ]]
 	end)
 end
 
-function t:capture_exception(p14, p15, p16, p17, p18) --[[ line: 248 ]]
+function t:capture_exception(p14, p15, p16, p17, p18)
 	-- upvalues: versionModule (ref), var2 (ref)
 	p15 = p15 or "error"
 	local t = {
@@ -218,7 +218,7 @@ function t:capture_exception(p14, p15, p16, p17, p18) --[[ line: 248 ]]
 	end
 	t_3.debug_meta = self:_buildDebugMeta()
 	local httpService = self.httpService
-	self.transport:send(t_3, if not p18 then nil else function(p19, p20) --[[ line: 46 ]]
+	self.transport:send(t_3, if not p18 then nil else function(p19, p20)
 		-- upvalues: httpService (ref), p18 (ref)
 		local id = nil
 		local var4 = nil
@@ -230,7 +230,7 @@ function t:capture_exception(p14, p15, p16, p17, p18) --[[ line: 248 ]]
 				local body = p20.body.Body
 				
 				if type(body) == "string" then
-					local ok, status = pcall(function() --[[ line: 23 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var5 (ref), body (ref)
 						return var5:JSONDecode(body)
 					end)
@@ -258,10 +258,10 @@ function t:capture_exception(p14, p15, p16, p17, p18) --[[ line: 248 ]]
 	end)
 end
 
-function t:send_event_with_attachments(p21, p22, p23) --[[ line: 339 ]]
+function t:send_event_with_attachments(p21, p22, p23)
 	if p21 and #p22 ~= 0 then
 		local httpService = self.httpService
-		self.transport:send_attachments(p21, p22, if not p23 then nil else function(p24, p25) --[[ line: 46 ]]
+		self.transport:send_attachments(p21, p22, if not p23 then nil else function(p24, p25)
 			-- upvalues: httpService (ref), p23 (ref)
 			local id = nil
 			local var4 = nil
@@ -273,7 +273,7 @@ function t:send_event_with_attachments(p21, p22, p23) --[[ line: 339 ]]
 					local body = p25.body.Body
 					
 					if type(body) == "string" then
-						local ok, status = pcall(function() --[[ line: 23 ]]
+						local ok, status = pcall(function()
 							-- upvalues: var5 (ref), body (ref)
 							return var5:JSONDecode(body)
 						end)
@@ -306,19 +306,19 @@ function t:send_event_with_attachments(p21, p22, p23) --[[ line: 339 ]]
 	end
 end
 
-function t:set_user(p26) --[[ line: 361 ]]
+function t:set_user(p26)
 	self.user = p26
 end
 
-function t:set_tag(p27, p28) --[[ line: 366 ]]
+function t:set_tag(p27, p28)
 	self.tags[p27] = tostring(p28)
 end
 
-function t:set_extra(p29, p30) --[[ line: 371 ]]
+function t:set_extra(p29, p30)
 	self.extra[p29] = p30
 end
 
-function t:add_breadcrumb(p31) --[[ line: 376 ]]
+function t:add_breadcrumb(p31)
 	p31.timestamp = os.time()
 	table.insert(self.breadcrumbs, p31)
 	

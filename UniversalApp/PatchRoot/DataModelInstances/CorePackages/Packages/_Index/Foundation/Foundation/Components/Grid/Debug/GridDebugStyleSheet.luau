@@ -8,7 +8,7 @@ local _ = require(foundation.Enums.Breakpoint)
 local _ = require(foundation.Enums.BreakpointShortName)
 local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | named "GridDebugStyleSheet" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useResponsiveModule (ref), useStyleSheet (ref), reactModule (ref), useForwardRef (ref), styleRuleModule (ref)
 	local var4 = useResponsiveModule()
 	local var5 = useStyleSheet()
@@ -17,7 +17,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | 
 	local breakpoint = var4.config.breakpoint
 	local grid = var4.config.grid
 	local breakpoint_1 = p0.breakpoint or breakpoint.order[#breakpoint.order]
-	local var10 = reactModule.useMemo(function() --[[ line: 31 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: breakpoint (ref), breakpoint_1 (ref), grid (ref), reactModule (copy), styleRuleModule (copy)
 		local var11 = breakpoint.shortNames[breakpoint_1]
 		local var12 = grid.columns[breakpoint_1]
@@ -33,7 +33,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | 
 		end
 		return t
 	end, { breakpoint_1, breakpoint, grid })
-	reactModule.useLayoutEffect(function() --[[ line: 54 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var6 (ref), var5 (ref)
 		if var6 then
 			var6:SetDerives({ var5 })

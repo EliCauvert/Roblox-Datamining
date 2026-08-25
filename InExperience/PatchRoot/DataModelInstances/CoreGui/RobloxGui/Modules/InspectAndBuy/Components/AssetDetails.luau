@@ -35,13 +35,13 @@ local controllerBarHeight = require(coreGuiService.RobloxGui.Modules.InGameMenuC
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local assetDetails = roactModule.PureComponent:extend("AssetDetails")
 
-function assetDetails.setScrollingEnabled(value, p0) --[[ line: 48 ]]
+function assetDetails.setScrollingEnabled(value, p0)
 	if value.state.scrollingEnabled ~= p0 then
 		value:setState({ scrollingEnabled = p0 })
 	end
 end
 
-function assetDetails.getInfoRowProps(p1) --[[ line: 58 ]]
+function assetDetails.getInfoRowProps(p1)
 	-- upvalues: robloxTranslatorModule (ref), attributionConstantsModule (ref), overlayModule (ref), roactModule (ref), constantsModule (ref)
 	local assetInfo = p1.props.assetInfo or {}
 	local locale = p1.props.locale
@@ -63,7 +63,7 @@ function assetDetails.getInfoRowProps(p1) --[[ line: 58 ]]
 			t_1 = {
 				infoName = robloxTranslatorModule:FormatByKeyForLocale("Feature.Catalog.Label.Attribution", locale),
 				infoData = var33.name or "",
-				onActivate = function() --[[ line: 91 ]]
+				onActivate = function()
 					-- upvalues: p1 (ref), overlayModule (copy), var33 (ref)
 					p1.props.openOverlay(overlayModule.AttributionTraversal, var33)
 				end,
@@ -97,13 +97,13 @@ function assetDetails.getInfoRowProps(p1) --[[ line: 58 ]]
 	}
 end
 
-function assetDetails.init(p2) --[[ line: 135 ]]
+function assetDetails.init(p2)
 	-- upvalues: roactModule (ref)
 	p2.state = { scrollingEnabled = true }
 	p2.attributionRef = roactModule.createRef()
 end
 
-function assetDetails.willUpdate(p3, p4) --[[ line: 143 ]]
+function assetDetails.willUpdate(p3, p4)
 	-- upvalues: utilityFunctionsModule (ref), tutilsModule (ref)
 	if utilityFunctionsModule.isCollectibles(p3.props.assetInfo) then
 		local collectibleItemId = p3.props.assetInfo.collectibleItemId
@@ -123,7 +123,7 @@ function assetDetails.willUpdate(p3, p4) --[[ line: 143 ]]
 	end
 end
 
-function assetDetails.didUpdate(p5, p6) --[[ line: 176 ]]
+function assetDetails.didUpdate(p5, p6)
 	-- upvalues: utilityFunctionsModule (ref)
 	local reportOpenDetailsPage = p5.props.reportOpenDetailsPage
 	local assetInfo = p5.props.assetInfo
@@ -149,7 +149,7 @@ function assetDetails.didUpdate(p5, p6) --[[ line: 176 ]]
 	end
 end
 
-function assetDetails.render(p7) --[[ line: 214 ]]
+function assetDetails.render(p7)
 	-- upvalues: images (ref), roactModule (ref), inspectAndBuyContextModule (ref), getFFlagDisplayCollectiblesIconModule (ref), utilityFunctionsModule (ref), playersService (ref), tutilsModule (ref), controllerBarHeight (ref), themeModule (ref), colorsModule (ref), detailsButtonsModule (ref), detailsThumbnailModule (ref), isInExperienceUIVREnabled (ref), tryOnViewportModule (ref), detailsTextModule (ref), imageSetLabel (ref), robloxTranslatorModule (ref), appFonts (ref), detailsDescriptionModule (ref), itemInfoList (ref)
 	local view = p7.props.view
 	local detailsInformation = p7.props.detailsInformation
@@ -161,7 +161,7 @@ function assetDetails.render(p7) --[[ line: 214 ]]
 	local var39 = if owned then owned.ImageRectSize / images.ImagesResolutionScale else Vector2.new(0, 0)
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p8) --[[ line: 225 ]]
+		render = function(p8)
 			-- upvalues: view (ref), getFFlagDisplayCollectiblesIconModule (copy), utilityFunctionsModule (copy), assetInfo (ref), p7 (ref), playersService (copy), tutilsModule (copy), controllerBarHeight (copy), themeModule (copy), roactModule (copy), colorsModule (copy), detailsInformation (ref), detailsButtonsModule (copy), localPlayerModel (ref), scrollingEnabled (ref), detailsThumbnailModule (copy), isInExperienceUIVREnabled (copy), tryOnViewportModule (copy), detailsTextModule (copy), var39 (ref), imageSetLabel (copy), owned (ref), robloxTranslatorModule (copy), locale (ref), appFonts (copy), detailsDescriptionModule (copy), itemInfoList (copy)
 			local resellableInstances
 			local var40 = p8[view]
@@ -215,13 +215,13 @@ function assetDetails.render(p7) --[[ line: 214 ]]
 					DetailsThumbnail = roactModule.createElement(detailsThumbnailModule),
 					TryOnViewport = if not isInExperienceUIVREnabled then if detailsInformation.viewingDetails and localPlayerModel then roactModule.createElement(tryOnViewportModule, {
 						localPlayerModel = localPlayerModel,
-						setScrollingEnabled = function(value) --[[ line: 279 ]]
+						setScrollingEnabled = function(value)
 							-- upvalues: p7 (copy)
 							p7:setScrollingEnabled(value)
 						end
 					}) else nil else localPlayerModel and roactModule.createElement(tryOnViewportModule, {
 						localPlayerModel = localPlayerModel,
-						setScrollingEnabled = function(value) --[[ line: 286 ]]
+						setScrollingEnabled = function(value)
 							-- upvalues: p7 (copy)
 							p7:setScrollingEnabled(value)
 						end
@@ -259,7 +259,7 @@ function assetDetails.render(p7) --[[ line: 214 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p9, _) --[[ line: 335 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p9, _)
 	return {
 		view = p9.view,
 		detailsInformation = p9.detailsInformation,
@@ -270,34 +270,34 @@ return roactRoduxModule.UNSTABLE_connect2(function(p9, _) --[[ line: 335 ]]
 		resellableInstances = p9.collectibleResellableInstances,
 		creatingExperiences = p9.creatingExperiences
 	}
-end, function(p10) --[[ line: 348 ]]
+end, function(p10)
 	-- upvalues: getAssetBundlesModule (ref), getEconomyProductInfoModule (ref), reportOpenDetailsPageModule (ref), getCollectibleResellableInstancesModule (ref), openOverlayModule (ref), getItemDetailsModule (ref), setAssetFromBundleInfoModule (ref)
 	return {
-		getAssetBundles = function(value) --[[ line: 350 ]]
+		getAssetBundles = function(value)
 			-- upvalues: p10 (ref), getAssetBundlesModule (copy)
 			p10(getAssetBundlesModule(value))
 		end,
-		getEconomyProductInfo = function(p11, p12, p13) --[[ line: 353 ]]
+		getEconomyProductInfo = function(p11, p12, p13)
 			-- upvalues: p10 (ref), getEconomyProductInfoModule (copy)
 			p10(getEconomyProductInfoModule(p11, p12, p13))
 		end,
-		reportOpenDetailsPage = function(p14) --[[ line: 356 ]]
+		reportOpenDetailsPage = function(p14)
 			-- upvalues: p10 (ref), reportOpenDetailsPageModule (copy)
 			p10(reportOpenDetailsPageModule(p14))
 		end,
-		getCollectibleResellableInstances = function(p15, p16) --[[ line: 359 ]]
+		getCollectibleResellableInstances = function(p15, p16)
 			-- upvalues: p10 (ref), getCollectibleResellableInstancesModule (copy)
 			p10(getCollectibleResellableInstancesModule(p15, p16))
 		end,
-		openOverlay = function(p17, p18) --[[ line: 362 ]]
+		openOverlay = function(p17, p18)
 			-- upvalues: p10 (ref), openOverlayModule (copy)
 			p10(openOverlayModule(p17, p18))
 		end,
-		getItemDetails = function(p19, p20) --[[ line: 365 ]]
+		getItemDetails = function(p19, p20)
 			-- upvalues: p10 (ref), getItemDetailsModule (copy)
 			p10(getItemDetailsModule(p19, p20))
 		end,
-		setAssetFromBundleInfo = function(value, p21) --[[ line: 368 ]]
+		setAssetFromBundleInfo = function(value, p21)
 			-- upvalues: p10 (ref), setAssetFromBundleInfoModule (copy)
 			p10(setAssetFromBundleInfoModule(value, p21))
 		end

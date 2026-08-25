@@ -3,10 +3,10 @@ local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).MemoryFormatting.ChartHeaderNames
 local var2 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 11 ]]
+	[chartHeaderNames[1]] = function(p0, p1)
 		return p0.name < p1.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 14 ]]
+	[chartHeaderNames[2]] = function(p2, p3)
 		return p2.dataStats.dataSet:back().data < p3.dataStats.dataSet:back().data
 	end
 }
@@ -14,7 +14,7 @@ local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 24 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), signalModule (ref), chartHeaderNames (ref)
 	local t = {}
 	setmetatable(t, t_1)
@@ -37,7 +37,7 @@ function t_1.new() --[[ line: 24 ]]
 	return t
 end
 
-function t_1:updateEntry(p4, p5, p6, p7) --[[ line: 53 ]]
+function t_1:updateEntry(p4, p5, p6, p7)
 	-- upvalues: circularBufferModule (ref), var2 (ref)
 	if not p4[p6] then
 		local var8 = circularBufferModule.new(var2)
@@ -74,7 +74,7 @@ function t_1:updateEntry(p4, p5, p6, p7) --[[ line: 53 ]]
 	p4[p6].min = if min < p7 then min else p7
 end
 
-function t_1:updateEntryList(p8, p9, p10) --[[ line: 109 ]]
+function t_1:updateEntryList(p8, p9, p10)
 	local var12 = 0
 	
 	for i, v in pairs(p10) do
@@ -97,7 +97,7 @@ function t_1:updateEntryList(p8, p9, p10) --[[ line: 109 ]]
 	return var12
 end
 
-function t_1:updateWithTreeStats(p11) --[[ line: 138 ]]
+function t_1:updateWithTreeStats(p11)
 	local t = {
 		PlaceMemory = 0,
 		CoreMemory = 0,
@@ -150,19 +150,19 @@ function t_1:updateWithTreeStats(p11) --[[ line: 138 ]]
 	end
 end
 
-function t_1:totalMemSignal() --[[ line: 204 ]]
+function t_1:totalMemSignal()
 	return self._totalMemoryUpdated
 end
 
-function t_1:treeUpdatedSignal() --[[ line: 208 ]]
+function t_1:treeUpdatedSignal()
 	return self._treeViewUpdated
 end
 
-function t_1:getSortType() --[[ line: 212 ]]
+function t_1:getSortType()
 	return self._sortType
 end
 
-local function recursiveSort(p12, p13) --[[ line: 216 ]]
+local function recursiveSort(p12, p13)
 	-- upvalues: recursiveSort (ref)
 	table.sort(p12, p13)
 	
@@ -173,7 +173,7 @@ local function recursiveSort(p12, p13) --[[ line: 216 ]]
 	end
 end
 
-function t_1:setSortType(p14) --[[ line: 225 ]]
+function t_1:setSortType(p14)
 	-- upvalues: t (ref), recursiveSort (ref)
 	if t[p14] then
 		self._sortType = p14
@@ -184,20 +184,20 @@ function t_1:setSortType(p14) --[[ line: 225 ]]
 	error(string.format("attempted to pass invalid sortType: %s", tostring(p14)), 2)
 end
 
-function t_1:getMemoryData() --[[ line: 234 ]]
+function t_1:getMemoryData()
 	return self._memoryDataSorted
 end
 
-function t_1:isRunning() --[[ line: 238 ]]
+function t_1:isRunning()
 	return self._isRunning
 end
 
-function t_1:start() --[[ line: 242 ]]
+function t_1:start()
 	-- upvalues: getClientReplicatorModule (ref)
 	local var17 = getClientReplicatorModule()
 	
 	if var17 and not self._statsListenerConnection then
-		self._statsListenerConnection = var17.StatsReceived:connect(function(p15) --[[ line: 245 ]]
+		self._statsListenerConnection = var17.StatsReceived:connect(function(p15)
 			-- upvalues: self (ref)
 			if not p15.ServerMemoryTree then return end
 			self._lastUpdate = os.time()
@@ -213,7 +213,7 @@ function t_1:start() --[[ line: 242 ]]
 	end
 end
 
-function t_1:stop() --[[ line: 263 ]]
+function t_1:stop()
 	-- upvalues: getClientReplicatorModule (ref)
 	local var18 = getClientReplicatorModule()
 	

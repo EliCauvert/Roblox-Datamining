@@ -26,28 +26,28 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 
-return function(p0) --[[ line: 66 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), reactModule (ref), cryoModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), useCallback (ref), captureItemModule (ref), view (ref), text (ref), chip (ref), foundationModule (ref), image (ref), videoCamera (ref), scrollingGridView (ref), constantsModule (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	local var11 = useDeviceInsets()
 	local var12 = useTokens()
 	local var13 = useCreationFlowStringsModule()
 	local var14, var15 = reactModule.useState(nil)
 	local var16 = reactModule.useRef(false)
-	local var17 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), p0 (ref), cryoModule (copy)
-		return if var14 then cryoModule.List.filter(p0.captures, function(p1) --[[ line: 78 ]]
+		return if var14 then cryoModule.List.filter(p0.captures, function(p1)
 			-- upvalues: var14 (copy)
 			return p1.CaptureType == var14
 		end) else p0.captures
 	end, { p0.captures, var14 })
-	reactModule.useEffect(function() --[[ line: 83 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var16 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
 		if #p0.captures == 0 and var16.current == false then
 			var16.current = true
 			fireAnalyticsEventModule(eventNames.EditingFlowGalleryNoCapturesAvailable, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 		end
 	end, { p0.captures })
-	local var18 = useCallback(function(p2) --[[ line: 97 ]]
+	local var18 = useCallback(function(p2)
 		-- upvalues: p0 (ref)
 		p0.onCaptureSelected(p2)
 	end, { p0.onCaptureSelected })
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 66 ]]
 			AllChip = reactModule.createElement(chip, {
 				LayoutOrder = 1,
 				isChecked = var14 == nil,
-				onActivated = useCallback(function() --[[ line: 121 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var15 (ref)
 					var15(nil)
 				end, {}),
@@ -82,7 +82,7 @@ return function(p0) --[[ line: 66 ]]
 				LayoutOrder = 2,
 				isChecked = var14 == Enum.CaptureType.Screenshot,
 				leading = image,
-				onActivated = useCallback(function() --[[ line: 125 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var15 (ref)
 					var15(Enum.CaptureType.Screenshot)
 				end, {}),
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 66 ]]
 				LayoutOrder = 3,
 				isChecked = var14 == Enum.CaptureType.Video,
 				leading = videoCamera,
-				onActivated = useCallback(function() --[[ line: 129 ]]
+				onActivated = useCallback(function()
 					-- upvalues: var15 (ref)
 					var15(Enum.CaptureType.Video)
 				end, {}),
@@ -119,14 +119,14 @@ return function(p0) --[[ line: 66 ]]
 					minItemWidth = 100
 				},
 				items = var17,
-				onShowMoreCallback = useCallback(function() --[[ line: 133 ]]
+				onShowMoreCallback = useCallback(function()
 					-- upvalues: p0 (ref)
 					if p0.onShowMore then
 						p0.onShowMore()
 					end
 				end, { p0.onShowMore }),
 				padding = { bottom = UDim.new(0, var12.Padding.Large) },
-				renderEmptyState = useCallback(function() --[[ line: 110 ]]
+				renderEmptyState = useCallback(function()
 					-- upvalues: reactModule (copy), view (copy), text (copy), var13 (ref)
 					return reactModule.createElement(view, { tag = "shrink size-full-full" }, {
 						EmptyState = reactModule.createElement(text, {
@@ -135,7 +135,7 @@ return function(p0) --[[ line: 66 ]]
 						})
 					})
 				end, { var13 }),
-				renderItem = useCallback(function(p3, _) --[[ line: 101 ]]
+				renderItem = useCallback(function(p3, _)
 					-- upvalues: reactModule (copy), captureItemModule (copy), var18 (ref), p0 (ref)
 					return reactModule.createElement(captureItemModule, {
 						zIndex = 1,

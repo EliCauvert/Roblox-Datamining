@@ -7,19 +7,19 @@ local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signal
 
 return {
 	configName = "PartyChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p0) --[[ line: 11 ]]
+	shouldTriggerVisualTreatment = function(p0)
 		-- upvalues: constants (ref)
 		return p0.type == constants.NotificationDialogType.ChatTimeout and p0.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerBehavioralTreatment = function(p1) --[[ line: 15 ]]
+	shouldTriggerBehavioralTreatment = function(p1)
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatTimeout and p1.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerEventReceived = function(p2) --[[ line: 19 ]]
+	shouldTriggerEventReceived = function(p2)
 		-- upvalues: constants (ref)
 		return p2.type == constants.NotificationDialogType.ChatTimeout and p2.abuseVector == constants.AbuseVectorType.PartyChat
 	end,
-	onTriggerVisualTreatment = function(p3, p4) --[[ line: 23 ]]
+	onTriggerVisualTreatment = function(p3, p4)
 		-- upvalues: constants (ref)
 		p3({
 			isShown = true,
@@ -29,11 +29,11 @@ return {
 			detail = p4
 		})
 	end,
-	onTriggerBehavioralTreatment = function(p5) --[[ line: 32 ]]
+	onTriggerBehavioralTreatment = function(p5)
 		-- upvalues: partyChatTimeoutReceivedSignal (ref)
 		partyChatTimeoutReceivedSignal:fire(p5.vectorTargetId)
 	end,
-	onTriggerEventReceived = function(p6) --[[ line: 35 ]]
+	onTriggerEventReceived = function(p6)
 		-- upvalues: interventionAnalytics (ref), constants (ref)
 		interventionAnalytics.sendAnalyticsEvent(interventionAnalytics.TelemetryConfigs.MessageReceived, {
 			eventType = interventionAnalytics.Constants.EventTypes.ModalMessageReceived,

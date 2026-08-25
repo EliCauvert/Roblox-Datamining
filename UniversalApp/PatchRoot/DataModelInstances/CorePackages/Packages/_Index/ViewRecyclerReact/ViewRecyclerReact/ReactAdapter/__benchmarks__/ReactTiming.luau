@@ -1,7 +1,7 @@
 ﻿local responsibilityCatalogModule = require(game:GetService("ReplicatedStorage").Packages._Workspace.ViewRecycler.ViewRecycler.Core.Diagnostics.__benchmarks__.ResponsibilityCatalog)
 local list = { 10, 40 }
 
-local function createItems(p0) --[[ line: 76 ]]
+local function createItems(p0)
 	local list = table.create(p0)
 	
 	for i = 1, p0 do
@@ -14,7 +14,7 @@ local function createItems(p0) --[[ line: 76 ]]
 	return list
 end
 
-local function hasItemText(p1, p2) --[[ line: 88 ]]
+local function hasItemText(p1, p2)
 	for i, v in p1:GetDescendants() do
 		if v:IsA("TextLabel") and v.Name == "Content" and v.Text == p2 then
 			return true
@@ -23,7 +23,7 @@ local function hasItemText(p1, p2) --[[ line: 88 ]]
 	return false
 end
 
-local function mountedItemCount(p3) --[[ line: 97 ]]
+local function mountedItemCount(p3)
 	local var32 = 0
 	
 	for i, v in p3:GetDescendants() do
@@ -34,7 +34,7 @@ local function mountedItemCount(p3) --[[ line: 97 ]]
 	return var32
 end
 
-local function findMeasuredObjects(p4, p5) --[[ line: 107 ]]
+local function findMeasuredObjects(p4, p5)
 	for i, v in p4:GetDescendants() do
 		if v:IsA("TextLabel") and v.Name == "Content" and v.Text == p5 then
 			local parent = v.Parent
@@ -51,7 +51,7 @@ local function findMeasuredObjects(p4, p5) --[[ line: 107 ]]
 	return nil, nil
 end
 
-local function recordSizeComparison(p6, p7, p8, p9) --[[ line: 123 ]]
+local function recordSizeComparison(p6, p7, p8, p9)
 	local var33 = p6[p7]
 	
 	if var33 == nil then
@@ -73,16 +73,16 @@ local function recordSizeComparison(p6, p7, p8, p9) --[[ line: 123 ]]
 	var33.differedFromSettled += 1
 end
 
-local function _(p10) --[[ line: 144 | named "findScrollingFrame" ]]
+local function _(p10)
 	local scrollingFrame = p10:FindFirstChildWhichIsA("ScrollingFrame", true)
 	assert(scrollingFrame ~= nil, "React benchmark did not mount a ScrollingFrame")
 	
 	return scrollingFrame
 end
 
-local function flushDeferredWork() --[[ line: 150 ]]
+local function flushDeferredWork()
 	local bindableEvent = Instance.new("BindableEvent")
-	task.defer(function() --[[ line: 152 ]]
+	task.defer(function()
 		-- upvalues: bindableEvent (ref)
 		bindableEvent:Fire()
 	end)
@@ -90,26 +90,26 @@ local function flushDeferredWork() --[[ line: 150 ]]
 	bindableEvent:Destroy()
 end
 
-local function waitForHeartbeatToSettle(value) --[[ line: 159 ]]
+local function waitForHeartbeatToSettle(value)
 	local bindableEvent = Instance.new("BindableEvent")
-	value.RunService.Heartbeat:Once(function() --[[ line: 161 ]]
+	value.RunService.Heartbeat:Once(function()
 		-- upvalues: bindableEvent (ref)
-		task.defer(function() --[[ line: 164 ]]
+		task.defer(function()
 			-- upvalues: bindableEvent (copy)
-			task.defer(function() --[[ line: 165 ]]
+			task.defer(function()
 				-- upvalues: bindableEvent (copy)
 				bindableEvent:Fire()
 			end)
 		end)
 	end)
-	value.ReactRoblox.act(function() --[[ line: 170 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: bindableEvent (ref)
 		bindableEvent.Event:Wait()
 	end)
 	bindableEvent:Destroy()
 end
 
-local _ = function(p11, p12, p13) --[[ line: 176 | named "recordPhase" ]]
+local _ = function(p11, p12, p13)
 	local var37 = p11[p12]
 	
 	if var37 == nil then
@@ -119,7 +119,7 @@ local _ = function(p11, p12, p13) --[[ line: 176 | named "recordPhase" ]]
 	var37[p13] = (var37[p13] or 0) + 1
 end
 
-local function captureCompletionPhase(p14, p15, p16, p17) --[[ line: 185 ]]
+local function captureCompletionPhase(p14, p15, p16, p17)
 	local var38 = true
 	
 	for i, v in p14 do
@@ -140,11 +140,11 @@ local function captureCompletionPhase(p14, p15, p16, p17) --[[ line: 185 ]]
 	return var38
 end
 
-local function observeCompletionPhases(p18, p19, p20, p21, p22) --[[ line: 204 ]]
+local function observeCompletionPhases(p18, p19, p20, p21, p22)
 	-- upvalues: captureCompletionPhase (ref), flushDeferredWork (ref), waitForHeartbeatToSettle (ref)
 	p22 = p22 or {}
 	
-	local function _(p23) --[[ line: 212 | named "capture" ]]
+	local function _(p23)
 		-- upvalues: captureCompletionPhase (copy), p19 (ref), p22 (ref), p21 (ref)
 		return captureCompletionPhase(p19, p22, p21, p23)
 	end
@@ -173,7 +173,7 @@ local function observeCompletionPhases(p18, p19, p20, p21, p22) --[[ line: 204 ]
 	error(`React benchmark did not complete: {if type(p20) == "function" then p20() else p20}`)
 end
 
-local function createOffsets(value, p24) --[[ line: 238 ]]
+local function createOffsets(value, p24)
 	local maxValue = math.max(0, value * 40 - 400)
 	local list = table.create(p24)
 	
@@ -183,12 +183,12 @@ local function createOffsets(value, p24) --[[ line: 238 ]]
 	return list
 end
 
-local function createItemTypes(p25) --[[ line: 248 ]]
+local function createItemTypes(p25)
 	local react = p25.React
 	local signalsReact = p25.SignalsReact
 	local viewRecycler = p25.ViewRecycler
 	
-	return viewRecycler.createRecyclableView(function(p26) --[[ line: 252 | named "UniformRow" ]]
+	return viewRecycler.createRecyclableView(function(p26)
 		-- upvalues: signalsReact (ref), react (ref)
 		return react.createElement("TextLabel", {
 			Name = "Content",
@@ -196,7 +196,7 @@ local function createItemTypes(p25) --[[ line: 248 ]]
 			Size = UDim2.fromScale(1, 1),
 			Text = signalsReact.useSignalState(p26.valueSignal).text
 		})
-	end, { readiness = "ReadyOnAssignment" }), viewRecycler.createRecyclableView(function(p27) --[[ line: 261 | named "MeasuredRow" ]]
+	end, { readiness = "ReadyOnAssignment" }), viewRecycler.createRecyclableView(function(p27)
 		-- upvalues: signalsReact (ref), react (ref)
 		local var43 = signalsReact.useSignalState(p27.valueSignal)
 		
@@ -210,8 +210,8 @@ local function createItemTypes(p25) --[[ line: 248 ]]
 	end, { readiness = "ReadyOnAssignment" })
 end
 
-local _ = function(p28, p29, p30, p31, p32, p33, p34, p35) --[[ line: 280 | named "renderList" ]]
-	p28.ReactRoblox.act(function() --[[ line: 290 ]]
+local _ = function(p28, p29, p30, p31, p32, p33, p34, p35)
+	p28.ReactRoblox.act(function()
 		-- upvalues: p30 (ref), p31 (ref), p28 (ref), p32 (ref), p34 (ref), p35 (ref), p29 (ref), p33 (ref)
 		local t = {
 			overscan = 0,
@@ -236,8 +236,8 @@ local _ = function(p28, p29, p30, p31, p32, p33, p34, p35) --[[ line: 280 | name
 	end)
 end
 
-local _ = function(p36, p37, p38, p39) --[[ line: 313 | named "cleanupFixture" ]]
-	p36.ReactRoblox.act(function() --[[ line: 314 ]]
+local _ = function(p36, p37, p38, p39)
+	p36.ReactRoblox.act(function()
 		-- upvalues: p37 (ref)
 		p37:unmount()
 	end)
@@ -245,18 +245,18 @@ local _ = function(p36, p37, p38, p39) --[[ line: 313 | named "cleanupFixture" ]
 	p39:Destroy()
 end
 
-local _ = function(p40, p41) --[[ line: 321 | named "approximatelyEqual" ]]
+local _ = function(p40, p41)
 	return math.abs(p40 - p41) <= 0.01
 end
 
-local _ = function(value, p42) --[[ line: 325 | named "getItemHostOffset" ]]
+local _ = function(value, p42)
 	-- upvalues: findMeasuredObjects (ref)
 	local _, var45 = findMeasuredObjects(value, p42)
 	
 	return if var45 == nil then nil else var45.Position.Y.Offset
 end
 
-local function createPropagationScenario(p43, p44, p45) --[[ line: 333 ]]
+local function createPropagationScenario(p43, p44, p45)
 	local var46 = p45 * 40
 	local var47 = var46 + 80
 	local var48 = math.floor(p45 / 2) + 1
@@ -323,7 +323,7 @@ local function createPropagationScenario(p43, p44, p45) --[[ line: 333 ]]
 	}
 end
 
-local function measureCompletedMount(p46, p47, p48, p49, p50, p51, p52) --[[ line: 406 ]]
+local function measureCompletedMount(p46, p47, p48, p49, p50, p51, p52)
 	-- upvalues: observeCompletionPhases (ref), hasItemText (ref), mountedItemCount (ref), responsibilityCatalogModule (ref)
 	local clock = p52.clock or os.clock
 	local var54 = 0
@@ -345,19 +345,19 @@ local function measureCompletedMount(p46, p47, p48, p49, p50, p51, p52) --[[ lin
 			includesSchedulerWaits = true
 		},
 		arms = {
-			viewRecycler = p47.run(function() --[[ line: 418 ]]
+			viewRecycler = p47.run(function()
 				-- upvalues: p46 (ref), p49 (ref), clock (ref), p50 (ref), p51 (ref), observeCompletionPhases (copy), hasItemText (copy), t (ref), var54 (write), mountedItemCount (copy)
 				local folder = Instance.new("Folder")
 				local var57 = p46.ReactRoblox.createRoot(folder)
 				local var58 = p46.ViewRecycler.Layout.uniform({ itemLength = 40 })
-				local var59 = p46.ViewRecycler.DataSource.snapshot(p49, function(p53) --[[ line: 422 ]]
+				local var59 = p46.ViewRecycler.DataSource.snapshot(p49, function(p53)
 					return p53.id
 				end)
 				local var60 = clock()
 				local act = p46.ReactRoblox.act
 				local var61 = nil
 				local var62 = nil
-				act(function() --[[ line: 290 ]]
+				act(function()
 					-- upvalues: var59 (ref), var58 (ref), p46 (ref), p50 (ref), var61 (ref), var62 (ref), var57 (ref), p51 (ref)
 					local t = {
 						overscan = 0,
@@ -381,14 +381,14 @@ local function measureCompletedMount(p46, p47, p48, p49, p50, p51, p52) --[[ lin
 					}))
 				end)
 				observeCompletionPhases(p46, {
-					destinationRowCommitted = function() --[[ line: 429 ]]
+					destinationRowCommitted = function()
 						-- upvalues: hasItemText (copy), folder (ref), p51 (copy)
 						return hasItemText(folder, `Item {p51}`)
 					end
 				}, `mount Item {p51}`, t)
 				local var63 = (clock() - var60) * 1000
 				var54 = mountedItemCount(folder)
-				p46.ReactRoblox.act(function() --[[ line: 314 ]]
+				p46.ReactRoblox.act(function()
 					-- upvalues: var57 (ref)
 					var57:unmount()
 				end)
@@ -407,18 +407,18 @@ local function measureCompletedMount(p46, p47, p48, p49, p50, p51, p52) --[[ lin
 	})
 end
 
-local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61, p62) --[[ line: 470 ]]
+local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61, p62)
 	-- upvalues: hasItemText (ref), observeCompletionPhases (ref), createOffsets (ref), captureCompletionPhase (ref), mountedItemCount (ref), responsibilityCatalogModule (ref)
 	local clock = p62.clock or os.clock
 	local folder = Instance.new("Folder")
 	local var66 = p54.ReactRoblox.createRoot(folder)
 	local var67 = if p61 then p54.ViewRecycler.Layout.measured({ estimatedItemLength = 40 }) else p54.ViewRecycler.Layout.uniform({ itemLength = 40 })
-	local var68 = p54.ViewRecycler.DataSource.sequence(p57, function(p63) --[[ line: 487 ]]
+	local var68 = p54.ViewRecycler.DataSource.sequence(p57, function(p63)
 		return p63.id
 	end)
 	local var69 = 0
 	
-	local var70 = function(p64) --[[ line: 491 ]]
+	local var70 = function(p64)
 		-- upvalues: var69 (write)
 		if p64.kind == "measurementsProcessed" then
 			var69 += p64.accepted
@@ -428,7 +428,7 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 	local act = p54.ReactRoblox.act
 	local var71 = nil
 	local var72 = 10
-	act(function() --[[ line: 290 ]]
+	act(function()
 		-- upvalues: var68 (ref), var67 (ref), p54 (ref), p58 (ref), var70 (ref), var71 (ref), var66 (ref), var72 (ref)
 		local t = {
 			overscan = 0,
@@ -452,14 +452,14 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 		}))
 	end)
 	local t = {
-		destinationRowCommitted = function() --[[ line: 498 ]]
+		destinationRowCommitted = function()
 			-- upvalues: hasItemText (copy), folder (ref)
 			return hasItemText(folder, "Item 10")
 		end
 	}
 	
 	if p61 then
-		function t.measurementAccepted() --[[ line: 503 ]]
+		function t.measurementAccepted()
 			-- upvalues: var69 (write)
 			return var69 > 0
 		end
@@ -471,7 +471,7 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 	local var76 = 0
 	local var77 = 0
 	local t_1 = {}
-	local var79 = p55.run(function() --[[ line: 514 ]]
+	local var79 = p55.run(function()
 		-- upvalues: var76 (write), p61 (ref), var75 (ref), var68 (ref), var69 (write), clock (ref), hasItemText (copy), folder (ref), p54 (ref), scrollingFrame (ref), captureCompletionPhase (copy), t_1 (ref), observeCompletionPhases (copy), var77 (write)
 		var76 = (var76 + 1) % 2
 		
@@ -489,20 +489,20 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 			local var85 = math.floor(v / 40) + 1
 			local var86 = var69
 			local t = {
-				destinationRowCommitted = function() --[[ line: 532 ]]
+				destinationRowCommitted = function()
 					-- upvalues: hasItemText (copy), folder (copy), var85 (ref)
 					return hasItemText(folder, `Item {var85}`)
 				end
 			}
 			
 			if p61 then
-				function t.measurementAccepted() --[[ line: 537 ]]
+				function t.measurementAccepted()
 					-- upvalues: var69 (copy), var86 (ref)
 					return var86 < var69
 				end
 			end
 			local t_2 = {}
-			p54.ReactRoblox.act(function() --[[ line: 542 ]]
+			p54.ReactRoblox.act(function()
 				-- upvalues: scrollingFrame (copy), v (ref), captureCompletionPhase (copy), t (ref), t_2 (ref), t_1 (copy)
 				scrollingFrame.CanvasPosition = Vector2.new(0, v)
 				captureCompletionPhase(t, t_2, t_1, "afterMutation")
@@ -511,12 +511,12 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 		end
 		local var84 = (clock() - var83) * 1000
 		var77 = var69 - var69
-		p54.ReactRoblox.act(function() --[[ line: 557 ]]
+		p54.ReactRoblox.act(function()
 			-- upvalues: scrollingFrame (copy)
 			scrollingFrame.CanvasPosition = Vector2.zero
 		end)
 		observeCompletionPhases(p54, {
-			destinationRowCommitted = function() --[[ line: 561 ]]
+			destinationRowCommitted = function()
 				-- upvalues: hasItemText (copy), folder (copy)
 				return hasItemText(folder, "Item 1")
 			end
@@ -525,7 +525,7 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 		return var84
 	end, p62)
 	local var80 = mountedItemCount(folder)
-	p54.ReactRoblox.act(function() --[[ line: 314 ]]
+	p54.ReactRoblox.act(function()
 		-- upvalues: var66 (ref)
 		var66:unmount()
 	end)
@@ -563,7 +563,7 @@ local function measureCompletedTraversal(p54, p55, p56, p57, p58, p59, p60, p61,
 	})
 end
 
-local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 ]]
+local function measureHostSizeSettlePhases(value, p65, p66, p67)
 	-- upvalues: observeCompletionPhases (ref), hasItemText (ref), waitForHeartbeatToSettle (ref), findMeasuredObjects (ref), flushDeferredWork (ref), recordSizeComparison (ref), responsibilityCatalogModule (ref)
 	local clock = p67.clock or os.clock
 	local screenGui = Instance.new("ScreenGui")
@@ -572,7 +572,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 	local var91 = value.ReactRoblox.createRoot(screenGui)
 	local var92 = value.ViewRecycler.Layout.measured({ estimatedItemLength = 40 })
 	local repeated = string.rep("This response grows enough to wrap across the measured row. ", 8)
-	local var94 = value.ViewRecycler.createRecyclableView(function(p68) --[[ line: 621 ]]
+	local var94 = value.ViewRecycler.createRecyclableView(function(p68)
 		-- upvalues: value (ref)
 		return value.React.createElement("TextLabel", {
 			Name = "Content",
@@ -589,12 +589,12 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 		text = "Short response",
 		height = 40
 	}
-	local var96 = value.ViewRecycler.DataSource.sequence({ t }, function(p69) --[[ line: 641 ]]
+	local var96 = value.ViewRecycler.DataSource.sequence({ t }, function(p69)
 		return p69.id
 	end)
 	local var97 = 0
 	
-	local var98 = function(p70) --[[ line: 645 ]]
+	local var98 = function(p70)
 		-- upvalues: var97 (write)
 		if p70.kind == "measurementsProcessed" then
 			var97 += p70.accepted
@@ -604,7 +604,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 	local act = value.ReactRoblox.act
 	local var99 = nil
 	local var100 = 3
-	act(function() --[[ line: 290 ]]
+	act(function()
 		-- upvalues: var96 (ref), var92 (ref), value (ref), var94 (ref), var98 (ref), var99 (ref), var91 (ref), var100 (ref)
 		local t = {
 			overscan = 0,
@@ -628,11 +628,11 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 		}))
 	end)
 	observeCompletionPhases(value, {
-		destinationRowCommitted = function() --[[ line: 652 ]]
+		destinationRowCommitted = function()
 			-- upvalues: hasItemText (copy), screenGui (ref)
 			return hasItemText(screenGui, "Short response")
 		end,
-		measurementAccepted = function() --[[ line: 655 ]]
+		measurementAccepted = function()
 			-- upvalues: var97 (write)
 			return var97 > 0
 		end
@@ -647,7 +647,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 	local t_5 = {}
 	local t_6 = { host = {}, content = {} }
 	local var108 = 0
-	local var109 = p65.run(function() --[[ line: 673 ]]
+	local var109 = p65.run(function()
 		-- upvalues: var108 (write), var101 (write), repeated (ref), var97 (write), findMeasuredObjects (copy), screenGui (ref), t_1 (ref), clock (ref), value (ref), var96 (ref), t (ref), flushDeferredWork (copy), waitForHeartbeatToSettle (copy), t_4 (ref), t_5 (ref), recordSizeComparison (copy), t_2 (ref), t_6 (ref), t_3 (ref)
 		var108 += 1
 		var101 = (var101 + 1) % 2
@@ -657,7 +657,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 		local t_8 = {}
 		local var114 = nil
 		
-		local function _(p71) --[[ line: 682 | named "capture" ]]
+		local function _(p71)
 			-- upvalues: findMeasuredObjects (copy), screenGui (copy), var110 (ref), t_8 (ref), t_7 (ref), var114 (write), var97 (copy), var97 (ref), t_1 (copy)
 			local var128, var129 = findMeasuredObjects(screenGui, var110)
 			
@@ -681,7 +681,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 		end
 		
 		local var115 = clock()
-		value.ReactRoblox.act(function() --[[ line: 697 ]]
+		value.ReactRoblox.act(function()
 			-- upvalues: var96 (copy), t (copy), var110 (ref), findMeasuredObjects (copy), screenGui (copy), t_8 (ref), t_7 (ref), var114 (write), var97 (copy), var97 (ref), t_1 (copy)
 			var96.setItem(1, { id = t.id, text = var110, height = t.height })
 			local var131, var132 = findMeasuredObjects(screenGui, var110)
@@ -810,7 +810,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 		end
 		return var126
 	end, p67)
-	value.ReactRoblox.act(function() --[[ line: 314 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: var91 (ref)
 		var91:unmount()
 	end)
@@ -850,7 +850,7 @@ local function measureHostSizeSettlePhases(value, p65, p66, p67) --[[ line: 607 
 	})
 end
 
-local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ line: 785 ]]
+local function runAssignmentPropagationSample(value, p72, p73, p74, p75)
 	-- upvalues: observeCompletionPhases (ref), hasItemText (ref), waitForHeartbeatToSettle (ref), findMeasuredObjects (ref)
 	local clock = p75.clock or os.clock
 	local list = table.create(p74)
@@ -866,7 +866,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	local folder = Instance.new("Folder")
 	local var138 = value.ReactRoblox.createRoot(folder)
 	local var139 = value.ViewRecycler.Layout.measured({ estimatedItemLength = 40 })
-	local var140 = value.ViewRecycler.DataSource.sequence(list, function(p76) --[[ line: 809 ]]
+	local var140 = value.ViewRecycler.DataSource.sequence(list, function(p76)
 		return p76.id
 	end)
 	local var141 = nil
@@ -879,7 +879,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	local t_1 = { data = 0, measurement = 0, programmaticScroll = 0 }
 	local t_2 = {}
 	
-	local var150 = function(p77) --[[ line: 825 ]]
+	local var150 = function(p77)
 		-- upvalues: var146 (write), var141 (write), var142 (write), clock (ref), var143 (write), t_1 (ref)
 		if not var146 then return end
 		if p77.kind == "measurementsProcessingStarted" and var141 ~= nil then
@@ -901,14 +901,14 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 		initialScrollAlignment = p73.initialScrollAlignment,
 		autoScrollOnChange = p73.autoScrollOnChange,
 		_instrumentation = {
-			assignmentChanged = function(_, p78) --[[ line: 843 ]]
+			assignmentChanged = function(_, p78)
 				-- upvalues: var146 (write), t (ref), var141 (write), clock (ref)
 				if var146 and p78 ~= nil and (p78.key == t.id and var141 == nil) then
 					var141 = clock()
 				end
 			end
 		},
-		onContentLengthChanged = function(p79) --[[ line: 854 ]]
+		onContentLengthChanged = function(p79)
 			-- upvalues: var146 (write), p73 (ref), var147 (write)
 			if var146 and math.abs(p79 - p73.finalContentLength) <= 0.01 then
 				var147 = p79
@@ -916,7 +916,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 		end
 	}
 	local var152 = 10
-	value.ReactRoblox.act(function() --[[ line: 290 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: var140 (ref), var139 (ref), value (ref), p72 (ref), var150 (ref), t_3 (ref), var138 (ref), var152 (ref)
 		local t = {
 			overscan = 0,
@@ -941,16 +941,16 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	end)
 	local scrollingFrame = folder:FindFirstChildWhichIsA("ScrollingFrame", true)
 	assert(scrollingFrame ~= nil, "React benchmark did not mount a ScrollingFrame")
-	value.ReactRoblox.act(function() --[[ line: 861 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: scrollingFrame (ref), p73 (ref)
 		scrollingFrame.CanvasPosition = Vector2.new(0, p73.initialOffset)
 	end)
 	observeCompletionPhases(value, {
-		destinationRowCommitted = function() --[[ line: 865 ]]
+		destinationRowCommitted = function()
 			-- upvalues: hasItemText (copy), folder (ref), p73 (ref)
 			return hasItemText(folder, p73.initialDestinationText)
 		end,
-		initialCanvasSettled = function() --[[ line: 868 ]]
+		initialCanvasSettled = function()
 			-- upvalues: scrollingFrame (ref), p74 (ref)
 			return math.abs(scrollingFrame.CanvasSize.Y.Offset - p74 * 40) <= 0.01
 		end
@@ -959,7 +959,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	assert(math.abs(scrollingFrame.CanvasSize.Y.Offset - p74 * 40) <= 0.01, `{p73.name}: initial canvas size did not settle (expected {p74 * 40}, got {scrollingFrame.CanvasSize.Y.Offset})`)
 	assert(math.abs(scrollingFrame.CanvasPosition.Y - p73.initialOffset) <= 0.01, `{p73.name}: initial scroll position did not settle`)
 	var146 = true
-	value.ReactRoblox.act(function() --[[ line: 883 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: var140 (ref), p73 (ref), t (ref)
 		var140.insert(p73.insertIndex, t)
 	end)
@@ -967,7 +967,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	local var155 = if p73.name == "before-visible-anchor" then 40 else 0
 	local t_4 = {}
 	
-	local function captureLibraryPublication() --[[ line: 889 ]]
+	local function captureLibraryPublication()
 		-- upvalues: folder (ref), t (ref), findMeasuredObjects (copy), p73 (ref), var141 (write), var142 (write), var143 (write), var147 (write), t_1 (ref), var154 (ref), var155 (ref), var144 (write), clock (ref)
 		local _, var167 = findMeasuredObjects(folder, t.text)
 		local var168 = if var167 == nil then nil else var167.Position.Y.Offset
@@ -983,7 +983,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	
 	observeCompletionPhases(value, {
 		libraryOutputsPublished = captureLibraryPublication,
-		hostValuesObserved = function() --[[ line: 909 ]]
+		hostValuesObserved = function()
 			-- upvalues: captureLibraryPublication (ref), folder (ref), t (ref), findMeasuredObjects (copy), p73 (ref), t_4 (write), var141 (write), var142 (write), var143 (write), var144 (write), var147 (write), scrollingFrame (ref), var145 (write), clock (ref)
 			captureLibraryPublication()
 			local _, var172 = findMeasuredObjects(folder, t.text)
@@ -1007,7 +1007,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 			end
 			return var175
 		end
-	}, function() --[[ line: 933 ]]
+	}, function()
 		-- upvalues: p73 (ref), t_4 (write)
 		return `{p73.name} assignment, measurement, and propagation; assigned={t_4.assigned}, measurementStarted={t_4.measurementStarted}, measurementProcessed={t_4.measurementProcessed}, libraryPublished={t_4.libraryPublished}, content={t_4.observedContentLength}, canvas={t_4.canvasLength}, scroll={t_4.scrollOffset}, inserted={t_4.insertedOffset}, neighbor={t_4.neighborOffset}`
 	end, t_2)
@@ -1038,7 +1038,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	t_5.measurementProcessedToLibraryPublicationMs = (var161 - var160) * 1000
 	t_5.libraryPublicationToHostObservationMs = (var162 - var161) * 1000
 	t_5.assignmentToHostObservationMs = (var162 - var158) * 1000
-	value.ReactRoblox.act(function() --[[ line: 314 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: var138 (ref)
 		var138:unmount()
 	end)
@@ -1048,7 +1048,7 @@ local function runAssignmentPropagationSample(value, p72, p73, p74, p75) --[[ li
 	return t_5
 end
 
-local function measureAssignmentPropagation(value, p80, p81, p82, p83, p84, p85) --[[ line: 984 ]]
+local function measureAssignmentPropagation(value, p80, p81, p82, p83, p84, p85)
 	-- upvalues: runAssignmentPropagationSample (ref), responsibilityCatalogModule (ref)
 	local t = {}
 	
@@ -1074,35 +1074,35 @@ local function measureAssignmentPropagation(value, p80, p81, p82, p83, p84, p85)
 			includesSchedulerWaits = true
 		},
 		arms = {
-			assignmentToMeasurementStart = p80.run(function() --[[ line: 994 ]]
+			assignmentToMeasurementStart = p80.run(function()
 				-- upvalues: runAssignmentPropagationSample (copy), value (ref), p82 (ref), p83 (ref), p84 (ref), p85 (ref), t (write)
 				local var177 = runAssignmentPropagationSample(value, p82, p83, p84, p85)
 				t = var177
 				
 				return var177.assignmentToMeasurementStartMs
 			end, p85),
-			measurementProcessing = p80.run(function() --[[ line: 999 ]]
+			measurementProcessing = p80.run(function()
 				-- upvalues: runAssignmentPropagationSample (copy), value (ref), p82 (ref), p83 (ref), p84 (ref), p85 (ref), t (write)
 				local var178 = runAssignmentPropagationSample(value, p82, p83, p84, p85)
 				t = var178
 				
 				return var178.measurementProcessingMs
 			end, p85),
-			measurementProcessedToLibraryPublication = p80.run(function() --[[ line: 1004 ]]
+			measurementProcessedToLibraryPublication = p80.run(function()
 				-- upvalues: runAssignmentPropagationSample (copy), value (ref), p82 (ref), p83 (ref), p84 (ref), p85 (ref), t (write)
 				local var179 = runAssignmentPropagationSample(value, p82, p83, p84, p85)
 				t = var179
 				
 				return var179.measurementProcessedToLibraryPublicationMs
 			end, p85),
-			libraryPublicationToHostObservation = p80.run(function() --[[ line: 1009 ]]
+			libraryPublicationToHostObservation = p80.run(function()
 				-- upvalues: runAssignmentPropagationSample (copy), value (ref), p82 (ref), p83 (ref), p84 (ref), p85 (ref), t (write)
 				local var180 = runAssignmentPropagationSample(value, p82, p83, p84, p85)
 				t = var180
 				
 				return var180.libraryPublicationToHostObservationMs
 			end, p85),
-			assignmentToHostObservation = p80.run(function() --[[ line: 1014 ]]
+			assignmentToHostObservation = p80.run(function()
 				-- upvalues: runAssignmentPropagationSample (copy), value (ref), p82 (ref), p83 (ref), p84 (ref), p85 (ref), t (write)
 				local var181 = runAssignmentPropagationSample(value, p82, p83, p84, p85)
 				t = var181
@@ -1116,7 +1116,7 @@ end
 
 local var19 = nil
 
-local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ line: 1054 ]]
+local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90)
 	-- upvalues: createItems (ref), observeCompletionPhases (ref), hasItemText (ref), responsibilityCatalogModule (ref)
 	local clock = p90.clock or os.clock
 	local folder = Instance.new("Folder")
@@ -1128,10 +1128,10 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 	for i, v in var187 do
 		v.text = `Reconciled {i}`
 	end
-	local function _(p91) --[[ line: 1070 | named "declarativeData" ]]
+	local function _(p91)
 		return {
 			items = p91,
-			getItemKey = function(p92) --[[ line: 1073 ]]
+			getItemKey = function(p92)
 				return p92.id
 			end
 		}
@@ -1139,7 +1139,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 	
 	local t = {
 		items = var186,
-		getItemKey = function(p93) --[[ line: 1073 ]]
+		getItemKey = function(p93)
 			return p93.id
 		end
 	}
@@ -1147,7 +1147,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 	local var189 = nil
 	local var190 = nil
 	local var191 = 10
-	act(function() --[[ line: 290 ]]
+	act(function()
 		-- upvalues: t (ref), var185 (ref), p86 (ref), p89 (ref), var189 (ref), var190 (ref), var184 (ref), var191 (ref)
 		local t = {
 			overscan = 0,
@@ -1174,7 +1174,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 	local var193 = 0
 	local t_1 = {}
 	local var195 = ""
-	local var196 = p87.run(function() --[[ line: 1083 ]]
+	local var196 = p87.run(function()
 		-- upvalues: var192 (write), var187 (ref), var186 (ref), var195 (write), clock (ref), p86 (ref), var184 (ref), var185 (ref), p89 (ref), observeCompletionPhases (copy), hasItemText (copy), folder (ref), t_1 (ref), var193 (write)
 		var192 = not var192
 		local var198 = if var192 then var187 else var186
@@ -1182,7 +1182,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 		local var199 = clock()
 		local t = {
 			items = var198,
-			getItemKey = function(p94) --[[ line: 1073 ]]
+			getItemKey = function(p94)
 				return p94.id
 			end
 		}
@@ -1190,7 +1190,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 		local var201 = nil
 		local var202 = nil
 		local var203 = 10
-		act(function() --[[ line: 290 ]]
+		act(function()
 			-- upvalues: t (ref), var185 (ref), p86 (ref), p89 (ref), var201 (ref), var202 (ref), var184 (ref), var203 (ref)
 			local t = {
 				overscan = 0,
@@ -1214,7 +1214,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 			}))
 		end)
 		observeCompletionPhases(p86, {
-			reconciledContentCommitted = function() --[[ line: 1090 ]]
+			reconciledContentCommitted = function()
 				-- upvalues: hasItemText (copy), folder (copy), var195 (copy)
 				return hasItemText(folder, var195)
 			end
@@ -1226,7 +1226,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 	local scrollingFrame = folder:FindFirstChildWhichIsA("ScrollingFrame", true)
 	assert(scrollingFrame ~= nil, "React benchmark did not mount a ScrollingFrame")
 	scrollingFrame = scrollingFrame.CanvasSize.Y.Offset
-	p86.ReactRoblox.act(function() --[[ line: 314 ]]
+	p86.ReactRoblox.act(function()
 		-- upvalues: var184 (ref)
 		var184:unmount()
 	end)
@@ -1259,7 +1259,7 @@ local function measureDeclarativeReconciliation(p86, p87, p88, p89, p90) --[[ li
 	})
 end
 
-local function runDeclarativeDataReconciliation(p95, p96, p97, p98, p99) --[[ line: 1131 ]]
+local function runDeclarativeDataReconciliation(p95, p96, p97, p98, p99)
 	-- upvalues: createItemTypes (ref), var19 (write), measureDeclarativeReconciliation (ref)
 	p98 = p98 or {}
 	local var205, var206 = createItemTypes(p95)
@@ -1271,7 +1271,7 @@ local function runDeclarativeDataReconciliation(p95, p96, p97, p98, p99) --[[ li
 	return measureDeclarativeReconciliation(p95, p96, p97, var205, p98)
 end
 
-local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ line: 1151 ]]
+local function measurePropSynchronization(p100, p101, p102, p103, p104)
 	-- upvalues: createItems (ref), observeCompletionPhases (ref), hasItemText (ref), responsibilityCatalogModule (ref)
 	local clock = p104.clock or os.clock
 	local folder = Instance.new("Folder")
@@ -1281,17 +1281,17 @@ local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ lin
 	local var212 = createItems(20)
 	local var213 = createItems(21)
 	var213[1].text = "Replacement first"
-	local var214 = p100.ViewRecycler.DataSource.snapshot(var212, function(p105) --[[ line: 1167 ]]
+	local var214 = p100.ViewRecycler.DataSource.snapshot(var212, function(p105)
 		return p105.id
 	end)
-	local var215 = p100.ViewRecycler.DataSource.snapshot(var213, function(p106) --[[ line: 1170 ]]
+	local var215 = p100.ViewRecycler.DataSource.snapshot(var213, function(p106)
 		return p106.id
 	end)
 	local act = p100.ReactRoblox.act
 	local var216 = nil
 	local var217 = nil
 	local var218 = 10
-	act(function() --[[ line: 290 ]]
+	act(function()
 		-- upvalues: var214 (ref), var210 (ref), p100 (ref), p103 (ref), var216 (ref), var217 (ref), var209 (ref), var218 (ref)
 		local t = {
 			overscan = 0,
@@ -1319,7 +1319,7 @@ local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ lin
 	local t = {}
 	local var222 = 0
 	local var223 = ""
-	local var224 = p101.run(function() --[[ line: 1179 ]]
+	local var224 = p101.run(function()
 		-- upvalues: var219 (write), var215 (ref), var214 (ref), var211 (ref), var210 (ref), var222 (write), var213 (ref), var212 (ref), var223 (write), clock (ref), p100 (ref), var209 (ref), p103 (ref), observeCompletionPhases (copy), hasItemText (copy), folder (ref), t (ref), var220 (write)
 		var219 = not var219
 		local var225 = if var219 then var215 else var214
@@ -1331,7 +1331,7 @@ local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ lin
 		local var228 = nil
 		local var229 = nil
 		local var230 = 10
-		act(function() --[[ line: 290 ]]
+		act(function()
 			-- upvalues: var225 (ref), var226 (ref), p100 (ref), p103 (ref), var228 (ref), var229 (ref), var209 (ref), var230 (ref)
 			local t = {
 				overscan = 0,
@@ -1355,7 +1355,7 @@ local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ lin
 			}))
 		end)
 		observeCompletionPhases(p100, {
-			dataAndLayoutPropsCommitted = function() --[[ line: 1188 ]]
+			dataAndLayoutPropsCommitted = function()
 				-- upvalues: hasItemText (copy), folder (copy), var223 (copy), var222 (copy)
 				local var231 = hasItemText(folder, var223)
 				
@@ -1371,7 +1371,7 @@ local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ lin
 		
 		return (clock() - var227) * 1000
 	end, p104)
-	p100.ReactRoblox.act(function() --[[ line: 314 ]]
+	p100.ReactRoblox.act(function()
 		-- upvalues: var209 (ref)
 		var209:unmount()
 	end)
@@ -1409,12 +1409,12 @@ local function measurePropSynchronization(p100, p101, p102, p103, p104) --[[ lin
 	})
 end
 
-local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230 ]]
+local function measureAssignmentBinding(value, p107, p108, p109)
 	-- upvalues: createItems (ref), hasItemText (ref), captureCompletionPhase (ref), observeCompletionPhases (ref), responsibilityCatalogModule (ref)
 	local clock = p109.clock or os.clock
 	local var234 = 0
 	local var235 = 0
-	local var236 = value.ViewRecycler.createRecyclableView(function(p110) --[[ line: 1239 ]]
+	local var236 = value.ViewRecycler.createRecyclableView(function(p110)
 		-- upvalues: var234 (write), value (ref)
 		var234 += 1
 		
@@ -1422,7 +1422,7 @@ local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230
 			Name = "Content",
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Text = value.ViewRecycler.useItemBinding(p110.valueSignal, function(p111) --[[ line: 1245 ]]
+			Text = value.ViewRecycler.useItemBinding(p110.valueSignal, function(p111)
 				return p111.text
 			end)
 		})
@@ -1430,12 +1430,12 @@ local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230
 	local folder = Instance.new("Folder")
 	local var238 = value.ReactRoblox.createRoot(folder)
 	local var239 = value.ViewRecycler.Layout.uniform({ itemLength = 40 })
-	local var240 = value.ViewRecycler.DataSource.sequence(createItems(20), function(p112) --[[ line: 1255 ]]
+	local var240 = value.ViewRecycler.DataSource.sequence(createItems(20), function(p112)
 		return p112.id
 	end)
 	local t = {
 		_instrumentation = {
-			assignmentChanged = function(_, p113) --[[ line: 1260 ]]
+			assignmentChanged = function(_, p113)
 				-- upvalues: var235 (write)
 				if p113 ~= nil then
 					var235 += 1
@@ -1446,7 +1446,7 @@ local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230
 	local act = value.ReactRoblox.act
 	local var242 = nil
 	local var243 = 10
-	act(function() --[[ line: 290 ]]
+	act(function()
 		-- upvalues: var240 (ref), var239 (ref), value (ref), var236 (ref), var242 (ref), t (ref), var238 (ref), var243 (ref)
 		local t = {
 			overscan = 0,
@@ -1476,20 +1476,20 @@ local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230
 	local var247 = true
 	local var248 = 0
 	local t_1 = {}
-	local var250 = p107.run(function() --[[ line: 1272 ]]
+	local var250 = p107.run(function()
 		-- upvalues: var247 (write), var235 (write), hasItemText (copy), folder (ref), clock (ref), value (ref), var246 (ref), captureCompletionPhase (copy), t_1 (ref), observeCompletionPhases (copy), var248 (write)
 		var247 = not var247
 		local var252 = if var247 then 0 else 400
 		local var253 = if var247 then "Item 1" else "Item 11"
 		local t = {
-			bindingDelivered = function() --[[ line: 1278 ]]
+			bindingDelivered = function()
 				-- upvalues: hasItemText (copy), folder (copy), var253 (ref)
 				return hasItemText(folder, var253)
 			end
 		}
 		local t_2 = {}
 		local var256 = clock()
-		value.ReactRoblox.act(function() --[[ line: 1284 ]]
+		value.ReactRoblox.act(function()
 			-- upvalues: var246 (copy), var252 (ref), captureCompletionPhase (copy), t (ref), t_2 (ref), t_1 (copy)
 			var246.CanvasPosition = Vector2.new(0, var252)
 			captureCompletionPhase(t, t_2, t_1, "afterMutation")
@@ -1500,7 +1500,7 @@ local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230
 		return (clock() - var256) * 1000
 	end, p109)
 	local var251 = var234
-	value.ReactRoblox.act(function() --[[ line: 314 ]]
+	value.ReactRoblox.act(function()
 		-- upvalues: var238 (ref)
 		var238:unmount()
 	end)
@@ -1556,19 +1556,19 @@ local function measureAssignmentBinding(value, p107, p108, p109) --[[ line: 1230
 	})
 end
 
-local function createPresentationArm(p114, p115, p116, p117) --[[ line: 1363 ]]
+local function createPresentationArm(p114, p115, p116, p117)
 	-- upvalues: createItems (ref), hasItemText (ref), captureCompletionPhase (ref), observeCompletionPhases (ref)
-	local var257 = p114.ViewRecycler.createRecyclableView(if p115 == "ReadyOnAssignment" then function(p119) --[[ line: 1371 ]]
+	local var257 = p114.ViewRecycler.createRecyclableView(if p115 == "ReadyOnAssignment" then function(p119)
 		-- upvalues: p114 (ref)
 		return p114.React.createElement("TextLabel", {
 			Name = "Content",
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Text = p114.ViewRecycler.useItemBinding(p119.valueSignal, function(p120) --[[ line: 1376 ]]
+			Text = p114.ViewRecycler.useItemBinding(p119.valueSignal, function(p120)
 				return p120.text
 			end)
 		})
-	end else function(p118) --[[ line: 1382 ]]
+	end else function(p118)
 		-- upvalues: p114 (ref)
 		return p114.React.createElement("TextLabel", {
 			Name = "Content",
@@ -1580,14 +1580,14 @@ local function createPresentationArm(p114, p115, p116, p117) --[[ line: 1363 ]]
 	local folder = Instance.new("Folder")
 	local var259 = p114.ReactRoblox.createRoot(folder)
 	local var260 = p114.ViewRecycler.Layout.uniform({ itemLength = 40 })
-	local var261 = p114.ViewRecycler.DataSource.sequence(createItems(20), function(p121) --[[ line: 1399 ]]
+	local var261 = p114.ViewRecycler.DataSource.sequence(createItems(20), function(p121)
 		return p121.id
 	end)
 	local act = p114.ReactRoblox.act
 	local var262 = nil
 	local var263 = nil
 	local var264 = 10
-	act(function() --[[ line: 290 ]]
+	act(function()
 		-- upvalues: var261 (ref), var260 (ref), p114 (ref), var257 (ref), var262 (ref), var263 (ref), var259 (ref), var264 (ref)
 		local t = {
 			overscan = 0,
@@ -1617,20 +1617,20 @@ local function createPresentationArm(p114, p115, p116, p117) --[[ line: 1363 ]]
 	local t = {}
 	
 	return {
-		run = function() --[[ line: 1407 ]]
+		run = function()
 			-- upvalues: var267 (write), hasItemText (copy), folder (ref), p117 (ref), p114 (ref), var266 (ref), captureCompletionPhase (copy), t (ref), observeCompletionPhases (copy)
 			var267 = not var267
 			local var269 = if var267 then 0 else 400
 			local var270 = if var267 then "Item 1" else "Item 11"
 			local t_1 = {
-				presentationCommitted = function() --[[ line: 1412 ]]
+				presentationCommitted = function()
 					-- upvalues: hasItemText (copy), folder (copy), var270 (ref)
 					return hasItemText(folder, var270)
 				end
 			}
 			local t_2 = {}
 			local var273 = p117()
-			p114.ReactRoblox.act(function() --[[ line: 1418 ]]
+			p114.ReactRoblox.act(function()
 				-- upvalues: var266 (copy), var269 (ref), captureCompletionPhase (copy), t_1 (ref), t_2 (ref), t (copy)
 				var266.CanvasPosition = Vector2.new(0, var269)
 				captureCompletionPhase(t_1, t_2, t, "afterMutation")
@@ -1639,7 +1639,7 @@ local function createPresentationArm(p114, p115, p116, p117) --[[ line: 1363 ]]
 			
 			return (p117() - var273) * 1000
 		end,
-		getEvidence = function() --[[ line: 1431 ]]
+		getEvidence = function()
 			-- upvalues: p115 (ref), p116 (ref), t (ref)
 			return {
 				presentations = 1,
@@ -1648,9 +1648,9 @@ local function createPresentationArm(p114, p115, p116, p117) --[[ line: 1363 ]]
 				completionPhaseCounts = t
 			}
 		end,
-		destroy = function() --[[ line: 1439 ]]
+		destroy = function()
 			-- upvalues: p114 (ref), var259 (ref), var260 (ref), folder (ref)
-			p114.ReactRoblox.act(function() --[[ line: 314 ]]
+			p114.ReactRoblox.act(function()
 				-- upvalues: var259 (ref)
 				var259:unmount()
 			end)
@@ -1660,7 +1660,7 @@ local function createPresentationArm(p114, p115, p116, p117) --[[ line: 1363 ]]
 	}
 end
 
-local function measurePresentationCommit(p122, p123, p124, p125) --[[ line: 1445 ]]
+local function measurePresentationCommit(p122, p123, p124, p125)
 	-- upvalues: createPresentationArm (ref), responsibilityCatalogModule (ref)
 	local clock = p125.clock or os.clock
 	local var275 = createPresentationArm(p122, "ReadyOnCommit", false, clock)
@@ -1703,7 +1703,7 @@ local function measurePresentationCommit(p122, p123, p124, p125) --[[ line: 1445
 	})
 end
 
-local function measureVirtualListTeardown(p126, p127, p128, p129) --[[ line: 1495 ]]
+local function measureVirtualListTeardown(p126, p127, p128, p129)
 	-- upvalues: createItems (ref), observeCompletionPhases (ref), hasItemText (ref), responsibilityCatalogModule (ref)
 	local clock = p129.clock or os.clock
 	local t = {}
@@ -1724,18 +1724,18 @@ local function measureVirtualListTeardown(p126, p127, p128, p129) --[[ line: 149
 			includesSchedulerWaits = true
 		},
 		arms = {
-			viewRecycler = p127.run(function() --[[ line: 1503 ]]
+			viewRecycler = p127.run(function()
 				-- upvalues: p126 (ref), createItems (copy), observeCompletionPhases (copy), hasItemText (copy), clock (ref), t (write)
 				local var284 = 0
 				local var285 = 0
-				local var286 = p126.ViewRecycler.createRecyclableView(function(p130) --[[ line: 1506 ]]
+				local var286 = p126.ViewRecycler.createRecyclableView(function(p130)
 					-- upvalues: p126 (copy), var284 (write), var285 (write)
 					local var297 = p126.SignalsReact.useSignalState(p130.valueSignal)
-					p126.React.useEffect(function() --[[ line: 1508 ]]
+					p126.React.useEffect(function()
 						-- upvalues: var284 (copy), var285 (copy)
 						var284 += 1
 						
-						return function() --[[ line: 1510 ]]
+						return function()
 							-- upvalues: var285 (copy)
 							var285 += 1
 						end
@@ -1751,14 +1751,14 @@ local function measureVirtualListTeardown(p126, p127, p128, p129) --[[ line: 149
 				local folder = Instance.new("Folder")
 				local var288 = p126.ReactRoblox.createRoot(folder)
 				local var289 = p126.ViewRecycler.Layout.uniform({ itemLength = 40 })
-				local var290 = p126.ViewRecycler.DataSource.snapshot(createItems(20), function(p131) --[[ line: 1527 ]]
+				local var290 = p126.ViewRecycler.DataSource.snapshot(createItems(20), function(p131)
 					return p131.id
 				end)
 				local act = p126.ReactRoblox.act
 				local var291 = nil
 				local var292 = nil
 				local var293 = 10
-				act(function() --[[ line: 290 ]]
+				act(function()
 					-- upvalues: var290 (ref), var289 (ref), p126 (ref), var286 (ref), var291 (ref), var292 (ref), var288 (ref), var293 (ref)
 					local t = {
 						overscan = 0,
@@ -1782,13 +1782,13 @@ local function measureVirtualListTeardown(p126, p127, p128, p129) --[[ line: 149
 					}))
 				end)
 				observeCompletionPhases(p126, {
-					mounted = function() --[[ line: 1532 ]]
+					mounted = function()
 						-- upvalues: var284 (write), hasItemText (copy), folder (ref)
 						return var284 > 0 and hasItemText(folder, "Item 10")
 					end
 				}, "VirtualList teardown setup", {})
 				local var294 = clock()
-				p126.ReactRoblox.act(function() --[[ line: 1537 ]]
+				p126.ReactRoblox.act(function()
 					-- upvalues: var288 (ref)
 					var288:unmount()
 				end)
@@ -1813,20 +1813,20 @@ local function measureVirtualListTeardown(p126, p127, p128, p129) --[[ line: 149
 	})
 end
 
-local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
+local function createRecyclingTransferArm(p132, p133, p134)
 	-- upvalues: findMeasuredObjects (ref), hasItemText (ref), captureCompletionPhase (ref), observeCompletionPhases (ref)
 	local react = p132.React
 	local viewRecycler = p132.ViewRecycler
 	local var298 = 0
 	local var299 = 0
-	local var300 = viewRecycler.createRecyclableView(if p133 == "ReadyOnAssignment" then function(p136) --[[ line: 1605 | named "StatefulBindingRow" ]]
+	local var300 = viewRecycler.createRecyclableView(if p133 == "ReadyOnAssignment" then function(p136)
 		-- upvalues: react (ref), var298 (write), var299 (write), viewRecycler (ref)
 		local var326 = react.useState("state-preserved")
-		react.useEffect(function() --[[ line: 1607 ]]
+		react.useEffect(function()
 			-- upvalues: var298 (copy), var299 (copy)
 			var298 += 1
 			
-			return function() --[[ line: 1609 ]]
+			return function()
 				-- upvalues: var299 (copy)
 				var299 += 1
 			end
@@ -1836,20 +1836,20 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 			Name = "Content",
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Text = viewRecycler.useItemBinding(p136.valueSignal, function(p137) --[[ line: 1617 ]]
+			Text = viewRecycler.useItemBinding(p136.valueSignal, function(p137)
 				-- upvalues: var326 (ref)
 				return `{p137.text}:{var326}`
 			end)
 		})
-	end else function(p135) --[[ line: 1589 | named "StatefulStructuralRow" ]]
+	end else function(p135)
 		-- upvalues: p132 (ref), react (ref), var298 (write), var299 (write)
 		local var324 = p132.SignalsReact.useSignalState(p135.valueSignal)
 		local var325 = react.useState("state-preserved")
-		react.useEffect(function() --[[ line: 1592 ]]
+		react.useEffect(function()
 			-- upvalues: var298 (copy), var299 (copy)
 			var298 += 1
 			
-			return function() --[[ line: 1594 ]]
+			return function()
 				-- upvalues: var299 (copy)
 				var299 += 1
 			end
@@ -1865,10 +1865,10 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 		readiness = p133,
 		hideWhilePending = p133 == "ReadyOnCommit"
 	})
-	local var301 = viewRecycler.DataSource.sequence({ { id = "first", text = "First", height = 40 } }, function(p138) --[[ line: 1633 ]]
+	local var301 = viewRecycler.DataSource.sequence({ { id = "first", text = "First", height = 40 } }, function(p138)
 		return p138.id
 	end)
-	local var302 = viewRecycler.DataSource.sequence({ { id = "second", text = "Second", height = 40 } }, function(p139) --[[ line: 1643 ]]
+	local var302 = viewRecycler.DataSource.sequence({ { id = "second", text = "Second", height = 40 } }, function(p139)
 		return p139.id
 	end)
 	local var303 = viewRecycler.Layout.uniform({ itemLength = 40 })
@@ -1885,7 +1885,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 	local var312 = 0
 	local var313 = 0
 	
-	local function assignmentChanged(_, p140) --[[ line: 1661 ]]
+	local function assignmentChanged(_, p140)
 		-- upvalues: var308 (write), var313 (write), var312 (write), var309 (write), var310 (write), p134 (ref)
 		if var308 then
 			if p140 == nil then
@@ -1901,14 +1901,14 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 		end
 	end
 	
-	local function presentationChanged(_, p141) --[[ line: 1673 ]]
+	local function presentationChanged(_, p141)
 		-- upvalues: var308 (write), var309 (write), var311 (write), p134 (ref)
 		if var308 and p141 ~= nil and (p141.key == var309 and var311 == nil) then
 			var311 = p134()
 		end
 	end
 	
-	p132.ReactRoblox.act(function() --[[ line: 1679 ]]
+	p132.ReactRoblox.act(function()
 		-- upvalues: var307 (ref), react (ref), viewRecycler_1 (ref), t (ref), var301 (ref), var303 (ref), var300 (ref), assignmentChanged (ref), presentationChanged (ref), var302 (ref), var304 (ref)
 		var307:render(react.createElement(viewRecycler_1.RecyclingViewport, {
 			axis = viewRecycler_1.Axis.Y,
@@ -1965,7 +1965,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 	local t_2 = {}
 	
 	return {
-		run = function() --[[ line: 1737 ]]
+		run = function()
 			-- upvalues: var320 (write), var318 (ref), var319 (ref), var309 (write), var310 (write), var311 (write), var308 (write), hasItemText (copy), frame (ref), findMeasuredObjects (copy), p134 (ref), var316 (ref), listItemViewFrame1 (ref), p132 (ref), t (ref), captureCompletionPhase (copy), t_1 (ref), observeCompletionPhases (copy), var322 (write), t_2 (write)
 			var320 = not var320
 			local var327 = if var320 then "First:state-preserved" else "Second:state-preserved"
@@ -1979,15 +1979,15 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 			local var331 = nil
 			local var332 = nil
 			local t_3 = {
-				assignmentDelivered = function() --[[ line: 1750 ]]
+				assignmentDelivered = function()
 					-- upvalues: var310 (copy)
 					return var310 ~= nil
 				end,
-				commitCompleted = function() --[[ line: 1753 ]]
+				commitCompleted = function()
 					-- upvalues: var311 (copy), hasItemText (copy), frame (copy), var327 (ref)
 					return var311 ~= nil and hasItemText(frame, var327)
 				end,
-				layoutSettled = function() --[[ line: 1756 ]]
+				layoutSettled = function()
 					-- upvalues: findMeasuredObjects (copy), frame (copy), var327 (ref), var330 (ref), var331 (write), p134 (copy)
 					local var336 = findMeasuredObjects(frame, var327)
 					local var337 = var336 ~= nil and math.abs(var336.AbsoluteSize.X - var330) <= 0.01
@@ -1997,7 +1997,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 					end
 					return var337
 				end,
-				hostObserved = function() --[[ line: 1764 ]]
+				hostObserved = function()
 					-- upvalues: findMeasuredObjects (copy), frame (copy), var327 (ref), var316 (copy), var328 (ref), listItemViewFrame1 (copy), var332 (write), p134 (copy)
 					local var338 = findMeasuredObjects(frame, var327)
 					local var339 = var338 ~= nil and (var338 == var316 and (var338:IsDescendantOf(var328) and var338:FindFirstAncestor("ListItemViewFrame1") == listItemViewFrame1))
@@ -2007,7 +2007,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 					end
 					return var339
 				end,
-				destinationPresented = function() --[[ line: 1775 ]]
+				destinationPresented = function()
 					-- upvalues: findMeasuredObjects (copy), frame (copy), var327 (ref), var316 (copy), var328 (ref), listItemViewFrame1 (copy), var330 (ref)
 					local var340 = findMeasuredObjects(frame, var327)
 					
@@ -2016,7 +2016,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 			}
 			local t_4 = {}
 			local var335 = p134()
-			p132.ReactRoblox.act(function() --[[ line: 1786 ]]
+			p132.ReactRoblox.act(function()
 				-- upvalues: t (copy), var329 (ref), captureCompletionPhase (copy), t_3 (ref), t_4 (ref), t_1 (copy)
 				t.current.CanvasPosition = Vector2.new(0, var329)
 				captureCompletionPhase(t_3, t_4, t_1, "afterMutation")
@@ -2032,7 +2032,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 			
 			return (p134() - var335) * 1000
 		end,
-		getEvidence = function() --[[ line: 1812 ]]
+		getEvidence = function()
 			-- upvalues: var298 (write), var299 (write), var322 (write), findMeasuredObjects (copy), frame (ref), var320 (write), var316 (ref), var312 (write), var313 (write), t_2 (write), t_1 (ref)
 			return {
 				firstListWidth = 400,
@@ -2047,9 +2047,9 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 				completionPhaseCounts = t_1
 			}
 		end,
-		destroy = function() --[[ line: 1829 ]]
+		destroy = function()
 			-- upvalues: p132 (ref), var307 (ref), var303 (ref), var304 (ref), frame (ref)
-			p132.ReactRoblox.act(function() --[[ line: 1830 ]]
+			p132.ReactRoblox.act(function()
 				-- upvalues: var307 (copy)
 				var307:unmount()
 			end)
@@ -2060,7 +2060,7 @@ local function createRecyclingTransferArm(p132, p133, p134) --[[ line: 1584 ]]
 	}
 end
 
-local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 1840 ]]
+local function createWrappedRecyclingTransferArm(p142, p143, p144)
 	-- upvalues: waitForHeartbeatToSettle (ref), findMeasuredObjects (ref), hasItemText (ref), captureCompletionPhase (ref), observeCompletionPhases (ref)
 	local react = p142.React
 	local viewRecycler = p142.ViewRecycler
@@ -2072,15 +2072,15 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 	local var346 = nil
 	local var347 = nil
 	local var348 = nil
-	local var349 = viewRecycler.createRecyclableView(function(p145) --[[ line: 1851 | named "WrappedStatefulRow" ]]
+	local var349 = viewRecycler.createRecyclableView(function(p145)
 		-- upvalues: p142 (ref), react (ref), var341 (write), var342 (write)
 		local var372 = p142.SignalsReact.useSignalState(p145.valueSignal)
 		local var373 = react.useState("state-preserved")
-		react.useEffect(function() --[[ line: 1854 ]]
+		react.useEffect(function()
 			-- upvalues: var341 (copy), var342 (copy)
 			var341 += 1
 			
-			return function() --[[ line: 1856 ]]
+			return function()
 				-- upvalues: var342 (copy)
 				var342 += 1
 			end
@@ -2100,12 +2100,12 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 	})
 	local repeated = string.rep("First wrapped transfer content ", 8)
 	local repeated_1 = string.rep("Second wrapped transfer content ", 8)
-	local var352 = viewRecycler.DataSource.sequence({ { id = "first-wrapped", height = 40, text = repeated } }, function(p146) --[[ line: 1881 ]]
+	local var352 = viewRecycler.DataSource.sequence({ { id = "first-wrapped", height = 40, text = repeated } }, function(p146)
 		return p146.id
 	end)
 	local var353 = viewRecycler.DataSource.sequence({
 		{ id = "second-wrapped", height = 40, text = repeated_1 }
-	}, function(p147) --[[ line: 1891 ]]
+	}, function(p147)
 		return p147.id
 	end)
 	local var354 = viewRecycler.Layout.measured({ estimatedItemLength = 40 })
@@ -2118,21 +2118,21 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 	local var359 = false
 	local var360 = ""
 	
-	local function assignmentChanged(_, p148) --[[ line: 1905 ]]
+	local function assignmentChanged(_, p148)
 		-- upvalues: var359 (write), var360 (write), var344 (write), p144 (ref)
 		if var359 and p148 ~= nil and (p148.key == var360 and var344 == nil) then
 			var344 = p144()
 		end
 	end
 	
-	local function presentationChanged(_, p149) --[[ line: 1910 ]]
+	local function presentationChanged(_, p149)
 		-- upvalues: var359 (write), var360 (write), var345 (write), p144 (ref)
 		if var359 and p149 ~= nil and (p149.key == var360 and var345 == nil) then
 			var345 = p144()
 		end
 	end
 	
-	local function diagnostics(p150) --[[ line: 1915 ]]
+	local function diagnostics(p150)
 		-- upvalues: var359 (write), var347 (write), var343 (write), p144 (ref)
 		if var359 and p150.kind == "measurementsProcessed" and (p150.accepted > 0 and var347 == nil) then
 			var343 += p150.accepted
@@ -2140,7 +2140,7 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 		end
 	end
 	
-	p142.ReactRoblox.act(function() --[[ line: 1926 ]]
+	p142.ReactRoblox.act(function()
 		-- upvalues: var358 (ref), react (ref), viewRecycler (ref), t (ref), var352 (ref), var354 (ref), var349 (ref), diagnostics (ref), assignmentChanged (ref), presentationChanged (ref), var353 (ref), var355 (ref)
 		var358:render(react.createElement("Frame", { Name = "TransferHost", Size = UDim2.fromOffset(400, 40) }, {
 			Viewport = react.createElement(viewRecycler.RecyclingViewport, {
@@ -2203,7 +2203,7 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 	local t_2 = {}
 	
 	return {
-		run = function() --[[ line: 1993 ]]
+		run = function()
 			-- upvalues: var368 (write), repeated (ref), repeated_1 (ref), var360 (write), var366 (ref), var367 (ref), var354 (ref), var355 (ref), var344 (write), var345 (write), var346 (write), var347 (write), var348 (write), p144 (ref), var359 (write), hasItemText (copy), screenGui (ref), findMeasuredObjects (copy), var364 (ref), listItemViewFrame1 (ref), p142 (ref), t (ref), captureCompletionPhase (copy), t_1 (ref), observeCompletionPhases (copy), t_2 (write), var370 (write)
 			var368 = not var368
 			local _ = "%*:state-preserved"
@@ -2221,15 +2221,15 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 			local var378 = p144()
 			var359 = true
 			local t_3 = {
-				assignmentDelivered = function() --[[ line: 2009 ]]
+				assignmentDelivered = function()
 					-- upvalues: var344 (copy)
 					return var344 ~= nil
 				end,
-				commitCompleted = function() --[[ line: 2012 ]]
+				commitCompleted = function()
 					-- upvalues: var345 (copy), hasItemText (copy), screenGui (copy), ? (ref)
 					return var345 ~= nil and hasItemText(screenGui, u1510)
 				end,
-				layoutSettled = function() --[[ line: 2015 ]]
+				layoutSettled = function()
 					-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var376 (ref), var346 (copy), p144 (copy)
 					local var381, var382 = findMeasuredObjects(screenGui, u1516)
 					local var383 = var381 ~= nil and (var382 ~= nil and (var381.AbsoluteSize.X == var376 - 20 and (var381.AbsoluteSize.Y > 0 and var382.AbsoluteSize.Y > 0)))
@@ -2239,7 +2239,7 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 					end
 					return var383
 				end,
-				measurementSettled = function() --[[ line: 2027 ]]
+				measurementSettled = function()
 					-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var377 (ref), var347 (copy), p144 (copy)
 					local var384, var385 = findMeasuredObjects(screenGui, u1528)
 					local var386 = var384 ~= nil and (var385 ~= nil and math.abs(var377.getItemLayout(1).length - var385.AbsoluteSize.Y) <= 0.01)
@@ -2249,7 +2249,7 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 					end
 					return var386
 				end,
-				hostObserved = function() --[[ line: 2037 ]]
+				hostObserved = function()
 					-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var364 (copy), var374 (ref), listItemViewFrame1 (copy), var348 (copy), p144 (copy)
 					local var387 = findMeasuredObjects(screenGui, u1541)
 					local var388 = var387 ~= nil and (var387 == var364 and (var387:IsDescendantOf(var374) and var387:FindFirstAncestor("ListItemViewFrame1") == listItemViewFrame1))
@@ -2261,12 +2261,12 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 				end
 			}
 			local t_4 = {}
-			p142.ReactRoblox.act(function() --[[ line: 2050 ]]
+			p142.ReactRoblox.act(function()
 				-- upvalues: t (copy), var375 (ref), captureCompletionPhase (copy), t_3 (ref), t_4 (ref), t_1 (copy)
 				t.current.CanvasPosition = Vector2.new(0, var375)
 				captureCompletionPhase(t_3, t_4, t_1, "afterMutation")
 			end)
-			observeCompletionPhases(p142, t_3, function() --[[ line: 2054 ]]
+			observeCompletionPhases(p142, t_3, function()
 				-- upvalues: findMeasuredObjects (copy), screenGui (copy), ? (ref), var360 (copy), var344 (copy), var345 (copy), var346 (copy), var347 (copy), var348 (copy), var376 (ref)
 				local var389, var390 = findMeasuredObjects(screenGui, u1565)
 				
@@ -2283,7 +2283,7 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 			
 			return (p144() - var378) * 1000
 		end,
-		getEvidence = function() --[[ line: 2080 ]]
+		getEvidence = function()
 			-- upvalues: var341 (write), var342 (write), var370 (write), findMeasuredObjects (copy), screenGui (ref), var368 (write), repeated (ref), repeated_1 (ref), var364 (ref), var343 (write), t_2 (write), t_1 (ref)
 			return {
 				mounts = var341,
@@ -2295,9 +2295,9 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 				completionPhaseCounts = t_1
 			}
 		end,
-		destroy = function() --[[ line: 2094 ]]
+		destroy = function()
 			-- upvalues: p142 (ref), var358 (ref), var354 (ref), var355 (ref), screenGui (ref)
-			p142.ReactRoblox.act(function() --[[ line: 2095 ]]
+			p142.ReactRoblox.act(function()
 				-- upvalues: var358 (copy)
 				var358:unmount()
 			end)
@@ -2308,7 +2308,7 @@ local function createWrappedRecyclingTransferArm(p142, p143, p144) --[[ line: 18
 	}
 end
 
-var19 = function(p151, p152, p153, p154) --[[ line: 2105 ]]
+var19 = function(p151, p152, p153, p154)
 	-- upvalues: createRecyclingTransferArm (ref), createWrappedRecyclingTransferArm (ref), responsibilityCatalogModule (ref)
 	local clock = p154.clock or os.clock
 	local var392 = createRecyclingTransferArm(p151, "ReadyOnCommit", clock)
@@ -2399,7 +2399,7 @@ var19 = function(p151, p152, p153, p154) --[[ line: 2105 ]]
 	})
 end
 
-local function measureRecyclingScopeHighWater(p155, p156, p157, p158, p159) --[[ line: 2211 ]]
+local function measureRecyclingScopeHighWater(p155, p156, p157, p158, p159)
 	-- upvalues: responsibilityCatalogModule (ref)
 	local clock = p159.clock or os.clock
 	local t = {}
@@ -2420,7 +2420,7 @@ local function measureRecyclingScopeHighWater(p155, p156, p157, p158, p159) --[[
 			operationsPerSample = p158
 		},
 		arms = {
-			viewRecycler = p156.run(function() --[[ line: 2220 ]]
+			viewRecycler = p156.run(function()
 				-- upvalues: p155 (ref), p158 (ref), clock (ref), t (write)
 				local var404, var405 = p155.LifecycleWorkloads.recyclingScopeHighWater(p158, clock)
 				t = var405
@@ -2432,13 +2432,13 @@ local function measureRecyclingScopeHighWater(p155, p156, p157, p158, p159) --[[
 	})
 end
 
-local function measureCompositionChurn(p160, p161, p162, p163, p164) --[[ line: 2249 ]]
+local function measureCompositionChurn(p160, p161, p162, p163, p164)
 	-- upvalues: responsibilityCatalogModule (ref)
 	local clock = p164.clock or os.clock
 	local var407 = p160.LifecycleWorkloads.compositionChurn(p163)
 	local var408 = 0
 	local var409 = 0
-	local var410 = p161.run(function() --[[ line: 2260 ]]
+	local var410 = p161.run(function()
 		-- upvalues: var407 (ref), clock (ref), var408 (write), var409 (write)
 		local assignmentUpdates = var407.getAssignmentUpdates()
 		local flushes = var407.getFlushes()
@@ -2478,7 +2478,7 @@ local function measureCompositionChurn(p160, p161, p162, p163, p164) --[[ line: 
 end
 
 return {
-	run = function(p165, p166, p167, p168) --[[ line: 2305 ]]
+	run = function(p165, p166, p167, p168)
 		-- upvalues: list (ref), createItems (ref), createItemTypes (ref), measureCompletedMount (ref), measureCompletedTraversal (ref), measureHostSizeSettlePhases (ref), measureAssignmentPropagation (ref), createPropagationScenario (ref), var19 (write), measureRecyclingScopeHighWater (ref), measureCompositionChurn (ref), measureDeclarativeReconciliation (ref), measurePropSynchronization (ref), measureAssignmentBinding (ref), measurePresentationCommit (ref), measureVirtualListTeardown (ref)
 		p168 = p168 or {}
 		local itemCount = p168.itemCount or 1000

@@ -12,7 +12,7 @@ local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiE
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local t = {}
 
-local var3 = function(p0) --[[ line: 25 ]]
+local var3 = function(p0)
 	if not p0 or type(p0) ~= "table" then
 		return nil
 	end
@@ -26,7 +26,7 @@ local var3 = function(p0) --[[ line: 25 ]]
 	return if next(t) then t else nil
 end
 
-return function(p1, p2, p3, p4, p5) --[[ line: 48 | named "SduiGameImpressionsHandler" ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: sduiErrors (ref), t (ref), cryoModule (ref), var3 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiChartsSupport (ref), sduiParseHelpers (ref)
 	if not p4 then
 		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
@@ -74,7 +74,7 @@ return function(p1, p2, p3, p4, p5) --[[ line: 48 | named "SduiGameImpressionsHa
 		
 		return
 	end
-	sendGameImpressions.sendFromTopicContents(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, p2, t_1, p1.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, if fFlagSduiChartsSupport then p4.gameSetTargetId else nil, nil, p4.itemsPerRow, p4.isWideTiles or false, var7, if fFlagSduiChartsSupport then p4.appliedFilters else nil, nil, function(p6) --[[ line: 150 ]]
+	sendGameImpressions.sendFromTopicContents(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, p2, t_1, p1.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, if fFlagSduiChartsSupport then p4.gameSetTargetId else nil, nil, p4.itemsPerRow, p4.isWideTiles or false, var7, if fFlagSduiChartsSupport then p4.appliedFilters else nil, nil, function(p6)
 		-- upvalues: sduiParseHelpers (copy), p4 (ref), p1 (ref), sduiErrors (copy), var7 (ref)
 		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",

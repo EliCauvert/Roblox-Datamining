@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.BackgroundHighlight)
 local useTokens = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Foundation).Hooks.useTokens
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: useTokens (ref)
 	return {
 		ZIndex = p0.ZIndex or 0,

@@ -18,7 +18,7 @@ local ENTRY_POINT = peopleServiceModule.getService("Constants").ANALYTICS.ENTRY_
 local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 
-local function VoiceVolumeSlider(p0) --[[ line: 74 ]]
+local function VoiceVolumeSlider(p0)
 	-- upvalues: useLocalization (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), reactModule (ref), peopleServiceModule (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (ref), ENTRY_POINT (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), fFlagVoiceChatVolumePerUserMuteVolumeSyncModule (ref), view (ref), text (ref), foundationModule (ref)
 	local var9 = useLocalization({
 		volumeLabel = "CoreScripts.InGameMenu.GameSettings.Volume"
@@ -27,7 +27,7 @@ local function VoiceVolumeSlider(p0) --[[ line: 74 ]]
 	local var11 = nil
 	
 	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
-		var10 = reactModule.useMemo(function() --[[ line: 82 ]]
+		var10 = reactModule.useMemo(function()
 			-- upvalues: peopleServiceModule (copy)
 			return peopleServiceModule.getService("PeopleAnalyticsManager")
 		end, {})
@@ -36,9 +36,9 @@ local function VoiceVolumeSlider(p0) --[[ line: 74 ]]
 	local var12 = fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule and p0.isMutedByLocalUser == true
 	local var13 = reactModule.useRef(false)
 	local var14, var15 = reactModule.useBinding(p0.getPlayerVoiceVolume(p0.userId))
-	reactModule.useEffect(function() --[[ line: 94 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var13 (ref), var15 (ref)
-		return p0.subscribePlayerVoiceVolume(p0.userId, function(p1) --[[ line: 95 ]]
+		return p0.subscribePlayerVoiceVolume(p0.userId, function(p1)
 			-- upvalues: var13 (copy), var15 (copy)
 			if not var13.current then
 				var15(p1)
@@ -66,12 +66,12 @@ local function VoiceVolumeSlider(p0) --[[ line: 74 ]]
 			knobVisibility = foundationModule.Enums.Visibility.Always,
 			width = UDim.new(1, 0),
 			isDisabled = var12,
-			onValueChanged = reactModule.useCallback(function(p2) --[[ line: 102 ]]
+			onValueChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var15 (ref), p0 (ref)
 				var15(p2)
 				p0.setPlayerVoiceVolume(p0.userId, p2)
 			end, { p0.userId, p0.setPlayerVoiceVolume }),
-			onDragStarted = reactModule.useCallback(function() --[[ line: 108 ]]
+			onDragStarted = reactModule.useCallback(function()
 				-- upvalues: var13 (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var10 (write), var11 (write), p0 (ref), ENTRY_POINT (copy)
 				var13.current = true
 				
@@ -91,7 +91,7 @@ local function VoiceVolumeSlider(p0) --[[ line: 74 ]]
 				if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var10 else nil,
 				if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var11 else nil
 			}),
-			onDragEnded = reactModule.useCallback(function() --[[ line: 139 ]]
+			onDragEnded = reactModule.useCallback(function()
 				-- upvalues: var13 (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var10 (write), var11 (write), p0 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), ENTRY_POINT (copy), fFlagVoiceChatVolumePerUserMuteVolumeSyncModule (copy), var15 (ref)
 				var13.current = false
 				
@@ -127,7 +127,7 @@ local function VoiceVolumeSlider(p0) --[[ line: 74 ]]
 	})
 end
 
-return reactModule.memo(function(p3) --[[ line: 210 | named "CardMenuWithVoiceVolume" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: useTokens (ref), reactModule (ref), baseMenu (ref), view (ref), text (ref), VoiceVolumeSlider (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), popover (ref), foundationModule (ref), radius (ref), inputSize (ref)
 	local var16 = useTokens()
 	local standard = var16.Stroke.Standard

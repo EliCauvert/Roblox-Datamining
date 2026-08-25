@@ -7,7 +7,7 @@ local enums = foundationModule.Enums
 local constantsModule = require(avatarExperienceCommon.Constants)
 local useArrowNavScrollBehaviorModule = require(avatarExperienceCommon.Hooks.useArrowNavScrollBehavior)
 
-return function(p0) --[[ line: 39 | named "ArrowNavV2" ]]
+return function(p0)
 	-- upvalues: useArrowNavScrollBehaviorModule (ref), reactModule (ref), constantsModule (ref), foundationModule (ref), icon (ref), enums (ref)
 	local var5 = useArrowNavScrollBehaviorModule({
 		navDirection = p0.navDirection,
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 39 | named "ArrowNavV2" ]]
 	})
 	local handleInputBegan = var5.handleInputBegan
 	local handleInputEnded = var5.handleInputEnded
-	local var6 = reactModule.useCallback(function() --[[ line: 52 ]] end, {})
+	local var6 = reactModule.useCallback(function() end, {})
 	local var7 = if p0.navDirection == constantsModule.NAVIGATION_DIRECTION.IS_LEFT then "chevron-small-left" else "chevron-small-right"
 	local actionStandard = p0.tokens.Color.ActionStandard
 	local color3 = p0.tokens.Color.Surface.Surface_0.Color3

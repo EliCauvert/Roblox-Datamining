@@ -6,7 +6,7 @@ local text = foundationModule.Text
 local combineReactTags = require(parent.RoactUtils).combineReactTags
 local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 
-return function(p0) --[[ line: 26 | named "PriceLineItem" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), combineReactTags (ref), view (ref), text (ref), fFlagPurchasePromptFetchCartPricing (ref)
 	local textStyle = p0.textStyle or "text-body-small content-emphasis"
 	
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 26 | named "PriceLineItem" ]]
 			LayoutOrder = 1,
 			Text = p0.label,
 			Size = UDim2.new(0.5, 0, 0, 0),
-			tag = reactModule.useMemo(function() --[[ line: 28 ]]
+			tag = reactModule.useMemo(function()
 				-- upvalues: combineReactTags (copy), textStyle (ref)
 				return combineReactTags("auto-y", textStyle, "content-emphasis", "text-align-x-left")
 			end, { textStyle }),
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 26 | named "PriceLineItem" ]]
 			RichText = true,
 			Text = p0.amount,
 			Size = UDim2.new(0.5, 0, 0, 0),
-			tag = reactModule.useMemo(function() --[[ line: 31 ]]
+			tag = reactModule.useMemo(function()
 				-- upvalues: combineReactTags (copy), textStyle (ref)
 				return combineReactTags("auto-y", textStyle, "content-emphasis", "text-align-x-right")
 			end, { textStyle })

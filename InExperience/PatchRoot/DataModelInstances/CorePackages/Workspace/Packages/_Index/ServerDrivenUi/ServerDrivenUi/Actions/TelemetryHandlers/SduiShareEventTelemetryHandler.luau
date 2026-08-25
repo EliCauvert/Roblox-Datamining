@@ -4,7 +4,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
 
-return function(p0, p1, p2) --[[ line: 16 ]]
+return function(p0, p1, p2)
 	-- upvalues: getActionTelemetryFieldValue (ref), sduiErrorType (ref), virtualEventsModule (ref)
 	local var2 = getActionTelemetryFieldValue(p0, p1, "eventId")
 	

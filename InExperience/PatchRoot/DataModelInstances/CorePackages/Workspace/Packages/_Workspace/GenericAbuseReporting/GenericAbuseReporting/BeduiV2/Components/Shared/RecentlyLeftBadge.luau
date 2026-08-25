@@ -7,7 +7,7 @@ local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.a
 local badge = foundationModule.Badge
 local badgeVariant = foundationModule.Enums.BadgeVariant
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "RecentlyLeftBadge" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useArTranslation (ref), reactModule (ref), badge (ref), badgeVariant (ref)
 	return reactModule.createElement(badge, {
 		text = useArTranslation().translateIntoString(p0.text),

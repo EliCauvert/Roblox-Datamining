@@ -16,7 +16,7 @@ local var4 = urlBuilder.new({
 })()
 
 return {
-	fetchShareLink = function(p0, p1) --[[ line: 40 ]]
+	fetchShareLink = function(p0, p1)
 		-- upvalues: fetch (ref), httpService (ref), promiseModule (ref), var4 (ref), response (ref), graphQLError (ref)
 		local var5 = p1 or fetch
 		local var6 = httpService:JSONEncode({
@@ -24,7 +24,7 @@ return {
 			data = httpService:JSONEncode(p0.data)
 		})
 		
-		return promiseModule.new(function(p2, p3) --[[ line: 50 ]]
+		return promiseModule.new(function(p2, p3)
 			-- upvalues: var5 (ref), var4 (copy), var6 (ref), response (copy), graphQLError (copy)
 			local var7 = var5(var4, {
 				method = "POST",
@@ -33,7 +33,7 @@ return {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function(p4) --[[ line: 59 ]]
+			}):catch(function(p4)
 				-- upvalues: response (copy)
 				local var9 = response.error()
 				var9.statusText = p4.message
@@ -49,7 +49,7 @@ return {
 				
 				return
 			end
-			local var8 = var7:json():catch(function() --[[ line: 83 ]]
+			local var8 = var7:json():catch(function()
 				return nil
 			end):expect()
 			

@@ -3,7 +3,7 @@ local cmpLiteralArgsModule = require(script.Parent.cmpLiteralArgs)
 local cmpPredicateArgsModule = require(script.Parent.cmpPredicateArgs)
 local fmtArgsModule = require(script.Parent.fmtArgs)
 local t = {
-	args = function(p0, p1) --[[ line: 10 ]]
+	args = function(p0, p1)
 		-- upvalues: getCallsModule (ref), fmtArgsModule (ref)
 		local var5 = getCallsModule(p0)
 		local var5Count = #var5
@@ -34,21 +34,21 @@ local t = {
 	end
 }
 
-function t.literals(p2, ...) --[[ line: 36 ]]
+function t.literals(p2, ...)
 	-- upvalues: t (ref), cmpLiteralArgsModule (ref)
 	local packed = table.pack(...)
 	
-	return t.args(p2, function(p3) --[[ line: 38 ]]
+	return t.args(p2, function(p3)
 		-- upvalues: cmpLiteralArgsModule (copy), packed (ref)
 		return cmpLiteralArgsModule(packed, p3)
 	end)
 end
 
-function t.predicates(p4, ...) --[[ line: 43 ]]
+function t.predicates(p4, ...)
 	-- upvalues: t (ref), cmpPredicateArgsModule (ref)
 	local packed = table.pack(...)
 	
-	return t.args(p4, function(p5) --[[ line: 45 ]]
+	return t.args(p4, function(p5)
 		-- upvalues: cmpPredicateArgsModule (copy), packed (ref)
 		return cmpPredicateArgsModule(packed, p5)
 	end)

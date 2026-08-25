@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	local state = p0.state
 	local router = p0.router
 	local getChildNavigation = p0.getChildNavigation

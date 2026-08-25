@@ -18,7 +18,7 @@ local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelec
 local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local fixKidsBlueOnReportDropdown = game:DefineFastFlag("FixKidsBlueOnReportDropdown", false)
 
-return reactModule.memo(function(p0) --[[ line: 42 | named "DynamicReportContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), appearanceContext (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), dynamicReportV2ContainerModule (ref), fixKidsBlueOnReportDropdown (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref), foundationProvider (ref), foundationModule (ref)
 	return if p0.abuseVector == abuseVectorModule.UserProfile or fFlagEnableReportingFlowForMomentsFeed and p0.abuseVector == abuseVectorModule.MomentsFeed then reactModule.createElement(dynamicReportV2ContainerModule, {
 		abuseVector = p0.abuseVector,

@@ -11,9 +11,9 @@ local t = {
 	[conversationOverlay.TrustedConnectionRequestU18] = fFlagAppChatEnableDoubleOptIn
 }
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: useSelector (ref), getDeepValue2Module (ref), t (ref), conversationOverlay (ref), loggerModule (ref)
-	local var4 = useSelector(function(p1) --[[ line: 21 ]]
+	local var4 = useSelector(function(p1)
 		-- upvalues: getDeepValue2Module (copy), p0 (ref)
 		return getDeepValue2Module(p1, `ChatAppReducer.Modals.conversationOverlays.{p0}.modal_variant`) or ""
 	end)

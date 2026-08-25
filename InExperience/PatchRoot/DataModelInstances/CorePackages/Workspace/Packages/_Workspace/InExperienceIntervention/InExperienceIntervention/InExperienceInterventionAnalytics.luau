@@ -26,7 +26,7 @@ local t = {
 }
 local var3 = if localPlayer then localPlayer.UserId else 0
 
-local var4 = function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 43 ]]
+local var4 = function(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: var3 (write), t (ref), cryoModule (ref)
 	local unixTimestampMillis = DateTime.now().UnixTimestampMillis
 	local t_1 = {
@@ -52,7 +52,7 @@ local var4 = function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 43 ]]
 end
 
 return {
-	sendAnalyticsEvent = function(p8, p9, p10, p11, p12, p13, p14, p15) --[[ line: 85 ]]
+	sendAnalyticsEvent = function(p8, p9, p10, p11, p12, p13, p14, p15)
 		-- upvalues: var1 (ref), t (ref), var4 (ref)
 		var1:sendEventDeferred(t.EventContext, t.EventName, var4(p8, p9, p10, p11, p12, p13, p14, p15))
 	end,

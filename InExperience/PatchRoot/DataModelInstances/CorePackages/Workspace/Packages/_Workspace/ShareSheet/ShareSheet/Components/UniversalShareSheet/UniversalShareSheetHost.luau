@@ -11,29 +11,29 @@ local shareSheetSnackbarAutoDismissSeconds = game:DefineFastInt("ShareSheetSnack
 local useOverlay = foundationModule.Hooks.useOverlay
 local useTokens = foundationModule.Hooks.useTokens
 
-local function UniversalShareSheetContent(p0) --[[ line: 22 ]]
+local function UniversalShareSheetContent(p0)
 	-- upvalues: useShareSheetViewModelModule (ref), reactModule (ref), shareSheetViewModule (ref)
 	return reactModule.createElement(shareSheetViewModule, useShareSheetViewModelModule(p0))
 end
 
-return reactModule.memo(function() --[[ line: 27 | named "UniversalShareSheetHost" ]]
+return reactModule.memo(function()
 	-- upvalues: reactModule (ref), useOverlay (ref), useTokens (ref), useUniversalShareSheetViewModelModule (ref), shareSheetSnackbarAutoDismissSeconds (ref), UniversalShareSheetContent (ref), fFlagShareSheetTelemetryRefactorModule (ref), reactRobloxModule (ref), foundationModule (ref)
 	local var10, var11 = reactModule.useState(nil)
 	local var12 = useOverlay()
 	local var13 = useTokens()
 	local var14 = useUniversalShareSheetViewModelModule()
-	local var15 = reactModule.useCallback(function() --[[ line: 33 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref)
 		var11(nil)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), shareSheetSnackbarAutoDismissSeconds (copy), var15 (ref)
 		if var10 == nil then
 			return
 		end
 		local delayedThread = task.delay(shareSheetSnackbarAutoDismissSeconds, var15)
 		
-		return function() --[[ line: 42 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
@@ -56,7 +56,7 @@ return reactModule.memo(function() --[[ line: 27 | named "UniversalShareSheetHos
 			testId = "share-sheet-snackbar",
 			ZIndex = 999,
 			action = if var16 then {
-				onActivated = function() --[[ line: 49 ]]
+				onActivated = function()
 					-- upvalues: var15 (ref), var16 (ref)
 					var15()
 					var16.onActivated()

@@ -28,7 +28,7 @@ local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPre
 local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 local text = string.gsub(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www", "https://apis") .. "rights-management-api/rights/v1/snapshots"
 
-return function(p0) --[[ line: 57 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), setTimeout (ref), clearTimeout (ref), preciseSelectionBugfixesEnabled (ref), screenshotManager (ref), sceneAnalysisModule (ref), inGameAssetReportAnalyticsModule (ref), experienceStateCaptureService (ref), userInputService (ref), httpService (ref), text (ref), getHighlightModeVariantModule (ref), buildReportModule (ref), playersService (ref), withLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), reportPreciseSelectionPortraitHeaderFooterModule (ref), reportPreciseSelectionLandscapeHeaderModule (ref), inGameAssetReportSubmitDialogModule (ref), fFlagPrefillPreciseSelectionChoices (ref), inGameAssetReportCompleteModalModule (ref), inGameAssetReportIPInfringementModalModule (ref), inGameAssetIPInfringementErrorModalModule (ref)
 	local var22, var23 = reactModule.useState(false)
 	local var24, var25 = reactModule.useState(false)
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 57 ]]
 	local var50, var51 = reactModule.useState(false)
 	local viewportSize = game.Workspace.CurrentCamera.ViewportSize
 	local isSmallPortraitMode = p0.getIsSmallPortraitMode(viewportSize)
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var35 (ref), constantsModule (copy), var45 (ref), setTimeout (copy), var43 (ref)
 		var35({
 			type = constantsModule.AnalyticsActions.AccumulateForTimeSpent,
@@ -57,12 +57,12 @@ return function(p0) --[[ line: 57 ]]
 			type = constantsModule.AnalyticsActions.SetPlaceId,
 			place_id = game.PlaceId
 		})
-		var45(setTimeout(function() --[[ line: 88 ]]
+		var45(setTimeout(function()
 			-- upvalues: var43 (copy)
 			var43(true)
 		end, 10000))
 	end, { var43, var45 })
-	local var53 = reactModule.useCallback(function() --[[ line: 93 ]]
+	local var53 = reactModule.useCallback(function()
 		-- upvalues: var43 (ref), var44 (ref), clearTimeout (copy)
 		var43(false)
 		
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 57 ]]
 			clearTimeout(var44)
 		end
 	end, { var43, var44 })
-	local var54 = reactModule.useCallback(function() --[[ line: 101 ]]
+	local var54 = reactModule.useCallback(function()
 		-- upvalues: preciseSelectionBugfixesEnabled (copy), var28 (ref), screenshotManager (copy), var29 (ref), var53 (ref), var23 (ref), var35 (ref), constantsModule (copy), viewportSize (ref), isSmallPortraitMode (ref)
 		if preciseSelectionBugfixesEnabled then
 			if var28 == "" then
@@ -93,22 +93,22 @@ return function(p0) --[[ line: 57 ]]
 	end, {
 		var23, var29, var28, viewportSize, isSmallPortraitMode, var35, var53
 	})
-	local var55 = reactModule.useCallback(function() --[[ line: 141 ]]
+	local var55 = reactModule.useCallback(function()
 		-- upvalues: var31 (ref), sceneAnalysisModule (copy), var40 (ref), var54 (ref)
 		var31(sceneAnalysisModule.interpretAndExtractItemsFromInstanceForPreciseSelection(var40))
 		var54()
 	end, { var54, var31, var40 })
-	local var56 = reactModule.useCallback(function() --[[ line: 147 ]]
+	local var56 = reactModule.useCallback(function()
 		-- upvalues: inGameAssetReportAnalyticsModule (copy), var34 (ref), p0 (ref)
 		inGameAssetReportAnalyticsModule(var34, 2)
 		p0.backAction()
 	end, { p0.backAction, var34 })
-	reactModule.useEffect(function() --[[ line: 155 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), experienceStateCaptureService (copy), var41 (ref), var35 (ref), constantsModule (copy), preciseSelectionBugfixesEnabled (copy), var53 (ref), userInputService (copy), var31 (ref), sceneAnalysisModule (copy), var54 (ref), var39 (ref)
 		if var38 then
 			var38:Disconnect()
 		end
-		var39(experienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p1) --[[ line: 159 ]]
+		var39(experienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p1)
 			-- upvalues: var41 (copy), var35 (copy), constantsModule (copy), preciseSelectionBugfixesEnabled (copy), var53 (copy), userInputService (copy), var31 (copy), sceneAnalysisModule (copy), var54 (copy)
 			var41(p1)
 			
@@ -129,7 +129,7 @@ return function(p0) --[[ line: 57 ]]
 	end, {
 		var41, var39, var54, var31, var35, var53
 	})
-	local var57 = reactModule.useCallback(function(p2, p3, p4) --[[ line: 192 ]]
+	local var57 = reactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: var30 (ref), var49 (ref), constantsModule (copy), var28 (ref), httpService (copy), text (copy), var47 (ref), var27 (ref), var23 (ref), var25 (ref), var35 (ref), getHighlightModeVariantModule (copy), buildReportModule (copy), playersService (copy)
 		if p2 == "ip infringement" then
 			if not var30 or not var30.extractedAssets then
@@ -165,7 +165,7 @@ return function(p0) --[[ line: 57 ]]
 						universe_id = game.GameId,
 						contents = t
 					})
-				}):Start(function(_, p5) --[[ line: 235 ]]
+				}):Start(function(_, p5)
 					-- upvalues: httpService (copy), var47 (copy), var27 (copy), var49 (copy), constantsModule (copy)
 					if p5.StatusCode == 200 then
 						local ok, status = pcall(httpService.JSONDecode, httpService, p5.Body)
@@ -229,19 +229,19 @@ return function(p0) --[[ line: 57 ]]
 	end, {
 		var30, var23, var25, var28, var49, var27, var47, var35
 	})
-	local var58 = reactModule.useCallback(function() --[[ line: 321 ]]
+	local var58 = reactModule.useCallback(function()
 		-- upvalues: var31 (ref), var23 (ref), experienceStateCaptureService (copy)
 		var31(nil)
 		var23(false)
 		experienceStateCaptureService:ResetHighlight()
 	end, { var23, var31 })
-	local var59 = reactModule.useCallback(function() --[[ line: 328 ]]
+	local var59 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref), inGameAssetReportAnalyticsModule (copy), var34 (ref), p0 (ref)
 		var25(false)
 		inGameAssetReportAnalyticsModule(var34, 1)
 		p0.onReportComplete()
 	end, { p0.onReportComplete, var25, var34 })
-	local var60 = reactModule.useCallback(function() --[[ line: 334 ]]
+	local var60 = reactModule.useCallback(function()
 		-- upvalues: var32 (ref), var33 (ref), var35 (ref), constantsModule (copy)
 		if var32 then
 			var33(false)
@@ -253,23 +253,23 @@ return function(p0) --[[ line: 57 ]]
 			type = constantsModule.AnalyticsActions.SetDidUserResize
 		})
 	end, { var32, var22, var35, var33 })
-	reactModule.useEffect(function() --[[ line: 347 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var36 (ref), userInputService (copy), var56 (ref), var37 (ref)
 		if var36 then
 			var36:Disconnect()
 		end
-		var37(userInputService.InputEnded:Connect(function(p6) --[[ line: 352 ]]
+		var37(userInputService.InputEnded:Connect(function(p6)
 			-- upvalues: var56 (copy)
 			if p6.KeyCode == Enum.KeyCode.Escape then
 				var56()
 			end
 		end))
 	end, { var56, var37 })
-	local var61 = reactModule.useCallback(function() --[[ line: 361 ]]
+	local var61 = reactModule.useCallback(function()
 		-- upvalues: var49 (ref)
 		var49(nil)
 	end, {})
-	local var62 = reactModule.useCallback(function() --[[ line: 368 ]]
+	local var62 = reactModule.useCallback(function()
 		-- upvalues: var51 (ref), httpService (copy), var28 (ref), text (copy), var47 (ref), var49 (ref), var27 (ref), constantsModule (copy)
 		var51(true)
 		httpService:RequestInternal({
@@ -284,7 +284,7 @@ return function(p0) --[[ line: 57 ]]
 				universe_id = game.GameId,
 				contents = {}
 			})
-		}):Start(function(_, p7) --[[ line: 387 ]]
+		}):Start(function(_, p7)
 			-- upvalues: var51 (copy), httpService (copy), var47 (copy), var49 (copy), var27 (copy), constantsModule (copy)
 			var51(false)
 			
@@ -314,7 +314,7 @@ return function(p0) --[[ line: 57 ]]
 		coachmarkTitle = "Feature.ReportAbuse.Label.CantSelectTitle",
 		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle",
 		next = if fFlagUpdateInGameAssetReportingCTAs then "CommonUI.Controls.Action.Continue" else "Feature.ReportAbuse.Action.Next"
-	})(function(p8) --[[ line: 417 ]]
+	})(function(p8)
 		-- upvalues: reactModule (copy), var60 (ref), isSmallPortraitMode (ref), reportPreciseSelectionPortraitHeaderFooterModule (copy), var56 (ref), reportPreciseSelectionLandscapeHeaderModule (copy), var55 (ref), var42 (ref), var53 (ref), var22 (ref), inGameAssetReportSubmitDialogModule (copy), viewportSize (ref), var57 (ref), var58 (ref), var35 (ref), fFlagPrefillPreciseSelectionChoices (copy), var30 (ref), var24 (ref), inGameAssetReportCompleteModalModule (copy), var59 (ref), var26 (ref), inGameAssetReportIPInfringementModalModule (copy), var46 (ref), var48 (ref), inGameAssetIPInfringementErrorModalModule (copy), var61 (ref), var62 (ref), var50 (ref)
 		return reactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),

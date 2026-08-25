@@ -3,33 +3,33 @@ local dictationModeModule = require(script.Parent.DictationMode)
 local dictationAnalyticsModule = require(script.Parent.DictationAnalytics)
 local _ = require(script.Parent.requestMicPermission)
 
-return function() --[[ line: 28 | named "useDictationTelemetry" ]]
+return function()
 	-- upvalues: reactModule (ref), dictationAnalyticsModule (ref), dictationModeModule (ref)
 	local var3 = reactModule.useRef(nil)
 	
 	return {
-		logMicClick = reactModule.useCallback(function(p0, p1) --[[ line: 31 ]]
+		logMicClick = reactModule.useCallback(function(p0, p1)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MicClick, {
 				[dictationAnalyticsModule.Properties.SttMode] = p0,
 				[dictationAnalyticsModule.Properties.EntryPoint] = p1
 			})
 		end, {}),
-		logPermissionResolved = reactModule.useCallback(function(p2, p3) --[[ line: 38 ]]
+		logPermissionResolved = reactModule.useCallback(function(p2, p3)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.PermissionPrompt, {
 				[dictationAnalyticsModule.Properties.SttMode] = p2,
 				[dictationAnalyticsModule.Properties.Status] = p3
 			})
 		end, {}),
-		logRecordingStart = reactModule.useCallback(function(p4, p5) --[[ line: 45 ]]
+		logRecordingStart = reactModule.useCallback(function(p4, p5)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStart, {
 				[dictationAnalyticsModule.Properties.SttMode] = p4,
 				[dictationAnalyticsModule.Properties.TriggerType] = p5
 			})
 		end, {}),
-		logRecordingStop = reactModule.useCallback(function(p6, p7, p8, p9) --[[ line: 53 ]]
+		logRecordingStop = reactModule.useCallback(function(p6, p7, p8, p9)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStop, {
 				[dictationAnalyticsModule.Properties.SttMode] = p6,
@@ -38,7 +38,7 @@ return function() --[[ line: 28 | named "useDictationTelemetry" ]]
 				[dictationAnalyticsModule.Properties.CharCount] = p9
 			})
 		end, {}),
-		logSpeechStarted = reactModule.useCallback(function() --[[ line: 69 ]]
+		logSpeechStarted = reactModule.useCallback(function()
 			-- upvalues: var3 (ref), dictationAnalyticsModule (copy), dictationModeModule (copy)
 			var3.current = os.clock()
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.RecordingStart, {
@@ -46,7 +46,7 @@ return function() --[[ line: 28 | named "useDictationTelemetry" ]]
 				[dictationAnalyticsModule.Properties.TriggerType] = dictationAnalyticsModule.TriggerTypes.AutoChunk
 			})
 		end, {}),
-		logTranscription = reactModule.useCallback(function(p10, p11, p12) --[[ line: 77 ]]
+		logTranscription = reactModule.useCallback(function(p10, p11, p12)
 			-- upvalues: dictationModeModule (copy), var3 (ref), dictationAnalyticsModule (copy)
 			local p10Count = #p10
 			
@@ -66,7 +66,7 @@ return function() --[[ line: 28 | named "useDictationTelemetry" ]]
 				[dictationAnalyticsModule.Properties.CharCount] = p10Count
 			})
 		end, {}),
-		logTranscriptionFailed = reactModule.useCallback(function(p13) --[[ line: 98 ]]
+		logTranscriptionFailed = reactModule.useCallback(function(p13)
 			-- upvalues: dictationAnalyticsModule (copy)
 			dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.TranscriptionDone, {
 				[dictationAnalyticsModule.Properties.SttMode] = p13,

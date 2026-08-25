@@ -9,7 +9,7 @@ local radius = foundationModule.Enums.Radius
 local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
 
-return reactModule.memo(function(p0) --[[ line: 24 | named "DynamicReportV2InExpLoading" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), overlaidControlsProvider (ref), layout (ref), skeleton (ref), radius (ref), view (ref)
 	return reactModule.createElement(overlaidControlsProvider, { value = p0.shouldUseOverlaidControls }, {
 		Layout = reactModule.createElement(layout, {

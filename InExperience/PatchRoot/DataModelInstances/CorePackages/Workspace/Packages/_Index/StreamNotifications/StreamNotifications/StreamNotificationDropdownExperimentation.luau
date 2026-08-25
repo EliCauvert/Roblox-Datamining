@@ -6,14 +6,14 @@ local constantsModule = require(streamNotifications.constants)
 local streamNotificationUXExposureLayer = game:DefineFastString("StreamNotificationUXExposureLayer", "Notifications.StreamNotificationUXExposure")
 local streamNotificationUXDropdownVariant = game:DefineFastString("StreamNotificationUXDropdownVariant", "enableStreamDropdown")
 
-local function _() --[[ line: 20 | named "getIsLargeScreen" ]]
+local function _()
 	-- upvalues: constantsModule (ref)
 	local currentCamera = workspace.CurrentCamera
 	
 	return currentCamera ~= nil and constantsModule.Modal.WidthLimit <= currentCamera.ViewportSize.X
 end
 
-local _ = function() --[[ line: 25 | named "getIsUserInTreatment" ]]
+local _ = function()
 	-- upvalues: ixpHelper (ref), streamNotificationUXExposureLayer (ref), streamNotificationUXDropdownVariant (ref)
 	local ixpLayerData = ixpHelper.getIxpLayerData(streamNotificationUXExposureLayer)
 	
@@ -21,7 +21,7 @@ local _ = function() --[[ line: 25 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getDropdownEnabled = function() --[[ line: 36 ]]
+	getDropdownEnabled = function()
 		-- upvalues: fFlagStreamNotificationUXDropdown (ref), constantsModule (ref), ixpHelper (ref), streamNotificationUXExposureLayer (ref), streamNotificationUXDropdownVariant (ref)
 		local var5 = fFlagStreamNotificationUXDropdown
 		
@@ -40,7 +40,7 @@ return {
 		end
 		return var5
 	end,
-	logExposure = function() --[[ line: 43 ]]
+	logExposure = function()
 		-- upvalues: fFlagStreamNotificationUXDropdown (ref), constantsModule (ref), ixpHelper (ref), streamNotificationUXExposureLayer (ref), streamNotificationUXDropdownVariant (ref)
 		if fFlagStreamNotificationUXDropdown then
 			local currentCamera = workspace.CurrentCamera

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableCompensatingScrollingFrame", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableCompensatingScrollingFrame")
 end

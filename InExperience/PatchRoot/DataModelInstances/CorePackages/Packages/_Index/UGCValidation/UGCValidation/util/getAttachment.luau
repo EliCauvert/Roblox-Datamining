@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "getAttachment" ]]
+﻿return function(p0, p1)
 	local var0
 	for i, v in pairs(p1) do
 		var0 = p0:FindFirstChild(v)

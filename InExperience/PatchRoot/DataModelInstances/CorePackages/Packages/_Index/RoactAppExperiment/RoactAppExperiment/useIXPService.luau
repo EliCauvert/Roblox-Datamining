@@ -2,7 +2,7 @@
 local reactModule = require(script:FindFirstAncestor("RoactAppExperiment").Parent.React)
 local experimentContextModule = require(script.Parent.ExperimentContext)
 
-return function() --[[ line: 8 | named "useIXPService" ]]
+return function()
 	-- upvalues: reactModule (ref), experimentContextModule (ref), IXPService (ref)
 	local var3 = reactModule.useContext(experimentContextModule)
 	

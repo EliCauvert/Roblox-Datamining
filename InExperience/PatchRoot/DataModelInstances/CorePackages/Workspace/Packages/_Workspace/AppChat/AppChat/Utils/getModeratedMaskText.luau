@@ -2,7 +2,7 @@
 local fIntFriendsChatModeratedMaskMinLength = sharedFlagsModule.FIntFriendsChatModeratedMaskMinLength
 local fIntFriendsChatModeratedMaskMaxLength = sharedFlagsModule.FIntFriendsChatModeratedMaskMaxLength
 
-return function(p0) --[[ line: 17 | named "getModeratedMaskText" ]]
+return function(p0)
 	-- upvalues: fIntFriendsChatModeratedMaskMaxLength (ref), fIntFriendsChatModeratedMaskMinLength (ref)
 	return string.rep("#", fIntFriendsChatModeratedMaskMinLength + string.byte(p0, #p0) % (fIntFriendsChatModeratedMaskMaxLength - fIntFriendsChatModeratedMaskMinLength + 1))
 end

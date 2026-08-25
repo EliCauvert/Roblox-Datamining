@@ -1,7 +1,7 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local t = {}
 
-local function _() --[[ line: 18 | named "update" ]]
+local function _()
 	-- upvalues: t (ref), userInputService (ref)
 	local var2 = t[#t]
 	
@@ -14,7 +14,7 @@ local function _() --[[ line: 18 | named "update" ]]
 end
 
 return {
-	push = function(p0, p1) --[[ line: 28 ]]
+	push = function(p0, p1)
 		-- upvalues: t (ref), userInputService (ref)
 		assert(if type(p0) ~= "userdata" then type(p0) == "string" else true, "key")
 		assert(typeof(p1) == "EnumItem", "behavior")
@@ -36,7 +36,7 @@ return {
 		end
 		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.None
 	end,
-	pop = function(p2) --[[ line: 43 ]]
+	pop = function(p2)
 		-- upvalues: t (ref), userInputService (ref)
 		assert(if type(p2) ~= "userdata" then type(p2) == "string" else true, "key")
 		local var4 = nil

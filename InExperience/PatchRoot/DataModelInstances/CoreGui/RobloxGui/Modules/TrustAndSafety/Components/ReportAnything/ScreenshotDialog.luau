@@ -20,7 +20,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 local dividerModule = require(dependenciesModule.Divider)
 
-local function PortraitModeFooter(p0) --[[ line: 47 ]]
+local function PortraitModeFooter(p0)
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), robloxTranslatorModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -50,7 +50,7 @@ local function PortraitModeFooter(p0) --[[ line: 47 ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ line: 76 ]]
+							onActivated = function()
 								-- upvalues: p0 (ref)
 								p0.reportAction(p0.annotationPoints)
 							end,
@@ -63,9 +63,9 @@ local function PortraitModeFooter(p0) --[[ line: 47 ]]
 	})
 end
 
-return function(p1) --[[ line: 90 | named "ScreenshotDialog" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), useStyle (ref), virtualKeyboardMonitorModule (ref), cryoModule (ref), imageSetButton (ref), assetsModule (ref), screenshotDialogPortraitModeHeaderModule (ref), screenshotDialogLandscapeModeHeaderModule (ref), dividerModule (ref), debugCanvasModule (ref), abuseReportBuilderModule (ref), screenshotHighlighterModule (ref), PortraitModeFooter (ref)
-	reactModule.useEffect(function() --[[ line: 92 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref)
 		if p1.reportAnythingAnalytics then
 			p1.reportAnythingAnalytics.incrementAnnotationPageSeen()
@@ -74,7 +74,7 @@ return function(p1) --[[ line: 90 | named "ScreenshotDialog" ]]
 	local theme = useStyle().Theme
 	local instance = virtualKeyboardMonitorModule.getInstance()
 	
-	local var17 = function() --[[ line: 103 ]]
+	local var17 = function()
 		-- upvalues: instance (ref), p1 (ref)
 		warn("OverlayActivated")
 		
@@ -88,7 +88,7 @@ return function(p1) --[[ line: 90 | named "ScreenshotDialog" ]]
 	local var18, var19 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
 	local var20, var21 = reactModule.useState({})
 	
-	local function _() --[[ line: 120 | named "updatePointsAndRerender" ]]
+	local function _()
 		-- upvalues: var18 (ref), var19 (ref)
 		local t = {}
 		
@@ -98,7 +98,7 @@ return function(p1) --[[ line: 90 | named "ScreenshotDialog" ]]
 		var19(t)
 	end
 	
-	local var22 = function(_) --[[ line: 128 ]]
+	local var22 = function(_)
 		-- upvalues: p1 (ref), var18 (ref), var19 (ref), var21 (ref)
 		if p1.reportAnythingAnalytics then
 			p1.reportAnythingAnalytics.incrementAnnotationPlace()
@@ -112,7 +112,7 @@ return function(p1) --[[ line: 90 | named "ScreenshotDialog" ]]
 		var21({})
 	end
 	
-	local var23 = function() --[[ line: 138 ]]
+	local var23 = function()
 		-- upvalues: var18 (ref), p1 (ref), var20 (ref), var19 (ref)
 		if #var18 > 0 then
 			if p1.reportAnythingAnalytics then
@@ -129,7 +129,7 @@ return function(p1) --[[ line: 90 | named "ScreenshotDialog" ]]
 		end
 	end
 	
-	local var24 = function() --[[ line: 150 ]]
+	local var24 = function()
 		-- upvalues: var20 (ref), p1 (ref), var18 (ref), var19 (ref)
 		if #var20 > 0 then
 			if p1.reportAnythingAnalytics then

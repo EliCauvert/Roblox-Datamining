@@ -1,5 +1,5 @@
 ﻿return {
-	escapeRichFormatting = function(p0) --[[ line: 2 ]]
+	escapeRichFormatting = function(p0)
 		return p0:gsub("[&<>\"']", {
 			["&"] = "&amp;",
 			["<"] = "&lt;",
@@ -14,7 +14,7 @@
 			["&amp;amp;"] = "&amp;"
 		})
 	end,
-	unescapeRichFormatting = function(p1) --[[ line: 22 ]]
+	unescapeRichFormatting = function(p1)
 		return p1:gsub("&%l+;", {
 			["&lt;"] = "<",
 			["&gt;"] = ">",

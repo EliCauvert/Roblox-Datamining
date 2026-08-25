@@ -1,6 +1,6 @@
 ﻿local object = require(script:FindFirstAncestor("GraphQLServer").Parent.LuauPolyfill).Object
 
-return function(p0, p1) --[[ line: 6 | named "addMockResolvers" ]]
+return function(p0, p1)
 	-- upvalues: object (ref)
 	local var0 = object.assign({}, p0, p1)
 	object.assign(var0, {

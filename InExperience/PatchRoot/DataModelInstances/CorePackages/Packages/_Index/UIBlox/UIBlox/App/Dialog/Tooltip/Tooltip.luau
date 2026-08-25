@@ -32,8 +32,8 @@ tooltip.defaultProps = {
 	orientation = tooltipOrientationModule.Bottom
 }
 
-function tooltip.init(p0) --[[ line: 67 ]]
-	function p0.onDismissDefault() --[[ line: 68 ]]
+function tooltip.init(p0)
+	function p0.onDismissDefault()
 		-- upvalues: p0 (ref)
 		if p0.props.forceClickTriggerPoint or p0.props.triggerOnHover then return end
 		if p0.props.onDismiss then
@@ -42,12 +42,12 @@ function tooltip.init(p0) --[[ line: 67 ]]
 	end
 end
 
-function tooltip.render(p1) --[[ line: 78 ]]
+function tooltip.render(p1)
 	-- upvalues: withStyleModule (ref), roactModule (ref), tooltipContainerModule (ref)
 	local forceClickTriggerPoint = p1.props.forceClickTriggerPoint or p1.props.triggerOnHover
 	local isDirectChild = p1.props.isDirectChild
 	
-	return withStyleModule(function(p2) --[[ line: 81 ]]
+	return withStyleModule(function(p2)
 		-- upvalues: p1 (ref), roactModule (copy), isDirectChild (ref), forceClickTriggerPoint (ref), tooltipContainerModule (copy)
 		local t = {
 			Background = not p1.props.forceClickTriggerPoint and roactModule.createElement("TextButton", {

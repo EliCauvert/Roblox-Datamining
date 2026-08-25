@@ -24,13 +24,13 @@ local t = {
 	size = if flagsModule.FoundationAvatarBeta then statusIndicatorSizeModule.Small else nil
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 65 | named "StatusIndicator" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), statusIndicatorShapeModule (ref), var11 (ref), validNumericVariantsModule (ref), dashModule (ref), useTokensModule (ref), useStatusIndicatorVariantsModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref), reactIsModule (ref)
 	local var17 = withDefaultsModule(p0, t)
 	local var18 = if var17.value then statusIndicatorShapeModule.Circle else var17.shape
 	
 	if var11 and var17.value ~= nil then
-		assert(validNumericVariantsModule[var17.variant], `{var17.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p2, _) --[[ line: 73 ]]
+		assert(validNumericVariantsModule[var17.variant], `{var17.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p2, _)
 			-- upvalues: validNumericVariantsModule (copy)
 			return validNumericVariantsModule[p2] == true
 		end), ",")}`)
@@ -39,7 +39,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 65 | 
 	local var19 = useTokensModule()
 	local var20 = var17.value ~= nil
 	local var21 = useStatusIndicatorVariantsModule(var19, var17.variant, var20, var18, if flagsModule.FoundationAvatarBeta then var17.size else nil)
-	local var22 = reactModule.useCallback(function(p3) --[[ line: 91 ]]
+	local var22 = reactModule.useCallback(function(p3)
 		-- upvalues: var17 (ref)
 		return if var17.max and var17.max < p3 then `{var17.max}+` else tostring(p3)
 	end, { var17.max })

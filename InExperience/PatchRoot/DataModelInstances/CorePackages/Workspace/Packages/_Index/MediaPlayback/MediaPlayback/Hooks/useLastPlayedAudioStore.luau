@@ -5,7 +5,7 @@ local getAudioPlaybackStoreModule = require(mediaPlayback.Stores.getAudioPlaybac
 local useAudioStoreModule = require(mediaPlayback.Hooks.useAudioStore)
 local useSignalState = signalsReactModule.useSignalState
 
-return function() --[[ line: 11 | named "useLastPlayedAudioStore" ]]
+return function()
 	-- upvalues: useSignalState (ref), getAudioPlaybackStoreModule (ref), useAudioStoreModule (ref)
 	local var4 = useSignalState(useSignalState(getAudioPlaybackStoreModule).getLastPlayedAudioStore)
 	

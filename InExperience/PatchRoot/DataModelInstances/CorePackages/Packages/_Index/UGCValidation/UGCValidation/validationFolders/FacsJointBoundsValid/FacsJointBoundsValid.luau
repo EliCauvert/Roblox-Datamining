@@ -16,11 +16,11 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 29 ]]
+	run = function(p0, p1)
 		-- upvalues: getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref), getFIntFacsJointMaximumDistRatioDirectModule (ref), getFIntFacsJointMaximumDistRatioAccumulatedModule (ref)
 		if not getEngineFeatureEngineUGCValidateFACSJointTransformsWithinBoundsModule() then return end
 		local head = p1.renderMeshesData.Head
-		local ok, status = pcall(function() --[[ line: 38 ]]
+		local ok, status = pcall(function()
 			-- upvalues: UGCValidationService (copy), head (ref)
 			return UGCValidationService:GetMaximalJointDistancesWithinFacs(head.editable)
 		end)

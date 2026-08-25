@@ -9,7 +9,7 @@ local logRobloxSubscriptionUpsellCounterModule = require(robloxSubscriptionPurch
 local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local robloxSubscriptionLoggerModule = require(robloxSubscriptionPurchaseApp.Utils.RobloxSubscriptionLogger)
 
-function transitionToError(p0, p1) --[[ line: 19 ]]
+function transitionToError(p0, p1)
 	-- upvalues: robloxSubscriptionStoreModule (ref), promptStateModule (ref), robloxSubscriptionLoggerModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), httpService (ref)
 	local var9 = robloxSubscriptionStoreModule.get()
 	var9.setErrorReason(p0)

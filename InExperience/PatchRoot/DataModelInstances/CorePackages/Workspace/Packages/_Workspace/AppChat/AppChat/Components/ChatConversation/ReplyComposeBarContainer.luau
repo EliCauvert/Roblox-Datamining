@@ -26,11 +26,11 @@ local t = {
 	unknownUserKey = "Feature.Chat.Label.UnknownUser",
 	replyingToYourselfKey = "Feature.Chat.Label.ReplyingToYourself",
 	replyingToOthersKey = "Feature.Chat.Label.ReplyingToOthers",
-	close = function() --[[ line: 53 ]] end,
-	setReplyComposeBarHeight = function(_) --[[ line: 56 ]] end
+	close = function() end,
+	setReplyComposeBarHeight = function(_) end
 }
 
-function getTargetMessageInfo(p0) --[[ line: 63 ]]
+function getTargetMessageInfo(p0)
 	return if p0 then {
 		targetMessageSenderId = p0.senderTargetId,
 		targetMessageId = p0.id,
@@ -39,7 +39,7 @@ function getTargetMessageInfo(p0) --[[ line: 63 ]]
 	} else {}
 end
 
-local function _(value, p1, p2) --[[ line: 75 | named "getTargetMessageInfoFromSignals" ]]
+local function _(value, p1, p2)
 	return {
 		targetMessageSenderId = value,
 		targetMessageId = p1,
@@ -47,7 +47,7 @@ local function _(value, p1, p2) --[[ line: 75 | named "getTargetMessageInfoFromS
 	}
 end
 
-function ReplyComposeBarContainer(p3) --[[ line: 83 ]]
+function ReplyComposeBarContainer(p3)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useLocalUserId (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), getConversationMessageStoreModule (ref), useSignalState (ref), reactModule (ref), fFlagAppChatReplyComposeBarContainerModule (ref), replyComposeBarConstantsModule (ref), chatConversationTelemetryEventsModule (ref), useSelector (ref), populateUserWithStateModule (ref), userProfilesModule (ref), useLocalization (ref), replyComposeBarModule (ref)
 	local var22, var26, var27
 	local var16 = cryoModule.Dictionary.union(t, p3)
@@ -58,14 +58,14 @@ function ReplyComposeBarContainer(p3) --[[ line: 83 ]]
 	if fFlagAppChatSignalsReplyStoreModule then
 		local var20 = getConversationMessageStoreModule(false)
 		local var21 = useSignalState(getReplyingToStoreModule(false).getMessageId)
-		var22 = reactModule.useMemo(function() --[[ line: 94 ]]
+		var22 = reactModule.useMemo(function()
 			-- upvalues: var21 (ref), var20 (ref)
 			return if var21 == nil then nil else var20.messages(false)[var21]
 		end, { var21, var20 })
 		local var23 = if var22 and var22.sender_user_id then tostring(var22.sender_user_id) else nil
 		local var24 = if var22 then var22.content else nil
 		local var25 = if fFlagAppChatReplyComposeBarContainerModule then nil else var17.Tokens.Size.Size_1400 + replyComposeBarConstantsModule.VERTICAL_PADDING * 2 + replyComposeBarConstantsModule.BORDER_HEIGHT
-		reactModule.useEffect(function() --[[ line: 114 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var23 (ref), var21 (ref), var24 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var16 (ref), var25 (ref)
 			var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, {
 				targetMessageSenderId = var23,
@@ -74,16 +74,16 @@ function ReplyComposeBarContainer(p3) --[[ line: 83 ]]
 			})
 			
 			if fFlagAppChatReplyComposeBarContainerModule then
-				return function() --[[ line: 120 ]] end
+				return function() end
 			end
 			var16.setReplyComposeBarHeight(var25)
 			
-			return function() --[[ line: 123 ]]
+			return function()
 				-- upvalues: var16 (copy)
 				var16.setReplyComposeBarHeight(0)
 			end
 		end, {})
-		var26 = useSelector(function(p4) --[[ line: 130 ]]
+		var26 = useSelector(function(p4)
 			-- upvalues: var23 (ref), populateUserWithStateModule (copy)
 			local var34 = if p4 and p4.Users and var23 then p4.Users[var23] else nil
 			
@@ -108,7 +108,7 @@ function ReplyComposeBarContainer(p3) --[[ line: 83 ]]
 			}).replyingToUserText,
 			replyingToUserContent = var24,
 			replyingToUserId = if var29 or not var26.targetUser then nil else var23,
-			onCloseActivated = reactModule.useCallback(function() --[[ line: 172 ]]
+			onCloseActivated = reactModule.useCallback(function()
 				-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var23 (ref), var21 (ref), var24 (ref), var16 (ref)
 				var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, {
 					targetMessageSenderId = var23,
@@ -126,21 +126,21 @@ function ReplyComposeBarContainer(p3) --[[ line: 83 ]]
 		})
 	end
 	local var30 = if fFlagAppChatReplyComposeBarContainerModule then nil else var17.Tokens.Size.Size_1400 + replyComposeBarConstantsModule.VERTICAL_PADDING * 2 + replyComposeBarConstantsModule.BORDER_HEIGHT
-	reactModule.useEffect(function() --[[ line: 202 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var16 (ref), fFlagAppChatReplyComposeBarContainerModule (copy), var30 (ref)
 		var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeRendered, getTargetMessageInfo(var16.message))
 		
 		if fFlagAppChatReplyComposeBarContainerModule then
-			return function() --[[ line: 208 ]] end
+			return function() end
 		end
 		var16.setReplyComposeBarHeight(var30)
 		
-		return function() --[[ line: 211 ]]
+		return function()
 			-- upvalues: var16 (copy)
 			var16.setReplyComposeBarHeight(0)
 		end
 	end, {})
-	local var31 = useSelector(function(p5) --[[ line: 218 ]]
+	local var31 = useSelector(function(p5)
 		-- upvalues: var16 (ref), populateUserWithStateModule (copy)
 		local var35 = if p5 and p5.Users and var16.message.senderTargetId then p5.Users[var16.message.senderTargetId] else nil
 		
@@ -167,7 +167,7 @@ function ReplyComposeBarContainer(p3) --[[ line: 83 ]]
 		replyingToUserText = var26,
 		replyingToUserContent = var16.message.content,
 		replyingToUserId = var27,
-		onCloseActivated = reactModule.useCallback(function() --[[ line: 272 ]]
+		onCloseActivated = reactModule.useCallback(function()
 			-- upvalues: var19 (ref), chatConversationTelemetryEventsModule (copy), var16 (ref)
 			var19.emit(chatConversationTelemetryEventsModule.ConversationInputBarReplyComposeCancelBtnActivated, getTargetMessageInfo(var16.message))
 			var16.close()

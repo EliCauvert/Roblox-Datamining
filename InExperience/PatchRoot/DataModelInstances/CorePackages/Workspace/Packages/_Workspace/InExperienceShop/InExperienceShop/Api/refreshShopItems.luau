@@ -4,7 +4,7 @@ local shopItemMappingModule = require(script.Parent.shopItemMapping)
 local makeRequestKey = shopItemMappingModule.makeRequestKey
 local toShopItem = shopItemMappingModule.toShopItem
 
-local function refreshShopItemFromProductInfo(p0, p1) --[[ line: 200 ]]
+local function refreshShopItemFromProductInfo(p0, p1)
 	-- upvalues: toShopItem (ref)
 	local var2 = toShopItem(p1, p0.itemType, tonumber(p0.id))
 	
@@ -25,10 +25,10 @@ local function refreshShopItemFromProductInfo(p0, p1) --[[ line: 200 ]]
 end
 
 return {
-	infoTypeForShopItemType = function(p2) --[[ line: 26 ]]
+	infoTypeForShopItemType = function(p2)
 		return if p2 == "Product" then Enum.InfoType.Product elseif p2 == "GamePass" then Enum.InfoType.GamePass else nil
 	end,
-	buildRequestsFromSections = function(p3) --[[ line: 39 ]]
+	buildRequestsFromSections = function(p3)
 		-- upvalues: makeRequestKey (ref)
 		local t = {}
 		local t_1 = {}
@@ -54,7 +54,7 @@ return {
 		end
 		return t
 	end,
-	appendFailedItemRequests = function(p4, p5) --[[ line: 66 ]]
+	appendFailedItemRequests = function(p4, p5)
 		-- upvalues: makeRequestKey (ref)
 		local t = {}
 		
@@ -72,7 +72,7 @@ return {
 		return p4
 	end,
 	refreshShopItemFromProductInfo = refreshShopItemFromProductInfo,
-	mergeProductInfoIntoSections = function(p6, p7) --[[ line: 231 ]]
+	mergeProductInfoIntoSections = function(p6, p7)
 		-- upvalues: makeRequestKey (ref), refreshShopItemFromProductInfo (ref)
 		local t = {}
 		
@@ -117,7 +117,7 @@ return {
 		end
 		return list
 	end,
-	insertRecoveredItemsIntoSections = function(p8, p9, p10) --[[ line: 108 ]]
+	insertRecoveredItemsIntoSections = function(p8, p9, p10)
 		-- upvalues: makeRequestKey (ref), toShopItem (ref)
 		local t = {}
 		
@@ -154,7 +154,7 @@ return {
 				list[i_2] = v_2
 				continue
 			end
-			table.sort(id, function(p11, p12) --[[ line: 159 ]]
+			table.sort(id, function(p11, p12)
 				return (p11.originalIndex or 0) < (p12.originalIndex or 0)
 			end)
 			local list_1 = table.create(#v_2.items + #id)

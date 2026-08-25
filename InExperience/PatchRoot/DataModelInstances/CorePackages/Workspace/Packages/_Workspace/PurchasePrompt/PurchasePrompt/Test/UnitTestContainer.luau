@@ -14,14 +14,14 @@ local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDef
 local localization = require(parent.RobloxAppLocales).Localization
 local unitTestContainer = roact.Component:extend("UnitTestContainer")
 
-function unitTestContainer.init(p0) --[[ line: 26 ]]
+function unitTestContainer.init(p0)
 	-- upvalues: layoutValuesModule (ref), rodux (ref), reducerModule (ref), localizationService (ref), localization (ref)
 	p0.layoutValues = layoutValuesModule.new(false).layout
 	p0.store = p0.props.overrideStore or rodux.Store.new(reducerModule, {})
 	p0.localizationContext = localization.new(p0.props.overrideLocale or localizationService.RobloxLocaleId)
 end
 
-function unitTestContainer.render(p1) --[[ line: 34 ]]
+function unitTestContainer.render(p1)
 	-- upvalues: roact (ref), roactRodux (ref), localeProvider (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), localizationContextProviderModule (ref), layoutValuesProviderModule (ref)
 	assert(p1.props[roact.Children] ~= nil and #p1.props[roact.Children] > 0, "UnitTestContainer: no children provided, nothing will be tested")
 	
@@ -30,11 +30,11 @@ function unitTestContainer.render(p1) --[[ line: 34 ]]
 			StyleProvider = roact.createElement(styleProviderWithDefaultTheme, {
 				LocalizationContextProvider = roact.createElement(localizationContextProviderModule, {
 					localizationContext = p1.localizationContext,
-					render = function() --[[ line: 49 ]]
+					render = function()
 						-- upvalues: roact (copy), layoutValuesProviderModule (copy), p1 (ref)
 						return roact.createElement(layoutValuesProviderModule, {
 							isTenFootInterface = false,
-							render = function() --[[ line: 52 ]]
+							render = function()
 								-- upvalues: roact (copy), p1 (copy)
 								return roact.createElement("ScreenGui", { AutoLocalize = false, IgnoreGuiInset = true }, p1.props[roact.Children])
 							end

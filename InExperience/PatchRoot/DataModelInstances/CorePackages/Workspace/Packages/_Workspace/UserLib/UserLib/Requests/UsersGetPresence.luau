@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local url = require(script:FindFirstAncestor("UserLib").Parent.Http).Url
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: httpService (ref), url (ref)
 	local t = {}
 	

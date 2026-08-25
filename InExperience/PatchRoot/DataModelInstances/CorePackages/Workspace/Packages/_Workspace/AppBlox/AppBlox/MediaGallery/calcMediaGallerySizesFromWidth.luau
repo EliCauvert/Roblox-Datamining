@@ -1,7 +1,7 @@
 ﻿local imageSet = require(script:FindFirstAncestor("AppBlox").Parent.UIBlox).App.ImageSet
 local iconSize = imageSet.getIconSize(imageSet.Enum.IconSize.Medium)
 
-function calcMediaGallerySizesFromWidth(p0, p1, p2) --[[ line: 15 ]]
+function calcMediaGallerySizesFromWidth(p0, p1, p2)
 	-- upvalues: iconSize (ref)
 	local var1 = if p2 then p0 else p0 - iconSize * 2
 	local floored = math.floor(var1 / 1.777777777778)

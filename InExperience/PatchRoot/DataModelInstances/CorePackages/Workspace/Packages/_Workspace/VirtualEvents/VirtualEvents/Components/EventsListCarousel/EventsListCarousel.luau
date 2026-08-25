@@ -19,17 +19,17 @@ local useEffect = reactModule.useEffect
 local fFlagLuaAppSduiEventDetailsEnabled = require(virtualEvents.Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 local fFlagLuaAppGameViewTileBackgroundColorOverride = require(virtualEvents.Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 
-return function(p0) --[[ line: 51 ]]
+return function(p0)
 	-- upvalues: useTextSizeOffset (ref), useDesignTokens (ref), responsiveModule (ref), reactModule (ref), httpService (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), useCallback (ref), eventTileModule (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), useGetGameTileHeight (ref), useLocalization (ref), sortEventsByStartDateModule (ref), discoveryEventErrorLogger (ref), useCollectionImpressionsSignal (ref), useEffect (ref), collectionCarousel (ref), frameBoundsImpressionsTracker (ref)
 	local var7 = useTextSizeOffset()
 	local var8 = useDesignTokens()
 	local var9 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-	local var10 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), httpService (copy)
 		return `EventsListCarousel_{p0.universeId}{httpService:GenerateGUID()}`
 	end, { p0.universeId })
 	local var11 = if fFlagLuaAppGameViewTileBackgroundColorOverride and p0.peekViewFormat then var8.Color.Surface.Surface_200 else nil
-	local var12 = useCallback(function(p1, p2, p3, _) --[[ line: 68 ]]
+	local var12 = useCallback(function(p1, p2, p3, _)
 		-- upvalues: reactModule (copy), eventTileModule (copy), p0 (ref), var11 (ref), var10 (ref), var9 (ref), fFlagLuaAppSduiEventDetailsEnabled (copy)
 		return reactModule.createElement(eventTileModule, {
 			Event = p1,
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 51 ]]
 	local var14 = useLocalization({ title = "Feature.VirtualEvents.EventsListTitle" })
 	local var15 = sortEventsByStartDateModule(p0.virtualEvents)
 	local var16 = reactModule.useRef({})
-	local var17 = useCallback(function(p4) --[[ line: 117 ]]
+	local var17 = useCallback(function(p4)
 		-- upvalues: var15 (ref), var16 (ref), p0 (ref), discoveryEventErrorLogger (copy)
 		for i, v in p4 do
 			local var23 = var15[v]
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 51 ]]
 	local var18 = reactModule.useRef(nil)
 	local var19, var20 = useCollectionImpressionsSignal()
 	local var21, var22 = reactModule.useState(os.clock())
-	useEffect(function() --[[ line: 148 ]]
+	useEffect(function()
 		-- upvalues: var22 (ref)
 		var22(os.clock())
 	end, { p0.virtualEvents })

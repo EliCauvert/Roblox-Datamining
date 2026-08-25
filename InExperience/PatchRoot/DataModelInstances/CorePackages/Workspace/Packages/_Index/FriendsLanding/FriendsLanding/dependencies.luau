@@ -17,13 +17,13 @@ local challengeRequestWrapper = require(parent.GenericChallenges).Middleware.Cha
 local enableFriendsLandingChallengeInterceptor = game:DefineFastFlag("EnableFriendsLandingChallengeInterceptor", false)
 local httpRequest = luaSocialLibrariesDepsModule.httpRequest
 local var11 = httpRequest.config({
-	requestFunction = function(p0, p1, p2) --[[ line: 28 ]]
+	requestFunction = function(p0, p1, p2)
 		-- upvalues: var3 (ref), httpRequest (ref)
 		var3:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
 		
 		return httpRequest.requestFunctions.RequestInternal(p0, p1, p2)
 	end,
-	postRequestFunction = function(p3, p4) --[[ line: 32 ]]
+	postRequestFunction = function(p3, p4)
 		-- upvalues: var3 (ref)
 		var3:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p4.requestMethod, p4.url, p3.StatusCode, p3.Body))
 	end,

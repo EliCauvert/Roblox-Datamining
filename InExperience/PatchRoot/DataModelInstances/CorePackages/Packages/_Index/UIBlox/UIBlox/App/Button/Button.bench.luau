@@ -9,9 +9,9 @@ local mountComponentTimes = benchmarksModule.mountComponentTimes
 local scrollComponentTimes = benchmarksModule.scrollComponentTimes
 local var3 = reactModule.createElement(buttonModule, {
 	text = "Button",
-	onActivated = function() --[[ line: 17 ]] end
+	onActivated = function() end
 })
-describe("Button", function() --[[ line: 21 ]]
+describe("Button", function()
 	-- upvalues: mountComponentTimes (ref), var3 (ref), scrollComponentTimes (ref)
 	mountComponentTimes(var3, 100, "Button")
 	scrollComponentTimes(var3, 100, "Button")

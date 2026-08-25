@@ -4,7 +4,7 @@ local _ = require(viewRecyclerRoblox.Parent.ViewRecycler)
 local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
 
 return {
-	attach = function(p0) --[[ line: 43 ]]
+	attach = function(p0)
 		-- upvalues: runService (ref), axisMapModule (ref)
 		local instance = p0.instance
 		local axis = p0.axis
@@ -13,7 +13,7 @@ return {
 		local t = {}
 		local t_1 = {}
 		
-		local function scheduleSettle() --[[ line: 66 ]]
+		local function scheduleSettle()
 			-- upvalues: getIdentity (ref), t_1 (ref), runService (copy), t (ref), instance (ref), axisMapModule (copy), axis (ref), onItemMeasured (ref)
 			local var7 = getIdentity()
 			
@@ -39,7 +39,7 @@ return {
 				local itemRevision = var7.itemRevision
 				local pinnedPosition = var7.pinnedPosition
 				local heartbeatConnection = nil
-				heartbeatConnection = runService.Heartbeat:Once(function() --[[ line: 97 ]]
+				heartbeatConnection = runService.Heartbeat:Once(function()
 					-- upvalues: t (copy), heartbeatConnection (write), var9 (write), itemRevision (ref), assignmentGeneration (write), ? (write), t_1 (copy), assignmentGeneration_1 (ref), getIdentity (copy), itemKey (ref), itemIndex_1 (ref), pinnedPosition (ref), instance (copy), axisMapModule (copy), axis (copy), onItemMeasured (copy)
 					t[heartbeatConnection] = nil
 					
@@ -72,7 +72,7 @@ return {
 		
 		return {
 			scheduleSettle = scheduleSettle,
-			getPendingCount = function() --[[ line: 154 ]]
+			getPendingCount = function()
 				-- upvalues: t (ref)
 				local var12 = 0
 				
@@ -81,7 +81,7 @@ return {
 				end
 				return var12
 			end,
-			disconnect = function() --[[ line: 143 ]]
+			disconnect = function()
 				-- upvalues: var6 (ref), t (ref), t_1 (ref)
 				var6:Disconnect()
 				

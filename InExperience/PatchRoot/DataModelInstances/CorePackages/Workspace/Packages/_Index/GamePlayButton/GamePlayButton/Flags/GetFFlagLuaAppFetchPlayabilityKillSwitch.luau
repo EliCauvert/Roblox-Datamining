@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppFetchPlayabilityKillSwitch1", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("LuaAppFetchPlayabilityKillSwitch1")
 end

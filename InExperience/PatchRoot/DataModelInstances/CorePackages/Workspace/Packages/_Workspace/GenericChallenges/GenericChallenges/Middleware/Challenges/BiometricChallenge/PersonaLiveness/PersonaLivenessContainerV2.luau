@@ -26,23 +26,23 @@ local getFFlagEnhancedPersonaLivenessEvents = require(parent.SharedFlags).GetFFl
 local personaLivenessV2QrPollDelaySec = game:DefineFastInt("PersonaLivenessV2QrPollDelaySec", 6)
 local personaLivenessV2QrPollMaxRetries = game:DefineFastInt("PersonaLivenessV2QrPollMaxRetries", 60)
 
-local function defaultGetLocalUserId() --[[ line: 66 ]]
+local function defaultGetLocalUserId()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	return if localPlayer then localPlayer.UserId else nil
 end
 
-local function _(p0) --[[ line: 76 | named "buildDeeplink" ]]
+local function _(p0)
 	return "https://ro.blox.com/Ebh5" .. "?pid=QR_code&c=liveness_onelink" .. "&is_retargeting=false" .. "&af_dp=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(p0) .. "&deep_link_value=" .. "roblox%3A%2F%2Fnavigation%2Faccount_unlock%3Fuser_id=" .. tostring(p0)
 end
 
-local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
+local function PersonaLivenessQRFlow(p1)
 	-- upvalues: useDispatch (ref), useRoactService (ref), appLogging (ref), roactNetworking (ref), useSelector (ref), defaultGetLocalUserId (ref), useLocalization (ref), reactModule (ref), getFFlagEnhancedPersonaLivenessEvents (ref), biometricChallengeEventModule (ref), challengeEventConstantsModule (ref), biometricTypeEnum (ref), telemetryReasonsModule (ref), personaLivenessV2QrPollMaxRetries (ref), personaLivenessV2QrPollDelaySec (ref), loading (ref), iconSize (ref), fullscreenPageWithSafeArea (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), QRDeepLinkDialog (ref)
 	local var14 = useDispatch()
 	local var15 = useRoactService(appLogging)
 	local var16 = useRoactService(roactNetworking)
-	local var17 = useSelector(function(p2) --[[ line: 93 ]]
+	local var17 = useSelector(function(p2)
 		return p2.UserAccess and p2.UserAccess.restrictionDetail
 	end)
 	local var18 = (p1.getLocalUserId or defaultGetLocalUserId)()
@@ -58,7 +58,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 		}
 	})
 	local var21 = reactModule.useRef(false)
-	local var22 = reactModule.useCallback(function(p3) --[[ line: 119 ]]
+	local var22 = reactModule.useCallback(function(p3)
 		-- upvalues: var21 (ref), p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var15 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy)
 		if var21.current then return end
 		var21.current = true
@@ -80,7 +80,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
 	end, { var15, p1.challengeId, p1.onChallengeAbandoned })
-	local var23 = reactModule.useCallback(function(p4, p5) --[[ line: 142 ]]
+	local var23 = reactModule.useCallback(function(p4, p5)
 		-- upvalues: var21 (ref), p1 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var15 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), biometricTypeEnum (copy)
 		if var21.current then return end
 		var21.current = true
@@ -102,7 +102,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 			biometricType = biometricTypeEnum.PersonaLiveness
 		})
 	end, {})
-	reactModule.useEffect(function() --[[ line: 165 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var23 (ref), telemetryReasonsModule (copy)
 		if not var19 then
 			if getFFlagEnhancedPersonaLivenessEvents() then
@@ -113,7 +113,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 			var23("MissingLocalUserId")
 		end
 	end, { var19, var23 })
-	reactModule.useEffect(function() --[[ line: 177 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var17 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var21 (ref), var15 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), var22 (ref)
 		if not var19 or var17 ~= nil then return end
 		if not getFFlagEnhancedPersonaLivenessEvents() then
@@ -134,7 +134,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 	end, {
 		var17, var19, var22, var15, p1.challengeId, p1.onChallengeAbandoned
 	})
-	reactModule.useEffect(function() --[[ line: 208 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), getFFlagEnhancedPersonaLivenessEvents (copy), var15 (ref), biometricChallengeEventModule (copy), challengeEventConstantsModule (copy), p1 (ref), biometricTypeEnum (copy), telemetryReasonsModule (copy), personaLivenessV2QrPollMaxRetries (copy), personaLivenessV2QrPollDelaySec (copy), var14 (ref), var16 (ref), var23 (ref)
 		if not var19 then return end
 		if getFFlagEnhancedPersonaLivenessEvents() then
@@ -146,7 +146,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 			})
 		end
 		local var24 = false
-		task.spawn(function() --[[ line: 223 ]]
+		task.spawn(function()
 			-- upvalues: personaLivenessV2QrPollMaxRetries (copy), personaLivenessV2QrPollDelaySec (copy), var24 (write), p1 (copy), var14 (copy), var16 (copy), getFFlagEnhancedPersonaLivenessEvents (copy), var23 (copy), telemetryReasonsModule (copy)
 			for _ = 1, personaLivenessV2QrPollMaxRetries do
 				task.wait(personaLivenessV2QrPollDelaySec)
@@ -168,7 +168,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 			end
 		end)
 		
-		return function() --[[ line: 244 ]]
+		return function()
 			-- upvalues: var24 (write)
 			var24 = true
 		end
@@ -189,7 +189,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 					title = var20.title,
 					description = var20.description,
 					footer = var20.footer,
-					onClose = if getFFlagEnhancedPersonaLivenessEvents() then function() --[[ line: 282 ]]
+					onClose = if getFFlagEnhancedPersonaLivenessEvents() then function()
 						-- upvalues: var22 (ref), telemetryReasonsModule (copy)
 						var22(telemetryReasonsModule.QRUserAbandon)
 					end else var22
@@ -203,7 +203,7 @@ local function PersonaLivenessQRFlow(p1) --[[ line: 88 ]]
 	})
 end
 
-return function(p6) --[[ line: 292 | named "PersonaLivenessContainerV2" ]]
+return function(p6)
 	-- upvalues: personaLivenessServiceWrapperModule (ref), reactModule (ref), personaLivenessContainerModule (ref), PersonaLivenessQRFlow (ref)
 	return if personaLivenessServiceWrapperModule.isAvailable() then reactModule.createElement(personaLivenessContainerModule, {
 		challengeId = p6.challengeId,

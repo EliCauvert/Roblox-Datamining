@@ -13,7 +13,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 31 | named "AdUpsellCard" ]]
+return function(p0)
 	-- upvalues: foundationModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), buttonVariant (ref)
 	local var5 = if fFlagBuildLocalization then useLocalization({
 		title = localizationStringsModule.AD_UPSELL_CARD_TITLE,

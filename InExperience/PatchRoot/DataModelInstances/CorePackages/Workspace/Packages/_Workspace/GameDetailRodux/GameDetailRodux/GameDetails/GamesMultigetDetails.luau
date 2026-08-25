@@ -1,6 +1,6 @@
 ﻿local url = require(script:FindFirstAncestor("GameDetailRodux").Parent.Http).Url
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: url (ref)
 	assert(type(p1) == "table", "GamesMultigetDetails request expects universeIds to be a table")
 	

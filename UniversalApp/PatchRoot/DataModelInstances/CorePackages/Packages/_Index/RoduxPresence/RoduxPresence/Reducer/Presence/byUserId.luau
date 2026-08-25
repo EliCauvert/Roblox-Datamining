@@ -6,10 +6,10 @@ local receivedUserPresenceModule = require(roduxPresence.Actions.ReceivedUserPre
 local presenceModelModule = require(roduxPresence.Models.PresenceModel)
 local t = {}
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), t (ref), receivedUserPresenceModule (ref), presenceModelModule (ref), cryoModule (ref)
 	return roduxModule.createReducer(t, {
-		[receivedUserPresenceModule.name] = function(p1, p2) --[[ line: 16 ]]
+		[receivedUserPresenceModule.name] = function(p1, p2)
 			-- upvalues: presenceModelModule (copy), cryoModule (copy)
 			local userId = p2.payload.userId
 			local payload = p2.payload
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 12 ]]
 			
 			return cryoModule.Dictionary.join(p1, { [userId] = presenceModelModule.format(payload) })
 		end,
-		[p0.presenceNetworking.GetPresencesFromUserIds.Succeeded.name] = function(p3, p4) --[[ line: 27 ]]
+		[p0.presenceNetworking.GetPresencesFromUserIds.Succeeded.name] = function(p3, p4)
 			-- upvalues: presenceModelModule (copy), cryoModule (copy)
 			local t = {}
 			

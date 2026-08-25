@@ -12,7 +12,7 @@ local sessionHistoryCacheModule = require(script.Parent.ChatSession.sessionHisto
 local sessionScalarStateModule = require(script.Parent.ChatSession.sessionScalarState)
 local _ = require(script.Parent.ChatSession.sessionDeps)
 
-return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: sessionScalarStateModule (ref), constantsModule (ref), sessionHistoryCacheModule (ref), sessionHistoryMergeModule (ref), signalsModule (ref), historyPageUtilsModule (ref), historyLoaderModule (ref), historyPollingModule (ref), acpProtocolModule (ref), experimentOverrideModule (ref), sendPromptModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -22,24 +22,24 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 	local var16 = sessionHistoryCacheModule.createSessionHistoryCache()
 	local var17 = 0
 	
-	local function buildMergedHistory() --[[ line: 49 ]]
+	local function buildMergedHistory()
 		-- upvalues: sessionHistoryMergeModule (copy), t (write), t_1 (write)
 		return sessionHistoryMergeModule.orderMergedHistoryItems(t, t_1)
 	end
 	
 	local var19, var20 = signalsModule.createSignal(buildMergedHistory())
 	
-	local function notifySessionStateChanged() --[[ line: 57 ]]
+	local function notifySessionStateChanged()
 		-- upvalues: var20 (ref), buildMergedHistory (ref)
 		var20(buildMergedHistory())
 	end
 	
-	local function noteHistorySequenceIds(p4) --[[ line: 61 ]]
+	local function noteHistorySequenceIds(p4)
 		-- upvalues: var13 (ref), historyPageUtilsModule (copy)
 		var13.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p4))
 	end
 	
-	local function noteTurnSequenceIds(p5) --[[ line: 65 ]]
+	local function noteTurnSequenceIds(p5)
 		-- upvalues: var13 (ref)
 		local getLatestProcessedSequenceNumber = p5.getLatestProcessedSequenceNumber
 		
@@ -48,7 +48,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		end
 	end
 	
-	local function snapshotActiveSession() --[[ line: 72 ]]
+	local function snapshotActiveSession()
 		-- upvalues: var13 (ref), t (write), t_1 (write)
 		local casSessionId = var13.getCasSessionId(false)
 		
@@ -61,7 +61,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		}
 	end
 	
-	local function _() --[[ line: 86 | named "saveActiveSessionToCache" ]]
+	local function _()
 		-- upvalues: var13 (ref), snapshotActiveSession (ref), var16 (ref)
 		local casSessionId = var13.getCasSessionId(false)
 		
@@ -73,7 +73,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		end
 	end
 	
-	local _ = function(p6) --[[ line: 97 | named "restoreSessionFromCache" ]]
+	local _ = function(p6)
 		-- upvalues: var16 (ref), t (write), t_1 (write), var13 (ref), var20 (ref), buildMergedHistory (ref)
 		local var35 = var16.restore(p6)
 		
@@ -90,7 +90,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		return true
 	end
 	
-	local function clearActiveSessionState() --[[ line: 111 ]]
+	local function clearActiveSessionState()
 		-- upvalues: t (write), t_1 (write), var13 (ref), var20 (ref), buildMergedHistory (ref)
 		t = {}
 		t_1 = {}
@@ -101,7 +101,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		var20(buildMergedHistory())
 	end
 	
-	local function setCasSessionIdInternal(value) --[[ line: 121 ]]
+	local function setCasSessionIdInternal(value)
 		-- upvalues: var13 (ref), var17 (write), snapshotActiveSession (ref), var16 (ref), t (write), t_1 (write), var20 (ref), buildMergedHistory (ref), p0 (ref), clearActiveSessionState (ref)
 		if value == "" then return end
 		if var13.getCasSessionId(false) == value then return end
@@ -140,7 +140,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		p0.onCasSessionIdChanged(value)
 	end
 	
-	local function mergeHistoryPage(p7, p8) --[[ line: 140 ]]
+	local function mergeHistoryPage(p7, p8)
 		-- upvalues: sessionHistoryMergeModule (copy), t (write), t_1 (write), var13 (ref), historyPageUtilsModule (copy), var20 (ref), buildMergedHistory (ref)
 		sessionHistoryMergeModule.mergeHistoryIntoMap(t, p7, t_1)
 		var13.setNextHistoryPageToken(p8)
@@ -148,7 +148,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		var20(buildMergedHistory())
 	end
 	
-	local function ingestRealtimeUpdate(p9, p10) --[[ line: 147 ]]
+	local function ingestRealtimeUpdate(p9, p10)
 		-- upvalues: sessionHistoryMergeModule (copy), t_1 (write), t (write), var13 (ref), var20 (ref), buildMergedHistory (ref)
 		if sessionHistoryMergeModule.ingestOverlayUpdate(t_1, t, p9, p10) then
 			var13.noteHistorySequenceId(p10)
@@ -159,33 +159,33 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 	local var29 = historyLoaderModule.createHistoryLoader({
 		deps = p0,
 		rpcTimeoutSeconds = rpcTimeoutSeconds,
-		getCasSessionId = function() --[[ line: 157 ]]
+		getCasSessionId = function()
 			-- upvalues: var13 (ref)
 			return var13.getCasSessionId(false)
 		end,
-		getHistoryLoadInFlight = function() --[[ line: 160 ]]
+		getHistoryLoadInFlight = function()
 			-- upvalues: var13 (ref)
 			return var13.getHistoryLoadInFlight(false)
 		end,
 		setHistoryLoadInFlight = var13.setHistoryLoadInFlight,
-		getNextHistoryPageToken = function() --[[ line: 164 ]]
+		getNextHistoryPageToken = function()
 			-- upvalues: var13 (ref)
 			return var13.getNextHistoryPageToken(false)
 		end,
 		setNextHistoryPageToken = var13.setNextHistoryPageToken,
-		getLoadedBySequenceId = function() --[[ line: 168 ]]
+		getLoadedBySequenceId = function()
 			-- upvalues: t (write)
 			return t
 		end,
-		setLoadedBySequenceId = function(value) --[[ line: 171 ]]
+		setLoadedBySequenceId = function(value)
 			-- upvalues: t (write)
 			t = value
 		end,
-		getOverlayBySequenceId = function() --[[ line: 174 ]]
+		getOverlayBySequenceId = function()
 			-- upvalues: t_1 (write)
 			return t_1
 		end,
-		setOverlayBySequenceId = function(value) --[[ line: 177 ]]
+		setOverlayBySequenceId = function(value)
 			-- upvalues: t_1 (write)
 			t_1 = value
 		end,
@@ -194,7 +194,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		noteHistorySequenceIds = noteHistorySequenceIds,
 		notifyMergedHistoryChanged = notifySessionStateChanged,
 		markHistoryLoaded = var13.markHistoryLoaded,
-		getRefreshGeneration = function() --[[ line: 185 ]]
+		getRefreshGeneration = function()
 			-- upvalues: var17 (write)
 			return var17
 		end
@@ -202,18 +202,18 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 	local var30 = historyPollingModule.createHistoryPolling({
 		deps = p0,
 		rpcTimeoutSeconds = rpcTimeoutSeconds,
-		getCasSessionId = function() --[[ line: 193 ]]
+		getCasSessionId = function()
 			-- upvalues: var13 (ref)
 			return var13.getCasSessionId(false)
 		end,
-		getNextHistoryPageToken = function() --[[ line: 196 ]]
+		getNextHistoryPageToken = function()
 			-- upvalues: var13 (ref)
 			return var13.getNextHistoryPageToken(false)
 		end,
 		mergeHistoryPage = mergeHistoryPage
 	})
 	
-	local function ensureInitialized() --[[ line: 202 ]]
+	local function ensureInitialized()
 		-- upvalues: var13 (ref), p0 (ref), acpProtocolModule (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref)
 		if var13.getInitialized(false) then
 			return true, nil
@@ -231,17 +231,17 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 	return {
 		universeId = p1,
 		placeId = p2,
-		getCasSessionId = function() --[[ line: 298 ]]
+		getCasSessionId = function()
 			-- upvalues: var13 (ref)
 			return var13.getCasSessionId(false)
 		end,
 		setCasSessionId = setCasSessionIdInternal,
-		hasLoadedHistory = function() --[[ line: 302 ]]
+		hasLoadedHistory = function()
 			-- upvalues: var13 (ref)
 			return var13.getHasLoadedHistory(false)
 		end,
 		markHistoryLoaded = var13.markHistoryLoaded,
-		getNextHistoryPageToken = function() --[[ line: 306 ]]
+		getNextHistoryPageToken = function()
 			-- upvalues: var13 (ref)
 			return var13.getNextHistoryPageToken(false)
 		end,
@@ -252,7 +252,7 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 		loadOlderHistory = var29.loadOlderHistory,
 		sendPrompt = sendPromptModule.createSendPrompt({
 			ensureInitialized = ensureInitialized,
-			ensureCasSession = function() --[[ line: 215 ]]
+			ensureCasSession = function()
 				-- upvalues: var13 (ref), p1 (ref), p2 (ref), ensureInitialized (ref), p0 (ref), experimentOverrideModule (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), setCasSessionIdInternal (ref)
 				local casSessionId = var13.getCasSessionId(false)
 				
@@ -284,30 +284,30 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 				end
 				return nil, { stage = "session_new" }
 			end,
-			getLatestObservedHistorySequenceId = function() --[[ line: 247 ]]
+			getLatestObservedHistorySequenceId = function()
 				-- upvalues: var13 (ref)
 				return var13.getLatestObservedHistorySequenceId(false)
 			end,
 			noteTurnSequenceIds = noteTurnSequenceIds,
 			startPollingTurnFromHistory = var30.startPollingTurnFromHistory,
-			getAssistantTurnSequence = function() --[[ line: 252 ]]
+			getAssistantTurnSequence = function()
 				-- upvalues: var13 (ref)
 				return var13.getAssistantTurnSequence(false)
 			end,
 			incrementAssistantTurnSequence = var13.incrementAssistantTurnSequence,
 			sessionPrompt = p0.sessionPrompt,
-			setActiveStop = function(value) --[[ line: 257 ]]
+			setActiveStop = function(value)
 				-- upvalues: var14 (write)
 				var14 = value
 			end
 		}).sendPrompt,
-		stopActiveTurn = function() --[[ line: 289 ]]
+		stopActiveTurn = function()
 			-- upvalues: var14 (write)
 			if var14 ~= nil then
 				var14()
 			end
 		end,
-		submitActiveToolResult = function(p11, p12, p13, p14) --[[ line: 270 ]]
+		submitActiveToolResult = function(p11, p12, p13, p14)
 			-- upvalues: var13 (ref), p0 (ref)
 			local casSessionId = var13.getCasSessionId(false)
 			
@@ -319,17 +319,17 @@ return function(p0, p1, p2, p3) --[[ line: 34 | named "createChatSession" ]]
 				isError = if p12 ~= nil then false else p12
 			})
 		end,
-		getActiveTurnHandle = function() --[[ line: 262 ]]
+		getActiveTurnHandle = function()
 			-- upvalues: var13 (ref), p0 (ref)
 			local casSessionId = var13.getCasSessionId(false)
 			
 			return if casSessionId == nil then nil else p0.getActiveTurnHandle(casSessionId)
 		end,
-		startPollingActiveTurn = function(p15) --[[ line: 318 ]]
+		startPollingActiveTurn = function(p15)
 			-- upvalues: var13 (ref), var30 (ref)
 			local casSessionId = var13.getCasSessionId(false)
 			
-			return if casSessionId == nil then function() --[[ line: 321 ]] end else var30.startPollingActiveTurn(casSessionId, p15)
+			return if casSessionId == nil then function() end else var30.startPollingActiveTurn(casSessionId, p15)
 		end
 	}
 end

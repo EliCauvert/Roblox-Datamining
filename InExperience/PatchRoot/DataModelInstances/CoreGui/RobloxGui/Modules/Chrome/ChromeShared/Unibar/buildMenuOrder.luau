@@ -20,13 +20,13 @@ local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
 local var7 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
 local var8 = if var7 then var7.Flags.FFlagAddTraversalHistory else false
 
-local function _(p0, p1, p2) --[[ line: 34 | named "reorder" ]]
+local function _(p0, p1, p2)
 	if p0[p1] ~= nil then
 		p0[p1] = p2
 	end
 end
 
-return function() --[[ line: 41 | named "buildMenuOrder" ]]
+return function()
 	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var8 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), fFlagDebugEnablePioneerUX (ref)
 	local var9 = isConnectDropdownEnabledModule()
 	
@@ -120,7 +120,7 @@ return function() --[[ line: 41 | named "buildMenuOrder" ]]
 	for i in t do
 		table.insert(t_1, i)
 	end
-	table.sort(t_1, function(p3, p4) --[[ line: 120 ]]
+	table.sort(t_1, function(p3, p4)
 		-- upvalues: t (ref)
 		return t[p3] < t[p4]
 	end)

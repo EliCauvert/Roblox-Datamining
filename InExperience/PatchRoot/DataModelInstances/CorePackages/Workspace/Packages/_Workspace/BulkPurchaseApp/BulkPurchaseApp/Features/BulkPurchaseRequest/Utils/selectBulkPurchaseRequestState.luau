@@ -5,7 +5,7 @@ local createPurchasableItemModule = require(script.Parent.createPurchasableItem)
 local createOwnedItemModule = require(script.Parent.createOwnedItem)
 local createUnpurchasableItemModule = require(script.Parent.createUnpurchasableItem)
 
-return function(p0) --[[ line: 11 | named "selectBulkPurchaseRequestState" ]]
+return function(p0)
 	-- upvalues: purchasableStateEnumModule (ref), createPurchasableItemModule (ref), createOwnedItemModule (ref), createUnpurchasableItemModule (ref)
 	local t = {}
 	local t_1 = {}

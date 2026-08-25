@@ -28,7 +28,7 @@ local createValidateFriendRequestNicknameModule = require(networkRequests.create
 local createRemoveTCModule = require(networkRequests.createRemoveTC)
 local createSendTCRequestModule = require(networkRequests.createSendTCRequest)
 
-return function(p0) --[[ line: 37 ]]
+return function(p0)
 	-- upvalues: createGetFriendsFromUserIdModule (ref), createFindFriendsFromUserIdModule (ref), createSearchFriendsByQueryModule (ref), createGetFriendRequestsCountModule (ref), createGetNewFriendRequestsCountModule (ref), createUnfriendTargetUserIdModule (ref), createGetFriendRequestsModule (ref), createAcceptFriendRequestFromUserIdModule (ref), createDeclineFriendRequestFromUserIdModule (ref), createDeclineAllFriendRequestsModule (ref), createClearNewFriendRequestsModule (ref), createGetFriendsCountFromUserIdModule (ref), createGetInactiveFriendsModule (ref), createRequestFriendshipFromUserIdModule (ref), createRequestFriendshipFromContactIdModule (ref), createGetFollowingExistsModule (ref), createGetUserFollowersModule (ref), createGetFriendRecommendationsFromUserIdModule (ref), createGetFriendshipStatusModule (ref), createGetFriendshipStatusesModule (ref), createGetExtendedFriendshipStatusModule (ref), createAcceptFriendRequestWithTokenModule (ref), createGetFollowersCountModule (ref), createGetFollowingsCountModule (ref), createValidateFriendRequestNicknameModule (ref), createRemoveTCModule (ref), createSendTCRequestModule (ref)
 	return {
 		GetFriendsFromUserId = createGetFriendsFromUserIdModule(p0),

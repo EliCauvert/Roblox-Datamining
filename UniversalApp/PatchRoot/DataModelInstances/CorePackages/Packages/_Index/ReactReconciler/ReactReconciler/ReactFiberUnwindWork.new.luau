@@ -21,7 +21,7 @@ local popTopLevelContextObject = unknownModule_1.popTopLevelContextObject
 local popProvider = require(script.Parent["ReactFiberNewContext.new"]).popProvider
 local var5 = nil
 
-local var6 = function(...) --[[ line: 47 ]]
+local var6 = function(...)
 	-- upvalues: var5 (write)
 	if not var5 then
 		var5 = require(script.Parent["ReactFiberWorkLoop.new"]).popRenderLanes
@@ -32,7 +32,7 @@ end
 local transferActualDuration = require(script.Parent["ReactProfilerTimer.new"]).transferActualDuration
 local invariant = require(parent.Shared).invariant
 
-local function unwindWork(p0, _) --[[ line: 59 ]]
+local function unwindWork(p0, _)
 	-- upvalues: reactWorkTagsModule (ref), isContextProvider (ref), popContext (ref), reactFiberFlagsModule (ref), enableProfilerTimer (ref), reactTypeOfModeModule (ref), transferActualDuration (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), invariant (ref), popHostContext (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), resetHydrationState (ref), popProvider (ref), var6 (ref)
 	if p0.tag == reactWorkTagsModule.ClassComponent then
 		if isContextProvider(p0.type) then
@@ -104,7 +104,7 @@ local function unwindWork(p0, _) --[[ line: 59 ]]
 	return nil
 end
 
-function unwindInterruptedWork(p1) --[[ line: 154 ]]
+function unwindInterruptedWork(p1)
 	-- upvalues: reactWorkTagsModule (ref), popContext (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHostContext (ref), popSuspenseContext (ref), popProvider (ref), var6 (ref)
 	if p1.tag == reactWorkTagsModule.ClassComponent then
 		if (if typeof(p1.type) == "table" then p1.type.childContextTypes else nil) == nil then

@@ -1,7 +1,7 @@
 ﻿local map = require(script.Parent.Parent.Parent.LuauPolyfill).Map
 
 return {
-	mapValueOrdered = function(p0, p1) --[[ line: 17 ]]
+	mapValueOrdered = function(p0, p1)
 		-- upvalues: map (ref)
 		local var0 = map.new()
 		

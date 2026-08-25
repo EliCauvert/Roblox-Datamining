@@ -2,12 +2,12 @@
 local _ = require(script.Parent.types)
 
 return {
-	encodeJson = function(p0) --[[ line: 8 ]]
+	encodeJson = function(p0)
 		-- upvalues: httpService (ref)
 		return httpService:JSONEncode(p0), "application/json"
 	end,
-	encodeRaw = function(p1) --[[ line: 13 ]]
-		return function(p2) --[[ line: 14 ]]
+	encodeRaw = function(p1)
+		return function(p2)
 			-- upvalues: p1 (ref)
 			local var1 = typeof(p2)
 			

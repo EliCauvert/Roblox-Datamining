@@ -15,7 +15,7 @@ local uDim2_5 = UDim2.new(1, -statsUtilsModule.TextPanelLeftMarginPix * 2, 0, st
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 59 ]]
+function t.new(p0)
 	-- upvalues: t (ref), statsUtilsModule (ref), uDim2_4 (ref), uDim2 (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -39,7 +39,7 @@ function t.new(p0) --[[ line: 59 ]]
 	return t_1
 end
 
-function t:_getTarget() --[[ line: 92 ]]
+function t:_getTarget()
 	if self._performanceStats == nil then
 		return 0
 	end
@@ -48,7 +48,7 @@ function t:_getTarget() --[[ line: 92 ]]
 	return if statMaxName == nil then 0 else statMaxName:GetValue()
 end
 
-function t:_addCurrentValueWidget() --[[ line: 108 ]]
+function t:_addCurrentValueWidget()
 	-- upvalues: decoratedValueLabelModule (ref), uDim2_5 (ref), uDim2_1 (ref), statsUtilsModule (ref)
 	self._currentValueWidget = decoratedValueLabelModule.new(self._statType, "Current")
 	self._currentValueWidget:PlaceInParent(self._frame, uDim2_5, uDim2_1)
@@ -63,7 +63,7 @@ function t:_addCurrentValueWidget() --[[ line: 108 ]]
 	self._currentValueDecoration = imageLabel
 end
 
-function t:_addTargetValueWidget() --[[ line: 129 ]]
+function t:_addTargetValueWidget()
 	-- upvalues: decoratedValueLabelModule (ref), uDim2_5 (ref), uDim2_2 (ref), statsUtilsModule (ref)
 	self._targetValueWidget = decoratedValueLabelModule.new(self._statType, "Target")
 	self._targetValueWidget:PlaceInParent(self._frame, uDim2_5, uDim2_2)
@@ -76,7 +76,7 @@ function t:_addTargetValueWidget() --[[ line: 129 ]]
 	imageLabel.Image = "rbxasset://textures/ui/PerformanceStats/TargetKey.png"
 end
 
-function t:_addAverageValueWidget() --[[ line: 148 ]]
+function t:_addAverageValueWidget()
 	-- upvalues: decoratedValueLabelModule (ref), uDim2_5 (ref), uDim2_3 (ref), statsUtilsModule (ref)
 	self._averageValueWidget = decoratedValueLabelModule.new(self._statType, "Average")
 	self._averageValueWidget:PlaceInParent(self._frame, uDim2_5, uDim2_3)
@@ -88,18 +88,18 @@ function t:_addAverageValueWidget() --[[ line: 148 ]]
 	statsUtilsModule.StyleAverageLine(frame)
 end
 
-function t:_getTitle() --[[ line: 165 ]]
+function t:_getTitle()
 	-- upvalues: statsUtilsModule (ref)
 	return statsUtilsModule.TypeToName[self._statType]
 end
 
-function t:PlaceInParent(p1, p2, p3) --[[ line: 169 ]]
+function t:PlaceInParent(p1, p2, p3)
 	self._frame.Position = p3
 	self._frame.Size = p2
 	self._frame.Parent = p1
 end
 
-function t:SetStatsAggregator(p4) --[[ line: 176 ]]
+function t:SetStatsAggregator(p4)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
@@ -109,17 +109,17 @@ function t:SetStatsAggregator(p4) --[[ line: 176 ]]
 	self:_refreshVisibility()
 end
 
-function t:SetVisible(p5) --[[ line: 188 ]]
+function t:SetVisible(p5)
 	self._frame.Visible = p5
 	self:_refreshVisibility()
 end
 
-function t:_shouldBeVisible() --[[ line: 193 ]]
+function t:_shouldBeVisible()
 	-- upvalues: statsUtilsModule (ref)
 	return if statsUtilsModule.PerformanceStatsShouldBeVisible() then self._frame.Visible else false
 end
 
-function t:_refreshVisibility() --[[ line: 201 ]]
+function t:_refreshVisibility()
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateFromAggregator()
@@ -129,11 +129,11 @@ function t:_refreshVisibility() --[[ line: 201 ]]
 	self:_stopListening()
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged() --[[ line: 210 ]]
+function t:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function t:_stopListening() --[[ line: 214 ]]
+function t:_stopListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
 		return
@@ -142,10 +142,10 @@ function t:_stopListening() --[[ line: 214 ]]
 	self._listenerId = nil
 end
 
-function t:_startListening() --[[ line: 227 ]]
+function t:_startListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function() --[[ line: 236 ]]
+		self._listenerId = self._aggregator:AddListener(function()
 			-- upvalues: self (ref)
 			self:_updateFromAggregator()
 		end)
@@ -154,7 +154,7 @@ function t:_startListening() --[[ line: 227 ]]
 	end
 end
 
-function t:_updateFromAggregator() --[[ line: 241 ]]
+function t:_updateFromAggregator()
 	-- upvalues: statsUtilsModule (ref)
 	local var18 = 0
 	local var19 = 0
@@ -171,7 +171,7 @@ function t:_updateFromAggregator() --[[ line: 241 ]]
 	self._currentValueDecoration.ImageColor3 = statsUtilsModule.GetColorForValue(var18, var20)
 end
 
-function t:SetZIndex(p6) --[[ line: 260 ]]
+function t:SetZIndex(p6)
 	self._frame.ZIndex = p6
 	self._titleLabel.ZIndex = p6
 	self._currentValueWidget:SetZIndex(p6)

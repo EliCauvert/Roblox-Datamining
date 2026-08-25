@@ -8,13 +8,13 @@ local focusNavHelperModule = require(parent.Common.FocusNavHelper)
 local _ = require(parent_1.LeaderboardStore)
 local constantsModule = require(parent.Common.Constants)
 
-return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
+return function()
 	-- upvalues: useFocusGuiObject (ref), reactModule (ref), focusNavHelperModule (ref), constantsModule (ref), guiService (ref)
 	local var4 = useFocusGuiObject()
 	local var5 = reactModule.useRef(nil)
 	local var6 = reactModule.useRef(nil)
 	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useCallback(function(p0, p1) --[[ line: 66 ]]
+	local var8 = reactModule.useCallback(function(p0, p1)
 		-- upvalues: focusNavHelperModule (copy), var7 (ref), var4 (ref), var5 (ref)
 		local nextPlayerInstance = focusNavHelperModule.getNextPlayerInstance(var7.current, p0, p1)
 		
@@ -25,7 +25,7 @@ return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
 		end
 		var4(var5.current)
 	end, {})
-	local var9 = reactModule.useCallback(function() --[[ line: 78 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var6 (ref), constantsModule (copy), var7 (ref), var4 (ref), var5 (ref), focusNavHelperModule (copy)
 		if var6.current and var6.current ~= constantsModule.SELECTED_TITLE_PLAYER_ID then
 			for i, v in var7.current do
@@ -49,9 +49,9 @@ return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
 			var4(firstPlayerInstance.object)
 		end
 	end, {})
-	local var10 = reactModule.useCallback(function(p2) --[[ line: 104 ]]
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: var7 (ref)
-		return function(p3, p4, p5) --[[ line: 105 ]]
+		return function(p3, p4, p5)
 			-- upvalues: var7 (copy), p2 (ref)
 			if p4 and var7.current[p2] then
 				var7.current[p2].players[p3] = { userId = p3, object = p4, order = p5 }
@@ -60,9 +60,9 @@ return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
 			end
 		end
 	end, {})
-	local var11 = reactModule.useCallback(function(p6) --[[ line: 118 ]]
+	local var11 = reactModule.useCallback(function(p6)
 		-- upvalues: var7 (ref), guiService (copy), var8 (ref)
-		return function(p7) --[[ line: 119 ]]
+		return function(p7)
 			-- upvalues: var7 (copy), p6 (ref), guiService (copy), var8 (copy)
 			local var19 = var7.current[p6]
 			
@@ -76,7 +76,7 @@ return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
 			var7.current[p6].players[p7] = nil
 		end
 	end, {})
-	local var12 = reactModule.useCallback(function(p8, p9) --[[ line: 138 ]]
+	local var12 = reactModule.useCallback(function(p8, p9)
 		-- upvalues: var10 (ref), var11 (ref), var7 (ref)
 		local t = {
 			teamId = p8,
@@ -89,19 +89,19 @@ return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
 		
 		return t
 	end, {})
-	local var13 = reactModule.useCallback(function(p10) --[[ line: 152 ]]
+	local var13 = reactModule.useCallback(function(p10)
 		-- upvalues: var7 (ref)
 		var7.current[p10] = nil
 	end, {})
-	local var14 = reactModule.useCallback(function(p11) --[[ line: 156 ]]
+	local var14 = reactModule.useCallback(function(p11)
 		-- upvalues: var5 (ref)
 		var5.current = p11
 	end, {})
-	local var15 = reactModule.useCallback(function(p12) --[[ line: 160 ]]
+	local var15 = reactModule.useCallback(function(p12)
 		-- upvalues: var6 (ref)
 		var6.current = p12
 	end, {})
-	local var16 = reactModule.useCallback(function(p13) --[[ line: 164 ]]
+	local var16 = reactModule.useCallback(function(p13)
 		-- upvalues: var4 (ref), var5 (ref), var6 (ref), var7 (ref)
 		if p13 then
 			var4(nil)
@@ -111,7 +111,7 @@ return function() --[[ line: 57 | named "usePlayerListFocusNavigation" ]]
 		var7.current = {}
 	end, {})
 	
-	return reactModule.useMemo(function() --[[ line: 175 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var9 (ref), var12 (ref), var13 (ref), var14 (ref), var15 (ref), var16 (ref)
 		return {
 			getFocus = var9,

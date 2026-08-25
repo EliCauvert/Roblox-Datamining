@@ -4,10 +4,10 @@ local argCheckModule = require(parent.ArgCheck)
 local graphite = require(parent.Style).Colors.Graphite
 local windowedListFrame = roactModule.PureComponent:extend("WindowedListFrame")
 
-function windowedListFrame.init(p0) --[[ line: 17 ]]
+function windowedListFrame.init(p0)
 	p0.state = { windowStart = 1, windowSize = 5, topPadding = 0 }
 	
-	function p0.updateWindow(p1) --[[ line: 24 ]]
+	function p0.updateWindow(p1)
 		-- upvalues: p0 (ref)
 		local var3 = p0.props.ButtonSizeY + 1
 		local y = p1.AbsoluteSize.Y
@@ -35,7 +35,7 @@ windowedListFrame.defaultProps = {
 	ListButtonProps = {}
 }
 
-function windowedListFrame.render(p2) --[[ line: 52 ]]
+function windowedListFrame.render(p2)
 	-- upvalues: roactModule (ref), argCheckModule (ref), graphite (ref)
 	local listButton = p2.props.ListButton
 	local listButtonProps = p2.props.ListButtonProps

@@ -1,11 +1,11 @@
 ﻿local var0 = nil
 local t = {}
 local t_1 = {
-	getSceneOverrides = function() --[[ line: 24 ]]
+	getSceneOverrides = function()
 		-- upvalues: var0 (write)
 		return var0
 	end,
-	setSceneOverrides = function(value) --[[ line: 27 ]]
+	setSceneOverrides = function(value)
 		-- upvalues: var0 (write), t (ref)
 		var0 = value
 		
@@ -13,11 +13,11 @@ local t_1 = {
 			v(value)
 		end
 	end,
-	subscribe = function(p0) --[[ line: 33 ]]
+	subscribe = function(p0)
 		-- upvalues: t (ref)
 		table.insert(t, p0)
 		
-		return function() --[[ line: 35 ]]
+		return function()
 			-- upvalues: t (copy), p0 (ref)
 			local index = table.find(t, p0)
 			
@@ -28,7 +28,7 @@ local t_1 = {
 	end
 }
 
-return function() --[[ line: 44 | named "getSceneOverridesStore" ]]
+return function()
 	-- upvalues: t_1 (ref)
 	return t_1
 end

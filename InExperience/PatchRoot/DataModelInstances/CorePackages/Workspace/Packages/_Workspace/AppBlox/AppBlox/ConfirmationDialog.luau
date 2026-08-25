@@ -5,7 +5,7 @@ local foundationModule = require(parent.Foundation)
 local dialog = foundationModule.Dialog
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), dialog (ref), buttonVariant (ref)
 	local var2 = useLocalization({
 		confirmButtonText = "CommonUI.Controls.Action.Confirm",

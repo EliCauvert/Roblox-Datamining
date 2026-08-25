@@ -28,7 +28,7 @@ return {
 	interpretAnnotation = sceneAnalysisModule.interpretAnnotation,
 	extractItemsFromInterpretations = sceneAnalysisModule.extractItemsFromInterpretations,
 	__setRandomGenerator = sceneAnalysisModule.__setRandomGenerator,
-	initialize = function() --[[ line: 42 ]]
+	initialize = function()
 		-- upvalues: inGameAssetReportModeModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariantModule (ref), highlightModeVariants (ref), t (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), fFlagAbuseReportMenuV2 (ref), messageBusService (ref), captureModeMessageId (ref), experienceStateCaptureService (ref), coreGuiService (ref)
 		local _ = nil
 		local var13 = inGameAssetReportModeModule
@@ -53,21 +53,21 @@ return {
 					}, {
 						StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, {
 							InGameAssetReportUI = roactModule.createElement(var13, {
-								backAction = function() --[[ line: 73 ]]
+								backAction = function()
 									-- upvalues: fFlagAbuseReportMenuV2 (copy), messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
 									if fFlagAbuseReportMenuV2 then
 										messageBusService:Publish(captureModeMessageId, { reason = "back" })
 									end
 									experienceStateCaptureService:ToggleCaptureMode()
 								end,
-								onReportComplete = function() --[[ line: 79 ]]
+								onReportComplete = function()
 									-- upvalues: fFlagAbuseReportMenuV2 (copy), messageBusService (copy), captureModeMessageId (copy), experienceStateCaptureService (copy)
 									if fFlagAbuseReportMenuV2 then
 										messageBusService:Publish(captureModeMessageId, { reason = "submit" })
 									end
 									experienceStateCaptureService:ToggleCaptureMode()
 								end,
-								getIsSmallPortraitMode = function(p0) --[[ line: 85 ]]
+								getIsSmallPortraitMode = function(p0)
 									return p0.X < p0.Y and p0.X < 800
 								end
 							})

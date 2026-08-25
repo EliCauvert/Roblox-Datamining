@@ -8,7 +8,7 @@ local record = viewRecyclerModule.Adapter._Private.Record
 local frozen = table.freeze({ "key", "generation" })
 
 return {
-	new = function(p0) --[[ line: 55 ]]
+	new = function(p0)
 		-- upvalues: measurementBatcherModule (ref), reparentableHostModule (ref), canvasItemPlacerModule (ref), measurerModule (ref), record (ref), frozen (ref)
 		local t = {
 			container = p0.container,
@@ -20,14 +20,14 @@ return {
 		local var9 = measurementBatcherModule.new(p0.onItemMeasurements)
 		local var10 = false
 		
-		local function _(p1) --[[ line: 66 | named "disconnectMeasurer" ]]
+		local function _(p1)
 			if p1.measurer ~= nil then
 				p1.measurer.disconnect()
 				p1.measurer = nil
 			end
 		end
 		
-		local _ = function(p2) --[[ line: 73 | named "detachHost" ]]
+		local _ = function(p2)
 			-- upvalues: reparentableHostModule (copy), canvasItemPlacerModule (copy)
 			if p2.host ~= nil then
 				reparentableHostModule.clearSelection(p2.host)
@@ -41,7 +41,7 @@ return {
 			p2.measurementIdentity = nil
 		end
 		
-		local function updateMeasurement(p3, p4) --[[ line: 83 ]]
+		local function updateMeasurement(p3, p4)
 			-- upvalues: t (write), measurerModule (copy), var9 (ref)
 			p3.measurementIdentity = p4
 			
@@ -50,11 +50,11 @@ return {
 					p3.measurer = measurerModule.attach({
 						instance = p3.host,
 						axis = t.axis,
-						getIdentity = function() --[[ line: 95 ]]
+						getIdentity = function()
 							-- upvalues: p3 (ref)
 							return p3.measurementIdentity
 						end,
-						onItemMeasured = function(p5, p6) --[[ line: 98 ]]
+						onItemMeasured = function(p5, p6)
 							-- upvalues: var9 (copy)
 							local cloned = table.clone(p5)
 							cloned.length = p6
@@ -71,7 +71,7 @@ return {
 			end
 		end
 		
-		local function getEntry(p7) --[[ line: 108 ]]
+		local function getEntry(p7)
 			-- upvalues: t_1 (ref), canvasItemPlacerModule (copy)
 			local var16 = t_1[p7]
 			
@@ -91,7 +91,7 @@ return {
 			return var16
 		end
 		
-		local function reportPresentation(p8, p9, p10) --[[ line: 126 ]]
+		local function reportPresentation(p8, p9, p10)
 			-- upvalues: p0 (ref)
 			local var17 = if p10 == nil then nil else p10.generation
 			
@@ -108,7 +108,7 @@ return {
 			end
 		end
 		
-		local function applyPhysical(p11, p12) --[[ line: 142 ]]
+		local function applyPhysical(p11, p12)
 			-- upvalues: reparentableHostModule (copy), canvasItemPlacerModule (copy), p0 (ref), record (copy), frozen (copy), t (write), updateMeasurement (ref), reportPresentation (ref)
 			local hostState = p12.hostState
 			local placementIntent = p12.placementIntent
@@ -253,21 +253,21 @@ return {
 		end
 		
 		return {
-			applyHostState = function(p13, p14) --[[ line: 212 ]]
+			applyHostState = function(p13, p14)
 				-- upvalues: var10 (write), getEntry (ref), applyPhysical (ref)
 				assert(not var10, "CanvasItemViewRuntime: cannot apply Host state after destroy")
 				local var22 = getEntry(p13)
 				var22.hostState = p14
 				applyPhysical(p13, var22)
 			end,
-			applyPlacementIntent = function(p15, p16) --[[ line: 218 ]]
+			applyPlacementIntent = function(p15, p16)
 				-- upvalues: var10 (write), getEntry (ref), applyPhysical (ref)
 				assert(not var10, "CanvasItemViewRuntime: cannot apply Placement intent after destroy")
 				local var23 = getEntry(p15)
 				var23.placementIntent = p16
 				applyPhysical(p15, var23)
 			end,
-			setConfiguration = function(value) --[[ line: 224 ]]
+			setConfiguration = function(value)
 				-- upvalues: var10 (write), t (write), t_1 (ref), applyPhysical (ref)
 				if not var10 then
 					local var24 = t.axis ~= value.axis
@@ -282,11 +282,11 @@ return {
 					end
 				end
 			end,
-			cancelPendingMeasurements = function() --[[ line: 236 ]]
+			cancelPendingMeasurements = function()
 				-- upvalues: var9 (ref)
 				var9.cancelPending()
 			end,
-			destroy = function() --[[ line: 239 ]]
+			destroy = function()
 				-- upvalues: var10 (write), var9 (ref), t_1 (ref), reparentableHostModule (copy), canvasItemPlacerModule (copy)
 				if var10 then return end
 				var10 = true

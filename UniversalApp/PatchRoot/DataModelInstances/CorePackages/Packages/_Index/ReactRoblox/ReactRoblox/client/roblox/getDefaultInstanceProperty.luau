@@ -1,11 +1,11 @@
 ﻿local _nil = require(script.Parent.Parent.Parent.Parent.Shared).Symbol.named("Nil")
 local t = {}
 
-local function tryPropertyName(p0, p1) --[[ line: 33 ]]
+local function tryPropertyName(p0, p1)
 	return p0[p1]
 end
 
-return function(p2, p3) --[[ line: 37 | named "getDefaultInstanceProperty" ]]
+return function(p2, p3)
 	-- upvalues: t (ref), _nil (ref), tryPropertyName (ref)
 	local var3 = t[p2]
 	

@@ -8,7 +8,7 @@ local splitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
-return function(p0, p1, p2, p3) --[[ line: 41 | named "useSplitPaneRender" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), supportPaneMode (ref)
 	local store = splitPaneStoreModule.getStore()
 	local var6 = signalsReactModule.useSignalState(store.getSupportPaneMode)
@@ -60,7 +60,7 @@ return function(p0, p1, p2, p3) --[[ line: 41 | named "useSplitPaneRender" ]]
 	end
 	local var17 = p0[1] ~= nil and (p0[1].descriptor ~= nil and (p0[1].descriptor.state ~= nil and p0[1].descriptor.state.routeName == tempRnSwitchNavigatorName))
 	local var18 = reactModule.useRef(0)
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), var10 (ref), var17 (ref), var6 (ref), supportPaneMode (copy), store (ref)
 		local current = var18.current
 		var18.current = var10

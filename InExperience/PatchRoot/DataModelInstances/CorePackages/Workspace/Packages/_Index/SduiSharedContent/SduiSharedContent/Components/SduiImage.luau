@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.SduiCompat)
 
-return function(p0) --[[ line: 39 | named "SduiImage" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.Image, {
 		AnchorPoint = p0.anchorPoint,

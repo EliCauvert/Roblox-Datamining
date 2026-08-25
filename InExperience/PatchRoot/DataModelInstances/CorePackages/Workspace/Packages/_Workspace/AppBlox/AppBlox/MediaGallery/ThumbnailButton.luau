@@ -40,23 +40,23 @@ thumbnailButton.defaultProps = {
 	size = UDim2.fromScale(1, 1)
 }
 
-function thumbnailButton.init(p0) --[[ line: 57 ]]
+function thumbnailButton.init(p0)
 	-- upvalues: controlState (ref)
 	p0:setState({ controlState = controlState.Initialize })
 	
-	function p0.onStateChanged(_, p1) --[[ line: 62 ]]
+	function p0.onStateChanged(_, p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p1 })
 	end
 	
-	function p0.onActivated() --[[ line: 68 ]]
+	function p0.onActivated()
 		-- upvalues: p0 (ref)
 		if p0.props.onActivated then
 			p0.props.onActivated(p0.props.itemKey)
 		end
 	end
 	
-	function p0.onPlayActivated() --[[ line: 74 ]]
+	function p0.onPlayActivated()
 		-- upvalues: p0 (ref)
 		if p0.props.onPlayActivated then
 			p0.props.onPlayActivated(p0.props.itemKey)
@@ -64,12 +64,12 @@ function thumbnailButton.init(p0) --[[ line: 57 ]]
 	end
 end
 
-function thumbnailButton.renderButton(p2) --[[ line: 81 ]]
+function thumbnailButton.renderButton(p2)
 	-- upvalues: uDim2 (ref), uDim2_1 (ref), withStyle (ref), controlState (ref), roactModule (ref), interactable (ref), loadableImage (ref), button (ref), buttonType (ref), images (ref), imageSetLabel (ref), uDim2_2 (ref), hoverButtonBackgroundModule (ref)
 	local useScaledPlayButton = p2.props.useScaledPlayButton
 	local var9 = if useScaledPlayButton then uDim2 else uDim2_1
 	
-	return withStyle(function(p3) --[[ line: 90 ]]
+	return withStyle(function(p3)
 		-- upvalues: p2 (ref), controlState (copy), roactModule (copy), interactable (copy), loadableImage (copy), button (copy), buttonType (copy), var9 (write), useScaledPlayButton (ref), images (copy), imageSetLabel (copy), uDim2_2 (copy), hoverButtonBackgroundModule (copy)
 		local layoutOrder = p2.props.layoutOrder
 		local anchorPoint = p2.props.anchorPoint
@@ -121,9 +121,9 @@ function thumbnailButton.renderButton(p2) --[[ line: 81 ]]
 	end)
 end
 
-function thumbnailButton.renderEmptyState(p4) --[[ line: 151 ]]
+function thumbnailButton.renderEmptyState(p4)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), var4 (ref), images (ref)
-	return withStyle(function(p5) --[[ line: 152 ]]
+	return withStyle(function(p5)
 		-- upvalues: p4 (ref), roactModule (copy), imageSetLabel (copy), var4 (copy), images (copy)
 		return roactModule.createElement("Frame", {
 			LayoutOrder = p4.props.layoutOrder,
@@ -147,7 +147,7 @@ function thumbnailButton.renderEmptyState(p4) --[[ line: 151 ]]
 	end)
 end
 
-function thumbnailButton.render(p6) --[[ line: 182 ]]
+function thumbnailButton.render(p6)
 	return if p6.props.imageId == "" then p6:renderEmptyState() else p6:renderButton()
 end
 

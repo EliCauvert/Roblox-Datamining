@@ -4,14 +4,14 @@ local realNamesInDisplayNamesExperimentDefinition = game:DefineFastString("RealN
 local realNamesInDisplayNamesEnabledForAll = game:DefineFastFlag("RealNamesInDisplayNamesEnabledForAll", false)
 local useUserExperiment = roactAppExperimentModule.useUserExperiment
 
-local var4 = function(p0) --[[ line: 12 ]]
+local var4 = function(p0)
 	-- upvalues: realNamesInDisplayNamesEnabledForAll (ref), realNamesInDisplayNamesIXPV1 (ref), realNamesInDisplayNamesExperimentDefinition (ref)
 	return if realNamesInDisplayNamesEnabledForAll then true else ((p0 or {})[realNamesInDisplayNamesIXPV1] or {})[realNamesInDisplayNamesExperimentDefinition] == true
 end
 
 return {
 	isExperimentEnabled = var4,
-	useIsExperimentEnabled = function(p1) --[[ line: 25 ]]
+	useIsExperimentEnabled = function(p1)
 		-- upvalues: useUserExperiment (ref), realNamesInDisplayNamesIXPV1 (ref), var4 (ref)
 		return useUserExperiment({ realNamesInDisplayNamesIXPV1 }, var4, p1.isExposureEnabled)
 	end

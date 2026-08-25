@@ -1,6 +1,6 @@
 ﻿local contentProviderService = game:GetService("ContentProvider")
 
-local function parseBaseUrlInformation() --[[ line: 11 ]]
+local function parseBaseUrlInformation()
 	-- upvalues: contentProviderService (ref)
 	local baseUrl = contentProviderService.BaseUrl
 	
@@ -13,11 +13,11 @@ local function parseBaseUrlInformation() --[[ line: 11 ]]
 	return baseUrl, baseUrl:sub(var6 + 1, var7 - 1), baseUrl:sub(var8 + 1)
 end
 
-local function preventTableModification(_, _, _) --[[ line: 33 ]]
+local function preventTableModification(_, _, _)
 	error("Attempt to modify read-only table")
 end
 
-local function _(p0) --[[ line: 36 | named "createReadOnlyTable" ]]
+local function _(p0)
 	-- upvalues: preventTableModification (ref)
 	return setmetatable({}, {
 		__metatable = false,
@@ -65,22 +65,22 @@ return setmetatable({}, {
 		BLOG_URL = "https://blog.roblox.com/",
 		CORP_URL = "https://corp.roblox.com/",
 		GAME_I18N_URL = string.format("https://gameinternationalization.%s", var5),
-		getUserProfileUrl = function(p1, p2) --[[ line: 117 ]]
+		getUserProfileUrl = function(p1, p2)
 			return string.format("%susers/%s/profile", p1.BASE_URL, p2)
 		end,
-		getUserFriendsUrl = function(p3, p4) --[[ line: 121 ]]
+		getUserFriendsUrl = function(p3, p4)
 			return string.format("%susers/%s/friends", p3.BASE_URL, p4)
 		end,
-		getUserInventoryUrl = function(p5, p6) --[[ line: 125 ]]
+		getUserInventoryUrl = function(p5, p6)
 			return string.format("%susers/%s/inventory", p5.BASE_URL, p6)
 		end,
-		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10) --[[ line: 129 ]]
+		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10)
 			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p7.BASE_URL, p9, p10, tostring(p8))
 		end,
-		isVanitySite = function(p11) --[[ line: 138 ]]
+		isVanitySite = function(p11)
 			return p11.PREFIX ~= "www"
 		end,
-		makeQueryString = function(_, p12) --[[ line: 143 ]]
+		makeQueryString = function(_, p12)
 			local t = {}
 			
 			for i, v in pairs(p12) do

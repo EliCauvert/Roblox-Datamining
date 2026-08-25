@@ -9,10 +9,10 @@ local var1 = t.strictInterface({
 	onError = t.union(t.callback, t.table)
 })
 
-return function(p0) --[[ line: 16 ]]
+return function(p0)
 	-- upvalues: var1 (ref), friendsNetworking (ref), promise (ref)
 	return {
-		refreshPageData = function(p1) --[[ line: 18 ]]
+		refreshPageData = function(p1)
 			-- upvalues: var1 (copy), p0 (ref), friendsNetworking (copy), promise (copy)
 			assert(var1(p1))
 			local t = {}
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 16 ]]
 			
 			return promise.all(t):andThen(p1.onResolve):catch(p1.onError)
 		end,
-		getFriendRequestsCount = function() --[[ line: 26 ]]
+		getFriendRequestsCount = function()
 			-- upvalues: p0 (ref), friendsNetworking (copy)
 			return p0(friendsNetworking.GetFriendRequestsCount.API())
 		end

@@ -7,7 +7,7 @@ local responsiveLayoutContextModule = require(parent.ResponsiveLayoutContext)
 local responsiveLayoutConfigReaderModule = require(parent.ResponsiveLayoutConfigReader)
 local responsiveBaseRow = roactModule.PureComponent:extend("ResponsiveBaseRow")
 
-local function multilineScrollingValidator(p0) --[[ line: 16 ]]
+local function multilineScrollingValidator(p0)
 	if p0.multiLine and p0.scrollable then
 		return false, "multiLine can't be scrollable"
 	end
@@ -38,7 +38,7 @@ responsiveBaseRow.defaultProps = {
 	multiLine = false
 }
 
-function responsiveBaseRow.renderChildrenWithPadding(p1, p2, p3) --[[ line: 64 ]]
+function responsiveBaseRow.renderChildrenWithPadding(p1, p2, p3)
 	-- upvalues: object (ref), roactModule (ref)
 	local lines = p1.props.lines or 1
 	local paddingTopLines = p1.props.paddingTopLines or 0
@@ -52,7 +52,7 @@ function responsiveBaseRow.renderChildrenWithPadding(p1, p2, p3) --[[ line: 64 ]
 	}, p1.props[roactModule.Children])
 end
 
-function responsiveBaseRow.renderChildrenMultiline(p4, p5, p6, p7, p8) --[[ line: 80 ]]
+function responsiveBaseRow.renderChildrenMultiline(p4, p5, p6, p7, p8)
 	-- upvalues: object (ref), roactModule (ref)
 	local lines = p4.props.lines or 1
 	
@@ -72,7 +72,7 @@ function responsiveBaseRow.renderChildrenMultiline(p4, p5, p6, p7, p8) --[[ line
 	}, p4:renderChildrenWithPadding(p6, p8))
 end
 
-function responsiveBaseRow.renderChildren(p9, p10, p11, p12, p13) --[[ line: 102 ]]
+function responsiveBaseRow.renderChildren(p9, p10, p11, p12, p13)
 	-- upvalues: object (ref), roactModule (ref)
 	local var10 = object.assign({
 		_uiblox_grid_layout_ = roactModule.createElement("UIListLayout", {
@@ -102,11 +102,11 @@ function responsiveBaseRow.renderChildren(p9, p10, p11, p12, p13) --[[ line: 102
 	return var10
 end
 
-local function _(p14, p15) --[[ line: 136 | named "applyUDim" ]]
+local function _(p14, p15)
 	return p14.Scale * p15 + p14.Offset
 end
 
-function responsiveBaseRow.getSize(p16, p17, p18, p19, p20, p21) --[[ line: 141 ]]
+function responsiveBaseRow.getSize(p16, p17, p18, p19, p20, p21)
 	if p17 == nil then
 		return UDim2.fromScale(1, 0)
 	end
@@ -123,7 +123,7 @@ function responsiveBaseRow.getSize(p16, p17, p18, p19, p20, p21) --[[ line: 141 
 	return UDim2.new(1, 0, var12, var13)
 end
 
-function responsiveBaseRow.render(p22) --[[ line: 165 ]]
+function responsiveBaseRow.render(p22)
 	-- upvalues: multilineScrollingValidator (ref), roactModule (ref), responsiveLayoutContextModule (ref), object (ref), responsiveLayoutConfigReaderModule (ref)
 	assert(multilineScrollingValidator(p22.props))
 	local relativeHeight = p22.props.relativeHeight
@@ -132,7 +132,7 @@ function responsiveBaseRow.render(p22) --[[ line: 165 ]]
 	local var14 = if p22.props.layoutOrder then string.format("ResponsiveRow%02d", p22.props.layoutOrder) else "ResponsiveRow"
 	
 	return roactModule.createElement(responsiveLayoutContextModule.Consumer, {
-		render = function(p23) --[[ line: 174 ]]
+		render = function(p23)
 			-- upvalues: object (copy), p22 (ref), scrollable (ref), multiLine (ref), relativeHeight (write), responsiveLayoutConfigReaderModule (copy), roactModule (copy), responsiveLayoutContextModule (copy), var14 (ref)
 			local var15 = object.assign({}, p23, {
 				subPixelOffset = 0,
@@ -200,7 +200,7 @@ function responsiveBaseRow.render(p22) --[[ line: 165 ]]
 	})
 end
 
-return roactModule.forwardRef(function(p24, p25) --[[ line: 230 ]]
+return roactModule.forwardRef(function(p24, p25)
 	-- upvalues: roactModule (ref), responsiveBaseRow (ref), object (ref)
 	return roactModule.createElement(responsiveBaseRow, object.assign({}, p24, { gridBasicRowRef = p25 }))
 end)

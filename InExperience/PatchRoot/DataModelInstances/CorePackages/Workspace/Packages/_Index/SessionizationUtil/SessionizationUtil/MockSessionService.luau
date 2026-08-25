@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 10 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref)
 	local t_1 = {
 		parent = nil,
@@ -17,14 +17,14 @@ function t.new(p0, p1) --[[ line: 10 ]]
 	return t_1
 end
 
-function t:addChild(p2, p3) --[[ line: 27 ]]
+function t:addChild(p2, p3)
 	-- upvalues: t (ref)
 	local var3 = t.new(p2, p3)
 	var3.parent = self
 	self.children[p2] = var3
 end
 
-function t:dump(p4, p5) --[[ line: 34 ]]
+function t:dump(p4, p5)
 	p5 ..= `{p4} sid: {self.sid}, tag: {self.tag}\n`
 	p4 ..= "----"
 	
@@ -34,7 +34,7 @@ function t:dump(p4, p5) --[[ line: 34 ]]
 	return p5
 end
 
-function findSid(p6, p7) --[[ line: 44 ]]
+function findSid(p6, p7)
 	if p6.sid == p7 then
 		return p6
 	end
@@ -51,7 +51,7 @@ end
 local t_1 = { MOCK_ROOT_SID = "MOCK_ROOT_SID" }
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 65 ]]
+function t_1.new()
 	-- upvalues: t (ref), t_1 (ref), signal (ref)
 	local t_2 = {
 		mockRootNode = t.new(t_1.MOCK_ROOT_SID, t_1.MOCK_ROOT_SID),
@@ -62,28 +62,28 @@ function t_1.new() --[[ line: 65 ]]
 	return t_2
 end
 
-function t_1:_resetMockData() --[[ line: 78 ]]
+function t_1:_resetMockData()
 	-- upvalues: t (ref), t_1 (ref)
 	self.mockRootNode = t.new(t_1.MOCK_ROOT_SID, t_1.MOCK_ROOT_SID)
 end
 
-function t_1:_findSid(p8) --[[ line: 82 ]]
+function t_1:_findSid(p8)
 	return findSid(self.mockRootNode, p8)
 end
 
-function t_1:_dumpSessionTree() --[[ line: 86 ]]
+function t_1:_dumpSessionTree()
 	return if self.mockRootNode == nil then "Root node is nil!" else self.mockRootNode:dump("", "")
 end
 
-function t_1:GetRootSID() --[[ line: 94 ]]
+function t_1:GetRootSID()
 	return self.MOCK_ROOT_SID
 end
 
-function t_1:SetSession(p9, p10, p11) --[[ line: 98 ]]
+function t_1:SetSession(p9, p10, p11)
 	;(findSid(self.mockRootNode, p9) or self.mockRootNode):addChild(p10, p11)
 end
 
-function t_1:ReplaceSession(p12, p13) --[[ line: 104 ]]
+function t_1:ReplaceSession(p12, p13)
 	local var6 = findSid(self.mockRootNode, p12)
 	
 	if var6 ~= nil and var6.parent ~= nil then
@@ -92,7 +92,7 @@ function t_1:ReplaceSession(p12, p13) --[[ line: 104 ]]
 	end
 end
 
-function t_1:RemoveSession(p14) --[[ line: 114 ]]
+function t_1:RemoveSession(p14)
 	local var7 = findSid(self.mockRootNode, p14)
 	
 	if var7 ~= nil then
@@ -104,13 +104,13 @@ function t_1:RemoveSession(p14) --[[ line: 114 ]]
 	end
 end
 
-function t_1:GetMetadata(p15, p16) --[[ line: 124 ]]
+function t_1:GetMetadata(p15, p16)
 	local var8 = findSid(self.mockRootNode, p15)
 	
 	return if var8 == nil then nil else var8.metadata[p16]
 end
 
-function t_1:SetMetadata(p17, p18, p19) --[[ line: 133 ]]
+function t_1:SetMetadata(p17, p18, p19)
 	local var9 = findSid(self.mockRootNode, p17)
 	
 	if var9 ~= nil then
@@ -118,13 +118,13 @@ function t_1:SetMetadata(p17, p18, p19) --[[ line: 133 ]]
 	end
 end
 
-function t_1:SessionExists(p20) --[[ line: 140 ]]
+function t_1:SessionExists(p20)
 	return findSid(self.mockRootNode, p20) ~= nil
 end
 
-function t_1:RemoveSessionsWithMetadataKey(p21) --[[ line: 145 ]]
+function t_1:RemoveSessionsWithMetadataKey(p21)
 	if p21 == nil then return end
-	local function findNodeWithMetadataKey(p22, p23) --[[ line: 150 ]]
+	local function findNodeWithMetadataKey(p22, p23)
 		-- upvalues: findNodeWithMetadataKey (ref)
 		if p23 ~= nil then
 			if p23.metadata[p22] ~= nil then
@@ -148,11 +148,11 @@ function t_1:RemoveSessionsWithMetadataKey(p21) --[[ line: 145 ]]
 	end
 end
 
-function t_1.generateSessionInfoString(_, _, _, _, _) --[[ line: 174 ]]
+function t_1.generateSessionInfoString(_, _, _, _, _)
 	return ""
 end
 
-function t_1:GetSessionTag(p24) --[[ line: 183 ]]
+function t_1:GetSessionTag(p24)
 	local var13 = findSid(self.mockRootNode, p24)
 	
 	return if var13 == nil then "" else var13.tag

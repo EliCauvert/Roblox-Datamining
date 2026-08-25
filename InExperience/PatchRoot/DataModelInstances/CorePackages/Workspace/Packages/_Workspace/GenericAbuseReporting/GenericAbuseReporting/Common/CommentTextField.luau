@@ -5,7 +5,7 @@ local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local useStyle = UIBloxModule.Core.Style.useStyle
 local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
 
-return function(p0) --[[ line: 25 | named "CommentTextField" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref)
 	local var2, var3 = reactModule.useState("")
 	local var4 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 25 | named "CommentTextField" ]]
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
 			Interactable = p0.interactable,
-			[reactModule.Change.Text] = reactModule.useCallback(function(p1) --[[ line: 33 ]]
+			[reactModule.Change.Text] = reactModule.useCallback(function(p1)
 				-- upvalues: var3 (ref), p0 (ref), var2 (ref)
 				local text = p1.Text
 				

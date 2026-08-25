@@ -7,7 +7,7 @@ local t = {}
 local isSymbol = require(parent.Utils.jsHelpers).isSymbol
 local isObject = nil
 
-local function mergeDeep(p0, p1) --[[ line: 26 ]]
+local function mergeDeep(p0, p1)
 	-- upvalues: boolean (ref), isObject (write), isSymbol (ref), array (ref), object (ref), mergeDeep (ref)
 	local var4 = if p1 ~= nil then false else p1
 	local var5 = if boolean.toJSBoolean(p0[1]) then p0[1] else {}
@@ -35,7 +35,7 @@ end
 
 t.mergeDeep = mergeDeep
 
-isObject = function(p2) --[[ line: 98 | named "isObject" ]]
+isObject = function(p2)
 	-- upvalues: boolean (ref), array (ref)
 	local var8 = boolean.toJSBoolean(p2)
 	

@@ -3,18 +3,18 @@ local _ = require(script.Parent.Parent.ChatSession.sessionDeps)
 local _ = require(script.Parent.Parent.types)
 
 return {
-	createSessionRegistry = function(p0) --[[ line: 20 ]]
+	createSessionRegistry = function(p0)
 		-- upvalues: createChatSessionModule (ref)
 		local t = {}
 		local t_1 = {}
 		local t_2 = {}
 		
-		local function _(p1, p2, p3) --[[ line: 45 | named "projectKey" ]]
+		local function _(p1, p2, p3)
 			return if typeof(p3) == "string" and p3 ~= "" and (p1 == nil or p2 == nil) then `session:{p3}` elseif p1 == nil or p2 == nil then "anonymous" else `{p1}:{p2}`
 		end
 		
 		return {
-			getSessionForProject = function(p4, p5, p6) --[[ line: 55 ]]
+			getSessionForProject = function(p4, p5, p6)
 				-- upvalues: t_1 (ref), t (ref), t_2 (ref), createChatSessionModule (copy), p0 (ref)
 				local var4 = if typeof(p6) == "string" and p6 ~= "" and (p4 == nil or p5 == nil) then `session:{p6}` elseif p4 == nil or p5 == nil then "anonymous" else `{p4}:{p5}`
 				
@@ -41,7 +41,7 @@ return {
 						ingestSessionHistory = p0.ingestSessionHistory,
 						submitToolResult = p0.submitToolResult,
 						getActiveTurnHandle = p0.getActiveTurnHandle,
-						onCasSessionIdChanged = function(p7) --[[ line: 85 ]]
+						onCasSessionIdChanged = function(p7)
 							-- upvalues: var9 (write), t_2 (copy), t_1 (copy)
 							if var9 ~= nil then
 								local var13 = var9
@@ -106,7 +106,7 @@ return {
 				end
 				return var6
 			end,
-			registerCasSession = function(p8, p9) --[[ line: 25 ]]
+			registerCasSession = function(p8, p9)
 				-- upvalues: t_2 (ref), t_1 (ref)
 				if typeof(p9) ~= "string" or p9 == "" then return end
 				local var16 = t_2[p8]
@@ -122,7 +122,7 @@ return {
 				t_1[p9] = p8
 				t_2[p8] = p9
 			end,
-			getSessionByCasSessionId = function(p10) --[[ line: 100 ]]
+			getSessionByCasSessionId = function(p10)
 				-- upvalues: t_1 (ref)
 				local var18 = t_1[p10]
 				

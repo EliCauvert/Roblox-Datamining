@@ -6,10 +6,10 @@ local getNamedType = definitionModule.getNamedType
 local isInputObjectType = definitionModule.isInputObjectType
 
 return {
-	NoDeprecatedCustomRule = function(p0) --[[ line: 28 ]]
+	NoDeprecatedCustomRule = function(p0)
 		-- upvalues: invariant (ref), graphQLError (ref), getNamedType (ref), isInputObjectType (ref)
 		return {
-			Field = function(_, p1) --[[ line: 30 ]]
+			Field = function(_, p1)
 				-- upvalues: p0 (ref), invariant (copy), graphQLError (copy)
 				local fieldDef = p0:getFieldDef()
 				local deprecationReason = fieldDef and fieldDef.deprecationReason
@@ -20,7 +20,7 @@ return {
 					p0:reportError(graphQLError.new(("The field %s.%s is deprecated. %s"):format(parentType.name, fieldDef.name, deprecationReason), p1))
 				end
 			end,
-			Argument = function(_, p2) --[[ line: 48 ]]
+			Argument = function(_, p2)
 				-- upvalues: p0 (ref), graphQLError (copy), invariant (copy)
 				local argument = p0:getArgument()
 				local deprecationReason = argument and argument.deprecationReason
@@ -39,7 +39,7 @@ return {
 					p0:reportError(graphQLError.new(("Field \"%s.%s\" argument \"%s\" is deprecated. %s"):format(parentType.name, fieldDef.name, argument.name, deprecationReason), p2))
 				end
 			end,
-			ObjectField = function(_, p3) --[[ line: 82 ]]
+			ObjectField = function(_, p3)
 				-- upvalues: getNamedType (copy), p0 (ref), isInputObjectType (copy), graphQLError (copy)
 				local var9 = getNamedType(p0:getParentInputType())
 				
@@ -52,7 +52,7 @@ return {
 					end
 				end
 			end,
-			EnumValue = function(_, p4) --[[ line: 103 ]]
+			EnumValue = function(_, p4)
 				-- upvalues: p0 (ref), getNamedType (copy), invariant (copy), graphQLError (copy)
 				local enumValue = p0:getEnumValue()
 				local deprecationReason = enumValue and enumValue.deprecationReason

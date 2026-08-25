@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 9 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local t_1 = { _isEnabled = true, _reporter = p0 }
 	setmetatable(t_1, t)
@@ -9,11 +9,11 @@ function t.new(p0) --[[ line: 9 ]]
 	return t_1
 end
 
-function t:setEnabled(p1) --[[ line: 19 ]]
+function t:setEnabled(p1)
 	self._isEnabled = p1
 end
 
-function t:sendTelemetryEvent(p2, p3, p4) --[[ line: 26 ]]
+function t:sendTelemetryEvent(p2, p3, p4)
 	p4 = p4 or {}
 	assert(type(p2) == "string", "Expected eventContext to be a string")
 	assert(type(p3) == "string", "Expected eventName to be a string")

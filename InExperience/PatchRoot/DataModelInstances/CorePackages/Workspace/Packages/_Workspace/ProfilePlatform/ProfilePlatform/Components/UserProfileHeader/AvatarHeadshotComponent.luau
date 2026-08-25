@@ -30,7 +30,7 @@ local useNavigation = require(parent.Navigation).useNavigation
 local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local getBuilderIconForCurrentPlatform = foundationModule.Utility.getBuilderIconForCurrentPlatform
 
-return function(p0) --[[ line: 54 | named "AvatarHeadshotComponent" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useDynamicSizeMarginModule (ref), useLocalUserId (ref), convertToFoundationPresenceEnum (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagAddPlatformNameToProfileHeader (ref), getBuilderIconForCurrentPlatform (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagDisableCopyUsernameOnConsole (ref), responsiveModule (ref), fFlagEnableUserRecentActivityEntryPoint (ref), useCurrentProfileFriendStatusModule (ref), enumsModule (ref), useNavigation (ref), appPage (ref), default (ref), contexts (ref), setCurrentToastMessage (ref), copy (ref), constantsModule (ref), userTile (ref), layoutMode (ref), fFlagUserTileTextTCIndicator (ref)
 	local var19
 	local var9 = useTokens()
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 54 | named "AvatarHeadshotComponent" ]]
 		usernameCopied = textKeysModule.UsernameCopied,
 		viewRecentActivity = textKeysModule.ViewRecentActivity
 	})
-	local var17 = reactModule.useMemo(function() --[[ line: 78 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: fFlagAddPlatformNameToProfileHeader (copy), getBuilderIconForCurrentPlatform (copy)
 		return if fFlagAddPlatformNameToProfileHeader then getBuilderIconForCurrentPlatform() else nil
 	end, {})
@@ -96,7 +96,7 @@ return function(p0) --[[ line: 54 | named "AvatarHeadshotComponent" ]]
 			userPresenceType = var13,
 			titleStyle = var9.Typography.HeadingSmall,
 			subtitleStyle = var9.Typography.BodyMedium,
-			onSubtitleClicked = if var19 then nil else reactModule.useCallback(function() --[[ line: 108 ]]
+			onSubtitleClicked = if var19 then nil else reactModule.useCallback(function()
 				-- upvalues: default (copy), contexts (copy), p0 (ref), var15 (ref), setCurrentToastMessage (copy), var16 (ref), copy (copy)
 				default:setClipboardText({ context = contexts.ProfileCard, text = p0.username })
 				var15(setCurrentToastMessage({
@@ -108,7 +108,7 @@ return function(p0) --[[ line: 54 | named "AvatarHeadshotComponent" ]]
 			trustedConnectionIndicatorEnabled = if fFlagUserTileTextTCIndicator then true else nil,
 			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var18 else nil,
 			extraInfo = if var21 then var16.viewRecentActivity else nil,
-			onExtraInfoClicked = if var21 then if fFlagEnableUserRecentActivityEntryPoint then reactModule.useCallback(function() --[[ line: 100 ]]
+			onExtraInfoClicked = if var21 then if fFlagEnableUserRecentActivityEntryPoint then reactModule.useCallback(function()
 				-- upvalues: var22 (ref), appPage (copy), p0 (ref)
 				var22.navigate(appPage.UserRecentActivity, { userId = p0.userId, primaryName = p0.primaryName })
 			end, { var22, p0.userId, p0.primaryName }) else nil else nil

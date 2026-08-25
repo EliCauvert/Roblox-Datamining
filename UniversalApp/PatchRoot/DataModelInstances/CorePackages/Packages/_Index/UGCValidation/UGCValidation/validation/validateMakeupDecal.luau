@@ -10,7 +10,7 @@ local validateMakeupDecalUVZonesModule = require(parent.validation.validateMakeu
 local getFFlagUGCValidateDecalTextureLimitsModule = require(parent.flags.getFFlagUGCValidateDecalTextureLimits)
 local validateTextureSizeModule = require(parent.validation.validateTextureSize)
 
-return function(p0, p1) --[[ line: 23 | named "validateMakeupDecal" ]]
+return function(p0, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getEditableImageFromContextModule (ref), analyticsModule (ref), getFFlagUGCValidateDecalTextureLimitsModule (ref), constantsInterfaceModule (ref), validateTextureSizeModule (ref), validateMakeupDecalUVZonesModule (ref)
 	local currentTime = tick()
 	local assetTypeEnum = p1.assetTypeEnum

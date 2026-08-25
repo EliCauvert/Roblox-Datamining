@@ -18,13 +18,13 @@ return {
 	name = "SetAlias",
 	storyRoot = setAlias,
 	roact = roact,
-	mapDefinition = function(p0) --[[ line: 40 ]]
+	mapDefinition = function(p0)
 		-- upvalues: dash (ref), t_1 (ref)
 		return dash.join(p0, { controls = dash.join(t_1, p0.controls or {}) })
 	end,
-	mapStory = function(p1) --[[ line: 44 ]]
+	mapStory = function(p1)
 		-- upvalues: roact (ref), appStyleProvider (ref), t (ref), mockLocale (ref)
-		return function(p2) --[[ line: 45 ]]
+		return function(p2)
 			-- upvalues: roact (copy), appStyleProvider (copy), t (copy), mockLocale (copy), p1 (ref)
 			return roact.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = mockLocale(p1, p2) })
 		end

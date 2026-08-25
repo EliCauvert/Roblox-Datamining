@@ -6,14 +6,14 @@ local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 local var4 = if not fFlagSocialTabsPagePresenceSignalsMigrationModule then require(socialTabsPage.Networking.NetworkingPresence).GetPresencesFromUserIds else nil
 
-return if fFlagSocialTabsPagePresenceSignalsMigrationModule then nil else function(p0) --[[ line: 18 ]]
+return if fFlagSocialTabsPagePresenceSignalsMigrationModule then nil else function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), cryoModule (ref), var4 (ref)
 	local var5 = useDispatch()
 	local var6 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 22 ]]
+	reactModule.useEffect(function()
 		-- upvalues: cryoModule (copy), var6 (ref), p0 (ref), var5 (ref), var4 (copy)
 		local var7 = cryoModule.List.toSet(var6.current)
-		local var8 = cryoModule.List.filter(p0, function(p1) --[[ line: 24 ]]
+		local var8 = cryoModule.List.filter(p0, function(p1)
 			-- upvalues: var7 (ref)
 			return not var7[p1]
 		end)

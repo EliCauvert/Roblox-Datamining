@@ -14,12 +14,12 @@ local var7 = tModule.interface({
 	immersiveBrandedAdId = tModule.string
 })
 
-return function() --[[ line: 35 ]]
+return function()
 	-- upvalues: reactModule (ref), adService (ref), var7 (ref), adsInteractivityTelemetryModule (ref), getScreenPositionFromGuiObjectInputModule (ref), immersiveBrandedAdMenuModule (ref)
 	local var8, var9 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: adService (copy), var7 (copy), adsInteractivityTelemetryModule (copy), var9 (ref), getScreenPositionFromGuiObjectInputModule (copy)
-		function adService.OnImmersiveBrandedAdDisclosureButtonActivated(p0) --[[ line: 40 ]]
+		function adService.OnImmersiveBrandedAdDisclosureButtonActivated(p0)
 			-- upvalues: var7 (copy), adsInteractivityTelemetryModule (copy), var9 (copy), getScreenPositionFromGuiObjectInputModule (copy)
 			local var10, _ = var7(p0)
 			
@@ -36,9 +36,9 @@ return function() --[[ line: 35 ]]
 			end
 		end
 		
-		return function() --[[ line: 55 ]]
+		return function()
 			-- upvalues: adService (copy)
-			function adService.OnImmersiveBrandedAdDisclosureButtonActivated() --[[ line: 56 ]] end
+			function adService.OnImmersiveBrandedAdDisclosureButtonActivated() end
 		end
 	end, {})
 	
@@ -47,7 +47,7 @@ return function() --[[ line: 35 ]]
 		advertiserName = var8.advertiserName,
 		campaignId = var8.campaignId,
 		immersiveBrandedAdId = var8.immersiveBrandedAdId,
-		onDismiss = reactModule.useCallback(function() --[[ line: 60 ]]
+		onDismiss = reactModule.useCallback(function()
 			-- upvalues: var9 (ref)
 			var9(nil)
 		end, {})

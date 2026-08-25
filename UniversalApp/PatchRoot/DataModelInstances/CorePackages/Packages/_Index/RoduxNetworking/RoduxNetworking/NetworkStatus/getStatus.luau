@@ -2,11 +2,11 @@
 local getDeepValueModule = require(parent.getDeepValue)
 local enumNetworkStatusModule = require(parent.EnumNetworkStatus)
 
-return function(p0) --[[ line: 5 ]]
+return function(p0)
 	-- upvalues: getDeepValueModule (ref), enumNetworkStatusModule (ref)
 	local keyPath = p0.keyPath
 	
-	return function(p1, p2) --[[ line: 8 ]]
+	return function(p1, p2)
 		-- upvalues: getDeepValueModule (copy), keyPath (ref), enumNetworkStatusModule (copy)
 		assert(typeof(p1) == "table")
 		assert(typeof(p2) == "string")

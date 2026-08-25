@@ -21,12 +21,12 @@ local t_7 = {}
 local var16 = true
 local _ = { BoundInputType = 3, TableHeader = 2, BoundAction = 1 }
 
-local function sortInputTypeRows(p0, p1) --[[ line: 43 ]]
+local function sortInputTypeRows(p0, p1)
 	-- upvalues: t_1 (ref)
 	return tostring(t_1[p0]) < tostring(t_1[p1])
 end
 
-local function sortActionRows(p2, p3) --[[ line: 49 ]]
+local function sortActionRows(p2, p3)
 	-- upvalues: t_3 (ref), t_4 (ref)
 	local var28 = t_3[p2]
 	local var29 = t_3[p3]
@@ -50,7 +50,7 @@ local function sortActionRows(p2, p3) --[[ line: 49 ]]
 	return if stackOrder and stackOrder_1 then stackOrder_1 < stackOrder else true
 end
 
-local function createEmptyRow(p4, p5) --[[ line: 75 ]]
+local function createEmptyRow(p4, p5)
 	-- upvalues: create (ref)
 	local var32 = create("Frame")({
 		BackgroundTransparency = 1,
@@ -68,7 +68,7 @@ local function createEmptyRow(p4, p5) --[[ line: 75 ]]
 	return var32
 end
 
-local function createButtonRow(p6, p7) --[[ line: 91 ]]
+local function createButtonRow(p6, p7)
 	-- upvalues: create (ref)
 	local var33 = create("TextButton")({
 		BackgroundTransparency = 1,
@@ -87,7 +87,7 @@ local function createButtonRow(p6, p7) --[[ line: 91 ]]
 	return var33
 end
 
-local function createEmptyColumn(p8, p9) --[[ line: 108 ]]
+local function createEmptyColumn(p8, p9)
 	-- upvalues: create (ref)
 	return create("Frame")({
 		BackgroundTransparency = 0.75,
@@ -101,7 +101,7 @@ local function createEmptyColumn(p8, p9) --[[ line: 108 ]]
 	})
 end
 
-local function createImageColumn(p10, p11, p12, p13, p14) --[[ line: 123 ]]
+local function createImageColumn(p10, p11, p12, p13, p14)
 	-- upvalues: createEmptyColumn (ref), create (ref)
 	local var34 = createEmptyColumn(p10, p11)
 	local _ = create("UIAspectRatioConstraint")({ AspectRatio = p13 or 1, Parent = var34 })
@@ -119,7 +119,7 @@ local function createImageColumn(p10, p11, p12, p13, p14) --[[ line: 123 ]]
 	return var34
 end
 
-local function createTextColumn(p15, p16, p17) --[[ line: 145 ]]
+local function createTextColumn(p15, p16, p17)
 	-- upvalues: createEmptyColumn (ref), create (ref)
 	local var35 = createEmptyColumn(p15, p16)
 	local _ = create("TextLabel")({
@@ -140,7 +140,7 @@ local function createTextColumn(p15, p16, p17) --[[ line: 145 ]]
 	return var35
 end
 
-local function createActionColumns(p18, p19) --[[ line: 166 ]]
+local function createActionColumns(p18, p19)
 	-- upvalues: createEmptyColumn (ref), createTextColumn (ref)
 	local var36 = 0
 	local var37 = createEmptyColumn(p18, "Inset")
@@ -170,7 +170,7 @@ local function createActionColumns(p18, p19) --[[ line: 166 ]]
 	return var37, var38, var39, var40, var41
 end
 
-local function updateContainerCanvas() --[[ line: 203 ]]
+local function updateContainerCanvas()
 	-- upvalues: var16 (write), t (ref), sortInputTypeRows (ref), t_1 (ref), t_6 (ref), t_2 (ref), sortActionRows (ref)
 	debug.profilebegin("updateContainerCanvas")
 	
@@ -214,7 +214,7 @@ local function updateContainerCanvas() --[[ line: 203 ]]
 	debug.profileend()
 end
 
-local function scrollContainerToRow(p20) --[[ line: 245 ]]
+local function scrollContainerToRow(p20)
 	-- upvalues: var7 (write), tweenService (ref), tweenInfo_1 (ref)
 	tweenService:Create(var7, tweenInfo_1, {
 		CanvasPosition = var7.CanvasPosition + Vector2.new(0, p20.AbsolutePosition.Y - var7.AbsolutePosition.Y)
@@ -223,7 +223,7 @@ end
 
 local t_8 = {}
 
-function t_8.initializeGui(p21) --[[ line: 253 ]]
+function t_8.initializeGui(p21)
 	-- upvalues: create (ref), var7 (write), t_8 (ref), contextActionService (ref), var16 (write), updateContainerCanvas (ref)
 	local var48 = create("ScrollingFrame")({
 		BorderSizePixel = 0,
@@ -238,19 +238,19 @@ function t_8.initializeGui(p21) --[[ line: 253 ]]
 	var7 = var48
 	local var49 = create("UIListLayout")({ Padding = UDim.new(0, 5), Parent = var48 })
 	var49.SortOrder = Enum.SortOrder.LayoutOrder
-	var49:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ line: 271 ]]
+	var49:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 		-- upvalues: var7 (copy), var49 (ref)
 		var7.CanvasSize = UDim2.new(0, 0, 0, var49.AbsoluteContentSize.Y)
 	end)
 	t_8.updateGuis()
-	contextActionService.BoundActionAdded:connect(function(p22, _, p23, p24) --[[ line: 275 ]]
+	contextActionService.BoundActionAdded:connect(function(p22, _, p23, p24)
 		-- upvalues: t_8 (copy), var16 (copy), updateContainerCanvas (copy)
 		p23.isCore = p24
 		t_8.updateActionRows(p22, p23)
 		var16 = true
 		updateContainerCanvas()
 	end)
-	contextActionService.BoundActionRemoved:connect(function(p25, p26, p27) --[[ line: 282 ]]
+	contextActionService.BoundActionRemoved:connect(function(p25, p26, p27)
 		-- upvalues: t_8 (copy), var16 (copy), updateContainerCanvas (copy)
 		p26.isCore = p27
 		t_8.removeActionRows(p25, p26)
@@ -259,7 +259,7 @@ function t_8.initializeGui(p21) --[[ line: 253 ]]
 	end)
 end
 
-function t_8.updateBoundInputTypeRow(p28) --[[ line: 291 ]]
+function t_8.updateBoundInputTypeRow(p28)
 	-- upvalues: t (ref), createButtonRow (ref), createImageColumn (ref), createTextColumn (ref), createEmptyRow (ref), createActionColumns (ref), color3_1 (ref), t_1 (ref), t_5 (ref), t_6 (ref), var7 (write), tweenService (ref), tweenInfo (ref), t_7 (ref), t_2 (ref), updateContainerCanvas (ref), scrollContainerToRow (ref)
 	if not t[p28] then
 		local var50 = createButtonRow("BoundInputType", 30)
@@ -284,7 +284,7 @@ function t_8.updateBoundInputTypeRow(p28) --[[ line: 291 ]]
 		var50.Parent = var7
 		tweenService:Create(var52, tweenInfo, { BackgroundColor3 = Color3.new(0.5, 0.5, 0.5) }):Play()
 		t_7[p28] = false
-		var50.MouseButton1Click:connect(function() --[[ line: 323 ]]
+		var50.MouseButton1Click:connect(function()
 			-- upvalues: t_7 (copy), p28 (ref), t_2 (copy), var51 (ref), var53 (ref), updateContainerCanvas (copy), tweenService (copy), var52 (ref), tweenInfo (copy), scrollContainerToRow (copy), var50 (ref)
 			t_7[p28] = not t_7[p28]
 			local var58 = t_2[p28]
@@ -318,7 +318,7 @@ function t_8.updateBoundInputTypeRow(p28) --[[ line: 291 ]]
 	end
 end
 
-function t_8.updateActionRowForInputType(p29, p30, p31) --[[ line: 354 ]]
+function t_8.updateActionRowForInputType(p29, p30, p31)
 	-- upvalues: t_2 (ref), createEmptyRow (ref), t_7 (ref), createActionColumns (ref), color3 (ref), color3_1 (ref), t_4 (ref), t_3 (ref), var7 (write), tweenService (ref), tweenInfo (ref), t (ref)
 	local var59 = t_2[p31]
 	
@@ -364,7 +364,7 @@ function t_8.updateActionRowForInputType(p29, p30, p31) --[[ line: 354 ]]
 	end
 end
 
-function t_8.updateActionRows(p32, p33) --[[ line: 402 ]]
+function t_8.updateActionRows(p32, p33)
 	-- upvalues: t_8 (ref)
 	for i, v in pairs(p33.inputTypes) do
 		t_8.updateBoundInputTypeRow(v)
@@ -372,7 +372,7 @@ function t_8.updateActionRows(p32, p33) --[[ line: 402 ]]
 	end
 end
 
-function t_8.removeActionRows(p34, p35) --[[ line: 409 ]]
+function t_8.removeActionRows(p34, p35)
 	-- upvalues: t_2 (ref), t (ref), t_6 (ref), updateContainerCanvas (ref), var7 (write)
 	local var68
 	for i, v in pairs(p35.inputTypes) do
@@ -408,7 +408,7 @@ function t_8.removeActionRows(p34, p35) --[[ line: 409 ]]
 	var7.UIListLayout:ApplyLayout()
 end
 
-function t_8.updateGuis() --[[ line: 446 ]]
+function t_8.updateGuis()
 	-- upvalues: contextActionService (ref), t_8 (ref), var16 (write), updateContainerCanvas (ref)
 	for i, v in pairs(contextActionService:GetAllBoundCoreActionInfo()) do
 		v.isCore = true

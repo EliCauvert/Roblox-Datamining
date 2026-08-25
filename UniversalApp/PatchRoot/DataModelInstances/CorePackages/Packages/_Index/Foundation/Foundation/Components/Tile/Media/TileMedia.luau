@@ -18,7 +18,7 @@ local t = {
 }
 local t_1 = { LayoutOrder = 1, shape = mediaShapeModule.Square }
 
-return function(p0) --[[ line: 54 | named "TileMedia" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTileModule (ref), reactModule (ref), getRbxThumbModule (ref), imageModule (ref), viewModule (ref), t (ref), mediaShapeModule (ref)
 	local var10 = withDefaultsModule(p0, t_1)
 	local var11 = useTileModule()
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 54 | named "TileMedia" ]]
 		testId = `{var11.testId}--media`
 	}, {
 		Image = reactModule.createElement(imageModule, {
-			Image = reactModule.useMemo(function() --[[ line: 62 ]]
+			Image = reactModule.useMemo(function()
 				-- upvalues: var10 (ref), getRbxThumbModule (copy)
 				return if var10.id == nil or var10.type == nil then nil else getRbxThumbModule(var10.type, var10.id)
 			end, { var10.type, var10.id }),

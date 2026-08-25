@@ -1,7 +1,7 @@
-﻿return function(p0) --[[ line: 1 | named "createSpy" ]]
+﻿return function(p0)
 	local t = { callCount = 0, valuesLength = 0, values = {} }
 	
-	function t.value(...) --[[ line: 8 ]]
+	function t.value(...)
 		-- upvalues: t (ref), p0 (ref)
 		t.callCount += 1
 		t.values = { ... }
@@ -13,7 +13,7 @@
 		return p0(...)
 	end
 	
-	function t.assertCalledWith(_, ...) --[[ line: 18 ]]
+	function t.assertCalledWith(_, ...)
 		-- upvalues: t (ref)
 		local var1 = select("#", ...)
 		assert(t.valuesLength, var1, "length of expected values differs from stored values")
@@ -24,7 +24,7 @@
 	end
 	
 	setmetatable(t, {
-		__index = function(_, p1) --[[ line: 30 ]]
+		__index = function(_, p1)
 			error(("%q is not a valid member of spy"):format(p1))
 		end
 	})

@@ -5,7 +5,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local useScreenSize = require(parent.EconomyCommonCoreScriptHooks).useScreenSize
 local constantsModule = require(bulkPurchaseApp.constants)
 
-return function(p0) --[[ line: 16 | named "FullPagePromptTwoPanelLayout" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useScreenSize (ref), useDesignTokens (ref), constantsModule (ref)
 	local var3, var4 = reactModule.useBinding(Vector2.new(0, 0))
 	local var5 = useScreenSize()
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 16 | named "FullPagePromptTwoPanelLayout" ]]
 		StartSlot = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var3:map(function(p1) --[[ line: 30 ]]
+			Size = var3:map(function(p1)
 				-- upvalues: var7 (ref), var6 (ref), size300 (ref)
 				return if var7 then UDim2.new(1, 0, 1, -(p1.Y + var6.Size.Size_600)) else UDim2.new(0.5, -size300, 1, 0)
 			end)
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 16 | named "FullPagePromptTwoPanelLayout" ]]
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 45 ]]
+			[reactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: var4 (ref)
 				var4(p2.AbsoluteSize)
 			end

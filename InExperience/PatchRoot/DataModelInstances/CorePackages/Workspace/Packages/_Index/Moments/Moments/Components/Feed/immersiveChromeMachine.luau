@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 68 | named "createImmersiveChromeMachine" ]]
+﻿return function(p0, p1)
 	local now = p1.now
 	local var0 = true
 	local var1 = 0
@@ -11,7 +11,7 @@
 	local var8 = now()
 	local var9 = -1e999
 	
-	local function _(p2) --[[ line: 89 | named "applyShow" ]]
+	local function _(p2)
 		-- upvalues: var7 (write), var1 (write), var8 (write), now (ref), var0 (write), p1 (ref)
 		if var7 then return end
 		var1 = 0
@@ -24,7 +24,7 @@
 		p1.setChromeVisible(true, p2)
 	end
 	
-	local _ = function(p3) --[[ line: 105 | named "applyHide" ]]
+	local _ = function(p3)
 		-- upvalues: var0 (write), var9 (write), now (ref), p1 (ref)
 		if var0 then
 			var0 = false
@@ -35,7 +35,7 @@
 		end
 	end
 	
-	local _ = function() --[[ line: 114 | named "tryHide" ]]
+	local _ = function()
 		-- upvalues: var6 (write), var0 (write), var1 (write), p0 (ref), var5 (write), var4 (write), now (ref), var8 (write), var9 (write), p1 (ref)
 		if var6 or not var0 then return end
 		if var1 < p0.hideAfterAdvances then return end
@@ -51,7 +51,7 @@
 	end
 	
 	return {
-		onActiveUpdate = function(p4, p5, p6) --[[ line: 167 ]]
+		onActiveUpdate = function(p4, p5, p6)
 			-- upvalues: var2 (write), var4 (write), var5 (write), var3 (write), var7 (write), var1 (write), var8 (write), now (ref), var0 (write), p1 (ref), var6 (write), p0 (ref), var9 (write)
 			if var2 == nil then
 				var2 = p4
@@ -122,7 +122,7 @@
 			end
 			var5 = false
 		end,
-		setForceShow = function(value) --[[ line: 134 ]]
+		setForceShow = function(value)
 			-- upvalues: var6 (write), var7 (write), var1 (write), var8 (write), now (ref), var0 (write), p1 (ref)
 			if value == var6 then return end
 			var6 = value
@@ -137,7 +137,7 @@
 				p1.setChromeVisible(true, "force")
 			end
 		end,
-		setForceHide = function(value) --[[ line: 145 ]]
+		setForceHide = function(value)
 			-- upvalues: var7 (write), var0 (write), var9 (write), now (ref), p1 (ref), var1 (write), var8 (write)
 			if value == var7 then return end
 			var7 = value
@@ -161,11 +161,11 @@
 			var0 = true
 			p1.setChromeVisible(true, "reveal")
 		end,
-		setCount = function(value) --[[ line: 158 ]]
+		setCount = function(value)
 			-- upvalues: var3 (write)
 			var3 = value
 		end,
-		reveal = function() --[[ line: 245 ]]
+		reveal = function()
 			-- upvalues: var7 (write), var1 (write), var8 (write), now (ref), var0 (write), p1 (ref)
 			if var7 then return end
 			var1 = 0
@@ -177,7 +177,7 @@
 			var0 = true
 			p1.setChromeVisible(true, "reveal")
 		end,
-		isVisible = function() --[[ line: 255 ]]
+		isVisible = function()
 			-- upvalues: var0 (write)
 			return var0
 		end

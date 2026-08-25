@@ -7,7 +7,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local useFlyoutItemNavigationModule = require(script.Parent.Parent.Hooks.useFlyoutItemNavigation)
 
-return function(p0) --[[ line: 17 | named "TermsPrivacyFooter" ]]
+return function(p0)
 	-- upvalues: flyoutContentSettingsModule (ref), useFlyoutItemNavigationModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
 	local terms = flyoutContentSettingsModule.ItemInfo[flyoutContentSettingsModule.ItemType.Terms]
 	local privacy = flyoutContentSettingsModule.ItemInfo[flyoutContentSettingsModule.ItemType.Privacy]

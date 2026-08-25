@@ -9,7 +9,7 @@ local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 local _ = require(avatarExperienceControlBar.ControlBarTypes)
 
-return function(p0) --[[ line: 15 | named "Tooltip" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), popover (ref), popoverAlign (ref), popoverSide (ref), radius (ref), foundationModule (ref)
 	return reactModule.createElement(popover.Root, { isOpen = p0.open or false }, {
 		Anchor = reactModule.createElement(popover.Anchor, nil, p0.children),

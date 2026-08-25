@@ -5,20 +5,20 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local iconButton = foundationModule.IconButton
 local view = foundationModule.View
 
-return function(p0) --[[ line: 27 | named "ProgressBar" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), iconButton (ref), buttonSize (ref)
 	local var2 = if p0.timeLength > 0 then p0.timePosition / p0.timeLength else 0
 	local var3 = reactModule.useRef(nil)
 	local var4, var5 = reactModule.useState(0)
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var5 (ref)
 		if var3 and var3.current then
-			local inputBeganConnection = var3.current.InputBegan:Connect(function(p1) --[[ line: 39 ]]
+			local inputBeganConnection = var3.current.InputBegan:Connect(function(p1)
 				-- upvalues: var5 (copy)
 				var5(p1.Position.X)
 			end)
 			
-			return function() --[[ line: 43 ]]
+			return function()
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 27 | named "ProgressBar" ]]
 			LayoutOrder = 1,
 			tag = "radius-small size-full-200",
 			backgroundStyle = { Transparency = 0.7, Color3 = Color3.fromHex("#D5D7DD") },
-			onActivated = reactModule.useCallback(function() --[[ line: 48 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var3 (ref), p0 (ref), var4 (ref)
 				if var3 and var3.current then
 					p0.onProgressBarActivated((var4 - var3.current.AbsolutePosition.X) / var3.current.AbsoluteSize.X)

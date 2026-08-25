@@ -1,9 +1,9 @@
-﻿local function _(p0) --[[ line: 6 | named "getWidth" ]]
+﻿local function _(p0)
 	return p0 * 0.659649122807
 end
 
 return {
-	getSize = function(p1, p2) --[[ line: 10 ]]
+	getSize = function(p1, p2)
 		local minValue = math.min(math.round(p1.Y * 0.7), 285)
 		local var1 = minValue * 0.659649122807
 		

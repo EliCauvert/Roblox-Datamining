@@ -16,20 +16,20 @@ local tryYieldModule = require(parent.util.tryYield)
 local validateAccurateBoundingBoxFlagsModule = require(parent.flags.validateAccurateBoundingBoxFlags)
 local getFFlagUGCValidateTinyTrianglesIntersectFixModule = require(parent.flags.getFFlagUGCValidateTinyTrianglesIntersectFix)
 
-local function _(p0) --[[ line: 39 | named "getHeadNeckAttachmentMeshLocalPosition" ]]
+local function _(p0)
 	-- upvalues: getAttachmentCFrameInPartSpaceModule (ref)
 	local neckRigAttachment = p0:FindFirstChild("NeckRigAttachment", true)
 	
 	return if neckRigAttachment then getAttachmentCFrameInPartSpaceModule(neckRigAttachment).Position / (p0.Size / p0.MeshSize) else nil
 end
 
-local function projectMeshLocalPointToImageRow(p1, p2) --[[ line: 53 ]]
+local function projectMeshLocalPointToImageRow(p1, p2)
 	local viewSpaceBounds = p2.viewSpaceBounds
 	
 	return (((p2.view:Inverse() * p1).Y - (viewSpaceBounds.max.Y + viewSpaceBounds.min.Y) / 2) / ((viewSpaceBounds.max.Y - viewSpaceBounds.min.Y) / 2) * -0.5 + 0.5) * (p2.mask.Size.Y - 1)
 end
 
-local function cloneMaskZeroedBelowRow(p3, p4) --[[ line: 69 ]]
+local function cloneMaskZeroedBelowRow(p3, p4)
 	-- upvalues: assetService (ref)
 	local size = p3.Size
 	local x = size.X
@@ -46,15 +46,15 @@ local function cloneMaskZeroedBelowRow(p3, p4) --[[ line: 69 ]]
 	return var30
 end
 
-local _ = function(p5, p6, p7, p8, p9) --[[ line: 89 | named "sampleAreaTable" ]]
+local _ = function(p5, p6, p7, p8, p9)
 	local var31 = Vector2.new(p6, p8) * p5.size
 	
 	return p5:GetAreaDensityContinuous(var31, Vector2.new(p7, p9) * p5.size - var31)
 end
 
-local function shrinkBounds(p10, p11, p12) --[[ line: 101 ]]
+local function shrinkBounds(p10, p11, p12)
 	-- upvalues: floatVectorModule (ref)
-	local _ = function(p13) --[[ line: 102 ]]
+	local _ = function(p13)
 		return if p13 % 2 == 0 then p13 - 1 else p13 + 1
 	end
 	
@@ -67,7 +67,7 @@ local function shrinkBounds(p10, p11, p12) --[[ line: 101 ]]
 	end
 end
 
-local function createSimplex(p14, p15) --[[ line: 146 ]]
+local function createSimplex(p14, p15)
 	-- upvalues: floatVectorModule (ref)
 	local t = {}
 	table.insert(t, p14)
@@ -79,12 +79,12 @@ local function createSimplex(p14, p15) --[[ line: 146 ]]
 	return t
 end
 
-local function calculateMinimumBoundsForView(a, b) --[[ line: 156 ]]
+local function calculateMinimumBoundsForView(a, b)
 	-- upvalues: floatVectorModule (ref), createSimplex (ref), summedAreaTableModule (ref), validateAccurateBoundingBoxFlagsModule (ref), nelderMeadModule (ref), tryYieldModule (ref), shrinkBounds (ref)
 	local var40 = createSimplex(floatVectorModule.new(0, 1, 0, 1), 0.9)
 	local mask = a.mask
 	local size = mask.Size
-	local var41 = summedAreaTableModule.new(size, function(p16) --[[ line: 165 ]]
+	local var41 = summedAreaTableModule.new(size, function(p16)
 		return if p16.R > 0 or p16.G > 0 or p16.B > 0 then 1 else 0
 	end)
 	var41:BuildSummedAreaTable(mask)
@@ -98,7 +98,7 @@ local function calculateMinimumBoundsForView(a, b) --[[ line: 156 ]]
 	local var43 = validateAccurateBoundingBoxFlagsModule.targetPercentage()
 	local var44 = validateAccurateBoundingBoxFlagsModule.percentageWeight()
 	
-	local var45 = function(p17) --[[ line: 189 ]]
+	local var45 = function(p17)
 		-- upvalues: var41 (ref), zeroAreaDensity (ref), var43 (ref), var44 (ref)
 		assert(p17:getSize() == 4)
 		local var50 = 0
@@ -115,7 +115,7 @@ local function calculateMinimumBoundsForView(a, b) --[[ line: 156 ]]
 	
 	local var46 = validateAccurateBoundingBoxFlagsModule.maxIterations()
 	local var47 = Vector2.new(1 / size.X, 1 / size.Y).Magnitude * validateAccurateBoundingBoxFlagsModule.convergedLength()
-	local var48 = nelderMeadModule.new(var40, var45, function(p18, p19) --[[ line: 209 ]]
+	local var48 = nelderMeadModule.new(var40, var45, function(p18, p19)
 		-- upvalues: var46 (ref), nelderMeadModule (copy), var47 (ref), tryYieldModule (copy), b (ref)
 		if var46 <= p19 then
 			return true
@@ -133,11 +133,11 @@ local function calculateMinimumBoundsForView(a, b) --[[ line: 156 ]]
 	return true, floatVectorModule.new(math.clamp(var49[1], 0, 1), math.clamp(var49[2], 0, 1), math.clamp(var49[3], 0, 1), math.clamp(var49[4], 0, 1))
 end
 
-local _ = function(p20, p21) --[[ line: 242 | named "transformIsAlignedWithAxis" ]]
+local _ = function(p20, p21)
 	return if p21:FuzzyEq(p20.XVector:Abs()) then true else p21:FuzzyEq(p20.YVector:Abs())
 end
 
-local function alignedExtentsFromReprojectedPoint(p22, p23) --[[ line: 252 ]]
+local function alignedExtentsFromReprojectedPoint(p22, p23)
 	-- upvalues: extentsModule (ref)
 	local t = { X = -1e999, Y = -1e999, Z = -1e999 }
 	local t_1 = { X = 1e999, Y = 1e999, Z = 1e999 }
@@ -157,7 +157,7 @@ local function alignedExtentsFromReprojectedPoint(p22, p23) --[[ line: 252 ]]
 	return extentsModule.fromMinMax(Vector3.new(t_1.X, t_1.Y, t_1.Z), Vector3.new(t.X, t.Y, t.Z))
 end
 
-local function calculateValidBounds(p24, p25) --[[ line: 279 ]]
+local function calculateValidBounds(p24, p25)
 	-- upvalues: extentsModule (ref), getFFlagUGCValidateTinyTrianglesIntersectFixModule (ref), calculateMinimumBoundsForView (ref), bodyAssetMasksRendererModule (ref), alignedExtentsFromReprojectedPoint (ref)
 	local var56 = extentsModule.new()
 	local var57 = if getFFlagUGCValidateTinyTrianglesIntersectFixModule() then {} else nil
@@ -195,11 +195,11 @@ local function calculateValidBounds(p24, p25) --[[ line: 279 ]]
 	return true, var56
 end
 
-local _ = function(p26, p27) --[[ line: 336 | named "worldSpacePositionFromPointInMeshPart" ]]
+local _ = function(p26, p27)
 	return p27.CFrame * (p26 * (p27.Size / p27.MeshSize))
 end
 
-local function getHighestInflatingPointInEachAxis(p28, p29, p30, p31, p32) --[[ line: 353 ]]
+local function getHighestInflatingPointInEachAxis(p28, p29, p30, p31, p32)
 	-- upvalues: getMeshVertsModule (ref)
 	local t = {
 		X = {
@@ -254,7 +254,7 @@ local function getHighestInflatingPointInEachAxis(p28, p29, p30, p31, p32) --[[ 
 	return true, t
 end
 
-local function getBodyPartAssetEditableMeshes(value, p33) --[[ line: 413 ]]
+local function getBodyPartAssetEditableMeshes(value, p33)
 	-- upvalues: getEditableMeshFromContextModule (ref)
 	local t = {}
 	
@@ -285,7 +285,7 @@ local function getBodyPartAssetEditableMeshes(value, p33) --[[ line: 413 ]]
 	return true, t_1
 end
 
-local function tryReportInflationError(p34, p35) --[[ line: 448 ]]
+local function tryReportInflationError(p34, p35)
 	-- upvalues: failureReasonsAccumulatorModule (ref), validateAccurateBoundingBoxFlagsModule (ref)
 	local var84 = failureReasonsAccumulatorModule.new()
 	local var85 = validateAccurateBoundingBoxFlagsModule.AssetTypeToAxisThresholds[p35]
@@ -324,10 +324,10 @@ end
 local t = {}
 local var26 = nil
 
-function t.getBoundsViewsForAssetType(value) --[[ line: 506 ]]
+function t.getBoundsViewsForAssetType(value)
 	-- upvalues: var26 (write), bodyAssetMasksRendererModule (ref)
 	if not var26 then
-		local _ = function() --[[ line: 508 ]]
+		local _ = function()
 			-- upvalues: bodyAssetMasksRendererModule (copy)
 			local t = {}
 			
@@ -381,12 +381,12 @@ function t.getBoundsViewsForAssetType(value) --[[ line: 506 ]]
 	return var26[value]
 end
 
-function t.validate(p36, p37, p38) --[[ line: 545 ]]
+function t.validate(p36, p37, p38)
 	-- upvalues: t (ref), validateAccurateBoundingBoxFlagsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), bodyAssetMasksRendererModule (ref), projectMeshLocalPointToImageRow (ref), cloneMaskZeroedBelowRow (ref), calculateValidBounds (ref), assetCalculatorModule (ref), getBodyPartAssetEditableMeshes (ref), getHighestInflatingPointInEachAxis (ref), tryReportInflationError (ref), analyticsModule (ref)
 	local assetTypeEnum = p38.assetTypeEnum
 	assert(assetTypeEnum)
 	
-	local function findMeshHandle(p39) --[[ line: 553 ]]
+	local function findMeshHandle(p39)
 		-- upvalues: assetTypeEnum (ref), p36 (ref)
 		return if assetTypeEnum == Enum.AssetType.DynamicHead then p36 else p36:FindFirstChild(p39)
 	end
@@ -432,7 +432,7 @@ function t.validate(p36, p37, p38) --[[ line: 545 ]]
 			t_1 = t_3
 		end
 	end
-	local var109, var110 = (function() --[[ line: 611 ]]
+	local var109, var110 = (function()
 		-- upvalues: calculateValidBounds (copy), t_1 (write), p38 (ref), assetCalculatorModule (copy), p36 (ref), getBodyPartAssetEditableMeshes (copy), getHighestInflatingPointInEachAxis (copy), findMeshHandle (ref), tryReportInflationError (copy), assetTypeEnum (ref), analyticsModule (copy)
 		local _ = nil
 		local var111, var112 = calculateValidBounds(t_1, p38)

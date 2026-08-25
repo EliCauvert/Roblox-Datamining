@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 4 ]]
+﻿return function(p0)
 	local var0 = 0
 	
 	for i in pairs(p0) do

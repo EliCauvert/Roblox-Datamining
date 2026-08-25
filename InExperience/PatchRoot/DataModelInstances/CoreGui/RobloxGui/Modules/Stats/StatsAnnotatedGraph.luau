@@ -4,7 +4,7 @@ local barGraphModule = require(coreGuiService.RobloxGui.Modules.Stats.BarGraph)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 24 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref), statsUtilsModule (ref), barGraphModule (ref)
 	local pSBottomAxisLabel = {}
 	setmetatable(pSBottomAxisLabel, t)
@@ -39,14 +39,14 @@ function t.new(p0, p1) --[[ line: 24 ]]
 	return pSBottomAxisLabel
 end
 
-function t:SetZIndex(p2) --[[ line: 71 ]]
+function t:SetZIndex(p2)
 	self._frame.ZIndex = p2
 	self._topLabel.ZIndex = p2
 	self._bottomLabel.ZIndex = p2
 	self._graph:SetZIndex(p2)
 end
 
-function t:_layoutElements() --[[ line: 78 ]]
+function t:_layoutElements()
 	local var5
 	local _ = nil
 	
@@ -72,13 +72,13 @@ function t:_layoutElements() --[[ line: 78 ]]
 	self._graph:PlaceInParent(self._frame, uDim2_1, uDim2)
 end
 
-function t:PlaceInParent(p3, p4, p5) --[[ line: 108 ]]
+function t:PlaceInParent(p3, p4, p5)
 	self._frame.Position = p5
 	self._frame.Size = p4
 	self._frame.Parent = p3
 end
 
-function t:_getTarget() --[[ line: 114 ]]
+function t:_getTarget()
 	if self._performanceStats == nil then
 		return 0
 	end
@@ -87,7 +87,7 @@ function t:_getTarget() --[[ line: 114 ]]
 	return if statMaxName == nil then 0 else statMaxName:GetValue()
 end
 
-function t:_render() --[[ line: 128 ]]
+function t:_render()
 	self._graph:SetAxisMax(self._axisMax)
 	self._graph:SetValues(self._values)
 	self._graph:SetAverage(self._average)
@@ -97,13 +97,13 @@ function t:_render() --[[ line: 128 ]]
 	self._bottomLabel.Text = string.format("%.2f", 0)
 end
 
-function t:_calculateAxisMax() --[[ line: 140 ]]
+function t:_calculateAxisMax()
 	local var13 = self._target * 2
 	local var14 = self:_recursiveGetOrderOfMagnitude(1, var13)
 	self._axisMax = math.floor(0.5 + var13 / var14) * var14
 end
 
-function t:SetStatsAggregator(p6) --[[ line: 150 ]]
+function t:SetStatsAggregator(p6)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
@@ -113,7 +113,7 @@ function t:SetStatsAggregator(p6) --[[ line: 150 ]]
 	self:_refreshVisibility()
 end
 
-function t:_stopListening() --[[ line: 162 ]]
+function t:_stopListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
 		return
@@ -122,10 +122,10 @@ function t:_stopListening() --[[ line: 162 ]]
 	self._listenerId = nil
 end
 
-function t:_startListening() --[[ line: 175 ]]
+function t:_startListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function() --[[ line: 184 ]]
+		self._listenerId = self._aggregator:AddListener(function()
 			-- upvalues: self (ref)
 			self:_updateValuesAndRender()
 		end)
@@ -134,17 +134,17 @@ function t:_startListening() --[[ line: 175 ]]
 	end
 end
 
-function t:_shouldBeVisible() --[[ line: 189 ]]
+function t:_shouldBeVisible()
 	-- upvalues: statsUtilsModule (ref)
 	return if statsUtilsModule.PerformanceStatsShouldBeVisible() then self._frame.Visible else false
 end
 
-function t:SetVisible(p7) --[[ line: 197 ]]
+function t:SetVisible(p7)
 	self._frame.Visible = p7
 	self:_refreshVisibility()
 end
 
-function t:_refreshVisibility() --[[ line: 202 ]]
+function t:_refreshVisibility()
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateValuesAndRender()
@@ -154,15 +154,15 @@ function t:_refreshVisibility() --[[ line: 202 ]]
 	self:_stopListening()
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged() --[[ line: 211 ]]
+function t:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function t:_recursiveGetOrderOfMagnitude(p8, p9) --[[ line: 215 ]]
+function t:_recursiveGetOrderOfMagnitude(p8, p9)
 	return if p9 < p8 then self:_recursiveGetOrderOfMagnitude(p8 / 10, p9) elseif p9 <= p8 * 10 then p8 else self:_recursiveGetOrderOfMagnitude(p8 * 10, p9)
 end
 
-function t:_updateValuesAndRender() --[[ line: 227 ]]
+function t:_updateValuesAndRender()
 	self._values = {}
 	self._average = 0
 	self._target = 0

@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("UGCValidationBodyAssetMaskHeightPixels", 200)
 
-return function() --[[ line: 3 | named "getFIntUGCValidationBodyAssetMaskHeightPixels" ]]
+return function()
 	return game:GetFastInt("UGCValidationBodyAssetMaskHeightPixels")
 end

@@ -3,7 +3,7 @@ local _ = require(currencyTransfers.types)
 local tModule = require(currencyTransfers.Parent.t)
 local t = {}
 
-function t.new(p0) --[[ line: 24 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -12,7 +12,7 @@ function t.new(p0) --[[ line: 24 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 36 ]]
+function t.mock(p1)
 	-- upvalues: t (ref)
 	p1 = p1 or {}
 	p1 = p1.robuxTransfer or {}
@@ -43,7 +43,7 @@ function t.mock(p1) --[[ line: 36 ]]
 	})
 end
 
-function t.format(p2) --[[ line: 73 ]]
+function t.format(p2)
 	-- upvalues: t (ref)
 	local robuxTransfer = p2.robuxTransfer
 	local sender = robuxTransfer.sender

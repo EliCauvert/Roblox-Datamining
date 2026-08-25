@@ -4,13 +4,13 @@ local luauPolyfillModule = require(parent.LuauPolyfill)
 local collectSubFields = require(parent.GraphqlToolsUtils).collectSubFields
 local userProfileNestedFieldsModule = require(graphQLServer.graphql.enums.UserProfileNestedFields)
 
-return function(p0, p1) --[[ line: 8 ]]
+return function(p0, p1)
 	-- upvalues: collectSubFields (ref), luauPolyfillModule (ref), userProfileNestedFieldsModule (ref)
 	local var3 = p1 or collectSubFields
 	local var4 = var3(p0.schema, p0.fragments, p0.variableValues, p0.returnType, p0.fieldNodes)
 	local t = {}
 	
-	local _ = function(p2) --[[ line: 20 ]]
+	local _ = function(p2)
 		-- upvalues: luauPolyfillModule (copy)
 		return if p2 ~= nil then if p2 ~= "id" then luauPolyfillModule.String.endsWith(p2, "__typename") else true else true
 	end

@@ -13,14 +13,14 @@ local t = {
 	isContained = { isContained = false, hasMargin = true }
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 32 | named "List" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), listContextModule (ref)
 	local var8 = withDefaultsModule(p0, t)
 	local var9 = if flagsModule.FoundationListStableContextValue then if type(var8.hasDivider) == "boolean" then var8.hasDivider else var8.hasDivider.hasDivider else nil
 	local var10 = 0
 	
 	if not flagsModule.FoundationListStableContextValue or var9 then
-		reactModule.Children.forEach(var8.children, function(p2) --[[ line: 40 ]]
+		reactModule.Children.forEach(var8.children, function(p2)
 			-- upvalues: var10 (write)
 			if p2 and p2.props and p2.props.LayoutOrder then
 				var10 = math.max(var10, p2.props.LayoutOrder)
@@ -39,7 +39,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 32 | 
 		ref = p1
 	}), {
 		ListContext = reactModule.createElement(listContextModule.Provider, {
-			value = if flagsModule.FoundationListStableContextValue then if flagsModule.FoundationListStableContextValue then reactModule.useMemo(function() --[[ line: 57 ]]
+			value = if flagsModule.FoundationListStableContextValue then if flagsModule.FoundationListStableContextValue then reactModule.useMemo(function()
 				-- upvalues: var8 (ref), var11 (ref), var13 (ref), var12 (ref), var10 (write)
 				return {
 					hasDivider = var8.hasDivider,

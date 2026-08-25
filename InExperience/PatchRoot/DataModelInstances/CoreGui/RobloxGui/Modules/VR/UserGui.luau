@@ -74,7 +74,7 @@ var21:GetPart().CanQuery = false
 var21:ResizeStuds(vector2.x, vector2.y, 128)
 var21:SetVisible(false)
 var21.showCursor = true
-VRHub.ModuleOpened.Event:connect(function(p0) --[[ line: 106 ]]
+VRHub.ModuleOpened.Event:connect(function(p0)
 	-- upvalues: t (ref), VRHub (ref), var19 (ref)
 	if p0 ~= t.ModuleName and VRHub:GetModule(p0).VRClosesNonExclusive and var19:IsVisible() then
 		t:SetVisible(false, nil)
@@ -83,7 +83,7 @@ end)
 local var22 = false
 local var23 = false
 
-function t.SetVisible(_, _, _) --[[ line: 118 ]]
+function t.SetVisible(_, _, _)
 	-- upvalues: var23 (write), VRHub (ref), t (ref), var22 (write), isSpatialRobloxGuiEnabledModule (ref), coreGuiService (ref)
 -- FATAL: Failed to generate AST for `SetVisible` function:
 runtime : [KeyError] :11990: 17
@@ -93,17 +93,17 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-function t.IsVisible(_) --[[ line: 139 ]]
+function t.IsVisible(_)
 	-- upvalues: var23 (write)
 	return var23
 end
 
-function t.Update(p1) --[[ line: 143 ]]
+function t.Update(p1)
 	-- upvalues: var23 (write)
 	p1:SetVisible(var23)
 end
 
-local function onGuiSelection() --[[ line: 148 ]]
+local function onGuiSelection()
 	-- upvalues: fixUserGuiRenderingAfterVRDisabled (ref), VRService (ref), VRHub (ref), t (ref), var21 (write), var13 (ref), var18 (write), vector2 (ref), guiService (ref)
 	if fixUserGuiRenderingAfterVRDisabled and not VRService.VREnabled then return end
 	VRHub.LaserPointer:updateInputUserCFrame()
@@ -133,14 +133,14 @@ end
 VRHub.ShowTopBarChanged.Event:connect(onGuiSelection)
 guiService:GetPropertyChangedSignal("MenuIsOpen"):Connect(onGuiSelection)
 VRService.UserCFrameEnabled:Connect(onGuiSelection)
-guiService.PurchasePromptShown:Connect(function() --[[ line: 181 ]]
+guiService.PurchasePromptShown:Connect(function()
 	-- upvalues: VRHub (ref)
 	if not VRHub.ShowTopBar then
 		VRHub:SetShowTopBar(true)
 	end
 end)
 
-local function onGuiSelectedObjectChanged(_) --[[ line: 188 ]]
+local function onGuiSelectedObjectChanged(_)
 	-- upvalues: guiService (ref), VRHub (ref)
 	if (guiService.SelectedObject or guiService.SelectedCoreObject) and not VRHub.ShowTopBar then
 		VRHub:SetShowTopBar(true)
@@ -153,7 +153,7 @@ guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(onGuiSelectedO
 guiService:GetPropertyChangedSignal("SelectedObject"):Connect(onGuiSelectedObjectChanged)
 local inGameMenuModule = require(robloxGui.Modules.InGameMenu)
 
-local function onVRMenuClicked(p2) --[[ line: 201 ]]
+local function onVRMenuClicked(p2)
 	-- upvalues: VRHub (ref), rbxAnalyticsService (ref), inGameMenuModule (ref), inGameMenuConstantsModule (ref)
 	if p2 == "OpenVRMenu" then
 		if VRHub.ShowTopBar then
@@ -175,7 +175,7 @@ local function onVRMenuClicked(p2) --[[ line: 201 ]]
 	end
 end
 
-local function handleAction(p3, p4, _) --[[ line: 226 ]]
+local function handleAction(p3, p4, _)
 	-- upvalues: onVRMenuClicked (ref)
 	if p4 == Enum.UserInputState.Begin then
 		onVRMenuClicked(p3)
@@ -187,14 +187,14 @@ if isInExperienceUIVREnabled then
 	local var30 = false
 	local var31 = false
 	
-	function t.isInputNeededForOpenVRMenu(_, p5) --[[ line: 237 ]]
+	function t.isInputNeededForOpenVRMenu(_, p5)
 		return p5.KeyCode == Enum.KeyCode.ButtonSelect
 	end
 	
-	function t.getOpenVRMenuHandler(_) --[[ line: 241 ]]
+	function t.getOpenVRMenuHandler(_)
 		-- upvalues: inputHandlersModule (ref), var30 (write), var31 (write), UIManager (write), VRHub (ref), rbxAnalyticsService (ref), inGameMenuModule (ref)
 		local var33 = inputHandlersModule.handleInput({
-			onPress = function() --[[ line: 243 ]]
+			onPress = function()
 				-- upvalues: var30 (copy), var31 (copy)
 				var30 = true
 				var31 = false
@@ -202,13 +202,13 @@ if isInExperienceUIVREnabled then
 			hold = {
 				durationSeconds = 1,
 				allowReleaseAfterHold = true,
-				onComplete = function() --[[ line: 249 ]]
+				onComplete = function()
 					-- upvalues: var31 (copy), UIManager (copy)
 					var31 = true
 					UIManager.getInstance():resetDragAndDrop()
 				end
 			},
-			onRelease = function() --[[ line: 255 ]]
+			onRelease = function()
 				-- upvalues: var31 (copy), VRHub (copy), rbxAnalyticsService (copy), inGameMenuModule (copy), var30 (copy)
 				if not var31 then
 					if VRHub.ShowTopBar then
@@ -225,7 +225,7 @@ if isInExperienceUIVREnabled then
 			end
 		})
 		
-		return function(_, p6, _) --[[ line: 263 ]]
+		return function(_, p6, _)
 			-- upvalues: var33 (ref)
 			var33({ eventData = { UserInputState = p6 } })
 		end
@@ -240,7 +240,7 @@ else
 end
 contextActionService:BindAction("OpenIGMenu", handleAction, false, Enum.KeyCode.ButtonStart)
 
-local function OnVREnabledChanged() --[[ line: 290 ]]
+local function OnVREnabledChanged()
 	-- upvalues: VRService (ref), var19 (ref), coreGuiService (ref), t (ref), var21 (write), VRHub (ref)
 	if VRService.VREnabled then
 		t:SetVisible(false, var19)
@@ -255,12 +255,12 @@ end
 
 VRService:GetPropertyChangedSignal("VREnabled"):connect(OnVREnabledChanged)
 OnVREnabledChanged()
-virtualKeyboardModule.OpenedEvent:connect(function() --[[ line: 303 ]]
+virtualKeyboardModule.OpenedEvent:connect(function()
 	-- upvalues: var22 (write), t (ref)
 	var22 = true
 	t:Update()
 end)
-virtualKeyboardModule.ClosedEvent:connect(function() --[[ line: 308 ]]
+virtualKeyboardModule.ClosedEvent:connect(function()
 	-- upvalues: var22 (write), t (ref)
 	var22 = false
 	t:Update()
@@ -268,7 +268,7 @@ end)
 VRHub:SetShowTopBar(true)
 onGuiSelection()
 
-function t.getPanel(_) --[[ line: 316 ]]
+function t.getPanel(_)
 	-- upvalues: var21 (write)
 	return var21
 end

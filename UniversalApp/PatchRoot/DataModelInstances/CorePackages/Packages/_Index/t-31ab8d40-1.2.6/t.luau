@@ -1,8 +1,8 @@
 ﻿local typeof = typeof or type
 
-local function _(p0) --[[ line: 6 | named "primitive" ]]
+local function _(p0)
 	-- upvalues: typeof (ref)
-	return function(p1) --[[ line: 7 ]]
+	return function(p1)
 		-- upvalues: typeof (copy), p0 (ref)
 		local var43 = typeof(p1)
 		
@@ -14,7 +14,7 @@ local function _(p0) --[[ line: 6 | named "primitive" ]]
 end
 
 local t = {
-	any = function(p2) --[[ line: 26 ]]
+	any = function(p2)
 		if p2 == nil then
 			return false, "any expected, got nil"
 		end
@@ -23,7 +23,7 @@ local t = {
 }
 local var2 = "boolean"
 
-function t.boolean(p3) --[[ line: 7 ]]
+function t.boolean(p3)
 	-- upvalues: typeof (ref), var2 (ref)
 	local var43 = typeof(p3)
 	
@@ -35,7 +35,7 @@ end
 
 local var3 = "thread"
 
-function t.thread(p4) --[[ line: 7 ]]
+function t.thread(p4)
 	-- upvalues: typeof (ref), var3 (ref)
 	local var43 = typeof(p4)
 	
@@ -47,7 +47,7 @@ end
 
 local var4 = "function"
 
-function t.callback(p5) --[[ line: 7 ]]
+function t.callback(p5)
 	-- upvalues: typeof (ref), var4 (ref)
 	local var43 = typeof(p5)
 	
@@ -59,7 +59,7 @@ end
 
 local var5 = "nil"
 
-function t.none(p6) --[[ line: 7 ]]
+function t.none(p6)
 	-- upvalues: typeof (ref), var5 (ref)
 	local var43 = typeof(p6)
 	
@@ -71,7 +71,7 @@ end
 
 local var6 = "string"
 
-function t.string(p7) --[[ line: 7 ]]
+function t.string(p7)
 	-- upvalues: typeof (ref), var6 (ref)
 	local var43 = typeof(p7)
 	
@@ -83,7 +83,7 @@ end
 
 local var7 = "table"
 
-function t.table(p8) --[[ line: 7 ]]
+function t.table(p8)
 	-- upvalues: typeof (ref), var7 (ref)
 	local var43 = typeof(p8)
 	
@@ -95,7 +95,7 @@ end
 
 local var8 = "userdata"
 
-function t.userdata(p9) --[[ line: 7 ]]
+function t.userdata(p9)
 	-- upvalues: typeof (ref), var8 (ref)
 	local var43 = typeof(p9)
 	
@@ -105,7 +105,7 @@ function t.userdata(p9) --[[ line: 7 ]]
 	return false, string.format("%s expected, got %s", var8, var43)
 end
 
-function t.number(p10) --[[ line: 106 ]]
+function t.number(p10)
 	-- upvalues: typeof (ref)
 	local var44 = typeof(p10)
 	
@@ -117,7 +117,7 @@ function t.number(p10) --[[ line: 106 ]]
 	return false, "unexpected NaN value"
 end
 
-function t.nan(p11) --[[ line: 126 ]]
+function t.nan(p11)
 	if p11 == p11 then
 		return false, "unexpected non-NaN value"
 	end
@@ -126,7 +126,7 @@ end
 
 local var9 = "Axes"
 
-function t.Axes(p12) --[[ line: 7 ]]
+function t.Axes(p12)
 	-- upvalues: typeof (ref), var9 (ref)
 	local var43 = typeof(p12)
 	
@@ -138,7 +138,7 @@ end
 
 local var10 = "BrickColor"
 
-function t.BrickColor(p13) --[[ line: 7 ]]
+function t.BrickColor(p13)
 	-- upvalues: typeof (ref), var10 (ref)
 	local var43 = typeof(p13)
 	
@@ -150,7 +150,7 @@ end
 
 local var11 = "CFrame"
 
-function t.CFrame(p14) --[[ line: 7 ]]
+function t.CFrame(p14)
 	-- upvalues: typeof (ref), var11 (ref)
 	local var43 = typeof(p14)
 	
@@ -162,7 +162,7 @@ end
 
 local var12 = "Color3"
 
-function t.Color3(p15) --[[ line: 7 ]]
+function t.Color3(p15)
 	-- upvalues: typeof (ref), var12 (ref)
 	local var43 = typeof(p15)
 	
@@ -174,7 +174,7 @@ end
 
 local var13 = "ColorSequence"
 
-function t.ColorSequence(p16) --[[ line: 7 ]]
+function t.ColorSequence(p16)
 	-- upvalues: typeof (ref), var13 (ref)
 	local var43 = typeof(p16)
 	
@@ -186,7 +186,7 @@ end
 
 local var14 = "ColorSequenceKeypoint"
 
-function t.ColorSequenceKeypoint(p17) --[[ line: 7 ]]
+function t.ColorSequenceKeypoint(p17)
 	-- upvalues: typeof (ref), var14 (ref)
 	local var43 = typeof(p17)
 	
@@ -198,7 +198,7 @@ end
 
 local var15 = "DockWidgetPluginGuiInfo"
 
-function t.DockWidgetPluginGuiInfo(p18) --[[ line: 7 ]]
+function t.DockWidgetPluginGuiInfo(p18)
 	-- upvalues: typeof (ref), var15 (ref)
 	local var43 = typeof(p18)
 	
@@ -210,7 +210,7 @@ end
 
 local var16 = "Faces"
 
-function t.Faces(p19) --[[ line: 7 ]]
+function t.Faces(p19)
 	-- upvalues: typeof (ref), var16 (ref)
 	local var43 = typeof(p19)
 	
@@ -222,7 +222,7 @@ end
 
 local var17 = "Instance"
 
-function t.Instance(p20) --[[ line: 7 ]]
+function t.Instance(p20)
 	-- upvalues: typeof (ref), var17 (ref)
 	local var43 = typeof(p20)
 	
@@ -234,7 +234,7 @@ end
 
 local var18 = "NumberRange"
 
-function t.NumberRange(p21) --[[ line: 7 ]]
+function t.NumberRange(p21)
 	-- upvalues: typeof (ref), var18 (ref)
 	local var43 = typeof(p21)
 	
@@ -246,7 +246,7 @@ end
 
 local var19 = "NumberSequence"
 
-function t.NumberSequence(p22) --[[ line: 7 ]]
+function t.NumberSequence(p22)
 	-- upvalues: typeof (ref), var19 (ref)
 	local var43 = typeof(p22)
 	
@@ -258,7 +258,7 @@ end
 
 local var20 = "NumberSequenceKeypoint"
 
-function t.NumberSequenceKeypoint(p23) --[[ line: 7 ]]
+function t.NumberSequenceKeypoint(p23)
 	-- upvalues: typeof (ref), var20 (ref)
 	local var43 = typeof(p23)
 	
@@ -270,7 +270,7 @@ end
 
 local var21 = "PathWaypoint"
 
-function t.PathWaypoint(p24) --[[ line: 7 ]]
+function t.PathWaypoint(p24)
 	-- upvalues: typeof (ref), var21 (ref)
 	local var43 = typeof(p24)
 	
@@ -282,7 +282,7 @@ end
 
 local var22 = "PhysicalProperties"
 
-function t.PhysicalProperties(p25) --[[ line: 7 ]]
+function t.PhysicalProperties(p25)
 	-- upvalues: typeof (ref), var22 (ref)
 	local var43 = typeof(p25)
 	
@@ -294,7 +294,7 @@ end
 
 local var23 = "Random"
 
-function t.Random(p26) --[[ line: 7 ]]
+function t.Random(p26)
 	-- upvalues: typeof (ref), var23 (ref)
 	local var43 = typeof(p26)
 	
@@ -306,7 +306,7 @@ end
 
 local var24 = "Ray"
 
-function t.Ray(p27) --[[ line: 7 ]]
+function t.Ray(p27)
 	-- upvalues: typeof (ref), var24 (ref)
 	local var43 = typeof(p27)
 	
@@ -318,7 +318,7 @@ end
 
 local var25 = "Rect"
 
-function t.Rect(p28) --[[ line: 7 ]]
+function t.Rect(p28)
 	-- upvalues: typeof (ref), var25 (ref)
 	local var43 = typeof(p28)
 	
@@ -330,7 +330,7 @@ end
 
 local var26 = "Region3"
 
-function t.Region3(p29) --[[ line: 7 ]]
+function t.Region3(p29)
 	-- upvalues: typeof (ref), var26 (ref)
 	local var43 = typeof(p29)
 	
@@ -342,7 +342,7 @@ end
 
 local var27 = "Region3int16"
 
-function t.Region3int16(p30) --[[ line: 7 ]]
+function t.Region3int16(p30)
 	-- upvalues: typeof (ref), var27 (ref)
 	local var43 = typeof(p30)
 	
@@ -354,7 +354,7 @@ end
 
 local var28 = "TweenInfo"
 
-function t.TweenInfo(p31) --[[ line: 7 ]]
+function t.TweenInfo(p31)
 	-- upvalues: typeof (ref), var28 (ref)
 	local var43 = typeof(p31)
 	
@@ -366,7 +366,7 @@ end
 
 local var29 = "UDim"
 
-function t.UDim(p32) --[[ line: 7 ]]
+function t.UDim(p32)
 	-- upvalues: typeof (ref), var29 (ref)
 	local var43 = typeof(p32)
 	
@@ -378,7 +378,7 @@ end
 
 local var30 = "UDim2"
 
-function t.UDim2(p33) --[[ line: 7 ]]
+function t.UDim2(p33)
 	-- upvalues: typeof (ref), var30 (ref)
 	local var43 = typeof(p33)
 	
@@ -390,7 +390,7 @@ end
 
 local var31 = "Vector2"
 
-function t.Vector2(p34) --[[ line: 7 ]]
+function t.Vector2(p34)
 	-- upvalues: typeof (ref), var31 (ref)
 	local var43 = typeof(p34)
 	
@@ -402,7 +402,7 @@ end
 
 local var32 = "Vector3"
 
-function t.Vector3(p35) --[[ line: 7 ]]
+function t.Vector3(p35)
 	-- upvalues: typeof (ref), var32 (ref)
 	local var43 = typeof(p35)
 	
@@ -414,7 +414,7 @@ end
 
 local var33 = "Vector3int16"
 
-function t.Vector3int16(p36) --[[ line: 7 ]]
+function t.Vector3int16(p36)
 	-- upvalues: typeof (ref), var33 (ref)
 	local var43 = typeof(p36)
 	
@@ -426,7 +426,7 @@ end
 
 local var34 = "Enum"
 
-function t.Enum(p37) --[[ line: 7 ]]
+function t.Enum(p37)
 	-- upvalues: typeof (ref), var34 (ref)
 	local var43 = typeof(p37)
 	
@@ -438,7 +438,7 @@ end
 
 local var35 = "EnumItem"
 
-function t.EnumItem(p38) --[[ line: 7 ]]
+function t.EnumItem(p38)
 	-- upvalues: typeof (ref), var35 (ref)
 	local var43 = typeof(p38)
 	
@@ -450,7 +450,7 @@ end
 
 local var36 = "RBXScriptSignal"
 
-function t.RBXScriptSignal(p39) --[[ line: 7 ]]
+function t.RBXScriptSignal(p39)
 	-- upvalues: typeof (ref), var36 (ref)
 	local var43 = typeof(p39)
 	
@@ -462,7 +462,7 @@ end
 
 local var37 = "RBXScriptConnection"
 
-function t.RBXScriptConnection(p40) --[[ line: 7 ]]
+function t.RBXScriptConnection(p40)
 	-- upvalues: typeof (ref), var37 (ref)
 	local var43 = typeof(p40)
 	
@@ -472,14 +472,14 @@ function t.RBXScriptConnection(p40) --[[ line: 7 ]]
 	return false, string.format("%s expected, got %s", var37, var43)
 end
 
-function t.literal(...) --[[ line: 406 ]]
+function t.literal(...)
 	-- upvalues: t (ref)
 	local var45 = select("#", ...)
 	
 	if var45 == 1 then
 		local var46 = ...
 		
-		return function(p41) --[[ line: 410 ]]
+		return function(p41)
 			-- upvalues: var46 (ref)
 			if p41 == var46 then
 				return true
@@ -497,7 +497,7 @@ end
 
 t.exactly = t.literal
 
-function t.keyOf(p42) --[[ line: 439 ]]
+function t.keyOf(p42)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -507,7 +507,7 @@ function t.keyOf(p42) --[[ line: 439 ]]
 	return t.literal(unpack(t_1))
 end
 
-function t.valueOf(p43) --[[ line: 454 ]]
+function t.valueOf(p43)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -517,7 +517,7 @@ function t.valueOf(p43) --[[ line: 454 ]]
 	return t.literal(unpack(t_1))
 end
 
-function t.integer(p44) --[[ line: 469 ]]
+function t.integer(p44)
 	-- upvalues: t (ref)
 	local var50, var51 = t.number(p44)
 	
@@ -529,9 +529,9 @@ function t.integer(p44) --[[ line: 469 ]]
 	return false, string.format("integer expected, got %s", p44)
 end
 
-function t.numberMin(a) --[[ line: 488 ]]
+function t.numberMin(a)
 	-- upvalues: t (ref)
-	return function(p45) --[[ line: 489 ]]
+	return function(p45)
 		-- upvalues: t (copy), a (ref)
 		local var52, var53 = t.number(p45)
 		
@@ -544,9 +544,9 @@ function t.numberMin(a) --[[ line: 488 ]]
 	end
 end
 
-function t.numberMax(a) --[[ line: 509 ]]
+function t.numberMax(a)
 	-- upvalues: t (ref)
-	return function(p46) --[[ line: 510 ]]
+	return function(p46)
 		-- upvalues: t (copy), a (ref)
 		local var54, var55 = t.number(p46)
 		
@@ -559,9 +559,9 @@ function t.numberMax(a) --[[ line: 509 ]]
 	end
 end
 
-function t.numberMinExclusive(a) --[[ line: 530 ]]
+function t.numberMinExclusive(a)
 	-- upvalues: t (ref)
-	return function(p47) --[[ line: 531 ]]
+	return function(p47)
 		-- upvalues: t (copy), a (ref)
 		local var56, var57 = t.number(p47)
 		
@@ -574,9 +574,9 @@ function t.numberMinExclusive(a) --[[ line: 530 ]]
 	end
 end
 
-function t.numberMaxExclusive(a) --[[ line: 551 ]]
+function t.numberMaxExclusive(a)
 	-- upvalues: t (ref)
-	return function(p48) --[[ line: 552 ]]
+	return function(p48)
 		-- upvalues: t (copy), a (ref)
 		local var58, var59 = t.number(p48)
 		
@@ -592,13 +592,13 @@ end
 t.numberPositive = t.numberMinExclusive(0)
 t.numberNegative = t.numberMaxExclusive(0)
 
-function t.numberConstrained(p49, p50) --[[ line: 587 ]]
+function t.numberConstrained(p49, p50)
 	-- upvalues: t (ref)
 	assert(t.number(p49) and t.number(p50))
 	local var60 = t.numberMin(p49)
 	local var61 = t.numberMax(p50)
 	
-	return function(p51) --[[ line: 591 ]]
+	return function(p51)
 		-- upvalues: var60 (ref), var61 (ref)
 		local var62, var63 = var60(p51)
 		
@@ -614,13 +614,13 @@ function t.numberConstrained(p49, p50) --[[ line: 587 ]]
 	end
 end
 
-function t.numberConstrainedExclusive(p52, p53) --[[ line: 614 ]]
+function t.numberConstrainedExclusive(p52, p53)
 	-- upvalues: t (ref)
 	assert(t.number(p52) and t.number(p53))
 	local var66 = t.numberMinExclusive(p52)
 	local var67 = t.numberMaxExclusive(p53)
 	
-	return function(p54) --[[ line: 618 ]]
+	return function(p54)
 		-- upvalues: var66 (ref), var67 (ref)
 		local var68, var69 = var66(p54)
 		
@@ -636,11 +636,11 @@ function t.numberConstrainedExclusive(p52, p53) --[[ line: 614 ]]
 	end
 end
 
-function t.match(p55) --[[ line: 640 ]]
+function t.match(p55)
 	-- upvalues: t (ref)
 	assert(t.string(p55))
 	
-	return function(p56) --[[ line: 642 ]]
+	return function(p56)
 		-- upvalues: t (copy), p55 (ref)
 		local var72, var73 = t.string(p56)
 		
@@ -653,11 +653,11 @@ function t.match(p55) --[[ line: 640 ]]
 	end
 end
 
-function t.optional(p57) --[[ line: 663 ]]
+function t.optional(p57)
 	-- upvalues: t (ref)
 	assert(t.callback(p57))
 	
-	return function(p58) --[[ line: 665 ]]
+	return function(p58)
 		-- upvalues: p57 (ref)
 		if p58 == nil then
 			return true
@@ -671,10 +671,10 @@ function t.optional(p57) --[[ line: 663 ]]
 	end
 end
 
-function t.tuple(...) --[[ line: 685 ]]
+function t.tuple(...)
 	local list = { ... }
 	
-	return function(...) --[[ line: 687 ]]
+	return function(...)
 		-- upvalues: list (ref)
 		local list_1 = { ... }
 		
@@ -690,11 +690,11 @@ function t.tuple(...) --[[ line: 685 ]]
 	end
 end
 
-function t.keys(p59) --[[ line: 706 ]]
+function t.keys(p59)
 	-- upvalues: t (ref)
 	assert(t.callback(p59))
 	
-	return function(p60) --[[ line: 708 ]]
+	return function(p60)
 		-- upvalues: t (copy), p59 (ref)
 		local var80, var81 = t.table(p60)
 		
@@ -712,11 +712,11 @@ function t.keys(p59) --[[ line: 706 ]]
 	end
 end
 
-function t.values(p61) --[[ line: 732 ]]
+function t.values(p61)
 	-- upvalues: t (ref)
 	assert(t.callback(p61))
 	
-	return function(p62) --[[ line: 734 ]]
+	return function(p62)
 		-- upvalues: t (copy), p61 (ref)
 		local var84, var85 = t.table(p62)
 		
@@ -734,13 +734,13 @@ function t.values(p61) --[[ line: 732 ]]
 	end
 end
 
-function t.map(p63, p64) --[[ line: 759 ]]
+function t.map(p63, p64)
 	-- upvalues: t (ref)
 	assert(t.callback(p63), t.callback(p64))
 	local var88 = t.keys(p63)
 	local var89 = t.values(p64)
 	
-	return function(p65) --[[ line: 763 ]]
+	return function(p65)
 		-- upvalues: var88 (ref), var89 (ref)
 		local var90, var91 = var88(p65)
 		
@@ -758,12 +758,12 @@ end
 
 local var38 = t.keys(t.integer)
 
-function t.array(p66) --[[ line: 787 ]]
+function t.array(p66)
 	-- upvalues: t (ref), var38 (ref)
 	assert(t.callback(p66))
 	local var94 = t.values(p66)
 	
-	return function(p67) --[[ line: 790 ]]
+	return function(p67)
 		-- upvalues: var38 (copy), var94 (ref)
 		local var95, var96 = var38(p67)
 		
@@ -791,12 +791,12 @@ end
 
 local var39 = t.array(t.callback)
 
-function t.union(...) --[[ line: 829 ]]
+function t.union(...)
 	-- upvalues: var39 (ref)
 	local list = { ... }
 	assert(var39(list))
 	
-	return function(p68) --[[ line: 832 ]]
+	return function(p68)
 		-- upvalues: list (ref)
 		for i, v in pairs(list) do
 			if v(p68) then
@@ -809,12 +809,12 @@ end
 
 t.some = t.union
 
-function t.intersection(...) --[[ line: 854 ]]
+function t.intersection(...)
 	-- upvalues: var39 (ref)
 	local list = { ... }
 	assert(var39(list))
 	
-	return function(p69) --[[ line: 857 ]]
+	return function(p69)
 		-- upvalues: list (ref)
 		for i, v in pairs(list) do
 			local var102, var103 = v(p69)
@@ -830,11 +830,11 @@ end
 t.every = t.intersection
 local var40 = t.map(t.any, t.callback)
 
-function t.interface(p70) --[[ line: 883 ]]
+function t.interface(p70)
 	-- upvalues: var40 (ref), t (ref)
 	assert(var40(p70))
 	
-	return function(p71) --[[ line: 885 ]]
+	return function(p71)
 		-- upvalues: t (copy), p70 (ref)
 		local var104, var105 = t.table(p71)
 		
@@ -852,11 +852,11 @@ function t.interface(p70) --[[ line: 883 ]]
 	end
 end
 
-function t.strictInterface(p72) --[[ line: 908 ]]
+function t.strictInterface(p72)
 	-- upvalues: var40 (ref), t (ref)
 	assert(var40(p72))
 	
-	return function(p73) --[[ line: 910 ]]
+	return function(p73)
 		-- upvalues: t (copy), p72 (ref)
 		local var108, var109 = t.table(p73)
 		
@@ -879,12 +879,12 @@ function t.strictInterface(p72) --[[ line: 908 ]]
 	end
 end
 
-function t.instanceOf(p74, p75) --[[ line: 941 ]]
+function t.instanceOf(p74, p75)
 	-- upvalues: t (ref)
 	assert(t.string(p74))
 	local var112 = if p75 ~= nil then t.children(p75) else nil
 	
-	return function(p76) --[[ line: 949 ]]
+	return function(p76)
 		-- upvalues: t (copy), p74 (ref), var112 (write)
 		local var113, var114 = t.Instance(p76)
 		
@@ -906,12 +906,12 @@ end
 
 t.instance = t.instanceOf
 
-function t.instanceIsA(p77, p78) --[[ line: 978 ]]
+function t.instanceIsA(p77, p78)
 	-- upvalues: t (ref)
 	assert(t.string(p77))
 	local var117 = if p78 ~= nil then t.children(p78) else nil
 	
-	return function(p79) --[[ line: 986 ]]
+	return function(p79)
 		-- upvalues: t (copy), p77 (ref), var117 (write)
 		local var118, var119 = t.Instance(p79)
 		
@@ -931,11 +931,11 @@ function t.instanceIsA(p77, p78) --[[ line: 978 ]]
 	end
 end
 
-function t.enum(p80) --[[ line: 1014 ]]
+function t.enum(p80)
 	-- upvalues: t (ref)
 	assert(t.Enum(p80))
 	
-	return function(p81) --[[ line: 1016 ]]
+	return function(p81)
 		-- upvalues: t (copy), p80 (ref)
 		local var122, var123 = t.EnumItem(p81)
 		
@@ -950,11 +950,11 @@ end
 
 local var41 = t.tuple(t.callback, t.callback)
 
-function t.wrap(p82, p83) --[[ line: 1041 ]]
+function t.wrap(p82, p83)
 	-- upvalues: var41 (ref)
 	assert(var41(p82, p83))
 	
-	return function(...) --[[ line: 1043 ]]
+	return function(...)
 		-- upvalues: p83 (ref), p82 (ref)
 		assert(p83(...))
 		
@@ -962,8 +962,8 @@ function t.wrap(p82, p83) --[[ line: 1041 ]]
 	end
 end
 
-function t.strict(p84) --[[ line: 1057 ]]
-	return function(...) --[[ line: 1058 ]]
+function t.strict(p84)
+	return function(...)
 		-- upvalues: p84 (ref)
 		assert(p84(...))
 	end
@@ -971,11 +971,11 @@ end
 
 local var42 = t.map(t.string, t.callback)
 
-function t.children(p85) --[[ line: 1077 ]]
+function t.children(p85)
 	-- upvalues: var42 (ref), t (ref)
 	assert(var42(p85))
 	
-	return function(p86) --[[ line: 1080 ]]
+	return function(p86)
 		-- upvalues: t (copy), p85 (ref)
 		local var124, var125 = t.Instance(p86)
 		

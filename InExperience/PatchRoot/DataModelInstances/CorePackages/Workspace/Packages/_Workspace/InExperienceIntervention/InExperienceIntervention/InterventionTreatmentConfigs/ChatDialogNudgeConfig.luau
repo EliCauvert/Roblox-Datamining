@@ -5,18 +5,18 @@ local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention
 
 return {
 	configName = "ChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p0) --[[ line: 10 ]]
+	shouldTriggerVisualTreatment = function(p0)
 		-- upvalues: constants (ref)
 		return p0.type == constants.NotificationDialogType.ChatNudge and (p0.modalType == constants.NotificationModalType.Dialog and (p0.abuseVector == constants.AbuseVectorType.ExperienceChat and not p0.acknowledgeable))
 	end,
-	shouldTriggerBehavioralTreatment = function(_) --[[ line: 16 ]]
+	shouldTriggerBehavioralTreatment = function(_)
 		return false
 	end,
-	shouldTriggerEventReceived = function(p1) --[[ line: 19 ]]
+	shouldTriggerEventReceived = function(p1)
 		-- upvalues: constants (ref)
 		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.ExperienceChat)
 	end,
-	onTriggerVisualTreatment = function(p2, p3) --[[ line: 24 ]]
+	onTriggerVisualTreatment = function(p2, p3)
 		-- upvalues: constants (ref)
 		p2({
 			isShown = true,
@@ -25,8 +25,8 @@ return {
 			detail = p3
 		})
 	end,
-	onTriggerBehavioralTreatment = function(_) --[[ line: 32 ]] end,
-	onTriggerEventReceived = function(p4) --[[ line: 33 ]]
+	onTriggerBehavioralTreatment = function(_) end,
+	onTriggerEventReceived = function(p4)
 		-- upvalues: inExperienceInterventionAnalyticsModule (ref)
 		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p4.decisionEventId, p4.evidence, p4.timeoutDurationSeconds)
 	end

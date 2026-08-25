@@ -13,7 +13,7 @@ local localStorageKey = localStorage.Enums.LocalStorageKey
 local t = {}
 t.__index = t
 
-function t:_batchNotificationAction(p0, p1) --[[ line: 31 ]]
+function t:_batchNotificationAction(p0, p1)
 	-- upvalues: typeModule (ref), notificationSnoozedSignal (ref)
 	local var6 = if type(p0.notificationType) == "table" then p0.notificationType else { p0.notificationType }
 	
@@ -48,11 +48,11 @@ function t:_batchNotificationAction(p0, p1) --[[ line: 31 ]]
 	end
 end
 
-function t:_isExpiredSnooze() --[[ line: 90 ]]
+function t:_isExpiredSnooze()
 	return self.durationMinutes == -1 or self.durationMinutes * 60 > (DateTime.now().UnixTimestampMillis - self.snoozedTimestampMs) / 1000
 end
 
-function t._showNotificationsModal(_, p2) --[[ line: 104 ]]
+function t._showNotificationsModal(_, p2)
 	-- upvalues: notificationModalsManager (ref), images (ref)
 	notificationModalsManager.SetUIBloxToast({
 		iconImage = images["icons/common/notificationOn"],
@@ -60,23 +60,23 @@ function t._showNotificationsModal(_, p2) --[[ line: 104 ]]
 	})
 end
 
-function t:_updateAppStorage() --[[ line: 121 ]]
+function t:_updateAppStorage()
 	-- upvalues: localStorageKey (ref), httpService (ref)
 	self._appStorageService:SetItem(localStorageKey.SnoozedNotificationTypesLocalStorageKey, httpService:JSONEncode(self.snoozedNotificationTypes))
 	self._appStorageService:Flush()
 end
 
-function t:unmuteNotification(p3) --[[ line: 138 ]]
+function t:unmuteNotification(p3)
 	-- upvalues: typeModule (ref)
 	self:_batchNotificationAction(p3, typeModule.SnoozeActionEnum.Unmute)
 end
 
-function t:snoozeNotification(p4) --[[ line: 156 ]]
+function t:snoozeNotification(p4)
 	-- upvalues: typeModule (ref)
 	self:_batchNotificationAction(p4, typeModule.SnoozeActionEnum.Mute)
 end
 
-function t:isSnoozedNotificationType(p5) --[[ line: 173 ]]
+function t:isSnoozedNotificationType(p5)
 	-- upvalues: cryo (ref)
 	if not self.snoozedNotificationTypes[p5] then
 		return false
@@ -89,7 +89,7 @@ function t:isSnoozedNotificationType(p5) --[[ line: 173 ]]
 	return true
 end
 
-function t.new(p6) --[[ line: 191 ]]
+function t.new(p6)
 	-- upvalues: analyticsServiceModule (ref), t (ref), localStorageKey (ref), httpService (ref)
 	local t_1 = {
 		_appStorageService = p6,
@@ -100,13 +100,13 @@ function t.new(p6) --[[ line: 191 ]]
 	local t_2 = {}
 	local t_3 = {}
 	local var11 = false
-	local ok, status = pcall(function() --[[ line: 204 ]]
+	local ok, status = pcall(function()
 		-- upvalues: t_1 (ref), localStorageKey (copy)
 		return t_1._appStorageService:GetItem(localStorageKey.SnoozedNotificationTypesLocalStorageKey)
 	end)
 	
 	if ok and status ~= "" then
-		local ok_1, status_1 = pcall(function() --[[ line: 209 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: httpService (copy), status (ref)
 			return httpService:JSONDecode(status)
 		end)

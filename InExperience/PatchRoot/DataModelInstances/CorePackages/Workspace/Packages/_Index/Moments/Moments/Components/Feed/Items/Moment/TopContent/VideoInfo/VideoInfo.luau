@@ -13,7 +13,7 @@ local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionC
 local view = foundationModule.View
 local useSignalState = signalsReactModule.useSignalState
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "VideoInfo" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: momentContextModule (ref), useSignalState (ref), useMomentsSession (ref), reactModule (ref), debugInfoModule (ref), creatorAttributionModule (ref), descriptionModule (ref), reactionsModule (ref), statusChipModule (ref), view (ref)
 	local isExperience = useSignalState(momentContextModule.useMoment().store.getData).kind == "experience"
 	local t = {}

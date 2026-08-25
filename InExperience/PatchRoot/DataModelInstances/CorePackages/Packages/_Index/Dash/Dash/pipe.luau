@@ -1,4 +1,4 @@
-﻿return function(p0, ...) --[[ line: 22 | named "pipe" ]]
+﻿return function(p0, ...)
 	local var0 = select("#", ...)
 	
 	if var0 == 0 then
@@ -6,7 +6,7 @@
 	end
 	local list = { ... }
 	
-	return function(...) --[[ line: 28 ]]
+	return function(...)
 		-- upvalues: p0 (ref), var0 (ref), list (ref)
 		local list_1 = { p0(...) }
 		

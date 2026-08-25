@@ -5,7 +5,7 @@ local enableSchedulerTracing = require(parent.Shared).ReactFeatureFlags.enableSc
 local subscriberRef = require(script.Parent.Tracing).__subscriberRef
 local var1 = if enableSchedulerTracing then {} else {}
 
-function t.unstable_subscribe(p0) --[[ line: 30 ]]
+function t.unstable_subscribe(p0)
 	-- upvalues: enableSchedulerTracing (ref), var1 (write), object (ref), subscriberRef (ref)
 	if enableSchedulerTracing then
 		var1[p0] = true
@@ -23,7 +23,7 @@ function t.unstable_subscribe(p0) --[[ line: 30 ]]
 	end
 end
 
-function t.unstable_unsubscribe(p1) --[[ line: 47 ]]
+function t.unstable_unsubscribe(p1)
 	-- upvalues: enableSchedulerTracing (ref), var1 (write), object (ref), subscriberRef (ref)
 	if enableSchedulerTracing then
 		var1[p1] = nil
@@ -34,7 +34,7 @@ function t.unstable_unsubscribe(p1) --[[ line: 47 ]]
 	end
 end
 
-function onInteractionTraced(p2) --[[ line: 57 ]]
+function onInteractionTraced(p2)
 	-- upvalues: var1 (write)
 	local var2 = false
 	local var3 = nil
@@ -52,7 +52,7 @@ function onInteractionTraced(p2) --[[ line: 57 ]]
 	end
 end
 
-function onInteractionScheduledWorkCompleted(p3) --[[ line: 79 ]]
+function onInteractionScheduledWorkCompleted(p3)
 	-- upvalues: var1 (write)
 	local var4 = false
 	local var5 = nil
@@ -70,7 +70,7 @@ function onInteractionScheduledWorkCompleted(p3) --[[ line: 79 ]]
 	end
 end
 
-function onWorkScheduled(p4, p5) --[[ line: 102 ]]
+function onWorkScheduled(p4, p5)
 	-- upvalues: var1 (write)
 	local var6 = false
 	local var7 = nil
@@ -88,7 +88,7 @@ function onWorkScheduled(p4, p5) --[[ line: 102 ]]
 	end
 end
 
-function onWorkStarted(p6, p7) --[[ line: 124 ]]
+function onWorkStarted(p6, p7)
 	-- upvalues: var1 (write)
 	local var8 = false
 	local var9 = nil
@@ -106,7 +106,7 @@ function onWorkStarted(p6, p7) --[[ line: 124 ]]
 	end
 end
 
-function onWorkStopped(p8, p9) --[[ line: 146 ]]
+function onWorkStopped(p8, p9)
 	-- upvalues: var1 (write)
 	local var10 = false
 	local var11 = nil
@@ -124,7 +124,7 @@ function onWorkStopped(p8, p9) --[[ line: 146 ]]
 	end
 end
 
-function onWorkCanceled(p10, p11) --[[ line: 168 ]]
+function onWorkCanceled(p10, p11)
 	-- upvalues: var1 (write)
 	local var12 = false
 	local var13 = nil

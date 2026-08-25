@@ -10,7 +10,7 @@ local playersService = game:GetService("Players")
 local runService = game:GetService("RunService")
 local createSignal = signalsModule.createSignal
 
-local function defaultCreateTtsInstance() --[[ line: 52 ]]
+local function defaultCreateTtsInstance()
 	-- upvalues: playersService (ref)
 	if not game:GetEngineFeature("TextToSpeechPlatformPreview") then
 		return nil
@@ -41,7 +41,7 @@ local function defaultCreateTtsInstance() --[[ line: 52 ]]
 	return audioTextToSpeech
 end
 
-return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
+return function(p0)
 	-- upvalues: defaultCreateTtsInstance (ref), createSignal (ref), runService (ref), classifyTTSErrorModule (ref), getFIntMomentsTTSWaveformSamplesPerSecondModule (ref), getFIntMomentsTTSWaveformMinSamplesModule (ref), getFIntMomentsTTSWaveformMaxSamplesModule (ref), normalizeWaveformModule (ref)
 	p0 = p0 or defaultCreateTtsInstance
 	local var16, var17 = createSignal("idle")
@@ -59,7 +59,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 	local var36 = nil
 	local var37 = false
 	
-	local function _() --[[ line: 110 | named "stopTimeTracking" ]]
+	local function _()
 		-- upvalues: var35 (write)
 		if var35 then
 			var35:Disconnect()
@@ -67,13 +67,13 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 117 | named "startTimeTracking" ]]
+	local _ = function()
 		-- upvalues: var35 (write), runService (copy), var32 (write), var23 (ref)
 		if var35 then
 			var35:Disconnect()
 			var35 = nil
 		end
-		var35 = runService.RenderStepped:Connect(function() --[[ line: 119 ]]
+		var35 = runService.RenderStepped:Connect(function()
 			-- upvalues: var32 (copy), var23 (copy)
 			if var32 then
 				var23(var32.TimePosition)
@@ -81,7 +81,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 		end)
 	end
 	
-	local _ = function() --[[ line: 126 | named "ensureGraph" ]]
+	local _ = function()
 		-- upvalues: var32 (write), p0 (ref), var33 (write), var36 (write), var37 (write), var17 (ref), var23 (ref), var35 (write)
 		if var32 ~= nil then
 			return var32
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 		end
 		var32 = var39
 		var33 = var39.Parent
-		var36 = var39.Ended:Connect(function() --[[ line: 141 ]]
+		var36 = var39.Ended:Connect(function()
 			-- upvalues: var37 (copy), var17 (copy), var23 (copy), var35 (copy)
 			if var37 then return end
 			var17("ready")
@@ -108,7 +108,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 		return var39
 	end
 	
-	local function failGeneration(p1) --[[ line: 154 ]]
+	local function failGeneration(p1)
 		-- upvalues: var27 (ref), var29 (ref), var25 (ref), var21 (ref), var31 (ref), var19 (ref), var17 (ref)
 		var27("")
 		var29(0)
@@ -128,7 +128,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 		getLoadedText = var26,
 		getLoadedVoiceId = var28,
 		getWaveform = var30,
-		generate = function(p2, p3) --[[ line: 164 ]]
+		generate = function(p2, p3)
 			-- upvalues: var37 (write), var26 (ref), var28 (ref), var16 (ref), var32 (write), p0 (ref), var33 (write), var36 (write), var17 (ref), var23 (ref), var35 (write), var19 (ref), var34 (write), var31 (ref), var27 (ref), var29 (ref), failGeneration (ref), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var21 (ref), var25 (ref), normalizeWaveformModule (copy)
 			local var40
 			if var37 then return end
@@ -141,7 +141,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 				else
 					var32 = var41
 					var33 = var41.Parent
-					var36 = var41.Ended:Connect(function() --[[ line: 141 ]]
+					var36 = var41.Ended:Connect(function()
 						-- upvalues: var37 (copy), var17 (copy), var23 (copy), var35 (copy)
 						if var37 then return end
 						var17("ready")
@@ -177,12 +177,12 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 			var31({})
 			var27("")
 			var29(0)
-			task.spawn(function() --[[ line: 195 ]]
+			task.spawn(function()
 				-- upvalues: var37 (copy), var40 (ref), p2 (ref), p3 (ref), var34 (copy), var42 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var27 (copy), var29 (copy), var21 (copy), var25 (copy), var23 (copy), var31 (copy), normalizeWaveformModule (copy), var17 (copy)
 				if var37 then return end
 				var40.Text = p2
 				var40.VoiceId = tostring(p3)
-				local ok, status = pcall(function() --[[ line: 203 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var40 (copy)
 					return var40:LoadPlatformAsync()
 				end)
@@ -198,7 +198,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 					return
 				end
 				local clampedValue = math.clamp(math.round(var40.TimeLength * getFIntMomentsTTSWaveformSamplesPerSecondModule()), getFIntMomentsTTSWaveformMinSamplesModule(), getFIntMomentsTTSWaveformMaxSamplesModule())
-				local ok_1, status_1 = pcall(function() --[[ line: 226 ]]
+				local ok_1, status_1 = pcall(function()
 					-- upvalues: var40 (copy), clampedValue (ref)
 					return var40:GetWaveformAsync(NumberRange.new(0, var40.TimeLength), clampedValue)
 				end)
@@ -216,7 +216,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 				var17("ready")
 			end)
 		end,
-		play = function() --[[ line: 250 ]]
+		play = function()
 			-- upvalues: var37 (write), var32 (write), var17 (ref), var35 (write), runService (copy), var23 (ref)
 			if var37 then return end
 			if var32 and var32.IsLoaded then
@@ -227,7 +227,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 					var35:Disconnect()
 					var35 = nil
 				end
-				var35 = runService.RenderStepped:Connect(function() --[[ line: 119 ]]
+				var35 = runService.RenderStepped:Connect(function()
 					-- upvalues: var32 (copy), var23 (copy)
 					if var32 then
 						var23(var32.TimePosition)
@@ -235,7 +235,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 				end)
 			end
 		end,
-		pause = function() --[[ line: 262 ]]
+		pause = function()
 			-- upvalues: var37 (write), var32 (write), var35 (write), var16 (ref), var17 (ref)
 			if var37 then return end
 			if var32 then
@@ -250,7 +250,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 				end
 			end
 		end,
-		seek = function(p4) --[[ line: 276 ]]
+		seek = function(p4)
 			-- upvalues: var37 (write), var32 (write), var20 (ref), var23 (ref)
 			if var37 then return end
 			if var32 then
@@ -259,14 +259,14 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 				var23(clampedValue)
 			end
 		end,
-		setVolume = function(value) --[[ line: 288 ]]
+		setVolume = function(value)
 			-- upvalues: var37 (write), var32 (write)
 			if var37 then return end
 			if var32 then
 				var32.Volume = value
 			end
 		end,
-		reset = function() --[[ line: 302 ]]
+		reset = function()
 			-- upvalues: var37 (write), var34 (write), var32 (write), var35 (write), var19 (ref), var17 (ref), var23 (ref), var21 (ref), var25 (ref), var27 (ref), var29 (ref), var31 (ref)
 			if var37 then return end
 			var34 += 1
@@ -287,7 +287,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 			var29(0)
 			var31({})
 		end,
-		destroy = function() --[[ line: 322 ]]
+		destroy = function()
 			-- upvalues: var37 (write), var35 (write), var36 (write), var33 (write), var32 (write)
 			if var37 then return end
 			var37 = true

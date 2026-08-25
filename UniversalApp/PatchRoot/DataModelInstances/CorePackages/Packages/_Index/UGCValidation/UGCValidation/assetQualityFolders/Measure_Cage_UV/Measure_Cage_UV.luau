@@ -10,7 +10,7 @@ local t = {
 }
 local list = { "Handle_InnerCage", "Handle_OuterCage" }
 
-function t.run(p0, p1) --[[ line: 19 ]]
+function t.run(p0, p1)
 	-- upvalues: list (ref), UGCValidateLCCagingIncorrectUVThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 	local measureCageUV = p1.aqsSummaryData.Measure_Cage_UV
 	

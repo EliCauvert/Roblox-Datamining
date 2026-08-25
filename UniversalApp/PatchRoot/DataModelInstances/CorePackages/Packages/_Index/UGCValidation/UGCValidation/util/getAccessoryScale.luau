@@ -22,7 +22,7 @@ if not humanoidParentNil then
 		end
 	end
 end
-return function(p0, p1) --[[ line: 43 ]]
+return function(p0, p1)
 	-- upvalues: humanoidParentNil (ref), var3 (write), playersService (ref), humanoid (write), t (ref)
 	if humanoidParentNil and var3 == nil then
 		var3 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)

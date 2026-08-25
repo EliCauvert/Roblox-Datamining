@@ -8,7 +8,7 @@ local url = require(parent.Http).Url
 local _ = require(userSignals.UserSignalTypes)
 local fFlagLuaAppAddSessionIdToUserSignals = require(parent.SharedFlags).FFlagLuaAppAddSessionIdToUserSignals
 
-return function(p0, p1, p2, p3, p4) --[[ line: 82 ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: fFlagLuaAppAddSessionIdToUserSignals (ref), sessionService (ref), sessionType (ref), url (ref), httpService (ref)
 	return p0(string.format("%suser-signal-http-gateway/v1/user-signal/ingest", url.APIS_URL), "POST", {
 		postBody = httpService:JSONEncode({

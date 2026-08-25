@@ -9,7 +9,7 @@ local view = foundationModule.View
 local verticalItemModule = require(inExperienceSideSheet.Components.VerticalItem)
 local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "VerticalList" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: signalsReactModule (ref), reactModule (ref), verticalItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
 	local t = {}
 	

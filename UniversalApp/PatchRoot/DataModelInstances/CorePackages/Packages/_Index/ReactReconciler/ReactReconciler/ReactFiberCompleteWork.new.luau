@@ -1,4 +1,4 @@
-﻿local function _(p0) --[[ line: 11 | named "unimplemented" ]]
+﻿local function _(p0)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring(p0))
@@ -105,17 +105,17 @@ local includesSomeLane = reactFiberLaneModule.includesSomeLane
 local mergeLanes = reactFiberLaneModule.mergeLanes
 local transferActualDuration = require(script.Parent["ReactProfilerTimer.new"]).transferActualDuration
 
-local _ = function(p1) --[[ line: 189 | named "markUpdate" ]]
+local _ = function(p1)
 	-- upvalues: update (ref)
 	p1.flags = bit32.bor(p1.flags, update)
 end
 
-local _ = function(p2) --[[ line: 195 | named "markRef" ]]
+local _ = function(p2)
 	-- upvalues: ref (ref)
 	p2.flags = bit32.bor(p2.flags, ref)
 end
 
-local function hadNoMutationsEffects(p3, p4) --[[ line: 201 ]]
+local function hadNoMutationsEffects(p3, p4)
 	-- upvalues: mutationMask (ref), noFlags (ref)
 	if p3 ~= nil and p3.child == p4.child then
 		return true
@@ -140,7 +140,7 @@ local updateHostComponent = nil
 local updateHostText = nil
 
 if supportsMutation then
-	var11 = function(p5, p6, _, _) --[[ line: 227 ]]
+	var11 = function(p5, p6, _, _)
 		-- upvalues: hostComponent (ref), hostText (ref), appendInitialChild (ref), enableFundamentalAPI (ref), fundamentalComponent (ref), hostPortal (ref)
 		local child = p6.child
 		while child ~= nil do
@@ -168,9 +168,9 @@ if supportsMutation then
 		end
 	end
 	
-	local var14 = function(_, _) --[[ line: 265 ]] end
+	local var14 = function(_, _) end
 	
-	updateHostComponent = function(p7, p8, p9, p10, p11) --[[ line: 268 | named "updateHostComponent" ]]
+	updateHostComponent = function(p7, p8, p9, p10, p11)
 		-- upvalues: getHostContext (ref), prepareUpdate (ref), update (ref)
 		local memoizedProps = p7.memoizedProps
 		
@@ -183,28 +183,28 @@ if supportsMutation then
 		end
 	end
 	
-	updateHostText = function(_, p12, p13, p14) --[[ line: 309 | named "updateHostText" ]]
+	updateHostText = function(_, p12, p13, p14)
 		-- upvalues: update (ref)
 		if p13 ~= p14 then
 			p12.flags = bit32.bor(p12.flags, update)
 		end
 	end
 elseif supportsPersistence then
-	var11 = function(_, _, _, _) --[[ line: 322 ]]
+	var11 = function(_, _, _, _)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildren"))
 		error("FIXME (roblox): appendAllChildren is unimplemented", 2)
 	end
 	
-	local _ = function(_, _, _, _) --[[ line: 417 | named "appendAllChildrenToContainer" ]]
+	local _ = function(_, _, _, _)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildrenToContainer"))
 		error("FIXME (roblox): appendAllChildrenToContainer is unimplemented", 2)
 	end
 	
-	local function var14(p15, p16) --[[ line: 511 | named "updateHostContainer" ]]
+	local function var14(p15, p16)
 		-- upvalues: hadNoMutationsEffects (ref), createContainerChildSet (ref), update (ref), finalizeContainerChildren (ref)
 		local stateNode = p16.stateNode
 		
@@ -222,9 +222,9 @@ elseif supportsPersistence then
 		finalizeContainerChildren(containerInfo, var17)
 	end
 else
-	local var14 = function(_, _) --[[ line: 627 ]] end
+	local var14 = function(_, _) end
 end
-local function bubbleProperties(p17) --[[ line: 720 ]]
+local function bubbleProperties(p17)
 	-- upvalues: noLanes (ref), noFlags (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), mergeLanes (ref), staticMask (ref)
 	local var18 = p17.alternate ~= nil and p17.alternate.child == p17.child
 	local var19 = noLanes
@@ -280,7 +280,7 @@ local function bubbleProperties(p17) --[[ line: 720 ]]
 end
 
 return {
-	completeWork = function(p18, p19, p20) --[[ line: 859 ]]
+	completeWork = function(p18, p19, p20)
 		-- upvalues: indeterminateComponent (ref), lazyComponent (ref), simpleMemoComponent (ref), functionComponent (ref), forwardRef (ref), fragment (ref), mode (ref), contextConsumer (ref), memoComponent (ref), bubbleProperties (ref), classComponent (ref), isContextProvider (ref), popContext (ref), hostRoot (ref), popHostContainer (ref), popTopLevelContextObject (ref), resetWorkInProgressVersions (ref), popHydrationState (ref), update (ref), snapshot (ref), var14 (write), hostComponent (ref), popHostContext (ref), getRootHostContainer (ref), updateHostComponent (write), ref (ref), invariant (ref), getHostContext (ref), prepareToHydrateHostInstance (ref), createInstance (ref), var11 (write), finalizeInitialChildren (ref), hostText (ref), updateHostText (write), prepareToHydrateHostTextInstance (ref), createTextInstance (ref), profiler (ref), callback (ref), passive (ref), performedWork (ref), noFlags (ref), layoutMask (ref), deletion (ref), passiveMask (ref), suspenseComponent (ref), popSuspenseContext (ref), enableSuspenseServerRenderer (ref), prepareToHydrateHostSuspenseInstance (ref), enableSchedulerTracing (ref), markSpawnedWork (ref), offscreenLane (ref), enableProfilerTimer (ref), profileMode (ref), noMode (ref), resetHydrationState (ref), didCapture (ref), transferActualDuration (ref), blockingMode (ref), hasSuspenseContext (ref), suspenseStackCursor (ref), invisibleParentSuspenseContext (ref), renderDidSuspend (ref), renderDidSuspendDelayIfPossible (ref), supportsPersistence (ref), supportsMutation (ref), enableSuspenseCallback (ref), hostPortal (ref), preparePortalMount (ref), contextProvider (ref), popProvider (ref), incompleteClassComponent (ref), suspenseListComponent (ref), fundamentalComponent (ref), scopeComponent (ref), block (ref), offscreenComponent (ref), legacyHiddenComponent (ref), popRenderLanes (ref), includesSomeLane (ref), unknownModule_4 (ref), concurrentMode (ref)
 		local var30
 		local pendingProps = p19.pendingProps

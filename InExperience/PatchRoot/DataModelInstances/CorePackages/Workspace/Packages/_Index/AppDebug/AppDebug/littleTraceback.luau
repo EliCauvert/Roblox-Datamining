@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 7 | named "littleTraceback" ]]
+﻿return function(p0)
 	local var0 = 1 + (p0 or 5)
 	local trac = debug.traceback()
 	local var2 = nil

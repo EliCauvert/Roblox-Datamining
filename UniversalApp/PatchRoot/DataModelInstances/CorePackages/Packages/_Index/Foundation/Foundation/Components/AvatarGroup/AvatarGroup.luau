@@ -28,7 +28,7 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-local function AvatarOverflow(p0) --[[ line: 56 ]]
+local function AvatarOverflow(p0)
 	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
 	local var20 = usePresentationContext()
 	local emphasis = useTokensModule()[var20.colorNamespace or colorNamespaceModule.Color].Content.Emphasis
@@ -48,7 +48,7 @@ local function AvatarOverflow(p0) --[[ line: 56 ]]
 	}))
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 92 | named "AvatarGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), usePresentationContext (ref), useTokensModule (ref), avatarGroupTypeModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), getAvatarSizeModule (ref), flagsModule (ref), reactModule (ref), avatarModule (ref), internalAvatarGroupModule (ref), withCommonPropsModule (ref), getBindableValueModule (ref), AvatarOverflow (ref), viewModule (ref)
 	local var21 = withDefaultsModule(p1, t)
 	local var22 = usePresentationContext()
@@ -70,7 +70,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 92 | 
 			gap = var24,
 			backplateStyle = backplateStyle,
 			avatars = var21.avatars,
-			renderAvatar = reactModule.useCallback(function(p3, p4) --[[ line: 115 ]]
+			renderAvatar = reactModule.useCallback(function(p3, p4)
 				-- upvalues: reactModule (copy), avatarModule (copy), var21 (ref)
 				local userId
 				local userPresence = nil

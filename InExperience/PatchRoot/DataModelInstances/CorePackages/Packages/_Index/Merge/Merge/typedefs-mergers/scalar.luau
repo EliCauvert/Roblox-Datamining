@@ -7,7 +7,7 @@ local kind = require(parent.GraphQL).Kind
 local mergeDirectives = require(script.Parent.directives).mergeDirectives
 local _ = require(script.Parent["merge-typedefs_types"])
 
-function t.mergeScalar(p0, p1, p2) --[[ line: 24 ]]
+function t.mergeScalar(p0, p1, p2)
 	-- upvalues: boolean (ref), mergeDirectives (ref), object (ref), kind (ref)
 	return if p1 then {
 		name = p0.name,

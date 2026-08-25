@@ -3,9 +3,9 @@ local updateOptedInUsers = dependenciesModule.SocialModalsCommon.Utils.updateOpt
 local permissionsProtocol = dependenciesModule.PermissionsProtocol
 local appStorageService = dependenciesModule.AppStorageService
 
-return function(p0, p1) --[[ line: 10 ]]
+return function(p0, p1)
 	-- upvalues: permissionsProtocol (ref), updateOptedInUsers (ref), appStorageService (ref)
-	p0:hasPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p2) --[[ line: 13 ]]
+	p0:hasPermissions({ permissionsProtocol.Permissions.CONTACTS_ACCESS }):andThen(function(p2)
 		-- upvalues: permissionsProtocol (copy), updateOptedInUsers (copy), appStorageService (copy), p1 (ref)
 		local var1 = p2 and p2.status == permissionsProtocol.Status.AUTHORIZED
 		
@@ -15,7 +15,7 @@ return function(p0, p1) --[[ line: 10 ]]
 		if p1 then
 			p1(var1)
 		end
-	end):catch(function(_) --[[ line: 24 ]]
+	end):catch(function(_)
 		-- upvalues: p1 (ref)
 		if p1 then
 			p1(false)

@@ -2,7 +2,7 @@
 local base64 = require(script:FindFirstAncestor("GenericChallenges").Parent.AuthCommon).Utils.Base64
 local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 11 ]]
+return function(p0)
 	-- upvalues: constantsModule (ref), base64 (ref), httpService (ref)
 	assert(p0.challengeId ~= nil, "challenge id must not be nil")
 	assert(p0.challengeType ~= nil, "challenge type must not be nil")

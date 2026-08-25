@@ -7,7 +7,7 @@ local backButtonModule = require(avatarExperienceInspectAndBuy.Components.Common
 local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-return function(p0) --[[ line: 39 | named "ItemHeader" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), backButtonModule (ref)
 	local var4 = useTokens()
 	

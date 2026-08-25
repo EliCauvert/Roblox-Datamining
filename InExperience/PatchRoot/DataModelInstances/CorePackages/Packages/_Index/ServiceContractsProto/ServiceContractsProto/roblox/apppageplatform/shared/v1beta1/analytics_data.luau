@@ -5,14 +5,14 @@ local propConditionModule = require(script.Parent.prop_condition)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 107 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		kind = if p0 == nil or p0.kind == nil then nil else p0.kind
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 113 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var8 = 0
@@ -42,7 +42,7 @@ function t_1:encode() --[[ line: 113 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 136 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var17 = t_1.new()
 	local var18 = 0
@@ -102,7 +102,7 @@ function t_1.decode(p1) --[[ line: 136 ]]
 	return var17
 end
 
-function t_1:jsonEncode() --[[ line: 190 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -121,7 +121,7 @@ function t_1:jsonEncode() --[[ line: 190 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 206 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var39 = t_1.new()
 	
@@ -152,7 +152,7 @@ typeRegistryModule.default:register(t.AnalyticsDataField)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 245 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		condition = if p2 == nil or p2.condition == nil then nil else p2.condition,
@@ -160,7 +160,7 @@ function t_2.new(p2) --[[ line: 245 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 254 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var41 = 0
@@ -191,7 +191,7 @@ function t_2:encode() --[[ line: 254 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 279 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), propConditionModule (ref)
 	local var50 = t_2.new()
 	local var51 = 0
@@ -248,7 +248,7 @@ function t_2.decode(p3) --[[ line: 279 ]]
 	return var50
 end
 
-function t_2:jsonEncode() --[[ line: 332 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -266,7 +266,7 @@ function t_2:jsonEncode() --[[ line: 332 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 350 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), propConditionModule (ref)
 	local var72 = t_2.new()
 	
@@ -294,14 +294,14 @@ typeRegistryModule.default:register(t.AnalyticsDataField_ConditionalOption)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 389 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		options = if p4 == nil or p4.options == nil then {} else p4.options
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 397 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var74 = 0
@@ -321,7 +321,7 @@ function t_3:encode() --[[ line: 397 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 414 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var79 = t_3.new()
 	local var80 = 0
@@ -368,7 +368,7 @@ function t_3.decode(p5) --[[ line: 414 ]]
 	return var79
 end
 
-function t_3:jsonEncode() --[[ line: 457 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -382,7 +382,7 @@ function t_3:jsonEncode() --[[ line: 457 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 471 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), t (ref)
 	local var98 = t_3.new()
 	

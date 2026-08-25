@@ -5,7 +5,7 @@ local httpService = game:GetService("HttpService")
 local getFFlagExpChatProtectedChatInternalAPIs = require(parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 local getTextAndTranslationModule = require(script.Parent.getTextAndTranslation)
 
-local function createUserMessage(p0) --[[ line: 74 ]]
+local function createUserMessage(p0)
 	return {
 		messageType = "user",
 		messageId = p0.messageId,
@@ -23,7 +23,7 @@ local function createUserMessage(p0) --[[ line: 74 ]]
 end
 
 return {
-	createSystemMessage = function(p1, p2) --[[ line: 39 ]]
+	createSystemMessage = function(p1, p2)
 		-- upvalues: httpService (ref)
 		return {
 			messageType = "system-roblox",
@@ -32,7 +32,7 @@ return {
 			timestamp = DateTime.now()
 		}
 	end,
-	createSystemMessageFromTextChatMessage = function(p3) --[[ line: 50 ]]
+	createSystemMessageFromTextChatMessage = function(p3)
 		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref)
 		return {
 			messageType = "system-roblox",
@@ -43,7 +43,7 @@ return {
 		}
 	end,
 	createUserMessage = createUserMessage,
-	createUserMessageFromTextChatMessage = function(p4, p5) --[[ line: 91 ]]
+	createUserMessageFromTextChatMessage = function(p4, p5)
 		-- upvalues: createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), getTextAndTranslationModule (ref), fFlagExpChatPresetBoltInMessageLayout (ref)
 		local textSource = p4.TextSource
 		

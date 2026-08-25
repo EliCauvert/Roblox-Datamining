@@ -6,9 +6,9 @@ local _ = require(script.Parent.Parent.types)
 local nowModule = require(timeToInteractiveTracker.Utils.now)
 local utilModule = require(timeToInteractiveTracker.Utils.Util)
 
-return function(p0, p1) --[[ line: 21 ]]
+return function(p0, p1)
 	-- upvalues: nowModule (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (ref), fFlagDebugTimeToInteractiveTrackerModule (ref), name (ref), utilModule (ref)
-	return function(p2, p3, p4) --[[ line: 22 ]]
+	return function(p2, p3, p4)
 		-- upvalues: nowModule (copy), p0 (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), p1 (ref), utilModule (copy)
 		local var6 = nowModule()
 		local var7 = p0(false)[p2]
@@ -19,7 +19,7 @@ return function(p0, p1) --[[ line: 21 ]]
 				timestamp = var6,
 				deltaMs = (var6 - var7.startTime) * 1000
 			}
-			p1(function(p5) --[[ line: 45 ]]
+			p1(function(p5)
 				-- upvalues: p2 (ref), utilModule (copy), p3 (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), t (ref)
 				local var9 = p5[p2]
 				

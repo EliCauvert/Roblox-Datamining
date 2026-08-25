@@ -10,7 +10,7 @@ local getThumbnailUrlModule = require(bulkPurchaseApp.Utils.getThumbnailUrl)
 local _ = require(bulkPurchaseApp.Store.Types)
 local _ = require(script.Parent.BulkPurchasePartialSuccess)
 
-local function _(p0, p1) --[[ line: 18 | named "createBulkPurchasePartialSuccessItem" ]]
+local function _(p0, p1)
 	-- upvalues: getThumbnailUrlModule (ref)
 	return {
 		id = p0.id,
@@ -20,7 +20,7 @@ local function _(p0, p1) --[[ line: 18 | named "createBulkPurchasePartialSuccess
 	}
 end
 
-local function selectBulkPurchasePartialSuccessState(p2) --[[ line: 30 ]]
+local function selectBulkPurchasePartialSuccessState(p2)
 	-- upvalues: getThumbnailUrlModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -52,14 +52,14 @@ local function selectBulkPurchasePartialSuccessState(p2) --[[ line: 30 ]]
 	}
 end
 
-return function() --[[ line: 54 | named "useBulkPurchasePartialSuccessProps" ]]
+return function()
 	-- upvalues: useSelector (ref), selectPurchaseResultsModule (ref), selectBulkPurchasePartialSuccessState (ref), useDispatch (ref), reactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
 	local var11 = useSelector(selectPurchaseResultsModule)
 	local var12 = useSelector(selectBulkPurchasePartialSuccessState)
 	local var13 = useDispatch()
 	
 	return {
-		onDismiss = reactModule.useCallback(function() --[[ line: 59 ]]
+		onDismiss = reactModule.useCallback(function()
 			-- upvalues: marketplaceService (copy), var11 (ref), var13 (ref), bulkPurchaseEndedModule (copy)
 			marketplaceService:signalPromptBulkPurchaseFinished(1, var11)
 			var13(bulkPurchaseEndedModule())

@@ -54,7 +54,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					entrypointType = function(p0) --[[ line: 77 ]]
+					entrypointType = function(p0)
 						return p0
 					end
 				}
@@ -86,7 +86,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					externalShareSource = function(p1) --[[ line: 117 ]]
+					externalShareSource = function(p1)
 						return p1
 					end
 				}
@@ -103,7 +103,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					triggerType = function(p2) --[[ line: 136 ]]
+					triggerType = function(p2)
 						return p2
 					end
 				}
@@ -115,7 +115,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					triggerType = function(p3) --[[ line: 148 ]]
+					triggerType = function(p3)
 						return p3
 					end
 				}
@@ -156,7 +156,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 201 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -165,7 +165,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowDescriptionEdited
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p4) --[[ line: 209 ]]
+					creationSessionId = function(p4)
 						return p4
 					end
 				}
@@ -176,7 +176,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 220 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -185,7 +185,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowGalleryItemSelected
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p5) --[[ line: 228 ]]
+					creationSessionId = function(p5)
 						return p5
 					end
 				}
@@ -196,7 +196,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 239 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
@@ -205,7 +205,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowGalleryNoCapturesAvailable
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p6) --[[ line: 247 ]]
+					creationSessionId = function(p6)
 						return p6
 					end
 				}
@@ -216,7 +216,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 258 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -225,7 +225,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p7) --[[ line: 266 ]]
+					creationSessionId = function(p7)
 						return p7
 					end
 				}
@@ -236,7 +236,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 277 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -245,7 +245,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p8) --[[ line: 285 ]]
+					creationSessionId = function(p8)
 						return p8
 					end
 				}
@@ -256,7 +256,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 296 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -265,7 +265,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p9) --[[ line: 304 ]]
+					creationSessionId = function(p9)
 						return p9
 					end
 				}
@@ -276,7 +276,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 315 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -285,10 +285,10 @@ return {
 					action = eventNamesModule.XExpEditingFlowMusicSelected
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p10) --[[ line: 323 ]]
+					creationSessionId = function(p10)
 						return p10
 					end,
-					musicAssetId = function(value) --[[ line: 326 ]]
+					musicAssetId = function(value)
 						return value
 					end
 				}
@@ -299,7 +299,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 337 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -308,10 +308,10 @@ return {
 					action = eventNamesModule.XExpEditingFlowNextButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p11) --[[ line: 345 ]]
+					creationSessionId = function(p11)
 						return p11
 					end,
-					editFlowState = function(p12) --[[ line: 348 ]]
+					editFlowState = function(p12)
 						return p12
 					end
 				}
@@ -322,7 +322,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 359 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -331,10 +331,10 @@ return {
 					action = eventNamesModule.XExpEditingFlowReturnButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p13) --[[ line: 367 ]]
+					creationSessionId = function(p13)
 						return p13
 					end,
-					editFlowState = function(p14) --[[ line: 370 ]]
+					editFlowState = function(p14)
 						return p14
 					end
 				}
@@ -345,7 +345,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 381 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -354,7 +354,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowTextOverlayBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p15) --[[ line: 389 ]]
+					creationSessionId = function(p15)
 						return p15
 					end
 				}
@@ -365,7 +365,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 400 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -374,7 +374,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowTextOverlayButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p16) --[[ line: 408 ]]
+					creationSessionId = function(p16)
 						return p16
 					end
 				}
@@ -385,7 +385,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 419 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -394,7 +394,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowTextOverlayDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p17) --[[ line: 427 ]]
+					creationSessionId = function(p17)
 						return p17
 					end
 				}
@@ -405,7 +405,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 438 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -414,7 +414,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowTrimBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p18) --[[ line: 446 ]]
+					creationSessionId = function(p18)
 						return p18
 					end
 				}
@@ -425,7 +425,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 457 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -434,7 +434,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowTrimButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p19) --[[ line: 465 ]]
+					creationSessionId = function(p19)
 						return p19
 					end
 				}
@@ -445,7 +445,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 476 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -454,7 +454,7 @@ return {
 					action = eventNamesModule.XExpEditingFlowTrimDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p20) --[[ line: 484 ]]
+					creationSessionId = function(p20)
 						return p20
 					end
 				}
@@ -465,7 +465,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 495 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -474,7 +474,7 @@ return {
 					action = eventNamesModule.XExpMomentCreationStarted
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p21) --[[ line: 503 ]]
+					creationSessionId = function(p21)
 						return p21
 					end
 				}
@@ -485,7 +485,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 514 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -494,7 +494,7 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowContinueToDescriptionButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p22) --[[ line: 522 ]]
+					creationSessionId = function(p22)
 						return p22
 					end
 				}
@@ -505,7 +505,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 533 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -514,7 +514,7 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowContinueToEditButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p23) --[[ line: 541 ]]
+					creationSessionId = function(p23)
 						return p23
 					end
 				}
@@ -525,7 +525,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 552 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
@@ -534,7 +534,7 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowExited
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p24) --[[ line: 560 ]]
+					creationSessionId = function(p24)
 						return p24
 					end
 				}
@@ -545,7 +545,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 571 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
@@ -554,7 +554,7 @@ return {
 					action = eventNamesModule.XExpMomentsEditingFlowPublished
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p25) --[[ line: 579 ]]
+					creationSessionId = function(p25)
 						return p25
 					end
 				}
@@ -565,7 +565,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 590 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
@@ -580,7 +580,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 604 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,

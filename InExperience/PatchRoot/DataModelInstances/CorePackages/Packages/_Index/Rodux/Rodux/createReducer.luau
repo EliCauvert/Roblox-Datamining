@@ -1,5 +1,5 @@
-﻿return function(p0, p1) --[[ line: 1 ]]
-	return function(p2, p3) --[[ line: 2 ]]
+﻿return function(p0, p1)
+	return function(p2, p3)
 		-- upvalues: p0 (ref), p1 (ref)
 		if p2 == nil then
 			p2 = p0

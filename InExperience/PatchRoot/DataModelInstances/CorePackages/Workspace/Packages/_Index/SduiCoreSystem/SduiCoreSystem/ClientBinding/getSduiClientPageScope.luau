@@ -1,7 +1,7 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.Signals)
 local tbl = setmetatable({}, { __mode = "v" })
 
-local function _(value, p0) --[[ line: 17 | named "ensureFieldSignal" ]]
+local function _(value, p0)
 	-- upvalues: signalsModule (ref)
 	local var2 = value[p0]
 	
@@ -15,7 +15,7 @@ local function _(value, p0) --[[ line: 17 | named "ensureFieldSignal" ]]
 	return t
 end
 
-return function(p1) --[[ line: 40 | named "getSduiClientPageScope" ]]
+return function(p1)
 	-- upvalues: tbl (ref), signalsModule (ref)
 	local var6 = tbl[p1]
 	
@@ -24,7 +24,7 @@ return function(p1) --[[ line: 40 | named "getSduiClientPageScope" ]]
 	end
 	local t = {}
 	local t_1 = {
-		get = function(p2) --[[ line: 49 ]]
+		get = function(p2)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var10
 			local var9 = t[p2]
@@ -39,7 +39,7 @@ return function(p1) --[[ line: 40 | named "getSduiClientPageScope" ]]
 			end
 			return var10.get(false)
 		end,
-		set = function(value, p3) --[[ line: 52 ]]
+		set = function(value, p3)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var15
 			local var14 = t[value]
@@ -54,7 +54,7 @@ return function(p1) --[[ line: 40 | named "getSduiClientPageScope" ]]
 			end
 			var15.set(p3)
 		end,
-		getSignal = function(value) --[[ line: 55 ]]
+		getSignal = function(value)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var20
 			local var19 = t[value]

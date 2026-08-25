@@ -12,7 +12,7 @@ local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local constantsModule = require(parent.Resources.Constants)
 local var8 = #Enum.SavedQualitySetting:GetEnumItems() - 1
 
-local function _(p0, p1, p2, p3, p4) --[[ line: 30 | named "mapInteger" ]]
+local function _(p0, p1, p2, p3, p4)
 	return math.clamp(math.floor(p3 + (p0 - p1) * (p4 - p3) / (p2 - p1)), p3, p4)
 end
 
@@ -23,7 +23,7 @@ graphicsQualityEntry.validateProps = t.strictInterface({
 	isMenuOpen = t.optional(t.boolean)
 })
 
-function graphicsQualityEntry.init(p5) --[[ line: 41 ]]
+function graphicsQualityEntry.init(p5)
 	-- upvalues: userGameSettingsService (ref)
 	local var10 = userGameSettingsService.SavedQualityLevel == Enum.SavedQualitySetting.Automatic
 	p5:setState({
@@ -31,7 +31,7 @@ function graphicsQualityEntry.init(p5) --[[ line: 41 ]]
 		automatic = var10
 	})
 	
-	function p5.onQualityChanged() --[[ line: 48 ]]
+	function p5.onQualityChanged()
 		-- upvalues: userGameSettingsService (copy), p5 (ref)
 		local savedQualityLevel = userGameSettingsService.SavedQualityLevel
 		p5:setState({
@@ -48,13 +48,13 @@ function graphicsQualityEntry.init(p5) --[[ line: 41 ]]
 	p5:setManualQualityLevel(p5.state.quality)
 end
 
-function graphicsQualityEntry.setAutomaticQualityLevel(_) --[[ line: 65 ]]
+function graphicsQualityEntry.setAutomaticQualityLevel(_)
 	-- upvalues: userGameSettingsService (ref), rendering (ref)
 	userGameSettingsService.SavedQualityLevel = Enum.SavedQualitySetting.Automatic
 	rendering.QualityLevel = 0
 end
 
-function graphicsQualityEntry.setManualQualityLevel(_, p6) --[[ line: 70 ]]
+function graphicsQualityEntry.setManualQualityLevel(_, p6)
 	-- upvalues: var8 (ref), rendering (ref), userGameSettingsService (ref)
 	local var11 = rendering:GetMaxQualityLevel() - 1
 	local clampedValue = math.clamp(math.floor(1 + (p6 - 1) * (var11 - 1) / (var8 - 1)), 1, var11)
@@ -64,7 +64,7 @@ function graphicsQualityEntry.setManualQualityLevel(_, p6) --[[ line: 70 ]]
 	return nil
 end
 
-function graphicsQualityEntry.render(p7) --[[ line: 85 ]]
+function graphicsQualityEntry.render(p7)
 	-- upvalues: roact (ref), toggleEntryModule (ref), sendAnalyticsModule (ref), constantsModule (ref), sliderEntryModule (ref), externalEventConnectionModule (ref), savedQualityLevelPropertyChangedSignal (ref)
 	return roact.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -76,7 +76,7 @@ function graphicsQualityEntry.render(p7) --[[ line: 85 ]]
 			LayoutOrder = 1,
 			labelKey = "CoreScripts.InGameMenu.GameSettings.AutoGraphicsQuality",
 			checked = p7.state.automatic,
-			onToggled = function() --[[ line: 98 ]]
+			onToggled = function()
 				-- upvalues: p7 (ref), sendAnalyticsModule (copy), constantsModule (copy)
 				if p7.state.automatic then
 					p7:setManualQualityLevel(p7.state.quality)
@@ -94,7 +94,7 @@ function graphicsQualityEntry.render(p7) --[[ line: 85 ]]
 			stepInterval = 1,
 			value = p7.state.quality,
 			disabled = p7.state.automatic,
-			valueChanged = function(p8) --[[ line: 115 ]]
+			valueChanged = function(p8)
 				-- upvalues: p7 (ref), sendAnalyticsModule (copy), constantsModule (copy)
 				p7:setManualQualityLevel(p8)
 				sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)

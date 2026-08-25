@@ -10,7 +10,7 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0) --[[ line: 26 | named "IDVErrorScreen" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), buttonType (ref), imageSetLabel (ref), iconSize (ref), images (ref), styledTextLabel (ref)
 	local errorTitle = p0.errorTitle
 	local errorDescription = p0.errorDescription
@@ -20,10 +20,10 @@ return function(p0) --[[ line: 26 | named "IDVErrorScreen" ]]
 	return reactModule.createElement(partialPageModal, {
 		bottomPadding = 20,
 		title = errorTitle,
-		screenSize = useSelector(function(p1) --[[ line: 32 ]]
+		screenSize = useSelector(function(p1)
 			return p1.ScreenSize
 		end),
-		onCloseClicked = function() --[[ line: 39 ]]
+		onCloseClicked = function()
 			-- upvalues: onClose (ref)
 			onClose()
 		end,
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 26 | named "IDVErrorScreen" ]]
 					buttonType = buttonType.PrimarySystem,
 					props = {
 						isDisabled = false,
-						onActivated = function() --[[ line: 51 ]]
+						onActivated = function()
 							-- upvalues: onClose (ref)
 							onClose()
 						end,

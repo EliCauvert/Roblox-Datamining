@@ -9,7 +9,7 @@ local useGetTFActionsEnumLegacyModule = require(script.Parent.useGetTFActionsEnu
 local fFlagTrustedFriendsLinkVPCModule = require(trustedContacts.Flags.FFlagTrustedFriendsLinkVPC)
 local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCheck
 
-return function(p0, _, p1, p2) --[[ line: 27 | named "useModalButtonActions" ]]
+return function(p0, _, p1, p2)
 	-- upvalues: fFlagTFWithActionsCheck (ref), useGetTFActionsEnumLegacyModule (ref), useGetTFActionsCallbacksModule (ref), useLocalization (ref), reactModule (ref), TFActionsEnumModule (ref), foundationModule (ref), fFlagTrustedFriendsLinkVPCModule (ref)
 	local var7 = if fFlagTFWithActionsCheck then p1 else useGetTFActionsEnumLegacyModule(p0, {
 		modalVariant = p1,
@@ -25,7 +25,7 @@ return function(p0, _, p1, p2) --[[ line: 27 | named "useModalButtonActions" ]]
 		accept = "CommonUI.Controls.Action.Accept"
 	})
 	
-	return if var7 then reactModule.useMemo(function() --[[ line: 52 ]]
+	return if var7 then reactModule.useMemo(function()
 		-- upvalues: var9 (ref), var8 (ref), TFActionsEnumModule (copy), fFlagTFWithActionsCheck (copy), foundationModule (copy), fFlagTrustedFriendsLinkVPCModule (copy)
 		local t = {
 			icon = nil,
@@ -38,7 +38,7 @@ return function(p0, _, p1, p2) --[[ line: 27 | named "useModalButtonActions" ]]
 			[TFActionsEnumModule.Loading] = if fFlagTFWithActionsCheck then nil else {
 				{
 					isLoading = true,
-					onActivated = function() --[[ line: 66 ]] end
+					onActivated = function() end
 				},
 				t
 			},
@@ -99,7 +99,7 @@ return function(p0, _, p1, p2) --[[ line: 27 | named "useModalButtonActions" ]]
 				{
 					isDisabled = true,
 					text = var9.accept,
-					onActivated = function() --[[ line: 121 ]] end
+					onActivated = function() end
 				},
 				t
 			},
@@ -107,7 +107,7 @@ return function(p0, _, p1, p2) --[[ line: 27 | named "useModalButtonActions" ]]
 				{
 					isDisabled = true,
 					text = var9.add,
-					onActivated = function() --[[ line: 129 ]] end
+					onActivated = function() end
 				},
 				t
 			},
@@ -115,7 +115,7 @@ return function(p0, _, p1, p2) --[[ line: 27 | named "useModalButtonActions" ]]
 				{
 					isDisabled = true,
 					text = var9.accept,
-					onActivated = function() --[[ line: 137 ]] end
+					onActivated = function() end
 				},
 				t
 			}

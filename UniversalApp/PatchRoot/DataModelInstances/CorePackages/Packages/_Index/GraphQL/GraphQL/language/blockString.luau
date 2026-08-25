@@ -5,7 +5,7 @@ local var1 = nil
 local _ = nil
 local _ = nil
 
-local function dedentBlockStringValue(p0) --[[ line: 22 ]]
+local function dedentBlockStringValue(p0)
 	-- upvalues: string (ref), var1 (write), array (ref)
 	local var3 = string.split(p0, { "\r\n", "\n", "\r" })
 	local var4 = var1(p0)
@@ -26,7 +26,7 @@ local function dedentBlockStringValue(p0) --[[ line: 22 ]]
 	return array.join(array.slice(var3, var5 + 1, var3Count + 1), "\n")
 end
 
-function isBlank(p1) --[[ line: 51 ]]
+function isBlank(p1)
 	for i = 1, #p1 do
 		local substring = string.sub(p1, i, i)
 		
@@ -39,7 +39,7 @@ function isBlank(p1) --[[ line: 51 ]]
 end
 
 return {
-	getBlockStringIndentation = function(p2) --[[ line: 62 ]]
+	getBlockStringIndentation = function(p2)
 		-- upvalues: string (ref)
 		local var8 = true
 		local var9 = true
@@ -68,7 +68,7 @@ return {
 		return var11 or 0
 	end,
 	dedentBlockStringValue = dedentBlockStringValue,
-	printBlockString = function(p3, p4, p5) --[[ line: 102 ]]
+	printBlockString = function(p3, p4, p5)
 		p4 = p4 or ""
 		local var16 = if p5 == nil then false else p5
 		local var17 = string.find(p3, "\n") == nil

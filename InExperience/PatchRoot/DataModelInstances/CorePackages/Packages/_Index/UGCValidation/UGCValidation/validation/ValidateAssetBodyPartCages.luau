@@ -12,7 +12,7 @@ local assetCalculatorModule = require(util.AssetCalculator)
 local getFStringUGCValidationMaxCageDistanceModule = require(parent.flags.GetFStringUGCValidationMaxCageDistance)
 local t = {}
 
-local function validateInternal(p0, p1) --[[ line: 26 ]]
+local function validateInternal(p0, p1)
 	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), getExpectedPartSizeModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFStringUGCValidationMaxCageDistanceModule (ref)
 	local _ = nil
 	local _ = nil
@@ -35,7 +35,7 @@ local function validateInternal(p0, p1) --[[ line: 26 ]]
 		return false, var17
 	end
 	local var20 = getExpectedPartSizeModule(p0, p1) / getExpectedPartSizeModule(p0, p1, true)
-	local var21, var22 = pcallDeferredModule(function() --[[ line: 50 ]]
+	local var21, var22 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), var19 (write), var14 (write), wrapTarget (ref), var20 (ref)
 		return UGCValidationService:CalculateBodyPartMaxCageDistance(var19.editableMesh, var14.editableMesh, wrapTarget.CageOrigin, var20)
 	end, p1)
@@ -61,7 +61,7 @@ local function validateInternal(p0, p1) --[[ line: 26 ]]
 	end
 end
 
-function t.validateSingleBodyPart(p2, p3) --[[ line: 93 ]]
+function t.validateSingleBodyPart(p2, p3)
 	-- upvalues: constantsModule (ref), failureReasonsAccumulatorModule (ref), validateInternal (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local assetTypeEnum = constantsModule.ASSET_TYPE_INFO[p3.assetTypeEnum]
@@ -80,7 +80,7 @@ function t.validateSingleBodyPart(p2, p3) --[[ line: 93 ]]
 	return var25:getFinalResults()
 end
 
-function t.validateFullBody(p4, p5) --[[ line: 116 ]]
+function t.validateFullBody(p4, p5)
 	-- upvalues: assetCalculatorModule (ref), getMeshInfoModule (ref), constantsModule (ref), getExpectedPartSizeModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFStringUGCValidationMaxCageDistanceModule (ref)
 	local currentTime = tick()
 	local var28 = assetCalculatorModule.calculateAllTransformsForFullBody(p4)
@@ -121,7 +121,7 @@ function t.validateFullBody(p4, p5) --[[ line: 116 ]]
 		end
 		return false, var37
 	end
-	local var30, var31, var32 = pcallDeferredModule(function() --[[ line: 158 ]]
+	local var30, var31, var32 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), t (ref)
 		return UGCValidationService:CalculateBodyMaxCageDistance(t)
 	end, p5)

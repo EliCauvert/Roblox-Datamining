@@ -12,14 +12,14 @@ local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesSt
 local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 
-local function _(p0) --[[ line: 18 | named "getIsChatInputBarVisible" ]]
+local function _(p0)
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), selectSelectedTabNameModule (ref)
 	local isChatInputBarEnabled = p0.ChatVisibility.isChatInputBarEnabled
 	
 	return if getFFlagTextChatEnableUniverseChatTabs() and selectSelectedTabNameModule(p0) == "RBXGlobal" and isChatInputBarEnabled._propertyEnabled ~= nil then isChatInputBarEnabled._topBarVisibility and (isChatInputBarEnabled._coreGuiEnabled and not isChatInputBarEnabled._devTextBoxEnabled) else isChatInputBarEnabled.value
 end
 
-local _ = function(p1) --[[ line: 33 | named "getSelectedTabType" ]]
+local _ = function(p1)
 	local channelTabs = p1.ChannelTabs
 	
 	if channelTabs == nil or channelTabs.allChannelTabs == nil or channelTabs.selectedTabName == nil then
@@ -30,7 +30,7 @@ local _ = function(p1) --[[ line: 33 | named "getSelectedTabType" ]]
 	return if selectedTabName then selectedTabName.Type else nil
 end
 
-return function(p2, _) --[[ line: 42 ]]
+return function(p2, _)
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), fFlagExpChatUseMessagesStore (ref), selectSelectedTabNameModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref)
 	local var7 = false
 	

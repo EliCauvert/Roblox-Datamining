@@ -31,12 +31,12 @@ local getNamedType = definitionModule.getNamedType
 local t = nil
 local collectReferencedTypes = nil
 
-local function isSchema(p0) --[[ line: 74 ]]
+local function isSchema(p0)
 	-- upvalues: instanceOfModule (ref), t (write)
 	return instanceOfModule(p0, t)
 end
 
-local function assertSchema(p1) --[[ line: 78 ]]
+local function assertSchema(p1)
 	-- upvalues: instanceOfModule (ref), t (write), error (ref), inspect (ref)
 	if not instanceOfModule(p1, t) then
 		error(error.new(("Expected %s to be a GraphQL schema."):format(inspect(p1))))
@@ -47,7 +47,7 @@ end
 t = {}
 t.__index = t
 
-function t.new(p2) --[[ line: 200 ]]
+function t.new(p2)
 	-- upvalues: t (write), devAssert (ref), isObjectLike (ref), array (ref), inspect (ref), toObjMap (ref), specifiedDirectives (ref), set (ref), collectReferencedTypes (write), isNotNillish (ref), isDirective (ref), schema (ref), map (ref), isNillish (ref), error (ref), isInterfaceType (ref), isObjectType (ref)
 	local tbl = setmetatable({}, t)
 	tbl.__validationErrors = nil
@@ -138,36 +138,36 @@ function t.new(p2) --[[ line: 200 ]]
 	return tbl
 end
 
-function t:getQueryType() --[[ line: 349 ]]
+function t:getQueryType()
 	return self._queryType
 end
 
-function t:getMutationType() --[[ line: 353 ]]
+function t:getMutationType()
 	return self._mutationType
 end
 
-function t:getSubscriptionType() --[[ line: 357 ]]
+function t:getSubscriptionType()
 	return self._subscriptionType
 end
 
-function t:getTypeMap() --[[ line: 361 ]]
+function t:getTypeMap()
 	return self._typeMap
 end
 
-function t:getType(p3) --[[ line: 365 ]]
+function t:getType(p3)
 	return self:getTypeMap()[p3]
 end
 
-function t:getPossibleTypes(p4) --[[ line: 369 ]]
+function t:getPossibleTypes(p4)
 	-- upvalues: isUnionType (ref)
 	return if isUnionType(p4) then p4:getTypes() else self:getImplementations(p4).objects
 end
 
-function t:getImplementations(p5) --[[ line: 378 ]]
+function t:getImplementations(p5)
 	return self._implementationsMap:get(p5.name) or { objects = {}, interfaces = {} }
 end
 
-function t:isSubType(p6, p7) --[[ line: 388 ]]
+function t:isSubType(p6, p7)
 	-- upvalues: isUnionType (ref)
 	local name = self._subTypeMap[p6.name]
 	
@@ -193,19 +193,19 @@ function t:isSubType(p6, p7) --[[ line: 388 ]]
 	return name[p7.name] ~= nil
 end
 
-function t:getDirectives() --[[ line: 417 ]]
+function t:getDirectives()
 	return self._directives
 end
 
-function t:getDirective(p8) --[[ line: 421 ]]
+function t:getDirective(p8)
 	-- upvalues: array (ref)
-	return array.find(self:getDirectives(), function(p9) --[[ line: 422 ]]
+	return array.find(self:getDirectives(), function(p9)
 		-- upvalues: p8 (ref)
 		return p9.name == p8
 	end)
 end
 
-function t:toConfig() --[[ line: 427 ]]
+function t:toConfig()
 	-- upvalues: array (ref)
 	return {
 		description = self.description,
@@ -221,11 +221,11 @@ function t:toConfig() --[[ line: 427 ]]
 	}
 end
 
-function t:__tostring() --[[ line: 443 ]]
+function t:__tostring()
 	return "GraphQLSchema"
 end
 
-collectReferencedTypes = function(p10, p11) --[[ line: 485 | named "collectReferencedTypes" ]]
+collectReferencedTypes = function(p10, p11)
 	-- upvalues: getNamedType (ref), isUnionType (ref), collectReferencedTypes (write), isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref)
 	local var15 = getNamedType(p10)
 	

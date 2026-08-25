@@ -11,7 +11,7 @@ local t = {
 }
 
 return {
-	publishSurveyEvent = function(p0) --[[ line: 30 ]]
+	publishSurveyEvent = function(p0)
 		-- upvalues: messageBus (ref), t (ref)
 		messageBus.publish(t, { eventType = p0 })
 	end,

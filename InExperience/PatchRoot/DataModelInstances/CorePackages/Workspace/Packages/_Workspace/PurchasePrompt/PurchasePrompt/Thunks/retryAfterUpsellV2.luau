@@ -33,9 +33,9 @@ local upsellAccountBalanceRetryAttemps = game:DefineFastInt("UpsellAccountBalanc
 local upsellAccountBalanceRetryIntervalSec = game:DefineFastInt("UpsellAccountBalanceRetryIntervalSec", 1)
 local list = { analyticsModule, networkModule, externalSettingsModule }
 
-local function restartUpsell(p0, _, p1, p2, p3) --[[ line: 52 ]]
+local function restartUpsell(p0, _, p1, p2, p3)
 	-- upvalues: getRobuxUpsellSuggestionsModule (ref), hasPendingRequestModule (ref), promptNativeUpsellSuggestionsModule (ref), sendCounterModule (ref), counterModule (ref), setPromptStateModule (ref), promptStateModule (ref)
-	return getRobuxUpsellSuggestionsModule(p1, p2, p3):andThen(function(p4) --[[ line: 55 ]]
+	return getRobuxUpsellSuggestionsModule(p1, p2, p3):andThen(function(p4)
 		-- upvalues: hasPendingRequestModule (copy), p0 (ref), promptNativeUpsellSuggestionsModule (copy), sendCounterModule (copy), counterModule (copy)
 		if hasPendingRequestModule(p0:getState()) then
 			p0:dispatch(promptNativeUpsellSuggestionsModule(p4.products, 1, p4.virtualItemBadgeType))
@@ -43,7 +43,7 @@ local function restartUpsell(p0, _, p1, p2, p3) --[[ line: 52 ]]
 			
 			return
 		end
-	end, function() --[[ line: 65 ]]
+	end, function()
 		-- upvalues: hasPendingRequestModule (copy), p0 (ref), setPromptStateModule (copy), promptStateModule (copy), sendCounterModule (copy), counterModule (copy)
 		if hasPendingRequestModule(p0:getState()) then
 			p0:dispatch(setPromptStateModule(promptStateModule.LargeRobuxUpsell))
@@ -54,11 +54,11 @@ local function restartUpsell(p0, _, p1, p2, p3) --[[ line: 52 ]]
 	end)
 end
 
-local function retryAfterUpsell(p5) --[[ line: 76 ]]
+local function retryAfterUpsell(p5)
 	-- upvalues: upsellAccountBalanceRetryAttemps (ref), thunkModule (ref), list (ref), analyticsModule (ref), networkModule (ref), externalSettingsModule (ref), getUpsellFlowModule (ref), requestTypeModule (ref), promptStateModule (ref), fFlagAXMISWithBlackbird (ref), purchaseCompleteRecievedModule (ref), completeRequestModule (ref), purchaseFlowModule (ref), setPromptStateModule (ref), getBalanceInfoModule (ref), getPlayerPriceModule (ref), hasPendingRequestModule (ref), getPaymentPlatformModule (ref), balanceInfoRecievedModule (ref), upsellFlowModule (ref), restartUpsell (ref), errorOccurredModule (ref), purchaseErrorModule (ref), sendCounterModule (ref), counterModule (ref), addUnifiedPurchaseRobuxUpsellCompletedTelemetry (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), purchaseItemModule (ref), upsellAccountBalanceRetryIntervalSec (ref), retryAfterUpsell (ref)
 	p5 = p5 or upsellAccountBalanceRetryAttemps
 	
-	return thunkModule.new(script.Name, list, function(p6, p7) --[[ line: 79 ]]
+	return thunkModule.new(script.Name, list, function(p6, p7)
 		-- upvalues: analyticsModule (copy), networkModule (copy), externalSettingsModule (copy), getUpsellFlowModule (copy), requestTypeModule (copy), promptStateModule (copy), fFlagAXMISWithBlackbird (copy), purchaseCompleteRecievedModule (copy), completeRequestModule (copy), purchaseFlowModule (copy), setPromptStateModule (copy), getBalanceInfoModule (copy), getPlayerPriceModule (copy), hasPendingRequestModule (copy), getPaymentPlatformModule (copy), balanceInfoRecievedModule (copy), upsellFlowModule (copy), restartUpsell (copy), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy), addUnifiedPurchaseRobuxUpsellCompletedTelemetry (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), purchaseItemModule (copy), p5 (ref), upsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy)
 		local var34 = p7[analyticsModule]
 		local var35 = p7[networkModule]
@@ -82,7 +82,7 @@ local function retryAfterUpsell(p5) --[[ line: 76 ]]
 		elseif purchaseFlow == purchaseFlowModule.RobuxUpsellV2 or purchaseFlow == purchaseFlowModule.LargeRobuxUpsell then
 			p6:dispatch(setPromptStateModule(promptStateModule.PollingBalance))
 		end
-		return getBalanceInfoModule(var35, var36, false):andThen(function(p9) --[[ line: 113 ]]
+		return getBalanceInfoModule(var35, var36, false):andThen(function(p9)
 			-- upvalues: p6 (ref), getPlayerPriceModule (copy), hasPendingRequestModule (copy), getPaymentPlatformModule (copy), var36 (ref), balanceInfoRecievedModule (copy), purchaseFlow (ref), purchaseFlowModule (copy), var38 (ref), upsellFlowModule (copy), restartUpsell (copy), var35 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy), addUnifiedPurchaseRobuxUpsellCompletedTelemetry (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), purchaseItemModule (copy), p5 (copy), upsellAccountBalanceRetryIntervalSec (copy), retryAfterUpsell (copy), var34 (ref)
 			local state = p6:getState()
 			local var40 = getPlayerPriceModule(state.productInfo, state.accountInfo.membershipType == 4)
@@ -95,7 +95,7 @@ local function retryAfterUpsell(p5) --[[ line: 76 ]]
 			
 			if balance == robux then
 				if p5 > 0 then
-					delay(upsellAccountBalanceRetryIntervalSec, function() --[[ line: 154 ]]
+					delay(upsellAccountBalanceRetryIntervalSec, function()
 						-- upvalues: p6 (copy), retryAfterUpsell (copy), p5 (copy)
 						p6:dispatch(retryAfterUpsell(p5 - 1))
 					end)
@@ -127,7 +127,7 @@ local function retryAfterUpsell(p5) --[[ line: 76 ]]
 			end
 			p6:dispatch(errorOccurredModule(purchaseErrorModule.InvalidFunds))
 			p6:dispatch(sendCounterModule(counterModule.UpsellFailedNotEnoughRobux))
-		end):catch(function(p8) --[[ line: 180 ]]
+		end):catch(function(p8)
 			-- upvalues: p6 (ref), errorOccurredModule (copy)
 			p6:dispatch(errorOccurredModule(p8))
 		end)

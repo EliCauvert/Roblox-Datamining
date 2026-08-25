@@ -7,8 +7,8 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local useDefaultFocusBehavior = require(parent.ReactFocusNavigation).useDefaultFocusBehavior
 
-local function _(p0, p1) --[[ line: 13 | named "mergeRefs" ]]
-	return function(p2) --[[ line: 14 ]]
+local function _(p0, p1)
+	return function(p2)
 		-- upvalues: p0 (ref), p1 (ref)
 		if type(p0) == "function" then
 			p0(p2)
@@ -25,7 +25,7 @@ local function _(p0, p1) --[[ line: 13 | named "mergeRefs" ]]
 	end
 end
 
-return function(p3, p4) --[[ line: 31 | named "useFocusNavigationRefs" ]]
+return function(p3, p4)
 	-- upvalues: useDefaultFocusBehavior (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactModule (ref)
 	local var3, var4 = useDefaultFocusBehavior()
 	local var5 = useFocusRoot({
@@ -35,9 +35,9 @@ return function(p3, p4) --[[ line: 31 | named "useFocusNavigationRefs" ]]
 			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p3) }
 		}
 	})
-	local var6 = reactModule.useMemo(function() --[[ line: 44 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref), var4 (ref)
-		return function(p5) --[[ line: 14 ]]
+		return function(p5)
 			-- upvalues: var5 (ref), var4 (ref)
 			if type(var5) == "function" then
 				var5(p5)
@@ -54,9 +54,9 @@ return function(p3, p4) --[[ line: 31 | named "useFocusNavigationRefs" ]]
 		end
 	end, { var5, var4 })
 	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useMemo(function() --[[ line: 50 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), var3 (ref)
-		return function(p6) --[[ line: 14 ]]
+		return function(p6)
 			-- upvalues: var7 (ref), var3 (ref)
 			if type(var7) == "function" then
 				var7(p6)
@@ -73,7 +73,7 @@ return function(p3, p4) --[[ line: 31 | named "useFocusNavigationRefs" ]]
 		end
 	end, { var3 })
 	local var9 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var9 (ref), p4 (ref)
 		local current = var7.current
 		

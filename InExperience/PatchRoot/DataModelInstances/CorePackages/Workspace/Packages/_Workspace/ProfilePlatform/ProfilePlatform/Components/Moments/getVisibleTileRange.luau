@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3, p4, p5) --[[ line: 12 | named "getVisibleTileRange" ]]
+﻿return function(p0, p1, p2, p3, p4, p5)
 	if p5 <= 0 or p1 <= 0 then
 		return 1, 0
 	end

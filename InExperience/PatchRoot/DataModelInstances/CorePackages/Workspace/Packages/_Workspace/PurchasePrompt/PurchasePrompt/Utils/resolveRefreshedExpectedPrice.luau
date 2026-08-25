@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3) --[[ line: 1 | named "resolveRefreshedExpectedPrice" ]]
+﻿return function(p0, p1, p2, p3)
 	local price = nil
 	
 	if p2 and p2 ~= "" then

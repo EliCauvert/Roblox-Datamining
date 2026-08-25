@@ -13,7 +13,7 @@ name.defaultProps = {
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.getMessage(_, p0, p1) --[[ line: 36 ]]
+function name.getMessage(_, p0, p1)
 	-- upvalues: u13ConfirmTypeModule (ref)
 	if p1 == u13ConfirmTypeModule.U13PaymentModal then
 		return p0.u13PaymentModal
@@ -26,7 +26,7 @@ function name.getMessage(_, p0, p1) --[[ line: 36 ]]
 	end
 end
 
-function name.render(p2) --[[ line: 48 ]]
+function name.render(p2)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -44,14 +44,14 @@ function name.render(p2) --[[ line: 48 ]]
 			confirm = { key = "IAPExperience.U13Confirm.Action.Confirm" },
 			cancel = { key = "IAPExperience.U13Confirm.Action.Cancel" }
 		},
-		render = function(p3) --[[ line: 73 ]]
+		render = function(p3)
 			-- upvalues: p2 (ref)
 			return p2:renderAlert(p3)
 		end
 	})
 end
 
-function name.renderAlert(p4, p5) --[[ line: 79 ]]
+function name.renderAlert(p4, p5)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref)
 	local props = p4.props
 	

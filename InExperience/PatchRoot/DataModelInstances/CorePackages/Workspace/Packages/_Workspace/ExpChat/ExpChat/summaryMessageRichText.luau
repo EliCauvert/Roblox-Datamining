@@ -7,7 +7,7 @@ local configModule = require(expChat.Config)
 local fStringExpChatSummaryPrefixTextModule = require(expChat.Flags.FStringExpChatSummaryPrefixText)
 local fFlagExpChatPolishSummaryMessageUIModule = require(expChat.Flags.FFlagExpChatPolishSummaryMessageUI)
 
-local function _(value) --[[ line: 15 | named "ceilToEven" ]]
+local function _(value)
 	local ceiled = math.ceil(value)
 	
 	if ceiled % 2 == 1 then
@@ -16,11 +16,11 @@ local function _(value) --[[ line: 15 | named "ceilToEven" ]]
 	return math.max(0, ceiled)
 end
 
-local _ = function(p0) --[[ line: 23 | named "calculateSummaryTextSize" ]]
+local _ = function(p0)
 	return math.max(0, p0 - 2)
 end
 
-local _ = function() --[[ line: 27 | named "getSummaryTextSizeFromConfiguration" ]]
+local _ = function()
 	-- upvalues: textChatService (ref), configModule (ref)
 	local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 	
@@ -28,7 +28,7 @@ local _ = function() --[[ line: 27 | named "getSummaryTextSizeFromConfiguration"
 end
 
 return {
-	getSummaryIconPrefix = function(p1) --[[ line: 35 ]]
+	getSummaryIconPrefix = function(p1)
 		-- upvalues: fFlagExpChatPolishSummaryMessageUIModule (ref), textChatService (ref), configModule (ref), foundationModule (ref), fStringExpChatSummaryPrefixTextModule (ref)
 		local maxValue
 		if not fFlagExpChatPolishSummaryMessageUIModule then
@@ -46,7 +46,7 @@ return {
 		end
 		return `<font weight='600' size="{math.max(0, ceiled)}" family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>{foundationModule.Enums.IconName.Nebula}</font>{fStringExpChatSummaryPrefixTextModule}`
 	end,
-	wrapInSummaryMutedStyle = function(p2, p3, p4) --[[ line: 46 ]]
+	wrapInSummaryMutedStyle = function(p2, p3, p4)
 		-- upvalues: fFlagExpChatPolishSummaryMessageUIModule (ref), UIBloxModule (ref), textChatService (ref), configModule (ref)
 		if not fFlagExpChatPolishSummaryMessageUIModule then
 			return `<font color='#{p3 or "BCBEC8"}' size="{configModule.ChatWindowTextSize - 2}">{p2}</font>`

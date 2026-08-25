@@ -1,6 +1,6 @@
 ﻿local commandsModule = require(script.Parent.Commands)
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: commandsModule (ref)
 	for i, v in commandsModule do
 		for i_1, v_1 in v.aliases do

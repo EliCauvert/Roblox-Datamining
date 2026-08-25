@@ -5,7 +5,7 @@ local runService = game:GetService("RunService")
 local contentProviderService = game:GetService("ContentProvider")
 local userInputService = game:GetService("UserInputService")
 local var5 = nil
-pcall(function() --[[ line: 10 ]]
+pcall(function()
 	-- upvalues: var5 (write)
 	var5 = game:GetService("AppLifecycleObserverService")
 end)
@@ -22,12 +22,12 @@ local fFlagProfileMomentsVideoPlaybackFix = sharedFlagsModule.FFlagProfileMoment
 local fFlagMomentsCarouselVideoHandoff = sharedFlagsModule.FFlagMomentsCarouselVideoHandoff
 local fFlagProfileMomentsMuteCarouselAudioModule = require(profilePlatform.Flags.FFlagProfileMomentsMuteCarouselAudio)
 
-local function _() --[[ line: 51 | named "shouldPauseWhenAppHidden" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	return userInputService:GetDeviceType() ~= Enum.DeviceType.Desktop
 end
 
-local function defaultCreateCoordinator(p0, p1) --[[ line: 55 ]]
+local function defaultCreateCoordinator(p0, p1)
 	-- upvalues: enableAudioPlaybackInApp (ref), coreGuiService (ref), fFlagProfileMomentsVideoPlaybackFix (ref), runService (ref), contentProviderService (ref), media (ref), fFlagMomentsCarouselVideoHandoff (ref)
 	enableAudioPlaybackInApp()
 	local profileMomentsAudioOutput = Instance.new("AudioDeviceOutput")
@@ -47,7 +47,7 @@ local function defaultCreateCoordinator(p0, p1) --[[ line: 55 ]]
 	
 	return {
 		provider = var14,
-		dispose = function() --[[ line: 91 ]]
+		dispose = function()
 			-- upvalues: fFlagMomentsCarouselVideoHandoff (copy), var15 (write), var14 (ref), profileMomentsAudioOutput (ref), profileMomentsMediaHost (ref)
 			if fFlagMomentsCarouselVideoHandoff then
 				if var15 then return end
@@ -63,67 +63,67 @@ local function defaultCreateCoordinator(p0, p1) --[[ line: 55 ]]
 	}
 end
 
-return function(p2) --[[ line: 118 | named "MomentsCarouselMediaProvider" ]]
+return function(p2)
 	-- upvalues: fFlagMomentsAutoplayAmpPolicy (ref), useAppPolicy (ref), reactModule (ref), signalsModule (ref), userInputService (ref), var5 (write), toMediaItemModule (ref), defaultCreateCoordinator (ref), fFlagProfileMomentsMuteCarouselAudioModule (ref), fFlagMomentsCarouselVideoHandoff (ref), media (ref)
 	local activeIndex = p2.activeIndex
 	local playbackActive = p2.playbackActive
-	local var16 = if fFlagMomentsAutoplayAmpPolicy then useAppPolicy(function(p3) --[[ line: 122 ]]
+	local var16 = if fFlagMomentsAutoplayAmpPolicy then useAppPolicy(function(p3)
 		return p3.getMomentsCanAutoPlay()
 	end) else nil
-	local var17 = reactModule.useMemo(function() --[[ line: 129 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), activeIndex (ref)
 		local var27, var28 = signalsModule.createSignal(activeIndex)
 		
 		return { get = var27, set = var28 }
 	end, {})
-	local var18 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), playbackActive (ref)
 		local var29, var30 = signalsModule.createSignal(playbackActive)
 		
 		return { get = var29, set = var30 }
 	end, {})
-	local var19 = if fFlagMomentsAutoplayAmpPolicy then reactModule.useMemo(function() --[[ line: 140 ]]
+	local var19 = if fFlagMomentsAutoplayAmpPolicy then reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var16 (ref)
 		local var31, var32 = signalsModule.createSignal(var16)
 		
 		return { get = var31, set = var32 }
 	end, {}) else nil
-	local var20 = reactModule.useMemo(function() --[[ line: 147 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		local var33, var34 = signalsModule.createSignal(true)
 		
 		return { get = var33, set = var34 }
 	end, {})
-	reactModule.useEffect(function() --[[ line: 152 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), activeIndex (ref)
 		var17.set(activeIndex)
 	end, { activeIndex, var17 })
-	reactModule.useEffect(function() --[[ line: 156 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), playbackActive (ref)
 		var18.set(playbackActive)
 	end, { playbackActive, var18 })
 	
 	if fFlagMomentsAutoplayAmpPolicy then
-		reactModule.useEffect(function() --[[ line: 161 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var19 (ref), var16 (ref)
 			var19.set(var16)
 		end, { var16, var19 })
 	end
-	reactModule.useEffect(function() --[[ line: 166 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var5 (copy), var20 (ref)
 		if userInputService:GetDeviceType() ~= Enum.DeviceType.Desktop and var5 ~= nil then
 			local list = {
-				var5.OnHide:Connect(function() --[[ line: 170 | named "onHidden" ]]
+				var5.OnHide:Connect(function()
 					-- upvalues: var20 (copy)
 					var20.set(false)
 				end),
-				var5.OnUnhide:Connect(function() --[[ line: 173 | named "onShown" ]]
+				var5.OnUnhide:Connect(function()
 					-- upvalues: var20 (copy)
 					var20.set(true)
 				end)
 			}
 			
-			return function() --[[ line: 180 ]]
+			return function()
 				-- upvalues: list (ref)
 				for i, v in list do
 					v:Disconnect()
@@ -131,7 +131,7 @@ return function(p2) --[[ line: 118 | named "MomentsCarouselMediaProvider" ]]
 			end
 		end
 	end, { var20 })
-	local var21 = reactModule.useMemo(function() --[[ line: 187 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), toMediaItemModule (copy)
 		local t = {}
 		
@@ -145,18 +145,18 @@ return function(p2) --[[ line: 118 | named "MomentsCarouselMediaProvider" ]]
 		end
 		return t
 	end, { p2.moments, p2.mediaCornerRadius })
-	local var22 = reactModule.useMemo(function() --[[ line: 201 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: var18 (ref), var20 (ref)
-		return function(p4) --[[ line: 202 ]]
+		return function(p4)
 			-- upvalues: var18 (copy), var20 (copy)
 			return var18.get(p4) and var20.get(p4)
 		end
 	end, { var18, var20 })
-	local var23 = reactModule.useMemo(function() --[[ line: 207 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), var21 (ref), var22 (ref), fFlagMomentsAutoplayAmpPolicy (copy), var19 (ref)
 		return {
 			getActiveIndex = var17.get,
-			getItems = function(_) --[[ line: 210 ]]
+			getItems = function(_)
 				-- upvalues: var21 (copy)
 				return var21
 			end,
@@ -171,20 +171,20 @@ return function(p2) --[[ line: 118 | named "MomentsCarouselMediaProvider" ]]
 	})
 	local createCoordinator = p2.createCoordinator or defaultCreateCoordinator
 	local var25 = if fFlagProfileMomentsMuteCarouselAudioModule then 0 else nil
-	local var26 = reactModule.useMemo(function() --[[ line: 228 ]]
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: createCoordinator (ref), var23 (ref), var25 (ref)
 		return createCoordinator(var23, var25)
 	end, { var23, createCoordinator, var25 })
-	reactModule.useEffect(function() --[[ line: 232 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var26 (ref)
-		return function() --[[ line: 233 ]]
+		return function()
 			-- upvalues: var26 (copy)
 			var26.dispose()
 		end
 	end, { var26 })
 	
 	if fFlagMomentsCarouselVideoHandoff then
-		reactModule.useImperativeHandle(p2.handoffRef, function() --[[ line: 239 ]]
+		reactModule.useImperativeHandle(p2.handoffRef, function()
 			-- upvalues: var26 (ref)
 			return { release = var26.dispose }
 		end, { var26 })

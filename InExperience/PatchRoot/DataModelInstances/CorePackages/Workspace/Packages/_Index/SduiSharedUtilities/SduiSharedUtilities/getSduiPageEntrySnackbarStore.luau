@@ -1,11 +1,11 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Signals)
 
-local function createSduiPageEntrySnackbarStore() --[[ line: 20 ]]
+local function createSduiPageEntrySnackbarStore()
 	-- upvalues: signalsModule (ref)
 	local t = {}
 	
 	return {
-		getSignal = function(value) --[[ line: 23 ]]
+		getSignal = function(value)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var4 = t[value]
 			
@@ -17,7 +17,7 @@ local function createSduiPageEntrySnackbarStore() --[[ line: 20 ]]
 			
 			return var5
 		end,
-		show = function(p0, p1) --[[ line: 37 ]]
+		show = function(p0, p1)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var7 = t[p0]
 			
@@ -30,7 +30,7 @@ local function createSduiPageEntrySnackbarStore() --[[ line: 20 ]]
 			t[p0] = { get = var8, set = var9 }
 			var9(p1)
 		end,
-		hide = function(p2) --[[ line: 51 ]]
+		hide = function(p2)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var10 = t[p2]
 			
@@ -48,7 +48,7 @@ end
 
 local var2 = nil
 
-return function() --[[ line: 74 | named "getSduiPageEntrySnackbarStore" ]]
+return function()
 	-- upvalues: var2 (write), createSduiPageEntrySnackbarStore (ref)
 	if var2 == nil then
 		var2 = createSduiPageEntrySnackbarStore()

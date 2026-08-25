@@ -46,50 +46,50 @@ local t = {
 	[creationFlowLocalization.StayFriendlyModeration] = "Feature.Moments.Description.StayFriendly"
 }
 
-return function() --[[ line: 61 | named "MomentsCreationFlowScreen" ]]
+return function()
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), t (ref), useSelector (ref), constantsModule (ref), reactModule (ref), momentsCreationFlowClosedModule (ref), createMomentModule (ref), dashModule (ref), cryoModule (ref), creationFlowContextProvider (ref), creationFlowScreen (ref)
 	local var11 = useAnalyticsModule()
 	local var12 = useDispatch()
 	local var13 = useLocalization(t)
-	local var14 = useSelector(function(p0) --[[ line: 67 ]]
+	local var14 = useSelector(function(p0)
 		-- upvalues: constantsModule (copy)
 		return p0[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen
 	end)
-	local var15 = useSelector(function(p1) --[[ line: 71 ]]
+	local var15 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].MomentsCreationFlow.Capture
 	end)
-	local var16 = useSelector(function(p2) --[[ line: 75 ]]
+	local var16 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].MomentsCreationFlow.SessionId
 	end)
 	
 	return if var14 and var15 then reactModule.createElement(creationFlowContextProvider, {
 		captures = { var15 },
-		exitCreationFlow = reactModule.useCallback(function() --[[ line: 79 ]]
+		exitCreationFlow = reactModule.useCallback(function()
 			-- upvalues: var12 (ref), momentsCreationFlowClosedModule (copy)
 			var12(momentsCreationFlowClosedModule())
 		end, { var12 }),
 		value = {
-			capturesPagesIsFinished = function() --[[ line: 103 ]]
+			capturesPagesIsFinished = function()
 				return true
 			end,
-			createMoment = reactModule.useCallback(function(p3, p4, p5) --[[ line: 88 ]]
+			createMoment = reactModule.useCallback(function(p3, p4, p5)
 				-- upvalues: var12 (ref), createMomentModule (copy)
 				var12(createMomentModule(p3, p4, p5))
 			end, { var12 }),
 			fetchAdditionalCaptures = dashModule.noop,
 			fetchInitialCaptures = dashModule.noop,
-			fireEvent = function(p6, p7) --[[ line: 109 ]]
+			fireEvent = function(p6, p7)
 				-- upvalues: var11 (ref), cryoModule (copy), var16 (ref)
 				var11.fireEvent("XExp" .. p6, cryoModule.Dictionary.join(p7 or {}, { creationSessionId = var16 }))
 			end,
-			getLocalization = reactModule.useCallback(function(p8) --[[ line: 83 ]]
+			getLocalization = reactModule.useCallback(function(p8)
 				-- upvalues: var13 (ref)
 				return var13[p8] or nil
 			end, { var13 }),
 			getUserConfiguration = dashModule.noop,
-			isTextFiltered = function() --[[ line: 119 ]]
+			isTextFiltered = function()
 				return false
 			end,
 			setScreenOrientation = dashModule.noop

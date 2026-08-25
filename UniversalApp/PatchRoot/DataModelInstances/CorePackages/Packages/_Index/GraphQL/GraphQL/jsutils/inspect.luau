@@ -11,19 +11,19 @@ local formatArray = nil
 local formatObject = nil
 local getObjectTag = nil
 
-local function inspect(p0) --[[ line: 33 ]]
+local function inspect(p0)
 	-- upvalues: formatValue (write)
 	return formatValue(p0, {})
 end
 
-formatValue = function(p1, p2) --[[ line: 37 | named "formatValue" ]]
+formatValue = function(p1, p2)
 	-- upvalues: httpService (ref), nullModule (ref), formatObjectValue (write)
 	local var9 = typeof(p1)
 	
 	return if var9 == "string" then httpService:JSONEncode(p1) elseif var9 == "number" then if p1 == p1 then if p1 == 1e999 then "Infinity" elseif p1 == -1e999 then "-Infinity" else tostring(p1) else "NaN" elseif var9 == "function" then "[function]" elseif var9 == "table" then if p1 == nullModule then "null" else formatObjectValue(p1, p2) else tostring(p1)
 end
 
-formatObjectValue = function(p3, p4) --[[ line: 65 | named "formatObjectValue" ]]
+formatObjectValue = function(p3, p4)
 	-- upvalues: formatValue (write), array (ref), formatArray (write), formatObject (write)
 	if table.find(p4, p3) ~= nil then
 		return "[Circular]"
@@ -42,7 +42,7 @@ formatObjectValue = function(p3, p4) --[[ line: 65 | named "formatObjectValue" ]
 	end
 end
 
-formatObject = function(p5, p6) --[[ line: 90 | named "formatObject" ]]
+formatObject = function(p5, p6)
 	-- upvalues: object (ref), getObjectTag (write), formatValue (write)
 	local var12 = object.keys(p5)
 	
@@ -60,7 +60,7 @@ formatObject = function(p5, p6) --[[ line: 90 | named "formatObject" ]]
 	return "{ " .. table.concat(t, ", ") .. " }"
 end
 
-formatArray = function(p7, p8) --[[ line: 111 | named "formatArray" ]]
+formatArray = function(p7, p8)
 	-- upvalues: formatValue (write)
 	local p7Count = #p7
 	
@@ -84,7 +84,7 @@ formatArray = function(p7, p8) --[[ line: 111 | named "formatArray" ]]
 	return "[" .. table.concat(t, ", ") .. "]"
 end
 
-getObjectTag = function(_) --[[ line: 137 | named "getObjectTag" ]]
+getObjectTag = function(_)
 	return "Object"
 end
 

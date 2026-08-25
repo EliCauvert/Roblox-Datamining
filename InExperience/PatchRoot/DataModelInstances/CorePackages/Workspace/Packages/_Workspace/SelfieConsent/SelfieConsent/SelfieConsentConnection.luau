@@ -9,9 +9,9 @@ local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local useEventConnection = reactUtilsModule.useEventConnection
 
-local var5 = function(p0) --[[ line: 21 ]]
+local var5 = function(p0)
 	-- upvalues: reactModule (ref), useEventConnection (ref), avatarCreationService (ref)
-	useEventConnection(avatarCreationService.OpenSelfieConsent, reactModule.useCallback(function() --[[ line: 22 ]]
+	useEventConnection(avatarCreationService.OpenSelfieConsent, reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.displaySelfieConsent(true)
 	end))
@@ -19,7 +19,7 @@ local var5 = function(p0) --[[ line: 21 ]]
 	return reactModule.createElement(reactModule.Fragment, {}, {})
 end
 
-return function(_) --[[ line: 29 ]]
+return function(_)
 	-- upvalues: reactModule (ref), selfieConsentPromptModule (ref), var5 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var6, var7 = reactModule.useState(false)
 	local var8 = if var6 then reactModule.createElement(selfieConsentPromptModule, { displaySelfieConsent = var7 }) else nil

@@ -1,5 +1,5 @@
 ﻿return {
-	positionHasKeyframes = function(p0) --[[ line: 3 ]]
+	positionHasKeyframes = function(p0)
 		local position = p0:FindFirstChild("Position")
 		
 		if not position or not position:IsA("Vector3Curve") then
@@ -14,7 +14,7 @@
 		end
 		return false
 	end,
-	translationExceedsThreshold = function(p1, p2) --[[ line: 17 ]]
+	translationExceedsThreshold = function(p1, p2)
 		local position = p1:FindFirstChild("Position")
 		
 		if not position or not position:IsA("Vector3Curve") then

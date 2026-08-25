@@ -9,7 +9,7 @@ local clientCapabilitiesModule = require(script.Parent.Parent.Parent.shared.v1be
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 442 ]]
+function t_1.new(p0)
 	-- upvalues: hydrationStreamModeModule (ref), t_1 (ref)
 	return setmetatable({
 		feed_page_token = if p0 == nil or p0.feed_page_token == nil then "" else p0.feed_page_token,
@@ -30,7 +30,7 @@ function t_1.new(p0) --[[ line: 442 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 478 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref), hydrationStreamModeModule (ref)
 	local buff = buffer.create(0)
 	local var21 = 0
@@ -141,7 +141,7 @@ function t_1:encode() --[[ line: 478 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 588 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), hydrationStreamModeModule (ref), t (ref), clientCapabilitiesModule (ref)
 	local var59 = t_1.new()
 	local var60 = 0
@@ -261,7 +261,7 @@ function t_1.decode(p1) --[[ line: 588 ]]
 	return var59
 end
 
-function t_1:jsonEncode() --[[ line: 714 ]]
+function t_1:jsonEncode()
 	-- upvalues: hydrationStreamModeModule (ref)
 	local t = {}
 	
@@ -318,7 +318,7 @@ function t_1:jsonEncode() --[[ line: 714 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 798 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), hydrationStreamModeModule (ref), t (ref), clientCapabilitiesModule (ref)
 	local var107 = t_1.new()
 	
@@ -428,7 +428,7 @@ typeRegistryModule.default:register(t.GetChartsPageRequest)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 959 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		key = if p2 == nil or p2.key == nil then "" else p2.key,
@@ -436,7 +436,7 @@ function t_2.new(p2) --[[ line: 959 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 971 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var111 = 0
@@ -459,7 +459,7 @@ function t_2:encode() --[[ line: 971 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 992 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref)
 	local var117 = t_2.new()
 	local var118 = 0
@@ -511,7 +511,7 @@ function t_2.decode(p3) --[[ line: 992 ]]
 	return var117
 end
 
-function t_2:jsonEncode() --[[ line: 1042 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -523,7 +523,7 @@ function t_2:jsonEncode() --[[ line: 1042 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 1058 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref)
 	local var137 = t_2.new()
 	
@@ -545,7 +545,7 @@ typeRegistryModule.default:register(t.GetChartsPageRequest_CachedRobloxComponent
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 1089 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		items_per_row = if p4 == nil or p4.items_per_row == nil then {} else p4.items_per_row,
@@ -553,7 +553,7 @@ function t_3.new(p4) --[[ line: 1089 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 1096 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var139 = 0
@@ -584,7 +584,7 @@ function t_3:encode() --[[ line: 1096 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 1123 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var149 = t_3.new()
 	local var150 = 0
@@ -638,7 +638,7 @@ function t_3.decode(p5) --[[ line: 1123 ]]
 	return var149
 end
 
-function t_3:jsonEncode() --[[ line: 1178 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.items_per_row ~= nil and next(self.items_per_row) ~= nil then
@@ -655,7 +655,7 @@ function t_3:jsonEncode() --[[ line: 1178 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 1196 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref)
 	local var170 = t_3.new()
 	
@@ -693,7 +693,7 @@ typeRegistryModule.default:register(t.CollectionLayoutInfo)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 1242 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		key = if p6 == nil or p6.key == nil then "" else p6.key,
@@ -701,7 +701,7 @@ function t_4.new(p6) --[[ line: 1242 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 1251 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var174 = 0
@@ -724,7 +724,7 @@ function t_4:encode() --[[ line: 1251 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 1270 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref)
 	local var180 = t_4.new()
 	local var181 = 0
@@ -777,7 +777,7 @@ function t_4.decode(p7) --[[ line: 1270 ]]
 	return var180
 end
 
-function t_4:jsonEncode() --[[ line: 1318 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -789,7 +789,7 @@ function t_4:jsonEncode() --[[ line: 1318 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 1332 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref)
 	local var200 = t_4.new()
 	
@@ -811,7 +811,7 @@ typeRegistryModule.default:register(t.CollectionLayoutInfo_ItemsPerRowEntry)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 1362 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		page_entries = if p8 == nil or p8.page_entries == nil then {} else p8.page_entries,
@@ -821,7 +821,7 @@ function t_5.new(p8) --[[ line: 1362 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 1371 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var202 = 0
@@ -877,7 +877,7 @@ function t_5:encode() --[[ line: 1371 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 1421 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var224 = t_5.new()
 	local var225 = 0
@@ -941,7 +941,7 @@ function t_5.decode(p9) --[[ line: 1421 ]]
 	return var224
 end
 
-function t_5:jsonEncode() --[[ line: 1497 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -974,7 +974,7 @@ function t_5:jsonEncode() --[[ line: 1497 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 1531 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var251 = t_5.new()
 	
@@ -1036,7 +1036,7 @@ typeRegistryModule.default:register(t.GetChartsPageResponse)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1614 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		key = if p10 == nil or p10.key == nil then "" else p10.key,
@@ -1044,7 +1044,7 @@ function t_6.new(p10) --[[ line: 1614 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1623 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var258 = 0
@@ -1068,7 +1068,7 @@ function t_6:encode() --[[ line: 1623 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1643 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), templateEntryModule (ref)
 	local var265 = t_6.new()
 	local var266 = 0
@@ -1120,7 +1120,7 @@ function t_6.decode(p11) --[[ line: 1643 ]]
 	return var265
 end
 
-function t_6:jsonEncode() --[[ line: 1691 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1132,7 +1132,7 @@ function t_6:jsonEncode() --[[ line: 1691 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1705 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), templateEntryModule (ref)
 	local var285 = t_6.new()
 	
@@ -1154,7 +1154,7 @@ typeRegistryModule.default:register(t.GetChartsPageResponse_TemplatesEntry)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 1735 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		key = if p12 == nil or p12.key == nil then "" else p12.key,
@@ -1162,7 +1162,7 @@ function t_7.new(p12) --[[ line: 1735 ]]
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 1744 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var287 = 0
@@ -1185,7 +1185,7 @@ function t_7:encode() --[[ line: 1744 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 1765 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref)
 	local var293 = t_7.new()
 	local var294 = 0
@@ -1237,7 +1237,7 @@ function t_7.decode(p13) --[[ line: 1765 ]]
 	return var293
 end
 
-function t_7:jsonEncode() --[[ line: 1815 ]]
+function t_7:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1249,7 +1249,7 @@ function t_7:jsonEncode() --[[ line: 1815 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 1831 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref)
 	local var313 = t_7.new()
 	
@@ -1271,7 +1271,7 @@ typeRegistryModule.default:register(t.GetChartsPageResponse_LocalizedLiteralsEnt
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 1861 ]]
+function t_8.new(p14)
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		sort_id = if p14 == nil or p14.sort_id == nil then "" else p14.sort_id,
@@ -1287,7 +1287,7 @@ function t_8.new(p14) --[[ line: 1861 ]]
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 1883 ]]
+function t_8:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var315 = 0
@@ -1367,7 +1367,7 @@ function t_8:encode() --[[ line: 1883 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 1954 ]]
+function t_8.decode(p15)
 	-- upvalues: t_8 (ref), protoModule (ref), t (ref), clientCapabilitiesModule (ref)
 	local var342 = t_8.new()
 	local var343 = 0
@@ -1460,7 +1460,7 @@ function t_8.decode(p15) --[[ line: 1954 ]]
 	return var342
 end
 
-function t_8:jsonEncode() --[[ line: 2052 ]]
+function t_8:jsonEncode()
 	local t = {}
 	
 	if self.sort_id ~= nil and self.sort_id ~= "" then
@@ -1501,7 +1501,7 @@ function t_8:jsonEncode() --[[ line: 2052 ]]
 	return t
 end
 
-function t_8:jsonDecode() --[[ line: 2105 ]]
+function t_8:jsonDecode()
 	-- upvalues: t_8 (ref), clientCapabilitiesModule (ref)
 	local var379 = t_8.new()
 	
@@ -1581,7 +1581,7 @@ typeRegistryModule.default:register(t.GetChartsSortDetailRequest)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 2214 ]]
+function t_9.new(p16)
 	-- upvalues: t_9 (ref)
 	return setmetatable({
 		key = if p16 == nil or p16.key == nil then "" else p16.key,
@@ -1589,7 +1589,7 @@ function t_9.new(p16) --[[ line: 2214 ]]
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 2226 ]]
+function t_9:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var383 = 0
@@ -1612,7 +1612,7 @@ function t_9:encode() --[[ line: 2226 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 2247 ]]
+function t_9.decode(p17)
 	-- upvalues: t_9 (ref), protoModule (ref)
 	local var389 = t_9.new()
 	local var390 = 0
@@ -1664,7 +1664,7 @@ function t_9.decode(p17) --[[ line: 2247 ]]
 	return var389
 end
 
-function t_9:jsonEncode() --[[ line: 2297 ]]
+function t_9:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -1676,7 +1676,7 @@ function t_9:jsonEncode() --[[ line: 2297 ]]
 	return t
 end
 
-function t_9:jsonDecode() --[[ line: 2313 ]]
+function t_9:jsonDecode()
 	-- upvalues: t_9 (ref)
 	local var409 = t_9.new()
 	
@@ -1698,7 +1698,7 @@ typeRegistryModule.default:register(t.GetChartsSortDetailRequest_CachedRobloxCom
 local t_10 = {}
 t_10.__index = t_10
 
-function t_10.new(p18) --[[ line: 2344 ]]
+function t_10.new(p18)
 	-- upvalues: t_10 (ref)
 	return setmetatable({
 		page_entries = if p18 == nil or p18.page_entries == nil then {} else p18.page_entries,
@@ -1709,7 +1709,7 @@ function t_10.new(p18) --[[ line: 2344 ]]
 	}, t_10)
 end
 
-function t_10:encode() --[[ line: 2358 ]]
+function t_10:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var411 = 0
@@ -1771,7 +1771,7 @@ function t_10:encode() --[[ line: 2358 ]]
 	return buff_1
 end
 
-function t_10.decode(p19) --[[ line: 2413 ]]
+function t_10.decode(p19)
 	-- upvalues: t_10 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var435 = t_10.new()
 	local var436 = 0
@@ -1840,7 +1840,7 @@ function t_10.decode(p19) --[[ line: 2413 ]]
 	return var435
 end
 
-function t_10:jsonEncode() --[[ line: 2494 ]]
+function t_10:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -1876,7 +1876,7 @@ function t_10:jsonEncode() --[[ line: 2494 ]]
 	return t
 end
 
-function t_10:jsonDecode() --[[ line: 2532 ]]
+function t_10:jsonDecode()
 	-- upvalues: t_10 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref)
 	local var464 = t_10.new()
 	
@@ -1944,7 +1944,7 @@ typeRegistryModule.default:register(t.GetChartsSortDetailResponse)
 local t_11 = {}
 t_11.__index = t_11
 
-function t_11.new(p20) --[[ line: 2623 ]]
+function t_11.new(p20)
 	-- upvalues: t_11 (ref)
 	return setmetatable({
 		key = if p20 == nil or p20.key == nil then "" else p20.key,
@@ -1952,7 +1952,7 @@ function t_11.new(p20) --[[ line: 2623 ]]
 	}, t_11)
 end
 
-function t_11:encode() --[[ line: 2632 ]]
+function t_11:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var471 = 0
@@ -1976,7 +1976,7 @@ function t_11:encode() --[[ line: 2632 ]]
 	return buff_1
 end
 
-function t_11.decode(p21) --[[ line: 2654 ]]
+function t_11.decode(p21)
 	-- upvalues: t_11 (ref), protoModule (ref), templateEntryModule (ref)
 	local var478 = t_11.new()
 	local var479 = 0
@@ -2028,7 +2028,7 @@ function t_11.decode(p21) --[[ line: 2654 ]]
 	return var478
 end
 
-function t_11:jsonEncode() --[[ line: 2704 ]]
+function t_11:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2040,7 +2040,7 @@ function t_11:jsonEncode() --[[ line: 2704 ]]
 	return t
 end
 
-function t_11:jsonDecode() --[[ line: 2720 ]]
+function t_11:jsonDecode()
 	-- upvalues: t_11 (ref), templateEntryModule (ref)
 	local var498 = t_11.new()
 	
@@ -2062,7 +2062,7 @@ typeRegistryModule.default:register(t.GetChartsSortDetailResponse_TemplatesEntry
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p22) --[[ line: 2751 ]]
+function t_12.new(p22)
 	-- upvalues: t_12 (ref)
 	return setmetatable({
 		key = if p22 == nil or p22.key == nil then "" else p22.key,
@@ -2070,7 +2070,7 @@ function t_12.new(p22) --[[ line: 2751 ]]
 	}, t_12)
 end
 
-function t_12:encode() --[[ line: 2763 ]]
+function t_12:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var500 = 0
@@ -2093,7 +2093,7 @@ function t_12:encode() --[[ line: 2763 ]]
 	return buff_1
 end
 
-function t_12.decode(p23) --[[ line: 2784 ]]
+function t_12.decode(p23)
 	-- upvalues: t_12 (ref), protoModule (ref)
 	local var506 = t_12.new()
 	local var507 = 0
@@ -2145,7 +2145,7 @@ function t_12.decode(p23) --[[ line: 2784 ]]
 	return var506
 end
 
-function t_12:jsonEncode() --[[ line: 2834 ]]
+function t_12:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -2157,7 +2157,7 @@ function t_12:jsonEncode() --[[ line: 2834 ]]
 	return t
 end
 
-function t_12:jsonDecode() --[[ line: 2850 ]]
+function t_12:jsonDecode()
 	-- upvalues: t_12 (ref)
 	local var526 = t_12.new()
 	

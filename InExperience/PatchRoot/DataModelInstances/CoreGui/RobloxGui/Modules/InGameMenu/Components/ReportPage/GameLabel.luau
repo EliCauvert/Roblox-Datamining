@@ -25,7 +25,7 @@ gameLabel.validateProps = t.strictInterface({
 	buttonRef = t.optional(t.table)
 })
 
-function gameLabel.renderButtons(p0) --[[ line: 51 ]]
+function gameLabel.renderButtons(p0)
 	-- upvalues: roact (ref), cryo (ref)
 	return cryo.Dictionary.join(p0.props[roact.Children] or {}, {
 		List = roact.createElement("UIListLayout", {
@@ -38,13 +38,13 @@ function gameLabel.renderButtons(p0) --[[ line: 51 ]]
 	})
 end
 
-function gameLabel.renderWithSelectionCursor(p1, p2) --[[ line: 66 ]]
+function gameLabel.renderWithSelectionCursor(p1, p2)
 	-- upvalues: assetsModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), reactModule (ref), var4 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), themedTextLabelModule (ref)
 	local var9 = if p1.props.gameId > 0 then "rbxthumb://type=GameIcon&id=" .. p1.props.gameId .. "&w=150&h=150" else assetsModule.Images.PlaceholderGameIcon
 	
-	return withFoundationOrUIBloxStyle(function(_) --[[ line: 73 ]]
+	return withFoundationOrUIBloxStyle(function(_)
 		return {}
-	end, function(_) --[[ line: 75 ]]
+	end, function(_)
 		-- upvalues: roact (copy), reactModule (copy), p1 (ref), p2 (ref), var4 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), var9 (write), imageSetLabel (copy), themedTextLabelModule (copy)
 		return roact.createElement("TextButton", {
 			[reactModule.Tag] = "data-testid=experienceLabel",
@@ -89,15 +89,15 @@ function gameLabel.renderWithSelectionCursor(p1, p2) --[[ line: 66 ]]
 	end)
 end
 
-function gameLabel.render(p3) --[[ line: 124 ]]
+function gameLabel.render(p3)
 	-- upvalues: var3 (ref)
-	return var3(function(p4) --[[ line: 125 ]]
+	return var3(function(p4)
 		-- upvalues: p3 (ref)
 		return p3:renderWithSelectionCursor(p4)
 	end)
 end
 
-return roact.forwardRef(function(p5, p6) --[[ line: 130 ]]
+return roact.forwardRef(function(p5, p6)
 	-- upvalues: roact (ref), gameLabel (ref), cryo (ref)
 	return roact.createElement(gameLabel, cryo.Dictionary.join(p5, { buttonRef = p6 }))
 end)

@@ -50,19 +50,19 @@ local gameJoinCardOnBeforeJoinCallback = game:DefineFastFlag("GameJoinCardOnBefo
 local socialJoinPassPlaceIdToLaunch = game:DefineFastFlag("SocialJoinPassPlaceIdToLaunch", false)
 local t = { skipFetch = true }
 
-return function(p0, p1) --[[ line: 74 ]]
+return function(p0, p1)
 	-- upvalues: useDispatch (ref), useRoactService (ref), appSessionService (ref), appGame (ref), reactModule (ref), initializeSocialExperienceJoinAnalyticsModule (ref), useLocalUserId (ref), fFlagSocialExperienceJoinPresenceStoreMigrationModule (ref), var21 (ref), t (ref), useSelector (ref), fFlagEnableDesktopGameJoinCard (ref), fFlagEnableMobileGameJoinCard (ref), fFlagProfilePlatformPassPresenceToJoinUserInExperience (ref), getDeepValue (ref), constantsModule (ref), networkingGamesModule (ref), networkStatus (ref), fFlagJoinCardAgeCheckUpsell (ref), useAgeCheckUpsellStateModule (ref), setGamePlaySession (ref), sessionType (ref), eventNamesModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), joinExperienceStatusModule (ref), promiseModule (ref), socialJoinUseUnifiedPurchaseFlow (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var19 (ref), navigateDown (ref), playabilityStatus (ref), gameJoinCardOnBeforeJoinCallback (ref), launchGame (ref), socialJoinPassPlaceIdToLaunch (ref)
 	local var36
 	local var27 = useDispatch()
 	local var28 = useRoactService(appSessionService)
 	local var29 = useRoactService(appGame)
-	local var30 = reactModule.useMemo(function() --[[ line: 92 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: initializeSocialExperienceJoinAnalyticsModule (copy), p1 (ref)
 		return initializeSocialExperienceJoinAnalyticsModule(p1.analyticProps)
 	end, {})
 	local var31 = useLocalUserId()
 	local var32 = if fFlagSocialExperienceJoinPresenceStoreMigrationModule then var21(p0, t) else nil
-	local var33 = useSelector(function(p2) --[[ line: 103 ]]
+	local var33 = useSelector(function(p2)
 		-- upvalues: fFlagEnableDesktopGameJoinCard (copy), fFlagEnableMobileGameJoinCard (copy), fFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), p1 (ref), fFlagSocialExperienceJoinPresenceStoreMigrationModule (copy), var32 (write), getDeepValue (copy), constantsModule (copy), p0 (ref), networkingGamesModule (copy), networkStatus (copy)
 		local var38 = if (fFlagEnableDesktopGameJoinCard or fFlagEnableMobileGameJoinCard or fFlagProfilePlatformPassPresenceToJoinUserInExperience) and p1.presence then p1.presence elseif fFlagSocialExperienceJoinPresenceStoreMigrationModule then var32 else getDeepValue(p2, `{constantsModule.RODUX_KEY}.Presence.byUserId.{p0}`)
 		local var39 = if var38 and var38.universeId then tostring(var38.universeId) else ""
@@ -82,21 +82,21 @@ return function(p0, p1) --[[ line: 74 ]]
 		}
 	end)
 	local var34 = if fFlagJoinCardAgeCheckUpsell then useAgeCheckUpsellStateModule(var33.universeId, p1.onAgeCheckCompletion) else nil
-	local var35 = reactModule.useCallback(function() --[[ line: 140 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: var27 (ref), networkingGamesModule (copy), setGamePlaySession (copy), var28 (ref), sessionType (copy), var30 (ref), eventNamesModule (copy), var33 (ref), p0 (ref), var31 (ref), p1 (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), joinExperienceStatusModule (copy), promiseModule (copy), socialJoinUseUnifiedPurchaseFlow (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var34 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var19 (copy), navigateDown (copy), playabilityStatus (copy), gameJoinCardOnBeforeJoinCallback (copy), launchGame (copy), socialJoinPassPlaceIdToLaunch (copy), var29 (ref), constantsModule (copy)
-		local _ = function(p3) --[[ line: 141 ]]
+		local _ = function(p3)
 			-- upvalues: var27 (copy), networkingGamesModule (copy)
 			return var27(networkingGamesModule.GetExperiencesDetails.API({ p3 }))
 		end
 		
-		local var41 = function(p4) --[[ line: 145 ]]
+		local var41 = function(p4)
 			-- upvalues: var27 (copy), networkingGamesModule (copy)
 			return var27(networkingGamesModule.GetExperiencesProductInfo.API({ p4 }))
 		end
 		
-		local _ = function(p5) --[[ line: 149 ]]
+		local _ = function(p5)
 			-- upvalues: setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
-			return function(p6) --[[ line: 150 ]]
+			return function(p6)
 				-- upvalues: setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), p5 (ref), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var28, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var30.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
@@ -114,10 +114,10 @@ return function(p0, p1) --[[ line: 74 ]]
 			end
 		end
 		
-		local var42 = function() --[[ line: 169 ]]
+		local var42 = function()
 			-- upvalues: joinExperienceStatusModule (copy), setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), promiseModule (copy), var27 (copy), networkingGamesModule (copy), var41 (ref), socialJoinUseUnifiedPurchaseFlow (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var34 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var19 (copy), navigateDown (copy)
 			local purchaseRequired = joinExperienceStatusModule.PurchaseRequired;
-			(function(p7) --[[ line: 150 ]]
+			(function(p7)
 				-- upvalues: setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), purchaseRequired (ref), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var28, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var30.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
@@ -133,7 +133,7 @@ return function(p0, p1) --[[ line: 74 ]]
 					friendId = if fFlagProfilePlatformImproveGameDetailsAnalytics then p0 else nil
 				})
 			end)()
-			promiseModule.all(var27(networkingGamesModule.GetExperiencesDetails.API({ var33.universeId })), var41(var33.universeId)):andThen(function() --[[ line: 177 ]]
+			promiseModule.all(var27(networkingGamesModule.GetExperiencesDetails.API({ var33.universeId })), var41(var33.universeId)):andThen(function()
 				-- upvalues: socialJoinUseUnifiedPurchaseFlow (copy), var33 (copy), var27 (copy), setCentralOverlay (copy), centralOverlayType (copy), closeCentralOverlay (copy), var34 (copy), appPage (copy), p0 (copy), p1 (copy), fFlagSignalsNavP3Dispatch (copy), var19 (copy), navigateDown (copy)
 				if socialJoinUseUnifiedPurchaseFlow then
 					var27(setCentralOverlay(centralOverlayType.UnifiedProductPurchaseModal, {
@@ -144,11 +144,11 @@ return function(p0, p1) --[[ line: 74 ]]
 							experienceIconUrl = string.format("rbxthumb://type=GameIcon&id=%s&w=150&h=150", var33.universeId)
 						},
 						purchaseCallbacks = {
-							onFlowComplete = function() --[[ line: 191 ]]
+							onFlowComplete = function()
 								-- upvalues: var27 (copy), closeCentralOverlay (copy)
 								var27(closeCentralOverlay())
 							end,
-							onPurchaseSuccess = function() --[[ line: 194 ]]
+							onPurchaseSuccess = function()
 								-- upvalues: var34 (copy)
 								if var34 then
 									var34.refetchPlayability()
@@ -175,10 +175,10 @@ return function(p0, p1) --[[ line: 74 ]]
 			end)
 		end
 		
-		local var43 = function() --[[ line: 222 ]]
+		local var43 = function()
 			-- upvalues: socialJoinUseUnifiedPurchaseFlow (copy), joinExperienceStatusModule (copy), setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var19 (copy), var27 (copy), navigateDown (copy)
 			local var45 = if socialJoinUseUnifiedPurchaseFlow then joinExperienceStatusModule.Unable else joinExperienceStatusModule.PurchaseRequired;
-			(function(p8) --[[ line: 150 ]]
+			(function(p8)
 				-- upvalues: setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), var45 (ref), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var28, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var30.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
@@ -212,12 +212,12 @@ return function(p0, p1) --[[ line: 74 ]]
 			var27(navigateDown(t))
 		end
 		
-		;(function(p12) --[[ line: 248 ]]
+		;(function(p12)
 			-- upvalues: var34 (copy), promiseModule (copy), var27 (copy), networkingGamesModule (copy)
-			return if var34 and var34.cachedPlayabilityStatus then promiseModule.resolve(var34.cachedPlayabilityStatus) else var27(networkingGamesModule.GetExperiencesPlayabilityStatus.API({ p12 })):andThen(function(p13) --[[ line: 253 ]]
+			return if var34 and var34.cachedPlayabilityStatus then promiseModule.resolve(var34.cachedPlayabilityStatus) else var27(networkingGamesModule.GetExperiencesPlayabilityStatus.API({ p12 })):andThen(function(p13)
 				return p13.responseBody[1].playabilityStatus
 			end)
-		end)(var33.universeId):andThen(function(p10) --[[ line: 260 ]]
+		end)(var33.universeId):andThen(function(p10)
 			-- upvalues: playabilityStatus (copy), var42 (ref), gameJoinCardOnBeforeJoinCallback (copy), p1 (copy), joinExperienceStatusModule (copy), setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), launchGame (copy), socialJoinPassPlaceIdToLaunch (copy), var29 (copy), constantsModule (copy), var34 (copy), var43 (ref)
 			if p10 == playabilityStatus.PurchaseRequired.rawValue() then
 				var42()
@@ -228,7 +228,7 @@ return function(p0, p1) --[[ line: 74 ]]
 					p1.onBeforeJoin()
 				end
 				local success = joinExperienceStatusModule.Success
-				launchGame(if socialJoinPassPlaceIdToLaunch and var33.placeId ~= "" then var33.placeId else nil, nil, { userId = p0 }, var29, constantsModule.AnalyticsContext.PeopleListInHomePage, function(p11) --[[ line: 150 ]]
+				launchGame(if socialJoinPassPlaceIdToLaunch and var33.placeId ~= "" then var33.placeId else nil, nil, { userId = p0 }, var29, constantsModule.AnalyticsContext.PeopleListInHomePage, function(p11)
 					-- upvalues: setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), success (ref), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 					setGamePlaySession(var28, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 					var30.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
@@ -252,10 +252,10 @@ return function(p0, p1) --[[ line: 74 ]]
 				return
 			end
 			var43()
-		end):catch(function() --[[ line: 285 ]]
+		end):catch(function()
 			-- upvalues: joinExperienceStatusModule (copy), setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 			local failure = joinExperienceStatusModule.Failure;
-			(function(p9) --[[ line: 150 ]]
+			(function(p9)
 				-- upvalues: setGamePlaySession (copy), var28 (copy), sessionType (copy), var30 (copy), eventNamesModule (copy), var33 (copy), p0 (copy), var31 (copy), failure (ref), p1 (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy)
 				setGamePlaySession(var28, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 				var30.fireAnalyticsEvent(eventNamesModule.JoinExperience, {
@@ -288,11 +288,11 @@ return function(p0, p1) --[[ line: 74 ]]
 	end
 	local var37 = if var34 then var33.isLoading or (not var34.playabilityChecked or var34.pendingParentalControlsResolution) else var33.isLoading
 	
-	return reactModule.useMemo(function() --[[ line: 340 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var35 (ref), var34 (ref), var36 (ref), var37 (ref)
 		return {
 			joinExperience = var35,
-			joinAgeCheckUpsellFlow = if var34 then var34.joinAgeCheckUpsellFlow else function() --[[ line: 345 ]] end,
+			joinAgeCheckUpsellFlow = if var34 then var34.joinAgeCheckUpsellFlow else function() end,
 			ageCheckRequired = if var34 then var34.ageCheckRequired else false,
 			cachedPlayabilityStatus = if var34 then var34.cachedPlayabilityStatus else nil,
 			playabilityFromCache = if var34 then var34.playabilityFromCache else false,

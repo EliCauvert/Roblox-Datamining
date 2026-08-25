@@ -4,7 +4,7 @@ local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local fetchHomePageModule = require(home.fetchHomePage)
 
-return function(p0, p1) --[[ line: 10 | named "refreshHomePage" ]]
+return function(p0, p1)
 	-- upvalues: sduiSharedUtilitiesModule (ref), appPage (ref), fetchHomePageModule (ref)
 	local var3 = sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(appPage.Home)
 	var3.start("refresh")

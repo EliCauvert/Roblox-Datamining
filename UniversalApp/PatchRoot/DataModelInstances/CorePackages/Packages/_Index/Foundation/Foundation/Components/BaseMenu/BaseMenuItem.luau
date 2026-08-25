@@ -26,11 +26,11 @@ local useBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVaria
 local useMenuItemHoverModule = require(script.Parent.useMenuItemHover)
 local t = { isChecked = false }
 
-local function _(p0) --[[ line: 68 | named "resolveAccessory" ]]
+local function _(p0)
 	return if p0 == nil then nil elseif type(p0) == "string" then { iconName = p0 } else p0
 end
 
-local var23 = (function() --[[ line: 81 | named "getInputSinkAll" ]]
+local var23 = (function()
 	-- upvalues: flagsModule (ref)
 	if not flagsModule.FoundationGuiObjectInputSinkProperty then
 		return nil
@@ -40,21 +40,21 @@ local var23 = (function() --[[ line: 81 | named "getInputSinkAll" ]]
 	if not ok or not status then
 		return nil
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 91 ]]
+	local ok_1, status_1 = pcall(function()
 		return Enum.InputSink.All
 	end)
 	
 	return if ok_1 then status_1 else nil
 end)()
 
-local function getContainerPadding(p1, p2) --[[ line: 100 ]]
+local function getContainerPadding(p1, p2)
 	return {
 		left = UDim.new(0, (if p2 then p1.paddingLeftWithCheck else p1.paddingLeftWithoutCheck) or 0),
 		right = UDim.new(0, p1.paddingRight or 0)
 	}
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 109 | named "BaseMenuItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p3, p4)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), baseMenuContextModule (ref), useTokensModule (ref), flagsModule (ref), useBaseMenuItemVariantsModule (ref), useMenuItemHoverModule (ref), loggerModule (ref), useBindableModule (ref), useComposedRef (ref), getContainerPadding (ref), viewModule (ref), iconModule (ref), builderIconsModule (ref), baseMenuItemAccessoryModule (ref), textModule (ref), withCommonPropsModule (ref), constantsModule (ref), baseMenuScrollContainerModule (ref), var23 (ref), popoverModule (ref), popoverSideModule (ref), popoverAlignModule (ref), radiusModule (ref)
 	local var25 = withDefaultsModule(p3, t)
 	local var26 = reactModule.useContext(baseMenuContextModule)
@@ -74,12 +74,12 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 109 |
 	local var38 = reactModule.useRef(nil)
 	local var39 = var25.isChecked == true and not var31
 	local var40, var41 = reactModule.useState(false)
-	local var42 = reactModule.useCallback(function() --[[ line: 131 ]]
+	local var42 = reactModule.useCallback(function()
 		-- upvalues: var41 (ref)
 		var41(true)
 	end, {})
 	local var43 = var34 ~= nil
-	reactModule.useEffect(function() --[[ line: 136 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var43 (ref), var26 (ref)
 		if var43 and var26.setHasLeading then
 			var26.setHasLeading()
@@ -94,7 +94,7 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 109 |
 		hoverOpenAtDepth = var26.hoverOpenAtDepth,
 		hoverCloseAtDepth = var26.hoverCloseAtDepth
 	})
-	local _ = reactModule.useCallback(function() --[[ line: 153 ]]
+	local _ = reactModule.useCallback(function()
 		-- upvalues: var31 (ref), var25 (ref), var26 (ref), var32 (ref), depth (ref), loggerModule (copy)
 		if var31 then
 			if var25.isDisabled then return end
@@ -121,14 +121,14 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 109 |
 		var26.onActivated, var26.onNestedLeafActivated, var26.hoverOpenAtDepth,
 		var26.hoverReset
 	})
-	local var44 = reactModule.useCallback(function() --[[ line: 194 ]]
+	local var44 = reactModule.useCallback(function()
 		-- upvalues: var26 (ref)
 		if var26.hoverReset then
 			var26.hoverReset()
 		end
 	end, { var26.hoverReset })
 	local var45 = useBindableModule(var26.maxHeight)
-	local _ = reactModule.useMemo(function() --[[ line: 202 ]]
+	local _ = reactModule.useMemo(function()
 		-- upvalues: var29 (ref)
 		return {
 			radius = UDim.new(0, var29.Radius.Small),
@@ -196,7 +196,7 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 109 |
 			testId = `{var25.testId}--trailing`
 		})
 	end
-	local var48 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 321 ]]
+	local var48 = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 		-- upvalues: var26 (ref), size (ref), var40 (ref), var42 (ref), depth (ref)
 		return {
 			onActivated = var26.onActivated,

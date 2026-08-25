@@ -7,24 +7,24 @@ local collectionLayoutStoreContextModule = require(script.Parent.CollectionLayou
 local createCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
 local getMainCollectionLayoutStoreModule = require(script.Parent.getMainCollectionLayoutStore)
 
-return function(p0) --[[ line: 22 | named "CollectionLayoutStoreProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signalsModule (ref), createCollectionLayoutStoreModule (ref), getMainCollectionLayoutStoreModule (ref), collectionLayoutStoreContextModule (ref)
-	local var6, var7 = reactModule.useMemo(function() --[[ line: 23 ]]
+	local var6, var7 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal(0)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 27 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var7 (ref)
 		local container = p0.container
 		
 		if container then
 			var7(container.AbsoluteSize.X)
-			local var8 = container:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 33 ]]
+			local var8 = container:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var7 (copy), container (ref)
 				var7(container.AbsoluteSize.X)
 			end)
 			
-			return function() --[[ line: 36 ]]
+			return function()
 				-- upvalues: var8 (ref)
 				var8:Disconnect()
 			end
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 22 | named "CollectionLayoutStoreProvider" ]]
 	end, { p0.container })
 	
 	return reactModule.createElement(collectionLayoutStoreContextModule.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 41 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: createCollectionLayoutStoreModule (copy), var6 (ref), getMainCollectionLayoutStoreModule (copy)
 			return createCollectionLayoutStoreModule(var6, getMainCollectionLayoutStoreModule(false))
 		end, { var6 })

@@ -9,20 +9,20 @@ local t = {
 	state_change = true
 }
 
-local function _(p0) --[[ line: 18 | named "getHistorySequenceId" ]]
+local function _(p0)
 	local sequenceId = p0.sequenceId
 	
 	return if typeof(sequenceId) == "number" then sequenceId else nil
 end
 
-local _ = function(p1) --[[ line: 23 | named "isAssistantSessionUpdate" ]]
+local _ = function(p1)
 	-- upvalues: t (ref)
 	local sessionUpdate = p1.sessionUpdate
 	
 	return typeof(sessionUpdate) == "string" and t[sessionUpdate] == true
 end
 
-local function orderHistoryItems(p2) --[[ line: 34 ]]
+local function orderHistoryItems(p2)
 	local t = {}
 	
 	for i, v in p2 do
@@ -31,7 +31,7 @@ local function orderHistoryItems(p2) --[[ line: 34 ]]
 		t_1.sequenceId = if typeof(sequenceId) == "number" then sequenceId else nil
 		table.insert(t, t_1)
 	end
-	table.sort(t, function(p3, p4) --[[ line: 44 ]]
+	table.sort(t, function(p3, p4)
 		return if p3.sequenceId == nil or p4.sequenceId == nil then p3.originalIndex < p4.originalIndex else p3.sequenceId < p4.sequenceId
 	end)
 	
@@ -39,7 +39,7 @@ local function orderHistoryItems(p2) --[[ line: 34 ]]
 end
 
 return {
-	ingestSessionHistory = function(p5, p6, p7, p8) --[[ line: 59 ]]
+	ingestSessionHistory = function(p5, p6, p7, p8)
 		-- upvalues: orderHistoryItems (ref), t (ref), acpProtocolModule (ref)
 		assert(typeof(p6) == "string" and p6 ~= "", "sessionId is required")
 		local activeTurnInternals = p5.getActiveTurnInternals(p6)

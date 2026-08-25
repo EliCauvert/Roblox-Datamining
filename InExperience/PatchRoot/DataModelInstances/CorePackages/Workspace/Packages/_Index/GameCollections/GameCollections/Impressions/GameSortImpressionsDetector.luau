@@ -8,7 +8,7 @@ local impressionsModule = require(parent.Impressions)
 local screenSizeImpressionsDetector = impressionsModule.ScreenSizeImpressionsDetector
 local impressionsVisualizer = impressionsModule.ImpressionsVisualizer
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signal (ref), impressionsVisualizer (ref), useRouteName (ref), useSelector (ref), cryoModule (ref), screenSizeImpressionsDetector (ref)
 	local var3 = reactModule.useRef({})
 	local var4 = reactModule.useRef(signal.new())
@@ -22,11 +22,11 @@ return function(p0) --[[ line: 23 ]]
 	local var6, var7 = reactModule.useState({})
 	local var8, var9 = reactModule.useState(p0.dataUpdatedTimestamp)
 	local var10 = useRouteName()
-	local var11 = useSelector(function(p1) --[[ line: 36 ]]
+	local var11 = useSelector(function(p1)
 		return p1.ScreenSize
 	end)
 	local var12 = reactModule.useRef(p0.impressionsTag)
-	reactModule.useEffect(function() --[[ line: 42 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), p0 (ref), var9 (ref), var3 (ref), var5 (write)
 		if var12.current ~= p0.impressionsTag then
 			var12.current = p0.impressionsTag
@@ -36,22 +36,22 @@ return function(p0) --[[ line: 23 ]]
 			var5.current:setImpressionsTag(p0.impressionsTag)
 		end
 	end, { p0.impressionsTag })
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), p0 (ref)
 		var4.current:fire()
-		local var13 = if p0.scrollViewPositionChangedSignal then p0.scrollViewPositionChangedSignal:connect(function() --[[ line: 59 ]]
+		local var13 = if p0.scrollViewPositionChangedSignal then p0.scrollViewPositionChangedSignal:connect(function()
 			-- upvalues: var4 (copy)
 			var4.current:fire()
 		end) else nil
 		
-		return function() --[[ line: 64 ]]
+		return function()
 			-- upvalues: var13 (write)
 			if var13 ~= nil then
 				var13:disconnect()
 			end
 		end
 	end, { p0.scrollViewPositionChangedSignal })
-	reactModule.useEffect(function() --[[ line: 71 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), cryoModule (copy), var10 (ref), var4 (ref), var8 (ref), var9 (ref), var3 (ref), var5 (write)
 		local var14
 		local _ = false
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 23 ]]
 		var8,
 		var11
 	})
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), p0 (ref), var5 (write), var7 (ref)
 		if var6 ~= nil and #var6 > 0 then
 			p0.sendGameImpressions(var6)
@@ -86,9 +86,9 @@ return function(p0) --[[ line: 23 ]]
 			var7({})
 		end
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 98 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (write)
-		return function() --[[ line: 99 ]]
+		return function()
 			-- upvalues: var5 (copy)
 			var5.current:destroy()
 		end
@@ -97,7 +97,7 @@ return function(p0) --[[ line: 23 ]]
 	return reactModule.createElement(screenSizeImpressionsDetector, {
 		onRequestImpressionsSignal = var4.current,
 		parentRef = p0.parentRef,
-		filterImpressionFunc = reactModule.useCallback(function(p2) --[[ line: 104 ]]
+		filterImpressionFunc = reactModule.useCallback(function(p2)
 			-- upvalues: var3 (ref)
 			if var3.current[p2] == nil then
 				var3.current[p2] = true
@@ -106,7 +106,7 @@ return function(p0) --[[ line: 23 ]]
 			end
 			return false
 		end, {}),
-		onImpressionsDetected = reactModule.useCallback(function(p3) --[[ line: 113 ]]
+		onImpressionsDetected = reactModule.useCallback(function(p3)
 			-- upvalues: var7 (ref)
 			if p3 and #p3 ~= 0 then
 				var7(p3)

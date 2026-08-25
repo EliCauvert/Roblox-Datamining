@@ -15,7 +15,7 @@ local t = {
 	isLastMessageInMessageGroup = false
 }
 
-return function(p0) --[[ line: 38 | named "HiddenMessage" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), reactModule (ref), chatBubbleContainerAutomaticSizeModule (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	local var6 = foundationModule.Hooks.useTokens()

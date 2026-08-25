@@ -34,12 +34,12 @@ threeSectionBar.defaultProps = {
 	sectionSpacing = 8,
 	contentPaddingLeft = UDim.new(0, 0),
 	contentPaddingRight = UDim.new(0, 0),
-	onWidthChange = function() --[[ line: 46 ]]
+	onWidthChange = function()
 		return nil
 	end
 }
 
-function threeSectionBar.init(p0) --[[ line: 55 ]]
+function threeSectionBar.init(p0)
 	-- upvalues: roactModule (ref)
 	local var5, var6 = roactModule.createBinding(0)
 	p0.leftWidth = var5
@@ -51,25 +51,25 @@ function threeSectionBar.init(p0) --[[ line: 55 ]]
 	p0.fullWidth = var9
 	p0.updateFullWidth = var10
 	
-	function p0.computeCenteredSize(p1) --[[ line: 60 ]]
+	function p0.computeCenteredSize(p1)
 		-- upvalues: p0 (ref)
 		local maxValue = math.max(p1[1], p1[2])
 		
 		return if p0.props.renderLeft and p0.props.renderRight then UDim2.new(0, (Vector2.new(p1[3] / 2, 0) - Vector2.new(maxValue, 0)).magnitude * 2, 1, 0) else UDim2.new(1, -maxValue, 1, 0)
 	end
 	
-	function p0.computeBumpedPosition(p2) --[[ line: 78 ]]
+	function p0.computeBumpedPosition(p2)
 		local var12 = p2[1]
 		
 		return UDim2.new(0, var12 + (p2[3] - var12 - p2[2]) / 2, 0.5, 0)
 	end
 	
-	function p0.computeBumpedSize(p3) --[[ line: 86 ]]
+	function p0.computeBumpedSize(p3)
 		return UDim2.new(1, (-p3[1]) - p3[2], 1, 0)
 	end
 end
 
-function threeSectionBar.didUpdate(p4) --[[ line: 93 ]]
+function threeSectionBar.didUpdate(p4)
 	if not p4.props.renderLeft then
 		p4.updateLeftWidth(0)
 	end
@@ -78,7 +78,7 @@ function threeSectionBar.didUpdate(p4) --[[ line: 93 ]]
 	end
 end
 
-function threeSectionBar.render(p5) --[[ line: 104 ]]
+function threeSectionBar.render(p5)
 	-- upvalues: roactModule (ref), fitFrameModule (ref), cryoModule (ref)
 	local vector2 = Vector2.new(0.5, 0.5)
 	local _ = nil
@@ -90,7 +90,7 @@ function threeSectionBar.render(p5) --[[ line: 104 ]]
 		BackgroundTransparency = p5.props.BackgroundTransparency,
 		BorderSizePixel = 0,
 		AutomaticSize = if p5.props.automaticHeight then Enum.AutomaticSize.Y else nil,
-		[roactModule.Change.AbsoluteSize] = function(p6) --[[ line: 123 ]]
+		[roactModule.Change.AbsoluteSize] = function(p6)
 			-- upvalues: p5 (ref)
 			p5.props.onWidthChange(p6.AbsoluteSize.X)
 			p5.updateFullWidth(p6.AbsoluteSize.X)
@@ -111,7 +111,7 @@ function threeSectionBar.render(p5) --[[ line: 104 ]]
 				left = p5.props.marginLeft,
 				right = p5.props.sectionSpacing
 			},
-			[roactModule.Change.AbsoluteSize] = function(p7) --[[ line: 144 ]]
+			[roactModule.Change.AbsoluteSize] = function(p7)
 				-- upvalues: p5 (ref)
 				p5.updateLeftWidth(p7.AbsoluteSize.X)
 			end
@@ -119,7 +119,7 @@ function threeSectionBar.render(p5) --[[ line: 104 ]]
 			leftContent = p5.props.renderLeft(cryoModule.Dictionary.join(p5.props, {
 				[roactModule.Children] = {
 					sizeConstraint = roactModule.createElement("UISizeConstraint", {
-						MaxSize = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p8) --[[ line: 153 ]]
+						MaxSize = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p8)
 							-- upvalues: p5 (ref)
 							local _ = p8[1]
 							
@@ -132,11 +132,11 @@ function threeSectionBar.render(p5) --[[ line: 104 ]]
 		centerFrame = p5.props.renderCenter and roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = vector2,
-			Position = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p9) --[[ line: 169 ]]
+			Position = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p9)
 				-- upvalues: p5 (ref), var14 (write)
 				return if math.abs(p5.computeCenteredSize(p9).X.Offset) <= p5.props.estimatedCenterWidth then p5.computeBumpedPosition(p9) else var14
 			end),
-			Size = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p10) --[[ line: 178 ]]
+			Size = roactModule.joinBindings({ p5.leftWidth, p5.rightWidth, p5.fullWidth }):map(function(p10)
 				-- upvalues: p5 (ref)
 				local var15 = p5.computeCenteredSize(p10)
 				
@@ -169,7 +169,7 @@ function threeSectionBar.render(p5) --[[ line: 104 ]]
 				left = p5.props.sectionSpacing,
 				right = p5.props.marginRight
 			},
-			[roactModule.Change.AbsoluteSize] = function(p11) --[[ line: 216 ]]
+			[roactModule.Change.AbsoluteSize] = function(p11)
 				-- upvalues: p5 (ref)
 				p5.updateRightWidth(p11.AbsoluteSize.X)
 			end

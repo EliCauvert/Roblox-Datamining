@@ -2,7 +2,7 @@
 local selectHasBodyTryOnModule = require(script.Parent.selectHasBodyTryOn)
 local selectDefaultTryOnBodyColorsModule = require(script.Parent.selectDefaultTryOnBodyColors)
 
-return function(p0) --[[ line: 9 | named "selectAvatarPreviewColors" ]]
+return function(p0)
 	-- upvalues: selectHasBodyTryOnModule (ref), selectDefaultTryOnBodyColorsModule (ref), join (ref)
 	local outfitTryOn = p0.AvatarExperience.AvatarScene.OutfitTryOn
 	local var2 = selectHasBodyTryOnModule(p0)

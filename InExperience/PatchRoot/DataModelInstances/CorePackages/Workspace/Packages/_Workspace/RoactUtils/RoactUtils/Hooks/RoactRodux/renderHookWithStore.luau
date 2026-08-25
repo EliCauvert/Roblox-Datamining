@@ -4,18 +4,18 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local act = reactRobloxModule.act
 
-return function(p0, p1, p2) --[[ line: 12 | named "renderHookWithStore" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), roactRoduxModule (ref), reactRobloxModule (ref), act (ref)
 	local t = {}
 	
-	local var4 = function(p3) --[[ line: 15 ]]
+	local var4 = function(p3)
 		-- upvalues: t (ref), p1 (ref)
 		t.current = p1(p3)
 		
 		return nil
 	end
 	
-	local function createRootElement(p4) --[[ line: 20 ]]
+	local function createRootElement(p4)
 		-- upvalues: reactModule (copy), var4 (ref), p0 (ref), roactRoduxModule (copy)
 		local var7 = reactModule.createElement(var4, p4)
 		
@@ -26,21 +26,21 @@ return function(p0, p1, p2) --[[ line: 12 | named "renderHookWithStore" ]]
 	end
 	
 	local var6 = reactRobloxModule.createRoot(Instance.new("Frame"))
-	act(function() --[[ line: 35 ]]
+	act(function()
 		-- upvalues: var6 (ref), createRootElement (ref), p2 (ref)
 		var6:render(createRootElement(p2 or {}))
 	end)
 	
 	return {
 		result = t,
-		rerender = function(p5) --[[ line: 39 ]]
+		rerender = function(p5)
 			-- upvalues: act (copy), var6 (ref), createRootElement (ref)
-			act(function() --[[ line: 40 ]]
+			act(function()
 				-- upvalues: var6 (copy), createRootElement (copy), p5 (ref)
 				var6:render(createRootElement(p5))
 			end)
 		end,
-		cleanup = function() --[[ line: 45 ]]
+		cleanup = function()
 			-- upvalues: var6 (ref)
 			var6:unmount()
 		end

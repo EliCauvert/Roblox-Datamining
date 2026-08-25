@@ -10,7 +10,7 @@ local variantsContextModule = require(foundation.Providers.Style.VariantsContext
 local var7 = _G.__DEV__ == true
 local font = Font.new(require(foundation.Constants).BUILDER_SANS_FONT_ASSET, Enum.FontWeight.SemiBold, Enum.FontStyle.Normal)
 
-function variantsFactory(p0) --[[ line: 35 ]]
+function variantsFactory(p0)
 	-- upvalues: font (ref), statusIndicatorVariantModule (ref), flagsModule (ref), statusIndicatorShapeModule (ref), statusIndicatorSizeModule (ref)
 	return {
 		common = {
@@ -113,7 +113,7 @@ function variantsFactory(p0) --[[ line: 35 ]]
 	}
 end
 
-return function(p1, p2, p3, p4, p5) --[[ line: 178 ]]
+return function(p1, p2, p3, p4, p5)
 	-- upvalues: flagsModule (ref), var7 (ref), statusIndicatorVariantModule (ref), variantsContextModule (ref), composeStyleVariantModule (ref)
 	if not flagsModule.FoundationStatusIndicatorVariantExperiment and var7 then
 		if p2 == statusIndicatorVariantModule.Contrast_Experiment then

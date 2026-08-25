@@ -8,7 +8,7 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Days",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Day.Expired",
 		unitInSeconds = 86400,
-		descriptionActiveFormatFunction = function(p0) --[[ line: 20 ]]
+		descriptionActiveFormatFunction = function(p0)
 			return tostring(math.ceil(p0 / 86400))
 		end
 	},
@@ -19,7 +19,7 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Hours",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Hour.Expired",
 		unitInSeconds = 3600,
-		descriptionActiveFormatFunction = function(p1) --[[ line: 31 ]]
+		descriptionActiveFormatFunction = function(p1)
 			-- upvalues: localizationService (ref)
 			return DateTime.fromUnixTimestamp(p1):FormatUniversalTime("HH:mm", localizationService.RobloxLocaleId)
 		end
@@ -31,14 +31,14 @@ local list = {
 		descriptionActive = "Feature.InExperienceIntervention.Description.ChatSuspension.Minutes",
 		descriptionExpired = "Feature.InExperienceIntervention.Description.ChatSuspension.Minute.Expired",
 		unitInSeconds = 60,
-		descriptionActiveFormatFunction = function(p2) --[[ line: 45 ]]
+		descriptionActiveFormatFunction = function(p2)
 			-- upvalues: localizationService (ref)
 			return DateTime.fromUnixTimestamp(p2):FormatUniversalTime("mm:ss", localizationService.RobloxLocaleId)
 		end
 	}
 }
 
-local var3 = function(p3, p4) --[[ line: 58 ]]
+local var3 = function(p3, p4)
 	-- upvalues: var1 (ref), list (ref)
 	if p4 then
 		return var1:Format("Feature.InExperienceIntervention.Heading.ChatSuspension.Expired")
@@ -60,7 +60,7 @@ local var3 = function(p3, p4) --[[ line: 58 ]]
 	return var4
 end
 
-return function(p5, p6) --[[ line: 83 ]]
+return function(p5, p6)
 	-- upvalues: var3 (ref), list (ref), var1 (ref)
 	if p5 == nil or p6 == nil then
 		return 0, "", ""

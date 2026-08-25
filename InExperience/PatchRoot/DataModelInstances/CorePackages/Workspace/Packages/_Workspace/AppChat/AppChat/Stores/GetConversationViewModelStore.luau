@@ -4,7 +4,7 @@ local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
 local getConversationMessageStoreModule = require(appChat.Stores.GetConversationMessageStore)
 local createConversationViewModelStoreModule = require(script.createConversationViewModelStore)
 
-return signalsModule.createComputed(function() --[[ line: 12 ]]
+return signalsModule.createComputed(function()
 	-- upvalues: getConversationStoreModule (ref), getConversationMessageStoreModule (ref), createConversationViewModelStoreModule (ref)
 	return createConversationViewModelStoreModule(getConversationStoreModule(false), getConversationMessageStoreModule(false))
 end)

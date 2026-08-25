@@ -5,20 +5,20 @@ local signalsReactModule = require(parent.SignalsReact)
 local conversationChannelsModule = require(parent.AppChat.ConversationChannels)
 local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-local function _(p0) --[[ line: 29 | named "toConversationModerationType" ]]
+local function _(p0)
 	-- upvalues: conversationChannelsModule (ref)
 	return if p0 == conversationChannelsModule.ModerationType.TrustedComms or p0 == conversationChannelsModule.ModerationType.Moderated or (p0 == conversationChannelsModule.ModerationType.Invalid or p0 == conversationChannelsModule.ModerationType.UnknownType) then p0 else nil
 end
 
-return function(p1) --[[ line: 41 | named "useConversationModerationType" ]]
+return function(p1)
 	-- upvalues: expChatConversationListAdapterModule (ref), reactModule (ref), signalsModule (ref), conversationChannelsModule (ref), signalsReactModule (ref)
 	local conversationId = p1.conversationId
 	local hasConversationId = p1.hasConversationId
 	local conversationStore = expChatConversationListAdapterModule.getConversationStore()
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 46 ]]
+	return signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), hasConversationId (ref), conversationStore (ref), conversationId (ref), conversationChannelsModule (copy)
-		return signalsModule.createComputed(function(p2) --[[ line: 47 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: hasConversationId (copy), conversationStore (copy), conversationId (copy), conversationChannelsModule (copy)
 			if not hasConversationId then
 				return nil

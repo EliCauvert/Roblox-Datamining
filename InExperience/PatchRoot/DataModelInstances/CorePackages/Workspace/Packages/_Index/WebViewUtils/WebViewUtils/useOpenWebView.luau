@@ -10,21 +10,21 @@ local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
 local webViewService = game:GetService("WebViewService")
 
-return function() --[[ line: 25 | named "useOpenWebView" ]]
+return function()
 	-- upvalues: useRef (ref), useCallback (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), fFlagAppNavMyStatsTab (ref), browserService (ref), httpService (ref), useEffect (ref)
 	local var5 = useRef(nil)
-	local var6 = useCallback(function() --[[ line: 28 ]]
+	local var6 = useCallback(function()
 		-- upvalues: var5 (ref)
 		if var5.current then
 			var5.current:Disconnect()
 			var5.current = nil
 		end
 	end, { var5 })
-	local var7 = useCallback(function(p0, p1, p2) --[[ line: 35 ]]
+	local var7 = useCallback(function(p0, p1, p2)
 		-- upvalues: getFFlagEnableUnifiedWebViews (copy), var6 (ref), var5 (ref), webViewService (copy), fFlagAppNavMyStatsTab (copy), browserService (copy), httpService (copy)
 		if getFFlagEnableUnifiedWebViews() then
 			var6()
-			var5.current = webViewService.OnWindowClosed:Connect(function() --[[ line: 41 ]]
+			var5.current = webViewService.OnWindowClosed:Connect(function()
 				-- upvalues: webViewService (copy), var6 (copy), fFlagAppNavMyStatsTab (copy), p2 (ref)
 				webViewService:CloseWindow()
 				var6()
@@ -46,9 +46,9 @@ return function() --[[ line: 25 | named "useOpenWebView" ]]
 			title = p1
 		}))
 	end, { var6 })
-	useEffect(function() --[[ line: 63 ]]
+	useEffect(function()
 		-- upvalues: var6 (ref)
-		return function() --[[ line: 64 ]]
+		return function()
 			-- upvalues: var6 (copy)
 			var6()
 		end

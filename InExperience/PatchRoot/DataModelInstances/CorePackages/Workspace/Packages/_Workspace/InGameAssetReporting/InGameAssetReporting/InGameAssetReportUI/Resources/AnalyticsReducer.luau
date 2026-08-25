@@ -2,7 +2,7 @@
 local _ = require(inGameAssetReporting.InGameAssetReportUI.Resources.Types)
 local analyticsActions = require(inGameAssetReporting.InGameAssetReportUI.Resources.Constants).AnalyticsActions
 
-return function(p0, p1) --[[ line: 8 | named "analyticsReducer" ]]
+return function(p0, p1)
 	-- upvalues: analyticsActions (ref)
 	local cloned = table.clone(p0)
 	local type = p1.type

@@ -12,7 +12,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local constantsModule = require(momentsCreation.Constants)
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 
-return function(p0) --[[ line: 28 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), reactModule (ref), view (ref), constantsModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
 	local var6 = useDeviceInsets()
 	local var7 = useTokens()

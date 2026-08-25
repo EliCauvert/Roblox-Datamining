@@ -38,7 +38,7 @@ imageTextLabel.defaultProps = {
 	frameProps = {}
 }
 
-function imageTextLabel.render(p0) --[[ line: 68 ]]
+function imageTextLabel.render(p0)
 	-- upvalues: withStyleModule (ref), getWrappedTextWithIconModule (ref), getTextSizeModule (ref), roactModule (ref), cryoModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref)
 	local genericTextLabelProps = p0.props.genericTextLabelProps
 	local imageProps = p0.props.imageProps
@@ -49,7 +49,7 @@ function imageTextLabel.render(p0) --[[ line: 68 ]]
 	local useMaxHeight = p0.props.useMaxHeight
 	local richText = p0.props.richText
 	
-	return withStyleModule(function(p1) --[[ line: 78 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: genericTextLabelProps (ref), imageProps (ref), text (write), getWrappedTextWithIconModule (copy), padding (ref), getTextSizeModule (copy), maxSize (ref), useMaxHeight (ref), roactModule (copy), cryoModule (copy), frameProps (ref), imageSetComponentModule (copy), genericTextLabelModule (copy), p0 (ref), richText (ref)
 		local fontStyle = genericTextLabelProps.fontStyle
 		local var12 = if fontStyle.RelativeSize then p1.Font.BaseSize * fontStyle.RelativeSize else fontStyle.FontSize

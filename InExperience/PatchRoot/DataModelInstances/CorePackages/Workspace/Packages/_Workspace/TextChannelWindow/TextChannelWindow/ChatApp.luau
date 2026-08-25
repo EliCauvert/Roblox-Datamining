@@ -11,7 +11,7 @@ local themeFromBackgroundColorModule = require(script.Parent.themeFromBackground
 local fFlagExpChatTextChannelWindowThemeByBackgroundModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowThemeByBackground)
 local createNextOrder = reactUtilsModule.createNextOrder
 
-local function ChatAppInner(p0) --[[ line: 34 ]]
+local function ChatAppInner(p0)
 	-- upvalues: foundationModule (ref), createNextOrder (ref), reactModule (ref), fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), messageListAreaModule (ref), textChatWindowInputBarHostModule (ref), chatWindowTopBannerModule (ref)
 	local var9 = foundationModule.Hooks.useTokens()
 	local var10 = createNextOrder()
@@ -59,7 +59,7 @@ local function ChatAppInner(p0) --[[ line: 34 ]]
 	})
 end
 
-return function(p1) --[[ line: 92 | named "ChatApp" ]]
+return function(p1)
 	-- upvalues: fFlagExpChatTextChannelWindowThemeByBackgroundModule (ref), themeFromBackgroundColorModule (ref), foundationModule (ref), reactModule (ref), ChatAppInner (ref)
 	return reactModule.createElement(foundationModule.FoundationProvider, {
 		colorMode = if fFlagExpChatTextChannelWindowThemeByBackgroundModule and p1.backgroundColor then themeFromBackgroundColorModule(p1.backgroundColor) else foundationModule.Enums.ColorMode.Dark

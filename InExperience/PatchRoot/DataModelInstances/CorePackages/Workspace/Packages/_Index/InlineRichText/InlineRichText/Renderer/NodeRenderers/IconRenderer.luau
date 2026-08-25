@@ -4,7 +4,7 @@ local isBuilderIcon = require(inlineRichText.Parent.Foundation).Utility.isBuilde
 local iconElementModule = require(inlineRichText.Renderer.InlineElements.IconElement)
 local _ = require(inlineRichText.Types)
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: name (ref), isBuilderIcon (ref), iconElementModule (ref)
 	local name_1 = p0.attributes.name
 	

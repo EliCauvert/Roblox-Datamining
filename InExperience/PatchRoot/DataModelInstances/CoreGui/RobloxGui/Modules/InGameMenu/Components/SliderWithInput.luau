@@ -35,7 +35,7 @@ sliderWithInput.validateProps = t.intersection(t.strictInterface({
 	sliderDotRef = t.optional(t.table),
 	onSelectionLost = t.callback,
 	onSelectionGained = t.callback
-}), function(p0) --[[ line: 73 ]]
+}), function(p0)
 	if p0.max < p0.min then
 		return false, "min must be less than or equal to max"
 	elseif p0.max < p0.value or p0.value < p0.min then
@@ -44,21 +44,21 @@ sliderWithInput.validateProps = t.intersection(t.strictInterface({
 	return true
 end)
 
-function sliderWithInput.init(p1) --[[ line: 86 ]]
+function sliderWithInput.init(p1)
 	-- upvalues: roact (ref)
 	p1.textBoxRef = roact.createRef()
 	p1.state = { textEntryMode = false }
 end
 
-function sliderWithInput.renderFocusHandler(p2) --[[ line: 94 ]]
+function sliderWithInput.renderFocusHandler(p2)
 	-- upvalues: roact (ref), focusHandlerModule (ref), guiService (ref), contextActionService (ref)
 	return roact.createElement(focusHandlerModule, {
 		isFocused = if p2.props.canCaptureFocus then p2.state.textEntryMode else false,
-		didFocus = function() --[[ line: 98 ]]
+		didFocus = function()
 			-- upvalues: guiService (copy), p2 (ref), contextActionService (copy)
 			guiService.CoreGuiNavigationEnabled = false
 			local value = p2.props.value
-			contextActionService:BindCoreAction("LeaveTextEntryMode", function(_, p3) --[[ line: 107 ]]
+			contextActionService:BindCoreAction("LeaveTextEntryMode", function(_, p3)
 				-- upvalues: p2 (copy), value (ref)
 				if p3 == Enum.UserInputState.End then
 					p2:setState({ textEntryMode = false })
@@ -71,7 +71,7 @@ function sliderWithInput.renderFocusHandler(p2) --[[ line: 94 ]]
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB)
 		end,
-		didBlur = function() --[[ line: 119 ]]
+		didBlur = function()
 			-- upvalues: guiService (copy), contextActionService (copy)
 			guiService.CoreGuiNavigationEnabled = true
 			contextActionService:UnbindCoreAction("LeaveTextEntryMode")
@@ -79,7 +79,7 @@ function sliderWithInput.renderFocusHandler(p2) --[[ line: 94 ]]
 	}) or nil
 end
 
-function sliderWithInput.renderWithSelectionCursor(p4, p5) --[[ line: 126 ]]
+function sliderWithInput.renderWithSelectionCursor(p4, p5)
 	-- upvalues: cryo (ref), roact (ref), sliderModule (ref), withFoundationOrUIBloxStyle (ref), assetImageModule (ref), var7 (ref), externalEventConnectionModule (ref), userInputService (ref)
 	local props = p4.props
 	
@@ -97,7 +97,7 @@ function sliderWithInput.renderWithSelectionCursor(p4, p5) --[[ line: 126 ]]
 			keyboardInputStepInterval = cryo.None,
 			NextSelectionRight = p4.textBoxRef
 		})),
-		TextContainer = withFoundationOrUIBloxStyle(function(p6) --[[ line: 144 ]]
+		TextContainer = withFoundationOrUIBloxStyle(function(p6)
 			return {
 				Theme = {
 					TextMuted = {
@@ -122,7 +122,7 @@ function sliderWithInput.renderWithSelectionCursor(p4, p5) --[[ line: 126 ]]
 					}
 				}
 			}
-		end, function(p7) --[[ line: 156 ]]
+		end, function(p7)
 			-- upvalues: props (ref), roact (copy), assetImageModule (copy), p4 (ref), p5 (ref), var7 (copy)
 			local var13 = if props.disabled then p7.Theme.TextMuted else p7.Theme.TextDefault
 			
@@ -153,13 +153,13 @@ function sliderWithInput.renderWithSelectionCursor(p4, p5) --[[ line: 126 ]]
 					[roact.Event.SelectionLost] = p4.props.onSelectionLost,
 					[roact.Event.SelectionGained] = p4.props.onSelectionGained,
 					[roact.Ref] = p4.textBoxRef,
-					[roact.Event.Focused] = if props.disabled then function(p8) --[[ line: 186 ]]
+					[roact.Event.Focused] = if props.disabled then function(p8)
 						p8:ReleaseFocus(false)
-					end else function() --[[ line: 188 ]]
+					end else function()
 						-- upvalues: p4 (copy)
 						p4:setState({ textEntryMode = true })
 					end,
-					[roact.Event.FocusLost] = function(p9, _) --[[ line: 191 ]]
+					[roact.Event.FocusLost] = function(p9, _)
 						-- upvalues: p4 (copy), props (copy)
 						p4:setState({ textEntryMode = false })
 						local var14 = tonumber(p9.Text)
@@ -189,7 +189,7 @@ function sliderWithInput.renderWithSelectionCursor(p4, p5) --[[ line: 126 ]]
 		end),
 		UserInputConnection = not props.disabled and roact.createElement(externalEventConnectionModule, {
 			event = userInputService.InputBegan,
-			callback = function(p10, _) --[[ line: 229 ]]
+			callback = function(p10, _)
 				-- upvalues: userInputService (copy), p4 (ref), props (ref)
 				if p10.UserInputType ~= Enum.UserInputType.Keyboard then return end
 				if userInputService:GetFocusedTextBox() ~= p4.textBoxRef.current then return end
@@ -215,9 +215,9 @@ function sliderWithInput.renderWithSelectionCursor(p4, p5) --[[ line: 126 ]]
 	})
 end
 
-function sliderWithInput.render(p11) --[[ line: 269 ]]
+function sliderWithInput.render(p11)
 	-- upvalues: var6 (ref)
-	return var6(function(p12) --[[ line: 270 ]]
+	return var6(function(p12)
 		-- upvalues: p11 (ref)
 		return p11:renderWithSelectionCursor(p12)
 	end)

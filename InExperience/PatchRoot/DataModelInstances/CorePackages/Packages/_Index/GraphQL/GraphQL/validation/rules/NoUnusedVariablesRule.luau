@@ -1,17 +1,17 @@
 ﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	NoUnusedVariablesRule = function(p0) --[[ line: 20 ]]
+	NoUnusedVariablesRule = function(p0)
 		-- upvalues: graphQLError (ref)
 		local t = {}
 		
 		return {
 			OperationDefinition = {
-				enter = function() --[[ line: 25 ]]
+				enter = function()
 					-- upvalues: t (write)
 					t = {}
 				end,
-				leave = function(_, p1) --[[ line: 28 ]]
+				leave = function(_, p1)
 					-- upvalues: p0 (ref), t (write), graphQLError (copy)
 					local t_1 = {}
 					
@@ -27,7 +27,7 @@ return {
 					end
 				end
 			},
-			VariableDefinition = function(_, p2) --[[ line: 55 ]]
+			VariableDefinition = function(_, p2)
 				-- upvalues: t (write)
 				table.insert(t, p2)
 			end

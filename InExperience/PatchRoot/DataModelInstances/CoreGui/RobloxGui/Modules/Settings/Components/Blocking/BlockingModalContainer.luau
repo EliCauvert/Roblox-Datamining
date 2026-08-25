@@ -8,7 +8,7 @@ local toast = require(corePackagesService.Packages.UIBlox).App.Dialog.Toast
 local actionModalModule = require(script.Parent.ActionModal)
 local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
 
-return function(p0) --[[ line: 33 | named "BlockingModalContainer" ]]
+return function(p0)
 	-- upvalues: blockingUtilityModule (ref), reactModule (ref), isNewInGameMenuEnabledModule (ref), modules (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), toast (ref), actionModalModule (ref)
 	local player = p0.player
 	local closeModal = p0.closeModal
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 33 | named "BlockingModalContainer" ]]
 	local onBlockingSuccess = p0.onBlockingSuccess
 	local var6, var7 = reactModule.useState(Vector2.new(1000, 1000))
 	local var8, var9 = reactModule.useState(false)
-	local var10 = reactModule.useCallback(function() --[[ line: 45 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: blockingUtility (ref), player (ref), analytics (ref), source (ref), onBlockingSuccess (ref), closeModal (ref), var9 (ref)
 		if not blockingUtility:BlockPlayerAsync(player) then
 			var9(true)
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 33 | named "BlockingModalContainer" ]]
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		[reactModule.Change.AbsoluteSize] = function(p1) --[[ line: 105 ]]
+		[reactModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: var7 (ref)
 			var7(p1.AbsoluteSize)
 		end
@@ -75,7 +75,7 @@ return function(p0) --[[ line: 33 | named "BlockingModalContainer" ]]
 			cancelText = var11.cancelTextKey,
 			cancel = closeModal,
 			block = var10,
-			blockAndReport = reactModule.useCallback(function() --[[ line: 62 ]]
+			blockAndReport = reactModule.useCallback(function()
 				-- upvalues: var10 (ref), source (ref), isNewInGameMenuEnabledModule (copy), modules (copy), player (ref)
 				var10()
 				local source_1 = source or "BlockingModal"

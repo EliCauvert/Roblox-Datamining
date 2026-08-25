@@ -1,7 +1,7 @@
 ﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 local parentContainerContextModule = require(script.Parent.ParentContainerContext)
 
-return function(p0) --[[ line: 11 | named "ParentContainerProvider" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), parentContainerContextModule (ref)
 	return reactModule.createElement(parentContainerContextModule.Provider, {
 		value = {

@@ -19,7 +19,7 @@ reportConfirmationContainer.defaultProps = {
 	isVoiceReport = false,
 	blockingUtility = blockingUtilityModule,
 	voiceChatServiceManager = default,
-	closeMenu = function() --[[ line: 36 ]] end
+	closeMenu = function() end
 }
 reportConfirmationContainer.validateProps = tModule.interface({
 	player = tModule.strictInterface({
@@ -33,22 +33,22 @@ reportConfirmationContainer.validateProps = tModule.interface({
 	reportAbuseAnalytics = tModule.optional(tModule.table)
 })
 
-local function _(p0, p1) --[[ line: 57 | named "getIsPlayerBlockedByUserId" ]]
+local function _(p0, p1)
 	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p2, _) --[[ line: 58 ]]
+	return promiseModule.new(function(p2, _)
 		-- upvalues: p0 (ref), p1 (ref)
 		p2(p0:IsPlayerBlockedByUserId(p1))
 	end)
 end
 
-function reportConfirmationContainer.init(p3) --[[ line: 63 ]]
+function reportConfirmationContainer.init(p3)
 	-- upvalues: getFFlagVoiceARUnblockingUnmutingEnabledModule (ref), constantsModule (ref), var12 (ref), promiseModule (ref)
 	local player = p3.props.player
 	local participants = p3.props.voiceChatServiceManager.participants
 	p3:setState({ absoluteWidth = 0 })
 	
 	if p3.props.onSizeChanged then
-		p3.props.onSizeChanged:Connect(function(p4) --[[ line: 72 ]]
+		p3.props.onSizeChanged:Connect(function(p4)
 			-- upvalues: p3 (ref)
 			p3:setState({ absoluteWidth = p4.X })
 		end)
@@ -56,17 +56,17 @@ function reportConfirmationContainer.init(p3) --[[ line: 63 ]]
 	local userId = participants[tostring(player.UserId)]
 	p3.userFullName = player.DisplayName .. "(@" .. player.Name .. ")"
 	
-	function p3.onMuteCheckboxActivated(p5) --[[ line: 82 ]]
+	function p3.onMuteCheckboxActivated(p5)
 		-- upvalues: p3 (ref)
 		p3:setState({ muteFlipped = p5 })
 	end
 	
-	function p3.onBlockCheckboxActivated(p6) --[[ line: 88 ]]
+	function p3.onBlockCheckboxActivated(p6)
 		-- upvalues: p3 (ref)
 		p3:setState({ blockFlipped = p6 })
 	end
 	
-	function p3.processMuteAndBlocking() --[[ line: 94 ]]
+	function p3.processMuteAndBlocking()
 		-- upvalues: p3 (ref), player (ref), getFFlagVoiceARUnblockingUnmutingEnabledModule (copy), constantsModule (copy)
 		local blockFlipped = p3.state.blockFlipped
 		local muteFlipped = p3.state.muteFlipped
@@ -98,7 +98,7 @@ function reportConfirmationContainer.init(p3) --[[ line: 63 ]]
 		p3.props.closeMenu()
 	end
 	
-	function p3.onActionSelectionDoneActivated(p7, p8) --[[ line: 151 ]]
+	function p3.onActionSelectionDoneActivated(p7, p8)
 		-- upvalues: p3 (ref), var12 (copy)
 		p3:setState({ blockFlipped = p7, muteFlipped = p8 })
 		
@@ -110,12 +110,12 @@ function reportConfirmationContainer.init(p3) --[[ line: 63 ]]
 		p3.processMuteAndBlocking()
 	end
 	
-	function p3.onYesOrNoConfirmation() --[[ line: 174 ]]
+	function p3.onYesOrNoConfirmation()
 		-- upvalues: p3 (ref)
 		p3.processMuteAndBlocking()
 	end
 	
-	function p3.onYesOrNoCancel() --[[ line: 178 ]]
+	function p3.onYesOrNoCancel()
 		-- upvalues: p3 (ref), var12 (copy)
 		p3:setState({ currentPage = var12.SelectActions })
 	end
@@ -132,16 +132,16 @@ function reportConfirmationContainer.init(p3) --[[ line: 63 ]]
 	end
 	local blockingUtility = p3.props.blockingUtility
 	local userId_1 = player.UserId
-	promiseModule.new(function(p10, _) --[[ line: 58 ]]
+	promiseModule.new(function(p10, _)
 		-- upvalues: blockingUtility (ref), userId_1 (ref)
 		p10(blockingUtility:IsPlayerBlockedByUserId(userId_1))
-	end):andThen(function(p9) --[[ line: 201 ]]
+	end):andThen(function(p9)
 		-- upvalues: p3 (ref)
 		p3:setState({ targetInitiallyBlocked = p9, blockFlipped = p9 })
 	end)
 end
 
-function reportConfirmationContainer.renderContent(p11) --[[ line: 209 ]]
+function reportConfirmationContainer.renderContent(p11)
 	-- upvalues: roactModule (ref), reportActionSelectionModule (ref), robloxTranslatorModule (ref), reportActionAreYouSureModule (ref), var12 (ref)
 	local currentPage = p11.state.currentPage
 	local var14 = 1.3
@@ -194,9 +194,9 @@ function reportConfirmationContainer.renderContent(p11) --[[ line: 209 ]]
 	return var17
 end
 
-function reportConfirmationContainer.render(p12) --[[ line: 297 ]]
+function reportConfirmationContainer.render(p12)
 	-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (ref), withStyle (ref)
-	return if fFlagCoreUiMigrateUIBloxToFoundation then p12:renderContent() else withStyle(function(_) --[[ line: 301 ]]
+	return if fFlagCoreUiMigrateUIBloxToFoundation then p12:renderContent() else withStyle(function(_)
 		-- upvalues: p12 (ref)
 		return p12:renderContent()
 	end)

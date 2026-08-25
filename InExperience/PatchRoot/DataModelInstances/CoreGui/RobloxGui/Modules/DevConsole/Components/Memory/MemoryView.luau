@@ -16,23 +16,23 @@ local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
 local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out, 0, false, 0)
 local memoryView = roactModule.Component:extend("MemoryView")
 
-local function getX(p0) --[[ line: 37 ]]
+local function getX(p0)
 	return p0.time
 end
 
-local function getY(p1) --[[ line: 41 ]]
+local function getY(p1)
 	return p1.data
 end
 
-local function formatValueStr(p2) --[[ line: 45 ]]
+local function formatValueStr(p2)
 	return string.format("%.3f", p2)
 end
 
-function memoryView.init(p3, p4) --[[ line: 49 ]]
+function memoryView.init(p3, p4)
 	-- upvalues: entryFrameHeight (ref), tweenService (ref), tweenInfo (ref), roactModule (ref)
-	function p3.getOnButtonPress(p5, p6) --[[ line: 50 ]]
+	function p3.getOnButtonPress(p5, p6)
 		-- upvalues: p3 (ref), entryFrameHeight (copy), tweenService (copy), tweenInfo (copy)
-		return function(_, _) --[[ line: 51 ]]
+		return function(_, _)
 			-- upvalues: p3 (copy), p5 (ref), p6 (ref), entryFrameHeight (copy), tweenService (copy), tweenInfo (copy)
 			if p3.state.expandIndex ~= p5 and p5 then
 				local current = p3.scrollingRef.current
@@ -47,7 +47,7 @@ function memoryView.init(p3, p4) --[[ line: 49 ]]
 		end
 	end
 	
-	function p3.onSortChanged(p7) --[[ line: 71 ]]
+	function p3.onSortChanged(p7)
 		-- upvalues: p4 (ref), p3 (ref)
 		if p7 == p4.targetMemoryData:getSortType() then
 			p4.targetMemoryData:setSortType(p7)
@@ -59,7 +59,7 @@ function memoryView.init(p3, p4) --[[ line: 49 ]]
 		p3:setState({ reverseSort = false })
 	end
 	
-	function p3.onCanvasPosChanged() --[[ line: 87 ]]
+	function p3.onCanvasPosChanged()
 		-- upvalues: p3 (ref)
 		local canvasPosition = p3.scrollingRef.current.CanvasPosition
 		
@@ -79,20 +79,20 @@ function memoryView.init(p3, p4) --[[ line: 49 ]]
 	}
 end
 
-function memoryView.willUpdate(p8) --[[ line: 106 ]]
+function memoryView.willUpdate(p8)
 	if p8.canvasPosConnector then
 		p8.canvasPosConnector:Disconnect()
 	end
 end
 
-function memoryView.didUpdate(p9) --[[ line: 112 ]]
+function memoryView.didUpdate(p9)
 	if p9.scrollingRef.current then
 		p9.canvasPosConnector = p9.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p9.onCanvasPosChanged)
 	end
 end
 
-function memoryView.didMount(p10) --[[ line: 119 ]]
-	p10.treeViewItemConnector = p10.props.targetMemoryData:treeUpdatedSignal():Connect(function(p11) --[[ line: 121 ]]
+function memoryView.didMount(p10)
+	p10.treeViewItemConnector = p10.props.targetMemoryData:treeUpdatedSignal():Connect(function(p11)
 		-- upvalues: p10 (ref)
 		p10:setState({ memoryData = p11 })
 	end)
@@ -106,11 +106,11 @@ function memoryView.didMount(p10) --[[ line: 119 ]]
 	end
 end
 
-function memoryView.willUnmount(p12) --[[ line: 138 ]]
+function memoryView.willUnmount(p12)
 	p12.treeViewItemConnector:Disconnect()
 end
 
-function memoryView.appendAdditionTabInformation(p13, p14, p15, p16, p17, p18) --[[ line: 142 ]]
+function memoryView.appendAdditionTabInformation(p13, p14, p15, p16, p17, p18)
 	-- upvalues: entryFrameHeight (ref), roactModule (ref), memoryViewEntryModule (ref), formatValueStr (ref)
 	local canvasPosition = p13.scrollingRef.current.CanvasPosition
 	local absoluteSize = p13.scrollingRef.current.AbsoluteSize
@@ -146,7 +146,7 @@ function memoryView.appendAdditionTabInformation(p13, p14, p15, p16, p17, p18) -
 	end
 end
 
-function memoryView.recursiveConstructEntries(p19, p20, p21, p22, p23) --[[ line: 183 ]]
+function memoryView.recursiveConstructEntries(p19, p20, p21, p22, p23)
 	-- upvalues: entryFrameHeight (ref), lineGraphHeight (ref), roactModule (ref), memoryViewEntryModule (ref), formatValueStr (ref), getX (ref), getY (ref)
 	assert(p19.scrollingRef.current, "ScrollingFrame not initialized yet")
 	local expandIndex = p19.state.expandIndex
@@ -205,7 +205,7 @@ function memoryView.recursiveConstructEntries(p19, p20, p21, p22, p23) --[[ line
 	end
 end
 
-function memoryView.render(p24) --[[ line: 251 ]]
+function memoryView.render(p24)
 	-- upvalues: roactModule (ref), constantsModule (ref), noResultSearchStr (ref), headerFrameHeight (ref), headerButtonModule (ref), chartHeaderNames (ref), valueCellWidth (ref), valuePadding (ref), cellPadding (ref), lineColor (ref), lineWidth (ref)
 	local t = {}
 	local layoutOrder = p24.props.layoutOrder

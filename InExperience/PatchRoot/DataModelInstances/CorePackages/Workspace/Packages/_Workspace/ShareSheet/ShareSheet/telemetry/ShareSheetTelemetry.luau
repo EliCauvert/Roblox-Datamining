@@ -61,15 +61,15 @@ local t_1 = {
 		CustomMessageComposerFocused = "customMessageComposerFocused",
 		CustomMessageSubmitted = "customMessageSubmitted"
 	},
-	logShareSheetOpened = function(p0) --[[ line: 150 ]]
+	logShareSheetOpened = function(p0)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t.shareSheetOpened, { standardizedFields = list, customFields = p0 })
 	end,
-	logShareSheetLinkCopied = function(p1) --[[ line: 157 ]]
+	logShareSheetLinkCopied = function(p1)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t.shareSheetLinkCopied, { standardizedFields = list, customFields = p1 })
 	end,
-	logShareSheetMessageSent = function(p2) --[[ line: 164 ]]
+	logShareSheetMessageSent = function(p2)
 		-- upvalues: telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t.shareSheetMessageSent, { standardizedFields = list, customFields = p2 })
 	end
@@ -96,7 +96,7 @@ local t_4 = {
 	lastUpdated = { 2026, 8, 3 }
 }
 
-function t_1.logLifecycle(p3) --[[ line: 171 ]]
+function t_1.logLifecycle(p3)
 	-- upvalues: telemetryService (ref), t (ref), list (ref), t_1 (ref), t_2 (ref), t_3 (ref)
 	telemetryService:LogEvent(t.Lifecycle, { standardizedFields = list, customFields = p3 })
 	telemetryService:LogCounter(if p3.lifecycleType == t_1.LifecycleType.Open then t_2 else t_3, {
@@ -104,7 +104,7 @@ function t_1.logLifecycle(p3) --[[ line: 171 ]]
 	}, 1)
 end
 
-function t_1.logInteraction(p4) --[[ line: 188 ]]
+function t_1.logInteraction(p4)
 	-- upvalues: telemetryService (ref), t (ref), list (ref), t_4 (ref)
 	telemetryService:LogEvent(t.Interaction, { standardizedFields = list, customFields = p4 })
 	telemetryService:LogCounter(t_4, {

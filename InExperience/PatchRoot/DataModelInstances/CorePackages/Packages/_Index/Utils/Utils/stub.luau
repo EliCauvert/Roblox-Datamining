@@ -14,14 +14,14 @@ local kind = graphQLModule.Kind
 local graphQLList = graphQLModule.GraphQLList
 local graphQLNonNull = graphQLModule.GraphQLNonNull
 
-local function createNamedStub(p0, p1) --[[ line: 68 ]]
+local function createNamedStub(p0, p1)
 	-- upvalues: graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref), graphQLString (ref)
 	return (if p1 == "object" then graphQLObjectType elseif p1 == "interface" then graphQLInterfaceType else graphQLInputObjectType).new({ name = p0, fields = { _fake = { type = graphQLString } } })
 end
 
 t.createNamedStub = createNamedStub
 
-local function createStub(p2, p3) --[[ line: 96 ]]
+local function createStub(p2, p3)
 	-- upvalues: kind (ref), graphQLList (ref), createStub (ref), graphQLNonNull (ref), createNamedStub (ref)
 	local kind_1 = p2.kind
 	
@@ -30,7 +30,7 @@ end
 
 t.createStub = createStub
 
-function t.isNamedStub(p4) --[[ line: 125 ]]
+function t.isNamedStub(p4)
 	if p4.getFields ~= nil then
 		local fields = p4:getFields()
 		
@@ -41,7 +41,7 @@ function t.isNamedStub(p4) --[[ line: 125 ]]
 	return false
 end
 
-function t.getBuiltInForStub(p5) --[[ line: 149 ]]
+function t.getBuiltInForStub(p5)
 	-- upvalues: graphQLInt (ref), graphQLFloat (ref), graphQLString (ref), graphQLBoolean (ref), graphQLID (ref)
 	local name = p5.name
 	

@@ -1,9 +1,9 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 3 | named "parseCreateConversationErrors" ]]
+return function(p0)
 	-- upvalues: httpService (ref)
 	if p0.StatusCode == 403 then
-		local ok, status = pcall(function() --[[ line: 5 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p0 (ref)
 			return httpService:JSONDecode(p0.Body)
 		end)

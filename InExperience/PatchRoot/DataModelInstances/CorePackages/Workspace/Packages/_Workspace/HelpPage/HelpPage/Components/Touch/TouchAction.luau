@@ -11,7 +11,7 @@ local icon = foundationModule.Icon
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), constantsModule (ref), icon (ref)
 	local var4 = useTokens()
 	local touchInput = constantsModule.HELP_PAGE.TOUCH_ENUM_TO_ICON[p0.touchInput]

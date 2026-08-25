@@ -6,23 +6,23 @@ local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-local function _(p0, p1) --[[ line: 29 | named "playtestersUrl" ]]
+local function _(p0, p1)
 	return ("%s/v1/universes/%d/configuration/playtesters"):format(p0, p1)
 end
 
-local _ = function(p2) --[[ line: 33 | named "resolveBase" ]]
+local _ = function(p2)
 	-- upvalues: urlBase (ref)
 	p2 = p2 or {}
 	
 	return p2.network, p2.baseUrl or urlBase.new("develop")
 end
 
-local _ = function(p3) --[[ line: 39 | named "resolveMutatingNetwork" ]]
+local _ = function(p3)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
 	return (p3 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 end
 
-local function decodePlaytesterIds(p4) --[[ line: 46 ]]
+local function decodePlaytesterIds(p4)
 	local t = {}
 	local var6 = if type(p4) == "table" then p4.playtesters else nil
 	
@@ -43,7 +43,7 @@ local function decodePlaytesterIds(p4) --[[ line: 46 ]]
 end
 
 return {
-	fetchPlaytesters = function(p5, p6) --[[ line: 66 ]]
+	fetchPlaytesters = function(p5, p6)
 		-- upvalues: urlBase (ref), fetch (ref), decodePlaytesterIds (ref), asPromise (ref)
 		p6 = p6 or {}
 		
@@ -56,7 +56,7 @@ return {
 			decode = decodePlaytesterIds
 		}))
 	end,
-	addPlaytester = function(p7, p8, p9) --[[ line: 79 ]]
+	addPlaytester = function(p7, p8, p9)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), decodePlaytesterIds (ref), asPromise (ref)
 		p9 = p9 or {}
 		local _ = p9.network
@@ -71,7 +71,7 @@ return {
 			decode = decodePlaytesterIds
 		}))
 	end,
-	removePlaytester = function(p10, p11, p12) --[[ line: 97 ]]
+	removePlaytester = function(p10, p11, p12)
 		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), decodePlaytesterIds (ref), asPromise (ref)
 		p12 = p12 or {}
 		local _ = p12.network

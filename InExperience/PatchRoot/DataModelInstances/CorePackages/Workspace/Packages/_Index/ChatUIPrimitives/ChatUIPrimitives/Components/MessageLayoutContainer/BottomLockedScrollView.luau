@@ -4,19 +4,19 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(chatUIPrimitives.Types)
 
-local function _(p0) --[[ line: 12 | named "isNearBottom" ]]
+local function _(p0)
 	local y = p0.AbsoluteWindowSize.Y
 	local y_1 = p0.AbsoluteCanvasSize.Y
 	
 	return y_1 <= y or p0.CanvasPosition.Y / (y_1 - y) >= 0.9
 end
 
-return reactModule.memo(function(p1) --[[ line: 28 | named "BottomLockedScrollView" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	local var3 = reactModule.useRef(nil)
 	local var4 = reactModule.useRef(true)
 	local onScroll = p1.onScroll
-	local var5 = reactModule.useCallback(function(p2) --[[ line: 33 ]]
+	local var5 = reactModule.useCallback(function(p2)
 		-- upvalues: var4 (ref), onScroll (ref)
 		local y = p2.AbsoluteWindowSize.Y
 		local y_1 = p2.AbsoluteCanvasSize.Y
@@ -26,13 +26,13 @@ return reactModule.memo(function(p1) --[[ line: 28 | named "BottomLockedScrollVi
 			onScroll()
 		end
 	end, { onScroll })
-	local var6 = reactModule.useCallback(function(p3) --[[ line: 41 ]]
+	local var6 = reactModule.useCallback(function(p3)
 		-- upvalues: var4 (ref)
 		if var4.current then
 			p3.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref)
 		local current = var3.current
 		

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsTileSkeletonPoster", false)
 
-return function() --[[ line: 14 ]]
+return function()
 	return game:GetFastFlag("MomentsTileSkeletonPoster")
 end

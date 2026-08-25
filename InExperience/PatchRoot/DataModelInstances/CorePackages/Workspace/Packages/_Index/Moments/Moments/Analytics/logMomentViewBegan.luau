@@ -6,7 +6,7 @@ local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fFlagMomentsRealtimeObservability = momentsCommonModule.Flags.FFlagMomentsRealtimeObservability
 
-return function(p0, p1) --[[ line: 14 | named "logMomentViewBegan" ]]
+return function(p0, p1)
 	-- upvalues: fFlagMomentsRealtimeObservability (ref), analytics (ref), makeMomentViewBeganFieldsModule (ref), eventNames (ref)
 	if fFlagMomentsRealtimeObservability then
 		analytics.reportMomentsViewBegan(p1)

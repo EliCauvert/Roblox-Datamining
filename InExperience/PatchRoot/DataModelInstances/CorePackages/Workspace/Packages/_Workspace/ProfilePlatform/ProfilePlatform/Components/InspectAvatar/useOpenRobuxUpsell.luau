@@ -9,13 +9,13 @@ local fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(profilePlatf
 local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
 local fFlagEnableRecentActivityInspectAndBuy = require(parent.SharedFlags).FFlagEnableRecentActivityInspectAndBuy
 
-return function(p0, p1) --[[ line: 20 | named "useOpenRobuxUpsell" ]]
+return function(p0, p1)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), reactModule (ref), parent (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (ref), fFlagEnableRecentActivityInspectAndBuy (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (ref), promiseModule (ref)
 	local var6 = useDispatch()
 	local var7 = useNavigation()
 	local var8 = useProfileWrapperContextModule()
 	
-	return reactModule.useCallback(function() --[[ line: 26 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: parent (copy), var6 (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), var8 (ref), fFlagEnableRecentActivityInspectAndBuy (copy), p1 (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), var7 (ref), promiseModule (copy), p0 (ref)
 		local purchasePromptLiteModule = require(parent.PurchasePromptLite)
 		local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
@@ -25,7 +25,7 @@ return function(p0, p1) --[[ line: 20 | named "useOpenRobuxUpsell" ]]
 				surface = purchasePromptLiteModule.Enums.ProductPurchaseSurface.Profile
 			} else nil,
 			purchaseCallbacks = {
-				onFlowComplete = function() --[[ line: 38 ]]
+				onFlowComplete = function()
 					-- upvalues: var6 (copy), closeCentralOverlay (ref), var8 (copy), fFlagEnableRecentActivityInspectAndBuy (copy), p1 (copy), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), var7 (copy)
 					var6(closeCentralOverlay())
 					local var10 = if var8.postPurchase then var8.postPurchase.refreshRobuxBalance else nil
@@ -41,7 +41,7 @@ return function(p0, p1) --[[ line: 20 | named "useOpenRobuxUpsell" ]]
 						var7.goBack()
 					end
 				end,
-				fetchProductInfo = function() --[[ line: 52 ]]
+				fetchProductInfo = function()
 					-- upvalues: promiseModule (copy), p0 (copy)
 					return promiseModule.resolve({
 						IsForSale = true,

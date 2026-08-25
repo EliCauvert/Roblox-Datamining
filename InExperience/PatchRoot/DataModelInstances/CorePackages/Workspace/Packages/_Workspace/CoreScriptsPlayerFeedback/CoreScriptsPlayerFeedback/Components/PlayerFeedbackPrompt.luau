@@ -18,13 +18,13 @@ local telemetryService = game:GetService("TelemetryService")
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local circle21 = images["component_assets/circle_21"]
 
-return reactModule.memo(function(p0) --[[ line: 42 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useScreenSize (ref), useStyle (ref), useLastInputMethod (ref), reactModule (ref), useLocalization (ref), guiService (ref), constantsModule (ref), mouseIconOverrideService (ref), telemetryService (ref), useEscapeDismissModule (ref), contextActionService (ref), imageSetLabel (ref), circle21 (ref), buttonType (ref), interactiveAlert (ref)
 	local var8 = useScreenSize()
 	local var9 = useStyle()
 	local var10 = useLastInputMethod()
 	local var11, var12 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var10 (ref), var12 (ref)
 		if not var11 and (var10 == "Keyboard" or var10 == "Gamepad") then
 			var12(true)
@@ -41,13 +41,13 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 	local var14, var15 = reactModule.useState("")
 	local var16, var17 = reactModule.useState(false)
 	local var18 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), var18 (ref), guiService (copy)
 		if not var11 then return end
 		local current = var18.current
 		
 		if current then
-			pcall(function() --[[ line: 74 ]]
+			pcall(function()
 				-- upvalues: guiService (copy), current (ref)
 				guiService:Select(current)
 			end)
@@ -56,30 +56,30 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 	local MIN_FEEDBACK_LENGTH = constantsModule.MIN_FEEDBACK_LENGTH
 	local MAX_FEEDBACK_LENGTH = constantsModule.MAX_FEEDBACK_LENGTH
 	local DELAYED_INPUT_ANIM_SEC = constantsModule.DELAYED_INPUT_ANIM_SEC
-	reactModule.useEffect(function() --[[ line: 84 ]]
+	reactModule.useEffect(function()
 		-- upvalues: mouseIconOverrideService (copy)
 		mouseIconOverrideService.push("PlayerFeedbackPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function() --[[ line: 86 ]]
+		return function()
 			-- upvalues: mouseIconOverrideService (copy)
 			mouseIconOverrideService.pop("PlayerFeedbackPromptOverride")
 		end
 	end, {})
-	local var19 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), MIN_FEEDBACK_LENGTH (ref), MAX_FEEDBACK_LENGTH (ref), var17 (ref), telemetryService (copy), p0 (ref)
 		if #var14 < MIN_FEEDBACK_LENGTH then return end
 		if MAX_FEEDBACK_LENGTH < #var14 then
 			return
 		end
 		var17(true)
-		pcall(function() --[[ line: 99 ]]
+		pcall(function()
 			-- upvalues: telemetryService (copy)
 			telemetryService:LogCounter({
 				eventName = "FeedbackPrompt_Submitted",
 				backends = { "RobloxTelemetryCounter" }
 			}, { customFields = {} }, 1)
 		end)
-		pcall(function() --[[ line: 106 ]]
+		pcall(function()
 			-- upvalues: var14 (copy)
 			local socialService = game:GetService("SocialService")
 			
@@ -89,16 +89,16 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 		end)
 		p0.closePrompt()
 	end, { var14 })
-	local var20 = reactModule.useCallback(function() --[[ line: 115 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: telemetryService (copy), p0 (ref)
-		pcall(function() --[[ line: 116 ]]
+		pcall(function()
 			-- upvalues: telemetryService (copy)
 			telemetryService:LogCounter({
 				eventName = "FeedbackPrompt_Cancelled",
 				backends = { "RobloxTelemetryCounter" }
 			}, { customFields = {} }, 1)
 		end)
-		pcall(function() --[[ line: 123 ]]
+		pcall(function()
 			local socialService = game:GetService("SocialService")
 			
 			if socialService.SignalFeedbackSubmissionPermissionDenied then
@@ -108,12 +108,12 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 		p0.closePrompt()
 	end, {})
 	useEscapeDismissModule("FeedbackPromptCancel", var20)
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function()
 		-- upvalues: contextActionService (copy), guiService (copy), var19 (ref)
-		contextActionService:BindCoreActionAtPriority("FeedbackPromptDisableGameControls", function(_, _, p1) --[[ line: 137 ]]
+		contextActionService:BindCoreActionAtPriority("FeedbackPromptDisableGameControls", function(_, _, p1)
 			return if p1 and p1.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 		end, false, Enum.ContextActionPriority.Low.Value, Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward, Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight, Enum.PlayerActions.CharacterJump)
-		contextActionService:BindCoreAction("FeedbackPromptSubmit", function(_, p2) --[[ line: 152 ]]
+		contextActionService:BindCoreAction("FeedbackPromptSubmit", function(_, p2)
 			-- upvalues: guiService (copy), var19 (copy)
 			if p2 ~= Enum.UserInputState.Begin then
 				return Enum.ContextActionResult.Pass
@@ -128,20 +128,20 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 			return Enum.ContextActionResult.Sink
 		end, false, Enum.KeyCode.ButtonA, Enum.KeyCode.Return)
 		
-		return function() --[[ line: 164 ]]
+		return function()
 			-- upvalues: contextActionService (copy)
 			contextActionService:UnbindCoreAction("FeedbackPromptDisableGameControls")
 			contextActionService:UnbindCoreAction("FeedbackPromptSubmit")
 		end
 	end, { var19, var20 })
-	reactModule.useEffect(function() --[[ line: 170 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), guiService (copy)
-		local function trySelect() --[[ line: 171 ]]
+		local function trySelect()
 			-- upvalues: var18 (copy), guiService (copy)
 			local current = var18.current
 			
 			if current then
-				pcall(function() --[[ line: 174 ]]
+				pcall(function()
 					-- upvalues: guiService (copy), current (ref)
 					guiService:Select(current)
 				end)
@@ -153,7 +153,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 		task.delay(0.15, trySelect)
 		task.delay(0.2, trySelect)
 		task.delay(0.25, trySelect)
-		local var27 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 182 ]]
+		local var27 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 			-- upvalues: guiService (copy), var18 (copy)
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
@@ -161,7 +161,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 				local current = var18.current
 				
 				if current then
-					pcall(function() --[[ line: 174 ]]
+					pcall(function()
 						-- upvalues: guiService (copy), current (ref)
 						guiService:Select(current)
 					end)
@@ -169,7 +169,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 			end
 		end)
 		
-		return function() --[[ line: 188 ]]
+		return function()
 			-- upvalues: var27 (ref)
 			var27:Disconnect()
 		end
@@ -178,7 +178,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 	local var21 = if var16 then var13.Submitting else var13.Submit
 	local placeholder = var13.Placeholder
 	local var22 = MIN_FEEDBACK_LENGTH <= #var14 and #var14 <= MAX_FEEDBACK_LENGTH
-	local var23 = reactModule.useCallback(function(p3) --[[ line: 199 ]]
+	local var23 = reactModule.useCallback(function(p3)
 		-- upvalues: var15 (ref)
 		var15(p3.Text)
 	end, {})
@@ -188,7 +188,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 		isMiddleContentFocusable = true,
 		title = title,
 		onCloseClicked = var20,
-		buttonStackInfo = reactModule.useMemo(function() --[[ line: 288 ]]
+		buttonStackInfo = reactModule.useMemo(function()
 			-- upvalues: buttonType (copy), var19 (ref), var21 (ref), p0 (ref), DELAYED_INPUT_ANIM_SEC (ref), var22 (ref), var16 (ref)
 			return {
 				buttons = {
@@ -213,7 +213,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 			var22,
 			var16
 		}),
-		middleContent = reactModule.useCallback(function() --[[ line: 204 ]]
+		middleContent = reactModule.useCallback(function()
 			-- upvalues: var9 (ref), var8 (ref), constantsModule (copy), reactModule (copy), var13 (ref), imageSetLabel (copy), circle21 (copy), var14 (ref), placeholder (ref), var18 (ref), var23 (ref)
 			local body = var9.Font.Body
 			local floored = math.floor(body.RelativeSize * var9.Font.BaseSize)
@@ -295,7 +295,7 @@ return reactModule.memo(function(p0) --[[ line: 42 ]]
 		screenSize = var8,
 		defaultChildRef = if var11 then var18 else nil,
 		isRoactGamepadEnabled = var11,
-		footerContent = reactModule.useCallback(function() --[[ line: 309 ]]
+		footerContent = reactModule.useCallback(function()
 			-- upvalues: footer (ref), reactModule (copy), var9 (ref)
 			local var30 = footer
 			

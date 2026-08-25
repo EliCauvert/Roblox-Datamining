@@ -8,7 +8,7 @@ local colorMode = foundationModule.Enums.ColorMode
 local constantsModule = require(moments.Constants)
 local feed = require(moments.Components.Feed).Feed
 
-return function(p0) --[[ line: 49 | named "MomentsFeedSurface" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), feed (ref), view (ref), constantsModule (ref), foundationProvider (ref), colorMode (ref)
 	local bottomInset = p0.bottomInset or 0
 	local var5 = reactModule.createElement(feed, {

@@ -17,14 +17,14 @@ local fFlagEnableSocialTabsPage = require(parent.SharedFlags).FFlagEnableSocialT
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var6 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0, p1, p2, p3, p4) --[[ line: 35 | named "useSocialCountsActions" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: useDispatch (ref), useNavigation (ref), reactModule (ref), appPage (ref), eventNamesModule (ref), fFlagEnableSocialTabsPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), url (ref), textKeysModule (ref), fFlagCreateConnectionsHub (ref), urlBuilder (ref), fFlagConnectionsToFriendsRename (ref)
 	local var7 = useDispatch()
 	local var8 = useNavigation()
 	
-	return reactModule.useMemo(function() --[[ line: 46 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p3 (ref), appPage (copy), p2 (ref), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p1 (ref), p0 (ref), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (ref), navigateDown (copy), url (copy), textKeysModule (copy), fFlagCreateConnectionsHub (copy), var8 (ref), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy)
-		local function buildTabConfig() --[[ line: 47 ]]
+		local function buildTabConfig()
 			-- upvalues: p3 (copy), appPage (copy)
 			local t = {}
 			
@@ -43,7 +43,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 35 | named "useSocialCountsAction
 		end
 		
 		return {
-			mutualFriendsCount = function() --[[ line: 60 ]]
+			mutualFriendsCount = function()
 				-- upvalues: p2 (copy), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p1 (copy), appPage (copy), p0 (copy), p4 (copy), buildTabConfig (ref), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (copy), navigateDown (copy), p3 (copy)
 				p2.fireAnalyticsEvent(eventNamesModule.MutualFriendsButton)
 				
@@ -81,7 +81,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 35 | named "useSocialCountsAction
 					var7(navigateDown(t))
 				end
 			end,
-			followersCount = function() --[[ line: 94 ]]
+			followersCount = function()
 				-- upvalues: p2 (copy), eventNamesModule (copy), appPage (copy), url (copy), p0 (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (copy), navigateDown (copy)
 				p2.fireAnalyticsEvent(eventNamesModule.FollowersButton)
 				local t = {
@@ -97,7 +97,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 35 | named "useSocialCountsAction
 				end
 				var7(navigateDown(t))
 			end,
-			followingsCount = function() --[[ line: 110 ]]
+			followingsCount = function()
 				-- upvalues: p2 (copy), eventNamesModule (copy), appPage (copy), url (copy), p0 (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (copy), navigateDown (copy)
 				p2.fireAnalyticsEvent(eventNamesModule.FollowingsButton)
 				local t = {
@@ -113,7 +113,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 35 | named "useSocialCountsAction
 				end
 				var7(navigateDown(t))
 			end,
-			friendsCount = function() --[[ line: 126 ]]
+			friendsCount = function()
 				-- upvalues: p2 (copy), eventNamesModule (copy), p1 (copy), fFlagCreateConnectionsHub (copy), var8 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var6 (copy), var7 (copy), navigateDown (copy), fFlagEnableSocialTabsPage (copy), p0 (copy), p4 (copy), buildTabConfig (ref), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy)
 				p2.fireAnalyticsEvent(eventNamesModule.FriendsButton)
 				

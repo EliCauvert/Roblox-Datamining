@@ -25,7 +25,7 @@ game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitPeriod", 60)
 game:DefineFastInt("CoreScriptBacktraceRepeatedErrorRateLimitProcessIntervalTenths", 10)
 game:DefineFastInt("CoreScriptBacktraceErrorReportPercentage", 100)
 
-local function _() --[[ line: 48 | named "CanReportCoreScriptBacktrace" ]]
+local function _()
 	return math.random(1, 100) <= math.clamp(game:GetFastInt("CoreScriptBacktraceErrorReportPercentage"), 0, 100)
 end
 
@@ -51,7 +51,7 @@ if not game:GetFastFlag("DisableCorescriptBacktraceReporting") and game:GetFastS
 	local var19 = backtraceReporter.new({
 		httpService = httpService,
 		token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-		processErrorReportMethod = function(p0) --[[ line: 84 ]]
+		processErrorReportMethod = function(p0)
 			-- upvalues: t (ref), playersService (ref), runService (ref)
 			p0:addAttributes(t)
 			p0:addAttributes({ PlayerCount = #playersService:GetPlayers() })
@@ -61,7 +61,7 @@ if not game:GetFastFlag("DisableCorescriptBacktraceReporting") and game:GetFastS
 		end
 	})
 	
-	local function handleErrorDetailed(p1, p2, p3, p4) --[[ line: 105 ]]
+	local function handleErrorDetailed(p1, p2, p3, p4)
 		-- upvalues: coreGuiService (ref), corePackagesService (ref), reactModule (ref), var15 (ref), coreScriptBacktraceRepeatedErrorRateLimitingFastFlag (ref), var17 (write), var19 (ref), default (ref), luaCoreScriptsErrorV2CounterConfigModule (ref), var18 (ref)
 		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService)) then
 			local var21, var22 = reactModule.unstable_parseReactError(p1)
@@ -86,7 +86,7 @@ if not game:GetFastFlag("DisableCorescriptBacktraceReporting") and game:GetFastS
 		end
 	end
 	
-	scriptContextService.ErrorDetailed:Connect(function(...) --[[ line: 146 ]]
+	scriptContextService.ErrorDetailed:Connect(function(...)
 		-- upvalues: handleErrorDetailed (ref)
 		local ok, status = pcall(handleErrorDetailed, ...)
 		

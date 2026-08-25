@@ -12,7 +12,7 @@ t.Interface = tModule.strictInterface({
 	isOverlayVisible = tModule.boolean
 })
 
-function t.new(p0) --[[ line: 40 ]]
+function t.new(p0)
 	-- upvalues: routeInfoModule (ref), t (ref)
 	local t_1 = {
 		current = p0.current or routeInfoModule.EMPTY,
@@ -26,7 +26,7 @@ function t.new(p0) --[[ line: 40 ]]
 	return t_1
 end
 
-function t:__tostring() --[[ line: 52 ]]
+function t:__tostring()
 	local current = self.current
 	local opaque = self.opaque
 	local text = (("AvatarRoute[" .. (if self.isVisible then "Visible" else "Not Visible")) .. (if self.isOverlayVisible then " *Overlay" else "")) .. ", " .. tostring(current)
@@ -37,7 +37,7 @@ function t:__tostring() --[[ line: 52 ]]
 	return text .. "]"
 end
 
-function t:__eq(p1) --[[ line: 67 ]]
+function t:__eq(p1)
 	return not (not self or not p1) and (if rawequal(self, p1) then true else self.isVisible == p1.isVisible and (self.isOverlayVisible == p1.isOverlayVisible and (self.current == p1.current and self.opaque == p1.opaque)))
 end
 

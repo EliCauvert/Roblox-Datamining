@@ -3,7 +3,7 @@ local collectionViewsModule = require(parent.CollectionViews)
 local displayModule = require(parent.Display)
 local fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx = require(parent.SharedFlags).FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx
 
-return function(p0, p1) --[[ line: 26 | named "buildSduiCollectionInfo" ]]
+return function(p0, p1)
 	-- upvalues: displayModule (ref), collectionViewsModule (ref), fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx (ref)
 	local displayStore = displayModule.GetDisplayStore(false)
 	local mainCollectionLayoutStore = collectionViewsModule.getMainCollectionLayoutStore(false)

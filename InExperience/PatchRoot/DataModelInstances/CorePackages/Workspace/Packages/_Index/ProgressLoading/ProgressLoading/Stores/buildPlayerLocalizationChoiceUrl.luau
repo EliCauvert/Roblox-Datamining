@@ -2,7 +2,7 @@
 local url = require(parent.Http).Url
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 
-return function(p0) --[[ line: 8 | named "buildPlayerLocalizationChoiceUrl" ]]
+return function(p0)
 	-- upvalues: urlBuilder (ref), url (ref)
 	return urlBuilder.new({
 		path = "v1/user-localization-settings/player-choice/{universeId}",

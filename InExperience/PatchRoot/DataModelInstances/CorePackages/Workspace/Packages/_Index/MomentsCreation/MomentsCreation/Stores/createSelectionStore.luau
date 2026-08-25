@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("MomentsCreation").Parent.Signals).createSignal
 
-return function() --[[ line: 20 | named "createSelectionStore" ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal(nil)
 	

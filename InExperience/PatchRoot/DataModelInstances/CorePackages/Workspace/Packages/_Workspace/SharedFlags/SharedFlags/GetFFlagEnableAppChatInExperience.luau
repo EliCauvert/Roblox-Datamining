@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("AppChatInExperienceEnabledV654NewIcon", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("AppChatInExperienceEnabledV654NewIcon")
 end

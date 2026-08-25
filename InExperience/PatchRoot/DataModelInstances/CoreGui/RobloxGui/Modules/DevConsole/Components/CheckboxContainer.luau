@@ -10,21 +10,21 @@ local filterUnfilled = constantsModule.Image.FilterUnfilled
 local filterFilled = constantsModule.Image.FilterFilled
 local checkboxContainer = roactModule.PureComponent:extend("CheckboxContainer")
 
-function checkboxContainer.init(p0) --[[ line: 20 ]]
+function checkboxContainer.init(p0)
 	-- upvalues: textService (ref), constantsModule (ref), checkboxHeight (ref), var5 (ref), roactModule (ref)
-	function p0.onCheckboxClicked(p1, p2) --[[ line: 21 ]]
+	function p0.onCheckboxClicked(p1, p2)
 		-- upvalues: p0 (ref)
 		p0.props.onCheckboxChanged(p1, p2)
 	end
 	
-	function p0.onCheckboxExpanded(_, p3) --[[ line: 27 ]]
+	function p0.onCheckboxExpanded(_, p3)
 		-- upvalues: p0 (ref)
 		if p3.UserInputType == Enum.UserInputType.MouseButton1 or p3.UserInputType == Enum.UserInputType.Touch and p3.UserInputState == Enum.UserInputState.End then
 			p0:setState({ expanded = true })
 		end
 	end
 	
-	function p0.onCloseCheckbox(_, p4) --[[ line: 39 ]]
+	function p0.onCloseCheckbox(_, p4)
 		-- upvalues: p0 (ref)
 		if p4.UserInputType == Enum.UserInputType.MouseButton1 or p4.UserInputType == Enum.UserInputType.Touch and p4.UserInputState == Enum.UserInputState.End then
 			p0:setState({ expanded = false })
@@ -53,7 +53,7 @@ function checkboxContainer.init(p0) --[[ line: 20 ]]
 	}
 end
 
-function checkboxContainer.render(p5) --[[ line: 79 ]]
+function checkboxContainer.render(p5)
 	-- upvalues: roactModule (ref), labeledCheckboxModule (ref), constantsModule (ref), checkboxHeight (ref), filterFilled (ref), filterUnfilled (ref), checkboxDropdownModule (ref)
 	local t = {}
 	local frameWidth = p5.props.frameWidth

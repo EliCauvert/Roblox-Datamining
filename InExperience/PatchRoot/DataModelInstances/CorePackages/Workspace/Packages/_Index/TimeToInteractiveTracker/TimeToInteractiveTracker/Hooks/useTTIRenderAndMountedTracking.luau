@@ -3,9 +3,9 @@ local reactModule = require(timeToInteractiveTracker.Parent.React)
 local constantsModule = require(timeToInteractiveTracker.Milestones.constants)
 local _ = require(timeToInteractiveTracker.Milestones.types)
 
-return function(value) --[[ line: 25 | named "createUseTTIRenderAndMountedTracking" ]]
+return function(value)
 	-- upvalues: reactModule (ref), constantsModule (ref)
-	return function(p0) --[[ line: 26 ]]
+	return function(p0)
 		-- upvalues: reactModule (copy), value (ref), constantsModule (copy)
 		local var3 = reactModule.useRef(false)
 		
@@ -13,7 +13,7 @@ return function(value) --[[ line: 25 | named "createUseTTIRenderAndMountedTracki
 			var3.current = true
 			value(p0, constantsModule.RenderStarted)
 		end
-		reactModule.useEffect(function() --[[ line: 34 ]]
+		reactModule.useEffect(function()
 			-- upvalues: value (copy), p0 (ref), constantsModule (copy)
 			value(p0, constantsModule.SurfaceMounted)
 		end, {})

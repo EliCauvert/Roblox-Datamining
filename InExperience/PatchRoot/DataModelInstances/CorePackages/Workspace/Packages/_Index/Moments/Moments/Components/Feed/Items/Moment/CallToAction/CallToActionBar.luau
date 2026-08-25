@@ -29,7 +29,7 @@ local t = {
 }
 local char = utf8.char(57344)
 
-return reactModule.memo(function(p0) --[[ line: 65 | named "CallToActionBar" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), momentContextModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsAndroidTvEnabledModule (ref), useIsTvRemoteDevice (ref), useExperienceDetailsModule (ref), useScaledValue (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), getRbxThumb (ref), foundationModule (ref), char (ref), reactModule (ref), imageWithSkeletonModule (ref), radius (ref), view (ref), text (ref), skeleton (ref), getExperienceDetailsSheetStoreModule (ref), button (ref), joinButtonModule (ref)
 	local var16 = useLocalization(t)
 	local var17 = useTokens()
@@ -61,7 +61,7 @@ return reactModule.memo(function(p0) --[[ line: 65 | named "CallToActionBar" ]]
 		LayoutOrder = 1,
 		tag = "row align-x-left align-y-center grow gap-medium auto-y",
 		testId = "moments-experience-row",
-		onActivated = if isAd or var24 then nil else function() --[[ line: 157 ]]
+		onActivated = if isAd or var24 then nil else function()
 			-- upvalues: getExperienceDetailsSheetStoreModule (copy), var21 (ref), var22 (ref), data (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var29 (write)
 			getExperienceDetailsSheetStoreModule(false).open({
 				placeId = var21,
@@ -112,7 +112,7 @@ return reactModule.memo(function(p0) --[[ line: 65 | named "CallToActionBar" ]]
 		CtaButton = if var25 and var26 then nil elseif isAd then reactModule.createElement(button, {
 			LayoutOrder = 2,
 			isDisabled = var23 or var24,
-			onActivated = function() --[[ line: 191 ]] end,
+			onActivated = function() end,
 			size = foundationModule.Enums.InputSize.Medium,
 			text = var33,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis

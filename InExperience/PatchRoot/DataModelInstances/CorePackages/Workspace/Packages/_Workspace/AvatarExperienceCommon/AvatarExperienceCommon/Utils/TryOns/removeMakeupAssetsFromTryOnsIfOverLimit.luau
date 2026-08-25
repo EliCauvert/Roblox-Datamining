@@ -2,7 +2,7 @@
 local constantsModule = require(avatarExperienceCommon.Constants)
 local _ = require(avatarExperienceCommon.Enums.ItemTypeEnum)
 
-function removeMakeupAssetsFromTryOnsIfOverLimit(value) --[[ line: 6 ]]
+function removeMakeupAssetsFromTryOnsIfOverLimit(value)
 	-- upvalues: constantsModule (ref)
 	local var2 = 0
 	local var3 = 1e999

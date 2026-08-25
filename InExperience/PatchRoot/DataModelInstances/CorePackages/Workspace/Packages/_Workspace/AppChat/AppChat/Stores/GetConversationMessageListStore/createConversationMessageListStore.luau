@@ -4,12 +4,12 @@ local cryoModule = require(parent.Cryo)
 local createProxy = require(parent.SignalsExperimental).createProxy
 local arraySetModule = require(appChat.DataStructures.ArraySet)
 
-local function _() --[[ line: 90 | named "newConversationOrdering" ]]
+local function _()
 	-- upvalues: arraySetModule (ref)
 	return { messageIds = arraySetModule.new({}) }
 end
 
-local _ = function() --[[ line: 96 | named "newMessagePaginationMetadata" ]]
+local _ = function()
 	return {
 		nextPageCursor = nil,
 		isLoading = false,
@@ -17,19 +17,19 @@ local _ = function() --[[ line: 96 | named "newMessagePaginationMetadata" ]]
 	}
 end
 
-return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
+return function()
 	-- upvalues: createProxy (ref), arraySetModule (ref), cryoModule (ref)
 	local var3 = createProxy({})
 	local var4 = createProxy({})
 	
-	local function _(p0) --[[ line: 112 | named "getOrDefaultOrdering" ]]
+	local function _(p0)
 		-- upvalues: var3 (ref), arraySetModule (copy)
 		local var8 = var3[p0]
 		
 		return if var8 == nil then { messageIds = arraySetModule.new({}) } else var8
 	end
 	
-	local _ = function(p1) --[[ line: 120 | named "getOrDefaultMetadata" ]]
+	local _ = function(p1)
 		-- upvalues: var4 (ref)
 		local var9 = var4[p1]
 		
@@ -40,7 +40,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 		} else var9
 	end
 	
-	local function prependMessages(p2, p3) --[[ line: 130 ]]
+	local function prependMessages(p2, p3)
 		-- upvalues: var3 (ref), arraySetModule (copy)
 		local var10 = var3[p2]
 		local var11 = if var10 ~= nil then { messageIds = arraySetModule.new({}) } else var10
@@ -52,7 +52,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 		end
 	end
 	
-	local function appendMessages(p4, p5) --[[ line: 143 ]]
+	local function appendMessages(p4, p5)
 		-- upvalues: var3 (ref), arraySetModule (copy)
 		local var12 = var3[p4]
 		local var13 = if var12 ~= nil then { messageIds = arraySetModule.new({}) } else var12
@@ -70,7 +70,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 		end
 	end
 	
-	local function updatePagination(p6, p7, p8) --[[ line: 181 ]]
+	local function updatePagination(p6, p7, p8)
 		-- upvalues: var4 (ref), cryoModule (copy)
 		local var15 = var4[p6]
 		local var16 = if var15 ~= nil then {
@@ -90,7 +90,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 		metadata = var4,
 		prependMessages = prependMessages,
 		appendMessages = appendMessages,
-		removeMessage = function(p9, p10) --[[ line: 161 ]]
+		removeMessage = function(p9, p10)
 			-- upvalues: var3 (ref)
 			local var17 = var3[p9]
 			
@@ -101,7 +101,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 				return
 			end
 		end,
-		setLoading = function(value, p11) --[[ line: 173 ]]
+		setLoading = function(value, p11)
 			-- upvalues: var4 (ref), cryoModule (copy)
 			local var18 = var4[value]
 			var4[value] = cryoModule.Dictionary.union(if var18 ~= nil then {
@@ -111,17 +111,17 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 			} else var18, { isLoading = p11 })
 		end,
 		updatePagination = updatePagination,
-		receivePage = function(p12, p13, p14) --[[ line: 191 ]]
+		receivePage = function(p12, p13, p14)
 			-- upvalues: appendMessages (ref), updatePagination (ref)
 			appendMessages(p12, p13)
 			updatePagination(p12, p14, if p14 ~= nil then p14 == "" else true)
 		end,
-		clearConversation = function(p15) --[[ line: 196 ]]
+		clearConversation = function(p15)
 			-- upvalues: var3 (ref), var4 (ref)
 			var3[p15] = nil
 			var4[p15] = nil
 		end,
-		clear = function() --[[ line: 201 ]]
+		clear = function()
 			-- upvalues: var3 (ref), var4 (ref)
 			for i in var3 do
 				var3[i] = nil
@@ -130,19 +130,19 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 				var4[i_1] = nil
 			end
 		end,
-		getIndex = function(p16, p17, p18) --[[ line: 210 ]]
+		getIndex = function(p16, p17, p18)
 			-- upvalues: var3 (ref)
 			local var19 = var3(p18)[p16]
 			
 			return if var19 == nil then nil else var19.messageIds:indexOf(p17)
 		end,
-		getOrderedIds = function(p19, p20) --[[ line: 218 ]]
+		getOrderedIds = function(p19, p20)
 			-- upvalues: var3 (ref)
 			local var20 = var3(p20)[p19]
 			
 			return if var20 == nil then {} else var20.messageIds:values()
 		end,
-		getPrevId = function(p21, p22, p23) --[[ line: 226 ]]
+		getPrevId = function(p21, p22, p23)
 			-- upvalues: var3 (ref)
 			local var21 = var3(p23)[p21]
 			
@@ -153,7 +153,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 			
 			return if var22 == nil or var22 <= 1 then nil else var21.messageIds:at(var22 - 1)
 		end,
-		getNextId = function(p24, p25, p26) --[[ line: 238 ]]
+		getNextId = function(p24, p25, p26)
 			-- upvalues: var3 (ref)
 			local var23 = var3(p26)[p24]
 			
@@ -164,7 +164,7 @@ return function() --[[ line: 104 | named "createConversationMessageListStore" ]]
 			
 			return if var24 == nil or var23.messageIds:size() <= var24 then nil else var23.messageIds:at(var24 + 1)
 		end,
-		getMetadata = function(p27, p28) --[[ line: 250 ]]
+		getMetadata = function(p27, p28)
 			-- upvalues: var4 (ref)
 			return var4(p28)[p27]
 		end

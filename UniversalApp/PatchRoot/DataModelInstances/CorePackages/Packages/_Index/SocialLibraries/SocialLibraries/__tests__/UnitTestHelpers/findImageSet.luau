@@ -1,6 +1,6 @@
 ﻿local UIBlox = require(script:FindFirstAncestor("SocialLibraries").dependencies).UIBlox
 
-return function(p0) --[[ line: 5 ]]
+return function(p0)
 	-- upvalues: UIBlox (ref)
 	local var0 = UIBlox.App.ImageSet.Images[p0]
 	

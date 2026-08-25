@@ -10,7 +10,7 @@ local t = {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidateInstanceTreesEquivalent)
 }
 
-local function collectAllInstances(p0) --[[ line: 23 ]]
+local function collectAllInstances(p0)
 	local t = {}
 	
 	for i, v in p0 do
@@ -32,7 +32,7 @@ local function collectAllInstances(p0) --[[ line: 23 ]]
 	return t
 end
 
-function t.run(p1, p2) --[[ line: 44 ]]
+function t.run(p1, p2)
 	-- upvalues: collectAllInstances (ref), errorSourceStringsModule (ref), constantsModule (ref)
 	for i, v in collectAllInstances(p2.entrypointInput) do
 		if v.Archivable == false then

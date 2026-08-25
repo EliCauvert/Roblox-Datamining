@@ -21,9 +21,9 @@ leaveToAppPrompt.validateProps = t.strictInterface({
 })
 leaveToAppPrompt.defaultProps = { linkingProtocol = linkingProtocol.default }
 
-function leaveToAppPrompt.init(p0) --[[ line: 35 ]]
+function leaveToAppPrompt.init(p0)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref), runService (ref)
-	function p0.goToHomePage() --[[ line: 36 ]]
+	function p0.goToHomePage()
 		-- upvalues: sendAnalyticsModule (copy), constantsModule (copy), runService (copy), p0 (ref)
 		sendAnalyticsModule(constantsModule.AnalyticsLeaveToHomeName, constantsModule.AnalyticsLeaveToHomeName, { confirmed = constantsModule.AnalyticsLeaveToHomeName })
 		runService.Heartbeat:Wait()
@@ -32,14 +32,14 @@ function leaveToAppPrompt.init(p0) --[[ line: 35 ]]
 	end
 end
 
-function leaveToAppPrompt.render(p1) --[[ line: 57 ]]
+function leaveToAppPrompt.render(p1)
 	-- upvalues: withLocalizationModule (ref), roact (ref), leavePromptModule (ref)
 	return withLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Prompt.LeaveGameTitle",
 		bodyText = "CoreScripts.InGameMenu.Prompt.LeaveGameBodyText",
 		confirmText = "CoreScripts.InGameMenu.Prompt.BackToHome",
 		cancelText = "CoreScripts.InGameMenu.Prompt.ResumeGame"
-	})(function(p2) --[[ line: 63 ]]
+	})(function(p2)
 		-- upvalues: roact (copy), leavePromptModule (copy), p1 (ref)
 		return roact.createElement(leavePromptModule, {
 			titleText = p2.titleText,
@@ -54,16 +54,16 @@ function leaveToAppPrompt.render(p1) --[[ line: 57 ]]
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p3, _) --[[ line: 77 ]]
+return roactRodux.UNSTABLE_connect2(function(p3, _)
 	-- upvalues: constantsModule (ref)
 	return {
 		canGamepadCaptureFocus = p3.menuPage == constantsModule.LeaveToAppPromptPageKey and (p3.displayOptions.inputType == constantsModule.InputType.Gamepad and (not p3.respawn.dialogOpen and p3.currentZone == 1)),
 		canKeyboardCaptureFocus = p3.menuPage == constantsModule.LeaveToAppPromptPageKey and (p3.displayOptions.inputType == constantsModule.InputType.MouseAndKeyboard and not p3.respawn.dialogOpen)
 	}
-end, function(p4) --[[ line: 91 ]]
+end, function(p4)
 	-- upvalues: closeMenuModule (ref)
 	return {
-		closeMenu = function() --[[ line: 93 ]]
+		closeMenu = function()
 			-- upvalues: p4 (ref), closeMenuModule (copy)
 			p4(closeMenuModule)
 		end

@@ -6,12 +6,12 @@ local promiseModule = require(parent.Promise)
 local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
 local followingsUrlBuilderModule = require(script.Parent.FollowingsUrlBuilder)
 
-return function(p0, p1) --[[ line: 13 | named "requestUpdateFollowing" ]]
+return function(p0, p1)
 	-- upvalues: getLocalPlayerUserId (ref), promiseModule (ref), followingsUrlBuilderModule (ref), httpRequestModule (ref), httpService (ref)
 	local var5 = getLocalPlayerUserId()
 	
 	return if var5 and var5 > 0 then httpRequestModule.config({
-		requestFunction = function(p2, p3, p4) --[[ line: 25 ]]
+		requestFunction = function(p2, p3, p4)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
 		end

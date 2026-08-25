@@ -16,7 +16,7 @@ local color3 = Color3.new(1, 1, 1)
 local refresh = images["icons/common/refresh"]
 local errorXlarge = images["icons/graphic/error_xlarge"]
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), color3 (ref), iconSize (ref), imageSetLabel (ref), errorXlarge (ref), styledTextLabel (ref), button (ref), buttonType (ref), standardButtonSize (ref), refresh (ref)
 	local var5 = useStyle()
 	

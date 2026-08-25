@@ -6,14 +6,14 @@ local playButton = roactModule.PureComponent:extend("PlayButton")
 playButton.defaultProps = {
 	text = "Play!",
 	LayoutOrder = 0,
-	onActivated = function() --[[ line: 15 ]]
+	onActivated = function()
 		print("Play button activated!")
 	end
 }
 
-function playButton.render(p0) --[[ line: 20 ]]
+function playButton.render(p0)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), buttonModule (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 21 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: roactModule (copy), buttonModule (copy), p0 (ref)
 		return roactModule.createElement(buttonModule, {
 			textSize = 23,

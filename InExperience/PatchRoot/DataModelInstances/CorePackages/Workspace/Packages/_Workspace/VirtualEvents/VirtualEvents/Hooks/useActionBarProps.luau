@@ -12,7 +12,7 @@ local fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable = require(virtualEvents.
 local images = UIBloxModule.App.ImageSet.Images
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0, p1, p2, p3) --[[ line: 68 | named "useActionBarProps" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: useLocalization (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), getEventCtaButtonStateModule (ref), reactModule (ref), buttonType (ref), images (ref)
 	local var4 = useLocalization({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
@@ -28,7 +28,7 @@ return function(p0, p1, p2, p3) --[[ line: 68 | named "useActionBarProps" ]]
 		isJoinEventDisabled = var5.isJoinEventDisabled
 		isRsvpDisabled = var5.isRsvpDisabled
 	end
-	local var6 = reactModule.useMemo(function() --[[ line: 92 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), p1 (ref), buttonType (copy), var4 (ref), images (copy), p2 (ref), p3 (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (copy), isRsvpDisabled (write), isJoinEventDisabled (write)
 		return if p0.eventStatus == "cancelled" or p0.eventStatus == "moderated" then {
 			props = {
@@ -69,7 +69,7 @@ return function(p0, p1, p2, p3) --[[ line: 68 | named "useActionBarProps" ]]
 		if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isRsvpDisabled else nil,
 		if fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable then isJoinEventDisabled else nil
 	})
-	local var7 = reactModule.useMemo(function() --[[ line: 158 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), p1 (ref), images (copy), p2 (ref)
 		return if p0.eventStatus == "cancelled" or p0.eventStatus == "moderated" or p1 == "Elapsed" then nil else {
 			props = {
@@ -82,7 +82,7 @@ return function(p0, p1, p2, p3) --[[ line: 68 | named "useActionBarProps" ]]
 		}
 	end, { p0, p1, p2 })
 	
-	return reactModule.useMemo(function() --[[ line: 178 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var6 (ref), var7 (ref)
 		return { button = var6, icons = { var7 } }
 	end, { var6, var7 })

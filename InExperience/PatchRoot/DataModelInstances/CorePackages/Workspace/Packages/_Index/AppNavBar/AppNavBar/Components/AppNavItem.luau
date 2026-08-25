@@ -12,7 +12,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local fFlagAppNavLabelScaling = sharedFlagsModule.FFlagAppNavLabelScaling
 local fFlagShrinkAppNavBar = sharedFlagsModule.FFlagShrinkAppNavBar
 
-return reactModule.memo(function(p0) --[[ line: 52 | named "AppNavItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), controlState (ref), fFlagShrinkAppNavBar (ref), fFlagAppNavLabelScaling (ref), navigationTab (ref), navigationTabLayout (ref)
 	local tokens = useStyle().Tokens
 	local var5 = useLocalization({ labelText = p0.item.labelText })
@@ -21,7 +21,7 @@ return reactModule.memo(function(p0) --[[ line: 52 | named "AppNavItem" ]]
 	local var8 = if fFlagShrinkAppNavBar then nil else p0.systemBarLabelTextSizeBinding.default:getBinding()
 	
 	if not fFlagShrinkAppNavBar then
-		reactModule.useEffect(function() --[[ line: 62 ]]
+		reactModule.useEffect(function()
 			-- upvalues: fFlagAppNavLabelScaling (copy), p0 (ref), var5 (ref), captionSmall (ref), tokens (ref)
 			if fFlagAppNavLabelScaling then
 				p0.systemBarLabelTextSizeBinding.default:setTextToMaxSize(var5.labelText or "", captionSmall.Font, Vector2.new(tokens.Size.Size_1200, tokens.Size.Size_1200), tokens.FontSize.FontSize_300)
@@ -34,7 +34,7 @@ return reactModule.memo(function(p0) --[[ line: 52 | named "AppNavItem" ]]
 	return reactModule.createElement(navigationTab, {
 		iconImage = p0.item.iconImage,
 		iconCheckedImage = p0.item.iconCheckedImage,
-		renderIcon = if p0.item.renderIcon then function(p1) --[[ line: 84 ]]
+		renderIcon = if p0.item.renderIcon then function(p1)
 			-- upvalues: p0 (ref), var6 (ref)
 			return p0.item.renderIcon(p1, var6)
 		end else nil,
@@ -53,12 +53,12 @@ return reactModule.memo(function(p0) --[[ line: 52 | named "AppNavItem" ]]
 		anchorPoint = if p0.isCenterPositioned then Vector2.new(0.5, 0.5) else nil,
 		position = if p0.isCenterPositioned then UDim2.fromScale(0.5, 0.5) else nil,
 		onActivated = p0.item.onActivated,
-		onStateChanged = if p0.item.renderIcon then function(_, p2) --[[ line: 106 ]]
+		onStateChanged = if p0.item.renderIcon then function(_, p2)
 			-- upvalues: var7 (ref)
 			var7(p2)
 		end else nil
 	})
-end, function(p3, p4) --[[ line: 43 | named "arePropsEqual" ]]
+end, function(p3, p4)
 	-- upvalues: cryoModule (ref), fFlagShrinkAppNavBar (ref)
 	local var9 = cryoModule.Dictionary.equals(p3.item, p4.item)
 	

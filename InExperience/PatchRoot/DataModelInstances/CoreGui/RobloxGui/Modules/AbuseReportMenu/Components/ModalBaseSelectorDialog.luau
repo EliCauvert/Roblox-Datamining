@@ -32,7 +32,7 @@ if isInExperienceUIVREnabled then
 	UIManager = vrSpatialUiModule.UIManager
 	panelType = vrSpatialUiModule.Constants.PanelType
 end
-local function ModalBaseSelectorDialog(p0) --[[ line: 63 ]]
+local function ModalBaseSelectorDialog(p0)
 	-- upvalues: useTokens (ref), useStyle (ref), isInExperienceUIVREnabled (ref), responsiveModule (write), UIManager (write), panelType (write), reactModule (ref), getFFlagModalSelectorCloseButtonModule (ref), cryoModule (ref), iconButton (ref), iconSize (ref), images (ref), scrollingListTable (ref), dashModule (ref), cell (ref), cellHeadDetail (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), cellTailDescription (ref), modalWindow (ref)
 	local var11 = useTokens()
 	local var12 = useStyle()
@@ -74,7 +74,7 @@ local function ModalBaseSelectorDialog(p0) --[[ line: 63 ]]
 					size = UDim2.fromOffset(0, 0),
 					iconSize = iconSize.Medium,
 					icon = images["icons/navigation/close"],
-					onActivated = function() --[[ line: 120 ]]
+					onActivated = function()
 						-- upvalues: p0 (ref)
 						p0.onClose()
 					end
@@ -107,7 +107,7 @@ local function ModalBaseSelectorDialog(p0) --[[ line: 63 ]]
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ZIndex = 10,
 			Text = "",
-			[reactModule.Event.Activated] = function() --[[ line: 195 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p0 (ref)
 				p0.onClose()
 			end
@@ -132,7 +132,7 @@ local function ModalBaseSelectorDialog(p0) --[[ line: 63 ]]
 						ModalSelector = reactModule.createElement(scrollingListTable, {
 							selectable = false,
 							size = UDim2.new(1, 0, 1, 0),
-							cells = dashModule.map(p0.cellData, function(p1) --[[ line: 149 ]]
+							cells = dashModule.map(p0.cellData, function(p1)
 								-- upvalues: reactModule (copy), cell (copy), cellHeadDetail (copy), getFFlagLuaAppEnableOpenTypeSupport (copy), openTypeSupport (copy), cellTailDescription (copy), var11 (ref), p0 (ref)
 								return reactModule.createElement(cell, {
 									userInteractionEnabled = true,
@@ -144,7 +144,7 @@ local function ModalBaseSelectorDialog(p0) --[[ line: 63 ]]
 									tail = reactModule.createElement(cellTailDescription, { text = "", showArrow = false }),
 									background = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }),
 									size = UDim2.new(1, 0, 0, var11.Size.Size_1000),
-									onActivated = function() --[[ line: 168 ]]
+									onActivated = function()
 										-- upvalues: p0 (copy), p1 (ref)
 										p0.onSelect(p1.label, p1.subLabel, p1.identifier)
 										p0.onClose()
@@ -159,7 +159,7 @@ local function ModalBaseSelectorDialog(p0) --[[ line: 63 ]]
 	})
 end
 
-function DialogWrapper(p2) --[[ line: 216 ]]
+function DialogWrapper(p2)
 	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), ModalBaseSelectorDialog (ref)
 	return reactModule.createElement(coreScriptsRootProvider, {}, {
 		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {

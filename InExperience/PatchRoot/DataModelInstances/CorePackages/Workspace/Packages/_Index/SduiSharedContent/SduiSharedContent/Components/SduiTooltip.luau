@@ -16,7 +16,7 @@ local t_1 = {
 	End = popoverAlign.End
 }
 
-return reactModule.memo(function(p0) --[[ line: 40 | named "SduiTooltip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), tooltip (ref), t (ref), t_1 (ref)
 	return if p0.anchor == nil then nil else reactModule.createElement(tooltip, {
 		title = p0.title or "",

@@ -11,7 +11,7 @@ return roduxModule.createReducer({
 	lastReadMessages = 0,
 	unreadMessages = 0
 }, {
-	[require(actions.UpdateUnreadMessagesBadge).name] = function(p0, p1) --[[ line: 28 ]]
+	[require(actions.UpdateUnreadMessagesBadge).name] = function(p0, p1)
 		return if p0.visible then {
 			visible = true,
 			lastReadMessages = 0,
@@ -24,7 +24,7 @@ return roduxModule.createReducer({
 			unreadMessages = p1.messages
 		}
 	end,
-	[require(actions.UpdateChatMessages).name] = function(p2, p3) --[[ line: 46 ]]
+	[require(actions.UpdateChatMessages).name] = function(p2, p3)
 		return if p2.visible then {
 			visible = true,
 			unreadMessages = 0,
@@ -37,7 +37,7 @@ return roduxModule.createReducer({
 			unreadMessages = p3.messages - p2.lastReadMessages
 		}
 	end,
-	[require(actions.UpdateChatVisible).name] = function(p4, p5) --[[ line: 64 ]]
+	[require(actions.UpdateChatVisible).name] = function(p4, p5)
 		return if p5.visible then {
 			visible = true,
 			unreadMessages = 0,
@@ -50,7 +50,7 @@ return roduxModule.createReducer({
 			unreadMessages = p4.unreadMessages
 		}
 	end,
-	[require(actions.SetCanChat).name] = function(p6, p7) --[[ line: 82 ]]
+	[require(actions.SetCanChat).name] = function(p6, p7)
 		return {
 			canChat = p7.canChat,
 			visible = p6.visible,

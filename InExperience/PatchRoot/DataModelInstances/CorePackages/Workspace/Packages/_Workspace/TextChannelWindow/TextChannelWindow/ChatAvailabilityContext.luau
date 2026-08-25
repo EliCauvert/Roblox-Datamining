@@ -44,20 +44,20 @@ local var4 = reactModule.createContext({
 
 return {
 	Context = var4,
-	Provider = function(p0) --[[ line: 84 ]]
+	Provider = function(p0)
 		-- upvalues: playersService (ref), reactModule (ref), useEventConnection (ref), t (ref), t_1 (ref), var4 (ref)
 		local subjectPlayer = p0.subjectPlayer or playersService.LocalPlayer
-		local var6, var7 = reactModule.useState(function() --[[ line: 87 ]]
+		local var6, var7 = reactModule.useState(function()
 			-- upvalues: p0 (ref), subjectPlayer (ref)
 			return if p0.value == nil then if subjectPlayer then subjectPlayer.ChatAvailabilityStatus else "Enabled" else p0.value
 		end)
-		useEventConnection(if p0.value == nil and subjectPlayer then subjectPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus") else nil, function() --[[ line: 97 ]]
+		useEventConnection(if p0.value == nil and subjectPlayer then subjectPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus") else nil, function()
 			-- upvalues: subjectPlayer (ref), var7 (ref)
 			if subjectPlayer then
 				var7(subjectPlayer.ChatAvailabilityStatus)
 			end
 		end, {})
-		reactModule.useEffect(function() --[[ line: 107 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p0 (ref), var7 (ref)
 			if p0.value ~= nil then
 				var7(p0.value)
@@ -65,7 +65,7 @@ return {
 		end, { p0.value })
 		
 		return reactModule.createElement(var4.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 114 ]]
+			value = reactModule.useMemo(function()
 				-- upvalues: var6 (ref), t (copy), t_1 (copy)
 				local var8 = t[var6]
 				local var9 = if var8 then t_1[var8] else nil
@@ -79,7 +79,7 @@ return {
 			end, { var6 })
 		}, p0.children)
 	end,
-	resolve = function(p1) --[[ line: 54 ]]
+	resolve = function(p1)
 		-- upvalues: t (ref), t_1 (ref)
 		local var10 = t[p1]
 		local var11 = if var10 then t_1[var10] else nil
@@ -91,7 +91,7 @@ return {
 			messageFallback = if var11 then var11.fallback else nil
 		}
 	end,
-	useLocalUserChatAvailability = function() --[[ line: 123 ]]
+	useLocalUserChatAvailability = function()
 		-- upvalues: reactModule (ref), var4 (ref)
 		return reactModule.useContext(var4)
 	end

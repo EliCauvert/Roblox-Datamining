@@ -187,7 +187,7 @@ local list_1 = {
 	}
 }
 
-local function pickRandomItems() --[[ line: 341 ]]
+local function pickRandomItems()
 	-- upvalues: list (ref), list_1 (ref)
 	local list_2 = table.create(#list + #list_1)
 	table.move(list, 1, #list, 1, list_2)
@@ -287,7 +287,7 @@ local list_2 = {
 	{ name = "Gear", items = pickRandomItems() }
 }
 
-local function buildShopData() --[[ line: 374 ]]
+local function buildShopData()
 	-- upvalues: list_2 (ref)
 	local list = table.create(#list_2)
 	local t = {}
@@ -311,7 +311,7 @@ end
 return {
 	MOCK_PRODUCT_ITEMS = list,
 	MOCK_GAMEPASS_ITEMS = list_1,
-	buildShopItems = function() --[[ line: 402 ]]
+	buildShopItems = function()
 		-- upvalues: list_2 (ref)
 		local t = {}
 		
@@ -328,9 +328,9 @@ return {
 		end
 		return { categories = t }
 	end,
-	getShopData = function(p0) --[[ line: 439 ]]
+	getShopData = function(p0)
 		-- upvalues: promiseModule (ref), buildShopData (ref)
-		return promiseModule.delay(if p0 ~= nil then 0.5 else p0):andThen(function() --[[ line: 441 ]]
+		return promiseModule.delay(if p0 ~= nil then 0.5 else p0):andThen(function()
 			-- upvalues: buildShopData (copy)
 			return buildShopData()
 		end)

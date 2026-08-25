@@ -10,7 +10,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function legacyVariantsFactory(p0) --[[ line: 60 ]]
+local function legacyVariantsFactory(p0)
 	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -74,7 +74,7 @@ local function legacyVariantsFactory(p0) --[[ line: 60 ]]
 	}
 end
 
-local function groupSizeVariantsFactory(p1) --[[ line: 133 ]]
+local function groupSizeVariantsFactory(p1)
 	-- upvalues: iconSizeModule (ref), optionSelectorGroupSizeModule (ref), composeStyleVariantModule (ref)
 	local t = {
 		label = { tag = "size-full-0 auto-y" },
@@ -151,7 +151,7 @@ local function groupSizeVariantsFactory(p1) --[[ line: 133 ]]
 	}
 end
 
-local function variantsFactory(p2) --[[ line: 247 ]]
+local function variantsFactory(p2)
 	-- upvalues: legacyVariantsFactory (ref), groupSizeVariantsFactory (ref)
 	return {
 		legacy = legacyVariantsFactory(p2),
@@ -159,7 +159,7 @@ local function variantsFactory(p2) --[[ line: 247 ]]
 	}
 end
 
-return function(p3, p4, p5, p6, p7) --[[ line: 254 ]]
+return function(p3, p4, p5, p6, p7)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), orientationModule (ref), fillBehaviorModule (ref), composeStyleVariantModule (ref)
 	local optionSelectorGroupItem = variantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p3)
 	

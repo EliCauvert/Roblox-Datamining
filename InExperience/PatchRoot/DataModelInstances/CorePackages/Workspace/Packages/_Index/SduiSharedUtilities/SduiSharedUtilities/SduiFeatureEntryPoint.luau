@@ -22,14 +22,14 @@ local fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = sharedFlagsModule.FFl
 local fFlagSduiUseSharedUiStatusHook = sharedFlagsModule.FFlagSduiUseSharedUiStatusHook
 local fFlagSduiClientPageScope = sharedFlagsModule.FFlagSduiClientPageScope
 
-local function _(p0) --[[ line: 32 | named "useUiStatusLegacy" ]]
+local function _(p0)
 	-- upvalues: signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref)
 	local var14 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p0).status)
 	
 	return if var14 == dataHydrationTypes.DataStatus.NotReady then "Loading" elseif var14 == dataHydrationTypes.DataStatus.Failed then "Error" else "Resolved"
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 82 | named "SduiFeatureEntryPoint" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), useDataUpdatedTimestampModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), useStatefulRefModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiClientPageScope (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), sduiFeatureEntryPointUiModule (ref), getSduiComponentWrapper (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref)
 	local var20
 	local configKey = p1.configKey

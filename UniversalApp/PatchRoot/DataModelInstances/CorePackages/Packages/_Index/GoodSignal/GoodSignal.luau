@@ -1,13 +1,13 @@
 ﻿local var0 = nil
 
-local function acquireRunnerThreadAndCallEventHandler(p0, ...) --[[ line: 35 ]]
+local function acquireRunnerThreadAndCallEventHandler(p0, ...)
 	-- upvalues: var0 (write)
 	var0 = nil
 	p0(...)
 	var0 = var0
 end
 
-local function runEventHandlerInFreeThread() --[[ line: 46 ]]
+local function runEventHandlerInFreeThread()
 	-- upvalues: acquireRunnerThreadAndCallEventHandler (ref)
 	while true do
 		acquireRunnerThreadAndCallEventHandler(coroutine.yield())
@@ -17,12 +17,12 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p1, p2) --[[ line: 61 ]]
+function t.new(p1, p2)
 	-- upvalues: t (ref)
 	return setmetatable({ _connected = true, _next = false, _signal = p1, _fn = p2 }, t)
 end
 
-function t:Disconnect() --[[ line: 70 ]]
+function t:Disconnect()
 	self._connected = false
 	
 	if self._signal._handlerListHead == self then
@@ -40,22 +40,22 @@ function t:Disconnect() --[[ line: 70 ]]
 end
 
 setmetatable(t, {
-	__index = function(_, p3) --[[ line: 92 ]]
+	__index = function(_, p3)
 		error(("Attempt to get Connection::%s (not a valid member)"):format(tostring(p3)), 2)
 	end,
-	__newindex = function(_, p4) --[[ line: 95 ]]
+	__newindex = function(_, p4)
 		error(("Attempt to set Connection::%s (not a valid member)"):format(tostring(p4)), 2)
 	end
 })
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 115 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref)
 	return setmetatable({ _handlerListHead = false }, t_1)
 end
 
-function t_1:Connect(p5) --[[ line: 121 ]]
+function t_1:Connect(p5)
 	-- upvalues: t (ref)
 	local var5 = t.new(self, p5)
 	
@@ -70,11 +70,11 @@ function t_1:Connect(p5) --[[ line: 121 ]]
 	return var5
 end
 
-function t_1:DisconnectAll() --[[ line: 134 ]]
+function t_1:DisconnectAll()
 	self._handlerListHead = false
 end
 
-function t_1:Fire(...) --[[ line: 142 ]]
+function t_1:Fire(...)
 	-- upvalues: var0 (write), runEventHandlerInFreeThread (ref)
 	local handlerListHead = self._handlerListHead
 	while handlerListHead do
@@ -89,10 +89,10 @@ function t_1:Fire(...) --[[ line: 142 ]]
 	end
 end
 
-function t_1:Wait() --[[ line: 159 ]]
+function t_1:Wait()
 	local currentThread = coroutine.running()
 	local var7 = nil
-	var7 = self:Connect(function(...) --[[ line: 162 ]]
+	var7 = self:Connect(function(...)
 		-- upvalues: var7 (write), currentThread (ref)
 		var7:Disconnect()
 		task.spawn(currentThread, ...)
@@ -101,10 +101,10 @@ function t_1:Wait() --[[ line: 159 ]]
 	return coroutine.yield()
 end
 
-function t_1:Once(p6) --[[ line: 171 ]]
+function t_1:Once(p6)
 	local var8 = nil
 	
-	return self:Connect(function(...) --[[ line: 173 ]]
+	return self:Connect(function(...)
 		-- upvalues: var8 (write), p6 (ref)
 		if var8._connected then
 			var8:Disconnect()
@@ -114,10 +114,10 @@ function t_1:Once(p6) --[[ line: 171 ]]
 end
 
 setmetatable(t_1, {
-	__index = function(_, p7) --[[ line: 184 ]]
+	__index = function(_, p7)
 		error(("Attempt to get Signal::%s (not a valid member)"):format(tostring(p7)), 2)
 	end,
-	__newindex = function(_, p8) --[[ line: 187 ]]
+	__newindex = function(_, p8)
 		error(("Attempt to set Signal::%s (not a valid member)"):format(tostring(p8)), 2)
 	end
 })

@@ -11,29 +11,29 @@ local info = images["icons/actions/info"]
 local feedback = images["icons/actions/feedback"]
 local var5 = require(script.Parent.Flags).GetAdGuiInteractivityPixelsPerStud() / 50
 
-local function _(p0) --[[ line: 20 | named "applyScalingUDim" ]]
+local function _(p0)
 	-- upvalues: var5 (ref)
 	return UDim.new(p0.Scale, p0.Offset * var5)
 end
 
-local _ = function(p1) --[[ line: 24 | named "applyScalingUDim2" ]]
+local _ = function(p1)
 	-- upvalues: var5 (ref)
 	return UDim2.new(p1.X.Scale, p1.X.Offset * var5, p1.Y.Scale, p1.Y.Offset * var5)
 end
 
-local _ = function(p2) --[[ line: 28 | named "applyScalingNumber" ]]
+local _ = function(p2)
 	-- upvalues: var5 (ref)
 	return p2 * var5
 end
 
-local function WhyThisAdRow(p3) --[[ line: 41 ]]
+local function WhyThisAdRow(p3)
 	-- upvalues: roactModule (ref), interactable (ref), var5 (ref), imageSetLabel (ref), info (ref), var3 (ref)
 	local createElement = roactModule.createElement
 	local t = {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		[roactModule.Event.Activated] = p3.onWhyThisAdActivated,
-		onStateChanged = function() --[[ line: 46 ]] end
+		onStateChanged = function() end
 	}
 	local t_1 = {}
 	local createElement_1 = roactModule.createElement
@@ -83,14 +83,14 @@ local function WhyThisAdRow(p3) --[[ line: 41 ]]
 	return createElement(interactable, t, t_1)
 end
 
-local function ReportAdRow(p4) --[[ line: 81 ]]
+local function ReportAdRow(p4)
 	-- upvalues: roactModule (ref), interactable (ref), var5 (ref), imageSetLabel (ref), feedback (ref), var4 (ref)
 	local createElement = roactModule.createElement
 	local t = {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		[roactModule.Event.Activated] = p4.onReportAdActivated,
-		onStateChanged = function() --[[ line: 86 ]] end
+		onStateChanged = function() end
 	}
 	local t_1 = {}
 	local createElement_1 = roactModule.createElement
@@ -140,7 +140,7 @@ local function ReportAdRow(p4) --[[ line: 81 ]]
 	return createElement(interactable, t, t_1)
 end
 
-function AdDropdownMenu(p5) --[[ line: 121 ]]
+function AdDropdownMenu(p5)
 	-- upvalues: roactModule (ref), var5 (ref), WhyThisAdRow (ref), ReportAdRow (ref)
 	local createElement = roactModule.createElement
 	local var40 = "Frame"

@@ -4,7 +4,7 @@ local constantsModule = require(expChat.PresetChat.Constants)
 local var2 = nil
 local var3 = nil
 
-local function flatten(p0) --[[ line: 43 ]]
+local function flatten(p0)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
@@ -23,7 +23,7 @@ local function flatten(p0) --[[ line: 43 ]]
 	return { values = t, lowerValues = t_1, presetIdByValue = t_2 }
 end
 
-local function getCatalog(p1) --[[ line: 71 ]]
+local function getCatalog(p1)
 	-- upvalues: constantsModule (ref), var3 (write), var2 (write), flatten (ref)
 	if not p1.getIsEnabled(false) or p1.getAccessLevel(false) ~= constantsModule.AccessLevel.Enabled then
 		return nil
@@ -37,7 +37,7 @@ local function getCatalog(p1) --[[ line: 71 ]]
 	return var3
 end
 
-local function _(p2, p3) --[[ line: 85 | named "getRank" ]]
+local function _(p2, p3)
 	local matchIndex = string.find(p2, p3, 1, true)
 	
 	return if matchIndex == nil then nil elseif matchIndex == 1 then 1 elseif string.match(string.sub(p2, matchIndex - 1, matchIndex - 1), "%w") == nil then 2 else 3
@@ -45,7 +45,7 @@ end
 
 return {
 	MIN_QUERY_LENGTH = 2,
-	findMatchingPresets = function(value, p4) --[[ line: 106 ]]
+	findMatchingPresets = function(value, p4)
 		-- upvalues: getCatalog (ref)
 		if (utf8.len(p4) or #p4) < 2 then
 			return {}
@@ -71,7 +71,7 @@ return {
 				table.insert(t, { rank = var17, index = i })
 			end
 		end
-		table.sort(t, function(p5, p6) --[[ line: 140 ]]
+		table.sort(t, function(p5, p6)
 			return if p5.rank == p6.rank then p5.index < p6.index else p5.rank < p6.rank
 		end)
 		local list = table.create(#t)
@@ -81,7 +81,7 @@ return {
 		end
 		return list
 	end,
-	getPresetIdForValue = function(value, p7) --[[ line: 160 ]]
+	getPresetIdForValue = function(value, p7)
 		-- upvalues: getCatalog (ref)
 		local var18 = getCatalog(value)
 		

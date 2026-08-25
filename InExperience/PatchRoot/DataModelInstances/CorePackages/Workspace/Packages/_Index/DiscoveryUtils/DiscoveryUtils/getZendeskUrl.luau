@@ -21,7 +21,7 @@
 	nb_no = "no"
 }
 
-local var1 = function(p0) --[[ line: 24 ]]
+local var1 = function(p0)
 	-- upvalues: t (ref)
 	if t[p0] then
 		return t[p0]
@@ -34,15 +34,15 @@ local var1 = function(p0) --[[ line: 24 ]]
 	return if t_1[1] then t_1[1] else "en-us"
 end
 
-local _ = function(p1) --[[ line: 42 ]]
+local _ = function(p1)
 	return p1 and string.match(p1, "^[%w%-_]+$") ~= nil
 end
 
-local _ = function(p2) --[[ line: 47 ]]
+local _ = function(p2)
 	return p2 and string.match(p2, "^[a-zA-Z0-9]+$") ~= nil
 end
 
-return function(p3, p4, p5) --[[ line: 52 | named "getZendeskUrl" ]]
+return function(p3, p4, p5)
 	-- upvalues: var1 (ref)
 	return `{p3 or "https://en.help.roblox.com/hc"}/{if p4 and string.match(p4, "^[%w%-_]+$") ~= nil then var1(p4) else "en-us"}/{if p5 and string.match(p5, "^[a-zA-Z0-9]+$") ~= nil then `articles/{p5}` else ""}`
 end

@@ -8,19 +8,19 @@ local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestSer
 local appUserInputService = require(parent.RoactServiceTags).AppUserInputService
 local uiStatusBarTappedEventModule = require(uiShellEvents.Analytics.uiStatusBarTappedEvent)
 
-return function(p0) --[[ line: 11 | named "useLogStatusBarTapped" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), appEventIngestService (ref), appUserInputService (ref), useNavigation (ref), getCurrentRouteState (ref), reactModule (ref), uiStatusBarTappedEventModule (ref)
 	local var3 = useRoactService(appEventIngestService)
 	local var4 = useRoactService(appUserInputService)
 	p0 = p0 or ((getCurrentRouteState(useNavigation()) or {}).name or "Unknown")
-	reactModule.useEffect(function() --[[ line: 19 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), uiStatusBarTappedEventModule (copy), var3 (ref), p0 (ref)
-		local statusBarTappedConnection = var4.StatusBarTapped:Connect(function() --[[ line: 20 ]]
+		local statusBarTappedConnection = var4.StatusBarTapped:Connect(function()
 			-- upvalues: uiStatusBarTappedEventModule (copy), var3 (copy), p0 (copy)
 			uiStatusBarTappedEventModule(var3, "StatusBar", { page = p0 })
 		end)
 		
-		return function() --[[ line: 26 ]]
+		return function()
 			-- upvalues: statusBarTappedConnection (ref)
 			statusBarTappedConnection:Disconnect()
 		end

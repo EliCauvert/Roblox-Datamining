@@ -12,7 +12,7 @@ return {
 		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshQuality),
-	run = function(p0, p1) --[[ line: 18 ]]
+	run = function(p0, p1)
 		-- upvalues: errorSourceStringsModule (ref), UGCValidationTriangleIntersectionMaxPercent (ref)
 		local measureTriangleIntersection = p1.aqsSummaryData.Measure_Triangle_Intersection
 		

@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t:__tostring() --[[ line: 3 ]]
+function t:__tostring()
 	local t = {}
 	
 	for i, v in pairs(self) do
@@ -12,12 +12,12 @@ function t:__tostring() --[[ line: 3 ]]
 	return "<HttpResponse: " .. table.concat(t, ", ") .. ">"
 end
 
-function t.success(p0, p1) --[[ line: 14 ]]
+function t.success(p0, p1)
 	-- upvalues: t (ref)
 	return setmetatable({ responseCode = p0, responseBody = p1 }, t)
 end
 
-function t.error(p2) --[[ line: 21 ]]
+function t.error(p2)
 	-- upvalues: t (ref)
 	return setmetatable({ HttpError = p2 }, t)
 end

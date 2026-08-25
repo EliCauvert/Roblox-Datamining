@@ -5,7 +5,7 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p0) --[[ line: 21 | named "AlertPrompt" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
 	local var2 = useLocalization({
 		GoToSettings = "Common.VerifiedParentalConsent.Action.GoToSettings",
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 21 | named "AlertPrompt" ]]
 		titleIcon = p0.titleIcon,
 		bodyText = p0.bodyText,
 		buttonStackInfo = {
-			buttons = (function() --[[ line: 33 ]]
+			buttons = (function()
 				-- upvalues: p0 (ref), buttonType (copy), var2 (ref)
 				return if p0.isActionable then {
 					{

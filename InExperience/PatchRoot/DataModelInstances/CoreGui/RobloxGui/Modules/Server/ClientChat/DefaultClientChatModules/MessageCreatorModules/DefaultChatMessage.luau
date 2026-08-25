@@ -1,5 +1,5 @@
 ﻿local _ = false
-local ok, status = pcall(function() --[[ line: 8 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserIsChatTranslationEnabled2")
 end)
 local status_1 = ok and status
@@ -10,14 +10,14 @@ local chatConstantsModule = require(parent:WaitForChild("ChatConstants"))
 local utilModule = require(script.Parent:WaitForChild("Util"))
 local char = utf8.char(57344)
 
-function IsPlayerVerified(p0) --[[ line: 23 ]]
+function IsPlayerVerified(p0)
 	-- upvalues: playersService (ref)
 	local var6 = playersService:GetPlayerByUserId(p0)
 	
 	if not var6 then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 30 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var6 (ref)
 		return var6.HasVerifiedBadge
 	end)
@@ -25,12 +25,12 @@ function IsPlayerVerified(p0) --[[ line: 23 ]]
 	return if ok then status else false
 end
 
-function AppendVerifiedBadge(p1) --[[ line: 37 ]]
+function AppendVerifiedBadge(p1)
 	-- upvalues: char (ref)
 	return p1 .. char
 end
 
-function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
+function CreateMessageLabel(p2, p3, p4)
 	-- upvalues: chatSettingsModule (ref), utilModule (ref), status_1 (write)
 	local fromSpeaker = p2.FromSpeaker
 	local _ = nil
@@ -77,14 +77,14 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 	local var25 = nil
 	
 	if status_1 then
-		pcall(function() --[[ line: 105 ]]
+		pcall(function()
 			-- upvalues: var25 (write), utilModule (copy), var18 (ref), uDim2 (write), var19 (ref)
 			var25 = utilModule:AddTranslationButtonToBaseMessage(var18)
 			uDim2 += UDim2.new(0, var19.Size.X.Offset + 2, 0, 0)
 			var25.Position = uDim2
 		end)
 	end
-	local function useOriginalText(p5) --[[ line: 112 ]]
+	local function useOriginalText(p5)
 		-- upvalues: var24 (write), p2 (ref), var18 (ref), utilModule (copy), var16 (write)
 		var24 = false
 		
@@ -96,7 +96,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 		var18.Text = utilModule:CreateLeadingSpaces(var16) .. string.rep("_", p5.MessageLengthUtf8 or p5.MessageLength)
 	end
 	
-	i = function(value) --[[ line: 122 | named "useTranslatedText" ]]
+	i = function(value)
 		-- upvalues: var25 (write), var16 (write), var24 (write), useOriginalText (ref), var18 (ref), utilModule (copy)
 		if var25 == nil then return end
 		if var25.Visible == false then
@@ -113,7 +113,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 		var18.Text = utilModule:CreateLeadingSpaces(var16) .. utilModule:SanitizeForRichText(value.TranslatedMessage)
 	end
 	
-	local function _(p6) --[[ line: 142 | named "UpdateTextFunction_Chat" ]]
+	local function _(p6)
 		-- upvalues: p2 (ref), var25 (write), var16 (write), var24 (write), useOriginalText (ref), var18 (ref), utilModule (copy)
 		p2.TranslatedMessage = p6.TranslatedMessage
 		
@@ -136,7 +136,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 		var18.Text = utilModule:CreateLeadingSpaces(var16) .. utilModule:SanitizeForRichText(p6.TranslatedMessage)
 	end
 	
-	local function UpdateTextFunction(p7) --[[ line: 151 ]]
+	local function UpdateTextFunction(p7)
 		-- upvalues: status_1 (copy), p2 (ref), var25 (write), var16 (write), var24 (write), useOriginalText (ref), var18 (ref), utilModule (copy)
 		if status_1 then
 			p2.TranslatedMessage = p7.TranslatedMessage
@@ -168,7 +168,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 		var18.Text = utilModule:CreateLeadingSpaces(var16) .. string.rep("_", p7.MessageLengthUtf8 or p7.MessageLength)
 	end
 	
-	local _ = function() --[[ line: 164 | named "toggleTranslation" ]]
+	local _ = function()
 		-- upvalues: var24 (write), p2 (ref), var25 (write), var16 (write), useOriginalText (ref), var18 (ref), utilModule (copy), p4 (ref)
 		if var24 or not p2.TranslatedMessage then
 			useOriginalText(p2)
@@ -195,7 +195,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 	end
 	
 	if status_1 and var25 ~= nil then
-		local mouseButton1ClickConnection = var25.MouseButton1Click:connect(function() --[[ line: 176 ]]
+		local mouseButton1ClickConnection = var25.MouseButton1Click:connect(function()
 			-- upvalues: var24 (write), p2 (ref), var25 (write), var16 (write), useOriginalText (ref), var18 (ref), utilModule (copy), p4 (ref)
 			if var24 or not p2.TranslatedMessage then
 				useOriginalText(p2)
@@ -221,7 +221,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 			end
 		end)
 		changedConnection = nil
-		changedConnection = var25.Changed:connect(function(p8) --[[ line: 181 ]]
+		changedConnection = var25.Changed:connect(function(p8)
 			-- upvalues: mouseButton1ClickConnection (ref), changedConnection (write)
 			if p8 == "Parent" then
 				mouseButton1ClickConnection:Disconnect()
@@ -231,7 +231,7 @@ function CreateMessageLabel(p2, p3, p4) --[[ line: 41 ]]
 	end
 	UpdateTextFunction(p2)
 	
-	local function GetHeightFunction(p9) --[[ line: 191 ]]
+	local function GetHeightFunction(p9)
 		-- upvalues: utilModule (copy), var18 (ref), var17 (ref)
 		return utilModule:GetMessageHeight(var18, var17, p9)
 	end

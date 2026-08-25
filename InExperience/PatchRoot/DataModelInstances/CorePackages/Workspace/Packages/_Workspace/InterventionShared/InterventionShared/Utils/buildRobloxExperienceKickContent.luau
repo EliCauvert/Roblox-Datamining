@@ -17,7 +17,7 @@ local list = {
 	}
 }
 
-local function parseErrorDetails(p0) --[[ line: 37 ]]
+local function parseErrorDetails(p0)
 	return if p0 == nil then {
 		beginTimestamp = "",
 		endTimestamp = "",
@@ -31,7 +31,7 @@ local function parseErrorDetails(p0) --[[ line: 37 ]]
 	}
 end
 
-local function buildModerationDetail(p1, p2) --[[ line: 55 ]]
+local function buildModerationDetail(p1, p2)
 	return {
 		interventionId = "",
 		punishedUserId = 0,
@@ -54,7 +54,7 @@ local function buildModerationDetail(p1, p2) --[[ line: 55 ]]
 	}
 end
 
-local function pickTitleAndBody(p3, p4) --[[ line: 79 ]]
+local function pickTitleAndBody(p3, p4)
 	-- upvalues: list (ref)
 	if p4 == nil or p4 <= 0 then
 		return {
@@ -78,7 +78,7 @@ local function pickTitleAndBody(p3, p4) --[[ line: 79 ]]
 	}
 end
 
-return function(p5, p6, p7) --[[ line: 119 | named "buildRobloxExperienceKickContent" ]]
+return function(p5, p6, p7)
 	-- upvalues: parseErrorDetails (ref), buildModerationDetail (ref), pickTitleAndBody (ref), abuseVectorModule (ref)
 	local var6 = parseErrorDetails(p6)
 	local var7 = pickTitleAndBody(p7, var6.durationSeconds)

@@ -10,24 +10,24 @@ local useSelectedTabTypeModule = require(expChat.useSelectedTabType)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 
-local function selectIsChatHotkeyEnabled(p0) --[[ line: 41 ]]
+local function selectIsChatHotkeyEnabled(p0)
 	return p0.ChatVisibility.isChatHotkeyEnabled.value
 end
 
-local function selectDevDefinedFocusKeyCode(p1) --[[ line: 45 ]]
+local function selectDevDefinedFocusKeyCode(p1)
 	return p1.ChatLayout.ChatInputBarSettings.KeyboardKeyCode
 end
 
-return function(p2) --[[ line: 54 | named "FocusHotKeyReceiver" ]]
+return function(p2)
 	-- upvalues: contextActionService (ref), useSelector (ref), selectIsChatHotkeyEnabled (ref), useSelectedTabTypeModule (ref), selectDevDefinedFocusKeyCode (ref), useDispatch (ref), reactModule (ref), configModule (ref), getTabFocusBehaviorModule (ref), focusChatHotKeyActivatedModule (ref)
 	local contextActionService_1 = p2.contextActionService or contextActionService
 	local var11 = useSelector(selectIsChatHotkeyEnabled)
 	local var12 = useSelectedTabTypeModule()
 	local var13 = useSelector(selectDevDefinedFocusKeyCode)
 	local var14 = useDispatch()
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), configModule (copy), var13 (ref), var12 (ref), getTabFocusBehaviorModule (copy), var14 (ref), focusChatHotKeyActivatedModule (copy), contextActionService_1 (ref)
-		contextActionService_1:BindCoreAction("ExpChatFocusHotKey", function(_, p3, p4) --[[ line: 63 | named "handleAction" ]]
+		contextActionService_1:BindCoreAction("ExpChatFocusHotKey", function(_, p3, p4)
 			-- upvalues: var11 (copy), configModule (copy), var13 (copy), var12 (copy), getTabFocusBehaviorModule (copy), var14 (copy), focusChatHotKeyActivatedModule (copy)
 			if not var11 then
 				return Enum.ContextActionResult.Pass
@@ -51,7 +51,7 @@ return function(p2) --[[ line: 54 | named "FocusHotKeyReceiver" ]]
 			return Enum.ContextActionResult.Pass
 		end, false, Enum.UserInputType.Keyboard)
 		
-		return function() --[[ line: 103 ]]
+		return function()
 			-- upvalues: contextActionService_1 (copy)
 			contextActionService_1:UnbindCoreAction("ExpChatFocusHotKey")
 		end

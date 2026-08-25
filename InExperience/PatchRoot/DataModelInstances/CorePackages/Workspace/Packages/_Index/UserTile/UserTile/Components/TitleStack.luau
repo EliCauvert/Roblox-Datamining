@@ -30,7 +30,7 @@ local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUse
 local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 local t = { layoutOrder = 2 }
 
-return function(p0) --[[ line: 70 | named "TitleStack" ]]
+return function(p0)
 	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), fFlagUserTileUnfilteredChatIndicator (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), iconSize (ref), userTileRemoveContextualInfoTag (ref)
 	local var17
 	p0 = llama.Dictionary.join(t, p0 or {})
@@ -206,7 +206,7 @@ return function(p0) --[[ line: 70 | named "TitleStack" ]]
 			fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
 			Text = p0.subtitle or "",
 			TextTruncate = customTextTruncation,
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 276 ]]
+			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function()
 				-- upvalues: p0 (write)
 				p0.onSubtitleClicked()
 			end else nil,
@@ -223,7 +223,7 @@ return function(p0) --[[ line: 70 | named "TitleStack" ]]
 				["align-x-center"] = p0.layoutMode == layoutModeModule.compact,
 				["align-x-left"] = p0.layoutMode == layoutModeModule.wide
 			},
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 297 ]]
+			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function()
 				-- upvalues: p0 (write)
 				p0.onSubtitleClicked()
 			end else nil,

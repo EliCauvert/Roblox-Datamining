@@ -7,7 +7,7 @@ local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindow
 local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
 
-return function(p0) --[[ line: 28 | named "MessageListArea" ]]
+return function(p0)
 	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
 	local var4 = foundationModule.Hooks.useTokens()
 	local var5 = useInExperienceLocalization()
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 28 | named "MessageListArea" ]]
 			left = UDim.new(0, var4.Size.Size_200),
 			right = UDim.new(0, var4.Size.Size_1400)
 		},
-		onScroll = reactModule.useMemo(function() --[[ line: 32 ]]
+		onScroll = reactModule.useMemo(function()
 			-- upvalues: textChannelWindowAnalyticsModule (copy), p0 (ref)
 			return textChannelWindowAnalyticsModule.createOnScrollCallback(p0.windowName)
 		end, { p0.windowName })

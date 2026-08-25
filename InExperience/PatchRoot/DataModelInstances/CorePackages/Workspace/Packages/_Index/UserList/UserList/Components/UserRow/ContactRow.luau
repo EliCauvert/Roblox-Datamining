@@ -5,7 +5,7 @@ local _ = require(userList.Common.Enums)
 local baseRowModule = require(script.Parent.BaseRow)
 local useContactsDataModule = require(userList.Hooks.useContactsData)
 
-return reactModule.memo(function(p0) --[[ line: 34 | named "ContactRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useContactsDataModule (ref), reactModule (ref), baseRowModule (ref)
 	local var4 = useContactsDataModule(p0.entityId)
 	

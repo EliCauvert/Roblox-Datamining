@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local getFFlagReportAnythingEnableAdReport = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags).GetFFlagReportAnythingEnableAdReport
 
-local function transformVectorArray(p0) --[[ line: 70 ]]
+local function transformVectorArray(p0)
 	local t = {}
 	
 	for i, v in ipairs(p0) do
@@ -10,7 +10,7 @@ local function transformVectorArray(p0) --[[ line: 70 ]]
 	return t
 end
 
-local function transformIdentifiedAds(p1) --[[ line: 78 ]]
+local function transformIdentifiedAds(p1)
 	local t = {}
 	
 	for i, v in pairs(p1) do
@@ -31,7 +31,7 @@ local function transformIdentifiedAds(p1) --[[ line: 78 ]]
 	return t
 end
 
-local function transformIdentifiedAvatars(p2) --[[ line: 98 ]]
+local function transformIdentifiedAvatars(p2)
 	-- upvalues: transformVectorArray (ref)
 	local t = {}
 	
@@ -62,14 +62,14 @@ local function transformIdentifiedAvatars(p2) --[[ line: 98 ]]
 	return t
 end
 
-local function _(p3) --[[ line: 130 | named "hasIdentifiedAvatars" ]]
+local function _(p3)
 	for i in pairs(p3.identifiedAvatars) do
 		return true
 	end
 	return false
 end
 
-local _ = function(p4) --[[ line: 137 | named "hasIdentifiedAds" ]]
+local _ = function(p4)
 	for i in pairs(p4.identifiedAds) do
 		return true
 	end
@@ -77,7 +77,7 @@ local _ = function(p4) --[[ line: 137 | named "hasIdentifiedAds" ]]
 end
 
 return {
-	appendReportAnythingTags = function(p5, p6) --[[ line: 144 ]]
+	appendReportAnythingTags = function(p5, p6)
 		-- upvalues: httpService (ref), transformIdentifiedAvatars (ref), getFFlagReportAnythingEnableAdReport (ref), transformIdentifiedAds (ref)
 		if not p6 then
 			return p5

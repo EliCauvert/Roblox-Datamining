@@ -1,4 +1,4 @@
-﻿return require(script.Parent.Parent.Action)(script.Name, function(p0, p1, p2, p3, p4, p5) --[[ line: 6 ]]
+﻿return require(script.Parent.Parent.Action)(script.Name, function(p0, p1, p2, p3, p4, p5)
 	return {
 		isClientView = p0,
 		usePercentages = p1,

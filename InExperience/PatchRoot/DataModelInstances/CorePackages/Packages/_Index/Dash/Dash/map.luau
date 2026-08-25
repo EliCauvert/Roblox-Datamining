@@ -2,7 +2,7 @@
 local _ = require(parent.Types)
 local assertEqualModule = require(parent.assertEqual)
 
-return function(p0, p1) --[[ line: 20 | named "map" ]]
+return function(p0, p1)
 	-- upvalues: assertEqualModule (ref)
 	local t = {}
 	

@@ -2,7 +2,7 @@
 local signalsModule = require(parent.Signals)
 local cryoModule = require(parent.Cryo)
 
-return function(value) --[[ line: 22 | named "createSignalMap" ]]
+return function(value)
 	-- upvalues: signalsModule (ref), cryoModule (ref)
 	local t = {}
 	local var3 = 0
@@ -17,11 +17,11 @@ return function(value) --[[ line: 22 | named "createSignalMap" ]]
 	local var6, var7 = signalsModule.createSignal(var3)
 	
 	return {
-		getData = function(p0, p1) --[[ line: 35 ]]
+		getData = function(p0, p1)
 			-- upvalues: var4 (ref)
 			return var4(p1)[p0]
 		end,
-		setData = function(value, p2, p3) --[[ line: 39 ]]
+		setData = function(value, p2, p3)
 			-- upvalues: var4 (ref), cryoModule (copy), var7 (ref), var6 (ref), var5 (ref)
 			local var8 = var4(p3)
 			local var9 = cryoModule.Dictionary.join(var8, { [value] = p2 })
@@ -31,7 +31,7 @@ return function(value) --[[ line: 22 | named "createSignalMap" ]]
 			end
 			var5(var9)
 		end,
-		removeData = function(p4, p5) --[[ line: 49 ]]
+		removeData = function(p4, p5)
 			-- upvalues: var4 (ref), cryoModule (copy), var7 (ref), var6 (ref), var5 (ref)
 			local var10 = var4(p5)
 			
@@ -42,16 +42,16 @@ return function(value) --[[ line: 22 | named "createSignalMap" ]]
 			end
 		end,
 		getCount = var6,
-		iterateData = function(p6, p7) --[[ line: 64 ]]
+		iterateData = function(p6, p7)
 			-- upvalues: signalsModule (copy), var4 (ref)
-			return signalsModule.createEffect(function() --[[ line: 65 ]]
+			return signalsModule.createEffect(function()
 				-- upvalues: var4 (copy), p7 (ref), p6 (ref)
 				for i, v in pairs(var4(p7)) do
 					p6(i, v)
 				end
 			end)
 		end,
-		getAllData = signalsModule.createComputed(function(p8) --[[ line: 60 ]]
+		getAllData = signalsModule.createComputed(function(p8)
 			-- upvalues: var4 (ref)
 			return var4(p8)
 		end)

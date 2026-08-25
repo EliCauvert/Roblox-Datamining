@@ -64,9 +64,9 @@ local segmentedControl = require(corePackagesService.Packages.UIBlox).App.Contro
 local list = { reportModes.Classic, reportModes.SelectInScene }
 local list_1 = { reportTypes.Person, reportTypes.Experience }
 
-local function _() --[[ line: 101 | named "isInSelectInSceneExperiment" ]]
+local function _()
 	-- upvalues: IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
-	local ok, status = pcall(function() --[[ line: 103 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 	end)
@@ -79,12 +79,12 @@ local function _() --[[ line: 101 | named "isInSelectInSceneExperiment" ]]
 	return false
 end
 
-local function isInWHAM1707Experiment() --[[ line: 115 ]]
+local function isInWHAM1707Experiment()
 	-- upvalues: getFFlagWHAM1707ExperimentForceEnabledModule (ref), IXPService (ref), fStringEARReportMenuIXPLayer (ref), fStringWHAM1707IXPFieldModule (ref)
 	if getFFlagWHAM1707ExperimentForceEnabledModule() then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 121 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringEARReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringEARReportMenuIXPLayer)
 	end)
@@ -97,7 +97,7 @@ local function isInWHAM1707Experiment() --[[ line: 115 ]]
 	return false
 end
 
-local var37 = function(p0) --[[ line: 133 ]]
+local var37 = function(p0)
 	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), list (ref), list_1 (ref), createCleanupModule (ref), useReportAnythingWithScreenshotModule (ref), getMenuItemSizingsModule (ref), useTokens (ref), useLocalization (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707Experiment (ref), safetyService (ref), annotationModalModule (ref), modalBasedSelectorDialogControllerModule (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (ref), setTimeout (ref), reportAbuseAnalyticsModule (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), playersService (ref), isShowSelectInSceneReportMenuModule (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref), fFlagReportFocusNavIEMButtonsModule (ref), guiService (ref), fFlagIEMTabFocusNav (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportAnythingAnalyticsModule (ref), reportTypes (ref), reportPersonMenuItemsContainerModule (ref), reportExperienceMenuItemsContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), IEMReportScrollingFix (ref), segmentedControl (ref), reportModes (ref), selectInSceneReportMenuModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariant (ref), reportTypeSelectorModule (ref), view (ref), text (ref), isShowUKOSAIllegalContentReportingLink (ref), fFlagMigrateAllOsaMessagingToCentralService (ref), isShowEUDSAIllegalContentReportingLink (ref), DSAReportLink (ref), OSAReportLink (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref)
 	local var38, var39 = reactModule.useState(false)
 	local var40, var41 = reactModule.useState(1)
@@ -118,9 +118,9 @@ local var37 = function(p0) --[[ line: 133 ]]
 	local var65 = getMenuItemSizingsModule()
 	local var66 = useTokens()
 	local var67 = useLocalization(constantsModule.localizationKeys)
-	reactModule.useEffect(function() --[[ line: 164 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var39 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var63 (ref), safetyService (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), var45 (ref), var47 (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var64 (ref), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
-		p0.registerOnReportTabDisplayed(function() --[[ line: 165 ]]
+		p0.registerOnReportTabDisplayed(function()
 			-- upvalues: var39 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var63 (copy), safetyService (copy)
 			var39(true)
 			
@@ -128,7 +128,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 				safetyService:ReportMenuTabOpen()
 			end
 		end)
-		p0.registerOnReportTabHidden(function() --[[ line: 174 ]]
+		p0.registerOnReportTabHidden(function()
 			-- upvalues: var39 (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), safetyService (copy)
 			var39(false)
 			annotationModalModule.unmountAnnotationPage()
@@ -138,18 +138,18 @@ local var37 = function(p0) --[[ line: 133 ]]
 				safetyService:ReportMenuTabClose()
 			end
 		end)
-		p0.registerSetNextPlayerToReport(function(p1) --[[ line: 183 ]]
+		p0.registerSetNextPlayerToReport(function(p1)
 			-- upvalues: var45 (copy)
 			var45(p1)
 		end)
-		p0.registerOnMenuWidthChange(function(p2) --[[ line: 186 ]]
+		p0.registerOnMenuWidthChange(function(p2)
 			-- upvalues: var47 (copy)
 			var47(p2)
 		end)
-		p0.registerOnSettingsHidden(function() --[[ line: 189 ]]
+		p0.registerOnSettingsHidden(function()
 			-- upvalues: abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var64 (copy), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
 			if abuseReportTabClearCapturedScreenshotOnCloseFix then
-				setTimeout(function() --[[ line: 196 ]]
+				setTimeout(function()
 					-- upvalues: reportAbuseAnalyticsModule (copy), var64 (copy), constantsModule (copy)
 					if reportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint() == "" then
 						var64({ type = constantsModule.ReportAnythingActions.ClearAll })
@@ -164,7 +164,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 			end
 		end)
 	end, { var63 })
-	reactModule.useEffect(function() --[[ line: 214 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), var43 (ref), var41 (ref), var51 (ref), playersService (copy), var49 (ref)
 		if not var38 then
 			var43(0)
@@ -181,7 +181,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 		var43(1)
 		var49(false)
 	end, { var38 })
-	reactModule.useEffect(function() --[[ line: 234 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), var60 (ref), constantsModule (copy), reportAbuseAnalyticsModule (copy), isShowSelectInSceneReportMenuModule (copy), IXPService (copy), fStringReportMenuIXPLayer (copy), fStringSelectInSceneIXPField (copy), var51 (ref), var57 (ref)
 		local ok
 		if var38 then
@@ -193,7 +193,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 			
 			if isShowSelectInSceneReportMenuModule(var60) then
 				local var82
-				ok, status = pcall(function() --[[ line: 103 ]]
+				ok, status = pcall(function()
 					-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 					return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 				end)
@@ -223,10 +223,10 @@ local var37 = function(p0) --[[ line: 133 ]]
 	end, { var38, var46 })
 	
 	if fFlagReportFocusNavIEMButtonsModule then
-		reactModule.useEffect(function() --[[ line: 268 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var38 (ref), p0 (ref), guiService (copy), var53 (ref)
 			if not var38 then return end
-			local function _() --[[ line: 273 | named "isMenuSelected" ]]
+			local function _()
 				-- upvalues: p0 (copy), guiService (copy)
 				local getSettingsHubRef = p0.getSettingsHubRef
 				local var86 = getSettingsHubRef and getSettingsHubRef()
@@ -239,7 +239,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 			local var83 = getSettingsHubRef and getSettingsHubRef()
 			local menuContainer = var83 and var83.MenuContainer
 			var53(not (guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))))
-			local var85 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 284 ]]
+			local var85 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
 				-- upvalues: var53 (copy), p0 (copy), guiService (copy)
 				local getSettingsHubRef = p0.getSettingsHubRef
 				local var88 = getSettingsHubRef and getSettingsHubRef()
@@ -247,14 +247,14 @@ local var37 = function(p0) --[[ line: 133 ]]
 				var53(not (guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))))
 			end)
 			
-			return function() --[[ line: 288 ]]
+			return function()
 				-- upvalues: var85 (ref)
 				var85:Disconnect()
 			end
 		end, { var38, p0.getSettingsHubRef })
 	end
 	if fFlagIEMTabFocusNav then
-		reactModule.useEffect(function() --[[ line: 296 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var38 (ref), var54 (ref), p0 (ref)
 			if not var38 then return end
 			local var90 = if var54.current and var54.current.tabRefs then {
@@ -352,7 +352,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 			AnchorPoint = Vector2.new(0.5, 0)
 		}, {
 			SelectInSceneToggle = reactModule.createElement(segmentedControl, {
-				onTabActivated = function(p3) --[[ line: 400 ]]
+				onTabActivated = function(p3)
 					-- upvalues: var41 (ref)
 					var41(p3)
 				end,
@@ -393,7 +393,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 				isSelectionDisabled = var48,
 				menuWidth = var46,
 				isSmallPortraitViewport = var58,
-				onClickLeft = function() --[[ line: 443 ]]
+				onClickLeft = function()
 					-- upvalues: var64 (ref), constantsModule (copy), var60 (ref), var43 (ref), var42 (ref), list_1 (copy)
 					var64({
 						type = constantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
@@ -403,7 +403,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 					})
 					var43((var42 - 1 - 1) % #list_1 + 1)
 				end,
-				onClickRight = function() --[[ line: 453 ]]
+				onClickRight = function()
 					-- upvalues: var64 (ref), constantsModule (copy), var60 (ref), var43 (ref), var42 (ref), list_1 (copy)
 					var64({
 						type = constantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
@@ -460,7 +460,7 @@ local var37 = function(p0) --[[ line: 133 ]]
 	return createElement(var70, t_1, t_2)
 end
 
-return function(p4) --[[ line: 537 ]]
+return function(p4)
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), constantsModule (ref), var37 (ref)
 	return reactModule.createElement(coreScriptsRootProvider, {}, {
 		LocalizationProvider = reactModule.createElement(localizationProvider, {

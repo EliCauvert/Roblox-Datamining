@@ -4,13 +4,13 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local actions = script.Parent.Parent.Actions
 
 return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p0, p1) --[[ line: 11 ]]
+	[require(actions.AddPlayer).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.List.join(p0, { p1.player })
 	end,
-	[require(actions.RemovePlayer).name] = function(p2, p3) --[[ line: 15 ]]
+	[require(actions.RemovePlayer).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
-		return cryoModule.List.filter(p2, function(p4) --[[ line: 16 ]]
+		return cryoModule.List.filter(p2, function(p4)
 			-- upvalues: p3 (ref)
 			return p4 ~= p3.player
 		end)

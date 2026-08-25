@@ -10,19 +10,19 @@ local constantsModule = require(parent.Constants)
 local eventNamesModule = require(parent.Analytics.EventNames)
 local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useAnalyticsModule (ref), useSelector (ref), constantsModule (ref), useEffectOnce (ref), eventNamesModule (ref), captureConfigCTAsModule (ref), capturesGalleryModule (ref)
-	local var7 = reactModule.useCallback(function() --[[ line: 23 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.closeSettingsMenu()
 	end, {})
 	local var8 = useAnalyticsModule()
 	local var9, var10 = reactModule.useState(0)
-	local var11 = useSelector(function(p1) --[[ line: 30 ]]
+	local var11 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].IsMenuOpen
 	end)
-	useEffectOnce(function() --[[ line: 34 ]]
+	useEffectOnce(function()
 		-- upvalues: var8 (ref), eventNamesModule (copy)
 		var8.fireEvent(eventNamesModule.CapturesPageOpenedInGameMenu)
 	end, var11)
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 22 ]]
 		CaptureConfigCTAs = reactModule.createElement(captureConfigCTAsModule, {
 			LayoutOrder = 1,
 			closeSettingsMenu = var7,
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2) --[[ line: 38 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var10 (ref)
 				var10(p2.Y)
 			end, {})

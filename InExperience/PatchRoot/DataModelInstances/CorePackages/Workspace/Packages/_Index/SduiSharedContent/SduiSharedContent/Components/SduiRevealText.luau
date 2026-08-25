@@ -4,7 +4,7 @@ local cryoModule = require(parent.Cryo)
 local sduiTextModule = require(script.Parent.SduiText)
 local useRevealTextModule = require(script.Parent.useRevealText)
 
-return function(p0) --[[ line: 16 | named "SduiRevealText" ]]
+return function(p0)
 	-- upvalues: useRevealTextModule (ref), reactModule (ref), cryoModule (ref), sduiTextModule (ref)
 	local var4 = useRevealTextModule({
 		delimiter = p0.delimiter,
@@ -14,7 +14,7 @@ return function(p0) --[[ line: 16 | named "SduiRevealText" ]]
 		text = p0.text
 	})
 	
-	return reactModule.createElement(sduiTextModule, reactModule.useMemo(function() --[[ line: 24 ]]
+	return reactModule.createElement(sduiTextModule, reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), p0 (ref), var4 (ref)
 		return cryoModule.Dictionary.join(p0, {
 			delimiter = cryoModule.None,

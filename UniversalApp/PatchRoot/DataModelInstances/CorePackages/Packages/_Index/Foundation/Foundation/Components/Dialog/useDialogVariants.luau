@@ -13,7 +13,7 @@ local t = {
 	[dialogSizeModule.Large] = 640
 }
 
-local function variantsFactory(p0) --[[ line: 45 ]]
+local function variantsFactory(p0)
 	-- upvalues: flagsModule (ref), dialogSizeModule (ref), t (ref)
 	return {
 		common = {
@@ -89,7 +89,7 @@ local function variantsFactory(p0) --[[ line: 45 ]]
 	}
 end
 
-function useDialogVariants() --[[ line: 181 ]]
+function useDialogVariants()
 	-- upvalues: useTokensModule (ref), variantsContextModule (ref), variantsFactory (ref), useDialogModule (ref), composeStyleVariantModule (ref)
 	local dialog = variantsContextModule.useVariants("Dialog", variantsFactory, useTokensModule())
 	

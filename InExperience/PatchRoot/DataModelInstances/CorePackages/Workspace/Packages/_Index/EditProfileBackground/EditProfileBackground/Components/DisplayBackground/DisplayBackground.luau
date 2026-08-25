@@ -17,7 +17,7 @@ local runService = game:GetService("RunService")
 local promiseModule = require(parent.Promise)
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 
-local function _() --[[ line: 27 | named "shouldEnableAnimation" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	return userInputService.PreferredInput ~= Enum.PreferredInput.Touch
 end
@@ -28,7 +28,7 @@ local var9 = if fFlagProfilePlatformNewProfileHeader then 6.5 else nil
 local var10 = if fFlagProfilePlatformNewProfileHeader then 8 else nil
 local var11 = if fFlagProfilePlatformNewProfileHeader then math.rad((if fFlagProfilePlatformNewProfileHeader then 70 else nil) / 2) else nil
 
-local _ = function(p0, p1) --[[ line: 47 | named "getCameraDistanceForCharacterHeight" ]]
+local _ = function(p0, p1)
 	-- upvalues: var11 (ref), var9 (ref), var10 (ref)
 	return math.clamp(p0 / (math.tan(var11) * 2) * p1, var9 * p1, var10 * p1)
 end
@@ -44,7 +44,7 @@ local insertService = game:GetService("InsertService")
 local var18 = 0
 local var19 = nil
 
-local _ = function() --[[ line: 108 | named "acquireUnthrottle" ]]
+local _ = function()
 	-- upvalues: var18 (write), var19 (write), runService (ref)
 	if var18 == 0 then
 		var19 = runService:getThrottleFramerateEnabled()
@@ -53,7 +53,7 @@ local _ = function() --[[ line: 108 | named "acquireUnthrottle" ]]
 	var18 += 1
 end
 
-local function releaseUnthrottle() --[[ line: 116 ]]
+local function releaseUnthrottle()
 	-- upvalues: var18 (write), runService (ref), var19 (write)
 	var18 -= 1
 	
@@ -64,7 +64,7 @@ local function releaseUnthrottle() --[[ line: 116 ]]
 	end
 end
 
-local function playToolAnimation(p2) --[[ line: 134 ]]
+local function playToolAnimation(p2)
 	if not p2:IsDescendantOf(game) then return end
 	local animate = p2:FindFirstChild("Animate")
 	assert(animate ~= nil, "Expected animate to always exist")
@@ -86,7 +86,7 @@ local function playToolAnimation(p2) --[[ line: 134 ]]
 	var27:Play()
 end
 
-return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
+return function(value)
 	-- upvalues: useLocalUserId (ref), useSelectedTheme (ref), reactModule (ref), isGetThrottleFramerateEnabledAvailable (ref), fFlagPPVEnable3DBackground (ref), insertService (ref), getDisplayBackgroundId (ref), color (ref), color_1 (ref), PPVBackgroundUnthrottleRefCount (ref), var18 (write), var19 (write), runService (ref), releaseUnthrottle (ref), playToolAnimation (ref), promiseModule (ref), avatarModelPrefetchModule (ref), cryoModule (ref), errorTypes (ref), cFrame (ref), fFlagProfilePlatformNewProfileHeader (ref), var12 (ref), fFlagProfilePlatformMeTabMobileProfileHero (ref), var11 (ref), var9 (ref), var10 (ref), userInputService (ref), view (ref), fFlagPPVBackgroundUse2DAsLoadingState (ref), loadableImage (ref), loading (ref), iconSize (ref)
 	local var28 = useLocalUserId()
 	local userId = value.userId or var28 and tonumber(var28)
@@ -99,12 +99,12 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 	local var37 = if isGetThrottleFramerateEnabledAvailable then reactModule.useRef(nil) else nil
 	
 	if fFlagPPVEnable3DBackground then
-		reactModule.useEffect(function() --[[ line: 179 ]]
+		reactModule.useEffect(function()
 			-- upvalues: value (ref), insertService (copy), getDisplayBackgroundId (copy), var30 (ref), var32 (ref), var31 (ref), color (copy), color_1 (copy)
-			task.defer(function() --[[ line: 181 ]]
+			task.defer(function()
 				-- upvalues: value (copy), insertService (copy), getDisplayBackgroundId (copy), var30 (copy), var32 (copy), var31 (copy), color (copy), color_1 (copy)
 				if not value.currentBackgroundId then return end
-				local ok, status = pcall(function() --[[ line: 186 ]]
+				local ok, status = pcall(function()
 					-- upvalues: insertService (copy), getDisplayBackgroundId (copy), value (copy), var30 (copy)
 					return insertService:LoadAsset(getDisplayBackgroundId(value.currentBackgroundId, var30))
 				end)
@@ -138,13 +138,13 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 		end, { value.currentBackgroundId })
 	end
 	if isGetThrottleFramerateEnabledAvailable then
-		reactModule.useEffect(function() --[[ line: 223 ]]
+		reactModule.useEffect(function()
 			-- upvalues: PPVBackgroundUnthrottleRefCount (copy), var18 (copy), var19 (copy), runService (copy), releaseUnthrottle (copy), var37 (ref)
 			if not PPVBackgroundUnthrottleRefCount then
 				var37.current = runService:getThrottleFramerateEnabled()
 				runService:setThrottleFramerateEnabled(false)
 				
-				return function() --[[ line: 231 ]]
+				return function()
 					-- upvalues: runService (copy), var37 (copy)
 					runService:setThrottleFramerateEnabled(var37.current or true)
 				end
@@ -157,7 +157,7 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 			return releaseUnthrottle
 		end, {})
 	end
-	local var38 = reactModule.useCallback(function(p3, p4) --[[ line: 238 ]]
+	local var38 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: playToolAnimation (copy)
 		if not p3 or not p4 then return end
 		local rightHand = p3:FindFirstChild("RightHand")
@@ -184,7 +184,7 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 		weld.C0 = p4.Grip
 		weld.C1 = rightGripAttachment.CFrame
 	end, {})
-	local var39 = reactModule.useCallback(function(p5, p6) --[[ line: 275 ]]
+	local var39 = reactModule.useCallback(function(p5, p6)
 		if not p5 or not p6 then return end
 		local var45 = p5:FindFirstChild("Right Arm")
 		
@@ -214,9 +214,9 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 		weld.C0 = p6.Grip
 		weld.C1 = var49
 	end, {})
-	reactModule.useEffect(function() --[[ line: 312 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userId (ref), var36 (ref), promiseModule (copy), avatarModelPrefetchModule (copy), insertService (copy), cryoModule (copy), value (ref), errorTypes (copy), var32 (ref), cFrame (copy), var34 (ref), var38 (ref), var39 (ref), fFlagProfilePlatformNewProfileHeader (copy), var33 (ref), var12 (copy), fFlagProfilePlatformMeTabMobileProfileHero (copy), var11 (copy), var9 (copy), var10 (copy), isGetThrottleFramerateEnabledAvailable (copy), userInputService (copy)
-		task.defer(function() --[[ line: 314 ]]
+		task.defer(function()
 			-- upvalues: userId (copy), var36 (copy), promiseModule (copy), avatarModelPrefetchModule (copy), insertService (copy), cryoModule (copy), value (copy), errorTypes (copy), var32 (copy), cFrame (copy), var34 (copy), var38 (copy), var39 (copy), fFlagProfilePlatformNewProfileHeader (copy), var33 (copy), var12 (copy), fFlagProfilePlatformMeTabMobileProfileHero (copy), var11 (copy), var9 (copy), var10 (copy), isGetThrottleFramerateEnabledAvailable (copy), userInputService (copy)
 			if not userId then return end
 			var36(true)
@@ -224,18 +224,18 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 			local var52 = promiseModule.resolve(nil)
 			local var53, var54 = promiseModule.all({
 				avatarModelPrefetchModule.get(userId),
-				promiseModule.new(function(p7) --[[ line: 325 ]]
+				promiseModule.new(function(p7)
 					-- upvalues: userId (copy), var51 (write), promiseModule (copy), insertService (copy), cryoModule (copy), var52 (write)
-					local ok, status = pcall(function() --[[ line: 326 ]]
+					local ok, status = pcall(function()
 						-- upvalues: userId (copy)
 						return game.Players:GetCharacterAppearanceInfoAsync(userId)
 					end)
 					
 					if ok and status then
 						if status.emotes and #status.emotes > 0 then
-							var51 = promiseModule.new(function(p8) --[[ line: 331 ]]
+							var51 = promiseModule.new(function(p8)
 								-- upvalues: insertService (copy), status (ref)
-								local ok, status_1 = pcall(function() --[[ line: 332 ]]
+								local ok, status_1 = pcall(function()
 									-- upvalues: insertService (copy), status (copy)
 									return insertService:LoadAsset(status.emotes[1].assetId):FindFirstChildOfClass("Animation")
 								end)
@@ -243,15 +243,15 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 							end)
 						end
 						if status.assets then
-							local var65 = cryoModule.List.findWhere(status.assets, function(p9) --[[ line: 341 ]]
+							local var65 = cryoModule.List.findWhere(status.assets, function(p9)
 								return p9.assetType.name == "Gear"
 							end)
 							
 							if var65 then
 								local var66 = status.assets[var65]
-								var52 = promiseModule.new(function(p10) --[[ line: 346 ]]
+								var52 = promiseModule.new(function(p10)
 									-- upvalues: insertService (copy), var66 (ref)
-									local ok, status = pcall(function() --[[ line: 347 ]]
+									local ok, status = pcall(function()
 										-- upvalues: insertService (copy), var66 (copy)
 										return insertService:LoadAsset(var66.id):FindFirstChildOfClass("Tool")
 									end)
@@ -261,7 +261,7 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 						end
 					end
 					p7(if ok then status else nil)
-				end):catch(function() --[[ line: 366 ]]
+				end):catch(function()
 					return nil
 				end)
 			}):await()
@@ -325,7 +325,7 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 				var36(false)
 				
 				if isGetThrottleFramerateEnabledAvailable or userInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-					local ok, _ = pcall(function() --[[ line: 455 ]]
+					local ok, _ = pcall(function()
 						-- upvalues: var51 (write), character (ref)
 						local _, var67 = var51:await()
 						local animation1 = character:FindFirstChild("Animate"):FindFirstChild("idle"):FindFirstChild("Animation1")
@@ -338,7 +338,7 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 								local var71 = animator:LoadAnimation(var67)
 								var71.Looped = false
 								var71:Play()
-								var71.Stopped:Connect(function() --[[ line: 470 ]]
+								var71.Stopped:Connect(function()
 									-- upvalues: var70 (ref)
 									var70:Play()
 								end)
@@ -363,7 +363,7 @@ return function(value) --[[ line: 165 | named "BackgroundDisplay" ]]
 		userId,
 		if fFlagProfilePlatformMeTabMobileProfileHero then value.cameraDistanceScale else nil
 	})
-	reactModule.useEffect(function() --[[ line: 491 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var31 (ref), var33 (ref)
 		if var31.current and var33.current then
 			var31.current.CurrentCamera = var33.current

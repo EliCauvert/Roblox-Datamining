@@ -3,7 +3,7 @@ local fFlagExpChatPresetChatEnabled = require(parent.ExpChatShared).Flags.FFlagE
 local fFlagEnableChatReportingTextChannelTag = require(parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
 local t = { Variant = { CLRv1 = "CLRv1" } }
 
-function buildReport(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 13 ]]
+function buildReport(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: t (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableChatReportingTextChannelTag (ref)
 	local t_1 = {
 		tags = {

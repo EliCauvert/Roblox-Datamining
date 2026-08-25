@@ -3,7 +3,7 @@ local _ = require(parent.util.Types)
 local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
 
 return {
-	getData = function(p0) --[[ line: 17 ]]
+	getData = function(p0)
 		-- upvalues: getAllInstancesIsAModule (ref)
 		local t = {}
 		
@@ -11,7 +11,7 @@ return {
 			local animationId = v.AnimationId
 			
 			if animationId ~= "" then
-				local ok, status = pcall(function() --[[ line: 26 ]]
+				local ok, status = pcall(function()
 					-- upvalues: animationId (ref)
 					return game:GetObjectsAllOrNone(animationId)
 				end)

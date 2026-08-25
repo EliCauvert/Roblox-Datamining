@@ -18,26 +18,26 @@ local selectedBlue = constantsModule.Color.SelectedBlue
 local unselectedGray_1 = constantsModule.Color.UnselectedGray
 local serverProfilerInteraface = roactModule.Component:extend("ServerProfilerInteraface")
 
-function serverProfilerInteraface.init(p0) --[[ line: 35 ]]
+function serverProfilerInteraface.init(p0)
 	-- upvalues: gameSettings (ref), getClientReplicatorModule (ref)
-	function p0.onUtilTabHeightChanged(p1) --[[ line: 36 ]]
+	function p0.onUtilTabHeightChanged(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ utilTabHeight = p1 })
 	end
 	
-	function p0.onFocusLostFrameRate(p2, _, _) --[[ line: 42 ]]
+	function p0.onFocusLostFrameRate(p2, _, _)
 		-- upvalues: gameSettings (copy)
 		gameSettings.RCCProfilerRecordFrameRate = p2.Text
 		p2.Text = gameSettings.RCCProfilerRecordFrameRate
 	end
 	
-	function p0.onFocusLostTimeFrame(p3, _, _) --[[ line: 50 ]]
+	function p0.onFocusLostTimeFrame(p3, _, _)
 		-- upvalues: gameSettings (copy)
 		gameSettings.RCCProfilerRecordTimeFrame = p3.Text
 		p3.Text = gameSettings.RCCProfilerRecordTimeFrame
 	end
 	
-	function p0.requestRCCProfilerData(_) --[[ line: 58 ]]
+	function p0.requestRCCProfilerData(_)
 		-- upvalues: getClientReplicatorModule (copy), gameSettings (copy), p0 (ref)
 		local var9 = getClientReplicatorModule()
 		
@@ -47,9 +47,9 @@ function serverProfilerInteraface.init(p0) --[[ line: 35 ]]
 		end
 	end
 	
-	function p0.changeProfilerState(p4) --[[ line: 71 ]]
+	function p0.changeProfilerState(p4)
 		-- upvalues: gameSettings (copy), p0 (ref)
-		return function() --[[ line: 72 ]]
+		return function()
 			-- upvalues: gameSettings (copy), p4 (ref), p0 (copy)
 			gameSettings.OnScreenProfilerEnabled = p4
 			p0:setState({ clientProfilerEnabled = p4 })
@@ -62,7 +62,7 @@ function serverProfilerInteraface.init(p0) --[[ line: 35 ]]
 	}
 end
 
-function serverProfilerInteraface.render(p5) --[[ line: 86 ]]
+function serverProfilerInteraface.render(p5)
 	-- upvalues: buttonWidth (ref), roactModule (ref), fFlagDevConsoleMicroProfilerImproveWordingModule (ref), mainWindowHeader (ref), buttonTextSize (ref), constantsModule (ref), unselectedGray_1 (ref), mainWindow (ref), devConsoleMicroProfilerFixAutoTextClear (ref), unselectedGray (ref), selectedBlue (ref)
 	local _ = p5.props.size
 	local _ = p5.props.formFactor
@@ -178,15 +178,15 @@ function serverProfilerInteraface.render(p5) --[[ line: 86 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _) --[[ line: 215 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
 	return {
 		waitingForRecording = p6.MicroProfiler.waitingForRecording,
 		lastFileOutputLocation = p6.MicroProfiler.lastFileOutputLocation
 	}
-end, function(p7) --[[ line: 222 | named "mapDispatchToProps" ]]
+end, function(p7)
 	-- upvalues: setRCCProfilerStateModule (ref)
 	return {
-		dispatchSetRCCProfilerState = function(value, p8) --[[ line: 224 ]]
+		dispatchSetRCCProfilerState = function(value, p8)
 			-- upvalues: p7 (ref), setRCCProfilerStateModule (copy)
 			p7(setRCCProfilerStateModule(value, p8))
 		end

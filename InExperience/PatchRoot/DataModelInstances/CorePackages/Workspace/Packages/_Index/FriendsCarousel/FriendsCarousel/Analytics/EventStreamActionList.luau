@@ -12,7 +12,7 @@ local formatRecommendationContextType = socialLuaAnalyticsModule.Analytics.Forma
 local formatPresence = socialLuaAnalyticsModule.Analytics.Formatters.formatPresence
 local getFIntShowFriendRecommendationsLimitModule = require(parent.Flags.getFIntShowFriendRecommendationsLimit)
 
-local var7 = function(p0) --[[ line: 20 ]]
+local var7 = function(p0)
 	return p0
 end
 

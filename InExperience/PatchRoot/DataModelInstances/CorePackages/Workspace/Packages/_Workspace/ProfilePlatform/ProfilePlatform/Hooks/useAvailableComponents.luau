@@ -18,7 +18,7 @@ local fFlagProfilePlatformEnableVRModule = require(profilePlatform.Flags.FFlagPr
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
-return function() --[[ line: 23 ]]
+return function()
 	-- upvalues: useProfileWrapperContextModule (ref), getDeepValueModule (ref), useAreWebViewsSupportedModule (ref), useIsProfileQrCodeEnabledModule (ref), useCanRenderTransferOnProfileModule (ref), useCanSeeChatTabModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), useLocalUserId (ref), reactModule (ref), enumsModule (ref), getAvailableUserComponentsModule (ref), fFlagProfilePlatformEnableVRModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), getAvailableCommunityComponentsModule (ref), getAvailableContactComponentsModule (ref)
 	local var21
 	local var14 = useProfileWrapperContextModule()
@@ -36,7 +36,7 @@ return function() --[[ line: 23 ]]
 	else
 		var21 = false
 	end
-	return reactModule.useMemo(function() --[[ line: 38 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: profileType (ref), enumsModule (copy), getAvailableUserComponentsModule (copy), var15 (ref), fFlagProfilePlatformEnableVRModule (copy), var16 (ref), var17 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var18 (ref), var19 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var21 (ref), getAvailableCommunityComponentsModule (copy), getAvailableContactComponentsModule (copy)
 		return if profileType == enumsModule.ProfileTypes.User then getAvailableUserComponentsModule(var15, if fFlagProfilePlatformEnableVRModule then {
 			areWebViewsSupported = var16,

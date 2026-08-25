@@ -14,7 +14,7 @@ return {
 	prereqTests = {
 		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p0, p1) --[[ line: 20 ]]
+	run = function(p0, p1)
 		-- upvalues: errorSourceStringsModule (ref)
 		if p1.uploadEnum.assetType == Enum.AssetType.JumpAnimation then return end
 		for i, v in p1.curveAnimations do

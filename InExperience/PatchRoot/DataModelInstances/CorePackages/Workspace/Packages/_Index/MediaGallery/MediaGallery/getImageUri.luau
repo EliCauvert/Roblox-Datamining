@@ -1,6 +1,6 @@
 ﻿local fFlagLuaAppMediaGalleryNilImageIdFix = require(script:FindFirstAncestor("MediaGallery").Parent.SharedFlags).FFlagLuaAppMediaGalleryNilImageIdFix
 
-return function(p0) --[[ line: 9 | named "getImageUri" ]]
+return function(p0)
 	-- upvalues: fFlagLuaAppMediaGalleryNilImageIdFix (ref)
 	if fFlagLuaAppMediaGalleryNilImageIdFix and (p0 == nil or p0 == "") then
 		return ""

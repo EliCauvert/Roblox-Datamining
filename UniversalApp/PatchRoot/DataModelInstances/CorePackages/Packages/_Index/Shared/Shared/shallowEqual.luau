@@ -1,6 +1,6 @@
 ﻿local objectIsModule = require(script.Parent.objectIs)
 
-return function(p0, p1) --[[ line: 18 | named "shallowEqual" ]]
+return function(p0, p1)
 	-- upvalues: objectIsModule (ref)
 	if objectIsModule(p0, p1) then
 		return true

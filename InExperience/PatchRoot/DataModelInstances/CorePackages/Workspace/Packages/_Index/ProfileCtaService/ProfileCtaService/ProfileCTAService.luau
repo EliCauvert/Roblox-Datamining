@@ -1,18 +1,18 @@
 ﻿local profileCTAStore = require(script:FindFirstAncestor("ProfileCtaService").Parent.DataHydration).Profile.ProfileCTAStore
 local createProfileCTAEventListenerModule = require(script.Parent.createProfileCTAEventListener)
 
-return (function() --[[ line: 20 | named "createProfileCTAService" ]]
+return (function()
 	-- upvalues: profileCTAStore (ref), createProfileCTAEventListenerModule (ref)
 	local var1 = 0
 	local t = {}
 	local var3 = profileCTAStore.get()
 	
-	local function _(p0) --[[ line: 25 | named "refetchCTA" ]]
+	local function _(p0)
 		-- upvalues: var3 (ref)
 		var3.getCTA(p0, true)
 	end
 	
-	local _ = createProfileCTAEventListenerModule(function(p1) --[[ line: 29 | named "handleCTAUpdate" ]]
+	local _ = createProfileCTAEventListenerModule(function(p1)
 		-- upvalues: var1 (write), var3 (ref), t (ref)
 		if var1 > 0 then
 			var3.getCTA(p1, true)
@@ -22,12 +22,12 @@ return (function() --[[ line: 20 | named "createProfileCTAService" ]]
 		t[p1] = true
 	end)
 	
-	local _ = function() --[[ line: 39 | named "enableRealTimeUpdates" ]]
+	local _ = function()
 		-- upvalues: var1 (write)
 		var1 += 1
 	end
 	
-	local _ = function() --[[ line: 43 | named "disableRealTimeUpdates" ]]
+	local _ = function()
 		-- upvalues: var1 (write)
 		var1 -= 1
 		
@@ -37,13 +37,13 @@ return (function() --[[ line: 20 | named "createProfileCTAService" ]]
 	end
 	
 	return {
-		connectRealTimeUpdates = function() --[[ line: 54 ]]
+		connectRealTimeUpdates = function()
 			-- upvalues: var1 (write)
 			var1 += 1
 			local var4 = false
 			
 			return {
-				Disconnect = function() --[[ line: 60 ]]
+				Disconnect = function()
 					-- upvalues: var4 (write), var1 (copy)
 					if var4 then return end
 					var4 = true
@@ -55,7 +55,7 @@ return (function() --[[ line: 20 | named "createProfileCTAService" ]]
 				end
 			}
 		end,
-		getProfileCTA = function(p2) --[[ line: 70 ]]
+		getProfileCTA = function(p2)
 			-- upvalues: t (ref), var3 (ref)
 			local var5 = false
 			
@@ -65,7 +65,7 @@ return (function() --[[ line: 20 | named "createProfileCTAService" ]]
 			end
 			return var3.getCTA(p2, var5)
 		end,
-		getProfileCTAs = function(p3) --[[ line: 79 ]]
+		getProfileCTAs = function(p3)
 			-- upvalues: t (ref), var3 (ref)
 			local t_1 = {}
 			

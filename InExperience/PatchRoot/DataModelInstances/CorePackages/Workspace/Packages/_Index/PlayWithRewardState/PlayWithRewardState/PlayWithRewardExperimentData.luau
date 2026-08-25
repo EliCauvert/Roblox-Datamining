@@ -25,10 +25,10 @@ local t_1 = {
 	keepRewardContained = if fFlagLuaAppEnableContainedRewardUiModule then false else nil
 }
 
-function t.fromJsonData(p0) --[[ line: 44 ]]
+function t.fromJsonData(p0)
 	-- upvalues: t_1 (ref), httpService (ref), var3 (ref), mutedError (ref), fFlagLuaAppEnableContainedRewardUiModule (ref)
 	local cloned = table.clone(t_1)
-	local ok, status = pcall(function() --[[ line: 47 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), p0 (ref)
 		return httpService:JSONDecode(p0)
 	end)

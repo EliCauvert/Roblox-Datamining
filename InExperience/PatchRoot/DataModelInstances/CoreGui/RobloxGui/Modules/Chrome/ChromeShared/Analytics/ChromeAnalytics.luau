@@ -17,7 +17,7 @@ local _ = { NONE = 0, STARTED = 1, DRAGGED = 2 }
 local t = {}
 t.__index = t
 
-local function getDynamicEventProps() --[[ line: 95 ]]
+local function getDynamicEventProps()
 	-- upvalues: playerGui (ref), constantsModule (ref), userInputService (ref)
 	local var14 = "Unknown"
 	
@@ -30,21 +30,21 @@ local function getDynamicEventProps() --[[ line: 95 ]]
 	}
 end
 
-local function _(p0, p1) --[[ line: 112 | named "getTrackerName" ]]
+local function _(p0, p1)
 	return p0 .. p1
 end
 
-local _ = function(p2) --[[ line: 116 | named "getIntegration" ]]
+local _ = function(p2)
 	-- upvalues: serviceModule (ref)
 	return serviceModule:integrations()[p2]
 end
 
-local _ = function(p3) --[[ line: 120 | named "getInteractionSource" ]]
+local _ = function(p3)
 	-- upvalues: fFlagEnableSideSheet (ref), serviceModule (ref)
 	return if fFlagEnableSideSheet and serviceModule:withinOpenSideSheet(p3) then "sidesheet" elseif serviceModule:withinCurrentSubmenu(p3) then serviceModule:currentSubMenu():get() elseif serviceModule:withinCurrentTopLevelMenu(p3) then "unibar" else "unknown"
 end
 
-function t.new() --[[ line: 134 ]]
+function t.new()
 	-- upvalues: rbxAnalyticsService (ref), trackerModule (ref), t (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), serviceModule (ref), cryoModule (ref), getDynamicEventProps (ref), guiService (ref), fFlagIntegrationsChromeShortcutTelemetryModule (ref)
 	local tbl = setmetatable({
 		_target = "client",
@@ -63,13 +63,13 @@ function t.new() --[[ line: 134 ]]
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		tbl._defaultProps.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function tbl._observeIntegration(p4) --[[ line: 155 ]]
+	function tbl._observeIntegration(p4)
 		-- upvalues: serviceModule (copy), tbl (ref)
 		local var16 = serviceModule:integrations()[p4]
 		
 		if var16 and var16.windowSize then
 			tbl._tracker:set("window_size_" .. p4, var16.windowSize:get())
-			var16.windowSize:connect(function(p5) --[[ line: 164 ]]
+			var16.windowSize:connect(function(p5)
 				-- upvalues: var16 (ref), tbl (copy), p4 (ref)
 				if typeof(p5) ~= "UDim2" then return end
 				local var17 = var16.windowSize:get()
@@ -85,7 +85,7 @@ function t.new() --[[ line: 134 ]]
 		end
 	end
 	
-	function tbl._resetWindowTrackers(p6) --[[ line: 187 ]]
+	function tbl._resetWindowTrackers(p6)
 		-- upvalues: tbl (ref)
 		tbl._tracker:reset("window_dposition_" .. p6)
 		tbl._tracker:reset("window_position_" .. p6)
@@ -94,29 +94,29 @@ function t.new() --[[ line: 134 ]]
 		tbl._tracker:reset("window_status_" .. p6)
 	end
 	
-	function tbl._defaultWindowTrackers(p7) --[[ line: 195 ]]
+	function tbl._defaultWindowTrackers(p7)
 		-- upvalues: tbl (ref)
 		tbl._resetWindowTrackers(p7)
 		tbl._tracker:startTime("window_time_" .. p7)
 		tbl._tracker:set("window_status_" .. p7, 1)
 	end
 	
-	function tbl._sendEvent(p8, p9) --[[ line: 201 ]]
+	function tbl._sendEvent(p8, p9)
 		-- upvalues: cryoModule (copy), getDynamicEventProps (copy), tbl (ref), rbxAnalyticsService (copy)
 		rbxAnalyticsService:SendEventDeferred(tbl._target, tbl._context, p8, cryoModule.Dictionary.join(getDynamicEventProps(), tbl._defaultProps, p9 or {}))
 	end
 	
-	function tbl._calculateWindowAbsolutePosition(p10, p11) --[[ line: 206 ]]
+	function tbl._calculateWindowAbsolutePosition(p10, p11)
 		-- upvalues: tbl (ref)
 		return Vector2.new(p10.X.Scale * tbl._defaultProps.screen_width + p10.X.Offset - p11.Width.Offset / 2, p10.Y.Scale * tbl._defaultProps.screen_height + p10.Y.Offset - p11.Height.Offset / 2)
 	end
 	
-	function tbl._setWindowLastPosition(p12, p13) --[[ line: 215 ]]
+	function tbl._setWindowLastPosition(p12, p13)
 		-- upvalues: tbl (ref)
 		tbl._tracker:set("window_position_" .. p12, p13)
 	end
 	
-	guiService.MenuOpened:Connect(function() --[[ line: 219 ]]
+	guiService.MenuOpened:Connect(function()
 		-- upvalues: tbl (ref)
 		tbl._defaultProps.is_game_menu_opened = not tbl._defaultProps.is_game_menu_opened
 	end)
@@ -124,11 +124,11 @@ function t.new() --[[ line: 134 ]]
 	for i, v in serviceModule:integrations() do
 		tbl._observeIntegration(v.id)
 	end
-	serviceModule:onIntegrationRegistered():connect(function(p14) --[[ line: 227 ]]
+	serviceModule:onIntegrationRegistered():connect(function(p14)
 		-- upvalues: tbl (ref)
 		tbl._observeIntegration(p14)
 	end)
-	serviceModule:onIntegrationActivated():connect(function(p15, p16) --[[ line: 231 ]]
+	serviceModule:onIntegrationActivated():connect(function(p15, p16)
 		-- upvalues: fFlagIntegrationsChromeShortcutTelemetryModule (copy), tbl (ref)
 		if fFlagIntegrationsChromeShortcutTelemetryModule then
 			tbl:onIconActivated(p15, p16)
@@ -137,7 +137,7 @@ function t.new() --[[ line: 134 ]]
 		end
 		tbl:onIconActivated(p15)
 	end)
-	serviceModule:onIntegrationStatusChanged():connect(function(p17, p18) --[[ line: 239 ]]
+	serviceModule:onIntegrationStatusChanged():connect(function(p17, p18)
 		-- upvalues: serviceModule (copy), tbl (ref)
 		local var19 = serviceModule:integrations()[p17]
 		
@@ -154,14 +154,14 @@ function t.new() --[[ line: 134 ]]
 	return tbl
 end
 
-function t:setScreenSize(p19) --[[ line: 253 ]]
+function t:setScreenSize(p19)
 	self._defaultProps.screen_width = p19.X
 	self._defaultProps.screen_height = p19.Y
 	
 	return nil
 end
 
-function t:onIconActivated(_, _) --[[ line: 259 ]]
+function t:onIconActivated(_, _)
 	-- upvalues: serviceModule (ref), constantsModule (ref), fFlagEnableSideSheet (ref), fFlagIntegrationsChromeShortcutTelemetryModule (ref)
 -- FATAL: Failed to generate AST for `onIconActivated` function:
 runtime : [KeyError] :11990: 134
@@ -171,13 +171,13 @@ Traceback:
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-function t:onIconTouchBegan(p20) --[[ line: 287 ]]
+function t:onIconTouchBegan(p20)
 	self._tracker:set("icon_drag_" .. p20, 1)
 	
 	return nil
 end
 
-function t:onIconDrag(p21) --[[ line: 292 ]]
+function t:onIconDrag(p21)
 	-- upvalues: constantsModule (ref), fFlagEnableSideSheet (ref), serviceModule (ref)
 	local text = "icon_drag_" .. p21
 	
@@ -191,7 +191,7 @@ function t:onIconDrag(p21) --[[ line: 292 ]]
 	return nil
 end
 
-function t:onIconTouchEnded(p22, p23, p24) --[[ line: 305 ]]
+function t:onIconTouchEnded(p22, p23, p24)
 	-- upvalues: serviceModule (ref), constantsModule (ref), fFlagEnableSideSheet (ref)
 	local text = "icon_drag_" .. p22
 	local var22 = serviceModule:integrations()[p22]
@@ -213,7 +213,7 @@ function t:onIconTouchEnded(p22, p23, p24) --[[ line: 305 ]]
 	return nil
 end
 
-function t:onWindowOpened(p25) --[[ line: 332 ]]
+function t:onWindowOpened(p25)
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	local var24 = serviceModule:integrations()[p25]
 	
@@ -232,7 +232,7 @@ function t:onWindowOpened(p25) --[[ line: 332 ]]
 	return nil
 end
 
-function t:onWindowClosed(p26) --[[ line: 358 ]]
+function t:onWindowClosed(p26)
 	-- upvalues: constantsModule (ref)
 	if self._tracker:get("window_status_" .. p26) == 1 then
 		self._sendEvent(constantsModule.ANALYTICS.WINDOW_CLOSED, {
@@ -244,7 +244,7 @@ function t:onWindowClosed(p26) --[[ line: 358 ]]
 	return nil
 end
 
-function t:onWindowTouchBegan(p27, _) --[[ line: 371 ]]
+function t:onWindowTouchBegan(p27, _)
 	-- upvalues: serviceModule (ref)
 	local var26 = serviceModule:integrations()[p27]
 	
@@ -254,7 +254,7 @@ function t:onWindowTouchBegan(p27, _) --[[ line: 371 ]]
 	return nil
 end
 
-function t:onWindowDrag(p28, p29) --[[ line: 379 ]]
+function t:onWindowDrag(p28, p29)
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	local text = "window_drag_" .. p28
 	local var28 = serviceModule:integrations()[p28]
@@ -282,7 +282,7 @@ function t:onWindowDrag(p28, p29) --[[ line: 379 ]]
 	return nil
 end
 
-function t:onWindowTouchEnded(p30, p31, p32) --[[ line: 412 ]]
+function t:onWindowTouchEnded(p30, p31, p32)
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	local var32 = serviceModule:integrations()[p30]
 	
@@ -307,14 +307,14 @@ function t:onWindowTouchEnded(p30, p31, p32) --[[ line: 412 ]]
 	return nil
 end
 
-function t:setWindowDefaultPosition(p33, p34) --[[ line: 444 ]]
+function t:setWindowDefaultPosition(p33, p34)
 	self._tracker:set("window_dposition_" .. p33, p34)
 	self._setWindowLastPosition(p33, p34)
 	
 	return nil
 end
 
-function t:onWindowResize(p35, p36) --[[ line: 450 ]]
+function t:onWindowResize(p35, p36)
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	local var35 = serviceModule:integrations()[p35]
 	

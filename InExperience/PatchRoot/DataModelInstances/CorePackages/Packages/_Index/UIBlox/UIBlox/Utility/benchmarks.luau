@@ -6,7 +6,7 @@ local mockStyleComponentModule = require(parent.Utility.mockStyleComponent)
 local render = require(parent_1.Dev.ReactTestingLibrary).render
 local benchmark = require(parent_1.Dev.JestBenchmark).benchmark
 
-function measureFPS(p0, p1) --[[ line: 14 ]]
+function measureFPS(p0, p1)
 	task.wait()
 	task.wait()
 	p0.start("fps")
@@ -14,7 +14,7 @@ function measureFPS(p0, p1) --[[ line: 14 ]]
 	p0.stop()
 end
 
-function mountComponentTimes(p2, p3, p4) --[[ line: 22 ]]
+function mountComponentTimes(p2, p3, p4)
 	-- upvalues: mockStyleComponentModule (ref), benchmark (ref), render (ref)
 	local t = {}
 	
@@ -22,25 +22,25 @@ function mountComponentTimes(p2, p3, p4) --[[ line: 22 ]]
 		t[i] = p2
 	end
 	local var4 = mockStyleComponentModule(t)
-	benchmark(`Mount {p4} {p3} times`, function() --[[ line: 29 ]]
+	benchmark(`Mount {p4} {p3} times`, function()
 		-- upvalues: render (copy), var4 (ref)
 		render(var4):unmount()
 	end)
 end
 
-function AutoScrollingFrame(p5) --[[ line: 35 ]]
+function AutoScrollingFrame(p5)
 	-- upvalues: reactUtilsModule (ref), reactModule (ref)
 	return reactModule.createElement("ScrollingFrame", {
 		Size = UDim2.fromOffset(100, 100),
 		CanvasSize = UDim2.fromOffset(100, 0),
-		CanvasPosition = reactUtilsModule.useClock():map(function(p6) --[[ line: 41 ]]
+		CanvasPosition = reactUtilsModule.useClock():map(function(p6)
 			return Vector2.new(0, p6 * 10000)
 		end),
 		AutomaticCanvasSize = Enum.AutomaticSize.Y
 	}, p5.children)
 end
 
-function scrollComponentTimes(p7, p8, p9) --[[ line: 48 ]]
+function scrollComponentTimes(p7, p8, p9)
 	-- upvalues: reactModule (ref), mockStyleComponentModule (ref), benchmark (ref), render (ref)
 	local t = {}
 	
@@ -53,7 +53,7 @@ function scrollComponentTimes(p7, p8, p9) --[[ line: 48 ]]
 		FillDirection = Enum.FillDirection.Vertical
 	})
 	local var6 = mockStyleComponentModule(reactModule.createElement(AutoScrollingFrame, {}, t))
-	benchmark(`Scroll {p9} {p8} times`, function(p10) --[[ line: 62 ]]
+	benchmark(`Scroll {p9} {p8} times`, function(p10)
 		-- upvalues: render (copy), var6 (ref)
 		local var7 = render(var6)
 		measureFPS(p10)

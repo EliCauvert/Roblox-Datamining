@@ -15,7 +15,7 @@ local fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(parent.Shared
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 25 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({}, t)
 end
@@ -27,18 +27,18 @@ t.customParams = nil
 t.placeId = nil
 t.openSession = 0
 
-local function openDeveloperInviteModalNonBlocking(p0, p1, p2) --[[ line: 43 ]]
+local function openDeveloperInviteModalNonBlocking(p0, p1, p2)
 	-- upvalues: contextActionService (ref), getCustomizedInvitePromptParamsModule (ref), getCanSendAndCanCustomizeInvitesModule (ref), cryoModule (ref), gameInviteAnalyticsManagerModule (ref)
 	local openSession = p0.openSession
 	p0.customParams = nil
 	p0.ToggleGameInviteModalEvent:Fire(true, false, p1)
-	contextActionService:BindCoreAction("hideGameInviteModal", function(_, p3) --[[ line: 48 ]]
+	contextActionService:BindCoreAction("hideGameInviteModal", function(_, p3)
 		-- upvalues: p0 (ref)
 		if p3 == Enum.UserInputState.Begin then
 			p0:closeModal()
 		end
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
-	task.spawn(function() --[[ line: 54 ]]
+	task.spawn(function()
 		-- upvalues: getCustomizedInvitePromptParamsModule (copy), p2 (ref), p1 (ref), getCanSendAndCanCustomizeInvitesModule (copy), p0 (ref), openSession (ref), cryoModule (copy), gameInviteAnalyticsManagerModule (copy)
 		local var10 = getCustomizedInvitePromptParamsModule(p2, p1.trigger, getCanSendAndCanCustomizeInvitesModule)
 		
@@ -67,7 +67,7 @@ local function openDeveloperInviteModalNonBlocking(p0, p1, p2) --[[ line: 43 ]]
 	end)
 end
 
-function t:openModal(p4, p5) --[[ line: 90 ]]
+function t:openModal(p4, p5)
 	-- upvalues: fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (ref), isTriggerDDI (ref), openDeveloperInviteModalNonBlocking (ref), getCustomizedInvitePromptParamsModule (ref), getCanSendAndCanCustomizeInvitesModule (ref), cryoModule (ref), gameInviteAnalyticsManagerModule (ref), contextActionService (ref)
 	if self.isModalOpen then
 		if isTriggerDDI(p4.trigger) then
@@ -138,7 +138,7 @@ function t:openModal(p4, p5) --[[ line: 90 ]]
 				place_id = p4.rootPlaceId
 			})
 		end
-		contextActionService:BindCoreAction("hideGameInviteModal", function(_, p6) --[[ line: 157 ]]
+		contextActionService:BindCoreAction("hideGameInviteModal", function(_, p6)
 			-- upvalues: self (ref)
 			if p6 == Enum.UserInputState.Begin then
 				self:closeModal()
@@ -147,7 +147,7 @@ function t:openModal(p4, p5) --[[ line: 90 ]]
 	end
 end
 
-function t:closeModal(p7) --[[ line: 170 ]]
+function t:closeModal(p7)
 	-- upvalues: isTriggerDDI (ref), gameInviteAnalyticsManagerModule (ref), contextActionService (ref), fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (ref)
 	if self.isModalOpen then
 		local var18 = false
@@ -182,11 +182,11 @@ function t:closeModal(p7) --[[ line: 170 ]]
 	self.ToggleGameInviteModalEvent:Fire(false)
 end
 
-function t:isGameModalOpen() --[[ line: 207 ]]
+function t:isGameModalOpen()
 	return self.isModalOpen
 end
 
-function t.invokeGameInvitePromptClosed(_) --[[ line: 211 ]]
+function t.invokeGameInvitePromptClosed(_)
 	-- upvalues: socialService (ref), playersService (ref)
 	if socialService and playersService.LocalPlayer then
 		socialService:InvokeGameInvitePromptClosed(playersService.LocalPlayer, {})

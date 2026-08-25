@@ -16,9 +16,9 @@ local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useOverlay = foundationModule.Hooks.useOverlay
 local useTokens = foundationModule.Hooks.useTokens
 
-local function noop() --[[ line: 33 ]] end
+local function noop() end
 
-return function(p0) --[[ line: 35 | named "ChatSheetLauncher" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useOverlay (ref), var8 (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
 	local var10 = if fFlagBuildLocalization then useLocalization({
 		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER

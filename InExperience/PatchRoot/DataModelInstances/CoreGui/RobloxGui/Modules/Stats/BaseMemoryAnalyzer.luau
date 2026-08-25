@@ -10,7 +10,7 @@ local uDim2_3 = UDim2.new(1, -100, 0, 0)
 local uDim2_4 = UDim2.new(0, 100, 0, 20)
 local _ = game:GetService("CoreGui")
 
-local function _(p0) --[[ line: 36 | named "__StyleAndSizeButton" ]]
+local function _(p0)
 	-- upvalues: color3_2 (ref), color3_4 (ref), uDim2_1 (ref), uDim2_2 (ref)
 	p0.TextXAlignment = Enum.TextXAlignment.Center
 	p0.TextColor3 = color3_2
@@ -21,7 +21,7 @@ local function _(p0) --[[ line: 36 | named "__StyleAndSizeButton" ]]
 	p0.Size = uDim2_2
 end
 
-local _ = function(p1) --[[ line: 47 | named "__StyleAndSizeLabel" ]]
+local _ = function(p1)
 	-- upvalues: color3_2 (ref)
 	p1.TextXAlignment = Enum.TextXAlignment.Left
 	p1.TextColor3 = color3_2
@@ -30,7 +30,7 @@ local _ = function(p1) --[[ line: 47 | named "__StyleAndSizeLabel" ]]
 	p1.Size = UDim2.new(1, -10, 1, 0)
 end
 
-local _ = function(p2) --[[ line: 56 | named "__StyleRowCellFrame" ]]
+local _ = function(p2)
 	-- upvalues: color3_3 (ref)
 	p2.BorderColor3 = color3_3
 	p2.BorderSizePixel = 1
@@ -40,7 +40,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p3) --[[ line: 74 ]]
+function t.new(p3)
 	-- upvalues: t (ref), uDim2 (ref), color3_3 (ref), color3_2 (ref), color3_4 (ref), uDim2_1 (ref), uDim2_2 (ref), uDim2_3 (ref), uDim2_4 (ref)
 	local value = {}
 	setmetatable(value, t)
@@ -71,7 +71,7 @@ function t.new(p3) --[[ line: 74 ]]
 	button_1.BorderSizePixel = 1
 	button_1.Position = uDim2_1
 	button_1.Size = uDim2_2
-	value._button.MouseButton1Click:connect(function() --[[ line: 102 ]]
+	value._button.MouseButton1Click:connect(function()
 		-- upvalues: value (ref)
 		value:__toggleExpansion()
 	end)
@@ -119,19 +119,19 @@ function t.new(p3) --[[ line: 74 ]]
 	return value
 end
 
-function t:isExpanded() --[[ line: 143 ]]
+function t:isExpanded()
 	return self._expanded
 end
 
-function t:valueHasBeenNonZero() --[[ line: 147 ]]
+function t:valueHasBeenNonZero()
 	return self._valueHasBeenNonZero
 end
 
-function t:setExpansionToggleCallback(p4) --[[ line: 151 ]]
+function t:setExpansionToggleCallback(p4)
 	self._expansionToggleCallback = p4
 end
 
-function t:__toggleExpansion() --[[ line: 155 ]]
+function t:__toggleExpansion()
 	self._expanded = not self._expanded
 	self:__updateButtonState()
 	
@@ -140,7 +140,7 @@ function t:__toggleExpansion() --[[ line: 155 ]]
 	end
 end
 
-function t:__updateButtonState() --[[ line: 164 ]]
+function t:__updateButtonState()
 	if #self._treeViewItem:getChildren() == 0 then
 		self._button.Visible = false
 		
@@ -156,28 +156,28 @@ function t:__updateButtonState() --[[ line: 164 ]]
 	self._button.Text = "+"
 end
 
-function t:updateValue() --[[ line: 178 ]]
+function t:updateValue()
 	if self._treeViewItem:getValue() >= 0.001 then
 		self._valueHasBeenNonZero = true
 	end
 	self._valueTextLabel.Text = string.format("%.3f", self._treeViewItem:getValue())
 end
 
-function t:setZIndex(p5) --[[ line: 190 ]]
+function t:setZIndex(p5)
 	self._frame.ZIndex = p5
 	self._labelTextLabel.ZIndex = p5
 	self._valueTextLabel.ZIndex = p5
 end
 
-function t:setRowValue(p6) --[[ line: 196 ]]
+function t:setRowValue(p6)
 	self._valueTextLabel.Text = string.format("%.3f", p6)
 end
 
-function t:getFrame() --[[ line: 200 ]]
+function t:getFrame()
 	return self._frame
 end
 
-function t:setRowNumber(p7) --[[ line: 204 ]]
+function t:setRowNumber(p7)
 	-- upvalues: color3 (ref), color3_1 (ref)
 	if p7 % 2 == 1 then
 		self._buttonFrame.BackgroundColor3 = color3
@@ -195,7 +195,7 @@ local t_1 = {}
 t_1.__index = t_1
 t_1.Indent = string.rep(" ", 4)
 
-function t_1.new(p8) --[[ line: 227 ]]
+function t_1.new(p8)
 	-- upvalues: t_1 (ref)
 	local memoryAnalyzerClassFrame = {}
 	setmetatable(memoryAnalyzerClassFrame, t_1)
@@ -212,19 +212,19 @@ function t_1.new(p8) --[[ line: 227 ]]
 	return memoryAnalyzerClassFrame
 end
 
-function t_1.getMemoryUsageTree(_) --[[ line: 254 ]]
+function t_1.getMemoryUsageTree(_)
 	return nil
 end
 
-function t_1:setHeightChangedCallback(p9) --[[ line: 258 ]]
+function t_1:setHeightChangedCallback(p9)
 	self._heightChangedCallback = p9
 end
 
-function t_1:__getOrMakeRowForTreeViewItem(p10) --[[ line: 262 ]]
+function t_1:__getOrMakeRowForTreeViewItem(p10)
 	-- upvalues: t (ref)
 	if self._rowsByTreeViewItem[p10] == nil then
 		local var15 = t.new(p10)
-		var15:setExpansionToggleCallback(function() --[[ line: 265 ]]
+		var15:setExpansionToggleCallback(function()
 			-- upvalues: self (ref)
 			self:__layoutRows()
 		end)
@@ -235,7 +235,7 @@ function t_1:__getOrMakeRowForTreeViewItem(p10) --[[ line: 262 ]]
 	return self._rowsByTreeViewItem[p10]
 end
 
-function t_1:__recursiveUpdateStatValue(p11) --[[ line: 277 ]]
+function t_1:__recursiveUpdateStatValue(p11)
 	self:__getOrMakeRowForTreeViewItem(p11):updateValue()
 	
 	for i, v in ipairs(p11:getChildren()) do
@@ -243,7 +243,7 @@ function t_1:__recursiveUpdateStatValue(p11) --[[ line: 277 ]]
 	end
 end
 
-function t_1:renderUpdates() --[[ line: 288 ]]
+function t_1:renderUpdates()
 	local memoryUsageTree = self:getMemoryUsageTree()
 	
 	if memoryUsageTree ~= nil then
@@ -254,7 +254,7 @@ function t_1:renderUpdates() --[[ line: 288 ]]
 	end
 end
 
-function t_1:__layoutRows() --[[ line: 300 ]]
+function t_1:__layoutRows()
 	self._layoutDirty = false
 	self._heightInPix = 0
 	
@@ -269,7 +269,7 @@ function t_1:__layoutRows() --[[ line: 300 ]]
 	end
 end
 
-function t_1:__recursiveLayoutTreeViewItem(p12, p13) --[[ line: 317 ]]
+function t_1:__recursiveLayoutTreeViewItem(p12, p13)
 	local var17 = self:__getOrMakeRowForTreeViewItem(p12)
 	local frame = var17:getFrame()
 	local var19 = p13 and var17:valueHasBeenNonZero()
@@ -289,7 +289,7 @@ function t_1:__recursiveLayoutTreeViewItem(p12, p13) --[[ line: 317 ]]
 	end
 end
 
-function t_1:getHeightInPix() --[[ line: 343 ]]
+function t_1:getHeightInPix()
 	return self._heightInPix
 end
 

@@ -40,26 +40,26 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local squadInviteFriendsButtonModule = require(script.Parent.SquadInviteFriendsButton)
 local inviteToSquadModule = require(squads.Thunks.inviteToSquad)
 
-local var16 = function() --[[ line: 59 ]] end
+local var16 = function() end
 
 local t = {
 	buttonText = "Add",
 	preselectedUsers = nil,
 	preselectedUsersUnremovable = false,
 	shouldHideFooterButton = nil,
-	onMultiInvite = function(_) --[[ line: 63 ]] end,
+	onMultiInvite = function(_) end,
 	participants = {},
 	analyticsInfo = {},
-	onRemoveCallback = function() --[[ line: 66 ]] end,
-	onSelectedFriendsChanged = function() --[[ line: 69 ]] end
+	onRemoveCallback = function() end,
+	onSelectedFriendsChanged = function() end
 }
 
-local function SelectedFriendsListener(p0) --[[ line: 73 ]]
+local function SelectedFriendsListener(p0)
 	-- upvalues: react (ref), selectedUsersContext (ref), fFlagEnablePartyQuickStartButton (ref), useIsInviteButtonDisabledModule (ref)
 	local var19 = react.useContext(selectedUsersContext)
 	local selectedFriendsSize = var19.selectedFriendsSize
 	local selectedFriends = var19.selectedFriends
-	local var20 = react.useCallback(function() --[[ line: 82 ]]
+	local var20 = react.useCallback(function()
 		-- upvalues: fFlagEnablePartyQuickStartButton (copy), p0 (ref), selectedFriends (ref)
 		if fFlagEnablePartyQuickStartButton and p0.onMultiInvite then
 			p0.onMultiInvite(selectedFriends)
@@ -73,7 +73,7 @@ local function SelectedFriendsListener(p0) --[[ line: 73 ]]
 		selectedFriends
 	})
 	local var21 = useIsInviteButtonDisabledModule(selectedFriendsSize, var19.selectedFriends or {}, var19.preselectedUsers or {})
-	react.useEffect(function() --[[ line: 96 ]]
+	react.useEffect(function()
 		-- upvalues: p0 (ref), var21 (ref), var20 (ref)
 		p0.onSelectedFriendsChanged(not var21, var20)
 	end, { var21, var20, p0.onSelectedFriendsChanged })
@@ -81,7 +81,7 @@ local function SelectedFriendsListener(p0) --[[ line: 73 ]]
 	return nil
 end
 
-return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
+return function(p1)
 	-- upvalues: cryo (ref), t (ref), react (ref), focusNavigationContext (ref), squadExternalContractContext (ref), useDispatch (ref), useNavigation (ref), useStore (ref), useStyle (ref), useAppPolicy (ref), useLocalUserId (ref), useCurrentSquadSelector (ref), useLocalization (ref), squadInviteSourceEnumModule (ref), eventNamesModule (ref), notificationModalsManagerModule (ref), images (ref), promiseModule (ref), inviteToParentChannelModule (ref), inviteToSquadModule (ref), constantsModule_1 (ref), squadPromptType (ref), focusBehaviorsModule (ref), focusNavigationService (ref), coreGui (ref), friendsMenuContextWrapper (ref), var16 (ref), fFlagEnablePartyQuickStartButton (ref), constantsModule (ref), SelectedFriendsListener (ref), friendsMenuSearch (ref), selectedUsersScroller (ref), friendsMenuFriendsList (ref), friendMenuType (ref), squadInviteFriendsButtonModule (ref)
 	local preselectedUsersUnremovable
 	local var22 = cryo.Dictionary.join(t, p1)
@@ -92,13 +92,13 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 	local var27 = useStore()
 	local theme = useStyle().Theme
 	local var28, var29 = react.useState(0)
-	local var30 = useAppPolicy(react.useCallback(function(p2) --[[ line: 116 ]]
+	local var30 = useAppPolicy(react.useCallback(function(p2)
 		return p2.getCanUsePlatformChat()
 	end, {}))
 	local var31 = react.useRef(nil)
 	local var32 = react.useRef(nil)
 	local var33 = useLocalUserId()
-	local var34 = react.useCallback(function(p3) --[[ line: 126 ]]
+	local var34 = react.useCallback(function(p3)
 		-- upvalues: var29 (ref)
 		var29(p3.AbsoluteSize.Y)
 	end, { var29 })
@@ -111,14 +111,14 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 		youAddedToChat = "Feature.Squads.Description.YouAddedToChat",
 		youAddedTwoToChat = "Feature.Squads.Description.YouAddedTwoToChat"
 	})
-	local var39 = react.useCallback(function(p4) --[[ line: 143 ]]
+	local var39 = react.useCallback(function(p4)
 		-- upvalues: cryo (copy), var36 (ref), squadInviteSourceEnumModule (copy), var24 (ref), eventNamesModule (copy)
 		var24.fireSquadAnalytics(eventNamesModule.SquadInvite, cryo.Dictionary.union({
 			parentChannelId = var36,
 			source = squadInviteSourceEnumModule.SourceSquadInvitePage
 		}, p4))
 	end, { var36, var24.fireSquadAnalytics })
-	local var40 = react.useCallback(function(p5) --[[ line: 155 ]]
+	local var40 = react.useCallback(function(p5)
 		-- upvalues: cryo (copy), var38 (ref), notificationModalsManagerModule (copy), images (copy)
 		local var43 = cryo.Dictionary.keys(p5)
 		local displayName = p5[var43[1]].displayName
@@ -137,19 +137,19 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 		var38.youAddedToChat,
 		var38.youAddedTwoToChat
 	})
-	local var41 = react.useCallback(function(p6) --[[ line: 182 ]]
+	local var41 = react.useCallback(function(p6)
 		-- upvalues: var35 (ref), var37 (ref), cryo (copy), var33 (ref), var24 (ref), var25 (ref), promiseModule (copy), inviteToParentChannelModule (copy), var26 (ref), inviteToSquadModule (copy), var39 (ref), var40 (ref), constantsModule_1 (copy), var30 (ref), var27 (ref), squadPromptType (copy)
 		if not var35 or not var37 then return end
 		local var44 = cryo.Dictionary.keys(p6)
 		local var45 = cryo.List.toSet(var37.participants)
-		local var46 = cryo.List.filter(var44, function(p7) --[[ line: 193 ]]
+		local var46 = cryo.List.filter(var44, function(p7)
 			-- upvalues: var45 (ref)
 			return var45[p7] == nil
 		end)
 		
-		local var47 = function() --[[ line: 197 ]]
+		local var47 = function()
 			-- upvalues: cryo (copy), var37 (copy), var44 (ref), var33 (copy), var24 (copy), var25 (copy), promiseModule (copy), var46 (ref), inviteToParentChannelModule (copy), var26 (copy), inviteToSquadModule (copy), var35 (copy), var39 (copy), var40 (copy), p6 (ref)
-			local var48 = cryo.List.filter(var37.participants, function(p8) --[[ line: 200 ]]
+			local var48 = cryo.List.filter(var37.participants, function(p8)
 				-- upvalues: cryo (copy), var44 (copy), var33 (copy)
 				return cryo.List.find(var44, tostring(p8)) == nil and p8 ~= var33
 			end)
@@ -158,18 +158,18 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 			for i, v in ipairs(var48) do
 				table.insert(t, var24.removeUserFromParentChannel(var25, var37.id, v))
 			end
-			promiseModule.all(t):andThen(function() --[[ line: 215 ]]
+			promiseModule.all(t):andThen(function()
 				-- upvalues: var46 (copy), var25 (copy), inviteToParentChannelModule (copy), var48 (ref), var26 (copy), var37 (copy), inviteToSquadModule (copy), var35 (copy), var33 (copy), var39 (copy), var40 (copy), p6 (copy), var24 (copy)
 				if #var46 > 0 then
 					var25(inviteToParentChannelModule({
 						dispatch = var25,
-						onErrorCallback = function() --[[ line: 219 ]]
+						onErrorCallback = function()
 							-- upvalues: var48 (copy), var26 (copy)
 							if #var48 > 0 then
 								var26.pop()
 							end
 						end,
-						onSuccessCallback = function(p9) --[[ line: 224 ]]
+						onSuccessCallback = function(p9)
 							-- upvalues: var37 (copy), var25 (copy), inviteToSquadModule (copy), var35 (copy), var33 (copy), var46 (copy), var39 (copy), var40 (copy), p6 (copy), var26 (copy)
 							var25(inviteToSquadModule(var35.squadId, p9, var33, var46, var39, p9 ~= var37.id))
 							var40(p6)
@@ -190,7 +190,7 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 			var24.setSquadPrompt(var27, {
 				hideCancelButton = false,
 				promptType = squadPromptType.ConfirmInviteToSquad,
-				onConfirm = function() --[[ line: 257 ]]
+				onConfirm = function()
 					-- upvalues: var47 (ref)
 					var47()
 				end
@@ -203,7 +203,7 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 		var35, var25, var26, var37, var39, var40, var24.setSquadPrompt,
 		var24.inviteToParentChannel, var24.removeUserFromParentChannel, var27, var33
 	})
-	react.useEffect(function() --[[ line: 278 ]]
+	react.useEffect(function()
 		-- upvalues: var23 (ref), var31 (ref), var32 (ref), focusBehaviorsModule (copy), focusNavigationService (copy), coreGui (copy)
 		if var23 and var31.current ~= nil and var32.current ~= nil then
 			if var23 then
@@ -211,7 +211,7 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 				local current = var31.current
 				var23:registerFocusBehavior(current, var50)
 				
-				return function() --[[ line: 284 ]]
+				return function()
 					-- upvalues: var23 (copy), current (ref), var50 (ref)
 					var23:deregisterFocusBehavior(current, var50)
 				end
@@ -219,7 +219,7 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 		elseif var31.current ~= nil and var32.current ~= nil then
 			focusNavigationService.new(coreGui):registerFocusBehavior(var31.current, focusBehaviorsModule.default(var32.current))
 		end
-		return function() --[[ line: 296 ]] end
+		return function() end
 	end, { var23 })
 	local createElement = react.createElement
 	local t_1 = {
@@ -227,7 +227,7 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 		inviteSingleFriend = var16,
 		inviteMultiFriends = if fFlagEnablePartyQuickStartButton then var22.onMultiInvite else var41,
 		selectionLimit = constantsModule.SQUAD_PARTICIPANT_LIMIT - 1,
-		preselectedUsers = if fFlagEnablePartyQuickStartButton then var22.preselectedUsers else var37 and (var37.participants and cryo.List.filter(var37.participants, function(p10) --[[ line: 308 ]]
+		preselectedUsers = if fFlagEnablePartyQuickStartButton then var22.preselectedUsers else var37 and (var37.participants and cryo.List.filter(var37.participants, function(p10)
 			-- upvalues: var33 (ref)
 			return p10 ~= var33
 		end))
@@ -245,7 +245,7 @@ return function(p1) --[[ line: 103 | named "SquadInviteFriends" ]]
 		preselectedUsersUnremovable = nil
 	end
 	t_1.preselectedUsersUnremovable = preselectedUsersUnremovable
-	t_1.onRemoveCallback = if fFlagEnablePartyQuickStartButton then var22.onRemoveCallback elseif var37 then function(p11, p12) --[[ line: 321 ]]
+	t_1.onRemoveCallback = if fFlagEnablePartyQuickStartButton then var22.onRemoveCallback elseif var37 then function(p11, p12)
 		-- upvalues: cryo (copy), var37 (ref), var24 (ref), var27 (ref), var38 (ref), squadPromptType (copy)
 		if cryo.List.find(var37.participants, p11) then
 			var24.setSquadPrompt(var27, {

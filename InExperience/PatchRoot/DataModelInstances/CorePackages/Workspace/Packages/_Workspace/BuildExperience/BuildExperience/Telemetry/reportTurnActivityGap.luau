@@ -7,12 +7,12 @@ local t = {
 	lastUpdated = { 2026, 6, 30 }
 }
 
-local function _(p0) --[[ line: 14 | named "shouldSample" ]]
+local function _(p0)
 	return if p0 <= 0 then false else p0 >= 10000 or math.random(1, 10000) <= p0
 end
 
 return {
-	log = function(p1, p2, p3) --[[ line: 24 ]]
+	log = function(p1, p2, p3)
 		-- upvalues: telemetryService (ref), t (ref)
 		local buildExperienceTurnActivityGapMsThrottleHundredthsPercentFastInt = game:GetFastInt("BuildExperienceTurnActivityGapMsThrottleHundredthsPercent")
 		

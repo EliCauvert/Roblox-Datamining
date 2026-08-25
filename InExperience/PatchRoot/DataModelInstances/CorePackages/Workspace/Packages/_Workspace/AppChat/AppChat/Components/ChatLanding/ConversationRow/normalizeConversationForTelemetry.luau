@@ -1,4 +1,4 @@
-﻿local function normalizeParticipants(p0) --[[ line: 1 ]]
+﻿local function normalizeParticipants(p0)
 	if type(p0) ~= "table" then
 		return p0
 	end
@@ -10,7 +10,7 @@
 	return t
 end
 
-return function(p1) --[[ line: 18 | named "normalizeConversationForTelemetry" ]]
+return function(p1)
 	-- upvalues: normalizeParticipants (ref)
 	local cloned = table.clone(p1)
 	cloned.participants = normalizeParticipants(p1.participants)

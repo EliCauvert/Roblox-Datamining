@@ -5,7 +5,7 @@ local t = {
 }
 
 return {
-	StartEvents = function(p0, p1, p2) --[[ line: 14 ]]
+	StartEvents = function(p0, p1, p2)
 		-- upvalues: t (ref), eventsModule (ref)
 		local var2 = t[p0]
 		local var3 = eventsModule[p0][p1]
@@ -16,7 +16,7 @@ return {
 			end
 		end
 	end,
-	StopEvents = function(p3, p4) --[[ line: 25 ]]
+	StopEvents = function(p3, p4)
 		-- upvalues: t (ref), eventsModule (ref)
 		local var4 = t[p3]
 		local var5 = eventsModule[p3][p4]

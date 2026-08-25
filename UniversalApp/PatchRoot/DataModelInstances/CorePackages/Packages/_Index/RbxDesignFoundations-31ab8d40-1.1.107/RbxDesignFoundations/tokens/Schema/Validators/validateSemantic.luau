@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	return {
 		Typography = p0.strictInterface({
 			Title = p0.strictInterface({

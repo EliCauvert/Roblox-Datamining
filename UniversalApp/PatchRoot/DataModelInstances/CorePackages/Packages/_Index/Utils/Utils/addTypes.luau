@@ -11,7 +11,7 @@ local getObjectTypeFromTypeMap = require(script.Parent.getObjectTypeFromTypeMap)
 local rewireTypes = require(script.Parent.rewire).rewireTypes
 local map = luauPolyfillModule.Map
 
-function t.addTypes(p0, p1) --[[ line: 61 ]]
+function t.addTypes(p0, p1)
 	-- upvalues: map (ref), boolean (ref), isNamedType (ref), isDirective (ref), rewireTypes (ref), object (ref), graphQLSchema (ref), getObjectTypeFromTypeMap (ref)
 	local var3 = p0:toConfig()
 	local var4 = map.new()

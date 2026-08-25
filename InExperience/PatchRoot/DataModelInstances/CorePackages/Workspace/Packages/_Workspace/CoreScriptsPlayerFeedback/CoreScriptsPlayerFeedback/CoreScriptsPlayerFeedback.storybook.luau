@@ -14,9 +14,9 @@ return {
 	storyRoot = parent,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0) --[[ line: 16 ]]
+	mapStory = function(p0)
 		-- upvalues: reactModule (ref), localizationProvider (ref), var4 (ref), foundationProvider (ref), foundationModule (ref)
-		return function(p1) --[[ line: 17 ]]
+		return function(p1)
 			-- upvalues: reactModule (copy), localizationProvider (copy), var4 (copy), foundationProvider (copy), foundationModule (copy), p0 (ref)
 			return reactModule.createElement(localizationProvider, { localization = var4 }, {
 				FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { Child = reactModule.createElement(p0, p1) })

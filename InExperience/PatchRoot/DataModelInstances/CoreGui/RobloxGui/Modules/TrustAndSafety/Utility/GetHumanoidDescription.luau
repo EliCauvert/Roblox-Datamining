@@ -8,7 +8,7 @@ local _ = {
 }
 
 return {
-	getHumanoidDescription = function(p0) --[[ line: 53 ]]
+	getHumanoidDescription = function(p0)
 		-- upvalues: playersService (ref)
 		local var1 = playersService:GetPlayerByUserId(p0)
 		local t = {
@@ -70,7 +70,7 @@ return {
 		if not appliedDescription then
 			return t, "ERR_RA_HUMDESC"
 		end
-		pcall(function() --[[ line: 116 ]]
+		pcall(function()
 			-- upvalues: t (ref), appliedDescription (ref)
 			for i, v in pairs(t) do
 				if typeof(appliedDescription[i]) == "Color3" then

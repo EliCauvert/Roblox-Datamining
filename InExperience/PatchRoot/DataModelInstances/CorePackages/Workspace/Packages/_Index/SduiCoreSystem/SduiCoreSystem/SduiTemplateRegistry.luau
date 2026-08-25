@@ -9,7 +9,7 @@ local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
 local sduiTemplateInterface = sduiConfigTypesModule.SduiTemplateInterface
 local t = {}
 
-local function _(p0, p1) --[[ line: 26 | named "deepJoinArrays" ]]
+local function _(p0, p1)
 	-- upvalues: tutilsModule (ref)
 	p1 = p1 or {}
 	
@@ -19,7 +19,7 @@ local function _(p0, p1) --[[ line: 26 | named "deepJoinArrays" ]]
 	return p1
 end
 
-local function deepJoin(p2, p3) --[[ line: 36 ]]
+local function deepJoin(p2, p3)
 	-- upvalues: t (ref), tutilsModule (ref), deepJoin (ref)
 	if not p2 then
 		return p3
@@ -39,7 +39,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p4) --[[ line: 60 ]]
+function t_1.new(p4)
 	-- upvalues: t_1 (ref)
 	local t = { _registeredTemplates = p4 or {} }
 	setmetatable(t, t_1)
@@ -47,15 +47,15 @@ function t_1.new(p4) --[[ line: 60 ]]
 	return t
 end
 
-function t_1:getTemplate(p5) --[[ line: 69 ]]
+function t_1:getTemplate(p5)
 	return self._registeredTemplates[p5]
 end
 
-function t_1.shouldResolveTemplate(_, p6) --[[ line: 73 ]]
+function t_1.shouldResolveTemplate(_, p6)
 	return p6.templateKey ~= nil and p6.templateKey ~= "NONE"
 end
 
-function t_1:resolveTemplateForConfig(p7, p8, p9) --[[ line: 80 ]]
+function t_1:resolveTemplateForConfig(p7, p8, p9)
 	-- upvalues: sduiErrorsModule (ref), validateInterfaceModule (ref), sduiTemplateInterface (ref), t_1 (ref), cryoModule (ref), t (ref), deepJoin (ref), tutilsModule (ref)
 	local templateKey = p7.templateKey
 	
@@ -115,7 +115,7 @@ function t_1:resolveTemplateForConfig(p7, p8, p9) --[[ line: 80 ]]
 			p7.analyticsData = cryoModule.Dictionary.join(var13.analyticsData, p7.analyticsData or t)
 		end
 		if var13.props then
-			local ok, status = pcall(function() --[[ line: 158 ]]
+			local ok, status = pcall(function()
 				-- upvalues: deepJoin (copy), var13 (ref), p7 (ref)
 				return deepJoin(var13.props, p7.props)
 			end)

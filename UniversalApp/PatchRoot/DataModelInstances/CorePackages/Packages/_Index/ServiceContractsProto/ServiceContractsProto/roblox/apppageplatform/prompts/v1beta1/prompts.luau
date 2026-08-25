@@ -7,7 +7,7 @@ local templateEntryModule = require(script.Parent.Parent.Parent.shared.v1beta1.t
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 240 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		parameters = if p0 == nil or p0.parameters == nil then {} else p0.parameters,
@@ -15,7 +15,7 @@ function t_1.new(p0) --[[ line: 240 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 247 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var14 = 0
@@ -54,7 +54,7 @@ function t_1:encode() --[[ line: 247 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 282 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var28 = t_1.new()
 	local var29 = 0
@@ -108,7 +108,7 @@ function t_1.decode(p1) --[[ line: 282 ]]
 	return var28
 end
 
-function t_1:jsonEncode() --[[ line: 344 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.parameters ~= nil and next(self.parameters) ~= nil then
@@ -130,7 +130,7 @@ function t_1:jsonEncode() --[[ line: 344 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 366 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var50 = t_1.new()
 	
@@ -162,7 +162,7 @@ typeRegistryModule.default:register(t.CustomPrompt)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 404 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		key = if p2 == nil or p2.key == nil then "" else p2.key,
@@ -170,7 +170,7 @@ function t_2.new(p2) --[[ line: 404 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 413 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var54 = 0
@@ -193,7 +193,7 @@ function t_2:encode() --[[ line: 413 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 432 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref)
 	local var60 = t_2.new()
 	local var61 = 0
@@ -245,7 +245,7 @@ function t_2.decode(p3) --[[ line: 432 ]]
 	return var60
 end
 
-function t_2:jsonEncode() --[[ line: 480 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -257,7 +257,7 @@ function t_2:jsonEncode() --[[ line: 480 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 494 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref)
 	local var80 = t_2.new()
 	
@@ -279,7 +279,7 @@ typeRegistryModule.default:register(t.CustomPrompt_ParametersEntry)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 522 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		key = if p4 == nil or p4.key == nil then "" else p4.key,
@@ -287,7 +287,7 @@ function t_3.new(p4) --[[ line: 522 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 531 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var82 = 0
@@ -310,7 +310,7 @@ function t_3:encode() --[[ line: 531 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 550 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref)
 	local var88 = t_3.new()
 	local var89 = 0
@@ -362,7 +362,7 @@ function t_3.decode(p5) --[[ line: 550 ]]
 	return var88
 end
 
-function t_3:jsonEncode() --[[ line: 598 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -374,7 +374,7 @@ function t_3:jsonEncode() --[[ line: 598 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 612 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref)
 	local var108 = t_3.new()
 	
@@ -396,7 +396,7 @@ typeRegistryModule.default:register(t.CustomPrompt_TranslationsEntry)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 640 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		page_entries = if p6 == nil or p6.page_entries == nil then {} else p6.page_entries,
@@ -407,7 +407,7 @@ function t_4.new(p6) --[[ line: 640 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 652 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var110 = 0
@@ -478,7 +478,7 @@ function t_4:encode() --[[ line: 652 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 716 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var140 = t_4.new()
 	local var141 = 0
@@ -548,7 +548,7 @@ function t_4.decode(p7) --[[ line: 716 ]]
 	return var140
 end
 
-function t_4:jsonEncode() --[[ line: 804 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -589,7 +589,7 @@ function t_4:jsonEncode() --[[ line: 804 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 846 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref), t (ref)
 	local var170 = t_4.new()
 	
@@ -667,7 +667,7 @@ typeRegistryModule.default:register(t.GetEligiblePromptsResponse)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 947 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		key = if p8 == nil or p8.key == nil then "" else p8.key,
@@ -675,7 +675,7 @@ function t_5.new(p8) --[[ line: 947 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 956 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var179 = 0
@@ -699,7 +699,7 @@ function t_5:encode() --[[ line: 956 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 978 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref), templateEntryModule (ref)
 	local var186 = t_5.new()
 	local var187 = 0
@@ -751,7 +751,7 @@ function t_5.decode(p9) --[[ line: 978 ]]
 	return var186
 end
 
-function t_5:jsonEncode() --[[ line: 1028 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -763,7 +763,7 @@ function t_5:jsonEncode() --[[ line: 1028 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 1044 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref), templateEntryModule (ref)
 	local var206 = t_5.new()
 	
@@ -785,7 +785,7 @@ typeRegistryModule.default:register(t.GetEligiblePromptsResponse_TemplatesEntry)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1074 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		key = if p10 == nil or p10.key == nil then "" else p10.key,
@@ -793,7 +793,7 @@ function t_6.new(p10) --[[ line: 1074 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1083 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var208 = 0
@@ -817,7 +817,7 @@ function t_6:encode() --[[ line: 1083 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1105 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref), t (ref)
 	local var215 = t_6.new()
 	local var216 = 0
@@ -869,7 +869,7 @@ function t_6.decode(p11) --[[ line: 1105 ]]
 	return var215
 end
 
-function t_6:jsonEncode() --[[ line: 1155 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -881,7 +881,7 @@ function t_6:jsonEncode() --[[ line: 1155 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1171 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref), t (ref)
 	local var235 = t_6.new()
 	
@@ -903,7 +903,7 @@ typeRegistryModule.default:register(t.GetEligiblePromptsResponse_CustomPromptsEn
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 1202 ]]
+function t_7.new(p12)
 	-- upvalues: t_7 (ref)
 	return setmetatable({
 		key = if p12 == nil or p12.key == nil then "" else p12.key,
@@ -911,7 +911,7 @@ function t_7.new(p12) --[[ line: 1202 ]]
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 1214 ]]
+function t_7:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var237 = 0
@@ -934,7 +934,7 @@ function t_7:encode() --[[ line: 1214 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 1235 ]]
+function t_7.decode(p13)
 	-- upvalues: t_7 (ref), protoModule (ref)
 	local var243 = t_7.new()
 	local var244 = 0
@@ -986,7 +986,7 @@ function t_7.decode(p13) --[[ line: 1235 ]]
 	return var243
 end
 
-function t_7:jsonEncode() --[[ line: 1285 ]]
+function t_7:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -998,7 +998,7 @@ function t_7:jsonEncode() --[[ line: 1285 ]]
 	return t
 end
 
-function t_7:jsonDecode() --[[ line: 1301 ]]
+function t_7:jsonDecode()
 	-- upvalues: t_7 (ref)
 	local var263 = t_7.new()
 	

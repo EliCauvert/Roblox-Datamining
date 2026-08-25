@@ -2,11 +2,11 @@
 local _ = require(script.Parent.Parent.types)
 local mergeTTIEventMetadataModule = require(script.Parent.Parent.Parent.Utils.mergeTTIEventMetadata)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: name (ref), mergeTTIEventMetadataModule (ref)
-	return function(p1, p2) --[[ line: 15 ]]
+	return function(p1, p2)
 		-- upvalues: p0 (ref), name (copy), mergeTTIEventMetadataModule (copy)
-		p0(function(p3) --[[ line: 16 ]]
+		p0(function(p3)
 			-- upvalues: p1 (ref), name (copy), mergeTTIEventMetadataModule (copy), p2 (ref)
 			local var2 = p3[p1]
 			

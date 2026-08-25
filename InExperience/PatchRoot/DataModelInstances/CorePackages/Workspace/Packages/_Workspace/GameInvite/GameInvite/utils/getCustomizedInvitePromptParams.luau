@@ -1,7 +1,7 @@
 ﻿local getCustomizedInvitePromptUserIdModule = require(script.Parent.getCustomizedInvitePromptUserId)
 local _ = require(script:FindFirstAncestor("GameInvite").gameInviteModalType)
 
-return function(p0, p1, p2) --[[ line: 8 ]]
+return function(p0, p1, p2)
 	-- upvalues: getCustomizedInvitePromptUserIdModule (ref)
 	local var1 = getCustomizedInvitePromptUserIdModule(p0)
 	local var2, var3 = p2(p1, var1)

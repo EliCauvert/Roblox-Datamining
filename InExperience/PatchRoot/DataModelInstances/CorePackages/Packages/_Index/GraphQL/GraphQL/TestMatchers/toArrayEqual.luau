@@ -1,7 +1,7 @@
 ﻿local deepEqualModule = require(script.Parent.Parent.luaUtils.deepEqual)
 local deepContainsModule = require(script.Parent.Parent.luaUtils.deepContains)
 
-return function(p0, p1, p2) --[[ line: 18 | named "toArrayEqual" ]]
+return function(p0, p1, p2)
 	-- upvalues: deepContainsModule (ref), deepEqualModule (ref)
 	if #p0 ~= #p1 then
 		return {

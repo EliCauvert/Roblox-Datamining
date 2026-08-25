@@ -25,7 +25,7 @@ local t = {
 local t_1 = { root = "HumanoidRootPart", children = { LowerTorso = t } }
 local t_2 = {}
 
-local function calculateCFrame(p0, p1) --[[ line: 60 ]]
+local function calculateCFrame(p0, p1)
 	-- upvalues: canBeNormalizedModule (ref)
 	local var15 = p0 - p1
 	
@@ -39,7 +39,7 @@ local function calculateCFrame(p0, p1) --[[ line: 60 ]]
 	return CFrame.fromMatrix(p0, unit, var15, unit:Cross(var15).Unit)
 end
 
-local function calculatePartTransformInHierarchy(a, b, p2, p3, p4) --[[ line: 79 ]]
+local function calculatePartTransformInHierarchy(a, b, p2, p3, p4)
 	-- upvalues: constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
 	local var16 = if p4 and p4[a.Name] then p4[a.Name] else CFrame.new()
 	local var17 = p2
@@ -58,11 +58,11 @@ local function calculatePartTransformInHierarchy(a, b, p2, p3, p4) --[[ line: 79
 	return var16
 end
 
-local function calculateHierarchyTransforms(p5, p6, p7) --[[ line: 112 ]]
+local function calculateHierarchyTransforms(p5, p6, p7)
 	-- upvalues: calculatePartTransformInHierarchy (ref)
 	local t = {}
 	
-	local function calculateAllTransformsInternal(p8, p9, p10, p11) --[[ line: 119 ]]
+	local function calculateAllTransformsInternal(p8, p9, p10, p11)
 		-- upvalues: p6 (ref), calculatePartTransformInHierarchy (copy), p7 (ref), t (ref), calculateAllTransformsInternal (ref)
 		local var24 = p6(p8)
 		assert(var24)
@@ -80,22 +80,22 @@ local function calculateHierarchyTransforms(p5, p6, p7) --[[ line: 112 ]]
 	return t
 end
 
-local function _(p12, p13) --[[ line: 140 | named "calculateLocalSpaceTransform" ]]
+local function _(p12, p13)
 	return CFrame.new(p12.Rotation:Inverse() * (p13.Position - p12.Position)) * (p12.Rotation:Inverse() * p13.Rotation)
 end
 
-local function calculateAssetCFrameFromPartsCFrames(value, p14) --[[ line: 147 ]]
+local function calculateAssetCFrameFromPartsCFrames(value, p14)
 	-- upvalues: getPartNamesInHierarchyOrderModule (ref), calculateCFrame (ref)
 	local var26 = getPartNamesInHierarchyOrderModule(value)
 	
 	return calculateCFrame(p14[var26[1]].Position, p14[var26[3]].Position)
 end
 
-local _ = function(p15) --[[ line: 158 | named "assertTypesToOrient" ]]
+local _ = function(p15)
 	assert(if p15 ~= Enum.AssetType.LeftArm then if p15 ~= Enum.AssetType.RightArm then if p15 ~= Enum.AssetType.LeftLeg then p15 == Enum.AssetType.RightLeg else true else true else true)
 end
 
-local _ = function(p16, p17, p18) --[[ line: 167 | named "getAttachmentCFrame" ]]
+local _ = function(p16, p17, p18)
 	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
 	local var27 = p16:FindFirstChild(p17, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	assert(var27)
@@ -103,7 +103,7 @@ local _ = function(p16, p17, p18) --[[ line: 167 | named "getAttachmentCFrame" ]
 	return p18 * getAttachmentCFrameInPartSpaceModule(var27)
 end
 
-function t_2.calculatePartCFrameFromRigAttachments(p19, p20, p21) --[[ line: 174 ]]
+function t_2.calculatePartCFrameFromRigAttachments(p19, p20, p21)
 	-- upvalues: constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), assetTraversalUtilsModule (ref), calculateCFrame (ref)
 	assert(if p19 ~= Enum.AssetType.LeftArm then if p19 ~= Enum.AssetType.RightArm then if p19 ~= Enum.AssetType.LeftLeg then p19 == Enum.AssetType.RightLeg else true else true else true)
 	local rigAttachmentToParent = constantsInterfaceModule.getRigAttachmentToParent(p19, p20.Name)
@@ -122,7 +122,7 @@ function t_2.calculatePartCFrameFromRigAttachments(p19, p20, p21) --[[ line: 174
 	end
 end
 
-function t_2.calculateStraightenedLimb(p22, p23, p24) --[[ line: 198 ]]
+function t_2.calculateStraightenedLimb(p22, p23, p24)
 	-- upvalues: cryoModule (ref), getPartNamesInHierarchyOrderModule (ref), assetTraversalUtilsModule (ref), t_2 (ref), constantsInterfaceModule (ref), r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref)
 	assert(if p22 ~= Enum.AssetType.LeftArm then if p22 ~= Enum.AssetType.RightArm then if p22 ~= Enum.AssetType.LeftLeg then p22 == Enum.AssetType.RightLeg else true else true else true)
 	local var33 = cryoModule.Dictionary.join(p23)
@@ -159,30 +159,30 @@ function t_2.calculateStraightenedLimb(p22, p23, p24) --[[ line: 198 ]]
 	return var33
 end
 
-function t_2.calculateAssetCFrame(value, p25) --[[ line: 251 ]]
+function t_2.calculateAssetCFrame(value, p25)
 	-- upvalues: t_2 (ref), calculateAssetCFrameFromPartsCFrames (ref)
 	local var45 = t_2.calculateAllTransformsForAsset(value, p25)
 	
 	return if Enum.AssetType.DynamicHead == value then var45.Head elseif Enum.AssetType.Torso == value then var45.LowerTorso else calculateAssetCFrameFromPartsCFrames(value, var45)
 end
 
-function t_2.calculateAllTransformsForAsset(value, p26) --[[ line: 262 ]]
+function t_2.calculateAllTransformsForAsset(value, p26)
 	-- upvalues: calculateHierarchyTransforms (ref), assetTraversalUtilsModule (ref)
-	return if Enum.AssetType.DynamicHead == value then { Head = CFrame.new() } else calculateHierarchyTransforms(assetTraversalUtilsModule.assetHierarchy[value], function(p27) --[[ line: 267 | named "findMeshHandle" ]]
+	return if Enum.AssetType.DynamicHead == value then { Head = CFrame.new() } else calculateHierarchyTransforms(assetTraversalUtilsModule.assetHierarchy[value], function(p27)
 		-- upvalues: p26 (ref)
 		return p26:FindFirstChild(p27)
 	end)
 end
 
-function t_2.calculateAllTransformsForFullBody(p28, p29) --[[ line: 274 ]]
+function t_2.calculateAllTransformsForFullBody(p28, p29)
 	-- upvalues: t_1 (ref), t (ref), calculateHierarchyTransforms (ref)
-	return calculateHierarchyTransforms(if p29 then t_1 else t, function(p30) --[[ line: 278 | named "findMeshHandle" ]]
+	return calculateHierarchyTransforms(if p29 then t_1 else t, function(p30)
 		-- upvalues: p28 (ref)
 		return p28[p30]
 	end, p29)
 end
 
-function t_2.calculatePartsLocalToAsset(value, p31) --[[ line: 286 ]]
+function t_2.calculatePartsLocalToAsset(value, p31)
 	-- upvalues: getPartNamesInHierarchyOrderModule (ref), calculateCFrame (ref)
 	assert(if value ~= Enum.AssetType.LeftArm then if value ~= Enum.AssetType.RightArm then if value ~= Enum.AssetType.LeftLeg then value == Enum.AssetType.RightLeg else true else true else true)
 	local var46 = getPartNamesInHierarchyOrderModule(value)
@@ -202,11 +202,11 @@ function t_2.calculatePartsLocalToAsset(value, p31) --[[ line: 286 ]]
 	return t
 end
 
-function t_2.getBodyPartsToParents() --[[ line: 308 ]]
+function t_2.getBodyPartsToParents()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
-	local function calculateAllTransformsInternal(p32, p33, p34) --[[ line: 311 ]]
+	local function calculateAllTransformsInternal(p32, p33, p34)
 		-- upvalues: t_1 (ref), calculateAllTransformsInternal (ref)
 		t_1[p32] = p33 or "HumanoidRootPart"
 		
@@ -228,7 +228,7 @@ function t_2.getBodyPartsToParents() --[[ line: 308 ]]
 	return t_1
 end
 
-function t_2.getAssetMeshesValidationSpaceTransforms(value, p35) --[[ line: 327 ]]
+function t_2.getAssetMeshesValidationSpaceTransforms(value, p35)
 	-- upvalues: t_2 (ref), getMeshScalesModule (ref)
 	local assetTypeEnum = p35.assetTypeEnum
 	assert(assetTypeEnum)
@@ -245,7 +245,7 @@ function t_2.getAssetMeshesValidationSpaceTransforms(value, p35) --[[ line: 327 
 	end
 	local var54 = t_2.calculateAllTransformsForAsset(assetTypeEnum, value)
 	
-	local function findMeshHandle(p36) --[[ line: 348 ]]
+	local function findMeshHandle(p36)
 		-- upvalues: assetTypeEnum (ref), value (ref)
 		return if assetTypeEnum == Enum.AssetType.DynamicHead then value else value:FindFirstChild(p36)
 	end

@@ -9,15 +9,15 @@ local requestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FollowingStoreTypes)
 game:DefineFastInt("FollowingStoreProcessDelaySec", 1)
 
-local function _() --[[ line: 27 | named "getFIntFollowingStoreProcessDelaySec" ]]
+local function _()
 	return game:GetFastInt("FollowingStoreProcessDelaySec")
 end
 
-local _ = function(p0) --[[ line: 33 | named "normalizeId" ]]
+local _ = function(p0)
 	return if p0 == nil then nil else tostring(p0)
 end
 
-return function() --[[ line: 40 | named "createFollowingStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), requestsModule (ref)
 	local var5 = createDataCacheModule()
 	local var6 = createDataResolverModule({
@@ -25,11 +25,11 @@ return function() --[[ line: 40 | named "createFollowingStore" ]]
 		cache = var5,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
 		supportsMutations = fFlagLuaAppDataHydrationOptimisticMutationLayer,
-		fetchFn = function(p1) --[[ line: 52 ]]
+		fetchFn = function(p1)
 			-- upvalues: cryoModule (copy), requestsModule (copy)
 			local var7 = cryoModule.Dictionary.keys(p1)
 			
-			return requestsModule.GetFollowingExists(var7):andThen(function(p2) --[[ line: 55 ]]
+			return requestsModule.GetFollowingExists(var7):andThen(function(p2)
 				-- upvalues: var7 (ref)
 				local t = {}
 				
@@ -55,11 +55,11 @@ return function() --[[ line: 40 | named "createFollowingStore" ]]
 	})
 	
 	return {
-		GetFollowingStatus = function(p3, p4) --[[ line: 84 ]]
+		GetFollowingStatus = function(p3, p4)
 			-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var6 (ref)
 			return if fFlagLuaAppDataHydrationOptimisticMutationLayer then if p4 and p4.skipFetch then var6.getOptimisticCachedItem(p3) else var6.getOptimisticAndFetchItem(p3) elseif p4 and p4.skipFetch then var6.getCachedItem(p3) else var6.getAndFetchItem(p3)
 		end,
-		UpdateFollowingStatus = function(p5, p6) --[[ line: 98 ]]
+		UpdateFollowingStatus = function(p5, p6)
 			-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var6 (ref), var5 (ref)
 			if fFlagLuaAppDataHydrationOptimisticMutationLayer then
 				var6.setMutation(p5, p6)
@@ -69,11 +69,11 @@ return function() --[[ line: 40 | named "createFollowingStore" ]]
 			end
 			var5.replaceItem(p5, p6)
 		end,
-		clear = function() --[[ line: 107 ]]
+		clear = function()
 			-- upvalues: var6 (ref)
 			var6.clear()
 		end,
-		dispose = function() --[[ line: 111 ]]
+		dispose = function()
 			-- upvalues: var6 (ref)
 			var6.dispose()
 		end

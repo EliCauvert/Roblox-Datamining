@@ -26,19 +26,19 @@ promptWithTextField.validateProps = tModule.strictInterface({
 	screenSize = tModule.Vector2
 })
 
-function promptWithTextField.init(p0) --[[ line: 50 ]]
+function promptWithTextField.init(p0)
 	-- upvalues: roactModule (ref), userInputService (ref)
 	p0:setState({ alertPosition = UDim2.fromScale(0.5, 0.5) })
 	p0.textBoxRef = roactModule.createRef()
 	
-	function p0.textUpdated(p1) --[[ line: 57 ]]
+	function p0.textUpdated(p1)
 		-- upvalues: p0 (ref)
 		p0.props.onFieldTextUpdated(p1.Text)
 	end
 	
 	p0.lastAlertHeight = 100
 	
-	function p0.calculateAlertPosition() --[[ line: 63 ]]
+	function p0.calculateAlertPosition()
 		-- upvalues: userInputService (copy), p0 (ref)
 		local uDim2 = UDim2.fromScale(0.5, 0.5)
 		
@@ -56,13 +56,13 @@ function promptWithTextField.init(p0) --[[ line: 50 ]]
 		end
 	end
 	
-	function p0.alertSizeChanged(p2) --[[ line: 86 ]]
+	function p0.alertSizeChanged(p2)
 		-- upvalues: p0 (ref)
 		p0.lastAlertHeight = p2.AbsoluteSize.Y
 		p0.calculateAlertPosition()
 	end
 	
-	function p0.alertMounted() --[[ line: 92 ]]
+	function p0.alertMounted()
 		-- upvalues: p0 (ref)
 		local value = p0.textBoxRef:getValue()
 		
@@ -72,9 +72,9 @@ function promptWithTextField.init(p0) --[[ line: 50 ]]
 	end
 end
 
-function promptWithTextField.renderAlertMiddleContent(p3) --[[ line: 100 ]]
+function promptWithTextField.renderAlertMiddleContent(p3)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), circle17Stroke1 (ref), rect (ref), roactGamepadModule (ref), robloxTranslatorModule (ref)
-	return withStyle(function(p4) --[[ line: 101 ]]
+	return withStyle(function(p4)
 		-- upvalues: roactModule (copy), imageSetLabel (copy), circle17Stroke1 (copy), rect (copy), roactGamepadModule (copy), robloxTranslatorModule (copy), p3 (ref)
 		local font = p4.Font
 		local theme = p4.Theme
@@ -120,7 +120,7 @@ function promptWithTextField.renderAlertMiddleContent(p3) --[[ line: 100 ]]
 	end)
 end
 
-function promptWithTextField.render(p5) --[[ line: 149 ]]
+function promptWithTextField.render(p5)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), externalEventConnection (ref), userInputService (ref)
 	return roactModule.createFragment({
 		InteractiveAlert = roactModule.createElement(interactiveAlert, {
@@ -130,7 +130,7 @@ function promptWithTextField.render(p5) --[[ line: 149 ]]
 			buttonStackInfo = p5.props.buttonStackInfo,
 			position = p5.state.alertPosition,
 			screenSize = p5.props.screenSize,
-			middleContent = function() --[[ line: 159 ]]
+			middleContent = function()
 				-- upvalues: p5 (ref)
 				return p5:renderAlertMiddleContent()
 			end,
@@ -148,10 +148,10 @@ function promptWithTextField.render(p5) --[[ line: 149 ]]
 	})
 end
 
-function promptWithTextField.didMount(p6) --[[ line: 179 ]]
+function promptWithTextField.didMount(p6)
 	p6.calculateAlertPosition()
 end
 
-return roactRoduxModule.connect(function(p7) --[[ line: 183 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p7)
 	return { screenSize = p7.screenSize }
 end, nil)(promptWithTextField)

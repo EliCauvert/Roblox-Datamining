@@ -22,14 +22,14 @@ carouselHeader.validateProps = tModule.strictInterface({
 })
 carouselHeader.defaultProps = { headerText = "", carouselMargin = 0 }
 
-function carouselHeader.render(p0) --[[ line: 48 ]]
+function carouselHeader.render(p0)
 	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), getIconSizeModule (ref), iconSizeModule (ref), roactModule (ref), interactableModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), pushRightSmall (ref)
 	local headerText = p0.props.headerText
 	local onSeeAll = p0.props.onSeeAll
 	local layoutOrder = p0.props.layoutOrder
 	local carouselMargin = p0.props.carouselMargin
 	
-	return withStyleModule(function(p1) --[[ line: 55 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: getTextSizeModule (copy), headerText (ref), getIconSizeModule (copy), iconSizeModule (copy), roactModule (copy), layoutOrder (ref), interactableModule (copy), carouselMargin (ref), onSeeAll (ref), genericTextLabelModule (copy), imageSetComponentModule (copy), pushRightSmall (copy)
 		local header1 = p1.Font.Header1
 		local var11 = getTextSizeModule(headerText, header1.RelativeSize * p1.Font.BaseSize, header1.Font, Vector2.new(10000, 10000))
@@ -45,7 +45,7 @@ function carouselHeader.render(p0) --[[ line: 48 ]]
 				AutoButtonColor = false,
 				BackgroundTransparency = 1,
 				[roactModule.Event.Activated] = onSeeAll,
-				onStateChanged = function() --[[ line: 77 ]] end
+				onStateChanged = function() end
 			}, {
 				Layout = roactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,

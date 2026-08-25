@@ -17,7 +17,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local fillBehavior = foundationModule.Enums.FillBehavior
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function mapErrorReasonToCopy(p0, p1) --[[ line: 32 ]]
+local function mapErrorReasonToCopy(p0, p1)
 	-- upvalues: errorReasonModule (ref)
 	local var8 = ({
 		[errorReasonModule.GenericError] = { p1.GenericErrorTitle, p1.GenericErrorBody },
@@ -28,7 +28,7 @@ local function mapErrorReasonToCopy(p0, p1) --[[ line: 32 ]]
 	return if var8 then { title = var8[1], body = var8[2] } else { title = p1.GenericErrorTitle, body = p1.GenericErrorBody }
 end
 
-return function() --[[ line: 59 | named "useErrorSheetSlots" ]]
+return function()
 	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), useTokens (ref), useLocalization (ref), reactModule (ref), mapErrorReasonToCopy (ref), completeRobloxSubscriptionUpsellFlowModule (ref), sheet (ref), view (ref), text (ref), icon (ref), iconName (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
 	local var9 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getErrorReason)
 	local var10 = useTokens()
@@ -41,16 +41,16 @@ return function() --[[ line: 59 | named "useErrorSheetSlots" ]]
 		UnsupportedPlatformTitle = "Feature.RobloxSubscription.Title.UnsupportedPlatform",
 		UnsupportedPlatformBody = "Feature.RobloxSubscription.Body.UnsupportedPlatform"
 	})
-	local var12 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: mapErrorReasonToCopy (copy), var9 (ref), var11 (ref)
 		return mapErrorReasonToCopy(var9, var11)
 	end, { var9, var11 })
-	local var13 = reactModule.useCallback(function() --[[ line: 77 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
 		completeRobloxSubscriptionUpsellFlowModule()
 	end, {})
 	
-	return reactModule.useMemo(function() --[[ line: 81 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), sheet (copy), view (copy), text (copy), var12 (ref), icon (copy), iconName (copy), var10 (ref), button (copy), var11 (ref), var13 (ref), fillBehavior (copy), buttonVariant (copy)
 		return {
 			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {

@@ -10,7 +10,7 @@ local reactionAnimationModule = require(script.Parent.ReactionAnimation)
 local reactionAssetsModule = require(script.Parent.ReactionAssets)
 local t = {}
 
-local function _(p0) --[[ line: 47 | named "warnMissingAnimation" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	if t[p0] then
 		return
@@ -19,7 +19,7 @@ local function _(p0) --[[ line: 47 | named "warnMissingAnimation" ]]
 	t[p0] = true
 end
 
-local function getStaticImageData(p1, p2) --[[ line: 56 ]]
+local function getStaticImageData(p1, p2)
 	-- upvalues: reactionAssetsModule (ref)
 	local staticImageUri = reactionAssetsModule.getStaticImageUri(p1, p2)
 	
@@ -30,7 +30,7 @@ local function getStaticImageData(p1, p2) --[[ line: 56 ]]
 	}
 end
 
-local _ = function(value, p3, p4, p5, p6) --[[ line: 68 | named "setFrame" ]]
+local _ = function(value, p3, p4, p5, p6)
 	-- upvalues: reactionAnimationModule (ref)
 	local frameRect = reactionAnimationModule.getFrameRect(value, p3)
 	p4.current = frameRect.frameIndex
@@ -38,11 +38,11 @@ local _ = function(value, p3, p4, p5, p6) --[[ line: 68 | named "setFrame" ]]
 	p6(frameRect.size)
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p7, p8) --[[ line: 81 | named "Reaction" ]]
+return reactModule.memo(reactModule.forwardRef(function(p7, p8)
 	-- upvalues: reactionAssetsModule (ref), animationDataModule (ref), reactModule (ref), getStaticImageData (ref), reactionAnimationModule (ref), t (ref), runService (ref), image (ref)
 	local assetKey = reactionAssetsModule.getAssetKey(p7.reactionType)
 	local var11 = if assetKey ~= nil then nil else animationDataModule(assetKey)
-	local var12 = reactModule.useMemo(function() --[[ line: 84 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: getStaticImageData (copy), p7 (ref)
 		return getStaticImageData(p7.reactionType, p7.size)
 	end, { p7.reactionType, p7.size })
@@ -57,7 +57,7 @@ return reactModule.memo(reactModule.forwardRef(function(p7, p8) --[[ line: 81 | 
 	local var24 = reactModule.useRef(1)
 	local var25 = reactModule.useRef(0)
 	local var26 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 104 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14_1 (ref), var11 (ref), var25 (ref), var26 (ref), var24 (ref), var21 (ref), var23 (ref), reactionAnimationModule (copy), var12 (ref), var17 (ref), var14 (ref), assetKey (ref), p7 (ref), t (copy)
 		if var14_1 and var11 ~= nil then
 			var25.current = 0
@@ -87,10 +87,10 @@ return reactModule.memo(reactModule.forwardRef(function(p7, p8) --[[ line: 81 | 
 	end, {
 		var14_1, var11, var12, p7.reactionType, var17, p7.loop, var14, assetKey
 	})
-	reactModule.useEffect(function() --[[ line: 133 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var14_1 (ref), var11 (ref), runService (copy), var26 (ref), var25 (ref), p7 (ref), reactionAnimationModule (copy), var24 (ref), var21 (ref), var23 (ref), var16 (ref)
 		if var14_1 and var11 ~= nil then
-			local heartbeatConnection = runService.Heartbeat:Connect(function(p9) --[[ line: 138 ]]
+			local heartbeatConnection = runService.Heartbeat:Connect(function(p9)
 				-- upvalues: var26 (copy), var25 (copy), p7 (copy), reactionAnimationModule (copy), var11 (copy), var24 (copy), var21 (copy), var23 (copy), var16 (copy)
 				if var26.current then return end
 				var25.current += p9
@@ -123,23 +123,23 @@ return reactModule.memo(reactModule.forwardRef(function(p7, p8) --[[ line: 81 | 
 				end
 			end)
 			
-			return function() --[[ line: 159 ]]
+			return function()
 				-- upvalues: heartbeatConnection (ref)
 				heartbeatConnection:Disconnect()
 			end
 		end
 		return nil
 	end, { var14_1, var11, p7.loop })
-	reactModule.useImperativeHandle(p8, function() --[[ line: 164 ]]
+	reactModule.useImperativeHandle(p8, function()
 		-- upvalues: p7 (ref), var16 (ref)
 		return {
-			start = function() --[[ line: 166 ]]
+			start = function()
 				-- upvalues: p7 (copy), var16 (copy)
 				if p7.isPlaying == nil then
 					var16(true)
 				end
 			end,
-			stop = function() --[[ line: 171 ]]
+			stop = function()
 				-- upvalues: p7 (copy), var16 (copy)
 				if p7.isPlaying == nil then
 					var16(false)

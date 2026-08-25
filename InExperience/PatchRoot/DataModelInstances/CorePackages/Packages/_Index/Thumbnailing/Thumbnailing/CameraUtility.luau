@@ -5,10 +5,10 @@
 	XRotForFullBody = 15,
 	XRotForCloseup = 0,
 	DistanceScaleForFullBody = 1,
-	GetCameraCFrame = function(p0, p1) --[[ line: 59 ]]
+	GetCameraCFrame = function(p0, p1)
 		return CFrame.lookAt(p0 * p1, p0.Position)
 	end,
-	CreateThumbnailCamera = function() --[[ line: 71 ]]
+	CreateThumbnailCamera = function()
 		local thumbnailCamera = Instance.new("Camera")
 		thumbnailCamera.Name = "ThumbnailCamera"
 		thumbnailCamera.CameraType = Enum.CameraType.Scriptable
@@ -16,7 +16,7 @@
 		
 		return thumbnailCamera
 	end,
-	CalculateBaseDistanceToCamera = function(p2, p3, p4, p5) --[[ line: 87 ]]
+	CalculateBaseDistanceToCamera = function(p2, p3, p4, p5)
 		return math.max((p4.X - p3.X) / 2, (p4.Y - p3.Y) / 2) * p5 / math.tan(p2 / 2)
 	end
 }
@@ -29,7 +29,7 @@ local cframe = CFrame.Angles(0.436332312999, 0.436332312999, 0)
 local cframe_1 = CFrame.Angles(0, 1.570796326795, 0)
 local cframe_2 = CFrame.Angles(0, -1.570796326795, 0)
 
-function t.SetupCamera(p6, p7) --[[ line: 118 ]]
+function t.SetupCamera(p6, p7)
 	-- upvalues: t (ref), cFrameUtilityModule (ref), vectorUtilityModule (ref)
 	if p7.optFieldOfView then
 		p6.FieldOfView = p7.optFieldOfView
@@ -42,7 +42,7 @@ function t.SetupCamera(p6, p7) --[[ line: 118 ]]
 	p6.CFrame = t.GetCameraCFrame(cFrameUtilityModule.AdjustTargetCFrameWithExtents(p7.targetCFrame, p7.minExtent, p7.maxExtent), vectorUtilityModule.Vector3FromXYRotPlusDistance(p7.optCameraXRot or 0, p7.optCameraYRot or 0, var10))
 end
 
-function t.SetupBodyPartCamera(p8, p9, p10, p11) --[[ line: 157 ]]
+function t.SetupBodyPartCamera(p8, p9, p10, p11)
 	-- upvalues: cFrame_1 (ref), cFrame (ref), characterUtilityModule (ref), t (ref)
 	local t_1 = {}
 	
@@ -66,7 +66,7 @@ function t.SetupBodyPartCamera(p8, p9, p10, p11) --[[ line: 157 ]]
 	})
 end
 
-function t.SetupHeadCamera(p12, p13) --[[ line: 195 ]]
+function t.SetupHeadCamera(p12, p13)
 	-- upvalues: cFrameUtilityModule (ref), characterUtilityModule (ref), t (ref)
 	local var16 = CFrame.fromEulerAnglesYXZ(0.261799387799, 0.523598775598, 0) * cFrameUtilityModule.CalculateTargetCFrame(p12:FindFirstChild("Head").CFrame)
 	local var17, var18 = characterUtilityModule.CalculateHeadExtents(p12, var16)
@@ -79,7 +79,7 @@ function t.SetupHeadCamera(p12, p13) --[[ line: 195 ]]
 	})
 end
 
-local function _(p14) --[[ line: 224 | named "isLeftShoe" ]]
+local function _(p14)
 	local meshPart = p14:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart then
@@ -90,7 +90,7 @@ local function _(p14) --[[ line: 224 | named "isLeftShoe" ]]
 	return false
 end
 
-local _ = function(p15) --[[ line: 233 | named "isRightShoe" ]]
+local _ = function(p15)
 	local meshPart = p15:FindFirstChildWhichIsA("MeshPart")
 	
 	if meshPart then
@@ -101,7 +101,7 @@ local _ = function(p15) --[[ line: 233 | named "isRightShoe" ]]
 	return false
 end
 
-local _ = function(vectorA) --[[ line: 242 | named "getAccessoryAngle" ]]
+local _ = function(vectorA)
 	-- upvalues: cframe_1 (ref), cframe_2 (ref), cframe (ref)
 	local var22
 	local meshPart = vectorA:FindFirstChildWhichIsA("MeshPart")
@@ -127,7 +127,7 @@ local _ = function(vectorA) --[[ line: 242 | named "getAccessoryAngle" ]]
 	return if var24 then cframe_2 else cframe
 end
 
-function t.SetupAccessoryCamera(p16, p17) --[[ line: 251 ]]
+function t.SetupAccessoryCamera(p16, p17)
 	-- upvalues: cframe_1 (ref), cframe_2 (ref), cframe (ref), characterUtilityModule (ref), t (ref)
 	local var29
 	local children = p16:GetChildren()

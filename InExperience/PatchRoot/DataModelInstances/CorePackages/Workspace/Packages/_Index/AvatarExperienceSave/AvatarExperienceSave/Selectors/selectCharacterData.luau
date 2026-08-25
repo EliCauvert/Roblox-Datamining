@@ -2,7 +2,7 @@
 local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
 local fFlagAXBackgroundsPersistence = require(avatarExperienceSave.Parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
 
-return function(p0) --[[ line: 9 | named "selectCharacterData" ]]
+return function(p0)
 	-- upvalues: fFlagAXBackgroundsPersistence (ref)
 	return {
 		tryOn = {

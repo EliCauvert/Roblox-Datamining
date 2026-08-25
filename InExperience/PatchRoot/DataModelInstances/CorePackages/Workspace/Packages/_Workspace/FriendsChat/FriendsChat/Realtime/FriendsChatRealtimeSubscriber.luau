@@ -14,7 +14,7 @@ local fFlagFriendsChatRefreshListForNewConversationModule = require(script.Paren
 local fStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
 local name = expChatSharedModule.Logger:new(script.Name)
 
-local function fetchNewerMessagesSafe(p0, p1) --[[ line: 66 ]]
+local function fetchNewerMessagesSafe(p0, p1)
 	-- upvalues: expChatConversationListAdapterModule (ref), getConversationMessageListStoreModule (ref), fetchNewerMessagesModule (ref), getFriendsChatRealtimeStoreModule (ref), playersService (ref), name (ref)
 	local conversation = expChatConversationListAdapterModule.getConversationStore().getConversation(p0, false)
 	local lastUpdated = conversation and conversation.lastUpdated
@@ -23,7 +23,7 @@ local function fetchNewerMessagesSafe(p0, p1) --[[ line: 66 ]]
 	for i, v in getConversationMessageListStoreModule(false).getOrderedIds(p0, false) do
 		t[v] = true
 	end
-	fetchNewerMessagesModule(p0):andThen(function(p3) --[[ line: 80 ]]
+	fetchNewerMessagesModule(p0):andThen(function(p3)
 		-- upvalues: getFriendsChatRealtimeStoreModule (copy), playersService (copy), p0 (ref), expChatConversationListAdapterModule (copy), lastUpdated (ref), p1 (ref), t (ref)
 		local response = p3 and p3.response
 		local responseBody = response and response.responseBody
@@ -61,20 +61,20 @@ local function fetchNewerMessagesSafe(p0, p1) --[[ line: 66 ]]
 				end
 			end
 		end
-	end):catch(function(p2) --[[ line: 119 ]]
+	end):catch(function(p2)
 		-- upvalues: name (copy), p0 (ref)
 		name:warning(`Failed to fetch newer messages for {p0}: {tostring(p2)}`)
 	end)
 end
 
-local function _(p4) --[[ line: 126 | named "getFirstConversationResponse" ]]
+local function _(p4)
 	local var28 = p4 == nil and ((if p4 == nil then p4.responseBody else nil) or p4)
 	local conversations = var28 and var28.conversations
 	
 	return if conversations == nil then nil else conversations[1]
 end
 
-local function updateSelectedFriendPlaceholder(p5, p6) --[[ line: 132 ]]
+local function updateSelectedFriendPlaceholder(p5, p6)
 	-- upvalues: conversationChannelsModule (ref), getFriendsChatNavigationStoreModule (ref)
 	local var30 = p6 == nil and ((if p6 == nil then p6.responseBody else nil) or p6)
 	local conversations = var30 and var30.conversations
@@ -88,9 +88,9 @@ local function updateSelectedFriendPlaceholder(p5, p6) --[[ line: 132 ]]
 	end
 end
 
-local function fetchConversationDetailsSafe(p7, p8, p9) --[[ line: 151 ]]
+local function fetchConversationDetailsSafe(p7, p8, p9)
 	-- upvalues: expChatConversationListAdapterModule (ref), updateSelectedFriendPlaceholder (ref), name (ref)
-	expChatConversationListAdapterModule.fetchConversationDetailsToSignals(p7):andThen(function(p11) --[[ line: 157 ]]
+	expChatConversationListAdapterModule.fetchConversationDetailsToSignals(p7):andThen(function(p11)
 		-- upvalues: p8 (ref), p9 (ref), p7 (ref), updateSelectedFriendPlaceholder (copy)
 		if p8 then
 			local var34 = p11 == nil and ((if p11 == nil then p11.responseBody else nil) or p11)
@@ -103,13 +103,13 @@ local function fetchConversationDetailsSafe(p7, p8, p9) --[[ line: 151 ]]
 			end
 		end
 		updateSelectedFriendPlaceholder(p7, p11)
-	end):catch(function(p10) --[[ line: 167 ]]
+	end):catch(function(p10)
 		-- upvalues: name (copy), p7 (ref)
 		name:warning(`Failed to fetch conversation details for {p7}: {tostring(p10)}`)
 	end)
 end
 
-local _ = function(p12) --[[ line: 173 | named "handleRemove" ]]
+local _ = function(p12)
 	-- upvalues: expChatConversationListAdapterModule (ref), getFriendsChatNavigationStoreModule (ref)
 	expChatConversationListAdapterModule.removeConversation(p12)
 	local var36 = getFriendsChatNavigationStoreModule(false)
@@ -119,19 +119,19 @@ local _ = function(p12) --[[ line: 173 | named "handleRemove" ]]
 	end
 end
 
-return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
+return function(p13)
 	-- upvalues: reactModule (ref), expChatConversationListAdapterModule (ref), name (ref), realtimeDeliveryModule (ref), classifyCommunicationChannelsEventModule (ref), fetchNewerMessagesSafe (ref), getFriendsChatNavigationStoreModule (ref), fetchConversationDetailsSafe (ref), fFlagFriendsChatRefreshListForNewConversationModule (ref), getFriendsChatRealtimeStoreModule (ref), fStringDebugFriendsChatConversationIdModule (ref)
 	local onActiveConversationMessageReceived = p13.onActiveConversationMessageReceived
 	local var37 = reactModule.useRef(false)
 	local var38 = reactModule.useRef(0)
 	
-	local function requestConversationListRefresh(p14) --[[ line: 194 ]]
+	local function requestConversationListRefresh(p14)
 		-- upvalues: var37 (ref), var38 (ref), expChatConversationListAdapterModule (copy), name (copy)
 		var37.current = true
 		var38.current += 1
 		local current = var38.current
 		
-		local function attempt(p15) --[[ line: 199 ]]
+		local function attempt(p15)
 			-- upvalues: var38 (copy), current (ref), expChatConversationListAdapterModule (copy), var37 (copy), name (copy), p14 (ref), attempt (ref)
 			if var38.current ~= current then return end
 			if expChatConversationListAdapterModule.getConversationStore().getListStatus(false).isFetchingConversations == true then
@@ -141,7 +141,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 					
 					return
 				end
-				task.delay(1, function() --[[ line: 211 ]]
+				task.delay(1, function()
 					-- upvalues: attempt (copy), p15 (ref)
 					attempt(p15 - 1)
 				end)
@@ -149,7 +149,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 				return
 			elseif var37.current then
 				var37.current = false
-				expChatConversationListAdapterModule.fetchConversationListPageToSignals():catch(function(p16) --[[ line: 222 ]]
+				expChatConversationListAdapterModule.fetchConversationListPageToSignals():catch(function(p16)
 					-- upvalues: name (copy), p14 (copy)
 					name:warning(`Failed to refresh conversation list after {p14}: {tostring(p16)}`)
 				end)
@@ -161,7 +161,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 		attempt(3)
 	end
 	
-	realtimeDeliveryModule.useRealtimeNamespace("CommunicationChannels", function(p17) --[[ line: 230 ]]
+	realtimeDeliveryModule.useRealtimeNamespace("CommunicationChannels", function(p17)
 		-- upvalues: classifyCommunicationChannelsEventModule (copy), fetchNewerMessagesSafe (copy), onActiveConversationMessageReceived (ref), expChatConversationListAdapterModule (copy), getFriendsChatNavigationStoreModule (copy), fetchConversationDetailsSafe (copy), fFlagFriendsChatRefreshListForNewConversationModule (copy), requestConversationListRefresh (ref)
 		local var41 = classifyCommunicationChannelsEventModule(p17)
 		local channelId = var41.channelId
@@ -184,7 +184,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 			fetchConversationDetailsSafe(channelId, fFlagFriendsChatRefreshListForNewConversationModule and (if p17.Type ~= "AddedToChannel" then p17.Type == "ChannelCreated" else true), requestConversationListRefresh)
 		end
 	end, {})
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(p18, p19) --[[ line: 254 ]]
+	realtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(p18, p19)
 		-- upvalues: getFriendsChatRealtimeStoreModule (copy), fStringDebugFriendsChatConversationIdModule (copy), fetchNewerMessagesSafe (copy), onActiveConversationMessageReceived (ref)
 		if p18 ~= Enum.ConnectionState.Connected or not p19 then return end
 		local var43 = getFriendsChatRealtimeStoreModule(false).getActiveConversationId(false) or fStringDebugFriendsChatConversationIdModule
@@ -193,7 +193,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 			fetchNewerMessagesSafe(var43, onActiveConversationMessageReceived)
 		end
 	end, {})
-	realtimeDeliveryModule.useRealtimeNamespace("FriendshipNotifications", function(p20) --[[ line: 268 ]]
+	realtimeDeliveryModule.useRealtimeNamespace("FriendshipNotifications", function(p20)
 		-- upvalues: name (copy), var37 (ref), var38 (ref), expChatConversationListAdapterModule (copy)
 		if p20 == nil or p20.Type ~= "FriendshipCreated" then
 			return
@@ -204,7 +204,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 		local current = var38.current
 		local var44 = "friendship update"
 		
-		local function attempt(p21) --[[ line: 199 ]]
+		local function attempt(p21)
 			-- upvalues: var38 (copy), current (ref), expChatConversationListAdapterModule (copy), var37 (copy), name (copy), var44 (ref), attempt (ref)
 			if var38.current ~= current then return end
 			if expChatConversationListAdapterModule.getConversationStore().getListStatus(false).isFetchingConversations == true then
@@ -214,7 +214,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 					
 					return
 				end
-				task.delay(1, function() --[[ line: 211 ]]
+				task.delay(1, function()
 					-- upvalues: attempt (copy), p21 (ref)
 					attempt(p21 - 1)
 				end)
@@ -222,7 +222,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 				return
 			elseif var37.current then
 				var37.current = false
-				expChatConversationListAdapterModule.fetchConversationListPageToSignals():catch(function(p22) --[[ line: 222 ]]
+				expChatConversationListAdapterModule.fetchConversationListPageToSignals():catch(function(p22)
 					-- upvalues: name (copy), var44 (copy)
 					name:warning(`Failed to refresh conversation list after {var44}: {tostring(p22)}`)
 				end)
@@ -233,9 +233,9 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 		
 		attempt(3)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 276 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref)
-		return function() --[[ line: 277 ]]
+		return function()
 			-- upvalues: var38 (copy)
 			var38.current += 1
 		end

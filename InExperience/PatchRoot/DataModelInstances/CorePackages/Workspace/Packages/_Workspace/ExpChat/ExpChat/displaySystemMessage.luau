@@ -4,19 +4,19 @@ local var0 = require(parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
 local sanitizeForRichTextModule = require(script.Parent.sanitizeForRichText)
 local fFlagEnableClientSummarySystemMessageOnLua = require(parent.SharedFlags).FFlagEnableClientSummarySystemMessageOnLua
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 12 | named "displaySystemMessage" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: var0 (ref), list (ref), fFlagEnableClientSummarySystemMessageOnLua (ref), sanitizeForRichTextModule (ref)
 	var0:debug("Display system message: {}", p2)
 	local var2 = nil
 	
 	if type(p0) ~= "string" then
-		var2 = table.concat(list.map(p0, function(p7) --[[ line: 38 ]]
+		var2 = table.concat(list.map(p0, function(p7)
 			-- upvalues: p3 (ref), p1 (ref)
 			return p3:FormatByKey(p7, p1)
 		end), "\n")
 	elseif p0 ~= "" then
 		local _ = nil
-		local ok, status = pcall(function() --[[ line: 27 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p3 (ref), p0 (ref), p1 (ref)
 			return p3:FormatByKey(p0, p1)
 		end)

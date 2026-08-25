@@ -16,19 +16,19 @@ local t = {
 	analyticsContext = true
 }
 
-local function PlaceholderHost(p0) --[[ line: 36 ]]
+local function PlaceholderHost(p0)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), sine (ref)
 	local fadeOut = p0.fadeOut
 	local durationSeconds = p0.durationSeconds
 	local onFadeComplete = p0.onFadeComplete
-	local var4, var5 = reactOtterModule.useAnimatedBinding(if fadeOut then 1 else 0, reactModule.useCallback(function(p1) --[[ line: 43 ]]
+	local var4, var5 = reactOtterModule.useAnimatedBinding(if fadeOut then 1 else 0, reactModule.useCallback(function(p1)
 		-- upvalues: onFadeComplete (ref)
 		if p1 >= 1 then
 			onFadeComplete()
 		end
 	end, { onFadeComplete }))
 	local var6 = reactModule.useRef(fadeOut)
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), fadeOut (ref), var5 (ref), reactOtterModule (copy), durationSeconds (ref), sine (copy)
 		local current = var6.current
 		var6.current = fadeOut
@@ -42,18 +42,18 @@ local function PlaceholderHost(p0) --[[ line: 36 ]]
 	return reactModule.cloneElement(p0.placeholder, { transparencyBinding = var4, zIndex = p0.zIndex })
 end
 
-return reactModule.memo(function(p2) --[[ line: 83 | named "SduiPlaceholderWrapper" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: reactModule (ref), t (ref), PlaceholderHost (ref)
 	local var7 = p2.isPlaceholder == true
 	local transitionDurationSeconds = p2.transitionDurationSeconds or 0.15
 	local var9, var10 = reactModule.useState(var7)
-	reactModule.useEffect(function() --[[ line: 89 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var9 (ref), var10 (ref)
 		if var7 and not var9 then
 			var10(true)
 		end
 	end, { var7, var9 })
-	local var11 = reactModule.useCallback(function() --[[ line: 95 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref)
 		var10(false)
 	end, {})

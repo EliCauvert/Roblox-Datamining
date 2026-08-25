@@ -10,33 +10,33 @@ local t = {
 }
 local navigationEvents = reactModule.Component:extend("NavigationEvents")
 
-function navigationEvents.didMount(p0) --[[ line: 51 ]]
+function navigationEvents.didMount(p0)
 	p0:subscribeAll()
 end
 
-function navigationEvents.didUpdate(p1, p2) --[[ line: 58 ]]
+function navigationEvents.didUpdate(p1, p2)
 	if p1.props.navigation ~= p2.navigation then
 		p1:removeAll()
 		p1:subscribeAll()
 	end
 end
 
-function navigationEvents.willUnmount(p3) --[[ line: 66 ]]
+function navigationEvents.willUnmount(p3)
 	p3:removeAll()
 end
 
-function navigationEvents.getPropListener(p4, p5) --[[ line: 70 ]]
+function navigationEvents.getPropListener(p4, p5)
 	-- upvalues: t (ref)
 	return p4.props[t[p5]]
 end
 
-function navigationEvents.subscribeAll(p6) --[[ line: 74 ]]
+function navigationEvents.subscribeAll(p6)
 	-- upvalues: t (ref)
 	local navigation = p6.props.navigation
 	p6.subscriptions = {}
 	
 	for i in t do
-		p6.subscriptions[i] = navigation.addListener(i, function(...) --[[ line: 80 ]]
+		p6.subscriptions[i] = navigation.addListener(i, function(...)
 			-- upvalues: p6 (ref), i (ref)
 			local var5 = p6:getPropListener(i)
 			
@@ -47,7 +47,7 @@ function navigationEvents.subscribeAll(p6) --[[ line: 74 ]]
 	end
 end
 
-function navigationEvents.removeAll(p7) --[[ line: 90 ]]
+function navigationEvents.removeAll(p7)
 	-- upvalues: t (ref)
 	for i in t do
 		local var6 = p7.subscriptions[i]
@@ -59,7 +59,7 @@ function navigationEvents.removeAll(p7) --[[ line: 90 ]]
 	end
 end
 
-function navigationEvents.render(_) --[[ line: 100 ]]
+function navigationEvents.render(_)
 	return nil
 end
 

@@ -7,27 +7,27 @@ local t = {
 	[presenceType.InGame] = 2,
 	[presenceType.InStudio] = 3
 }
-local var2 = cryoModule.List.foldLeft(cryoModule.Dictionary.keys(t), function(p0, p1) --[[ line: 18 ]]
+local var2 = cryoModule.List.foldLeft(cryoModule.Dictionary.keys(t), function(p0, p1)
 	-- upvalues: t (ref)
 	p0[tostring(t[p1])] = p1
 	
 	return p0
 end, {})
 
-local function _(p2) --[[ line: 23 | named "convertToStringWithDefault" ]]
+local function _(p2)
 	return if p2 then tostring(p2) else ""
 end
 
 return {
-	formatNumberToPresenceType = function(p3) --[[ line: 27 ]]
+	formatNumberToPresenceType = function(p3)
 		-- upvalues: var2 (ref), presenceType (ref)
 		return if p3 then var2[tostring(p3)] else presenceType.Offline
 	end,
-	formatPresenceTypeToNumber = function(p4) --[[ line: 31 ]]
+	formatPresenceTypeToNumber = function(p4)
 		-- upvalues: t (ref), presenceType (ref)
 		return if p4 then t[p4] else t[presenceType.Offline]
 	end,
-	formatUserPresence = function(p5) --[[ line: 58 ]]
+	formatUserPresence = function(p5)
 		-- upvalues: var2 (ref), presenceType (ref)
 		local userPresenceType
 		local t = { id = p5.id }

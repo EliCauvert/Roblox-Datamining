@@ -5,9 +5,9 @@ local foundationProvider = foundationModule.FoundationProvider
 local theme = foundationModule.Enums.Theme
 local device = foundationModule.Enums.Device
 
-return function(p0) --[[ line: 19 | named "StoryMiddleware" ]]
+return function(p0)
 	-- upvalues: theme (ref), reactModule (ref), foundationProvider (ref), device (ref)
-	return function(p1) --[[ line: 21 ]]
+	return function(p1)
 		-- upvalues: theme (copy), reactModule (copy), foundationProvider (copy), device (copy), p0 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

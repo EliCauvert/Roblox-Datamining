@@ -1,6 +1,6 @@
 ﻿local var0 = 0
 
-return function() --[[ line: 3 ]]
+return function()
 	-- upvalues: var0 (write)
 	var0 += 1
 	

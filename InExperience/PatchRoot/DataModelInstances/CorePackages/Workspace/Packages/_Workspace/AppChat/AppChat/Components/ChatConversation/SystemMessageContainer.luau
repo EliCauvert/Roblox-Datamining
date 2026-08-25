@@ -21,7 +21,7 @@ local t = {
 	senderTargetId = nil
 }
 
-local function getCardComponentTypes(p0) --[[ line: 47 ]]
+local function getCardComponentTypes(p0)
 	local t = {}
 	
 	if not p0 then
@@ -41,15 +41,15 @@ local function getCardComponentTypes(p0) --[[ line: 47 ]]
 	return t
 end
 
-function SystemMessageContainer(p1) --[[ line: 67 ]]
+function SystemMessageContainer(p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), getFFlagDebugAppChatModule (ref), getFFlagEnableSocialCards (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), getCardComponentTypes (ref), domLocatorsModule (ref), cardContainerModule (ref), fFlagAppChatDomLocatorFoundationMigrationModule (ref), foundationModule (ref), systemMessageModule (ref)
 	local var13 = cryoModule.Dictionary.join(t, p1)
 	local var14 = useStyle()
 	local var15, var16 = reactModule.useState(false)
-	local var17 = reactModule.useCallback(function() --[[ line: 72 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: getFFlagDebugAppChatModule (copy), var16 (ref)
 		if getFFlagDebugAppChatModule() then
-			var16(function(p2) --[[ line: 74 ]]
+			var16(function(p2)
 				return not p2
 			end)
 		end

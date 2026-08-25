@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("WhitelistVerifiedUserId", "")
 
-return function() --[[ line: 13 | named "getFStringWhitelistVerifiedUserId" ]]
+return function()
 	return game:GetFastString("WhitelistVerifiedUserId")
 end

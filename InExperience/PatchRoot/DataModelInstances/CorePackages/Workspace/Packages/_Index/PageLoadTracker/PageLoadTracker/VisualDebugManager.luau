@@ -3,11 +3,11 @@ local pageLoadConfigModule = require(script.Parent.PageLoadConfig)
 local t = {}
 t.__index = t
 
-local function getRandomHighlightColor() --[[ line: 8 ]]
+local function getRandomHighlightColor()
 	return Color3.new(math.random() * 0.6 + 0.4, math.random() * 0.6 + 0.4, math.random() * 0.6 + 0.4)
 end
 
-function t.new() --[[ line: 15 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { originalProperties = {} }
 	setmetatable(t_1, t)
@@ -15,7 +15,7 @@ function t.new() --[[ line: 15 ]]
 	return t_1
 end
 
-function t:highlightComponent(p0) --[[ line: 30 ]]
+function t:highlightComponent(p0)
 	-- upvalues: pageLoadConfigModule (ref), getRandomHighlightColor (ref), tweenService (ref)
 	if self.originalProperties[p0] then return end
 	if p0.BackgroundColor3 == pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_COLOR then return end
@@ -37,7 +37,7 @@ function t:highlightComponent(p0) --[[ line: 30 ]]
 	end
 	p0.BorderColor3 = pageLoadConfigModule.VISUAL_DEBUG.BORDER_COLOR
 	p0.BorderSizePixel = math.max(pageLoadConfigModule.VISUAL_DEBUG.MIN_BORDER_SIZE, borderSizePixel)
-	task.delay(pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_DURATION, function() --[[ line: 61 ]]
+	task.delay(pageLoadConfigModule.VISUAL_DEBUG.HIGHLIGHT_DURATION, function()
 		-- upvalues: p0 (ref), self (ref), pageLoadConfigModule (copy), tweenService (copy)
 		if p0.Parent and self.originalProperties[p0] then
 			local var5 = self.originalProperties[p0]
@@ -46,7 +46,7 @@ function t:highlightComponent(p0) --[[ line: 30 ]]
 				BackgroundTransparency = var5.backgroundTransparency * 0.9,
 				BorderSizePixel = var5.borderSize
 			})
-			var6.Completed:Connect(function() --[[ line: 76 ]]
+			var6.Completed:Connect(function()
 				-- upvalues: self (copy), p0 (copy)
 				self.originalProperties[p0] = nil
 			end)
@@ -55,7 +55,7 @@ function t:highlightComponent(p0) --[[ line: 30 ]]
 	end)
 end
 
-function t:clearAllHighlights() --[[ line: 85 ]]
+function t:clearAllHighlights()
 	for i, v in self.originalProperties do
 		if i.Parent then
 			i.BackgroundColor3 = v.backgroundColor
@@ -67,7 +67,7 @@ function t:clearAllHighlights() --[[ line: 85 ]]
 	self.originalProperties = {}
 end
 
-function t:destroy() --[[ line: 97 ]]
+function t:destroy()
 	self:clearAllHighlights()
 end
 

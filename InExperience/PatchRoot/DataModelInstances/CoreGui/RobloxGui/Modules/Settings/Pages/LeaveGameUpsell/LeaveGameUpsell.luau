@@ -40,7 +40,7 @@ local _ = {
 	CompletedAndClosed = "CompletedAndClosed"
 }
 local _ = nil
-local var13 = (function() --[[ line: 65 | named "Initialize" ]]
+local var13 = (function()
 	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), constantsModule_1 (ref), useStyle (ref), useLocalization (ref), constantsModule (ref), useAppPolicy (ref), reactModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), getFFlagAddMorePhoneUpsellEvents (ref), getPlatformTarget (ref), eventStreamConstants (ref), phoneUpsellController (ref), default (ref), getFFlagDisablePVUpsellDataConsent (ref), phoneLegalDisclaimer (ref), constants (ref), useRoactService (ref), roactNetworking (ref), useInputType (ref), inputTypeConstants (ref), guiService (ref), contextActionService (ref), postPhoneUpsellDisplayed (ref), useEventConnection (ref), buttonStack (ref), leaveGameModule (ref), inExperienceProviderContainer (ref), roactModule (ref)
 	local leaveGameUpsellPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	leaveGameUpsellPage.playsessionid = ""
@@ -48,7 +48,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		leaveGameUpsellPage.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function leaveGameUpsellPage.DontLeaveFunc(p0) --[[ line: 74 ]]
+	function leaveGameUpsellPage.DontLeaveFunc(p0)
 		-- upvalues: leaveGameUpsellPage (ref), rbxAnalyticsService (copy), constantsModule_1 (copy)
 		if leaveGameUpsellPage.HubRef then
 			leaveGameUpsellPage.HubRef:PopMenu(p0, true)
@@ -61,14 +61,14 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 		})
 	end
 	
-	function leaveGameUpsellPage.DontLeaveFromHotkey(_, p1, p2) --[[ line: 91 ]]
+	function leaveGameUpsellPage.DontLeaveFromHotkey(_, p1, p2)
 		-- upvalues: leaveGameUpsellPage (ref)
 		if p1 == Enum.UserInputState.Begin then
 			leaveGameUpsellPage.DontLeaveFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
 		end
 	end
 	
-	function leaveGameUpsellPage.DontLeaveFromButton(p3) --[[ line: 101 ]]
+	function leaveGameUpsellPage.DontLeaveFromButton(p3)
 		-- upvalues: leaveGameUpsellPage (ref)
 		leaveGameUpsellPage.DontLeaveFunc(p3)
 	end
@@ -79,7 +79,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 	leaveGameUpsellPage.ShouldShowHubBar = false
 	leaveGameUpsellPage.DisableTopPadding = true
 	
-	function leaveGameUpsellPage.UpsellComponent(p4) --[[ line: 114 ]]
+	function leaveGameUpsellPage.UpsellComponent(p4)
 		-- upvalues: leaveGameUpsellPage (ref), useStyle (copy), useLocalization (copy), constantsModule (copy), useAppPolicy (copy), reactModule (copy), styledTextLabel (copy), button (copy), buttonType (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), eventStreamConstants (copy), phoneUpsellController (copy), default (copy), getFFlagDisablePVUpsellDataConsent (copy), phoneLegalDisclaimer (copy), constants (copy)
 		local upsellType = leaveGameUpsellPage.upsellType
 		local var15 = useStyle()
@@ -93,7 +93,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 			bodyKey = if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then "Feature.VerificationUpsell.Description.UnlockVoiceChatBody" else "Feature.VerificationUpsell.Description.RecoverAccountEasily"
 		})
 		var16.voiceDisclaimer = var16.voiceDisclaimer:gsub("{buttonText}", var16.button)
-		local var17 = useAppPolicy(function(p5) --[[ line: 131 ]]
+		local var17 = useAppPolicy(function(p5)
 			-- upvalues: upsellType (ref), constantsModule (copy)
 			return upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat and p5.RequireExplicitVoiceConsent()
 		end)
@@ -131,7 +131,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 				buttonType = buttonType.Secondary,
 				size = UDim2.new(1, 0, 0, var15.Tokens.Size.Size_1200),
 				text = var16.button,
-				onActivated = function() --[[ line: 169 ]]
+				onActivated = function()
 					-- upvalues: leaveGameUpsellPage (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p4 (ref), eventStreamConstants (copy), phoneUpsellController (copy), default (copy), upsellType (ref), constantsModule (copy)
 					leaveGameUpsellPage.HubRef:SetVisibility(false, true)
 					
@@ -145,14 +145,14 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 					phoneUpsellController.openPhoneUpsell({
 						eventContext = "verificationUpsell",
 						origin = p4.origin,
-						onSuccessBeforeToast = function() --[[ line: 181 ]]
+						onSuccessBeforeToast = function()
 							-- upvalues: default (copy), p4 (copy), leaveGameUpsellPage (copy)
 							default:DisablePhoneVerificationUpsell()
 							p4.onUpsellComplete()
 							leaveGameUpsellPage.HubRef:SetVisibility(true, false)
 							leaveGameUpsellPage.HubRef:SwitchToPage(leaveGameUpsellPage.HubRef.LeaveGameUpsellPage, true)
 						end,
-						onSuccess = function() --[[ line: 187 ]]
+						onSuccess = function()
 							-- upvalues: upsellType (copy), constantsModule (copy), default (copy), p4 (copy)
 							if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
 								default:EnableVoice()
@@ -172,11 +172,11 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 				showLegalText = upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat,
 				showLegalTextCheckbox = var17,
 				legalTextChecked = var18,
-				setLegalTextChecked = function() --[[ line: 208 ]]
+				setLegalTextChecked = function()
 					-- upvalues: var19 (ref), var18 (ref)
 					var19(not var18)
 				end,
-				onTermsOfUseClick = function() --[[ line: 211 ]]
+				onTermsOfUseClick = function()
 					-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p4 (ref), constants (copy)
 					if getFFlagAddMorePhoneUpsellEvents() then
 						rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
@@ -187,7 +187,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 					end
 					p4.showWebpage(constants.TERMS_OF_SERVICE_URL)
 				end,
-				onPrivacyPolicyClick = function() --[[ line: 222 ]]
+				onPrivacyPolicyClick = function()
 					-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p4 (ref), constants (copy)
 					if getFFlagAddMorePhoneUpsellEvents() then
 						rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
@@ -202,7 +202,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 		})
 	end
 	
-	function leaveGameUpsellPage.LeaveGameComponent(p6) --[[ line: 239 ]]
+	function leaveGameUpsellPage.LeaveGameComponent(p6)
 		-- upvalues: useStyle (copy), useLocalization (copy), reactModule (copy), leaveGameUpsellPage (ref), constantsModule (copy), getFFlagAddMorePhoneUpsellEvents (copy), useRoactService (copy), roactNetworking (copy), useInputType (copy), inputTypeConstants (copy), guiService (copy), contextActionService (copy), postPhoneUpsellDisplayed (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), eventStreamConstants (copy), useEventConnection (copy), robloxGui (copy), buttonStack (copy), buttonType (copy), default (copy), leaveGameModule (copy)
 		local var20 = useStyle()
 		local var21 = useLocalization({
@@ -220,7 +220,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 		local var30 = useRoactService(roactNetworking)
 		local var31 = useInputType()
 		
-		local var32 = function() --[[ line: 296 ]]
+		local var32 = function()
 			-- upvalues: contextActionService (copy), incomplete (ref), incomplete_1 (ref)
 			contextActionService:UnbindCoreAction("LeaveGameCancelAction")
 			
@@ -229,7 +229,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 			end
 		end
 		
-		useEventConnection(leaveGameUpsellPage.Displayed.Event, function() --[[ line: 262 ]]
+		useEventConnection(leaveGameUpsellPage.Displayed.Event, function()
 			-- upvalues: var31 (ref), inputTypeConstants (copy), guiService (copy), var27 (ref), contextActionService (copy), leaveGameUpsellPage (copy), postPhoneUpsellDisplayed (copy), var30 (ref), constantsModule (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p6 (ref), eventStreamConstants (copy)
 			if var31 ~= inputTypeConstants.Touch then
 				guiService.SelectedCoreObject = var27.current
@@ -237,7 +237,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 			contextActionService:BindCoreAction("LeaveGameCancelAction", leaveGameUpsellPage.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 			
 			if not leaveGameUpsellPage.postSent then
-				postPhoneUpsellDisplayed(var30, constantsModule.EXIT_CONFIRMATION_PHONE_UPSELL_IXP_LAYER, os.time(), true, true):catch(function(_) --[[ line: 281 ]] end)
+				postPhoneUpsellDisplayed(var30, constantsModule.EXIT_CONFIRMATION_PHONE_UPSELL_IXP_LAYER, os.time(), true, true):catch(function(_) end)
 				
 				if getFFlagAddMorePhoneUpsellEvents() then
 					rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
@@ -282,7 +282,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 							props = {
 								layoutOrder = 1,
 								text = var21.confirmLeave,
-								onActivated = function() --[[ line: 340 ]]
+								onActivated = function()
 									-- upvalues: var28 (ref), incomplete (ref), upsellType (ref), constantsModule (copy), default (copy), var29 (ref), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), var25 (ref), var26 (ref), leaveGameModule (copy)
 									if not var28 and (incomplete == "Completed" or incomplete == "CompletedAndClosed") and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
 										default:EnableVoice()
@@ -301,7 +301,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 							props = {
 								layoutOrder = 2,
 								text = if incomplete == "Completed" and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then var21.returnWithVoice else var21.dontLeave,
-								onActivated = function() --[[ line: 371 ]]
+								onActivated = function()
 									-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), incomplete (ref), upsellType (ref), constantsModule (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), var25 (ref), var26 (ref), eventStreamConstants (copy), leaveGameUpsellPage (copy)
 									if getFFlagAddMorePhoneUpsellEvents() then
 										if incomplete == "Completed" and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
@@ -345,7 +345,7 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 					origin = var25,
 					section = var26,
 					showWebpage = p6.showWebpage,
-					onUpsellComplete = function() --[[ line: 430 ]]
+					onUpsellComplete = function()
 						-- upvalues: incomplete_1 (ref)
 						incomplete_1("Completed")
 					end,
@@ -355,20 +355,20 @@ local var13 = (function() --[[ line: 65 | named "Initialize" ]]
 		})
 	end
 	
-	leaveGameUpsellPage.handle = roactModule.mount(reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(leaveGameUpsellPage.LeaveGameComponent, { showWebpage = function() --[[ line: 443 ]] end }, {})), leaveGameUpsellPage.Page, "LeaveGameUpsell")
+	leaveGameUpsellPage.handle = roactModule.mount(reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(leaveGameUpsellPage.LeaveGameComponent, { showWebpage = function() end }, {})), leaveGameUpsellPage.Page, "LeaveGameUpsell")
 	leaveGameUpsellPage.Page.Size = UDim2.new(1, 0, 0, 0)
 	leaveGameUpsellPage.Page.AutomaticSize = Enum.AutomaticSize.Y
 	
 	return leaveGameUpsellPage
 end)()
 
-function var13.SetUpsellProp(value, p7) --[[ line: 457 ]]
+function var13.SetUpsellProp(value, p7)
 	-- upvalues: constantsModule (ref), roactModule (ref), reactModule (ref), inExperienceProviderContainer (ref)
 	if p7 == constantsModule.PHONE_UPSELL_VALUE_PROP.None then
 		return
 	end
 	value.upsellType = p7
-	value.handle = roactModule.update(value.handle, reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(value.LeaveGameComponent, { showWebpage = function() --[[ line: 470 ]] end }, {})))
+	value.handle = roactModule.update(value.handle, reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(value.LeaveGameComponent, { showWebpage = function() end }, {})))
 end
 
 return var13

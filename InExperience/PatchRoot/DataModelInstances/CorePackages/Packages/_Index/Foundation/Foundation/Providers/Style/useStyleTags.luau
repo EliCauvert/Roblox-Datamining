@@ -5,11 +5,11 @@ local tagsContextModule = require(parent.TagsContext)
 local getFormattedTagsModule = require(foundation.Utility.getFormattedTags)
 local _ = require(foundation.Components.Types)
 
-return function(p0) --[[ line: 12 | named "useStyleTags" ]]
+return function(p0)
 	-- upvalues: getFormattedTagsModule (ref), reactModule (ref), tagsContextModule (ref)
 	local var4 = getFormattedTagsModule(p0)
 	local var5 = reactModule.useContext(tagsContextModule)
-	reactModule.useLayoutEffect(function() --[[ line: 16 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var4 (ref), var5 (ref)
 		if var4 ~= nil then
 			var5(string.split(var4, " "))

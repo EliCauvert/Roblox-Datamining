@@ -5,7 +5,7 @@ local fFlagBuildExperienceSinglePlaytestCardModule = require(buildExperience.Fla
 local chatTurnBlockModule = require(script.Parent.ChatTurnBlock)
 local chatUserMessageModule = require(script.Parent.ChatUserMessage)
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "ChatMessageItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), chatUserMessageModule (ref), chatTurnBlockModule (ref)
 	local message = p0.message
 	
@@ -17,7 +17,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "ChatMessageItem" ]]
 		onPlaytest = p0.onPlaytest,
 		isPlaytestLoading = p0.isPlaytestLoading
 	})
-end, function(p1, p2) --[[ line: 44 | named "arePropsEqual" ]]
+end, function(p1, p2)
 	-- upvalues: fFlagBuildExperienceSinglePlaytestCardModule (ref)
 	local message = p1.message
 	local message_1 = p2.message

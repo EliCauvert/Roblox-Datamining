@@ -70,11 +70,11 @@ local t = {
 }
 local bindableEvent = Instance.new("BindableEvent")
 local tbl = setmetatable({}, {
-	__index = function(_, p0) --[[ line: 107 ]]
+	__index = function(_, p0)
 		-- upvalues: t (ref)
 		return t[p0]
 	end,
-	__newindex = function(_, p1, p2) --[[ line: 110 ]]
+	__newindex = function(_, p1, p2)
 		-- upvalues: t (ref), bindableEvent (ref)
 		t[p1] = p2
 		bindableEvent:Fire(p1, p2)

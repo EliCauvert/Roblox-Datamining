@@ -5,13 +5,13 @@ local inspect = require(parent.LuauPolyfill).util.inspect
 local _ = require(parent.Shared)
 local REACT_LAZY_TYPE = require(parent.Shared).ReactSymbols.REACT_LAZY_TYPE
 
-function lazyInitializer(p0) --[[ line: 73 ]]
+function lazyInitializer(p0)
 	-- upvalues: reactGlobalsModule (ref), console (ref), inspect (ref)
 	if p0._status == -1 then
 		local var1 = p0._result()
 		p0._status = 0
 		p0._result = var1
-		var1:andThen(function(p1) --[[ line: 81 ]]
+		var1:andThen(function(p1)
 			-- upvalues: p0 (ref), reactGlobalsModule (copy), console (copy), inspect (copy)
 			if p0._status == 0 then
 				local default = p1.default
@@ -23,7 +23,7 @@ function lazyInitializer(p0) --[[ line: 73 ]]
 				var2._status = 1
 				var2._result = default
 			end
-		end, function(p2) --[[ line: 102 ]]
+		end, function(p2)
 			-- upvalues: p0 (ref)
 			if p0._status == 0 then
 				local var3 = p0
@@ -39,7 +39,7 @@ function lazyInitializer(p0) --[[ line: 73 ]]
 end
 
 return {
-	lazy = function(p3) --[[ line: 128 ]]
+	lazy = function(p3)
 		-- upvalues: REACT_LAZY_TYPE (ref), reactGlobalsModule (ref), console (ref)
 		local t = {
 			["$$typeof"] = REACT_LAZY_TYPE,
@@ -51,7 +51,7 @@ return {
 			local var5 = nil
 			local var6 = nil
 			setmetatable(t, {
-				__index = function(_, p4) --[[ line: 150 ]]
+				__index = function(_, p4)
 					-- upvalues: var5 (write), var6 (write)
 					if p4 == "defaultProps" then
 						return var5
@@ -59,22 +59,22 @@ return {
 						return var6
 					end
 				end,
-				__newindex = function(p5, p6, p7) --[[ line: 159 ]]
+				__newindex = function(p5, p6, p7)
 					-- upvalues: console (copy), var5 (write), var6 (write)
 					if p6 == "defaultProps" then
 						console.error("React.lazy(...): It is not supported to assign `defaultProps` to a lazy component import. Either specify them where the component is defined, or create a wrapping component around it.")
 						var5 = p7
 						setmetatable(p5, {
-							__index = function() --[[ line: 170 ]] end,
-							__newindex = function() --[[ line: 171 ]] end
+							__index = function() end,
+							__newindex = function() end
 						})
 					end
 					if p6 == "propTypes" then
 						console.error("React.lazy(...): It is not supported to assign `propTypes` to a lazy component import. Either specify them where the component is defined, or create a wrapping component around it.")
 						var6 = p7
 						setmetatable(p5, {
-							__index = function() --[[ line: 184 ]] end,
-							__newindex = function() --[[ line: 185 ]] end
+							__index = function() end,
+							__newindex = function() end
 						})
 					end
 				end

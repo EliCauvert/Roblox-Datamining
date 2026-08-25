@@ -9,16 +9,16 @@ local t = {
 	flyout_menu = "flyout_menu"
 }
 
-local function _(p0) --[[ line: 104 | named "normalizeViewSource" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	return t[p0] or "unknown"
 end
 
-local function normalizeRequestFailureReason(p1) --[[ line: 108 ]]
+local function normalizeRequestFailureReason(p1)
 	return if p1 == nil or p1 == "" then "unknown" elseif p1 == "requestFailed" or p1 == "malformedResponse" then p1 else "unknown"
 end
 
-local function normalizeMediaFailureReason(p2) --[[ line: 115 ]]
+local function normalizeMediaFailureReason(p2)
 	return if p2 == nil or p2 == "" then "unknown" elseif string.find(p2, "video load errored:", 1, true) == 1 then "videoLoadErrored" elseif string.find(p2, "video load failed:", 1, true) == 1 then "videoLoadFailed" elseif string.find(p2, "screenshot load failed:", 1, true) == 1 then "screenshotLoadFailed" else "unknown"
 end
 
@@ -30,7 +30,7 @@ local t_1 = {
 	report = "report"
 }
 
-local _ = function(p3) --[[ line: 137 | named "normalizeEngagementAction" ]]
+local _ = function(p3)
 	-- upvalues: t_1 (ref)
 	return t_1[p3] or "unknown"
 end
@@ -42,12 +42,12 @@ local t_2 = {
 	upload = "upload"
 }
 
-local _ = function(p4) --[[ line: 148 | named "normalizeCreationStep" ]]
+local _ = function(p4)
 	-- upvalues: t_2 (ref)
 	return t_2[p4] or "unknown"
 end
 
-local _ = function(p5) --[[ line: 152 | named "normalizeCreationStatus" ]]
+local _ = function(p5)
 	return if p5 == "success" or p5 == "failed" then p5 else "unknown"
 end
 
@@ -58,7 +58,7 @@ local t_3 = {
 	deleted = "deleted"
 }
 
-local _ = function(p6) --[[ line: 163 | named "normalizeFilterReason" ]]
+local _ = function(p6)
 	-- upvalues: t_3 (ref)
 	return t_3[p6] or "unknown"
 end
@@ -71,7 +71,7 @@ local t_4 = {
 	description = "description"
 }
 
-local _ = function(p7) --[[ line: 175 | named "normalizePublishedEditType" ]]
+local _ = function(p7)
 	-- upvalues: t_4 (ref)
 	return t_4[p7] or "unknown"
 end
@@ -84,20 +84,20 @@ local t_5 = {
 	generateText = "generateText"
 }
 
-local _ = function(p8) --[[ line: 187 | named "normalizeEditTool" ]]
+local _ = function(p8)
 	-- upvalues: t_5 (ref)
 	return t_5[p8] or "unknown"
 end
 
-local _ = function(p9) --[[ line: 191 | named "normalizeCaptureType" ]]
+local _ = function(p9)
 	return if p9 == "screenshot" or p9 == "video" then p9 else "unknown"
 end
 
-local _ = function(p10) --[[ line: 195 | named "normalizeGenerateTextStatus" ]]
+local _ = function(p10)
 	return if p10 == "succeeded" or p10 == "failed" or p10 == "filtered" then p10 else "unknown"
 end
 
-local _ = function(p11, p12) --[[ line: 199 | named "formatFeedOperationInfo" ]]
+local _ = function(p11, p12)
 	local t = { status = p11.status, feedType = p11.feedType }
 	
 	if p11.status == "failed" then
@@ -116,7 +116,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p13) --[[ line: 220 ]]
+				format = function(p13)
 					return { feedType = p13.feedType }
 				end
 			}
@@ -131,7 +131,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p14) --[[ line: 237 ]]
+				format = function(p14)
 					local t = { status = p14.status, feedType = p14.feedType }
 					
 					if p14.status == "failed" then
@@ -152,7 +152,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p15) --[[ line: 259 ]]
+				format = function(p15)
 					-- upvalues: normalizeRequestFailureReason (ref)
 					local t = { status = p15.status, feedType = p15.feedType }
 					
@@ -174,7 +174,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p16) --[[ line: 274 ]]
+				format = function(p16)
 					-- upvalues: normalizeMediaFailureReason (ref)
 					local t = { status = p16.status, feedType = p16.feedType }
 					
@@ -195,7 +195,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p17) --[[ line: 289 ]]
+				format = function(p17)
 					return { reason = p17.reason }
 				end
 			}
@@ -210,7 +210,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p18) --[[ line: 304 ]]
+				format = function(p18)
 					-- upvalues: t (ref)
 					return { source = t[p18.source] or "unknown" }
 				end
@@ -226,7 +226,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p19) --[[ line: 321 ]]
+				format = function(p19)
 					-- upvalues: t (ref)
 					return { source = t[p19.source] or "unknown" }
 				end
@@ -242,7 +242,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p20) --[[ line: 338 ]]
+				format = function(p20)
 					-- upvalues: t (ref)
 					return { source = t[p20.source] or "unknown" }
 				end
@@ -258,7 +258,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p21) --[[ line: 355 ]]
+				format = function(p21)
 					-- upvalues: t (ref)
 					return { source = t[p21.source] or "unknown" }
 				end
@@ -274,7 +274,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p22) --[[ line: 372 ]]
+				format = function(p22)
 					-- upvalues: t_1 (ref)
 					return { action = t_1[p22.action] or "unknown" }
 				end
@@ -290,7 +290,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p23) --[[ line: 389 ]]
+				format = function(p23)
 					-- upvalues: t_2 (ref)
 					local t = { step = t_2[p23.step] or "unknown" }
 					
@@ -312,7 +312,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p24) --[[ line: 410 ]]
+				format = function(p24)
 					return { feedType = p24.feedType }
 				end
 			}
@@ -327,7 +327,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p25) --[[ line: 427 ]]
+				format = function(p25)
 					-- upvalues: t_3 (ref)
 					return {
 						reason = t_3[p25.reason] or "unknown",
@@ -346,7 +346,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p26) --[[ line: 445 ]]
+				format = function(p26)
 					-- upvalues: t_4 (ref)
 					return { editType = t_4[p26.editType] or "unknown" }
 				end
@@ -362,7 +362,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p27) --[[ line: 462 ]]
+				format = function(p27)
 					return { bucket = p27.bucket }
 				end
 			}
@@ -377,7 +377,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p28) --[[ line: 479 ]]
+				format = function(p28)
 					local t = {}
 					local captureType = p28.captureType
 					t.captureType = if captureType == "screenshot" or captureType == "video" then captureType else "unknown"
@@ -396,7 +396,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p29) --[[ line: 496 ]]
+				format = function(p29)
 					-- upvalues: t_5 (ref)
 					return { tool = t_5[p29.tool] or "unknown" }
 				end
@@ -412,7 +412,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p30) --[[ line: 513 ]]
+				format = function(p30)
 					-- upvalues: t_5 (ref)
 					return { tool = t_5[p30.tool] or "unknown" }
 				end
@@ -428,7 +428,7 @@ return {
 			{
 				incrementValue = 1,
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p31) --[[ line: 530 ]]
+				format = function(p31)
 					local t = {}
 					local status = p31.status
 					t.status = if status == "succeeded" or status == "failed" or status == "filtered" then status else "unknown"

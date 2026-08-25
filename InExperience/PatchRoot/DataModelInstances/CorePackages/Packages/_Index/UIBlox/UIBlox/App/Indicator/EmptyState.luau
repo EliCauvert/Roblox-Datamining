@@ -46,15 +46,15 @@ emptyState.defaultProps = {
 	iconSize = UDim2.fromOffset(getIconSizeModule(iconSizeModule.XLarge), getIconSizeModule(iconSizeModule.XLarge))
 }
 
-local function _(p0) --[[ line: 73 | named "getCorrectedIconValue" ]]
+local function _(p0)
 	return if p0 == "" then nil else p0
 end
 
-function emptyState.init(p1) --[[ line: 77 ]]
+function emptyState.init(p1)
 	-- upvalues: roactModule (ref)
 	p1:setState({ absoluteSize = Vector2.new(0, 0) })
 	
-	function p1.onAbsoluteSizeChange(p2) --[[ line: 81 ]]
+	function p1.onAbsoluteSizeChange(p2)
 		-- upvalues: p1 (ref)
 		p1:setState({ absoluteSize = p2.AbsoluteSize })
 	end
@@ -62,9 +62,9 @@ function emptyState.init(p1) --[[ line: 77 ]]
 	p1.buttonRef = roactModule.createRef()
 end
 
-function emptyState.render(p3) --[[ line: 90 ]]
+function emptyState.render(p3)
 	-- upvalues: withStyleModule (ref), roactModule (ref), roactGamepadModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref), getPageMarginModule (ref), buttonModule (ref)
-	return withStyleModule(function(p4) --[[ line: 91 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: roactModule (copy), roactGamepadModule (copy), p3 (ref), imageSetComponentModule (copy), genericTextLabelModule (copy), getPageMarginModule (copy), buttonModule (copy)
 		local createElement = roactModule.createElement
 		local frame = roactGamepadModule.Focusable.Frame
@@ -194,7 +194,7 @@ function emptyState.render(p3) --[[ line: 90 ]]
 	end)
 end
 
-return roactModule.forwardRef(function(p5, p6) --[[ line: 203 ]]
+return roactModule.forwardRef(function(p5, p6)
 	-- upvalues: roactModule (ref), emptyState (ref), cryoModule (ref)
 	return roactModule.createElement(emptyState, cryoModule.Dictionary.join(p5, { frameRef = p6 }))
 end)

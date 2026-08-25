@@ -1,6 +1,6 @@
 ﻿local symbolModule = require(script.Symbol)
 local tbl = setmetatable({}, {
-	__call = function(_, p0) --[[ line: 29 ]]
+	__call = function(_, p0)
 		-- upvalues: symbolModule (ref)
 		return symbolModule.new(p0)
 	end

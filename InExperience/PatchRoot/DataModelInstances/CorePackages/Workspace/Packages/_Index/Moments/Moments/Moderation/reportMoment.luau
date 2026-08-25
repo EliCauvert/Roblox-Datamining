@@ -6,7 +6,7 @@ local text = httpModule.Url.APIS_URL .. "content-captures-api/v1/moderate/report
 local fFlagMomentsIPReporting = sharedFlagsModule.FFlagMomentsIPReporting
 local fFlagMomentsReportWithFeedId = sharedFlagsModule.FFlagMomentsReportWithFeedId
 
-return function(p0, p1, p2) --[[ line: 25 | named "reportMoment" ]]
+return function(p0, p1, p2)
 	-- upvalues: httpClientModule (ref), text (ref), fFlagMomentsReportWithFeedId (ref), fFlagMomentsIPReporting (ref)
 	return httpClientModule.asPromise(httpClientModule.fetch({
 		method = "POST",
@@ -18,7 +18,7 @@ return function(p0, p1, p2) --[[ line: 25 | named "reportMoment" ]]
 			reportType = if fFlagMomentsIPReporting then p1 else nil
 		},
 		network = p2,
-		decode = function(p3) --[[ line: 37 ]]
+		decode = function(p3)
 			-- upvalues: fFlagMomentsIPReporting (copy)
 			return {
 				ok = true,

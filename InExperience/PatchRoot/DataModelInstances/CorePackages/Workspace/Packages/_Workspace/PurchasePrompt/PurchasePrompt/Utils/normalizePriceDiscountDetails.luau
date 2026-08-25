@@ -7,7 +7,7 @@ local t = {
 	[discountType.RobloxPlusSubscription] = true
 }
 
-local function isValidRawDiscount(p0) --[[ line: 16 ]]
+local function isValidRawDiscount(p0)
 	-- upvalues: fFlagNormalizePriceDiscountAcceptLowercaseModule (ref)
 	if type(p0) ~= "table" then
 		return false
@@ -29,7 +29,7 @@ local function isValidRawDiscount(p0) --[[ line: 16 ]]
 	end
 end
 
-return function(p1) --[[ line: 50 | named "normalizePriceDiscountDetails" ]]
+return function(p1)
 	-- upvalues: isValidRawDiscount (ref), fFlagNormalizePriceDiscountAcceptLowercaseModule (ref), t (ref), discountType (ref), fFlagPurchasePromptCartPricingEnabledModule (ref)
 	if type(p1) ~= "table" or #p1 == 0 then
 		return {}

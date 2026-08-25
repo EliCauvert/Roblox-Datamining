@@ -2,8 +2,8 @@
 local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 
-local function pascalToKebab(p0) --[[ line: 10 ]]
-	local replaced = string.gsub(p0:gsub("_", "-"), "(%u)", function(p1) --[[ line: 15 ]]
+local function pascalToKebab(p0)
+	local replaced = string.gsub(p0:gsub("_", "-"), "(%u)", function(p1)
 		return "-" .. p1:lower()
 	end)
 	
@@ -13,7 +13,7 @@ local function pascalToKebab(p0) --[[ line: 10 ]]
 	return replaced
 end
 
-return function(p2) --[[ line: 28 | named "formatTokens" ]]
+return function(p2)
 	-- upvalues: pascalToKebab (ref), colorScopeKeepPrefixModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -63,21 +63,21 @@ return function(p2) --[[ line: 28 | named "formatTokens" ]]
 		table.insert(t_2, { name = pascalToKebab(i_2), size = v_2 })
 	end
 	table.insert(t_2, { name = "none", size = 0 })
-	table.sort(t_2, function(p3, p4) --[[ line: 86 ]]
+	table.sort(t_2, function(p3, p4)
 		return p3.size < p4.size
 	end)
 	
 	for i_3, v_3 in pairs(p2.Gap) do
 		table.insert(t_3, { name = string.lower(i_3), size = UDim.new(0, v_3) })
 	end
-	table.sort(t_3, function(p5, p6) --[[ line: 94 ]]
+	table.sort(t_3, function(p5, p6)
 		return p5.size.Offset < p6.size.Offset
 	end)
 	
 	for i_4, v_4 in pairs(p2.Radius) do
 		table.insert(t_4, { name = string.lower(i_4), size = UDim.new(0, v_4) })
 	end
-	table.sort(t_4, function(p7, p8) --[[ line: 102 ]]
+	table.sort(t_4, function(p7, p8)
 		return p7.size.Offset < p8.size.Offset
 	end)
 	
@@ -88,7 +88,7 @@ return function(p2) --[[ line: 28 | named "formatTokens" ]]
 		})
 	end
 	table.insert(t_5, { name = "full", size = UDim.new(1, 0) })
-	table.sort(t_5, function(p9, p10) --[[ line: 114 ]]
+	table.sort(t_5, function(p9, p10)
 		return p9.size.Offset < p10.size.Offset
 	end)
 	
@@ -102,21 +102,21 @@ return function(p2) --[[ line: 28 | named "formatTokens" ]]
 	for i_7, v_7 in pairs(p2.Padding) do
 		table.insert(t_7, { name = string.lower(i_7), size = UDim.new(0, v_7) })
 	end
-	table.sort(t_7, function(p11, p12) --[[ line: 130 ]]
+	table.sort(t_7, function(p11, p12)
 		return p11.size.Offset < p12.size.Offset
 	end)
 	
 	for i_8, v_8 in pairs(p2.Margin) do
 		table.insert(t_8, { name = string.lower(i_8), size = UDim.new(0, v_8) })
 	end
-	table.sort(t_8, function(p13, p14) --[[ line: 138 ]]
+	table.sort(t_8, function(p13, p14)
 		return p13.size.Offset < p14.size.Offset
 	end)
 	
 	for i_9, v_9 in pairs(p2.Gutter) do
 		table.insert(t_9, { name = string.lower(i_9), size = UDim.new(0, v_9) })
 	end
-	table.sort(t_9, function(p15, p16) --[[ line: 146 ]]
+	table.sort(t_9, function(p15, p16)
 		return p15.size.Offset < p16.size.Offset
 	end)
 	

@@ -12,7 +12,7 @@ local supportPaneMode = appSplitViewModule.Enums.SupportPaneMode
 local splitPaneSlot = appSplitViewModule.Enums.SplitPaneSlot
 local tempRnSwitchNavigatorName = constants.TempRnSwitchNavigatorName
 
-return function(p0, p1) --[[ line: 26 | named "useSplitLayoutStatus" ]]
+return function(p0, p1)
 	-- upvalues: splitPaneStoreModule (ref), signalsReactModule (ref), computeSplitEligibilityModule (ref), reactModule (ref), splitPaneContextModule (ref), tempRnSwitchNavigatorName (ref), splitPaneSlot (ref), viewState (ref), roactNavigationModule (ref), supportPaneMode (ref)
 	local options
 	local store = splitPaneStoreModule.getStore()
@@ -47,7 +47,7 @@ return function(p0, p1) --[[ line: 26 | named "useSplitLayoutStatus" ]]
 	end
 	local var16 = var14 ~= nil and #t > 0
 	options = var15 or (var16 or var9_1 and (var11 and p1 >= 1))
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), store (ref), var9 (ref), p0 (ref), splitPaneSlot (copy), roactNavigationModule (copy)
 		if not var12 then return end
 		local isSplitEligible = store.getIsSplitEligible(false)
@@ -75,7 +75,7 @@ return function(p0, p1) --[[ line: 26 | named "useSplitLayoutStatus" ]]
 			end
 		end
 	end, { var12, var9, p0, store })
-	reactModule.useEffect(function() --[[ line: 113 ]]
+	reactModule.useEffect(function()
 		-- upvalues: options (ref), var12 (ref), store (ref), supportPaneMode (copy), p0 (ref), viewState (copy), splitPaneSlot (copy)
 		if options then return end
 		if var12 and store.getSupportPaneMode(false) ~= supportPaneMode.Normal then

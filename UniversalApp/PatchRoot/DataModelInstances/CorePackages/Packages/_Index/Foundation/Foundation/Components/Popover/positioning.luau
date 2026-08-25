@@ -3,13 +3,13 @@ local popoverAlignModule = require(foundation.Enums.PopoverAlign)
 local popoverSideModule = require(foundation.Enums.PopoverSide)
 
 return {
-	adjustForOnScreenKeyboard = function(p0, p1, p2) --[[ line: 93 ]]
+	adjustForOnScreenKeyboard = function(p0, p1, p2)
 		return Rect.new(p0.Min, Vector2.new(p0.Max.X, math.min(p0.Max.Y, (p1 - p2).Y)))
 	end,
-	isOnScreen = function(p3, p4) --[[ line: 25 ]]
+	isOnScreen = function(p3, p4)
 		return p4.Max.X < p3.Min.X or p3.Max.X < p4.Min.X or (p4.Max.Y < p3.Min.Y or p3.Max.Y < p4.Min.Y)
 	end,
-	calculateSide = function(p5, p6, p7, p8) --[[ line: 38 ]]
+	calculateSide = function(p5, p6, p7, p8)
 		-- upvalues: popoverSideModule (ref)
 		if p5 == popoverSideModule.Top then
 			if p6.Min.Y - p8.Y < p7.Min.Y and p6.Max.Y + p8.Y < p7.Max.Y then
@@ -27,7 +27,7 @@ return {
 			return if p5 == popoverSideModule.Right and p7.Max.X < p6.Max.X + p8.X and p7.Min.X < p6.Min.X - p8.X then popoverSideModule.Left else p5
 		end
 	end,
-	calculatePositions = function(p9, p10, p11, p12, p13, p14, p15, p16) --[[ line: 102 ]]
+	calculatePositions = function(p9, p10, p11, p12, p13, p14, p15, p16)
 		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref)
 		local t = { X = 0, Y = 0 }
 		local t_1 = { X = 0, Y = 0 }
@@ -101,7 +101,7 @@ return {
 		
 		return Vector2.new(t.X, t.Y), Vector2.new(t_1.X, t_1.Y), Vector2.new(t_2.X, t_2.Y)
 	end,
-	calculatePopoverBounds = function(p17, p18, p19, p20, p21) --[[ line: 9 ]]
+	calculatePopoverBounds = function(p17, p18, p19, p20, p21)
 		-- upvalues: popoverSideModule (ref)
 		local var17 = p21
 		
@@ -112,7 +112,7 @@ return {
 		end
 		return var17 + Vector2.new(p18 + p20, p19)
 	end,
-	calculateAlign = function(p22, p23, p24, p25, p26) --[[ line: 59 ]]
+	calculateAlign = function(p22, p23, p24, p25, p26)
 		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref)
 		if if p22 ~= popoverSideModule.Top then p22 == popoverSideModule.Bottom else true then
 			if p23 == popoverAlignModule.Start then

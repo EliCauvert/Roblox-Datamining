@@ -7,7 +7,7 @@ local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 
-return function(p0) --[[ line: 36 | named "ChatLineReportVerbatim" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), getMessageTextModule (ref), view (ref), constantsModule (ref), text (ref)
 	local var5, var6 = reactModule.useState(nil)
 	local var7 = getMessageTextModule(p0.selectedMessage.useTranslation, p0.selectedMessage.translation, p0.selectedMessage.text)

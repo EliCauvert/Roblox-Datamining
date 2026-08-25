@@ -31,7 +31,7 @@ local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagM
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
-return function(p0) --[[ line: 73 | named "createCreationController" ]]
+return function(p0)
 	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSAudioOverlayModule (ref), createCapturePreviewControllerModule (ref), createTTSAudioManagerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), getFFlagMomentsCreationSaveDraft (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), fFlagMomentTextGenerationFilteredSignal (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref), getFFlagMomentsGenerateTextInTextOverlayModule (ref)
 	local store = p0.store
 	local host = p0.host or {}
@@ -54,14 +54,14 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		getActiveSession = var21
 		var23 = var22
 		
-		local setActiveSession = function(p1) --[[ line: 102 ]]
+		local setActiveSession = function(p1)
 			-- upvalues: var23 (write)
 			var23(p1)
 		end
 	end
 	local getIsGenerating, setIsGenerating
 	var23, var24 = createSignal(nil)
-	local var25 = createComputed(function(p2) --[[ line: 111 ]]
+	local var25 = createComputed(function(p2)
 		-- upvalues: store (ref), registry (ref)
 		local t = {}
 		
@@ -103,7 +103,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		getActiveGeneration = var28
 		setActiveGeneration = var29
 	end
-	local function _() --[[ line: 158 | named "cancelActiveGeneration" ]]
+	local function _()
 		-- upvalues: getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write)
 		local var55 = getActiveGeneration(false)
 		
@@ -116,7 +116,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 	end
 	
 	local var30, var31 = createSignal(false)
-	local var32 = createComputed(function(p3) --[[ line: 174 ]]
+	local var32 = createComputed(function(p3)
 		-- upvalues: store (ref), host (ref), var25 (ref), registry (ref)
 		local selectedCapture = store.getSelectedCapture(p3)
 		local var57 = if selectedCapture ~= nil then nil else selectedCapture.CaptureType
@@ -134,7 +134,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 		return t_1
 	end)
-	local var33 = createComputed(function(p4) --[[ line: 196 ]]
+	local var33 = createComputed(function(p4)
 		-- upvalues: store (ref), registry (ref)
 		local step = store.getStep(p4)
 		
@@ -145,7 +145,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 		return nil
 	end)
-	local var34 = createComputed(function(p5) --[[ line: 241 ]]
+	local var34 = createComputed(function(p5)
 		-- upvalues: getFFlagMomentsTTSAudioOverlayModule (copy), var33 (ref), getActiveSession (write), var25 (ref)
 		if not getFFlagMomentsTTSAudioOverlayModule then
 			return nil
@@ -159,7 +159,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 			return if var63 == nil or var63.text == nil or var63.text == "" then var25(p5).tts else var63
 		end
 	end)
-	local preview = p0.preview or createCapturePreviewControllerModule(store, createComputed(function(p6) --[[ line: 210 ]]
+	local preview = p0.preview or createCapturePreviewControllerModule(store, createComputed(function(p6)
 		-- upvalues: var33 (ref), getActiveSession (write), var25 (ref)
 		local var64 = var33(p6)
 		
@@ -174,7 +174,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		local trim = var25(p6).trim
 		
 		return if trim == nil or trim.startTime == nil or trim.endTime == nil then nil else { startTime = trim.startTime, endTime = trim.endTime }
-	end), createComputed(function(p7) --[[ line: 229 ]]
+	end), createComputed(function(p7)
 		-- upvalues: var33 (ref), getActiveSession (write), var25 (ref)
 		local var67 = var33(p7)
 		
@@ -197,32 +197,32 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 			store.setTTSAudio(var36)
 		end
 	end
-	local function showModal(p8) --[[ line: 270 ]]
+	local function showModal(p8)
 		-- upvalues: var24 (ref)
 		var24(p8)
 	end
 	
-	local function dismissModal() --[[ line: 274 ]]
+	local function dismissModal()
 		-- upvalues: var24 (ref)
 		var24(nil)
 	end
 	
-	local function dismissVoiceCoachmark() --[[ line: 278 ]]
+	local function dismissVoiceCoachmark()
 		-- upvalues: var31 (ref)
 		var31(true)
 	end
 	
-	local function withCreationSession(p9) --[[ line: 286 ]]
+	local function withCreationSession(p9)
 		-- upvalues: sessionManager (copy), funnelEventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
 		return cryoModule.Dictionary.join(p9, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 	end
 	
-	local function navigate(p10) --[[ line: 291 ]]
+	local function navigate(p10)
 		-- upvalues: store (ref)
 		store.navigate(p10)
 	end
 	
-	local function returnToGallery() --[[ line: 296 ]]
+	local function returnToGallery()
 		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), store (ref), creationFlowStateModule (copy), setActiveSession (write), var36 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref)
 		if getFFlagEnableMomentTextGeneration() then
 			local var70 = getActiveGeneration(false)
@@ -245,7 +245,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 	end
 	
-	local function selectCapture(p11) --[[ line: 318 ]]
+	local function selectCapture(p11)
 		-- upvalues: getActiveGeneration (write), getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (write), setIsGenerating (write), store (ref), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy)
 		local var71 = getActiveGeneration(false)
 		
@@ -269,12 +269,12 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 	end
 	
-	local function setDescription(value) --[[ line: 340 ]]
+	local function setDescription(value)
 		-- upvalues: store (ref)
 		store.updateDescription(value)
 	end
 	
-	local function beginTool(p12) --[[ line: 344 ]]
+	local function beginTool(p12)
 		-- upvalues: registry (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), var20 (write), createEditSessionModule (copy), store (ref), setActiveSession (write)
 		local var73 = registry.get(p12)
 		
@@ -304,7 +304,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 	end
 	
-	local function commitActiveTool() --[[ line: 386 ]]
+	local function commitActiveTool()
 		-- upvalues: getActiveSession (write), var33 (ref), store (ref), creationFlowStateModule (copy), var20 (write), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write)
 		local var75 = getActiveSession(false)
 		local var76 = var33(false)
@@ -326,7 +326,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		store.navigate(creationFlowStateModule.Preview)
 	end
 	
-	local function saveActiveTool() --[[ line: 413 ]]
+	local function saveActiveTool()
 		-- upvalues: getActiveSession (write), var33 (ref), store (ref)
 		local var78 = getActiveSession(false)
 		local var79 = var33(false)
@@ -337,7 +337,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		store.setCommittedEdit(var79.kind, var78.commit())
 	end
 	
-	local function clearActiveTool() --[[ line: 428 ]]
+	local function clearActiveTool()
 		-- upvalues: getActiveSession (write), var33 (ref), var36 (write)
 		local var80 = getActiveSession(false)
 		local var81 = var33(false)
@@ -351,7 +351,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 	end
 	
-	local function discardActiveTool() --[[ line: 442 ]]
+	local function discardActiveTool()
 		-- upvalues: getActiveSession (write), var33 (ref), var36 (write), var25 (ref), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), setActiveSession (write), store (ref), creationFlowStateModule (copy)
 		local var82 = getActiveSession(false)
 		local var83 = var33(false)
@@ -378,12 +378,12 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		store.navigate(creationFlowStateModule.Preview)
 	end
 	
-	local function updateCommittedEdit(p13, p14) --[[ line: 478 ]]
+	local function updateCommittedEdit(p13, p14)
 		-- upvalues: store (ref)
 		store.setCommittedEdit(p13, p14)
 	end
 	
-	local function dismiss() --[[ line: 482 ]]
+	local function dismiss()
 		-- upvalues: getFFlagEnableMomentTextGeneration (copy), getActiveGeneration (write), setActiveGeneration (write), setIsGenerating (write), host (ref), var24 (ref), p0 (ref), creationFlowStateModule (copy), store (ref), var36 (write), getFFlagMomentsCreationSaveDraft (copy), momentsDraftStorageModule (copy)
 		if getFFlagEnableMomentTextGeneration() then
 			local var84 = getActiveGeneration(false)
@@ -412,7 +412,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		end
 	end
 	
-	local function emitGeneratedTextFeedback(p15) --[[ line: 513 ]]
+	local function emitGeneratedTextFeedback(p15)
 		-- upvalues: fFlagMomentTextGenerationFilteredSignal (copy), host (ref), store (ref)
 		if not fFlagMomentTextGenerationFilteredSignal or host.momentGeneratedTextFeedback == nil then return end
 		local generationToken = store.getGenerationToken(false)
@@ -420,7 +420,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		if generationToken == nil or generationToken == "" then
 			return
 		end
-		host.momentGeneratedTextFeedback(generationToken, p15):catch(function() --[[ line: 521 ]] end)
+		host.momentGeneratedTextFeedback(generationToken, p15):catch(function() end)
 	end
 	
 	return {
@@ -442,7 +442,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		clearActiveTool = clearActiveTool,
 		discardActiveTool = discardActiveTool,
 		updateCommittedEdit = updateCommittedEdit,
-		onDisabledToolActivated = function(p16) --[[ line: 791 ]]
+		onDisabledToolActivated = function(p16)
 			-- upvalues: getFFlagEnableMomentTextGeneration (copy), getIsGenerating (write), host (ref)
 			if getFFlagEnableMomentTextGeneration() and p16 == "text" and (getIsGenerating(false) and host.onGenerateTextManualEditBlocked ~= nil) then
 				host.onGenerateTextManualEditBlocked()
@@ -453,7 +453,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 		dismissModal = dismissModal,
 		getVoiceCoachmarkDismissed = var30,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
-		publish = function() --[[ line: 539 ]]
+		publish = function()
 			-- upvalues: store (ref), host (ref), var24 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var25 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
@@ -522,12 +522,12 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 			end
 			dismiss()
 		end,
-		exit = function() --[[ line: 799 ]]
+		exit = function()
 			-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), dismiss (ref)
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowExited, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowExited)))
 			dismiss()
 		end,
-		generateText = function(p17) --[[ line: 649 ]]
+		generateText = function(p17)
 			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (write), var33 (ref)
 			if getIsGenerating(false) then return end
 			if host.generateMomentText == nil then return end
@@ -551,7 +551,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 			elseif getFFlagEnableMomentTextGeneration() then
 				setActiveGeneration({ promise = var96, capture = selectedCapture })
 			end
-			var96:andThen(function(p18) --[[ line: 676 ]]
+			var96:andThen(function(p18)
 				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy), getFFlagMomentsGenerateTextInTextOverlayModule (copy), getActiveSession (copy), var33 (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)
@@ -643,7 +643,7 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 					host.onGenerateTextSuccess()
 				end
 				setIsGenerating(false)
-			end):catch(function() --[[ line: 773 ]]
+			end):catch(function()
 				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)
@@ -660,11 +660,11 @@ return function(p0) --[[ line: 73 | named "createCreationController" ]]
 			end)
 		end,
 		getIsGenerating = getIsGenerating,
-		getCanGenerateText = function(_) --[[ line: 645 ]]
+		getCanGenerateText = function(_)
 			-- upvalues: host (ref)
 			return host.generateMomentText ~= nil
 		end,
-		submitGeneratedTextFeedback = function(p19) --[[ line: 526 ]]
+		submitGeneratedTextFeedback = function(p19)
 			-- upvalues: fFlagMomentTextGenerationFilteredSignal (copy), store (ref), emitGeneratedTextFeedback (ref)
 			if not fFlagMomentTextGenerationFilteredSignal then return end
 			if p19 == "policy_violation" then

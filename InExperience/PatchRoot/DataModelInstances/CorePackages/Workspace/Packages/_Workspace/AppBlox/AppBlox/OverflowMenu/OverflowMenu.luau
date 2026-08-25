@@ -22,14 +22,14 @@ local useOverflowMenuOpenModule = require(appBlox.OverflowMenu.useOverflowMenuOp
 local overflowMenuRemoveCloseMenuChecks = game:DefineFastFlag("OverflowMenuRemoveCloseMenuChecks", false)
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 59 | named "OverflowMenu" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), overflowMenuRemoveCloseMenuChecks (ref), getOverflowMenuSignalStoreModule (ref), useOverflowMenuOpenModule (ref), cryoModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref), iconButton (ref), threeDotsHorizontal (ref), iconSize (ref), buttonVariant (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref)
 	local menuKey = p0.menuKey
 	local var10 = reactModule.useRef(nil)
 	local var11 = if overflowMenuRemoveCloseMenuChecks then nil else reactModule.useRef(nil)
 	local var12 = getOverflowMenuSignalStoreModule()
 	local var13 = useOverflowMenuOpenModule(menuKey)
-	local var14 = reactModule.useCallback(function() --[[ line: 69 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), var12 (ref), menuKey (ref), p0 (ref)
 		var12.toggleMenu(menuKey)
 		
@@ -37,7 +37,7 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "OverflowMenu" ]]
 			p0.onMenuOpenChanged(var13)
 		end
 	end, { menuKey, var12, var13, p0.onMenuOpenChanged })
-	local var15 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: overflowMenuRemoveCloseMenuChecks (copy), var11 (ref), p0 (ref), var12 (ref), menuKey (ref)
 		if overflowMenuRemoveCloseMenuChecks or var11.current == Enum.GuiState.Idle or (not p0.hasOverflowButton or not p0.shouldShowAnchor) then
 			var12.closeMenu(menuKey)
@@ -53,17 +53,17 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "OverflowMenu" ]]
 		var12,
 		p0.onMenuOpenChanged
 	})
-	local var16 = reactModule.useMemo(function() --[[ line: 111 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), p0 (ref), var12 (ref), menuKey (ref)
-		return cryoModule.List.map(p0.menuItems, function(p1) --[[ line: 112 ]]
+		return cryoModule.List.map(p0.menuItems, function(p1)
 			-- upvalues: var12 (copy), menuKey (copy), p0 (copy)
 			return {
 				icon = p1.icon,
 				id = p1.id,
 				text = p1.text,
-				onActivated = function() --[[ line: 117 ]]
+				onActivated = function()
 					-- upvalues: p1 (ref), var12 (copy), menuKey (copy), p0 (copy)
-					task.spawn(function() --[[ line: 118 ]]
+					task.spawn(function()
 						-- upvalues: p1 (copy)
 						p1.onActivated()
 					end)
@@ -77,21 +77,21 @@ return reactModule.memo(function(p0) --[[ line: 59 | named "OverflowMenu" ]]
 		end)
 	end, { p0.menuItems, menuKey, var12, p0.onMenuOpenChanged })
 	local var17 = reactModule.useRef(menuKey)
-	reactModule.useEffect(function() --[[ line: 139 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), menuKey (ref), var12 (ref)
 		if var17.current ~= menuKey and var12 then
 			var17.current = menuKey
 			var12.closeMenu(menuKey)
 		end
 	end, { menuKey, var12 })
-	local var18 = if not overflowMenuRemoveCloseMenuChecks then reactModule.useCallback(function() --[[ line: 148 ]]
+	local var18 = if not overflowMenuRemoveCloseMenuChecks then reactModule.useCallback(function()
 		-- upvalues: var10 (ref), var11 (ref)
 		if var10.current then
 			var11.current = var10.current.GuiState
 		end
 	end, {}) else nil
 	local var19, var20 = reactModule.useState(nil)
-	local var21 = reactModule.useCallback(function(p2) --[[ line: 156 ]]
+	local var21 = reactModule.useCallback(function(p2)
 		-- upvalues: var20 (ref), p0 (ref)
 		var20(p2)
 		

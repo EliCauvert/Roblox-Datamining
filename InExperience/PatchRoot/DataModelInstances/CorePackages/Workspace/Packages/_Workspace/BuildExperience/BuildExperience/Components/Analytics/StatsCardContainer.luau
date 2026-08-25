@@ -6,7 +6,7 @@ local useBreakpoint = foundationModule.Hooks.useBreakpoint
 local statsCardModule = require(script.Parent.StatsCard.StatsCard)
 local getStatsCardColumnsModule = require(script.Parent.getStatsCardColumns)
 
-return function(p0) --[[ line: 19 | named "StatsCardContainer" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useBreakpoint (ref), getStatsCardColumnsModule (ref), view (ref), statsCardModule (ref)
 	local var4, var5 = reactModule.useState(nil)
 	local var6, var7 = useBreakpoint(var4)

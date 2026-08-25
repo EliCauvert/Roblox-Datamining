@@ -13,16 +13,16 @@ local seedHomeOmniSduiV2PayloadModule = require(serverDrivenUi.Migration.seedHom
 local fStringLuaEnabledSduiTreatmentTypes = require(parent.SharedFlags).FStringLuaEnabledSduiTreatmentTypes
 local t = {}
 
-local function _(p0, p1, p2) --[[ line: 39 | named "getRefreshRequestKey" ]]
+local function _(p0, p1, p2)
 	return `{p0}:{p1}:{p2}`
 end
 
-local _ = function(p3, p4) --[[ line: 43 | named "isCurrentRequest" ]]
+local _ = function(p3, p4)
 	-- upvalues: t (ref)
 	return t[p3] == p4
 end
 
-local function getSupportedSduiTreatmentTypes() --[[ line: 47 ]]
+local function getSupportedSduiTreatmentTypes()
 	-- upvalues: runService (ref), fStringLuaEnabledSduiTreatmentTypes (ref)
 	local var10 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
 	local t = {}
@@ -40,7 +40,7 @@ local function getSupportedSduiTreatmentTypes() --[[ line: 47 ]]
 	return t
 end
 
-local function findSortByTopicId(p5, p6) --[[ line: 65 ]]
+local function findSortByTopicId(p5, p6)
 	for i, v in p5 do
 		if typeof(v) == "table" and v.topicId and tostring(v.topicId) == p6 then
 			return v
@@ -49,7 +49,7 @@ local function findSortByTopicId(p5, p6) --[[ line: 65 ]]
 	return nil
 end
 
-local function hasPageEntryForFeedItemKey(p7, p8) --[[ line: 74 ]]
+local function hasPageEntryForFeedItemKey(p7, p8)
 	local pageEntries = p7.pageEntries
 	
 	if typeof(pageEntries) ~= "table" then
@@ -63,14 +63,14 @@ local function hasPageEntryForFeedItemKey(p7, p8) --[[ line: 74 ]]
 	return false
 end
 
-local _ = function(p9, p10, p11) --[[ line: 94 | named "reportValidationError" ]]
+local _ = function(p9, p10, p11)
 	p9(p11.errorType, {
 		name = "discovery-api/omni-recommendation/sduiv2",
 		message = `{p11.message}, topicIds: {p10}`
 	})
 end
 
-local _ = function(p12, p13, p14) --[[ line: 101 | named "reportNetworkError" ]]
+local _ = function(p12, p13, p14)
 	-- upvalues: sduiErrors (ref), sduiParseHelpers (ref)
 	p12(sduiErrors.SduiErrorType.FailedToFetchPage, {
 		name = "discovery-api/omni-recommendation/sduiv2",
@@ -78,7 +78,7 @@ local _ = function(p12, p13, p14) --[[ line: 101 | named "reportNetworkError" ]]
 	})
 end
 
-local function validateResponseBody(p15, p16, p17) --[[ line: 108 ]]
+local function validateResponseBody(p15, p16, p17)
 	-- upvalues: sduiErrors (ref), findSortByTopicId (ref), omniFeedTypes (ref), hasPageEntryForFeedItemKey (ref)
 	if p15 == nil or typeof(p15) ~= "table" then
 		return false, {
@@ -130,7 +130,7 @@ local function validateResponseBody(p15, p16, p17) --[[ line: 108 ]]
 	}
 end
 
-return function(p18, p19, p20, p21, p22, p23, p24) --[[ line: 180 | named "refreshOmniRecommendationFeedItem" ]]
+return function(p18, p19, p20, p21, p22, p23, p24)
 	-- upvalues: sduiLoadTimer (ref), omniFeedTypes (ref), getSupportedSduiTreatmentTypes (ref), httpService (ref), t (ref), makeOmniRecommendationsRequest (ref), validateResponseBody (ref), seedHomeOmniSduiV2PayloadModule (ref), sduiErrors (ref), sduiParseHelpers (ref)
 	local loadTimer = p24.loadTimer or sduiLoadTimer.createLoadTimer(p19)
 	loadTimer.start("feed-item-refresh")
@@ -149,7 +149,7 @@ return function(p18, p19, p20, p21, p22, p23, p24) --[[ line: 180 | named "refre
 	local var21 = httpService:GenerateGUID(false):lower()
 	t[var20] = var21
 	
-	return makeOmniRecommendationsRequest(p18, p19, httpService:GenerateGUID(false):lower(), nil, t_1, p22, { p20 }, var19, p24.contextFeatures):andThen(function(p26) --[[ line: 218 ]]
+	return makeOmniRecommendationsRequest(p18, p19, httpService:GenerateGUID(false):lower(), nil, t_1, p22, { p20 }, var19, p24.contextFeatures):andThen(function(p26)
 		-- upvalues: var20 (ref), var21 (ref), t (copy), validateResponseBody (copy), p20 (ref), p21 (ref), p23 (ref), seedHomeOmniSduiV2PayloadModule (copy), p19 (ref), loadTimer (ref), sduiErrors (copy)
 		if t[var20] ~= var21 then return end
 		local var22 = if typeof(p26) == "table" then p26.responseBody else nil
@@ -164,7 +164,7 @@ return function(p18, p19, p20, p21, p22, p23, p24) --[[ line: 180 | named "refre
 			
 			return
 		end
-		local ok, status = pcall(function() --[[ line: 233 ]]
+		local ok, status = pcall(function()
 			-- upvalues: seedHomeOmniSduiV2PayloadModule (copy), var22 (ref), p19 (copy), loadTimer (copy)
 			seedHomeOmniSduiV2PayloadModule(var22.sduiv2, p19, loadTimer)
 		end)
@@ -176,7 +176,7 @@ return function(p18, p19, p20, p21, p22, p23, p24) --[[ line: 180 | named "refre
 			name = "discovery-api/omni-recommendation/sduiv2",
 			message = `Error seeding omni recommendation feed item: {status}, topicIds: {p20}`
 		})
-	end):catch(function(p25) --[[ line: 246 ]]
+	end):catch(function(p25)
 		-- upvalues: var20 (ref), var21 (ref), t (copy), p23 (ref), p20 (ref), sduiErrors (copy), sduiParseHelpers (copy)
 		if t[var20] == var21 then
 			p23(sduiErrors.SduiErrorType.FailedToFetchPage, {
@@ -186,7 +186,7 @@ return function(p18, p19, p20, p21, p22, p23, p24) --[[ line: 180 | named "refre
 			
 			return
 		end
-	end):finally(function() --[[ line: 253 ]]
+	end):finally(function()
 		-- upvalues: var20 (ref), var21 (ref), t (copy), loadTimer (ref)
 		if t[var20] == var21 then
 			loadTimer.logRefreshComplete()

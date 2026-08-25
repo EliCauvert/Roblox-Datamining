@@ -16,7 +16,7 @@ local deviceAccessChallengeEventModule = require(script.Parent.DeviceAccessChall
 local challengeEventConstantsModule = require(genericChallenges.Utils.ChallengeEventConstants)
 local getFFlagLuaAppChallengeMoreTelemetryEnabledModule = require(genericChallenges.Middleware.Flags.GetFFlagLuaAppChallengeMoreTelemetryEnabled)
 
-return function(p0) --[[ line: 34 | named "DeviceAccessTokenChallenge" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), appLogging (ref), httpService (ref), getFFlagLuaAppChallengeMoreTelemetryEnabledModule (ref), useState (ref), useEffect (ref), deviceAccessChallengeEventModule (ref), challengeEventConstantsModule (ref), useSelector (ref), roactModule (ref), loading (ref), iconSize (ref), roactNavigationModule (ref)
 	local var9 = useRoactService(appLogging)
 	local var10 = nil
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 34 | named "DeviceAccessTokenChallenge" ]]
 		var12 = var17
 		var13 = var18
 	end
-	useEffect(function() --[[ line: 46 ]]
+	useEffect(function()
 		-- upvalues: var9 (ref), deviceAccessChallengeEventModule (copy), challengeEventConstantsModule (copy), p0 (ref), challengeMetadata (ref), httpService (copy), getFFlagLuaAppChallengeMoreTelemetryEnabledModule (copy), var11 (write), var13 (write)
 		var9:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {
 			context = challengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInitialized,
@@ -73,7 +73,7 @@ return function(p0) --[[ line: 34 | named "DeviceAccessTokenChallenge" ]]
 			})
 		end
 	end, {})
-	local var19 = useSelector(function(p1) --[[ line: 86 ]]
+	local var19 = useSelector(function(p1)
 		return { screenSize = p1.ScreenSize }
 	end)
 	
@@ -88,7 +88,7 @@ return function(p0) --[[ line: 34 | named "DeviceAccessTokenChallenge" ]]
 			size = iconSize.Large
 		}),
 		NavigationEvents = if getFFlagLuaAppChallengeMoreTelemetryEnabledModule() then roactModule.createElement(roactNavigationModule.NavigationEvents, {
-			onWillBlur = function() --[[ line: 106 ]]
+			onWillBlur = function()
 				-- upvalues: var10 (write), var12 (write), var9 (ref), deviceAccessChallengeEventModule (copy), challengeEventConstantsModule (copy), p0 (ref), challengeMetadata (ref)
 				if not var10 and not var12 then
 					var9:logRobloxTelemetryEvent(deviceAccessChallengeEventModule, {}, {

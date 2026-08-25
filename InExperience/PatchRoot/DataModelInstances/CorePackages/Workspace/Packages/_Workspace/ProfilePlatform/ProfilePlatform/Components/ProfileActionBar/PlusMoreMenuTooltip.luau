@@ -15,7 +15,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 30 | named "PlusMoreMenuTooltip" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), popover (ref), popoverSide (ref), popoverAlign (ref), radius (ref), fFlagProfilePlatformEnableTransferTooltipContrastModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref)
 	local var4 = useTokens()
 	

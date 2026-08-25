@@ -96,7 +96,7 @@ local t_3 = {
 		textKey = t_2[t.Inventory],
 		icon = builderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p0) --[[ line: 135 ]]
+			urlGenerator = function(p0)
 				-- upvalues: urlBuilder (ref)
 				return p0 and urlBuilder.user.inventory({ userId = p0 }) or nil
 			end
@@ -115,7 +115,7 @@ local t_3 = {
 		textKey = t_2[t.Communities],
 		icon = builderIconsModule.Icon.ThreePeople,
 		context = if fFlagFlyoutResolveItemContextOnActivationModule_1 then nil else { url = urlBuilder.static.groups() },
-		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then function() --[[ line: 105 | named "getCommunitiesContext" ]]
+		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then function()
 			-- upvalues: communityListRouting (ref), appPage (ref), urlBuilder (ref)
 			return if communityListRouting.getShouldUseLuaCommunityList() then { appPage = appPage.Groups } else { url = urlBuilder.static.groups() }
 		end else nil
@@ -161,7 +161,7 @@ local t_3 = {
 		textKey = t_2[t.CreateGames],
 		icon = builderIconsModule.Icon.Studio,
 		context = {
-			urlGenerator = function(p1) --[[ line: 206 ]]
+			urlGenerator = function(p1)
 				return p1({ utm_content = "side_panel" })
 			end
 		}
@@ -177,7 +177,7 @@ local t_3 = {
 		textKey = t_2[t.GiftCards],
 		icon = builderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p2) --[[ line: 224 ]]
+			urlGenerator = function(p2)
 				-- upvalues: urlBuilder (ref)
 				return urlBuilder.static.giftCards(p2)
 			end
@@ -207,7 +207,7 @@ local t_3 = {
 		itemType = t.Terms,
 		textKey = t_2[t.Terms],
 		context = {
-			urlGenerator = function(_, p3) --[[ line: 261 ]]
+			urlGenerator = function(_, p3)
 				-- upvalues: urlBuilder (ref)
 				local var14 = if p3 then p3.getTermsOfUseLink() else nil
 				
@@ -222,7 +222,7 @@ local t_3 = {
 		itemType = t.Privacy,
 		textKey = t_2[t.Privacy],
 		context = {
-			urlGenerator = function(_, p4) --[[ line: 277 ]]
+			urlGenerator = function(_, p4)
 				-- upvalues: urlBuilder (ref)
 				local var15 = if p4 then p4.getPrivacyPolicyLink() else nil
 				

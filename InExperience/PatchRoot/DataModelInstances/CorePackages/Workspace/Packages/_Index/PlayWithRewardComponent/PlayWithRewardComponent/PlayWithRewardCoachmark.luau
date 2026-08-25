@@ -14,7 +14,7 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local fFlagPlayWithRewardCoachmarkOverlayFix = sharedFlagsModule.FFlagPlayWithRewardCoachmarkOverlayFix
 
-return reactModule.memo(function(p0) --[[ line: 42 | named "PlayWithRewardCoachmark" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), fFlagPlayWithRewardCoachmarkOverlayFix (ref), useEarlyIsFocused (ref), useSelector (ref), playWithRewardCoachmarkStorageModule (ref), playWithRewardTelemetryModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref)
 	local var8, var9 = reactModule.useState(false)
 	local var10 = nil
@@ -22,11 +22,11 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "PlayWithRewardCoachm
 	
 	if fFlagPlayWithRewardCoachmarkOverlayFix then
 		var10 = useEarlyIsFocused()
-		var11 = useSelector(function(p1) --[[ line: 47 ]]
+		var11 = useSelector(function(p1)
 			return p1.CentralOverlay.OverlayType ~= nil
 		end)
 	end
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), p0 (ref), playWithRewardCoachmarkStorageModule (copy), playWithRewardTelemetryModule (copy)
 		var9(false)
 		
@@ -38,7 +38,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "PlayWithRewardCoachm
 	end, { p0.flowId, p0.localUserId, p0.productId, p0.universeId })
 	
 	if fFlagPlayWithRewardCoachmarkOverlayFix then
-		reactModule.useEffect(function() --[[ line: 66 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var10 (write), var11 (write), var9 (ref)
 			if not var10 or var11 then
 				var9(false)
@@ -52,7 +52,7 @@ return reactModule.memo(function(p0) --[[ line: 42 | named "PlayWithRewardCoachm
 		side = popoverSide.Bottom,
 		align = popoverAlign.Center,
 		anchorRef = p0.anchorRef,
-		onClose = reactModule.useCallback(function() --[[ line: 73 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: playWithRewardCoachmarkStorageModule (copy), p0 (ref), playWithRewardTelemetryModule (copy), var9 (ref)
 			playWithRewardCoachmarkStorageModule.dismissCurrentWindow(p0.localUserId)
 			playWithRewardTelemetryModule.logPlayWithRewardCoachmark("dismissed", p0.flowId, p0.universeId, p0.productId)

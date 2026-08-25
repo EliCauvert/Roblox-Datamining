@@ -11,7 +11,7 @@ local socialNetworksInEditProfileIXPModule = require(editProfile.Flags.SocialNet
 local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
 local callbackInputBox = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
 
-return function(p0) --[[ line: 34 | named "EditSocialNetworksItem" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useStyle (ref), useScreenSize (ref), socialNetworksInEditProfileIXPModule (ref), userInputService (ref), imageSetLabel (ref), images (ref), callbackInputBox (ref), iconSize (ref)
 	local var5 = reactModule.useRef(nil)
 	local var6 = useStyle()
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 34 | named "EditSocialNetworksItem" ]]
 	local var8 = useScreenSize()
 	local var9 = socialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
 	local var10 = if var9 then var9 == socialNetworksInEditProfileIXPModule.Variants.VisibilityFirst and p0.isVisibilityNoOne else nil
-	local var11 = reactModule.useCallback(function() --[[ line: 48 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: userInputService (copy), var5 (ref), p0 (ref)
 		if userInputService.OnScreenKeyboardVisible then
 			if not var5.current or not var5.current:IsFocused() then return end
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 34 | named "EditSocialNetworksItem" ]]
 			p0.setKeyboardOffset(0)
 		end
 	end, { var8, p0.setKeyboardOffset })
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var11 (ref), p0 (ref), var5 (ref)
 		local list = {
 			userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(var11),
@@ -47,14 +47,14 @@ return function(p0) --[[ line: 34 | named "EditSocialNetworksItem" ]]
 		}
 		
 		if p0.focusOn then
-			task.spawn(function() --[[ line: 71 ]]
+			task.spawn(function()
 				-- upvalues: var5 (copy)
 				if var5 and var5.current then
 					var5.current:captureFocus()
 				end
 			end)
 		end
-		return function() --[[ line: 78 ]]
+		return function()
 			-- upvalues: list (ref)
 			for i, v in list do
 				v:Disconnect()

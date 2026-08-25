@@ -11,8 +11,8 @@ local fFlagGamepadIconSupportCheck = require(corePackagesService.Workspace.Packa
 local t = {}
 t.__index = t
 
-local function _(p0) --[[ line: 79 | named "_handleShortcutEvent" ]]
-	return function(p1, p2, _) --[[ line: 80 ]]
+local function _(p0)
+	return function(p1, p2, _)
 		-- upvalues: p0 (ref)
 		if p2 ~= Enum.UserInputState.Begin then
 			return Enum.ContextActionResult.Pass
@@ -26,7 +26,7 @@ local function _(p0) --[[ line: 79 | named "_handleShortcutEvent" ]]
 	end
 end
 
-function t.new() --[[ line: 94 ]]
+function t.new()
 	-- upvalues: signal (ref), t (ref)
 	return setmetatable({
 		_shortcuts = {},
@@ -37,7 +37,7 @@ function t.new() --[[ line: 94 ]]
 	}, t)
 end
 
-function t:registerShortcut(p3) --[[ line: 108 ]]
+function t:registerShortcut(p3)
 	-- upvalues: var4 (ref), availabilitySignal (ref), availabilitySignalState (ref), userInputService (ref)
 	if self._shortcuts[p3.id] then
 		warn(string.format("shortcut " .. p3.id .. " already registered", debug.traceback()))
@@ -50,7 +50,7 @@ function t:registerShortcut(p3) --[[ line: 108 ]]
 	if p3.availability == nil then
 		p3.availability = availabilitySignal.new(availabilitySignalState.Available)
 	end
-	p3.availability:connect(function() --[[ line: 122 ]]
+	p3.availability:connect(function()
 		-- upvalues: self (ref), p3 (ref)
 		self:shortcutChanged(p3)
 	end)
@@ -58,7 +58,7 @@ function t:registerShortcut(p3) --[[ line: 108 ]]
 	self._shortcuts[p3.id] = p3
 end
 
-function t:activateShortcut(p4) --[[ line: 131 ]]
+function t:activateShortcut(p4)
 	if self._shortcuts[p4] then
 		local var6 = self._shortcuts[p4]
 		
@@ -66,11 +66,11 @@ function t:activateShortcut(p4) --[[ line: 131 ]]
 	end
 end
 
-function t:shortcutChanged(_) --[[ line: 142 ]]
+function t:shortcutChanged(_)
 	self:updateShortcutBar(self:getCurrentShortcutBar())
 end
 
-function t:updateShortcutBar(p5) --[[ line: 146 ]]
+function t:updateShortcutBar(p5)
 	self:_unbindAllShortcuts()
 	self._currentShortcutBar = p5
 	
@@ -86,17 +86,17 @@ function t:updateShortcutBar(p5) --[[ line: 146 ]]
 	end
 end
 
-function t:configureShortcutBar(p6, p7) --[[ line: 161 ]]
+function t:configureShortcutBar(p6, p7)
 	self._shortcutBarList[p6] = p7
 end
 
-function t:setShortcutBar(p8) --[[ line: 165 ]]
+function t:setShortcutBar(p8)
 	if self._currentShortcutBar ~= p8 then
 		self:updateShortcutBar(p8)
 	end
 end
 
-function t:setHideShortcutBar(p9, p10) --[[ line: 171 ]]
+function t:setHideShortcutBar(p9, p10)
 	if self._shortcutBarHiddenOverrides[p9] ~= p10 then
 		if p10 then
 			self._shortcutBarHiddenOverrides[p9] = p10
@@ -116,15 +116,15 @@ function t:setHideShortcutBar(p9, p10) --[[ line: 171 ]]
 	end
 end
 
-function t:getHideShortcutBar() --[[ line: 192 ]]
+function t:getHideShortcutBar()
 	return self._shortcutBarHidden
 end
 
-function t:getShortcut(p11) --[[ line: 196 ]]
+function t:getShortcut(p11)
 	return self._shortcuts[p11]
 end
 
-function t:getShortcutsFromBar(p12, _) --[[ line: 200 ]]
+function t:getShortcutsFromBar(p12, _)
 	-- upvalues: availabilitySignalState (ref), fFlagGamepadIconSupportCheck (ref), userInputService (ref)
 	if not p12 then
 		return {}
@@ -145,11 +145,11 @@ function t:getShortcutsFromBar(p12, _) --[[ line: 200 ]]
 	return t
 end
 
-function t:getCurrentShortcutBar() --[[ line: 229 ]]
+function t:getCurrentShortcutBar()
 	return self._currentShortcutBar
 end
 
-function t:_bindShortcutBar(p13) --[[ line: 233 ]]
+function t:_bindShortcutBar(p13)
 	-- upvalues: availabilitySignalState (ref)
 	for i, v in self._shortcutBarList[p13] do
 		local var10 = self._shortcuts[v]
@@ -164,7 +164,7 @@ function t:_bindShortcutBar(p13) --[[ line: 233 ]]
 	end
 end
 
-function t:_unbindShortcutBar(p14) --[[ line: 247 ]]
+function t:_unbindShortcutBar(p14)
 	if p14 then
 		for i, v in self._shortcutBarList[p14] do
 			local var11 = self._shortcuts[v]
@@ -176,12 +176,12 @@ function t:_unbindShortcutBar(p14) --[[ line: 247 ]]
 	end
 end
 
-function t:_bindShortcut(p15) --[[ line: 258 ]]
+function t:_bindShortcut(p15)
 	-- upvalues: contextActionService (ref)
 	local var12 = self._shortcuts[p15]
 	
 	if var12 and var12.actionName then
-		contextActionService:BindCoreAction(var12.actionName, function(p16, p17, _) --[[ line: 80 ]]
+		contextActionService:BindCoreAction(var12.actionName, function(p16, p17, _)
 			-- upvalues: self (ref)
 			if p17 ~= Enum.UserInputState.Begin then
 				return Enum.ContextActionResult.Pass
@@ -197,7 +197,7 @@ function t:_bindShortcut(p15) --[[ line: 258 ]]
 	end
 end
 
-function t:_unbindShortcut(p18) --[[ line: 266 ]]
+function t:_unbindShortcut(p18)
 	-- upvalues: contextActionService (ref)
 	local var13 = self._shortcuts[p18]
 	
@@ -207,7 +207,7 @@ function t:_unbindShortcut(p18) --[[ line: 266 ]]
 	end
 end
 
-function t:_unbindAllShortcuts() --[[ line: 274 ]]
+function t:_unbindAllShortcuts()
 	-- upvalues: contextActionService (ref)
 	for i, v in self._boundShortcuts do
 		if v then

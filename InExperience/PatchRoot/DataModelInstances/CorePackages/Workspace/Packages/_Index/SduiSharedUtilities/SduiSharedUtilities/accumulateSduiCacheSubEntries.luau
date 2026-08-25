@@ -1,6 +1,6 @@
 ﻿local cryoModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Cryo)
 
-return function(p0, p1) --[[ line: 7 | named "accumulateSduiCacheSubEntries" ]]
+return function(p0, p1)
 	-- upvalues: cryoModule (ref)
 	local var1 = cryoModule.Dictionary.join(p1 or {}, {})
 	

@@ -11,11 +11,11 @@ infoAlertView.defaultProps = {
 	soakAreaTransparency = 0.9,
 	width = UDim.new(0.5, 0),
 	screenSize = Vector2.new(0, 0),
-	onModalClose = function() --[[ line: 18 ]] end,
+	onModalClose = function() end,
 	soakAreaColor3 = Color3.fromRGB(0, 0, 255)
 }
 
-function infoAlertView.render(p0) --[[ line: 24 ]]
+function infoAlertView.render(p0)
 	-- upvalues: roact (ref), alertViewBuilderModule (ref), buttonType (ref)
 	local props = p0.props
 	

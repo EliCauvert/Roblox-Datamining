@@ -16,9 +16,9 @@ subscriptionTitle.validateProps = tModule.strictInterface({
 	itemIcon = tModule.any
 })
 
-local function _(p0, p1) --[[ line: 53 | named "createSubscriptionInfo" ]]
+local function _(p0, p1)
 	-- upvalues: withStyle (ref), reactModule (ref)
-	return withStyle(function(p2) --[[ line: 54 ]]
+	return withStyle(function(p2)
 		-- upvalues: reactModule (copy), p0 (ref), p1 (ref)
 		local theme = p2.Theme
 		local font = p2.Font.Body.Font
@@ -119,7 +119,7 @@ local function _(p0, p1) --[[ line: 53 | named "createSubscriptionInfo" ]]
 	end)
 end
 
-local function createCompactSubscriptionTitle(p3) --[[ line: 157 ]]
+local function createCompactSubscriptionTitle(p3)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), withStyle (ref)
 	local createElement = reactModule.createElement
 	local var6 = "Frame"
@@ -146,7 +146,7 @@ local function createCompactSubscriptionTitle(p3) --[[ line: 157 ]]
 		})
 	}
 	local var9 = true
-	t_1.SubscriptionInfo = withStyle(function(p4) --[[ line: 54 ]]
+	t_1.SubscriptionInfo = withStyle(function(p4)
 		-- upvalues: reactModule (copy), p3 (ref), var9 (ref)
 		local theme = p4.Theme
 		local font = p4.Font.Body.Font
@@ -249,7 +249,7 @@ local function createCompactSubscriptionTitle(p3) --[[ line: 157 ]]
 	return createElement(var6, t, t_1)
 end
 
-local function createNormalSubscriptionTitle(p5) --[[ line: 182 ]]
+local function createNormalSubscriptionTitle(p5)
 	-- upvalues: reactModule (ref), imageSetLabel (ref), withStyle (ref)
 	local createElement = reactModule.createElement
 	local var10 = "Frame"
@@ -276,7 +276,7 @@ local function createNormalSubscriptionTitle(p5) --[[ line: 182 ]]
 		})
 	}
 	local var13 = false
-	t_1.SubscriptionInfo = withStyle(function(p6) --[[ line: 54 ]]
+	t_1.SubscriptionInfo = withStyle(function(p6)
 		-- upvalues: reactModule (copy), p5 (ref), var13 (ref)
 		local theme = p6.Theme
 		local font = p6.Font.Body.Font
@@ -379,11 +379,11 @@ local function createNormalSubscriptionTitle(p5) --[[ line: 182 ]]
 	return createElement(var10, t, t_1)
 end
 
-function subscriptionTitle.getTitleHeight(_, p7) --[[ line: 207 ]]
+function subscriptionTitle.getTitleHeight(_, p7)
 	return if p7 > 216 then 216 else 96
 end
 
-function subscriptionTitle.render(p8) --[[ line: 215 ]]
+function subscriptionTitle.render(p8)
 	-- upvalues: createNormalSubscriptionTitle (ref), createCompactSubscriptionTitle (ref)
 	return if p8.props.contentHeight > 216 then createNormalSubscriptionTitle(p8.props) else createCompactSubscriptionTitle(p8.props)
 end

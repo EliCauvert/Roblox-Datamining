@@ -7,20 +7,20 @@ local fFlagUserProfileBetterErrorsModule = require(graphQLServer.Flags.FFlagUser
 
 return {
 	UserProfile = {
-		id = function(p0) --[[ line: 16 ]]
+		id = function(p0)
 			return tostring(p0.userId)
 		end,
-		displayName = function() --[[ line: 19 ]]
+		displayName = function()
 			-- upvalues: graphQLError (ref)
 			return graphQLError.new("The displayName field is not available on the UserProfile implementation of User, please use the names field instead")
 		end
 	},
 	Query = {
-		userProfiles = function(_, p1, p2, p3) --[[ line: 26 ]]
+		userProfiles = function(_, p1, p2, p3)
 			-- upvalues: formatUserProfileFieldsModule (ref), fFlagUserProfileBetterErrorsModule (ref)
-			return p2.dataLoaders.userProfiles:getLoader(p2.fetchImpl, formatUserProfileFieldsModule(p3, p2.collectSubFieldsImpl)):loadMany(p1.userIds):andThen(function(p5) --[[ line: 31 ]]
+			return p2.dataLoaders.userProfiles:getLoader(p2.fetchImpl, formatUserProfileFieldsModule(p3, p2.collectSubFieldsImpl)):loadMany(p1.userIds):andThen(function(p5)
 				return p5 or {}
-			end):catch(function(p4) --[[ line: 34 ]]
+			end):catch(function(p4)
 				-- upvalues: fFlagUserProfileBetterErrorsModule (copy)
 				return if fFlagUserProfileBetterErrorsModule then p4 else {}
 			end)

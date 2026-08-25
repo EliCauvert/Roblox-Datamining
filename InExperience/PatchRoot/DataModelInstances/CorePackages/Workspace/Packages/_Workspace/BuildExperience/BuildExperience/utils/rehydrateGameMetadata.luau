@@ -3,7 +3,7 @@ local experienceQuestionnaireModule = require(parent.DataHydration.ExperienceQue
 local game = require(parent.DataHydration).Game
 local refreshPublishEligibilityModule = require(script.Parent.refreshPublishEligibility)
 
-return function(p0) --[[ line: 7 | named "rehydrateGameMetadata" ]]
+return function(p0)
 	-- upvalues: game (ref), refreshPublishEligibilityModule (ref), experienceQuestionnaireModule (ref)
 	local var2 = tostring(p0)
 	game.getGameInfoStore().fetchGameInfo(var2)

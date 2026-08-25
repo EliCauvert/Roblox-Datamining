@@ -10,14 +10,14 @@ local _ = require(parent:WaitForChild("MessageSender"))
 local t_1 = {}
 t_1.__index = t_1
 
-function mergeProps(p0, p1) --[[ line: 26 ]]
+function mergeProps(p0, p1)
 	if not p0 then return end
 	for i, v in pairs(p0) do
 		p1[i] = v
 	end
 end
 
-function ReturnToObjectPoolRecursive(p2, p3) --[[ line: 33 ]]
+function ReturnToObjectPoolRecursive(p2, p3)
 	local children = p2:GetChildren()
 	
 	for i = 1, #children do
@@ -27,7 +27,7 @@ function ReturnToObjectPoolRecursive(p2, p3) --[[ line: 33 ]]
 	p3:ReturnInstance(p2)
 end
 
-function GetMessageCreators() --[[ line: 42 ]]
+function GetMessageCreators()
 	-- upvalues: messageCreatorModules (ref), utilModule (ref)
 	local t = {}
 	local children = messageCreatorModules:GetChildren()
@@ -41,13 +41,13 @@ function GetMessageCreators() --[[ line: 42 ]]
 	return t
 end
 
-function t_1.WrapIntoMessageObject(p4, p5, p6) --[[ line: 56 ]]
+function t_1.WrapIntoMessageObject(p4, p5, p6)
 	-- upvalues: utilModule (ref)
 	return {
 		ID = p5.ID,
 		BaseFrame = p6[utilModule.KEY_BASE_FRAME],
 		BaseMessage = if utilModule.KEY_BASE_MESSAGE then p6[utilModule.KEY_BASE_MESSAGE] else nil,
-		UpdateTextFunction = p6[utilModule.KEY_UPDATE_TEXT_FUNC] or function() --[[ line: 73 ]]
+		UpdateTextFunction = p6[utilModule.KEY_UPDATE_TEXT_FUNC] or function()
 			warn("NO MESSAGE RESIZE FUNCTION")
 		end,
 		GetHeightFunction = p6[utilModule.KEY_GET_HEIGHT],
@@ -56,18 +56,18 @@ function t_1.WrapIntoMessageObject(p4, p5, p6) --[[ line: 56 ]]
 		UpdateAnimFunction = p6[utilModule.KEY_UPDATE_ANIMATION],
 		ObjectPool = p4.ObjectPool,
 		Destroyed = false,
-		Destroy = function(p7) --[[ line: 81 ]]
+		Destroy = function(p7)
 			ReturnToObjectPoolRecursive(p7.BaseFrame, p7.ObjectPool)
 			p7.Destroyed = true
 		end
 	}
 end
 
-function t_1.CreateMessageLabel_Chat(p8, p9, p10, p11) --[[ line: 89 ]]
+function t_1.CreateMessageLabel_Chat(p8, p9, p10, p11)
 	-- upvalues: chatService (ref)
 	p9.Channel = p10
 	local var11 = nil
-	pcall(function() --[[ line: 92 ]]
+	pcall(function()
 		-- upvalues: var11 (write), chatService (copy), p9 (ref)
 		var11 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnClientFormattingMessage, p9)
 	end)
@@ -92,11 +92,11 @@ function t_1.CreateMessageLabel_Chat(p8, p9, p10, p11) --[[ line: 89 ]]
 	end
 end
 
-function t_1.CreateMessageLabel(p12, p13, p14) --[[ line: 114 ]]
+function t_1.CreateMessageLabel(p12, p13, p14)
 	-- upvalues: chatService (ref)
 	p13.Channel = p14
 	local var14 = nil
-	pcall(function() --[[ line: 118 ]]
+	pcall(function()
 		-- upvalues: var14 (write), chatService (copy), p13 (ref)
 		var14 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnClientFormattingMessage, p13)
 	end)
@@ -121,7 +121,7 @@ function t_1.CreateMessageLabel(p12, p13, p14) --[[ line: 114 ]]
 	end
 end
 
-function t.new() --[[ line: 143 ]]
+function t.new()
 	-- upvalues: t_1 (ref), objectPoolModule (ref), utilModule (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.ObjectPool = objectPoolModule.new(50)
@@ -132,7 +132,7 @@ function t.new() --[[ line: 143 ]]
 	return tbl
 end
 
-function t.GetStringTextBounds(_, p15, p16, p17, p18) --[[ line: 155 ]]
+function t.GetStringTextBounds(_, p15, p16, p17, p18)
 	-- upvalues: utilModule (ref)
 	return utilModule:GetStringTextBounds(p15, p16, p17, p18)
 end

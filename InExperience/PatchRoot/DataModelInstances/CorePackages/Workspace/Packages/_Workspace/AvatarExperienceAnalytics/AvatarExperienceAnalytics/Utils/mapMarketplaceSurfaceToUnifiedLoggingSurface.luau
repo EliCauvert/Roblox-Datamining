@@ -22,7 +22,7 @@ for i_1, v_1 in unifiedLoggingSurface do
 		t_2[v_1] = true
 	end
 end
-return function(p0) --[[ line: 52 | named "mapMarketplaceSurfaceToUnifiedLoggingSurface" ]]
+return function(p0)
 	-- upvalues: t (ref), t_2 (ref)
 	if p0 == nil then
 		return nil

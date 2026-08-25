@@ -2,7 +2,7 @@
 local mockIdModule = require(script.Parent.MockId)
 local t = {}
 
-function t.new(p0) --[[ line: 7 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -11,7 +11,7 @@ function t.new(p0) --[[ line: 7 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 19 ]]
+function t.mock(p1)
 	-- upvalues: t (ref), mockIdModule (ref)
 	p1 = p1 or {}
 	
@@ -24,7 +24,7 @@ function t.mock(p1) --[[ line: 19 ]]
 	})
 end
 
-function t.isValid(p2) --[[ line: 33 ]]
+function t.isValid(p2)
 	if not p2 then
 		return false, "Expected user information to be given"
 	elseif not p2.id then
@@ -39,7 +39,7 @@ function t.isValid(p2) --[[ line: 33 ]]
 	return true, "Valid UserModel"
 end
 
-function t.isEqual(p3, p4) --[[ line: 52 ]]
+function t.isEqual(p3, p4)
 	return if game:GetFastFlag("EnableHasVerifiedBadgeUserModelValidation") then p3.id == p4.id and (p3.username == p4.username and (p3.displayName == p4.displayName and p3.hasVerifiedBadge == p4.hasVerifiedBadge)) else p3.id == p4.id and (p3.username == p4.username and p3.displayName == p4.displayName)
 end
 

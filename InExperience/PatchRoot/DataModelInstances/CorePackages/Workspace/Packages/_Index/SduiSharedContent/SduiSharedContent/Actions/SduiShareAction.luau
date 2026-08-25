@@ -21,14 +21,14 @@ local gameShareExperienceLink = discoveryAnalyticsModule.Events.gameShareExperie
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 
-local function _() --[[ line: 38 | named "isDesktopPlatform" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	local platform = userInputService:GetPlatform()
 	
 	return if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true
 end
 
-local function logExperienceDetailsShareAnalytics(p0, p1, p2, p3) --[[ line: 45 ]]
+local function logExperienceDetailsShareAnalytics(p0, p1, p2, p3)
 	-- upvalues: playersService (ref), userInputService (ref), gameCopyExperienceLink (ref), gameShareExperienceLink (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -52,7 +52,7 @@ local function logExperienceDetailsShareAnalytics(p0, p1, p2, p3) --[[ line: 45 
 	}, p1)
 end
 
-local function handleGenericShare(p4, p5, p6, p7) --[[ line: 77 ]]
+local function handleGenericShare(p4, p5, p6, p7)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), default (ref), userInputService (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	local url = p5 and p5.url
 	local shareUrlContext = p5 and p5.shareUrlContext
@@ -91,10 +91,10 @@ local function handleGenericShare(p4, p5, p6, p7) --[[ line: 77 ]]
 	end
 end
 
-local function fetchShareLinkId(p8, p9) --[[ line: 131 ]]
+local function fetchShareLinkId(p8, p9)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p11, p12, p13) --[[ line: 143 ]]
+		requestFunction = function(p11, p12, p13)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.RequestInternal(p11, p12, p13)
 		end
@@ -103,7 +103,7 @@ local function fetchShareLinkId(p8, p9) --[[ line: 131 ]]
 		base = urlBase.APIS
 	})(), "POST", {
 		postBody = httpService:JSONEncode({ linkType = p8, data = httpService:JSONEncode(p9) })
-	}):andThen(function(p10) --[[ line: 148 ]]
+	}):andThen(function(p10)
 		local responseBody = p10.responseBody or p10.result
 		
 		if responseBody and responseBody.linkId then
@@ -113,7 +113,7 @@ local function fetchShareLinkId(p8, p9) --[[ line: 131 ]]
 	end)
 end
 
-return function(p14, p15, p16) --[[ line: 158 ]]
+return function(p14, p15, p16)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), promiseModule (ref), fetchShareLinkId (ref), urlBuilder (ref), default (ref), userInputService (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), getActionTelemetryFieldValue (ref), logExperienceDetailsShareAnalytics (ref), handleGenericShare (ref)
 	local var20 = if p14 then p14.actionParams else nil
 	
@@ -141,7 +141,7 @@ return function(p14, p15, p16) --[[ line: 158 ]]
 	if var24 then
 		local linkType = shareLinkData.linkType
 		local linkData = shareLinkData.linkData
-		var27 = if linkData == nil then promiseModule.reject(`Missing linkData in ShareLinkFetchData (linkType={linkType})`) else fetchShareLinkId(linkType, linkData):andThen(function(p17) --[[ line: 190 ]]
+		var27 = if linkData == nil then promiseModule.reject(`Missing linkData in ShareLinkFetchData (linkType={linkType})`) else fetchShareLinkId(linkType, linkData):andThen(function(p17)
 			-- upvalues: var25 (write), var26 (write), urlBuilder (copy), linkType (ref)
 			var25 = p17
 			var26 = tostring(DateTime.now().UnixTimestampMillis)
@@ -152,7 +152,7 @@ return function(p14, p15, p16) --[[ line: 158 ]]
 		local url = shareLinkData.url
 		var27 = if url == nil then promiseModule.reject("Missing url in shareLinkData") else promiseModule.resolve(url)
 	end
-	var27:andThen(function(p19) --[[ line: 210 ]]
+	var27:andThen(function(p19)
 		-- upvalues: default (copy), shareUrlContext (ref), userInputService (copy), entryPointKey (ref), p16 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), shareLinkData (ref), getActionTelemetryFieldValue (copy), p14 (ref), p15 (ref), logExperienceDetailsShareAnalytics (copy), var25 (write), var26 (write)
 		default:shareUrl({ context = shareUrlContext, url = p19 })
 		local platform = userInputService:GetPlatform()
@@ -170,7 +170,7 @@ return function(p14, p15, p16) --[[ line: 158 ]]
 				logExperienceDetailsShareAnalytics(tostring(var29), getActionTelemetryFieldValue(p14, p15, "ctx") or "ExperienceDetailsShare", var25, var26)
 			end
 		end
-	end):catch(function(p18) --[[ line: 240 ]]
+	end):catch(function(p18)
 		-- upvalues: p16 (ref), sduiErrorType (copy), sduiActionType (copy), entryPointKey (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy)
 		p16.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, { name = sduiActionType.Share, message = tostring(p18) }, p16.appPage)
 		

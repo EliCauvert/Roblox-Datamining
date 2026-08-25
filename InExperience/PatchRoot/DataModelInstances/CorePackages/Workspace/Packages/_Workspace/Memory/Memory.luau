@@ -7,7 +7,7 @@ return {
 	["jest.config"] = script["jest.config"],
 	MemoryTracker = memoryTrackerModule,
 	MemoryScope = memoryScopeModule,
-	start = function(p0, p1, p2) --[[ line: 6 ]]
+	start = function(p0, p1, p2)
 		-- upvalues: memoryTrackerModule (ref), fFlagEnableMemoryShellModule (ref), memoryShellModule (ref)
 		if p0 then
 			local var4 = memoryTrackerModule(p1, p2)

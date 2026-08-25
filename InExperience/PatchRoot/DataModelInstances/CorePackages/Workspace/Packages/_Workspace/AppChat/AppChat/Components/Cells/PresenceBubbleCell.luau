@@ -60,7 +60,7 @@ local t = {
 	paddingRight = 0
 }
 
-return reactModule.memo(function(p0) --[[ line: 142 | named "PresenceBubbleCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTextSizeOffset (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), baseCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), conversationFacePileModule (ref), avatarCircleModule (ref), skeleton (ref), radius (ref), fFlagAppChatFixPlusBadgeAlignmentModule (ref), foundationModule (ref), fFlagEnableBlackbirdCheck (ref), imageSetLabel (ref)
 	local var12 = cryoModule.Dictionary.join(t, p0)
 	local var13 = useTextSizeOffset()
@@ -80,17 +80,17 @@ return reactModule.memo(function(p0) --[[ line: 142 | named "PresenceBubbleCell"
 		var17 = var22
 		local var24, var25 = reactModule.useBinding(0)
 		var18 = var25
-		var19 = reactModule.joinBindings({ var23, var24 }):map(function(p1) --[[ line: 157 ]]
+		var19 = reactModule.joinBindings({ var23, var24 }):map(function(p1)
 			return Vector2.new(math.max(0, p1[1] - p1[2]), 1e999)
 		end)
-		var20 = reactModule.useMemo(function() --[[ line: 160 ]]
+		var20 = reactModule.useMemo(function()
 			-- upvalues: var12 (ref)
 			if not var12.subTitleTimestamp then
 				return nil
 			end
 			local subTitleText = var12.subTitleText
 			
-			return if subTitleText and subTitleText ~= "" then var12.subTitleTimestamp:map(function(p2) --[[ line: 166 ]]
+			return if subTitleText and subTitleText ~= "" then var12.subTitleTimestamp:map(function(p2)
 				return if p2 == "" then "" else " \194\183 " .. p2
 			end) else var12.subTitleTimestamp
 		end, { var12.subTitleTimestamp, var12.subTitleText })
@@ -281,7 +281,7 @@ return reactModule.memo(function(p0) --[[ line: 142 | named "PresenceBubbleCell"
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, var14),
 			LayoutOrder = 2,
-			[reactModule.Change.AbsoluteSize] = if fFlagAppChatTimestampInSubtitleModule then function(p3) --[[ line: 371 ]]
+			[reactModule.Change.AbsoluteSize] = if fFlagAppChatTimestampInSubtitleModule then function(p3)
 				-- upvalues: var17 (write)
 				var17(p3.AbsoluteSize.X)
 			end else nil
@@ -331,7 +331,7 @@ return reactModule.memo(function(p0) --[[ line: 142 | named "PresenceBubbleCell"
 				Text = var20,
 				Font = var12.subTitleTextFont,
 				LayoutOrder = 3,
-				[reactModule.Change.AbsoluteSize] = function(p4) --[[ line: 454 ]]
+				[reactModule.Change.AbsoluteSize] = function(p4)
 					-- upvalues: var18 (write)
 					var18(p4.AbsoluteSize.X)
 				end

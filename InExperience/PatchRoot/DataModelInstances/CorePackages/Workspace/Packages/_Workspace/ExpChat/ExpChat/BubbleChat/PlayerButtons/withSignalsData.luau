@@ -7,9 +7,9 @@ local _ = require(expChat.Stores.GetVoiceStore.createVoiceStore)
 local var3 = require(expChat.Stores.GetVoiceStore)(false)
 local var4 = signalsModule.createSignal(nil)
 
-return function(value) --[[ line: 24 | named "withSignalsData" ]]
+return function(value)
 	-- upvalues: var3 (ref), useSignalState (ref), var4 (ref), reactModule (ref)
-	return function(p0) --[[ line: 25 ]]
+	return function(p0)
 		-- upvalues: var3 (copy), useSignalState (copy), var4 (copy), reactModule (copy), value (ref)
 		local userId = p0.userId
 		local cloned = table.clone(p0)

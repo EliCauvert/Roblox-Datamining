@@ -7,7 +7,7 @@ local icon = foundationModule.Icon
 local hexColor = Color3.fromHex("121215")
 local t = { Transparency = 0.2, Color3 = Color3.new(1, 1, 1) }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 41 | named "TextOverlayTrashZone" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), view (ref), hexColor (ref), foundationModule (ref), icon (ref), builderIconsModule (ref), t (ref)
 	return reactModule.createElement(view, {
 		Active = false,

@@ -1,4 +1,4 @@
-﻿local function _(value, minValue, maxValue, p0) --[[ line: 1 | named "clampAxis" ]]
+﻿local function _(value, minValue, maxValue, p0)
 	if maxValue <= 0 or p0 <= 0 then
 		return value
 	end
@@ -8,7 +8,7 @@
 	return if var1 < var0 then minValue + maxValue / 2 else math.clamp(value, var0, var1)
 end
 
-return function(value, minValue, maxValue, p1, p2) --[[ line: 16 | named "clampOverlayPosition" ]]
+return function(value, minValue, maxValue, p1, p2)
 	if minValue.X <= 0 or minValue.Y <= 0 then
 		return value
 	end

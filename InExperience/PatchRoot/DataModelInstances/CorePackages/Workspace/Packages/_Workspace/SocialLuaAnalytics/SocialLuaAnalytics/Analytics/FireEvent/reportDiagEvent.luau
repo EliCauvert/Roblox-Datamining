@@ -2,9 +2,9 @@
 local getPlatformSuffixModule = require(script.Parent.getPlatformSuffix)
 local _ = require(script.Parent.Parent.Types)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: getPlatformSuffixModule (ref), diagEventTypes (ref)
-	return function(p1) --[[ line: 12 ]]
+	return function(p1)
 		-- upvalues: getPlatformSuffixModule (copy), diagEventTypes (copy), p0 (ref)
 		local name = `{p1.name}{getPlatformSuffixModule(p1.platformSpecificity)}`
 		

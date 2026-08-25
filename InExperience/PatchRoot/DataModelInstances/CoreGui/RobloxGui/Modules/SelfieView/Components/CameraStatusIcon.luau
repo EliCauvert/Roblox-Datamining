@@ -6,7 +6,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useCameraOnModule = require(script.Parent.Parent.Hooks.useCameraOn)
 local uDim2 = UDim2.fromScale(1, 1)
 
-return function(p0) --[[ line: 18 | named "CameraStatusIcon" ]]
+return function(p0)
 	-- upvalues: useCameraOnModule (ref), reactModule (ref), imageSetLabel (ref), images (ref), uDim2 (ref)
 	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 		Icon = reactModule.createElement(imageSetLabel, {

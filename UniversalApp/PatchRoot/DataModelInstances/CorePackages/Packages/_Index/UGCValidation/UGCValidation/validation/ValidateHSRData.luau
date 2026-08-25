@@ -11,7 +11,7 @@ local failureReasonsAccumulatorModule = require(util.FailureReasonsAccumulator)
 local parseContentIdsModule = require(util.ParseContentIds)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local t = {
-	validateHiddenSurfaceRemovalAsset = function(value, p0) --[[ line: 31 ]]
+	validateHiddenSurfaceRemovalAsset = function(value, p0)
 		-- upvalues: analyticsModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref), validateAttributesModule (ref), validatePropertiesSensibleModule (ref)
 		if #value ~= 1 then
 			analyticsModule.reportFailure(analyticsModule.ErrorType.validateHSR_FileDataInvalid, nil, p0)
@@ -43,7 +43,7 @@ local t = {
 }
 local getFFlagUGCValidateHSRMeshIdsModule = require(parent.flags.getFFlagUGCValidateHSRMeshIds)
 
-function t.validateHSRMeshIdData(p1, p2, p3) --[[ line: 62 ]]
+function t.validateHSRMeshIdData(p1, p2, p3)
 	-- upvalues: getFFlagUGCValidateHSRMeshIdsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	if not getFFlagUGCValidateHSRMeshIdsModule() then
 		return true
@@ -57,7 +57,7 @@ function t.validateHSRMeshIdData(p1, p2, p3) --[[ line: 62 ]]
 			"WrapLayer HSR asset does not have a HiddenSurfaceRemovalAsset as the root Instance"
 		}
 	end
-	local var13, var14 = pcallDeferredModule(function() --[[ line: 81 ]]
+	local var13, var14 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p1 (ref), var12 (ref)
 		return UGCValidationService:ValidateHSRMeshIds(p1, var12)
 	end, p3)
@@ -74,7 +74,7 @@ function t.validateHSRMeshIdData(p1, p2, p3) --[[ line: 62 ]]
 	}
 end
 
-function t.validateInstance(p4, p5) --[[ line: 98 ]]
+function t.validateInstance(p4, p5)
 	-- upvalues: analyticsModule (ref), parseContentIdsModule (ref), getFFlagUGCValidateHSRMeshIdsModule (ref), t (ref), failureReasonsAccumulatorModule (ref)
 	if not p4:IsA("WrapLayer") then
 		return true
@@ -88,7 +88,7 @@ function t.validateInstance(p4, p5) --[[ line: 98 ]]
 			
 			return false, { "WrapLayer HSRAssetId contains an invalid url" }
 		end
-		local ok, status = pcall(function() --[[ line: 124 ]]
+		local ok, status = pcall(function()
 			-- upvalues: HSRAssetId (ref)
 			return game:GetObjectsAllOrNone(HSRAssetId)
 		end)
@@ -121,7 +121,7 @@ function t.validateInstance(p4, p5) --[[ line: 98 ]]
 	return true
 end
 
-function t.validate(p6, p7) --[[ line: 160 ]]
+function t.validate(p6, p7)
 	-- upvalues: failureReasonsAccumulatorModule (ref), t (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local var18 = failureReasonsAccumulatorModule.new()

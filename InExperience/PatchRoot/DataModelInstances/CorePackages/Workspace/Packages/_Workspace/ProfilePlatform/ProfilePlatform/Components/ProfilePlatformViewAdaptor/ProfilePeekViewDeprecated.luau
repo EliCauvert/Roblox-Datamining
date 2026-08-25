@@ -6,15 +6,15 @@ local peekViewState = peekViewModule.PeekViewState
 local peekView = peekViewModule.PeekView
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), peekViewState (ref), peekView (ref)
 	local var3 = useStyle()
 	local var4, var5 = reactModule.useState(0)
-	local var6 = reactModule.useCallback(function(p1) --[[ line: 29 ]]
+	local var6 = reactModule.useCallback(function(p1)
 		-- upvalues: var5 (ref)
 		var5(p1)
 	end, {})
-	local var7 = reactModule.useCallback(function(p2, _) --[[ line: 33 ]]
+	local var7 = reactModule.useCallback(function(p2, _)
 		-- upvalues: p0 (ref), peekViewState (copy)
 		local onPeekViewClosed = p0.onPeekViewClosed
 		

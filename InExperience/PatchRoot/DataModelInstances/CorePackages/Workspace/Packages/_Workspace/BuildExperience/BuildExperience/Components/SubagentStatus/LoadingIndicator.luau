@@ -11,7 +11,7 @@ local progressShape = foundationModule.Enums.ProgressShape
 local progressSize = foundationModule.Enums.ProgressSize
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 
-return reactModule.memo(function(p0) --[[ line: 29 | named "LoadingIndicator" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), subagentTaskStatus (ref), view (ref), progress (ref), progressShape (ref), progressSize (ref), icon (ref), iconName (ref), iconSize (ref)
 	local var3 = reactModule.useBinding(0)
 	local testId = p0.testId or "subagent-status-loading-indicator"

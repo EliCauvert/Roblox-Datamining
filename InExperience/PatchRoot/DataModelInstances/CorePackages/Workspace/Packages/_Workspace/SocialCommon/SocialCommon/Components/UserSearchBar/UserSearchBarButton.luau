@@ -11,9 +11,9 @@ local userSearchBarModule = require(socialCommon.Components.UserSearchBar.UserSe
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
 local fFlagAddFriendsPageCapitalization = require(parent.SharedFlags).FFlagAddFriendsPageCapitalization
 
-return function(p0) --[[ line: 32 ]]
+return function(p0)
 	-- upvalues: useIsWideModeModule (ref), useSelector (ref), getPageMargin (ref), useLocalization (ref), fFlagAddFriendsPageCapitalization (ref), reactModule (ref), imageSetButton (ref), fFlagCreateConnectionsHub (ref), userSearchBarModule (ref)
-	local var5 = getPageMargin(useSelector(function(p1) --[[ line: 36 ]]
+	local var5 = getPageMargin(useSelector(function(p1)
 		return p1.ScreenSize
 	end).X)
 	

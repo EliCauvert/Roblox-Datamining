@@ -8,14 +8,14 @@ local FTUXSlideshowDataModule = require(parent.Resources.FTUXSlideshowData)
 local buttonModule = require(parent.Components.Slideshow.Button)
 local _ = require(parent.Enums.PlatformEnum)
 
-return function(p0) --[[ line: 21 | named "EndItem" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), FTUXSlideshowDataModule (ref), withLocalization (ref), reactModule (ref), buttonModule (ref), UIBloxModule (ref)
 	local var5 = useStyle()
 	local theme = var5.Theme
 	local font = var5.Font
 	local platform = FTUXSlideshowDataModule[p0.platform]
 	
-	return withLocalization({ footerText = "CoreScripts.VRFTUX.Label.Footer" })(function(p1) --[[ line: 31 ]]
+	return withLocalization({ footerText = "CoreScripts.VRFTUX.Label.Footer" })(function(p1)
 		-- upvalues: p0 (ref), platform (ref), reactModule (copy), buttonModule (copy), UIBloxModule (copy), font (ref), theme (ref)
 		return p0.currentIndex ~= #platform and reactModule.createElement(buttonModule, {
 			platform = p0.platform,

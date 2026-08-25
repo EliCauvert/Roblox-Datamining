@@ -3,7 +3,7 @@ local reactModule = require(parent.Parent.React)
 local useStyleModule = require(parent.Core.Style.useStyle)
 local UIBloxConfigModule = require(parent.UIBloxConfig)
 
-return function(p0) --[[ line: 19 | named "HelperText" ]]
+return function(p0)
 	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref)
 	local var3 = useStyleModule()
 	local var4 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var3.Tokens.Typography.CaptionSmall else var3.Tokens.Component.HelperText.Base.Typography

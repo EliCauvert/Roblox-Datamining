@@ -9,7 +9,7 @@ local t = {
 
 return {
 	ELEVATION_LAYERS = t,
-	getRelativeIndex = function(p0) --[[ line: 23 ]]
+	getRelativeIndex = function(p0)
 		-- upvalues: t (ref)
 		return p0.zIndex - t[p0.layer].start
 	end

@@ -4,7 +4,7 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local insertServiceLoadAssetModule = require(profilePlatform.Utils.insertServiceLoadAsset)
 local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
 
-local function _(value) --[[ line: 14 | named "parseAssetId" ]]
+local function _(value)
 	if value == nil then
 		return nil
 	end
@@ -19,7 +19,7 @@ local function _(value) --[[ line: 14 | named "parseAssetId" ]]
 	end
 end
 
-local function findInnerImageId(p0) --[[ line: 37 ]]
+local function findInnerImageId(p0)
 	if type(p0) == "table" then
 		local imageId = p0.ImageId
 		
@@ -45,7 +45,7 @@ local function findInnerImageId(p0) --[[ line: 37 ]]
 	end
 end
 
-return function() --[[ line: 73 | named "useAvatarBackgroundFromWrapper" ]]
+return function()
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), insertServiceLoadAssetModule (ref), findInnerImageId (ref)
 	local var9, assetId, var10
 	local var8 = useProfileJsonComponentModule(enumsModule.Components.ProfileBackground)
@@ -63,7 +63,7 @@ return function() --[[ line: 73 | named "useAvatarBackgroundFromWrapper" ]]
 		end
 	end
 	assetId, var10 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 81 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var10 (ref), insertServiceLoadAssetModule (copy), findInnerImageId (copy)
 		if var9 == nil then
 			var10(nil)
@@ -71,9 +71,9 @@ return function() --[[ line: 73 | named "useAvatarBackgroundFromWrapper" ]]
 			return nil
 		end
 		local var11 = false
-		task.spawn(function() --[[ line: 88 ]]
+		task.spawn(function()
 			-- upvalues: insertServiceLoadAssetModule (copy), var9 (copy), var11 (write), findInnerImageId (copy), var10 (copy)
-			local ok, status = pcall(function() --[[ line: 89 ]]
+			local ok, status = pcall(function()
 				-- upvalues: insertServiceLoadAssetModule (copy), var9 (copy)
 				return insertServiceLoadAssetModule(var9)
 			end)
@@ -90,7 +90,7 @@ return function() --[[ line: 73 | named "useAvatarBackgroundFromWrapper" ]]
 			var10("rbxassetid://" .. tostring(var12))
 		end)
 		
-		return function() --[[ line: 109 ]]
+		return function()
 			-- upvalues: var11 (write)
 			var11 = true
 		end

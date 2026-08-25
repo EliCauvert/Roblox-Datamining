@@ -24,7 +24,7 @@ local t = {
 }
 
 return {
-	mountModalSelector = function(p0, p1, p2, p3, p4, p5) --[[ line: 58 ]]
+	mountModalSelector = function(p0, p1, p2, p3, p4, p5)
 		-- upvalues: guiService (ref), isInExperienceUIVREnabled (ref), isSpatial (write), UIManager (write), panelType (write), t (ref), coreGuiService (ref), constantsModule (ref), fFlagHideShortcutsOnReportDropdownModule (ref), roactModule (ref), modalBaseSelectorDialogModule (ref)
 		local guiInset, _ = guiService:GetGuiInset()
 		
@@ -64,7 +64,7 @@ return {
 			onClose = p4
 		}), t.modalSelectorFrame, "ModalSelectorDialog")
 	end,
-	unmountModalSelector = function() --[[ line: 34 ]]
+	unmountModalSelector = function()
 		-- upvalues: t (ref), roactModule (ref), isInExperienceUIVREnabled (ref)
 		if t.modalSelectorHandle ~= nil then
 			roactModule.unmount(t.modalSelectorHandle)

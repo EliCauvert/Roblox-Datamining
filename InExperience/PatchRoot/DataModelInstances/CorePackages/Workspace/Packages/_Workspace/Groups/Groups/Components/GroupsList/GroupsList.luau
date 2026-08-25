@@ -15,7 +15,7 @@ local groupsListHeaderModule = require(script.Parent.GroupsListHeader)
 local groupListItemSkeletonModule = require(script.Parent.GroupListItemSkeleton)
 local frozen = table.freeze({})
 
-local function renderSkeletons() --[[ line: 33 ]]
+local function renderSkeletons()
 	-- upvalues: reactModule (ref), groupListItemSkeletonModule (ref)
 	local t = {}
 	
@@ -25,7 +25,7 @@ local function renderSkeletons() --[[ line: 33 ]]
 	return t
 end
 
-return function(p0) --[[ line: 43 | named "GroupsList" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), frozen (ref), reactModule (ref), view (ref), renderSkeletons (ref), scrollView (ref), scrollBarVisibility (ref), groupsListSectionModule (ref), groupsListHeaderModule (ref), groupsListToolbarModule (ref), text (ref)
 	local var11 = useLocalization({
 		primaryHeading = textKeysModule.HeadingPrimary,
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 43 | named "GroupsList" ]]
 	local groupsList = p0.groupsList or frozen
 	local var13, var14 = reactModule.useState("")
 	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: groupsList (ref)
 		for i, v in ipairs(groupsList) do
 			if v.isPrimary then
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 43 | named "GroupsList" ]]
 		end
 		return nil
 	end, { groupsList })
-	local var17 = reactModule.useMemo(function() --[[ line: 65 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), groupsList (ref)
 		if not var16 then
 			return groupsList
@@ -60,18 +60,18 @@ return function(p0) --[[ line: 43 | named "GroupsList" ]]
 		end
 		return t
 	end, { groupsList, var16 })
-	local var18 = reactModule.useMemo(function() --[[ line: 79 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref)
 		return if var16 then { var16 } else {}
 	end, { var16 })
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var15 (ref)
 		if var13 ~= "" and var15.current then
 			var15.current.CanvasPosition = Vector2.new(0, 0)
 		end
 	end, { var13 })
 	local var19 = var13 ~= ""
-	local var20 = reactModule.useMemo(function() --[[ line: 94 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: var19 (ref), var13 (ref), groupsList (ref)
 		if not var19 then
 			return nil
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 43 | named "GroupsList" ]]
 		return t
 	end, { groupsList, var13 })
 	local var21 = var19 and (var20 ~= nil and next(var20) == nil)
-	local var22 = reactModule.useMemo(function() --[[ line: 111 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var11 (ref), groupsList (ref), var21 (ref)
 		return if p0.isLoading or not p0.groupsList then nil elseif p0.loadFailure then var11.loadFailure elseif #groupsList == 0 then var11.notInGroups elseif var21 then var11.noResults else nil
 	end, {

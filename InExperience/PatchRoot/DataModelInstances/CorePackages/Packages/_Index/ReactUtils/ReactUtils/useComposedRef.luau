@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-local function _(p0, p1) --[[ line: 9 | named "forwardRefValue" ]]
+local function _(p0, p1)
 	if type(p0) == "function" then
 		p0(p1)
 		
@@ -10,9 +10,9 @@ local function _(p0, p1) --[[ line: 9 | named "forwardRefValue" ]]
 	end
 end
 
-return function(p2, p3) --[[ line: 22 | named "useComposedRef" ]]
+return function(p2, p3)
 	-- upvalues: reactModule (ref)
-	return reactModule.useCallback(function(p4) --[[ line: 23 ]]
+	return reactModule.useCallback(function(p4)
 		-- upvalues: p2 (ref), p3 (ref)
 		if type(p2) == "function" then
 			p2(p4)

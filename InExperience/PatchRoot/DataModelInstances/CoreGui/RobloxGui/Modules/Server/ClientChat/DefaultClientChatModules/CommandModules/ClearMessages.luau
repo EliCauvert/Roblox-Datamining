@@ -1,6 +1,6 @@
 ﻿local utilModule = require(script.Parent:WaitForChild("Util"))
 
-function ProcessMessage(p0, p1, _) --[[ line: 8 ]]
+function ProcessMessage(p0, p1, _)
 	if string.sub(p0, 1, 4):lower() ~= "/cls" and string.sub(p0, 1, 6):lower() ~= "/clear" then
 		return false
 	end

@@ -16,7 +16,7 @@ local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedF
 local fFlagSduiDeferredListItems = require(parent.SharedFlags).FFlagSduiDeferredListItems
 local propResultCategory = sduiClientBindingTypesModule.PropResultCategory
 
-local function _(p0, p1) --[[ line: 37 | named "canSorterReorder" ]]
+local function _(p0, p1)
 	if p1 ~= nil then
 		return true
 	end
@@ -28,7 +28,7 @@ local function _(p0, p1) --[[ line: 37 | named "canSorterReorder" ]]
 	return false
 end
 
-local function buildItemsFromEntries(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13) --[[ line: 54 ]]
+local function buildItemsFromEntries(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)
 	-- upvalues: sduiListEntrySorterModule (ref), fFlagSduiPoolBackedFeed (ref), sduiPoolEntryHelpersModule (ref), sduiListEntryRendererModule (ref), fFlagSduiDeferredListItems (ref)
 	if p4 ~= nil then
 		local var13
@@ -67,7 +67,7 @@ local function buildItemsFromEntries(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p
 	return sduiListEntryRendererModule.buildEntryConfigs(var14, var15, p4, p7, p8, p9, p6, p10, if fFlagSduiDeferredListItems then p11 else nil, if fFlagSduiPoolBackedFeed then entryConfigExtrasFn else nil)
 end
 
-return function(_, p14, p15, p16, p17, p18) --[[ line: 125 | named "buildComponentList" ]]
+return function(_, p14, p15, p16, p17, p18)
 	-- upvalues: fFlagSduiDeferredListItems (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), propResultCategory (ref), sduiListEntryRendererModule (ref), fFlagSduiPoolBackedFeed (ref), sduiPoolEntryHelpersModule (ref), sduiPropUtilsModule (ref), sduiListEntryNormalizerModule (ref), buildItemsFromEntries (ref), sduiParseHelpersModule (ref), signalsModule (ref)
 	local source = p14 and p14.source
 	local defaultItem = p14 and p14.default_item
@@ -83,7 +83,7 @@ return function(_, p14, p15, p16, p17, p18) --[[ line: 125 | named "buildCompone
 			parserName = p17.currentParserName
 		}, p17.appPage)
 		
-		return function() --[[ line: 150 ]]
+		return function()
 			return { data = {} }
 		end, propResultCategory.PropSignal
 	end
@@ -101,7 +101,7 @@ return function(_, p14, p15, p16, p17, p18) --[[ line: 125 | named "buildCompone
 	if type == "binding_path" then
 		local var27 = nil
 		
-		return sduiPropUtilsModule.generateDynamicBindingPropValue(value, p15, p17, p16, function(p19, p20) --[[ line: 185 ]]
+		return sduiPropUtilsModule.generateDynamicBindingPropValue(value, p15, p17, p16, function(p19, p20)
 			-- upvalues: sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p17 (ref), var27 (write), buildItemsFromEntries (copy), orderedIdentifiers (ref), p16 (ref), p15 (ref), var23 (ref), p18 (ref), fFlagSduiDeferredListItems (copy), var22 (ref), var24 (write), fFlagSduiPoolBackedFeed (copy), var25 (write)
 			var27 = buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeBoundData(p19, defaultItem, itemOverrides, p17), orderedIdentifiers, var27, p16, p15, p17, var23, p18, p20, if fFlagSduiDeferredListItems then var22 else nil, var24, if fFlagSduiPoolBackedFeed then var25 else nil)
 			
@@ -111,13 +111,13 @@ return function(_, p14, p15, p16, p17, p18) --[[ line: 125 | named "buildCompone
 		local items = value and value.items
 		
 		if items == nil then
-			return function() --[[ line: 214 ]]
+			return function()
 				return { data = {} }
 			end, propResultCategory.PropSignal
 		end
-		return function(p21) --[[ line: 222 ]]
+		return function(p21)
 			-- upvalues: sduiListEntryNormalizerModule (copy), items (ref), defaultItem (ref), p17 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p16 (ref), p15 (ref), var23 (ref), p18 (ref), fFlagSduiDeferredListItems (copy), var22 (ref), var24 (write), fFlagSduiPoolBackedFeed (copy), var25 (write), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
-			local ok, status = pcall(function() --[[ line: 223 ]]
+			local ok, status = pcall(function()
 				-- upvalues: sduiListEntryNormalizerModule (copy), items (copy), defaultItem (copy), p17 (copy), buildItemsFromEntries (copy), orderedIdentifiers (copy), p16 (copy), p15 (copy), var23 (copy), p18 (copy), p21 (ref), fFlagSduiDeferredListItems (copy), var22 (copy), var24 (copy), fFlagSduiPoolBackedFeed (copy), var25 (copy)
 				return buildItemsFromEntries(sduiListEntryNormalizerModule.normalizeLiteralItems(items, defaultItem, p17), orderedIdentifiers, nil, p16, p15, p17, var23, p18, p21, if fFlagSduiDeferredListItems then var22 else nil, var24, if fFlagSduiPoolBackedFeed then var25 else nil)
 			end)
@@ -135,9 +135,9 @@ return function(_, p14, p15, p16, p17, p18) --[[ line: 125 | named "buildCompone
 			return { data = {} }
 		end, propResultCategory.PropSignal
 	elseif fFlagSduiPoolBackedFeed and type == "pool" then
-		return signalsModule.createComputed(function(p22) --[[ line: 263 ]]
+		return signalsModule.createComputed(function(p22)
 			-- upvalues: p16 (ref), sduiListEntryNormalizerModule (copy), defaultItem (ref), itemOverrides (ref), p17 (ref), buildItemsFromEntries (copy), orderedIdentifiers (ref), p15 (ref), var23 (ref), p18 (ref), fFlagSduiDeferredListItems (copy), var22 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy)
-			local ok, status = pcall(function() --[[ line: 264 ]]
+			local ok, status = pcall(function()
 				-- upvalues: p16 (copy), p22 (ref), sduiListEntryNormalizerModule (copy), defaultItem (copy), itemOverrides (copy), p17 (copy), buildItemsFromEntries (copy), orderedIdentifiers (copy), p15 (copy), var23 (copy), p18 (copy), fFlagSduiDeferredListItems (copy), var22 (copy), sduiLoggerModule (copy), sduiErrorsModule (copy)
 				local section = (p16(p22) or {})._section
 				

@@ -14,14 +14,14 @@ local setIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOp
 local compactWidthThreshold = configModule.PresetTray.CompactWidthThreshold
 local slideSpring = configModule.PresetTray.SlideSpring
 
-local function _() --[[ line: 23 | named "isCompactMode" ]]
+local function _()
 	-- upvalues: compactWidthThreshold (ref)
 	local currentCamera = workspace.CurrentCamera
 	
 	return if currentCamera then currentCamera.ViewportSize.X < compactWidthThreshold else false
 end
 
-return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]]
+return reactModule.memo(function(value)
 	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), compactWidthThreshold (ref), foundationModule (ref), useAutoTrayHeightModule (ref), reactModule (ref), guiService (ref), setIsPresetTrayOpenModule (ref), otterModule (ref), slideSpring (ref), userInputService (ref), configModule (ref), presetChatContainerModule (ref)
 	local var14
 	local var12 = getPresetChatStoreModule(false)
@@ -43,34 +43,34 @@ return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]
 	local var25, var26 = reactModule.useState(0)
 	local var27, var28 = reactModule.useState(guiService.TopbarInset.Height)
 	local var29 = var16 + math.max(0, var23 - var25 - var27)
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: guiService (copy), var28 (ref)
-		local var35 = guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ line: 50 ]]
+		local var35 = guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
 			-- upvalues: var28 (copy), guiService (copy)
 			var28(guiService.TopbarInset.Height)
 		end)
 		
-		return function() --[[ line: 53 ]]
+		return function()
 			-- upvalues: var35 (ref)
 			var35:Disconnect()
 		end
 	end, {})
 	local var30, var31 = reactModule.useState(false)
-	local var32 = reactModule.useCallback(function(p0) --[[ line: 60 ]]
+	local var32 = reactModule.useCallback(function(p0)
 		-- upvalues: var24 (ref), var31 (ref)
 		var24(p0.AbsoluteSize.Y)
 		var31(p0.AbsoluteSize.X < p0.AbsoluteSize.Y)
 	end, {})
-	local var33 = reactModule.useCallback(function(p1) --[[ line: 65 ]]
+	local var33 = reactModule.useCallback(function(p1)
 		-- upvalues: var26 (ref), var17 (ref)
 		var26(p1.AbsoluteSize.Y)
 		var17(p1)
 	end, { var17 })
-	local var34 = reactModule.useCallback(function() --[[ line: 70 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: setIsPresetTrayOpenModule (copy), var12 (ref)
 		setIsPresetTrayOpenModule(var12, false)
 	end, { var12 })
-	reactModule.useEffect(function() --[[ line: 74 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), var19 (ref), var22 (ref), otterModule (copy), var21 (ref), slideSpring (copy)
 		if var13 then
 			var19(true)
@@ -80,7 +80,7 @@ return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]
 			end
 			local var36 = otterModule.createSingleMotor(1)
 			var22.current = var36
-			var36:onStep(function(p2) --[[ line: 82 ]]
+			var36:onStep(function(p2)
 				-- upvalues: var21 (copy)
 				var21(p2)
 			end)
@@ -89,15 +89,15 @@ return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]
 			return
 		elseif var22.current then
 			var22.current:setGoal(otterModule.spring(1, slideSpring))
-			var22.current:onComplete(function() --[[ line: 89 ]]
+			var22.current:onComplete(function()
 				-- upvalues: var19 (copy)
 				var19(false)
 			end)
 		end
 	end, { var13 })
-	reactModule.useEffect(function() --[[ line: 96 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var22 (ref)
-		return function() --[[ line: 97 ]]
+		return function()
 			-- upvalues: var22 (copy)
 			if var22.current then
 				var22.current:destroy()
@@ -105,21 +105,21 @@ return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 105 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), userInputService (copy), setIsPresetTrayOpenModule (copy), var12 (ref), guiService (copy)
 		if var13 then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p3, _) --[[ line: 110 ]]
+			local inputBeganConnection = userInputService.InputBegan:Connect(function(p3, _)
 				-- upvalues: setIsPresetTrayOpenModule (copy), var12 (copy)
 				if p3.KeyCode == Enum.KeyCode.Escape or p3.KeyCode == Enum.KeyCode.ButtonB then
 					setIsPresetTrayOpenModule(var12, false)
 				end
 			end)
-			local menuOpenedConnection = guiService.MenuOpened:Connect(function() --[[ line: 116 ]]
+			local menuOpenedConnection = guiService.MenuOpened:Connect(function()
 				-- upvalues: var12 (copy)
 				var12.setIsTrayOpen(false)
 			end)
 			
-			return function() --[[ line: 120 ]]
+			return function()
 				-- upvalues: inputBeganConnection (ref), menuOpenedConnection (ref)
 				inputBeganConnection:Disconnect()
 				menuOpenedConnection:Disconnect()
@@ -141,7 +141,7 @@ return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]
 			FullFrame = if not var30 then reactModule.createElement(foundationModule.View, {
 				tag = "bg-surface-200",
 				AnchorPoint = Vector2.new(0, 1),
-				Position = var20:map(function(p4) --[[ line: 144 ]]
+				Position = var20:map(function(p4)
 					-- upvalues: var29 (ref)
 					return UDim2.new(0, 0, 1, math.round(p4 * var29))
 				end),
@@ -168,7 +168,7 @@ return reactModule.memo(function(value) --[[ line: 31 | named "PresetChatTray" ]
 				ClipsDescendants = true,
 				ZIndex = 1,
 				AnchorPoint = Vector2.new(0, 1),
-				Position = var20:map(function(p5) --[[ line: 169 ]]
+				Position = var20:map(function(p5)
 					-- upvalues: var16 (ref)
 					return UDim2.new(0, 0, 1, math.round(p5 * var16))
 				end),

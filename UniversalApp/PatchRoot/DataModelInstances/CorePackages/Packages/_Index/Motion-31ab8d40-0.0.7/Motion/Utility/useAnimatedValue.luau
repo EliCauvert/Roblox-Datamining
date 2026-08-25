@@ -4,14 +4,14 @@ local reactModule = require(parent_1.React)
 local reactOtterModule = require(parent_1.ReactOtter)
 local _ = require(parent.Types)
 
-local function _(p0, p1) --[[ line: 40 | named "validateNumber" ]]
+local function _(p0, p1)
 	return if type(p0) == "number" then p0 else p1 or 0
 end
 
-return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), reactOtterModule (ref)
 	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function(...) --[[ line: 52 ]]
+	local var3 = reactModule.useCallback(function(...)
 		-- upvalues: var2 (ref)
 		if var2.current ~= nil then
 			if type(var2.current) == "function" then
@@ -33,9 +33,9 @@ return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
 		t.offset = if type(offset) == "number" then offset else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p3) --[[ line: 69 ]]
+		return useAnimatedBinding:map(function(p3)
 			return UDim.new(p3.scale, p3.offset)
-		end), function(p4, p5) --[[ line: 73 ]]
+		end), function(p4, p5)
 			-- upvalues: var2 (ref), t (ref), reactOtterModule (copy)
 			if not p4 then return end
 			if typeof(p4) == "UDim" then
@@ -68,9 +68,9 @@ return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
 		t.yOffset = if type(offset_1) == "number" then offset_1 else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p6) --[[ line: 110 ]]
+		return useAnimatedBinding:map(function(p6)
 			return UDim2.new(p6.xScale, p6.xOffset, p6.yScale, p6.yOffset)
-		end), function(p7, p8) --[[ line: 114 ]]
+		end), function(p7, p8)
 			-- upvalues: var2 (ref), t (ref), reactOtterModule (copy)
 			if not p7 then return end
 			if typeof(p7) == "UDim2" then
@@ -103,9 +103,9 @@ return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
 		t.y = if type(y) == "number" then y else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p9) --[[ line: 149 ]]
+		return useAnimatedBinding:map(function(p9)
 			return Vector2.new(p9.x, p9.y)
-		end), function(p10, p11) --[[ line: 153 ]]
+		end), function(p10, p11)
 			-- upvalues: var2 (ref), t (ref), reactOtterModule (copy)
 			if not p10 then return end
 			if typeof(p10) == "Vector2" then
@@ -136,9 +136,9 @@ return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
 		t.b = if type(b) == "number" then b else 0
 		useAnimatedBinding, t = useAnimatedBinding(t, var3)
 		
-		return useAnimatedBinding:map(function(p12) --[[ line: 188 ]]
+		return useAnimatedBinding:map(function(p12)
 			return Color3.new(p12.r, p12.g, p12.b)
-		end), function(p13, p14) --[[ line: 192 ]]
+		end), function(p13, p14)
 			-- upvalues: var2 (ref), t (ref), reactOtterModule (copy)
 			if not p13 then return end
 			if typeof(p13) == "Color3" then
@@ -163,9 +163,9 @@ return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
 	elseif typeof(p2) == "number" then
 		local var8, var9 = reactOtterModule.useAnimatedBinding(if type(p2) == "number" then p2 else 0, var3)
 		
-		return var8:map(function(p15) --[[ line: 224 ]]
+		return var8:map(function(p15)
 			return p15
-		end), function(p16, p17) --[[ line: 228 ]]
+		end), function(p16, p17)
 			-- upvalues: var2 (ref), var9 (ref), reactOtterModule (copy)
 			if typeof(p16) == "number" then
 				var2.current = if p17 then p17.onComplete else nil
@@ -180,5 +180,5 @@ return function(p2) --[[ line: 49 | named "useAnimatedValue" ]]
 	end
 	warn("Unsupported type for animated value:", typeof(p2))
 	
-	return reactModule.createBinding(p2), function() --[[ line: 248 ]] end
+	return reactModule.createBinding(p2), function() end
 end

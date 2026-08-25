@@ -1,5 +1,5 @@
 ﻿local t = {
-	advanceCriticalDampedSpring = function(p0, p1, p2, p3, p4) --[[ line: 25 ]]
+	advanceCriticalDampedSpring = function(p0, p1, p2, p3, p4)
 		local var1 = 6.28318530718 * p4
 		local var2 = p0 - p2
 		local var3 = var1 * p3
@@ -8,18 +8,18 @@
 		
 		return p2 + (var2 + var5 * p3) * expValue, (p1 - var5 * var3) * expValue
 	end,
-	offsetForIndex = function(value, p5) --[[ line: 45 ]]
+	offsetForIndex = function(value, p5)
 		return (value - 1) * p5
 	end,
-	clampIndex = function(value, minValue) --[[ line: 50 ]]
+	clampIndex = function(value, minValue)
 		return if minValue <= 0 then 1 else math.clamp(value, 1, minValue)
 	end,
-	projectSnapOffset = function(value, p6, p7) --[[ line: 62 ]]
+	projectSnapOffset = function(value, p6, p7)
 		return value - p6 * p7
 	end
 }
 
-function t.resolveSnapIndex(p8, p9, p10, p11, p12) --[[ line: 77 ]]
+function t.resolveSnapIndex(p8, p9, p10, p11, p12)
 	-- upvalues: t (ref)
 	if p11 <= 0 or p10 <= 0 then
 		return 1
@@ -31,7 +31,7 @@ function t.resolveSnapIndex(p8, p9, p10, p11, p12) --[[ line: 77 ]]
 	return t.clampIndex(if var8 < var7 then math.floor(var6) + 2 elseif var7 < -var8 then math.ceil(var6) else math.round(var6) + 1, p11)
 end
 
-function t.getVisibleWindow(p13, p14, p15) --[[ line: 109 ]]
+function t.getVisibleWindow(p13, p14, p15)
 	-- upvalues: t (ref)
 	if p15 <= 0 then
 		return { startIndex = 1, endIndex = 0 }
@@ -44,21 +44,21 @@ function t.getVisibleWindow(p13, p14, p15) --[[ line: 109 ]]
 	}
 end
 
-function t.reindexAfterRemoval(p16, p17, p18) --[[ line: 130 ]]
+function t.reindexAfterRemoval(p16, p17, p18)
 	-- upvalues: t (ref)
 	return if p18 <= 0 then 1 elseif p17 < p16 then t.clampIndex(p16 - 1, p18) else t.clampIndex(p16, p18)
 end
 
-function t.neighborForRemoval(p19, p20) --[[ line: 145 ]]
+function t.neighborForRemoval(p19, p20)
 	return if p19 < p20 then p19 + 1 else p19 - 1
 end
 
-function t.nearestIndexForOffset(value, p21, p22) --[[ line: 155 ]]
+function t.nearestIndexForOffset(value, p21, p22)
 	-- upvalues: t (ref)
 	return if p22 <= 0 then 1 elseif p21 <= 0 then 1 else t.clampIndex(math.round(value / p21) + 1, p22)
 end
 
-function t.resolveSettleIndex(value, p23, p24, p25, p26, p27) --[[ line: 178 ]]
+function t.resolveSettleIndex(value, p23, p24, p25, p26, p27)
 	-- upvalues: t (ref)
 	if p25 <= 0 or p24 <= 0 then
 		return t.clampIndex(value, p25)

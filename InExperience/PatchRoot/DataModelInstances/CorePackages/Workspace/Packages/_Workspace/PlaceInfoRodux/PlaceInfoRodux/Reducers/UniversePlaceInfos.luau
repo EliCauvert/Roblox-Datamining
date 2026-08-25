@@ -4,7 +4,7 @@ local immutable = require(parent.AppCommonLib).Immutable
 local receivedPlacesInfos = require(placeInfoRodux.Actions).ReceivedPlacesInfos
 local convertUniverseIdToString = require(parent.SharedFlags).ConvertUniverseIdToString
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: receivedPlacesInfos (ref), convertUniverseIdToString (ref), immutable (ref)
 	p0 = p0 or {}
 	

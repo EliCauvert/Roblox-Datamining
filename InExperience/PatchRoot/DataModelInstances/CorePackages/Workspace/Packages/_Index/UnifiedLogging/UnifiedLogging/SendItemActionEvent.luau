@@ -10,7 +10,7 @@ local _ = require(unifiedLogging.SduiAnalyticsTypes)
 local calculateRowPositionFieldsModule = require(unifiedLogging.calculateRowPositionFields)
 local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
 
-local var7 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 19 ]]
+local var7 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
 	-- upvalues: discoveryEventErrorLogger (ref)
 	if p0 then
 		return {
@@ -34,7 +34,7 @@ local var7 = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ lin
 	return {}
 end
 
-local _ = function(p12, p13) --[[ line: 62 ]]
+local _ = function(p12, p13)
 	-- upvalues: userEntryUtilsModule (ref)
 	local var8 = userEntryUtilsModule.extractFieldsFromUserEntry(p12)
 	
@@ -47,7 +47,7 @@ local _ = function(p12, p13) --[[ line: 62 ]]
 end
 
 return {
-	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24) --[[ line: 186 ]]
+	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24)
 		-- upvalues: discoveryEventErrorLogger (ref), var7 (ref), itemActionEventModule (ref)
 		if p14 and p15 then
 			itemActionEventModule(p14, p19, p23, var7(p16, p18, p17, p23, p20, p21, p22, p24))
@@ -56,7 +56,7 @@ return {
 		end
 		discoveryEventErrorLogger.reportError("SendItemActionEventNilServiceItemCollection", "Event Ingest or App Analytics was nil when trying to send an itemActionEvent for collection", { eventIngest = p14, appAnalytics = p15 })
 	end else nil,
-	sendFromFriendsCarousel = function(p25, p26, p27, p28, p29, p30, p31, p32, p33, p34) --[[ line: 73 ]]
+	sendFromFriendsCarousel = function(p25, p26, p27, p28, p29, p30, p31, p32, p33, p34)
 		-- upvalues: discoveryEventErrorLogger (ref), contentTypeModule (ref), var7 (ref), userEntryUtilsModule (ref), cryoModule (ref), itemActionEventModule (ref)
 		if p25 and p26 then
 			local user = contentTypeModule.User
@@ -72,7 +72,7 @@ return {
 		end
 		discoveryEventErrorLogger.reportError("SendItemActionEventNilService", `Event Ingest or App Analytics was nil when trying to send an itemActionEvent for collection {p31}`, { eventIngest = p25, appAnalytics = p26, sortId = p31 })
 	end,
-	sendFromServerDrivenUi = function(p35, p36, p37, p38, p39, p40, p41, p42, p43, p44, _, p45, p46, p47) --[[ line: 119 ]]
+	sendFromServerDrivenUi = function(p35, p36, p37, p38, p39, p40, p41, p42, p43, p44, _, p45, p46, p47)
 		-- upvalues: discoveryEventErrorLogger (ref), calculateRowPositionFieldsModule (ref), var7 (ref), cryoModule (ref), appStorageService (ref), itemActionEventModule (ref)
 		if not p35 then
 			discoveryEventErrorLogger.reportError("SendItemActionEventFromSduiNilService", `Event Ingest was nil when trying to send an itemActionEvent for collection {p40}`, { eventIngest = p35, collectionId = p40 })

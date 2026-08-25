@@ -13,7 +13,7 @@ local fFlagUseSignalsForCountryCodeList = require(parent.SharedFlags).FFlagUseSi
 local getCountryCodeListStoreModule = require(authCommon.Stores.GetCountryCodeListStore)
 local _ = require(authCommon.Common.Types)
 
-return function(p0) --[[ line: 23 | named "CountryCodeDropdownContainer" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), useDispatch (ref), apiFetchCountryCodesModule (ref), fFlagUseSignalsForCountryCodeList (ref), useSignalState (ref), getCountryCodeListStoreModule (ref), useSelector (ref), reactModule (ref), countryCodeDropdownViewModule (ref)
 	local var6 = useRoactService(roactNetworking)
 	local var7 = useDispatch()
@@ -22,17 +22,17 @@ return function(p0) --[[ line: 23 | named "CountryCodeDropdownContainer" ]]
 	local dropdownVisible = p0.dropdownVisible
 	local onCountryCodeSelected = p0.onCountryCodeSelected
 	
-	local _ = function(p1) --[[ line: 31 ]]
+	local _ = function(p1)
 		-- upvalues: var7 (ref), apiFetchCountryCodesModule (copy)
 		return var7(apiFetchCountryCodesModule.Fetch(p1))
 	end
 	
-	local var8 = if fFlagUseSignalsForCountryCodeList then useSignalState(getCountryCodeListStoreModule(false).getCountryCodeList) else useSelector(function(p2) --[[ line: 37 ]]
+	local var8 = if fFlagUseSignalsForCountryCodeList then useSignalState(getCountryCodeListStoreModule(false).getCountryCodeList) else useSelector(function(p2)
 		return p2.CountryCodeList
 	end)
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var7 (ref), apiFetchCountryCodesModule (copy)
-		var7(apiFetchCountryCodesModule.Fetch(var6)):catch(function() --[[ line: 42 ]] end)
+		var7(apiFetchCountryCodesModule.Fetch(var6)):catch(function() end)
 	end, {})
 	
 	return reactModule.createElement(countryCodeDropdownViewModule, {

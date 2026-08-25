@@ -22,17 +22,17 @@ local fFlagHomePhoneVerificationUpsellNewCopy = require(parent.SharedFlags).FFla
 local t = {
 	addPhoneTitleKey = "Feature.VerificationUpsell.Action.AddPhoneVoice",
 	addPhoneDescriptionKey = "Feature.VerificationUpsell.Description.AddPhoneBodyVoice",
-	onSuccess = function() --[[ line: 41 ]] end,
-	closeUpsell = function() --[[ line: 42 ]] end
+	onSuccess = function() end,
+	closeUpsell = function() end
 }
 
-return function(p0) --[[ line: 49 | named "VoicePhoneVerificationUpsellOverlayWrapper" ]]
+return function(p0)
 	-- upvalues: mergePropsModule (ref), t (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), useAppPolicy (ref), imageSetLabel (ref), images (ref), postUserOptIn (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (ref), logging (ref), useLocalization (ref), upsellContainerModule (ref), cryoModule (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), getFFlagDisablePVUpsellDataConsent (ref), phoneVerificationStatusOverlayModule (ref)
 	local var9 = mergePropsModule(t, p0)
 	local var10 = useRoactService(roactNetworking)
 	local var11, var12 = reactModule.useState(false)
 	local var13, var14 = reactModule.useState(false)
-	local var15 = useAppPolicy(function(p1) --[[ line: 56 ]]
+	local var15 = useAppPolicy(function(p1)
 		return p1.RequireExplicitVoiceConsent()
 	end)
 	local var16 = reactModule.createElement(imageSetLabel, {
@@ -48,13 +48,13 @@ return function(p0) --[[ line: 49 | named "VoicePhoneVerificationUpsellOverlayWr
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		PhoneVerificationUpsellOverlay = reactModule.createElement(upsellContainerModule, cryoModule.Dictionary.join(var9, {
 			alwaysShowAddPhoneLegalText = true,
-			onSuccess = function() --[[ line: 66 ]]
+			onSuccess = function()
 				-- upvalues: postUserOptIn (copy), var10 (ref), var12 (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (ref), var14 (ref), logging (copy)
-				postUserOptIn(var10, true, false):andThen(function(p2) --[[ line: 68 ]]
+				postUserOptIn(var10, true, false):andThen(function(p2)
 					-- upvalues: var12 (copy), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy), var14 (copy), logging (copy)
 					if p2 then
 						var12(true)
-						task.delay(3, function() --[[ line: 71 ]]
+						task.delay(3, function()
 							-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy)
 							if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
 								var9.closeUpsell()
@@ -69,7 +69,7 @@ return function(p0) --[[ line: 49 | named "VoicePhoneVerificationUpsellOverlayWr
 						return
 					end
 					var14(true)
-					task.delay(5, function() --[[ line: 82 ]]
+					task.delay(5, function()
 						-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy)
 						if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
 							var9.closeUpsell()
@@ -81,10 +81,10 @@ return function(p0) --[[ line: 49 | named "VoicePhoneVerificationUpsellOverlayWr
 						var9.closeUpsell()
 					end)
 					logging.warn("Error getting UserOptIn. " .. tostring(p2))
-				end):catch(function() --[[ line: 94 ]]
+				end):catch(function()
 					-- upvalues: var14 (copy), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy), logging (copy)
 					var14(true)
-					task.delay(5, function() --[[ line: 96 ]]
+					task.delay(5, function()
 						-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy)
 						if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
 							var9.closeUpsell()

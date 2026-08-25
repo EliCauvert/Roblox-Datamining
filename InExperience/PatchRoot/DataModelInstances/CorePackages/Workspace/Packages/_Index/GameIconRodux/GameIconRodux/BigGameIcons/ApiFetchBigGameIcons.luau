@@ -6,9 +6,9 @@ local parent = gameIconRodux.Parent
 local promiseModule = require(parent.Promise)
 local apiFetchThumbnails = require(parent.Http).Utils.ApiFetchThumbnails
 
-return function(p0, p1, p2) --[[ line: 12 ]]
+return function(p0, p1, p2)
 	-- upvalues: bigGameIconReducerModule (ref), promiseModule (ref), apiFetchThumbnails (ref), gamesGetIconsModule (ref), setBigGameIconsModule (ref)
-	return function(p3) --[[ line: 13 ]]
+	return function(p3)
 		-- upvalues: bigGameIconReducerModule (copy), p1 (ref), promiseModule (copy), apiFetchThumbnails (copy), p0 (ref), p2 (ref), gamesGetIconsModule (copy), setBigGameIconsModule (copy)
 		local key = p3:getState()[bigGameIconReducerModule.key]
 		local t = {}

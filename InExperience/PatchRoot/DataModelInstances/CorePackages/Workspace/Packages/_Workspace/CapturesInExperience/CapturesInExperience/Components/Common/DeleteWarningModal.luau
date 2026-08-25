@@ -22,7 +22,7 @@ local useAnalyticsModule = require(parent.Analytics.useAnalytics)
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 
-return function(p0) --[[ line: 37 ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useStyle (ref), useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), useState (ref), useEffect (ref), useCallback (ref), deleteWarningModalClosedModule (ref), eventNamesModule (ref), recordDeleteWarningModalOptOutModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref), checkbox (ref)
 	local var10 = useScreenSize()
 	local var11 = useStyle()
@@ -38,16 +38,16 @@ return function(p0) --[[ line: 37 ]]
 		optOutText = "Feature.Captures.Label.DeleteCaptureWarningOptOut"
 	})
 	local theme = var11.Theme
-	local var15 = useSelector(function(p1) --[[ line: 56 ]]
+	local var15 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
-	local var16 = useSelector(function(p2) --[[ line: 60 ]]
+	local var16 = useSelector(function(p2)
 		-- upvalues: constantsModule (copy)
 		return p2[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
 	local var17, var18 = useState(false)
-	useEffect(function() --[[ line: 66 ]]
+	useEffect(function()
 		-- upvalues: var15 (ref), var18 (ref)
 		if var15 then
 			var18(false)
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 37 ]]
 					{
 						buttonType = buttonType.Secondary,
 						props = {
-							onActivated = useCallback(function() --[[ line: 72 ]]
+							onActivated = useCallback(function()
 								-- upvalues: var13 (ref), deleteWarningModalClosedModule (copy), var12 (ref), eventNamesModule (copy)
 								var13(deleteWarningModalClosedModule())
 								var12.fireEvent(eventNamesModule.CapturesDeleteWarningModalCancelPressed)
@@ -82,7 +82,7 @@ return function(p0) --[[ line: 37 ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = useCallback(function() --[[ line: 77 ]]
+							onActivated = useCallback(function()
 								-- upvalues: p0 (ref), var17 (ref), recordDeleteWarningModalOptOutModule (copy), var12 (ref), eventNamesModule (copy), var13 (ref), deleteWarningModalClosedModule (copy)
 								p0.deleteItem()
 								
@@ -97,13 +97,13 @@ return function(p0) --[[ line: 37 ]]
 					}
 				}
 			},
-			middleContent = function() --[[ line: 118 ]]
+			middleContent = function()
 				-- upvalues: reactModule (copy), checkbox (copy), var14 (ref), var17 (ref), var18 (ref)
 				return reactModule.createElement(checkbox, {
 					isDisabled = false,
 					label = var14.optOutText,
 					isChecked = var17,
-					onActivated = function() --[[ line: 123 ]]
+					onActivated = function()
 						-- upvalues: var18 (copy), var17 (copy)
 						var18(not var17)
 					end

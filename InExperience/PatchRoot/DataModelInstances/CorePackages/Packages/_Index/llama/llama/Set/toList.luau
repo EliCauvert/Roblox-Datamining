@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 2 | named "toList" ]]
+﻿return function(p0)
 	local t = {}
 	local var1 = 1
 	

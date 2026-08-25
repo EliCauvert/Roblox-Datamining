@@ -2,7 +2,7 @@
 local naturalCompare = require(script.Parent.naturalCompare).naturalCompare
 local t = {}
 
-local function suggestionList(p0, p1) --[[ line: 34 ]]
+local function suggestionList(p0, p1)
 	-- upvalues: t (ref), object (ref), naturalCompare (ref)
 	local t_1 = {}
 	local var4 = t.new(p0)
@@ -17,7 +17,7 @@ local function suggestionList(p0, p1) --[[ line: 34 ]]
 		end
 	end
 	local var8 = object.keys(t_1)
-	table.sort(var8, function(p2, p3) --[[ line: 49 ]]
+	table.sort(var8, function(p2, p3)
 		-- upvalues: t_1 (ref), naturalCompare (copy)
 		local var9 = t_1[p2] - t_1[p3]
 		
@@ -30,7 +30,7 @@ end
 local stringToArray = nil
 t.__index = t
 
-function t.new(p4) --[[ line: 78 ]]
+function t.new(p4)
 	-- upvalues: t (ref), stringToArray (write)
 	local tbl = setmetatable({}, t)
 	tbl._input = p4
@@ -46,7 +46,7 @@ function t.new(p4) --[[ line: 78 ]]
 	return tbl
 end
 
-function t:measure(p5, p6) --[[ line: 93 ]]
+function t:measure(p5, p6)
 	-- upvalues: stringToArray (write)
 	if self._input == p5 then
 		return 0
@@ -102,7 +102,7 @@ function t:measure(p5, p6) --[[ line: 93 ]]
 	return if var21 <= p6 then var21 else nil
 end
 
-stringToArray = function(p7) --[[ line: 168 | named "stringToArray" ]]
+stringToArray = function(p7)
 	local t = {}
 	
 	for i = 1, p7:len() do

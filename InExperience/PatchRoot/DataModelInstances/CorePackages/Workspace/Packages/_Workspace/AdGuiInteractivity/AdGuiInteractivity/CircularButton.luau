@@ -3,7 +3,7 @@ local roactModule = require(parent.Roact)
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local circularButton = roactModule.Component:extend("CircularButton")
 
-function circularButton.render(p0) --[[ line: 10 ]]
+function circularButton.render(p0)
 	-- upvalues: roactModule (ref), imageSetLabel (ref)
 	local _ = nil
 	
@@ -15,7 +15,7 @@ function circularButton.render(p0) --[[ line: 10 ]]
 		BackgroundColor3 = Color3.fromRGB(17, 18, 19),
 		Transparency = p0.props.Transparency,
 		Text = "",
-		Visible = if typeof(p0.props.Transparency) == "table" then p0.props.Transparency:map(function(p1) --[[ line: 13 ]]
+		Visible = if typeof(p0.props.Transparency) == "table" then p0.props.Transparency:map(function(p1)
 			-- upvalues: p0 (ref)
 			return p1 < 1 and p0.props.Visible
 		end) else p0.props.Visible and p0.props.Transparency < 1,

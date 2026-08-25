@@ -5,7 +5,7 @@ local constants = require(corePackagesService.Workspace.Packages.UserLib).Utils.
 local size100x100 = Enum.ThumbnailSize.Size100x100
 local avatarThumbnail = Enum.ThumbnailType.AvatarThumbnail
 
-function t.GetPlayerImage(p0, p1, p2, _) --[[ line: 23 ]]
+function t.GetPlayerImage(p0, p1, p2, _)
 	-- upvalues: size100x100 (ref), avatarThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref)
 	if not p1 then
 		p1 = size100x100

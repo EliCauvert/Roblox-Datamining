@@ -3,7 +3,7 @@ local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local view = require(parent.Foundation).View
 
-return reactModule.memo(function(p0) --[[ line: 19 | named "EmptyTile" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), view (ref), cryoModule (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full",

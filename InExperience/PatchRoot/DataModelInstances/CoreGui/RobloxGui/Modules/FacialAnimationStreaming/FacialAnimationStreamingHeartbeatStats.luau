@@ -18,7 +18,7 @@ local _ = {
 	AudioAnimationEnabled = "audioAnimationEnabled"
 }
 
-local function _() --[[ line: 41 | named "updateTrackingTimes" ]]
+local function _()
 	-- upvalues: var11 (write), t_2 (ref), none (write)
 	local processTime = os.clock()
 	local _ = 0
@@ -29,7 +29,7 @@ local function _() --[[ line: 41 | named "updateTrackingTimes" ]]
 	var11 = processTime
 end
 
-local function reportHeartbeat() --[[ line: 52 ]]
+local function reportHeartbeat()
 	-- upvalues: rbxAnalyticsService (ref), playersService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), none (write), var11 (write), t_2 (ref), default (ref), avatarChatHeartbeatStatsModule (ref)
 	local t = {
 		pid = tostring(game.PlaceId),
@@ -57,13 +57,13 @@ local function reportHeartbeat() --[[ line: 52 ]]
 	default:logRobloxTelemetryEvent(avatarChatHeartbeatStatsModule, nil, t)
 end
 
-local _ = function() --[[ line: 76 | named "startHeartbeat" ]]
+local _ = function()
 	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), var8 (write), reportHeartbeat (ref)
 	local var17 = getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule()
 	
 	if var17 > 0 and not var8 then
 		var8 = true
-		task.spawn(function() --[[ line: 80 ]]
+		task.spawn(function()
 			-- upvalues: var8 (copy), reportHeartbeat (copy), var17 (ref)
 			while var8 do
 				reportHeartbeat()
@@ -74,7 +74,7 @@ local _ = function() --[[ line: 76 | named "startHeartbeat" ]]
 	end
 end
 
-local _ = function() --[[ line: 90 | named "updateTrackingMode" ]]
+local _ = function()
 	-- upvalues: var11 (write), t_2 (ref), none (write), faceAnimatorService (ref), t_1 (ref)
 	local processTime = os.clock()
 	local _ = 0
@@ -100,13 +100,13 @@ local _ = function() --[[ line: 90 | named "updateTrackingMode" ]]
 	none = t_1.None
 end
 
-function t.Initialize() --[[ line: 104 ]]
+function t.Initialize()
 	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), t_1 (ref), t_2 (ref), t_3 (ref), faceAnimatorService (ref), var11 (write), none (write), var8 (write), reportHeartbeat (ref)
 	if getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule() <= 0 then return end
 	for i, v in t_1 do
 		t_2[v] = 0
 	end
-	t_3.videoAnimationEnabled = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function() --[[ line: 113 ]]
+	t_3.videoAnimationEnabled = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"):Connect(function()
 		-- upvalues: var11 (copy), t_2 (copy), none (copy), faceAnimatorService (copy), t_1 (copy)
 		local processTime = os.clock()
 		local _ = 0
@@ -131,7 +131,7 @@ function t.Initialize() --[[ line: 104 ]]
 		end
 		none = t_1.None
 	end)
-	t_3.audioAnimationEnabled = faceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function() --[[ line: 117 ]]
+	t_3.audioAnimationEnabled = faceAnimatorService:GetPropertyChangedSignal("AudioAnimationEnabled"):Connect(function()
 		-- upvalues: var11 (copy), t_2 (copy), none (copy), faceAnimatorService (copy), t_1 (copy)
 		local processTime = os.clock()
 		local _ = 0
@@ -168,7 +168,7 @@ function t.Initialize() --[[ line: 104 ]]
 	
 	if var20 > 0 and not var8 then
 		var8 = true
-		task.spawn(function() --[[ line: 80 ]]
+		task.spawn(function()
 			-- upvalues: var8 (copy), reportHeartbeat (copy), var20 (ref)
 			while true do
 				while var8 do
@@ -181,7 +181,7 @@ function t.Initialize() --[[ line: 104 ]]
 	end
 end
 
-function t.Cleanup() --[[ line: 125 ]]
+function t.Cleanup()
 	-- upvalues: getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule (ref), t_3 (ref), var8 (write)
 	if getFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule() <= 0 then return end
 	for i, v in pairs(t_3) do

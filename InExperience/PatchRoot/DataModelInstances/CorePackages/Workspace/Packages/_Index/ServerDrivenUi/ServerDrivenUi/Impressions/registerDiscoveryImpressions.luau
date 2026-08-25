@@ -9,61 +9,61 @@ local fFlagSduiEdpStoreImpressionsLogging = require(parent.SharedFlags).FFlagSdu
 local fFlagSduiDevStoreSeeAllImpressionsLogging = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllImpressionsLogging
 local fFlagSduiQueryImpressionsLogging = require(parent.SharedFlags).FFlagSduiQueryImpressionsLogging
 
-return function() --[[ line: 18 | named "registerDiscoveryImpressions" ]]
+return function()
 	-- upvalues: sduiImpressionEventType (ref), fFlagSduiChartsSupport (ref), serverDrivenUi (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEdpStoreImpressionsLogging (ref), fFlagSduiDevStoreSeeAllImpressionsLogging (ref), fFlagSduiQueryImpressionsLogging (ref), getSduiImpressionHandlerRegistry (ref)
 	getSduiImpressionHandlerRegistry().registerImpressionHandlerConfigs({
 		[sduiImpressionEventType.filterImpressions] = if fFlagSduiChartsSupport then {
 			skipItemImpressionsLog = true,
-			lazyHandler = function() --[[ line: 22 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiFilterImpressionsHandler)
 			end
 		} else nil,
 		[sduiImpressionEventType.gameImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function() --[[ line: 29 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiGameImpressionsHandler)
 			end
 		},
 		[sduiImpressionEventType.socialLinksImpressions] = if fFlagSduiExperienceDetailsSupport then {
 			skipItemImpressionsLog = false,
-			lazyHandler = function() --[[ line: 36 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiSocialLinksImpressionsHandler)
 			end
 		} else nil,
 		[sduiImpressionEventType.virtualEventImpressions] = if fFlagSduiExperienceDetailsSupport then {
 			skipItemImpressionsLog = false,
-			lazyHandler = function() --[[ line: 44 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiVirtualEventImpressionsHandler)
 			end
 		} else nil,
 		[sduiImpressionEventType.experienceStoreImpressions] = if fFlagSduiEdpStoreImpressionsLogging then {
 			skipItemImpressionsLog = false,
-			lazyHandler = function() --[[ line: 52 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiEdpStoreImpressionsHandler)
 			end
 		} else nil,
 		[sduiImpressionEventType.marketplaceItemImpressions] = if fFlagSduiEdpStoreImpressionsLogging then {
 			skipItemImpressionsLog = false,
-			lazyHandler = function() --[[ line: 60 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 			end
 		} else nil,
 		[sduiImpressionEventType.devStoreSeeAllImpressions] = if fFlagSduiDevStoreSeeAllImpressionsLogging then {
 			skipItemImpressionsLog = false,
-			lazyHandler = function() --[[ line: 68 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiDevStoreSeeAllImpressionsHandler)
 			end
 		} else nil,
 		[sduiImpressionEventType.queryImpressions] = if fFlagSduiQueryImpressionsLogging then {
 			skipItemImpressionsLog = true,
-			lazyHandler = function() --[[ line: 76 ]]
+			lazyHandler = function()
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Impressions.SduiQueryImpressionsHandler)
 			end

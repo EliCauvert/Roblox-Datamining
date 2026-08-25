@@ -22,7 +22,7 @@ end
 local var7 = nil
 local var8 = nil
 local currentCamera = workspaceService.CurrentCamera
-workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 67 ]]
+workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	-- upvalues: workspaceService (ref), currentCamera (write)
 	local currentCamera_1 = workspaceService.CurrentCamera
 	
@@ -34,62 +34,62 @@ local var9 = nil
 local var10 = nil
 local t = nil
 local _ = nil
-local ok, status = pcall(function() --[[ line: 80 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserExitFreecamBreaksWithShiftlock")
 end)
 local status_1 = ok and status
 local _ = nil
-local ok_1, status_2 = pcall(function() --[[ line: 88 ]]
+local ok_1, status_2 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserShowGuiHideToggles")
 end)
 local status_2_1 = ok_1 and status_2
 local _ = nil
-local ok_2, status_3 = pcall(function() --[[ line: 96 ]]
+local ok_2, status_3 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFixFreecamDeltaTimeCalculation")
 end)
 local status_3_1 = ok_2 and status_3
 local _ = nil
-local ok_3, status_4 = pcall(function() --[[ line: 104 ]]
+local ok_3, status_4 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFixFreecamGuiChangeVisibility2")
 end)
 local status_4_1 = ok_3 and status_4
 local _ = nil
-local ok_4, status_5 = pcall(function() --[[ line: 112 ]]
+local ok_4, status_5 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamControlSpeed")
 end)
 local status_5_1 = ok_4 and status_5
 local _ = nil
-local ok_5, status_6 = pcall(function() --[[ line: 120 ]]
+local ok_5, status_6 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamTiltControl")
 end)
 local status_6_1 = ok_5 and status_6
 local _ = nil
-local ok_6, status_7 = pcall(function() --[[ line: 128 ]]
+local ok_6, status_7 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamSmoothnessControl")
 end)
 local status_7_1 = ok_6 and status_7
 local _ = nil
-local ok_7, status_8 = pcall(function() --[[ line: 136 ]]
+local ok_7, status_8 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamGuiDestabilization")
 end)
 local status_8_1 = ok_7 and status_8
 local _ = nil
-local ok_8, status_9 = pcall(function() --[[ line: 144 ]]
+local ok_8, status_9 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamDepthOfFieldEffect3")
 end)
 local status_9_1 = ok_8 and status_9
 local _ = nil
-local ok_9, status_10 = pcall(function() --[[ line: 152 ]]
+local ok_9, status_10 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamPlayerLock2")
 end)
 local status_10_1 = ok_9 and status_10
 local _ = nil
-local ok_10, status_11 = pcall(function() --[[ line: 160 ]]
+local ok_10, status_11 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamPlayerLockResetHeight")
 end)
 local status_11_1 = ok_10 and status_11
 local _ = nil
-local ok_11, status_12 = pcall(function() --[[ line: 168 ]]
+local ok_11, status_12 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserFreecamCustomGui")
 end)
 local status_12_1 = ok_11 and status_12
@@ -131,7 +131,7 @@ local var53 = false
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p0, p1) --[[ line: 267 ]]
+function t_12.new(p0, p1)
 	-- upvalues: t_12 (ref)
 	local tbl = setmetatable({}, t_12)
 	tbl.f = p0
@@ -141,7 +141,7 @@ function t_12.new(p0, p1) --[[ line: 267 ]]
 	return tbl
 end
 
-function t_12:Update(p2, p3) --[[ line: 275 ]]
+function t_12:Update(p2, p3)
 	-- upvalues: exp (ref)
 	local var89 = self.f * 2 * 3.14159265359
 	local v = self.v
@@ -155,11 +155,11 @@ function t_12:Update(p2, p3) --[[ line: 275 ]]
 	return var92
 end
 
-function t_12:SetFreq(p4) --[[ line: 292 ]]
+function t_12:SetFreq(p4)
 	self.f = p4
 end
 
-function t_12:Reset(p5) --[[ line: 296 ]]
+function t_12:Reset(p5)
 	self.p = p5
 	self.v = p5 * 0
 end
@@ -174,17 +174,17 @@ local var61 = t_12.new(var37, 0)
 local t_13 = {}
 local _ = nil
 
-local function _(p6) --[[ line: 325 | named "fCurve" ]]
+local function _(p6)
 	-- upvalues: exp (ref)
 	return (exp(2 * p6) - 1) / 6.389056098931
 end
 
-local _ = function(p7) --[[ line: 329 | named "fDeadzone" ]]
+local _ = function(p7)
 	-- upvalues: exp (ref)
 	return (exp(2 * ((p7 - 0.15) / 0.85)) - 1) / 6.389056098931
 end
 
-local function thumbstickCurve(p8) --[[ line: 333 ]]
+local function thumbstickCurve(p8)
 	-- upvalues: sign (ref), abs (ref), exp (ref), clamp (ref)
 	return sign(p8) * clamp((exp(2 * ((abs(p8) - 0.15) / 0.85)) - 1) / 6.389056098931, 0, 1)
 end
@@ -258,14 +258,14 @@ local var71 = 1
 local var72 = 1
 local var73 = 1
 
-function t_13.Vel(p9) --[[ line: 448 ]]
+function t_13.Vel(p9)
 	-- upvalues: status_5_1 (write), var71 (write), t_15 (ref), t_14 (ref), clamp (ref), thumbstickCurve (write), userInputService (ref)
 	var71 = if status_5_1 then clamp(var71 + p9 * (t_15.Up - t_15.Down + t_14.DPadUp - t_14.DPadDown) * 0.75, 0.01, 4) else clamp(var71 + p9 * (t_15.Up - t_15.Down) * 0.75, 0.01, 4)
 	
 	return (Vector3.new(thumbstickCurve(t_14.Thumbstick1.X), thumbstickCurve(t_14.ButtonR2) - thumbstickCurve(t_14.ButtonL2), thumbstickCurve(-t_14.Thumbstick1.Y)) * Vector3.new(1, 1, 1) + Vector3.new(t_15.D - t_15.A + t_15.K - t_15.H, t_15.E - t_15.Q + t_15.I - t_15.Y, t_15.S - t_15.W + t_15.J - t_15.U) * Vector3.new(1, 1, 1)) * (var71 * (if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) then 0.25 else 1))
 end
 
-function t_13.Pan(p10) --[[ line: 471 ]]
+function t_13.Pan(p10)
 	-- upvalues: thumbstickCurve (write), t_14 (ref), var69 (ref), t_16 (ref), var67 (ref), status_3_1 (write), var68 (ref)
 	local var94 = Vector2.new(thumbstickCurve(t_14.Thumbstick2.Y), thumbstickCurve(-t_14.Thumbstick2.X)) * var69
 	local var95 = if status_3_1 and p10 > 0 then t_16.Delta / p10 * var68 else t_16.Delta * var67
@@ -274,7 +274,7 @@ function t_13.Pan(p10) --[[ line: 471 ]]
 	return var94 + var95
 end
 
-function t_13.Fov(p11) --[[ line: 486 ]]
+function t_13.Fov(p11)
 	-- upvalues: status_5_1 (write), var73 (write), t_15 (ref), t_14 (ref), clamp (ref), t_16 (ref), status_3_1 (write)
 	if status_5_1 then
 		var73 = clamp(var73 + p11 * (t_15.Right - t_15.Left + t_14.DPadRight - t_14.DPadLeft) * 0.75, 0.01, 4)
@@ -286,14 +286,14 @@ function t_13.Fov(p11) --[[ line: 486 ]]
 	return if status_5_1 then (var96 + var97) * var73 else var96 + var97
 end
 
-function t_13.Roll(p12) --[[ line: 505 ]]
+function t_13.Roll(p12)
 	-- upvalues: var72 (write), t_15 (ref), clamp (ref), t_14 (ref)
 	var72 = clamp(var72 + p12 * (t_15.Period - t_15.Comma) * 0.75, 0.01, 4)
 	
 	return ((t_14.ButtonR1 - t_14.ButtonL1) * 1 + (t_15.C - t_15.Z) * 1) * var72
 end
 
-function t_13.SpringControl(p13) --[[ line: 514 ]]
+function t_13.SpringControl(p13)
 	-- upvalues: status_9_1 (write), userInputService (ref), var34 (write), t_15 (ref), clamp (ref), var58 (ref), var35 (write), var59 (ref), var36 (write), var60 (ref), var37 (write), var61 (ref)
 	if status_9_1 then
 		if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) or (userInputService:IsKeyDown(Enum.KeyCode.LeftControl) or userInputService:IsKeyDown(Enum.KeyCode.RightControl)) then
@@ -310,7 +310,7 @@ function t_13.SpringControl(p13) --[[ line: 514 ]]
 	var61:SetFreq(var37)
 end
 
-function t_13.DoF(p14) --[[ line: 537 ]]
+function t_13.DoF(p14)
 	-- upvalues: userInputService (ref), var9 (write), t_15 (ref), t_17 (ref), clamp (ref)
 	local leftControl = userInputService:IsKeyDown(Enum.KeyCode.LeftControl) or userInputService:IsKeyDown(Enum.KeyCode.RightControl)
 	
@@ -327,7 +327,7 @@ function t_13.DoF(p14) --[[ line: 537 ]]
 	var9.FocusDistance = clamp(var9.FocusDistance + p14 * (t_15.Equals - t_15.Minus) * t_17.FocusDistance.ADJ, t_17.FocusDistance.MIN, t_17.FocusDistance.MAX)
 end
 
-local _ = function(value, p15) --[[ line: 568 | named "resetKeys" ]]
+local _ = function(value, p15)
 	for i, v in pairs(value) do
 		if p15[i.Name] then
 			p15[i.Name] = 0
@@ -335,7 +335,7 @@ local _ = function(value, p15) --[[ line: 568 | named "resetKeys" ]]
 	end
 end
 
-local function handleDoubleTapReset(value) --[[ line: 576 ]]
+local function handleDoubleTapReset(value)
 	-- upvalues: t_9 (ref), var39 (write), var56 (write), var61 (ref), status_9_1 (write), t_2 (ref), t_14 (ref), t_1 (ref), t_15 (ref)
 	local processTime = os.clock()
 	local var100 = t_9[value]
@@ -368,7 +368,7 @@ local function handleDoubleTapReset(value) --[[ line: 576 ]]
 	t_9[value] = processTime
 end
 
-local function findPlayerLockRootPart(p16) --[[ line: 601 ]]
+local function findPlayerLockRootPart(p16)
 	-- upvalues: t_11 (write), var50 (write), var46 (write)
 	if not t_11 or #t_11 < 1 then
 		return nil
@@ -394,7 +394,7 @@ local function findPlayerLockRootPart(p16) --[[ line: 601 ]]
 	return nil
 end
 
-local function Keypress(_, p17, p18) --[[ line: 628 ]]
+local function Keypress(_, p17, p18)
 	-- upvalues: t_15 (ref), status_6_1 (write), t_1 (ref), handleDoubleTapReset (ref), status_9_1 (write), t_3 (ref), var9 (write), t_10 (write), currentCamera (write), lightingService (ref), var42 (write), var43 (write), status_10_1 (write), t_4 (ref), var46 (write), var47 (write), status_11_1 (write), var48 (write), var51 (write), findPlayerLockRootPart (ref), t_5 (ref), t_11 (write), status_12_1 (write), t_6 (ref), var8 (write), t_7 (ref), var52 (write), t (write), t_8 (ref), var53 (write), starterGuiService (ref)
 	t_15[p18.KeyCode.Name] = if p17 == Enum.UserInputState.Begin then 1 else 0
 	
@@ -432,14 +432,14 @@ local function Keypress(_, p17, p18) --[[ line: 628 ]]
 					v_1.Enabled = false
 				end
 			end
-			var42 = currentCamera.ChildAdded:Connect(function(p19) --[[ line: 654 ]]
+			var42 = currentCamera.ChildAdded:Connect(function(p19)
 				-- upvalues: t_10 (copy)
 				if p19:IsA("DepthOfFieldEffect") and p19.Enabled then
 					t_10[#t_10 + 1] = p19
 					p19.Enabled = false
 				end
 			end)
-			var43 = lightingService.ChildAdded:Connect(function(p20) --[[ line: 660 ]]
+			var43 = lightingService.ChildAdded:Connect(function(p20)
 				-- upvalues: t_10 (copy)
 				if p20:IsA("DepthOfFieldEffect") and p20.Enabled then
 					t_10[#t_10 + 1] = p20
@@ -535,7 +535,7 @@ local function Keypress(_, p17, p18) --[[ line: 628 ]]
 	return Enum.ContextActionResult.Sink
 end
 
-local function GpButton(_, p21, p22) --[[ line: 741 ]]
+local function GpButton(_, p21, p22)
 	-- upvalues: t_14 (ref), status_6_1 (write), t_2 (ref), handleDoubleTapReset (ref)
 	t_14[p22.KeyCode.Name] = if p21 == Enum.UserInputState.Begin then 1 else 0
 	
@@ -545,7 +545,7 @@ local function GpButton(_, p21, p22) --[[ line: 741 ]]
 	return Enum.ContextActionResult.Sink
 end
 
-local function MousePan(_, _, p23) --[[ line: 753 ]]
+local function MousePan(_, _, p23)
 	-- upvalues: t_16 (ref)
 	local delta = p23.Delta
 	t_16.Delta = Vector2.new(-delta.y, -delta.x)
@@ -553,34 +553,34 @@ local function MousePan(_, _, p23) --[[ line: 753 ]]
 	return Enum.ContextActionResult.Sink
 end
 
-local function Thumb(_, _, p24) --[[ line: 759 ]]
+local function Thumb(_, _, p24)
 	-- upvalues: t_14 (ref)
 	t_14[p24.KeyCode.Name] = p24.Position
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local function Trigger(_, _, p25) --[[ line: 764 ]]
+local function Trigger(_, _, p25)
 	-- upvalues: t_14 (ref)
 	t_14[p25.KeyCode.Name] = p25.Position.z
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local function MouseWheel(_, _, p26) --[[ line: 769 ]]
+local function MouseWheel(_, _, p26)
 	-- upvalues: t_16 (ref)
 	t_16[p26.UserInputType.Name] = -p26.Position.z
 	
 	return Enum.ContextActionResult.Sink
 end
 
-local _ = function(p27) --[[ line: 774 | named "Zero" ]]
+local _ = function(p27)
 	for i, v in pairs(p27) do
 		p27[i] = v * 0
 	end
 end
 
-function t_13.StartCapture() --[[ line: 780 ]]
+function t_13.StartCapture()
 	-- upvalues: status_5_1 (write), contextActionService (ref), Keypress (ref), value_1 (ref), GpButton (ref), status_6_1 (write), status_7_1 (write), status_9_1 (write), status_10_1 (write), status_12_1 (write), MousePan (ref), MouseWheel (ref), Trigger (ref), Thumb (ref)
 	if status_5_1 then
 		contextActionService:BindActionAtPriority("FreecamKeyboard", Keypress, false, value_1, Enum.KeyCode.W, Enum.KeyCode.U, Enum.KeyCode.A, Enum.KeyCode.H, Enum.KeyCode.S, Enum.KeyCode.J, Enum.KeyCode.D, Enum.KeyCode.K, Enum.KeyCode.E, Enum.KeyCode.I, Enum.KeyCode.Q, Enum.KeyCode.Y)
@@ -618,7 +618,7 @@ function t_13.StartCapture() --[[ line: 780 ]]
 	contextActionService:BindActionAtPriority("FreecamGamepadThumbstick", Thumb, false, value_1, Enum.KeyCode.Thumbstick1, Enum.KeyCode.Thumbstick2)
 end
 
-function t_13.StopCapture() --[[ line: 860 ]]
+function t_13.StopCapture()
 	-- upvalues: status_12_1 (write), var71 (write), status_5_1 (write), var73 (write), status_6_1 (write), var72 (write), t_14 (ref), t_15 (ref), t_16 (ref), contextActionService (ref), status_7_1 (write), status_9_1 (write), status_10_1 (write)
 	if not status_12_1 then
 		var71 = 1
@@ -674,22 +674,22 @@ function t_13.StopCapture() --[[ line: 860 ]]
 	contextActionService:UnbindAction("FreecamGamepadThumbstick")
 end
 
-function t_13.getNavSpeed() --[[ line: 906 ]]
+function t_13.getNavSpeed()
 	-- upvalues: var71 (write)
 	return var71
 end
 
-function t_13.getFovSpeed() --[[ line: 910 ]]
+function t_13.getFovSpeed()
 	-- upvalues: var73 (write)
 	return var73
 end
 
-function t_13.getRollSpeed() --[[ line: 914 ]]
+function t_13.getRollSpeed()
 	-- upvalues: var72 (write)
 	return var72
 end
 
-thumbstickCurve = function(p28) --[[ line: 922 | named "StepFreecam" ]]
+thumbstickCurve = function(p28)
 	-- upvalues: status_7_1 (write), t_13 (ref), status_9_1 (write), var9 (write), var58 (ref), var59 (ref), var60 (ref), status_6_1 (write), var61 (ref), var57 (write), rad (ref), tan (ref), sqrt (ref), clamp (ref), var33 (ref), var56 (write), vector3 (write), status_10_1 (write), var46 (write), var51 (write), var47 (write), var48 (write), status_12_1 (write), var10 (write), var8 (write), var34 (write), var35 (write), var36 (write), var37 (write), status_5_1 (write), t_11 (write), var50 (write), currentCamera (write)
 	if status_7_1 then
 		t_13.SpringControl(p28)
@@ -753,7 +753,7 @@ thumbstickCurve = function(p28) --[[ line: 922 | named "StepFreecam" ]]
 	currentCamera.FieldOfView = var57
 end
 
-local _ = function() --[[ line: 1038 | named "CheckMouseLockAvailability" ]]
+local _ = function()
 	-- upvalues: playersService (ref), gameSettings (ref)
 	return playersService.LocalPlayer.DevEnableMouseLock and (gameSettings.ControlMode == Enum.ControlMode.MouseLockSwitch and (not (gameSettings.ComputerMovementMode == Enum.ComputerMovementMode.ClickToMove) and not (playersService.LocalPlayer.DevComputerMovementMode == Enum.DevComputerMovementMode.Scriptable)))
 end
@@ -777,7 +777,7 @@ var73 = {
 	PointsNotificationsActive = true
 }
 
-function t.Push() --[[ line: 1071 ]]
+function t.Push()
 	-- upvalues: var72 (ref), starterGuiService (ref), var73 (ref), localPlayer (write), var71 (write), status_4_1 (write), var41 (write), status_12_1 (write), var52 (write), ToggleFreecam (write), currentCamera (write), StartFreecam (write), var86 (write), StopFreecam (write), initializePlayerList (write), userInputService (ref), status_1 (write), playersService (ref), gameSettings (ref), removePlayerFromList (write)
 	for i in pairs(var72) do
 		var72[i] = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType[i])
@@ -797,7 +797,7 @@ function t.Push() --[[ line: 1071 ]]
 			end
 		end
 		if status_4_1 then
-			var41 = playerGui.ChildAdded:Connect(function(p29) --[[ line: 1089 ]]
+			var41 = playerGui.ChildAdded:Connect(function(p29)
 				-- upvalues: var71 (copy), status_12_1 (copy), var52 (copy)
 				if p29:IsA("ScreenGui") and p29.Enabled then
 					var71[#var71 + 1] = p29
@@ -824,7 +824,7 @@ function t.Push() --[[ line: 1071 ]]
 	userInputService.MouseBehavior = Enum.MouseBehavior.Default
 end
 
-function t.Pop() --[[ line: 1123 ]]
+function t.Pop()
 	-- upvalues: var72 (ref), starterGuiService (ref), var73 (ref), var71 (write), status_12_1 (write), var8 (write), status_4_1 (write), var41 (write), currentCamera (write), ToggleFreecam (write), StartFreecam (write), var86 (write), StopFreecam (write), userInputService (ref), initializePlayerList (write), removePlayerFromList (write)
 	for i, v in pairs(var72) do
 		starterGuiService:SetCoreGuiEnabled(Enum.CoreGuiType[i], v)
@@ -862,12 +862,12 @@ function t.Pop() --[[ line: 1123 ]]
 	removePlayerFromList = nil
 end
 
-function t.getScreenGuis() --[[ line: 1169 ]]
+function t.getScreenGuis()
 	-- upvalues: var71 (write)
 	return var71
 end
 
-removePlayerFromList = function(p30) --[[ line: 1174 | named "removePlayerFromList" ]]
+removePlayerFromList = function(p30)
 	-- upvalues: t_11 (write), var50 (write), var46 (write)
 	for i, v in ipairs(t_11) do
 		if v == p30 then
@@ -888,7 +888,7 @@ removePlayerFromList = function(p30) --[[ line: 1174 | named "removePlayerFromLi
 	end
 end
 
-initializePlayerList = function() --[[ line: 1198 | named "initializePlayerList" ]]
+initializePlayerList = function()
 	-- upvalues: t_11 (write), playersService (ref), localPlayer (write), var50 (write), var44 (write), var45 (write), removePlayerFromList (ref)
 	t_11 = playersService:GetPlayers()
 	
@@ -898,14 +898,14 @@ initializePlayerList = function() --[[ line: 1198 | named "initializePlayerList"
 			break
 		end
 	end
-	var44 = playersService.PlayerAdded:Connect(function(p31) --[[ line: 1208 ]]
+	var44 = playersService.PlayerAdded:Connect(function(p31)
 		-- upvalues: t_11 (copy)
 		table.insert(t_11, p31)
 	end)
 	var45 = playersService.PlayerRemoving:Connect(removePlayerFromList)
 end
 
-StartFreecam = function() --[[ line: 1215 | named "StartFreecam" ]]
+StartFreecam = function()
 	-- upvalues: status_10_1 (write), initializePlayerList (ref), status_8_1 (write), status_2_1 (write), currentCamera (write), status_6_1 (write), var56 (write), vector3 (write), var57 (write), var58 (ref), var59 (ref), var60 (ref), var61 (ref), status_12_1 (write), status_7_1 (write), var34 (write), var35 (write), var36 (write), var37 (write), var7 (write), localPlayer (write), var8 (write), var10 (write), t (write), status_9_1 (write), var9 (write), runService (ref), thumbstickCurve (ref), t_13 (ref)
 	if status_10_1 then
 		initializePlayerList()
@@ -963,7 +963,7 @@ StartFreecam = function() --[[ line: 1215 | named "StartFreecam" ]]
 	t_13.StartCapture()
 end
 
-StopFreecam = function() --[[ line: 1287 | named "StopFreecam" ]]
+StopFreecam = function()
 	-- upvalues: status_8_1 (write), status_2_1 (write), status_10_1 (write), var44 (write), var45 (write), var46 (write), var50 (write), t_11 (write), status_9_1 (write), var9 (write), t_10 (write), var42 (write), var43 (write), status_12_1 (write), var8 (write), var52 (write), var53 (write), t_13 (ref), runService (ref), t (write)
 	if not status_8_1 and status_2_1 then
 		script:SetAttribute("FreecamEnabled", false)
@@ -1014,7 +1014,7 @@ end
 
 var86 = false
 
-ToggleFreecam = function() --[[ line: 1348 | named "ToggleFreecam" ]]
+ToggleFreecam = function()
 	-- upvalues: var86 (write), StopFreecam (ref), StartFreecam (ref), status_8_1 (write)
 	if var86 then
 		StopFreecam()
@@ -1028,7 +1028,7 @@ ToggleFreecam = function() --[[ line: 1348 | named "ToggleFreecam" ]]
 	end
 end
 
-var71 = function(p32) --[[ line: 1360 | named "CheckMacro" ]]
+var71 = function(p32)
 	-- upvalues: userInputService (ref), var86 (write), StopFreecam (ref), StartFreecam (ref), status_8_1 (write)
 	for i = 1, #p32 - 1 do
 		if userInputService:IsKeyDown(p32[i]) then
@@ -1048,7 +1048,7 @@ var71 = function(p32) --[[ line: 1360 | named "CheckMacro" ]]
 	end
 end
 
-contextActionService:BindActionAtPriority("FreecamToggle", function(_, p33, p34) --[[ line: 1369 | named "HandleActivationInput" ]]
+contextActionService:BindActionAtPriority("FreecamToggle", function(_, p33, p34)
 	-- upvalues: list (ref), var71 (ref)
 	if p33 == Enum.UserInputState.Begin and p34.KeyCode == list[#list] then
 		var71(list)
@@ -1058,7 +1058,7 @@ end, false, value, list[#list])
 
 if status_8_1 or status_2_1 then
 	script:SetAttribute("FreecamEnabled", var86)
-	script:GetAttributeChangedSignal("FreecamEnabled"):Connect(function() --[[ line: 1382 ]]
+	script:GetAttributeChangedSignal("FreecamEnabled"):Connect(function()
 		-- upvalues: var86 (write), StartFreecam (ref), StopFreecam (ref)
 		local freecamEnabledAttribute = script:GetAttribute("FreecamEnabled")
 		

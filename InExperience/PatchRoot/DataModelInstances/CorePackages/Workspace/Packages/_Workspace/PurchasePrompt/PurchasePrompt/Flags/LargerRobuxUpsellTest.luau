@@ -3,18 +3,18 @@ game:DefineFastFlag("InGameLargerRobuxUpsellIXPRolledOut", false)
 game:DefineFastFlag("InGameLargerRobuxUpsellEnabled", false)
 game:DefineFastString("InGameLargerRobuxUpsellIXPLayerParam", "isInExperiment")
 
-local function _() --[[ line: 20 | named "isRolledOut" ]]
+local function _()
 	return game:GetFastFlag("InGameLargerRobuxUpsellEnabled") or game:GetFastFlag("InGameLargerRobuxUpsellIXPRolledOut")
 end
 
 return {
-	isEnabled = function() --[[ line: 24 ]]
+	isEnabled = function()
 		return game:GetFastFlag("InGameLargerRobuxUpsellEnabled") or game:GetFastFlag("InGameLargerRobuxUpsellIXP")
 	end,
-	isEnabledForAll = function() --[[ line: 16 ]]
+	isEnabledForAll = function()
 		return game:GetFastFlag("InGameLargerRobuxUpsellEnabled")
 	end,
-	isUserEnrolled = function(p0) --[[ line: 28 ]]
+	isUserEnrolled = function(p0)
 		if game:GetFastFlag("InGameLargerRobuxUpsellEnabled") then
 			return true
 		elseif not game:GetFastFlag("InGameLargerRobuxUpsellEnabled") and not game:GetFastFlag("InGameLargerRobuxUpsellIXP") then

@@ -20,13 +20,13 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0) --[[ line: 35 | named "ConversationStackNavigationFocusListener" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), reactFocusNavigationModule (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), enumScreensModule (ref), leaveSquad (ref), squadPromptType (ref), mutedError (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), t (ref)
 	local var9 = useDispatch()
 	local var10 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
 	local var11 = reactModule.useContext(squadExternalContractContext)
 	local var12 = useCurrentSquadParentChannelId()
-	local var13 = reactModule.useCallback(function(p1) --[[ line: 41 ]]
+	local var13 = reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), var10 (ref)
 		local conversationStackNavigator = p0.navigation.getChildNavigation("ConversationStackNavigator")
 		
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 35 | named "ConversationStackNavigationFocusListe
 		p0.rightContainerRef,
 		var10
 	})
-	local var14 = reactModule.useCallback(function(p2) --[[ line: 54 ]]
+	local var14 = reactModule.useCallback(function(p2)
 		-- upvalues: p0 (ref), enumScreensModule (copy), var12 (ref), var9 (ref), leaveSquad (copy), squadPromptType (copy), var11 (ref), mutedError (copy)
 		local conversationStackNavigator = p0.navigation.getChildNavigation("ConversationStackNavigator")
 		
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 35 | named "ConversationStackNavigationFocusListe
 				elseif var12 == nil or var12 == conversationId then
 					p0.navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
 				else
-					var9(leaveSquad(squadPromptType.JoinAnotherSquad, var11.setSquadPrompt, function() --[[ line: 64 ]]
+					var9(leaveSquad(squadPromptType.JoinAnotherSquad, var11.setSquadPrompt, function()
 						-- upvalues: p0 (copy), enumScreensModule (copy), conversationId (ref)
 						p0.navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
 					end, var11.squadLocation, true))
@@ -84,7 +84,7 @@ return function(p0) --[[ line: 35 | named "ConversationStackNavigationFocusListe
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		ref = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 86 ]]
+		ref = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var13 (ref), var14 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var13) },

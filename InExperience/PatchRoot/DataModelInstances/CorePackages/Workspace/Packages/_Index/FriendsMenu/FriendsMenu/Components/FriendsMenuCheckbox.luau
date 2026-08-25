@@ -6,7 +6,7 @@ local checkbox = require(parent.Foundation).Checkbox
 local _ = require(friendsMenu.friendsMenuModalType)
 local selectedUsersContextModule = require(context.SelectedUsersContext)
 
-return function(p0) --[[ line: 23 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), checkbox (ref)
 	local var3 = reactModule.useContext(selectedUsersContextModule)
 	
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 23 ]]
 		CheckboxAlignment = reactModule.createElement("UIListLayout", { VerticalAlignment = Enum.VerticalAlignment.Center }),
 		Button = reactModule.createElement(checkbox, {
 			label = "",
-			onActivated = reactModule.useCallback(function() --[[ line: 27 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var3 (ref), p0 (ref)
 				if var3.isFriendSelected(p0.friend.id) then
 					var3.removeFriend(p0.friend.id)

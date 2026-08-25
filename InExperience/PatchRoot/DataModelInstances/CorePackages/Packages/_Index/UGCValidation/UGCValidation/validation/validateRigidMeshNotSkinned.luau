@@ -4,9 +4,9 @@ local pcallDeferredModule = require(parent.util.pcallDeferred)
 local analyticsModule = require(parent.Analytics)
 local UGCValidationService = game:GetService("UGCValidationService")
 
-return function(p0, p1) --[[ line: 13 | named "validateRigidMeshNotSkinned" ]]
+return function(p0, p1)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
-	local var3, var4 = pcallDeferredModule(function() --[[ line: 17 ]]
+	local var3, var4 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p0 (ref)
 		return UGCValidationService:DoesMeshHaveSkinningData(p0)
 	end, p1)

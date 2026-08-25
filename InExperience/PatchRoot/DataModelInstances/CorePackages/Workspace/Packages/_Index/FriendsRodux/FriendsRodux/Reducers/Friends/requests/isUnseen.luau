@@ -6,12 +6,12 @@ local _ = require(parent.roduxFriendsTypes)
 local llamaModule = require(parent_1.llama)
 local t = {}
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), t (ref), llamaModule (ref), friendRequestCreatedModule (ref)
 	local friendsNetworking = p0.friendsNetworking
 	
 	return roduxModule.createReducer(t, {
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p1, p2) --[[ line: 19 ]]
+		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p1, p2)
 			-- upvalues: llamaModule (copy)
 			local t = {}
 			
@@ -20,11 +20,11 @@ return function(p0) --[[ line: 15 ]]
 			end
 			return llamaModule.Dictionary.join(p1, t)
 		end,
-		[friendRequestCreatedModule.name] = function(p3, p4) --[[ line: 34 ]]
+		[friendRequestCreatedModule.name] = function(p3, p4)
 			-- upvalues: llamaModule (copy)
 			return llamaModule.Dictionary.join(p3, { [tostring(p4.requesteeId)] = true })
 		end,
-		[friendsNetworking.ClearNewFriendRequests.Succeeded.name] = function(_, _) --[[ line: 41 ]]
+		[friendsNetworking.ClearNewFriendRequests.Succeeded.name] = function(_, _)
 			-- upvalues: t (copy)
 			return t
 		end

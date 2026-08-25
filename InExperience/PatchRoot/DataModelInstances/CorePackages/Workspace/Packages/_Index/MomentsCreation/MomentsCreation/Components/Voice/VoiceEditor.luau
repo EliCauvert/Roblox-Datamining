@@ -2,7 +2,7 @@
 local voiceEditorViewModule = require(script.Parent.VoiceEditorView)
 local useVoiceEditorViewModelModule = require(script.Parent.useVoiceEditorViewModel)
 
-return function(p0) --[[ line: 16 | named "VoiceEditor" ]]
+return function(p0)
 	-- upvalues: useVoiceEditorViewModelModule (ref), reactModule (ref), voiceEditorViewModule (ref)
 	return reactModule.createElement(voiceEditorViewModule, useVoiceEditorViewModelModule(p0))
 end

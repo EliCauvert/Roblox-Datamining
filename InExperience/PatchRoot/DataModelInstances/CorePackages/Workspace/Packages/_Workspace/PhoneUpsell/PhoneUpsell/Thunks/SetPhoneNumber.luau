@@ -5,14 +5,14 @@ local promiseModule = require(parent.Promise)
 local postSetPhoneModule = require(phoneUpsell.Http.Requests.PostSetPhone)
 local isStringPhone = require(parent.AuthCommon).Utils.isStringPhone
 
-return function(p0, p1, p2, p3, p4) --[[ line: 16 ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: isStringPhone (ref), promiseModule (ref), postSetPhoneModule (ref), httpService (ref)
-	return function() --[[ line: 17 ]]
+	return function()
 		-- upvalues: isStringPhone (copy), p2 (ref), p3 (ref), promiseModule (copy), postSetPhoneModule (copy), p0 (ref), p1 (ref), p4 (ref), httpService (copy)
-		return if isStringPhone(p2 .. p3) then postSetPhoneModule(p0, p1, p2, p3, p4):andThen(function(_) --[[ line: 23 ]]
+		return if isStringPhone(p2 .. p3) then postSetPhoneModule(p0, p1, p2, p3, p4):andThen(function(_)
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve()
-		end, function(p5) --[[ line: 25 ]]
+		end, function(p5)
 			-- upvalues: httpService (copy), promiseModule (copy)
 			return promiseModule.reject({
 				PhoneRegexFailed = false,

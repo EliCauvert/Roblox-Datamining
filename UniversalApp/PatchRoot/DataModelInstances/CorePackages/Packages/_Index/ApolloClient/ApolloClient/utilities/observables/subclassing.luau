@@ -2,9 +2,9 @@
 local _ = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
 local observable = require(script.Parent.Observable).Observable
 
-function t.fixObservableSubclass(p0) --[[ line: 30 ]]
+function t.fixObservableSubclass(p0)
 	-- upvalues: observable (ref)
-	local function _(value) --[[ line: 32 | named "set" ]]
+	local function _(value)
 		-- upvalues: p0 (ref), observable (copy)
 		p0[value] = observable
 	end

@@ -10,7 +10,7 @@ local getImageData = require(parent.RobloxAppAssets).GetImageData
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local graphite = colors.Graphite
 
-return function(p0) --[[ line: 28 | named "CountryCodeDropdownView" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), functionalCountryCodeSelectorButtonModule (ref), graphite (ref), imageSetLabel (ref), getImageData (ref)
 	local dropdownVisible = p0.dropdownVisible
 	local countryCodeList = p0.countryCodeList
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 28 | named "CountryCodeDropdownView" ]]
 			ListHolder = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, -8, 1, maxHeight)
-			}, (function(p1) --[[ line: 38 | named "getListButtons" ]]
+			}, (function(p1)
 				-- upvalues: reactModule (copy), functionalCountryCodeSelectorButtonModule (copy), onCountryCodeSelected (ref), graphite (copy)
 				local list = {
 					reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),

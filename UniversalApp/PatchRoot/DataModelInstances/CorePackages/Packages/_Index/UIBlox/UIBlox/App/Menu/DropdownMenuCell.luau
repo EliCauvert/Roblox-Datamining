@@ -25,14 +25,14 @@ local validateColorInfoModule = require(core.Style.Validator.validateColorInfo)
 local styleDefaultsModule = require(script.Parent.StyleDefaults)
 local dropdownMenuCell = roactModule.PureComponent:extend("DropdownMenuCell")
 
-local function getColorFromMap(p0, p1) --[[ line: 40 ]]
+local function getColorFromMap(p0, p1)
 	-- upvalues: controlStateModule (ref)
 	local var23 = p0[p1] or p0[controlStateModule.Default]
 	
 	return { Color = var23.Color, Transparency = var23.Transparency }
 end
 
-local function _(p2, p3, p4, p5, p6) --[[ line: 48 | named "getButtonStyle" ]]
+local function _(p2, p3, p4, p5, p6)
 	-- upvalues: controlStateModule (ref)
 	local var24 = p2(p3, p4, p5)
 	
@@ -42,7 +42,7 @@ local function _(p2, p3, p4, p5, p6) --[[ line: 48 | named "getButtonStyle" ]]
 	return var24
 end
 
-local _ = function(p7, p8, p9, p10, p11, p12) --[[ line: 56 | named "getButtonContentStyle" ]]
+local _ = function(p7, p8, p9, p10, p11, p12)
 	-- upvalues: controlStateModule (ref)
 	local var25 = p7(p8, p9, p10)
 	
@@ -52,11 +52,11 @@ local _ = function(p7, p8, p9, p10, p11, p12) --[[ line: 56 | named "getButtonCo
 	return var25
 end
 
-function dropdownMenuCell.init(p13) --[[ line: 68 ]]
+function dropdownMenuCell.init(p13)
 	-- upvalues: controlStateModule (ref)
 	p13:setState({ controlState = controlStateModule.Initialize })
 	
-	function p13.onStateChanged(p14, p15) --[[ line: 73 ]]
+	function p13.onStateChanged(p14, p15)
 		-- upvalues: p13 (ref)
 		p13:setState({ controlState = p15 })
 		
@@ -102,11 +102,11 @@ dropdownMenuCell.defaultProps = {
 	border = { cornerRadius = 8, size = 1 }
 }
 
-function dropdownMenuCell.render(p16) --[[ line: 186 ]]
+function dropdownMenuCell.render(p16)
 	-- upvalues: withStyleModule (ref), withSelectionCursorProviderModule (ref), tModule (ref), cursorKindModule (ref), getColorFromMap (ref), getContentStyleModule (ref), controlStateModule (ref), roactModule (ref), skeleton (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), cryoModule (ref), interactableModule (ref)
-	return withStyleModule(function(p17) --[[ line: 187 ]]
+	return withStyleModule(function(p17)
 		-- upvalues: withSelectionCursorProviderModule (copy), tModule (copy), p16 (ref), cursorKindModule (copy), getColorFromMap (copy), getContentStyleModule (copy), controlStateModule (copy), roactModule (copy), skeleton (copy), genericTextLabelModule (copy), imageSetComponentModule (copy), cryoModule (copy), interactableModule (copy)
-		return withSelectionCursorProviderModule(function(p18) --[[ line: 188 ]]
+		return withSelectionCursorProviderModule(function(p18)
 			-- upvalues: tModule (copy), p17 (ref), p16 (copy), cursorKindModule (copy), getColorFromMap (copy), getContentStyleModule (copy), controlStateModule (copy), roactModule (copy), skeleton (copy), genericTextLabelModule (copy), imageSetComponentModule (copy), cryoModule (copy), interactableModule (copy)
 			assert(tModule.table(p17), "Style provider is missing.")
 			local controlState = p16.state.controlState
@@ -263,7 +263,7 @@ function dropdownMenuCell.render(p16) --[[ line: 186 ]]
 	end)
 end
 
-return function(p19) --[[ line: 383 ]]
+return function(p19)
 	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), cryoModule (ref), useStyleModule (ref), styleDefaultsModule (ref), roactModule (ref), dropdownMenuCell (ref)
 	return roactModule.createElement(dropdownMenuCell, if p19.enableTokenOverride then cryoModule.Dictionary.join(styleDefaultsModule.getDropdownMenuCellDefaultTokens(useStyleModule()), p19) else cryoModule.Dictionary.join(p19, {
 		selectionCursor = useCursorByTypeModule(cursorTypeModule.RoundedRectNoInset)

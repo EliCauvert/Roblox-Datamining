@@ -2,11 +2,11 @@
 local parent = sduiCoreSystem.Parent
 local sduiCapabilityFlagsModule = require(sduiCoreSystem.ClientBinding.SduiCapabilityFlags)
 local t = {
-	isEnabled = function(p0) --[[ line: 16 ]]
+	isEnabled = function(p0)
 		-- upvalues: sduiCapabilityFlagsModule (ref)
 		return sduiCapabilityFlagsModule[p0] == true
 	end,
-	getEnabledCapabilities = function() --[[ line: 20 ]]
+	getEnabledCapabilities = function()
 		-- upvalues: sduiCapabilityFlagsModule (ref)
 		local t = {}
 		
@@ -19,7 +19,7 @@ local t = {
 	end
 }
 
-local function resolveNamesToNumbers(p1) --[[ line: 30 ]]
+local function resolveNamesToNumbers(p1)
 	-- upvalues: parent (ref)
 	if #p1 == 0 then
 		return {}
@@ -39,7 +39,7 @@ local function resolveNamesToNumbers(p1) --[[ line: 30 ]]
 	return t
 end
 
-function t.createQueryValue(p2) --[[ line: 51 ]]
+function t.createQueryValue(p2)
 	-- upvalues: resolveNamesToNumbers (ref)
 	local var7 = resolveNamesToNumbers(p2)
 	
@@ -55,7 +55,7 @@ function t.createQueryValue(p2) --[[ line: 51 ]]
 	return table.concat(list, ",")
 end
 
-function t.addToQueryParams(p3, p4) --[[ line: 71 ]]
+function t.addToQueryParams(p3, p4)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -71,7 +71,7 @@ function t.addToQueryParams(p3, p4) --[[ line: 71 ]]
 	end
 end
 
-function t.getEnabledCapabilityNumbers(p5) --[[ line: 87 ]]
+function t.getEnabledCapabilityNumbers(p5)
 	-- upvalues: t (ref), resolveNamesToNumbers (ref)
 	local t_1 = {}
 	
@@ -86,7 +86,7 @@ function t.getEnabledCapabilityNumbers(p5) --[[ line: 87 ]]
 	return var12
 end
 
-function t.addAllToQueryParams(p6) --[[ line: 99 ]]
+function t.addAllToQueryParams(p6)
 	-- upvalues: t (ref)
 	local var13 = t.createQueryValue(t.getEnabledCapabilities())
 	

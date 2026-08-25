@@ -15,7 +15,7 @@ local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local useLocalization = localizationModule.Hooks.useLocalization
 
-return function(p0) --[[ line: 27 | named "AgeCheckUpsellCTA" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), divider (ref), dividerVariant (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
 	local var3 = useLocalization({
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",

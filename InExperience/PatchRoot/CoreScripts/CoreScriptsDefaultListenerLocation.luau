@@ -3,27 +3,27 @@ local voiceChatService = game:GetService("VoiceChatService")
 local runService = game:GetService("RunService")
 local localPlayer = game:GetService("Players").LocalPlayer
 
-local function _() --[[ line: 7 | named "ShouldUseDefaultVoice" ]]
+local function _()
 	-- upvalues: soundService (ref), voiceChatService (ref)
 	return soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)
 end
 
-local _ = function() --[[ line: 13 | named "ShouldUseCamera" ]]
+local _ = function()
 	-- upvalues: soundService (ref)
 	return soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera
 end
 
-local _ = function() --[[ line: 17 | named "ShouldUseCharacter" ]]
+local _ = function()
 	-- upvalues: soundService (ref)
 	return soundService.DefaultListenerLocation == Enum.ListenerLocation.Character
 end
 
-local _ = function() --[[ line: 21 | named "ShouldSpawnListener" ]]
+local _ = function()
 	-- upvalues: soundService (ref), voiceChatService (ref)
 	return if soundService.DefaultListenerLocation == Enum.ListenerLocation.None then false else soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Character or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)))
 end
 
-local _ = function(p0, p1) --[[ line: 28 | named "WireUp" ]]
+local _ = function(p0, p1)
 	local wire = Instance.new("Wire")
 	wire.SourceInstance = p0
 	wire.TargetInstance = p1
@@ -32,7 +32,7 @@ local _ = function(p0, p1) --[[ line: 28 | named "WireUp" ]]
 	return wire
 end
 
-local _ = function() --[[ line: 36 | named "GetMainOut" ]]
+local _ = function()
 	-- upvalues: soundService (ref)
 	local audioDeviceOutput = soundService:FindFirstChildWhichIsA("AudioDeviceOutput", true)
 	
@@ -44,12 +44,12 @@ local _ = function() --[[ line: 36 | named "GetMainOut" ]]
 	return audioDeviceOutput
 end
 
-local function SpawnCharacterListener(p2) --[[ line: 46 ]]
+local function SpawnCharacterListener(p2)
 	-- upvalues: SpawnCharacterListener (ref), soundService (ref), runService (ref)
 	local primaryPart = p2.PrimaryPart
 	
 	if not primaryPart then
-		p2:GetPropertyChangedSignal("PrimaryPart"):Once(function() --[[ line: 49 ]]
+		p2:GetPropertyChangedSignal("PrimaryPart"):Once(function()
 			-- upvalues: SpawnCharacterListener (copy), p2 (ref)
 			SpawnCharacterListener(p2)
 		end)
@@ -58,7 +58,7 @@ local function SpawnCharacterListener(p2) --[[ line: 46 ]]
 	end
 	local attachment = Instance.new("Attachment")
 	
-	local function UpdateCFrame() --[[ line: 56 ]]
+	local function UpdateCFrame()
 		-- upvalues: attachment (ref)
 		local currentCamera = workspace.CurrentCamera
 		
@@ -94,7 +94,7 @@ local function SpawnCharacterListener(p2) --[[ line: 46 ]]
 	wire.Parent = audioListener
 	local heartbeatConnection = runService.Heartbeat:Connect(UpdateCFrame)
 	local ancestryChangedConnection = nil
-	ancestryChangedConnection = attachment.AncestryChanged:Connect(function() --[[ line: 76 ]]
+	ancestryChangedConnection = attachment.AncestryChanged:Connect(function()
 		-- upvalues: attachment (ref), heartbeatConnection (ref), ancestryChangedConnection (write)
 		if not attachment:IsDescendantOf(game) then
 			heartbeatConnection:Disconnect()
@@ -105,7 +105,7 @@ end
 
 local var4 = false
 
-local function Initialize() --[[ line: 86 ]]
+local function Initialize()
 	-- upvalues: soundService (ref), voiceChatService (ref), var4 (write), localPlayer (ref), SpawnCharacterListener (ref)
 	if not (if soundService.DefaultListenerLocation == Enum.ListenerLocation.None then false else soundService.DefaultListenerLocation == Enum.ListenerLocation.Camera or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Character or (soundService.DefaultListenerLocation == Enum.ListenerLocation.Default and (voiceChatService.UseAudioApi == Enum.AudioApiRollout.Enabled and voiceChatService.EnableDefaultVoice)))) then return end
 	if var4 then return end

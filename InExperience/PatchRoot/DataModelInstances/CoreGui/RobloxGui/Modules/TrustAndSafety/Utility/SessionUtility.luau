@@ -5,7 +5,7 @@ local getFFlagEnableARFlowSessionModule = require(parent.Flags.GetFFlagEnableARF
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 
 return {
-	startAbuseReportSession = function(p0) --[[ line: 12 ]]
+	startAbuseReportSession = function(p0)
 		-- upvalues: getFFlagEnableARFlowSessionModule (ref), sessionService (ref), constantsModule (ref), sendAnalyticsModule (ref)
 		if getFFlagEnableARFlowSessionModule() then
 			if not sessionService:SessionExists(constantsModule.Session.StructuralIdentifier.AbuseReport) then
@@ -16,7 +16,7 @@ return {
 			sendAnalyticsModule(constantsModule.Analytics.ReportFlowOpened, constantsModule.Analytics.ReportFlowOpened, { source = p0 })
 		end
 	end,
-	endAbuseReportSession = function() --[[ line: 43 ]]
+	endAbuseReportSession = function()
 		-- upvalues: getFFlagEnableARFlowSessionModule (ref), sessionService (ref), constantsModule (ref)
 		if getFFlagEnableARFlowSessionModule() and sessionService:SessionExists(constantsModule.Session.StructuralIdentifier.AbuseReport) then
 			sessionService:RemoveSession(constantsModule.Session.StructuralIdentifier.AbuseReport)

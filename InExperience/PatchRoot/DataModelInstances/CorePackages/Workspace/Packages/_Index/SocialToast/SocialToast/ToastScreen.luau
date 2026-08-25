@@ -7,11 +7,11 @@ local images = UIBloxModule.App.ImageSet.Images
 local iconSize = UIBloxModule.App.Constant.IconSize
 local toast = UIBloxModule.App.Dialog.Toast
 
-return function() --[[ line: 17 ]]
+return function()
 	-- upvalues: reactModule (ref), useNavigation (ref), useNavigationProps (ref), images (ref), iconSize (ref), toast (ref)
 	local var2 = reactModule.useRef(false)
 	local var3 = useNavigation()
-	local var4 = useNavigationProps(function(_, p0) --[[ line: 20 ]]
+	local var4 = useNavigationProps(function(_, p0)
 		return {
 			toastContent = p0.toastContent,
 			anchorPoint = p0.anchorPoint,
@@ -22,7 +22,7 @@ return function() --[[ line: 17 ]]
 			show = p0.show
 		}
 	end)
-	local var5 = reactModule.useMemo(function() --[[ line: 32 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), images (copy), iconSize (copy), var2 (ref), var3 (ref)
 		return {
 			toastTitle = var4.toastContent.toastTitle or "",
@@ -31,7 +31,7 @@ return function() --[[ line: 17 ]]
 			iconImage = if not var4.toastContent.shouldHideIcon then var4.toastContent.iconImage or images["icons/status/alert"] else nil,
 			iconSize = if not var4.toastContent.shouldHideIcon then var4.toastContent.iconSize or Vector2.new(iconSize.Regular, iconSize.Regular) else nil,
 			swipeUpDismiss = var4.toastContent.swipeUpDismiss,
-			onAppeared = function() --[[ line: 44 ]]
+			onAppeared = function()
 				-- upvalues: var4 (copy), var2 (copy)
 				if var4.toastContent.onAppeared then
 					var4.toastContent.onAppeared()
@@ -39,7 +39,7 @@ return function() --[[ line: 17 ]]
 				var2.current = false
 			end,
 			onActivated = var4.toastContent.onActivated,
-			onDismissed = function() --[[ line: 51 ]]
+			onDismissed = function()
 				-- upvalues: var4 (copy), var2 (copy), var3 (copy)
 				if var4.toastContent.onDismissed then
 					var4.toastContent.onDismissed()
@@ -50,7 +50,7 @@ return function() --[[ line: 17 ]]
 			end
 		}
 	end, { var4.toastContent })
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var2 (ref)
 		var2.current = true
 	end)

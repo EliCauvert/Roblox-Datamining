@@ -6,7 +6,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, _) --[[ line: 19 | named "SduiOpenSocialProofUserListSheetAction" ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), playersService (ref), gameConnectionsPlayedChipClicked (ref), appPage (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	

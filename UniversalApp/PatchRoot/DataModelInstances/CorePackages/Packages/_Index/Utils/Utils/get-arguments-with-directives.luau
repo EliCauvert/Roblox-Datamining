@@ -9,12 +9,12 @@ local graphQLModule = require(parent.GraphQL)
 local kind = graphQLModule.Kind
 local valueFromASTUntyped = graphQLModule.valueFromASTUntyped
 
-local function isTypeWithFields(p0) --[[ line: 31 ]]
+local function isTypeWithFields(p0)
 	-- upvalues: kind (ref)
 	return if p0.kind ~= kind.OBJECT_TYPE_DEFINITION then p0.kind == kind.OBJECT_TYPE_EXTENSION else true
 end
 
-function t.getArgumentsWithDirectives(p1) --[[ line: 38 ]]
+function t.getArgumentsWithDirectives(p1)
 	-- upvalues: array (ref), isTypeWithFields (ref), boolean (ref), object (ref), valueFromASTUntyped (ref)
 	local t = {}
 	
@@ -22,7 +22,7 @@ function t.getArgumentsWithDirectives(p1) --[[ line: 38 ]]
 		if v.fields ~= nil then
 			for i_1, v_1 in v.fields do
 				local var5 = if typeof(v_1.arguments) == "table" then v_1.arguments else nil
-				local var6 = if var5 ~= nil then nil else array.filter(var5, function(p2) --[[ line: 62 ]]
+				local var6 = if var5 ~= nil then nil else array.filter(var5, function(p2)
 					-- upvalues: boolean (copy)
 					return boolean.toJSBoolean(if typeof(p2.directives) == "table" then #p2.directives else nil)
 				end)
@@ -32,11 +32,11 @@ function t.getArgumentsWithDirectives(p1) --[[ line: 38 ]]
 					local value = t[tostring(("%s.%s"):format(tostring(v.name.value), tostring(v_1.name.value)))]
 					
 					for i_2, v_2 in var6 do
-						value[tostring(v_2.name.value)] = array.map(v_2.directives, function(p3) --[[ line: 84 ]]
+						value[tostring(v_2.name.value)] = array.map(v_2.directives, function(p3)
 							-- upvalues: array (copy), boolean (copy), object (copy), valueFromASTUntyped (copy)
 							return {
 								name = p3.name.value,
-								args = array.reduce(if boolean.toJSBoolean(p3.arguments) then p3.arguments else {}, function(p4, p5) --[[ line: 91 ]]
+								args = array.reduce(if boolean.toJSBoolean(p3.arguments) then p3.arguments else {}, function(p4, p5)
 									-- upvalues: object (copy), valueFromASTUntyped (copy)
 									return object.assign({}, p4, { [p5.name.value] = valueFromASTUntyped(p5.value, {}) })
 								end, {})

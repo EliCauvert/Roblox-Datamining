@@ -17,9 +17,9 @@ listTable.validateProps = tModule.strictInterface({
 })
 listTable.defaultProps = { showDividers = true, dividerStartOffset = 24 }
 
-function listTable.render(p0) --[[ line: 49 ]]
+function listTable.render(p0)
 	-- upvalues: withStyleModule (ref), roactModule (ref)
-	return withStyleModule(function(p1) --[[ line: 50 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: p0 (ref), roactModule (copy)
 		local automaticSize = p0.props.automaticSize
 		local size = p0.props.size or (if automaticSize then if automaticSize == Enum.AutomaticSize.X then UDim2.fromScale(0, 1) elseif automaticSize == Enum.AutomaticSize.Y then UDim2.fromScale(1, 0) elseif automaticSize == Enum.AutomaticSize.XY then UDim2.fromScale(0, 0) else UDim2.fromScale(1, 1) else UDim2.fromScale(1, 1))

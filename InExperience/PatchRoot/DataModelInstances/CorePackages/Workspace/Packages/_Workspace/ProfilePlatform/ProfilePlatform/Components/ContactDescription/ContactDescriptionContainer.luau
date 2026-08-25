@@ -15,7 +15,7 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var8 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0) --[[ line: 32 | named "ContactDescriptionContainer" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), parseSectionsFromData (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var8 (ref), navigateDown (ref), descriptionModule (ref)
 	local var9 = useDispatch()
 	local contactsProfileDescription = useLocalization({
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 32 | named "ContactDescriptionContainer" ]]
 			contactName = useProfileJsonComponentModule(enumsModule.Components.ContactDescription).contactName
 		}
 	}).contactsProfileDescription
-	local var10 = reactModule.useMemo(function() --[[ line: 40 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: parseSectionsFromData (copy), contactsProfileDescription (ref), enumsModule (copy)
 		return parseSectionsFromData({ description = contactsProfileDescription }, enumsModule.ProfileTypes.Contact)
 	end, { contactsProfileDescription })
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 32 | named "ContactDescriptionContainer" ]]
 	return reactModule.createElement(descriptionModule, {
 		description = contactsProfileDescription,
 		layoutOrder = p0.layoutOrder,
-		onActivateMoreButton = reactModule.useCallback(function() --[[ line: 44 ]]
+		onActivateMoreButton = reactModule.useCallback(function()
 			-- upvalues: appPage (copy), var10 (ref), fFlagSignalsNavP3Dispatch (copy), var8 (copy), var9 (ref), navigateDown (copy)
 			local t = {
 				name = appPage.AboutDetailsSheet,

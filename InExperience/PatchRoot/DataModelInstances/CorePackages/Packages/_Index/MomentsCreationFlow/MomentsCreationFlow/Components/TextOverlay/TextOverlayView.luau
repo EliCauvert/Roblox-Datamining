@@ -11,7 +11,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
 local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), creationFlowContextModule (ref), useCallback (ref), view (ref), button (ref), foundationModule (ref), creationFlowLocalizationModule (ref)
 	local var6 = useDeviceInsets()
 	local var7 = useTokens()
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 25 ]]
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
 				text = var8.getLocalization(creationFlowLocalizationModule.GeneralCtaBack),
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function() --[[ line: 30 ]]
+				onActivated = useCallback(function()
 					-- upvalues: p0 (ref)
 					if p0.onTextOverlayDiscard then
 						p0.onTextOverlayDiscard()
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 25 ]]
 				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
 				text = var8.getLocalization(creationFlowLocalizationModule.GeneralCtaDone),
 				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function() --[[ line: 36 ]]
+				onActivated = useCallback(function()
 					-- upvalues: p0 (ref)
 					if p0.onTextOverlaySave then
 						p0.onTextOverlaySave()

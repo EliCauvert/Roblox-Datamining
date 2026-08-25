@@ -9,7 +9,7 @@ local scenesReducerModule = require(script.Parent.ScenesReducer)
 local invariantModule = require(parent.utils.invariant)
 local t = { frequency = 4 }
 
-local function buildTransitionProps(p0, p1) --[[ line: 17 ]]
+local function buildTransitionProps(p0, p1)
 	-- upvalues: invariantModule (ref)
 	local navigation = p0.navigation
 	local options = p0.options
@@ -37,9 +37,9 @@ local function buildTransitionProps(p0, p1) --[[ line: 17 ]]
 	}
 end
 
-local function _(p2) --[[ line: 46 | named "filterStale" ]]
+local function _(p2)
 	-- upvalues: array (ref)
-	local var9 = array.filter(p2, function(p3) --[[ line: 47 ]]
+	local var9 = array.filter(p2, function(p3)
 		return not p3.isStale
 	end)
 	
@@ -48,7 +48,7 @@ end
 
 local transitioner = reactModule.Component:extend("Transitioner")
 
-function transitioner.init(p4) --[[ line: 60 ]]
+function transitioner.init(p4)
 	-- upvalues: reactModule (ref), otterModule (ref), scenesReducerModule (ref), buildTransitionProps (ref)
 	local state = p4.props.navigation.state
 	local descriptors = p4.props.descriptors
@@ -59,7 +59,7 @@ function transitioner.init(p4) --[[ line: 60 ]]
 		scenes = scenesReducerModule({}, state, nil, descriptors)
 	}
 	
-	function p4._doOnAbsoluteSizeChanged(...) --[[ line: 78 ]]
+	function p4._doOnAbsoluteSizeChanged(...)
 		-- upvalues: p4 (ref)
 		return p4:_onAbsoluteSizeChanged(...)
 	end
@@ -70,13 +70,13 @@ function transitioner.init(p4) --[[ line: 60 ]]
 	p4._isMounted = false
 	p4._isTransitionRunning = false
 	p4._transitionQueue = {}
-	p4._completeSignalDisconnector = p4.state.position:onComplete(function() --[[ line: 91 ]]
+	p4._completeSignalDisconnector = p4.state.position:onComplete(function()
 		-- upvalues: p4 (ref)
 		if p4._isMounted then
 			p4:_onTransitionEnd()
 		end
 	end)
-	p4._stepSignalDisconnector = p4.state.position:onStep(function(p5) --[[ line: 97 ]]
+	p4._stepSignalDisconnector = p4.state.position:onStep(function(p5)
 		-- upvalues: p4 (ref)
 		if p4._isMounted then
 			p4:_onPositionStep(p5)
@@ -84,11 +84,11 @@ function transitioner.init(p4) --[[ line: 60 ]]
 	end)
 end
 
-function transitioner.didMount(p6) --[[ line: 104 ]]
+function transitioner.didMount(p6)
 	p6._isMounted = true
 end
 
-function transitioner.willUnmount(p7) --[[ line: 108 ]]
+function transitioner.willUnmount(p7)
 	p7._isMounted = false
 	
 	if p7._completeSignalDisconnector then
@@ -101,7 +101,7 @@ function transitioner.willUnmount(p7) --[[ line: 108 ]]
 	end
 end
 
-function transitioner.didUpdate(p8, p9) --[[ line: 122 ]]
+function transitioner.didUpdate(p8, p9)
 	if not p8.state.layout.isMeasured and p8._ref.current then
 		p8:_onAbsoluteSizeChanged(p8._ref.current)
 	end
@@ -117,7 +117,7 @@ function transitioner.didUpdate(p8, p9) --[[ line: 122 ]]
 	end
 end
 
-function transitioner.render(p10) --[[ line: 147 ]]
+function transitioner.render(p10)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
@@ -131,7 +131,7 @@ function transitioner.render(p10) --[[ line: 147 ]]
 	})
 end
 
-function transitioner._onAbsoluteSizeChanged(value, p11) --[[ line: 165 ]]
+function transitioner._onAbsoluteSizeChanged(value, p11)
 	-- upvalues: object (ref), buildTransitionProps (ref)
 	if not value._isMounted then return end
 	local x = p11.AbsoluteSize.X
@@ -145,13 +145,13 @@ function transitioner._onAbsoluteSizeChanged(value, p11) --[[ line: 165 ]]
 	value:setState({ layout = var10 })
 end
 
-function transitioner._computeScenes(p12, p13, p14) --[[ line: 194 ]]
+function transitioner._computeScenes(p12, p13, p14)
 	-- upvalues: scenesReducerModule (ref), array (ref)
 	local var11 = scenesReducerModule(p12.state.scenes, p14.navigation.state, p13.navigation.state, p14.descriptors)
 	
 	if not p14.navigation.state.isTransitioning then
 		local var12 = var11
-		local var13 = array.filter(var12, function(p15) --[[ line: 47 ]]
+		local var13 = array.filter(var12, function(p15)
 			return not p15.isStale
 		end)
 		var11 = if #var13 == #var12 then var12 else var13
@@ -162,7 +162,7 @@ function transitioner._computeScenes(p12, p13, p14) --[[ line: 194 ]]
 	return if var11 == p12.state.scenes then nil else var11
 end
 
-function transitioner._startTransition(p16, p17, p18) --[[ line: 213 ]]
+function transitioner._startTransition(p16, p17, p18)
 	-- upvalues: object (ref), buildTransitionProps (ref), t (ref), otterModule (ref)
 	local var14 = p17.navigation.state.index ~= p18.navigation.state.index
 	local var15 = p16:_computeScenes(p17, p18)
@@ -178,7 +178,7 @@ function transitioner._startTransition(p16, p17, p18) --[[ line: 213 ]]
 		if isTransitioning and var14 then
 			p16._isTransitionRunning = true
 		end
-		p16:setState(var16, function() --[[ line: 245 ]]
+		p16:setState(var16, function()
 			-- upvalues: isTransitioning (ref), var14 (ref), p18 (ref), p16 (ref), index (ref), object (copy), t (copy), position (ref), otterModule (copy)
 			if isTransitioning and var14 then
 				if p18.onTransitionStart then
@@ -213,17 +213,17 @@ function transitioner._startTransition(p16, p17, p18) --[[ line: 213 ]]
 	end
 end
 
-function transitioner._onTransitionEnd(p19) --[[ line: 284 ]]
+function transitioner._onTransitionEnd(p19)
 	-- upvalues: array (ref), object (ref), buildTransitionProps (ref)
 	local prevTransitionProps = p19._prevTransitionProps
 	p19._prevTransitionProps = nil
 	local scenes = p19.state.scenes
-	local var18 = array.filter(scenes, function(p20) --[[ line: 47 ]]
+	local var18 = array.filter(scenes, function(p20)
 		return not p20.isStale
 	end)
 	scenes = object.assign(table.clone(p19.state), { scenes = if #var18 == #scenes then scenes else var18 })
 	p19._transitionProps = buildTransitionProps(p19.props, scenes)
-	p19:setState(scenes, function() --[[ line: 296 ]]
+	p19:setState(scenes, function()
 		-- upvalues: p19 (ref), prevTransitionProps (ref)
 		if p19.props.onTransitionEnd then
 			p19.props.onTransitionEnd(p19._transitionProps, prevTransitionProps)
@@ -242,7 +242,7 @@ function transitioner._onTransitionEnd(p19) --[[ line: 284 ]]
 	end)
 end
 
-function transitioner._onPositionStep(p21, p22) --[[ line: 315 ]]
+function transitioner._onPositionStep(p21, p22)
 	p21._positionLastValue = p22
 	local index = p21._transitionProps.index
 	local var20 = if p21._prevTransitionProps then p21._prevTransitionProps.index else index

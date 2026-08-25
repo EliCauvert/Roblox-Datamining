@@ -2,7 +2,7 @@
 local array = require(parent.Parent.LuauPolyfill).Array
 local isObjectLike = require(parent.jsutils.isObjectLike).isObjectLike
 
-local function toJSONDeep(p0) --[[ line: 18 ]]
+local function toJSONDeep(p0)
 	-- upvalues: isObjectLike (ref), array (ref), toJSONDeep (ref)
 	if not isObjectLike(p0) then
 		return p0

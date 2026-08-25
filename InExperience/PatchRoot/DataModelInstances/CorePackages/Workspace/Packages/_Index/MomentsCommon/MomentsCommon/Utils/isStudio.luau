@@ -1,6 +1,6 @@
 ﻿local runService = game:GetService("RunService")
 
-return function() --[[ line: 4 | named "isStudio" ]]
+return function()
 	-- upvalues: runService (ref)
 	return runService:IsStudio()
 end

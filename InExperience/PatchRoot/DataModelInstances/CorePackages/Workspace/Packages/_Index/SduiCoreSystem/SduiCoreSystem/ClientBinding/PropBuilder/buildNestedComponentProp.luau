@@ -15,7 +15,7 @@ local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiIm
 local fFlagSduiInlineNestedComponentSchema = require(parent.SharedFlags).FFlagSduiInlineNestedComponentSchema
 local fFlagSduiLazyNestedComponentProp = require(parent.SharedFlags).FFlagSduiLazyNestedComponentProp
 
-local function buildNestedComponentProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 50 ]]
+local function buildNestedComponentProp(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiPropUtilsModule (ref), buildConfigForComponent (ref), signalsModule (ref), buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiLazyNestedComponentProp (ref), propResultCategory (ref), buildNestedComponentProp (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
@@ -41,10 +41,10 @@ local function buildNestedComponentProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 5
 		var8 = templateForRobloxComponent
 		local _ = nil
 		
-		return if fFlagSduiInlineNestedComponentSchema and p1.inline_component ~= nil then buildConfigForComponent(var8, p3, p4, p5, nil, p2) else buildConfigForComponent(var8, signalsModule.createComputed(function(p7) --[[ line: 90 ]]
+		return if fFlagSduiInlineNestedComponentSchema and p1.inline_component ~= nil then buildConfigForComponent(var8, p3, p4, p5, nil, p2) else buildConfigForComponent(var8, signalsModule.createComputed(function(p7)
 			-- upvalues: buildInputsForNestedComponentModule (copy), p3 (ref), p1 (ref), p2 (ref), p4 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
 			local t = {}
-			local ok, status = pcall(function() --[[ line: 92 ]]
+			local ok, status = pcall(function()
 				-- upvalues: buildInputsForNestedComponentModule (copy), p3 (copy), p1 (copy), p2 (copy), p7 (ref), t (ref), p4 (copy)
 				buildInputsForNestedComponentModule(p3, p1.inputs, p2, p7, t, p4)
 			end)

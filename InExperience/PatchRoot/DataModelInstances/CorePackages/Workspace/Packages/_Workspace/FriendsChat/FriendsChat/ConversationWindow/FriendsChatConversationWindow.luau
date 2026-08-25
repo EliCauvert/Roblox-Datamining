@@ -27,10 +27,10 @@ local resolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
 local layoutConstantsModule = require(friendsChat.LayoutConstants)
 local useFriendsChatConversationTelemetryModule = require(script.Parent.Parent.Telemetry.ChatConversation.useFriendsChatConversationTelemetry)
 
-return function(p0) --[[ line: 79 | named "FriendsChatConversationWindow" ]]
+return function(p0)
 	-- upvalues: useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), fFlagDebugFriendsChatModule (ref), fStringDebugFriendsChatConversationIdModule (ref), playersService (ref), expChatConversationListAdapterModule (ref), signalsModule (ref), fFlagFriendsChatOsaSystemMessage (ref), getConversationStoreModule (ref), signalsReactModule (ref), appChatNetworkingModule (ref), friendsChatOsaAcknowledgementModule (ref), useConversationHeaderPropsModule (ref), useConversationModerationTypeModule (ref), useConversationMessagePoolModule (ref), getConversationMessageListStoreModule (ref), useFriendsChatConversationTelemetryModule (ref), useConversationHeaderFadeLayoutModule (ref), friendsChatConversationHeaderBarModule (ref), resolveFadeModule (ref), layoutConstantsModule (ref), friendsChatMessageListModule (ref), friendsChatInputBarHostModule (ref)
 	local var25 = useChatWindowSettingsModule()
-	local chatWindowSettings = p0.chatWindowSettings or reactModule.useMemo(function() --[[ line: 81 ]]
+	local chatWindowSettings = p0.chatWindowSettings or reactModule.useMemo(function()
 		-- upvalues: var25 (ref)
 		return {
 			BackgroundColor3 = var25.ChatWindowBackgroundColor3,
@@ -47,9 +47,9 @@ return function(p0) --[[ line: 79 | named "FriendsChatConversationWindow" ]]
 	local localPlayer = playersService.LocalPlayer
 	local var30 = if localPlayer then localPlayer.UserId else 0
 	local var31 = var29 and not expChatConversationListAdapterModule.isFriendPlaceholder(conversationId)
-	local var32 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 101 ]]
+	local var32 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), fFlagFriendsChatOsaSystemMessage (copy), getConversationStoreModule (copy), conversationId (write)
-		return signalsModule.createComputed(function(p1) --[[ line: 102 ]]
+		return signalsModule.createComputed(function(p1)
 			-- upvalues: fFlagFriendsChatOsaSystemMessage (copy), getConversationStoreModule (copy), conversationId (copy)
 			if not fFlagFriendsChatOsaSystemMessage then
 				return nil
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 79 | named "FriendsChatConversationWindow" ]]
 		conversationId = conversationId,
 		hasConversationId = var29
 	})
-	reactModule.useEffect(function() --[[ line: 126 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var29 (ref), expChatConversationListAdapterModule (copy), conversationId (write)
 		if var29 then
 			expChatConversationListAdapterModule.markConversationRead(conversationId)
@@ -84,7 +84,7 @@ return function(p0) --[[ line: 79 | named "FriendsChatConversationWindow" ]]
 	})
 	local var36 = useFriendsChatConversationTelemetryModule({
 		conversationId = conversationId,
-		getLoadedMessageCount = reactModule.useCallback(function() --[[ line: 152 ]]
+		getLoadedMessageCount = reactModule.useCallback(function()
 			-- upvalues: var29 (ref), getConversationMessageListStoreModule (copy), conversationId (write)
 			return if var29 then #getConversationMessageListStoreModule(false).getOrderedIds(conversationId, false) else 0
 		end, { conversationId, var29 })
@@ -124,7 +124,7 @@ return function(p0) --[[ line: 79 | named "FriendsChatConversationWindow" ]]
 				onHovered = p0.onHovered,
 				onUnhovered = p0.onUnhovered,
 				onBack = p0.onBack,
-				onActivated = if p0.onOpenDetails and var31 then reactModule.useCallback(function() --[[ line: 170 ]]
+				onActivated = if p0.onOpenDetails and var31 then reactModule.useCallback(function()
 					-- upvalues: fireInfoButtonClicked (ref), onOpenDetails (ref), conversationId (write)
 					fireInfoButtonClicked()
 					onOpenDetails(conversationId)

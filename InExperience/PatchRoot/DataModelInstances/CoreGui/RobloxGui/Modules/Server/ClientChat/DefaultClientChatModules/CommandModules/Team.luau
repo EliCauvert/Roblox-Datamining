@@ -1,7 +1,7 @@
 ﻿local playersService = game:GetService("Players")
 local list = { "/team ", "/t ", "% " }
 
-function IsTeamCommand(p0) --[[ line: 10 ]]
+function IsTeamCommand(p0)
 	-- upvalues: list (ref)
 	for i = 1, #list do
 		local var5 = list[i]
@@ -18,7 +18,7 @@ local t = {}
 t.__index = t
 local utilModule = require(script.Parent:WaitForChild("Util"))
 local t_1 = {
-	new = function(p1, p2, p3) --[[ line: 91 ]]
+	new = function(p1, p2, p3)
 		-- upvalues: t (ref)
 		local tbl = setmetatable({}, t)
 		tbl.Destroyed = false
@@ -29,7 +29,7 @@ local t_1 = {
 		tbl.MessageModeButton = p2:GetMessageModeTextButton()
 		tbl.OriginalTeamText = ""
 		tbl.TeamChatEntered = false
-		tbl.MessageModeConnection = tbl.MessageModeButton.MouseButton1Click:connect(function() --[[ line: 102 ]]
+		tbl.MessageModeConnection = tbl.MessageModeButton.MouseButton1Click:connect(function()
 			-- upvalues: tbl (ref)
 			local text = tbl.TextBox.Text
 			
@@ -46,7 +46,7 @@ local t_1 = {
 	end
 }
 
-function t.EnterTeamChat(p4) --[[ line: 27 ]]
+function t.EnterTeamChat(p4)
 	p4.TeamChatEntered = true
 	p4.MessageModeButton.Size = UDim2.new(0, 1000, 1, 0)
 	p4.MessageModeButton.Text = "[Team]"
@@ -59,7 +59,7 @@ function t.EnterTeamChat(p4) --[[ line: 27 ]]
 	p4.TextBox.Text = " "
 end
 
-function t.TextUpdated(p5) --[[ line: 41 ]]
+function t.TextUpdated(p5)
 	local text = p5.TextBox.Text
 	
 	if not p5.TeamChatEntered then
@@ -80,27 +80,27 @@ function t.TextUpdated(p5) --[[ line: 41 ]]
 	end
 end
 
-function t.GetMessage(p6) --[[ line: 64 ]]
+function t.GetMessage(p6)
 	return if p6.TeamChatEntered then "/t " .. p6.TextBox.Text else p6.TextBox.Text
 end
 
-function t.ProcessCompletedMessage(_) --[[ line: 71 ]]
+function t.ProcessCompletedMessage(_)
 	return false
 end
 
-function t.Destroy(p7) --[[ line: 75 ]]
+function t.Destroy(p7)
 	p7.MessageModeConnection:disconnect()
 	p7.Destroyed = true
 end
 
-function t.GetTeamChatColor(p8) --[[ line: 80 ]]
+function t.GetTeamChatColor(p8)
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	return if localPlayer.Team then localPlayer.Team.TeamColor.Color elseif p8.ChatSettings.DefaultChannelNameColor then p8.ChatSettings.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
 end
 
-function ProcessMessage(p9, p10, p11, p12) --[[ line: 117 ]]
+function ProcessMessage(p9, p10, p11, p12)
 	-- upvalues: t_1 (ref)
 	if p11.TargetChannel == "Team" then return end
 	return if IsTeamCommand(p9) then t_1.new(p10, p11, p12) else nil

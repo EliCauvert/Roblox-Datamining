@@ -9,7 +9,7 @@ for i = 1, 64 do
 end
 t_1[61] = 0
 
-local function buildStringFromCodes(p0) --[[ line: 46 ]]
+local function buildStringFromCodes(p0)
 	local t = {}
 	
 	for i = 1, #p0, 4096 do
@@ -19,7 +19,7 @@ local function buildStringFromCodes(p0) --[[ line: 46 ]]
 end
 
 return {
-	encode = function(p1) --[[ line: 56 ]]
+	encode = function(p1)
 		-- upvalues: t (ref), buildStringFromCodes (ref)
 		local p1Count = #p1
 		local var7 = math.ceil(p1Count / 3) * 4
@@ -53,7 +53,7 @@ return {
 		end
 		return buildStringFromCodes(list)
 	end,
-	decode = function(p2) --[[ line: 102 ]]
+	decode = function(p2)
 		-- upvalues: t_1 (ref), buildStringFromCodes (ref)
 		local p2Count = #p2
 		local var15 = math.ceil(p2Count / 4) * 3

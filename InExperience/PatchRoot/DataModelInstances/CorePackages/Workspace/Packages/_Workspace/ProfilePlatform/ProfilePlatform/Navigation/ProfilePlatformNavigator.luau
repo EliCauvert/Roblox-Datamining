@@ -37,9 +37,9 @@ local t_1 = {
 	renderUnderlyingPage = true
 }
 
-local function _(p0) --[[ line: 52 | named "makeFullBleedNavigationOptions" ]]
+local function _(p0)
 	-- upvalues: t_1 (ref)
-	return function(p1) --[[ line: 53 ]]
+	return function(p1)
 		-- upvalues: t_1 (copy), p0 (ref)
 		return if p1.navigation.getParam("fullBleed") then t_1 else p0
 	end
@@ -52,7 +52,7 @@ local list = {
 	{
 		[enumsModule.Screens.EditProfilePage] = {
 			screen = editProfileLandingModule,
-			navigationOptions = if fFlagAXEnableProfileTab then function(p2) --[[ line: 53 ]]
+			navigationOptions = if fFlagAXEnableProfileTab then function(p2)
 				-- upvalues: t_1 (ref), t (ref)
 				return if p2.navigation.getParam("fullBleed") then t_1 else t
 			end else t
@@ -124,7 +124,7 @@ if fFlagAXEnableProfileTab then
 		absorbInput = false
 	}
 	
-	local var28 = function(p3) --[[ line: 53 ]]
+	local var28 = function(p3)
 		-- upvalues: t_1 (ref), t_4 (ref)
 		return if p3.navigation.getParam("fullBleed") then t_1 else t_4
 	end

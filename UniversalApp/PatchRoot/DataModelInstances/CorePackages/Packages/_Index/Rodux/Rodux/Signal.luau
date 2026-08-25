@@ -1,11 +1,11 @@
 ﻿local dEV = _G.__DEV__
-local _, status = xpcall(function() --[[ line: 9 ]]
+local _, status = xpcall(function()
 	return game:DefineFastFlag("RoduxRemoveConnectTraceback", false)
-end, function() --[[ line: 11 ]]
+end, function()
 	return true
 end)
 
-local function immutableAppend(p0, ...) --[[ line: 15 ]]
+local function immutableAppend(p0, ...)
 	local t = {}
 	local p0Count = #p0
 	
@@ -18,7 +18,7 @@ local function immutableAppend(p0, ...) --[[ line: 15 ]]
 	return t
 end
 
-local function immutableRemoveValue(p1, p2) --[[ line: 30 ]]
+local function immutableRemoveValue(p1, p2)
 	local t = {}
 	
 	for i = 1, #p1 do
@@ -32,7 +32,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p3) --[[ line: 46 ]]
+function t.new(p3)
 	-- upvalues: t (ref)
 	local t_1 = { _listeners = {}, _store = p3 }
 	setmetatable(t_1, t)
@@ -40,7 +40,7 @@ function t.new(p3) --[[ line: 46 ]]
 	return t_1
 end
 
-function t:connect(p4) --[[ line: 57 ]]
+function t:connect(p4)
 	-- upvalues: status (ref), dEV (ref), immutableAppend (ref), immutableRemoveValue (ref)
 	if typeof(p4) ~= "function" then
 		error("Expected the listener to be a function.")
@@ -61,7 +61,7 @@ function t:connect(p4) --[[ line: 57 ]]
 	self._listeners = immutableAppend(self._listeners, t)
 	
 	return {
-		disconnect = function() --[[ line: 83 ]]
+		disconnect = function()
 			-- upvalues: t (ref), self (ref), status (copy), dEV (copy), immutableRemoveValue (copy)
 			if t.disconnected then
 				error(("Listener connected at: \n%s\nwas already disconnected at: \n%s\n"):format(tostring(t.connectTraceback), tostring(t.disconnectTraceback)))
@@ -78,7 +78,7 @@ function t:connect(p4) --[[ line: 57 ]]
 	}
 end
 
-function t:fire(...) --[[ line: 109 ]]
+function t:fire(...)
 	for i, v in ipairs(self._listeners) do
 		if not v.disconnected then
 			v.callback(...)

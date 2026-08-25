@@ -18,7 +18,7 @@ local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 
-return function(p0) --[[ line: 35 | named "PersonaLivenessHosted" ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), appLinking (ref), reactModule (ref), useLocalization (ref), fullscreenPageWithSafeArea (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), dialog (ref), dialogSize (ref), view (ref), loading (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref)
 	local webLink = p0.webLink
 	local onCancel = p0.onCancel
@@ -63,7 +63,7 @@ return function(p0) --[[ line: 35 | named "PersonaLivenessHosted" ]]
 									size = inputSize.Medium,
 									text = var6.cancelButton,
 									fillBehavior = fillBehavior.Fill,
-									onActivated = reactModule.useCallback(function() --[[ line: 49 ]]
+									onActivated = reactModule.useCallback(function()
 										-- upvalues: onCancel (ref)
 										onCancel()
 									end, { onCancel, sessionId })
@@ -75,7 +75,7 @@ return function(p0) --[[ line: 35 | named "PersonaLivenessHosted" ]]
 									size = inputSize.Medium,
 									text = var6.continueButton,
 									fillBehavior = fillBehavior.Fill,
-									onActivated = reactModule.useCallback(function() --[[ line: 44 ]]
+									onActivated = reactModule.useCallback(function()
 										-- upvalues: var5 (ref), var3 (ref), webLink (ref)
 										var5(true)
 										var3:openURL(webLink)

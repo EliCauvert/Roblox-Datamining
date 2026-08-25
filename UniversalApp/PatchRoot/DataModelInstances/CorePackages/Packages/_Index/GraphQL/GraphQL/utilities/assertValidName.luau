@@ -5,7 +5,7 @@ local var0 = nil
 local _ = nil
 
 return {
-	assertValidName = function(p0) --[[ line: 23 ]]
+	assertValidName = function(p0)
 		-- upvalues: var0 (write)
 		local var1 = var0(p0)
 		
@@ -14,7 +14,7 @@ return {
 		end
 		return p0
 	end,
-	isValidNameError = function(p1) --[[ line: 34 ]]
+	isValidNameError = function(p1)
 		-- upvalues: devAssert (ref), graphQLError (ref)
 		devAssert(type(p1) == "string", "Expected name to be a string.")
 		

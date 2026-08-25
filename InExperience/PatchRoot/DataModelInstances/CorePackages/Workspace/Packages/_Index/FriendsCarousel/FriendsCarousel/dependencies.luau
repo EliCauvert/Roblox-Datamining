@@ -10,13 +10,13 @@ local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
 local var4 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 18 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: var3 (ref), getFFlagMigrateSocialNetworking (ref), httpRequest (ref)
 			var3:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
 			
 			return if getFFlagMigrateSocialNetworking() then httpRequest.requestFunctions.RequestInternal(p0, p1, p2) else httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
 		end,
-		postRequestFunction = function(p3, p4) --[[ line: 26 ]]
+		postRequestFunction = function(p3, p4)
 			-- upvalues: var3 (ref)
 			var3:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p4.requestMethod, p4.url, p3.StatusCode))
 		end,

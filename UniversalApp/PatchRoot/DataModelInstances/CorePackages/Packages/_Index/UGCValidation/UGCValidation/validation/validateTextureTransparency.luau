@@ -2,7 +2,7 @@
 local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 
-local function getIsOpaque(p0) --[[ line: 10 ]]
+local function getIsOpaque(p0)
 	local var2 = p0:ReadPixelsBuffer(Vector2.new(0, 0), p0.Size)
 	
 	for i = 0, buffer.len(var2) - 1, 4 do
@@ -14,7 +14,7 @@ local function getIsOpaque(p0) --[[ line: 10 ]]
 	return true
 end
 
-return function(p1, p2) --[[ line: 22 | named "validateTextureTransparency" ]]
+return function(p1, p2)
 	-- upvalues: analyticsModule (ref), getIsOpaque (ref)
 	local currentTime = tick()
 	

@@ -4,17 +4,17 @@ local themeModule = require(parent.Utils.Highlighter.Theme)
 local _ = require(parent.Types)
 local isCliModule = require(parent.Utils.isCli)
 
-return function() --[[ line: 8 | named "useStudioThemeColors" ]]
+return function()
 	-- upvalues: reactModule (ref), themeModule (ref), isCliModule (ref)
 	local var3, var4 = reactModule.useState(themeModule.defaultColors)
-	reactModule.useEffect(function() --[[ line: 11 ]]
+	reactModule.useEffect(function()
 		-- upvalues: isCliModule (copy), themeModule (copy), var4 (ref)
-		local function getTokens() --[[ line: 12 ]]
+		local function getTokens()
 			-- upvalues: isCliModule (copy), themeModule (copy)
 			if isCliModule() then
 				return themeModule.defaultColors
 			end
-			local ok, status = pcall(function() --[[ line: 17 ]]
+			local ok, status = pcall(function()
 				return settings().Studio.Theme
 			end)
 			
@@ -32,15 +32,15 @@ return function() --[[ line: 8 | named "useStudioThemeColors" ]]
 		end
 		
 		var4(getTokens())
-		local ok, status = pcall(function() --[[ line: 40 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var4 (copy), getTokens (ref)
-			return settings().Studio.ThemeChanged:Connect(function() --[[ line: 41 ]]
+			return settings().Studio.ThemeChanged:Connect(function()
 				-- upvalues: var4 (copy), getTokens (copy)
 				var4(getTokens())
 			end)
 		end)
 		
-		return function() --[[ line: 46 ]]
+		return function()
 			-- upvalues: ok (ref), status (ref)
 			if ok and status then
 				status:Disconnect()

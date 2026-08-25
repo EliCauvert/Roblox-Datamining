@@ -1,11 +1,11 @@
 ﻿local createComputed = require(script.Parent.Parent.Signals).createComputed
 
-return function(p0, p1) --[[ line: 8 | named "createReducer" ]]
+return function(p0, p1)
 	-- upvalues: createComputed (ref)
 	local var0 = false
 	local var1 = nil
 	
-	local function _() --[[ line: 12 | named "ensureInitialized" ]]
+	local function _()
 		-- upvalues: var0 (write), var1 (write), p1 (ref)
 		if not var0 then
 			var0 = true
@@ -13,7 +13,7 @@ return function(p0, p1) --[[ line: 8 | named "createReducer" ]]
 		end
 	end
 	
-	return createComputed(function(p2) --[[ line: 19 ]]
+	return createComputed(function(p2)
 		-- upvalues: var0 (write), var1 (write), p1 (ref), p0 (ref)
 		if not var0 then
 			var0 = true

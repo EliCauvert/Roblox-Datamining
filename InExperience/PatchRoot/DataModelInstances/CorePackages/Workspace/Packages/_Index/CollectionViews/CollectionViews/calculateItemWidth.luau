@@ -1,6 +1,6 @@
 ﻿local argCheckModule = require(script:FindFirstAncestor("CollectionViews").Parent.ArgCheck)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 8 | named "calculateItemWidth" ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: argCheckModule (ref)
 	if p0 <= 0 then
 		return 0

@@ -1,7 +1,7 @@
 ﻿local dictionary = require(script:FindFirstAncestor("ExpChat").Parent.llama).Dictionary
 local var0 = 0
 
-return function(p0) --[[ line: 7 | named "createMockMessage" ]]
+return function(p0)
 	-- upvalues: var0 (write), dictionary (ref)
 	var0 += 1
 	

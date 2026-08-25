@@ -1,6 +1,6 @@
 ﻿local productTypeEnum = require(script:FindFirstAncestor("PurchasePrompt").types).ProductTypeEnum
 
-local function buildPermanentRowsFromIds(p0) --[[ line: 27 ]]
+local function buildPermanentRowsFromIds(p0)
 	local list = table.create(#p0)
 	
 	for i, v in p0 do
@@ -11,7 +11,7 @@ local function buildPermanentRowsFromIds(p0) --[[ line: 27 ]]
 	return list
 end
 
-return function(p1, p2, p3) --[[ line: 37 | named "getCartPricingRequestedItemsForCartPricing" ]]
+return function(p1, p2, p3)
 	-- upvalues: productTypeEnum (ref), buildPermanentRowsFromIds (ref)
 	if type(p2) == "table" and p2.kind == productTypeEnum.Look then
 		local cartPricingRequestedItems = p2.cartPricingRequestedItems

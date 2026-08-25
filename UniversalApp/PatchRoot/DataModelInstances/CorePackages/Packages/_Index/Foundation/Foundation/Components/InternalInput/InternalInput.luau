@@ -27,7 +27,7 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 86 | named "InternalInput" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), useTokensModule (ref), useInputVariantsModule (ref), useInputMotionStatesModule (ref), useMotion (ref), controlStateModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), viewModule (ref), withCommonPropsModule (ref), dashModule (ref), inputLabelModule (ref), getInputTextSizeModule (ref), inputHintModule (ref)
 	local var20
 	local var18 = withDefaultsModule(p0, t)
@@ -51,7 +51,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 86 | 
 	local var25 = useTokensModule()
 	local isChecked = var18.isChecked or var18.isIndeterminate
 	local var27 = useInputVariantsModule(var25, var18.size, position)
-	local var28 = reactModule.useMemo(function() --[[ line: 103 ]]
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: var18 (ref), var25 (ref)
 		return {
 			radius = var18.customVariantProps.cursorRadius or UDim.new(0, 0),
@@ -61,7 +61,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 86 | 
 	end, { var25, var20, var18.customVariantProps.cursorRadius })
 	local var29 = useInputMotionStatesModule(var25, var18.customVariantProps.colors)
 	local var30, var31 = useMotion(var29.Default)
-	reactModule.useEffect(function() --[[ line: 116 ]]
+	reactModule.useEffect(function()
 		-- upvalues: flagsModule (copy), isChecked (ref), var31 (ref), var29 (ref), var21 (write)
 		if flagsModule.FoundationInternalInputBeta then
 			if isChecked then
@@ -83,11 +83,11 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 86 | 
 		end
 		var31(var29.Default)
 	end, if flagsModule.FoundationInternalInputBeta then { isChecked, var29 } else { isChecked, var21, var29 })
-	local var32 = if flagsModule.FoundationInternalInputBeta then nil else reactModule.useCallback(function(p2) --[[ line: 140 ]]
+	local var32 = if flagsModule.FoundationInternalInputBeta then nil else reactModule.useCallback(function(p2)
 		-- upvalues: var22 (write), controlStateModule (copy)
 		var22(p2 == controlStateModule.Hover)
 	end, {})
-	local var33 = reactModule.useCallback(function() --[[ line: 144 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref)
 		if var18.isDisabled then
 			return
@@ -118,7 +118,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 86 | 
 		Size = var18.customVariantProps.size - UDim2.fromOffset(var36, var36),
 		backgroundStyle = var30.backgroundStyle,
 		onActivated = var33,
-		stateLayer = if flagsModule.FoundationInternalInputBeta then if flagsModule.FoundationInternalInputBeta then reactModule.useMemo(function() --[[ line: 177 ]]
+		stateLayer = if flagsModule.FoundationInternalInputBeta then if flagsModule.FoundationInternalInputBeta then reactModule.useMemo(function()
 			-- upvalues: stateLayerAffordanceModule (copy)
 			return {
 				inset = nil,
@@ -127,10 +127,10 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 86 | 
 			}
 		end, {}) else nil else { affordance = stateLayerAffordanceModule.Background },
 		stroke = {
-			Color = var30.strokeStyle:map(function(p3) --[[ line: 194 ]]
+			Color = var30.strokeStyle:map(function(p3)
 				return p3.Color3
 			end),
-			Transparency = var30.strokeStyle:map(function(p4) --[[ line: 197 ]]
+			Transparency = var30.strokeStyle:map(function(p4)
 				-- upvalues: var18 (ref), var20 (ref), constantsModule (copy)
 				return if var18.isDisabled and not var20 then constantsModule.DISABLED_TRANSPARENCY else p4.Transparency
 			end),

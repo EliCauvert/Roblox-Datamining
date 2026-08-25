@@ -8,7 +8,7 @@ local t_1 = {
 }
 
 return {
-	create = function(p0) --[[ line: 46 ]]
+	create = function(p0)
 		-- upvalues: t (ref), responsibilityCatalogModule (ref), t_1 (ref)
 		assert(p0.suite ~= "", "benchmark suite must not be empty")
 		assert(p0.workload ~= "", "benchmark workload must not be empty")

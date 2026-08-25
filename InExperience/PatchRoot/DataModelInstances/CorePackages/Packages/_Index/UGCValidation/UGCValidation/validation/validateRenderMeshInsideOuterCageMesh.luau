@@ -5,10 +5,10 @@ local getFIntUGCValidateRenderMeshInsideOuterCageMeshThresholdModule = require(p
 local _ = require(parent.util.Types)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 
-return function(p0, p1, p2, p3) --[[ line: 17 | named "validateRenderMeshInsideOuterCageMesh" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref), getFIntUGCValidateRenderMeshInsideOuterCageMeshThresholdModule (ref)
 	local currentTime = tick()
-	local var5, var6 = pcallDeferredModule(function() --[[ line: 28 ]]
+	local var5, var6 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p1 (ref), p2 (ref), p0 (ref)
 		return UGCValidationService:CalculateEditableMeshInsideMeshPercentage(p1.editableMesh, p2.editableMesh, p0.CageOrigin:Inverse(), Vector3.new(1, 1, 1))
 	end, p3)

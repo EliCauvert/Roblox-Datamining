@@ -1,6 +1,6 @@
 ﻿local setCentralOverlayModule = require(script:FindFirstAncestor("CentralOverlay").Actions.SetCentralOverlay)
 
-return function(p0, p1) --[[ line: 4 ]]
+return function(p0, p1)
 	-- upvalues: setCentralOverlayModule (ref)
 	return if p1.type == setCentralOverlayModule.name then {
 		OverlayType = p1.overlayType,

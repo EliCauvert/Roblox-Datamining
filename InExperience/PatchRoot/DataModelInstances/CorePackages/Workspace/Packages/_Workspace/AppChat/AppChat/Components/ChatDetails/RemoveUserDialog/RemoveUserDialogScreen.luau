@@ -4,14 +4,14 @@ local loggerModule = require(script.Parent.Logger)
 local removeUserDialog = roactModule.PureComponent:extend("RemoveUserDialog")
 removeUserDialog.defaultProps = { navigation = nil }
 
-function removeUserDialog.init(p0) --[[ line: 14 ]]
-	function p0.onRemoveUserDialogClose() --[[ line: 15 ]]
+function removeUserDialog.init(p0)
+	function p0.onRemoveUserDialogClose()
 		-- upvalues: p0 (ref)
 		p0.props.navigation.goBack()
 	end
 end
 
-function removeUserDialog.render(p1) --[[ line: 20 ]]
+function removeUserDialog.render(p1)
 	-- upvalues: loggerModule (ref), roactModule (ref), removeUserDialogContainerModule (ref)
 	local navigation = p1.props.navigation
 	assert(type(navigation) ~= "nil", "RemoveUserDialog should be wrapped with Roact Navigation")
@@ -30,7 +30,7 @@ function removeUserDialog.render(p1) --[[ line: 20 ]]
 	})
 end
 
-function removeUserDialog.didMount(_) --[[ line: 38 ]]
+function removeUserDialog.didMount(_)
 	-- upvalues: loggerModule (ref)
 	loggerModule:info("{screen} mounted")
 end

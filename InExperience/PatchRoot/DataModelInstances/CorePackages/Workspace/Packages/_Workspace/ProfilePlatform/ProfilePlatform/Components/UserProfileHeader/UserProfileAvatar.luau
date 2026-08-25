@@ -20,7 +20,7 @@ local fFlagPPVBackgroundUse2DAsLoadingState = require(parent.SharedFlags).FFlagP
 local fFlagPPVEnable3DBackground = require(parent.SharedFlags).FFlagPPVEnable3DBackground
 local fFlagProfilePlatformEnableAvatarBackground = require(parent.SharedFlags).FFlagProfilePlatformEnableAvatarBackground
 
-return function(p0) --[[ line: 39 | named "UserProfileAvatar" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useStyleMetadata (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagPPVEnable3DBackground (ref), fFlagProfilePlatformEnableAvatarBackground (ref), useAvatarBackgroundFromWrapperModule (ref), fFlagProfilePlatformNewProfileHeader (ref), constantsModule (ref), fFlagProfilePlatformMeTabMobileProfileHero (ref), reactModule (ref), image (ref), imageSetLabel (ref), images (ref), view (ref), displayBackground (ref), fFlagPPVBackgroundUse2DAsLoadingState (ref)
 	local var8 = useStyle()
 	local var9 = useStyleMetadata()

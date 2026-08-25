@@ -5,7 +5,7 @@ local instanceOfModule = require(parent.jsutils.instanceOf)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2) --[[ line: 39 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: devAssert (ref), inspect (ref), t (ref)
 	p1 = p1 or "GraphQL request"
 	p2 = p2 or { line = 1, column = 1 }
@@ -17,11 +17,11 @@ function t.new(p0, p1, p2) --[[ line: 39 ]]
 	return setmetatable(t_1, t)
 end
 
-function t:__tostring() --[[ line: 61 ]]
+function t:__tostring()
 	return "{table Source}"
 end
 
-function isSource(p3) --[[ line: 71 ]]
+function isSource(p3)
 	-- upvalues: instanceOfModule (ref), t (ref)
 	return instanceOfModule(p3, t)
 end

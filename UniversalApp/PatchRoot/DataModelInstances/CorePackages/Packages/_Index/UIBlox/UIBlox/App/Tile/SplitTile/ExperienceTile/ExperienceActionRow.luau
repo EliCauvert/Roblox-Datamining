@@ -5,9 +5,9 @@ local buttonTypeModule = require(parent.Button.Enum.ButtonType)
 local comboButtonModule = require(parent.Button.ComboButton)
 local imagesModule = require(parent.ImageSet.Images)
 
-local var5 = function() --[[ line: 21 ]] end
+local var5 = function() end
 
-return function(p0) --[[ line: 52 | named "ExperienceActionRow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), comboButtonModule (ref), var5 (ref), imagesModule (ref), buttonModule (ref), buttonTypeModule (ref)
 	local isActionable = p0.isActionable
 	local horizontalPadding = p0.horizontalPadding or 6

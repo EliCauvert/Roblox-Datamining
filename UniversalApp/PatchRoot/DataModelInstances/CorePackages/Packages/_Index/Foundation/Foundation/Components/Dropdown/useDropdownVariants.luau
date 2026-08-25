@@ -11,7 +11,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local getInputVariantsFactoryModule = require(foundation.Components.InputField.getInputVariantsFactory)
 
-local function variantsFactory() --[[ line: 45 ]]
+local function variantsFactory()
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), controlStateModule (ref), dashModule (ref)
 	local t = {
 		[controlStateModule.Disabled] = { container = nil, text = { tag = "content-muted" } },
@@ -59,14 +59,14 @@ local function variantsFactory() --[[ line: 45 ]]
 			}
 		},
 		states = t,
-		placeholderStates = dashModule.map(t, function(p0) --[[ line: 102 ]]
+		placeholderStates = dashModule.map(t, function(p0)
 			-- upvalues: dashModule (copy)
 			return dashModule.join(p0, { text = { tag = "content-muted" } })
 		end)
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 116 ]]
+return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
 	local dropdown = variantsContextModule.useVariants("Dropdown", variantsFactory, p1)
 	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p1)

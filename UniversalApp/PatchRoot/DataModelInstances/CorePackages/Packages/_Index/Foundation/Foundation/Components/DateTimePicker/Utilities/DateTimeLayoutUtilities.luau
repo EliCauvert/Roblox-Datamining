@@ -5,7 +5,7 @@ return {
 	CALENDAR_WIDTH = 272,
 	PANE_WIDTH = 280,
 	TIME_LIST_WIDTH = 132,
-	computeSingleWithTimeLayout = function(p0, p1, p2, p3) --[[ line: 31 ]]
+	computeSingleWithTimeLayout = function(p0, p1, p2, p3)
 		-- upvalues: DAYS_PER_WEEK (ref)
 		local large = p2.Padding.Large
 		local var0 = p3 * (p0 / DAYS_PER_WEEK)

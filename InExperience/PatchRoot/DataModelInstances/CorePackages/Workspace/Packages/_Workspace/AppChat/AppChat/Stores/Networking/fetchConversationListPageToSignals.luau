@@ -2,7 +2,7 @@
 local promiseModule = require(appChat.Parent.Promise)
 local getConversationPageDataHydrationModule = require(appChat.Stores.GetConversationPageDataHydration)
 
-return function(value) --[[ line: 12 | named "fetchConversationListPageToSignals" ]]
+return function(value)
 	-- upvalues: getConversationPageDataHydrationModule (ref), promiseModule (ref)
 	getConversationPageDataHydrationModule.fetchPage(if value ~= nil then nil else value.cursor)
 	

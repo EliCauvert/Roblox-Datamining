@@ -5,7 +5,7 @@ local t = {}
 local t_1 = {}
 t[t_1] = true
 
-function t.new(p0) --[[ line: 20 ]]
+function t.new(p0)
 	-- upvalues: argCheckModule (ref), t (ref)
 	local t_1 = { Month = 1, Day = 1, Year = 1970 }
 	
@@ -22,31 +22,31 @@ function t.new(p0) --[[ line: 20 ]]
 	return t_1
 end
 
-function t:IsUnder13() --[[ line: 41 ]]
+function t:IsUnder13()
 	-- upvalues: t (ref), dateTime (ref)
 	local var4 = t.new(dateTime.now():GetValues())
 	
 	return var4.Year - 13 < self.Year or (if self.Year < var4.Year - 13 then false elseif var4.Month >= self.Month then var4.Month == self.Month and var4.Day < self.Day else true)
 end
 
-function t:GetAgeInYears(p1) --[[ line: 52 ]]
+function t:GetAgeInYears(p1)
 	-- upvalues: dateTime (ref), t (ref)
 	local var5 = t.new(p1 or dateTime.now():GetValues())
 	
 	return if var5.Month < self.Month or var5.Month == self.Month and var5.Day < self.Day then var5.Year - self.Year - 1 else var5.Year - self.Year
 end
 
-function t:FormatForEndpoint() --[[ line: 63 ]]
+function t:FormatForEndpoint()
 	return self.Year .. "-" .. self.Month .. "-" .. self.Day .. "T12:00:00.000Z"
 end
 
-function t:ToString(p2) --[[ line: 67 ]]
+function t:ToString(p2)
 	p2 = p2 or " "
 	
 	return self.Month .. p2 .. self.Day .. p2 .. self.Year
 end
 
-function t:is() --[[ line: 73 ]]
+function t:is()
 	-- upvalues: t_1 (ref)
 	return type(self) == "table" and self[t_1] == true
 end

@@ -17,7 +17,7 @@ local useFormDataModule = require(genericAbuseReporting.Bedui.Provider.useFormDa
 local uDim2 = UDim2.fromOffset(180, 101)
 local t = { [abuseVectorModule.Place] = "THUMBNAIL_IDS" }
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "Selector" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useFormDataModule (ref), useRoactService (ref), roactNetworking (ref), abuseVectorModule (ref), getPlaceMediaAssetIdsModule (ref), t (ref), view (ref), checkbox (ref), image (ref), scaleType (ref), uDim2 (ref), text (ref), componentSubtextModule (ref)
 	local var9, var10 = reactModule.useState({})
 	local var11, var12 = reactModule.useState({})
@@ -26,10 +26,10 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "Selector" ]]
 	local updateAdditionalReportTags = useFormDataModule().updateAdditionalReportTags
 	local var13 = useRoactService(roactNetworking)
 	local var14 = reactModule.useRef(`selector-{DateTime.now()}`)
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), abuseVectorModule (copy), getPlaceMediaAssetIdsModule (copy), var13 (ref), custom (ref), var10 (ref)
 		if p0.abuseVector == abuseVectorModule.Place then
-			getPlaceMediaAssetIdsModule(var13, tostring(custom and custom.universeId)):andThen(function(p1) --[[ line: 54 ]]
+			getPlaceMediaAssetIdsModule(var13, tostring(custom and custom.universeId)):andThen(function(p1)
 				-- upvalues: var10 (copy)
 				var10(p1)
 			end)
@@ -40,9 +40,9 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "Selector" ]]
 		var13,
 		custom and custom.universeId
 	})
-	local var15 = reactModule.useCallback(function(p2) --[[ line: 61 ]]
+	local var15 = reactModule.useCallback(function(p2)
 		-- upvalues: var12 (ref), p0 (ref), abuseVectorModule (copy), updateAdditionalReportTags (ref), var14 (ref), t (copy)
-		var12(function(p3) --[[ line: 62 ]]
+		var12(function(p3)
 			-- upvalues: p2 (ref), p0 (copy), abuseVectorModule (copy), updateAdditionalReportTags (copy), var14 (copy), t (copy)
 			local cloned = table.clone(p3)
 			local index = table.find(cloned, p2)
@@ -72,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "Selector" ]]
 			LayoutOrder = 0,
 			Text = p0.component.selector.prompt
 		}),
-		CheckboxGroup = reactModule.createElement(view, { tag = "size-full-0 auto-y col", LayoutOrder = 1 }, reactModule.useMemo(function() --[[ line: 85 ]]
+		CheckboxGroup = reactModule.createElement(view, { tag = "size-full-0 auto-y col", LayoutOrder = 1 }, reactModule.useMemo(function()
 			-- upvalues: var9 (ref), reactModule (copy), view (copy), checkbox (copy), var11 (ref), var15 (ref), image (copy), scaleType (copy), uDim2 (copy)
 			local t = {}
 			
@@ -84,7 +84,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "Selector" ]]
 					Checkbox = reactModule.createElement(checkbox, {
 						label = "",
 						isChecked = table.find(var11, v) ~= nil,
-						onActivated = function() --[[ line: 97 ]]
+						onActivated = function()
 							-- upvalues: var15 (copy), v (ref)
 							var15(v)
 						end
@@ -93,7 +93,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "Selector" ]]
 						Image = `rbxthumb://type=Asset&id={v}&w=768&h=432`,
 						ScaleType = scaleType.Fit,
 						Size = uDim2,
-						onActivated = function() --[[ line: 105 ]]
+						onActivated = function()
 							-- upvalues: var15 (copy), v (ref)
 							var15(v)
 						end

@@ -6,7 +6,7 @@ local _ = require(parent.Types)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), captureService (ref), retrieveCapturesModule (ref)
 	local t = {}
 	
@@ -19,7 +19,7 @@ return function(p0) --[[ line: 14 ]]
 			table.insert(t, v.filePath)
 		end
 	end
-	return function(p1) --[[ line: 26 ]]
+	return function(p1)
 		-- upvalues: captureService (copy), t (ref), retrieveCapturesModule (copy)
 		captureService:DeleteCapturesAsync(t)
 		p1:dispatch(retrieveCapturesModule())

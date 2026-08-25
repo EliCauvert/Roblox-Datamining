@@ -4,7 +4,7 @@ local axisMapModule = require(viewRecyclerRoblox.RobloxAdapter.axisMap)
 local createCoordinator = viewRecyclerModule.Adapter.ScrollPolicy.createCoordinator
 
 return {
-	new = function(p0) --[[ line: 47 ]]
+	new = function(p0)
 		-- upvalues: axisMapModule (ref), viewRecyclerModule (ref), createCoordinator (ref)
 		local dispatch = p0.dispatch
 		local getSnapshot = p0.getSnapshot
@@ -19,19 +19,19 @@ return {
 		local var8 = 0
 		local var9 = nil
 		
-		local function _() --[[ line: 61 | named "sampleConfiguration" ]]
+		local function _()
 			-- upvalues: configuration (write), p0 (ref)
 			configuration = p0.getConfiguration()
 			
 			return configuration
 		end
 		
-		local _ = function(p1) --[[ line: 66 | named "resolveInstance" ]]
+		local _ = function(p1)
 			-- upvalues: p0 (ref)
 			return p1 or p0.getInstance()
 		end
 		
-		local function getViewportState(p2) --[[ line: 70 ]]
+		local function getViewportState(p2)
 			-- upvalues: p0 (ref), configuration (write), axisMapModule (copy)
 			p2 = p2 or p0.getInstance()
 			
@@ -47,7 +47,7 @@ return {
 			}
 		end
 		
-		local function setHostScrollOffset(value) --[[ line: 83 ]]
+		local function setHostScrollOffset(value)
 			-- upvalues: p0 (ref), configuration (write), viewRecyclerModule (copy)
 			local instance = p0.getInstance()
 			
@@ -60,7 +60,7 @@ return {
 			return true
 		end
 		
-		local function observeHostOffset(value, p3) --[[ line: 95 ]]
+		local function observeHostOffset(value, p3)
 			-- upvalues: dispatch (ref), viewRecyclerModule (copy)
 			dispatch({
 				type = viewRecyclerModule.VirtualizerCommandType.ObserveScrollOffset,
@@ -68,24 +68,24 @@ return {
 			})
 		end
 		
-		local _ = function(p4) --[[ line: 105 | named "reportHostWrite" ]]
+		local _ = function(p4)
 			-- upvalues: observeHostOffset (ref), viewRecyclerModule (copy), var9 (write)
 			observeHostOffset(viewRecyclerModule.ScrollObservationKind.Programmatic, p4)
 			var9 = p4
 		end
 		
 		local var13 = createCoordinator({
-			getItemCount = function() --[[ line: 114 ]]
+			getItemCount = function()
 				-- upvalues: configuration (write)
 				return configuration.dataSource.getItemCount()
 			end,
-			getScrollState = function() --[[ line: 117 ]]
+			getScrollState = function()
 				-- upvalues: query (ref), viewRecyclerModule (copy)
 				return query({
 					type = viewRecyclerModule.VirtualizerQueryType.GetScrollState
 				})
 			end,
-			getScrollOffsetForItem = function(value, p5) --[[ line: 120 ]]
+			getScrollOffsetForItem = function(value, p5)
 				-- upvalues: query (ref), viewRecyclerModule (copy)
 				return query({
 					type = viewRecyclerModule.VirtualizerQueryType.GetScrollOffsetForItem,
@@ -93,7 +93,7 @@ return {
 					alignment = p5
 				})
 			end,
-			applyScrollAnchorOffset = function(value) --[[ line: 127 ]]
+			applyScrollAnchorOffset = function(value)
 				-- upvalues: dispatch (ref), viewRecyclerModule (copy)
 				return dispatch({
 					type = viewRecyclerModule.VirtualizerCommandType.ApplyScrollAnchorOffset,
@@ -101,27 +101,27 @@ return {
 				}).result
 			end,
 			getViewportState = getViewportState,
-			getInitialScrollAlignment = function() --[[ line: 131 ]]
+			getInitialScrollAlignment = function()
 				-- upvalues: configuration (write)
 				return configuration.initialScrollAlignment
 			end,
-			getAutoScrollPolicy = function() --[[ line: 134 ]]
+			getAutoScrollPolicy = function()
 				-- upvalues: configuration (write)
 				return configuration.autoScrollOnChange
 			end,
-			getStartReachedThreshold = function() --[[ line: 137 ]]
+			getStartReachedThreshold = function()
 				-- upvalues: configuration (write)
 				return configuration.startReachedThreshold
 			end,
-			getOnStartReached = function() --[[ line: 140 ]]
+			getOnStartReached = function()
 				-- upvalues: configuration (write)
 				return configuration.onStartReached
 			end,
-			getOnEndReached = function() --[[ line: 143 ]]
+			getOnEndReached = function()
 				-- upvalues: configuration (write)
 				return configuration.onEndReached
 			end,
-			onContentLengthChanged = function(p6) --[[ line: 146 ]]
+			onContentLengthChanged = function(p6)
 				-- upvalues: configuration (write)
 				local onContentLengthChanged = configuration.onContentLengthChanged
 				
@@ -131,7 +131,7 @@ return {
 			end
 		})
 		
-		local function publishCanvas() --[[ line: 154 ]]
+		local function publishCanvas()
 			-- upvalues: getSnapshot (ref), p0 (ref), var4 (write), axisMapModule (copy), configuration (write), getViewportState (ref), var8 (write), observeHostOffset (ref), viewRecyclerModule (copy), var9 (write)
 			local contentLength = getSnapshot().contentLength
 			local instance = p0.getInstance()
@@ -157,7 +157,7 @@ return {
 			return contentLength
 		end
 		
-		local function applyProgrammaticScrollOffset(value) --[[ line: 174 ]]
+		local function applyProgrammaticScrollOffset(value)
 			-- upvalues: var4 (write), var8 (write), setHostScrollOffset (ref), p0 (ref), getViewportState (ref), observeHostOffset (ref), viewRecyclerModule (copy), var9 (write)
 			if var4 ~= "synchronized" then return end
 			assert(value == value and (value ~= 1e999 and value ~= -1e999), "ScrollHostCoordinator: invalid offset")
@@ -173,7 +173,7 @@ return {
 			var8 -= 1
 		end
 		
-		local _ = function() --[[ line: 194 | named "disconnectHost" ]]
+		local _ = function()
 			-- upvalues: t (ref), var6 (write), var9 (write)
 			for i, v in t do
 				v:Disconnect()
@@ -183,7 +183,7 @@ return {
 			var9 = nil
 		end
 		
-		local function synchronizeViewport(p7) --[[ line: 203 ]]
+		local function synchronizeViewport(p7)
 			-- upvalues: var4 (write), getViewportState (ref), dispatch (ref), viewRecyclerModule (copy), observeHostOffset (ref), var9 (write), var13 (ref), configuration (write)
 			if var4 ~= "synchronized" then return end
 			local var25 = getViewportState(p7)
@@ -211,7 +211,7 @@ return {
 			end
 		end
 		
-		local function synchronizeScrollOffset(value) --[[ line: 229 ]]
+		local function synchronizeScrollOffset(value)
 			-- upvalues: var4 (write), getViewportState (ref), var8 (write), var9 (write), observeHostOffset (ref), viewRecyclerModule (copy), var13 (ref), configuration (write)
 			if var4 ~= "synchronized" then return end
 			local var27 = getViewportState(value)
@@ -238,7 +238,7 @@ return {
 			end
 		end
 		
-		local function connectHost(p8) --[[ line: 257 ]]
+		local function connectHost(p8)
 			-- upvalues: var6 (write), t (ref), var9 (write), configuration (write), p0 (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
 			if var6 == p8 then return end
 			for i, v in t do
@@ -252,13 +252,13 @@ return {
 			if p8 == nil or typeof(p8) ~= "Instance" then
 				return
 			end
-			table.insert(t, p8:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ line: 268 ]]
+			table.insert(t, p8:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: configuration (copy), p0 (copy), publishCanvas (copy), synchronizeViewport (copy), p8 (ref)
 				configuration = p0.getConfiguration()
 				publishCanvas()
 				synchronizeViewport(p8)
 			end))
-			table.insert(t, p8:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 276 ]]
+			table.insert(t, p8:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: configuration (copy), p0 (copy), synchronizeScrollOffset (copy), p8 (ref)
 				configuration = p0.getConfiguration()
 				synchronizeScrollOffset(p8)
@@ -266,7 +266,7 @@ return {
 		end
 		
 		return {
-			connect = function() --[[ line: 319 ]]
+			connect = function()
 				-- upvalues: var4 (write), var5 (write), configuration (write), p0 (ref), axis (write), dataSource (write), connectHost (ref), var13 (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref), t (ref), var6 (write), var9 (write)
 				assert(var4 == "disconnected", "ScrollHostCoordinator: already connected")
 				var5 += 1
@@ -276,7 +276,7 @@ return {
 				dataSource = configuration.dataSource
 				var4 = "priming"
 				connectHost(p0.getInstance())
-				local ok, status = pcall(function() --[[ line: 328 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var4 (copy), var13 (copy), publishCanvas (copy), p0 (copy), synchronizeViewport (copy), synchronizeScrollOffset (copy)
 					var4 = "synchronized"
 					var13.onContentLengthChanged(publishCanvas())
@@ -301,7 +301,7 @@ return {
 				end
 				local var30 = false
 				
-				return function() --[[ line: 343 ]]
+				return function()
 					-- upvalues: var30 (write), var4 (copy), var5 (copy), var29 (ref), t (copy), var6 (copy), var9 (copy)
 					if var30 then return end
 					var30 = true
@@ -318,7 +318,7 @@ return {
 					end
 				end
 			end,
-			hostChanged = function() --[[ line: 283 ]]
+			hostChanged = function()
 				-- upvalues: var4 (write), configuration (write), p0 (ref), connectHost (ref), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
 				if var4 == "disconnected" then return end
 				configuration = p0.getConfiguration()
@@ -331,7 +331,7 @@ return {
 					synchronizeScrollOffset(instance)
 				end
 			end,
-			configurationChanged = function() --[[ line: 297 ]]
+			configurationChanged = function()
 				-- upvalues: configuration (write), p0 (ref), dataSource (write), axis (write), var13 (ref), var4 (write), publishCanvas (ref), synchronizeViewport (ref), synchronizeScrollOffset (ref)
 				configuration = p0.getConfiguration()
 				local var33 = configuration
@@ -356,7 +356,7 @@ return {
 					var13.checkEdges()
 				end
 			end,
-			handleUpdate = function(p9, p10) --[[ line: 359 ]]
+			handleUpdate = function(p9, p10)
 				-- upvalues: var4 (write), configuration (write), p0 (ref), var13 (ref), publishCanvas (ref), viewRecyclerModule (copy), applyProgrammaticScrollOffset (ref)
 				if var4 == "disconnected" then return end
 				configuration = p0.getConfiguration()
@@ -373,7 +373,7 @@ return {
 					end
 				end
 			end,
-			isHostReady = function() --[[ line: 377 ]]
+			isHostReady = function()
 				-- upvalues: configuration (write), p0 (ref), getViewportState (ref)
 				configuration = p0.getConfiguration()
 				

@@ -21,7 +21,7 @@ local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHand
 local textKeysModule = require(socialTabsPage.Common.TextKeys)
 local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 
-return function() --[[ line: 29 | named "FriendsTabContent" ]]
+return function()
 	-- upvalues: useSocialTabsContextModule (ref), useFriendsListModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), socialTabsEmptyStateModule (ref), userListLayoutAdaptor (ref), layoutMode (ref)
 	local var15 = useSocialTabsContextModule()
 	local title = var15.title
@@ -33,16 +33,16 @@ return function() --[[ line: 29 | named "FriendsTabContent" ]]
 	local var17 = useLocalization({
 		emptyText = { textKeysModule.NoConnectionYet, name = title or "" }
 	})
-	local var18 = reactModule.useMemo(function() --[[ line: 49 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), friends (ref), entityType (copy)
-		return dashModule.map(friends, function(p0) --[[ line: 50 ]]
+		return dashModule.map(friends, function(p0)
 			-- upvalues: entityType (copy)
 			return { id = tostring(p0.id), type = entityType.User }
 		end)
 	end, { friends })
-	local var19 = reactModule.useMemo(function() --[[ line: 55 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var18 (ref)
-		return dashModule.map(var18, function(p1) --[[ line: 56 ]]
+		return dashModule.map(var18, function(p1)
 			return p1.id
 		end)
 	end, { var18 })
@@ -61,7 +61,7 @@ return function() --[[ line: 29 | named "FriendsTabContent" ]]
 			layoutMode = layoutMode.Vertical,
 			hasMore = hasMore,
 			onLoadMore = if hasMore then fetchMore else nil,
-			renderRow = reactModule.useCallback(function(p2, p3, _) --[[ line: 72 ]]
+			renderRow = reactModule.useCallback(function(p2, p3, _)
 				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var21 (ref), var22 (ref)
 				return reactModule.createElement(rowDataProviderModule, {
 					createRow = p2,

@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "shallowEqual" ]]
+﻿return function(p0, p1)
 	if p0 == nil then
 		return p1 == nil
 	elseif p1 == nil then

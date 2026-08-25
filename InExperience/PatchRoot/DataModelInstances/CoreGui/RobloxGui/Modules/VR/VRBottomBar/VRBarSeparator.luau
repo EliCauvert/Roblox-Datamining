@@ -19,7 +19,7 @@ local _ = t.strictInterface({
 	forwardRef = t.optional(t.table)
 })
 
-local function renderWithSelectionCursor(p0, p1) --[[ line: 44 ]]
+local function renderWithSelectionCursor(p0, p1)
 	-- upvalues: roact (ref), imageSetButton (ref), cursorKind (ref)
 	return roact.createElement(imageSetButton, {
 		Visible = true,
@@ -30,22 +30,22 @@ local function renderWithSelectionCursor(p0, p1) --[[ line: 44 ]]
 		Size = UDim2.new(0, 28, 0, 36),
 		LayoutOrder = p0.layoutOrder,
 		SelectionImageObject = p1(cursorKind.RoundedRect),
-		[roact.Event.Activated] = function() --[[ line: 55 ]] end,
+		[roact.Event.Activated] = function() end,
 		[roact.Event.SelectionGained] = p0.onSelectionGained,
 		[roact.Event.SelectionLost] = p0.onSelectionLost,
 		[roact.Ref] = p0.forwardRef
 	})
 end
 
-local function VRBarSeparator(p2) --[[ line: 64 ]]
+local function VRBarSeparator(p2)
 	-- upvalues: withSelectionCursorProvider (ref), renderWithSelectionCursor (ref)
-	return withSelectionCursorProvider(function(p3) --[[ line: 65 ]]
+	return withSelectionCursorProvider(function(p3)
 		-- upvalues: renderWithSelectionCursor (copy), p2 (ref)
 		return renderWithSelectionCursor(p2, p3)
 	end)
 end
 
-return roact.forwardRef(function(p4, p5) --[[ line: 70 ]]
+return roact.forwardRef(function(p4, p5)
 	-- upvalues: roact (ref), VRBarSeparator (ref), cryo (ref)
 	return roact.createElement(VRBarSeparator, cryo.Dictionary.join(p4, { forwardRef = p5 }))
 end)

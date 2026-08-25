@@ -1,26 +1,26 @@
 ﻿local reactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 
-local function _(p0) --[[ line: 17 | named "getDelimiter" ]]
+local function _(p0)
 	return if p0 == nil or p0 == "" then " " else p0
 end
 
-local _ = function(p1) --[[ line: 24 | named "getRevealInterval" ]]
+local _ = function(p1)
 	return if p1 == nil then 0.05 else math.max(p1, 0)
 end
 
-local _ = function(p2) --[[ line: 31 | named "shouldRenderDelimiter" ]]
+local _ = function(p2)
 	return not p2
 end
 
-local _ = function(p3, p4) --[[ line: 35 | named "getTagName" ]]
+local _ = function(p3, p4)
 	return string.match(p3, if p4 then "^<%s*/%s*([%w]+)" else "^<%s*([%w]+)")
 end
 
-local _ = function(p5, p6) --[[ line: 40 | named "isSelfClosingTag" ]]
+local _ = function(p5, p6)
 	return if p6 ~= "br" then string.match(p5, "/%s*>$") ~= nil else true
 end
 
-local function removeLastMatchingTag(p7, p8) --[[ line: 44 ]]
+local function removeLastMatchingTag(p7, p8)
 	for i = #p7, 1, -1 do
 		if p7[i] ~= p8 then
 			continue
@@ -31,7 +31,7 @@ local function removeLastMatchingTag(p7, p8) --[[ line: 44 ]]
 	end
 end
 
-local _ = function(p9, p10) --[[ line: 53 | named "buildBalancedText" ]]
+local _ = function(p9, p10)
 	local joined = table.concat(p9)
 	
 	for i = #p10, 1, -1 do
@@ -40,7 +40,7 @@ local _ = function(p9, p10) --[[ line: 53 | named "buildBalancedText" ]]
 	return joined
 end
 
-local _ = function(p11, p12, p13) --[[ line: 61 | named "appendFrame" ]]
+local _ = function(p11, p12, p13)
 	local joined = table.concat(p12)
 	
 	for i = #p13, 1, -1 do
@@ -51,7 +51,7 @@ local _ = function(p11, p12, p13) --[[ line: 61 | named "appendFrame" ]]
 	end
 end
 
-local function buildRevealTextFrames(p14, p15, p16, p17) --[[ line: 68 ]]
+local function buildRevealTextFrames(p14, p15, p16, p17)
 	-- upvalues: removeLastMatchingTag (ref)
 	if p14 == nil or p14 == "" then
 		return { p14 or "" }
@@ -127,22 +127,22 @@ local function buildRevealTextFrames(p14, p15, p16, p17) --[[ line: 68 ]]
 	return t
 end
 
-return function(p18) --[[ line: 133 | named "useRevealText" ]]
+return function(p18)
 	-- upvalues: reactModule (ref), buildRevealTextFrames (ref)
 	local text = p18.text
 	local delimiter = p18.delimiter
 	local removeDelimiter = p18.removeDelimiter
 	local richText = p18.richText
 	local revealInterval = p18.revealInterval
-	local var22 = reactModule.useMemo(function() --[[ line: 140 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: buildRevealTextFrames (copy), text (ref), delimiter (ref), richText (ref), removeDelimiter (ref)
 		return buildRevealTextFrames(text, delimiter, richText, removeDelimiter)
 	end, { text, delimiter, richText, removeDelimiter })
 	local var23 = if revealInterval == nil then 0.05 else math.max(revealInterval, 0)
 	local var24, var25 = reactModule.useState(if var23 == 0 then var22[#var22] else var22[1])
-	reactModule.useEffect(function() --[[ line: 147 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var23 (ref), var25 (ref), var22 (ref)
-		local thread = task.spawn(function() --[[ line: 148 ]]
+		local thread = task.spawn(function()
 			-- upvalues: var23 (copy), var25 (copy), var22 (copy)
 			if var23 == 0 then
 				var25(var22[#var22])
@@ -157,7 +157,7 @@ return function(p18) --[[ line: 133 | named "useRevealText" ]]
 			end
 		end)
 		
-		return function() --[[ line: 162 ]]
+		return function()
 			-- upvalues: thread (ref)
 			task.cancel(thread)
 		end

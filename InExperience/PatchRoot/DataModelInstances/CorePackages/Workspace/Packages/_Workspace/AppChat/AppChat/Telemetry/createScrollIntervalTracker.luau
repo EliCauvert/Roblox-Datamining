@@ -11,16 +11,16 @@ local t = {
 	stableFramesRequired = game:DefineFastInt("AppChatScrollPerfMinStableFrames", 5)
 }
 
-return if game:DefineFastFlag("AppChatMigrateScrollIntervalTracker2", false) then function(p7, p8, p9, p10) --[[ line: 51 | named "createScrollIntervalTracker" ]]
+return if game:DefineFastFlag("AppChatMigrateScrollIntervalTracker2", false) then function(p7, p8, p9, p10)
 	-- upvalues: appChatPerfTrackerModule (ref), cryoModule (ref), t (ref), scrollIntervalTrackerModule (ref)
-	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(p11) --[[ line: 57 | named "tryStart" ]]
+	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(p11)
 		-- upvalues: appChatPerfTrackerModule (copy), p7 (ref)
 		return appChatPerfTrackerModule.start(p7, p11)
-	end, function(p12) --[[ line: 60 | named "finish" ]]
+	end, function(p12)
 		-- upvalues: appChatPerfTrackerModule (copy), p7 (ref)
 		appChatPerfTrackerModule.finish(p7, p12)
 	end, p8, p9, cryoModule.Dictionary.join(t, { debugName = p7 }, p10 or {}))
-end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTracker" ]]
+end else function(p0, p1, p2, p3)
 	-- upvalues: cryoModule (ref), t (ref), scrollIntervalTracker (ref), appChatPerfTrackerModule (ref), runService (ref)
 	local var7 = cryoModule.Dictionary.join(t, p3 or {})
 	local var8 = false
@@ -29,19 +29,19 @@ end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTra
 	local var11 = 0
 	local var12 = nil
 	
-	local function _() --[[ line: 90 | named "resetStopDetection" ]]
+	local function _()
 		-- upvalues: var11 (write), var12 (write)
 		var11 = 0
 		var12 = nil
 	end
 	
-	local _ = function() --[[ line: 95 | named "resetStartDetection" ]]
+	local _ = function()
 		-- upvalues: var9 (write), var10 (write)
 		var9 = nil
 		var10 = 0
 	end
 	
-	local _ = function(p4) --[[ line: 100 | named "stopInterval" ]]
+	local _ = function(p4)
 		-- upvalues: scrollIntervalTracker (copy), p0 (ref), appChatPerfTrackerModule (copy), p2 (ref), var8 (write), var11 (write), var12 (write), var9 (write), var10 (write)
 		scrollIntervalTracker:debug("Scroll: {} stopping (reason={})", p0, p4)
 		appChatPerfTrackerModule.finish(p0, p2)
@@ -52,13 +52,13 @@ end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTra
 		var10 = 0
 	end
 	
-	local _ = function(p5) --[[ line: 108 | named "recordCanvasPositionChanged" ]]
+	local _ = function(p5)
 		-- upvalues: var11 (write), var12 (write)
 		var11 = 0
 		var12 = p5
 	end
 	
-	local _ = function(a) --[[ line: 114 | named "isPastMinScrollDistance" ]]
+	local _ = function(a)
 		-- upvalues: var9 (write), var10 (write), var7 (ref)
 		if var9 ~= nil then
 			var10 += math.abs(a - var9)
@@ -68,7 +68,7 @@ end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTra
 		return var7.minDistancePx <= var10
 	end
 	
-	local _ = function(p6) --[[ line: 122 | named "tryStartInterval" ]]
+	local _ = function(p6)
 		-- upvalues: scrollIntervalTracker (copy), p0 (ref), appChatPerfTrackerModule (copy), p2 (ref), var8 (write), var9 (write), var10 (write), var11 (write), var12 (write)
 		scrollIntervalTracker:debug("Scroll: {} starting", p0)
 		
@@ -83,7 +83,7 @@ end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTra
 		end
 	end
 	
-	local renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 138 ]]
+	local renderSteppedConnection = runService.RenderStepped:Connect(function()
 		-- upvalues: var8 (write), p1 (ref), var12 (write), var11 (write), var7 (ref), scrollIntervalTracker (copy), p0 (ref), appChatPerfTrackerModule (copy), p2 (ref), var9 (write), var10 (write)
 		if not var8 then return end
 		local y = p1.CanvasPosition.Y
@@ -109,7 +109,7 @@ end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTra
 	end)
 	
 	return {
-		onScrollTick = function() --[[ line: 163 ]]
+		onScrollTick = function()
 			-- upvalues: p1 (ref), var8 (write), var9 (write), var10 (write), var7 (ref), scrollIntervalTracker (copy), p0 (ref), appChatPerfTrackerModule (copy), p2 (ref), var11 (write), var12 (write)
 			local y = p1.CanvasPosition.Y
 			
@@ -136,7 +136,7 @@ end else function(p0, p1, p2, p3) --[[ line: 72 | named "createScrollIntervalTra
 				return
 			end
 		end,
-		cleanup = function() --[[ line: 178 ]]
+		cleanup = function()
 			-- upvalues: renderSteppedConnection (ref), var8 (write), scrollIntervalTracker (copy), p0 (ref), appChatPerfTrackerModule (copy), p2 (ref), var11 (write), var12 (write), var9 (write), var10 (write)
 			if renderSteppedConnection then
 				renderSteppedConnection:Disconnect()

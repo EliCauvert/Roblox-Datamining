@@ -24,19 +24,19 @@ return {
 		cancelAnalyticsEvent = eventNames.EditingFlowTextOverlayBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function() --[[ line: 40 ]]
+	createSession = function()
 		-- upvalues: createEditSessionModule (ref)
 		return createEditSessionModule()
 	end,
-	renderEditor = function(p0) --[[ line: 43 ]]
+	renderEditor = function(p0)
 		-- upvalues: reactModule (ref), textOverlayControlsModule (ref)
 		return reactModule.createElement(textOverlayControlsModule, { layoutOrder = 2, controller = p0 })
 	end,
-	renderPreviewLayer = function(p1, p2) --[[ line: 48 ]]
+	renderPreviewLayer = function(p1, p2)
 		-- upvalues: reactModule (ref), textOverlayLayerModule (ref)
 		return reactModule.createElement(textOverlayLayerModule, { zIndex = 3, controller = p1, ctx = p2 })
 	end,
-	toEdits = function(p3) --[[ line: 51 ]]
+	toEdits = function(p3)
 		local var8 = p3 and p3[1]
 		
 		return if var8 == nil or var8.text == "" then {} else { textOverlays = p3 }

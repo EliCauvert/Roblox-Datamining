@@ -10,12 +10,12 @@ chatDisabledIndicator.defaultProps = {
 	chatDisabledText = "TRANSLATED To chat with your friends, turn on chat in your Privacy Settings.",
 	privacyButtonText = "TRANSLATED Privacy Settings",
 	privacyButtonEnabled = true,
-	navigateToPrivacy = function() --[[ line: 18 ]] end
+	navigateToPrivacy = function() end
 }
 
-function chatDisabledIndicator.render(p0) --[[ line: 22 ]]
+function chatDisabledIndicator.render(p0)
 	-- upvalues: withStyle (ref), text (ref), appFonts (ref), roactModule (ref)
-	return withStyle(function(p1) --[[ line: 23 ]]
+	return withStyle(function(p1)
 		-- upvalues: text (copy), p0 (ref), appFonts (copy), roactModule (copy)
 		local var2 = p1.Font.SubHeader1.RelativeSize * p1.Font.BaseSize
 		

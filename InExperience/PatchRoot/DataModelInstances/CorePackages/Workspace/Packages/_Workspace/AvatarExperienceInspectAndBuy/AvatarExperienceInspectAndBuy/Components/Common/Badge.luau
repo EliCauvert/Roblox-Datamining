@@ -4,7 +4,7 @@ local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0) --[[ line: 32 | named "Badge" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), iconSize (ref)
 	local var2 = useTokens()
 	

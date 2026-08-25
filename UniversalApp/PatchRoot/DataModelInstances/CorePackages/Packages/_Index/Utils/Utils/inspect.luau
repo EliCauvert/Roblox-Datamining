@@ -15,12 +15,12 @@ local getObjectTag = nil
 local graphQLError = require(parent.GraphQL).GraphQLError
 local isAggregateError = require(script.Parent.AggregateError).isAggregateError
 
-function t.inspect(p0) --[[ line: 40 ]]
+function t.inspect(p0)
 	-- upvalues: formatValue (write)
 	return formatValue(p0, {})
 end
 
-formatValue = function(p1, p2) --[[ line: 46 | named "formatValue" ]]
+formatValue = function(p1, p2)
 	-- upvalues: boolean (ref), formatObjectValue (write)
 	local var9 = typeof(p1)
 	
@@ -34,12 +34,12 @@ formatValue = function(p1, p2) --[[ line: 46 | named "formatValue" ]]
 	return if var9 == "table" then formatObjectValue(p1, p2) else tostring(p1)
 end
 
-local function formatError(p3) --[[ line: 75 ]]
+local function formatError(p3)
 	-- upvalues: instanceof (ref), graphQLError (ref)
 	return if instanceof(p3, graphQLError) then tostring(p3) else ("%s: %s;\n %s"):format(tostring(p3.name), tostring(p3.message), tostring(p3.stack))
 end
 
-formatObjectValue = function(p4, p5) --[[ line: 83 | named "formatObjectValue" ]]
+formatObjectValue = function(p4, p5)
 	-- upvalues: instanceof (ref), error (ref), isAggregateError (ref), graphQLError (ref), formatArray (write), formatError (ref), boolean (ref), array (ref), isJSONable (write), formatValue (write), formatObject (write)
 	if p4 == nil then
 		return "null"
@@ -61,15 +61,15 @@ formatObjectValue = function(p4, p5) --[[ line: 83 | named "formatObjectValue" ]
 	end
 end
 
-isJSONable = function(p6) --[[ line: 139 | named "isJSONable" ]]
+isJSONable = function(p6)
 	return typeof(p6.toJSON) == "function"
 end
 
-formatObject = function(p7, p8) --[[ line: 147 | named "formatObject" ]]
+formatObject = function(p7, p8)
 	-- upvalues: object (ref), getObjectTag (write), array (ref), formatValue (write)
 	local var13 = object.entries(p7)
 	
-	return if #var13 == 0 then "{}" elseif #p8 > 3 then "[" .. tostring(getObjectTag(p7)) .. "]" else "{ " .. tostring(array.join(array.map(var13, function(p9) --[[ line: 165 ]]
+	return if #var13 == 0 then "{}" elseif #p8 > 3 then "[" .. tostring(getObjectTag(p7)) .. "]" else "{ " .. tostring(array.join(array.map(var13, function(p9)
 		-- upvalues: formatValue (copy), p8 (ref)
 		local unpacked, unpacked_1 = table.unpack(p9, 1, 2)
 		
@@ -77,7 +77,7 @@ formatObject = function(p7, p8) --[[ line: 147 | named "formatObject" ]]
 	end), ", ")) .. " }"
 end
 
-formatArray = function(p10, p11) --[[ line: 175 | named "formatArray" ]]
+formatArray = function(p10, p11)
 	-- upvalues: formatValue (write), array (ref)
 	if #p10 == 0 then
 		return "[]"
@@ -100,7 +100,7 @@ formatArray = function(p10, p11) --[[ line: 175 | named "formatArray" ]]
 	return "[" .. tostring(array.join(t, ", ")) .. "]"
 end
 
-getObjectTag = function(_) --[[ line: 230 | named "getObjectTag" ]]
+getObjectTag = function(_)
 	return "Object"
 end
 

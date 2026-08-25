@@ -3,21 +3,21 @@ local playersService = game:GetService("Players")
 local reactModule = require(script:FindFirstAncestor("ExpChat").Parent.React)
 local engineAudioSTTIsDictationEnabled = game:DefineFastFlag("EngineAudioSTTIsDictationEnabled", false)
 
-local function _(p0) --[[ line: 43 | named "destroyIfExists" ]]
+local function _(p0)
 	if p0.current then
 		p0.current:Destroy()
 		p0.current = nil
 	end
 end
 
-local _ = function(p1) --[[ line: 50 | named "disconnectIfExists" ]]
+local _ = function(p1)
 	if p1.current then
 		p1.current:Disconnect()
 		p1.current = nil
 	end
 end
 
-local _ = function(p2) --[[ line: 57 | named "teardownInstances" ]]
+local _ = function(p2)
 	local textConnection = p2.textConnection
 	
 	if textConnection.current then
@@ -56,7 +56,7 @@ local _ = function(p2) --[[ line: 57 | named "teardownInstances" ]]
 	end
 end
 
-return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
+return function()
 	-- upvalues: reactModule (ref), playersService (ref), coreGuiService (ref), engineAudioSTTIsDictationEnabled (ref)
 	local var4, var5 = reactModule.useState(nil)
 	local var6 = reactModule.useRef(nil)
@@ -65,7 +65,7 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 	local var9 = reactModule.useRef(nil)
 	local var10 = reactModule.useRef(nil)
 	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var6 (ref), var7 (ref), var8 (ref), var9 (ref), var10 (ref), var11 (ref)
 		return {
 			audioDeviceInput = var6,
@@ -76,7 +76,7 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 			vadConnection = var11
 		}
 	end, {})
-	local var13 = reactModule.useCallback(function() --[[ line: 87 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var5 (ref)
 		local textConnection = var12.textConnection
 		
@@ -116,7 +116,7 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 		end
 		var5(nil)
 	end, { var12 })
-	local var14 = reactModule.useCallback(function(p3, p4) --[[ line: 93 ]]
+	local var14 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: playersService (copy), var12 (ref), coreGuiService (copy), engineAudioSTTIsDictationEnabled (copy), var5 (ref)
 		local localPlayer = playersService.LocalPlayer
 		
@@ -183,7 +183,7 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 		wire_1.TargetInstance = audioSpeechToText
 		wire_1.Parent = expChatDictation
 		var12.wire.current = wire_1
-		var12.textConnection.current = audioSpeechToText:GetPropertyChangedSignal("Text"):Connect(function() --[[ line: 139 ]]
+		var12.textConnection.current = audioSpeechToText:GetPropertyChangedSignal("Text"):Connect(function()
 			-- upvalues: audioSpeechToText (ref), var15 (ref), p3 (ref)
 			local text = audioSpeechToText.Text
 			
@@ -197,7 +197,7 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 		
 		if p3.onSpeechStarted then
 			local onSpeechStarted = p3.onSpeechStarted
-			var12.vadConnection.current = audioSpeechToText:GetPropertyChangedSignal("VoiceDetected"):Connect(function() --[[ line: 153 ]]
+			var12.vadConnection.current = audioSpeechToText:GetPropertyChangedSignal("VoiceDetected"):Connect(function()
 				-- upvalues: audioSpeechToText (ref), onSpeechStarted (ref)
 				if audioSpeechToText.VoiceDetected then
 					onSpeechStarted()
@@ -208,9 +208,9 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 		
 		return audioDeviceInput_1
 	end, { var12 })
-	reactModule.useEffect(function() --[[ line: 166 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref)
-		return function() --[[ line: 167 ]]
+		return function()
 			-- upvalues: var12 (copy)
 			local textConnection = var12.textConnection
 			
@@ -251,7 +251,7 @@ return function() --[[ line: 66 | named "useDictationAudioPipeline" ]]
 		end
 	end, { var12 })
 	
-	return reactModule.useMemo(function() --[[ line: 172 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var14 (ref), var13 (ref), var4 (ref), var6 (ref)
 		return {
 			start = var14,

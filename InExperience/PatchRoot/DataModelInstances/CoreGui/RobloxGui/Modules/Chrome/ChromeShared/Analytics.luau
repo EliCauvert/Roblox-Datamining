@@ -7,7 +7,7 @@ local reactModule = require(corePackagesService.Packages.React)
 local fFlagUnibarLuaOcclusionMetrics = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagUnibarLuaOcclusionMetrics()
 local occlusionMetricsManagerModule = require(script.OcclusionMetricsManager)
 
-return function(_) --[[ line: 14 | named "ChromeAnalyticsListener" ]]
+return function(_)
 	-- upvalues: chromeAnalyticsModule (ref), useObservableValueModule (ref), viewportUtilModule (ref), fFlagUnibarLuaOcclusionMetrics (ref), reactModule (ref), occlusionMetricsManagerModule (ref)
 	chromeAnalyticsModule.default:setScreenSize(useObservableValueModule(viewportUtilModule.screenSize))
 	

@@ -6,9 +6,9 @@ local sendCounterModule = require(parent.Thunks.SendCounter)
 local constantsModule = require(parent.Constants)
 local list = { analyticsModule }
 
-return function(p0) --[[ line: 18 | named "ReportOpenDetailsPage" ]]
+return function(p0)
 	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), utilityFunctionsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2) --[[ line: 19 ]]
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: analyticsModule (copy), p0 (ref), utilityFunctionsModule (copy), sendCounterModule (copy), constantsModule (copy)
 		local var8, assetId
 		local var6 = p2[analyticsModule]

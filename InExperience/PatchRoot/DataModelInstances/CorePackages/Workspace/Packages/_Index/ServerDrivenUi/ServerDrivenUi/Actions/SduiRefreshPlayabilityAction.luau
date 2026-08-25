@@ -5,7 +5,7 @@ local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1) --[[ line: 15 | named "SduiRefreshPlayabilityAction" ]]
+return function(p0, _, p1)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), gamePlayButtonModule (ref), fetchGamePlayabilityAndProductInfo (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	

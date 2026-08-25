@@ -7,7 +7,7 @@ local panel3D = UIBloxModule.Core.VR.Panel3D
 local constants = UIBloxModule.Core.VR.Constants
 local repositionInExperienceVRToasts = game:DefineFastFlag("RepositionInExperienceVRToasts", false)
 
-return function(p0) --[[ line: 28 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), guiService (ref), VRConstants (ref), repositionInExperienceVRToasts (ref), constants (ref), panel3D (ref)
 	local isConfirmModalOpen = p0.isConfirmModalOpen
 	local isToastOpen = p0.isToastOpen
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 28 ]]
 			anchoring = constants.AnchoringTypes.Head,
 			parent = guiService.CoreGuiFolder,
 			hidden = not isToastOpen,
-			tiltCallback = reactModule.useCallback(function(p1) --[[ line: 62 ]]
+			tiltCallback = reactModule.useCallback(function(p1)
 				-- upvalues: positionLockedPanelName (write), repositionInExperienceVRToasts (copy), var6 (ref)
 				return if positionLockedPanelName then if repositionInExperienceVRToasts then positionLockedPanelName.CFrame * CFrame.new(0, var6 * -0.53, var6 * -0.15) * CFrame.Angles(0.25, 0, 0) else positionLockedPanelName.CFrame * CFrame.new(0, var6 * -0.45, var6 * -0.15) * CFrame.Angles(0.2, 0, 0) else p1.panelCFrame
 			end, { positionLockedPanelName, var6 })
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 28 ]]
 			anchoring = constants.AnchoringTypes.Head,
 			parent = guiService.CoreGuiFolder,
 			hidden = not isConfirmModalOpen,
-			tiltCallback = reactModule.useCallback(function(p2) --[[ line: 93 ]]
+			tiltCallback = reactModule.useCallback(function(p2)
 				-- upvalues: positionLockedPanelName (write)
 				return if positionLockedPanelName then positionLockedPanelName.CFrame * CFrame.new(0, 0, -0.1) else p2.panelCFrame
 			end, { positionLockedPanelName })

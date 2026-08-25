@@ -9,7 +9,7 @@ local formatNumberModule = require(parent.Utility.formatNumber)
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local useRobuxTextModule = require(parent.Generic.Hooks.useRobuxText)
 
-return function(p0) --[[ line: 28 | named "UnifiedPurchaseModalHeader" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), formatNumberModule (ref), localizationService (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), useRobuxTextModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, { tag = "auto-xy align-y-center align-x-start row" }, {
 		LeftSide = reactModule.createElement(view, {
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 28 | named "UnifiedPurchaseModalHeader" ]]
 			RobuxPrice = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-label-medium content-emphasis text-align-x-right",
-				Text = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(p0.robuxBalanceAmount or 0) else reactModule.useMemo(function() --[[ line: 29 ]]
+				Text = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then useRobuxTextModule(p0.robuxBalanceAmount or 0) else reactModule.useMemo(function()
 					-- upvalues: formatNumberModule (copy), localizationService (copy), p0 (ref)
 					return utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p0.robuxBalanceAmount or 0)
 				end, {

@@ -3,7 +3,7 @@ local argCheckModule = require(parent.ArgCheck)
 local displayModule = require(parent.Display)
 local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
 
-return function(p0, p1) --[[ line: 8 | named "getSafeAreaSize" ]]
+return function(p0, p1)
 	-- upvalues: argCheckModule (ref), fFlagExtendScrollingFramesBySafeInsets (ref), displayModule (ref)
 	assert(typeof(p0) == "Vector2", "getSafeAreaSize expects screenSize to be a Vector2")
 	assert(type(p1) == "table", "getSafeAreaSize expects guiInset to be a table")

@@ -6,12 +6,12 @@ local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
 local fFlagAddPreselectedAbuseTypeAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAddPreselectedAbuseTypeAnalytics
 local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 
-local _ = function(p0) --[[ line: 14 ]]
+local _ = function(p0)
 	-- upvalues: default (ref)
 	return default:getRecentUsersInteractionData()[tostring(p0.UserId)] ~= nil
 end
 
-function handlePreselectedPlayer(p1, p2, p3, p4) --[[ line: 19 ]]
+function handlePreselectedPlayer(p1, p2, p3, p4)
 	-- upvalues: default (ref), constantsModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), tnSIXPWrapperModule (ref)
 	if p2 and default:getRecentUsersInteractionData()[tostring(p1.UserId)] ~= nil then
 		p3({

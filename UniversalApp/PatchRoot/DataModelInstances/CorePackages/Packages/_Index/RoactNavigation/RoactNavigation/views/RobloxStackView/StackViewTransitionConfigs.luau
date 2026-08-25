@@ -17,11 +17,11 @@ local t_3 = {
 }
 
 return {
-	getDefaultTransitionConfig = function(_, _, p0) --[[ line: 31 ]]
+	getDefaultTransitionConfig = function(_, _, p0)
 		-- upvalues: stackPresentationStyleModule (ref), t_2 (ref), t_3 (ref), t_1 (ref)
 		return if p0 == stackPresentationStyleModule.Modal then t_2 elseif p0 == stackPresentationStyleModule.Overlay then t_3 else t_1
 	end,
-	getTransitionConfig = function(p1, p2, p3, p4) --[[ line: 41 ]]
+	getTransitionConfig = function(p1, p2, p3, p4)
 		-- upvalues: stackPresentationStyleModule (ref), t_2 (ref), t_3 (ref), t_1 (ref), object (ref)
 		local var6 = if p4 == stackPresentationStyleModule.Modal then t_2 elseif p4 == stackPresentationStyleModule.Overlay then t_3 else t_1
 		

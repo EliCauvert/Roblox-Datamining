@@ -8,7 +8,7 @@ local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 local useScaledValue = foundationModule.Hooks.useScaledValue
 
-return reactModule.memo(function(p0) --[[ line: 28 | named "SduiContentRatingLabel" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useScaledValue (ref), useTokens (ref), reactModule (ref), view (ref), foundationModule (ref), image (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "padding-medium gap-large radius-medium row align-y-center stroke-default size-full-0 auto-y",

@@ -7,7 +7,7 @@ local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstant
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 local displayNameHelpersModule = require(chatModules.Utility.DisplayNameHelpers)
 local t = nil
-pcall(function() --[[ line: 17 ]]
+pcall(function()
 	-- upvalues: t (write)
 	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -16,7 +16,7 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0) --[[ line: 20 ]]
+	function t.FormatMessageToSend(_, _, p0)
 		return p0
 	end
 end
@@ -24,26 +24,26 @@ local t_1 = {
 	ChatColor = chatSettingsModule.ErrorMessageTextColor or Color3.fromRGB(245, 50, 50)
 }
 local var10 = false
-local ok, status = pcall(function() --[[ line: 27 ]]
+local ok, status = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserUseNewDirectChatAPI")
 end)
 
 if ok then
 	var10 = status
 end
-local function _() --[[ line: 35 | named "GetWhisperChannelPrefix" ]]
+local function _()
 	-- upvalues: chatConstantsModule (ref)
 	return if chatConstantsModule.WhisperChannelPrefix then chatConstantsModule.WhisperChannelPrefix else "To "
 end
 
-local _ = function(p1) --[[ line: 42 | named "GetWhisperChannelId" ]]
+local _ = function(p1)
 	-- upvalues: chatConstantsModule (ref)
 	return (if chatConstantsModule.WhisperChannelPrefix then chatConstantsModule.WhisperChannelPrefix else "To ") .. p1
 end
 
-return function(p2) --[[ line: 46 | named "Run" ]]
+return function(p2)
 	-- upvalues: runService (ref), var10 (write), textChatService (ref), chatService (ref), chatSettingsModule (ref), displayNameHelpersModule (ref), t (write), t_1 (ref), chatConstantsModule (ref)
-	local function CanCommunicate(p3, p4) --[[ line: 48 ]]
+	local function CanCommunicate(p3, p4)
 		-- upvalues: runService (copy), var10 (copy), textChatService (copy), chatService (copy)
 		if runService:IsStudio() then
 			return true
@@ -54,14 +54,14 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 		if not player or not player_1 then
 			return false
 		elseif var10 then
-			local ok, status = pcall(function() --[[ line: 56 ]]
+			local ok, status = pcall(function()
 				-- upvalues: textChatService (copy), player (ref), player_1 (ref)
 				return textChatService:CanUsersDirectChatAsync(player.UserId, { player_1.UserId })
 			end)
 			
 			return ok and #status > 0
 		end
-		local ok, status = pcall(function() --[[ line: 61 ]]
+		local ok, status = pcall(function()
 			-- upvalues: chatService (copy), player (ref), player_1 (ref)
 			return chatService:CanUsersChatAsync(player.UserId, player_1.UserId)
 		end)
@@ -69,7 +69,7 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 		return ok and status
 	end
 	
-	local function DoWhisperCommand(p5, p6, p7) --[[ line: 70 ]]
+	local function DoWhisperCommand(p5, p6, p7)
 		-- upvalues: p2 (ref), chatSettingsModule (copy), displayNameHelpersModule (copy), t (copy), t_1 (copy), chatConstantsModule (copy), CanCommunicate (ref)
 		local var18 = p2:GetSpeaker(p5)
 		local var19 = p6
@@ -142,7 +142,7 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 		end
 	end
 	
-	local function WhisperCommandsFunction(p8, p9, p10) --[[ line: 147 ]]
+	local function WhisperCommandsFunction(p8, p9, p10)
 		-- upvalues: DoWhisperCommand (ref)
 		local var32 = false
 		
@@ -158,7 +158,7 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 		return var32
 	end
 	
-	local function PrivateMessageReplicationFunction(p11, p12, p13) --[[ line: 163 ]]
+	local function PrivateMessageReplicationFunction(p11, p12, p13)
 		-- upvalues: p2 (ref), chatConstantsModule (copy)
 		local var33 = p2:GetSpeaker(p11)
 		local extraData = var33.ExtraData
@@ -175,7 +175,7 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 		return true
 	end
 	
-	local function PrivateMessageAddTypeFunction(_, p14, _) --[[ line: 181 ]]
+	local function PrivateMessageAddTypeFunction(_, p14, _)
 		-- upvalues: chatConstantsModule (copy)
 		if chatConstantsModule.MessageTypeWhisper then
 			p14.MessageType = chatConstantsModule.MessageTypeWhisper
@@ -184,12 +184,12 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 	
 	p2:RegisterProcessCommandsFunction("whisper_commands", WhisperCommandsFunction, chatConstantsModule.StandardPriority)
 	
-	local function _() --[[ line: 189 | named "GetWhisperChanneNameColor" ]]
+	local function _()
 		-- upvalues: chatSettingsModule (copy)
 		return if chatSettingsModule.WhisperChannelNameColor then chatSettingsModule.WhisperChannelNameColor else Color3.fromRGB(102, 14, 102)
 	end
 	
-	p2.SpeakerAdded:connect(function(p15) --[[ line: 196 ]]
+	p2.SpeakerAdded:connect(function(p15)
 		-- upvalues: p2 (ref), chatSettingsModule (copy), chatConstantsModule (copy), t (copy), PrivateMessageReplicationFunction (ref), PrivateMessageAddTypeFunction (ref)
 		local var36 = p2:GetSpeaker(p15)
 		local _ = nil
@@ -209,7 +209,7 @@ return function(p2) --[[ line: 46 | named "Run" ]]
 		var39:RegisterProcessCommandsFunction("replication_function", PrivateMessageReplicationFunction, chatConstantsModule.LowPriority)
 		var39:RegisterFilterMessageFunction("message_type_function", PrivateMessageAddTypeFunction)
 	end)
-	p2.SpeakerRemoved:connect(function(p16) --[[ line: 228 ]]
+	p2.SpeakerRemoved:connect(function(p16)
 		-- upvalues: chatConstantsModule (copy), p2 (ref)
 		local text = (if chatConstantsModule.WhisperChannelPrefix then chatConstantsModule.WhisperChannelPrefix else "To ") .. p16
 		

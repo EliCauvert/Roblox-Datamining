@@ -9,7 +9,7 @@ local receivedConversationModule = require(appChat.Conversations.Actions.Receive
 local enumScreensModule = require(appChat.EnumScreens)
 local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local t = {
-	navigateToRootedChatDetails = function(p0, p1) --[[ line: 55 ]]
+	navigateToRootedChatDetails = function(p0, p1)
 		-- upvalues: roactNavigationModule (ref), enumScreensModule (ref)
 		return roactNavigationModule.Actions.navigate({
 			routeName = enumScreensModule.ChatLandingStack,
@@ -31,15 +31,15 @@ local t = {
 	end
 }
 
-local function _(p2) --[[ line: 16 | named "hasIteratorMember" ]]
+local function _(p2)
 	return type(p2) == "table" and p2.CreateIterator ~= nil
 end
 
-local _ = function(p3) --[[ line: 20 | named "isFriendsPlaceholderConversationId" ]]
+local _ = function(p3)
 	return type(p3) == "string" and string.sub(p3, 1, 8) == "friends:"
 end
 
-local function normalizeStoreConversationForRodux(p4) --[[ line: 24 ]]
+local function normalizeStoreConversationForRodux(p4)
 	-- upvalues: dateTime (ref), conversationChannelsModule (ref), cryoModule (ref)
 	local lastUpdated = p4.lastUpdated
 	local var10 = nil
@@ -61,7 +61,7 @@ local function normalizeStoreConversationForRodux(p4) --[[ line: 24 ]]
 	})
 end
 
-function t.tryNavigateToRootedChatDetails(p5, p6) --[[ line: 82 ]]
+function t.tryNavigateToRootedChatDetails(p5, p6)
 	-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref), getConversationStoreModule (ref), receivedConversationModule (ref), normalizeStoreConversationForRodux (ref), conversationChannelsModule (ref), t (ref)
 	local conversationId = p6 and p6.conversationId
 	

@@ -17,7 +17,7 @@ local enableSpatialUIPlaceFilter = game:DefineFastFlag("EnableSpatialUIPlaceFilt
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 40 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { _layer_data = nil }
 	setmetatable(t_1, t)
@@ -25,7 +25,7 @@ function t.new() --[[ line: 40 ]]
 	return t_1
 end
 
-function t:getIXPVariant() --[[ line: 48 ]]
+function t:getIXPVariant()
 	-- upvalues: experimentCacheManager (ref), luaAppIECVRLayerName (ref), luaAppIECVRVariantKey (ref), luaAppIECVRVariantNoSpatialUI (ref)
 	if self._layer_data == nil then
 		self._layer_data = experimentCacheManager.default:getLayerVariables(luaAppIECVRLayerName) or {}
@@ -35,17 +35,17 @@ function t:getIXPVariant() --[[ line: 48 ]]
 	return if var15 == nil then luaAppIECVRVariantNoSpatialUI else tonumber(var15)
 end
 
-function t.isDependencyFlagsEnabled() --[[ line: 60 ]]
+function t.isDependencyFlagsEnabled()
 	-- upvalues: fFlagEnableUIManagerPackgify (ref), enableSpatialUIPlaceFilter (ref)
 	return fFlagEnableUIManagerPackgify and not enableSpatialUIPlaceFilter
 end
 
-function t:isInExperienceUIVREnabled() --[[ line: 64 ]]
+function t:isInExperienceUIVREnabled()
 	-- upvalues: luaAppIECVREnabled8 (ref), luaAppIECVRIxpEnabled8 (ref), luaAppIECVRVariantNoSpatialUI (ref)
 	return if self:isDependencyFlagsEnabled() then if luaAppIECVREnabled8 then true elseif luaAppIECVRIxpEnabled8 then self:getIXPVariant() ~= luaAppIECVRVariantNoSpatialUI else false else false
 end
 
-function t:isDraggingAllowed() --[[ line: 78 ]]
+function t:isDraggingAllowed()
 	-- upvalues: spatialUIEnableDrag8 (ref), spatialUIEnableMovePanelToCenter8 (ref), luaAppIECVRVariantSpatialUIWithDragging (ref), luaAppIECVRVariantSpatialUIWithoutDragging (ref), luaAppIECVRVariantSpatialUIMovePanelToCenter (ref)
 	if not self:isInExperienceUIVREnabled() then
 		return false
@@ -59,17 +59,17 @@ function t:isDraggingAllowed() --[[ line: 78 ]]
 	return IXPVariant == luaAppIECVRVariantSpatialUIWithDragging or (if IXPVariant == luaAppIECVRVariantSpatialUIWithoutDragging then false elseif IXPVariant == luaAppIECVRVariantSpatialUIMovePanelToCenter then false else spatialUIEnableDrag8)
 end
 
-function t:isMovePanelToCenter() --[[ line: 101 ]]
+function t:isMovePanelToCenter()
 	-- upvalues: spatialUIEnableMovePanelToCenter8 (ref), luaAppIECVRVariantSpatialUIMovePanelToCenter (ref)
 	return if self:isInExperienceUIVREnabled() then if spatialUIEnableMovePanelToCenter8 then true else self:getIXPVariant() == luaAppIECVRVariantSpatialUIMovePanelToCenter else false
 end
 
-function t.isSpatialUICameraTypeFixEnabled(_) --[[ line: 112 ]]
+function t.isSpatialUICameraTypeFixEnabled(_)
 	-- upvalues: enableSpatialUICameraTypeFix8 (ref)
 	return enableSpatialUICameraTypeFix8
 end
 
-function t.isSpatialUIScalingFixEnabled(_) --[[ line: 116 ]]
+function t.isSpatialUIScalingFixEnabled(_)
 	-- upvalues: enableSpatialUIScalingFix (ref)
 	return enableSpatialUIScalingFix
 end

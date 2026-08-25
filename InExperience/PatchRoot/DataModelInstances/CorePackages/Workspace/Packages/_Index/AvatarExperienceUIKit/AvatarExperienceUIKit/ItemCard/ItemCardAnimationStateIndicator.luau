@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 
-return function(p0) --[[ line: 23 | named "ItemCardAnimationStateIndicator" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var1 = useTokens()
 	local t = {

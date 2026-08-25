@@ -33,21 +33,21 @@ local t = {
 	verified = { reveal = reactModule.createBinding(1) }
 }
 
-local function _(value) --[[ line: 49 | named "clamp01" ]]
+local function _(value)
 	return math.clamp(value, 0, 1)
 end
 
-local _ = function(p0) --[[ line: 53 | named "clipWindowHeight" ]]
+local _ = function(p0)
 	return math.ceil(p0.FontSize * p0.LineHeight)
 end
 
-local _ = function(p1) --[[ line: 57 | named "clippingFromReveal" ]]
-	return p1:map(function(p2) --[[ line: 58 ]]
+local _ = function(p1)
+	return p1:map(function(p2)
 		return p2 < 0.999
 	end)
 end
 
-return reactModule.memo(function(p3) --[[ line: 63 | named "TiltLockup" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: useTokens (ref), t (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule_1 (ref), verifiedBadgeModule (ref)
 	local var7 = useTokens()
 	local animation = p3.animation or t
@@ -58,31 +58,31 @@ return reactModule.memo(function(p3) --[[ line: 63 | named "TiltLockup" ]]
 	local ceiled = math.ceil(headingLarge.FontSize * headingLarge.LineHeight)
 	local bodyMedium = var7.Typography.BodyMedium
 	local ceiled_1 = math.ceil(bodyMedium.FontSize * bodyMedium.LineHeight)
-	local var11 = animation.title.reveal:map(function(p4) --[[ line: 58 ]]
+	local var11 = animation.title.reveal:map(function(p4)
 		return p4 < 0.999
 	end)
-	local var12 = animation.creator.reveal:map(function(p5) --[[ line: 58 ]]
+	local var12 = animation.creator.reveal:map(function(p5)
 		return p5 < 0.999
 	end)
-	local var13 = animation.title.reveal:map(function(p6) --[[ line: 76 ]]
+	local var13 = animation.title.reveal:map(function(p6)
 		-- upvalues: color3 (ref)
 		return { Color3 = color3, Transparency = 1 - math.clamp(p6, 0, 1) }
 	end)
-	local var14 = animation.creator.reveal:map(function(p7) --[[ line: 80 ]]
+	local var14 = animation.creator.reveal:map(function(p7)
 		-- upvalues: color3_1 (ref)
 		return {
 			Color3 = color3_1,
 			Transparency = 1 - math.clamp(p7, 0, 1) * 0.6
 		}
 	end)
-	local var15 = animation.verified.reveal:map(function(p8) --[[ line: 84 ]]
+	local var15 = animation.verified.reveal:map(function(p8)
 		-- upvalues: color3_2 (ref)
 		return {
 			Color3 = color3_2,
 			Transparency = 1 - math.clamp(p8, 0, 1)
 		}
 	end)
-	local var16 = animation.verified.reveal:map(function(p9) --[[ line: 88 ]]
+	local var16 = animation.verified.reveal:map(function(p9)
 		-- upvalues: var7 (ref)
 		return {
 			Color3 = var7.Color.Content.Emphasis.Color3,

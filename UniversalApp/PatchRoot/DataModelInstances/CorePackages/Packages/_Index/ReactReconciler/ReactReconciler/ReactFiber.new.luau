@@ -83,7 +83,7 @@ local var13 = nil
 local _ = nil
 local var14 = 1
 
-local function createFiber(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 167 ]]
+local function createFiber(p0, p1, p2, p3, p4, p5, p6, p7)
 	-- upvalues: noFlags (ref), noLanes (ref), enableProfilerTimer (ref), dEV (ref), var14 (write)
 	local t = {
 		index = 1,
@@ -117,15 +117,15 @@ local function createFiber(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 167 ]]
 	return t
 end
 
-function _shouldConstruct(p8) --[[ line: 267 ]]
+function _shouldConstruct(p8)
 	return type(p8) ~= "function" and not not p8.isReactComponent
 end
 
-local function isSimpleFunctionComponent(p9) --[[ line: 274 ]]
+local function isSimpleFunctionComponent(p9)
 	return type(p9) == "function"
 end
 
-local function resolveLazyComponentTag(p10) --[[ line: 282 ]]
+local function resolveLazyComponentTag(p10)
 	-- upvalues: functionComponent (ref), classComponent (ref), REACT_FORWARD_REF_TYPE (ref), forwardRef (ref), REACT_MEMO_TYPE (ref), memoComponent (ref), indeterminateComponent (ref)
 	local var25 = typeof(p10)
 	
@@ -141,7 +141,7 @@ local function resolveLazyComponentTag(p10) --[[ line: 282 ]]
 	end
 end
 
-local function createWorkInProgress(p11, p12) --[[ line: 305 ]]
+local function createWorkInProgress(p11, p12)
 	-- upvalues: createFiber (ref), dEV (ref), noFlags (ref), enableProfilerTimer (ref), staticMask (ref), indeterminateComponent (ref), functionComponent (ref), simpleMemoComponent (ref), resolveFunctionForHotReloading (ref), classComponent (ref), resolveClassForHotReloading (ref), forwardRef (ref), resolveForwardRefForHotReloading (ref)
 	local alternate = p11.alternate
 	
@@ -211,7 +211,7 @@ local function createWorkInProgress(p11, p12) --[[ line: 305 ]]
 	return alternate
 end
 
-local function resetWorkInProgress(value, p13) --[[ line: 409 ]]
+local function resetWorkInProgress(value, p13)
 	-- upvalues: staticMask (ref), placement (ref), noLanes (ref), noFlags (ref), enableProfilerTimer (ref)
 	value.flags = bit32.band(value.flags, bit32.bor(staticMask, placement))
 	local alternate = value.alternate
@@ -261,7 +261,7 @@ local function resetWorkInProgress(value, p13) --[[ line: 409 ]]
 	return value
 end
 
-local function createHostRootFiber(p14) --[[ line: 484 ]]
+local function createHostRootFiber(p14)
 	-- upvalues: concurrentRoot (ref), concurrentMode (ref), blockingMode (ref), strictMode (ref), blockingRoot (ref), noMode (ref), enableProfilerTimer (ref), isDevToolsPresent (ref), profileMode (ref), createFiber (ref), hostRoot (ref)
 	local var27 = if p14 == concurrentRoot then bit32.bor(concurrentMode, blockingMode, strictMode) elseif p14 == blockingRoot then bit32.bor(blockingMode, strictMode) else noMode
 	
@@ -271,7 +271,7 @@ local function createHostRootFiber(p14) --[[ line: 484 ]]
 	return createFiber(hostRoot, nil, nil, var27)
 end
 
-local function createFiberFromTypeAndProps(p15, p16, p17, p18, p19, p20) --[[ line: 505 ]]
+local function createFiberFromTypeAndProps(p15, p16, p17, p18, p19, p20)
 	-- upvalues: indeterminateComponent (ref), dEV (ref), resolveFunctionForHotReloading (ref), classComponent (ref), resolveClassForHotReloading (ref), hostComponent (ref), REACT_FRAGMENT_TYPE (ref), createFiberFromFragment (write), REACT_DEBUG_TRACING_MODE_TYPE (ref), mode (ref), debugTracingMode (ref), REACT_STRICT_MODE_TYPE (ref), strictMode (ref), REACT_PROFILER_TYPE (ref), createFiberFromProfiler (write), REACT_SUSPENSE_TYPE (ref), var11 (write), REACT_OFFSCREEN_TYPE (ref), var12 (write), REACT_LEGACY_HIDDEN_TYPE (ref), var13 (write), REACT_PROVIDER_TYPE (ref), contextProvider (ref), REACT_CONTEXT_TYPE (ref), contextConsumer (ref), REACT_FORWARD_REF_TYPE (ref), forwardRef (ref), resolveForwardRefForHotReloading (ref), REACT_MEMO_TYPE (ref), memoComponent (ref), REACT_LAZY_TYPE (ref), lazyComponent (ref), object (ref), inspect (ref), getComponentName (ref), array (ref), REACT_ELEMENT_TYPE (ref), invariant (ref), createFiber (ref)
 	local var28 = indeterminateComponent
 	local var29 = p15
@@ -374,7 +374,7 @@ local function createFiberFromTypeAndProps(p15, p16, p17, p18, p19, p20) --[[ li
 	return var35
 end
 
-local function createFiberFromElement(p21, p22, p23) --[[ line: 659 ]]
+local function createFiberFromElement(p21, p22, p23)
 	-- upvalues: dEV (ref), createFiberFromTypeAndProps (ref)
 	local var36 = createFiberFromTypeAndProps(p21.type, p21.key, p21.props, if dEV then p21._owner else nil, p22, p23)
 	
@@ -385,22 +385,22 @@ local function createFiberFromElement(p21, p22, p23) --[[ line: 659 ]]
 	return var36
 end
 
-createFiberFromFragment = function(p24, p25, p26, p27) --[[ line: 687 | named "createFiberFromFragment" ]]
+createFiberFromFragment = function(p24, p25, p26, p27)
 	-- upvalues: createFiber (ref), fragment (ref)
 	return createFiber(fragment, p24, p27, p25, nil, nil, nil, p26)
 end
 
-local function createFiberFromFundamental(p28, p29, p30, p31, p32) --[[ line: 700 ]]
+local function createFiberFromFundamental(p28, p29, p30, p31, p32)
 	-- upvalues: createFiber (ref), fundamentalComponent (ref)
 	return createFiber(fundamentalComponent, p29, p32, p30, p28, p28, nil, p31)
 end
 
-createFiberFromScope = function(p33, p34, p35, p36, p37) --[[ line: 725 | named "createFiberFromScope" ]]
+createFiberFromScope = function(p33, p34, p35, p36, p37)
 	-- upvalues: createFiber (ref), scopeComponent (ref)
 	return createFiber(scopeComponent, p34, p37, p35, p33, p33, nil, p36)
 end
 
-createFiberFromProfiler = function(p38, p39, p40, p41) --[[ line: 742 | named "createFiberFromProfiler" ]]
+createFiberFromProfiler = function(p38, p39, p40, p41)
 	-- upvalues: dEV (ref), console (ref), createFiber (ref), profiler (ref), profileMode (ref), REACT_PROFILER_TYPE (ref), enableProfilerTimer (ref)
 	if dEV and typeof(p38.id) ~= "string" then
 		console.error("Profiler must specify an \"id\" as a prop")
@@ -418,35 +418,35 @@ return {
 	createFiberFromElement = createFiberFromElement,
 	createFiberFromFragment = createFiberFromFragment,
 	createFiberFromFundamental = createFiberFromFundamental,
-	createFiberFromSuspense = function(p42, p43, p44, p45) --[[ line: 786 ]]
+	createFiberFromSuspense = function(p42, p43, p44, p45)
 		-- upvalues: createFiber (ref), suspenseComponent (ref), REACT_SUSPENSE_TYPE (ref)
 		return createFiber(suspenseComponent, p42, p45, p43, REACT_SUSPENSE_TYPE, REACT_SUSPENSE_TYPE, nil, p44)
 	end,
-	createFiberFromSuspenseList = function(p46, p47, p48, p49) --[[ line: 815 ]]
+	createFiberFromSuspenseList = function(p46, p47, p48, p49)
 		-- upvalues: createFiber (ref), suspenseListComponent (ref), REACT_SUSPENSE_LIST_TYPE (ref), dEV (ref)
 		return createFiber(suspenseListComponent, p46, p49, p47, REACT_SUSPENSE_LIST_TYPE, if dEV then REACT_SUSPENSE_LIST_TYPE else nil, nil, p48)
 	end,
-	createFiberFromOffscreen = function(p50, p51, p52, p53) --[[ line: 844 ]]
+	createFiberFromOffscreen = function(p50, p51, p52, p53)
 		-- upvalues: createFiber (ref), offscreenComponent (ref), REACT_OFFSCREEN_TYPE (ref), dEV (ref)
 		return createFiber(offscreenComponent, p50, p53, p51, REACT_OFFSCREEN_TYPE, if dEV then REACT_OFFSCREEN_TYPE else nil, nil, p52)
 	end,
-	createFiberFromLegacyHidden = function(p54, p55, p56, p57) --[[ line: 873 ]]
+	createFiberFromLegacyHidden = function(p54, p55, p56, p57)
 		-- upvalues: createFiber (ref), legacyHiddenComponent (ref), REACT_LEGACY_HIDDEN_TYPE (ref), dEV (ref)
 		return createFiber(legacyHiddenComponent, p54, p57, p55, REACT_LEGACY_HIDDEN_TYPE, if dEV then REACT_LEGACY_HIDDEN_TYPE else nil, nil, p56)
 	end,
-	createFiberFromText = function(p58, p59, p60) --[[ line: 902 ]]
+	createFiberFromText = function(p58, p59, p60)
 		-- upvalues: createFiber (ref), hostText (ref)
 		return createFiber(hostText, p58, nil, p59, nil, nil, nil, p60)
 	end,
-	createFiberFromHostInstanceForDeletion = function() --[[ line: 910 ]]
+	createFiberFromHostInstanceForDeletion = function()
 		-- upvalues: createFiber (ref), hostComponent (ref), noMode (ref)
 		return createFiber(hostComponent, nil, nil, noMode, "DELETED", "DELETED")
 	end,
-	createFiberFromDehydratedFragment = function(p61) --[[ line: 920 ]]
+	createFiberFromDehydratedFragment = function(p61)
 		-- upvalues: createFiber (ref), dehydratedFragment (ref), noMode (ref)
 		return createFiber(dehydratedFragment, nil, nil, noMode, nil, nil, p61)
 	end,
-	createFiberFromPortal = function(p62, p63, p64) --[[ line: 929 ]]
+	createFiberFromPortal = function(p62, p63, p64)
 		-- upvalues: createFiber (ref), hostPortal (ref)
 		return createFiber(hostPortal, if p62.children ~= nil then {} else p62.children, p62.key, p63, nil, nil, {
 			pendingChildren = nil,
@@ -454,7 +454,7 @@ return {
 			implementation = p62.implementation
 		}, p64)
 	end,
-	assignFiberPropertiesInDEV = function(value, p65) --[[ line: 953 ]]
+	assignFiberPropertiesInDEV = function(value, p65)
 		-- upvalues: createFiber (ref), indeterminateComponent (ref), noMode (ref), enableProfilerTimer (ref)
 		if value == nil then
 			value = createFiber(indeterminateComponent, nil, nil, noMode)

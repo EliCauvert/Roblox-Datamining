@@ -22,7 +22,7 @@ local t = {
 	[promptStateModule.TransferProcessing] = { promptStateModule.TransferSuccess }
 }
 
-local function _(p0, p1) --[[ line: 26 | named "isValidPromptStateTransition" ]]
+local function _(p0, p1)
 	-- upvalues: t (ref)
 	for i, v in ipairs(t[p0]) do
 		if v == p1 then
@@ -32,7 +32,7 @@ local function _(p0, p1) --[[ line: 26 | named "isValidPromptStateTransition" ]]
 	return false
 end
 
-return function(value, p2) --[[ line: 36 | named "setTransferPromptState" ]]
+return function(value, p2)
 	-- upvalues: t (ref), promptStateModule (ref)
 	local var3
 	local setPromptState = value.setPromptState

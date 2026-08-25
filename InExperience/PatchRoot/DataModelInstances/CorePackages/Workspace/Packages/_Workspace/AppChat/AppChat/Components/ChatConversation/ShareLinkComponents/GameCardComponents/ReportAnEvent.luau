@@ -1,6 +1,6 @@
 ﻿local gamePlayIntent = require(script:FindFirstAncestor("AppChat").Parent.DiscoveryAnalytics).Events.gamePlayIntent
 
-return function(p0, p1, p2) --[[ line: 9 | named "ReportAnEvent" ]]
+return function(p0, p1, p2)
 	-- upvalues: gamePlayIntent (ref)
 	local t, eventIngest
 	local _ = nil

@@ -32,7 +32,7 @@ local t = {
 if enableIllegalChildAccountLinkingErrorMessageOnSSO then
 	t[loginErrorCodesModule.IllegalChildAccountLinking] = "Authentication.Login.LinkIllegalChildAccountLinking"
 end
-return function(p0) --[[ line: 44 | named "GetLoginByUsernameErrorMessage" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return if t[p0] then t[p0] else "Authentication.Login.Response.SomethingWentWrong"
 end

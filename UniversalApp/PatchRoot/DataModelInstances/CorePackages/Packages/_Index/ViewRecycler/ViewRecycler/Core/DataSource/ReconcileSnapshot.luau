@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2, p3) --[[ line: 12 | named "reconcileSnapshot" ]]
+﻿return function(p0, p1, p2, p3)
 	local list = table.create(#p1)
 	local list_1 = table.create(#p2)
 	local t = {}
@@ -43,7 +43,7 @@
 	while var6 < math.min(#list, #list_1) - var5 and list[#list - var6] == list_1[#list_1 - var6] do
 		var6 += 1
 	end
-	local function updateRetainedValues() --[[ line: 63 ]]
+	local function updateRetainedValues()
 		-- upvalues: p2 (ref), t (ref), list_1 (ref), p0 (ref)
 		for i, v in p2 do
 			if t[list_1[i]] ~= v then
@@ -52,7 +52,7 @@
 		end
 	end
 	
-	p0.transaction(function() --[[ line: 71 ]]
+	p0.transaction(function()
 		-- upvalues: list (ref), list_1 (ref), var5 (write), updateRetainedValues (ref), var6 (write), p0 (ref), p2 (ref), p1 (ref), var4 (write)
 		if #list == #list_1 and var5 == #list_1 then
 			updateRetainedValues()
@@ -90,7 +90,7 @@
 		local index = table.find(list, list_1[var13])
 		local var15 = var13
 		
-		local function matchesMove(p4, p5) --[[ line: 99 ]]
+		local function matchesMove(p4, p5)
 			-- upvalues: list (copy), list_1 (copy)
 			if p4 == nil or p5 == nil then
 				return false

@@ -4,7 +4,7 @@ local loginStatus = require(parent.RobloxAppEnums).LoginStatus
 local setAuthenticationStatusModule = require(authenticationStatus.Actions.SetAuthenticationStatus)
 local cryoModule = require(parent.Cryo)
 
-return function(p0, p1) --[[ line: 7 ]]
+return function(p0, p1)
 	-- upvalues: loginStatus (ref), setAuthenticationStatusModule (ref), cryoModule (ref)
 	p0 = p0 or { status = loginStatus.UNKNOWN }
 	

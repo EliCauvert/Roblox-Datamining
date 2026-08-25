@@ -7,17 +7,17 @@ local commercePurchaseStartedModule = require(commercePurchaseApp.Store.Actions.
 local commercePurchaseCheckoutModule = require(commercePurchaseApp.Store.Actions.CommercePurchaseCheckout)
 local _ = require(commercePurchaseApp.Store.Types)
 
-local function _() --[[ line: 20 | named "createInitialState" ]]
+local function _()
 	-- upvalues: commercePurchasePromptStateEnumModule (ref)
 	return { promptState = commercePurchasePromptStateEnumModule.None }
 end
 
 return roduxModule.createReducer({ promptState = commercePurchasePromptStateEnumModule.None }, {
-	[commercePurchaseEndedModule.name] = function(_, _) --[[ line: 27 ]]
+	[commercePurchaseEndedModule.name] = function(_, _)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
 		return { promptState = commercePurchasePromptStateEnumModule.None }
 	end,
-	[commercePurchaseFailedModule.name] = function(p0, p1) --[[ line: 30 ]]
+	[commercePurchaseFailedModule.name] = function(p0, p1)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
 		local cloned = table.clone(p0)
 		cloned.errorCode = p1.errorCode
@@ -25,7 +25,7 @@ return roduxModule.createReducer({ promptState = commercePurchasePromptStateEnum
 		
 		return cloned
 	end,
-	[commercePurchaseStartedModule.name] = function(p2, p3) --[[ line: 36 ]]
+	[commercePurchaseStartedModule.name] = function(p2, p3)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
 		local cloned = table.clone(p2)
 		cloned.promptState = commercePurchasePromptStateEnumModule.Started
@@ -33,7 +33,7 @@ return roduxModule.createReducer({ promptState = commercePurchasePromptStateEnum
 		
 		return cloned
 	end,
-	[commercePurchaseCheckoutModule.name] = function(p4, p5) --[[ line: 42 ]]
+	[commercePurchaseCheckoutModule.name] = function(p4, p5)
 		-- upvalues: commercePurchasePromptStateEnumModule (ref)
 		local cloned = table.clone(p4)
 		cloned.promptState = commercePurchasePromptStateEnumModule.Checkout

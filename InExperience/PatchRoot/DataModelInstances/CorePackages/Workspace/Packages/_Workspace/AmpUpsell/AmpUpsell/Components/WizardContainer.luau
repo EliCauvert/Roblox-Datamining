@@ -36,13 +36,13 @@ local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
 local VPCRequestTypeEnum = enumsModule.VPCRequestTypeEnum
 
-local function VPCPrologueController(p0) --[[ line: 90 ]]
+local function VPCPrologueController(p0)
 	-- upvalues: reactModule (ref), accessResponseEnum (ref), cryoModule (ref), actionStatusEnum (ref), VPCPrologueModule (ref)
 	local options = p0.options
 	
 	return reactModule.createElement(VPCPrologueModule, {
 		recourseData = p0.recourseData,
-		onConfirm = reactModule.useCallback(function() --[[ line: 93 ]]
+		onConfirm = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), options (ref)
 			local actionProps = p0.request.actionProps
 			p0.onDone()
@@ -54,7 +54,7 @@ local function VPCPrologueController(p0) --[[ line: 90 ]]
 				p0.request.openUpsellFn(actionProps)
 			end
 		end, { p0.request, p0.onDone, options }),
-		onCancel = reactModule.useCallback(function() --[[ line: 104 ]]
+		onCancel = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), options (ref), accessResponseEnum (copy), cryoModule (copy), actionStatusEnum (copy)
 			p0.onDone()
 			
@@ -73,7 +73,7 @@ local function VPCPrologueController(p0) --[[ line: 90 ]]
 	})
 end
 
-local function getSuccessfulActions(p1) --[[ line: 123 ]]
+local function getSuccessfulActions(p1)
 	-- upvalues: actionStatusEnum (ref)
 	local t = {}
 	
@@ -85,7 +85,7 @@ local function getSuccessfulActions(p1) --[[ line: 123 ]]
 	return t
 end
 
-return function(p2) --[[ line: 133 | named "WizardContainer" ]]
+return function(p2)
 	-- upvalues: useNavigation (ref), ampApiProviderModule (ref), analyticsServiceModule (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), useApolloClient (ref), useCompletionCallbackWithReturnPageModule (ref), fFlagEnableAmpWizardDeepLink (ref), actionTypeEnum (ref), appScreensModule (ref), cryoModule (ref), actionStatusEnum (ref), accessResponseEnum (ref), getFFlagEnableAmpEmailUpsellSupportModule (ref), getFFlagEnableAmpIDVUpsellSupportModule (ref), getFFlagEnableAmpIDVUpsellPopOnCompletionModule (ref), getFFlagEnableAmpWizardVPCNavigationFixModule (ref), logEventOnceIfEnabled (ref), getFFlagEnableAmpSubscriptionUpsellModule (ref), userSettingsSettingNameEnum (ref), getFFlagEnableAmpVPCPrologueModule (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (ref), accountSettingsUpsellStringsFn (ref), getFFlagEnableAmpUpsellGqlModule (ref), getSuccessfulActions (ref), sendModalActionEventModule (ref), VPCRequestTypeEnum (ref), VPCApiProviderModule (ref), VPCPrologueController (ref), errorScreenModule (ref), loading (ref), iconSize (ref)
 	local var24 = useNavigation()
 	local featureName = p2.featureName
@@ -109,18 +109,18 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 	local var38 = useApolloClient()
 	local var39 = if fFlagEnableAmpWizardDeepLink then useCompletionCallbackWithReturnPageModule(var24, completionCallback, metadata) else completionCallback
 	
-	local function _(p3) --[[ line: 165 | named "isSelfContained" ]]
+	local function _(p3)
 		-- upvalues: selfContainedUpsells (ref)
 		return selfContainedUpsells ~= nil and selfContainedUpsells[p3] == true
 	end
 	
-	local var40 = reactModule.useCallback(function(p4) --[[ line: 170 ]]
+	local var40 = reactModule.useCallback(function(p4)
 		-- upvalues: selfContainedUpsells (ref), var24 (ref)
 		if not (selfContainedUpsells ~= nil and selfContainedUpsells[p4] == true) then
 			var24.pop()
 		end
 	end, { var24.pop, selfContainedUpsells })
-	local var41 = reactModule.useCallback(function(_, p5) --[[ line: 177 ]]
+	local var41 = reactModule.useCallback(function(_, p5)
 		-- upvalues: actionTypeEnum (copy), appScreensModule (copy), var31 (ref), cryoModule (copy), var30 (ref), actionStatusEnum (copy), var39 (ref), accessResponseEnum (copy), getFFlagEnableAmpEmailUpsellSupportModule (copy), getFFlagEnableAmpIDVUpsellSupportModule (copy), featureName (ref), entryPointEventCtx (ref), metadata (ref), getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var24 (ref), recourseData (ref), var28 (ref), getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var40 (ref), p2 (ref), logEventOnceIfEnabled (copy), getFFlagEnableAmpSubscriptionUpsellModule (copy)
 		local action = p5.action
 		
@@ -128,15 +128,15 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 			return {
 				eventContext = "AmpUpsell",
 				origin = appScreensModule.AmpWizardContainer,
-				onSuccess = function() --[[ line: 183 ]]
+				onSuccess = function()
 					-- upvalues: var31 (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var31(cryoModule.Dictionary.join(var30, { [actionTypeEnum.Phone] = actionStatusEnum.Success }))
 				end,
-				onFailure = function() --[[ line: 188 ]]
+				onFailure = function()
 					-- upvalues: var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [actionTypeEnum.Phone] = actionStatusEnum.Failure }))
 				end,
-				onCancelled = function() --[[ line: 194 ]]
+				onCancelled = function()
 					-- upvalues: var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [actionTypeEnum.Phone] = actionStatusEnum.Cancelled }))
 				end
@@ -148,36 +148,36 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 				addEmailOver13TextKey = "Feature.VerificationUpsell.Description.IDVerificationAddEmailText",
 				addEmailUnder13TextKey = "Feature.VerificationUpsell.Description.IDVerificationAddEmailText",
 				addEmailTitleKey = "Feature.VerificationUpsell.Heading.AddEmail",
-				successCallback = function(_) --[[ line: 208 ]]
+				successCallback = function(_)
 					-- upvalues: var31 (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var31(cryoModule.Dictionary.join(var30, { [actionTypeEnum.Email] = actionStatusEnum.Success }))
 				end,
-				failureCallback = function() --[[ line: 213 ]]
+				failureCallback = function()
 					-- upvalues: var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [actionTypeEnum.Phone] = actionStatusEnum.Failure }))
 				end,
-				closeCentralOverlay = function() --[[ line: 219 ]] end
+				closeCentralOverlay = function() end
 			}
 		elseif getFFlagEnableAmpIDVUpsellSupportModule() and action == actionTypeEnum.GovernmentId then
 			return {
 				featureName = featureName,
 				entryPointEventCtx = entryPointEventCtx,
 				metadata = metadata,
-				onSuccess = function() --[[ line: 226 ]]
+				onSuccess = function()
 					-- upvalues: getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var24 (copy), var31 (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					if getFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
 						var24.pop()
 					end
 					var31(cryoModule.Dictionary.join(var30, { [actionTypeEnum.GovernmentId] = actionStatusEnum.Success }))
 				end,
-				onFailure = function() --[[ line: 237 ]]
+				onFailure = function()
 					-- upvalues: getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					if getFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
 						var24.pop()
 					end
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [actionTypeEnum.GovernmentId] = actionStatusEnum.Failure }))
 				end,
-				onCancelled = function() --[[ line: 249 ]]
+				onCancelled = function()
 					-- upvalues: getFFlagEnableAmpIDVUpsellPopOnCompletionModule (copy), var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					if getFFlagEnableAmpIDVUpsellPopOnCompletionModule() then
 						var24.pop()
@@ -194,21 +194,21 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 				recourseData = recourseData,
 				entryPointEventCtx = entryPointEventCtx,
 				isInExperienceEntry = var28,
-				onCancel = function() --[[ line: 270 ]]
+				onCancel = function()
 					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var40 (copy), action (ref), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionStatusEnum (copy)
 					if getFFlagEnableAmpWizardVPCNavigationFixModule() then
 						var40(action)
 					end
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [action] = actionStatusEnum.Cancelled }))
 				end,
-				onSuccess = function() --[[ line: 279 ]]
+				onSuccess = function()
 					-- upvalues: getFFlagEnableAmpWizardVPCNavigationFixModule (copy), var40 (copy), action (ref), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionStatusEnum (copy)
 					if getFFlagEnableAmpWizardVPCNavigationFixModule() then
 						var40(action)
 					end
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [action] = actionStatusEnum.Success }))
 				end,
-				onRetryAmp = function() --[[ line: 288 ]]
+				onRetryAmp = function()
 					-- upvalues: var40 (copy), action (ref), var31 (copy), cryoModule (copy), var30 (copy), actionStatusEnum (copy)
 					var40(action)
 					var31(cryoModule.Dictionary.join(var30, { [action] = actionStatusEnum.RetryRequested }))
@@ -220,7 +220,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 				entryPointEventCtx = entryPointEventCtx,
 				metadata = metadata,
 				skipFacialAgeEstimationWebLinkModal = p2.skipFacialAgeEstimationWebLinkModal,
-				onSuccess = function() --[[ line: 301 ]]
+				onSuccess = function()
 					-- upvalues: logEventOnceIfEnabled (copy), var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					logEventOnceIfEnabled("complete_flow_with_success")
 					var24.pop()
@@ -228,7 +228,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 						[actionTypeEnum.AgeEstimation] = actionStatusEnum.Success
 					}))
 				end,
-				onFailure = function() --[[ line: 312 ]]
+				onFailure = function()
 					-- upvalues: logEventOnceIfEnabled (copy), var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					logEventOnceIfEnabled("complete_flow_with_error")
 					var24.pop()
@@ -236,7 +236,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 						[actionTypeEnum.AgeEstimation] = actionStatusEnum.Failure
 					}))
 				end,
-				onCancel = function() --[[ line: 323 ]]
+				onCancel = function()
 					-- upvalues: logEventOnceIfEnabled (copy), var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					logEventOnceIfEnabled("complete_flow_with_cancel")
 					var24.pop()
@@ -244,7 +244,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 						[actionTypeEnum.AgeEstimation] = actionStatusEnum.Cancelled
 					}))
 				end,
-				onRetry = function() --[[ line: 334 ]]
+				onRetry = function()
 					-- upvalues: var24 (copy), var31 (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var24.pop()
 					var31(cryoModule.Dictionary.join(var30, {
@@ -260,17 +260,17 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 				surfaceName = var45 and var45.surfaceName,
 				surfaceContext = var45 and var45.surfaceContext,
 				analyticsContext = var45 and var45.analyticsContext,
-				onSuccess = function() --[[ line: 351 ]]
+				onSuccess = function()
 					-- upvalues: var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var24.pop()
 					var39(accessResponseEnum.Granted, cryoModule.Dictionary.join(var30, { [actionTypeEnum.Subscription] = actionStatusEnum.Success }))
 				end,
-				onFailure = function() --[[ line: 361 ]]
+				onFailure = function()
 					-- upvalues: var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var24.pop()
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [actionTypeEnum.Subscription] = actionStatusEnum.Failure }))
 				end,
-				onCancel = function() --[[ line: 371 ]]
+				onCancel = function()
 					-- upvalues: var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), actionTypeEnum (copy), actionStatusEnum (copy)
 					var24.pop()
 					var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, {
@@ -281,7 +281,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 		end
 		return {}
 	end, { var30, var39, var40 })
-	local var42 = reactModule.useCallback(function(p6) --[[ line: 392 ]]
+	local var42 = reactModule.useCallback(function(p6)
 		-- upvalues: actionTypeEnum (copy), userSettingsSettingNameEnum (copy), openUpsells (ref)
 		local action = p6.action
 		
@@ -291,7 +291,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 			return if userSettings and userSettings.settingName == userSettingsSettingNameEnum.AllowFacialAgeEstimation then nil else openUpsells[action]
 		end
 	end, { openUpsells })
-	local var43 = reactModule.useCallback(function(_, p7) --[[ line: 406 ]]
+	local var43 = reactModule.useCallback(function(_, p7)
 		-- upvalues: var33 (ref), var42 (ref), var41 (ref), actionTypeEnum (copy), p2 (ref), getFFlagEnableAmpVPCPrologueModule (copy), selfContainedUpsells (ref), var35 (ref), getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), userSettingsSettingNameEnum (copy), var37 (ref), var39 (ref), accessResponseEnum (copy), var30 (ref), accountSettingsUpsellStringsFn (copy), var27 (ref), featureName (ref), var24 (ref), cryoModule (copy), actionStatusEnum (copy)
 		if p7 == nil or #p7 == 0 then
 			var33(true)
@@ -321,7 +321,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 					var27({
 						featureName = featureName,
 						localizationStrings = var49,
-						onCloseModal = function() --[[ line: 455 ]]
+						onCloseModal = function()
 							-- upvalues: var24 (copy), var39 (copy), accessResponseEnum (copy), cryoModule (copy), var30 (copy), action (ref), actionStatusEnum (copy)
 							var24.pop()
 							var39(accessResponseEnum.Denied, cryoModule.Dictionary.join(var30, { [action] = actionStatusEnum.Cancelled }))
@@ -355,7 +355,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 		var30, var39, featureName, var41, var24.pop, var27, var42, p2.usePrologue,
 		selfContainedUpsells, var37
 	})
-	local var44 = reactModule.useCallback(function(p8, p9) --[[ line: 476 ]]
+	local var44 = reactModule.useCallback(function(p8, p9)
 		-- upvalues: var33 (ref), logEventOnceIfEnabled (copy), getFFlagEnableAmpUpsellGqlModule (copy), var25 (ref), var38 (ref), getSuccessfulActions (copy), var30 (ref), extraParameters (ref), accessResponseEnum (copy), var43 (ref), var39 (ref)
 		var33(false)
 		logEventOnceIfEnabled("amp_feature_access_init")
@@ -383,18 +383,18 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 		end
 		var39(accessResponseEnum.Pending, var30)
 	end, { var25, extraParameters, var39 })
-	reactModule.useEffect(function() --[[ line: 509 ]]
+	reactModule.useEffect(function()
 		-- upvalues: sendModalActionEventModule (copy), var26 (ref), appScreensModule (copy), featureName (ref)
 		sendModalActionEventModule(var26, appScreensModule.AmpWizardContainer, featureName, "Shown")
 	end, { var26 })
-	reactModule.useEffect(function() --[[ line: 513 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var44 (ref), featureName (ref), nameSpace (ref)
 		var44(featureName, nameSpace)
 	end, { var30, featureName, var44, nameSpace })
-	reactModule.useEffect(function() --[[ line: 520 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getFFlagEnableAmpWizardInlineVPCForFAEModule (copy), var36 (ref), VPCRequestTypeEnum (copy), var41 (ref), cryoModule (copy), recourseData (ref), VPCApiProviderModule (copy), var29 (ref), actionTypeEnum (copy), openUpsells (ref), getFFlagEnableAmpVPCPrologueModule (copy), selfContainedUpsells (ref), var35 (ref), var37 (ref)
 		if getFFlagEnableAmpWizardInlineVPCForFAEModule() and var36 ~= nil then
-			local function buildFAEProps(p10) --[[ line: 527 ]]
+			local function buildFAEProps(p10)
 				-- upvalues: VPCRequestTypeEnum (copy), var41 (copy), cryoModule (copy), recourseData (copy)
 				return cryoModule.Dictionary.join(var41(p10, {
 					action = p10,
@@ -404,7 +404,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 				})
 			end
 			
-			VPCApiProviderModule.getLinkedParentEmails(var29):andThen(function(p11) --[[ line: 539 ]]
+			VPCApiProviderModule.getLinkedParentEmails(var29):andThen(function(p11)
 				-- upvalues: actionTypeEnum (copy), buildFAEProps (ref), openUpsells (copy), getFFlagEnableAmpVPCPrologueModule (copy), selfContainedUpsells (copy), var35 (copy), var37 (copy)
 				local var52 = if (if p11.parentEmails then #p11.parentEmails else 0) > 0 then actionTypeEnum.ParentConsent else actionTypeEnum.ParentLink
 				local var53 = buildFAEProps(var52)
@@ -422,7 +422,7 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 					end
 					var37(nil)
 				end
-			end):catch(function(_) --[[ line: 561 ]]
+			end):catch(function(_)
 				-- upvalues: buildFAEProps (ref), actionTypeEnum (copy), openUpsells (copy), var37 (copy)
 				openUpsells[actionTypeEnum.ParentLink](buildFAEProps(actionTypeEnum.ParentLink))
 				var37(nil)
@@ -440,18 +440,18 @@ return function(p2) --[[ line: 133 | named "WizardContainer" ]]
 		handleCompletion = var39,
 		actionsTaken = var30,
 		options = p2.prologueOptions,
-		onDone = function() --[[ line: 585 ]]
+		onDone = function()
 			-- upvalues: var35 (ref)
 			var35(nil)
 		end
 	}) elseif var32 then reactModule.createElement(errorScreenModule, {
 		featureName = featureName,
-		onRetry = function() --[[ line: 594 ]]
+		onRetry = function()
 			-- upvalues: var33 (ref), var44 (ref), featureName (ref)
 			var33(false)
 			var44(featureName)
 		end,
-		onCancel = function() --[[ line: 598 ]]
+		onCancel = function()
 			-- upvalues: var39 (ref), accessResponseEnum (copy), var30 (ref)
 			var39(accessResponseEnum.Denied, var30)
 		end

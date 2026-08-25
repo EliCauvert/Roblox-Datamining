@@ -9,10 +9,10 @@ local flaggedMutedError = require(parent_1.Loggers).flaggedMutedError
 local luaAppIsClickoutEnabledUniverse = game:DefineFastFlag("LuaAppIsClickoutEnabledUniverse", false)
 local getFFlagEnableUnifiedWebViews = require(parent_1.SharedFlags).GetFFlagEnableUnifiedWebViews
 
-return function() --[[ line: 19 | named "starterScript" ]]
+return function()
 	-- upvalues: luaAppIsClickoutEnabledUniverse (ref), replicatedStorageService (ref), flaggedMutedError (ref), httpService (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), clickoutTelemetryModule (ref), browserService (ref)
 	if luaAppIsClickoutEnabledUniverse then
-		replicatedStorageService:WaitForChild("AdClickoutEvent").Event:Connect(function(p0) --[[ line: 26 ]]
+		replicatedStorageService:WaitForChild("AdClickoutEvent").Event:Connect(function(p0)
 			-- upvalues: flaggedMutedError (copy), httpService (copy), getFFlagEnableUnifiedWebViews (copy), webViewService (copy), clickoutTelemetryModule (copy), browserService (copy)
 			if string.find(p0, "[<>]") then
 				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received invalid URL: {p0}`)
@@ -33,7 +33,7 @@ return function() --[[ line: 19 | named "starterScript" ]]
 			end
 			local var6 = httpService:GenerateGUID(false)
 			local var7 = nil
-			var7 = if getFFlagEnableUnifiedWebViews() then webViewService.OnWindowClosed:Connect(function() --[[ line: 59 ]]
+			var7 = if getFFlagEnableUnifiedWebViews() then webViewService.OnWindowClosed:Connect(function()
 				-- upvalues: clickoutTelemetryModule (copy), var6 (ref), p0 (ref), webViewService (copy), var7 (write)
 				clickoutTelemetryModule.logWebviewToggled(false, var6, p0)
 				webViewService:CloseWindow()
@@ -42,7 +42,7 @@ return function() --[[ line: 19 | named "starterScript" ]]
 					var7:Disconnect()
 					var7 = nil
 				end
-			end) else browserService.BrowserWindowClosed:Connect(function() --[[ line: 68 ]]
+			end) else browserService.BrowserWindowClosed:Connect(function()
 				-- upvalues: clickoutTelemetryModule (copy), var6 (ref), p0 (ref), var7 (write)
 				clickoutTelemetryModule.logWebviewToggled(false, var6, p0)
 				
@@ -56,7 +56,7 @@ return function() --[[ line: 19 | named "starterScript" ]]
 			if getFFlagEnableUnifiedWebViews() then
 				webViewService:OpenWindow(p0, nil, true, nil, nil, true)
 			else
-				local ok, status = pcall(function() --[[ line: 89 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p0 (ref)
 					return httpService:JSONEncode({
 						command = "open",

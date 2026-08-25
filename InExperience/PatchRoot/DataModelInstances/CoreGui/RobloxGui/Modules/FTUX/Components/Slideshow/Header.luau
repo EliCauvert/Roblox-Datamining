@@ -7,7 +7,7 @@ local parent = script.Parent.Parent.Parent
 local FTUXConstantsModule = require(parent.Resources.FTUXConstants)
 local _ = require(parent.Enums.PlatformEnum)
 
-return function(p0) --[[ line: 18 | named "Header" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), FTUXConstantsModule (ref), withLocalization (ref), reactModule (ref), UIBloxModule (ref)
 	local var4 = useStyle()
 	local theme = var4.Theme
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 18 | named "Header" ]]
 	local var5 = panelConstants.CONTENT_PADDING / panelConstants.SLIDESHOW_FRAME_WIDTH
 	local var6 = 1 - 2 * var5
 	
-	return withLocalization({ headerText = "CoreScripts.VRFTUX.Heading.Header" })(function(p1) --[[ line: 33 ]]
+	return withLocalization({ headerText = "CoreScripts.VRFTUX.Heading.Header" })(function(p1)
 		-- upvalues: reactModule (copy), color (ref), HEADER_HEIGHT_RATIO (ref), var6 (ref), var5 (ref), UIBloxModule (copy), font (ref), theme (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 0,

@@ -26,7 +26,7 @@ local t = {
 	showDivider = not require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 }
 
-return reactModule.memo(function(p0) --[[ line: 73 | named "StyledCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), cryoModule (ref), t (ref), reactModule (ref), presenceBubbleCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref)
 	local var7 = useTokens()
 	local var8 = cryoModule.Dictionary.join(t, p0)

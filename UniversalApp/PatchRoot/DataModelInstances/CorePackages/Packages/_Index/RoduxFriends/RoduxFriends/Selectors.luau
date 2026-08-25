@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	return {
 		isFriendsWith = require(script.isFriendsWith)(p0),
 		getSortedByRankRecommendations = require(script.getSortedByRankRecommendations)(p0),

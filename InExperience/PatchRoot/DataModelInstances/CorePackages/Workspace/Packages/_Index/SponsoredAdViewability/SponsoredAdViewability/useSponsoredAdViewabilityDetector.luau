@@ -6,7 +6,7 @@ local sponsoredAdViewabilityDetectorModule = require(script.Parent.SponsoredAdVi
 local sponsoredAdViewabilityTelemetryModule = require(script.Parent.sponsoredAdViewabilityTelemetry)
 local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 
-return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDetector" ]]
+return function(p0, p1, p2)
 	-- upvalues: useViewportBounds (ref), reactModule (ref), sponsoredAdViewabilityDetectorModule (ref), sponsoredAdViewabilityTelemetryModule (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref)
 	local var4 = useViewportBounds()
 	local var5 = reactModule.useRef(nil)
@@ -19,7 +19,7 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 			onUnload = sponsoredAdViewabilityTelemetryModule.logSponsoredAdUnload
 		})
 	end
-	reactModule.useEffect(function() --[[ line: 39 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var4 (ref)
 		local current = var5.current
 		
@@ -27,7 +27,7 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 			current:setViewportBounds(var4)
 		end
 	end, { var4 })
-	reactModule.useEffect(function() --[[ line: 49 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), p0 (ref)
 		local current = var5.current
 		
@@ -39,12 +39,12 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 		end
 		current:start()
 		
-		return function() --[[ line: 62 ]]
+		return function()
 			-- upvalues: current (ref)
 			current:reset()
 		end
 	end, { p0 })
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p2 (ref), var5 (ref)
 		if p2 == nil then return end
 		local current = var5.current
@@ -53,17 +53,17 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 			return
 		end
 		local list = {
-			p2.OnHide:Connect(function() --[[ line: 77 ]]
+			p2.OnHide:Connect(function()
 				-- upvalues: current (ref)
 				current:pause()
 			end),
-			p2.OnUnhide:Connect(function() --[[ line: 80 ]]
+			p2.OnUnhide:Connect(function()
 				-- upvalues: current (ref)
 				current:resume()
 			end)
 		}
 		
-		return function() --[[ line: 84 ]]
+		return function()
 			-- upvalues: list (ref)
 			for i, v in list do
 				v:Disconnect()
@@ -71,7 +71,7 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 		end
 	end, { p2 })
 	local var6 = reactModule.useRef(p1)
-	reactModule.useEffect(function() --[[ line: 95 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var6 (ref), p1 (ref)
 		local current = var5.current
 		local current_1 = var6.current

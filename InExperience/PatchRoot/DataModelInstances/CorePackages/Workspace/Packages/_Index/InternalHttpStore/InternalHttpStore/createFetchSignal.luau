@@ -13,7 +13,7 @@ local t = {
 	[statusCodes.GATEWAY_TIMEOUT] = true
 }
 
-local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
+local function createHttpFetchWithRetry(p0)
 	-- upvalues: signalsModule (ref), httpSignalsModule (ref), t (ref), statusCodes (ref)
 	local maxRetryCount = p0.MaxRetryCount or 4
 	local retryJitterMinMs = p0.RetryJitterMinMs or 0
@@ -23,7 +23,7 @@ local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
 	local var11, var12 = signalsModule.createSignal(0)
 	local var13, var14 = signalsModule.createSignal(false)
 	
-	local function _() --[[ line: 44 | named "cleanupCurrentFetch" ]]
+	local function _()
 		-- upvalues: var9 (write), var10 (write)
 		if var9 ~= nil then
 			task.cancel(var9)
@@ -35,7 +35,7 @@ local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
 		end
 	end
 	
-	local function dispose() --[[ line: 55 ]]
+	local function dispose()
 		-- upvalues: var14 (ref), var9 (write), var10 (write)
 		var14(true)
 		
@@ -49,7 +49,7 @@ local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
 		end
 	end
 	
-	local function scheduleRetry(p1) --[[ line: 60 ]]
+	local function scheduleRetry(p1)
 		-- upvalues: var9 (write), var11 (ref), retryJitterMaxMs (ref), retryJitterMinMs (ref), var12 (ref)
 		if var9 ~= nil then return end
 		local var18 = p1
@@ -57,16 +57,16 @@ local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
 		if var18 == nil or var18 > 16 then
 			var18 = math.max(math.pow(2, var11() + 1) + (retryJitterMinMs + math.random() * (retryJitterMaxMs - retryJitterMinMs)) / 1000, 0)
 		end
-		var9 = task.delay(var18, function() --[[ line: 74 ]]
+		var9 = task.delay(var18, function()
 			-- upvalues: var9 (copy), var12 (copy)
 			var9 = nil
-			var12(function(p2) --[[ line: 76 ]]
+			var12(function(p2)
 				return p2 + 1
 			end)
 		end)
 	end
 	
-	local var17 = signalsModule.createComputed(function(p3) --[[ line: 82 ]]
+	local var17 = signalsModule.createComputed(function(p3)
 		-- upvalues: var11 (ref), p0 (ref), var9 (write), var10 (write), httpSignalsModule (copy)
 		local var19 = var11(p3)
 		local var20 = p0
@@ -91,7 +91,7 @@ local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
 		return var22
 	end)
 	
-	return signalsModule.createComputed(function(p4) --[[ line: 100 ]]
+	return signalsModule.createComputed(function(p4)
 		-- upvalues: var13 (ref), var17 (ref), var11 (ref), maxRetryCount (ref), t (copy), scheduleRetry (ref), statusCodes (copy)
 		if var13(p4) then
 			return {
@@ -143,7 +143,7 @@ local function createHttpFetchWithRetry(p0) --[[ line: 33 ]]
 	end), dispose
 end
 
-return function(p5) --[[ line: 156 | named "createFetchHttpHandler" ]]
+return function(p5)
 	-- upvalues: mrRouterHeaders (ref), createHttpFetchWithRetry (ref), createParsedResponseModule (ref)
 	if p5.MaxRetryCount ~= nil and p5.MaxRetryCount < 0 then
 		error(`MaxRetryCount must be >= 0, was provided: {p5.MaxRetryCount}`)

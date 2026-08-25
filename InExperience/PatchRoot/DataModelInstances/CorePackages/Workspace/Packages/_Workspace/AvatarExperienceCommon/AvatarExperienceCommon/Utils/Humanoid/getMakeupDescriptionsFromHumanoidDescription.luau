@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 5 | named "getMakeupDescriptionsFromHumanoidDescription" ]]
+﻿return function(p0)
 	local t = {}
 	
 	for i, v in p0:GetChildren() do

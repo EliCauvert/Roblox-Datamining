@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0) --[[ line: 19 | named "WidgetLayout" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

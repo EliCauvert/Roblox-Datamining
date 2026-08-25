@@ -7,11 +7,11 @@ local _ = require(parent.SduiCoreSystem)
 local useGetOnlineFriends = require(parent.FriendsHydrationReact).useGetOnlineFriends
 local fFlagSduiSocialDataMigrateOffLegacyPresence = require(parent.SharedFlags).FFlagSduiSocialDataMigrateOffLegacyPresence
 
-local function useOnlineFriendsInGameByUniverseId() --[[ line: 24 ]]
+local function useOnlineFriendsInGameByUniverseId()
 	-- upvalues: useGetOnlineFriends (ref), reactModule (ref), presenceType (ref)
 	local var4 = useGetOnlineFriends()
 	
-	return reactModule.useMemo(function() --[[ line: 27 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var4 (ref), presenceType (copy)
 		local t = {}
 		
@@ -28,16 +28,16 @@ local function useOnlineFriendsInGameByUniverseId() --[[ line: 24 ]]
 	end, { var4 })
 end
 
-local function useFriendsInGame() --[[ line: 47 ]]
+local function useFriendsInGame()
 	-- upvalues: useSelector (ref), reactModule (ref)
-	local var7 = useSelector(function(p0) --[[ line: 48 ]]
+	local var7 = useSelector(function(p0)
 		return p0.LocalUserId
 	end)
-	local var8 = useSelector(function(p1) --[[ line: 52 ]]
+	local var8 = useSelector(function(p1)
 		return p1.InGameUsersByGame
 	end)
 	
-	return reactModule.useMemo(function() --[[ line: 56 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var8 (ref), var7 (ref)
 		local t = {}
 		
@@ -57,15 +57,15 @@ local function useFriendsInGame() --[[ line: 47 ]]
 	end, { var7, var8 })
 end
 
-return function() --[[ line: 74 | named "useSduiSocialData" ]]
+return function()
 	-- upvalues: reactModule (ref), signalsModule (ref), fFlagSduiSocialDataMigrateOffLegacyPresence (ref), useOnlineFriendsInGameByUniverseId (ref), useFriendsInGame (ref)
-	local var11, var12 = reactModule.useMemo(function() --[[ line: 75 ]]
+	local var11, var12 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy)
 		return signalsModule.createSignal({})
 	end, {})
 	var12(if fFlagSduiSocialDataMigrateOffLegacyPresence then useOnlineFriendsInGameByUniverseId() else useFriendsInGame())
 	
-	return reactModule.useMemo(function() --[[ line: 85 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var11 (ref)
 		return { getInGameFriendsByGame = var11 }
 	end, { var11 })

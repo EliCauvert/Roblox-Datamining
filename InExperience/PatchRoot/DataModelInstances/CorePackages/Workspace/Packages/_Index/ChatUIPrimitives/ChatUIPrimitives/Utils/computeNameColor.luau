@@ -8,7 +8,7 @@
 	BrickColor.new("Brick yellow").Color
 }
 
-local function HashNameToColor(p0) --[[ line: 13 ]]
+local function HashNameToColor(p0)
 	local var2 = 0
 	
 	for i = 1, #p0 do
@@ -26,7 +26,7 @@ local function HashNameToColor(p0) --[[ line: 13 ]]
 	return var2
 end
 
-return function(p1) --[[ line: 31 | named "computeNameColor" ]]
+return function(p1)
 	-- upvalues: list (ref), HashNameToColor (ref)
 	return list[(HashNameToColor(p1) + 0) % #list + 1]
 end

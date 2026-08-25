@@ -12,7 +12,7 @@ local loggerModule = require(script.Parent.Logger)
 local chatEntryPointNames = require(parent.SocialCommon).Enums.ChatEntryPointNames
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p0) --[[ line: 27 ]]
+return function(p0)
 	-- upvalues: chatEntryPointNames (ref), loggerModule (ref), getFFlagIsSquadEnabled (ref), useSelector (ref), rbxAnalyticsService (ref), reactModule (ref), analyticsFactory (ref), eventStreamActionListModule (ref), diagActionListModule (ref), defaultAnalyticsService (ref), roactChatAnalyticsContextModule (ref)
 	local entryPoint = p0.entryPoint
 	
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 27 ]]
 		loggerModule:warning("entryPoint=" .. tostring(entryPoint) .. " is not a reigstered value.")
 		entryPoint = chatEntryPointNames.Unknown
 	end
-	local var7 = if getFFlagIsSquadEnabled() then useSelector(function(p1) --[[ line: 36 ]]
+	local var7 = if getFFlagIsSquadEnabled() then useSelector(function(p1)
 		local currentSquad = p1.Squad and (p1.Squad.Squad and p1.Squad.Squad.currentSquad)
 		
 		return if currentSquad and currentSquad.squadId then currentSquad.squadId else nil
@@ -28,7 +28,7 @@ return function(p0) --[[ line: 27 ]]
 	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
 	
 	return reactModule.createElement(roactChatAnalyticsContextModule.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 44 ]]
+		value = reactModule.useMemo(function()
 			-- upvalues: analyticsFactory (copy), eventStreamActionListModule (copy), diagActionListModule (copy), defaultAnalyticsService (copy), getFFlagIsSquadEnabled (copy), var7 (ref), entryPoint (write), playSessionId (ref)
 			return analyticsFactory.setUpAnalyticsFactory({
 				eventLists = {

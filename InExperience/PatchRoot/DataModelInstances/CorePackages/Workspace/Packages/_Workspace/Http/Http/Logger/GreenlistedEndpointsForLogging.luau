@@ -12,12 +12,12 @@
 	["marketplace-widgets/v1/pills"] = "avatar_experience_catalog_categories"
 }
 local t_1 = {
-	isSuccessStatusCode = function(_, p0) --[[ line: 25 ]]
+	isSuccessStatusCode = function(_, p0)
 		return p0 >= 200 and p0 < 300
 	end
 }
 
-function t_1.getMatchingName(p1, p2) --[[ line: 32 ]]
+function t_1.getMatchingName(p1, p2)
 	-- upvalues: t_1 (ref), t (ref)
 	local text = nil
 	local var3 = tostring(p2)
@@ -33,7 +33,7 @@ function t_1.getMatchingName(p1, p2) --[[ line: 32 ]]
 	return text
 end
 
-function t_1.sendStatusCodeCounter(p3, p4, p5) --[[ line: 49 ]]
+function t_1.sendStatusCodeCounter(p3, p4, p5)
 	-- upvalues: t_1 (ref)
 	if not p5 then
 		p5 = game:GetService("RbxAnalyticsService")

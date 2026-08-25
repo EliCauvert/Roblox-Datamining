@@ -7,7 +7,7 @@ local loggerModule = require(script.Parent.Logger)
 local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
 local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
 local t = {
-	new = function(p0) --[[ line: 18 ]]
+	new = function(p0)
 		return { universeId = tostring(p0) }
 	end
 }
@@ -36,7 +36,7 @@ local t_1 = {
 	}
 }
 
-function t_1.new(p1) --[[ line: 51 ]]
+function t_1.new(p1)
 	-- upvalues: t_1 (ref)
 	t_1.__index = t_1
 	p1 = p1 or {}
@@ -45,7 +45,7 @@ function t_1.new(p1) --[[ line: 51 ]]
 	return p1
 end
 
-function t_1.fromWeb(p2, p3, p4) --[[ line: 61 ]]
+function t_1.fromWeb(p2, p3, p4)
 	-- upvalues: t_1 (ref), dateTime (ref)
 	if t_1.DoRequiredFieldsPresent(p2) then
 		local var7 = t_1.new()
@@ -64,7 +64,7 @@ function t_1.fromWeb(p2, p3, p4) --[[ line: 61 ]]
 	return nil
 end
 
-function t_1.fromSentWeb(p5, p6) --[[ line: 81 ]]
+function t_1.fromSentWeb(p5, p6)
 	-- upvalues: t_1 (ref), playersService (ref), dateTime (ref)
 	if t_1.DoRequiredFieldsPresentForSent(p5) then
 		local var8 = t_1.new()
@@ -83,12 +83,12 @@ function t_1.fromSentWeb(p5, p6) --[[ line: 81 ]]
 	return nil
 end
 
-function t_1.newSendingId() --[[ line: 102 ]]
+function t_1.newSendingId()
 	-- upvalues: generateStringId (ref)
 	return "sending-message-" .. generateStringId()
 end
 
-function t_1.newSending(p7) --[[ line: 106 ]]
+function t_1.newSending(p7)
 	-- upvalues: t_1 (ref), playersService (ref)
 	assert(p7, "props argument is missing")
 	assert(p7.id, "props.id argument is missing")
@@ -106,15 +106,15 @@ function t_1.newSending(p7) --[[ line: 106 ]]
 	return var9
 end
 
-function t_1.DoRequiredFieldsPresent(p8) --[[ line: 126 ]]
+function t_1.DoRequiredFieldsPresent(p8)
 	return p8 and (p8.id and (p8.messageType and (p8.senderTargetId and p8.sent)))
 end
 
-function t_1.DoRequiredFieldsPresentForSent(p9) --[[ line: 129 ]]
+function t_1.DoRequiredFieldsPresentForSent(p9)
 	return p9 and (p9.messageId and (p9.messageType and p9.sent))
 end
 
-function t_1.parseContentWeb(p10, p11) --[[ line: 133 ]]
+function t_1.parseContentWeb(p10, p11)
 	-- upvalues: t_1 (ref), t (ref)
 	p10:parseContent(p11)
 	
@@ -123,7 +123,7 @@ function t_1.parseContentWeb(p10, p11) --[[ line: 133 ]]
 	end
 end
 
-function t_1.parseContentSentWeb(p12, p13) --[[ line: 142 ]]
+function t_1.parseContentSentWeb(p12, p13)
 	-- upvalues: t_1 (ref), t (ref)
 	p12:parseContent(p13)
 	
@@ -132,7 +132,7 @@ function t_1.parseContentSentWeb(p12, p13) --[[ line: 142 ]]
 	end
 end
 
-function t_1.parseContent(p14, p15) --[[ line: 151 ]]
+function t_1.parseContent(p14, p15)
 	-- upvalues: t_1 (ref)
 	p14.messageType = p15.messageType
 	
@@ -144,7 +144,7 @@ function t_1.parseContent(p14, p15) --[[ line: 151 ]]
 	p14.content = nil
 end
 
-function t_1.fromChannelsApi(p16, p17, p18, _) --[[ line: 164 ]]
+function t_1.fromChannelsApi(p16, p17, p18, _)
 	-- upvalues: t_1 (ref), dateTime (ref), getFFlagEnableSocialCards (ref), fFlagAppChatEnableAutotranslationModule (ref)
 	if not t_1.DoRequiredFieldsPresentFromChannelsApi(p16) then
 		return nil
@@ -179,7 +179,7 @@ function t_1.fromChannelsApi(p16, p17, p18, _) --[[ line: 164 ]]
 	return var10
 end
 
-function t_1.serializeForUserMessage(p19, p20) --[[ line: 201 ]]
+function t_1.serializeForUserMessage(p19, p20)
 	-- upvalues: t_1 (ref), loggerModule (ref)
 	p19.senderTargetId = tostring(p20.sender_user_id)
 	p19.senderType = t_1.SenderTypes.User
@@ -195,24 +195,24 @@ function t_1.serializeForUserMessage(p19, p20) --[[ line: 201 ]]
 	p19.messageType = t_1.MessageTypes.PlainText
 end
 
-function t_1.serializeForSystemMessage(p21, _) --[[ line: 219 ]]
+function t_1.serializeForSystemMessage(p21, _)
 	-- upvalues: t_1 (ref)
 	p21.senderType = t_1.SenderTypes.System
 	p21.messageType = t_1.MessageTypes.System
 end
 
-function t_1.DoRequiredFieldsPresentFromChannelsApi(p22) --[[ line: 225 ]]
+function t_1.DoRequiredFieldsPresentFromChannelsApi(p22)
 	-- upvalues: t_1 (ref)
 	return if p22 then if p22.type == t_1.SenderTypes.User then p22.id and (p22.sender_user_id and p22.created_at) else p22.type == t_1.SenderTypes.System and (p22.id and p22.created_at) else false
 end
 
-function t_1.parseContentFromChannelsApi(p23, p24) --[[ line: 239 ]]
+function t_1.parseContentFromChannelsApi(p23, p24)
 	-- upvalues: t_1 (ref)
 	p23.messageType = t_1.MessageTypes.PlainText
 	p23.content = p24.content
 end
 
-function t_1.fromSentChannelsApi(p25, p26, p27) --[[ line: 245 ]]
+function t_1.fromSentChannelsApi(p25, p26, p27)
 	-- upvalues: t_1 (ref), dateTime (ref), loggerModule (ref)
 	if not t_1.DoRequiredFieldsPresentForSentFromChannelsApi(p25) then
 		return nil
@@ -245,7 +245,7 @@ function t_1.fromSentChannelsApi(p25, p26, p27) --[[ line: 245 ]]
 	return var11
 end
 
-function t_1.DoRequiredFieldsPresentForSentFromChannelsApi(p28) --[[ line: 283 ]]
+function t_1.DoRequiredFieldsPresentForSentFromChannelsApi(p28)
 	return p28 and (p28.messages and (#p28.messages > 0 and (p28.messages[1].id and p28.messages[1].created_at)))
 end
 

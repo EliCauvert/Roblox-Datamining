@@ -129,11 +129,11 @@ local topBarAppPolicyModule = require(script.Parent.Parent.TopBarAppPolicy)
 local var59 = enabled()
 local var60 = if isInExperienceUIVREnabled and enabled() then require(script.Parent.VRBottomUnibar) else require(robloxGui.Modules.VR.VRBottomBar.VRBottomBar)
 
-local function _(p0) --[[ line: 182 | named "selectMenuOpen" ]]
+local function _(p0)
 	return p0.displayOptions.menuOpen or p0.displayOptions.inspectMenuOpen
 end
 
-local _ = function() --[[ line: 186 | named "canShowAssistantBuild" ]]
+local _ = function()
 	-- upvalues: buildExperienceModule (ref), VRService (ref)
 	return buildExperienceModule.BuildModeLaunch:hasBuildMode() and not VRService.VREnabled
 end
@@ -148,7 +148,7 @@ topBarApp.validateProps = tModule.strictInterface({
 	showGameAgeRating = tModule.optional(tModule.boolean)
 })
 
-function topBarApp.init(p1) --[[ line: 204 ]]
+function topBarApp.init(p1)
 	-- upvalues: roactModule (ref), signalsModule (ref), displayModule (ref), fFlagAddUILessMode (ref), stores (ref), fIntAddUILessModeVariant (ref), tweenService (ref), localStoreModule (write), constantsModule_1 (write), UILessTooltipDuration (ref), settingsHubModule (ref), constantsModule (ref), contextActionService (ref), fFlagTopBarSignalizeMenuOpen (ref), settingsShowSignal (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref), enabled (ref), chrome (ref), fFlagEnableConsoleExpControls (ref), gamepadConnectorModule (write), reactModule (ref), fFlagEnableInExperienceShop (ref), inExperienceShopModule (ref), fFlagCenterInExperienceShopWindow (ref), textChatService (ref)
 	local var62, var63 = roactModule.createBinding(UDim2.new())
 	p1.unibarRightSidePosition = var62
@@ -156,7 +156,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 	local var64, var65 = roactModule.createBinding(false)
 	p1.closeButtonState = var64
 	p1.setCloseButtonState = var65
-	p1.disposeUiScaleEffect = signalsModule.createEffect(function(p2) --[[ line: 207 ]]
+	p1.disposeUiScaleEffect = signalsModule.createEffect(function(p2)
 		-- upvalues: displayModule (copy), p1 (ref)
 		p1:setState({
 			UiScale = displayModule.GetDisplayStore(p2).getUIScale(p2)
@@ -174,16 +174,16 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 			p1.uiLessTooltipTransparency = var68
 			p1.setUILessTooltipTransparency = var69
 			
-			function p1.fadeOutUILessTooltip() --[[ line: 221 ]]
+			function p1.fadeOutUILessTooltip()
 				-- upvalues: p1 (ref), tweenService (copy)
 				local numberValue = Instance.new("NumberValue")
 				numberValue.Value = 0
-				numberValue:GetPropertyChangedSignal("Value"):Connect(function() --[[ line: 224 ]]
+				numberValue:GetPropertyChangedSignal("Value"):Connect(function()
 					-- upvalues: p1 (copy), numberValue (ref)
 					p1.setUILessTooltipTransparency(numberValue.Value)
 				end)
 				p1.uiLessTooltipTween = tweenService:Create(numberValue, TweenInfo.new(0.5), { Value = 1 })
-				p1.uiLessTooltipTween.Completed:Connect(function() --[[ line: 231 ]]
+				p1.uiLessTooltipTween.Completed:Connect(function()
 					-- upvalues: p1 (copy)
 					p1.setUILessTooltipVisible(false)
 					p1.uiLessTooltipTween = nil
@@ -191,7 +191,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 				p1.uiLessTooltipTween:Play()
 			end
 			
-			function p1.cleanupUILessTooltip() --[[ line: 239 ]]
+			function p1.cleanupUILessTooltip()
 				-- upvalues: p1 (ref)
 				if p1.uiLessTooltipTween then
 					p1.uiLessTooltipTween:Cancel()
@@ -216,19 +216,19 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 				end
 				if var70 then
 					p1.setUILessTooltipVisible(true)
-					p1.uiLessTooltipTimer = task.delay(UILessTooltipDuration, function() --[[ line: 268 ]]
+					p1.uiLessTooltipTimer = task.delay(UILessTooltipDuration, function()
 						-- upvalues: p1 (ref)
 						p1.fadeOutUILessTooltip()
 						p1.uiLessTooltipTimer = nil
 					end)
 				end
 			end
-			contextActionService:BindCoreAction("ToggleUILess", function(_, p3) --[[ line: 275 ]]
+			contextActionService:BindCoreAction("ToggleUILess", function(_, p3)
 				-- upvalues: p1 (ref), fIntAddUILessModeVariant (copy), settingsHubModule (copy), constantsModule (copy)
 				if p3 ~= Enum.UserInputState.Begin then return end
 				if p1.uiLessStore.getUILessModeEnabled(false) then
 					if fIntAddUILessModeVariant == 1 then
-						p1.uiLessStore.setUIVisible(function(p4) --[[ line: 282 ]]
+						p1.uiLessStore.setUIVisible(function(p4)
 							-- upvalues: settingsHubModule (copy), constantsModule (copy)
 							if p4 == settingsHubModule:GetVisibility() then
 								settingsHubModule:PopMenu(false, true, constantsModule.AnalyticsMenuOpenTypes.Keyboard)
@@ -240,7 +240,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 						
 						return
 					elseif fIntAddUILessModeVariant ~= 2 then return end
-					p1.uiLessStore.setUIVisible(function(p5) --[[ line: 293 ]]
+					p1.uiLessStore.setUIVisible(function(p5)
 						return not p5
 					end)
 					
@@ -264,11 +264,11 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 		local var74, var75 = roactModule.createBinding(false)
 		p1.inspectMenuOpen = var74
 		p1.setInspectMenuOpen = var75
-		p1.inspectMenuDisposeEffect = signalsModule.createEffect(function(p6) --[[ line: 315 ]]
+		p1.inspectMenuDisposeEffect = signalsModule.createEffect(function(p6)
 			-- upvalues: stores (copy), p1 (ref)
 			p1.setInspectMenuOpen(stores.GetInspectAndBuyStore(p6).getInspectAndBuyOpen(p6))
 		end)
-		settingsShowSignal:connect(function(p7) --[[ line: 320 ]]
+		settingsShowSignal:connect(function(p7)
 			-- upvalues: p1 (ref)
 			p1.setTiltMenuOpen(p7)
 		end)
@@ -276,7 +276,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 	if fFlagTopBarSignalizeKeepOutAreas then
 		p1.keepOutAreasStore = coreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
 	end
-	function p1.onCloseBtnStateChange(_, p8) --[[ line: 329 ]]
+	function p1.onCloseBtnStateChange(_, p8)
 		-- upvalues: p1 (ref)
 		p1.setCloseButtonState(p8)
 	end
@@ -293,7 +293,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 			p1.menuIconRef = roactModule.createRef()
 		end
 		if fFlagEnableInExperienceShop then
-			p1.shopGlobalIconDisposeEffect = signalsModule.createEffect(function(p9) --[[ line: 348 ]]
+			p1.shopGlobalIconDisposeEffect = signalsModule.createEffect(function(p9)
 				-- upvalues: inExperienceShopModule (copy), p1 (ref)
 				local getShopGlobalIconStore = inExperienceShopModule.GetShopGlobalIconStore
 				
@@ -308,7 +308,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 				end
 			end)
 			
-			function p1.onShopGlobalIconActivated() --[[ line: 359 ]]
+			function p1.onShopGlobalIconActivated()
 				-- upvalues: fFlagCenterInExperienceShopWindow (copy), chrome (copy), serviceModule (ref), constantsModule_1 (copy)
 				if fFlagCenterInExperienceShopWindow then
 					require(chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow()
@@ -319,7 +319,7 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 			end
 			
 			p1.shopGlobalIconCleanup = inExperienceShopModule.initShopGlobalIcon and inExperienceShopModule.initShopGlobalIcon()
-			p1.shopIsActiveMappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(serviceModule:onIntegrationStatusChanged(), function() --[[ line: 370 ]]
+			p1.shopIsActiveMappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
 				-- upvalues: serviceModule (ref), constantsModule_1 (copy)
 				return serviceModule:isWindowOpen(constantsModule_1.IN_EXPERIENCE_SHOP_ID)
 			end)
@@ -328,24 +328,24 @@ function topBarApp.init(p1) --[[ line: 204 ]]
 	p1:setState({ chatVersion = textChatService.ChatVersion })
 	
 	if not game:IsLoaded() then
-		game.Loaded:Connect(function() --[[ line: 384 ]]
+		game.Loaded:Connect(function()
 			-- upvalues: p1 (ref), textChatService (copy)
 			p1:setState({ chatVersion = textChatService.ChatVersion })
 		end)
 	end
 end
 
-function topBarApp.didMount(p10) --[[ line: 392 ]]
+function topBarApp.didMount(p10)
 	-- upvalues: enabled (ref), chrome (ref), fFlagEnableInExperienceShop (ref), constantsModule_1 (write), fFlagEnableConsoleExpControls (ref), isSpatial (ref), VRService (ref)
 	if enabled() then
 		local serviceModule = require(chrome.Service)
-		p10.orderAlignmentConnection = serviceModule:orderAlignment():connect(function() --[[ line: 395 ]]
+		p10.orderAlignmentConnection = serviceModule:orderAlignment():connect(function()
 			-- upvalues: p10 (ref), serviceModule (ref)
 			p10:setState({ unibarAlignment = serviceModule:orderAlignment():get() })
 		end)
 		
 		if fFlagEnableInExperienceShop then
-			p10.shopIsActiveConnection = serviceModule:onIntegrationStatusChanged():connect(function() --[[ line: 402 ]]
+			p10.shopIsActiveConnection = serviceModule:onIntegrationStatusChanged():connect(function()
 				-- upvalues: p10 (ref), serviceModule (ref), constantsModule_1 (copy)
 				p10:setState({
 					shopGlobalIconIsActive = serviceModule:isWindowOpen(constantsModule_1.IN_EXPERIENCE_SHOP_ID)
@@ -356,7 +356,7 @@ function topBarApp.didMount(p10) --[[ line: 392 ]]
 			if not isSpatial() then
 				p10.GamepadConnector:connectToTopbar()
 			end
-			p10.vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ line: 413 ]]
+			p10.vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 				-- upvalues: isSpatial (copy), p10 (ref)
 				if isSpatial() then
 					p10.GamepadConnector:disconnectFromTopbar()
@@ -369,7 +369,7 @@ function topBarApp.didMount(p10) --[[ line: 392 ]]
 	end
 end
 
-function topBarApp.willUnmount(p11) --[[ line: 424 ]]
+function topBarApp.willUnmount(p11)
 	-- upvalues: enabled (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableInExperienceShop (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), contextActionService (ref), fFlagTopBarSignalizeMenuOpen (ref), fFlagTopBarSignalizeKeepOutAreas (ref)
 	if enabled() then
 		if p11.orderAlignmentConnection then
@@ -422,9 +422,9 @@ function topBarApp.willUnmount(p11) --[[ line: 424 ]]
 	end
 end
 
-function topBarApp.render(p12) --[[ line: 486 ]]
+function topBarApp.render(p12)
 	-- upvalues: withFoundationOrUIBloxStyle (ref)
-	return withFoundationOrUIBloxStyle(function(p13) --[[ line: 487 ]]
+	return withFoundationOrUIBloxStyle(function(p13)
 		return {
 			Theme = {
 				Overlay = {
@@ -463,19 +463,19 @@ function topBarApp.render(p12) --[[ line: 486 ]]
 				Semantic = { Radius = { Small = p13.Radius.Small } }
 			}
 		}
-	end, function(p14) --[[ line: 538 ]]
+	end, function(p14)
 		-- upvalues: p12 (ref)
 		return p12:renderWithStyle(p14)
 	end)
 end
 
-function topBarApp.renderUnibarFrame(p15, p16) --[[ line: 543 ]]
+function topBarApp.renderUnibarFrame(p15, p16)
 	-- upvalues: isInExperienceUIVREnabled (ref), isSpatial (ref), fFlagEnableConsoleExpControls (ref), reactModule (ref), var47 (ref), unibarModule (write), fFlagTopBarSignalizeKeepOutAreas (ref), roactModule (ref)
 	return if isInExperienceUIVREnabled and isSpatial() then nil elseif fFlagEnableConsoleExpControls then reactModule.createElement(var47.Provider, { value = { menuIconRef = p15.menuIconRef } }, {
 		reactModule.createElement(unibarModule, {
 			layoutOrder = 1,
 			onAreaChanged = if fFlagTopBarSignalizeKeepOutAreas then p15.keepOutAreasStore.setKeepOutArea else p15.props.setKeepOutArea,
-			onMinWidthChanged = function(a) --[[ line: 557 ]]
+			onMinWidthChanged = function(a)
 				-- upvalues: p15 (ref)
 				p15.setUnibarRightSidePosition(UDim2.new(0, a, 0, 0))
 			end,
@@ -484,14 +484,14 @@ function topBarApp.renderUnibarFrame(p15, p16) --[[ line: 543 ]]
 	}) else roactModule.createElement(unibarModule, {
 		layoutOrder = 1,
 		onAreaChanged = if fFlagTopBarSignalizeKeepOutAreas then p15.keepOutAreasStore.setKeepOutArea else p15.props.setKeepOutArea,
-		onMinWidthChanged = function(a) --[[ line: 569 ]]
+		onMinWidthChanged = function(a)
 			-- upvalues: p15 (ref)
 			p15.setUnibarRightSidePosition(UDim2.new(0, a, 0, 0))
 		end
 	})
 end
 
-function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
+function topBarApp.renderWithStyle(p17, p18)
 	-- upvalues: enabled (ref), constantsModule_2 (ref), fFlagAppNavMyStatsTab (ref), buildExperienceModule (ref), VRService (ref), fFlagEnableInExperienceShop (ref), constantsModule_1 (write), fFlagTopBarSignalizeMenuOpen (ref), tenFootInterfaceModule (ref), roactModule (ref), voiceStateContextModule (ref), var60 (ref), default (ref), isInExperienceUIVREnabled (ref), menuIconModule (ref), fFlagEnableConsoleExpControls (ref), fFlagTopBarSignalizeKeepOutAreas (ref), selectionCursorProvider (ref), fFlagEnablePlaytestModeUnibar (ref), playtestModeThemeProviderModule (ref), isSpatial (ref), fFlagTopBarSignalizeScreenSize (ref), connectionModule (ref), playtestModeTooltipModule (ref), fFlagEnableTeamTestLua (ref), unpublishedPlaytestModeTooltip (ref), fFlagEnableUISelector (ref), reactModule (ref), coreGuiCommonModule (ref), gamepadMenuModule (write), fFlagAddMenuNavigationToggleDialog (write), menuNavigationToggleDialogModule (write), fFlagGamepadNavigationDialogABTestModule (ref), gamepadNavigationDialogModule (ref), useNewHeadsetDisconnectDialog (ref), headsetDisconnectDialog (ref), headsetMenuModule (ref), keepOutAreasHandlerModule (write), hurtOverlayModule (ref), fFlagEnableSideSheet (ref), isNewTiltIconEnabledModule (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), withLocalization (ref), unibarModule (write), isNewInGameMenuEnabledModule (ref), interactable (ref), robloxGui (ref), controlState (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), var16 (ref), imageSetButton (ref), songbirdModule (ref), var56 (write), getFFlagEnableCrossExpVoice (ref), partyMicBinderModule (ref), analyticsModule (write), fFlagAddTraversalBackButton (ref), view (ref), traversalBackButtonModule (ref), var59 (ref), healthBarModule (ref), buildPillMenuPortalHost (ref), shopGlobalIcon (ref), fFlagExperienceShopNewIconography (ref), commonIconModule (write), chatIconModule (ref), moreMenuModule (ref)
 	local var80 = enabled()
 	local var81 = if p17.state.unibarAlignment ~= nil then p17.state.unibarAlignment else Enum.HorizontalAlignment.Right
@@ -511,7 +511,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 		var82 = constantsModule_2.ScreenSideOffsetTenFoot
 		var83 = constantsModule_2.TopBarHeightTenFoot
 	end
-	local var93 = if fFlagTopBarSignalizeMenuOpen then roactModule.joinBindings({ p17.tiltMenuOpen, p17.inspectMenuOpen }):map(function(p19) --[[ line: 608 ]]
+	local var93 = if fFlagTopBarSignalizeMenuOpen then roactModule.joinBindings({ p17.tiltMenuOpen, p17.inspectMenuOpen }):map(function(p19)
 		return not (p19[0] or p19[1])
 	end) else not (p17.props.menuOpen or p17.props.inspectMenuOpen)
 	local uDim2 = UDim2.new(0, 0, 0, var84)
@@ -521,7 +521,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 	local uDim2_3 = UDim2.new(1, -var82, 0, var84)
 	local uDim2_4 = UDim2.new(0, 0, 0.5, 0)
 	local var100 = roactModule.createElement(voiceStateContextModule.Provider, {}, {
-		VRBottomBar = voiceStateContextModule.withVoiceState(function(p20) --[[ line: 621 ]]
+		VRBottomBar = voiceStateContextModule.withVoiceState(function(p20)
 			-- upvalues: roactModule (copy), var60 (copy), default (copy), isInExperienceUIVREnabled (copy), p17 (ref)
 			return roactModule.createElement(var60, {
 				voiceChatServiceManager = default,
@@ -554,7 +554,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		AutoLocalize = false,
 		DisplayOrder = 6,
-		[roactModule.Change.AbsoluteSize] = if fFlagTopBarSignalizeScreenSize then nil else function(p21) --[[ line: 665 ]]
+		[roactModule.Change.AbsoluteSize] = if fFlagTopBarSignalizeScreenSize then nil else function(p21)
 			-- upvalues: p17 (ref)
 			p17.props.setScreenSize(p21.AbsoluteSize)
 		end
@@ -588,7 +588,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 		UILessTooltip = if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 then withLocalization({
 			uiLessTooltipTitle = constantsModule_2.LocalizedKeys.UILessTooltipTitle,
 			uiLessTooltipDescription = constantsModule_2.LocalizedKeys.UILessTooltipDescription
-		})(function(p22) --[[ line: 730 ]]
+		})(function(p22)
 			-- upvalues: roactModule (copy), p18 (ref), var82 (write), var84 (ref), p17 (ref)
 			return roactModule.createElement("Frame", {
 				BackgroundColor3 = p18.Tokens.Color.Extended.White.White_100.Color3,
@@ -659,7 +659,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 					AnchorPoint = Vector2.new(0, 0.5),
 					Size = UDim2.new(0, var87, 0, var87),
 					BackgroundColor3 = p18.Theme.Overlay.Color,
-					[roactModule.Event.Activated] = function() --[[ line: 794 ]]
+					[roactModule.Event.Activated] = function()
 						-- upvalues: robloxGui (copy)
 						require(robloxGui.Modules.Settings.SettingsHub):ToggleVisibility()
 					end
@@ -685,11 +685,11 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 					}),
 					StateOverlayRound = not var80 and roactModule.createElement("Frame", {
 						ZIndex = 2,
-						BackgroundTransparency = p17.closeButtonState:map(function(p23) --[[ line: 824 ]]
+						BackgroundTransparency = p17.closeButtonState:map(function(p23)
 							-- upvalues: controlState (copy), p18 (ref)
 							return if p23 == controlState.Pressed then p18.Theme.BackgroundOnPress.Transparency elseif p23 == controlState.Hover then p18.Theme.BackgroundOnHover.Transparency else 1
 						end),
-						BackgroundColor3 = p17.closeButtonState:map(function(p24) --[[ line: 833 ]]
+						BackgroundColor3 = p17.closeButtonState:map(function(p24)
 							-- upvalues: controlState (copy), p18 (ref)
 							return if p24 == controlState.Pressed then p18.Theme.BackgroundOnPress.Color elseif p24 == controlState.Hover then p18.Theme.BackgroundOnHover.Color else Color3.new(1, 1, 1)
 						end),
@@ -707,7 +707,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 					AnchorPoint = Vector2.new(0, 0.5),
 					Size = UDim2.new(0, var87, 0, var87),
 					Image = var16,
-					onActivated = function() --[[ line: 858 ]]
+					onActivated = function()
 						-- upvalues: robloxGui (copy)
 						require(robloxGui.Modules.Settings.SettingsHub):ToggleVisibility()
 					end
@@ -718,7 +718,7 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 					AnchorPoint = Vector2.new(0, 0.5),
 					Size = UDim2.new(0, var87, 0, var87),
 					Image = var16,
-					[roactModule.Event.Activated] = function() --[[ line: 870 ]]
+					[roactModule.Event.Activated] = function()
 						-- upvalues: robloxGui (copy)
 						require(robloxGui.Modules.Settings.SettingsHub):ToggleVisibility()
 					end
@@ -895,30 +895,30 @@ function topBarApp.renderWithStyle(p17, p18) --[[ line: 576 ]]
 	return createElement_1(var102, t, t_1)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(if fFlagTopBarSignalizeMenuOpen then nil else function(p27) --[[ line: 1061 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(if fFlagTopBarSignalizeMenuOpen then nil else function(p27)
 	-- upvalues: fFlagTopBarSignalizeMenuOpen (ref)
 	return if fFlagTopBarSignalizeMenuOpen then nil else {
 		menuOpen = p27.displayOptions.menuOpen,
 		inspectMenuOpen = p27.displayOptions.inspectMenuOpen
 	}
-end, function(p28) --[[ line: 1086 | named "mapDispatchToProps" ]]
+end, function(p28)
 	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), setScreenSizeModule (ref), fFlagTopBarSignalizeKeepOutAreas (ref), setKeepOutAreaModule (ref), removeKeepOutAreaModule (ref)
 	return {
-		setScreenSize = if fFlagTopBarSignalizeScreenSize then nil else function(p29) --[[ line: 1090 ]]
+		setScreenSize = if fFlagTopBarSignalizeScreenSize then nil else function(p29)
 			-- upvalues: p28 (ref), setScreenSizeModule (copy)
 			return p28(setScreenSizeModule(p29))
 		end,
-		setKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else function(p30, p31, p32) --[[ line: 1095 ]]
+		setKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else function(p30, p31, p32)
 			-- upvalues: p28 (ref), setKeepOutAreaModule (copy)
 			return p28(setKeepOutAreaModule(p30, p31, p32))
 		end,
-		removeKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else function(p33) --[[ line: 1100 ]]
+		removeKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else function(p33)
 			-- upvalues: p28 (ref), removeKeepOutAreaModule (copy)
 			return p28(removeKeepOutAreaModule(p33))
 		end
 	}
-end)(if fFlagShowGameAgeRating then universalAppPolicyModule.UniversalAppPolicy.connect(function(p26, _) --[[ line: 1075 ]]
+end)(if fFlagShowGameAgeRating then universalAppPolicyModule.UniversalAppPolicy.connect(function(p26, _)
 	return { showGameAgeRating = p26.getShowGameAgeRating() }
-end)(topBarApp) else topBarAppPolicyModule.connect(function(p25, _) --[[ line: 1080 ]]
+end)(topBarApp) else topBarAppPolicyModule.connect(function(p25, _)
 	return { showGameAgeRating = p25.showBadgeOver12() }
 end)(topBarApp))

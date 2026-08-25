@@ -13,7 +13,7 @@ local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.Get
 local fixBundleThumbnailOnDetailPage = game:DefineFastFlag("FixBundleThumbnailOnDetailPage", false)
 local detailsThumbnail = roactModule.PureComponent:extend("DetailsThumbnail")
 
-local function _(p0) --[[ line: 24 | named "isPartOfBundleAndOffsale" ]]
+local function _(p0)
 	local var12
 	if p0 then
 		var12 = p0.parentBundleId ~= nil
@@ -21,7 +21,7 @@ local function _(p0) --[[ line: 24 | named "isPartOfBundleAndOffsale" ]]
 	return var12
 end
 
-function detailsThumbnail.getUrl(p1) --[[ line: 28 ]]
+function detailsThumbnail.getUrl(p1)
 	-- upvalues: utilityFunctionsModule (ref), fixBundleThumbnailOnDetailPage (ref)
 	local var14
 	local assetInfo = p1.props.assetInfo
@@ -37,7 +37,7 @@ function detailsThumbnail.getUrl(p1) --[[ line: 28 ]]
 	return if not (not var14 or not bundles[bundleId] or not bundles[bundleId].costumeId) then if fixBundleThumbnailOnDetailPage then "rbxthumb://type=BundleThumbnail&id=" .. tostring(bundleId) .. "&w=420&h=420" else "rbxthumb://type=Outfit&id=" .. bundles[bundleId].costumeId .. "&w=420&h=420" else "rbxthumb://type=Asset&id=" .. detailsInformation.assetId .. "&w=420&h=420"
 end
 
-function detailsThumbnail.render(p2) --[[ line: 53 ]]
+function detailsThumbnail.render(p2)
 	-- upvalues: images (ref), roactModule (ref), inspectAndBuyContextModule (ref), getFFlagDisplayCollectiblesIconModule (ref), utilityFunctionsModule (ref), getFFlagIBEnableCollectiblesSystemSupportModule (ref), constantsModule (ref), robloxTranslatorModule (ref), limitedLabelModule (ref)
 	local view = p2.props.view
 	local detailsInformation = p2.props.detailsInformation
@@ -48,7 +48,7 @@ function detailsThumbnail.render(p2) --[[ line: 53 ]]
 	local var15 = if limited then limited.ImageRectSize / images.ImagesResolutionScale else Vector2.new(0, 0)
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p3) --[[ line: 63 ]]
+		render = function(p3)
 			-- upvalues: view (ref), getFFlagDisplayCollectiblesIconModule (copy), utilityFunctionsModule (copy), assetInfo (ref), getFFlagIBEnableCollectiblesSystemSupportModule (copy), constantsModule (copy), var15 (ref), robloxTranslatorModule (copy), locale (ref), roactModule (copy), tryingOnInfo (ref), detailsInformation (ref), p2 (ref), limitedLabelModule (copy)
 			local var16 = p3[view]
 			local var17 = getFFlagDisplayCollectiblesIconModule() and utilityFunctionsModule.isCollectibles(assetInfo)
@@ -97,7 +97,7 @@ function detailsThumbnail.render(p2) --[[ line: 53 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4, _) --[[ line: 138 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p4, _)
 	return {
 		view = p4.view,
 		tryingOnInfo = p4.tryingOnInfo,

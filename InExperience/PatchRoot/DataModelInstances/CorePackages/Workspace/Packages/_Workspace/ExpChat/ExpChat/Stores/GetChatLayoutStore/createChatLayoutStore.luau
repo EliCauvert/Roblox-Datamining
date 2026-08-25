@@ -1,6 +1,6 @@
 ﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal(nil)
 	

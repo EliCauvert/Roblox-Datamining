@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local constantsModule = require(avatarExperienceSlotBasedEditor.Constants)
 
-return function(p0) --[[ line: 17 | named "OutfitDetailsActionBar" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref), constantsModule (ref)
 	return reactModule.createElement(foundationModule.View, {
 		tag = "col bg-surface-0",

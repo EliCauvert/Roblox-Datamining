@@ -23,7 +23,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 28 ]]
+function t.run(p0, p1)
 	-- upvalues: getFFlagUGCValidateCurveAnimRotationSpeedModule (ref), getFIntUGCValidateMaxAnimationFPSModule (ref), getFIntUGCValidationMaxAnimationRotationSpeedPerSecondModule (ref), errorSourceStringsModule (ref)
 	if not getFFlagUGCValidateCurveAnimRotationSpeedModule() then return end
 	local animFrames = p1.curveAnimComputedFrames.animFrames

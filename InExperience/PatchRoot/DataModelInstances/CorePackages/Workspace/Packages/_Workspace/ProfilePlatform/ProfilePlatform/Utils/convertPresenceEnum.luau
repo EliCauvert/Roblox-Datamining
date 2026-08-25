@@ -12,7 +12,7 @@ local t = {
 	InStudio = enumsModule.PresenceTypes.InStudio
 }
 
-return function(p0, p1) --[[ line: 18 ]]
+return function(p0, p1)
 	-- upvalues: t (ref), enumsModule (ref)
 	local var3 = t[p0] or enumsModule.PresenceTypes.Offline
 	

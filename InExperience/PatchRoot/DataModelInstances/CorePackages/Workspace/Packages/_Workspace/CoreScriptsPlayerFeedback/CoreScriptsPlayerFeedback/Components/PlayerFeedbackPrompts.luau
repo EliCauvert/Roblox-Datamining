@@ -23,14 +23,14 @@ local _ = {
 	PromptUnavailable = "PromptUnavailable",
 	PromptPlayerSupportUnavailable = "PromptPlayerSupportUnavailable"
 }
-local var12 = reactModule.memo(function(p0) --[[ line: 59 ]]
+local var12 = reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref), unavailablePromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var14, var15 = reactModule.useState({ promptType = nil, promptData = nil, promptQueue = {} })
 	local promptData = var14.promptData
 	local promptType = var14.promptType
-	local var16 = reactModule.useCallback(function() --[[ line: 69 ]]
+	local var16 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), cryoModule (copy)
-		var15(function(p1) --[[ line: 70 ]]
+		var15(function(p1)
 			-- upvalues: cryoModule (copy)
 			local promptQueue = p1.promptQueue or {}
 			
@@ -46,9 +46,9 @@ local var12 = reactModule.memo(function(p0) --[[ line: 59 ]]
 			}
 		end)
 	end, {})
-	local var17 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), cryoModule (copy)
-		var15(function(p2) --[[ line: 89 ]]
+		var15(function(p2)
 			-- upvalues: cryoModule (copy)
 			return if p2.promptType == nil then {
 				promptType = "PromptFeedback",
@@ -61,9 +61,9 @@ local var12 = reactModule.memo(function(p0) --[[ line: 59 ]]
 			}
 		end)
 	end, {})
-	local var18 = reactModule.useCallback(function(p3) --[[ line: 111 ]]
+	local var18 = reactModule.useCallback(function(p3)
 		-- upvalues: var15 (ref), cryoModule (copy)
-		var15(function(p4) --[[ line: 112 ]]
+		var15(function(p4)
 			-- upvalues: cryoModule (copy), p3 (ref)
 			return if p4.promptType == nil then {
 				promptType = "PromptUnavailable",
@@ -115,7 +115,7 @@ local var12 = reactModule.memo(function(p0) --[[ line: 59 ]]
 		}, { Prompt = var19 })
 	})
 end)
-local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
+local var13 = reactModule.memo(function(p5)
 	-- upvalues: useLocalization (ref), reactModule (ref), cryoModule (ref), t (ref), unavailablePromptModule (ref), playerSupportUnavailablePromptModule (ref), playerSupportPromptModule (ref), playerFeedbackPromptModule (ref), promptConnectionsModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerSupportToastModule (ref)
 	local var22 = useLocalization({
 		ToastSubmitted = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Toast.Submitted",
@@ -128,19 +128,19 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 	local var31, var32 = reactModule.useState(false)
 	local promptData = var23.promptData
 	local promptType = var23.promptType
-	local var33 = reactModule.useCallback(function() --[[ line: 193 ]]
+	local var33 = reactModule.useCallback(function()
 		-- upvalues: var28 (ref), var30 (ref), var32 (ref)
 		var28("")
 		var30("")
 		var32(false)
 	end, {})
-	local var34 = reactModule.useCallback(function() --[[ line: 199 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: var26 (ref)
 		var26(nil)
 	end, {})
-	local var35 = reactModule.useCallback(function() --[[ line: 203 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), cryoModule (copy)
-		var24(function(p6) --[[ line: 204 ]]
+		var24(function(p6)
 			-- upvalues: cryoModule (copy)
 			local promptQueue = p6.promptQueue or {}
 			
@@ -156,9 +156,9 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 			}
 		end)
 	end, {})
-	local var36 = reactModule.useCallback(function() --[[ line: 222 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), cryoModule (copy)
-		var24(function(p7) --[[ line: 223 ]]
+		var24(function(p7)
 			-- upvalues: cryoModule (copy)
 			return if p7.promptType == nil then {
 				promptType = "PromptFeedback",
@@ -171,9 +171,9 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 			}
 		end)
 	end, {})
-	local var37 = reactModule.useCallback(function() --[[ line: 245 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var24 (ref), cryoModule (copy)
-		var24(function(p8) --[[ line: 246 ]]
+		var24(function(p8)
 			-- upvalues: cryoModule (copy)
 			return if p8.promptType == nil then {
 				promptType = "PromptPlayerSupport",
@@ -186,9 +186,9 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 			}
 		end)
 	end, {})
-	local var38 = reactModule.useCallback(function(p9) --[[ line: 268 ]]
+	local var38 = reactModule.useCallback(function(p9)
 		-- upvalues: var24 (ref), cryoModule (copy)
-		var24(function(p10) --[[ line: 269 ]]
+		var24(function(p10)
 			-- upvalues: cryoModule (copy), p9 (ref)
 			return if p10.promptType == nil then {
 				promptType = "PromptUnavailable",
@@ -206,7 +206,7 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 			}
 		end)
 	end, {})
-	local var39 = reactModule.useCallback(function(p11) --[[ line: 291 ]]
+	local var39 = reactModule.useCallback(function(p11)
 		-- upvalues: t (copy), var33 (ref), var26 (ref), var22 (ref), var24 (ref), cryoModule (copy)
 		local var44 = t[p11]
 		
@@ -216,7 +216,7 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 			
 			return
 		end
-		var24(function(p12) --[[ line: 298 ]]
+		var24(function(p12)
 			-- upvalues: cryoModule (copy), p11 (ref)
 			return if p12.promptType == nil then {
 				promptType = "PromptPlayerSupportUnavailable",
@@ -291,7 +291,7 @@ local var13 = reactModule.memo(function(p5) --[[ line: 174 ]]
 	})
 end)
 
-return reactModule.memo(function(p13) --[[ line: 392 ]]
+return reactModule.memo(function(p13)
 	-- upvalues: var10 (ref), reactModule (ref), var13 (ref), var12 (ref)
 	return if var10 then reactModule.createElement(var13, p13) else reactModule.createElement(var12, p13)
 end)

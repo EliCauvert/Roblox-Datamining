@@ -18,7 +18,7 @@ local serviceOverrideContextModule = require(groups.Components.CoreUI.ServiceOve
 local _ = require(groups.Common.Types)
 local THUMBNAIL_SIZE = require(groups.Common.constants).THUMBNAIL_SIZE
 
-local function parseMembershipStatusFromActions(p0) --[[ line: 39 ]]
+local function parseMembershipStatusFromActions(p0)
 	-- upvalues: enumsModule (ref)
 	local buttons = p0.buttons or {}
 	local type = nil
@@ -36,7 +36,7 @@ local function parseMembershipStatusFromActions(p0) --[[ line: 39 ]]
 	}
 end
 
-local function buildGroupJoinPromptData(p1) --[[ line: 72 ]]
+local function buildGroupJoinPromptData(p1)
 	-- upvalues: parseMembershipStatusFromActions (ref)
 	if p1 then
 		local components = p1.components or {}
@@ -60,7 +60,7 @@ local function buildGroupJoinPromptData(p1) --[[ line: 72 ]]
 	return nil
 end
 
-return function(p2) --[[ line: 98 ]]
+return function(p2)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), useContext (ref), serviceOverrideContextModule (ref), useLocalization (ref), reactModule (ref), postJoinGroupModule (ref), fetchGroupActionsModule (ref), parseMembershipStatusFromActions (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), THUMBNAIL_SIZE (ref), fetchGroupDetailsModule (ref), buildGroupJoinPromptData (ref), useEventConnection (ref)
 	local var15 = useRoactService(roactNetworking)
 	local var16 = useContext(serviceOverrideContextModule)
@@ -78,13 +78,13 @@ return function(p2) --[[ line: 98 ]]
 	})
 	local var18 = reactModule.useRef(nil)
 	
-	local function _() --[[ line: 122 | named "closePrompt" ]]
+	local function _()
 		-- upvalues: var18 (ref), p2 (ref)
 		var18.current = nil
 		p2.closePrompt()
 	end
 	
-	local var19 = reactModule.useCallback(function(p3, p4, p5) --[[ line: 129 ]]
+	local var19 = reactModule.useCallback(function(p3, p4, p5)
 		-- upvalues: groupService (ref), guiService (ref), var18 (ref), p2 (ref)
 		groupService:PromptJoinCompleted(p3, false, Enum.GroupMembershipStatus.None, p4)
 		guiService:SendNotification({
@@ -94,19 +94,19 @@ return function(p2) --[[ line: 98 ]]
 		var18.current = nil
 		p2.closePrompt()
 	end, { groupService, guiService, p2.closePrompt })
-	local var20 = reactModule.useCallback(function(p6, p7, p8, p9) --[[ line: 147 ]]
+	local var20 = reactModule.useCallback(function(p6, p7, p8, p9)
 		-- upvalues: var17 (ref), var19 (ref)
 		var19(p6, p8, if p9 then var17.notificationFailedToLoad elseif p7 then var17.notificationFailedToJoin else var17.notificationFailedToFollow)
 	end, { var19 })
-	local var21 = reactModule.useCallback(function(p10, p11) --[[ line: 162 ]]
+	local var21 = reactModule.useCallback(function(p10, p11)
 		-- upvalues: postJoinGroupModule (copy), var15 (ref), fetchGroupActionsModule (copy), var20 (ref), parseMembershipStatusFromActions (copy), var17 (ref), groupService (ref), var18 (ref), p2 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (ref)
-		return function() --[[ line: 163 ]]
+		return function()
 			-- upvalues: p11 (ref), postJoinGroupModule (copy), var15 (copy), p10 (ref), fetchGroupActionsModule (copy), var20 (copy), parseMembershipStatusFromActions (copy), var17 (copy), groupService (copy), var18 (copy), p2 (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
 			local var23 = if p11 and p11.hasSocialModules ~= nil then p11.hasSocialModules else true
 			local var24 = if p11 then p11.groupName or "" else ""
-			postJoinGroupModule(var15, p10):andThen(function() --[[ line: 171 ]]
+			postJoinGroupModule(var15, p10):andThen(function()
 				-- upvalues: fetchGroupActionsModule (copy), var15 (copy), p10 (copy), var20 (copy), var23 (ref), parseMembershipStatusFromActions (copy), var17 (copy), groupService (copy), var18 (copy), p2 (copy), var24 (ref), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
-				return fetchGroupActionsModule(var15, p10):andThen(function(p12) --[[ line: 172 ]]
+				return fetchGroupActionsModule(var15, p10):andThen(function(p12)
 					-- upvalues: var20 (copy), p10 (copy), var23 (copy), parseMembershipStatusFromActions (copy), var17 (copy), groupService (copy), var18 (copy), p2 (copy), var24 (copy), getRbxthumbWithTypeSizeAndOptions (copy), constants (copy), THUMBNAIL_SIZE (copy), guiService (copy)
 					if p12.errors then
 						var20(p10, var23, "Network error on join prompt: Some group components failed to load", false)
@@ -135,11 +135,11 @@ return function(p2) --[[ line: 98 ]]
 						Title = string.gsub(notificationJoinRequestPending, "{groupName}", var24),
 						Icon = getRbxthumbWithTypeSizeAndOptions(tostring(p10), constants.RbxthumbTypes.GroupIcon, THUMBNAIL_SIZE)
 					})
-				end, function(p13) --[[ line: 226 ]]
+				end, function(p13)
 					-- upvalues: var20 (copy), p10 (copy), var23 (copy)
 					var20(p10, var23, "Network error on join prompt: " .. p13.StatusMessage, false)
 				end)
-			end, function(p14) --[[ line: 234 ]]
+			end, function(p14)
 				-- upvalues: var20 (copy), p10 (copy), var23 (ref)
 				var20(p10, var23, "Network error on join prompt: " .. p14.StatusMessage, false)
 			end)
@@ -147,21 +147,21 @@ return function(p2) --[[ line: 98 ]]
 	end, {
 		var15, var20, var17, groupService, guiService, p2.closePrompt
 	})
-	local var22 = reactModule.useCallback(function(p15, p16) --[[ line: 246 ]]
+	local var22 = reactModule.useCallback(function(p15, p16)
 		-- upvalues: groupService (ref), var18 (ref), p2 (ref)
-		return function() --[[ line: 247 ]]
+		return function()
 			-- upvalues: p16 (ref), groupService (copy), p15 (ref), var18 (copy), p2 (copy)
 			groupService:PromptJoinCompleted(p15, true, if if p16 and p16.isAlreadyMember then true else false then Enum.GroupMembershipStatus.AlreadyMember elseif if p16 and p16.hasPendingRequest then true else false then Enum.GroupMembershipStatus.JoinRequestPending else Enum.GroupMembershipStatus.None, "")
 			var18.current = nil
 			p2.closePrompt()
 		end
 	end, { groupService, p2.closePrompt })
-	useEventConnection(groupService.ShowJoinPrompt, reactModule.useCallback(function(p17) --[[ line: 275 ]]
+	useEventConnection(groupService.ShowJoinPrompt, reactModule.useCallback(function(p17)
 		-- upvalues: var18 (ref), var21 (ref), var22 (ref), p2 (ref), fetchGroupDetailsModule (copy), var15 (ref), var20 (ref), var19 (ref), var17 (ref), buildGroupJoinPromptData (copy)
 		local t = {}
 		var18.current = t
 		p2.openGroupJoinPrompt(p17, nil, { onJoin = var21(p17, nil), onClose = var22(p17, nil) })
-		fetchGroupDetailsModule(var15, p17):andThen(function(p18) --[[ line: 291 ]]
+		fetchGroupDetailsModule(var15, p17):andThen(function(p18)
 			-- upvalues: var18 (copy), t (ref), var20 (copy), p17 (ref), var19 (copy), var17 (copy), buildGroupJoinPromptData (copy), var21 (copy), var22 (copy), p2 (copy)
 			if var18.current ~= t then return end
 			local components = p18.components or {}
@@ -198,7 +198,7 @@ return function(p2) --[[ line: 98 ]]
 				
 				return
 			end
-		end, function(p19) --[[ line: 341 ]]
+		end, function(p19)
 			-- upvalues: var18 (copy), t (ref), var19 (copy), p17 (ref), var17 (copy)
 			if var18.current == t then
 				var19(p17, "Network error on join prompt: " .. p19.StatusMessage, var17.notificationFailedToLoad)

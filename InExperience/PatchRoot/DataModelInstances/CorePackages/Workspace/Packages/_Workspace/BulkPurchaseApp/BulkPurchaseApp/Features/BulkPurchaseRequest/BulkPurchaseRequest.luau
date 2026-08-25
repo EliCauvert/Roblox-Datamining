@@ -32,12 +32,12 @@ local t = {
 	itemOwned = "CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemOwned"
 }
 
-return function(p0) --[[ line: 61 | named "BulkPurchaseRequest" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref)
 	local var15 = useLocalization(t)
 	local var16 = reactModule.useContext(localizationRoactContext)
 	local var17, var18 = reactFocusNavigationModule.useDefaultFocusBehavior()
-	local var19 = if fFlagFixVP8143Module then reactModule.useCallback(function(p1) --[[ line: 66 ]]
+	local var19 = if fFlagFixVP8143Module then reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), var17 (ref)
 		if typeof(p0.purchaseButtonRef) == "table" then
 			p0.purchaseButtonRef.current = p1
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 61 | named "BulkPurchaseRequest" ]]
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = 1,
-			[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 134 ]]
+			[reactModule.Change.AbsoluteSize] = function(p2)
 				-- upvalues: var23 (ref)
 				var23(p2.AbsoluteSize)
 			end
@@ -105,7 +105,7 @@ return function(p0) --[[ line: 61 | named "BulkPurchaseRequest" ]]
 			})
 		})), reactModule.createElement(fullPagePromptScrollListModule, {
 			LayoutOrder = 2,
-			size = var22:map(function(p3) --[[ line: 158 ]]
+			size = var22:map(function(p3)
 				-- upvalues: var20 (ref)
 				return UDim2.new(1, 0, 1, -(p3.Y + var20.Size.Size_600))
 			end)

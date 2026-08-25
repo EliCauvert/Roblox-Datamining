@@ -2,7 +2,7 @@
 local array = luauPolyfillModule.Array
 local object = luauPolyfillModule.Object
 
-local function equal(p0, p1) --[[ line: 12 ]]
+local function equal(p0, p1)
 	-- upvalues: array (ref), object (ref), equal (ref)
 	if typeof(p0) ~= typeof(p1) then
 		return false

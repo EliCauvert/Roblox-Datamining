@@ -26,10 +26,10 @@ local t = {
 	isRepliedTo = false,
 	isPressed = false,
 	isLastMessageInMessageGroup = false,
-	[reactModule.Change.AbsoluteSize] = function(_) --[[ line: 48 ]] end
+	[reactModule.Change.AbsoluteSize] = function(_) end
 }
 
-return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useCursor (ref), foundationModule (ref), useTokens (ref), useStyle (ref), useSelectedTheme (ref), reactModule (ref), colorMode (ref), colorSystem (ref), unfilteredMessageColorConfigModule (ref), BUBBLE_VARIANTS (ref), chatBubbleEnumModule (ref), chatBubbleGroupableModule (ref), repliedToMarkerModule (ref)
 	local var10 = cryoModule.Dictionary.join(t, p0)
 	local var11 = useCursor(foundationModule.Enums.CursorType.RoundedSlot)
@@ -42,7 +42,7 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer"
 	local var15 = useSelectedTheme()
 	local var16, var17 = reactModule.useState(var13.Theme.UIDefault)
 	
-	local function setBubbleStyle() --[[ line: 66 ]]
+	local function setBubbleStyle()
 		-- upvalues: var10 (ref), var15 (ref), colorMode (copy), colorSystem (copy), var12 (ref), isIncoming (ref), isUnfiltered (ref), var17 (ref)
 		var17(if var10.isRepliedTo then {
 			Transparency = 0,
@@ -62,7 +62,7 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer"
 		})
 	end
 	
-	local function setPressedBubbleStyle() --[[ line: 104 ]]
+	local function setPressedBubbleStyle()
 		-- upvalues: var10 (ref), isIncoming (ref), var15 (ref), colorMode (copy), colorSystem (copy), isUnfiltered (ref), unfilteredMessageColorConfigModule (copy), var17 (ref)
 		if var10.isRepliedTo or var10.isPending then return end
 		local _ = nil
@@ -78,7 +78,7 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer"
 		})
 	end
 	
-	reactModule.useLayoutEffect(function() --[[ line: 139 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var10 (ref), setPressedBubbleStyle (ref), setBubbleStyle (ref)
 		if var10.isPressed then
 			setPressedBubbleStyle()
@@ -91,12 +91,12 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer"
 		var10.isAssetCard
 	})
 	
-	local function _(p1, p2, p3) --[[ line: 157 | named "getBubbleVariant" ]]
+	local function _(p1, p2, p3)
 		-- upvalues: BUBBLE_VARIANTS (copy)
 		return if p1 and p2 or p3 then BUBBLE_VARIANTS.SINGLE elseif p1 then BUBBLE_VARIANTS.TOP elseif p2 then BUBBLE_VARIANTS.BOTTOM else BUBBLE_VARIANTS.MIDDLE
 	end
 	
-	return (function() --[[ line: 173 | named "renderGroupedBubbleUI" ]]
+	return (function()
 		-- upvalues: reactModule (copy), foundationModule (copy), var10 (ref), var11 (ref), isIncoming (ref), chatBubbleEnumModule (copy), chatBubbleGroupableModule (copy), children (ref), var16 (ref), BUBBLE_VARIANTS (copy), repliedToMarkerModule (copy)
 		local createElement = reactModule.createElement
 		local view = foundationModule.View

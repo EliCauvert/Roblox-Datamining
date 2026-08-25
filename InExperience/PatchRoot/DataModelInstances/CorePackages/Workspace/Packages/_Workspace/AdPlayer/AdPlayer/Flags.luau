@@ -3,16 +3,16 @@ game:DefineFastString("AdDropdownButtonDefault", "rbxassetid://85625850440429")
 game:DefineFastString("AdDropdownButtonOpen", "rbxassetid://85625850440429")
 
 return {
-	GetAdPlayerExitButton = function() --[[ line: 6 ]]
+	GetAdPlayerExitButton = function()
 		return game:GetFastString("AdPlayerExitButton")
 	end,
-	GetAdDropdownButtonDefault = function() --[[ line: 9 ]]
+	GetAdDropdownButtonDefault = function()
 		return game:GetFastString("AdDropdownButtonDefault")
 	end,
-	GetAdDropdownButtonOpen = function() --[[ line: 12 ]]
+	GetAdDropdownButtonOpen = function()
 		return game:GetFastString("AdDropdownButtonOpen")
 	end,
-	GetEnableLuaRewardTimerUI = function() --[[ line: 15 ]]
+	GetEnableLuaRewardTimerUI = function()
 		return game:GetEngineFeature("EnableLuaRewardTimerUI")
 	end
 }

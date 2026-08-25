@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsCreationGalleryPreviewSwapFix", false)
 
-return function() --[[ line: 13 ]]
+return function()
 	return game:GetFastFlag("MomentsCreationGalleryPreviewSwapFix")
 end

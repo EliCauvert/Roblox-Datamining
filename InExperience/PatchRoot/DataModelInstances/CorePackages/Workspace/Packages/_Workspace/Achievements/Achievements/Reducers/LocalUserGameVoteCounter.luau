@@ -5,7 +5,7 @@ local var1 = require(parent.Rodux).createReducer({
 	lastUniverseId = -1,
 	gameVoteStatus = {}
 }, {
-	SetUserGameVotes = function(value, p0) --[[ line: 30 ]]
+	SetUserGameVotes = function(value, p0)
 		-- upvalues: cryoModule (ref)
 		local universeId = p0.universeId
 		local userVote = p0.userVote
@@ -26,7 +26,7 @@ local var1 = require(parent.Rodux).createReducer({
 	end
 })
 
-return function(p1, p2) --[[ line: 64 ]]
+return function(p1, p2)
 	-- upvalues: var1 (ref)
 	return var1(p1, p2)
 end

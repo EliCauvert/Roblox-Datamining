@@ -17,7 +17,7 @@ local t = {
 	annotationPageScreenGui = nil
 }
 
-local function unmountAnnotationPage() --[[ line: 28 ]]
+local function unmountAnnotationPage()
 	-- upvalues: fFlagEnableConsoleExpControls (ref), enabled (ref), var6 (ref), t (ref), roactModule (ref)
 	if fFlagEnableConsoleExpControls and (if fFlagEnableConsoleExpControls then enabled() else enabled) then
 		var6:setHideShortcutBar("AnnotationModal", false)
@@ -34,7 +34,7 @@ local function unmountAnnotationPage() --[[ line: 28 ]]
 end
 
 return {
-	mountAnnotationPage = function(p0, p1, p2, p3, p4) --[[ line: 43 ]]
+	mountAnnotationPage = function(p0, p1, p2, p3, p4)
 		-- upvalues: fFlagEnableConsoleExpControls (ref), enabled (ref), var6 (ref), guiService (ref), t (ref), coreGuiService (ref), constantsModule (ref), roactModule (ref), screenshotFlowStepHandlerContainerModule (ref), unmountAnnotationPage (ref)
 		if fFlagEnableConsoleExpControls and (if fFlagEnableConsoleExpControls then enabled() else enabled) then
 			var6:setHideShortcutBar("AnnotationModal", true)
@@ -60,15 +60,15 @@ return {
 			initialPageNumber = 1,
 			screenshot = p3.screenshotContentId,
 			entryPoint = p0,
-			backAction = function() --[[ line: 76 ]]
+			backAction = function()
 				-- upvalues: unmountAnnotationPage (copy)
 				unmountAnnotationPage()
 			end,
-			dismissAction = function() --[[ line: 79 ]]
+			dismissAction = function()
 				-- upvalues: unmountAnnotationPage (copy)
 				unmountAnnotationPage()
 			end,
-			finishAnnotationAction = function(p5) --[[ line: 82 ]]
+			finishAnnotationAction = function(p5)
 				-- upvalues: unmountAnnotationPage (copy), p4 (ref), constantsModule (copy)
 				unmountAnnotationPage()
 				p4({
@@ -79,27 +79,27 @@ return {
 					type = constantsModule.ReportAnythingActions.CompleteAttachment
 				})
 			end,
-			restartAction = function() --[[ line: 92 ]]
+			restartAction = function()
 				-- upvalues: unmountAnnotationPage (copy), p4 (ref), constantsModule (copy), p1 (ref)
 				unmountAnnotationPage()
 				p4({ type = constantsModule.ReportAnythingActions.ClearAll })
 				p1()
 			end,
-			skipAnnotationAction = function() --[[ line: 102 ]]
+			skipAnnotationAction = function()
 				-- upvalues: unmountAnnotationPage (copy), p4 (ref), constantsModule (copy)
 				unmountAnnotationPage()
 				p4({
 					type = constantsModule.ReportAnythingActions.CompleteAttachment
 				})
 			end,
-			setAnnotationCircleRadius = function(value) --[[ line: 108 ]]
+			setAnnotationCircleRadius = function(value)
 				-- upvalues: p4 (ref), constantsModule (copy)
 				p4({
 					type = constantsModule.ReportAnythingActions.SetAnnotationCircleRadius,
 					radius = value
 				})
 			end,
-			setAnnotationAreaDimensions = function(value, p6) --[[ line: 114 ]]
+			setAnnotationAreaDimensions = function(value, p6)
 				-- upvalues: p4 (ref), constantsModule (copy)
 				p4({
 					type = constantsModule.ReportAnythingActions.SetAnnotationAreaDimensions,

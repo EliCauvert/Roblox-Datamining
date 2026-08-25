@@ -8,7 +8,7 @@ local graphQLList = definitionModule.GraphQLList
 local graphQLNonNull = definitionModule.GraphQLNonNull
 local _ = require(parent.type.schema)
 
-local function typeFromAST(p0, p1) --[[ line: 33 ]]
+local function typeFromAST(p0, p1)
 	-- upvalues: kind (ref), typeFromAST (ref), graphQLList (ref), graphQLNonNull (ref), invariant (ref), inspect (ref)
 	local _ = nil
 	

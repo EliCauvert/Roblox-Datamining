@@ -1,15 +1,15 @@
 ﻿local axis = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler).Axis
 
 return {
-	mainOf = function(p0, p1) --[[ line: 13 ]]
+	mainOf = function(p0, p1)
 		-- upvalues: axis (ref)
 		return if p1 == axis.X then p0.X else p0.Y
 	end,
-	crossOf = function(vectorA, vectorB) --[[ line: 17 ]]
+	crossOf = function(vectorA, vectorB)
 		-- upvalues: axis (ref)
 		return if vectorB == axis.X then vectorA.Y else vectorA.X
 	end,
-	positionFor = function(p2, p3, p4) --[[ line: 23 ]]
+	positionFor = function(p2, p3, p4)
 		-- upvalues: axis (ref)
 		local crossAxisIndex = p2.crossAxisIndex or 1
 		local crossAxisCount = p2.crossAxisCount or 1
@@ -19,7 +19,7 @@ return {
 		
 		return if p3 == axis.X then UDim2.new(0, var4, var2, var3) else UDim2.new(var2, var3, 0, var4)
 	end,
-	sizeFor = function(p5, p6, p7) --[[ line: 38 ]]
+	sizeFor = function(p5, p6, p7)
 		-- upvalues: axis (ref)
 		local crossAxisCount = p5.crossAxisCount or 1
 		local var6 = 1 / crossAxisCount
@@ -28,7 +28,7 @@ return {
 		
 		return if p6 == axis.X then UDim2.new(0, var8, var6, var7) else UDim2.new(var6, var7, 0, var8)
 	end,
-	canvasSizeFor = function(p8, p9) --[[ line: 49 ]]
+	canvasSizeFor = function(p8, p9)
 		-- upvalues: axis (ref)
 		return if p9 == axis.X then UDim2.fromOffset(p8, 0) else UDim2.fromOffset(0, p8)
 	end

@@ -13,7 +13,7 @@ return {
 		validationEnumsModule.SharedDataMember.outerCagesData
 	},
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 22 ]]
+	run = function(p0, p1)
 		-- upvalues: getFIntUGCLCCageVerticesSimilarityMaximumModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
 		local var4 = getFIntUGCLCCageVerticesSimilarityMaximumModule()
 		local t = {}

@@ -49,7 +49,7 @@ local var23 = create("ScreenGui")({
 	Parent = coreGuiService
 })
 
-local function reportPauseSessionAnalytics() --[[ line: 84 ]]
+local function reportPauseSessionAnalytics()
 	-- upvalues: var14 (write), var15 (write), telemetryService (ref), t (ref), processTime (ref), var13 (write), var23 (ref)
 	local var28 = var14
 	
@@ -66,7 +66,7 @@ local function reportPauseSessionAnalytics() --[[ line: 84 ]]
 	})
 end
 
-local function _(value) --[[ line: 100 | named "setNotificationVisible" ]]
+local function _(value)
 	-- upvalues: var22 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var15 (write), var13 (write), var14 (write)
 	if value then
 		var22:Show()
@@ -90,7 +90,7 @@ local function _(value) --[[ line: 100 | named "setNotificationVisible" ]]
 	end
 end
 
-local _ = function() --[[ line: 124 | named "cancelTimers" ]]
+local _ = function()
 	-- upvalues: var20 (write), var21 (write)
 	if var20 ~= nil then
 		task.cancel(var20)
@@ -102,12 +102,12 @@ local _ = function() --[[ line: 124 | named "cancelTimers" ]]
 	end
 end
 
-local _ = function() --[[ line: 135 | named "isRapidRepause" ]]
+local _ = function()
 	-- upvalues: var18 (write), rapidGameplayPauseIntervalMs (ref)
 	return (os.clock() - var18) * 1000 < rapidGameplayPauseIntervalMs
 end
 
-local function enterStage(p0) --[[ line: 139 ]]
+local function enterStage(p0)
 	-- upvalues: UNPAUSED (write), var20 (write), var21 (write), frozen (ref), var19 (write), var22 (ref), runService (ref), streamingPauseUIAnalyticsEnabled (ref), var15 (write), var14 (write), gameplayPauseShowDelayMs (ref), localPlayer (write), var23 (ref), enterStage (ref), var18 (write), rapidGameplayPauseIntervalMs (ref), var13 (write), rapidGameplayPauseMinNotificationDurationMs (ref)
 	UNPAUSED = p0
 	
@@ -131,7 +131,7 @@ local function enterStage(p0) --[[ line: 139 ]]
 			return
 		end
 	elseif p0 == frozen.PENDING_SHOW then
-		var20 = task.delay(gameplayPauseShowDelayMs / 1000, function() --[[ line: 148 ]]
+		var20 = task.delay(gameplayPauseShowDelayMs / 1000, function()
 			-- upvalues: var20 (copy), UNPAUSED (copy), frozen (copy), localPlayer (copy), var23 (copy), enterStage (copy)
 			var20 = nil
 			
@@ -153,7 +153,7 @@ local function enterStage(p0) --[[ line: 139 ]]
 			return
 		end
 	elseif p0 == frozen.RAPID_PAUSE_PENDING_DISMISS then
-		var21 = task.delay(rapidGameplayPauseMinNotificationDurationMs / 1000, function() --[[ line: 161 ]]
+		var21 = task.delay(rapidGameplayPauseMinNotificationDurationMs / 1000, function()
 			-- upvalues: var21 (copy), UNPAUSED (copy), frozen (copy), localPlayer (copy), enterStage (copy)
 			var21 = nil
 			
@@ -164,7 +164,7 @@ local function enterStage(p0) --[[ line: 139 ]]
 	end
 end
 
-local function onGameplayPausedChanged() --[[ line: 171 ]]
+local function onGameplayPausedChanged()
 	-- upvalues: localPlayer (write), var23 (ref), var17 (write), UNPAUSED (write), frozen (ref), var18 (write), rapidGameplayPauseIntervalMs (ref), enterStage (ref), var19 (write)
 	local var29 = localPlayer.GameplayPaused and (var23.Enabled and not var17)
 	var17 = false
@@ -195,7 +195,7 @@ end
 
 localPlayer:GetPropertyChangedSignal("GameplayPaused"):Connect(onGameplayPausedChanged)
 
-local function enableNotification(p1) --[[ line: 201 ]]
+local function enableNotification(p1)
 	-- upvalues: var23 (ref), onGameplayPausedChanged (ref), enterStage (ref), frozen (ref)
 	assert(type(p1) == "boolean", "Specified argument 'enabled' must be of type boolean")
 	

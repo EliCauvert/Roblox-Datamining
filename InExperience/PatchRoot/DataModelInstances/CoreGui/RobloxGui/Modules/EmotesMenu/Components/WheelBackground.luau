@@ -11,7 +11,7 @@ local selectionEffectModule = require(parent.SelectionEffect)
 local wheelTextModule = require(parent.WheelText)
 local wheelBackground = roactModule.PureComponent:extend("WheelBackground")
 
-function wheelBackground.renderContent(p0, p1) --[[ line: 20 ]]
+function wheelBackground.renderContent(p0, p1)
 	-- upvalues: constantsModule (ref), roactModule (ref), colors (ref), selectionGradientModule (ref), selectionEffectModule (ref), wheelTextModule (ref)
 	local layout = constantsModule.Layouts[p0.props.layout]
 	
@@ -60,14 +60,14 @@ function wheelBackground.renderContent(p0, p1) --[[ line: 20 ]]
 	})
 end
 
-function wheelBackground.render(p2) --[[ line: 78 ]]
+function wheelBackground.render(p2)
 	-- upvalues: withStyle (ref)
-	return withStyle(function(p3) --[[ line: 79 ]]
+	return withStyle(function(p3)
 		-- upvalues: p2 (ref)
 		return p2:renderContent(p3.Settings.PreferredTransparency)
 	end)
 end
 
-return roactRoduxModule.connect(function(p4) --[[ line: 84 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p4)
 	return { layout = p4.layout }
 end, nil)(wheelBackground)

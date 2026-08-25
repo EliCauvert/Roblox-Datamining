@@ -15,7 +15,7 @@ local accessoryType = foundationModule.Enums.AccessoryType
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
-return function(p0) --[[ line: 39 | named "UserPickerRow" ]]
+return function(p0)
 	-- upvalues: useUserProfileInfoModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), icon (ref), iconName (ref), iconSize (ref), list (ref), accessoryType (ref), view (ref)
 	local PRIVATE_INVITES_UNKNOWN_USER, var8
 	local var6 = useUserProfileInfoModule(p0.userId)

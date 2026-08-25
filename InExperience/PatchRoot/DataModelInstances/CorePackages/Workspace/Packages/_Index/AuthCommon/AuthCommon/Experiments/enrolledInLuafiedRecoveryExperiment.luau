@@ -2,7 +2,7 @@
 local IXPServiceWrapper = require(parent.IXPServiceWrapper).IXPServiceWrapper
 local appBtidLayers = require(parent.ExperimentLayers).AppBtidLayers
 
-return function() --[[ line: 7 | named "enrolledInLuafiedRecoveryExperiment" ]]
+return function()
 	-- upvalues: IXPServiceWrapper (ref), appBtidLayers (ref)
 	local accountRecoveryUILayerBTIDLayerData = IXPServiceWrapper:GetBTIDLayerData(appBtidLayers.AccountRecoveryUILayer)
 	IXPServiceWrapper:LogBrowserTrackerLayerExposure(appBtidLayers.AccountRecoveryUILayer)

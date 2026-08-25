@@ -11,7 +11,7 @@ local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local useExperienceDetailsModule = require(genericAbuseReporting.BeduiV2.Hooks.Enrichment.useExperienceDetails)
 local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 
-local function UserPreview(p0) --[[ line: 29 ]]
+local function UserPreview(p0)
 	-- upvalues: reactModule (ref), view (ref), avatar (ref), var3 (ref), text (ref)
 	local preview = p0.preview
 	
@@ -53,7 +53,7 @@ local function UserPreview(p0) --[[ line: 29 ]]
 	return createElement(view, t, t_1)
 end
 
-local function ChatPreview(p1) --[[ line: 64 ]]
+local function ChatPreview(p1)
 	-- upvalues: reactModule (ref), view (ref), textWithTranslationModule (ref)
 	local preview = p1.preview
 	
@@ -68,7 +68,7 @@ local function ChatPreview(p1) --[[ line: 64 ]]
 	}) else nil
 end
 
-local function ExperiencePreview(p2) --[[ line: 81 ]]
+local function ExperiencePreview(p2)
 	-- upvalues: useExperienceDetailsModule (ref), reactModule (ref), view (ref), image (ref), text (ref)
 	local preview = p2.preview
 	local var12 = useExperienceDetailsModule(preview.id)
@@ -90,7 +90,7 @@ local function ExperiencePreview(p2) --[[ line: 81 ]]
 	}) else nil
 end
 
-return reactModule.memo(function(p3) --[[ line: 108 | named "PreviewBox" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: reactModule (ref), UserPreview (ref), ChatPreview (ref), ExperiencePreview (ref)
 	local preview = p3.preview
 	

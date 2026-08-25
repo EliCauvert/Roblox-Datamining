@@ -4,9 +4,9 @@ local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverl
 local socialUpsellTypeModule = require(socialUpsell.Enum.SocialUpsellType)
 local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref), socialUpsellTypeModule (ref)
-	return function(p1) --[[ line: 16 ]]
+	return function(p1)
 		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p0 (ref), socialUpsellTypeModule (copy)
 		p1:dispatch(setCentralOverlay(centralOverlayType.SocialUpsellOverlay, {
 			data = p0,

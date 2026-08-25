@@ -15,14 +15,14 @@ local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagUseSignalsForIsLocalUserUnder13 = sharedFlagsModule.FFlagUseSignalsForIsLocalUserUnder13
 local var5 = if fFlagUseSignalsForIsLocalUserUnder13 then require(userLib.Stores.GetIsLocalUserUnder13Store) else nil
 
-local function getHasRobloxSubscription(p0) --[[ line: 24 ]]
+local function getHasRobloxSubscription(p0)
 	-- upvalues: fFlagEnableBlackbirdCheck (ref), mutedError (ref)
 	if not fFlagEnableBlackbirdCheck then
 		return false
 	elseif not game:GetEngineFeature("ReadHasRobloxSubscriptionLua") then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 31 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p0 (ref)
 		return p0.HasRobloxSubscription
 	end)
@@ -33,9 +33,9 @@ local function getHasRobloxSubscription(p0) --[[ line: 24 ]]
 	return ok and status == true
 end
 
-return function() --[[ line: 40 ]]
+return function()
 	-- upvalues: playersService (ref), userModel (ref), isPlayerVerifiedModule (ref), addUser (ref), setLocalUserId (ref), setUserMembershipType (ref), fFlagEnableBlackbirdCheck (ref), setUserHasRobloxSubscription (ref), getHasRobloxSubscription (ref), fFlagUseSignalsForIsLocalUserUnder13 (ref), var5 (ref), setLocalUserUnder13 (ref)
-	return function(p1) --[[ line: 41 ]]
+	return function(p1)
 		-- upvalues: playersService (copy), userModel (copy), isPlayerVerifiedModule (copy), addUser (copy), setLocalUserId (copy), setUserMembershipType (copy), fFlagEnableBlackbirdCheck (copy), setUserHasRobloxSubscription (copy), getHasRobloxSubscription (copy), fFlagUseSignalsForIsLocalUserUnder13 (copy), var5 (copy), setLocalUserUnder13 (copy)
 		local localPlayer = playersService.LocalPlayer
 		local var7 = tostring(localPlayer.UserId)

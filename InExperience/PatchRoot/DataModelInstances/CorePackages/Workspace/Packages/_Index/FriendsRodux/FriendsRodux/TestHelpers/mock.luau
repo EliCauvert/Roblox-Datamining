@@ -2,7 +2,7 @@
 
 return {
 	mockGetFriendsFromUserId = "GET_FRIENDS_SUCCEEDED_ACTION",
-	mockGetFriendsFromUserIdAction = roduxModule.makeActionCreator("GET_FRIENDS_SUCCEEDED_ACTION", function(p0, p1, p2) --[[ line: 8 ]]
+	mockGetFriendsFromUserIdAction = roduxModule.makeActionCreator("GET_FRIENDS_SUCCEEDED_ACTION", function(p0, p1, p2)
 		return {
 			responseBody = { data = p1 },
 			namedIds = { users = p0 },
@@ -10,55 +10,55 @@ return {
 		}
 	end),
 	mockGetFriendsCountFromUserId = "GET_FRIENDS_COUNT_SUCCEEDED_ACTION",
-	mockGetFriendsCountFromUserIdAction = roduxModule.makeActionCreator("GET_FRIENDS_COUNT_SUCCEEDED_ACTION", function(p3, p4) --[[ line: 20 ]]
+	mockGetFriendsCountFromUserIdAction = roduxModule.makeActionCreator("GET_FRIENDS_COUNT_SUCCEEDED_ACTION", function(p3, p4)
 		return { responseBody = { count = p4 }, namedIds = { users = p3 } }
 	end),
 	mockRequestCount = "GET_REQUEST_COUNT",
-	mockRequestCountAction = roduxModule.makeActionCreator("GET_REQUEST_COUNT", function(p5) --[[ line: 29 ]]
+	mockRequestCountAction = roduxModule.makeActionCreator("GET_REQUEST_COUNT", function(p5)
 		return { responseBody = { count = p5 } }
 	end),
 	mockGetNewRequestsCount = "GET_NEW_FRIEND_REQUEST_COUNT",
-	mockNewFriendRequestsCountAction = roduxModule.makeActionCreator("GET_NEW_FRIEND_REQUEST_COUNT", function(p6) --[[ line: 38 ]]
+	mockNewFriendRequestsCountAction = roduxModule.makeActionCreator("GET_NEW_FRIEND_REQUEST_COUNT", function(p6)
 		return { responseBody = { count = p6 } }
 	end),
 	mockClearNewFriendRequests = "CLEAR_NEW_FRIEND_REQUEST_COUNT",
-	mockClearNewFriendRequestsAction = roduxModule.makeActionCreator("GET_NEW_FRIEND_REQUEST_COUNT", function(p7) --[[ line: 47 ]]
+	mockClearNewFriendRequestsAction = roduxModule.makeActionCreator("GET_NEW_FRIEND_REQUEST_COUNT", function(p7)
 		return { responseBody = { status = p7 } }
 	end),
 	mockUnfriendTargetUserId = "UNFRIEND_TARGET_USER_ID",
-	mockUnfriendTargetUserIdAction = roduxModule.makeActionCreator("UNFRIEND_TARGET_USER_ID", function(p8) --[[ line: 56 ]]
+	mockUnfriendTargetUserIdAction = roduxModule.makeActionCreator("UNFRIEND_TARGET_USER_ID", function(p8)
 		return {
 			namedIds = { users = p8.targetUserId },
 			additionalData = { currentUserId = p8.currentUserId }
 		}
 	end),
 	mockAcceptFriendRequestFromUserId = "ACCEPT_REQUEST_FROM_USER_ID",
-	mockAcceptFriendRequestFromUserIdAction = roduxModule.makeActionCreator("ACCEPT_REQUEST_FROM_USER_ID", function(p9) --[[ line: 66 ]]
+	mockAcceptFriendRequestFromUserIdAction = roduxModule.makeActionCreator("ACCEPT_REQUEST_FROM_USER_ID", function(p9)
 		return {
 			ids = p9.ids,
 			additionalData = { currentUserId = p9.currentUserId }
 		}
 	end),
 	mockRequestFriendshipFromUserId = "REQUEST_FRIENDSHIP_FROM_USER_ID",
-	mockRequestFriendshipFromUserIdAction = roduxModule.makeActionCreator("REQUEST_FRIENDSHIP_FROM_USER_ID", function(p10) --[[ line: 75 ]]
+	mockRequestFriendshipFromUserIdAction = roduxModule.makeActionCreator("REQUEST_FRIENDSHIP_FROM_USER_ID", function(p10)
 		return {
 			namedIds = { users = p10.users },
 			additionalData = { currentUserId = p10.currentUserId }
 		}
 	end),
 	mockRequestFriendshipFromContactId = "REQUEST_FRIENDSHIP_FROM_CONTACT_ID",
-	mockRequestFriendshipFromContactIdAction = roduxModule.makeActionCreator("REQUEST_FRIENDSHIP_FROM_CONTACT_ID", function(p11) --[[ line: 85 ]]
+	mockRequestFriendshipFromContactIdAction = roduxModule.makeActionCreator("REQUEST_FRIENDSHIP_FROM_CONTACT_ID", function(p11)
 		return {
 			namedIds = { contacts = p11.contacts },
 			additionalData = { currentUserId = p11.currentUserId }
 		}
 	end),
 	mockDeclineFriendRequestFromUserId = "DECLINE_REQUEST_FROM_USER_ID",
-	mockDeclineFriendRequestFromUserIdAction = roduxModule.makeActionCreator("DECLINE_REQUEST_FROM_USER_ID", function(p12) --[[ line: 96 ]]
+	mockDeclineFriendRequestFromUserIdAction = roduxModule.makeActionCreator("DECLINE_REQUEST_FROM_USER_ID", function(p12)
 		return { ids = p12.ids }
 	end),
 	mockGetFriendRequests = "GET_FRIEND_REQUESTS",
-	mockGetFriendRequestsAction = roduxModule.makeActionCreator("GET_FRIEND_REQUESTS", function(p13) --[[ line: 104 ]]
+	mockGetFriendRequestsAction = roduxModule.makeActionCreator("GET_FRIEND_REQUESTS", function(p13)
 		return {
 			responseBody = if p13 then p13.data else {
 				previousPageCursor = nil,
@@ -107,11 +107,11 @@ return {
 		}
 	end),
 	mockDeclineAllFriendRequests = "DECLINE_ALL_FRIEND_REQUESTS",
-	mockDeclineAllFriendRequestsAction = roduxModule.makeActionCreator("DECLINE_ALL_FRIEND_REQUESTS", function(p14) --[[ line: 154 ]]
+	mockDeclineAllFriendRequestsAction = roduxModule.makeActionCreator("DECLINE_ALL_FRIEND_REQUESTS", function(p14)
 		return { ids = p14.ids }
 	end),
 	mockGetFriendRecommendationsFromUserId = "GET_FRIEND_RECOMMENDATIONS_FROM_USER_ID",
-	mockGetFriendRecommendationsFromUserIdAction = roduxModule.makeActionCreator("GET_FRIEND_RECOMMENDATIONS_FROM_USER_ID", function(p15, p16) --[[ line: 163 ]]
+	mockGetFriendRecommendationsFromUserIdAction = roduxModule.makeActionCreator("GET_FRIEND_RECOMMENDATIONS_FROM_USER_ID", function(p15, p16)
 		return {
 			responseBody = {
 				data = p16 or {
@@ -181,7 +181,7 @@ return {
 		}
 	end),
 	mockGetFriendshipStatus = "GET_FRIENDSHIP_STATUS",
-	mockGetFriendshipStatusAction = roduxModule.makeActionCreator("GET_FRIENDSHIP_STATUS", function(_) --[[ line: 238 ]]
+	mockGetFriendshipStatusAction = roduxModule.makeActionCreator("GET_FRIENDSHIP_STATUS", function(_)
 		return {
 			responseBody = {
 				data = {
@@ -192,7 +192,7 @@ return {
 		}
 	end),
 	mockGetFriendshipStatuses = "GET_FRIENDSHIP_STATUSES",
-	mockGetFriendshipStatusesAction = roduxModule.makeActionCreator("GET_FRIENDSHIP_STATUSES", function(_) --[[ line: 256 ]]
+	mockGetFriendshipStatusesAction = roduxModule.makeActionCreator("GET_FRIENDSHIP_STATUSES", function(_)
 		return {
 			responseBody = {
 				data = {
@@ -203,11 +203,11 @@ return {
 		}
 	end),
 	mockGetUserExtendedFriendshipStatus = "GET_EXTENDED_FRIENDSHIP_STATUS",
-	mockGetUserExtendedFriendshipStatusAction = roduxModule.makeActionCreator("GET_EXTENDED_FRIENDSHIP_STATUS", function(p17, p18) --[[ line: 276 ]]
+	mockGetUserExtendedFriendshipStatusAction = roduxModule.makeActionCreator("GET_EXTENDED_FRIENDSHIP_STATUS", function(p17, p18)
 		return { responseBody = p18, ids = { p17 } }
 	end),
 	mockGetFollowingExists = "GET_FOLLOWING_EXISTS",
-	mockGetFollowingExistsAction = roduxModule.makeActionCreator("GET_FOLLOWING_EXISTS", function(_, _) --[[ line: 294 ]]
+	mockGetFollowingExistsAction = roduxModule.makeActionCreator("GET_FOLLOWING_EXISTS", function(_, _)
 		return {
 			responseBody = {
 				followings = {
@@ -218,7 +218,7 @@ return {
 		}
 	end),
 	mockBlockUserById = "BLOCK_USER_BY_ID",
-	mockBlockUserByIdAction = roduxModule.makeActionCreator("BLOCK_USER_BY_ID", function(p19, p20) --[[ line: 285 ]]
+	mockBlockUserByIdAction = roduxModule.makeActionCreator("BLOCK_USER_BY_ID", function(p19, p20)
 		return {
 			responseBody = p20,
 			namedIds = { users = p19.userId },

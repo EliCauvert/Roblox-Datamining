@@ -6,7 +6,7 @@ local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function() --[[ line: 15 | named "EventDetailsFullBleedSkeleton" ]]
+return reactModule.memo(function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	return reactModule.createElement(view, {
 		ClipsDescendants = true,

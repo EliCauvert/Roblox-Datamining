@@ -7,17 +7,17 @@ local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 local getAccountModule = require(bulkPurchaseApp.NetworkRequests.getAccount)
 local _ = require(bulkPurchaseApp.Store.Types)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 17 | named "InitiateBulkPurchaseFlow" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: bulkPurchaseRequestedModule (ref), getAccountModule (ref), promiseModule (ref), bulkPurchaseStartedModule (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
-	return function(p7) --[[ line: 26 ]]
+	return function(p7)
 		-- upvalues: bulkPurchaseRequestedModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), getAccountModule (copy), p0 (ref), promiseModule (copy), bulkPurchaseStartedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
 		p7:dispatch(bulkPurchaseRequestedModule(p1, p2, p3, p4, p5, p6))
 		local var7, _ = getAccountModule(p0)
 		
-		return promiseModule.all({ var7 }):andThen(function(_) --[[ line: 41 ]]
+		return promiseModule.all({ var7 }):andThen(function(_)
 			-- upvalues: p7 (ref), bulkPurchaseStartedModule (copy), p3 (copy)
 			p7:dispatch(bulkPurchaseStartedModule(p3))
-		end):catch(function(_) --[[ line: 49 ]]
+		end):catch(function(_)
 			-- upvalues: p7 (ref), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
 			p7:dispatch(bulkPurchaseFailedModule(errorCodeEnumModule.Generic))
 		end)

@@ -1,7 +1,7 @@
 ﻿local playWithRewardExperimentDataModule = require(script:FindFirstAncestor("PlayWithRewardState").PlayWithRewardExperimentData)
 
 return {
-	new = function(p0, p1, p2, p3, p4) --[[ line: 16 ]]
+	new = function(p0, p1, p2, p3, p4)
 		-- upvalues: playWithRewardExperimentDataModule (ref)
 		return {
 			adAvailabilityResult = p0,

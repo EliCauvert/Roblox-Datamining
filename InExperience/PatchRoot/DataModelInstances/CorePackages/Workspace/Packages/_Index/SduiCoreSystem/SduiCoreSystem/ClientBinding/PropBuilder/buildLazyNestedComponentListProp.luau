@@ -25,7 +25,7 @@ local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPage
 local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 local t = {}
 
-local function buildItemList(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 47 ]]
+local function buildItemList(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	-- upvalues: fFlagSduiInlineNestedComponentSchema (ref), fFlagSduiLazyNestedComponentArrayMapItemResolutionSupport (ref), fFlagSduiFixEmptyRobloxComponentInPropBuilder (ref), fFlagSduiOrderedTemplateDataSupport (ref), sduiPropUtilsModule (ref), signalsModule (ref), cryoModule (ref), t (ref), buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildConfigForComponent (ref)
 	local t_1 = {}
 	
@@ -55,7 +55,7 @@ local function buildItemList(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 
 				table.insert(t_1, var19)
 			end
 		else
-			local var18 = buildConfigForComponent(var16, signalsModule.createComputed(function(p10) --[[ line: 102 ]]
+			local var18 = buildConfigForComponent(var16, signalsModule.createComputed(function(p10)
 				-- upvalues: fFlagSduiInlineNestedComponentSchema (copy), var17 (write), cryoModule (copy), p3 (ref), v (ref), t (copy), p2 (ref), buildInputsForNestedComponentModule (copy), p7 (ref), p4 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), sduiParseHelpersModule (copy), fFlagSduiImprovedErrorDimensions (copy)
 				if fFlagSduiInlineNestedComponentSchema and var17 then
 					return cryoModule.Dictionary.join(p3(p10), v or t)
@@ -65,7 +65,7 @@ local function buildItemList(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 
 				
 				if p2 then
 					cloned = table.clone(v)
-					local ok, status = pcall(function() --[[ line: 114 ]]
+					local ok, status = pcall(function()
 						-- upvalues: buildInputsForNestedComponentModule (copy), p3 (copy), p2 (copy), p7 (copy), p10 (ref), cloned (write), p4 (copy)
 						buildInputsForNestedComponentModule(p3, p2, p7, p10, cloned, p4)
 					end)
@@ -98,7 +98,7 @@ local function buildItemList(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 
 	return t_1
 end
 
-local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15) --[[ line: 171 ]]
+local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15)
 	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), signalsModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiImprovedErrorDimensions (ref), buildInputsForNestedComponentModule (ref), buildConfigForComponent (ref), sduiParseHelpersModule (ref), propResultCategory (ref)
 	local entryMapPath = p11.entry_map_path
 	local entryOrder = p11.entry_order
@@ -114,9 +114,9 @@ local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15) --[[ line: 
 	local var22 = if entryOrder then entryOrder.kind else nil
 	local var23 = if var22 and var22.type == "binding_path" then if fFlagSduiRenderPerf then splitDottedPathModule(var22.value) else string.split(var22.value, ".") else nil
 	
-	return signalsModule.createComputed(function(p16) --[[ line: 198 ]]
+	return signalsModule.createComputed(function(p16)
 		-- upvalues: var23 (ref), sduiPropUtilsModule (copy), p12 (ref), p13 (ref), fFlagSduiClientPageScope (copy), p14 (ref), var22 (ref), var21 (ref), templateDataMap (ref), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (ref), sduiParseHelpersModule (copy)
-		local ok, status = pcall(function() --[[ line: 199 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var23 (copy), sduiPropUtilsModule (copy), p16 (ref), p12 (copy), p13 (copy), fFlagSduiClientPageScope (copy), p14 (copy), var22 (copy), var21 (copy), templateDataMap (copy), fFlagSduiInlineNestedComponentSchema (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), buildConfigForComponent (copy), p15 (copy), sduiParseHelpersModule (copy)
 			local var24 = nil
 			
@@ -148,13 +148,13 @@ local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15) --[[ line: 
 							parserName = if fFlagSduiImprovedErrorDimensions then p14.currentParserName else nil
 						}, p14.appPage)
 					else
-						local ok, status = pcall(function() --[[ line: 272 ]]
+						local ok, status = pcall(function()
 							-- upvalues: fFlagSduiInlineNestedComponentSchema (copy), sduiPropUtilsModule (copy), var31 (ref), var30 (ref), p14 (copy), var28 (ref), signalsModule (copy), p13 (copy), buildInputsForNestedComponentModule (copy), p12 (copy), var29 (ref), buildConfigForComponent (copy), p15 (copy)
 							local var32 = if fFlagSduiInlineNestedComponentSchema then sduiPropUtilsModule.resolveTemplate(var31, var30, p14) else sduiPropUtilsModule.resolveTemplate(var31, p14)
 							local var33 = fFlagSduiInlineNestedComponentSchema and var30 ~= nil
 							local var34 = if var28 then var28.inputs else nil
 							
-							return buildConfigForComponent(var32, signalsModule.createComputed(function(p17) --[[ line: 284 ]]
+							return buildConfigForComponent(var32, signalsModule.createComputed(function(p17)
 								-- upvalues: var33 (ref), p13 (copy), var34 (ref), buildInputsForNestedComponentModule (copy), p12 (copy), p14 (copy), var29 (copy)
 								local cloned
 								local _ = nil
@@ -211,7 +211,7 @@ local function buildOrderedTemplateDataList(p11, p12, p13, p14, p15) --[[ line: 
 	end), propResultCategory.PropSignal
 end
 
-local function buildLazyNestedComponentListProp(p18, p19, p20, p21, p22, p23) --[[ line: 392 ]]
+local function buildLazyNestedComponentListProp(p18, p19, p20, p21, p22, p23)
 	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), fFlagSduiOrderedTemplateDataSupport (ref), fFlagSduiInlineNestedComponentSchema (ref), sduiPropUtilsModule (ref), buildItemList (ref), propResultCategory (ref), signalsModule (ref), buildInputsForNestedComponentModule (ref), sduiParseHelpersModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), buildConfigForComponent (ref), buildOrderedTemplateDataList (ref), buildLazyNestedComponentListProp (ref), buildComponentListModule (ref)
 	local var37
 	local currentComponentType = nil
@@ -243,7 +243,7 @@ local function buildLazyNestedComponentListProp(p18, p19, p20, p21, p22, p23) --
 		local var39 = fFlagSduiInlineNestedComponentSchema and p19.inline_component ~= nil
 		local var40 = nil
 		
-		return sduiPropUtilsModule.generateDynamicBindingPropValue(bindingPath, p20, p22, p21, function(p24, p25) --[[ line: 441 ]]
+		return sduiPropUtilsModule.generateDynamicBindingPropValue(bindingPath, p20, p22, p21, function(p24, p25)
 			-- upvalues: var40 (write), buildItemList (copy), var37 (write), p19 (ref), p21 (ref), p22 (ref), p23 (ref), p20 (ref), var39 (ref)
 			var40 = buildItemList(var37, p24, p19.inputs, p21, p22, p23, var40, p20, p25, var39)
 			
@@ -258,9 +258,9 @@ local function buildLazyNestedComponentListProp(p18, p19, p20, p21, p22, p23) --
 		if typeof(var37) ~= "table" then
 			error(`Missing or invalid templateDataList.items {typeof(p19)}`)
 		end
-		return signalsModule.createComputed(function(p26) --[[ line: 471 ]]
+		return signalsModule.createComputed(function(p26)
 			-- upvalues: var37 (ref), fFlagSduiOrderedTemplateDataSupport (copy), fFlagSduiInlineNestedComponentSchema (copy), sduiPropUtilsModule (copy), p22 (ref), p21 (ref), signalsModule (copy), buildInputsForNestedComponentModule (copy), p20 (ref), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), buildConfigForComponent (copy), p23 (ref)
-			local ok, status = pcall(function() --[[ line: 472 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var37 (copy), fFlagSduiOrderedTemplateDataSupport (copy), fFlagSduiInlineNestedComponentSchema (copy), sduiPropUtilsModule (copy), p22 (copy), p21 (copy), signalsModule (copy), buildInputsForNestedComponentModule (copy), p20 (copy), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (copy), currentParserName (copy), buildConfigForComponent (copy), p23 (copy), p26 (ref)
 				local t = {}
 				
@@ -281,12 +281,12 @@ local function buildLazyNestedComponentListProp(p18, p19, p20, p21, p22, p23) --
 					var42 = templateForRobloxComponent
 					local var44 = fFlagSduiInlineNestedComponentSchema and v.inline_component ~= nil
 					local inputs = v.inputs
-					local var45 = buildConfigForComponent(var42, if fFlagSduiInlineNestedComponentSchema and var44 then p21 else signalsModule.createComputed(function(p27) --[[ line: 500 ]]
+					local var45 = buildConfigForComponent(var42, if fFlagSduiInlineNestedComponentSchema and var44 then p21 else signalsModule.createComputed(function(p27)
 						-- upvalues: inputs (ref), buildInputsForNestedComponentModule (copy), p21 (copy), p20 (copy), p22 (copy), sduiParseHelpersModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (copy), currentParserName (copy)
 						local t = {}
 						
 						if inputs then
-							local ok, status = pcall(function() --[[ line: 503 ]]
+							local ok, status = pcall(function()
 								-- upvalues: buildInputsForNestedComponentModule (copy), p21 (copy), inputs (copy), p20 (copy), p27 (ref), t (ref), p22 (copy)
 								buildInputsForNestedComponentModule(p21, inputs, p20, p27, t, p22)
 							end)

@@ -19,7 +19,7 @@ local _ = require(script.Parent.CheckboxFeedbackFormModal)
 local snackbarWrapperModule = require(script.Parent.SnackbarWrapper)
 local fFlagLuaAppUseSnackbarForProvideFeedbackToast = sharedFlagsModule.FFlagLuaAppUseSnackbarForProvideFeedbackToast
 
-return reactModule.memo(function(p0) --[[ line: 55 | named "ProvideFeedbackToast" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useDispatch (ref), useTokens (ref), useLocalization (ref), reactModule (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref), fFlagLuaAppUseSnackbarForProvideFeedbackToast (ref), snackbarWrapperModule (ref), useSelector (ref), toast (ref)
 	local var9 = useDispatch()
 	local var10 = useTokens()
@@ -27,14 +27,14 @@ return reactModule.memo(function(p0) --[[ line: 55 | named "ProvideFeedbackToast
 		giveFeedback = "Feature.GameDetails.Action.GiveFeedback",
 		helpUsImprove = "Feature.GameDetails.Message.HelpImproveExperience"
 	})
-	local var12 = reactModule.useCallback(function() --[[ line: 63 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var9 (ref), setCentralOverlay (copy), centralOverlayType (copy)
 		if p0.onToastActivated then
 			task.spawn(p0.onToastActivated)
 		end
 		var9(setCentralOverlay(centralOverlayType.CheckboxFeedbackFormModal, p0.feedbackFormProps))
 	end, { p0.onToastActivated, var9, p0.feedbackFormProps })
-	local var13 = reactModule.useCallback(function() --[[ line: 70 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var9 (ref), closeCentralOverlay (copy)
 		if p0.onToastDismissed then
 			task.spawn(p0.onToastDismissed)
@@ -51,9 +51,9 @@ return reactModule.memo(function(p0) --[[ line: 55 | named "ProvideFeedbackToast
 		closeSnackbar = var13
 	}) else reactModule.createElement(toast, {
 		duration = 5,
-		position = UDim2.new(0.5, 0, 0, useSelector(function(p1) --[[ line: 93 ]]
+		position = UDim2.new(0.5, 0, 0, useSelector(function(p1)
 			return p1.GlobalGuiInset or { left = 0, top = 0, right = 0, bottom = 0 }
-		end).top + 20 + useSelector(function(p2) --[[ line: 102 ]]
+		end).top + 20 + useSelector(function(p2)
 			return p2.TopBar.statusBarHeight
 		end)),
 		toastContent = {

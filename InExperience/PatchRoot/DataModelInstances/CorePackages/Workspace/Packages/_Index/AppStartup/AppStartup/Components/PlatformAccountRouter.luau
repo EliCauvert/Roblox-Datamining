@@ -6,15 +6,15 @@ local thirdPartyUserService = game:GetService("ThirdPartyUserService")
 local default = require(parent.LoggingProtocol).default
 local useProperty = require(parent.GuiObjectUtils).useProperty
 
-return if thirdPartyUserService and thirdPartyUserService.IsSingleSignOnSupported and thirdPartyUserService:IsSingleSignOnSupported() then function(_) --[[ line: 17 ]]
+return if thirdPartyUserService and thirdPartyUserService.IsSingleSignOnSupported and thirdPartyUserService:IsSingleSignOnSupported() then function(_)
 	-- upvalues: useNavigation (ref), useProperty (ref), thirdPartyUserService (ref), reactModule (ref), default (ref), appPage (ref)
 	local var3 = useNavigation()
 	local var4 = useProperty(thirdPartyUserService, "HasActiveUser")
-	reactModule.useEffect(function() --[[ line: 21 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (copy)
 		default:logEventOnce("platform_account_router_page_did_mount")
 	end, {})
-	reactModule.useEffect(function() --[[ line: 25 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), default (copy), var3 (ref), appPage (copy)
 		if var4 then
 			default:logEventOnce("platform_account_router_page_did_continue")
@@ -23,10 +23,10 @@ return if thirdPartyUserService and thirdPartyUserService.IsSingleSignOnSupporte
 	end, { var4, var3 })
 	
 	return nil
-end else function(_) --[[ line: 34 ]]
+end else function(_)
 	-- upvalues: useNavigation (ref), reactModule (ref), default (ref), appPage (ref)
 	local var2 = useNavigation()
-	reactModule.useEffect(function() --[[ line: 36 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (copy), var2 (ref), appPage (copy)
 		default:logEventOnce("platform_account_router_page_did_mount")
 		default:logEventOnce("platform_account_router_page_did_continue")

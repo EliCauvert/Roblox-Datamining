@@ -1,13 +1,13 @@
 ﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local sduiUsageRecorderModule = require(sduiCoreSystem.Analytics.SduiUsageRecorder)
 
-local function _(p0) --[[ line: 23 | named "unwrapOneofProp" ]]
+local function _(p0)
 	return if p0 and p0.oneof_prop and p0.oneof_prop.value then p0.oneof_prop.value else p0
 end
 
 local recordV2ActionPropDefinition = nil
 
-local _ = function(p1) --[[ line: 37 | named "unwrapInnerActionConfig" ]]
+local _ = function(p1)
 	if typeof(p1) ~= "table" then
 		return nil
 	end
@@ -16,7 +16,7 @@ local _ = function(p1) --[[ line: 37 | named "unwrapInnerActionConfig" ]]
 	return if typeof(kind) == "table" and typeof(kind.value) == "table" then kind.value elseif typeof(p1.action_type) == "string" then p1 else nil
 end
 
-local function recordV2ActionConfig(p2, p3) --[[ line: 56 ]]
+local function recordV2ActionConfig(p2, p3)
 	-- upvalues: sduiCoreSystem (ref), sduiUsageRecorderModule (ref), recordV2ActionPropDefinition (write)
 	if typeof(p3) ~= "table" then return end
 	local actionType = p3.action_type
@@ -46,7 +46,7 @@ local function recordV2ActionConfig(p2, p3) --[[ line: 56 ]]
 	end
 end
 
-recordV2ActionPropDefinition = function(p4, p5) --[[ line: 95 | named "recordV2ActionPropDefinition" ]]
+recordV2ActionPropDefinition = function(p4, p5)
 	-- upvalues: recordV2ActionConfig (ref)
 	local var12
 	local kind = p5 and p5.kind
@@ -83,7 +83,7 @@ recordV2ActionPropDefinition = function(p4, p5) --[[ line: 95 | named "recordV2A
 	end
 end
 
-return function(p6, p7) --[[ line: 123 | named "recordTemplateUsage" ]]
+return function(p6, p7)
 	-- upvalues: sduiUsageRecorderModule (ref), sduiCoreSystem (ref), recordV2ActionPropDefinition (write)
 	if not p7 then return end
 	local var13 = sduiUsageRecorderModule.isTypeSamplingEnabled()

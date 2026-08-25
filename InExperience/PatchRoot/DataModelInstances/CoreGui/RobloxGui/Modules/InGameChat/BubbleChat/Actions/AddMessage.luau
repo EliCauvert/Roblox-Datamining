@@ -2,7 +2,7 @@
 local maybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
 local typesModule = require(script.Parent.Parent.Types)
 
-return makeActionCreator(script.Name, function(p0) --[[ line: 7 ]]
+return makeActionCreator(script.Name, function(p0)
 	-- upvalues: maybeAssertModule (ref), typesModule (ref)
 	maybeAssertModule(typesModule.IMessage(p0))
 	

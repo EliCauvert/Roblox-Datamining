@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.util.Types)
 
-return function(p0, p1, p2, p3) --[[ line: 5 ]]
+return function(p0, p1, p2, p3)
 	if not p2 then
 		if p3.isServer then
 			error(string.format("Failed to load texture data"))

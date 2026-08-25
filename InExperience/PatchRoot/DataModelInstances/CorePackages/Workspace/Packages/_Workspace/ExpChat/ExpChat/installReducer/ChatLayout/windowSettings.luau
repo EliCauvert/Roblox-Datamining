@@ -17,11 +17,11 @@ return roduxModule.createReducer({
 	BackgroundTransparency = configModule.ChatWindowBackgroundTransparency,
 	SpatialPanelTextSize = configModule.ChatWindowSpatialPanelTextSize
 }, {
-	[require(actions.ConfigurationObjectsLoaded).name] = function(p0, p1) --[[ line: 26 ]]
+	[require(actions.ConfigurationObjectsLoaded).name] = function(p0, p1)
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p0, p1.chatWindowSettings)
 	end,
-	[require(actions.ChatWindowSettingsChanged).name] = function(p2, p3) --[[ line: 30 ]]
+	[require(actions.ChatWindowSettingsChanged).name] = function(p2, p3)
 		-- upvalues: dictionary (ref)
 		return if p2[p3.property] then dictionary.join(p2, { [p3.property] = p3.value }) else p2
 	end

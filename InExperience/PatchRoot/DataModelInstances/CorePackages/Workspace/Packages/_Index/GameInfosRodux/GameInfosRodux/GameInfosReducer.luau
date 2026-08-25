@@ -3,7 +3,7 @@ local addGamesModule = require(script.Parent.AddGames)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.DiscoveryTypes)
 
-local function getMergedState(p0, p1) --[[ line: 12 ]]
+local function getMergedState(p0, p1)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
@@ -19,7 +19,7 @@ end
 
 return {
 	key = "GameInfosKey",
-	reducer = function(p2, p3) --[[ line: 26 ]]
+	reducer = function(p2, p3)
 		-- upvalues: addGamesModule (ref), getMergedState (ref)
 		p2 = p2 or {}
 		assert(p2, "")

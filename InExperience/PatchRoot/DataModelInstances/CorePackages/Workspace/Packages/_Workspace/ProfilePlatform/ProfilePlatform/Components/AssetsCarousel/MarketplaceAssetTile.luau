@@ -11,7 +11,7 @@ local textKeysModule = require(profilePlatform.Common.TextKeys)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
 
-return function(value) --[[ line: 46 | named "MarketplaceAssetTile" ]]
+return function(value)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), enumsModule (ref), constants (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), catalogItemCard (ref), itemCardThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref)
 	local var6 = useLocalization({
 		free = textKeysModule.CatalogLabelFree,

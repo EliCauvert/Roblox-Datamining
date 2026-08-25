@@ -13,9 +13,9 @@ contactsInformationModal.validateProps = t.strictInterface({
 	layoutOrder = t.optional(t.number)
 })
 
-function contactsInformationModal.render(p0) --[[ line: 32 ]]
+function contactsInformationModal.render(p0)
 	-- upvalues: withStyle (ref), roact (ref), imageSetLabel (ref), iconSize (ref), styledTextLabel (ref)
-	return withStyle(function(p1) --[[ line: 33 ]]
+	return withStyle(function(p1)
 		-- upvalues: p0 (ref), roact (copy), imageSetLabel (copy), iconSize (copy), styledTextLabel (copy)
 		local props = p0.props
 		

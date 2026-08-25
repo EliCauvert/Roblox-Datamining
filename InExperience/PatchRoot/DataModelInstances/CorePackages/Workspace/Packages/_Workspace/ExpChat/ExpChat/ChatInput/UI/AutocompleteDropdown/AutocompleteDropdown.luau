@@ -8,13 +8,13 @@ local dictionary = require(parent.llama).Dictionary
 local configModule = require(expChat.Config)
 local autocompleteEntryModule = require(script.Parent.AutocompleteEntry)
 
-return reactModule.memo(function(p0) --[[ line: 19 | named "AutoCompleteDropdown" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useStyle (ref), dictionary (ref), autocompleteEntryModule (ref), list (ref), configModule (ref), textChatService (ref)
 	local var5 = reactModule.useRef(nil)
 	local theme = useStyle().Theme
-	local var6 = reactModule.useCallback(function(p1) --[[ line: 25 ]]
+	local var6 = reactModule.useCallback(function(p1)
 		-- upvalues: dictionary (copy), reactModule (copy), autocompleteEntryModule (copy), p0 (ref), list (copy)
-		local var18 = dictionary.map(p1, function(p2, p3) --[[ line: 26 ]]
+		local var18 = dictionary.map(p1, function(p2, p3)
 			-- upvalues: reactModule (copy), autocompleteEntryModule (copy), p0 (copy), list (copy), p1 (ref)
 			return reactModule.createElement(autocompleteEntryModule, {
 				result = p2,
@@ -34,7 +34,7 @@ return reactModule.memo(function(p0) --[[ line: 19 | named "AutoCompleteDropdown
 		return var18
 	end)
 	
-	local function setCanvasPosition() --[[ line: 50 ]]
+	local function setCanvasPosition()
 		-- upvalues: var5 (ref), p0 (ref), configModule (copy)
 		if not var5.current then
 			return Vector2.new(0, 0)

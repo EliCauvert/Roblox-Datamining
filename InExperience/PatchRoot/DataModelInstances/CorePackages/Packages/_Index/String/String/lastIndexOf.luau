@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 16 | named "lastIndexOf" ]]
+﻿return function(p0, p1, p2)
 	local var0 = string.len(p0)
 	local var1 = if p2 and p2 < 1 then 1 else p2 or var0
 	

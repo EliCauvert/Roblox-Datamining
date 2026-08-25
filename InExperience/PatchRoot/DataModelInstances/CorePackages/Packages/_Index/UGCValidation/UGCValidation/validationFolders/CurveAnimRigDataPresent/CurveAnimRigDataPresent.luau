@@ -22,7 +22,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 27 ]]
+function t.run(p0, p1)
 	-- upvalues: errorSourceStringsModule (ref), getFFlagUGCValidateEmotesBonesAllowedModule (ref), curveAnimBoneHierarchyUtilsModule (ref), getFFlagUGCValidateCurveAnimRigDataR15PlusModule (ref), getEngineFeatureIsValidR15PlusModule (ref)
 	for i, v in p1.curveAnimations do
 		local var9 = 0

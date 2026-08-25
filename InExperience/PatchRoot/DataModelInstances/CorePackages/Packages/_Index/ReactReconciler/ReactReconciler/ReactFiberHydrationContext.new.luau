@@ -2,7 +2,7 @@
 local reactGlobalsModule = require(parent.ReactGlobals)
 local console = require(parent.Shared).console
 
-local function _(p0) --[[ line: 18 | named "unimplemented" ]]
+local function _(p0)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. p0)
@@ -41,14 +41,14 @@ local var4 = nil
 local var5 = nil
 local var6 = false
 
-function warnIfHydrating() --[[ line: 92 ]]
+function warnIfHydrating()
 	-- upvalues: reactGlobalsModule (ref), var6 (write), console (ref)
 	if reactGlobalsModule.__DEV__ and var6 then
 		console.error("We should not be hydrating here. This is a bug in React. Please file a bug.")
 	end
 end
 
-function enterHydrationState(p1) --[[ line: 102 ]]
+function enterHydrationState(p1)
 	-- upvalues: supportsHydration (ref), var5 (write), getFirstHydratableChild (ref), var4 (write), var6 (write)
 	if supportsHydration then
 		var5 = getFirstHydratableChild(p1.stateNode.containerInfo)
@@ -60,7 +60,7 @@ function enterHydrationState(p1) --[[ line: 102 ]]
 	return false
 end
 
-function reenterHydrationStateFromDehydratedSuspenseInstance(p2, p3) --[[ line: 114 ]]
+function reenterHydrationStateFromDehydratedSuspenseInstance(p2, p3)
 	-- upvalues: supportsHydration (ref), var5 (write), getNextHydratableSibling (ref), var6 (write)
 	if supportsHydration then
 		var5 = getNextHydratableSibling(p3)
@@ -72,14 +72,14 @@ function reenterHydrationStateFromDehydratedSuspenseInstance(p2, p3) --[[ line: 
 	return false
 end
 
-function deleteHydratableInstance(_, _) --[[ line: 128 ]]
+function deleteHydratableInstance(_, _)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: deleteHydratableInstance")
 	error("FIXME (roblox): deleteHydratableInstance is unimplemented", 2)
 end
 
-function insertNonHydratedInstance(_, p4) --[[ line: 163 ]]
+function insertNonHydratedInstance(_, p4)
 	-- upvalues: hydrating (ref), placement (ref), reactGlobalsModule (ref)
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -88,7 +88,7 @@ function insertNonHydratedInstance(_, p4) --[[ line: 163 ]]
 	p4.flags = bit32.bor(bit32.band(p4.flags, bit32.bnot(hydrating)), placement)
 end
 
-function tryHydrate(p5, p6) --[[ line: 227 ]]
+function tryHydrate(p5, p6)
 	-- upvalues: hostComponent (ref), canHydrateInstance (ref), hostText (ref), canHydrateTextInstance (ref), suspenseComponent (ref), enableSuspenseServerRenderer (ref), canHydrateSuspenseInstance (ref), offscreenLane (ref), createFiberFromDehydratedFragment (ref)
 	if p5.tag == hostComponent then
 		local var7 = canHydrateInstance(p6, p5.type, p5.pendingProps)
@@ -126,7 +126,7 @@ function tryHydrate(p5, p6) --[[ line: 227 ]]
 	end
 end
 
-function tryToClaimNextHydratableInstance(p7) --[[ line: 272 ]]
+function tryToClaimNextHydratableInstance(p7)
 	-- upvalues: var6 (write), var5 (write), var4 (write), getNextHydratableSibling (ref), getFirstHydratableChild (ref)
 	if not var6 then return end
 	local var11 = var5
@@ -153,7 +153,7 @@ function tryToClaimNextHydratableInstance(p7) --[[ line: 272 ]]
 	var5 = getFirstHydratableChild(var11)
 end
 
-function prepareToHydrateHostInstance(p8, p9, p10) --[[ line: 308 ]]
+function prepareToHydrateHostInstance(p8, p9, p10)
 	-- upvalues: supportsHydration (ref), invariant (ref), hydrateInstance (ref)
 	if not supportsHydration then
 		invariant(false, "Expected prepareToHydrateHostInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -164,7 +164,7 @@ function prepareToHydrateHostInstance(p8, p9, p10) --[[ line: 308 ]]
 	return var12 ~= nil
 end
 
-function prepareToHydrateHostTextInstance(p11) --[[ line: 340 ]]
+function prepareToHydrateHostTextInstance(p11)
 	-- upvalues: supportsHydration (ref), invariant (ref), hydrateTextInstance (ref), reactGlobalsModule (ref), var4 (write), hostRoot (ref), didNotMatchHydratedContainerTextInstance (ref), hostComponent (ref), didNotMatchHydratedTextInstance (ref)
 	if not supportsHydration then
 		invariant(false, "Expected prepareToHydrateHostTextInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -189,7 +189,7 @@ function prepareToHydrateHostTextInstance(p11) --[[ line: 340 ]]
 	return var13
 end
 
-function prepareToHydrateHostSuspenseInstance(p12) --[[ line: 383 ]]
+function prepareToHydrateHostSuspenseInstance(p12)
 	-- upvalues: supportsHydration (ref), invariant (ref), hydrateSuspenseInstance (ref)
 	if not supportsHydration then
 		invariant(false, "Expected prepareToHydrateHostSuspenseInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -200,7 +200,7 @@ function prepareToHydrateHostSuspenseInstance(p12) --[[ line: 383 ]]
 	hydrateSuspenseInstance(var15, p12)
 end
 
-function skipPastDehydratedSuspenseInstance(p13) --[[ line: 408 ]]
+function skipPastDehydratedSuspenseInstance(p13)
 	-- upvalues: supportsHydration (ref), invariant (ref), getNextHydratableInstanceAfterSuspenseInstance (ref)
 	if not supportsHydration then
 		invariant(false, "Expected skipPastDehydratedSuspenseInstance() to never be called. This error is likely caused by a bug in React. Please file an issue.")
@@ -212,7 +212,7 @@ function skipPastDehydratedSuspenseInstance(p13) --[[ line: 408 ]]
 	return getNextHydratableInstanceAfterSuspenseInstance(var16)
 end
 
-function popToNextHostParent(p14) --[[ line: 431 ]]
+function popToNextHostParent(p14)
 	-- upvalues: hostComponent (ref), hostRoot (ref), suspenseComponent (ref), var4 (write)
 	local _return = p14.return_
 	while _return ~= nil and (_return.tag ~= hostComponent and _return.tag ~= hostRoot) and _return.tag ~= suspenseComponent do
@@ -221,7 +221,7 @@ function popToNextHostParent(p14) --[[ line: 431 ]]
 	var4 = _return
 end
 
-function popHydrationState(p15) --[[ line: 444 ]]
+function popHydrationState(p15)
 	-- upvalues: supportsHydration (ref), var4 (write), var6 (write), hostComponent (ref), shouldSetTextContent (ref), var5 (write), getNextHydratableSibling (ref), suspenseComponent (ref)
 	if not supportsHydration then
 		return false
@@ -248,7 +248,7 @@ function popHydrationState(p15) --[[ line: 444 ]]
 	return true
 end
 
-function resetHydrationState() --[[ line: 497 ]]
+function resetHydrationState()
 	-- upvalues: supportsHydration (ref), var4 (write), var5 (write), var6 (write)
 	if supportsHydration then
 		var4 = nil
@@ -259,7 +259,7 @@ function resetHydrationState() --[[ line: 497 ]]
 	end
 end
 
-function getIsHydrating() --[[ line: 507 ]]
+function getIsHydrating()
 	-- upvalues: var6 (write)
 	return var6
 end

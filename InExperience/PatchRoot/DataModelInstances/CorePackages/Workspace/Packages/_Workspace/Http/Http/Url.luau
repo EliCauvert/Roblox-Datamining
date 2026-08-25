@@ -1,6 +1,6 @@
 ﻿local contentProviderService = game:GetService("ContentProvider")
 
-local function parseBaseUrlInformation() --[[ line: 12 ]]
+local function parseBaseUrlInformation()
 	-- upvalues: contentProviderService (ref)
 	local baseUrl = contentProviderService.BaseUrl
 	
@@ -13,11 +13,11 @@ local function parseBaseUrlInformation() --[[ line: 12 ]]
 	return baseUrl, baseUrl:sub(var51 + 1, var52 - 1), baseUrl:sub(var53 + 1)
 end
 
-local function preventTableModification(_, _, _) --[[ line: 34 ]]
+local function preventTableModification(_, _, _)
 	error("Attempt to modify read-only table")
 end
 
-local function _(p0) --[[ line: 37 | named "createReadOnlyTable" ]]
+local function _(p0)
 	-- upvalues: preventTableModification (ref)
 	return setmetatable({}, {
 		__metatable = false,
@@ -130,22 +130,22 @@ return setmetatable({}, {
 		TRANSLATIONS_URL = formattedText_40,
 		TWOSTEPVERIFICATION_URL = formattedText_41,
 		PRIVATEMESSAGES_URL = formattedText_42,
-		getUserProfileUrl = function(p1, p2) --[[ line: 155 ]]
+		getUserProfileUrl = function(p1, p2)
 			return string.format("%susers/%s/profile", p1.BASE_URL, p2)
 		end,
-		getUserFriendsUrl = function(p3, p4) --[[ line: 159 ]]
+		getUserFriendsUrl = function(p3, p4)
 			return string.format("%susers/%s/friends", p3.BASE_URL, p4)
 		end,
-		getUserInventoryUrl = function(p5, p6) --[[ line: 163 ]]
+		getUserInventoryUrl = function(p5, p6)
 			return string.format("%susers/%s/inventory", p5.BASE_URL, p6)
 		end,
-		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10) --[[ line: 167 ]]
+		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10)
 			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p7.BASE_URL, p9, p10, tostring(p8))
 		end,
-		isVanitySite = function(p11) --[[ line: 177 ]]
+		isVanitySite = function(p11)
 			return p11.PREFIX ~= "www"
 		end,
-		makeQueryString = function(_, p12) --[[ line: 182 ]]
+		makeQueryString = function(_, p12)
 			local t = {}
 			
 			for i, v in pairs(p12) do
@@ -161,7 +161,7 @@ return setmetatable({}, {
 			end
 			return table.concat(t, "&")
 		end,
-		stripHttpsAndTrailingSlash = function(p13) --[[ line: 205 ]]
+		stripHttpsAndTrailingSlash = function(p13)
 			return string.gsub(string.gsub(p13, "^https://", ""), "/*$", "")
 		end
 	},

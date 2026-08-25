@@ -18,7 +18,7 @@ local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.a
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
-return reactModule.memo(function(p0) --[[ line: 47 | named "ReviewNode" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useArTranslation (ref), useLayoutSlots (ref), reactModule (ref), view (ref), eyebrowModule (ref), previewBoxModule (ref), dashModule (ref), textWithTranslationModule (ref), fFlagAbuseReportMenuV2 (ref), footerModule (ref), button (ref), buttonVariant (ref), foundationModule (ref)
 	local var10 = useLayoutSlots()
 	
@@ -39,7 +39,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ReviewNode" ]]
 			DetailsContainer = reactModule.createElement(view, {
 				tag = "col gap-medium size-full-0 auto-y",
 				LayoutOrder = 3
-			}, dashModule.map(p0.details, function(p1) --[[ line: 81 ]]
+			}, dashModule.map(p0.details, function(p1)
 				-- upvalues: reactModule (copy), view (copy), textWithTranslationModule (copy)
 				return reactModule.createElement(view, { tag = "col size-full-0 auto-y gap-xsmall" }, {
 					Heading = reactModule.createElement(textWithTranslationModule, {

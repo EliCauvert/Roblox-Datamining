@@ -6,11 +6,11 @@ local _ = require(parent.LuauPolyfill)
 local constantsModule = require(robloxSubscriptionPurchaseApp.Constants)
 local marketplaceService = game:GetService("MarketplaceService")
 
-return function() --[[ line: 15 ]]
+return function()
 	-- upvalues: promiseModule (ref), marketplaceService (ref), constantsModule (ref), getRobloxSubscriptionProductsModelModule (ref)
-	return promiseModule.new(function(p0, p1) --[[ line: 16 ]]
+	return promiseModule.new(function(p0, p1)
 		-- upvalues: marketplaceService (copy), constantsModule (copy), getRobloxSubscriptionProductsModelModule (copy)
-		local ok, status = pcall(function() --[[ line: 17 ]]
+		local ok, status = pcall(function()
 			-- upvalues: marketplaceService (copy), constantsModule (copy)
 			return marketplaceService:GetAvailableSubscriptionProductsAsync(constantsModule.ROBLOX_SUBSCRIPTION_PRODUCT_TYPE)
 		end)

@@ -5,17 +5,17 @@ local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local getImageData = require(parent.RobloxAppAssets).GetImageData
 local loginSearchBar = roactModule.PureComponent:extend("LoginSearchBar")
 
-function loginSearchBar.init(p0) --[[ line: 18 ]]
+function loginSearchBar.init(p0)
 	p0.state = { longText = false }
 	p0.lastInput = 0
 	
-	function p0.searchTextChanged(p1) --[[ line: 25 ]]
+	function p0.searchTextChanged(p1)
 		-- upvalues: p0 (ref)
 		local var2 = p1.AbsoluteSize.X < p1.TextBounds.X
 		
 		if var2 ~= p0.state.longText then
 			p1.TextXAlignment = if var2 then Enum.TextXAlignment.Right else Enum.TextXAlignment.Left
-			spawn(function() --[[ line: 29 ]]
+			spawn(function()
 				-- upvalues: p0 (copy), var2 (ref)
 				p0:setState({ longText = var2 })
 			end)
@@ -32,7 +32,7 @@ function loginSearchBar.init(p0) --[[ line: 18 ]]
 	end
 end
 
-function loginSearchBar.render(p2) --[[ line: 47 ]]
+function loginSearchBar.render(p2)
 	-- upvalues: roactModule (ref), imageSetLabel (ref), getImageData (ref), appFonts (ref)
 	local offset = p2.props.Size.Y.Offset
 	local iconSize = p2.props.IconSize

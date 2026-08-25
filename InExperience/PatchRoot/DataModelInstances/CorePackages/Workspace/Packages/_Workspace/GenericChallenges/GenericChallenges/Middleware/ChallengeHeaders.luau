@@ -6,7 +6,7 @@ local httpService = game:GetService("HttpService")
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 41 ]]
+function t.new(p0)
 	-- upvalues: constantsModule (ref), base64 (ref), httpService (ref), genericTypeModule (ref), t (ref)
 	local t_1 = { challengeId = p0[constantsModule.challengeIdHeader] }
 	local var6 = base64.Decode(p0[constantsModule.challengeMetadataHeader])

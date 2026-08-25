@@ -6,7 +6,7 @@ local textButton = require(corePackagesService.Packages.UIBlox).App.Button.TextB
 local checkboxRowModule = require(script.Parent.CheckboxRow)
 local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
 
-local var5 = function() --[[ line: 25 ]] end
+local var5 = function() end
 
 reportActionSelection.defaultProps = {
 	titleText = "Thanks for your report!",
@@ -40,20 +40,20 @@ reportActionSelection.validateProps = tModule.interface({
 	ZIndex = tModule.number
 })
 
-function reportActionSelection.init(p0) --[[ line: 60 ]]
-	function p0.onMuteCheckboxActivated(p1) --[[ line: 61 ]]
+function reportActionSelection.init(p0)
+	function p0.onMuteCheckboxActivated(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ isVoiceMuted = p1 })
 		p0.props.onMuteCheckboxActivated(p1)
 	end
 	
-	function p0.onBlockCheckboxActivated(p2) --[[ line: 69 ]]
+	function p0.onBlockCheckboxActivated(p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ isBlocked = p2 })
 		p0.props.onBlockCheckboxActivated(p2)
 	end
 	
-	function p0.onDoneActivated() --[[ line: 77 ]]
+	function p0.onDoneActivated()
 		-- upvalues: p0 (ref)
 		p0.props.onDoneActivated(p0.state.isBlocked, p0.state.isVoiceMuted)
 	end
@@ -64,9 +64,9 @@ function reportActionSelection.init(p0) --[[ line: 60 ]]
 	})
 end
 
-function reportActionSelection.render(p3) --[[ line: 87 ]]
+function reportActionSelection.render(p3)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), roactModule (ref), checkboxRowModule (ref), textButton (ref)
-	return withFoundationOrUIBloxStyle(function(p4) --[[ line: 88 ]]
+	return withFoundationOrUIBloxStyle(function(p4)
 		return {
 			Theme = {
 				Divider = {
@@ -98,7 +98,7 @@ function reportActionSelection.render(p3) --[[ line: 87 ]]
 				}
 			}
 		}
-	end, function(p5) --[[ line: 120 ]]
+	end, function(p5)
 		-- upvalues: roactModule (copy), p3 (ref), checkboxRowModule (copy), textButton (copy)
 		local baseSize = p5.Font.BaseSize
 		

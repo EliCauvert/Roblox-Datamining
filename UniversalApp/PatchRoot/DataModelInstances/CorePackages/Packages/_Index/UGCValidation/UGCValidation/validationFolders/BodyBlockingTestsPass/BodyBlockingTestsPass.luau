@@ -17,7 +17,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateMeshMin(a, b, p0) --[[ line: 35 ]]
+local function validateMeshMin(a, b, p0)
 	-- upvalues: floatEqualsModule (ref), errorSourceStringsModule (ref)
 	local t = {}
 	
@@ -31,7 +31,7 @@ local function validateMeshMin(a, b, p0) --[[ line: 35 ]]
 	end
 end
 
-function t.run(p1, p2) --[[ line: 53 ]]
+function t.run(p1, p2)
 	-- upvalues: validateMeshMin (ref)
 	for i, v in p2.renderMeshesData do
 		validateMeshMin(p1, v.originalSize, i)

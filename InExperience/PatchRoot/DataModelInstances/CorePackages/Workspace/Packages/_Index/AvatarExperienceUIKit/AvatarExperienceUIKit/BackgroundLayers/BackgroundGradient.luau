@@ -7,7 +7,7 @@ local t = {
 	transparency = NumberSequence.new(0)
 }
 
-return function(value) --[[ line: 22 | named "BackgroundGradient" ]]
+return function(value)
 	-- upvalues: dashModule (ref), t (ref), reactModule (ref)
 	local var3 = dashModule.join(t, value)
 	

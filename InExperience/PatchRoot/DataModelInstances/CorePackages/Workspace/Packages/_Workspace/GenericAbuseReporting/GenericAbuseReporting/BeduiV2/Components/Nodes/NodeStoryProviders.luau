@@ -15,12 +15,12 @@ local uDim2 = UDim2.new(0, 468, 0, 560)
 local t = {}
 local t_1 = {}
 local t_2 = {
-	sendEvent = function(...) --[[ line: 25 ]]
+	sendEvent = function(...)
 		print("Analytics:", ...)
 	end
 }
 
-return function(p0) --[[ line: 37 | named "NodeStoryProviders" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), abuseReportAnalyticsProvider (ref), t_2 (ref), arTranslationProvider (ref), t_1 (ref), loaderProvider (ref), t (ref), layoutSlotsProvider (ref), inlineSlots (ref), overlaidControlsProvider (ref), view (ref), uDim2 (ref), foundationModule (ref)
 	local var9, var10 = reactModule.useState(nil)
 	

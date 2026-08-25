@@ -16,7 +16,7 @@ local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagChromeWindowSignalConstraintsToggle = sharedFlagsModule.FFlagChromeWindowSignalConstraintsToggle
 local fFlagRemoveAvatarSwitcherIfUnsupported = sharedFlagsModule.FFlagRemoveAvatarSwitcherIfUnsupported
-local var13 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function() --[[ line: 25 ]]
+local var13 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	return serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID)
 end)
@@ -24,7 +24,7 @@ local var14 = if fFlagRemoveAvatarSwitcherIfUnsupported then url.AVATAR_URL .. "
 local var15 = if fFlagChromeWindowSignalConstraintsToggle then windowSizeSignalModule.new(844, 754, false, true) else windowSizeSignalModule.new(844, 754, false)
 local all = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.AvatarSwitcher)
 
-local function _() --[[ line: 43 | named "getInitialAvailability" ]]
+local function _()
 	-- upvalues: all (write), fFlagRemoveAvatarSwitcherIfUnsupported (ref), serviceModule (ref)
 	return if all and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
 end
@@ -36,18 +36,18 @@ local var17 = serviceModule:register({
 	initialAvailability = if all and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 	id = constantsModule.AVATAR_SWITCHER_ID,
 	sideSheetPlacement = sideSheetPlacement.Vertical,
-	activated = function(_) --[[ line: 55 ]]
+	activated = function(_)
 		-- upvalues: serviceModule (ref), constantsModule (ref)
 		serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
 	end,
 	isActivated = var13,
 	windowSize = var15,
 	components = {
-		Icon = function() --[[ line: 63 ]]
+		Icon = function()
 			-- upvalues: reactModule (ref), avatarSwitcherIconModule (ref), var13 (ref)
 			return reactModule.createElement(avatarSwitcherIconModule, { isActive = var13 })
 		end,
-		Window = function() --[[ line: 69 ]]
+		Window = function()
 			-- upvalues: reactModule (ref), avatarSwitcherChromeWrapperModule (ref), var15 (ref)
 			return reactModule.createElement(avatarSwitcherChromeWrapperModule, {
 				maxWindowWidth = 844,
@@ -59,7 +59,7 @@ local var17 = serviceModule:register({
 })
 local var18 = not fFlagRemoveAvatarSwitcherIfUnsupported
 
-local _ = function() --[[ line: 83 | named "updateAvatarSwitcherAvailability" ]]
+local _ = function()
 	-- upvalues: all (write), var18 (write), var17 (ref), serviceModule (ref), constantsModule (ref)
 	if all and var18 then
 		var17.availability:available()
@@ -71,7 +71,7 @@ local _ = function() --[[ line: 83 | named "updateAvatarSwitcherAvailability" ]]
 	var17.availability:unavailable()
 end
 
-chromeUtilsModule.setCoreGuiAvailability(var17, Enum.CoreGuiType.AvatarSwitcher, function(p0) --[[ line: 95 ]]
+chromeUtilsModule.setCoreGuiAvailability(var17, Enum.CoreGuiType.AvatarSwitcher, function(p0)
 	-- upvalues: all (write), var18 (write), var17 (ref), serviceModule (ref), constantsModule (ref)
 	all = p0
 	
@@ -86,12 +86,12 @@ chromeUtilsModule.setCoreGuiAvailability(var17, Enum.CoreGuiType.AvatarSwitcher,
 end)
 
 if fFlagRemoveAvatarSwitcherIfUnsupported then
-	task.spawn(function() --[[ line: 102 ]]
+	task.spawn(function()
 		-- upvalues: httpRbxApiService (ref), var14 (ref), httpService (ref), var18 (write), all (write), var17 (ref), serviceModule (ref), constantsModule (ref)
 		if not game:IsLoaded() then
 			game.Loaded:Wait()
 		end
-		local ok, status = pcall(function() --[[ line: 108 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpRbxApiService (copy), var14 (copy), httpService (copy)
 			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(var14))
 		end)

@@ -3,7 +3,7 @@ local dateTimePickerRangeBandRoleModule = require(foundation.Enums.DateTimePicke
 local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 local localizationService = require(foundation.Utility.Wrappers).Services.LocalizationService
 
-local function roundUpToNearestHalfHour(value) --[[ line: 35 ]]
+local function roundUpToNearestHalfHour(value)
 	-- upvalues: dateTimeUtilitiesModule (ref)
 	local var4 = dateTimeUtilitiesModule.toLocalTime(value)
 	
@@ -16,10 +16,10 @@ local function roundUpToNearestHalfHour(value) --[[ line: 35 ]]
 end
 
 return {
-	getDayOfWeek = function(p0) --[[ line: 117 ]]
+	getDayOfWeek = function(p0)
 		return tonumber(p0:FormatLocalTime("d", "en-us")) or 0
 	end,
-	getRangeBandRadiusTag = function(p1, p2, p3) --[[ line: 130 ]]
+	getRangeBandRadiusTag = function(p1, p2, p3)
 		-- upvalues: dateTimeUtilitiesModule (ref), dateTimePickerRangeBandRoleModule (ref)
 		local var6 = dateTimeUtilitiesModule.roundToStartOfDay(p2.startDate)
 		local var7 = dateTimeUtilitiesModule.roundToStartOfDay(p2.endDate)
@@ -34,14 +34,14 @@ return {
 		
 		return if var13 and var14 then "radius-circle" elseif var13 then "radius-left-circle" elseif var14 then "radius-right-circle" else ""
 	end,
-	getRangeDayBounds = function(p4) --[[ line: 123 ]]
+	getRangeDayBounds = function(p4)
 		-- upvalues: dateTimeUtilitiesModule (ref)
 		local var15 = dateTimeUtilitiesModule.roundToStartOfDay(p4.startDate)
 		local var16 = dateTimeUtilitiesModule.roundToStartOfDay(p4.endDate)
 		
 		return math.min(var15, var16), math.max(var15, var16)
 	end,
-	getTimeSlotIndex = function(p5, p6) --[[ line: 104 ]]
+	getTimeSlotIndex = function(p5, p6)
 		if p6 == nil then
 			return nil
 		end
@@ -52,7 +52,7 @@ return {
 		end
 		return nil
 	end,
-	getTimeSlotsForDay = function(p7) --[[ line: 73 ]]
+	getTimeSlotsForDay = function(p7)
 		-- upvalues: roundUpToNearestHalfHour (ref), dateTimeUtilitiesModule (ref), localizationService (ref)
 		local var17 = dateTimeUtilitiesModule.toLocalTime(roundUpToNearestHalfHour(p7))
 		local unixTimestamp = DateTime.fromLocalTime(var17.Year, var17.Month, var17.Day, var17.Hour, var17.Minute, 0).UnixTimestamp
@@ -67,11 +67,11 @@ return {
 		end
 		return t, unixTimestamp
 	end,
-	resolveAnchorDate = function(p8, p9) --[[ line: 53 ]]
+	resolveAnchorDate = function(p8, p9)
 		return if p8 and p8[1] then p8[1] else p9 or DateTime.now()
 	end,
 	roundUpToNearestHalfHour = roundUpToNearestHalfHour,
-	toViewDate = function(p10) --[[ line: 29 ]]
+	toViewDate = function(p10)
 		-- upvalues: dateTimeUtilitiesModule (ref)
 		local var20 = dateTimeUtilitiesModule.toLocalTime(p10)
 		

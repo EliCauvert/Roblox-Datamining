@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 | named "getUserIdsFromString" ]]
+﻿return function(p0)
 	local t = {}
 	
 	for i, v in string.split(p0, ",") do

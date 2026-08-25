@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableVoiceChatVoiceUISync", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableVoiceChatVoiceUISync")
 end

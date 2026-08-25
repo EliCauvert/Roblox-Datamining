@@ -34,7 +34,7 @@ return roduxModule.createReducer({
 	identifiedAvatars = {},
 	selectedAvatars = {}
 }, {
-	[endReportFlowModule.name] = function(p0, _) --[[ line: 41 ]]
+	[endReportFlowModule.name] = function(p0, _)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
 		return cryoModule.Dictionary.join(p0, {
 			history = {},
@@ -46,7 +46,7 @@ return roduxModule.createReducer({
 			screenshotAnnotationPoints = {}
 		})
 	end,
-	[beginReportFlowModule.name] = function(p1, p2) --[[ line: 52 ]]
+	[beginReportFlowModule.name] = function(p1, p2)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
 		local t = {
 			reportCategory = constantsModule.Category.None,
@@ -72,14 +72,14 @@ return roduxModule.createReducer({
 			currentPage = if p1.voiceReportingFlowEnabled then constantsModule.Page.Category else constantsModule.Page.Listing
 		})
 	end,
-	[navigateBackModule.name] = function(p3, _) --[[ line: 86 ]]
+	[navigateBackModule.name] = function(p3, _)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p3, {
 			history = cryoModule.List.removeIndex(p3.history, #p3.history),
 			currentPage = p3.history[#p3.history] or p3.currentPage
 		})
 	end,
-	[selectReportCategoryModule.name] = function(p4, p5) --[[ line: 95 ]]
+	[selectReportCategoryModule.name] = function(p4, p5)
 		-- upvalues: constantsModule (ref), getFFlagReportAnythingScreenshotModule (ref), cryoModule (ref)
 		local var18 = p5.reportCategory == constantsModule.Category.Experience
 		local var19 = p4.beginningReportType == constantsModule.ReportType.Player
@@ -107,7 +107,7 @@ return roduxModule.createReducer({
 			reportCategory = p5.reportCategory
 		})
 	end,
-	[selectReportListingModule.name] = function(p6, p7) --[[ line: 129 ]]
+	[selectReportListingModule.name] = function(p6, p7)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
 		return cryoModule.Dictionary.join(p6, {
 			sortedUserIds = cryoModule.List.join(p7.sortedUserIds or {}, {}),
@@ -117,7 +117,7 @@ return roduxModule.createReducer({
 			targetPlayer = p7.targetPlayer or cryoModule.None
 		})
 	end,
-	[screenshotAnnotatedModule.name] = function(p8, p9) --[[ line: 140 ]]
+	[screenshotAnnotatedModule.name] = function(p8, p9)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
 		return cryoModule.Dictionary.join(p8, {
 			history = cryoModule.List.join(p8.history, { p8.currentPage }),
@@ -125,15 +125,15 @@ return roduxModule.createReducer({
 			screenshotAnnotationPoints = p9.annotationPoints
 		})
 	end,
-	[openReportMenuModule.name] = function(p10, _) --[[ line: 151 ]]
+	[openReportMenuModule.name] = function(p10, _)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p10, { isReportMenuOpen = true })
 	end,
-	[closeReportMenuModule.name] = function(p11, _) --[[ line: 156 ]]
+	[closeReportMenuModule.name] = function(p11, _)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p11, { isReportMenuOpen = false })
 	end,
-	[openReportSentDialogModule.name] = function(p12, p13) --[[ line: 161 ]]
+	[openReportSentDialogModule.name] = function(p12, p13)
 		-- upvalues: cryoModule (ref), constantsModule (ref)
 		return cryoModule.Dictionary.join(p12, {
 			currentPage = constantsModule.Page.ReportSent,
@@ -141,18 +141,18 @@ return roduxModule.createReducer({
 			targetPlayer = p13.targetPlayer or cryoModule.None
 		})
 	end,
-	[setVoiceReportingFlowModule.name] = function(p14, p15) --[[ line: 168 ]]
+	[setVoiceReportingFlowModule.name] = function(p14, p15)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p14, { voiceReportingFlowEnabled = p15.enable })
 	end,
-	[setIdentifiedAvatarsModule.name] = function(p16, p17) --[[ line: 173 ]]
+	[setIdentifiedAvatarsModule.name] = function(p16, p17)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p16, {
 			identifiedAvatars = p17.identifiedAvatars,
 			screenshotAnnotationPoints = {}
 		})
 	end,
-	[setSelectedAvatarsModule.name] = function(p18, p19) --[[ line: 179 ]]
+	[setSelectedAvatarsModule.name] = function(p18, p19)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p18, { selectedAvatars = p19.selectedAvatars })
 	end

@@ -7,11 +7,11 @@ local _ = require(socialUpsell.Enum.SocialUpsellType)
 local _ = require(socialUpsell.Types)
 local var3 = nil
 
-local function createUpsellSignalStore() --[[ line: 37 ]]
+local function createUpsellSignalStore()
 	-- upvalues: signalsModule (ref), cryoModule (ref)
 	local t = {}
 	
-	local function _(p0) --[[ line: 40 | named "getOrCreateUpsellBannerDataStore" ]]
+	local function _(p0)
 		-- upvalues: t (ref), signalsModule (copy)
 		local var6 = t[p0]
 		
@@ -24,7 +24,7 @@ local function createUpsellSignalStore() --[[ line: 37 ]]
 	end
 	
 	return {
-		getUpsellBannerDataGetter = function(p1) --[[ line: 53 ]]
+		getUpsellBannerDataGetter = function(p1)
 			-- upvalues: t (ref), signalsModule (copy)
 			local var9 = t[p1]
 			
@@ -35,7 +35,7 @@ local function createUpsellSignalStore() --[[ line: 37 ]]
 			end
 			return var9.getBannerData
 		end,
-		setUpsellBannerData = function(value, p2, p3) --[[ line: 57 ]]
+		setUpsellBannerData = function(value, p2, p3)
 			-- upvalues: t (ref), signalsModule (copy), cryoModule (copy)
 			local var12 = t[value]
 			
@@ -44,7 +44,7 @@ local function createUpsellSignalStore() --[[ line: 37 ]]
 				var12 = { getBannerData = var13, setBannerData = var14 }
 				t[value] = var12
 			end
-			var12.setBannerData(function(p4) --[[ line: 62 ]]
+			var12.setBannerData(function(p4)
 				-- upvalues: p3 (ref), cryoModule (copy), p2 (ref)
 				local var15 = cryoModule.Dictionary.join(p4 or {}, {
 					[p2] = if p3 ~= nil then cryoModule.None else { isVisible = true }
@@ -56,7 +56,7 @@ local function createUpsellSignalStore() --[[ line: 37 ]]
 	}
 end
 
-return function() --[[ line: 75 ]]
+return function()
 	-- upvalues: var3 (write), signalsModule (ref), createUpsellSignalStore (ref)
 	if var3 == nil then
 		var3 = signalsModule.createComputed(createUpsellSignalStore)(false)

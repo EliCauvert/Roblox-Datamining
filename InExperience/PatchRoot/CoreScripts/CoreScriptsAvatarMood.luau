@@ -41,17 +41,17 @@ local t_2 = {
 	cheer = true
 }
 
-local function _(p0) --[[ line: 63 | named "getPlayerHumanoid" ]]
+local function _(p0)
 	return if p0.Character then p0.Character:FindFirstChildOfClass("Humanoid") else nil
 end
 
-local _ = function(p1) --[[ line: 71 | named "getPlayerAnimator" ]]
+local _ = function(p1)
 	local var21 = if p1.Character then p1.Character:FindFirstChildOfClass("Humanoid") else nil
 	
 	return if var21 then var21:FindFirstChildOfClass("Animator") else nil
 end
 
-local _ = function(p2) --[[ line: 80 | named "switchPriority" ]]
+local _ = function(p2)
 	-- upvalues: core (write), var4 (write)
 	core = p2
 	
@@ -60,7 +60,7 @@ local _ = function(p2) --[[ line: 80 | named "switchPriority" ]]
 	end
 end
 
-local _ = function(p3) --[[ line: 87 | named "disconnectAndRemoveConnection" ]]
+local _ = function(p3)
 	-- upvalues: t (ref)
 	if t[p3] ~= nil then
 		t[p3]:Disconnect()
@@ -68,7 +68,7 @@ local _ = function(p3) --[[ line: 87 | named "disconnectAndRemoveConnection" ]]
 	end
 end
 
-local _ = function() --[[ line: 94 | named "resumeMoodAfterEmote" ]]
+local _ = function()
 	-- upvalues: var5 (write), var4 (write), t (ref)
 	var5 = nil
 	
@@ -85,7 +85,7 @@ local _ = function() --[[ line: 94 | named "resumeMoodAfterEmote" ]]
 	end
 end
 
-local function onEmoteTriggered(p4, p5) --[[ line: 104 ]]
+local function onEmoteTriggered(p4, p5)
 	-- upvalues: var6 (write), var4 (write), var5 (write), var7 (write), t (ref), t_1 (ref)
 	if not var6 or var4 == nil then return end
 	if p4 and p5 then
@@ -101,7 +101,7 @@ local function onEmoteTriggered(p4, p5) --[[ line: 104 ]]
 			t.emoteKeyframeReached:Disconnect()
 			t.emoteKeyframeReached = nil
 		end
-		t.currentEmoteTrackStopped = var5.Stopped:Connect(function() --[[ line: 116 ]]
+		t.currentEmoteTrackStopped = var5.Stopped:Connect(function()
 			-- upvalues: var5 (copy), var4 (copy), t_1 (copy), t (copy), var7 (copy)
 			var5 = nil
 			
@@ -122,7 +122,7 @@ local function onEmoteTriggered(p4, p5) --[[ line: 104 ]]
 			end
 			var7 = false
 		end)
-		t.emoteKeyframeReached = var5.KeyframeReached:Connect(function(p6) --[[ line: 122 ]]
+		t.emoteKeyframeReached = var5.KeyframeReached:Connect(function(p6)
 			-- upvalues: var5 (copy), var4 (copy), t_1 (copy), t (copy), var7 (copy)
 			if p6 == "End" and not var5.Looped then
 				var5 = nil
@@ -148,7 +148,7 @@ local function onEmoteTriggered(p4, p5) --[[ line: 104 ]]
 	end
 end
 
-local function checkEmotePlaying(p7) --[[ line: 131 ]]
+local function checkEmotePlaying(p7)
 	-- upvalues: t_2 (ref), t (ref), var5 (write), var7 (write), var4 (write), checkEmotePlaying (ref), t_1 (ref)
 	local var22 = false
 	
@@ -165,7 +165,7 @@ local function checkEmotePlaying(p7) --[[ line: 131 ]]
 			var5 = v
 			var7 = false
 			var4:Stop()
-			t.currentEmoteTrackStopped = var5.Stopped:Connect(function() --[[ line: 150 ]]
+			t.currentEmoteTrackStopped = var5.Stopped:Connect(function()
 				-- upvalues: checkEmotePlaying (copy), p7 (ref), var7 (copy), var5 (copy), var4 (copy), t_1 (copy), t (copy)
 				wait(0.3)
 				
@@ -189,7 +189,7 @@ local function checkEmotePlaying(p7) --[[ line: 131 ]]
 					end
 				end
 			end)
-			t.emoteKeyframeReached = var5.KeyframeReached:Connect(function(p8) --[[ line: 159 ]]
+			t.emoteKeyframeReached = var5.KeyframeReached:Connect(function(p8)
 				-- upvalues: checkEmotePlaying (copy), p7 (ref), var7 (copy), var5 (copy), var4 (copy), t_1 (copy), t (copy)
 				if p8 == "End" then
 					wait(0.3)
@@ -221,7 +221,7 @@ local function checkEmotePlaying(p7) --[[ line: 131 ]]
 	return var22
 end
 
-local chattedConnection = localPlayer.Chatted:Connect(function(p9) --[[ line: 175 ]]
+local chattedConnection = localPlayer.Chatted:Connect(function(p9)
 	-- upvalues: var6 (write), var4 (write), localPlayer (ref), t_2 (ref), checkEmotePlaying (ref)
 	if not var6 or var4 == nil then return end
 	if localPlayer.Character then
@@ -243,7 +243,7 @@ local chattedConnection = localPlayer.Chatted:Connect(function(p9) --[[ line: 17
 	end
 end)
 
-chattedConnection = function() --[[ line: 198 | named "stopAndDestroyCurrentMoodTrack" ]]
+chattedConnection = function()
 	-- upvalues: var4 (write)
 	if var4 ~= nil then
 		var4:Stop()
@@ -252,7 +252,7 @@ chattedConnection = function() --[[ line: 198 | named "stopAndDestroyCurrentMood
 	end
 end
 
-local _ = function() --[[ line: 206 | named "stopAndDestroyCurrentMoodTrackConnections" ]]
+local _ = function()
 	-- upvalues: var4 (write), t (ref), var3 (write)
 	if var4 ~= nil then
 		var4:Stop()
@@ -278,11 +278,11 @@ local _ = function() --[[ line: 206 | named "stopAndDestroyCurrentMoodTrackConne
 	var3 = nil
 end
 
-local _ = function(_, _, p10, p11) --[[ line: 215 | named "updateCharacterMoodOnAnimatorAdded" ]]
+local _ = function(_, _, p10, p11)
 	-- upvalues: var4 (write), var3 (write), core (write), var5 (write), t (ref), onEmoteTriggered (ref)
 	var4 = p11:LoadAnimation(var3)
 	var4.Priority = core
-	task.delay(0.1, function() --[[ line: 222 ]]
+	task.delay(0.1, function()
 		-- upvalues: var5 (copy), var3 (copy), var4 (copy), p11 (ref), core (copy), t (copy), p10 (ref), onEmoteTriggered (copy)
 		if var5 == nil and var3 then
 			if not var4 then
@@ -301,14 +301,14 @@ local _ = function(_, _, p10, p11) --[[ line: 215 | named "updateCharacterMoodOn
 	end)
 end
 
-local function updateCharacterMoodOnHumanoidAdded(p12, p13, p14) --[[ line: 242 ]]
+local function updateCharacterMoodOnHumanoidAdded(p12, p13, p14)
 	-- upvalues: var4 (write), var3 (write), core (write), var5 (write), t (ref), onEmoteTriggered (ref)
 	local animator = p14:FindFirstChild("Animator")
 	
 	if animator then
 		var4 = animator:LoadAnimation(var3)
 		var4.Priority = core
-		task.delay(0.1, function() --[[ line: 222 ]]
+		task.delay(0.1, function()
 			-- upvalues: var5 (copy), var3 (copy), var4 (copy), animator (ref), core (copy), t (copy), p14 (ref), onEmoteTriggered (copy)
 			if var5 == nil and var3 then
 				if not var4 then
@@ -330,7 +330,7 @@ local function updateCharacterMoodOnHumanoidAdded(p12, p13, p14) --[[ line: 242 
 		t.humanoidAnimatorAdded:Disconnect()
 		t.humanoidAnimatorAdded = nil
 	end
-	t.humanoidAnimatorAdded = p14.ChildAdded:Connect(function(p15) --[[ line: 252 ]]
+	t.humanoidAnimatorAdded = p14.ChildAdded:Connect(function(p15)
 		-- upvalues: p12 (ref), p13 (ref), p14 (ref), var4 (copy), var3 (copy), core (copy), var5 (copy), t (copy), onEmoteTriggered (copy)
 		if p15.Name == "Animator" then
 			local _ = p12
@@ -338,7 +338,7 @@ local function updateCharacterMoodOnHumanoidAdded(p12, p13, p14) --[[ line: 242 
 			local var26 = p14
 			var4 = p15:LoadAnimation(var3)
 			var4.Priority = core
-			task.delay(0.1, function() --[[ line: 222 ]]
+			task.delay(0.1, function()
 				-- upvalues: var5 (copy), var3 (copy), var4 (copy), p15 (ref), core (copy), t (copy), var26 (ref), onEmoteTriggered (copy)
 				if var5 == nil and var3 then
 					if not var4 then
@@ -359,7 +359,7 @@ local function updateCharacterMoodOnHumanoidAdded(p12, p13, p14) --[[ line: 242 
 	end)
 end
 
-local function updateCharacterMood(p16, p17) --[[ line: 259 ]]
+local function updateCharacterMood(p16, p17)
 	-- upvalues: var6 (write), t (ref), var4 (write), var3 (write), updateCharacterMood (ref), updateCharacterMoodOnHumanoidAdded (ref)
 	if p16 == nil or p17 == nil or not var6 then return end
 	if t.animationInstanceChanged and t.animationInstanceChanged ~= nil then
@@ -376,7 +376,7 @@ local function updateCharacterMood(p16, p17) --[[ line: 259 ]]
 		var4 = nil
 	end
 	var3 = p17
-	t.animationInstanceChanged = var3.Changed:Connect(function(_) --[[ line: 275 ]]
+	t.animationInstanceChanged = var3.Changed:Connect(function(_)
 		-- upvalues: updateCharacterMood (copy), p16 (ref), p17 (ref)
 		updateCharacterMood(p16, p17)
 	end)
@@ -385,7 +385,7 @@ local function updateCharacterMood(p16, p17) --[[ line: 259 ]]
 	if humanoid then
 		updateCharacterMoodOnHumanoidAdded(p16, p17, humanoid)
 	end
-	t.characterHumanoidAdded = p16.ChildAdded:Connect(function(p18) --[[ line: 284 ]]
+	t.characterHumanoidAdded = p16.ChildAdded:Connect(function(p18)
 		-- upvalues: updateCharacterMoodOnHumanoidAdded (copy), p16 (ref), p17 (ref), humanoid (ref)
 		if p18:IsA("Humanoid") then
 			updateCharacterMoodOnHumanoidAdded(p16, p17, humanoid)
@@ -393,7 +393,7 @@ local function updateCharacterMood(p16, p17) --[[ line: 259 ]]
 	end)
 end
 
-function initAvatarMood(p19) --[[ line: 291 ]]
+function initAvatarMood(p19)
 	-- upvalues: t (ref), var6 (write), updateCharacterMood (ref), localPlayer (ref), var4 (write), t_1 (ref), var3 (write)
 	local moodsEnabled = p19:FindFirstChild("MoodsEnabled")
 	
@@ -420,7 +420,7 @@ function initAvatarMood(p19) --[[ line: 291 ]]
 			t.moodChildAdded:Disconnect()
 			t.moodChildAdded = nil
 		end
-		t.moodChildAdded = mood.ChildAdded:Connect(function(p20) --[[ line: 313 ]]
+		t.moodChildAdded = mood.ChildAdded:Connect(function(p20)
 			-- upvalues: updateCharacterMood (copy), localPlayer (copy)
 			if p20:IsA("Animation") then
 				updateCharacterMood(localPlayer.Character, p20)
@@ -456,7 +456,7 @@ function initAvatarMood(p19) --[[ line: 291 ]]
 		t[emoteTriggered] = nil
 	end
 	var3 = nil
-	t.animateScriptMoodAdded = p19.ChildAdded:Connect(function(p21) --[[ line: 322 ]]
+	t.animateScriptMoodAdded = p19.ChildAdded:Connect(function(p21)
 		-- upvalues: updateCharacterMood (copy), localPlayer (copy), t (copy), var6 (copy)
 		if p21.Name == "mood" then
 			if #p21:GetChildren() > 0 then
@@ -466,7 +466,7 @@ function initAvatarMood(p19) --[[ line: 291 ]]
 				t.moodChildAdded:Disconnect()
 				t.moodChildAdded = nil
 			end
-			t.moodChildAdded = p21.ChildAdded:Connect(function(p22) --[[ line: 332 ]]
+			t.moodChildAdded = p21.ChildAdded:Connect(function(p22)
 				-- upvalues: updateCharacterMood (copy), localPlayer (copy)
 				updateCharacterMood(localPlayer.Character, p22)
 			end)
@@ -476,7 +476,7 @@ function initAvatarMood(p19) --[[ line: 291 ]]
 			var6 = false
 		end
 	end)
-	t.animateScriptMoodRemoved = p19.ChildRemoved:Connect(function(p23) --[[ line: 340 ]]
+	t.animateScriptMoodRemoved = p19.ChildRemoved:Connect(function(p23)
 		-- upvalues: p19 (ref), updateCharacterMood (copy), localPlayer (copy), var4 (copy), t_1 (copy), t (copy), var3 (copy)
 		if p23.Name == "mood" then
 			local mood = p19:FindFirstChild("mood")
@@ -519,7 +519,7 @@ function initAvatarMood(p19) --[[ line: 291 ]]
 	end)
 end
 
-local function waitForAnimateScript() --[[ line: 352 ]]
+local function waitForAnimateScript()
 	-- upvalues: localPlayer (ref), t (ref)
 	local animate = localPlayer.Character:FindFirstChild("Animate")
 	
@@ -530,14 +530,14 @@ local function waitForAnimateScript() --[[ line: 352 ]]
 		t.animateScriptAdded:Disconnect()
 		t.animateScriptAdded = nil
 	end
-	t.animateScriptAdded = localPlayer.Character.ChildAdded:Connect(function(p24) --[[ line: 359 ]]
+	t.animateScriptAdded = localPlayer.Character.ChildAdded:Connect(function(p24)
 		if p24.Name == "Animate" then
 			initAvatarMood(p24)
 		end
 	end)
 end
 
-local function onHeadAdded(p25) --[[ line: 367 ]]
+local function onHeadAdded(p25)
 	-- upvalues: waitForAnimateScript (ref), t (ref)
 	if p25:FindFirstChildWhichIsA("FaceControls") then
 		waitForAnimateScript()
@@ -546,7 +546,7 @@ local function onHeadAdded(p25) --[[ line: 367 ]]
 		t.headChildAdded:Disconnect()
 		t.headChildAdded = nil
 	end
-	t.headChildAdded = p25.ChildAdded:Connect(function(p26) --[[ line: 374 ]]
+	t.headChildAdded = p25.ChildAdded:Connect(function(p26)
 		-- upvalues: waitForAnimateScript (copy)
 		if p26:IsA("FaceControls") then
 			waitForAnimateScript()
@@ -554,7 +554,7 @@ local function onHeadAdded(p25) --[[ line: 367 ]]
 	end)
 end
 
-local _ = function(p27) --[[ line: 381 | named "syncWithStreamTrack" ]]
+local _ = function(p27)
 	-- upvalues: t (ref), core (write), var4 (write)
 	if t.StreamTrackStopped ~= nil then
 		t.StreamTrackStopped:Disconnect()
@@ -565,7 +565,7 @@ local _ = function(p27) --[[ line: 381 | named "syncWithStreamTrack" ]]
 	if var4 then
 		var4.Priority = core
 	end
-	t.StreamTrackStopped = p27.Stopped:Connect(function() --[[ line: 389 ]]
+	t.StreamTrackStopped = p27.Stopped:Connect(function()
 		-- upvalues: t (copy), core (copy), var4 (copy)
 		if t.StreamTrackStopped ~= nil then
 			t.StreamTrackStopped:Disconnect()
@@ -579,13 +579,13 @@ local _ = function(p27) --[[ line: 381 | named "syncWithStreamTrack" ]]
 	end)
 end
 
-local function onAnimatorAdded(p28) --[[ line: 397 ]]
+local function onAnimatorAdded(p28)
 	-- upvalues: t (ref), t_1 (ref), core (write), var4 (write)
 	if t.AnimationStreamTrackPlayed ~= nil then
 		t.AnimationStreamTrackPlayed:Disconnect()
 		t.AnimationStreamTrackPlayed = nil
 	end
-	t.AnimationStreamTrackPlayed = p28.AnimationStreamTrackPlayed:Connect(function(p29) --[[ line: 402 ]]
+	t.AnimationStreamTrackPlayed = p28.AnimationStreamTrackPlayed:Connect(function(p29)
 		-- upvalues: t_1 (copy), t (copy), core (copy), var4 (copy)
 		local streamTrackStopped = t_1.StreamTrackStopped
 		
@@ -598,7 +598,7 @@ local function onAnimatorAdded(p28) --[[ line: 397 ]]
 		if var4 then
 			var4.Priority = core
 		end
-		t[t_1.StreamTrackStopped] = p29.Stopped:Connect(function() --[[ line: 389 ]]
+		t[t_1.StreamTrackStopped] = p29.Stopped:Connect(function()
 			-- upvalues: t (copy), core (copy), var4 (copy)
 			if t.StreamTrackStopped ~= nil then
 				t.StreamTrackStopped:Disconnect()
@@ -632,7 +632,7 @@ local function onAnimatorAdded(p28) --[[ line: 397 ]]
 		if var4 then
 			var4.Priority = core
 		end
-		t[t_1.StreamTrackStopped] = var33.Stopped:Connect(function() --[[ line: 389 ]]
+		t[t_1.StreamTrackStopped] = var33.Stopped:Connect(function()
 			-- upvalues: t (copy), core (copy), var4 (copy)
 			if t.StreamTrackStopped ~= nil then
 				t.StreamTrackStopped:Disconnect()
@@ -655,7 +655,7 @@ local function onAnimatorAdded(p28) --[[ line: 397 ]]
 	end
 end
 
-local _ = function(p30, _) --[[ line: 424 | named "onAnimatorRemoving" ]]
+local _ = function(p30, _)
 	-- upvalues: t (ref), core (write), var4 (write), onAnimatorAdded (ref)
 	if t.AnimationStreamTrackPlayed ~= nil then
 		t.AnimationStreamTrackPlayed:Disconnect()
@@ -678,20 +678,20 @@ local _ = function(p30, _) --[[ line: 424 | named "onAnimatorRemoving" ]]
 	end
 end
 
-local function onCharacterAdded(p31, p32) --[[ line: 439 ]]
+local function onCharacterAdded(p31, p32)
 	-- upvalues: onHeadAdded (ref), t (ref), var4 (write), onAnimatorAdded (ref), t_1 (ref), core (write)
 	local head = p32:FindFirstChild("Head")
 	
 	if head then
 		onHeadAdded(head)
 	end
-	t.characterChildAdded = p32.ChildAdded:Connect(function(p33) --[[ line: 445 ]]
+	t.characterChildAdded = p32.ChildAdded:Connect(function(p33)
 		-- upvalues: onHeadAdded (copy)
 		if p33.Name == "Head" then
 			onHeadAdded(p33)
 		end
 	end)
-	t.characterChildRemoved = p32.ChildRemoved:Connect(function(p34) --[[ line: 451 ]]
+	t.characterChildRemoved = p32.ChildRemoved:Connect(function(p34)
 		-- upvalues: var4 (copy), p32 (ref), onHeadAdded (copy)
 		if p34.Name == "Head" then
 			if var4 ~= nil then
@@ -706,7 +706,7 @@ local function onCharacterAdded(p31, p32) --[[ line: 439 ]]
 			end
 		end
 	end)
-	t.DescendantAdded = p32.DescendantAdded:Connect(function(p35) --[[ line: 461 ]]
+	t.DescendantAdded = p32.DescendantAdded:Connect(function(p35)
 		-- upvalues: onAnimatorAdded (copy)
 		if p35:IsA("Animator") then
 			onAnimatorAdded(p35)
@@ -717,7 +717,7 @@ local function onCharacterAdded(p31, p32) --[[ line: 439 ]]
 	if animator then
 		onAnimatorAdded(animator)
 	end
-	t.DescendantRemoving = p32.DescendantRemoving:Connect(function(p36) --[[ line: 471 ]]
+	t.DescendantRemoving = p32.DescendantRemoving:Connect(function(p36)
 		-- upvalues: p31 (ref), t_1 (copy), t (copy), core (copy), var4 (copy), onAnimatorAdded (copy)
 		if p36:IsA("Animator") then
 			local var39 = p31
@@ -748,7 +748,7 @@ local function onCharacterAdded(p31, p32) --[[ line: 439 ]]
 	end)
 end
 
-local function onCharacterRemoving(_) --[[ line: 478 ]]
+local function onCharacterRemoving(_)
 	-- upvalues: var4 (write), t (ref)
 	if var4 ~= nil then
 		var4:Stop()
@@ -766,7 +766,7 @@ end
 if localPlayer.Character then
 	onCharacterAdded(localPlayer, localPlayer.Character)
 end
-localPlayer.CharacterAdded:Connect(function(p37) --[[ line: 492 ]]
+localPlayer.CharacterAdded:Connect(function(p37)
 	-- upvalues: onCharacterAdded (ref), localPlayer (ref)
 	onCharacterAdded(localPlayer, p37)
 end)

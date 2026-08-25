@@ -1,4 +1,4 @@
-﻿local function deepcopy(p0) --[[ line: 1 ]]
+﻿local function deepcopy(p0)
 	-- upvalues: deepcopy (ref)
 	local _ = nil
 	

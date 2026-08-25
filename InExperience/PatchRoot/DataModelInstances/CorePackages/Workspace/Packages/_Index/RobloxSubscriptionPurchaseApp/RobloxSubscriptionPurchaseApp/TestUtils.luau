@@ -5,22 +5,22 @@ local localization = require(parent.AppLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
 
 return {
-	makeTestRoot = function(p0) --[[ line: 14 ]]
+	makeTestRoot = function(p0)
 		-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref)
 		return reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, { Child = p0 })
 	end,
 	NativePurchaseFinishedWithLocalPlayer = {
-		new = function() --[[ line: 39 ]]
+		new = function()
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function() --[[ line: 42 ]]
+				getSignal = function()
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p1, p2) --[[ line: 45 ]]
+				fire = function(p1, p2)
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p1, p2)
 				end
@@ -28,15 +28,15 @@ return {
 		end
 	},
 	NativePurchaseFinishedWithLocalPlayerV2 = {
-		new = function() --[[ line: 51 ]]
+		new = function()
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function() --[[ line: 54 ]]
+				getSignal = function()
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p3, p4, p5) --[[ line: 57 ]]
+				fire = function(p3, p4, p5)
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p3, p4, p5)
 				end
@@ -44,15 +44,15 @@ return {
 		end
 	},
 	NativePurchaseFinished = {
-		new = function() --[[ line: 63 ]]
+		new = function()
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function() --[[ line: 66 ]]
+				getSignal = function()
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p6, p7, p8) --[[ line: 69 ]]
+				fire = function(p6, p7, p8)
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p6, p7, p8)
 				end
@@ -60,15 +60,15 @@ return {
 		end
 	},
 	NativePurchaseFinishedV2 = {
-		new = function() --[[ line: 81 ]]
+		new = function()
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function() --[[ line: 84 ]]
+				getSignal = function()
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p9, p10, p11, p12) --[[ line: 87 ]]
+				fire = function(p9, p10, p11, p12)
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p9, p10, p11, p12)
 				end
@@ -76,18 +76,18 @@ return {
 		end
 	},
 	LocalPlayerHasRobloxSubscription = {
-		new = function() --[[ line: 99 ]]
+		new = function()
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
 				HasRobloxSubscription = false,
-				GetPropertyChangedSignal = function(_, p13) --[[ line: 103 ]]
+				GetPropertyChangedSignal = function(_, p13)
 					-- upvalues: bindableEvent (ref)
 					assert(p13 == "HasRobloxSubscription", "Invalid property name")
 					
 					return bindableEvent.Event
 				end,
-				setHasRobloxSubscription = function(value, p14) --[[ line: 107 ]]
+				setHasRobloxSubscription = function(value, p14)
 					-- upvalues: bindableEvent (ref)
 					value.HasRobloxSubscription = p14
 					bindableEvent:Fire()

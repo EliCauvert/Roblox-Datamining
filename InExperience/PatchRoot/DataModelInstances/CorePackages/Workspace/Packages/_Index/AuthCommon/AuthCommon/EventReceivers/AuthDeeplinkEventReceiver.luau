@@ -29,7 +29,7 @@ local preAuthDeepLinkHandlerModule = require(script.Parent.PreAuthDeepLinkHandle
 local preAuthDeepLinkUrlStore = require(authCommon.Stores).PreAuthDeepLinkUrlStore
 local fFlagEnablePreAuthDeepLinkHandlerModule = require(authCommon.Flags.FFlagEnablePreAuthDeepLinkHandler)
 
-return function(p0) --[[ line: 47 ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), appLinking (ref), roactNetworking (ref), useDispatch (ref), appOmniRecommendationsRequest (ref), roactAnalytics (ref), useAppPolicy (ref), useState (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var5 (ref), loginStatus (ref), useSelector (ref), fFlagUseSignalsForStartup (ref), var6 (ref), retrievalStatus (ref), fFlagEnableDeepLinkHistoryWithModalAPI (ref), deepLinkModule (ref), useCallback (ref), preAuthDeepLinkUrlStore (ref), postAuthDeepLinkAvailableSignalModule (ref), postAuthPendingLuaUrlAvailableSignalModule (ref), fFlagEnablePreAuthDeepLinkHandlerModule (ref), preAuthDeepLinkHandlerModule (ref), useEffect (ref)
 	local var17
 	local var11 = useRoactService(appLinking)
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 47 ]]
 		dispatch = useDispatch(),
 		omniRecommendationsRequest = useRoactService(appOmniRecommendationsRequest),
 		analytics = useRoactService(roactAnalytics),
-		appPolicy = useAppPolicy(function(p1) --[[ line: 59 ]]
+		appPolicy = useAppPolicy(function(p1)
 			return p1
 		end),
 		resetAppState = monoDeps.ResetAppState
@@ -52,17 +52,17 @@ return function(p0) --[[ line: 47 ]]
 		var17 = useSignalState(var5(false).getStatus) == loginStatus.LOGGED_OUT
 		var17 = nil
 	else
-		var17 = useSelector(function(p2) --[[ line: 95 ]]
+		var17 = useSelector(function(p2)
 			-- upvalues: loginStatus (copy)
 			return p2.AuthenticationStatus.status == loginStatus.LOGGED_OUT
 		end)
 	end
-	local var18 = if fFlagUseSignalsForStartup then useSignalState(var6(false).getAppLoadingStarted) else useSelector(function(p3) --[[ line: 101 ]]
+	local var18 = if fFlagUseSignalsForStartup then useSignalState(var6(false).getAppLoadingStarted) else useSelector(function(p3)
 		-- upvalues: retrievalStatus (copy)
 		return p3.Startup.AppDataStatus ~= retrievalStatus.NotStarted
 	end)
 	local var19 = if fFlagEnableDeepLinkHistoryWithModalAPI then deepLinkModule.DeepLinkLuaReceiverStatusStore(false) else nil
-	local var20 = useCallback(function() --[[ line: 110 ]]
+	local var20 = useCallback(function()
 		-- upvalues: var11 (ref), var17 (ref), var18 (ref), preAuthDeepLinkUrlStore (copy), fFlagEnableDeepLinkHistoryWithModalAPI (copy), var19 (write), deepLinkModule (copy), var13 (ref), postAuthDeepLinkAvailableSignalModule (copy), var14 (ref), var15 (ref), postAuthPendingLuaUrlAvailableSignalModule (copy), var16 (ref), fFlagEnablePreAuthDeepLinkHandlerModule (copy), preAuthDeepLinkHandlerModule (copy), t (ref)
 		if not var11 then return end
 		local var18_1 = not var17 and var18
@@ -84,7 +84,7 @@ return function(p0) --[[ line: 47 ]]
 		elseif fFlagEnableDeepLinkHistoryWithModalAPI then
 			var19.setDeepLinkLuaPostAuthReceiverStatus(deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Disconnected, nil)
 		end
-		var11:getAndClearLastPendingURL():andThen(function(p4) --[[ line: 152 ]]
+		var11:getAndClearLastPendingURL():andThen(function(p4)
 			-- upvalues: var18_1 (ref), preAuthDeepLinkUrlStore (copy), var16 (copy), postAuthPendingLuaUrlAvailableSignalModule (copy)
 			if not p4 or not p4.hasPendingUrl then return end
 			if var18_1 then
@@ -95,7 +95,7 @@ return function(p0) --[[ line: 47 ]]
 			preAuthDeepLinkUrlStore.setUrl(p4.url)
 			var16(p4)
 		end)
-		var11:listenForLuaURLs(function(p5, p6) --[[ line: 169 ]]
+		var11:listenForLuaURLs(function(p5, p6)
 			-- upvalues: fFlagEnablePreAuthDeepLinkHandlerModule (copy), preAuthDeepLinkHandlerModule (copy), t (copy), var18_1 (ref), preAuthDeepLinkUrlStore (copy), var14 (copy), postAuthDeepLinkAvailableSignalModule (copy)
 			if fFlagEnablePreAuthDeepLinkHandlerModule and preAuthDeepLinkHandlerModule.isPreauthDeeplink(p5) then
 				preAuthDeepLinkHandlerModule.firePreauthDeeplink(p5, t)
@@ -112,11 +112,11 @@ return function(p0) --[[ line: 47 ]]
 	end, {
 		var11, var17, var18, postAuthDeepLinkAvailableSignalModule, var13, var15
 	})
-	useEffect(function() --[[ line: 202 ]]
+	useEffect(function()
 		-- upvalues: var20 (ref), var11 (ref)
 		var20()
 		
-		return function() --[[ line: 206 ]]
+		return function()
 			-- upvalues: var11 (copy)
 			if var11 then
 				var11:stopListeningForLuaURLs()

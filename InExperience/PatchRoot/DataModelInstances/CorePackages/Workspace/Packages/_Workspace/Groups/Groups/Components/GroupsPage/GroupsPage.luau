@@ -12,12 +12,12 @@ local useGroupsListData = require(groups.Hooks).useGroupsListData
 local useGroupsAnalyticsModule = require(groups.Hooks.useGroupsAnalytics)
 local eventNamesModule = require(groups.Analytics.EventNames)
 
-return function(_) --[[ line: 25 | named "GroupsPage" ]]
+return function(_)
 	-- upvalues: useGroupsWrapperContextModule (ref), useTokens (ref), useGroupsListData (ref), useGroupsAnalyticsModule (ref), useEffectOnce (ref), eventNamesModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref), view (ref), groupsListModule (ref)
 	local var7 = useTokens()
 	local var8 = useGroupsListData(useGroupsWrapperContextModule().userId)
 	local var9 = useGroupsAnalyticsModule()
-	useEffectOnce(function() --[[ line: 32 ]]
+	useEffectOnce(function()
 		-- upvalues: var9 (ref), eventNamesModule (copy)
 		var9.fireAnalyticsEvent(eventNamesModule.GroupsListPageExposure)
 	end, not var8.isLoading and not var8.loadFailure)

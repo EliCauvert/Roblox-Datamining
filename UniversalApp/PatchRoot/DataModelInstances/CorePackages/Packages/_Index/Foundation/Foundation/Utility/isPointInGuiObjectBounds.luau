@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 1 | named "isPointInGuiObjectBounds" ]]
+﻿return function(p0, p1)
 	if p0 then
 		local absolutePosition = p0.AbsolutePosition
 		local absoluteSize = p0.AbsoluteSize

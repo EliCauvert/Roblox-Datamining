@@ -1,7 +1,7 @@
 ﻿local object = require(script.Parent.Parent.Parent.LuauPolyfill).Object
 local _ = require(script.Parent.Parent.language.directiveLocation)
 
-function getIntrospectionQuery(p0) --[[ line: 39 ]]
+function getIntrospectionQuery(p0)
 	-- upvalues: object (ref)
 	local var0 = object.assign({
 		descriptions = true,
@@ -12,7 +12,7 @@ function getIntrospectionQuery(p0) --[[ line: 39 ]]
 	}, p0)
 	local var1 = if var0.descriptions then "description" else ""
 	
-	local function _(p1) --[[ line: 55 | named "inputDeprecation" ]]
+	local function _(p1)
 		-- upvalues: var0 (ref)
 		return if var0.inputValueDeprecation then p1 else ""
 	end

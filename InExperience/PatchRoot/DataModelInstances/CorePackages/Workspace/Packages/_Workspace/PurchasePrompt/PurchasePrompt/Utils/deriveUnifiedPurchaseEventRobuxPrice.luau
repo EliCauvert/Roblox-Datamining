@@ -2,7 +2,7 @@
 local deriveCartPricingView = require(parent.IAPExperience).deriveCartPricingView
 local fFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice = require(parent.SharedFlags).FFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice
 
-return function(p0, p1) --[[ line: 21 | named "deriveUnifiedPurchaseEventRobuxPrice" ]]
+return function(p0, p1)
 	-- upvalues: fFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice (ref), deriveCartPricingView (ref)
 	if not fFlagPurchasePromptUnifiedEventsUseOfferAdjustedPrice then
 		return p1

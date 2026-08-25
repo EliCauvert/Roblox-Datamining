@@ -11,7 +11,7 @@ local _ = require(avatarExperienceInspectAndBuy.Types)
 local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
 local useTokens = foundationModule.Hooks.useTokens
 
-local var7 = function(p0, p1) --[[ line: 64 ]]
+local var7 = function(p0, p1)
 	-- upvalues: viewTypeModule (ref)
 	return if p0 == viewTypeModule.Compact then {
 		left = UDim.new(0, p1.Padding.Medium),
@@ -28,7 +28,7 @@ local var7 = function(p0, p1) --[[ line: 64 ]]
 	} else nil
 end
 
-return reactModule.forwardRef(function(p2, p3) --[[ line: 89 ]]
+return reactModule.forwardRef(function(p2, p3)
 	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), itemsViewHeaderModule (ref), var7 (ref), avatarItemsViewModule (ref), buyActionBarLayoutModule (ref)
 	local view = p2.view
 	local var8 = useTokens()
@@ -41,7 +41,7 @@ return reactModule.forwardRef(function(p2, p3) --[[ line: 89 ]]
 			padding = var7(view, var8),
 			headerText = p2.headerText,
 			subheaderText = p2.subheaderText,
-			onBackButtonClick = function() --[[ line: 107 ]]
+			onBackButtonClick = function()
 				-- upvalues: onInspectMenuClosed (ref)
 				onInspectMenuClosed()
 			end,

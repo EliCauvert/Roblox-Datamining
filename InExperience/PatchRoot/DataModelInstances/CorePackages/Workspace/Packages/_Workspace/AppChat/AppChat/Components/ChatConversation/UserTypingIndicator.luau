@@ -21,9 +21,9 @@ userTypingIndicator.defaultProps = {
 	maxCharacterLength = messageCharacterLimitModule
 }
 
-function userTypingIndicator.init(p0) --[[ line: 33 ]]
+function userTypingIndicator.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
-	function p0.getDisplayText() --[[ line: 34 ]]
+	function p0.getDisplayText()
 		-- upvalues: p0 (ref)
 		if p0.props.usersTyping then
 			return if #p0.props.usersTyping == 1 then p0.props.oneUserTyping elseif #p0.props.usersTyping == 2 then p0.props.twoUsersTyping elseif #p0.props.usersTyping > 2 then p0.props.severalUsersTyping else ""
@@ -36,7 +36,7 @@ function userTypingIndicator.init(p0) --[[ line: 33 ]]
 	p0.motor:onStep(var7)
 	p0.animationProgress = var6
 	
-	function p0.updateAnimationGoal() --[[ line: 55 ]]
+	function p0.updateAnimationGoal()
 		-- upvalues: p0 (ref), otterModule (copy), t (copy)
 		p0.motor:setGoal(otterModule.spring(if #p0.props.usersTyping > 0 then 0 else 1, t))
 	end
@@ -44,15 +44,15 @@ function userTypingIndicator.init(p0) --[[ line: 33 ]]
 	p0.updateAnimationGoal()
 end
 
-function userTypingIndicator.didUpdate(p1, p2, _) --[[ line: 63 ]]
+function userTypingIndicator.didUpdate(p1, p2, _)
 	if #p2.usersTyping ~= #p1.props.usersTyping then
 		p1.updateAnimationGoal()
 	end
 end
 
-function userTypingIndicator.render(p3) --[[ line: 69 ]]
+function userTypingIndicator.render(p3)
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref)
-	return withStyle(function(p4) --[[ line: 70 ]]
+	return withStyle(function(p4)
 		-- upvalues: roactModule (copy), p3 (ref), imageSetLabel (copy), images (copy)
 		local font = p4.Font
 		
@@ -84,10 +84,10 @@ function userTypingIndicator.render(p3) --[[ line: 69 ]]
 				SliceCenter = Rect.new(8, 8, 9, 9),
 				Image = images["component_assets/circle_17"],
 				ImageColor3 = p4.Theme.BackgroundUIDefault.Color,
-				ImageTransparency = p3.animationProgress:map(function(p5) --[[ line: 105 ]]
+				ImageTransparency = p3.animationProgress:map(function(p5)
 					return p5
 				end),
-				Position = p3.animationProgress:map(function(p6) --[[ line: 108 ]]
+				Position = p3.animationProgress:map(function(p6)
 					return UDim2.new(0, 0, p6, 0)
 				end)
 			}, {
@@ -111,7 +111,7 @@ function userTypingIndicator.render(p3) --[[ line: 69 ]]
 					TextColor3 = p4.Theme.TextMuted.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					TextTransparency = p3.animationProgress:map(function(p7) --[[ line: 134 ]]
+					TextTransparency = p3.animationProgress:map(function(p7)
 						return p7
 					end)
 				})
@@ -120,7 +120,7 @@ function userTypingIndicator.render(p3) --[[ line: 69 ]]
 	end)
 end
 
-function userTypingIndicator.willUnmount(p8) --[[ line: 143 ]]
+function userTypingIndicator.willUnmount(p8)
 	if p8.motor then
 		p8.motor:destroy()
 	end

@@ -14,7 +14,7 @@ return {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 24 ]]
+	run = function(p0, p1)
 		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
 		local rootInstance = p1.rootInstance
 		

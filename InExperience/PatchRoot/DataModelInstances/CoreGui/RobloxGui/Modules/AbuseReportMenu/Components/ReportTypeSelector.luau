@@ -12,7 +12,7 @@ local textButton = UIBloxModule.App.Button.TextButton
 local iconButton = UIBloxModule.App.Button.IconButton
 local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), getMenuItemDimensionsModule (ref), getMenuItemSizingsModule (ref), constantsModule (ref), reactModule (ref), appFonts (ref), iconButton (ref), iconSize (ref), images (ref), textButton (ref)
 	local size200 = useStyle().Tokens.Size.Size_200
 	local var7 = getMenuItemDimensionsModule(p0.menuWidth)

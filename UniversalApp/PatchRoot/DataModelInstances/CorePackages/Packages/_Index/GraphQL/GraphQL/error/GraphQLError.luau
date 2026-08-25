@@ -17,12 +17,12 @@ local undefinedIfEmpty = nil
 local tbl = setmetatable({}, { __index = error })
 tbl.__index = tbl
 
-function tbl:__tostring() --[[ line: 45 ]]
+function tbl:__tostring()
 	-- upvalues: var3 (write)
 	return var3(self)
 end
 
-function tbl.new(p0, p1, p2, p3, p4, p5, p6) --[[ line: 124 ]]
+function tbl.new(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: error (ref), undefinedIfEmpty (write), array (ref), getLocation (ref), isObjectLike (ref), object (ref), tbl (ref)
 	local graphQLError = error.new(p0)
 	graphQLError.name = "GraphQLError"
@@ -41,13 +41,13 @@ function tbl.new(p0, p1, p2, p3, p4, p5, p6) --[[ line: 124 ]]
 	end
 	local var8 = undefinedIfEmpty(t)
 	graphQLError.source = p2 or (if var8 == nil then nil else var8[1].source)
-	graphQLError.positions = p3 or (if not var8 then nil else array.map(var8, function(p7) --[[ line: 165 ]]
+	graphQLError.positions = p3 or (if not var8 then nil else array.map(var8, function(p7)
 		return p7.start
 	end))
-	var8 = if p3 and p2 then array.map(p3, function(p9) --[[ line: 170 ]]
+	var8 = if p3 and p2 then array.map(p3, function(p9)
 		-- upvalues: getLocation (copy), p2 (ref)
 		return getLocation(p2, p9)
-	end) elseif var8 then array.map(var8, function(p8) --[[ line: 174 ]]
+	end) elseif var8 then array.map(var8, function(p8)
 		-- upvalues: getLocation (copy)
 		return getLocation(p8.source, p8.start)
 	end) else nil
@@ -66,12 +66,12 @@ function tbl.new(p0, p1, p2, p3, p4, p5, p6) --[[ line: 124 ]]
 	return setmetatable(graphQLError, tbl)
 end
 
-function tbl.toString(p10) --[[ line: 209 ]]
+function tbl.toString(p10)
 	-- upvalues: var3 (write)
 	return var3(p10)
 end
 
-function tbl:toJSON() --[[ line: 214 ]]
+function tbl:toJSON()
 	-- upvalues: array (ref), httpService (ref)
 	local list = { "message" }
 	
@@ -84,18 +84,18 @@ function tbl:toJSON() --[[ line: 214 ]]
 	if self.extensions ~= nil then
 		table.insert(list, "extensions")
 	end
-	return "{" .. array.join(array.map(list, function(p11) --[[ line: 231 ]]
+	return "{" .. array.join(array.map(list, function(p11)
 		-- upvalues: httpService (copy), self (ref)
 		return httpService:JSONEncode(p11) .. ":" .. httpService:JSONEncode(self[p11])
 	end), ",") .. "}"
 end
 
-undefinedIfEmpty = function(p12) --[[ line: 239 | named "undefinedIfEmpty" ]]
+undefinedIfEmpty = function(p12)
 	return if p12 == nil or #p12 == 0 then nil else p12
 end
 
 return {
-	printError = function(p13) --[[ line: 243 ]]
+	printError = function(p13)
 		-- upvalues: printLocation (ref), printSourceLocation (ref)
 		local message = p13.message
 		

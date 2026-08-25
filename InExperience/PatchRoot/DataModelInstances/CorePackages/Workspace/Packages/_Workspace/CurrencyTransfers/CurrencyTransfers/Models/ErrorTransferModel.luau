@@ -4,7 +4,7 @@ local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
 local getFFlagEnableLimitHit2SVUpsellModule = require(currencyTransfers.Flags.GetFFlagEnableLimitHit2SVUpsell)
 local t = {}
 
-function t.new(p0) --[[ line: 20 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	assert(t.isValid(p0))
 	t.__index = t
@@ -13,7 +13,7 @@ function t.new(p0) --[[ line: 20 ]]
 	return p0
 end
 
-function t.mock(p1) --[[ line: 32 ]]
+function t.mock(p1)
 	-- upvalues: t (ref)
 	p1 = p1 or {}
 	
@@ -25,7 +25,7 @@ function t.mock(p1) --[[ line: 32 ]]
 	})
 end
 
-function t.format(p2) --[[ line: 45 ]]
+function t.format(p2)
 	-- upvalues: getFFlagEnableLimitHit2SVUpsellModule (ref), failureReasonModule (ref), t (ref)
 	local failureReason = p2.FailureReason or p2.failureReason
 	local errorMessage = p2.ErrorMessage or (p2.errorMessage or "")

@@ -1,11 +1,11 @@
 ﻿local playersService = game:GetService("Players")
 local signalsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Signals)
 
-local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
+local function createRecentlyLeftStore(p0)
 	-- upvalues: signalsModule (ref), playersService (ref)
 	p0 = p0 or os.clock
 	local var5, var6 = signalsModule.createSignal({})
-	local var7 = signalsModule.createComputed(function(p1) --[[ line: 46 ]]
+	local var7 = signalsModule.createComputed(function(p1)
 		-- upvalues: var5 (ref)
 		local t = {}
 		
@@ -16,7 +16,7 @@ local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
 	end)
 	local var8 = false
 	
-	local function prune(p2) --[[ line: 55 ]]
+	local function prune(p2)
 		-- upvalues: p0 (ref)
 		local var13 = p0()
 		local t = {}
@@ -29,7 +29,7 @@ local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
 		return t
 	end
 	
-	local function handlePlayerRemoving(p3) --[[ line: 67 ]]
+	local function handlePlayerRemoving(p3)
 		-- upvalues: playersService (copy), var5 (ref), p0 (ref), var6 (ref), prune (ref)
 		local localPlayer = playersService.LocalPlayer
 		
@@ -46,7 +46,7 @@ local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
 		var6(prune(cloned))
 	end
 	
-	local function handlePlayerAdded(p4) --[[ line: 83 ]]
+	local function handlePlayerAdded(p4)
 		-- upvalues: var5 (ref), var6 (ref), prune (ref)
 		local var16 = var5(false)
 		
@@ -59,7 +59,7 @@ local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
 	end
 	
 	return {
-		init = function() --[[ line: 93 ]]
+		init = function()
 			-- upvalues: var8 (write), playersService (copy), handlePlayerRemoving (ref), handlePlayerAdded (ref)
 			if var8 then
 				return
@@ -68,7 +68,7 @@ local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
 			playersService.PlayerRemoving:Connect(handlePlayerRemoving)
 			playersService.PlayerAdded:Connect(handlePlayerAdded)
 		end,
-		getRecentlyLeft = function() --[[ line: 102 ]]
+		getRecentlyLeft = function()
 			-- upvalues: prune (ref), var5 (ref)
 			local t = {}
 			
@@ -81,7 +81,7 @@ local function createRecentlyLeftStore(p0) --[[ line: 43 ]]
 			end
 			return t
 		end,
-		getRecentlyLeftIds = function() --[[ line: 115 ]]
+		getRecentlyLeftIds = function()
 			-- upvalues: var7 (ref)
 			return var7
 		end,

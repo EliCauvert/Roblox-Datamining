@@ -12,7 +12,7 @@ local wearTimeListModule = require(script.Parent.WearTimeList)
 local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
 local useWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 
-return function(p0) --[[ line: 22 | named "WearTimeSelectedOptionInListView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), view (ref), text (ref), foundationModule (ref), enums (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
 	local tokens = p0.tokens
 	
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 22 | named "WearTimeSelectedOptionInListView" ]]
 			Transparency = p0.tokens.Color.Shift.Shift_200.Transparency,
 			BackgroundColor3 = p0.tokens.Color.Shift.Shift_200.Color3,
 			ref = p0.anchorRef,
-			[reactModule.Event.Activated] = function() --[[ line: 45 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: p0 (ref)
 				p0.setIsOpen(not p0.isOpen)
 			end
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 22 | named "WearTimeSelectedOptionInListView" ]]
 				hasArrow = false,
 				align = popoverAlign.Start,
 				side = popoverSide.Bottom,
-				onPressedOutside = function() --[[ line: 100 ]]
+				onPressedOutside = function()
 					-- upvalues: p0 (ref)
 					p0.setIsOpen(false)
 				end
@@ -78,7 +78,7 @@ return function(p0) --[[ line: 22 | named "WearTimeSelectedOptionInListView" ]]
 				ContentWrapper = reactModule.createElement(view, {
 					tag = "auto-y",
 					Size = UDim2.new(0, tokens.Size.Size_2900 * 2, 0, 0),
-					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function() --[[ line: 25 ]]
+					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function()
 						-- upvalues: p0 (ref)
 						p0.setIsOpen(false)
 					end, { p0.setIsOpen }), p0.isOpen, if fFlagAXFixIaBTimedOptionsPopoverFocus then p0.anchorRef else nil)

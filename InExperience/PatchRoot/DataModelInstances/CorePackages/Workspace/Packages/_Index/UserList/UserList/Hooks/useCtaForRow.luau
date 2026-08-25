@@ -18,7 +18,7 @@ local mapServerActionsToRowCtaModule = require(userList.Cta.mapServerActionsToRo
 local _ = require(userList.Common.Types)
 local t = { primaryCta = nil, secondaryCta = nil, isLoading = true }
 
-local function _(p0, p1, p2) --[[ line: 43 | named "buildJoinCta" ]]
+local function _(p0, p1, p2)
 	local cloned = table.clone(p0)
 	cloned.onActivated = p2
 	cloned.isDisabled = not p1.isInExperience
@@ -27,11 +27,11 @@ local function _(p0, p1, p2) --[[ line: 43 | named "buildJoinCta" ]]
 	return cloned
 end
 
-return function(p3, p4, p5, p6, p7, p8) --[[ line: 55 | named "useCtaForRow" ]]
+return function(p3, p4, p5, p6, p7, p8)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateDown (ref), enumsModule (ref), buttonTypes (ref), buttonVariant (ref), dataStatus (ref), t (ref), mapServerActionsToRowCtaModule (ref), fFlagUserListCtaAnalyticsEnabled (ref)
 	local var8 = useDispatch()
 	local var9 = useLocalUserId()
-	local var10 = reactModule.useCallback(function(p9) --[[ line: 65 ]]
+	local var10 = reactModule.useCallback(function(p9)
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var8 (ref), navigateDown (copy)
 		local t = { name = appPage.GameJoinCard, userId = p9 }
 		
@@ -42,7 +42,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 55 | named "useCtaForRow" ]]
 		end
 		var8(navigateDown(t))
 	end, { var8 })
-	local var11 = reactModule.useCallback(function() --[[ line: 77 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: appPage (copy), p6 (ref), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var8 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.ProfilePlatform,
@@ -58,7 +58,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 55 | named "useCtaForRow" ]]
 		var8(navigateDown(t))
 	end, { var8, p6 })
 	
-	return reactModule.useMemo(function() --[[ line: 91 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p7 (ref), p6 (ref), var9 (ref), buttonTypes (copy), var11 (ref), buttonVariant (copy), p4 (ref), dataStatus (copy), t (copy), mapServerActionsToRowCtaModule (copy), p3 (ref), p5 (ref), p8 (ref), fFlagUserListCtaAnalyticsEnabled (copy), var10 (ref)
 		if p7 and p7.showSelfProfileCta and p6 == var9 then
 			return {
@@ -82,7 +82,7 @@ return function(p3, p4, p5, p6, p7, p8) --[[ line: 55 | named "useCtaForRow" ]]
 			local var16 = p8
 			local cloned = table.clone(primaryCta)
 			
-			function cloned.onActivated() --[[ line: 117 ]]
+			function cloned.onActivated()
 				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), p7 (copy), buttonTypes (copy), p6 (copy), var10 (copy)
 				if fFlagUserListCtaAnalyticsEnabled then
 					local var18 = if p7 then p7.onCtaActivated else nil

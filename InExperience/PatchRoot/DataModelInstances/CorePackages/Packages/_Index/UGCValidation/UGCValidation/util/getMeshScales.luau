@@ -2,7 +2,7 @@
 local _ = require(parent.util.Types)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 
-return function(p0, p1, p2) --[[ line: 10 ]]
+return function(p0, p1, p2)
 	-- upvalues: getExpectedPartSizeModule (ref)
 	local t = {}
 	

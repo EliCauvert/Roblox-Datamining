@@ -23,7 +23,7 @@ local createGetFollowersCountModule = require(networkRequests.createGetFollowers
 local createGetFollowingsCountModule = require(networkRequests.createGetFollowingsCount)
 local createValidateFriendRequestNicknameModule = require(networkRequests.createValidateFriendRequestNickname)
 
-return function(p0) --[[ line: 32 ]]
+return function(p0)
 	-- upvalues: createGetFriendsFromUserIdModule (ref), createFindFriendsFromUserIdModule (ref), createSearchFriendsByQueryModule (ref), createGetFriendRequestsCountModule (ref), createUnfriendTargetUserIdModule (ref), createGetFriendRequestsModule (ref), createAcceptFriendRequestFromUserIdModule (ref), createDeclineFriendRequestFromUserIdModule (ref), createDeclineAllFriendRequestsModule (ref), createGetFriendsCountFromUserIdModule (ref), createGetInactiveFriendsModule (ref), createRequestFriendshipFromUserIdModule (ref), createRequestFriendshipFromContactIdModule (ref), createGetFollowingExistsModule (ref), createGetUserFollowersModule (ref), createGetFriendRecommendationsFromUserIdModule (ref), createGetFriendshipStatusModule (ref), createGetExtendedFriendshipStatusModule (ref), createAcceptFriendRequestWithTokenModule (ref), createGetFollowersCountModule (ref), createGetFollowingsCountModule (ref), createValidateFriendRequestNicknameModule (ref)
 	return {
 		GetFriendsFromUserId = createGetFriendsFromUserIdModule(p0),

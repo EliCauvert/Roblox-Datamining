@@ -1,10 +1,10 @@
-﻿return function(p0) --[[ line: 2 | named "createShallowEqualAndTables" ]]
+﻿return function(p0)
 	local t = {}
 	
 	for i, v in p0 do
 		t[v] = true
 	end
-	return function(p1, p2) --[[ line: 8 ]]
+	return function(p1, p2)
 		-- upvalues: t (ref)
 		for i, v in p1 do
 			local var1 = p2[i]

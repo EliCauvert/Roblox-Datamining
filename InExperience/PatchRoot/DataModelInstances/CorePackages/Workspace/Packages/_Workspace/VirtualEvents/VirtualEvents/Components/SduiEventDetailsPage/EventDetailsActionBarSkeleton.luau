@@ -6,7 +6,7 @@ local skeleton = foundationModule.Skeleton
 local radius = foundationModule.Enums.Radius
 local useTokens = foundationModule.Hooks.useTokens
 
-return reactModule.memo(function() --[[ line: 14 | named "EventDetailsActionBarSkeleton" ]]
+return reactModule.memo(function()
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	local size1000 = useTokens().Size.Size_1000
 	

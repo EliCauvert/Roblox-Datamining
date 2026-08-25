@@ -25,7 +25,7 @@ local t = {
 	isSquadIndicatorEnabled = false
 }
 
-return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), inExperienceAppChatModalModule (ref), mappedSignal (ref), useMappedSignal (ref), usePartyIconModule (ref), on (ref), off (ref), subMenuContextModule (ref), fFlagEnableChatIconUnibarDropdownFixEnabled (ref), foundationModule (ref), argoPartyExperimentation (ref), var11 (ref)
 	local var13 = cryoModule.Dictionary.union(t, p0)
 	local var14 = useTokens()
@@ -34,14 +34,14 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 	local var16, var17 = reactModule.useState(inExperienceAppChatModalModule.default.unreadCount)
 	
 	if var13.shouldShowCustomBadge then
-		reactModule.useEffect(function() --[[ line: 63 ]]
+		reactModule.useEffect(function()
 			-- upvalues: inExperienceAppChatModalModule (copy), var17 (ref)
-			local eventConnection = inExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p1) --[[ line: 64 ]]
+			local eventConnection = inExperienceAppChatModalModule.default.unreadCountSignal.Event:Connect(function(p1)
 				-- upvalues: var17 (copy)
 				var17(p1)
 			end)
 			
-			return function() --[[ line: 67 ]]
+			return function()
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end
@@ -58,20 +58,20 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 		var18 = var20
 		var19 = var21
 	end
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), inExperienceAppChatModalModule (copy), var19 (write)
 		if var13.isSquadIndicatorEnabled then
-			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2) --[[ line: 83 ]]
+			local eventConnection = inExperienceAppChatModalModule.default.currentSquadIdSignal.Event:Connect(function(p2)
 				-- upvalues: var19 (copy)
 				var19(p2)
 			end)
 			
-			return function() --[[ line: 87 ]]
+			return function()
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end
 		end
-		return function() --[[ line: 91 ]] end
+		return function() end
 	end, { var13.isSquadIndicatorEnabled, var19 })
 	
 	if var13.isSquadIndicatorEnabled then
@@ -82,16 +82,16 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 		end
 	end
 	local var22 = if var13.isSquadIndicatorEnabled then contrast else var16 > 0
-	local var23 = useMappedSignal(mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function(_) --[[ line: 104 ]]
+	local var23 = useMappedSignal(mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function(_)
 		-- upvalues: inExperienceAppChatModalModule (copy)
 		return inExperienceAppChatModalModule:getVisible()
 	end))
 	local var24 = usePartyIconModule(var15, 24, if var23 then on else off)
 	local var25 = reactModule.useContext(subMenuContextModule)
 	
-	local function _(p3) --[[ line: 112 | named "getTransparency" ]]
+	local function _(p3)
 		-- upvalues: var25 (ref)
-		return if var25 then var25:map(function(p4) --[[ line: 114 ]]
+		return if var25 then var25:map(function(p4)
 			-- upvalues: p3 (ref)
 			return p3 + (1 - p3) * (1 - p4)
 		end) else p3
@@ -101,7 +101,7 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 	
 	if fFlagEnableChatIconUnibarDropdownFixEnabled then
 		local transparency = var14.Color.Content.Default.Transparency
-		var26 = if var25 then var25:map(function(p5) --[[ line: 124 ]]
+		var26 = if var25 then var25:map(function(p5)
 			-- upvalues: var14 (ref), transparency (ref)
 			return {
 				Color3 = var14.Color.Content.Default.Color3,
@@ -130,7 +130,7 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 		local t_3 = {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = var24.size:map(function(p6) --[[ line: 147 ]]
+			Size = var24.size:map(function(p6)
 				return UDim2.fromOffset(p6, p6)
 			end)
 		}
@@ -141,7 +141,7 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 			
 			if var25 then
 				local var32 = 0
-				var33 = var25:map(function(p7) --[[ line: 114 ]]
+				var33 = var25:map(function(p7)
 					-- upvalues: var32 (ref)
 					return var32 + (1 - var32) * (1 - p7)
 				end)
@@ -157,7 +157,7 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 		t_3.Image = var24.image.thumbnail
 		local t_5 = { Color3 = var14.Color.Content.Emphasis.Color3 }
 		local transparency = var14.Color.Content.Emphasis.Transparency
-		t_5.Transparency = if var25 then var25:map(function(p8) --[[ line: 114 ]]
+		t_5.Transparency = if var25 then var25:map(function(p8)
 			-- upvalues: transparency (ref)
 			return transparency + (1 - transparency) * (1 - p8)
 		end) else transparency
@@ -179,14 +179,14 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 		if var13.isSquadIndicatorEnabled then
 			t_5 = { Color3 = contrast.Color3 }
 			local transparency = contrast.Transparency
-			t_5.Transparency = if var25 then var25:map(function(p9) --[[ line: 114 ]]
+			t_5.Transparency = if var25 then var25:map(function(p9)
 				-- upvalues: transparency (ref)
 				return transparency + (1 - transparency) * (1 - p9)
 			end) else transparency
 		else
 			t_5 = { Color3 = var14.Color.System.Contrast.Color3 }
 			local transparency = var14.Color.System.Contrast.Transparency
-			t_5.Transparency = if var25 then var25:map(function(p10) --[[ line: 114 ]]
+			t_5.Transparency = if var25 then var25:map(function(p10)
 				-- upvalues: transparency (ref)
 				return transparency + (1 - transparency) * (1 - p10)
 			end) else transparency
@@ -194,7 +194,7 @@ return function(p0) --[[ line: 48 | named "ConnectIcon" ]]
 		t_3.backgroundStyle = t_5
 		local t_6 = { Color = var14.Color.Surface.Surface_0.Color3 }
 		local transparency = var14.Color.Surface.Surface_0.Transparency
-		t_6.Transparency = if var25 then var25:map(function(p11) --[[ line: 114 ]]
+		t_6.Transparency = if var25 then var25:map(function(p11)
 			-- upvalues: transparency (ref)
 			return transparency + (1 - transparency) * (1 - p11)
 		end) else transparency

@@ -3,7 +3,7 @@ local constantsModule = require(abuseReportMenu.Components.Constants)
 local _ = require(abuseReportMenu.Components.Types)
 local playerMenuActions = constantsModule.PlayerMenuActions
 
-return function(p0, p1) --[[ line: 7 | named "reportPersonUIStateReducer" ]]
+return function(p0, p1)
 	-- upvalues: playerMenuActions (ref), constantsModule (ref)
 	local cloned = table.clone(p0)
 	local type = p1.type

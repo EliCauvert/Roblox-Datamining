@@ -5,7 +5,7 @@ local setDevConsoleVisibilityModule = require(script.Parent.Parent.Actions.SetDe
 local setDevConsoleMinimizedModule = require(script.Parent.Parent.Actions.SetDevConsoleMinimized)
 local reportDevConsoleTabEventsThrottleHundredthsPercent = game:DefineFastInt("ReportDevConsoleTabEventsThrottleHundredthsPercent", 0)
 
-function ReportDevConsoleOpenClose(p0, p1) --[[ line: 23 ]]
+function ReportDevConsoleOpenClose(p0, p1)
 	-- upvalues: setDevConsoleVisibilityModule (ref), rbxAnalyticsService (ref)
 	if p1.type == setDevConsoleVisibilityModule.name then
 		local visibleStartTime = p0:getState().DisplayOptions.visibleStartTime
@@ -21,11 +21,11 @@ function ReportDevConsoleOpenClose(p0, p1) --[[ line: 23 ]]
 	end
 end
 
-function getTabAnalyticsKeyName(p2, p3) --[[ line: 39 ]]
+function getTabAnalyticsKeyName(p2, p3)
 	return if p3 == nil then string.format("%s", p2) else string.format("%s_%s", p2, if p3 then "Client" else "Server")
 end
 
-function dispatchTabAnalytics(p4) --[[ line: 47 ]]
+function dispatchTabAnalytics(p4)
 	-- upvalues: dashModule (ref), rbxAnalyticsService (ref), reportDevConsoleTabEventsThrottleHundredthsPercent (ref)
 	rbxAnalyticsService:ReportInfluxSeries("devConsoleMetric", dashModule.join({
 		calledFrom = "devConsoleTabChange",
@@ -33,7 +33,7 @@ function dispatchTabAnalytics(p4) --[[ line: 47 ]]
 	}, p4), reportDevConsoleTabEventsThrottleHundredthsPercent)
 end
 
-function ReportTabChange(p5, p6) --[[ line: 59 ]]
+function ReportTabChange(p5, p6)
 	-- upvalues: setActiveTabModule (ref), setDevConsoleVisibilityModule (ref), setDevConsoleMinimizedModule (ref)
 	if p6.type == setActiveTabModule.name then
 		local mainView = p5:getState().MainView
@@ -73,8 +73,8 @@ function ReportTabChange(p5, p6) --[[ line: 59 ]]
 	end
 end
 
-return function(p7, p8) --[[ line: 117 ]]
-	return function(p9) --[[ line: 118 ]]
+return function(p7, p8)
+	return function(p9)
 		-- upvalues: p8 (ref), p7 (ref)
 		ReportTabChange(p8, p9)
 		ReportDevConsoleOpenClose(p8, p9)

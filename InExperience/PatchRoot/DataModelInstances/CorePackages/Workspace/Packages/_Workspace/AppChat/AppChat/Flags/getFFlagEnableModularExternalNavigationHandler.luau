@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableModularExternalNavigationHandler", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableModularExternalNavigationHandler")
 end

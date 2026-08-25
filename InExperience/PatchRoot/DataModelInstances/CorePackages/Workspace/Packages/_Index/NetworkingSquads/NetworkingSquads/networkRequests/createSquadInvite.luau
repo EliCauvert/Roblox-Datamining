@@ -2,10 +2,10 @@
 local SQUAD_URLModule = require(script.Parent.Parent.SQUAD_URL)
 local _ = require(script.Parent.Parent.networkingSquadTypes)
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: SQUAD_URLModule (ref), httpService (ref)
 	local var2 = nil
-	local squadInvite = p0.roduxNetworking.POST("SquadInvite", function(p1, p2) --[[ line: 13 ]]
+	local squadInvite = p0.roduxNetworking.POST("SquadInvite", function(p1, p2)
 		-- upvalues: p0 (ref), var2 (write), SQUAD_URLModule (copy), httpService (copy)
 		if p0.useMockedResponse then
 			var2 = {
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 7 ]]
 	
 	if p0.useMockedResponse then
 		squadInvite.Mock.clear()
-		squadInvite.Mock.reply(function() --[[ line: 44 ]]
+		squadInvite.Mock.reply(function()
 			-- upvalues: var2 (write)
 			return var2
 		end)

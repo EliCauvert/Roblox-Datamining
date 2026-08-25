@@ -14,7 +14,7 @@ local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStor
 local luaAppDefaultDataTtlSec = game:DefineFastInt("LuaAppDefaultDataTtlSec", 3600)
 local luaAppDefaultFailedDataTtlSec = game:DefineFastInt("LuaAppDefaultFailedDataTtlSec", 60)
 
-return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
+return function(p0, p1, p2)
 	-- upvalues: luaAppDefaultDataTtlSec (ref), luaAppDefaultFailedDataTtlSec (ref), fFlagLuaAppDataHydrationSanitizeItem (ref), signalsModule (ref), dataStatus (ref), luaAppDataCacheBatch (ref), signalsExperimentalModule (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), cryoModule (ref), fFlagMigrateGameInfoToStore (ref), getLocalPlayerUserId (ref), playersService (ref)
 	p0 = p0 or luaAppDefaultDataTtlSec
 	p1 = p1 or luaAppDefaultFailedDataTtlSec
@@ -24,7 +24,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 	local t_2 = {}
 	local t_3 = {}
 	
-	local function getOrCreateSignals(value) --[[ line: 42 ]]
+	local function getOrCreateSignals(value)
 		-- upvalues: t (write), t_1 (write), signalsModule (copy), t_2 (write), dataStatus (copy)
 		if t[value] == nil or t_1[value] == nil then
 			t[value] = {}
@@ -41,7 +41,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		return t[value], t_1[value]
 	end
 	
-	local function getItem(p3, p4) --[[ line: 54 ]]
+	local function getItem(p3, p4)
 		-- upvalues: getOrCreateSignals (ref), t_3 (write), dataStatus (copy)
 		local var36 = getOrCreateSignals(p3)
 		local var37 = true
@@ -59,7 +59,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		return var36, var37
 	end
 	
-	local function getItems(p5, p6) --[[ line: 76 ]]
+	local function getItems(p5, p6)
 		-- upvalues: getItem (ref)
 		local t = {}
 		local t_1 = {}
@@ -75,12 +75,12 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		return t, t_1
 	end
 	
-	local function replaceItems(p7) --[[ line: 95 ]]
+	local function replaceItems(p7)
 		-- upvalues: p0 (ref), luaAppDataCacheBatch (copy), getOrCreateSignals (ref), var11 (ref), t_2 (write), dataStatus (copy), t_3 (write), signalsExperimentalModule (copy)
 		local var43 = os.clock() + p0
 		
 		if luaAppDataCacheBatch then
-			signalsExperimentalModule.batch(function() --[[ line: 99 | named "batchUpdate" ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: p7 (ref), getOrCreateSignals (copy), var11 (copy), t_2 (copy), dataStatus (copy), t_3 (copy), var43 (ref)
 				for i, v in p7 do
 					local _, var45 = getOrCreateSignals(i)
@@ -100,12 +100,12 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		end
 	end
 	
-	local function updateItems(p8, p9) --[[ line: 118 ]]
+	local function updateItems(p8, p9)
 		-- upvalues: p0 (ref), luaAppDataCacheBatch (copy), getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var11 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), signalsExperimentalModule (copy)
 		local var46 = os.clock() + p0
 		
 		if luaAppDataCacheBatch then
-			signalsExperimentalModule.batch(function() --[[ line: 122 | named "batchUpdate" ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: p8 (ref), getOrCreateSignals (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var11 (copy), t_2 (copy), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), p9 (ref), t_3 (copy), var46 (ref)
 				for i, v in p8 do
 					local var51, var52 = getOrCreateSignals(i)
@@ -139,7 +139,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		end
 	end
 	
-	local function updateItem(p10, p11, p12) --[[ line: 172 ]]
+	local function updateItem(p10, p11, p12)
 		-- upvalues: getOrCreateSignals (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), cryoModule (copy), var11 (ref), t_2 (write), dataStatus (copy), fFlagMigrateGameInfoToStore (copy), t_3 (write), p0 (ref)
 		local var55, var56 = getOrCreateSignals(p10)
 		local var57 = var55.data(false)
@@ -160,7 +160,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		end
 	end
 	
-	local function replaceItem(p13, p14) --[[ line: 194 ]]
+	local function replaceItem(p13, p14)
 		-- upvalues: getOrCreateSignals (ref), var11 (ref), t_2 (write), dataStatus (copy), t_3 (write), p0 (ref)
 		local _, var59 = getOrCreateSignals(p13)
 		var59(if var11 then var11(p14) else p14)
@@ -168,7 +168,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		t_3[p13] = os.clock() + p0
 	end
 	
-	local function resetFailedItem(value) --[[ line: 205 ]]
+	local function resetFailedItem(value)
 		-- upvalues: t (write), dataStatus (copy), t_2 (write)
 		local var60 = t[value]
 		
@@ -177,7 +177,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		end
 	end
 	
-	local function resetFailedItems(value) --[[ line: 212 ]]
+	local function resetFailedItems(value)
 		-- upvalues: t (write), dataStatus (copy), t_2 (write)
 		for i, v in value do
 			local var61 = t[v]
@@ -188,12 +188,12 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		end
 	end
 	
-	local function markItemsAsFailed(p15) --[[ line: 218 ]]
+	local function markItemsAsFailed(p15)
 		-- upvalues: p1 (ref), luaAppDataCacheBatch (copy), t_2 (write), dataStatus (copy), t_3 (write), signalsExperimentalModule (copy)
 		local var62 = os.clock() + p1
 		
 		if luaAppDataCacheBatch then
-			signalsExperimentalModule.batch(function() --[[ line: 221 | named "batchUpdate" ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: p15 (ref), t_2 (copy), dataStatus (copy), t_3 (copy), var62 (ref)
 				for i, v in p15 do
 					if t_2[v] then
@@ -213,7 +213,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		end
 	end
 	
-	local function clear() --[[ line: 240 ]]
+	local function clear()
 		-- upvalues: t_3 (write), t (write), t_1 (write), t_2 (write)
 		t_3 = {}
 		t = {}
@@ -222,7 +222,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 	end
 	
 	local var27 = getLocalPlayerUserId()
-	local var28 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ line: 248 ]]
+	local var28 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
 		-- upvalues: getLocalPlayerUserId (copy), var27 (write), clear (ref)
 		local var63 = getLocalPlayerUserId()
 		
@@ -243,7 +243,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createDataCache" ]]
 		resetFailedItem = resetFailedItem,
 		resetFailedItems = resetFailedItems,
 		clear = clear,
-		dispose = function() --[[ line: 256 ]]
+		dispose = function()
 			-- upvalues: var28 (write), clear (ref)
 			if var28 then
 				var28:Disconnect()

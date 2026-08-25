@@ -16,27 +16,27 @@ local t = {
 	restingVelocityLimit = 0.1
 }
 
-return function(p0) --[[ line: 32 | named "ChatLineReportInfo" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), fFlagChatLineReportingFocusFixesEnabled (ref), view (ref)
 	local var6 = useTokens()
 	local var7, var8 = reactModule.useState(false)
 	local var9 = useLocalization(constantsModule.ChatLineLocalizationKeys)
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), p0 (ref)
 		var8(p0.visible)
 	end, { p0.visible })
-	local var10, var11 = reactOtterModule.useAnimatedBinding(1, function() --[[ line: 42 ]] end)
-	local var12 = reactModule.useMemo(function() --[[ line: 44 ]]
+	local var10, var11 = reactOtterModule.useAnimatedBinding(1, function() end)
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref)
 		return if var7 then 0 else 1
 	end, { var7 })
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), reactOtterModule (copy), var12 (ref), t (copy)
 		var11(reactOtterModule.spring(var12, t))
 	end, { var12 })
 	
 	return reactModule.createElement("TextButton", {
-		Active = var10:map(function(p1) --[[ line: 53 ]]
+		Active = var10:map(function(p1)
 			return p1 == 0
 		end),
 		AutoButtonColor = false,
@@ -45,11 +45,11 @@ return function(p0) --[[ line: 32 | named "ChatLineReportInfo" ]]
 		Selectable = if fFlagChatLineReportingFocusFixesEnabled then false else nil,
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
-		[reactModule.Event.Activated] = function() --[[ line: 62 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: var8 (ref)
 			var8(false)
 		end,
-		ZIndex = var10:map(function(p2) --[[ line: 66 ]]
+		ZIndex = var10:map(function(p2)
 			return (1 - p2) * 4
 		end)
 	}, {
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 32 | named "ChatLineReportInfo" ]]
 			ClipsDescendants = true,
 			ZIndex = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = var10:map(function(p3) --[[ line: 74 ]]
+			Size = var10:map(function(p3)
 				return UDim2.new(1, 0, 0, 60):Lerp(UDim2.new(1, 0, 0, 0), p3)
 			end)
 		}, {

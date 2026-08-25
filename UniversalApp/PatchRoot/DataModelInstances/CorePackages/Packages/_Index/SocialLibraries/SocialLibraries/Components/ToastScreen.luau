@@ -30,11 +30,11 @@ local var3 = t.strictInterface({
 	show = t.optional(t.boolean)
 })
 
-function toastScreen.init(p0) --[[ line: 41 ]]
+function toastScreen.init(p0)
 	-- upvalues: var3 (ref), var2 (ref), images (ref), iconSize (ref)
 	p0.hasToastChanged = false
 	
-	function p0.getToastProps(p1) --[[ line: 44 ]]
+	function p0.getToastProps(p1)
 		-- upvalues: var3 (copy), var2 (copy), images (copy), iconSize (copy), p0 (ref)
 		local toastContent = p1.toastContent or {}
 		assert(var3(p1))
@@ -48,7 +48,7 @@ function toastScreen.init(p0) --[[ line: 41 ]]
 				iconImage = if not toastContent.hideIcon then toastContent.iconImage or images["icons/status/alert"] else nil,
 				iconSize = if not toastContent.hideIcon then toastContent.iconSize or Vector2.new(iconSize.Regular, iconSize.Regular) else nil,
 				swipeUpDismiss = toastContent.swipeUpDismiss,
-				onAppeared = function() --[[ line: 62 ]]
+				onAppeared = function()
 					-- upvalues: toastContent (ref), p0 (copy)
 					if toastContent.onAppeared then
 						toastContent.onAppeared()
@@ -56,7 +56,7 @@ function toastScreen.init(p0) --[[ line: 41 ]]
 					p0.hasToastChanged = false
 				end,
 				onActivated = toastContent.onActivated,
-				onDismissed = function() --[[ line: 69 ]]
+				onDismissed = function()
 					-- upvalues: toastContent (ref), p0 (copy)
 					if toastContent.onDismissed then
 						toastContent.onDismissed()
@@ -76,14 +76,14 @@ function toastScreen.init(p0) --[[ line: 41 ]]
 	end
 end
 
-function toastScreen.render(p2) --[[ line: 90 ]]
+function toastScreen.render(p2)
 	-- upvalues: roact (ref), toast (ref)
 	assert(type(p2.props.navigation) ~= "nil", "ToastScreen should be wrapped with Roact Navigation")
 	
 	return roact.createElement(toast, p2.getToastProps(p2.props.navigation.getParam("toastProps", {})))
 end
 
-function toastScreen.didUpdate(p3, _, _) --[[ line: 98 ]]
+function toastScreen.didUpdate(p3, _, _)
 	p3.hasToastChanged = true
 end
 

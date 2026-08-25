@@ -3,7 +3,7 @@ local httpService = game:GetService("HttpService")
 local urlBuilder = require(authCommon.Parent.UrlBuilder).UrlBuilder
 local usernameValidationContextModule = require(authCommon.Enums.UsernameValidationContext)
 
-return function(p0, p1, p2, p3) --[[ line: 12 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: usernameValidationContextModule (ref), urlBuilder (ref), httpService (ref)
 	if not p3 then
 		p3 = usernameValidationContextModule.Unknown

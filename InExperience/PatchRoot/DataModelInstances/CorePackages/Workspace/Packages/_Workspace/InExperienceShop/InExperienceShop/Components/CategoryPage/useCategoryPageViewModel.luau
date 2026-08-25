@@ -14,7 +14,7 @@ local var6 = if fFlagPassShopPurchaseSurfaceToBuyModal then require(inExperience
 local _ = require(script.Parent.CategoryPageView)
 local t = {}
 
-local function _(p0) --[[ line: 51 | named "shopItemTileFlexItem" ]]
+local function _(p0)
 	return {
 		ShrinkRatio = 1,
 		FlexMode = Enum.UIFlexMode.Custom,
@@ -23,7 +23,7 @@ local function _(p0) --[[ line: 51 | named "shopItemTileFlexItem" ]]
 	}
 end
 
-local _ = function() --[[ line: 60 | named "explicitWidthFlexItem" ]]
+local _ = function()
 	return {
 		GrowRatio = 0,
 		ShrinkRatio = 0,
@@ -32,16 +32,16 @@ local _ = function() --[[ line: 60 | named "explicitWidthFlexItem" ]]
 	}
 end
 
-local _ = function(p1, p2, p3) --[[ line: 69 | named "resolveTileWidth" ]]
+local _ = function(p1, p2, p3)
 	return if p3 == nil or p3.rowWidth <= 0 then nil elseif p3.isFeaturedDoubleWidthRobux(p1, p2) and p3.featuredRobuxWidth ~= nil then p3.featuredRobuxWidth else p3.shopWidth
 end
 
-local _ = function(p4) --[[ line: 81 | named "resolveRobuxMediaHeightScale" ]]
+local _ = function(p4)
 	-- upvalues: computeRobuxPackageMediaHeightScale (ref)
 	return if p4 == nil or p4.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p4.shopWidth, p4.gap)
 end
 
-local function tileWrapperProps(p5, p6) --[[ line: 89 ]]
+local function tileWrapperProps(p5, p6)
 	return if p5 == nil or p5 <= 0 then {
 		tag = "size-full-0 auto-y",
 		Size = UDim2.fromOffset(0, 0),
@@ -63,7 +63,7 @@ local function tileWrapperProps(p5, p6) --[[ line: 89 ]]
 	}
 end
 
-local _ = function(p7) --[[ line: 105 | named "shopItemFromRobuxPackage" ]]
+local _ = function(p7)
 	return {
 		id = p7.id,
 		name = tostring(p7.robuxAmount),
@@ -71,7 +71,7 @@ local _ = function(p7) --[[ line: 105 | named "shopItemFromRobuxPackage" ]]
 	}
 end
 
-local _ = function(p8, p9, p10) --[[ line: 113 | named "getTileLoggingProps" ]]
+local _ = function(p8, p9, p10)
 	return {
 		categoryId = p10,
 		gridPositionRow = if p9 then p9.gridPositionRow else nil,
@@ -79,9 +79,9 @@ local _ = function(p8, p9, p10) --[[ line: 113 | named "getTileLoggingProps" ]]
 	}
 end
 
-return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
+return function(p11)
 	-- upvalues: reactModule (ref), findSectionModule (ref), t (ref), tileWrapperProps (ref), view (ref), robuxPackageTileContainerModule (ref), computeRobuxPackageMediaHeightScale (ref), shopItemTileModule (ref), var6 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref)
-	local var9 = reactModule.useMemo(function() --[[ line: 132 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: findSectionModule (copy), p11 (ref)
 		return findSectionModule(p11.sections, p11.sectionId)
 	end, { p11.sections, p11.sectionId })
@@ -92,7 +92,7 @@ return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
 	local var14 = var11 ~= nil and #var11 > 0
 	local var15 = var12 ~= nil
 	local onItemActivated = p11.onItemActivated
-	local var16 = reactModule.useMemo(function() --[[ line: 149 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), var11 (ref), var12 (ref), var10 (ref)
 		if var14 then
 			local var19 = var11
@@ -122,7 +122,7 @@ return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
 		end
 		return list
 	end, { var10, var11, var12, var14 })
-	local var17 = reactModule.useMemo(function() --[[ line: 171 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var14 (ref), var11 (ref), var12 (ref)
 		if var14 then
 			local t = {}
@@ -138,7 +138,7 @@ return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
 		
 		return { [var24.id] = var24 }
 	end, { var11, var12, var14 })
-	local var18 = reactModule.useCallback(function(p12, p13, p14) --[[ line: 189 ]]
+	local var18 = reactModule.useCallback(function(p12, p13, p14)
 		-- upvalues: p11 (ref), var17 (ref), var14 (ref), var15 (ref), tileWrapperProps (copy), reactModule (copy), view (copy), robuxPackageTileContainerModule (copy), var13 (ref), onItemActivated (ref), computeRobuxPackageMediaHeightScale (copy), shopItemTileModule (copy), onItemActivated (ref), var6 (copy)
 		local t = {
 			categoryId = p11.sectionId,
@@ -200,16 +200,16 @@ return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
 		sectionId = p11.sectionId,
 		onItemActivated = onItemActivated,
 		renderTile = if fFlagEnableInExperienceShopUnifiedLoggingModule then var18 elseif var17 ~= nil then nil else var18,
-		isFeaturedDoubleWidthRobux = reactModule.useMemo(function() --[[ line: 252 ]]
+		isFeaturedDoubleWidthRobux = reactModule.useMemo(function()
 			-- upvalues: var14 (ref), var15 (ref), var12 (ref)
 			if var14 then
-				return function(_, _) --[[ line: 254 ]]
+				return function(_, _)
 					return true
 				end
 			elseif var15 then
 				local id = var12.id
 				
-				return function(p15, p16) --[[ line: 264 ]]
+				return function(p15, p16)
 					-- upvalues: id (ref)
 					return p16 == 1 and p15.id == id
 				end

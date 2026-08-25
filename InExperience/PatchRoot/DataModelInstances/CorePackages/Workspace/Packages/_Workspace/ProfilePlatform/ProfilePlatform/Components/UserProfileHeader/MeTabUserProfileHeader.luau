@@ -20,7 +20,7 @@ local fFlagEnableFontStylisticAlternativesOnSocialScreens = sharedFlagsModule.FF
 local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
 local var11 = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then CTARowModule else profileActionBarModule
 
-return function(p0) --[[ line: 57 | named "MeTabUserProfileHeader" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useProfileWrapperContextModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useProfileJsonComponentModule (ref), fFlagEnableFontStylisticAlternativesOnSocialScreens (ref), constantsModule (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), var11 (ref), horizontalPageMargin (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref)
 	local var12 = useTokens()
 	local profileId = useProfileWrapperContextModule().profileId

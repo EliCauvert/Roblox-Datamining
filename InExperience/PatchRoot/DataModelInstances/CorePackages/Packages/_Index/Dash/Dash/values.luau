@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Types)
 local insert = table.insert
 
-return function(p0) --[[ line: 14 | named "values" ]]
+return function(p0)
 	-- upvalues: insert (ref)
 	local t = {}
 	

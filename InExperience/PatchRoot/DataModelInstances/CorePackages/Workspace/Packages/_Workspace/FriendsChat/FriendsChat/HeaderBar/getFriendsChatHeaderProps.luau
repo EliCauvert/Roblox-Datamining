@@ -1,6 +1,6 @@
 ﻿local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-local function getParticipantUserIds(p0) --[[ line: 24 ]]
+local function getParticipantUserIds(p0)
 	local t = {}
 	local participants = p0.participants
 	
@@ -17,7 +17,7 @@ local function getParticipantUserIds(p0) --[[ line: 24 ]]
 	return t
 end
 
-return function(p1, _) --[[ line: 40 | named "getFriendsChatHeaderProps" ]]
+return function(p1, _)
 	-- upvalues: getParticipantUserIds (ref), expChatConversationListAdapterModule (ref)
 	return {
 		participantUserIds = getParticipantUserIds(p1),

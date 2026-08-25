@@ -9,7 +9,7 @@ local _ = require(script.Parent.types)
 local string = luauPolyfillModule.String
 local jsonModule = require(script.Parent.json)
 
-local function _(p0) --[[ line: 26 | named "stripBOM" ]]
+local function _(p0)
 	-- upvalues: string (ref)
 	p0 = tostring(p0)
 	
@@ -19,7 +19,7 @@ local function _(p0) --[[ line: 26 | named "stripBOM" ]]
 	return p0
 end
 
-local _ = function(p1) --[[ line: 41 | named "parseBOM" ]]
+local _ = function(p1)
 	-- upvalues: jsonModule (ref), string (ref)
 	local parse = jsonModule.parse
 	local var3 = tostring(p1)
@@ -30,7 +30,7 @@ local _ = function(p1) --[[ line: 41 | named "parseBOM" ]]
 	return parse(var3)
 end
 
-function t.parseGraphQLJSON(p2, p3, p4) --[[ line: 44 ]]
+function t.parseGraphQLJSON(p2, p3, p4)
 	-- upvalues: jsonModule (ref), string (ref), boolean (ref), buildClientSchema (ref), error (ref)
 	local parse = jsonModule.parse
 	local var4 = tostring(p3)

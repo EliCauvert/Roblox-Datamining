@@ -63,7 +63,7 @@ contextualMenu.defaultProps = {
 	openPositionX = UDim.new(0, 0)
 }
 
-function contextualMenu.init(p0) --[[ line: 118 ]]
+function contextualMenu.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
 	p0.wasDismissed = false
 	local var12, var13 = roactModule.createBinding(0)
@@ -71,7 +71,7 @@ function contextualMenu.init(p0) --[[ line: 118 ]]
 	p0.positionPercentBindingUpdate = var13
 	p0.motor = otterModule.createSingleMotor(0)
 	p0.motor:onStep(p0.positionPercentBindingUpdate)
-	p0.motor:onComplete(function() --[[ line: 125 ]]
+	p0.motor:onComplete(function()
 		-- upvalues: p0 (ref)
 		if p0.wasDismissed then
 			p0.wasDismissed = false
@@ -92,14 +92,14 @@ function contextualMenu.init(p0) --[[ line: 118 ]]
 		absoluteSize = Vector2.new(0, 0),
 		absolutePosition = Vector2.new(0, 0)
 	}
-	p0.visibleBinding = p0.positionPercentBinding:map(function(p1) --[[ line: 145 ]]
+	p0.visibleBinding = p0.positionPercentBinding:map(function(p1)
 		return p1 ~= 0
 	end)
 end
 
-function contextualMenu.render(p2) --[[ line: 150 ]]
+function contextualMenu.render(p2)
 	-- upvalues: withStyleModule (ref), menuDirectionModule (ref), guiService (ref), roactModule (ref), baseMenuModule (ref)
-	return withStyleModule(function(p3) --[[ line: 151 ]]
+	return withStyleModule(function(p3)
 		-- upvalues: p2 (ref), menuDirectionModule (copy), guiService (copy), roactModule (copy), baseMenuModule (copy)
 		local var14 = 0.5
 		local uDim = UDim.new(1, -24)
@@ -128,11 +128,11 @@ function contextualMenu.render(p2) --[[ line: 150 ]]
 			BackgroundTransparency = 1,
 			Visible = p2.visibleBinding,
 			ZIndex = p2.props.zIndex,
-			[roactModule.Change.AbsoluteSize] = function(p4) --[[ line: 192 ]]
+			[roactModule.Change.AbsoluteSize] = function(p4)
 				-- upvalues: p2 (copy)
 				p2:setState({ absoluteSize = p4.AbsoluteSize })
 			end,
-			[roactModule.Change.AbsolutePosition] = function(p5) --[[ line: 198 ]]
+			[roactModule.Change.AbsolutePosition] = function(p5)
 				-- upvalues: p2 (copy)
 				p2:setState({ absolutePosition = p5.AbsolutePosition })
 			end
@@ -147,7 +147,7 @@ function contextualMenu.render(p2) --[[ line: 150 ]]
 				Selectable = false,
 				Position = UDim2.fromOffset(-var22.X, -var22.Y),
 				Size = UDim2.fromOffset(p2.props.screenSize.X, p2.props.screenSize.Y),
-				[roactModule.Event.Activated] = function() --[[ line: 216 ]]
+				[roactModule.Event.Activated] = function()
 					-- upvalues: p2 (copy)
 					if not p2.wasDismissed then
 						p2.wasDismissed = true
@@ -166,7 +166,7 @@ function contextualMenu.render(p2) --[[ line: 150 ]]
 					setFirstItemRef = p2.props.setFirstItemRef,
 					setFrameRef = p2.props.setFrameRef,
 					width = uDim,
-					position = p2.positionPercentBinding:map(function(p6) --[[ line: 243 ]]
+					position = p2.positionPercentBinding:map(function(p6)
 						-- upvalues: var17 (ref), p2 (copy), menuDirectionModule (copy)
 						local var23 = 0.5
 						
@@ -198,14 +198,14 @@ function contextualMenu.render(p2) --[[ line: 150 ]]
 	end)
 end
 
-function contextualMenu.didMount(p7) --[[ line: 278 ]]
+function contextualMenu.didMount(p7)
 	if p7.props.open then
 		p7.wasDismissed = false
 		p7.motor:setGoal(p7.motorType(p7.motorOptions.open.targetValue, p7.motorOptions.open.springParams))
 	end
 end
 
-function contextualMenu.didUpdate(p8, p9, _) --[[ line: 285 ]]
+function contextualMenu.didUpdate(p8, p9, _)
 	if p8.props.open ~= p9.open then
 		if p8.props.open then
 			p8.wasDismissed = false
@@ -217,7 +217,7 @@ function contextualMenu.didUpdate(p8, p9, _) --[[ line: 285 ]]
 	end
 end
 
-function contextualMenu.willUnmount(p10) --[[ line: 298 ]]
+function contextualMenu.willUnmount(p10)
 	p10.motor:destroy()
 end
 

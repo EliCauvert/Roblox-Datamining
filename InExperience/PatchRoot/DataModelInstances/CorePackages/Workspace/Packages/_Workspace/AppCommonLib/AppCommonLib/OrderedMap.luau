@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0, p1, ...) --[[ line: 51 ]]
+function t.new(p0, p1, ...)
 	-- upvalues: t (ref)
 	local t_1 = { keys = {}, values = {}, getId = p0, sortPredicate = p1 }
 	setmetatable(t_1, t)
@@ -10,25 +10,25 @@ function t.new(p0, p1, ...) --[[ line: 51 ]]
 	return t_1
 end
 
-function t:Get(p2) --[[ line: 69 ]]
+function t:Get(p2)
 	return self.values[p2]
 end
 
-function t:GetByIndex(p3) --[[ line: 76 ]]
+function t:GetByIndex(p3)
 	local var2 = self.keys[p3]
 	
 	return if var2 == nil then nil else self.values[var2]
 end
 
-function t:GetIds() --[[ line: 89 ]]
+function t:GetIds()
 	return self.keys
 end
 
-function t:Length() --[[ line: 96 ]]
+function t:Length()
 	return #self.keys
 end
 
-function t:Delete(...) --[[ line: 109 ]]
+function t:Delete(...)
 	-- upvalues: t (ref)
 	local var3 = t.new(self.getId, self.sortPredicate)
 	local var4 = select("#", ...)
@@ -47,7 +47,7 @@ function t:Delete(...) --[[ line: 109 ]]
 	return var3
 end
 
-function t:Insert(...) --[[ line: 143 ]]
+function t:Insert(...)
 	-- upvalues: t (ref)
 	local var5 = self:_Copy()
 	t._InsertInPlace(var5, ...)
@@ -55,21 +55,21 @@ function t:Insert(...) --[[ line: 143 ]]
 	return var5
 end
 
-function t:First() --[[ line: 154 ]]
+function t:First()
 	return if self.keys[1] then self:Get(self.keys[1]) else nil
 end
 
-function t:Last() --[[ line: 164 ]]
+function t:Last()
 	local keysCount = #self.keys
 	
 	return if self.keys[keysCount] then self:Get(self.keys[keysCount]) else nil
 end
 
-function t:CreateIterator() --[[ line: 181 ]]
+function t:CreateIterator()
 	local var7 = 0
 	local keysCount = #self.keys
 	
-	return function() --[[ line: 186 ]]
+	return function()
 		-- upvalues: var7 (write), keysCount (ref), self (ref)
 		var7 += 1
 		
@@ -82,10 +82,10 @@ function t:CreateIterator() --[[ line: 181 ]]
 	end
 end
 
-function t:CreateReverseIterator() --[[ line: 206 ]]
+function t:CreateReverseIterator()
 	local var10 = #self.keys + 1
 	
-	return function() --[[ line: 210 ]]
+	return function()
 		-- upvalues: var10 (write), self (ref)
 		var10 -= 1
 		
@@ -98,7 +98,7 @@ function t:CreateReverseIterator() --[[ line: 206 ]]
 	end
 end
 
-function t:Map(p4) --[[ line: 233 ]]
+function t:Map(p4)
 	-- upvalues: t (ref)
 	local var12 = t.new(self.getId, self.sortPredicate)
 	
@@ -110,7 +110,7 @@ function t:Map(p4) --[[ line: 233 ]]
 	return var12
 end
 
-function t:Merge(...) --[[ line: 260 ]]
+function t:Merge(...)
 	local var13 = nil
 	
 	for i = 1, select("#", ...) do
@@ -134,7 +134,7 @@ function t:Merge(...) --[[ line: 260 ]]
 	return self
 end
 
-function t:_Copy() --[[ line: 289 ]]
+function t:_Copy()
 	-- upvalues: t (ref)
 	local var15 = t.new(self.getId, self.sortPredicate)
 	
@@ -147,7 +147,7 @@ function t:_Copy() --[[ line: 289 ]]
 	return var15
 end
 
-function t:_InsertInPlaceUnsorted(...) --[[ line: 309 ]]
+function t:_InsertInPlaceUnsorted(...)
 	for i = 1, select("#", ...) do
 		local var16 = select(i, ...)
 		local id = self.getId(var16)
@@ -159,14 +159,14 @@ function t:_InsertInPlaceUnsorted(...) --[[ line: 309 ]]
 	end
 end
 
-function t:_Sort() --[[ line: 328 ]]
-	table.sort(self.keys, function(p5, p6) --[[ line: 329 ]]
+function t:_Sort()
+	table.sort(self.keys, function(p5, p6)
 		-- upvalues: self (ref)
 		return self.sortPredicate(self.values[p5], self.values[p6])
 	end)
 end
 
-function t:_InsertInPlace(...) --[[ line: 342 ]]
+function t:_InsertInPlace(...)
 	self:_InsertInPlaceUnsorted(...)
 	self:_Sort()
 end

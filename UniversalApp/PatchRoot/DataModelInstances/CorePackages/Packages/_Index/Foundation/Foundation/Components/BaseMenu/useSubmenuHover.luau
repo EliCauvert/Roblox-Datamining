@@ -3,7 +3,7 @@ local reactModule = require(foundation.Parent.React)
 local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-local function _(p0, p1) --[[ line: 36 | named "truncatePath" ]]
+local function _(p0, p1)
 	local t = {}
 	
 	for i = 1, p1 do
@@ -14,7 +14,7 @@ local function _(p0, p1) --[[ line: 36 | named "truncatePath" ]]
 	return t
 end
 
-local _ = function(p2, p3, p4) --[[ line: 46 | named "buildPath" ]]
+local _ = function(p2, p3, p4)
 	local t = {}
 	
 	for i = 1, p3 - 1 do
@@ -27,7 +27,7 @@ local _ = function(p2, p3, p4) --[[ line: 46 | named "buildPath" ]]
 	return t
 end
 
-return function() --[[ line: 52 | named "useSubmenuHover" ]]
+return function()
 	-- upvalues: useTokensModule (ref), reactModule (ref)
 	local var5 = useTokensModule()
 	local time100 = var5.Time.Time_100
@@ -37,7 +37,7 @@ return function() --[[ line: 52 | named "useSubmenuHover" ]]
 	local var9 = reactModule.useRef(nil)
 	local var10 = reactModule.useRef(nil)
 	var8.current = var6
-	local var11 = reactModule.useCallback(function() --[[ line: 64 ]]
+	local var11 = reactModule.useCallback(function()
 		-- upvalues: var9 (ref), var10 (ref)
 		if var9.current then
 			task.cancel(var9.current)
@@ -48,13 +48,13 @@ return function() --[[ line: 52 | named "useSubmenuHover" ]]
 			var10.current = nil
 		end
 	end, {})
-	local var12 = reactModule.useCallback(function(p5, p6, p7) --[[ line: 75 ]]
+	local var12 = reactModule.useCallback(function(p5, p6, p7)
 		-- upvalues: var11 (ref), var8 (ref), var7 (ref), var9 (ref), time100 (ref)
 		var11()
 		
 		if var8.current[p5] == p6 then return end
 		if p7 then
-			var7(function(p8) --[[ line: 83 ]]
+			var7(function(p8)
 				-- upvalues: p5 (ref), p6 (ref)
 				local t = {}
 				
@@ -70,9 +70,9 @@ return function() --[[ line: 52 | named "useSubmenuHover" ]]
 			
 			return
 		end
-		var9.current = task.delay(time100, function() --[[ line: 89 ]]
+		var9.current = task.delay(time100, function()
 			-- upvalues: var7 (copy), p5 (ref), p6 (ref), var9 (copy)
-			var7(function(p9) --[[ line: 90 ]]
+			var7(function(p9)
 				-- upvalues: p5 (copy), p6 (copy)
 				local t = {}
 				
@@ -88,16 +88,16 @@ return function() --[[ line: 52 | named "useSubmenuHover" ]]
 			var9.current = nil
 		end)
 	end, { var11, time100 })
-	local var13 = reactModule.useCallback(function(p10) --[[ line: 97 ]]
+	local var13 = reactModule.useCallback(function(p10)
 		-- upvalues: var11 (ref), var8 (ref), var10 (ref), time300 (ref), var7 (ref)
 		var11()
 		
 		if #var8.current < p10 then
 			return
 		end
-		var10.current = task.delay(time300, function() --[[ line: 104 ]]
+		var10.current = task.delay(time300, function()
 			-- upvalues: var7 (copy), p10 (ref), var10 (copy)
-			var7(function(p11) --[[ line: 105 ]]
+			var7(function(p11)
 				-- upvalues: p10 (copy)
 				if #p11 < p10 then
 					return p11
@@ -114,14 +114,14 @@ return function() --[[ line: 52 | named "useSubmenuHover" ]]
 			var10.current = nil
 		end)
 	end, { var11, time300 })
-	local var14 = reactModule.useCallback(function() --[[ line: 117 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), var7 (ref)
 		var11()
 		var7({})
 	end, { var11 })
-	reactModule.useEffect(function() --[[ line: 123 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var10 (ref)
-		return function() --[[ line: 124 ]]
+		return function()
 			-- upvalues: var9 (copy), var10 (copy)
 			if var9.current then
 				task.cancel(var9.current)

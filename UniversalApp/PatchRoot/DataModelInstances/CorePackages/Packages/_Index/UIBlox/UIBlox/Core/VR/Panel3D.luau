@@ -28,25 +28,25 @@ local t = {
 	parent = workspace
 }
 
-return function(p0) --[[ line: 43 | named "Panel3D" ]]
+return function(p0)
 	-- upvalues: object (ref), t (ref), reactModule (ref), usePanel3DRenderStepModule (ref), constantsModule (ref), roactModule (ref), var5 (ref)
 	local var7 = object.assign({}, t, p0)
 	local partRef = var7.partRef or reactModule.useRef(nil)
 	local var9 = reactModule.useRef(nil)
 	local var10 = reactModule.useRef(nil)
 	usePanel3DRenderStepModule(var7, partRef)
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), constantsModule (copy), var9 (ref)
 		if var7.anchoring ~= constantsModule.AnchoringTypes.PanelManaged then
-			return function() --[[ line: 53 ]] end
+			return function() end
 		elseif var7.connectPanelManagerFunction == nil then
-			return function() --[[ line: 57 ]] end
+			return function() end
 		elseif var9 == nil or not var7.connectPanelManagerFunction then
-			return function() --[[ line: 68 ]] end
+			return function() end
 		end
 		var7.connectPanelManagerFunction(var9)
 		
-		return function() --[[ line: 63 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			var7.connectPanelManagerFunction(nil)
 		end

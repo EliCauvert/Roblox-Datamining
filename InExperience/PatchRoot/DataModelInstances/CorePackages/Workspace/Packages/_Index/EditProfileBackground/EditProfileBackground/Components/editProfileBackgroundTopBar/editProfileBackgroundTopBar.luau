@@ -7,7 +7,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useLastInputMode = require(parent.FocusNavigationUtils).useLastInputMode
 local view = foundationModule.View
 
-return function(value) --[[ line: 22 | named "EditProfileBackgroundTopBar" ]]
+return function(value)
 	-- upvalues: useLastInputMode (ref), useLocalization (ref), makeBackButton (ref), reactModule (ref), view (ref), headerBar (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-1200",

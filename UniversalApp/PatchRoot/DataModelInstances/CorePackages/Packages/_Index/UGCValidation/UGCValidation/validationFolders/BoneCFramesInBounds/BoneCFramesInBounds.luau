@@ -20,7 +20,7 @@ local t = {
 local UGCValidationBoneCFrameBoundsMultiplierHundredths = game:DefineFastInt("UGCValidationBoneCFrameBoundsMultiplierHundredths", 110)
 local var8 = game:DefineFastInt("UGCValidationMinimumJointDistanceHundredths", 5) / 100
 
-function t.run(p0, p1) --[[ line: 22 ]]
+function t.run(p0, p1)
 	-- upvalues: UGCValidationBoneCFrameBoundsMultiplierHundredths (ref), getAllInstancesIsAModule (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), cFrameUtilsModule (ref), var8 (ref)
 	local var9 = UGCValidationBoneCFrameBoundsMultiplierHundredths / 100
 	

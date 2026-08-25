@@ -10,9 +10,9 @@ local thunkModule = require(purchasePrompt.Thunk)
 local promptStateModule = require(purchasePrompt.Enums.PromptState)
 local list = { analyticsModule, networkModule, externalSettingsModule }
 
-return function() --[[ line: 21 | named "handleNativePurchaseFailureOrCancel" ]]
+return function()
 	-- upvalues: thunkModule (ref), list (ref), promptStateModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), sendCounterModule (ref), counterModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, _) --[[ line: 22 ]]
+	return thunkModule.new(script.Name, list, function(p0, _)
 		-- upvalues: promptStateModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), sendCounterModule (copy), counterModule (copy)
 		if p0:getState().promptState == promptStateModule.BlackbirdUpsellInProgress then
 			return

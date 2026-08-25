@@ -4,7 +4,7 @@ local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local _ = require(parent.util.Types)
 
 return {
-	getData = function(p0, p1) --[[ line: 9 ]]
+	getData = function(p0, p1)
 		-- upvalues: validationEnumsModule (ref), parseContentIdsModule (ref)
 		if p1.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
 			return {}
@@ -27,7 +27,7 @@ return {
 						if var5 then
 							t[var4] = var5
 						else
-							local ok, status = pcall(function() --[[ line: 48 ]]
+							local ok, status = pcall(function()
 								-- upvalues: HSRAssetId (ref)
 								return game:GetObjectsAllOrNone(HSRAssetId)
 							end)

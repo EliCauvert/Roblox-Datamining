@@ -24,19 +24,19 @@ if not var7 then
 		t[v] = statsButtonModule.new(v)
 	end
 end
-function ShowMasterFrame() --[[ line: 48 ]]
+function ShowMasterFrame()
 	-- upvalues: performanceStats (write), coreGuiService (ref)
 	performanceStats.Visible = true
 	performanceStats.Parent = coreGuiService.RobloxGui
 end
 
-function HideMasterFrame() --[[ line: 53 ]]
+function HideMasterFrame()
 	-- upvalues: performanceStats (write)
 	performanceStats.Visible = false
 	performanceStats.Parent = nil
 end
 
-function ConfigureMasterFrame() --[[ line: 59 ]]
+function ConfigureMasterFrame()
 	-- upvalues: performanceStats (write)
 	performanceStats.Position = UDim2.new(0, 0, 0, 0)
 	performanceStats.Size = UDim2.new(1, 0, 1, 0)
@@ -47,28 +47,28 @@ function ConfigureMasterFrame() --[[ line: 59 ]]
 	HideMasterFrame()
 end
 
-function ConfigureStatButtonsInMasterFrame() --[[ line: 77 ]]
+function ConfigureStatButtonsInMasterFrame()
 	-- upvalues: statsUtilsModule (ref)
 	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
 		AddButton(v, i)
 	end
 end
 
-function OnButtonToggled(p0) --[[ line: 84 ]]
+function OnButtonToggled(p0)
 	-- upvalues: t (write), var12 (write)
 	var12 = if t[p0]._isSelected then p0 else nil
 	UpdateButtonSelectedStates()
 	UpdateViewerVisibility()
 end
 
-function UpdateButtonSelectedStates() --[[ line: 99 ]]
+function UpdateButtonSelectedStates()
 	-- upvalues: statsUtilsModule (ref), t (write), var12 (write)
 	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
 		t[v]:SetIsSelected(v == var12)
 	end
 end
 
-function UpdateViewerVisibility() --[[ line: 106 ]]
+function UpdateViewerVisibility()
 	-- upvalues: var12 (write), var10 (write), singleton (write), rbxAnalyticsService (ref)
 	if var12 == nil then
 		if var10:GetIsVisible() then
@@ -95,7 +95,7 @@ function UpdateViewerVisibility() --[[ line: 106 ]]
 	end
 end
 
-function AddButton(p1, p2) --[[ line: 135 ]]
+function AddButton(p1, p2)
 	-- upvalues: t (write), performanceStats (write), singleton (write), statsUtilsModule (ref)
 	local var15 = t[p1]
 	var15:SetParent(performanceStats)
@@ -105,14 +105,14 @@ function AddButton(p1, p2) --[[ line: 135 ]]
 	var15:SetToggleCallbackFunction(OnButtonToggled)
 end
 
-function ConfigureStatViewerInMasterFrame() --[[ line: 154 ]]
+function ConfigureStatViewerInMasterFrame()
 	-- upvalues: var10 (write), performanceStats (write), statsUtilsModule (ref)
 	var10:SetParent(performanceStats)
 	var10:SetSizeAndPosition(UDim2.new(0, statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ViewerHeight), UDim2.new(1, -statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ButtonHeight + statsUtilsModule.ViewerTopMargin))
 end
 
 if var7 then
-	function CreatePerformanceStatsUI() --[[ line: 166 ]]
+	function CreatePerformanceStatsUI()
 		-- upvalues: singleton (write), statsAggregatorManagerModule (ref), performanceStats (write), t (write), statsUtilsModule (ref), statsButtonModule (ref), var10 (write), statsViewerModule (ref), var12 (write)
 		singleton = statsAggregatorManagerModule.getSingleton()
 		singleton:StartListening()
@@ -133,7 +133,7 @@ if var7 then
 		ShowMasterFrame()
 	end
 	
-	function DestroyPerformanceStatsUI() --[[ line: 192 ]]
+	function DestroyPerformanceStatsUI()
 		-- upvalues: var10 (write), statsUtilsModule (ref), t (write), performanceStats (write), var12 (write), singleton (write)
 		if var10 then
 			var10:OnPerformanceStatsShouldBeVisibleChanged()
@@ -158,7 +158,7 @@ if var7 then
 		end
 	end
 	
-	function UpdatePerformanceStatsVisibility() --[[ line: 218 ]]
+	function UpdatePerformanceStatsVisibility()
 		-- upvalues: statsUtilsModule (ref), performanceStats (write), rbxAnalyticsService (ref), var13 (write)
 		local var18 = statsUtilsModule.PerformanceStatsShouldBeVisible()
 		
@@ -180,7 +180,7 @@ if var7 then
 		end
 	end
 else
-	function UpdatePerformanceStatsVisibility() --[[ line: 251 ]]
+	function UpdatePerformanceStatsVisibility()
 		-- upvalues: statsUtilsModule (ref), performanceStats (write), var10 (write), t (write), rbxAnalyticsService (ref), var13 (write)
 		local var19 = statsUtilsModule.PerformanceStatsShouldBeVisible()
 		
@@ -217,7 +217,7 @@ if not var7 then
 	UpdateViewerVisibility()
 	UpdatePerformanceStatsVisibility()
 end
-spawn(function() --[[ line: 305 ]]
+spawn(function()
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	while not localPlayer do

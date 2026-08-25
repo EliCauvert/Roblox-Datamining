@@ -26,7 +26,7 @@ chatBubble.validateProps = tModule.strictInterface({
 })
 chatBubble.defaultProps = { theme = "Light", isMostRecent = true }
 
-local function _() --[[ line: 41 | named "initMockSizingLabel" ]]
+local function _()
 	-- upvalues: coreGuiService (ref)
 	local richTextSizingLabel = Instance.new("ScreenGui")
 	richTextSizingLabel.Enabled = false
@@ -40,13 +40,13 @@ local function _() --[[ line: 41 | named "initMockSizingLabel" ]]
 	return textLabel
 end
 
-function chatBubble.init(p0) --[[ line: 53 ]]
+function chatBubble.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), textChatService (ref)
 	local var15, var16 = roactModule.createBinding(0)
 	p0.width = var15
 	p0.updateWidth = var16
 	p0.widthMotor = otterModule.createSingleMotor(0)
-	p0.widthMotor:onStep(function(p1) --[[ line: 56 ]]
+	p0.widthMotor:onStep(function(p1)
 		-- upvalues: p0 (ref)
 		p0.updateWidth(math.round(p1))
 	end)
@@ -54,7 +54,7 @@ function chatBubble.init(p0) --[[ line: 53 ]]
 	p0.height = var17
 	p0.updateHeight = var18
 	p0.heightMotor = otterModule.createSingleMotor(0)
-	p0.heightMotor:onStep(function(p2) --[[ line: 62 ]]
+	p0.heightMotor:onStep(function(p2)
 		-- upvalues: p0 (ref)
 		p0.updateHeight(math.round(p2))
 	end)
@@ -63,14 +63,14 @@ function chatBubble.init(p0) --[[ line: 53 ]]
 	p0.updateTransparency = var20
 	p0.transparencyMotor = otterModule.createSingleMotor(1)
 	p0.transparencyMotor:onStep(p0.updateTransparency)
-	p0.size = roactModule.joinBindings({ p0.width, p0.height }):map(function(p3) --[[ line: 70 ]]
+	p0.size = roactModule.joinBindings({ p0.width, p0.height }):map(function(p3)
 		return UDim2.fromOffset(p3[1], p3[2])
 	end)
 	p0.mockSizingLabel = nil
 	p0.isRichTextEnabled = textChatService.ChatVersion == Enum.ChatVersion.TextChatService
 end
 
-function chatBubble.getBoundsFromSizingLabel(_, p4, p5, p6, p7) --[[ line: 79 ]]
+function chatBubble.getBoundsFromSizingLabel(_, p4, p5, p6, p7)
 	-- upvalues: coreGuiService (ref)
 	local richTextSizingLabel = Instance.new("ScreenGui")
 	richTextSizingLabel.Enabled = false
@@ -90,14 +90,14 @@ function chatBubble.getBoundsFromSizingLabel(_, p4, p5, p6, p7) --[[ line: 79 ]]
 	return textBounds
 end
 
-function chatBubble.getTextBounds(p8) --[[ line: 92 ]]
+function chatBubble.getTextBounds(p8)
 	-- upvalues: textService (ref)
 	local chatSettings = p8.props.chatSettings
 	
 	return (if p8.isRichTextEnabled then p8:getBoundsFromSizingLabel(p8.props.text, chatSettings.TextSize, chatSettings.Font, Vector2.new(chatSettings.MaxWidth, 10000)) else textService:GetTextSize(p8.props.text, chatSettings.TextSize, chatSettings.Font, Vector2.new(chatSettings.MaxWidth, 10000))) + Vector2.new(chatSettings.Padding * 4, chatSettings.Padding * 2)
 end
 
-function chatBubble.render(p9) --[[ line: 116 ]]
+function chatBubble.render(p9)
 	-- upvalues: roactModule (ref), cryoModule (ref)
 	local chatSettings = p9.props.chatSettings
 	local backgroundImage = chatSettings.BackgroundImage
@@ -168,11 +168,11 @@ function chatBubble.render(p9) --[[ line: 116 ]]
 	})
 end
 
-function chatBubble.fadeOut(p10) --[[ line: 205 ]]
+function chatBubble.fadeOut(p10)
 	-- upvalues: getTransparencySpringFromSettingsModule (ref)
 	if not p10.isFadingOut then
 		p10.isFadingOut = true
-		p10.transparencyMotor:onComplete(function() --[[ line: 209 ]]
+		p10.transparencyMotor:onComplete(function()
 			-- upvalues: p10 (ref)
 			if p10.props.onFadeOut then
 				p10.props.onFadeOut(p10.props.messageId)
@@ -182,7 +182,7 @@ function chatBubble.fadeOut(p10) --[[ line: 205 ]]
 	end
 end
 
-function chatBubble.didUpdate(p11, p12) --[[ line: 220 ]]
+function chatBubble.didUpdate(p11, p12)
 	-- upvalues: getSizeSpringFromSettingsModule (ref)
 	if p11.props.fadingOut then
 		p11:fadeOut()
@@ -203,7 +203,7 @@ function chatBubble.didUpdate(p11, p12) --[[ line: 220 ]]
 	end
 end
 
-function chatBubble.didMount(p13) --[[ line: 247 ]]
+function chatBubble.didMount(p13)
 	-- upvalues: getSizeSpringFromSettingsModule (ref), getTransparencySpringFromSettingsModule (ref), otterModule (ref)
 	p13.isMounted = true
 	local textBounds = p13:getTextBounds()
@@ -227,14 +227,14 @@ function chatBubble.didMount(p13) --[[ line: 247 ]]
 	p13.transparencyMotor:setGoal(var27(chatSettings.Transparency))
 end
 
-function chatBubble.willUnmount(p14) --[[ line: 275 ]]
+function chatBubble.willUnmount(p14)
 	p14.isMounted = false
 	p14.transparencyMotor:destroy()
 	p14.heightMotor:destroy()
 	p14.widthMotor:destroy()
 end
 
-return roactRoduxModule.connect(function(p15, p16) --[[ line: 282 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p15, p16)
 	local messageId = p15.messages[p16.messageId]
 	
 	return {

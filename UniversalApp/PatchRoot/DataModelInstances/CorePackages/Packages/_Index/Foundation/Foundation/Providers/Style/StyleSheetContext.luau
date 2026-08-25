@@ -5,7 +5,7 @@ local var1 = reactModule.createContext(none)
 
 return {
 	Provider = var1.Provider,
-	useStyleSheet = function() --[[ line: 11 ]]
+	useStyleSheet = function()
 		-- upvalues: reactModule (ref), var1 (ref), none (ref)
 		local var2 = reactModule.useContext(var1)
 		

@@ -1,6 +1,6 @@
 ﻿local tModule = require(script.Parent.Parent.Parent.Parent.t)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: tModule (ref)
 	assert(tModule.number(p0))
 	

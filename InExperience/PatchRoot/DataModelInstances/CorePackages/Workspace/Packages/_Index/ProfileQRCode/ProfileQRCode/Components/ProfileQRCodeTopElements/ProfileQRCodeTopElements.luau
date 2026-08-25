@@ -27,12 +27,12 @@ local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFrie
 local fFlagQRCodeFriendRequestNotificationV2Module = require(profileQRCode.Flags.FFlagQRCodeFriendRequestNotificationV2)
 local friendAdd = images["icons/actions/friends/friendAdd"]
 
-return roactAppExperimentModule.connectUserLayer({ getFStringProfileQRCodeFriendRequestAlertsLayerModule() }, function(p7, _) --[[ line: 248 ]]
+return roactAppExperimentModule.connectUserLayer({ getFStringProfileQRCodeFriendRequestAlertsLayerModule() }, function(p7, _)
 	-- upvalues: getFStringProfileQRCodeFriendRequestAlertsLayerModule (ref), getFStringProfileQRCodeFriendRequestAlertsExperimentKeyModule (ref)
 	return {
 		profileQRCodeFriendRequestAlertsEnabled = (p7[getFStringProfileQRCodeFriendRequestAlertsLayerModule()] or {})[getFStringProfileQRCodeFriendRequestAlertsExperimentKeyModule()]
 	}
-end, false)(function(p0) --[[ line: 53 ]]
+end, false)(function(p0)
 	-- upvalues: useLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), useAnalyticsModule (ref), reactModule (ref), fFlagQRCodeFriendRequestNotificationV2Module (ref), IXPService (ref), getFStringProfileQRCodeFriendRequestAlertsLayerModule (ref), cryoModule (ref), useLocalUserId (ref), useGetUsersInfoUrlModule (ref), useAcceptFriendUrlModule (ref), signalREventsModule (ref), friendsNetworkingModule (ref), profileQRCodeTopBarModule (ref), toast (ref), friendAdd (ref), QRCodeFriendRequestNotificationModule (ref), eventNamesModule (ref), friendAcceptedSnackbarModule (ref)
 	local var21 = useLocalization({
 		friendAdded = if fFlagConnectionsToFriendsRename then textKeysModule.FriendAdded else textKeysModule.ConnectionAdded
@@ -59,13 +59,13 @@ end, false)(function(p0) --[[ line: 53 ]]
 		local var36, var37 = reactModule.useState(false)
 		var29 = var36
 		var30 = var37
-		var31 = reactModule.useCallback(function() --[[ line: 72 ]]
+		var31 = reactModule.useCallback(function()
 			-- upvalues: var30 (write), var28 (write)
 			var30(false)
 			var28(false)
 		end, {})
 	end
-	local var38, var39 = reactModule.useReducer(function(p1, p2) --[[ line: 78 ]]
+	local var38, var39 = reactModule.useReducer(function(p1, p2)
 		-- upvalues: IXPService (copy), getFStringProfileQRCodeFriendRequestAlertsLayerModule (copy), cryoModule (copy)
 		if p2.type == "addItemToQueue" then
 			IXPService:LogUserLayerExposure(getFStringProfileQRCodeFriendRequestAlertsLayerModule())
@@ -77,7 +77,7 @@ end, false)(function(p0) --[[ line: 53 ]]
 	local var40 = useLocalUserId()
 	local var41 = useGetUsersInfoUrlModule()
 	local var42 = useAcceptFriendUrlModule()
-	local var43 = if fFlagQRCodeFriendRequestNotificationV2Module then function(p3) --[[ line: 97 ]]
+	local var43 = if fFlagQRCodeFriendRequestNotificationV2Module then function(p3)
 		-- upvalues: var40 (ref)
 		local var45 = tostring(p3.UserId1)
 		
@@ -87,7 +87,7 @@ end, false)(function(p0) --[[ line: 53 ]]
 		return var45
 	end else nil
 	
-	local function friendshipNotificationReceived(p4) --[[ line: 106 ]]
+	local function friendshipNotificationReceived(p4)
 		-- upvalues: signalREventsModule (copy), friendsNetworkingModule (copy), var40 (ref), var41 (ref), var39 (ref), fFlagQRCodeFriendRequestNotificationV2Module (copy), var43 (write), var26 (write), var30 (write), var28 (write)
 		local var46
 		if p4.Type == signalREventsModule.FriendshipRequested and p4.EventArgs.SourceType == friendsNetworkingModule.Enums.FriendshipOriginSourceType.QrCode.rawValue() then
@@ -96,7 +96,7 @@ end, false)(function(p0) --[[ line: 53 ]]
 			if var46 == var40 then
 				var46 = tostring(p4.EventArgs.UserId2)
 			end
-			var41(var46):andThen(function() --[[ line: 120 ]]
+			var41(var46):andThen(function()
 				-- upvalues: var39 (copy), var46 (write)
 				var39({ type = "addItemToQueue", newUserId = var46 })
 			end)
@@ -104,7 +104,7 @@ end, false)(function(p0) --[[ line: 53 ]]
 			return
 		elseif p4.Type == signalREventsModule.FriendshipCreated and fFlagQRCodeFriendRequestNotificationV2Module then
 			var46 = var43(p4.EventArgs)
-			var41(var46):andThen(function() --[[ line: 126 ]]
+			var41(var46):andThen(function()
 				-- upvalues: var26 (copy), var46 (ref), var30 (copy), var28 (copy), p4 (ref)
 				var26(var46)
 				var30(true)
@@ -113,9 +113,9 @@ end, false)(function(p0) --[[ line: 53 ]]
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function()
 		-- upvalues: robloxEventReceiver (ref), signalREventsModule (copy), friendshipNotificationReceived (ref)
-		robloxEventReceiver:observeEvent(signalREventsModule.FriendshipNotifications, function(p5) --[[ line: 135 ]]
+		robloxEventReceiver:observeEvent(signalREventsModule.FriendshipNotifications, function(p5)
 			-- upvalues: friendshipNotificationReceived (copy)
 			friendshipNotificationReceived(p5)
 		end)
@@ -156,7 +156,7 @@ end, false)(function(p0) --[[ line: 53 ]]
 				toastContent = {
 					toastTitle = var21.friendAdded,
 					iconImage = friendAdd,
-					onDismissed = function() --[[ line: 181 ]]
+					onDismissed = function()
 						-- upvalues: var24 (ref)
 						var24(false)
 					end
@@ -181,19 +181,19 @@ end, false)(function(p0) --[[ line: 53 ]]
 			}),
 			FriendsInvite = reactModule.createElement(QRCodeFriendRequestNotificationModule, {
 				notificationQueueSize = #var38,
-				onAccept = function(p6) --[[ line: 212 ]]
+				onAccept = function(p6)
 					-- upvalues: var42 (ref), var40 (ref), var39 (ref), fFlagQRCodeFriendRequestNotificationV2Module (copy), var24 (ref), var22 (ref), eventNamesModule (copy), var38 (ref)
-					var42(var40, p6):andThen(function() --[[ line: 214 ]]
+					var42(var40, p6):andThen(function()
 						-- upvalues: var39 (copy), fFlagQRCodeFriendRequestNotificationV2Module (copy), var24 (copy)
 						var39({ type = "removeItemFromQueue", newUserId = "0" })
 						
 						if not fFlagQRCodeFriendRequestNotificationV2Module then
 							var24(true)
 						end
-					end):catch(function() --[[ line: 220 ]] end)
+					end):catch(function() end)
 					var22.fireEvent(eventNamesModule.QRPageFriendRequestBannerAccepted, { qrCodeBannerQueueSize = #var38 })
 				end,
-				onClose = function() --[[ line: 225 ]]
+				onClose = function()
 					-- upvalues: var39 (ref), var22 (ref), eventNamesModule (copy), var38 (ref)
 					var39({ type = "removeItemFromQueue", newUserId = "0" })
 					var22.fireEvent(eventNamesModule.QRPageFriendRequestBannerDismissed, { qrCodeBannerQueueSize = #var38 })

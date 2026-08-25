@@ -9,7 +9,7 @@ local getNodeTypeModule = require(script.Parent.Parent.getNodeType)
 local isNodeBlockModule = require(script.Parent.Parent.isNodeBlock)
 local t = {}
 
-function t.postProcessTree(p0, p1) --[[ line: 23 ]]
+function t.postProcessTree(p0, p1)
 	-- upvalues: CONTAINERS (ref), INLINE_TEXT (ref), t (ref), insert (ref), PLAIN_TEXT (ref), isNodeBlockModule (ref)
 	local var7
 	local t_1 = {}
@@ -69,7 +69,7 @@ function t.postProcessTree(p0, p1) --[[ line: 23 ]]
 	return t_1
 end
 
-function t.buildParagraph(p2, p3, p4, p5) --[[ line: 88 ]]
+function t.buildParagraph(p2, p3, p4, p5)
 	-- upvalues: INLINE_TEXT (ref), PLAIN_TEXT (ref), t (ref), insert (ref), getNodeTypeModule (ref)
 	local var20, name
 	local t_1 = {}
@@ -114,7 +114,7 @@ function t.buildParagraph(p2, p3, p4, p5) --[[ line: 88 ]]
 	}
 end
 
-function t.outputRichText(p6, p7) --[[ line: 141 ]]
+function t.outputRichText(p6, p7)
 	-- upvalues: STYLED_TEXT (ref), t (ref)
 	local var25 = if p6.attributes then STYLED_TEXT[p6.attributes.style] else nil
 	
@@ -129,7 +129,7 @@ function t.outputRichText(p6, p7) --[[ line: 141 ]]
 	assert(false, `No text for node at {p6.offset}`)
 end
 
-function t.buildList(p8, p9, p10) --[[ line: 155 ]]
+function t.buildList(p8, p9, p10)
 	-- upvalues: t (ref), insert (ref), getNodeTypeModule (ref)
 	local var28 = 0
 	local depth = p8[p9].attributes.depth
@@ -163,7 +163,7 @@ function t.buildList(p8, p9, p10) --[[ line: 155 ]]
 	}
 end
 
-function t.buildTable(p11, p12, p13) --[[ line: 195 ]]
+function t.buildTable(p11, p12, p13)
 	-- upvalues: t (ref), insert (ref), getNodeTypeModule (ref)
 	local var34 = 0
 	local TABLE_HEADER = {}
@@ -190,7 +190,7 @@ function t.buildTable(p11, p12, p13) --[[ line: 195 ]]
 	}
 end
 
-function t.buildTableCells(p14, p15) --[[ line: 225 ]]
+function t.buildTableCells(p14, p15)
 	-- upvalues: getNodeTypeModule (ref), t (ref), insert (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -218,7 +218,7 @@ function t.buildTableCells(p14, p15) --[[ line: 225 ]]
 	return if var40 then nil else t_1
 end
 
-function t.mergeTextNodes(p16, p17, p18, p19) --[[ line: 258 ]]
+function t.mergeTextNodes(p16, p17, p18, p19)
 	-- upvalues: PLAIN_TEXT (ref), getNodeTypeModule (ref)
 	local var44 = ""
 	local var45 = 0
@@ -242,7 +242,7 @@ function t.mergeTextNodes(p16, p17, p18, p19) --[[ line: 258 ]]
 	}
 end
 
-function t.applyCodeSpanRules(p20) --[[ line: 289 ]]
+function t.applyCodeSpanRules(p20)
 	local var47 = nil
 	local var48 = nil
 	local var49 = false

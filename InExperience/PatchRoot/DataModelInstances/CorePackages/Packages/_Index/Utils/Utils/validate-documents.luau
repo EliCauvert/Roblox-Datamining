@@ -15,11 +15,11 @@ local _ = require(script.Parent.loaders)
 local aggregateError = require(script.Parent.AggregateError).AggregateError
 local var4 = nil
 
-function t.validateGraphQlDocuments(p0, p1, p2) --[[ line: 66 ]]
+function t.validateGraphQlDocuments(p0, p1, p2)
 	-- upvalues: var4 (write), promiseModule (ref), map (ref), kind (ref), array (ref), concatAST (ref), validate (ref)
 	local var5 = if p2 ~= nil then var4() else p2
 	
-	return promiseModule.resolve():andThen(function() --[[ line: 74 ]]
+	return promiseModule.resolve():andThen(function()
 		-- upvalues: map (copy), p1 (ref), kind (copy), array (copy), promiseModule (copy), concatAST (copy), validate (copy), p0 (ref), var5 (ref)
 		local var6 = map.new()
 		local t = {}
@@ -46,9 +46,9 @@ function t.validateGraphQlDocuments(p0, p1, p2) --[[ line: 66 ]]
 			kind = kind.DOCUMENT,
 			definitions = array.concat({}, var6:values())
 		}
-		promiseModule.all(array.map(t, function(p3) --[[ line: 104 ]]
+		promiseModule.all(array.map(t, function(p3)
 			-- upvalues: promiseModule (copy), concatAST (copy), t_2 (ref), validate (copy), p0 (copy), var5 (copy), t_1 (ref)
-			return promiseModule.resolve():andThen(function() --[[ line: 105 ]]
+			return promiseModule.resolve():andThen(function()
 				-- upvalues: concatAST (copy), t_2 (copy), p3 (ref), validate (copy), p0 (copy), var5 (copy), t_1 (copy)
 				local var11 = validate(p0, concatAST({ t_2, p3.document }), var5)
 				
@@ -62,7 +62,7 @@ function t.validateGraphQlDocuments(p0, p1, p2) --[[ line: 66 ]]
 	end)
 end
 
-function t.checkValidationErrors(p4) --[[ line: 123 ]]
+function t.checkValidationErrors(p4)
 	-- upvalues: error (ref), aggregateError (ref), array (ref)
 	if #p4 > 0 then
 		local t = {}
@@ -82,13 +82,13 @@ function t.checkValidationErrors(p4) --[[ line: 123 ]]
 				table.insert(t, graphQLDocumentError)
 			end
 		end
-		error(aggregateError.new(t, ("GraphQL Document Validation failed with %s errors;\n  %s"):format(tostring(#t), tostring(array.join(array.map(t, function(p5, p6) --[[ line: 170 ]]
+		error(aggregateError.new(t, ("GraphQL Document Validation failed with %s errors;\n  %s"):format(tostring(#t), tostring(array.join(array.map(t, function(p5, p6)
 			return ("Error %s: %s"):format(tostring(p6), tostring(p5.stack))
 		end), "\n\n")))))
 	end
 end
 
-function t.createDefaultRules() --[[ line: 185 ]]
+function t.createDefaultRules()
 	-- upvalues: versionInfo (ref), array (ref), specifiedRules (ref)
 	local list = {
 		"NoUnusedFragmentsRule",
@@ -97,11 +97,11 @@ function t.createDefaultRules() --[[ line: 185 ]]
 	}
 	
 	if versionInfo.major < 15 then
-		list = array.map(list, function(p7) --[[ line: 192 ]]
+		list = array.map(list, function(p7)
 			return p7:gsub("Rule$", "", 1)
 		end)
 	end
-	return array.filter(specifiedRules, function(p8) --[[ line: 200 ]]
+	return array.filter(specifiedRules, function(p8)
 		-- upvalues: array (copy), list (write)
 		return not array.includes(list, debug.info(p8, "n"))
 	end)

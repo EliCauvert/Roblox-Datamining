@@ -5,10 +5,10 @@ local valueChangedSignal = settingsServiceModule.ValueChangedSignal
 local settingEnum = settingsServiceModule.SettingEnum
 local LAYOUT_ORDER = require(settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
-local function _() --[[ line: 21 | named "ReducedMotionValue" ]]
+local function _()
 	-- upvalues: gameSettings (ref), valueChangedSignal (ref)
 	local var4 = valueChangedSignal.new(gameSettings.ReducedMotion)
-	var4:connect(function(p0) --[[ line: 25 ]]
+	var4:connect(function(p0)
 		-- upvalues: gameSettings (copy)
 		if gameSettings.ReducedMotion == p0 then
 			return
@@ -27,7 +27,7 @@ local t = {
 	field_type = settingEnum.Toggle
 }
 local var3 = valueChangedSignal.new(gameSettings.ReducedMotion)
-var3:connect(function(p1) --[[ line: 25 ]]
+var3:connect(function(p1)
 	-- upvalues: gameSettings (ref)
 	if gameSettings.ReducedMotion == p1 then
 		return

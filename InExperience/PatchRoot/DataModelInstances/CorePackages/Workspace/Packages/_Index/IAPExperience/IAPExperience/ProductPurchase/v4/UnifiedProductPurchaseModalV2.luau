@@ -29,7 +29,7 @@ local fFlagPurchasePromptFetchCartPricing = require(parent.Parent.SharedFlags).F
 local fFlagPurchasePromptFixOfferMarginUpsell = require(parent.Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 local _ = require(script.Parent.cartPricingResponseLineItem)
 
-local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
+local function UnifiedProductPurchaseModalV2(p0)
 	-- upvalues: useLocalization (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), urlBuilder (ref), unifiedPurchaseModalTypeEnumModule (ref), fFlagPurchasePromptFetchCartPricing (ref), useCartPricingModule (ref), reactModule (ref), useFocusNavigationRefsModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref), checkbox (ref), subtitleComponentMapModule (ref), productDetailsContainerModule (ref), cartPricingProductDetailsModule (ref), buildCartPricingOfferCheckboxesModule (ref), view (ref), buttonVariant (ref), foundationModule (ref), dialog (ref), dialogSize (ref), blackbirdUpsellBanner (ref)
 	local var12 = useLocalization({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
@@ -63,14 +63,14 @@ local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
 	local _ = nil
 	local var18, var19 = useFocusNavigationRefsModule(p0.buttons.cancelActivated, p0.onBuyItemButtonMounted)
 	local var20 = var19
-	local var21 = reactModule.useCallback(function() --[[ line: 162 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref), p0 (ref)
 		if var15 and p0.setPostPurchaseActions then
 			p0.setPostPurchaseActions(var15)
 		end
 		p0.buttons.buyItemActivated()
 	end, { p0.buttons.buyItemActivated, var15 })
-	reactModule.useEffect(function() --[[ line: 170 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), p0 (ref)
 		var16(p0.postPurchaseActions or {})
 	end, { p0.postPurchaseActions })
@@ -89,7 +89,7 @@ local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
 		end
 		var24 = if var14.showCartOfferUi then #var14.cartPricingOffers else 0
 	end
-	local var25 = if not fFlagPurchasePromptFetchCartPricing then reactModule.useMemo(function() --[[ line: 200 ]]
+	local var25 = if not fFlagPurchasePromptFetchCartPricing then reactModule.useMemo(function()
 		-- upvalues: var15 (ref), reactModule (copy), checkbox (copy), p0 (ref), fFlagUnifiedPurchaseAddSkeleton (copy), var16 (ref)
 		local t = {}
 		
@@ -100,9 +100,9 @@ local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
 				label = v.label,
 				isChecked = v.isActionSelected,
 				isDisabled = p0.buttons.isDisabled or (if fFlagUnifiedPurchaseAddSkeleton then p0.isLoading else nil),
-				onActivated = function() --[[ line: 211 ]]
+				onActivated = function()
 					-- upvalues: var16 (copy), i (ref), v (ref)
-					var16(function(p2) --[[ line: 212 ]]
+					var16(function(p2)
 						-- upvalues: i (copy), v (copy)
 						local cloned = table.clone(p2)
 						cloned[i] = {
@@ -120,7 +120,7 @@ local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
 	end, {
 		var15,
 		if fFlagUnifiedPurchaseAddSkeleton then p0.isLoading else nil
-	}) else reactModule.useMemo(function() --[[ line: 228 ]]
+	}) else reactModule.useMemo(function()
 		-- upvalues: var15 (ref), reactModule (copy), checkbox (copy), var24 (write), isDisabled (write), var16 (ref)
 		local t = {}
 		
@@ -131,9 +131,9 @@ local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
 				label = v.label,
 				isChecked = v.isActionSelected,
 				isDisabled = isDisabled,
-				onActivated = function() --[[ line: 237 ]]
+				onActivated = function()
 					-- upvalues: var16 (copy), i (ref), v (ref)
-					var16(function(p1) --[[ line: 238 ]]
+					var16(function(p1)
 						-- upvalues: i (copy), v (copy)
 						local cloned = table.clone(p1)
 						cloned[i] = {
@@ -240,7 +240,7 @@ local function UnifiedProductPurchaseModalV2(p0) --[[ line: 104 ]]
 	})
 end
 
-return function(p3) --[[ line: 394 | named "UnifiedProductPurchaseModalV2Container" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedProductPurchaseModalV2 (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.GetConversationListStore)
 local serializeParticipantIdsForTelemetryModule = require(script.Parent.Parent.App.serializeParticipantIdsForTelemetry)
 
-local function _(p0, p1) --[[ line: 30 | named "indexOfConversation" ]]
+local function _(p0, p1)
 	for i, v in p0 do
 		if v.id == p1 then
 			return i
@@ -10,7 +10,7 @@ local function _(p0, p1) --[[ line: 30 | named "indexOfConversation" ]]
 	return 0
 end
 
-return function(p2, p3, p4) --[[ line: 39 | named "getChatLandingConversationInfo" ]]
+return function(p2, p3, p4)
 	-- upvalues: serializeParticipantIdsForTelemetryModule (ref)
 	local var2
 	local t = {

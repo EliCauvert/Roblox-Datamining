@@ -24,7 +24,7 @@ local t = {
 	shouldShowVerificationText = if fFlagHomePhoneVerificationUpsellNewCopy then false else nil
 }
 
-local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 82 ]]
+local function getButtonStackProps(p0, p1, p2, p3, p4)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
@@ -46,11 +46,11 @@ local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 82 ]]
 	}
 end
 
-return function(p5) --[[ line: 118 | named "AddPhoneView" ]]
+return function(p5)
 	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), getPartialPageModalMiddleContentWidth (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), withStyle (ref), withLocalization (ref), partialPageModal (ref), getButtonStackProps (ref), textBoxStateWrapper (ref), phoneNumberTextBox (ref), text (ref), checkbox (ref), linkButton (ref)
 	local var9 = mergePropsModule(t, p5)
 	
-	local function noOp() --[[ line: 121 ]] end
+	local function noOp() end
 	
 	local var11, var12 = reactModule.useState(false)
 	local var13 = getPartialPageModalMiddleContentWidth(var9.screenSize.X)
@@ -69,9 +69,9 @@ return function(p5) --[[ line: 118 | named "AddPhoneView" ]]
 	if var9.extraButtonKey and var9.extraButtonKey ~= "" then
 		t_1.extraButtonKey = var9.extraButtonKey
 	end
-	return withStyle(function(p6) --[[ line: 145 ]]
+	return withStyle(function(p6)
 		-- upvalues: withLocalization (copy), t_1 (ref), var9 (ref), var11 (ref), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var13 (ref), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (ref), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var12 (ref), linkButton (copy)
-		return withLocalization(t_1)(function(p7) --[[ line: 146 ]]
+		return withLocalization(t_1)(function(p7)
 			-- upvalues: p6 (ref), var9 (copy), var11 (copy), reactModule (copy), partialPageModal (copy), getButtonStackProps (copy), var13 (copy), textBoxStateWrapper (copy), phoneNumberTextBox (copy), noOp (copy), fFlagHomePhoneVerificationUpsellNewCopy (copy), text (copy), checkbox (copy), var12 (copy), linkButton (copy)
 			local baseSize = p6.Font.BaseSize
 			local relativeSize = p6.Font.Body.RelativeSize

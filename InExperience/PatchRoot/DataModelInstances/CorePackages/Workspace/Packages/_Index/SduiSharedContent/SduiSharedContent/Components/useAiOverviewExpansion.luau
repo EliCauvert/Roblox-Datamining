@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
 local t = { dampingRatio = 0.9, frequency = 6 }
 
-return function(p0) --[[ line: 32 | named "useAiOverviewExpansion" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref)
 	local var3 = if p0.hasHeader and p0.hasExpandableBody then p0.sectionGap else 0
 	local var4, var5 = reactModule.useState(false)
@@ -11,11 +11,11 @@ return function(p0) --[[ line: 32 | named "useAiOverviewExpansion" ]]
 	local var8 = reactModule.useRef(false)
 	local var9, var10 = reactModule.useState(nil)
 	local var11, var12 = reactModule.useState(nil)
-	local var13 = reactModule.useCallback(function(p1) --[[ line: 40 ]]
+	local var13 = reactModule.useCallback(function(p1)
 		-- upvalues: var12 (ref)
 		var12(p1.AbsoluteSize.Y)
 	end, {})
-	local var14 = reactModule.useCallback(function(p2) --[[ line: 43 ]]
+	local var14 = reactModule.useCallback(function(p2)
 		-- upvalues: var10 (ref)
 		var10(p2.AbsoluteSize.Y)
 	end, {})
@@ -37,14 +37,14 @@ return function(p0) --[[ line: 32 | named "useAiOverviewExpansion" ]]
 	local var24_2 = var24 or var25
 	local reducedMotion = p0.reducedMotion
 	local var29 = if var4 then var9_1 elseif var24_1 then var22 else 0
-	local var30, var31 = reactOtterModule.useAnimatedBinding(var29, reactModule.useCallback(function() --[[ line: 78 ]]
+	local var30, var31 = reactOtterModule.useAnimatedBinding(var29, reactModule.useCallback(function()
 		-- upvalues: var8 (ref), var7 (ref)
 		if var8.current then
 			var8.current = false
 			var7(true)
 		end
 	end, {}))
-	local var32 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref), var23 (ref), reducedMotion (ref), var8 (ref), var7 (ref), var31 (ref), reactOtterModule (copy), var9_1 (ref), t (copy)
 		var5(true)
 		
@@ -60,7 +60,7 @@ return function(p0) --[[ line: 32 | named "useAiOverviewExpansion" ]]
 		var7(false)
 		var31(reactOtterModule.spring(var9_1, t))
 	end, { var9_1, var23, reducedMotion, var31 })
-	reactModule.useLayoutEffect(function() --[[ line: 110 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var26 (ref), var8 (ref), var31 (ref), reactOtterModule (copy), var29 (ref)
 		if var26 then
 			return

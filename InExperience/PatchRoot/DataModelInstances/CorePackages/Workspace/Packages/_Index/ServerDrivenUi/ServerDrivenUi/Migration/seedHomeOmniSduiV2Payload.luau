@@ -5,7 +5,7 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
 local sduiV2OmniFeedConstantsModule = require(serverDrivenUi.Migration.SduiV2OmniFeedConstants)
 
-return function(p0, p1, p2) --[[ line: 11 | named "seedHomeOmniSduiV2Payload" ]]
+return function(p0, p1, p2)
 	-- upvalues: sduiLoadTimer (ref), parent (ref), getSduiApiStore (ref), sduiV2OmniFeedConstantsModule (ref)
 	local homePageResponse = require(parent.ServiceContractsProto).apppageplatform.home.home_page.HomePageResponse
 	getSduiApiStore().seedFromDecodedResponse({

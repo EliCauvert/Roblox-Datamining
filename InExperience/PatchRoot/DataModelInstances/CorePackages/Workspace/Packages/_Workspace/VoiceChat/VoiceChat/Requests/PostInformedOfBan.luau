@@ -1,7 +1,7 @@
 ﻿local url = require(script:FindFirstAncestor("VoiceChat").Parent.Http).Url
 local httpService = game:GetService("HttpService")
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: url (ref), httpService (ref)
 	assert(type(p1) == "boolean", "PostInformedOfBan request expects informedOfBan to be a boolean")
 	

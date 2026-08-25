@@ -1,4 +1,4 @@
-﻿local function _(p0, p1) --[[ line: 29 | named "imul32" ]]
+﻿local function _(p0, p1)
 	local shifted = bit32.rshift(p0, 16)
 	local bits = bit32.band(p0, 65535)
 	local shifted_1 = bit32.rshift(p1, 16)
@@ -11,7 +11,7 @@
 end
 
 return {
-	textEncode = function(p2) --[[ line: 10 ]]
+	textEncode = function(p2)
 		local t = {}
 		
 		for i = 1, #p2 do
@@ -19,7 +19,7 @@ return {
 		end
 		return t
 	end,
-	hashStringWithFnv1a32 = function(p3) --[[ line: 50 ]]
+	hashStringWithFnv1a32 = function(p3)
 		local t = {}
 		
 		for i = 1, #p3 do

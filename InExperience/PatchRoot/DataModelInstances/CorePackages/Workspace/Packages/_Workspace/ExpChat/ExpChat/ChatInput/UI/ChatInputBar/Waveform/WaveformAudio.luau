@@ -5,15 +5,15 @@ return {
 	BAR_GAP = 2,
 	ITEM_WIDTH = 4,
 	RENDER_INTERVAL = 0.1,
-	amplitudeToDecibels = function(p0) --[[ line: 13 ]]
+	amplitudeToDecibels = function(p0)
 		return if p0 <= 0 then -1e999 else math.log10(p0) * 20
 	end,
-	amplitudeToNormalized = function(p1) --[[ line: 20 ]]
+	amplitudeToNormalized = function(p1)
 		local var1 = if p1 <= 0 then -1e999 else math.log10(p1) * 20
 		
 		return if var1 == -1e999 then 0 else math.clamp((var1 - -60) / 60, 0, 1)
 	end,
-	sampleVolume = function(p2, p3, p4) --[[ line: 33 ]]
+	sampleVolume = function(p2, p3, p4)
 		-- upvalues: random (ref)
 		if not p2 then
 			return random:NextNumber(0, 1)

@@ -16,17 +16,17 @@ local useNavigation = require(parent.Navigation).useNavigation
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local fFlagProfileEnableSocialNetworksUsernames = require(parent.SharedFlags).FFlagProfileEnableSocialNetworksUsernames
 
-return function() --[[ line: 25 | named "EditSocialLinksModalContainer" ]]
+return function()
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), useNavigation (ref), useSelector (ref), getDeepValue (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), socialLinksNetworkingModule (ref), fFlagProfileEnableSocialNetworksUsernames (ref), httpService (ref), reactModule (ref), editSocialLinksModalModule (ref)
 	local var7 = useDispatch()
 	local var8 = useLocalUserId()
 	local var9 = useNavigation()
-	local var10 = useSelector(function(p0) --[[ line: 30 ]]
+	local var10 = useSelector(function(p0)
 		-- upvalues: getDeepValue (copy)
 		return getDeepValue(p0, "Profile.SocialLinks.selfSocialLinks")
 	end)
 	
-	local function openEditSocialNetworksErrorModal(p1) --[[ line: 38 ]]
+	local function openEditSocialNetworksErrorModal(p1)
 		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var7 (ref), navigateDown (copy)
 		local t = {
 			name = appPage.EditSocialNetworksError,
@@ -44,11 +44,11 @@ return function() --[[ line: 25 | named "EditSocialLinksModalContainer" ]]
 	return reactModule.createElement(editSocialLinksModalModule, {
 		socialNetworksVisbility = var10.visibility,
 		socialNetworks = var10.socialLinks,
-		cancelOnActivated = function() --[[ line: 34 ]]
+		cancelOnActivated = function()
 			-- upvalues: var9 (ref)
 			var9.goBack()
 		end,
-		saveOnActivated = function(p2, p3, p4, p5, p6, p7) --[[ line: 52 ]]
+		saveOnActivated = function(p2, p3, p4, p5, p6, p7)
 			-- upvalues: var7 (ref), socialLinksNetworkingModule (copy), var8 (ref), fFlagProfileEnableSocialNetworksUsernames (copy), var9 (ref), httpService (copy), openEditSocialNetworksErrorModal (ref)
 			return var7(socialLinksNetworkingModule.SetSocialLinks.API({
 				promotionChannelsVisibilityPrivacy = p2,
@@ -57,14 +57,14 @@ return function() --[[ line: 25 | named "EditSocialLinksModalContainer" ]]
 				youtube = p5,
 				twitch = p6,
 				guilded = p7
-			})):andThen(function(_) --[[ line: 68 ]]
+			})):andThen(function(_)
 				-- upvalues: var7 (copy), socialLinksNetworkingModule (copy), var8 (copy), fFlagProfileEnableSocialNetworksUsernames (copy), var9 (copy)
-				var7(socialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) --[[ line: 70 ]] end)
+				var7(socialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) end)
 				var7(socialLinksNetworkingModule.GetSocialLinks.API({
 					alwaysReturnUrls = true,
 					filterLink = true,
 					userId = var8
-				})):andThen(function(_) --[[ line: 77 ]]
+				})):andThen(function(_)
 					-- upvalues: fFlagProfileEnableSocialNetworksUsernames (copy), var7 (copy), socialLinksNetworkingModule (copy), var8 (copy)
 					if fFlagProfileEnableSocialNetworksUsernames then
 						var7(socialLinksNetworkingModule.GetSocialLinks.API({
@@ -73,11 +73,11 @@ return function() --[[ line: 25 | named "EditSocialLinksModalContainer" ]]
 							userId = var8
 						}))
 					end
-				end):catch(function(_) --[[ line: 86 ]] end)
+				end):catch(function(_) end)
 				var9.goBack()
-			end):catch(function(p8) --[[ line: 89 ]]
+			end):catch(function(p8)
 				-- upvalues: httpService (copy), openEditSocialNetworksErrorModal (copy)
-				local ok, status = pcall(function() --[[ line: 90 ]]
+				local ok, status = pcall(function()
 					-- upvalues: httpService (copy), p8 (ref)
 					return httpService:JSONDecode(p8.Body)
 				end)

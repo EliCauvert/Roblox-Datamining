@@ -2,11 +2,11 @@
 
 return {
 	ServiceLocator = serviceLocatorModule,
-	getService = function(p0) --[[ line: 11 ]]
+	getService = function(p0)
 		-- upvalues: serviceLocatorModule (ref)
 		return serviceLocatorModule.get(p0)
 	end,
-	setupMockServices = function(value) --[[ line: 16 ]]
+	setupMockServices = function(value)
 		-- upvalues: serviceLocatorModule (ref)
 		serviceLocatorModule.clear()
 		

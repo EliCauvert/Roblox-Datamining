@@ -11,7 +11,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 
-return function(p0) --[[ line: 27 | named "RestoreVersionDialog" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagEnableTeamTestLua (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
 	local VERSION_HISTORY_CANCEL, CHAT_REVERT_CONFIRMATION_ACTION, VERSION_HISTORY_RESTORE
 	local var5 = if fFlagBuildLocalization then useLocalization({
@@ -32,11 +32,11 @@ return function(p0) --[[ line: 27 | named "RestoreVersionDialog" ]]
 		CHAT_REVERT_CONFIRMATION_ACTION = localizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION
 		VERSION_HISTORY_RESTORE = localizationStringsModule.VERSION_HISTORY_RESTORE
 	end
-	local var6 = reactModule.useCallback(function() --[[ line: 47 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onRestore()
 	end, { p0.onRestore })
-	local var7 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onCancel()
 	end, { p0.onCancel })
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 27 | named "RestoreVersionDialog" ]]
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			Description = reactModule.createElement(dialog.Text, { Text = p0.description })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function() --[[ line: 54 ]]
+		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function()
 			-- upvalues: fFlagEnableTeamTestLua (copy), CHAT_REVERT_CONFIRMATION_ACTION (write), VERSION_HISTORY_RESTORE (write), buttonVariant (copy), var6 (ref), VERSION_HISTORY_CANCEL (write), var7 (ref)
 			return {
 				LayoutOrder = 3,

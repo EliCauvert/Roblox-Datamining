@@ -11,17 +11,17 @@ contextActionsBinder.validateProps = tModule.strictInterface({
 	closeOpenPrompt = tModule.callback
 })
 
-function contextActionsBinder.init(p0) --[[ line: 27 ]]
+function contextActionsBinder.init(p0)
 	p0.actionsBound = false
 end
 
-function contextActionsBinder.bindActions(p1) --[[ line: 31 ]]
+function contextActionsBinder.bindActions(p1)
 	-- upvalues: contextActionService (ref), guiService (ref)
 	if p1.actionsBound then
 		return
 	end
 	p1.actionsBound = true
-	contextActionService:BindCoreAction("CloseAvatarEditorPrompt", function(_, p2, _) --[[ line: 38 ]]
+	contextActionService:BindCoreAction("CloseAvatarEditorPrompt", function(_, p2, _)
 		-- upvalues: guiService (copy), p1 (ref)
 		if guiService.MenuIsOpen then
 			return Enum.ContextActionResult.Pass
@@ -34,7 +34,7 @@ function contextActionsBinder.bindActions(p1) --[[ line: 31 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function contextActionsBinder.unbindActions(p3) --[[ line: 51 ]]
+function contextActionsBinder.unbindActions(p3)
 	-- upvalues: contextActionService (ref)
 	if p3.actionsBound then
 		p3.actionsBound = false
@@ -44,17 +44,17 @@ function contextActionsBinder.unbindActions(p3) --[[ line: 51 ]]
 	end
 end
 
-function contextActionsBinder.didMount(p4) --[[ line: 61 ]]
+function contextActionsBinder.didMount(p4)
 	if p4.props.promptOpen then
 		p4:bindActions()
 	end
 end
 
-function contextActionsBinder.render(_) --[[ line: 67 ]]
+function contextActionsBinder.render(_)
 	return nil
 end
 
-function contextActionsBinder.didUpdate(p5, p6, _) --[[ line: 71 ]]
+function contextActionsBinder.didUpdate(p5, p6, _)
 	if p5.props.promptOpen ~= p6.promptOpen then
 		if p5.props.promptOpen then
 			p5:bindActions()
@@ -65,18 +65,18 @@ function contextActionsBinder.didUpdate(p5, p6, _) --[[ line: 71 ]]
 	end
 end
 
-function contextActionsBinder.willUnmount(p7) --[[ line: 81 ]]
+function contextActionsBinder.willUnmount(p7)
 	if p7.actionsBound then
 		p7:unbindActions()
 	end
 end
 
-return roactRoduxModule.connect(function(p8) --[[ line: 87 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p8)
 	return { promptOpen = p8.promptInfo.promptType ~= nil }
-end, function(p9) --[[ line: 93 | named "mapDispatchToProps" ]]
+end, function(p9)
 	-- upvalues: closeOpenPromptModule (ref)
 	return {
-		closeOpenPrompt = function() --[[ line: 95 ]]
+		closeOpenPrompt = function()
 			-- upvalues: p9 (ref), closeOpenPromptModule (copy)
 			return p9(closeOpenPromptModule)
 		end

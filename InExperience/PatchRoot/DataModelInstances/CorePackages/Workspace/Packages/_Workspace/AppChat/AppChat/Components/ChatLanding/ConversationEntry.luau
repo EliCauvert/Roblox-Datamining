@@ -44,10 +44,10 @@ local _ = require(appChat.types)
 local t = {
 	entryHeight = 64,
 	boldTitle = true,
-	onSquadJoinButtonActivated = function() --[[ line: 73 ]] end
+	onSquadJoinButtonActivated = function() end
 }
 
-return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
+return memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useTextSizeOffset (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useIsUserPendingModule (ref), getBoldTextThemeModule (ref), useDispatch (ref), useChatPlacementContext (ref), useChatPagePaddingModule (ref), useRelativeTimestampBindingModule (ref), useMemo (ref), text (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), useNavigation (ref), getOverlayStoreModule (ref), enumScreensModule (ref), overlayTypesModule (ref), conversationModule (ref), removedConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), httpService (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), reactFocusNavigationModule (ref), useCanAccessPartyModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationCell (ref), getFFlagDebugAppChatModule (ref), conversationRelativeTimestampModule (ref), foundationModule (ref)
 	local var31 = cryoModule.Dictionary.join(t, p0)
 	local var32 = useStyle()
@@ -66,7 +66,7 @@ return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
 	local var42 = var38.Font.BaseSize * captionSubHeader.RelativeSize
 	local shortRelativeTime = var31.conversation.shortRelativeTime or ""
 	local var44 = useRelativeTimestampBindingModule(var31.conversation.unixTime)
-	local var45 = useMemo(function() --[[ line: 102 ]]
+	local var45 = useMemo(function()
 		-- upvalues: text (copy), shortRelativeTime (ref), captionSubHeader (ref), var42 (ref)
 		return text.GetTextWidth(shortRelativeTime, captionSubHeader.Font, var42)
 	end, { shortRelativeTime, captionSubHeader.Font, var42, var34 })
@@ -78,24 +78,24 @@ return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
 	if var48.getScreenProps then
 		wideMode = var48.getScreenProps("wideMode", wideMode)
 	end
-	reactModule.useEffect(function() --[[ line: 113 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var31 (ref)
 		var31.fireImpressionEvent(var31.conversation)
 	end, {})
 	local var50 = nil
 	local _ = nil
 	local var51 = getOverlayStoreModule(false)
-	local var52 = reactModule.useCallback(function(p1) --[[ line: 121 ]]
+	local var52 = reactModule.useCallback(function(p1)
 		-- upvalues: var48 (ref), enumScreensModule (copy)
 		var48.navigate(enumScreensModule.ChatConversation, { isNavigatedFromGroupOSAJoin = true, conversationId = p1 })
 	end, { var48 })
-	local var53 = reactModule.useCallback(function(p2, p3, p4, p5, p6) --[[ line: 129 ]]
+	local var53 = reactModule.useCallback(function(p2, p3, p4, p5, p6)
 		-- upvalues: var51 (ref), overlayTypesModule (copy), var52 (ref), conversationModule (copy), var39 (ref), removedConversationModule (copy)
 		var51.showOverlay(overlayTypesModule.GroupOSADialog, {
 			conversationId = p2,
 			impressionId = p3,
 			modalVariant = p4,
-			onJoin = function() --[[ line: 140 ]]
+			onJoin = function()
 				-- upvalues: var51 (copy), p6 (ref), p2 (ref), var52 (copy)
 				var51.dismissOverlay()
 				
@@ -106,7 +106,7 @@ return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
 				end
 				var52(p2)
 			end,
-			onDecline = function() --[[ line: 148 ]]
+			onDecline = function()
 				-- upvalues: p2 (ref), p5 (ref), conversationModule (copy), var39 (copy), removedConversationModule (copy), var51 (copy)
 				if p2 and p5 == conversationModule.Type.MULTI_USER_CONVERSATION then
 					var39(removedConversationModule(p2))
@@ -115,7 +115,7 @@ return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
 			end
 		})
 	end, { var52, var39 })
-	local var54 = reactModule.useCallback(function(p7) --[[ line: 163 ]]
+	local var54 = reactModule.useCallback(function(p7)
 		-- upvalues: shouldShowU13ChatOptInForConversationModule (copy), constantsModule (copy), shouldShowOSAForConversationModule (copy), httpService (copy), var53 (write), var31 (ref), var35 (ref)
 		local var60 = nil
 		local osaContextCard = nil
@@ -135,7 +135,7 @@ return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
 	end, { var53, var31.onActivated, var31.fireClickEvent, var35 })
 	local _ = nil
 	local onSquadJoinButtonActivated = var31.onSquadJoinButtonActivated
-	local var55 = reactModule.useCallback(function(p8) --[[ line: 192 ]]
+	local var55 = reactModule.useCallback(function(p8)
 		-- upvalues: shouldShowOSAForConversationModule (copy), conversation (ref), constantsModule (copy), fFlagAppChatSquadJoinButtonU13OSAModule (copy), shouldShowU13ChatOptInForConversationModule (copy), conversationModule (copy), var53 (write), httpService (copy), onSquadJoinButtonActivated (ref)
 		local chatOptInInfoCard = nil
 		
@@ -153,22 +153,22 @@ return memo(function(p0) --[[ line: 77 | named "ConversationEntry" ]]
 		end
 	end, { var53, conversation, onSquadJoinButtonActivated })
 	local var56 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	reactModule.useEffect(function() --[[ line: 226 ]]
+	reactModule.useEffect(function()
 		-- upvalues: wideMode (write), var54 (ref), var56 (ref), var47 (ref), conversation (ref)
 		if wideMode and var54 and var56 then
-			local var61 = var56.focusedGuiObject:subscribe(function(p9) --[[ line: 228 ]]
+			local var61 = var56.focusedGuiObject:subscribe(function(p9)
 				-- upvalues: var47 (copy), var54 (copy), conversation (copy)
 				if var47.current and p9 == var47.current.cell then
 					var54(conversation)
 				end
 			end)
 			
-			return function() --[[ line: 233 ]]
+			return function()
 				-- upvalues: var61 (ref)
 				var61:unsubscribe()
 			end
 		end
-		return function() --[[ line: 237 ]] end
+		return function() end
 	end, { var54, wideMode, var56 })
 	local children = var31.children or {}
 	local size1900 = var33.Size.Size_1900

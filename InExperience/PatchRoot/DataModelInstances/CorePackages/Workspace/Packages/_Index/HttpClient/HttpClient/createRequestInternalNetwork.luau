@@ -1,7 +1,7 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function toLowerKeyedHeaders(p0) --[[ line: 13 ]]
+local function toLowerKeyedHeaders(p0)
 	if typeof(p0) ~= "table" then
 		return nil
 	end
@@ -13,10 +13,10 @@ local function toLowerKeyedHeaders(p0) --[[ line: 13 ]]
 	return t
 end
 
-return function() --[[ line: 24 | named "createRequestInternalNetwork" ]]
+return function()
 	-- upvalues: httpService (ref), toLowerKeyedHeaders (ref)
 	return {
-		request = function(p1, p2) --[[ line: 25 ]]
+		request = function(p1, p2)
 			-- upvalues: httpService (copy), toLowerKeyedHeaders (copy)
 			local var3 = httpService:RequestInternal({
 				Url = p1.url,
@@ -26,7 +26,7 @@ return function() --[[ line: 24 | named "createRequestInternalNetwork" ]]
 				OnMessage = p1.onMessage
 			})
 			local var4 = false
-			var3:Start(function(p3, p4) --[[ line: 42 ]]
+			var3:Start(function(p3, p4)
 				-- upvalues: var4 (write), p2 (ref), toLowerKeyedHeaders (copy)
 				if var4 then return end
 				var4 = true
@@ -58,13 +58,13 @@ return function() --[[ line: 24 | named "createRequestInternalNetwork" ]]
 				})
 			end)
 			
-			return function() --[[ line: 72 ]]
+			return function()
 				-- upvalues: var4 (write), var3 (ref)
 				if var4 then
 					return
 				end
 				var4 = true
-				pcall(function() --[[ line: 77 ]]
+				pcall(function()
 					-- upvalues: var3 (copy)
 					var3:Cancel()
 				end)

@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 | named "isValidFocusTarget" ]]
+﻿return function(p0)
 	if not p0 then
 		return false, "`nil` value provided to isValidFocusTarget"
 	elseif not p0:IsA("GuiBase2d") then

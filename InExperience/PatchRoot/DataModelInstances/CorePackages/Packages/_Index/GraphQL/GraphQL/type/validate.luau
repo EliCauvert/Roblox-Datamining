@@ -46,7 +46,7 @@ local validateTypes = nil
 local validateTypeImplementsInterface = nil
 local validateInterfaces = nil
 
-local var20 = function(p0) --[[ line: 78 ]]
+local var20 = function(p0)
 	-- upvalues: assertSchema (ref), t (write), validateRootTypes (write), validateDirectives (write), validateTypes (write)
 	assertSchema(p0)
 	
@@ -63,12 +63,12 @@ local var20 = function(p0) --[[ line: 78 ]]
 	return p0.__validationErrors
 end
 
-local var21 = function(p1) --[[ line: 106 ]]
+local var21 = function(p1)
 	-- upvalues: var20 (ref), error (ref), array (ref)
 	local var24 = var20(p1)
 	
 	if #var24 ~= 0 then
-		error(error.new(array.join(array.map(var24, function(p2) --[[ line: 111 ]]
+		error(error.new(array.join(array.map(var24, function(p2)
 			return p2.message
 		end), "\n\n")))
 	end
@@ -77,7 +77,7 @@ end
 t = {}
 t.__index = t
 
-function t.new(p3) --[[ line: 132 ]]
+function t.new(p3)
 	-- upvalues: t (write)
 	local tbl = setmetatable({}, t)
 	tbl._errors = {}
@@ -86,20 +86,20 @@ function t.new(p3) --[[ line: 132 ]]
 	return tbl
 end
 
-function t:reportError(p4, p5) --[[ line: 141 ]]
+function t:reportError(p4, p5)
 	-- upvalues: array (ref), boolean (ref), graphQLError (ref)
 	self:addError(graphQLError.new(p4, if array.isArray(p5) then array.filter(p5, boolean.toJSBoolean) else p5))
 end
 
-function t:addError(p6) --[[ line: 150 ]]
+function t:addError(p6)
 	table.insert(self._errors, p6)
 end
 
-function t:getErrors() --[[ line: 154 ]]
+function t:getErrors()
 	return self._errors
 end
 
-validateRootTypes = function(p7) --[[ line: 158 | named "validateRootTypes" ]]
+validateRootTypes = function(p7)
 	-- upvalues: isNotNillish (ref), isObjectType (ref), getOperationTypeNode (write), inspect (ref)
 	local schema = p7.schema
 	local queryType = schema:getQueryType()
@@ -124,9 +124,9 @@ validateRootTypes = function(p7) --[[ line: 158 | named "validateRootTypes" ]]
 	end
 end
 
-getOperationTypeNode = function(p8, p9) --[[ line: 197 | named "getOperationTypeNode" ]]
+getOperationTypeNode = function(p8, p9)
 	-- upvalues: getAllSubNodes (write)
-	for i, v in ipairs(getAllSubNodes(p8, function(p10) --[[ line: 198 ]]
+	for i, v in ipairs(getAllSubNodes(p8, function(p10)
 		return p10.operationTypes
 	end)) do
 		if v.operation == p9 then
@@ -136,7 +136,7 @@ getOperationTypeNode = function(p8, p9) --[[ line: 197 | named "getOperationType
 	return nil
 end
 
-validateDirectives = function(p11) --[[ line: 211 | named "validateDirectives" ]]
+validateDirectives = function(p11)
 	-- upvalues: isDirective (ref), inspect (ref), validateName (write), isInputType (ref), isRequiredArgument (ref), isNotNillish (ref), getDeprecatedDirectiveNode (write)
 	for i, v in ipairs(p11.schema:getDirectives()) do
 		if isDirective(v) then
@@ -161,7 +161,7 @@ validateDirectives = function(p11) --[[ line: 211 | named "validateDirectives" ]
 	end
 end
 
-validateName = function(p12, p13) --[[ line: 255 | named "validateName" ]]
+validateName = function(p12, p13)
 	-- upvalues: isValidNameError (ref), locatedError (ref)
 	local name
 	local _ = nil
@@ -180,7 +180,7 @@ validateName = function(p12, p13) --[[ line: 255 | named "validateName" ]]
 	end
 end
 
-validateTypes = function(p14) --[[ line: 276 | named "validateTypes" ]]
+validateTypes = function(p14)
 	-- upvalues: isNamedType (ref), inspect (ref), isIntrospectionType (ref), validateName (write), isObjectType (ref), validateFields (write), validateInterfaces (write), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), validateEnumValues (write), isInputObjectType (ref)
 	local var34
 	local var33 = createInputObjectCircularRefsValidator(p14)
@@ -212,7 +212,7 @@ validateTypes = function(p14) --[[ line: 276 | named "validateTypes" ]]
 	end
 end
 
-validateFields = function(p15, p16) --[[ line: 329 | named "validateFields" ]]
+validateFields = function(p15, p16)
 	-- upvalues: getAllNodes (write), validateName (write), isOutputType (ref), inspect (ref), isInputType (ref), isRequiredArgument (ref), isNotNillish (ref), getDeprecatedDirectiveNode (write)
 	local var35 = p16:getFields():values()
 	
@@ -242,7 +242,7 @@ validateFields = function(p15, p16) --[[ line: 329 | named "validateFields" ]]
 	end
 end
 
-validateInterfaces = function(p17, p18) --[[ line: 394 | named "validateInterfaces" ]]
+validateInterfaces = function(p17, p18)
 	-- upvalues: isInterfaceType (ref), inspect (ref), getAllImplementsInterfaceNodes (write), validateTypeImplementsAncestors (write), validateTypeImplementsInterface (write)
 	local t = {}
 	
@@ -265,7 +265,7 @@ validateInterfaces = function(p17, p18) --[[ line: 394 | named "validateInterfac
 	end
 end
 
-validateTypeImplementsInterface = function(p19, p20, p21) --[[ line: 444 | named "validateTypeImplementsInterface" ]]
+validateTypeImplementsInterface = function(p19, p20, p21)
 	-- upvalues: array (ref), getAllNodes (write), isTypeSubTypeOf (ref), inspect (ref), isEqualType (ref), isRequiredArgument (ref)
 	local name
 	local fields = p20:getFields()
@@ -286,7 +286,7 @@ validateTypeImplementsInterface = function(p19, p20, p21) --[[ line: 444 | named
 		end
 		for i_1, v_1 in ipairs(v.args) do
 			local name_1 = v_1.name
-			local var40 = array.find(var39.args, function(p22) --[[ line: 492 ]]
+			local var40 = array.find(var39.args, function(p22)
 				-- upvalues: name_1 (ref)
 				return p22.name == name_1
 			end)
@@ -303,7 +303,7 @@ validateTypeImplementsInterface = function(p19, p20, p21) --[[ line: 444 | named
 		for i_1, v_1 in ipairs(var39.args) do
 			local name_1 = v_1.name
 			
-			if not array.find(v.args, function(p23) --[[ line: 538 ]]
+			if not array.find(v.args, function(p23)
 				-- upvalues: name_1 (ref)
 				return p23.name == name_1
 			end) and isRequiredArgument(v_1) then
@@ -313,7 +313,7 @@ validateTypeImplementsInterface = function(p19, p20, p21) --[[ line: 444 | named
 	end
 end
 
-validateTypeImplementsAncestors = function(p24, p25, p26) --[[ line: 557 | named "validateTypeImplementsAncestors" ]]
+validateTypeImplementsAncestors = function(p24, p25, p26)
 	-- upvalues: array (ref), getAllImplementsInterfaceNodes (write)
 	local interfaces = p25:getInterfaces()
 	
@@ -324,7 +324,7 @@ validateTypeImplementsAncestors = function(p24, p25, p26) --[[ line: 557 | named
 	end
 end
 
-function validateUnionMembers(p27, p28) --[[ line: 587 ]]
+function validateUnionMembers(p27, p28)
 	-- upvalues: getAllNodes (write), getUnionMemberTypeNodes (write), isObjectType (ref), inspect (ref)
 	local types = p28:getTypes()
 	
@@ -346,7 +346,7 @@ function validateUnionMembers(p27, p28) --[[ line: 587 ]]
 	end
 end
 
-validateEnumValues = function(p29, p30) --[[ line: 621 | named "validateEnumValues" ]]
+validateEnumValues = function(p29, p30)
 	-- upvalues: getAllNodes (write), validateName (write)
 	local values = p30:getValues()
 	
@@ -363,7 +363,7 @@ validateEnumValues = function(p29, p30) --[[ line: 621 | named "validateEnumValu
 	end
 end
 
-function validateInputFields(p31, p32) --[[ line: 646 ]]
+function validateInputFields(p31, p32)
 	-- upvalues: getAllNodes (write), validateName (write), isInputType (ref), inspect (ref), isRequiredInputField (ref), isNotNillish (ref), getDeprecatedDirectiveNode (write)
 	local var45 = p32:getFields():values()
 	
@@ -385,13 +385,13 @@ function validateInputFields(p31, p32) --[[ line: 646 ]]
 	end
 end
 
-function createInputObjectCircularRefsValidator(p33) --[[ line: 688 ]]
+function createInputObjectCircularRefsValidator(p33)
 	-- upvalues: isNonNullType (ref), isInputObjectType (ref), array (ref)
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	
-	local function detectCycleRecursive(p34) --[[ line: 705 ]]
+	local function detectCycleRecursive(p34)
 		-- upvalues: t (ref), t_2 (ref), t_1 (ref), isNonNullType (copy), isInputObjectType (copy), detectCycleRecursive (ref), array (copy), p33 (ref)
 		if t[tostring(p34.name)] then return end
 		t[tostring(p34.name)] = true
@@ -408,9 +408,9 @@ function createInputObjectCircularRefsValidator(p33) --[[ line: 688 ]]
 				else
 					local _ = nil
 					local var50 = array.slice(t_1, name)
-					p33:reportError(("Cannot reference Input Object \"%s\" within itself through a series of non-null fields: \"%s\"."):format(ofType.name, array.join(array.map(var50, function(p35) --[[ line: 733 ]]
+					p33:reportError(("Cannot reference Input Object \"%s\" within itself through a series of non-null fields: \"%s\"."):format(ofType.name, array.join(array.map(var50, function(p35)
 						return p35.name
-					end), ".")), array.map(var50, function(p36) --[[ line: 743 ]]
+					end), ".")), array.map(var50, function(p36)
 						return p36.astNode
 					end))
 				end
@@ -423,7 +423,7 @@ function createInputObjectCircularRefsValidator(p33) --[[ line: 688 ]]
 	return detectCycleRecursive
 end
 
-getAllNodes = function(p37) --[[ line: 767 | named "getAllNodes" ]]
+getAllNodes = function(p37)
 	-- upvalues: array (ref)
 	local astNode = p37.astNode
 	local extensionASTNodes = p37.extensionASTNodes
@@ -431,7 +431,7 @@ getAllNodes = function(p37) --[[ line: 767 | named "getAllNodes" ]]
 	return if astNode then if extensionASTNodes then array.concat({ astNode }, extensionASTNodes) else { astNode } else extensionASTNodes or {}
 end
 
-getAllSubNodes = function(p38, p39) --[[ line: 777 | named "getAllSubNodes" ]]
+getAllSubNodes = function(p38, p39)
 	-- upvalues: getAllNodes (write), array (ref)
 	local t = {}
 	
@@ -442,32 +442,32 @@ getAllSubNodes = function(p38, p39) --[[ line: 777 | named "getAllSubNodes" ]]
 	return t
 end
 
-getAllImplementsInterfaceNodes = function(p40, p41) --[[ line: 793 | named "getAllImplementsInterfaceNodes" ]]
+getAllImplementsInterfaceNodes = function(p40, p41)
 	-- upvalues: array (ref), getAllSubNodes (write)
-	return array.filter(getAllSubNodes(p40, function(p42) --[[ line: 798 ]]
+	return array.filter(getAllSubNodes(p40, function(p42)
 		return p42.interfaces
-	end), function(p43) --[[ line: 801 ]]
+	end), function(p43)
 		-- upvalues: p41 (ref)
 		return p43.name.value == p41.name
 	end)
 end
 
-getUnionMemberTypeNodes = function(p44, p45) --[[ line: 807 | named "getUnionMemberTypeNodes" ]]
+getUnionMemberTypeNodes = function(p44, p45)
 	-- upvalues: array (ref), getAllSubNodes (write)
-	return array.filter(getAllSubNodes(p44, function(p46) --[[ line: 809 ]]
+	return array.filter(getAllSubNodes(p44, function(p46)
 		return p46.types
-	end), function(p47) --[[ line: 812 ]]
+	end), function(p47)
 		-- upvalues: p45 (ref)
 		return p47.name.value == p45
 	end)
 end
 
-getDeprecatedDirectiveNode = function(p48) --[[ line: 818 | named "getDeprecatedDirectiveNode" ]]
+getDeprecatedDirectiveNode = function(p48)
 	-- upvalues: array (ref), graphQLDeprecatedDirective (ref)
 	if p48 == nil or p48.directives == nil then
 		return
 	end
-	return array.find(p48.directives, function(p49) --[[ line: 823 ]]
+	return array.find(p48.directives, function(p49)
 		-- upvalues: graphQLDeprecatedDirective (copy)
 		return p49.name.value == graphQLDeprecatedDirective.name
 	end)

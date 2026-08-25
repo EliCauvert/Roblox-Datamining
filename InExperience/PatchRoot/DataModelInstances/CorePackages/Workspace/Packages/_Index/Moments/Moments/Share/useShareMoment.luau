@@ -15,14 +15,14 @@ local t = {
 	linkCopyFailed = "Feature.Moments.Label.LinkCopyFailed"
 }
 
-return function(p0) --[[ line: 32 | named "useShareMoment" ]]
+return function(p0)
 	-- upvalues: momentContextModule (ref), reactModule (ref), feedContextModule (ref), useLocalization (ref), t (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), shareMomentModule (ref)
 	local momentId = momentContextModule.useMoment().momentId
 	local var9 = reactModule.useContext(feedContextModule.FeedContext)
 	local var10 = useLocalization(t)
 	
 	return {
-		onShareActivated = reactModule.useCallback(function() --[[ line: 40 ]]
+		onShareActivated = reactModule.useCallback(function()
 			-- upvalues: makeRecommendationAttributionModule (copy), p0 (ref), var9 (ref), signalActionTypeModule (copy), shareMomentModule (copy), momentId (ref), var10 (ref)
 			local var11 = makeRecommendationAttributionModule(if p0 then p0.recommendationMetadata else nil)
 			shareMomentModule({
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 32 | named "useShareMoment" ]]
 				feedItemId = if p0 and p0.recommendationMetadata then p0.recommendationMetadata.feedItemId else nil,
 				feedSessionId = if p0 and p0.recommendationMetadata then p0.recommendationMetadata.tracingId else nil,
 				description = if p0 and p0.metadata then p0.metadata.description else nil,
-				logAction = if var11 and var9 then function(p1) --[[ line: 49 ]]
+				logAction = if var11 and var9 then function(p1)
 					-- upvalues: var9 (copy), signalActionTypeModule (copy), var11 (ref)
 					return var9.logAction(signalActionTypeModule.Share, var11, p1)
 				end else nil,

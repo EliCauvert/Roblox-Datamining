@@ -7,17 +7,17 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local name = logger:new(script.Name)
 
-return function(p0) --[[ line: 22 | named "ImagePile" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), cryoModule (ref), name (ref), imageSetLabel (ref)
 	local tokens = useStyle().Tokens
-	local var4 = cryoModule.Dictionary.union(reactModule.useMemo(function() --[[ line: 26 ]]
+	local var4 = cryoModule.Dictionary.union(reactModule.useMemo(function()
 		-- upvalues: tokens (ref)
 		return {
 			imageBorderColor = tokens.Color.Extended.White.White_100.Color3,
 			imageBorderThickness = tokens.Size.Size_50
 		}
 	end, { tokens }), p0)
-	local var5 = reactModule.useMemo(function() --[[ line: 35 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: tokens (ref)
 		return {
 			[1] = {
@@ -44,11 +44,11 @@ return function(p0) --[[ line: 22 | named "ImagePile" ]]
 			}
 		}
 	end, { tokens })
-	local var6 = reactModule.useCallback(function(p1, p2) --[[ line: 62 ]]
+	local var6 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: var5 (ref)
 		return var5[math.min(p1, 2)]["Attribute" .. p2]
 	end, { var5 })
-	local var7 = reactModule.useMemo(function() --[[ line: 67 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), name (copy), var6 (ref), reactModule (copy), imageSetLabel (copy)
 		local t = {}
 		

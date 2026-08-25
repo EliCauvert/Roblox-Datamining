@@ -2,7 +2,7 @@
 local var1 = nil
 
 return {
-	isAllowListedUserId = function(p0) --[[ line: 7 ]]
+	isAllowListedUserId = function(p0)
 		-- upvalues: var1 (write), rccInExperienceNameSettingsEnabledAllowList (ref)
 		local var2 = tostring(p0)
 		

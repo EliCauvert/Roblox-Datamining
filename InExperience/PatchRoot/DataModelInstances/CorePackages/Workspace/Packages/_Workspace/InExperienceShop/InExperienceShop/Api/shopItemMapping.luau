@@ -3,25 +3,25 @@ local _ = require(inExperienceShop.Types)
 local formatUpdatedDateModule = require(inExperienceShop.Utils.formatUpdatedDate)
 local fFlagShopProductsUseDisplayNameModule = require(inExperienceShop.Flags.FFlagShopProductsUseDisplayName)
 
-local function _(p0) --[[ line: 76 | named "toShopItemName" ]]
+local function _(p0)
 	-- upvalues: fFlagShopProductsUseDisplayNameModule (ref)
 	return if fFlagShopProductsUseDisplayNameModule then p0.DisplayName or p0.Name else p0.Name
 end
 
 return {
-	makeRequestKey = function(p1, p2) --[[ line: 28 ]]
+	makeRequestKey = function(p1, p2)
 		return tostring(p1) .. ":" .. tostring(p2)
 	end,
-	toShopItemThumbnail = function(p3) --[[ line: 37 ]]
+	toShopItemThumbnail = function(p3)
 		return if p3 == nil then "" else "rbxassetid://" .. tostring(p3)
 	end,
-	toShopItemCreator = function(p4) --[[ line: 50 ]]
+	toShopItemCreator = function(p4)
 		return if p4 == nil then nil else {
 			name = p4.Name,
 			hasVerifiedBadge = p4.HasVerifiedBadge == true
 		}
 	end,
-	toShopItem = function(p5, p6, p7) --[[ line: 83 ]]
+	toShopItem = function(p5, p6, p7)
 		-- upvalues: fFlagShopProductsUseDisplayNameModule (ref), formatUpdatedDateModule (ref)
 		local t = {
 			isOwned = false,

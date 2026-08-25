@@ -23,10 +23,10 @@ local getFFlagEnableCrossExpVoice = sharedFlags.GetFFlagEnableCrossExpVoice
 local _ = nil
 local var7 = if getFFlagEnableCrossExpVoice() then require(parent.CrossExperienceVoice).Hooks.useLastActiveParticipant else nil
 
-function SquadTopBanner(p0) --[[ line: 53 ]]
+function SquadTopBanner(p0)
 	-- upvalues: react (ref), squadCoordinationUIChangesExperimentation (ref), fFlagIntroduceTopBannerPartyStatesModule (ref), getFFlagEnableCrossExpVoice (ref), var7 (write), useTokens (ref), useCurrentSquadParentChannelId (ref), squadExternalContractContext (ref), useLocalUserId (ref), constantsModule (ref), userProfilesModule (ref), useLocalization (ref), cryoModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), foundation (ref), fFlagDebugAppChatEnableDomLocators (ref), view (ref), horizontalFacepileGroupModule (ref)
 	local var16
-	react.useEffect(function() --[[ line: 54 ]]
+	react.useEffect(function()
 		-- upvalues: squadCoordinationUIChangesExperimentation (copy)
 		if squadCoordinationUIChangesExperimentation.isLogExposureEnabled then
 			squadCoordinationUIChangesExperimentation.logExposure()
@@ -39,7 +39,7 @@ function SquadTopBanner(p0) --[[ line: 53 ]]
 	local var12 = useLocalUserId()
 	local data = nil
 	local _ = false
-	local var14 = react.useMemo(function() --[[ line: 81 ]]
+	local var14 = react.useMemo(function()
 		-- upvalues: p0 (ref), constantsModule (copy), var12 (ref)
 		if p0.parentChannelType == constantsModule.CONVERSATION_CHANNEL_ONE_TO_ONE_TYPE and p0.parentChannelParticipants then
 			for i, v in ipairs(p0.parentChannelParticipants) do
@@ -78,7 +78,7 @@ function SquadTopBanner(p0) --[[ line: 53 ]]
 			loading = "Feature.Squads.Label.Loading",
 			waitingForCombinedName = "Feature.Squads.Label.WaitingForCombinedName"
 		})
-		var18 = react.useMemo(function() --[[ line: 122 ]]
+		var18 = react.useMemo(function()
 			-- upvalues: var17 (write), var20 (ref), p0 (ref), constantsModule (copy), data (write)
 			return if var17 then var20.loading elseif p0.parentChannelType == constantsModule.CONVERSATION_CHANNEL_ONE_TO_ONE_TYPE and data and #p0.squadMemberList < 2 then var20.waitingForCombinedName:gsub("{(.-)}", { combinedName = data }) elseif p0.parentChannelType == constantsModule.CONVERSATION_CHANNEL_GROUP_TYPE and #p0.squadMemberList < 2 then var20.waitingForOthers else var20.numberInTheParty:gsub("{(.-)}", { partyCount = tostring(#p0.squadMemberList) })
 		end, {
@@ -88,7 +88,7 @@ function SquadTopBanner(p0) --[[ line: 53 ]]
 			p0.parentChannelType,
 			p0.squadMemberList
 		})
-		local var21 = react.useCallback(function() --[[ line: 148 ]]
+		local var21 = react.useCallback(function()
 			-- upvalues: var12 (ref), p0 (ref)
 			local t = {}
 			
@@ -104,9 +104,9 @@ function SquadTopBanner(p0) --[[ line: 53 ]]
 			
 			return t
 		end, { p0.squadMemberList })
-		var19 = react.useMemo(function() --[[ line: 166 ]]
+		var19 = react.useMemo(function()
 			-- upvalues: var21 (ref), cryoModule (copy), getStandardSizeAvatarHeadShotRbxthumb (copy)
-			return cryoModule.List.map(var21(), function(p1) --[[ line: 169 ]]
+			return cryoModule.List.map(var21(), function(p1)
 				-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (copy)
 				return getStandardSizeAvatarHeadShotRbxthumb(p1)
 			end)

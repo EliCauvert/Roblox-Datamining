@@ -2,7 +2,7 @@
 local constants = require(crossExperienceVoice.dependencies).CrossExperience.Constants
 local useVoiceStatusModule = require(crossExperienceVoice.Hooks.useVoiceStatus)
 
-return function() --[[ line: 8 ]]
+return function()
 	-- upvalues: useVoiceStatusModule (ref), constants (ref)
 	local var2 = useVoiceStatusModule()
 	

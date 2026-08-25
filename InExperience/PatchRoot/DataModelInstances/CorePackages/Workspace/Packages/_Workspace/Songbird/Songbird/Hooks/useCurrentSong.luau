@@ -13,19 +13,19 @@ local useMemo = reactModule.useMemo
 local useAudibleSounds = reactSceneUnderstandingModule.useAudibleSounds
 local useAssetFavoriting = assetFavoritesModule.useAssetFavoriting
 
-return function() --[[ line: 21 | named "useCurrentSong" ]]
+return function()
 	-- upvalues: useAudibleSounds (ref), useMemo (ref), cryoModule (ref), getAssetIdForAudioSourceModule (ref), useAudioMetadataModule (ref), useAssetFavoriting (ref), loggerModule (ref), sendChromeWindowAnalyticsModule (ref), analyticActionsModule (ref)
 	local var10 = useAudibleSounds()
-	local var11 = useMemo(function() --[[ line: 30 ]]
+	local var11 = useMemo(function()
 		-- upvalues: cryoModule (copy), var10 (ref), getAssetIdForAudioSourceModule (copy)
-		return cryoModule.List.filter(var10, function(p0) --[[ line: 31 ]]
+		return cryoModule.List.filter(var10, function(p0)
 			-- upvalues: getAssetIdForAudioSourceModule (copy)
 			return getAssetIdForAudioSourceModule(p0) ~= nil
 		end)
 	end, { var10 })
-	local var12 = useMemo(function() --[[ line: 36 ]]
+	local var12 = useMemo(function()
 		-- upvalues: cryoModule (copy), var11 (ref), getAssetIdForAudioSourceModule (copy)
-		return cryoModule.List.map(var11, function(p1) --[[ line: 37 ]]
+		return cryoModule.List.map(var11, function(p1)
 			-- upvalues: getAssetIdForAudioSourceModule (copy)
 			return getAssetIdForAudioSourceModule(p1)
 		end)
@@ -33,7 +33,7 @@ return function() --[[ line: 21 | named "useCurrentSong" ]]
 	local var13 = useAudioMetadataModule(var12)
 	local var14 = useAssetFavoriting(var12)
 	
-	return useMemo(function() --[[ line: 47 ]]
+	return useMemo(function()
 		-- upvalues: loggerModule (copy), var11 (ref), getAssetIdForAudioSourceModule (copy), var13 (ref), var14 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy)
 		local byAssetId
 		loggerModule:info(`determining currently playing song from {#var11} audio sources...`)
@@ -67,9 +67,9 @@ return function() --[[ line: 21 | named "useCurrentSong" ]]
 						metadata = byAssetId,
 						meetsCriteria = var17,
 						isFavorited = var14.getByAssetId(var15),
-						toggleFavorite = function() --[[ line: 93 ]]
+						toggleFavorite = function()
 							-- upvalues: var14 (copy), var15 (ref), sendChromeWindowAnalyticsModule (copy), analyticActionsModule (copy), loggerModule (copy)
-							return var14.toggleFavorite(var15):andThen(function(p3) --[[ line: 96 ]]
+							return var14.toggleFavorite(var15):andThen(function(p3)
 								-- upvalues: sendChromeWindowAnalyticsModule (copy), var15 (copy), analyticActionsModule (copy)
 								if p3 then
 									sendChromeWindowAnalyticsModule({ assetId = var15, action = analyticActionsModule.Like })
@@ -77,7 +77,7 @@ return function() --[[ line: 21 | named "useCurrentSong" ]]
 									return
 								end
 								sendChromeWindowAnalyticsModule({ assetId = var15, action = analyticActionsModule.Unlike })
-							end):catch(function(p2) --[[ line: 103 ]]
+							end):catch(function(p2)
 								-- upvalues: loggerModule (copy)
 								loggerModule:warning(p2)
 							end)

@@ -6,11 +6,11 @@ local promiseModule = require(parent.Promise)
 local name = require(appChat.Logger):new(script.Name)
 local getNewestWithNilPreviousMessageIdModule = require(appChat.Components.ChatConversation.Utils.getNewestWithNilPreviousMessageId)
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: name (ref), promiseModule (ref), appChatNetworkingModule (ref), roduxNetworkingModule (ref), getNewestWithNilPreviousMessageIdModule (ref)
 	name:info("Maybe getting older messages for {}", p1)
 	
-	return function(p2) --[[ line: 13 ]]
+	return function(p2)
 		-- upvalues: promiseModule (copy), p1 (ref), appChatNetworkingModule (copy), roduxNetworkingModule (copy), name (copy), getNewestWithNilPreviousMessageIdModule (copy), p0 (ref)
 		local chatAppReducer = p2:getState().ChatAppReducer
 		

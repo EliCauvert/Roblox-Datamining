@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local background2026 = require(authCommon.Common.AuthBackgroundConstants).Background2026
 
-local function renderScrim(p0) --[[ line: 37 ]]
+local function renderScrim(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("ImageLabel", {
 		ZIndex = 2,
@@ -18,7 +18,7 @@ local function renderScrim(p0) --[[ line: 37 ]]
 	})
 end
 
-local function renderImage(p1) --[[ line: 50 ]]
+local function renderImage(p1)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.Image, {
 		BorderSizePixel = 0,
@@ -30,7 +30,7 @@ local function renderImage(p1) --[[ line: 50 ]]
 	})
 end
 
-return function(value) --[[ line: 61 | named "AuthBackgroundContainer" ]]
+return function(value)
 	-- upvalues: background2026 (ref), reactModule (ref), renderImage (ref), renderScrim (ref)
 	local var5 = value.showImage ~= nil or value.showImage
 	

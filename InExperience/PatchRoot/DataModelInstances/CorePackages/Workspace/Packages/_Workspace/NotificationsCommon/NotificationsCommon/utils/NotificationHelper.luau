@@ -7,7 +7,7 @@ local constantsModule = require(notificationsCommon.constants)
 local fFlagLuaAppFixToastNotificationClosePosition = game:DefineFastFlag("FFlagLuaAppFixToastNotificationClosePosition", false)
 
 return {
-	calculateToastPosition = function(p0, p1, p2) --[[ line: 67 ]]
+	calculateToastPosition = function(p0, p1, p2)
 		-- upvalues: fFlagLuaAppFixToastNotificationClosePosition (ref), guiService (ref)
 		return if p0 then if p1 then {
 			positionX = 1,
@@ -39,15 +39,15 @@ return {
 			positionYOffset = if fFlagLuaAppFixToastNotificationClosePosition then (if fFlagLuaAppFixToastNotificationClosePosition and guiService then guiService:GetGuiInset().Y + 20 else 60) * -1 else -50
 		}
 	end,
-	getDeviceOrientation = function(p3) --[[ line: 22 ]]
+	getDeviceOrientation = function(p3)
 		-- upvalues: typeModule (ref)
 		return if p3.Y < p3.X then typeModule.DeviceOrientationEnum.Landscape else typeModule.DeviceOrientationEnum.Portrait
 	end,
-	getNotificationSize = function(p4, p5) --[[ line: 28 ]]
+	getNotificationSize = function(p4, p5)
 		-- upvalues: constantsModule (ref)
 		return if p5 < constantsModule.FullWidthDeviceThreshold then UDim2.new(0, p5 - 24, 0, 0) elseif p4 then if p5 < constantsModule.CompactCardThreashold then UDim2.new(0, constantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0)
 	end,
-	marshalStreamNotificationData = function(p6, _) --[[ line: 42 ]]
+	marshalStreamNotificationData = function(p6, _)
 		local t = {
 			currentState = p6.content.currentState,
 			notificationType = p6.content.notificationType,
@@ -64,21 +64,21 @@ return {
 		end
 		return t
 	end,
-	isToastToRight = function(p7) --[[ line: 63 ]]
+	isToastToRight = function(p7)
 		-- upvalues: typeModule (ref)
 		return p7 == typeModule.DeviceOrientationEnum.Landscape
 	end,
-	isDesktopDevice = function() --[[ line: 141 ]]
+	isDesktopDevice = function()
 		-- upvalues: userInputService (ref)
 		local none = Enum.Platform.None
-		pcall(function() --[[ line: 143 ]]
+		pcall(function()
 			-- upvalues: none (write), userInputService (copy)
 			none = userInputService:GetPlatform()
 		end)
 		
 		return if none ~= Enum.Platform.Windows then if none ~= Enum.Platform.OSX then none == Enum.Platform.UWP else true else true
 	end,
-	fireEvent = function(p8, p9, p10, p11) --[[ line: 121 ]]
+	fireEvent = function(p8, p9, p10, p11)
 		-- upvalues: constantsModule (ref), cryoModule (ref)
 		local t = { streamContext = "InApp" }
 		

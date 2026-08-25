@@ -10,7 +10,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 26 | named "EditComponentRow" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), skeleton (ref), radius (ref), icon (ref), iconName (ref), iconSize (ref)
 	return reactModule.createElement(view, {
 		tag = "row size-full-1100 padding-medium align-y-center flex-x-between gap-medium",

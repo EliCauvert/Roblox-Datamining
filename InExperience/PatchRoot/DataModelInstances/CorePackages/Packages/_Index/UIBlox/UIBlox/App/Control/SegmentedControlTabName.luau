@@ -18,11 +18,11 @@ local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontI
 local validateImageModule = require(core.ImageSet.Validator.validateImage)
 local segmentedControlTabName = roactModule.PureComponent:extend("SegmentedControlTabName")
 
-function segmentedControlTabName.init(p0) --[[ line: 32 ]]
+function segmentedControlTabName.init(p0)
 	-- upvalues: controlStateModule (ref)
 	p0.state = { controlState = controlStateModule.Initialize }
 	
-	function p0.onStateChanged(p1, p2) --[[ line: 37 ]]
+	function p0.onStateChanged(p1, p2)
 		-- upvalues: p0 (ref)
 		p0:setState({ controlState = p2 })
 		
@@ -58,9 +58,9 @@ segmentedControlTabName.defaultProps = {
 	buttonStateColorMap = { [controlStateModule.Default] = "SecondaryContent" }
 }
 
-function segmentedControlTabName.render(p3) --[[ line: 101 ]]
+function segmentedControlTabName.render(p3)
 	-- upvalues: withStyleModule (ref), controlStateModule (ref), getContentStyleModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref), getIconSizeModule (ref), iconSizeModule (ref), genericTextLabelModule (ref), interactableModule (ref), cryoModule (ref)
-	return withStyleModule(function(p4) --[[ line: 102 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: p3 (ref), controlStateModule (copy), getContentStyleModule (copy), roactModule (copy), skeleton (copy), imageSetComponentModule (copy), getIconSizeModule (copy), iconSizeModule (copy), genericTextLabelModule (copy), interactableModule (copy), cryoModule (copy)
 		local controlState = p3.state.controlState
 		local text = p3.props.text

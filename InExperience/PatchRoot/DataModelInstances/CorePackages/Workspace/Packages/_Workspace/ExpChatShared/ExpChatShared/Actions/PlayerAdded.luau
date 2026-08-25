@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3) --[[ line: 15 ]]
+﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3)
 	return {
 		userId = tostring(p0),
 		username = p1,

@@ -30,7 +30,7 @@ local var21 = windowSizeSignalModule.new(size.X, size.Y)
 local constantsModule_1 = require(chrome.ChromeShared.Unibar.Constants)
 local var23 = require(robloxGui.Modules.SelfView.Analytics).new()
 local SELFIE_VIEW_ID = constantsModule_1.SELFIE_VIEW_ID
-local var24 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function() --[[ line: 52 ]]
+local var24 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: serviceModule (ref), SELFIE_VIEW_ID (ref)
 	return serviceModule:isWindowOpen(SELFIE_VIEW_ID)
 end)
@@ -46,13 +46,13 @@ local var27 = serviceModule:register({
 	sideSheetPlacement = sideSheetPlacement.Page,
 	windowSize = var21,
 	initialAvailability = availabilitySignalState.Unavailable,
-	activated = function() --[[ line: 71 ]]
+	activated = function()
 		-- upvalues: serviceModule (ref), SELFIE_VIEW_ID (ref)
 		serviceModule:toggleWindow(SELFIE_VIEW_ID)
 	end,
 	isActivated = var24,
 	components = {
-		Icon = function(_) --[[ line: 78 ]]
+		Icon = function(_)
 			-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule_1 (ref), reactModule (ref), commonIconModule (ref), var24 (ref), unknownModule (ref), serviceModule (ref), SELFIE_VIEW_ID (ref)
 			local _ = nil
 			local var31 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else constantsModule_1.ICON_SIZE
@@ -65,7 +65,7 @@ local var27 = serviceModule:register({
 				CameraStatusDot = if unknownModule.useCameraOn() and not serviceModule:isWindowOpen(SELFIE_VIEW_ID) then reactModule.createElement(unknownModule.CameraStatusDot, { ZIndex = 2, Position = UDim2.fromScale(0.8, 0.7) }) else nil
 			}, {})
 		end,
-		Window = function(_) --[[ line: 100 ]]
+		Window = function(_)
 			-- upvalues: serviceModule (ref), SELFIE_VIEW_ID (ref), reactModule (ref), unknownModule (ref), var21 (ref)
 			local var32 = serviceModule:dragConnection(SELFIE_VIEW_ID)
 			
@@ -77,7 +77,7 @@ local var27 = serviceModule:register({
 		end
 	}
 })
-viewportUtilModule.screenSize:connect(function(p0) --[[ line: 112 ]]
+viewportUtilModule.screenSize:connect(function(p0)
 	-- upvalues: serviceModule (ref), SELFIE_VIEW_ID (ref), sizingUtilsModule (ref), var21 (ref)
 	if not serviceModule:isWindowOpen(SELFIE_VIEW_ID) then
 		local size = sizingUtilsModule.getSize(p0, var21:getIsLarge())
@@ -85,7 +85,7 @@ viewportUtilModule.screenSize:connect(function(p0) --[[ line: 112 ]]
 	end
 end, true)
 
-local var28 = function() --[[ line: 119 ]]
+local var28 = function()
 	-- upvalues: starterGuiService (ref), getFFlagChromeSelfViewIgnoreCoreGuiModule (ref), faceChatUtilsModule (ref), var27 (ref)
 	if getFFlagChromeSelfViewIgnoreCoreGuiModule() or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView) then
 		local permissions = faceChatUtilsModule.getPermissions()
@@ -104,7 +104,7 @@ local var28 = function() --[[ line: 119 ]]
 	var27.availability:unavailable()
 end
 
-local _ = function() --[[ line: 147 ]]
+local _ = function()
 	-- upvalues: faceChatUtilsModule (ref), var23 (ref)
 	local permissions = faceChatUtilsModule.getPermissions()
 	var23:reportExperienceSettings(true, permissions.placeCamEnabled, permissions.placeMicEnabled)
@@ -132,7 +132,7 @@ end
 starterGuiService.CoreGuiChangedSignal:Connect(var28)
 
 if game:GetEngineFeature("EnableSelfViewToggleApi") then
-	local _ = socialService.SelfViewVisible:Connect(function(p1) --[[ line: 185 ]]
+	local _ = socialService.SelfViewVisible:Connect(function(p1)
 		-- upvalues: constantsModule (ref), serviceModule (ref), SELFIE_VIEW_ID (ref), var21 (ref), viewportUtilModule (ref), constantsModule_1 (ref), var12 (ref)
 		local var36 = constantsModule.ApplyDisplayScale(constantsModule.ScreenSideOffset)
 		
@@ -157,7 +157,7 @@ if game:GetEngineFeature("EnableSelfViewToggleApi") then
 			end
 		end
 	end)
-	local _ = socialService.SelfViewHidden:Connect(function() --[[ line: 219 ]]
+	local _ = socialService.SelfViewHidden:Connect(function()
 		-- upvalues: serviceModule (ref), SELFIE_VIEW_ID (ref)
 		if serviceModule:isWindowOpen(SELFIE_VIEW_ID) then
 			serviceModule:toggleWindow(SELFIE_VIEW_ID)

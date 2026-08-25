@@ -11,7 +11,7 @@ local sduiVideoThumbnailModule = require(script.Parent.SduiVideoThumbnail)
 local fIntLuaAppGameTileVideoDwellTimeInSec = require(parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local fIntLuaAppGameTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 
-return function(p0) --[[ line: 39 | named "SduiGameVideoThumbnail" ]]
+return function(p0)
 	-- upvalues: dataHydrationModule (ref), signalsReactModule (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), sduiVideoThumbnailModule (ref), isVideoEligibleForPlayability (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
 	local playabilityStore = dataHydrationModule.Game.getPlayabilityStore(false)
 	local playability = playabilityStore.getPlayability(p0.universeId)
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 39 | named "SduiGameVideoThumbnail" ]]
 		imageComponent = p0.imageComponent,
 		videoPlaybackContext = p0.sduiContext.videoPlaybackContext,
 		isVideoEligible = isVideoEligibleForPlayability(var8, var7, nil) and var9,
-		onPlaybackCandidate = reactModule.useCallback(function() --[[ line: 51 ]]
+		onPlaybackCandidate = reactModule.useCallback(function()
 			-- upvalues: var8 (ref), playabilityStore (ref), p0 (ref), var10 (ref), var11 (ref)
 			if not var8 then
 				playabilityStore.fetchPlayability(p0.universeId)

@@ -1,1 +1,1 @@
-﻿return setmetatable({ isEnabled = false }, { __call = function(_, ...) --[[ line: 3 ]] end })
+﻿return setmetatable({ isEnabled = false }, { __call = function(_, ...) end })

@@ -2,7 +2,7 @@
 local ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE = require(avatarExperienceCommon.Constants).ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE
 local destroyMakeupDescriptionsModule = require(avatarExperienceCommon.Utils.Humanoid.destroyMakeupDescriptions)
 
-return function(value, p0) --[[ line: 17 | named "setMakeupDescriptions" ]]
+return function(value, p0)
 	-- upvalues: destroyMakeupDescriptionsModule (ref), ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE (ref)
 	destroyMakeupDescriptionsModule(value)
 	

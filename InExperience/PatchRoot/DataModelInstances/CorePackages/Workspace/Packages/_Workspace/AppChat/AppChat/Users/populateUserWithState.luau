@@ -6,7 +6,7 @@ local roduxPresenceModule = require(appChat.Http.RoduxPresence)
 local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 local userPresenceUtilsModule = require(script.Parent.userPresenceUtils)
 
-return function(p0, p1, p2) --[[ line: 16 ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagAppChatPresenceStoreMigrationModule (ref), roduxPresenceModule (ref), userPresenceUtilsModule (ref), cryoModule (ref), getUserDisplayName (ref), getThumbnailsForUserIdsModule (ref)
 	local var6 = if not fFlagAppChatPresenceStoreMigrationModule then userPresenceUtilsModule.getUserDisplayPresence(roduxPresenceModule.Selectors.getUserPresenceByUserId(p0, p1.id), p1.id == p0.LocalUserId) else nil
 	

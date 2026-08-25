@@ -21,7 +21,7 @@ local var12 = roduxModule.combineReducers({
 	VirtualEvents = virtualEventsStateModule.installReducer()
 })
 
-return function(p0, p1) --[[ line: 34 | named "withMockProviders" ]]
+return function(p0, p1)
 	-- upvalues: roduxModule (ref), var12 (ref), reactModule (ref), roactRoduxModule (ref), contentProvider (ref), mockContentProvider (ref), localizationModule (ref), robloxAppLocalesModule (ref), foundationProvider (ref), colorMode (ref), appStyleProvider (ref), constants (ref), roactNavigationModule (ref), designTokenProvider (ref), graphQLServerModule (ref), apolloClientModule (ref)
 	local t = {
 		StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
@@ -40,12 +40,12 @@ return function(p0, p1) --[[ line: 34 | named "withMockProviders" ]]
 						}, {
 							NavigationProvider = reactModule.createElement(roactNavigationModule.Provider, {
 								value = {
-									isFocused = function() --[[ line: 63 ]]
+									isFocused = function()
 										return true
 									end,
-									goBack = function() --[[ line: 66 ]] end,
-									addListener = function() --[[ line: 67 ]]
-										return { remove = function() --[[ line: 69 ]] end }
+									goBack = function() end,
+									addListener = function()
+										return { remove = function() end }
 									end
 								}
 							}, {
@@ -69,7 +69,7 @@ return function(p0, p1) --[[ line: 34 | named "withMockProviders" ]]
 						cache = apolloClientModule.InMemoryCache.new({}),
 						link = apolloClientModule.HttpLink.new({
 							uri = "/api",
-							fetch = function(_, p2) --[[ line: 97 ]]
+							fetch = function(_, p2)
 								-- upvalues: var14 (ref)
 								return var14:fetchLocal(p2)
 							end

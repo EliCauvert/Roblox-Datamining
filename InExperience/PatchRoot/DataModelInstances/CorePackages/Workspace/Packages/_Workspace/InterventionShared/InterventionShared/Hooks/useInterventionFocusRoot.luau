@@ -14,11 +14,11 @@ local t = {
 	[Enum.KeyCode.RightBracket] = focusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(p0) --[[ line: 31 | named "getScrollableAncestor" ]]
+local function _(p0)
 	return if p0 == nil then nil elseif p0:IsA("ScrollingFrame") then p0 else p0:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(p1, p2) --[[ line: 44 | named "scrollTo" ]]
+local _ = function(p1, p2)
 	if p1 ~= nil then
 		local var3 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
 		
@@ -35,7 +35,7 @@ local _ = function(p1, p2) --[[ line: 44 | named "scrollTo" ]]
 	end
 end
 
-return function(p3) --[[ line: 73 | named "useInterventionFocusRoot" ]]
+return function(p3)
 	-- upvalues: useFocusedGuiObject (ref), useMemo (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), t (ref)
 	local var4 = useFocusedGuiObject()
 	local var5 = if var4 == nil then nil elseif var4:IsA("ScrollingFrame") then var4 else var4:FindFirstAncestorWhichIsA("ScrollingFrame")
@@ -44,11 +44,11 @@ return function(p3) --[[ line: 73 | named "useInterventionFocusRoot" ]]
 		surfaceIdentifier = p3.surfaceIdentifier,
 		isAutoFocusRoot = p3.isAutoFocusRoot == nil or p3.isAutoFocusRoot,
 		eventMap = t,
-		eventHandlers = useMemo(function() --[[ line: 77 ]]
+		eventHandlers = useMemo(function()
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var5 (ref)
 			local t = {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onPress(function(p4) --[[ line: 80 ]]
+					handler = inputHandlersModule.onPress(function(p4)
 						p4:cancel()
 					end)
 				}
@@ -56,7 +56,7 @@ return function(p3) --[[ line: 73 | named "useInterventionFocusRoot" ]]
 			
 			if var5 then
 				t[focusNavigationEventNameEnum.ScrollDown] = {
-					handler = inputHandlersModule.onRelease(function(_) --[[ line: 88 ]]
+					handler = inputHandlersModule.onRelease(function(_)
 						-- upvalues: var5 (copy)
 						if var5 ~= nil then
 							local var7 = var5.AbsoluteCanvasSize.Y - var5.AbsoluteWindowSize.Y
@@ -71,7 +71,7 @@ return function(p3) --[[ line: 73 | named "useInterventionFocusRoot" ]]
 					end)
 				}
 				t[focusNavigationEventNameEnum.ScrollUp] = {
-					handler = inputHandlersModule.onRelease(function(_) --[[ line: 93 ]]
+					handler = inputHandlersModule.onRelease(function(_)
 						-- upvalues: var5 (copy)
 						if var5 ~= nil then
 							local _ = var5.AbsoluteCanvasSize.Y - var5.AbsoluteWindowSize.Y

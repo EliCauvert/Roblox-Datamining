@@ -14,7 +14,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useMeasurableRef = foundationModule.Hooks.useMeasurableRef
 local _ = { WhyThisAd = "whyThisAd", ReportAd = "reportAd" }
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), useMeasurableRef (ref), guiService (ref), adsInteractivityTelemetryModule (ref), immersiveBrandedAdWhyThisAdDialogModule (ref), immersiveBrandedAdReportAdDialogModule (ref), menu (ref), inputSize (ref), popoverSide (ref)
 	local screenPosition = p0.screenPosition
 	local var8 = useLocalization({
@@ -23,14 +23,14 @@ return function(p0) --[[ line: 34 ]]
 	})
 	local var9, var10 = reactModule.useState(nil)
 	local var11 = useMeasurableRef(screenPosition)
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: guiService (copy), p0 (ref)
-		local menuOpenedConnection = guiService.MenuOpened:Connect(function() --[[ line: 45 ]]
+		local menuOpenedConnection = guiService.MenuOpened:Connect(function()
 			-- upvalues: p0 (copy)
 			p0.onDismiss()
 		end)
 		
-		return function() --[[ line: 49 ]]
+		return function()
 			-- upvalues: menuOpenedConnection (ref)
 			menuOpenedConnection:Disconnect()
 		end
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 34 ]]
 	}) else reactModule.createElement(reactModule.Fragment, nil, {
 		menu = reactModule.createElement(menu, {
 			isOpen = true,
-			items = reactModule.useMemo(function() --[[ line: 54 ]]
+			items = reactModule.useMemo(function()
 				-- upvalues: var8 (ref)
 				return {
 					{
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 34 ]]
 			end, { var8.WhyThisAdText, var8.ReportAdText }),
 			size = inputSize.Small,
 			side = popoverSide.Right,
-			onActivated = reactModule.useCallback(function(p1) --[[ line: 69 ]]
+			onActivated = reactModule.useCallback(function(p1)
 				-- upvalues: adsInteractivityTelemetryModule (copy), var10 (ref)
 				if p1 == "whyThisAd" then
 					adsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("whyThisAd")

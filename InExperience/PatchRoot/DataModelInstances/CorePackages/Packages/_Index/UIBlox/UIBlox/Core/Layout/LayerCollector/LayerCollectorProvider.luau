@@ -3,7 +3,7 @@ local layerCollectorContextModule = require(script.Parent.LayerCollectorContext)
 local guiService = game:GetService("GuiService")
 local layerCollectorProvider = roactModule.PureComponent:extend("LayerCollectorProvider")
 
-function layerCollectorProvider.init(p0) --[[ line: 11 ]]
+function layerCollectorProvider.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.rootRef = roactModule.createRef()
 	p0.state = {
@@ -12,14 +12,14 @@ function layerCollectorProvider.init(p0) --[[ line: 11 ]]
 	}
 end
 
-function layerCollectorProvider.watchLayerCollector(p1, p2) --[[ line: 24 ]]
+function layerCollectorProvider.watchLayerCollector(p1, p2)
 	-- upvalues: guiService (ref)
 	local absoluteSize = p2.AbsoluteSize
 	local vector2 = Vector2.new(0, 0)
 	local vector2_1 = Vector2.new(0, 0)
 	
 	if p2:IsA("ScreenGui") then
-		local ok, status = pcall(function() --[[ line: 30 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p2 (ref)
 			return p2.IgnoreGuiInset
 		end)
@@ -39,7 +39,7 @@ function layerCollectorProvider.watchLayerCollector(p1, p2) --[[ line: 24 ]]
 			right = vector2_1.X
 		}
 	})
-	p1.absoluteSizeConnection = p2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 48 ]]
+	p1.absoluteSizeConnection = p2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 		-- upvalues: absoluteSize (write), p2 (ref), p1 (ref), vector2 (write), vector2_1 (write)
 		absoluteSize = p2.AbsoluteSize
 		p1:setState({
@@ -54,12 +54,12 @@ function layerCollectorProvider.watchLayerCollector(p1, p2) --[[ line: 24 ]]
 	end)
 end
 
-function layerCollectorProvider.didMount(p3) --[[ line: 64 ]]
+function layerCollectorProvider.didMount(p3)
 	local current = p3.rootRef.current
 	local layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
 	
 	if layerCollector == nil then
-		p3.ancestryConnection = current.AncestryChanged:Connect(function() --[[ line: 69 ]]
+		p3.ancestryConnection = current.AncestryChanged:Connect(function()
 			-- upvalues: layerCollector (write), current (ref), p3 (ref)
 			layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
 			
@@ -74,7 +74,7 @@ function layerCollectorProvider.didMount(p3) --[[ line: 64 ]]
 	end
 end
 
-function layerCollectorProvider.render(p4) --[[ line: 82 ]]
+function layerCollectorProvider.render(p4)
 	-- upvalues: roactModule (ref), layerCollectorContextModule (ref)
 	return roactModule.createElement(layerCollectorContextModule.Provider, {
 		value = {

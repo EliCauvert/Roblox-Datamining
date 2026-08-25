@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 23 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local pSLineFrame = {}
 	setmetatable(pSLineFrame, t)
@@ -25,7 +25,7 @@ function t.new(p0) --[[ line: 23 ]]
 	return pSLineFrame
 end
 
-function t:SetZIndex(p1) --[[ line: 53 ]]
+function t:SetZIndex(p1)
 	self._barFrame.ZIndex = p1
 	self._lineFrame.ZIndex = p1 + 1
 	
@@ -35,7 +35,7 @@ function t:SetZIndex(p1) --[[ line: 53 ]]
 	end
 end
 
-function t:PlaceInParent(p2, p3, p4) --[[ line: 62 ]]
+function t:PlaceInParent(p2, p3, p4)
 	self._barFrame.Position = p4
 	self._barFrame.Size = p3
 	self._barFrame.Parent = p2
@@ -44,24 +44,24 @@ function t:PlaceInParent(p2, p3, p4) --[[ line: 62 ]]
 	self._lineFrame.Parent = p2
 end
 
-function t:SetAxisMax(b) --[[ line: 71 ]]
+function t:SetAxisMax(b)
 	self._axisMax = b
 end
 
-function t:SetValues(p5) --[[ line: 75 ]]
+function t:SetValues(p5)
 	self._values = p5
 end
 
-function t:SetAverage(p6) --[[ line: 79 ]]
+function t:SetAverage(p6)
 	self._average = p6
 end
 
-function t:SetTarget(p7) --[[ line: 83 ]]
+function t:SetTarget(p7)
 	self._target = p7
 	self:_moveGraphTarget()
 end
 
-function t:_updateBarCount(p8) --[[ line: 90 ]]
+function t:_updateBarCount(p8)
 	local t = {}
 	local barsCount = #self._bars
 	
@@ -78,7 +78,7 @@ function t:_updateBarCount(p8) --[[ line: 90 ]]
 	self._bars = t
 end
 
-function t:Render() --[[ line: 113 ]]
+function t:Render()
 	local valuesCount = #self._values
 	self:_updateBarCount(valuesCount)
 	
@@ -90,7 +90,7 @@ function t:Render() --[[ line: 113 ]]
 	end
 end
 
-function t:_addGraphTarget() --[[ line: 128 ]]
+function t:_addGraphTarget()
 	-- upvalues: statsUtilsModule (ref)
 	local targetLine = Instance.new("ImageLabel")
 	targetLine.Name = "TargetLine"
@@ -100,7 +100,7 @@ function t:_addGraphTarget() --[[ line: 128 ]]
 	targetLine.Parent = self._lineFrame
 	targetLine.ZIndex = self._lineFrame.ZIndex
 	targetLine.BorderSizePixel = 0
-	targetLine.Changed:connect(function() --[[ line: 140 ]]
+	targetLine.Changed:connect(function()
 		-- upvalues: self (ref)
 		self:_updateTargetLineImageSize()
 	end)
@@ -108,11 +108,11 @@ function t:_addGraphTarget() --[[ line: 128 ]]
 	self:_updateTargetLineImageSize()
 end
 
-function t:_updateTargetLineImageSize() --[[ line: 148 ]]
+function t:_updateTargetLineImageSize()
 	self._targetLine.ImageRectSize = self._targetLine.AbsoluteSize
 end
 
-function t:_addGraphAverage() --[[ line: 152 ]]
+function t:_addGraphAverage()
 	-- upvalues: statsUtilsModule (ref)
 	local averageLine = Instance.new("Frame")
 	averageLine.Name = "AverageLine"
@@ -123,7 +123,7 @@ function t:_addGraphAverage() --[[ line: 152 ]]
 	self._averageLine = averageLine
 end
 
-function t:_moveGraphTarget() --[[ line: 166 ]]
+function t:_moveGraphTarget()
 	-- upvalues: statsUtilsModule (ref)
 	if self._targetLine == nil then
 		return
@@ -131,7 +131,7 @@ function t:_moveGraphTarget() --[[ line: 166 ]]
 	self._targetLine.Position = UDim2.new(0, 0, (self._axisMax - self._target) / self._axisMax, -statsUtilsModule.GraphTargetLineInnerThickness / 2)
 end
 
-function t:_moveGraphAverage() --[[ line: 177 ]]
+function t:_moveGraphAverage()
 	-- upvalues: statsUtilsModule (ref)
 	if self._averageLine == nil then
 		return
@@ -139,7 +139,7 @@ function t:_moveGraphAverage() --[[ line: 177 ]]
 	self._averageLine.Position = UDim2.new(0, 0, (self._axisMax - math.min(self._average, self._axisMax)) / self._axisMax, -statsUtilsModule.GraphAverageLineTotalThickness / 2)
 end
 
-function t:_makeNthBar(p9) --[[ line: 192 ]]
+function t:_makeNthBar(p9)
 	local frame = Instance.new("Frame")
 	frame.Name = string.format("Bar_%d", p9 - 1)
 	frame.Parent = self._barFrame
@@ -149,7 +149,7 @@ function t:_makeNthBar(p9) --[[ line: 192 ]]
 	return frame
 end
 
-function t:_updateBar(p10, p11, p12) --[[ line: 203 ]]
+function t:_updateBar(p10, p11, p12)
 	-- upvalues: statsUtilsModule (ref)
 	local var9 = self._bars[p10]
 	local maxValue = math.max(0, math.min(p11, self._axisMax))

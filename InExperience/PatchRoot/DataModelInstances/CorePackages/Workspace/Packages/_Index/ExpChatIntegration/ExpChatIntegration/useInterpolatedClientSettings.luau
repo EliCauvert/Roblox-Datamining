@@ -5,7 +5,7 @@ local _ = require(script.Parent.ChatPlatformContext)
 local useChatPlatformModule = require(script.Parent.useChatPlatform)
 local fFlagExpChatAddressFrame0Flash = require(parent.ChatUIPrimitives).Flags.FFlagExpChatAddressFrame0Flash
 
-return function(value) --[[ line: 14 | named "useInterpolatedClientSettings" ]]
+return function(value)
 	-- upvalues: useChatPlatformModule (ref), signalsReactModule (ref), reactModule (ref), fFlagExpChatAddressFrame0Flash (ref)
 	local var3 = signalsReactModule.useSignalState(useChatPlatformModule().getInterpolators)
 	local getBackgroundColor = var3.getBackgroundColor
@@ -15,7 +15,7 @@ return function(value) --[[ line: 14 | named "useInterpolatedClientSettings" ]]
 		BackgroundColor = if not fFlagExpChatAddressFrame0Flash then getBackgroundColor(value) else nil,
 		BackgroundTransparency = getBackgroundTransparency(value)
 	})
-	reactModule.useEffect(function() --[[ line: 26 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), getBackgroundColor (ref), value (ref), getBackgroundTransparency (ref)
 		var5({
 			BackgroundColor3 = getBackgroundColor(value),

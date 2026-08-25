@@ -20,24 +20,24 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-local function _(p0, p1, p2) --[[ line: 46 | named "getStepState" ]]
+local function _(p0, p1, p2)
 	-- upvalues: stepperStepStateModule (ref)
 	return if p2 then stepperStepStateModule.Current elseif p0 < p1 then stepperStepStateModule.Complete else stepperStepStateModule.Incomplete
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 56 | named "Stepper" ]]
+return reactModule.memo(reactModule.forwardRef(function(p3, p4)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), dashModule (ref), fillBehaviorModule (ref), reactModule (ref), useAnimatedHighlightModule (ref), stepperStepStateModule (ref), stepItemModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref)
 	local var14 = withDefaultsModule(p3, t)
 	local var15 = useTokensModule()
 	local activeStepId = var14.activeStepId or dashModule.get(var14, { "steps", 1, "id" })
-	local steps = dashModule.findIndex(var14.steps, function(p5) --[[ line: 61 ]]
+	local steps = dashModule.findIndex(var14.steps, function(p5)
 		-- upvalues: activeStepId (ref)
 		return p5.id == activeStepId
 	end) or 1
 	local var18 = var14.fillBehavior == fillBehaviorModule.Fill
 	local var19 = reactModule.useRef(nil)
 	local var20 = reactModule.useRef({})
-	local var21 = reactModule.useMemo(function() --[[ line: 70 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), var14 (ref), reactModule (copy)
 		local current = var20.current
 		
@@ -50,7 +50,7 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 56 | 
 	end, { var14.steps })
 	local var22 = useAnimatedHighlightModule(activeStepId, p4 or var19, var21, var14.size, var14.fillBehavior)
 	local var23, var24 = reactModule.useBinding(0)
-	local var25 = reactModule.useCallback(function(p6) --[[ line: 85 ]]
+	local var25 = reactModule.useCallback(function(p6)
 		-- upvalues: var24 (ref)
 		var24(p6.AbsoluteSize.X)
 	end, {})
@@ -72,7 +72,7 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 56 | 
 	return reactModule.createElement(viewModule, withCommonPropsModule(var14, {
 		tag = "size-full-0 auto-y no-clip",
 		sizeConstraint = if not var18 then {
-			MaxSize = var23:map(function(p7) --[[ line: 114 ]]
+			MaxSize = var23:map(function(p7)
 				return Vector2.new(p7, 1e999)
 			end)
 		} else nil
@@ -110,11 +110,11 @@ return reactModule.memo(reactModule.forwardRef(function(p3, p4) --[[ line: 56 | 
 			LayoutOrder = 0,
 			tag = "anchor-bottom-left bg-system-contrast",
 			ZIndex = var14.ZIndex + 1,
-			Size = var22.highlightWidth:map(function(p8) --[[ line: 154 ]]
+			Size = var22.highlightWidth:map(function(p8)
 				-- upvalues: standard (ref)
 				return UDim2.fromOffset(p8, standard)
 			end),
-			Position = reactModule.joinBindings({ var22.highlightPosition, var22.activeItemHeight }):map(function(p9) --[[ line: 158 ]]
+			Position = reactModule.joinBindings({ var22.highlightPosition, var22.activeItemHeight }):map(function(p9)
 				return UDim2.fromOffset(p9[1], p9[2])
 			end),
 			testId = `{var14.testId}--animated-border`

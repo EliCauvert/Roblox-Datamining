@@ -26,12 +26,12 @@ local mainWindow_1 = constantsModule.Font.MainWindow
 local slimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
 local textService = slimDevConsole2 and game:GetService("TextService") or nil
 
-local function _(p0, p1) --[[ line: 37 | named "getDescriptionWidth" ]]
+local function _(p0, p1)
 	-- upvalues: learnMoreWidth (ref), cellPadding (ref)
 	return if p1 == nil then p0 - cellPadding * 2 else p0 - learnMoreWidth - cellPadding * 2
 end
 
-local _ = function(p2, p3) --[[ line: 43 | named "getDescriptionHeight" ]]
+local _ = function(p2, p3)
 	-- upvalues: textService (ref), mainWindow (ref), mainWindow_1 (ref), entryFrameHeight (ref)
 	return math.max(textService:GetTextSize(p2, mainWindow, mainWindow_1, Vector2.new(p3, 1e999)).Y, entryFrameHeight)
 end
@@ -70,7 +70,7 @@ for i_2, v_2 in ipairs(t) do
 end
 local debugVisualizationsChart = roactModule.Component:extend("DebugVisualizationsChart")
 
-local function constructHeader(p4, p5) --[[ line: 106 ]]
+local function constructHeader(p4, p5)
 	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref)
 	local t_2 = {}
 	
@@ -104,7 +104,7 @@ local function constructHeader(p4, p5) --[[ line: 106 ]]
 	}, t_2)
 end
 
-local function constructEntry(p6, p7, p8, p9, p10, p11, p12, p13) --[[ line: 148 ]]
+local function constructEntry(p6, p7, p8, p9, p10, p11, p12, p13)
 	-- upvalues: t_3 (ref), roactModule (ref), lineWidth (ref), lineColor (ref), cellLabelModule (ref), t_2 (ref), t (ref), slimDevConsole2 (ref), dropDownModule (ref), cellPadding (ref), entryFrameHeight (ref), cellCheckboxModule (ref), learnMoreWidth (ref), bannerButtonModule (ref), boxButtonModule (ref)
 	local name = p6.name
 	local settingInfo = p6.settingInfo
@@ -141,7 +141,7 @@ local function constructEntry(p6, p7, p8, p9, p10, p11, p12, p13) --[[ line: 148
 				position = UDim2.new(0, 0, 0, 4),
 				dropDownList = settingInfo.DropDownList,
 				selectedIndex = var24,
-				onSelection = function(p14) --[[ line: 193 ]]
+				onSelection = function(p14)
 					-- upvalues: p6 (ref), var22 (ref), enumItems (ref)
 					p6.valueChangeCallback(var22, enumItems[p14])
 				end
@@ -206,7 +206,7 @@ local function constructEntry(p6, p7, p8, p9, p10, p11, p12, p13) --[[ line: 148
 	})
 end
 
-function populateEntries(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24) --[[ line: 269 ]]
+function populateEntries(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24)
 	-- upvalues: roactModule (ref), entryFrameHeight (ref), slimDevConsole2 (ref), learnMoreWidth (ref), cellPadding (ref), textService (ref), mainWindow (ref), mainWindow_1 (ref), constructEntry (ref), lineColor (ref)
 	local t = {
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -300,30 +300,30 @@ function populateEntries(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24) --[[ 
 	return t, var30
 end
 
-function debugVisualizationsChart.init(p25, p26) --[[ line: 393 ]]
+function debugVisualizationsChart.init(p25, p26)
 	-- upvalues: linkingProtocol (ref), slimDevConsole2 (ref), roactModule (ref)
 	local currentData = p26.DebugVisualizationsData:getCurrentData()
 	
-	function p25.getOnButtonPress(p27) --[[ line: 396 ]]
+	function p25.getOnButtonPress(p27)
 		-- upvalues: p25 (ref)
-		return function(_, _) --[[ line: 397 ]]
+		return function(_, _)
 			-- upvalues: p25 (copy), p27 (ref)
 			p25:setState({ expandedEntry = p25.state.expandedEntry ~= p27 and p27 })
 		end
 	end
 	
-	function p25.getLearnMorePress(p28, p29) --[[ line: 404 ]]
+	function p25.getLearnMorePress(p28, p29)
 		-- upvalues: linkingProtocol (copy), slimDevConsole2 (copy)
-		return function(_, _) --[[ line: 405 ]]
+		return function(_, _)
 			-- upvalues: linkingProtocol (copy), slimDevConsole2 (copy), p29 (ref), p28 (ref)
 			linkingProtocol.default:openURL(if slimDevConsole2 then p29 else "https://create.roblox.com/docs/reference/engine/classes/PhysicsSettings#" .. p28)
 		end
 	end
 	
-	function p25.onSortChanged(p30) --[[ line: 413 ]]
+	function p25.onSortChanged(p30)
 		-- upvalues: p26 (ref), p25 (ref)
 		if p30 == p26.DebugVisualizationsData:getSortType() then
-			p25:setState(function(p31) --[[ line: 416 ]]
+			p25:setState(function(p31)
 				return { reverseSort = not p31.reverseSort }
 			end)
 			
@@ -333,7 +333,7 @@ function debugVisualizationsChart.init(p25, p26) --[[ line: 393 ]]
 		p25:setState({ reverseSort = false })
 	end
 	
-	function p25.onCanvasPosChanged() --[[ line: 430 ]]
+	function p25.onCanvasPosChanged()
 		-- upvalues: p25 (ref)
 		p25:setState({ canvasPos = p25.scrollingRef.current.CanvasPosition })
 	end
@@ -346,7 +346,7 @@ function debugVisualizationsChart.init(p25, p26) --[[ line: 393 ]]
 	}
 end
 
-function debugVisualizationsChart.didUpdate(p32) --[[ line: 446 ]]
+function debugVisualizationsChart.didUpdate(p32)
 	if p32.scrollingRef.current then
 		local absoluteSize = p32.scrollingRef.current.AbsoluteSize
 		
@@ -356,8 +356,8 @@ function debugVisualizationsChart.didUpdate(p32) --[[ line: 446 ]]
 	end
 end
 
-function debugVisualizationsChart.didMount(p33) --[[ line: 458 ]]
-	p33.visualizationsUpdated = p33.props.DebugVisualizationsData:Signal():Connect(function(p34) --[[ line: 459 ]]
+function debugVisualizationsChart.didMount(p33)
+	p33.visualizationsUpdated = p33.props.DebugVisualizationsData:Signal():Connect(function(p34)
 		-- upvalues: p33 (ref)
 		p33:setState({ visualizationEntries = p34 })
 	end)
@@ -371,14 +371,14 @@ function debugVisualizationsChart.didMount(p33) --[[ line: 458 ]]
 	end
 end
 
-function debugVisualizationsChart.willUnmount(p35) --[[ line: 476 ]]
+function debugVisualizationsChart.willUnmount(p35)
 	p35.visualizationsUpdated:Disconnect()
 	p35.visualizationsUpdated = nil
 	p35.canvasPosConnector:Disconnect()
 	p35.canvasPosConnector = nil
 end
 
-function debugVisualizationsChart.render(p36) --[[ line: 483 ]]
+function debugVisualizationsChart.render(p36)
 	-- upvalues: minFrameWidth (ref), roactModule (ref), constructHeader (ref), headerFrameHeight (ref), constantsModule (ref)
 	local absScrollSize = p36.state.absScrollSize
 	local x = absScrollSize and math.max(absScrollSize.X, minFrameWidth) or minFrameWidth

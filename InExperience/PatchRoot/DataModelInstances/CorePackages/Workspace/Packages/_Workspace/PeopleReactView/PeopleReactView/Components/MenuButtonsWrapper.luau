@@ -7,13 +7,13 @@ local view = foundationModule.View
 local useSignalState = require(parent.SignalsReact).useSignalState
 local menuButtonsModule = require(menuButtons:WaitForChild("MenuButtons"))
 
-return function() --[[ line: 27 ]]
+return function()
 	-- upvalues: reactModule (ref), peopleServiceModule (ref), useSignalState (ref), view (ref), menuButtonsModule (ref)
-	local var5 = reactModule.useMemo(function() --[[ line: 28 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("SettingsHubService")
 	end, {})
-	local var6 = reactModule.useMemo(function() --[[ line: 34 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: var5 (ref)
 		local var7 = var5.hubRef()
 		
@@ -25,9 +25,9 @@ return function() --[[ line: 27 ]]
 			onLeaveGame = var6.onLeaveGame,
 			onRespawn = var6.onRespawn,
 			onResume = var6.onResume,
-			setAddMenuKeyBindings = function() --[[ line: 54 ]] end,
-			setRemoveMenuKeyBindings = function() --[[ line: 55 ]] end,
-			getVisibility = function() --[[ line: 56 ]]
+			setAddMenuKeyBindings = function() end,
+			setRemoveMenuKeyBindings = function() end,
+			getVisibility = function()
 				return true
 			end,
 			getCanRespawn = var6.getCanRespawn

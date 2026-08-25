@@ -14,7 +14,7 @@ local profilesModule = require(profilePlatform.Rodux.Profiles)
 local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 
-return function() --[[ line: 25 ]]
+return function()
 	-- upvalues: roduxModule (ref), gamesModule (ref), itemDetailsModule (ref), bundleDetailsModule (ref), assetDetailsModule (ref), fFlagAddVideoToCommunityProfile (ref), assetDataModule (ref), myRoduxNetworkingModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), profilePlatformFixPresenceReducer (ref), var10 (ref), presenceModule (ref), profilesModule (ref)
 	return roduxModule.combineReducers({
 		Games = gamesModule.installReducer(),

@@ -16,7 +16,7 @@ local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubsc
 local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
 local _ = require(robloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
 
-return function(p0) --[[ line: 40 | named "startRobloxSubscriptionPurchaseFromUpsell" ]]
+return function(p0)
 	-- upvalues: robloxSubscriptionStoreModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), getAppFeaturePolicies (ref), robloxSubscriptionHeadlessOverlayControllerModule (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), performRobloxSubscriptionPurchaseModule (ref)
 	local var12 = robloxSubscriptionStoreModule.get()
 	local entryContext = p0.entryContext
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 40 | named "startRobloxSubscriptionPurchaseFromUp
 	if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 		logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalOpen")
 	end
-	createPaymentSessionModule(entryContext):andThen(function(p1) --[[ line: 76 ]]
+	createPaymentSessionModule(entryContext):andThen(function(p1)
 		-- upvalues: var12 (ref), performRobloxSubscriptionPurchaseModule (copy)
 		var12.setPaymentSessionId(p1)
 		performRobloxSubscriptionPurchaseModule()

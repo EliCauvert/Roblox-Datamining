@@ -21,15 +21,15 @@ local t_3 = {
 
 return {
 	CtaType = t,
-	logOneByTwoTileActivated = function() --[[ line: 41 ]]
+	logOneByTwoTileActivated = function()
 		-- upvalues: telemetryService (ref), t_1 (ref)
 		telemetryService:LogCounter(t_1, {}, 1)
 	end,
-	logOneByTwoTileCtaActivated = function(p0) --[[ line: 45 ]]
+	logOneByTwoTileCtaActivated = function(p0)
 		-- upvalues: telemetryService (ref), t_2 (ref)
 		telemetryService:LogCounter(t_2, { customFields = { CtaType = p0 } }, 1)
 	end,
-	logOneByTwoTileGameJoinInitiated = function() --[[ line: 49 ]]
+	logOneByTwoTileGameJoinInitiated = function()
 		-- upvalues: telemetryService (ref), t_3 (ref)
 		telemetryService:LogCounter(t_3, {}, 1)
 	end

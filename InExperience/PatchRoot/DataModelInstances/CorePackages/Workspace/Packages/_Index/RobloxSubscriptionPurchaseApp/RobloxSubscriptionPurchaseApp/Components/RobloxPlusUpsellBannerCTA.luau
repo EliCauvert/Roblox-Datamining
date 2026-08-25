@@ -7,7 +7,7 @@ local badge = foundationModule.Badge
 local badgeVariant = foundationModule.Enums.BadgeVariant
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 
-return function(p0) --[[ line: 25 | named "RobloxPlusUpsellBannerCTA" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), badge (ref), badgeVariant (ref), text (ref)
 	local var2 = useLocalization({
 		getFreeTrialText = "Feature.RobloxSubscription.Label.FreeTrialText",
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 25 | named "RobloxPlusUpsellBannerCTA" ]]
 		SubscribeText = reactModule.createElement(text, {
 			tag = "auto-xy text-body-small content-default",
 			RichText = true,
-			Text = "<u>" .. reactModule.useCallback(function() --[[ line: 32 ]]
+			Text = "<u>" .. reactModule.useCallback(function()
 				-- upvalues: p0 (ref), var2 (ref)
 				return if p0.productInfo.isFreeTrial then var2.getFreeTrialText else var2.subscribe
 			end, {

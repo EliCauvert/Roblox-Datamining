@@ -6,7 +6,7 @@ local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Parent.Pa
 local t = { Name = "MovementTooltipEvent" }
 local var5 = nil
 
-function t.StartEvent() --[[ line: 27 ]]
+function t.StartEvent()
 	-- upvalues: roactModule (ref), VRFTUXToolTipsModule (ref), renderWithCoreScriptsStyleProviderModule (ref), var5 (write), coreGuiService (ref)
 	var5 = roactModule.mount(renderWithCoreScriptsStyleProviderModule({
 		roactModule.createElement(VRFTUXToolTipsModule, {
@@ -31,7 +31,7 @@ function t.StartEvent() --[[ line: 27 ]]
 	}), coreGuiService:FindFirstChild("FTUXMenu"), "MovementTooltip")
 end
 
-function t.StopEvent() --[[ line: 58 ]]
+function t.StopEvent()
 	-- upvalues: var5 (write), roactModule (ref)
 	if var5 then
 		roactModule.unmount(var5)

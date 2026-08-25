@@ -62,12 +62,12 @@ baseMenu.defaultProps = {
 	position = UDim2.new(0, 0, 0, 0)
 }
 
-function baseMenu.init(p0) --[[ line: 98 ]]
+function baseMenu.init(p0)
 	-- upvalues: roactGamepadModule (ref)
 	p0.gamepadRefs = p0.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
 end
 
-function baseMenu.renderFixedHeightMenu(_, p1, p2, p3) --[[ line: 102 ]]
+function baseMenu.renderFixedHeightMenu(_, p1, p2, p3)
 	-- upvalues: setDefaultModule (ref), roactModule (ref), imageSetComponentModule (ref), dropshadow178 (ref), verticalScrollViewModule (ref)
 	local fixedListHeight = p1.fixedListHeight
 	local var19 = setDefaultModule(p1.borderCornerRadius, 8)
@@ -122,7 +122,7 @@ function baseMenu.renderFixedHeightMenu(_, p1, p2, p3) --[[ line: 102 ]]
 	})
 end
 
-function baseMenu.render(p4) --[[ line: 157 ]]
+function baseMenu.render(p4)
 	-- upvalues: cryoModule (ref), roactModule (ref), cursorKindModule (ref), withSelectionCursorProviderModule (ref), roactGamepadModule (ref), cellModule (ref), withStyleModule (ref), setDefaultModule (ref), imageSetComponentModule (ref), dropshadow178 (ref), roundedFrameModule (ref)
 	local headerHeight = p4.props.headerHeight
 	local var21 = p4.props.elementHeight * 7.5 + headerHeight
@@ -175,7 +175,7 @@ function baseMenu.render(p4) --[[ line: 157 ]]
 			cursorKind = var28,
 			selectionOrder = p4.props.selectionOrder
 		})
-		t["cell " .. i] = withSelectionCursorProviderModule(function(p5) --[[ line: 212 ]]
+		t["cell " .. i] = withSelectionCursorProviderModule(function(p5)
 			-- upvalues: roactModule (copy), p4 (ref), roactGamepadModule (copy), i (ref), v (ref), var28 (write), cellModule (copy), join (write)
 			return roactModule.createElement(if p4.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
 				Size = UDim2.new(p4.props.width, UDim.new(0, p4.props.elementHeight)),
@@ -197,7 +197,7 @@ function baseMenu.render(p4) --[[ line: 157 ]]
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 	
-	return withStyleModule(function(p6) --[[ line: 245 ]]
+	return withStyleModule(function(p6)
 		-- upvalues: setDefaultModule (copy), p4 (ref), var23 (write), t (ref), roactModule (copy), var22 (write), imageSetComponentModule (copy), dropshadow178 (copy), roundedFrameModule (copy), headerHeight (ref)
 		local theme = p6.Theme
 		local backgroundUIDefault = theme.BackgroundUIDefault
@@ -272,7 +272,7 @@ function baseMenu.render(p4) --[[ line: 157 ]]
 	end)
 end
 
-return function(p7) --[[ line: 341 | named "BaseMenuFn" ]]
+return function(p7)
 	-- upvalues: useStyleModule (ref), cryoModule (ref), styleDefaultsModule (ref), reactModule (ref), baseMenu (ref)
 	local var34 = p7
 	

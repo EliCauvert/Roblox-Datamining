@@ -85,14 +85,14 @@ local t_2 = {
 		startToken = "LINK_START",
 		endToken = "LINK_END",
 		textStartOffset = 1,
-		mapToText = function(p0) --[[ line: 103 ]]
+		mapToText = function(p0)
 			return if p0.capture then p0.capture[1] else ""
 		end
 	}
 }
 local list_7 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
 
-local function tokenizeTextSpan(p1, p2, p3, p4) --[[ line: 117 ]]
+local function tokenizeTextSpan(p1, p2, p3, p4)
 	-- upvalues: t (ref), t_1 (ref), list_7 (ref), utilsModule (ref), constantsModule (ref), insert (ref), postProcessTokensModule (ref)
 	local var19, var21, var22, substring, var27, var28, characterContext, matchIndex_2
 	local var15 = 0
@@ -170,7 +170,7 @@ local function tokenizeTextSpan(p1, p2, p3, p4) --[[ line: 117 ]]
 	return postProcessTokensModule(t_2)
 end
 
-return function(p5, p6) --[[ line: 219 | named "tokenize" ]]
+return function(p5, p6)
 	-- upvalues: tokenizeTextSpan (ref), t_2 (ref), insert (ref)
 	local t = {}
 	

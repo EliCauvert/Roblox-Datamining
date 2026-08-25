@@ -9,7 +9,7 @@ local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local constants = UIBloxModule.App.Style.Constants
 local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
 
-local function dumpInstanceTree(p0, p1) --[[ line: 17 ]]
+local function dumpInstanceTree(p0, p1)
 	-- upvalues: dumpInstanceTree (ref)
 	p1 = p1 or ""
 	
@@ -26,7 +26,7 @@ local function dumpInstanceTree(p0, p1) --[[ line: 17 ]]
 	end
 end
 
-return function(p2, p3, p4, p5, p6) --[[ line: 44 ]]
+return function(p2, p3, p4, p5, p6)
 	-- upvalues: roduxModule (ref), roactModule (ref), roactRoduxModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), httpService (ref), coreGuiService (ref), dumpInstanceTree (ref)
 	local text = "Test-" .. httpService:GenerateGUID(false)
 	local var9 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
@@ -44,7 +44,7 @@ return function(p2, p3, p4, p5, p6) --[[ line: 44 ]]
 		})
 	}), coreGuiService, text)
 	local var10 = ("game.CoreGui.%s.*[ClassName=Folder].*"):format(text)
-	local ok, status = pcall(function() --[[ line: 77 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p2 (ref), var10 (ref)
 		p2(var10)
 	end)

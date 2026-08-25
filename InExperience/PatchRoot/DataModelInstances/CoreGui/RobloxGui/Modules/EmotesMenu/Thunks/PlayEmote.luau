@@ -14,12 +14,12 @@ local hideErrorModule = require(actions.HideError)
 local showErrorModule = require(actions.ShowError)
 local var10 = analyticsModule.new():withEventStream(eventStream.new(rbxAnalyticsService))
 
-local function handlePlayFailure(p0, p1, p2, p3) --[[ line: 29 ]]
+local function handlePlayFailure(p0, p1, p2, p3)
 	-- upvalues: var10 (ref), constantsModule (ref), robloxTranslatorModule (ref), showErrorModule (ref), hideErrorModule (ref), hideMenuModule (ref)
 	if p1 then
 		var10:onEmoteFailed(p2, p3, p1)
 		p0:dispatch(showErrorModule(robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.ErrorMessages[p1], p0:getState().locale)))
-		delay(constantsModule.ErrorDisplayTimeSeconds, function() --[[ line: 38 ]]
+		delay(constantsModule.ErrorDisplayTimeSeconds, function()
 			-- upvalues: p0 (ref), hideErrorModule (copy)
 			p0:dispatch(hideErrorModule())
 		end)
@@ -27,17 +27,17 @@ local function handlePlayFailure(p0, p1, p2, p3) --[[ line: 29 ]]
 	p0:dispatch(hideMenuModule())
 end
 
-return function(_, p4, p5, _, _) --[[ line: 46 | named "PlayEmote" ]]
+return function(_, p4, p5, _, _)
 	-- upvalues: localPlayer (ref), maybeSendEmoteFailureAnalyticsFromPlayerModule (ref), handlePlayFailure (ref), hideMenuModule (ref), var10 (ref), constantsModule (ref)
-	return function(p6) --[[ line: 47 ]]
+	return function(p6)
 		-- upvalues: localPlayer (copy), maybeSendEmoteFailureAnalyticsFromPlayerModule (copy), handlePlayFailure (copy), p4 (ref), p5 (ref), hideMenuModule (copy), var10 (copy), constantsModule (copy)
-		if maybeSendEmoteFailureAnalyticsFromPlayerModule(localPlayer, function(p7) --[[ line: 49 ]]
+		if maybeSendEmoteFailureAnalyticsFromPlayerModule(localPlayer, function(p7)
 			-- upvalues: handlePlayFailure (copy), p6 (ref), p4 (copy), p5 (copy)
 			handlePlayFailure(p6, p7, p4, p5)
 		end) then return end
 		p6:dispatch(hideMenuModule())
 		local humanoid = localPlayer.Character:FindFirstChildOfClass("Humanoid")
-		local ok, status, _ = pcall(function() --[[ line: 59 ]]
+		local ok, status, _ = pcall(function()
 			-- upvalues: humanoid (ref), p5 (copy)
 			return humanoid:PlayEmoteAndGetAnimTrackById(p5)
 		end)

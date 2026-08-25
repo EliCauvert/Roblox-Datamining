@@ -1,3 +1,3 @@
-﻿return function() --[[ line: 6 | named "useDictationEligibility" ]]
+﻿return function()
 	return true
 end

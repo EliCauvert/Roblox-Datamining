@@ -24,12 +24,12 @@ genericTextLabel.defaultProps = {
 	maxSize = Vector2.new(10000, 10000)
 }
 
-function genericTextLabel.render(p0) --[[ line: 48 ]]
+function genericTextLabel.render(p0)
 	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), cryoModule (ref), roactModule (ref), UIBloxConfigModule (ref)
 	local text = p0.props.Text
 	local fluidSizing = p0.props.fluidSizing
 	
-	return withStyleModule(function(p1) --[[ line: 52 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: p0 (ref), text (ref), getTextSizeModule (copy), cryoModule (copy), roactModule (copy), fluidSizing (ref), UIBloxConfigModule (copy)
 		local fontStyle = p0.props.fontStyle
 		local colorStyle = p0.props.colorStyle

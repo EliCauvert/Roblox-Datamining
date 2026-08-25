@@ -8,7 +8,7 @@ local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJs
 local useProfileScrollContextModule = require(profilePlatform.Contexts.ProfileScrollContext.useProfileScrollContext)
 local coverPhotoModule = require(profilePlatform.Components.CoverPhoto.CoverPhoto)
 
-return function(p0) --[[ line: 22 | named "CoverPhotoContainer" ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileFormFactorModule (ref), useProfileScrollContextModule (ref), constants (ref), reactModule (ref), coverPhotoModule (ref)
 	local coverPhoto = useProfileJsonComponentModule(enumsModule.Components.CoverPhoto) or {}
 	local var8 = useProfileScrollContextModule()

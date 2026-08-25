@@ -6,9 +6,9 @@ local images = UIBloxModule.App.ImageSet.Images
 local checkbox = roactModule.PureComponent:extend("Checkbox")
 checkbox.defaultProps = { activated = false }
 
-function checkbox.render(p0) --[[ line: 17 ]]
+function checkbox.render(p0)
 	-- upvalues: UIBloxModule (ref), roactModule (ref), imageSetLabel (ref), images (ref)
-	return UIBloxModule.Style.withStyle(function(p1) --[[ line: 18 ]]
+	return UIBloxModule.Style.withStyle(function(p1)
 		-- upvalues: roactModule (copy), imageSetLabel (copy), p0 (ref), images (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

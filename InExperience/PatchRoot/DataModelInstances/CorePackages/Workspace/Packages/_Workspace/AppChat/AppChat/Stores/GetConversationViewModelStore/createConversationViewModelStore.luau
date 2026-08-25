@@ -15,11 +15,11 @@ local localization = require(parent.RobloxAppLocales).Localization
 local messageType = enumsModule.MessageType
 local messageVisibility = enumsModule.MessageVisibility
 
-local function _(p0) --[[ line: 28 | named "getFirstCardAltText" ]]
+local function _(p0)
 	return if not (type(p0) ~= "table" or type(p0[1]) ~= "table") then if type(p0[1].alt_text) == "string" then p0[1].alt_text else nil else nil
 end
 
-local _ = function(p1) --[[ line: 49 | named "getContentFirstLine" ]]
+local _ = function(p1)
 	if type(p1) == "string" then
 		local var10 = p1:split("\n")
 		
@@ -28,16 +28,16 @@ local _ = function(p1) --[[ line: 49 | named "getContentFirstLine" ]]
 	return ""
 end
 
-local _ = function() --[[ line: 57 | named "getHiddenMessageText" ]]
+local _ = function()
 	-- upvalues: localization (ref), localizationService (ref)
 	return localization.new(localizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable")
 end
 
-local _ = function(p2) --[[ line: 61 | named "getUnixTime" ]]
+local _ = function(p2)
 	return if p2 == nil then nil elseif typeof(p2) == "DateTime" then p2.UnixTimestamp elseif type(p2) == "table" and p2.GetUnixTimestamp ~= nil then p2:GetUnixTimestamp() else nil
 end
 
-local function getSubtitle(p3, p4) --[[ line: 74 ]]
+local function getSubtitle(p3, p4)
 	-- upvalues: messageVisibility (ref), localization (ref), localizationService (ref), messageType (ref)
 	local cards
 	if p4 == nil then
@@ -67,17 +67,17 @@ local function getSubtitle(p3, p4) --[[ line: 74 ]]
 	end
 end
 
-local _ = function(p5) --[[ line: 88 | named "getTitle" ]]
+local _ = function(p5)
 	-- upvalues: getConversationTitleModule (ref)
 	return getConversationTitleModule(p5) or ""
 end
 
-local _ = function(p6) --[[ line: 92 | named "getLocatorTitle" ]]
+local _ = function(p6)
 	-- upvalues: getConversationTitleModule (ref)
 	return p6.title or (getConversationTitleModule(p6) or "")
 end
 
-local _ = function(p7, p8, p9, p10) --[[ line: 98 | named "getCachedGetter" ]]
+local _ = function(p7, p8, p9, p10)
 	-- upvalues: signalsModule (ref)
 	local var15 = p7[p8]
 	
@@ -98,14 +98,14 @@ local _ = function(p7, p8, p9, p10) --[[ line: 98 | named "getCachedGetter" ]]
 	end
 end
 
-return function(p11, p12) --[[ line: 120 | named "createConversationViewModelStore" ]]
+return function(p11, p12)
 	-- upvalues: getConversationTitleModule (ref), signalsModule (ref), getSubtitle (ref), useIsUserPendingModule (ref), shouldShowOSAForConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), domLocatorsModule (ref)
 	local t = {}
 	
 	return {
-		getTitle = function(p13) --[[ line: 126 ]]
+		getTitle = function(p13)
 			-- upvalues: t (ref), p11 (ref), getConversationTitleModule (copy), signalsModule (copy)
-			local var19 = function(p14) --[[ line: 127 ]]
+			local var19 = function(p14)
 				-- upvalues: p11 (copy), p13 (ref), getConversationTitleModule (copy)
 				local conversation = p11.getConversation(p13, p14)
 				
@@ -130,9 +130,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p13] = var20
 			end
 		end,
-		getSubtitle = function(p15) --[[ line: 133 ]]
+		getSubtitle = function(p15)
 			-- upvalues: t (ref), p11 (ref), p12 (ref), getSubtitle (copy), signalsModule (copy)
-			local var23 = function(p16) --[[ line: 134 ]]
+			local var23 = function(p16)
 				-- upvalues: p11 (copy), p15 (ref), p12 (copy), getSubtitle (copy)
 				local conversation = p11.getConversation(p15, p16)
 				
@@ -157,9 +157,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p15] = var24
 			end
 		end,
-		getIsSubtitlePending = function(p17) --[[ line: 147 ]]
+		getIsSubtitlePending = function(p17)
 			-- upvalues: t (ref), p11 (ref), useIsUserPendingModule (copy), signalsModule (copy)
-			local var27 = function(p18) --[[ line: 148 ]]
+			local var27 = function(p18)
 				-- upvalues: p11 (copy), p17 (ref), useIsUserPendingModule (copy)
 				local conversation = p11.getConversation(p17, p18)
 				
@@ -184,9 +184,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p17] = var28
 			end
 		end,
-		getHasUnreadMessages = function(p19) --[[ line: 154 ]]
+		getHasUnreadMessages = function(p19)
 			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var31 = function(p20) --[[ line: 155 ]]
+			local var31 = function(p20)
 				-- upvalues: p11 (copy), p19 (ref)
 				local conversation = p11.getConversation(p19, p20)
 				
@@ -211,9 +211,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p19] = var32
 			end
 		end,
-		getHasGroupUp = function(p21) --[[ line: 161 ]]
+		getHasGroupUp = function(p21)
 			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var35 = function(p22) --[[ line: 162 ]]
+			local var35 = function(p22)
 				-- upvalues: p11 (copy), p21 (ref)
 				local conversation = p11.getConversation(p21, p22)
 				
@@ -238,9 +238,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p21] = var36
 			end
 		end,
-		getShouldShowOSA = function(p23) --[[ line: 168 ]]
+		getShouldShowOSA = function(p23)
 			-- upvalues: t (ref), p11 (ref), shouldShowOSAForConversationModule (copy), signalsModule (copy)
-			local var39 = function(p24) --[[ line: 169 ]]
+			local var39 = function(p24)
 				-- upvalues: p11 (copy), p23 (ref), shouldShowOSAForConversationModule (copy)
 				local conversation = p11.getConversation(p23, p24)
 				
@@ -265,9 +265,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p23] = var40
 			end
 		end,
-		getShouldShowU13ChatOptIn = function(p25) --[[ line: 175 ]]
+		getShouldShowU13ChatOptIn = function(p25)
 			-- upvalues: t (ref), p11 (ref), shouldShowU13ChatOptInForConversationModule (copy), signalsModule (copy)
-			local var43 = function(p26) --[[ line: 176 ]]
+			local var43 = function(p26)
 				-- upvalues: p11 (copy), p25 (ref), shouldShowU13ChatOptInForConversationModule (copy)
 				local conversation = p11.getConversation(p25, p26)
 				
@@ -292,9 +292,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p25] = var44
 			end
 		end,
-		getConversationType = function(p27) --[[ line: 182 ]]
+		getConversationType = function(p27)
 			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var47 = function(p28) --[[ line: 183 ]]
+			local var47 = function(p28)
 				-- upvalues: p11 (copy), p27 (ref)
 				local conversation = p11.getConversation(p27, p28)
 				
@@ -319,9 +319,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p27] = var48
 			end
 		end,
-		getUnixTime = function(p29) --[[ line: 189 ]]
+		getUnixTime = function(p29)
 			-- upvalues: t (ref), p11 (ref), signalsModule (copy)
-			local var51 = function(p30) --[[ line: 190 ]]
+			local var51 = function(p30)
 				-- upvalues: p11 (copy), p29 (ref)
 				local conversation = p11.getConversation(p29, p30)
 				
@@ -351,9 +351,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p29] = var52
 			end
 		end,
-		getTestId = function(p31) --[[ line: 196 ]]
+		getTestId = function(p31)
 			-- upvalues: t (ref), p11 (ref), domLocatorsModule (copy), getConversationTitleModule (copy), signalsModule (copy)
-			local var55 = function(p32) --[[ line: 197 ]]
+			local var55 = function(p32)
 				-- upvalues: p11 (copy), p31 (ref), domLocatorsModule (copy), getConversationTitleModule (copy)
 				local conversation = p11.getConversation(p31, p32)
 				
@@ -378,9 +378,9 @@ return function(p11, p12) --[[ line: 120 | named "createConversationViewModelSto
 				t[p31] = var56
 			end
 		end,
-		getLocatorTitle = function(p33) --[[ line: 206 ]]
+		getLocatorTitle = function(p33)
 			-- upvalues: t (ref), p11 (ref), getConversationTitleModule (copy), signalsModule (copy)
-			local var59 = function(p34) --[[ line: 207 ]]
+			local var59 = function(p34)
 				-- upvalues: p11 (copy), p33 (ref), getConversationTitleModule (copy)
 				local title
 				local conversation = p11.getConversation(p33, p34)

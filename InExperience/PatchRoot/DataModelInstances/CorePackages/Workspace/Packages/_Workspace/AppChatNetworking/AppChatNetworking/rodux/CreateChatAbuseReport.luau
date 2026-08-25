@@ -11,7 +11,7 @@ local t = {
 	ABUSE_TYPE_OTHER = 2
 }
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p0, p1) --[[ line: 18 ]]
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(p0, p1)
 	-- upvalues: CHAT_PLATFORM_BASE_URLModule (ref), t (ref)
 	return p0(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("create-chat-abuse-report"):body({
 		comment = if string.len(p1.comment) > 0 then p1.comment else " ",

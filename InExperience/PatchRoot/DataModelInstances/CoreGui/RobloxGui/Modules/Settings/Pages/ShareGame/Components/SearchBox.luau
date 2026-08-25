@@ -13,12 +13,12 @@ local clearFrame = shareGameIconsModule:GetFrame("clear")
 local themeModule = require(robloxGui.Modules.Settings.Theme)
 local var12 = require(robloxGui.Modules.Settings.Pages.ShareGame.getTranslator)()
 
-function searchBox.init(p0) --[[ line: 40 ]]
+function searchBox.init(p0)
 	p0.state = { isTextWritten = false }
 	p0.searchField = nil
 end
 
-function searchBox.render(p1) --[[ line: 47 ]]
+function searchBox.render(p1)
 	-- upvalues: roactModule (ref), imagePath (ref), searchBorderFrame (ref), rect (ref), imagePath (ref), searchSmallFrame (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), var12 (ref), themeModule (ref), imagePath (ref), clearFrame (ref)
 	local anchorPoint = p1.props.anchorPoint
 	local onTextBoxFocusLost = p1.props.onTextBoxFocusLost
@@ -69,7 +69,7 @@ function searchBox.render(p1) --[[ line: 47 ]]
 			TextSize = themeModule.textSize(16),
 			Font = themeModule.font(Enum.Font.SourceSans),
 			ZIndex = zIndex,
-			[roactModule.Ref] = function(p2) --[[ line: 102 ]]
+			[roactModule.Ref] = function(p2)
 				-- upvalues: p1 (ref), searchFieldRef (ref)
 				p1.searchField = p2
 				
@@ -77,13 +77,13 @@ function searchBox.render(p1) --[[ line: 47 ]]
 					searchFieldRef(p2)
 				end
 			end,
-			[roactModule.Event.Focused] = function() --[[ line: 111 ]]
+			[roactModule.Event.Focused] = function()
 				-- upvalues: onTextBoxFocused (ref)
 				if onTextBoxFocused then
 					onTextBoxFocused()
 				end
 			end,
-			[roactModule.Event.FocusLost] = function(p3) --[[ line: 116 ]]
+			[roactModule.Event.FocusLost] = function(p3)
 				-- upvalues: onTextBoxFocusLost (ref)
 				if onTextBoxFocusLost then
 					onTextBoxFocusLost(p3.Text)
@@ -100,7 +100,7 @@ function searchBox.render(p1) --[[ line: 47 ]]
 			ImageRectSize = clearFrame.size,
 			ZIndex = zIndex,
 			Visible = p1.state.isTextWritten,
-			[roactModule.Event.Activated] = function() --[[ line: 132 ]]
+			[roactModule.Event.Activated] = function()
 				-- upvalues: p1 (ref)
 				if p1.searchField then
 					p1.searchField.Text = ""
@@ -111,12 +111,12 @@ function searchBox.render(p1) --[[ line: 47 ]]
 	})
 end
 
-function searchBox.didMount(p4) --[[ line: 145 ]]
+function searchBox.didMount(p4)
 	local searchField = p4.searchField
 	local onTextChanged = p4.props.onTextChanged
 	
 	if searchField then
-		p4.textBoxChangedConnection = searchField:GetPropertyChangedSignal("Text"):Connect(function() --[[ line: 150 ]]
+		p4.textBoxChangedConnection = searchField:GetPropertyChangedSignal("Text"):Connect(function()
 			-- upvalues: searchField (ref), p4 (ref), onTextChanged (ref)
 			local text = searchField.Text
 			p4:setState({ isTextWritten = text:len() > 0 })
@@ -125,7 +125,7 @@ function searchBox.didMount(p4) --[[ line: 145 ]]
 	end
 end
 
-function searchBox.willUnmount(p5) --[[ line: 160 ]]
+function searchBox.willUnmount(p5)
 	if p5.textBoxChangedConnection then
 		p5.textBoxChangedConnection:Disconnect()
 	end

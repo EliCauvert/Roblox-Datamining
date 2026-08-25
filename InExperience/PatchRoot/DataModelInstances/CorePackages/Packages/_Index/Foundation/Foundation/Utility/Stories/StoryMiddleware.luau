@@ -10,21 +10,21 @@ local tokenOverridesStoreModule = require(script.Parent.TokenOverridesStore)
 local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
 local useStyleSheet = require(foundation.Providers.Style.StyleSheetContext).useStyleSheet
 
-local function useTokenOverrides() --[[ line: 20 ]]
+local function useTokenOverrides()
 	-- upvalues: tokenOverridesStoreModule (ref), reactModule (ref)
 	local var12 = tokenOverridesStoreModule()
-	local var13, var14 = reactModule.useState(function() --[[ line: 22 ]]
+	local var13, var14 = reactModule.useState(function()
 		-- upvalues: var12 (ref)
 		return var12.getTokenOverrides()
 	end)
-	reactModule.useEffect(function() --[[ line: 26 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var12 (ref), var14 (ref)
-		local var15 = var12.subscribe(function(p0) --[[ line: 27 ]]
+		local var15 = var12.subscribe(function(p0)
 			-- upvalues: var14 (copy)
 			var14(p0)
 		end)
 		
-		return function() --[[ line: 30 ]]
+		return function()
 			-- upvalues: var15 (ref)
 			var15()
 		end
@@ -33,14 +33,14 @@ local function useTokenOverrides() --[[ line: 20 ]]
 	return var13
 end
 
-local function StyleLinkPortal(p1) --[[ line: 50 ]]
+local function StyleLinkPortal(p1)
 	-- upvalues: useStyleSheet (ref), reactRobloxModule (ref), reactModule (ref)
 	local var16 = useStyleSheet()
 	
 	return if var16 and p1.overlay then reactRobloxModule.createPortal(reactModule.createElement("StyleLink", { StyleSheet = var16 }), p1.overlay) else nil
 end
 
-local function useCreateOverlay(p2) --[[ line: 65 ]]
+local function useCreateOverlay(p2)
 	-- upvalues: typesModule (ref), reactModule (ref)
 	local var17 = typesModule.toFlipbookStoryProps(p2)
 	local var18 = if var17 then var17.widget else p2.focus
@@ -50,12 +50,12 @@ local function useCreateOverlay(p2) --[[ line: 65 ]]
 	if var20.current.Parent ~= var18 then
 		var20.current.Parent = var18
 	end
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref)
 		var20.current.Size = UDim2.fromScale(1, 1)
 		var20.current.BackgroundTransparency = 1
 		
-		return function() --[[ line: 83 ]]
+		return function()
 			-- upvalues: var20 (copy)
 			var20.current:Destroy()
 		end
@@ -64,9 +64,9 @@ local function useCreateOverlay(p2) --[[ line: 65 ]]
 	return if isStorybookEmbed then nil else var20.current
 end
 
-return function(p3) --[[ line: 91 | named "StoryMiddleware" ]]
+return function(p3)
 	-- upvalues: useCreateOverlay (ref), colorModeModule (ref), useTokenOverrides (ref), typesModule (ref), deviceModule (ref), reactModule (ref), foundationModule (ref), isPluginSecurityModule (ref), StyleLinkPortal (ref)
-	return function(p4) --[[ line: 93 ]]
+	return function(p4)
 		-- upvalues: useCreateOverlay (copy), colorModeModule (copy), useTokenOverrides (copy), typesModule (copy), deviceModule (copy), reactModule (copy), foundationModule (copy), isPluginSecurityModule (copy), p3 (ref), StyleLinkPortal (copy)
 		local var21 = useCreateOverlay(p4)
 		local theme = colorModeModule[p4.theme]

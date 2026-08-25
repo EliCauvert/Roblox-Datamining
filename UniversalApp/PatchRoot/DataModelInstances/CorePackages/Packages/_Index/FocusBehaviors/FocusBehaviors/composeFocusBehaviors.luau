@@ -1,10 +1,10 @@
 ﻿local _ = require(script.Parent.Parent.FocusNavigation)
 
-return function(...) --[[ line: 5 | named "composeFocusBehaviors" ]]
+return function(...)
 	local list = { ... }
 	
 	return {
-		onDescendantFocusChanged = function(p0) --[[ line: 8 ]]
+		onDescendantFocusChanged = function(p0)
 			-- upvalues: list (ref)
 			for i, v in list do
 				if v.onDescendantFocusChanged then
@@ -12,7 +12,7 @@ return function(...) --[[ line: 5 | named "composeFocusBehaviors" ]]
 				end
 			end
 		end,
-		getTargets = function() --[[ line: 15 ]]
+		getTargets = function()
 			-- upvalues: list (ref)
 			local t = {}
 			

@@ -38,7 +38,7 @@ educationalModal.validateProps = tModule.strictInterface({
 	onConfirm = tModule.callback
 })
 
-local function ContentItem(p0) --[[ line: 69 ]]
+local function ContentItem(p0)
 	-- upvalues: roactModule (ref), label (ref), getIconSizeModule (ref), iconSizeModule (ref), genericTextLabelModule (ref)
 	local vector2 = Vector2.new(16, 16)
 	local isSystemMenuIcon = p0.isSystemMenuIcon or false
@@ -100,42 +100,42 @@ local function ContentItem(p0) --[[ line: 69 ]]
 	})
 end
 
-function educationalModal.init(p1) --[[ line: 134 ]]
+function educationalModal.init(p1)
 	-- upvalues: roactModule (ref)
 	p1.state = { shouldNotShowAgain = false }
 	local var14, var15 = roactModule.createBinding(Vector2.new(0, 0))
 	p1.contentSize = var14
 	p1.changeContentSize = var15
 	
-	function p1.toggleDoNotShow() --[[ line: 140 ]]
+	function p1.toggleDoNotShow()
 		-- upvalues: p1 (ref)
-		p1:setState(function(p2) --[[ line: 141 ]]
+		p1:setState(function(p2)
 			return { shouldNotShowAgain = not p2.shouldNotShowAgain }
 		end)
 	end
 	
-	function p1.onDismiss() --[[ line: 148 ]]
+	function p1.onDismiss()
 		-- upvalues: p1 (ref)
 		p1.props.onDismiss(p1.state.shouldNotShowAgain)
 	end
 	
-	function p1.onCancel() --[[ line: 151 ]]
+	function p1.onCancel()
 		-- upvalues: p1 (ref)
 		p1.props.onCancel(p1.state.shouldNotShowAgain)
 	end
 	
-	function p1.onConfirm() --[[ line: 154 ]]
+	function p1.onConfirm()
 		-- upvalues: p1 (ref)
 		p1.props.onConfirm(p1.state.shouldNotShowAgain)
 	end
 end
 
-function educationalModal.render(p3) --[[ line: 159 ]]
+function educationalModal.render(p3)
 	-- upvalues: withStyleModule (ref), roactModule (ref), ContentItem (ref), checkbox (ref), partialPageModalModule (ref), buttonTypeModule (ref), fitFrameVertical (ref)
 	local props = p3.props
 	local hasDoNotShow = props.hasDoNotShow
 	
-	return withStyleModule(function(p4) --[[ line: 163 ]]
+	return withStyleModule(function(p4)
 		-- upvalues: props (ref), roactModule (copy), ContentItem (copy), hasDoNotShow (ref), checkbox (copy), p3 (ref), partialPageModalModule (copy), buttonTypeModule (copy), fitFrameVertical (copy)
 		local var16 = 0
 		local t = {}
@@ -213,7 +213,7 @@ function educationalModal.render(p3) --[[ line: 159 ]]
 				width = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 28),
 				margin = { top = 36, bottom = 36 },
-				[roactModule.Change.AbsoluteSize] = function(p5) --[[ line: 245 ]]
+				[roactModule.Change.AbsoluteSize] = function(p5)
 					-- upvalues: p3 (copy)
 					p3.changeContentSize(p5.AbsoluteSize)
 				end

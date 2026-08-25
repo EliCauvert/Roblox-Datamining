@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local fFlagAXItemCardComponentsMemo = require(parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
 
-local function CornerSlot(p0) --[[ line: 17 ]]
+local function CornerSlot(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -15,7 +15,7 @@ local function CornerSlot(p0) --[[ line: 17 ]]
 	}, p0.children)
 end
 
-local function ItemCardHeaderCornersOverlay(p1) --[[ line: 36 ]]
+local function ItemCardHeaderCornersOverlay(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), CornerSlot (ref)
 	local small = useTokens().Gap.Small
 	

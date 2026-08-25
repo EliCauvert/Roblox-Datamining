@@ -7,7 +7,7 @@ local createTextOverlayNodeModule = require(momentsCommon.Media.Nodes.createText
 local createStickerOverlayNodeModule = require(momentsCommon.Media.Nodes.createStickerOverlayNode)
 local getFFlagMomentsStickerButtonModule = require(momentsCommon.Flags.GetFFlagMomentsStickerButton)
 
-return function() --[[ line: 28 | named "createDefaultMediaNodeRegistry" ]]
+return function()
 	-- upvalues: mediaNodeRegistryModule (ref), createVideoNodeModule (ref), createMusicNodeModule (ref), createScreenshotNodeModule (ref), createTextOverlayNodeModule (ref), getFFlagMomentsStickerButtonModule (ref), createStickerOverlayNodeModule (ref)
 	local var8 = mediaNodeRegistryModule()
 	var8.register(createVideoNodeModule)

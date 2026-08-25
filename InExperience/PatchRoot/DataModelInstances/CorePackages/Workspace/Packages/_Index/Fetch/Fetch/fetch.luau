@@ -4,7 +4,7 @@ local promiseModule = require(parent.Promise)
 local response = require(script.Parent.Response).Response
 local request = require(script.Parent.Request).Request
 
-local function _(p0) --[[ line: 34 | named "parseResponse" ]]
+local function _(p0)
 	-- upvalues: response (ref)
 	return response.new(p0.Body, {
 		status = p0.StatusCode,
@@ -13,13 +13,13 @@ local function _(p0) --[[ line: 34 | named "parseResponse" ]]
 	})
 end
 
-return function(p1) --[[ line: 44 | named "buildFetch" ]]
+return function(p1)
 	-- upvalues: promiseModule (ref), request (ref), error (ref), response (ref)
-	return function(p2, p3) --[[ line: 45 | named "fetch" ]]
+	return function(p2, p3)
 		-- upvalues: promiseModule (copy), request (copy), error (copy), p1 (ref), response (copy)
-		return promiseModule.new(function(p4, p5) --[[ line: 46 ]]
+		return promiseModule.new(function(p4, p5)
 			-- upvalues: request (copy), p2 (ref), p3 (ref), error (copy), p1 (copy), response (copy)
-			local ok, status = pcall(function() --[[ line: 47 ]]
+			local ok, status = pcall(function()
 				-- upvalues: request (copy), p2 (copy), p3 (copy)
 				return request.new(p2, p3)
 			end)
@@ -31,7 +31,7 @@ return function(p1) --[[ line: 44 | named "buildFetch" ]]
 					Body = status.body,
 					Headers = status.headers.headerList,
 					CachePolicy = status.cache
-				}):Start(function(p6, p7) --[[ line: 66 ]]
+				}):Start(function(p6, p7)
 					-- upvalues: status (ref), p5 (ref), error (copy), response (copy), p4 (ref)
 					if p6 then
 						p4(response.new(p7.Body, {

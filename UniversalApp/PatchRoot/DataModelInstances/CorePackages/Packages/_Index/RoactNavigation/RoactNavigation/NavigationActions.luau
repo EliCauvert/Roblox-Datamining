@@ -10,24 +10,24 @@ local t = {
 	SetParams = var4
 }
 setmetatable(t, {
-	__index = function(_, p0) --[[ line: 24 ]]
+	__index = function(_, p0)
 		error(("%q is not a valid member of NavigationActions"):format(tostring(p0)), 2)
 	end
 })
 
-function t.back(p1) --[[ line: 30 ]]
+function t.back(p1)
 	-- upvalues: var1 (ref)
 	p1 = p1 or {}
 	
 	return { type = var1, key = p1.key, immediate = p1.immediate }
 end
 
-function t.init(p2) --[[ line: 40 ]]
+function t.init(p2)
 	-- upvalues: var2 (ref)
 	return { type = var2, params = (p2 or {}).params }
 end
 
-function t.navigate(p3) --[[ line: 49 ]]
+function t.navigate(p3)
 	-- upvalues: var3 (ref)
 	p3 = p3 or {}
 	
@@ -40,7 +40,7 @@ function t.navigate(p3) --[[ line: 49 ]]
 	}
 end
 
-function t.setParams(value) --[[ line: 61 ]]
+function t.setParams(value)
 	-- upvalues: var4 (ref)
 	local value_1 = value or {}
 	

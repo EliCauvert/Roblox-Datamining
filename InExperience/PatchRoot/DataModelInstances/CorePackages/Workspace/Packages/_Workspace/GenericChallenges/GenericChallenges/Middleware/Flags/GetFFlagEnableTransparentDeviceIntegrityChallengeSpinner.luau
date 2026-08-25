@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableTransparentDeviceIntegrityChallengeSpinner", false)
 
-return function() --[[ line: 2 ]]
+return function()
 	return game:GetFastFlag("EnableTransparentDeviceIntegrityChallengeSpinner")
 end

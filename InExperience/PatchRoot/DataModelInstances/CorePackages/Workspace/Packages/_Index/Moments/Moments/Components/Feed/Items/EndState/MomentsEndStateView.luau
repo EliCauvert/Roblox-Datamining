@@ -27,11 +27,11 @@ local t_1 = {
 	description = "Feature.Moments.Label.FeedEndBody"
 }
 
-local function _(p0, p1) --[[ line: 54 | named "resolveLocalized" ]]
+local function _(p0, p1)
 	return if p0 == nil or p0 == "" then p1 else p0
 end
 
-return function(p2) --[[ line: 86 | named "MomentsEndStateView" ]]
+return function(p2)
 	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), useLocalization (ref), t_1 (ref), t (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), button (ref), fillBehavior (ref), inputSize (ref), buttonVariant (ref)
 	local var8 = useTokens()
 	local var9 = useFormFactor() == formFactor.Wide

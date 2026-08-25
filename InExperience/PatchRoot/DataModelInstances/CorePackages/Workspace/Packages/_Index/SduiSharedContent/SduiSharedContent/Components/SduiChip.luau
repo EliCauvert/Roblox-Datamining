@@ -5,7 +5,7 @@ local chip = require(parent.Foundation).Chip
 local fFlagSduiChipAccessoryProps = require(parent.SharedFlags).FFlagSduiChipAccessoryProps
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 62 | named "SduiChip" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagSduiChipAccessoryProps (ref), reactModule (ref), chip (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local layoutOrder = p0.layoutOrder
 	local anchorPoint = p0.anchorPoint

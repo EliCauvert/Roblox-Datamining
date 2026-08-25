@@ -5,7 +5,7 @@ if require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFF
 	local referredPlayerJoin = Instance.new("RemoteEvent")
 	referredPlayerJoin.Name = "ReferredPlayerJoin"
 	referredPlayerJoin.Parent = robloxReplicatedStorageService
-	playersService.PlayerAdded:Connect(function(p0) --[[ line: 16 ]]
+	playersService.PlayerAdded:Connect(function(p0)
 		-- upvalues: playersService (ref), referredPlayerJoin (ref)
 		local joinData = p0:GetJoinData()
 		local referredByPlayerId = joinData and tonumber(joinData.ReferredByPlayerId)

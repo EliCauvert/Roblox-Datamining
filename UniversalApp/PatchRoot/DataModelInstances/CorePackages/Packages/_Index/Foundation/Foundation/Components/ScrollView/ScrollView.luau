@@ -19,7 +19,7 @@ local t = {
 	}
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 62 | named "ScrollView" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useDefaultTagsModule (ref), useStyleTagsModule (ref), reactModule (ref), controlStateModule (ref), viewModule (ref), scrollingFrameModule (ref)
 	local children
 	local var9 = withDefaultsModule(p0, t)
@@ -27,7 +27,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 62 | 
 	local var11, var12 = reactModule.useState(controlStateModule.Initialize)
 	local cloned = table.clone(var9)
 	
-	function cloned.onStateChanged(p2) --[[ line: 74 ]]
+	function cloned.onStateChanged(p2)
 		-- upvalues: var12 (ref), var9 (ref)
 		var12(p2)
 		

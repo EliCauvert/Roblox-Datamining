@@ -6,7 +6,7 @@ local avatarsUnsupportedMessageModule = require(avatarSwitcher.Components.Messag
 local pendingAvatarSwitchMessageModule = require(avatarSwitcher.Components.Messages.PendingAvatarSwitchMessage)
 local outfitsGridContainerModule = require(avatarSwitcher.Components.OutfitsGrid.OutfitsGridContainer)
 
-return function() --[[ line: 17 | named "OutfitsGridWithMessage" ]]
+return function()
 	-- upvalues: reactModule (ref), foundationModule (ref), avatarsUnsupportedMessageModule (ref), pendingAvatarSwitchMessageModule (ref), outfitsGridContainerModule (ref)
 	return reactModule.createElement(foundationModule.View, { tag = "size-full-full col gap-large" }, {
 		AvatarsUnsupportedMessage = reactModule.createElement(avatarsUnsupportedMessageModule, { LayoutOrder = 1 }),

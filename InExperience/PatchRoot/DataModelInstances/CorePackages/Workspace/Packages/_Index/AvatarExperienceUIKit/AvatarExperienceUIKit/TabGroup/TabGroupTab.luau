@@ -16,7 +16,7 @@ local t_1 = {
 }
 local t_2 = { Transparency = 1 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 48 | named "TabGroupTabComponent" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), t (ref), fFlagAXCategoryMenuVisualFixes (ref), getFixedTabHeightModule (ref), t_1 (ref), text (ref), t_2 (ref)
 	local var7 = useTokens()
 	local padding = p0.padding or Vector2.new(var7.Padding.Small, var7.Padding.Medium)

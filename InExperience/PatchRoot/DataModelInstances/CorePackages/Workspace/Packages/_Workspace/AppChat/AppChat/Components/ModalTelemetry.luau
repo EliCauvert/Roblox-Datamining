@@ -10,16 +10,16 @@ local eventIngestWithFormatFunction = defaultTelemetryEventsModule.eventIngestWi
 local cryoModule = require(parent.Cryo)
 local t = {}
 
-local function eventIngestWithModalFormatFunction(p0, p1) --[[ line: 37 ]]
+local function eventIngestWithModalFormatFunction(p0, p1)
 	-- upvalues: cryoModule (ref), eventIngestWithFormatFunction (ref)
-	return eventIngestWithFormatFunction(function(p2, p3) --[[ line: 38 ]]
+	return eventIngestWithFormatFunction(function(p2, p3)
 		-- upvalues: p0 (ref), cryoModule (copy), p1 (ref)
 		return cryoModule.Dictionary.join({ modalSequence = p1 }, p0(p2, p3))
 	end)
 end
 
 t.Events = {
-	modalRenderedWithSequence = function(p4) --[[ line: 48 ]]
+	modalRenderedWithSequence = function(p4)
 		-- upvalues: namedCounterConfigurationAndFormat (ref), eventIngestWithModalFormatFunction (ref), telemetryModule (ref)
 		local t = {}
 		local counterFormat = p4.counterFormat
@@ -38,7 +38,7 @@ t.Events = {
 			backendsList = t
 		})
 	end,
-	modalActionWithSequence = function(p5) --[[ line: 79 ]]
+	modalActionWithSequence = function(p5)
 		-- upvalues: namedCounterConfigurationAndFormat (ref), eventIngestWithModalFormatFunction (ref), telemetryModule (ref)
 		local t = {}
 		local counterFormat = p5.counterFormat
@@ -57,7 +57,7 @@ t.Events = {
 			backendsList = t
 		})
 	end,
-	modalActionResultWithSequence = function(p6) --[[ line: 113 ]]
+	modalActionResultWithSequence = function(p6)
 		-- upvalues: namedCounterConfigurationAndFormat (ref), eventIngestWithModalFormatFunction (ref), telemetryModule (ref)
 		local t = {}
 		local counterFormat = p6.counterFormat

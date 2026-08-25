@@ -8,7 +8,7 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local enableToastNotificationsDeeplinkConfirmationModalHeightFix = game:DefineFastFlag("EnableToastNotificationsDeeplinkConfirmationModalHeightFix", false)
 local robloxTranslatorModule = require(parent.RobloxTranslator)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), enableToastNotificationsDeeplinkConfirmationModalHeightFix (ref), guiService (ref), reactRobloxModule (ref), interactiveAlert (ref), buttonType (ref)
 	local var6, var7 = reactModule.useState(Vector2.new(800, 600))
 	
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 22 ]]
 		BackgroundTransparency = if p0.backgroundTransparency then p0.backgroundTransparency else 0.5,
 		BackgroundColor3 = Color3.new(0, 0, 0),
 		Size = UDim2.new(1, 0, 1, if enableToastNotificationsDeeplinkConfirmationModalHeightFix then guiService.TopbarInset.Height else 0),
-		[reactRobloxModule.Change.AbsoluteSize] = function(p1) --[[ line: 42 ]]
+		[reactRobloxModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: var7 (ref)
 			var7(p1.AbsoluteSize)
 		end,
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 22 ]]
 				buttons = {
 					{
 						props = {
-							onActivated = function() --[[ line: 57 ]]
+							onActivated = function()
 								-- upvalues: p0 (ref)
 								p0.closeCallback(false)
 							end,
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 22 ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ line: 66 ]]
+							onActivated = function()
 								-- upvalues: p0 (ref)
 								p0.closeCallback(true)
 							end,

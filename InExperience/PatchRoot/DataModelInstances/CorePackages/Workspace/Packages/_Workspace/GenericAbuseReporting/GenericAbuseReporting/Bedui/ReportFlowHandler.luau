@@ -39,7 +39,7 @@ local valueToAbuseCategoryModule = require(genericAbuseReporting.Enums.ValueToAb
 local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
 local fFlagGenericAbuseReportingUnifyReportTagsModule = require(genericAbuseReporting.Flags.FFlagGenericAbuseReportingUnifyReportTags)
 
-return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), useBeduiDataModule (ref), useFormDataModule (ref), useRoactService (ref), roactNetworking (ref), useAnalyticsContextModule (ref), useLayerCollector (ref), abuseReportBeduiContextStatus (ref), validateBeduiDataModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), innerContentConfigType (ref), cryoModule (ref), playersService (ref), abuseVectorModule (ref), getReportBodyModule (ref), submitReportV1Module (ref), dashModule (ref), fFlagGenericAbuseReportingUnifyReportTagsModule (ref), fFlagAddThumbnailSelectorReport (ref), getReportTagsModule (ref), submitReportModule (ref), createReportModule (ref), valueToAbuseCategoryModule (ref), abuseCategoryModule (ref), singleStepContainerModule (ref), singleStepInnerContentRendererModule (ref), argCheckModule (ref), buttonVariant (ref), fillBehavior (ref), skeleton (ref), radius (ref), empty (ref), stepperModule (ref)
 	local var25 = useTokens()
 	local var26, var27 = reactModule.useState({})
@@ -51,11 +51,11 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 	local isReportSubmitted = var30.isReportSubmitted
 	local setIsReportSubmitted = var30.setIsReportSubmitted
 	local var31 = useLayerCollector().absoluteSize.X < 540
-	local var32 = reactModule.useMemo(function() --[[ line: 78 ]]
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref), abuseReportBeduiContextStatus (copy)
 		return if var28 ~= nil then var28.status == abuseReportBeduiContextStatus.Loading else true
 	end, { var28 })
-	local var33 = reactModule.useMemo(function() --[[ line: 82 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: var32 (ref), var28 (ref), validateBeduiDataModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (ref), abuseReportBeduiContextStatus (copy)
 		if var32 or var28 == nil then
 			return true
@@ -81,7 +81,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 		sendAnalyticsEvent,
 		var30
 	})
-	local var34 = reactModule.useCallback(function(p1) --[[ line: 101 ]]
+	local var34 = reactModule.useCallback(function(p1)
 		-- upvalues: innerContentConfigType (copy), formData (ref), var27 (ref), cryoModule (copy), var26 (ref)
 		if p1 == nil then
 			return true
@@ -98,7 +98,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 		end
 		return not var39
 	end, { formData, var26 })
-	local var35 = reactModule.useCallback(function() --[[ line: 120 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: playersService (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (ref), p0 (ref), abuseVectorModule (copy), getReportBodyModule (copy), formData (ref), additionalReportTags (ref), submitReportV1Module (copy), var29 (ref), dashModule (copy), fFlagGenericAbuseReportingUnifyReportTagsModule (copy), fFlagAddThumbnailSelectorReport (copy), getReportTagsModule (copy), submitReportModule (copy), createReportModule (copy), valueToAbuseCategoryModule (copy), abuseCategoryModule (copy)
 		local localPlayer = playersService.LocalPlayer
 		
@@ -117,7 +117,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 				localPlayerUserId = localPlayer.UserId,
 				targetIdStr = p0.targetId,
 				additionalReportTags = additionalReportTags
-			})):andThen(function(_) --[[ line: 142 ]]
+			})):andThen(function(_)
 				-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy), p0 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Submitted,
@@ -127,7 +127,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 				if p0.onSubmit then
 					p0.onSubmit()
 				end
-			end):catch(function(p2) --[[ line: 151 ]]
+			end):catch(function(p2)
 				-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Error,
@@ -147,7 +147,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 				targetId = p0.targetId,
 				custom = p0.custom,
 				additionalReportTags = additionalReportTags
-			})):andThen(function(_) --[[ line: 172 ]]
+			})):andThen(function(_)
 				-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy), p0 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Submitted,
@@ -157,7 +157,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 				if p0.onSubmit then
 					p0.onSubmit()
 				end
-			end):catch(function(p3) --[[ line: 181 ]]
+			end):catch(function(p3)
 				-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
 				sendAnalyticsEvent({
 					eventType = telemetryEventType.Error,
@@ -177,13 +177,13 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 			submitterId = tostring(localPlayer.UserId),
 			targetId = p0.targetId,
 			custom = p0.custom
-		})):andThen(function(_) --[[ line: 203 ]]
+		})):andThen(function(_)
 			-- upvalues: sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Submitted,
 				context = var30
 			})
-		end):catch(function(p4) --[[ line: 209 ]]
+		end):catch(function(p4)
 			-- upvalues: dashModule (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy)
 			sendAnalyticsEvent({
 				eventType = telemetryEventType.Error,
@@ -197,7 +197,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 		formData, playersService.LocalPlayer, p0.abuseVector, p0.targetId,
 		sendAnalyticsEvent, var30
 	})
-	local var36 = reactModule.useMemo(function() --[[ line: 232 ]]
+	local var36 = reactModule.useMemo(function()
 		-- upvalues: var32 (ref), var33 (ref), var28 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (ref), dashModule (copy), var31 (ref), cryoModule (copy), reactModule (copy), singleStepContainerModule (copy), var26 (ref), singleStepInnerContentRendererModule (copy), argCheckModule (copy), isReportSubmitted (ref), var35 (ref), setIsReportSubmitted (ref), var34 (ref), buttonVariant (copy), fillBehavior (copy)
 		if var32 then
 			return {}
@@ -242,7 +242,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 						formDataKeysWithError = var26
 					}) else nil,
 					labels = { continueButton = var41.actionInfo.actionLabel },
-					onStepContinue = function() --[[ line: 295 ]]
+					onStepContinue = function()
 						-- upvalues: argCheckModule (copy), isReportSubmitted (copy), sendAnalyticsEvent (copy), telemetryEventType (copy), var30 (copy), var41 (ref), var35 (copy), setIsReportSubmitted (copy)
 						argCheckModule.assert(isReportSubmitted == false, "Report should only be able to be submitted once")
 						
@@ -260,7 +260,7 @@ return reactModule.memo(function(p0) --[[ line: 62 | named "ReportFlowHandler" ]
 							setIsReportSubmitted(true)
 						end
 					end,
-					validateState = function() --[[ line: 313 ]]
+					validateState = function()
 						-- upvalues: var34 (copy), innerContentConfig (write)
 						return var34(innerContentConfig)
 					end,

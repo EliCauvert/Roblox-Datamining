@@ -5,14 +5,14 @@ local subPages = socialLuaAnalyticsModule.Analytics.Enums.SubPages
 local eventNamesModule = require(script.Parent.EventNames)
 local btnValuesModule = require(script.Parent.BtnValues)
 
-local var3 = function(p0) --[[ line: 10 ]]
+local var3 = function(p0)
 	return p0
 end
 
 local playerProfile = contexts.PlayerProfile
 local peekView = subPages.PeekView
 
-return function(p1) --[[ line: 17 ]]
+return function(p1)
 	-- upvalues: playerProfile (ref), peekView (ref), eventNamesModule (ref), eventTypes (ref), btnValuesModule (ref), var3 (ref)
 	local var4 = if p1 then p1.context else playerProfile
 	local var5 = if p1 then p1.subpage else peekView

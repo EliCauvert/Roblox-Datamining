@@ -19,11 +19,11 @@ healthConnector.validateProps = tModule.strictInterface({
 	updateHealth = tModule.callback
 })
 
-function healthConnector.init(p0) --[[ line: 34 ]]
+function healthConnector.init(p0)
 	p0:setState({ character = nil, humanoid = nil })
 end
 
-function healthConnector.didMount(p1) --[[ line: 41 ]]
+function healthConnector.didMount(p1)
 	-- upvalues: localPlayer (write)
 	local character = localPlayer.Character
 	p1:setState({
@@ -32,21 +32,21 @@ function healthConnector.didMount(p1) --[[ line: 41 ]]
 	})
 end
 
-function healthConnector.render(p2) --[[ line: 54 ]]
+function healthConnector.render(p2)
 	-- upvalues: roactModule (ref), eventConnectionModule (ref), localPlayer (write)
 	local t = {}
 	
 	if p2.state.humanoid then
 		t.HealthChangedConnection = roactModule.createElement(eventConnectionModule, {
 			event = p2.state.humanoid.HealthChanged,
-			callback = function(_) --[[ line: 60 ]]
+			callback = function(_)
 				-- upvalues: p2 (ref)
 				p2.props.updateHealth(p2.state.humanoid.Health, p2.state.humanoid.MaxHealth)
 			end
 		})
 		t.HumanoidDiedConnection = roactModule.createElement(eventConnectionModule, {
 			event = p2.state.humanoid.Died,
-			callback = function() --[[ line: 67 ]]
+			callback = function()
 				-- upvalues: p2 (ref)
 				p2.props.setIsDead(true)
 			end
@@ -54,7 +54,7 @@ function healthConnector.render(p2) --[[ line: 54 ]]
 	elseif p2.state.character then
 		t.ChildAddedConnection = roactModule.createElement(eventConnectionModule, {
 			event = p2.state.character.ChildAdded,
-			callback = function(p3) --[[ line: 74 ]]
+			callback = function(p3)
 				-- upvalues: p2 (ref)
 				if p3:IsA("Humanoid") then
 					p2:setState({ humanoid = p3 })
@@ -64,7 +64,7 @@ function healthConnector.render(p2) --[[ line: 54 ]]
 	end
 	t.CharacterAddedConnection = roactModule.createElement(eventConnectionModule, {
 		event = localPlayer.CharacterAdded,
-		callback = function(p4) --[[ line: 86 ]]
+		callback = function(p4)
 			-- upvalues: p2 (ref), roactModule (copy)
 			p2:setState({
 				humanoid = p4:FindFirstChildOfClass("Humanoid") or roactModule.None,
@@ -75,7 +75,7 @@ function healthConnector.render(p2) --[[ line: 54 ]]
 	})
 	t.CharacterRemovingConnection = roactModule.createElement(eventConnectionModule, {
 		event = localPlayer.CharacterRemoving,
-		callback = function() --[[ line: 97 ]]
+		callback = function()
 			-- upvalues: p2 (ref), roactModule (copy)
 			p2:setState({
 				humanoid = roactModule.None,
@@ -87,7 +87,7 @@ function healthConnector.render(p2) --[[ line: 54 ]]
 	return roactModule.createFragment(t)
 end
 
-function healthConnector.didUpdate(p5, _, p6) --[[ line: 108 ]]
+function healthConnector.didUpdate(p5, _, p6)
 	if p5.state.humanoid == nil then
 		p5.props.updateHealth(0, 0)
 	elseif p5.state.humanoid ~= p6.humanoid then
@@ -103,14 +103,14 @@ function healthConnector.didUpdate(p5, _, p6) --[[ line: 108 ]]
 	end
 end
 
-return if fFlagTopBarSignalizeHealthBar then nil else roactRoduxModule.UNSTABLE_connect2(nil, function(p7) --[[ line: 126 | named "mapDispatchToProps" ]]
+return if fFlagTopBarSignalizeHealthBar then nil else roactRoduxModule.UNSTABLE_connect2(nil, function(p7)
 	-- upvalues: setIsDeadModule (ref), updateHealthModule (ref)
 	return {
-		setIsDead = function(value) --[[ line: 128 ]]
+		setIsDead = function(value)
 			-- upvalues: p7 (ref), setIsDeadModule (copy)
 			return p7(setIsDeadModule(value))
 		end,
-		updateHealth = function(p8, p9) --[[ line: 132 ]]
+		updateHealth = function(p8, p9)
 			-- upvalues: p7 (ref), updateHealthModule (copy)
 			return p7(updateHealthModule(p8, p9))
 		end

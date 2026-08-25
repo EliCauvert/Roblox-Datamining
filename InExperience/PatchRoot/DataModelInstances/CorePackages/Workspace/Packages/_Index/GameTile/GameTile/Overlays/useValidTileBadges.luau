@@ -7,14 +7,14 @@ local getGameTileLayoutDataModule = require(gameTile.getGameTileLayoutData)
 local getValidTileBadgesModule = require(gameTile.Overlays.getValidTileBadges)
 local _ = require(gameTile.GameTileTypes)
 
-return function(p0, p1, p2) --[[ line: 13 | named "useValidTileBadges" ]]
+return function(p0, p1, p2)
 	-- upvalues: useSelector (ref), gameInfosReducer (ref), getGameTileLayoutDataModule (ref), reactModule (ref), getValidTileBadgesModule (ref)
-	local var4 = getGameTileLayoutDataModule(useSelector(function(p3) --[[ line: 18 ]]
+	local var4 = getGameTileLayoutDataModule(useSelector(function(p3)
 		-- upvalues: gameInfosReducer (copy), p0 (ref)
 		return p3.Personalization[gameInfosReducer.key][p0]
 	end), p1)
 	
-	return reactModule.useMemo(function() --[[ line: 25 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: p2 (ref), var4 (ref), getValidTileBadgesModule (copy)
 		local tileBadgesByPosition = nil
 		

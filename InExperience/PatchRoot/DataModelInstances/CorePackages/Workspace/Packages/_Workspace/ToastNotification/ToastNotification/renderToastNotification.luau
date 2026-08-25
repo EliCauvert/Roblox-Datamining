@@ -20,7 +20,7 @@ local securityAlertEventReceiverModule = require(script.Parent.receivers.Securit
 local clientToastNotificationsEnabledEngineFeature = game:GetEngineFeature("ClientToastNotificationsEnabled")
 local getFFlagEnableSecurityAlertToastCallback = require(parent_1.SharedFlags).GetFFlagEnableSecurityAlertToastCallback
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: coreGuiService (ref), clientToastNotificationsEnabledEngineFeature (ref), react (ref), foundationProvider (ref), foundationModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), localizationService (ref), reactFocusNavigationModule (ref), var6 (ref), provider (ref), inGameToastNotificationActionEventReceiverModule (ref), getFFlagEnableSecurityAlertToastCallback (ref), securityAlertEventReceiverModule (ref), toastNotificationWrapperModule (ref), reactRoblox (ref)
 	local toastNotification = Instance.new("Folder")
 	toastNotification.Name = "ToastNotification"

@@ -14,11 +14,11 @@ local apiFetchCountryCodesModule = require(authCommon.Thunks.ApiFetchCountryCode
 local countryCodeSelectorButtonModule = require(authCommon.Components.CountryCodeSelectorButton)
 local countryCodeSelector = roactModule.PureComponent:extend("CountryCodeSelector")
 
-function countryCodeSelector.init(p0) --[[ line: 21 ]]
-	p0.props.fetchCountryCodes(p0.props.networking):catch(function() --[[ line: 22 ]] end)
+function countryCodeSelector.init(p0)
+	p0.props.fetchCountryCodes(p0.props.networking):catch(function() end)
 end
 
-function countryCodeSelector.render(p1) --[[ line: 27 ]]
+function countryCodeSelector.render(p1)
 	-- upvalues: roactModule (ref), listSearchWidgetModule (ref), countryCodeSelectorButtonModule (ref)
 	return roactModule.createElement(listSearchWidgetModule, {
 		Heading = "Authentication.SignUp.Heading.CountryCodeSelector",
@@ -30,12 +30,12 @@ function countryCodeSelector.render(p1) --[[ line: 27 ]]
 	})
 end
 
-countryCodeSelector = roactRoduxModule.connect(if fFlagUseSignalsForCountryCodeList then nil else function(p2) --[[ line: 41 ]]
+countryCodeSelector = roactRoduxModule.connect(if fFlagUseSignalsForCountryCodeList then nil else function(p2)
 	return { countryCodeList = p2.CountryCodeList }
-end, function(p3) --[[ line: 46 ]]
+end, function(p3)
 	-- upvalues: apiFetchCountryCodesModule (ref)
 	return {
-		fetchCountryCodes = function(p4) --[[ line: 48 ]]
+		fetchCountryCodes = function(p4)
 			-- upvalues: p3 (ref), apiFetchCountryCodesModule (copy)
 			return p3(apiFetchCountryCodesModule.Fetch(p4))
 		end
@@ -44,7 +44,7 @@ end)(countryCodeSelector)
 
 if fFlagUseSignalsForCountryCodeList then
 	local var10 = countryCodeSelector
-	countryCodeSelector = reactModule.memo(function(p5) --[[ line: 57 ]]
+	countryCodeSelector = reactModule.memo(function(p5)
 		-- upvalues: useSignalState (ref), getCountryCodeListStoreModule (ref), roactModule (ref), var10 (ref), cryoModule (ref)
 		return roactModule.createElement(var10, cryoModule.Dictionary.union(p5, {
 			countryCodeList = useSignalState(getCountryCodeListStoreModule(false).getCountryCodeList)

@@ -4,7 +4,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
 local lineItemLayoutModule = require(script.Parent.LineItemLayout)
 
-return function(p0) --[[ line: 17 | named "ItemListHeader" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref)
 	local var2 = useDesignTokens()
 	local t = {

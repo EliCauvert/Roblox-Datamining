@@ -3,7 +3,7 @@
 return {
 	default = {
 		UpsellFeatureAccessResponse = {
-			featureAccess = function(p0) --[[ line: 7 ]]
+			featureAccess = function(p0)
 				return {
 					featureName = p0.featureName,
 					access = p0.access,
@@ -13,11 +13,11 @@ return {
 			end
 		},
 		Query = {
-			getFeatureAccess = function(_, p1, p2) --[[ line: 18 ]]
+			getFeatureAccess = function(_, p1, p2)
 				-- upvalues: ampUpsellConnectorModule (ref)
 				return ampUpsellConnectorModule.getFeatureAccessFromFeatureNamesList(p1.featureNames, p2.fetchImpl)
 			end,
-			getUpsellFeatureAccess = function(_, p3, p4) --[[ line: 21 ]]
+			getUpsellFeatureAccess = function(_, p3, p4)
 				-- upvalues: ampUpsellConnectorModule (ref)
 				return ampUpsellConnectorModule.getUpsellFeatureAccessFromFeatureName(p3.featureName, p3.successfulActions, p4.fetchImpl, p3.nameSpace, p3.extraParameters)
 			end

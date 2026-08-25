@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 23 | named "rightPad" ]]
+﻿return function(p0, p1, p2)
 	p2 = p2 or " "
 	local var1 = p1 - p0:len()
 	local var2 = var1 % p2:len()

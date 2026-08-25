@@ -9,7 +9,7 @@ local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTr
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p0, p1, p2, p3) --[[ line: 17 | named "handleReceiveBlock" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), promptStateModule (ref), getTransferRequestByIdRequestModule (ref)
 	local setPromptState = p0.setPromptState
 	local setAmpRecourseActions = p0.setAmpRecourseActions
@@ -19,7 +19,7 @@ return function(p0, p1, p2, p3) --[[ line: 17 | named "handleReceiveBlock" ]]
 	local getSender = p0.getSender
 	local getTransferRequestId = p0.getTransferRequestId
 	
-	local function applyBlockState() --[[ line: 31 ]]
+	local function applyBlockState()
 		-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), p1 (ref), setAmpRecourseActions (ref), p2 (ref), setAmpFeatureCheck (ref), p3 (ref), setTransferRetryOrigin (ref), setPromptState (ref), promptStateModule (copy)
 		logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAmpRecourseRequiredCounter)
 		
@@ -46,13 +46,13 @@ return function(p0, p1, p2, p3) --[[ line: 17 | named "handleReceiveBlock" ]]
 	local var9 = getTransferRequestId(false)
 	
 	if var9 then
-		getTransferRequestByIdRequestModule({ transferRequestId = var9 }, nil, p0.getNetworkImpl()):andThen(function(p4) --[[ line: 60 ]]
+		getTransferRequestByIdRequestModule({ transferRequestId = var9 }, nil, p0.getNetworkImpl()):andThen(function(p4)
 			-- upvalues: setSender (ref), applyBlockState (ref)
 			if p4 and p4.transfer and p4.transfer.sender then
 				setSender(p4.transfer.sender)
 			end
 			applyBlockState()
-		end):catch(function() --[[ line: 66 ]]
+		end):catch(function()
 			-- upvalues: applyBlockState (ref)
 			applyBlockState()
 		end)

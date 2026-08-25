@@ -13,9 +13,9 @@ local useNavigation = require(parent.Navigation).useNavigation
 local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
 local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlagEditProfileFixFocusNavigation)
 
-return function() --[[ line: 18 | named "EditSocialNetworksErrorModal" ]]
+return function()
 	-- upvalues: useNavigationProps (ref), useNavigation (ref), useScreenSize (ref), useLocalization (ref), textKeysModule (ref), constantsModule (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var7 = useNavigationProps(function(_, p0) --[[ line: 19 ]]
+	local var7 = useNavigationProps(function(_, p0)
 		return { errorCode = p0.errorCode }
 	end)
 	local var8 = useNavigation()
@@ -37,7 +37,7 @@ return function() --[[ line: 18 | named "EditSocialNetworksErrorModal" ]]
 		[constantsModule.SocialNetworksErrorCodes.Guilded] = var10.InvalidGuilded
 	})[var7.errorCode]
 	
-	local function onClose() --[[ line: 45 ]]
+	local function onClose()
 		-- upvalues: var8 (ref)
 		var8.goBack()
 	end

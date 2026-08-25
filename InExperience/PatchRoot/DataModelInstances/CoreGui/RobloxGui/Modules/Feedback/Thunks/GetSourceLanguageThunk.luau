@@ -3,11 +3,11 @@ local parent = script.Parent.Parent
 local getExperienceSourceLanguageModule = require(parent.Network.GetExperienceSourceLanguage)
 local setSourceLanguageNameModule = require(parent.Actions.SetSourceLanguageName)
 
-return function() --[[ line: 16 ]]
+return function()
 	-- upvalues: performFetch (ref), getExperienceSourceLanguageModule (ref), setSourceLanguageNameModule (ref)
-	return performFetch.Single("GetExperienceSourceLanguage", function(p0) --[[ line: 17 ]]
+	return performFetch.Single("GetExperienceSourceLanguage", function(p0)
 		-- upvalues: getExperienceSourceLanguageModule (copy), setSourceLanguageNameModule (copy)
-		return getExperienceSourceLanguageModule():andThen(function(p1) --[[ line: 18 ]]
+		return getExperienceSourceLanguageModule():andThen(function(p1)
 			-- upvalues: p0 (ref), setSourceLanguageNameModule (copy)
 			p0:dispatch(setSourceLanguageNameModule(p1))
 		end)

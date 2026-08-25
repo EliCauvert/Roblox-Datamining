@@ -3,21 +3,21 @@ local buildExperience = script:FindFirstAncestor("BuildExperience")
 local reactModule = require(buildExperience.Parent.React)
 local _ = require(buildExperience.Chat.useChatSessionCore)
 
-local function _(p0) --[[ line: 15 | named "getInputPosition" ]]
+local function _(p0)
 	return Vector2.new(p0.Position.X, p0.Position.Y)
 end
 
-local _ = function(p1, p2) --[[ line: 19 | named "isPositionHorizontallyInsideGuiObject" ]]
+local _ = function(p1, p2)
 	local var4 = p1.X - p2.AbsolutePosition.X
 	
 	return var4 >= 0 and var4 <= p2.AbsoluteSize.X
 end
 
-local _ = function(p3) --[[ line: 24 | named "isDownSwipe" ]]
+local _ = function(p3)
 	return p3.Y >= 24 and math.abs(p3.X) < p3.Y
 end
 
-local function didDownSwipeCrossGuiObject(vectorA, vectorB, p4) --[[ line: 28 ]]
+local function didDownSwipeCrossGuiObject(vectorA, vectorB, p4)
 	local var5 = vectorB - vectorA
 	
 	if var5.Y >= 24 and math.abs(var5.X) < var5.Y then
@@ -29,12 +29,12 @@ local function didDownSwipeCrossGuiObject(vectorA, vectorB, p4) --[[ line: 28 ]]
 	return false
 end
 
-return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
+return function(p5, p6)
 	-- upvalues: reactModule (ref), didDownSwipeCrossGuiObject (ref), userInputService (ref)
 	local var6 = reactModule.useRef(nil)
 	local var7 = reactModule.useRef(nil)
 	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useCallback(function() --[[ line: 56 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref), var6 (ref), var7 (ref)
 		if var8.current then
 			var8.current:Disconnect()
@@ -43,7 +43,7 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 		var6.current = nil
 		var7.current = nil
 	end, {})
-	local var10 = reactModule.useCallback(function() --[[ line: 65 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p6 (ref)
 		local var11 = if p6 then p6.current else nil
 		
@@ -51,9 +51,9 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 			var11.releaseFocus()
 		end
 	end, { p6 })
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var6 (ref), p5 (ref), didDownSwipeCrossGuiObject (copy), var9 (ref), var10 (ref), userInputService (copy), p6 (ref), var8 (ref)
-		local function _(p7) --[[ line: 73 | named "maybeReleaseFocus" ]]
+		local function _(p7)
 			-- upvalues: var7 (copy), var6 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
 			local current = var7.current
 			
@@ -71,7 +71,7 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 			return true
 		end
 		
-		local _ = function(p8) --[[ line: 91 | named "handleInputChanged" ]]
+		local _ = function(p8)
 			-- upvalues: var7 (copy), var6 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
 			local var14
 			local current = var7.current
@@ -95,7 +95,7 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 			end
 		end
 		
-		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p9) --[[ line: 102 ]]
+		local touchStartedConnection = userInputService.TouchStarted:Connect(function(p9)
 			-- upvalues: var9 (copy), p5 (copy), p6 (copy), var6 (copy), var7 (copy), var8 (copy), didDownSwipeCrossGuiObject (copy), var10 (copy)
 			var9()
 			local current = p5.current
@@ -107,7 +107,7 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 			if (var16 >= 0 and var16 <= current.AbsoluteSize.X) and current.AbsolutePosition.Y + current.AbsoluteSize.Y >= vector2.Y then
 				var6.current = p9
 				var7.current = vector2
-				var8.current = p9.Changed:Connect(function() --[[ line: 121 ]]
+				var8.current = p9.Changed:Connect(function()
 					-- upvalues: p9 (ref), var7 (copy), var6 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
 					local var17
 					local current = var7.current
@@ -134,7 +134,7 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 				return
 			end
 		end)
-		local touchEndedConnection = userInputService.TouchEnded:Connect(function(p10) --[[ line: 126 ]]
+		local touchEndedConnection = userInputService.TouchEnded:Connect(function(p10)
 			-- upvalues: var6 (copy), var7 (copy), p5 (copy), didDownSwipeCrossGuiObject (copy), var9 (copy), var10 (copy)
 			if var6.current == p10 then
 				local var18
@@ -159,7 +159,7 @@ return function(p5, p6) --[[ line: 51 | named "useReleaseFocusOnDownSwipe" ]]
 			end
 		end)
 		
-		return function() --[[ line: 134 ]]
+		return function()
 			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), var9 (copy)
 			touchStartedConnection:Disconnect()
 			touchEndedConnection:Disconnect()

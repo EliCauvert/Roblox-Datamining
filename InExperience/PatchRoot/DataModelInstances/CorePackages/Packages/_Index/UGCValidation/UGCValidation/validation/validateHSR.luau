@@ -3,7 +3,7 @@ local analyticsModule = require(parent.Analytics)
 local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
 local _ = require(parent.util.Types)
 
-return function(p0, p1) --[[ line: 8 | named "validateHSR" ]]
+return function(p0, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), analyticsModule (ref)
 	local currentTime = tick()
 	

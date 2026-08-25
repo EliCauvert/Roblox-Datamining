@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.AnalyticsTypes)
 
-return function(_) --[[ line: 3 ]]
+return function(_)
 	return { SessionIdUpdated = require(script.SessionIdUpdated) }
 end

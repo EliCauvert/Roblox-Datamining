@@ -1,6 +1,6 @@
 ﻿local appStorageUtilitiesModule = require(script:FindFirstAncestor("AuthCommon").Utils.AppStorageUtilities)
 
-return function(p0) --[[ line: 4 ]]
+return function(p0)
 	-- upvalues: appStorageUtilitiesModule (ref)
 	local previousAccountsList = appStorageUtilitiesModule.getPreviousAccountsList()
 	

@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 5 | named "reverse" ]]
+﻿return function(p0)
 	local t = {}
 	local p0Count = #p0
 	local var2 = p0Count + 1

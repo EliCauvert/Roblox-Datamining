@@ -2,9 +2,9 @@
 local analyticsSetupModule = require(script.Parent.AnalyticsSetup)
 local _ = require(script.Parent.RelationshipTypes)
 
-return function(p0, p1, p2) --[[ line: 14 | named "useUserRelationshipModalAnalytics" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), analyticsSetupModule (ref)
-	return reactModule.useMemo(function() --[[ line: 19 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: analyticsSetupModule (copy), p0 (ref), p2 (ref)
 		return analyticsSetupModule({
 			infoForAllEvents = { relationshipType = p0, targetUserId = p2 }

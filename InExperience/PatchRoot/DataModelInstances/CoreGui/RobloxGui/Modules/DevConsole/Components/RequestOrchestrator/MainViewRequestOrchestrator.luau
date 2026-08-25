@@ -32,7 +32,7 @@ local t = {
 	CacheHit = { requestOrchestratorDataModule.recordCacheHit }
 }
 
-local function makeLabel(p0, p1) --[[ line: 37 ]]
+local function makeLabel(p0, p1)
 	-- upvalues: roactModule (ref), color (ref), mono (ref)
 	return roactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
@@ -47,7 +47,7 @@ local function makeLabel(p0, p1) --[[ line: 37 ]]
 	})
 end
 
-local function _(value) --[[ line: 51 | named "cloneSet" ]]
+local function _(value)
 	local t = {}
 	
 	for i, v in pairs(value) do
@@ -58,18 +58,18 @@ end
 
 local mainViewRequestOrchestrator = roactModule.Component:extend("MainViewRequestOrchestrator")
 
-function mainViewRequestOrchestrator.init(p2) --[[ line: 61 ]]
+function mainViewRequestOrchestrator.init(p2)
 	-- upvalues: requestOrchestratorDataModule (ref), roactModule (ref)
 	p2.model = requestOrchestratorDataModule.new()
 	p2.connections = {}
 	p2.utilRef = roactModule.createRef()
 	
-	function p2.onUtilTabHeightChanged(p3) --[[ line: 66 ]]
+	function p2.onUtilTabHeightChanged(p3)
 		-- upvalues: p2 (ref)
 		p2:setState({ utilTabHeight = p3 })
 	end
 	
-	function p2.onTypeToggle(p4) --[[ line: 70 ]]
+	function p2.onTypeToggle(p4)
 		-- upvalues: p2 (ref)
 		local t = {}
 		
@@ -83,7 +83,7 @@ function mainViewRequestOrchestrator.init(p2) --[[ line: 61 ]]
 	p2.state = { utilTabHeight = 0, selectedTypes = {} }
 end
 
-function mainViewRequestOrchestrator.observeType(p5, p6) --[[ line: 83 ]]
+function mainViewRequestOrchestrator.observeType(p5, p6)
 	-- upvalues: requestOrchestratorDataModule (ref)
 	local var13 = requestOrchestratorDataModule.observeType(p5.model, p6)
 	
@@ -99,11 +99,11 @@ function mainViewRequestOrchestrator.observeType(p5, p6) --[[ line: 83 ]]
 	end
 end
 
-function mainViewRequestOrchestrator.didMount(p7) --[[ line: 92 ]]
+function mainViewRequestOrchestrator.didMount(p7)
 	-- upvalues: requestOrchestratorDataModule (ref), t (ref), runService (ref)
 	p7:setState({ utilTabHeight = p7.utilRef.current.Size.Y.Offset })
 	local requestOrchestratorService = game:GetService("RequestOrchestratorService")
-	local ok, status = pcall(function() --[[ line: 101 ]]
+	local ok, status = pcall(function()
 		-- upvalues: requestOrchestratorService (ref)
 		return requestOrchestratorService:GetRegisteredOrchestrators()
 	end)
@@ -126,7 +126,7 @@ function mainViewRequestOrchestrator.didMount(p7) --[[ line: 92 ]]
 		end
 	end
 	for i, v in pairs(t) do
-		p7.connections[i] = requestOrchestratorService[i]:Connect(function(p8) --[[ line: 116 ]]
+		p7.connections[i] = requestOrchestratorService[i]:Connect(function(p8)
 			-- upvalues: p7 (ref), v (ref)
 			local orchestratorType = p8.orchestratorType or "Unknown"
 			p7:observeType(orchestratorType)
@@ -137,21 +137,21 @@ function mainViewRequestOrchestrator.didMount(p7) --[[ line: 92 ]]
 			p7:setState({})
 		end)
 	end
-	p7.connections.heartbeat = runService.Heartbeat:Connect(function() --[[ line: 127 ]]
+	p7.connections.heartbeat = runService.Heartbeat:Connect(function()
 		-- upvalues: requestOrchestratorDataModule (copy), p7 (ref)
 		requestOrchestratorDataModule.advanceTime(p7.model)
 		p7:setState({})
 	end)
 end
 
-function mainViewRequestOrchestrator.willUnmount(p9) --[[ line: 133 ]]
+function mainViewRequestOrchestrator.willUnmount(p9)
 	for i, v in pairs(p9.connections) do
 		v:Disconnect()
 	end
 	p9.connections = {}
 end
 
-function mainViewRequestOrchestrator.didUpdate(p10) --[[ line: 140 ]]
+function mainViewRequestOrchestrator.didUpdate(p10)
 	local offset = p10.utilRef.current.Size.Y.Offset
 	
 	if offset ~= p10.state.utilTabHeight then
@@ -159,7 +159,7 @@ function mainViewRequestOrchestrator.didUpdate(p10) --[[ line: 140 ]]
 	end
 end
 
-function mainViewRequestOrchestrator.render(p11) --[[ line: 147 ]]
+function mainViewRequestOrchestrator.render(p11)
 	-- upvalues: roactModule (ref), mainRowPadding (ref), utilAndTabModule (ref), makeLabel (ref), dropDownModule (ref), orchestratorRowModule (ref), constantsModule (ref)
 	local size = p11.props.size
 	local formFactor = p11.props.formFactor

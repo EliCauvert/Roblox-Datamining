@@ -1,6 +1,6 @@
 ﻿local invariantModule = require(script.Parent.utils.invariant)
 
-return function(p0, p1) --[[ line: 4 ]]
+return function(p0, p1)
 	-- upvalues: invariantModule (ref)
 	if p0.childRouters and p0.childRouters[p1] then
 		return p0.childRouters[p1]

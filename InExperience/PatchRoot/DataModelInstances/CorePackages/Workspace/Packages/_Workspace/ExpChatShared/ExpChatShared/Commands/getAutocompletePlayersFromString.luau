@@ -2,21 +2,21 @@
 local dictionary = require(parent.llama).Dictionary
 local list = require(parent.llama).List
 
-return function(p0, p1) --[[ line: 12 | named "getAutocompletePlayersFromString" ]]
+return function(p0, p1)
 	-- upvalues: dictionary (ref), list (ref)
 	local t = {}
 	local lowerText = string.lower(p1)
 	
 	if string.sub(lowerText, 1, 1) == "@" then
 		lowerText = string.sub(lowerText, 2)
-		t = dictionary.values(dictionary.filter(p0.byUsername, function(_, p2) --[[ line: 17 ]]
+		t = dictionary.values(dictionary.filter(p0.byUsername, function(_, p2)
 			-- upvalues: lowerText (ref)
 			return string.find(p2, "^" .. lowerText) ~= nil
 		end))
 	else
 		lowerText = lowerText
 		
-		for i, v in pairs(dictionary.filter(p0.byDisplayName, function(_, p3) --[[ line: 22 ]]
+		for i, v in pairs(dictionary.filter(p0.byDisplayName, function(_, p3)
 			-- upvalues: lowerText (ref)
 			return string.find(p3, "^" .. lowerText) ~= nil
 		end)) do
@@ -25,7 +25,7 @@ return function(p0, p1) --[[ line: 12 | named "getAutocompletePlayersFromString"
 			end
 		end
 	end
-	return list.map(t, function(p4) --[[ line: 33 ]]
+	return list.map(t, function(p4)
 		-- upvalues: p0 (ref)
 		return p0.byUserId[tostring(p4)]
 	end)

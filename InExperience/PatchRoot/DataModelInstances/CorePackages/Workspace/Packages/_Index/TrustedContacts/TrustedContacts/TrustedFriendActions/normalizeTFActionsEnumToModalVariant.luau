@@ -14,7 +14,7 @@ local t = {
 	[TFActionsEnumModule.PendingIncomingTrustedConnection] = trustedConnectionStatus.RequestReceived
 }
 
-return function(p0) --[[ line: 24 | named "normalizeTFActionsEnumToModalVariant" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return t[p0]
 end

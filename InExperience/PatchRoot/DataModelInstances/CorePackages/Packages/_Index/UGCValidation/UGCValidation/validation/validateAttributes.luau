@@ -3,7 +3,7 @@ local analyticsModule = require(parent.Analytics)
 local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 
-local function hasOnlyAllowedAttribute(p0, p1) --[[ line: 13 ]]
+local function hasOnlyAllowedAttribute(p0, p1)
 	-- upvalues: constantsModule (ref)
 	for i, v in p0 do
 		if not p1 or i ~= constantsModule.AlternateMeshIdAttributeName then
@@ -21,7 +21,7 @@ local function hasOnlyAllowedAttribute(p0, p1) --[[ line: 13 ]]
 	return true
 end
 
-return function(p2, p3) --[[ line: 35 | named "validateAttributes" ]]
+return function(p2, p3)
 	-- upvalues: hasOnlyAllowedAttribute (ref), constantsModule (ref), analyticsModule (ref)
 	local allowEditableInstances = p3.allowEditableInstances
 	local t = {}

@@ -13,14 +13,14 @@ local presetChatTooltipModule = require(script.Parent.PresetChatTooltip)
 local setIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
 local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 
-return reactModule.memo(function(value) --[[ line: 24 | named "PresetChatButton" ]]
+return reactModule.memo(function(value)
 	-- upvalues: reactModule (ref), localizationModule (ref), getPresetChatStoreModule (ref), signalsReactModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), setIsPresetTrayOpenModule (ref), expChatSharedModule (ref), constantsModule (ref), foundationModule (ref), configModule (ref), presetChatTooltipModule (ref)
 	local var12 = reactModule.useRef(false)
 	local var13 = localizationModule.useLocalization({
 		sendQuickWords = "CoreScripts.TextChat.Action.SendQuickWords"
 	})
 	local var14 = getPresetChatStoreModule(false)
-	local var15 = reactModule.useCallback(function() --[[ line: 34 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: fFlagExpChatUseUnifiedTooltipStore (copy), getChatTooltipStoreModule (copy), var12 (ref), setIsPresetTrayOpenModule (copy), var14 (ref), expChatSharedModule (copy), constantsModule (copy)
 		if fFlagExpChatUseUnifiedTooltipStore then
 			local var16 = getChatTooltipStoreModule(false)

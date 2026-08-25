@@ -8,7 +8,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local getFormatTimeModule = require(momentsCreation.Utils.getFormatTime)
 local dragHandleModule = require(momentsCreation.Enums.DragHandle)
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), dragHandleModule (ref), reactModule (ref), view (ref), text (ref), getFormatTimeModule (ref)
 	local var5 = useTokens()
 	
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 30 ]]
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-bottom gap-xsmall anchor-bottom-center",
-		Position = var6:map(function(p1) --[[ line: 52 ]]
+		Position = var6:map(function(p1)
 			-- upvalues: var5 (ref)
 			return UDim2.new(p1, 0, 0, -var5.Padding.Small)
 		end)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 30 ]]
 		}, {
 			TimeText = reactModule.createElement(text, {
 				tag = "position-center-center anchor-center-center auto-xy text-caption-medium content-inverse-default",
-				Text = var6:map(function(p2) --[[ line: 62 ]]
+				Text = var6:map(function(p2)
 					-- upvalues: getFormatTimeModule (copy), timeLength (ref)
 					return getFormatTimeModule(p2 * timeLength)
 				end)

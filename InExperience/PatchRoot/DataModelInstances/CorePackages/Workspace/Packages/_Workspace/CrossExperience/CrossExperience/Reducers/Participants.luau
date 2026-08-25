@@ -27,7 +27,7 @@ local t = {
 	publicVoiceFocusedUserIds = {}
 }
 
-local _ = function(p0) --[[ line: 56 ]]
+local _ = function(p0)
 	-- upvalues: t (ref), utilsModule (ref)
 	if p0 then
 		t.participants = utilsModule.stringMapToNumberMap(p0.participants)
@@ -37,7 +37,7 @@ local _ = function(p0) --[[ line: 56 ]]
 	return t
 end
 
-return function(p1) --[[ line: 67 ]]
+return function(p1)
 	-- upvalues: rodux (ref), t (ref), utilsModule (ref), participantAdded (ref), cryo (ref), participantRemoved (ref), participantWasMuted (ref), participantWasUnmuted (ref), voiceChangerWasEnabled (ref), voiceChangerWasDisabled (ref), voicePackWasSet (ref), voiceChangerFeedbackWasEnabled (ref), voiceChangerFeedbackWasDisabled (ref), participantIsActive (ref), participantIsInactive (ref), experienceJoined (ref), restoreState (ref), participantAudioFocusChanged (ref), muteParticipant (ref), unmuteParticipant (ref), experienceLeft (ref)
 	local createReducer = rodux.createReducer
 	
@@ -47,7 +47,7 @@ return function(p1) --[[ line: 67 ]]
 		t.publicVoiceFocusedUserIds = utilsModule.stringMapToNumberMap(p1.publicVoiceFocusedUserIds)
 	end
 	return createReducer(t, {
-		[participantAdded.name] = function(p2, p3) --[[ line: 70 ]]
+		[participantAdded.name] = function(p2, p3)
 			-- upvalues: cryo (copy)
 			local participant = p3.payload.participant
 			
@@ -59,7 +59,7 @@ return function(p1) --[[ line: 67 ]]
 			
 			return cryo.Dictionary.join(p2, { participants = cloned })
 		end,
-		[participantRemoved.name] = function(p4, p5) --[[ line: 84 ]]
+		[participantRemoved.name] = function(p4, p5)
 			-- upvalues: cryo (copy)
 			local userId = p5.payload.userId
 			
@@ -85,7 +85,7 @@ return function(p1) --[[ line: 67 ]]
 				publicVoiceFocusedUserIds = publicVoiceFocusedUserIds
 			})
 		end,
-		[participantWasMuted.name] = function(p6, p7) --[[ line: 113 ]]
+		[participantWasMuted.name] = function(p6, p7)
 			-- upvalues: cryo (copy)
 			local userId = p7.payload.userId
 			
@@ -109,7 +109,7 @@ return function(p1) --[[ line: 67 ]]
 				activeUserIds = activeUserIds
 			})
 		end,
-		[participantWasUnmuted.name] = function(p8, p9) --[[ line: 140 ]]
+		[participantWasUnmuted.name] = function(p8, p9)
 			-- upvalues: cryo (copy)
 			local userId = p9.payload.userId
 			
@@ -121,7 +121,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p8
 		end,
-		[voiceChangerWasEnabled.name] = function(p10, p11) --[[ line: 156 ]]
+		[voiceChangerWasEnabled.name] = function(p10, p11)
 			-- upvalues: cryo (copy)
 			local userId = p11.payload.userId
 			
@@ -135,7 +135,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p10
 		end,
-		[voiceChangerWasDisabled.name] = function(p12, p13) --[[ line: 175 ]]
+		[voiceChangerWasDisabled.name] = function(p12, p13)
 			-- upvalues: cryo (copy)
 			local userId = p13.payload.userId
 			
@@ -149,7 +149,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p12
 		end,
-		[voicePackWasSet.name] = function(p14, p15) --[[ line: 194 ]]
+		[voicePackWasSet.name] = function(p14, p15)
 			-- upvalues: cryo (copy)
 			local userId = p15.payload.userId
 			
@@ -163,7 +163,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p14
 		end,
-		[voiceChangerFeedbackWasEnabled.name] = function(p16, p17) --[[ line: 210 ]]
+		[voiceChangerFeedbackWasEnabled.name] = function(p16, p17)
 			-- upvalues: cryo (copy)
 			local userId = p17.payload.userId
 			
@@ -177,7 +177,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p16
 		end,
-		[voiceChangerFeedbackWasDisabled.name] = function(p18, p19) --[[ line: 229 ]]
+		[voiceChangerFeedbackWasDisabled.name] = function(p18, p19)
 			-- upvalues: cryo (copy)
 			local userId = p19.payload.userId
 			
@@ -191,7 +191,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p18
 		end,
-		[participantIsActive.name] = function(p20, p21) --[[ line: 248 ]]
+		[participantIsActive.name] = function(p20, p21)
 			-- upvalues: cryo (copy)
 			local userId = p21.payload.userId
 			local cloned = table.clone(p20.activeUserIds)
@@ -205,7 +205,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return cryo.Dictionary.join(p20, { activeUserIds = cloned })
 		end,
-		[participantIsInactive.name] = function(p22, p23) --[[ line: 267 ]]
+		[participantIsInactive.name] = function(p22, p23)
 			-- upvalues: cryo (copy)
 			local index = table.find(p22.activeUserIds, p23.payload.userId)
 			
@@ -217,7 +217,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p22
 		end,
-		[experienceJoined.name] = function(p24, p25) --[[ line: 283 ]]
+		[experienceJoined.name] = function(p24, p25)
 			-- upvalues: cryo (copy)
 			local payload = p25.payload
 			
@@ -227,11 +227,11 @@ return function(p1) --[[ line: 67 ]]
 				publicVoiceFocusedUserIds = payload.publicVoiceFocusedUserIds
 			}) else p24
 		end,
-		[restoreState.name] = function(p26, p27) --[[ line: 295 ]]
+		[restoreState.name] = function(p26, p27)
 			-- upvalues: cryo (copy)
 			return if p27.payload.Participants then cryo.Dictionary.join({}, p27.payload.Participants) else p26
 		end,
-		[participantAudioFocusChanged.name] = function(p28, p29) --[[ line: 302 ]]
+		[participantAudioFocusChanged.name] = function(p28, p29)
 			-- upvalues: cryo (copy)
 			local contextIds = p29.payload.contextIds
 			local cloned = table.clone(p28.publicVoiceFocusedUserIds)
@@ -251,7 +251,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return cryo.Dictionary.join(p28, { publicVoiceFocusedUserIds = cloned })
 		end,
-		[muteParticipant.name] = function(p30, p31) --[[ line: 330 ]]
+		[muteParticipant.name] = function(p30, p31)
 			-- upvalues: cryo (copy)
 			local userId = p31.payload.userId
 			
@@ -263,7 +263,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p30
 		end,
-		[unmuteParticipant.name] = function(p32, p33) --[[ line: 343 ]]
+		[unmuteParticipant.name] = function(p32, p33)
 			-- upvalues: cryo (copy)
 			local userId = p33.payload.userId
 			
@@ -275,7 +275,7 @@ return function(p1) --[[ line: 67 ]]
 			end
 			return p32
 		end,
-		[experienceLeft.name] = function() --[[ line: 356 ]]
+		[experienceLeft.name] = function()
 			return {
 				participants = {},
 				activeUserIds = {},

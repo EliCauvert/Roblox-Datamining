@@ -8,11 +8,11 @@ local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetInteg
 local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 
-local function createActionBinding(p0) --[[ line: 31 ]]
+local function createActionBinding(p0)
 	-- upvalues: signalsModule (ref)
 	local var10, var11 = signalsModule.createSignal(true)
-	local var12, var13 = signalsModule.createSignal(function() --[[ line: 33 ]]
-		return function() --[[ line: 34 ]] end
+	local var12, var13 = signalsModule.createSignal(function()
+		return function() end
 	end)
 	
 	return {
@@ -24,21 +24,21 @@ local function createActionBinding(p0) --[[ line: 31 ]]
 	}
 end
 
-return function() --[[ line: 46 | named "createActionBindingsStore" ]]
+return function()
 	-- upvalues: enumsModule (ref), createActionBinding (ref), signalsModule (ref), getIntegrationsStoreModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), getSideSheetVisibilityModule (ref), contextActionService (ref)
 	local t = {
 		[enumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
 		[enumsModule.ActionBinding.Respawn] = createActionBinding({ Enum.KeyCode.R, Enum.KeyCode.ButtonY })
 	}
-	local var15 = signalsModule.createEffect(function(p1) --[[ line: 53 ]]
+	local var15 = signalsModule.createEffect(function(p1)
 		-- upvalues: getIntegrationsStoreModule (copy), t (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 		for i, v in getIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
 			local id = t[v.id]
 			
 			if id then
-				id.setOnActivated(function() --[[ line: 61 ]]
+				id.setOnActivated(function()
 					-- upvalues: v (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-					return function() --[[ line: 62 ]]
+					return function()
 						-- upvalues: v (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 						v.activated()
 						toggleSideSheetModule(false)
@@ -48,11 +48,11 @@ return function() --[[ line: 46 | named "createActionBindingsStore" ]]
 			end
 		end
 	end)
-	local var16 = signalsModule.createEffect(function(p2) --[[ line: 73 ]]
+	local var16 = signalsModule.createEffect(function(p2)
 		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), contextActionService (copy)
 		if getSideSheetVisibilityModule(p2) then
 			for i, v in t do
-				local var17 = function(_, p3, _) --[[ line: 76 ]]
+				local var17 = function(_, p3, _)
 					-- upvalues: v (ref)
 					if p3 == Enum.UserInputState.Begin then
 						v.getOnActivated()()
@@ -75,7 +75,7 @@ return function() --[[ line: 46 | named "createActionBindingsStore" ]]
 	
 	return {
 		sessionActionBindings = t,
-		cleanUp = function() --[[ line: 96 ]]
+		cleanUp = function()
 			-- upvalues: var16 (ref), var15 (ref)
 			var16()
 			var15()

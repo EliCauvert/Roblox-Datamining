@@ -13,24 +13,24 @@ local constantsModule = require(script.Parent.Parent.Parent.Constants)
 local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
 local mainViewNetwork = roactModule.Component:extend("MainViewNetwork")
 
-function mainViewNetwork.init(p0) --[[ line: 20 ]]
+function mainViewNetwork.init(p0)
 	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p1) --[[ line: 21 ]]
+	function p0.onUtilTabHeightChanged(p1)
 		-- upvalues: p0 (ref)
 		p0:setState({ utilTabHeight = p1 })
 	end
 	
-	function p0.onClientButton() --[[ line: 27 ]]
+	function p0.onClientButton()
 		-- upvalues: p0 (ref)
 		p0.props.dispatchSetActiveTab("Network", true)
 	end
 	
-	function p0.onServerButton() --[[ line: 31 ]]
+	function p0.onServerButton()
 		-- upvalues: p0 (ref)
 		p0.props.dispatchSetActiveTab("Network", false)
 	end
 	
-	function p0.onSearchTermChanged(p2) --[[ line: 35 ]]
+	function p0.onSearchTermChanged(p2)
 		-- upvalues: p0 (ref)
 		if p0.props.isClientView then
 			p0.props.dispatchClientNetworkUpdateSearchFilter(p2, {})
@@ -44,11 +44,11 @@ function mainViewNetwork.init(p0) --[[ line: 20 ]]
 	p0.state = { utilTabHeight = 0 }
 end
 
-function mainViewNetwork.didMount(p3) --[[ line: 50 ]]
+function mainViewNetwork.didMount(p3)
 	p3:setState({ utilTabHeight = p3.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewNetwork.didUpdate(p4) --[[ line: 57 ]]
+function mainViewNetwork.didUpdate(p4)
 	local size = p4.utilRef.current.Size
 	
 	if size.Y.Offset ~= p4.state.utilTabHeight then
@@ -56,7 +56,7 @@ function mainViewNetwork.didUpdate(p4) --[[ line: 57 ]]
 	end
 end
 
-function mainViewNetwork.render(p5) --[[ line: 66 ]]
+function mainViewNetwork.render(p5)
 	-- upvalues: roactModule (ref), mainRowPadding (ref), utilAndTabModule (ref), clientNetworkModule (ref), serverNetworkModule (ref), constantsModule (ref)
 	local t = {
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -107,24 +107,24 @@ function mainViewNetwork.render(p5) --[[ line: 66 ]]
 	}, t)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _) --[[ line: 121 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
 	return {
 		isClientView = p6.MainView.isClientView,
 		clientSearchTerm = p6.NetworkData.clientSearchTerm,
 		serverSearchTerm = p6.NetworkData.serverSearchTerm
 	}
-end, function(p7) --[[ line: 129 | named "mapDispatchToProps" ]]
+end, function(p7)
 	-- upvalues: clientNetworkUpdateSearchFilterModule (ref), serverNetworkUpdateSearchFilterModule (ref), setActiveTabModule (ref)
 	return {
-		dispatchClientNetworkUpdateSearchFilter = function(p8, p9) --[[ line: 131 ]]
+		dispatchClientNetworkUpdateSearchFilter = function(p8, p9)
 			-- upvalues: p7 (ref), clientNetworkUpdateSearchFilterModule (copy)
 			p7(clientNetworkUpdateSearchFilterModule(p8, p9))
 		end,
-		dispatchServerNetworkUpdateSearchFilter = function(p10, p11) --[[ line: 135 ]]
+		dispatchServerNetworkUpdateSearchFilter = function(p10, p11)
 			-- upvalues: p7 (ref), serverNetworkUpdateSearchFilterModule (copy)
 			p7(serverNetworkUpdateSearchFilterModule(p10, p11))
 		end,
-		dispatchSetActiveTab = function(value, p12) --[[ line: 138 ]]
+		dispatchSetActiveTab = function(value, p12)
 			-- upvalues: p7 (ref), setActiveTabModule (copy)
 			p7(setActiveTabModule(value, p12))
 		end

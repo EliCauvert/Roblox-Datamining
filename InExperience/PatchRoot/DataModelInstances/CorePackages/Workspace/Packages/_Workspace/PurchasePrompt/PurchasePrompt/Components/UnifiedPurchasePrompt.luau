@@ -17,10 +17,10 @@ local _ = sharedFlagsModule.FFlagEnableBlackbirdUpsellInUnifiedPurchaseModal
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local _ = require(purchasePrompt.types)
 
-return function(p0) --[[ line: 35 | named "UnifiedPurchasePrompt" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), setProductPayloadModule (ref), setPurchaseCallbacksModule (ref), setPostPurchaseActionsModule (ref), setPurchaseAnalyticsMetadataModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), setPurchaseOptionsModule (ref), dispatchPurchaseForProductPayloadModule (ref), purchasePromptAppModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref)
 	local store = p0.store
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), store (ref), setProductPayloadModule (copy), setPurchaseCallbacksModule (copy), setPostPurchaseActionsModule (copy), setPurchaseAnalyticsMetadataModule (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), setPurchaseOptionsModule (copy), dispatchPurchaseForProductPayloadModule (copy)
 		local productPayload = p0.productPayload
 		store:dispatch(setProductPayloadModule(productPayload))
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 35 | named "UnifiedPurchasePrompt" ]]
 		if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p0.purchaseOptions then
 			store:dispatch(setPurchaseOptionsModule(p0.purchaseOptions))
 		end
-		dispatchPurchaseForProductPayloadModule(function(p1) --[[ line: 61 ]]
+		dispatchPurchaseForProductPayloadModule(function(p1)
 			-- upvalues: store (copy)
 			store:dispatch(p1)
 		end, productPayload, nil, false)

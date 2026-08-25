@@ -1,5 +1,5 @@
 ﻿if require(script.Parent.Parent.SafeFlags).createGetFFlag("ReactIsolatedGlobalsEnabled")() then
-	local function _(p0, p1) --[[ line: 49 | named "loadFromGlobal" ]]
+	local function _(p0, p1)
 		local var1 = _G[p0]
 		
 		return if var1 == nil then p1 else var1

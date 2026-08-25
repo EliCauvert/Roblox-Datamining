@@ -3,7 +3,7 @@ local sessionType = require(script:FindFirstAncestor("SessionizationUtil").Paren
 local t = {}
 t.__index = t
 
-function t.new(p0, p1, p2, p3, p4) --[[ line: 40 ]]
+function t.new(p0, p1, p2, p3, p4)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.level = p0
@@ -15,7 +15,7 @@ function t.new(p0, p1, p2, p3, p4) --[[ line: 40 ]]
 	return tbl
 end
 
-function t:__tostring() --[[ line: 63 ]]
+function t:__tostring()
 	local var3 = 0
 	
 	for i in pairs(self.metadata) do
@@ -24,7 +24,7 @@ function t:__tostring() --[[ line: 63 ]]
 	return string.format("SessionInfo{level=%s, sessionId=%s, tagName=%s, creationTimestamp=%s, metadata_count=%d}", tostring(self.level), tostring(self.sessionId), tostring(self.tagName), tostring(self.creationTimestamp), var3)
 end
 
-function t.getSessionByLevel(p5) --[[ line: 97 ]]
+function t.getSessionByLevel(p5)
 	-- upvalues: sessionType (ref), sessionService (ref), t (ref)
 	local rootSID, var6
 	local _ = nil

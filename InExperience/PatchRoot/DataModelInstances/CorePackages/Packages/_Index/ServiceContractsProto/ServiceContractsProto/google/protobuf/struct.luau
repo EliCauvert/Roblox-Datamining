@@ -4,14 +4,14 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 125 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		fields = if p0 == nil or p0.fields == nil then {} else p0.fields
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 131 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var8 = 0
@@ -37,7 +37,7 @@ function t_1:encode() --[[ line: 131 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 154 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var18 = t_1.new()
 	local var19 = 0
@@ -85,7 +85,7 @@ function t_1.decode(p1) --[[ line: 154 ]]
 	return var18
 end
 
-function t_1:jsonEncode() --[[ line: 204 ]]
+function t_1:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -95,7 +95,7 @@ function t_1:jsonEncode() --[[ line: 204 ]]
 	return t_1
 end
 
-function t_1.jsonDecode(p2) --[[ line: 214 ]]
+function t_1.jsonDecode(p2)
 	-- upvalues: t (ref), t_1 (ref)
 	local t_2 = {}
 	
@@ -111,7 +111,7 @@ typeRegistryModule.default:register(t.Struct)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p3) --[[ line: 240 ]]
+function t_2.new(p3)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		key = if p3 == nil or p3.key == nil then "" else p3.key,
@@ -119,7 +119,7 @@ function t_2.new(p3) --[[ line: 240 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 247 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var38 = 0
@@ -143,7 +143,7 @@ function t_2:encode() --[[ line: 247 ]]
 	return buff_1
 end
 
-function t_2.decode(p4) --[[ line: 267 ]]
+function t_2.decode(p4)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var45 = t_2.new()
 	local var46 = 0
@@ -195,7 +195,7 @@ function t_2.decode(p4) --[[ line: 267 ]]
 	return var45
 end
 
-function t_2:jsonEncode() --[[ line: 315 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -207,7 +207,7 @@ function t_2:jsonEncode() --[[ line: 315 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 329 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref)
 	local var65 = t_2.new()
 	
@@ -229,14 +229,14 @@ typeRegistryModule.default:register(t.Struct_FieldsEntry)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p5) --[[ line: 357 ]]
+function t_3.new(p5)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		kind = if p5 == nil or p5.kind == nil then nil else p5.kind
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 363 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var67 = 0
@@ -282,7 +282,7 @@ function t_3:encode() --[[ line: 363 ]]
 	return buff_1
 end
 
-function t_3.decode(p6) --[[ line: 396 ]]
+function t_3.decode(p6)
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var83 = t_3.new()
 	local var84 = 0
@@ -359,14 +359,14 @@ function t_3.decode(p6) --[[ line: 396 ]]
 	return var83
 end
 
-function t_3:jsonEncode() --[[ line: 467 ]]
+function t_3:jsonEncode()
 	-- upvalues: t (ref)
 	local kind = self.kind
 	
 	return if kind == nil or kind.type == "null_value" then nil elseif kind.type == "number_value" or kind.type == "string_value" or kind.type == "bool_value" then kind.value elseif kind.type == "list_value" then t.ListValue.jsonEncode(kind.value) elseif kind.type == "struct_value" then t.Struct.jsonEncode(kind.value) else kind.type
 end
 
-function t_3.jsonDecode(p7) --[[ line: 484 ]]
+function t_3.jsonDecode(p7)
 	-- upvalues: t_3 (ref), t (ref)
 	if p7 == nil then
 		return t_3.new({ kind = { type = "null_value", value = "NULL_VALUE" } })
@@ -405,14 +405,14 @@ typeRegistryModule.default:register(t.Value)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p8) --[[ line: 530 ]]
+function t_4.new(p8)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		values = if p8 == nil or p8.values == nil then {} else p8.values
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 536 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var114 = 0
@@ -432,7 +432,7 @@ function t_4:encode() --[[ line: 536 ]]
 	return buff_1
 end
 
-function t_4.decode(p9) --[[ line: 553 ]]
+function t_4.decode(p9)
 	-- upvalues: t_4 (ref), protoModule (ref), t (ref)
 	local var119 = t_4.new()
 	local var120 = 0
@@ -479,7 +479,7 @@ function t_4.decode(p9) --[[ line: 553 ]]
 	return var119
 end
 
-function t_4:jsonEncode() --[[ line: 596 ]]
+function t_4:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -489,7 +489,7 @@ function t_4:jsonEncode() --[[ line: 596 ]]
 	return t_1
 end
 
-function t_4.jsonDecode(p10) --[[ line: 606 ]]
+function t_4.jsonDecode(p10)
 	-- upvalues: t (ref), t_4 (ref)
 	local t_1 = {}
 	
@@ -506,13 +506,13 @@ t_4.descriptor = {
 t.ListValue = t_4
 typeRegistryModule.default:register(t.ListValue)
 t.NullValue = {
-	fromNumber = function(p11) --[[ line: 631 ]]
+	fromNumber = function(p11)
 		return if p11 == 0 then "NULL_VALUE" else nil
 	end,
-	toNumber = function(p12) --[[ line: 639 ]]
+	toNumber = function(p12)
 		return if p12 == "NULL_VALUE" then 0 else p12
 	end,
-	fromName = function(p13) --[[ line: 647 ]]
+	fromName = function(p13)
 		return if p13 == "NULL_VALUE" then "NULL_VALUE" else nil
 	end
 }

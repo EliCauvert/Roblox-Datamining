@@ -19,7 +19,7 @@ local _ = require(socialTabsPage.Common.Types)
 local friendingActionsModule = require(socialTabsPage.Utils.friendingActions)
 local notificationTypeList = guiService:GetNotificationTypeList()
 
-return function() --[[ line: 31 | named "useCTAActionHandlers" ]]
+return function()
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), buttonTypes (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref), friendshipOriginSourceType (ref)
 	local var12 = useDispatch()
 	local var13 = useLocalUserId()
@@ -39,15 +39,15 @@ return function() --[[ line: 31 | named "useCTAActionHandlers" ]]
 		defaultFriendingError = textKeysModule.DefaultFriendingError
 	})
 	
-	return reactModule.useMemo(function() --[[ line: 51 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: buttonTypes (copy), var12 (ref), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy), var14 (ref), friendingActionsModule (copy), var13 (ref), friendshipOriginSourceType (copy), var15 (ref)
 		return {
-			[buttonTypes.Chat] = function(p0) --[[ line: 53 ]]
+			[buttonTypes.Chat] = function(p0)
 				-- upvalues: var12 (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy)
 				var12(enteredChatFromEntryPointModule(chatEntryPointNames.SocialTab))
 				guiService:BroadcastNotification(p0, notificationTypeList.LAUNCH_CONVERSATION)
 			end,
-			[buttonTypes.Add] = function(p1) --[[ line: 58 ]]
+			[buttonTypes.Add] = function(p1)
 				-- upvalues: var14 (copy), friendingActionsModule (copy), var12 (copy), var13 (copy), friendshipOriginSourceType (copy), var15 (copy)
 				if var14.current[p1] then
 					return
@@ -59,12 +59,12 @@ return function() --[[ line: 31 | named "useCTAActionHandlers" ]]
 					targetUserId = p1,
 					friendshipOriginSourceType = friendshipOriginSourceType.UserProfile.rawValue(),
 					localized = var15
-				}):finally(function() --[[ line: 71 ]]
+				}):finally(function()
 					-- upvalues: var14 (copy), p1 (ref)
 					var14.current[p1] = nil
 				end)
 			end,
-			[buttonTypes.Accept] = function(p2) --[[ line: 76 ]]
+			[buttonTypes.Accept] = function(p2)
 				-- upvalues: var14 (copy), friendingActionsModule (copy), var12 (copy), var13 (copy), var15 (copy)
 				if var14.current[p2] then
 					return
@@ -75,7 +75,7 @@ return function() --[[ line: 31 | named "useCTAActionHandlers" ]]
 					currentUserId = var13,
 					targetUserId = p2,
 					localized = var15
-				}):finally(function() --[[ line: 88 ]]
+				}):finally(function()
 					-- upvalues: var14 (copy), p2 (ref)
 					var14.current[p2] = nil
 				end)

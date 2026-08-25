@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 2 ]]
+﻿return function(p0, p1)
 	local t = {}
 	
 	for i, v in pairs(p0) do

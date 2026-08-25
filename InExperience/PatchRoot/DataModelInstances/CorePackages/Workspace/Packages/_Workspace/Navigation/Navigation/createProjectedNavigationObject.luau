@@ -9,18 +9,18 @@ local signalsExperimentalModule = require(parent.SignalsExperimental)
 local _ = require(script.Parent.types)
 local dEV = _G.__DEV__ or _G.__TESTEZ_RUNNING_TEST__
 
-return function(p0) --[[ line: 44 | named "createProjectedNavigationObject" ]]
+return function(p0)
 	-- upvalues: createSignal (ref), actions (ref), signalsExperimentalModule (ref), dEV (ref), createComputed (ref), getNavigation (ref)
 	local t = {}
 	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(function() --[[ line: 52 ]]
+	local var7, var8 = createSignal(function()
 		-- upvalues: p0 (ref), actions (copy)
 		return p0.getStateForAction(actions.init())
 	end)
 	local var9 = nil
 	local t_1 = {}
 	
-	local function setDispatch(value) --[[ line: 61 ]]
+	local function setDispatch(value)
 		-- upvalues: var9 (write), t_1 (write)
 		var9 = value
 		
@@ -34,27 +34,27 @@ return function(p0) --[[ line: 44 | named "createProjectedNavigationObject" ]]
 		end
 	end
 	
-	local function clearDispatch() --[[ line: 72 ]]
+	local function clearDispatch()
 		-- upvalues: var9 (write)
 		var9 = nil
 	end
 	
-	local function update(p1) --[[ line: 79 ]]
+	local function update(p1)
 		-- upvalues: signalsExperimentalModule (copy), var8 (ref), var6 (ref)
 		if p1 == nil then
 			return
 		end
-		signalsExperimentalModule.batch(function() --[[ line: 83 ]]
+		signalsExperimentalModule.batch(function()
 			-- upvalues: var8 (copy), p1 (ref), var6 (copy)
 			var8(p1)
 			var6(p1.isTransitioning == true)
 		end)
 	end
 	
-	local function dispatch(p2) --[[ line: 94 ]]
+	local function dispatch(p2)
 		-- upvalues: dEV (copy), signalsExperimentalModule (copy), var8 (ref), p0 (ref), actions (copy), var6 (ref), var9 (write), var7 (ref), t_1 (write)
 		if dEV and p2.type == "RESET_NAVIGATION_FOR_TESTING_ONLY__DO_NOT_USE_IN_PRODUCTION" then
-			signalsExperimentalModule.batch(function() --[[ line: 96 ]]
+			signalsExperimentalModule.batch(function()
 				-- upvalues: var8 (copy), p0 (copy), actions (copy), var6 (copy)
 				var8(p0.getStateForAction(actions.init()))
 				var6(false)
@@ -77,17 +77,17 @@ return function(p0) --[[ line: 44 | named "createProjectedNavigationObject" ]]
 		return true
 	end
 	
-	local function notifyEvents() --[[ line: 118 ]] end
+	local function notifyEvents() end
 	
-	local var16 = function() --[[ line: 123 ]]
+	local var16 = function()
 		return nil
 	end
 	
-	local var17 = createComputed(function(p3) --[[ line: 126 ]]
+	local var17 = createComputed(function(p3)
 		-- upvalues: var7 (ref), getNavigation (copy), p0 (ref), dispatch (ref), t (ref), var16 (write)
-		return getNavigation(p0, var7(p3), dispatch, t, function(_, p4) --[[ line: 128 ]]
+		return getNavigation(p0, var7(p3), dispatch, t, function(_, p4)
 			return p4
-		end, function() --[[ line: 130 ]]
+		end, function()
 			-- upvalues: var16 (copy)
 			return var16()
 		end)

@@ -60,18 +60,18 @@ local t_1 = {
 	[settingsRoute.Contacts] = permissionsProtocol.Permissions.CONTACTS_ACCESS
 }
 
-return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert" ]]
+return function(value)
 	-- upvalues: useScreenSize (ref), useDispatch (ref), useStyle (ref), reactModule (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), fFlagQRInSearchScanner (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), fIntLinkingProtocolFetchTimeoutMS (ref), appStorageService (ref), var10 (ref), messageBusService (ref), realtimeMessageId (ref), permissionsProtocol (ref), t_1 (ref), useAppPolicy (ref), fFlagPermissionAlertContentUpgradeModule (ref), useLocalization (ref), settingsRoute (ref), images (ref), buttonType (ref), styledTextLabel (ref), text (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), text_1 (ref), orientation (ref), interactiveAlert (ref)
 	local var14 = useScreenSize()
 	local var15 = useDispatch()
 	local var16 = useStyle()
 	local settingsRoute_1 = value.settingsRoute or value.navigation and value.navigation.getParam("settingsRoute")
 	local source = value.source or value.navigation and value.navigation.getParam("source")
-	local var19 = reactModule.useCallback(function() --[[ line: 104 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: value (ref), var15 (ref)
 		return if value.closeCentralOverlayThunk then var15(value.closeCentralOverlayThunk()) else value.navigation and value.navigation.pop()
 	end, { var15, value.closeCentralOverlayThunk, value.navigation })
-	local var20 = reactModule.useMemo(function() --[[ line: 111 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: analyticsFactory (copy), t (copy), defaultAnalyticsService (copy), fFlagQRInSearchScanner (copy), source (ref)
 		return analyticsFactory.setUpAnalyticsFactory({
 			eventLists = { EventStream = t },
@@ -86,7 +86,7 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 	if var22_1 == nil then
 		if fFlagEnableRetryForLinkingProtocolFetch then
 			for _ = 0, fIntLinkingProtocolFetchRetries do
-				local thread = task.spawn(function() --[[ line: 141 ]]
+				local thread = task.spawn(function()
 					-- upvalues: var21 (write), var22 (write), default (copy), settingsRoute_1 (ref)
 					local var39, var40 = default:supportsSwitchToSettingsApp(settingsRoute_1):await()
 					var21 = var39
@@ -106,7 +106,7 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 		end
 		var22_1 = var21 and var22
 	end
-	reactModule.useEffect(function() --[[ line: 158 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), settingsRoute_1 (ref), var22_1 (write), appStorageService (copy), var10 (copy), messageBusService (copy), realtimeMessageId (copy), permissionsProtocol (copy), t_1 (copy), var19 (ref)
 		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertImpression", {
 			settingsRoute = settingsRoute_1,
@@ -114,9 +114,9 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 		})
 		appStorageService:SetItem(var10, "true")
 		appStorageService:Flush()
-		local var41 = messageBusService:Subscribe(realtimeMessageId, function() --[[ line: 167 ]]
+		local var41 = messageBusService:Subscribe(realtimeMessageId, function()
 			-- upvalues: permissionsProtocol (copy), t_1 (copy), settingsRoute_1 (copy), var19 (copy)
-			permissionsProtocol.default:hasPermissions({ t_1[settingsRoute_1] }):andThen(function(p0) --[[ line: 172 ]]
+			permissionsProtocol.default:hasPermissions({ t_1[settingsRoute_1] }):andThen(function(p0)
 				-- upvalues: permissionsProtocol (copy), var19 (copy)
 				if p0 and p0.status == permissionsProtocol.Status.AUTHORIZED then
 					var19()
@@ -124,12 +124,12 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 			end)
 		end, false, true)
 		
-		return function() --[[ line: 179 ]]
+		return function()
 			-- upvalues: var41 (ref)
 			var41:Disconnect()
 		end
 	end, {})
-	local var27 = useAppPolicy(function(p1) --[[ line: 184 ]]
+	local var27 = useAppPolicy(function(p1)
 		return p1.getShouldShowSettingsPermissionsAdditionalInstructions()
 	end)
 	local var22_1_1 = fFlagPermissionAlertContentUpgradeModule and var22_1
@@ -169,7 +169,7 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 		}
 	}
 	local text_2 = "<b>" .. t_5[settingsRoute_1][if var22_1 then "deepLinkSupported" else "deepLinkNotSupported"] .. "</b>"
-	local var35 = reactModule.useCallback(function() --[[ line: 248 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), settingsRoute_1 (ref), var19 (ref)
 		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "notNow", settingsRoute = settingsRoute_1 })
 		
@@ -179,13 +179,13 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 		buttonType = buttonType.Secondary,
 		props = { onActivated = var35, text = var29.notNow }
 	}
-	local var37 = reactModule.useCallback(function() --[[ line: 263 ]]
+	local var37 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), settingsRoute_1 (ref), var19 (ref)
 		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "ok", settingsRoute = settingsRoute_1 })
 		
 		return var19()
 	end, { value.navigation })
-	local var38 = reactModule.useCallback(function() --[[ line: 278 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), settingsRoute_1 (ref), default (copy)
 		var20.fireAnalyticsEvent("SettingsPermissionInteractiveAlertButtonClick", { btn = "openSettings", settingsRoute = settingsRoute_1 })
 		
@@ -235,7 +235,7 @@ return function(value) --[[ line: 95 | named "SettingsPermissionInteractiveAlert
 		screenSize = var14,
 		title = t_3[settingsRoute_1],
 		titleIcon = t_2[settingsRoute_1],
-		middleContent = reactModule.useCallback(function() --[[ line: 298 ]]
+		middleContent = reactModule.useCallback(function()
 			-- upvalues: reactModule (copy), styledTextLabel (copy), var16 (ref), t_4 (ref), settingsRoute_1 (ref), var27 (ref), text (copy), text_2 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

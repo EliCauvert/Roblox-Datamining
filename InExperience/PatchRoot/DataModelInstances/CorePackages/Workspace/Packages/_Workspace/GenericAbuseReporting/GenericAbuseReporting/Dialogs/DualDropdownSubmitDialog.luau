@@ -17,11 +17,11 @@ local scrollViewGradientModule = require(genericAbuseReporting.Common.ScrollView
 local sideModalModule = require(genericAbuseReporting.Common.SideModal)
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
 
-local function _(p0, p1) --[[ line: 43 | named "getContentRightPadding" ]]
+local function _(p0, p1)
 	return if p1.Y < p0.Y then 16 else 1
 end
 
-return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
+return function(p2)
 	-- upvalues: useTokens (ref), useLayerCollector (ref), reactModule (ref), useLocalizedStringsModule (ref), useLocalization (ref), createNextOrder (ref), view (ref), sideModalModule (ref), scrollViewGradientModule (ref), text (ref), sideModalDropdownButtonModule (ref), commentTextFieldModule (ref), buttonListModule (ref)
 	local var10 = useTokens()
 	local absoluteSize = useLayerCollector().absoluteSize
@@ -50,7 +50,7 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 		chooseOne = "Feature.ReportAbuse.Label.ChooseOne"
 	})
 	local var40 = createNextOrder()
-	reactModule.useLayoutEffect(function() --[[ line: 80 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var33 (ref), var35 (ref), var37 (ref)
 		if var33.current then
 			local scrollingFrame = var33.current:FindFirstChildWhichIsA("ScrollingFrame")
@@ -58,16 +58,16 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 			if scrollingFrame then
 				var35(scrollingFrame.AbsoluteCanvasSize)
 				var37(scrollingFrame.AbsoluteWindowSize)
-				local var42 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ line: 89 ]]
+				local var42 = scrollingFrame:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 					-- upvalues: var35 (copy), scrollingFrame (ref)
 					var35(scrollingFrame.AbsoluteCanvasSize)
 				end)
-				local var43 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ line: 94 ]]
+				local var43 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 					-- upvalues: var37 (copy), scrollingFrame (ref)
 					var37(scrollingFrame.AbsoluteWindowSize)
 				end)
 				
-				return function() --[[ line: 97 ]]
+				return function()
 					-- upvalues: var42 (ref), var43 (ref)
 					var42:Disconnect()
 					var43:Disconnect()
@@ -77,7 +77,7 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 			var35(Vector2.zero)
 			var37(Vector2.zero)
 		end
-		return function() --[[ line: 106 ]] end
+		return function() end
 	end, { var33.current, absoluteSize })
 	
 	return reactModule.createElement(view, { tag = "size-full auto-xy" }, {
@@ -85,11 +85,11 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 			screenSize = absoluteSize,
 			buttonProps = {
 				text = var38.formSubmit,
-				onActivated = reactModule.useCallback(function() --[[ line: 109 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: p2 (ref), var15 (ref), var21 (ref), var31 (ref)
 					p2.onSubmit(var15, var21, var31)
 				end, { p2.onSubmit, var15, var21, var31 }),
-				validateState = reactModule.useCallback(function() --[[ line: 113 ]]
+				validateState = reactModule.useCallback(function()
 					-- upvalues: var15 (ref), var21 (ref), var12 (ref), var14 (ref)
 					if var15 ~= "" and var21 ~= "" then
 						return true
@@ -143,7 +143,7 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 					}, {
 						ProblemDropdown = reactModule.createElement(sideModalDropdownButtonModule, {
 							setDropdownError = var12,
-							onActivated = function() --[[ line: 185 ]]
+							onActivated = function()
 								-- upvalues: var26 (ref), var30 (ref)
 								var26(true)
 								var30(false)
@@ -181,7 +181,7 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 					}, {
 						SurfaceDropdown = reactModule.createElement(sideModalDropdownButtonModule, {
 							setDropdownError = var14,
-							onActivated = function() --[[ line: 224 ]]
+							onActivated = function()
 								-- upvalues: var28 (ref), var30 (ref)
 								var28(true)
 								var30(false)
@@ -242,7 +242,7 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 					title = if var25 then var39.submitDialogProblemSubheading else var39.submitDialogSurfaceSubheading,
 					width = math.min(400, absoluteSize.X - 50) - 50,
 					height = math.min(500, absoluteSize.Y - 50) - 50,
-					onAbandon = reactModule.useCallback(function() --[[ line: 127 ]]
+					onAbandon = reactModule.useCallback(function()
 						-- upvalues: var26 (ref), var28 (ref)
 						var26(false)
 						var28(false)
@@ -253,7 +253,7 @@ return function(p2) --[[ line: 47 | named "DualDropdownSubmitDialog" ]]
 						Padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 16) }),
 						ButtonList = reactModule.createElement(buttonListModule, {
 							options = if var25 then p2.reportProblems else p2.reportSurfaces,
-							onSelected = function(p3, p4) --[[ line: 304 ]]
+							onSelected = function(p3, p4)
 								-- upvalues: var25 (ref), var16 (ref), var18 (ref), var12 (ref), var30 (ref), var22 (ref), var24 (ref), var14 (ref)
 								if var25 then
 									var16(p3)

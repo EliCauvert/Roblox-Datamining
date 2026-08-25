@@ -19,7 +19,7 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 local markdownViewer = markdownModule.Components.MarkdownViewer
 
-local function AgentPlanSheet(p0) --[[ line: 46 ]]
+local function AgentPlanSheet(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), foundationModule (ref), reactModule (ref), getMarkdownRendererPropsModule (ref), sheet (ref), text (ref), view (ref), markdownViewer (ref)
 	local var10 = if fFlagBuildLocalization then useLocalization({ overview = localizationStringsModule.AGENT_PLAN_OVERVIEW }) else nil
 	local var11 = foundationModule.Hooks.useTokens()
@@ -55,7 +55,7 @@ local function AgentPlanSheet(p0) --[[ line: 46 ]]
 						tag = "size-full-0 auto-y text-body-medium content-emphasis",
 						testId = `{p0.testId}-text-content`
 					},
-					MarkdownRendererProps = reactModule.useMemo(function() --[[ line: 54 ]]
+					MarkdownRendererProps = reactModule.useMemo(function()
 						-- upvalues: getMarkdownRendererPropsModule (copy), var11 (ref), default (ref)
 						return getMarkdownRendererPropsModule(var11, default)
 					end, { var11, default })
@@ -65,7 +65,7 @@ local function AgentPlanSheet(p0) --[[ line: 46 ]]
 	})
 end
 
-return function(p1) --[[ line: 102 | named "AgentPlanCard" ]]
+return function(p1)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
 	local var12 = if fFlagBuildLocalization then useLocalization({
 		build = localizationStringsModule.AGENT_PLAN_BUILD,
@@ -89,7 +89,7 @@ return function(p1) --[[ line: 102 | named "AgentPlanCard" ]]
 					variant = buttonVariant.Emphasis,
 					fillBehavior = fillBehavior.Fill,
 					isDisabled = p1.isBuildDisabled == true,
-					onActivated = reactModule.useCallback(function() --[[ line: 112 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: p1 (ref)
 						if p1.isBuildDisabled == true then
 							return
@@ -104,7 +104,7 @@ return function(p1) --[[ line: 102 | named "AgentPlanCard" ]]
 					size = inputSize.Small,
 					variant = buttonVariant.Standard,
 					fillBehavior = fillBehavior.Fill,
-					onActivated = reactModule.useCallback(function() --[[ line: 119 ]]
+					onActivated = reactModule.useCallback(function()
 						-- upvalues: var15 (ref)
 						var15(true)
 					end, {}),
@@ -116,7 +116,7 @@ return function(p1) --[[ line: 102 | named "AgentPlanCard" ]]
 			title = p1.title,
 			textContent = p1.textContent,
 			isOpen = var14,
-			onClose = reactModule.useCallback(function() --[[ line: 123 ]]
+			onClose = reactModule.useCallback(function()
 				-- upvalues: var15 (ref)
 				var15(false)
 			end, {}),

@@ -6,7 +6,7 @@ local lightTheme = styleModule.Themes.LightTheme
 local getTextSize = styleModule.GetTextSize
 local useDesignTokens = styleModule.useDesignTokens
 
-return function(p0) --[[ line: 19 | named "GameTileOverlayTextPill" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), reactModule (ref), getTextSize (ref), colors (ref), lightTheme (ref)
 	if p0.text and string.len(p0.text) ~= 0 then
 		local var2 = useDesignTokens()
@@ -14,7 +14,7 @@ return function(p0) --[[ line: 19 | named "GameTileOverlayTextPill" ]]
 		local size150 = var2.Size.Size_150
 		local font = var2.Typography.HeadingLarge.Font
 		local fontSize300 = var2.FontSize.FontSize_300
-		local var3 = reactModule.useMemo(function() --[[ line: 32 ]]
+		local var3 = reactModule.useMemo(function()
 			-- upvalues: getTextSize (copy), p0 (ref), fontSize300 (ref), font (ref)
 			return getTextSize(p0.text, fontSize300, font, Vector2.new(1e999, 1e999))
 		end, { p0.text, fontSize300, font })
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 19 | named "GameTileOverlayTextPill" ]]
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}, {
 				UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-					MaxSize = p0.maxWidthBinding:map(function(p1) --[[ line: 65 ]]
+					MaxSize = p0.maxWidthBinding:map(function(p1)
 						-- upvalues: size200 (ref), var3 (ref)
 						local var4 = p1 - size200 * 2
 						

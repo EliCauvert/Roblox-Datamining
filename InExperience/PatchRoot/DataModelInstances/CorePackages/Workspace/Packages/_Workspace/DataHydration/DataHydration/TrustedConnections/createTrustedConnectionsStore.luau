@@ -18,17 +18,17 @@ local fIntTrustedFriendRequestsPageSize = require(parent.SharedFlags).FIntTruste
 local trustedConnectionsStoreDataTtlSec = game:DefineFastInt("TrustedConnectionsStoreDataTtlSec", 0)
 game:DefineFastInt("TrustedConnectionsStoreProcessDelaySec", 1)
 
-local _ = function() --[[ line: 68 ]]
+local _ = function()
 	return game:GetFastInt("TrustedConnectionsStoreProcessDelaySec")
 end
 
 game:DefineFastInt("TrustedConnectionsStoreIncomingRequestsProcessDelaySec", 0)
 
-local _ = function() --[[ line: 73 ]]
+local _ = function()
 	return game:GetFastInt("TrustedConnectionsStoreIncomingRequestsProcessDelaySec")
 end
 
-return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
+return function()
 	-- upvalues: trustedConnectionsStoreDataTtlSec (ref), createDataCacheModule (ref), fFlagConnectionManagementChips (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), getLocalPlayerUserId (ref), mergeListsWithoutDuplicates (ref), cryoModule (ref), createDataResolverModule (ref), requestsModule (ref), createTrustedConnectionEventListenerModule (ref), trustedConnectionStatusModule (ref), createFriendshipEventListenerModule (ref), promiseModule (ref), fIntTrustedFriendRequestsPageSize (ref), fFlagTCShareLinkReceiverUI (ref)
 	local var10 = if trustedConnectionsStoreDataTtlSec > 0 then trustedConnectionsStoreDataTtlSec else 1e999
 	local var11 = createDataCacheModule(var10)
@@ -37,7 +37,7 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 	local var14 = if fFlagAddFriendsPageTrustedFriendRequestSection then createDataCacheModule(var10) else nil
 	local var15 = if fFlagAddFriendsPageTrustedFriendRequestSection then createDataCacheModule(var10) else nil
 	local var16 = false
-	local var17 = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p0) --[[ line: 94 ]]
+	local var17 = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p0)
 		-- upvalues: getLocalPlayerUserId (copy), var14 (ref), mergeListsWithoutDuplicates (copy), var15 (ref)
 		local var26 = tostring(getLocalPlayerUserId())
 		local var27 = var14.getItem(var26).data(false)
@@ -57,7 +57,7 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 			var15.replaceItem(var26, math.max(var29 + 1, 0))
 		end
 	end else nil
-	local var18 = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p1) --[[ line: 120 ]]
+	local var18 = if fFlagAddFriendsPageTrustedFriendRequestSection then function(p1)
 		-- upvalues: getLocalPlayerUserId (copy), var14 (ref), cryoModule (copy), var15 (ref)
 		local var30 = tostring(getLocalPlayerUserId())
 		local var31 = var14.getItem(var30).data(false)
@@ -82,17 +82,17 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 		replaceItems = true,
 		cache = var13,
 		queueProcessDelaySec = game:GetFastInt("TrustedConnectionsStoreProcessDelaySec"),
-		fetchFn = function(p2) --[[ line: 152 ]]
+		fetchFn = function(p2)
 			-- upvalues: requestsModule (copy), cryoModule (copy)
-			return requestsModule.GetUserTrustedConnections(p2):andThen(function(p3) --[[ line: 153 ]]
+			return requestsModule.GetUserTrustedConnections(p2):andThen(function(p3)
 				-- upvalues: cryoModule (copy)
-				return cryoModule.List.map(p3.PageItems or {}, function(p4) --[[ line: 155 ]]
+				return cryoModule.List.map(p3.PageItems or {}, function(p4)
 					return { id = tostring(p4.id) }
 				end)
 			end)
 		end
 	}) else nil
-	local var20 = createTrustedConnectionEventListenerModule(function(p5, p6) --[[ line: 166 ]]
+	local var20 = createTrustedConnectionEventListenerModule(function(p5, p6)
 		-- upvalues: var11 (ref), var12 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var17 (ref), fFlagConnectionManagementChips (copy), getLocalPlayerUserId (copy), var19 (ref)
 		var11.updateItems({ [p5] = p6 })
 		var12.updateItems({
@@ -110,7 +110,7 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 			end
 		end
 	end)
-	local var21 = if fFlagAddFriendsPageTrustedFriendRequestSection then createFriendshipEventListenerModule(function(p7, p8) --[[ line: 192 ]]
+	local var21 = if fFlagAddFriendsPageTrustedFriendRequestSection then createFriendshipEventListenerModule(function(p7, p8)
 		-- upvalues: var11 (ref), var12 (ref), trustedConnectionStatusModule (copy), var18 (ref)
 		var11.updateItems({ [p7] = p8 })
 		var12.updateItems({
@@ -124,19 +124,19 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 	local var22 = createDataResolverModule({
 		cache = var12,
 		queueProcessDelaySec = game:GetFastInt("TrustedConnectionsStoreProcessDelaySec"),
-		fetchFn = function(p9) --[[ line: 210 ]]
+		fetchFn = function(p9)
 			-- upvalues: cryoModule (copy), requestsModule (copy)
 			local var35 = cryoModule.Dictionary.keys(p9)
 			
-			return requestsModule.MultiGetUsersAreTrustedConnections(var35):andThen(function(p10) --[[ line: 212 ]]
+			return requestsModule.MultiGetUsersAreTrustedConnections(var35):andThen(function(p10)
 				-- upvalues: cryoModule (copy), var35 (ref)
-				local var36 = cryoModule.List.foldLeft(p10, function(p11, p12) --[[ line: 213 ]]
+				local var36 = cryoModule.List.foldLeft(p10, function(p11, p12)
 					p11[tostring(p12)] = true
 					
 					return p11
 				end, {})
 				
-				return cryoModule.List.foldLeft(var35, function(p13, p14) --[[ line: 218 ]]
+				return cryoModule.List.foldLeft(var35, function(p13, p14)
 					-- upvalues: var36 (ref)
 					p13[tostring(p14)] = var36[p14] or false
 					
@@ -148,17 +148,17 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 	local var23 = createDataResolverModule({
 		cache = var11,
 		queueProcessDelaySec = game:GetFastInt("TrustedConnectionsStoreProcessDelaySec"),
-		fetchFn = function(p15) --[[ line: 229 ]]
+		fetchFn = function(p15)
 			-- upvalues: cryoModule (copy), requestsModule (copy), promiseModule (copy)
-			return promiseModule.all(cryoModule.List.foldLeft(cryoModule.Dictionary.keys(p15), function(p17, p18) --[[ line: 231 ]]
+			return promiseModule.all(cryoModule.List.foldLeft(cryoModule.Dictionary.keys(p15), function(p17, p18)
 				-- upvalues: requestsModule (copy)
-				table.insert(p17, requestsModule.GetUserTrustedConnectionStatus(p18):andThen(function(p19) --[[ line: 235 ]]
+				table.insert(p17, requestsModule.GetUserTrustedConnectionStatus(p18):andThen(function(p19)
 					-- upvalues: p18 (ref)
 					return { [p18] = p19 }
 				end))
 				
 				return p17
-			end, {})):andThen(function(p16) --[[ line: 242 ]]
+			end, {})):andThen(function(p16)
 				-- upvalues: cryoModule (copy)
 				return cryoModule.Dictionary.join(table.unpack(p16))
 			end)
@@ -169,17 +169,17 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 		replaceItems = true,
 		cache = var14,
 		queueProcessDelaySec = game:GetFastInt("TrustedConnectionsStoreIncomingRequestsProcessDelaySec"),
-		fetchFn = function(_, p20) --[[ line: 254 ]]
+		fetchFn = function(_, p20)
 			-- upvalues: var16 (write), requestsModule (copy), fIntTrustedFriendRequestsPageSize (copy), cryoModule (copy), mergeListsWithoutDuplicates (copy)
 			local var37 = if var16 then nil else p20.data(false)
 			var16 = false
 			
-			return requestsModule.GetTrustedFriendRequests(if var37 then var37.nextPageCursor else nil, fIntTrustedFriendRequestsPageSize):andThen(function(p21) --[[ line: 261 ]]
+			return requestsModule.GetTrustedFriendRequests(if var37 then var37.nextPageCursor else nil, fIntTrustedFriendRequestsPageSize):andThen(function(p21)
 				-- upvalues: cryoModule (copy), var37 (ref), mergeListsWithoutDuplicates (copy)
 				local var38 = if p21 then p21.nextPageCursor else nil
 				
 				return {
-					senderIds = mergeListsWithoutDuplicates(if var37 then var37.senderIds else nil, cryoModule.List.map((if p21 then p21.data else nil) or {}, function(p22) --[[ line: 263 ]]
+					senderIds = mergeListsWithoutDuplicates(if var37 then var37.senderIds else nil, cryoModule.List.map((if p21 then p21.data else nil) or {}, function(p22)
 						return tostring(p22.senderId)
 					end)),
 					nextPageCursor = var38,
@@ -193,36 +193,36 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 		replaceItems = true,
 		cache = var15,
 		queueProcessDelaySec = game:GetFastInt("TrustedConnectionsStoreIncomingRequestsProcessDelaySec"),
-		fetchFn = function(_) --[[ line: 286 ]]
+		fetchFn = function(_)
 			-- upvalues: requestsModule (copy)
-			return requestsModule.GetTrustedFriendRequestsCount():andThen(function(p23) --[[ line: 287 ]]
+			return requestsModule.GetTrustedFriendRequestsCount():andThen(function(p23)
 				return if p23 then p23.count else 0
 			end)
 		end
 	}) else nil
 	
 	return {
-		getStatus = function(p24) --[[ line: 294 ]]
+		getStatus = function(p24)
 			-- upvalues: var23 (ref)
 			return var23.getAndFetchItem(p24)
 		end,
-		getIsTrustedConnection = function(p25) --[[ line: 298 ]]
+		getIsTrustedConnection = function(p25)
 			-- upvalues: var22 (ref)
 			return var22.getAndFetchItem(p25)
 		end,
-		getUserTrustedConnections = if fFlagConnectionManagementChips then if fFlagConnectionManagementChips then function() --[[ line: 303 ]]
+		getUserTrustedConnections = if fFlagConnectionManagementChips then if fFlagConnectionManagementChips then function()
 			-- upvalues: getLocalPlayerUserId (copy), var19 (ref)
 			return var19.getAndFetchItem(tostring(getLocalPlayerUserId()))
 		end else nil else nil,
-		getTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function() --[[ line: 310 ]]
+		getTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function()
 			-- upvalues: getLocalPlayerUserId (copy), var24 (ref)
 			return var24.getAndFetchItem(tostring(getLocalPlayerUserId()))
 		end else nil else nil,
-		getTrustedFriendRequestsCount = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function() --[[ line: 317 ]]
+		getTrustedFriendRequestsCount = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function()
 			-- upvalues: getLocalPlayerUserId (copy), var25 (ref)
 			return var25.getAndFetchItem(tostring(getLocalPlayerUserId()))
 		end else nil else nil,
-		loadMoreTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function() --[[ line: 324 ]]
+		loadMoreTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function()
 			-- upvalues: getLocalPlayerUserId (copy), var14 (ref), var24 (ref)
 			local var39 = tostring(getLocalPlayerUserId())
 			local var40 = var14.getItem(var39).data(false)
@@ -232,25 +232,25 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 			end
 			var24.fetchItem(var39)
 		end else nil else nil,
-		refetchTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function() --[[ line: 335 ]]
+		refetchTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function()
 			-- upvalues: var16 (write), getLocalPlayerUserId (copy), var24 (ref)
 			var16 = true
 			var24.fetchItem(tostring(getLocalPlayerUserId()))
 		end else nil else nil,
-		refetchTrustedFriendRequestsCount = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function() --[[ line: 344 ]]
+		refetchTrustedFriendRequestsCount = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function()
 			-- upvalues: getLocalPlayerUserId (copy), var25 (ref)
 			var25.fetchItem(tostring(getLocalPlayerUserId()))
 		end else nil else nil,
-		sendTrustedConnectionRequest = function(p26, p27) --[[ line: 350 ]]
+		sendTrustedConnectionRequest = function(p26, p27)
 			-- upvalues: requestsModule (copy), var11 (ref), trustedConnectionStatusModule (copy)
-			return requestsModule.PostUserSendTrustedConnectionRequest(p26, p27):andThen(function() --[[ line: 351 ]]
+			return requestsModule.PostUserSendTrustedConnectionRequest(p26, p27):andThen(function()
 				-- upvalues: var11 (copy), p26 (ref), trustedConnectionStatusModule (copy)
 				var11.updateItems({ [p26] = trustedConnectionStatusModule.RequestSent })
 			end)
 		end,
-		acceptTrustedConnectionRequest = function(p28) --[[ line: 358 ]]
+		acceptTrustedConnectionRequest = function(p28)
 			-- upvalues: requestsModule (copy), var11 (ref), trustedConnectionStatusModule (copy), var12 (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var18 (ref)
-			return requestsModule.PostUserAcceptTrustedConnectionRequest(p28):andThen(function() --[[ line: 359 ]]
+			return requestsModule.PostUserAcceptTrustedConnectionRequest(p28):andThen(function()
 				-- upvalues: var11 (copy), p28 (ref), trustedConnectionStatusModule (copy), var12 (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var18 (copy)
 				var11.updateItems({ [p28] = trustedConnectionStatusModule.TrustedFriends })
 				var12.updateItems({ [p28] = true })
@@ -260,9 +260,9 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 				end
 			end)
 		end,
-		ignoreTrustedConnectionRequest = function(p29) --[[ line: 374 ]]
+		ignoreTrustedConnectionRequest = function(p29)
 			-- upvalues: requestsModule (copy), var11 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var18 (ref)
-			return requestsModule.PostUserIgnoreTrustedConnectionRequest(p29):andThen(function() --[[ line: 375 ]]
+			return requestsModule.PostUserIgnoreTrustedConnectionRequest(p29):andThen(function()
 				-- upvalues: var11 (copy), p29 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var18 (copy)
 				var11.updateItems({ [p29] = trustedConnectionStatusModule.RequestIgnored })
 				
@@ -271,36 +271,36 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 				end
 			end)
 		end,
-		ignoreAllTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function() --[[ line: 387 ]]
+		ignoreAllTrustedFriendRequests = if fFlagAddFriendsPageTrustedFriendRequestSection then if fFlagAddFriendsPageTrustedFriendRequestSection then function()
 			-- upvalues: requestsModule (copy), getLocalPlayerUserId (copy), var14 (ref), var15 (ref)
-			return requestsModule.PostUserIgnoreAllTrustedFriendRequests():andThen(function() --[[ line: 388 ]]
+			return requestsModule.PostUserIgnoreAllTrustedFriendRequests():andThen(function()
 				-- upvalues: getLocalPlayerUserId (copy), var14 (copy), var15 (copy)
 				local var41 = tostring(getLocalPlayerUserId())
 				var14.replaceItem(var41, { nextPageCursor = nil, hasMore = false, senderIds = {} })
 				var15.replaceItem(var41, 0)
 			end)
 		end else nil else nil,
-		removeTrustedConnectionRequest = function(p30) --[[ line: 400 ]]
+		removeTrustedConnectionRequest = function(p30)
 			-- upvalues: requestsModule (copy), var11 (ref), trustedConnectionStatusModule (copy), var12 (ref)
-			return requestsModule.PostUserRemoveTrustedConnection(p30):andThen(function() --[[ line: 401 ]]
+			return requestsModule.PostUserRemoveTrustedConnection(p30):andThen(function()
 				-- upvalues: var11 (copy), p30 (ref), trustedConnectionStatusModule (copy), var12 (copy)
 				var11.updateItems({ [p30] = trustedConnectionStatusModule.RequestReceived })
 				var12.updateItems({ [p30] = false })
 			end)
 		end,
-		createTrustedFriendLink = function(p31) --[[ line: 412 ]]
+		createTrustedFriendLink = function(p31)
 			-- upvalues: requestsModule (copy)
 			return requestsModule.PostUserCreateTrustedFriendLink(p31)
 		end,
-		validateTrustedFriendLink = if fFlagTCShareLinkReceiverUI then function(p32, p33) --[[ line: 416 ]]
+		validateTrustedFriendLink = if fFlagTCShareLinkReceiverUI then function(p32, p33)
 			-- upvalues: requestsModule (copy)
 			return requestsModule.PostUserValidateTrustedFriendLink(p32, p33)
 		end else nil,
-		addTrustedFriendFromLink = if fFlagTCShareLinkReceiverUI then function(p34, p35) --[[ line: 420 ]]
+		addTrustedFriendFromLink = if fFlagTCShareLinkReceiverUI then function(p34, p35)
 			-- upvalues: requestsModule (copy)
 			return requestsModule.PostUserAddTrustedFriendFromLink(p34, p35)
 		end else nil,
-		clear = function() --[[ line: 424 ]]
+		clear = function()
 			-- upvalues: var11 (ref), var12 (ref), var22 (ref), var23 (ref), fFlagConnectionManagementChips (copy), var13 (ref), var19 (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var14 (ref), var24 (ref), var15 (ref), var25 (ref)
 			var11.clear()
 			var12.clear()
@@ -318,7 +318,7 @@ return function() --[[ line: 77 | named "createTrustedConnectionsStore" ]]
 				var25.clear()
 			end
 		end,
-		dispose = function() --[[ line: 443 ]]
+		dispose = function()
 			-- upvalues: var11 (ref), var12 (ref), var22 (ref), var23 (ref), var20 (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy), var21 (ref), fFlagConnectionManagementChips (copy), var13 (ref), var19 (ref), var14 (ref), var24 (ref), var15 (ref), var25 (ref)
 			var11.dispose()
 			var12.dispose()

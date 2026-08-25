@@ -3,7 +3,7 @@ local var1 = reactModule.createContext(nil)
 
 return {
 	MomentsHostContext = var1,
-	useMomentsHost = function() --[[ line: 29 ]]
+	useMomentsHost = function()
 		-- upvalues: reactModule (ref), var1 (ref)
 		local var2 = reactModule.useContext(var1)
 		

@@ -2,11 +2,11 @@
 local list_1 = { 0, 0 }
 local list_2 = { 0, 0, 0, 0 }
 
-local function _(value) --[[ line: 20 | named "roundToDecimalPrecision" ]]
+local function _(value)
 	return if value >= 0 then math.floor(value * 100000 + 0.5) / 100000 else math.ceil(value * 100000 - 0.5) / 100000
 end
 
-local function applyNumericPrecision(p0) --[[ line: 28 ]]
+local function applyNumericPrecision(p0)
 	-- upvalues: applyNumericPrecision (ref)
 	if typeof(p0) == "number" then
 		return if p0 >= 0 then math.floor(p0 * 100000 + 0.5) / 100000 else math.ceil(p0 * 100000 - 0.5) / 100000
@@ -21,7 +21,7 @@ local function applyNumericPrecision(p0) --[[ line: 28 ]]
 	return t
 end
 
-local function toVectorCode(p1) --[[ line: 42 ]]
+local function toVectorCode(p1)
 	local p1Count = #p1
 	
 	if p1Count ~= 2 and p1Count ~= 4 then
@@ -37,7 +37,7 @@ local function toVectorCode(p1) --[[ line: 42 ]]
 	return if p1Count == 2 then 1 else 2
 end
 
-local _ = function(p2, p3) --[[ line: 62 | named "getSchemaName" ]]
+local _ = function(p2, p3)
 	local var9 = "s_"
 	local var10 = typeof(p3)
 	
@@ -53,7 +53,7 @@ local _ = function(p2, p3) --[[ line: 62 | named "getSchemaName" ]]
 	return var9 .. p2
 end
 
-local function compressPackedProperties(p4) --[[ line: 83 ]]
+local function compressPackedProperties(p4)
 	local var11 = 0
 	
 	for i, v in p4 do
@@ -90,10 +90,10 @@ local function compressPackedProperties(p4) --[[ line: 83 ]]
 	return table.concat(t, ",")
 end
 
-local function collectSchema(p5) --[[ line: 120 ]]
+local function collectSchema(p5)
 	local t = {}
 	
-	local function collectProperties(p6) --[[ line: 123 ]]
+	local function collectProperties(p6)
 		-- upvalues: t (ref), collectProperties (ref)
 		for i, v in p6.Properties do
 			if v ~= nil then
@@ -133,14 +133,14 @@ local function collectSchema(p5) --[[ line: 120 ]]
 	return t_1, t_2
 end
 
-return function(p7) --[[ line: 151 | named "compactDataModelPayload" ]]
+return function(p7)
 	-- upvalues: collectSchema (ref), list (ref), list_1 (ref), list_2 (ref), toVectorCode (ref), applyNumericPrecision (ref), compressPackedProperties (ref)
 	local var23, var24 = collectSchema(p7)
 	local t = {}
 	local t_1 = { [0] = list, [1] = list_1, [2] = list_2 }
 	local var27 = 3
 	
-	local function serializeMappingValue(p8) --[[ line: 162 ]]
+	local function serializeMappingValue(p8)
 		-- upvalues: serializeMappingValue (ref)
 		local var36 = typeof(p8)
 		
@@ -173,7 +173,7 @@ return function(p7) --[[ line: 151 | named "compactDataModelPayload" ]]
 		return "t:[" .. table.concat(list, ",") .. "]{" .. table.concat(t, ",") .. "}"
 	end
 	
-	local function mapValue(p9) --[[ line: 191 ]]
+	local function mapValue(p9)
 		-- upvalues: toVectorCode (copy), serializeMappingValue (ref), t (ref), t_1 (ref), var27 (write)
 		if typeof(p9) == "table" then
 			local var40 = toVectorCode(p9)
@@ -199,7 +199,7 @@ return function(p7) --[[ line: 151 | named "compactDataModelPayload" ]]
 		return var43
 	end
 	
-	local function encodeProperties(p10) --[[ line: 216 ]]
+	local function encodeProperties(p10)
 		-- upvalues: var23 (ref), var24 (ref), mapValue (ref), applyNumericPrecision (copy), compressPackedProperties (copy)
 		local t = {}
 		
@@ -233,7 +233,7 @@ return function(p7) --[[ line: 151 | named "compactDataModelPayload" ]]
 	local t_2 = {}
 	local var32 = 1
 	
-	local function appendNode(p11, p12) --[[ line: 236 ]]
+	local function appendNode(p11, p12)
 		-- upvalues: var32 (write), encodeProperties (ref), t_2 (ref), appendNode (ref)
 		var32 += 1
 		local t = {

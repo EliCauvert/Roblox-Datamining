@@ -1,8 +1,8 @@
-﻿local ok, _ = pcall(function() --[[ line: 2 ]]
+﻿local ok, _ = pcall(function()
 	return game:GetService("ProcessService")
 end)
 
-return function() --[[ line: 7 ]]
+return function()
 	-- upvalues: ok (ref)
 	return ok
 end

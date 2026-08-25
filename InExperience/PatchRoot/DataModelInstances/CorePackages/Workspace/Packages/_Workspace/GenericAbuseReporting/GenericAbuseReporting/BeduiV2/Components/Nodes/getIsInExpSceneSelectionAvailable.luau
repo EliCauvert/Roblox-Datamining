@@ -5,9 +5,9 @@ local gateAbuseReportInExpSceneSelectionOnIXP = game:DefineFastFlag("GateAbuseRe
 local fStringReportMenuIXPLayer = sharedFlagsModule.FStringReportMenuIXPLayer
 local fStringSelectInSceneIXPField = sharedFlagsModule.FStringSelectInSceneIXPField
 
-local function _() --[[ line: 15 | named "isInSelectInSceneExperiment" ]]
+local function _()
 	-- upvalues: IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
-	local ok, status = pcall(function() --[[ line: 16 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 	end)
@@ -20,7 +20,7 @@ local function _() --[[ line: 15 | named "isInSelectInSceneExperiment" ]]
 	return false
 end
 
-return function() --[[ line: 36 | named "getIsInExpSceneSelectionAvailable" ]]
+return function()
 	-- upvalues: experienceStateCaptureService (ref), gateAbuseReportInExpSceneSelectionOnIXP (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
 	if not game:GetEngineFeature("SafetyServiceCaptureModeReportProp") then
 		return false
@@ -33,7 +33,7 @@ return function() --[[ line: 36 | named "getIsInExpSceneSelectionAvailable" ]]
 	elseif not gateAbuseReportInExpSceneSelectionOnIXP then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 16 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 	end)

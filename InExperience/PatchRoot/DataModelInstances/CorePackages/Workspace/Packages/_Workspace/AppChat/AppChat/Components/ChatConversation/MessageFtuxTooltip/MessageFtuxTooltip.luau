@@ -10,14 +10,14 @@ local t = {
 	variant = require(script.Parent.MessageFtuxTooltipVariant).None
 }
 
-return reactModule.memo(function(p0) --[[ line: 25 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useMessageFtuxTooltipModule (ref), reactModule (ref), text (ref), enums (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	local var6 = foundationModule.Hooks.useTokens()
 	local var7 = useMessageFtuxTooltipModule(var5.variant)
 	local var8, var9 = reactModule.useState(false)
 	local var10, var11 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 32 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), text (copy), var7 (ref), var9 (ref), var5 (ref), var11 (ref)
 		local var15
 		local titleSmall = var6.Typography.TitleSmall
@@ -32,7 +32,7 @@ return reactModule.memo(function(p0) --[[ line: 25 ]]
 		var9(var15)
 		var11(true)
 	end, { var7.text, var6 })
-	local var12, var13 = reactModule.useMemo(function() --[[ line: 43 ]]
+	local var12, var13 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), var5 (ref), enums (copy), var6 (ref)
 		local var16 = if var8 then if var5.isReversed then enums.PopoverAlign.Start else enums.PopoverAlign.End elseif var5.isReversed then enums.PopoverAlign.End else enums.PopoverAlign.Start
 		

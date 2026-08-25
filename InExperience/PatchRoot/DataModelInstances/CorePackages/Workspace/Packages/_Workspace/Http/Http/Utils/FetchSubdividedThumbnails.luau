@@ -9,14 +9,14 @@ local tutilsModule = require(parent.tutils)
 local maxValue = math.max(0, tonumber(settings():GetFVariable("LuaAppNonFinalThumbnailMaxRetries")) or 0)
 local maxValue_1 = math.max(0, tonumber(settings():GetFVariable("LuaAppThumbnailsApiRetryTimeMultiplier")) or 0)
 local t = {
-	_fetchIcons = function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 20 ]]
+	_fetchIcons = function(p0, p1, p2, p3, p4, p5, p6, p7)
 		-- upvalues: resultModule (ref), thumbnail (ref), promiseModule (ref)
-		local function _(p8) --[[ line: 30 | named "keyMapperForCurrentRequestNameAndSize" ]]
+		local function _(p8)
 			-- upvalues: p4 (ref), p5 (ref), p3 (ref)
 			return p4({ targetId = p8, requestName = p5, iconSize = p3 })
 		end
 		
-		local function getTableOfFailedResults(p9) --[[ line: 38 ]]
+		local function getTableOfFailedResults(p9)
 			-- upvalues: p4 (ref), p5 (ref), p3 (ref), resultModule (copy)
 			local t = {}
 			
@@ -26,7 +26,7 @@ local t = {
 			return t
 		end
 		
-		return p6(p1, p2, p3):andThen(function(p10) --[[ line: 49 ]]
+		return p6(p1, p2, p3):andThen(function(p10)
 			-- upvalues: getTableOfFailedResults (ref), p2 (ref), thumbnail (copy), p3 (ref), p4 (ref), p5 (ref), resultModule (copy), p0 (ref), p7 (ref), promiseModule (copy)
 			local var11 = getTableOfFailedResults(p2)
 			local t = {}
@@ -49,16 +49,16 @@ local t = {
 			p0:dispatch(p7(t))
 			
 			return promiseModule.resolve(var11)
-		end, function(_) --[[ line: 69 ]]
+		end, function(_)
 			-- upvalues: getTableOfFailedResults (ref), p2 (ref), promiseModule (copy)
 			return promiseModule.resolve(getTableOfFailedResults(p2))
 		end)
 	end
 }
 
-function t._fetch(p11, p12, p13, p14, p15, p16, p17, p18) --[[ line: 75 ]]
+function t._fetch(p11, p12, p13, p14, p15, p16, p17, p18)
 	-- upvalues: t (ref), maxValue (write), maxValue_1 (write), thumbnail (ref), tutilsModule (ref), promiseModule (ref)
-	return t._fetchIcons(p11, p12, p13, p14, p15, p16, p17, p18):andThen(function(p19) --[[ line: 95 ]]
+	return t._fetchIcons(p11, p12, p13, p14, p15, p16, p17, p18):andThen(function(p19)
 		-- upvalues: maxValue (copy), maxValue_1 (copy), thumbnail (copy), tutilsModule (copy), promiseModule (copy), t (copy), p11 (ref), p12 (ref), p13 (ref), p14 (ref), p15 (ref), p16 (ref), p17 (ref), p18 (ref)
 		local t_1 = {}
 		local var17 = p19
@@ -67,7 +67,7 @@ function t._fetch(p11, p12, p13, p14, p15, p16, p17, p18) --[[ line: 75 ]]
 			maxValue = 1
 			maxValue_1 = 0.001
 		end
-		local function retry(p20) --[[ line: 104 ]]
+		local function retry(p20)
 			-- upvalues: var17 (write), thumbnail (copy), t_1 (ref), tutilsModule (copy), promiseModule (copy), maxValue_1 (copy), t (copy), p11 (copy), p12 (copy), p13 (copy), p14 (copy), p15 (copy), p16 (copy), p17 (copy), p18 (copy), retry (ref)
 			local t_2 = {}
 			
@@ -80,17 +80,17 @@ function t._fetch(p11, p12, p13, p14, p15, p16, p17, p18) --[[ line: 75 ]]
 					table.insert(t_2, var21)
 				end
 			end
-			return if tutilsModule.fieldCount(t_2) == 0 then promiseModule.resolve(t_1) else promiseModule.new(function(p22, _) --[[ line: 122 ]]
+			return if tutilsModule.fieldCount(t_2) == 0 then promiseModule.resolve(t_1) else promiseModule.new(function(p22, _)
 				-- upvalues: maxValue_1 (copy), p20 (ref)
-				coroutine.wrap(function() --[[ line: 123 ]]
+				coroutine.wrap(function()
 					-- upvalues: maxValue_1 (copy), p20 (copy), p22 (ref)
 					wait(maxValue_1 * math.pow(2, p20 - 1))
 					p22()
 				end)()
-			end):andThen(function() --[[ line: 130 ]]
+			end):andThen(function()
 				-- upvalues: t (copy), p11 (copy), p12 (copy), p13 (copy), p14 (copy), p15 (copy), p16 (copy), p17 (copy), p18 (copy)
 				return t._fetchIcons(p11, p12, p13, p14, p15, p16, p17, p18)
-			end):andThen(function(p21) --[[ line: 142 ]]
+			end):andThen(function(p21)
 				-- upvalues: var17 (copy), p20 (ref), retry (copy), promiseModule (copy), t_1 (copy)
 				var17 = p21
 				
@@ -102,14 +102,14 @@ function t._fetch(p11, p12, p13, p14, p15, p16, p17, p18) --[[ line: 75 ]]
 	end)
 end
 
-function t.Fetch(p23, p24, p25, p26, p27, p28) --[[ line: 156 ]]
+function t.Fetch(p23, p24, p25, p26, p27, p28)
 	-- upvalues: argCheckModule (ref), t (ref), performFetchModule (ref)
 	argCheckModule.isType(p24, "table", "requests")
 	argCheckModule.isType(p26, "string", "requestName")
 	argCheckModule.isNonNegativeNumber(#p24, "requests count")
 	t.KeyMapper = p25
 	
-	return performFetchModule.Batch(p24, p25, function(p29, p30) --[[ line: 162 ]]
+	return performFetchModule.Batch(p24, p25, function(p29, p30)
 		-- upvalues: t (copy), p23 (ref), p25 (ref), p26 (ref), p27 (ref), p28 (ref)
 		local t_1 = {}
 		local iconSize = nil

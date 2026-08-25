@@ -1,16 +1,16 @@
 ﻿local copyModule = require(script.Parent.copy)
 
-local function noUpdate(p0, p1) --[[ line: 4 ]]
+local function noUpdate(p0, p1)
 	return p0, p1
 end
 
-local function call(p2, ...) --[[ line: 8 ]]
+local function call(p2, ...)
 	if type(p2) == "function" then
 		return p2(...)
 	end
 end
 
-return function(p3, p4, p5, p6) --[[ line: 14 | named "update" ]]
+return function(p3, p4, p5, p6)
 	-- upvalues: copyModule (ref), noUpdate (ref), call (ref)
 	local var7, var8
 	local var3 = type(p3)

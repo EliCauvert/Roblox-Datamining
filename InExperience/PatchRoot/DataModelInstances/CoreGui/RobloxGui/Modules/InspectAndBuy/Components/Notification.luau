@@ -7,7 +7,7 @@ local colorsModule = require(parent.Colors)
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local notification = roactModule.PureComponent:extend("Notification")
 
-function notification.render(p0) --[[ line: 11 ]]
+function notification.render(p0)
 	-- upvalues: roactModule (ref), colorsModule (ref), appFonts (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement("Frame", {
 		LayoutOrder = 0,
@@ -46,6 +46,6 @@ function notification.render(p0) --[[ line: 11 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ line: 54 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 	return { locale = p1.locale }
 end)(notification)

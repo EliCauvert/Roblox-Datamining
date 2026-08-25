@@ -10,7 +10,7 @@ local pageNavigationEventModule = require(script.Parent.PageNavigationEvent)
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 16 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = { navigationEvents = {} }
 	setmetatable(t_1, t)
@@ -18,11 +18,11 @@ function t.new() --[[ line: 16 ]]
 	return t_1
 end
 
-function t:getNavigationEvents() --[[ line: 26 ]]
+function t:getNavigationEvents()
 	return self.navigationEvents
 end
 
-function t:printNavigationEvents() --[[ line: 30 ]]
+function t:printNavigationEvents()
 	print("Total Events: ", #self.navigationEvents)
 	
 	for i, v in self.navigationEvents do
@@ -30,18 +30,18 @@ function t:printNavigationEvents() --[[ line: 30 ]]
 	end
 end
 
-function t:waitForNumberEventsMaxWaitTime(b, p0) --[[ line: 37 ]]
+function t:waitForNumberEventsMaxWaitTime(b, p0)
 	-- upvalues: reactRobloxModule (ref)
 	local var9 = 0
 	while #self.navigationEvents < b and var9 <= p0 do
-		reactRobloxModule.act(function() --[[ line: 40 ]]
+		reactRobloxModule.act(function()
 			-- upvalues: var9 (write)
 			var9 += task.wait()
 		end)
 	end
 end
 
-function t:resetNavigationEvents() --[[ line: 46 ]]
+function t:resetNavigationEvents()
 	self.navigationEvents = {}
 end
 
@@ -52,12 +52,12 @@ local t_1 = {
 	onDidBlur = eventsModule.DidBlur
 }
 
-function t.createNavigationAdapter(p1, p2) --[[ line: 57 ]]
+function t.createNavigationAdapter(p1, p2)
 	-- upvalues: t_1 (ref), pageNavigationEventModule (ref), reactModule (ref), navigationEventsModule (ref)
 	local t = {}
 	
 	for i, v in t_1 do
-		t[i] = function() --[[ line: 60 ]]
+		t[i] = function()
 			-- upvalues: pageNavigationEventModule (copy), p2 (ref), v (ref), p1 (ref)
 			pageNavigationEventModule.new(p2, v)
 			table.insert(p1.navigationEvents, pageNavigationEventModule.new(p2, v))
@@ -66,7 +66,7 @@ function t.createNavigationAdapter(p1, p2) --[[ line: 57 ]]
 	return reactModule.createElement(navigationEventsModule, t)
 end
 
-function t:equalTo(p3) --[[ line: 69 ]]
+function t:equalTo(p3)
 	-- upvalues: invariantModule (ref)
 	invariantModule(type(p3) == "table", "should be a list")
 	local navigationEventsCount = #self.navigationEvents
@@ -83,7 +83,7 @@ function t:equalTo(p3) --[[ line: 69 ]]
 	return true
 end
 
-function t:expect(p4) --[[ line: 86 ]]
+function t:expect(p4)
 	-- upvalues: array (ref)
 	local var12, var13 = self:equalTo(p4)
 	

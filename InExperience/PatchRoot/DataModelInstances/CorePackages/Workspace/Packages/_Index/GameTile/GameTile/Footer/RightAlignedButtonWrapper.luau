@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("GameTile").Parent.React)
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	return if p0.Button then reactModule.createElement(reactModule.Fragment, nil, {
 		ListLayout = reactModule.createElement("UIListLayout", {

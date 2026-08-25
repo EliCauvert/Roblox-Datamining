@@ -4,7 +4,7 @@ local toastNotification = lumberyak.Logger.new(nil, "ToastNotification")
 toastNotification:setContext({ prefix = "[ToastNotification] - " })
 toastNotification:addSink({
 	maxLevel = toastNotificationEventLoggingLevel,
-	log = function(_, p0, _) --[[ line: 16 ]]
+	log = function(_, p0, _)
 		print(p0)
 	end
 })

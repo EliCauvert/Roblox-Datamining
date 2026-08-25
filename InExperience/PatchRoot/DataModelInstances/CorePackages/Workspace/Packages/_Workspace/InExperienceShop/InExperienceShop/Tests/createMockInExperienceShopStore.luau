@@ -6,7 +6,7 @@ local constantsModule = require(inExperienceShop.Constants)
 local _ = require(inExperienceShop.Types)
 local _ = require(inExperienceShop.Api.BonusPromotionEligibility)
 
-return function() --[[ line: 68 | named "createMockInExperienceShopStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), constantsModule (ref), jest (ref)
 	local var3, var4 = signalsModule.createSignal({})
 	local var5, var6 = signalsModule.createSignal({})

@@ -17,7 +17,7 @@ local var6 = t.strictInterface({
 	LayoutOrder = t.integer
 })
 
-local function renderHorizontalSpacer(p0, p1, p2) --[[ line: 30 ]]
+local function renderHorizontalSpacer(p0, p1, p2)
 	-- upvalues: roact (ref), themedTextLabelModule (ref)
 	return roact.createElement(themedTextLabelModule, {
 		themeKey = "TextEmphasis",
@@ -29,7 +29,7 @@ local function renderHorizontalSpacer(p0, p1, p2) --[[ line: 30 ]]
 	})
 end
 
-local function renderKey(p3, p4) --[[ line: 44 ]]
+local function renderKey(p3, p4)
 	-- upvalues: roact (ref), keyLabel (ref), pointerLabelModule (ref)
 	return if p3.EnumType == Enum.KeyCode then roact.createElement(keyLabel, {
 		textThemeKey = "TextEmphasis",
@@ -38,7 +38,7 @@ local function renderKey(p3, p4) --[[ line: 44 ]]
 	}) else roact.createElement(pointerLabelModule, { input = p3, LayoutOrder = p4 })
 end
 
-local function renderInputIconContainer(p5, p6) --[[ line: 60 ]]
+local function renderInputIconContainer(p5, p6)
 	-- upvalues: roact (ref), renderKey (ref), renderHorizontalSpacer (ref), themedTextLabelModule (ref)
 	local t = {
 		ListLayout = roact.createElement("UIListLayout", {
@@ -97,12 +97,12 @@ local function renderInputIconContainer(p5, p6) --[[ line: 60 ]]
 	}, t)
 end
 
-return function(p7) --[[ line: 115 | named "ControlEntry" ]]
+return function(p7)
 	-- upvalues: globalConfigModule (ref), var6 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref), dividerModule (ref), renderInputIconContainer (ref)
 	if globalConfigModule.propValidation then
 		assert(var6(p7))
 	end
-	return withLocalizationModule({ actionDescription = p7.actionDescription })(function(p8) --[[ line: 122 ]]
+	return withLocalizationModule({ actionDescription = p7.actionDescription })(function(p8)
 		-- upvalues: roact (copy), p7 (ref), themedTextLabelModule (copy), dividerModule (copy), renderInputIconContainer (copy)
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,

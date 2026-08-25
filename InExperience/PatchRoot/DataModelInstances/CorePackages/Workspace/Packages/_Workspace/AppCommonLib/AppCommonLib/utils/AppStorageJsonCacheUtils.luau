@@ -3,7 +3,7 @@ local httpService = game:GetService("HttpService")
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 20 ]]
+function t.new(p0)
 	-- upvalues: appStorageService (ref), httpService (ref), t (ref)
 	local t_1 = {
 		_appStorageService = p0 or appStorageService,
@@ -15,7 +15,7 @@ function t.new(p0) --[[ line: 20 ]]
 	return t_1
 end
 
-function t:getCachedJsonForKey(p1, p2) --[[ line: 30 ]]
+function t:getCachedJsonForKey(p1, p2)
 	local var4
 	local _ = nil
 	
@@ -28,8 +28,8 @@ function t:getCachedJsonForKey(p1, p2) --[[ line: 30 ]]
 	return var4.result
 end
 
-function t.decodeInternal(p3, p4) --[[ line: 41 ]]
-	local ok, status = pcall(function() --[[ line: 42 ]]
+function t.decodeInternal(p3, p4)
+	local ok, status = pcall(function()
 		-- upvalues: p3 (ref), p4 (ref)
 		return p3._appStorageService:GetItem(p4)
 	end)
@@ -37,7 +37,7 @@ function t.decodeInternal(p3, p4) --[[ line: 41 ]]
 	if not ok then
 		return { result = nil }
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 50 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: p3 (ref), status (ref)
 		return p3._httpService:JSONDecode(status)
 	end)

@@ -15,17 +15,17 @@ local var5 = if fFlagUserListPresenceStoreMigrationModule then require(parent.Da
 local userProfileStoreDataFetchFix = game:DefineFastFlag("UserProfileStoreDataFetchFix", false)
 local userRowModule = require(script.Parent.UserRow)
 
-return function(p0) --[[ line: 34 | named "UserRowWrapper" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useEffect (ref), userProfileStore (ref), userProfileStoreDataFetchFix (ref), fFlagUserListPresenceStoreMigrationModule (ref), var4 (ref), useSelector (ref), getDeepValue (ref), RODUX_KEY (ref), presenceType (ref), var5 (ref), userPresence (ref), userRowModule (ref)
-	local var8 = reactModule.useCallback(function() --[[ line: 35 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		p0.onActivated(p0.userId)
 	end, { p0.onActivated, p0.userId })
 	local var9, var10 = reactModule.useState("")
 	local var11, var12 = reactModule.useState("")
-	useEffect(function() --[[ line: 42 ]]
+	useEffect(function()
 		-- upvalues: userProfileStore (copy), p0 (ref), userProfileStoreDataFetchFix (copy), var10 (ref), var12 (ref)
-		userProfileStore.get().fetchNamesByUserIds({ tostring(p0.userId) }, function(p1) --[[ line: 43 ]]
+		userProfileStore.get().fetchNamesByUserIds({ tostring(p0.userId) }, function(p1)
 			-- upvalues: userProfileStoreDataFetchFix (copy), var10 (copy), var12 (copy)
 			local data
 			if userProfileStoreDataFetchFix then
@@ -49,14 +49,14 @@ return function(p0) --[[ line: 34 | named "UserRowWrapper" ]]
 			end
 		end)
 	end, { p0.userId })
-	local var13 = if fFlagUserListPresenceStoreMigrationModule then var4(p0.userId) else useSelector(function(p2) --[[ line: 66 ]]
+	local var13 = if fFlagUserListPresenceStoreMigrationModule then var4(p0.userId) else useSelector(function(p2)
 		-- upvalues: getDeepValue (copy), RODUX_KEY (copy), p0 (ref)
 		return getDeepValue(p2, string.format("%s.Presence.byUserId.%s", RODUX_KEY, p0.userId)) or {}
 	end)
 	
 	return reactModule.createElement(userRowModule, {
 		userId = p0.userId,
-		userPresence = if fFlagUserListPresenceStoreMigrationModule then reactModule.useMemo(function() --[[ line: 79 ]]
+		userPresence = if fFlagUserListPresenceStoreMigrationModule then reactModule.useMemo(function()
 			-- upvalues: var13 (ref), var5 (copy), userPresence (copy)
 			local userPresenceType = var13 and var13.userPresenceType
 			

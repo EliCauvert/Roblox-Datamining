@@ -21,7 +21,7 @@ local var3 = nil
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 66 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref), var3 (write), concurrentRoot (ref)
 	local tbl = setmetatable({}, t)
 	tbl._internalRoot = var3(p0, concurrentRoot, p1)
@@ -29,7 +29,7 @@ function t.new(p0, p1) --[[ line: 66 ]]
 	return tbl
 end
 
-local function _(p2, p3, p4) --[[ line: 73 | named "createBlockingRoot" ]]
+local function _(p2, p3, p4)
 	-- upvalues: t (ref), var3 (write)
 	local tbl = setmetatable({}, t)
 	tbl._internalRoot = var3(p2, p3, p4)
@@ -37,18 +37,18 @@ local function _(p2, p3, p4) --[[ line: 73 | named "createBlockingRoot" ]]
 	return tbl
 end
 
-function t:render(p5) --[[ line: 85 ]]
+function t:render(p5)
 	-- upvalues: updateContainer (ref)
 	updateContainer(p5, self._internalRoot, nil)
 end
 
-function t:unmount() --[[ line: 113 ]]
+function t:unmount()
 	-- upvalues: flushSync (ref), updateContainer (ref), unmarkContainerAsRoot (ref), flushPassiveEffects (ref)
 	local internalRoot = self._internalRoot
 	local containerInfo = internalRoot.containerInfo
-	flushSync(function() --[[ line: 126 ]]
+	flushSync(function()
 		-- upvalues: updateContainer (copy), internalRoot (ref), unmarkContainerAsRoot (copy), containerInfo (ref)
-		updateContainer(nil, internalRoot, nil, function() --[[ line: 127 ]]
+		updateContainer(nil, internalRoot, nil, function()
 			-- upvalues: unmarkContainerAsRoot (copy), containerInfo (copy)
 			unmarkContainerAsRoot(containerInfo)
 		end)
@@ -56,7 +56,7 @@ function t:unmount() --[[ line: 113 ]]
 	flushPassiveEffects()
 end
 
-var3 = function(p6, p7, p8) --[[ line: 141 ]]
+var3 = function(p6, p7, p8)
 	-- upvalues: createContainer (ref), markContainerAsRoot (ref), enableEagerRootListeners (ref)
 	local var8 = p8 ~= nil and p8.hydrate == true
 	local var9 = if p8 ~= nil then nil else p8.hydrationOptions
@@ -71,17 +71,17 @@ var3 = function(p6, p7, p8) --[[ line: 141 ]]
 end
 
 local t_1 = {
-	isValidContainer = function(p9) --[[ line: 189 ]]
+	isValidContainer = function(p9)
 		return typeof(p9) == "Instance"
 	end,
-	createRoot = function(p10, p11) --[[ line: 212 ]]
+	createRoot = function(p10, p11)
 		-- upvalues: invariant (ref), t (ref)
 		invariant(typeof(p10) == "Instance", "createRoot(...): Target container is not a Roblox Instance.")
 		warnIfReactDOMContainerInDEV(p10)
 		
 		return t.new(p10, p11)
 	end,
-	createBlockingRoot = function(p12, p13) --[[ line: 222 ]]
+	createBlockingRoot = function(p12, p13)
 		-- upvalues: invariant (ref), blockingRoot (ref), t (ref), var3 (write)
 		invariant(typeof(p12) == "Instance", "createRoot(...): Target container is not a Roblox Instance.")
 		warnIfReactDOMContainerInDEV(p12)
@@ -90,7 +90,7 @@ local t_1 = {
 		
 		return tbl
 	end,
-	createLegacyRoot = function(p14, p15) --[[ line: 235 ]]
+	createLegacyRoot = function(p14, p15)
 		-- upvalues: legacyRoot (ref), t (ref), var3 (write)
 		local tbl = setmetatable({}, t)
 		tbl._internalRoot = var3(p14, legacyRoot, p15)
@@ -99,7 +99,7 @@ local t_1 = {
 	end
 }
 
-function warnIfReactDOMContainerInDEV(_) --[[ line: 239 ]]
+function warnIfReactDOMContainerInDEV(_)
 	-- upvalues: reactGlobalsModule (ref) end
 
 return t_1

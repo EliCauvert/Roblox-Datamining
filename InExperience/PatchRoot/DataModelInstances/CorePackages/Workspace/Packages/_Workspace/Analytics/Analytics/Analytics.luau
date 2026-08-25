@@ -7,7 +7,7 @@ local influxModule = require(analyticsReporters.Influx)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 35 ]]
+function t.new(p0)
 	-- upvalues: rbxAnalyticsService (ref), diagModule (ref), eventStreamModule (ref), googleAnalyticsModule (ref), influxModule (ref), t (ref)
 	if not p0 then
 		p0 = rbxAnalyticsService
@@ -23,17 +23,17 @@ function t.new(p0) --[[ line: 35 ]]
 	return t_1
 end
 
-function t.mock() --[[ line: 63 ]]
+function t.mock()
 	-- upvalues: t (ref)
 	return t.new({
-		ReportCounter = function() --[[ line: 66 ]] end,
-		ReportInfluxSeries = function() --[[ line: 67 ]] end,
-		ReportStats = function() --[[ line: 68 ]] end,
-		SetRBXEvent = function() --[[ line: 69 ]] end,
-		SetRBXEventStream = function() --[[ line: 70 ]] end,
-		TrackEvent = function() --[[ line: 71 ]] end,
-		UpdateHeartbeatObject = function() --[[ line: 72 ]] end,
-		SendEventDeferred = function() --[[ line: 73 ]] end
+		ReportCounter = function() end,
+		ReportInfluxSeries = function() end,
+		ReportStats = function() end,
+		SetRBXEvent = function() end,
+		SetRBXEventStream = function() end,
+		TrackEvent = function() end,
+		UpdateHeartbeatObject = function() end,
+		SendEventDeferred = function() end
 	})
 end
 

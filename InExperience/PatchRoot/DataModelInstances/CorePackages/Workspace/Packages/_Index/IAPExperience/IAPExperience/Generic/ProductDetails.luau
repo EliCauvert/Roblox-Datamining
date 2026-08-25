@@ -19,18 +19,18 @@ local default = require(parent_1.LoggingProtocol).default
 local virtualItemBadgeShownCounter = require(parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
 local imageunavailable = images["icons/status/imageunavailable"]
 
-local function _(a) --[[ line: 41 | named "withMaxLength" ]]
+local function _(a)
 	return if #a > 50 then a:sub(1, 50) .. "..." else a
 end
 
-return function(p0) --[[ line: 57 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), modelViewportModule (ref), imageSetLabel (ref), imageunavailable (ref), virtualItemBadgeTypeModule (ref), yellowBadgeModule (ref), loggerModule (ref), default (ref), virtualItemBadgeShownCounter (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref)
 	local var9 = useLocalization({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
 	local var10 = useTokens()
 	local var11 = if p0.isPortrait then 128 else 80
 	local var12, var13 = reactModule.useState(0)
 	
-	local function updateComponentWidth(p1) --[[ line: 66 ]]
+	local function updateComponentWidth(p1)
 		-- upvalues: var11 (ref), var12 (ref), var13 (ref)
 		if not p1 then return end
 		local var22 = p1.AbsoluteSize.X - var11 - 6
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 57 ]]
 		Icon = "icons/menu/fire_fill",
 		Text = var9.Popular
 	}) else nil
-	reactModule.useEffect(function() --[[ line: 102 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), loggerModule (copy), p0 (ref), default (copy), virtualItemBadgeShownCounter (copy)
 		if var16 then
 			loggerModule.debug({

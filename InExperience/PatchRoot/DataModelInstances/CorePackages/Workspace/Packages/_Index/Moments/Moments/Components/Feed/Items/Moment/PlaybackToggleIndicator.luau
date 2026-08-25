@@ -16,67 +16,67 @@ local useSignalState = signalsReactModule.useSignalState
 local t = { frequency = 4, dampingRatio = 1 }
 local t_1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
-local function defaultSchedule(p0, p1) --[[ line: 57 ]]
+local function defaultSchedule(p0, p1)
 	local delayedThread = task.delay(p0 / 1000, p1)
 	
-	return function() --[[ line: 59 ]]
+	return function()
 		-- upvalues: delayedThread (ref)
 		task.cancel(delayedThread)
 	end
 end
 
-return function(p2) --[[ line: 70 | named "PlaybackToggleIndicator" ]]
+return function(p2)
 	-- upvalues: momentContextModule (ref), useTokens (ref), usePreferences (ref), reactModule (ref), reactOtterModule (ref), signalsModule (ref), useSignalState (ref), t (ref), t_1 (ref), defaultSchedule (ref), playbackToggleIndicatorMachineModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref)
 	local controller = momentContextModule.useMoment().controller
 	local var11 = useTokens()
 	local reducedMotion = usePreferences().reducedMotion
 	local var12, var13 = reactModule.useState(false)
 	local var14, var15 = reactOtterModule.useAnimatedBinding(0)
-	local var16 = useSignalState(reactModule.useMemo(function() --[[ line: 82 ]]
+	local var16 = useSignalState(reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p3) --[[ line: 83 ]]
+		return signalsModule.createComputed(function(p3)
 			-- upvalues: controller (copy)
 			return if controller == nil then false else controller.getState(p3).isPlaying
 		end)
 	end, { controller }))
 	local var17 = reactModule.useRef(nil)
 	
-	function var17.current(p4) --[[ line: 95 ]]
+	function var17.current(p4)
 		-- upvalues: reducedMotion (ref), reactOtterModule (copy), t (copy), t_1 (copy), var15 (ref)
 		var15(if reducedMotion then reactOtterModule.instant(if p4 == "enter" then 1 else 0) elseif p4 == "enter" then reactOtterModule.spring(1, t) else reactOtterModule.ease(0, t_1))
 	end
 	
 	local var18 = reactModule.useRef(nil)
 	var18.current = p2.scheduleOverride or defaultSchedule
-	local var19 = reactModule.useMemo(function() --[[ line: 113 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: playbackToggleIndicatorMachineModule (copy), var18 (ref), var13 (ref), var17 (ref)
 		return playbackToggleIndicatorMachineModule({ dwellMs = 800, exitDurationMs = 150 }, {
-			schedule = function(p5, p6) --[[ line: 118 ]]
+			schedule = function(p5, p6)
 				-- upvalues: var18 (copy)
 				return var18.current(p5, p6)
 			end,
 			setMounted = var13,
-			animate = function(p7) --[[ line: 122 ]]
+			animate = function(p7)
 				-- upvalues: var17 (copy)
 				var17.current(p7)
 			end
 		})
 	end, {})
-	reactModule.useEffect(function() --[[ line: 130 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref)
-		return function() --[[ line: 131 ]]
+		return function()
 			-- upvalues: var19 (copy)
 			var19.dispose()
 		end
 	end, { var19 })
-	reactModule.useEffect(function() --[[ line: 139 ]]
+	reactModule.useEffect(function()
 		-- upvalues: controller (ref), signalsModule (copy), var19 (ref)
 		if controller == nil then
 			return
 		end
 		local var20 = nil
 		
-		return signalsModule.createEffect(function(p8) --[[ line: 144 ]]
+		return signalsModule.createEffect(function(p8)
 			-- upvalues: controller (copy), var20 (write), var19 (copy)
 			local userToggleNonce = controller.getUserToggleNonce(p8)
 			
@@ -97,13 +97,13 @@ return function(p2) --[[ line: 70 | named "PlaybackToggleIndicator" ]]
 		BackgroundTransparency = 1,
 		ZIndex = 3,
 		Size = UDim2.fromOffset(64, 64),
-		scale = var14:map(function(p9) --[[ line: 163 ]]
+		scale = var14:map(function(p9)
 			return p9 * 0.25 + 0.75
 		end)
 	}, {
 		Circle = reactModule.createElement(view, {
 			tag = "row align-x-center align-y-center size-full radius-circle clip bg-over-media-0",
-			GroupTransparency = var14:map(function(p10) --[[ line: 166 ]]
+			GroupTransparency = var14:map(function(p10)
 				return 1 - p10
 			end)
 		}, {

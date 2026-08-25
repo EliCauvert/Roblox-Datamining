@@ -6,7 +6,7 @@ return require(foundation.Parent.React).createContext({
 	Selectable = true,
 	testId = "",
 	fillBehavior = nil,
-	onValueChanged = function(_) --[[ line: 25 ]]
+	onValueChanged = function(_)
 		warn("No OptionSelectorGroupProvider found for OptionSelectorGroup")
 	end,
 	orientation = require(foundation.Enums.Orientation).Vertical,

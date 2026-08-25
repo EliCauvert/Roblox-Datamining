@@ -7,12 +7,12 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local text = appCommonLibModule.Text
 local useStyle = UIBloxModule.Core.Style.useStyle
 
-return function(p0) --[[ line: 25 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), text (ref), button (ref), buttonType (ref)
 	local var3 = useStyle()
 	local font = var3.Font.Header2.Font
 	local var4 = var3.Font.BaseSize * var3.Font.Header2.RelativeSize
-	local var5 = reactModule.useMemo(function() --[[ line: 31 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), text (copy), font (ref), var4 (ref)
 		return if p0.buttonWidth then p0.buttonWidth else text.GetTextWidth(p0.text, font, var4) + 24
 	end, { p0.text, font, var4, p0.buttonWidth })

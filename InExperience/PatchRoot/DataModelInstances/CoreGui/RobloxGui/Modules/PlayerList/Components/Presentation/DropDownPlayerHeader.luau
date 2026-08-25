@@ -16,11 +16,11 @@ dropDownPlayerHeader.validateProps = tModule.strictInterface({
 	showVerifiedBadge = tModule.optional(tModule.boolean)
 })
 
-function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
+function dropDownPlayerHeader.render(p0)
 	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref)
-	return withLayoutValues(function(p1) --[[ line: 38 ]]
+	return withLayoutValues(function(p1)
 		-- upvalues: withFoundationOrUIBloxStyle (copy), p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy)
-		return withFoundationOrUIBloxStyle(function(p2) --[[ line: 39 ]]
+		return withFoundationOrUIBloxStyle(function(p2)
 			return {
 				Theme = {
 					Divider = {
@@ -52,7 +52,7 @@ function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
 					}
 				}
 			}
-		end, function(p3) --[[ line: 71 ]]
+		end, function(p3)
 			-- upvalues: p0 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), p1 (ref), emojiTextLabel (copy), emoji (copy)
 			local player = p0.props.player
 			
@@ -154,7 +154,7 @@ function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
 	end)
 end
 
-return if fFlagEnableVerifiedBadgeStore then function(p4) --[[ line: 181 ]]
+return if fFlagEnableVerifiedBadgeStore then function(p4)
 	-- upvalues: useVerifiedBadge (ref), roactModule (ref), dropDownPlayerHeader (ref), cryoModule (ref)
 	return roactModule.createElement(dropDownPlayerHeader, cryoModule.Dictionary.join(p4, { showVerifiedBadge = useVerifiedBadge(p4.player) }))
 end else dropDownPlayerHeader

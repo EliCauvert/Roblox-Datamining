@@ -2,7 +2,7 @@
 local tModule = require(parent.t)
 local array = require(parent.LuauPolyfill).Array
 
-local function _(p0, p1) --[[ line: 28 | named "hasValue" ]]
+local function _(p0, p1)
 	for i, v in p0 do
 		if v == p1 then
 			return true
@@ -11,7 +11,7 @@ local function _(p0, p1) --[[ line: 28 | named "hasValue" ]]
 	return false
 end
 
-local _ = function(p2, p3) --[[ line: 37 | named "matches" ]]
+local _ = function(p2, p3)
 	if not p2 or not p3 then
 		return true
 	elseif typeof(p3) ~= "table" then
@@ -25,11 +25,11 @@ local _ = function(p2, p3) --[[ line: 37 | named "matches" ]]
 	return false
 end
 
-local function readValue(p4, p5, p6, p7, p8) --[[ line: 48 ]]
+local function readValue(p4, p5, p6, p7, p8)
 	-- upvalues: array (ref), readValue (ref)
 	local var4 = p4[p7]
 	local var5 = if var4 ~= nil then -1 else p8
-	array.forEach(p4, function(p9) --[[ line: 51 ]]
+	array.forEach(p4, function(p9)
 		-- upvalues: p5 (ref), p6 (ref), readValue (copy), p7 (ref), p8 (ref), var5 (write), var4 (write)
 		local var7
 		local var6 = p5
@@ -80,13 +80,13 @@ end
 
 local t = { name = "_default", min = 1e999, max = 0 }
 local t_1 = {
-	[tModule.strictInterface({ Scale = tModule.number, Offset = tModule.number })] = function(p10) --[[ line: 89 ]]
+	[tModule.strictInterface({ Scale = tModule.number, Offset = tModule.number })] = function(p10)
 		return UDim.new(p10.Scale, p10.Offset)
 	end
 }
 
 return {
-	getValue = function(p11, p12) --[[ line: 95 ]]
+	getValue = function(p11, p12)
 		-- upvalues: array (ref), readValue (ref), t_1 (ref)
 		local config = p11.config
 		local breakpoint = p11.breakpoint
@@ -94,7 +94,7 @@ return {
 		local var8 = config[p12]
 		local var9 = if var8 ~= nil then -1 else 0
 		local var10 = 0
-		array.forEach(config, function(p13) --[[ line: 51 ]]
+		array.forEach(config, function(p13)
 			-- upvalues: breakpoint (ref), kind (ref), readValue (copy), p12 (ref), var10 (ref), var9 (write), var8 (write)
 			local var7
 			local var6 = breakpoint
@@ -149,9 +149,9 @@ return {
 		end
 		return var11
 	end,
-	findBreakpoint = function(p14, p15) --[[ line: 69 ]]
+	findBreakpoint = function(p14, p15)
 		-- upvalues: array (ref), t (ref)
-		local var12 = array.find(p14, function(p16) --[[ line: 70 ]]
+		local var12 = array.find(p14, function(p16)
 			-- upvalues: p15 (ref)
 			return type(p16) == "table" and (type(p16.breakpoint) == "string" and (p15 <= (p16.max or 1e999) and (p16.min or 0) <= p15))
 		end)

@@ -28,15 +28,15 @@ local capturesSaveToExternalStorageLimit = game:DefineFastInt("CapturesSaveToExt
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local uDim2 = UDim2.new(0.33, 0, 0, 36)
 
-return capturesPolicyModule.connect(function(p2) --[[ line: 279 ]]
+return capturesPolicyModule.connect(function(p2)
 	return { enableShareCaptureCTA = p2.enableShareCaptureCTA() }
-end)(function(p0) --[[ line: 55 ]]
+end)(function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useRef (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesSaveToExternalStorageLimit (ref), useLocalization (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), getSaveToStoragePermissionModule (ref), eventNamesModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref), getIsDeleteWarningModalOptedOutModule (ref), deleteWarningModalOpenedModule (ref), iconButton (ref), images (ref), iconSize (ref), uDim2 (ref)
 	local var18 = useAnalyticsModule()
 	local var19 = useDispatch()
 	local var20 = useStyle()
 	local var21 = useRef(0)
-	local var22 = useSelector(function(p1) --[[ line: 62 ]]
+	local var22 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].CaptureManager.SelectedCaptures
 	end)
@@ -57,7 +57,7 @@ end)(function(p0) --[[ line: 55 ]]
 			numberOfCaptures = var22Count
 		}
 	})
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), var22 (ref), captureTypeModule (copy), var24 (ref)
 		local var37 = false
 		
@@ -77,15 +77,15 @@ end)(function(p0) --[[ line: 55 ]]
 		end
 		var24(var37)
 	end, { var22 })
-	local var34 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: var22Count (ref), var33 (ref)
 		return if var22Count == 0 then var33.selectCaptureLabel elseif var22Count == 1 then var33.oneCaptureSelectedLabel else var33.multipleCapturesSelectedLabel
 	end, { var22Count })
-	local var35 = reactModule.useCallback(function() --[[ line: 120 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var21 (ref)
 		return if p0.isDisabled then true else DateTime.now().UnixTimestampMillis - var21.current < 500
 	end, { p0.isDisabled })
-	local var36 = reactModule.useCallback(function() --[[ line: 134 ]]
+	local var36 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref)
 		var21.current = DateTime.now().UnixTimestampMillis
 	end, {})
@@ -141,7 +141,7 @@ end)(function(p0) --[[ line: 55 ]]
 				icon = images["icons/actions/download_medium"],
 				iconSize = iconSize.Medium,
 				isDisabled = var27,
-				onActivated = reactModule.useCallback(function() --[[ line: 138 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var35 (ref), var22 (ref), getSaveToStoragePermissionModule (copy), p0 (ref), var19 (ref), var18 (ref), eventNamesModule (copy), var36 (ref)
 					if var35() or #var22 == 0 then
 						return
@@ -158,7 +158,7 @@ end)(function(p0) --[[ line: 55 ]]
 				icon = images["icons/actions/share"],
 				iconSize = iconSize.Medium,
 				isDisabled = var26,
-				onActivated = reactModule.useCallback(function() --[[ line: 149 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var35 (ref), var26 (ref), var22 (ref), var36 (ref), var23 (ref), var18 (ref), eventNamesModule (copy), socialStopwatchModule (copy), var19 (ref), shareCaptureModule (copy), externalShareSourceTypeModule (copy)
 					if var35() or var26 then return end
 					local var38 = var22[1]
@@ -183,7 +183,7 @@ end)(function(p0) --[[ line: 55 ]]
 				icon = images["icons/actions/edit/delete"],
 				iconSize = iconSize.Medium,
 				isDisabled = var28,
-				onActivated = reactModule.useCallback(function() --[[ line: 177 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var35 (ref), var28 (ref), var36 (ref), var18 (ref), eventNamesModule (copy), getIsDeleteWarningModalOptedOutModule (copy), p0 (ref), var19 (ref), deleteWarningModalOpenedModule (copy)
 					if var35() or var28 then return end
 					var36()

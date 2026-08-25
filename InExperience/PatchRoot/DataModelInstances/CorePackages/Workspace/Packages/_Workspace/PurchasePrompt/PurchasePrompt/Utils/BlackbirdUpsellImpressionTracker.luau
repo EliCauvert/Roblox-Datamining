@@ -1,9 +1,9 @@
 ﻿local blackbirdUpsellBannerMaxSessionImpressions = game:DefineFastInt("BlackbirdUpsellBannerMaxSessionImpressions", 50)
 local memStorageService = game:GetService("MemStorageService")
 local t = {
-	getImpressionCount = function() --[[ line: 10 ]]
+	getImpressionCount = function()
 		-- upvalues: memStorageService (ref)
-		local ok, status = pcall(function() --[[ line: 11 ]]
+		local ok, status = pcall(function()
 			-- upvalues: memStorageService (copy)
 			return memStorageService:GetItem("BlackbirdUpsellBannerImpressionCount")
 		end)
@@ -12,16 +12,16 @@ local t = {
 	end
 }
 
-function t.incrementImpressionCount() --[[ line: 20 ]]
+function t.incrementImpressionCount()
 	-- upvalues: t (ref), memStorageService (ref)
 	local impressionCount = t.getImpressionCount()
-	pcall(function() --[[ line: 22 ]]
+	pcall(function()
 		-- upvalues: memStorageService (copy), impressionCount (ref)
 		memStorageService:SetItem("BlackbirdUpsellBannerImpressionCount", tostring(impressionCount + 1))
 	end)
 end
 
-function t.hasReachedMaxImpressions() --[[ line: 27 ]]
+function t.hasReachedMaxImpressions()
 	-- upvalues: blackbirdUpsellBannerMaxSessionImpressions (ref), t (ref)
 	return if blackbirdUpsellBannerMaxSessionImpressions == 0 then false else blackbirdUpsellBannerMaxSessionImpressions <= t.getImpressionCount()
 end

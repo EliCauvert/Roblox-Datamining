@@ -7,11 +7,11 @@ local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-local var2 = function() --[[ line: 14 ]] end
+local var2 = function() end
 
 local t = { affordance = enums.StateLayerAffordance.None }
 
-return reactModule.memo(function(p0) --[[ line: 36 | named "InfoTableCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagSduiExperienceDetailsSupport (ref), reactModule (ref), view (ref), var2 (ref), t (ref), divider (ref), icon (ref), enums (ref)
 	local var4 = (p0.numColumns or 1) == 1
 	local var5 = nil
@@ -19,7 +19,7 @@ return reactModule.memo(function(p0) --[[ line: 36 | named "InfoTableCell" ]]
 	
 	if fFlagSduiExperienceDetailsSupport then
 		var5 = p0.selectable ~= false
-		var6 = reactModule.useMemo(function() --[[ line: 44 ]]
+		var6 = reactModule.useMemo(function()
 			-- upvalues: var5 (write), p0 (ref)
 			return if var5 then { Selectable = true, SelectionOrder = p0.selectionOrder } else nil
 		end, { var5, p0.selectionOrder })

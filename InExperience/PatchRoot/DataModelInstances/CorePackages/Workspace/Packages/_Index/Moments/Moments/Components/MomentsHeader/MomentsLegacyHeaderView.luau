@@ -20,7 +20,7 @@ local navigationMenuModule = require(moments.Components.NavigationMenu)
 local constantsModule = require(moments.Constants)
 local _ = require(script.Parent.MomentsHeaderView)
 
-return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), view (ref), plusLarge (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), navigationMenuModule (ref), foundationProvider (ref), colorMode (ref), gradientBackdrop (ref), constantsModule (ref)
 	local t = nil
 	

@@ -13,7 +13,7 @@ local colorMode = foundationModule.Enums.ColorMode
 local var4 = dependenciesModule.Lumberyak.Logger.new()
 var4:addSink({
 	maxLevel = var4.Levels.fromString("info"),
-	log = function(_, p0, _) --[[ line: 29 ]]
+	log = function(_, p0, _)
 		print(p0)
 	end
 })
@@ -27,14 +27,14 @@ local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_2 = { language = "en-us" }
 
 return {
-	mapDefinition = function(p1) --[[ line: 61 ]]
+	mapDefinition = function(p1)
 		-- upvalues: llama (ref), t_2 (ref)
 		return llama.Dictionary.join(p1, { controls = llama.Dictionary.join(t_2, p1.controls or {}) })
 	end,
 	roact = roact,
-	mapStory = function(p2) --[[ line: 66 ]]
+	mapStory = function(p2)
 		-- upvalues: t (ref), roact (ref), foundationProvider (ref), t_1 (ref), appStyleProvider (ref), universalAppPolicy (ref), mockLocale (ref)
-		return function(p3) --[[ line: 67 ]]
+		return function(p3)
 			-- upvalues: t (copy), roact (copy), foundationProvider (copy), t_1 (copy), appStyleProvider (copy), universalAppPolicy (copy), mockLocale (copy), p2 (ref)
 			local var8 = if p3 then t[p3.theme] else t.Default
 			
@@ -42,10 +42,10 @@ return {
 				AppStyle = roact.createElement(appStyleProvider, { style = var8 }, {
 					roact.createElement(universalAppPolicy.Provider, {
 						policy = {
-							function() --[[ line: 80 ]]
+							function()
 								-- upvalues: p3 (ref)
 								return {
-									getShowDisplayName = function() --[[ line: 82 ]]
+									getShowDisplayName = function()
 										-- upvalues: p3 (copy)
 										return p3.controls.getShowDisplayName
 									end

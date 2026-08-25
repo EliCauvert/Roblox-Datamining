@@ -14,7 +14,7 @@ local var1 = t.interface({
 	})
 })
 
-return function(p0) --[[ line: 29 ]]
+return function(p0)
 	-- upvalues: var1 (ref)
 	local var2, _ = var1(p0)
 	

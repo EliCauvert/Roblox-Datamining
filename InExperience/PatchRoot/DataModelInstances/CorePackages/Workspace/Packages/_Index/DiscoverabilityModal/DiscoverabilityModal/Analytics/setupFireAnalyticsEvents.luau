@@ -4,7 +4,7 @@ local fireEventStream = socialLuaAnalytics.Analytics.FireEvent.fireEventStream
 local fireDiagCounter = socialLuaAnalytics.Analytics.FireEvent.fireDiagCounter
 local analyticsEventsModule = require(script.Parent.AnalyticsEvents)
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: fireEventStream (ref), analyticsEventsModule (ref), fireDiagCounter (ref), diagEventsModule (ref)
 	local var2 = fireEventStream({
 		eventStreamImpl = if p0.analytics then p0.analytics.EventStream else p0.eventStreamImpl,
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 10 ]]
 		eventList = diagEventsModule
 	})
 	
-	return function(p1, p2) --[[ line: 28 ]]
+	return function(p1, p2)
 		-- upvalues: var3 (ref), var2 (ref)
 		var3(p1)
 		var2(p1, p2)

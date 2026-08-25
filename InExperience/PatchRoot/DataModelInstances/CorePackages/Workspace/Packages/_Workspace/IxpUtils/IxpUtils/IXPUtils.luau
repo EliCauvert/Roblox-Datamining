@@ -14,7 +14,7 @@ local var7 = IXPService
 local connectUserLayer = roactAppExperimentModule.connectUserLayer
 local default = experimentCacheManager.default
 local t = {
-	defineIXPTest = function(p0) --[[ line: 210 ]]
+	defineIXPTest = function(p0)
 		-- upvalues: fFlagAXLegacyIXPExposureLogging (ref), var5 (ref), nOVALUE (ref)
 		local t = {
 			name = p0.name,
@@ -22,11 +22,11 @@ local t = {
 			recordExposure = if p0.recordExposure then p0.recordExposure else false,
 			logExposureEnabled = if fFlagAXLegacyIXPExposureLogging then p0.logExposureEnabled else nil,
 			getIsUserInExperiment = p0.getIsUserInExperiment,
-			isEnabled = function() --[[ line: 222 ]]
+			isEnabled = function()
 				-- upvalues: p0 (ref)
 				return p0.getDependentFlagsEnabled() and (p0.getEnabledFlag() or p0.getEnabledForAllFlag())
 			end,
-			isEnabledForAll = function() --[[ line: 227 ]]
+			isEnabledForAll = function()
 				-- upvalues: p0 (ref)
 				return p0.getDependentFlagsEnabled() and p0.getEnabledForAllFlag()
 			end
@@ -45,14 +45,14 @@ local t = {
 	end
 }
 
-local function readLayerVariablesForTest(p1) --[[ line: 254 ]]
+local function readLayerVariablesForTest(p1)
 	-- upvalues: var7 (write), default (write)
 	p1.usedExperimentCacheManager = p1.usedExperimentCacheManager or var7:GetUserStatusForLayer(p1.layer) ~= Enum.IXPLoadingStatus.Initialized
 	
 	return (if p1.usedExperimentCacheManager then default:getLayerVariables(p1.layer) else var7:GetUserLayerVariables(p1.layer)) or {}
 end
 
-local function mapTestVariable(p2, p3) --[[ line: 265 ]]
+local function mapTestVariable(p2, p3)
 	-- upvalues: readLayerVariablesForTest (ref), var5 (ref)
 	local ixpTest = p2.ixpTest
 	
@@ -68,13 +68,13 @@ local function mapTestVariable(p2, p3) --[[ line: 265 ]]
 	return var13
 end
 
-local function _(p4, p5) --[[ line: 278 | named "accessLayer" ]]
+local function _(p4, p5)
 	return if p4.usedExperimentCacheManager then nil else p5[p4.layer]
 end
 
-local function doConnectTestVariables(p6, p7, p8) --[[ line: 286 ]]
+local function doConnectTestVariables(p6, p7, p8)
 	-- upvalues: connectUserLayer (write), mapTestVariable (ref)
-	return connectUserLayer(p7, function(p9) --[[ line: 291 ]]
+	return connectUserLayer(p7, function(p9)
 		-- upvalues: p6 (ref), mapTestVariable (copy)
 		local t = {}
 		
@@ -89,7 +89,7 @@ local function doConnectTestVariables(p6, p7, p8) --[[ line: 286 ]]
 	end, p8)
 end
 
-function t.connectTestVariables(p10) --[[ line: 318 ]]
+function t.connectTestVariables(p10)
 	-- upvalues: dashModule (ref), doConnectTestVariables (ref)
 	local t = {}
 	local t_1 = {}
@@ -123,7 +123,7 @@ function t.connectTestVariables(p10) --[[ line: 318 ]]
 	return dashModule.pipe(table.unpack(t_4))
 end
 
-function t.useTestVariables(...) --[[ line: 360 ]]
+function t.useTestVariables(...)
 	-- upvalues: argCheckModule (ref), useUserExperiment (ref), mapTestVariable (ref)
 	local list = { ... }
 	local ixpTest = nil
@@ -135,7 +135,7 @@ function t.useTestVariables(...) --[[ line: 360 ]]
 			ixpTest = v.ixpTest
 		end
 	end
-	return useUserExperiment({ ixpTest.layer }, function(p11) --[[ line: 374 ]]
+	return useUserExperiment({ ixpTest.layer }, function(p11)
 		-- upvalues: ixpTest (write), list (ref), mapTestVariable (copy)
 		local var23 = if ixpTest.usedExperimentCacheManager then nil else p11[ixpTest.layer]
 		local t = {}
@@ -149,14 +149,14 @@ function t.useTestVariables(...) --[[ line: 360 ]]
 	end, ixpTest.recordExposure)
 end
 
-local _ = function(p12, p13) --[[ line: 388 | named "readTestVariableImpl" ]]
+local _ = function(p12, p13)
 	-- upvalues: mapTestVariable (ref)
 	local ixpTest = p12.ixpTest
 	
 	return if ixpTest.isEnabled() then mapTestVariable(p12, if p13 then p13[ixpTest.layer] else nil) else nil
 end
 
-function t.readTestVariable(p14) --[[ line: 403 ]]
+function t.readTestVariable(p14)
 	-- upvalues: readLayerVariablesForTest (ref), var5 (ref)
 	if not p14.ixpTest.isEnabled() then
 		return nil
@@ -173,26 +173,26 @@ function t.readTestVariable(p14) --[[ line: 403 ]]
 	return var25
 end
 
-function t.getFromLayers(p15, p16) --[[ line: 413 ]]
+function t.getFromLayers(p15, p16)
 	-- upvalues: mapTestVariable (ref)
 	local ixpTest = p16.ixpTest
 	
 	return if ixpTest.isEnabled() then mapTestVariable(p16, if p15 then p15[ixpTest.layer] else nil) else nil
 end
 
-function t.logExposure(p17) --[[ line: 417 ]]
+function t.logExposure(p17)
 	-- upvalues: var5 (ref), var7 (write)
 	var5:debug("LogUserLayerExposure: {}", p17.layer)
 	var7:LogUserLayerExposure(p17.layer)
 end
 
-function t.logLayerExposure(p18) --[[ line: 422 ]]
+function t.logLayerExposure(p18)
 	-- upvalues: var5 (ref), var7 (write)
 	var5:debug("LogLayerExposure: {}", p18)
 	var7:LogUserLayerExposure(p18)
 end
 
-function t.logExperimentExposure(p19) --[[ line: 431 ]]
+function t.logExperimentExposure(p19)
 	-- upvalues: var5 (ref), readLayerVariablesForTest (ref), var7 (write)
 	var5:debug("LogExperimentExposure: {}", p19.layer)
 	
@@ -204,11 +204,11 @@ function t.logExperimentExposure(p19) --[[ line: 431 ]]
 	return false
 end
 
-function t.useLogExposureOnce(p20) --[[ line: 449 ]]
+function t.useLogExposureOnce(p20)
 	-- upvalues: reactModule (ref), t (ref)
 	local var26 = reactModule.useRef(false)
 	
-	return reactModule.useCallback(function() --[[ line: 452 ]]
+	return reactModule.useCallback(function()
 		-- upvalues: var26 (ref), t (copy), p20 (ref)
 		if not var26.current then
 			t.logExposure(p20)
@@ -217,14 +217,14 @@ function t.useLogExposureOnce(p20) --[[ line: 449 ]]
 	end, { p20.layer })
 end
 
-function t.setMocksForTesting(value, p21, p22) --[[ line: 460 ]]
+function t.setMocksForTesting(value, p21, p22)
 	-- upvalues: var7 (write), connectUserLayer (write), default (write)
 	var7 = value or var7
 	connectUserLayer = p21 or connectUserLayer
 	default = p22 or default
 end
 
-function t.restoreDefaultsAfterTesting() --[[ line: 466 ]]
+function t.restoreDefaultsAfterTesting()
 	-- upvalues: var7 (write), IXPService (ref), connectUserLayer (write), roactAppExperimentModule (ref), default (write), experimentCacheManager (ref)
 	var7 = IXPService
 	connectUserLayer = roactAppExperimentModule.connectUserLayer

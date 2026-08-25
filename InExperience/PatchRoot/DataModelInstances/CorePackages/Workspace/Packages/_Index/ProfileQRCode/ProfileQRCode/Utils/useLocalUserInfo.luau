@@ -6,10 +6,10 @@ local constantsModule = require(profileQRCode.Common.Constants)
 local userProfilesModule = require(parent.UserProfiles)
 local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p0) --[[ line: 12 ]]
+return function(p0)
 	-- upvalues: fFlagProfileQrCodeDeprecateUserReduxModule (ref), userProfilesModule (ref), useSelector (ref), getDeepValue (ref), constantsModule (ref)
 	if not fFlagProfileQrCodeDeprecateUserReduxModule then
-		return useSelector(function(p1) --[[ line: 31 ]]
+		return useSelector(function(p1)
 			-- upvalues: getDeepValue (copy), constantsModule (copy), p0 (ref)
 			return getDeepValue(p1, constantsModule.RODUX_KEY .. ".Users.byUserId." .. p0)
 		end)

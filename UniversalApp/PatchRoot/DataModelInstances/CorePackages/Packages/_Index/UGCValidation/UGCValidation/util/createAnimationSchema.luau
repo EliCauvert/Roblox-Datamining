@@ -3,7 +3,7 @@ local constantsModule = require(parent.Constants)
 local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
 local getFFlagUGCValidationAnimationAssetDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationAssetDisableModelStructure)
 
-local function createAnimationEntry(p0, p1) --[[ line: 8 ]]
+local function createAnimationEntry(p0, p1)
 	local t = { ClassName = "Animation" }
 	
 	if p0 then
@@ -21,7 +21,7 @@ local function createAnimationEntry(p0, p1) --[[ line: 8 ]]
 	return t
 end
 
-local function createStringValueWithAnimations(p2, p3, p4) --[[ line: 27 ]]
+local function createStringValueWithAnimations(p2, p3, p4)
 	-- upvalues: createAnimationEntry (ref)
 	local t = {}
 	table.insert(t, createAnimationEntry(false, p4))
@@ -32,7 +32,7 @@ local function createStringValueWithAnimations(p2, p3, p4) --[[ line: 27 ]]
 	return { ClassName = "StringValue", Name = p2, _children = t }
 end
 
-return function(p5, p6) --[[ line: 46 | named "createAnimationSchema" ]]
+return function(p5, p6)
 	-- upvalues: constantsModule (ref), createStringValueWithAnimations (ref), getFFlagUGCValidationAnimationAssetDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref)
 	local var7 = constantsModule.ANIMATION_ASSET_INFO[p5]
 	assert(var7, `No ANIMATION_ASSET_INFO for {p5}`)

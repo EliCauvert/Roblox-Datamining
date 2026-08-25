@@ -2,7 +2,7 @@
 local recommendationContextTypeModule = require(socialCommon.Enums.RecommendationContextType)
 local contextualInfoTypesModule = require(socialCommon.Enums.ContextualInfoTypes)
 
-return function(p0) --[[ line: 11 | named "getRecommendationContextualInfoType" ]]
+return function(p0)
 	-- upvalues: recommendationContextTypeModule (ref), contextualInfoTypesModule (ref)
 	local var3 = p0.contextType and p0.contextType.rawValue()
 	

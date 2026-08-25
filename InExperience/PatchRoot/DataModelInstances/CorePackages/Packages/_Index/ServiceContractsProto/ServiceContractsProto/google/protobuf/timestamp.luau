@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 41 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		seconds = if p0 == nil or p0.seconds == nil then 0 else p0.seconds,
@@ -12,7 +12,7 @@ function t_1.new(p0) --[[ line: 41 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 48 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -35,7 +35,7 @@ function t_1:encode() --[[ line: 48 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 67 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var12 = t_1.new()
 	local var13 = 0
@@ -85,11 +85,11 @@ function t_1.decode(p1) --[[ line: 67 ]]
 	return var12
 end
 
-local function serializeFractionalNanos(p2) --[[ line: 115 ]]
+local function serializeFractionalNanos(p2)
 	return if p2 % 1000000 == 0 then string.format(".%03d", p2) elseif p2 % 1000 == 0 then string.format(".%06d", p2) else string.format(".%09d", p2)
 end
 
-local function _(p3) --[[ line: 125 | named "deserializeFractionalNanos" ]]
+local function _(p3)
 	local var31 = assert(tonumber(p3), "Invalid nanos string received, couldn't turn into a number")
 	
 	for i = #p3 + 1, 9 do
@@ -98,7 +98,7 @@ local function _(p3) --[[ line: 125 | named "deserializeFractionalNanos" ]]
 	return var31
 end
 
-function t_1:jsonEncode() --[[ line: 134 ]]
+function t_1:jsonEncode()
 	-- upvalues: serializeFractionalNanos (ref)
 	if self.seconds > 253402300799 then
 		error("Invalid timestamp provided: years after 9999 are not supported")
@@ -114,7 +114,7 @@ function t_1:jsonEncode() --[[ line: 134 ]]
 	return string.format("%04d-%02d-%02dT%02d:%02d:%02d%sZ", dateString.year, dateString.month, dateString.day, dateString.hour, dateString.min, dateString.sec, if self.nanos == 0 then "" else serializeFractionalNanos(self.nanos))
 end
 
-function t_1.jsonDecode(p4) --[[ line: 160 ]]
+function t_1.jsonDecode(p4)
 	-- upvalues: t_1 (ref)
 	local match, match_1, match_2, match_3, match_4, match_5, match_6 = string.match(p4, "^([0-9]+)-([0-9]+)-([0-9]+)T([0-9]+):([0-9]+):([0-9]+)(.*)Z$")
 	

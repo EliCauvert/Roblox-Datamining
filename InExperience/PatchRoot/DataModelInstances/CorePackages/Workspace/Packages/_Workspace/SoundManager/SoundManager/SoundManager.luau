@@ -18,14 +18,14 @@ local t_1 = {
 }
 local t_2 = {}
 
-local function fadeVolume(p0, p1, p2, p3) --[[ line: 36 ]]
+local function fadeVolume(p0, p1, p2, p3)
 	-- upvalues: t_2 (ref), runService (ref)
 	if p1 < 0 then
 		error(p3 .. " cannot have a negative fadeIn/fadeOut time.")
 	end
 	local var10 = (p2 - p0.Volume) / p1
 	
-	local function onHeartBeat(p4) --[[ line: 45 ]]
+	local function onHeartBeat(p4)
 		-- upvalues: var10 (ref), p0 (ref), t_2 (copy), p2 (ref)
 		local var12 = p0.Volume + var10 * p4
 		
@@ -50,7 +50,7 @@ local function fadeVolume(p0, p1, p2, p3) --[[ line: 36 ]]
 	t_2[p0.SoundId] = runService.Heartbeat:Connect(onHeartBeat)
 end
 
-function t._createSoundEffect(_, p5, p6, p7, p8) --[[ line: 76 ]]
+function t._createSoundEffect(_, p5, p6, p7, p8)
 	-- upvalues: soundEffectsModule (ref)
 	if not soundEffectsModule[p5] then
 		error(p5 .. " does not exist in list of SoundEffects")
@@ -64,7 +64,7 @@ function t._createSoundEffect(_, p5, p6, p7, p8) --[[ line: 76 ]]
 	var13.Name = p6
 end
 
-function t.PlaySound(p9, p10, p11, p12) --[[ line: 107 ]]
+function t.PlaySound(p9, p10, p11, p12)
 	-- upvalues: robloxGui (ref), soundsModule (ref), cryoModule (ref), t_1 (ref), fadeVolume (ref)
 	local soundManagerSounds = robloxGui:FindFirstChild("SoundManager_Sounds")
 	
@@ -108,7 +108,7 @@ function t.PlaySound(p9, p10, p11, p12) --[[ line: 107 ]]
 	name:Play()
 end
 
-function t.StopSound(_, p13) --[[ line: 168 ]]
+function t.StopSound(_, p13)
 	-- upvalues: robloxGui (ref), soundsModule (ref), fadeVolume (ref)
 	local soundManagerSounds = robloxGui:FindFirstChild("SoundManager_Sounds")
 	
@@ -140,7 +140,7 @@ function t.StopSound(_, p13) --[[ line: 168 ]]
 	name:Stop()
 end
 
-function t.CreateSoundGroup(p14, p15) --[[ line: 202 ]]
+function t.CreateSoundGroup(p14, p15)
 	-- upvalues: soundGroupsModule (ref), robloxGui (ref)
 	local var22 = soundGroupsModule[p15]
 	
@@ -170,7 +170,7 @@ function t.CreateSoundGroup(p14, p15) --[[ line: 202 ]]
 	end
 end
 
-function t.SoundGroupAddSoundEffect(p16, p17, p18) --[[ line: 236 ]]
+function t.SoundGroupAddSoundEffect(p16, p17, p18)
 	-- upvalues: soundGroupsModule (ref), robloxGui (ref)
 	if not soundGroupsModule[p17] then
 		error("SoundGroup does not exist in list of SoundGroups")
@@ -198,7 +198,7 @@ function t.SoundGroupAddSoundEffect(p16, p17, p18) --[[ line: 236 ]]
 	p16:_createSoundEffect(p18.Type, p18.Name, p18.Properties, var26)
 end
 
-function t.SoundGroupRemoveSoundEffect(_, p19, p20) --[[ line: 269 ]]
+function t.SoundGroupRemoveSoundEffect(_, p19, p20)
 	-- upvalues: soundGroupsModule (ref), robloxGui (ref)
 	local var27 = soundGroupsModule[p19]
 	
@@ -229,7 +229,7 @@ function t.SoundGroupRemoveSoundEffect(_, p19, p20) --[[ line: 269 ]]
 	var30:Destroy()
 end
 
-function t.init() --[[ line: 300 ]]
+function t.init()
 	-- upvalues: t (ref), robloxGui (ref), soundManager (ref)
 	local tbl = setmetatable({}, t)
 	

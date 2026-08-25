@@ -20,19 +20,19 @@ local _ = require(foundation.Providers.Style.Tokens)
 local useAccordionItemVariantsModule = require(script.Parent.Parent.useAccordionItemVariants)
 local t = { hasDivider = true, isExpanded = false }
 
-local function _(p0) --[[ line: 61 | named "getCommonEaseConfig" ]]
+local function _(p0)
 	return {
 		easingStyle = p0.Ease.StandardOut,
 		duration = p0.Time.Time_300
 	}
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | named "AccordionItem" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), reactOtterModule (ref), useAccordionModule (ref), useAccordionItemVariantsModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), icon (ref), dividerModule (ref)
 	local var15 = withDefaultsModule(p1, t)
 	local var16 = useTokensModule()
 	local reducedMotion = usePreferencesModule().reducedMotion
-	local var17 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref)
 		return {
 			easingStyle = var16.Ease.StandardOut,
@@ -42,7 +42,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 	local var18, var19 = reactModule.useState(var15.isExpanded)
 	local var20 = reactModule.useRef(false)
 	local var21, var22 = reactOtterModule.useAnimatedBinding(0)
-	local var23, var24 = reactOtterModule.useAnimatedBinding(0, function() --[[ line: 81 ]]
+	local var23, var24 = reactOtterModule.useAnimatedBinding(0, function()
 		-- upvalues: var20 (ref), var19 (ref)
 		if var20.current then
 			var19(false)
@@ -50,7 +50,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 		end
 	end)
 	local var25 = reactModule.useRef(nil)
-	local var26 = reactModule.useCallback(function() --[[ line: 88 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: reducedMotion (ref), var24 (ref), reactOtterModule (copy), var22 (ref), var19 (ref), var20 (ref), var17 (ref)
 		if reducedMotion then
 			var24(reactOtterModule.instant(0))
@@ -64,7 +64,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 		var24(reactOtterModule.ease(0, var17))
 		var22(reactOtterModule.ease(0, var17))
 	end, { reducedMotion, var17 })
-	local var27 = reactModule.useCallback(function() --[[ line: 102 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref), var18 (ref), reducedMotion (ref), var24 (ref), reactOtterModule (copy), var17 (ref)
 		if var25 and var25.current and var18 then
 			if reducedMotion then
@@ -75,7 +75,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 			var24(reactOtterModule.ease(var25.current.AbsoluteSize.Y, var17))
 		end
 	end, { var25, var18, reducedMotion, var17 })
-	reactModule.useEffect(function() --[[ line: 112 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), var15 (ref), var26 (ref), var19 (ref)
 		if var18 and not var15.isExpanded then
 			var26()
@@ -84,7 +84,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 		end
 		var19(var15.isExpanded)
 	end, { var15.isExpanded })
-	reactModule.useEffect(function() --[[ line: 120 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var18 (ref), reducedMotion (ref), var22 (ref), reactOtterModule (copy), var17 (ref)
 		if var18 then
 			if reducedMotion then
@@ -98,7 +98,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 	local var28 = useAccordionModule()
 	local onAccordionItemActivated = var28.onAccordionItemActivated
 	local var29 = useAccordionItemVariantsModule(var16, var28.itemSize, false)
-	local var30 = if var15.onActivated then var15.onActivated elseif onAccordionItemActivated then onAccordionItemActivated(var15.id, var18) else reactModule.useCallback(function() --[[ line: 135 ]]
+	local var30 = if var15.onActivated then var15.onActivated elseif onAccordionItemActivated then onAccordionItemActivated(var15.id, var18) else reactModule.useCallback(function()
 		-- upvalues: var18 (ref), var26 (ref), var19 (ref)
 		if var18 then
 			var26()
@@ -150,7 +150,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 68 | 
 			LayoutOrder = 2,
 			ClipsDescendants = true,
 			testId = `{var15.testId}--content`,
-			Size = if var23 then var23:map(function(p3) --[[ line: 201 ]]
+			Size = if var23 then var23:map(function(p3)
 				return UDim2.new(1, 0, 0, p3)
 			end) else nil
 		}, {

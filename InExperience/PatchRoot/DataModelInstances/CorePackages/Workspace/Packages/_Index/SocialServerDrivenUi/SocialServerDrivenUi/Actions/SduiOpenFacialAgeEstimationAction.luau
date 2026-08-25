@@ -8,7 +8,7 @@ local upsellEntrySurfaceType = socialUpsellModule.Analytics.Enum.UpsellEntrySurf
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 
-return function(p0, _, p1, _) --[[ line: 19 ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), appPage (ref), socialUpsellType (ref), upsellEntrySurfaceType (ref), startFacialAgeEstimation (ref)
 	local var2 = if p0 then p0.actionParams else nil
 	

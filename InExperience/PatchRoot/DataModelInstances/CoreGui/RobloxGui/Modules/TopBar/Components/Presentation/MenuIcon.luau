@@ -71,7 +71,7 @@ if isInExperienceUIVREnabled then
 	panelType = vrSpatialUiModule.Constants.PanelType
 	SPATIAL_TOOLTIP_SPACING = vrSpatialUiModule.Constants.SPATIAL_TOOLTIP_SPACING
 	
-	var31 = function() --[[ line: 88 ]]
+	var31 = function()
 		-- upvalues: isInExperienceUIVREnabled (ref), isSpatial (write), var14 (ref), UIManager (write)
 		return if isInExperienceUIVREnabled and isSpatial() then not var14:showTopBar() and not UIManager.getInstance():isBottomBarInteractionOnAnimationSupported() else false
 	end
@@ -93,7 +93,7 @@ menuIcon.validateProps = tModule.strictInterface({
 	referralRewardTooltipText = tModule.optional(tModule.string)
 })
 
-function menuIcon.init(p0) --[[ line: 125 ]]
+function menuIcon.init(p0)
 	-- upvalues: var36 (ref), signalsModule (ref), displayModule (ref), fFlagTopBarSignalizeMenuOpen (ref), settingsShowSignal (ref), enabled (ref), isInExperienceUIVREnabled (ref), var31 (write), robloxGui (ref), fFlagAddUILessMode (ref), inGameMenuConstantsModule (ref), VRService (ref), VRHub (ref), gamepadService (ref), var29 (write), isNewInGameMenuEnabledModule (ref), menuIconHoveredSignalModule (ref), var37 (ref), isSubjectToDesktopPolicies (ref), fFlagEnableConsoleExpControls (ref), fFlagShowUnibarOnVirtualCursor (ref), var15 (ref), var14 (ref), focusUtils (ref), guiService (ref), contextActionService (ref), var28 (ref), roactModule (ref), fFlagReduceTopBarInsetsWhileHidden (ref), constantsModule (ref), fIntAddUILessModeVariant (ref), stores (ref), createEffect (ref)
 	p0:setState({
 		vrShowMenuIcon = false,
@@ -102,7 +102,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 		enableFlashingDot = false,
 		clickLatched = if var36 then false else nil
 	})
-	p0.disposeUiScaleEffect = signalsModule.createEffect(function(p1) --[[ line: 133 ]]
+	p0.disposeUiScaleEffect = signalsModule.createEffect(function(p1)
 		-- upvalues: displayModule (copy), p0 (ref)
 		p0:setState({
 			UiScale = displayModule.GetDisplayStore(p1).getUIScale(p1)
@@ -110,18 +110,18 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 	end)
 	
 	if fFlagTopBarSignalizeMenuOpen then
-		settingsShowSignal:connect(function(p2) --[[ line: 142 ]]
+		settingsShowSignal:connect(function(p2)
 			-- upvalues: p0 (ref)
 			p0:setState({ tiltMenuOpen = p2 })
 		end)
 	end
 	if not enabled() then
-		task.spawn(function() --[[ line: 151 ]]
+		task.spawn(function()
 			-- upvalues: p0 (ref)
 			p0:setState({ enableFlashingDot = true })
 		end)
 	end
-	function p0.menuIconActivated() --[[ line: 158 ]]
+	function p0.menuIconActivated()
 		-- upvalues: p0 (ref), var36 (copy), isInExperienceUIVREnabled (copy), var31 (copy), robloxGui (copy), fFlagAddUILessMode (copy), inGameMenuConstantsModule (copy), VRService (copy), VRHub (copy), gamepadService (copy), var29 (copy), isNewInGameMenuEnabledModule (copy)
 		p0:setState({
 			showTooltip = false,
@@ -160,18 +160,18 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 		settingsHubModule:ToggleVisibility(inGameMenuConstantsModule.AnalyticsMenuOpenTypes.TopbarButton)
 	end
 	
-	function p0.fireMenuIconHoveredSignal(p3) --[[ line: 193 ]]
+	function p0.fireMenuIconHoveredSignal(p3)
 		-- upvalues: menuIconHoveredSignalModule (copy)
 		menuIconHoveredSignalModule:fire(p3)
 	end
 	
-	function p0.menuIconOnHover() --[[ line: 196 ]]
+	function p0.menuIconOnHover()
 		-- upvalues: isInExperienceUIVREnabled (copy), var31 (copy), var36 (copy), p0 (ref), var37 (copy), isNewInGameMenuEnabledModule (copy), isSubjectToDesktopPolicies (copy), var29 (copy), inGameMenuConstantsModule (copy)
 		if isInExperienceUIVREnabled and var31() then return end
 		if var36 then
 			p0:setState({ isHovering = true })
 			p0.fireMenuIconHoveredSignal(true)
-			delay(var37, function() --[[ line: 206 ]]
+			delay(var37, function()
 				-- upvalues: p0 (copy), isInExperienceUIVREnabled (copy), var31 (copy)
 				if p0.state.isHovering and not p0.state.clickLatched then
 					if isInExperienceUIVREnabled and var31() then return end
@@ -188,7 +188,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 		end
 	end
 	
-	function p0.menuIconOnHoverEnd() --[[ line: 230 ]]
+	function p0.menuIconOnHoverEnd()
 		-- upvalues: p0 (ref), var36 (copy)
 		p0:setState({
 			showTooltip = false,
@@ -197,7 +197,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 		})
 	end
 	
-	function p0.showTopBarCallback() --[[ line: 238 ]]
+	function p0.showTopBarCallback()
 		-- upvalues: p0 (ref)
 		if p0.state.vrShowMenuIcon ~= false then
 			p0:setState({ vrShowMenuIcon = false })
@@ -205,7 +205,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 	end
 	
 	if enabled() and fFlagEnableConsoleExpControls then
-		function p0.onMenuIconSelectionChanged(_, p4, _, p5) --[[ line: 248 ]]
+		function p0.onMenuIconSelectionChanged(_, p4, _, p5)
 			-- upvalues: fFlagEnableConsoleExpControls (copy), gamepadService (copy), fFlagShowUnibarOnVirtualCursor (copy), var15 (copy), var14 (copy), focusUtils (copy), guiService (copy), contextActionService (copy)
 			if fFlagEnableConsoleExpControls then
 				if gamepadService.GamepadCursorEnabled then return end
@@ -216,7 +216,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 				
 				return
 			else
-				local function unfocusTilt(_, p6, _) --[[ line: 259 ]]
+				local function unfocusTilt(_, p6, _)
 					-- upvalues: fFlagEnableConsoleExpControls (copy), guiService (copy)
 					if (fFlagEnableConsoleExpControls or p6 ~= Enum.UserInputState.End) and (not fFlagEnableConsoleExpControls or p6 ~= Enum.UserInputState.Begin) then
 						return Enum.ContextActionResult.Pass
@@ -249,7 +249,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 			p0.priorAbsolutePosition = Vector2.zero
 			p0.priorAbsoluteSize = Vector2.zero
 		end
-		showTopBar:connect(function() --[[ line: 292 ]]
+		showTopBar:connect(function()
 			-- upvalues: showTopBar (ref), p0 (ref), fFlagReduceTopBarInsetsWhileHidden (copy), constantsModule (copy)
 			local var48 = showTopBar:get()
 			p0.setShowIcon(var48)
@@ -265,7 +265,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 		end)
 	end
 	if enabled() and fFlagEnableConsoleExpControls then
-		var14:onTriggerMenuIcon():connect(function() --[[ line: 307 ]]
+		var14:onTriggerMenuIcon():connect(function()
 			-- upvalues: guiService (copy), p0 (ref), focusUtils (copy)
 			guiService.SelectedCoreObject = p0.props.menuIconRef:getValue()
 			focusUtils.MenuIconSelectedSignal:set(true)
@@ -280,7 +280,7 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 			p0.setShowIcon = var44
 			p0.priorAbsolutePosition = Vector2.zero
 			p0.priorAbsoluteSize = Vector2.zero
-			p0.disposeEffect = createEffect(function(p7) --[[ line: 322 ]]
+			p0.disposeEffect = createEffect(function(p7)
 				-- upvalues: p0 (ref), constantsModule (copy)
 				local UIVisible = p0.uiLessStore.getUIVisible(p7)
 				p0.setShowIcon(UIVisible)
@@ -296,12 +296,12 @@ function menuIcon.init(p0) --[[ line: 125 ]]
 	end
 end
 
-function menuIcon.renderWithTooltipCompat(p8, p9, p10, p11) --[[ line: 336 ]]
+function menuIcon.renderWithTooltipCompat(p8, p9, p10, p11)
 	-- upvalues: isInExperienceUIVREnabled (ref), isSpatial (write), reactModule (ref), panel3DInSpatialUI (write), panelType (write), tooltipCallout (write), tooltipOrientation (ref), SPATIAL_TOOLTIP_SPACING (write), withTooltip (ref)
 	return if not (not isInExperienceUIVREnabled or not isSpatial()) then reactModule.createElement(reactModule.Fragment, nil, {
 		VRSpatialTooltip = if p10.active and p8.state.triggerPointSize and panel3DInSpatialUI then reactModule.createElement(panel3DInSpatialUI, {
 			panelType = panelType.ToolTipsContainer,
-			renderFunction = function(p12) --[[ line: 354 ]]
+			renderFunction = function(p12)
 				-- upvalues: reactModule (copy), tooltipCallout (copy), p9 (ref), tooltipOrientation (copy), p8 (ref), SPATIAL_TOOLTIP_SPACING (copy)
 				return reactModule.createElement(tooltipCallout, {
 					distanceOffset = 0,
@@ -314,7 +314,7 @@ function menuIcon.renderWithTooltipCompat(p8, p9, p10, p11) --[[ line: 336 ]]
 				})
 			end
 		}) else nil,
-		MenuIconTriggerPoint = p11(function(p13) --[[ line: 339 ]]
+		MenuIconTriggerPoint = p11(function(p13)
 			-- upvalues: p8 (ref)
 			p8:setState({
 				triggerPointSize = p13.AbsoluteSize,
@@ -324,7 +324,7 @@ function menuIcon.renderWithTooltipCompat(p8, p9, p10, p11) --[[ line: 336 ]]
 	}) else withTooltip(p9, p10, p11)
 end
 
-function menuIcon.willUnmount(p14) --[[ line: 378 ]]
+function menuIcon.willUnmount(p14)
 	-- upvalues: fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), fFlagTopBarSignalizeMenuOpen (ref)
 	if fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and (p14.uiLessStore.getUILessModeEnabled(false) and p14.disposeEffect) then
 		p14.disposeEffect()
@@ -337,7 +337,7 @@ function menuIcon.willUnmount(p14) --[[ line: 378 ]]
 	end
 end
 
-function menuIcon.render(p15) --[[ line: 395 ]]
+function menuIcon.render(p15)
 	-- upvalues: isInExperienceUIVREnabled (ref), VRService (ref), constantsModule (ref), fFlagReduceTopBarInsetsWhileHidden (ref), fFlagEnableConsoleExpControls (ref), enabled (ref), var28 (ref), fFlagAddUILessMode (ref), fIntAddUILessModeVariant (ref), roactModule (ref), iconButtonModule (ref), isNewTiltIconEnabledModule (ref), images (ref), fFlagTopBarSignalizeMenuOpen (ref), var36 (ref), gamepadService (ref), externalEventConnection (ref), VRHub (ref), badgeOver12Module (ref), robloxTranslatorModule (ref), list (ref), enableReferralRewardTooltip (ref), coreGuiService (ref), tooltipOrientation (ref), var14 (ref), var15 (ref)
 	local var57
 	local _ = nil
@@ -346,7 +346,7 @@ function menuIcon.render(p15) --[[ line: 395 ]]
 	local var52 = constantsModule.TopBarButtonPadding * p15.state.UiScale
 	local var53 = constantsModule.MENU_ICON_SIZE * p15.state.UiScale
 	
-	local var54 = function(p16) --[[ line: 407 ]]
+	local var54 = function(p16)
 		-- upvalues: fFlagReduceTopBarInsetsWhileHidden (copy), p15 (ref), fFlagEnableConsoleExpControls (copy), enabled (copy), var28 (copy), constantsModule (copy), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy)
 		if p16 then
 			if fFlagReduceTopBarInsetsWhileHidden then
@@ -396,7 +396,7 @@ function menuIcon.render(p15) --[[ line: 395 ]]
 	
 	if var36 then
 		var57 = "Roblox Menu"
-		pcall(function() --[[ line: 459 ]]
+		pcall(function()
 			-- upvalues: var57 (write), robloxTranslatorModule (copy)
 			var57 = robloxTranslatorModule:FormatByKey("CoreScripts.TopBar.RobloxMenu")
 		end)
@@ -420,9 +420,9 @@ function menuIcon.render(p15) --[[ line: 395 ]]
 		if enableReferralRewardTooltip and p15.props.referralRewardTooltipText and p15.props.referralRewardTooltipText ~= "" then
 			t_1.active = true
 		end
-		return p15:renderWithTooltipCompat(t, t_1, function(p17) --[[ line: 484 ]]
+		return p15:renderWithTooltipCompat(t, t_1, function(p17)
 			-- upvalues: var54 (ref), enabled (copy), fFlagEnableConsoleExpControls (copy), p15 (ref), var14 (copy), var15 (copy), roactModule (copy), iconButtonModule (copy), isNewTiltIconEnabledModule (copy), images (copy), fFlagTopBarSignalizeMenuOpen (copy), var53 (ref), constantsModule (copy), var36 (copy), fFlagAddUILessMode (copy), fIntAddUILessModeVariant (copy), var50 (write), var51 (ref), var56 (ref), createElement (ref), var55 (ref)
-			local var60 = function(p18) --[[ line: 485 ]]
+			local var60 = function(p18)
 				-- upvalues: var54 (copy), p17 (ref)
 				var54(p18)
 				p17(p18)
@@ -447,7 +447,7 @@ function menuIcon.render(p15) --[[ line: 395 ]]
 				})
 			end
 			return roactModule.createElement("Frame", {
-				Visible = if enabled() and fFlagEnableConsoleExpControls or fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and p15.uiLessStore.getUILessModeEnabled(false) then p15.showIcon:map(function(p19) --[[ line: 516 ]]
+				Visible = if enabled() and fFlagEnableConsoleExpControls or fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and p15.uiLessStore.getUILessModeEnabled(false) then p15.showIcon:map(function(p19)
 					-- upvalues: var50 (copy)
 					return var50 and p19
 				end) else var50,
@@ -471,7 +471,7 @@ function menuIcon.render(p15) --[[ line: 395 ]]
 		var57 = roactModule.createElement
 		
 		return var57("Frame", {
-			Visible = if enabled() and fFlagEnableConsoleExpControls or fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and p15.uiLessStore.getUILessModeEnabled(false) then p15.showIcon:map(function(p20) --[[ line: 537 ]]
+			Visible = if enabled() and fFlagEnableConsoleExpControls or fFlagAddUILessMode and fIntAddUILessModeVariant ~= 0 and p15.uiLessStore.getUILessModeEnabled(false) then p15.showIcon:map(function(p20)
 				-- upvalues: var50 (write)
 				return var50 and p20
 			end) else var50,
@@ -488,14 +488,14 @@ function menuIcon.render(p15) --[[ line: 395 ]]
 	end
 end
 
-local var39 = roactRoduxModule.UNSTABLE_connect2(nil, function(p21) --[[ line: 553 | named "mapDispatchToProps" ]]
+local var39 = roactRoduxModule.UNSTABLE_connect2(nil, function(p21)
 	-- upvalues: fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setGamepadMenuOpenModule (ref), fFlagTopBarSignalizeKeepOutAreas (ref), setKeepOutAreaModule (ref)
 	return {
-		setGamepadMenuOpen = if fFlagTopBarDeprecateDisplayOptionsRoduxModule then nil else function(p22) --[[ line: 557 ]]
+		setGamepadMenuOpen = if fFlagTopBarDeprecateDisplayOptionsRoduxModule then nil else function(p22)
 			-- upvalues: p21 (ref), setGamepadMenuOpenModule (copy)
 			return p21(setGamepadMenuOpenModule(p22))
 		end,
-		onAreaChanged = if fFlagTopBarSignalizeKeepOutAreas then nil else function(p23, p24, p25) --[[ line: 562 ]]
+		onAreaChanged = if fFlagTopBarSignalizeKeepOutAreas then nil else function(p23, p24, p25)
 			-- upvalues: p21 (ref), setKeepOutAreaModule (copy)
 			return p21(setKeepOutAreaModule(p23, p24, p25))
 		end

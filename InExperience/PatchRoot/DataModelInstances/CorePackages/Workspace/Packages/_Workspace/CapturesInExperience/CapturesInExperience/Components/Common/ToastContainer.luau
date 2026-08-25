@@ -49,7 +49,7 @@ local _ = {
 }
 local var21 = if userInputService:GetPlatform() ~= Enum.Platform.Windows then userInputService:GetPlatform() == Enum.Platform.OSX else true
 
-local function _(p0) --[[ line: 75 | named "isVideoCapture" ]]
+local function _(p0)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref)
 	if not p0 then
 		return false
@@ -63,7 +63,7 @@ local t = {
 	[capturesToastTypeModule.CaptureSavedToDevice] = {
 		toastTitleKey = "captureSavedToDevice",
 		iconImage = images["icons/status/success"],
-		onActivated = if var21 then function(p1, _, p2) --[[ line: 96 ]]
+		onActivated = if var21 then function(p1, _, p2)
 			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref)
 			local var23
 			p1.fireEvent(eventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated)
@@ -96,7 +96,7 @@ local t = {
 		toastSubtitleKey = "shareCaptureDescription",
 		toastTitleKey = "captureSaved",
 		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(p3, p4, p5) --[[ line: 110 ]]
+		onActivated = function(p3, p4, p5)
 			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref)
 			local var24
 			p3.fireEvent(eventNamesModule.CapturesShareToastButtonActivated)
@@ -162,7 +162,7 @@ local t = {
 		toastCTAKey = "viewAction",
 		toastTitleKey = "captureSaved",
 		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(p6, p7) --[[ line: 160 ]]
+		onActivated = function(p6, p7)
 			-- upvalues: eventNamesModule (ref), carouselOpenedModule (ref)
 			p6.fireEvent(eventNamesModule.CapturesViewToastButtonActivated)
 			p7(carouselOpenedModule(1))
@@ -170,7 +170,7 @@ local t = {
 	}
 }
 
-return function(_) --[[ line: 171 ]]
+return function(_)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesToastTypeModule (ref), t (ref), toastVanishedModule (ref), dashModule (ref), fFlagCreateMomentsToastModule (ref), toastControllerModule (ref), httpService (ref), startMomentsCreationFlowModule (ref), eventNamesModule (ref), toast (ref)
 	local var25 = useAnalyticsModule()
 	local var26 = useDispatch()
@@ -194,23 +194,23 @@ return function(_) --[[ line: 171 ]]
 		videoCaptureOtherError = "Feature.Captures.Toast.VideoCaptureOtherError",
 		viewAction = "Feature.Captures.Action.ViewCapture"
 	})
-	local var28 = useSelector(function(p8) --[[ line: 196 ]]
+	local var28 = useSelector(function(p8)
 		-- upvalues: constantsModule (copy)
 		return p8[constantsModule.RoduxKey].Toast.ToastType
 	end)
-	local var29 = useSelector(function(p9) --[[ line: 200 ]]
+	local var29 = useSelector(function(p9)
 		-- upvalues: constantsModule (copy)
 		return p9[constantsModule.RoduxKey].Toast.ToastConfig
 	end)
-	local var30 = useSelector(function(p10) --[[ line: 204 ]]
+	local var30 = useSelector(function(p10)
 		-- upvalues: constantsModule (copy)
 		return p10[constantsModule.RoduxKey].Toast.IsDismissed
 	end)
-	local var31 = reactModule.useCallback(function(p11) --[[ line: 208 ]]
+	local var31 = reactModule.useCallback(function(p11)
 		-- upvalues: var27 (ref)
 		return if p11 then var27[p11] else nil
 	end)
-	local var32 = reactModule.useMemo(function() --[[ line: 215 ]]
+	local var32 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref), capturesToastTypeModule (copy), t (copy), var26 (ref), toastVanishedModule (copy), var25 (ref), var29 (ref), constantsModule (copy), dashModule (copy), var31 (ref)
 		if var28 == capturesToastTypeModule.None then
 			return nil
@@ -220,7 +220,7 @@ return function(_) --[[ line: 171 ]]
 		return dashModule.join(var33, {
 			buttonText = var31(var33.toastCTAKey),
 			duration = var33.duration or constantsModule.ToastDuration,
-			onActivated = if var33.onActivated then function() --[[ line: 231 ]]
+			onActivated = if var33.onActivated then function()
 				-- upvalues: var33 (ref), var25 (copy), var26 (copy), var29 (copy), var28 (ref), var28 (copy), toastVanishedModule (copy)
 				var33.onActivated(var25, var26, var29)
 				
@@ -228,7 +228,7 @@ return function(_) --[[ line: 171 ]]
 					var26(toastVanishedModule())
 				end
 			end else nil,
-			onDismissed = function() --[[ line: 223 ]]
+			onDismissed = function()
 				-- upvalues: var28 (ref), var28 (copy), var26 (copy), toastVanishedModule (copy)
 				if var28 == var28 then
 					var26(toastVanishedModule())
@@ -247,7 +247,7 @@ return function(_) --[[ line: 171 ]]
 		title = var31("momentsTitle"),
 		text = var31("discoverPostWatch"),
 		actionText = var31("createAction"),
-		onAction = function() --[[ line: 263 ]]
+		onAction = function()
 			-- upvalues: var29 (ref), httpService (copy), var26 (ref), startMomentsCreationFlowModule (copy), var25 (ref), eventNamesModule (copy)
 			if var29 and var29.captureInfo then
 				local var34 = httpService:GenerateGUID(false)
@@ -256,7 +256,7 @@ return function(_) --[[ line: 171 ]]
 			end
 			var25.fireEvent(eventNamesModule.CapturesCreateMomentToastButtonActivated)
 		end,
-		onDismissed = function() --[[ line: 273 ]]
+		onDismissed = function()
 			-- upvalues: var26 (ref), toastVanishedModule (copy)
 			var26(toastVanishedModule())
 		end,
@@ -266,7 +266,7 @@ return function(_) --[[ line: 171 ]]
 		icon = "icons/brands/moments_large",
 		title = var31("momentProcessingTitle"),
 		text = var31("momentProcessingDescription"),
-		onDismissed = function() --[[ line: 284 ]]
+		onDismissed = function()
 			-- upvalues: var26 (ref), toastVanishedModule (copy)
 			var26(toastVanishedModule())
 		end,

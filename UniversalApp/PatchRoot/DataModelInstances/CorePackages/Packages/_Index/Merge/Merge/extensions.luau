@@ -9,12 +9,12 @@ local t = {
 local _ = require(parent.GraphQL)
 local mergeDeep = require(parent.Utils).mergeDeep
 
-function t.mergeExtensions(p0) --[[ line: 44 ]]
+function t.mergeExtensions(p0)
 	-- upvalues: mergeDeep (ref)
 	return mergeDeep(p0)
 end
 
-local function applyExtensionObject(p1, p2) --[[ line: 48 ]]
+local function applyExtensionObject(p1, p2)
 	-- upvalues: mergeDeep (ref), boolean (ref)
 	if p1 then
 		p1.extensions = mergeDeep({
@@ -26,7 +26,7 @@ local function applyExtensionObject(p1, p2) --[[ line: 48 ]]
 	end
 end
 
-function t.applyExtensions(p3, p4) --[[ line: 69 ]]
+function t.applyExtensions(p3, p4)
 	-- upvalues: applyExtensionObject (ref), object (ref), boolean (ref), array (ref)
 	applyExtensionObject(p3, p4.schemaExtensions)
 	
@@ -47,7 +47,7 @@ function t.applyExtensions(p3, p4) --[[ line: 69 ]]
 						
 						for i_3, v_4 in object.entries(var9.arguments) do
 							local unpacked, unpacked_1 = table.unpack(v_4, 1, 2)
-							applyExtensionObject(array.find(var10.args, function(p5) --[[ line: 107 ]]
+							applyExtensionObject(array.find(var10.args, function(p5)
 								-- upvalues: unpacked (ref)
 								return p5.name == unpacked
 							end), unpacked_1)

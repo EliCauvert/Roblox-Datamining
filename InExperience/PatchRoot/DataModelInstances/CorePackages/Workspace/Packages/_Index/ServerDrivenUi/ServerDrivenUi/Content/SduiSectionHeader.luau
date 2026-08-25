@@ -14,7 +14,7 @@ local getImageData = require(parent.RobloxAppAssets).GetImageData
 local addLayoutOrderToSduiSectionHeaderIconComponent = game:DefineFastFlag("AddLayoutOrderToSduiSectionHeaderIconComponent", false)
 local luaAppSduiSeeAllArrowIconMigration2 = game:DefineFastFlag("LuaAppSduiSeeAllArrowIconMigration2", false)
 
-return reactModule.memo(function(p0) --[[ line: 79 | named "SduiSectionHeader" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), responsiveModule (ref), luaAppSduiSeeAllArrowIconMigration2 (ref), getImageData (ref), images (ref), addLayoutOrderToSduiSectionHeaderIconComponent (ref), reactModule (ref), view (ref), sduiTextIconRowModule (ref), iconWithTooltip (ref), tooltipOrientation (ref)
 	local var16
 	local layoutOrder = p0.layoutOrder

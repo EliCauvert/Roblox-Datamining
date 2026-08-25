@@ -1,6 +1,6 @@
 ﻿local userModel = require(script:FindFirstAncestor("SocialLibraries").dependencies).UserModel
 
-return function(p0) --[[ line: 5 ]]
+return function(p0)
 	-- upvalues: userModel (ref)
 	local presence = p0.presence
 	local lastLocation = p0.lastLocation

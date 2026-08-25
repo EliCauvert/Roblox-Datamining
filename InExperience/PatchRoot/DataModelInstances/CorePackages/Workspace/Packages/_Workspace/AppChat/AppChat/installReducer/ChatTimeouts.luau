@@ -4,7 +4,7 @@ local cryoModule = require(parent.Cryo)
 local serializeChatTimeoutRangeModule = require(appChat.Utils.serializeChatTimeoutRange)
 
 return require(parent.Rodux).createReducer({ userTimeout = {}, byConversationId = {} }, {
-	[require(parent.AppChatNetworking).rodux.GetChatModerationStatuses.Succeeded.name] = function(p0, p1) --[[ line: 28 ]]
+	[require(parent.AppChatNetworking).rodux.GetChatModerationStatuses.Succeeded.name] = function(p0, p1)
 		-- upvalues: serializeChatTimeoutRangeModule (ref), cryoModule (ref)
 		local responseBody = p1.responseBody
 		
@@ -24,13 +24,13 @@ return require(parent.Rodux).createReducer({ userTimeout = {}, byConversationId 
 		end
 		return p0
 	end,
-	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3) --[[ line: 49 ]]
+	[require(appChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p2, {
 			byConversationId = cryoModule.Dictionary.join(p2.byConversationId, { [p3.conversationId] = cryoModule.None })
 		})
 	end,
-	[require(appChat.Conversations.Actions.CurrentConversationTimeoutEnded).name] = function(p4, p5) --[[ line: 57 ]]
+	[require(appChat.Conversations.Actions.CurrentConversationTimeoutEnded).name] = function(p4, p5)
 		-- upvalues: cryoModule (ref)
 		local var3 = p4
 		local unixTimestamp = DateTime.now().UnixTimestamp

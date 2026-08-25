@@ -7,14 +7,14 @@ local createNextOrder = require(songbird.Parent.ReactUtils).createNextOrder
 local useTokens = foundationModule.Hooks.useTokens
 local t = { iconSize = foundationModule.Enums.IconSize.Medium }
 
-return function(p0) --[[ line: 31 | named "SubmenuButton" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), createNextOrder (ref), useTokens (ref), useCallback (ref), foundationModule (ref), reactModule (ref)
 	local var5 = cryoModule.Dictionary.join(t, p0)
 	local var6 = createNextOrder()
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full-0 auto-y row gap-small padding-small align-y-center radius-medium",
-		onStateChanged = useCallback(function(p1) --[[ line: 37 ]]
+		onStateChanged = useCallback(function(p1)
 			-- upvalues: foundationModule (copy), var5 (ref)
 			if p1 == foundationModule.Enums.ControlState.Pressed and var5.onActivated then
 				var5.onActivated()

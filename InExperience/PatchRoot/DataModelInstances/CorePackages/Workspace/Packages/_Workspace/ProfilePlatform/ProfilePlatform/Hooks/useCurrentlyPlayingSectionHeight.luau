@@ -1,6 +1,6 @@
 ﻿local useTokens = require(script:FindFirstAncestor("ProfilePlatform").Parent.Foundation).Hooks.useTokens
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: useTokens (ref)
 	local var0 = useTokens()
 	

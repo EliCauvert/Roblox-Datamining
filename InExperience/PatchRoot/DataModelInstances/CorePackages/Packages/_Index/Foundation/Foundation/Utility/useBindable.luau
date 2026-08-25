@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local reactIsModule = require(parent.ReactIs)
 local _ = require(foundation.Components.Types)
 
-return function(p0) --[[ line: 10 | named "useBindable" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reactIsModule (ref)
 	local var3, var4 = reactModule.useBinding(nil)
 	

@@ -13,7 +13,7 @@ local sduiFeedIndexInExtraLocalProps = game:DefineFastFlag("SduiFeedIndexInExtra
 local sduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
 local t = {}
 
-return function(p0) --[[ line: 43 | named "buildSduiFeedChildren" ]]
+return function(p0)
 	-- upvalues: findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), getSduiComponentWrapper (ref), fFlagSduiPoolBackedFeed (ref), cryoModule (ref), sduiFeedIndexInExtraLocalProps (ref), reactModule (ref), sduiFeedDebugNameWithImpressionsTag (ref), sduiFeedItemModule (ref)
 	local t_1 = {}
 	local sduiContext = p0.sduiContext

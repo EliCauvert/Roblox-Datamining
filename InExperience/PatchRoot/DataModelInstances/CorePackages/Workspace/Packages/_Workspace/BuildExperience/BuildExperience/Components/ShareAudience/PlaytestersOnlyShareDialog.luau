@@ -10,7 +10,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialogSize = foundationModule.Enums.DialogSize
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 28 | named "PlaytestersOnlyShareDialog" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref)
 	local SHARE_AUDIENCE_CANCEL, SHARE_AUDIENCE_PLAYTESTERS_ONLY_DESCRIPTION, SHARE_AUDIENCE_SHARE, SHARE_AUDIENCE_PLAYTESTERS_ONLY_TITLE
 	local var5 = if fFlagBuildLocalization then useLocalization({

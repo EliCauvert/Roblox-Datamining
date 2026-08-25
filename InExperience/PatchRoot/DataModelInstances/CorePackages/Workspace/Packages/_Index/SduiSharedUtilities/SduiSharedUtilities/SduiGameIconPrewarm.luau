@@ -2,7 +2,7 @@
 local dataHydrationModule = require(sduiSharedUtilities.Parent.DataHydration)
 local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
 
-local function collectUniverseIds(p0, p1) --[[ line: 16 ]]
+local function collectUniverseIds(p0, p1)
 	-- upvalues: collectUniverseIds (ref)
 	if type(p0) ~= "table" then return end
 	for i, v in p0 do
@@ -14,7 +14,7 @@ local function collectUniverseIds(p0, p1) --[[ line: 16 ]]
 	end
 end
 
-local function prewarmIcons(p2, p3) --[[ line: 41 ]]
+local function prewarmIcons(p2, p3)
 	-- upvalues: collectUniverseIds (ref), dataHydrationModule (ref)
 	local t = {}
 	
@@ -33,11 +33,11 @@ end
 
 return {
 	collectUniverseIds = collectUniverseIds,
-	prewarmSmallIcons = function(p4) --[[ line: 56 ]]
+	prewarmSmallIcons = function(p4)
 		-- upvalues: prewarmIcons (ref), dataHydrationModule (ref)
 		prewarmIcons(p4, dataHydrationModule.Game.GameIconSize.Small)
 	end,
-	prewarmLargeIcons = function(p5) --[[ line: 60 ]]
+	prewarmLargeIcons = function(p5)
 		-- upvalues: prewarmIcons (ref), dataHydrationModule (ref)
 		prewarmIcons(p5, dataHydrationModule.Game.GameIconSize.Large)
 	end

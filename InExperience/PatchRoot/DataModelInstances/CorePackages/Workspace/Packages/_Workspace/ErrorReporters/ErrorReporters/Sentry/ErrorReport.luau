@@ -4,9 +4,9 @@ local tModule = require(parent.t)
 local processErrorStackModule = require(script.Parent.Parent.ProcessErrorStack)
 local constantsModule = require(script.Parent.Constants)
 local var4 = tModule.optional(tModule.map(tModule.string, tModule.some(tModule.string, tModule.number, tModule.boolean)))
-local var5 = tModule.optional(tModule.map(tModule.string, function(p0) --[[ line: 53 ]]
+local var5 = tModule.optional(tModule.map(tModule.string, function(p0)
 	-- upvalues: tModule (ref)
-	local function checkTypeRecursive(p1) --[[ line: 54 ]]
+	local function checkTypeRecursive(p1)
 		-- upvalues: checkTypeRecursive (ref), tModule (copy)
 		if type(p1) ~= "table" then
 			return tModule.some(tModule.string, tModule.number, tModule.boolean)(p1), nil
@@ -56,12 +56,12 @@ local t = {
 }
 t.__index = t
 
-function t.validate(p2) --[[ line: 144 ]]
+function t.validate(p2)
 	-- upvalues: var7 (ref)
 	return var7(p2)
 end
 
-function t.new() --[[ line: 154 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {
 		threads = {},
@@ -74,7 +74,7 @@ function t.new() --[[ line: 154 ]]
 	return t_1
 end
 
-function t:addAttributes(p3) --[[ line: 172 ]]
+function t:addAttributes(p3)
 	-- upvalues: cryoModule (ref)
 	if type(p3) == "table" then
 		self.attributes = cryoModule.Dictionary.join(self.attributes, p3)
@@ -84,7 +84,7 @@ function t:addAttributes(p3) --[[ line: 172 ]]
 	warn("Cannot add attributes of type: ", type(p3))
 end
 
-function t:addAnnotations(p4) --[[ line: 190 ]]
+function t:addAnnotations(p4)
 	-- upvalues: cryoModule (ref)
 	if type(p4) == "table" then
 		self.annotations = cryoModule.Dictionary.join(self.annotations, p4)
@@ -94,7 +94,7 @@ function t:addAnnotations(p4) --[[ line: 190 ]]
 	warn("Cannot add annotations of type: ", type(p4))
 end
 
-local function sanitizeCustomMetadataGroup(p5) --[[ line: 212 ]]
+local function sanitizeCustomMetadataGroup(p5)
 	if type(p5) ~= "table" then
 		return nil
 	end
@@ -110,7 +110,7 @@ local function sanitizeCustomMetadataGroup(p5) --[[ line: 212 ]]
 	return if next(t) == nil then nil else t
 end
 
-function t:addCustomMetadata(p6) --[[ line: 244 ]]
+function t:addCustomMetadata(p6)
 	-- upvalues: sanitizeCustomMetadataGroup (ref), cryoModule (ref)
 	if type(p6) ~= "table" then
 		warn("Cannot add custom metadata of type: ", type(p6))
@@ -135,7 +135,7 @@ function t:addCustomMetadata(p6) --[[ line: 244 ]]
 	self.customMetadata = customMetadata
 end
 
-function t.fromMessageAndStack(p7, p8, p9) --[[ line: 275 ]]
+function t.fromMessageAndStack(p7, p8, p9)
 	-- upvalues: t (ref), constantsModule (ref), processErrorStackModule (ref)
 	local var20 = t.new()
 	var20.message = p7
@@ -152,7 +152,7 @@ function t.fromMessageAndStack(p7, p8, p9) --[[ line: 275 ]]
 	return var20
 end
 
-function t:fromDetails() --[[ line: 307 ]]
+function t:fromDetails()
 	-- upvalues: t (ref), constantsModule (ref)
 	local var23
 	local _ = nil

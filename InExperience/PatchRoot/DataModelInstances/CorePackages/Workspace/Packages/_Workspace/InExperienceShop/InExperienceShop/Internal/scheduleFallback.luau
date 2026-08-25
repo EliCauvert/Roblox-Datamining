@@ -1,5 +1,5 @@
-﻿return function(p0, p1) --[[ line: 7 | named "scheduleFallback" ]]
-	local function guardedCallback() --[[ line: 11 ]]
+﻿return function(p0, p1)
+	local function guardedCallback()
 		-- upvalues: p1 (ref)
 		if game:IsLoaded() then
 			p1()
@@ -13,7 +13,7 @@
 		
 		return
 	end
-	game.Loaded:Once(function() --[[ line: 26 ]]
+	game.Loaded:Once(function()
 		-- upvalues: p0 (ref), guardedCallback (ref)
 		task.delay(p0, guardedCallback)
 	end)

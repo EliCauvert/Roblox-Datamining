@@ -2,11 +2,11 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 
-return function() --[[ line: 10 | named "useMenuItemCursor" ]]
+return function()
 	-- upvalues: foundationModule (ref), reactModule (ref)
 	local var2 = foundationModule.Hooks.useTokens()
 	
-	return reactModule.useMemo(function() --[[ line: 12 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var2 (ref)
 		return {
 			radius = UDim.new(0, var2.Radius.Small),

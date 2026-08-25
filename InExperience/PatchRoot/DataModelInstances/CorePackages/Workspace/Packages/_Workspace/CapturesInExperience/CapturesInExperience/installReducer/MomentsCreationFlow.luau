@@ -6,7 +6,7 @@ local _ = require(parent.Types)
 local t = { IsOpen = false, Capture = nil, SessionId = nil }
 
 return roduxModule.createReducer(t, {
-	[require(parent.Actions.MomentsCreationFlowOpened).name] = function(p0, p1) --[[ line: 25 ]]
+	[require(parent.Actions.MomentsCreationFlowOpened).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, {
 			IsOpen = true,
@@ -14,7 +14,7 @@ return roduxModule.createReducer(t, {
 			SessionId = p1.sessionId
 		})
 	end,
-	[require(parent.Actions.MomentsCreationFlowClosed).name] = function(_, _) --[[ line: 33 ]]
+	[require(parent.Actions.MomentsCreationFlowClosed).name] = function(_, _)
 		-- upvalues: t (ref)
 		return t
 	end

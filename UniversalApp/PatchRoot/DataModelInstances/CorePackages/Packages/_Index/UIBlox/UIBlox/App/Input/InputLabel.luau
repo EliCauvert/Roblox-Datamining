@@ -4,12 +4,12 @@ local reactModule = require(parent.Parent.React)
 local useStyleModule = require(parent.Core.Style.useStyle)
 local UIBloxConfigModule = require(parent.UIBloxConfig)
 
-local function _(p0, p1) --[[ line: 22 | named "labelText" ]]
+local function _(p0, p1)
 	-- upvalues: reactModule (ref), translatorModule (ref)
 	return if p1 == nil or p1 == reactModule.None then p0 elseif p1 then p0 .. "*" else translatorModule:FormatByKey("CommonUI.Controls.Input.Optional", { inputLabel = p0 })
 end
 
-return function(p2) --[[ line: 32 | named "InputLabel" ]]
+return function(p2)
 	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), reactModule (ref), translatorModule (ref)
 	local var4 = useStyleModule()
 	local var5 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var4.Tokens.Typography.BodySmall else var4.Tokens.Component.InputLabel.Base.Typography

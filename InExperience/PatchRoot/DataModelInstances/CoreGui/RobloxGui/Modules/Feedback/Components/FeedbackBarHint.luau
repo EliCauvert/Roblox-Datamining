@@ -13,9 +13,9 @@ feedbackBarHint.validateProps = tModule.strictInterface({
 	hintTextSize = tModule.optional(tModule.number)
 })
 
-function feedbackBarHint.render(p0) --[[ line: 32 ]]
+function feedbackBarHint.render(p0)
 	-- upvalues: withStyle (ref), roactModule (ref), styledTextLabel (ref), feedbackBarHintSizeAdjustment (ref)
-	return withStyle(function(p1) --[[ line: 33 ]]
+	return withStyle(function(p1)
 		-- upvalues: roactModule (copy), p0 (ref), styledTextLabel (copy), feedbackBarHintSizeAdjustment (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

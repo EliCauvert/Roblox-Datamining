@@ -18,7 +18,7 @@ local friendsChatOsaSystemMessageModule = require(script.Parent.FriendsChatOsaSy
 local name = expChatSharedModule.Logger:new(script.Name)
 local UIListLayout = reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder })
 
-local function getOtherParticipantUserId(p0) --[[ line: 46 ]]
+local function getOtherParticipantUserId(p0)
 	-- upvalues: playersService (ref)
 	if p0 == nil then
 		return nil
@@ -34,27 +34,27 @@ local function getOtherParticipantUserId(p0) --[[ line: 46 ]]
 	return nil
 end
 
-return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), getConversationMessageListStoreModule (ref), localizationRoactContext (ref), localizeStrings (ref), useMessageDisplayStoreModule (ref), friendsChatTextMessageModule (ref), useMessagePool (ref), signalsModule (ref), UIListLayout (ref), fFlagFriendsChatOsaSystemMessage (ref), getConversationStoreModule (ref), getOtherParticipantUserId (ref), friendsChatOsaSystemMessageModule (ref), fetchMessagePageModule (ref), name (ref)
 	local conversationId = p1.conversationId
 	local shouldReadMessages = p1.shouldReadMessages
 	local shouldFetchMessages = p1.shouldFetchMessages
-	local var16 = reactModule.useMemo(function() --[[ line: 84 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: shouldReadMessages (ref), getConversationMessageListStoreModule (copy), conversationId (ref)
-		return if shouldReadMessages then function(p2) --[[ line: 90 ]]
+		return if shouldReadMessages then function(p2)
 			-- upvalues: getConversationMessageListStoreModule (copy), conversationId (copy)
 			return getConversationMessageListStoreModule(p2).getOrderedIds(conversationId, p2)
-		end else function() --[[ line: 86 ]]
+		end else function()
 			return {}
 		end
 	end, { conversationId, shouldReadMessages })
 	local var17 = reactModule.useContext(localizationRoactContext)
-	local var18 = reactModule.useCallback(function(p3) --[[ line: 97 ]]
+	local var18 = reactModule.useCallback(function(p3)
 		-- upvalues: var17 (ref), localizeStrings (copy)
 		if var17 == nil then
 			return ""
 		end
-		local ok, status = pcall(function() --[[ line: 101 ]]
+		local ok, status = pcall(function()
 			-- upvalues: localizeStrings (copy), var17 (copy), p3 (ref)
 			return localizeStrings(var17, { value = p3 }).value
 		end)
@@ -65,7 +65,7 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 	local var20 = useMessagePool({
 		maxSlots = 50,
 		messageIdsSignal = var19.getDisplayIds,
-		createSlotElement = reactModule.useCallback(function(p4) --[[ line: 116 ]]
+		createSlotElement = reactModule.useCallback(function(p4)
 			-- upvalues: reactModule (copy), friendsChatTextMessageModule (copy), var19 (ref), p1 (ref), var18 (ref)
 			return reactModule.createElement(friendsChatTextMessageModule, {
 				getDisplayId = p4.getMessageId,
@@ -85,9 +85,9 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 			var18
 		})
 	})
-	local var21 = reactModule.useMemo(function() --[[ line: 146 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), var20 (ref), UIListLayout (copy), fFlagFriendsChatOsaSystemMessage (copy), getConversationStoreModule (copy), conversationId (ref), getOtherParticipantUserId (copy), reactModule (copy), friendsChatOsaSystemMessageModule (copy), p1 (ref), var18 (ref)
-		return signalsModule.createComputed(function(p5) --[[ line: 147 ]]
+		return signalsModule.createComputed(function(p5)
 			-- upvalues: var20 (copy), UIListLayout (copy), fFlagFriendsChatOsaSystemMessage (copy), getConversationStoreModule (copy), conversationId (copy), getOtherParticipantUserId (copy), reactModule (copy), friendsChatOsaSystemMessageModule (copy), p1 (copy), var18 (copy)
 			local cloned = table.clone(var20(p5))
 			cloned["$layout"] = UIListLayout
@@ -110,11 +110,11 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 		var20, conversationId, p1.chatWindowSettings, p1.textTransparency,
 		p1.isSpatialUIEnabled, var18
 	})
-	reactModule.useEffect(function() --[[ line: 188 ]]
+	reactModule.useEffect(function()
 		-- upvalues: shouldFetchMessages (ref), fetchMessagePageModule (copy), conversationId (ref), name (copy)
 		if shouldFetchMessages then
 			local var25 = false
-			fetchMessagePageModule(conversationId, nil):catch(function(p6) --[[ line: 203 ]]
+			fetchMessagePageModule(conversationId, nil):catch(function(p6)
 				-- upvalues: var25 (write), name (copy), conversationId (copy)
 				if var25 then
 					return
@@ -122,7 +122,7 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 				name:warning(`Failed to fetch conversation messages for {conversationId}: {tostring(p6)}`)
 			end)
 			
-			return function() --[[ line: 210 ]]
+			return function()
 				-- upvalues: var25 (write)
 				var25 = true
 			end

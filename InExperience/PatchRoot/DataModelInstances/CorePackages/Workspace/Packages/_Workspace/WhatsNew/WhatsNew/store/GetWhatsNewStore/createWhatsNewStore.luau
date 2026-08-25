@@ -9,7 +9,7 @@ local whatsNewTelemetryModule = require(whatsNew.telemetry.WhatsNewTelemetry)
 local loadWhatsNewRegistryModule = require(whatsNew.registry.LoadWhatsNewRegistry)
 local _ = require(whatsNew.registry.ScopeActions)
 
-local function createIdleState(p0) --[[ line: 30 ]]
+local function createIdleState(p0)
 	-- upvalues: enumsModule (ref)
 	return {
 		activeTourType = nil,
@@ -24,14 +24,14 @@ local function createIdleState(p0) --[[ line: 30 ]]
 	}
 end
 
-local function _(p1) --[[ line: 45 | named "hasBeenSeen" ]]
+local function _(p1)
 	-- upvalues: entryStorageModule (ref)
 	local var11 = entryStorageModule.getEntries()[p1]
 	
 	return var11 ~= nil and var11.seen ~= nil
 end
 
-local _ = function(p2) --[[ line: 51 | named "isEligibleForNewSession" ]]
+local _ = function(p2)
 	-- upvalues: entryStorageModule (ref)
 	local toShow = p2.toShow
 	
@@ -42,7 +42,7 @@ local _ = function(p2) --[[ line: 51 | named "isEligibleForNewSession" ]]
 	return toShow
 end
 
-local _ = function(p3) --[[ line: 55 | named "countEligibleTips" ]]
+local _ = function(p3)
 	-- upvalues: entryStorageModule (ref)
 	local var12 = 0
 	
@@ -60,7 +60,7 @@ local _ = function(p3) --[[ line: 55 | named "countEligibleTips" ]]
 	return var12
 end
 
-local _ = function(p4) --[[ line: 66 | named "tourHasEligibleRootTips" ]]
+local _ = function(p4)
 	-- upvalues: entryStorageModule (ref)
 	for i, v in p4.tourTips do
 		local toShow = v.toShow
@@ -76,7 +76,7 @@ local _ = function(p4) --[[ line: 66 | named "tourHasEligibleRootTips" ]]
 	return false
 end
 
-local _ = function(p5) --[[ line: 75 | named "findFirstEligibleTipIndex" ]]
+local _ = function(p5)
 	-- upvalues: entryStorageModule (ref)
 	for i, v in p5.tourTips do
 		local toShow = v.toShow
@@ -92,7 +92,7 @@ local _ = function(p5) --[[ line: 75 | named "findFirstEligibleTipIndex" ]]
 	return nil
 end
 
-local _ = function(p6, p7) --[[ line: 85 | named "findNextVisibleTipIndexFrom" ]]
+local _ = function(p6, p7)
 	for i = p7, #p6.tourTips do
 		if not p6.tourTips[i].toShow then
 			continue
@@ -102,7 +102,7 @@ local _ = function(p6, p7) --[[ line: 85 | named "findNextVisibleTipIndexFrom" ]
 	return nil
 end
 
-local _ = function(p8, p9) --[[ line: 94 | named "findPreviousVisibleTipIndexFrom" ]]
+local _ = function(p8, p9)
 	for i = p9, 1, -1 do
 		if not p8.tourTips[i].toShow then
 			continue
@@ -112,7 +112,7 @@ local _ = function(p8, p9) --[[ line: 94 | named "findPreviousVisibleTipIndexFro
 	return nil
 end
 
-local function findGatewayTipByOpenActionKey(p10, p11) --[[ line: 103 ]]
+local function findGatewayTipByOpenActionKey(p10, p11)
 	-- upvalues: findGatewayTipByOpenActionKey (ref)
 	for i, v in p10.tourTips do
 		local gateway = v.gateway
@@ -131,7 +131,7 @@ local function findGatewayTipByOpenActionKey(p10, p11) --[[ line: 103 ]]
 	return nil
 end
 
-local function findCloseActionKeyForScope(p12, p13) --[[ line: 119 ]]
+local function findCloseActionKeyForScope(p12, p13)
 	-- upvalues: findCloseActionKeyForScope (ref)
 	for i, v in p12.tourTips do
 		local gateway = v.gateway
@@ -150,7 +150,7 @@ local function findCloseActionKeyForScope(p12, p13) --[[ line: 119 ]]
 	return nil
 end
 
-local _ = function(p14) --[[ line: 135 | named "getCloseActionKeyForFrame" ]]
+local _ = function(p14)
 	local parentTipIndex = p14.parentScopeTour.tourTips[p14.parentTipIndex]
 	local gateway = parentTipIndex.gateway
 	assert(gateway ~= nil, `parent tip '{parentTipIndex.id}' is missing gateway for scope stack frame`)
@@ -158,7 +158,7 @@ local _ = function(p14) --[[ line: 135 | named "getCloseActionKeyForFrame" ]]
 	return gateway.closeActionKey
 end
 
-local _ = function(p15) --[[ line: 143 | named "popScopeStack" ]]
+local _ = function(p15)
 	local var15 = p15[#p15]
 	local cloned = table.clone(p15)
 	table.remove(cloned)
@@ -166,16 +166,16 @@ local _ = function(p15) --[[ line: 143 | named "popScopeStack" ]]
 	return var15, cloned
 end
 
-local _ = function(p16) --[[ line: 150 | named "markEntrySeen" ]]
+local _ = function(p16)
 	-- upvalues: entryStorageModule (ref), _DateTime (ref)
 	entryStorageModule.markSeen(p16, _DateTime.now():ToIsoDate())
 end
 
-local function markTipsSeenFromCurrent(p17, p18, p19) --[[ line: 154 ]]
+local function markTipsSeenFromCurrent(p17, p18, p19)
 	-- upvalues: entryStorageModule (ref), _DateTime (ref), whatsNewTelemetryModule (ref)
 	local var17 = false
 	
-	local function _(p20) --[[ line: 161 | named "runtimeStateForTip" ]]
+	local function _(p20)
 		-- upvalues: p19 (ref)
 		local cloned = table.clone(p19)
 		cloned.currentEntry = p20
@@ -205,18 +205,18 @@ local function markTipsSeenFromCurrent(p17, p18, p19) --[[ line: 154 ]]
 	end
 end
 
-return function() --[[ line: 187 | named "createWhatsNewStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), createIdleState (ref), enumsModule (ref), whatsNewTelemetryModule (ref), markTipsSeenFromCurrent (ref), loadWhatsNewRegistryModule (ref), findCloseActionKeyForScope (ref), entryStorageModule (ref), findGatewayTipByOpenActionKey (ref), _DateTime (ref)
 	local var22 = nil
 	local var23 = nil
 	local var24 = false
 	
-	local function _() --[[ line: 192 | named "assertInitialized" ]]
+	local function _()
 		-- upvalues: var24 (write), var22 (write), var23 (write)
 		assert(var24 and (var22 ~= nil and var23 ~= nil), "WhatsNew store not initialized. Call initialize first.")
 	end
 	
-	local _ = function() --[[ line: 196 | named "getRootTourAndScopeActions" ]]
+	local _ = function()
 		-- upvalues: var24 (write), var22 (write), var23 (write)
 		assert(var24 and (var22 ~= nil and var23 ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		
@@ -226,14 +226,14 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 	local t = {}
 	local var26, var27 = signalsModule.createSignal(createIdleState(""))
 	
-	local _ = function(p21) --[[ line: 204 | named "resolveSurfaceForAnchor" ]]
+	local _ = function(p21)
 		-- upvalues: t (ref), enumsModule (copy)
 		local var45 = t[p21]
 		
 		return if var45 == nil or not var45.isReady then enumsModule.WhatsNewSurface.WaitingForAnchor else enumsModule.WhatsNewSurface.TourTip
 	end
 	
-	local function refreshSurfaceForCurrentEntry() --[[ line: 212 ]]
+	local function refreshSurfaceForCurrentEntry()
 		-- upvalues: var26 (ref), var27 (ref), t (ref), enumsModule (copy)
 		local var46 = var26(false)
 		local currentEntry = var46.currentEntry
@@ -254,7 +254,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		var27(t_1)
 	end
 	
-	local function showTipAt(p22, p23, p24, p25) --[[ line: 231 ]]
+	local function showTipAt(p22, p23, p24, p25)
 		-- upvalues: var26 (ref), var27 (ref), t (ref), enumsModule (copy)
 		local var48 = var26(false)
 		local t_1 = {
@@ -272,12 +272,12 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		var27(t_1)
 	end
 	
-	local _ = function() --[[ line: 257 | named "resetToIdle" ]]
+	local _ = function()
 		-- upvalues: var27 (ref), createIdleState (copy), var26 (ref)
 		var27(createIdleState(var26(false).screenScopeId))
 	end
 	
-	local function stopTour() --[[ line: 261 ]]
+	local function stopTour()
 		-- upvalues: var26 (ref), enumsModule (copy), whatsNewTelemetryModule (copy), var27 (ref), createIdleState (copy)
 		local var50 = var26(false)
 		
@@ -289,10 +289,10 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 	
 	local var31 = false
 	
-	local _ = function(p26, p27) --[[ line: 277 | named "invokeCloseAction" ]]
+	local _ = function(p26, p27)
 		-- upvalues: var31 (write)
 		var31 = true
-		local ok, status = pcall(function() --[[ line: 279 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p26 (ref), p27 (ref)
 			p26:invoke(p27)
 		end)
@@ -303,7 +303,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local _ = function(p28, p29) --[[ line: 288 | named "exitNestedScope" ]]
+	local _ = function(p28, p29)
 		-- upvalues: var31 (write)
 		local var51 = p29[#p29]
 		local cloned = table.clone(p29)
@@ -313,7 +313,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		assert(gateway ~= nil, `parent tip '{parentTipIndex.id}' is missing gateway for scope stack frame`)
 		local closeActionKey = gateway.closeActionKey
 		var31 = true
-		local ok, status = pcall(function() --[[ line: 279 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p28 (ref), closeActionKey (ref)
 			p28:invoke(closeActionKey)
 		end)
@@ -325,7 +325,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		return var51, cloned
 	end
 	
-	local function markActiveScopeEndedEarly(p30) --[[ line: 297 ]]
+	local function markActiveScopeEndedEarly(p30)
 		-- upvalues: whatsNewTelemetryModule (copy), markTipsSeenFromCurrent (copy)
 		if p30.currentEntry ~= nil then
 			whatsNewTelemetryModule.logTourtipInteraction(whatsNewTelemetryModule.InteractionType.DISMISS, p30.currentEntry.id, whatsNewTelemetryModule.Button.CLOSE, p30)
@@ -339,7 +339,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		whatsNewTelemetryModule.logTourLifecycle(whatsNewTelemetryModule.LifecycleType.TOUR_STOPPED, p30, whatsNewTelemetryModule.StopReason.DISMISS)
 	end
 	
-	local function completeTour(p31) --[[ line: 321 ]]
+	local function completeTour(p31)
 		-- upvalues: var26 (ref), enumsModule (copy), markActiveScopeEndedEarly (ref), var24 (write), var22 (write), var23 (write), whatsNewTelemetryModule (copy), var31 (write), showTipAt (ref), var27 (ref), createIdleState (copy), loadWhatsNewRegistryModule (copy), findCloseActionKeyForScope (copy)
 		local var53 = var26(false)
 		
@@ -366,7 +366,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 				assert(status ~= nil, `parent tip '{parentTipIndex.id}' is missing gateway for scope stack frame`)
 				local closeActionKey = status.closeActionKey
 				var31 = true
-				ok, status = pcall(function() --[[ line: 279 ]]
+				ok, status = pcall(function()
 					-- upvalues: var23 (ref), closeActionKey (ref)
 					var23:invoke(closeActionKey)
 				end)
@@ -426,7 +426,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 				
 				if var59 ~= nil then
 					var31 = true
-					local ok, status = pcall(function() --[[ line: 279 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var23 (ref), var59 (ref)
 						var23:invoke(var59)
 					end)
@@ -441,7 +441,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		var27(createIdleState(var26(false).screenScopeId))
 	end
 	
-	local function startTour(p32, p33) --[[ line: 395 ]]
+	local function startTour(p32, p33)
 		-- upvalues: var24 (write), var22 (write), var23 (write), loadWhatsNewRegistryModule (copy), entryStorageModule (copy), showTipAt (ref), whatsNewTelemetryModule (copy), var26 (ref)
 		assert(var24 and (var22 ~= nil and var23 ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		local var60 = var22[loadWhatsNewRegistryModule.makeRootTourKey(p32, p33)]
@@ -489,7 +489,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		var61 = nil
 	end
 	
-	local _ = function(p34, p35) --[[ line: 424 | named "tryStartTour" ]]
+	local _ = function(p34, p35)
 		-- upvalues: var24 (write), var22 (write), var23 (write), loadWhatsNewRegistryModule (copy), entryStorageModule (copy), startTour (ref)
 		assert(var24 and (var22 ~= nil and var23 ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		local var65 = var22[loadWhatsNewRegistryModule.makeRootTourKey(p34, p35)]
@@ -517,7 +517,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		return false
 	end
 	
-	local function startEligibleTour(p36) --[[ line: 434 ]]
+	local function startEligibleTour(p36)
 		-- upvalues: var24 (write), var22 (write), var23 (write), var26 (ref), enumsModule (copy), var27 (ref), createIdleState (copy), loadWhatsNewRegistryModule (copy), entryStorageModule (copy), startTour (ref)
 		assert(var24 and (var22 ~= nil and var23 ~= nil), "WhatsNew store not initialized. Call initialize first.")
 		
@@ -555,7 +555,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local function registerAnchor(p37, p38) --[[ line: 449 ]]
+	local function registerAnchor(p37, p38)
 		-- upvalues: t (ref), var26 (ref), refreshSurfaceForCurrentEntry (ref)
 		local var70 = t[p37]
 		
@@ -571,14 +571,14 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local function getAnchorRef(p39) --[[ line: 469 ]]
+	local function getAnchorRef(p39)
 		-- upvalues: t (ref)
 		local var72 = t[p39]
 		
 		return if var72 == nil then nil else var72.ref
 	end
 	
-	local function setAnchorReady(value, p40, p41) --[[ line: 477 ]]
+	local function setAnchorReady(value, p40, p41)
 		-- upvalues: t (ref), var26 (ref), refreshSurfaceForCurrentEntry (ref)
 		local var73 = t[value]
 		
@@ -592,7 +592,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		end
 	end
 	
-	local function unregisterAnchor(p42, p43) --[[ line: 492 ]]
+	local function unregisterAnchor(p42, p43)
 		-- upvalues: t (ref), var26 (ref), refreshSurfaceForCurrentEntry (ref)
 		local var75 = t[p42]
 		
@@ -608,7 +608,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 	
 	local var40 = false
 	
-	local function tryEnterNestedScope(p44) --[[ line: 510 ]]
+	local function tryEnterNestedScope(p44)
 		-- upvalues: var40 (write), var26 (ref), enumsModule (copy), entryStorageModule (copy), showTipAt (ref), whatsNewTelemetryModule (copy)
 		if var40 then
 			return false
@@ -640,7 +640,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 					return false
 				end
 				var40 = true
-				local ok, status = pcall(function() --[[ line: 541 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var77 (ref), currentScopeTour (ref), scope (ref), var78 (ref), showTipAt (copy), entryStorageModule (copy), whatsNewTelemetryModule (copy), var26 (copy)
 					local cloned = table.clone(var77.scopeStack)
 					table.insert(cloned, {
@@ -679,7 +679,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		var78 = nil
 	end
 	
-	local function tryStartNestedFromIdle(p45) --[[ line: 570 ]]
+	local function tryStartNestedFromIdle(p45)
 		-- upvalues: var26 (ref), var24 (write), var22 (write), var23 (write), enumsModule (copy), loadWhatsNewRegistryModule (copy), findGatewayTipByOpenActionKey (copy), entryStorageModule (copy), showTipAt (ref), whatsNewTelemetryModule (copy)
 		local screenScopeId = var26(false).screenScopeId
 		
@@ -744,7 +744,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		return false
 	end
 	
-	local function notifyScopeOpened(p46) --[[ line: 610 ]]
+	local function notifyScopeOpened(p46)
 		-- upvalues: var26 (ref), enumsModule (copy), tryStartNestedFromIdle (ref), entryStorageModule (copy), _DateTime (copy), tryEnterNestedScope (ref)
 		local var89 = var26(false)
 		
@@ -780,7 +780,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		var90 = nil
 	end
 	
-	local function notifyScopeClosed(p47) --[[ line: 643 ]]
+	local function notifyScopeClosed(p47)
 		-- upvalues: var26 (ref), var31 (write), var40 (write), enumsModule (copy), completeTour (ref), var24 (write), var22 (write), var23 (write), loadWhatsNewRegistryModule (copy), findCloseActionKeyForScope (copy)
 		local var91 = var26(false)
 		
@@ -816,7 +816,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 	end
 	
 	return {
-		initialize = function(p48) --[[ line: 754 ]]
+		initialize = function(p48)
 			-- upvalues: var24 (write), var22 (write), var23 (write), notifyScopeOpened (ref), notifyScopeClosed (ref), var26 (ref)
 			if var24 then
 				return
@@ -831,7 +831,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 				getRuntimeStateSignal = var26
 			})
 		end,
-		resetForTests = function() --[[ line: 769 ]]
+		resetForTests = function()
 			-- upvalues: var23 (write), var24 (write), var22 (write), t (ref), var27 (ref), createIdleState (copy)
 			if var23 ~= nil then
 				var23:stopOpenStateWiring()
@@ -842,24 +842,24 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 			table.clear(t)
 			var27(createIdleState(""))
 		end,
-		getRuntimeState = function() --[[ line: 784 ]]
+		getRuntimeState = function()
 			-- upvalues: var26 (ref)
 			return var26(false)
 		end,
 		getRuntimeStateSignal = var26,
-		getCurrentScope = function() --[[ line: 790 ]]
+		getCurrentScope = function()
 			-- upvalues: var26 (ref)
 			return var26(false).currentScopeTour
 		end,
-		getCurrentEntry = function() --[[ line: 794 ]]
+		getCurrentEntry = function()
 			-- upvalues: var26 (ref)
 			return var26(false).currentEntry
 		end,
-		getGlobalStepIndex = function() --[[ line: 798 ]]
+		getGlobalStepIndex = function()
 			-- upvalues: var26 (ref)
 			return var26(false).globalStepIndex
 		end,
-		getGlobalTotalSteps = function() --[[ line: 802 ]]
+		getGlobalTotalSteps = function()
 			-- upvalues: var26 (ref)
 			local var93 = var26(false)
 			
@@ -872,7 +872,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 		startEligibleTour = startEligibleTour,
 		startTour = startTour,
 		stopTour = stopTour,
-		next = function() --[[ line: 678 ]]
+		next = function()
 			-- upvalues: var26 (ref), enumsModule (copy), entryStorageModule (copy), _DateTime (copy), whatsNewTelemetryModule (copy), completeTour (ref), showTipAt (ref)
 			local var94 = var26(false)
 			
@@ -906,7 +906,7 @@ return function() --[[ line: 187 | named "createWhatsNewStore" ]]
 			end
 			var96 = nil
 		end,
-		back = function() --[[ line: 718 ]]
+		back = function()
 			-- upvalues: var26 (ref), enumsModule (copy), whatsNewTelemetryModule (copy), showTipAt (ref)
 			local var97 = var26(false)
 			

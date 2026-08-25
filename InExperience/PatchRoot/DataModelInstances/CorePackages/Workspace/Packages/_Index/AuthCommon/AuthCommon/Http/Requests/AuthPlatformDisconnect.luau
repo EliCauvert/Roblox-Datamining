@@ -5,7 +5,7 @@ local getSingleSignOnUrlsModule = require(authCommon.Utils.getSingleSignOnUrls)
 local consoleAuthRequestWrapper = require(parent.Http).Utils.ConsoleAuthRequestWrapper
 local promiseModule = require(parent.Promise)
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: getSingleSignOnUrlsModule (ref), consoleAuthRequestWrapper (ref), promiseModule (ref)
 	local disconnect = getSingleSignOnUrlsModule().disconnect
 	

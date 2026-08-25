@@ -20,7 +20,7 @@ local fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModul
 local fStringSocialProfileCurrentlyPlayingLayerModule = require(profilePlatform.Flags.FStringSocialProfileCurrentlyPlayingLayer)
 local fFlagProfileCurrentlyPlayingIXPEnabledModule = require(profilePlatform.Flags.FFlagProfileCurrentlyPlayingIXPEnabled)
 
-return function(p0) --[[ line: 45 | named "ContextualInformationContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (ref), useDispatch (ref), useEffectOnMount (ref), networkingGamesModule (ref), reactModule (ref), fFlagProfileCurrentlyPlayingIXPEnabledModule (ref), IXPService (ref), fStringSocialProfileCurrentlyPlayingLayerModule (ref), useSelector (ref), getDeepValue (ref), contextualPresenceModule (ref), contextualMutualFriendsModule (ref), contextualPlayedTogetherModule (ref), contextualGenericModule (ref), horizontalPageMargin (ref)
 	local var20
 	local sourceInfo = useProfileWrapperContextModule().sourceInfo
@@ -29,19 +29,19 @@ return function(p0) --[[ line: 45 | named "ContextualInformationContainer" ]]
 	local contextDetails = contextualInformation.contextDetails
 	local var15 = if context == enumsModule.ContextualTypes.SentFromExperience then contextDetails[context].sourceUniverseId elseif fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then contextDetails[context].mostFrequentUniverseId else nil
 	local var16 = useDispatch()
-	useEffectOnMount(function() --[[ line: 64 ]]
+	useEffectOnMount(function()
 		-- upvalues: context (ref), enumsModule (copy), fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule (copy), var16 (ref), networkingGamesModule (copy), var15 (ref)
 		if context == enumsModule.ContextualTypes.SentFromExperience or fFlagProfilePlatformEnablePlayedTogetherContextFrequentExperienceNameModule and context == enumsModule.ContextualTypes.PlayedTogether then
-			var16(networkingGamesModule.GetExperiencesDetails.API({ var15 })):catch(function(_) --[[ line: 72 ]] end)
+			var16(networkingGamesModule.GetExperiencesDetails.API({ var15 })):catch(function(_) end)
 		end
 	end)
-	reactModule.useEffect(function() --[[ line: 76 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagProfileCurrentlyPlayingIXPEnabledModule (copy), context (ref), enumsModule (copy), IXPService (copy), fStringSocialProfileCurrentlyPlayingLayerModule (copy)
 		if fFlagProfileCurrentlyPlayingIXPEnabledModule and context == enumsModule.ContextualTypes.Presence then
 			IXPService:LogFlagLinkedUserLayerExposure(fStringSocialProfileCurrentlyPlayingLayerModule)
 		end
 	end, { context })
-	local var17 = useSelector(function(p1) --[[ line: 82 ]]
+	local var17 = useSelector(function(p1)
 		-- upvalues: getDeepValue (copy), var15 (ref)
 		return getDeepValue(p1, `ProfilePlatform.Games.byGameId.{tostring(var15)}.name`) or ""
 	end)

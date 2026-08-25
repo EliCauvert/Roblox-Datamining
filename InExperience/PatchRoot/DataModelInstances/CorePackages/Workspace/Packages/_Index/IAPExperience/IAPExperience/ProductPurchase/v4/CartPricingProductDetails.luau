@@ -8,7 +8,7 @@ local _ = require(script.Parent.useCartPricing)
 local _ = require(parent.Enums.UnifiedPurchaseModalTypeEnum)
 local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 
-return function(p0) --[[ line: 28 | named "CartPricingProductDetails" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), cartPricingLoadingModule (ref), view (ref), productDetailsContainerModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref)
 	local cartPricing = p0.cartPricing
 	

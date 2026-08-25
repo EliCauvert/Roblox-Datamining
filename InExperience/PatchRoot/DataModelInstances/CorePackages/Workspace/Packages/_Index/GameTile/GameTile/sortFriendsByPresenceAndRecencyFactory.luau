@@ -6,11 +6,11 @@ local t = {
 	[userModel.PresenceType.OFFLINE] = 0
 }
 
-local function _(p0, p1) --[[ line: 12 | named "useLastOnlineForSort" ]]
+local function _(p0, p1)
 	return typeof(p0) == "number" and (typeof(p1) == "number" and p0 ~= p1)
 end
 
-local _ = function(p2) --[[ line: 16 | named "getFriendWeight" ]]
+local _ = function(p2)
 	-- upvalues: t (ref), userModel (ref)
 	local var1 = if p2 and p2.presence then t[p2.presence] else nil
 	
@@ -20,9 +20,9 @@ local _ = function(p2) --[[ line: 16 | named "getFriendWeight" ]]
 	return var1
 end
 
-return function(p3) --[[ line: 27 ]]
+return function(p3)
 	-- upvalues: t (ref), userModel (ref)
-	return function(p4, p5) --[[ line: 28 ]]
+	return function(p4, p5)
 		-- upvalues: t (copy), userModel (copy), p3 (ref)
 		local var2 = if p4 and p4.presence then t[p4.presence] else nil
 		

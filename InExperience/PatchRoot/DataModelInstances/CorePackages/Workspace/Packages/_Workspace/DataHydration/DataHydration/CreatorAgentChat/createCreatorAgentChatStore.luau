@@ -13,11 +13,11 @@ local rpcDecoderModule = require(script.Parent.rpcDecoder)
 local _ = require(script.Parent.types)
 local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
 
-local function _(p0) --[[ line: 39 | named "normalizeNextPageToken" ]]
+local function _(p0)
 	return if typeof(p0) == "string" and p0 ~= "" then p0 else nil
 end
 
-local function appendSessionListEntries(p1, p2) --[[ line: 46 ]]
+local function appendSessionListEntries(p1, p2)
 	local t = {}
 	local t_1 = {}
 	
@@ -40,32 +40,32 @@ local function appendSessionListEntries(p1, p2) --[[ line: 46 ]]
 	return t_1
 end
 
-local _ = function(p3) --[[ line: 71 | named "normalizePrompt" ]]
+local _ = function(p3)
 	return if typeof(p3) == "string" then { { type = "text", text = p3 } } else p3
 end
 
 local t = {
-	debug = function() --[[ line: 79 ]] end,
-	info = function() --[[ line: 80 ]] end,
-	warning = function() --[[ line: 81 ]] end,
-	error = function() --[[ line: 82 ]] end
+	debug = function() end,
+	info = function() end,
+	warning = function() end,
+	error = function() end
 }
 
-return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
+return function(p4)
 	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref), acpProtocolModule (ref), t (ref), rpcDecoderModule (ref), signalsModule (ref), onTerminalModule (ref), appendSessionListEntries (ref), createTurnHandleModule (ref), historyIngestModule (ref), sessionRegistryModule (ref), constantsModule (ref), ingestFrameHandlerModule (ref)
 	p4 = p4 or {}
 	local network = p4.network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
 	local baseUrl = p4.baseUrl or acpProtocolModule.acpUrl()
 	local logger = p4.logger or t
 	
-	local function _() --[[ line: 92 | named "authHeaders" ]]
+	local function _()
 		-- upvalues: p4 (ref)
 		return if p4.getAuthHeaders then p4.getAuthHeaders() else {}
 	end
 	
 	local var20 = 0
 	
-	local _ = function() --[[ line: 97 | named "nextId" ]]
+	local _ = function()
 		-- upvalues: p4 (ref), var20 (write)
 		if p4.generateRequestId then
 			return p4.generateRequestId()
@@ -79,11 +79,11 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 	local t_2 = {}
 	local t_3 = {}
 	
-	local _ = function(p5) --[[ line: 109 | named "requestIdKey" ]]
+	local _ = function(p5)
 		return if p5 == nil then nil else tostring(p5)
 	end
 	
-	local function unregisterHandle(p6) --[[ line: 113 ]]
+	local function unregisterHandle(p6)
 		-- upvalues: t_1 (ref), t_3 (ref), t_2 (ref)
 		for i, v in t_1 do
 			if v == p6 then
@@ -100,7 +100,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		end
 	end
 	
-	local function rpcCall(p7, p8, p9) --[[ line: 127 ]]
+	local function rpcCall(p7, p8, p9)
 		-- upvalues: logger (ref), httpClientModule (copy), network (ref), baseUrl (ref), p4 (ref), rpcDecoderModule (copy)
 		logger:debug(`[CAS] -> {p8} id={tostring(p7)}`)
 		
@@ -115,7 +115,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		})
 	end
 	
-	local function rpcCallSync(p10, p11) --[[ line: 145 ]]
+	local function rpcCallSync(p10, p11)
 		-- upvalues: rpcCall (ref), p4 (ref), var20 (write)
 		local var56
 		if p4.generateRequestId then
@@ -127,7 +127,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return rpcCall(var56, p10, p11)
 	end
 	
-	local function submitToolResult(p12) --[[ line: 149 ]]
+	local function submitToolResult(p12)
 		-- upvalues: p4 (ref), var20 (write), acpProtocolModule (copy), httpClientModule (copy), network (ref), baseUrl (ref), rpcDecoderModule (copy)
 		local var57
 		assert(typeof(p12.sessionId) == "string" and p12.sessionId ~= "", "sessionId is required")
@@ -169,12 +169,12 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		})
 	end
 	
-	local function initialize(p13) --[[ line: 189 ]]
+	local function initialize(p13)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		return rpcCallSync(acpProtocolModule.Methods.Initialize, p13 or { protocolVersion = acpProtocolModule.ProtocolVersion })
 	end
 	
-	local function sessionNew(p14) --[[ line: 193 ]]
+	local function sessionNew(p14)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(p14 ~= nil, "sessionNew requires params")
 		assert(typeof(p14.project) == "table", "sessionNew requires params.project")
@@ -189,7 +189,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		}))
 	end
 	
-	local function sessionList(p15) --[[ line: 209 ]]
+	local function sessionList(p15)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		return rpcCallSync(acpProtocolModule.Methods.SessionList, p15 or {})
 	end
@@ -206,7 +206,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		getNextPageToken = var33,
 		getStatus = pending,
 		getLoadMoreStatus = var37,
-		refresh = function() --[[ line: 221 ]]
+		refresh = function()
 			-- upvalues: var39 (write), var41 (write), var40 (write), pending_1 (ref), var38 (ref), acpProtocolModule (copy), rpcCall (ref), p4 (ref), var20 (write), onTerminalModule (copy), var32 (ref), var34 (ref)
 			if var39 ~= nil then
 				if var39.state(false).status == "pending" then
@@ -231,7 +231,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 			end
 			local var62 = rpcCall(var61, sessionList, t)
 			var39 = var62
-			onTerminalModule(var62.state, function(p16) --[[ line: 238 ]]
+			onTerminalModule(var62.state, function(p16)
 				-- upvalues: var59 (ref), var41 (copy), var39 (copy), var32 (copy), var34 (copy), pending_1 (copy)
 				if var59 ~= var41 then return end
 				var39 = nil
@@ -241,7 +241,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 				var32(sessions)
 				var34(var64)
 				pending_1("succeeded")
-			end, function(_) --[[ line: 248 ]]
+			end, function(_)
 				-- upvalues: var59 (ref), var41 (copy), var39 (copy), pending_1 (copy)
 				if var59 == var41 then
 					var39 = nil
@@ -253,7 +253,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 			
 			return var62
 		end,
-		loadMore = function() --[[ line: 258 ]]
+		loadMore = function()
 			-- upvalues: var33 (ref), var39 (write), var40 (write), pending (ref), var41 (write), var38 (ref), acpProtocolModule (copy), rpcCall (ref), p4 (ref), var20 (write), onTerminalModule (copy), appendSessionListEntries (copy), var31 (ref), var32 (ref), var34 (ref)
 			local var65 = var33(false)
 			
@@ -279,7 +279,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 			end
 			local var68 = rpcCall(var67, sessionList, var66)
 			var40 = var68
-			onTerminalModule(var68.state, function(p17) --[[ line: 280 ]]
+			onTerminalModule(var68.state, function(p17)
 				-- upvalues: var41 (ref), var41 (copy), var40 (copy), appendSessionListEntries (copy), var31 (copy), var32 (copy), var34 (copy), var38 (copy)
 				if var41 ~= var41 then return end
 				var40 = nil
@@ -289,7 +289,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 				var32(appendSessionListEntries(var31(false), sessions))
 				var34(var70)
 				var38("succeeded")
-			end, function(_) --[[ line: 291 ]]
+			end, function(_)
 				-- upvalues: var41 (ref), var41 (copy), var40 (copy), var38 (copy)
 				if var41 == var41 then
 					var40 = nil
@@ -303,7 +303,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		end
 	}
 	
-	local function sessionFindByUniverse(p18) --[[ line: 310 ]]
+	local function sessionFindByUniverse(p18)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p18) == "table", "sessionFindByUniverse requires params")
 		assert(typeof(p18.universeId) == "number" and p18.universeId ~= 0, "universeId is required")
@@ -311,7 +311,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return rpcCallSync(acpProtocolModule.Methods.SessionFindByUniverse, p18)
 	end
 	
-	local function sessionLoad(p19, p20) --[[ line: 318 ]]
+	local function sessionLoad(p19, p20)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p19) == "string" and p19 ~= "", "sessionId is required")
 		
@@ -323,19 +323,19 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		})
 	end
 	
-	local function sessionReadTasks(p21) --[[ line: 331 ]]
+	local function sessionReadTasks(p21)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p21) == "string" and p21 ~= "", "sessionId is required")
 		
 		return rpcCallSync(acpProtocolModule.Methods.SessionReadTasks, { sessionId = p21 })
 	end
 	
-	local _ = function(p22) --[[ line: 336 | named "postSessionCancel" ]]
+	local _ = function(p22)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		return rpcCallSync(acpProtocolModule.Methods.SessionCancel, { sessionId = p22 })
 	end
 	
-	local function sessionCancel(p23) --[[ line: 340 ]]
+	local function sessionCancel(p23)
 		-- upvalues: acpProtocolModule (copy), rpcCall (ref), p4 (ref), var20 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var72
 		assert(typeof(p23) == "string" and p23 ~= "", "sessionId is required")
@@ -349,7 +349,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 			var72 = var20
 		end
 		local var73 = rpcCall(var72, sessionCancel, t)
-		onTerminalModule(var73.state, function() --[[ line: 343 ]]
+		onTerminalModule(var73.state, function()
 			-- upvalues: t_1 (copy), p23 (ref), t_3 (copy), t_2 (copy)
 			local var74 = t_1[p23]
 			
@@ -375,7 +375,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return var73
 	end
 	
-	local function sessionDelete(p24) --[[ line: 353 ]]
+	local function sessionDelete(p24)
 		-- upvalues: acpProtocolModule (copy), rpcCall (ref), p4 (ref), var20 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var77
 		assert(typeof(p24) == "string" and p24 ~= "", "sessionId is required")
@@ -389,7 +389,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 			var77 = var20
 		end
 		local var78 = rpcCall(var77, sessionDelete, t)
-		onTerminalModule(var78.state, function() --[[ line: 356 ]]
+		onTerminalModule(var78.state, function()
 			-- upvalues: t_1 (copy), p24 (ref), acpProtocolModule (copy), t_3 (copy), t_2 (copy)
 			local var79 = t_1[p24]
 			
@@ -415,14 +415,14 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return var78
 	end
 	
-	local function sessionUpdateInfo(p25, p26) --[[ line: 366 ]]
+	local function sessionUpdateInfo(p25, p26)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p25) == "string" and p25 ~= "", "sessionId is required")
 		
 		return rpcCallSync(acpProtocolModule.Methods.SessionUpdateInfo, { sessionId = p25, title = p26 })
 	end
 	
-	local function sessionSaveAndPublish(p27) --[[ line: 371 ]]
+	local function sessionSaveAndPublish(p27)
 		-- upvalues: rpcCallSync (ref), acpProtocolModule (copy)
 		assert(typeof(p27) == "table", "sessionSaveAndPublish requires params")
 		assert(typeof(p27.placeId) == "number" and p27.placeId > 0, "placeId must be a positive number")
@@ -432,9 +432,9 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return rpcCallSync(acpProtocolModule.Methods.SessionSaveAndPublish, p27)
 	end
 	
-	local _ = function(p28, p29, p30, p31) --[[ line: 381 | named "registerTurnHandle" ]]
+	local _ = function(p28, p29, p30, p31)
 		-- upvalues: createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p4 (ref), var20 (write), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
-		local var81, var82 = createTurnHandleModule(p28, p29, function() --[[ line: 387 ]]
+		local var81, var82 = createTurnHandleModule(p28, p29, function()
 			-- upvalues: p28 (ref), acpProtocolModule (copy), rpcCall (copy), p4 (copy), var20 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
 			local var84
 			assert(typeof(p28) == "string" and p28 ~= "", "sessionId is required")
@@ -447,7 +447,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 				var20 += 1
 				var84 = var20
 			end
-			onTerminalModule(rpcCall(var84, sessionCancel, t).state, function() --[[ line: 343 ]]
+			onTerminalModule(rpcCall(var84, sessionCancel, t).state, function()
 				-- upvalues: t_1 (copy), p28 (ref), t_3 (copy), t_2 (copy)
 				local var74 = t_1[p28]
 				
@@ -479,7 +479,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return var81
 	end
 	
-	local function sessionPrompt(p32) --[[ line: 398 ]]
+	local function sessionPrompt(p32)
 		-- upvalues: p4 (ref), var20 (write), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), onTerminalModule (copy), t_1 (ref), t_3 (ref), t_2 (ref)
 		local var85
 		assert(p32 and (typeof(p32.sessionId) == "string" and p32.sessionId ~= ""), "sessionId is required")
@@ -492,7 +492,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 			var20 += 1
 			var85 = var20
 		end
-		local var86, var87 = createTurnHandleModule(sessionId, var85, function() --[[ line: 387 ]]
+		local var86, var87 = createTurnHandleModule(sessionId, var85, function()
 			-- upvalues: sessionId (ref), acpProtocolModule (copy), rpcCall (copy), p4 (copy), var20 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
 			local var84
 			assert(typeof(sessionId) == "string" and sessionId ~= "", "sessionId is required")
@@ -505,7 +505,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 				var20 += 1
 				var84 = var20
 			end
-			onTerminalModule(rpcCall(var84, sessionCancel, t).state, function() --[[ line: 343 ]]
+			onTerminalModule(rpcCall(var84, sessionCancel, t).state, function()
 				-- upvalues: t_1 (copy), sessionId (ref), t_3 (copy), t_2 (copy)
 				local var74 = t_1[sessionId]
 				
@@ -542,9 +542,9 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		if p32._meta then
 			t._meta = p32._meta
 		end
-		onTerminalModule(rpcCall(var85, acpProtocolModule.Methods.SessionPrompt, t).state, nil, function(p33, p34) --[[ line: 417 ]]
+		onTerminalModule(rpcCall(var85, acpProtocolModule.Methods.SessionPrompt, t).state, nil, function(p33, p34)
 			-- upvalues: var88 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
-			task.defer(function() --[[ line: 418 ]]
+			task.defer(function()
 				-- upvalues: var88 (copy), p33 (ref), p34 (ref), t_1 (copy), t_3 (copy), t_2 (copy)
 				if var88.isDone() then return end
 				var88.fail(p33, p34)
@@ -568,7 +568,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return var86
 	end
 	
-	local function resumeTurnFromHistory(p35, p36, p37) --[[ line: 430 ]]
+	local function resumeTurnFromHistory(p35, p36, p37)
 		-- upvalues: t_3 (ref), createTurnHandleModule (copy), acpProtocolModule (copy), rpcCall (ref), p4 (ref), var20 (write), onTerminalModule (copy), t_1 (ref), t_2 (ref)
 		assert(typeof(p35) == "string" and p35 ~= "", "sessionId is required")
 		
@@ -578,7 +578,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		local var91 = t_3[p35]
 		
 		if var91 == nil then
-			local var92, var93 = createTurnHandleModule(p35, nil, function() --[[ line: 387 ]]
+			local var92, var93 = createTurnHandleModule(p35, nil, function()
 				-- upvalues: p35 (ref), acpProtocolModule (copy), rpcCall (copy), p4 (copy), var20 (copy), onTerminalModule (copy), t_1 (copy), t_3 (copy), t_2 (copy)
 				local var84
 				assert(typeof(p35) == "string" and p35 ~= "", "sessionId is required")
@@ -591,7 +591,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 					var20 += 1
 					var84 = var20
 				end
-				onTerminalModule(rpcCall(var84, sessionCancel, t).state, function() --[[ line: 343 ]]
+				onTerminalModule(rpcCall(var84, sessionCancel, t).state, function()
 					-- upvalues: t_1 (copy), p35 (ref), t_3 (copy), t_2 (copy)
 					local var74 = t_1[p35]
 					
@@ -622,15 +622,15 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		return var91
 	end
 	
-	local function getActiveTurnHandle(p38) --[[ line: 446 ]]
+	local function getActiveTurnHandle(p38)
 		-- upvalues: t_3 (ref)
 		return t_3[p38]
 	end
 	
-	local function ingestSessionHistory(p39, p40, p41) --[[ line: 450 ]]
+	local function ingestSessionHistory(p39, p40, p41)
 		-- upvalues: historyIngestModule (copy), t_1 (ref), unregisterHandle (ref)
 		return historyIngestModule.ingestSessionHistory({
-			getActiveTurnInternals = function(p42) --[[ line: 456 ]]
+			getActiveTurnInternals = function(p42)
 				-- upvalues: t_1 (copy)
 				return t_1[p42]
 			end,
@@ -646,7 +646,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		ingestSessionHistory = ingestSessionHistory,
 		submitToolResult = submitToolResult,
 		getActiveTurnHandle = getActiveTurnHandle,
-		onCasSessionIdChanged = function(_) --[[ line: 471 ]] end,
+		onCasSessionIdChanged = function(_) end,
 		rpcTimeoutSeconds = constantsModule.getRpcTimeoutSeconds()
 	})
 	
@@ -654,7 +654,7 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		initialize = initialize,
 		sessionNew = sessionNew,
 		sessionList = sessionList,
-		getSessionListStore = function() --[[ line: 494 ]]
+		getSessionListStore = function()
 			-- upvalues: t_4 (ref)
 			return t_4
 		end,
@@ -668,17 +668,17 @@ return function(p4) --[[ line: 85 | named "createCreatorAgentChatStore" ]]
 		sessionUpdateInfo = sessionUpdateInfo,
 		sessionSaveAndPublish = sessionSaveAndPublish,
 		ingestSessionHistory = ingestSessionHistory,
-		ingestFrame = function(p43, p44) --[[ line: 475 ]]
+		ingestFrame = function(p43, p44)
 			-- upvalues: ingestFrameHandlerModule (copy), logger (ref), var54 (ref), t_1 (ref), t_2 (ref), unregisterHandle (ref)
 			ingestFrameHandlerModule.ingestFrame({
 				logger = logger,
 				getSessionByCasSessionId = var54.getSessionByCasSessionId,
 				getSessionForProject = var54.getSessionForProject,
-				getActiveTurnBySession = function(p45) --[[ line: 480 ]]
+				getActiveTurnBySession = function(p45)
 					-- upvalues: t_1 (copy)
 					return t_1[p45]
 				end,
-				getActiveTurnByRequestId = function(p46) --[[ line: 483 ]]
+				getActiveTurnByRequestId = function(p46)
 					-- upvalues: t_2 (copy)
 					return t_2[p46]
 				end,

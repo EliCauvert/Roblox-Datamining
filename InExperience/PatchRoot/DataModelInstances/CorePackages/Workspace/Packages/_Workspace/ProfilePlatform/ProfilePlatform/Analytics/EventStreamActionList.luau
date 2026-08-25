@@ -14,7 +14,7 @@ local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatfo
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
 
-local var8 = function(p0) --[[ line: 28 ]]
+local var8 = function(p0)
 	return p0
 end
 

@@ -1,7 +1,7 @@
 ﻿local t = {}
 local createButtonsTimeModule = require(script.Parent.CreateButtonsTime)
 
-function t.createHelpText(helpDescription) --[[ line: 7 ]]
+function t.createHelpText(helpDescription)
 	-- upvalues: createButtonsTimeModule (ref)
 	helpDescription.HelpRevealer = Instance.new("TextLabel")
 	helpDescription.HelpRevealer.Name = "HelpRevealer"
@@ -42,12 +42,12 @@ function t.createHelpText(helpDescription) --[[ line: 7 ]]
 	UIPadding_1.PaddingLeft = UDim.new(0.02, 0)
 	UIPadding_1.PaddingBottom = UDim.new(0.02, 0)
 	UIPadding_1.Parent = helpDescription.HelpDescription
-	helpDescription.HelpRevealer.MouseEnter:Connect(function() --[[ line: 55 ]]
+	helpDescription.HelpRevealer.MouseEnter:Connect(function()
 		-- upvalues: helpDescription (ref), createButtonsTimeModule (copy)
 		helpDescription.HelpRevealer.TextColor3 = createButtonsTimeModule.hoverColor
 		helpDescription.HelpDescription.Visible = true
 	end)
-	helpDescription.HelpRevealer.MouseLeave:Connect(function() --[[ line: 60 ]]
+	helpDescription.HelpRevealer.MouseLeave:Connect(function()
 		-- upvalues: helpDescription (ref), createButtonsTimeModule (copy)
 		helpDescription.HelpRevealer.TextColor3 = createButtonsTimeModule.regularColor
 		helpDescription.HelpDescription.Visible = false

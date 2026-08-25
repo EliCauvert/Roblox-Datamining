@@ -26,9 +26,9 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local supportedProfileTypesModule = require(script.SupportedProfileTypes)
 local t = {}
 
-local function _(p0, p1) --[[ line: 56 | named "withValidation" ]]
+local function _(p0, p1)
 	-- upvalues: supportedProfileTypesModule (ref)
-	return function(p2) --[[ line: 57 ]]
+	return function(p2)
 		-- upvalues: p1 (ref), p0 (ref), supportedProfileTypesModule (copy)
 		local var25 = p1(p2)
 		
@@ -57,7 +57,7 @@ for i, v in {
 	for i_1, v_1 in v do
 		assert(t[i_1] == nil, "Duplicate ProfileAction key: " .. tostring(i_1))
 		
-		t[i_1] = function(p3) --[[ line: 57 ]]
+		t[i_1] = function(p3)
 			-- upvalues: v_1 (ref), i_1 (ref), supportedProfileTypesModule (ref)
 			local var25 = v_1(p3)
 			

@@ -14,7 +14,7 @@ local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
 local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
 local luauHeapViewEntry = roactModule.PureComponent:extend("LuauHeapViewEntry")
 
-local function BorderedCellLabel(p0) --[[ line: 32 ]]
+local function BorderedCellLabel(p0)
 	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
 	return roactModule.createFragment({
 		Label = roactModule.createElement(cellLabelModule, {
@@ -33,7 +33,7 @@ local function BorderedCellLabel(p0) --[[ line: 32 ]]
 	})
 end
 
-function luauHeapViewEntry.init(p1) --[[ line: 50 ]]
+function luauHeapViewEntry.init(p1)
 	p1.state = {
 		expandedEllipsis = false,
 		showTooltip = false,
@@ -41,19 +41,19 @@ function luauHeapViewEntry.init(p1) --[[ line: 50 ]]
 		tooltipPos = UDim2.fromOffset(0, 0)
 	}
 	
-	function p1.onButtonPress() --[[ line: 58 ]]
+	function p1.onButtonPress()
 		-- upvalues: p1 (ref)
-		p1:setState(function(p2) --[[ line: 59 ]]
+		p1:setState(function(p2)
 			return { expanded = not p2.expanded }
 		end)
 	end
 	
-	function p1.onExpandEllipsis() --[[ line: 66 ]]
+	function p1.onExpandEllipsis()
 		-- upvalues: p1 (ref)
 		p1:setState({ expandedEllipsis = true })
 	end
 	
-	function p1.onMouseEnter(_, p3, p4) --[[ line: 72 ]]
+	function p1.onMouseEnter(_, p3, p4)
 		-- upvalues: p1 (ref)
 		p1:setState({
 			showTooltip = true,
@@ -61,7 +61,7 @@ function luauHeapViewEntry.init(p1) --[[ line: 50 ]]
 		})
 	end
 	
-	function p1.onMouseMove(_, p5, p6) --[[ line: 79 ]]
+	function p1.onMouseMove(_, p5, p6)
 		-- upvalues: p1 (ref)
 		p1:setState({
 			showTooltip = true,
@@ -69,13 +69,13 @@ function luauHeapViewEntry.init(p1) --[[ line: 50 ]]
 		})
 	end
 	
-	function p1.onMouseLeave() --[[ line: 86 ]]
+	function p1.onMouseLeave()
 		-- upvalues: p1 (ref)
 		p1:setState({ showTooltip = false })
 	end
 end
 
-function luauHeapViewEntry.renderChildren(p7, p8, p9) --[[ line: 93 ]]
+function luauHeapViewEntry.renderChildren(p7, p8, p9)
 	-- upvalues: roactModule (ref), luauHeapViewEntry (ref)
 	if not p7.state.expanded then
 		return {}
@@ -89,7 +89,7 @@ function luauHeapViewEntry.renderChildren(p7, p8, p9) --[[ line: 93 ]]
 	local var10 = 0
 	local var11 = 0
 	
-	local function _(p10) --[[ line: 117 | named "getCompareInfo" ]]
+	local function _(p10)
 		-- upvalues: p9 (ref)
 		if p9 then
 			for i, v in ipairs(p9) do
@@ -177,7 +177,7 @@ function luauHeapViewEntry.renderChildren(p7, p8, p9) --[[ line: 93 ]]
 	return t
 end
 
-function luauHeapViewEntry.renderValues(_, p11) --[[ line: 223 ]]
+function luauHeapViewEntry.renderValues(_, p11)
 	-- upvalues: valueCellWidth (ref), valuePadding (ref), graphEntryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
 	local t = {}
 	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, graphEntryFrameHeight)
@@ -193,7 +193,7 @@ function luauHeapViewEntry.renderValues(_, p11) --[[ line: 223 ]]
 	return t
 end
 
-function luauHeapViewEntry.render(p12) --[[ line: 238 ]]
+function luauHeapViewEntry.render(p12)
 	-- upvalues: graphEntryFrameHeight (ref), depthIndent (ref), valueCellWidth (ref), cellPadding (ref), roactModule (ref), tooltipModule (ref), bannerButtonModule (ref), cellLabelModule (ref)
 	local props = p12.props
 	local size = props.size or UDim2.new(1, 0, 0, graphEntryFrameHeight)

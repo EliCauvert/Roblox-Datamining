@@ -9,7 +9,7 @@ local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFrom
 local getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 local getFFlagUGCValidationEnableR15plusSkinningModule = require(parent.flags.getFFlagUGCValidationEnableR15plusSkinning)
 local t = {
-	validateMeshPart = function(p0, p1) --[[ line: 22 ]]
+	validateMeshPart = function(p0, p1)
 		-- upvalues: getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), getEditableMeshFromContextModule (ref), analyticsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), constantsModule (ref)
 		if getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() and getFFlagUGCValidationEnableR15plusSkinningModule() then
 			error("ValidateMeshPartOnlySkinnedToR15 is deprecated. Use RigidSkinnedToSchema / LCSkinnedToSchema / BodySkinnedToSchema instead.")
@@ -23,7 +23,7 @@ local t = {
 				`Could not get editable mesh data for {p0}. Please retry later or make a bug report.`
 			}
 		end
-		local var10, var11 = pcallDeferredModule(function() --[[ line: 46 ]]
+		local var10, var11 = pcallDeferredModule(function()
 			-- upvalues: UGCValidationService (copy), var9 (ref)
 			return {
 				UGCValidationService:GetSkinnedJointNamesFromEditableMesh(var9)
@@ -50,7 +50,7 @@ local t = {
 	end
 }
 
-function t.validateBodyParts(p2, p3) --[[ line: 76 ]]
+function t.validateBodyParts(p2, p3)
 	-- upvalues: getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), constantsModule (ref), t (ref)
 	if getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() and getFFlagUGCValidationEnableR15plusSkinningModule() then
 		error("ValidateMeshPartOnlySkinnedToR15 is deprecated. Use RigidSkinnedToSchema / LCSkinnedToSchema / BodySkinnedToSchema instead.")

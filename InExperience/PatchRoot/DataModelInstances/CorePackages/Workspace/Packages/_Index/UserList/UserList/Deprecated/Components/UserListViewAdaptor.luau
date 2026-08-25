@@ -12,12 +12,12 @@ local t = {
 	anchorPoint = Vector2.new(0, 0)
 }
 
-return function(p0) --[[ line: 28 | named "UserListViewAdaptor" ]]
+return function(p0)
 	-- upvalues: useListFormFactorModule (ref), appFormFactor (ref), reactModule (ref), t (ref), view (ref), userListPeekViewModule (ref)
 	local var5 = useListFormFactorModule()
 	local var6 = var5.formFactor == appFormFactor.Compact
 	local var7 = not var6 and p0.wideModePeekViewLayout ~= nil
-	local var8 = reactModule.useMemo(function() --[[ line: 32 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: var7 (ref), p0 (ref), t (copy)
 		return if var7 then p0.wideModePeekViewLayout else t
 	end, { var5.formFactor, p0.wideModePeekViewLayout })

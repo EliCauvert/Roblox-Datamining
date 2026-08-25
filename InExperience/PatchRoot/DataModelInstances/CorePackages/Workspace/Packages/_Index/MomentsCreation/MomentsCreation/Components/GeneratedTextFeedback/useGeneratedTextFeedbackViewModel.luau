@@ -19,12 +19,12 @@ local t = {
 	disclosure = "Feature.Moments.Description.GenerateTextFeedbackDisclosure"
 }
 
-local function _(p0) --[[ line: 36 | named "fireFeedbackEvent" ]]
+local function _(p0)
 	-- upvalues: sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), makeCreationEventFieldsModule (ref)
 	fireAnalyticsEventModule(p0, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 end
 
-return function(p1) --[[ line: 41 | named "useGeneratedTextFeedbackViewModel" ]]
+return function(p1)
 	-- upvalues: getCreationFlowStoreModule (ref), useCreationControllerModule (ref), useLocalization (ref), t (ref), useSignalState (ref), useState (ref), eventNames (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), makeCreationEventFieldsModule (ref)
 	local var10 = getCreationFlowStoreModule(false)
 	local var11 = useCreationControllerModule()
@@ -40,7 +40,7 @@ return function(p1) --[[ line: 41 | named "useGeneratedTextFeedbackViewModel" ]]
 		disclosureText = var12.disclosure or "",
 		selectedAction = var14,
 		showReasonDialog = var16,
-		onThumbsUp = function() --[[ line: 55 ]]
+		onThumbsUp = function()
 			-- upvalues: var14 (ref), var15 (ref), eventNames (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), makeCreationEventFieldsModule (copy), var11 (ref)
 			if var14 == "thumbs_up" then
 				return
@@ -49,25 +49,25 @@ return function(p1) --[[ line: 41 | named "useGeneratedTextFeedbackViewModel" ]]
 			fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFeedbackThumbsUp, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 			var11.submitGeneratedTextFeedback("thumbs_up")
 		end,
-		onThumbsDown = function() --[[ line: 64 ]]
+		onThumbsDown = function()
 			-- upvalues: var17 (ref)
 			var17(true)
 		end,
-		onNotHelpful = function() --[[ line: 68 ]]
+		onNotHelpful = function()
 			-- upvalues: var15 (ref), var17 (ref), eventNames (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), makeCreationEventFieldsModule (copy), var11 (ref)
 			var15("thumbs_down")
 			var17(false)
 			fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFeedbackThumbsDownNotHelpful, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 			var11.submitGeneratedTextFeedback("not_helpful")
 		end,
-		onPolicyViolation = function() --[[ line: 75 ]]
+		onPolicyViolation = function()
 			-- upvalues: var15 (ref), var17 (ref), eventNames (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), makeCreationEventFieldsModule (copy), var11 (ref)
 			var15("thumbs_down")
 			var17(false)
 			fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFeedbackThumbsDownPolicy, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 			var11.submitGeneratedTextFeedback("policy_violation")
 		end,
-		onDismissDialog = function() --[[ line: 82 ]]
+		onDismissDialog = function()
 			-- upvalues: var17 (ref)
 			var17(false)
 		end

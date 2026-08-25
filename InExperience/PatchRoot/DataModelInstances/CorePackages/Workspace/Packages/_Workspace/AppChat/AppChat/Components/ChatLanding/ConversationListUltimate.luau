@@ -45,17 +45,17 @@ local t = {
 	restingPositionLimit = 0.1
 }
 
-local function noop() --[[ line: 67 ]] end
+local function noop() end
 
-local function _(p0) --[[ line: 69 | named "isPartyQuickStartEnabled" ]]
+local function _(p0)
 	return p0.isPartyQuickStartEnabled
 end
 
-local _ = function(p1) --[[ line: 73 | named "getIsSquadEnabledForRows" ]]
+local _ = function(p1)
 	return p1.canAccessParty == true
 end
 
-local function getConversationRowListItems(p2) --[[ line: 77 ]]
+local function getConversationRowListItems(p2)
 	local t = {}
 	
 	for i, v in p2 do
@@ -64,26 +64,26 @@ local function getConversationRowListItems(p2) --[[ line: 77 ]]
 	return t
 end
 
-local _ = function(p3) --[[ line: 87 | named "getFirstId" ]]
+local _ = function(p3)
 	return if p3 and p3[1] then p3[1].id else nil
 end
 
-local _ = function(p4) --[[ line: 91 | named "getLastId" ]]
+local _ = function(p4)
 	return if p4 and p4[#p4] then p4[#p4].id else nil
 end
 
-local _ = function(p5) --[[ line: 95 | named "getAutoLoadNextRequestKey" ]]
+local _ = function(p5)
 	return `{#p5}:{tostring(if p5 and p5[1] then p5[1].id else nil)}:{tostring(if p5 and p5[#p5] then p5[#p5].id else nil)}`
 end
 
-local function getKey(p6) --[[ line: 99 ]]
+local function getKey(p6)
 	return tostring(p6.id)
 end
 
-local function MeasuredChatLandingModal(p7) --[[ line: 103 ]]
+local function MeasuredChatLandingModal(p7)
 	-- upvalues: reactModule (ref), chatLandingModalContainerModule (ref)
 	local var32 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 106 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), p7 (ref)
 		local current = var32.current
 		
@@ -97,7 +97,7 @@ local function MeasuredChatLandingModal(p7) --[[ line: 103 ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		ref = var32,
-		[reactModule.Change.AbsoluteSize] = function(p8) --[[ line: 118 ]]
+		[reactModule.Change.AbsoluteSize] = function(p8)
 			-- upvalues: p7 (ref)
 			p7.onHeightChanged(p7.itemId, p8.AbsoluteSize.Y)
 		end
@@ -106,7 +106,7 @@ local function MeasuredChatLandingModal(p7) --[[ line: 103 ]]
 	})
 end
 
-return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUltimate" ]]
+return reactModule.memo(function(p9)
 	-- upvalues: noop (ref), reactModule (ref), signal (ref), fFlagFriendsChatConversationListShowScrollBar (ref), reactOtterModule (ref), useTokens (ref), cryoModule (ref), appChatPerfExperimentation (ref), partyPageCarouselExperimentation (ref), squadQuickStartExperimentation (ref), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (ref), IXPService (ref), fStringAppChatRemoveConversationListDividerIxpLayerModule (ref), focusNavigationService (ref), coreGui (ref), fFlagAppChatPerfTrackingModule (ref), createScrollIntervalTrackerModule (ref), appChatPerfTrackerModule (ref), appPage (ref), constants (ref), enums (ref), getConversationRowListItems (ref), fFlagAppIaScrollAway (ref), appChatChatLandingInitialFetchLimit (ref), appChatChatLandingInitialFetchMinimumConversations (ref), name (ref), var25 (ref), t (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (ref), MeasuredChatLandingModal (ref), conversationGroupsEntryContainerModule (ref), partyQuickStartContainerModule (ref), socialCarouselModule (ref), view (ref), conversationRowModule (ref), ultimateListModule (ref), getKey (ref), appChatPerfChatLandingPaginationOnStartReachedUnits (ref)
 	local entryHeight = p9.entryHeight or 64
 	local itemList = p9.itemList or {}
@@ -120,7 +120,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 	local fireConversationClickedEvent = p9.fireConversationClickedEvent or noop
 	local var43 = p9.showHeaderEntries ~= false
 	local rowProps = p9.rowProps or {}
-	local var45 = reactModule.useMemo(function() --[[ line: 139 ]]
+	local var45 = reactModule.useMemo(function()
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
@@ -138,7 +138,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 	end
 	local var53 = reactModule.useRef(nil)
 	local var54 = reactModule.useRef(0)
-	local var55 = reactModule.useMemo(function() --[[ line: 153 ]]
+	local var55 = reactModule.useMemo(function()
 		-- upvalues: itemList (ref)
 		return `{#itemList}:{tostring(if itemList and itemList[1] then itemList[1].id else nil)}:{tostring(if itemList and itemList[#itemList] then itemList[#itemList].id else nil)}`
 	end, { itemList })
@@ -148,25 +148,25 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 	local var60, var61 = reactModule.useState(nil)
 	local var62 = useTokens()
 	local var63, var64 = reactModule.useState({})
-	local var65 = reactModule.useCallback(function(p10, p11) --[[ line: 162 ]]
+	local var65 = reactModule.useCallback(function(p10, p11)
 		-- upvalues: var64 (ref), cryoModule (copy)
 		if p11 < 0 then
 			return
 		end
-		var64(function(p12) --[[ line: 167 ]]
+		var64(function(p12)
 			-- upvalues: p10 (ref), p11 (ref), cryoModule (copy)
 			return if p12[p10] == p11 then p12 else cryoModule.Dictionary.join(p12, { [p10] = p11 })
 		end)
 	end, {})
 	local var66 = p9.loadNext ~= nil and (not p9.isLoadingNext and not p9.oldestConversationIsFetched)
-	reactModule.useEffect(function() --[[ line: 178 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var57 (ref), p9 (ref), var56 (ref)
 		if var57.current and not p9.isLoadingNext then
 			var56.current = nil
 		end
 		var57.current = p9.isLoadingNext == true
 	end, { p9.isLoadingNext })
-	local var67 = reactModule.useCallback(function() --[[ line: 186 ]]
+	local var67 = reactModule.useCallback(function()
 		-- upvalues: var66 (ref), var56 (ref), var55 (ref), p9 (ref)
 		if var66 and var56.current ~= var55 then
 			var56.current = var55
@@ -176,7 +176,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		end
 		return false
 	end, { var66, var55, p9.loadNext })
-	reactModule.useEffect(function() --[[ line: 198 ]]
+	reactModule.useEffect(function()
 		-- upvalues: appChatPerfExperimentation (copy), p9 (ref), partyPageCarouselExperimentation (copy), squadQuickStartExperimentation (copy), fFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), fStringAppChatRemoveConversationListDividerIxpLayerModule (copy)
 		appChatPerfExperimentation.logExposure()
 		
@@ -191,17 +191,17 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 			end
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 212 ]]
+	reactModule.useEffect(function()
 		-- upvalues: focusNavigationService (copy), coreGui (copy)
 		local var81 = focusNavigationService.new(coreGui)
 		
-		return function() --[[ line: 214 ]]
+		return function()
 			-- upvalues: var81 (ref)
 			var81:teardown()
 		end
 	end, {})
 	local var68 = p9.canAccessParty == true
-	reactModule.useEffect(function() --[[ line: 221 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var60 (ref), fFlagAppChatPerfTrackingModule (copy), var46 (ref), createScrollIntervalTrackerModule (copy), appChatPerfTrackerModule (copy)
 		if var60 == nil then
 			return nil
@@ -211,7 +211,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		if fFlagAppChatPerfTrackingModule then
 			var46.current = createScrollIntervalTrackerModule(appChatPerfTrackerModule.Events.ScrollConversationList, var60)
 			
-			return function() --[[ line: 232 ]]
+			return function()
 				-- upvalues: var46 (copy)
 				if var46.current then
 					var46.current.cleanup()
@@ -222,7 +222,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		return nil
 	end, { var60 })
 	local isPartyQuickStartEnabled = p9.isPartyQuickStartEnabled
-	local var69 = reactModule.useMemo(function() --[[ line: 244 ]]
+	local var69 = reactModule.useMemo(function()
 		-- upvalues: appPage (copy), p9 (ref), constants (copy), var45 (ref)
 		return {
 			sortId = 0,
@@ -232,11 +232,11 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 			scrollViewPositionChangedSignal = var45
 		}
 	end, { p9.isInExperience, var45 })
-	local var70 = reactModule.useCallback(function(p13) --[[ line: 256 ]]
+	local var70 = reactModule.useCallback(function(p13)
 		-- upvalues: navigateToConversationFromUserId (ref)
 		navigateToConversationFromUserId(p13.id)
 	end, { navigateToConversationFromUserId })
-	local var71 = reactModule.useMemo(function() --[[ line: 260 ]]
+	local var71 = reactModule.useMemo(function()
 		-- upvalues: enums (copy), navigateToQuickStartSquadInviteFriends (ref), var70 (ref)
 		return {
 			{
@@ -249,7 +249,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 			}
 		}
 	end, { navigateToQuickStartSquadInviteFriends, var70 })
-	local var72 = reactModule.useMemo(function() --[[ line: 274 ]]
+	local var72 = reactModule.useMemo(function()
 		-- upvalues: getConversationRowListItems (copy), itemList (ref), p9 (ref), var43 (ref), cryoModule (copy), partyPageCarouselExperimentation (copy), isPartyQuickStartEnabled (ref), fFlagAppIaScrollAway (copy)
 		local var82 = getConversationRowListItems(itemList)
 		local var83 = var43 and (if p9.filterText ~= "" then p9.filterText == nil else true)
@@ -289,7 +289,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		itemList, p9.filterText, p9.showGroupsLink, p9.isWideMode, p9.isInExperience,
 		p9.canvasTopPadding, var43, isPartyQuickStartEnabled
 	})
-	local var73 = reactModule.useMemo(function() --[[ line: 347 ]]
+	local var73 = reactModule.useMemo(function()
 		-- upvalues: var72 (ref), var63 (ref), fFlagAppIaScrollAway (copy), entryHeight (ref), cryoModule (copy)
 		local t = {}
 		local var85 = 0
@@ -301,7 +301,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		end
 		return { items = t, contentHeight = var85 }
 	end, { var72, entryHeight, var63 })
-	reactModule.useEffect(function() --[[ line: 370 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var66 (ref), var54 (ref), appChatChatLandingInitialFetchLimit (copy), itemList (ref), appChatChatLandingInitialFetchMinimumConversations (copy), var67 (ref), name (copy)
 		if var66 and var54.current < appChatChatLandingInitialFetchLimit and #itemList < appChatChatLandingInitialFetchMinimumConversations then
 			local var87 = var54.current + 1
@@ -312,48 +312,48 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 			end
 		end
 	end, { itemList, var66, var67 })
-	reactModule.useEffect(function() --[[ line: 390 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var66 (ref), var73 (ref), var58 (ref), var67 (ref), name (copy)
 		if var66 and var73.contentHeight > 0 and (var58.Y > 0 and var73.contentHeight <= var58.Y) and var67() then
 			name:info("Not enough UltimateList content to fill the view, loading more conversations")
 		end
 	end, { var73.contentHeight, var58.Y, var66, var67 })
-	local var74 = reactModule.useCallback(function() --[[ line: 398 ]]
+	local var74 = reactModule.useCallback(function()
 		-- upvalues: var67 (ref), name (copy)
 		if var67() then
 			name:debug("UltimateList onEndReached - Loading more conversations")
 		end
 	end, { var67 })
-	local var75 = reactModule.useCallback(function() --[[ line: 404 ]]
+	local var75 = reactModule.useCallback(function()
 		-- upvalues: p9 (ref), name (copy)
 		if p9.loadPrevious and not p9.isLoadingPrevious then
 			name:debug("UltimateList onStartReached - Loading previous conversations")
 			p9.loadPrevious()
 		end
 	end, { p9.loadPrevious, p9.isLoadingPrevious })
-	local var76 = reactModule.useCallback(function(p14) --[[ line: 411 ]]
+	local var76 = reactModule.useCallback(function(p14)
 		-- upvalues: var59 (ref)
 		var59(p14)
 	end, {})
 	local var77 = nil
 	
 	if fFlagFriendsChatConversationListShowScrollBar then
-		var77 = reactModule.useCallback(function() --[[ line: 417 ]]
+		var77 = reactModule.useCallback(function()
 			-- upvalues: var48 (write), var50 (write), reactOtterModule (copy), var25 (copy), t (copy)
 			if var48.current ~= nil then
 				pcall(task.cancel, var48.current)
 				var48.current = nil
 			end
 			var50(reactOtterModule.instant(0))
-			var48.current = task.delay(var25, function() --[[ line: 425 ]]
+			var48.current = task.delay(var25, function()
 				-- upvalues: var48 (copy), var50 (copy), reactOtterModule (copy), t (copy)
 				var48.current = nil
 				var50(reactOtterModule.spring(1, t))
 			end)
 		end, { var50 })
-		reactModule.useEffect(function() --[[ line: 431 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var48 (write)
-			return function() --[[ line: 432 ]]
+			return function()
 				-- upvalues: var48 (copy)
 				if var48.current ~= nil then
 					pcall(task.cancel, var48.current)
@@ -362,7 +362,7 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 			end
 		end, {})
 	end
-	local var78 = reactModule.useCallback(function(p15) --[[ line: 441 ]]
+	local var78 = reactModule.useCallback(function(p15)
 		-- upvalues: fFlagAppChatPerfTrackingModule (copy), var46 (ref), fFlagFriendsChatConversationListShowScrollBar (copy), p9 (ref), var77 (write), var45 (ref), entryHeight (ref), appChatPerfChatLandingPaginationOnEndReachedUnits (copy), var73 (ref), var58 (ref), var67 (ref), onScrollUpdate (ref)
 		if fFlagAppChatPerfTrackingModule and var46.current then
 			var46.current.onScrollTick()
@@ -381,13 +381,13 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		if fFlagFriendsChatConversationListShowScrollBar then p9.showScrollbarOnScroll else nil,
 		if fFlagFriendsChatConversationListShowScrollBar then var77 else nil
 	})
-	local var79 = reactModule.useCallback(function(p16) --[[ line: 473 ]]
+	local var79 = reactModule.useCallback(function(p16)
 		-- upvalues: var47 (ref), var61 (ref)
 		var47.current = p16
 		var61(p16)
 	end, {})
 	local var80 = if itemList and itemList[1] then itemList[1].id else nil
-	reactModule.useEffect(function() --[[ line: 479 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var47 (ref), var80 (ref), var53 (ref)
 		local current = var47.current
 		
@@ -411,13 +411,13 @@ return reactModule.memo(function(p9) --[[ line: 126 | named "ConversationListUlt
 		scroller = reactModule.createElement(ultimateListModule.Components.ScrollingFrame, {
 			direction = "y",
 			dataSource = ultimateListModule.DataSources.array(if var58.X > 0 or var58.Y > 0 then var73.items else {}),
-			dimensions = ultimateListModule.Dimensions.getter(function(p17) --[[ line: 606 ]]
+			dimensions = ultimateListModule.Dimensions.getter(function(p17)
 				return {
 					size = UDim2.new(1, 0, 0, p17.height),
 					position = UDim2.fromOffset(0, p17.yOffset)
 				}
 			end),
-			renderer = ultimateListModule.Renderers.byState(reactModule.useCallback(function(p18) --[[ line: 495 ]]
+			renderer = ultimateListModule.Renderers.byState(reactModule.useCallback(function(p18)
 				-- upvalues: reactModule (copy), MeasuredChatLandingModal (copy), var65 (ref), conversationGroupsEntryContainerModule (copy), entryHeight (ref), isPartyQuickStartEnabled (ref), partyQuickStartContainerModule (copy), partyPageCarouselExperimentation (copy), socialCarouselModule (copy), var71 (ref), p9 (ref), constants (copy), var69 (ref), fFlagAppIaScrollAway (copy), view (copy), var62 (ref), conversationRowModule (copy), var68 (ref), navigateToSquadLobby (ref), fireConversationImpressionEvent (ref), fireConversationClickedEvent (ref), rowProps (ref)
 				return if p18.isChatLandingModal then reactModule.createElement(MeasuredChatLandingModal, { itemId = p18.id, onHeightChanged = var65 }) elseif p18.isGroupLink then reactModule.createElement(conversationGroupsEntryContainerModule, { entryHeight = entryHeight }) elseif isPartyQuickStartEnabled and p18.isQuickStartLink then reactModule.createElement(partyQuickStartContainerModule, { entryHeight = entryHeight }) elseif partyPageCarouselExperimentation.getPartyPageCarouselEnabled() and p18.isSocialCarousel then reactModule.createElement(socialCarouselModule.Entry, {
 					roduxKey = "ChatAppReducer",

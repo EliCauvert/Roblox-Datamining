@@ -55,7 +55,7 @@ local var7 = nil
 local getDeprecationReason = nil
 local getSpecifiedByUrl = nil
 
-local function extendSchema(p0, p1, p2) --[[ line: 152 ]]
+local function extendSchema(p0, p1, p2)
 	-- upvalues: assertSchema (ref), devAssert (ref), kind (ref), assertValidSDLExtension (ref), graphQLSchema (ref)
 	assertSchema(p0)
 	devAssert(p1 ~= nil and p1.kind == kind.DOCUMENT, "Must provide valid Document AST.")
@@ -69,7 +69,7 @@ local function extendSchema(p0, p1, p2) --[[ line: 152 ]]
 	return if var11 == var12 then p0 else graphQLSchema.new(var12)
 end
 
-function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
+function extendSchemaImpl(p3, p4, p5)
 	-- upvalues: map (ref), kind (ref), isTypeDefinitionNode (ref), isTypeExtensionNode (ref), array (ref), isListType (ref), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), graphQLDirective (ref), object (ref), mapValueOrdered (ref), coerceToMap (ref), isIntrospectionType (ref), isSpecifiedScalarType (ref), isScalarType (ref), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isInputObjectType (ref), inspect (ref), graphQLInputObjectType (ref), graphQLEnumType (ref), getSpecifiedByUrl (write), graphQLScalarType (ref), graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLUnionType (ref), var7 (write), error (ref), getDeprecationReason (write), valueFromAST (ref)
 	local t = {}
 	local var14 = map.new()
@@ -113,17 +113,17 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 	local buildArgumentMap = nil
 	local buildFieldMap = nil
 	
-	local function replaceType(p6) --[[ line: 279 ]]
+	local function replaceType(p6)
 		-- upvalues: isListType (copy), graphQLList (copy), replaceType (ref), isNonNullType (copy), graphQLNonNull (copy), replaceNamedType (write)
 		return if isListType(p6) then graphQLList.new(replaceType(p6.ofType)) elseif isNonNullType(p6) then graphQLNonNull.new(replaceType(p6.ofType)) else replaceNamedType(p6)
 	end
 	
-	replaceNamedType = function(p7) --[[ line: 291 | named "replaceNamedType" ]]
+	replaceNamedType = function(p7)
 		-- upvalues: var18 (ref)
 		return var18:get(p7.name)
 	end
 	
-	local function replaceDirective(p8) --[[ line: 299 ]]
+	local function replaceDirective(p8)
 		-- upvalues: graphQLDirective (copy), object (copy), mapValueOrdered (copy), coerceToMap (copy), extendArg (write)
 		local var43 = p8:toConfig()
 		
@@ -132,7 +132,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	local function extendNamedType(p9) --[[ line: 310 ]]
+	local function extendNamedType(p9)
 		-- upvalues: isIntrospectionType (copy), isSpecifiedScalarType (copy), isScalarType (copy), extendScalarType (write), isObjectType (copy), extendObjectType (write), isInterfaceType (copy), extendInterfaceType (write), isUnionType (copy), extendUnionType (write), isEnumType (copy), extendEnumType (write), isInputObjectType (copy), extendInputObjectType (write), inspect (copy)
 		if isIntrospectionType(p9) or isSpecifiedScalarType(p9) then
 			return p9
@@ -152,15 +152,15 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		assert(false, "Unexpected type: " .. inspect(p9))
 	end
 	
-	extendInputObjectType = function(p10) --[[ line: 341 | named "extendInputObjectType" ]]
+	extendInputObjectType = function(p10)
 		-- upvalues: var14 (ref), graphQLInputObjectType (copy), object (copy), map (copy), array (copy), mapValueOrdered (copy), coerceToMap (copy), replaceType (ref), buildInputFieldMap (write)
 		local var44 = p10:toConfig()
 		local name = var14[var44.name] or {}
 		
 		return graphQLInputObjectType.new(object.assign({}, var44, {
-			fields = function() --[[ line: 347 ]]
+			fields = function()
 				-- upvalues: map (copy), array (copy), mapValueOrdered (copy), coerceToMap (copy), var44 (ref), object (copy), replaceType (copy), buildInputFieldMap (copy), name (ref)
-				return map.new(array.concat(mapValueOrdered(coerceToMap(var44.fields), function(p11) --[[ line: 349 ]]
+				return map.new(array.concat(mapValueOrdered(coerceToMap(var44.fields), function(p11)
 					-- upvalues: object (copy), replaceType (copy)
 					return object.assign({}, p11, { type = replaceType(p11.type) })
 				end):entries(), buildInputFieldMap(name):entries()))
@@ -169,7 +169,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	extendEnumType = function(p12) --[[ line: 360 | named "extendEnumType" ]]
+	extendEnumType = function(p12)
 		-- upvalues: var14 (ref), graphQLEnumType (copy), object (copy), map (copy), array (copy), buildEnumValueMap (write)
 		local var46 = p12:toConfig()
 		local name = var14:get(p12.name) or {}
@@ -180,7 +180,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	extendScalarType = function(p13) --[[ line: 378 | named "extendScalarType" ]]
+	extendScalarType = function(p13)
 		-- upvalues: var14 (ref), getSpecifiedByUrl (copy), graphQLScalarType (copy), object (copy), array (copy)
 		local var48 = p13:toConfig()
 		local name = var14:get(var48.name) or {}
@@ -195,17 +195,17 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	extendObjectType = function(p14) --[[ line: 394 | named "extendObjectType" ]]
+	extendObjectType = function(p14)
 		-- upvalues: var14 (ref), graphQLObjectType (copy), object (copy), array (copy), replaceNamedType (write), buildInterfaces (write), map (copy), mapValueOrdered (copy), coerceToMap (copy), extendField (write), buildFieldMap (write)
 		local var50 = p14:toConfig()
 		local name = var14:get(var50.name) or {}
 		
 		return graphQLObjectType.new(object.assign({}, var50, {
-			interfaces = function() --[[ line: 400 ]]
+			interfaces = function()
 				-- upvalues: array (copy), p14 (ref), replaceNamedType (copy), buildInterfaces (copy), name (ref)
 				return array.concat(array.map(p14:getInterfaces(), replaceNamedType), buildInterfaces(name))
 			end,
-			fields = function() --[[ line: 407 ]]
+			fields = function()
 				-- upvalues: map (copy), array (copy), mapValueOrdered (copy), coerceToMap (copy), var50 (ref), extendField (copy), buildFieldMap (copy), name (ref)
 				return map.new(array.concat(mapValueOrdered(coerceToMap(var50.fields), extendField):entries(), buildFieldMap(name):entries()))
 			end,
@@ -213,17 +213,17 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	extendInterfaceType = function(p15) --[[ line: 419 | named "extendInterfaceType" ]]
+	extendInterfaceType = function(p15)
 		-- upvalues: var14 (ref), graphQLInterfaceType (copy), object (copy), array (copy), replaceNamedType (write), buildInterfaces (write), map (copy), mapValueOrdered (copy), coerceToMap (copy), extendField (write), buildFieldMap (write)
 		local var52 = p15:toConfig()
 		local name = var14:get(var52.name) or {}
 		
 		return graphQLInterfaceType.new(object.assign({}, var52, {
-			interfaces = function() --[[ line: 425 ]]
+			interfaces = function()
 				-- upvalues: array (copy), p15 (ref), replaceNamedType (copy), buildInterfaces (copy), name (ref)
 				return array.concat(array.map(p15:getInterfaces(), replaceNamedType), buildInterfaces(name))
 			end,
-			fields = function() --[[ line: 432 ]]
+			fields = function()
 				-- upvalues: map (copy), array (copy), mapValueOrdered (copy), coerceToMap (copy), var52 (ref), extendField (copy), buildFieldMap (copy), name (ref)
 				return map.new(array.concat(mapValueOrdered(coerceToMap(var52.fields), extendField):entries(), buildFieldMap(name):entries()))
 			end,
@@ -231,13 +231,13 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	extendUnionType = function(p16) --[[ line: 444 | named "extendUnionType" ]]
+	extendUnionType = function(p16)
 		-- upvalues: var14 (ref), graphQLUnionType (copy), object (copy), array (copy), replaceNamedType (write), buildUnionTypes (write)
 		local var54 = p16:toConfig()
 		local name = var14:get(var54.name) or {}
 		
 		return graphQLUnionType.new(object.assign({}, var54, {
-			types = function() --[[ line: 450 ]]
+			types = function()
 				-- upvalues: array (copy), p16 (ref), replaceNamedType (copy), buildUnionTypes (copy), name (ref)
 				return array.concat(array.map(p16:getTypes(), replaceNamedType), buildUnionTypes(name))
 			end,
@@ -245,7 +245,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		}))
 	end
 	
-	extendField = function(p17) --[[ line: 461 | named "extendField" ]]
+	extendField = function(p17)
 		-- upvalues: object (copy), replaceType (ref), mapValueOrdered (copy), extendArg (write)
 		return object.assign({}, p17, {
 			type = replaceType(p17.type),
@@ -253,12 +253,12 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		})
 	end
 	
-	extendArg = function(p18) --[[ line: 469 | named "extendArg" ]]
+	extendArg = function(p18)
 		-- upvalues: object (copy), replaceType (ref)
 		return object.assign({}, p18, { type = replaceType(p18.type) })
 	end
 	
-	local function getOperationTypes(p19) --[[ line: 473 ]]
+	local function getOperationTypes(p19)
 		-- upvalues: getNamedType (write)
 		local t = {}
 		
@@ -270,7 +270,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return t
 	end
 	
-	getNamedType = function(p20) --[[ line: 496 | named "getNamedType" ]]
+	getNamedType = function(p20)
 		-- upvalues: var7 (copy), var18 (ref), error (copy)
 		local value = p20.name.value
 		local var57 = var7[value] or var18[value]
@@ -281,17 +281,17 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return var57
 	end
 	
-	local function getWrappedType(p21) --[[ line: 508 ]]
+	local function getWrappedType(p21)
 		-- upvalues: kind (copy), graphQLList (copy), getWrappedType (ref), graphQLNonNull (copy), getNamedType (write)
 		return if p21.kind == kind.LIST_TYPE then graphQLList.new(getWrappedType(p21.type)) elseif p21.kind == kind.NON_NULL_TYPE then graphQLNonNull.new(getWrappedType(p21.type)) else getNamedType(p21)
 	end
 	
-	local function buildDirective(p22) --[[ line: 519 ]]
+	local function buildDirective(p22)
 		-- upvalues: array (copy), graphQLDirective (copy), buildArgumentMap (write)
 		return graphQLDirective.new({
 			name = p22.name.value,
 			description = if p22.description then p22.description.value else nil,
-			locations = array.map(p22.locations, function(p23) --[[ line: 520 ]]
+			locations = array.map(p22.locations, function(p23)
 				return p23.value
 			end),
 			isRepeatable = p22.repeatable,
@@ -300,7 +300,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		})
 	end
 	
-	buildFieldMap = function(p24) --[[ line: 537 | named "buildFieldMap" ]]
+	buildFieldMap = function(p24)
 		-- upvalues: map (copy), getWrappedType (ref), buildArgumentMap (write), getDeprecationReason (copy)
 		local var58 = map.new()
 		
@@ -318,7 +318,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return var58
 	end
 	
-	buildArgumentMap = function(p25) --[[ line: 565 | named "buildArgumentMap" ]]
+	buildArgumentMap = function(p25)
 		-- upvalues: map (copy), getWrappedType (ref), valueFromAST (copy), getDeprecationReason (copy)
 		local var59 = map.new()
 		
@@ -335,7 +335,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return var59
 	end
 	
-	buildInputFieldMap = function(p26) --[[ line: 589 | named "buildInputFieldMap" ]]
+	buildInputFieldMap = function(p26)
 		-- upvalues: map (copy), getWrappedType (ref), valueFromAST (copy), getDeprecationReason (copy)
 		local var61 = map.new()
 		
@@ -354,7 +354,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return var61
 	end
 	
-	buildEnumValueMap = function(p27) --[[ line: 621 | named "buildEnumValueMap" ]]
+	buildEnumValueMap = function(p27)
 		-- upvalues: map (copy), getDeprecationReason (copy)
 		local var63 = map.new()
 		
@@ -370,7 +370,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return var63
 	end
 	
-	buildInterfaces = function(p28) --[[ line: 644 | named "buildInterfaces" ]]
+	buildInterfaces = function(p28)
 		-- upvalues: getNamedType (write)
 		local t = {}
 		
@@ -384,7 +384,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return t
 	end
 	
-	buildUnionTypes = function(p29) --[[ line: 670 | named "buildUnionTypes" ]]
+	buildUnionTypes = function(p29)
 		-- upvalues: getNamedType (write)
 		local t = {}
 		
@@ -398,7 +398,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 		return t
 	end
 	
-	local function buildType(p30) --[[ line: 691 ]]
+	local function buildType(p30)
 		-- upvalues: var14 (ref), kind (copy), array (copy), graphQLObjectType (copy), buildInterfaces (write), buildFieldMap (write), graphQLInterfaceType (copy), graphQLEnumType (copy), buildEnumValueMap (write), graphQLUnionType (copy), buildUnionTypes (write), graphQLScalarType (copy), getSpecifiedByUrl (copy), graphQLInputObjectType (copy), buildInputFieldMap (write), inspect (copy)
 		local value = p30.name.value
 		local var66 = var14[value] or {}
@@ -410,11 +410,11 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 			return graphQLObjectType.new({
 				name = value,
 				description = if p30.description then p30.description.value else nil,
-				interfaces = function() --[[ line: 704 ]]
+				interfaces = function()
 					-- upvalues: buildInterfaces (copy), var67 (ref)
 					return buildInterfaces(var67)
 				end,
-				fields = function() --[[ line: 707 ]]
+				fields = function()
 					-- upvalues: buildFieldMap (copy), var67 (ref)
 					return buildFieldMap(var67)
 				end,
@@ -427,11 +427,11 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 			return graphQLInterfaceType.new({
 				name = value,
 				description = if p30.description then p30.description.value else nil,
-				interfaces = function() --[[ line: 724 ]]
+				interfaces = function()
 					-- upvalues: buildInterfaces (copy), var68 (ref)
 					return buildInterfaces(var68)
 				end,
-				fields = function() --[[ line: 727 ]]
+				fields = function()
 					-- upvalues: buildFieldMap (copy), var68 (ref)
 					return buildFieldMap(var68)
 				end,
@@ -452,7 +452,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 			return graphQLUnionType.new({
 				name = value,
 				description = if p30.description then p30.description.value else nil,
-				types = function() --[[ line: 750 ]]
+				types = function()
 					-- upvalues: buildUnionTypes (copy), var69 (ref)
 					return buildUnionTypes(var69)
 				end,
@@ -473,7 +473,7 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 			return graphQLInputObjectType.new({
 				name = value,
 				description = if p30.description then p30.description.value else nil,
-				fields = function() --[[ line: 773 ]]
+				fields = function()
 					-- upvalues: buildInputFieldMap (copy), var70 (ref)
 					return buildInputFieldMap(var70)
 				end,
@@ -509,18 +509,18 @@ function extendSchemaImpl(p3, p4, p5) --[[ line: 175 ]]
 	return var42
 end
 
-var7 = keyMap(array.concat(specifiedScalarTypes, introspectionTypes), function(p31) --[[ line: 846 ]]
+var7 = keyMap(array.concat(specifiedScalarTypes, introspectionTypes), function(p31)
 	return p31.name
 end)
 
-getDeprecationReason = function(p32) --[[ line: 854 | named "getDeprecationReason" ]]
+getDeprecationReason = function(p32)
 	-- upvalues: getDirectiveValues (ref), graphQLDeprecatedDirective (ref)
 	local var71 = getDirectiveValues(graphQLDeprecatedDirective, p32)
 	
 	return var71 and var71.reason
 end
 
-getSpecifiedByUrl = function(p33) --[[ line: 864 | named "getSpecifiedByUrl" ]]
+getSpecifiedByUrl = function(p33)
 	-- upvalues: getDirectiveValues (ref), graphQLSpecifiedByDirective (ref)
 	local var72 = getDirectiveValues(graphQLSpecifiedByDirective, p33)
 	

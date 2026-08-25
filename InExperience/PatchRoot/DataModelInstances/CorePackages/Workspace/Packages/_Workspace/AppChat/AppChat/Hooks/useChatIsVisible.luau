@@ -11,20 +11,20 @@ local signalsModule = require(parent.Signals)
 local var3 = if fFlagSignalsNavP3hMisc then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
 local var4 = if fFlagSignalsNavP3hMisc then require(parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-return function() --[[ line: 27 ]]
+return function()
 	-- upvalues: fFlagSignalsNavP3hMisc (ref), var3 (ref), reactModule (ref), signalsModule (ref), var4 (ref), appPage (ref), useSignalState (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref)
 	if fFlagSignalsNavP3hMisc then
 		local var5 = var3(false)
 		
-		return useSignalState(reactModule.useMemo(function() --[[ line: 30 ]]
+		return useSignalState(reactModule.useMemo(function()
 			-- upvalues: signalsModule (copy), var4 (copy), var5 (ref), appPage (copy)
-			return signalsModule.createComputed(function(p0) --[[ line: 31 ]]
+			return signalsModule.createComputed(function(p0)
 				-- upvalues: var4 (copy), var5 (copy), appPage (copy)
 				return if var4() then var5.getCurrentPageName(p0) == appPage.Chat else true
 			end)
 		end, {}))
 	end
-	return useSelector(function(p1) --[[ line: 40 ]]
+	return useSelector(function(p1)
 		-- upvalues: fFlagUseNavigationSelectors (copy), selectors (copy), appPage (copy)
 		if not p1.Navigation then
 			return true

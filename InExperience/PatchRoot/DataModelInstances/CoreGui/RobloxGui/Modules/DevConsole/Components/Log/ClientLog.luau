@@ -3,14 +3,14 @@ local dataConsumerModule = require(script.Parent.Parent.DataConsumer)
 local logOutputModule = require(script.Parent.LogOutput)
 local clientLog = roactModule.Component:extend("ClientLog")
 
-function clientLog.init(p0) --[[ line: 9 ]]
-	function p0.initClientLogData() --[[ line: 10 ]]
+function clientLog.init(p0)
+	function p0.initClientLogData()
 		-- upvalues: p0 (ref)
 		return p0.props.ClientLogData:getLogData()
 	end
 end
 
-function clientLog.render(p1) --[[ line: 14 ]]
+function clientLog.render(p1)
 	-- upvalues: roactModule (ref), logOutputModule (ref)
 	return roactModule.createElement(logOutputModule, {
 		layoutOrder = p1.props.layoutOrder,

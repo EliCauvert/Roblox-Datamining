@@ -6,15 +6,15 @@ local urlBuilder = require(parent.UrlBuilder).UrlBuilder
 local promiseModule = require(parent.Promise)
 local buildQueryStringModule = require(interventionShared.Utils.buildQueryString)
 
-return function(p0) --[[ line: 20 | named "GetModerationDetail" ]]
+return function(p0)
 	-- upvalues: urlBuilder (ref), buildQueryStringModule (ref), promiseModule (ref), httpRbxApiService (ref), httpService (ref)
 	local text = urlBuilder.usermoderation.moderationDetail() .. buildQueryStringModule(p0)
 	
-	return promiseModule.new(function(p1, p2) --[[ line: 24 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: httpRbxApiService (copy), text (ref), httpService (copy)
-		task.defer(function() --[[ line: 25 ]]
+		task.defer(function()
 			-- upvalues: httpRbxApiService (copy), text (copy), httpService (copy), p1 (ref), p2 (ref)
-			local ok, status = pcall(function() --[[ line: 26 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpRbxApiService (copy), text (copy)
 				return httpRbxApiService:GetAsyncFullUrl(text, Enum.ThrottlingPriority.Default)
 			end)
@@ -24,7 +24,7 @@ return function(p0) --[[ line: 20 | named "GetModerationDetail" ]]
 				
 				return
 			end
-			local ok_1, status_1 = pcall(function() --[[ line: 31 ]]
+			local ok_1, status_1 = pcall(function()
 				-- upvalues: httpService (copy), status (ref)
 				return httpService:JSONDecode(status)
 			end)

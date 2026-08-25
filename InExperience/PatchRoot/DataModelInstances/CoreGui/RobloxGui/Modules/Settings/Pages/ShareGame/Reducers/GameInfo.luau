@@ -1,7 +1,7 @@
 ﻿local immutable = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Immutable
 local setGameInfoCreatedModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Actions.SetGameInfoCreated)
 
-return function(p0, p1) --[[ line: 10 ]]
+return function(p0, p1)
 	-- upvalues: setGameInfoCreatedModule (ref), immutable (ref)
 	p0 = p0 or { Created = nil }
 	

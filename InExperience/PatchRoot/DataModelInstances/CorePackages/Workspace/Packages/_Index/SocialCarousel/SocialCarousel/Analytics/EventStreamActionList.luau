@@ -13,7 +13,7 @@ local fFlagLuaAppAddSortDataToSocialCarouselClicks = sharedFlagsModule.FFlagLuaA
 local fFlagSocialCarouselShareQREnabled = sharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local fFlagLuaAppUserSeenCollectionUnifiedFields = sharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 
-local var5 = function(p0) --[[ line: 18 ]]
+local var5 = function(p0)
 	return p0
 end
 

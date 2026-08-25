@@ -1,5 +1,5 @@
-﻿return function(p0) --[[ line: 8 | named "GetEngineFeatureSafe" ]]
-	local ok, status = pcall(function() --[[ line: 9 ]]
+﻿return function(p0)
+	local ok, status = pcall(function()
 		-- upvalues: p0 (ref)
 		return game:GetEngineFeature(p0)
 	end)

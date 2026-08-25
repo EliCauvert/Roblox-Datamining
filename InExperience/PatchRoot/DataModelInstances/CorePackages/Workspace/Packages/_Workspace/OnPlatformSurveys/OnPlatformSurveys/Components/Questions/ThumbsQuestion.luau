@@ -14,7 +14,7 @@ local list = {
 	{ id = "2", icon = "thumb-up" }
 }
 
-local function _(p0, p1) --[[ line: 44 | named "findChoice" ]]
+local function _(p0, p1)
 	-- upvalues: t (ref)
 	for i, v in p0.choices or t do
 		if v.id == p1 then
@@ -24,7 +24,7 @@ local function _(p0, p1) --[[ line: 44 | named "findChoice" ]]
 	return nil
 end
 
-return reactModule.memo(function(p2) --[[ line: 53 | named "ThumbsQuestion" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: useTokens (ref), reactModule (ref), list (ref), t (ref), view (ref), icon (ref), iconVariant (ref), text (ref)
 	local var5 = useTokens()
 	local question = p2.question
@@ -57,20 +57,20 @@ return reactModule.memo(function(p2) --[[ line: 53 | named "ThumbsQuestion" ]]
 							Selectable = not var6,
 							LayoutOrder = 1,
 							[reactModule.Tag] = "data-testid=thumb-" .. v.id,
-							[reactModule.Event.Activated] = function() --[[ line: 91 ]]
+							[reactModule.Event.Activated] = function()
 								-- upvalues: var6 (ref), p2 (ref), id (ref), v (ref)
 								if var6 then
 									return
 								end
 								p2.onAnswerChanged({ choiceIds = if id then {} else { v.id } })
 							end,
-							[reactModule.Event.MouseEnter] = function() --[[ line: 100 ]]
+							[reactModule.Event.MouseEnter] = function()
 								-- upvalues: var9 (ref), v (ref)
 								var9(v.id)
 							end,
-							[reactModule.Event.MouseLeave] = function() --[[ line: 103 ]]
+							[reactModule.Event.MouseLeave] = function()
 								-- upvalues: var9 (ref), v (ref)
-								var9(function(p3) --[[ line: 104 ]]
+								var9(function(p3)
 									-- upvalues: v (copy)
 									return if p3 == v.id then nil else p3
 								end)

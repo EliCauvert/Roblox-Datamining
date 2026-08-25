@@ -3,12 +3,12 @@ local chatSettingsModule = require(parent:WaitForChild("ChatSettings"))
 local chatConstantsModule = require(parent:WaitForChild("ChatConstants"))
 local utilModule = require(script.Parent:WaitForChild("Util"))
 
-function CreateSetCoreMessageLabel(value, _) --[[ line: 11 ]]
+function CreateSetCoreMessageLabel(value, _)
 	-- upvalues: chatSettingsModule (ref), utilModule (ref)
 	local extraData = value.ExtraData or {}
 	local message, message_1 = utilModule:CreateBaseMessage(value.Message, extraData.Font or chatSettingsModule.DefaultFont, extraData.TextSize or chatSettingsModule.ChatWindowTextSize, extraData.Color or chatSettingsModule.DefaultMessageColor)
 	
-	local function GetHeightFunction(p0) --[[ line: 20 ]]
+	local function GetHeightFunction(p0)
 		-- upvalues: utilModule (copy), message_1 (ref), message (ref)
 		return utilModule:GetMessageHeight(message_1, message, p0)
 	end

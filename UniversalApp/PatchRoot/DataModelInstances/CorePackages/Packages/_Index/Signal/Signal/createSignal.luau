@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.types)
 
-return function() --[[ line: 25 | named "createSignal" ]]
+return function()
 	local t = {}
 	local t_1 = {}
 	local var2 = false
 	
 	return {
-		subscribe = function(_, p0) --[[ line: 31 ]]
+		subscribe = function(_, p0)
 			-- upvalues: var2 (write), t (ref), t_1 (ref)
 			local t_2 = { unsubscribed = false, callback = p0 }
 			
@@ -16,7 +16,7 @@ return function() --[[ line: 25 | named "createSignal" ]]
 				t[p0] = t_2
 			end
 			return {
-				unsubscribe = function(_) --[[ line: 45 ]]
+				unsubscribe = function(_)
 					-- upvalues: t_2 (ref), t (copy), p0 (ref), t_1 (copy)
 					t_2.unsubscribed = true
 					t[p0] = nil
@@ -24,7 +24,7 @@ return function() --[[ line: 25 | named "createSignal" ]]
 				end
 			}
 		end
-	}, function(p1) --[[ line: 56 | named "fire" ]]
+	}, function(p1)
 		-- upvalues: var2 (write), t (ref), t_1 (ref)
 		var2 = true
 		

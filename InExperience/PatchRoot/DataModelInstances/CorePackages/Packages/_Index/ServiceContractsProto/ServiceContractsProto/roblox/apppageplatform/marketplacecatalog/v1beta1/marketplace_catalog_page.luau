@@ -7,7 +7,7 @@ local pageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 214 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		request_id = if p0 == nil or p0.request_id == nil then "" else p0.request_id,
@@ -17,7 +17,7 @@ function t_1.new(p0) --[[ line: 214 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 225 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var13 = 0
@@ -53,7 +53,7 @@ function t_1:encode() --[[ line: 225 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 255 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var24 = t_1.new()
 	local var25 = 0
@@ -115,7 +115,7 @@ function t_1.decode(p1) --[[ line: 255 ]]
 	return var24
 end
 
-function t_1:jsonEncode() --[[ line: 313 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.request_id ~= nil and self.request_id ~= "" then
@@ -133,7 +133,7 @@ function t_1:jsonEncode() --[[ line: 313 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 335 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), t (ref)
 	local var48 = t_1.new()
 	
@@ -167,7 +167,7 @@ typeRegistryModule.default:register(t.MarketplaceCatalogPageRequest)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 379 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		cursor = if p2 == nil or p2.cursor == nil then nil else p2.cursor,
@@ -176,7 +176,7 @@ function t_2.new(p2) --[[ line: 379 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 387 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var50 = 0
@@ -205,7 +205,7 @@ function t_2:encode() --[[ line: 387 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 412 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var58 = t_2.new()
 	local var59 = 0
@@ -264,7 +264,7 @@ function t_2.decode(p3) --[[ line: 412 ]]
 	return var58
 end
 
-function t_2:jsonEncode() --[[ line: 465 ]]
+function t_2:jsonEncode()
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -280,7 +280,7 @@ function t_2:jsonEncode() --[[ line: 465 ]]
 	return t_1
 end
 
-function t_2:jsonDecode() --[[ line: 485 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref)
 	local var81 = t_2.new()
 	
@@ -308,7 +308,7 @@ typeRegistryModule.default:register(t.RequestPagination)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 523 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		page_entries = if p4 == nil or p4.page_entries == nil then {} else p4.page_entries,
@@ -319,7 +319,7 @@ function t_3.new(p4) --[[ line: 523 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 535 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var83 = 0
@@ -382,7 +382,7 @@ function t_3:encode() --[[ line: 535 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 591 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
 	local var108 = t_3.new()
 	local var109 = 0
@@ -451,7 +451,7 @@ function t_3.decode(p5) --[[ line: 591 ]]
 	return var108
 end
 
-function t_3:jsonEncode() --[[ line: 672 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -487,7 +487,7 @@ function t_3:jsonEncode() --[[ line: 672 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 710 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref), t (ref)
 	local var137 = t_3.new()
 	
@@ -552,7 +552,7 @@ typeRegistryModule.default:register(t.MarketplaceCatalogPageResponse)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 797 ]]
+function t_4.new(p6)
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		key = if p6 == nil or p6.key == nil then "" else p6.key,
@@ -560,7 +560,7 @@ function t_4.new(p6) --[[ line: 797 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 806 ]]
+function t_4:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var144 = 0
@@ -584,7 +584,7 @@ function t_4:encode() --[[ line: 806 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 828 ]]
+function t_4.decode(p7)
 	-- upvalues: t_4 (ref), protoModule (ref), templateEntryModule (ref)
 	local var151 = t_4.new()
 	local var152 = 0
@@ -636,7 +636,7 @@ function t_4.decode(p7) --[[ line: 828 ]]
 	return var151
 end
 
-function t_4:jsonEncode() --[[ line: 878 ]]
+function t_4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -648,7 +648,7 @@ function t_4:jsonEncode() --[[ line: 878 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 894 ]]
+function t_4:jsonDecode()
 	-- upvalues: t_4 (ref), templateEntryModule (ref)
 	local var171 = t_4.new()
 	
@@ -670,7 +670,7 @@ typeRegistryModule.default:register(t.MarketplaceCatalogPageResponse_TemplatesEn
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 925 ]]
+function t_5.new(p8)
 	-- upvalues: t_5 (ref)
 	return setmetatable({
 		key = if p8 == nil or p8.key == nil then "" else p8.key,
@@ -678,7 +678,7 @@ function t_5.new(p8) --[[ line: 925 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 937 ]]
+function t_5:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var173 = 0
@@ -701,7 +701,7 @@ function t_5:encode() --[[ line: 937 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 958 ]]
+function t_5.decode(p9)
 	-- upvalues: t_5 (ref), protoModule (ref)
 	local var179 = t_5.new()
 	local var180 = 0
@@ -753,7 +753,7 @@ function t_5.decode(p9) --[[ line: 958 ]]
 	return var179
 end
 
-function t_5:jsonEncode() --[[ line: 1008 ]]
+function t_5:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -765,7 +765,7 @@ function t_5:jsonEncode() --[[ line: 1008 ]]
 	return t
 end
 
-function t_5:jsonDecode() --[[ line: 1024 ]]
+function t_5:jsonDecode()
 	-- upvalues: t_5 (ref)
 	local var199 = t_5.new()
 	
@@ -787,14 +787,14 @@ typeRegistryModule.default:register(t.MarketplaceCatalogPageResponse_LocalizedLi
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 1055 ]]
+function t_6.new(p10)
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		next_cursor = if p10 == nil or p10.next_cursor == nil then nil else p10.next_cursor
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 1061 ]]
+function t_6:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var201 = 0
@@ -811,7 +811,7 @@ function t_6:encode() --[[ line: 1061 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 1075 ]]
+function t_6.decode(p11)
 	-- upvalues: t_6 (ref), protoModule (ref)
 	local var205 = t_6.new()
 	local var206 = 0
@@ -858,7 +858,7 @@ function t_6.decode(p11) --[[ line: 1075 ]]
 	return var205
 end
 
-function t_6:jsonEncode() --[[ line: 1118 ]]
+function t_6:jsonEncode()
 	local t = {}
 	
 	if self.next_cursor ~= nil then
@@ -867,7 +867,7 @@ function t_6:jsonEncode() --[[ line: 1118 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 1128 ]]
+function t_6:jsonDecode()
 	-- upvalues: t_6 (ref)
 	local var223 = t_6.new()
 	
@@ -887,13 +887,13 @@ t_6.descriptor = {
 t.Pagination = t_6
 typeRegistryModule.default:register(t.Pagination)
 t.PaginationDirection = {
-	fromNumber = function(p12) --[[ line: 1153 ]]
+	fromNumber = function(p12)
 		return if p12 == 0 then "PAGINATION_DIRECTION_INVALID" elseif p12 == 1 then "PAGINATION_DIRECTION_FORWARD" elseif p12 == 2 then "PAGINATION_DIRECTION_BACKWARD" else nil
 	end,
-	toNumber = function(p13) --[[ line: 1165 ]]
+	toNumber = function(p13)
 		return if p13 == "PAGINATION_DIRECTION_INVALID" then 0 elseif p13 == "PAGINATION_DIRECTION_FORWARD" then 1 elseif p13 == "PAGINATION_DIRECTION_BACKWARD" then 2 else p13
 	end,
-	fromName = function(p14) --[[ line: 1177 ]]
+	fromName = function(p14)
 		return if p14 == "PAGINATION_DIRECTION_INVALID" then "PAGINATION_DIRECTION_INVALID" elseif p14 == "PAGINATION_DIRECTION_FORWARD" then "PAGINATION_DIRECTION_FORWARD" elseif p14 == "PAGINATION_DIRECTION_BACKWARD" then "PAGINATION_DIRECTION_BACKWARD" else nil
 	end
 }

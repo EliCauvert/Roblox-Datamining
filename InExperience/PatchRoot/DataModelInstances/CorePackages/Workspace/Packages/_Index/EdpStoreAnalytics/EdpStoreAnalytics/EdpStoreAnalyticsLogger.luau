@@ -7,7 +7,7 @@ local edpStoreClicksDetectorThrottlingHundredthsPercent = game:DefineFastInt("Ed
 local edpStoreImpressionsDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0)
 local t = {}
 
-local function sendLogEvent(p0) --[[ line: 17 ]]
+local function sendLogEvent(p0)
 	-- upvalues: edpStoreClicksDetectorThrottlingHundredthsPercent (ref), telemetryService (ref)
 	telemetryService:LogEvent({
 		eventName = "experienceStoreProducts",
@@ -18,7 +18,7 @@ local function sendLogEvent(p0) --[[ line: 17 ]]
 	}, { customFields = p0 })
 end
 
-local function sendImpressionLogEvent(p1) --[[ line: 32 ]]
+local function sendImpressionLogEvent(p1)
 	-- upvalues: constantsModule (ref), edpStoreImpressionsDetectorThrottlingHundredthsPercent (ref), telemetryService (ref)
 	telemetryService:LogEvent({
 		description = "Event fired from the lua app for every impression on the EDP store or preview",
@@ -29,7 +29,7 @@ local function sendImpressionLogEvent(p1) --[[ line: 32 ]]
 	}, { customFields = p1 })
 end
 
-function t.logEvent(p2, p3, p4, p5, p6, p7, _) --[[ line: 45 ]]
+function t.logEvent(p2, p3, p4, p5, p6, p7, _)
 	-- upvalues: sendLogEvent (ref)
 	sendLogEvent({
 		actionType = p2,
@@ -41,12 +41,12 @@ function t.logEvent(p2, p3, p4, p5, p6, p7, _) --[[ line: 45 ]]
 	})
 end
 
-function t.logImpression(p8) --[[ line: 69 ]]
+function t.logImpression(p8)
 	-- upvalues: sendImpressionLogEvent (ref)
 	sendImpressionLogEvent(p8)
 end
 
-function t.logExperienceStoreExposure() --[[ line: 75 ]]
+function t.logExperienceStoreExposure()
 	-- upvalues: IXPService (ref), appUserLayers (ref)
 	IXPService:LogUserLayerExposure(appUserLayers.EconomyDeveloperMonetizationEdpVirtualProductsRanking)
 end

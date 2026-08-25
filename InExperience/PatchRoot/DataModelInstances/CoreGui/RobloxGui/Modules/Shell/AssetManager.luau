@@ -2,7 +2,7 @@
 local create = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 
 return {
-	CreateShadow = function(p0) --[[ line: 14 ]]
+	CreateShadow = function(p0)
 		-- upvalues: create (ref)
 		return create("ImageLabel")({
 			Name = "Shadow",

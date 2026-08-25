@@ -8,7 +8,7 @@ local _ = constantsModule.Font.MainWindowBold
 local checkboxHeight = constantsModule.UtilityBarFormatting.CheckboxHeight
 local _ = constantsModule.UtilityBarFormatting.CheckboxInnerPadding
 
-return function(p0) --[[ line: 23 | named "CellCheckbox" ]]
+return function(p0)
 	-- upvalues: roactModule (ref), checkboxModule (ref), checkboxHeight (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

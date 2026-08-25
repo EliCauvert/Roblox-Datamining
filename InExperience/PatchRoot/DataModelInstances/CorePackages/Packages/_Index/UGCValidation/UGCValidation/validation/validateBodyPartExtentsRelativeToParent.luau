@@ -20,7 +20,7 @@ local t_2 = {
 	[Enum.AssetType.RightLeg] = true
 }
 
-local function reportFailure_lowerAboveUpper(p0, p1, p2, p3) --[[ line: 40 ]]
+local function reportFailure_lowerAboveUpper(p0, p1, p2, p3)
 	-- upvalues: analyticsModule (ref)
 	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyAttPosRelativeToParent_PartAboveParent, nil, p3)
 	
@@ -29,7 +29,7 @@ local function reportFailure_lowerAboveUpper(p0, p1, p2, p3) --[[ line: 40 ]]
 	}
 end
 
-local function reportFailure_upperBelowLower(p4, p5, p6, p7) --[[ line: 63 ]]
+local function reportFailure_upperBelowLower(p4, p5, p6, p7)
 	-- upvalues: analyticsModule (ref)
 	analyticsModule.reportFailure(analyticsModule.ErrorType.validateBodyAttPosRelativeToParent_ParentBelowPart, nil, p7)
 	
@@ -39,7 +39,7 @@ local function reportFailure_upperBelowLower(p4, p5, p6, p7) --[[ line: 63 ]]
 end
 
 local t_3 = {
-	validateSinglePartBasedOnBBoxes = function(p8, p9, p10, p11, p12) --[[ line: 86 ]]
+	validateSinglePartBasedOnBBoxes = function(p8, p9, p10, p11, p12)
 		-- upvalues: failureReasonsAccumulatorModule (ref), reportFailure_lowerAboveUpper (ref), reportFailure_upperBelowLower (ref)
 		local var13 = failureReasonsAccumulatorModule.new()
 		local boundsData = p10[p8.Name].boundsData
@@ -53,7 +53,7 @@ local t_3 = {
 		end
 		return var13:getFinalResults()
 	end,
-	validateSinglePartBasedOnAttachmentYPos = function(p13, p14, p15, p16) --[[ line: 112 ]]
+	validateSinglePartBasedOnAttachmentYPos = function(p13, p14, p15, p16)
 		-- upvalues: failureReasonsAccumulatorModule (ref), r15plusUtilsModule (ref), getExpectedPartSizeModule (ref), getAttachmentCFrameInPartSpaceModule (ref), reportFailure_lowerAboveUpper (ref), reportFailure_upperBelowLower (ref)
 		local var14 = failureReasonsAccumulatorModule.new()
 		local var15 = p14:FindFirstChild(p15, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
@@ -78,7 +78,7 @@ local t_3 = {
 	end
 }
 
-function t_3.runValidation(p17, p18) --[[ line: 150 ]]
+function t_3.runValidation(p17, p18)
 	-- upvalues: constantsModule (ref), t (ref), boundsCalculatorModule (ref), failureReasonsAccumulatorModule (ref), t_1 (ref), t_3 (ref), t_2 (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local assetTypeEnum = p18.assetTypeEnum

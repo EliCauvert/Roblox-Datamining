@@ -11,7 +11,7 @@ local useCursorModule = require(parent_2.App.SelectionCursor.useCursor)
 local UIBloxConfigModule = require(parent_2.UIBloxConfig)
 local t = { width = UDim.new(0, 400) }
 
-return function(p0) --[[ line: 54 | named "TextField" ]]
+return function(p0)
 	-- upvalues: useStyleModule (ref), reactModule (ref), UIBloxConfigModule (ref), useCursorModule (ref), t (ref), inputLabelModule (ref), imageSetComponentModule (ref), helperTextModule (ref)
 	local tokens = useStyleModule().Tokens
 	local var8 = reactModule.useRef(nil)
@@ -27,8 +27,8 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 	local var20 = useCursorModule(UDim.new(0.5), var14 / 2, var13)
 	local var21 = if p0.width ~= nil then t.width else p0.width
 	
-	local function _() --[[ line: 94 | named "canUseTextInputType" ]]
-		local ok, status = pcall(function() --[[ line: 95 ]]
+	local function _()
+		local ok, status = pcall(function()
 			local coreGuiService = game:GetService("CoreGui")
 			local _ = coreGuiService.Name
 			
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 		return ok and status ~= nil
 	end
 	
-	local function getTextBoxWidthOffset() --[[ line: 103 ]]
+	local function getTextBoxWidthOffset()
 		-- upvalues: p0 (ref), var14 (ref), UIBloxConfigModule (copy), tokens (ref)
 		local var41 = 0
 		
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 		return var41
 	end
 	
-	local function onTextChange(p1) --[[ line: 120 ]]
+	local function onTextChange(p1)
 		-- upvalues: p0 (ref)
 		if p1 == nil then
 			p0.onChange("")
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 		p0.onChange(p1.Text)
 	end
 	
-	local function onFocusGained() --[[ line: 128 ]]
+	local function onFocusGained()
 		-- upvalues: p0 (ref), var8 (ref), var12 (ref)
 		if p0.disabled and var8.current then
 			var8.current:ReleaseFocus()
@@ -75,7 +75,7 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 		end
 	end
 	
-	local function onFocusLost() --[[ line: 139 ]]
+	local function onFocusLost()
 		-- upvalues: var12 (ref)
 		var12(false)
 	end
@@ -114,17 +114,17 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 		Selectable = not p0.disabled,
 		Image = "",
 		SelectionImageObject = var19,
-		[reactModule.Event.Activated] = function() --[[ line: 189 ]]
+		[reactModule.Event.Activated] = function()
 			-- upvalues: var8 (ref)
 			if var8.current then
 				var8.current:CaptureFocus()
 			end
 		end,
-		[reactModule.Event.MouseEnter] = function() --[[ line: 194 ]]
+		[reactModule.Event.MouseEnter] = function()
 			-- upvalues: var10 (ref)
 			var10(true)
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 197 ]]
+		[reactModule.Event.MouseLeave] = function()
 			-- upvalues: var10 (ref)
 			var10(false)
 		end
@@ -177,7 +177,7 @@ return function(p0) --[[ line: 54 | named "TextField" ]]
 	local createElement_4 = reactModule.createElement
 	local var38 = "TextBox"
 	local t_9 = { ref = var8, Text = p0.text }
-	local ok, status = pcall(function() --[[ line: 95 ]]
+	local ok, status = pcall(function()
 		local coreGuiService = game:GetService("CoreGui")
 		local _ = coreGuiService.Name
 		

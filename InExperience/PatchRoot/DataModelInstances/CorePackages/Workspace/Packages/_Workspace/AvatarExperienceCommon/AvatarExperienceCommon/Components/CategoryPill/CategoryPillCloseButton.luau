@@ -6,11 +6,11 @@ local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 local fFlagAXCategoryPillPositionAnimation = require(parent.AvatarExperienceFlags).FFlagAXCategoryPillPositionAnimation
 
-return function(p0) --[[ line: 28 | named "CategoryPillCloseButton" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), fFlagAXCategoryPillPositionAnimation (ref), icon (ref), enums (ref)
 	local actionStandard = useTokens().Color.ActionStandard
 	local var2 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var2 (ref), p0 (ref)
 		if var2.current then
 			p0.categoryButtonRefs["X-Button"] = var2

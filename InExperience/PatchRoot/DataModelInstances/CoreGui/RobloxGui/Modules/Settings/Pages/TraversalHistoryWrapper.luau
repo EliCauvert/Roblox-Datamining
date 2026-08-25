@@ -14,7 +14,7 @@ local settingsPageFactoryModule = require(settings.SettingsPageFactory)
 local utilsModule = require(settings.Integrations.Utils)
 local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
 
-return function() --[[ line: 24 | named "createTraversalHistoryWrapper" ]]
+return function()
 	-- upvalues: localization (ref), localizationService (ref), settingsPageFactoryModule (ref), constantsModule (ref), fFlagEnableSideSheet (ref), reactRobloxModule (ref), reactModule (ref), foundationProvider (ref), foundationModule (ref), utilsModule (ref), localizationProvider (ref), traversalHistoryPageModule (ref)
 	local var11 = localization.new(localizationService.RobloxLocaleId)
 	local traversalHistoryPage = settingsPageFactoryModule:CreateNewPage()

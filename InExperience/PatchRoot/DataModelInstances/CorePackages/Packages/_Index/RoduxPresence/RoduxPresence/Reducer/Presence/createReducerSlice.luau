@@ -3,11 +3,11 @@ local cryoModule = require(roduxPresence.Parent.Cryo)
 local getDeepValueModule = require(roduxPresence.getDeepValue)
 local receivedUserPresenceModule = require(roduxPresence.Actions.ReceivedUserPresence)
 
-return function(p0, p1, p2) --[[ line: 10 ]]
+return function(p0, p1, p2)
 	-- upvalues: getDeepValueModule (ref), cryoModule (ref), receivedUserPresenceModule (ref)
 	local presenceNetworking = p2.presenceNetworking
 	
-	local function handlePresenceModel(p3, p4) --[[ line: 13 ]]
+	local function handlePresenceModel(p3, p4)
 		-- upvalues: p0 (ref), getDeepValueModule (copy), p1 (ref), cryoModule (copy)
 		local var5 = p3[p0]
 		local var6 = tostring(p4.userId)
@@ -24,7 +24,7 @@ return function(p0, p1, p2) --[[ line: 10 ]]
 		})
 	end
 	
-	return function(p5, p6) --[[ line: 36 ]]
+	return function(p5, p6)
 		-- upvalues: receivedUserPresenceModule (copy), handlePresenceModel (ref), presenceNetworking (ref), p0 (ref)
 		assert(p5, "state should not be nil")
 		

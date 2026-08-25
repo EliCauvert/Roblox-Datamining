@@ -1,8 +1,8 @@
 ﻿local dispatchBindableEventModule = require(script.Parent.DispatchBindableEvent)
 
-return function(p0) --[[ line: 3 | named "createDispatchBindableEvent" ]]
+return function(p0)
 	-- upvalues: dispatchBindableEventModule (ref)
-	dispatchBindableEventModule.Event:Connect(function(p1) --[[ line: 4 ]]
+	dispatchBindableEventModule.Event:Connect(function(p1)
 		-- upvalues: p0 (ref)
 		p0:dispatch(p1)
 	end)

@@ -27,17 +27,17 @@ local t = {
 }
 t.__index = t
 
-function t.new() --[[ line: 59 ]]
+function t.new()
 	-- upvalues: messageBus (ref), t (ref)
 	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
 end
 
-function t:sendSMS(p0) --[[ line: 72 ]]
+function t:sendSMS(p0)
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var3 = promiseModule.new(function(p1, _) --[[ line: 73 ]]
+	local var3 = promiseModule.new(function(p1, _)
 		-- upvalues: self (ref)
 		local SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2) --[[ line: 75 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2)
 			-- upvalues: self (copy), SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p1 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SEND_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p1(p2)
@@ -48,12 +48,12 @@ function t:sendSMS(p0) --[[ line: 72 ]]
 	return var3
 end
 
-function t:supportsSMS() --[[ line: 93 ]]
+function t:supportsSMS()
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var4 = promiseModule.new(function(p3, _) --[[ line: 94 ]]
+	local var4 = promiseModule.new(function(p3, _)
 		-- upvalues: self (ref)
 		local SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p4) --[[ line: 96 ]]
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p4)
 			-- upvalues: self (copy), SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p3 (ref)
 			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_SMS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
 			p3(p4.support)

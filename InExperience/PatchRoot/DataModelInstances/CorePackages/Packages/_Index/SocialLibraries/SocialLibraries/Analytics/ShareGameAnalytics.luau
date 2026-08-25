@@ -19,7 +19,7 @@ t.DiagCounters = {
 	}
 }
 
-function t.new(p0, p1, p2) --[[ line: 38 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref)
 	assert(p0, "EventStream implementation not found.")
 	assert(p1, "Diag implementation not found.")
@@ -28,7 +28,7 @@ function t.new(p0, p1, p2) --[[ line: 38 ]]
 	return setmetatable({ _eventStreamImpl = p0, _diagImpl = p1, _buttonName = p2 }, t)
 end
 
-function t:onActivatedInviteSent(p3, p4, p5, p6, p7) --[[ line: 50 ]]
+function t:onActivatedInviteSent(p3, p4, p5, p6, p7)
 	-- upvalues: t (ref)
 	self:_getEventStream():setRBXEventStream("touch", t.EventName.InviteSent, {
 		btn = self:_getButtonName(),
@@ -45,7 +45,7 @@ function t:onActivatedInviteSent(p3, p4, p5, p6, p7) --[[ line: 50 ]]
 	end
 end
 
-function t:inputShareGameEntryPoint(p8, p9) --[[ line: 71 ]]
+function t:inputShareGameEntryPoint(p8, p9)
 	-- upvalues: t (ref)
 	self:_getEventStream():setRBXEventStream("touch", t.EventName.EntryPoint, {
 		btn = self:_getButtonName(),
@@ -59,15 +59,15 @@ function t:inputShareGameEntryPoint(p8, p9) --[[ line: 71 ]]
 	end
 end
 
-function t:_getEventStream() --[[ line: 89 ]]
+function t:_getEventStream()
 	return self._eventStreamImpl
 end
 
-function t:_getDiag() --[[ line: 93 ]]
+function t:_getDiag()
 	return self._diagImpl
 end
 
-function t:_getButtonName() --[[ line: 97 ]]
+function t:_getButtonName()
 	return self._buttonName
 end
 

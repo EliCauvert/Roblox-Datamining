@@ -8,7 +8,7 @@ local text = foundationModule.Text
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
-return reactModule.memo(function(p0) --[[ line: 20 | named "EmptyFriendsStateImpl" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
 	local var4 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
 	

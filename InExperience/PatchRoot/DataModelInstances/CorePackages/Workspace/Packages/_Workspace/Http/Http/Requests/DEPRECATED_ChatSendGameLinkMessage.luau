@@ -3,7 +3,7 @@ local http = script:FindFirstAncestor("Http")
 local urlModule = require(http.Url)
 local _ = require(http.RequestTypes)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 8 ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: httpService (ref), urlModule (ref)
 	assert(p0, "requestImpl is required")
 	assert(p1, "conversationId is required")

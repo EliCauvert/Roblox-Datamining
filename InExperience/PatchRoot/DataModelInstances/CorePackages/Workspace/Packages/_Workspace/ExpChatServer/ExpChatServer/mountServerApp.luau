@@ -22,21 +22,21 @@ local fFlagExpChatAddUserAsyncNilCheck = expChatSharedModule.Flags.FFlagExpChatA
 local expChatBackfillTeamChannels = game:DefineFastFlag("ExpChatBackfillTeamChannels", false)
 local expChatBackfillTeamChannelsParentCheck = game:DefineFastFlag("ExpChatBackfillTeamChannelsParentCheck", false)
 
-local _ = function() --[[ line: 38 ]]
+local _ = function()
 	-- upvalues: list (ref), textChatService (ref)
-	return #list.filter(textChatService:GetDescendants(), function(p0) --[[ line: 39 ]]
+	return #list.filter(textChatService:GetDescendants(), function(p0)
 		return p0:IsA("TextChannel")
 	end)
 end
 
-local _ = function() --[[ line: 46 ]]
+local _ = function()
 	-- upvalues: list (ref), textChatService (ref)
-	return #list.filter(textChatService:GetDescendants(), function(p1) --[[ line: 47 ]]
+	return #list.filter(textChatService:GetDescendants(), function(p1)
 		return p1:IsA("TextChatCommand")
 	end)
 end
 
-return function(p2) --[[ line: 54 ]]
+return function(p2)
 	-- upvalues: var8 (ref), createStoreModule (ref), createDispatchRemoteFunctionModule (ref), analytics (ref), watchForErrors (ref), textChatService (ref), fFlagExpChatAddUserAsyncNilCheck (ref), expChatBackfillTeamChannels (ref), expChatBackfillTeamChannelsParentCheck (ref), teamsService (ref), config (ref), playersService (ref), commands (ref), list (ref), getFFlagExpChatAlwaysRunTCS (ref), countParticipantsInTextChannel (ref), playerAdded (ref), playerRemoved (ref)
 	var8:trace("mountServerApp started")
 	local var11 = createStoreModule()
@@ -54,7 +54,7 @@ return function(p2) --[[ line: 54 ]]
 		textChannels.Name = "TextChannels"
 		textChannels.Parent = textChatService
 		
-		local function findChannel(p3) --[[ line: 75 ]]
+		local function findChannel(p3)
 			-- upvalues: textChatService (copy)
 			for i, v in pairs(textChatService:GetDescendants()) do
 				if v:IsA("TextChannel") and v.Name == p3 then
@@ -64,7 +64,7 @@ return function(p2) --[[ line: 54 ]]
 			return nil
 		end
 		
-		local function _(p4) --[[ line: 85 | named "addChannel" ]]
+		local function _(p4)
 			-- upvalues: findChannel (ref), textChannels (ref)
 			local var21 = findChannel(p4)
 			
@@ -76,7 +76,7 @@ return function(p2) --[[ line: 54 ]]
 			return var21
 		end
 		
-		local function findTextSourceFromChannelWithUserId(p5, p6) --[[ line: 97 ]]
+		local function findTextSourceFromChannelWithUserId(p5, p6)
 			for i, v in pairs(p5:GetChildren()) do
 				if v:IsA("TextSource") and v.UserId == p6 then
 					return v
@@ -85,7 +85,7 @@ return function(p2) --[[ line: 54 ]]
 			return nil
 		end
 		
-		local function createTeamChannel(p7) --[[ line: 107 ]]
+		local function createTeamChannel(p7)
 			-- upvalues: findChannel (ref), textChannels (ref), var8 (copy), fFlagExpChatAddUserAsyncNilCheck (copy), findTextSourceFromChannelWithUserId (ref), expChatBackfillTeamChannels (copy), expChatBackfillTeamChannelsParentCheck (copy), teamsService (copy)
 			local text = "RBXTeam" .. tostring(p7.TeamColor.Name)
 			local var23 = findChannel(text)
@@ -96,7 +96,7 @@ return function(p2) --[[ line: 54 ]]
 				var23.Parent = textChannels
 			end
 			var8:debug("Creating team TextChannel: {}", var23.Name)
-			p7.PlayerAdded:Connect(function(p8) --[[ line: 111 ]]
+			p7.PlayerAdded:Connect(function(p8)
 				-- upvalues: p7 (ref), findChannel (copy), textChannels (copy), fFlagExpChatAddUserAsyncNilCheck (copy)
 				local text = "RBXTeam" .. tostring(p7.TeamColor.Name)
 				local var29 = findChannel(text)
@@ -120,7 +120,7 @@ return function(p2) --[[ line: 54 ]]
 					userId.CanSend = true
 				end
 			end)
-			p7.PlayerRemoved:Connect(function(p9) --[[ line: 124 ]]
+			p7.PlayerRemoved:Connect(function(p9)
 				-- upvalues: p7 (ref), findChannel (copy), textChannels (copy), findTextSourceFromChannelWithUserId (copy)
 				local text = "RBXTeam" .. tostring(p7.TeamColor.Name)
 				local var32 = findChannel(text)
@@ -160,7 +160,7 @@ return function(p2) --[[ line: 54 ]]
 					end
 				end
 			end
-			p7:GetPropertyChangedSignal("TeamColor"):Connect(function() --[[ line: 154 ]]
+			p7:GetPropertyChangedSignal("TeamColor"):Connect(function()
 				-- upvalues: p7 (ref), findChannel (copy), textChannels (copy)
 				local text = "RBXTeam" .. tostring(p7.TeamColor.Name)
 				local var35 = findChannel(text)
@@ -179,13 +179,13 @@ return function(p2) --[[ line: 54 ]]
 				createTeamChannel(v)
 			end
 		end
-		teamsService.ChildAdded:Connect(function(p10) --[[ line: 166 ]]
+		teamsService.ChildAdded:Connect(function(p10)
 			-- upvalues: createTeamChannel (ref)
 			if p10:IsA("Team") then
 				createTeamChannel(p10)
 			end
 		end)
-		teamsService.ChildRemoved:Connect(function(p11) --[[ line: 172 ]]
+		teamsService.ChildRemoved:Connect(function(p11)
 			-- upvalues: findChannel (ref), var8 (copy)
 			if p11:IsA("Team") then
 				local var36 = findChannel("RBXTeam" .. tostring(p11.TeamColor.Name))
@@ -208,7 +208,7 @@ return function(p2) --[[ line: 54 ]]
 			end
 			table.insert(t, var18)
 		end
-		local function addPlayerTextSourceToDefaultChannels(p12) --[[ line: 187 ]]
+		local function addPlayerTextSourceToDefaultChannels(p12)
 			-- upvalues: t (ref), var8 (copy), fFlagExpChatAddUserAsyncNilCheck (copy)
 			for i, v in ipairs(t) do
 				var8:trace("Adding user {} to TextChannel: {}", tostring(p12.UserId), v.Name)
@@ -252,10 +252,10 @@ return function(p2) --[[ line: 54 ]]
 		analytics.FireRccAnalyticsWithEventName("DefaultCommandsCreated")
 	end
 	analytics.FireRccAnalyticsWithEventName("ExperienceChatLoaded", {
-		loadedChannels = #list.filter(textChatService:GetDescendants(), function(p13) --[[ line: 39 ]]
+		loadedChannels = #list.filter(textChatService:GetDescendants(), function(p13)
 			return p13:IsA("TextChannel")
 		end),
-		loadedCommands = #list.filter(textChatService:GetDescendants(), function(p14) --[[ line: 47 ]]
+		loadedCommands = #list.filter(textChatService:GetDescendants(), function(p14)
 			return p14:IsA("TextChatCommand")
 		end)
 	})
@@ -264,12 +264,12 @@ return function(p2) --[[ line: 54 ]]
 		analytics.FireRccAnalyticsDeferred("AutomigratedToTCS", { universeId = game.GameId })
 	end
 	var8:debug("Start watching for new channels and commands")
-	textChatService.DescendantAdded:Connect(function(p15) --[[ line: 252 ]]
+	textChatService.DescendantAdded:Connect(function(p15)
 		-- upvalues: analytics (copy), list (copy), textChatService (copy), countParticipantsInTextChannel (copy)
 		if p15:IsA("TextChannel") then
 			analytics.FireRccAnalyticsWithEventName("ChannelCreated", {
 				channelName = p15.Name,
-				totalChannels = #list.filter(textChatService:GetDescendants(), function(p16) --[[ line: 39 ]]
+				totalChannels = #list.filter(textChatService:GetDescendants(), function(p16)
 					return p16:IsA("TextChannel")
 				end)
 			})
@@ -290,12 +290,12 @@ return function(p2) --[[ line: 54 ]]
 			end
 		end
 	end)
-	textChatService.DescendantRemoving:Connect(function(p17) --[[ line: 273 ]]
+	textChatService.DescendantRemoving:Connect(function(p17)
 		-- upvalues: analytics (copy), list (copy), textChatService (copy), countParticipantsInTextChannel (copy)
 		if p17:IsA("TextChannel") then
 			analytics.FireRccAnalyticsWithEventName("ChannelRemoved", {
 				channelName = p17.Name,
-				totalChannels = #list.filter(textChatService:GetDescendants(), function(p18) --[[ line: 39 ]]
+				totalChannels = #list.filter(textChatService:GetDescendants(), function(p18)
 					return p18:IsA("TextChannel")
 				end) - 1
 			})
@@ -320,11 +320,11 @@ return function(p2) --[[ line: 54 ]]
 	for i, v in pairs(playersService:GetPlayers()) do
 		var11:dispatch(playerAdded(v.UserId, v.Name, v.DisplayName))
 	end
-	playersService.PlayerAdded:Connect(function(p19) --[[ line: 297 ]]
+	playersService.PlayerAdded:Connect(function(p19)
 		-- upvalues: var11 (ref), playerAdded (copy)
 		var11:dispatch(playerAdded(p19.UserId, p19.Name, p19.DisplayName))
 	end)
-	playersService.PlayerRemoving:Connect(function(p20) --[[ line: 301 ]]
+	playersService.PlayerRemoving:Connect(function(p20)
 		-- upvalues: var11 (ref), playerRemoved (copy)
 		var11:dispatch(playerRemoved(p20.UserId))
 	end)

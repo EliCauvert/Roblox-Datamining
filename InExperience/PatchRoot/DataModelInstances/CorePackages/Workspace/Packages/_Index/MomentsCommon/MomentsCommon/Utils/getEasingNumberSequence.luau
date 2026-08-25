@@ -1,10 +1,10 @@
 ﻿local tweenService = game:GetService("TweenService")
 
-local function _(p0, p1, p2) --[[ line: 3 | named "linearInterpolate" ]]
+local function _(p0, p1, p2)
 	return p0 + (p1 - p0) * p2
 end
 
-return function(p3, p4, p5, p6, p7) --[[ line: 7 | named "getEasingNumberSequence" ]]
+return function(p3, p4, p5, p6, p7)
 	-- upvalues: tweenService (ref)
 	local t = {}
 	

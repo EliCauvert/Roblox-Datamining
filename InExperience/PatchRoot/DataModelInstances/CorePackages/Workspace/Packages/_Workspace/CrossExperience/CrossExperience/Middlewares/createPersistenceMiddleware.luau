@@ -1,12 +1,12 @@
 ﻿local memStorageService = game:GetService("MemStorageService")
 local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: memStorageService (ref), httpService (ref)
 	local t = {
-		persist = function(_, p1) --[[ line: 10 ]]
+		persist = function(_, p1)
 			-- upvalues: memStorageService (copy), p0 (ref), httpService (copy)
-			local ok, _ = pcall(function() --[[ line: 11 ]]
+			local ok, _ = pcall(function()
 				-- upvalues: memStorageService (copy), p0 (copy), httpService (copy), p1 (ref)
 				memStorageService:SetItem(p0.storeKey, httpService:JSONEncode(p1))
 			end)
@@ -16,9 +16,9 @@ return function(p0) --[[ line: 8 ]]
 			end
 			return ok
 		end,
-		restore = function() --[[ line: 19 ]]
+		restore = function()
 			-- upvalues: memStorageService (copy), p0 (ref), httpService (copy)
-			local ok, status = pcall(function() --[[ line: 20 ]]
+			local ok, status = pcall(function()
 				-- upvalues: memStorageService (copy), p0 (copy), httpService (copy)
 				local storeKeyItem = memStorageService:GetItem(p0.storeKey)
 				
@@ -27,9 +27,9 @@ return function(p0) --[[ line: 8 ]]
 			
 			return if ok then status else nil
 		end,
-		clean = function() --[[ line: 32 ]]
+		clean = function()
 			-- upvalues: memStorageService (copy), p0 (ref)
-			local ok, _ = pcall(function() --[[ line: 33 ]]
+			local ok, _ = pcall(function()
 				-- upvalues: memStorageService (copy), p0 (copy)
 				memStorageService:SetItem(p0.storeKey, "")
 			end)
@@ -41,16 +41,16 @@ return function(p0) --[[ line: 8 ]]
 		end
 	}
 	
-	function t.getMiddleware(_) --[[ line: 43 ]]
+	function t.getMiddleware(_)
 		-- upvalues: t (ref)
-		return function(p2, p3) --[[ line: 44 ]]
+		return function(p2, p3)
 			-- upvalues: t (copy)
-			p3.changed:connect(function(p4, _) --[[ line: 47 ]]
+			p3.changed:connect(function(p4, _)
 				-- upvalues: t (copy), p3 (ref)
 				t.persist(p3, p4)
 			end)
 			
-			return function(p5) --[[ line: 50 ]]
+			return function(p5)
 				-- upvalues: p2 (ref)
 				return p2(p5)
 			end

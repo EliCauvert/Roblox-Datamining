@@ -66,7 +66,7 @@ local _ = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.sendBackButtonActionEvent(p0) --[[ line: 142 ]]
+function t_1.sendBackButtonActionEvent(p0)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.BackButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -74,7 +74,7 @@ function t_1.sendBackButtonActionEvent(p0) --[[ line: 142 ]]
 	})
 end
 
-function t_1.sendHistoryMenuButtonActionEvent(p1) --[[ line: 149 ]]
+function t_1.sendHistoryMenuButtonActionEvent(p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryMenuButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -82,7 +82,7 @@ function t_1.sendHistoryMenuButtonActionEvent(p1) --[[ line: 149 ]]
 	})
 end
 
-function t_1.sendHistoryMenuItemClick(p2) --[[ line: 156 ]]
+function t_1.sendHistoryMenuItemClick(p2)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryMenuItemClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -90,7 +90,7 @@ function t_1.sendHistoryMenuItemClick(p2) --[[ line: 156 ]]
 	})
 end
 
-function t_1.sendHistoryMenuHistoryClick(p3) --[[ line: 163 ]]
+function t_1.sendHistoryMenuHistoryClick(p3)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryMenuHistoryClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -98,7 +98,7 @@ function t_1.sendHistoryMenuHistoryClick(p3) --[[ line: 163 ]]
 	})
 end
 
-function t_1.sendHistoryPageBackButtonClick(p4) --[[ line: 170 ]]
+function t_1.sendHistoryPageBackButtonClick(p4)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryPageBackButtonClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -106,7 +106,7 @@ function t_1.sendHistoryPageBackButtonClick(p4) --[[ line: 170 ]]
 	})
 end
 
-function t_1.sendHistoryPageExperienceTileClick(p5) --[[ line: 177 ]]
+function t_1.sendHistoryPageExperienceTileClick(p5)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.HistoryPageExperienceTileClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
@@ -114,7 +114,7 @@ function t_1.sendHistoryPageExperienceTileClick(p5) --[[ line: 177 ]]
 	})
 end
 
-function t_1.sendTeleportConfirmationActions(p6) --[[ line: 184 ]]
+function t_1.sendTeleportConfirmationActions(p6)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t.TeleportConfirmationActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },

@@ -11,18 +11,18 @@ local profileCompletionResolveLatestSduiEntry = game:DefineFastFlag("ProfileComp
 local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local fetchPrompts = serverTriggeredModalsModule.fetchPrompts
 
-return function() --[[ line: 29 | named "useProfileCompletionData" ]]
+return function()
 	-- upvalues: reactModule (ref), createProfileCompletionPromptsConfig (ref), fetchPrompts (ref), profileCompletionResolveLatestSduiEntry (ref), getSduiApiStore (ref), enumsModule (ref), signalsReactModule (ref)
-	local var7 = reactModule.useMemo(function() --[[ line: 30 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: createProfileCompletionPromptsConfig (copy)
 		return createProfileCompletionPromptsConfig()
 	end, {})
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fetchPrompts (copy), var7 (ref)
 		fetchPrompts(var7, true)
 	end, { var7 })
 	
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p0) --[[ line: 42 ]]
+	return signalsReactModule.useSignalState(reactModule.useCallback(function(p0)
 		-- upvalues: profileCompletionResolveLatestSduiEntry (copy), getSduiApiStore (copy), enumsModule (copy)
 		if not profileCompletionResolveLatestSduiEntry then
 			return getSduiApiStore().getRootConfig(enumsModule.Components.ProfileCompletion, p0)
@@ -46,7 +46,7 @@ return function() --[[ line: 29 | named "useProfileCompletionData" ]]
 			end
 		end
 		return config
-	end, {})), reactModule.useCallback(function() --[[ line: 38 ]]
+	end, {})), reactModule.useCallback(function()
 		-- upvalues: fetchPrompts (copy), createProfileCompletionPromptsConfig (copy)
 		fetchPrompts(createProfileCompletionPromptsConfig(), true)
 	end, {})

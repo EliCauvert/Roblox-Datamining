@@ -3,7 +3,7 @@ local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceCha
 local _ = require(viewRecycler.Core.Types)
 
 return {
-	hasStructuralChange = function(p0) --[[ line: 28 ]]
+	hasStructuralChange = function(p0)
 		-- upvalues: dataSourceChangeTypeModule (ref)
 		for i, v in p0.changes do
 			if v.type ~= dataSourceChangeTypeModule.Update then
@@ -12,12 +12,12 @@ return {
 		end
 		return false
 	end,
-	create = function() --[[ line: 37 ]]
+	create = function()
 		local var2 = true
 		local var3 = true
 		
 		return {
-			check = function(p1) --[[ line: 42 ]]
+			check = function(p1)
 				-- upvalues: var2 (write), var3 (write)
 				if p1.rearmAfterStructureChange then
 					var2 = true

@@ -10,7 +10,7 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
 
-return function(p0) --[[ line: 27 | named "FAELoadingModal" ]]
+return function(p0)
 	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), authButtonClick (ref), loading (ref), iconSize (ref), interactiveAlert (ref), buttonType (ref)
 	local onCancel = p0.onCancel
 	local sessionId = p0.sessionId
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 27 | named "FAELoadingModal" ]]
 				{
 					buttonType = buttonType.Secondary,
 					props = {
-						onActivated = reactModule.useCallback(function() --[[ line: 40 ]]
+						onActivated = reactModule.useCallback(function()
 							-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), onCancel (ref)
 							authButtonClick(entryPointEventCtx, "faeLoadingCancel", sessionId)
 							onCancel()
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 27 | named "FAELoadingModal" ]]
 				}
 			}
 		},
-		middleContent = reactModule.useCallback(function() --[[ line: 45 ]]
+		middleContent = reactModule.useCallback(function()
 			-- upvalues: reactModule (copy), loading (copy), iconSize (copy)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,

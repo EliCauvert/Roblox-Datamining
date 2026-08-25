@@ -13,16 +13,16 @@ local signal = appCommonLibModule.Signal
 local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
 local var9 = signal.new()
-local var10 = mappedSignal.new(var9, function() --[[ line: 25 ]]
+local var10 = mappedSignal.new(var9, function()
 	-- upvalues: gameInviteModalManager (ref)
 	return gameInviteModalManager:isGameModalOpen()
 end)
-gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function() --[[ line: 28 ]]
+gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function()
 	-- upvalues: var9 (ref)
 	var9:fire()
 end)
 
-local function _() --[[ line: 32 | named "shouldShowInviteFriends" ]]
+local function _()
 	-- upvalues: runService (ref), playersService (ref)
 	return not runService:IsStudio() and (playersService.LocalPlayer ~= nil and playersService.LocalPlayer.UserId > 0)
 end
@@ -35,7 +35,7 @@ return serviceModule:register({
 	activated = inGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
 	isActivated = var10,
 	components = {
-		Icon = function() --[[ line: 48 ]]
+		Icon = function()
 			-- upvalues: commonIconModule (ref), var10 (ref)
 			return commonIconModule("PersonArrowFromBottomRight", nil, var10)
 		end

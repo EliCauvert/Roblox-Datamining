@@ -14,7 +14,7 @@ local _ = require(userList.Common.Types)
 local friendingActionsModule = require(userList.Cta.friendingActions)
 local notificationTypeList = guiService:GetNotificationTypeList()
 
-return function(p0) --[[ line: 29 | named "useCtaActionHandlers" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), fFlagUserListCtaAnalyticsEnabled (ref), buttonTypes (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref)
 	local var9 = useDispatch()
 	local var10 = reactModule.useRef({})
@@ -35,17 +35,17 @@ return function(p0) --[[ line: 29 | named "useCtaActionHandlers" ]]
 	local var12 = if p0 then p0.friendshipOriginSourceType else nil
 	local var13 = if fFlagUserListCtaAnalyticsEnabled then if p0 then p0.onCtaActivated else nil else nil
 	
-	return reactModule.useMemo(function() --[[ line: 55 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: buttonTypes (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (write), guiService (copy), notificationTypeList (copy), var10 (ref), friendingActionsModule (copy), var9 (ref), var12 (ref), var11 (ref)
 		return {
-			[buttonTypes.Chat] = function(p1) --[[ line: 57 ]]
+			[buttonTypes.Chat] = function(p1)
 				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), guiService (copy), notificationTypeList (copy)
 				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
 					var13({ buttonType = buttonTypes.Chat, userId = p1 })
 				end
 				guiService:BroadcastNotification(p1, notificationTypeList.LAUNCH_CONVERSATION)
 			end,
-			[buttonTypes.Add] = function(p2) --[[ line: 64 ]]
+			[buttonTypes.Add] = function(p2)
 				-- upvalues: var10 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), friendingActionsModule (copy), var9 (copy), var12 (copy), var11 (copy)
 				if var10.current[p2] then return end
 				var10.current[p2] = true
@@ -58,12 +58,12 @@ return function(p0) --[[ line: 29 | named "useCtaActionHandlers" ]]
 					targetUserId = p2,
 					friendshipOriginSourceType = var12,
 					localized = var11
-				}):finally(function() --[[ line: 79 ]]
+				}):finally(function()
 					-- upvalues: var10 (copy), p2 (ref)
 					var10.current[p2] = nil
 				end)
 			end,
-			[buttonTypes.Accept] = function(p3) --[[ line: 84 ]]
+			[buttonTypes.Accept] = function(p3)
 				-- upvalues: var10 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), friendingActionsModule (copy), var9 (copy), var11 (copy)
 				if var10.current[p3] then return end
 				var10.current[p3] = true
@@ -71,12 +71,12 @@ return function(p0) --[[ line: 29 | named "useCtaActionHandlers" ]]
 				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
 					var13({ buttonType = buttonTypes.Accept, userId = p3 })
 				end
-				friendingActionsModule.executeAcceptFriendRequest({ dispatch = var9, targetUserId = p3, localized = var11 }):finally(function() --[[ line: 98 ]]
+				friendingActionsModule.executeAcceptFriendRequest({ dispatch = var9, targetUserId = p3, localized = var11 }):finally(function()
 					-- upvalues: var10 (copy), p3 (ref)
 					var10.current[p3] = nil
 				end)
 			end,
-			[buttonTypes.Dismiss] = function(p4) --[[ line: 103 ]]
+			[buttonTypes.Dismiss] = function(p4)
 				-- upvalues: var10 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var13 (copy), buttonTypes (copy), friendingActionsModule (copy), var9 (copy), var11 (copy)
 				if var10.current[p4] then return end
 				var10.current[p4] = true
@@ -84,7 +84,7 @@ return function(p0) --[[ line: 29 | named "useCtaActionHandlers" ]]
 				if fFlagUserListCtaAnalyticsEnabled and var13 ~= nil then
 					var13({ buttonType = buttonTypes.Dismiss, userId = p4 })
 				end
-				friendingActionsModule.executeDeclineFriendRequest({ dispatch = var9, targetUserId = p4, localized = var11 }):finally(function() --[[ line: 117 ]]
+				friendingActionsModule.executeDeclineFriendRequest({ dispatch = var9, targetUserId = p4, localized = var11 }):finally(function()
 					-- upvalues: var10 (copy), p4 (ref)
 					var10.current[p4] = nil
 				end)

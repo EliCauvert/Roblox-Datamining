@@ -27,14 +27,14 @@ local useTCAnalytics = analyticsModule.useTCAnalytics
 local eventNames = analyticsModule.EventNames
 local friendsRenameModalUnboldText = game:DefineFastFlag("FriendsRenameModalUnboldText", false)
 
-return function() --[[ line: 48 | named "FriendsRenameInfoModal" ]]
+return function()
 	-- upvalues: usePreferredInput (ref), useDispatch (ref), useScreenSize (ref), useNavigation (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), responsiveModule (ref), useLocalization (ref), peekViewState (ref), useAppPolicy (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), text (ref), view (ref), friendsRenameModalUnboldText (ref), inputLabel (ref), inputLabelSize (ref), interactiveAlert (ref), buttonType (ref), peekView (ref)
 	local var8 = usePreferredInput()
 	local var9 = useDispatch()
 	local var10 = useScreenSize()
 	local var11 = useNavigation()
 	local fireAnalyticsEvent = useTCAnalytics().fireAnalyticsEvent
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
 		fireAnalyticsEvent(eventNames.FriendsRenameInfoModalSeen)
 	end, {})
@@ -45,20 +45,20 @@ return function() --[[ line: 48 | named "FriendsRenameInfoModal" ]]
 		introducingConnections = "Feature.Friends.Label.IntroducingConnections",
 		renameInfoText = "Feature.Friends.Label.RenameInfoText"
 	})
-	local var14 = reactModule.useCallback(function() --[[ line: 70 ]]
+	local var14 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref)
 		var11.pop()
 	end, { var11 })
-	local var15 = reactModule.useCallback(function(p0, _) --[[ line: 74 ]]
+	local var15 = reactModule.useCallback(function(p0, _)
 		-- upvalues: peekViewState (copy), var11 (ref)
 		if p0 == peekViewState.Closed or p0 == peekViewState.Hidden then
 			var11.goBack()
 		end
 	end, { var11 })
-	local var16 = useAppPolicy(function(p1) --[[ line: 80 ]]
+	local var16 = useAppPolicy(function(p1)
 		return p1.getWebViewSupport()
 	end)
-	local var17 = reactModule.useCallback(function() --[[ line: 84 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var9 (ref), navigateDown (copy)
 		fireAnalyticsEvent(eventNames.FriendsRenameLearnMoreClicked)
 		local t = {
@@ -75,7 +75,7 @@ return function() --[[ line: 48 | named "FriendsRenameInfoModal" ]]
 		var9(navigateDown(t, nil))
 	end, { var9 })
 	local introducingConnections = var13.introducingConnections
-	local var18 = reactModule.useCallback(function() --[[ line: 109 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), view (copy), var12 (ref), friendsRenameModalUnboldText (copy), text (copy), inputLabel (copy), inputLabelSize (copy), var13 (ref), var16 (ref), var17 (ref)
 		return reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y gap-small padding-0",
@@ -126,7 +126,7 @@ return function() --[[ line: 48 | named "FriendsRenameInfoModal" ]]
 		Contents = reactModule.createElement(view, {
 			tag = "col size-full-0 auto-y gap-small padding-xxlarge align-x-left"
 		}, {
-			Title = reactModule.useMemo(function() --[[ line: 101 ]]
+			Title = reactModule.useMemo(function()
 				-- upvalues: reactModule (copy), text (copy), introducingConnections (ref)
 				return reactModule.createElement(text, {
 					LayoutOrder = 1,

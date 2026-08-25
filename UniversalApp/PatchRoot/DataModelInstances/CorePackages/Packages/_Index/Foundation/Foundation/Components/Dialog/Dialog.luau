@@ -37,7 +37,7 @@ local t = {
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-local function Dialog(p0) --[[ line: 70 ]]
+local function Dialog(p0)
 	-- upvalues: dashModule (ref), useDialogVariants (ref), useScaledValueModule (ref), reactModule (ref), useOverlayModule (ref), useElevationModule (ref), elevationLayerModule (ref), useDialogModule (ref), useDialogResponsiveSizeModule (ref), useTokensModule (ref), usePreferencesModule (ref), useAnimatedBinding (ref), otterModule (ref), viewModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), typesModule (ref), closeAffordanceModule (ref), elevationOwnerScope (ref), flagsModule (ref), onCloseCallbackReasonModule (ref), reactRobloxModule (ref)
 	local createElement_2
 	local var27 = dashModule.assign({}, p0, { LayoutOrder = 1 })
@@ -55,7 +55,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 	local var38 = reactModule.useRef(false)
 	local var39 = reactModule.useRef(nil)
 	local var40, var41 = useAnimatedBinding(1)
-	local var42, var43 = useAnimatedBinding(size800, function() --[[ line: 95 ]]
+	local var42, var43 = useAnimatedBinding(size800, function()
 		-- upvalues: var38 (ref), var27 (ref), var39 (ref), var37 (ref)
 		if var38.current then
 			if var27.onClose then
@@ -67,7 +67,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 			var37(false)
 		end
 	end)
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function()
 		-- upvalues: reducedMotion (ref), var43 (ref), otterModule (copy), var41 (ref), var35 (ref)
 		if reducedMotion then
 			var43(otterModule.instant(0))
@@ -81,7 +81,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 		}))
 		var41(otterModule.ease(0, { duration = var35.Time.Time_100 }))
 	end, {})
-	local var44 = reactModule.useCallback(function(p1) --[[ line: 122 ]]
+	local var44 = reactModule.useCallback(function(p1)
 		-- upvalues: var38 (ref), var39 (ref), reducedMotion (ref), var43 (ref), otterModule (copy), size800 (ref), var41 (ref), var35 (ref), var37 (ref)
 		if var38.current then return end
 		var39.current = p1
@@ -101,18 +101,18 @@ local function Dialog(p0) --[[ line: 70 ]]
 		var37(true)
 		var38.current = true
 	end, { size800, reducedMotion })
-	local var45 = reactModule.useMemo(function() --[[ line: 144 ]]
+	local var45 = reactModule.useMemo(function()
 		return Instance.new("Folder")
 	end, {})
-	reactModule.useEffect(function() --[[ line: 148 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var45 (ref)
-		return function() --[[ line: 149 ]]
+		return function()
 			-- upvalues: var45 (copy)
 			var45:Destroy()
 		end
 	end, { var45 })
 	local var46, var47 = reactModule.useState(false)
-	local var48 = reactModule.useCallback(function(p2) --[[ line: 157 ]]
+	local var48 = reactModule.useCallback(function(p2)
 		-- upvalues: var45 (ref), var47 (ref)
 		if p2 then
 			var45.Parent = p2
@@ -126,7 +126,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 	local var49 = reactModule.createElement(viewModule, { ZIndex = 2, tag = var28.container.tag }, {
 		Shadow = reactModule.createElement(imageModule, {
 			Image = SHADOW_IMAGE,
-			Size = var30:map(function(p3) --[[ line: 173 ]]
+			Size = var30:map(function(p3)
 				-- upvalues: SHADOW_SIZE (copy)
 				return UDim2.fromOffset(p3.X + SHADOW_SIZE * 2, p3.Y + SHADOW_SIZE * 2)
 			end),
@@ -171,7 +171,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 	t_2.CloseAffordance = createElement_2
 	t_2.DialogBody = reactModule.createElement(viewModule, {
 		tag = var28.body.tag,
-		onAbsoluteSizeChanged = function(value) --[[ line: 219 ]]
+		onAbsoluteSizeChanged = function(value)
 			-- upvalues: var31 (ref)
 			local absoluteSize = value.AbsoluteSize
 			
@@ -199,7 +199,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 			ZIndex = 2,
 			Size = UDim2.fromScale(2, 2),
 			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onActivated = function() --[[ line: 243 ]]
+			onActivated = function()
 				-- upvalues: var27 (ref), var44 (ref), reducedMotion (ref), onCloseCallbackReasonModule (copy)
 				if var27.onClose then
 					if var44 and not reducedMotion then
@@ -210,7 +210,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 					var27.onClose(onCloseCallbackReasonModule.BackdropClick)
 				end
 			end,
-			backgroundStyle = if reducedMotion or not var40 then var28.backdrop.backgroundStyle else var40:map(function(p4) --[[ line: 253 ]]
+			backgroundStyle = if reducedMotion or not var40 then var28.backdrop.backgroundStyle else var40:map(function(p4)
 				-- upvalues: var28 (ref)
 				return {
 					Color3 = var28.backdrop.backgroundStyle.Color3,
@@ -226,7 +226,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 	t_4.DialogContentWrapper = reactModule.createElement(viewModule, {
 		ZIndex = 2,
 		ref = if not reducedMotion then var48 else nil,
-		Position = if reducedMotion or not var42 then nil else var42:map(function(p5) --[[ line: 273 ]]
+		Position = if reducedMotion or not var42 then nil else var42:map(function(p5)
 			return UDim2.new(0.5, 0, 0.5, p5)
 		end),
 		sizeConstraint = if not reducedMotion then { MaxSize = Vector2.new(var29 + SHADOW_SIZE * 2, 1e999) } else nil,
@@ -234,7 +234,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 			["anchor-center-center size-full"] = not reducedMotion,
 			["size-full"] = reducedMotion
 		},
-		GroupTransparency = if reducedMotion or not var36 or not var42 then nil else var42:map(function(p6) --[[ line: 288 ]]
+		GroupTransparency = if reducedMotion or not var36 or not var42 then nil else var42:map(function(p6)
 			-- upvalues: size800 (ref)
 			return p6 / size800
 		end)
@@ -247,7 +247,7 @@ local function Dialog(p0) --[[ line: 70 ]]
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p7, p8) --[[ line: 328 | named "DialogContainer" ]]
+return reactModule.memo(reactModule.forwardRef(function(p7, p8)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), dialogProviderModule (ref), Dialog (ref), dashModule (ref)
 	local var58 = withDefaultsModule(p7, t)
 	

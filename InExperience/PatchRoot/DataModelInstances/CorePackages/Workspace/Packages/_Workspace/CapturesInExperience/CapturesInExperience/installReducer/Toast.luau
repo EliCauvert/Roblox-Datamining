@@ -10,18 +10,18 @@ return roduxModule.createReducer({
 	ToastConfig = nil,
 	ToastType = capturesToastTypeModule.None
 }, {
-	[require(parent.Actions.ToastVanished).name] = function(p0, _) --[[ line: 26 ]]
+	[require(parent.Actions.ToastVanished).name] = function(p0, _)
 		-- upvalues: capturesToastTypeModule (ref)
 		return if p0.ToastType == capturesToastTypeModule.None then p0 else {
 			IsDismissed = false,
 			ToastType = capturesToastTypeModule.None
 		}
 	end,
-	[require(parent.Actions.ToastDismissed).name] = function(p1, _) --[[ line: 37 ]]
+	[require(parent.Actions.ToastDismissed).name] = function(p1, _)
 		-- upvalues: capturesToastTypeModule (ref), dashModule (ref)
 		return if p1.IsDismissed then p1 elseif p1.ToastType == capturesToastTypeModule.None then p1 else dashModule.join(p1, { IsDismissed = true })
 	end,
-	[require(parent.Actions.ToastTriggered).name] = function(p2, p3) --[[ line: 51 ]]
+	[require(parent.Actions.ToastTriggered).name] = function(p2, p3)
 		-- upvalues: dashModule (ref)
 		return if p2.ToastType == p3.toastType and not p2.IsDismissed and dashModule.shallowEqual(p2.ToastConfig, p3.toastConfig) then p2 else {
 			IsDismissed = false,

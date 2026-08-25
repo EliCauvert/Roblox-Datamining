@@ -14,33 +14,33 @@ local _ = require(inExperienceShop.Types)
 local _ = require(script.Parent.ItemDetailsView)
 local t = { product = "Feature.DeveloperProducts.Label.Product" }
 
-local function _(p0, p1) --[[ line: 47 | named "categoryLabelForType" ]]
+local function _(p0, p1)
 	return if p0 == "GamePass" then "Game pass" else p1
 end
 
-return function(p2) --[[ line: 54 | named "useItemDetailsViewModel" ]]
+return function(p2)
 	-- upvalues: useLocalization (ref), t (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), var8 (ref), sharedFlagsModule (ref), abuseVectorModule (ref), useShopReportOverflowModule (ref), formatUpdatedDateModule (ref)
 	local item = p2.item
 	local var11 = useLocalization(t)
 	local var12 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
-	local var13 = signalsReactModule.useSignalState(function(p3) --[[ line: 64 ]]
+	local var13 = signalsReactModule.useSignalState(function(p3)
 		-- upvalues: var12 (ref), item (ref)
 		return var12.getOwnership(p3)[item.id]
 	end)
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function()
 		-- upvalues: item (ref), var12 (ref)
 		if item.itemType == "GamePass" then
 			var12.fetchGamePassOwnership(item.id)
 		end
 	end, { item.id, item.itemType, var12.fetchGamePassOwnership })
 	local var14 = if var13 ~= nil then item.isOwned else var13
-	local var15 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: initiateShopItemPurchaseModule (copy), item (ref), var8 (copy)
 		initiateShopItemPurchaseModule(item.id, item.itemType, if var8 then var8.Category else nil)
 	end, { item.id, item.itemType })
 	local var16 = useShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = sharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
-		buildReportSession = reactModule.useCallback(function() --[[ line: 89 ]]
+		buildReportSession = reactModule.useCallback(function()
 			-- upvalues: item (ref), abuseVectorModule (copy)
 			return if item.itemType == "GamePass" then {
 				abuseVector = abuseVectorModule.GamePass,
@@ -51,7 +51,7 @@ return function(p2) --[[ line: 54 | named "useItemDetailsViewModel" ]]
 			}
 		end, { item.id, item.itemType })
 	})
-	local var17 = reactModule.useMemo(function() --[[ line: 107 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: formatUpdatedDateModule (copy), item (ref)
 		return formatUpdatedDateModule(item.updated)
 	end, { item.updated })
@@ -79,7 +79,7 @@ return function(p2) --[[ line: 54 | named "useItemDetailsViewModel" ]]
 		onOverflowMenuClosed = var16.onOverflowMenuClosed,
 		onMenuItemActivated = var16.onMenuItemActivated,
 		onReportClose = var16.onReportClose,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p4) --[[ line: 115 ]]
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p4)
 			-- upvalues: var20 (ref)
 			local x = p4.AbsoluteSize.X
 			
@@ -87,7 +87,7 @@ return function(p2) --[[ line: 54 | named "useItemDetailsViewModel" ]]
 				return
 			end
 			local var21 = x < 480
-			var20(function(p5) --[[ line: 121 ]]
+			var20(function(p5)
 				-- upvalues: var21 (ref)
 				return if p5 == var21 then p5 else var21
 			end)

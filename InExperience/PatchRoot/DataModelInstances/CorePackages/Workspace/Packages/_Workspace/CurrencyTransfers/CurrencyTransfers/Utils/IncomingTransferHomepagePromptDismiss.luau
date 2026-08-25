@@ -4,7 +4,7 @@ local list = {
 	"HomeIncomingRobuxTransferAgeGateBanner"
 }
 
-local function dismissPromptTypes(p0, p1) --[[ line: 23 ]]
+local function dismissPromptTypes(p0, p1)
 	local t = {}
 	local t_1 = {}
 	
@@ -19,12 +19,12 @@ local function dismissPromptTypes(p0, p1) --[[ line: 23 ]]
 	return t_1
 end
 
-local function reportDismissForAllPromptTypes(p2, p3, p4, p5) --[[ line: 38 ]]
+local function reportDismissForAllPromptTypes(p2, p3, p4, p5)
 	local var5 = nil
 	
 	for i, v in p4 do
 		local var6 = p2(p3, v, p5)
-		var5 = if var5 == nil then var6 else var5:andThen(function() --[[ line: 50 ]]
+		var5 = if var5 == nil then var6 else var5:andThen(function()
 			-- upvalues: var6 (ref)
 			return var6
 		end)
@@ -33,13 +33,13 @@ local function reportDismissForAllPromptTypes(p2, p3, p4, p5) --[[ line: 38 ]]
 end
 
 return {
-	createCallbacks = function(p6) --[[ line: 58 ]]
+	createCallbacks = function(p6)
 		-- upvalues: list (ref), parent (ref), dismissPromptTypes (ref), reportDismissForAllPromptTypes (ref)
 		local promptId = p6.promptId
 		local onReportPromptDismissFailed = p6.onReportPromptDismissFailed
 		
 		return {
-			optimisticHide = function() --[[ line: 63 ]]
+			optimisticHide = function()
 				-- upvalues: parent (copy), p6 (ref), dismissPromptTypes (copy), list (ref)
 				local dismissEntry = require(parent.SduiSharedUtilities).getSduiApiStore().dismissEntry
 				
@@ -53,7 +53,7 @@ return {
 				end
 				dismissPromptTypes(dismissEntry, list)
 			end,
-			commitDismiss = function() --[[ line: 78 ]]
+			commitDismiss = function()
 				-- upvalues: parent (copy), dismissPromptTypes (copy), list (ref), p6 (ref), reportDismissForAllPromptTypes (copy), promptId (ref), onReportPromptDismissFailed (ref)
 				local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 				local sduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore()
@@ -64,7 +64,7 @@ return {
 				if networking == nil then
 					return
 				end
-				reportDismissForAllPromptTypes(require(parent.SduiSharedContent).reportPromptDismiss, networking, list, promptId):andThen(function() --[[ line: 95 ]]
+				reportDismissForAllPromptTypes(require(parent.SduiSharedContent).reportPromptDismiss, networking, list, promptId):andThen(function()
 					-- upvalues: dismissEntry (ref), var9 (write), sduiApiStore (ref), sduiSharedUtilitiesModule (ref)
 					if dismissEntry ~= nil then
 						for i, v in var9 do
@@ -74,7 +74,7 @@ return {
 							})
 						end
 					end
-				end):catch(function(p7) --[[ line: 105 ]]
+				end):catch(function(p7)
 					-- upvalues: onReportPromptDismissFailed (copy)
 					if onReportPromptDismissFailed then
 						onReportPromptDismissFailed(p7)

@@ -2,7 +2,7 @@
 
 return {
 	DEFAULT_REACTION = thumbsUp,
-	decide = function(p0, p1, p2) --[[ line: 40 ]]
+	decide = function(p0, p1, p2)
 		-- upvalues: thumbsUp (ref)
 		local var0 = p0 ~= nil
 		

@@ -17,7 +17,7 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 37 ]]
+function t_1.new()
 	-- upvalues: discoveryTypesModule (ref), t_1 (ref)
 	local t = { dataSource = discoveryTypesModule.DataSourceType.Unknown }
 	setmetatable(t, t_1)
@@ -25,7 +25,7 @@ function t_1.new() --[[ line: 37 ]]
 	return t
 end
 
-function t_1.mockFromExploreJsonData(p0, p1, p2) --[[ line: 47 ]]
+function t_1.mockFromExploreJsonData(p0, p1, p2)
 	-- upvalues: t_1 (ref)
 	return t_1.fromExploreJsonData({
 		sortDisplayName = "",
@@ -37,12 +37,12 @@ function t_1.mockFromExploreJsonData(p0, p1, p2) --[[ line: 47 ]]
 	})
 end
 
-function t_1.mockFromOmniApi(p3) --[[ line: 60 ]]
+function t_1.mockFromOmniApi(p3)
 	-- upvalues: t_1 (ref)
 	return t_1.fromOmniApi({ topic = "", treatmentType = "", topicId = p3 })
 end
 
-function t_1:fromExploreJsonData() --[[ line: 69 ]]
+function t_1:fromExploreJsonData()
 	-- upvalues: t_1 (ref), discoveryTypesModule (ref), fFlagEnableTopSongsSort (ref), t (ref)
 	local var4 = t_1.new()
 	var4.dataSource = discoveryTypesModule.DataSourceType.ExploreApi
@@ -72,7 +72,7 @@ function t_1:fromExploreJsonData() --[[ line: 69 ]]
 	return var4
 end
 
-function t_1:fromOmniApi() --[[ line: 101 ]]
+function t_1:fromOmniApi()
 	-- upvalues: t_1 (ref), discoveryTypesModule (ref)
 	local var5 = t_1.new()
 	var5.dataSource = discoveryTypesModule.DataSourceType.DiscoveryApi
@@ -89,7 +89,7 @@ function t_1:fromOmniApi() --[[ line: 101 ]]
 end
 
 if fFlagSearchOmniAutocompletePage then
-	function t_1:fromOmniAutocompleteApi() --[[ line: 118 ]]
+	function t_1:fromOmniAutocompleteApi()
 		-- upvalues: t_1 (ref), discoveryTypesModule (ref)
 		local var6 = t_1.new()
 		var6.dataSource = discoveryTypesModule.DataSourceType.OmniAutocompleteApi
@@ -103,11 +103,11 @@ if fFlagSearchOmniAutocompletePage then
 		return var6
 	end
 end
-function t_1.makeTopSearchTopicKey(p4, p5) --[[ line: 133 ]]
+function t_1.makeTopSearchTopicKey(p4, p5)
 	return `{p4}_{p5}`
 end
 
-function t_1:fromTopSearchApi(p6) --[[ line: 137 ]]
+function t_1:fromTopSearchApi(p6)
 	-- upvalues: t_1 (ref), discoveryTypesModule (ref)
 	local var7 = t_1.new()
 	var7.dataSource = discoveryTypesModule.DataSourceType.SearchApi
@@ -121,22 +121,22 @@ function t_1:fromTopSearchApi(p6) --[[ line: 137 ]]
 	return var7
 end
 
-function t_1.makeSearchTopicKey(p7, p8) --[[ line: 151 ]]
+function t_1.makeSearchTopicKey(p7, p8)
 	-- upvalues: t_1 (ref)
 	return t_1.makeTopSearchTopicKey(p7, p8)
 end
 
-function t_1.fromSearchApi(p9, p10) --[[ line: 155 ]]
+function t_1.fromSearchApi(p9, p10)
 	-- upvalues: t_1 (ref)
 	return t_1.fromTopSearchApi(p9, p10)
 end
 
-function t_1:isOmni() --[[ line: 159 ]]
+function t_1:isOmni()
 	-- upvalues: discoveryTypesModule (ref)
 	return self.dataSource == discoveryTypesModule.DataSourceType.DiscoveryApi
 end
 
-function t_1:isSponsored() --[[ line: 167 ]]
+function t_1:isSponsored()
 	return self.topicId == "400000000" or self.gameSetTypeId == "27"
 end
 

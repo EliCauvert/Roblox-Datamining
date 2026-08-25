@@ -10,7 +10,7 @@ local useParsedBadUtterancesModule = require(interventionShared.Hooks.useParsedB
 local useRestrictionEndDateInfoModule = require(interventionShared.Hooks.useRestrictionEndDateInfo)
 local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImprovements)
 
-return reactModule.memo(function(p0) --[[ line: 49 | named "UniversalFeatureRestrictionDialog" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useEffect (ref), fFlagUFRImprovementsModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
 	local moderationDetail = p0.moderationDetail
 	local consequenceTransparencyMessage = moderationDetail.consequenceTransparencyMessage
@@ -30,7 +30,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "UniversalFeatureRest
 		endDate = moderationDetail.endDate,
 		acknowledgeable = acknowledgeable
 	})
-	useEffect(function() --[[ line: 75 ]]
+	useEffect(function()
 		-- upvalues: fFlagUFRImprovementsModule (copy), p0 (ref)
 		if fFlagUFRImprovementsModule and p0.onShownCallback then
 			p0.onShownCallback()
@@ -45,7 +45,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "UniversalFeatureRest
 		isAppealable = var13.isAppealable,
 		evidence = joined,
 		violationReason = joined_1,
-		onDismiss = useCallback(function() --[[ line: 82 ]]
+		onDismiss = useCallback(function()
 			-- upvalues: p0 (ref)
 			p0.onDismiss()
 			

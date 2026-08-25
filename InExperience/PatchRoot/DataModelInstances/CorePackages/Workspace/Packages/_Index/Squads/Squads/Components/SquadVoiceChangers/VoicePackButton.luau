@@ -9,10 +9,10 @@ local t = {
 	LayoutOrder = 1,
 	isSelected = false,
 	isVoiceChangerActive = false,
-	onActivated = function() --[[ line: 28 ]] end
+	onActivated = function() end
 }
 
-return function(p0) --[[ line: 32 | named "VoicePackButton" ]]
+return function(p0)
 	-- upvalues: cryo (ref), t (ref), useTokens (ref), react (ref), foundationModule (ref)
 	local var4 = cryo.Dictionary.join(t, p0)
 	local size = useTokens().Size

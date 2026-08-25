@@ -1,6 +1,6 @@
 ﻿local getFFlagEnableShimmeringIconLegacyChatServiceModule = require(game:GetService("CoreGui").RobloxGui.Modules.Flags.getFFlagEnableShimmeringIconLegacyChatService)
 
-return function(p0, p1, p2) --[[ line: 5 ]]
+return function(p0, p1, p2)
 	-- upvalues: getFFlagEnableShimmeringIconLegacyChatServiceModule (ref)
 	local _ = nil
 	

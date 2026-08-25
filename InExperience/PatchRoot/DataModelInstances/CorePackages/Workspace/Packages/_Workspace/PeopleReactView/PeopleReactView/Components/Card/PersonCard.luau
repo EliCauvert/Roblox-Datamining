@@ -16,19 +16,19 @@ local getFFlagPeoplePageLazyRenderCards = flags.GetFFlagPeoplePageLazyRenderCard
 local getFFlagFixPeoplePageCardTooltip = flags.GetFFlagFixPeoplePageCardTooltip
 local fFlagPeopleCardsEnableVirtualizedGrid = flags.FFlagPeopleCardsEnableVirtualizedGrid
 
-return reactModule.memo(function(p0) --[[ line: 36 | named "PersonCard" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getFFlagPeoplePageEnablePersonSignalStore (ref), signalsReactModule (ref), signalsModule (ref), reactIsModule (ref), reactModule (ref), fFlagPeopleCardsEnableVirtualizedGrid (ref), localPlayer (ref), view (ref), getFFlagFixPeoplePageCardTooltip (ref), cardThumbnailModule (ref), getFFlagPeoplePageLazyRenderCards (ref), cardDetailsModule (ref), cardTooltipModule (ref)
-	local var10 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p1) --[[ line: 38 ]]
+	local var10 = if getFFlagPeoplePageEnablePersonSignalStore() then signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p1)
 		-- upvalues: p0 (ref)
 		return if type(p0.layoutOrder) == "function" then p0.layoutOrder(p1) else p0.layoutOrder or 0
 	end)) else nil
-	local var11 = if reactIsModule.isBinding(p0.width) then p0.width:map(function(p2) --[[ line: 48 ]]
+	local var11 = if reactIsModule.isBinding(p0.width) then p0.width:map(function(p2)
 		return UDim2.new(0, p2, 0, 0)
 	end) else UDim2.new(0, p0.width, 0, 0)
 	local var12, var13 = reactModule.useState(if fFlagPeopleCardsEnableVirtualizedGrid then false else p0.showTooltip)
 	
 	if fFlagPeopleCardsEnableVirtualizedGrid then
-		reactModule.useEffect(function() --[[ line: 60 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var13 (ref), p0 (ref), localPlayer (copy)
 			var13(p0.showTooltip and (localPlayer ~= nil and p0.person.UserId == localPlayer.UserId))
 		end, { p0.showTooltip, p0.person })
@@ -50,7 +50,7 @@ return reactModule.memo(function(p0) --[[ line: 36 | named "PersonCard" ]]
 			CardDetails = reactModule.createElement(cardDetailsModule, { layoutOrder = 2, person = p0.person })
 		}),
 		CardTooltip = if var12 then reactModule.createElement(cardTooltipModule, {
-			action = reactModule.useCallback(function() --[[ line: 65 ]]
+			action = reactModule.useCallback(function()
 				-- upvalues: var13 (ref), p0 (ref)
 				var13(false)
 				p0.onDismissTooltip()

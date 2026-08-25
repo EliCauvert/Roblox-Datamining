@@ -6,7 +6,7 @@ local configModule = require(script.Parent.Config)
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 17 ]]
+function t.new(p0, p1)
 	-- upvalues: t (ref)
 	local focusController = nil
 	
@@ -27,12 +27,12 @@ function t.new(p0, p1) --[[ line: 17 ]]
 	return tbl
 end
 
-function t:__getFocusControllerInternal() --[[ line: 40 ]]
+function t:__getFocusControllerInternal()
 	-- upvalues: focusControllerInternalApiModule (ref)
 	return self.focusController[focusControllerInternalApiModule]
 end
 
-function t:__findDefaultChildNode() --[[ line: 44 ]]
+function t:__findDefaultChildNode()
 	local layoutOrder
 	local var7 = 1e999
 	local var8 = nil
@@ -53,7 +53,7 @@ function t:__findDefaultChildNode() --[[ line: 44 ]]
 	return nil
 end
 
-function t:updateNavProps(p2) --[[ line: 98 ]]
+function t:updateNavProps(p2)
 	-- upvalues: inputBindingsEqualModule (ref)
 	local var12 = p2.restorePreviousChildFocus ~= nil and p2.restorePreviousChildFocus
 	local inputBindings = self.inputBindings
@@ -67,7 +67,7 @@ function t:updateNavProps(p2) --[[ line: 98 ]]
 	end
 end
 
-function t:focus() --[[ line: 116 ]]
+function t:focus()
 	-- upvalues: configModule (ref), cryoModule (ref), debugPrintModule (ref)
 	if not configModule.Enabled then return end
 	local focusControllerInternal = self:__getFocusControllerInternal()
@@ -100,7 +100,7 @@ function t:focus() --[[ line: 116 ]]
 			debugPrintModule("[FOCUS] Default child specified is not valid. Wait for it to be assigned...")
 			self.timeout = processTime + 0.5
 		end
-		task.delay(0, function() --[[ line: 155 ]]
+		task.delay(0, function()
 			-- upvalues: focusControllerInternal (ref), self (ref)
 			if focusControllerInternal:isInProgressFocus(self) then
 				self:focus()
@@ -124,12 +124,12 @@ function t:focus() --[[ line: 116 ]]
 	var18:focus()
 end
 
-function t:attachToTree(p3, p4) --[[ line: 180 ]]
+function t:attachToTree(p3, p4)
 	-- upvalues: cryoModule (ref)
 	local focusControllerInternal = self:__getFocusControllerInternal()
 	focusControllerInternal:registerNode(p3, self.ref, self)
 	self.parent = p3
-	self.disconnectSelectionListener = focusControllerInternal:subscribeToSelectionChange(function() --[[ line: 185 ]]
+	self.disconnectSelectionListener = focusControllerInternal:subscribeToSelectionChange(function()
 		-- upvalues: focusControllerInternal (ref), self (ref), p4 (ref), cryoModule (copy)
 		local var20 = focusControllerInternal:isNodeFocused(self)
 		p4(var20)
@@ -143,7 +143,7 @@ function t:attachToTree(p3, p4) --[[ line: 180 ]]
 	end)
 end
 
-function t:detachFromTree() --[[ line: 209 ]]
+function t:detachFromTree()
 	self:__getFocusControllerInternal():deregisterNode(self.parent, self.ref)
 	
 	if self.disconnectSelectionListener ~= nil then

@@ -16,10 +16,10 @@ local t = {
 	bodyText = "Placeholder body",
 	onAccepted = nil,
 	onDenied = nil,
-	onHeightChanged = function(_) --[[ line: 43 ]] end
+	onHeightChanged = function(_) end
 }
 
-return function(p0) --[[ line: 51 | named "ConversationModal" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), useChatPagePaddingModule (ref), useEffect (ref), useMemo (ref), enum (ref), reactModule (ref), buttonStack (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local style = var7.style or useStyle()
@@ -28,14 +28,14 @@ return function(p0) --[[ line: 51 | named "ConversationModal" ]]
 	local size1000 = style.Tokens.Size.Size_1000
 	local size500 = style.Tokens.Size.Size_500
 	local var11 = useChatPagePaddingModule()
-	useEffect(function() --[[ line: 62 ]]
+	useEffect(function()
 		-- upvalues: var7 (ref)
-		return function() --[[ line: 63 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			var7.onHeightChanged(0)
 		end
 	end, {})
-	local var12 = useMemo(function() --[[ line: 68 ]]
+	local var12 = useMemo(function()
 		-- upvalues: var7 (ref), enum (copy)
 		local t = {}
 		
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 51 | named "ConversationModal" ]]
 		LayoutOrder = var7.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[reactModule.Change.AbsoluteSize] = function(p1) --[[ line: 105 ]]
+		[reactModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: var7 (ref)
 			var7.onHeightChanged(p1.AbsoluteSize.Y)
 		end

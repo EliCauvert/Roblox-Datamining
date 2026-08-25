@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local _ = require(avatarExperienceSave.SaveButton.useSaveButtonProps)
 
-return function(p0) --[[ line: 14 | named "SaveButton" ]]
+return function(p0)
 	-- upvalues: foundationModule (ref), reactModule (ref)
 	return reactModule.createElement(foundationModule.Button, {
 		text = p0.text or "Save",

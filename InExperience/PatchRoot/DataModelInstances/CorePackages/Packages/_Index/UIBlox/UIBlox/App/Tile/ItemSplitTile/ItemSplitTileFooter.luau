@@ -17,13 +17,13 @@ itemSplitTileFooter.validateProps = tModule.strictInterface({
 	layoutOrder = tModule.optional(tModule.number)
 })
 
-function itemSplitTileFooter.render(p0) --[[ line: 33 ]]
+function itemSplitTileFooter.render(p0)
 	-- upvalues: imagesModule (ref), withStyleModule (ref), getIconSizeUDim2Module (ref), iconSizeModule (ref), roactModule (ref), skeleton (ref), imageSetComponentModule (ref)
 	local priceText = p0.props.priceText
 	local isOwned = p0.props.isOwned
 	local var9 = if isOwned then imagesModule["icons/status/item/owned"] else imagesModule["icons/common/robux_small"]
 	
-	return withStyleModule(function(p1) --[[ line: 38 ]]
+	return withStyleModule(function(p1)
 		-- upvalues: priceText (ref), isOwned (ref), getIconSizeUDim2Module (copy), iconSizeModule (copy), roactModule (copy), p0 (ref), skeleton (copy), imageSetComponentModule (copy), var9 (ref)
 		local font = p1.Font.Body.Font
 		local var10 = p1.Font.BaseSize * p1.Font.Body.RelativeSize

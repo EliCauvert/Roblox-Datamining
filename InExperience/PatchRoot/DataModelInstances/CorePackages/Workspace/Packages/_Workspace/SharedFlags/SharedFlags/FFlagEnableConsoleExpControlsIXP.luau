@@ -1,7 +1,7 @@
 ﻿local appStorageService = game:GetService("AppStorageService")
 local enableConsoleExpControlsIXP684 = game:DefineFastFlag("EnableConsoleExpControlsIXP684", false)
 local _ = { HAMBURGER = "hamburger", SUBMENU = "submenu" }
-local ok, status = pcall(function() --[[ line: 12 ]]
+local ok, status = pcall(function()
 	-- upvalues: appStorageService (ref)
 	return appStorageService:GetItem("ExperienceMenuVersion")
 end)

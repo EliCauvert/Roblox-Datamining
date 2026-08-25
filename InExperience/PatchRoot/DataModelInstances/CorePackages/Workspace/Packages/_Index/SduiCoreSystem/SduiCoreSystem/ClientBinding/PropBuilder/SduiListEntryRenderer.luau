@@ -18,7 +18,7 @@ local sduiDeferredItemStubModule = require(sduiCoreSystem.ClientBinding.PropBuil
 local fFlagSduiDeferredListItems = require(parent.SharedFlags).FFlagSduiDeferredListItems
 local t = {}
 
-local function captureErrorContext(p0) --[[ line: 63 ]]
+local function captureErrorContext(p0)
 	return {
 		name = p0.debugName,
 		componentType = p0.currentComponentType,
@@ -27,7 +27,7 @@ local function captureErrorContext(p0) --[[ line: 63 ]]
 	}
 end
 
-local function unwrapEntryData(p1) --[[ line: 75 ]]
+local function unwrapEntryData(p1)
 	if typeof(p1) ~= "table" then
 		return { value = p1 }
 	end
@@ -46,10 +46,10 @@ local function unwrapEntryData(p1) --[[ line: 75 ]]
 	return t
 end
 
-local function fillInputs(p2, p3, p4, p5, p6, p7, p8) --[[ line: 99 ]]
+local function fillInputs(p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: buildInputsForNestedComponentModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiParseHelpersModule (ref)
 	if p3 == nil then return end
-	local ok, status = pcall(function() --[[ line: 111 ]]
+	local ok, status = pcall(function()
 		-- upvalues: buildInputsForNestedComponentModule (copy), p4 (ref), p3 (ref), p5 (ref), p6 (ref), p2 (ref), p7 (ref)
 		buildInputsForNestedComponentModule(p4, p3, p5, p6, p2, p7)
 	end)
@@ -66,12 +66,12 @@ end
 
 return {
 	captureErrorContext = captureErrorContext,
-	createInputSlicer = function(p9, p10, p11, p12, p13) --[[ line: 142 ]]
+	createInputSlicer = function(p9, p10, p11, p12, p13)
 		-- upvalues: fillInputs (ref), cryoModule (ref), t (ref), unwrapEntryData (ref), fFlagSduiPoolBackedFeed (ref)
-		local function rawSlice(p14, p15) --[[ line: 149 ]]
+		local function rawSlice(p14, p15)
 			-- upvalues: p9 (ref), fillInputs (copy), p10 (ref), p11 (ref), p12 (ref), cryoModule (copy), t (copy), unwrapEntryData (copy)
 			if p14.sourceMode == "literal" then
-				return if p15 then p9 else function(p16) --[[ line: 159 ]]
+				return if p15 then p9 else function(p16)
 					-- upvalues: fillInputs (copy), p14 (ref), p9 (copy), p10 (copy), p11 (copy), p12 (copy)
 					local t = {}
 					fillInputs(t, p14.inputs, p9, p10, p16, p11, p12)
@@ -81,10 +81,10 @@ return {
 			end
 			local item = p14.item
 			
-			return if p15 then function(p18) --[[ line: 179 ]]
+			return if p15 then function(p18)
 				-- upvalues: cryoModule (copy), p9 (copy), item (ref), t (copy)
 				return cryoModule.Dictionary.join(p9(p18), if typeof(item) == "table" then item else t)
-			end else function(p17) --[[ line: 186 ]]
+			end else function(p17)
 				-- upvalues: unwrapEntryData (copy), item (ref), fillInputs (copy), p14 (ref), p9 (copy), p10 (copy), p11 (copy), p12 (copy)
 				local var16 = unwrapEntryData(item)
 				fillInputs(var16, p14.inputs, p9, p10, p17, p11, p12)
@@ -93,11 +93,11 @@ return {
 			end
 		end
 		
-		return if fFlagSduiPoolBackedFeed and p13 ~= nil then function(p19, p20) --[[ line: 204 ]]
+		return if fFlagSduiPoolBackedFeed and p13 ~= nil then function(p19, p20)
 			-- upvalues: rawSlice (ref), p13 (ref), cryoModule (copy)
 			local var17 = rawSlice(p19, p20)
 			
-			return function(p21) --[[ line: 206 ]]
+			return function(p21)
 				-- upvalues: p13 (copy), p19 (ref), var17 (ref), cryoModule (copy)
 				local var18 = p13(p19)
 				
@@ -105,7 +105,7 @@ return {
 			end
 		end else rawSlice
 	end,
-	buildEntryConfigs = function(p22, p23, p24, p25, p26, p27, p28, p29, p30, p31) --[[ line: 235 ]]
+	buildEntryConfigs = function(p22, p23, p24, p25, p26, p27, p28, p29, p30, p31)
 		-- upvalues: fFlagSduiPoolBackedFeed (ref), sduiPropUtilsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiDeferredListItems (ref), sduiDeferredItemStubModule (ref), buildConfigForComponent (ref)
 		local t = {}
 		local t_1 = {}

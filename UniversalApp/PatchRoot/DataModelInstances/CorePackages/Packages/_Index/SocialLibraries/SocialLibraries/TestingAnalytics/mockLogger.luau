@@ -1,3 +1,3 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	return { info = p0.fn() }
 end

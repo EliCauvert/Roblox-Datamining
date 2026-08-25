@@ -21,12 +21,12 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45 | named "Tabs" ]]
+return reactModule.memo(reactModule.forwardRef(function(value, p0)
 	-- upvalues: useTokensModule (ref), withDefaultsModule (ref), t (ref), reactModule (ref), dashModule (ref), fillBehaviorModule (ref), flagsModule (ref), useAnimatedHighlightModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), overflowScrollContainerModule_1 (ref), inputSizeModule (ref), tabItemModule (ref)
 	local var15 = useTokensModule()
 	local var16 = withDefaultsModule(value, t)
 	local var17, var18 = reactModule.useState(var16.defaultActiveTabId or dashModule.get(var16, { 1, "id" }))
-	local var19 = reactModule.useCallback(function(p1) --[[ line: 51 ]]
+	local var19 = reactModule.useCallback(function(p1)
 		-- upvalues: var16 (ref), var18 (ref)
 		if var16.onActivated then
 			var16.onActivated(p1)
@@ -35,7 +35,7 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 	end)
 	local var20 = var16.fillBehavior == fillBehaviorModule.Fill
 	local activeTabId = var16.activeTabId or var17
-	local var22 = dashModule.find(var16.tabs, function(p2) --[[ line: 60 ]]
+	local var22 = dashModule.find(var16.tabs, function(p2)
 		-- upvalues: activeTabId (ref)
 		return p2.id == activeTabId
 	end)
@@ -48,7 +48,7 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 		local var26, var27 = reactModule.useBinding(0)
 		var24 = var26
 		local var28 = var27
-		var25 = reactModule.useCallback(function(p3) --[[ line: 70 ]]
+		var25 = reactModule.useCallback(function(p3)
 			-- upvalues: var28 (write)
 			var28(p3.AbsoluteSize.X)
 		end, {})
@@ -56,7 +56,7 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 	local var45
 	local _ = nil
 	local var29 = reactModule.useRef({})
-	local var30 = reactModule.useMemo(function() --[[ line: 78 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: var29 (ref), var16 (ref), reactModule (copy)
 		local current = var29.current
 		
@@ -79,7 +79,7 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 		tag = if flagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
 		Size = UDim2.fromScale(1, 0),
 		sizeConstraint = if flagsModule.FoundationUnifiedScrimScrolling and not var20 then {
-			MaxSize = var24:map(function(p4) --[[ line: 110 ]]
+			MaxSize = var24:map(function(p4)
 				return Vector2.new(p4, 1e999)
 			end)
 		} else nil
@@ -138,7 +138,7 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 	t_7.tag = t_8
 	t_7.Size = if var20 then UDim2.fromScale(1, 0) else nil
 	t_7.testId = `{var16.testId}--list`
-	t_6.TabList = createElement_4(viewModule, t_7, dashModule.map(var16.tabs, function(p5, p6) --[[ line: 160 ]]
+	t_6.TabList = createElement_4(viewModule, t_7, dashModule.map(var16.tabs, function(p5, p6)
 		-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var19 (ref), var16 (ref), var30 (write)
 		return reactModule.createElement(tabItemModule, {
 			id = p5.id,
@@ -176,12 +176,12 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 	t_1.AnimatedBorder = reactModule.createElement(viewModule, {
 		LayoutOrder = 0,
 		ZIndex = var16.ZIndex + 1,
-		Size = highlightWidth:map(function(p7) --[[ line: 201 ]]
+		Size = highlightWidth:map(function(p7)
 			-- upvalues: var15 (ref)
 			return UDim2.fromOffset(p7, var15.Stroke.Thick)
 		end),
 		AnchorPoint = if flagsModule.FoundationFixTabsBorderPosition then Vector2.new(0, 1) else nil,
-		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p8) --[[ line: 205 ]]
+		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p8)
 			-- upvalues: flagsModule (copy), var15 (ref)
 			local var46 = p8[2]
 			

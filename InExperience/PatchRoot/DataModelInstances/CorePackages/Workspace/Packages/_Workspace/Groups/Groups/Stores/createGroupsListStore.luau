@@ -11,7 +11,7 @@ local t = {
 	canCreateGroup = true
 }
 
-local function translateResultToGroup(p0, p1) --[[ line: 38 ]]
+local function translateResultToGroup(p0, p1)
 	local var13
 	local group = p0.group or {}
 	local role = p0.role or {}
@@ -41,7 +41,7 @@ local function translateResultToGroup(p0, p1) --[[ line: 38 ]]
 	return t
 end
 
-local function compareNames(p2, p3) --[[ line: 62 ]]
+local function compareNames(p2, p3)
 	local lowerText = string.lower(p2)
 	local lowerText_1 = string.lower(p3)
 	local substring = string.sub(lowerText, 1, 1)
@@ -52,10 +52,10 @@ local function compareNames(p2, p3) --[[ line: 62 ]]
 	return if not (not var18 and var19) then if var18 and not var19 then false else lowerText < lowerText_1 else true
 end
 
-local function _(p4) --[[ line: 82 | named "sortGroups" ]]
+local function _(p4)
 	-- upvalues: compareNames (ref)
 	local cloned = table.clone(p4)
-	table.sort(cloned, function(p5, p6) --[[ line: 84 ]]
+	table.sort(cloned, function(p5, p6)
 		-- upvalues: compareNames (copy)
 		local isOwner = p5.isOwner or false
 		local isOwner_1 = p6.isOwner or false
@@ -68,7 +68,7 @@ local function _(p4) --[[ line: 82 | named "sortGroups" ]]
 	return cloned
 end
 
-local function getVisibleGroups(p7, p8) --[[ line: 107 ]]
+local function getVisibleGroups(p7, p8)
 	if not p8 or not p8.groups then
 		return {}
 	end
@@ -91,7 +91,7 @@ local function getVisibleGroups(p7, p8) --[[ line: 107 ]]
 	return t_1
 end
 
-local function movePrimaryGroupToFront(p9) --[[ line: 133 ]]
+local function movePrimaryGroupToFront(p9)
 	local var28 = nil
 	
 	for i, v in ipairs(p9) do
@@ -114,7 +114,7 @@ local function movePrimaryGroupToFront(p9) --[[ line: 133 ]]
 	return t
 end
 
-local _ = function(p10) --[[ line: 159 | named "deriveCanCreateGroup" ]]
+local _ = function(p10)
 	if not p10 then
 		return true
 	end
@@ -124,7 +124,7 @@ local _ = function(p10) --[[ line: 159 | named "deriveCanCreateGroup" ]]
 	return if groupLimit and currentGroupCount then currentGroupCount < groupLimit else true
 end
 
-local function collectGroupIds(p11) --[[ line: 171 ]]
+local function collectGroupIds(p11)
 	if not p11 then
 		return {}
 	end
@@ -138,13 +138,13 @@ local function collectGroupIds(p11) --[[ line: 171 ]]
 	return t
 end
 
-return function() --[[ line: 184 | named "createGroupsListStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), t (ref), groupsWebApiModule (ref), collectGroupIds (ref), cryoModule (ref), translateResultToGroup (ref), getVisibleGroups (ref), compareNames (ref), movePrimaryGroupToFront (ref)
 	local var31, var32 = signalsModule.createSignal(t)
 	local t_1 = {}
 	local t_2 = {}
 	
-	local function cleanup() --[[ line: 190 ]]
+	local function cleanup()
 		-- upvalues: t_1 (write), t_2 (write)
 		for i, v in t_1 do
 			v()
@@ -158,7 +158,7 @@ return function() --[[ line: 184 | named "createGroupsListStore" ]]
 	
 	return {
 		getState = var31,
-		fetchGroups = function(p12) --[[ line: 201 ]]
+		fetchGroups = function(p12)
 			-- upvalues: cleanup (ref), var32 (ref), groupsWebApiModule (copy), t_2 (write), signalsModule (copy), collectGroupIds (copy), cryoModule (copy), translateResultToGroup (copy), getVisibleGroups (copy), compareNames (copy), movePrimaryGroupToFront (copy), t_1 (write)
 			cleanup()
 			var32({
@@ -172,7 +172,7 @@ return function() --[[ line: 184 | named "createGroupsListStore" ]]
 			table.insert(t_2, userGroupsWithRoles_1)
 			table.insert(t_2, groupsMetadata_1)
 			local var40 = false
-			table.insert(t_1, signalsModule.createEffect(function(p13) --[[ line: 220 ]]
+			table.insert(t_1, signalsModule.createEffect(function(p13)
 				-- upvalues: var40 (write), userGroupsWithRoles (ref), var32 (copy), collectGroupIds (copy), groupsWebApiModule (copy), t_2 (copy), signalsModule (copy), groupsMetadata (ref), cryoModule (copy), translateResultToGroup (copy), p12 (ref), getVisibleGroups (copy), compareNames (copy), movePrimaryGroupToFront (copy), t_1 (copy)
 				if var40 then return end
 				local var41 = userGroupsWithRoles(p13)
@@ -204,7 +204,7 @@ return function() --[[ line: 184 | named "createGroupsListStore" ]]
 				end
 				local groupPolicies, groupPolicies_1 = groupsWebApiModule.GetGroupPolicies(collectGroupIds(var42))
 				table.insert(t_2, groupPolicies_1)
-				table.insert(t_1, signalsModule.createEffect(function(p14) --[[ line: 260 ]]
+				table.insert(t_1, signalsModule.createEffect(function(p14)
 					-- upvalues: var40 (copy), groupPolicies (ref), groupsMetadata (copy), cryoModule (copy), var42 (ref), translateResultToGroup (copy), p12 (copy), getVisibleGroups (copy), compareNames (copy), var32 (copy), movePrimaryGroupToFront (copy)
 					if var40 then return end
 					local var45 = groupPolicies(p14)
@@ -215,11 +215,11 @@ return function() --[[ line: 184 | named "createGroupsListStore" ]]
 					local var47 = if var46.status == "Success" then var46.data else nil
 					var40 = true
 					local var48 = if var45.status == "Success" then var45.data else nil
-					local cloned = table.clone(if var48 then getVisibleGroups(cryoModule.List.map(var42, function(p15) --[[ line: 278 ]]
+					local cloned = table.clone(if var48 then getVisibleGroups(cryoModule.List.map(var42, function(p15)
 						-- upvalues: translateResultToGroup (copy), p12 (copy)
 						return translateResultToGroup(p15, p12)
 					end), var48) else {})
-					table.sort(cloned, function(p16, p17) --[[ line: 84 ]]
+					table.sort(cloned, function(p16, p17)
 						-- upvalues: compareNames (copy)
 						local isOwner = p16.isOwner or false
 						local isOwner_1 = p17.isOwner or false
@@ -277,7 +277,7 @@ return function() --[[ line: 184 | named "createGroupsListStore" ]]
 				end))
 			end))
 		end,
-		reset = function() --[[ line: 311 ]]
+		reset = function()
 			-- upvalues: cleanup (ref), var32 (ref), t (copy)
 			cleanup()
 			var32(t)

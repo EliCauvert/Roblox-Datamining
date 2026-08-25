@@ -8,12 +8,12 @@ local var4 = var2
 local var5 = var3
 
 return {
-	createLeaderboardStoreInstance = function() --[[ line: 13 ]]
+	createLeaderboardStoreInstance = function()
 		-- upvalues: var5 (write), var1 (ref)
 		var5(var1())
 	end,
 	getLeaderboardStoreInstance = var4,
-	cleanUpInstance = function() --[[ line: 17 ]]
+	cleanUpInstance = function()
 		-- upvalues: var4 (write), var5 (write)
 		local var6 = var4(false)
 		

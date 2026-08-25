@@ -2,9 +2,9 @@
 local displayModule = require(parent.Display)
 local signalsModule = require(parent.Signals)
 
-return function() --[[ line: 13 | named "createAssistantBuildStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), displayModule (ref)
-	local var2 = signalsModule.createComputed(function(p0) --[[ line: 14 ]]
+	local var2 = signalsModule.createComputed(function(p0)
 		-- upvalues: displayModule (copy)
 		local displayStore = displayModule.GetDisplayStore(p0)
 		local viewportSize = displayStore.getViewportSize(p0)

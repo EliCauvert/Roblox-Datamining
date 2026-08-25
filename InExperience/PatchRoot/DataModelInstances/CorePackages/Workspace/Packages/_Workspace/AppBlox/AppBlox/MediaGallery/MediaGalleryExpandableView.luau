@@ -23,12 +23,12 @@ local t = {
 	numItemsShown = 4,
 	itemAspectRatio = 1.777777777778,
 	animationConfig = { dampingRatio = 1, frequency = 6.666666666667 },
-	onActivated = function() --[[ line: 39 ]] end,
-	onSelectionGained = function() --[[ line: 40 ]] end,
-	exitFullscreen = function() --[[ line: 41 ]] end
+	onActivated = function() end,
+	onSelectionGained = function() end,
+	exitFullscreen = function() end
 }
 
-return function(p0) --[[ line: 79 | named "MediaGalleryExpandableView" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (ref), useTokens (ref), constantsModule (ref), reactOtterModule (ref), reactModule (ref), useCursor (ref), useSelectionCursor (ref), cursorKind (ref), view (ref), icon (ref), iconSize (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), styledTextLabel (ref)
 	local var8 = cryoModule.Dictionary.join(t, p0)
 	local var9 = useStyle()
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 79 | named "MediaGalleryExpandableView" ]]
 		ExpandableArea = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = var12:map(function(p1) --[[ line: 229 ]]
+			Size = var12:map(function(p1)
 				return UDim2.new(1, 0, 0, p1)
 			end)
 		}),
@@ -79,12 +79,12 @@ return function(p0) --[[ line: 79 | named "MediaGalleryExpandableView" ]]
 			ScrollingDirection = Enum.ScrollingDirection.X,
 			Selectable = false,
 			LayoutOrder = 3,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2, _, _, _) --[[ line: 96 ]]
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2, _, _, _)
 				-- upvalues: gutter (ref), var8 (ref), var15 (ref)
 				local var17 = (p2.AbsoluteSize.X - gutter * (var8.numItemsShown - 1)) / var8.numItemsShown
 				var15(Vector2.new(var17, var17 / var8.itemAspectRatio))
 			end, { gutter, var8.itemAspectRatio, var8.numItemsShown }),
-			[reactModule.Event.SelectionChanged] = reactModule.useCallback(function(p3, _, p4, p5) --[[ line: 110 ]]
+			[reactModule.Event.SelectionChanged] = reactModule.useCallback(function(p3, _, p4, p5)
 				-- upvalues: var13 (ref), reactOtterModule (copy), var8 (ref)
 				if not p3 then
 					return nil
@@ -119,7 +119,7 @@ return function(p0) --[[ line: 79 | named "MediaGalleryExpandableView" ]]
 				FillDirection = Enum.FillDirection.Horizontal,
 				Padding = UDim.new(0, gutter)
 			}),
-			Items = reactModule.createElement(reactModule.Fragment, {}, reactModule.useMemo(function() --[[ line: 161 ]]
+			Items = reactModule.createElement(reactModule.Fragment, {}, reactModule.useMemo(function()
 				-- upvalues: var8 (ref), reactModule (copy), var14 (ref), var16 (ref), borderRadius (ref), fFlagLuaAppEdpConsoleMediaGalleryVideoPlayIcon (copy), view (copy), icon (copy), iconSize (copy), var10 (ref)
 				local t = {}
 				
@@ -132,11 +132,11 @@ return function(p0) --[[ line: 79 | named "MediaGalleryExpandableView" ]]
 						BackgroundTransparency = 1,
 						AutoButtonColor = false,
 						SelectionImageObject = var16,
-						[reactModule.Event.Activated] = function() --[[ line: 172 ]]
+						[reactModule.Event.Activated] = function()
 							-- upvalues: var8 (copy), i (ref)
 							var8.onActivated(i)
 						end,
-						[reactModule.Event.SelectionGained] = function() --[[ line: 175 ]]
+						[reactModule.Event.SelectionGained] = function()
 							-- upvalues: var8 (copy), i (ref)
 							var8.onSelectionGained(i)
 						end

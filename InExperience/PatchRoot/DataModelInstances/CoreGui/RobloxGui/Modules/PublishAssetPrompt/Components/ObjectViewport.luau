@@ -6,17 +6,17 @@ local runService = game:GetService("RunService")
 local objectViewport = roactModule.PureComponent:extend("ObjectViewport")
 objectViewport.validateProps = tModule.strictInterface({ model = tModule.instanceOf("Model") })
 
-local function _(p0, p1) --[[ line: 23 | named "getCameraDistance" ]]
+local function _(p0, p1)
 	local z = p1.Z
 	
 	return math.max(p1.X, p1.Y, z) / 2 * (1 / math.tan(math.rad(p0) / 2)) + z / 2
 end
 
-local _ = function(value, p2, p3) --[[ line: 33 | named "rotateVectorAround" ]]
+local _ = function(value, p2, p3)
 	return CFrame.fromAxisAngle(p3, p2):VectorToWorldSpace(value)
 end
 
-function objectViewport.init(p4) --[[ line: 37 ]]
+function objectViewport.init(p4)
 	-- upvalues: roactModule (ref)
 	p4.cameraRef = roactModule.createRef()
 	p4.worldModelRef = roactModule.createRef()
@@ -32,7 +32,7 @@ function objectViewport.init(p4) --[[ line: 37 ]]
 	p4:OnModelChanged()
 end
 
-function objectViewport.OnModelChanged(p5) --[[ line: 49 ]]
+function objectViewport.OnModelChanged(p5)
 	if p5.props.model ~= nil then
 		p5.modelCFrame = p5.props.model:GetModelCFrame()
 		p5.initialLookVector = p5.modelCFrame.lookVector
@@ -43,7 +43,7 @@ function objectViewport.OnModelChanged(p5) --[[ line: 49 ]]
 	end
 end
 
-function objectViewport.render(p6) --[[ line: 58 ]]
+function objectViewport.render(p6)
 	-- upvalues: roactModule (ref), externalEventConnection (ref), runService (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -77,7 +77,7 @@ function objectViewport.render(p6) --[[ line: 58 ]]
 			WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p6.worldModelRef }),
 			RenderSteppedConnection = roactModule.createElement(externalEventConnection, {
 				event = runService.RenderStepped,
-				callback = function() --[[ line: 99 ]]
+				callback = function()
 					-- upvalues: p6 (ref)
 					p6.updateCameraRotationBinding(p6.cameraRotationBinding:getValue() + 0.01)
 					p6.updateCameraCFrameBinding(CFrame.new(p6.modelCFrame.p + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), p6.cameraRotationBinding:getValue()):VectorToWorldSpace(p6.initialLookVector) * p6.cameraDistance, p6.modelCFrame.p))
@@ -87,19 +87,19 @@ function objectViewport.render(p6) --[[ line: 58 ]]
 	})
 end
 
-function objectViewport.didMount(p7) --[[ line: 112 ]]
+function objectViewport.didMount(p7)
 	if p7.worldModelRef:getValue() and p7.props.model ~= nil then
 		p7.props.model.Parent = p7.worldModelRef:getValue()
 	end
 end
 
-function objectViewport.willUnmount(p8) --[[ line: 118 ]]
+function objectViewport.willUnmount(p8)
 	if p8.props.model then
 		p8.props.model.Parent = nil
 	end
 end
 
-function objectViewport.didUpdate(p9, p10) --[[ line: 124 ]]
+function objectViewport.didUpdate(p9, p10)
 	if p9.props.model ~= p10.model then
 		if p10.model ~= nil then
 			p10.model.Parent = nil

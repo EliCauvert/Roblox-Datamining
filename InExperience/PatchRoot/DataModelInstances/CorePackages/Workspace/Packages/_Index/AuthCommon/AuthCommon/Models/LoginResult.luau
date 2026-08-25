@@ -12,7 +12,7 @@ local var4 = tModule.interface({
 	accountBlob = tModule.optional(tModule.string)
 })
 
-function t.new(p0) --[[ line: 51 ]]
+function t.new(p0)
 	-- upvalues: fFlagEnableLuaAccountSwitch (ref), t (ref)
 	local t_1 = { user = { id = "0", name = "" } }
 	
@@ -35,7 +35,7 @@ function t.new(p0) --[[ line: 51 ]]
 	return t_1
 end
 
-function t.mock() --[[ line: 79 ]]
+function t.mock()
 	-- upvalues: t (ref)
 	local var6 = t.new()
 	var6.user = { id = "1", name = "ROBLOX" }
@@ -47,7 +47,7 @@ function t.mock() --[[ line: 79 ]]
 	return var6
 end
 
-function t:fromJsonData() --[[ line: 95 ]]
+function t:fromJsonData()
 	-- upvalues: t (ref), var4 (ref), fFlagEnableLuaAccountSwitch (ref), argCheckModule (ref)
 	local var7 = t.new()
 	local var8, var9 = var4(self)
@@ -72,12 +72,12 @@ function t:fromJsonData() --[[ line: 95 ]]
 	return var7
 end
 
-function t:is() --[[ line: 126 ]]
+function t:is()
 	-- upvalues: t_1 (ref)
 	return type(self) == "table" and self[t_1] == true
 end
 
-function t:hasTwoStepData() --[[ line: 134 ]]
+function t:hasTwoStepData()
 	-- upvalues: t (ref)
 	return t.is(self) and type(self.twoStepVerificationData) == "table"
 end

@@ -22,7 +22,7 @@ slidingContainer.validateProps = tModule.strictInterface({
 })
 slidingContainer.defaultProps = { springOptions = t }
 
-function slidingContainer.render(p0) --[[ line: 45 ]]
+function slidingContainer.render(p0)
 	-- upvalues: roactModule (ref), springAnimatedItemModule (ref), t_1 (ref)
 	local show = p0.props.show
 	local slidingDirection = p0.props.slidingDirection
@@ -30,7 +30,7 @@ function slidingContainer.render(p0) --[[ line: 45 ]]
 	return roactModule.createElement(springAnimatedItemModule.AnimatedFrame, {
 		springOptions = p0.props.springOptions,
 		animatedValues = { step = if show then 0 else 1 },
-		mapValuesToProps = function(p1) --[[ line: 54 ]]
+		mapValuesToProps = function(p1)
 			-- upvalues: t_1 (copy), slidingDirection (ref)
 			local var7 = t_1[slidingDirection]
 			

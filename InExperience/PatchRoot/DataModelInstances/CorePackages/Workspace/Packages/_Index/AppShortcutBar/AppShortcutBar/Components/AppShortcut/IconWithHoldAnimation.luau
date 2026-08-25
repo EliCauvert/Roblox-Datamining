@@ -6,9 +6,9 @@ local isBuilderIcon = foundationModule.Utility.isBuilderIcon
 local useTokens = foundationModule.Hooks.useTokens
 local icon = foundationModule.Icon
 
-local function useAnimationValues(p0) --[[ line: 35 ]]
+local function useAnimationValues(p0)
 	-- upvalues: reactModule (ref), motionModule (ref)
-	local var5 = reactModule.useMemo(function() --[[ line: 36 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: motionModule (copy)
 		return {
 			initial = motionModule.createState({ scale = 1, ringScale = 1 }, { default = motionModule.transition({ duration = 0.2 }) }),
@@ -16,7 +16,7 @@ local function useAnimationValues(p0) --[[ line: 35 ]]
 		}
 	end, {})
 	local var6, var7 = motionModule.useMotion(var5.initial)
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), p0 (ref), var5 (ref)
 		var7(if p0 then var5.target else var5.initial)
 	end, { p0, var7, var5 })
@@ -24,12 +24,12 @@ local function useAnimationValues(p0) --[[ line: 35 ]]
 	return var6
 end
 
-local function CircularProgress(p1) --[[ line: 62 ]]
+local function CircularProgress(p1)
 	-- upvalues: useTokens (ref), reactModule (ref)
 	local var8 = useTokens()
 	local size = p1.size
 	local progress = p1.progress
-	local var9 = reactModule.useMemo(function() --[[ line: 67 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref)
 		return NumberSequence.new({
 			NumberSequenceKeypoint.new(0, var8.Color.Content.Emphasis.Transparency),
@@ -38,7 +38,7 @@ local function CircularProgress(p1) --[[ line: 62 ]]
 			NumberSequenceKeypoint.new(1, 0.5)
 		})
 	end, { var8 })
-	local var10 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var10 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref)
 		return ColorSequence.new({
 			ColorSequenceKeypoint.new(0, var8.Color.Content.Emphasis.Color3),
@@ -62,9 +62,9 @@ local function CircularProgress(p1) --[[ line: 62 ]]
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = var9,
 					Color = var10,
-					Rotation = reactModule.useMemo(function() --[[ line: 85 ]]
+					Rotation = reactModule.useMemo(function()
 						-- upvalues: progress (ref)
-						return if progress then progress:map(function(p2) --[[ line: 87 ]]
+						return if progress then progress:map(function(p2)
 							return math.clamp(p2 * 360, 180, 360)
 						end) else 180
 					end, { progress })
@@ -86,9 +86,9 @@ local function CircularProgress(p1) --[[ line: 62 ]]
 				Gradient = reactModule.createElement("UIGradient", {
 					Transparency = var9,
 					Color = var10,
-					Rotation = reactModule.useMemo(function() --[[ line: 93 ]]
+					Rotation = reactModule.useMemo(function()
 						-- upvalues: progress (ref)
-						return if progress then progress:map(function(p3) --[[ line: 95 ]]
+						return if progress then progress:map(function(p3)
 							return math.clamp(p3 * 360, 0, 180)
 						end) else 0
 					end, { progress })
@@ -98,7 +98,7 @@ local function CircularProgress(p1) --[[ line: 62 ]]
 	})
 end
 
-function IconWithHoldAnimation(p4) --[[ line: 144 ]]
+function IconWithHoldAnimation(p4)
 	-- upvalues: useAnimationValues (ref), reactModule (ref), useTokens (ref), CircularProgress (ref), isBuilderIcon (ref), icon (ref)
 	local layoutOrder = p4.layoutOrder
 	local size = p4.size
@@ -109,7 +109,7 @@ function IconWithHoldAnimation(p4) --[[ line: 144 ]]
 	local iconSize = p4.iconSize
 	local var11 = useAnimationValues(progress)
 	local var12, var13 = reactModule.useBinding(iconSize)
-	reactModule.useEffect(function() --[[ line: 156 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var13 (ref), iconSize (ref)
 		var13(iconSize)
 	end, { iconSize })

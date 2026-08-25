@@ -19,15 +19,15 @@ local t = {
 	SubItemStyle = { ItemIndentation = 20, ItemOffset = 12 }
 }
 
-local function _(value, p0) --[[ line: 57 | named "calculateItemOffset" ]]
+local function _(value, p0)
 	return p0 + value
 end
 
-local _ = function(p1) --[[ line: 98 | named "isOrdered" ]]
+local _ = function(p1)
 	return p1 and (not p1:find("^*") and not p1:find("^-"))
 end
 
-return function(p2) --[[ line: 102 | named "BulletList" ]]
+return function(p2)
 	-- upvalues: foundationModule (ref), t (ref), map (ref), reactModule (ref), text (ref), view (ref), image (ref), dashModule (ref)
 	local var4 = foundationModule.Hooks.useTokens()
 	local textWrapped = p2.TextWrapped
@@ -46,7 +46,7 @@ return function(p2) --[[ line: 102 | named "BulletList" ]]
 		LayoutOrder = p2.LayoutOrder or 1,
 		Position = p2.Position,
 		Size = size
-	}, dashModule.assign(map(items, function(p3, p4) --[[ line: 116 ]]
+	}, dashModule.assign(map(items, function(p3, p4)
 		-- upvalues: itemIndentation (ref), listStyle (ref), t (copy), reactModule (copy), text (copy), uDim2 (ref), textTruncate (ref), textWrapped (ref), view (copy), image (copy)
 		local var11
 		local _ = nil

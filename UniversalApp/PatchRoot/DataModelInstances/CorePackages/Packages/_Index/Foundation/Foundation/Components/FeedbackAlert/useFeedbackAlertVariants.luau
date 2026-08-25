@@ -5,7 +5,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function createSeverityStyles(_, p0) --[[ line: 34 ]]
+local function createSeverityStyles(_, p0)
 	return {
 		icon = { style = p0 },
 		stroke = {
@@ -17,7 +17,7 @@ local function createSeverityStyles(_, p0) --[[ line: 34 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ line: 49 ]]
+local function variantsFactory(p1)
 	-- upvalues: alertSeverityModule (ref), createSeverityStyles (ref)
 	return {
 		common = {
@@ -47,7 +47,7 @@ local function variantsFactory(p1) --[[ line: 49 ]]
 	}
 end
 
-return function(p2, p3) --[[ line: 81 ]]
+return function(p2, p3)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local feedbackAlert = variantsContextModule.useVariants("FeedbackAlert", variantsFactory, p2)
 	

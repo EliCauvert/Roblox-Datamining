@@ -40,11 +40,11 @@ local var5 = urlBuilder.new({
 	}
 })
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: httpRequestModule (ref), var4 (ref), promiseModule (ref), var5 (ref)
 	local var6 = httpRequestModule.new()
 	
-	return var6:get(var4({ grantType = p0 })):andThen(function(p1) --[[ line: 45 ]]
+	return var6:get(var4({ grantType = p0 })):andThen(function(p1)
 		-- upvalues: promiseModule (copy), var5 (copy), p0 (ref), var6 (ref)
 		local var7 = p1 and (p1.products and p1.products[1])
 		local id = var7 and (var7.productKey and var7.productKey.id)

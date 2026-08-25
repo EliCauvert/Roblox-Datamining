@@ -20,7 +20,7 @@ local var12 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rb
 local var13 = themeModule.textSize(36)
 local var14 = themeModule.textSize(24)
 local var15 = themeModule.textSize(16)
-local var16 = (function() --[[ line: 36 | named "Initialize" ]]
+local var16 = (function()
 	-- upvalues: settingsPageFactoryModule (ref), create (ref), themeModule (ref), utilityModule (ref), robloxTranslatorModule (ref), var13 (ref), var14 (ref), var15 (ref)
 	local reportSentPage = settingsPageFactoryModule:CreateNewPage()
 	reportSentPage.TabHeader = nil
@@ -46,7 +46,7 @@ local var16 = (function() --[[ line: 36 | named "Initialize" ]]
 		Parent = reportSentPage.Root
 	})
 	
-	local function createTextLabel(p0, p1, p2, p3) --[[ line: 64 ]]
+	local function createTextLabel(p0, p1, p2, p3)
 		-- upvalues: create (copy), themeModule (copy), reportSentPage (ref)
 		return create("TextLabel")({
 			BackgroundTransparency = 1,
@@ -64,7 +64,7 @@ local var16 = (function() --[[ line: 36 | named "Initialize" ]]
 		})
 	end
 	
-	local function _(p4, p5, p6, p7) --[[ line: 81 | named "createButton" ]]
+	local function _(p4, p5, p6, p7)
 		-- upvalues: utilityModule (copy), reportSentPage (ref)
 		local var23, var24 = utilityModule:MakeStyledButton(p4, p5, UDim2.new(1, 0, 0, 50), p7)
 		var23.LayoutOrder = p6
@@ -73,7 +73,7 @@ local var16 = (function() --[[ line: 36 | named "Initialize" ]]
 		return var23, var24
 	end
 	
-	local function createSpacer(p8, p9) --[[ line: 89 ]]
+	local function createSpacer(p8, p9)
 		-- upvalues: create (copy), reportSentPage (ref)
 		return create("Frame")({
 			LayoutOrder = p9,
@@ -88,7 +88,7 @@ local var16 = (function() --[[ line: 36 | named "Initialize" ]]
 	reportSentPage.TopSpacer = createSpacer(10, 2)
 	reportSentPage.ActionHeader = createTextLabel("ActionHeader", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Report.OtherActionsHeader"), var15, 3)
 	reportSentPage.ActionHeader.TextXAlignment = Enum.TextXAlignment.Left
-	local blockButton, blockButton_1 = utilityModule:MakeStyledButton("BlockButton", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Block"), UDim2.new(1, 0, 0, 50), function() --[[ line: 111 ]]
+	local blockButton, blockButton_1 = utilityModule:MakeStyledButton("BlockButton", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Block"), UDim2.new(1, 0, 0, 50), function()
 		-- upvalues: reportSentPage (ref)
 		reportSentPage:HandleBlock()
 	end)
@@ -97,7 +97,7 @@ local var16 = (function() --[[ line: 36 | named "Initialize" ]]
 	reportSentPage.BlockButton = blockButton
 	reportSentPage.BlockLabel = blockButton_1
 	reportSentPage.MiddleSpacer = createSpacer(20, 6)
-	local doneButton, _ = utilityModule:MakeStyledButton("DoneButton", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Report.Done"), UDim2.new(1, 0, 0, 50), function() --[[ line: 118 ]]
+	local doneButton, _ = utilityModule:MakeStyledButton("DoneButton", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Report.Done"), UDim2.new(1, 0, 0, 50), function()
 		-- upvalues: reportSentPage (ref)
 		reportSentPage:HandleDone()
 	end)
@@ -108,7 +108,7 @@ local var16 = (function() --[[ line: 36 | named "Initialize" ]]
 	return reportSentPage
 end)()
 
-function var16.UpdateActions(p10) --[[ line: 127 ]]
+function var16.UpdateActions(p10)
 	-- upvalues: blockingUtilityModule (ref), robloxTranslatorModule (ref)
 	if p10.ReportedPlayer then
 		p10.TopSpacer.Visible = true
@@ -126,14 +126,14 @@ function var16.UpdateActions(p10) --[[ line: 127 ]]
 	p10.BlockButton.Visible = false
 end
 
-function var16.ShowReportedPlayer(p11, p12) --[[ line: 149 ]]
+function var16.ShowReportedPlayer(p11, p12)
 	-- upvalues: var16 (ref)
 	p11.ReportedPlayer = p12
 	p11:UpdateActions()
 	p11.HubRef:SwitchToPage(var16, true)
 end
 
-function var16.HandleBlock(p13) --[[ line: 156 ]]
+function var16.HandleBlock(p13)
 	-- upvalues: onBlockButtonActivatedModule (ref), var12 (ref)
 	if p13.ReportedPlayer then
 		onBlockButtonActivatedModule(p13.ReportedPlayer, var12)
@@ -141,7 +141,7 @@ function var16.HandleBlock(p13) --[[ line: 156 ]]
 	p13:HandleDone()
 end
 
-function var16.HandleDone(p14) --[[ line: 163 ]]
+function var16.HandleDone(p14)
 	p14.HubRef:SetVisibility(false, true)
 end
 

@@ -18,17 +18,17 @@ voiceBubble.validateProps = tModule.strictInterface({
 	isDistant = tModule.optional(tModule.boolean)
 })
 
-function voiceBubble.init(p0, p1) --[[ line: 33 ]]
+function voiceBubble.init(p0, p1)
 	-- upvalues: roactModule (ref), otterModule (ref)
 	local var9, var10 = roactModule.createBinding(0)
 	p0.width = var9
 	p0.updateWidth = var10
 	p0.widthMotor = otterModule.createSingleMotor(0)
-	p0.widthMotor:onStep(function(p2) --[[ line: 36 ]]
+	p0.widthMotor:onStep(function(p2)
 		-- upvalues: p0 (ref)
 		p0.updateWidth(math.round(p2))
 	end)
-	p0.frameSize = p0.width:map(function(p3) --[[ line: 40 ]]
+	p0.frameSize = p0.width:map(function(p3)
 		-- upvalues: p0 (ref)
 		return if p0.props.insertSize then UDim2.fromOffset(p3, p0.props.insertSize.Y + p0.props.chatSettings.Padding * 2) else UDim2.fromOffset(p3, 0)
 	end)
@@ -43,13 +43,13 @@ function voiceBubble.init(p0, p1) --[[ line: 33 ]]
 	end
 end
 
-function voiceBubble.getDerivedStateFromProps(p4, p5) --[[ line: 59 ]]
+function voiceBubble.getDerivedStateFromProps(p4, p5)
 	local var13 = if p4.insertSize then p4.insertSize.X + p4.chatSettings.Padding * 2 else 0
 	
 	return if var13 == p5.fullWidth then nil else { fullWidth = var13 }
 end
 
-function voiceBubble.render(p6) --[[ line: 76 ]]
+function voiceBubble.render(p6)
 	-- upvalues: roactModule (ref), cryoModule (ref)
 	local chatSettings = p6.props.chatSettings
 	local backgroundImage = chatSettings.BackgroundImage
@@ -96,11 +96,11 @@ function voiceBubble.render(p6) --[[ line: 76 ]]
 	})
 end
 
-function voiceBubble.fadeOut(p7) --[[ line: 142 ]]
+function voiceBubble.fadeOut(p7)
 	-- upvalues: getTransparencySpringFromSettingsModule (ref)
 	if not p7.isFadingOut then
 		p7.isFadingOut = true
-		p7.transparencyMotor:onComplete(function() --[[ line: 146 ]]
+		p7.transparencyMotor:onComplete(function()
 			-- upvalues: p7 (ref)
 			if p7.props.onFadeOut then
 				p7.props.onFadeOut()
@@ -110,7 +110,7 @@ function voiceBubble.fadeOut(p7) --[[ line: 142 ]]
 	end
 end
 
-function voiceBubble.didUpdate(p8, _, p9) --[[ line: 157 ]]
+function voiceBubble.didUpdate(p8, _, p9)
 	-- upvalues: getSizeSpringFromSettingsModule (ref)
 	if p8.props.fadingOut then
 		p8:fadeOut()
@@ -121,7 +121,7 @@ function voiceBubble.didUpdate(p8, _, p9) --[[ line: 157 ]]
 	end
 end
 
-function voiceBubble.didMount(p10) --[[ line: 167 ]]
+function voiceBubble.didMount(p10)
 	-- upvalues: getSizeSpringFromSettingsModule (ref), getTransparencySpringFromSettingsModule (ref)
 	if not p10.props.fadingOut then
 		local chatSettings = p10.props.chatSettings
@@ -131,7 +131,7 @@ function voiceBubble.didMount(p10) --[[ line: 167 ]]
 	end
 end
 
-function voiceBubble.willUnmount(p11) --[[ line: 178 ]]
+function voiceBubble.willUnmount(p11)
 	p11.transparencyMotor:destroy()
 	p11.widthMotor:destroy()
 end

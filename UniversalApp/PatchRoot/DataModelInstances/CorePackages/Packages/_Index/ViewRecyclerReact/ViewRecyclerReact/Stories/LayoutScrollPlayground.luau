@@ -167,7 +167,7 @@ local t_2 = {
 	}
 }
 
-local function resolveControls(p0) --[[ line: 177 ]]
+local function resolveControls(p0)
 	-- upvalues: storyControlsModule (ref), frozen_1 (ref), t_2 (ref), unknownModule (ref)
 	local var23 = storyControlsModule.merge(frozen_1, p0)
 	var23 = if t_2[var23.scenario] ~= nil then frozen_1.scenario else var23.scenario
@@ -198,7 +198,7 @@ local function resolveControls(p0) --[[ line: 177 ]]
 	}
 end
 
-local function mergeControls(...) --[[ line: 210 ]]
+local function mergeControls(...)
 	-- upvalues: frozen_1 (ref), storyControlsModule (ref)
 	local cloned = table.clone(frozen_1)
 	
@@ -208,13 +208,13 @@ local function mergeControls(...) --[[ line: 210 ]]
 	return cloned
 end
 
-local function createLayout(p1) --[[ line: 218 ]]
+local function createLayout(p1)
 	-- upvalues: frozen (ref), unknownModule (ref)
 	if p1.scenario == frozen.KnownVariable then
 		local var29 = p1.shortLength + p1.longLength + 2 * p1.spacing
 		
 		return unknownModule.Layout.create({
-			getItemLayout = function(p2) --[[ line: 222 ]]
+			getItemLayout = function(p2)
 				-- upvalues: var29 (ref), p1 (ref)
 				local var30 = p2 % 2 == 1
 				
@@ -228,16 +228,16 @@ local function createLayout(p1) --[[ line: 218 ]]
 	return if p1.scenario == frozen.Measured then unknownModule.Layout.measured({ estimatedItemLength = p1.measuredEstimate }) else unknownModule.Layout.uniform({ itemLength = p1.itemLength, spacing = p1.spacing })
 end
 
-local function createItems(p3, p4, p5, p6, p7) --[[ line: 243 ]]
+local function createItems(p3, p4, p5, p6, p7)
 	-- upvalues: frozen (ref), rowFixturesModule (ref)
 	return if p3 == frozen.KnownVariable then rowFixturesModule.buildKnownVariableRows(p4, p5, p6) elseif p3 == frozen.Measured then rowFixturesModule.buildMeasuredRows(p4, p7) elseif p3 == frozen.Fixed then rowFixturesModule.buildLogRows(p4) else rowFixturesModule.buildSimpleRows(p4)
 end
 
-local function LayoutScrollPlayground(value) --[[ line: 255 ]]
+local function LayoutScrollPlayground(value)
 	-- upvalues: resolveControls (ref), reactModule (ref), useManagedLayoutModule (ref), createLayout (ref), createItems (ref), recyclingStatsModule (ref), frozen (ref), t_2 (ref), createElement (ref), storyShellModule (ref), jumpControlsModule (ref), unknownModule (ref), rowFixturesModule (ref)
 	local var31 = resolveControls(value.controls)
 	local var32, var33 = reactModule.useState(0)
-	local var34 = useManagedLayoutModule(reactModule, function() --[[ line: 258 ]]
+	local var34 = useManagedLayoutModule(reactModule, function()
 		-- upvalues: createLayout (copy), var31 (ref)
 		return createLayout(var31)
 	end, {
@@ -249,7 +249,7 @@ local function LayoutScrollPlayground(value) --[[ line: 255 ]]
 	local shortLength = var31.shortLength
 	local longLength = var31.longLength
 	local spacing = var31.spacing
-	local var35 = reactModule.useMemo(function() --[[ line: 274 ]]
+	local var35 = reactModule.useMemo(function()
 		-- upvalues: createItems (copy), scenario (ref), itemCount (ref), shortLength (ref), longLength (ref), spacing (ref)
 		return createItems(scenario, itemCount, shortLength, longLength, spacing)
 	end, {
@@ -268,7 +268,7 @@ local function LayoutScrollPlayground(value) --[[ line: 255 ]]
 	var42.current = var31
 	var41.current = recyclingStatsModule.format(var36)
 	local var43, var44 = reactModule.useBinding("")
-	local var45 = reactModule.useCallback(function() --[[ line: 287 ]]
+	local var45 = reactModule.useCallback(function()
 		-- upvalues: var42 (ref), frozen (copy), var39 (ref), var44 (ref), var41 (ref), var40 (ref)
 		local current = var42.current
 		local var49 = ""
@@ -280,12 +280,12 @@ local function LayoutScrollPlayground(value) --[[ line: 255 ]]
 		end
 		var44(`{var41.current}   Offset: {math.round(var39.current)}px{var49}   Diagnostics: {var40.current}`)
 	end, { var44 })
-	local var46 = reactModule.useCallback(function(p8) --[[ line: 301 ]]
+	local var46 = reactModule.useCallback(function(p8)
 		-- upvalues: var39 (ref), var45 (ref)
 		var39.current = p8
 		var45()
 	end, { var45 })
-	local var47 = reactModule.useCallback(function(_) --[[ line: 305 ]]
+	local var47 = reactModule.useCallback(function(_)
 		-- upvalues: var40 (ref), var45 (ref)
 		var40.current += 1
 		var45()
@@ -312,9 +312,9 @@ local function LayoutScrollPlayground(value) --[[ line: 255 ]]
 					Position = UDim2.fromOffset(424, 6),
 					Size = UDim2.fromOffset(132, 30),
 					Text = "Reset estimate",
-					[reactModule.Event.Activated] = function() --[[ line: 337 ]]
+					[reactModule.Event.Activated] = function()
 						-- upvalues: var33 (ref)
-						var33(function(p9) --[[ line: 338 ]]
+						var33(function(p9)
 							return p9 + 1
 						end)
 					end
@@ -344,7 +344,7 @@ return {
 	mergeControls = mergeControls,
 	resolveControls = resolveControls,
 	scenarioDetails = t_2,
-	createPreset = function(value) --[[ line: 379 ]]
+	createPreset = function(value)
 		-- upvalues: t_1 (ref), createElement (ref), LayoutScrollPlayground (ref), mergeControls (ref), reactModule (ref)
 		local var52 = t_1[value]
 		assert(var52 ~= nil, `Unknown LayoutScrollPlayground preset {value}`)
@@ -353,7 +353,7 @@ return {
 			name = var52.name,
 			summary = var52.summary,
 			roact = reactModule,
-			story = function(value) --[[ line: 383 ]]
+			story = function(value)
 				-- upvalues: createElement (copy), LayoutScrollPlayground (copy), mergeControls (copy), var52 (ref)
 				return createElement(LayoutScrollPlayground, {
 					controls = mergeControls(var52.values, value and value.controls),

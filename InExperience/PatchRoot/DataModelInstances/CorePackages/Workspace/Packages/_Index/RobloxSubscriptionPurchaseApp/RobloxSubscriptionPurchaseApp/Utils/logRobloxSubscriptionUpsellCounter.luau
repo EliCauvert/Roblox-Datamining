@@ -5,7 +5,7 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local _ = require(robloxSubscriptionPurchaseApp.types)
 local _ = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
 
-function logRobloxSubscriptionUpsellCounter(p0) --[[ line: 14 ]]
+function logRobloxSubscriptionUpsellCounter(p0)
 	-- upvalues: robloxSubscriptionStoreModule (ref), surfaceNameModule (ref), loggingProtocolModule (ref)
 	local var4 = robloxSubscriptionStoreModule.get()
 	local entryContext = var4.getEntryContext()

@@ -12,9 +12,9 @@ alertView.defaultProps = {
 	width = UDim.new(0.5, 0)
 }
 
-function alertView.render(p0) --[[ line: 18 ]]
+function alertView.render(p0)
 	-- upvalues: UIBlox (ref), roact (ref), fitFrameVerticalModule (ref)
-	return UIBlox.Style.withStyle(function(p1) --[[ line: 19 ]]
+	return UIBlox.Style.withStyle(function(p1)
 		-- upvalues: roact (copy), fitFrameVerticalModule (copy), p0 (ref)
 		return roact.createElement(fitFrameVerticalModule, {
 			Visible = p0.props.Visible,

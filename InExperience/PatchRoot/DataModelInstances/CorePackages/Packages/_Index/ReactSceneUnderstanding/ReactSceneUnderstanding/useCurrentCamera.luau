@@ -4,10 +4,10 @@ local useCallback = reactModule.useCallback
 local useEffect = reactModule.useEffect
 local camera = Instance.new("Camera")
 
-return function() --[[ line: 11 | named "useCurrentCamera" ]]
+return function()
 	-- upvalues: useState (ref), useCallback (ref), useEffect (ref), camera (ref)
 	local var2, var3 = useState(nil)
-	local var4 = useCallback(function() --[[ line: 14 ]]
+	local var4 = useCallback(function()
 		-- upvalues: var2 (ref), var3 (ref)
 		local currentCamera = workspace.CurrentCamera
 		
@@ -15,11 +15,11 @@ return function() --[[ line: 11 | named "useCurrentCamera" ]]
 			var3(currentCamera)
 		end
 	end, { var2 })
-	useEffect(function() --[[ line: 21 ]]
+	useEffect(function()
 		-- upvalues: var4 (ref)
 		local var5 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(var4)
 		
-		return function() --[[ line: 24 ]]
+		return function()
 			-- upvalues: var5 (ref)
 			var5:Disconnect()
 		end

@@ -26,7 +26,7 @@ local replaceChatLineReportingIcon = game:DefineFastFlag("ReplaceChatLineReporti
 local expChatTopBannerZIndexFix = game:DefineFastFlag("ExpChatTopBannerZIndexFix", false)
 local var14 = require(expChat.Stores.GetFocusNavigationStore)(false)
 
-local var15 = function(p0) --[[ line: 38 ]]
+local var15 = function(p0)
 	-- upvalues: reactModule (ref), localization (ref), localizationService (ref), reactFocusNavigationModule (ref), fFlagExpChatFocusViaLastModeFixModule (ref), focusNavigationUtilsModule (ref), signalsReactModule (ref), var14 (ref), guiService (ref), signalsModule (ref), constants (ref), expChatTopBannerZIndexFix (ref), replaceChatLineReportingIcon (ref), view (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), images (ref), localizationProvider (ref), chatBoxContextMenu (ref), getFFlagMemoizeChatReportingMenu (ref)
 	local var16 = reactModule.useRef(nil)
 	local var17, var18 = reactModule.useState(false)
@@ -34,7 +34,7 @@ local var15 = function(p0) --[[ line: 38 ]]
 	local var20 = reactFocusNavigationModule.useFocusGuiObject()
 	local var21 = if fFlagExpChatFocusViaLastModeFixModule then nil else focusNavigationUtilsModule.useLastInputMode()
 	local var22 = if fFlagExpChatFocusViaLastModeFixModule then signalsReactModule.useSignalState(var14.getChatInputBarFocused) else nil
-	local var23 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var23 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), fFlagExpChatFocusViaLastModeFixModule (copy), var22 (ref), var21 (ref), var16 (ref), var20 (ref), guiService (copy)
 		p0.onUnfocus()
 		
@@ -49,25 +49,25 @@ local var15 = function(p0) --[[ line: 38 ]]
 		p0.onUnfocus
 	})
 	local var24 = reactModule.useRef(var23)
-	reactModule.useEffect(function() --[[ line: 74 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var24 (ref), var23 (ref)
 		var24.current = var23
 	end, { var23 })
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), var24 (ref)
-		return function() --[[ line: 79 ]]
+		return function()
 			-- upvalues: var17 (copy), var24 (copy)
 			if var17 and var24.current then
 				var24.current()
 			end
 		end
 	end, { var17 })
-	reactModule.useEffect(function() --[[ line: 87 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagExpChatFocusViaLastModeFixModule (copy), var22 (ref), var17 (ref), var18 (ref), var21 (ref), signalsModule (copy), var14 (copy)
-		return if fFlagExpChatFocusViaLastModeFixModule then if var22 and var17 then function() --[[ line: 91 ]]
+		return if fFlagExpChatFocusViaLastModeFixModule then if var22 and var17 then function()
 			-- upvalues: var18 (copy)
 			var18(false)
-		end else nil elseif var21 == "Focus" and var17 then signalsModule.createEffect(function(p1) --[[ line: 99 ]]
+		end else nil elseif var21 == "Focus" and var17 then signalsModule.createEffect(function(p1)
 			-- upvalues: var14 (copy), var18 (copy)
 			if not var14.getChatInputBarFocused(p1) then
 				var18(false)
@@ -88,11 +88,11 @@ local var15 = function(p0) --[[ line: 38 ]]
 			tag = "auto-xy padding-small radius-medium align-x-center align-y-center",
 			Size = UDim2.new(0, constants.IconButtonSize, 0, constants.IconButtonSize),
 			Position = UDim2.new(1, constants.IconButtonPositionXOffset, 0, constants.IconButtonPositionYOffset),
-			onActivated = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function() --[[ line: 133 ]]
+			onActivated = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function()
 				-- upvalues: var18 (ref), p0 (ref)
 				var18(true)
 				p0.onFocus()
-			end, { var18, p0.onFocus }) else function() --[[ line: 137 ]]
+			end, { var18, p0.onFocus }) else function()
 				-- upvalues: var18 (ref), p0 (ref)
 				var18(true)
 				p0.onFocus()
@@ -110,11 +110,11 @@ local var15 = function(p0) --[[ line: 38 ]]
 			icon = images["icons/menu/more_off"],
 			iconTransparency = p0.iconTransparency,
 			buttonRef = var16,
-			onActivated = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function() --[[ line: 166 ]]
+			onActivated = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function()
 				-- upvalues: var18 (ref), p0 (ref)
 				var18(true)
 				p0.onFocus()
-			end, { var18, p0.onFocus }) else function() --[[ line: 170 ]]
+			end, { var18, p0.onFocus }) else function()
 				-- upvalues: var18 (ref), p0 (ref)
 				var18(true)
 				p0.onFocus()

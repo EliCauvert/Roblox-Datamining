@@ -10,7 +10,7 @@ local useDescendantHasFocusModule = require(focusNavigationUtils.useDescendantHa
 local useLastInputModeModule = require(focusNavigationUtils.useLastInputMode)
 local t = {}
 
-return function(p0) --[[ line: 44 | named "useFocusRoot" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), t (ref), reactFocusNavigationModule (ref), useFocusNavigableSurfaceRegistryConnectionModule (ref), useDescendantHasFocusModule (ref), useAutoFocusModule (ref), useLastInputModeModule (ref), guiService (ref)
 	local _ = nil
 	local _ = nil
@@ -23,11 +23,11 @@ return function(p0) --[[ line: 44 | named "useFocusRoot" ]]
 	useFocusNavigableSurfaceRegistryConnectionModule(var11, p0.surfaceIdentifier, var13)
 	local var15 = useAutoFocusModule({ var11 }, 0.1)
 	local var16 = p0.isAutoFocusRoot and (var13 and (useLastInputModeModule() == "Focus" and (var11 and not useDescendantHasFocusModule(var11))))
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var15 (ref)
 		local var18 = if var16 then var15() else nil
 		
-		return function() --[[ line: 78 ]]
+		return function()
 			-- upvalues: var18 (write)
 			if var18 then
 				var18.cancel()
@@ -35,15 +35,15 @@ return function(p0) --[[ line: 44 | named "useFocusRoot" ]]
 		end
 	end, { var16, var15 })
 	local var17 = reactModule.useRef(var11)
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (write), var17 (ref)
 		if var11 then
 			var17.current = var11
 		end
 	end, { var11 })
-	reactModule.useEffect(function() --[[ line: 92 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), guiService (copy)
-		return function() --[[ line: 93 ]]
+		return function()
 			-- upvalues: var17 (copy), guiService (copy)
 			if not var17.current then return end
 			local selectedCoreObject = guiService.SelectedCoreObject

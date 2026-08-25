@@ -41,7 +41,7 @@ local var28 = nil
 local bindableEvent = Instance.new("BindableEvent")
 local bindableEvent_1 = Instance.new("BindableEvent")
 
-local function createStore() --[[ line: 61 ]]
+local function createStore()
 	-- upvalues: ABTestModule (ref), networkModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), var28 (write), analyticsModule (ref), platformInterfaceModule (ref), externalSettingsModule (ref), publicBindablesModule (ref), bindableEvent (ref), var27 (write), rodux (ref), reducerModule (ref), thunkModule (ref), windowStateModule (ref), promptStateModule (ref), bindableEvent_1 (ref), purchasePromptLiteModule (ref)
 	local var32 = ABTestModule.new()
 	local var33 = networkModule.new()
@@ -59,7 +59,7 @@ local function createStore() --[[ line: 61 ]]
 			[publicBindablesModule] = publicBindablesModule.new({ windowStateChangedBindable = bindableEvent })
 		})
 	})
-	var27.changed:connect(function(p0, p1) --[[ line: 87 ]]
+	var27.changed:connect(function(p0, p1)
 		-- upvalues: bindableEvent (copy), windowStateModule (copy), promptStateModule (copy), bindableEvent_1 (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), purchasePromptLiteModule (copy)
 		if p1.windowState ~= p0.windowState then
 			bindableEvent:Fire({
@@ -77,7 +77,7 @@ local function createStore() --[[ line: 61 ]]
 end
 
 return {
-	mountPurchasePrompt = function() --[[ line: 117 ]]
+	mountPurchasePrompt = function()
 		-- upvalues: runService (ref), var26 (write), createStore (ref), purchasePromptElevateDisplayOrder (ref), roact (ref), purchasePromptAppModule (ref), var27 (write), fFlagPurchasePromptCartPricingEnabledModule (ref), var28 (write), coreGuiService (ref)
 		if runService:IsStudio() and runService:IsEdit() or var26 then
 			return nil
@@ -97,14 +97,14 @@ return {
 		
 		return var26
 	end,
-	initiateAvatarCreationFeePurchase = function(p2, p3, p4, p5) --[[ line: 151 ]]
+	initiateAvatarCreationFeePurchase = function(p2, p3, p4, p5)
 		-- upvalues: var27 (write), initiateAvatarCreationFeePurchaseModule (ref)
 		if not var27 then
 			error("initiateAvatarCreationFeePurchase cannot be called when the PurchasePrompt has not been mounted")
 		end
 		var27:dispatch(initiateAvatarCreationFeePurchaseModule(p2, p3, p4, p5))
 	end,
-	initiatePurchaseForProductPayload = function(p6, p7) --[[ line: 178 ]]
+	initiatePurchaseForProductPayload = function(p6, p7)
 		-- upvalues: var27 (write), fFlagEnablePurchasePayloadInExperienceShop (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), setProductPayloadModule (ref), fFlagPassShopPurchaseSurfaceToBuyModal (ref), setPurchaseAnalyticsMetadataModule (ref), dispatchPurchaseForProductPayloadModule (ref)
 		if not var27 then
 			warn("initiatePurchaseForProductPayload called before mountPurchasePrompt; ignoring.")
@@ -119,7 +119,7 @@ return {
 				productUniverseId = p7.productUniverseId
 			}))
 		end
-		dispatchPurchaseForProductPayloadModule(function(p8) --[[ line: 204 ]]
+		dispatchPurchaseForProductPayloadModule(function(p8)
 			-- upvalues: var27 (copy)
 			var27:dispatch(p8)
 		end, p6, nil, false)
@@ -130,7 +130,7 @@ return {
 		getBlackbirdUpsellBannerProductInfo = require(_script.Utils.getBlackbirdUpsellBannerProductInfo)
 	} else {},
 	PublishAssetAnalytics = publishAssetAnalyticsModule,
-	UnifiedPurchasePromptContainer = if fFlagEnableUnifiedProductPurchaseFlow then function(p9) --[[ line: 222 | named "UnifiedPurchasePromptContainer" ]]
+	UnifiedPurchasePromptContainer = if fFlagEnableUnifiedProductPurchaseFlow then function(p9)
 		-- upvalues: createStore (ref), roact (ref), unifiedPurchasePromptModule (ref), var27 (write), fFlagPurchasePromptCartPricingEnabledModule (ref), var28 (write), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref)
 		createStore()
 		

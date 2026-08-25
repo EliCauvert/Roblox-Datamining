@@ -14,7 +14,7 @@ local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBui
 local _ = require(script.Parent.PrivateInvitesPickerView)
 local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), friendsStore (ref), searchFriendsAsyncModule (ref), useUserPickerModule (ref)
 	local PRIVATE_INVITES_ADD_PLAYTESTER, PRIVATE_INVITES_ADD_PLAYTESTERS, PRIVATE_INVITES_ALL_FRIENDS_ADDED, PRIVATE_INVITES_FRIENDS_LOAD_ERROR, PRIVATE_INVITES_NO_FRIENDS, PRIVATE_INVITES_SEARCH_PLACEHOLDER
 	local var8 = if fFlagBuildLocalization then useLocalization({
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
 	local universeId = p0.universeId
 	local onInvitesSent = p0.onInvitesSent
 	local var9 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
 		if var9.current then
 			return
@@ -59,13 +59,13 @@ return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
 		sendBuildExperienceEventModule("PLAYTEST_PICKER_IMPRESSION", { universeId = universeId })
 	end, { universeId })
 	local var10 = getPrivatePlaytestersStore(false)
-	local var11 = reactModule.useMemo(function() --[[ line: 87 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: var10 (ref), universeId (ref)
 		return var10.getAndFetchInvitedPlayers(universeId)
 	end, { var10, universeId })
 	local var12 = signalsReactModule.useSignalState(var11.players)
 	local var13 = if signalsReactModule.useSignalState(var11.status) == "Ready" then math.max(0, var10.MAX_INVITES - #var12) else 0
-	local var14 = reactModule.useMemo(function() --[[ line: 100 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: var12 (ref)
 		local t = {}
 		
@@ -74,19 +74,19 @@ return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
 		end
 		return t
 	end, { var12 })
-	local var15 = reactModule.useMemo(function() --[[ line: 110 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: friendsStore (copy)
 		return friendsStore.get()
 	end, {})
-	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 113 ]]
+	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: var15 (ref)
 		return var15.GetAllFriends()
 	end, { var15 }))
-	local var17 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 116 ]]
+	local var17 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: var15 (ref)
 		return var15.GetAllFriendsStatus()
 	end, { var15 }))
-	local var18 = reactModule.useMemo(function() --[[ line: 122 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref)
 		local t = {}
 		
@@ -102,27 +102,27 @@ return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
 		return t
 	end, { var16 })
 	local isNotReady = var17 == "NotReady"
-	local var20 = reactModule.useCallback(function() --[[ line: 136 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var15 (ref)
 		var15.FetchMoreFriends()
 	end, { var15 })
-	local var21 = reactModule.useCallback(function(p1, p2) --[[ line: 142 ]]
+	local var21 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: searchFriendsAsyncModule (copy)
 		return searchFriendsAsyncModule(p1, p2, 20)
 	end, {})
-	local var22 = reactModule.useCallback(function(p3, p4) --[[ line: 146 ]]
+	local var22 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var10 (ref), universeId (ref), sendBuildExperienceEventModule (copy), onInvitesSent (ref)
-		return var10.sendInvites(universeId, p3, p4):andThen(function() --[[ line: 149 ]]
+		return var10.sendInvites(universeId, p3, p4):andThen(function()
 			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p3 (ref), onInvitesSent (copy)
 			sendBuildExperienceEventModule("PLAYTESTERS_ADDED", { universeId = universeId }, { count = tostring(#p3) })
 			onInvitesSent()
-		end):catch(function(p5) --[[ line: 155 ]]
+		end):catch(function(p5)
 			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p3 (ref)
 			sendBuildExperienceEventModule("PLAYTESTERS_ADD_FAILED", { universeId = universeId }, { count = tostring(#p3) })
 			error(p5)
 		end)
 	end, { var10, universeId, onInvitesSent })
-	local var23 = useUserPickerModule(reactModule.useMemo(function() --[[ line: 166 ]]
+	local var23 = useUserPickerModule(reactModule.useMemo(function()
 		-- upvalues: var18 (ref), isNotReady (ref), var20 (ref), var21 (ref), var22 (ref), var13 (ref), var14 (ref)
 		return {
 			browseIds = var18,
@@ -137,20 +137,20 @@ return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
 		var18, isNotReady, var20, var21, var22, var13, var14
 	}))
 	local var24, var25 = reactModule.useState(true)
-	local var26 = reactModule.useCallback(function() --[[ line: 193 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref)
 		var25(false)
 	end, {})
 	local var27, var28 = reactModule.useState(nil)
-	local var29 = reactModule.useCallback(function(p6) --[[ line: 202 ]]
+	local var29 = reactModule.useCallback(function(p6)
 		-- upvalues: var28 (ref)
 		var28(p6)
 	end, {})
 	local loadMore = var23.loadMore
-	reactModule.useEffect(function() --[[ line: 206 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var27 (ref), loadMore (ref)
 		if var27 == nil then return end
-		local function maybeLoadMore() --[[ line: 211 ]]
+		local function maybeLoadMore()
 			-- upvalues: var27 (ref), loadMore (copy)
 			if var27.AbsoluteCanvasSize.Y > 0 and var27.AbsoluteCanvasSize.Y - (var27.CanvasPosition.Y + var27.AbsoluteWindowSize.Y) <= 240 then
 				loadMore()
@@ -164,7 +164,7 @@ return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
 		if var27.AbsoluteCanvasSize.Y > 0 and var27.AbsoluteCanvasSize.Y - (var27.CanvasPosition.Y + var27.AbsoluteWindowSize.Y) <= 240 then
 			loadMore()
 		end
-		return function() --[[ line: 222 ]]
+		return function()
 			-- upvalues: var34 (ref), var35 (ref), var36 (ref)
 			var34:Disconnect()
 			var35:Disconnect()

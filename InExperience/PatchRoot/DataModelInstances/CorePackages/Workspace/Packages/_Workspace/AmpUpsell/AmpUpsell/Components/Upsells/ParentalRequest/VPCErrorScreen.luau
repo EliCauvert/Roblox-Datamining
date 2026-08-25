@@ -18,11 +18,11 @@ local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-local function selectScreenSize(p0) --[[ line: 37 ]]
+local function selectScreenSize(p0)
 	return p0.ScreenSize
 end
 
-return function(p1) --[[ line: 41 | named "VPCErrorScreen" ]]
+return function(p1)
 	-- upvalues: useSelector (ref), selectScreenSize (ref), getShouldUseFoundationUIVPCUpsellModule (ref), getRetryBehaviorFromErrorCodeAndRetryNum (ref), getStringsFromErrorCodeAndRetryNum (ref), useLocalization (ref), cryoModule (ref), vpcErrorScreenStrings (ref), VPCRetryBehaviorEnum (ref), buttonVariant (ref), buttonType (ref), reactModule (ref), dialog (ref), dialogSize (ref), getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), interactiveAlert (ref)
 	local errorCode = p1.errorCode
 	local onRetryAmp = p1.onRetryAmp

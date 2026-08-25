@@ -8,9 +8,9 @@ local utilModule = require(timeToInteractiveTracker.Utils.Util)
 local getMemoryMbModule = require(timeToInteractiveTracker.Utils.getMemoryMb)
 local fFlagTTITrackerMemoryTrackingModule = require(timeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: name (ref), nowModule (ref), mergeTTIEventMetadataModule (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), getMemoryMbModule (ref), sendTTIStatModule (ref)
-	return function(p1, p2) --[[ line: 22 ]]
+	return function(p1, p2)
 		-- upvalues: p0 (ref), name (copy), nowModule (copy), mergeTTIEventMetadataModule (copy), utilModule (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), sendTTIStatModule (copy)
 		local var8 = nil
 		local var9 = nil
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 21 ]]
 		local var11 = false
 		local var12 = if p2 and p2.cleanupAfterSend ~= nil then p2.cleanupAfterSend else true
 		local var13 = if p2 then p2.samplingRateOverride else nil
-		p0(function(p3) --[[ line: 32 ]]
+		p0(function(p3)
 			-- upvalues: p1 (ref), name (copy), nowModule (copy), var8 (write), var11 (write), var9 (write), mergeTTIEventMetadataModule (copy), var10 (write), var12 (ref), utilModule (copy)
 			local var15 = p3[p1]
 			

@@ -4,7 +4,7 @@ local default = require(authCommon.Parent.LinkingProtocol).LinkingProtocol.defau
 local preAuthDeepLinkMapModule = require(script.Parent.PreAuthDeepLinkMap)
 local fFlagEnablePreAuthDeepLinkHandlerModule = require(authCommon.Flags.FFlagEnablePreAuthDeepLinkHandler)
 
-local function parseQueryParams(p0) --[[ line: 50 ]]
+local function parseQueryParams(p0)
 	local t = {}
 	local _, matchIndex = string.find(p0, "?")
 	
@@ -21,16 +21,16 @@ local function parseQueryParams(p0) --[[ line: 50 ]]
 	return t
 end
 
-local function _(p1, p2) --[[ line: 70 | named "matchesPattern" ]]
+local function _(p1, p2)
 	return string.match(p2, p1) ~= nil
 end
 
-local _ = function() --[[ line: 74 | named "userIsAuthenticated" ]]
+local _ = function()
 	-- upvalues: userModule (ref)
 	return userModule.fromLocalStorage().userId ~= -1
 end
 
-local function isPreauthDeeplink(p3) --[[ line: 78 ]]
+local function isPreauthDeeplink(p3)
 	-- upvalues: preAuthDeepLinkMapModule (ref)
 	if not p3 or p3 == "" then
 		return false
@@ -45,7 +45,7 @@ local function isPreauthDeeplink(p3) --[[ line: 78 ]]
 	return false
 end
 
-local function firePreauthDeeplink(p4, p5) --[[ line: 94 ]]
+local function firePreauthDeeplink(p4, p5)
 	-- upvalues: userModule (ref), preAuthDeepLinkMapModule (ref), parseQueryParams (ref)
 	if not p4 or p4 == "" then
 		return nil
@@ -61,7 +61,7 @@ local function firePreauthDeeplink(p4, p5) --[[ line: 94 ]]
 	return nil
 end
 
-local function registerPatterns() --[[ line: 117 ]]
+local function registerPatterns()
 	-- upvalues: preAuthDeepLinkMapModule (ref), default (ref)
 	for i, v in ipairs(preAuthDeepLinkMapModule) do
 		default:registerURL(v.regexPattern:gsub("%%", "\\"))

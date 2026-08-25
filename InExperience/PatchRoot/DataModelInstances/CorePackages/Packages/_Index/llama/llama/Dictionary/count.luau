@@ -1,8 +1,8 @@
-﻿local function alwaysTrue() --[[ line: 2 ]]
+﻿local function alwaysTrue()
 	return true
 end
 
-return function(p0, p1) --[[ line: 6 | named "count" ]]
+return function(p0, p1)
 	-- upvalues: alwaysTrue (ref)
 	local var1 = type(p0)
 	assert(var1 == "table", "expected a table for first argument, got " .. var1)

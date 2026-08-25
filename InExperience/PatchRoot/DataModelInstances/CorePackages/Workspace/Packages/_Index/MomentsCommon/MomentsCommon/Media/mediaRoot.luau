@@ -1,6 +1,6 @@
 ﻿local coreGuiService = game:GetService("CoreGui")
 
-local function _(p0, p1) --[[ line: 23 | named "getOrCreateFolder" ]]
+local function _(p0, p1)
 	local var1 = p0:FindFirstChild(p1)
 	
 	if var1 and var1:IsA("Folder") then
@@ -13,7 +13,7 @@ local function _(p0, p1) --[[ line: 23 | named "getOrCreateFolder" ]]
 	return folder
 end
 
-return function(p2, p3) --[[ line: 35 | named "createMediaRoot" ]]
+return function(p2, p3)
 	-- upvalues: coreGuiService (ref)
 	local var6
 	p3 = p3 or coreGuiService
@@ -39,7 +39,7 @@ return function(p2, p3) --[[ line: 35 | named "createMediaRoot" ]]
 	end
 	return {
 		folder = momentMedia,
-		dispose = function() --[[ line: 40 ]]
+		dispose = function()
 			-- upvalues: momentMedia (ref), var6 (ref)
 			momentMedia:Destroy()
 			

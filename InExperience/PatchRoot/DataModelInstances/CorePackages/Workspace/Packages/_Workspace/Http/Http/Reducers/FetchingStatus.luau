@@ -4,7 +4,7 @@ local updateFetchingStatus = require(http.Actions).UpdateFetchingStatus
 local batchUpdateFetchingStatus = require(http.Actions).BatchUpdateFetchingStatus
 local cryoModule = require(parent.Cryo)
 
-local function mapStatusToValue(p0) --[[ line: 8 ]]
+local function mapStatusToValue(p0)
 	-- upvalues: cryoModule (ref)
 	local t = {}
 	
@@ -15,7 +15,7 @@ local function mapStatusToValue(p0) --[[ line: 8 ]]
 	return t
 end
 
-return function(p1, p2) --[[ line: 27 ]]
+return function(p1, p2)
 	-- upvalues: updateFetchingStatus (ref), cryoModule (ref), batchUpdateFetchingStatus (ref), mapStatusToValue (ref)
 	p1 = p1 or {}
 	

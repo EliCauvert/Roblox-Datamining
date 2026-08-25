@@ -2,7 +2,7 @@
 local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
 local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstants"))
 local t = nil
-pcall(function() --[[ line: 13 ]]
+pcall(function()
 	-- upvalues: t (write)
 	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
@@ -11,18 +11,18 @@ if t == nil then
 	t = {}
 end
 if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p0) --[[ line: 17 ]]
+	function t.FormatMessageToSend(_, _, p0)
 		return p0
 	end
 end
-return function(p1) --[[ line: 20 | named "Run" ]]
+return function(p1)
 	-- upvalues: chatSettingsModule (ref), t (write), chatConstantsModule (ref)
-	local function _() --[[ line: 22 | named "ShowJoinAndLeaveCommands" ]]
+	local function _()
 		-- upvalues: chatSettingsModule (copy)
 		return if chatSettingsModule.ShowJoinAndLeaveHelpText == nil then false else chatSettingsModule.ShowJoinAndLeaveHelpText
 	end
 	
-	p1:RegisterProcessCommandsFunction("chat_commands_inquiry", function(p2, p3, p4) --[[ line: 29 | named "ProcessCommandsFunction" ]]
+	p1:RegisterProcessCommandsFunction("chat_commands_inquiry", function(p2, p3, p4)
 		-- upvalues: p1 (ref), t (copy), chatSettingsModule (copy)
 		if p3:lower() ~= "/?" and p3:lower() ~= "/help" then
 			return false

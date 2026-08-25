@@ -2,7 +2,7 @@
 local loggingProtocolModule = require(currencyTransfers.Parent.LoggingProtocol)
 local _ = require(currencyTransfers.Stores.createTransferStore)
 
-return function(p0, p1, p2) --[[ line: 9 | named "logCurrencyTransferCounter" ]]
+return function(p0, p1, p2)
 	-- upvalues: loggingProtocolModule (ref)
 	local direction = p0.getDirection(false)
 	local transferOrigination = p0.getTransferOrigination(false)

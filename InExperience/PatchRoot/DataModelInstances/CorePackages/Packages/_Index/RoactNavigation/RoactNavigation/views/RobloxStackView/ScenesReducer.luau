@@ -5,7 +5,7 @@ local object = luauPolyfillModule.Object
 local tableUtilitiesModule = require(parent.utils.TableUtilities)
 local invariantModule = require(parent.utils.invariant)
 
-local function compareScenes(p0, p1) --[[ line: 12 ]]
+local function compareScenes(p0, p1)
 	if p0.index ~= p1.index then
 		return p0.index < p1.index
 	end
@@ -14,12 +14,12 @@ local function compareScenes(p0, p1) --[[ line: 12 ]]
 	return if var4 == 0 then p0.key < p1.key else var4 < 0
 end
 
-local function _(p2, p3) --[[ line: 27 | named "routesAreShallowEqual" ]]
+local function _(p2, p3)
 	-- upvalues: tableUtilitiesModule (ref)
 	return if not (not p2 or not p3) then p2.key == p3.key and tableUtilitiesModule.ShallowEqual(p2, p3) else p2 == p3
 end
 
-local _ = function(p4, p5) --[[ line: 39 | named "scenesAreShallowEqual" ]]
+local _ = function(p4, p5)
 	-- upvalues: tableUtilitiesModule (ref)
 	local var5 = false
 	
@@ -46,7 +46,7 @@ local _ = function(p4, p5) --[[ line: 39 | named "scenesAreShallowEqual" ]]
 	return var5
 end
 
-return function(p6, p7, p8, p9) --[[ line: 48 ]]
+return function(p6, p7, p8, p9)
 	-- upvalues: array (ref), invariantModule (ref), tableUtilitiesModule (ref), compareScenes (ref), object (ref)
 	for i, v in p6 do
 		local route = v.route
@@ -134,7 +134,7 @@ return function(p6, p7, p8, p9) --[[ line: 48 ]]
 	local var16
 	local t_4 = {}
 	
-	local function _(p10) --[[ line: 155 | named "mergeScene" ]]
+	local function _(p10)
 		-- upvalues: t (ref), tableUtilitiesModule (copy), t_4 (ref)
 		local key = t[p10.key] or nil
 		

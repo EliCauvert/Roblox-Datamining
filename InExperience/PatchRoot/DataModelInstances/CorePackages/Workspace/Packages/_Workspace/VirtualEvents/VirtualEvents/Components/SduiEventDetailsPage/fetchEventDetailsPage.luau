@@ -6,7 +6,7 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local getEventDetailsUrlModule = require(script.Parent.getEventDetailsUrl)
 local getEventDetailsPageKeyModule = require(script.Parent.getEventDetailsPageKey)
 
-return function(p0, p1) --[[ line: 13 | named "fetchEventDetailsPage" ]]
+return function(p0, p1)
 	-- upvalues: getEventDetailsUrlModule (ref), parent (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getEventDetailsPageKeyModule (ref)
 	getSduiApiStore().fetchIfNeeded({
 		responseType = sduiResponseType.Protobuf,

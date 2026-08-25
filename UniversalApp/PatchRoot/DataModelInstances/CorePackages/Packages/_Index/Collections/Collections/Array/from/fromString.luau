@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(p0, p1, p2) --[[ line: 25 ]]
+return function(p0, p1, p2)
 	local _ = {}
 	local p0Count = #p0
 	local list = table.create(p0Count)

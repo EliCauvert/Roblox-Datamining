@@ -11,16 +11,16 @@ pageNavigationWatcher.validateProps = t.strictInterface({
 	menuOpen = t.boolean
 })
 
-function pageNavigationWatcher.init(p0, p1) --[[ line: 25 ]]
+function pageNavigationWatcher.init(p0, p1)
 	p0:setState({ lastPage = p1.currentPage, lastMenuOpen = p1.menuOpen })
 end
 
-function pageNavigationWatcher.render(p2) --[[ line: 32 ]]
+function pageNavigationWatcher.render(p2)
 	-- upvalues: roact (ref)
 	return roact.createFragment(p2.props[roact.Children])
 end
 
-function pageNavigationWatcher.didUpdate(p3) --[[ line: 36 ]]
+function pageNavigationWatcher.didUpdate(p3)
 	local lastPage = p3.state.lastPage
 	local lastMenuOpen = p3.state.lastMenuOpen
 	local currentPage = p3.props.currentPage
@@ -43,6 +43,6 @@ function pageNavigationWatcher.didUpdate(p3) --[[ line: 36 ]]
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p4) --[[ line: 58 ]]
+return roactRodux.UNSTABLE_connect2(function(p4)
 	return { currentPage = p4.menuPage, menuOpen = p4.isMenuOpen }
 end)(pageNavigationWatcher)

@@ -6,7 +6,7 @@ local focusControllerInternalApiModule = require(script.Parent.FocusControllerIn
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 16 ]]
+function t.new()
 	-- upvalues: createSignalModule (ref), t (ref)
 	return setmetatable({
 		rootRef = nil,
@@ -24,11 +24,11 @@ function t.new() --[[ line: 16 ]]
 	}, t)
 end
 
-function t:isInitialized() --[[ line: 37 ]]
+function t:isInitialized()
 	return self.engineInterface ~= nil
 end
 
-function t:moveFocusTo(p0) --[[ line: 41 ]]
+function t:moveFocusTo(p0)
 	-- upvalues: debugPrintModule (ref)
 	if self.engineInterface == nil then
 		self.moveFocusToOnInitialize = p0
@@ -44,7 +44,7 @@ function t:moveFocusTo(p0) --[[ line: 41 ]]
 	self:debugPrintTree()
 end
 
-function t:moveFocusToNeighbor(p1) --[[ line: 56 ]]
+function t:moveFocusToNeighbor(p1)
 	-- upvalues: debugPrintModule (ref)
 	if self.engineInterface == nil then
 		error("FocusController is not connected to a component hierarchy!", 2)
@@ -59,15 +59,15 @@ function t:moveFocusToNeighbor(p1) --[[ line: 56 ]]
 	end
 end
 
-function t:getSelection() --[[ line: 70 ]]
+function t:getSelection()
 	return self.engineInterface.getSelection()
 end
 
-function t:setSelection(p2) --[[ line: 74 ]]
+function t:setSelection(p2)
 	self.engineInterface.setSelection(p2)
 end
 
-function t:registerNode(p3, p4, p5) --[[ line: 78 ]]
+function t:registerNode(p3, p4, p5)
 	-- upvalues: debugPrintModule (ref)
 	if p3 ~= nil then
 		debugPrintModule("[TREE ] Registering child node", p4)
@@ -89,7 +89,7 @@ function t:registerNode(p3, p4, p5) --[[ line: 78 ]]
 	end
 end
 
-function t:deregisterNode(p6, p7) --[[ line: 103 ]]
+function t:deregisterNode(p6, p7)
 	-- upvalues: debugPrintModule (ref)
 	if p6 == nil then
 		debugPrintModule("[TREE ] Deregistering root node", p7)
@@ -103,14 +103,14 @@ function t:deregisterNode(p6, p7) --[[ line: 103 ]]
 	self:descendantRemovedRefocus()
 end
 
-function t:needsDescendantRemovedRefocus() --[[ line: 119 ]]
+function t:needsDescendantRemovedRefocus()
 	if self.focusedLeaf == nil then
 		return
 	end
 	return self.focusedLeaf.ref:getValue() == nil
 end
 
-function t:descendantRemovedRefocus() --[[ line: 132 ]]
+function t:descendantRemovedRefocus()
 	-- upvalues: debugPrintModule (ref)
 	if self:needsDescendantRemovedRefocus() then
 		debugPrintModule("[FOCUS] Focused node was removed; refocusing from nearest existing ancestor")
@@ -124,12 +124,12 @@ function t:descendantRemovedRefocus() --[[ line: 132 ]]
 	end
 end
 
-function t:needsDescendantAddedRefocus() --[[ line: 149 ]]
+function t:needsDescendantAddedRefocus()
 	-- upvalues: cryoModule (ref)
 	return if self.focusedLeaf == nil then nil else not cryoModule.isEmpty(self:getChildren(self.focusedLeaf))
 end
 
-function t:descendantAddedRefocus() --[[ line: 162 ]]
+function t:descendantAddedRefocus()
 	-- upvalues: debugPrintModule (ref)
 	if self:needsDescendantAddedRefocus() then
 		debugPrintModule("[FOCUS] Currently-focused node is no longer a leaf; refocusing", self.focusedLeaf.ref)
@@ -137,11 +137,11 @@ function t:descendantAddedRefocus() --[[ line: 162 ]]
 	end
 end
 
-function t:getChildren(p8) --[[ line: 171 ]]
+function t:getChildren(p8)
 	return self.focusNodeTree[p8] or {}
 end
 
-function t:isNodeFocused(p9) --[[ line: 175 ]]
+function t:isNodeFocused(p9)
 	if self.focusedLeaf == nil then
 		return false
 	elseif self.focusedLeaf == p9 then
@@ -158,22 +158,22 @@ function t:isNodeFocused(p9) --[[ line: 175 ]]
 	return false
 end
 
-function t:setFocusedLeaf(p10) --[[ line: 198 ]]
+function t:setFocusedLeaf(p10)
 	self.focusedLeaf = p10
 end
 
-function t:setInProgressFocus(p11) --[[ line: 202 ]]
+function t:setInProgressFocus(p11)
 	self.inProgressFocus = p11
 end
 
-function t:isInProgressFocus(p12) --[[ line: 206 ]]
+function t:isInProgressFocus(p12)
 	return self.inProgressFocus == p12
 end
 
-function t:debugPrintTree() --[[ line: 211 ]]
+function t:debugPrintTree()
 	-- upvalues: debugPrintModule (ref)
 	if debugPrintModule.isEnabled then
-		local function recursePrintTree(p13, p14) --[[ line: 216 ]]
+		local function recursePrintTree(p13, p14)
 			-- upvalues: self (ref), debugPrintModule (copy), recursePrintTree (ref)
 			local var10 = tostring(p13.ref)
 			
@@ -194,7 +194,7 @@ function t:debugPrintTree() --[[ line: 211 ]]
 	end
 end
 
-function t:updateInputBindings() --[[ line: 236 ]]
+function t:updateInputBindings()
 	-- upvalues: inputModule (ref), debugPrintModule (ref)
 	local t = {}
 	local focusedLeaf = self.focusedLeaf
@@ -225,13 +225,13 @@ function t:updateInputBindings() --[[ line: 236 ]]
 	self.boundInputsChangedSignal:fire(self.boundInputs)
 end
 
-function t:initialize(p15) --[[ line: 271 ]]
+function t:initialize(p15)
 	-- upvalues: debugPrintModule (ref)
 	if self.engineInterface ~= nil then
 		error("FocusController cannot be initialized more than once; make sure you are not passing it to multiple components")
 	end
 	self.engineInterface = p15
-	self.guiServiceConnection = p15.subscribeToSelectionChanged(function() --[[ line: 284 ]]
+	self.guiServiceConnection = p15.subscribeToSelectionChanged(function()
 		-- upvalues: self (ref), p15 (ref), debugPrintModule (copy)
 		if self.rootRef == nil then return end
 		local var13 = self.focusedLeaf ~= nil
@@ -263,7 +263,7 @@ function t:initialize(p15) --[[ line: 271 ]]
 	end
 end
 
-function t:captureFocus() --[[ line: 344 ]]
+function t:captureFocus()
 	if self.engineInterface == nil then
 		self.captureFocusOnInitialize = true
 		
@@ -277,7 +277,7 @@ function t:captureFocus() --[[ line: 344 ]]
 	self:debugPrintTree()
 end
 
-function t:releaseFocus() --[[ line: 355 ]]
+function t:releaseFocus()
 	if self.engineInterface ~= nil then
 		self.engineInterface.setSelection(nil)
 	end
@@ -285,7 +285,7 @@ function t:releaseFocus() --[[ line: 355 ]]
 	self.captureFocusOnRootRegistered = false
 end
 
-function t:teardown() --[[ line: 363 ]]
+function t:teardown()
 	if self.guiServiceConnection ~= nil then
 		self.guiServiceConnection:Disconnect()
 	end
@@ -299,58 +299,58 @@ function t:teardown() --[[ line: 363 ]]
 	self.focusedLeaf = nil
 end
 
-function t:subscribeToSelectionChange(p16) --[[ line: 382 ]]
+function t:subscribeToSelectionChange(p16)
 	-- upvalues: debugPrintModule (ref)
 	debugPrintModule("[TREE ] New subscription to selection change event")
 	
 	return self.selectionChangedSignal:subscribe(p16)
 end
 
-function t.createPublicApiWrapper() --[[ line: 389 ]]
+function t.createPublicApiWrapper()
 	-- upvalues: t (ref), focusControllerInternalApiModule (ref)
 	local var16 = t.new()
 	
 	return {
 		[focusControllerInternalApiModule] = var16,
-		moveFocusTo = function(...) --[[ line: 394 ]]
+		moveFocusTo = function(...)
 			-- upvalues: var16 (ref)
 			var16:moveFocusTo(...)
 		end,
-		moveFocusLeft = function() --[[ line: 397 ]]
+		moveFocusLeft = function()
 			-- upvalues: var16 (ref)
 			var16:moveFocusToNeighbor("NextSelectionLeft")
 		end,
-		moveFocusRight = function() --[[ line: 400 ]]
+		moveFocusRight = function()
 			-- upvalues: var16 (ref)
 			var16:moveFocusToNeighbor("NextSelectionRight")
 		end,
-		moveFocusUp = function() --[[ line: 403 ]]
+		moveFocusUp = function()
 			-- upvalues: var16 (ref)
 			var16:moveFocusToNeighbor("NextSelectionUp")
 		end,
-		moveFocusDown = function() --[[ line: 406 ]]
+		moveFocusDown = function()
 			-- upvalues: var16 (ref)
 			var16:moveFocusToNeighbor("NextSelectionDown")
 		end,
-		captureFocus = function() --[[ line: 409 ]]
+		captureFocus = function()
 			-- upvalues: var16 (ref)
 			var16:captureFocus()
 		end,
-		releaseFocus = function() --[[ line: 412 ]]
+		releaseFocus = function()
 			-- upvalues: var16 (ref)
 			var16:releaseFocus()
 		end,
-		getCurrentFocus = function() --[[ line: 415 ]]
+		getCurrentFocus = function()
 			-- upvalues: var16 (ref)
 			local focusedLeaf = var16.focusedLeaf
 			
 			return if focusedLeaf then focusedLeaf.ref else nil
 		end,
-		getBoundInputs = function() --[[ line: 419 ]]
+		getBoundInputs = function()
 			-- upvalues: var16 (ref)
 			return var16.boundInputs
 		end,
-		subscribeToBoundInputsChanged = function(p17) --[[ line: 422 ]]
+		subscribeToBoundInputsChanged = function(p17)
 			-- upvalues: var16 (ref)
 			return var16.boundInputsChangedSignal:subscribe(p17)
 		end

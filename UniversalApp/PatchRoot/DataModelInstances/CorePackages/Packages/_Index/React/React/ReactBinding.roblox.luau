@@ -8,47 +8,47 @@ local bindingImpl = luauPolyfillModule.Symbol("BindingImpl")
 local t = {}
 local t_1 = {
 	__index = {
-		getValue = function(p0) --[[ line: 48 ]]
+		getValue = function(p0)
 			-- upvalues: t (ref)
 			return t.getValue(p0)
 		end,
-		map = function(p1, p2) --[[ line: 52 ]]
+		map = function(p1, p2)
 			-- upvalues: t (ref)
 			return t.map(p1, p2)
 		end
 	},
-	__tostring = function(p3) --[[ line: 61 ]]
+	__tostring = function(p3)
 		return string.format("RoactBinding(%s)", tostring(p3:getValue()))
 	end
 }
 
-function t.update(p4, p5) --[[ line: 66 ]]
+function t.update(p4, p5)
 	-- upvalues: bindingImpl (ref)
 	return p4[bindingImpl].update(p5)
 end
 
-function t.subscribe(p6, p7) --[[ line: 70 ]]
+function t.subscribe(p6, p7)
 	-- upvalues: bindingImpl (ref)
 	return p6[bindingImpl].subscribe(p7)
 end
 
-function t.getValue(p8) --[[ line: 74 ]]
+function t.getValue(p8)
 	-- upvalues: bindingImpl (ref)
 	return p8[bindingImpl]:getValue()
 end
 
-function t.create(p9) --[[ line: 78 ]]
+function t.create(p9)
 	-- upvalues: unknownModule (ref), reactGlobalsModule (ref), reactSymbols (ref), bindingImpl (ref), t_1 (ref)
 	local var6, var7 = unknownModule()
 	local t = { value = p9, subscribe = var6 }
 	
-	function t.update(p10) --[[ line: 85 ]]
+	function t.update(p10)
 		-- upvalues: t (ref), var7 (ref)
 		t.value = p10
 		var7(p10)
 	end
 	
-	function t.getValue() --[[ line: 90 ]]
+	function t.getValue()
 		-- upvalues: t (ref)
 		return t.value
 	end
@@ -60,7 +60,7 @@ function t.create(p9) --[[ line: 78 ]]
 	}, t_1), t.update
 end
 
-function t.map(p11, p12) --[[ line: 108 ]]
+function t.map(p11, p12)
 	-- upvalues: reactGlobalsModule (ref), reactSymbols (ref), t (ref), bindingImpl (ref), t_1 (ref)
 	if reactGlobalsModule.__DEV__ then
 		assert(typeof(p11) == "table" and p11["$$typeof"] == reactSymbols.REACT_BINDING_TYPE, "Expected `self` to be a binding")
@@ -69,17 +69,17 @@ function t.map(p11, p12) --[[ line: 108 ]]
 	return setmetatable({
 		["$$typeof"] = reactSymbols.REACT_BINDING_TYPE,
 		[bindingImpl] = {
-			subscribe = function(p13) --[[ line: 124 ]]
+			subscribe = function(p13)
 				-- upvalues: t (copy), p11 (ref), p12 (ref)
-				return t.subscribe(p11, function(p14) --[[ line: 125 ]]
+				return t.subscribe(p11, function(p14)
 					-- upvalues: p13 (ref), p12 (copy)
 					p13(p12(p14))
 				end)
 			end,
-			update = function(_) --[[ line: 130 ]]
+			update = function(_)
 				error("Bindings created by Binding:map(fn) cannot be updated directly", 2)
 			end,
-			getValue = function() --[[ line: 134 ]]
+			getValue = function()
 				-- upvalues: p12 (ref), p11 (ref)
 				return p12(p11:getValue())
 			end
@@ -88,7 +88,7 @@ function t.map(p11, p12) --[[ line: 108 ]]
 	}, t_1)
 end
 
-function t.join(p15) --[[ line: 155 ]]
+function t.join(p15)
 	-- upvalues: reactGlobalsModule (ref), reactSymbols (ref), t (ref), bindingImpl (ref), t_1 (ref)
 	if reactGlobalsModule.__DEV__ then
 		assert(typeof(p15) == "table", "Expected arg #1 to be of type table")
@@ -101,7 +101,7 @@ function t.join(p15) --[[ line: 155 ]]
 	end
 	local t_2 = {}
 	
-	local function getValue() --[[ line: 176 ]]
+	local function getValue()
 		-- upvalues: p15 (ref)
 		local t = {}
 		
@@ -111,17 +111,17 @@ function t.join(p15) --[[ line: 155 ]]
 		return t
 	end
 	
-	function t_2.subscribe(p16) --[[ line: 187 ]]
+	function t_2.subscribe(p16)
 		-- upvalues: p15 (ref), t (copy), getValue (ref)
 		local t_1 = {}
 		
 		for i, v in p15 do
-			t_1[i] = t.subscribe(v, function(_) --[[ line: 192 ]]
+			t_1[i] = t.subscribe(v, function(_)
 				-- upvalues: p16 (ref), getValue (copy)
 				p16(getValue())
 			end)
 		end
-		return function() --[[ line: 197 ]]
+		return function()
 			-- upvalues: t_1 (write)
 			if t_1 == nil then return end
 			for i, v in t_1 do
@@ -131,11 +131,11 @@ function t.join(p15) --[[ line: 155 ]]
 		end
 	end
 	
-	function t_2.update(_) --[[ line: 210 ]]
+	function t_2.update(_)
 		error("Bindings created by joinBindings(...) cannot be updated directly", 2)
 	end
 	
-	function t_2.getValue() --[[ line: 214 ]]
+	function t_2.getValue()
 		-- upvalues: getValue (ref)
 		return getValue()
 	end

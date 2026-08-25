@@ -17,35 +17,35 @@ local setDevConsoleVisibilityModule = require(actions.SetDevConsoleVisibility)
 local setDevConsoleMinimizedModule = require(actions.SetDevConsoleMinimized)
 local devConsoleWindow = roactModule.PureComponent:extend("DevConsoleWindow")
 
-function devConsoleWindow.onMinimizeClicked(a) --[[ line: 30 ]]
+function devConsoleWindow.onMinimizeClicked(a)
 	a.props.dispatchSetDevConsoleMinimized(true)
 end
 
-function devConsoleWindow.onMaximizeClicked(a) --[[ line: 34 ]]
+function devConsoleWindow.onMaximizeClicked(a)
 	a.props.dispatchSetDevConsoleMinimized(false)
 end
 
-function devConsoleWindow.onCloseClicked(p0) --[[ line: 38 ]]
+function devConsoleWindow.onCloseClicked(p0)
 	p0.props.onCloseCallback(false)
 	p0.props.dispatchSetDevConsolVisibility(false)
 end
 
-function devConsoleWindow.init(p1) --[[ line: 43 ]]
+function devConsoleWindow.init(p1)
 	-- upvalues: minSize (ref), userInputService (ref), roactModule (ref)
-	function p1.setDevConsoleSize(p2, p3, p4) --[[ line: 44 ]]
+	function p1.setDevConsoleSize(p2, p3, p4)
 		-- upvalues: minSize (copy)
 		local var12 = p4.X - p3.X
 		local var13 = p4.Y - p3.Y
 		p2.props.dispatchChangeDevConsoleSize(UDim2.new(0, if var12 < minSize.X then minSize.X else var12, 0, if var13 < minSize.Y then minSize.Y else var13))
 	end
 	
-	function p1.resizeInputBegan(_, p5) --[[ line: 54 ]]
+	function p1.resizeInputBegan(_, p5)
 		-- upvalues: p1 (ref), userInputService (copy)
 		if p5.UserInputType == Enum.UserInputType.MouseButton1 then
 			local inputChangedConnection = nil
 			local inputEndedConnection = nil
 			
-			local function onInputEnded(p6) --[[ line: 64 ]]
+			local function onInputEnded(p6)
 				-- upvalues: inputChangedConnection (write), inputEndedConnection (write)
 				if p6.UserInputType == Enum.UserInputType.MouseButton1 then
 					inputChangedConnection:Disconnect()
@@ -53,7 +53,7 @@ function devConsoleWindow.init(p1) --[[ line: 43 ]]
 				end
 			end
 			
-			inputChangedConnection = userInputService.InputChanged:Connect(function(p7) --[[ line: 58 | named "onInputChanged" ]]
+			inputChangedConnection = userInputService.InputChanged:Connect(function(p7)
 				-- upvalues: p1 (copy)
 				p1:setDevConsoleSize(p1.ref.current.AbsolutePosition, p7.Position)
 			end)
@@ -61,7 +61,7 @@ function devConsoleWindow.init(p1) --[[ line: 43 ]]
 		end
 	end
 	
-	function p1.doGamepadMenuButton(p8) --[[ line: 76 ]]
+	function p1.doGamepadMenuButton(p8)
 		-- upvalues: p1 (ref)
 		if p1.props.isVisible then
 			if if p8.KeyCode ~= Enum.KeyCode.ButtonStart then p8.KeyCode == Enum.KeyCode.Escape else true then
@@ -74,9 +74,9 @@ function devConsoleWindow.init(p1) --[[ line: 43 ]]
 	p1.state = { resizing = false }
 end
 
-function devConsoleWindow.didMount(p9) --[[ line: 92 ]]
+function devConsoleWindow.didMount(p9)
 	-- upvalues: setMouseVisibilityModule (ref), userInputService (ref)
-	delay(0, function() --[[ line: 96 ]]
+	delay(0, function()
 		-- upvalues: p9 (ref)
 		if p9.ref.current then
 			p9:setDevConsoleSize(p9.ref.current.AbsolutePosition, p9.ref.current.ResizeButton.AbsolutePosition)
@@ -86,7 +86,7 @@ function devConsoleWindow.didMount(p9) --[[ line: 92 ]]
 	p9.gamepadMenuListener = userInputService.InputBegan:Connect(p9.doGamepadMenuButton)
 end
 
-function devConsoleWindow.willUnmount(p10) --[[ line: 108 ]]
+function devConsoleWindow.willUnmount(p10)
 	-- upvalues: guiService (ref)
 	if guiService.SelectedCoreObject == p10.ref.current then
 		guiService.SelectedCoreObject = nil
@@ -94,7 +94,7 @@ function devConsoleWindow.willUnmount(p10) --[[ line: 108 ]]
 	p10.gamepadMenuListener:Disconnect()
 end
 
-function devConsoleWindow.didUpdate(p11, p12, _) --[[ line: 116 ]]
+function devConsoleWindow.didUpdate(p11, p12, _)
 	-- upvalues: setMouseVisibilityModule (ref), guiService (ref), userInputService (ref)
 	setMouseVisibilityModule(p11.props.isVisible)
 	
@@ -112,7 +112,7 @@ function devConsoleWindow.didUpdate(p11, p12, _) --[[ line: 116 ]]
 	end
 end
 
-function devConsoleWindow.render(p13) --[[ line: 133 ]]
+function devConsoleWindow.render(p13)
 	-- upvalues: constantsModule (ref), robloxGui (ref), roactModule (ref), windowPadding (ref), devConsoleTopBarModule (ref), frameHeight (ref)
 	local isVisible = p13.props.isVisible
 	local formFactor = p13.props.formFactor
@@ -148,15 +148,15 @@ function devConsoleWindow.render(p13) --[[ line: 133 ]]
 			LayoutOrder = 1,
 			isMinimized = true,
 			formFactor = formFactor,
-			onMinimizeClicked = function() --[[ line: 176 ]]
+			onMinimizeClicked = function()
 				-- upvalues: p13 (ref)
 				p13:onMinimizeClicked()
 			end,
-			onMaximizeClicked = function() --[[ line: 179 ]]
+			onMaximizeClicked = function()
 				-- upvalues: p13 (ref)
 				p13:onMaximizeClicked()
 			end,
-			onCloseClicked = function() --[[ line: 182 ]]
+			onCloseClicked = function()
 				-- upvalues: p13 (ref)
 				p13:onCloseClicked()
 			end
@@ -179,15 +179,15 @@ function devConsoleWindow.render(p13) --[[ line: 133 ]]
 		LayoutOrder = 1,
 		isMinimized = false,
 		formFactor = formFactor,
-		onMinimizeClicked = function() --[[ line: 205 ]]
+		onMinimizeClicked = function()
 			-- upvalues: p13 (ref)
 			p13:onMinimizeClicked()
 		end,
-		onMaximizeClicked = function() --[[ line: 208 ]]
+		onMaximizeClicked = function()
 			-- upvalues: p13 (ref)
 			p13:onMaximizeClicked()
 		end,
-		onCloseClicked = function() --[[ line: 211 ]]
+		onCloseClicked = function()
 			-- upvalues: p13 (ref)
 			p13:onCloseClicked()
 		end
@@ -234,7 +234,7 @@ function devConsoleWindow.render(p13) --[[ line: 133 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p14, _) --[[ line: 266 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p14, _)
 	return {
 		isVisible = p14.DisplayOptions.isVisible,
 		isMinimized = p14.DisplayOptions.isMinimized,
@@ -244,18 +244,18 @@ return roactRoduxModule.UNSTABLE_connect2(function(p14, _) --[[ line: 266 | name
 		currTabIndex = p14.MainView.currTabIndex,
 		tabList = p14.MainView.tabList
 	}
-end, function(p15) --[[ line: 278 | named "mapDispatchToProps" ]]
+end, function(p15)
 	-- upvalues: changeDevConsoleSizeModule (ref), setDevConsoleVisibilityModule (ref), setDevConsoleMinimizedModule (ref)
 	return {
-		dispatchChangeDevConsoleSize = function(p16) --[[ line: 280 ]]
+		dispatchChangeDevConsoleSize = function(p16)
 			-- upvalues: p15 (ref), changeDevConsoleSizeModule (copy)
 			p15(changeDevConsoleSizeModule(p16))
 		end,
-		dispatchSetDevConsolVisibility = function(value) --[[ line: 283 ]]
+		dispatchSetDevConsolVisibility = function(value)
 			-- upvalues: p15 (ref), setDevConsoleVisibilityModule (copy)
 			p15(setDevConsoleVisibilityModule(value))
 		end,
-		dispatchSetDevConsoleMinimized = function(a) --[[ line: 286 ]]
+		dispatchSetDevConsoleMinimized = function(a)
 			-- upvalues: p15 (ref), setDevConsoleMinimizedModule (copy)
 			p15(setDevConsoleMinimizedModule(a))
 		end

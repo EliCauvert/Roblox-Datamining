@@ -2,7 +2,7 @@
 local noneModule = require(parent.None)
 local _ = require(parent.Types)
 
-return function(p0, p1) --[[ line: 14 | named "union" ]]
+return function(p0, p1)
 	-- upvalues: noneModule (ref)
 	local cloned = table.clone(p0)
 	

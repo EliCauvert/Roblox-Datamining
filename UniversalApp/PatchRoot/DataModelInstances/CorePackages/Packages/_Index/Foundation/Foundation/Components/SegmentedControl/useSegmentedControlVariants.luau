@@ -9,7 +9,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function _(p0, p1) --[[ line: 39 | named "strokeFromStyle" ]]
+local function _(p0, p1)
 	return {
 		Color = p0.Color3,
 		Transparency = p0.Transparency,
@@ -18,7 +18,7 @@ local function _(p0, p1) --[[ line: 39 | named "strokeFromStyle" ]]
 	}
 end
 
-local function variantsFactory_DEPRECATED(p2) --[[ line: 48 ]]
+local function variantsFactory_DEPRECATED(p2)
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -83,7 +83,7 @@ local function variantsFactory_DEPRECATED(p2) --[[ line: 48 ]]
 	}
 end
 
-local function variantsFactory(p3) --[[ line: 124 ]]
+local function variantsFactory(p3)
 	-- upvalues: segmentedControlVariantModule (ref), inputSizeModule (ref), iconSizeModule (ref), fillBehaviorModule (ref)
 	local t = {
 		[segmentedControlVariantModule.Filled] = { container = { tag = "bg-shift-200" } }
@@ -191,7 +191,7 @@ local function variantsFactory(p3) --[[ line: 124 ]]
 	}
 end
 
-return function(p4, p5, p6, p7, p8, p9) --[[ line: 244 ]]
+return function(p4, p5, p6, p7, p8, p9)
 	-- upvalues: flagsModule (ref), variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), segmentedControlVariantModule (ref), fillBehaviorModule (ref), variantsFactory_DEPRECATED (ref)
 	if flagsModule.FoundationSegmentedControlBeta then
 		local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory, p4)

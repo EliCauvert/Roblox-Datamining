@@ -8,9 +8,9 @@ local _ = {
 }
 
 return {
-	GetDeviceMemoryTier = function() --[[ line: 27 ]]
+	GetDeviceMemoryTier = function()
 		-- upvalues: systemInfoProtocol (ref), reactLowEndMemoryCutoff (ref), reactHighEndMemoryCutoff (ref)
-		local ok, status = pcall(function() --[[ line: 28 ]]
+		local ok, status = pcall(function()
 			-- upvalues: systemInfoProtocol (copy)
 			return systemInfoProtocol.default:getSystemInfo({ systemInfoProtocol.InfoNames.MAX_MEMORY })
 		end)

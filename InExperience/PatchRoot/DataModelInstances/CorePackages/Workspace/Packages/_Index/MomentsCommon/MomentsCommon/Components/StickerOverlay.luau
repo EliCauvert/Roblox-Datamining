@@ -6,17 +6,17 @@ local image = foundationModule.Image
 local useCallback = reactModule.useCallback
 local _ = require(parent.MomentsTypes)
 
-return function(p0) --[[ line: 30 | named "StickerOverlay" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), useCallback (ref), view (ref), foundationModule (ref), image (ref)
 	local var2 = reactModule.useRef(nil)
 	local var3 = reactModule.useRef(nil)
-	local var4 = useCallback(function(_, p1) --[[ line: 34 ]]
+	local var4 = useCallback(function(_, p1)
 		-- upvalues: p0 (ref), var3 (ref)
 		if p0.containerRef and p0.containerRef.current then
 			var3.current = p1
 		end
 	end, { p0.containerRef })
-	local var5 = useCallback(function(_, p2) --[[ line: 40 ]]
+	local var5 = useCallback(function(_, p2)
 		-- upvalues: var3 (ref), p0 (ref)
 		if var3.current == p2 and p0.onActivated then
 			p0.onActivated()
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 30 | named "StickerOverlay" ]]
 		},
 		ZIndex = p0.overlayEdit.zIndex
 	}, {
-		UIDragDetector = reactModule.useMemo(function() --[[ line: 50 ]]
+		UIDragDetector = reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), var2 (ref), var4 (ref), var5 (ref)
 			return if p0.draggable then reactModule.createElement("UIDragDetector", {
 				BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,

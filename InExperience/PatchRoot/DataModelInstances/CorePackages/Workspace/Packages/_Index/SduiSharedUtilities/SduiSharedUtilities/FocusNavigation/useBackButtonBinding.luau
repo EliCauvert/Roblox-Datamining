@@ -9,11 +9,11 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0) --[[ line: 27 | named "useBackButtonBinding" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), t (ref), useOnNavigateBack (ref)
 	local var4, var5 = reactModule.useState(nil)
 	local var6 = useOnNavigateBack(p0, reactFocusNavigationModule.useEventMap(t))
-	reactModule.useEffect(function() --[[ line: 33 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref), var4 (ref)
 		if var6 then
 			var6(var4)

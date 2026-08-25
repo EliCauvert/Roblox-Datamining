@@ -16,14 +16,14 @@ local cursorType = foundationModule.Enums.CursorType
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local fFlagFixSduiCardFocusNavScroll = require(parent.SharedFlags).FFlagFixSduiCardFocusNavScroll
 
-local var4 = function() --[[ line: 33 ]] end
+local var4 = function() end
 
-return reactModule.memo(function(p0) --[[ line: 60 | named "SduiCard" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), fFlagFixSduiCardFocusNavScroll (ref), useCursor (ref), cursorType (ref), signalsReactModule (ref), textSizeModule (ref), reactModule (ref), view (ref), var4 (ref), stateLayerAffordance (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), loadableImage (ref)
 	local var5 = useTokens()
 	local var6 = if fFlagFixSduiCardFocusNavScroll then useCursor(cursorType.RoundedRect) else nil
 	local size2500 = var5.Size.Size_2500
-	local var7 = signalsReactModule.useSignalState(function(p1) --[[ line: 65 ]]
+	local var7 = signalsReactModule.useSignalState(function(p1)
 		-- upvalues: textSizeModule (copy)
 		return textSizeModule.getTextSizeStore(p1).getTextSizeOffset(p1)
 	end)
@@ -39,7 +39,7 @@ return reactModule.memo(function(p0) --[[ line: 60 | named "SduiCard" ]]
 		tag = "size-full-0 row auto-y stroke-default",
 		backgroundStyle = p0.backgroundStyle or var5.Color.Surface.Surface_100,
 		cornerRadius = p0.cornerRadius or UDim.new(0, var5.Radius.Medium),
-		selection = if fFlagFixSduiCardFocusNavScroll then reactModule.useMemo(function() --[[ line: 82 ]]
+		selection = if fFlagFixSduiCardFocusNavScroll then reactModule.useMemo(function()
 			-- upvalues: var6 (ref), p0 (ref)
 			return {
 				Selectable = true,
@@ -60,7 +60,7 @@ return reactModule.memo(function(p0) --[[ line: 60 | named "SduiCard" ]]
 			tag = "flex-between size-full-0 auto-y col gap-xsmall padding-top-large padding-bottom-large padding-left-large padding-right-small",
 			LayoutOrder = 1,
 			Size = UDim2.new(UDim.new(1, -size2500), if p0.size then p0.size.Height else UDim.new(0, 0)),
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2) --[[ line: 77 ]]
+			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 				-- upvalues: var10 (ref)
 				var10(p2.AbsoluteSize.Y)
 			end, {})

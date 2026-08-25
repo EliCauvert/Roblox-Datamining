@@ -8,7 +8,7 @@ local image = foundationModule.Image
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local flagsModule = require(adPlayer.Flags)
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), flagsModule (ref), text (ref), image (ref), stateLayerAffordance (ref)
 	local visible = p0.Visible
 	

@@ -2,7 +2,7 @@
 
 return {
 	Name = "SoundFeedbackEvent",
-	StartEvent = function() --[[ line: 9 ]]
+	StartEvent = function()
 		local sound = Instance.new("Sound")
 		sound.Parent = game.Workspace
 		sound.SoundId = "rbxassetid://10066947742"

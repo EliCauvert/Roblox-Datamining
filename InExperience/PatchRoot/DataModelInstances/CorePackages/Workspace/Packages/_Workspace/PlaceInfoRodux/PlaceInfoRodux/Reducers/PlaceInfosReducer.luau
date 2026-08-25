@@ -2,7 +2,7 @@
 local receivedMultiplePlaceInfos = require(placeInfoRodux.Actions).ReceivedMultiplePlaceInfos
 local immutable = require(placeInfoRodux.Parent.AppCommonLib).Immutable
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: receivedMultiplePlaceInfos (ref), immutable (ref)
 	p0 = p0 or {}
 	

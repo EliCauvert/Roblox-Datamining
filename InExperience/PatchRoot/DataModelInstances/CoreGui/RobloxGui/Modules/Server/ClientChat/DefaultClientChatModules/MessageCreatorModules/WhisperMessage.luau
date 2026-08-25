@@ -10,19 +10,19 @@ local chatConstantsModule = require(parent:WaitForChild("ChatConstants"))
 local utilModule = require(script.Parent:WaitForChild("Util"))
 local char = utf8.char(57344)
 local var5 = nil
-pcall(function() --[[ line: 22 ]]
+pcall(function()
 	-- upvalues: var5 (write)
 	var5 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-function IsPlayerVerified(p0) --[[ line: 24 ]]
+function IsPlayerVerified(p0)
 	-- upvalues: playersService (ref)
 	local var6 = playersService:GetPlayerByUserId(p0)
 	
 	if not var6 then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 31 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var6 (ref)
 		return var6.HasVerifiedBadge
 	end)
@@ -30,12 +30,12 @@ function IsPlayerVerified(p0) --[[ line: 24 ]]
 	return if ok then status else false
 end
 
-function AppendVerifiedBadge(p1) --[[ line: 38 ]]
+function AppendVerifiedBadge(p1)
 	-- upvalues: char (ref)
 	return p1 .. char
 end
 
-function CreateMessageLabel(p2, p3) --[[ line: 42 ]]
+function CreateMessageLabel(p2, p3)
 	-- upvalues: chatSettingsModule (ref), utilModule (ref), localPlayer (write), var5 (write)
 	local fromSpeaker = p2.FromSpeaker
 	local _ = nil
@@ -69,7 +69,7 @@ function CreateMessageLabel(p2, p3) --[[ line: 42 ]]
 		var18.Position = UDim2.new(0, var19.Size.X.Offset + utilModule:GetStringTextBounds(" ", font, textSize).X, 0, 0)
 		var15 = var15 + utilModule:GetNumberOfSpaces(formattedText_1, font, textSize) + 1
 	end
-	local function UpdateTextFunction(p4) --[[ line: 92 ]]
+	local function UpdateTextFunction(p4)
 		-- upvalues: p2 (ref), var17 (ref), utilModule (copy), var15 (write)
 		if p2.IsFiltered then
 			var17.Text = utilModule:CreateLeadingSpaces(var15) .. utilModule:SanitizeForRichText(p4.Message)
@@ -81,7 +81,7 @@ function CreateMessageLabel(p2, p3) --[[ line: 42 ]]
 	
 	UpdateTextFunction(p2)
 	
-	local function GetHeightFunction(p5) --[[ line: 103 ]]
+	local function GetHeightFunction(p5)
 		-- upvalues: utilModule (copy), var17 (ref), var16 (ref)
 		return utilModule:GetMessageHeight(var17, var16, p5)
 	end

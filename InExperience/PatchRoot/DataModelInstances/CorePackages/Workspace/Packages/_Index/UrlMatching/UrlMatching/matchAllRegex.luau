@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.Parent.RegExp)
 
-local function matchAllRegex(p0, p1) --[[ line: 6 ]]
+local function matchAllRegex(p0, p1)
 	-- upvalues: matchAllRegex (ref)
 	local var1 = p1:exec(p0)
 	

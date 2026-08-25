@@ -11,15 +11,15 @@ local fFlagAXAddToolTipToIconItemMenu = require(parent.AvatarExperienceFlags).FF
 local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
 local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 27 | named "IconOnlyMenu" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), fFlagAXResetAvatarButton (ref), imageItemModule (ref), iconItemModule (ref), fFlagAXMigrateBuilderIcons (ref), fFlagAXAddToolTipToIconItemMenu (ref), colorItemModule (ref), foundationModule (ref)
 	local var7 = useSemanticTokensModule()
-	local var8 = reactModule.useCallback(function(p2) --[[ line: 30 ]]
+	local var8 = reactModule.useCallback(function(p2)
 		-- upvalues: fFlagAXResetAvatarButton (copy), reactModule (copy), imageItemModule (copy), iconItemModule (copy), fFlagAXMigrateBuilderIcons (copy), fFlagAXAddToolTipToIconItemMenu (copy), p0 (ref), colorItemModule (copy), foundationModule (copy)
 		local item = p2.item
 		local isActive = p2.isActive
 		local onItemActivated = p2.onItemActivated
-		local var9 = if fFlagAXResetAvatarButton and item.type == "divider" then nil else function() --[[ line: 43 ]]
+		local var9 = if fFlagAXResetAvatarButton and item.type == "divider" then nil else function()
 			-- upvalues: onItemActivated (ref), item (ref)
 			if onItemActivated then
 				onItemActivated(item.id)
@@ -82,7 +82,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 27 | 
 		LayoutOrder = p0.LayoutOrder,
 		onAbsoluteSizeChanged = p0.onAbsoluteSizeChanged,
 		Position = p0.Position
-	}, reactModule.useMemo(function() --[[ line: 110 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), p0 (ref), var7 (ref), var8 (ref)
 		local t = {
 			IconOnlyMenuListLayout = reactModule.createElement("UIListLayout", {

@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local dialog = foundationModule.Dialog
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 
-return function(p0) --[[ line: 18 ]]
+return function(p0)
 	-- upvalues: useCreationFlowStringsModule (ref), reactModule (ref), dialog (ref), foundationModule (ref)
 	local var4 = useCreationFlowStringsModule()
 	

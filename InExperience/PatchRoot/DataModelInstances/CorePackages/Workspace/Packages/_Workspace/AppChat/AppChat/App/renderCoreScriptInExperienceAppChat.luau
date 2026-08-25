@@ -22,7 +22,7 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
 
-return function(p0, p1, p2) --[[ line: 32 ]]
+return function(p0, p1, p2)
 	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
 	local appChat_1 = Instance.new("Folder")
 	appChat_1.Name = "AppChat"
@@ -53,7 +53,7 @@ return function(p0, p1, p2) --[[ line: 32 ]]
 	end
 	local var23 = roduxModule.Store.new(appChatReducerModule, nil, list)
 	local var24 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-	var21:render((function() --[[ line: 79 | named "AppChatMainWithFocusRoot" ]]
+	var21:render((function()
 		-- upvalues: reactModule (copy), reactFocusNavigationModule (copy), var24 (ref), provider (copy), inExperienceAppChatProvidersModule (copy), var23 (ref), p2 (ref), p1 (ref), p0 (ref), inExperienceAppChatModule (copy)
 		return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var24 }, {
 			FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {

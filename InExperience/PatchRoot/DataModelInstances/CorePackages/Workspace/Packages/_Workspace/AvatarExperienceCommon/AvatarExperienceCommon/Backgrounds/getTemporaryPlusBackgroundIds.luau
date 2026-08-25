@@ -3,11 +3,11 @@ local var0 = nil
 local frozen = table.freeze({})
 local var2 = false
 
-local function _(p0) --[[ line: 9 | named "isNumericId" ]]
+local function _(p0)
 	return string.match(p0, "^%d+$") ~= nil
 end
 
-return function() --[[ line: 13 | named "getTemporaryPlusBackgroundIds" ]]
+return function()
 	-- upvalues: fStringAXPlusExclusiveBackgroundIds (ref), var0 (write), frozen (write), var2 (write)
 	local var3 = fStringAXPlusExclusiveBackgroundIds()
 	

@@ -18,7 +18,7 @@ local radioGroup = foundationModule.RadioGroup
 local scrollView = foundationModule.ScrollView
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 
-local function createChildren(p0, _, p1, p2) --[[ line: 38 ]]
+local function createChildren(p0, _, p1, p2)
 	-- upvalues: isSystemMessageModule (ref), reactModule (ref), radioGroup (ref), chatLineReportSelectableLineModule (ref)
 	local t = {}
 	local t_1 = {}
@@ -37,7 +37,7 @@ local function createChildren(p0, _, p1, p2) --[[ line: 38 ]]
 	return t, t_1
 end
 
-return function(p3) --[[ line: 65 | named "ChatLineReportSelectionModalOld" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), useLocalization (ref), constantsModule (ref), createChildren (ref), cryoModule (ref), useLayerCollector (ref), fFlagChatLineReportingFocusFixesEnabled (ref), chatLineReportModalWindowModule (ref), buttonType (ref), chatLineReportInfoModule (ref), empty (ref), scrollView (ref), scrollBarVisibility (ref), radioGroup (ref)
 	local var14, var15 = reactModule.useState(false)
 	local var16 = reactModule.useRef(nil)
@@ -50,25 +50,25 @@ return function(p3) --[[ line: 65 | named "ChatLineReportSelectionModalOld" ]]
 	local var26 = cryoModule.isEmpty(var24)
 	local var27 = useLayerCollector()
 	local absoluteSize = var27.absoluteSize
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var16 (ref), var18 (ref)
 		if var16.current then
-			var16.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 82 ]]
+			var16.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var18 (copy), var16 (copy)
 				var18(var16.current.AbsoluteSize.Y)
 			end)
 		end
 	end, { var16.current, absoluteSize })
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var21 (ref)
 		if var19.current then
-			var19.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 90 ]]
+			var19.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var21 (copy), var19 (copy)
 				var21(var19.current.AbsoluteSize.X)
 			end)
 		end
 	end, { var19.current, absoluteSize })
-	reactModule.useEffect(function() --[[ line: 97 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var22 (ref), constantsModule (copy), fFlagChatLineReportingFocusFixesEnabled (copy)
 		if var19.current then
 			local scrollingFrame = var19.current:FindFirstChildWhichIsA("ScrollingFrame", true)
@@ -90,7 +90,7 @@ return function(p3) --[[ line: 65 | named "ChatLineReportSelectionModalOld" ]]
 		anchorPoint = Vector2.new(0.5, 0),
 		title = var23.ChatSelectionModalTitle,
 		onCloseClicked = p3.onBack,
-		onInfoClicked = reactModule.useCallback(function() --[[ line: 111 ]]
+		onInfoClicked = reactModule.useCallback(function()
 			-- upvalues: var15 (ref), var14 (ref)
 			var15(not var14)
 		end, { var14, var15 }),
@@ -124,7 +124,7 @@ return function(p3) --[[ line: 65 | named "ChatLineReportSelectionModalOld" ]]
 				PaddingBottom = UDim.new(0, 12)
 			}),
 			RadioGroup = reactModule.createElement(radioGroup.Root, {
-				onValueChanged = function(p4) --[[ line: 165 ]]
+				onValueChanged = function(p4)
 					-- upvalues: p3 (ref), constantsModule (copy), var25 (ref)
 					p3.setSelectedMessage(p3.messages[p4])
 					p3.analyticsDispatch({

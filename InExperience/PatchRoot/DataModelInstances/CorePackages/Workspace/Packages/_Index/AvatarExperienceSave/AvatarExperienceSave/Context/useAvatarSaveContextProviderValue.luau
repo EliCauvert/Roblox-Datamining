@@ -78,7 +78,7 @@ local t_4 = {
 	Games = appPage.Games
 }
 
-local function _(p0) --[[ line: 98 | named "buildHumanoidDescriptionForCharacterData" ]]
+local function _(p0)
 	-- upvalues: buildHumanoidDescription (ref)
 	return buildHumanoidDescription({
 		currentAssets = p0.equipped.EquippedAssets,
@@ -88,7 +88,7 @@ local function _(p0) --[[ line: 98 | named "buildHumanoidDescriptionForCharacter
 	})
 end
 
-return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
+return function()
 	-- upvalues: useDispatch (ref), useNavigation (ref), useSelectorSignal (ref), selectCharacterDataModule (ref), tutilsModule (ref), selectHasAvatarDataModule (ref), useSignal (ref), reactModule (ref), signalsModule (ref), shouldInsertNewHistoryEntryModule (ref), dashModule (ref), AXEnableMaxUndoRedoHistory (ref), AXMaxUndoRedoHistory (ref), shouldReplaceLastHistoryEntryModule (ref), removeInvalidAssetsFromCharacterDataModule (ref), avatarExperienceCommonModule (ref), useComputedSignal (ref), saveStatusEnumModule (ref), checkHasChangesToSaveModule (ref), checkCharacterDataHasTryOnItemsModule (ref), getInvalidAssetIdsToAssetTypeIdMapModule (ref), getAssetIdToAssetTypeIdFromHumanoidDescription (ref), setCurrentToastMessage (ref), t_2 (ref), t_1 (ref), characterHistoryStateChangeButtonActivated (ref), t (ref), t_3 (ref), promiseModule (ref), fIntAXMinSaveIntervalSeconds (ref), buildHumanoidDescription (ref), getSaveDictModule (ref), fFlagAXBackgroundsPersistence (ref), avatarExperienceFlagsModule (ref), cryoModule (ref), saveProfileConfigurationModule (ref), getGearAssetIdFromEquippedAssets (ref), saveAvatarModule (ref), fFlagAXEnableManualSavingBlockingPrompt (ref), fFlagSignalsNavP3Dispatch (ref), var27 (ref), navigateToRoute (ref), actions (ref), avatarScreen (ref), t_4 (ref), registerCustomGetStateForAction (ref), customGetStateForAction (ref)
 	local var36 = useDispatch()
 	local var37 = useNavigation()
@@ -100,9 +100,9 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 	local var46, var47 = useSignal(nil)
 	local var48, var49 = useSignal(0)
 	local var50, var51 = useSignal(false)
-	reactModule.useEffect(function() --[[ line: 131 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var39 (ref), var38 (ref), var40 (ref), tutilsModule (copy), var41 (ref), var43 (ref), var45 (ref), var47 (ref), var49 (ref)
-		return signalsModule.createEffect(function(p1) --[[ line: 132 ]]
+		return signalsModule.createEffect(function(p1)
 			-- upvalues: var39 (copy), var38 (copy), var40 (copy), tutilsModule (copy), var41 (copy), var43 (copy), var45 (copy), var47 (copy), var49 (copy)
 			local var63 = var38(p1)
 			
@@ -115,9 +115,9 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 			end
 		end)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 155 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var38 (ref), var40 (ref), var42 (ref), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var41 (ref), var43 (ref), shouldReplaceLastHistoryEntryModule (copy)
-		return signalsModule.createEffect(function(p2) --[[ line: 156 ]]
+		return signalsModule.createEffect(function(p2)
 			-- upvalues: var38 (copy), var40 (copy), var42 (copy), shouldInsertNewHistoryEntryModule (copy), dashModule (copy), AXEnableMaxUndoRedoHistory (copy), AXMaxUndoRedoHistory (copy), var41 (copy), var43 (copy), shouldReplaceLastHistoryEntryModule (copy)
 			local var64 = var38(p2)
 			local var65 = var40(false)
@@ -153,7 +153,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 			end
 		end)
 	end, {})
-	local var52 = reactModule.useCallback(function(p3) --[[ line: 189 ]]
+	local var52 = reactModule.useCallback(function(p3)
 		-- upvalues: var40 (ref), var43 (ref)
 		local var71 = var40(false)
 		
@@ -164,7 +164,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 		
 		return var71[p3]
 	end, { var40, var43 })
-	local var53 = reactModule.useCallback(function(p4) --[[ line: 206 ]]
+	local var53 = reactModule.useCallback(function(p4)
 		-- upvalues: var40 (ref), var42 (ref), removeInvalidAssetsFromCharacterDataModule (copy), var41 (ref)
 		local var72 = var40(false)
 		local var73 = var42(false)
@@ -184,7 +184,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 		return nil
 	end, { var40, var41, var43 })
 	local timeoutStatusStore = avatarExperienceCommonModule.Stores.getTimeoutStatusStore()
-	local var55 = useComputedSignal(function(p5) --[[ line: 228 ]]
+	local var55 = useComputedSignal(function(p5)
 		-- upvalues: timeoutStatusStore (ref), saveStatusEnumModule (copy), var40 (ref), var42 (ref), var44 (ref), var46 (ref), checkHasChangesToSaveModule (copy), checkCharacterDataHasTryOnItemsModule (copy)
 		if timeoutStatusStore and timeoutStatusStore.getIsTimedOut(p5) then
 			return saveStatusEnumModule.TimedOut
@@ -194,7 +194,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 		
 		return if not (not var78 or not var77) then if var46(p5) then saveStatusEnumModule.Saving elseif var77 and not checkHasChangesToSaveModule(var78, var77) then saveStatusEnumModule.AlreadySaved elseif checkCharacterDataHasTryOnItemsModule(var78) then saveStatusEnumModule.HasTryOns else saveStatusEnumModule.Eligible else saveStatusEnumModule.NoData
 	end)
-	local var56 = reactModule.useCallback(function(p6, p7, p8, _, p9) --[[ line: 258 ]]
+	local var56 = reactModule.useCallback(function(p6, p7, p8, _, p9)
 		-- upvalues: saveStatusEnumModule (copy), getInvalidAssetIdsToAssetTypeIdMapModule (copy), getAssetIdToAssetTypeIdFromHumanoidDescription (copy), var53 (ref), removeInvalidAssetsFromCharacterDataModule (copy), var45 (ref), var47 (ref), var36 (ref), setCurrentToastMessage (copy), t_2 (copy), t_1 (copy), characterHistoryStateChangeButtonActivated (copy)
 		local var79 = p8
 		local success = saveStatusEnumModule.Success
@@ -227,7 +227,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 		var47,
 		var53
 	})
-	local var57 = reactModule.useCallback(function(p10) --[[ line: 310 ]]
+	local var57 = reactModule.useCallback(function(p10)
 		-- upvalues: var47 (ref), saveStatusEnumModule (copy), var36 (ref), setCurrentToastMessage (copy), t (copy), t_3 (copy)
 		var47(nil)
 		
@@ -238,9 +238,9 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 		end
 		var36(setCurrentToastMessage(t_3))
 	end, { var47, var36 })
-	local var58 = reactModule.useCallback(function() --[[ line: 320 ]]
+	local var58 = reactModule.useCallback(function()
 		-- upvalues: promiseModule (copy), timeoutStatusStore (ref), var57 (ref), saveStatusEnumModule (copy), var40 (ref), var42 (ref), var44 (ref), var48 (ref), fIntAXMinSaveIntervalSeconds (copy), var47 (ref), var49 (ref), buildHumanoidDescription (copy), getSaveDictModule (copy), fFlagAXBackgroundsPersistence (copy), avatarExperienceFlagsModule (copy), cryoModule (copy), saveProfileConfigurationModule (copy), var51 (ref), var56 (ref), getGearAssetIdFromEquippedAssets (copy), saveAvatarModule (copy)
-		return promiseModule.new(function(p11, p12) --[[ line: 321 ]]
+		return promiseModule.new(function(p11, p12)
 			-- upvalues: timeoutStatusStore (copy), var57 (copy), saveStatusEnumModule (copy), var40 (copy), var42 (copy), var44 (copy), var48 (copy), fIntAXMinSaveIntervalSeconds (copy), var47 (copy), var49 (copy), buildHumanoidDescription (copy), getSaveDictModule (copy), fFlagAXBackgroundsPersistence (copy), avatarExperienceFlagsModule (copy), cryoModule (copy), saveProfileConfigurationModule (copy), var51 (copy), var56 (copy), getGearAssetIdFromEquippedAssets (copy), saveAvatarModule (copy)
 			if timeoutStatusStore and timeoutStatusStore.getIsTimedOut(false) then
 				var57(saveStatusEnumModule.TimedOut)
@@ -284,12 +284,12 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 					end
 				end
 				if var88 and not var90 then
-					saveProfileConfigurationModule(var89):andThen(function() --[[ line: 379 ]]
+					saveProfileConfigurationModule(var89):andThen(function()
 						-- upvalues: var51 (copy), var56 (copy), var85 (ref), var83 (ref), var82 (ref), var86 (write), p11 (ref)
 						var51(false)
 						var56(var85, var85, var83, var82, var86)
 						p11()
-					end):catch(function() --[[ line: 390 ]]
+					end):catch(function()
 						-- upvalues: var51 (copy), var57 (copy), saveStatusEnumModule (copy), p12 (ref)
 						var51(false)
 						var57(saveStatusEnumModule.Failure)
@@ -299,22 +299,22 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 					return
 				end
 				local var91 = if var88 then saveProfileConfigurationModule(var89) else nil
-				saveAvatarModule(var85, avatarType, var86, getGearAssetIdFromEquippedAssets(var83.equipped.EquippedAssets)):andThen(function(p13) --[[ line: 404 ]]
+				saveAvatarModule(var85, avatarType, var86, getGearAssetIdFromEquippedAssets(var83.equipped.EquippedAssets)):andThen(function(p13)
 					-- upvalues: var51 (copy), var56 (copy), var85 (ref), var82 (ref), var86 (write), p11 (ref), var91 (ref), var83 (ref), cryoModule (copy)
 					var51(false)
 					
-					local function _(p14) --[[ line: 407 | named "finishSuccess" ]]
+					local function _(p14)
 						-- upvalues: var56 (copy), var85 (copy), p13 (ref), var82 (copy), var86 (copy), p11 (copy)
 						var56(var85, p13.humanoidDescriptionWithValidAssets, p14, var82, var86)
 						p11()
 					end
 					
 					if var91 then
-						var91:andThen(function() --[[ line: 421 ]]
+						var91:andThen(function()
 							-- upvalues: var83 (copy), var56 (copy), var85 (copy), p13 (ref), var82 (copy), var86 (copy), p11 (copy)
 							var56(var85, p13.humanoidDescriptionWithValidAssets, var83, var82, var86)
 							p11()
-						end, function() --[[ line: 423 ]]
+						end, function()
 							-- upvalues: cryoModule (copy), var83 (copy), var82 (copy), var56 (copy), var85 (copy), p13 (ref), var86 (copy), p11 (copy)
 							var56(var85, p13.humanoidDescriptionWithValidAssets, cryoModule.Dictionary.join(var83, {
 								equipped = cryoModule.Dictionary.join(var83.equipped, {
@@ -328,7 +328,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 					end
 					var56(var85, p13.humanoidDescriptionWithValidAssets, var83, var82, var86)
 					p11()
-				end):catch(function(_) --[[ line: 436 ]]
+				end):catch(function(_)
 					-- upvalues: var51 (copy), timeoutStatusStore (copy), var57 (copy), saveStatusEnumModule (copy), p12 (ref)
 					var51(false)
 					
@@ -345,11 +345,11 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 	})
 	
 	if fFlagAXEnableManualSavingBlockingPrompt then
-		local var59 = reactModule.useCallback(function(p15) --[[ line: 468 ]]
+		local var59 = reactModule.useCallback(function(p15)
 			-- upvalues: var58 (ref), fFlagSignalsNavP3Dispatch (copy), var27 (copy), var36 (ref), navigateToRoute (copy)
-			return function() --[[ line: 469 ]]
+			return function()
 				-- upvalues: var58 (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), p15 (ref), var36 (copy), navigateToRoute (copy)
-				var58():finally(function() --[[ line: 470 ]]
+				var58():finally(function()
 					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var27 (copy), p15 (copy), var36 (copy), navigateToRoute (copy)
 					if fFlagSignalsNavP3Dispatch then
 						var27.to(var27.fromLegacyPage({ skipSaveBlockingPrompt = true, name = p15 }))
@@ -360,11 +360,11 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 				end)
 			end
 		end, { var58, var36 })
-		local var60 = reactModule.useCallback(function(p16) --[[ line: 480 ]]
+		local var60 = reactModule.useCallback(function(p16)
 			-- upvalues: var44 (ref), var36 (ref), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), navigateToRoute (copy)
-			return function() --[[ line: 481 ]]
+			return function()
 				-- upvalues: var44 (copy), var36 (copy), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), p16 (ref), navigateToRoute (copy)
-				task.spawn(function() --[[ line: 482 ]]
+				task.spawn(function()
 					-- upvalues: var44 (copy), var36 (copy), characterHistoryStateChangeButtonActivated (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), p16 (copy), navigateToRoute (copy)
 					var36(characterHistoryStateChangeButtonActivated(var44(false)))
 					task.wait()
@@ -378,7 +378,7 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 				end)
 			end
 		end, { var36, var44 })
-		local var61 = reactModule.useCallback(function(p17, p18) --[[ line: 503 ]]
+		local var61 = reactModule.useCallback(function(p17, p18)
 			-- upvalues: actions (copy), avatarScreen (copy), t_4 (copy), tutilsModule (copy), var55 (ref), saveStatusEnumModule (copy), cryoModule (copy), var59 (ref), var60 (ref)
 			local routeName = (p17 or {}).routeName
 			local params = (p17 or {}).params
@@ -403,14 +403,14 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 			
 			return true, cryoModule.Dictionary.join(p18, { routes = var92, index = #var92 })
 		end, { var55, var59, var60 })
-		reactModule.useEffect(function() --[[ line: 566 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var37 (ref), registerCustomGetStateForAction (copy), customGetStateForAction (copy), var61 (ref)
 			var37.dispatch(registerCustomGetStateForAction(customGetStateForAction.HandlerId.BlockAXExitOnUnsavedChanges, var61))
 		end, { var37, var61 })
 	end
-	reactModule.useEffect(function() --[[ line: 579 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var40 (ref), var50 (ref), var55 (ref), saveStatusEnumModule (copy), var58 (ref)
-		return signalsModule.createEffect(function(p19) --[[ line: 580 ]]
+		return signalsModule.createEffect(function(p19)
 			-- upvalues: var40 (copy), var50 (copy), var55 (copy), saveStatusEnumModule (copy), var58 (copy)
 			local var93 = var40(p19)
 			
@@ -423,12 +423,12 @@ return function() --[[ line: 109 | named "useAvatarSaveContextProviderValue" ]]
 			end
 		end)
 	end, {})
-	local var62 = reactModule.useCallback(function() --[[ line: 597 ]]
+	local var62 = reactModule.useCallback(function()
 		-- upvalues: var51 (ref)
 		var51(true)
 	end, { var51 })
 	
-	return reactModule.useMemo(function() --[[ line: 602 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var40 (ref), var42 (ref), var52 (ref), var44 (ref), var55 (ref), var58 (ref), var62 (ref)
 		return {
 			getHistorySignal = var40,

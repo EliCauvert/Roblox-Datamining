@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getTrustedFriendActionModule = require(script.Parent.getTrustedFriendAction)
 
-return function(value) --[[ line: 23 | named "useTrustedFriendAction" ]]
+return function(value)
 	-- upvalues: reactModule (ref), useLocalization (ref), getTrustedFriendActionModule (ref)
 	local var2, var3 = reactModule.useState(nil)
 	local var4, var5 = reactModule.useState(0)
@@ -13,13 +13,13 @@ return function(value) --[[ line: 23 | named "useTrustedFriendAction" ]]
 		removeTrustedFriendText = "Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend",
 		removeTrustedFriendToastText = "Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved"
 	})
-	local var7 = reactModule.useCallback(function() --[[ line: 35 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
-		var5(function(p0) --[[ line: 36 ]]
+		var5(function(p0)
 			return p0 + 1
 		end)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: value (ref), var3 (ref), getTrustedFriendActionModule (copy)
 		if value == "" then
 			var3(nil)
@@ -28,19 +28,19 @@ return function(value) --[[ line: 23 | named "useTrustedFriendAction" ]]
 		end
 		local var9 = true
 		var3(nil)
-		getTrustedFriendActionModule(value):andThen(function(p1) --[[ line: 54 ]]
+		getTrustedFriendActionModule(value):andThen(function(p1)
 			-- upvalues: var9 (write), var3 (copy)
 			if var9 then
 				var3(p1)
 			end
-		end):catch(function() --[[ line: 59 ]]
+		end):catch(function()
 			-- upvalues: var9 (write), var3 (copy)
 			if var9 then
 				var3(nil)
 			end
 		end)
 		
-		return function() --[[ line: 65 ]]
+		return function()
 			-- upvalues: var9 (write)
 			var9 = false
 		end

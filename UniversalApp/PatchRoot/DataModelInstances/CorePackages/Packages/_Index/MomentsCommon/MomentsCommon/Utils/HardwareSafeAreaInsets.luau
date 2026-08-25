@@ -6,11 +6,11 @@ local var3 = nil
 local var4 = nil
 local t = { left = 0, top = 0, right = 0, bottom = 0 }
 
-function diffInsets(value, p0) --[[ line: 27 ]]
+function diffInsets(value, p0)
 	return if value.top == p0.top then if value.bottom == p0.bottom then if value.left == p0.left then value.right ~= p0.right else true else true else true
 end
 
-function getHardwareSafeAreaInsets() --[[ line: 31 ]]
+function getHardwareSafeAreaInsets()
 	-- upvalues: var3 (write), var4 (write)
 	local absolutePosition = var3.AbsolutePosition
 	local absolutePosition_1 = var4.AbsolutePosition
@@ -27,7 +27,7 @@ end
 
 local var6 = nil
 
-function handleSizeChange() --[[ line: 48 ]]
+function handleSizeChange()
 	-- upvalues: t (write), var6 (write), var2 (ref)
 	local var9 = getHardwareSafeAreaInsets()
 	
@@ -37,7 +37,7 @@ function handleSizeChange() --[[ line: 48 ]]
 		if var6 then
 			task.cancel(var6)
 		end
-		var6 = task.defer(function() --[[ line: 55 ]]
+		var6 = task.defer(function()
 			-- upvalues: var6 (copy), var2 (copy), var9 (ref)
 			var6 = nil
 			var2:fire(var9)
@@ -45,7 +45,7 @@ function handleSizeChange() --[[ line: 48 ]]
 	end
 end
 
-function init() --[[ line: 62 ]]
+function init()
 	-- upvalues: var1 (write), var3 (write), localPlayer (ref), var4 (write)
 	if var1 then return end
 	if not var3 then
@@ -69,20 +69,20 @@ function init() --[[ line: 62 ]]
 end
 
 return {
-	connect = function(_, p1) --[[ line: 90 ]]
+	connect = function(_, p1)
 		-- upvalues: var2 (ref)
 		init()
 		
 		return var2:connect(p1)
 	end,
-	deviceInsets = function() --[[ line: 94 ]]
+	deviceInsets = function()
 		-- upvalues: t (write)
 		init()
 		
 		return t
 	end,
 	diffInsets = diffInsets,
-	fullscreenGui = function() --[[ line: 99 ]]
+	fullscreenGui = function()
 		-- upvalues: var3 (write)
 		init()
 		

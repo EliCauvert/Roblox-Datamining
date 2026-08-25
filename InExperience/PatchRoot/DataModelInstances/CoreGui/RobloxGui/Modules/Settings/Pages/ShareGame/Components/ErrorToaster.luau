@@ -11,10 +11,10 @@ local inviteStatus = constantsModule.InviteStatus
 local var8 = require(shareGame.getTranslator)()
 local errorToaster = roactModule.PureComponent:extend("ErrorToaster")
 
-function errorToaster.restartTimer(p0) --[[ line: 26 ]]
+function errorToaster.restartTimer(p0)
 	-- upvalues: runService (ref)
 	if not p0.timerConnection then
-		p0.timerConnection = runService.RenderStepped:Connect(function() --[[ line: 28 ]]
+		p0.timerConnection = runService.RenderStepped:Connect(function()
 			-- upvalues: p0 (ref)
 			local failedInvites = p0.props.failedInvites
 			
@@ -29,7 +29,7 @@ function errorToaster.restartTimer(p0) --[[ line: 26 ]]
 	end
 end
 
-function errorToaster.stopTimer(p1) --[[ line: 47 ]]
+function errorToaster.stopTimer(p1)
 	if p1.timerConnection then
 		p1.timerConnection:Disconnect()
 		p1.timerConnection = nil
@@ -37,13 +37,13 @@ function errorToaster.stopTimer(p1) --[[ line: 47 ]]
 	p1.props.stoppedTimerDispatch()
 end
 
-function errorToaster.didUpdate(p2) --[[ line: 56 ]]
+function errorToaster.didUpdate(p2)
 	if #p2.props.failedInvites ~= 0 then
 		p2:restartTimer()
 	end
 end
 
-function errorToaster.render(p3) --[[ line: 64 ]]
+function errorToaster.render(p3)
 	-- upvalues: constantsModule (ref), inviteStatus (ref), roactModule (ref), themeModule (ref), var8 (ref)
 	local failedInvites = p3.props.failedInvites
 	local TOAST_HEIGHT = constantsModule.LayoutSpecific[p3.props.deviceLayout].TOAST_HEIGHT
@@ -87,15 +87,15 @@ function errorToaster.render(p3) --[[ line: 64 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4) --[[ line: 113 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p4)
 	return {
 		deviceLayout = p4.DeviceInfo.DeviceLayout,
 		failedInvites = p4.Toasts.failedInvites
 	}
-end, function(p5) --[[ line: 120 | named "mapDispatchToProps" ]]
+end, function(p5)
 	-- upvalues: stoppedToastTimerModule (ref)
 	return {
-		stoppedTimerDispatch = function() --[[ line: 122 ]]
+		stoppedTimerDispatch = function()
 			-- upvalues: p5 (ref), stoppedToastTimerModule (copy)
 			p5(stoppedToastTimerModule())
 		end

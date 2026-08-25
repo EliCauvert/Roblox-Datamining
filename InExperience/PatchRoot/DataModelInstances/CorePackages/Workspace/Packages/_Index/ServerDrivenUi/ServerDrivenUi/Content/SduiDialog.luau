@@ -5,10 +5,10 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialog = foundationModule.Dialog
 local orientation = foundationModule.Enums.Orientation
 
-return reactModule.memo(function(p0) --[[ line: 47 | named "SduiDialog" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), buttonVariant (ref), dialog (ref), orientation (ref)
 	local bodyText = p0.bodyText or p0.bodyComponent
-	local var3 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var3 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.primaryButtonAction then
 			p0.primaryButtonAction()
@@ -18,7 +18,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "SduiDialog" ]]
 			end
 		end
 	end, { p0.primaryButtonAction, p0.primaryButtonSideEffectAction })
-	local var4 = reactModule.useCallback(function() --[[ line: 59 ]]
+	local var4 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		if p0.secondaryButtonAction then
 			p0.secondaryButtonAction()

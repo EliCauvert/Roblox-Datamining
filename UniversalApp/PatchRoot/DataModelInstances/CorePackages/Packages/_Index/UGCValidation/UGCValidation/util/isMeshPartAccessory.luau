@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 | named "isMeshPartAccessory" ]]
+﻿return function(p0)
 	if p0:IsA("Accessory") then
 		local handle = p0:FindFirstChild("Handle")
 		

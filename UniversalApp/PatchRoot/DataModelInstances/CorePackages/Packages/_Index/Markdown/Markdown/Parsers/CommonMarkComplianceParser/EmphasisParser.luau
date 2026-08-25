@@ -1,7 +1,7 @@
 ﻿local _ = require(script:FindFirstAncestor("Markdown").Types)
 local utilsModule = require(script.Parent.Utils)
 local t = {
-	collectDelimiterRun = function(p0, p1, p2) --[[ line: 19 ]]
+	collectDelimiterRun = function(p0, p1, p2)
 		-- upvalues: utilsModule (ref)
 		local length = p1.length
 		local var2 = p2 + 1
@@ -35,7 +35,7 @@ local t = {
 	end
 }
 
-function t.processEmphasisRun(p3, p4, p5) --[[ line: 61 ]]
+function t.processEmphasisRun(p3, p4, p5)
 	-- upvalues: utilsModule (ref), t (ref)
 	local t_1 = {}
 	local var7 = p4

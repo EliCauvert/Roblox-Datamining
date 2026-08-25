@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	local t = {}
 	
 	for i = 1, p0.n do

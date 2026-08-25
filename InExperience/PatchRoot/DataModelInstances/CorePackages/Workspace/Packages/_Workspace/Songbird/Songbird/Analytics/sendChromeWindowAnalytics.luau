@@ -13,7 +13,7 @@ local t = {
 	lastUpdated = { 24, 12, 10 }
 }
 
-return function(p0) --[[ line: 30 | named "sendChromeWindowAnalytics" ]]
+return function(p0)
 	-- upvalues: rbxAnalyticsService (ref), cryoModule (ref), default (ref), t (ref)
 	default:logRobloxTelemetryEvent(t, nil, cryoModule.Dictionary.join(p0, {
 		placeid = tostring(game.PlaceId),

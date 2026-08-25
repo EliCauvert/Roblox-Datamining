@@ -2,7 +2,7 @@
 local sendTextMessageModule = require(appChat.Conversations.Thunks.SendTextMessage)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(...) --[[ line: 5 ]]
+return function(...)
 	-- upvalues: name (ref), sendTextMessageModule (ref)
 	name:info("Sending text message")
 	

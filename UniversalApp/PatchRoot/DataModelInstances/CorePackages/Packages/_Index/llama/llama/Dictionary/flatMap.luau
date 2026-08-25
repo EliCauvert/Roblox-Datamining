@@ -1,6 +1,6 @@
 ﻿local joinModule = require(script.Parent.join)
 
-local function flatMap(p0, p1) --[[ line: 4 ]]
+local function flatMap(p0, p1)
 	-- upvalues: joinModule (ref), flatMap (ref)
 	local var2 = type(p0)
 	assert(var2 == "table", "expected a table for first argument, got " .. var2)

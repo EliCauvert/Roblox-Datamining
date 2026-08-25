@@ -2,15 +2,15 @@
 local constantsModule = require(inExperienceShop.Constants)
 local _ = require(inExperienceShop.Types)
 
-local function _(p0, p1) --[[ line: 10 | named "formatCurrencyAmountStr" ]]
+local function _(p0, p1)
 	return p0 .. string.format("%.2f", p1)
 end
 
-local _ = function(p2, p3) --[[ line: 14 | named "warnParseFailure" ]]
+local _ = function(p2, p3)
 	warn("[Shop] toRobuxPackageItem failed (" .. p3 .. ") id=" .. tostring(p2.id))
 end
 
-local _ = function(p4) --[[ line: 18 | named "parseBonusItem" ]]
+local _ = function(p4)
 	local bonusItem = p4.bonusItem
 	
 	if bonusItem == nil then
@@ -24,7 +24,7 @@ local _ = function(p4) --[[ line: 18 | named "parseBonusItem" ]]
 end
 
 return {
-	toRobuxPackageItem = function(p5) --[[ line: 37 ]]
+	toRobuxPackageItem = function(p5)
 		-- upvalues: constantsModule (ref)
 		if p5.type ~= "Robux" then
 			return nil

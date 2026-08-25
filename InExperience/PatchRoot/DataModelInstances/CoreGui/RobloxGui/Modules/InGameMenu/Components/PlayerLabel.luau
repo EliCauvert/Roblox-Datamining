@@ -40,14 +40,14 @@ playerLabel.validateProps = t.strictInterface(validatePropsWithForwardRef({
 playerLabel.defaultProps = { Visible = true }
 
 if fFlagLuaMenuPerfImprovementsModule then
-	function playerLabel.init(p0) --[[ line: 82 ]]
-		function p0.onActivated() --[[ line: 83 ]]
+	function playerLabel.init(p0)
+		function p0.onActivated()
 			-- upvalues: p0 (ref)
 			p0.props.onActivated(p0.props.userId)
 		end
 	end
 end
-function playerLabel.renderButtons(p1) --[[ line: 89 ]]
+function playerLabel.renderButtons(p1)
 	-- upvalues: roact (ref), cryo (ref)
 	return cryo.Dictionary.join(p1.props[roact.Children] or {}, {
 		List = roact.createElement("UIListLayout", {
@@ -60,11 +60,11 @@ function playerLabel.renderButtons(p1) --[[ line: 89 ]]
 	})
 end
 
-function playerLabel.renderWithSelectionCursor(p2, p3) --[[ line: 104 ]]
+function playerLabel.renderWithSelectionCursor(p2, p3)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagLuaMenuPerfImprovementsModule (ref), roact (ref), var7 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), cryo (ref), t_1 (ref), assetsModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), getFFlagLuaAppEnableOpenTypeIGMFix (ref), openTypeSupport (ref)
 	local props = p2.props
 	
-	return withFoundationOrUIBloxStyle(function(p4) --[[ line: 107 ]]
+	return withFoundationOrUIBloxStyle(function(p4)
 		return {
 			Theme = {
 				BackgroundContrast = {
@@ -81,7 +81,7 @@ function playerLabel.renderWithSelectionCursor(p2, p3) --[[ line: 104 ]]
 				}
 			}
 		}
-	end, function(p5) --[[ line: 115 ]]
+	end, function(p5)
 		-- upvalues: p2 (ref), fFlagLuaMenuPerfImprovementsModule (copy), roact (copy), props (ref), p3 (ref), var7 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), cryo (copy), t_1 (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), getFFlagLuaAppEnableOpenTypeSupport (copy), getFFlagLuaAppEnableOpenTypeIGMFix (copy), openTypeSupport (copy)
 		local var10 = if p2.props.isSelected then { Transparency = 0, Color = Color3.fromRGB(48, 50, 52) } else p5.Theme.BackgroundContrast
 		
@@ -160,15 +160,15 @@ function playerLabel.renderWithSelectionCursor(p2, p3) --[[ line: 104 ]]
 	end)
 end
 
-function playerLabel.render(p6) --[[ line: 234 ]]
+function playerLabel.render(p6)
 	-- upvalues: var6 (ref)
-	return var6(function(p7) --[[ line: 235 ]]
+	return var6(function(p7)
 		-- upvalues: p6 (ref)
 		return p6:renderWithSelectionCursor(p7)
 	end)
 end
 
-return roact.forwardRef(function(p8, p9) --[[ line: 240 ]]
+return roact.forwardRef(function(p8, p9)
 	-- upvalues: roact (ref), playerLabel (ref), cryo (ref)
 	return roact.createElement(playerLabel, cryo.Dictionary.join(p8, { forwardRef = p9 }))
 end)

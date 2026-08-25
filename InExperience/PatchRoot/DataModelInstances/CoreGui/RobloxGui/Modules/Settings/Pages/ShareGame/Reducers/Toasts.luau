@@ -4,7 +4,7 @@ local receivedUserInviteStatusModule = require(shareGame.Actions.ReceivedUserInv
 local stoppedToastTimerModule = require(shareGame.Actions.StoppedToastTimer)
 local inviteStatus = require(shareGame.Constants).InviteStatus
 
-return function(p0, p1) --[[ line: 13 ]]
+return function(p0, p1)
 	-- upvalues: receivedUserInviteStatusModule (ref), inviteStatus (ref), immutable (ref), stoppedToastTimerModule (ref)
 	p0 = p0 or { failedInvites = {} }
 	

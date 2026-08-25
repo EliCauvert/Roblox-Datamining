@@ -35,14 +35,14 @@ leavePrompt.defaultProps = {
 	canKeyboardCaptureFocus = false
 }
 
-function leavePrompt.init(p0) --[[ line: 58 ]]
+function leavePrompt.init(p0)
 	-- upvalues: roact (ref)
 	p0.leaveButtonRef = roact.createRef()
 end
 
-function leavePrompt.render(p1) --[[ line: 62 ]]
+function leavePrompt.render(p1)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), gameIconModule (ref), themedTextLabelModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), platformEnumModule (ref), button (ref), buttonType (ref), focusHandlerModule (ref), guiService (ref), zonePortalModule (ref), directionModule (ref), contextActionService (ref)
-	return withFoundationOrUIBloxStyle(function(p2) --[[ line: 63 ]]
+	return withFoundationOrUIBloxStyle(function(p2)
 		return {
 			Theme = {
 				BackgroundDefault = {
@@ -62,7 +62,7 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 				}
 			}
 		}
-	end, function(p3) --[[ line: 74 ]]
+	end, function(p3)
 		-- upvalues: roact (copy), gameIconModule (copy), themedTextLabelModule (copy), p1 (ref), getFFlagEnableVRFTUXExperienceModule (copy), isFTUXExperienceModule (copy), platformEnumModule (copy), button (copy), buttonType (copy), focusHandlerModule (copy), guiService (copy), zonePortalModule (copy), directionModule (copy), contextActionService (copy)
 		local font = p3.Font
 		
@@ -127,7 +127,7 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 			}),
 			FocusHandler = roact.createElement(focusHandlerModule, {
 				isFocused = p1.props.canGamepadCaptureFocus,
-				didFocus = function() --[[ line: 141 ]]
+				didFocus = function()
 					-- upvalues: guiService (copy), p1 (copy)
 					guiService.SelectedCoreObject = p1.leaveButtonRef.current
 				end
@@ -135,9 +135,9 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 			ZonePortal = roact.createElement(zonePortalModule, { targetZone = 0, direction = directionModule.Left }),
 			KeyboardFocusHandler = roact.createElement(focusHandlerModule, {
 				isFocused = p1.props.canKeyboardCaptureFocus,
-				didFocus = function() --[[ line: 152 ]]
+				didFocus = function()
 					-- upvalues: contextActionService (copy), p1 (copy)
-					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p4) --[[ line: 153 ]]
+					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p4)
 						-- upvalues: p1 (copy)
 						if p4 == Enum.UserInputState.End then
 							p1.props.onConfirm()
@@ -147,7 +147,7 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 						return Enum.ContextActionResult.Pass
 					end, false, Enum.KeyCode.Return)
 				end,
-				didBlur = function() --[[ line: 162 ]]
+				didBlur = function()
 					-- upvalues: contextActionService (copy)
 					contextActionService:UnbindCoreAction("LeavePromptConfirm")
 				end

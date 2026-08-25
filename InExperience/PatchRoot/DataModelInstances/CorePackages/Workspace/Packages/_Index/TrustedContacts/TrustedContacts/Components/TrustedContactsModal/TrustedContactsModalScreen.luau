@@ -7,7 +7,7 @@ local var3 = if require(parent.SharedFlags).FFlagTFWithActionsCheck then require
 local fFlagTCModalUseFoundationOverlay = require(parent.SharedFlags).FFlagTCModalUseFoundationOverlay
 local _ = require(trustedContacts.Common.Types)
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: fFlagTCModalUseFoundationOverlay (ref), useOverlay (ref), reactRobloxModule (ref), reactModule (ref), var3 (ref)
 	local modalProps = p0.screenProps.modalProps
 	local externalNavigation = p0.screenProps.externalNavigation

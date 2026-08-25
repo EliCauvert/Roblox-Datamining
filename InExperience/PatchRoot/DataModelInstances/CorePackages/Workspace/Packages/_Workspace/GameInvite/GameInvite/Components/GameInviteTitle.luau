@@ -41,12 +41,12 @@ local t = {
 	inviteConnections = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.InviteConnections"
 }
 
-local var15 = function(p0, p1, p2) --[[ line: 61 ]]
+local var15 = function(p0, p1, p2)
 	-- upvalues: getFFlagEnableGameInviteModalVRSupport (ref), isVRAppBuild (ref), isExperienceOlderThanOneWeekModule (ref)
 	return if getFFlagEnableGameInviteModalVRSupport() then not isVRAppBuild() and (p2 and (not p1 and (p0 and (p0.isCoreScript and (p0.serverType == "StandardServer" and isExperienceOlderThanOneWeekModule(p0.gameDetails)))))) else not p1 and (p2 and (p0 and (p0.isCoreScript and (p0.serverType == "StandardServer" and isExperienceOlderThanOneWeekModule(p0.gameDetails)))))
 end
 
-return function(p3) --[[ line: 90 ]]
+return function(p3)
 	-- upvalues: useStyle (ref), reactModule (ref), gameInviteModalLayoutContextModule (ref), gameDetailsContextModule (ref), friendsListContext (ref), inviteFriendContext (ref), getLocalizedStrings (ref), t (ref), useAppPolicy (ref), deviceInfo (ref), var15 (ref), textService (ref), titleIconSize (ref), gameInviteModalManagerModule (ref), sidePadding (ref), imageSetButton (ref), close (ref), fFlagConnectionsToFriendsRename (ref), search (ref), shareGameInviteLinkModule (ref), friendsMenuSearch (ref), gameInviteAnalyticsManagerModule (ref)
 	local var16 = useStyle()
 	local var17 = reactModule.useContext(gameInviteModalLayoutContextModule)
@@ -56,7 +56,7 @@ return function(p3) --[[ line: 90 ]]
 	local var21, var22 = reactModule.useState(false)
 	local var23 = getLocalizedStrings(t)
 	local searchFriends = var19.searchFriends
-	local var24 = useAppPolicy(function(p4) --[[ line: 102 ]]
+	local var24 = useAppPolicy(function(p4)
 		return p4.getExperienceInviteShareLinkEnabled()
 	end)
 	local isCompact = var17.modalMode == "compact"
@@ -86,17 +86,17 @@ return function(p3) --[[ line: 90 ]]
 	if isCompact and var27 then
 		var33 += 4
 	end
-	local var35 = function() --[[ line: 143 ]]
+	local var35 = function()
 		-- upvalues: gameInviteModalManagerModule (copy), var20 (ref)
 		gameInviteModalManagerModule:closeModal(var20.getMaxRecipientRowNum())
 	end
 	
-	local var36 = function() --[[ line: 147 ]]
+	local var36 = function()
 		-- upvalues: var22 (ref)
 		var22(true)
 	end
 	
-	local var37 = function() --[[ line: 151 ]]
+	local var37 = function()
 		-- upvalues: var22 (ref), searchFriends (ref)
 		var22(false)
 		searchFriends("")
@@ -112,7 +112,7 @@ return function(p3) --[[ line: 90 ]]
 		LayoutOrder = p3.layoutOrder,
 		Position = UDim2.new(0, 0, 1, 0),
 		Size = p3.size
-	}, if var21 then reactModule.useMemo(function() --[[ line: 243 ]]
+	}, if var21 then reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), friendsMenuSearch (copy), gameInviteAnalyticsManagerModule (copy), var30 (ref), var16 (ref), var23 (ref), var37 (ref)
 		return {
 			UIListLayout = reactModule.createElement("UIListLayout", {
@@ -126,7 +126,7 @@ return function(p3) --[[ line: 90 ]]
 				layoutOrder = 0,
 				focusElement = true,
 				size = UDim2.new(1, -120, 1, -20),
-				onFocus = function() --[[ line: 256 ]]
+				onFocus = function()
 					-- upvalues: gameInviteAnalyticsManagerModule (copy)
 					gameInviteAnalyticsManagerModule:onSearchFocused()
 				end
@@ -144,7 +144,7 @@ return function(p3) --[[ line: 90 ]]
 				[reactModule.Event.Activated] = var37
 			})
 		}
-	end, { var21 }) else reactModule.useMemo(function() --[[ line: 162 ]]
+	end, { var21 }) else reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), sidePadding (copy), var33 (write), p3 (ref), imageSetButton (copy), titleIconSize (copy), var35 (ref), close (copy), var16 (ref), fFlagConnectionsToFriendsRename (copy), var23 (ref), var29 (ref), isCompact (ref), var36 (ref), search (copy), var27 (ref), shareGameInviteLinkModule (copy), var26 (ref), var28 (ref), uDim2 (write)
 		return {
 			UIPadding = reactModule.createElement("UIPadding", {

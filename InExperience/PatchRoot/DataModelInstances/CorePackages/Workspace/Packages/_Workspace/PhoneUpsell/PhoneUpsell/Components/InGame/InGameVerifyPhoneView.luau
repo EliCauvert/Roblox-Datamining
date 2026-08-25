@@ -8,7 +8,7 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local getFFlagAddMorePhoneUpsellEvents = require(parent.SharedFlags).GetFFlagAddMorePhoneUpsellEvents
 
-local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 35 ]]
+local function getButtonStackProps(p0, p1, p2, p3, p4)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
@@ -30,7 +30,7 @@ local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 35 ]]
 	}
 end
 
-return function(p5) --[[ line: 72 | named "InGameVerifyPhoneView" ]]
+return function(p5)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), interactiveAlert (ref), getButtonStackProps (ref), textField (ref), getFFlagAddMorePhoneUpsellEvents (ref)
 	local var4 = useStyle()
 	local tokens = var4.Tokens
@@ -52,7 +52,7 @@ return function(p5) --[[ line: 72 | named "InGameVerifyPhoneView" ]]
 	local var7, var8 = reactModule.useState(0)
 	local var9 = var7 ~= 0
 	
-	local function _(p6) --[[ line: 97 | named "getBodyText" ]]
+	local function _(p6)
 		-- upvalues: p5 (ref)
 		return p6:gsub("{phoneNumber}", "+" .. p5.prefix .. p5.phoneNumber)
 	end
@@ -62,13 +62,13 @@ return function(p5) --[[ line: 72 | named "InGameVerifyPhoneView" ]]
 	return reactModule.createElement(interactiveAlert, {
 		title = var6.titleKey,
 		screenSize = p5.screenSize,
-		buttonStackInfo = getButtonStackProps(if var9 then var6.buttonDisabledKey .. " (" .. var7 .. ")" else var6.buttonKey, function() --[[ line: 101 | named "handleResendButtonClick" ]]
+		buttonStackInfo = getButtonStackProps(if var9 then var6.buttonDisabledKey .. " (" .. var7 .. ")" else var6.buttonKey, function()
 			-- upvalues: p5 (ref), var8 (ref)
 			p5.onResendPhoneCode()
 			var8(10)
 			local currentTime = tick()
 			
-			local function countDown() --[[ line: 106 ]]
+			local function countDown()
 				-- upvalues: currentTime (ref), var8 (copy), countDown (ref)
 				local var14 = 10 - (tick() - currentTime)
 				
@@ -94,7 +94,7 @@ return function(p5) --[[ line: 72 | named "InGameVerifyPhoneView" ]]
 		onCloseClicked = p5.onClose,
 		position = p5.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p5.keyboardHeight) or nil,
 		anchorPoint = p5.isKeyboardShowing and Vector2.new(0.5, 1) or nil,
-		middleContent = function() --[[ line: 139 ]]
+		middleContent = function()
 			-- upvalues: reactModule (copy), tokens (ref), textField (copy), p5 (ref), var10 (ref), getFFlagAddMorePhoneUpsellEvents (copy), var4 (ref), var6 (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -122,7 +122,7 @@ return function(p5) --[[ line: 72 | named "InGameVerifyPhoneView" ]]
 						required = true,
 						LayoutOrder = 1,
 						text = p5.code,
-						onChange = function(p7) --[[ line: 165 ]]
+						onChange = function(p7)
 							-- upvalues: p5 (copy)
 							p5.onCodeTextChange({ Text = p7 })
 						end,

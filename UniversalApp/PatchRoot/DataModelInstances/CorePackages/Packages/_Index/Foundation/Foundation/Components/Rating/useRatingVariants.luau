@@ -6,7 +6,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 40 ]]
+local function variantsFactory(p0)
 	-- upvalues: chipSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -61,7 +61,7 @@ local function variantsFactory(p0) --[[ line: 40 ]]
 	}
 end
 
-return function(p1, p2) --[[ line: 90 ]]
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local rating = variantsContextModule.useVariants("Rating", variantsFactory, p1)
 	local var7 = rating.sizes[p2]

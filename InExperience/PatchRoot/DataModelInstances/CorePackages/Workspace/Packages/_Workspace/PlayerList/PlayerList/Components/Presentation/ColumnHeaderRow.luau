@@ -8,7 +8,7 @@ local gameTextTranslatorContextModule = require(parent.Common.GameTextTranslator
 local getPeopleHeaderLabelModule = require(parent.Common.getPeopleHeaderLabel)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return reactModule.memo(function(p0) --[[ line: 18 | named "ColumnHeaderRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), reactModule (ref), gameTextTranslatorContextModule (ref), getPeopleHeaderLabelModule (ref), peopleCellModule (ref), leaderboardTextCellModule (ref), leaderboardRowShellModule (ref)
 	local var7 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useContext(gameTextTranslatorContextModule) else nil
 	local t = {

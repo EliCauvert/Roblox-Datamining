@@ -30,7 +30,7 @@ local t = {
 	searchPlaceHolder = if fFlagConnectionsToFriendsRename then "Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename" else "Feature.FriendsMenu.Label.SearchForConnections"
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useStyle (ref), useTokens (ref), reactModule (ref), friendsListContextModule (ref), getLocalizedStrings (ref), t (ref), var6 (write), var7 (write), var8 (write), var10 (write), var9 (write), var11 (write), var13 (write), var12 (write), useCursor (ref), foundationModule (ref), getFFlagEnableFriendsListSearchNormalizationErrorFix (ref), debounce (ref), imageSetLabel (ref), search (ref), imageSetButton (ref), clear (ref)
 	local var15 = useStyle()
 	local var16 = useTokens()
@@ -56,14 +56,14 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
 	local searchFriendsString = var17.searchFriendsString
 	local searchFriends = var17.searchFriends
 	local var21 = #searchFriendsString > 0
-	local var22 = if getFFlagEnableFriendsListSearchNormalizationErrorFix() then reactModule.useCallback(debounce(function(p3) --[[ line: 80 ]]
+	local var22 = if getFFlagEnableFriendsListSearchNormalizationErrorFix() then reactModule.useCallback(debounce(function(p3)
 		-- upvalues: searchFriends (ref)
 		searchFriends(p3.Text:lower())
-	end, 0.5), { searchFriends }) else function(p2) --[[ line: 88 ]]
+	end, 0.5), { searchFriends }) else function(p2)
 		-- upvalues: searchFriends (ref)
 		searchFriends(p2.Text)
 	end
-	reactModule.useEffect(function() --[[ line: 95 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (write), p0 (ref)
 		if var19.current and p0.focusElement then
 			var19.current:CaptureFocus()
@@ -128,7 +128,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
 			Image = clear,
 			ImageColor3 = var15.Theme.IconEmphasis.Color,
 			ImageTransparency = var15.Theme.IconEmphasis.Transparency,
-			[reactModule.Event.Activated] = function() --[[ line: 161 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: searchFriends (ref)
 				searchFriends("")
 			end,

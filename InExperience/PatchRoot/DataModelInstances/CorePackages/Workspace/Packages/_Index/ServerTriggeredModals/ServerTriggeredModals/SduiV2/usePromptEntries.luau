@@ -4,11 +4,11 @@ local signalsReactModule = require(parent.SignalsReact)
 local _ = require(script.Parent.PromptStyle)
 local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
 
-return function(p0, p1) --[[ line: 27 | named "usePromptEntries" ]]
+return function(p0, p1)
 	-- upvalues: signalsReactModule (ref), getSduiApiStore (ref), reactModule (ref)
 	local var2 = signalsReactModule.useSignalState(getSduiApiStore().getData(p0).data)
 	
-	return reactModule.useMemo(function() --[[ line: 30 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var2 (ref), p1 (ref)
 		local t = {}
 		

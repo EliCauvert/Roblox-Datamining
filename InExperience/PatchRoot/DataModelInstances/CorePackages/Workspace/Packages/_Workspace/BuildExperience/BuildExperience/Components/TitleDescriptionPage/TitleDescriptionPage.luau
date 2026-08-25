@@ -17,7 +17,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 35 | named "TitleDescriptionPage" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
 	local TITLE_DESCRIPTION_DESCRIPTION_LABEL, TITLE_DESCRIPTION_TITLE, TITLE_DESCRIPTION_TITLE_LABEL
 	local testId = p0.testId or "title-description-page"
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 35 | named "TitleDescriptionPage" ]]
 		TITLE_DESCRIPTION_TITLE = localizationStringsModule.TITLE_DESCRIPTION_TITLE
 		TITLE_DESCRIPTION_TITLE_LABEL = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
 	end
-	local var15 = reactModule.useCallback(function() --[[ line: 62 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), var10 (ref), var12 (ref), titleText (ref), descriptionText (ref), gameConfigurationActionsModule (copy)
 		local universeId = p0.universeId
 		
@@ -54,7 +54,7 @@ return function(p0) --[[ line: 35 | named "TitleDescriptionPage" ]]
 		if value == titleText and value_1 == descriptionText then
 			return
 		end
-		gameConfigurationActionsModule.updateTitleDescription(universeId, value, value_1):catch(function(p1) --[[ line: 75 ]]
+		gameConfigurationActionsModule.updateTitleDescription(universeId, value, value_1):catch(function(p1)
 			warn(`[BuildExperience] Failed to save title and description: {tostring(p1)}`)
 		end)
 	end, {
@@ -64,7 +64,7 @@ return function(p0) --[[ line: 35 | named "TitleDescriptionPage" ]]
 		p0.universeId,
 		var10
 	})
-	reactModule.useEffect(function() --[[ line: 88 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref)
 		return var15
 	end, { var15 })
@@ -86,7 +86,7 @@ return function(p0) --[[ line: 35 | named "TitleDescriptionPage" ]]
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = iconName.ArrowLargeLeft,
-				onActivated = reactModule.useCallback(function() --[[ line: 92 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var15 (ref), p0 (ref)
 					var15()
 					p0.onBack()

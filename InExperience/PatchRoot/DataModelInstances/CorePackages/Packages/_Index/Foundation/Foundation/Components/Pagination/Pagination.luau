@@ -9,7 +9,7 @@ local t = {
 	variant = paginationVariantModule.MultiPage
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 22 | named "Pagination" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), paginationVariantModule (ref), reactModule (ref), multiPagePaginationModule (ref), directionalPaginationModule (ref)
 	local var7 = withDefaultsModule(p0, t)
 	var7.ref = p1

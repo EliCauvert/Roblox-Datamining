@@ -5,7 +5,7 @@ local _ = require(profilePlatform.Common.Types)
 local mergeProfileStateAndResponseModule = require(profilePlatform.Rodux.ProfileTypes.mergeProfileStateAndResponse)
 
 return roduxModule.createReducer({}, {
-	[require(profilePlatform.Networking.getProfilePlatform).Succeeded.name] = function(p0, p1) --[[ line: 13 ]]
+	[require(profilePlatform.Networking.getProfilePlatform).Succeeded.name] = function(p0, p1)
 		-- upvalues: enumsModule (ref), mergeProfileStateAndResponseModule (ref)
 		local responseBody = p1.responseBody
 		

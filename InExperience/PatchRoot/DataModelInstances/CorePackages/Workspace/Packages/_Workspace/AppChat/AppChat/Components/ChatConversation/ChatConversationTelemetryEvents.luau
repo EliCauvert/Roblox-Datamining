@@ -10,9 +10,9 @@ local fFlagAppChatUseSwipeForRepliesModule = require(appChat.Flags.FFlagAppChatU
 local namedCounterConfigurationNoEmittedInfo = defaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
 local namedCounterConfigurationAndFormat = defaultTelemetryEventsModule.namedCounterConfigurationAndFormat
 
-local function targetMessageFormatFunction() --[[ line: 23 ]]
+local function targetMessageFormatFunction()
 	-- upvalues: defaultTelemetryEventsModule (ref)
-	return defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p0) --[[ line: 24 ]]
+	return defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p0)
 		return {
 			targetMessageId = p0.targetMessageId,
 			targetMessageSenderId = p0.targetMessageSenderId,
@@ -30,7 +30,7 @@ return {
 		lastUpdated = { 2025, 7, 31 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.Rendered"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ line: 48 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
 				return { loadedMessageCount = p1.loadedMessageCount }
 			end)
 		}
@@ -40,10 +40,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Exit", function(p2) --[[ line: 60 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Exit", function(p2)
 				return { conversationExitType = p2.conversationExitType }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p3) --[[ line: 68 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p3)
 				return { conversationExitType = p3.conversationExitType }
 			end)
 		}
@@ -62,10 +62,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.Sent", function(p4) --[[ line: 90 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.Sent", function(p4)
 				return { messageSentResult = p4.messageSentResult }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p5) --[[ line: 103 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p5)
 				return {
 					messageSentResult = p5.messageSentResult,
 					messageId = p5.messageId,
@@ -83,10 +83,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.MoreMenu", function(p6) --[[ line: 129 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.MoreMenu", function(p6)
 				return { action = p6.action }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p7) --[[ line: 137 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p7)
 				return { action = p7.action }
 			end)
 		}
@@ -96,10 +96,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.Send", function(p8) --[[ line: 150 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Button.Send", function(p8)
 				return { sendBtnClickResult = p8.sendBtnClickResult }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p9) --[[ line: 157 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p9)
 				return { sendBtnClickResult = p9.sendBtnClickResult }
 			end)
 		}
@@ -181,10 +181,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Impression", function(p10) --[[ line: 247 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Impression", function(p10)
 				return { tooltipVariant = p10.tooltipVariant }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p11) --[[ line: 255 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p11)
 				return { tooltipVariant = p11.tooltipVariant }
 			end)
 		}
@@ -194,10 +194,10 @@ return {
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Dismissed", function(p12) --[[ line: 271 ]]
+			namedCounterConfigurationAndFormat("AppChat.ChatConversation.Message.FtuxTooltip.Dismissed", function(p12)
 				return { tooltipVariant = p12.tooltipVariant }
 			end),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p13) --[[ line: 279 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p13)
 				return { tooltipVariant = p13.tooltipVariant }
 			end)
 		}
@@ -208,7 +208,7 @@ return {
 		lastUpdated = { 2025, 11, 18 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.GameCard.Thumbnail.Clicked"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p14) --[[ line: 294 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p14)
 				return { universeId = p14.universeId, placeId = p14.placeId }
 			end)
 		}
@@ -219,7 +219,7 @@ return {
 		lastUpdated = { 2025, 11, 18 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.GameCard.Button.Play"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p15) --[[ line: 311 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p15)
 				return { universeId = p15.universeId, placeId = p15.placeId }
 			end)
 		}
@@ -230,7 +230,7 @@ return {
 		lastUpdated = { 2025, 11, 19 },
 		backendsList = {
 			namedCounterConfigurationNoEmittedInfo("AppChat.ChatConversation.GameCard.Metadata.Clicked"),
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p16) --[[ line: 328 ]]
+			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p16)
 				return { universeId = p16.universeId, placeId = p16.placeId }
 			end)
 		}

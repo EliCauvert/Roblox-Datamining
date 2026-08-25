@@ -10,7 +10,7 @@ local useIsSpatial = require(parent.Responsive).useIsSpatial
 local getFFlagEnableVRWrapperTransparency = sharedFlagsModule.GetFFlagEnableVRWrapperTransparency
 local ROUNDED_CORNER_RADIUS = require(script.Parent.Constants).ROUNDED_CORNER_RADIUS
 
-return function(p0) --[[ line: 36 ]]
+return function(p0)
 	-- upvalues: useIsFPSAtTarget (ref), object (ref), useIsSpatial (ref), roactModule (ref), roundedCornersFrameModule (ref), ROUNDED_CORNER_RADIUS (ref), getFFlagEnableVRWrapperTransparency (ref), reactModule (ref), panel3D (ref)
 	local var4 = object.assign({}, p0.vrProps, { hidden = p0.vrProps.hidden or not useIsFPSAtTarget() })
 	

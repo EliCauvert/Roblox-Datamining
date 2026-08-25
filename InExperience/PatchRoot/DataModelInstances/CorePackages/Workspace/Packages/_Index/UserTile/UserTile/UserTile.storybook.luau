@@ -13,9 +13,9 @@ local roactRoduxModule = require(parent.RoactRodux)
 local colorMode = foundationModule.Enums.ColorMode
 local t = { Light = colorMode.Light, Dark = colorMode.Dark }
 
-local function createStore(_) --[[ line: 20 ]]
+local function createStore(_)
 	-- upvalues: roduxModule (ref)
-	return roduxModule.Store.new(function() --[[ line: 21 ]]
+	return roduxModule.Store.new(function()
 		return {
 			ScreenSize = Vector2.new(600, 600),
 			TopBar = { topBarHeight = 100 },
@@ -24,21 +24,21 @@ local function createStore(_) --[[ line: 20 ]]
 	end, {}, { roduxModule.thunkMiddleware })
 end
 
-local function mockNavigation(p0) --[[ line: 37 ]]
+local function mockNavigation(p0)
 	-- upvalues: reactModule (ref), roactNavigationModule (ref)
 	return reactModule.createElement(roactNavigationModule.Provider, {
 		value = {
 			state = { routeName = "appPage" },
-			isFocused = function() --[[ line: 43 ]]
+			isFocused = function()
 				return true
 			end,
-			addListener = function() --[[ line: 46 ]]
-				return { remove = function() --[[ line: 48 ]] end }
+			addListener = function()
+				return { remove = function() end }
 			end,
-			getParam = function(_, p1) --[[ line: 51 ]]
+			getParam = function(_, p1)
 				return p1
 			end,
-			navigate = function() --[[ line: 54 ]] end
+			navigate = function() end
 		}
 	}, { Child = p0 })
 end
@@ -48,9 +48,9 @@ return {
 	storyRoot = userTile.Stories,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p2) --[[ line: 66 ]]
+	mapStory = function(p2)
 		-- upvalues: t (ref), reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), createStore (ref), mockNavigation (ref), foundationProvider (ref), designTokenProvider (ref)
-		return function(p3) --[[ line: 67 ]]
+		return function(p3)
 			-- upvalues: t (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), designTokenProvider (copy), p2 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore(nil) }, {

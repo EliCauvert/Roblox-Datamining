@@ -1,8 +1,8 @@
-﻿local _ = function(p0) --[[ line: 3 ]]
+﻿local _ = function(p0)
 	return p0.order ~= nil and (not p0.moderated and not p0.failed)
 end
 
-return function(p1, p2) --[[ line: 7 ]]
+return function(p1, p2)
 	if p1.order and p2.order then
 		return p1.order < p2.order
 	end

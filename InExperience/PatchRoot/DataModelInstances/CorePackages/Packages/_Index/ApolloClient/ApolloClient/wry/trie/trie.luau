@@ -1,14 +1,14 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
 local t = {}
 
-local function defaultMakeData() --[[ line: 24 ]]
+local function defaultMakeData()
 	return {}
 end
 
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0, p1) --[[ line: 67 ]]
+function t_1.new(p0, p1)
 	-- upvalues: defaultMakeData (ref), t_1 (ref)
 	local var3 = p0
 	local var4 = p1
@@ -26,11 +26,11 @@ function t_1.new(p0, p1) --[[ line: 67 ]]
 	return tbl
 end
 
-function t_1:lookup(...) --[[ line: 88 ]]
+function t_1:lookup(...)
 	return self:lookupArray({ ... })
 end
 
-function t_1:lookupArray(p2) --[[ line: 97 ]]
+function t_1:lookupArray(p2)
 	local var6 = self
 	
 	for i, v in p2 do
@@ -42,7 +42,7 @@ function t_1:lookupArray(p2) --[[ line: 97 ]]
 	return var6.data
 end
 
-function t_1:getChildTrie(p3) --[[ line: 114 ]]
+function t_1:getChildTrie(p3)
 	-- upvalues: t_1 (ref)
 	local weak
 	local _ = nil

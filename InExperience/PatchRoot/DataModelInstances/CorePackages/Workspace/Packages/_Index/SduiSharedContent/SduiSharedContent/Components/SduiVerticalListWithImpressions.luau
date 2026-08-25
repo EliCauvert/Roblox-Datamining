@@ -21,15 +21,15 @@ local fFlagSduiCarouselUseNestedImpressionsFeedContext = sharedFlagsModule.FFlag
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 local frozen = table.freeze({})
 
-local function ImpressionTaggedSduiItem(p0) --[[ line: 75 ]]
+local function ImpressionTaggedSduiItem(p0)
 	-- upvalues: reactModule (ref), impressionsTagUtility (ref), getSduiComponentWrapper (ref)
 	local var10 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), impressionsTagUtility (copy), var10 (ref)
 		if p0.impressionsTag then
 			impressionsTagUtility.AddTag(var10, p0.impressionsTag, p0.index)
 			
-			return function() --[[ line: 83 ]]
+			return function()
 				-- upvalues: impressionsTagUtility (copy), var10 (copy), p0 (copy)
 				impressionsTagUtility.RemoveTag(var10, p0.impressionsTag, p0.index)
 			end
@@ -38,7 +38,7 @@ local function ImpressionTaggedSduiItem(p0) --[[ line: 75 ]]
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ref = reactModule.useCallback(function(p1) --[[ line: 88 ]]
+		ref = reactModule.useCallback(function(p1)
 			-- upvalues: var10 (ref), p0 (ref), impressionsTagUtility (copy)
 			var10.current = p1
 			
@@ -66,7 +66,7 @@ local function ImpressionTaggedSduiItem(p0) --[[ line: 75 ]]
 	})
 end
 
-local function resolveImpressionsTag(p2, p3, p4, p5, p6, p7) --[[ line: 121 ]]
+local function resolveImpressionsTag(p2, p3, p4, p5, p6, p7)
 	-- upvalues: sduiErrors (ref)
 	local current = p2.current
 	
@@ -91,7 +91,7 @@ local function resolveImpressionsTag(p2, p3, p4, p5, p6, p7) --[[ line: 121 ]]
 	return `{p5}_{collectionComponentType}_{p4}_{collectionId}_{p6}`
 end
 
-return reactModule.memo(function(p8) --[[ line: 163 | named "SduiVerticalListWithImpressions" ]]
+return reactModule.memo(function(p8)
 	-- upvalues: frozen (ref), reactModule (ref), sduiFeedContextModule (ref), fFlagSduiCarouselUseNestedImpressionsFeedContext (ref), findAnalyticsField (ref), sduiBuilder (ref), useCollectionAnalyticsContextModule (ref), resolveImpressionsTag (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), sduiCollectionAnalyticsBuilder (ref), ImpressionTaggedSduiItem (ref), getSduiComponentWrapper (ref), sduiViewModule (ref), frameBoundsImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref)
 	local sduiContext = p8.sduiContext
 	local items = p8.items or frozen
@@ -106,7 +106,7 @@ return reactModule.memo(function(p8) --[[ line: 163 | named "SduiVerticalListWit
 	local var21 = reactModule.useRef({})
 	local routeName = sduiContext.routeName or sduiContext.appPage
 	local var23 = resolveImpressionsTag(var20, componentType, routeName, p8.debugName, p8.index or 0, sduiContext)
-	local var24 = reactModule.useMemo(function() --[[ line: 254 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: items (ref), sduiContext (ref), sduiErrors (copy), componentType (ref), var23 (ref), findAnalyticsField (copy), frozen (copy), sduiBuilder (copy), sduiCollectionAnalyticsBuilder (copy), reactModule (copy), ImpressionTaggedSduiItem (copy), p8 (ref), var19 (ref), scrollViewPositionChangedSignal (ref), verticalScrollingFrameRef (ref), var21 (ref)
 		local t = {}
 		local t_1 = {}
@@ -173,7 +173,7 @@ return reactModule.memo(function(p8) --[[ line: 163 | named "SduiVerticalListWit
 			pageContext = routeName,
 			impressionsTag = var23,
 			scrollViewPositionChangedSignal = scrollViewPositionChangedSignal,
-			sendImpressions = reactModule.useCallback(function(p9) --[[ line: 213 ]]
+			sendImpressions = reactModule.useCallback(function(p9)
 				-- upvalues: items (ref), var19 (ref), sduiParseHelpers (copy), sduiContext (ref), sduiErrors (copy), componentType (ref), var23 (ref), reportUnifiedLoggingImpressions (copy), var21 (ref), var20 (ref), p8 (ref)
 				if #items ~= 0 then
 					reportUnifiedLoggingImpressions(sduiContext, p9, var21.current, var20.current, p8.startRow, p8.impressionEventName, p8.skipItemImpressionsLog, var23)

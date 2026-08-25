@@ -1,9 +1,9 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0) --[[ line: 10 | named "usePrevious" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 12 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var1 (ref), p0 (ref)
 		var1.current = p0
 	end)

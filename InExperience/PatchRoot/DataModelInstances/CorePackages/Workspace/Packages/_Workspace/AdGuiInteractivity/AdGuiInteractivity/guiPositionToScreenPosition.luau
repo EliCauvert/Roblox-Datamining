@@ -8,7 +8,7 @@ local t = {
 	[Enum.NormalId.Bottom] = CFrame.fromEulerAnglesYXZ(-1.570796326795, -1.570796326795, 0)
 }
 
-return function(p0, p1, p2) --[[ line: 21 | named "guiPositionToScreenPosition" ]]
+return function(p0, p1, p2)
 	-- upvalues: guiService (ref), t (ref)
 	local var2 = p1 / p0.AbsoluteSize
 	

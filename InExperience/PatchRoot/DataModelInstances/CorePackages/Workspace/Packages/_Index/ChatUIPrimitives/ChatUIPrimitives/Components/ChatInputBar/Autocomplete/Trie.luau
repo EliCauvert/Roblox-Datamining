@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 4 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.children = {}
@@ -14,7 +14,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 15 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), t (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.root = t.new("")
@@ -22,7 +22,7 @@ function t_1.new() --[[ line: 15 ]]
 	return tbl
 end
 
-function t_1:insert(p1) --[[ line: 21 ]]
+function t_1:insert(p1)
 	-- upvalues: t (ref)
 	local root = self.root
 	
@@ -37,7 +37,7 @@ function t_1:insert(p1) --[[ line: 21 ]]
 	root.isEndOfWord = true
 end
 
-function t_1:autocomplete(p2) --[[ line: 33 ]]
+function t_1:autocomplete(p2)
 	local substring
 	local t = {}
 	local root = self.root
@@ -55,7 +55,7 @@ function t_1:autocomplete(p2) --[[ line: 33 ]]
 	return t
 end
 
-function t_1:_collect(p3, p4, p5) --[[ line: 48 ]]
+function t_1:_collect(p3, p4, p5)
 	if p3.isEndOfWord then
 		table.insert(p4, p5 .. p3.data)
 	end

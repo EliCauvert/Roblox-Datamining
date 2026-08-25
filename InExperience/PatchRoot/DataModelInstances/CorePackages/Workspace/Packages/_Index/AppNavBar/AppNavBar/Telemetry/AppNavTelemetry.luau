@@ -50,7 +50,7 @@ local t_4 = {
 }
 local var9 = nil
 
-local function logSwitchTabStart(value, p0) --[[ line: 80 ]]
+local function logSwitchTabStart(value, p0)
 	-- upvalues: var9 (write)
 	var9 = {
 		previousPage = value,
@@ -59,7 +59,7 @@ local function logSwitchTabStart(value, p0) --[[ line: 80 ]]
 	}
 end
 
-local function reportSwitchTab(p1, p2, p3) --[[ line: 88 ]]
+local function reportSwitchTab(p1, p2, p3)
 	-- upvalues: telemetryService (ref), t (ref), appNavDeviceTier (ref), var3 (ref), t_1 (ref), list (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
 	telemetryService:LogStat(t, {
 		customFields = {
@@ -78,7 +78,7 @@ local function reportSwitchTab(p1, p2, p3) --[[ line: 88 ]]
 	end
 end
 
-local function logSwitchTabEnd(p4) --[[ line: 115 ]]
+local function logSwitchTabEnd(p4)
 	-- upvalues: var9 (write), reportSwitchTab (ref)
 	if not var9 then return end
 	if p4 == var9.nextPage then
@@ -94,12 +94,12 @@ end
 
 local var13 = nil
 
-local function logVisibilityStart(p5) --[[ line: 134 ]]
+local function logVisibilityStart(p5)
 	-- upvalues: var13 (write)
 	var13 = { nextValue = p5, startTime = os.clock() }
 end
 
-local function reportVisibility(p6, p7) --[[ line: 141 ]]
+local function reportVisibility(p6, p7)
 	-- upvalues: telemetryService (ref), t_2 (ref), appNavDeviceTier (ref), var3 (ref), t_3 (ref), list (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
 	telemetryService:LogStat(t_2, {
 		customFields = {
@@ -123,7 +123,7 @@ return {
 	logSwitchTabStart = logSwitchTabStart,
 	logSwitchTabEnd = logSwitchTabEnd,
 	logVisibilityStart = logVisibilityStart,
-	logVisibilityEnd = function(p8) --[[ line: 165 ]]
+	logVisibilityEnd = function(p8)
 		-- upvalues: var13 (write), reportVisibility (ref)
 		if not var13 then return end
 		if p8 == var13.nextValue then
@@ -135,7 +135,7 @@ return {
 		end
 		var13 = nil
 	end,
-	logPlacement = function(p9) --[[ line: 183 ]]
+	logPlacement = function(p9)
 		-- upvalues: var16 (write), telemetryService (ref), t_4 (ref), fFlagAppNavTelemetryLogger (ref), var1 (write)
 		if p9 == var16 then return end
 		telemetryService:LogCounter(t_4, {
@@ -147,7 +147,7 @@ return {
 		end
 		var16 = p9
 	end,
-	reset = function() --[[ line: 201 ]]
+	reset = function()
 		-- upvalues: var9 (write), var13 (write), var16 (write)
 		var9 = nil
 		var13 = nil

@@ -3,7 +3,7 @@ local reactModule = require(avatarExperienceControlBar.Parent.React)
 local useCustomizeControlBarPropsModule = require(avatarExperienceControlBar.useCustomizeControlBarProps)
 local baseControlBarContainerModule = require(avatarExperienceControlBar.BaseControlBarContainer)
 
-return reactModule.memo(function(p0) --[[ line: 9 | named "CustomizeControlBarContainer" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useCustomizeControlBarPropsModule (ref), reactModule (ref), baseControlBarContainerModule (ref)
 	return reactModule.createElement(baseControlBarContainerModule, {
 		config = useCustomizeControlBarPropsModule(p0).config,

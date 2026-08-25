@@ -13,12 +13,12 @@ local fFlagAXSlotBasedEditorCategoryTooltip = require(parent.AvatarExperienceFla
 local AXSlotBasedEditorCategoryTooltipKey = game:DefineFastString("AXSlotBasedEditorCategoryTooltipKey", "SlotEditorSecondCategory")
 local t = { dampingRatio = 1, frequency = 1 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 46 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), foundationModule (ref), t (ref), fFlagAXSlotBasedEditorCategoryTooltip (ref), itemCard (ref), itemCardHeader (ref), view (ref), AXTooltip (ref), AXSlotBasedEditorCategoryTooltipKey (ref), slotItemCardFooterModule (ref)
 	local var7 = useTokens()
 	local var8, var9 = reactOtterModule.useAnimatedBinding(1)
 	local var10, var11 = reactModule.useState(false)
-	local var12 = reactModule.useCallback(function(p2) --[[ line: 52 ]]
+	local var12 = reactModule.useCallback(function(p2)
 		-- upvalues: foundationModule (copy), var11 (ref)
 		if p2 == foundationModule.Enums.ControlState.Default then
 			var11(false)
@@ -28,7 +28,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 46 ]]
 			var11(true)
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), var7 (ref), var9 (ref), reactOtterModule (copy), t (copy)
 		var9(reactOtterModule.spring(if var10 then var7.Color.Stroke.Emphasis.Transparency else 1, t))
 	end, { var10 })
@@ -37,7 +37,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 46 ]]
 	
 	if fFlagAXSlotBasedEditorCategoryTooltip then
 		var13 = reactModule.createRef()
-		var14 = reactModule.useCallback(function() --[[ line: 71 ]]
+		var14 = reactModule.useCallback(function()
 			-- upvalues: var13 (write), p0 (ref)
 			if var13.current then
 				var13.current()

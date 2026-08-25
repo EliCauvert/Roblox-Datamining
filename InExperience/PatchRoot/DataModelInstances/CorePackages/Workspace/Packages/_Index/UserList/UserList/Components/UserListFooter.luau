@@ -8,7 +8,7 @@ local button = foundationModule.Button
 local inputSize = enums.InputSize
 local fFlagUserListFooterViewMore = require(parent.SharedFlags).FFlagUserListFooterViewMore
 
-return function(p0) --[[ line: 21 | named "UserListFooter" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), fFlagUserListFooterViewMore (ref), reactModule (ref), view (ref), button (ref), inputSize (ref), enums (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y padding-top-medium padding-bottom-medium",

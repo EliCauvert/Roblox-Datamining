@@ -12,7 +12,7 @@ local constantsModule = require(parent.Resources.Constants)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
 local sessionUtilityModule = require(parent.Utility.SessionUtility)
 
-function sendAnalytics(p0, p1, p2, p3) --[[ line: 36 ]]
+function sendAnalytics(p0, p1, p2, p3)
 	-- upvalues: sendAnalyticsModule (ref), constantsModule (ref)
 	sendAnalyticsModule(p0, constantsModule.Analytics.ReportSubmittedName, {
 		reportType = p0,
@@ -23,20 +23,20 @@ function sendAnalytics(p0, p1, p2, p3) --[[ line: 36 ]]
 	})
 end
 
-function getAbuseVectorFromReportCategory(p4) --[[ line: 50 ]]
+function getAbuseVectorFromReportCategory(p4)
 	-- upvalues: constantsModule (ref)
 	return if p4 == constantsModule.Category.Voice then "voice" elseif p4 == constantsModule.Category.Text then "chat" else "other"
 end
 
-function submitUserAbuseReport(p5, p6) --[[ line: 59 ]]
+function submitUserAbuseReport(p5, p6)
 	-- upvalues: constantsModule (ref), playersService (ref), createVoiceAbuseReportRequestModule (ref), default (ref), url (ref), httpRbxApiService (ref), sessionUtilityModule (ref)
 	local var9 = p5.reportCategory == constantsModule.Category.Voice
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
-		pcall(function() --[[ line: 63 ]]
+		pcall(function()
 			-- upvalues: p5 (ref), var9 (ref), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (ref), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p6 (ref)
-			coroutine.wrap(function() --[[ line: 64 ]]
+			coroutine.wrap(function()
 				-- upvalues: p5 (copy), var9 (copy), createVoiceAbuseReportRequestModule (copy), playersService (copy), default (copy), localPlayer (copy), url (copy), httpRbxApiService (copy), constantsModule (copy), sessionUtilityModule (copy), p6 (copy)
 				local var10 = getAbuseVectorFromReportCategory(p5.reportCategory)
 				
@@ -70,10 +70,10 @@ function submitUserAbuseReport(p5, p6) --[[ line: 59 ]]
 	end
 end
 
-function submitPlaceAbuseReport(p7, p8) --[[ line: 99 ]]
+function submitPlaceAbuseReport(p7, p8)
 	-- upvalues: runService (ref), playersService (ref), constantsModule (ref), sessionUtilityModule (ref)
 	if p7.placeName ~= "" then
-		coroutine.wrap(function() --[[ line: 101 ]]
+		coroutine.wrap(function()
 			-- upvalues: runService (copy), p7 (ref), playersService (copy), constantsModule (copy), sessionUtilityModule (copy), p8 (ref)
 			if not runService:IsStudio() then
 				playersService:ReportAbuse(nil, p7.reason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p7.comment, p7.placeName, tostring(p7.placeId), p7.placeDescription))

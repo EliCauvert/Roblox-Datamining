@@ -23,7 +23,7 @@ local t_1 = {
 playerContext.validateProps = tModule.strictInterface({
 	text = tModule.optional(tModule.string),
 	icon = tModule.optional(tModule.union(tModule.string, tModule.table)),
-	iconSize = tModule.optional(tModule.intersection(tModule.UDim2, function(p0) --[[ line: 33 | named "doesNotUseScale" ]]
+	iconSize = tModule.optional(tModule.intersection(tModule.UDim2, function(p0)
 		if p0.X.Scale == 0 and p0.Y.Scale == 0 then
 			return true
 		end
@@ -55,11 +55,11 @@ playerContext.defaultProps = {
 	textXAlignment = Enum.TextXAlignment.Left
 }
 
-function playerContext.init(p1) --[[ line: 87 ]]
+function playerContext.init(p1)
 	p1.state = {}
 end
 
-function playerContext.render(p2) --[[ line: 91 ]]
+function playerContext.render(p2)
 	-- upvalues: withStyleModule (ref), getContentStyleModule (ref), t_1 (ref), t (ref), roactModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref)
 	local controlState = p2.state.controlState
 	local text = p2.props.text
@@ -68,7 +68,7 @@ function playerContext.render(p2) --[[ line: 91 ]]
 	local horizontalAlignment = p2.props.horizontalAlignment
 	local onActivated = p2.props.onActivated
 	
-	return withStyleModule(function(p3) --[[ line: 101 ]]
+	return withStyleModule(function(p3)
 		-- upvalues: getContentStyleModule (copy), t_1 (copy), controlState (ref), t (copy), onActivated (ref), p2 (ref), iconSize (ref), roactModule (copy), horizontalAlignment (ref), icon (ref), imageSetComponentModule (copy), text (ref), genericTextLabelModule (copy)
 		local var16 = getContentStyleModule(t_1, controlState, p3)
 		local var17 = getContentStyleModule(t, controlState, p3)

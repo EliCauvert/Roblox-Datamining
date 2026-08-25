@@ -2,17 +2,17 @@
 local createSignalModule = require(parent.Misc.createSignal)
 local strictModule = require(parent.strict)
 
-local function _(p0, p1) --[[ line: 7 | named "makeImageData" ]]
+local function _(p0, p1)
 	return { Path = "rbxasset://textures/" .. p0, SliceCenter = p1 }
 end
 
 local t = {
-	__tostring = function() --[[ line: 15 ]]
+	__tostring = function()
 		return "Service(LayoutValues)"
 	end
 }
 
-function t.new(p2) --[[ line: 19 ]]
+function t.new(p2)
 	-- upvalues: t (ref), createSignalModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, { __index = t })
@@ -22,12 +22,12 @@ function t.new(p2) --[[ line: 19 ]]
 	return t_1
 end
 
-function t.update(p3, p4) --[[ line: 31 ]]
+function t.update(p3, p4)
 	p3.layout = p3:generate(p4)
 	p3.signal:fire(p3.layout)
 end
 
-function t.generate(_, p5) --[[ line: 36 ]]
+function t.generate(_, p5)
 	-- upvalues: strictModule (ref)
 	local var4 = if p5 then 3 else 1
 	local var5 = 44 * var4

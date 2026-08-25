@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Types)
 local insert = table.insert
 
-return function(p0, p1) --[[ line: 18 | named "collectArray" ]]
+return function(p0, p1)
 	-- upvalues: insert (ref)
 	local t = {}
 	

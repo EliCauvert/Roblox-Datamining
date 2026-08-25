@@ -8,16 +8,16 @@ local useEventConnection = require(parent_1.ReactUtils).useEventConnection
 local fetchEventDetailsModule = require(parent.Common.fetchEventDetails)
 local serviceOverrideContextModule = require(parent.Components.CoreUI.ServiceOverrideContext)
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), useContext (ref), serviceOverrideContextModule (ref), reactModule (ref), fetchEventDetailsModule (ref), useEventConnection (ref)
 	local var3 = useRoactService(roactNetworking)
 	local socialService = useContext(serviceOverrideContextModule).socialService
-	useEventConnection(socialService.ShowPromptRsvpToEvent, reactModule.useCallback(function(p1) --[[ line: 33 ]]
+	useEventConnection(socialService.ShowPromptRsvpToEvent, reactModule.useCallback(function(p1)
 		-- upvalues: fetchEventDetailsModule (copy), var3 (ref), p0 (ref), socialService (ref)
-		fetchEventDetailsModule(var3, p1):andThen(function(p2) --[[ line: 34 ]]
+		fetchEventDetailsModule(var3, p1):andThen(function(p2)
 			-- upvalues: p0 (copy), p1 (ref)
 			p0.openRsvpPrompt(p1, p2)
-		end, function(p3) --[[ line: 36 ]]
+		end, function(p3)
 			-- upvalues: socialService (copy), p1 (ref), p0 (copy)
 			socialService:PromptRsvpToEventCompleted(p1, false, Enum.RsvpStatus.None)
 			warn("Error fetching event details: ", p3)

@@ -12,21 +12,21 @@ local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local fFlagFixUpsellVerificationToNavigateToOverlaysModule = require(phoneUpsell.Flags.FFlagFixUpsellVerificationToNavigateToOverlays)
 local t = {
-	onSuccess = function() --[[ line: 24 ]] end,
-	closeUpsell = function() --[[ line: 25 ]] end
+	onSuccess = function() end,
+	closeUpsell = function() end
 }
 
-return function(p0) --[[ line: 30 | named "PhoneVerificationUpsellOverlayWrapper" ]]
+return function(p0)
 	-- upvalues: mergePropsModule (ref), t (ref), reactModule (ref), imageSetLabel (ref), images (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (ref), useLocalization (ref), upsellContainerModule (ref), cryoModule (ref), phoneVerificationStatusOverlayModule (ref)
 	local var9 = mergePropsModule(t, p0)
 	local var10, var11 = reactModule.useState(false)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		PhoneVerificationUpsellOverlay = reactModule.createElement(upsellContainerModule, cryoModule.Dictionary.join(var9, {
-			onSuccess = function() --[[ line: 41 ]]
+			onSuccess = function()
 				-- upvalues: var11 (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (ref)
 				var11(true)
-				task.delay(3, function() --[[ line: 43 ]]
+				task.delay(3, function()
 					-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var9 (copy)
 					if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
 						var9.closeUpsell()

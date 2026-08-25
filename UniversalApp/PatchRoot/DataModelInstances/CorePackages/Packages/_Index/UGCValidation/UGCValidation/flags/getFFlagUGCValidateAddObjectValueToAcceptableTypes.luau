@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateAddObjectValueToAcceptableTypes", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidateAddObjectValueToAcceptableTypes")
 end

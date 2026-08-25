@@ -22,9 +22,9 @@ local t = { language = "en-us" }
 local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_2 = { Console = device.Console, Desktop = device.Desktop }
 
-local var14 = function(p0) --[[ line: 40 ]]
+local var14 = function(p0)
 	-- upvalues: roduxModule (ref), cryoModule (ref)
-	return roduxModule.Store.new(function() --[[ line: 41 ]]
+	return roduxModule.Store.new(function()
 		-- upvalues: cryoModule (copy), p0 (ref)
 		return cryoModule.Dictionary.join(p0, {
 			ScreenSize = Vector2.new(600, 600),
@@ -40,15 +40,15 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	roactRodux = roactRoduxModule,
-	mapDefinition = function(p1) --[[ line: 63 ]]
+	mapDefinition = function(p1)
 		-- upvalues: cryoModule (ref), t (ref)
 		return cryoModule.Dictionary.join(p1, {
 			controls = cryoModule.Dictionary.join(t, p1.controls or {})
 		})
 	end,
-	mapStory = function(p2) --[[ line: 67 ]]
+	mapStory = function(p2)
 		-- upvalues: t_1 (ref), reactModule (ref), styleProviderWithDefaultTheme (ref), roactRoduxModule (ref), var14 (ref), universalAppPolicyModule (ref), apolloClientModule (ref), mockApolloClient (ref), foundationProvider (ref), t_2 (ref), designTokenProvider (ref), mockLocale (ref)
-		return function(p3) --[[ line: 68 ]]
+		return function(p3)
 			-- upvalues: t_1 (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), var14 (copy), universalAppPolicyModule (copy), apolloClientModule (copy), mockApolloClient (copy), foundationProvider (copy), t_2 (copy), designTokenProvider (copy), mockLocale (copy), p2 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				storeProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var14(p3.definition.state or {}) }, {

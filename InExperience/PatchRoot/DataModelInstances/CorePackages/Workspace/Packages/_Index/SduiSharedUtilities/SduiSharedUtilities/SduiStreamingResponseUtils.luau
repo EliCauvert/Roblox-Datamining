@@ -1,4 +1,4 @@
-﻿local function readFrameLength(p0, p1) --[[ line: 27 ]]
+﻿local function readFrameLength(p0, p1)
 	local var1 = 0
 	local var2 = 1
 	
@@ -19,10 +19,10 @@
 end
 
 return {
-	isEmptyResponseBody = function(p2) --[[ line: 9 ]]
+	isEmptyResponseBody = function(p2)
 		return p2 == nil or (if typeof(p2) == "string" then p2 == "" else typeof(p2) == "buffer" and buffer.len(p2) == 0)
 	end,
-	extractFrames = function(p3) --[[ line: 51 ]]
+	extractFrames = function(p3)
 		-- upvalues: readFrameLength (ref)
 		local t = {}
 		local var5 = 1

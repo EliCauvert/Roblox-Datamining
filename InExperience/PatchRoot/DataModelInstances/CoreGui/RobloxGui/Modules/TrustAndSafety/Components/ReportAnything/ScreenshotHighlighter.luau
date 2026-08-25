@@ -6,13 +6,13 @@ local getFIntRAMaxAnnotationCountModule = require(script.Parent.Parent.Parent.Fl
 local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local images = UIBloxModule.App.ImageSet.Images
 
-return function(p0) --[[ line: 24 | named "ScreenshotHighlighter" ]]
+return function(p0)
 	-- upvalues: robloxGui (ref), reactModule (ref), getFIntRAMaxAnnotationCountModule (ref), imageSetButton (ref), images (ref)
 	local absoluteSize = robloxGui.AbsoluteSize
 	local var5 = (if absoluteSize.X < absoluteSize.Y then absoluteSize.X else absoluteSize.Y) / 5
 	local var6, var7 = reactModule.useState(false)
 	
-	local var8 = function(p1, p2) --[[ line: 34 ]]
+	local var8 = function(p1, p2)
 		-- upvalues: p0 (ref), var5 (ref)
 		table.insert(p0.annotationPoints, (Vector2.new(p2.X, p2.Y) - p1.AbsolutePosition) / p1.AbsoluteSize)
 		p0.setAnnotationCircleRadius(var5 * 0.5 / (if p1.AbsoluteSize.Y < p1.AbsoluteSize.X then p1.AbsoluteSize.X else p1.AbsoluteSize.Y))
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 24 | named "ScreenshotHighlighter" ]]
 		p0.handleAnnotationPoints(p0.annotationPoints)
 	end
 	
-	local var9 = function(p3, p4) --[[ line: 46 ]]
+	local var9 = function(p3, p4)
 		-- upvalues: p0 (ref), getFIntRAMaxAnnotationCountModule (copy), var7 (ref), var8 (ref)
 		if p4.UserInputState == Enum.UserInputState.Begin and (p4.UserInputType == Enum.UserInputType.Touch or p4.UserInputType == Enum.UserInputType.MouseButton1) and #p0.annotationPoints < getFIntRAMaxAnnotationCountModule() then
 			var7(true)
@@ -28,9 +28,9 @@ return function(p0) --[[ line: 24 | named "ScreenshotHighlighter" ]]
 		end
 	end
 	
-	local var10 = function(_, _) --[[ line: 56 ]] end
+	local var10 = function(_, _) end
 	
-	local var11 = function(_, _) --[[ line: 68 ]]
+	local var11 = function(_, _)
 		-- upvalues: var6 (ref), var7 (ref)
 		if var6 then
 			var7(false)

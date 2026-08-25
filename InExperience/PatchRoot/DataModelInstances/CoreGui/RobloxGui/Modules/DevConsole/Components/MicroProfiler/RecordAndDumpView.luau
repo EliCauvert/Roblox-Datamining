@@ -20,7 +20,7 @@ local t = {
 	lastUpdated = { 2025, 11, 24 }
 }
 
-function recordAndDumpView.logRecordAndDumpAction(p0, p1) --[[ line: 41 ]]
+function recordAndDumpView.logRecordAndDumpAction(p0, p1)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogCounter(t, {
 		customFields = {
@@ -31,7 +31,7 @@ function recordAndDumpView.logRecordAndDumpAction(p0, p1) --[[ line: 41 ]]
 	}, 1)
 end
 
-function recordAndDumpView.numericInputRow(_, p2) --[[ line: 51 ]]
+function recordAndDumpView.numericInputRow(_, p2)
 	-- upvalues: roactModule (ref), constantsModule (ref), numberInputModule (ref)
 	return {
 		UIListLayout = roactModule.createElement("UIListLayout", {
@@ -83,7 +83,7 @@ function recordAndDumpView.numericInputRow(_, p2) --[[ line: 51 ]]
 	}
 end
 
-function recordAndDumpView.recordAndDumpRows(p3, p4) --[[ line: 104 ]]
+function recordAndDumpView.recordAndDumpRows(p3, p4)
 	-- upvalues: gameSettings (ref), roactModule (ref), boxButtonModule (ref)
 	local isClient = p4.Context == "Client"
 	
@@ -94,7 +94,7 @@ function recordAndDumpView.recordAndDumpRows(p3, p4) --[[ line: 104 ]]
 			Context = p4.Context,
 			DefaultValue = if isClient then p3.state.ClientFramesToRecord else p3.state.ServerFramesToRecord,
 			Range = NumberRange.new(1, 60),
-			OnNumberInputChanged = function(p5) --[[ line: 114 ]]
+			OnNumberInputChanged = function(p5)
 				-- upvalues: isClient (ref), p3 (ref), gameSettings (copy)
 				if isClient then
 					p3:setState({ ClientFramesToRecord = p5 })
@@ -111,7 +111,7 @@ function recordAndDumpView.recordAndDumpRows(p3, p4) --[[ line: 104 ]]
 			Context = p4.Context,
 			DefaultValue = if isClient then p3.state.ClientSecondsToDelay else p3.state.ServerSecondsToDelay,
 			Range = NumberRange.new(1, 4),
-			OnNumberInputChanged = function(p6) --[[ line: 133 ]]
+			OnNumberInputChanged = function(p6)
 				-- upvalues: isClient (ref), p3 (ref), gameSettings (copy)
 				if isClient then
 					p3:setState({ ClientSecondsToDelay = p6 })
@@ -140,7 +140,7 @@ function recordAndDumpView.recordAndDumpRows(p3, p4) --[[ line: 104 ]]
 	}
 end
 
-function recordAndDumpView.init(p7) --[[ line: 170 ]]
+function recordAndDumpView.init(p7)
 	-- upvalues: gameSettings (ref)
 	p7.state = {
 		IsClientRecording = false,
@@ -152,13 +152,13 @@ function recordAndDumpView.init(p7) --[[ line: 170 ]]
 	p7.RecordingTasks = { Client = nil }
 end
 
-function recordAndDumpView.willUnmount(p8) --[[ line: 187 ]]
+function recordAndDumpView.willUnmount(p8)
 	if p8.RecordingTasks.Client and coroutine.status(p8.RecordingTasks.Client) ~= "dead" then
 		task.cancel(p8.RecordingTasks.Client)
 	end
 end
 
-function recordAndDumpView.render(p9) --[[ line: 193 ]]
+function recordAndDumpView.render(p9)
 	-- upvalues: roactModule (ref), microProfilerPanelModule (ref), microProfilerService (ref), getClientReplicatorModule (ref)
 	return roactModule.createElement(microProfilerPanelModule, {
 		Title = "Record and dump",
@@ -172,17 +172,17 @@ function recordAndDumpView.render(p9) --[[ line: 193 ]]
 						Idle = "Begin client recording",
 						Recording = "Recording client..."
 					},
-					OnRecordButtonClicked = function() --[[ line: 203 ]]
+					OnRecordButtonClicked = function()
 						-- upvalues: p9 (ref), microProfilerService (copy)
 						if p9.state.IsClientRecording then
 							return
 						end
 						p9:logRecordAndDumpAction("Client")
 						p9:setState({ IsClientRecording = true })
-						p9.RecordingTasks.Client = task.spawn(function() --[[ line: 211 ]]
+						p9.RecordingTasks.Client = task.spawn(function()
 							-- upvalues: microProfilerService (copy), p9 (copy)
 							p9.props.dispatchAppendRecentDumpPath(microProfilerService:DumpToFileAsync(p9.state.ClientSecondsToDelay, p9.state.ClientFramesToRecord))
-							p9:setState(function(_) --[[ line: 219 ]]
+							p9:setState(function(_)
 								return { IsClientRecording = false }
 							end)
 							p9.RecordingTasks.Client = nil
@@ -198,7 +198,7 @@ function recordAndDumpView.render(p9) --[[ line: 193 ]]
 						Idle = "Begin server recording",
 						Recording = "Recording server..."
 					},
-					OnRecordButtonClicked = function() --[[ line: 235 ]]
+					OnRecordButtonClicked = function()
 						-- upvalues: p9 (ref), getClientReplicatorModule (copy)
 						if p9.props.IsServerRecording then return end
 						local var15 = getClientReplicatorModule()
@@ -217,18 +217,18 @@ function recordAndDumpView.render(p9) --[[ line: 193 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p10, _) --[[ line: 260 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p10, _)
 	return {
 		IsServerRecording = p10.MicroProfiler.waitingForRecording
 	}
-end, function(p11) --[[ line: 266 | named "mapDispatchToProps" ]]
+end, function(p11)
 	-- upvalues: appendRecentDumpPathModule (ref), setRCCProfilerStateModule (ref)
 	return {
-		dispatchAppendRecentDumpPath = function(p12) --[[ line: 268 ]]
+		dispatchAppendRecentDumpPath = function(p12)
 			-- upvalues: p11 (ref), appendRecentDumpPathModule (copy)
 			p11(appendRecentDumpPathModule(p12))
 		end,
-		dispatchSetRCCProfilerState = function(value, p13) --[[ line: 271 ]]
+		dispatchSetRCCProfilerState = function(value, p13)
 			-- upvalues: p11 (ref), setRCCProfilerStateModule (copy)
 			p11(setRCCProfilerStateModule(value, p13))
 		end

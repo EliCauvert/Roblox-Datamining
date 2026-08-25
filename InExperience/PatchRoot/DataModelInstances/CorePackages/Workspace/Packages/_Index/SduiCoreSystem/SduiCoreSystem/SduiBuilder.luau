@@ -18,13 +18,13 @@ local fFlagSduiUsageTelemetry = require(parent.SharedFlags).FFlagSduiUsageTeleme
 local t = {}
 
 return {
-	getComponentType = function(p0, p1) --[[ line: 37 ]]
+	getComponentType = function(p0, p1)
 		if not p0.__isClientBinding and p1.templateRegistry:shouldResolveTemplate(p0) then
 			p1.templateRegistry:resolveTemplateForConfig(p0, p1)
 		end
 		return p0.componentType
 	end,
-	buildAnalyticsContext = function(p2, p3, p4) --[[ line: 47 ]]
+	buildAnalyticsContext = function(p2, p3, p4)
 		-- upvalues: t (ref), cryoModule (ref)
 		p3 = p3 or t
 		local var11 = p2.analyticsData or t
@@ -40,7 +40,7 @@ return {
 			getCollectionData = getCollectionData
 		}
 	end,
-	tryCreateEagerProcessedComponentConfig = function(p5, p6, p7, p8, p9) --[[ line: 81 ]]
+	tryCreateEagerProcessedComponentConfig = function(p5, p6, p7, p8, p9)
 		-- upvalues: sduiErrorType (ref), tutilsModule (ref), validateInterfaceModule (ref), uiComponentInterface (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), fFlagSduiUsageTelemetry (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref)
 		local instrumentation = p6.dependencies.instrumentation
 		instrumentation:startTimerFlow("EagerProcess")

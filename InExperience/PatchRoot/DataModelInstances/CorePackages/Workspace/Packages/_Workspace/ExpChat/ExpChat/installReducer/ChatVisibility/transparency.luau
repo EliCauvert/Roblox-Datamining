@@ -18,7 +18,7 @@ local t = {
 	isTextBoxFocused = false
 }
 
-local function reset(value) --[[ line: 31 ]]
+local function reset(value)
 	-- upvalues: dictionary (ref), t (ref)
 	local processTime = os.clock()
 	
@@ -29,7 +29,7 @@ local function reset(value) --[[ line: 31 ]]
 	})
 end
 
-local function resetTextOnly(value) --[[ line: 41 ]]
+local function resetTextOnly(value)
 	-- upvalues: dictionary (ref)
 	return dictionary.join(value, {
 		isTextBoxFocused = value.isTextBoxFocused,
@@ -38,23 +38,23 @@ local function resetTextOnly(value) --[[ line: 41 ]]
 end
 
 return roduxModule.createReducer(t, {
-	[chatInputBarConfigurationEnabledModule.name] = function(p0, p1) --[[ line: 51 ]]
+	[chatInputBarConfigurationEnabledModule.name] = function(p0, p1)
 		-- upvalues: reset (ref)
 		return if p1.enabled then reset(p0) else p0
 	end,
-	[chatTopBarButtonActivatedModule.name] = function(p2, p3) --[[ line: 59 ]]
+	[chatTopBarButtonActivatedModule.name] = function(p2, p3)
 		-- upvalues: reset (ref)
 		return if p3.isVisible then reset(p2) else p2
 	end,
-	[setCoreGuiEnabledChangedModule.name] = function(p4, p5) --[[ line: 67 ]]
+	[setCoreGuiEnabledChangedModule.name] = function(p4, p5)
 		-- upvalues: reset (ref)
 		return if p5.enabled then reset(p4) else p4
 	end,
-	[clientAppLoaded.name] = function(p6, _) --[[ line: 75 ]]
+	[clientAppLoaded.name] = function(p6, _)
 		-- upvalues: reset (ref)
 		return reset(p6)
 	end,
-	[userInteractionModule.name] = function(p7, p8) --[[ line: 79 ]]
+	[userInteractionModule.name] = function(p7, p8)
 		-- upvalues: dictionary (ref), t (ref), reset (ref)
 		if p8.interaction == "focus" then
 			local processTime = os.clock()
@@ -75,7 +75,7 @@ return roduxModule.createReducer(t, {
 		end
 		return reset(p7)
 	end,
-	[incomingMessageReceivedModule.name] = function(p9, _) --[[ line: 93 ]]
+	[incomingMessageReceivedModule.name] = function(p9, _)
 		-- upvalues: resetTextOnly (ref)
 		return resetTextOnly(p9)
 	end

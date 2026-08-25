@@ -5,14 +5,14 @@ local badge = require(parent.Foundation).Badge
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useRemainingTimeModule = require(avatarExperienceUIKit.Utils.useRemainingTime)
 
-local function _(p0, p1) --[[ line: 23 | named "getTimerText" ]]
+local function _(p0, p1)
 	local unit = p0.unit
 	local var3 = p0.value ~= 1
 	
 	return if unit == "days" then if var3 then p1.dayPlural else p1.daySingular elseif unit == "hours" then if var3 then p1.hourPlural else p1.hourSingular elseif unit == "minutes" then if var3 then p1.minutePlural else p1.minuteSingular elseif var3 then p1.secondPlural else p1.secondSingular
 end
 
-return function(p2) --[[ line: 38 | named "TimerBadge" ]]
+return function(p2)
 	-- upvalues: useRemainingTimeModule (ref), useLocalization (ref), reactModule (ref), badge (ref)
 	local var4 = useRemainingTimeModule(p2.endTime)
 	local var5 = if var4 then var4.value else 0

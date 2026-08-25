@@ -1,5 +1,5 @@
 ﻿return {
-	seedConversationStore = function(p0, p1, p2) --[[ line: 2 ]]
+	seedConversationStore = function(p0, p1, p2)
 		p0.clear()
 		
 		for i, v in pairs(p1 or {}) do

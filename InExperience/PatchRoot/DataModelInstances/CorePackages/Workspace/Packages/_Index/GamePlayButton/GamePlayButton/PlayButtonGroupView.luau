@@ -9,9 +9,9 @@ local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceD
 local buttonHeightSizeKeyByInputSizeModule = require(script.Parent.ButtonHeightSizeKeyByInputSize)
 local playButtonViewModule = require(script.Parent.PlayButtonView)
 
-local var5 = function() --[[ line: 20 ]] end
+local var5 = function() end
 
-local function makePlayButtonProps(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 28 ]]
+local function makePlayButtonProps(p0, p1, p2, p3, p4, p5, p6, p7)
 	return {
 		playButtonState = p1,
 		gameProductInfo = p0.gameProductInfo,
@@ -41,7 +41,7 @@ local function makePlayButtonProps(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 28
 	}
 end
 
-return reactModule.memo(function(p8) --[[ line: 67 | named "PlayButtonGroupView" ]]
+return reactModule.memo(function(p8)
 	-- upvalues: inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), buttonHeightSizeKeyByInputSizeModule (ref), fillBehavior (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), playButtonViewModule (ref), makePlayButtonProps (ref), var5 (ref)
 	local tokens = p8.tokens
 	local buttonSize = p8.buttonSize or inputSize.Medium

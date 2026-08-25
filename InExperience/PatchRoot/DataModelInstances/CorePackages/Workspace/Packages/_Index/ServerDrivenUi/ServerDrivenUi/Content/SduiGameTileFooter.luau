@@ -10,11 +10,11 @@ local sduiTileFooterModule = require(serverDrivenUi.Content.SduiTileFooter)
 local sduiInGameFriendsDataModule = require(serverDrivenUi.DataStore.SduiInGameFriendsData)
 local fFlagLuaAppFixInlineSignalsReactPattern = require(parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
 
-return reactModule.memo(function(p0) --[[ line: 34 | named "SduiGameTileFooter" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: sduiInGameFriendsDataModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), signalsReactModule (ref), sduiTileFooterModule (ref), sduiGameTileActiveFriendsFooterModule (ref), images (ref), abbreviateCount (ref)
 	local _ = nil
 	local getInGameFriendsByGame = sduiInGameFriendsDataModule.getInGameFriendsByGame
-	local var6 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2) --[[ line: 39 ]]
+	local var6 = if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
 		-- upvalues: getInGameFriendsByGame (ref), p0 (ref)
 		local universeId = getInGameFriendsByGame(p2)[p0.universeId]
 		
@@ -24,7 +24,7 @@ return reactModule.memo(function(p0) --[[ line: 34 | named "SduiGameTileFooter" 
 			end
 		end
 		return false
-	end, { getInGameFriendsByGame, p0.universeId })) else signalsReactModule.useSignalState(function(p1) --[[ line: 51 ]]
+	end, { getInGameFriendsByGame, p0.universeId })) else signalsReactModule.useSignalState(function(p1)
 		-- upvalues: getInGameFriendsByGame (ref), p0 (ref)
 		local universeId = getInGameFriendsByGame(p1)[p0.universeId]
 		

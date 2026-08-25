@@ -5,7 +5,7 @@ local signalsModule = require(parent.Signals)
 local _ = require(avatarSwitcher.Enums.ExperienceAvatarSupportType)
 local _ = require(avatarSwitcher.types)
 
-return function() --[[ line: 54 | named "createMockAvatarSwitcherStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), jest (ref)
 	local var2, var3 = signalsModule.createSignal({})
 	local var4, var5 = signalsModule.createSignal(false)

@@ -6,7 +6,7 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local emojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
 local emoji = UIBloxModule.App.Emoji.Enum.Emoji
 
-return function(p0) --[[ line: 19 | named "EventHostName" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), emoji (ref), reactModule (ref), emojiTextLabel (ref)
 	local var3 = useStyle()
 	local var4 = if p0.host.hasVerifiedBadge then emoji.Verified else nil
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 19 | named "EventHostName" ]]
 			emoji = var4,
 			fontStyle = var3.Font.Header2,
 			colorStyle = var3.Theme.TextEmphasis,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1) --[[ line: 25 ]]
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
 				-- upvalues: var6 (ref)
 				var6(p1.TextSize)
 			end, { var6 })

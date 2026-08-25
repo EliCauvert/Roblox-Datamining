@@ -16,7 +16,7 @@ local createComputed = signalsModule.createComputed
 local reactionType = momentsTypesModule.Enums.ReactionType
 local t = {}
 
-return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
+return function(p0)
 	-- upvalues: momentsGetMomentsReactionsStoreModule (ref), debounce (ref), createSignal (ref), t (ref), createComputed (ref), reactionType (ref), cryoModule (ref), fFlagMomentsDebounceReactionsModule (ref), reactionActionModule (ref), momentsResolveEmoteIdModule (ref), fFlagMomentsReactToFeedItemV2Module (ref), fIntMomentsReactionDebounceMsModule (ref)
 	p0 = p0 or {}
 	local var12 = if p0.momentsReactionsStore ~= nil then momentsGetMomentsReactionsStoreModule(false) else p0.momentsReactionsStore
@@ -30,15 +30,15 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 	local t_6 = {}
 	local var22 = 0
 	
-	local function getReactions(p1, p2) --[[ line: 85 ]]
+	local function getReactions(p1, p2)
 		-- upvalues: var14 (ref), t (copy)
 		return var14(p2 or false)[p1] or t
 	end
 	
-	local function getReactionsForMoment(p3) --[[ line: 89 ]]
+	local function getReactionsForMoment(p3)
 		-- upvalues: t_1 (ref), createComputed (copy), var14 (ref), t (copy)
 		if t_1[p3] == nil then
-			t_1[p3] = createComputed(function(p4) --[[ line: 91 ]]
+			t_1[p3] = createComputed(function(p4)
 				-- upvalues: p3 (ref), var14 (copy), t (copy)
 				return var14(p4 or false)[p3] or t
 			end)
@@ -46,10 +46,10 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		return t_1[p3]
 	end
 	
-	local function getUserReactionForMoment(p5) --[[ line: 98 ]]
+	local function getUserReactionForMoment(p5)
 		-- upvalues: t_2 (ref), createComputed (copy), var14 (ref), t (copy)
 		if t_2[p5] == nil then
-			t_2[p5] = createComputed(function(p6) --[[ line: 101 ]]
+			t_2[p5] = createComputed(function(p6)
 				-- upvalues: p5 (ref), var14 (copy), t (copy)
 				return (var14(p6 or false)[p5] or t).userReaction
 			end)
@@ -57,10 +57,10 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		return t_2[p5]
 	end
 	
-	local function getTotalReactionCountForMoment(p7) --[[ line: 109 ]]
+	local function getTotalReactionCountForMoment(p7)
 		-- upvalues: t_3 (ref), createComputed (copy), var14 (ref), t (copy), reactionType (copy)
 		if t_3[p7] == nil then
-			t_3[p7] = createComputed(function(p8) --[[ line: 111 ]]
+			t_3[p7] = createComputed(function(p8)
 				-- upvalues: p7 (ref), var14 (copy), t (copy), reactionType (copy)
 				local var35 = 0
 				local var36 = var14(p8 or false)[p7] or t
@@ -74,10 +74,10 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		return t_3[p7]
 	end
 	
-	local function getIndividualReactionCountsForMoment(p9) --[[ line: 124 ]]
+	local function getIndividualReactionCountsForMoment(p9)
 		-- upvalues: t_4 (ref), createComputed (copy), var14 (ref), t (copy), reactionType (copy)
 		if t_4[p9] == nil then
-			t_4[p9] = createComputed(function(p10) --[[ line: 126 ]]
+			t_4[p9] = createComputed(function(p10)
 				-- upvalues: p9 (ref), var14 (copy), t (copy), reactionType (copy)
 				local var37 = var14(p10 or false)[p9] or t
 				local t_1 = {}
@@ -89,7 +89,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 						table.insert(t_1, { reaction = v, count = var39 })
 					end
 				end
-				table.sort(t_1, function(p11, p12) --[[ line: 139 ]]
+				table.sort(t_1, function(p11, p12)
 					return if p11.count == p12.count then p11.reaction < p12.reaction else p12.count < p11.count
 				end)
 				
@@ -99,7 +99,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		return t_4[p9]
 	end
 	
-	local function setBatchReactionCounts(value) --[[ line: 153 ]]
+	local function setBatchReactionCounts(value)
 		-- upvalues: var14 (ref), var15 (ref)
 		local var40 = var14(false)
 		local cloned = table.clone(var40)
@@ -120,12 +120,12 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		var15(cloned)
 	end
 	
-	local function setReactions(value, p13) --[[ line: 174 ]]
+	local function setReactions(value, p13)
 		-- upvalues: var15 (ref), cryoModule (copy), var14 (ref)
 		var15(cryoModule.Dictionary.union(var14(false), { [value] = p13 or {} }))
 	end
 	
-	local function clear() --[[ line: 180 ]]
+	local function clear()
 		-- upvalues: fFlagMomentsDebounceReactionsModule (copy), var22 (write), t_5 (ref), t_6 (ref), var15 (ref), t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref)
 		if fFlagMomentsDebounceReactionsModule then
 			var22 += 1
@@ -139,7 +139,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		table.clear(t_4)
 	end
 	
-	local function updateReaction(p14) --[[ line: 195 ]]
+	local function updateReaction(p14)
 		-- upvalues: var14 (ref), reactionActionModule (copy), cryoModule (copy), var15 (ref)
 		local action = p14.action
 		local reaction = p14.reaction
@@ -170,7 +170,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		var15(cryoModule.Dictionary.union(var44, { [momentId] = var45 }))
 	end
 	
-	local function postReactToFeedItemV2(p15) --[[ line: 231 ]]
+	local function postReactToFeedItemV2(p15)
 		-- upvalues: var12 (ref), momentsResolveEmoteIdModule (copy)
 		local var46 = if var12.getEmojis ~= nil then {} else var12.getEmojis(false)
 		local reactToFeedItemV2 = var12.reactToFeedItemV2
@@ -184,12 +184,12 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		})
 	end
 	
-	local function postReactionRequest(p16) --[[ line: 243 ]]
+	local function postReactionRequest(p16)
 		-- upvalues: fFlagMomentsReactToFeedItemV2Module (copy), postReactToFeedItemV2 (ref), var12 (ref)
 		return if fFlagMomentsReactToFeedItemV2Module then postReactToFeedItemV2(p16) else var12.reactToFeedItem(p16)
 	end
 	
-	local function flushSync(p17, p18, p19, p20) --[[ line: 255 ]]
+	local function flushSync(p17, p18, p19, p20)
 		-- upvalues: t_5 (ref), var14 (ref), t (copy), fFlagMomentsReactToFeedItemV2Module (copy), postReactToFeedItemV2 (ref), var12 (ref)
 		local var47 = t_5[p17]
 		local var48 = if var47 ~= nil then nil else var47.reaction
@@ -208,25 +208,25 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		local var51 = if fFlagMomentsReactToFeedItemV2Module then postReactToFeedItemV2(t_1) else var12.reactToFeedItem(t_1)
 		
 		if type(var51) == "table" and var51.catch ~= nil then
-			var51:catch(function() --[[ line: 279 ]] end)
+			var51:catch(function() end)
 		end
 	end
 	
-	local function _(p21) --[[ line: 285 | named "seedSyncBaseline" ]]
+	local function _(p21)
 		-- upvalues: t_5 (ref), var14 (ref), t (copy)
 		if t_5[p21] == nil then
 			t_5[p21] = { reaction = (var14(false)[p21] or t).userReaction }
 		end
 	end
 	
-	local _ = function(p22) --[[ line: 294 | named "scheduleSync" ]]
+	local _ = function(p22)
 		-- upvalues: t_6 (ref), var22 (write), debounce_1 (ref), flushSync (ref), fIntMomentsReactionDebounceMsModule (copy)
 		local entityId = p22.entityId
 		local var52 = t_6[entityId]
 		
 		if var52 == nil then
 			local var53 = var22
-			var52 = debounce_1(function(p23, p24, p25) --[[ line: 302 ]]
+			var52 = debounce_1(function(p23, p24, p25)
 				-- upvalues: var53 (ref), var22 (copy), flushSync (copy), entityId (ref)
 				if var53 == var22 then
 					flushSync(entityId, p23, p24, p25)
@@ -250,7 +250,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 		setReactions = setReactions,
 		clear = clear,
 		updateReaction = updateReaction,
-		reactToFeedItem = function(p26) --[[ line: 313 ]]
+		reactToFeedItem = function(p26)
 			-- upvalues: var14 (ref), t (copy), fFlagMomentsDebounceReactionsModule (copy), t_5 (ref), updateReaction (ref), reactionActionModule (copy), t_6 (ref), var22 (write), debounce_1 (ref), flushSync (ref), fIntMomentsReactionDebounceMsModule (copy), postReactionRequest (ref)
 			local userReaction = (var14(false)[p26.entityId] or t).userReaction
 			
@@ -275,7 +275,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 			
 			if var54 == nil then
 				local var55 = var22
-				var54 = debounce_1(function(p27, p28, p29) --[[ line: 302 ]]
+				var54 = debounce_1(function(p27, p28, p29)
 					-- upvalues: var55 (ref), var22 (copy), flushSync (copy), entityId (ref)
 					if var55 == var22 then
 						flushSync(entityId, p27, p28, p29)
@@ -289,7 +289,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 			
 			return nil
 		end,
-		removeFeedItemReaction = function(p30) --[[ line: 333 ]]
+		removeFeedItemReaction = function(p30)
 			-- upvalues: fFlagMomentsDebounceReactionsModule (copy), t_5 (ref), var14 (ref), t (copy), updateReaction (ref), reactionActionModule (copy), t_6 (ref), var22 (write), debounce_1 (ref), flushSync (ref), fIntMomentsReactionDebounceMsModule (copy), fFlagMomentsReactToFeedItemV2Module (copy), postReactToFeedItemV2 (ref)
 			if fFlagMomentsDebounceReactionsModule then
 				local entityId = p30.entityId
@@ -310,7 +310,7 @@ return function(p0) --[[ line: 60 | named "createReactionsStore" ]]
 				
 				if var56 == nil then
 					local var57 = var22
-					var56 = debounce_1(function(p31, p32, p33) --[[ line: 302 ]]
+					var56 = debounce_1(function(p31, p32, p33)
 						-- upvalues: var57 (ref), var22 (copy), flushSync (copy), entityId (ref)
 						if var57 == var22 then
 							flushSync(entityId, p31, p32, p33)

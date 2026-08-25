@@ -10,11 +10,11 @@ local setIsSmallTouchScreenModule = require(shareGame.Actions.SetIsSmallTouchScr
 local setDeviceLayoutModule = require(shareGame.Actions.SetDeviceLayout)
 local layoutProvider = roactModule.Component:extend("LayoutProvider")
 
-function layoutProvider.didMount(p0) --[[ line: 22 ]]
+function layoutProvider.didMount(p0)
 	if workspace.CurrentCamera then
 		p0:setObservedCamera(workspace.CurrentCamera)
 	end
-	p0.cameraChangedListener = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 27 ]]
+	p0.cameraChangedListener = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 		-- upvalues: p0 (ref)
 		if workspace.CurrentCamera then
 			p0:setObservedCamera(workspace.CurrentCamera)
@@ -22,7 +22,7 @@ function layoutProvider.didMount(p0) --[[ line: 22 ]]
 	end)
 end
 
-function layoutProvider.willUnmount(p1) --[[ line: 34 ]]
+function layoutProvider.willUnmount(p1)
 	if p1.cameraChangedListener then
 		p1.cameraChangedListener:Disconnect()
 	end
@@ -31,12 +31,12 @@ function layoutProvider.willUnmount(p1) --[[ line: 34 ]]
 	end
 end
 
-function layoutProvider.setObservedCamera(value, p2) --[[ line: 44 ]]
+function layoutProvider.setObservedCamera(value, p2)
 	if value.viewportSizeListener then
 		value.viewportSizeListener:Disconnect()
 	end
 	value:checkAllDeviceInfo(p2.ViewportSize)
-	value.viewportSizeListener = p2:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 51 ]]
+	value.viewportSizeListener = p2:GetPropertyChangedSignal("ViewportSize"):Connect(function()
 		-- upvalues: p2 (ref), value (ref)
 		local viewportSize = p2.ViewportSize
 		
@@ -47,7 +47,7 @@ function layoutProvider.setObservedCamera(value, p2) --[[ line: 44 ]]
 	end)
 end
 
-function layoutProvider.checkDeviceOrientation(p3, p4) --[[ line: 63 ]]
+function layoutProvider.checkDeviceOrientation(p3, p4)
 	-- upvalues: constantsModule (ref)
 	local var8 = if p4.Y < p4.X then constantsModule.DeviceOrientation.LANDSCAPE else constantsModule.DeviceOrientation.PORTRAIT
 	
@@ -57,7 +57,7 @@ function layoutProvider.checkDeviceOrientation(p3, p4) --[[ line: 63 ]]
 	end
 end
 
-function layoutProvider.checkDeviceIsSmallTouchScreen(p5, p6) --[[ line: 73 ]]
+function layoutProvider.checkDeviceIsSmallTouchScreen(p5, p6)
 	-- upvalues: userInputService (ref)
 	local var9 = userInputService.TouchEnabled and (if p6.X >= 700 then p6.Y < 500 else true)
 	
@@ -67,7 +67,7 @@ function layoutProvider.checkDeviceIsSmallTouchScreen(p5, p6) --[[ line: 73 ]]
 	end
 end
 
-function layoutProvider.checkDeviceLayout(p7) --[[ line: 83 ]]
+function layoutProvider.checkDeviceLayout(p7)
 	-- upvalues: constantsModule (ref), userInputService (ref)
 	local var10 = if p7._isSmallTouchScreen then if p7._deviceOrientation == constantsModule.DeviceOrientation.LANDSCAPE then constantsModule.DeviceLayout.PHONE_LANDSCAPE else constantsModule.DeviceLayout.PHONE_PORTRAIT elseif userInputService.TouchEnabled then if p7._deviceOrientation == constantsModule.DeviceOrientation.LANDSCAPE then constantsModule.DeviceLayout.TABLET_LANDSCAPE else constantsModule.DeviceLayout.TABLET_PORTRAIT else constantsModule.DeviceLayout.DESKTOP
 	
@@ -77,29 +77,29 @@ function layoutProvider.checkDeviceLayout(p7) --[[ line: 83 ]]
 	end
 end
 
-function layoutProvider.checkAllDeviceInfo(p8, p9) --[[ line: 108 ]]
+function layoutProvider.checkAllDeviceInfo(p8, p9)
 	p8:checkDeviceOrientation(p9)
 	p8:checkDeviceIsSmallTouchScreen(p9)
 	p8:checkDeviceLayout()
 end
 
-function layoutProvider.render(p10) --[[ line: 114 ]]
+function layoutProvider.render(p10)
 	-- upvalues: roactModule (ref)
 	return roactModule.oneChild(p10.props[roactModule.Children])
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p11) --[[ line: 118 ]]
+return roactRoduxModule.UNSTABLE_connect2(nil, function(p11)
 	-- upvalues: setDeviceOrientation (ref), setIsSmallTouchScreenModule (ref), setDeviceLayoutModule (ref)
 	return {
-		setDeviceOrientation = function(value) --[[ line: 120 ]]
+		setDeviceOrientation = function(value)
 			-- upvalues: p11 (ref), setDeviceOrientation (copy)
 			return p11(setDeviceOrientation(value))
 		end,
-		setIsSmallTouchScreen = function(value) --[[ line: 123 ]]
+		setIsSmallTouchScreen = function(value)
 			-- upvalues: p11 (ref), setIsSmallTouchScreenModule (copy)
 			return p11(setIsSmallTouchScreenModule(value))
 		end,
-		setDeviceLayout = function(value) --[[ line: 126 ]]
+		setDeviceLayout = function(value)
 			-- upvalues: p11 (ref), setDeviceLayoutModule (copy)
 			return p11(setDeviceLayoutModule(value))
 		end

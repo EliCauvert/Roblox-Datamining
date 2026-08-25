@@ -1,11 +1,11 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("PeopleService").Parent.Signals)
 
-function createPersonStore(p0) --[[ line: 14 ]]
+function createPersonStore(p0)
 	-- upvalues: signalsModule (ref)
 	local var1, var2 = signalsModule.createSignal(0)
 	
 	return {
-		getPerson = function() --[[ line: 18 ]]
+		getPerson = function()
 			-- upvalues: p0 (ref)
 			return p0
 		end,

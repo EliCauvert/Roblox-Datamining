@@ -1,6 +1,6 @@
 ﻿local bodyAssetTypes = require(script.Parent.Parent.Constants).BodyAssetTypes
 
-return function(p0, p1) --[[ line: 18 | named "buildBodySlotViewportProps" ]]
+return function(p0, p1)
 	-- upvalues: bodyAssetTypes (ref)
 	local t = {}
 	local var1 = p0:ToHex()

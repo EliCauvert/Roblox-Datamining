@@ -3,17 +3,17 @@ local reactModule = require(inExperienceShop.Parent.React)
 local fIntScanFrequencyInExperienceShopModule = require(inExperienceShop.Flags.FIntScanFrequencyInExperienceShop)
 local isShopInstanceVisibleModule = require(script.Parent.isShopInstanceVisible)
 
-return function(p0) --[[ line: 25 | named "ShopImpressionsDetector" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fIntScanFrequencyInExperienceShopModule (ref), isShopInstanceVisibleModule (ref)
 	local var4 = reactModule.useRef(true)
 	local var5 = reactModule.useRef(nil)
 	local var6 = reactModule.useRef(nil)
 	local scanDebounceSeconds = p0.scanDebounceSeconds or fIntScanFrequencyInExperienceShopModule
-	local var8 = reactModule.useCallback(function() --[[ line: 32 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref)
 		return if p0.getViewPortBounds then p0.getViewPortBounds() else p0.viewPortBounds
 	end, { p0.getViewPortBounds, p0.viewPortBounds })
-	local var9 = reactModule.useCallback(function() --[[ line: 40 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), p0 (ref), var8 (ref), isShopInstanceVisibleModule (copy), var5 (ref)
 		if not var4.current then return end
 		if p0.pageFilter and not p0.pageFilter(nil) then return end
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 25 | named "ShopImpressionsDetector" ]]
 		p0.parentRef, p0.pageFilter, p0.collectObjectsFunc, p0.filterImpressionFunc,
 		p0.onImpressionsDetected, var8
 	})
-	local var10 = reactModule.useCallback(function() --[[ line: 90 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var6 (ref), p0 (ref), var5 (ref), scanDebounceSeconds (ref), var9 (ref)
 		if not var4.current then return end
 		if var6.current ~= nil then return end
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 25 | named "ShopImpressionsDetector" ]]
 			var14 = var15 - tick()
 		end
 		if var14 > 0 then
-			task.delay(var14, function() --[[ line: 112 ]]
+			task.delay(var14, function()
 				-- upvalues: var4 (copy), var6 (copy), var9 (copy)
 				if not var4.current then return end
 				if var6.current ~= nil and var6.current < tick() then
@@ -67,22 +67,22 @@ return function(p0) --[[ line: 25 | named "ShopImpressionsDetector" ]]
 		var6.current = nil
 		var9()
 	end, { p0.parentRef, scanDebounceSeconds, var9 })
-	reactModule.useEffect(function() --[[ line: 127 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var4 (ref), var10 (ref), p0 (ref)
 		var4.current = true
 		var10()
-		local onRequestImpressionsSignalConnection = p0.onRequestImpressionsSignal:connect(function() --[[ line: 131 ]]
+		local onRequestImpressionsSignalConnection = p0.onRequestImpressionsSignal:connect(function()
 			-- upvalues: var10 (copy)
 			var10()
 		end)
 		
-		return function() --[[ line: 135 ]]
+		return function()
 			-- upvalues: var4 (copy), onRequestImpressionsSignalConnection (ref)
 			var4.current = false
 			onRequestImpressionsSignalConnection:disconnect()
 		end
 	end, { p0.onRequestImpressionsSignal, var10 })
-	reactModule.useEffect(function() --[[ line: 141 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref)
 		var10()
 	end, { var8, var10 })

@@ -12,7 +12,7 @@ local t_1 = nil
 local notifySubscription = nil
 local _ = nil
 
-local function _(p0) --[[ line: 29 | named "isCallable" ]]
+local function _(p0)
 	if typeof(p0) == "function" then
 		return true
 	elseif typeof(p0) == "table" then
@@ -22,17 +22,17 @@ local function _(p0) --[[ line: 29 | named "isCallable" ]]
 	end
 end
 
-local _ = function() --[[ line: 45 | named "hasSymbols" ]]
+local _ = function()
 	-- upvalues: symbol (ref)
 	return typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function"
 end
 
-local _ = function(p1) --[[ line: 50 | named "hasSymbol" ]]
+local _ = function(p1)
 	-- upvalues: symbol (ref), boolean (ref)
 	return (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol[p1])
 end
 
-local _ = function(p2) --[[ line: 54 | named "getSymbol" ]]
+local _ = function(p2)
 	-- upvalues: symbol (ref), boolean (ref)
 	return if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol[p2]) then symbol[p2] else "@@" .. p2
 end
@@ -44,7 +44,7 @@ local _ = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) 
 local var5 = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.observable) then symbol.observable else "@@observable"
 local var6 = if (typeof(symbol) == "table" and typeof(getmetatable(symbol).__call) == "function") and boolean.toJSBoolean(symbol.species) then symbol.species else "@@species"
 
-local function getMethod(p3, p4) --[[ line: 72 ]]
+local function getMethod(p3, p4)
 	-- upvalues: error (ref)
 	local var16
 	local var15 = p3[p4]
@@ -63,46 +63,46 @@ local function getMethod(p3, p4) --[[ line: 72 ]]
 	return var15
 end
 
-local _ = function(p5) --[[ line: 86 | named "getSpecies" ]]
+local _ = function(p5)
 	-- upvalues: var6 (ref), t (write)
 	local var18 = p5[var6]
 	
 	return if var18 == nil then t else var18
 end
 
-local _ = function(p6) --[[ line: 97 | named "isObservable" ]]
+local _ = function(p6)
 	-- upvalues: instanceof (ref), t (write)
 	return instanceof(p6, t)
 end
 
 local tbl = nil
 tbl = setmetatable({}, {
-	__call = function(_, p7) --[[ line: 104 ]]
+	__call = function(_, p7)
 		-- upvalues: tbl (write), setTimeout (ref)
 		if tbl.log then
 			tbl:log(p7)
 			
 			return
 		end
-		setTimeout(function() --[[ line: 108 ]]
+		setTimeout(function()
 			-- upvalues: p7 (ref)
 			error(p7)
 		end, 0)
 	end
 })
 
-local _ = function(p8) --[[ line: 116 | named "enqueue" ]]
+local _ = function(p8)
 	-- upvalues: promiseModule (ref), tbl (write)
-	promiseModule.delay(0):doneCall(function() --[[ line: 117 ]]
+	promiseModule.delay(0):doneCall(function()
 		-- upvalues: p8 (ref), tbl (copy)
-		xpcall(p8, function(p9) --[[ line: 118 ]]
+		xpcall(p8, function(p9)
 			-- upvalues: tbl (copy)
 			tbl(p9)
 		end)
 	end)
 end
 
-local function cleanupSubscription(p10) --[[ line: 124 ]]
+local function cleanupSubscription(p10)
 	-- upvalues: error (ref), tbl (write)
 	local cleanup = p10._cleanup
 	
@@ -151,13 +151,13 @@ local function cleanupSubscription(p10) --[[ line: 124 ]]
 	end
 end
 
-local _ = function(p11) --[[ line: 153 | named "closeSubscription" ]]
+local _ = function(p11)
 	p11._observer = nil
 	p11._queue = nil
 	p11._state = "closed"
 end
 
-local function flushSubscription(p12) --[[ line: 159 ]]
+local function flushSubscription(p12)
 	-- upvalues: boolean (ref), notifySubscription (write)
 	local queue = p12._queue
 	
@@ -172,7 +172,7 @@ local function flushSubscription(p12) --[[ line: 159 ]]
 	end
 end
 
-notifySubscription = function(p13, p14, p15) --[[ line: 177 | named "notifySubscription" ]]
+notifySubscription = function(p13, p14, p15)
 	-- upvalues: getMethod (ref), tbl (write), cleanupSubscription (ref)
 	p13._state = "running"
 	local observer = p13._observer
@@ -224,7 +224,7 @@ notifySubscription = function(p13, p14, p15) --[[ line: 177 | named "notifySubsc
 	end
 end
 
-local function onNotify(p16, p17, p18) --[[ line: 216 ]]
+local function onNotify(p16, p17, p18)
 	-- upvalues: flushSubscription (ref), promiseModule (ref), tbl (write), notifySubscription (write)
 	if p16._state == "closed" then return end
 	if p16._state == "buffering" then
@@ -240,14 +240,14 @@ local function onNotify(p16, p17, p18) --[[ line: 216 ]]
 	p16._state = "buffering"
 	p16._queue = { { type = p17, value = p18 } }
 	
-	local var26 = function() --[[ line: 230 ]]
+	local var26 = function()
 		-- upvalues: flushSubscription (copy), p16 (ref)
 		return flushSubscription(p16)
 	end
 	
-	promiseModule.delay(0):doneCall(function() --[[ line: 117 ]]
+	promiseModule.delay(0):doneCall(function()
 		-- upvalues: var26 (ref), tbl (copy)
-		xpcall(var26, function(p19) --[[ line: 118 ]]
+		xpcall(var26, function(p19)
 			-- upvalues: tbl (copy)
 			tbl(p19)
 		end)
@@ -256,19 +256,19 @@ end
 
 local t_2 = {}
 
-function t_2:__index(p20) --[[ line: 259 ]]
+function t_2:__index(p20)
 	-- upvalues: t_2 (ref)
 	return if p20 == "closed" then self._state == "closed" elseif rawget(self, p20) then rawget(self, p20) elseif rawget(t_2, p20) then rawget(t_2, p20) else nil
 end
 
-function t_2:__newindex(p21, p22) --[[ line: 271 ]]
+function t_2:__newindex(p21, p22)
 	if p21 == "closed" then
 		error("setting getter-only property 'closed'")
 	end
 	rawset(self, p21, p22)
 end
 
-function t_2.new(p23, p24) --[[ line: 278 ]]
+function t_2.new(p23, p24)
 	-- upvalues: t_2 (ref), t_1 (write)
 	local tbl = setmetatable({}, t_2)
 	tbl._cleanup = nil
@@ -289,7 +289,7 @@ function t_2.new(p23, p24) --[[ line: 278 ]]
 	return tbl
 end
 
-function t_2:unsubscribe() --[[ line: 304 ]]
+function t_2:unsubscribe()
 	-- upvalues: cleanupSubscription (ref)
 	if self._state ~= "closed" then
 		self._observer = nil
@@ -301,34 +301,34 @@ end
 
 t_1 = {}
 
-function t_1:__index(p25) --[[ line: 320 ]]
+function t_1:__index(p25)
 	-- upvalues: t_1 (write)
 	return if p25 == "closed" then self._subscription._state == "closed" elseif rawget(t_1, p25) then rawget(t_1, p25) else rawget(self, p25)
 end
 
-function t_1:__newindex(p26, p27) --[[ line: 329 ]]
+function t_1:__newindex(p26, p27)
 	if p26 == "closed" then
 		error("setting getter-only property 'closed'")
 	end
 	rawset(self, p26, p27)
 end
 
-function t_1.new(p28) --[[ line: 336 ]]
+function t_1.new(p28)
 	-- upvalues: t_1 (write)
 	return setmetatable({ _subscription = p28 }, t_1)
 end
 
-function t_1:next(p29) --[[ line: 345 ]]
+function t_1:next(p29)
 	-- upvalues: onNotify (ref)
 	onNotify(self._subscription, "next", p29)
 end
 
-function t_1:error(p30) --[[ line: 349 ]]
+function t_1:error(p30)
 	-- upvalues: onNotify (ref)
 	onNotify(self._subscription, "error", p30)
 end
 
-function t_1:complete() --[[ line: 353 ]]
+function t_1:complete()
 	-- upvalues: onNotify (ref)
 	onNotify(self._subscription, "complete")
 end
@@ -336,12 +336,12 @@ end
 t = {}
 t.__index = t
 
-local function isObservableClass(p31) --[[ line: 413 ]]
+local function isObservableClass(p31)
 	-- upvalues: var5 (ref), t (write)
 	return typeof(p31) == "table" and (p31[var5] == t[var5] and typeof(rawget(p31, "new")) == "function")
 end
 
-function t.new(p32) --[[ line: 419 ]]
+function t.new(p32)
 	-- upvalues: t (write)
 	local var29
 	if typeof(p32) == "function" then
@@ -356,7 +356,7 @@ function t.new(p32) --[[ line: 419 ]]
 	return setmetatable({ _subscriber = p32 }, t)
 end
 
-function t:subscribe(p33, p34, p35) --[[ line: 437 ]]
+function t:subscribe(p33, p34, p35)
 	-- upvalues: t_2 (ref)
 	if typeof(p33) ~= "table" or p33 == nil then
 		p33 = { start = nil, next = p33, error = p34, complete = p35 }
@@ -364,9 +364,9 @@ function t:subscribe(p33, p34, p35) --[[ line: 437 ]]
 	return t_2.new(p33, self._subscriber)
 end
 
-function t.forEach(p36, p37) --[[ line: 455 ]]
+function t.forEach(p36, p37)
 	-- upvalues: promiseModule (ref), error (ref)
-	return promiseModule.new(function(p38, p39) --[[ line: 456 ]]
+	return promiseModule.new(function(p38, p39)
 		-- upvalues: p37 (ref), error (copy), p36 (ref)
 		local var32
 		local var31 = p37
@@ -380,14 +380,14 @@ function t.forEach(p36, p37) --[[ line: 455 ]]
 		if var32 then
 			local var34 = nil
 			
-			var31 = function() --[[ line: 466 | named "done" ]]
+			var31 = function()
 				-- upvalues: var34 (write), p38 (ref)
 				var34:unsubscribe()
 				p38()
 			end
 			
 			var34 = p36:subscribe({
-				next = function(_, p40) --[[ line: 472 ]]
+				next = function(_, p40)
 					-- upvalues: p37 (copy), var31 (ref), p39 (ref), var34 (write)
 					local ok, status = pcall(p37, p40, var31)
 					
@@ -396,11 +396,11 @@ function t.forEach(p36, p37) --[[ line: 455 ]]
 						var34:unsubscribe()
 					end
 				end,
-				error = function(_, p41) --[[ line: 481 ]]
+				error = function(_, p41)
 					-- upvalues: p39 (ref)
 					p39(p41)
 				end,
-				complete = function(_) --[[ line: 484 ]]
+				complete = function(_)
 					-- upvalues: p38 (ref)
 					p38()
 				end
@@ -412,7 +412,7 @@ function t.forEach(p36, p37) --[[ line: 455 ]]
 	end)
 end
 
-function t:map(p42) --[[ line: 492 ]]
+function t:map(p42)
 	-- upvalues: error (ref), var6 (ref), t (write)
 	local var35, var36
 	if typeof(p42) == "function" then
@@ -426,10 +426,10 @@ function t:map(p42) --[[ line: 492 ]]
 	end
 	var36 = self[var6]
 	
-	return (if var36 ~= nil then t else var36).new(function(p43) --[[ line: 501 ]]
+	return (if var36 ~= nil then t else var36).new(function(p43)
 		-- upvalues: self (ref), p42 (ref)
 		return self:subscribe({
-			next = function(_, p44) --[[ line: 503 ]]
+			next = function(_, p44)
 				-- upvalues: p42 (copy), p43 (ref)
 				local ok, status = pcall(p42, p44)
 				
@@ -440,11 +440,11 @@ function t:map(p42) --[[ line: 492 ]]
 				end
 				p43:error(status)
 			end,
-			error = function(_, p45) --[[ line: 514 ]]
+			error = function(_, p45)
 				-- upvalues: p43 (ref)
 				p43:error(p45)
 			end,
-			complete = function(_) --[[ line: 517 ]]
+			complete = function(_)
 				-- upvalues: p43 (ref)
 				p43:complete()
 			end
@@ -452,7 +452,7 @@ function t:map(p42) --[[ line: 492 ]]
 	end)
 end
 
-function t:filter(p46) --[[ line: 526 ]]
+function t:filter(p46)
 	-- upvalues: error (ref), var6 (ref), t (write), boolean (ref)
 	local var37, var38
 	if typeof(p46) == "function" then
@@ -466,12 +466,12 @@ function t:filter(p46) --[[ line: 526 ]]
 	end
 	var38 = self[var6]
 	
-	return (if var38 ~= nil then t else var38).new(function(p47) --[[ line: 535 ]]
+	return (if var38 ~= nil then t else var38).new(function(p47)
 		-- upvalues: self (ref), p46 (ref), boolean (copy)
 		return self:subscribe({
-			next = function(_, p48) --[[ line: 537 ]]
+			next = function(_, p48)
 				-- upvalues: p46 (copy), p47 (ref), boolean (copy)
-				local ok, status = xpcall(p46, function(p49) --[[ line: 539 ]]
+				local ok, status = xpcall(p46, function(p49)
 					-- upvalues: p47 (copy)
 					p47:error(p49)
 				end, p48)
@@ -483,11 +483,11 @@ function t:filter(p46) --[[ line: 526 ]]
 					return
 				end
 			end,
-			error = function(_, p50) --[[ line: 552 ]]
+			error = function(_, p50)
 				-- upvalues: p47 (ref)
 				p47:error(p50)
 			end,
-			complete = function(_) --[[ line: 555 ]]
+			complete = function(_)
 				-- upvalues: p47 (ref)
 				p47:complete()
 			end
@@ -495,7 +495,7 @@ function t:filter(p46) --[[ line: 526 ]]
 	end)
 end
 
-function t:reduce(p51, ...) --[[ line: 562 ]]
+function t:reduce(p51, ...)
 	-- upvalues: error (ref), var6 (ref), t (write)
 	local var40, var41
 	local list = { p51, ... }
@@ -515,10 +515,10 @@ function t:reduce(p51, ...) --[[ line: 562 ]]
 	local var43 = false
 	local var44 = list[2]
 	
-	return var42.new(function(p52) --[[ line: 577 ]]
+	return var42.new(function(p52)
 		-- upvalues: self (ref), var43 (write), var41 (ref), var44 (write), p51 (ref), error (copy)
 		return self:subscribe({
-			next = function(_, p53) --[[ line: 579 ]]
+			next = function(_, p53)
 				-- upvalues: var43 (copy), var41 (copy), var44 (copy), p51 (copy), p52 (ref)
 				local var45 = not var43
 				var43 = true
@@ -529,18 +529,18 @@ function t:reduce(p51, ...) --[[ line: 562 ]]
 					return
 				end
 				local var46 = nil
-				local ok, status = xpcall(p51, function(p54) --[[ line: 585 ]]
+				local ok, status = xpcall(p51, function(p54)
 					-- upvalues: p52 (copy)
 					p52:error(p54)
 				end, var44, p53)
 				var44 = status
 				var46 = ok
 			end,
-			error = function(_, p55) --[[ line: 593 ]]
+			error = function(_, p55)
 				-- upvalues: p52 (ref)
 				p52:error(p55)
 			end,
-			complete = function(_) --[[ line: 596 ]]
+			complete = function(_)
 				-- upvalues: var43 (copy), var41 (copy), p52 (ref), error (copy), var44 (copy)
 				if not var43 and not var41 then
 					p52:error(error.new("Cannot reduce an empty sequence"))
@@ -552,29 +552,29 @@ function t:reduce(p51, ...) --[[ line: 562 ]]
 	end)
 end
 
-function t:concat(...) --[[ line: 609 ]]
+function t:concat(...)
 	-- upvalues: var6 (ref), t (write), boolean (ref)
 	local list = { ... }
 	local var48 = self[var6]
 	local var49 = if var48 ~= nil then t else var48
 	
-	return var49.new(function(p56) --[[ line: 614 ]]
+	return var49.new(function(p56)
 		-- upvalues: list (ref), var49 (ref), self (ref), boolean (copy)
 		local var50 = nil
 		local var51 = 1
 		
-		local function startNext(p57) --[[ line: 617 ]]
+		local function startNext(p57)
 			-- upvalues: var50 (write), p56 (ref), var51 (write), list (copy), startNext (ref), var49 (copy)
 			var50 = p57:subscribe({
-				next = function(_, p58) --[[ line: 619 ]]
+				next = function(_, p58)
 					-- upvalues: p56 (copy)
 					p56:next(p58)
 				end,
-				error = function(_, p59) --[[ line: 622 ]]
+				error = function(_, p59)
 					-- upvalues: p56 (copy)
 					p56:error(p59)
 				end,
-				complete = function(_) --[[ line: 625 ]]
+				complete = function(_)
 					-- upvalues: var51 (copy), list (copy), var50 (copy), p56 (copy), startNext (copy), var49 (copy)
 					if var51 == #list + 1 then
 						var50 = nil
@@ -590,7 +590,7 @@ function t:concat(...) --[[ line: 609 ]]
 		
 		startNext(self)
 		
-		return function() --[[ line: 644 ]]
+		return function()
 			-- upvalues: boolean (copy), var50 (write)
 			if boolean.toJSBoolean(var50) then
 				var50:unsubscribe()
@@ -600,7 +600,7 @@ function t:concat(...) --[[ line: 609 ]]
 	end)
 end
 
-function t:flatMap(p60) --[[ line: 654 ]]
+function t:flatMap(p60)
 	-- upvalues: error (ref), var6 (ref), t (write), boolean (ref), array (ref)
 	local var54, var55
 	local var53 = nil
@@ -617,15 +617,15 @@ function t:flatMap(p60) --[[ line: 654 ]]
 	var55 = self[var6]
 	local var56 = if var55 ~= nil then t else var55
 	
-	return var56.new(function(p61) --[[ line: 665 ]]
+	return var56.new(function(p61)
 		-- upvalues: self (ref), boolean (copy), p60 (ref), var56 (ref), array (copy), var53 (write)
 		local t = {}
 		local var58 = self:subscribe({
-			next = function(_, p62) --[[ line: 668 ]]
+			next = function(_, p62)
 				-- upvalues: boolean (copy), p60 (copy), p61 (ref), var56 (copy), array (copy), t (ref), var53 (copy)
 				if boolean.toJSBoolean(p60) then
 					local _ = nil
-					local ok, status = xpcall(p60, function(p63) --[[ line: 672 ]]
+					local ok, status = xpcall(p60, function(p63)
 						-- upvalues: p61 (copy)
 						p61:error(p63)
 					end, p62)
@@ -634,15 +634,15 @@ function t:flatMap(p60) --[[ line: 654 ]]
 				end
 				local var59 = nil
 				table.insert(t, var56.from(p62):subscribe({
-					next = function(_, p64) --[[ line: 680 ]]
+					next = function(_, p64)
 						-- upvalues: p61 (copy)
 						p61:next(p64)
 					end,
-					error = function(_, p65) --[[ line: 683 ]]
+					error = function(_, p65)
 						-- upvalues: p61 (copy)
 						p61:error(p65)
 					end,
-					complete = function(_) --[[ line: 686 ]]
+					complete = function(_)
 						-- upvalues: array (copy), t (copy), var59 (write), var53 (copy)
 						local var60 = array.indexOf(t, var59)
 						
@@ -655,26 +655,26 @@ function t:flatMap(p60) --[[ line: 654 ]]
 				
 				return nil
 			end,
-			error = function(_, p66) --[[ line: 701 ]]
+			error = function(_, p66)
 				-- upvalues: p61 (ref)
 				p61:error(p66)
 			end,
-			complete = function(_) --[[ line: 704 ]]
+			complete = function(_)
 				-- upvalues: var53 (copy)
 				var53()
 			end
 		})
 		
-		var53 = function() --[[ line: 709 | named "completeIfDone" ]]
+		var53 = function()
 			-- upvalues: var58 (ref), t (ref), p61 (ref)
 			if var58.closed and #t == 0 then
 				p61:complete()
 			end
 		end
 		
-		return function() --[[ line: 715 ]]
+		return function()
 			-- upvalues: array (copy), t (ref), var58 (ref)
-			array.forEach(t, function(p67) --[[ line: 716 ]]
+			array.forEach(t, function(p67)
 				return p67:unsubscribe()
 			end)
 			var58:unsubscribe()
@@ -682,11 +682,11 @@ function t:flatMap(p60) --[[ line: 654 ]]
 	end)
 end
 
-t[var5] = function(p68) --[[ line: 724 ]]
+t[var5] = function(p68)
 	return p68
 end
 
-function t.from(p69, p70) --[[ line: 729 ]]
+function t.from(p69, p70)
 	-- upvalues: isObservableClass (write), t (write), error (ref), var5 (ref), instanceof (ref), array (ref), promiseModule (ref), tbl (write)
 	local var61, var62
 	local _ = nil
@@ -720,14 +720,14 @@ function t.from(p69, p70) --[[ line: 729 ]]
 	if var64 then
 		local var67 = var64(var62)
 		
-		return if instanceof(var67, t) and var67.new == var61.new then var67 else var61.new(function(p71) --[[ line: 758 ]]
+		return if instanceof(var67, t) and var67.new == var61.new then var67 else var61.new(function(p71)
 			-- upvalues: var67 (ref)
 			return var67:subscribe(p71)
 		end)
 	elseif array.isArray(var62) then
-		return t.new(function(p72) --[[ line: 780 ]]
+		return t.new(function(p72)
 			-- upvalues: var62 (write), promiseModule (copy), tbl (copy)
-			local var68 = function() --[[ line: 781 ]]
+			local var68 = function()
 				-- upvalues: p72 (ref), var62 (copy)
 				if p72.closed then return end
 				for i, v in pairs(var62) do
@@ -738,9 +738,9 @@ function t.from(p69, p70) --[[ line: 729 ]]
 				p72:complete()
 			end
 			
-			promiseModule.delay(0):doneCall(function() --[[ line: 117 ]]
+			promiseModule.delay(0):doneCall(function()
 				-- upvalues: var68 (ref), tbl (copy)
-				xpcall(var68, function(p73) --[[ line: 118 ]]
+				xpcall(var68, function(p73)
 					-- upvalues: tbl (copy)
 					tbl(p73)
 				end)
@@ -750,7 +750,7 @@ function t.from(p69, p70) --[[ line: 729 ]]
 	error(error.new(tostring(var62) .. " is not observable"))
 end
 
-function t.of(p74, ...) --[[ line: 803 ]]
+function t.of(p74, ...)
 	-- upvalues: isObservableClass (write), t (write), promiseModule (ref), tbl (write)
 	local var69, list
 	local _ = nil
@@ -763,9 +763,9 @@ function t.of(p74, ...) --[[ line: 803 ]]
 		var69 = t
 		list = { p74, ... }
 	end
-	return var69.new(function(p75) --[[ line: 813 ]]
+	return var69.new(function(p75)
 		-- upvalues: list (write), promiseModule (copy), tbl (copy)
-		local var71 = function() --[[ line: 814 ]]
+		local var71 = function()
 			-- upvalues: p75 (ref), list (copy)
 			if p75.closed then return end
 			for i, v in ipairs(list) do
@@ -776,9 +776,9 @@ function t.of(p74, ...) --[[ line: 803 ]]
 			p75:complete()
 		end
 		
-		promiseModule.delay(0):doneCall(function() --[[ line: 117 ]]
+		promiseModule.delay(0):doneCall(function()
 			-- upvalues: var71 (ref), tbl (copy)
-			xpcall(var71, function(p76) --[[ line: 118 ]]
+			xpcall(var71, function(p76)
 				-- upvalues: tbl (copy)
 				tbl(p76)
 			end)

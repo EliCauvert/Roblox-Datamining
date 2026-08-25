@@ -27,7 +27,7 @@ arrowNav.validateProps = tModule.intersection(tModule.strictInterface({
 		buttonPadding = tModule.number,
 		updateCanvasPosition = tModule.callback
 	}))
-}), function(p0) --[[ line: 63 ]]
+}), function(p0)
 	if p0.defaultUseProps then
 		if p0.defaultUseProps.buttonRefs ~= nil then
 			if p0.defaultUseProps.buttonWidth ~= nil then
@@ -51,11 +51,11 @@ arrowNav.defaultProps = {
 	Position = UDim2.new(0, 0, 0, 0)
 }
 
-function arrowNav.init(p1) --[[ line: 97 ]]
+function arrowNav.init(p1)
 	p1.holdConn = nil
 	p1.timeOfInputBegan = 0
 	
-	function p1.handleInputBegan(_, p2) --[[ line: 101 ]]
+	function p1.handleInputBegan(_, p2)
 		-- upvalues: p1 (ref)
 		local navDirection = p1.props.navDirection
 		
@@ -67,7 +67,7 @@ function arrowNav.init(p1) --[[ line: 97 ]]
 		p1:onPressHoldInputBegan(p2, navDirection)
 	end
 	
-	function p1.handleInputEnded(_, p3) --[[ line: 110 ]]
+	function p1.handleInputEnded(_, p3)
 		-- upvalues: p1 (ref)
 		local navDirection = p1.props.navDirection
 		
@@ -80,31 +80,31 @@ function arrowNav.init(p1) --[[ line: 97 ]]
 	end
 end
 
-function arrowNav.getGoal(p4, p5) --[[ line: 120 ]]
+function arrowNav.getGoal(p4, p5)
 	-- upvalues: otterModule (ref), t (ref)
 	return otterModule.spring(p4:getScrollToLocation(p5), t)
 end
 
-function arrowNav.didMount(p6) --[[ line: 124 ]]
+function arrowNav.didMount(p6)
 	p6:setMotor(0)
 end
 
-function arrowNav.setMotor(value, p7) --[[ line: 128 ]]
+function arrowNav.setMotor(value, p7)
 	-- upvalues: otterModule (ref)
 	value.motor = otterModule.createSingleMotor(p7)
-	value.motor:onStep(function(p8) --[[ line: 130 ]]
+	value.motor:onStep(function(p8)
 		-- upvalues: value (ref)
 		value.props.defaultUseProps.updateCanvasPosition(Vector2.new(p8, 0))
 	end)
-	value.motor:onComplete(function(p9) --[[ line: 133 ]]
+	value.motor:onComplete(function(p9)
 		-- upvalues: value (ref)
 		value.props.defaultUseProps.updateCanvasPosition(Vector2.new(p9, 0))
 	end)
 end
 
-function arrowNav.render(p10) --[[ line: 138 ]]
+function arrowNav.render(p10)
 	-- upvalues: withStyleModule (ref), roactModule (ref), button (ref)
-	return withStyleModule(function(p11) --[[ line: 139 ]]
+	return withStyleModule(function(p11)
 		-- upvalues: roactModule (copy), button (copy), p10 (ref)
 		return roactModule.createElement(button, {
 			AnchorPoint = p10.props.AnchorPoint,
@@ -120,7 +120,7 @@ function arrowNav.render(p10) --[[ line: 138 ]]
 	end)
 end
 
-function arrowNav.willUnmount(p12) --[[ line: 155 ]]
+function arrowNav.willUnmount(p12)
 	p12:disconnectHoldConn()
 	
 	if p12.motor then
@@ -129,11 +129,11 @@ function arrowNav.willUnmount(p12) --[[ line: 155 ]]
 	end
 end
 
-function arrowNav.getNewCanvasPosition(p13, p14) --[[ line: 163 ]]
+function arrowNav.getNewCanvasPosition(p13, p14)
 	return p13.props.defaultUseProps.scrollingFrameRef.current.CanvasPosition + Vector2.new(p14, 0)
 end
 
-function arrowNav.disconnectHoldConn(p15) --[[ line: 168 ]]
+function arrowNav.disconnectHoldConn(p15)
 	if p15.holdConn == nil then
 		return
 	end
@@ -141,12 +141,12 @@ function arrowNav.disconnectHoldConn(p15) --[[ line: 168 ]]
 	p15.holdConn = nil
 end
 
-function arrowNav.onPressHoldInputBegan(p16, p17, p18) --[[ line: 176 ]]
+function arrowNav.onPressHoldInputBegan(p16, p17, p18)
 	-- upvalues: runService (ref), navigationDirectionModule (ref)
 	if p17.UserInputState == Enum.UserInputState.Begin then
 		p16.timeOfInputBegan = tick()
 		p16:disconnectHoldConn()
-		p16.holdConn = runService.RenderStepped:connect(function(p19) --[[ line: 182 ]]
+		p16.holdConn = runService.RenderStepped:connect(function(p19)
 			-- upvalues: p16 (ref), navigationDirectionModule (copy), p18 (ref)
 			p16.props.defaultUseProps.updateCanvasPosition(p16:getNewCanvasPosition((if p18 == navigationDirectionModule.IsLeft then -1 else 1) * 500 * p19 * (tick() - p16.timeOfInputBegan) ^ 2))
 		end)
@@ -155,7 +155,7 @@ function arrowNav.onPressHoldInputBegan(p16, p17, p18) --[[ line: 176 ]]
 	end
 end
 
-function arrowNav.onPressHoldInputEnded(p20, p21, p22) --[[ line: 191 ]]
+function arrowNav.onPressHoldInputEnded(p20, p21, p22)
 	-- upvalues: otterModule (ref)
 	if p21.UserInputState ~= Enum.UserInputState.End then return end
 	local current = p20.props.defaultUseProps.scrollingFrameRef.current
@@ -172,14 +172,14 @@ function arrowNav.onPressHoldInputEnded(p20, p21, p22) --[[ line: 191 ]]
 	p20:disconnectHoldConn()
 end
 
-function arrowNav.getScrollToLocation(p23, p24) --[[ line: 209 ]]
+function arrowNav.getScrollToLocation(p23, p24)
 	-- upvalues: navigationDirectionModule (ref)
 	local buttonSizes = p23:getButtonSizes()
 	
 	return if p24 == navigationDirectionModule.IsLeft then p23:getScrollToLeftLocation(buttonSizes) else p23:getScrollToRightLocation(buttonSizes)
 end
 
-function arrowNav.getButtonSizes(p25) --[[ line: 219 ]]
+function arrowNav.getButtonSizes(p25)
 	local buttonRefs = p25.props.defaultUseProps.buttonRefs
 	local buttonWidth = p25.props.defaultUseProps.buttonWidth
 	local numButtons = p25.props.defaultUseProps.numButtons
@@ -195,7 +195,7 @@ function arrowNav.getButtonSizes(p25) --[[ line: 219 ]]
 	return t
 end
 
-function arrowNav.getScrollToLeftLocation(p26, p27) --[[ line: 236 ]]
+function arrowNav.getScrollToLeftLocation(p26, p27)
 	local current = p26.props.defaultUseProps.scrollingFrameRef.current
 	local buttonPadding = p26.props.defaultUseProps.buttonPadding
 	local var10 = current.CanvasPosition.X - current.AbsoluteSize.X * 0.4
@@ -211,7 +211,7 @@ function arrowNav.getScrollToLeftLocation(p26, p27) --[[ line: 236 ]]
 	return var11
 end
 
-function arrowNav.getScrollToRightLocation(p28, p29) --[[ line: 253 ]]
+function arrowNav.getScrollToRightLocation(p28, p29)
 	local current = p28.props.defaultUseProps.scrollingFrameRef.current
 	local buttonPadding = p28.props.defaultUseProps.buttonPadding
 	local padOutsideEdges = p28.props.defaultUseProps.padOutsideEdges

@@ -5,25 +5,25 @@ local toolControllerUtilsModule = require(script.Parent.toolControllerUtils)
 local studioClientDataModelTools = creatorAgentChatModule.StudioClientDataModelTools
 local debug = creatorAgentChatModule.debug
 
-return function(p0, p1, p2) --[[ line: 30 | named "createClientDataModelController" ]]
+return function(p0, p1, p2)
 	-- upvalues: studioClientDataModelTools (ref), clientDataModelCollectorModule (ref), debug (ref), toolControllerUtilsModule (ref), chatConstantsModule (ref)
-	p2 = p2 or function() --[[ line: 35 ]]
+	p2 = p2 or function()
 		return true
 	end
 	local t = {}
 	
-	local function _(p3) --[[ line: 40 | named "clearPending" ]]
+	local function _(p3)
 		-- upvalues: t (ref), p1 (ref)
 		t[p3] = nil
 		p1[p3] = nil
 	end
 	
-	local function collectResult(p4) --[[ line: 45 ]]
+	local function collectResult(p4)
 		-- upvalues: studioClientDataModelTools (copy), clientDataModelCollectorModule (copy)
 		return if p4.toolName == studioClientDataModelTools.SEARCH_TOOL_NAME then clientDataModelCollectorModule.searchClientDataModel(p4.rawInput) else clientDataModelCollectorModule.inspectClientInstance(p4.rawInput)
 	end
 	
-	local function submitResult(p5) --[[ line: 52 ]]
+	local function submitResult(p5)
 		-- upvalues: p2 (ref), t (ref), p1 (ref), debug (copy), collectResult (ref), studioClientDataModelTools (copy), p0 (ref), toolControllerUtilsModule (copy), chatConstantsModule (copy)
 		if not p2() then
 			local toolCallId = p5.toolCallId
@@ -98,7 +98,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createClientDataModelControll
 		})
 	end
 	
-	local function syncRequest(p6, p7, p8) --[[ line: 122 ]]
+	local function syncRequest(p6, p7, p8)
 		-- upvalues: p2 (ref), p1 (ref), t (ref), debug (copy), submitResult (ref)
 		if not p2() then
 			return false
@@ -127,7 +127,7 @@ return function(p0, p1, p2) --[[ line: 30 | named "createClientDataModelControll
 			gameId = game.GameId,
 			path = if typeof(var16) == "table" then var16.path else nil
 		})
-		task.spawn(function() --[[ line: 154 ]]
+		task.spawn(function()
 			-- upvalues: submitResult (copy), t_1 (ref)
 			submitResult(t_1)
 		end)
@@ -136,14 +136,14 @@ return function(p0, p1, p2) --[[ line: 30 | named "createClientDataModelControll
 	end
 	
 	return {
-		revokePending = function() --[[ line: 175 ]]
+		revokePending = function()
 			-- upvalues: t (ref), p1 (ref)
 			for i in t do
 				t[i] = nil
 				p1[i] = nil
 			end
 		end,
-		syncClientDataModelRequests = function(p9) --[[ line: 160 ]]
+		syncClientDataModelRequests = function(p9)
 			-- upvalues: syncRequest (ref), studioClientDataModelTools (copy)
 			return syncRequest(p9, studioClientDataModelTools.SEARCH_TOOL_NAME, studioClientDataModelTools.findSearchRequestInTurnState) or syncRequest(p9, studioClientDataModelTools.INSPECT_TOOL_NAME, studioClientDataModelTools.findInspectRequestInTurnState)
 		end

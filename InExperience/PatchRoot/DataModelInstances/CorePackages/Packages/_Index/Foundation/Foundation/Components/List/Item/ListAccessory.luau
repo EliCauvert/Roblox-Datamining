@@ -16,10 +16,10 @@ local avatarModule = require(foundation.Components.Avatar)
 local useListAccessoryVariantsModule = require(script.Parent.useListAccessoryVariants)
 local _ = require(foundation.Enums.InputSize)
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "ListAccessory" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokensModule (ref), reactModule (ref), accessoryTypeModule (ref), isBuilderOrMigratedIcon (ref), useListAccessoryVariantsModule (ref), avatarModule (ref), iconModule (ref), isMigrated (ref), uiblox (ref), imageModule (ref), viewModule (ref), stateLayerAffordanceModule (ref)
 	local var11 = useTokensModule()
-	local var12 = reactModule.useMemo(function() --[[ line: 47 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		return if type(p0.config) == "string" then { iconName = p0.config } else p0.config
 	end, { p0.config })

@@ -16,12 +16,12 @@ local t = {}
 local t_1 = {}
 local t_2 = { [1] = robloxGui }
 
-local function _(p0) --[[ line: 25 | named "getScreenPriority" ]]
+local function _(p0)
 	-- upvalues: globalSettingsModule (ref)
 	return if p0.GetPriority ~= nil then p0:GetPriority() else globalSettingsModule.DefaultPriority
 end
 
-local function setRBXEventStream_Screen(value, p1) --[[ line: 33 ]]
+local function setRBXEventStream_Screen(value, p1)
 	-- upvalues: analyticsModule (ref)
 	if value and type(value.GetAnalyticsInfo) == "function" then
 		local analyticsInfo = value:GetAnalyticsInfo()
@@ -33,7 +33,7 @@ local function setRBXEventStream_Screen(value, p1) --[[ line: 33 ]]
 	end
 end
 
-function t.GetScreenGuiByPriority(_, p2) --[[ line: 43 ]]
+function t.GetScreenGuiByPriority(_, p2)
 	-- upvalues: t_2 (ref), create (ref), coreGuiService (ref)
 	local maxValue = math.max(1, p2)
 	
@@ -50,7 +50,7 @@ function t.GetScreenGuiByPriority(_, p2) --[[ line: 43 ]]
 	return t_2[maxValue]
 end
 
-function t.OpenScreen(_, p3, p4) --[[ line: 60 ]]
+function t.OpenScreen(_, p3, p4)
 	-- upvalues: t_1 (ref), screenItemModule (ref), globalSettingsModule (ref), getFIntXboxPrimaryNavABLoggingModule (ref), t (ref), contentHistoryModule (ref), appStateModule (ref), insertScreenModule (ref)
 	if p4 == nil then
 		p4 = true
@@ -71,7 +71,7 @@ function t.OpenScreen(_, p3, p4) --[[ line: 60 ]]
 	appStateModule.store:dispatch(insertScreenModule(new))
 end
 
-function t.CloseCurrent(_, p5) --[[ line: 87 ]]
+function t.CloseCurrent(_, p5)
 	-- upvalues: appStateModule (ref), t_1 (ref), removeScreenModule (ref)
 	local screenList = appStateModule.store:getState().ScreenList
 	local var23 = #screenList > 0 and screenList[1]
@@ -83,7 +83,7 @@ function t.CloseCurrent(_, p5) --[[ line: 87 ]]
 	appStateModule.store:dispatch(removeScreenModule(var23))
 end
 
-local function handleScreensRemoved(p6) --[[ line: 104 ]]
+local function handleScreensRemoved(p6)
 	-- upvalues: t_1 (ref), setRBXEventStream_Screen (ref)
 	local t = {}
 	
@@ -114,7 +114,7 @@ local function handleScreensRemoved(p6) --[[ line: 104 ]]
 	end
 end
 
-local function handleScreensAdded(p7) --[[ line: 136 ]]
+local function handleScreensAdded(p7)
 	-- upvalues: t_1 (ref), setRBXEventStream_Screen (ref), pageHeartbeatTimerModule (ref), analyticsModule (ref)
 	for i = #p7, 1, -1 do
 		local id = t_1[p7[i].id]
@@ -157,13 +157,13 @@ local function handleScreensAdded(p7) --[[ line: 136 ]]
 	analyticsModule.reportPageChanged()
 end
 
-local _ = function(p8) --[[ line: 181 | named "update" ]]
+local _ = function(p8)
 	-- upvalues: handleScreensRemoved (ref), handleScreensAdded (ref)
 	handleScreensRemoved(p8)
 	handleScreensAdded(p8)
 end
 
-appStateModule.store.changed:connect(function(p9, p10) --[[ line: 186 ]]
+appStateModule.store.changed:connect(function(p9, p10)
 	-- upvalues: handleScreensRemoved (ref), handleScreensAdded (ref)
 	local screenList = p9.ScreenList
 	
@@ -174,7 +174,7 @@ appStateModule.store.changed:connect(function(p9, p10) --[[ line: 186 ]]
 	handleScreensAdded(screenList)
 end)
 
-function t.GetTopScreen(_) --[[ line: 197 ]]
+function t.GetTopScreen(_)
 	-- upvalues: appStateModule (ref), t_1 (ref)
 	local screenList = appStateModule.store:getState().ScreenList
 	

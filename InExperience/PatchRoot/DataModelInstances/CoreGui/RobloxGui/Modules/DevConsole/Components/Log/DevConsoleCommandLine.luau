@@ -10,9 +10,9 @@ local commandLine = constantsModule.DefaultFontSize.CommandLine
 local log = constantsModule.Font.Log
 local devConsoleCommandLine = roactModule.PureComponent:extend("DevConsoleCommandLine")
 
-function devConsoleCommandLine.init(p0) --[[ line: 17 ]]
+function devConsoleCommandLine.init(p0)
 	-- upvalues: logService (ref), roactModule (ref)
-	function p0.onFocusLost(p1, p2, _) --[[ line: 18 ]]
+	function p0.onFocusLost(p1, p2, _)
 		-- upvalues: logService (copy)
 		if p2 then
 			logService:ExecuteScript(p1.Text)
@@ -23,10 +23,10 @@ function devConsoleCommandLine.init(p0) --[[ line: 17 ]]
 	p0.textbox = roactModule.createRef()
 end
 
-function devConsoleCommandLine.didMount(p3) --[[ line: 28 ]]
+function devConsoleCommandLine.didMount(p3)
 	-- upvalues: userInputService (ref)
 	if not p3.onFocusConnection then
-		p3.onFocusConnection = userInputService.InputBegan:Connect(function(p4) --[[ line: 30 ]]
+		p3.onFocusConnection = userInputService.InputBegan:Connect(function(p4)
 			-- upvalues: p3 (ref)
 			if p3.textbox.current and p3.textbox.current:IsFocused() then
 				local current = p3.textbox.current
@@ -55,7 +55,7 @@ function devConsoleCommandLine.didMount(p3) --[[ line: 28 ]]
 		end)
 	end
 	if not p3.fixUnwantedReturnCapture then
-		p3.fixUnwantedReturnCapture = userInputService.InputEnded:Connect(function(p5) --[[ line: 70 ]]
+		p3.fixUnwantedReturnCapture = userInputService.InputEnded:Connect(function(p5)
 			-- upvalues: p3 (ref)
 			if p3.textbox.current and p3.textbox.current:IsFocused() and p5.KeyCode == Enum.KeyCode.Return then
 				p3.textbox.current.Text = ""
@@ -64,7 +64,7 @@ function devConsoleCommandLine.didMount(p3) --[[ line: 28 ]]
 	end
 end
 
-function devConsoleCommandLine.willUnmount(p6) --[[ line: 80 ]]
+function devConsoleCommandLine.willUnmount(p6)
 	if p6.onFocusConnection then
 		p6.onFocusConnection:Disconnect()
 		p6.onFocusConnection = nil
@@ -75,7 +75,7 @@ function devConsoleCommandLine.willUnmount(p6) --[[ line: 80 ]]
 	end
 end
 
-function devConsoleCommandLine.render(p7) --[[ line: 91 ]]
+function devConsoleCommandLine.render(p7)
 	-- upvalues: roactModule (ref), constantsModule (ref), commandLineIndent (ref), commandLine (ref), log (ref), scrollingTextBoxModule (ref)
 	local height = p7.props.height
 	local pos = p7.props.pos

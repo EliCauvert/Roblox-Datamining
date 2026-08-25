@@ -18,7 +18,7 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | named "TextArea" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref)
 	local var11 = withDefaultsModule(p0, t)
 	local var12 = useTokensModule()
@@ -32,7 +32,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 39 | 
 		hasError = var11.hasError,
 		isDisabled = var11.isDisabled,
 		isRequired = var11.isRequired,
-		input = function(p2) --[[ line: 54 ]]
+		input = function(p2)
 			-- upvalues: reactModule (copy), internalTextInputModule (copy), var11 (ref), var13 (ref), var12 (ref)
 			return reactModule.createElement(internalTextInputModule, {
 				LayoutOrder = 2,

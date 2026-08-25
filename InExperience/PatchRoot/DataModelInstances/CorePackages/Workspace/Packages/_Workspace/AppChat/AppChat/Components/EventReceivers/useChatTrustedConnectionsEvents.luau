@@ -16,16 +16,16 @@ local conversationModerationTypeChangedModule = require(appChat.Conversations.Ac
 local cryoModule = require(parent.Cryo)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(p0) --[[ line: 25 | named "useChatTrustedConnectionsEvents" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useSelector (ref), useGetConversationFromIdModule (ref), useIsInExperienceModule (ref), useLocalUserId (ref), reactModule (ref), conversationChannelsModule (ref), refreshConversationUnfilteredThreadsDetailsModule (ref), cryoModule (ref), conversationModerationTypeChangedModule (ref), reloadMessagesForConversationsModule (ref), realtimeDeliveryModule (ref), trustedConnections (ref), name (ref)
 	local var11 = useDispatch()
-	local var12 = useSelector(function(p1) --[[ line: 27 ]]
+	local var12 = useSelector(function(p1)
 		return p1.ChatAppReducer.Conversations
 	end)
 	local var13 = useGetConversationFromIdModule(p0.activeConversationId)
 	local var14 = useIsInExperienceModule()
 	local var15 = useLocalUserId()
-	local var16 = reactModule.useCallback(function(p2) --[[ line: 35 ]]
+	local var16 = reactModule.useCallback(function(p2)
 		-- upvalues: var13 (ref), conversationChannelsModule (copy), var11 (ref), refreshConversationUnfilteredThreadsDetailsModule (copy), var14 (ref)
 		if var13 and var13.participants and (var13.type == conversationChannelsModule.Type.OneToOne and p2) then
 			for i, v in var13.participants do
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 25 | named "useChatTrustedConnectionsEvents" ]]
 			end
 		end
 	end, { var11, var13, var14 })
-	local var17 = reactModule.useCallback(function(p3, p4) --[[ line: 53 ]]
+	local var17 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var12 (ref), conversationChannelsModule (copy), cryoModule (copy), var11 (ref), conversationModerationTypeChangedModule (copy)
 		for i, v in var12 do
 			if v.type == conversationChannelsModule.Type.OneToOne and v.participants and (v.source == conversationChannelsModule.Source.Friends and cryoModule.List.find(v.participants, p3)) then
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 25 | named "useChatTrustedConnectionsEvents" ]]
 			end
 		end
 	end, { var11, var12 })
-	local var18 = reactModule.useCallback(function(p5) --[[ line: 68 ]]
+	local var18 = reactModule.useCallback(function(p5)
 		-- upvalues: var12 (ref), cryoModule (copy), var11 (ref), reloadMessagesForConversationsModule (copy)
 		local t = {}
 		
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 25 | named "useChatTrustedConnectionsEvents" ]]
 		end
 		var11(reloadMessagesForConversationsModule(t))
 	end, { var11, var12 })
-	realtimeDeliveryModule.useRealtimeNamespace(trustedConnections.Namespace, function(p6) --[[ line: 84 ]]
+	realtimeDeliveryModule.useRealtimeNamespace(trustedConnections.Namespace, function(p6)
 		-- upvalues: name (copy), trustedConnections (copy), var15 (ref), var16 (ref), var17 (ref), conversationChannelsModule (copy), var18 (ref)
 		name:debug("Received Realtime Event " .. trustedConnections.Namespace .. " -> Actor: " .. tostring(p6.Actor) .. ", Target: " .. tostring(p6.Target) .. ", EventType: " .. tostring(p6.EventType))
 		local var20 = tostring(p6.Actor)

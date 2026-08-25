@@ -6,7 +6,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local getInputVariantsFactoryModule = require(script.Parent.getInputVariantsFactory)
 local _ = require(foundation.Providers.Style.Tokens)
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 22 | named "composeInputFieldVariants" ]]
+return function(p0, p1, p2, p3, p4, p5, p6)
 	-- upvalues: getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
 	local var4 = getInputVariantsFactoryModule(p0)
 	local var5 = var4.variants[p2 or inputVariantModule.Standard]

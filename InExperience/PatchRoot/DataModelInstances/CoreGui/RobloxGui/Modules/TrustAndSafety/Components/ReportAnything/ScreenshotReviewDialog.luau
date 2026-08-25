@@ -21,7 +21,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local getFFlagReportAnythingLocalizationEnabledModule = require(parent.Flags.GetFFlagReportAnythingLocalizationEnabled)
 local dividerModule = require(dependenciesModule.Divider)
 
-local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0) --[[ line: 45 ]]
+local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0)
 	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), button (ref), buttonType (ref), standardButtonSize (ref)
 	local var10, var11 = reactModule.useState(0)
 	
@@ -50,11 +50,11 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0) --[[ line:
 			text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Retake"),
 			fitContent = true,
 			standardSize = standardButtonSize.XSmall,
-			onActivated = reactModule.useCallback(function() --[[ line: 50 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: p0 (ref)
 				p0.setShowRestartDialog(true)
 			end, { p0.setShowRestartDialog }),
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1) --[[ line: 47 ]]
+			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p1)
 				-- upvalues: var11 (ref)
 				var11(p1.AbsoluteSize.X)
 			end, { var11 })
@@ -62,9 +62,9 @@ local function ScreenshotReviewDialogSmallPortraitModeHeaderRight(p0) --[[ line:
 	})
 end
 
-return function(p2) --[[ line: 91 | named "ScreenshotReviewDialog" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), getFFlagReportAnythingLocalizationEnabledModule (ref), useStyle (ref), restartScreenshotDialogModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), ScreenshotReviewDialogSmallPortraitModeHeaderRight (ref), button (ref), buttonType (ref), robloxTranslatorModule (ref), standardButtonSize (ref), dividerModule (ref), buttonStack (ref)
-	reactModule.useEffect(function() --[[ line: 92 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p2 (ref)
 		if p2.reportAnythingAnalytics then
 			p2.reportAnythingAnalytics.incrementAnnotationOptionSeen()
@@ -99,7 +99,7 @@ return function(p2) --[[ line: 91 | named "ScreenshotReviewDialog" ]]
 				DialogBody = reactModule.createElement(restartScreenshotDialogModule, {
 					ZIndex = 3,
 					isSmallPortraitMode = p2.isSmallPortraitMode,
-					onCancel = function() --[[ line: 135 ]]
+					onCancel = function()
 						-- upvalues: var14 (ref)
 						var14(false)
 					end,
@@ -156,18 +156,18 @@ return function(p2) --[[ line: 91 | named "ScreenshotReviewDialog" ]]
 							backgroundTransparency = 1,
 							barHeight = 48,
 							margin = 12,
-							renderLeft = function() --[[ line: 193 ]]
+							renderLeft = function()
 								-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (ref)
 								return reactModule.createElement(iconButton, {
 									iconSize = iconSize.Medium,
 									icon = images["icons/navigation/pushBack"],
-									onActivated = function() --[[ line: 197 ]]
+									onActivated = function()
 										-- upvalues: p2 (copy)
 										p2.onBack()
 									end
 								})
 							end,
-							renderRight = function() --[[ line: 203 ]]
+							renderRight = function()
 								-- upvalues: getFFlagReportAnythingLocalizationEnabledModule (copy), p2 (ref), reactModule (copy), ScreenshotReviewDialogSmallPortraitModeHeaderRight (copy), var14 (ref), font (ref), theme (ref), button (copy), buttonType (copy), robloxTranslatorModule (copy), standardButtonSize (copy)
 								return if getFFlagReportAnythingLocalizationEnabledModule() and p2.isSmallPortraitMode then reactModule.createElement(ScreenshotReviewDialogSmallPortraitModeHeaderRight, {
 									setShowRestartDialog = var14,
@@ -180,7 +180,7 @@ return function(p2) --[[ line: 91 | named "ScreenshotReviewDialog" ]]
 									text = if getFFlagReportAnythingLocalizationEnabledModule() then robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.Retake") else "Retake",
 									fitContent = getFFlagReportAnythingLocalizationEnabledModule(),
 									standardSize = if getFFlagReportAnythingLocalizationEnabledModule() then standardButtonSize.XSmall else nil,
-									onActivated = function() --[[ line: 227 ]]
+									onActivated = function()
 										-- upvalues: var14 (copy)
 										var14(true)
 									end
@@ -234,7 +234,7 @@ return function(p2) --[[ line: 91 | named "ScreenshotReviewDialog" ]]
 									BackgroundTransparency = 1,
 									ScaleType = Enum.ScaleType.Fit,
 									SliceCenter = assetsModule.Images.RoundedRect.SliceCenter,
-									[reactModule.Event.Activated] = function() --[[ line: 290 ]]
+									[reactModule.Event.Activated] = function()
 										-- upvalues: p2 (ref)
 										p2.onNextPage()
 									end
@@ -291,7 +291,7 @@ return function(p2) --[[ line: 91 | named "ScreenshotReviewDialog" ]]
 								{
 									buttonType = buttonType.PrimarySystem,
 									props = {
-										onActivated = function() --[[ line: 360 ]]
+										onActivated = function()
 											-- upvalues: p2 (ref)
 											p2.onNextPage()
 										end,

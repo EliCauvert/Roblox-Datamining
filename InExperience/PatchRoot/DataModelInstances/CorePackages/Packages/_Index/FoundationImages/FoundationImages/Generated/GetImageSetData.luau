@@ -1,6 +1,6 @@
 ﻿local var0 = nil
 
-function make_assets_1x() --[[ line: 11 ]]
+function make_assets_1x()
 	-- upvalues: var0 (write)
 	var0 = {
 		["chat_bubble/chat-bubble"] = {
@@ -2008,7 +2008,7 @@ end
 
 local var1 = nil
 
-function make_assets_2x() --[[ line: 415 ]]
+function make_assets_2x()
 	-- upvalues: var1 (write)
 	var1 = {
 		["chat_bubble/chat-bubble"] = {
@@ -4016,7 +4016,7 @@ end
 
 local var2 = nil
 
-function make_assets_3x() --[[ line: 819 ]]
+function make_assets_3x()
 	-- upvalues: var2 (write)
 	var2 = {
 		["chat_bubble/chat-bubble"] = {
@@ -6022,7 +6022,7 @@ function make_assets_3x() --[[ line: 819 ]]
 	}
 end
 
-return function(p0) --[[ line: 1222 ]]
+return function(p0)
 	-- upvalues: var2 (write), var1 (write), var0 (write)
 	if p0 > 2.5 then
 		if not var2 then

@@ -1,14 +1,14 @@
 ﻿local reactModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.React)
 local var1 = 0
 
-local function _() --[[ line: 8 | named "getNextUidKey" ]]
+local function _()
 	-- upvalues: var1 (write)
 	var1 += 1
 	
 	return tostring(var1)
 end
 
-return function() --[[ line: 13 | named "useUidRefString" ]]
+return function()
 	-- upvalues: reactModule (ref), var1 (write)
 	local var2 = reactModule.useRef(nil)
 	

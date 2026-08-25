@@ -22,14 +22,14 @@ local var12 = nil
 local var13 = nil
 local t_2 = { Default = 2, Activated = 1.7 }
 
-local function getCursorSize(p0) --[[ line: 45 ]]
+local function getCursorSize(p0)
 	-- upvalues: t_2 (ref), propertiesModule (ref)
 	local var19 = t_2[p0] * propertiesModule.CursorRadius
 	
 	return UDim2.fromOffset(var19, var19)
 end
 
-local function _(value) --[[ line: 50 | named "setCursorHighlight" ]]
+local function _(value)
 	-- upvalues: var8 (write)
 	if value then
 		var8.Image = "rbxasset://textures/ui/VirtualCursor/cursorHover.png"
@@ -39,12 +39,12 @@ local function _(value) --[[ line: 50 | named "setCursorHighlight" ]]
 	var8.Image = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png"
 end
 
-local _ = function(value) --[[ line: 58 | named "setCursorPosition" ]]
+local _ = function(value)
 	-- upvalues: var8 (write)
 	var8.Position = UDim2.fromOffset(value.x, value.y)
 end
 
-local function getOrCreateVirtualCursorContainer() --[[ line: 62 ]]
+local function getOrCreateVirtualCursorContainer()
 	-- upvalues: var7 (write), getFFlagVirtualCursorDisplayOrder (ref), var8 (write), t_2 (ref), propertiesModule (ref), coreGuiService (ref), var9 (write), tweenService (ref), var10 (write)
 	if var7 == nil then
 		var7 = Instance.new("ScreenGui")
@@ -83,14 +83,14 @@ local function getOrCreateVirtualCursorContainer() --[[ line: 62 ]]
 	return var7
 end
 
-local function tweenCursorOpacity(p1) --[[ line: 95 ]]
+local function tweenCursorOpacity(p1)
 	-- upvalues: var13 (write), var12 (write), tweenService (ref), var8 (write), getOrCreateVirtualCursorContainer (ref)
 	if var13 then
 		var13:Disconnect()
 		var13 = nil
 	end
 	var12 = tweenService:Create(var8, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { ImageTransparency = if p1 then 0 else 1 })
-	var13 = var12.Completed:Connect(function() --[[ line: 104 ]]
+	var13 = var12.Completed:Connect(function()
 		-- upvalues: var8 (copy), p1 (ref), getOrCreateVirtualCursorContainer (copy)
 		var8.Visible = p1
 		getOrCreateVirtualCursorContainer().Enabled = p1
@@ -98,28 +98,28 @@ local function tweenCursorOpacity(p1) --[[ line: 95 ]]
 	var12:Play()
 end
 
-local function tweenCursorPosition(p2) --[[ line: 112 ]]
+local function tweenCursorPosition(p2)
 	-- upvalues: var11 (write), tweenService (ref), var8 (write)
 	var11 = tweenService:Create(var8, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { Position = UDim2.fromOffset(p2.x, p2.y) })
 	var11:Play()
 end
 
-function t.GetCursorSize(_, p3) --[[ line: 119 ]]
+function t.GetCursorSize(_, p3)
 	-- upvalues: getCursorSize (ref)
 	return getCursorSize(p3)
 end
 
-function t.PlayCursorTweenActivate(_) --[[ line: 123 ]]
+function t.PlayCursorTweenActivate(_)
 	-- upvalues: var9 (write)
 	var9:Play()
 end
 
-function t.PlayCursorTweenDefault(_) --[[ line: 127 ]]
+function t.PlayCursorTweenDefault(_)
 	-- upvalues: var10 (write)
 	var10:Play()
 end
 
-function t.SetCursorHighlight(_, p4) --[[ line: 131 ]]
+function t.SetCursorHighlight(_, p4)
 	-- upvalues: var8 (write), t_1 (ref)
 	if p4 then
 		var8.Image = t_1.Hover
@@ -129,22 +129,22 @@ function t.SetCursorHighlight(_, p4) --[[ line: 131 ]]
 	var8.Image = t_1.Default
 end
 
-function t.SetCursorPosition(_, p5) --[[ line: 135 ]]
+function t.SetCursorPosition(_, p5)
 	-- upvalues: var8 (write)
 	var8.Position = UDim2.fromOffset(p5.x, p5.y)
 end
 
-function t.TweenCursorPosition(_, p6) --[[ line: 139 ]]
+function t.TweenCursorPosition(_, p6)
 	-- upvalues: tweenCursorPosition (ref)
 	tweenCursorPosition(p6)
 end
 
-function t.TweenCursorOpacity(_, p7) --[[ line: 143 ]]
+function t.TweenCursorOpacity(_, p7)
 	-- upvalues: tweenCursorOpacity (ref)
 	tweenCursorOpacity(p7)
 end
 
-function t.SetArrow(_, p8, p9) --[[ line: 147 ]]
+function t.SetArrow(_, p8, p9)
 	-- upvalues: var8 (write)
 	if p8 == -1 and p9 == 0 then
 		var8.Rotation = 90
@@ -159,7 +159,7 @@ function t.SetArrow(_, p8, p9) --[[ line: 147 ]]
 	var8.Image = "rbxasset://textures/ui/VirtualCursor/cursorArrow.png"
 end
 
-function t.EnableUI(_, p10) --[[ line: 163 ]]
+function t.EnableUI(_, p10)
 	-- upvalues: VRService (ref), getOrCreateVirtualCursorContainer (ref), var8 (write), t_2 (ref), propertiesModule (ref), t (ref)
 	local var29 = not VRService.VREnabled
 	getOrCreateVirtualCursorContainer().Enabled = var29
@@ -170,7 +170,7 @@ function t.EnableUI(_, p10) --[[ line: 163 ]]
 	t:TweenCursorOpacity(true)
 end
 
-function t.DisableUI(_) --[[ line: 174 ]]
+function t.DisableUI(_)
 	-- upvalues: var8 (write), t_1 (ref), t (ref)
 	var8.Image = t_1.Default
 	t:TweenCursorOpacity(false)

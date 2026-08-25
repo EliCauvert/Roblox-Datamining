@@ -1,6 +1,6 @@
 ﻿local naN = require(script.Parent.Parent.Number).NaN
 
-return function(p0, p1) --[[ line: 24 ]]
+return function(p0, p1)
 	-- upvalues: naN (ref)
 	if type(p1) ~= "number" then
 		p1 = 1

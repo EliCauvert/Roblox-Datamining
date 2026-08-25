@@ -10,11 +10,11 @@ local ingestBatchModule = require(script.Parent.ingestBatch)
 local ingestOperationModule = require(script.Parent.IngestOperation)
 local fFlagAppChatIngestConversationMessagesModule = require(appChat.Flags.FFlagAppChatIngestConversationMessages)
 
-local function _(p0) --[[ line: 22 | named "isInitialCursor" ]]
+local function _(p0)
 	return if p0 ~= nil then p0 == "" else true
 end
 
-local function upsertConversationResponse(p1, p2) --[[ line: 26 ]]
+local function upsertConversationResponse(p1, p2)
 	-- upvalues: conversationChannelsModule (ref), fFlagAppChatIngestConversationMessagesModule (ref), buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
 	if p2 == nil or p2.status == "failed" then return end
 	if p2.source == conversationChannelsModule.Source.Channels and p2.type == conversationChannelsModule.Type.OneToOne and p2.participant_user_ids ~= nil then
@@ -33,7 +33,7 @@ local function upsertConversationResponse(p1, p2) --[[ line: 26 ]]
 end
 
 return {
-	beginFetch = function(p3, p4) --[[ line: 74 ]]
+	beginFetch = function(p3, p4)
 		-- upvalues: cryoModule (ref)
 		p3.setListStatus({
 			isFetchingConversations = true,
@@ -41,7 +41,7 @@ return {
 			error = cryoModule.None
 		})
 	end,
-	ingestSuccess = function(p5, p6, p7) --[[ line: 82 ]]
+	ingestSuccess = function(p5, p6, p7)
 		-- upvalues: getResponseBodyModule (ref), upsertConversationResponse (ref), cryoModule (ref)
 		local var11 = getResponseBodyModule(p7)
 		local var12 = if var11 ~= nil then nil else var11.next_cursor
@@ -71,14 +71,14 @@ return {
 			responseBody = var11
 		}
 	end,
-	ingestFailure = function(p8, p9) --[[ line: 114 ]]
+	ingestFailure = function(p8, p9)
 		p8.setListStatus({
 			isFetchingConversations = false,
 			isFetchingNextPage = false,
 			error = p9
 		})
 	end,
-	ingestConversationResponses = function(p10, p11) --[[ line: 61 ]]
+	ingestConversationResponses = function(p10, p11)
 		-- upvalues: upsertConversationResponse (ref)
 		if p11 == nil or p11.conversations == nil then return end
 		for i, v in p11.conversations do

@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local getSduiClientPageScopeModule = require(sduiCoreSystem.ClientBinding.getSduiClientPageScope)
 local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
 
-return function(p0) --[[ line: 20 | named "usePageScopeRef" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), fFlagSduiClientPageScope (ref), getSduiClientPageScopeModule (ref)
 	local var3 = reactModule.useRef(nil)
 	

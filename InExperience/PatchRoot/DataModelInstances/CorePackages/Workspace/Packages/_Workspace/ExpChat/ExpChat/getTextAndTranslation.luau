@@ -2,7 +2,7 @@
 local isWhiteSpaceOnlyModule = require(expChat.isWhiteSpaceOnly)
 local getFFlagExpChatProtectedChatInternalAPIs = require(expChat.Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref), isWhiteSpaceOnlyModule (ref)
 	local var2 = ""
 	local var3 = ""

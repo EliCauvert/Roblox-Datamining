@@ -12,9 +12,9 @@ local getFFlagTenFootUiSupportSortHeaderTooltip = sharedFlagsModule.GetFFlagTenF
 local getFFlagTenFootUiSupportSortSubtitle = sharedFlagsModule.GetFFlagTenFootUiSupportSortSubtitle
 local vector2 = Vector2.new(1e999, 1e999)
 
-return function(p0) --[[ line: 33 | named "TenFootUiGridCarouselHeader" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), mapTypographyVariantToFontEnum (ref), getFFlagTenFootUiSupportSortSubtitle (ref), getTextSize (ref), vector2 (ref), getFFlagTenFootUiSupportSortHeaderTooltip (ref), reactModule (ref), cryoModule (ref), iconWithTooltip (ref), tooltipOrientation (ref)
-	local var5 = useDesignTokens(function(p1) --[[ line: 34 ]]
+	local var5 = useDesignTokens(function(p1)
 		-- upvalues: mapTypographyVariantToFontEnum (copy), getFFlagTenFootUiSupportSortSubtitle (copy)
 		return {
 			textStyles = {

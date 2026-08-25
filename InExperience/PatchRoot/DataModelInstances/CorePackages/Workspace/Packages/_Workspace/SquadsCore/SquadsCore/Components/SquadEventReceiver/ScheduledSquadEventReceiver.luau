@@ -17,28 +17,28 @@ local lifecycleEvents = toastNotificationModule.LifecycleEvents
 local notificationTypeEnum = toastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
 local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
 
-return function() --[[ line: 26 | named "SquadScheduledSquadEventReceiver" ]]
+return function()
 	-- upvalues: useDispatch (ref), reactModule (ref), squadExternalContractContextModule (ref), default (ref), notificationTypeEnum (ref), lifecycleEvents (ref), constantsModule (ref), httpService (ref), eventNamesModule (ref), squadToastActionsAndStatesModule (ref), squadToastTypeModule (ref), createOrJoinSquadModule (ref), realtimeDeliveryModule (ref), getScheduledSquadsStoreModule (ref)
 	local var13 = useDispatch()
 	local var14 = reactModule.useContext(squadExternalContractContextModule)
 	local var15 = var14.useIsChatEnabled()
-	reactModule.useEffect(function() --[[ line: 31 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (copy), notificationTypeEnum (copy), var15 (ref)
-		local var16 = default:listenToDisplayNotification(function(p0) --[[ line: 33 ]]
+		local var16 = default:listenToDisplayNotification(function(p0)
 			-- upvalues: notificationTypeEnum (copy), var15 (copy), default (copy)
 			if (p0.notificationType == notificationTypeEnum.ScheduledSquadHappeningNow or p0.notificationType == notificationTypeEnum.ScheduledSquadReminder) and not var15 then
 				default:dismissNotification(p0.notificationId)
 			end
 		end)
 		
-		return function() --[[ line: 45 ]]
+		return function()
 			-- upvalues: var16 (ref)
 			var16:Disconnect()
 		end
 	end, { var15 })
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), constantsModule (copy), httpService (copy), var14 (ref), eventNamesModule (copy), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var13 (ref), createOrJoinSquadModule (copy)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.ScheduledSquadHappeningNow, function(p1) --[[ line: 55 ]]
+		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.ScheduledSquadHappeningNow, function(p1)
 			-- upvalues: constantsModule (copy), httpService (copy), var14 (copy), eventNamesModule (copy), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var13 (copy), createOrJoinSquadModule (copy)
 			if p1 and p1.userActionType == "click" and (p1.visualItem and p1.visualItem.actionEventParams) and p1.visualItem.visualItemName == constantsModule.JOIN_SQUAD then
 				local actionEventParams = httpService:JSONDecode(p1.visualItem.actionEventParams)
@@ -47,11 +47,11 @@ return function() --[[ line: 26 | named "SquadScheduledSquadEventReceiver" ]]
 					toastAction = squadToastActionsAndStatesModule.ScheduledSquadHappeningNowJoinParty,
 					toastType = squadToastTypeModule.ScheduledSquadHappeningNow
 				})
-				var13(createOrJoinSquadModule(actionEventParams.parentChannelId, var14.setSquadPrompt, var14.fireSquadAnalytics, var14.squadLocation, httpService:GenerateGUID(false), function() --[[ line: 77 ]] end, tostring(actionEventParams.scheduledGroupUpId)))
+				var13(createOrJoinSquadModule(actionEventParams.parentChannelId, var14.setSquadPrompt, var14.fireSquadAnalytics, var14.squadLocation, httpService:GenerateGUID(false), function() end, tostring(actionEventParams.scheduledGroupUpId)))
 			end
 		end)
 		
-		return function() --[[ line: 85 ]]
+		return function()
 			-- upvalues: userAction (ref)
 			userAction()
 		end
@@ -61,7 +61,7 @@ return function() --[[ line: 26 | named "SquadScheduledSquadEventReceiver" ]]
 		var14.fireSquadAnalytics,
 		var14.squadLocation
 	})
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2) --[[ line: 97 ]]
+	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.COMMUNICATION_CHANNEL_RTN_NAMESPACE, function(p2)
 		-- upvalues: constantsModule (copy), getScheduledSquadsStoreModule (copy)
 		if p2.Type == constantsModule.SCHEDULED_GROUP_UP_CHANGED_RTN_TYPE then
 			local var19 = getScheduledSquadsStoreModule(false)

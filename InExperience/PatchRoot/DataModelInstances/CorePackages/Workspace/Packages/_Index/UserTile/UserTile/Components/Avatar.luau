@@ -13,7 +13,7 @@ local fFlagAddBackplateSupportToUserTile = require(parent.SharedFlags).FFlagAddB
 local fFlagUserTileUseProfileFrameThumbnailModule = require(userTile.Flags.FFlagUserTileUseProfileFrameThumbnail)
 local fFlagUserTileIncludeProfileFramePropModule = require(userTile.Flags.FFlagUserTileIncludeProfileFrameProp)
 
-return function(p0) --[[ line: 32 | named "Avatar" ]]
+return function(p0)
 	-- upvalues: fFlagUserTileUseProfileFrameThumbnailModule (ref), fFlagUserTileIncludeProfileFramePropModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), useTokens (ref), reactModule (ref), view (ref), fFlagAddBackplateSupportToUserTile (ref), image (ref), userPresence (ref)
 	local var7 = fFlagUserTileUseProfileFrameThumbnailModule
 	

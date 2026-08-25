@@ -12,10 +12,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local useDisabledReasonTextModule = require(profilePlatform.Components.ProfileActionBar.useDisabledReasonText)
 local fFlagEnableProfilePlatformDisabledReasonTextModule = require(profilePlatform.Flags.FFlagEnableProfilePlatformDisabledReasonText)
 
-return function(p0) --[[ line: 26 | named "CTAButtonsRow" ]]
+return function(p0)
 	-- upvalues: fFlagEnableProfilePlatformDisabledReasonTextModule (ref), useTokens (ref), reactModule (ref), useDisabledReasonTextModule (ref), CTAButtonModule (ref), popoverAlign (ref), view (ref), text (ref)
 	local var6 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useTokens() else nil
-	local var7 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useDisabledReasonTextModule(if fFlagEnableProfilePlatformDisabledReasonTextModule then reactModule.useMemo(function() --[[ line: 30 ]]
+	local var7 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useDisabledReasonTextModule(if fFlagEnableProfilePlatformDisabledReasonTextModule then reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		for i, v in p0.buttonList do
 			if v.disabledReason then
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 26 | named "CTAButtonsRow" ]]
 		ButtonRow = reactModule.createElement(view, {
 			tag = "row gap-small size-full-0 auto-y",
 			LayoutOrder = 0
-		}, reactModule.useMemo(function() --[[ line: 44 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), CTAButtonModule (copy), popoverAlign (copy)
 			local t = {}
 			

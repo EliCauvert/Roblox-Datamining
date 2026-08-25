@@ -15,22 +15,22 @@ local t = {
 }
 local t_1 = {}
 
-local function _(p0, p1, p2, p3) --[[ line: 33 | named "EaseOutCirc" ]]
+local function _(p0, p1, p2, p3)
 	p0 = p0 / p3 - 1
 	
 	return p2 * math.sqrt(1 - p0 * p0) + p1
 end
 
-local function IsGameRunning() --[[ line: 39 ]]
+local function IsGameRunning()
 	-- upvalues: runService (ref)
 	return if UserSettings().GameSettings:InStudioMode() and game:GetService("UserInputService"):GetPlatform() ~= Enum.Platform.Windows then runService:IsRunning() else true
 end
 
-function GetSoundManager() --[[ line: 46 ]]
+function GetSoundManager()
 	-- upvalues: t_1 (ref), t (ref), IsGameRunning (ref), utilityModule (ref), coreGuiService (ref), guiService (ref)
 	local t_2 = {
 		SoundHolder = nil,
-		CreateSound = function(_, p4) --[[ line: 63 ]]
+		CreateSound = function(_, p4)
 			-- upvalues: t (copy)
 			local text = "rbxasset://sounds/ui/Shell/" .. t[p4]
 			local sound = Instance.new("Sound")
@@ -42,7 +42,7 @@ function GetSoundManager() --[[ line: 46 ]]
 	}
 	local t_3 = {}
 	
-	local function _(p5) --[[ line: 53 | named "FindSoundObjectForName" ]]
+	local function _(p5)
 		-- upvalues: t_1 (copy)
 		if t_1[p5] then
 			local removed = table.remove(t_1[p5], 1)
@@ -55,7 +55,7 @@ function GetSoundManager() --[[ line: 46 ]]
 		end
 	end
 	
-	function t_2.Play(_, p6, p7, p8, p9, ...) --[[ line: 74 ]]
+	function t_2.Play(_, p6, p7, p8, p9, ...)
 		-- upvalues: t (copy), t_1 (copy), t_3 (ref), IsGameRunning (copy)
 		local var12 = nil
 		
@@ -87,21 +87,21 @@ function GetSoundManager() --[[ line: 46 ]]
 				return var12
 			end
 		else
-			spawn(function() --[[ line: 95 ]]
+			spawn(function()
 				-- upvalues: p6 (ref)
 				error("Unable to find sound: " .. tostring(p6))
 			end)
 		end
 	end
 	
-	function t_2.IsPlaying(_, p10) --[[ line: 103 ]]
+	function t_2.IsPlaying(_, p10)
 		-- upvalues: t_2 (ref)
 		local var15 = t_2.SoundHolder:FindFirstChild(p10)
 		
 		return if var15 then var15.IsPlaying else false
 	end
 	
-	function t_2.Stop(_, p11, ...) --[[ line: 111 ]]
+	function t_2.Stop(_, p11, ...)
 		-- upvalues: t_2 (ref), t (copy)
 		if t_2.SoundHolder and t[p11] then
 			local var16 = t_2.SoundHolder:FindFirstChild(p11)
@@ -112,19 +112,19 @@ function GetSoundManager() --[[ line: 46 ]]
 		end
 	end
 	
-	function t_2.TweenSound(_, p12, p13, p14) --[[ line: 120 ]]
+	function t_2.TweenSound(_, p12, p13, p14)
 		-- upvalues: t_3 (ref), utilityModule (copy), IsGameRunning (copy)
 		t_3[p12] = nil
-		utilityModule.PropertyTweener(p12, "Volume", p12.Volume, p13, p14, function(...) --[[ line: 123 ]]
+		utilityModule.PropertyTweener(p12, "Volume", p12.Volume, p13, p14, function(...)
 			-- upvalues: IsGameRunning (copy), utilityModule (copy)
 			return IsGameRunning() and utilityModule.EaseInOutQuad(...) or 0
-		end, true, function() --[[ line: 127 ]]
+		end, true, function()
 			-- upvalues: t_3 (copy), p12 (ref), p13 (ref)
 			t_3[p12] = p13
 		end)
 	end
 	
-	;(function() --[[ line: 138 | named "Initialize" ]]
+	;(function()
 		-- upvalues: coreGuiService (copy), t_2 (ref), t (copy), t_1 (copy), guiService (copy), IsGameRunning (copy), t_3 (ref)
 		local appShellSounds = Instance.new("Folder")
 		appShellSounds.Name = "AppShellSounds"
@@ -147,7 +147,7 @@ function GetSoundManager() --[[ line: 46 ]]
 			table.insert(t_1[i], var22)
 		end
 		local var18 = nil
-		guiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function() --[[ line: 159 ]]
+		guiService:GetPropertyChangedSignal("SelectedCoreObject"):connect(function()
 			-- upvalues: guiService (copy), var18 (write)
 			local selectedCoreObject = guiService.SelectedCoreObject
 			
@@ -163,7 +163,7 @@ function GetSoundManager() --[[ line: 46 ]]
 		end)
 		
 		if not IsGameRunning() then
-			spawn(function() --[[ line: 172 ]]
+			spawn(function()
 				-- upvalues: IsGameRunning (copy), t_3 (copy)
 				while not IsGameRunning() do
 					wait(0.1)

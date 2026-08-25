@@ -15,7 +15,7 @@ local linkButton = UIBloxModule.App.Button.LinkButton
 local useStyle = UIBloxModule.Core.Style.useStyle
 local _ = { OPEN_CUSTOM_WEBVIEW = 20 }
 
-function DSAReportLink() --[[ line: 26 ]]
+function DSAReportLink()
 	-- upvalues: useStyle (ref), usePreferredInput (ref), responsiveModule (ref), isInExperienceUIVREnabled (ref), useLocalization (ref), reactModule (ref), styledTextLabel (ref), linkButton (ref), httpService (ref), constantsModule (ref), guiService (ref)
 	local var7 = useStyle()
 	local var8 = usePreferredInput() == responsiveModule.Input.Directional
@@ -55,7 +55,7 @@ function DSAReportLink() --[[ line: 26 ]]
 			fontStyle = if var8 then "CaptionBody" else "Footer",
 			size = UDim2.new(0, 100, 0, 20),
 			text = var9.reportLinkText,
-			onActivated = function() --[[ line: 59 ]]
+			onActivated = function()
 				-- upvalues: httpService (copy), constantsModule (copy), guiService (copy)
 				guiService:BroadcastNotification(httpService:JSONEncode({
 					presentationStyle = nil,
@@ -68,7 +68,7 @@ function DSAReportLink() --[[ line: 26 ]]
 	})
 end
 
-function WrapperContainer() --[[ line: 95 ]]
+function WrapperContainer()
 	-- upvalues: reactModule (ref), styleProviderWithDefaultTheme (ref)
 	return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true }, { Button = reactModule.createElement(DSAReportLink) })
 end

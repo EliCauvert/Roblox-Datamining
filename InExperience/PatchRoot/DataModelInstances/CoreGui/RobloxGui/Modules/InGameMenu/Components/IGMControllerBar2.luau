@@ -16,15 +16,15 @@ IGMControllerBar2.validateProps = t.strictInterface({
 	decrementControllerBar = t.callback
 })
 
-function IGMControllerBar2.init(p0) --[[ line: 24 ]]
+function IGMControllerBar2.init(p0)
 	p0.props.incrementControllerBar()
 end
 
-function IGMControllerBar2.willUnmount(p1) --[[ line: 28 ]]
+function IGMControllerBar2.willUnmount(p1)
 	p1.props.decrementControllerBar()
 end
 
-function IGMControllerBar2.render(p2) --[[ line: 32 ]]
+function IGMControllerBar2.render(p2)
 	-- upvalues: roact (ref), coreGuiService (ref), constantsModule (ref), controllerBar (ref)
 	return roact.createElement(roact.Portal, { target = coreGuiService }, {
 		IGMControllerBar = roact.createElement("ScreenGui", {
@@ -38,14 +38,14 @@ function IGMControllerBar2.render(p2) --[[ line: 32 ]]
 	})
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p3) --[[ line: 48 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p3)
 	-- upvalues: incrementControllerBarModule (ref), decrementControllerBarModule (ref)
 	return {
-		incrementControllerBar = function() --[[ line: 50 ]]
+		incrementControllerBar = function()
 			-- upvalues: p3 (ref), incrementControllerBarModule (copy)
 			p3(incrementControllerBarModule())
 		end,
-		decrementControllerBar = function() --[[ line: 53 ]]
+		decrementControllerBar = function()
 			-- upvalues: p3 (ref), decrementControllerBarModule (copy)
 			p3(decrementControllerBarModule())
 		end

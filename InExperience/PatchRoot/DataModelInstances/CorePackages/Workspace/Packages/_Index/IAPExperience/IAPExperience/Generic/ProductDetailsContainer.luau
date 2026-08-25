@@ -11,7 +11,7 @@ local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local _ = require(IAPExperience.Enums.VirtualItemBadgeType)
 local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 
-local function _(p0) --[[ line: 60 | named "itemPriceHasDiscountBreakdown" ]]
+local function _(p0)
 	if p0 then
 		local basePriceInRobux = p0.basePriceInRobux
 		local priceInRobux = p0.priceInRobux
@@ -21,7 +21,7 @@ local function _(p0) --[[ line: 60 | named "itemPriceHasDiscountBreakdown" ]]
 	return false
 end
 
-return function(p1) --[[ line: 71 | named "ProductDetailsContainer" ]]
+return function(p1)
 	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), multiItemPriceShowsDiscountAccordionModule (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), view (ref), unifiedProductDetailsModule (ref), discountSummaryModule (ref), priceSummaryV2Module (ref)
 	local var8
 	local itemPrice = p1.product and p1.product.itemPrice

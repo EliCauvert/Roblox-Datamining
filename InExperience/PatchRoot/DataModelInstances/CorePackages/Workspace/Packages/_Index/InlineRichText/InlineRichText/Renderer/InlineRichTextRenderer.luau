@@ -18,7 +18,7 @@ local linkTypeModule = require(inlineRichText.Enums.LinkType)
 local linkBehaviorModule = require(inlineRichText.Enums.LinkBehavior)
 local getLinkTypeModule = require(inlineRichText.Linker.getLinkType)
 
-local function createDefaultRootNode(p0) --[[ line: 49 ]]
+local function createDefaultRootNode(p0)
 	-- upvalues: nodeTypeModule (ref)
 	return {
 		name = "ROOT",
@@ -61,17 +61,17 @@ local t_1 = {
 }
 local t_2 = {
 	errorToastText = nil,
-	evaluateLinkBehavior = function(_, p1) --[[ line: 90 ]]
+	evaluateLinkBehavior = function(_, p1)
 		-- upvalues: t_1 (ref), linkBehaviorModule (ref)
 		return t_1[p1] or linkBehaviorModule.ErrorToast
 	end
 }
 
-return function(p2) --[[ line: 96 | named "InlineRichTextRenderer" ]]
+return function(p2)
 	-- upvalues: reactModule (ref), parseXmlModule (ref), name (ref), createDefaultRootNode (ref), foundationModule (ref), cryoModule (ref), t_2 (ref), useLinkerOnActivatedModule (ref), getLinkTypeModule (ref), t (ref), processChildrenModule (ref), inlineLayout (ref)
 	local ast = p2.ast
 	local text = p2.text
-	local var20 = reactModule.useMemo(function() --[[ line: 99 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: ast (ref), parseXmlModule (copy), text (ref), p2 (ref), name (copy), createDefaultRootNode (copy)
 		if ast then
 			return ast
@@ -94,11 +94,11 @@ return function(p2) --[[ line: 96 | named "InlineRichTextRenderer" ]]
 	}
 	local var23 = cryoModule.Dictionary.union(t_2, p2.linkerOptions or {})
 	local var24 = useLinkerOnActivatedModule({ errorToastTextOverride = var23.errorToastText })
-	local var25 = reactModule.useCallback(function(p3) --[[ line: 123 ]]
+	local var25 = reactModule.useCallback(function(p3)
 		-- upvalues: var23 (ref), getLinkTypeModule (copy)
 		return var23.evaluateLinkBehavior(p3, getLinkTypeModule(p3))
 	end, { var23.evaluateLinkBehavior })
-	local var26 = reactModule.useMemo(function() --[[ line: 128 ]]
+	local var26 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), t (copy), p2 (ref), processChildrenModule (copy), default (ref), t_1 (ref), var21 (ref), var24 (ref), var25 (ref)
 		return {
 			inlineCustomRenderers = cryoModule.Dictionary.join(t, p2.renderers or {}),
@@ -117,7 +117,7 @@ return function(p2) --[[ line: 96 | named "InlineRichTextRenderer" ]]
 	
 	return reactModule.createElement(foundationModule.View, p2.wrapperProps, {
 		RichTextRoot = reactModule.createElement(inlineLayout, {
-			Elements = reactModule.useMemo(function() --[[ line: 153 ]]
+			Elements = reactModule.useMemo(function()
 				-- upvalues: processChildrenModule (copy), var20 (ref), var26 (ref)
 				return processChildrenModule(var20, var26)
 			end, { var20 and var20.children, var26 }),

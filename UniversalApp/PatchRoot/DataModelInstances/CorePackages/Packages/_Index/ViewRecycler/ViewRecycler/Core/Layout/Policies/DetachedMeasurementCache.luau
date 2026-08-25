@@ -1,4 +1,4 @@
-﻿local function _(p0) --[[ line: 20 | named "resolveCapacity" ]]
+﻿local function _(p0)
 	if p0 == nil then
 		return 256
 	elseif p0 == "unlimited" then
@@ -10,7 +10,7 @@
 end
 
 return {
-	new = function(p1) --[[ line: 34 ]]
+	new = function(p1)
 		local var0
 		if p1 == nil then
 			var0 = 256
@@ -25,7 +25,7 @@ return {
 		local var3 = nil
 		local var4 = 0
 		
-		local function _(p2) --[[ line: 41 | named "unlink" ]]
+		local function _(p2)
 			-- upvalues: var2 (write), var3 (write)
 			if p2.previous == nil then
 				var2 = p2.next
@@ -41,7 +41,7 @@ return {
 			p2.next = nil
 		end
 		
-		local _ = function(p3) --[[ line: 56 | named "append" ]]
+		local _ = function(p3)
 			-- upvalues: var3 (write), var2 (write)
 			p3.previous = var3
 			
@@ -54,7 +54,7 @@ return {
 		end
 		
 		return {
-			put = function(p4, p5) --[[ line: 77 ]]
+			put = function(p4, p5)
 				-- upvalues: var0 (ref), t (ref), var2 (write), var3 (write), var4 (write)
 				if var0 == 0 then return end
 				local var5 = t[p4]
@@ -117,7 +117,7 @@ return {
 					var3 = var6
 				end
 			end,
-			take = function(p6) --[[ line: 66 ]]
+			take = function(p6)
 				-- upvalues: t (ref), var2 (write), var3 (write), var4 (write)
 				local var9 = t[p6]
 				

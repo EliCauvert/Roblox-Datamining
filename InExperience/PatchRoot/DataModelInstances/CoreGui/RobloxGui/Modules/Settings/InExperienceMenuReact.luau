@@ -18,7 +18,7 @@ local localization = inExperienceLocalesModule.Localization
 local foundationProvider = foundationModule.FoundationProvider
 local t = { colorMode = foundationModule.Enums.ColorMode.Dark }
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "InExperienceMenuReact" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), reactModule (ref), serviceProvider (ref), appEventIngestService (ref), eventIngest (ref), eventIngestService (ref), roactAnalytics (ref), analytics (ref), localizationProvider (ref), foundationProvider (ref), t (ref), utilsModule (ref)
 	return reactModule.createElement(serviceProvider, {
 		services = {

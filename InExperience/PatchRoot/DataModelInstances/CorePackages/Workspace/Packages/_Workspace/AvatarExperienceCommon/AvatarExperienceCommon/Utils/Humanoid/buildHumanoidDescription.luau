@@ -7,7 +7,7 @@ local setMakeupDescriptionsModule = require(avatarExperienceCommon.Utils.Humanoi
 local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
 local fFlagAXMakeupEquipping = require(parent.AvatarExperienceFlags).FFlagAXMakeupEquipping
 
-local function applyCurrentAssets(value, p0) --[[ line: 24 ]]
+local function applyCurrentAssets(value, p0)
 	-- upvalues: constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), fFlagAXMakeupEquipping (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref)
 	if p0 then
 		local t = {}
@@ -42,7 +42,7 @@ local function applyCurrentAssets(value, p0) --[[ line: 24 ]]
 	end
 end
 
-local function _(p1, p2) --[[ line: 66 | named "applyAvatarScales" ]]
+local function _(p1, p2)
 	-- upvalues: constantsModule (ref)
 	if p2 then
 		for i, v in p2 do
@@ -51,7 +51,7 @@ local function _(p1, p2) --[[ line: 66 | named "applyAvatarScales" ]]
 	end
 end
 
-local _ = function(p3, p4) --[[ line: 76 | named "applyBodyColor3s" ]]
+local _ = function(p3, p4)
 	-- upvalues: constantsModule (ref)
 	if p4 then
 		for i, v in p4 do
@@ -60,7 +60,7 @@ local _ = function(p3, p4) --[[ line: 76 | named "applyBodyColor3s" ]]
 	end
 end
 
-local function applyEmotes(p5, p6) --[[ line: 87 ]]
+local function applyEmotes(p5, p6)
 	if p6 then
 		local t = {}
 		local t_1 = {}
@@ -74,7 +74,7 @@ local function applyEmotes(p5, p6) --[[ line: 87 ]]
 	end
 end
 
-return function(p7) --[[ line: 108 | named "buildHumanoidDescription" ]]
+return function(p7)
 	-- upvalues: applyCurrentAssets (ref), constantsModule (ref), applyEmotes (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
 	applyCurrentAssets(humanoidDescription, p7.currentAssets)

@@ -4,7 +4,7 @@ local productInfoByGameIdModule = require(script.Games.productInfoByGameId)
 local byGameIdModule = require(script.Games.byGameId)
 local mediaByGameIdModule = require(script.Games.mediaByGameId)
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), playabilityByGameIdModule (ref), productInfoByGameIdModule (ref), byGameIdModule (ref), mediaByGameIdModule (ref)
 	return roduxModule.combineReducers({
 		playabilityByGameId = playabilityByGameIdModule(p0),

@@ -12,11 +12,11 @@ return serviceModule:register({
 	initialAvailability = if require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagDebugEnableUnibarDummyIntegrations() then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 	startingWindowPosition = UDim2.new(1, -245, 0, 95),
 	components = {
-		Icon = function(_) --[[ line: 22 ]]
+		Icon = function(_)
 			-- upvalues: commonIconModule (ref)
 			return commonIconModule("icons/menu/home_on")
 		end,
-		Window = function(_) --[[ line: 25 ]]
+		Window = function(_)
 			-- upvalues: reactModule (ref), constantsModule (ref)
 			return reactModule.createElement("Frame", { BackgroundTransparency = 0, Size = UDim2.new(1, 0, 1, 0) }, {
 				Corner = reactModule.createElement("UICorner", { CornerRadius = constantsModule.CORNER_RADIUS })

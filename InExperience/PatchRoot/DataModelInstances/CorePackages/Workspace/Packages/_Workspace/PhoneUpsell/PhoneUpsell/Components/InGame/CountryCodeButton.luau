@@ -7,7 +7,7 @@ local getImageData = require(parent.RobloxAppAssets).GetImageData
 local roactModule = require(parent.Roact)
 local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 
-return function(p0) --[[ line: 25 | named "CountryCodeButton" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), fFlagRenameDeprecatedUIBloxTokens (ref), reactModule (ref), imageSetLabel (ref), getImageData (ref), roactModule (ref)
 	local var3 = useStyle()
 	local tokens = var3.Tokens

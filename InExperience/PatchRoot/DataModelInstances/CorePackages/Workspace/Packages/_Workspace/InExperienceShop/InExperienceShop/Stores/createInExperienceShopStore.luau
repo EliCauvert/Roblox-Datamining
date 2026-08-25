@@ -32,16 +32,16 @@ local sortRobuxPackagesByAmountDescendingModule = require(inExperienceShop.Utils
 local fFlagEnableExperienceShopGlobalIconModule = require(inExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local fFlagInExperienceShopExpectStringMetadataValuesModule = require(inExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues)
 
-local function _(p0) --[[ line: 108 | named "isValidShopData" ]]
+local function _(p0)
 	return type(p0) == "table" and (type(p0.categories) == "table" and type(p0.sections) == "table")
 end
 
-local _ = function() --[[ line: 121 | named "isPartialDisplayEnabled" ]]
+local _ = function()
 	-- upvalues: fFlagEnablePartialDisplayInExperienceShopModule (ref)
 	return if typeof(fFlagEnablePartialDisplayInExperienceShopModule) == "function" then fFlagEnablePartialDisplayInExperienceShopModule() else fFlagEnablePartialDisplayInExperienceShopModule
 end
 
-return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
+return function()
 	-- upvalues: createSignal (ref), constantsModule (ref), sortRobuxPackagesByAmountDescendingModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableRobuxInExperienceShop (ref), bonusPromotionEligibilityModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (ref), inExperienceShop (ref), fFlagShopUseMockDataModule (ref), fFlagShopUseMockMultiGetProductInfoModule (ref), mockMultiGetProductInfoModule (ref), streamMultiGetProductInfoModule (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), errorsModule (ref), fFlagEnablePartialDisplayInExperienceShopModule (ref), fetchShopWidgetsOnlyModule (ref), mockFetchAllShopDataModule (ref), fetchAllShopDataModule (ref), fFlagEnableShopProductInfoRefreshModule (ref), multiGetProductInfoModule (ref), promiseModule (ref), playersService (ref), marketplaceService (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref)
 	local var28, var29 = createSignal({})
 	local var30, var31 = createSignal({})
@@ -63,13 +63,13 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 	local t_3 = {}
 	local t_4 = {}
 	
-	local function _(p1, p2) --[[ line: 200 | named "commitBonusPromotionEligibility" ]]
+	local function _(p1, p2)
 		-- upvalues: t_3 (ref), var45 (ref)
 		t_3[p1] = p2
 		var45(table.clone(t_3))
 	end
 	
-	local function sortRobuxPackagesInSections(p3) --[[ line: 205 ]]
+	local function sortRobuxPackagesInSections(p3)
 		-- upvalues: sortRobuxPackagesByAmountDescendingModule (copy)
 		local v_1
 		local var75 = false
@@ -104,12 +104,12 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		return cloned
 	end
 	
-	local _ = function() --[[ line: 236 | named "reapplyFeaturedPromotion" ]]
+	local _ = function()
 		-- upvalues: promoteBonusRobuxPackageToTopPicksModule (copy), t_2 (write), t_3 (ref), var31 (ref), sortRobuxPackagesInSections (ref)
 		var31(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_2, t_3)))
 	end
 	
-	local function writeOwnership(p4, p5) --[[ line: 244 ]]
+	local function writeOwnership(p4, p5)
 		-- upvalues: var42 (ref), var43 (ref), fFlagEnableRobuxInExperienceShop (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_2 (write), bonusPromotionEligibilityModule (copy), t_3 (ref), var45 (ref), var31 (ref), sortRobuxPackagesInSections (ref)
 		local cloned = table.clone(var42(false))
 		cloned[p4] = p5
@@ -127,7 +127,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		var31(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_2, t_3)))
 	end
 	
-	local function fetchGamePassOwnership(p6) --[[ line: 267 ]]
+	local function fetchGamePassOwnership(p6)
 		-- upvalues: t (ref), var42 (ref), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassModule (copy), writeOwnership (ref)
 		if t[p6] then return end
 		if var42(false)[p6] ~= nil then return end
@@ -137,23 +137,23 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			return
 		end
 		t[p6] = true;
-		(if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassModule)(var80):andThen(function(p8) --[[ line: 283 ]]
+		(if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassModule)(var80):andThen(function(p8)
 			-- upvalues: var42 (copy), p6 (ref), writeOwnership (copy)
 			if var42(false)[p6] == nil then
 				writeOwnership(p6, p8)
 				
 				return
 			end
-		end):catch(function(p7) --[[ line: 295 ]]
+		end):catch(function(p7)
 			-- upvalues: p6 (ref)
 			warn("[Shop] fetchGamePassOwnership failed", p6, tostring(p7))
-		end):finally(function() --[[ line: 301 ]]
+		end):finally(function()
 			-- upvalues: t (copy), p6 (ref)
 			t[p6] = nil
 		end)
 	end
 	
-	local function fetchBonusGamePassOwnershipForPromotionId(p9) --[[ line: 306 ]]
+	local function fetchBonusGamePassOwnershipForPromotionId(p9)
 		-- upvalues: t_4 (ref), bonusPromotionEligibilityModule (copy), t_3 (ref), var45 (ref), promoteBonusRobuxPackageToTopPicksModule (copy), t_2 (write), var31 (ref), sortRobuxPackagesInSections (ref), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassModule (copy), var42 (ref), writeOwnership (ref)
 		if t_4[p9] then return end
 		t_3[p9] = bonusPromotionEligibilityModule.Unknown
@@ -169,7 +169,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			return
 		end
 		t_4[p9] = true;
-		(if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassModule)(var81):andThen(function(p11) --[[ line: 326 ]]
+		(if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassModule)(var81):andThen(function(p11)
 			-- upvalues: p9 (ref), bonusPromotionEligibilityModule (copy), t_3 (copy), var45 (copy), var42 (copy), writeOwnership (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_2 (copy), var31 (copy), sortRobuxPackagesInSections (copy)
 			t_3[p9] = if p11 then bonusPromotionEligibilityModule.Ineligible else bonusPromotionEligibilityModule.Eligible
 			var45(table.clone(t_3))
@@ -178,19 +178,19 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 				writeOwnership(p9, p11)
 			end
 			var31(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_2, t_3)))
-		end):catch(function(p10) --[[ line: 336 ]]
+		end):catch(function(p10)
 			-- upvalues: p9 (ref), bonusPromotionEligibilityModule (copy), t_3 (copy), var45 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_2 (copy), var31 (copy), sortRobuxPackagesInSections (copy)
 			warn("[Shop] fetchBonusGamePassOwnershipForPromotion failed", p9, tostring(p10))
 			t_3[p9] = bonusPromotionEligibilityModule.Ineligible
 			var45(table.clone(t_3))
 			var31(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_2, t_3)))
-		end):finally(function() --[[ line: 341 ]]
+		end):finally(function()
 			-- upvalues: t_4 (copy), p9 (ref)
 			t_4[p9] = nil
 		end)
 	end
 	
-	local function fetchBonusGamePassOwnershipForPromotion(p12) --[[ line: 346 ]]
+	local function fetchBonusGamePassOwnershipForPromotion(p12)
 		-- upvalues: fFlagEnableRobuxInExperienceShop (copy), promoteBonusRobuxPackageToTopPicksModule (copy), fetchBonusGamePassOwnershipForPromotionId (ref)
 		if not fFlagEnableRobuxInExperienceShop then return end
 		local var82 = promoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(p12)
@@ -201,14 +201,14 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		end
 	end
 	
-	local _ = function(p13) --[[ line: 360 | named "applySections" ]]
+	local _ = function(p13)
 		-- upvalues: t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var31 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref)
 		t_2 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(p13)
 		var31(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_2, t_3)))
 		fetchBonusGamePassOwnershipForPromotion(t_2)
 	end
 	
-	local _ = function(p14) --[[ line: 370 | named "commitShopMetadata" ]]
+	local _ = function(p14)
 		-- upvalues: fFlagEnableExperienceShopGlobalIconModule (copy), var37 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var39 (ref), var41 (ref)
 		if fFlagEnableExperienceShopGlobalIconModule then
 			local var85
@@ -227,7 +227,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		end
 	end
 	
-	local function buildProductInfoRequestsForHydration(p15, p16) --[[ line: 387 ]]
+	local function buildProductInfoRequestsForHydration(p15, p16)
 		-- upvalues: inExperienceShop (copy), fFlagEnableRobuxInExperienceShop (copy)
 		local refreshShopItemsModule = require(inExperienceShop.Api.refreshShopItems)
 		local hydrateRobuxBonusItemsModule = require(inExperienceShop.Api.hydrateRobuxBonusItems)
@@ -241,7 +241,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		return var88
 	end
 	
-	local function applyStreamingProductInfoResult(a, b, p17) --[[ line: 401 ]]
+	local function applyStreamingProductInfoResult(a, b, p17)
 		-- upvalues: inExperienceShop (copy), fFlagEnableRobuxInExperienceShop (copy)
 		local refreshShopItemsModule = require(inExperienceShop.Api.refreshShopItems)
 		local hydrateRobuxBonusItemsModule = require(inExperienceShop.Api.hydrateRobuxBonusItems)
@@ -266,12 +266,12 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		return var95, t_1
 	end
 	
-	local function routeStreamMultiGetProductInfo(p18, p19) --[[ line: 436 ]]
+	local function routeStreamMultiGetProductInfo(p18, p19)
 		-- upvalues: fFlagShopUseMockDataModule (copy), fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), streamMultiGetProductInfoModule (copy)
 		return if fFlagShopUseMockDataModule and fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.streamMultiGetProductInfo(p18, { onResult = p19 }, 0) else streamMultiGetProductInfoModule(p18, { onResult = p19 })
 	end
 	
-	local function streamProductInfoIntoSections(p20, p21, p22, p23) --[[ line: 446 ]]
+	local function streamProductInfoIntoSections(p20, p21, p22, p23)
 		-- upvalues: var52 (write), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var31 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), routeStreamMultiGetProductInfo (ref), applyStreamingProductInfoResult (ref), t_1 (write), logCounterModule (copy), productInfoFailedItemsCounterModule (copy)
 		if #p21 == 0 then
 			if p23 then
@@ -285,7 +285,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			local var99 = nil
 			local var100 = false
 			
-			local function flushPendingSections() --[[ line: 465 ]]
+			local function flushPendingSections()
 				-- upvalues: var100 (write), var99 (write), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var31 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
 				var100 = false
 				
@@ -297,7 +297,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 				end
 			end
 			
-			local function _(p24) --[[ line: 473 | named "scheduleFlush" ]]
+			local function _(p24)
 				-- upvalues: var99 (write), var100 (write), flushPendingSections (ref)
 				var99 = p24
 				
@@ -308,7 +308,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 				task.delay(0.05, flushPendingSections)
 			end
 			
-			routeStreamMultiGetProductInfo(p21, function(p26) --[[ line: 482 ]]
+			routeStreamMultiGetProductInfo(p21, function(p26)
 				-- upvalues: var97 (write), var98 (write), applyStreamingProductInfoResult (copy), var99 (write), var100 (write), flushPendingSections (ref)
 				local var102, var103 = applyStreamingProductInfoResult(var97, p26, var98)
 				var97 = var102
@@ -320,7 +320,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 				end
 				var100 = true
 				task.delay(0.05, flushPendingSections)
-			end):andThen(function(_) --[[ line: 487 ]]
+			end):andThen(function(_)
 				-- upvalues: var100 (write), var99 (write), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var31 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), var97 (write), t_1 (copy), var98 (write), logCounterModule (copy), productInfoFailedItemsCounterModule (copy), var52 (copy), p23 (ref)
 				var100 = false
 				
@@ -343,7 +343,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 				if p23 then
 					p23(var98)
 				end
-			end):catch(function(p25) --[[ line: 499 ]]
+			end):catch(function(p25)
 				-- upvalues: var100 (write), var99 (write), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var31 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), var52 (copy), p23 (ref), var98 (write)
 				warn("[Shop] streamProductInfoIntoSections failed", tostring(p25))
 				var100 = false
@@ -363,7 +363,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		end
 	end
 	
-	local function runShopFetch(p27, p28, p29) --[[ line: 509 ]]
+	local function runShopFetch(p27, p28, p29)
 		-- upvalues: var50 (write), var49 (write), var33 (ref), var35 (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var29 (ref), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var31 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var37 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var39 (ref), var41 (ref), t_1 (write)
 		if var50 or var49 then
 			return
@@ -371,7 +371,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		var49 = true
 		var33(true)
 		var35(nil);
-		(if fFlagShopUseMockDataModule then p28() else p27()):andThen(function(p31) --[[ line: 520 ]]
+		(if fFlagShopUseMockDataModule then p28() else p27()):andThen(function(p31)
 			-- upvalues: errorsModule (copy), p29 (ref), var29 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var31 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var37 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var39 (copy), var41 (copy), t_1 (copy), var33 (copy), var49 (copy), var50 (copy)
 			if not (type(p31) == "table" and (type(p31.categories) == "table" and type(p31.sections) == "table")) then
 				return errorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p29), p31)
@@ -400,7 +400,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			var33(false)
 			var49 = false
 			var50 = true
-		end):catch(function(p30) --[[ line: 538 ]]
+		end):catch(function(p30)
 			-- upvalues: var35 (copy), var29 (copy), var31 (copy), t_1 (copy), var33 (copy), var49 (copy)
 			var35(p30)
 			var29({})
@@ -411,7 +411,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		end)
 	end
 	
-	local function runPartialDisplayShopFetch(p32, p33, p34) --[[ line: 551 ]]
+	local function runPartialDisplayShopFetch(p32, p33, p34)
 		-- upvalues: var50 (write), var49 (write), var33 (ref), var35 (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var29 (ref), t_2 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var31 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var37 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var39 (ref), var41 (ref), t_1 (write), buildProductInfoRequestsForHydration (ref), streamProductInfoIntoSections (ref)
 		if var50 or var49 then
 			return
@@ -419,7 +419,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		var49 = true
 		var33(true)
 		var35(nil);
-		(if fFlagShopUseMockDataModule then p33() else p32()):andThen(function(p36) --[[ line: 566 ]]
+		(if fFlagShopUseMockDataModule then p33() else p32()):andThen(function(p36)
 			-- upvalues: errorsModule (copy), p34 (ref), var29 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var31 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var37 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var39 (copy), var41 (copy), t_1 (copy), var33 (copy), var49 (copy), var50 (copy), buildProductInfoRequestsForHydration (copy), streamProductInfoIntoSections (copy)
 			if not (type(p36) == "table" and (type(p36.categories) == "table" and type(p36.sections) == "table")) then
 				return errorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p34), p36)
@@ -450,7 +450,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			var50 = true
 			local var108 = t_2
 			streamProductInfoIntoSections(var108, buildProductInfoRequestsForHydration(var108, t_1), t_1, nil)
-		end):catch(function(p35) --[[ line: 585 ]]
+		end):catch(function(p35)
 			-- upvalues: var35 (copy), var29 (copy), var31 (copy), t_1 (copy), var33 (copy), var49 (copy)
 			var35(p35)
 			var29({})
@@ -461,7 +461,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		end)
 	end
 	
-	local function fetchAllShopData() --[[ line: 595 ]]
+	local function fetchAllShopData()
 		-- upvalues: fFlagEnablePartialDisplayInExperienceShopModule (copy), runPartialDisplayShopFetch (ref), fetchShopWidgetsOnlyModule (copy), mockFetchAllShopDataModule (copy), runShopFetch (ref), fetchAllShopDataModule (copy)
 		local var109 = fFlagEnablePartialDisplayInExperienceShopModule
 		
@@ -473,12 +473,12 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		runShopFetch(fetchAllShopDataModule, mockFetchAllShopDataModule.fetchAllShopData, "fetchAllShopData")
 	end
 	
-	local function prefetchWidgetsOnly() --[[ line: 607 ]]
+	local function prefetchWidgetsOnly()
 		-- upvalues: runShopFetch (ref), fetchShopWidgetsOnlyModule (copy), mockFetchAllShopDataModule (copy)
 		runShopFetch(fetchShopWidgetsOnlyModule, mockFetchAllShopDataModule.fetchShopWidgetsOnly, "prefetchWidgetsOnly")
 	end
 	
-	local function refreshShopItemInfo() --[[ line: 630 ]]
+	local function refreshShopItemInfo()
 		-- upvalues: fFlagEnableShopProductInfoRefreshModule (copy), var50 (write), var51 (write), var52 (write), inExperienceShop (copy), t_2 (write), var30 (ref), fFlagEnableRobuxInExperienceShop (copy), t_1 (write), fFlagEnablePartialDisplayInExperienceShopModule (copy), streamProductInfoIntoSections (ref), fFlagShopUseMockDataModule (copy), fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), multiGetProductInfoModule (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (ref), var31 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref)
 		if not fFlagEnableShopProductInfoRefreshModule then return end
 		if not var50 or var51 or var52 then return end
@@ -497,7 +497,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		local var114 = fFlagEnablePartialDisplayInExperienceShopModule
 		
 		if if typeof(var114) == "function" then var114() else var114 then
-			streamProductInfoIntoSections(var112, var113, t_1, function() --[[ line: 662 ]]
+			streamProductInfoIntoSections(var112, var113, t_1, function()
 				-- upvalues: var51 (copy)
 				var51 = false
 			end)
@@ -505,7 +505,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			return
 		end
 		local _ = nil;
-		(if fFlagShopUseMockDataModule and fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.multiGetProductInfo(var113, 0) else multiGetProductInfoModule(var113)):andThen(function(p38) --[[ line: 677 ]]
+		(if fFlagShopUseMockDataModule and fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.multiGetProductInfo(var113, 0) else multiGetProductInfoModule(var113)):andThen(function(p38)
 			-- upvalues: refreshShopItemsModule (ref), var112 (ref), fFlagEnableRobuxInExperienceShop (copy), hydrateRobuxBonusItemsModule (ref), t_1 (ref), t_1 (copy), t_2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var31 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), var51 (copy)
 			local var115 = refreshShopItemsModule.mergeProductInfoIntoSections(var112, p38)
 			local var116, var117 = refreshShopItemsModule.insertRecoveredItemsIntoSections(if fFlagEnableRobuxInExperienceShop then hydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(var115, p38) else var115, p38, t_1)
@@ -514,14 +514,14 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			var31(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_2, t_3)))
 			fetchBonusGamePassOwnershipForPromotion(t_2)
 			var51 = false
-		end):catch(function(p37) --[[ line: 688 ]]
+		end):catch(function(p37)
 			-- upvalues: var51 (copy)
 			warn("[Shop] refreshShopItemInfo failed", tostring(p37))
 			var51 = false
 		end)
 	end
 	
-	local function onShopOpened() --[[ line: 705 ]]
+	local function onShopOpened()
 		-- upvalues: fFlagEnablePartialDisplayInExperienceShopModule (copy), runPartialDisplayShopFetch (ref), fetchShopWidgetsOnlyModule (copy), mockFetchAllShopDataModule (copy), runShopFetch (ref), fetchAllShopDataModule (copy), refreshShopItemInfo (ref)
 		if if typeof(fFlagEnablePartialDisplayInExperienceShopModule) == "function" then fFlagEnablePartialDisplayInExperienceShopModule() else fFlagEnablePartialDisplayInExperienceShopModule then
 			runPartialDisplayShopFetch(fetchShopWidgetsOnlyModule, mockFetchAllShopDataModule.fetchShopWidgetsOnly, "fetchAllShopData")
@@ -533,29 +533,29 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 	
 	local t_5 = {}
 	
-	local function pollOwnershipUntilTrue(p39, p40, p41, p42) --[[ line: 725 ]]
+	local function pollOwnershipUntilTrue(p39, p40, p41, p42)
 		-- upvalues: promiseModule (copy), pollOwnershipUntilTrue (ref), constantsModule (copy)
-		return p39(p40):andThen(function(p44) --[[ line: 732 ]]
+		return p39(p40):andThen(function(p44)
 			-- upvalues: p41 (ref), promiseModule (copy), p42 (ref), pollOwnershipUntilTrue (copy), p39 (ref), p40 (ref), constantsModule (copy)
-			return if p44 then true elseif p41 <= 1 then false else promiseModule.delay(p42):andThen(function() --[[ line: 739 ]]
+			return if p44 then true elseif p41 <= 1 then false else promiseModule.delay(p42):andThen(function()
 				-- upvalues: pollOwnershipUntilTrue (copy), p39 (copy), p40 (copy), p41 (copy), p42 (copy), constantsModule (copy)
 				return pollOwnershipUntilTrue(p39, p40, p41 - 1, p42 * constantsModule.POLL_BACKOFF_MULTIPLIER)
 			end)
-		end):catch(function(p43) --[[ line: 748 ]]
+		end):catch(function(p43)
 			-- upvalues: p41 (ref), p40 (ref), promiseModule (copy), p42 (ref), pollOwnershipUntilTrue (copy), p39 (ref), constantsModule (copy)
 			if p41 <= 1 then
 				warn("[Shop] pollOwnershipUntilTrue exhausted with engine error", p40, tostring(p43))
 				
 				return nil
 			end
-			return promiseModule.delay(p42):andThen(function() --[[ line: 753 ]]
+			return promiseModule.delay(p42):andThen(function()
 				-- upvalues: pollOwnershipUntilTrue (copy), p39 (copy), p40 (copy), p41 (copy), p42 (copy), constantsModule (copy)
 				return pollOwnershipUntilTrue(p39, p40, p41 - 1, p42 * constantsModule.POLL_BACKOFF_MULTIPLIER)
 			end)
 		end)
 	end
 	
-	local function pollGamePassOwnershipAfterPurchase(p45, p46, p47, p48) --[[ line: 769 ]]
+	local function pollGamePassOwnershipAfterPurchase(p45, p46, p47, p48)
 		-- upvalues: t_5 (ref), pollOwnershipUntilTrue (ref), constantsModule (copy), writeOwnership (ref), playersService (copy), marketplaceService (copy), promiseModule (copy)
 		if t_5[p45] then return end
 		local var118 = tonumber(p45)
@@ -564,9 +564,9 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 			return
 		end
 		t_5[p45] = true
-		promiseModule.delay(constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function() --[[ line: 785 | named "startPoll" ]]
+		promiseModule.delay(constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function()
 			-- upvalues: pollOwnershipUntilTrue (copy), p47 (ref), var118 (ref), p46 (ref), constantsModule (copy), writeOwnership (copy), p45 (ref), p48 (ref), playersService (copy), marketplaceService (copy), t_5 (copy)
-			pollOwnershipUntilTrue(p47, var118, p46, constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function(p49) --[[ line: 787 ]]
+			pollOwnershipUntilTrue(p47, var118, p46, constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function(p49)
 				-- upvalues: writeOwnership (copy), p45 (copy), p48 (copy), playersService (copy), marketplaceService (copy), var118 (copy)
 				if p49 ~= true then return end
 				writeOwnership(p45, p49)
@@ -578,14 +578,14 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 						marketplaceService:SignalPromptGamePassPurchaseFinished(localPlayer, var118, true)
 					end
 				end
-			end):finally(function() --[[ line: 801 ]]
+			end):finally(function()
 				-- upvalues: t_5 (copy), p45 (copy)
 				t_5[p45] = nil
 			end)
 		end)
 	end
 	
-	marketplaceService.PromptGamePassPurchaseFinished:Connect(function(p50, p51, p52) --[[ line: 819 ]]
+	marketplaceService.PromptGamePassPurchaseFinished:Connect(function(p50, p51, p52)
 		-- upvalues: playersService (copy), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassModule (copy), fIntShopOwnershipFetchMaxAttemptsModule (copy), t_5 (ref), pollOwnershipUntilTrue (ref), constantsModule (copy), writeOwnership (ref), marketplaceService (copy), promiseModule (copy)
 		if not p52 then return end
 		local localPlayer = playersService.LocalPlayer
@@ -602,9 +602,9 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		end
 		t_5[var120] = true
 		local var122 = nil
-		promiseModule.delay(constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function() --[[ line: 785 | named "startPoll" ]]
+		promiseModule.delay(constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function()
 			-- upvalues: pollOwnershipUntilTrue (copy), var119 (ref), var121 (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), constantsModule (copy), writeOwnership (copy), var120 (ref), var122 (ref), playersService (copy), marketplaceService (copy), t_5 (copy)
-			pollOwnershipUntilTrue(var119, var121, fIntShopOwnershipFetchMaxAttemptsModule, constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function(p53) --[[ line: 787 ]]
+			pollOwnershipUntilTrue(var119, var121, fIntShopOwnershipFetchMaxAttemptsModule, constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function(p53)
 				-- upvalues: writeOwnership (copy), var120 (copy), var122 (copy), playersService (copy), marketplaceService (copy), var121 (copy)
 				if p53 ~= true then return end
 				writeOwnership(var120, p53)
@@ -616,7 +616,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 						marketplaceService:SignalPromptGamePassPurchaseFinished(localPlayer, var121, true)
 					end
 				end
-			end):finally(function() --[[ line: 801 ]]
+			end):finally(function()
 				-- upvalues: t_5 (copy), var120 (copy)
 				t_5[var120] = nil
 			end)
@@ -640,7 +640,7 @@ return function() --[[ line: 127 | named "createInExperienceShopStore" ]]
 		refreshShopItemInfo = refreshShopItemInfo,
 		fetchGamePassOwnership = fetchGamePassOwnership,
 		pollGamePassOwnership = pollGamePassOwnershipAfterPurchase,
-		setItemsPerRow = function(value) --[[ line: 843 ]]
+		setItemsPerRow = function(value)
 			-- upvalues: var47 (ref)
 			var47(value)
 		end

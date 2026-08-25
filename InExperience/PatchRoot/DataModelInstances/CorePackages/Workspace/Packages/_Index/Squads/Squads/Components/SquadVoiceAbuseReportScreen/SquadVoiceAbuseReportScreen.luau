@@ -5,7 +5,7 @@ local dependenciesModule = require(squads.dependencies)
 local react = dependenciesModule.React
 local foundation = dependenciesModule.Foundation
 
-return function(p0) --[[ line: 12 | named "SquadVoiceAbuseReportScreen" ]]
+return function(p0)
 	-- upvalues: react (ref), foundation (ref), squadVoiceAbuseReportModule (ref)
 	local navigation = p0.navigation
 	local reportData = navigation.getParam("reportData", nil)

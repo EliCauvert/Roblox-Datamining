@@ -6,7 +6,7 @@ local createMakePrimaryGroupModule = require(networkRequests.createMakePrimaryGr
 local createRemovePrimaryGroupModule = require(networkRequests.createRemovePrimaryGroup)
 
 return {
-	config = function(p0) --[[ line: 12 ]]
+	config = function(p0)
 		-- upvalues: createJoinGroupModule (ref), createCancelJoinGroupRequestModule (ref), createLeaveGroupModule (ref), createMakePrimaryGroupModule (ref), createRemovePrimaryGroupModule (ref)
 		return {
 			JoinGroup = createJoinGroupModule(p0),

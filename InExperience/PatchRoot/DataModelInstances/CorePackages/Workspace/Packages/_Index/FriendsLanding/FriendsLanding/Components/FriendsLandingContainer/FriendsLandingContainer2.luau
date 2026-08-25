@@ -33,9 +33,9 @@ local t_1 = {
 	[presenceType_1.InStudio] = presenceType.InStudio
 }
 
-function FriendsLandingContainer(_) --[[ line: 50 ]]
+function FriendsLandingContainer(_)
 	-- upvalues: reactModule (ref), fFlagFixCohubExposureLayer (ref), IXPServiceWrapper (ref), appUserLayers (ref), IXPService (ref), useLocalUserId (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), useGetFriendsCountByUserId (ref), t (ref), useSelector (ref), getDeepValue (ref), useAppPolicy (ref), friendsLandingContextModule (ref), useFriendsListOrderedByPresence (ref), friendsLandingPageSize (ref), fFlagConnectionManagementChips (ref), useDecoratedTrustedConnections (ref), filterStatesModule (ref), cryoModule (ref), presenceType_1 (ref), getRbxthumbWithTypeSizeAndOptions (ref), userLibConstants (ref), t_1 (ref), presenceType (ref), friendsLandingPageModule (ref)
-	reactModule.useEffect(function() --[[ line: 51 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagFixCohubExposureLayer (copy), IXPServiceWrapper (copy), appUserLayers (copy), IXPService (copy)
 		if fFlagFixCohubExposureLayer then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(appUserLayers.ConnectionsHubExposureLayer)
@@ -45,17 +45,17 @@ function FriendsLandingContainer(_) --[[ line: 50 ]]
 		IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.ConnectionsHubExposureLayer)
 	end, {})
 	local var12 = useLocalUserId()
-	local var13 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(if var12 then tostring(var12) else nil, t) or 0 else useSelector(function(p0) --[[ line: 66 ]]
+	local var13 = if fFlagFriendsCountDataHydrationMigrationEnabled then useGetFriendsCountByUserId(if var12 then tostring(var12) else nil, t) or 0 else useSelector(function(p0)
 		-- upvalues: getDeepValue (copy), var12 (ref)
 		return getDeepValue(p0, `FriendsLanding.Friends.countsByUserId.{var12}`)
 	end)
-	local var14 = useAppPolicy(function(p1) --[[ line: 71 ]]
+	local var14 = useAppPolicy(function(p1)
 		return p1.getShowDisplayName()
 	end)
 	local var15 = reactModule.useContext(friendsLandingContextModule.Context)
 	local var16 = useFriendsListOrderedByPresence({ userId = var12, pageSize = friendsLandingPageSize })
 	local var17 = if fFlagConnectionManagementChips then useDecoratedTrustedConnections(var16.onlineFriends) else nil
-	local var18 = reactModule.useMemo(function() --[[ line: 89 ]]
+	local var18 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), var15 (ref), filterStatesModule (copy), cryoModule (copy), fFlagConnectionManagementChips (copy), var17 (write), presenceType_1 (copy)
 		local t = {}
 		
@@ -69,7 +69,7 @@ function FriendsLandingContainer(_) --[[ line: 50 ]]
 			elseif fFlagConnectionManagementChips and var15.filter == filterStatesModule.Trusted then
 				return var17 or {}
 			end
-			t = cryoModule.List.filter(var16.onlineFriends, function(p2) --[[ line: 102 ]]
+			t = cryoModule.List.filter(var16.onlineFriends, function(p2)
 				-- upvalues: presenceType_1 (copy)
 				return p2.presence and p2.presence.userPresenceType == presenceType_1.InGame
 			end)
@@ -81,9 +81,9 @@ function FriendsLandingContainer(_) --[[ line: 50 ]]
 		var16.offlineFriends,
 		var17
 	} else { var15.filter, var16.onlineFriends, var16.offlineFriends })
-	local var19 = reactModule.useMemo(function() --[[ line: 115 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), var18 (ref), getRbxthumbWithTypeSizeAndOptions (copy), userLibConstants (copy), t_1 (copy), presenceType (copy)
-		return cryoModule.List.map(var18, function(p3, _) --[[ line: 116 ]]
+		return cryoModule.List.map(var18, function(p3, _)
 			-- upvalues: getRbxthumbWithTypeSizeAndOptions (copy), userLibConstants (copy), t_1 (copy), presenceType (copy)
 			return {
 				username = "",

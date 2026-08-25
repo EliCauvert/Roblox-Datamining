@@ -41,8 +41,8 @@ playerCell.validateProps = t.strictInterface({
 })
 playerCell.defaultProps = { Visible = true, UserInputService = userInputService }
 
-function playerCell.init(p0) --[[ line: 71 ]]
-	function p0.onActivated() --[[ line: 72 ]]
+function playerCell.init(p0)
+	function p0.onActivated()
 		-- upvalues: p0 (ref)
 		if p0.props.onActivated and p0.props.userId then
 			p0.props.onActivated(p0.props.userId)
@@ -50,7 +50,7 @@ function playerCell.init(p0) --[[ line: 71 ]]
 	end
 end
 
-function playerCell.renderButtons(p1) --[[ line: 79 ]]
+function playerCell.renderButtons(p1)
 	-- upvalues: roact (ref), cryo (ref)
 	return cryo.Dictionary.join(p1.props[roact.Children] or {}, {
 		List = roact.createElement("UIListLayout", {
@@ -63,12 +63,12 @@ function playerCell.renderButtons(p1) --[[ line: 79 ]]
 	})
 end
 
-function playerCell.renderWithSelectionCursor(p2, _) --[[ line: 94 ]]
+function playerCell.renderWithSelectionCursor(p2, _)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), uDim (ref), loadableImage (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), images (ref), assetsModule (ref), cell (ref), verifiedBadgesModule (ref), themedTextLabelModule (ref)
 	local props = p2.props
 	local var11 = if props.displayName ~= "" then props.displayName else props.username
 	
-	return withFoundationOrUIBloxStyle(function(p3) --[[ line: 104 ]]
+	return withFoundationOrUIBloxStyle(function(p3)
 		return {
 			Theme = {
 				BackgroundContrast = {
@@ -85,7 +85,7 @@ function playerCell.renderWithSelectionCursor(p2, _) --[[ line: 94 ]]
 				}
 			}
 		}
-	end, function(p4) --[[ line: 112 ]]
+	end, function(p4)
 		-- upvalues: p2 (ref), roact (copy), uDim (copy), loadableImage (copy), props (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), imageSetLabel (copy), images (copy), assetsModule (copy), cell (copy), verifiedBadgesModule (copy), themedTextLabelModule (copy), var11 (ref)
 		local backgroundContrast = p4.Theme.BackgroundContrast
 		local var12 = 1.1
@@ -115,7 +115,7 @@ function playerCell.renderWithSelectionCursor(p2, _) --[[ line: 94 ]]
 				Size = UDim2.fromScale(1, 1),
 				ImageColor3 = props.isOnline and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(115, 115, 115),
 				Image = if props.userId > 0 then "rbxthumb://type=AvatarHeadShot&id=" .. props.userId .. "&w=60&h=60" else "",
-				renderOnFailed = function() --[[ line: 152 ]]
+				renderOnFailed = function()
 					-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), uDim (copy), imageSetLabel (copy), images (copy)
 					return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
 						Image = "icons/common/user",
@@ -239,15 +239,15 @@ function playerCell.renderWithSelectionCursor(p2, _) --[[ line: 94 ]]
 	end)
 end
 
-function playerCell.render(p5) --[[ line: 291 ]]
+function playerCell.render(p5)
 	-- upvalues: var6 (ref)
-	return var6(function(p6) --[[ line: 292 ]]
+	return var6(function(p6)
 		-- upvalues: p5 (ref)
 		return p5:renderWithSelectionCursor(p6)
 	end)
 end
 
-return reactModule.memo(playerCell, function(p7, p8) --[[ line: 297 ]]
+return reactModule.memo(playerCell, function(p7, p8)
 	-- upvalues: roact (ref)
 	return p7.isSelected == p8.isSelected and (p7.isOnline == p8.isOnline and (p7[roact.Change.AbsolutePosition] == p8[roact.Change.AbsolutePosition] and (p7.forwardRef == p8.forwardRef and (p7.memoKey == p8.memoKey and p7.loadingStrategy == p8.loadingStrategy))))
 end)

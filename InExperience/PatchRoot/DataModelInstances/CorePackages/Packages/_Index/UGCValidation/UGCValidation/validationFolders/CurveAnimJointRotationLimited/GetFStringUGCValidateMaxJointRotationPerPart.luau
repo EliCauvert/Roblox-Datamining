@@ -1,6 +1,6 @@
 ﻿local getFStringUGCValidateMaxJointRotationModule = require(script.Parent.GetFStringUGCValidateMaxJointRotation)
 
-local function getFallbackValue() --[[ line: 23 ]]
+local function getFallbackValue()
 	-- upvalues: getFStringUGCValidateMaxJointRotationModule (ref)
 	return getFStringUGCValidateMaxJointRotationModule.asString()
 end
@@ -21,51 +21,51 @@ game:DefineFastString("UGCValidateMaxJointRotationRightLowerLeg", "")
 game:DefineFastString("UGCValidateMaxJointRotationRightFoot", "")
 local t = {}
 local t_1 = {
-	Head = function() --[[ line: 45 ]]
+	Head = function()
 		return game:GetFastString("UGCValidateMaxJointRotationHead")
 	end,
-	UpperTorso = function() --[[ line: 48 ]]
+	UpperTorso = function()
 		return game:GetFastString("UGCValidateMaxJointRotationUpperTorso")
 	end,
-	LeftUpperLeg = function() --[[ line: 51 ]]
+	LeftUpperLeg = function()
 		return game:GetFastString("UGCValidateMaxJointRotationLeftUpperLeg")
 	end,
-	LeftLowerLeg = function() --[[ line: 54 ]]
+	LeftLowerLeg = function()
 		return game:GetFastString("UGCValidateMaxJointRotationLeftLowerLeg")
 	end,
-	LeftHand = function() --[[ line: 57 ]]
+	LeftHand = function()
 		return game:GetFastString("UGCValidateMaxJointRotationLeftHand")
 	end,
-	RightUpperArm = function() --[[ line: 60 ]]
+	RightUpperArm = function()
 		return game:GetFastString("UGCValidateMaxJointRotationRightUpperArm")
 	end,
-	RightLowerArm = function() --[[ line: 63 ]]
+	RightLowerArm = function()
 		return game:GetFastString("UGCValidateMaxJointRotationRightLowerArm")
 	end,
-	RightHand = function() --[[ line: 66 ]]
+	RightHand = function()
 		return game:GetFastString("UGCValidateMaxJointRotationRightHand")
 	end,
-	LeftUpperArm = function() --[[ line: 69 ]]
+	LeftUpperArm = function()
 		return game:GetFastString("UGCValidateMaxJointRotationLeftUpperArm")
 	end,
-	LeftLowerArm = function() --[[ line: 72 ]]
+	LeftLowerArm = function()
 		return game:GetFastString("UGCValidateMaxJointRotationLeftLowerArm")
 	end,
-	LeftFoot = function() --[[ line: 75 ]]
+	LeftFoot = function()
 		return game:GetFastString("UGCValidateMaxJointRotationLeftFoot")
 	end,
-	RightUpperLeg = function() --[[ line: 78 ]]
+	RightUpperLeg = function()
 		return game:GetFastString("UGCValidateMaxJointRotationRightUpperLeg")
 	end,
-	RightLowerLeg = function() --[[ line: 81 ]]
+	RightLowerLeg = function()
 		return game:GetFastString("UGCValidateMaxJointRotationRightLowerLeg")
 	end,
-	RightFoot = function() --[[ line: 84 ]]
+	RightFoot = function()
 		return game:GetFastString("UGCValidateMaxJointRotationRightFoot")
 	end
 }
 
-function t.asString(p0) --[[ line: 89 ]]
+function t.asString(p0)
 	-- upvalues: t_1 (ref), getFallbackValue (ref)
 	local var4 = t_1[p0]
 	
@@ -77,7 +77,7 @@ function t.asString(p0) --[[ line: 89 ]]
 	return if #var5 == 0 then getFallbackValue() else var5
 end
 
-function t.asNumber(p1) --[[ line: 101 ]]
+function t.asNumber(p1)
 	-- upvalues: t (ref)
 	return tonumber(t.asString(p1))
 end

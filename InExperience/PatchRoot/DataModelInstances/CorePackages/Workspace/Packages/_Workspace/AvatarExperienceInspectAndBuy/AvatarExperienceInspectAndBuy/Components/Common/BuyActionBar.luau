@@ -7,9 +7,9 @@ local shouldShowPriceLabel = require(avatarExperienceInspectAndBuy.Utils.itemDet
 local _ = foundationModule.Enums.ButtonVariant
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-return function(p0) --[[ line: 55 | named "BuyActionBar" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref)
-	local var3 = reactModule.useMemo(function() --[[ line: 58 ]]
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: shouldShowPriceLabel (copy), p0 (ref)
 		return shouldShowPriceLabel(p0.priceStatus)
 	end, { p0.priceStatus })

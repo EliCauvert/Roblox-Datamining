@@ -1,10 +1,10 @@
 ﻿local getDeepValue = require(script.Parent.Parent.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: getDeepValue (ref)
 	local keyPath = p0.keyPath
 	
-	return function(p1) --[[ line: 8 ]]
+	return function(p1)
 		-- upvalues: getDeepValue (copy), keyPath (ref)
 		local t = {}
 		
@@ -16,7 +16,7 @@ return function(p0) --[[ line: 6 ]]
 				avatarThumbnailUrl = v.avatarThumbnailUrl
 			})
 		end
-		table.sort(t, function(p2, p3) --[[ line: 20 ]]
+		table.sort(t, function(p2, p3)
 			return if p2.contactName and p3.contactName and p2.contactName ~= p3.contactName then p2.contactName < p3.contactName else p2.contactId < p3.contactId
 		end)
 		

@@ -8,7 +8,7 @@ local _ = require(avatarExperienceInspectAndBuy.Types)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local var3 = if fFlagSocialEnableProfileInspectAndBuy then require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
 
-return function(p0, p1, p2, p3) --[[ line: 27 | named "getPriceLineContent" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), var3 (ref), getPriceStatusModule (ref), priceStatusModule (ref)
 	local var5
 	local t = {}

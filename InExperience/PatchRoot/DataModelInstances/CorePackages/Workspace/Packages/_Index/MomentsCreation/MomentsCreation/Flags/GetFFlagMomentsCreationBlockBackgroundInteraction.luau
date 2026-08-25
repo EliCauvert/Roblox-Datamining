@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsCreationBlockBackgroundInteraction", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("MomentsCreationBlockBackgroundInteraction")
 end

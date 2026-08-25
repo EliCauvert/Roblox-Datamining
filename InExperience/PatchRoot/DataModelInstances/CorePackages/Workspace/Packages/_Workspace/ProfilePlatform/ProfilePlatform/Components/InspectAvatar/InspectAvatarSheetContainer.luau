@@ -26,7 +26,7 @@ local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
 local getPriceStatus = inspectAvatarUtilsModule.getPriceStatus
 local priceStatusEnum = inspectAvatarUtilsModule.PriceStatusEnum
 
-return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
+return function(p0)
 	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useMarketplaceAnalyticsContextModule (ref), robloxAppHooksModule (ref), useProfileFormFactorModule (ref), enumsModule (ref), useSelector (ref), useProfileCardWidth (ref), useProfileJsonComponentModule (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), constantsModule (ref), useInspectAvatarDataModule (ref), reactModule (ref), isItemPurchasable (ref), dashModule (ref), inspectAvatarUtilsModule (ref), getPriceStatus (ref), priceStatusEnum (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), eventNamesModule (ref), inspectAvatarSheetModule (ref)
 	local var17 = useProfileWrapperContextModule()
 	local var18 = useProfileAnalyticsContextModule()
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 	local var20 = robloxAppHooksModule.useLocalRobuxBalance()
 	local var21 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
 	local profileId = var17.profileId
-	local var22 = if var21 then 0 else useSelector(function(p1) --[[ line: 57 ]]
+	local var22 = if var21 then 0 else useSelector(function(p1)
 		return p1.TopBar.statusBarHeight
 	end)
 	local var23 = useProfileCardWidth()
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 	local displayItems = var28.displayItems
 	local var29, var30 = reactModule.useState({})
 	local var31 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 85 ]]
+	reactModule.useEffect(function()
 		-- upvalues: displayItems (ref), isItemPurchasable (copy), var31 (ref), var30 (ref), dashModule (copy)
 		if #displayItems == 0 then return end
 		local t = {}
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 			end
 		end
 		if var36 then
-			var30(function(p2) --[[ line: 102 ]]
+			var30(function(p2)
 				-- upvalues: dashModule (copy), t (ref)
 				return dashModule.join(p2, t)
 			end)
@@ -70,14 +70,14 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 			return
 		end
 	end, { displayItems })
-	local var32 = reactModule.useCallback(function(p3) --[[ line: 107 ]]
+	local var32 = reactModule.useCallback(function(p3)
 		-- upvalues: var30 (ref), dashModule (copy)
-		var30(function(p4) --[[ line: 108 ]]
+		var30(function(p4)
 			-- upvalues: dashModule (copy), p3 (ref)
 			return dashModule.join(p4, { [p3] = not p4[p3] })
 		end)
 	end, {})
-	local var33 = reactModule.useMemo(function() --[[ line: 114 ]]
+	local var33 = reactModule.useMemo(function()
 		-- upvalues: displayItems (ref), var29 (ref), isItemPurchasable (copy), inspectAvatarUtilsModule (copy), getPriceStatus (copy), priceStatusEnum (copy), enumsModule (copy)
 		local t = {}
 		local var38 = 0
@@ -131,7 +131,7 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 			purchasedBundleIds = t_3
 		}
 	end, { displayItems, var29 })
-	local var34 = reactModule.useMemo(function() --[[ line: 171 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: displayItems (ref)
 		local t = {}
 		
@@ -168,7 +168,7 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 		topOffset = var22,
 		purchaseSummary = { totalPrice = var33.totalPrice, count = var33.count },
 		onToggleItem = var32,
-		onBuyAll = reactModule.useCallback(function() --[[ line: 193 ]]
+		onBuyAll = reactModule.useCallback(function()
 			-- upvalues: var33 (ref), var28 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var18 (ref), eventNamesModule (copy), var17 (ref), var20 (ref), p0 (ref), enumsModule (copy), var34 (ref)
 			if #var33.lineItems == 0 or not var28.localUserId then return end
 			if fFlagSocialEnableProfileInspectAndBuyAnalytics then
@@ -200,19 +200,19 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 			if fFlagSocialEnableProfileInspectAndBuyAnalytics then var18 else nil,
 			if fFlagSocialEnableProfileInspectAndBuyAnalytics then var17.profileSessionId else nil
 		}),
-		onClose = reactModule.useCallback(function() --[[ line: 238 ]]
+		onClose = reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			p0.navigation.pop()
 		end, { p0.navigation }),
-		onDismiss = reactModule.useCallback(function() --[[ line: 242 ]]
+		onDismiss = reactModule.useCallback(function()
 			-- upvalues: p0 (ref), var17 (ref)
 			p0.navigation.pop()
-			task.defer(function() --[[ line: 244 ]]
+			task.defer(function()
 				-- upvalues: var17 (copy)
 				var17.navigateTo.previousView(false)
 			end)
 		end, { p0.navigation, var17.navigateTo }),
-		openItemDetails = reactModule.useCallback(function(p5, p6, p7) --[[ line: 250 ]]
+		openItemDetails = reactModule.useCallback(function(p5, p6, p7)
 			-- upvalues: var17 (ref), var18 (ref), eventNamesModule (copy), var19 (ref)
 			var17.navigateTo.itemOrBundleDetails(p5, p6)
 			var18.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, {

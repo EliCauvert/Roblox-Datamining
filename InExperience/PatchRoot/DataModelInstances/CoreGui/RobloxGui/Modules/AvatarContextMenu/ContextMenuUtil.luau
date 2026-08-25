@@ -14,15 +14,15 @@ end
 local t = {}
 t.__index = t
 
-function t.GetHeadshotForPlayer(_, p0) --[[ line: 47 ]]
+function t.GetHeadshotForPlayer(_, p0)
 	return "rbxthumb://type=AvatarHeadShot&id=" .. p0.UserId .. "&w=150&h=150"
 end
 
-function t:HasOrGettingHeadShot(p1) --[[ line: 51 ]]
+function t:HasOrGettingHeadShot(p1)
 	return self.HeadShotUrlCache[p1] ~= nil
 end
 
-function t.FindPlayerFromPart(_, p2) --[[ line: 55 ]]
+function t.FindPlayerFromPart(_, p2)
 	-- upvalues: playersService (ref)
 	if p2 and p2.Parent then
 		local var13 = p2
@@ -33,7 +33,7 @@ function t.FindPlayerFromPart(_, p2) --[[ line: 55 ]]
 	end
 end
 
-function t.GetPlayerPosition(_, p3) --[[ line: 68 ]]
+function t.GetPlayerPosition(_, p3)
 	if p3.Character then
 		local humanoidRootPart = p3.Character:FindFirstChild("HumanoidRootPart")
 		
@@ -43,11 +43,11 @@ end
 
 local var8 = true
 
-function t.DisablePlayerMovement(_) --[[ line: 80 ]]
+function t.DisablePlayerMovement(_)
 	-- upvalues: var8 (write), contextActionService (ref)
 	if var8 then
 		var8 = false
-		contextActionService:BindCoreActionAtPriority("AvatarContextMenuStopInput", function(_, p4) --[[ line: 84 ]]
+		contextActionService:BindCoreActionAtPriority("AvatarContextMenuStopInput", function(_, p4)
 			return if p4 == Enum.UserInputState.End then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 		end, false, Enum.ContextActionPriority.Low.Value, Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward, Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight, Enum.PlayerActions.CharacterJump, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
 		
@@ -55,7 +55,7 @@ function t.DisablePlayerMovement(_) --[[ line: 80 ]]
 	end
 end
 
-function t.EnablePlayerMovement(_) --[[ line: 101 ]]
+function t.EnablePlayerMovement(_)
 	-- upvalues: var8 (write), contextActionService (ref)
 	if var8 then
 		return
@@ -64,9 +64,9 @@ function t.EnablePlayerMovement(_) --[[ line: 101 ]]
 	contextActionService:UnbindCoreAction("AvatarContextMenuStopInput")
 end
 
-function t.GetFriendStatus(_, p5) --[[ line: 108 ]]
+function t.GetFriendStatus(_, p5)
 	-- upvalues: localPlayer (write)
-	local ok, status = pcall(function() --[[ line: 109 ]]
+	local ok, status = pcall(function()
 		-- upvalues: localPlayer (copy), p5 (ref)
 		return localPlayer:GetFriendStatus(p5)
 	end)
@@ -75,9 +75,9 @@ function t.GetFriendStatus(_, p5) --[[ line: 108 ]]
 end
 
 local t_1 = {}
-coroutine.wrap(function() --[[ line: 121 ]]
+coroutine.wrap(function()
 	-- upvalues: robloxReplicatedStorageService (ref), t_1 (ref)
-	robloxReplicatedStorageService:WaitForChild("CanChatWith", 1e999).OnClientEvent:Connect(function(...) --[[ line: 124 ]]
+	robloxReplicatedStorageService:WaitForChild("CanChatWith", 1e999).OnClientEvent:Connect(function(...)
 		-- upvalues: t_1 (copy)
 		local list = { ... }
 		
@@ -92,7 +92,7 @@ coroutine.wrap(function() --[[ line: 121 ]]
 	end)
 end)()
 
-function t.GetCanChatWith(_, p6) --[[ line: 140 ]]
+function t.GetCanChatWith(_, p6)
 	-- upvalues: blockingUtilityModule (ref), t_1 (ref)
 	return if blockingUtilityModule:IsPlayerBlockedByUserId(p6.UserId) then false else t_1[p6.UserId] == nil or t_1[p6.UserId]
 end
@@ -101,7 +101,7 @@ local imageLabel = Instance.new("ImageLabel")
 imageLabel.Image = ""
 imageLabel.BackgroundTransparency = 1
 
-local function MakeDefaultButton(p7, p8, p9, p10) --[[ line: 156 ]]
+local function MakeDefaultButton(p7, p8, p9, p10)
 	-- upvalues: imageLabel (ref), userInputService (ref), guiService (ref)
 	local imageButton = Instance.new("ImageButton")
 	imageButton.Name = p7
@@ -125,34 +125,34 @@ local function MakeDefaultButton(p7, p8, p9, p10) --[[ line: 156 ]]
 	underline.Parent = imageButton
 	
 	if p9 then
-		imageButton.MouseButton1Click:Connect(function() --[[ line: 181 ]]
+		imageButton.MouseButton1Click:Connect(function()
 			-- upvalues: p9 (ref), userInputService (copy)
 			p9(userInputService:GetLastInputType())
 		end)
 	end
-	local function _(p11) --[[ line: 186 | named "isPointerInput" ]]
+	local function _(p11)
 		return if p11.UserInputType ~= Enum.UserInputType.MouseMovement then p11.UserInputType == Enum.UserInputType.Touch else true
 	end
 	
-	local _ = function() --[[ line: 190 | named "selectButton" ]]
+	local _ = function()
 		-- upvalues: imageButton (ref), p10 (ref)
 		imageButton.BackgroundColor3 = p10.ButtonHoverColor
 		imageButton.BackgroundTransparency = p10.ButtonHoverTransparency
 	end
 	
-	local _ = function() --[[ line: 195 | named "deselectButton" ]]
+	local _ = function()
 		-- upvalues: imageButton (ref), p10 (ref)
 		imageButton.BackgroundColor3 = p10.ButtonColor
 		imageButton.BackgroundTransparency = p10.ButtonTransparency
 	end
 	
-	imageButton.InputBegan:Connect(function(p12) --[[ line: 200 ]]
+	imageButton.InputBegan:Connect(function(p12)
 		-- upvalues: imageButton (ref), p10 (ref)
 		if imageButton.Selectable then
 			if if p12.UserInputType ~= Enum.UserInputType.MouseMovement then p12.UserInputType == Enum.UserInputType.Touch else true then
 				imageButton.BackgroundColor3 = p10.ButtonHoverColor
 				imageButton.BackgroundTransparency = p10.ButtonHoverTransparency
-				p12:GetPropertyChangedSignal("UserInputState"):connect(function() --[[ line: 203 ]]
+				p12:GetPropertyChangedSignal("UserInputState"):connect(function()
 					-- upvalues: p12 (ref), imageButton (copy), p10 (copy)
 					if p12.UserInputState == Enum.UserInputState.End then
 						imageButton.BackgroundColor3 = p10.ButtonColor
@@ -162,7 +162,7 @@ local function MakeDefaultButton(p7, p8, p9, p10) --[[ line: 156 ]]
 			end
 		end
 	end)
-	imageButton.InputEnded:Connect(function(p13) --[[ line: 210 ]]
+	imageButton.InputEnded:Connect(function(p13)
 		-- upvalues: imageButton (ref), guiService (copy), p10 (ref)
 		if imageButton.Selectable and guiService.SelectedCoreObject ~= imageButton then
 			if if p13.UserInputType ~= Enum.UserInputType.MouseMovement then p13.UserInputType == Enum.UserInputType.Touch else true then
@@ -171,17 +171,17 @@ local function MakeDefaultButton(p7, p8, p9, p10) --[[ line: 156 ]]
 			end
 		end
 	end)
-	imageButton.SelectionGained:Connect(function() --[[ line: 216 ]]
+	imageButton.SelectionGained:Connect(function()
 		-- upvalues: imageButton (ref), p10 (ref)
 		imageButton.BackgroundColor3 = p10.ButtonHoverColor
 		imageButton.BackgroundTransparency = p10.ButtonHoverTransparency
 	end)
-	imageButton.SelectionLost:Connect(function() --[[ line: 219 ]]
+	imageButton.SelectionLost:Connect(function()
 		-- upvalues: imageButton (ref), p10 (ref)
 		imageButton.BackgroundColor3 = p10.ButtonColor
 		imageButton.BackgroundTransparency = p10.ButtonTransparency
 	end)
-	local _ = guiService.Changed:Connect(function(p14) --[[ line: 223 ]]
+	local _ = guiService.Changed:Connect(function(p14)
 		-- upvalues: guiService (copy), imageButton (ref), p10 (ref)
 		if p14 ~= "SelectedCoreObject" then return end
 		if guiService.SelectedCoreObject == nil or guiService.SelectedCoreObject ~= imageButton then
@@ -198,7 +198,7 @@ local function MakeDefaultButton(p7, p8, p9, p10) --[[ line: 156 ]]
 	return imageButton
 end
 
-local function getViewportSize() --[[ line: 239 ]]
+local function getViewportSize()
 	while not workspace.CurrentCamera do
 		workspace.Changed:Wait()
 	end
@@ -209,14 +209,14 @@ local function getViewportSize() --[[ line: 239 ]]
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local function _() --[[ line: 255 | named "isSmallTouchScreen" ]]
+local function _()
 	-- upvalues: getViewportSize (ref), userInputService (ref)
 	local var18 = getViewportSize()
 	
 	return userInputService.TouchEnabled and (if var18.Y >= 500 then var18.X < 700 else true)
 end
 
-function t.MakeStyledButton(_, p15, p16, p17, p18, p19) --[[ line: 260 ]]
+function t.MakeStyledButton(_, p15, p16, p17, p18, p19)
 	-- upvalues: MakeDefaultButton (ref), getViewportSize (ref), userInputService (ref), guiService (ref)
 	local var19 = MakeDefaultButton(p15, p17, p18, p19)
 	local textLabel = Instance.new("TextLabel")
@@ -246,7 +246,7 @@ function t.MakeStyledButton(_, p15, p16, p17, p18, p19) --[[ line: 260 ]]
 	return var19, textLabel
 end
 
-function t.new() --[[ line: 290 ]]
+function t.new()
 	-- upvalues: t (ref)
 	return setmetatable({}, t)
 end

@@ -9,7 +9,7 @@ local loggerModule = require(foundation.Utility.Logger)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 54 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl._widgetsApi = p0
@@ -23,13 +23,13 @@ function t.new(p0) --[[ line: 54 ]]
 	return tbl
 end
 
-local function _(p1) --[[ line: 70 | named "getWidgetHost" ]]
+local function _(p1)
 	local pluginGui = p1:FindFirstAncestorWhichIsA("PluginGui")
 	
 	return pluginGui or p1:FindFirstAncestorWhichIsA("ScreenGui")
 end
 
-local _ = function(p2, p3, p4) --[[ line: 78 | named "makeRegistration" ]]
+local _ = function(p2, p3, p4)
 	return {
 		Uri = p2,
 		Widget = p3,
@@ -40,12 +40,12 @@ local _ = function(p2, p3, p4) --[[ line: 78 | named "makeRegistration" ]]
 	}
 end
 
-function t.nextId(_) --[[ line: 89 ]]
+function t.nextId(_)
 	-- upvalues: httpService (ref)
 	return httpService:GenerateGUID(false)
 end
 
-function t:flush() --[[ line: 93 ]]
+function t:flush()
 	-- upvalues: flagsModule (ref)
 	if flagsModule.FoundationWidgetManagerSnapshotFlush then
 		local pendingDeregisters = self._pendingDeregisters
@@ -61,7 +61,7 @@ function t:flush() --[[ line: 93 ]]
 	self._pendingRegisters = {}
 end
 
-function t:_flushWith(p5, p6) --[[ line: 108 ]]
+function t:_flushWith(p5, p6)
 	-- upvalues: flagsModule (ref), filter (ref), values (ref), studioUriModule (ref)
 	local t = {}
 	
@@ -70,13 +70,13 @@ function t:_flushWith(p5, p6) --[[ line: 108 ]]
 		self._registeredWidgets[i] = nil
 	end
 	if #t > 0 then
-		pcall(function() --[[ line: 119 ]]
+		pcall(function()
 			-- upvalues: self (ref), t (ref)
 			self._widgetsApi:DeregisterAsync(t)
 		end)
 	end
 	local var10 = if flagsModule.FoundationWidgetManagerSnapshotFlush then {} else nil
-	local var11 = filter(values(p6), function(p7) --[[ line: 125 ]]
+	local var11 = filter(values(p6), function(p7)
 		-- upvalues: flagsModule (copy), var10 (ref)
 		local var16 = p7.Widget:FindFirstAncestorWhichIsA("LayerCollector") ~= nil
 		
@@ -91,7 +91,7 @@ function t:_flushWith(p5, p6) --[[ line: 108 ]]
 			local var12 = studioUriModule.toString(v_1.Uri)
 			
 			if not self._deferredAncestrySignals[var12] then
-				self._deferredAncestrySignals[var12] = v_1.Widget.AncestryChanged:Connect(function(_, p8) --[[ line: 137 ]]
+				self._deferredAncestrySignals[var12] = v_1.Widget.AncestryChanged:Connect(function(_, p8)
 					-- upvalues: self (ref), var12 (ref), v_1 (ref)
 					if p8 == nil then
 						local var17 = self._deferredAncestrySignals[var12]
@@ -138,19 +138,19 @@ function t:_flushWith(p5, p6) --[[ line: 108 ]]
 		self._signals[var14] = {
 			Widget = v_1.Widget,
 			Host = if flagsModule.FoundationPopoverPluginOverlayMeasurement then DEPRECATED_PluginGui else nil,
-			PositionChanged = v_1.Widget:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 186 ]]
+			PositionChanged = v_1.Widget:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 				-- upvalues: self (ref), v_1 (ref)
 				self:register(v_1.Uri, v_1.Widget)
 			end),
-			SizeChanged = v_1.Widget:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 189 ]]
+			SizeChanged = v_1.Widget:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: self (ref), v_1 (ref)
 				self:register(v_1.Uri, v_1.Widget)
 			end),
-			VisibleChanged = v_1.Widget:GetStyledPropertyChangedSignal("Visible"):Connect(function() --[[ line: 192 ]]
+			VisibleChanged = v_1.Widget:GetStyledPropertyChangedSignal("Visible"):Connect(function()
 				-- upvalues: self (ref), v_1 (ref)
 				self:register(v_1.Uri, v_1.Widget)
 			end),
-			AncestryChanged = v_1.Widget.AncestryChanged:Connect(function(_, p9) --[[ line: 195 ]]
+			AncestryChanged = v_1.Widget.AncestryChanged:Connect(function(_, p9)
 				-- upvalues: self (ref), v_1 (ref)
 				if not p9 then
 					self:deregister(v_1.Uri)
@@ -159,7 +159,7 @@ function t:_flushWith(p5, p6) --[[ line: 108 ]]
 		}
 	end
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement and #t_1 > 0 then
-		pcall(function() --[[ line: 204 ]]
+		pcall(function()
 			-- upvalues: self (ref), t_1 (ref)
 			self._widgetsApi:DeregisterAsync(t_1)
 		end)
@@ -169,19 +169,19 @@ function t:_flushWith(p5, p6) --[[ line: 108 ]]
 	end
 end
 
-function t:_run() --[[ line: 214 ]]
+function t:_run()
 	if self._running then
 		return
 	end
 	self._running = true
-	task.defer(function() --[[ line: 219 ]]
+	task.defer(function()
 		-- upvalues: self (ref)
 		self._running = false
 		self:flush()
 	end)
 end
 
-function t:register(p10, p11) --[[ line: 229 ]]
+function t:register(p10, p11)
 	-- upvalues: studioUriModule (ref), flagsModule (ref)
 	local pluginGui = p11:FindFirstAncestorWhichIsA("PluginGui")
 	local var20 = pluginGui or p11:FindFirstAncestorWhichIsA("ScreenGui")
@@ -204,7 +204,7 @@ function t:register(p10, p11) --[[ line: 229 ]]
 	end
 end
 
-function t:refreshAsync(p12) --[[ line: 250 ]]
+function t:refreshAsync(p12)
 	-- upvalues: studioUriModule (ref)
 	local var23 = self._registeredWidgets[studioUriModule.toString(p12)]
 	
@@ -231,7 +231,7 @@ function t:refreshAsync(p12) --[[ line: 250 ]]
 	return false
 end
 
-function t:deregister(p13, p14) --[[ line: 266 ]]
+function t:deregister(p13, p14)
 	-- upvalues: studioUriModule (ref), flagsModule (ref), loggerModule (ref)
 	local var26 = studioUriModule.toString(p13)
 	self._pendingDeregisters[var26] = p13
@@ -261,7 +261,7 @@ function t:deregister(p13, p14) --[[ line: 266 ]]
 	self:_run()
 end
 
-function t:destroy() --[[ line: 292 ]]
+function t:destroy()
 	-- upvalues: flagsModule (ref)
 	for i, v in self._signals do
 		v.PositionChanged:Disconnect()

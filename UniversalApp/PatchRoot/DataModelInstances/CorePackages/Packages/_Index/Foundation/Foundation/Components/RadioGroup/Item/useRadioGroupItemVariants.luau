@@ -8,7 +8,7 @@ local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0) --[[ line: 30 ]]
+local function variantsFactory(p0)
 	-- upvalues: inputSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
@@ -52,7 +52,7 @@ local function variantsFactory(p0) --[[ line: 30 ]]
 	}
 end
 
-return function(p1, p2) --[[ line: 65 ]]
+return function(p1, p2)
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local radioItem = variantsContextModule.useVariants("RadioItem", variantsFactory, p1)
 	

@@ -7,7 +7,7 @@
 	}
 })
 
-return function() --[[ line: 21 | named "getShopPurchasePayload" ]]
+return function()
 	-- upvalues: var0 (ref)
 	return var0
 end

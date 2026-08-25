@@ -6,14 +6,14 @@ local _ = require(parent.GraphQL)
 local _ = require(script.Parent.types)
 local mapperKind = require(script.Parent.Interfaces).MapperKind
 
-function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
+function t.extractExtensionsFromSchema(p0)
 	-- upvalues: boolean (ref), mapSchema (ref), mapperKind (ref)
 	local t = {
 		schemaExtensions = if boolean.toJSBoolean(p0.extensions) then p0.extensions else {},
 		types = {}
 	}
 	mapSchema(p0, {
-		[tostring(mapperKind.OBJECT_TYPE)] = function(p1) --[[ line: 48 ]]
+		[tostring(mapperKind.OBJECT_TYPE)] = function(p1)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[tostring(p1.name)] = {
 				type = "object",
@@ -23,7 +23,7 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			
 			return p1
 		end,
-		[tostring(mapperKind.INTERFACE_TYPE)] = function(p2) --[[ line: 59 ]]
+		[tostring(mapperKind.INTERFACE_TYPE)] = function(p2)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[tostring(p2.name)] = {
 				type = "interface",
@@ -33,7 +33,7 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			
 			return p2
 		end,
-		[tostring(mapperKind.FIELD)] = function(p3, p4, p5) --[[ line: 73 ]]
+		[tostring(mapperKind.FIELD)] = function(p3, p4, p5)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[p5].fields[p4] = {
 				arguments = {},
@@ -49,7 +49,7 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			end
 			return p3
 		end,
-		[tostring(mapperKind.ENUM_TYPE)] = function(p6) --[[ line: 110 ]]
+		[tostring(mapperKind.ENUM_TYPE)] = function(p6)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[tostring(p6.name)] = {
 				type = "enum",
@@ -59,13 +59,13 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			
 			return p6
 		end,
-		[tostring(mapperKind.ENUM_VALUE)] = function(p7, p8, _, p9) --[[ line: 121 ]]
+		[tostring(mapperKind.ENUM_VALUE)] = function(p7, p8, _, p9)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[p8].values[p9] = if boolean.toJSBoolean(p7.extensions) then p7.extensions else {}
 			
 			return p7
 		end,
-		[tostring(mapperKind.SCALAR_TYPE)] = function(p10) --[[ line: 135 ]]
+		[tostring(mapperKind.SCALAR_TYPE)] = function(p10)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[tostring(p10.name)] = {
 				type = "scalar",
@@ -74,7 +74,7 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			
 			return p10
 		end,
-		[tostring(mapperKind.UNION_TYPE)] = function(p11) --[[ line: 145 ]]
+		[tostring(mapperKind.UNION_TYPE)] = function(p11)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[tostring(p11.name)] = {
 				type = "union",
@@ -83,7 +83,7 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			
 			return p11
 		end,
-		[tostring(mapperKind.INPUT_OBJECT_TYPE)] = function(p12) --[[ line: 155 ]]
+		[tostring(mapperKind.INPUT_OBJECT_TYPE)] = function(p12)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[tostring(p12.name)] = {
 				type = "input",
@@ -93,7 +93,7 @@ function t.extractExtensionsFromSchema(p0) --[[ line: 42 ]]
 			
 			return p12
 		end,
-		[tostring(mapperKind.INPUT_OBJECT_FIELD)] = function(p13, p14, p15) --[[ line: 166 ]]
+		[tostring(mapperKind.INPUT_OBJECT_FIELD)] = function(p13, p14, p15)
 			-- upvalues: t (ref), boolean (copy)
 			t.types[p15].fields[p14] = {
 				extensions = if boolean.toJSBoolean(p13.extensions) then p13.extensions else {}

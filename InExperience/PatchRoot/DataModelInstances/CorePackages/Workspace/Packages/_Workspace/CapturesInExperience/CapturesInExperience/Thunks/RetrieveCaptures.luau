@@ -8,16 +8,16 @@ local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags
 local fFlagCaptureServiceRetrieveCapturesSafeguardModule = require(parent.Flags.FFlagCaptureServiceRetrieveCapturesSafeguard)
 local fFlagCapturesFetchUseSharedUtilityModule = require(parent.Flags.FFlagCapturesFetchUseSharedUtility)
 
-local function _(p0) --[[ line: 16 | named "getSelectedCapture" ]]
+local function _(p0)
 	-- upvalues: constantsModule (ref)
 	local selectedCaptureIndex = p0[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	
 	return if selectedCaptureIndex == nil then nil else p0[constantsModule.RoduxKey].Captures[selectedCaptureIndex]
 end
 
-return function() --[[ line: 25 ]]
+return function()
 	-- upvalues: constantsModule (ref), fFlagCapturesFetchUseSharedUtilityModule (ref), fetchCapturesFromGalleryModule (ref), capturesRetrievedModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureService (ref), fFlagCaptureServiceRetrieveCapturesSafeguardModule (ref)
-	return function(p1) --[[ line: 26 ]]
+	return function(p1)
 		-- upvalues: constantsModule (copy), fFlagCapturesFetchUseSharedUtilityModule (copy), fetchCapturesFromGalleryModule (copy), capturesRetrievedModule (copy), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureService (copy), fFlagCaptureServiceRetrieveCapturesSafeguardModule (copy)
 		local state = p1:getState()
 		local selectedCaptureIndex = state[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
@@ -28,7 +28,7 @@ return function() --[[ line: 25 ]]
 			
 			return
 		elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			local ok, status = pcall(function() --[[ line: 34 ]]
+			local ok, status = pcall(function()
 				-- upvalues: captureService (copy)
 				local var10, var11 = captureService:ReadCapturesFromGalleryAsync()
 				
@@ -53,7 +53,7 @@ return function() --[[ line: 25 ]]
 			
 			return
 		end
-		local ok, status = pcall(function() --[[ line: 54 ]]
+		local ok, status = pcall(function()
 			-- upvalues: captureService (copy)
 			return captureService:RetrieveCaptures()
 		end)

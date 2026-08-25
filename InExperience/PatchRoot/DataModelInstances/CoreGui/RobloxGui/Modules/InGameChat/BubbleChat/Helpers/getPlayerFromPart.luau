@@ -1,6 +1,6 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0) --[[ line: 4 | named "getPlayerFromPart" ]]
+return function(p0)
 	-- upvalues: playersService (ref)
 	if not p0 then
 		return nil

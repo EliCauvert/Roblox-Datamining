@@ -43,12 +43,12 @@ local t_4 = {
 	lastUpdated = { 2025, 10, 30 }
 }
 
-local function _(p0) --[[ line: 64 | named "checkEventNameMappings" ]]
+local function _(p0)
 	-- upvalues: flyoutContentSettingsModule (ref)
 	return if p0 and flyoutContentSettingsModule.EventNameMappings[p0] then flyoutContentSettingsModule.EventNameMappings[p0] else p0 or ""
 end
 
-local function logEventHelper(p1, p2, p3) --[[ line: 71 ]]
+local function logEventHelper(p1, p2, p3)
 	-- upvalues: flyoutRemoveAddSessionInfo (ref), flyoutContentSettingsModule (ref), default (ref)
 	local integrationId = p3.integrationId
 	default:logRobloxTelemetryEvent(p1, if flyoutRemoveAddSessionInfo then {
@@ -68,29 +68,29 @@ local function logEventHelper(p1, p2, p3) --[[ line: 71 ]]
 	}, p2)
 end
 
-local _ = function(p4, p5, p6, p7) --[[ line: 111 | named "sendMoreGridItemClickEvent_legacy" ]]
+local _ = function(p4, p5, p6, p7)
 	p4:setRBXEventStream("moreGridItem", "moreGridItemClick", { itemType = p5, localUserId = p6, url = p7 })
 end
 
 return {
-	onFlyoutSidePanelClosed = function(p8) --[[ line: 93 ]]
+	onFlyoutSidePanelClosed = function(p8)
 		-- upvalues: logEventHelper (ref), t_1 (ref)
 		logEventHelper(t_1, "flyout_close", p8)
 	end,
-	onFlyoutTooltipShown = function(p9) --[[ line: 97 ]]
+	onFlyoutTooltipShown = function(p9)
 		-- upvalues: logEventHelper (ref), t_2 (ref)
 		logEventHelper(t_2, "flyout_tooltip_show", p9)
 	end,
-	onFlyoutTooltipDismissed = function(p10) --[[ line: 101 ]]
+	onFlyoutTooltipDismissed = function(p10)
 		-- upvalues: logEventHelper (ref), t_3 (ref)
 		logEventHelper(t_3, "flyout_tooltip_dismiss", p10)
 	end,
-	onFlyoutContentItemClicked = function(p11) --[[ line: 105 ]]
+	onFlyoutContentItemClicked = function(p11)
 		-- upvalues: logEventHelper (ref), t_4 (ref), t_1 (ref)
 		logEventHelper(t_4, "flyout_item_click", p11)
 		logEventHelper(t_1, "flyout_close", p11)
 	end,
-	sendMoreLegacyAndFlyoutItemClickEvent = function(p12, p13, p14, p15) --[[ line: 119 ]]
+	sendMoreLegacyAndFlyoutItemClickEvent = function(p12, p13, p14, p15)
 		-- upvalues: flyoutContentSettingsModule (ref), logEventHelper (ref), t_4 (ref), t_1 (ref)
 		local var9 = if p13 and flyoutContentSettingsModule.EventNameMappings[p13] then flyoutContentSettingsModule.EventNameMappings[p13] else p13 or ""
 		local t = { source = "click", integrationId = var9 }
@@ -98,7 +98,7 @@ return {
 		logEventHelper(t_1, "flyout_close", t)
 		p12:setRBXEventStream("moreGridItem", "moreGridItemClick", { itemType = var9, localUserId = p14, url = p15 })
 	end,
-	sendPageLoadEvent = function(p16, p17) --[[ line: 125 ]]
+	sendPageLoadEvent = function(p16, p17)
 		-- upvalues: localizationService (ref), logEventHelper (ref), t (ref)
 		p16:setRBXEventStream("AppRouter", "luaPageLoad", {
 			page = "more",

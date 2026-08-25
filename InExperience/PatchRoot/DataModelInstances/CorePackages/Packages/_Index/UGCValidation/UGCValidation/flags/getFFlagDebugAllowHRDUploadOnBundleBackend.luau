@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("DebugAllowHRDUploadOnBundleBackend", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("DebugAllowHRDUploadOnBundleBackend")
 end

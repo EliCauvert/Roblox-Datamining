@@ -7,7 +7,7 @@ local reactModule = require(parent.React)
 local responsiveModule = require(parent.Responsive)
 local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), iconButton (ref), iconSize (ref)
 	local var3 = useTokens()
 	local headingSmall = var3.Typography.HeadingSmall
@@ -17,7 +17,7 @@ return function(p0) --[[ line: 19 ]]
 		Size = if fFlagLuaAppChartsFilterOptionTextTag then nil else UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p0.LayoutOrder,
-		[reactModule.Change.AbsoluteSize] = function(p1) --[[ line: 31 ]]
+		[reactModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: p0 (ref)
 			p0.onHeightChanged(p1.AbsoluteSize.Y)
 		end

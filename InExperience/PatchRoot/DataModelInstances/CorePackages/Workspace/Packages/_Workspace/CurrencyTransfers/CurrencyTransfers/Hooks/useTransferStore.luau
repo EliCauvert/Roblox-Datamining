@@ -3,7 +3,7 @@ local reactModule = require(currencyTransfers.Parent.React)
 local transferContextModule = require(currencyTransfers.Contexts.TransferContext)
 local _ = require(currencyTransfers.Stores.createTransferStore)
 
-return function() --[[ line: 9 | named "useTransferStore" ]]
+return function()
 	-- upvalues: reactModule (ref), transferContextModule (ref)
 	local var3 = reactModule.useContext(transferContextModule)
 	

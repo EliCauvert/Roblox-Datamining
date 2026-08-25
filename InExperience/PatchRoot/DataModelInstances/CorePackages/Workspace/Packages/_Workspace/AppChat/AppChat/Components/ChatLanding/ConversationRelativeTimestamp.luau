@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 
-return function(p0) --[[ line: 12 | named "ConversationRelativeTimestamp" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	return reactModule.createElement(foundationModule.View, { tag = "row auto-xy align-y-center gap-xsmall" }, {
 		timestamp = reactModule.createElement(foundationModule.Text, {

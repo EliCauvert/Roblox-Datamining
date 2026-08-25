@@ -20,7 +20,7 @@ local t = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function reportSingleResult(p0, p1, p2, p3, p4) --[[ line: 43 ]]
+local function reportSingleResult(p0, p1, p2, p3, p4)
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		customFields = {
@@ -34,7 +34,7 @@ local function reportSingleResult(p0, p1, p2, p3, p4) --[[ line: 43 ]]
 	})
 end
 
-local function getMissingData(p5, p6) --[[ line: 62 ]]
+local function getMissingData(p5, p6)
 	-- upvalues: fetchAllDesiredDataModule (ref)
 	local t = {}
 	
@@ -46,7 +46,7 @@ local function getMissingData(p5, p6) --[[ line: 62 ]]
 	return t
 end
 
-local function _(p7, p8, p9) --[[ line: 73 | named "complete" ]]
+local function _(p7, p8, p9)
 	-- upvalues: reportSingleResult (ref)
 	local var14 = p9:complete()
 	reportSingleResult(p7, p8, var14.status, var14.telemetryContext, var14.duration)
@@ -54,7 +54,7 @@ local function _(p7, p8, p9) --[[ line: 73 | named "complete" ]]
 	return var14
 end
 
-return function(p10, p11, p12) --[[ line: 79 | named "ValidationTestWrapper" ]]
+return function(p10, p11, p12)
 	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
 	local v
 	local validationModule = validationModuleLoaderModule.getValidationModule(p10)
@@ -112,7 +112,7 @@ return function(p10, p11, p12) --[[ line: 79 | named "ValidationTestWrapper" ]]
 				
 				return status
 			end
-			ok, status = pcall(function() --[[ line: 134 ]]
+			ok, status = pcall(function()
 				-- upvalues: validationModule (ref), var16 (ref), p11 (ref)
 				validationModule.run(var16, p11)
 			end)

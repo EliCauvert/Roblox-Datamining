@@ -17,7 +17,7 @@ local t_1 = {
 	plural = "Feature.RobloxSubscription.Label.months"
 }
 
-return function(p0, p1) --[[ line: 35 | named "getPeriodTypeDisplayLabel" ]]
+return function(p0, p1)
 	-- upvalues: t (ref), t_1 (ref)
 	local var2 = t[string.lower(p0)] or t_1
 	

@@ -1,9 +1,9 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p0) --[[ line: 5 | named "once" ]]
+local function _(p0)
 	local var1 = false
 	
-	return function() --[[ line: 7 | named "notAgain" ]]
+	return function()
 		-- upvalues: var1 (write), p0 (ref)
 		if not var1 then
 			var1 = true
@@ -12,7 +12,7 @@ local function _(p0) --[[ line: 5 | named "once" ]]
 	end
 end
 
-local function disposeChildren(p1) --[[ line: 16 ]]
+local function disposeChildren(p1)
 	local t = {}
 	
 	for i = #p1, 1, -1 do
@@ -27,12 +27,12 @@ local function disposeChildren(p1) --[[ line: 16 ]]
 	end
 end
 
-return function(p2) --[[ line: 32 | named "createResource" ]]
+return function(p2)
 	-- upvalues: disposeChildren (ref)
 	local var3 = false
 	local t = {}
 	
-	local function dispose() --[[ line: 37 ]]
+	local function dispose()
 		-- upvalues: var3 (write), t (write), disposeChildren (copy)
 		if not var3 then
 			var3 = true
@@ -42,7 +42,7 @@ return function(p2) --[[ line: 32 | named "createResource" ]]
 		end
 	end
 	
-	local function _(p3) --[[ line: 46 | named "capture" ]]
+	local function _(p3)
 		-- upvalues: var3 (write), t (write)
 		if var3 then
 			error("attempted to track a child after the resource has been disposed")
@@ -54,13 +54,13 @@ return function(p2) --[[ line: 32 | named "createResource" ]]
 	
 	local var6 = false
 	
-	return function() --[[ line: 7 | named "notAgain" ]]
+	return function()
 		-- upvalues: var6 (write), dispose (ref)
 		if not var6 then
 			var6 = true
 			dispose()
 		end
-	end, (function(p5, ...) --[[ line: 59 | named "handleError" ]]
+	end, (function(p5, ...)
 		-- upvalues: var3 (write), t (write), disposeChildren (copy)
 		if not p5 then
 			if not var3 then
@@ -72,7 +72,7 @@ return function(p2) --[[ line: 32 | named "createResource" ]]
 			error(select(1, ...))
 		end
 		return ...
-	end)(pcall(p2, function(p4, ...) --[[ line: 54 | named "own" ]]
+	end)(pcall(p2, function(p4, ...)
 		-- upvalues: var3 (write), t (write)
 		if var3 then
 			error("attempted to track a child after the resource has been disposed")

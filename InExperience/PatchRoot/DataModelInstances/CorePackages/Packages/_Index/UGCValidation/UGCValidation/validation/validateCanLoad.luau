@@ -3,9 +3,9 @@ local parent = script.Parent.Parent
 local analyticsModule = require(parent.Analytics)
 local _ = require(parent.util.Types)
 
-return function(p0, p1) --[[ line: 9 | named "validateCanLoad" ]]
+return function(p0, p1)
 	-- upvalues: UGCValidationService (ref), analyticsModule (ref)
-	local ok, status = pcall(function() --[[ line: 10 ]]
+	local ok, status = pcall(function()
 		-- upvalues: UGCValidationService (copy), p0 (ref)
 		return UGCValidationService:CanLoadAsset(p0)
 	end)

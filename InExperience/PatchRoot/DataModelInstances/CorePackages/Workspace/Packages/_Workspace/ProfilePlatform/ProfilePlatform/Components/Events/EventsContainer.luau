@@ -26,7 +26,7 @@ local roactNavigationModule = require(parent.RoactNavigation)
 local eventsSkeletonModule = require(profilePlatform.Components.Events.EventsSkeleton)
 local fFlagEnableCommunityProfileLoadingSkeletonsModule = require(profilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 
-return function(p0) --[[ line: 63 | named "EventsContainer" ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useRoactService (ref), appGame (ref), useNavigation (ref), useApolloClient (ref), useProfileAnalyticsContextModule (ref), reactModule (ref), createGroupEventsStoreModule (ref), useSignalState (ref), eventNamesModule (ref), virtualEventsModule (ref), cryoModule (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), navigateToEventDetails (ref), appPage (ref), launchGame (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), horizontalPageMargin (ref), roactNavigationModule (ref), eventsSkeletonModule (ref), eventsListCarousel (ref)
 	local var13 = useProfileJsonComponentModule(enumsModule.Components.Events)
 	local var14 = tonumber(useProfileWrapperContextModule().profileId)
@@ -34,12 +34,12 @@ return function(p0) --[[ line: 63 | named "EventsContainer" ]]
 	local var16 = useNavigation()
 	local var17 = useApolloClient()
 	local var18 = useProfileAnalyticsContextModule()
-	local var19 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: createGroupEventsStoreModule (copy), var14 (ref)
 		return createGroupEventsStoreModule(var14)
 	end, { var14 })
 	local var20 = useSignalState(var19.getEvents)
-	local var21 = reactModule.useMemo(function() --[[ line: 80 ]]
+	local var21 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), var13 (ref)
 		local t = {}
 		
@@ -68,7 +68,7 @@ return function(p0) --[[ line: 63 | named "EventsContainer" ]]
 		layoutOrder = p0.layoutOrder
 	}, {
 		NavEvents = reactModule.createElement(roactNavigationModule.NavigationEvents, {
-			onDidFocus = function() --[[ line: 188 ]]
+			onDidFocus = function()
 				-- upvalues: var19 (ref)
 				var19.refetch()
 			end
@@ -77,7 +77,7 @@ return function(p0) --[[ line: 63 | named "EventsContainer" ]]
 			peekViewFormat = true,
 			referralSource = "communityPeekView",
 			virtualEvents = var21,
-			onTileActivated = reactModule.useCallback(function(p1) --[[ line: 141 ]]
+			onTileActivated = reactModule.useCallback(function(p1)
 				-- upvalues: var18 (ref), eventNamesModule (copy), fFlagLuaAppSduiEventDetailsEnabled (copy), navigateToEventDetails (copy), var16 (ref), appPage (copy)
 				var18.fireAnalyticsEvent(eventNamesModule.EventOpened, { virtualEventId = p1.id })
 				
@@ -90,7 +90,7 @@ return function(p0) --[[ line: 63 | named "EventsContainer" ]]
 					extraProps = { currentTime = DateTime.now(), virtualEventId = p1.id }
 				})
 			end, { var16 }),
-			onRsvpChanged = reactModule.useCallback(function(p2, p3) --[[ line: 110 ]]
+			onRsvpChanged = reactModule.useCallback(function(p2, p3)
 				-- upvalues: var18 (ref), eventNamesModule (copy), virtualEventsModule (copy), var19 (ref), var17 (ref), cryoModule (copy)
 				var18.fireAnalyticsEvent(eventNamesModule.EventRSVP, { virtualEventId = p2.id, status = p3 })
 				virtualEventsModule.fireVirtualEventRSVP({
@@ -103,18 +103,18 @@ return function(p0) --[[ line: 63 | named "EventsContainer" ]]
 				var17.cache:modify({
 					id = "VirtualEvent:" .. p2.id,
 					fields = {
-						userRsvpStatus = function(_, _, _) --[[ line: 126 ]]
+						userRsvpStatus = function(_, _, _)
 							-- upvalues: p3 (ref)
 							return p3
 						end,
-						rsvpCounters = function(_, p4, _) --[[ line: 129 ]]
+						rsvpCounters = function(_, p4, _)
 							-- upvalues: p3 (ref), cryoModule (copy)
 							return cryoModule.Dictionary.join(p4, { going = p4.going + (if p3 == "going" then 1 else -1) })
 						end
 					}
 				})
 			end, { var19 }),
-			onJoinEvent = reactModule.useCallback(function(p5) --[[ line: 157 ]]
+			onJoinEvent = reactModule.useCallback(function(p5)
 				-- upvalues: var18 (ref), eventNamesModule (copy), virtualEventsModule (copy), launchGame (copy), var15 (ref)
 				var18.fireAnalyticsEvent(eventNamesModule.EventJoined, { virtualEventId = p5.id })
 				virtualEventsModule.fireVirtualEventJoined({
@@ -124,7 +124,7 @@ return function(p0) --[[ line: 63 | named "EventsContainer" ]]
 				})
 				launchGame(p5.placeId, nil, { eventId = p5.id }, var15)
 			end, {}),
-			onEventImpression = reactModule.useCallback(function(p6) --[[ line: 169 ]]
+			onEventImpression = reactModule.useCallback(function(p6)
 				-- upvalues: virtualEventsModule (copy)
 				virtualEventsModule.fireVirtualEventImpression({
 					channel = "communityPeekView",

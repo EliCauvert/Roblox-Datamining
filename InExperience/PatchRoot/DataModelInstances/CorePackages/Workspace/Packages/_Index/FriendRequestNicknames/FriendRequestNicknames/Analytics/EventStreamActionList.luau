@@ -3,7 +3,7 @@ local enums = require(script:FindFirstAncestor("FriendRequestNicknames").Parent.
 local contexts = enums.Contexts
 local eventTypes = enums.EventTypes
 
-local var1 = function(p0) --[[ line: 10 ]]
+local var1 = function(p0)
 	return p0
 end
 

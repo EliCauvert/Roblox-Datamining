@@ -10,15 +10,15 @@ local kind = graphQLModule.Kind
 local print = graphQLModule.print
 local parseLiteral = nil
 
-local function _(p0, p1) --[[ line: 32 | named "parseFloat" ]]
+local function _(p0, p1)
 	return tonumber(p0, p1)
 end
 
-local function identity(p2) --[[ line: 36 ]]
+local function identity(p2)
 	return p2
 end
 
-local function ensureObject(p3) --[[ line: 40 ]]
+local function ensureObject(p3)
 	-- upvalues: boolean (ref), array (ref), error (ref)
 	if boolean.toJSBoolean(if typeof(p3) == "table" then if p3 ~= nil then array.isArray(p3) else true else true) then
 		error(error.new(("JSONObject cannot represent non-object value: %s"):format(tostring(p3))))
@@ -26,10 +26,10 @@ local function ensureObject(p3) --[[ line: 40 ]]
 	return p3
 end
 
-local _ = function(p4, p5, p6) --[[ line: 47 | named "parseObject" ]]
+local _ = function(p4, p5, p6)
 	-- upvalues: array (ref), parseLiteral (write)
 	local t = {}
-	array.forEach(p5.fields, function(p7) --[[ line: 49 ]]
+	array.forEach(p5.fields, function(p7)
 		-- upvalues: t (ref), parseLiteral (copy), p4 (ref), p6 (ref)
 		t[p7.name.value] = parseLiteral(p4, p7.value, p6)
 	end)
@@ -37,7 +37,7 @@ local _ = function(p4, p5, p6) --[[ line: 47 | named "parseObject" ]]
 	return t
 end
 
-parseLiteral = function(p8, p9, p10) --[[ line: 56 | named "parseLiteral" ]]
+parseLiteral = function(p8, p9, p10)
 	-- upvalues: kind (ref), array (ref), parseLiteral (write), boolean (ref), error (ref), print (ref)
 	local kind_1 = p9.kind
 	
@@ -47,14 +47,14 @@ parseLiteral = function(p8, p9, p10) --[[ line: 56 | named "parseLiteral" ]]
 		return tonumber(p9.value, nil)
 	elseif kind_1 == kind.OBJECT then
 		local t = {}
-		array.forEach(p9.fields, function(p11) --[[ line: 49 ]]
+		array.forEach(p9.fields, function(p11)
 			-- upvalues: t (ref), parseLiteral (copy), p8 (ref), p10 (ref)
 			t[p11.name.value] = parseLiteral(p8, p11.value, p10)
 		end)
 		
 		return t
 	elseif kind_1 == kind.LIST then
-		return array.map(p9.values, function(p12) --[[ line: 65 ]]
+		return array.map(p9.values, function(p12)
 			-- upvalues: parseLiteral (copy), p8 (ref), p10 (ref)
 			return parseLiteral(p8, p12, p10)
 		end)
@@ -74,7 +74,7 @@ local var6 = graphQLScalarType.new({
 	specifiedByUrl = "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf",
 	serialize = identity,
 	parseValue = identity,
-	parseLiteral = function(p13, p14) --[[ line: 86 ]]
+	parseLiteral = function(p13, p14)
 		-- upvalues: parseLiteral (write)
 		return parseLiteral("JSON", p13, p14)
 	end
@@ -87,14 +87,14 @@ t.GraphQLJSONObject = graphQLScalarType.new({
 	specifiedByUrl = "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf",
 	serialize = ensureObject,
 	parseValue = ensureObject,
-	parseLiteral = function(p15, p16) --[[ line: 99 ]]
+	parseLiteral = function(p15, p16)
 		-- upvalues: kind (ref), error (ref), print (ref), array (ref), parseLiteral (write)
 		if p15.kind ~= kind.OBJECT then
 			error(error.new(("JSONObject cannot represent non-object value: %s"):format(print(p15))))
 		end
 		local t = {}
 		local var10 = "JSONObject"
-		array.forEach(p15.fields, function(p17) --[[ line: 49 ]]
+		array.forEach(p15.fields, function(p17)
 			-- upvalues: t (ref), parseLiteral (copy), var10 (ref), p16 (ref)
 			t[p17.name.value] = parseLiteral(var10, p17.value, p16)
 		end)

@@ -22,7 +22,7 @@ local t_1 = {
 
 return {
 	PresenceType = t,
-	GetIcon = function(p0) --[[ line: 36 ]]
+	GetIcon = function(p0)
 		-- upvalues: t_1 (ref), reactModule (ref), imageSetLabel (ref), images (ref), iconSize (ref)
 		local var5 = t_1[p0]
 		

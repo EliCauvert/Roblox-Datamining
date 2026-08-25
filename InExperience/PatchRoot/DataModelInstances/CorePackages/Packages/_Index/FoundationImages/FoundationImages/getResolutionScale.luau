@@ -8,7 +8,7 @@ end
 if guiService:IsTenFootInterface() then
 	status = 3
 end
-return function() --[[ line: 18 | named "getResolutionScale" ]]
+return function()
 	-- upvalues: getImageSetDataModule (ref), status (write)
 	local _, var2 = getImageSetDataModule(status)
 	

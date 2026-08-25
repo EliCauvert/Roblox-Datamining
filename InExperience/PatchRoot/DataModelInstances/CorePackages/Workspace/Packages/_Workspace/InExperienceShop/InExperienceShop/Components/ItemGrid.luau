@@ -6,10 +6,10 @@ local itemRowModule = require(inExperienceShop.Components.ItemRow)
 local buildItemGridRows = require(inExperienceShop.Components.buildItemGridRows).buildItemGridRows
 local _ = require(inExperienceShop.Types)
 
-return function(p0) --[[ line: 32 | named "ItemGrid" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), buildItemGridRows (ref), itemRowModule (ref), view (ref)
 	local itemsPerRow = p0.itemsPerRow
-	local var3 = reactModule.useMemo(function() --[[ line: 36 ]]
+	local var3 = reactModule.useMemo(function()
 		-- upvalues: buildItemGridRows (copy), p0 (ref), itemsPerRow (ref)
 		return buildItemGridRows(p0.items, itemsPerRow, p0.isFeaturedDoubleWidthRobux)
 	end, { p0.items, itemsPerRow, p0.isFeaturedDoubleWidthRobux })
@@ -18,13 +18,13 @@ return function(p0) --[[ line: 32 | named "ItemGrid" ]]
 		tag = `col size-full-0 auto-y {p0.gap or "gap-medium"}`,
 		LayoutOrder = p0.LayoutOrder,
 		ref = p0.gridRef,
-		onAbsoluteSizeChanged = if p0.onGridLayoutChange ~= nil then nil else reactModule.useCallback(function() --[[ line: 67 ]]
+		onAbsoluteSizeChanged = if p0.onGridLayoutChange ~= nil then nil else reactModule.useCallback(function()
 			-- upvalues: p0 (ref)
 			if p0.onGridLayoutChange then
 				p0.onGridLayoutChange()
 			end
 		end, { p0.onGridLayoutChange })
-	}, reactModule.useMemo(function() --[[ line: 41 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: var3 (ref), reactModule (copy), itemRowModule (copy), itemsPerRow (ref), p0 (ref)
 		local t = {}
 		

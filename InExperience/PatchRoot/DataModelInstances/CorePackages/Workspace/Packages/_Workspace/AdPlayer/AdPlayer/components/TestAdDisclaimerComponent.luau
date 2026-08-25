@@ -9,7 +9,7 @@ local t = {
 	ineligibleDisclaimer = "CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer"
 }
 
-return function(p0) --[[ line: 18 | named "TestAdDisclaimerComponent" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useTokens (ref), reactModule (ref), text (ref)
 	local var3 = useLocalization(t)
 	

@@ -63,7 +63,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local chevronLargeLeft = foundationModule.Enums.IconName.ChevronLargeLeft
 local frozen = table.freeze({})
 
-return function() --[[ line: 94 | named "MomentsGridPage" ]]
+return function()
 	-- upvalues: useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useStyle (ref), useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), profileMomentsGridMeTabTopInset (ref), useStatusBarHeight (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), reactModule (ref), useUserProfilesFetch (ref), userProfilesModule (ref), useUserMomentsModule (ref), fFlagMomentsProfileGridInfiniteLoad (ref), useLocalization (ref), textKeysModule (ref), useAppPolicy (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var27 (ref), navigateDown (ref), momentGridItemModule (ref), view (ref), iconButton (ref), chevronLargeLeft (ref), buttonSize (ref), userTile (ref), layoutMode (ref), fFlagProfileMomentsVideoPlaybackFix (ref), useNavigationFocus (ref), foundationModule (ref), scrollingGridView (ref), momentsCarouselMediaProviderModule (ref), frozen (ref), profileModalViewModule (ref), fullscreenPageWithSafeArea (ref)
 	local var35
 	local var29 = useNavigation()
@@ -81,12 +81,12 @@ return function() --[[ line: 94 | named "MomentsGridPage" ]]
 		var35 = nil
 	end
 	local var36 = if profileMomentsGridMeTabTopInset then useStatusBarHeight() else 0
-	local var37 = if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var33) else math.min(getSafeAreaSize(useScreenSize(), useSelector(function(p0) --[[ line: 113 ]]
+	local var37 = if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var33) else math.min(getSafeAreaSize(useScreenSize(), useSelector(function(p0)
 		return p0.GlobalGuiInset
 	end)).X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)
 	local var38 = if extraProps then extraProps.profileId else nil
 	local var39 = useUserProfilesFetch({
-		userIds = reactModule.useMemo(function() --[[ line: 126 ]]
+		userIds = reactModule.useMemo(function()
 			-- upvalues: var38 (ref)
 			return if var38 == nil then {} else { var38 }
 		end, { var38 }),
@@ -103,30 +103,30 @@ return function() --[[ line: 94 | named "MomentsGridPage" ]]
 	
 	if fFlagMomentsProfileGridInfiniteLoad then
 		var43 = useLocalization({ feedEndTitle = textKeysModule.MomentsFeedEndTitle })
-		var44 = useAppPolicy(function(p1) --[[ line: 151 ]]
+		var44 = useAppPolicy(function(p1)
 			return p1.getEnableContinuousLoad()
 		end)
 	end
 	local var45, var46 = reactModule.useState(nil)
 	local var47 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 160 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var47 (ref), moments (ref), var38 (ref), fireAnalyticsEvent (copy), eventNames (copy)
 		if not var47.current and #moments > 0 and var38 ~= nil then
 			var47.current = true
 			fireAnalyticsEvent(eventNames.ProfileScreenImpression, { userId = var38, momentsCount = tostring(#moments) })
 		end
 	end, { moments, var38 })
-	reactModule.useEffect(function() --[[ line: 170 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagProfileMomentsLoadFailureAnalyticsModule (copy), var42 (ref), var38 (ref), fireAnalyticsEvent (copy), eventNames (copy)
 		if not fFlagProfileMomentsLoadFailureAnalyticsModule and var42.hasFailed and var38 ~= nil then
 			fireAnalyticsEvent(eventNames.ProfileLoadFailed, { userId = var38 })
 		end
 	end, { var42.hasFailed, var38 })
-	local var48 = reactModule.useCallback(function() --[[ line: 178 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: var29 (ref)
 		var29.goBack()
 	end, { var29.goBack })
-	local var49 = reactModule.useCallback(function(p2) --[[ line: 182 ]]
+	local var49 = reactModule.useCallback(function(p2)
 		-- upvalues: moments (ref), var38 (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var27 (copy), var30 (ref), navigateDown (copy), var29 (ref), enumsModule (copy)
 		local var59 = moments[p2]
 		
@@ -153,27 +153,27 @@ return function() --[[ line: 94 | named "MomentsGridPage" ]]
 		end
 		var30(navigateDown(t_1))
 	end, { var29, var30, var38, moments })
-	local var50 = reactModule.useCallback(function(p3, p4) --[[ line: 212 ]]
+	local var50 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: reactModule (copy), momentGridItemModule (copy), var45 (ref), var38 (ref), var49 (ref), var46 (ref)
 		return reactModule.createElement(momentGridItemModule, {
 			moment = p3,
 			isActive = var45 == p4,
 			userId = var38,
 			index = p4,
-			onActivated = function() --[[ line: 218 ]]
+			onActivated = function()
 				-- upvalues: var49 (copy), p4 (ref)
 				var49(p4)
 			end,
-			onHoverChanged = function(p5) --[[ line: 221 ]]
+			onHoverChanged = function(p5)
 				-- upvalues: var46 (copy), p4 (ref)
-				var46(function(p6) --[[ line: 222 ]]
+				var46(function(p6)
 					-- upvalues: p5 (ref), p4 (copy)
 					return if p5 then p4 elseif p6 == p4 then nil else p6
 				end)
 			end
 		})
 	end, { var49, var45, var38 })
-	local var51 = reactModule.useCallback(function() --[[ line: 234 ]]
+	local var51 = reactModule.useCallback(function()
 		-- upvalues: reactModule (copy), view (copy)
 		return reactModule.createElement(view, { tag = "col align-x-center align-y-center grow size-full" })
 	end, {})
@@ -210,7 +210,7 @@ return function() --[[ line: 94 | named "MomentsGridPage" ]]
 			})
 		})
 	})
-	local var53 = reactModule.useMemo(function() --[[ line: 276 ]]
+	local var53 = reactModule.useMemo(function()
 		-- upvalues: moments (ref)
 		for i, v in moments do
 			if v.metadata.captureType == Enum.CaptureType.Video then
@@ -273,7 +273,7 @@ return function() --[[ line: 94 | named "MomentsGridPage" ]]
 			topBarHeight = 56,
 			viewWidth = var37,
 			navigateBack = var48,
-			renderTopBar = function() --[[ line: 365 ]]
+			renderTopBar = function()
 				-- upvalues: reactModule (copy), view (copy), var58 (ref), var32 (ref), var52 (ref)
 				return reactModule.createElement(view, {
 					tag = "col",
@@ -281,7 +281,7 @@ return function() --[[ line: 94 | named "MomentsGridPage" ]]
 					padding = { top = UDim.new(0, var32.Padding.XLarge) }
 				}, { Header = var52 })
 			end,
-			renderContent = function() --[[ line: 374 ]]
+			renderContent = function()
 				-- upvalues: reactModule (copy), view (copy), var58 (ref), var57 (ref)
 				return reactModule.createElement(view, {
 					tag = "col size-full",

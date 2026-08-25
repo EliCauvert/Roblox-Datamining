@@ -7,27 +7,27 @@ local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperi
 local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
 local recyclableViewRecordModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRecord)
 
-local function _() --[[ line: 13 | named "viewType" ]]
+local function _()
 	-- upvalues: createRecyclableViewModule (ref)
-	return createRecyclableViewModule(function() --[[ line: 14 ]]
+	return createRecyclableViewModule(function()
 		return nil
 	end, { readiness = "ReadyOnAssignment" })
 end
 
 return {
-	recyclingScopeHighWater = function(p0, p1) --[[ line: 21 ]]
+	recyclingScopeHighWater = function(p0, p1)
 		-- upvalues: recyclingRuntimeModule (ref), createRecyclableViewModule (ref)
 		local var8 = 0
-		local var9 = recyclingRuntimeModule.new(function() --[[ line: 23 ]]
+		local var9 = recyclingRuntimeModule.new(function()
 			-- upvalues: var8 (write)
 			var8 += 1
 		end)
 		local recyclingScope = var9.getRecyclingScope({})
 		local var11 = recyclingScope == var9.getRecyclingScope({})
-		local var12 = createRecyclableViewModule(function() --[[ line: 14 ]]
+		local var12 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local var13 = createRecyclableViewModule(function() --[[ line: 29 ]]
+		local var13 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
 		local var14 = p1()
@@ -78,7 +78,7 @@ return {
 		local count_1 = #recyclingScope.getScopeInventory()
 		local var23 = 0
 		
-		for i_5 in var9.getHostChildren(function() --[[ line: 78 ]]
+		for i_5 in var9.getHostChildren(function()
 			return nil
 		end) do
 			var23 += 1
@@ -96,19 +96,19 @@ return {
 			completionPhaseCounts = { scopePublication = { synchronousBatch = 1 } }
 		}
 	end,
-	compositionChurn = function(p2) --[[ line: 102 ]]
+	compositionChurn = function(p2)
 		-- upvalues: viewRecyclerModule (ref), recyclableViewRecordModule (ref), signalsExperimentalModule (ref), compositionPlacementManagerModule (ref), createRecyclableViewModule (ref), signalsModule (ref)
 		local var24 = 1
 		local var25 = 0
 		local var26 = viewRecyclerModule.Adapter.createRecyclingScope({
 			adapter = {
-				create = function(p3) --[[ line: 107 ]]
+				create = function(p3)
 					-- upvalues: recyclableViewRecordModule (copy), var24 (write), var25 (write)
 					local var36 = recyclableViewRecordModule(var24, p3, nil)
 					var24 += 1
 					local set = var36.set
 					
-					function var36.set(p4) --[[ line: 111 ]]
+					function var36.set(p4)
 						-- upvalues: var25 (copy), set (ref)
 						var25 += 1
 						set(p4)
@@ -116,12 +116,12 @@ return {
 					
 					return var36
 				end,
-				destroy = function() --[[ line: 117 ]] end,
+				destroy = function() end,
 				batch = signalsExperimentalModule.batch
 			}
 		})
-		local var27 = compositionPlacementManagerModule.new(var26, function() --[[ line: 121 ]] end)
-		local var28 = createRecyclableViewModule(function() --[[ line: 14 ]]
+		local var27 = compositionPlacementManagerModule.new(var26, function() end)
+		local var28 = createRecyclableViewModule(function()
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
 		local list = table.create(p2)
@@ -140,7 +140,7 @@ return {
 		local var35 = 1
 		
 		return {
-			run = function() --[[ line: 142 ]]
+			run = function()
 				-- upvalues: var34 (write), p2 (ref), list (ref), var35 (write), var27 (ref), var33 (write)
 				var34 += 1
 				
@@ -151,15 +151,15 @@ return {
 				var33 += 1
 				var35 = var35 % p2 + 1
 			end,
-			getAssignmentUpdates = function() --[[ line: 154 ]]
+			getAssignmentUpdates = function()
 				-- upvalues: var25 (write)
 				return var25
 			end,
-			getFlushes = function() --[[ line: 157 ]]
+			getFlushes = function()
 				-- upvalues: var33 (write)
 				return var33
 			end,
-			destroy = function() --[[ line: 160 ]]
+			destroy = function()
 				-- upvalues: var27 (ref), var26 (ref), list_1 (ref)
 				var27.destroy()
 				var26.destroy()

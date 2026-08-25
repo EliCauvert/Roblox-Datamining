@@ -14,7 +14,7 @@ local disallowStickyShortcutBarOnNotLoggedIn = game:DefineFastFlag("DisallowStic
 local fFlagUseSignalsForAuthenticationStatus = require(parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
 local var6 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
-local function selectUserLoggedIn(p0) --[[ line: 24 ]]
+local function selectUserLoggedIn(p0)
 	-- upvalues: loginStatus (ref)
 	return p0.AuthenticationStatus and p0.AuthenticationStatus.status == loginStatus.LOGGED_IN
 end
@@ -23,7 +23,7 @@ local useAppShortcutBarHeight = require(appShortcutBar.Hooks).useAppShortcutBarH
 local getShortcutBarStatusStoreModule = require(appShortcutBar.Stores.GetShortcutBarStatusStore)
 local appShortcut = require(appShortcutBar.Components.AppShortcut).AppShortcut
 
-function AppStickyShortcutBar(p1) --[[ line: 34 ]]
+function AppStickyShortcutBar(p1)
 	-- upvalues: getShortcutBarStatusStoreModule (ref), useTokens (ref), useAppShortcutBarHeight (ref), responsiveModule (ref), useFocusedTextBox (ref), disallowStickyShortcutBarOnNotLoggedIn (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var6 (ref), loginStatus (ref), useSelector (ref), selectUserLoggedIn (ref), focusNavigationEventNameEnum (ref), reactModule (ref), appShortcut (ref)
 	local var9 = getShortcutBarStatusStoreModule(false)
 	local var10 = useTokens()
@@ -41,7 +41,7 @@ function AppStickyShortcutBar(p1) --[[ line: 34 ]]
 		end
 	end
 	local var15 = if p1.items then if #p1.items ~= 0 then #p1.items == 1 or (var13 or disallowStickyShortcutBarOnNotLoggedIn and not var14) else true else not p1.items
-	reactModule.useEffect(function() --[[ line: 56 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), var15 (ref)
 		var9.setShortcutBarVisible(not var15)
 	end, { var15 })

@@ -17,17 +17,17 @@ local virtualEventsUrlPatternsModule = require(script.Parent.UrlPatterns.Virtual
 local platformAuthPatternsModule = require(script.Parent.UrlPatterns.PlatformAuthPatterns)
 local t = {}
 
-local function splitAndTrim(p0, p1, p2) --[[ line: 28 ]]
+local function splitAndTrim(p0, p1, p2)
 	-- upvalues: stringSplit (ref), cryoModule (ref), stringTrim (ref)
-	return cryoModule.List.filter(cryoModule.List.map(stringSplit(p0, p1, p2), function(p3) --[[ line: 30 ]]
+	return cryoModule.List.filter(cryoModule.List.map(stringSplit(p0, p1, p2), function(p3)
 		-- upvalues: stringTrim (copy)
 		return stringTrim(p3)
-	end), function(p4) --[[ line: 33 ]]
+	end), function(p4)
 		return #p4 > 0
 	end)
 end
 
-local function validateValueType(p5) --[[ line: 44 ]]
+local function validateValueType(p5)
 	local var24 = type(p5)
 	
 	if var24 == "string" then
@@ -47,13 +47,13 @@ local function validateValueType(p5) --[[ line: 44 ]]
 	return true
 end
 
-local function _(p6) --[[ line: 64 | named "assertPlaceholder" ]]
+local function _(p6)
 	if string.sub(p6, 1, 1) == "{" then
 		assert(string.sub(p6, -1, -1) == "}", "invalid pattern: placeholder items should end with `}`")
 	end
 end
 
-local function assertElementIsValid(p7, p8) --[[ line: 71 ]]
+local function assertElementIsValid(p7, p8)
 	-- upvalues: validateValueType (ref)
 	assert(type(p7) == "table", "invalid pattern: elements should all be tables")
 	
@@ -81,7 +81,7 @@ local function assertElementIsValid(p7, p8) --[[ line: 71 ]]
 	end
 end
 
-local function assertPatternIsValid(p9) --[[ line: 102 ]]
+local function assertPatternIsValid(p9)
 	-- upvalues: assertElementIsValid (ref)
 	assert(type(p9.base) == "string", "invalid pattern: base should be a string")
 	assert(#p9.base > 0, "invalid pattern: base should not be empty")
@@ -103,9 +103,9 @@ local function assertPatternIsValid(p9) --[[ line: 102 ]]
 	end
 end
 
-local _ = function(p10, p11) --[[ line: 127 | named "buildElementsFromString" ]]
+local _ = function(p10, p11)
 	-- upvalues: splitAndTrim (ref), cryoModule (ref), stringTrim (ref), stringSplit (ref)
-	return cryoModule.List.map(splitAndTrim(p10, if p11 then "&" else "/"), function(p12) --[[ line: 130 ]]
+	return cryoModule.List.map(splitAndTrim(p10, if p11 then "&" else "/"), function(p12)
 		-- upvalues: stringTrim (copy), p11 (ref), stringSplit (copy)
 		local var26 = nil
 		local var27 = stringTrim(p12)
@@ -151,7 +151,7 @@ local _ = function(p10, p11) --[[ line: 127 | named "buildElementsFromString" ]]
 	end)
 end
 
-local function buildQueryStringFromTable(p13) --[[ line: 173 ]]
+local function buildQueryStringFromTable(p13)
 	local t = {}
 	
 	for i, v in pairs(p13) do
@@ -160,7 +160,7 @@ local function buildQueryStringFromTable(p13) --[[ line: 173 ]]
 	return table.concat(t, "&")
 end
 
-local function simplifyPattern(p14) --[[ line: 182 ]]
+local function simplifyPattern(p14)
 	-- upvalues: urlBaseModule (ref), splitAndTrim (ref), cryoModule (ref), stringTrim (ref), stringSplit (ref), buildQueryStringFromTable (ref)
 	local base = p14.base
 	local path = p14.path
@@ -172,7 +172,7 @@ local function simplifyPattern(p14) --[[ line: 182 ]]
 	end
 	if type(path) == "string" then
 		local var35 = false
-		path = cryoModule.List.map(splitAndTrim(path, "/"), function(p15) --[[ line: 130 ]]
+		path = cryoModule.List.map(splitAndTrim(path, "/"), function(p15)
 			-- upvalues: stringTrim (copy), var35 (ref), stringSplit (copy)
 			local var26 = nil
 			local var27 = stringTrim(p15)
@@ -222,7 +222,7 @@ local function simplifyPattern(p14) --[[ line: 182 ]]
 	end
 	if type(query) == "string" then
 		local var36 = true
-		query = cryoModule.List.map(splitAndTrim(query, "&"), function(p16) --[[ line: 130 ]]
+		query = cryoModule.List.map(splitAndTrim(query, "&"), function(p16)
 			-- upvalues: stringTrim (copy), var36 (ref), stringSplit (copy)
 			local var26 = nil
 			local var27 = stringTrim(p16)
@@ -269,7 +269,7 @@ local function simplifyPattern(p14) --[[ line: 182 ]]
 	end
 	if type(hash) == "string" then
 		local var37 = false
-		hash = cryoModule.List.map(splitAndTrim(hash, "/"), function(p17) --[[ line: 130 ]]
+		hash = cryoModule.List.map(splitAndTrim(hash, "/"), function(p17)
 			-- upvalues: stringTrim (copy), var37 (ref), stringSplit (copy)
 			local var26 = nil
 			local var27 = stringTrim(p17)
@@ -317,12 +317,12 @@ local function simplifyPattern(p14) --[[ line: 182 ]]
 	return { base = base, path = path, query = query, hash = hash }
 end
 
-local function concatValues(_, p18) --[[ line: 214 ]]
+local function concatValues(_, p18)
 	-- upvalues: cryoModule (ref), splitAndTrim (ref)
 	return table.concat(u987, if p18 then "&" else "/")
 end
 
-local function resolveElement(p19, p20, p21) --[[ line: 227 ]]
+local function resolveElement(p19, p20, p21)
 	-- upvalues: validateValueType (ref), cryoModule (ref), encodeURIComponentModule (ref), concatValues (ref)
 	if p20 == nil then
 		p20 = {}
@@ -349,7 +349,7 @@ local function resolveElement(p19, p20, p21) --[[ line: 227 ]]
 	if type(value) ~= "table" then
 		value = { value }
 	end
-	value = cryoModule.List.map(value, function(p22) --[[ line: 257 ]]
+	value = cryoModule.List.map(value, function(p22)
 		-- upvalues: encodeURIComponentModule (copy)
 		return encodeURIComponentModule(tostring(p22))
 	end)
@@ -358,7 +358,7 @@ local function resolveElement(p19, p20, p21) --[[ line: 227 ]]
 		if p19.collect == "csv" then
 			value = { table.concat(value, "%2C") }
 		end
-		value = cryoModule.List.map(value, function(p23) --[[ line: 265 ]]
+		value = cryoModule.List.map(value, function(p23)
 			-- upvalues: encodeURIComponentModule (copy), p19 (ref)
 			return encodeURIComponentModule(p19.name) .. "=" .. p23
 		end)
@@ -366,20 +366,20 @@ local function resolveElement(p19, p20, p21) --[[ line: 227 ]]
 	return concatValues(value, p21)
 end
 
-local function resolveElementList(p24, p25, p26) --[[ line: 272 ]]
+local function resolveElementList(p24, p25, p26)
 	-- upvalues: cryoModule (ref), resolveElement (ref), concatValues (ref)
-	return concatValues(cryoModule.List.map(p24 or {}, function(p27) --[[ line: 273 ]]
+	return concatValues(cryoModule.List.map(p24 or {}, function(p27)
 		-- upvalues: resolveElement (copy), p25 (ref), p26 (ref)
 		return resolveElement(p27, p25, p26)
 	end), p26)
 end
 
-function t.new(p28) --[[ line: 308 ]]
+function t.new(p28)
 	-- upvalues: simplifyPattern (ref), assertPatternIsValid (ref), stringTrim (ref), resolveElementList (ref)
 	p28 = simplifyPattern(p28)
 	assertPatternIsValid(p28)
 	
-	return function(p29, p30) --[[ line: 311 ]]
+	return function(p29, p30)
 		-- upvalues: stringTrim (copy), p28 (write), resolveElementList (copy)
 		local var38 = stringTrim(p28.base, "/", { right = true })
 		local var39 = resolveElementList(p28.path, p29, false)
@@ -411,7 +411,7 @@ function t.new(p28) --[[ line: 308 ]]
 	end
 end
 
-function t.fromString(p31) --[[ line: 347 ]]
+function t.fromString(p31)
 	-- upvalues: stringSplit (ref), t (ref), stringTrim (ref)
 	local var42 = stringSplit(p31, ":", 2)
 	
@@ -438,7 +438,7 @@ function t.fromString(p31) --[[ line: 347 ]]
 	})
 end
 
-function t.addQueryString(p32, p33) --[[ line: 376 ]]
+function t.addQueryString(p32, p33)
 	-- upvalues: stringTrim (ref), cryoModule (ref), t (ref)
 	local var49 = stringTrim(p32)
 	local matchIndex = string.find(var49, "%?")
@@ -448,7 +448,7 @@ function t.addQueryString(p32, p33) --[[ line: 376 ]]
 	elseif matchIndex < #var49 then
 		var49 ..= "&"
 	end
-	return t.fromString(var49 .. table.concat(cryoModule.List.map(cryoModule.Dictionary.keys(p33), function(p34) --[[ line: 385 ]]
+	return t.fromString(var49 .. table.concat(cryoModule.List.map(cryoModule.Dictionary.keys(p33), function(p34)
 		return "{" .. p34 .. "}"
 	end), "&"))(p33)
 end

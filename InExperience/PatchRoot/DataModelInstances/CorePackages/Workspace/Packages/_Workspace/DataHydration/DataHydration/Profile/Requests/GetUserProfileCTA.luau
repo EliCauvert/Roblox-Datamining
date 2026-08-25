@@ -6,7 +6,7 @@ local var2 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.Http).Url.APIS_URL
 })()
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: myHttpRequestModule (ref), var2 (ref)
 	return myHttpRequestModule(var2, "POST", {
 		postBody = {
@@ -15,7 +15,7 @@ return function(p0) --[[ line: 15 ]]
 			profileIds = p0,
 			components = { { component = "Actions" } }
 		}
-	}):catch(function(p1) --[[ line: 26 ]]
+	}):catch(function(p1)
 		error(p1)
 	end)
 end

@@ -2,7 +2,7 @@
 local constantsModule = require(momentsCreation.Constants)
 local _ = require(momentsCreation.Parent.MomentsTypes)
 
-return function() --[[ line: 9 | named "makeDefaultStickerOverlayEdit" ]]
+return function()
 	-- upvalues: constantsModule (ref)
 	return {
 		stickerURI = nil,

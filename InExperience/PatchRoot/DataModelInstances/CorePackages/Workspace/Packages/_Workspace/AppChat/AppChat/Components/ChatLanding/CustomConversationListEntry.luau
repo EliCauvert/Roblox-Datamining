@@ -14,7 +14,7 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local pushRight = images["icons/navigation/pushRight"]
 
-function CustomConversationListEntry(p0) --[[ line: 32 ]]
+function CustomConversationListEntry(p0)
 	-- upvalues: useStyle (ref), getBoldTextThemeModule (ref), useTextSizeOffset (ref), useChatPagePaddingModule (ref), iconSize (ref), foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), imageSetLabel (ref), pushRight (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
 	local var8 = useStyle()
 	local var9 = getBoldTextThemeModule(var8)

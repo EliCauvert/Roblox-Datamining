@@ -6,21 +6,21 @@ local view = require(parent.Foundation).View
 local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
 local enumsModule = require(profilePlatform.Common.Enums)
 
-local function _(p0, p1, p2) --[[ line: 30 | named "interpolateHeight" ]]
+local function _(p0, p1, p2)
 	return p0 + (p1 - p0) * p2
 end
 
-return function(p3) --[[ line: 34 | named "CoverPhoto" ]]
+return function(p3)
 	-- upvalues: enumsModule (ref), useScreenSize (ref), reactModule (ref), view (ref), loadableImage (ref)
 	local var3 = p3.profileFormFactorInfo.formFactor == enumsModule.ProfileFormFactor.Wide
 	local var4 = p3.profileFormFactorInfo.formFactor == enumsModule.ProfileFormFactor.PeekView
 	local isFullView = p3.profileFormFactorInfo.isFullView
 	local var5 = useScreenSize()
-	local var6 = reactModule.useMemo(function() --[[ line: 40 ]]
+	local var6 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref)
 		return if var4 then 393 else 456
 	end, { var4, isFullView, p3.peekViewOpenPercent })
-	local var7 = reactModule.useMemo(function() --[[ line: 48 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), isFullView (ref), p3 (ref), var6 (ref)
 		return if var4 and not isFullView then p3.peekViewOpenPercent * 98 + 295 else var6
 	end, { var4, isFullView, p3.peekViewOpenPercent, var6 })

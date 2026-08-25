@@ -14,7 +14,7 @@ local _isViewable = nil
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 146 ]]
+function t.new(p0)
 	-- upvalues: t (ref), set (ref), map (ref)
 	local tbl = setmetatable({}, t)
 	
@@ -30,15 +30,15 @@ function t.new(p0) --[[ line: 146 ]]
 	return tbl
 end
 
-function t:dispose() --[[ line: 159 ]]
+function t:dispose()
 	-- upvalues: clearTimeout (ref)
-	self._timers:forEach(function(p1) --[[ line: 163 ]]
+	self._timers:forEach(function(p1)
 		-- upvalues: clearTimeout (copy)
 		clearTimeout(p1)
 	end)
 end
 
-function t:computeViewableItems(p2, p3, p4, p5, p6) --[[ line: 168 ]]
+function t:computeViewableItems(p2, p3, p4, p5, p6)
 	-- upvalues: invariantModule (ref), console (ref), _isViewable (write)
 	local itemVisiblePercentThreshold = self._config.itemVisiblePercentThreshold
 	local viewAreaCoveragePercentThreshold = self._config.viewAreaCoveragePercentThreshold
@@ -86,12 +86,12 @@ function t:computeViewableItems(p2, p3, p4, p5, p6) --[[ line: 168 ]]
 	return t
 end
 
-function t:onUpdate(p7, p8, p9, p10, p11, p12, p13) --[[ line: 245 ]]
+function t:onUpdate(p7, p8, p9, p10, p11, p12, p13)
 	-- upvalues: array (ref), setTimeout (ref)
 	if self._config.waitForInteraction and not self._hasInteracted or (p7 == 0 or not p10(1)) then return end
 	local var17 = if p7 then self:computeViewableItems(p7, p8, p9, p10, p13) else {}
 	
-	if #self._viewableIndices == #var17 and array.every(self._viewableIndices, function(p14, p15) --[[ line: 278 ]]
+	if #self._viewableIndices == #var17 and array.every(self._viewableIndices, function(p14, p15)
 		-- upvalues: var17 (write)
 		return p14 == var17[p15]
 	end) then return end
@@ -99,7 +99,7 @@ function t:onUpdate(p7, p8, p9, p10, p11, p12, p13) --[[ line: 245 ]]
 	
 	if self._config.minimumViewTime then
 		local var18 = nil
-		self._timers:add(setTimeout(function() --[[ line: 289 ]]
+		self._timers:add(setTimeout(function()
 			-- upvalues: self (ref), var18 (write), var17 (write), p12 (ref), p11 (ref)
 			self._timers:delete(var18)
 			self:_onUpdateSync(var17, p12, p11)
@@ -109,21 +109,21 @@ function t:onUpdate(p7, p8, p9, p10, p11, p12, p13) --[[ line: 245 ]]
 	end
 end
 
-function t:resetViewableIndices() --[[ line: 305 ]]
+function t:resetViewableIndices()
 	self._viewableIndices = {}
 end
 
-function t:recordInteraction() --[[ line: 309 ]]
+function t:recordInteraction()
 	self._hasInteracted = true
 end
 
-function t:_onUpdateSync(p16, p17, p18) --[[ line: 313 ]]
+function t:_onUpdateSync(p16, p17, p18)
 	-- upvalues: array (ref), map (ref), object (ref)
 	local viewableItems = self._viewableItems
-	local var19 = map.new(array.map(array.filter(p16, function(p19) --[[ line: 315 ]]
+	local var19 = map.new(array.map(array.filter(p16, function(p19)
 		-- upvalues: array (copy), self (ref)
 		return array.includes(self._viewableIndices, p19)
-	end), function(p20) --[[ line: 319 ]]
+	end), function(p20)
 		-- upvalues: p18 (ref)
 		local var21 = p18(p20, true)
 		
@@ -151,7 +151,7 @@ function t:_onUpdateSync(p16, p17, p18) --[[ line: 313 ]]
 	end
 end
 
-_isViewable = function(p21, p22, p23, p24, p25, p26) --[[ line: 345 | named "_isViewable" ]]
+_isViewable = function(p21, p22, p23, p24, p25, p26)
 	-- upvalues: _isEntirelyVisible (write), _getPixelsVisible (write)
 	if _isEntirelyVisible(p23, p24, p25) then
 		return true
@@ -161,11 +161,11 @@ _isViewable = function(p21, p22, p23, p24, p25, p26) --[[ line: 345 | named "_is
 	return p22 <= 100 * (if p21 then var22 / p25 else var22 / p26)
 end
 
-_getPixelsVisible = function(p27, p28, p29) --[[ line: 362 | named "_getPixelsVisible" ]]
+_getPixelsVisible = function(p27, p28, p29)
 	return math.max(0, math.min(p28, p29) - math.max(p27, 0))
 end
 
-_isEntirelyVisible = function(p30, p31, p32) --[[ line: 367 | named "_isEntirelyVisible" ]]
+_isEntirelyVisible = function(p30, p31, p32)
 	return p30 >= 0 and (p31 <= p32 and p30 < p31)
 end
 

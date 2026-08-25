@@ -14,7 +14,7 @@ return {
 	NEXT_EVENT = "VerticalPagerNext",
 	KEYBOARD_KEY_EVENTS = t,
 	DPAD_KEY_EVENTS = t_1,
-	buildEventMap = function(p0, p1) --[[ line: 40 ]]
+	buildEventMap = function(p0, p1)
 		-- upvalues: t_1 (ref), t (ref)
 		if not p0 then
 			return {}
@@ -28,13 +28,13 @@ return {
 		end
 		return cloned
 	end,
-	thumbstickDirection = function(p2, p3) --[[ line: 59 ]]
+	thumbstickDirection = function(p2, p3)
 		return if math.abs(p2) < p3 then nil elseif p3 <= p2 then "previous" else "next"
 	end,
-	shouldTrackDrag = function(p4, p5) --[[ line: 77 ]]
+	shouldTrackDrag = function(p4, p5)
 		return if p4 then p5 else true
 	end,
-	resolveWheelGesture = function(p6, p7, p8) --[[ line: 99 ]]
+	resolveWheelGesture = function(p6, p7, p8)
 		return p8 <= p6 - p7, p6
 	end
 }

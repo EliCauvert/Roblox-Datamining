@@ -8,7 +8,7 @@ local t = {
 }
 local list = { "addOSInfo", "addSessionInfo" }
 
-return function(p0, p1) --[[ line: 18 | named "sendCoachmarkImpression" ]]
+return function(p0, p1)
 	-- upvalues: telemetryService (ref), t (ref), list (ref)
 	telemetryService:LogEvent(t, {
 		standardizedFields = list,

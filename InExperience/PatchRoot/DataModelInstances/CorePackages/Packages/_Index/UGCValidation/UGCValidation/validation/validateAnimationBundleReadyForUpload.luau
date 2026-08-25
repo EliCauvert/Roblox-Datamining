@@ -14,7 +14,7 @@ local getFFlagUGCValidationAnimationPackMissingTypeMessageModule = require(paren
 local legacyValidationAdapterModule = require(parent.util.LegacyValidationAdapter)
 local httpService = game:GetService("HttpService")
 
-local function hasExactStringValueNames(p0, p1) --[[ line: 28 ]]
+local function hasExactStringValueNames(p0, p1)
 	local t = {}
 	
 	for i, v in p1 do
@@ -39,9 +39,9 @@ local function hasExactStringValueNames(p0, p1) --[[ line: 28 ]]
 	return true
 end
 
-return function(p2, p3, p4, p5, p6, p7) --[[ line: 53 | named "validateAnimationBundleReadyForUpload" ]]
+return function(p2, p3, p4, p5, p6, p7)
 	-- upvalues: promiseModule (ref), getFFlagUGCValidationAnimationPackSupportModule (ref), constantsModule (ref), getFFlagUGCValidationAnimationPackDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref), hasExactStringValueNames (ref), getFFlagUGCValidationAnimationPackMissingTypeMessageModule (ref), errorSourceStringsModule (ref), httpService (ref), createEditableInstancesForContextModule (ref), legacyValidationAdapterModule (ref), destroyEditableInstancesModule (ref)
-	p5 = p5 or function() --[[ line: 61 ]] end
+	p5 = p5 or function() end
 	assert(p5 ~= nil, "Luau")
 	
 	if not p2:IsA("Model") then
@@ -169,7 +169,7 @@ return function(p2, p3, p4, p5, p6, p7) --[[ line: 53 | named "validateAnimation
 	p5(t_4)
 	local var24 = httpService:GenerateGUID()
 	
-	return promiseModule.each(t_3, function(p9, p10) --[[ line: 247 ]]
+	return promiseModule.each(t_3, function(p9, p10)
 		-- upvalues: p6 (ref), p7 (ref), createEditableInstancesForContextModule (copy), legacyValidationAdapterModule (copy), var24 (ref), destroyEditableInstancesModule (copy), t_4 (write), p5 (write)
 		if p9.status == "finished" then return end
 		local var43, var44
@@ -212,9 +212,9 @@ return function(p2, p3, p4, p5, p6, p7) --[[ line: 53 | named "validateAnimation
 		t_4.pieces = table.clone(t_4.pieces)
 		t_4.pieces[p10].status = "finished"
 		p5(t_4)
-	end):andThen(function() --[[ line: 306 ]]
+	end):andThen(function()
 		-- upvalues: t_4 (write), p6 (ref), p7 (ref), createEditableInstancesForContextModule (copy), getFFlagUGCValidationAnimationPackSupportModule (copy), legacyValidationAdapterModule (copy), var24 (ref), destroyEditableInstancesModule (copy), p5 (write)
-		local function createFullBodyData(p8) --[[ line: 307 ]]
+		local function createFullBodyData(p8)
 			local t = {}
 			
 			for i, v in p8 do
@@ -274,7 +274,7 @@ return function(p2, p3, p4, p5, p6, p7) --[[ line: 53 | named "validateAnimation
 			end
 		end
 		p5(t_4)
-	end):andThen(function() --[[ line: 380 ]]
+	end):andThen(function()
 		-- upvalues: t_4 (write)
 		return t_4
 	end)

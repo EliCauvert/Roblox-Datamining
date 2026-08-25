@@ -20,7 +20,7 @@ local t_1 = {
 	[radiusModule.Medium] = "radius-medium"
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | named "BaseMenu" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), t (ref), withDefaultsModule (ref), useBindableModule (ref), useScaledValueModule (ref), useSubmenuHoverModule (ref), flagsModule (ref), declarativeBaseMenuContentModule (ref), t_1 (ref), baseMenuContextModule (ref), baseMenuScrollContainerModule (ref), withCommonPropsModule (ref), viewModule (ref)
 	local var16, var17 = reactModule.useBinding(false)
 	local cloned = table.clone(t)
@@ -32,41 +32,41 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | 
 	local var23 = useScaledValueModule(320)
 	local var24, var25 = reactModule.useState(false)
 	local var26 = useSubmenuHoverModule()
-	reactModule.useEffect(function() --[[ line: 81 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref)
-		task.delay(0, function() --[[ line: 82 ]]
+		task.delay(0, function()
 			-- upvalues: var17 (copy)
 			var17(true)
 		end)
 	end, {})
-	local var27 = reactModule.useCallback(function() --[[ line: 87 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var25 (ref)
 		var25(true)
 	end, {})
-	local var28 = reactModule.useMemo(function() --[[ line: 92 ]]
+	local var28 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), flagsModule (copy), var22 (ref)
-		return var20:map(function(p2) --[[ line: 93 ]]
+		return var20:map(function(p2)
 			-- upvalues: flagsModule (copy), var22 (copy)
 			return if p2 then p2.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var22
 		end)
 	end, { var20, var22 })
-	local var29 = reactModule.useMemo(function() --[[ line: 101 ]]
+	local var29 = reactModule.useMemo(function()
 		-- upvalues: var20 (ref), flagsModule (copy), var19 (ref), var23 (ref)
-		return var20:map(function(p3) --[[ line: 102 ]]
+		return var20:map(function(p3)
 			-- upvalues: flagsModule (copy), var19 (copy), var23 (copy)
 			return if flagsModule.FoundationBaseMenuContentSizing then not p3 or var19.couldGrow == true else not p3 or (var19.couldGrow == true and p3.Offset < var23)
 		end)
 	end, { var20, var23, var19.couldGrow })
-	local var30 = reactModule.useMemo(function() --[[ line: 110 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var29 (ref), var28 (ref), flagsModule (copy), var23 (ref)
 		return {
-			MinSize = reactModule.joinBindings({ var29, var28 }):map(function(p4) --[[ line: 112 ]]
+			MinSize = reactModule.joinBindings({ var29, var28 }):map(function(p4)
 				-- upvalues: flagsModule (copy)
 				local var33 = p4[2]
 				
 				return if p4[1] then if flagsModule.FoundationBaseMenuContentSizing and var33 == 0 then nil else Vector2.new(var33, 0) else nil
 			end),
-			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var29:map(function(p5) --[[ line: 124 ]]
+			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var29:map(function(p5)
 				-- upvalues: var23 (copy)
 				return if p5 then Vector2.new(var23, 1e999) else nil
 			end)
@@ -79,7 +79,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | 
 	end
 	local var31 = if var19.radius ~= nil then "" else t_1[var19.radius]
 	local var32 = reactModule.createElement(baseMenuContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 142 ]]
+		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 			-- upvalues: var19 (ref), var24 (ref), var27 (ref), var26 (ref)
 			return {
 				depth = 1,
@@ -125,10 +125,10 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | 
 		})
 	}, var32) else reactModule.createElement(viewModule, withCommonPropsModule(var19, {
 		tag = `col stroke-standard stroke-default {var31}`,
-		AutomaticSize = var29:map(function(p6) --[[ line: 206 ]]
+		AutomaticSize = var29:map(function(p6)
 			return if p6 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
 		end),
-		Size = reactModule.joinBindings({ var29, var20 }):map(function(p7) --[[ line: 209 ]]
+		Size = reactModule.joinBindings({ var29, var20 }):map(function(p7)
 			return if p7[1] then nil else UDim2.new(p7[2], UDim.new())
 		end),
 		ref = p1,

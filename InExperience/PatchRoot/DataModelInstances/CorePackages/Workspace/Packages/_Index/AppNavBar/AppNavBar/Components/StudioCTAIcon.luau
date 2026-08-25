@@ -24,7 +24,7 @@ local constantsModule = require(parent.Constants)
 local var9 = if fFlagCoreUiMigrateUIBloxToFoundation then "icons/logo/studiologo" else images["icons/logo/studiologo"]
 local webViewRedesignEnabledEngineFeature = game:GetEngineFeature("WebViewRedesignEnabled")
 
-return function(p0) --[[ line: 48 | named "StudioCTAIcon" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), useRoactService (ref), appEventIngestService (ref), useLocalization (ref), useEffectOnce (ref), constantsModule (ref), controlState (ref), promiseModule (ref), tooltipOrientation (ref), coreGuiService (ref), webViewRedesignEnabledEngineFeature (ref), withTooltip (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), var9 (ref), imageSetLabel (ref)
 	local _ = nil
 	local _ = nil
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 48 | named "StudioCTAIcon" ]]
 		bodyText = "CommonUI.Features.StudioCTA.Tooltip.Body"
 	})
 	local var15 = reactModule.useRef(nil)
-	useEffectOnce(function() --[[ line: 63 ]]
+	useEffectOnce(function()
 		-- upvalues: var13 (ref), constantsModule (copy)
 		var13:setRBXEventStream(constantsModule.STUDIO_CTA_EVENT_CONTEXT, constantsModule.STUDIO_CTA_EVENT_NAME_MOUNT)
 	end, {})
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 48 | named "StudioCTAIcon" ]]
 			var12(false)
 		end
 	elseif not var15.current then
-		var15.current = promiseModule.delay(0.4):andThenCall(function() --[[ line: 71 ]]
+		var15.current = promiseModule.delay(0.4):andThenCall(function()
 			-- upvalues: var15 (ref), var12 (ref)
 			var15.current = nil
 			var12(true)
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 48 | named "StudioCTAIcon" ]]
 		preferredOrientation = tooltipOrientation.Top,
 		guiTarget = coreGuiService,
 		active = if webViewRedesignEnabledEngineFeature then p0.showTooltip and var11 else var11
-	}, function(p1) --[[ line: 99 ]]
+	}, function(p1)
 		-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), reactModule (copy), image (copy), var9 (copy), theme (write), imageSetLabel (copy)
 		return if fFlagCoreUiMigrateUIBloxToFoundation then reactModule.createElement(image, {
 			Size = UDim2.fromScale(1, 1),

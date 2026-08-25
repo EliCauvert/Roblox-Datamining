@@ -5,9 +5,9 @@ local reportAnalyticsForNewMessagesModule = require(appChat.Utils.reportAnalytic
 local fFlagAppChatNilGuardReceivedChatResponseModule = require(appChat.Flags.FFlagAppChatNilGuardReceivedChatResponse)
 local name = require(appChat.Logger):new(script.Name)
 
-return function(p0, p1, p2) --[[ line: 10 ]]
+return function(p0, p1, p2)
 	-- upvalues: messageModelModule (ref), reportAnalyticsForNewMessagesModule (ref), fFlagAppChatNilGuardReceivedChatResponseModule (ref), name (ref), receivedMessagesModule (ref)
-	return function(p3) --[[ line: 11 ]]
+	return function(p3)
 		-- upvalues: messageModelModule (copy), p1 (ref), p0 (ref), p2 (ref), reportAnalyticsForNewMessagesModule (copy), fFlagAppChatNilGuardReceivedChatResponseModule (copy), name (copy), receivedMessagesModule (copy)
 		local var6 = messageModelModule.fromSentChannelsApi(p1, p0, p2)
 		

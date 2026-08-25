@@ -9,17 +9,17 @@ local shortcutButtonModule = require(inExperienceSideSheet.Components.ShortcutBu
 local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
 local getSessionActionButtonsStoreModule = require(inExperienceSideSheet.Stores.GetSessionActionButtonsStore)
 
-local function getIsHeightSmall(p0) --[[ line: 26 ]]
+local function getIsHeightSmall(p0)
 	-- upvalues: getSideSheetConfigStoreModule (ref)
 	return getSideSheetConfigStoreModule(p0).getIsHeightSmall(p0)
 end
 
-local function getSessionActionButtonConfigs(p1) --[[ line: 30 ]]
+local function getSessionActionButtonConfigs(p1)
 	-- upvalues: getSessionActionButtonsStoreModule (ref)
 	return getSessionActionButtonsStoreModule(p1).sessionActionButtonConfigs
 end
 
-return reactModule.memo(function(p2) --[[ line: 34 | named "SessionActionButtons" ]]
+return reactModule.memo(function(p2)
 	-- upvalues: signalsReactModule (ref), getIsHeightSmall (ref), getSessionActionButtonConfigs (ref), reactModule (ref), shortcutButtonModule (ref), view (ref), fFlagEnableWhatsNew (ref), var3 (ref)
 	local var9 = signalsReactModule.useSignalState(getIsHeightSmall)
 	local t = {}

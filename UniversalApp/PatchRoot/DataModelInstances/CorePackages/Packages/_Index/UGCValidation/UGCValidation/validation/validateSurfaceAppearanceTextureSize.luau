@@ -15,7 +15,7 @@ local t = {
 	RoughnessMap = game:DefineFastInt("AccessoryRoughnessMapMaxSize", 256)
 }
 
-return function(p0, p1) --[[ line: 34 | named "validateSurfaceAppearanceTextureSize" ]]
+return function(p0, p1)
 	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getEditableImageFromContextModule (ref), getFFlagUGCValidateAccessoryAssetSurfaceAppearanceTextureLimitsModule (ref), constantsInterfaceModule (ref), t (ref), validateTextureSizeModule (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local descendants = p0:GetDescendants()

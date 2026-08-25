@@ -21,7 +21,7 @@ local t = {
 	variant = dateTimePickerVariantModule.Single
 }
 
-return reactModule.memo(function(x) --[[ line: 32 | named "DateTimePickerBeta" ]]
+return reactModule.memo(function(x)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), dateTimePickerVariantModule (ref), useDateTimePickerStateModule (ref), reactModule (ref), popoverModule (ref), textInputModule (ref), withCommonPropsModule (ref), icon (ref), translatorModule (ref), inputSizeModule (ref), popoverAlignModule (ref), popoverSideModule (ref), dateTimePickerPanelModule (ref), dateTimePickerCalendarContentModule (ref)
 	local var16 = withDefaultsModule(x, t)
 	local var17 = useTokensModule()

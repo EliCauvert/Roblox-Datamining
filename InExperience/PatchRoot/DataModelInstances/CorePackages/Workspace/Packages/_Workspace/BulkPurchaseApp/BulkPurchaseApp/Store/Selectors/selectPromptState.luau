@@ -2,6 +2,6 @@
 local _ = require(bulkPurchaseApp.Store.Types)
 local _ = require(bulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
 
-return function(p0) --[[ line: 9 | named "selectPromptState" ]]
+return function(p0)
 	return p0.promptState
 end

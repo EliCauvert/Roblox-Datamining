@@ -24,16 +24,16 @@ local profileWrapperContextModule = require(corePackagesService.Workspace.Packag
 local addConnectionButtonModule = require(script.Parent.AddConnectionButton)
 local profileHeaderModule = require(script.Parent.ProfileHeader)
 
-return reactModule.memo(function(p0) --[[ line: 41 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), profileWrapperContextModule (ref), peopleServiceModule (ref), playersService (ref), signalsReactModule (ref), useDeviceOrientation (ref), useBreakpointXOrLarger (ref), responsiveModule (ref), robloxAppEnumsModule (ref), useDynamicSizeMarginModule (ref), useDispatch (ref), getProfilePlatformModule (ref), enumsModule (ref), view (ref), iconButton (ref), iconName (ref), text (ref), scrollView (ref), visibility (ref), profileHeaderModule (ref), addConnectionButtonModule (ref), currentlyWearingModule (ref)
 	local var15 = useTokens()
 	local var16 = reactModule.useContext(profileWrapperContextModule)
 	local profileId = var16.profileId
 	local profileType = var16.profileType
-	local var17 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 48 ]]
+	local var17 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FriendStatusStore")
-	end, {}).getShouldShowFriendButton(p0.userId, reactModule.useMemo(function() --[[ line: 52 ]]
+	end, {}).getShouldShowFriendButton(p0.userId, reactModule.useMemo(function()
 		-- upvalues: p0 (ref), playersService (copy)
 		return if p0.userId then playersService:GetPlayerByUserId(p0.userId) else nil
 	end, { p0.userId })))
@@ -43,7 +43,7 @@ return reactModule.memo(function(p0) --[[ line: 41 ]]
 	local var22, var23 = reactModule.useState(true)
 	local var24, var25 = reactModule.useState(false)
 	local var26 = useDispatch()
-	reactModule.useEffect(function() --[[ line: 71 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var26 (ref), getProfilePlatformModule (copy), profileId (ref), profileType (ref), enumsModule (copy), var23 (ref), var25 (ref)
 		var26(getProfilePlatformModule.API({
 			includeComponentOrdering = false,
@@ -54,11 +54,11 @@ return reactModule.memo(function(p0) --[[ line: 41 ]]
 				{ component = enumsModule.Components.CurrentlyWearing },
 				{ component = enumsModule.Components.UserProfileHeader }
 			}
-		})):andThen(function(_) --[[ line: 86 ]]
+		})):andThen(function(_)
 			-- upvalues: var23 (copy), var25 (copy)
 			var23(false)
 			var25(false)
-		end):catch(function(_) --[[ line: 90 ]]
+		end):catch(function(_)
 			-- upvalues: var23 (copy), var25 (copy)
 			var23(false)
 			var25(true)

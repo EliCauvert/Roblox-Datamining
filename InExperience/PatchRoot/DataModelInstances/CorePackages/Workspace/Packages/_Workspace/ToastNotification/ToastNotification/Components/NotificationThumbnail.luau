@@ -22,17 +22,17 @@ local getFFlagEnableToastIconSupport = sharedFlagsModule.GetFFlagEnableToastIcon
 local fFlagNotificationThumbnailUseProfileFrameThumbnail = notificationsCommonModule.FFlagNotificationThumbnailUseProfileFrameThumbnail
 local useNotificationCardStateModule = require(context.useNotificationCardState)
 
-local var7 = function(p0) --[[ line: 32 ]]
+local var7 = function(p0)
 	-- upvalues: typeModule (ref), userLibConstants (ref)
 	return if p0 == typeModule.SENDERThumbnailTypeEnum.Game then userLibConstants.RbxthumbTypes.GameIcon elseif p0 == typeModule.SENDERThumbnailTypeEnum.User then userLibConstants.RbxthumbTypes.AvatarHeadShot elseif p0 == typeModule.SENDERThumbnailTypeEnum.Group then userLibConstants.RbxthumbTypes.GroupIcon elseif p0 == typeModule.SENDERThumbnailTypeEnum.Asset then userLibConstants.RbxthumbTypes.Asset elseif p0 == typeModule.SENDERThumbnailTypeEnum.Bundle then userLibConstants.RbxthumbTypes.BundleThumbnail else userLibConstants.RbxthumbTypes.GameIcon
 end
 
-local var8 = if toastNotificationHelperModule.isUserThumbnail then toastNotificationHelperModule.isUserThumbnail else function(p1) --[[ line: 50 ]]
+local var8 = if toastNotificationHelperModule.isUserThumbnail then toastNotificationHelperModule.isUserThumbnail else function(p1)
 	-- upvalues: typeModule (ref)
 	return p1.idType == typeModule.SENDERThumbnailTypeEnum.User
 end
 
-return function() --[[ line: 54 ]]
+return function()
 	-- upvalues: useNotificationCardStateModule (ref), useStyle (ref), var8 (ref), fFlagNotificationThumbnailUseProfileFrameThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), var7 (ref), getFFlagEnableToastIconSupport (ref), typeModule (ref), constants (ref), react (ref), imageSetLabel (ref), safety (ref), var5 (ref), imagePile (ref), loadableImage (ref)
 	local var9 = useNotificationCardStateModule("thumbnail")
 	

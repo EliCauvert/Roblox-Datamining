@@ -8,7 +8,7 @@ local t = {
 if require(parent.SharedFlags).FFlagAppIaHomeSubTab then
 	t[navigationRoduxModule.Constants.HomeContainerName] = true
 end
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: t (ref)
 	if not p0 then
 		return nil

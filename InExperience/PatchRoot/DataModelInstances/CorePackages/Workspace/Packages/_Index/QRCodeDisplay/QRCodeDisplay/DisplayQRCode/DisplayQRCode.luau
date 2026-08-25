@@ -6,7 +6,7 @@ local displayQRCodeFromMatrixModule = require(script.Parent.Parent.DisplayQRCode
 local _ = require(QRCodeDisplay.Common.ECLevels)
 local useQRCodeModule = require(script.Parent.useQRCode)
 
-return function(p0) --[[ line: 21 ]]
+return function(p0)
 	-- upvalues: useQRCodeModule (ref), reactModule (ref), displayQRCodeFromMatrixModule (ref), dashModule (ref)
 	return reactModule.createElement(displayQRCodeFromMatrixModule, dashModule.join(p0, { qrCodeMatrix = useQRCodeModule(p0) }))
 end

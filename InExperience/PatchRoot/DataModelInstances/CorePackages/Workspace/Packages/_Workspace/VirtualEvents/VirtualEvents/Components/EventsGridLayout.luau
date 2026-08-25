@@ -3,10 +3,10 @@ local cryoModule = require(virtualEvents.Parent.Cryo)
 local reactModule = require(virtualEvents.Parent.React)
 local t = { numItemsShown = 1e999, itemPadding = UDim.new(0, 12) }
 
-return function(p0) --[[ line: 19 | named "EventsGridLayout" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref)
 	local var4 = cryoModule.Dictionary.join(t, p0)
-	local var5 = reactModule.useMemo(function() --[[ line: 22 ]]
+	local var5 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref), reactModule (copy)
 		local t = {}
 		
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 19 | named "EventsGridLayout" ]]
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical
 		}),
-		Rows = reactModule.createElement(reactModule.Fragment, nil, reactModule.useMemo(function() --[[ line: 39 ]]
+		Rows = reactModule.createElement(reactModule.Fragment, nil, reactModule.useMemo(function()
 			-- upvalues: var5 (ref), reactModule (copy), var4 (ref)
 			local t = {}
 			

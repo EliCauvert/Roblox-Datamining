@@ -3,13 +3,13 @@ local signalModule = require(script.Parent.Parent.Parent.Signal)
 local var2 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).ServerScriptsFormatting.ChartHeaderNames
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 11 ]]
+	[chartHeaderNames[1]] = function(p0, p1)
 		return p0.dataStats.dataSet:back().name < p1.dataStats.dataSet:back().name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 14 ]]
+	[chartHeaderNames[2]] = function(p2, p3)
 		return p2.dataStats.dataSet:back().data[1] < p3.dataStats.dataSet:back().data[1]
 	end,
-	[chartHeaderNames[3]] = function(p4, p5) --[[ line: 17 ]]
+	[chartHeaderNames[3]] = function(p4, p5)
 		return p4.dataStats.dataSet:back().data[2] < p5.dataStats.dataSet:back().data[2]
 	end
 }
@@ -19,7 +19,7 @@ local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 29 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), signalModule (ref), chartHeaderNames (ref)
 	local t = {}
 	setmetatable(t, t_1)
@@ -33,7 +33,7 @@ function t_1.new() --[[ line: 29 ]]
 	return t
 end
 
-function t_1:setSortType(p6) --[[ line: 43 ]]
+function t_1:setSortType(p6)
 	-- upvalues: t (ref)
 	if t[p6] then
 		self._sortType = p6
@@ -44,19 +44,19 @@ function t_1:setSortType(p6) --[[ line: 43 ]]
 	error(string.format("attempted to pass invalid sortType: %s", tostring(p6)), 2)
 end
 
-function t_1:getSortType() --[[ line: 53 ]]
+function t_1:getSortType()
 	return self._sortType
 end
 
-function t_1:Signal() --[[ line: 57 ]]
+function t_1:Signal()
 	return self._serverScriptsUpdated
 end
 
-function t_1:getCurrentData() --[[ line: 61 ]]
+function t_1:getCurrentData()
 	return self._sortedScriptsData
 end
 
-function t_1:updateScriptsData(p7) --[[ line: 66 ]]
+function t_1:updateScriptsData(p7)
 	-- upvalues: circularBufferModule (ref), var2 (ref), maxOfTableModule (ref), minOfTableModule (ref)
 	self._lastUpdate = os.time()
 	
@@ -109,16 +109,16 @@ function t_1:updateScriptsData(p7) --[[ line: 66 ]]
 	end
 end
 
-function t_1:isRunning() --[[ line: 139 ]]
+function t_1:isRunning()
 	return self._isRunning
 end
 
-function t_1:start() --[[ line: 143 ]]
+function t_1:start()
 	-- upvalues: getClientReplicatorModule (ref)
 	local var17 = getClientReplicatorModule()
 	
 	if var17 and not self._statsListenerConnection then
-		self._statsListenerConnection = var17.StatsReceived:connect(function(p8) --[[ line: 146 ]]
+		self._statsListenerConnection = var17.StatsReceived:connect(function(p8)
 			-- upvalues: self (ref)
 			if p8 then
 				self._lastUpdate = os.time()
@@ -135,7 +135,7 @@ function t_1:start() --[[ line: 143 ]]
 	end
 end
 
-function t_1:stop() --[[ line: 163 ]]
+function t_1:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

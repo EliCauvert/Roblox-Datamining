@@ -5,7 +5,7 @@ local gameInviteContextProviderModule = require(gameInvite.Context.GameInviteCon
 local gameInviteContentModule = require(components.GameInviteContent)
 local _ = require(gameInvite.gameInviteModalType)
 
-return function(p0) --[[ line: 22 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), gameInviteContextProviderModule (ref), gameInviteContentModule (ref)
 	return reactModule.createElement(gameInviteContextProviderModule, {
 		options = p0.options,

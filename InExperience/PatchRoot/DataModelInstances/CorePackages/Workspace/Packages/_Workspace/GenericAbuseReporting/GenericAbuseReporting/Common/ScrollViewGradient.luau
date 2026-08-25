@@ -7,7 +7,7 @@ local scrollView = foundationModule.ScrollView
 local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local useLayerCollector = require(parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 21 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), useLayerCollector (ref), view (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var3 = reactModule.useRef(nil)
 	local var4, var5 = reactModule.useState(Vector2.zero)
@@ -15,32 +15,32 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 21 ]]
 	local var8, var9 = reactModule.useState(true)
 	local var10, var11 = reactModule.useState(false)
 	local absoluteSize = useLayerCollector().absoluteSize
-	reactModule.useLayoutEffect(function() --[[ line: 30 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: var3 (ref), var5 (ref), var7 (ref)
 		if var3.current then
 			var5(var3.current.AbsoluteCanvasSize)
 			var7(var3.current.AbsoluteWindowSize)
-			local var12 = var3.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ line: 37 ]]
+			local var12 = var3.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
 				-- upvalues: var5 (copy), var3 (copy)
 				var5(var3.current.AbsoluteCanvasSize)
 			end)
-			local var13 = var3.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ line: 42 ]]
+			local var13 = var3.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
 				-- upvalues: var7 (copy), var3 (copy)
 				var7(var3.current.AbsoluteWindowSize)
 			end)
 			
-			return function() --[[ line: 46 ]]
+			return function()
 				-- upvalues: var12 (ref), var13 (ref)
 				var12:Disconnect()
 				var13:Disconnect()
 			end
 		end
-		return function() --[[ line: 51 ]] end
+		return function() end
 	end, { var3.current, absoluteSize })
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var4 (ref), var6 (ref), var9 (ref), var11 (ref)
 		if var3.current then
-			local var14 = var3.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 56 ]]
+			local var14 = var3.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: var3 (copy), var4 (copy), var6 (copy), var9 (copy), var11 (copy)
 				local canvasPosition = var3.current.CanvasPosition
 				
@@ -62,12 +62,12 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 21 ]]
 				var11(false)
 			end)
 			
-			return function() --[[ line: 71 ]]
+			return function()
 				-- upvalues: var14 (ref)
 				var14:Disconnect()
 			end
 		end
-		return function() --[[ line: 75 ]] end
+		return function() end
 	end, { var3.current, absoluteSize, var4, var6 })
 	
 	return reactModule.createElement(view, { tag = "size-full" }, {

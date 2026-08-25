@@ -20,7 +20,7 @@ local MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY = constantsModule.MIN_VOICE_
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 55 ]]
+function t.new(p0)
 	-- upvalues: t (ref), getFFlagJoinWithoutMicPermissions (ref), PERMISSION_STATE (ref)
 	local tbl = setmetatable({}, t)
 	tbl.log = p0.log
@@ -40,12 +40,12 @@ function t.new(p0) --[[ line: 55 ]]
 	return tbl
 end
 
-local function _(value) --[[ line: 79 | named "isIgnoredAudioInput" ]]
+local function _(value)
 	-- upvalues: coreGuiService (ref)
 	return value:IsDescendantOf(coreGuiService)
 end
 
-function t:SetMicActive(p1, p2) --[[ line: 83 ]]
+function t:SetMicActive(p1, p2)
 	-- upvalues: getFFlagJoinWithoutMicPermissions (ref), PERMISSION_STATE (ref), permissionsProtocol (ref), voiceChatService (ref), playersService (ref)
 	if self.localMuted == nil then
 		self.log:trace("SetMicActive context: {} - Voice not connected yet", p2)
@@ -57,7 +57,7 @@ function t:SetMicActive(p1, p2) --[[ line: 83 ]]
 	if getFFlagJoinWithoutMicPermissions() then
 		if self.permissionState == PERMISSION_STATE.PENDING_MIC then
 			self.log:debug("In pending mic mode, requesting permission")
-			self.callbacks.emitGetPermissions(function(p3) --[[ line: 98 ]]
+			self.callbacks.emitGetPermissions(function(p3)
 				-- upvalues: self (ref), PERMISSION_STATE (copy), p1 (ref), p2 (ref)
 				self.permissionState = if p3.hasMicPermissions then PERMISSION_STATE.LISTEN_AND_TALK else PERMISSION_STATE.LISTEN_ONLY
 				self.log:debug("Got permissions, setting state to {}", self.permissionState)
@@ -109,11 +109,11 @@ function t:SetMicActive(p1, p2) --[[ line: 83 ]]
 	end
 end
 
-function t:SetLocalMuted(p4) --[[ line: 158 ]]
+function t:SetLocalMuted(p4)
 	self.localMuted = p4
 end
 
-function t:SyncLocalAudioDeviceActive() --[[ line: 162 ]]
+function t:SyncLocalAudioDeviceActive()
 	-- upvalues: voiceChatService (ref), playersService (ref)
 	if not voiceChatService.UseNewAudioApi then return end
 	local var15 = if self.localMuted == nil then false else not self.localMuted
@@ -126,19 +126,19 @@ function t:SyncLocalAudioDeviceActive() --[[ line: 162 ]]
 	self:_assertDeviceStateConsistency()
 end
 
-function t:SetupEarlyAudioDeviceGuard() --[[ line: 175 ]]
+function t:SetupEarlyAudioDeviceGuard()
 	-- upvalues: voiceChatService (ref), fFlagExpChatDictation (ref), coreGuiService (ref), playersService (ref), soundService (ref)
-	local function _(p5) --[[ line: 176 | named "shouldDeactivate" ]]
+	local function _(p5)
 		-- upvalues: voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (ref)
 		return voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and p5:IsDescendantOf(coreGuiService)) and (p5.Player == playersService.LocalPlayer and (p5.Active and self.localMuted == nil)))
 	end
 	
-	local function guardDevice(p6) --[[ line: 184 ]]
+	local function guardDevice(p6)
 		-- upvalues: voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (ref)
 		if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and p6:IsDescendantOf(coreGuiService)) and (p6.Player == playersService.LocalPlayer and (p6.Active and self.localMuted == nil))) then
 			p6.Active = false
 		end
-		table.insert(self._connections, p6:GetPropertyChangedSignal("Player"):Connect(function() --[[ line: 189 ]]
+		table.insert(self._connections, p6:GetPropertyChangedSignal("Player"):Connect(function()
 			-- upvalues: p6 (ref), voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (copy)
 			local var17 = p6
 			
@@ -146,7 +146,7 @@ function t:SetupEarlyAudioDeviceGuard() --[[ line: 175 ]]
 				p6.Active = false
 			end
 		end))
-		table.insert(self._connections, p6:GetPropertyChangedSignal("Active"):Connect(function() --[[ line: 196 ]]
+		table.insert(self._connections, p6:GetPropertyChangedSignal("Active"):Connect(function()
 			-- upvalues: p6 (ref), voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (copy)
 			local var18 = p6
 			
@@ -156,7 +156,7 @@ function t:SetupEarlyAudioDeviceGuard() --[[ line: 175 ]]
 		end))
 	end
 	
-	table.insert(self._connections, soundService.AudioInstanceAdded:Connect(function(p7) --[[ line: 204 ]]
+	table.insert(self._connections, soundService.AudioInstanceAdded:Connect(function(p7)
 		-- upvalues: guardDevice (ref)
 		if p7:IsA("AudioDeviceInput") then
 			guardDevice(p7)
@@ -170,7 +170,7 @@ function t:SetupEarlyAudioDeviceGuard() --[[ line: 175 ]]
 	end
 end
 
-function t:SetAndSyncActive(p8, p9) --[[ line: 218 ]]
+function t:SetAndSyncActive(p8, p9)
 	-- upvalues: playersService (ref)
 	p8.Active = p9
 	local sendMuteEvent = self.callbacks.getSendMuteEvent()
@@ -180,7 +180,7 @@ function t:SetAndSyncActive(p8, p9) --[[ line: 218 ]]
 	end
 end
 
-function t:RequestMicPermission() --[[ line: 226 ]]
+function t:RequestMicPermission()
 	-- upvalues: getFFlagDebugVoiceChatMicPermissionCliBypassModule (ref), PERMISSION_STATE (ref), promiseModule (ref), permissionsProtocol (ref), getFFlagEnableExpJoinMicPermAnalyticsModule (ref)
 	if getFFlagDebugVoiceChatMicPermissionCliBypassModule() then
 		self.permissionState = PERMISSION_STATE.LISTEN_AND_TALK
@@ -191,7 +191,7 @@ function t:RequestMicPermission() --[[ line: 226 ]]
 		
 		return self.permissionPromise
 	end
-	self.permissionPromise = self.callbacks.requestPermissions({ permissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(p10) --[[ line: 240 ]]
+	self.permissionPromise = self.callbacks.requestPermissions({ permissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(p10)
 		-- upvalues: getFFlagEnableExpJoinMicPermAnalyticsModule (copy), self (ref), promiseModule (copy), permissionsProtocol (copy)
 		if getFFlagEnableExpJoinMicPermAnalyticsModule() then
 			self.callbacks.recordExperienceJoinMicPerm(p10)
@@ -206,12 +206,12 @@ function t:RequestMicPermission() --[[ line: 226 ]]
 		self.callbacks.reportJoinFailed("noPermissionResponse", nil)
 		
 		return if self.callbacks.getPassInitErrorInPromiseReject() then promiseModule.reject({ code = "INIT_ERROR_NO_PERM_RESPONSE" }) else promiseModule.reject()
-	end):andThen(function() --[[ line: 260 ]]
+	end):andThen(function()
 		-- upvalues: self (ref), promiseModule (copy)
 		self.callbacks.emitOnRequestMicPermissionResolved()
 		
 		return promiseModule.resolve()
-	end):catch(function() --[[ line: 264 ]]
+	end):catch(function()
 		-- upvalues: self (ref), promiseModule (copy)
 		self.callbacks.emitOnRequestMicPermissionRejected()
 		
@@ -221,7 +221,7 @@ function t:RequestMicPermission() --[[ line: 226 ]]
 	return self.permissionPromise
 end
 
-function t:UpdateLocalMetering() --[[ line: 274 ]]
+function t:UpdateLocalMetering()
 	-- upvalues: playersService (ref), var8 (ref)
 	self.isTalking = self.callbacks.isSignalActive(playersService.LocalPlayer.UserId)
 	
@@ -235,7 +235,7 @@ function t:UpdateLocalMetering() --[[ line: 274 ]]
 	end
 end
 
-function t:FireTalkingChangedDebounced(p11) --[[ line: 285 ]]
+function t:FireTalkingChangedDebounced(p11)
 	-- upvalues: var9 (ref)
 	local var21 = tick() * 1000
 	
@@ -246,13 +246,13 @@ function t:FireTalkingChangedDebounced(p11) --[[ line: 285 ]]
 	end
 end
 
-function t:SetupMicActivityListener(p12) --[[ line: 299 ]]
+function t:SetupMicActivityListener(p12)
 	-- upvalues: var10 (ref), voiceChatService (ref), MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY (ref), getFFlagLocalMutedNilFix (ref), var8 (ref)
 	if var10 and voiceChatService.UseNewAudioApi then
 		if self.localMeteringTask then
 			return
 		else
-			self.localMeteringTask = task.spawn(function() --[[ line: 302 ]]
+			self.localMeteringTask = task.spawn(function()
 				-- upvalues: self (ref)
 				while true do
 					self:UpdateLocalMetering()
@@ -263,7 +263,7 @@ function t:SetupMicActivityListener(p12) --[[ line: 299 ]]
 			return
 		end
 	elseif MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY <= p12:GetVoiceChatApiVersion() then
-		table.insert(self._connections, p12.PlayerMicActivitySignalChange:Connect(function(p13) --[[ line: 311 ]]
+		table.insert(self._connections, p12.PlayerMicActivitySignalChange:Connect(function(p13)
 			-- upvalues: self (ref), getFFlagLocalMutedNilFix (copy), var8 (copy)
 			self.callbacks.onVoiceCapturedDuringVideoCapture(p13.isActive)
 			self.isTalking = p13.isActive
@@ -290,11 +290,11 @@ function t:SetupMicActivityListener(p12) --[[ line: 299 ]]
 	end
 end
 
-function t:SetAdMuteBlocked(p14) --[[ line: 337 ]]
+function t:SetAdMuteBlocked(p14)
 	self.isPlayerWatchingAd = p14
 end
 
-function t:Disconnect() --[[ line: 341 ]]
+function t:Disconnect()
 	for i, v in self._connections do
 		v:Disconnect()
 	end
@@ -306,7 +306,7 @@ function t:Disconnect() --[[ line: 341 ]]
 	end
 end
 
-function t:_assertDeviceStateConsistency() --[[ line: 352 ]]
+function t:_assertDeviceStateConsistency()
 	-- upvalues: playersService (ref)
 	local var22 = if self.localMuted == nil then false else not self.localMuted
 	

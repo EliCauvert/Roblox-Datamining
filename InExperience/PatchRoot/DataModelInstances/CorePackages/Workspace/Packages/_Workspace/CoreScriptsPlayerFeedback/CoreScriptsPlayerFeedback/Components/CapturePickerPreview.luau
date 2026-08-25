@@ -2,7 +2,7 @@
 local reactModule = require(coreScriptsPlayerFeedback.Parent.React)
 local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 
-return reactModule.memo(function(p0) --[[ line: 15 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

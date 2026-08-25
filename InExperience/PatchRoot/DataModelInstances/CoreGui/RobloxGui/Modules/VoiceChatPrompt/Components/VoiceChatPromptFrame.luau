@@ -103,7 +103,7 @@ local t_1 = {
 	[promptTypeModule.VoiceToxicityModal] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.VoiceToxicityModal"),
 	[promptTypeModule.VoiceToxicityToast] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.VoiceToxicityToast"),
 	[promptTypeModule.VoiceToxicityFeedbackToast] = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.ThanksForLettingUsKnow"),
-	[promptTypeModule.VoiceChatSuspendedTemporaryToast] = function(p0) --[[ line: 194 ]]
+	[promptTypeModule.VoiceChatSuspendedTemporaryToast] = function(p0)
 		-- upvalues: robloxTranslatorModule (ref)
 		return robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil", { dateTime = p0 })
 	end,
@@ -141,27 +141,27 @@ local var47 = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() the
 local var48 = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.TemporaryVoiceBan2V2") else nil
 local var49 = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.IncorrectNudgeV2") else nil
 
-local function _(p1) --[[ line: 273 | named "PromptTypeIsBan" ]]
+local function _(p1)
 	-- upvalues: promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref)
 	return if p1 ~= promptTypeModule.VoiceChatSuspendedPermanent then if p1 ~= promptTypeModule.VoiceChatSuspendedTemporary then if p1 ~= promptTypeModule.VoiceChatSuspendedTemporaryAvatarChat then if p1 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p1 == promptTypeModule.VoiceChatSuspendedTemporaryBV2 else true else true else true else true
 end
 
-local _ = function(p2) --[[ line: 281 | named "IsModalNudge" ]]
+local _ = function(p2)
 	-- upvalues: promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref)
 	return if p2 ~= promptTypeModule.VoiceToxicityModal then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p2 == promptTypeModule.VoiceToxicityModalV2 else true
 end
 
-local _ = function(p3) --[[ line: 286 | named "IsVoiceConsentModal" ]]
+local _ = function(p3)
 	-- upvalues: promptTypeModule (ref)
 	return if p3 ~= promptTypeModule.VoiceConsentModalV1 then if p3 ~= promptTypeModule.VoiceConsentModalV2 then p3 == promptTypeModule.VoiceConsentModalV3 else true else true
 end
 
-local _ = function(p4) --[[ line: 292 | named "IsDevicePermissionsModal" ]]
+local _ = function(p4)
 	-- upvalues: promptTypeModule (ref)
 	return p4 == promptTypeModule.DevicePermissionsModal
 end
 
-local _ = function(p5) --[[ line: 296 | named "PromptTypeIsModal" ]]
+local _ = function(p5)
 	-- upvalues: promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref)
 	local var52 = if p5 ~= promptTypeModule.VoiceChatSuspendedPermanent then if p5 ~= promptTypeModule.VoiceChatSuspendedTemporary then if p5 ~= promptTypeModule.VoiceChatSuspendedTemporaryAvatarChat then if p5 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p5 == promptTypeModule.VoiceChatSuspendedTemporaryBV2 else true else true else true else true
 	
@@ -176,27 +176,27 @@ local _ = function(p5) --[[ line: 296 | named "PromptTypeIsModal" ]]
 	return var52
 end
 
-local _ = function(p6) --[[ line: 303 | named "PromptTypeIsVoiceConsent" ]]
+local _ = function(p6)
 	-- upvalues: promptTypeModule (ref)
 	return if p6 ~= promptTypeModule.VoiceConsentDeclinedToast then p6 == promptTypeModule.VoiceConsentAcceptedToast else true
 end
 
-local _ = function(p7) --[[ line: 307 | named "PromptTypeIsVoiceDataConsent" ]]
+local _ = function(p7)
 	-- upvalues: promptTypeModule (ref)
 	return p7 == promptTypeModule.VoiceDataConsentOptOutToast
 end
 
-local _ = function(p8) --[[ line: 311 | named "PromptTypeIsConnectDisconnectToast" ]]
+local _ = function(p8)
 	-- upvalues: promptTypeModule (ref), getFFlagUpdateVoiceConnectionToastsModule (ref)
 	return if p8 ~= promptTypeModule.JoinVoice then if p8 ~= promptTypeModule.LeaveVoice then getFFlagUpdateVoiceConnectionToastsModule() and p8 == promptTypeModule.UnifiedJoinVoiceToast else true else true
 end
 
-local _ = function(p9) --[[ line: 317 | named "ShouldShowBannedUntil" ]]
+local _ = function(p9)
 	-- upvalues: promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref)
 	return if p9 ~= promptTypeModule.VoiceChatSuspendedTemporary then if p9 ~= promptTypeModule.VoiceChatSuspendedTemporaryAvatarChat then if p9 ~= promptTypeModule.VoiceChatSuspendedTemporaryToast then if p9 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p9 == promptTypeModule.VoiceChatSuspendedTemporaryBV2 else true else true else true else true
 end
 
-local _ = function(p10) --[[ line: 325 | named "ShouldShowSecondaryButton" ]]
+local _ = function(p10)
 	-- upvalues: promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref)
 	local var53 = true
 	
@@ -233,7 +233,7 @@ voiceChatPromptFrame.validateProps = tModule.strictInterface({
 	lastInput = tModule.optional(tModule.string)
 })
 
-function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
+function voiceChatPromptFrame.init(p11)
 	-- upvalues: promptTypeModule (ref), getFFlagSupportGamepadNavInVoiceModals (ref), roactModule (ref), robloxTranslatorModule (ref), t (ref), t_1 (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), images (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), contextActionService (ref), voiceNudgeUseNewDACopyModule (ref), voiceChatOnlyReportVoiceBans (ref)
 	p11.promptStyle = {
 		Theme = p11.props.appStyle.Theme,
@@ -255,14 +255,14 @@ function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
 		t[promptTypeModule.VoiceChatSuspendedPermanent] = var54
 		t_1[promptTypeModule.VoiceChatSuspendedTemporary] = var55
 	end
-	function p11.onScreenSizeChanged(p12) --[[ line: 374 ]]
+	function p11.onScreenSizeChanged(p12)
 		-- upvalues: p11 (ref)
 		if p11.state.screenSize ~= p12.AbsoluteSize then
 			p11:setState({ screenSize = p12.AbsoluteSize })
 		end
 	end
 	
-	function p11.promptSignalCallback(p13) --[[ line: 382 ]]
+	function p11.promptSignalCallback(p13)
 		-- upvalues: promptTypeModule (copy), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), p11 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), t (copy), t_1 (copy), getFFlagUpdateVoiceConnectionToastsModule (copy), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), images (copy), getFFlagEnableSeamlessVoiceDataConsentToastModule (copy), robloxTranslatorModule (copy), roactModule (copy)
 		if if p13 ~= promptTypeModule.VoiceChatSuspendedPermanent then if p13 ~= promptTypeModule.VoiceChatSuspendedTemporary then if p13 ~= promptTypeModule.VoiceChatSuspendedTemporaryAvatarChat then if p13 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p13 == promptTypeModule.VoiceChatSuspendedTemporaryBV2 else true else true else true else true then
 			if p11.props.Analytics then
@@ -313,13 +313,13 @@ function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
 					iconImage = var59,
 					toastTitle = var56,
 					toastSubtitle = var57,
-					onActivated = function() --[[ line: 460 ]]
+					onActivated = function()
 						-- upvalues: p11 (copy)
 						if p11.props.onPrimaryActivated then
 							p11.props.onPrimaryActivated()
 						end
 					end,
-					onDismissed = function() --[[ line: 465 ]] end
+					onDismissed = function() end
 				}
 			})
 			var58 = if p13 ~= promptTypeModule.VoiceChatSuspendedTemporary then if p13 ~= promptTypeModule.VoiceChatSuspendedTemporaryAvatarChat then if p13 ~= promptTypeModule.VoiceChatSuspendedTemporaryToast then if p13 ~= promptTypeModule.VoiceChatSuspendedTemporaryB then getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p13 == promptTypeModule.VoiceChatSuspendedTemporaryBV2 else true else true else true else true
@@ -339,7 +339,7 @@ function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
 		end
 	end
 	
-	function p11.closeVoiceBanPrompt() --[[ line: 495 ]]
+	function p11.closeVoiceBanPrompt()
 		-- upvalues: p11 (ref), contextActionService (copy), promptTypeModule (copy), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), voiceNudgeUseNewDACopyModule (copy), voiceChatOnlyReportVoiceBans (copy)
 		p11:setState({ showPrompt = false })
 		
@@ -373,14 +373,14 @@ function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
 		end
 	end
 	
-	function p11.checkInputStateForClosePrompt(_, p14, _) --[[ line: 530 ]]
+	function p11.checkInputStateForClosePrompt(_, p14, _)
 		-- upvalues: p11 (ref)
 		if p14 == Enum.UserInputState.Begin then
 			p11.closeVoiceBanPrompt()
 		end
 	end
 	
-	function p11.handlePrimayActivated() --[[ line: 536 ]]
+	function p11.handlePrimayActivated()
 		-- upvalues: p11 (ref)
 		p11.closeVoiceBanPrompt()
 		
@@ -389,7 +389,7 @@ function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
 		end
 	end
 	
-	function p11.handleSecondaryActivated() --[[ line: 543 ]]
+	function p11.handleSecondaryActivated()
 		-- upvalues: p11 (ref)
 		p11.closeVoiceBanPrompt()
 		
@@ -399,7 +399,7 @@ function voiceChatPromptFrame.init(p11) --[[ line: 350 ]]
 	end
 end
 
-function voiceChatPromptFrame.render(p15) --[[ line: 551 ]]
+function voiceChatPromptFrame.render(p15)
 	-- upvalues: getFFlagEnableVoicePromptReasonTextModule (ref), promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), textService (ref), var42 (ref), var46 (ref), var48 (ref), var41 (ref), getFFlagSupportGamepadNavInVoiceModals (ref), voiceNudgeUseNewConfirmButton (ref), roactModule (ref), var47 (ref), var44 (ref), var43 (ref), color_1 (ref), color (ref), button (ref), buttonType (ref), UIBloxModule (ref), assetsModule (ref), var49 (ref), var45 (ref), devicePermissionsModalModule (ref), t (ref), t_1 (ref), userInputService (ref), voiceChatConsentModalModule (ref), coreGuiService (ref), voiceChatTooltipModule (ref), getFIntVoiceToxicityToastDurationSecondsModule (ref), getFIntVoiceJoinM3ToastDurationSecondsModule (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), toast (ref), externalEventConnection (ref)
 	local var62 = if getFFlagEnableVoicePromptReasonTextModule() then p15.props.errorText else nil
 	local promptType = p15.state.promptType
@@ -609,11 +609,11 @@ function voiceChatPromptFrame.render(p15) --[[ line: 551 ]]
 							LayoutOrder = 1,
 							Text = if getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and voiceNudgeUseNewDACopyModule() and var66 then var47 elseif getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and var63 and (voiceNudgeUseNewDACopyModule() and p15.state.promptType == promptTypeModule.VoiceToxicityModalV2) then var47 elseif var63 then var44 else var43,
 							[roactModule.Event.Activated] = p15.handlePrimayActivated,
-							[roactModule.Event.MouseEnter] = function(p16) --[[ line: 619 ]]
+							[roactModule.Event.MouseEnter] = function(p16)
 								-- upvalues: color_1 (copy)
 								p16.BackgroundColor3 = color_1
 							end,
-							[roactModule.Event.MouseLeave] = function(p17) --[[ line: 622 ]]
+							[roactModule.Event.MouseLeave] = function(p17)
 								-- upvalues: color (copy)
 								p17.BackgroundColor3 = color
 							end,
@@ -653,7 +653,7 @@ function voiceChatPromptFrame.render(p15) --[[ line: 551 ]]
 			subtitleText = t_1[p15.state.promptType],
 			promptStyle = p15.promptStyle,
 			showPrompt = p15.state.showPrompt,
-			onClose = function() --[[ line: 854 ]]
+			onClose = function()
 				-- upvalues: p15 (ref)
 				p15:setState({ showPrompt = false })
 			end,
@@ -676,7 +676,7 @@ function voiceChatPromptFrame.render(p15) --[[ line: 551 ]]
 	end
 end
 
-function voiceChatPromptFrame.didUpdate(p18) --[[ line: 898 ]]
+function voiceChatPromptFrame.didUpdate(p18)
 	-- upvalues: getFFlagSupportGamepadNavInVoiceModals (ref), responsiveModule (ref), guiService (ref)
 	if getFFlagSupportGamepadNavInVoiceModals() then
 		if p18.props.lastInput == responsiveModule.Input.Directional then
@@ -698,7 +698,7 @@ function voiceChatPromptFrame.didUpdate(p18) --[[ line: 898 ]]
 	end
 end
 
-function voiceChatPromptFrame.didMount(p19) --[[ line: 930 ]]
+function voiceChatPromptFrame.didMount(p19)
 	-- upvalues: contextActionService (ref)
 	if p19.props.onReadyForSignal then
 		p19.props.onReadyForSignal()
@@ -707,7 +707,7 @@ function voiceChatPromptFrame.didMount(p19) --[[ line: 930 ]]
 	contextActionService:BindCoreAction("CloseVoiceBanPrompt", p19.checkInputStateForClosePrompt, false, Enum.KeyCode.ButtonB)
 end
 
-voiceChatPromptFrame = inGameMenuPolicyModule.connect(function(p20, _) --[[ line: 948 ]]
+voiceChatPromptFrame = inGameMenuPolicyModule.connect(function(p20, _)
 	return {
 		showNewContent = p20.getGameInfoShowChatFeatures(),
 		showCheckbox = p20.getDisplayCheckboxInVoiceConsent(),
@@ -715,7 +715,7 @@ voiceChatPromptFrame = inGameMenuPolicyModule.connect(function(p20, _) --[[ line
 	}
 end)(voiceChatPromptFrame)
 
-local function WrappedVoiceChatPromptFrame(p21) --[[ line: 958 ]]
+local function WrappedVoiceChatPromptFrame(p21)
 	-- upvalues: useStyle (ref), getFFlagSupportGamepadNavInVoiceModals (ref), useLastInput (ref), roactModule (ref), voiceChatPromptFrame (write), cryoModule (ref)
 	return roactModule.createElement(voiceChatPromptFrame, cryoModule.Dictionary.join(p21, {
 		appStyle = useStyle(),
@@ -723,7 +723,7 @@ local function WrappedVoiceChatPromptFrame(p21) --[[ line: 958 ]]
 	}))
 end
 
-return function(p22) --[[ line: 969 ]]
+return function(p22)
 	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref), roactModule (ref), WrappedVoiceChatPromptFrame (ref)
 	return renderWithCoreScriptsStyleProviderModule({
 		roactModule.createElement(WrappedVoiceChatPromptFrame, p22)

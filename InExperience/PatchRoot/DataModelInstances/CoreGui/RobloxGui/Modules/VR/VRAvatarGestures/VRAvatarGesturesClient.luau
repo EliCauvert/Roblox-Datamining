@@ -13,13 +13,13 @@ local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VR
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 55 ]]
+function t.new()
 	-- upvalues: t (ref), connectionUtil (ref), VRService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.partCFrameMap = {}
 	tbl.connections = connectionUtil.new()
 	tbl.analyticsSendEnabled = true
-	tbl.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ line: 60 ]]
+	tbl.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
 		-- upvalues: tbl (ref)
 		tbl:onAvatarGesturesChanged()
 	end)
@@ -30,7 +30,7 @@ function t.new() --[[ line: 55 ]]
 	return tbl
 end
 
-function t:onCharacterChanged(p0) --[[ line: 65 ]]
+function t:onCharacterChanged(p0)
 	-- upvalues: VRService (ref)
 	local humanoid = p0:FindFirstChild("Humanoid")
 	
@@ -49,7 +49,7 @@ function t:onCharacterChanged(p0) --[[ line: 65 ]]
 	local currentCamera = workspace.CurrentCamera
 	
 	if currentCamera then
-		local function updateSeated(p1) --[[ line: 86 ]]
+		local function updateSeated(p1)
 			-- upvalues: currentCamera (ref), humanoid (ref)
 			local vehicleSeat = currentCamera.CameraSubject and currentCamera.CameraSubject:IsA("VehicleSeat")
 			local var15 = (currentCamera.CFrame.Position - currentCamera.Focus.Position).Magnitude <= 5
@@ -66,7 +66,7 @@ function t:onCharacterChanged(p0) --[[ line: 65 ]]
 		end
 		
 		updateSeated(humanoid.Sit)
-		self.connections:connect("Seated", humanoid.Seated, function(p2) --[[ line: 102 ]]
+		self.connections:connect("Seated", humanoid.Seated, function(p2)
 			-- upvalues: updateSeated (ref), currentCamera (ref), VRService (copy)
 			updateSeated(p2)
 			
@@ -79,7 +79,7 @@ function t:onCharacterChanged(p0) --[[ line: 65 ]]
 	end
 end
 
-function t:onAvatarGesturesChanged() --[[ line: 111 ]]
+function t:onAvatarGesturesChanged()
 	-- upvalues: VRService (ref), debugImmersionModeNonVR (ref), robloxReplicatedStorageService (ref), avatarUtil (ref), playersService (ref), rbxAnalyticsService (ref), VRAvatarGesturesAnalyticsThrottleHundrethsPercent (ref)
 	if not VRService.AvatarGestures then
 		if VRService.VREnabled or debugImmersionModeNonVR then
@@ -90,7 +90,7 @@ function t:onAvatarGesturesChanged() --[[ line: 111 ]]
 			end
 		end
 		self.connections:disconnectAll()
-		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ line: 157 ]]
+		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
 			-- upvalues: self (ref)
 			self:onAvatarGesturesChanged()
 		end)
@@ -107,7 +107,7 @@ function t:onAvatarGesturesChanged() --[[ line: 111 ]]
 		
 		if not self.avatarUtil then
 			self.avatarUtil = avatarUtil.new()
-			self.avatarUtil:connectLocalCharacterChanges(function(p3) --[[ line: 128 ]]
+			self.avatarUtil:connectLocalCharacterChanges(function(p3)
 				-- upvalues: self (ref)
 				self:onCharacterChanged(p3)
 			end)
@@ -123,7 +123,7 @@ function t:onAvatarGesturesChanged() --[[ line: 111 ]]
 	end
 end
 
-function t.updateCFrames(_, p4, p5) --[[ line: 161 ]]
+function t.updateCFrames(_, p4, p5)
 	-- upvalues: playersService (ref), VRService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -183,16 +183,16 @@ function t.updateCFrames(_, p4, p5) --[[ line: 161 ]]
 	var19.CFrame = CFrame.new(var20.Position) * var21.CFrame.Rotation
 end
 
-function t:steppedCframes() --[[ line: 253 ]]
+function t:steppedCframes()
 	for i, v in pairs(self.partCFrameMap) do
 		self:updateCFrames(i, v)
 	end
 end
 
-function t:connectInputCFrames() --[[ line: 259 ]]
+function t:connectInputCFrames()
 	-- upvalues: VRService (ref), debugImmersionModeNonVR (ref), runService (ref)
 	if VRService.VREnabled then
-		self.connections:connect("UserCFrameChanged", VRService.UserCFrameChanged, function(p6, p7) --[[ line: 261 ]]
+		self.connections:connect("UserCFrameChanged", VRService.UserCFrameChanged, function(p6, p7)
 			-- upvalues: self (ref)
 			if p6 == Enum.UserCFrame.LeftHand then
 				self.partCFrameMap.TrackedLeftHand = p7
@@ -207,7 +207,7 @@ function t:connectInputCFrames() --[[ line: 259 ]]
 			end
 		end)
 	elseif debugImmersionModeNonVR then
-		self.connections:connect("NonVRSimulateInput", runService.RenderStepped, function(_) --[[ line: 271 ]]
+		self.connections:connect("NonVRSimulateInput", runService.RenderStepped, function(_)
 			-- upvalues: self (ref)
 			self.partCFrameMap.TrackedLeftHand = CFrame.new(-0.5, 0, -0.5)
 			self.partCFrameMap.TrackedRightHand = CFrame.new(0.5, 0, -0.5)
@@ -215,7 +215,7 @@ function t:connectInputCFrames() --[[ line: 259 ]]
 		end)
 	end
 	if VRService.VREnabled or debugImmersionModeNonVR then
-		self.connections:connect("RenderStepped", runService.RenderStepped, function(_) --[[ line: 279 ]]
+		self.connections:connect("RenderStepped", runService.RenderStepped, function(_)
 			-- upvalues: self (ref)
 			self:steppedCframes()
 		end)

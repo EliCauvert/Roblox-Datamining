@@ -11,7 +11,7 @@ local t = {
 	lastUpdated = { 2026, 7, 23 }
 }
 
-local function _logEventWithStandardizedFields(p0, p1) --[[ line: 26 ]]
+local function _logEventWithStandardizedFields(p0, p1)
 	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
 	local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
 	p1 = p1 or {}
@@ -25,7 +25,7 @@ local function _logEventWithStandardizedFields(p0, p1) --[[ line: 26 ]]
 end
 
 return {
-	logPlaytestModeEnabled = function(p2) --[[ line: 42 ]]
+	logPlaytestModeEnabled = function(p2)
 		-- upvalues: _logEventWithStandardizedFields (ref), t (ref)
 		_logEventWithStandardizedFields(t, { reason = p2 })
 	end

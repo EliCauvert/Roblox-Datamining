@@ -9,7 +9,7 @@ if not defaultSoundEvents_1 then
 	defaultSoundEvents_1.Archivable = false
 	defaultSoundEvents_1.Parent = replicatedStorageService
 end
-local function _(p0, p1) --[[ line: 27 | named "createEvent" ]]
+local function _(p0, p1)
 	-- upvalues: defaultSoundEvents_1 (write)
 	local var11 = defaultSoundEvents_1:FindFirstChild(p0)
 	
@@ -42,19 +42,19 @@ if not removeCharacterEvent_1 then
 	removeCharacterEvent_1.Name = "RemoveCharacterEvent"
 	removeCharacterEvent_1.Parent = defaultSoundEvents_1
 end
-local function fireDefaultServerSoundEventToClient(p2, p3, p4, p5) --[[ line: 43 ]]
+local function fireDefaultServerSoundEventToClient(p2, p3, p4, p5)
 	-- upvalues: t (ref), defaultServerSoundEvent_1 (ref)
 	if t[p2] then
 		defaultServerSoundEvent_1:FireClient(p2, p3, p4, p5)
 	end
 end
 
-local function addCharacterLoaded(p6) --[[ line: 50 ]]
+local function addCharacterLoaded(p6)
 	-- upvalues: t (ref)
 	t[p6] = true
 end
 
-local function removeCharacter(p7) --[[ line: 55 ]]
+local function removeCharacter(p7)
 	-- upvalues: t (ref)
 	t[p7] = nil
 end
@@ -67,7 +67,7 @@ if not soundDispatcher_1 then
 	soundDispatcher_1.Parent = defaultSoundEvents_1
 end
 soundDispatcher_1.Event:Connect(fireDefaultServerSoundEventToClient)
-defaultServerSoundEvent_1.OnServerEvent:Connect(function() --[[ line: 63 ]] end)
+defaultServerSoundEvent_1.OnServerEvent:Connect(function() end)
 addCharacterLoadedEvent_1.OnServerEvent:Connect(addCharacterLoaded)
 removeCharacterEvent_1.OnServerEvent:Connect(removeCharacter)
 playersService.PlayerRemoving:Connect(removeCharacter)

@@ -3,18 +3,18 @@ local gameCollections = script:FindFirstAncestor("GameCollections")
 local reactModule = require(gameCollections.Parent.React)
 local calculateCountdownTimeModule = require(gameCollections.calculateCountdownTime)
 
-local function _(p0) --[[ line: 19 | named "validateTimeValues" ]]
+local function _(p0)
 	return if p0.days < 0 then false elseif p0.hours < 0 or p0.hours > 23 then false else p0.minutes < 0 or p0.minutes > 59
 end
 
-local _ = function(p1) --[[ line: 35 | named "getUpdateFrequency" ]]
+local _ = function(p1)
 	return if p1 < 15 then 1 else 15
 end
 
-return function(p2, p3, p4) --[[ line: 46 | named "useCountdownSubtitleTextBinding" ]]
+return function(p2, p3, p4)
 	-- upvalues: reactModule (ref), calculateCountdownTimeModule (ref), runService (ref)
 	local var4, var5 = reactModule.useState("")
-	local var6 = reactModule.useCallback(function() --[[ line: 52 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: p4 (ref), p2 (ref), p3 (ref), calculateCountdownTimeModule (copy), var5 (ref)
 		if p4 == nil or p4 == "" or (p2 == nil or p3 == nil) or p3 == "" then
 			return 0
@@ -38,11 +38,11 @@ return function(p2, p3, p4) --[[ line: 46 | named "useCountdownSubtitleTextBindi
 		
 		return var8
 	end, { p4, p2, p3 })
-	reactModule.useEffect(function() --[[ line: 79 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var6 (ref)
 		var6()
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 84 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p4 (ref), p2 (ref), p3 (ref), runService (copy), var6 (ref)
 		local heartbeatConnection = nil
 		
@@ -52,7 +52,7 @@ return function(p2, p3, p4) --[[ line: 46 | named "useCountdownSubtitleTextBindi
 			if var12 > 0 then
 				local var13 = 0
 				local var14 = if var12 < 15 then 1 else 15
-				heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 99 ]]
+				heartbeatConnection = runService.Heartbeat:Connect(function()
 					-- upvalues: var13 (write), var14 (write), var12 (write), var6 (copy), heartbeatConnection (write)
 					local processTime = os.clock()
 					
@@ -68,7 +68,7 @@ return function(p2, p3, p4) --[[ line: 46 | named "useCountdownSubtitleTextBindi
 				end)
 			end
 		end
-		return function() --[[ line: 114 ]]
+		return function()
 			-- upvalues: heartbeatConnection (write)
 			if heartbeatConnection ~= nil then
 				heartbeatConnection:Disconnect()

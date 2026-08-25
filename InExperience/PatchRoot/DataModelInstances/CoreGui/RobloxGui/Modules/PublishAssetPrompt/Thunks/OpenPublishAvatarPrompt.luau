@@ -2,9 +2,9 @@
 local openPublishAvatarPromptModule = require(parent.Actions.OpenPublishAvatarPrompt)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: openPublishAvatarPromptModule (ref), promptTypeModule (ref)
-	return function(p2) --[[ line: 13 ]]
+	return function(p2)
 		-- upvalues: openPublishAvatarPromptModule (copy), promptTypeModule (copy), p0 (ref), p1 (ref)
 		p2:dispatch(openPublishAvatarPromptModule(promptTypeModule.PublishAvatar, p0, p1))
 	end

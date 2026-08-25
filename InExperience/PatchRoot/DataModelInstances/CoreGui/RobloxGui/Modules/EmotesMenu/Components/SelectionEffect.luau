@@ -4,7 +4,7 @@ local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local constantsModule = require(script.Parent.Parent.Constants)
 local selectionEffect = roactModule.PureComponent:extend("SelectionEffect")
 
-function selectionEffect.render(p0) --[[ line: 13 ]]
+function selectionEffect.render(p0)
 	-- upvalues: constantsModule (ref), roactModule (ref)
 	local layout = constantsModule.Layouts[p0.props.layout]
 	local focusedSegmentIndex = p0.props.emotesWheel.focusedSegmentIndex
@@ -32,6 +32,6 @@ function selectionEffect.render(p0) --[[ line: 13 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p1) --[[ line: 46 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p1)
 	return { emotesWheel = p1.emotesWheel, layout = p1.layout }
 end, nil)(selectionEffect)

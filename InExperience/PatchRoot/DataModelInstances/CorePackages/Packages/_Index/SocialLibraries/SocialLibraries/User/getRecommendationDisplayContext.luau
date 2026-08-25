@@ -5,11 +5,11 @@ local _ = {
 	PlayedTogether = "Feature.Friends.Label.Frequent"
 }
 
-local _ = function(p0) --[[ line: 49 ]]
+local _ = function(p0)
 	return if p0.mutualFriendsCount then p0.mutualFriendsCount elseif p0.mutualFriendsList then #p0.mutualFriendsList else 0
 end
 
-return function(p1) --[[ line: 55 ]]
+return function(p1)
 	-- upvalues: recommendationContextType (ref)
 	local t = nil
 	local var1 = nil
@@ -18,7 +18,7 @@ return function(p1) --[[ line: 55 ]]
 	local var4 = if p1.mutualFriendsCount then p1.mutualFriendsCount elseif p1.mutualFriendsList then #p1.mutualFriendsList else 0
 	
 	if var3 == recommendationContextType.MutualFriends.rawValue() and var4 > 0 then
-		var2 = function(p2) --[[ line: 65 ]]
+		var2 = function(p2)
 			-- upvalues: var4 (ref)
 			return if p2 then tostring(var4) .. " " .. string.lower(p2) else nil
 		end

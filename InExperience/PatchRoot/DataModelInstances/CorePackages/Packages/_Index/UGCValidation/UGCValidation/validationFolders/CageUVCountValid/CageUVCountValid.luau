@@ -15,7 +15,7 @@ return {
 	conditionalData = {},
 	fflag = require(parent.flags.getFFlagUGCValidateMigrateCageUV),
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 38 ]]
+	run = function(p0, p1)
 		-- upvalues: constantsModule (ref), UGCValidationService (ref), getFIntUniqueUVToleranceModule (ref), errorSourceStringsModule (ref)
 		for i, v in p1.outerCagesData do
 			local var5 = constantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[i]

@@ -10,14 +10,14 @@ local t = {
 	[tostring(Enum.AssetType.DressSkirtAccessory.Value)] = "LCBottoms"
 }
 
-function getTryOnItemComparisonData(p0) --[[ line: 16 ]]
+function getTryOnItemComparisonData(p0)
 	-- upvalues: t (ref), itemTypeEnumModule (ref)
 	local t_1 = {}
 	local t_2 = {}
 	local var5 = false
 	local var6 = false
 	
-	local function _(value) --[[ line: 26 | named "addAssetTypeAndLayeredClothingCategory" ]]
+	local function _(value)
 		-- upvalues: t_1 (ref), t (copy), t_2 (ref)
 		t_1[value] = true
 		local var9 = t[value]

@@ -10,7 +10,7 @@ t.aggregate = {
 	receiveResponse = 0
 }
 
-function t.track(p0, p1) --[[ line: 24 ]]
+function t.track(p0, p1)
 	p0.aggregate.queued += p1.queued
 	
 	if p1.nameLookup >= 0 then
@@ -30,7 +30,7 @@ function t.track(p0, p1) --[[ line: 24 ]]
 	end
 end
 
-function t.report(p2, p3) --[[ line: 43 ]]
+function t.report(p2, p3)
 	-- upvalues: var0 (ref)
 	p3("NetworkProfileDuringStartup", "Queued", p2.aggregate.queued, var0)
 	p3("NetworkProfileDuringStartup", "NameLookup", p2.aggregate.nameLookup, var0)

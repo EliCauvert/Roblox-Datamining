@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 83 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		type = if p0 == nil or p0.type == nil then "" else p0.type,
@@ -13,7 +13,7 @@ function t_1.new(p0) --[[ line: 83 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 91 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -42,7 +42,7 @@ function t_1:encode() --[[ line: 91 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 115 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var14 = t_1.new()
 	local var15 = 0
@@ -100,7 +100,7 @@ function t_1.decode(p1) --[[ line: 115 ]]
 	return var14
 end
 
-function t_1:jsonEncode() --[[ line: 168 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.type ~= nil and self.type ~= "" then
@@ -115,7 +115,7 @@ function t_1:jsonEncode() --[[ line: 168 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 186 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var36 = t_1.new()
 	
@@ -143,7 +143,7 @@ typeRegistryModule.default:register(t.PriceDiscountDetail)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 222 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		id = if p2 == nil or p2.id == nil then "" else p2.id,
@@ -159,7 +159,7 @@ function t_2.new(p2) --[[ line: 222 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 245 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var38 = 0
@@ -233,7 +233,7 @@ function t_2:encode() --[[ line: 245 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 307 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var61 = t_2.new()
 	local var62 = 0
@@ -326,7 +326,7 @@ function t_2.decode(p3) --[[ line: 307 ]]
 	return var61
 end
 
-function t_2:jsonEncode() --[[ line: 395 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -367,7 +367,7 @@ function t_2:jsonEncode() --[[ line: 395 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 445 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref)
 	local var98 = t_2.new()
 	

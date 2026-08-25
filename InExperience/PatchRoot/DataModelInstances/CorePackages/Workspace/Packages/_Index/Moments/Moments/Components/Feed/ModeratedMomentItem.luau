@@ -21,13 +21,13 @@ local t = {
 	unavailableBody = "Feature.Moments.Label.MomentUnavailableDefault"
 }
 
-return function(p0) --[[ line: 37 | named "ModeratedMomentItem" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), fFlagMomentsUseCompositionLibraryModule (ref), useFormFactor (ref), playersService (ref), reactModule (ref), useImageLoadingState (ref), image (ref), skeleton (ref), view (ref), constantsModule (ref), formFactor (ref), text (ref)
 	local var9 = useLocalization(t)
 	local var10 = if not fFlagMomentsUseCompositionLibraryModule then useFormFactor() else nil
 	local localPlayer = playersService.LocalPlayer
 	local var11 = if localPlayer then localPlayer.UserId else nil
-	local var12 = reactModule.useMemo(function() --[[ line: 46 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: var11 (ref), p0 (ref)
 		return var11 ~= nil and p0.creatorId == var11
 	end, { p0.creatorId, var11 or false })

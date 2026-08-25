@@ -4,20 +4,20 @@ local appCommonLibModule = require(corePackagesService.Workspace.Packages.AppCom
 local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
 
 return {
-	getDeviceType = function() --[[ line: 26 ]]
+	getDeviceType = function()
 		-- upvalues: appCommonLibModule (ref), deviceOrientationMode (ref)
 		local viewportSize = workspace.CurrentCamera.ViewportSize
 		
 		return appCommonLibModule.getDeviceType(if viewportSize.Y < viewportSize.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait)
 	end,
 	DeviceTypes = robloxAppEnumsModule.DeviceType,
-	getDeviceOrientation = function() --[[ line: 19 ]]
+	getDeviceOrientation = function()
 		-- upvalues: deviceOrientationMode (ref)
 		local viewportSize = workspace.CurrentCamera.ViewportSize
 		
 		return if viewportSize.Y < viewportSize.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait
 	end,
-	getViewportSize = function() --[[ line: 14 ]]
+	getViewportSize = function()
 		return workspace.CurrentCamera.ViewportSize
 	end
 }

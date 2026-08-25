@@ -115,8 +115,6 @@ jobs:
               }
             };
 
-            // Minimal RFC4180 parser matching RobloxExtractor's CsvEscape (quotes a
-            // field only when it contains , " \n or \r; quotes doubled inside).
             const parseCsvRows = (text) => {
               const rows = [];
               let row = [];

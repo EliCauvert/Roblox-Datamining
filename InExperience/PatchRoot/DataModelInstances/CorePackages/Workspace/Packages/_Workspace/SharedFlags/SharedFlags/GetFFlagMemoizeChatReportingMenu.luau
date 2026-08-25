@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MemoizeChatReportingMenu", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("MemoizeChatReportingMenu")
 end

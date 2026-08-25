@@ -12,13 +12,13 @@ local useNavigationFocus = navigationModule.useNavigationFocus
 local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
 local fFlagSduiPlayWithRewardGapFix = require(parent.SharedFlags).FFlagSduiPlayWithRewardGapFix
 
-return reactModule.memo(function(p0) --[[ line: 28 | named "SduiPlayWithReward" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useNavigationFocus (ref), reactModule (ref), usePlayButtonState (ref), playButtonStates (ref), usePlayWithRewardData (ref), fFlagSduiPlayWithRewardGapFix (ref), getSduiClientPageScope (ref), playWithRewardComponent (ref)
 	local var5 = useNavigationFocus()
 	local var6, var7 = reactModule.useState(false)
 	local var8 = usePlayButtonState(p0.sduiContext and (p0.sduiContext.dependencies and p0.sduiContext.dependencies.networking), p0.universeId)
 	local var9 = var8.playButtonState == playButtonStates.Playable
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var7 (ref)
 		if var5 then
 			var7(true)
@@ -27,7 +27,7 @@ return reactModule.memo(function(p0) --[[ line: 28 | named "SduiPlayWithReward" 
 	local var10 = usePlayWithRewardData({
 		universeId = p0.universeId,
 		shouldFetch = var6,
-		onFetchDispatched = function() --[[ line: 47 ]]
+		onFetchDispatched = function()
 			-- upvalues: var7 (ref)
 			var7(false)
 		end
@@ -40,7 +40,7 @@ return reactModule.memo(function(p0) --[[ line: 28 | named "SduiPlayWithReward" 
 		playWithRewardData_1 = var9 and (showPlayWithReward and playWithRewardData)
 		local var12 = var8.playButtonState ~= playButtonStates.Loading and (playWithRewardData and not playWithRewardData_1)
 		local configKey = p0.sduiContext and p0.sduiContext.configKey
-		reactModule.useEffect(function() --[[ line: 62 ]]
+		reactModule.useEffect(function()
 			-- upvalues: configKey (ref), var12 (ref), getSduiClientPageScope (copy)
 			if configKey and var12 then
 				getSduiClientPageScope(configKey).set("filterPlayWithReward", true)

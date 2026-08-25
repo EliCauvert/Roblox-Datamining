@@ -13,7 +13,7 @@ local dedentBlockStringValue = blockStringModule.dedentBlockStringValue
 local getBlockStringIndentation = blockStringModule.getBlockStringIndentation
 local dedentBlockString = nil
 
-local function stripIgnoredCharacters(p0) --[[ line: 81 ]]
+local function stripIgnoredCharacters(p0)
 	-- upvalues: isSource (ref), source (ref), lexer (ref), tokenKind (ref), isPunctuatorTokenKind (ref), string (ref), dedentBlockString (write)
 	local var5 = if isSource(p0) then p0 else source.new(p0)
 	local body = var5.body
@@ -35,7 +35,7 @@ local function stripIgnoredCharacters(p0) --[[ line: 81 ]]
 	return var7
 end
 
-dedentBlockString = function(p1) --[[ line: 118 | named "dedentBlockString" ]]
+dedentBlockString = function(p1)
 	-- upvalues: string (ref), dedentBlockStringValue (ref), getBlockStringIndentation (ref)
 	local var11 = dedentBlockStringValue(string.slice(p1, 4, -3))
 	

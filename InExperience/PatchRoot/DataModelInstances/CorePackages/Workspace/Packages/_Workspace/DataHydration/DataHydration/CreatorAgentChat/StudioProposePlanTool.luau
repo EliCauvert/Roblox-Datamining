@@ -15,12 +15,12 @@ local t_1 = {
 	}
 }
 
-local function _(p0) --[[ line: 36 | named "valueLooksLikeToolName" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	return typeof(p0) == "string" and t[string.lower(p0)] == true
 end
 
-local function getRawInputContent(p1) --[[ line: 40 ]]
+local function getRawInputContent(p1)
 	if typeof(p1) == "string" then
 		return p1, nil, nil
 	elseif typeof(p1) ~= "table" then
@@ -39,7 +39,7 @@ local function getRawInputContent(p1) --[[ line: 40 ]]
 	return content, var9, nil
 end
 
-local _ = function(p2) --[[ line: 59 | named "toolCallLooksLikeProposePlan" ]]
+local _ = function(p2)
 	-- upvalues: t (ref)
 	local kind = p2.kind
 	
@@ -65,7 +65,7 @@ local _ = function(p2) --[[ line: 59 | named "toolCallLooksLikeProposePlan" ]]
 	end
 end
 
-local function extractPlanFromToolCall(p3) --[[ line: 72 ]]
+local function extractPlanFromToolCall(p3)
 	-- upvalues: t (ref), getRawInputContent (ref)
 	local var10
 	local kind = p3.kind
@@ -108,14 +108,14 @@ local function extractPlanFromToolCall(p3) --[[ line: 72 ]]
 	end
 end
 
-local _ = function(p4) --[[ line: 93 | named "decodePersistedToolResultText" ]]
+local _ = function(p4)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, p4)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
 end
 
-local function getPersistedToolResultText(p5) --[[ line: 103 ]]
+local function getPersistedToolResultText(p5)
 	-- upvalues: httpService (ref)
 	if p5.content == nil then
 		return nil
@@ -139,7 +139,7 @@ local function getPersistedToolResultText(p5) --[[ line: 103 ]]
 	return if #t > 0 then table.concat(t) else nil
 end
 
-local function findPlanInTurnState(p6, p7) --[[ line: 126 ]]
+local function findPlanInTurnState(p6, p7)
 	-- upvalues: fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), getPersistedToolResultText (ref), t (ref), getRawInputContent (ref)
 	local t_1 = {}
 	
@@ -202,7 +202,7 @@ local function findPlanInTurnState(p6, p7) --[[ line: 126 ]]
 	return nil, nil, nil, nil, nil
 end
 
-local function getToolCallOrder(p8, p9) --[[ line: 159 ]]
+local function getToolCallOrder(p8, p9)
 	if p8.activityItems ~= nil then
 		for i, v in p8.activityItems do
 			if v.kind == "tool_call" and v.toolCallId == p9 then
@@ -225,7 +225,7 @@ local function getToolCallOrder(p8, p9) --[[ line: 159 ]]
 	return 0
 end
 
-local _ = function(p10) --[[ line: 182 | named "decodePlanResult" ]]
+local _ = function(p10)
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, p10)
 	
@@ -237,7 +237,7 @@ return {
 	LOCAL_TOOL_DEFINITION = t_1,
 	extractPlanFromToolCall = extractPlanFromToolCall,
 	findPlanInTurnState = findPlanInTurnState,
-	getCompletedPlansFromTurnState = function(p11) --[[ line: 198 ]]
+	getCompletedPlansFromTurnState = function(p11)
 		-- upvalues: t (ref), getRawInputContent (ref), getPersistedToolResultText (ref), httpService (ref), getToolCallOrder (ref)
 		local t_1 = {}
 		local t_2 = {}
@@ -312,11 +312,11 @@ return {
 		end
 		return t_1
 	end,
-	formatAcceptedContent = function() --[[ line: 227 ]]
+	formatAcceptedContent = function()
 		-- upvalues: httpService (ref)
 		return { text = httpService:JSONEncode({ accepted = true }) }
 	end,
-	formatFeedbackContent = function(p12) --[[ line: 235 ]]
+	formatFeedbackContent = function(p12)
 		-- upvalues: httpService (ref)
 		return {
 			text = httpService:JSONEncode({ accepted = false, feedbackText = p12 })

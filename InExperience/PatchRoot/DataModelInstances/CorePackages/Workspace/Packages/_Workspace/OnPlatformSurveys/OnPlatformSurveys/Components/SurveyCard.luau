@@ -12,7 +12,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local _ = require(onPlatformSurveys.Components.surveyPhaseSlots)
 
-return reactModule.memo(function(p0) --[[ line: 24 | named "SurveyCard" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), view (ref), text (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), button (ref), fillBehavior (ref)
 	local slots = p0.slots
 	local primaryAction = slots.primaryAction

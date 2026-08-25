@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("AccountRecoverySecondsBetweenResends", 30)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastInt("AccountRecoverySecondsBetweenResends")
 end

@@ -13,7 +13,7 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 29 | named "PlaytestCompletedCard" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
 	local var5 = if fFlagBuildLocalization then useLocalization({
 		description = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION,

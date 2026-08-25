@@ -1,6 +1,6 @@
 ﻿local equalObjectsModule = require(script.Parent.equalObjects)
 
-local function compareDeep(p0, p1) --[[ line: 4 ]]
+local function compareDeep(p0, p1)
 	-- upvalues: compareDeep (ref)
 	if type(p0) ~= "table" or type(p1) ~= "table" then
 		return p0 == p1
@@ -18,7 +18,7 @@ local function compareDeep(p0, p1) --[[ line: 4 ]]
 	return true
 end
 
-return function(...) --[[ line: 24 | named "equalsDeep" ]]
+return function(...)
 	-- upvalues: equalObjectsModule (ref), compareDeep (ref)
 	if equalObjectsModule(...) then
 		return true

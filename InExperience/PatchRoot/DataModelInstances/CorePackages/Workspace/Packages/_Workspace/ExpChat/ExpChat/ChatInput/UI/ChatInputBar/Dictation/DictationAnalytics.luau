@@ -36,7 +36,7 @@ local t_1 = {
 	DismissReason = "dismiss_reason"
 }
 
-local function _() --[[ line: 125 | named "getPlaySessionId" ]]
+local function _()
 	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref)
 	return if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
 end
@@ -68,7 +68,7 @@ return {
 		Visibility = "visibility",
 		UserInteraction = "user_interaction"
 	},
-	fire = function(p0, p1) --[[ line: 132 ]]
+	fire = function(p0, p1)
 		-- upvalues: t_1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), analytics (ref)
 		local var4 = if p1 then table.clone(p1) else {}
 		var4[t_1.PlaySessionId] = if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""

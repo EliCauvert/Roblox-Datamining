@@ -2,7 +2,7 @@
 local t = {}
 
 return {
-	add = function(p0, p1) --[[ line: 11 ]]
+	add = function(p0, p1)
 		-- upvalues: t (write)
 		local var1 = t[p0]
 		
@@ -12,7 +12,7 @@ return {
 		end
 		table.insert(var1, p1)
 	end,
-	remove = function(p2, p3) --[[ line: 21 ]]
+	remove = function(p2, p3)
 		-- upvalues: t (write)
 		local var2 = t[p2]
 		
@@ -27,11 +27,11 @@ return {
 			t[p2] = nil
 		end
 	end,
-	clear = function() --[[ line: 37 ]]
+	clear = function()
 		-- upvalues: t (write)
 		t = {}
 	end,
-	snapshot = function() --[[ line: 42 ]]
+	snapshot = function()
 		-- upvalues: t (write)
 		if next(t) == nil then
 			return nil

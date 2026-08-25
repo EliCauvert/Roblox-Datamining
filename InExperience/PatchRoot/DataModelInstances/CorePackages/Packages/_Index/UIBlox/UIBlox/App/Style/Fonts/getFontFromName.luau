@@ -4,7 +4,7 @@ local validateFontModule = require(parent.Validator.validateFont)
 local fontLoaderModule = require(script.Parent.FontLoader)
 local _ = require(parent.StyleTypes)
 
-return function(p0, p1) --[[ line: 9 ]]
+return function(p0, p1)
 	-- upvalues: fontLoaderModule (ref), constantsModule (ref), validateFontModule (ref)
 	local t = {
 		[constantsModule.FontName.Gotham:lower()] = fontLoaderModule.new(p1):loadFont()

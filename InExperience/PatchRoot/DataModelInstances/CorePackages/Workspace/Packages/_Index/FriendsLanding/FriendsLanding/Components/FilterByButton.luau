@@ -41,12 +41,12 @@ filterByButton.defaultProps = {
 	isDisabled = false,
 	showFriendPruningAlert = false,
 	initialShowFriendPruningTooltip = false,
-	onActivated = function() --[[ line: 55 ]] end,
+	onActivated = function() end,
 	filter = filterStatesModule.All,
-	onTooltipDismissal = function() --[[ line: 62 ]] end
+	onTooltipDismissal = function() end
 }
 
-function filterByButton.init(p0) --[[ line: 65 ]]
+function filterByButton.init(p0)
 	-- upvalues: fFlagConnectionManagementChips (ref), filterStatesModule (ref), appPage (ref), fFlagConnectionsToFriendsRename (ref)
 	p0.state = {
 		hasDismissedFriendPruningTooltip = false,
@@ -56,24 +56,24 @@ function filterByButton.init(p0) --[[ line: 65 ]]
 	if fFlagConnectionManagementChips then
 		p0.state.canAccessTrustedContacts = p0.props.canAccessTrustedContacts
 	end
-	function p0.convertFilterToTranslation(p1, p2) --[[ line: 75 ]]
+	function p0.convertFilterToTranslation(p1, p2)
 		-- upvalues: filterStatesModule (copy), fFlagConnectionManagementChips (copy)
 		return if p1 == filterStatesModule.All then p2.all elseif p1 == filterStatesModule.Online then p2.online elseif p1 == filterStatesModule.InExperience then p2.inExperience elseif p1 == filterStatesModule.Offline then p2.offline elseif p1 == filterStatesModule.Inactive then p2.inactive elseif fFlagConnectionManagementChips and p1 == filterStatesModule.Trusted then p2.trusted else nil
 	end
 	
-	function p0.buildFilterText(p3, p4, p5) --[[ line: 93 ]]
+	function p0.buildFilterText(p3, p4, p5)
 		-- upvalues: p0 (ref)
 		local var11 = p0.convertFilterToTranslation(p3, p4)
 		
 		return if p5 == 0 then var11 else var11 .. " (" .. p5 .. ")"
 	end
 	
-	function p0.isSelected(p6) --[[ line: 102 ]]
+	function p0.isSelected(p6)
 		-- upvalues: filterStatesModule (copy)
 		return p6 ~= filterStatesModule.All
 	end
 	
-	function p0.dismissFriendPruningTooltip() --[[ line: 110 ]]
+	function p0.dismissFriendPruningTooltip()
 		-- upvalues: p0 (ref)
 		p0:setState({
 			showFriendPruningTooltip = false,
@@ -83,7 +83,7 @@ function filterByButton.init(p0) --[[ line: 65 ]]
 	end
 	
 	if fFlagConnectionManagementChips then
-		function p0.onLearnMoreClicked() --[[ line: 119 ]]
+		function p0.onLearnMoreClicked()
 			-- upvalues: p0 (ref), appPage (copy)
 			p0.props.navigateDown({
 				detail = "https://en.help.roblox.com/hc/articles/46158344285204",
@@ -93,14 +93,14 @@ function filterByButton.init(p0) --[[ line: 65 ]]
 		end
 	end
 	if fFlagConnectionManagementChips then
-		function p0.getTrustedFilterText(p7) --[[ line: 129 ]]
+		function p0.getTrustedFilterText(p7)
 			-- upvalues: fFlagConnectionsToFriendsRename (copy), p0 (ref)
 			return if fFlagConnectionsToFriendsRename then if p0.props.canAccessTrustedContacts then p7.doMoreWithTrustedFriends else p7.trustedFriendsUnavailable elseif p0.props.canAccessTrustedContacts then p7.doMoreWithTrustedConnections else p7.trustedConnectionsUnavailable
 		end
 	end
 end
 
-function filterByButton.didMount(p8) --[[ line: 142 ]]
+function filterByButton.didMount(p8)
 	-- upvalues: impressionEventsModule (ref)
 	if p8.props.initialShowFriendPruningTooltip and p8.props.analytics then
 		p8.props.analytics:impressionEvent(impressionEventsModule.FriendPruningTooltipSeen, {
@@ -110,15 +110,15 @@ function filterByButton.didMount(p8) --[[ line: 142 ]]
 	end
 end
 
-function filterByButton.didUpdate(p9) --[[ line: 153 ]]
+function filterByButton.didUpdate(p9)
 	p9:setState({
 		showFriendPruningTooltip = p9.props.initialShowFriendPruningTooltip and not p9.state.hasDismissedFriendPruningTooltip
 	})
 end
 
-function filterByButton.render(p10) --[[ line: 161 ]]
+function filterByButton.render(p10)
 	-- upvalues: withStyle (ref), fFlagFixScalingOnFriendsLandingModule (ref), images (ref), fFlagConnectionManagementChips (ref), withLocalization (ref), tooltipOrientation (ref), coreGui (ref), roact (ref), withTooltip (ref), getIconSize (ref), iconSize (ref), textService (ref), pillWithAlertModule (ref), pill (ref), view (ref), fFlagFriendsPageUserListEnabled (ref), chipFilterGroupModule (ref), filterStatesModule (ref), text (ref), chip (ref), enums (ref)
-	return withStyle(function(_) --[[ line: 162 ]]
+	return withStyle(function(_)
 		-- upvalues: fFlagFixScalingOnFriendsLandingModule (copy), images (copy), fFlagConnectionManagementChips (copy), withLocalization (copy), p10 (ref), tooltipOrientation (copy), coreGui (copy), roact (copy), withStyle (copy), withTooltip (copy), getIconSize (copy), iconSize (copy), textService (copy), pillWithAlertModule (copy), pill (copy), view (copy), fFlagFriendsPageUserListEnabled (copy), chipFilterGroupModule (copy), filterStatesModule (copy), text (copy), chip (copy), enums (copy)
 		local var12 = if fFlagFixScalingOnFriendsLandingModule then "icons/actions/filter_small" else images["icons/actions/filter"]
 		local t = {
@@ -139,7 +139,7 @@ function filterByButton.render(p10) --[[ line: 161 ]]
 			t.trustedConnectionsUnavailable = "Feature.Friends.Description.TrustedConnectionsUnavailable"
 			t.trustedFriendsUnavailable = "Feature.Friends.Description.TrustedFriendsUnavailable"
 		end
-		return withLocalization(t)(function(p11) --[[ line: 183 ]]
+		return withLocalization(t)(function(p11)
 			-- upvalues: p10 (copy), fFlagConnectionManagementChips (copy), tooltipOrientation (copy), coreGui (copy), roact (copy), withStyle (copy), withTooltip (copy), getIconSize (copy), iconSize (copy), textService (copy), pillWithAlertModule (copy), var12 (ref), pill (copy), view (copy), fFlagFriendsPageUserListEnabled (copy), chipFilterGroupModule (copy), filterStatesModule (copy), text (copy), fFlagFixScalingOnFriendsLandingModule (copy), chip (copy), enums (copy)
 			local filter = p10.props.filter
 			local friendCount = p10.props.friendCount
@@ -175,9 +175,9 @@ function filterByButton.render(p10) --[[ line: 161 ]]
 			local t_3 = {}
 			
 			if p10.state.showFriendPruningTooltip then
-				var20 = withStyle(function(p12) --[[ line: 213 ]]
+				var20 = withStyle(function(p12)
 					-- upvalues: withTooltip (copy), t (ref), t_1 (ref), getIconSize (copy), iconSize (copy), textService (copy), var14 (ref), roact (copy), p10 (copy), coreGui (copy), pillWithAlertModule (copy), var12 (copy), isDisabled (ref), filter (ref), onActivated (ref), pill (copy)
-					return withTooltip(t, t_1, function(p13) --[[ line: 214 ]]
+					return withTooltip(t, t_1, function(p13)
 						-- upvalues: p12 (ref), getIconSize (copy), iconSize (copy), textService (copy), var14 (copy), roact (copy), p10 (copy), coreGui (copy), pillWithAlertModule (copy), var12 (copy), isDisabled (copy), filter (copy), onActivated (copy), pill (copy)
 						local font = p12.Font
 						
@@ -306,19 +306,19 @@ function filterByButton.render(p10) --[[ line: 161 ]]
 end
 
 if fFlagConnectionManagementChips then
-	filterByButton = roactRoduxModule.connect(function(_, _) --[[ line: 358 ]]
+	filterByButton = roactRoduxModule.connect(function(_, _)
 		return {}
-	end, function(p14) --[[ line: 360 ]]
+	end, function(p14)
 		-- upvalues: fFlagSignalsNavP3Dispatch (ref), var9 (ref), navigateDown (ref)
 		return {
-			navigateDown = function(p15) --[[ line: 362 ]]
+			navigateDown = function(p15)
 				-- upvalues: fFlagSignalsNavP3Dispatch (copy), var9 (copy), p14 (ref), navigateDown (copy)
 				return if fFlagSignalsNavP3Dispatch then var9.down(var9.fromLegacyPage(p15)) else p14(navigateDown(p15))
 			end
 		}
 	end)(filterByButton)
 	
-	return roactAppPolicy.connect(function(p16) --[[ line: 372 ]]
+	return roactAppPolicy.connect(function(p16)
 		return { webViewSupported = p16.getWebViewSupport() }
 	end)(filterByButton)
 end

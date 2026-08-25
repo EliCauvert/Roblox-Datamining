@@ -11,11 +11,11 @@ local getNavigationModule = require(parent.getNavigation)
 local _assert = assert
 local urlToPathAndParams = require(parent.routers.pathUtils).urlToPathAndParams
 
-local function _(p0) --[[ line: 20 | named "isStateful" ]]
+local function _(p0)
 	return not p0.navigation
 end
 
-local function validateProps(p1) --[[ line: 24 ]]
+local function validateProps(p1)
 	-- upvalues: object (ref), _assert (ref)
 	if p1.persistenceKey then
 		warn("You passed persistenceKey prop to a navigator. The persistenceKey prop was replaced by a more flexible persistence mechanism, please see the navigation state persistence docs for more information. Passing the persistenceKey prop is a no-op.")
@@ -39,20 +39,20 @@ end
 local var8 = 0
 
 return {
-	createAppContainer = function(p2, p3) --[[ line: 117 ]]
+	createAppContainer = function(p2, p3)
 		-- upvalues: _assert (ref), reactModule (ref), validateProps (ref), navigationActionsModule (ref), urlToPathAndParams (ref), console (ref), var8 (write), eventsModule (ref), getNavigationModule (ref), navigationContextModule (ref), object (ref)
 		_assert(type(p2) == "table" and p2.router ~= nil, "AppComponent must be a navigator or a stateful Roact component with a 'router' field")
 		local var10 = reactModule.Component:extend(string.format("NavigationContainer(%s)", tostring(p2)))
 		var10.router = p2.router
 		
-		function var10.getDerivedStateFromProps(p4) --[[ line: 128 ]]
+		function var10.getDerivedStateFromProps(p4)
 			-- upvalues: validateProps (copy)
 			validateProps(p4)
 			
 			return nil
 		end
 		
-		function var10.init(p5) --[[ line: 133 ]]
+		function var10.init(p5)
 			-- upvalues: validateProps (copy), navigationActionsModule (copy), p2 (ref)
 			validateProps(p5.props)
 			p5._actionEventSubscribers = {}
@@ -62,7 +62,7 @@ return {
 			}
 		end
 		
-		function var10._updateExternalDispatchConnector(p6) --[[ line: 155 ]]
+		function var10._updateExternalDispatchConnector(p6)
 			if p6._disconnectExternalDispatch then
 				p6._disconnectExternalDispatch()
 				p6._disconnectExternalDispatch = nil
@@ -70,22 +70,22 @@ return {
 			local externalDispatchConnector = p6.props.externalDispatchConnector
 			
 			if externalDispatchConnector ~= nil then
-				p6._disconnectExternalDispatch = externalDispatchConnector(function(...) --[[ line: 163 ]]
+				p6._disconnectExternalDispatch = externalDispatchConnector(function(...)
 					-- upvalues: p6 (ref)
 					return if p6._isMounted then p6:dispatch(...) else false
 				end)
 			end
 		end
 		
-		function var10._renderLoading(p7) --[[ line: 174 ]]
+		function var10._renderLoading(p7)
 			return p7.props.renderLoading and p7.props.renderLoading()
 		end
 		
-		function var10._isStateful(p8) --[[ line: 178 ]]
+		function var10._isStateful(p8)
 			return not p8.props.navigation
 		end
 		
-		function var10._handleOpenURL(p9, p10) --[[ line: 182 ]]
+		function var10._handleOpenURL(p9, p10)
 			-- upvalues: urlToPathAndParams (copy), p2 (ref)
 			local url = p10.url
 			local uriPrefix = p9.props.uriPrefix
@@ -102,7 +102,7 @@ return {
 			end
 		end
 		
-		function var10._onNavigationStateChange(p11, p12, p13, p14) --[[ line: 201 ]]
+		function var10._onNavigationStateChange(p11, p12, p13, p14)
 			-- upvalues: console (copy)
 			local onNavigationStateChange = p11.props.onNavigationStateChange
 			
@@ -119,7 +119,7 @@ return {
 			end
 		end
 		
-		function var10.didUpdate(p15, p16) --[[ line: 218 ]]
+		function var10.didUpdate(p15, p16)
 			if p15._navState == p15.state.nav then
 				p15._navState = nil
 			end
@@ -128,7 +128,7 @@ return {
 			end
 		end
 		
-		function var10.didMount(p17) --[[ line: 231 ]]
+		function var10.didMount(p17)
 			-- upvalues: var8 (copy), console (copy), p3 (ref), p2 (ref), eventsModule (copy)
 			p17._isMounted = true
 			p17:_updateExternalDispatchConnector()
@@ -140,7 +140,7 @@ return {
 			var8 += 1
 			
 			if p3 then
-				p3:listenForLuaURLs(function(p18) --[[ line: 256 ]]
+				p3:listenForLuaURLs(function(p18)
 					-- upvalues: p17 (ref)
 					p17:_handleOpenURL({ url = p18 })
 				end, false)
@@ -167,7 +167,7 @@ return {
 					var14 = p2.router.getStateForAction(actionForPathAndParams, var14)
 				end
 			end
-			local function dispatchAction() --[[ line: 300 ]]
+			local function dispatchAction()
 				-- upvalues: p17 (ref), eventsModule (copy), initialAction (write)
 				for i in p17._actionEventSubscribers do
 					i({
@@ -187,7 +187,7 @@ return {
 			p17:setState({ nav = var14 }, dispatchAction)
 		end
 		
-		function var10.getStartupParams(p19) --[[ line: 326 ]]
+		function var10.getStartupParams(p19)
 			-- upvalues: p3 (ref), urlToPathAndParams (copy)
 			local props = p19.props
 			local uriPrefix = props.uriPrefix
@@ -196,13 +196,13 @@ return {
 			local var18 = nil
 			
 			if p3 then
-				pcall(function() --[[ line: 334 ]]
+				pcall(function()
 					-- upvalues: var17 (write), p3 (copy)
 					var17 = p3:getLastLuaURL()
 				end)
 			end
 			if loadNavigationState then
-				pcall(function() --[[ line: 340 ]]
+				pcall(function()
 					-- upvalues: var18 (write), loadNavigationState (ref)
 					var18 = loadNavigationState()
 				end)
@@ -213,7 +213,7 @@ return {
 			}
 		end
 		
-		function var10._persistNavigationState(p20, p21) --[[ line: 353 ]]
+		function var10._persistNavigationState(p20, p21)
 			local persistNavigationState = p20.props.persistNavigationState
 			
 			if persistNavigationState then
@@ -225,7 +225,7 @@ return {
 			end
 		end
 		
-		function var10.willUnmount(p22) --[[ line: 369 ]]
+		function var10.willUnmount(p22)
 			-- upvalues: p3 (ref), var8 (copy)
 			p22._isMounted = false
 			
@@ -241,7 +241,7 @@ return {
 			end
 		end
 		
-		function var10.dispatch(p23, p24) --[[ line: 395 ]]
+		function var10.dispatch(p23, p24)
 			-- upvalues: _assert (copy), p2 (ref), eventsModule (copy)
 			if p23.props.navigation then
 				return p23.props.navigation.dispatch(p24)
@@ -252,7 +252,7 @@ return {
 			local stateForAction = p2.router.getStateForAction(p24, navState)
 			local var20 = if stateForAction == nil then navState else stateForAction
 			
-			local function dispatchActionEvents() --[[ line: 411 ]]
+			local function dispatchActionEvents()
 				-- upvalues: p23 (ref), eventsModule (copy), p24 (ref), var20 (write), navState (ref)
 				for i in p23._actionEventSubscribers do
 					i({
@@ -274,7 +274,7 @@ return {
 				return false
 			end
 			p23._navState = var20
-			p23:setState({ nav = var20 }, function() --[[ line: 436 ]]
+			p23:setState({ nav = var20 }, function()
 				-- upvalues: p23 (ref), navState (ref), var20 (write), p24 (ref), dispatchActionEvents (ref)
 				p23:_onNavigationStateChange(navState, var20, p24)
 				task.defer(dispatchActionEvents)
@@ -284,7 +284,7 @@ return {
 			return true
 		end
 		
-		function var10._getScreenProps(p25, p26, p27) --[[ line: 450 ]]
+		function var10._getScreenProps(p25, p26, p27)
 			if p26 == nil then
 				return p25.props.screenProps
 			end
@@ -293,7 +293,7 @@ return {
 			return if screenProps == nil or screenProps[p26] == nil then p27 else screenProps[p26]
 		end
 		
-		function var10.render(p28) --[[ line: 465 ]]
+		function var10.render(p28)
 			-- upvalues: getNavigationModule (copy), p2 (ref), _assert (copy), reactModule (copy), navigationContextModule (copy), object (copy)
 			local navigation = p28.props.navigation
 			
@@ -303,13 +303,13 @@ return {
 				if not nav then
 					return p28:_renderLoading()
 				elseif not p28._navigation or p28._navigation.state ~= nav then
-					p28._navigation = getNavigationModule(p2.router, nav, function(...) --[[ line: 478 ]]
+					p28._navigation = getNavigationModule(p2.router, nav, function(...)
 						-- upvalues: p28 (ref)
 						return p28:dispatch(...)
-					end, p28._actionEventSubscribers, function(...) --[[ line: 482 ]]
+					end, p28._actionEventSubscribers, function(...)
 						-- upvalues: p28 (ref)
 						return p28:_getScreenProps(...)
-					end, function() --[[ line: 485 ]]
+					end, function()
 						-- upvalues: p28 (ref)
 						return p28._navigation
 					end)
@@ -325,7 +325,7 @@ return {
 		
 		return var10
 	end,
-	_TESTING_ONLY_reset_container_count = function() --[[ line: 72 ]]
+	_TESTING_ONLY_reset_container_count = function()
 		-- upvalues: var8 (write)
 		var8 = 0
 	end

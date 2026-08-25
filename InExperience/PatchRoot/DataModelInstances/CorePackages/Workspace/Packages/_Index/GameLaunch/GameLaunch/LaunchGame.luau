@@ -8,7 +8,7 @@ local fFlagDeferInExperienceRbxmDownload = require(parent.SharedFlags).FFlagDefe
 local fFlagEnableDeferredAssetManagerService = require(parent.SharedFlags).FFlagEnableDeferredAssetManagerService
 local var1 = if fFlagDeferInExperienceRbxmDownload and fFlagEnableDeferredAssetManagerService then game:GetService("DeferredAssetManagerService") else nil
 
-return function(p0, p1, p2, _, p3, p4) --[[ line: 19 | named "LaunchGame" ]]
+return function(p0, p1, p2, _, p3, p4)
 	-- upvalues: getFFlagMoveLuaExpLaunchBegin (ref), default (ref), cryoModule (ref), fFlagDeferInExperienceRbxmDownload (ref), fFlagEnableDeferredAssetManagerService (ref), var1 (ref), experienceService (ref)
 	if not getFFlagMoveLuaExpLaunchBegin() then
 		default:logEvent("experience_launch_begin")

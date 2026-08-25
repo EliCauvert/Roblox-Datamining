@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidationAnimationAssetDisableModelStructure", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("UGCValidationAnimationAssetDisableModelStructure")
 end

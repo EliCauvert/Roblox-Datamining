@@ -21,7 +21,7 @@ local t = {
 	id = constantsModule.HOME_CATEGORY_ID
 }
 
-return function(p0, p1) --[[ line: 89 | named "buildShopDataFromWidgets" ]]
+return function(p0, p1)
 	-- upvalues: t (ref), constantsModule (ref), fFlagEnableRobuxInExperienceShop (ref), toRobuxPackageItem (ref), promiseModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), appendBonusItemRequests (ref), makeRequestKey (ref), toShopItem (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), mergeBonusItemDetailsIntoSections (ref)
 	local list = { t }
 	local t_1 = {}
@@ -82,7 +82,7 @@ return function(p0, p1) --[[ line: 89 | named "buildShopDataFromWidgets" ]]
 			end
 		end
 	end
-	local function filterOutput(p2) --[[ line: 200 ]]
+	local function filterOutput(p2)
 		-- upvalues: t_4 (ref), list (ref), constantsModule (copy)
 		local t = {}
 		local t_1 = {}
@@ -130,7 +130,7 @@ return function(p0, p1) --[[ line: 89 | named "buildShopDataFromWidgets" ]]
 		if fFlagEnableRobuxInExperienceShop then
 			appendBonusItemRequests(t_2, t_1)
 		end
-		return p1(t_2):andThen(function(p3) --[[ line: 245 ]]
+		return p1(t_2):andThen(function(p3)
 			-- upvalues: makeRequestKey (copy), t_2Count (ref), t_2 (ref), t_3 (ref), t_1 (ref), toShopItem (copy), logCounterModule (copy), productInfoFailedItemsCounterModule (copy), fFlagEnableRobuxInExperienceShop (copy), mergeBonusItemDetailsIntoSections (copy), filterOutput (ref), fFlagEnableExperienceShopGlobalIconModule (copy), p0 (ref)
 			local t = {}
 			

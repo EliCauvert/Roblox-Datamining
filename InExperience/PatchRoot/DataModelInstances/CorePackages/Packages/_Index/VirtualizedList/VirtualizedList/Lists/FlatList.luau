@@ -17,26 +17,26 @@ local _ = require(parent.Lists.ViewabilityHelper)
 local _ = require(parent.Lists.VirtualizedList)
 local keyExtractor = require(script.Parent.VirtualizeUtils).keyExtractor
 
-local function _(p0) --[[ line: 188 | named "removeClippedSubviewsOrDefault" ]]
+local function _(p0)
 	return if p0 == nil then false else p0
 end
 
-local _ = function(p1) --[[ line: 193 | named "numColumnsOrDefault" ]]
+local _ = function(p1)
 	return if p1 == nil then 1 else p1
 end
 
 local flatList = reactModule.PureComponent:extend("FlatList")
 
-function flatList.init(p2, _) --[[ line: 382 ]]
+function flatList.init(p2, _)
 	-- upvalues: keyExtractor (ref), array (ref), invariantModule (ref), reactModule (ref), viewModule (ref), styleSheetModule (ref), object (ref)
 	p2._virtualizedListPairs = {}
 	
-	function p2._captureRef(p3) --[[ line: 384 ]]
+	function p2._captureRef(p3)
 		-- upvalues: p2 (ref)
 		p2._listRef = p3
 	end
 	
-	function p2._getItem(p4, p5) --[[ line: 388 ]]
+	function p2._getItem(p4, p5)
 		-- upvalues: p2 (ref)
 		local numColumns = p2.props.numColumns
 		local var9 = if numColumns ~= nil then 1 else numColumns
@@ -56,7 +56,7 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 		return t
 	end
 	
-	function p2._getItemCount(p6) --[[ line: 404 ]]
+	function p2._getItemCount(p6)
 		-- upvalues: p2 (ref)
 		if p6 == nil then
 			return 0
@@ -67,7 +67,7 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 		return if var12 > 1 then math.ceil(#p6 / var12) else #p6
 	end
 	
-	function p2._keyExtractor(p7, p8) --[[ line: 414 ]]
+	function p2._keyExtractor(p7, p8)
 		-- upvalues: p2 (ref), keyExtractor (copy), array (copy), invariantModule (copy)
 		local numColumns = p2.props.numColumns
 		local var13 = if numColumns ~= nil then 1 else numColumns
@@ -76,7 +76,7 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 		if var13 <= 1 then
 			return var14(p7, p8)
 		elseif array.isArray(p7) then
-			return array.join(array.map(p7, function(p9, p10) --[[ line: 421 ]]
+			return array.join(array.map(p7, function(p9, p10)
 				-- upvalues: var14 (ref), p8 (ref), var13 (ref)
 				return var14(p9, (p8 - 1) * var13 + p10)
 			end), ":")
@@ -86,7 +86,7 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 		return nil
 	end
 	
-	function p2._renderer() --[[ line: 445 ]]
+	function p2._renderer()
 		-- upvalues: p2 (ref), reactModule (copy), invariantModule (copy), array (copy), viewModule (copy), styleSheetModule (copy), object (copy)
 		local listItemComponent = p2.props.ListItemComponent
 		local renderItem = p2.props.renderItem
@@ -94,13 +94,13 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 		local numColumns = p2.props.numColumns
 		local var15 = if numColumns ~= nil then 1 else numColumns
 		
-		local function renderer(p11) --[[ line: 451 ]]
+		local function renderer(p11)
 			-- upvalues: listItemComponent (ref), reactModule (copy), renderItem (ref)
 			return if listItemComponent then reactModule.createElement(listItemComponent, p11) elseif renderItem then renderItem(p11) else nil
 		end
 		
 		return {
-			[if listItemComponent then "ListItemComponent" else "renderItem"] = function(p12) --[[ line: 468 ]]
+			[if listItemComponent then "ListItemComponent" else "renderItem"] = function(p12)
 				-- upvalues: var15 (ref), reactModule (copy), p2 (copy), invariantModule (copy), array (copy), viewModule (copy), styleSheetModule (copy), columnWrapperStyle (ref), object (copy), listItemComponent (ref), renderItem (ref), renderer (ref)
 				if var15 > 1 then
 					local UIListLayout = reactModule.createElement("UIListLayout", {
@@ -113,7 +113,7 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 					local index = p12.index
 					invariantModule(array.isArray(item), "Expected array of items with numColumns > 1")
 					
-					return reactModule.createElement(viewModule, { style = styleSheetModule.compose(columnWrapperStyle) }, array.concat({ UIListLayout }, array.map(item, function(p13, p14) --[[ line: 491 ]]
+					return reactModule.createElement(viewModule, { style = styleSheetModule.compose(columnWrapperStyle) }, array.concat({ UIListLayout }, array.map(item, function(p13, p14)
 						-- upvalues: object (copy), index (ref), var15 (copy), p12 (ref), listItemComponent (copy), reactModule (copy), renderItem (copy)
 						local t = {
 							item = object.assign({}, p13, { LayoutOrder = p14 }),
@@ -133,7 +133,7 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 	p2:_checkProps(p2.props)
 	
 	if p2.props.viewabilityConfigCallbackPairs then
-		p2._virtualizedListPairs = array.map(p2.props.viewabilityConfigCallbackPairs, function(p15) --[[ line: 512 ]]
+		p2._virtualizedListPairs = array.map(p2.props.viewabilityConfigCallbackPairs, function(p15)
 			-- upvalues: p2 (ref)
 			return {
 				viewabilityConfig = p15.viewabilityConfig,
@@ -150,67 +150,67 @@ function flatList.init(p2, _) --[[ line: 382 ]]
 	end
 end
 
-function flatList.scrollToEnd(p16, p17) --[[ line: 530 ]]
+function flatList.scrollToEnd(p16, p17)
 	if p16._listRef then
 		p16._listRef:scrollToEnd(p17)
 	end
 end
 
-function flatList.scrollToIndex(p18, p19) --[[ line: 546 ]]
+function flatList.scrollToIndex(p18, p19)
 	if p18._listRef then
 		p18._listRef:scrollToIndex(p19)
 	end
 end
 
-function flatList.scrollToItem(p20, p21) --[[ line: 565 ]]
+function flatList.scrollToItem(p20, p21)
 	if p20._listRef then
 		p20._listRef:scrollToItem(p21)
 	end
 end
 
-function flatList.scrollToOffset(value, p22) --[[ line: 580 ]]
+function flatList.scrollToOffset(value, p22)
 	if value._listRef then
 		value._listRef:scrollToOffset(p22)
 	end
 end
 
-function flatList.recordInteraction(p23) --[[ line: 594 ]]
+function flatList.recordInteraction(p23)
 	if p23._listRef then
 		p23._listRef:recordInteraction()
 	end
 end
 
-function flatList.flashScrollIndicators(p24) --[[ line: 605 ]]
+function flatList.flashScrollIndicators(p24)
 	if p24._listRef then
 		p24._listRef:flashScrollIndicators()
 	end
 end
 
-function flatList.getScrollResponder(p25) --[[ line: 614 ]]
+function flatList.getScrollResponder(p25)
 	if p25._listRef then
 		return p25._listRef:getScrollResponder()
 	end
 end
 
-function flatList.getNativeScrollRef(p26) --[[ line: 623 ]]
+function flatList.getNativeScrollRef(p26)
 	if p26._listRef then
 		return p26._listRef:getScrollRef()
 	end
 end
 
-function flatList.getScrollableNode(p27) --[[ line: 630 ]]
+function flatList.getScrollableNode(p27)
 	if p27._listRef then
 		return p27._listRef:getScrollableNode()
 	end
 end
 
-function flatList.setNativeProps(value, p28) --[[ line: 635 ]]
+function flatList.setNativeProps(value, p28)
 	if value._listRef then
 		value._listRef:setNativeProps(p28)
 	end
 end
 
-function flatList.componentDidUpdate(p29, p30) --[[ line: 642 ]]
+function flatList.componentDidUpdate(p29, p30)
 	-- upvalues: invariantModule (ref), deepDifferModule (ref)
 	invariantModule(p30.numColumns == p29.props.numColumns, "Changing numColumns on the fly is not supported. Change the key prop on FlatList when changing the number of columns to force a fresh render of the component.")
 	invariantModule(p30.onViewableItemsChanged == p29.props.onViewableItemsChanged, "Changing onViewableItemsChanged on the fly is not supported")
@@ -219,7 +219,7 @@ function flatList.componentDidUpdate(p29, p30) --[[ line: 642 ]]
 	p29:_checkProps(p29.props)
 end
 
-function flatList._checkProps(p31, p32) --[[ line: 664 ]]
+function flatList._checkProps(p31, p32)
 	-- upvalues: invariantModule (ref)
 	local getItem = p32.getItem
 	local getItemCount = p32.getItemCount
@@ -239,12 +239,12 @@ function flatList._checkProps(p31, p32) --[[ line: 664 ]]
 	invariantModule(not (onViewableItemsChanged and viewabilityConfigCallbackPairs), "FlatList does not support setting both onViewableItemsChanged and viewabilityConfigCallbackPairs.")
 end
 
-function flatList._pushMultiColumnViewable(p33, p34, p35) --[[ line: 684 ]]
+function flatList._pushMultiColumnViewable(p33, p34, p35)
 	-- upvalues: keyExtractor (ref), array (ref), invariantModule (ref), object (ref)
 	local numColumns = p33.props.numColumns
 	local var21 = if numColumns ~= nil then 1 else numColumns
 	local var22 = if p33.props.keyExtractor ~= nil then keyExtractor else p33.props.keyExtractor
-	array.forEach(p35.item, function(p36, p37) --[[ line: 687 ]]
+	array.forEach(p35.item, function(p36, p37)
 		-- upvalues: invariantModule (copy), p35 (ref), var21 (ref), p34 (ref), object (copy), var22 (ref)
 		invariantModule(p35.index ~= nil, "Missing index!")
 		local var23 = (p35.index - 1) * var21 + p37
@@ -252,9 +252,9 @@ function flatList._pushMultiColumnViewable(p33, p34, p35) --[[ line: 684 ]]
 	end)
 end
 
-function flatList._createOnViewableItemsChanged(p38, p39) --[[ line: 693 ]]
+function flatList._createOnViewableItemsChanged(p38, p39)
 	-- upvalues: array (ref)
-	return function(p40) --[[ line: 701 ]]
+	return function(p40)
 		-- upvalues: p38 (ref), p39 (ref), array (copy)
 		local numColumns = p38.props.numColumns
 		local var24 = if numColumns ~= nil then 1 else numColumns
@@ -263,11 +263,11 @@ function flatList._createOnViewableItemsChanged(p38, p39) --[[ line: 693 ]]
 			if var24 > 1 then
 				local t = {}
 				local t_1 = {}
-				array.forEach(p40.viewableItems, function(p41) --[[ line: 710 ]]
+				array.forEach(p40.viewableItems, function(p41)
 					-- upvalues: p38 (copy), t_1 (ref)
 					return p38:_pushMultiColumnViewable(t_1, p41)
 				end)
-				array.forEach(p40.changed, function(p42) --[[ line: 713 ]]
+				array.forEach(p40.changed, function(p42)
 					-- upvalues: p38 (copy), t (ref)
 					return p38:_pushMultiColumnViewable(t, p42)
 				end)
@@ -280,7 +280,7 @@ function flatList._createOnViewableItemsChanged(p38, p39) --[[ line: 693 ]]
 	end
 end
 
-function flatList.render(p43) --[[ line: 724 ]]
+function flatList.render(p43)
 	-- upvalues: object (ref), reactModule (ref), virtualizedListModule (ref), t (ref)
 	local props = p43.props
 	local _ = props.numColumns

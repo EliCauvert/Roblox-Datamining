@@ -14,18 +14,18 @@ local t = {
 	size = require(foundation.Enums.InputLabelSize).Small
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 45 | named "InputField" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useScaledValueModule (ref), constantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputLabelModule (ref), hintTextModule (ref)
 	local var10 = withDefaultsModule(p0, t)
 	local var11 = useScaledValueModule(constantsModule.DEFAULT_INPUT_FIELD_WIDTH_PIXELS)
 	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var13 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref)
 		if var12.current and not var12.current.getIsFocused() then
 			var12.current.focus()
 		end
 	end, {})
-	reactModule.useImperativeHandle(var10.textBoxRef, function() --[[ line: 56 ]]
+	reactModule.useImperativeHandle(var10.textBoxRef, function()
 		-- upvalues: var12 (ref)
 		return if var12.current then {
 			focus = var12.current.focus,

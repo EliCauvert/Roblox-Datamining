@@ -6,7 +6,7 @@
 	[5] = Color3.fromRGB(250, 212, 106)
 }
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return t[p0 % #t + 1]
 end

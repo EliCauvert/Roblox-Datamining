@@ -8,12 +8,12 @@ local _ = require(viewRecycler.Core.RecyclingScope)
 local frozen = table.freeze({ "index", "value" })
 local frozen_1 = table.freeze({ "kind", "revision" })
 
-local function _(value, p0) --[[ line: 61 | named "assignmentChanged" ]]
+local function _(value, p0)
 	-- upvalues: recordModule (ref), frozen (ref), frozen_1 (ref)
 	return not recordModule.containsEqual(value, p0, frozen) or not recordModule.containsEqual(value.identity, p0.identity, frozen_1)
 end
 
-return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
+return function(p1)
 	-- upvalues: recordModule (ref), frozen (ref), frozen_1 (ref), diagnosticsModule (ref)
 	local recyclingScope = p1.recyclingScope
 	local t = {}
@@ -25,7 +25,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 	local var11 = 1
 	local var12 = false
 	
-	local function makeAssignment(value) --[[ line: 82 ]]
+	local function makeAssignment(value)
 		-- upvalues: p1 (ref), var11 (write)
 		local t = {
 			key = value.key,
@@ -47,7 +47,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 		return t_1
 	end
 	
-	local function resolvePlacementIntent(p2) --[[ line: 101 ]]
+	local function resolvePlacementIntent(p2)
 		-- upvalues: t_3 (write), var6 (write)
 		local var21 = t_3[p2]
 		
@@ -72,7 +72,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 		}
 	end
 	
-	local function publish(p3, p4) --[[ line: 124 ]]
+	local function publish(p3, p4)
 		-- upvalues: p1 (ref), resolvePlacementIntent (ref), tbl (ref)
 		for i, v in p3 do
 			if p1.prepareItemViewAssignment ~= nil then
@@ -109,7 +109,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 		end
 	end
 	
-	local function reconcile(p5) --[[ line: 162 ]]
+	local function reconcile(p5)
 		-- upvalues: t_2 (write), t_1 (ref), makeAssignment (ref), recyclingScope (ref), t (ref), recordModule (copy), frozen (copy), frozen_1 (copy), t_3 (write), var6 (write), publish (ref), diagnosticsModule (copy)
 		local v_4
 		local t_4 = {}
@@ -231,7 +231,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 		}
 	end
 	
-	local function applyPlacements(p6) --[[ line: 288 ]]
+	local function applyPlacements(p6)
 		-- upvalues: t_1 (ref), var6 (write), publish (ref)
 		local t = {}
 		
@@ -247,7 +247,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 		publish({}, t)
 	end
 	
-	local function releaseAll() --[[ line: 301 ]]
+	local function releaseAll()
 		-- upvalues: t_1 (ref), recyclingScope (ref), t (ref), t_2 (write), t_3 (write), var6 (write), publish (ref)
 		local list = table.create(#t_1)
 		local list_1 = table.create(#t_1)
@@ -267,7 +267,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 	end
 	
 	return {
-		apply = function(_, p7, p8) --[[ line: 319 ]]
+		apply = function(_, p7, p8)
 			-- upvalues: var12 (write), recyclingScope (ref), releaseAll (ref), var6 (write), applyPlacements (ref), reconcile (ref)
 			if var12 then
 				return {}
@@ -277,14 +277,14 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 				return {}
 			elseif var6 == nil or p8.assignmentsChanged then
 				local var46 = nil
-				recyclingScope.batch(function() --[[ line: 338 ]]
+				recyclingScope.batch(function()
 					-- upvalues: var46 (write), reconcile (copy), p7 (ref)
 					var46 = reconcile(p7)
 				end)
 				
 				return { var46 }
 			elseif p8.placementChanged then
-				recyclingScope.batch(function() --[[ line: 329 ]]
+				recyclingScope.batch(function()
 					-- upvalues: applyPlacements (copy), p7 (ref)
 					applyPlacements(p7)
 				end)
@@ -293,7 +293,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 			end
 			return {}
 		end,
-		destroy = function() --[[ line: 343 ]]
+		destroy = function()
 			-- upvalues: var12 (write), recyclingScope (ref), releaseAll (ref), tbl (ref)
 			if not var12 then
 				recyclingScope.batch(releaseAll)
@@ -301,7 +301,7 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 				table.clear(tbl)
 			end
 		end,
-		getItemViews = function() --[[ line: 350 ]]
+		getItemViews = function()
 			-- upvalues: t_1 (ref)
 			local list = table.create(#t_1)
 			
@@ -310,24 +310,24 @@ return function(p1) --[[ line: 69 | named "createItemViewPresentation" ]]
 			end
 			return list
 		end,
-		getSnapshot = function() --[[ line: 357 ]]
+		getSnapshot = function()
 			-- upvalues: var6 (write)
 			return var6
 		end,
 		resolvePlacementIntent = resolvePlacementIntent,
-		onPlacementIntentChanged = function(p9, p10) --[[ line: 361 ]]
+		onPlacementIntentChanged = function(p9, p10)
 			-- upvalues: tbl (ref)
 			assert(tbl[p9] == nil, "Virtualizer: ItemView already has a Placement-intent subscriber")
 			tbl[p9] = p10
 			
-			return function() --[[ line: 367 ]]
+			return function()
 				-- upvalues: tbl (copy), p9 (ref), p10 (ref)
 				if tbl[p9] == p10 then
 					tbl[p9] = nil
 				end
 			end
 		end,
-		validateMeasurements = function(p11) --[[ line: 373 ]]
+		validateMeasurements = function(p11)
 			-- upvalues: t_2 (write), recyclingScope (ref), t (ref)
 			local t_1 = {}
 			local var49 = 0

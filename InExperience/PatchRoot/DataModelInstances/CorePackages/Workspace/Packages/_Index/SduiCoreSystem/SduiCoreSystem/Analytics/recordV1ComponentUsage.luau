@@ -1,6 +1,6 @@
 ﻿local sduiUsageRecorderModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageRecorder)
 
-local function recordV1ComponentUsage(p0, p1) --[[ line: 21 ]]
+local function recordV1ComponentUsage(p0, p1)
 	-- upvalues: sduiUsageRecorderModule (ref), recordV1ComponentUsage (ref)
 	if not p1 then return end
 	local var2 = sduiUsageRecorderModule.isTypeSamplingEnabled()
@@ -15,7 +15,7 @@ local function recordV1ComponentUsage(p0, p1) --[[ line: 21 ]]
 	end
 	local recordActionConfig = nil
 	
-	local function visitValueForActions(p2) --[[ line: 45 ]]
+	local function visitValueForActions(p2)
 		-- upvalues: recordActionConfig (write), visitValueForActions (ref)
 		if typeof(p2) ~= "table" then return end
 		if typeof(p2.actionType) == "string" then
@@ -30,7 +30,7 @@ local function recordV1ComponentUsage(p0, p1) --[[ line: 21 ]]
 		end
 	end
 	
-	recordActionConfig = function(p3) --[[ line: 60 | named "recordActionConfig" ]]
+	recordActionConfig = function(p3)
 		-- upvalues: var2 (ref), sduiUsageRecorderModule (copy), p0 (ref), var3 (ref), visitValueForActions (ref)
 		local actionType = p3.actionType
 		
@@ -49,7 +49,7 @@ local function recordV1ComponentUsage(p0, p1) --[[ line: 21 ]]
 		end
 	end
 	
-	local function walkProps(p4) --[[ line: 80 ]]
+	local function walkProps(p4)
 		-- upvalues: var3 (ref), sduiUsageRecorderModule (copy), p0 (ref), componentType (ref), visitValueForActions (ref)
 		if typeof(p4) ~= "table" then return end
 		for i, v in p4 do

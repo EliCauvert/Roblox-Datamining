@@ -1,11 +1,11 @@
 ﻿local _ = require(script.Parent.types)
 local array = require(script:FindFirstAncestor("Navigation").Parent.LuauPolyfill).Array
 
-local function _(p0) --[[ line: 15 | named "isStackRoute" ]]
+local function _(p0)
 	return p0.index ~= nil and (p0.routes ~= nil and p0.isTransitioning ~= nil)
 end
 
-local function getActiveRoutes(p1) --[[ line: 29 ]]
+local function getActiveRoutes(p1)
 	-- upvalues: array (ref), getActiveRoutes (ref)
 	local t = {}
 	

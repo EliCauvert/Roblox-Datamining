@@ -8,9 +8,9 @@ local useNavigation = require(parent.Navigation).useNavigation
 local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 24 | named "InfoPeekView" ]]
+return function(p0)
 	-- upvalues: useNavigationProps (ref), reactModule (ref), useNavigation (ref), useTokens (ref), peekViewState (ref), peekView (ref)
-	local var3 = useNavigationProps(function(_, p1) --[[ line: 25 ]]
+	local var3 = useNavigationProps(function(_, p1)
 		return { title = p1.title, body = p1.body }
 	end)
 	local var4 = reactModule.useRef(nil)
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 24 | named "InfoPeekView" ]]
 		thumbstickScrollEnabled = true,
 		briefViewContentHeight = UDim.new(0, 0),
 		contentFrameRef = var4,
-		viewStateChanged = reactModule.useCallback(function(p2, _) --[[ line: 45 ]]
+		viewStateChanged = reactModule.useCallback(function(p2, _)
 			-- upvalues: peekViewState (copy), var5 (ref)
 			if p2 == peekViewState.Closed or p2 == peekViewState.Hidden then
 				var5.goBack()

@@ -1,14 +1,14 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new() --[[ line: 4 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local bindableEvent = Instance.new("BindableEvent")
 	local t_1 = {
 		MenuIsOpen = false,
 		broadcasts = {},
 		NativeClose = {
-			Connect = function(_, p0) --[[ line: 10 ]]
+			Connect = function(_, p0)
 				-- upvalues: bindableEvent (ref)
 				return bindableEvent.Event:Connect(p0)
 			end
@@ -20,7 +20,7 @@ function t.new() --[[ line: 4 ]]
 	return t_1
 end
 
-function t:SetMenuIsOpen(p1, p2) --[[ line: 23 ]]
+function t:SetMenuIsOpen(p1, p2)
 	if p1 then
 		table.insert(self.openedMenus, p2)
 	else
@@ -33,11 +33,11 @@ function t:SetMenuIsOpen(p1, p2) --[[ line: 23 ]]
 	self.MenuIsOpen = #self.openedMenus > 0
 end
 
-function t:BroadcastNotification(p3, p4) --[[ line: 36 ]]
+function t:BroadcastNotification(p3, p4)
 	table.insert(self.broadcasts, { data = p3, notification = p4 })
 end
 
-function t.GetNotificationTypeList(_) --[[ line: 45 ]]
+function t.GetNotificationTypeList(_)
 	return { NATIVE_EXIT = 35, RESTART_APP = 41 }
 end
 

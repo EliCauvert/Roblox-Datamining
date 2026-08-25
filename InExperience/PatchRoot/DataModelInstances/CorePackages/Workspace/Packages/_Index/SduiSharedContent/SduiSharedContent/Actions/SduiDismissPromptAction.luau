@@ -8,7 +8,7 @@ local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
 local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
 local reportPromptDismissModule = require(sduiSharedContent.Actions.reportPromptDismiss)
 
-return function(p0, _, p1) --[[ line: 19 | named "SduiDismissPromptAction" ]]
+return function(p0, _, p1)
 	-- upvalues: sduiErrorType (ref), getSduiApiStore (ref), reportPromptDismissModule (ref), sduiLoadTimer (ref), sduiParseHelpers (ref)
 	local var4 = if p0 then p0.actionParams else nil
 	
@@ -34,7 +34,7 @@ return function(p0, _, p1) --[[ line: 19 | named "SduiDismissPromptAction" ]]
 	if promptId == nil or typeof(promptId) == "string" then
 		local var5 = getSduiApiStore()
 		local var6 = var5.dismissEntry(promptType)
-		reportPromptDismissModule(p1.dependencies.networking, promptType, promptId):andThen(function() --[[ line: 71 ]]
+		reportPromptDismissModule(p1.dependencies.networking, promptType, promptId):andThen(function()
 			-- upvalues: var6 (ref), var5 (ref), sduiLoadTimer (copy)
 			for i, v in var6 do
 				var5.refreshFromApi({
@@ -42,7 +42,7 @@ return function(p0, _, p1) --[[ line: 19 | named "SduiDismissPromptAction" ]]
 					loadTimer = sduiLoadTimer.createLoadTimer(v)
 				})
 			end
-		end):catch(function(p2) --[[ line: 79 ]]
+		end):catch(function(p2)
 			-- upvalues: p1 (ref), sduiErrorType (copy), sduiParseHelpers (copy)
 			p1.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
 				name = "DismissPrompt",

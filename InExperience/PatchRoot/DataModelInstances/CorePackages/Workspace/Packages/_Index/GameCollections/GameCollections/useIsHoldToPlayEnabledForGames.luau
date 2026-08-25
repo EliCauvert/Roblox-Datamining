@@ -10,17 +10,17 @@ local fFlagGuacStickyShortcutBarEnabled = require(parent.SharedFlags).FFlagGuacS
 local var1 = if fFlagLuaAppEnableStickyShortcutBar then require(parent.AppShortcutBar).Hooks.useIsStickyShortcutBarEnabled else nil
 local var2 = if fFlagGuacStickyShortcutBarEnabled then require(parent.UniversalAppPolicy).useAppPolicy else nil
 
-return function() --[[ line: 21 | named "useIsHoldToPlayEnabledForGames" ]]
+return function()
 	-- upvalues: useUserExperiment (ref), appUserLayers (ref), responsiveModule (ref), useUiModeInfo (ref), fFlagGuacStickyShortcutBarEnabled (ref), var2 (ref), fFlagLuaAppEnableStickyShortcutBar (ref), var1 (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), uiMode (ref)
 	local var3 = useUserExperiment({
 		appUserLayers.PlatformExcellenceQualityImprovementConsoles
-	}, function(p0) --[[ line: 24 ]]
+	}, function(p0)
 		-- upvalues: appUserLayers (copy)
 		return (p0[appUserLayers.PlatformExcellenceQualityImprovementConsoles] or {}).enableHoldToPlay
 	end)
 	local var4 = responsiveModule.useLastInput()
 	local var5 = useUiModeInfo()
-	local var6 = if fFlagGuacStickyShortcutBarEnabled then var2(function(p1) --[[ line: 36 ]]
+	local var6 = if fFlagGuacStickyShortcutBarEnabled then var2(function(p1)
 		return p1.getStickyShortcutBarEnabled()
 	end) elseif fFlagLuaAppEnableStickyShortcutBar then var1() else nil
 	local var7 = if fFlagLuaAppResponsiveEnginePreferredInput then responsiveModule.usePreferredInput() else nil

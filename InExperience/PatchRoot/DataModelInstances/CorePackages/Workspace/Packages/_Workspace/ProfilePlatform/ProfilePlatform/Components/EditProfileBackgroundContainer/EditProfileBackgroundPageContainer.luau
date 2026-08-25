@@ -10,7 +10,7 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local defaultAnalyticsService = require(parent.SocialLuaAnalytics).Analytics.DefaultAnalyticsService
 local analytics = require(parent.EditProfileBackground).Analytics
 
-return function(_) --[[ line: 17 | named "EditProfileBackgroundPageWrapper" ]]
+return function(_)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), refreshProfilePlatformUserInfoModule (ref), analytics (ref), defaultAnalyticsService (ref), editProfileBackgroundModule (ref)
 	local var6 = useDispatch()
 	local var7 = useLocalUserId()
@@ -27,7 +27,7 @@ return function(_) --[[ line: 17 | named "EditProfileBackgroundPageWrapper" ]]
 		}
 	}, {
 		reactModule.createElement(editProfileBackgroundModule.EditProfileBackgroundPage, {
-			onBackgroundChanged = reactModule.useCallback(function() --[[ line: 23 ]]
+			onBackgroundChanged = reactModule.useCallback(function()
 				-- upvalues: var6 (ref), refreshProfilePlatformUserInfoModule (copy), var7 (ref)
 				var6(refreshProfilePlatformUserInfoModule(tostring(var7)))
 			end),

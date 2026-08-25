@@ -23,8 +23,8 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 local fFlagFriendsPageUnifiedOpenProfileLogic = require(parent.SharedFlags).FFlagFriendsPageUnifiedOpenProfileLogic
 local friendTile = roact.PureComponent:extend("FriendTile")
 
-local var10 = function() --[[ line: 38 ]]
-	return function() --[[ line: 39 ]] end
+local var10 = function()
+	return function() end
 end
 
 friendTile.validateProps = t.strictInterface({
@@ -58,29 +58,29 @@ friendTile.defaultProps = {
 	openPlayerProfile = var10
 }
 
-function friendTile.init(p0) --[[ line: 84 ]]
+function friendTile.init(p0)
 	-- upvalues: memoize (ref), createRelevancyInfoModule (ref), roact (ref), fFlagFriendsPageAlwaysOpenPPV (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), fFlagFriendsPageUserListEnabled (ref), socialCommonModule (ref)
 	p0.state = { isFirstRender = true }
 	p0.makeRelevancyInfo = memoize(createRelevancyInfoModule)
 	p0.playerTileRef = roact.createRef()
-	p0.openPlayerProfile = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil elseif p0.props.isPlayerContextualMenuEnabled then function(_, _) --[[ line: 91 ]]
+	p0.openPlayerProfile = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil elseif p0.props.isPlayerContextualMenuEnabled then function(_, _)
 		-- upvalues: p0 (ref)
 		return p0.props.openPlayerProfile(p0.props.user)
-	end else function(p1, p2) --[[ line: 95 ]]
+	end else function(p1, p2)
 		-- upvalues: p0 (ref)
 		local user = p0.props.user
 		
 		return if p1 and p2 then p0.props.openPlayerProfile(user.id, p0.props.index, user, p1, p2) else p0.props.openPlayerProfile(user.id, p0.props.index, user)
 	end
-	p0.openPlayerProfileForRelevancyInfo = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else function(p3, p4) --[[ line: 107 ]]
+	p0.openPlayerProfileForRelevancyInfo = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else function(p3, p4)
 		-- upvalues: p0 (ref)
-		return function() --[[ line: 108 ]]
+		return function()
 			-- upvalues: p0 (copy), p3 (ref), p4 (ref)
 			return p0.openPlayerProfile(p3, p4)
 		end
 	end
 	
-	function p0.checkAndSetSelected() --[[ line: 113 ]]
+	function p0.checkAndSetSelected()
 		-- upvalues: p0 (ref)
 		if p0.props.selected and p0.props.focusGuiObject then
 			local value = p0.playerTileRef:getValue()
@@ -91,24 +91,24 @@ function friendTile.init(p0) --[[ line: 84 ]]
 		end
 	end
 	
-	p0.getPresenceType = if fFlagFriendsPageUserListEnabled then function(p5) --[[ line: 123 ]]
+	p0.getPresenceType = if fFlagFriendsPageUserListEnabled then function(p5)
 		-- upvalues: socialCommonModule (copy)
 		return string.gsub(tostring(p5 or ""), "PresenceType%.", "") or socialCommonModule.Enums.PresenceTypes.Offline
 	end else nil
-	p0.openProfilePeekViewHandle = if fFlagFriendsPageUserListEnabled or fFlagFriendsPageUnifiedOpenProfileLogic then function() --[[ line: 130 ]]
+	p0.openProfilePeekViewHandle = if fFlagFriendsPageUserListEnabled or fFlagFriendsPageUnifiedOpenProfileLogic then function()
 		-- upvalues: p0 (ref), fFlagFriendsPageUnifiedOpenProfileLogic (copy)
 		return p0.props.openPlayerProfileHandle(p0.props.user.id, p0.props.index, if fFlagFriendsPageUnifiedOpenProfileLogic then p0.props.user else nil)
 	end else nil
 end
 
-function friendTile.didMount(p6) --[[ line: 140 ]]
+function friendTile.didMount(p6)
 	if p6.props.pageLoadingTimeReport then
 		p6.props.pageLoadingTimeReport()
 	end
 	p6.checkAndSetSelected()
 end
 
-function friendTile.render(p7) --[[ line: 148 ]]
+function friendTile.render(p7)
 	-- upvalues: getCorrectUserPresenceModule (ref), userPresenceTextModule (ref), userPresenceIconModule (ref), withStyle (ref), withLocalization (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageAlwaysOpenPPV (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), fFlagFriendsPageViewBtnEnabled (ref), buttonTypes (ref), buttonVariant (ref), userProfilesModule (ref), react (ref), friendTileWithTrustedIndicatorModule (ref), fFlagEnableBlackbirdCheck (ref)
 	local user = p7.props.user
 	local var12 = getCorrectUserPresenceModule(user)
@@ -124,13 +124,13 @@ function friendTile.render(p7) --[[ line: 148 ]]
 	else
 		p7:setState({ isFirstRender = false })
 	end
-	return withStyle(function(p8) --[[ line: 166 ]]
+	return withStyle(function(p8)
 		-- upvalues: withLocalization (copy), var13 (ref), fFlagFriendsPageUserListEnabled (copy), p7 (ref), user (ref), var14 (ref), fFlagFriendsPageAlwaysOpenPPV (copy), fFlagFriendsPageUnifiedOpenProfileLogic (copy), absoluteSize (write), absolutePosition (write), var12 (ref), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
 		return withLocalization({
 			accountDeletedText = "Feature.Friends.Action.AccountDeleted",
 			trustedText = "Feature.Friends.TrustedConnection.Label.Trusted",
 			presenceText = var13
-		})(function(p9) --[[ line: 171 ]]
+		})(function(p9)
 			-- upvalues: fFlagFriendsPageUserListEnabled (copy), p7 (copy), user (copy), var14 (copy), fFlagFriendsPageAlwaysOpenPPV (copy), fFlagFriendsPageUnifiedOpenProfileLogic (copy), absoluteSize (copy), absolutePosition (copy), p8 (ref), var12 (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
 			local presenceText = p9.presenceText or nil
 			local accountDeletedText = p9.accountDeletedText

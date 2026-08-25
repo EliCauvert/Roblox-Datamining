@@ -30,7 +30,7 @@ local t_1 = {
 	shape = searchInputShapeModule.Pill
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 75 | named "SearchInput" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTokensModule (ref), useTextInputVariantsModule (ref), useScaledValueModule (ref), constantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), internalTextInputModule (ref), t (ref), translatorModule (ref), iconModule (ref), builderIconsModule (ref)
 	local var19 = withDefaultsModule(p0, t_1)
 	local var20 = useTokensModule()
@@ -59,7 +59,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 75 | 
 			placeholder = if var19.placeholder then var19.placeholder else translatorModule:FormatByKey("CommonUI.Controls.Action.Search"),
 			leadingElement = reactModule.createElement(viewModule, {
 				tag = "anchor-center-left auto-xy",
-				Position = reactModule.useMemo(function() --[[ line: 83 ]]
+				Position = reactModule.useMemo(function()
 					-- upvalues: var21 (ref), var20 (ref)
 					return UDim2.fromOffset(0, (var21.container.minHeight - var20.Stroke.Standard) / 2)
 				end, { var21.container.minHeight, var20.Stroke.Standard })

@@ -7,7 +7,7 @@ local _ = require(currencyTransfers.Enums.TransferOrigination)
 local _ = require(currencyTransfers.Models.ErrorTransferModel)
 local _ = require(currencyTransfers.Enums.TransferRetryOrigin)
 
-return function() --[[ line: 77 ]]
+return function()
 	-- upvalues: signalsModule (ref), promptStateModule (ref)
 	local var3, var4 = signalsModule.createSignal(promptStateModule.Unspecified)
 	local var5, var6 = signalsModule.createSignal(nil)
@@ -79,32 +79,32 @@ return function() --[[ line: 77 ]]
 		setMinimumTransferAmount = var42,
 		getMaximumTransferAmount = var43,
 		setMaximumTransferAmount = var44,
-		setOnClose = function(value) --[[ line: 106 ]]
+		setOnClose = function(value)
 			-- upvalues: var45 (write)
 			var45 = value
 		end,
-		triggerOnClose = function() --[[ line: 110 ]]
+		triggerOnClose = function()
 			-- upvalues: var45 (write)
 			if var45 then
 				var45()
 			end
 		end,
-		setOnPromptOptimisticHide = function(value) --[[ line: 116 ]]
+		setOnPromptOptimisticHide = function(value)
 			-- upvalues: var46 (write)
 			var46 = value
 		end,
-		triggerOnPromptOptimisticHide = function() --[[ line: 120 ]]
+		triggerOnPromptOptimisticHide = function()
 			-- upvalues: var46 (write)
 			if var46 then
 				var46()
 			end
 		end,
-		setOnPromptDismissCommitted = function(value) --[[ line: 126 ]]
+		setOnPromptDismissCommitted = function(value)
 			-- upvalues: var47 (write), var48 (write)
 			var47 = value
 			var48 = false
 		end,
-		triggerOnPromptDismissCommitted = function() --[[ line: 131 ]]
+		triggerOnPromptDismissCommitted = function()
 			-- upvalues: var48 (write), var47 (write)
 			if var48 or var47 == nil then
 				return
@@ -112,11 +112,11 @@ return function() --[[ line: 77 ]]
 			var48 = true
 			var47()
 		end,
-		getNetworkImpl = function() --[[ line: 145 ]]
+		getNetworkImpl = function()
 			-- upvalues: var49 (write)
 			return var49
 		end,
-		setNetworkImpl = function(value) --[[ line: 142 ]]
+		setNetworkImpl = function(value)
 			-- upvalues: var49 (write)
 			var49 = value
 		end

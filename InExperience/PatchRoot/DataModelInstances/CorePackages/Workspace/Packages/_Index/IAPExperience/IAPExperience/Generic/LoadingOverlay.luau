@@ -14,7 +14,7 @@ local loadingOverlayStateModule = require(parent.LoadingOverlayState)
 local name = roactModule.Component:extend(script.Name)
 local t = { dampingRatio = 1, frequency = 1 }
 
-function name.init(p0) --[[ line: 36 ]]
+function name.init(p0)
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
 	local var8, var9 = roactModule.createBinding(0)
 	p0.motor = otterModule.createSingleMotor(0)
@@ -24,12 +24,12 @@ function name.init(p0) --[[ line: 36 ]]
 	p0.motor:setGoal(otterModule.spring(if p0.props.loadingState ~= nil then 0 else 1, t))
 end
 
-function name.getLoadingMessage(_, p1, p2) --[[ line: 48 ]]
+function name.getLoadingMessage(_, p1, p2)
 	-- upvalues: loadingOverlayStateModule (ref)
 	return if p2 == loadingOverlayStateModule.PurchasingItem then p1.PurchasingItem elseif p2 == loadingOverlayStateModule.PurchasingRobux then p1.PurchasingRobux elseif p2 == loadingOverlayStateModule.WaitingForPurchase then p1.WaitingForPurchase elseif p2 == loadingOverlayStateModule.WaitingForRobux then p1.WaitingForRobux else nil
 end
 
-function name.didUpdate(p3, p4, _) --[[ line: 61 ]]
+function name.didUpdate(p3, p4, _)
 	-- upvalues: otterModule (ref), t (ref)
 	local props = p3.props
 	
@@ -38,11 +38,11 @@ function name.didUpdate(p3, p4, _) --[[ line: 61 ]]
 	end
 end
 
-function name.willUnmount(p5) --[[ line: 69 ]]
+function name.willUnmount(p5)
 	p5.motor:destroy()
 end
 
-function name.render(p6) --[[ line: 73 ]]
+function name.render(p6)
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -51,27 +51,27 @@ function name.render(p6) --[[ line: 73 ]]
 			WaitingForPurchase = { key = "IAPExperience.Loading.Text.WaitingForPurchase" },
 			WaitingForRobux = { key = "IAPExperience.Loading.Text.WaitingForRobux" }
 		},
-		render = function(p7) --[[ line: 89 ]]
+		render = function(p7)
 			-- upvalues: p6 (ref)
 			return p6:renderAlert(p7)
 		end
 	})
 end
 
-function name.renderAlert(p8, p9) --[[ line: 95 ]]
+function name.renderAlert(p8, p9)
 	-- upvalues: loadingOverlayStateModule (ref), withStyle (ref), roactModule (ref), loading (ref), iconSize (ref)
 	local props = p8.props
 	local var10 = props.loadingState ~= loadingOverlayStateModule.None and props.loadingState ~= nil
 	local var11 = p8:getLoadingMessage(p9, props.loadingState)
 	
-	return withStyle(function(p10) --[[ line: 101 ]]
+	return withStyle(function(p10)
 		-- upvalues: roactModule (copy), p8 (ref), props (ref), var10 (ref), loading (copy), iconSize (copy), var11 (ref)
 		local theme = p10.Theme
 		local font = p10.Font
 		
 		return roactModule.createElement("Frame", {
 			BackgroundColor3 = theme.BackgroundUIContrast.Color,
-			BackgroundTransparency = p8.animationProgress:map(function(p11) --[[ line: 106 ]]
+			BackgroundTransparency = p8.animationProgress:map(function(p11)
 				-- upvalues: props (copy), theme (ref)
 				return if props.showOverlay then if props.shouldAnimate then 1 - (1 - theme.BackgroundUIContrast.Transparency) * p11 else theme.BackgroundUIContrast.Transparency else 1
 			end),

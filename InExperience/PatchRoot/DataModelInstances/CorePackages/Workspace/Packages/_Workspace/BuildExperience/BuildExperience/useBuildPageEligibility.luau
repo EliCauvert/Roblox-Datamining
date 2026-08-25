@@ -25,7 +25,7 @@ local frozen = table.freeze({
 	Leaving = "Leaving"
 })
 
-local function _(p0) --[[ line: 44 | named "wasCancelled" ]]
+local function _(p0)
 	-- upvalues: actionStatusEnum (ref)
 	if p0 == nil then
 		return false
@@ -40,9 +40,9 @@ end
 
 return {
 	Status = frozen,
-	useBuildPageEligibility = function(p1) --[[ line: 58 ]]
+	useBuildPageEligibility = function(p1)
 		-- upvalues: universalAppPolicyModule (ref), useDispatch (ref), useNavigationFocus (ref), reactModule (ref), frozen (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateBack (ref), buildPolicyRefreshTimeoutMs (ref), accessResponseEnum (ref), actionStatusEnum (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), fStringCoreContentAmpNameSpace (ref)
-		local var9, var10 = universalAppPolicyModule.useAppPolicy(function(p2) --[[ line: 59 ]]
+		local var9, var10 = universalAppPolicyModule.useAppPolicy(function(p2)
 			-- upvalues: p1 (ref)
 			if p1 then
 				return p2.getCanViewBuild(), p2.getCanUseBuild()
@@ -56,7 +56,7 @@ return {
 		local var15 = reactModule.useRef(0)
 		local var16, var17 = reactModule.useState(false)
 		local var18, var19 = reactModule.useState(frozen.Prompting)
-		local var20 = reactModule.useCallback(function() --[[ line: 73 ]]
+		local var20 = reactModule.useCallback(function()
 			-- upvalues: var13 (ref), var15 (ref), var17 (ref), var19 (ref), frozen (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var11 (ref), navigateBack (copy)
 			var13.current = false
 			var15.current += 1
@@ -70,13 +70,13 @@ return {
 			end
 			var11(navigateBack(true))
 		end, { var11 })
-		local var21 = reactModule.useCallback(function() --[[ line: 85 ]]
+		local var21 = reactModule.useCallback(function()
 			-- upvalues: var17 (ref), var19 (ref), frozen (copy), var15 (ref), buildPolicyRefreshTimeoutMs (copy), universalAppPolicyModule (copy)
 			var17(false)
 			var19(frozen.Refreshing)
 			var15.current += 1
 			local current = var15.current
-			task.delay(buildPolicyRefreshTimeoutMs / 1000, function() --[[ line: 91 ]]
+			task.delay(buildPolicyRefreshTimeoutMs / 1000, function()
 				-- upvalues: var15 (copy), current (ref), universalAppPolicyModule (copy), var17 (copy), var19 (copy), frozen (copy)
 				if var15.current ~= current then return end
 				local appFeaturePolicies = universalAppPolicyModule.getAppFeaturePolicies()
@@ -94,7 +94,7 @@ return {
 				var19(frozen.Ineligible)
 			end)
 		end, {})
-		local var22 = reactModule.useCallback(function(p3, p4) --[[ line: 110 ]]
+		local var22 = reactModule.useCallback(function(p3, p4)
 			-- upvalues: accessResponseEnum (copy), var21 (ref), actionStatusEnum (copy), var20 (ref), var19 (ref), frozen (copy)
 			local var26
 			if p3 == accessResponseEnum.Granted then
@@ -118,7 +118,7 @@ return {
 			end
 			var19(frozen.Error)
 		end, { var21, var20 })
-		reactModule.useEffect(function() --[[ line: 120 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var14 (ref), var12 (ref), var18 (ref), frozen (copy), var13 (ref), var19 (ref)
 			local current = var14.current
 			var14.current = var12
@@ -132,7 +132,7 @@ return {
 				var19(frozen.Prompting)
 			end
 		end, { var12, var18 })
-		reactModule.useEffect(function() --[[ line: 132 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p1 (ref), var10 (ref), var15 (ref), var13 (ref), var17 (ref), var19 (ref), frozen (copy), var9 (ref)
 			if not p1 then return end
 			if var10 then
@@ -148,7 +148,7 @@ return {
 				var19(frozen.Ineligible)
 			end
 		end, { var9, var10, p1 })
-		reactModule.useEffect(function() --[[ line: 150 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p1 (ref), var12 (ref), var18 (ref), frozen (copy), var10 (ref), var9 (ref), var13 (ref), var11 (ref), openAmpWizardContainer (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), var22 (ref), fStringCoreContentAmpNameSpace (copy)
 			if p1 and var12 and (var18 == frozen.Prompting and not var10) and (var9 and not var13.current) then
 				var13.current = true
@@ -159,9 +159,9 @@ return {
 		end, {
 			var9, var10, var11, p1, var22, var12, var18
 		})
-		reactModule.useEffect(function() --[[ line: 185 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var15 (ref)
-			return function() --[[ line: 186 ]]
+			return function()
 				-- upvalues: var15 (copy)
 				var15.current += 1
 			end

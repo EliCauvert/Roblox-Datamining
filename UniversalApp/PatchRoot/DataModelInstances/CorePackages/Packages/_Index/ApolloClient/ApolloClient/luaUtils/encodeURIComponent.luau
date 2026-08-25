@@ -1,6 +1,6 @@
 ﻿local httpService = game:GetService("HttpService")
 
-return function(p0) --[[ line: 10 | named "encodeURIComponent" ]]
+return function(p0)
 	-- upvalues: httpService (ref)
 	return httpService:UrlEncode(p0):gsub("%%2D", "-"):gsub("%%5F", "_"):gsub("%%2E", "."):gsub("%%21", "!"):gsub("%%7E", "~"):gsub("%%2A", "*"):gsub("%%27", "'"):gsub("%%28", "("):gsub("%%29", ")")
 end

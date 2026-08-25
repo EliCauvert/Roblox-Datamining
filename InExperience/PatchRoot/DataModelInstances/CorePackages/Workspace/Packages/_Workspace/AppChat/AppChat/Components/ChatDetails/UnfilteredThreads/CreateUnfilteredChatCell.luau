@@ -16,17 +16,17 @@ local t = {
 	subTitleText = "Placeholder subtitle",
 	iconImage = nil,
 	cellHeight = 48,
-	onActivated = function() --[[ line: 39 ]] end
+	onActivated = function() end
 }
 
-return function(p0) --[[ line: 44 | named "CreateUnfilteredChatCell" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useIsInExperienceModule (ref), useTelemetryModule (ref), chatDetailsTelemetryLayerModule (ref), useEffectOnMount (ref), chatDetailsTelemetryEventsModule (ref), reactModule (ref), flexIconWithTextCellModule (ref)
 	local var9 = cryoModule.Dictionary.join(t, p0)
 	local style = var9.style or useStyle()
 	local var11 = useTokens()
 	local var12 = useIsInExperienceModule()
 	local var13 = useTelemetryModule(chatDetailsTelemetryLayerModule.Context)
-	useEffectOnMount(function() --[[ line: 52 ]]
+	useEffectOnMount(function()
 		-- upvalues: var13 (ref), chatDetailsTelemetryEventsModule (copy)
 		var13.emit(chatDetailsTelemetryEventsModule.ChatDetailsCreateUnfilteredChatCellRendered, {})
 	end)

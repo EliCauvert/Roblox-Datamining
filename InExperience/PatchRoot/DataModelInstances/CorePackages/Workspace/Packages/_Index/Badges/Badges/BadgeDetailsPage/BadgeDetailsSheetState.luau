@@ -1,11 +1,11 @@
 ﻿local var0 = false
 
 return {
-	getIsBadgeDetailsSheetOpen = function() --[[ line: 3 ]]
+	getIsBadgeDetailsSheetOpen = function()
 		-- upvalues: var0 (write)
 		return var0
 	end,
-	setIsBadgeDetailsSheetOpen = function(value) --[[ line: 7 ]]
+	setIsBadgeDetailsSheetOpen = function(value)
 		-- upvalues: var0 (write)
 		var0 = value
 	end

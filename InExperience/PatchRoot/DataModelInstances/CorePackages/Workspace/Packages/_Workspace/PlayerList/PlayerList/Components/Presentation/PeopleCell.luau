@@ -6,7 +6,7 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local playerBadgeGroupModule = require(parent.Components.Presentation.PlayerBadgeGroup)
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "PeopleCell" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), text (ref), playerBadgeGroupModule (ref), view (ref)
 	local t = {
 		NameText = reactModule.createElement(text, {

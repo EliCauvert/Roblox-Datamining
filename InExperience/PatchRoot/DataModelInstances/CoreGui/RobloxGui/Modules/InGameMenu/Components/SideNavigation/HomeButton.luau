@@ -22,7 +22,7 @@ homeButton.validateProps = t.strictInterface({
 })
 homeButton.defaultProps = { on = false }
 
-function homeButton.renderWithSelectionCursor(p0, p1) --[[ line: 45 ]]
+function homeButton.renderWithSelectionCursor(p0, p1)
 	-- upvalues: var5 (ref), var6 (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), var4 (ref), imageSetButton (ref)
 	local var8 = if p0.props.on then var5 else var6
 	
@@ -51,9 +51,9 @@ function homeButton.renderWithSelectionCursor(p0, p1) --[[ line: 45 ]]
 	})
 end
 
-function homeButton.render(p2) --[[ line: 74 ]]
+function homeButton.render(p2)
 	-- upvalues: var3 (ref)
-	return var3(function(p3) --[[ line: 75 ]]
+	return var3(function(p3)
 		-- upvalues: p2 (ref)
 		return p2:renderWithSelectionCursor(p3)
 	end)

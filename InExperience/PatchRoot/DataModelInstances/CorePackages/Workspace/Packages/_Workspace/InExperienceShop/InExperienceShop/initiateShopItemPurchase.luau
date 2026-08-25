@@ -8,7 +8,7 @@ local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPu
 local fFlagSkipBuyDelayForExperienceShop = sharedFlagsModule.FFlagSkipBuyDelayForExperienceShop
 local _ = require(inExperienceShop.Types)
 
-return function(p0, p1, p2) --[[ line: 33 | named "initiateShopItemPurchase" ]]
+return function(p0, p1, p2)
 	-- upvalues: fFlagEnablePurchasePayloadInExperienceShop (ref), getShopPurchasePayloadModule (ref), purchasePromptModule (ref), fFlagPassShopPurchaseSurfaceToBuyModal (ref), inExperienceShop (ref), fFlagSkipBuyDelayForExperienceShop (ref)
 	if tonumber(p0) == nil then return end
 	local var4 = if fFlagEnablePurchasePayloadInExperienceShop then getShopPurchasePayloadModule() else nil
@@ -19,7 +19,7 @@ return function(p0, p1, p2) --[[ line: 33 | named "initiateShopItemPurchase" ]]
 			surface = require(inExperienceShop.Analytics.getShopPurchaseAnalyticsSurface)(p2)
 		}
 		
-		initiatePurchaseForProductPayload = function(p3) --[[ line: 49 ]]
+		initiatePurchaseForProductPayload = function(p3)
 			-- upvalues: purchasePromptModule (copy), t (ref)
 			purchasePromptModule.initiatePurchaseForProductPayload(p3, t)
 		end

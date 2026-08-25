@@ -11,7 +11,7 @@ local var7 = require(parent.UrlBuilder).UrlBuilder.new({
 	base = require(parent.UrlBuilder).UrlBase.APIS
 })
 
-return function(p0, p1) --[[ line: 23 ]]
+return function(p0, p1)
 	-- upvalues: var7 (ref), httpService (ref), promiseModule (ref), fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (ref), logResponseStatusModule (ref), loggerModule (ref), logResponseLatencyModule (ref)
 	local var8 = httpService:RequestInternal({
 		Method = "POST",
@@ -20,9 +20,9 @@ return function(p0, p1) --[[ line: 23 ]]
 		Body = httpService:JSONEncode({ promptType = p0, promptId = p1 })
 	})
 	
-	return promiseModule.new(function(p2, p3) --[[ line: 34 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: var8 (ref), fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (copy), logResponseStatusModule (copy), loggerModule (copy), logResponseLatencyModule (copy)
-		var8:Start(function(p4, p5) --[[ line: 35 ]]
+		var8:Start(function(p4, p5)
 			-- upvalues: fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (copy), logResponseStatusModule (copy), loggerModule (copy), p3 (ref), logResponseLatencyModule (copy), p2 (ref)
 			local var10
 			local statusCode = p5 and p5.StatusCode

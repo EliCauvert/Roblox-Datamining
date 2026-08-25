@@ -1,4 +1,4 @@
-﻿local function _(p0, p1) --[[ line: 3 | named "createFrameModel" ]]
+﻿local function _(p0, p1)
 	return { offset = p0, size = p1 }
 end
 
@@ -17,14 +17,14 @@ local t = {
 }
 
 return {
-	GetFrame = function(_, p2) --[[ line: 26 ]]
+	GetFrame = function(_, p2)
 		-- upvalues: t (ref)
 		return t.frames[p2]
 	end,
-	GetImagePath = function(_) --[[ line: 30 ]]
+	GetImagePath = function(_)
 		return "rbxasset://textures/ui/Settings/ShareGame/icons.png"
 	end,
-	ApplyImage = function(p3, p4, p5) --[[ line: 34 ]]
+	ApplyImage = function(p3, p4, p5)
 		local var1 = p3:GetFrame(p5)
 		p4.Image = "rbxasset://textures/ui/Settings/ShareGame/icons.png"
 		p4.ImageRectOffset = var1.offset

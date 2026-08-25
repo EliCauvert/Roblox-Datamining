@@ -3,7 +3,7 @@ local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
 
-return function(p0, _, p1, p2) --[[ line: 25 | named "SduiActionSequenceAction" ]]
+return function(p0, _, p1, p2)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), sduiParseHelpers (ref)
 	local var1 = if p0 then p0.actionParams else nil
 	

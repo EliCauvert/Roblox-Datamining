@@ -7,7 +7,7 @@ local var1 = tModule.strictInterface({
 	universeId = tModule.string
 })
 
-return function(p0, p1) --[[ line: 16 ]]
+return function(p0, p1)
 	-- upvalues: var1 (ref), mutedError (ref)
 	local var2, var3 = var1(p1)
 	

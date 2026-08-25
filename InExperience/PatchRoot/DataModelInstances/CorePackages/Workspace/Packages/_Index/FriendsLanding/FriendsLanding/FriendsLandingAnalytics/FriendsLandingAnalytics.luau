@@ -32,7 +32,7 @@ t.DiagStats = {
 }
 t.BASE_CONTEXT = "friendsLanding"
 
-function t.new(p0, p1, p2) --[[ line: 71 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref)
 	assert(p1, "FriendsLanding must be passed the ID of the local user")
 	local t_1 = {
@@ -47,7 +47,7 @@ function t.new(p0, p1, p2) --[[ line: 71 ]]
 	return t_1
 end
 
-function t:navigate(p3) --[[ line: 87 ]]
+function t:navigate(p3)
 	-- upvalues: loggerModule (ref), t (ref)
 	loggerModule:info("navigate to {}", p3)
 	local var10 = t.Navigation[p3]
@@ -60,7 +60,7 @@ function t:navigate(p3) --[[ line: 87 ]]
 	loggerModule:error("Error from navigate: Invalid destination '{}'", p3)
 end
 
-function t:buttonClick(p4, p5) --[[ line: 97 ]]
+function t:buttonClick(p4, p5)
 	-- upvalues: buttonClickEventsModule (ref), loggerModule (ref), llama (ref), showMoreSectionTypeEnumModule (ref), t (ref)
 	assert(buttonClickEventsModule.isEnumValue(p4), "invalid button name used")
 	loggerModule:info("eventName: buttonClick btn: {}{}", p4, self:_toStringAdditionalArgs(p5))
@@ -84,7 +84,7 @@ function t:buttonClick(p4, p5) --[[ line: 97 ]]
 	end
 end
 
-function t._toStringAdditionalArgs(_, p6) --[[ line: 127 ]]
+function t._toStringAdditionalArgs(_, p6)
 	-- upvalues: tutils (ref)
 	if p6 then
 		local replaced, _ = string.gsub(" args: " .. tutils.toString(p6), "%s+", " ")
@@ -94,17 +94,17 @@ function t._toStringAdditionalArgs(_, p6) --[[ line: 127 ]]
 	return ""
 end
 
-function t:pageLoaded() --[[ line: 136 ]]
+function t:pageLoaded()
 	-- upvalues: loggerModule (ref), t (ref)
 	loggerModule:info("pageLoaded")
 	self._diagImpl:reportCounter(t.DiagCounters.UserLoadedPage, 1)
 end
 
-function t:pageLoadedWithArgs(p7, p8) --[[ line: 142 ]]
+function t:pageLoadedWithArgs(p7, p8)
 	self._eventStreamImpl:setRBXEventStream(p7 or self.BASE_CONTEXT, "luaPageLoad", p8)
 end
 
-function t:_pagePerformanceReport(p9, p10, p11) --[[ line: 147 ]]
+function t:_pagePerformanceReport(p9, p10, p11)
 	-- upvalues: navigatedFromPagesEnumModule (ref), loggerModule (ref)
 	p11 = p11 or os.clock()
 	local var14 = self._getLoadingTimeInfo and self._getLoadingTimeInfo() or {}
@@ -129,7 +129,7 @@ function t:_pagePerformanceReport(p9, p10, p11) --[[ line: 147 ]]
 	loggerModule:warning("Cannot report loading time: incorrect startPage or startTime")
 end
 
-function t:_reportPagePerformanceOnceCheck(p12) --[[ line: 173 ]]
+function t:_reportPagePerformanceOnceCheck(p12)
 	if self._reportedPagePerformanceOnce[p12] then
 		return true
 	end
@@ -138,7 +138,7 @@ function t:_reportPagePerformanceOnceCheck(p12) --[[ line: 173 ]]
 	return false
 end
 
-function t:pageMountingTimeReport(p13) --[[ line: 181 ]]
+function t:pageMountingTimeReport(p13)
 	-- upvalues: t (ref)
 	if self:_reportPagePerformanceOnceCheck("pageMountingTime") then
 		return
@@ -146,7 +146,7 @@ function t:pageMountingTimeReport(p13) --[[ line: 181 ]]
 	self:_pagePerformanceReport(t.DiagStats.MountingPageTime, "pageMountingTime", p13)
 end
 
-function t:pageLoadingTimeReport(p14) --[[ line: 189 ]]
+function t:pageLoadingTimeReport(p14)
 	-- upvalues: t (ref)
 	if self:_reportPagePerformanceOnceCheck("pageLoadingTime") then
 		return
@@ -154,7 +154,7 @@ function t:pageLoadingTimeReport(p14) --[[ line: 189 ]]
 	self:_pagePerformanceReport(t.DiagStats.LoadingPageTime, "pageLoadingTime", p14)
 end
 
-function t:reportAddFriendsEntrypoint(p15, p16) --[[ line: 197 ]]
+function t:reportAddFriendsEntrypoint(p15, p16)
 	-- upvalues: t (ref), appPage (ref)
 	assert(t.Navigation[p15] ~= nil, "invalid screen")
 	
@@ -168,7 +168,7 @@ function t:reportAddFriendsEntrypoint(p15, p16) --[[ line: 197 ]]
 	self._diagImpl:reportCounter(t.Navigation[p15], 1)
 end
 
-function t:impressionEvent(p17, p18) --[[ line: 209 ]]
+function t:impressionEvent(p17, p18)
 	-- upvalues: impressionEventsModule (ref)
 	assert(impressionEventsModule.isEnumValue(p17), "invalid impression name used")
 	self._eventStreamImpl:setRBXEventStream("addUniversalFriends", p17:rawValue(), p18)

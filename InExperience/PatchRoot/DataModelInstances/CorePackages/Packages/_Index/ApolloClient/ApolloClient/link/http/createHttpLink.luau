@@ -19,7 +19,7 @@ local createSignalIfSupported = require(script.Parent.createSignalIfSupported).c
 local rewriteURIForGET = require(script.Parent.rewriteURIForGET).rewriteURIForGET
 local fromError = require(script.Parent.Parent.utils).fromError
 
-function t.createHttpLink(p0) --[[ line: 41 ]]
+function t.createHttpLink(p0)
 	-- upvalues: object (ref), checkFetcher (ref), boolean (ref), apolloLink (ref), selectURI (ref), selectHttpOptionsAndBody (ref), fallbackHttpConfig (ref), set (ref), visit (ref), createSignalIfSupported (ref), array (ref), rewriteURIForGET (ref), fromError (ref), serializeFetchParameter (ref), observable (ref), parseAndCheckHttpResponse (ref)
 	local var3 = p0
 	
@@ -50,7 +50,7 @@ function t.createHttpLink(p0) --[[ line: 41 ]]
 		headers = var6.headers
 	}
 	
-	return apolloLink.new(function(_, p1) --[[ line: 78 ]]
+	return apolloLink.new(function(_, p1)
 		-- upvalues: selectURI (copy), var4 (ref), boolean (copy), object (copy), selectHttpOptionsAndBody (copy), fallbackHttpConfig (copy), t (ref), var5 (ref), set (copy), visit (copy), createSignalIfSupported (copy), useGETForQueries (ref), array (copy), rewriteURIForGET (copy), fromError (copy), serializeFetchParameter (copy), observable (copy), fetch (write), parseAndCheckHttpResponse (copy)
 		local var8 = selectURI(p1, var4)
 		local context = p1:getContext()
@@ -79,7 +79,7 @@ function t.createHttpLink(p0) --[[ line: 41 ]]
 		if body.variables ~= nil and not var5 then
 			local var12 = set.new(object.keys(body.variables))
 			visit(p1.query, {
-				Variable = function(_, p2, _, p3) --[[ line: 122 ]]
+				Variable = function(_, p2, _, p3)
 					-- upvalues: boolean (copy), var12 (ref)
 					if boolean.toJSBoolean(p3) and p3.kind ~= "VariableDefinition" then
 						var12:delete(p2.name.value)
@@ -89,7 +89,7 @@ function t.createHttpLink(p0) --[[ line: 41 ]]
 			
 			if boolean.toJSBoolean(var12.size) then
 				body.variables = object.assign({}, body.variables)
-				var12:forEach(function(p4) --[[ line: 139 ]]
+				var12:forEach(function(p4)
 					-- upvalues: body (ref)
 					body.variables[p4] = nil
 				end)
@@ -106,7 +106,7 @@ function t.createHttpLink(p0) --[[ line: 41 ]]
 				options.signal = signal
 			end
 		end
-		if boolean.toJSBoolean(useGETForQueries) and not array.some(p1.query.definitions, function(p5) --[[ line: 156 | named "definitionIsMutation" ]]
+		if boolean.toJSBoolean(useGETForQueries) and not array.some(p1.query.definitions, function(p5)
 			return p5.kind == "OperationDefinition" and p5.operation == "mutation"
 		end) then
 			options.method = "GET"
@@ -120,25 +120,25 @@ function t.createHttpLink(p0) --[[ line: 41 ]]
 				return fromError(parseError)
 			end
 		else
-			local ok, status = pcall(function() --[[ line: 174 ]]
+			local ok, status = pcall(function()
 				-- upvalues: options (ref), serializeFetchParameter (copy), body (ref)
 				options.body = serializeFetchParameter(body, "Payload")
 			end)
 			
-			return if ok then observable.new(function(p6) --[[ line: 181 ]]
+			return if ok then observable.new(function(p6)
 				-- upvalues: fetch (copy), var8 (write), options (ref), p1 (ref), parseAndCheckHttpResponse (copy), boolean (copy), controller (write)
-				fetch(var8, options):andThen(function(p9) --[[ line: 183 ]]
+				fetch(var8, options):andThen(function(p9)
 					-- upvalues: p1 (copy)
 					p1:setContext({ response = p9 })
 					
 					return p9
-				end):andThen(parseAndCheckHttpResponse(p1)):andThen(function(p8) --[[ line: 188 ]]
+				end):andThen(parseAndCheckHttpResponse(p1)):andThen(function(p8)
 					-- upvalues: p6 (ref)
 					p6:next(p8)
 					p6:complete()
 					
 					return p8
-				end):catch(function(p7) --[[ line: 194 ]]
+				end):catch(function(p7)
 					-- upvalues: boolean (copy), p6 (ref)
 					if p7.name == "AbortError" then return end
 					if boolean.toJSBoolean(p7.result) and boolean.toJSBoolean(p7.result.errors) and boolean.toJSBoolean(p7.result.data) then
@@ -147,7 +147,7 @@ function t.createHttpLink(p0) --[[ line: 41 ]]
 					p6:error(p7)
 				end)
 				
-				return function() --[[ line: 241 ]]
+				return function()
 					-- upvalues: boolean (copy), controller (copy)
 					if boolean.toJSBoolean(controller) then
 						controller:abort()

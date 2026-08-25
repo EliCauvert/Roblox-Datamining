@@ -18,19 +18,19 @@ local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
 local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
 local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 
-return function() --[[ line: 26 | named "MutualsTabContent" ]]
+return function()
 	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref)
 	local var13 = useMutualsListModule(useSocialTabsContextModule().profileId)
-	local var14 = reactModule.useMemo(function() --[[ line: 32 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var13 (ref), entityType (copy)
-		return dashModule.map(var13.mutualFriends, function(p0) --[[ line: 33 ]]
+		return dashModule.map(var13.mutualFriends, function(p0)
 			-- upvalues: entityType (copy)
 			return { id = p0.id, type = entityType.User }
 		end)
 	end, { var13.mutualFriends })
-	local var15 = reactModule.useMemo(function() --[[ line: 38 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: dashModule (copy), var14 (ref)
-		return dashModule.map(var14, function(p1) --[[ line: 39 ]]
+		return dashModule.map(var14, function(p1)
 			return p1.id
 		end)
 	end, { var14 })
@@ -49,7 +49,7 @@ return function() --[[ line: 26 | named "MutualsTabContent" ]]
 			layoutMode = layoutMode.Vertical,
 			hasMore = var13.hasMore,
 			onLoadMore = if var13.hasMore then var13.loadMore else nil,
-			renderRow = reactModule.useCallback(function(p2, p3, _) --[[ line: 55 ]]
+			renderRow = reactModule.useCallback(function(p2, p3, _)
 				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var17 (ref), var18 (ref)
 				return reactModule.createElement(rowDataProviderModule, {
 					createRow = p2,

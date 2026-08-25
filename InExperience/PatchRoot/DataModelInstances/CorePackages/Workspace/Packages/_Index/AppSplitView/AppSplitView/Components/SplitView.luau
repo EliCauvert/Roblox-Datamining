@@ -15,21 +15,21 @@ local compositionTags = appCompositionModule.CompositionTags
 local getRegionOverrides = appCompositionModule.getRegionOverrides
 local regionName = appCompositionModule.RegionName
 
-local function _(p0) --[[ line: 23 | named "getPlatformScale" ]]
+local function _(p0)
 	-- upvalues: displayModule (ref)
 	local displayStore = displayModule.GetDisplayStore(p0)
 	
 	return if displayStore.getPlatformScale then displayStore.getPlatformScale(p0) else 1
 end
 
-local var10 = signalsModule.createComputed(function(p1) --[[ line: 29 ]]
+local var10 = signalsModule.createComputed(function(p1)
 	-- upvalues: getRegionOverrides (ref), regionName (ref), displayModule (ref)
 	local var14 = if getRegionOverrides and regionName then getRegionOverrides(regionName.NavigationRegion) else nil
 	local displayStore = displayModule.GetDisplayStore(p1)
 	
 	return (if var14 and var14.widthScale then var14.widthScale else 0) * (if displayStore.getPlatformScale then displayStore.getPlatformScale(p1) else 1)
 end)
-local var11 = signalsModule.createComputed(function(p2) --[[ line: 37 ]]
+local var11 = signalsModule.createComputed(function(p2)
 	-- upvalues: getRegionOverrides (ref), regionName (ref), displayModule (ref)
 	local var16 = if getRegionOverrides and regionName then getRegionOverrides(regionName.SupportRegion) else nil
 	
@@ -37,7 +37,7 @@ local var11 = signalsModule.createComputed(function(p2) --[[ line: 37 ]]
 end)
 local t = { Transparency = 1 }
 
-return reactModule.memo(function(p3) --[[ line: 75 | named "SplitView" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: signalsReactModule (ref), var10 (ref), var11 (ref), enumsModule (ref), useSplitViewResizeModule (ref), reactModule (ref), compositionTags (ref), compositionStyleSheet (ref), view (ref), t (ref), paneResizerModule (ref)
 	local supportPosition, supportSize
 	local var17 = signalsReactModule.useSignalState(var10)
@@ -60,7 +60,7 @@ return reactModule.memo(function(p3) --[[ line: 75 | named "SplitView" ]]
 		hasWidthOverride = p3.supportPane ~= nil and p3.supportPane.width ~= nil,
 		onSupportPaneWidthChanged = p3.onSupportPaneWidthChanged
 	})
-	local var31 = reactModule.useCallback(function(p4) --[[ line: 114 ]]
+	local var31 = reactModule.useCallback(function(p4)
 		-- upvalues: var23_1 (ref), var30 (ref), p3 (ref)
 		if not var23_1 then
 			var30.onSupportAbsoluteSizeChanged(p4)

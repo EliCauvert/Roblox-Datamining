@@ -12,7 +12,7 @@ local rules = standardBreakpointsModule.rules
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 62 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	local t = {
 		_hasSizeRules = false,
@@ -34,23 +34,23 @@ function t_1.new(p0) --[[ line: 62 ]]
 	return setmetatable(t, t_1)
 end
 
-function t_1:hasSizeRules() --[[ line: 98 ]]
+function t_1:hasSizeRules()
 	return self._hasSizeRules
 end
 
-function t_1:hasInputRules() --[[ line: 101 ]]
+function t_1:hasInputRules()
 	return self._hasInputRules
 end
 
-function t_1:currentRule() --[[ line: 105 ]]
+function t_1:currentRule()
 	return self._currentRule
 end
 
-function t_1:currentKey() --[[ line: 108 ]]
+function t_1:currentKey()
 	return self._currentKey
 end
 
-function t_1:resolve(p1, p2, p3, p4, p5) --[[ line: 114 ]]
+function t_1:resolve(p1, p2, p3, p4, p5)
 	local var11 = "Default"
 	local t = {}
 	local var13 = p1 / p2
@@ -121,7 +121,7 @@ function t_1:resolve(p1, p2, p3, p4, p5) --[[ line: 114 ]]
 	return true
 end
 
-function t.new() --[[ line: 154 ]]
+function t.new()
 	-- upvalues: VRService (ref), signal (ref), t (ref), inputModeModule (ref)
 	local t_1 = {
 		_layerCollectorSizeConnection = nil,
@@ -136,13 +136,13 @@ function t.new() --[[ line: 154 ]]
 		_configResolvers = { default = {} }
 	}
 	local tbl = setmetatable(t_1, t)
-	t_1._inputModeConnection = inputModeModule.connect(function() --[[ line: 182 ]]
+	t_1._inputModeConnection = inputModeModule.connect(function()
 		-- upvalues: t_1 (ref), tbl (ref)
 		if t_1._hasInputRules then
 			tbl:resolve()
 		end
 	end)
-	t_1._vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ line: 188 ]]
+	t_1._vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
 		-- upvalues: t_1 (ref), VRService (copy), tbl (ref)
 		t_1._vrEnabled = VRService.VREnabled
 		tbl:resolve()
@@ -151,11 +151,11 @@ function t.new() --[[ line: 154 ]]
 	return tbl
 end
 
-function t:incRef() --[[ line: 196 ]]
+function t:incRef()
 	self._refCount += 1
 end
 
-function t:destroy() --[[ line: 201 ]]
+function t:destroy()
 	-- upvalues: tbl (ref)
 	if self._refCount > 1 then
 		self._refCount -= 1
@@ -182,27 +182,27 @@ function t:destroy() --[[ line: 201 ]]
 	end
 end
 
-function t:connect(p6) --[[ line: 228 ]]
+function t:connect(p6)
 	if self._changed == nil then
 		error("Connecting to dead signal!")
 	end
 	return self._changed:connect(p6)
 end
 
-function t:currentRule(p7) --[[ line: 236 ]]
+function t:currentRule(p7)
 	return self._configResolvers[p7 or "default"]:currentRule()
 end
 
-function t:currentKey(p8) --[[ line: 241 ]]
+function t:currentKey(p8)
 	return self._configResolvers[p8 or "default"]:currentKey()
 end
 
-function t:updateAbsoluteSize(p9) --[[ line: 247 ]]
+function t:updateAbsoluteSize(p9)
 	-- upvalues: guiService (ref)
 	local absoluteSize = p9.AbsoluteSize
 	
 	if p9:IsA("LayerCollector") then
-		local ok, status = pcall(function() --[[ line: 251 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p9 (ref)
 			return p9.IgnoreGuiInset
 		end)
@@ -221,7 +221,7 @@ function t:updateAbsoluteSize(p9) --[[ line: 247 ]]
 	end
 end
 
-function t:resolve() --[[ line: 270 ]]
+function t:resolve()
 	-- upvalues: inputModeModule (ref)
 	if not self._configResolvers then return end
 	local x = self._absoluteSize.X or 1
@@ -241,11 +241,11 @@ function t:resolve() --[[ line: 270 ]]
 	end
 end
 
-function is_array(p10) --[[ line: 293 ]]
+function is_array(p10)
 	return type(p10) == "table" and p10[1] ~= nil
 end
 
-function t:setConfig(p11) --[[ line: 300 ]]
+function t:setConfig(p11)
 	-- upvalues: t_1 (ref)
 	if is_array(p11) then
 		p11 = { default = p11 }
@@ -267,7 +267,7 @@ function t:setConfig(p11) --[[ line: 300 ]]
 	self:resolve()
 end
 
-function t:setLocalInstance(p12, p13) --[[ line: 328 ]]
+function t:setLocalInstance(p12, p13)
 	-- upvalues: findFirstAncestorWithTagModule (ref)
 	if typeof(p12) ~= "Instance" then
 		error("setLocalInstance arg1 expects Instance")
@@ -284,7 +284,7 @@ function t:setLocalInstance(p12, p13) --[[ line: 328 ]]
 		self._layerCollectorSizeConnection = nil
 	end
 	if var26 then
-		self._layerCollectorSizeConnection = var26:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 354 ]]
+		self._layerCollectorSizeConnection = var26:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 			-- upvalues: self (ref), var26 (write)
 			self:updateAbsoluteSize(var26)
 		end)
@@ -294,7 +294,7 @@ end
 
 return {
 	DefaultKey = "Default",
-	bindContainer = function(p14, p15) --[[ line: 363 ]]
+	bindContainer = function(p14, p15)
 		-- upvalues: tbl (ref), t (ref), rules (ref)
 		local var27 = tbl[p14]
 		local var28 = p15 == nil

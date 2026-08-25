@@ -1,10 +1,10 @@
 ﻿local t = {
-	replaceNewlines = function(p0, p1) --[[ line: 18 ]]
+	replaceNewlines = function(p0, p1)
 		p1 = p1 or " "
 		
 		return p0:gsub("\r\n", p1):gsub("\r", p1):gsub("\n", p1)
 	end,
-	truncateLength = function(p2, p3) --[[ line: 33 ]]
+	truncateLength = function(p2, p3)
 		p3 = p3 or 140
 		
 		if p2:len() <= p3 then
@@ -30,7 +30,7 @@
 	end
 }
 
-function t.sanitizeDescription(p4) --[[ line: 73 ]]
+function t.sanitizeDescription(p4)
 	-- upvalues: t (ref)
 	return t.truncateLength(t.replaceNewlines(p4))
 end

@@ -1,6 +1,6 @@
 ﻿local chatMuteModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.ChatMute)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: chatMuteModule (ref)
 	if chatMuteModule.isUserIdMuted(tostring(p0.UserId)) then
 		return true

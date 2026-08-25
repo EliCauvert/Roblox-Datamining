@@ -1,18 +1,18 @@
 ﻿local utilModule = require(script.Parent:WaitForChild("Util"))
 local t = nil
-pcall(function() --[[ line: 10 ]]
+pcall(function()
 	-- upvalues: t (write)
 	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
 if t == nil then
 	t = {
-		Get = function(_, _, p0) --[[ line: 11 ]]
+		Get = function(_, _, p0)
 			return p0
 		end
 	}
 end
-function ProcessMessage(p1, p2, p3) --[[ line: 13 ]]
+function ProcessMessage(p1, p2, p3)
 	-- upvalues: utilModule (ref), t (write)
 	if string.sub(p1, 1, 3):lower() ~= "/c " then
 		return false

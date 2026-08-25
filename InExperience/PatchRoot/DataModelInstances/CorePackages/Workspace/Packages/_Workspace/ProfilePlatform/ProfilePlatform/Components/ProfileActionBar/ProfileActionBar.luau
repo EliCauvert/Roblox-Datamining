@@ -26,13 +26,13 @@ local fFlagProfilePlatformEnableTransferTooltipModule = require(profilePlatform.
 local _ = require(profilePlatform.Types.UpsellTooltipProps)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p0) --[[ line: 53 | named "ProfileActionBar" ]]
+return function(p0)
 	-- upvalues: fFlagEnableProfilePlatformDisabledReasonTextModule (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), useIsMeTabModule (ref), buttonVariant (ref), reactModule (ref), useDisabledReasonTextModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), actionMenuButtonModule (ref), button (ref), fillBehavior (ref), inputSize (ref), fFlagPortEnableCommunityVerificationModalModule (ref), fFlagEnableCommunityVerificationModalModule (ref), iconButton (ref), iconSize (ref), fFlagProfilePlatformEnableTransferTooltipModule (ref), profileMoreButtonModule (ref), plusMoreMenuTooltipModule (ref), view (ref), text (ref), horizontalPageMargin (ref)
 	local var14 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useTokens() else nil
 	local var15 = if fFlagAXEnableProfileTab then useIsMeTabModule() else nil
 	local profileActions = p0.profileActions
 	local standard = buttonVariant.Standard
-	local var16 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useDisabledReasonTextModule(if fFlagEnableProfilePlatformDisabledReasonTextModule then reactModule.useMemo(function() --[[ line: 64 ]]
+	local var16 = if fFlagEnableProfilePlatformDisabledReasonTextModule then useDisabledReasonTextModule(if fFlagEnableProfilePlatformDisabledReasonTextModule then reactModule.useMemo(function()
 		-- upvalues: profileActions (ref)
 		if profileActions.primary then
 			for i, v in ipairs(profileActions.primary) do
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 53 | named "ProfileActionBar" ]]
 		ActionBar = reactModule.createElement(view, {
 			tag = "size-full-0 auto-y row align-y-center gap-small",
 			LayoutOrder = 0
-		}, reactModule.useMemo(function() --[[ line: 83 ]]
+		}, reactModule.useMemo(function()
 			-- upvalues: profileActions (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), reactModule (copy), actionMenuButtonModule (copy), p0 (ref), standard (ref), buttonVariant (copy), button (copy), fillBehavior (copy), inputSize (copy), fFlagPortEnableCommunityVerificationModalModule (copy), fFlagEnableCommunityVerificationModalModule (copy), iconButton (copy), iconSize (copy), fFlagProfilePlatformEnableTransferTooltipModule (copy), profileMoreButtonModule (copy), plusMoreMenuTooltipModule (copy)
 			local t = {}
 			

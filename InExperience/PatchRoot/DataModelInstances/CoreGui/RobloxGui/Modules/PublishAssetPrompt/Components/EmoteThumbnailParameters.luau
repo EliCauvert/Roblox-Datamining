@@ -17,7 +17,7 @@ return {
 		thumbnailHorizontalOffset = 0,
 		thumbnailCharacterRotation = 0
 	},
-	encodeAsATable = function(p0) --[[ line: 41 ]]
+	encodeAsATable = function(p0)
 		return {
 			ThumbnailBundleId = 515,
 			ThumbnailCharacterRotation = p0.thumbnailCharacterRotation,

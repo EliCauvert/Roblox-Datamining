@@ -9,12 +9,12 @@ local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local useStyle = UIBloxModule.Core.Style.useStyle
 local char = utf8.char(8226)
 
-return function(p0) --[[ line: 19 | named "EventTimer" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), getVirtualEventDatesModule (ref), styledTextLabel (ref), formatDateModule (ref), char (ref)
 	local var6 = useStyle()
 	local var7 = useLocalization({ cancelled = "Feature.VirtualEvents.EventCancelledText" })
 	local isCancelled = p0.virtualEvent.eventStatus == "cancelled"
-	local var9 = reactModule.useMemo(function() --[[ line: 26 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: getVirtualEventDatesModule (copy), p0 (ref)
 		return getVirtualEventDatesModule(p0.virtualEvent)
 	end, { p0.virtualEvent })

@@ -11,9 +11,9 @@ local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3D
 local var4 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 local list = { { name = appPage.Chat } }
 
-return function(p0, p1) --[[ line: 32 ]]
+return function(p0, p1)
 	-- upvalues: fFlagEnableSquadDeeplinkWithChatId (ref), getDeepValue2Module (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), list (ref), thunks (ref), navigateIntoChatModule (ref), enumScreensModule (ref), networkingSquads (ref)
-	return function(p2) --[[ line: 33 ]]
+	return function(p2)
 		-- upvalues: fFlagEnableSquadDeeplinkWithChatId (copy), p0 (ref), getDeepValue2Module (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), list (copy), p1 (ref), thunks (copy), navigateIntoChatModule (copy), enumScreensModule (copy), networkingSquads (copy)
 		local _ = nil
 		local _ = nil
@@ -22,7 +22,7 @@ return function(p0, p1) --[[ line: 32 ]]
 		local var7 = nil
 		local var8 = getDeepValue2Module(p2:getState(), "Squad.Squad.currentSquad")
 		local squadId = var8 and var8.squadId
-		local var10 = if fFlagEnableSquadDeeplinkWithChatId then function() --[[ line: 42 ]]
+		local var10 = if fFlagEnableSquadDeeplinkWithChatId then function()
 			-- upvalues: fFlagSignalsNavP3Dispatch (copy), var4 (copy), list (copy), p1 (copy), p2 (ref), thunks (copy), var6 (write), var7 (write), navigateIntoChatModule (copy), enumScreensModule (copy), squadId (write)
 			if fFlagSignalsNavP3Dispatch then
 				var4.to(var4.fromLegacyPage(list[#list]), p1)
@@ -49,7 +49,7 @@ return function(p0, p1) --[[ line: 32 ]]
 		end else nil
 		
 		if not fFlagEnableSquadDeeplinkWithChatId then
-			p2:dispatch(networkingSquads.GetSquadFromSquadId.API({ squadId = p0.partyId })):andThen(function(p3) --[[ line: 91 ]]
+			p2:dispatch(networkingSquads.GetSquadFromSquadId.API({ squadId = p0.partyId })):andThen(function(p3)
 				-- upvalues: getDeepValue2Module (copy), squadId (write), p0 (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), list (copy), p1 (copy), p2 (ref), thunks (copy), navigateIntoChatModule (copy), enumScreensModule (copy)
 				if getDeepValue2Module(p3, "responseBody.groupUp.parentChannelId") then
 					local t = {
@@ -64,16 +64,16 @@ return function(p0, p1) --[[ line: 32 ]]
 					end
 					p2:dispatch(navigateIntoChatModule({ screen = enumScreensModule.SquadLobby, params = t }))
 				end
-			end):catch(function(_) --[[ line: 110 ]] end)
+			end):catch(function(_) end)
 		elseif p0.partyId and p0.partyId ~= "" then
-			p2:dispatch(networkingSquads.GetSquadFromSquadId.API({ squadId = p0.partyId })):andThen(function(p4) --[[ line: 74 ]]
+			p2:dispatch(networkingSquads.GetSquadFromSquadId.API({ squadId = p0.partyId })):andThen(function(p4)
 				-- upvalues: getDeepValue2Module (copy), var7 (write), p0 (copy), var6 (write), var10 (ref)
 				if getDeepValue2Module(p4, "responseBody.groupUp.parentChannelId") then
 					var7 = p0.partyId
 					var6 = p4.responseBody.groupUp.parentChannelId
 				end
 				var10()
-			end):catch(function(_) --[[ line: 82 ]]
+			end):catch(function(_)
 				-- upvalues: var10 (ref)
 				var10()
 			end)

@@ -11,7 +11,7 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 42 | named "PrivateInvitesManagementView" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), list (ref), view (ref), text (ref), badge (ref), button (ref), buttonVariant (ref), inputSize (ref), pickedUserListModule (ref)
 	local testId = p0.testId or "private-invites-management"
 	local isInviteDisabled = p0.isInviteDisabled

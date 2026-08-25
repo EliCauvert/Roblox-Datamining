@@ -8,7 +8,7 @@ local loadFoundationCloudAssetModule = require(appChat.Utils.loadFoundationCloud
 local var5, _ = loadFoundationCloudAssetModule("pictograms/chat")
 local var6, _ = loadFoundationCloudAssetModule("pictograms/voice_chat")
 
-return reactModule.memo(function() --[[ line: 15 | named "EmptyConversationPage" ]]
+return reactModule.memo(function()
 	-- upvalues: useTokens (ref), useIsChatUserMessagesEnabledModule (ref), reactModule (ref), foundationModule (ref), var6 (ref), var5 (ref)
 	return reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
 		ChatIcon = reactModule.createElement(foundationModule.Image, {

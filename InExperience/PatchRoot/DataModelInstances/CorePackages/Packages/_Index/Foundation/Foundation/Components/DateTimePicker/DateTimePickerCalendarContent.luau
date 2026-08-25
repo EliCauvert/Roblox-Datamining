@@ -6,7 +6,7 @@ local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVaria
 local dividerModule = require(foundation.Components.Divider)
 local viewModule = require(foundation.Components.View)
 
-return function(p0) --[[ line: 35 | named "DateTimePickerCalendarContent" ]]
+return function(p0)
 	-- upvalues: dateTimePickerVariantModule (ref), reactModule (ref), viewModule (ref), dividerModule (ref), singleMonthCalendarModule (ref)
 	local testId = `{p0.testId}--calendar`
 	

@@ -40,7 +40,7 @@ local addThumbnailReportToPlayerFeedback = game:DefineFastFlag("AddThumbnailRepo
 local useState = reactModule.useState
 local useEffect = reactModule.useEffect
 
-local function CategoryCheckboxes(p0) --[[ line: 70 ]]
+local function CategoryCheckboxes(p0)
 	-- upvalues: reactModule (ref), cryoModule (ref), checkbox (ref)
 	local category = p0.category
 	local selectedCategoryIds = p0.selectedCategoryIds
@@ -49,11 +49,11 @@ local function CategoryCheckboxes(p0) --[[ line: 70 ]]
 		layout = reactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
 		padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, -8) })
 	}
-	local var18 = reactModule.useCallback(function(p1) --[[ line: 82 ]]
+	local var18 = reactModule.useCallback(function(p1)
 		-- upvalues: cryoModule (copy), selectedCategoryIds (ref), onOptionSelected (ref)
-		return function(p2) --[[ line: 83 ]]
+		return function(p2)
 			-- upvalues: cryoModule (copy), selectedCategoryIds (copy), p1 (ref), onOptionSelected (copy)
-			onOptionSelected(if p2 then cryoModule.List.join(selectedCategoryIds, { p1 }) else cryoModule.List.filter(selectedCategoryIds, function(p3) --[[ line: 88 ]]
+			onOptionSelected(if p2 then cryoModule.List.join(selectedCategoryIds, { p1 }) else cryoModule.List.filter(selectedCategoryIds, function(p3)
 				-- upvalues: p1 (copy)
 				return p3 ~= p1
 			end))
@@ -76,7 +76,7 @@ local function CategoryCheckboxes(p0) --[[ line: 70 ]]
 	}, t)
 end
 
-local function _(p4) --[[ line: 118 | named "getTextLength" ]]
+local function _(p4)
 	return if utf8.len(p4) then utf8.len(utf8.nfcnormalize(p4)) else string.len(p4)
 end
 
@@ -109,7 +109,7 @@ local var16 = argCheckModule.wrap(tModule.interface({
 	onSubmitted = tModule.optional(tModule.callback)
 }))
 
-return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
+return function(p5)
 	-- upvalues: var16 (ref), useStyle (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useSelector (ref), useState (ref), reactModule (ref), getFFlagEdpPlayerFeedbackCommentsOnly (ref), useLocalization (ref), useEffect (ref), playerFeedbackEventsModule (ref), submitGamePlayerFeedbackModule (ref), setCurrentToastMessage (ref), setNetworkingErrorToast (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), addThumbnailReportToPlayerFeedback (ref), closeCentralOverlay (ref), appPage (ref), urlBuilder (ref), fFlagSignalsNavP3Dispatch (ref), var7 (ref), navigateDown (ref), userInputService (ref), partialPageModal (ref), verticalScrollView (ref), CategoryCheckboxes (ref), buttonStack (ref), buttonType (ref), fFlagEnableAbuseReportRevampFlow (ref), enableAbuseReportRevampFeedback (ref)
 	assert(var16(p5))
 	local var19 = useStyle()
@@ -117,10 +117,10 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 	local var21 = useRoactService(roactNetworking)
 	local var22 = useRoactService(appEventIngestService)
 	local tokens = var19.Tokens
-	local var23 = useSelector(function(p6) --[[ line: 163 ]]
+	local var23 = useSelector(function(p6)
 		return p6.ScreenSize
 	end)
-	local var24 = useSelector(function(p7) --[[ line: 166 ]]
+	local var24 = useSelector(function(p7)
 		local globalGuiInset = p7.GlobalGuiInset
 		
 		return if globalGuiInset then globalGuiInset.bottom else 0
@@ -160,9 +160,9 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 	if getFFlagEdpPlayerFeedbackCommentsOnly() then
 		var44 = #var38 > 0 and ((if utf8.len(var36) then utf8.len(utf8.nfcnormalize(var36)) else string.len(var36)) > 0 and var41 == nil)
 		local var45, var46 = useState(false)
-		useEffect(function() --[[ line: 214 ]]
+		useEffect(function()
 			-- upvalues: var45 (ref), var34 (ref), var46 (ref)
-			task.defer(function() --[[ line: 216 ]]
+			task.defer(function()
 				-- upvalues: var45 (copy), var34 (copy), var46 (copy)
 				if not var45 and var34.current then
 					var46(true)
@@ -171,21 +171,21 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 			end)
 		end, { var34, var45 })
 	end
-	local var47 = reactModule.useCallback(function() --[[ line: 225 ]]
+	local var47 = reactModule.useCallback(function()
 		-- upvalues: var20 (ref), p5 (ref)
 		var20(p5.closeCentralOverlayThunk())
 	end, { p5.closeCentralOverlayThunk })
-	local var48 = reactModule.useCallback(function() --[[ line: 229 ]]
+	local var48 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var47 (ref)
 		playerFeedbackEventsModule.DismissPlayerFeedbackFormModal(var22, rootPlaceId, { categoryType = categoryType })
 		var47()
 	end, { var47, categoryType, rootPlaceId, var22 })
-	local var49 = reactModule.useCallback(function(p8) --[[ line: 234 ]]
+	local var49 = reactModule.useCallback(function(p8)
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var39 (ref)
 		playerFeedbackEventsModule.TogglePlayerFeedbackFormModalReason(var22, rootPlaceId, { categoryType = categoryType })
 		var39(p8)
 	end, {})
-	local var50 = reactModule.useCallback(function() --[[ line: 244 ]]
+	local var50 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var38 (ref), getFFlagEdpPlayerFeedbackCommentsOnly (copy), var36 (ref), var42 (ref), var43 (ref), comment (ref), var20 (ref), submitGamePlayerFeedbackModule (copy), var21 (ref), setCurrentToastMessage (copy), p5 (ref), var47 (ref), setNetworkingErrorToast (copy)
 		playerFeedbackEventsModule.ClickPlayerFeedbackFormModalSubmit(var22, rootPlaceId, { categoryType = categoryType })
 		
@@ -209,7 +209,7 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 				
 				return
 			end
-			var20(submitGamePlayerFeedbackModule.Post(var21, rootPlaceId, categoryType, var38, var36)):andThen(function(_) --[[ line: 284 ]]
+			var20(submitGamePlayerFeedbackModule.Post(var21, rootPlaceId, categoryType, var38, var36)):andThen(function(_)
 				-- upvalues: var20 (copy), setCurrentToastMessage (copy), p5 (copy), var47 (copy)
 				var20(setCurrentToastMessage({
 					toastMessage = "PlayerFeedbacks.VoteForm.Message.SubmitSuccess"
@@ -219,7 +219,7 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 					p5.onSubmitted()
 				end
 				var47()
-			end, function(p9) --[[ line: 292 ]]
+			end, function(p9)
 				-- upvalues: var20 (copy), setNetworkingErrorToast (copy)
 				var20(setNetworkingErrorToast(p9))
 			end)
@@ -229,28 +229,28 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 		var43.commentTooShortMessage, var43.commentTooLongMessage, rootPlaceId,
 		categoryType, var38, var36, p5.onSubmitted, var47
 	})
-	useEffect(function() --[[ line: 312 ]]
+	useEffect(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref)
 		playerFeedbackEventsModule.PlayerFeedbackFormModalMounted(var22, rootPlaceId, { categoryType = categoryType })
 	end, { var22, rootPlaceId, categoryType })
-	local var51 = reactModule.useCallback(function() --[[ line: 316 ]]
+	local var51 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref)
 		playerFeedbackEventsModule.FocusPlayerFeedbackFormModalComment(var22, rootPlaceId, { categoryType = categoryType })
 	end, { var22, rootPlaceId, categoryType })
-	local var52 = reactModule.useCallback(function() --[[ line: 324 ]]
+	local var52 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), var20 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), addThumbnailReportToPlayerFeedback (copy), p5 (ref), closeCentralOverlay (copy)
 		playerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(var22, rootPlaceId, { categoryType = categoryType })
 		var20(openDynamicAbuseReportModule({
 			abuseVector = abuseVectorModule.Place,
 			targetId = rootPlaceId,
 			custom = if fFlagAddThumbnailSelectorReport and addThumbnailReportToPlayerFeedback then { universeId = p5.universeId } else nil,
-			onClose = function() --[[ line: 338 ]]
+			onClose = function()
 				-- upvalues: var20 (copy), closeCentralOverlay (copy)
 				var20(closeCentralOverlay())
 			end
 		}))
 	end, { var22, rootPlaceId, categoryType, rootPlaceId })
-	local var53 = reactModule.useCallback(function() --[[ line: 344 ]]
+	local var53 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), appPage (copy), urlBuilder (copy), var43 (ref), fFlagSignalsNavP3Dispatch (copy), var7 (copy), var20 (ref), navigateDown (copy), var47 (ref)
 		playerFeedbackEventsModule.ClickPlayerFeedbackFormAbuseReportPrompt(var22, rootPlaceId, { categoryType = categoryType })
 		local t = {
@@ -266,7 +266,7 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 		end
 		var47()
 	end, { var22, rootPlaceId, categoryType, var47 })
-	local var54 = reactModule.useCallback(function() --[[ line: 366 ]]
+	local var54 = reactModule.useCallback(function()
 		-- upvalues: playerFeedbackEventsModule (copy), var22 (ref), rootPlaceId (ref), categoryType (ref), appPage (copy), urlBuilder (copy), fFlagSignalsNavP3Dispatch (copy), var7 (copy), var20 (ref), navigateDown (copy), var47 (ref)
 		playerFeedbackEventsModule.ClickPlayerFeedbackFormModalDisclaimer(var22, rootPlaceId, { categoryType = categoryType })
 		local t = {
@@ -281,7 +281,7 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 		end
 		var47()
 	end, { var22, rootPlaceId, categoryType, var47 })
-	local var55 = reactModule.useCallback(function(p10) --[[ line: 384 ]]
+	local var55 = reactModule.useCallback(function(p10)
 		-- upvalues: var37 (ref), comment (ref), var41 (ref), var42 (ref)
 		local text = p10.Text
 		var37(text)
@@ -291,7 +291,7 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 			var42(nil)
 		end
 	end, { var41, comment.minimum_length, comment.maximum_length })
-	useEffect(function() --[[ line: 396 ]]
+	useEffect(function()
 		-- upvalues: var33 (ref), var27 (ref)
 		if var33 and var33.current and var27 ~= 0 then
 			var33.current.CanvasPosition = Vector2.new(0, var33.current.AbsoluteCanvasSize.Y)
@@ -299,15 +299,15 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 			return
 		end
 	end, { var33, var27 })
-	useEffect(function() --[[ line: 404 ]]
+	useEffect(function()
 		-- upvalues: userInputService (copy), var26 (ref), var28 (ref)
-		local var65 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ line: 407 ]]
+		local var65 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
 			-- upvalues: var26 (copy), userInputService (copy), var28 (copy)
 			var26(userInputService.OnScreenKeyboardVisible)
 			var28(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
 		end)
 		
-		return function() --[[ line: 414 ]]
+		return function()
 			-- upvalues: var65 (write)
 			if var65 then
 				var65:Disconnect()
@@ -340,7 +340,7 @@ return function(p5) --[[ line: 154 | named "GamePlayerFeedbackFormModal" ]]
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			Padding = UDim.new(0, 16),
-			[reactModule.Change.AbsoluteContentSize] = function(p11) --[[ line: 448 ]]
+			[reactModule.Change.AbsoluteContentSize] = function(p11)
 				-- upvalues: var32 (ref)
 				var32(p11.AbsoluteContentSize.Y)
 			end

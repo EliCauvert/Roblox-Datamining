@@ -8,7 +8,7 @@ local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local createTextWithLinksModule = require(genericAbuseReporting.Bedui.Utils.createTextWithLinks)
 local webViewLinkModule = require(genericAbuseReporting.Bedui.Components.WebViewLink)
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "Paragraph" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), createTextWithLinksModule (ref), webViewLinkModule (ref), view (ref), text (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y col",
@@ -18,7 +18,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "Paragraph" ]]
 			TextWrapped = true,
 			tag = "auto-xy padding-bottom-small",
 			LayoutOrder = 0,
-			Text = reactModule.useMemo(function() --[[ line: 22 ]]
+			Text = reactModule.useMemo(function()
 				-- upvalues: createTextWithLinksModule (copy), p0 (ref)
 				return createTextWithLinksModule(p0.component.paragraph.text, p0.component.paragraph.links)
 			end, {
@@ -27,7 +27,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "Paragraph" ]]
 			}),
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
-		Links = reactModule.createElement(view, { tag = "size-full-0 auto-y col wraps", LayoutOrder = 1 }, reactModule.useMemo(function() --[[ line: 30 ]]
+		Links = reactModule.createElement(view, { tag = "size-full-0 auto-y col wraps", LayoutOrder = 1 }, reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), webViewLinkModule (copy)
 			if not p0.component.paragraph.links then
 				return {}

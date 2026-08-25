@@ -17,7 +17,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function runAccessoryCheck(p0, p1) --[[ line: 25 ]]
+local function runAccessoryCheck(p0, p1)
 	-- upvalues: constantsModule (ref), UGCValidationService (ref), errorSourceStringsModule (ref)
 	local MAX_HAT_TRIANGLES = constantsModule.MAX_HAT_TRIANGLES
 	
@@ -34,7 +34,7 @@ local function runAccessoryCheck(p0, p1) --[[ line: 25 ]]
 	end
 end
 
-local function runBodyPartCheck(p2, p3) --[[ line: 41 ]]
+local function runBodyPartCheck(p2, p3)
 	-- upvalues: constantsModule (ref), UGCValidationService (ref), getFIntUGCValidateTriangleLimitToleranceModule (ref), errorSourceStringsModule (ref)
 	local name = p3.uploadEnum.assetType.Name
 	local var9 = constantsModule.ASSET_RENDER_MESH_MAX_TRIANGLES[name]
@@ -54,7 +54,7 @@ local function runBodyPartCheck(p2, p3) --[[ line: 41 ]]
 	end
 end
 
-function t.run(p4, p5) --[[ line: 67 ]]
+function t.run(p4, p5)
 	-- upvalues: validationEnumsModule (ref), runBodyPartCheck (ref), runAccessoryCheck (ref)
 	if p5.uploadCategory == validationEnumsModule.UploadCategory.TORSO_AND_LIMBS or p5.uploadCategory == validationEnumsModule.UploadCategory.DYNAMIC_HEAD then
 		runBodyPartCheck(p4, p5)

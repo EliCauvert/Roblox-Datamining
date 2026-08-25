@@ -10,7 +10,7 @@ local t = {}
 t.__index = t
 t.__type = inlineElementTypeModule
 
-local function getSplitPoint(p0, p1) --[[ line: 20 ]]
+local function getSplitPoint(p0, p1)
 	local var7 = 0
 	
 	for i, v in p0 do
@@ -25,7 +25,7 @@ local function getSplitPoint(p0, p1) --[[ line: 20 ]]
 	return -1, -1
 end
 
-local function _(p2, p3, p4, p5, p6, p7) --[[ line: 32 | named "handleSplitTrailingElement" ]]
+local function _(p2, p3, p4, p5, p6, p7)
 	local var9 = nil
 	local _ = nil
 	
@@ -41,7 +41,7 @@ local function _(p2, p3, p4, p5, p6, p7) --[[ line: 32 | named "handleSplitTrail
 	return var9, p3
 end
 
-function t.new(p8, p9, p10, p11) --[[ line: 56 ]]
+function t.new(p8, p9, p10, p11)
 	-- upvalues: t (ref), isInlineElementModule (ref), hardBreakElementModule (ref)
 	local tbl = setmetatable({}, t)
 	tbl.WrapperElement = p8
@@ -64,20 +64,20 @@ function t.new(p8, p9, p10, p11) --[[ line: 56 ]]
 	return tbl
 end
 
-function t:getWidth() --[[ line: 85 ]]
+function t:getWidth()
 	-- upvalues: dashModule (ref)
-	return dashModule.sum(dashModule.map(self.Elements, function(p12) --[[ line: 86 ]]
+	return dashModule.sum(dashModule.map(self.Elements, function(p12)
 		return p12:getWidth()
 	end))
 end
 
-function t:_splitChildAtIndex(p13, p14) --[[ line: 91 ]]
+function t:_splitChildAtIndex(p13, p14)
 	local var13, var14 = self.Elements[p13]:split(p14, false)
 	
 	return var13, var14, var13:getWidth() <= p14
 end
 
-function t:split(p15, p16) --[[ line: 101 ]]
+function t:split(p15, p16)
 	-- upvalues: getSplitPoint (ref), t (ref)
 	local t_1 = {}
 	local t_2 = {}
@@ -132,9 +132,9 @@ function t:split(p15, p16) --[[ line: 101 ]]
 	return var31, nil
 end
 
-function t:render(p17, p18) --[[ line: 147 ]]
+function t:render(p17, p18)
 	-- upvalues: dashModule (ref), reactModule (ref)
-	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p17, LayoutOrder = p18 }), dashModule.map(self.Elements, function(p19, p20) --[[ line: 148 ]]
+	return reactModule.createElement(self.WrapperElement, dashModule.join(self.wrapperElementProps, { id = p17, LayoutOrder = p18 }), dashModule.map(self.Elements, function(p19, p20)
 		-- upvalues: p17 (ref), self (ref)
 		return p19:render(`{p17}-{self.startingIndex + p20 - 1}`, p20)
 	end))

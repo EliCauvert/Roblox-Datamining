@@ -5,7 +5,7 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local reactModule = require(corePackagesService.Packages.React)
 
-return function(p0) --[[ line: 19 | named "LeaveCreationAlert" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return reactModule.createElement(interactiveAlert, {
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.LeaveCreationTitle"),

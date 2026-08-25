@@ -9,7 +9,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local sheetContextModule = require(script:FindFirstAncestor("Sheet").SheetContext)
 local t = { sticky = false, height = UDim.new(1, 0) }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | named "SheetFullBleed" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), sheetContextModule (ref), imageModule (ref), gradientModule (ref), viewModule (ref), constantsModule (ref)
 	local var8 = withDefaultsModule(p0, t)
 	local var9 = reactModule.useContext(sheetContextModule)
@@ -20,17 +20,17 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | 
 	local hasRadius = var9.hasRadius
 	local testId = var9.testId
 	assert(setFullBleedHeight and (hasHeader and testId), "SheetFullBleed must be used within a Sheet")
-	reactModule.useEffect(function() --[[ line: 48 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), hasHeader (ref)
 		assert(not (var8.sticky and hasHeader:getValue()), "Sheet.FullBleed with sticky=true is unsupported when used with Sheet.Header")
 	end, { var8.sticky, hasHeader })
-	local var10 = reactModule.useCallback(function(p2) --[[ line: 55 ]]
+	local var10 = reactModule.useCallback(function(p2)
 		-- upvalues: setFullBleedHeight (ref)
 		setFullBleedHeight(p2.AbsoluteSize.Y)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 59 ]]
+	reactModule.useEffect(function()
 		-- upvalues: setFullBleedHeight (ref)
-		return function() --[[ line: 60 ]]
+		return function()
 			-- upvalues: setFullBleedHeight (copy)
 			setFullBleedHeight(0)
 		end
@@ -41,7 +41,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | 
 	if var8.sticky then
 		var12 = uDim2
 	elseif innerScrollY and fullBleedHeight then
-		var12 = reactModule.joinBindings({ scrollY = innerScrollY, height = fullBleedHeight }):map(function(p3) --[[ line: 76 ]]
+		var12 = reactModule.joinBindings({ scrollY = innerScrollY, height = fullBleedHeight }):map(function(p3)
 			return if p3.height == 0 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, math.max(0, p3.height - p3.scrollY))
 		end)
 	end

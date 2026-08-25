@@ -6,7 +6,7 @@ local default = require(appChatNetworking.url.HttpRequest).default
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
 
-local function appendQueryArgs(p0, p1) --[[ line: 11 ]]
+local function appendQueryArgs(p0, p1)
 	-- upvalues: httpService (ref)
 	local t = {}
 	
@@ -18,7 +18,7 @@ local function appendQueryArgs(p0, p1) --[[ line: 11 ]]
 	return if #t == 0 then p0 else `{p0}?{table.concat(t, "&")}`
 end
 
-return function(p2, p3) --[[ line: 26 ]]
+return function(p2, p3)
 	-- upvalues: default (ref), getFFlagEnableSocialCards (ref), getFFlagIsSquadEnabled (ref), appendQueryArgs (ref), CHAT_PLATFORM_BASE_URLModule (ref)
 	return (p2 or default)(appendQueryArgs(`{CHAT_PLATFORM_BASE_URLModule}/v1/get-user-conversations`, {
 		include_user_data = true,

@@ -4,13 +4,13 @@ local rbxDesignFoundationsModule = require(parent_1.RbxDesignFoundations)
 local constantsModule = require(parent.Constants)
 
 return {
-	GetTokenGenerators = function(p0) --[[ line: 13 ]]
+	GetTokenGenerators = function(p0)
 		-- upvalues: constantsModule (ref), rbxDesignFoundationsModule (ref)
 		local var2 = p0:lower()
 		
 		return if var2 == constantsModule.ThemeName.Dark:lower() then rbxDesignFoundationsModule.tokens.Common.Builder.Dark elseif var2 == constantsModule.ThemeName.Light:lower() then rbxDesignFoundationsModule.tokens.Common.Builder.Light else nil
 	end,
-	GetFoundationTokens = function(p1) --[[ line: 23 ]]
+	GetFoundationTokens = function(p1)
 		-- upvalues: parent_1 (ref), constantsModule (ref)
 		local rbxDesignFoundationsV4Module = require(parent_1.RbxDesignFoundationsV4)
 		local var4 = rbxDesignFoundationsV4Module.themes[rbxDesignFoundationsV4Module.Theme.Default]()

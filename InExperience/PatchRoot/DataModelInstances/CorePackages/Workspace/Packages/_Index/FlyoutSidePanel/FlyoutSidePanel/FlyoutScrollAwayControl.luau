@@ -12,7 +12,7 @@ local t = {
 t.__index = t
 local var2 = nil
 
-function t.getInstance() --[[ line: 40 ]]
+function t.getInstance()
 	-- upvalues: var2 (write), t (ref)
 	if not var2 then
 		var2 = {}
@@ -22,37 +22,37 @@ function t.getInstance() --[[ line: 40 ]]
 	return var2
 end
 
-function t.initialize(p0) --[[ line: 49 ]]
+function t.initialize(p0)
 	-- upvalues: getDrawerVisibleStore (ref), signalsModule (ref)
 	p0.flyoutVisibleStore = getDrawerVisibleStore(false)
-	p0.disposeFlyoutVisibleEffect = signalsModule.createEffect(function(p1) --[[ line: 51 ]]
+	p0.disposeFlyoutVisibleEffect = signalsModule.createEffect(function(p1)
 		-- upvalues: p0 (ref)
 		p0.flyoutVisible = p0.flyoutVisibleStore.getDrawerVisible(p1)
 		p0:updateScrollAwayState()
 	end)
 end
 
-function t.updateScrollAwayState(p2) --[[ line: 58 ]]
+function t.updateScrollAwayState(p2)
 	-- upvalues: visibilityControl (ref)
 	visibilityControl.setEnabled(p2.scrollAwayEnabled and (not p2.flyoutVisible and not p2.contextualMenuVisible))
 end
 
-function t.setScrollAwayEnabled(value, p3) --[[ line: 63 ]]
+function t.setScrollAwayEnabled(value, p3)
 	value.scrollAwayEnabled = p3
 	value:updateScrollAwayState()
 end
 
-function t.setContextualMenuVisible(value, p4) --[[ line: 68 ]]
+function t.setContextualMenuVisible(value, p4)
 	value.contextualMenuVisible = p4
 	value:updateScrollAwayState()
 end
 
 return {
-	setScrollAwayEnabled = function(value) --[[ line: 74 ]]
+	setScrollAwayEnabled = function(value)
 		-- upvalues: t (ref)
 		return t.getInstance():setScrollAwayEnabled(value)
 	end,
-	setContextualMenuVisible = function(value) --[[ line: 77 ]]
+	setContextualMenuVisible = function(value)
 		-- upvalues: t (ref)
 		return t.getInstance():setContextualMenuVisible(value)
 	end

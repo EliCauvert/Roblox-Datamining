@@ -8,7 +8,7 @@ local t = {
 	[inputSizeModule.XSmall] = if require(foundation.Utility.Flags).FoundationInternalInputBeta then inputLabelSizeModule.XSmall else inputLabelSizeModule.Small
 }
 
-return function(p0) --[[ line: 21 | named "getInputTextSize" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return t[p0]
 end

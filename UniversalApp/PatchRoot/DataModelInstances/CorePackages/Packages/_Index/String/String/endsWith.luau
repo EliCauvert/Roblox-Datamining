@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 16 | named "endsWith" ]]
+﻿return function(p0, p1, p2)
 	local var0 = p1:len()
 	
 	if var0 == 0 then

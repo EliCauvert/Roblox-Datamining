@@ -16,11 +16,11 @@ local t = {
 	[Enum.Platform.None] = platformBucketsModule.None
 }
 
-return function(p0) --[[ line: 24 ]]
+return function(p0)
 	-- upvalues: getUserInputServiceModule (ref), platformSpecificityModule (ref), isVRAppBuild (ref), platformBucketsModule (ref), t (ref)
 	local var4 = getUserInputServiceModule()
 	local var5 = nil
-	pcall(function() --[[ line: 29 ]]
+	pcall(function()
 		-- upvalues: var5 (write), var4 (ref)
 		var5 = var4:GetPlatform() or Enum.Platform.None
 	end)

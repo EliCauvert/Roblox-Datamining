@@ -9,7 +9,7 @@ local getBadgesSeeAllPageKeyModule = require(badges.BadgesSeeAllPage.getBadgesSe
 local fFlagSduiProtobufJsonDecode = require(parent.SharedFlags).FFlagSduiProtobufJsonDecode
 local fFlagSduiUniversalPageEntry = require(parent.SharedFlags).FFlagSduiUniversalPageEntry
 
-return function(p0, p1, p2) --[[ line: 15 | named "fetchBadgesSeeAllPageIfNeeded" ]]
+return function(p0, p1, p2)
 	-- upvalues: getBadgesSeeAllUrlModule (ref), getBadgesSeeAllPageKeyModule (ref), parent (ref), getSduiApiStore (ref), fFlagSduiProtobufJsonDecode (ref), sduiResponseType (ref), appPage (ref), fFlagSduiUniversalPageEntry (ref)
 	local var4 = getBadgesSeeAllUrlModule(p0)
 	local badgesSeeAll = require(parent.ServiceContractsProto).apppageplatform.badges.badges_see_all
@@ -20,7 +20,7 @@ return function(p0, p1, p2) --[[ line: 15 | named "fetchBadgesSeeAllPageIfNeeded
 		configKey = getBadgesSeeAllPageKeyModule(p0),
 		loadTimer = p1,
 		apiProto = if fFlagSduiUniversalPageEntry then badgesSeeAll.BadgesSeeAllV2Response else badgesSeeAll.BadgesSeeAllResponse,
-		buildNextPageUrl = function(p3) --[[ line: 36 ]]
+		buildNextPageUrl = function(p3)
 			-- upvalues: getBadgesSeeAllUrlModule (copy), p0 (ref)
 			local nextCursor = p3 and (p3.pagination and p3.pagination.next_cursor)
 			

@@ -22,38 +22,38 @@ local robloxSubscriptionPurchaseAppModule = require(parent.RobloxSubscriptionPur
 local surfaceContext = robloxSubscriptionPurchaseAppModule.SurfaceContext
 local surfaceName = robloxSubscriptionPurchaseAppModule.SurfaceName
 
-return connectToStoreModule(nil, function(p1) --[[ line: 135 ]]
+return connectToStoreModule(nil, function(p1)
 	-- upvalues: playersService (ref), initiatePurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), completePurchaseModule (ref), initiateBundlePurchaseModule (ref), routePremiumToBlackbirdUpsell (ref), robloxSubscriptionPurchaseAppModule (ref), surfaceName (ref), surfaceContext (ref), initiatePremiumPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref), initiateSubscriptionPurchaseModule (ref), fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (ref)
 	return {
-		onPurchaseRequest = function(p2, p3, p4, _) --[[ line: 136 ]]
+		onPurchaseRequest = function(p2, p3, p4, _)
 			-- upvalues: playersService (copy), p1 (ref), initiatePurchaseModule (copy)
 			if p2 == playersService.LocalPlayer then
 				p1(initiatePurchaseModule(p3, Enum.InfoType.Asset, p4, false, "", ""))
 			end
 		end,
-		onPurchaseRequestV2 = function(p5, p6, p7, _, p8, p9) --[[ line: 142 ]]
+		onPurchaseRequestV2 = function(p5, p6, p7, _, p8, p9)
 			-- upvalues: playersService (copy), p1 (ref), initiatePurchaseModule (copy)
 			if p5 == playersService.LocalPlayer then
 				p1(initiatePurchaseModule(p6, Enum.InfoType.Asset, p7, false, p8, p9))
 			end
 		end,
-		onRobloxPurchaseRequest = function(p10, p11) --[[ line: 164 ]]
+		onRobloxPurchaseRequest = function(p10, p11)
 			-- upvalues: p1 (ref), initiatePurchaseModule (copy)
 			p1(initiatePurchaseModule(p10, Enum.InfoType.Asset, p11, true))
 		end,
-		onProductPurchaseRequest = function(p12, p13, p14, _) --[[ line: 168 ]]
+		onProductPurchaseRequest = function(p12, p13, p14, _)
 			-- upvalues: playersService (copy), p1 (ref), initiatePurchaseModule (copy)
 			if p12 == playersService.LocalPlayer then
 				p1(initiatePurchaseModule(p13, Enum.InfoType.Product, p14))
 			end
 		end,
-		onPurchaseGamePassRequest = function(p15, p16) --[[ line: 174 ]]
+		onPurchaseGamePassRequest = function(p15, p16)
 			-- upvalues: playersService (copy), p1 (ref), initiatePurchaseModule (copy)
 			if p15 == playersService.LocalPlayer then
 				p1(initiatePurchaseModule(p16, Enum.InfoType.GamePass, false))
 			end
 		end,
-		onServerPurchaseVerification = function(p17) --[[ line: 209 ]]
+		onServerPurchaseVerification = function(p17)
 			-- upvalues: p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), playersService (copy), completePurchaseModule (copy)
 			if not p17 then
 				p1(errorOccurredModule(purchaseErrorModule.UnknownFailure))
@@ -69,13 +69,13 @@ return connectToStoreModule(nil, function(p1) --[[ line: 135 ]]
 				p1(completePurchaseModule())
 			end
 		end,
-		onBundlePurchaseRequest = function(p18, p19) --[[ line: 223 ]]
+		onBundlePurchaseRequest = function(p18, p19)
 			-- upvalues: playersService (copy), p1 (ref), initiateBundlePurchaseModule (copy)
 			if p18 == playersService.LocalPlayer then
 				p1(initiateBundlePurchaseModule(p19))
 			end
 		end,
-		onPremiumPurchaseRequest = function(p20) --[[ line: 254 ]]
+		onPremiumPurchaseRequest = function(p20)
 			-- upvalues: playersService (copy), routePremiumToBlackbirdUpsell (copy), robloxSubscriptionPurchaseAppModule (copy), surfaceName (copy), surfaceContext (copy), p1 (ref), initiatePremiumPurchaseModule (copy)
 			if p20 == playersService.LocalPlayer then
 				if routePremiumToBlackbirdUpsell then
@@ -86,13 +86,13 @@ return connectToStoreModule(nil, function(p1) --[[ line: 135 ]]
 				p1(initiatePremiumPurchaseModule())
 			end
 		end,
-		onPromptCollectiblesPurchaseRequest = function(p21, p22, p23, p24, p25, p26, p27, p28) --[[ line: 180 ]]
+		onPromptCollectiblesPurchaseRequest = function(p21, p22, p23, p24, p25, p26, p27, p28)
 			-- upvalues: playersService (copy), p1 (ref), initiatePurchaseModule (copy)
 			if p21 == playersService.LocalPlayer then
 				p1(initiatePurchaseModule(p22, Enum.InfoType.Asset, false, true, p27, p28, p23, p24, p25, p26))
 			end
 		end,
-		onSubscriptionPurchaseRequest = function(p29) --[[ line: 274 ]]
+		onSubscriptionPurchaseRequest = function(p29)
 			-- upvalues: fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), p1 (ref), initiatePurchaseModule (copy), productTypeEnum (copy), initiateSubscriptionPurchaseModule (copy)
 			if fFlagEnableUnifiedPurchaseFlowForDevSubs then
 				p1(initiatePurchaseModule(p29, productTypeEnum.DeveloperSubscription))
@@ -101,25 +101,25 @@ return connectToStoreModule(nil, function(p1) --[[ line: 135 ]]
 			end
 			p1(initiateSubscriptionPurchaseModule(p29))
 		end,
-		onCollectibleBundlePurchaseRequest = function(p30, p31, p32, p33, p34, p35, p36, p37) --[[ line: 229 ]]
+		onCollectibleBundlePurchaseRequest = function(p30, p31, p32, p33, p34, p35, p36, p37)
 			-- upvalues: playersService (copy), p1 (ref), initiateBundlePurchaseModule (copy)
 			if p30 == playersService.LocalPlayer then
 				p1(initiateBundlePurchaseModule(p31, p36, p37, p32, p33, p34, p35))
 			end
 		end,
-		onRobloxSubscriptionPurchaseRequest = function() --[[ line: 282 ]]
+		onRobloxSubscriptionPurchaseRequest = function()
 			-- upvalues: fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (copy), robloxSubscriptionPurchaseAppModule (copy), surfaceName (copy), surfaceContext (copy)
 			if fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule then
 				robloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase({}, nil, nil, surfaceName.PromptSubscriptionPurchase, surfaceContext.InGame, { skipWaitingForPurchaseResult = true })
 			end
 		end
 	}
-end)(function(p0) --[[ line: 37 | named "MarketplaceServiceEventConnector" ]]
+end)(function(p0)
 	-- upvalues: marketplaceService (ref), getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), roact (ref), externalEventConnectionModule (ref), fFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (ref)
 	local _ = nil
 	
 	return roact.createFragment({
-		if getFFlagEnablePromptPurchaseRequestedV2Module() or getFFlagEnablePromptPurchaseRequestedV2Take2Module() and pcall(function() --[[ line: 51 | named "checkNewEventExists" ]]
+		if getFFlagEnablePromptPurchaseRequestedV2Module() or getFFlagEnablePromptPurchaseRequestedV2Take2Module() and pcall(function()
 			-- upvalues: marketplaceService (copy)
 			return marketplaceService.PromptPurchaseRequestedV2
 		end) then roact.createElement(externalEventConnectionModule, {
@@ -129,14 +129,14 @@ end)(function(p0) --[[ line: 37 | named "MarketplaceServiceEventConnector" ]]
 			event = marketplaceService.PromptPurchaseRequested,
 			callback = p0.onPurchaseRequest
 		}),
-		if pcall(function() --[[ line: 71 | named "checkPromptCollectiblesPurchaseRequestedEventExists" ]]
+		if pcall(function()
 			-- upvalues: marketplaceService (copy)
 			return marketplaceService.PromptCollectiblesPurchaseRequested
 		end) then roact.createElement(externalEventConnectionModule, {
 			event = marketplaceService.PromptCollectiblesPurchaseRequested,
 			callback = p0.onPromptCollectiblesPurchaseRequest
 		}) else nil,
-		if pcall(function() --[[ line: 82 | named "checkCollectibleBundlePurchaseEventExists" ]]
+		if pcall(function()
 			-- upvalues: marketplaceService (copy)
 			return marketplaceService.PromptCollectibleBundlePurchaseRequested
 		end) then roact.createElement(externalEventConnectionModule, {

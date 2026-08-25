@@ -10,7 +10,7 @@ local verticalUserListModule = require(script.Parent.VerticalUserList)
 local userListTightHeaderSpacing = game:DefineFastFlag("UserListTightHeaderSpacing", false)
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
-return function(p0) --[[ line: 42 | named "VerticalUserListSection" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref), userListTightHeaderSpacing (ref), userListHeaderModule (ref), userListFooterModule (ref), verticalUserListModule (ref), fFlagUserListCtaIntegrationEnabled (ref)
 	local var6 = if p0.header then reactModule.createElement(view, {
 		tag = {

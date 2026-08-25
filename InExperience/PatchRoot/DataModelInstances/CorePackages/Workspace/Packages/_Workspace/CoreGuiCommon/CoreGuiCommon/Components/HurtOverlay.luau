@@ -33,16 +33,16 @@ local t = {
 	})
 }
 
-function HurtOverlay(p0) --[[ line: 51 ]]
+function HurtOverlay(p0)
 	-- upvalues: starterGuiService (ref), motionModule (ref), t (ref), reactModule (ref), signalsReactModule (ref), getLocalHumanoidStore (ref), signalsModule (ref), constantsModule (ref), fFlagUseNewHurtOverlayImage (ref), color (ref), cachedPolicyServiceModule (ref), color3 (ref), image (ref), fFlagUseNewHurtOverlayAnimation (ref)
 	local mockStarterGui = p0.mockStarterGui or starterGuiService
 	local var13, var14 = motionModule.useMotion(t.hideOverlay)
 	local var15, var16 = reactModule.useState(mockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
 	local var17 = signalsReactModule.useSignalState(getLocalHumanoidStore)
 	local var18 = reactModule.useRef(var17.getHealthValue(false))
-	reactModule.useEffect(function() --[[ line: 60 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var17 (ref), var18 (ref), constantsModule (copy), var14 (ref), t (copy), mockStarterGui (ref), var16 (ref)
-		local var20 = signalsModule.createEffect(function(p1) --[[ line: 61 ]]
+		local var20 = signalsModule.createEffect(function(p1)
 			-- upvalues: var17 (copy), var18 (copy), constantsModule (copy), var14 (copy), t (copy)
 			local healthValue = var17.getHealthValue(p1)
 			local current = var18.current
@@ -53,7 +53,7 @@ function HurtOverlay(p0) --[[ line: 51 ]]
 				return
 			end
 			var14(t.showOverlay, {
-				onAnimationComplete = function(p2) --[[ line: 79 ]]
+				onAnimationComplete = function(p2)
 					-- upvalues: var14 (copy), t (copy)
 					if p2 == true then
 						var14(t.hideOverlay)
@@ -61,14 +61,14 @@ function HurtOverlay(p0) --[[ line: 51 ]]
 				end
 			})
 		end)
-		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p3, p4) --[[ line: 88 ]]
+		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p3, p4)
 			-- upvalues: var16 (copy)
 			if p3 == Enum.CoreGuiType.Health or p3 == Enum.CoreGuiType.All then
 				var16(p4)
 			end
 		end)
 		
-		return function() --[[ line: 95 ]]
+		return function()
 			-- upvalues: var20 (ref), coreGuiChangedSignalConnection (ref)
 			var20()
 			coreGuiChangedSignalConnection:Disconnect()
@@ -80,7 +80,7 @@ function HurtOverlay(p0) --[[ line: 51 ]]
 		tag = "anchor-center-center position-center-center",
 		testId = "hurt-overlay",
 		Image = if fFlagUseNewHurtOverlayImage then "rbxasset://textures/ui/TopBar/HurtOverlayAsset.png" else "rbxasset://textures/ui/TopBar/WhiteOverlayAsset.png",
-		imageStyle = var13.transparency:map(function(p5) --[[ line: 114 ]]
+		imageStyle = var13.transparency:map(function(p5)
 			-- upvalues: var19 (write)
 			return { Color3 = var19, Transparency = p5 }
 		end),

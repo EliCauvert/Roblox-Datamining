@@ -11,7 +11,7 @@ feedbackSubmissionToast.validateProps = tModule.strictInterface({
 	numFeedbackSubmissionAttempts = tModule.optional(tModule.number)
 })
 
-function feedbackSubmissionToast.render(p0) --[[ line: 26 ]]
+function feedbackSubmissionToast.render(p0)
 	-- upvalues: roactModule (ref), withLocalization (ref), toast (ref), images (ref)
 	return if p0.props.numFeedbackSubmissionAttempts == nil then nil else roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -21,7 +21,7 @@ function feedbackSubmissionToast.render(p0) --[[ line: 26 ]]
 		Toast = withLocalization({
 			toastTitle = "CoreScripts.Feedback.SubmissionToastHeader",
 			toastSubtitle = "CoreScripts.Feedback.SubmissionToastBody"
-		})(function(p1) --[[ line: 40 ]]
+		})(function(p1)
 			-- upvalues: p0 (ref), roactModule (copy), toast (copy), images (copy)
 			local toastTitle = p1.toastTitle
 			local toastSubtitle = p1.toastSubtitle
@@ -42,7 +42,7 @@ function feedbackSubmissionToast.render(p0) --[[ line: 26 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p2) --[[ line: 65 ]]
+return roactRoduxModule.connect(function(p2)
 	return {
 		numFeedbackSubmissionAttempts = p2.common.numFeedbackSubmissionAttempts
 	}

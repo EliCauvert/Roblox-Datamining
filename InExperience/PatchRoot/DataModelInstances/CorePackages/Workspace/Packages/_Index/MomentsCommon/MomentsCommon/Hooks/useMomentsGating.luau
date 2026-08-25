@@ -12,14 +12,14 @@ local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local debugMomentsGating = game:DefineFastFlag("DebugMomentsGating", false)
 local argusExperimentModule = require(momentsCommon.Flags.ArgusExperiment)
 
-return function() --[[ line: 49 | named "useMomentsGating" ]]
+return function()
 	-- upvalues: fFlagEnableArgus (ref), useAppPolicy (ref), argusExperimentModule (ref), reactModule (ref), fFlagArgoEnableMoments (ref), fFlagEnableArgusFlyoutEntry (ref), fFlagArgusTabImpliesFlyout (ref), fFlagEnableArgusTab (ref), debugMomentsGating (ref), var3 (ref)
-	local var6 = useAppPolicy(function(p0) --[[ line: 52 ]]
+	local var6 = useAppPolicy(function(p0)
 		return p0.getDisplayMomentsMoreTabTile()
 	end)
 	local var6_1 = fFlagEnableArgus and var6
 	local var8 = argusExperimentModule.useExperimentConfig({ isExposureEnabled = false })
-	local var9 = reactModule.useMemo(function() --[[ line: 59 ]]
+	local var9 = reactModule.useMemo(function()
 		-- upvalues: var8 (ref), fFlagArgoEnableMoments (copy), var6_1 (ref), fFlagEnableArgus (ref), var6 (ref), fFlagEnableArgusFlyoutEntry (copy), fFlagArgusTabImpliesFlyout (copy), fFlagEnableArgusTab (copy)
 		local entryType = var8.entryType
 		local isTab = entryType == "tab"
@@ -36,7 +36,7 @@ return function() --[[ line: 49 | named "useMomentsGating" ]]
 			experimentConfig = var8
 		}
 	end, { fFlagEnableArgus, var6, var6_1, var8 })
-	reactModule.useEffect(function() --[[ line: 83 ]]
+	reactModule.useEffect(function()
 		-- upvalues: debugMomentsGating (copy), var3 (copy), var9 (ref), fFlagEnableArgusFlyoutEntry (copy), fFlagEnableArgusTab (copy), fFlagArgoEnableMoments (copy)
 		if debugMomentsGating then
 			var3:debug("Moments.Gating master={} ampPolicy={} moments={} entryType={} platformIntegration={} influencerUploads={} flyout={} tab={} forceFlyout={} forceTab={} forceAll={}", tostring(var9.isMasterEnabled), tostring(var9.isAmpPolicyEnabled), tostring(var9.isMomentsEnabled), tostring(var9.experimentConfig.entryType), tostring(var9.platformIntegrationEnabled), tostring(var9.influencerUploadsEnabled), tostring(var9.isFlyoutEntryEnabled), tostring(var9.isTabEnabled), tostring(fFlagEnableArgusFlyoutEntry), tostring(fFlagEnableArgusTab), tostring(fFlagArgoEnableMoments))

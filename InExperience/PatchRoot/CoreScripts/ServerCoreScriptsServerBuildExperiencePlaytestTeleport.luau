@@ -7,12 +7,12 @@ local t = {}
 local buildExperiencePlaytestTeleport = Instance.new("RemoteEvent")
 buildExperiencePlaytestTeleport.Name = "BuildExperiencePlaytestTeleport"
 buildExperiencePlaytestTeleport.Parent = robloxReplicatedStorageService
-playersService.PlayerRemoving:Connect(function(p0) --[[ line: 14 ]]
+playersService.PlayerRemoving:Connect(function(p0)
 	-- upvalues: t (ref)
 	t[p0.UserId] = nil
 end)
 
-local function getCurrentExperiencePlaceIds() --[[ line: 18 ]]
+local function getCurrentExperiencePlaceIds()
 	-- upvalues: var4 (write), assetService (ref)
 	if var4 ~= nil then
 		return var4
@@ -31,7 +31,7 @@ local function getCurrentExperiencePlaceIds() --[[ line: 18 ]]
 	return t
 end
 
-buildExperiencePlaytestTeleport.OnServerEvent:Connect(function(p1, p2) --[[ line: 41 ]]
+buildExperiencePlaytestTeleport.OnServerEvent:Connect(function(p1, p2)
 	-- upvalues: t (ref), getCurrentExperiencePlaceIds (ref), teleportService (ref)
 	local userId = t[p1.UserId]
 	

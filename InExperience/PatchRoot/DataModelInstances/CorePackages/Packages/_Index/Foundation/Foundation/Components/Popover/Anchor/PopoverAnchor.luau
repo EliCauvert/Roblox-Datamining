@@ -7,15 +7,15 @@ local viewModule = require(foundation.Components.View)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local reactModule = require(parent.React)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 21 | named "PopoverAnchor" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), popoverContextModule (ref), studioUriModule (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var6 = reactModule.useContext(popoverContextModule)
 	local var7 = reactModule.useRef(nil)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 26 ]]
+	reactModule.useImperativeHandle(p1, function()
 		-- upvalues: var7 (ref)
 		return var7.current
 	end, {})
-	reactModule.useLayoutEffect(function() --[[ line: 30 ]]
+	reactModule.useLayoutEffect(function()
 		-- upvalues: studioUriModule (copy), p0 (ref), var6 (ref), var7 (ref)
 		if studioUriModule.isStudioUri(p0.anchorRef) then
 			var6.setAnchorUri(p0.anchorRef)

@@ -1,7 +1,7 @@
 ﻿local reactGlobalsModule = require(script.Parent.Parent.ReactGlobals)
 local describeError = require(script.Parent["ErrorHandling.roblox"]).describeError
 
-return function(p0, _, p1, p2, ...) --[[ line: 19 | named "invokeGuardedCallbackProd" ]]
+return function(p0, _, p1, p2, ...)
 	-- upvalues: reactGlobalsModule (ref), describeError (ref)
 	local var2
 	local _ = nil

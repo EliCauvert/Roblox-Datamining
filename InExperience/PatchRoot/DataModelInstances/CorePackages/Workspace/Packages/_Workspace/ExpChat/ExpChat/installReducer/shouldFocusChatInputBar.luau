@@ -5,13 +5,13 @@ local var2 = require(parent.ExpChatShared).Logger:new("ExpChat/Reducers/" .. scr
 local actions = expChat.Actions
 
 return roduxModule.createReducer(1, {
-	[require(actions.AvatarContextMenuWhisperSelected).name] = function(p0, _) --[[ line: 15 ]]
+	[require(actions.AvatarContextMenuWhisperSelected).name] = function(p0, _)
 		-- upvalues: var2 (ref)
 		var2:trace("AvatarContextMenuWhisperSelected dispatched")
 		
 		return p0 * -1
 	end,
-	[require(actions.PresetTrayKeyboardSelected).name] = function(p1, _) --[[ line: 20 ]]
+	[require(actions.PresetTrayKeyboardSelected).name] = function(p1, _)
 		-- upvalues: var2 (ref)
 		var2:trace("PresetTrayKeyboardSelected dispatched")
 		

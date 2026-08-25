@@ -5,7 +5,7 @@ local createUpdateUserSettingsModule = require(networkRequests.createUpdateUserS
 local createGetUserSettingsMetadataModule = require(networkRequests.createGetUserSettingsMetadata)
 local _ = require(parent.Types.networkRequestsTypes)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: createGetUserSettingsModule (ref), createUpdateUserSettingsModule (ref), createGetUserSettingsMetadataModule (ref)
 	return {
 		GetUserSettings = createGetUserSettingsModule(p0),

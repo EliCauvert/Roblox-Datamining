@@ -20,13 +20,13 @@ local preventMicToggleIfGameConsumedEvent = game:DefineFastFlag("PreventMicToggl
 local playerButtons = roactModule.PureComponent:extend("PlayerButtons")
 playerButtons.defaultProps = { LayoutOrder = 1 }
 
-function playerButtons.init(p0) --[[ line: 41 ]]
+function playerButtons.init(p0)
 	-- upvalues: faceAnimatorService (ref), preventMicToggleIfGameConsumedEvent (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), permissions (ref)
 	p0:setState({
 		cameraEnabled = if faceAnimatorService then faceAnimatorService:IsStarted() and faceAnimatorService.VideoAnimationEnabled else false
 	})
 	
-	function p0.toggleMic(p1, p2) --[[ line: 49 ]]
+	function p0.toggleMic(p1, p2)
 		-- upvalues: preventMicToggleIfGameConsumedEvent (copy), p0 (ref), getFFlagExpChatUseVoiceParticipantsStore (copy)
 		if preventMicToggleIfGameConsumedEvent and p1 then
 			return
@@ -34,12 +34,12 @@ function playerButtons.init(p0) --[[ line: 41 ]]
 		p0.props.onClickedVoiceIndicator(p0.props.userId, if getFFlagExpChatUseVoiceParticipantsStore() then p2 else p0.props.voiceState)
 	end
 	
-	function p0.onVideoButtonPressed() --[[ line: 61 ]]
+	function p0.onVideoButtonPressed()
 		-- upvalues: p0 (ref), permissions (copy)
 		if p0.props.hasCameraPermissions then
 			p0:toggleVideo()
 		else
-			local var13 = function(p3, _) --[[ line: 64 ]]
+			local var13 = function(p3, _)
 				-- upvalues: p0 (copy)
 				if p3 then
 					p0:toggleVideo()
@@ -62,12 +62,12 @@ function playerButtons.init(p0) --[[ line: 41 ]]
 		end
 	end
 	
-	function p0.toggleVideo() --[[ line: 86 ]]
+	function p0.toggleVideo()
 		-- upvalues: p0 (ref)
 		p0.props.onClickedCameraIndicator()
 	end
 	
-	function p0.updateVideo() --[[ line: 90 ]]
+	function p0.updateVideo()
 		-- upvalues: p0 (ref), faceAnimatorService (copy)
 		p0:setState({
 			cameraEnabled = faceAnimatorService.VideoAnimationEnabled
@@ -75,11 +75,11 @@ function playerButtons.init(p0) --[[ line: 41 ]]
 	end
 end
 
-function playerButtons.shouldShowCameraIndicator(p4) --[[ line: 97 ]]
+function playerButtons.shouldShowCameraIndicator(p4)
 	return p4.props.isLocalPlayer and p4:getCameraButtonVisibleAtMount()
 end
 
-function playerButtons.shouldShowMicOffIndicator(p5) --[[ line: 101 ]]
+function playerButtons.shouldShowMicOffIndicator(p5)
 	-- upvalues: globalFlagsModule (ref)
 	if not p5.props.isLocalPlayer then
 		return false
@@ -89,11 +89,11 @@ function playerButtons.shouldShowMicOffIndicator(p5) --[[ line: 101 ]]
 	return if globalFlagsModule.JoinWithoutMicPermissions then var14 else var14 or not p5.props.hasMicPermissions
 end
 
-function playerButtons.getCameraButtonVisibleAtMount(p6) --[[ line: 114 ]]
+function playerButtons.getCameraButtonVisibleAtMount(p6)
 	return if p6.props.isCameraOnlyUser and p6.props.isCameraOnlyUser() then false elseif p6.props.isCamEnabledForUserAndPlace then p6.props.isCamEnabledForUserAndPlace() else false
 end
 
-function playerButtons.render(p7) --[[ line: 130 ]]
+function playerButtons.render(p7)
 	-- upvalues: globalFlagsModule (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), avatarChatUISettings (ref), roactModule (ref), fFlagExpChatUseProximityStore (ref), var8 (ref), dictionary (ref), controlBubbleModule (ref), faceAnimatorService (ref), eventConnection (ref)
 	local var15 = p7.props.hasMicPermissions or p7.props.voiceEnabled
 	
@@ -116,7 +116,7 @@ function playerButtons.render(p7) --[[ line: 130 ]]
 		LayoutOrder = p7.props.LayoutOrder,
 		BackgroundTransparency = chatSettings.BackgroundTransparency,
 		BackgroundColor3 = chatSettings.BackgroundColor3,
-		Visible = if fFlagExpChatUseProximityStore and var8.isBinding(p7.props.Visible) then p7.props.Visible:map(function(p8) --[[ line: 163 ]]
+		Visible = if fFlagExpChatUseProximityStore and var8.isBinding(p7.props.Visible) then p7.props.Visible:map(function(p8)
 			-- upvalues: var15 (write), var16 (ref)
 			return if p8 then var15 else var16
 		end) else var15 or var16
@@ -188,7 +188,7 @@ function playerButtons.render(p7) --[[ line: 130 ]]
 	})
 end
 
-return if getFFlagExpChatUseVoiceParticipantsStore() then playerButtons else roactRoduxModule.connect(function(p9, p10) --[[ line: 246 | named "mapStateToProps" ]]
+return if getFFlagExpChatUseVoiceParticipantsStore() then playerButtons else roactRoduxModule.connect(function(p9, p10)
 	-- upvalues: getFFlagExpChatEnableVoiceReverseNudgeModule (ref)
 	local userId = false
 	

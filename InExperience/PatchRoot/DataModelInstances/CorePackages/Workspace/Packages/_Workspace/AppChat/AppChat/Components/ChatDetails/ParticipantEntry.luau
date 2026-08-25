@@ -12,12 +12,12 @@ local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubs
 local repeated = string.rep("W", 20)
 local t = { showDivider = true }
 
-return reactModule.memo(function(p0) --[[ line: 33 | named "ParticipantEntry" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useUserDataModule (ref), useTokens (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), reactModule (ref), text (ref), repeated (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
 	local var8 = cryoModule.Dictionary.union(t, p0)
 	local var9 = useUserDataModule(var8.userId)
 	local var10 = useTokens()
-	local var11 = reactModule.useMemo(function() --[[ line: 46 ]]
+	local var11 = reactModule.useMemo(function()
 		-- upvalues: text (copy), repeated (copy), var10 (ref)
 		local textBounds = text.GetTextBounds(repeated, var10.Typography.TitleLarge.Font, var10.Typography.TitleLarge.FontSize, Vector2.zero)
 		
@@ -33,7 +33,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "ParticipantEntry" ]]
 			["row align-y-center gap-medium size-full padding-x-medium"] = true,
 			["stroke-thin stroke-muted"] = var8.showDivider
 		},
-		onActivated = if var8.onActivated then reactModule.useCallback(function() --[[ line: 40 ]]
+		onActivated = if var8.onActivated then reactModule.useCallback(function()
 			-- upvalues: var8 (ref)
 			if var8.onActivated then
 				var8.onActivated()
@@ -51,7 +51,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "ParticipantEntry" ]]
 		UserInfo = reactModule.createElement(foundationModule.View, { tag = "col fill auto-y clip", LayoutOrder = 2 }, {
 			UserDataSkeleton = reactModule.createElement(foundationModule.Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(var11.X, var11.Y + reactModule.useMemo(function() --[[ line: 56 ]]
+				Size = UDim2.new(var11.X, var11.Y + reactModule.useMemo(function()
 					-- upvalues: text (copy), var10 (ref)
 					local textBounds = text.GetTextBounds("Roblox Studio", var10.Typography.CaptionMedium.Font, var10.Typography.CaptionMedium.FontSize, Vector2.zero)
 					
@@ -65,7 +65,7 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "ParticipantEntry" ]]
 			DisplayName = if fFlagEnableBlackbirdCheck and useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then var8.userId else nil) then reactModule.createElement(foundationModule.View, {
 				tag = "row align-y-center gap-xxsmall auto-xy",
 				LayoutOrder = 1,
-				Visible = var9.isLoading:map(function(p2) --[[ line: 96 ]]
+				Visible = var9.isLoading:map(function(p2)
 					return not p2
 				end)
 			}, {
@@ -84,18 +84,18 @@ return reactModule.memo(function(p0) --[[ line: 33 | named "ParticipantEntry" ]]
 				tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 				LayoutOrder = 1,
 				Text = var9.combinedName,
-				Visible = var9.isLoading:map(function(p1) --[[ line: 116 ]]
+				Visible = var9.isLoading:map(function(p1)
 					return not p1
 				end)
 			}),
 			PresenceText = reactModule.createElement(foundationModule.Text, {
 				tag = "auto-xy text-caption-medium text-truncate-end content-muted",
 				LayoutOrder = 3,
-				Text = if var8.statusText then var9.presenceText:map(function(p3) --[[ line: 124 ]]
+				Text = if var8.statusText then var9.presenceText:map(function(p3)
 					-- upvalues: var8 (ref)
 					return p3 .. " . " .. var8.statusText
 				end) else var9.presenceText,
-				Visible = var9.isLoading:map(function(p4) --[[ line: 129 ]]
+				Visible = var9.isLoading:map(function(p4)
 					return not p4
 				end)
 			})

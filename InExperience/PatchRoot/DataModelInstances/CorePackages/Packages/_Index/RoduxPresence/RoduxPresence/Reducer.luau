@@ -3,9 +3,9 @@ local byGameIdModule = require(script.Presence.byGameId)
 local byGameInstanceIdModule = require(script.Presence.byGameInstanceId)
 local byPlaceIdModule = require(script.Presence.byPlaceId)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: byUserIdModule (ref), byGameInstanceIdModule (ref), byGameIdModule (ref), byPlaceIdModule (ref)
-	return function(p1, p2) --[[ line: 7 ]]
+	return function(p1, p2)
 		-- upvalues: byUserIdModule (copy), p0 (ref), byGameInstanceIdModule (copy), byGameIdModule (copy), byPlaceIdModule (copy)
 		p1 = p1 or {
 			byUserId = {},

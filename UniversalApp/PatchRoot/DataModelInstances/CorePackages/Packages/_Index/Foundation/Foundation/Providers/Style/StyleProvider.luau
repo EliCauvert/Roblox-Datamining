@@ -23,7 +23,7 @@ local t = {
 	device = deviceModule.Desktop
 }
 
-return function(p0) --[[ line: 60 | named "StyleProvider" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), flagsModule (ref), t (ref), variantsContextModule (ref), reactModule (ref), getTokens (ref), usePreferencesModule (ref), getTextSizeOffsetModule (ref), useRegistryStyleSheetModule (ref), tokensContextModule (ref), textSizeOffsetContextModule (ref), tagsContextModule (ref), styleSheetContextModule (ref)
 	local var17 = withDefaultsModule({
 		themeName = if flagsModule.FoundationThemeName then p0.themeName else nil,
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 60 | named "StyleProvider" ]]
 		scale = p0.scale
 	}, t)
 	local var18 = variantsContextModule.useVariantsState()
-	local var19 = reactModule.useMemo(function() --[[ line: 71 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: getTokens (copy), var17 (ref), p0 (ref), flagsModule (copy)
 		return getTokens(var17.colorMode, var17.device, var17.scale, p0.tokenOverrides, if flagsModule.FoundationThemeName then var17.themeName else nil)
 	end, {
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 60 | named "StyleProvider" ]]
 		p0.tokenOverrides,
 		if flagsModule.FoundationThemeName then var17.themeName else nil
 	})
-	local var20 = reactModule.useMemo(function() --[[ line: 92 ]]
+	local var20 = reactModule.useMemo(function()
 		-- upvalues: getTextSizeOffsetModule (copy)
 		return getTextSizeOffsetModule() or 0
 	end, { usePreferencesModule().preferredTextSize })

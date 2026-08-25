@@ -37,7 +37,7 @@ t.viewDirections = {
 }
 t.views = nil
 
-function t.getViewToWorldTransforms() --[[ line: 73 ]]
+function t.getViewToWorldTransforms()
 	-- upvalues: t (ref)
 	if not t.views then
 		t.views = {}
@@ -55,14 +55,14 @@ function t.getViewToWorldTransforms() --[[ line: 73 ]]
 	return t.views
 end
 
-function t.getViewSpacePositionFromNormalized(p0, p1) --[[ line: 92 ]]
+function t.getViewSpacePositionFromNormalized(p0, p1)
 	local var15 = (p0 - Vector2.new(0.5, 0.5)) * Vector2.new(2, -2)
 	local var16 = (p1.max - p1.min) / 2
 	
 	return p1.min + var16 + var16 * Vector3.new(var15.X, var15.Y, 0)
 end
 
-local function populateViewsToRender(p2) --[[ line: 104 ]]
+local function populateViewsToRender(p2)
 	-- upvalues: t (ref)
 	local viewToWorldTransforms = t.getViewToWorldTransforms()
 	local t_1 = {}
@@ -78,7 +78,7 @@ local function populateViewsToRender(p2) --[[ line: 104 ]]
 	return t_1
 end
 
-local function addTransformedTriangle(vectorA, vectorB, p3, p4) --[[ line: 120 ]]
+local function addTransformedTriangle(vectorA, vectorB, p3, p4)
 	local var19 = vectorA:GetFaceVertices(vectorB)
 	local t = {}
 	
@@ -88,7 +88,7 @@ local function addTransformedTriangle(vectorA, vectorB, p3, p4) --[[ line: 120 ]
 	table.insert(p4, t)
 end
 
-local function pushTransformedMesh(p5, p6, p7, p8) --[[ line: 139 ]]
+local function pushTransformedMesh(p5, p6, p7, p8)
 	-- upvalues: addTransformedTriangle (ref), tryYieldModule (ref)
 	for i, v in p5:GetFaces() do
 		addTransformedTriangle(p5, v, p6, p8)
@@ -96,7 +96,7 @@ local function pushTransformedMesh(p5, p6, p7, p8) --[[ line: 139 ]]
 	end
 end
 
-local function getViewSpaceMesh(p9, p10) --[[ line: 152 ]]
+local function getViewSpaceMesh(p9, p10)
 	local var21 = p10:Inverse()
 	local t = {
 		min = Vector3.new(1e999, 1e999, 1e999),
@@ -118,7 +118,7 @@ local function getViewSpaceMesh(p9, p10) --[[ line: 152 ]]
 	return t_1, t
 end
 
-local function _(p11, p12, p13) --[[ line: 179 | named "getNormalizedCoordinates" ]]
+local function _(p11, p12, p13)
 	local t = {}
 	
 	for i, v in p11 do
@@ -127,15 +127,15 @@ local function _(p11, p12, p13) --[[ line: 179 | named "getNormalizedCoordinates
 	return t
 end
 
-local _ = function(vectorA) --[[ line: 193 | named "getIsNormalizedTriangleVisible" ]]
+local _ = function(vectorA)
 	return (vectorA[2] - vectorA[1]):Cross(vectorA[3] - vectorA[1]).Z > 0.001
 end
 
-local function normalizedSpaceToScreenSpace(p14, p15) --[[ line: 204 ]]
+local function normalizedSpaceToScreenSpace(p14, p15)
 	return (Vector2.new(p14.X, p14.Y) * Vector2.new(0.5, -0.5) + Vector2.new(0.5, 0.5)) * (p15 - Vector2.new(1, 1))
 end
 
-local function rasterMesh(p16, p17, p18, p19) --[[ line: 211 ]]
+local function rasterMesh(p16, p17, p18, p19)
 	-- upvalues: assetService (ref), normalizedSpaceToScreenSpace (ref), tryYieldModule (ref)
 	local var27 = p17.max - p17.min
 	local var28 = var27 / 2
@@ -165,7 +165,7 @@ local function rasterMesh(p16, p17, p18, p19) --[[ line: 211 ]]
 	return var31
 end
 
-local function createBodyAssetMasks(value, p20, p21) --[[ line: 250 ]]
+local function createBodyAssetMasks(value, p20, p21)
 	-- upvalues: getAssetMeshesValidationSpaceTransforms (ref), getEditableMeshFromContextModule (ref), pushTransformedMesh (ref), getViewSpaceMesh (ref), getFIntUGCValidationBodyAssetMaskHeightPixelsModule (ref), rasterMesh (ref)
 	local assetTypeEnum = p21.assetTypeEnum
 	local t = {}
@@ -215,7 +215,7 @@ local function createBodyAssetMasks(value, p20, p21) --[[ line: 250 ]]
 	return true, t_2
 end
 
-function t.new(p22, p23, p24) --[[ line: 312 ]]
+function t.new(p22, p23, p24)
 	-- upvalues: t (ref), populateViewsToRender (ref), createBodyAssetMasks (ref)
 	local tbl = setmetatable({}, t)
 	local var45, var46 = createBodyAssetMasks(p22, populateViewsToRender(p23), p24)
@@ -228,7 +228,7 @@ function t.new(p22, p23, p24) --[[ line: 312 ]]
 	return false, var46
 end
 
-function t:destroyBodyAssetMasks() --[[ line: 327 ]]
+function t:destroyBodyAssetMasks()
 	for i, v in self.bodyAssetMasks do
 		if v.mask then
 			v.mask:Destroy()

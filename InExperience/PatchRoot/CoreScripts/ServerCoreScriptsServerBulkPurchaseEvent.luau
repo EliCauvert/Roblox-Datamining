@@ -32,9 +32,9 @@ if fFlagAXEnableInspectAndBuyBulkPurchase then
 		Asset = Enum.MarketplaceProductType.AvatarAsset
 	}
 	
-	local function _(p0) --[[ line: 77 | named "getBatchItemDetailsServerSide" ]]
+	local function _(p0)
 		-- upvalues: url (ref), fFlagAXEnableTimedOptionsServerScript (ref), httpService (ref), httpRbxApiService (ref)
-		local ok, status = pcall(function() --[[ line: 78 ]]
+		local ok, status = pcall(function()
 			-- upvalues: url (copy), fFlagAXEnableTimedOptionsServerScript (copy), p0 (ref), httpService (copy), httpRbxApiService (copy)
 			local var15
 			local text = url.CATALOG_URL .. "v1/catalog/items/details"
@@ -56,21 +56,21 @@ if fFlagAXEnableInspectAndBuyBulkPurchase then
 		return if ok then status else nil
 	end
 	
-	local function isLimited(p1) --[[ line: 121 ]]
+	local function isLimited(p1)
 		local itemRestrictions = p1.itemRestrictions
 		
 		return if (itemRestrictions and table.find(itemRestrictions, "Limited")) == nil then if (itemRestrictions and table.find(itemRestrictions, "LimitedUnique")) == nil then (itemRestrictions and table.find(itemRestrictions, "Collectible")) ~= nil else true else true
 	end
 	
-	local _ = function(p2) --[[ line: 132 | named "validatePlayer" ]]
+	local _ = function(p2)
 		return p2.UserId and p2.UserId > 0
 	end
 	
-	local function validateItem(p3) --[[ line: 143 ]]
+	local function validateItem(p3)
 		return type(p3) == "table" and p3.id ~= nil and (p3.itemType ~= nil and type(p3.itemType) == "number") and (type(p3.id) == "number" and p3.id ~= 0 and (p3.itemType == Enum.AvatarItemType.Asset.Value or p3.itemType == Enum.AvatarItemType.Bundle.Value))
 	end
 	
-	local function validateIncomingItems(a) --[[ line: 161 ]]
+	local function validateIncomingItems(a)
 		-- upvalues: fIntBulkPurchaseRequestLimit (ref), validateItem (ref), fFlagAXEnableTimedOptionsServerScript (ref)
 		local t = {}
 		
@@ -97,7 +97,7 @@ if fFlagAXEnableInspectAndBuyBulkPurchase then
 		return t
 	end
 	
-	local _ = function(p4) --[[ line: 195 | named "isThrottled" ]]
+	local _ = function(p4)
 		-- upvalues: t (ref), fIntBulkPurchaseThrottleLimit (ref)
 		local var18 = t[p4]
 		
@@ -109,11 +109,11 @@ if fFlagAXEnableInspectAndBuyBulkPurchase then
 		return false
 	end
 	
-	playersService.PlayerRemoving:Connect(function(p5) --[[ line: 204 ]]
+	playersService.PlayerRemoving:Connect(function(p5)
 		-- upvalues: t (ref)
 		t[p5] = nil
 	end)
-	serverSideBulkPurchaseEvent.OnServerEvent:Connect(function(p6, p7) --[[ line: 208 ]]
+	serverSideBulkPurchaseEvent.OnServerEvent:Connect(function(p6, p7)
 		-- upvalues: t (ref), fIntBulkPurchaseThrottleLimit (ref), validateIncomingItems (ref), url (ref), fFlagAXEnableTimedOptionsServerScript (ref), httpService (ref), httpRbxApiService (ref), isLimited (ref), fFlagFilterOutShopOnlyItemsOnBulkPurchase (ref), var8 (ref), t_1 (ref), marketplaceService (ref)
 		local var19
 		if p6.UserId then
@@ -133,7 +133,7 @@ if fFlagAXEnableInspectAndBuyBulkPurchase then
 		local var22 = validateIncomingItems(p7)
 		
 		if var22 == nil or #var22 == 0 then return end
-		local ok, status = pcall(function() --[[ line: 78 ]]
+		local ok, status = pcall(function()
 			-- upvalues: url (copy), fFlagAXEnableTimedOptionsServerScript (copy), var22 (ref), httpService (copy), httpRbxApiService (copy)
 			local var15
 			local text = url.CATALOG_URL .. "v1/catalog/items/details"

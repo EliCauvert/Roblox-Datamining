@@ -19,7 +19,7 @@ local itemViewPresentationModule = require(viewRecycler.Core.Virtualizer.ItemVie
 local _ = require(viewRecycler.Core.RecyclingScope)
 local virtualizerEngineModule = require(viewRecycler.Core.Virtualizer.VirtualizerEngine)
 
-return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
+return function(p0)
 	-- upvalues: virtualizerEngineModule (ref), itemViewPresentationModule (ref), internal (ref), external (ref), virtualizerEffectTypeModule (ref), signalsModule (ref), virtualizerQueryTypeModule (ref)
 	local var7 = virtualizerEngineModule({
 		dataSource = p0.dataSource,
@@ -60,10 +60,10 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 	local var16 = nil
 	local var17 = nil
 	
-	local function _() --[[ line: 120 | named "subscribe" ]]
+	local function _()
 		-- upvalues: var9 (write), var10 (write), var13 (write), dataSource (write), var16 (write), internal (copy)
 		if var9 == nil and var10 and not var13 then
-			var9 = dataSource.subscribe(function(p1) --[[ line: 124 ]]
+			var9 = dataSource.subscribe(function(p1)
 				-- upvalues: var16 (copy), internal (copy)
 				var16(nil, { type = internal.ApplyDataSourceChange, changeBatch = p1 })
 			end)
@@ -72,7 +72,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 132 | named "unsubscribe" ]]
+	local _ = function()
 		-- upvalues: var9 (write)
 		if var9 ~= nil then
 			var9()
@@ -80,7 +80,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 		end
 	end
 	
-	local function executeDispatch(p2, p3, p4) --[[ line: 139 ]]
+	local function executeDispatch(p2, p3, p4)
 		-- upvalues: external (copy), dataSource (write), var9 (write), var7 (ref), var10 (write), var13 (write), var16 (write), internal (copy), var11 (write), var8 (ref), var12 (write), virtualizerEffectTypeModule (copy)
 		if p2 ~= nil and (p2.type == external.SetDataSource or p2.type == external.SetDataSourceAndLayout) then
 			local dataSource_1 = p2.dataSource
@@ -104,7 +104,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 			var10 = true
 			
 			if var9 == nil and not var13 then
-				var9 = dataSource.subscribe(function(p5) --[[ line: 124 ]]
+				var9 = dataSource.subscribe(function(p5)
 					-- upvalues: var16 (copy), internal (copy)
 					var16(nil, { type = internal.ApplyDataSourceChange, changeBatch = p5 })
 				end)
@@ -134,7 +134,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 					if var13 then
 						return var19
 					end
-					var9 = dataSource.subscribe(function(p6) --[[ line: 124 ]]
+					var9 = dataSource.subscribe(function(p6)
 						-- upvalues: var16 (copy), internal (copy)
 						var16(nil, { type = internal.ApplyDataSourceChange, changeBatch = p6 })
 					end)
@@ -153,7 +153,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 		end
 	end
 	
-	var16 = function(p7, p8) --[[ line: 211 ]]
+	var16 = function(p7, p8)
 		-- upvalues: external (copy), var8 (ref), t (ref), var17 (write), var14 (write), var13 (write), var7 (ref), executeDispatch (ref), p0 (ref), virtualizerEffectTypeModule (copy)
 		if p8 == nil and p7 ~= nil then
 			if p7.type == external.SubmitMeasurements then
@@ -196,7 +196,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 	end
 	
 	if p0.active ~= nil then
-		var17 = signalsModule.createEffect(function(p9) --[[ line: 255 ]]
+		var17 = signalsModule.createEffect(function(p9)
 			-- upvalues: var16 (write), external (copy), p0 (ref)
 			var16({ type = external.SetActive, active = p0.active(p9) })
 		end)
@@ -204,7 +204,7 @@ return function(p0) --[[ line: 75 | named "createVirtualizer" ]]
 	return {
 		dispatch = var16,
 		getSnapshot = var7.getSnapshot,
-		query = function(p10) --[[ line: 263 ]]
+		query = function(p10)
 			-- upvalues: virtualizerQueryTypeModule (copy), var8 (ref), var7 (ref)
 			return if p10.type == virtualizerQueryTypeModule.GetItemViews then var8.getItemViews() elseif p10.type == virtualizerQueryTypeModule.GetPlacementIntent then var8.resolvePlacementIntent(p10.itemView) else var7.query(p10)
 		end

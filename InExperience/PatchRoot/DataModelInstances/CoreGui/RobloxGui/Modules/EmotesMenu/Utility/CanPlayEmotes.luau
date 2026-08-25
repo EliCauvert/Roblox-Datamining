@@ -10,7 +10,7 @@ local t = {
 	ChangedEvent = Instance.new("BindableEvent")
 }
 
-local function _(p0) --[[ line: 15 | named "getAnimateScript" ]]
+local function _(p0)
 	if not p0 then
 		return nil
 	end
@@ -19,7 +19,7 @@ local function _(p0) --[[ line: 15 | named "getAnimateScript" ]]
 	return if animate and animate:IsA("LocalScript") then animate elseif animate and animate:IsA("Script") and animate.RunContext == Enum.RunContext.Client then animate else nil
 end
 
-local _ = function(p1) --[[ line: 31 | named "getPlayEmoteBindable" ]]
+local _ = function(p1)
 	local var11, animate
 	if p1 then
 		animate = p1:FindFirstChild("Animate")
@@ -35,7 +35,7 @@ local _ = function(p1) --[[ line: 31 | named "getPlayEmoteBindable" ]]
 	return if animate and animate:IsA("BindableFunction") then animate else nil
 end
 
-local _ = function(p2) --[[ line: 45 | named "getCanPlayEmotes" ]]
+local _ = function(p2)
 	local var13, animate
 	if p2 then
 		animate = p2:FindFirstChild("Animate")
@@ -57,7 +57,7 @@ local var2 = nil
 local var3 = nil
 local var4 = nil
 
-local _ = function() --[[ line: 52 | named "disconnectListeners" ]]
+local _ = function()
 	-- upvalues: var2 (write), var3 (write), var4 (write)
 	if var2 then
 		var2:Disconnect()
@@ -75,7 +75,7 @@ end
 
 local var5 = nil
 
-local _ = function(p3) --[[ line: 71 | named "checkUpdate" ]]
+local _ = function(p3)
 	-- upvalues: t (ref), var5 (write)
 	local var16, animate
 	if p3 then
@@ -100,7 +100,7 @@ local _ = function(p3) --[[ line: 71 | named "checkUpdate" ]]
 	var5(var19, p3)
 end
 
-local _ = function(p4) --[[ line: 82 | named "connectAnimateAddedListener" ]]
+local _ = function(p4)
 	-- upvalues: t (ref), var5 (write), var2 (write)
 	local var20, animate
 	if p4 then
@@ -111,7 +111,7 @@ local _ = function(p4) --[[ line: 82 | named "connectAnimateAddedListener" ]]
 	end
 	local var22, animate_1
 	if not var20 then
-		var2 = p4.ChildAdded:Connect(function(p5) --[[ line: 89 ]]
+		var2 = p4.ChildAdded:Connect(function(p5)
 			-- upvalues: p4 (ref), t (copy), var5 (copy)
 			if (p5:IsA("LocalScript") or p5:IsA("Script") and p5.RunContext == Enum.RunContext.Client) and p5.Name == "Animate" then
 				local var26, animate
@@ -163,7 +163,7 @@ local _ = function(p4) --[[ line: 82 | named "connectAnimateAddedListener" ]]
 	var5(animate, p4)
 end
 
-local _ = function(p6, p7) --[[ line: 98 | named "connectPlayEmoteAddedListener" ]]
+local _ = function(p6, p7)
 	-- upvalues: t (ref), var5 (write), var3 (write)
 	local var30, animate
 	if p6 then
@@ -181,7 +181,7 @@ local _ = function(p6, p7) --[[ line: 98 | named "connectPlayEmoteAddedListener"
 	end
 	local var33, animate_1
 	if not var32 then
-		var3 = p7.ChildAdded:Connect(function(p8) --[[ line: 105 ]]
+		var3 = p7.ChildAdded:Connect(function(p8)
 			-- upvalues: p6 (ref), t (copy), var5 (copy)
 			if p8:IsA("BindableFunction") and p8.Name == "PlayEmote" then
 				local var37, animate
@@ -232,7 +232,7 @@ local _ = function(p6, p7) --[[ line: 98 | named "connectPlayEmoteAddedListener"
 	var5(var35, p6)
 end
 
-local _ = function(p9) --[[ line: 112 | named "connectPlayEmoteRemovedListener" ]]
+local _ = function(p9)
 	-- upvalues: t (ref), var5 (write), var4 (write)
 	local var41, animate
 	if p9 then
@@ -250,7 +250,7 @@ local _ = function(p9) --[[ line: 112 | named "connectPlayEmoteRemovedListener" 
 	end
 	local var44, animate_1
 	if var43 then
-		var4 = var43.AncestryChanged:Connect(function(_, p10) --[[ line: 119 ]]
+		var4 = var43.AncestryChanged:Connect(function(_, p10)
 			-- upvalues: var43 (ref), p9 (ref), t (copy), var5 (copy)
 			if not p10 or not var43:IsDescendantOf(p9) then
 				local var48, animate
@@ -301,7 +301,7 @@ local _ = function(p9) --[[ line: 112 | named "connectPlayEmoteRemovedListener" 
 	var5(var46, p9)
 end
 
-var5 = function(p11, p12) --[[ line: 126 ]]
+var5 = function(p11, p12)
 	-- upvalues: var2 (write), var3 (write), var4 (write), t (ref), var5 (write)
 	local animate, animate_1, var58, animate_2
 	if var2 then
@@ -334,7 +334,7 @@ var5 = function(p11, p12) --[[ line: 126 ]]
 		end
 		local var55
 		if var54 then
-			var4 = var54.AncestryChanged:Connect(function(_, p13) --[[ line: 119 ]]
+			var4 = var54.AncestryChanged:Connect(function(_, p13)
 				-- upvalues: var54 (ref), p12 (ref), t (copy), var5 (copy)
 				if not p13 or not var54:IsDescendantOf(p12) then
 					local var48
@@ -428,7 +428,7 @@ var5 = function(p11, p12) --[[ line: 126 ]]
 			
 			return
 		else
-			var3 = var58.ChildAdded:Connect(function(p14) --[[ line: 105 ]]
+			var3 = var58.ChildAdded:Connect(function(p14)
 				-- upvalues: p12 (ref), t (copy), var5 (copy)
 				if p14:IsA("BindableFunction") and p14.Name == "PlayEmote" then
 					local var37
@@ -466,7 +466,7 @@ var5 = function(p11, p12) --[[ line: 126 ]]
 		animate_2 = nil
 	end
 	if not animate_2 then
-		var2 = p12.ChildAdded:Connect(function(p15) --[[ line: 89 ]]
+		var2 = p12.ChildAdded:Connect(function(p15)
 			-- upvalues: p12 (ref), t (copy), var5 (copy)
 			if (p15:IsA("LocalScript") or p15:IsA("Script") and p15.RunContext == Enum.RunContext.Client) and p15.Name == "Animate" then
 				local var26
@@ -517,7 +517,7 @@ var5 = function(p11, p12) --[[ line: 126 ]]
 	var5(animate, p12)
 end
 
-local _ = function(p16) --[[ line: 146 | named "onCharacterChanged" ]]
+local _ = function(p16)
 	-- upvalues: var2 (write), var3 (write), var4 (write), t (ref), var5 (write)
 	local var62, animate
 	if var2 then
@@ -554,7 +554,7 @@ local _ = function(p16) --[[ line: 146 | named "onCharacterChanged" ]]
 	var5(var65, p16)
 end
 
-localPlayer:GetPropertyChangedSignal("Character"):Connect(function() --[[ line: 151 ]]
+localPlayer:GetPropertyChangedSignal("Character"):Connect(function()
 	-- upvalues: localPlayer (write), var2 (write), var3 (write), var4 (write), t (ref), var5 (write)
 	local var66, animate
 	local character = localPlayer.Character

@@ -1,6 +1,6 @@
 ﻿local colorsModule = require(script.Parent.Colors)
 
-return function() --[[ line: 4 | named "getSelectionImageObjectRounded" ]]
+return function()
 	-- upvalues: colorsModule (ref)
 	local imageLabel = Instance.new("ImageLabel")
 	imageLabel.Image = "rbxasset://textures/ui/InspectMenu/selection_rounded.png"

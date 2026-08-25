@@ -22,7 +22,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function comparitorMethodImpl(p0, p1, p2) --[[ line: 32 ]]
+local function comparitorMethodImpl(p0, p1, p2)
 	-- upvalues: constantsModule (ref)
 	if p2 == constantsModule.COMPARISON_METHODS.SMALLER then
 		return p0 < p1
@@ -40,7 +40,7 @@ local function comparitorMethodImpl(p0, p1, p2) --[[ line: 32 ]]
 	error("Invalid comparitor method: " .. p2)
 end
 
-local function doesPropertyMatchExpectations(p3, p4, p5) --[[ line: 50 ]]
+local function doesPropertyMatchExpectations(p3, p4, p5)
 	-- upvalues: cryoModule (ref), getFFlagUGCValidationEyebrowEyelashSupportModule (ref), constantsModule (ref), doesPropertyMatchExpectations (ref), comparitorMethodImpl (ref)
 	if p4 == cryoModule.None then
 		return p3 == nil
@@ -56,7 +56,7 @@ local function doesPropertyMatchExpectations(p3, p4, p5) --[[ line: 50 ]]
 	end
 end
 
-local function _(p6, p7) --[[ line: 84 | named "extractSubProperty" ]]
+local function _(p6, p7)
 	if typeof(p7) == "CFrame" and p6 == "PositionMagnitude" then
 		return true, p7.Position.Magnitude
 	elseif typeof(p7) == "CFrame" and p6 == "Orientation" then
@@ -67,7 +67,7 @@ local function _(p6, p7) --[[ line: 84 | named "extractSubProperty" ]]
 	return false
 end
 
-local function getAllActiveTestsOnProperty(p8, p9, p10, p11) --[[ line: 96 ]]
+local function getAllActiveTestsOnProperty(p8, p9, p10, p11)
 	-- upvalues: constantsModule (ref), getAllActiveTestsOnProperty (ref)
 	if typeof(p11) ~= "table" then
 		return {
@@ -126,7 +126,7 @@ local function getAllActiveTestsOnProperty(p8, p9, p10, p11) --[[ line: 96 ]]
 	return t
 end
 
-function t.run(p12, p13) --[[ line: 149 ]]
+function t.run(p12, p13)
 	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), getAllActiveTestsOnProperty (ref), doesPropertyMatchExpectations (ref), valueToStringModule (ref)
 	local rootInstance = p13.rootInstance
 	local assetType = p13.uploadEnum.assetType
@@ -137,7 +137,7 @@ function t.run(p12, p13) --[[ line: 149 ]]
 		for i_1, v_1 in constantsModule.PROPERTIES do
 			if v:IsA(i_1) then
 				for i_2, v_2 in v_1 do
-					local ok, status = pcall(function() --[[ line: 160 ]]
+					local ok, status = pcall(function()
 						-- upvalues: v (ref), i_2 (ref)
 						return v[i_2]
 					end)

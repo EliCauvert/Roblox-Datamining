@@ -39,7 +39,7 @@ for i, v in list do
 	t_1[i] = v[1]
 	t_2[i] = v[2]
 end
-function t.scan(p0) --[[ line: 105 ]]
+function t.scan(p0)
 	-- upvalues: t_1 (ref), t_2 (ref), keyword (ref), builtin (ref), libraries (ref), t (ref)
 	local var5 = 1
 	local p0Count = #p0
@@ -47,7 +47,7 @@ function t.scan(p0) --[[ line: 105 ]]
 	local var8 = ""
 	local var9 = ""
 	local var10 = ""
-	local thread = coroutine.create(function() --[[ line: 110 ]]
+	local thread = coroutine.create(function()
 		-- upvalues: var5 (write), p0Count (ref), t_1 (copy), p0 (ref), t_2 (copy), keyword (copy), builtin (copy), var7 (write), var10 (write), var8 (write), libraries (copy), var9 (write), t (copy)
 		local substring, var17, var20
 		while var5 <= p0Count do
@@ -121,7 +121,7 @@ function t.scan(p0) --[[ line: 105 ]]
 		end
 	end)
 	
-	return function() --[[ line: 218 ]]
+	return function()
 		-- upvalues: thread (ref)
 		if coroutine.status(thread) == "dead" then return end
 		local var23, var24, var25 = coroutine.resume(thread)
@@ -132,7 +132,7 @@ function t.scan(p0) --[[ line: 105 ]]
 	end
 end
 
-function t.navigator() --[[ line: 232 ]]
+function t.navigator()
 	-- upvalues: t (ref)
 	local t_1 = {
 		Source = "",
@@ -140,20 +140,20 @@ function t.navigator() --[[ line: 232 ]]
 		_UserIndex = 0,
 		_ScanThread = nil,
 		TokenCache = table.create(50),
-		Destroy = function(p1) --[[ line: 242 ]]
+		Destroy = function(p1)
 			p1.Source = nil
 			p1._RealIndex = nil
 			p1._UserIndex = nil
 			p1.TokenCache = nil
 			p1._ScanThread = nil
 		end,
-		SetSource = function(value, p2) --[[ line: 250 ]]
+		SetSource = function(value, p2)
 			-- upvalues: t (copy)
 			value.Source = p2
 			value._RealIndex = 0
 			value._UserIndex = 0
 			table.clear(value.TokenCache)
-			value._ScanThread = coroutine.create(function() --[[ line: 257 ]]
+			value._ScanThread = coroutine.create(function()
 				-- upvalues: t (copy), value (ref)
 				for i, v in t.scan(value.Source) do
 					value._RealIndex += 1
@@ -164,7 +164,7 @@ function t.navigator() --[[ line: 232 ]]
 		end
 	}
 	
-	function t_1.Next() --[[ line: 266 ]]
+	function t_1.Next()
 		-- upvalues: t_1 (ref)
 		t_1._UserIndex += 1
 		
@@ -178,7 +178,7 @@ function t.navigator() --[[ line: 232 ]]
 		end
 	end
 	
-	function t_1.Peek(p3) --[[ line: 289 ]]
+	function t_1.Peek(p3)
 		-- upvalues: t_1 (ref)
 		local var30 = t_1._UserIndex + p3
 		

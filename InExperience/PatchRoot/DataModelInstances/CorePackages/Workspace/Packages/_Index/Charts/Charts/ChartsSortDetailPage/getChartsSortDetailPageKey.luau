@@ -1,4 +1,4 @@
-﻿local function serializeFilterSelections(p0) --[[ line: 3 ]]
+﻿local function serializeFilterSelections(p0)
 	if p0 == nil then
 		return nil
 	end
@@ -19,7 +19,7 @@
 	return table.concat(t_1, "&")
 end
 
-return function(p1, p2, p3) --[[ line: 22 | named "getChartsSortDetailPageKey" ]]
+return function(p1, p2, p3)
 	-- upvalues: serializeFilterSelections (ref)
 	local _ = nil
 	local var3 = if p1 == nil or p1 == "" then "ChartsSortDetail-Unknown" elseif p2 and p2 ~= "" then `ChartsSortDetail-{p1}-{p2}` else `ChartsSortDetail-{p1}`

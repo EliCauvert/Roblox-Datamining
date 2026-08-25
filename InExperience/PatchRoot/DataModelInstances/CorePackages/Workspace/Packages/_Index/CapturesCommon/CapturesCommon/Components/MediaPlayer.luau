@@ -12,11 +12,11 @@ local view = foundationModule.View
 local loadableVideoModule = require(parent.Components.LoadableVideo)
 local progressBarModule = require(parent.Components.ProgressBar)
 
-local function _(p0) --[[ line: 49 | named "getCurrent" ]]
+local function _(p0)
 	return if typeof(p0) == "table" and p0.current ~= nil then p0.current else nil
 end
 
-return function(p1) --[[ line: 56 | named "MediaPlayer" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), runService (ref), view (ref), stateLayerAffordance (ref), iconButton (ref), buttonSize (ref), loadableVideoModule (ref), text (ref), progressBarModule (ref), foundationModule (ref), image (ref)
 	local var24
 	local var5, var6 = reactModule.useState(0)
@@ -25,26 +25,26 @@ return function(p1) --[[ line: 56 | named "MediaPlayer" ]]
 	local var11, var12 = reactModule.useState(false)
 	local var13, var14 = reactModule.useState(false)
 	local var15, var16 = reactModule.useState(true)
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p1 (ref), var10 (ref), runService (copy), var6 (ref)
 		local videoRef = p1.videoRef
 		local var28 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
 		
 		if var28 then
-			videoRef = var28.Played:Connect(function() --[[ line: 70 ]]
+			videoRef = var28.Played:Connect(function()
 				-- upvalues: var10 (copy)
 				var10(false)
 			end)
-			local endedConnection = var28.Ended:Connect(function() --[[ line: 74 ]]
+			local endedConnection = var28.Ended:Connect(function()
 				-- upvalues: var10 (copy)
 				var10(true)
 			end)
-			local renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 78 ]]
+			local renderSteppedConnection = runService.RenderStepped:Connect(function()
 				-- upvalues: var6 (copy), var28 (ref)
 				var6(var28.TimePosition)
 			end)
 			
-			return function() --[[ line: 82 ]]
+			return function()
 				-- upvalues: renderSteppedConnection (ref), videoRef (ref), endedConnection (ref)
 				renderSteppedConnection:Disconnect()
 				videoRef:Disconnect()
@@ -52,7 +52,7 @@ return function(p1) --[[ line: 56 | named "MediaPlayer" ]]
 			end
 		end
 	end, { p1.videoRef, var15, var9 })
-	local var17 = reactModule.useCallback(function(p2) --[[ line: 89 ]]
+	local var17 = reactModule.useCallback(function(p2)
 		-- upvalues: p1 (ref), var8 (ref)
 		local videoRef = p1.videoRef
 		local var31 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
@@ -64,11 +64,11 @@ return function(p1) --[[ line: 56 | named "MediaPlayer" ]]
 			return
 		end
 	end, { p1.onLoaded, p1.videoRef })
-	local var18 = reactModule.useCallback(function() --[[ line: 99 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var16 (ref), var15 (ref)
 		var16(not var15)
 	end, { var15 })
-	local var19 = reactModule.useCallback(function() --[[ line: 103 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var9 (ref), var10 (ref), var5 (ref), var7 (ref)
 		local videoRef = p1.videoRef
 		local var32 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
@@ -85,14 +85,14 @@ return function(p1) --[[ line: 56 | named "MediaPlayer" ]]
 		var32:Play()
 		var10(false)
 	end, { var9, p1.videoRef, var5, var7 })
-	local var20 = reactModule.useCallback(function() --[[ line: 121 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var14 (ref), var13 (ref)
 		if p1.onExpandCallback then
 			p1.onExpandCallback()
 		end
 		var14(not var13)
 	end, { var13, p1.onExpandCallback })
-	local var21 = reactModule.useCallback(function(p3) --[[ line: 129 ]]
+	local var21 = reactModule.useCallback(function(p3)
 		-- upvalues: p1 (ref)
 		local videoRef = p1.videoRef
 		local var33 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
@@ -103,7 +103,7 @@ return function(p1) --[[ line: 56 | named "MediaPlayer" ]]
 			return
 		end
 	end, { p1.videoRef })
-	local var22 = reactModule.useCallback(function() --[[ line: 138 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), var11 (ref), var12 (ref)
 		if p1.onMuteCallback then
 			p1.onMuteCallback()

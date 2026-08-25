@@ -7,7 +7,7 @@ local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 20 | named "FilterMenuActionBar" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), button (ref), buttonType (ref)
 	local var3 = useTokens()
 	local surface100 = var3.Color.Surface.Surface_100

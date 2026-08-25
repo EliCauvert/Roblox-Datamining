@@ -1,6 +1,6 @@
 ﻿local makeRequestApiModule = require(script.Parent.makeRequestApi)
 
-return function(p0) --[[ line: 4 ]]
+return function(p0)
 	-- upvalues: makeRequestApiModule (ref)
 	return makeRequestApiModule(p0, "DELETE")
 end

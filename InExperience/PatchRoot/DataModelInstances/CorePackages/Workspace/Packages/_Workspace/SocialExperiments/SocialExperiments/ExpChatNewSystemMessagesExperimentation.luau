@@ -4,7 +4,7 @@ local expChatNewSystemMessagesVariant = game:DefineFastString("ExpChatNewSystemM
 local forceEnableExpChatNewSystemMessages = game:DefineFastFlag("ForceEnableExpChatNewSystemMessages", false)
 local enableExpChatNewSystemMessagesExperimentation = game:DefineFastFlag("EnableExpChatNewSystemMessagesExperimentation", false)
 
-local function _(p0) --[[ line: 14 | named "getIsUserInTreatment" ]]
+local function _(p0)
 	-- upvalues: experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
 	local var4 = experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer)
 	
@@ -12,7 +12,7 @@ local function _(p0) --[[ line: 14 | named "getIsUserInTreatment" ]]
 end
 
 return {
-	getNewSystemMessagesEnabled = function() --[[ line: 25 ]]
+	getNewSystemMessagesEnabled = function()
 		-- upvalues: forceEnableExpChatNewSystemMessages (ref), enableExpChatNewSystemMessagesExperimentation (ref), expChatNewSystemMessagesVariant (ref), experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
 		local var5 = forceEnableExpChatNewSystemMessages
 		
@@ -31,7 +31,7 @@ return {
 		end
 		return var5
 	end,
-	logExposure = function() --[[ line: 33 ]]
+	logExposure = function()
 		-- upvalues: enableExpChatNewSystemMessagesExperimentation (ref), experimentCacheManager (ref), expChatNewSystemMessagesExperimentLayer (ref)
 		if enableExpChatNewSystemMessagesExperimentation and experimentCacheManager.default:getLayerVariables(expChatNewSystemMessagesExperimentLayer) ~= nil then
 			experimentCacheManager.default:logLayerExposure(expChatNewSystemMessagesExperimentLayer)

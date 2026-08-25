@@ -22,7 +22,7 @@ local menuButtonsDisconnectGamepadConnected = game:DefineFastFlag("MenuButtonsDi
 local menuButtonsUseGreyResumeButton = game:DefineFastFlag("MenuButtonsUseGreyResumeButton", false)
 local fFlagIEMFocusNavSupportNewButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
 
-local function createMenuButtons(p0, p1, p2) --[[ line: 37 ]]
+local function createMenuButtons(p0, p1, p2)
 	-- upvalues: reactModule (ref), view (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), menuButtonModule (ref), fFlagGamepadIconSupportCheck (ref), fFlagAddTraversalHistoryReactMenuButtonsModule (ref)
 	local t = {}
 	
@@ -52,7 +52,7 @@ local function createMenuButtons(p0, p1, p2) --[[ line: 37 ]]
 	return t
 end
 
-return function(p3) --[[ line: 77 | named "MenuButtons" ]]
+return function(p3)
 	-- upvalues: reactModule (ref), utilityModule (ref), useSignalState (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), useLocalization (ref), constantsModule (ref), useLastInput (ref), fFlagAddTraversalHistoryReactMenuButtonsModule (ref), menuButtonsUseGreyResumeButton (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), contextActionService (ref), userInputService (ref), menuButtonsDisconnectGamepadConnected (ref), view (ref), createMenuButtons (ref)
 	local var19, _ = reactModule.useState(utilityModule:IsSmallTouchScreen())
 	local _ = useSignalState(p3.getCanRespawn)
@@ -60,7 +60,7 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 	local var21 = reactModule.useRef(nil)
 	
 	if fFlagIEMFocusNavSupportNewButtonsModule then
-		reactModule.useEffect(function() --[[ line: 86 ]]
+		reactModule.useEffect(function()
 			-- upvalues: p3 (ref), var21 (ref)
 			if p3.setResumeMenuButton then
 				p3.setResumeMenuButton(var21.current)
@@ -76,7 +76,7 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 		Resume = constantsModule.ResumeLocalizedKey
 	})
 	local var29 = useLastInput()
-	local var30 = reactModule.useMemo(function() --[[ line: 104 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: var28 (ref), var22 (ref), var23 (ref), p3 (ref), constantsModule (copy), fFlagAddTraversalHistoryReactMenuButtonsModule (copy), var20 (ref), var24 (ref), var25 (ref), var26 (ref), var27 (ref), menuButtonsUseGreyResumeButton (copy), fIntRelocateMobileMenuButtonsVariantModule (copy), fFlagIEMFocusNavSupportNewButtonsModule (copy), var21 (ref)
 		return {
 			{
@@ -90,15 +90,15 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 					gamepadButtonImage = var22,
 					setGamepadButtonImage = var23
 				},
-				getIsDisabled = function() --[[ line: 117 ]]
+				getIsDisabled = function()
 					return false
 				end,
-				onActivated = function() --[[ line: 120 ]]
+				onActivated = function()
 					-- upvalues: p3 (copy), constantsModule (copy)
 					p3.onLeaveGame(constantsModule.AnalyticsMenuButtonSource)
 				end,
 				hotkeys = { Enum.KeyCode.L, Enum.KeyCode.ButtonX },
-				hotkeyFunc = function() --[[ line: 124 ]]
+				hotkeyFunc = function()
 					-- upvalues: p3 (copy), constantsModule (copy)
 					p3.onLeaveGame(constantsModule.AnalyticsMenuHotkeySource)
 				end,
@@ -117,16 +117,16 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 					gamepadButtonImage = var24,
 					setGamepadButtonImage = var25
 				},
-				getIsDisabled = function() --[[ line: 142 ]]
+				getIsDisabled = function()
 					-- upvalues: p3 (copy)
 					return not p3.getCanRespawn(false)
 				end,
-				onActivated = function() --[[ line: 145 ]]
+				onActivated = function()
 					-- upvalues: p3 (copy), constantsModule (copy)
 					p3.onRespawn(constantsModule.AnalyticsMenuButtonSource)
 				end,
 				hotkeys = { Enum.KeyCode.R, Enum.KeyCode.ButtonY },
-				hotkeyFunc = function() --[[ line: 149 ]]
+				hotkeyFunc = function()
 					-- upvalues: p3 (copy), constantsModule (copy)
 					p3.onRespawn(constantsModule.AnalyticsMenuHotkeySource)
 				end
@@ -142,14 +142,14 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 					setGamepadButtonImage = var27
 				},
 				isEmphasized = if menuButtonsUseGreyResumeButton then false else not (fIntRelocateMobileMenuButtonsVariantModule == 1),
-				getIsDisabled = function() --[[ line: 164 ]]
+				getIsDisabled = function()
 					return false
 				end,
-				onActivated = function() --[[ line: 167 ]]
+				onActivated = function()
 					-- upvalues: p3 (copy), constantsModule (copy)
 					p3.onResume(constantsModule.AnalyticsMenuButtonSource)
 				end,
-				hotkeyFunc = function() --[[ line: 170 ]]
+				hotkeyFunc = function()
 					-- upvalues: p3 (copy), constantsModule (copy)
 					p3.onResume(constantsModule.AnalyticsMenuHotkeySource)
 				end,
@@ -164,7 +164,7 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 		p3.onResume,
 		p3.getCanRespawn
 	})
-	local var31 = reactModule.useCallback(function(p4) --[[ line: 179 ]]
+	local var31 = reactModule.useCallback(function(p4)
 		-- upvalues: p3 (ref), contextActionService (copy)
 		if not p3.getVisibility() then return end
 		for i = 1, #p4 do
@@ -173,17 +173,17 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 			end
 		end
 	end, {})
-	local var32 = reactModule.useCallback(function(p5) --[[ line: 196 ]]
+	local var32 = reactModule.useCallback(function(p5)
 		-- upvalues: contextActionService (copy)
 		for i = 1, #p5 do
 			contextActionService:UnbindCoreAction(p5[i].name)
 		end
 	end, {})
-	local var33 = reactModule.useCallback(function(p6) --[[ line: 202 ]]
+	local var33 = reactModule.useCallback(function(p6)
 		-- upvalues: var32 (ref), userInputService (copy), p3 (ref), var31 (ref)
-		local _ = function(p7, p8) --[[ line: 203 ]]
+		local _ = function(p7, p8)
 			-- upvalues: var32 (copy), p6 (ref)
-			return function() --[[ line: 204 ]]
+			return function()
 				-- upvalues: p8 (ref), var32 (copy), p6 (copy), p7 (ref)
 				if not p8() then
 					var32(p6)
@@ -192,14 +192,14 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 			end
 		end
 		
-		local _ = function(p9, p10) --[[ line: 212 ]]
+		local _ = function(p9, p10)
 			-- upvalues: var32 (copy), p6 (ref)
-			return function(_, p11, _) --[[ line: 213 ]]
+			return function(_, p11, _)
 				-- upvalues: p9 (ref), p10 (ref), var32 (copy), p6 (copy)
 				if p11 == Enum.UserInputState.Begin then
 					local var37 = p9
 					local var38 = p10;
-					(function() --[[ line: 204 ]]
+					(function()
 						-- upvalues: var38 (ref), var32 (copy), p6 (copy), var37 (ref)
 						if not var38() then
 							var32(p6)
@@ -215,7 +215,7 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 			local onActivated = p6[i].onActivated
 			local getIsDisabled = p6[i].getIsDisabled
 			
-			function var35.onActivated() --[[ line: 204 ]]
+			function var35.onActivated()
 				-- upvalues: getIsDisabled (ref), var32 (copy), p6 (ref), onActivated (ref)
 				if not getIsDisabled() then
 					var32(p6)
@@ -227,12 +227,12 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 			local hotkeyFunc = p6[i].hotkeyFunc
 			local getIsDisabled_1 = p6[i].getIsDisabled
 			
-			function var36.hotkeyFunc(_, p12, _) --[[ line: 213 ]]
+			function var36.hotkeyFunc(_, p12, _)
 				-- upvalues: hotkeyFunc (ref), getIsDisabled_1 (ref), var32 (copy), p6 (ref)
 				if p12 == Enum.UserInputState.Begin then
 					local var37 = hotkeyFunc
 					local var38 = getIsDisabled_1;
-					(function() --[[ line: 204 ]]
+					(function()
 						-- upvalues: var38 (ref), var32 (copy), p6 (copy), var37 (ref)
 						if not var38() then
 							var32(p6)
@@ -244,31 +244,31 @@ return function(p3) --[[ line: 77 | named "MenuButtons" ]]
 			
 			p6[i].hint.setGamepadButtonImage(userInputService:GetImageForKeyCode(p6[i].hint.gamepadButton))
 		end
-		p3.setAddMenuKeyBindings(function() --[[ line: 228 ]]
+		p3.setAddMenuKeyBindings(function()
 			-- upvalues: var31 (copy), p6 (ref)
 			var31(p6)
 		end)
-		p3.setRemoveMenuKeyBindings(function() --[[ line: 231 ]]
+		p3.setRemoveMenuKeyBindings(function()
 			-- upvalues: var32 (copy), p6 (ref)
 			var32(p6)
 		end)
 		
 		return p6
 	end, {})
-	local var34 = reactModule.useMemo(function() --[[ line: 238 ]]
+	local var34 = reactModule.useMemo(function()
 		-- upvalues: var33 (ref), var30 (ref)
 		return var33(var30)
 	end, { var30 })
-	reactModule.useEffect(function() --[[ line: 242 ]]
+	reactModule.useEffect(function()
 		-- upvalues: userInputService (copy), var34 (ref), menuButtonsDisconnectGamepadConnected (copy)
-		local gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function() --[[ line: 243 ]]
+		local gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function()
 			-- upvalues: var34 (copy), userInputService (copy)
 			for i = 1, #var34 do
 				var34[i].hint.setGamepadButtonImage(userInputService:GetImageForKeyCode(var34[i].hint.gamepadButton))
 			end
 		end)
 		
-		return function() --[[ line: 251 ]]
+		return function()
 			-- upvalues: menuButtonsDisconnectGamepadConnected (copy), gamepadConnectedConnection (ref)
 			if menuButtonsDisconnectGamepadConnected then
 				gamepadConnectedConnection:Disconnect()

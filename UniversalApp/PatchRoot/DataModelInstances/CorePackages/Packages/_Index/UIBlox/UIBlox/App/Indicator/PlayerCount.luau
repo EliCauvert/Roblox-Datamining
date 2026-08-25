@@ -12,12 +12,12 @@ local UIBloxConfigModule = require(parent.UIBloxConfig)
 local _ = require(parent.App.Style.StyleTypes)
 local var8 = getIconSizeModule(iconSizeModule.Large)
 
-local function _(p0, p1, p2) --[[ line: 32 | named "getTextWidth" ]]
+local function _(p0, p1, p2)
 	-- upvalues: getTextSizeModule (ref)
 	return getTextSizeModule(p0, p1.RelativeSize * p2.Font.BaseSize, p1.Font, Vector2.new(10000, 10000)).X
 end
 
-local _ = function(p3, p4) --[[ line: 39 | named "getMeasuredSectionWidth" ]]
+local _ = function(p3, p4)
 	-- upvalues: UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), var8 (ref), getTextSizeModule (ref)
 	local var9 = if UIBloxConfigModule.enableScalingForSomeEdpIcons then getIconSizeModule(iconSizeModule.Large, p4) else var8
 	local title = p4.Font.Title
@@ -26,7 +26,7 @@ local _ = function(p3, p4) --[[ line: 39 | named "getMeasuredSectionWidth" ]]
 	return math.max(getTextSizeModule(p3.countText, title.RelativeSize * p4.Font.BaseSize, title.Font, Vector2.new(10000, 10000)).X, getTextSizeModule(p3.labelText, captionHeader.RelativeSize * p4.Font.BaseSize, captionHeader.Font, Vector2.new(10000, 10000)).X) + var9 + 12
 end
 
-return function(p5) --[[ line: 46 | named "PlayerCount" ]]
+return function(p5)
 	-- upvalues: useStyleModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), var8 (ref), getTextSizeModule (ref), reactModule (ref), statWidgetModule (ref)
 	local var10 = useStyleModule()
 	local countLeft = p5.countLeft

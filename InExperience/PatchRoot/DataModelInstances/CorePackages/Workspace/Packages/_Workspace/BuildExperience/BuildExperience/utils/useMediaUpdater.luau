@@ -5,28 +5,28 @@ local getAssetUserAuthStore = require(parent.DataHydration.AssetUserAuth).getAss
 local debug = require(parent.DataHydration.CreatorAgentChat).debug
 local formatErrorModule = require(script.Parent.formatError)
 
-return function(p0) --[[ line: 34 | named "useMediaUpdater" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), promiseModule (ref), debug (ref), getAssetUserAuthStore (ref), formatErrorModule (ref)
 	local var3 = reactModule.useRef(promiseModule.resolve())
 	local onSuccess = p0 and p0.onSuccess
 	local onError = p0 and p0.onError
-	local var6 = reactModule.useCallback(function(p1, p2) --[[ line: 39 ]]
+	local var6 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: debug (copy), var3 (ref), getAssetUserAuthStore (copy), promiseModule (copy), onSuccess (ref), formatErrorModule (copy), onError (ref)
 		debug.log("info", `media_updater {p2} enqueued`)
-		local var7 = var3.current:catch(function() --[[ line: 42 ]]
+		local var7 = var3.current:catch(function()
 			return nil
-		end):andThen(p1):andThen(function(p4) --[[ line: 46 ]]
+		end):andThen(p1):andThen(function(p4)
 			-- upvalues: getAssetUserAuthStore (copy)
 			return getAssetUserAuthStore().pollUntilDone(p4)
-		end):andThen(function(p3) --[[ line: 49 ]]
+		end):andThen(function(p3)
 			-- upvalues: promiseModule (copy)
 			return if typeof(p3) == "table" and p3.status == "timed_out" then promiseModule.reject("Operation did not complete in time") elseif p3.status == "done" then p3.operation else p3
 		end)
-		var3.current = var7:catch(function() --[[ line: 56 ]]
+		var3.current = var7:catch(function()
 			return nil
 		end)
 		
-		return var7:andThen(function(p6) --[[ line: 61 ]]
+		return var7:andThen(function(p6)
 			-- upvalues: debug (copy), p2 (ref), onSuccess (copy)
 			debug.log("info", `media_updater {p2} succeeded`)
 			
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 34 | named "useMediaUpdater" ]]
 				onSuccess()
 			end
 			return p6
-		end):catch(function(p5) --[[ line: 68 ]]
+		end):catch(function(p5)
 			-- upvalues: formatErrorModule (copy), debug (copy), p2 (ref), onError (copy), promiseModule (copy)
 			local var8 = formatErrorModule(p5)
 			debug.log("warn", `media_updater {p2} failed`, { error = var8 })
@@ -47,25 +47,25 @@ return function(p0) --[[ line: 34 | named "useMediaUpdater" ]]
 	end, { onSuccess, onError })
 	
 	return {
-		setIcon = reactModule.useCallback(function(p7, p8) --[[ line: 78 ]]
+		setIcon = reactModule.useCallback(function(p7, p8)
 			-- upvalues: var6 (ref), promiseModule (copy), getAssetUserAuthStore (copy)
-			return var6(function() --[[ line: 79 ]]
+			return var6(function()
 				-- upvalues: promiseModule (copy), p8 (ref), getAssetUserAuthStore (copy), p7 (ref)
-				return promiseModule.resolve(p8):andThen(function(p9) --[[ line: 80 ]]
+				return promiseModule.resolve(p8):andThen(function(p9)
 					-- upvalues: getAssetUserAuthStore (copy), p7 (copy)
 					return getAssetUserAuthStore().updateIcon(p7, p9)
 				end)
 			end, "setIcon")
 		end, { var6 }),
-		addPreview = reactModule.useCallback(function(p10, p11) --[[ line: 87 ]]
+		addPreview = reactModule.useCallback(function(p10, p11)
 			-- upvalues: var6 (ref), getAssetUserAuthStore (copy), promiseModule (copy)
-			return var6(function() --[[ line: 88 ]]
+			return var6(function()
 				-- upvalues: getAssetUserAuthStore (copy), promiseModule (copy), p11 (ref), p10 (ref)
 				local var9 = getAssetUserAuthStore()
 				
-				return promiseModule.resolve(p11):andThen(function(p12) --[[ line: 90 ]]
+				return promiseModule.resolve(p11):andThen(function(p12)
 					-- upvalues: var9 (ref), p10 (copy)
-					return var9.getPreviews(p10):andThen(function(p13) --[[ line: 91 ]]
+					return var9.getPreviews(p10):andThen(function(p13)
 						-- upvalues: p12 (ref), var9 (copy), p10 (copy)
 						local cloned = table.clone(p13)
 						table.insert(cloned, { asset = `assets/{p12}` })
@@ -75,15 +75,15 @@ return function(p0) --[[ line: 34 | named "useMediaUpdater" ]]
 				end)
 			end, "addPreview")
 		end, { var6 }),
-		replacePreview = reactModule.useCallback(function(p14, p15, p16) --[[ line: 103 ]]
+		replacePreview = reactModule.useCallback(function(p14, p15, p16)
 			-- upvalues: var6 (ref), getAssetUserAuthStore (copy), promiseModule (copy)
-			return var6(function() --[[ line: 104 ]]
+			return var6(function()
 				-- upvalues: getAssetUserAuthStore (copy), promiseModule (copy), p15 (ref), p14 (ref), p16 (ref)
 				local var11 = getAssetUserAuthStore()
 				
-				return promiseModule.resolve(p15):andThen(function(p17) --[[ line: 106 ]]
+				return promiseModule.resolve(p15):andThen(function(p17)
 					-- upvalues: var11 (ref), p14 (copy), p16 (copy), promiseModule (copy)
-					return var11.getPreviews(p14):andThen(function(p18) --[[ line: 107 ]]
+					return var11.getPreviews(p14):andThen(function(p18)
 						-- upvalues: p16 (copy), promiseModule (copy), p17 (ref), var11 (copy), p14 (copy)
 						local var12 = nil
 						
@@ -106,13 +106,13 @@ return function(p0) --[[ line: 34 | named "useMediaUpdater" ]]
 				end)
 			end, "replacePreview")
 		end, { var6 }),
-		removePreview = reactModule.useCallback(function(p19, p20) --[[ line: 130 ]]
+		removePreview = reactModule.useCallback(function(p19, p20)
 			-- upvalues: var6 (ref), getAssetUserAuthStore (copy), promiseModule (copy)
-			return var6(function() --[[ line: 131 ]]
+			return var6(function()
 				-- upvalues: getAssetUserAuthStore (copy), p19 (ref), p20 (ref), promiseModule (copy)
 				local var15 = getAssetUserAuthStore()
 				
-				return var15.getPreviews(p19):andThen(function(p21) --[[ line: 133 ]]
+				return var15.getPreviews(p19):andThen(function(p21)
 					-- upvalues: p20 (copy), promiseModule (copy), var15 (ref), p19 (copy)
 					local var16 = nil
 					

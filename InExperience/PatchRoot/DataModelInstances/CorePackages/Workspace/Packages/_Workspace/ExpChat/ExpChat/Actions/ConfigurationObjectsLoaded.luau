@@ -1,4 +1,4 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p0) --[[ line: 13 ]]
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p0)
 	return {
 		bubbleChatSettings = p0.bubbleChatSettings or {},
 		chatWindowSettings = p0.chatWindowSettings or {},

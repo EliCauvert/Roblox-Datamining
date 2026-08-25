@@ -7,9 +7,9 @@ local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).def
 
 return {
 	type = "listItem",
-	fetch = function(_) --[[ line: 15 ]]
+	fetch = function(_)
 		-- upvalues: default (ref), promiseModule (ref), playersService (ref), accessoryType (ref)
-		local ok, status = pcall(function() --[[ line: 16 ]]
+		local ok, status = pcall(function()
 			-- upvalues: default (copy)
 			return default:getRecentUsersInteractionData()
 		end)
@@ -42,7 +42,7 @@ return {
 				})
 			end
 		end
-		table.sort(t, function(p0, p1) --[[ line: 43 ]]
+		table.sort(t, function(p0, p1)
 			return p0.label < p1.label
 		end)
 		

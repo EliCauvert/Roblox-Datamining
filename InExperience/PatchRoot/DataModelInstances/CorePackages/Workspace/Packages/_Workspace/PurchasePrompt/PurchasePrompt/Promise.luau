@@ -1,11 +1,11 @@
-﻿local function pack(...) --[[ line: 12 ]]
+﻿local function pack(...)
 	return select("#", ...), { ... }
 end
 
-local function wpcallPacked(p0, ...) --[[ line: 25 ]]
+local function wpcallPacked(p0, ...)
 	-- upvalues: pack (ref)
 	local var3, var4 = pack(...)
-	local var5, var6 = pack(xpcall(function() --[[ line: 28 ]]
+	local var5, var6 = pack(xpcall(function()
 		-- upvalues: p0 (ref), var4 (ref), var3 (ref)
 		return p0(unpack(var4, 1, var3))
 	end, debug.traceback))
@@ -13,9 +13,9 @@ local function wpcallPacked(p0, ...) --[[ line: 25 ]]
 	return var5, var6
 end
 
-local function _(p1, p2, p3) --[[ line: 48 | named "createAdvancer" ]]
+local function _(p1, p2, p3)
 	-- upvalues: wpcallPacked (ref)
-	return function(...) --[[ line: 49 ]]
+	return function(...)
 		-- upvalues: wpcallPacked (copy), p1 (ref), p2 (ref), p3 (ref)
 		local var7, var8 = wpcallPacked(p1, ...)
 		
@@ -28,7 +28,7 @@ local function _(p1, p2, p3) --[[ line: 48 | named "createAdvancer" ]]
 	end
 end
 
-local _ = function(p4) --[[ line: 61 | named "isEmpty" ]]
+local _ = function(p4)
 	return next(p4) == nil
 end
 
@@ -40,7 +40,7 @@ t.Status = {
 	Rejected = "Rejected"
 }
 
-function t.new(p5) --[[ line: 93 ]]
+function t.new(p5)
 	-- upvalues: t (ref), wpcallPacked (ref)
 	local t_1 = {
 		_type = "Promise",
@@ -54,12 +54,12 @@ function t.new(p5) --[[ line: 93 ]]
 	}
 	setmetatable(t_1, t)
 	
-	local function reject(...) --[[ line: 125 ]]
+	local function reject(...)
 		-- upvalues: t_1 (ref)
 		t_1:_reject(...)
 	end
 	
-	local _, var11 = wpcallPacked(p5, function(...) --[[ line: 121 | named "resolve" ]]
+	local _, var11 = wpcallPacked(p5, function(...)
 		-- upvalues: t_1 (ref)
 		t_1:_resolve(...)
 	end, reject)
@@ -71,30 +71,30 @@ function t.new(p5) --[[ line: 93 ]]
 	return t_1
 end
 
-function t.resolve(p6) --[[ line: 143 ]]
+function t.resolve(p6)
 	-- upvalues: t (ref)
-	return t.new(function(p7) --[[ line: 144 ]]
+	return t.new(function(p7)
 		-- upvalues: p6 (ref)
 		p7(p6)
 	end)
 end
 
-function t.reject(p8) --[[ line: 152 ]]
+function t.reject(p8)
 	-- upvalues: t (ref)
-	return t.new(function(_, p9) --[[ line: 153 ]]
+	return t.new(function(_, p9)
 		-- upvalues: p8 (ref)
 		p9(p8)
 	end)
 end
 
-function t.all(...) --[[ line: 163 ]]
+function t.all(...)
 	-- upvalues: t (ref)
 	local list = { ... }
 	
 	if type(list[1]) == "table" and list[1]._type ~= "Promise" then
 		list = list[1]
 	end
-	return t.new(function(p10, p11) --[[ line: 172 ]]
+	return t.new(function(p10, p11)
 		-- upvalues: list (write), t (copy)
 		local var14 = false
 		local t_1 = {}
@@ -104,7 +104,7 @@ function t.all(...) --[[ line: 163 ]]
 		for i in pairs(list) do
 			var17 += 1
 		end
-		local function _(p12, p13) --[[ line: 184 | named "promiseCompleted" ]]
+		local function _(p12, p13)
 			-- upvalues: var14 (write), t_1 (ref), var16 (write), var17 (write), p10 (ref)
 			if var14 then return end
 			t_1[p12] = p13
@@ -124,7 +124,7 @@ function t.all(...) --[[ line: 163 ]]
 		end
 		for i_1, v in pairs(list) do
 			if v._status == t.Status.Started then
-				v:andThen(function(p15) --[[ line: 208 ]]
+				v:andThen(function(p15)
 					-- upvalues: i_1 (ref), var14 (write), t_1 (ref), var16 (write), var17 (write), p10 (ref)
 					if var14 then return end
 					t_1[i_1] = p15
@@ -134,7 +134,7 @@ function t.all(...) --[[ line: 163 ]]
 						p10(t_1)
 						var14 = true
 					end
-				end):catch(function(p14) --[[ line: 211 ]]
+				end):catch(function(p14)
 					-- upvalues: var14 (write), p11 (ref)
 					var14 = true
 					p11(p14)
@@ -152,7 +152,7 @@ function t.all(...) --[[ line: 163 ]]
 					end
 				end
 			else
-				v:catch(function(_) --[[ line: 224 ]]
+				v:catch(function(_)
 					-- upvalues: var14 (write), p11 (ref), v (ref)
 					var14 = true
 					p11(unpack(v._values))
@@ -162,20 +162,20 @@ function t.all(...) --[[ line: 163 ]]
 	end)
 end
 
-function t:is() --[[ line: 236 ]]
+function t:is()
 	return type(self) == "table" and self._type == "Promise"
 end
 
-function t.promisify(p16) --[[ line: 247 ]]
+function t.promisify(p16)
 	-- upvalues: t (ref)
-	return function(...) --[[ line: 248 ]]
+	return function(...)
 		-- upvalues: t (copy), p16 (ref)
 		local list = { ... }
 		local var20 = select("#", ...)
 		
-		return t.new(function(p17, p18) --[[ line: 252 ]]
+		return t.new(function(p17, p18)
 			-- upvalues: p16 (copy), list (ref), var20 (ref)
-			spawn(function() --[[ line: 253 ]]
+			spawn(function()
 				-- upvalues: p16 (copy), list (copy), var20 (copy), p17 (ref), p18 (ref)
 				local ok, status = pcall(p16, unpack(list, 1, var20))
 				
@@ -190,22 +190,22 @@ function t.promisify(p16) --[[ line: 247 ]]
 	end
 end
 
-function t:getStatus() --[[ line: 266 ]]
+function t:getStatus()
 	return self._status
 end
 
-function t:andThen(p19, p20) --[[ line: 274 ]]
+function t:andThen(p19, p20)
 	-- upvalues: t (ref), wpcallPacked (ref)
 	self._unhandledRejection = false
 	
-	return t.new(function(p21, p22) --[[ line: 278 ]]
+	return t.new(function(p21, p22)
 		-- upvalues: p19 (ref), wpcallPacked (copy), p20 (ref), self (ref), t (copy)
 		local var21 = p21
 		
 		if p19 then
 			local var22 = p19
 			
-			var21 = function(...) --[[ line: 49 ]]
+			var21 = function(...)
 				-- upvalues: wpcallPacked (copy), var22 (ref), p21 (ref), p22 (ref)
 				local var7, var8 = wpcallPacked(var22, ...)
 				
@@ -222,7 +222,7 @@ function t:andThen(p19, p20) --[[ line: 274 ]]
 		if p20 then
 			local var24 = p20
 			
-			var23 = function(...) --[[ line: 49 ]]
+			var23 = function(...)
 				-- upvalues: wpcallPacked (copy), var24 (ref), p21 (ref), p22 (ref)
 				local var7, var8 = wpcallPacked(var24, ...)
 				
@@ -249,11 +249,11 @@ function t:andThen(p19, p20) --[[ line: 274 ]]
 	end)
 end
 
-function t:catch(p23) --[[ line: 309 ]]
+function t:catch(p23)
 	return self:andThen(nil, p23)
 end
 
-function t:await() --[[ line: 317 ]]
+function t:await()
 	-- upvalues: t (ref)
 	self._unhandledRejection = false
 	
@@ -261,12 +261,12 @@ function t:await() --[[ line: 317 ]]
 		local var25 = nil
 		local var26 = nil
 		local bindableEvent = Instance.new("BindableEvent")
-		self:andThen(function(...) --[[ line: 325 ]]
+		self:andThen(function(...)
 			-- upvalues: var25 (write), var26 (write), bindableEvent (ref)
 			var25 = { ... }
 			var26 = select("#", ...)
 			bindableEvent:Fire(true)
-		end, function(...) --[[ line: 329 ]]
+		end, function(...)
 			-- upvalues: var25 (write), var26 (write), bindableEvent (ref)
 			var25 = { ... }
 			var26 = select("#", ...)
@@ -283,7 +283,7 @@ function t:await() --[[ line: 317 ]]
 	end
 end
 
-function t:_resolve(...) --[[ line: 346 ]]
+function t:_resolve(...)
 	-- upvalues: t (ref)
 	if self._status ~= t.Status.Started then return end
 	local var29 = select("#", ...)
@@ -292,10 +292,10 @@ function t:_resolve(...) --[[ line: 346 ]]
 		if var29 > 1 then
 			warn(("When returning a Promise from andThen, extra arguments are discarded! See:\n\n%s"):format(self._source))
 		end;
-		(...):andThen(function(...) --[[ line: 363 ]]
+		(...):andThen(function(...)
 			-- upvalues: self (ref)
 			self:_resolve(...)
-		end, function(...) --[[ line: 365 ]]
+		end, function(...)
 			-- upvalues: self (ref)
 			self:_reject(...)
 		end)
@@ -312,7 +312,7 @@ function t:_resolve(...) --[[ line: 346 ]]
 	end
 end
 
-function t:_reject(...) --[[ line: 382 ]]
+function t:_reject(...)
 	-- upvalues: t (ref)
 	if self._status ~= t.Status.Started then return end
 	self._status = t.Status.Rejected
@@ -322,7 +322,7 @@ function t:_reject(...) --[[ line: 382 ]]
 	if next(self._queuedReject) == nil then
 		self._unhandledRejection = true
 		local var30 = tostring(...)
-		spawn(function() --[[ line: 406 ]]
+		spawn(function()
 			-- upvalues: self (ref), var30 (ref)
 			if self._unhandledRejection then
 				warn(("Unhandled promise rejection:\n\n%s\n\n%s"):format(var30, self._source))

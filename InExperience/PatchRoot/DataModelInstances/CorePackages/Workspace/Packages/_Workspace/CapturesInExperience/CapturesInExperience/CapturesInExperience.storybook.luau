@@ -21,13 +21,13 @@ return {
 	name = "CapturesInExperience",
 	storyRoot = parent,
 	roact = roactModule,
-	mapDefinition = function(p0) --[[ line: 45 ]]
+	mapDefinition = function(p0)
 		-- upvalues: dashModule (ref), t_1 (ref)
 		return dashModule.join(p0, { controls = dashModule.join(t_1, p0.controls) })
 	end,
-	mapStory = function(p1) --[[ line: 49 ]]
+	mapStory = function(p1)
 		-- upvalues: roactModule (ref), capturesContextModule (ref), dashModule (ref), appStyleProvider (ref), t (ref), mockLocale (ref)
-		return function(p2) --[[ line: 50 ]]
+		return function(p2)
 			-- upvalues: roactModule (copy), capturesContextModule (copy), dashModule (copy), appStyleProvider (copy), t (copy), mockLocale (copy), p1 (ref)
 			return roactModule.createElement(capturesContextModule.Provider, { value = { fireAnalyticsEvent = dashModule.noop } }, {
 				Element = roactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = mockLocale(p1, p2) })

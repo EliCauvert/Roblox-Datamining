@@ -8,12 +8,12 @@ local t = {}
 local serializeFetchParameter = require(script.Parent.serializeFetchParameter).serializeFetchParameter
 local _ = require(script.Parent.selectHttpOptionsAndBody)
 
-function t.rewriteURIForGET(p0, p1) --[[ line: 29 ]]
+function t.rewriteURIForGET(p0, p1)
 	-- upvalues: encodeURIComponentModule (ref), array (ref), object (ref), boolean (ref), serializeFetchParameter (ref)
 	local substring
 	local t = {}
 	
-	local function _(p2, p3) --[[ line: 39 | named "addQueryParam" ]]
+	local function _(p2, p3)
 		-- upvalues: t (ref), encodeURIComponentModule (copy)
 		table.insert(t, ("%s=%s"):format(p2, encodeURIComponentModule(p3)))
 	end
@@ -26,7 +26,7 @@ function t.rewriteURIForGET(p0, p1) --[[ line: 29 ]]
 	end
 	if boolean.toJSBoolean(p1.variables) then
 		substring = nil
-		local ok, status = pcall(function() --[[ line: 51 ]]
+		local ok, status = pcall(function()
 			-- upvalues: substring (write), serializeFetchParameter (copy), p1 (ref)
 			substring = serializeFetchParameter(p1.variables, "Variables map", true)
 		end)
@@ -38,7 +38,7 @@ function t.rewriteURIForGET(p0, p1) --[[ line: 29 ]]
 	end
 	if boolean.toJSBoolean(p1.extensions) then
 		substring = nil
-		local ok, status = pcall(function() --[[ line: 62 ]]
+		local ok, status = pcall(function()
 			-- upvalues: substring (write), serializeFetchParameter (copy), p1 (ref)
 			substring = serializeFetchParameter(p1.extensions, "Extensions map")
 		end)

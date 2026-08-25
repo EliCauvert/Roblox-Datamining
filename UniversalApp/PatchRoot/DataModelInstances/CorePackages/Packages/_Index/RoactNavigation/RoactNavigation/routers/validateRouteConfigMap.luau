@@ -2,11 +2,11 @@
 local invariantModule = require(parent.utils.invariant)
 local isValidScreenComponentModule = require(parent.utils.isValidScreenComponent)
 
-local function _(p0) --[[ line: 6 | named "getScreenComponent" ]]
+local function _(p0)
 	return if p0 then if type(p0) == "table" and p0.screen then p0.screen else p0 else nil
 end
 
-return function(p1) --[[ line: 36 ]]
+return function(p1)
 	-- upvalues: invariantModule (ref), isValidScreenComponentModule (ref)
 	invariantModule(next(p1) ~= nil, "Please specify at least one route when configuring a navigator.")
 	

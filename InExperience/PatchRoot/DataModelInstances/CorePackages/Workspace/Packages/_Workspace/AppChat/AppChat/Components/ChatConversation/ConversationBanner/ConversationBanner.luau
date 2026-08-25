@@ -9,11 +9,11 @@ local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useCha
 local t = {
 	actionText = "PLACEHOLDER Action",
 	bodyText = "PLACEHOLDER Body",
-	onActivated = function() --[[ line: 24 ]] end,
-	onDismissed = function() --[[ line: 25 ]] end
+	onActivated = function() end,
+	onDismissed = function() end
 }
 
-return reactModule.memo(function(p0) --[[ line: 28 | named "ConversationBanner" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useChatPagePaddingModule (ref), reactModule (ref), foundationModule (ref)
 	local var6 = cryoModule.Dictionary.union(t, p0)
 	local medium = useTokens().Padding.Medium

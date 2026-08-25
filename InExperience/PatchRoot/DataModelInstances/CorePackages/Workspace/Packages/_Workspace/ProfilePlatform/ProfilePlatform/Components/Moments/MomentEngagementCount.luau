@@ -9,7 +9,7 @@ local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 23 | named "MomentEngagementCount" ]]
+return function(p0)
 	-- upvalues: useAbbreviatedNumberLocalization (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), iconVariant (ref), text (ref)
 	local var2 = useAbbreviatedNumberLocalization(p0.count or 0)
 	local var3 = p0.onMedia == true

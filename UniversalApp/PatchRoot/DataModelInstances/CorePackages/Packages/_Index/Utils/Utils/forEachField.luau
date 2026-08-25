@@ -7,7 +7,7 @@ local isObjectType = graphQLModule.isObjectType
 local _ = require(script.Parent.Interfaces)
 local string = luauPolyfillModule.String
 
-function t.forEachField(p0, p1) --[[ line: 25 ]]
+function t.forEachField(p0, p1)
 	-- upvalues: string (ref), getNamedType (ref), isObjectType (ref)
 	local typeMap = p0:getTypeMap()
 	

@@ -33,29 +33,29 @@ stickyActionBar.defaultProps = {
 	width = nil
 }
 
-function stickyActionBar.init(p0) --[[ line: 77 ]]
+function stickyActionBar.init(p0)
 	-- upvalues: getTextSize (ref)
 	p0.state = { containerWidth = nil }
 	
-	function p0.onContainerSizeChange(p1) --[[ line: 81 ]]
+	function p0.onContainerSizeChange(p1)
 		-- upvalues: p0 (ref)
-		p0:setState(function(_, _) --[[ line: 82 ]]
+		p0:setState(function(_, _)
 			-- upvalues: p1 (ref)
 			return { containerWidth = p1.AbsoluteSize.X }
 		end)
 	end
 	
-	local _ = function() --[[ line: 89 ]]
+	local _ = function()
 		-- upvalues: p0 (ref)
 		return UDim2.fromOffset(p0.props.actionBarWidth, 48)
 	end
 	
-	local _ = function(p2, p3, p4) --[[ line: 93 ]]
+	local _ = function(p2, p3, p4)
 		-- upvalues: p0 (ref)
 		return if p4 and p4.infoSectionWidth then p4.infoSectionWidth elseif p3 then p2 - 80 - UDim2.fromOffset(p0.props.actionBarWidth, 48).X.Offset else p2 - 80
 	end
 	
-	local var6 = function(p5, p6, p7, p8) --[[ line: 104 ]]
+	local var6 = function(p5, p6, p7, p8)
 		-- upvalues: p0 (ref)
 		if p8 or not p7 then
 			return {
@@ -72,12 +72,12 @@ function stickyActionBar.init(p0) --[[ line: 77 ]]
 		}
 	end
 	
-	local _ = function(p9, p10, p11) --[[ line: 128 ]]
+	local _ = function(p9, p10, p11)
 		-- upvalues: getTextSize (copy)
 		return getTextSize(p9, p10.RelativeSize * p11.Font.BaseSize, p10.Font, Vector2.new(10000, 10000)).X
 	end
 	
-	function p0.getLayoutConfig(p12, p13, p14, p15, p16, p17, p18) --[[ line: 135 ]]
+	function p0.getLayoutConfig(p12, p13, p14, p15, p16, p17, p18)
 		-- upvalues: p0 (ref), getTextSize (copy), var6 (ref)
 		local var7 = if p0.props.infoProps and p0.props.infoProps.enableInfoAtStart then true else false
 		
@@ -92,14 +92,14 @@ function stickyActionBar.init(p0) --[[ line: 77 ]]
 	end
 end
 
-function stickyActionBar.render(p19) --[[ line: 176 ]]
+function stickyActionBar.render(p19)
 	-- upvalues: withStyle (ref), var4 (ref), roactModule (ref), actionBar (ref), fFlagUIBloxEnableActionBarButtonOverride (ref), imageSetLabel (ref), styledTextLabel (ref)
 	local var8 = p19.props.actionBarProps ~= nil
 	local var9 = p19.props.infoProps ~= nil
 	local width = p19.props.width or p19.state.containerWidth
 	assert(var8 or var9, "Either actionbar or info should be present!")
 	
-	return withStyle(function(p20) --[[ line: 181 ]]
+	return withStyle(function(p20)
 		-- upvalues: var9 (ref), p19 (ref), var4 (copy), width (ref), var8 (ref), roactModule (copy), actionBar (copy), fFlagUIBloxEnableActionBarButtonOverride (copy), imageSetLabel (copy), styledTextLabel (copy)
 		local var4_1 = var9 and (p19.props.infoProps.icon and (var4 or 0))
 		local var12 = if var9 then p19.props.infoProps.title else ""
@@ -160,7 +160,7 @@ function stickyActionBar.render(p19) --[[ line: 176 ]]
 	end)
 end
 
-function stickyActionBar.renderHorizontalLayout(_, p21, p22) --[[ line: 255 ]]
+function stickyActionBar.renderHorizontalLayout(_, p21, p22)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		Size = if p21.size then p21.size else UDim2.new(0, p21.width, 0, 0),

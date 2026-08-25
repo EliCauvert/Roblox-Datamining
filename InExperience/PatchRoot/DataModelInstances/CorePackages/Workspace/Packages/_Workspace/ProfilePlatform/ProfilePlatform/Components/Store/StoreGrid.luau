@@ -15,11 +15,11 @@ local fFlagProfileStoreEnableFreeItemPriceLabelFixModule = require(profilePlatfo
 local asset = constants.RbxthumbTypes.Asset
 local bundleThumbnail = constants.RbxthumbTypes.BundleThumbnail
 
-local var7 = function(p0) --[[ line: 37 ]]
+local var7 = function(p0)
 	return p0 + 49
 end
 
-return function(p1) --[[ line: 41 | named "StoreGrid" ]]
+return function(p1)
 	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), enumsModule (ref), bundleThumbnail (ref), asset (ref), fFlagProfileStoreEnableFreeItemPriceLabelFixModule (ref), catalogItemCard (ref), itemCardThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), squareCollectionGridViewModule (ref), var7 (ref)
 	local var8 = useLocalization({
 		store = textKeysModule.Store,
@@ -29,7 +29,7 @@ return function(p1) --[[ line: 41 | named "StoreGrid" ]]
 	return reactModule.createElement(squareCollectionGridViewModule, {
 		layoutOrder = p1.layoutOrder,
 		items = p1.assets,
-		renderItem = reactModule.useCallback(function(p2, p3) --[[ line: 47 ]]
+		renderItem = reactModule.useCallback(function(p2, p3)
 			-- upvalues: enumsModule (copy), bundleThumbnail (copy), asset (copy), fFlagProfileStoreEnableFreeItemPriceLabelFixModule (copy), var8 (ref), reactModule (copy), catalogItemCard (copy), itemCardThumbnail (copy), getRbxthumbWithTypeSizeAndOptions (copy), p1 (ref)
 			return reactModule.createElement(catalogItemCard, {
 				LayoutOrder = p3,
@@ -37,7 +37,7 @@ return function(p1) --[[ line: 41 | named "StoreGrid" ]]
 				presentationSlot = reactModule.createElement(itemCardThumbnail, {
 					url = getRbxthumbWithTypeSizeAndOptions(p2.id, if p2.itemType == enumsModule.ItemTypes.Bundle then bundleThumbnail else asset, 150)
 				}),
-				onActivated = function() --[[ line: 69 ]]
+				onActivated = function()
 					-- upvalues: p1 (copy), p2 (ref), p3 (ref)
 					p1.openItemDetails(p2.id, p2.itemType, p3)
 				end,

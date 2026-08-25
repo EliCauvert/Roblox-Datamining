@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	return {
 		Size_0 = p0.number,
 		Size_25 = p0.number,

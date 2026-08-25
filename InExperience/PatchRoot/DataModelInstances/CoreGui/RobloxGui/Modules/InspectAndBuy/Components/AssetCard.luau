@@ -15,12 +15,12 @@ local getFFlagDisplayCollectiblesIconModule = require(parent.Flags.GetFFlagDispl
 local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
 local assetCard = roactModule.Component:extend("AssetCard")
 
-function assetCard.init(p0) --[[ line: 24 ]]
+function assetCard.init(p0)
 	-- upvalues: getSelectionImageObjectRegularModule (ref)
 	p0.selectedImage = getSelectionImageObjectRegularModule()
 end
 
-function assetCard.render(p1) --[[ line: 28 ]]
+function assetCard.render(p1)
 	-- upvalues: images (ref), roactModule (ref), inspectAndBuyContextModule (ref), getFFlagDisplayCollectiblesIconModule (ref), utilityFunctionsModule (ref), getFFlagIBEnableCollectiblesSystemSupportModule (ref), constantsModule (ref), colorsModule (ref), appFonts (ref), limitedLabelModule (ref)
 	local view = p1.props.view
 	local equipped = p1.props.equipped
@@ -31,7 +31,7 @@ function assetCard.render(p1) --[[ line: 28 ]]
 	local var13 = if limited then limited.ImageRectSize / images.ImagesResolutionScale else Vector2.new(0, 0)
 	
 	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2) --[[ line: 38 ]]
+		render = function(p2)
 			-- upvalues: view (ref), getFFlagDisplayCollectiblesIconModule (copy), utilityFunctionsModule (copy), assetInfo (ref), getFFlagIBEnableCollectiblesSystemSupportModule (copy), constantsModule (copy), var13 (ref), roactModule (copy), colorsModule (copy), p1 (ref), openDetails (ref), assetCardSizeX (ref), appFonts (copy), equipped (ref), limitedLabelModule (copy)
 			local var14 = p2[view]
 			local var15 = getFFlagDisplayCollectiblesIconModule() and utilityFunctionsModule.isCollectibles(assetInfo)
@@ -52,7 +52,7 @@ function assetCard.render(p1) --[[ line: 28 ]]
 				BackgroundColor3 = colorsModule.Gray2,
 				Selectable = true,
 				SelectionImageObject = p1.selectedImage,
-				[roactModule.Event.Activated] = function() --[[ line: 66 ]]
+				[roactModule.Event.Activated] = function()
 					-- upvalues: openDetails (copy), assetInfo (copy)
 					openDetails(assetInfo.assetId)
 				end
@@ -66,7 +66,7 @@ function assetCard.render(p1) --[[ line: 28 ]]
 					Selectable = false,
 					AutoButtonColor = false,
 					Image = "rbxthumb://type=Asset&id=" .. assetInfo.assetId .. "&w=150&h=150",
-					[roactModule.Event.Activated] = function() --[[ line: 78 ]]
+					[roactModule.Event.Activated] = function()
 						-- upvalues: openDetails (copy), assetInfo (copy)
 						openDetails(assetInfo.assetId)
 					end
@@ -135,16 +135,16 @@ function assetCard.render(p1) --[[ line: 28 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p3, p4) --[[ line: 146 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p3, p4)
 	return {
 		view = p3.view,
 		equipped = p3.equippedAssets[p4.assetInfo.assetId] == true,
 		locale = p3.locale
 	}
-end, function(p5) --[[ line: 154 ]]
+end, function(p5)
 	-- upvalues: setDetailsInformationModule (ref)
 	return {
-		openDetails = function(p6) --[[ line: 156 ]]
+		openDetails = function(p6)
 			-- upvalues: p5 (ref), setDetailsInformationModule (copy)
 			p5(setDetailsInformationModule(true, p6))
 		end

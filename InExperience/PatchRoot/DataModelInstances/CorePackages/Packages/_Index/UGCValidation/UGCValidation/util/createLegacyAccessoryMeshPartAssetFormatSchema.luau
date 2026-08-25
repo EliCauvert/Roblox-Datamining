@@ -1,4 +1,4 @@
-﻿return function(value) --[[ line: 2 | named "createLegacyAccessoryMeshPartAssetFormatSchema" ]]
+﻿return function(value)
 	assert(value, "attachmentName cannot be nil")
 	
 	return {

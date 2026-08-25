@@ -2,13 +2,13 @@
 local _ = require(momentsCommon.Media.MediaTypes)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
 
-local function _(value) --[[ line: 76 | named "toAssetUri" ]]
+local function _(value)
 	return if typeof(value) == "string" and string.find(value, "://") ~= nil then value else `rbxassetid://{value}`
 end
 
 return {
 	kind = "music",
-	create = function(p0, p1) --[[ line: 83 ]]
+	create = function(p0, p1)
 		local parent = p0.parent
 		assert(parent ~= nil, "createMusicNode: spec.parent (the item media folder) is required")
 		local assetId = p0.assetId
@@ -32,23 +32,23 @@ return {
 			kind = "music",
 			usesDecoder = false,
 			id = p0.id,
-			assets = function() --[[ line: 109 ]]
+			assets = function()
 				-- upvalues: assetId (ref)
 				return { assetId }
 			end,
-			download = function() --[[ line: 113 ]]
+			download = function()
 				-- upvalues: var5 (write), p1 (ref), assetId (ref)
 				if var5 then
 					return
 				end
 				p1.contentProvider:PreloadAsync({ assetId.Uri })
 			end,
-			getAudioSource = function() --[[ line: 123 ]]
+			getAudioSource = function()
 				-- upvalues: audioPlayer (ref)
 				return audioPlayer
 			end,
 			audioStem = { stemId = p0.id, defaultVolume = volume },
-			play = function() --[[ line: 127 ]]
+			play = function()
 				-- upvalues: var5 (write), audioPlayer (ref)
 				if var5 then return end
 				audioPlayer.PlaybackSpeed = 1
@@ -57,14 +57,14 @@ return {
 					audioPlayer:Play()
 				end
 			end,
-			pause = function() --[[ line: 137 ]]
+			pause = function()
 				-- upvalues: var5 (write), audioPlayer (ref)
 				if var5 then
 					return
 				end
 				audioPlayer.PlaybackSpeed = 0
 			end,
-			seek = function(p2) --[[ line: 146 ]]
+			seek = function(p2)
 				-- upvalues: var5 (write), startTime (ref), audioPlayer (ref)
 				if var5 then return end
 				local var6 = startTime + p2
@@ -75,18 +75,18 @@ return {
 				end
 				audioPlayer.TimePosition = var6
 			end,
-			realignToRegionStart = function() --[[ line: 158 ]]
+			realignToRegionStart = function()
 				-- upvalues: var5 (write), audioPlayer (ref), startTime (ref)
 				if var5 then
 					return
 				end
 				audioPlayer.TimePosition = startTime
 			end,
-			getRegion = function() --[[ line: 165 ]]
+			getRegion = function()
 				-- upvalues: t (ref)
 				return t
 			end,
-			dispose = function() --[[ line: 169 ]]
+			dispose = function()
 				-- upvalues: var5 (write), audioPlayer (ref)
 				if var5 then
 					return

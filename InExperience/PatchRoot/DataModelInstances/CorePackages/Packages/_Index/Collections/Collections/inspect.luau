@@ -8,7 +8,7 @@ local formatArray = nil
 local formatObject = nil
 local getObjectTag = nil
 
-local function inspect(p0, p1) --[[ line: 51 ]]
+local function inspect(p0, p1)
 	-- upvalues: formatValue (write)
 	p1 = p1 or { depth = 2 }
 	local depth = p1.depth or 2
@@ -17,11 +17,11 @@ local function inspect(p0, p1) --[[ line: 51 ]]
 	return formatValue(p0, {}, p1)
 end
 
-local function _(p2, p3) --[[ line: 58 | named "isIndexKey" ]]
+local function _(p2, p3)
 	return type(p2) == "number" and (p2 <= p3 and (p2 >= 1 and math.floor(p2) == p2))
 end
 
-local _ = function(p4) --[[ line: 65 | named "getTableLength" ]]
+local _ = function(p4)
 	local var12 = 1
 	local var13 = rawget(p4, var12)
 	while var13 ~= nil do
@@ -31,18 +31,18 @@ local _ = function(p4) --[[ line: 65 | named "getTableLength" ]]
 	return var12 - 1
 end
 
-local function sortKeysForPrinting(p5, p6) --[[ line: 75 ]]
+local function sortKeysForPrinting(p5, p6)
 	local var14 = type(p5)
 	local var15 = type(p6)
 	
 	return if var14 == var15 and (var14 == "number" or var14 == "string") then p5 < p6 else var14 < var15
 end
 
-local _ = function(p7) --[[ line: 88 | named "rawpairs" ]]
+local _ = function(p7)
 	return next, p7, nil
 end
 
-local function getFragmentedKeys(p8) --[[ line: 92 ]]
+local function getFragmentedKeys(p8)
 	-- upvalues: sortKeysForPrinting (ref)
 	local t = {}
 	local var17 = 0
@@ -65,7 +65,7 @@ local function getFragmentedKeys(p8) --[[ line: 92 ]]
 	return t, var17, var20
 end
 
-formatValue = function(p9, p10, p11) --[[ line: 106 | named "formatValue" ]]
+formatValue = function(p9, p10, p11)
 	-- upvalues: httpService (ref), formatObjectValue (write)
 	local var21 = typeof(p9)
 	
@@ -86,7 +86,7 @@ formatValue = function(p9, p10, p11) --[[ line: 106 | named "formatValue" ]]
 	end
 end
 
-formatObjectValue = function(p12, p13, p14) --[[ line: 139 | named "formatObjectValue" ]]
+formatObjectValue = function(p12, p13, p14)
 	-- upvalues: formatValue (write), isArrayModule (ref), formatArray (write), formatObject (write)
 	if table.find(p13, p12) ~= nil then
 		return "[Circular]"
@@ -105,7 +105,7 @@ formatObjectValue = function(p12, p13, p14) --[[ line: 139 | named "formatObject
 	end
 end
 
-formatObject = function(p15, p16, p17) --[[ line: 164 | named "formatObject" ]]
+formatObject = function(p15, p16, p17)
 	-- upvalues: getFragmentedKeys (ref), getObjectTag (write), formatValue (write)
 	local var26 = ""
 	local var27 = getmetatable(p15)
@@ -136,7 +136,7 @@ formatObject = function(p15, p16, p17) --[[ line: 164 | named "formatObject" ]]
 	return var26 .. "{ " .. table.concat(t, ", ") .. " }"
 end
 
-formatArray = function(p18, p19, p20) --[[ line: 200 | named "formatArray" ]]
+formatArray = function(p18, p19, p20)
 	-- upvalues: formatValue (write)
 	local p18Count = #p18
 	
@@ -160,7 +160,7 @@ formatArray = function(p18, p19, p20) --[[ line: 200 | named "formatArray" ]]
 	return "[" .. table.concat(t, ", ") .. "]"
 end
 
-getObjectTag = function(_) --[[ line: 226 | named "getObjectTag" ]]
+getObjectTag = function(_)
 	return "Object"
 end
 

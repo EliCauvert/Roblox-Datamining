@@ -32,7 +32,7 @@ local t_1 = {
 	}
 }
 
-local function _(p0, p1) --[[ line: 44 | named "cornerProperties" ]]
+local function _(p0, p1)
 	local t = {}
 	
 	for i, v in p1 do
@@ -41,7 +41,7 @@ local function _(p0, p1) --[[ line: 44 | named "cornerProperties" ]]
 	return t
 end
 
-local _ = function(p2) --[[ line: 54 | named "zeroedBaseline" ]]
+local _ = function(p2)
 	-- upvalues: uDim (ref), list (ref)
 	local t = { pseudo = "UICorner", priority = 0, tag = p2 }
 	local t_1 = {}
@@ -54,7 +54,7 @@ local _ = function(p2) --[[ line: 54 | named "zeroedBaseline" ]]
 	return t
 end
 
-return function(p3, p4) --[[ line: 63 | named "cornerRules" ]]
+return function(p3, p4)
 	-- upvalues: list (ref), t_1 (ref), uDim (ref), t (ref)
 	local t_2 = {}
 	

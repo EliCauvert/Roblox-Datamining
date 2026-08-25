@@ -10,13 +10,13 @@ local getFFlagChatTranslationUIEnabledBubbleChatModule = require(expChat.Flags.g
 local getFFlagExpChatUseUpdatedMessageRenderedModule = require(expChat.Flags.getFFlagExpChatUseUpdatedMessageRendered)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 
-function bubbleChatList.getDerivedStateFromProps(p0, p1) --[[ line: 18 ]]
+function bubbleChatList.getDerivedStateFromProps(p0, p1)
 	-- upvalues: list (ref), getFFlagChatTranslationUIEnabledBubbleChatModule (ref), fFlagExpChatPresetChatEnabled (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref)
 	local t = {}
 	
 	if p1.bubbles then
 		for i, v in ipairs(p1.bubbles) do
-			if not list.findWhere(p0.messages, function(p2, _) --[[ line: 25 ]]
+			if not list.findWhere(p0.messages, function(p2, _)
 				-- upvalues: v (ref)
 				return p2.messageId == v.messageId
 			end) then
@@ -40,16 +40,16 @@ function bubbleChatList.getDerivedStateFromProps(p0, p1) --[[ line: 18 ]]
 	return { bubbles = t }
 end
 
-function bubbleChatList.init(p3, p4) --[[ line: 61 ]]
+function bubbleChatList.init(p3, p4)
 	-- upvalues: list (ref)
 	p3.state = {}
 	
 	if (not p4.messages or #p4.messages == 0) and p4.onLastBubbleFadeOut then
 		p4.onLastBubbleFadeOut()
 	end
-	function p3.onBubbleFadeOut(p5) --[[ line: 70 ]]
+	function p3.onBubbleFadeOut(p5)
 		-- upvalues: list (copy), p3 (ref)
-		local var9 = list.filter(p3.state.bubbles, function(p6) --[[ line: 71 ]]
+		local var9 = list.filter(p3.state.bubbles, function(p6)
 			-- upvalues: p5 (ref)
 			return p6.messageId ~= p5
 		end)
@@ -63,7 +63,7 @@ function bubbleChatList.init(p3, p4) --[[ line: 61 ]]
 	end
 end
 
-function bubbleChatList.render(p7) --[[ line: 86 ]]
+function bubbleChatList.render(p7)
 	-- upvalues: roactModule (ref), globalFlagsModule (ref), chatBubbleModule (ref), getFFlagChatTranslationUIEnabledBubbleChatModule (ref), fFlagExpChatPresetChatEnabled (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref)
 	local t = {}
 	local chatSettings = p7.props.chatSettings

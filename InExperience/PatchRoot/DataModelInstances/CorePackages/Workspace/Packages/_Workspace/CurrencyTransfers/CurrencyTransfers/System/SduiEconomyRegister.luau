@@ -2,9 +2,9 @@
 local reactModule = require(currencyTransfers.Parent.React)
 local registerCurrencyTransferSduiActionsModule = require(currencyTransfers.Actions.registerCurrencyTransferSduiActions)
 
-return reactModule.memo(function() --[[ line: 9 | named "SduiEconomyRegister" ]]
+return reactModule.memo(function()
 	-- upvalues: reactModule (ref), registerCurrencyTransferSduiActionsModule (ref)
-	reactModule.useEffect(function() --[[ line: 10 ]]
+	reactModule.useEffect(function()
 		-- upvalues: registerCurrencyTransferSduiActionsModule (copy)
 		registerCurrencyTransferSduiActionsModule()
 	end, {})

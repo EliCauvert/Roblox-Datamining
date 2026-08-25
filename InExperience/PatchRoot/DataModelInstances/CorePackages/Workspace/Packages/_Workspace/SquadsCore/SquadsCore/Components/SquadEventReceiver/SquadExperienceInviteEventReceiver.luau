@@ -45,20 +45,20 @@ local fFlagSquadLaunchExperienceMobileFix = sharedFlagsModule.FFlagSquadLaunchEx
 local fFlagEnablePrivatePartyAcceptInvite = sharedFlagsModule.FFlagEnablePrivatePartyAcceptInvite
 local toastNotificationsMessageId = messageBusService:GetMessageId("ToastNotifications", "userActionOnToastNotification")
 
-local _ = function(p0) --[[ line: 73 ]]
+local _ = function(p0)
 	-- upvalues: fFlagDebugSquadLogsEnabled (ref), httpService (ref)
 	return if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p0) elseif p0.StatusCode then p0.StatusCode else -1
 end
 
-return function(p1) --[[ line: 81 ]]
+return function(p1)
 	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), localStorageKey (ref), toastNotificationsProtocolModule (ref), useSelector (ref), useCurrentSquadParentChannelIdModule (ref), experienceInviteVoteType (ref), roduxSquadsModule (ref), networkingSquadsModule (ref), loggerModule (ref), fFlagDebugSquadLogsEnabled (ref), httpService (ref), eventNamesModule (ref), cryoModule (ref), squadCoordinationExperienceJoinExperimentation (ref), squadExperienceInviteTimeoutSeconds (ref), experienceInviteState (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteType (ref), squadLocationEnumModule (ref), fFlagSquadLaunchExperienceMobileFix (ref), gameParams (ref), experienceService (ref), squadExperienceInvitePollingIntervalSeconds (ref), setInterval (ref), clearInterval (ref), serializeTableModule (ref), squadToastActionsAndStatesModule (ref), squadToastTypeModule (ref), realtimeDeliveryModule (ref), notificationTypeEnum (ref), messageBusService (ref), toastNotificationsMessageId (ref), lifecycleEvents (ref), soundManager (ref), sounds (ref)
 	local var26 = useDispatch()
 	local var27 = tonumber(useLocalUserId()) or 0
 	local var28 = reactModule.useContext(squadExternalContractContextModule)
 	local var29, var30 = reactModule.useState("")
-	reactModule.useEffect(function() --[[ line: 89 ]]
+	reactModule.useEffect(function()
 		-- upvalues: appStorageService (copy), localStorageKey (copy), var30 (ref)
-		local ok, status = pcall(function() --[[ line: 91 ]]
+		local ok, status = pcall(function()
 			-- upvalues: appStorageService (copy), localStorageKey (copy)
 			return appStorageService:GetItem(localStorageKey.BrowserTrackerId)
 		end)
@@ -66,21 +66,21 @@ return function(p1) --[[ line: 81 ]]
 		if ok then
 			var30(status)
 		end
-		local itemWasSetConnection = appStorageService.ItemWasSet:Connect(function(p2, p3) --[[ line: 98 ]]
+		local itemWasSetConnection = appStorageService.ItemWasSet:Connect(function(p2, p3)
 			-- upvalues: localStorageKey (copy), var30 (copy)
 			if p2 == localStorageKey.BrowserTrackerId then
 				var30(p3)
 			end
 		end)
 		
-		return function() --[[ line: 103 ]]
+		return function()
 			-- upvalues: itemWasSetConnection (ref)
 			itemWasSetConnection:Disconnect()
 		end
 	end, { var30 })
 	local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
 	local var31 = reactModule.useRef(false)
-	local var32 = useSelector(reactModule.useCallback(function(p4) --[[ line: 111 ]]
+	local var32 = useSelector(reactModule.useCallback(function(p4)
 		return if p4.Squad and p4.Squad.Squad then p4.Squad.Squad.currentExperienceInvite else nil
 	end, {}))
 	local var33 = useCurrentSquadParentChannelIdModule()
@@ -90,7 +90,7 @@ return function(p1) --[[ line: 81 ]]
 	local var37 = if model then model.experienceDetail.gameInstanceId else ""
 	local var38 = if model then model.experienceDetail.placeId else 0
 	local var39 = if model then model.inviterId else 0
-	local var40, var41 = reactModule.useMemo(function() --[[ line: 131 ]]
+	local var40, var41 = reactModule.useMemo(function()
 		-- upvalues: var32 (ref), experienceInviteVoteType (copy), var27 (ref), var29 (ref)
 		if var32 and var32.model then
 			for i, v in ipairs(var32.model.votes) do
@@ -104,7 +104,7 @@ return function(p1) --[[ line: 81 ]]
 		end
 		return experienceInviteVoteType.Invalid, false
 	end, { var32, var27, var29 })
-	local var42 = reactModule.useCallback(function(p5, p6) --[[ line: 158 ]]
+	local var42 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: default (ref), var26 (ref), roduxSquadsModule (copy), var31 (ref)
 		if p6 then
 			default:dismissNotification(p5)
@@ -112,14 +112,14 @@ return function(p1) --[[ line: 81 ]]
 		var26(roduxSquadsModule.Actions.CurrentExperienceInviteDismissed(p5))
 		var31.current = false
 	end, { var26 })
-	local var43 = reactModule.useCallback(function(p7, p8) --[[ line: 169 ]]
+	local var43 = reactModule.useCallback(function(p7, p8)
 		-- upvalues: var26 (ref), networkingSquadsModule (copy), loggerModule (copy), fFlagDebugSquadLogsEnabled (copy), httpService (copy)
-		return var26(networkingSquadsModule.GetExperienceInvite.API({ experienceInviteId = p7, membershipEntityId = p8 })):catch(function(p9) --[[ line: 173 ]]
+		return var26(networkingSquadsModule.GetExperienceInvite.API({ experienceInviteId = p7, membershipEntityId = p8 })):catch(function(p9)
 			-- upvalues: loggerModule (copy), fFlagDebugSquadLogsEnabled (copy), httpService (copy), p7 (ref), p8 (ref)
 			loggerModule:warning("Error getting experience invite. Error: {}, ExperienceInviteId: {}, MembershipEntityId: {}", if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p9) elseif p9.StatusCode then p9.StatusCode else -1, p7, p8)
 		end)
 	end, { var26 })
-	local var44 = reactModule.useCallback(function(p10, p11, p12) --[[ line: 182 ]]
+	local var44 = reactModule.useCallback(function(p10, p11, p12)
 		-- upvalues: var33 (ref), var26 (ref), networkingSquadsModule (copy), var29 (ref), var28 (ref), eventNamesModule (copy), cryoModule (copy), httpService (copy), loggerModule (copy), fFlagDebugSquadLogsEnabled (copy)
 		local t = {
 			parentChannelId = var33,
@@ -132,13 +132,13 @@ return function(p1) --[[ line: 81 ]]
 			membershipEntityId = p12,
 			voteIdentifier = var29,
 			voteType = p11
-		})):andThen(function() --[[ line: 195 ]]
+		})):andThen(function()
 			-- upvalues: var28 (copy), eventNamesModule (copy), cryoModule (copy), t (ref)
 			var28.fireSquadAnalytics(eventNamesModule.SquadVoteApiCall, cryoModule.Dictionary.union(t, { isSuccess = true }))
-		end):catch(function(p13) --[[ line: 203 ]]
+		end):catch(function(p13)
 			-- upvalues: httpService (copy), var28 (copy), eventNamesModule (copy), cryoModule (copy), t (ref), loggerModule (copy), fFlagDebugSquadLogsEnabled (copy), p10 (ref), p12 (ref), p11 (ref)
 			local body = p13.Body
-			local ok, status = pcall(function() --[[ line: 205 ]]
+			local ok, status = pcall(function()
 				-- upvalues: httpService (copy), body (ref)
 				return httpService:JSONDecode(body)
 			end)
@@ -150,7 +150,7 @@ return function(p1) --[[ line: 81 ]]
 			loggerModule:warning("Error voting for experience invite. Error: {}, ExperienceInviteId: {}, MembershipEntityId: {}, VoteType: {}", if fFlagDebugSquadLogsEnabled then httpService:JSONEncode(p13) elseif p13.StatusCode then p13.StatusCode else -1, p10, p12, p11)
 		end)
 	end, { var26, var29 })
-	local var45 = reactModule.useCallback(function(p14) --[[ line: 230 ]]
+	local var45 = reactModule.useCallback(function(p14)
 		-- upvalues: var28 (ref), eventNamesModule (copy), var35 (ref), var37 (ref), var38 (ref), var39 (ref), var36 (ref), var33 (ref)
 		var28.fireSquadAnalytics(eventNamesModule.SquadExperienceInviteStateChange, {
 			experienceInviteId = var35,
@@ -165,21 +165,21 @@ return function(p1) --[[ line: 81 ]]
 		var37, var35, var39, var38, var36, var33,
 		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then var28.fireSquadAnalytics else nil
 	})
-	reactModule.useEffect(function() --[[ line: 255 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), squadExperienceInviteTimeoutSeconds (copy), var42 (ref)
-		local var48 = if var32 then task.delay(squadExperienceInviteTimeoutSeconds, function() --[[ line: 258 ]]
+		local var48 = if var32 then task.delay(squadExperienceInviteTimeoutSeconds, function()
 			-- upvalues: var42 (copy), var32 (copy)
 			var42(var32.notification.notificationId, true)
 		end) else nil
 		
-		return function() --[[ line: 262 ]]
+		return function()
 			-- upvalues: var48 (write)
 			if var48 then
 				task.cancel(var48)
 			end
 		end
 	end, { var42, var32 })
-	reactModule.useEffect(function() --[[ line: 270 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), var40 (ref), experienceInviteVoteType (copy), var31 (ref), experienceInviteState (copy), fFlagEnablePrivatePartyAcceptInvite (copy), experienceInviteType (copy), loggerModule (copy), var42 (ref), var28 (ref), squadLocationEnumModule (copy), fFlagSquadLaunchExperienceMobileFix (copy), squadCoordinationExperienceJoinExperimentation (copy), httpService (copy), var45 (ref), gameParams (copy), experienceService (copy)
 		if not var32 or var40 ~= experienceInviteVoteType.Accept or var31.current then return end
 		local model = var32.model
@@ -194,7 +194,7 @@ return function(p1) --[[ line: 81 ]]
 		end
 		var31.current = true
 		loggerModule:debug("Launching experience. GameInstanceId: {}, PlaceId: {}", gameInstanceId, placeId)
-		local delayedThread = task.delay(1, function() --[[ line: 297 ]]
+		local delayedThread = task.delay(1, function()
 			-- upvalues: var42 (copy), notification (ref), var28 (copy), squadLocationEnumModule (copy), fFlagSquadLaunchExperienceMobileFix (copy), squadCoordinationExperienceJoinExperimentation (copy), httpService (copy), var45 (copy), gameParams (copy), placeId (ref), gameInstanceId (ref), fFlagEnablePrivatePartyAcceptInvite (copy), var32 (copy), experienceInviteType (copy), experienceService (copy)
 			var42(notification.notificationId, true)
 			
@@ -225,7 +225,7 @@ return function(p1) --[[ line: 81 ]]
 			experienceService:LaunchExperience(var52, var50, nil)
 		end)
 		
-		return function() --[[ line: 332 ]]
+		return function()
 			-- upvalues: delayedThread (ref)
 			task.cancel(delayedThread)
 		end
@@ -236,27 +236,27 @@ return function(p1) --[[ line: 81 ]]
 		var40,
 		if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then var45 else nil
 	})
-	reactModule.useEffect(function() --[[ line: 348 ]]
+	reactModule.useEffect(function()
 		-- upvalues: squadExperienceInvitePollingIntervalSeconds (copy), var32 (ref), experienceInviteState (copy), setInterval (copy), var43 (ref), clearInterval (copy)
-		local var53 = if var32 and (not var32.model or var32.model.state == experienceInviteState.Active or var32.model.state == experienceInviteState.Reserving) then setInterval(function() --[[ line: 359 ]]
+		local var53 = if var32 and (not var32.model or var32.model.state == experienceInviteState.Active or var32.model.state == experienceInviteState.Reserving) then setInterval(function()
 			-- upvalues: var43 (copy), var32 (copy)
 			var43(var32.notification.experienceInviteId, var32.notification.membershipEntityId)
 		end, squadExperienceInvitePollingIntervalSeconds * 1000) else nil
 		
-		return function() --[[ line: 367 ]]
+		return function()
 			-- upvalues: var53 (write), clearInterval (copy)
 			if var53 then
 				clearInterval(var53)
 			end
 		end
 	end, { var32, var43 })
-	reactModule.useEffect(function() --[[ line: 376 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), p1 (ref), var41 (ref), var42 (ref)
 		if var32 and (p1.currentSquadId ~= var32.notification.membershipEntityId or var41) then
 			var42(var32.notification.notificationId, true)
 		end
 	end, { var32, var42, p1.currentSquadId, var41 })
-	reactModule.useEffect(function() --[[ line: 386 ]]
+	reactModule.useEffect(function()
 		-- upvalues: experienceInviteState (copy), var36 (ref), squadCoordinationExperienceJoinExperimentation (copy), var45 (ref)
 		if experienceInviteState[var36] then
 			if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
@@ -272,7 +272,7 @@ return function(p1) --[[ line: 81 ]]
 			end
 		end
 	end, { var36, var45 })
-	reactModule.useEffect(function() --[[ line: 404 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var32 (ref), loggerModule (copy), serializeTableModule (copy), var27 (ref), experienceInviteState (copy), default (ref), var42 (ref), var40 (ref), experienceInviteVoteType (copy), var28 (ref), eventNamesModule (copy), var33 (ref), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy)
 		if not var32 or not var32.model then return end
 		loggerModule:debug("Current experience invite updated: {}", serializeTableModule(var32.model))
@@ -355,14 +355,14 @@ return function(p1) --[[ line: 81 ]]
 	end, {
 		var32, var33, var42, var27, var28.fireSquadAnalytics, var40
 	})
-	realtimeDeliveryModule.useRealtimeNamespace("ExperienceInviteUpdate", function(p15) --[[ line: 496 ]]
+	realtimeDeliveryModule.useRealtimeNamespace("ExperienceInviteUpdate", function(p15)
 		-- upvalues: loggerModule (copy), serializeTableModule (copy), var26 (ref), roduxSquadsModule (copy)
 		loggerModule:debug("Experience invite RTN received. Detail: {}", serializeTableModule(p15))
 		var26(roduxSquadsModule.Actions.CurrentExperienceInviteUpdated(p15))
 	end, { var26 })
-	reactModule.useEffect(function() --[[ line: 508 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (ref), var32 (ref), var40 (ref), experienceInviteVoteType (copy), var42 (ref), experienceInviteState (copy), var28 (ref), eventNamesModule (copy), var33 (ref), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var44 (ref)
-		local var54 = default:listenToDismissNotification(function(p16) --[[ line: 510 ]]
+		local var54 = default:listenToDismissNotification(function(p16)
 			-- upvalues: var32 (copy), var40 (copy), experienceInviteVoteType (copy), var42 (copy), experienceInviteState (copy), var28 (copy), eventNamesModule (copy), var33 (copy), squadToastActionsAndStatesModule (copy), squadToastTypeModule (copy), var44 (copy)
 			if var32 and var32.notification.notificationId == p16.notificationId then
 				if var40 ~= experienceInviteVoteType.Accept then
@@ -380,7 +380,7 @@ return function(p1) --[[ line: 81 ]]
 			end
 		end)
 		
-		return function() --[[ line: 551 ]]
+		return function()
 			-- upvalues: var54 (ref)
 			if var54 then
 				var54:Disconnect()
@@ -389,9 +389,9 @@ return function(p1) --[[ line: 81 ]]
 	end, {
 		var32, var33, var42, var26, var28.fireSquadAnalytics, var40, var44
 	})
-	reactModule.useEffect(function() --[[ line: 567 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (ref), var27 (ref), notificationTypeEnum (copy), httpService (copy), var26 (ref), roduxSquadsModule (copy)
-		local var55 = default:listenToDisplayNotification(function(p17) --[[ line: 569 ]]
+		local var55 = default:listenToDisplayNotification(function(p17)
 			-- upvalues: var27 (copy), notificationTypeEnum (copy), httpService (copy), var26 (copy), roduxSquadsModule (copy)
 			if not p17 then return end
 			if var27 <= 0 then return end
@@ -401,22 +401,22 @@ return function(p1) --[[ line: 81 ]]
 			end
 		end)
 		
-		return function() --[[ line: 590 ]]
+		return function()
 			-- upvalues: var55 (ref)
 			if var55 then
 				var55:Disconnect()
 			end
 		end
 	end, { var27 })
-	reactModule.useEffect(function() --[[ line: 599 ]]
+	reactModule.useEffect(function()
 		-- upvalues: messageBusService (copy), toastNotificationsMessageId (copy), notificationTypeEnum (copy), var32 (ref), httpService (copy), var26 (ref), roduxSquadsModule (copy), default (ref), experienceInviteState (copy), var40 (ref), experienceInviteVoteType (copy)
-		local var57 = messageBusService:Subscribe(toastNotificationsMessageId, function(p18) --[[ line: 602 ]]
+		local var57 = messageBusService:Subscribe(toastNotificationsMessageId, function(p18)
 			-- upvalues: notificationTypeEnum (copy), var32 (copy), httpService (copy), var26 (copy), roduxSquadsModule (copy), default (copy), experienceInviteState (copy), var40 (copy), experienceInviteVoteType (copy)
 			if p18.notificationType == notificationTypeEnum.SquadExperienceInvitation and p18.userActionType == "timerElapsed" then
 				if not var32 then
 					local parameters = httpService:JSONDecode(p18.parameters)
 					var26(roduxSquadsModule.Actions.CurrentExperienceInviteReceived(parameters.experienceInviteId, parameters.membershipEntityId, p18.notificationId, parameters.isInviter))
-					var26(function() --[[ line: 617 ]]
+					var26(function()
 						-- upvalues: default (copy), p18 (ref)
 						default:updateNotification(p18.notificationId, "expired")
 					end)
@@ -431,16 +431,16 @@ return function(p1) --[[ line: 81 ]]
 			end
 		end, false, true)
 		
-		return function() --[[ line: 647 ]]
+		return function()
 			-- upvalues: var57 (ref)
 			if var57 then
 				var57:Disconnect()
 			end
 		end
 	end, { var32, var40, var44 })
-	reactModule.useEffect(function() --[[ line: 655 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), var33 (ref), squadToastTypeModule (copy), var32 (ref), var26 (ref), roduxSquadsModule (copy), var28 (ref), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var44 (ref), experienceInviteVoteType (copy)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadExperienceInvitation, function(p19) --[[ line: 659 ]]
+		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadExperienceInvitation, function(p19)
 			-- upvalues: httpService (copy), var33 (copy), squadToastTypeModule (copy), var32 (copy), var26 (copy), roduxSquadsModule (copy), var28 (copy), eventNamesModule (copy), cryoModule (copy), squadToastActionsAndStatesModule (copy), var44 (copy), experienceInviteVoteType (copy)
 			if p19 and p19.userActionType == "click" and (p19.visualItem and p19.visualItem.actionEventParams) then
 				local actionEventParams = httpService:JSONDecode(p19.visualItem.actionEventParams)
@@ -476,7 +476,7 @@ return function(p1) --[[ line: 81 ]]
 			end
 		end)
 		
-		return function() --[[ line: 727 ]]
+		return function()
 			-- upvalues: userAction (ref)
 			userAction()
 		end
@@ -487,9 +487,9 @@ return function(p1) --[[ line: 81 ]]
 		var28.fireSquadAnalytics,
 		var44
 	})
-	reactModule.useEffect(function() --[[ line: 739 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), var28 (ref), eventNamesModule (copy)
-		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadExperienceInvitation, function(p20) --[[ line: 743 ]]
+		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadExperienceInvitation, function(p20)
 			-- upvalues: httpService (copy), var28 (copy), eventNamesModule (copy)
 			local actionEventParams = p20 and (p20.state and (p20.state.visualItems and (p20.state.visualItems.button and (p20.state.visualItems.button[1] and p20.state.visualItems.button[1].actionEventParams))))
 			
@@ -502,14 +502,14 @@ return function(p1) --[[ line: 81 ]]
 			end
 		end)
 		
-		return function() --[[ line: 763 ]]
+		return function()
 			-- upvalues: display (ref)
 			display()
 		end
 	end, { var28.fireSquadAnalytics })
-	reactModule.useEffect(function() --[[ line: 769 ]]
+	reactModule.useEffect(function()
 		-- upvalues: soundManager (copy), sounds (copy), lifecycleEvents (copy), notificationTypeEnum (copy)
-		local var64 = function(p21) --[[ line: 770 ]]
+		local var64 = function(p21)
 			-- upvalues: soundManager (copy), sounds (copy)
 			if p21.currentState == "invited" then
 				soundManager:PlaySound(sounds.PartyToast.Name)
@@ -519,7 +519,7 @@ return function(p1) --[[ line: 81 ]]
 		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadExperienceInvitation, var64)
 		local update = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Update, notificationTypeEnum.SquadExperienceInvitation, var64)
 		
-		return function() --[[ line: 788 ]]
+		return function()
 			-- upvalues: display (ref), update (ref)
 			display()
 			update()

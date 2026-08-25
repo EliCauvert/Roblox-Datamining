@@ -13,7 +13,7 @@ local phaseModule = require(onPlatformSurveys.Enums.Phase)
 local inlineSurveyReducerModule = require(onPlatformSurveys.Hooks.inlineSurveyReducer)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-local function _() --[[ line: 46 | named "releaseKeyboardFocus" ]]
+local function _()
 	-- upvalues: userInputService (ref)
 	local focusedTextBox = userInputService:GetFocusedTextBox()
 	
@@ -22,7 +22,7 @@ local function _() --[[ line: 46 | named "releaseKeyboardFocus" ]]
 	end
 end
 
-return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), inlineSurveyReducerModule (ref), inlineSurveyApiModule (ref), inlineSurveyHelpersModule (ref), fFlagInlineSurveyBranching (ref), httpService (ref), fFlagInlineSurveyEnhancements (ref), userInputService (ref), phaseModule (ref), fFlagInlineSurveyPartialResponse (ref)
 	local networkImpl = p0.networkImpl
 	local eventType = p0.eventType
@@ -38,21 +38,21 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 	local var17 = reactModule.useRef(p0.onEligible)
 	var17.current = p0.onEligible
 	local var18 = reactModule.useRef(false)
-	local var19 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var13 (ref), var18 (ref), var11 (ref), inlineSurveyApiModule (copy), networkImpl (ref), eventType (ref)
 		local var28 = var12.current + 1
 		var12.current = var28
 		var13.current = false
 		var18.current = false
 		var11({ type = "fetchRequested" })
-		inlineSurveyApiModule.fetchInlineSurvey(networkImpl, eventType):andThen(function(p2) --[[ line: 82 ]]
+		inlineSurveyApiModule.fetchInlineSurvey(networkImpl, eventType):andThen(function(p2)
 			-- upvalues: var12 (copy), var28 (ref), var11 (copy)
 			if var12.current == var28 then
 				var11({ type = "questionsReceived", response = p2 })
 				
 				return
 			end
-		end):catch(function(p1) --[[ line: 88 ]]
+		end):catch(function(p1)
 			-- upvalues: var12 (copy), var28 (ref), var11 (copy)
 			if var12.current == var28 then
 				warn("Inline survey fetch failed:", p1)
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 			end
 		end)
 	end, { networkImpl, eventType })
-	local var20 = reactModule.useCallback(function() --[[ line: 97 ]]
+	local var20 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), var13 (ref), inlineSurveyHelpersModule (copy), fFlagInlineSurveyBranching (copy), httpService (copy), var11 (ref), var12 (ref), inlineSurveyApiModule (copy), networkImpl (ref)
 		local current = var14.current
 		
@@ -87,7 +87,7 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 		var12.current = var33
 		var13.current = true
 		var11({ type = "submitStarted", idempotencyKey = idempotencyKey })
-		inlineSurveyApiModule.submitSurveyResponse(networkImpl, var32):andThen(function(_) --[[ line: 131 ]]
+		inlineSurveyApiModule.submitSurveyResponse(networkImpl, var32):andThen(function(_)
 			-- upvalues: var12 (copy), var33 (ref), var13 (copy), var11 (copy)
 			if var12.current == var33 then
 				var13.current = false
@@ -95,7 +95,7 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 				
 				return
 			end
-		end):catch(function(p3) --[[ line: 138 ]]
+		end):catch(function(p3)
 			-- upvalues: var12 (copy), var33 (ref), var13 (copy), var11 (copy)
 			if var12.current == var33 then
 				var13.current = false
@@ -106,7 +106,7 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 			end
 		end)
 	end, { networkImpl })
-	local var21 = reactModule.useCallback(function() --[[ line: 149 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), var13 (ref), fFlagInlineSurveyEnhancements (copy), var20 (ref), inlineSurveyHelpersModule (copy), userInputService (copy), var11 (ref)
 		local current = var14.current
 		
@@ -128,7 +128,7 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 		end
 		var11({ type = "next" })
 	end, { var20 })
-	local var22 = reactModule.useCallback(function() --[[ line: 174 ]]
+	local var22 = reactModule.useCallback(function()
 		-- upvalues: var14 (ref), var20 (ref), var19 (ref)
 		if var14.current.errorType == "submit" then
 			var20()
@@ -137,11 +137,11 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 		end
 		var19()
 	end, { var20, var19 })
-	local var23 = reactModule.useCallback(function(p4) --[[ line: 182 ]]
+	local var23 = reactModule.useCallback(function(p4)
 		-- upvalues: var11 (ref)
 		var11({ type = "setAnswer", answer = p4 })
 	end, {})
-	local var24 = reactModule.useCallback(function() --[[ line: 187 ]]
+	local var24 = reactModule.useCallback(function()
 		-- upvalues: var13 (ref), var14 (ref), phaseModule (copy), httpService (copy), inlineSurveyHelpersModule (copy), inlineSurveyApiModule (copy), networkImpl (ref)
 		if var13.current then return end
 		local current = var14.current
@@ -153,11 +153,11 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 		if #var35.answers == 0 then
 			return
 		end
-		inlineSurveyApiModule.submitSurveyResponse(networkImpl, var35):catch(function(p5) --[[ line: 207 ]]
+		inlineSurveyApiModule.submitSurveyResponse(networkImpl, var35):catch(function(p5)
 			warn("Inline survey partial submit failed:", p5)
 		end)
 	end, { networkImpl })
-	local var25 = reactModule.useCallback(function() --[[ line: 212 ]]
+	local var25 = reactModule.useCallback(function()
 		-- upvalues: fFlagInlineSurveyEnhancements (copy), userInputService (copy), fFlagInlineSurveyPartialResponse (copy), var24 (ref), var12 (ref), var13 (ref), var11 (ref)
 		if fFlagInlineSurveyEnhancements then
 			local focusedTextBox = userInputService:GetFocusedTextBox()
@@ -173,26 +173,26 @@ return function(p0) --[[ line: 53 | named "useInlineSurveyFlow" ]]
 		var13.current = false
 		var11({ type = "dismissed" })
 	end, if fFlagInlineSurveyPartialResponse then { var24 } else {})
-	local var26 = reactModule.useCallback(function() --[[ line: 224 ]]
+	local var26 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref)
 		var11({ type = "inviteAccepted" })
 	end, {})
-	local var27 = reactModule.useCallback(function() --[[ line: 228 ]]
+	local var27 = reactModule.useCallback(function()
 		-- upvalues: var12 (ref), var13 (ref), var11 (ref)
 		var12.current += 1
 		var13.current = false
 		var11({ type = "inviteDeclined" })
 	end, {})
-	reactModule.useEffect(function() --[[ line: 235 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var12 (ref)
 		var19()
 		
-		return function() --[[ line: 237 ]]
+		return function()
 			-- upvalues: var12 (copy)
 			var12.current += 1
 		end
 	end, { var19 })
-	reactModule.useEffect(function() --[[ line: 242 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var10 (ref), phaseModule (copy), var16 (ref), var15 (ref), var18 (ref), var17 (ref)
 		if var10.phase == phaseModule.Completed and var16.current then
 			var16.current()

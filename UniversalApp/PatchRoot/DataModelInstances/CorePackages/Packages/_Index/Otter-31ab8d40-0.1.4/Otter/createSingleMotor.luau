@@ -3,7 +3,7 @@ local createSignalModule = require(script.Parent.createSignal)
 local t = { prototype = {} }
 t.__index = t.prototype
 
-local function createSingleMotor(p0) --[[ line: 9 ]]
+local function createSingleMotor(p0)
 	-- upvalues: createSignalModule (ref), t (ref)
 	assert(typeof(p0) == "number")
 	local t_1 = {
@@ -18,26 +18,26 @@ local function createSingleMotor(p0) --[[ line: 9 ]]
 	return t_1
 end
 
-function t.prototype.start(p1) --[[ line: 28 ]]
+function t.prototype.start(p1)
 	-- upvalues: runService (ref)
 	if p1.__running then
 		return
 	end
-	p1.__connection = runService.Heartbeat:Connect(function(p2) --[[ line: 33 ]]
+	p1.__connection = runService.Heartbeat:Connect(function(p2)
 		-- upvalues: p1 (ref)
 		p1:step(p2)
 	end)
 	p1.__running = true
 end
 
-function t.prototype.stop(p3) --[[ line: 40 ]]
+function t.prototype.stop(p3)
 	if p3.__connection ~= nil then
 		p3.__connection:Disconnect()
 	end
 	p3.__running = false
 end
 
-function t.prototype.step(p4, p5) --[[ line: 48 ]]
+function t.prototype.step(p4, p5)
 	assert(typeof(p5) == "number")
 	
 	if p4.__state.complete then return end
@@ -55,25 +55,25 @@ function t.prototype.step(p4, p5) --[[ line: 48 ]]
 	end
 end
 
-function t.prototype.setGoal(value, p6) --[[ line: 73 ]]
+function t.prototype.setGoal(value, p6)
 	value.__goal = p6
 	value.__state.complete = false
 	value:start()
 end
 
-function t.prototype.onStep(p7, p8) --[[ line: 79 ]]
+function t.prototype.onStep(p7, p8)
 	assert(typeof(p8) == "function")
 	
 	return p7.__onStep:subscribe(p8)
 end
 
-function t.prototype.onComplete(p9, p10) --[[ line: 85 ]]
+function t.prototype.onComplete(p9, p10)
 	assert(typeof(p10) == "function")
 	
 	return p9.__onComplete:subscribe(p10)
 end
 
-function t.prototype.destroy(p11) --[[ line: 91 ]]
+function t.prototype.destroy(p11)
 	p11:stop()
 end
 

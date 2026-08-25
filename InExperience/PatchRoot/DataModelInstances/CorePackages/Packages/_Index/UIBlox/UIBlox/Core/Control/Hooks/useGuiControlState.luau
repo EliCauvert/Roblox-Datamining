@@ -6,30 +6,30 @@ local controlStateModule = require(parent.Core.Control.Enum.ControlState)
 local controlStateEventModule = require(parent.Core.Control.Enum.ControlStateEvent)
 local createGuiControlStateTableModule = require(parent.Core.Control.createGuiControlStateTable)
 
-return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), controlStateModule (ref), createGuiControlStateTableModule (ref), controlStateEventModule (ref), useForwardRef (ref)
 	local var4 = reactModule.useRef(controlStateModule.Initialize)
 	local var5 = reactModule.useRef(p2)
 	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useCallback(function(p3, p4) --[[ line: 35 ]]
+	local var7 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var4 (ref), p1 (ref)
 		var4.current = p4
 		p1(p3, p4)
 	end, { p1 })
-	local var8 = reactModule.useMemo(function() --[[ line: 40 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: createGuiControlStateTableModule (copy), var7 (ref)
 		return createGuiControlStateTableModule(var7)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 44 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var8 (ref), var7 (ref)
 		var8:onStateChange(var7)
 	end, { var7 })
-	local var9 = reactModule.useCallback(function(p5) --[[ line: 48 ]]
+	local var9 = reactModule.useCallback(function(p5)
 		-- upvalues: var5 (ref), var8 (ref), controlStateEventModule (copy), var6 (ref)
 		local t = {}
 		
 		if p5 then
-			table.insert(t, p5.InputBegan:Connect(function(p6) --[[ line: 66 ]]
+			table.insert(t, p5.InputBegan:Connect(function(p6)
 				-- upvalues: var5 (copy), var8 (copy), controlStateEventModule (copy)
 				if not var5.current then
 					return nil
@@ -37,7 +37,7 @@ return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
 					var8.events[controlStateEventModule.PrimaryPressed]()
 				end
 			end))
-			table.insert(t, p5.InputEnded:Connect(function(p7) --[[ line: 82 ]]
+			table.insert(t, p5.InputEnded:Connect(function(p7)
 				-- upvalues: var5 (copy), var8 (copy), controlStateEventModule (copy)
 				if not var5.current then
 					return nil
@@ -49,7 +49,7 @@ return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
 					var8.events[controlStateEventModule.PrimaryReleased]()
 				end
 			end))
-			table.insert(t, p5.SelectionGained:Connect(function() --[[ line: 101 ]]
+			table.insert(t, p5.SelectionGained:Connect(function()
 				-- upvalues: var5 (copy), var8 (copy), controlStateEventModule (copy)
 				if var5.current then
 					var8.events[controlStateEventModule.SelectionGained]()
@@ -58,7 +58,7 @@ return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
 				end
 				return nil
 			end))
-			table.insert(t, p5.SelectionLost:Connect(function() --[[ line: 110 ]]
+			table.insert(t, p5.SelectionLost:Connect(function()
 				-- upvalues: var5 (copy), var8 (copy), controlStateEventModule (copy)
 				if var5.current then
 					var8.events[controlStateEventModule.SelectionLost]()
@@ -67,7 +67,7 @@ return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
 				end
 				return nil
 			end))
-			table.insert(t, p5.MouseEnter:Connect(function() --[[ line: 121 ]]
+			table.insert(t, p5.MouseEnter:Connect(function()
 				-- upvalues: var5 (copy), var6 (copy), var8 (copy), controlStateEventModule (copy)
 				if var5.current then
 					var6.current = true
@@ -77,7 +77,7 @@ return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
 				end
 				return nil
 			end))
-			table.insert(t, p5.MouseLeave:Connect(function() --[[ line: 131 ]]
+			table.insert(t, p5.MouseLeave:Connect(function()
 				-- upvalues: var5 (copy), var6 (copy), var8 (copy), controlStateEventModule (copy)
 				if var5.current then
 					var6.current = false
@@ -88,14 +88,14 @@ return function(p0, p1, p2) --[[ line: 20 | named "useGuiControlState" ]]
 				return nil
 			end))
 		end
-		return function() --[[ line: 141 ]]
+		return function()
 			-- upvalues: t (ref)
 			for i, v in ipairs(t) do
 				v:Disconnect()
 			end
 		end
 	end, { var8, var6 })
-	reactModule.useEffect(function() --[[ line: 148 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), p2 (ref)
 		var5.current = p2
 	end, { p2 })

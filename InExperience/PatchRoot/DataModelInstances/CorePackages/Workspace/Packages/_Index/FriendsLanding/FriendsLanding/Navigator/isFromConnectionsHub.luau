@@ -1,6 +1,6 @@
 ﻿local appPage = require(script:FindFirstAncestor("FriendsLanding").Parent.RobloxAppEnums).AppPage
 
-return function(p0) --[[ line: 7 | named "getLuaAppsNavigator" ]]
+return function(p0)
 	-- upvalues: appPage (ref)
 	local var0 = p0._dangerouslyGetParent()
 	

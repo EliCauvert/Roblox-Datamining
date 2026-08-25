@@ -1,21 +1,21 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LuauPolyfill)
 local t = {}
 
-local function _(p0) --[[ line: 19 | named "replaceNil" ]]
+local function _(p0)
 	-- upvalues: t (ref)
 	return if p0 == nil then t else p0
 end
 
-local _ = function() --[[ line: 26 | named "newWeakMap" ]]
+local _ = function()
 	return setmetatable({}, { __mode = "kv" })
 end
 
 return {
-	memoize3 = function(p1) --[[ line: 33 ]]
+	memoize3 = function(p1)
 		-- upvalues: t (ref)
 		local var1 = nil
 		
-		return function(p2, p3, p4) --[[ line: 36 ]]
+		return function(p2, p3, p4)
 			-- upvalues: t (copy), var1 (write), p1 (ref)
 			local var2 = if p2 == nil then t else p2
 			local var3 = if p3 == nil then t else p3

@@ -2,7 +2,7 @@
 local roactNavigationModule = require(appChat.Parent.RoactNavigation)
 local enumScreensModule = require(appChat.EnumScreens)
 
-return function(p0, p1, p2) --[[ line: 9 ]]
+return function(p0, p1, p2)
 	-- upvalues: enumScreensModule (ref), roactNavigationModule (ref)
 	p0.navigate(enumScreensModule.ChatLanding, nil, roactNavigationModule.StackActions.reset({
 		index = 2,

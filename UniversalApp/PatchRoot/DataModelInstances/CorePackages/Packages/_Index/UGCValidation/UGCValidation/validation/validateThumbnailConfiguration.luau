@@ -4,7 +4,7 @@ local parent = script.Parent.Parent
 local _ = require(parent.util.Types)
 local analyticsModule = require(parent.Analytics)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 14 | named "validateThumbnailConfiguration" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: analyticsModule (ref), UGCValidationAddThumbnailFrustumCheckingv2 (ref), UGCValidationService (ref)
 	local thumbnailConfiguration = p0:FindFirstChild("ThumbnailConfiguration")
 	

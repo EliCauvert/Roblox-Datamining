@@ -3,7 +3,7 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref)
 	local contextualInformation = (useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}).contextualInformation
 	local context = contextualInformation and contextualInformation.context

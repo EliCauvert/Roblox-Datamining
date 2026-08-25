@@ -12,7 +12,7 @@ local t = {
 	[deviceType.VR] = detailsPageTemplateModule
 }
 
-return function(p0) --[[ line: 32 | named "DetailsPageTemplateSelector" ]]
+return function(p0)
 	-- upvalues: t (ref), detailsPageTemplateModule (ref), reactModule (ref)
 	return reactModule.createElement(t[p0.deviceType] or detailsPageTemplateModule, p0.detailsPageProps)
 end

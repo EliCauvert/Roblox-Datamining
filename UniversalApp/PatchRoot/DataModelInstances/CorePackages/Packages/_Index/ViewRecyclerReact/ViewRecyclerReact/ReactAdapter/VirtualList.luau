@@ -17,16 +17,16 @@ local useVirtualListRuntimeModule = require(viewRecyclerReact.ReactAdapter.Priva
 local createElement = reactModule.createElement
 
 return {
-	create = function(p0) --[[ line: 113 ]]
+	create = function(p0)
 		-- upvalues: recyclingScopeModule (ref), createElement (ref), virtualListShellModule (ref), useVirtualListRuntimeModule (ref), useReconciledDataSourceModule (ref), reactModule (ref), recyclingScopeContextModule (ref), recyclableViewRegistryModule (ref)
 		local var9 = recyclingScopeModule.create(p0)
 		
-		local function VirtualListRenderer(p1) --[[ line: 116 ]]
+		local function VirtualListRenderer(p1)
 			-- upvalues: createElement (copy), virtualListShellModule (copy), useVirtualListRuntimeModule (copy)
 			return createElement(virtualListShellModule, useVirtualListRuntimeModule(p1))
 		end
 		
-		local function DeclarativeVirtualList(p2) --[[ line: 120 ]]
+		local function DeclarativeVirtualList(p2)
 			-- upvalues: useReconciledDataSourceModule (copy), createElement (copy), VirtualListRenderer (ref)
 			local var13 = useReconciledDataSourceModule(p2.data.items, p2.data.getItemKey)
 			local cloned = table.clone(p2)
@@ -36,7 +36,7 @@ return {
 			return createElement(VirtualListRenderer, cloned)
 		end
 		
-		local function DataSourceVirtualList(p3) --[[ line: 128 ]]
+		local function DataSourceVirtualList(p3)
 			-- upvalues: createElement (copy), VirtualListRenderer (ref)
 			local cloned = table.clone(p3)
 			cloned.dataSource = p3.data
@@ -45,7 +45,7 @@ return {
 			return createElement(VirtualListRenderer, cloned)
 		end
 		
-		return function(p4) --[[ line: 135 | named "VirtualList" ]]
+		return function(p4)
 			-- upvalues: reactModule (copy), recyclingScopeContextModule (copy), recyclableViewRegistryModule (copy), createElement (copy), DataSourceVirtualList (ref), DeclarativeVirtualList (ref), var9 (ref)
 			local var16 = reactModule.useContext(recyclingScopeContextModule)
 			local data = p4.data

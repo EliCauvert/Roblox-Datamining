@@ -10,16 +10,16 @@ introScroll.validateProps = tModule.strictInterface({
 	updateCanvasPosition = tModule.callback
 })
 
-function introScroll.init(p0) --[[ line: 25 ]]
+function introScroll.init(p0)
 	-- upvalues: otterModule (ref)
 	p0.motor = otterModule.createSingleMotor(0)
-	p0.motor:onStep(function(p1) --[[ line: 27 ]]
+	p0.motor:onStep(function(p1)
 		-- upvalues: p0 (ref)
 		p0.props.updateCanvasPosition(Vector2.new(p1, 0))
 	end)
 end
 
-function introScroll.didUpdate(p2, p3, _) --[[ line: 32 ]]
+function introScroll.didUpdate(p2, p3, _)
 	-- upvalues: otterModule (ref)
 	if p2.props.childWidgetIndex and p2.props.childWidgetIndex ~= p3.childWidgetIndex then
 		local current = p2.props.scrollingFrameRef.current
@@ -29,16 +29,16 @@ function introScroll.didUpdate(p2, p3, _) --[[ line: 32 ]]
 	end
 end
 
-function introScroll.getGoal(_, _) --[[ line: 48 ]]
+function introScroll.getGoal(_, _)
 	-- upvalues: otterModule (ref), t (ref)
 	return otterModule.spring(0, t)
 end
 
-function introScroll.render(_) --[[ line: 52 ]]
+function introScroll.render(_)
 	return nil
 end
 
-function introScroll.willUnmount(p4) --[[ line: 56 ]]
+function introScroll.willUnmount(p4)
 	if p4.motor then
 		p4.motor:destroy()
 		p4.motor = nil

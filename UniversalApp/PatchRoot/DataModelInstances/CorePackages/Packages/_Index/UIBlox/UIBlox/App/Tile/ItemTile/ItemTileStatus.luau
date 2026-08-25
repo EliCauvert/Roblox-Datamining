@@ -17,7 +17,7 @@ itemTileStatus.validateProps = tModule.strictInterface({
 	statusStyle = itemTileEnumsModule.StatusStyle.isEnumValue
 })
 
-local function getStyle(p0, p1) --[[ line: 31 ]]
+local function getStyle(p0, p1)
 	-- upvalues: itemTileEnumsModule (ref)
 	return if p1 == itemTileEnumsModule.StatusStyle.Info then {
 		Background = p0.SystemPrimaryDefault,
@@ -28,9 +28,9 @@ local function getStyle(p0, p1) --[[ line: 31 ]]
 	}
 end
 
-function itemTileStatus.render(p2) --[[ line: 50 ]]
+function itemTileStatus.render(p2)
 	-- upvalues: withStyleModule (ref), getTextSizeModule (ref), vector2 (ref), getStyle (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), UIBloxConfigModule (ref), vector2_1 (ref)
-	return withStyleModule(function(p3) --[[ line: 51 ]]
+	return withStyleModule(function(p3)
 		-- upvalues: p2 (ref), getTextSizeModule (copy), vector2 (copy), getStyle (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), UIBloxConfigModule (copy), vector2_1 (copy)
 		local theme = p3.Theme
 		local font = p3.Font

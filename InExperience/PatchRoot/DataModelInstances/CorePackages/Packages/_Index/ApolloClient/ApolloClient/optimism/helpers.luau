@@ -4,19 +4,19 @@ local _ = require(script.Parent.helpers_types)
 
 return {
 	hasOwnProperty = require(parent.luaUtils.hasOwnProperty),
-	toArray = function(p0) --[[ line: 23 ]]
+	toArray = function(p0)
 		if p0._array then
 			return table.clone(p0._array)
 		end
 		local t = {}
-		p0:forEach(function(p1) --[[ line: 31 ]]
+		p0:forEach(function(p1)
 			-- upvalues: t (ref)
 			table.insert(t, p1)
 		end)
 		
 		return t
 	end,
-	maybeUnsubscribe = function(p2) --[[ line: 41 ]]
+	maybeUnsubscribe = function(p2)
 		local unsubscribe = p2.unsubscribe
 		
 		if type(unsubscribe) == "function" then

@@ -5,14 +5,14 @@ local isPointInsideBounds = pressCaptureUtilsModule.isPointInsideBounds
 local getInputPosition = pressCaptureUtilsModule.getInputPosition
 local isPressInput = pressCaptureUtilsModule.isPressInput
 
-local function _(p0) --[[ line: 21 | named "disconnectGlobalInputEnded" ]]
+local function _(p0)
 	if p0.inputEndedConnection then
 		p0.inputEndedConnection:Disconnect()
 		p0.inputEndedConnection = nil
 	end
 end
 
-local _ = function(p1) --[[ line: 28 | named "disconnectInstanceListeners" ]]
+local _ = function(p1)
 	if p1.destroyingConnection then
 		p1.destroyingConnection:Disconnect()
 		p1.destroyingConnection = nil
@@ -23,7 +23,7 @@ local _ = function(p1) --[[ line: 28 | named "disconnectInstanceListeners" ]]
 	end
 end
 
-local _ = function(p2) --[[ line: 39 | named "clearPressTracking" ]]
+local _ = function(p2)
 	p2.isPressed = false
 	p2.boundsPosition = nil
 	p2.boundsSize = nil
@@ -38,7 +38,7 @@ local _ = function(p2) --[[ line: 39 | named "clearPressTracking" ]]
 	end
 end
 
-local _ = function(p3) --[[ line: 46 | named "disconnectAllPressCapture" ]]
+local _ = function(p3)
 	p3.isPressed = false
 	p3.boundsPosition = nil
 	p3.boundsSize = nil
@@ -57,7 +57,7 @@ local _ = function(p3) --[[ line: 46 | named "disconnectAllPressCapture" ]]
 	end
 end
 
-return function(p4) --[[ line: 51 ]]
+return function(p4)
 	-- upvalues: reactModule (ref), getInputPosition (ref), isPointInsideBounds (ref), userInputService (ref), isPressInput (ref)
 	local var3 = reactModule.useRef(p4)
 	var3.current = p4
@@ -72,7 +72,7 @@ return function(p4) --[[ line: 51 ]]
 	local var5 = reactModule.useRef(nil)
 	local var6 = reactModule.useRef(nil)
 	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useCallback(function() --[[ line: 72 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), var7 (ref), var3 (ref)
 		local current = var4.current
 		
@@ -100,7 +100,7 @@ return function(p4) --[[ line: 51 ]]
 		end
 		var3.current()
 	end, {})
-	local var9 = reactModule.useCallback(function(p5) --[[ line: 87 ]]
+	local var9 = reactModule.useCallback(function(p5)
 		-- upvalues: var4 (ref), getInputPosition (copy), isPointInsideBounds (copy), var8 (ref)
 		local current = var4.current
 		
@@ -146,14 +146,14 @@ return function(p4) --[[ line: 51 ]]
 			end
 		end
 	end, { var8 })
-	local var10 = reactModule.useCallback(function() --[[ line: 103 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var4 (ref), userInputService (copy), isPressInput (copy), var9 (ref)
 		local current = var4.current
 		
 		if current.inputEndedConnection then
 			return
 		end
-		current.inputEndedConnection = userInputService.InputEnded:Connect(function(p6) --[[ line: 109 ]]
+		current.inputEndedConnection = userInputService.InputEnded:Connect(function(p6)
 			-- upvalues: isPressInput (copy), var9 (copy)
 			if isPressInput(p6) then
 				var9(p6)
@@ -162,12 +162,12 @@ return function(p4) --[[ line: 51 ]]
 			end
 		end)
 	end, { var9 })
-	local var11 = reactModule.useCallback(function(p7) --[[ line: 117 ]]
+	local var11 = reactModule.useCallback(function(p7)
 		-- upvalues: var4 (ref), var10 (ref), isPressInput (copy), var7 (ref)
 		if p7 == nil then
-			return function() --[[ line: 119 ]] end
+			return function() end
 		end
-		local function onPressInstanceDestroyed() --[[ line: 122 ]]
+		local function onPressInstanceDestroyed()
 			-- upvalues: var4 (copy), var10 (copy)
 			if not var4.current.isPressed then return end
 			local current = var4.current
@@ -183,7 +183,7 @@ return function(p4) --[[ line: 51 ]]
 			var10()
 		end
 		
-		local inputBeganConnection = p7.InputBegan:Connect(function(p8) --[[ line: 130 ]]
+		local inputBeganConnection = p7.InputBegan:Connect(function(p8)
 			-- upvalues: isPressInput (copy), var4 (copy), var7 (copy), p7 (ref), onPressInstanceDestroyed (ref)
 			if not isPressInput(p8) then return end
 			local current = var4.current
@@ -201,7 +201,7 @@ return function(p4) --[[ line: 51 ]]
 				current.instanceInputEndedConnection = nil
 			end
 			current.destroyingConnection = p7.Destroying:Connect(onPressInstanceDestroyed)
-			current.instanceInputEndedConnection = p7.InputEnded:Connect(function(p9) --[[ line: 143 ]]
+			current.instanceInputEndedConnection = p7.InputEnded:Connect(function(p9)
 				-- upvalues: isPressInput (copy), var4 (copy)
 				if not isPressInput(p9) then return end
 				if var4.current.isPressed then
@@ -226,12 +226,12 @@ return function(p4) --[[ line: 51 ]]
 			end)
 		end)
 		
-		return function() --[[ line: 153 ]]
+		return function()
 			-- upvalues: inputBeganConnection (ref)
 			inputBeganConnection:Disconnect()
 		end
 	end, { var10 })
-	local var12 = reactModule.useCallback(function(p10) --[[ line: 158 ]]
+	local var12 = reactModule.useCallback(function(p10)
 		-- upvalues: var5 (ref), var11 (ref)
 		if var5.current then
 			var5.current()
@@ -241,7 +241,7 @@ return function(p4) --[[ line: 51 ]]
 			var5.current = var11(p10)
 		end
 	end, { var11 })
-	local var13 = reactModule.useCallback(function(p11) --[[ line: 169 ]]
+	local var13 = reactModule.useCallback(function(p11)
 		-- upvalues: var6 (ref), var11 (ref)
 		if var6.current then
 			var6.current()
@@ -251,9 +251,9 @@ return function(p4) --[[ line: 51 ]]
 			var6.current = var11(p11)
 		end
 	end, { var11 })
-	reactModule.useEffect(function() --[[ line: 180 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var6 (ref), var4 (ref), var10 (ref)
-		return function() --[[ line: 181 ]]
+		return function()
 			-- upvalues: var5 (copy), var6 (copy), var4 (copy), var10 (copy)
 			if var5.current then
 				var5.current()

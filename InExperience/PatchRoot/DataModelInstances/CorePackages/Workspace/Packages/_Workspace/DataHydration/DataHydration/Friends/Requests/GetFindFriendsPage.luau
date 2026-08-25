@@ -7,7 +7,7 @@ local fFlagFriendsSignalMigrationTelemetry = require(parent.SharedFlags).FFlagFr
 local myHttpRequestModule = require(dataHydration.Friends.Networking.myHttpRequest)
 local friendsRequestTelemetryModule = require(script.Parent.FriendsRequestTelemetry)
 
-local function collectFriendIdsFromResponse(p0) --[[ line: 34 ]]
+local function collectFriendIdsFromResponse(p0)
 	local t = {}
 	
 	for i, v in if p0 then p0.PageItems else {} do
@@ -18,7 +18,7 @@ local function collectFriendIdsFromResponse(p0) --[[ line: 34 ]]
 	return t
 end
 
-return function(p1, p2) --[[ line: 44 ]]
+return function(p1, p2)
 	-- upvalues: promiseModule (ref), url (ref), httpService (ref), fFlagFriendsSignalMigrationTelemetry (ref), friendsRequestTelemetryModule (ref), myHttpRequestModule (ref), collectFriendIdsFromResponse (ref)
 	if p1 == nil or tostring(p1) == "" then
 		return promiseModule.reject("GetFindFriendsPage called with nil userId")
@@ -36,7 +36,7 @@ return function(p1, p2) --[[ line: 44 ]]
 	end
 	local var8 = if fFlagFriendsSignalMigrationTelemetry then friendsRequestTelemetryModule.generateRequestId() else nil
 	
-	return myHttpRequestModule(formattedText, "GET", if fFlagFriendsSignalMigrationTelemetry then friendsRequestTelemetryModule.getRequestOptions(var8) else nil):andThen(function(p3) --[[ line: 70 ]]
+	return myHttpRequestModule(formattedText, "GET", if fFlagFriendsSignalMigrationTelemetry then friendsRequestTelemetryModule.getRequestOptions(var8) else nil):andThen(function(p3)
 		-- upvalues: fFlagFriendsSignalMigrationTelemetry (copy), var8 (ref), friendsRequestTelemetryModule (copy), collectFriendIdsFromResponse (copy)
 		local var9 = if p3 then p3.responseBody else nil
 		

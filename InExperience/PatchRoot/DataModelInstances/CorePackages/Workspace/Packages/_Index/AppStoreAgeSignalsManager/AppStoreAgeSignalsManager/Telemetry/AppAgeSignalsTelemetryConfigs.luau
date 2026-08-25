@@ -17,7 +17,7 @@ local t = {
 }
 
 return {
-	reportError = function(p0) --[[ line: 28 ]]
+	reportError = function(p0)
 		-- upvalues: enableAppAgeSignalsErrorTelemetry (ref), telemetryService (ref), t (ref)
 		if enableAppAgeSignalsErrorTelemetry then
 			telemetryService:LogCounter(t.ErrorCounter, {

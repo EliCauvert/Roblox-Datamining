@@ -5,7 +5,7 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local fFlagReplaceMissingDesignTokens = require(parent.SharedFlags).FFlagReplaceMissingDesignTokens
 local boxModule = require(script.Parent.Box)
 
-local function mapTokens(p0) --[[ line: 14 ]]
+local function mapTokens(p0)
 	local size1200 = p0.Size.Size_1200
 	local size200 = p0.Size.Size_200
 	
@@ -22,7 +22,7 @@ local function mapTokens(p0) --[[ line: 14 ]]
 	}
 end
 
-return function(p1) --[[ line: 38 | named "Item" ]]
+return function(p1)
 	-- upvalues: useDesignTokens (ref), mapTokens (ref), reactModule (ref), boxModule (ref), styledTextLabel (ref), fFlagReplaceMissingDesignTokens (ref)
 	local var3 = useDesignTokens(mapTokens)
 	

@@ -2,13 +2,13 @@
 local _ = require(script.Parent.types)
 local t = {}
 
-return function(a, b, p0) --[[ line: 25 | named "onTerminal" ]]
+return function(a, b, p0)
 	-- upvalues: t (ref), createEffect (ref)
 	local t_1 = {}
 	local var2 = false
 	local var3 = false
 	
-	local function _() --[[ line: 34 | named "cleanupEffect" ]]
+	local function _()
 		-- upvalues: var3 (write), t (copy), t_1 (ref)
 		if var3 then return end
 		var3 = true
@@ -20,7 +20,7 @@ return function(a, b, p0) --[[ line: 25 | named "onTerminal" ]]
 		end
 	end
 	
-	local _ = function(value) --[[ line: 46 | named "settle" ]]
+	local _ = function(value)
 		-- upvalues: var2 (write), var3 (write), t (copy), t_1 (ref), b (ref), p0 (ref)
 		if var2 then return end
 		var2 = true
@@ -47,7 +47,7 @@ return function(a, b, p0) --[[ line: 25 | named "onTerminal" ]]
 	
 	if var4.status == "pending" then
 		local _ = nil
-		local var6 = createEffect(function(p1) --[[ line: 67 ]]
+		local var6 = createEffect(function(p1)
 			-- upvalues: a (ref), var2 (write), var3 (write), t (copy), t_1 (ref), b (ref), p0 (ref)
 			local var9 = a(p1)
 			

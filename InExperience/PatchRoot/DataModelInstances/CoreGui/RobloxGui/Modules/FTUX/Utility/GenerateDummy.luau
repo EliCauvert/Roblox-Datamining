@@ -200,7 +200,7 @@ local t_2 = {
 	}
 }
 
-local function Scan(p0, p1, p2, p3) --[[ line: 316 ]]
+local function Scan(p0, p1, p2, p3)
 	-- upvalues: t_1 (ref), t (ref), Scan (ref)
 	local var4 = Instance.new(p0.Type)
 	
@@ -243,7 +243,7 @@ local function Scan(p0, p1, p2, p3) --[[ line: 316 ]]
 	return var4
 end
 
-return function(p4, p5) --[[ line: 354 ]]
+return function(p4, p5)
 	-- upvalues: Scan (ref), t_2 (ref)
 	return Scan(t_2, nil, p4, p5)
 end

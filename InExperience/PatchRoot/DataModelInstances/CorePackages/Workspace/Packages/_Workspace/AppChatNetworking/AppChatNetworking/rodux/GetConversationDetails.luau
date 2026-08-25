@@ -5,7 +5,7 @@ local parent = appChatNetworking.Parent
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
 
-return roduxNetworkingModule.POST(script.Name, function(p0, p1) --[[ line: 9 ]]
+return roduxNetworkingModule.POST(script.Name, function(p0, p1)
 	-- upvalues: CHAT_PLATFORM_BASE_URLModule (ref), getFFlagEnableSocialCards (ref), getFFlagIsSquadEnabled (ref)
 	return p0(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("get-conversations"):body({
 		include_participants = true,

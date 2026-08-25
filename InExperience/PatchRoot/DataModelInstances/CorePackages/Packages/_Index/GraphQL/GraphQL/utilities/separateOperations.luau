@@ -9,7 +9,7 @@ local visit = require(parent.language.visitor).visit
 local collectDependencies = nil
 local collectTransitiveDependencies = nil
 
-local function separateOperations(p0) --[[ line: 38 ]]
+local function separateOperations(p0)
 	-- upvalues: kind (ref), collectDependencies (write), set (ref), collectTransitiveDependencies (write), array (ref)
 	local t = {}
 	local t_1 = {}
@@ -33,7 +33,7 @@ local function separateOperations(p0) --[[ line: 38 ]]
 		end
 		t_2[if v_1.name then v_1.name.value else ""] = {
 			kind = kind.DOCUMENT,
-			definitions = array.filter(p0.definitions, function(p1) --[[ line: 81 ]]
+			definitions = array.filter(p0.definitions, function(p1)
 				-- upvalues: v_1 (ref), kind (copy), var7 (ref)
 				return if p1 ~= v_1 then p1.kind == kind.FRAGMENT_DEFINITION and var7:has(p1.name.value) else true
 			end)
@@ -42,7 +42,7 @@ local function separateOperations(p0) --[[ line: 38 ]]
 	return t_2
 end
 
-collectTransitiveDependencies = function(p2, p3, p4) --[[ line: 95 | named "collectTransitiveDependencies" ]]
+collectTransitiveDependencies = function(p2, p3, p4)
 	-- upvalues: collectTransitiveDependencies (write)
 	if not p2:has(p4) then
 		p2:add(p4)
@@ -56,11 +56,11 @@ collectTransitiveDependencies = function(p2, p3, p4) --[[ line: 95 | named "coll
 	end
 end
 
-collectDependencies = function(p5) --[[ line: 112 | named "collectDependencies" ]]
+collectDependencies = function(p5)
 	-- upvalues: visit (ref)
 	local t = {}
 	visit(p5, {
-		FragmentSpread = function(_, p6) --[[ line: 116 ]]
+		FragmentSpread = function(_, p6)
 			-- upvalues: t (ref)
 			table.insert(t, p6.name.value)
 		end

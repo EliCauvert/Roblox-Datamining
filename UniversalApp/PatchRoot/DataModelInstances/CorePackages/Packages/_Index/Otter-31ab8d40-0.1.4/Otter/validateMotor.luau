@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 1 | named "validateMotor" ]]
+﻿return function(p0)
 	assert(typeof(p0) == "table")
 	assert(typeof(p0.start) == "function")
 	assert(typeof(p0.stop) == "function")

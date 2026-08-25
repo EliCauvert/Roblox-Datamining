@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 27 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local var1 = type(p0)
 	assert(if var1 ~= "table" then var1 == "userdata" else true, "Unexpected value for reportingService")
@@ -11,12 +11,12 @@ function t.new(p0) --[[ line: 27 ]]
 	return t_1
 end
 
-function t:setEnabled(p1) --[[ line: 40 ]]
+function t:setEnabled(p1)
 	assert(type(p1) == "boolean", "Expected isEnabled to be a boolean")
 	self._isEnabled = p1
 end
 
-function t:reportSeries(p2, p3, p4) --[[ line: 48 ]]
+function t:reportSeries(p2, p3, p4)
 	p3 = p3 or {}
 	assert(type(p2) == "string", "Expected seriesName to be a string")
 	assert(type(p3) == "table", "Expected additionalArgs to be a table")

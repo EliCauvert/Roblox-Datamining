@@ -9,12 +9,12 @@ local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent
 local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
 local getIconSizeModule = require(parent_1.App.ImageSet.getIconSize)
 
-local function _(p0) --[[ line: 22 | named "getIconImage" ]]
+local function _(p0)
 	-- upvalues: itemTileEnumsModule (ref)
 	return if p0 == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif p0 == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
 end
 
-return function(p1) --[[ line: 32 | named "ItemTileStatusIcon" ]]
+return function(p1)
 	-- upvalues: useStyleModule (ref), itemTileEnumsModule (ref), getIconSizeModule (ref), iconSizeModule (ref), UIBloxConfigModule (ref), reactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
 	local tokens = useStyleModule().Tokens
 	local statusStyle = p1.statusStyle

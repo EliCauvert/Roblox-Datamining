@@ -67,7 +67,7 @@ local t_6 = {
 	RightBracket = true
 }
 
-local function getKeyCodeName(p0) --[[ line: 127 ]]
+local function getKeyCodeName(p0)
 	local name = p0.Name
 	
 	if name ~= "" then
@@ -78,16 +78,16 @@ local function getKeyCodeName(p0) --[[ line: 127 ]]
 	return var12 or tostring(p0)
 end
 
-local function _(p1) --[[ line: 141 | named "isDeprecatedKeyCode" ]]
+local function _(p1)
 	-- upvalues: t (ref)
 	return if t[p1] then true else p1:match("^World%d+$") ~= nil
 end
 
-local _ = function(p2) --[[ line: 148 | named "isGamepadKeyCode" ]]
+local _ = function(p2)
 	return if p2:match("^Button") == nil then if p2:match("^DPad") == nil then p2:match("^Thumbstick") ~= nil else true else true
 end
 
-local function getCategory(p3) --[[ line: 152 ]]
+local function getCategory(p3)
 	-- upvalues: t (ref), t_1 (ref), t_2 (ref), t_4 (ref), t_5 (ref), t_3 (ref), t_6 (ref)
 	local var13
 	local name = p3.Name
@@ -101,17 +101,17 @@ local function getCategory(p3) --[[ line: 152 ]]
 	return if if t[var13] then true else var13:match("^World%d+$") ~= nil then "Deprecated" elseif if var13:match("^Button") == nil then if var13:match("^DPad") == nil then var13:match("^Thumbstick") ~= nil else true else true then "Gamepad" elseif t_1[var13] then "Mouse and touch" elseif var13:match("^Keypad") then "Keypad" elseif var13:match("^[A-Z]$") then "Letters" elseif t_2[var13] then "Numbers" elseif var13:match("^F%d+$") then "Function keys" elseif t_4[var13] then "Arrows" elseif t_5[var13] then "Navigation" elseif t_3[var13] then "Modifiers" elseif t_6[var13] then "Punctuation" else "Other"
 end
 
-local function sortInCategory(p4, p5) --[[ line: 191 ]]
+local function sortInCategory(p4, p5)
 	-- upvalues: list_1 (ref)
 	if p4 == "Numbers" then
-		table.sort(p5, function(p6, p7) --[[ line: 193 ]]
+		table.sort(p5, function(p6, p7)
 			-- upvalues: list_1 (copy)
 			return (table.find(list_1, p6) or 0) < (table.find(list_1, p7) or 0)
 		end)
 		
 		return
 	elseif p4 == "Function keys" then
-		table.sort(p5, function(p8, p9) --[[ line: 199 ]]
+		table.sort(p5, function(p8, p9)
 			local var15
 			local name = p8.Name
 			
@@ -136,7 +136,7 @@ local function sortInCategory(p4, p5) --[[ line: 191 ]]
 		
 		return
 	elseif p4 == "Deprecated" then
-		table.sort(p5, function(p10, p11) --[[ line: 205 ]]
+		table.sort(p5, function(p10, p11)
 			local var20
 			local name = p10.Name
 			
@@ -163,7 +163,7 @@ local function sortInCategory(p4, p5) --[[ line: 191 ]]
 		
 		return
 	end
-	table.sort(p5, function(p12, p13) --[[ line: 222 ]]
+	table.sort(p5, function(p12, p13)
 		local var26
 		local name = p12.Name
 		
@@ -190,7 +190,7 @@ return {
 	CATEGORY_ORDER = list,
 	getKeyCodeName = getKeyCodeName,
 	getCategory = getCategory,
-	groupByCategory = function(p14) --[[ line: 228 ]]
+	groupByCategory = function(p14)
 		-- upvalues: list (ref), getCategory (ref), sortInCategory (ref)
 		local t = {}
 		
@@ -206,7 +206,7 @@ return {
 		end
 		return t
 	end,
-	getNonEmptyCategories = function(p15) --[[ line: 248 ]]
+	getNonEmptyCategories = function(p15)
 		-- upvalues: list (ref)
 		local t = {}
 		

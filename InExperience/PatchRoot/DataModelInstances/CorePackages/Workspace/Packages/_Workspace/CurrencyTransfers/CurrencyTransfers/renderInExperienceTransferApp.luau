@@ -20,15 +20,15 @@ local inExperienceTransferAppModule = require(currencyTransfers.Components.InExp
 local networkContext = require(parent.EconomyCommonCoreScriptHooks).NetworkContext
 local t = { themeName = "dark", fontName = "gotham" }
 
-local function _() --[[ line: 31 | named "createFocusNavigationService" ]]
+local function _()
 	-- upvalues: reactFocusNavigationModule (ref)
 	return reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl() --[[ line: 35 ]]
+local function createNetworkImpl()
 	-- upvalues: httpRequestModule (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 37 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
 		end,
@@ -37,7 +37,7 @@ local function createNetworkImpl() --[[ line: 35 ]]
 	})
 end
 
-return function() --[[ line: 46 | named "renderInExperienceTransferApp" ]]
+return function()
 	-- upvalues: coreGuiService (ref), createNetworkImpl (ref), reactFocusNavigationModule (ref), roduxModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), t (ref), networkContext (ref), roactRoduxModule (ref), designTokenProvider (ref), selectionCursorProvider (ref), cursorProvider (ref), provider (ref), inExperienceTransferAppModule (ref), reactRobloxModule (ref)
 	local inExperienceTransferApp = Instance.new("Folder")
 	inExperienceTransferApp.Name = "InExperienceTransferApp"
@@ -49,7 +49,7 @@ return function() --[[ line: 46 | named "renderInExperienceTransferApp" ]]
 		StyleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
 			NetworkProvider = reactModule.createElement(networkContext.Provider, { value = createNetworkImpl() }, {
 				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
-					store = roduxModule.Store.new(function(p3) --[[ line: 55 ]]
+					store = roduxModule.Store.new(function(p3)
 						return p3 or {}
 					end)
 				}, {

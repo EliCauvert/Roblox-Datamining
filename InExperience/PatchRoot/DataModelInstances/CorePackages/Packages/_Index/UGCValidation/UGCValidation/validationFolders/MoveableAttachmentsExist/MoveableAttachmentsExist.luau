@@ -13,7 +13,7 @@ return {
 	},
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd,
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: getAllInstancesIsAModule (ref), r15plusUtilsModule (ref), getAllInstancesWithNameModule (ref), errorSourceStringsModule (ref)
 		for i, v in getAllInstancesIsAModule(p1.rootInstance, "MeshPart") do
 			p0:setReportingInstance(v)

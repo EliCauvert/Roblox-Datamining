@@ -12,7 +12,7 @@ local avatarBackground = constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 
-return function(p0, p1) --[[ line: 24 | named "isItemAvailableForTryOn" ]]
+return function(p0, p1)
 	-- upvalues: itemTypeEnum (ref), AVATAR_ANIMATIONS_BUNDLE_TYPE_ID (ref), SHOES_BUNDLE_TYPE_ID (ref), avatarBackground (ref), avatarExperienceFlagsModule (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), LAYERED_ASSET_TYPES (ref)
 	local itemSubType = p1.itemSubType
 	local var3 = p0 and (p0.Humanoid and p0.Humanoid.RigType == Enum.HumanoidRigType.R6)

@@ -19,7 +19,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 27 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
@@ -34,16 +34,16 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 45 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p0) --[[ line: 52 ]]
+					modalVariant = function(p0)
 						return p0
 					end,
-					source = function(p1) --[[ line: 55 ]]
+					source = function(p1)
 						return p1
 					end
 				}
@@ -51,10 +51,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p2) --[[ line: 63 ]]
+					modalVariant = function(p2)
 						return p2
 					end,
-					source = function(p3) --[[ line: 66 ]]
+					source = function(p3)
 						return p3
 					end
 				}
@@ -67,7 +67,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 79 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
@@ -82,7 +82,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 97 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -100,7 +100,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 116 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -118,7 +118,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 135 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -127,10 +127,10 @@ return {
 					btn = buttonNamesModule.Close
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p4) --[[ line: 143 ]]
+					modalVariant = function(p4)
 						return p4
 					end,
-					source = function(p5) --[[ line: 146 ]]
+					source = function(p5)
 						return p5
 					end
 				}
@@ -138,10 +138,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p6) --[[ line: 154 ]]
+					modalVariant = function(p6)
 						return p6
 					end,
-					source = function(p7) --[[ line: 157 ]]
+					source = function(p7)
 						return p7
 					end
 				}
@@ -154,7 +154,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 170 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -172,7 +172,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 189 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -190,7 +190,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 208 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -208,7 +208,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 227 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -226,7 +226,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 246 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -235,10 +235,10 @@ return {
 					btn = buttonNamesModule.Cancel
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p8) --[[ line: 254 ]]
+					modalVariant = function(p8)
 						return p8
 					end,
-					source = function(p9) --[[ line: 257 ]]
+					source = function(p9)
 						return p9
 					end
 				}
@@ -246,10 +246,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p10) --[[ line: 265 ]]
+					modalVariant = function(p10)
 						return p10
 					end,
-					source = function(p11) --[[ line: 268 ]]
+					source = function(p11)
 						return p11
 					end
 				}
@@ -262,7 +262,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 281 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -271,10 +271,10 @@ return {
 					btn = buttonNamesModule.AddViaLink
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p12) --[[ line: 289 ]]
+					modalVariant = function(p12)
 						return p12
 					end,
-					source = function(p13) --[[ line: 292 ]]
+					source = function(p13)
 						return p13
 					end
 				}
@@ -282,10 +282,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p14) --[[ line: 300 ]]
+					modalVariant = function(p14)
 						return p14
 					end,
-					source = function(p15) --[[ line: 303 ]]
+					source = function(p15)
 						return p15
 					end
 				}
@@ -298,7 +298,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 316 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -307,10 +307,10 @@ return {
 					btn = buttonNamesModule.OpenVPCPrologue
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p16) --[[ line: 324 ]]
+					modalVariant = function(p16)
 						return p16
 					end,
-					source = function(p17) --[[ line: 327 ]]
+					source = function(p17)
 						return p17
 					end
 				}
@@ -318,10 +318,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p18) --[[ line: 335 ]]
+					modalVariant = function(p18)
 						return p18
 					end,
-					source = function(p19) --[[ line: 338 ]]
+					source = function(p19)
 						return p19
 					end
 				}
@@ -334,7 +334,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 351 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -352,7 +352,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 370 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -370,7 +370,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 389 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -388,7 +388,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 409 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -406,7 +406,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 429 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,
@@ -424,16 +424,16 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 449 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p20) --[[ line: 456 ]]
+					modalVariant = function(p20)
 						return p20
 					end,
-					source = function(p21) --[[ line: 459 ]]
+					source = function(p21)
 						return p21
 					end
 				}
@@ -441,10 +441,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p22) --[[ line: 467 ]]
+					modalVariant = function(p22)
 						return p22
 					end,
-					source = function(p23) --[[ line: 470 ]]
+					source = function(p23)
 						return p23
 					end
 				}
@@ -457,19 +457,19 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 485 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p24) --[[ line: 492 ]]
+					modalVariant = function(p24)
 						return p24
 					end,
-					source = function(p25) --[[ line: 495 ]]
+					source = function(p25)
 						return p25
 					end,
-					tfActionsEnum = function(p26) --[[ line: 498 ]]
+					tfActionsEnum = function(p26)
 						return p26
 					end
 				}
@@ -477,13 +477,13 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p27) --[[ line: 506 ]]
+					modalVariant = function(p27)
 						return p27
 					end,
-					source = function(p28) --[[ line: 509 ]]
+					source = function(p28)
 						return p28
 					end,
-					tfActionsEnum = function(p29) --[[ line: 512 ]]
+					tfActionsEnum = function(p29)
 						return p29
 					end
 				}
@@ -496,16 +496,16 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 527 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p30) --[[ line: 534 ]]
+					source = function(p30)
 						return p30
 					end,
-					tfActionsEnum = function(p31) --[[ line: 537 ]]
+					tfActionsEnum = function(p31)
 						return p31
 					end
 				}
@@ -513,10 +513,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p32) --[[ line: 545 ]]
+					source = function(p32)
 						return p32
 					end,
-					tfActionsEnum = function(p33) --[[ line: 548 ]]
+					tfActionsEnum = function(p33)
 						return p33
 					end
 				}
@@ -529,16 +529,16 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 563 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p34) --[[ line: 570 ]]
+					source = function(p34)
 						return p34
 					end,
-					tfActionsEnum = function(p35) --[[ line: 573 ]]
+					tfActionsEnum = function(p35)
 						return p35
 					end
 				}
@@ -546,10 +546,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p36) --[[ line: 581 ]]
+					source = function(p36)
 						return p36
 					end,
-					tfActionsEnum = function(p37) --[[ line: 584 ]]
+					tfActionsEnum = function(p37)
 						return p37
 					end
 				}
@@ -562,16 +562,16 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 599 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.UserSeen
 				end,
 				staticCustomFields = { eventContext = contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p38) --[[ line: 606 ]]
+					source = function(p38)
 						return p38
 					end,
-					tfActionsEnum = function(p39) --[[ line: 609 ]]
+					tfActionsEnum = function(p39)
 						return p39
 					end
 				}
@@ -579,10 +579,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p40) --[[ line: 617 ]]
+					source = function(p40)
 						return p40
 					end,
-					tfActionsEnum = function(p41) --[[ line: 620 ]]
+					tfActionsEnum = function(p41)
 						return p41
 					end
 				}
@@ -595,7 +595,7 @@ return {
 		backendsList = {
 			{
 				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 635 ]]
+				overrideName = function()
 					-- upvalues: eventTypes (ref)
 					return eventTypes.ButtonClick
 				end,

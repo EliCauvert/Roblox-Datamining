@@ -25,7 +25,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function expectedGripAttCFrameRotation(p0, p1) --[[ line: 39 ]]
+local function expectedGripAttCFrameRotation(p0, p1)
 	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), var10 (ref)
 	local var13 = if p1 == Enum.AssetType.RightArm then "Right" else "Left"
 	local var14 = p0:FindFirstChild(var13 .. "LowerArm")
@@ -47,7 +47,7 @@ local function expectedGripAttCFrameRotation(p0, p1) --[[ line: 39 ]]
 	return CFrame.identity
 end
 
-function t.run(p2, p3) --[[ line: 79 ]]
+function t.run(p2, p3)
 	-- upvalues: UGCValidateRigAttachmentRotationUsesDiff (ref), getDiffBetweenOrientationsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), thresholdGetters (ref), floatEqualsModule (ref), errorSourceStringsModule (ref), expectedGripAttCFrameRotation (ref), valueToStringModule (ref)
 	local rootInstance = p3.rootInstance
 	local assetType = p3.uploadEnum.assetType

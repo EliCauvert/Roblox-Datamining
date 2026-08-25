@@ -4,7 +4,7 @@ local foundationModule = require(parent.Foundation)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local collaborators = require(parent.FoundationCloudAssets).Assets["pictograms/collaborators"]
 
-function EmptyState(p0) --[[ line: 16 ]]
+function EmptyState(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref), collaborators (ref)
 	local var2 = useLocalization({
 		noAvatars = "Feature.AvatarSwitcher.Message.NoAvatars",

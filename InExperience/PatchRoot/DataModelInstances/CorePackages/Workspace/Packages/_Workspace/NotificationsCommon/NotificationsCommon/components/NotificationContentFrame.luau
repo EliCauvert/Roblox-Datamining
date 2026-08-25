@@ -21,7 +21,7 @@ local metaActionsWidth = constantsModule.MetaActionsWidth
 local timestampWidth = constantsModule.TimestampWidth
 local timestampHeight = constantsModule.TimestampHeight
 
-return function() --[[ line: 27 ]]
+return function()
 	-- upvalues: useStyle (ref), useNotificationCardDataModule (ref), constantsModule (ref), useNotificationCardStateModule (ref), defaultTextContentPadding (ref), metaActionsWidth (ref), timestampWidth (ref), timestampHeight (ref), react (ref), defaultContentPadding (ref), notificationThumbnailModule (ref), notificationStyledTextModule (ref), iconButton (ref), iconSize (ref), overflow (ref), notificationActionsFrameModule (ref)
 	local var8 = useStyle()
 	local var9 = var8.Font.BaseSize * var8.Font.CaptionHeader.RelativeSize
@@ -78,7 +78,7 @@ return function() --[[ line: 27 ]]
 		Text = "",
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		[react.Event.Activated] = function() --[[ line: 97 ]]
+		[react.Event.Activated] = function()
 			-- upvalues: handleActions (ref), var14 (ref), notificationPayload (ref)
 			if handleActions and var14 and notificationPayload then
 				handleActions(var14, notificationPayload)
@@ -140,7 +140,7 @@ return function() --[[ line: 27 ]]
 					size = UDim2.fromOffset(0, 0),
 					iconSize = iconSize.Medium,
 					icon = overflow,
-					onActivated = function() --[[ line: 172 ]]
+					onActivated = function()
 						-- upvalues: openMetaActions (ref), notificationPayload (ref)
 						openMetaActions(notificationPayload)
 					end

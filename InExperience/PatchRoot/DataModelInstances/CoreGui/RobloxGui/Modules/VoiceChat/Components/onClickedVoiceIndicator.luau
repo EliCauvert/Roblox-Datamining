@@ -4,7 +4,7 @@ local constants = require(game:GetService("CorePackages").Workspace.Packages.Voi
 local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local var2 = require(robloxGui.Modules.SelfView.Analytics).new()
 
-return function(p0, p1, p2) --[[ line: 11 ]]
+return function(p0, p1, p2)
 	-- upvalues: playersService (ref), constants (ref), default (ref), var2 (ref)
 	local localPlayer = playersService.LocalPlayer
 	

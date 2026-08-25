@@ -5,7 +5,7 @@ local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
 local foundationModule = require(parent.Foundation)
 local t = { isIncoming = false }
 
-function RepliedToMarker(p0) --[[ line: 32 ]]
+function RepliedToMarker(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), foundationModule (ref), chatBubbleEnumModule (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	

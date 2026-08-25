@@ -19,7 +19,7 @@ local t = {
 	throttlingPercentage = game:DefineFastInt("SocialLinksImpressionsEventHundredthsPercent", 10000)
 }
 
-return function(p0) --[[ line: 40 ]]
+return function(p0)
 	-- upvalues: var2 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
 	local var4, var5 = var2(p0)
 	

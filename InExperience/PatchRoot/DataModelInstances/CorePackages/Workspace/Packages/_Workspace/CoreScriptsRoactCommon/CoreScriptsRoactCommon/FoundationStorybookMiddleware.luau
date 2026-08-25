@@ -15,24 +15,24 @@ local t_1 = {
 }
 local useStyleSheet = foundationModule.Hooks.useStyleSheet
 
-local function StyleLinkPortal(p0) --[[ line: 25 ]]
+local function StyleLinkPortal(p0)
 	-- upvalues: useStyleSheet (ref), reactRobloxModule (ref)
 	return if useStyleSheet() and p0.overlay then reactRobloxModule.createPortal(nil, p0.overlay) else nil
 end
 
-local function useCreateOverlay(p1) --[[ line: 35 ]]
+local function useCreateOverlay(p1)
 	-- upvalues: reactModule (ref)
 	local var7 = reactModule.useRef(Instance.new("Frame"))
 	
 	if var7.current.Parent ~= p1.focus then
 		var7.current.Parent = p1.focus
 	end
-	reactModule.useEffect(function() --[[ line: 43 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref)
 		var7.current.Size = UDim2.fromScale(1, 1)
 		var7.current.BackgroundTransparency = 1
 		
-		return function() --[[ line: 47 ]]
+		return function()
 			-- upvalues: var7 (copy)
 			var7.current:Destroy()
 		end
@@ -41,9 +41,9 @@ local function useCreateOverlay(p1) --[[ line: 35 ]]
 	return var7.current
 end
 
-return function(p2) --[[ line: 62 | named "FoundationStorybookMiddleware" ]]
+return function(p2)
 	-- upvalues: useCreateOverlay (ref), t (ref), reactModule (ref), foundationProvider (ref), t_1 (ref), StyleLinkPortal (ref)
-	return function(p3) --[[ line: 63 ]]
+	return function(p3)
 		-- upvalues: useCreateOverlay (copy), t (copy), reactModule (copy), foundationProvider (copy), t_1 (copy), p2 (ref), StyleLinkPortal (copy)
 		local var8 = useCreateOverlay(p3)
 		

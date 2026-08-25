@@ -7,24 +7,24 @@ local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local t = { stiffness = 400, damping = 40, mass = 1 }
 
-return function(value) --[[ line: 24 | named "InGameAssetReportErrorModal" ]]
+return function(value)
 	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref), withLocalization (ref), interactiveAlert (ref), buttonType (ref)
 	local var4, var5 = reactModule.useState(true)
-	local var6, var7 = reactOtterModule.useAnimatedBinding(1, function() --[[ line: 27 ]]
+	local var6, var7 = reactOtterModule.useAnimatedBinding(1, function()
 		-- upvalues: var4 (ref), value (ref)
 		if not var4 then
 			value.onBack()
 		end
 	end)
-	local var8 = reactModule.useMemo(function() --[[ line: 34 ]]
+	local var8 = reactModule.useMemo(function()
 		-- upvalues: var4 (ref)
 		return if var4 then 0 else 1
 	end, { var4 })
-	reactModule.useEffect(function() --[[ line: 38 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), reactOtterModule (copy), var8 (ref), t (copy)
 		var7(reactOtterModule.spring(var8, t))
 	end, { var8 })
-	local var9 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
 		var5(false)
 	end, { var5 })
@@ -33,12 +33,12 @@ return function(value) --[[ line: 24 | named "InGameAssetReportErrorModal" ]]
 		errorTitle = "Feature.ReportAbuse.Heading.SelectInSceneErrorTitle",
 		errorDescription = "Feature.ReportAbuse.Label.SelectInSceneErrorDescription",
 		errorBack = "Feature.ReportAbuse.Action.ErrorModalGoBack"
-	})(function(p0) --[[ line: 50 ]]
+	})(function(p0)
 		-- upvalues: reactModule (copy), var6 (ref), var9 (ref), interactiveAlert (copy), value (ref), buttonType (copy)
 		return reactModule.createElement("TextButton", {
 			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			BackgroundTransparency = var6:map(function(p1) --[[ line: 54 ]]
+			BackgroundTransparency = var6:map(function(p1)
 				return p1 + 0.3
 			end),
 			BackgroundColor3 = Color3.fromHex("#000000"),
@@ -54,7 +54,7 @@ return function(value) --[[ line: 24 | named "InGameAssetReportErrorModal" ]]
 				title = p0.errorTitle,
 				bodyText = p0.errorDescription,
 				anchorPoint = Vector2.new(0.5, 0.5),
-				position = var6:map(function(p2) --[[ line: 70 ]]
+				position = var6:map(function(p2)
 					return UDim2.new(0.5, 0, 0.5, 0):Lerp(UDim2.new(0.5, 0, -0.5, 0), p2)
 				end),
 				buttonStackInfo = {

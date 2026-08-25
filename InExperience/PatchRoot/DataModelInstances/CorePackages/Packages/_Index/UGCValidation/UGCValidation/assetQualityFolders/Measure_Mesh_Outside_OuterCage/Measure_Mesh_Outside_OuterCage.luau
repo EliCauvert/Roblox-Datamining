@@ -8,7 +8,7 @@ local UGCValidateRenderMeshOutsideOuterCageMeshThreshold = game:DefineFastInt("U
 return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
-	run = function(p0, p1) --[[ line: 16 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidateRenderMeshOutsideOuterCageMeshThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local handle = p1.aqsSummaryData.Measure_Mesh_Outside_OuterCage.Handle
 		local meshOutsideOuterCagePercent = handle and tonumber(handle.mesh_outside_outer_cage_percent)

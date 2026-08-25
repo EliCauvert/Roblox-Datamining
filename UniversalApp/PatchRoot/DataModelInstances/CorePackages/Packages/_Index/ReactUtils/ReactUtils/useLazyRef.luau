@@ -1,6 +1,6 @@
 ﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p0) --[[ line: 21 | named "useLazyRef" ]]
+return function(p0)
 	-- upvalues: reactModule (ref)
 	local var1 = reactModule.useRef(nil)
 	

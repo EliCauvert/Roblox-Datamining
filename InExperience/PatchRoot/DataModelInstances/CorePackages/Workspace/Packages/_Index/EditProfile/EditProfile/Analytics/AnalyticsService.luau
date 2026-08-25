@@ -5,7 +5,7 @@ local getPlatformTarget = analyticsModule.getPlatformTarget
 return {
 	Diag = analyticsModule.Analytics.new(game:GetService("RbxAnalyticsService")).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p0, p1, p2) --[[ line: 13 ]]
+		setRBXEventStream = function(_, p0, p1, p2)
 			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
 			eventIngestService:SetRBXEventStream(getPlatformTarget(), p0, p1, p2 or {})
 		end

@@ -6,20 +6,20 @@ local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebu
 local domLocatorsModule = require(appChat.Utils.DomLocators)
 local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
 local t = {
-	getHeaderText = function() --[[ line: 29 ]]
+	getHeaderText = function()
 		-- upvalues: getFFlagIsSquadEnabled (ref)
 		return {
 			shouldLocalize = true,
 			raw = if getFFlagIsSquadEnabled() then "Feature.Chat.Label.Details" else "Feature.Chat.Label.ChatDetails"
 		}
 	end,
-	getIsRooted = function(p0) --[[ line: 36 ]]
+	getIsRooted = function(p0)
 		-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref)
 		return getFFlagAppChatEnableRootedNavigationModule() and (p0 and (p0.getParam and (p0.getParam("isRooted", false) or false)))
 	end
 }
 
-function t.getNavigationOptions(p1, p2) --[[ line: 44 ]]
+function t.getNavigationOptions(p1, p2)
 	-- upvalues: t (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), cryoModule (ref)
 	local navigation = p1 and p1.navigation
 	local t_1 = {
@@ -36,7 +36,7 @@ function t.getNavigationOptions(p1, p2) --[[ line: 44 ]]
 	return cryoModule.Dictionary.join(t_1, p2 or {})
 end
 
-function t.getTopBarConfig(p3) --[[ line: 64 ]]
+function t.getTopBarConfig(p3)
 	-- upvalues: t (ref), getFFlagAppChatEnableRootedNavigationModule (ref), cryoModule (ref)
 	local t_1 = { backButtonEnabled = true, headerText = t.getHeaderText() }
 	

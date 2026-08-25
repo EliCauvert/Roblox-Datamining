@@ -36,14 +36,14 @@ local clearTimeout = luauPolyfill.clearTimeout
 local fFlagFixCrossExperienceVoiceExecutePrint = sharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
 local crossExpVoicePlaceId = game:DefineFastString("CrossExpVoicePlaceId", tostring(constantsModule.DEFAULT_EXPERIENCE_PLACE_ID))
 
-local var16 = function() --[[ line: 57 ]] end
+local var16 = function() end
 
-local _ = function() --[[ line: 129 ]]
+local _ = function()
 	-- upvalues: crossExperience (ref)
 	return if game.PlaceId == 0 then crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else crossExperience.Constants.EXPERIENCE_TYPE_UGC
 end
 
-function t.new() --[[ line: 135 ]]
+function t.new()
 	-- upvalues: crossExperience (ref), crossExperienceVoiceAnalyticsModule (ref), t (ref)
 	local t_1 = {
 		joinRequestPulseCheckId = nil,
@@ -73,30 +73,30 @@ function t.new() --[[ line: 135 ]]
 	return t_1
 end
 
-function t:logPartyVoiceTimeout() --[[ line: 168 ]]
+function t:logPartyVoiceTimeout()
 	self.voiceAnalytics:logPartyVoiceTimeout(self.currentPartyId)
 end
 
-function t:initialize() --[[ line: 172 ]]
+function t:initialize()
 	-- upvalues: experienceService (ref), crossExperience (ref), loggerModule (ref), flagsModule (ref), fStringTimeoutLoadingLocalPlayerInBackgroundDM (ref), LOCAL_PLAYER_LOADING_TIMEOUT_ENUM (ref), playersService (ref), getFFlagEnableCrossExpVoiceMemoryCheck (ref), notificationService (ref)
 	self.voiceAnalytics:initialize(self.cevEventManager)
 	
 	if self.isInitialized == true then
 		return
 	end
-	table.insert(self.connections, experienceService:RegisterForExperienceJoin(function() --[[ line: 181 ]]
+	table.insert(self.connections, experienceService:RegisterForExperienceJoin(function()
 		-- upvalues: crossExperience (copy), self (ref)
 		if (if game.PlaceId == 0 then crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else crossExperience.Constants.EXPERIENCE_TYPE_UGC) == crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP then
 			self.isActiveDM = false
 		end
 	end))
-	table.insert(self.connections, experienceService:RegisterForExperienceLeave(function() --[[ line: 191 ]]
+	table.insert(self.connections, experienceService:RegisterForExperienceLeave(function()
 		-- upvalues: crossExperience (copy), self (ref)
 		if (if game.PlaceId == 0 then crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP else crossExperience.Constants.EXPERIENCE_TYPE_UGC) == crossExperience.Constants.EXPERIENCE_TYPE_LUAAPP then
 			self.isActiveDM = true
 		end
 	end))
-	table.insert(self.connections, experienceService.OnCrossExperienceStarted:Connect(function(_, _) --[[ line: 201 ]]
+	table.insert(self.connections, experienceService.OnCrossExperienceStarted:Connect(function(_, _)
 		-- upvalues: self (ref), loggerModule (copy), crossExperience (copy), flagsModule (copy), fStringTimeoutLoadingLocalPlayerInBackgroundDM (copy), LOCAL_PLAYER_LOADING_TIMEOUT_ENUM (copy), playersService (copy), getFFlagEnableCrossExpVoiceMemoryCheck (copy)
 		self.voiceAnalytics:logPartyVoiceOnCrossExperienceStartedSignalReceived(self.hasExperienceStarted, self.isActiveDM)
 		
@@ -108,7 +108,7 @@ function t:initialize() --[[ line: 172 ]]
 		end
 		self.observersInitialized = true
 		loggerModule:info("Initializing observers for the first time")
-		self.cevEventManager:addObserver(crossExperience.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, function(p0) --[[ line: 221 ]]
+		self.cevEventManager:addObserver(crossExperience.Constants.EVENTS.PARTY_VOICE_STATUS_CHANGED, function(p0)
 			-- upvalues: self (copy), flagsModule (copy), crossExperience (copy), fStringTimeoutLoadingLocalPlayerInBackgroundDM (copy), LOCAL_PLAYER_LOADING_TIMEOUT_ENUM (copy)
 			self.voiceAnalytics:logPartyVoiceStateChangeHandlerRun(self.isActiveDM, p0)
 			
@@ -130,14 +130,14 @@ function t:initialize() --[[ line: 172 ]]
 				self:leave()
 			end
 		end)
-		self.cevEventManager:addObserver(crossExperience.Constants.EVENTS.PARTY_VOICE_GAME_JOIN_FAILED, function(p1) --[[ line: 272 ]]
+		self.cevEventManager:addObserver(crossExperience.Constants.EVENTS.PARTY_VOICE_GAME_JOIN_FAILED, function(p1)
 			-- upvalues: self (copy), playersService (copy)
 			self.ExperienceJoinFailed:Fire()
 			self.voiceAnalytics:logPartyVoiceJoinFailure(self.currentPartyId, if p1 and p1.state then "PARTY_VOICE_GAME_JOIN_FAILED:" .. tostring(p1.state) else "PARTY_VOICE_GAME_JOIN_FAILED:-1", if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
 		end)
 		
 		if getFFlagEnableCrossExpVoiceMemoryCheck() then
-			self.cevEventManager:addObserver(crossExperience.Constants.EVENTS.PARTY_VOICE_MEMORY_LOW, function() --[[ line: 283 ]]
+			self.cevEventManager:addObserver(crossExperience.Constants.EVENTS.PARTY_VOICE_MEMORY_LOW, function()
 				-- upvalues: self (copy)
 				self:ignoreMemoryWarning()
 				
@@ -150,13 +150,13 @@ function t:initialize() --[[ line: 172 ]]
 		self.ExperienceJoined:Fire()
 		self.hasExperienceStarted = true
 	end))
-	table.insert(self.connections, experienceService.OnCrossExperienceStopped:Connect(function(_, _) --[[ line: 298 ]]
+	table.insert(self.connections, experienceService.OnCrossExperienceStopped:Connect(function(_, _)
 		-- upvalues: self (ref)
 		self:disconnect()
 		self.ExperienceLeft:Fire()
 		self:resetCEVMemStorage()
 	end))
-	table.insert(self.connections, notificationService.RobloxEventReceived:Connect(function(p2) --[[ line: 310 ]]
+	table.insert(self.connections, notificationService.RobloxEventReceived:Connect(function(p2)
 		-- upvalues: self (ref)
 		if p2.detailType == "SignOut" then
 			self:onUserLogout()
@@ -165,7 +165,7 @@ function t:initialize() --[[ line: 172 ]]
 	self.isInitialized = true
 end
 
-function t:onUserLogout() --[[ line: 319 ]]
+function t:onUserLogout()
 	if self.hasExperienceStarted then
 		self:leave()
 	end
@@ -176,11 +176,11 @@ function t:onUserLogout() --[[ line: 319 ]]
 	end
 end
 
-function t:getIsConnected() --[[ line: 330 ]]
+function t:getIsConnected()
 	return self.isConnected
 end
 
-function t:setAsDisconnected() --[[ line: 334 ]]
+function t:setAsDisconnected()
 	self.isConnected = false
 	self.hasExperienceStarted = false
 	
@@ -189,7 +189,7 @@ function t:setAsDisconnected() --[[ line: 334 ]]
 	end
 end
 
-function t:setAsConnected() --[[ line: 342 ]]
+function t:setAsConnected()
 	if not self.isInitialized then
 		self:initialize()
 	end
@@ -198,26 +198,26 @@ function t:setAsConnected() --[[ line: 342 ]]
 	self.ExperienceJoined:Fire()
 end
 
-function t.getIsBackgroundDMActive(_) --[[ line: 351 ]]
+function t.getIsBackgroundDMActive(_)
 	-- upvalues: promise (ref), communication (ref), crossExperience (ref), BACKGROUND_DM_STATUS (ref)
-	return promise.new(function(p3, p4) --[[ line: 352 ]]
+	return promise.new(function(p3, p4)
 		-- upvalues: communication (copy), crossExperience (copy), BACKGROUND_DM_STATUS (copy)
-		communication.execute(crossExperience.Constants.COMMUNICATIONS.EXECUTE_GET_BACKGROUND_DM_STATE, {}, function(p5) --[[ line: 356 ]]
+		communication.execute(crossExperience.Constants.COMMUNICATIONS.EXECUTE_GET_BACKGROUND_DM_STATE, {}, function(p5)
 			-- upvalues: p3 (ref), BACKGROUND_DM_STATUS (copy)
 			p3(if p5.status ~= BACKGROUND_DM_STATUS.ACTIVE then p5.status == BACKGROUND_DM_STATUS.BACKGROUND else true)
-		end, function() --[[ line: 359 ]]
+		end, function()
 			-- upvalues: p4 (ref)
 			p4()
 		end)
 	end)
 end
 
-function t:performJoinFeasibilityCheck() --[[ line: 367 ]]
+function t:performJoinFeasibilityCheck()
 	-- upvalues: getFFlagEnableCrossExpVoiceMemoryCheck (ref), crossExperience (ref), fFlagFixCrossExperienceVoiceExecutePrint (ref), loggerModule (ref)
 	if not getFFlagEnableCrossExpVoiceMemoryCheck() then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 371 ]]
+	local ok, status = pcall(function()
 		return game:GetService("PerformanceControlService")
 	end)
 	
@@ -226,7 +226,7 @@ function t:performJoinFeasibilityCheck() --[[ line: 367 ]]
 		
 		return false
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 380 ]]
+	local ok_1, status_1 = pcall(function()
 		-- upvalues: status (ref), crossExperience (copy)
 		return status:IsCrossExperienceLaunchFeasible(crossExperience.Constants.EXPERIENCE_TYPE_VOICE)
 	end)
@@ -245,7 +245,7 @@ function t:performJoinFeasibilityCheck() --[[ line: 367 ]]
 	return false
 end
 
-function t.ignoreMemoryWarning(_) --[[ line: 400 ]]
+function t.ignoreMemoryWarning(_)
 	-- upvalues: getFFlagEnableCrossExpVoiceMemoryCheck (ref), communication (ref), crossExperience (ref), var16 (ref)
 	if getFFlagEnableCrossExpVoiceMemoryCheck() then
 		communication.execute(crossExperience.Constants.COMMUNICATIONS.EXECUTE_PARTY_VOICE_IGNORE_LOW_MEMORY, {}, var16, var16)
@@ -254,7 +254,7 @@ function t.ignoreMemoryWarning(_) --[[ line: 400 ]]
 	end
 end
 
-function t:join(p6) --[[ line: 413 ]]
+function t:join(p6)
 	-- upvalues: crossExpVoicePlaceId (ref), fFlagFixCrossExperienceVoiceExecutePrint (ref), loggerModule (ref), httpService (ref), memStorageService (ref), CEV_JOIN_ATTEMPT_ID_KEY (ref), playersService (ref), crossExperience (ref), fIntPartyVoiceJoinRequestPulseCheckTimeout (ref), clearTimeout (ref), setTimeout (ref), getFFlagJoinCrossExpVoiceWithPartyId (ref), experienceService (ref), recordJoinAttemptIdForCEVEngineFeature (ref)
 	if p6.shouldIgnoreMemoryWarning then
 		self.shouldIgnoreMemoryWarning = true
@@ -284,7 +284,7 @@ function t:join(p6) --[[ line: 413 ]]
 		end
 	end
 	self.currentCevJoinAttemptId = httpService:GenerateGUID(false)
-	pcall(function() --[[ line: 447 ]]
+	pcall(function()
 		-- upvalues: memStorageService (copy), CEV_JOIN_ATTEMPT_ID_KEY (copy), self (ref)
 		memStorageService:SetItem(CEV_JOIN_ATTEMPT_ID_KEY, self.currentCevJoinAttemptId)
 	end)
@@ -302,7 +302,7 @@ function t:join(p6) --[[ line: 413 ]]
 			clearTimeout(self.joinRequestPulseCheckId)
 			self.joinRequestPulseCheckId = nil
 		end
-		self.joinRequestPulseCheckId = setTimeout(function() --[[ line: 467 ]]
+		self.joinRequestPulseCheckId = setTimeout(function()
 			-- upvalues: self (ref)
 			self.JoinRequestPulseCheck:Fire()
 		end, fIntPartyVoiceJoinRequestPulseCheckTimeout)
@@ -312,7 +312,7 @@ function t:join(p6) --[[ line: 413 ]]
 	if getFFlagJoinCrossExpVoiceWithPartyId() then
 		if p6 and p6.partyId then
 			self.currentPartyId = p6.partyId
-			local ok, status = pcall(function() --[[ line: 492 ]]
+			local ok, status = pcall(function()
 				-- upvalues: loggerModule (copy), p6 (ref), experienceService (copy), crossExperience (copy), var19 (ref), recordJoinAttemptIdForCEVEngineFeature (copy), self (ref)
 				loggerModule:info("CrossExperienceVoiceManager:join() - starting cross experience voice with partyId " .. p6.partyId)
 				experienceService:StartCrossExperience(crossExperience.Constants.EXPERIENCE_TYPE_VOICE, {
@@ -342,7 +342,7 @@ function t:join(p6) --[[ line: 413 ]]
 		
 		return
 	else
-		local ok, status = pcall(function() --[[ line: 514 ]]
+		local ok, status = pcall(function()
 			-- upvalues: loggerModule (copy), experienceService (copy), crossExperience (copy), var19 (ref), recordJoinAttemptIdForCEVEngineFeature (copy), self (ref)
 			loggerModule:info("CrossExperienceVoiceManager:join() - starting cross experience voice")
 			experienceService:StartCrossExperience(crossExperience.Constants.EXPERIENCE_TYPE_VOICE, {
@@ -364,54 +364,54 @@ function t:join(p6) --[[ line: 413 ]]
 	self.JoinRequestSubmitted:Fire(self.isConnected)
 end
 
-function t.changeInputDevice(_, p7, p8) --[[ line: 536 ]]
+function t.changeInputDevice(_, p7, p8)
 	-- upvalues: communication (ref), crossExperience (ref), var16 (ref)
 	communication.execute(crossExperience.Constants.COMMUNICATIONS.EXECUTE_CHANGE_PARTY_VOICE_INPUT_DEVICE, { deviceName = p7, deviceGuid = p8 }, var16, var16)
 end
 
-function t.changeOutputDevice(_, p9, p10) --[[ line: 543 ]]
+function t.changeOutputDevice(_, p9, p10)
 	-- upvalues: communication (ref), crossExperience (ref), var16 (ref)
 	communication.execute(crossExperience.Constants.COMMUNICATIONS.EXECUTE_CHANGE_PARTY_VOICE_OUTPUT_DEVICE, { deviceName = p9, deviceGuid = p10 }, var16, var16)
 end
 
-function t:muteVoiceParticipant(p11) --[[ line: 550 ]]
+function t:muteVoiceParticipant(p11)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.MUTE_PARTY_VOICE_PARTICIPANT, { userId = p11 })
 	self.voiceAnalytics:logPartyVoiceMuteParticipant(self.currentPartyId, p11)
 end
 
-function t:unmuteVoiceParticipant(p12) --[[ line: 558 ]]
+function t:unmuteVoiceParticipant(p12)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.UNMUTE_PARTY_VOICE_PARTICIPANT, { userId = p12 })
 	self.voiceAnalytics:logPartyVoiceUnmuteParticipant(self.currentPartyId, p12)
 end
 
-function t:enableVoiceChanger(p13) --[[ line: 566 ]]
+function t:enableVoiceChanger(p13)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.ENABLE_PARTY_VOICE_CHANGER, { userId = p13 })
 end
 
-function t:disableVoiceChanger(p14) --[[ line: 574 ]]
+function t:disableVoiceChanger(p14)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.DISABLE_PARTY_VOICE_CHANGER, { userId = p14 })
 end
 
-function t:setVoicePack(p15) --[[ line: 582 ]]
+function t:setVoicePack(p15)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.SET_PARTY_VOICE_PACK, { voicePackName = p15 })
 end
 
-function t:enableHearMyself(p16) --[[ line: 590 ]]
+function t:enableHearMyself(p16)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.ENABLE_PARTY_VOICE_CHANGER_FEEDBACK, { userId = p16 })
 end
 
-function t:disableHearMyself(p17) --[[ line: 596 ]]
+function t:disableHearMyself(p17)
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.DISABLE_PARTY_VOICE_CHANGER_FEEDBACK, { userId = p17 })
 end
 
-function t:blockVoiceParticipant(p18) --[[ line: 602 ]]
+function t:blockVoiceParticipant(p18)
 	-- upvalues: crossExperience (ref)
 	if self.isConnected then
 		self.cevEventManager:notify(crossExperience.Constants.EVENTS.PARTY_VOICE_BLOCK_PARTICIPANT, { userId = p18 })
@@ -419,7 +419,7 @@ function t:blockVoiceParticipant(p18) --[[ line: 602 ]]
 	end
 end
 
-function t:unblockVoiceParticipant(p19) --[[ line: 612 ]]
+function t:unblockVoiceParticipant(p19)
 	-- upvalues: crossExperience (ref)
 	if self.isConnected then
 		self.cevEventManager:notify(crossExperience.Constants.EVENTS.PARTY_VOICE_UNBLOCK_PARTICIPANT, { userId = p19 })
@@ -427,12 +427,12 @@ function t:unblockVoiceParticipant(p19) --[[ line: 612 ]]
 	end
 end
 
-function t:dumpDebugData() --[[ line: 622 ]]
+function t:dumpDebugData()
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.DEBUG_COMMAND, { name = "dump_session" })
 end
 
-function t:leave() --[[ line: 628 ]]
+function t:leave()
 	-- upvalues: experienceService (ref), crossExperience (ref), clearTimeout (ref)
 	experienceService:StopCrossExperience(crossExperience.Constants.EXPERIENCE_TYPE_VOICE, {})
 	
@@ -443,21 +443,21 @@ function t:leave() --[[ line: 628 ]]
 	self.voiceAnalytics:reset()
 end
 
-function t:rejoinVoice() --[[ line: 639 ]]
+function t:rejoinVoice()
 	-- upvalues: crossExperience (ref)
 	self.cevEventManager:notify(crossExperience.Constants.EVENTS.PARTY_VOICE_RECONNECT_REQUESTED, {})
 end
 
-function t:resetCEVMemStorage() --[[ line: 643 ]]
+function t:resetCEVMemStorage()
 	-- upvalues: memStorageService (ref), CEV_JOIN_ATTEMPT_ID_KEY (ref)
 	self.currentCevJoinAttemptId = nil
-	pcall(function() --[[ line: 645 ]]
+	pcall(function()
 		-- upvalues: memStorageService (copy), CEV_JOIN_ATTEMPT_ID_KEY (copy)
 		memStorageService:RemoveItem(CEV_JOIN_ATTEMPT_ID_KEY)
 	end)
 end
 
-function t:disconnect() --[[ line: 650 ]]
+function t:disconnect()
 	-- upvalues: loggerModule (ref), clearTimeout (ref), var14 (ref)
 	self.isConnected = false
 	self.currentPartyId = nil
@@ -473,25 +473,25 @@ function t:disconnect() --[[ line: 650 ]]
 	var14.clean()
 end
 
-function t.getAudioFocusService(_) --[[ line: 668 ]]
+function t.getAudioFocusService(_)
 	-- upvalues: audioFocusManagementEngineFeature (ref)
 	if not audioFocusManagementEngineFeature then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 674 ]]
+	local ok, status = pcall(function()
 		return game:GetService("AudioFocusService")
 	end)
 	
 	return if ok and status then status else nil
 end
 
-function t:getCurrentAudioContext() --[[ line: 684 ]]
+function t:getCurrentAudioContext()
 	local audioFocusService = self:getAudioFocusService()
 	
 	return if audioFocusService == nil then -1 else audioFocusService:GetFocusedContextId()
 end
 
-function t:toggleAudioFocus() --[[ line: 693 ]]
+function t:toggleAudioFocus()
 	-- upvalues: AUDIO_FOCUS_MANAGEMENT (ref)
 	local audioFocusService = self:getAudioFocusService()
 	
@@ -515,7 +515,7 @@ function t:toggleAudioFocus() --[[ line: 693 ]]
 	end
 end
 
-function t:muteAll(p20) --[[ line: 722 ]]
+function t:muteAll(p20)
 	-- upvalues: getFFlagEnableCrossExperienceVoiceCaptureMute (ref), crossExperience (ref)
 	if not getFFlagEnableCrossExperienceVoiceCaptureMute() then return end
 	if self.isConnected then
@@ -523,7 +523,7 @@ function t:muteAll(p20) --[[ line: 722 ]]
 	end
 end
 
-function t:unmuteAll(p21) --[[ line: 733 ]]
+function t:unmuteAll(p21)
 	-- upvalues: getFFlagEnableCrossExperienceVoiceCaptureMute (ref), crossExperience (ref)
 	if not getFFlagEnableCrossExperienceVoiceCaptureMute() then return end
 	if self.isConnected then
@@ -531,7 +531,7 @@ function t:unmuteAll(p21) --[[ line: 733 ]]
 	end
 end
 
-function t:signalCevReadinessSync() --[[ line: 744 ]]
+function t:signalCevReadinessSync()
 	-- upvalues: crossExperience (ref)
 	if game:GetEngineFeature("CevReadinessSync") then
 		self.cevEventManager:notify(crossExperience.Constants.EVENTS.FOREGROUND_UI_READY, {})

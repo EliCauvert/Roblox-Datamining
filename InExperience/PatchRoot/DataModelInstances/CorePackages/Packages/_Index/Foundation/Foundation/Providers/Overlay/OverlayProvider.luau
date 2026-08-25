@@ -13,7 +13,7 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local t = { DisplayOrder = constantsModule.MAX_LAYOUT_ORDER - 1 }
 local var10 = if flagsModule.FoundationOverlayResilientMainGui then nil else getMainGuiModule()
 
-return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useKeyboardAwareSizeModule (ref), useStyleSheet (ref), flagsModule (ref), getMainGuiModule (ref), var10 (ref), overlayContextModule (ref), reactRobloxModule (ref)
 	local var11 = withDefaultsModule(p0, t)
 	local var12, var13 = reactModule.useState(var11.gui)
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
 	local var16 = if not var11.gui then var12 and var12.Parent else nil
 	local var17 = useKeyboardAwareSizeModule(var16)
 	local var18 = useStyleSheet()
-	local var19 = reactModule.useCallback(function() --[[ line: 38 ]]
+	local var19 = reactModule.useCallback(function()
 		-- upvalues: var11 (ref), var15 (ref)
 		if var11.gui == nil then
 			var15(true)
@@ -33,7 +33,7 @@ return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
 	local var23 = if var11.gui ~= nil then var16 else var11.gui
 	
 	return reactModule.createElement(overlayContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 53 ]]
+		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 			-- upvalues: var19 (ref), var22 (ref), var23 (ref)
 			return { requestOverlay = var19, instance = var22, screen = var23 }
 		end, { var19, var22, var23 }) else nil else { requestOverlay = var19, instance = var22, screen = var23 }

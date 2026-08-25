@@ -22,7 +22,7 @@ local useCarouselControllerModule = require(parent.Hooks.useCarouselController)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-local function _(p0, p1) --[[ line: 40 | named "getMargins" ]]
+local function _(p0, p1)
 	local x = (p1 - p0).X
 	
 	if x % 2 == 0 then
@@ -35,14 +35,14 @@ local function _(p0, p1) --[[ line: 40 | named "getMargins" ]]
 	return floored + 1, floored
 end
 
-local _ = function() --[[ line: 54 | named "getTouchScrollingEnabled" ]]
+local _ = function()
 	-- upvalues: userInputService (ref), userGameSettingsService (ref)
 	local platform = userInputService:GetPlatform()
 	
 	return (if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true) and (userInputService.TouchEnabled and not userGameSettingsService.ReducedMotion)
 end
 
-return function(p2) --[[ line: 70 ]]
+return function(p2)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useScreenSize (ref), reactModule (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), carouselScrolledModule (ref), useCarouselControllerModule (ref), useSignal (ref), getClosestItemToCenterModule (ref), carouselItemModule (ref), fFlagUseRbxstorageInGalleryModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), userInputService (ref), userGameSettingsService (ref), carouselNavArrowModule (ref)
 	local var33, var34
 	local var18 = useAnalyticsModule()
@@ -50,11 +50,11 @@ return function(p2) --[[ line: 70 ]]
 	local var20 = useScreenSize()
 	local var21, var22 = reactModule.useState(false)
 	local var23, var24 = reactModule.useState(0)
-	local var25 = useSelector(function(p3) --[[ line: 77 ]]
+	local var25 = useSelector(function(p3)
 		-- upvalues: constantsModule (copy)
 		return p3[constantsModule.RoduxKey].Captures
 	end)
-	local var26 = useSelector(function(p4) --[[ line: 81 ]]
+	local var26 = useSelector(function(p4)
 		-- upvalues: constantsModule (copy)
 		return p4[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
 	end)
@@ -75,7 +75,7 @@ return function(p2) --[[ line: 70 ]]
 		var34 = floored
 	end
 	local var39
-	local var36 = useCarouselControllerModule(vector2, var26, reactModule.useCallback(function(p5) --[[ line: 102 ]]
+	local var36 = useCarouselControllerModule(vector2, var26, reactModule.useCallback(function(p5)
 		-- upvalues: var25 (ref), var26 (ref), constantsModule (copy), var18 (ref), eventNamesModule (copy), var19 (ref), carouselScrolledModule (copy)
 		if p5 < 1 or #var25 < p5 then
 			return
@@ -99,15 +99,15 @@ return function(p2) --[[ line: 70 ]]
 	if not var37 then
 		var39 = var38 and not p2.isDisabled
 	end
-	reactModule.useEffect(function() --[[ line: 130 ]]
+	reactModule.useEffect(function()
 		-- upvalues: setIsNavigationLocked (ref), var39 (ref)
 		setIsNavigationLocked(not var39)
 	end, { var39, setIsNavigationLocked })
-	useSignal(p2.deleteItemSignal, reactModule.useCallback(function(p6) --[[ line: 134 ]]
+	useSignal(p2.deleteItemSignal, reactModule.useCallback(function(p6)
 		-- upvalues: deleteSelectedItem (ref)
 		deleteSelectedItem(p6)
 	end, { deleteSelectedItem }))
-	local var40 = reactModule.useCallback(function(p7) --[[ line: 139 ]]
+	local var40 = reactModule.useCallback(function(p7)
 		-- upvalues: getClosestItemToCenterModule (copy), vector2 (ref), var27 (ref), var28 (ref)
 		local var53 = getClosestItemToCenterModule(vector2, p7)
 		
@@ -115,11 +115,11 @@ return function(p2) --[[ line: 70 ]]
 			var28(var53)
 		end
 	end, { vector2, var27, var28 })
-	local var41 = reactModule.useCallback(function() --[[ line: 146 ]]
+	local var41 = reactModule.useCallback(function()
 		-- upvalues: var18 (ref), eventNamesModule (copy)
 		var18.fireEvent(eventNamesModule.CapturesCarouselVideoMuteButtonActivated)
 	end, {})
-	local var42 = reactModule.useCallback(function(p8) --[[ line: 150 ]]
+	local var42 = reactModule.useCallback(function(p8)
 		-- upvalues: var22 (ref), var21 (ref), var24 (ref), var18 (ref), eventNamesModule (copy)
 		var22(not var21)
 		var24(p8)
@@ -131,7 +131,7 @@ return function(p2) --[[ line: 70 ]]
 		end
 		var18.fireEvent(eventNamesModule.CapturesCarouselVideoExpanded)
 	end, { var21 })
-	local var43 = reactModule.useCallback(function(p9, p10) --[[ line: 161 ]]
+	local var43 = reactModule.useCallback(function(p9, p10)
 		-- upvalues: var27 (ref), reactModule (copy), carouselItemModule (copy), var26 (ref), selectedItemFadeOutBinding (ref), postDeletionItemBinding (ref), clampedValue (ref), fFlagUseRbxstorageInGalleryModule (copy), p2 (ref), vector2 (ref), var42 (ref), var41 (ref)
 		if var27 + 3 < p10 or p10 < var27 - 3 then
 			return nil
@@ -168,7 +168,7 @@ return function(p2) --[[ line: 70 ]]
 		vector2, var27, clampedValue, p2.isDisabled, var42, var41,
 		postDeletionItemBinding, var26, selectedItemFadeOutBinding
 	})
-	local var44 = reactModule.useMemo(function() --[[ line: 201 ]]
+	local var44 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var25 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), vector2 (ref), var26 (ref), selectedItemRef (ref), var21 (ref), var23 (ref), var43 (ref)
 		local t = {
 			Layout = reactModule.createElement("UIListLayout", {

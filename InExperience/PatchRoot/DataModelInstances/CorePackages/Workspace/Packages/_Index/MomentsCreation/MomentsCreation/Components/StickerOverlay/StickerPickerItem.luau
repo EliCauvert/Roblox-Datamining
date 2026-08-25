@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local image = require(parent.Foundation).Image
 local useCallback = reactModule.useCallback
 
-return function(p0) --[[ line: 25 | named "StickerPickerItem" ]]
+return function(p0)
 	-- upvalues: useCallback (ref), reactModule (ref), image (ref)
 	local stickerURI = p0.stickerURI
 	local onStickerSelected = p0.onStickerSelected
@@ -12,7 +12,7 @@ return function(p0) --[[ line: 25 | named "StickerPickerItem" ]]
 		BackgroundTransparency = 1,
 		tag = "size-1000-1000 radius-medium",
 		LayoutOrder = p0.layoutOrder,
-		onActivated = if onStickerSelected then useCallback(function() --[[ line: 29 ]]
+		onActivated = if onStickerSelected then useCallback(function()
 			-- upvalues: onStickerSelected (ref), stickerURI (ref)
 			if onStickerSelected then
 				onStickerSelected(stickerURI)

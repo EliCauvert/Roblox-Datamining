@@ -26,7 +26,7 @@ local getFFlagRemoveAssetVersionEndpointModule = require(robloxGui.Modules.Flags
 local versionReporter = roact.PureComponent:extend("VersionReporter")
 versionReporter.validateProps = t.strictInterface({ LayoutOrder = t.integer })
 
-local function inferPlayerScriptStatus(p0) --[[ line: 46 ]]
+local function inferPlayerScriptStatus(p0)
 	-- upvalues: constantsModule (ref), rbxAnalyticsService (ref), getFFlagNewEventIngestPlayerScriptsDimensionsModule (ref)
 	local playerScriptsLoader = p0:FindFirstChild("PlayerScriptsLoader")
 	local playerModule = p0:FindFirstChild("PlayerModule")
@@ -42,7 +42,7 @@ local function inferPlayerScriptStatus(p0) --[[ line: 46 ]]
 	return var25
 end
 
-function versionReporter.init(p1) --[[ line: 82 ]]
+function versionReporter.init(p1)
 	-- upvalues: starterPlayerService (ref), inferPlayerScriptStatus (ref), contentProviderService (ref), runService (ref), coreScriptVersionEnabledEngineFeature (ref)
 	local var26 = "PlayerScript Status: Unknown"
 	local starterPlayerScripts = starterPlayerService:FindFirstChild("StarterPlayerScripts")
@@ -50,7 +50,7 @@ function versionReporter.init(p1) --[[ line: 82 ]]
 	if starterPlayerScripts then
 		var26 = inferPlayerScriptStatus(starterPlayerScripts)
 	else
-		p1.playerScriptsAddedConnection = starterPlayerService.ChildAdded:Connect(function(p2) --[[ line: 88 ]]
+		p1.playerScriptsAddedConnection = starterPlayerService.ChildAdded:Connect(function(p2)
 			-- upvalues: p1 (ref), inferPlayerScriptStatus (copy)
 			if p2.Name == "StarterPlayerScripts" then
 				p1.playerScriptsAddedConnection:Disconnect()
@@ -71,7 +71,7 @@ function versionReporter.init(p1) --[[ line: 82 ]]
 	})
 end
 
-function versionReporter.render(p3) --[[ line: 111 ]]
+function versionReporter.render(p3)
 	-- upvalues: withLocalizationModule (ref), coreScriptVersionEnabledEngineFeature (ref), runService (ref), roact (ref), themedTextLabelModule (ref), skeleton (ref), dividerModule (ref), externalEventConnectionModule (ref)
 	local var28 = p3.state.serverVersion ~= nil
 	local var29 = p3.state.latestPlaceVersion ~= nil
@@ -96,7 +96,7 @@ function versionReporter.render(p3) --[[ line: 111 ]]
 			"CoreScripts.InGameMenu.GameSettings.ClientCoreScriptVersion",
 			CLIENT_CORESCRIPT_VERSION = p3.state.coreScriptVersion
 		} or nil)
-	})(function(_) --[[ line: 136 ]]
+	})(function(_)
 		-- upvalues: runService (copy), roact (copy), p3 (ref), themedTextLabelModule (copy), var28 (ref), skeleton (copy), var30 (ref), var30_1 (ref), dividerModule (copy), coreScriptVersionEnabledEngineFeature (copy), externalEventConnectionModule (copy)
 -- FATAL: Failed to generate AST for `unnamed` function:
 runtime : [KeyError] :11990: 48
@@ -107,10 +107,10 @@ Traceback:
 	end)
 end
 
-function versionReporter.didMount(p4) --[[ line: 227 ]]
+function versionReporter.didMount(p4)
 	-- upvalues: robloxReplicatedStorageService (ref), getFFlagRemoveAssetVersionEndpointModule (ref), httpRbxApiService (ref), httpService (ref), playerPermissionsModule (ref), playersService (ref)
 	p4.mounted = true
-	coroutine.wrap(function() --[[ line: 230 ]]
+	coroutine.wrap(function()
 		-- upvalues: robloxReplicatedStorageService (copy), p4 (ref)
 		local var32 = robloxReplicatedStorageService:WaitForChild("GetServerVersion", 1e999):InvokeServer()
 		
@@ -120,9 +120,9 @@ function versionReporter.didMount(p4) --[[ line: 227 ]]
 	end)()
 	
 	if not getFFlagRemoveAssetVersionEndpointModule() then
-		coroutine.wrap(function() --[[ line: 244 ]]
+		coroutine.wrap(function()
 			-- upvalues: httpRbxApiService (copy), httpService (copy), p4 (ref)
-			pcall(function() --[[ line: 245 ]]
+			pcall(function()
 				-- upvalues: httpRbxApiService (copy), httpService (copy), p4 (copy)
 				local versionNumber = httpService:JSONDecode(httpRbxApiService:GetAsync(string.format("assets/%d/versions", game.PlaceId)))[1].VersionNumber
 				
@@ -132,7 +132,7 @@ function versionReporter.didMount(p4) --[[ line: 227 ]]
 			end)
 		end)()
 	end
-	coroutine.wrap(function() --[[ line: 259 ]]
+	coroutine.wrap(function()
 		-- upvalues: playerPermissionsModule (copy), playersService (copy), p4 (ref)
 		local var33 = playerPermissionsModule.IsPlayerAdminAsync(playersService.LocalPlayer)
 		
@@ -142,7 +142,7 @@ function versionReporter.didMount(p4) --[[ line: 227 ]]
 	end)()
 end
 
-function versionReporter.willUnmount(p5) --[[ line: 270 ]]
+function versionReporter.willUnmount(p5)
 	p5.mounted = false
 	
 	if p5.playerScriptsAddedConnection then

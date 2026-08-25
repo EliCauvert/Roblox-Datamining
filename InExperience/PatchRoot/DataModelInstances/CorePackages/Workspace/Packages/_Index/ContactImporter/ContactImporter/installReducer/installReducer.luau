@@ -5,7 +5,7 @@ local contactsModule = require(script.Parent.Contacts)
 local showContactImporterParamsModule = require(script.Parent.ShowContactImporterParams)
 local roduxUserPermissions = dependenciesModule.RoduxUserPermissions
 
-return function() --[[ line: 11 ]]
+return function()
 	-- upvalues: rodux (ref), contactsModule (ref), roduxUserPermissions (ref), roduxNetworking (ref), showContactImporterParamsModule (ref)
 	return rodux.combineReducers({
 		Contacts = contactsModule,

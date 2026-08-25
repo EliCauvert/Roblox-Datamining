@@ -1,40 +1,40 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Components").Parent.Parent.React)
 
-local var1 = function() --[[ line: 39 ]]
+local var1 = function()
 	warn("Wrap the component using HoverContext with a HoverContext.Provider element")
 end
 
 local var2 = reactModule.createContext({ registerOnHoverCallback = var1, onHover = var1 })
 
-function useHoverContext(p0) --[[ line: 54 ]]
+function useHoverContext(p0)
 	-- upvalues: reactModule (ref), var2 (ref)
 	local var3 = reactModule.useContext(var2)
 	local var4, var5 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 58 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), p0 (ref), var5 (ref)
 		var3.registerOnHoverCallback(p0, var5)
 	end, {})
 	
-	return var4, reactModule.useCallback(function(p1) --[[ line: 62 ]]
+	return var4, reactModule.useCallback(function(p1)
 		-- upvalues: var3 (ref), p0 (ref)
 		var3.onHover(p0, p1)
 	end, { p0 })
 end
 
-function Provider(p2) --[[ line: 69 ]]
+function Provider(p2)
 	-- upvalues: reactModule (ref), var2 (ref)
 	local var6 = reactModule.useRef({})
 	
 	return reactModule.createElement(var2.Provider, {
 		value = {
-			onHover = reactModule.useCallback(function(p3, p4) --[[ line: 71 ]]
+			onHover = reactModule.useCallback(function(p3, p4)
 				-- upvalues: var6 (ref)
 				if not var6.current[p3] then return end
 				for i, v in var6.current[p3] do
 					v(p4)
 				end
 			end, {}),
-			registerOnHoverCallback = reactModule.useCallback(function(p5, p6) --[[ line: 80 ]]
+			registerOnHoverCallback = reactModule.useCallback(function(p5, p6)
 				-- upvalues: var6 (ref)
 				local var7 = var6.current[p5]
 				

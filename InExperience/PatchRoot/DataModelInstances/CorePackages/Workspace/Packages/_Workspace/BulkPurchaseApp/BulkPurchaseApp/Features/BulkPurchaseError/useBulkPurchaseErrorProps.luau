@@ -11,13 +11,13 @@ local selectErrorMetadataModule = require(bulkPurchaseApp.Store.Selectors.select
 local _ = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(script.Parent.BulkPurchaseError)
 
-return function() --[[ line: 16 | named "useBulkPurchaseErrorProps" ]]
+return function()
 	-- upvalues: useSelector (ref), selectPurchaseResultsModule (ref), selectErrorCodeModule (ref), selectErrorMetadataModule (ref), useDispatch (ref), reactModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref)
 	local var7 = useSelector(selectPurchaseResultsModule)
 	local var8 = useDispatch()
 	
 	return {
-		onDismiss = reactModule.useCallback(function() --[[ line: 22 ]]
+		onDismiss = reactModule.useCallback(function()
 			-- upvalues: marketplaceService (copy), var7 (ref), var8 (ref), bulkPurchaseEndedModule (copy)
 			marketplaceService:signalPromptBulkPurchaseFinished(3, var7)
 			var8(bulkPurchaseEndedModule())

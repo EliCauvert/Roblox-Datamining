@@ -21,11 +21,11 @@ local _ = {
 }
 local t = { isLoading = false, maxSize = Vector2.new(300, 1e999) }
 
-return function(p0) --[[ line: 52 | named "ChromeWindow" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), createNextOrder (ref), useMemo (ref), useLocalization (ref), useCallback (ref), reactModule (ref), foundationModule (ref), likeButtonModule (ref), chromeWindowFrameModule (ref), constantsModule (ref), trackingAudioIconModule (ref), musicIconModule (ref), marqueeScrollerModule (ref)
 	local var13 = cryoModule.Dictionary.join(t, p0)
 	local var14 = createNextOrder()
-	local var15 = useMemo(function() --[[ line: 56 ]]
+	local var15 = useMemo(function()
 		-- upvalues: var13 (ref)
 		return if var13.isLoading then "Loading" elseif var13.song then if var13.song.meetsCriteria then "MeetsCriteria" else "Unverified" else "Loading"
 	end, { var13.isLoading, var13.song })
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 52 | named "ChromeWindow" ]]
 			LikeButtonWrapper = reactModule.createElement(foundationModule.View, { tag = "auto-xy padding-right-xsmall" }, {
 				LikeButton = reactModule.createElement(likeButtonModule, {
 					isFavorited = if var13.song then var13.song.isLiked else false,
-					onFavorite = useCallback(function() --[[ line: 80 ]]
+					onFavorite = useCallback(function()
 						-- upvalues: var13 (ref)
 						if var13.onToggleLike then
 							var13.onToggleLike()
@@ -90,7 +90,7 @@ return function(p0) --[[ line: 52 | named "ChromeWindow" ]]
 					}),
 					Artists = reactModule.createElement(foundationModule.Text, {
 						tag = "auto-xy shrink text-body-small content-default",
-						Text = useMemo(function() --[[ line: 86 ]]
+						Text = useMemo(function()
 							-- upvalues: var13 (ref)
 							return if var13.song then table.concat(var13.song.artists, ", ") else nil
 						end, { var13.song }),

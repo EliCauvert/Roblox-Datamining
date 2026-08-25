@@ -1,4 +1,4 @@
-﻿return function(...) --[[ line: 2 | named "equalObjects" ]]
+﻿return function(...)
 	local var0 = select(1, ...)
 	
 	for i = 2, select("#", ...) do

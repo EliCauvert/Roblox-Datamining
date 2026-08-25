@@ -5,7 +5,7 @@
 	["'"] = "&apos;"
 }
 
-return function(p0) --[[ line: 20 | named "escapeRichText" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	local replaced = string.gsub(p0, "&", "&amp;")
 	

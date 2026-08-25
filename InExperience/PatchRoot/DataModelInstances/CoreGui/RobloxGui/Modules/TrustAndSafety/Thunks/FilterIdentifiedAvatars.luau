@@ -1,11 +1,11 @@
 ﻿local setSelectedAvatarsModule = require(script.Parent.Parent.Actions.SetSelectedAvatars)
 local getAvatarsForPoint = require(game:GetService("CorePackages").Workspace.Packages.TnSAvatarIdentification).AvatarIdentification.getAvatarsForPoint
 
-return function(p0) --[[ line: 10 ]]
+return function(p0)
 	-- upvalues: getAvatarsForPoint (ref), setSelectedAvatarsModule (ref)
-	return function(p1) --[[ line: 11 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), getAvatarsForPoint (copy), setSelectedAvatarsModule (copy)
-		coroutine.wrap(function() --[[ line: 13 ]]
+		coroutine.wrap(function()
 			-- upvalues: p1 (ref), p0 (copy), getAvatarsForPoint (copy), setSelectedAvatarsModule (copy)
 			local identifiedAvatars = p1:getState().report.identifiedAvatars
 			local t = {}

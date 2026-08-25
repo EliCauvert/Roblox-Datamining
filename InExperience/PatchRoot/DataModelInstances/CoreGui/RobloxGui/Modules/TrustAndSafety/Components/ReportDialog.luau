@@ -40,7 +40,7 @@ local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateCo
 local constantsModule_1 = require(robloxGui.Modules.VoiceChat.Constants)
 local reactModule = require(corePackagesService.Packages.React)
 
-local var32 = function(p0) --[[ line: 52 ]]
+local var32 = function(p0)
 	-- upvalues: reactModule (ref), voiceStateContextModule (ref), voiceIndicatorFuncModule (ref), cryoModule (ref)
 	return if reactModule.useContext(voiceStateContextModule.Context).voiceEnabled then reactModule.createElement(voiceIndicatorFuncModule, cryoModule.Dictionary.join(p0, {})) else nil
 end
@@ -74,52 +74,52 @@ reportDialog.validateProps = tModule.strictInterface({
 	currentPage = tModule.string
 })
 
-function reportDialog.init(p1) --[[ line: 114 ]]
+function reportDialog.init(p1)
 	p1.state = { reasonText = nil, descriptionText = "" }
 	
-	function p1.onReasonChanged(p2) --[[ line: 120 ]]
+	function p1.onReasonChanged(p2)
 		-- upvalues: p1 (ref)
 		p1:setState({ reasonText = p2 })
 	end
 	
-	function p1.onTextChanged(p3) --[[ line: 126 ]]
+	function p1.onTextChanged(p3)
 		-- upvalues: p1 (ref)
 		p1:setState({ descriptionText = p3 })
 	end
 	
-	function p1.onReport(p4, p5) --[[ line: 132 ]]
+	function p1.onReport(p4, p5)
 		-- upvalues: p1 (ref)
 		p1.props.sendReport(p1.props.reportType, p1.props.targetPlayer, p1:getReason(), p1.state.descriptionText, p1.props.reportCategory, p4, p5)
 	end
 	
-	function p1.navigateBack() --[[ line: 146 ]]
+	function p1.navigateBack()
 		-- upvalues: p1 (ref)
 		p1.props.navigateBack(p1.state.reasonText, p1.state.descriptionText ~= "")
 	end
 	
-	function p1.onCancel() --[[ line: 150 ]]
+	function p1.onCancel()
 		-- upvalues: p1 (ref)
 		p1.props.closeDialog(p1.state.reasonText, p1.state.descriptionText ~= "")
 	end
 	
-	function p1.onScreenshotAnnotated(p6) --[[ line: 154 ]]
+	function p1.onScreenshotAnnotated(p6)
 		-- upvalues: p1 (ref)
 		p1.props.screenshotAnnotated(p1.props.reportCategory, p1.props.reportType, p6)
 	end
 end
 
-function reportDialog.getReason(p7) --[[ line: 159 ]]
+function reportDialog.getReason(p7)
 	-- upvalues: constantsModule (ref)
 	return if p7.props.reportType == constantsModule.ReportType.Player then p7.state.reasonText elseif p7.props.reportType == constantsModule.ReportType.Place then "Inappropriate Content" else nil
 end
 
-function reportDialog.canReport(p8) --[[ line: 169 ]]
+function reportDialog.canReport(p8)
 	local charCount = utf8.len(utf8.nfcnormalize(p8.state.descriptionText))
 	
 	return p8:getReason() ~= nil and (charCount >= 0 and charCount <= 160)
 end
 
-function reportDialog.renderUKOSALink(_) --[[ line: 176 ]]
+function reportDialog.renderUKOSALink(_)
 	-- upvalues: isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), OSAReportLink (ref)
 	return if isShowUKOSAIllegalContentReportingLink() then roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -129,11 +129,11 @@ function reportDialog.renderUKOSALink(_) --[[ line: 176 ]]
 	}, { OSALink = roactModule.createElement(OSAReportLink) }) else nil
 end
 
-function reportDialog.renderPlayerInfo(p9) --[[ line: 191 ]]
+function reportDialog.renderPlayerInfo(p9)
 	-- upvalues: constantsModule (ref), withStyle (ref), cryoModule (ref), t (ref), roactModule (ref), provider (ref), playerCellModule (ref), isPlayerVerified (ref), var32 (ref), default (ref), constantsModule_1 (ref)
 	local var39 = p9.props.reportCategory == constantsModule.Category.Voice
 	
-	return withStyle(function(p10) --[[ line: 194 ]]
+	return withStyle(function(p10)
 		-- upvalues: cryoModule (copy), t (copy), var39 (ref), p9 (ref), roactModule (copy), provider (copy), playerCellModule (copy), isPlayerVerified (copy), var32 (copy), default (copy), constantsModule_1 (copy)
 		local var40 = cryoModule.Dictionary.join(p10, { Theme = cryoModule.Dictionary.join(p10.Theme, t) })
 		local var41 = 0
@@ -158,7 +158,7 @@ function reportDialog.renderPlayerInfo(p9) --[[ line: 191 ]]
 					iconStyle = "SpeakerLight",
 					userId = tostring(p9.props.targetPlayer.UserId),
 					size = UDim2.fromOffset(36, 36),
-					onClicked = function() --[[ line: 225 ]]
+					onClicked = function()
 						-- upvalues: default (copy), p9 (copy), constantsModule_1 (copy)
 						default:ToggleMutePlayer(p9.props.targetPlayer.UserId, constantsModule_1.VOICE_CONTEXT_TYPE.REPORT_MENU)
 					end
@@ -168,7 +168,7 @@ function reportDialog.renderPlayerInfo(p9) --[[ line: 191 ]]
 	end)
 end
 
-function reportDialog.renderDropDownMenu(p11) --[[ line: 238 ]]
+function reportDialog.renderDropDownMenu(p11)
 	-- upvalues: isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), withLocalizationModule (ref), list (ref), dropdownMenu (ref)
 	return if p11.props.isReportDialogOpen then roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -186,7 +186,7 @@ function reportDialog.renderDropDownMenu(p11) --[[ line: 238 ]]
 			menu7 = "CoreScripts.InGameMenu.Report.AbusePersonalQuestion",
 			menu8 = "CoreScripts.InGameMenu.Report.AbuseOffsiteLink",
 			placeHolderText = "CoreScripts.InGameMenu.Report.AbuseTypePlaceHolder"
-		})(function(p12) --[[ line: 260 ]]
+		})(function(p12)
 			-- upvalues: list (copy), p11 (ref), roactModule (copy), dropdownMenu (copy)
 			local t = {}
 			local t_1 = {}
@@ -200,7 +200,7 @@ function reportDialog.renderDropDownMenu(p11) --[[ line: 238 ]]
 				showDropShadow = true,
 				fixedListHeight = 171,
 				placeholder = p12.placeHolderText,
-				onChange = function(p13) --[[ line: 271 ]]
+				onChange = function(p13)
 					-- upvalues: t_1 (ref), p11 (copy)
 					p11.onReasonChanged(t_1[p13])
 				end,
@@ -212,11 +212,11 @@ function reportDialog.renderDropDownMenu(p11) --[[ line: 238 ]]
 	}) else nil
 end
 
-function reportDialog.renderPlayerContents(p14) --[[ line: 290 ]]
+function reportDialog.renderPlayerContents(p14)
 	-- upvalues: withLocalizationModule (ref), isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), textEntryFieldModule (ref)
 	return withLocalizationModule({
 		placeHolderText = "CoreScripts.InGameMenu.Report.AbuseDetailsPlaceHolder"
-	})(function(p15) --[[ line: 293 ]]
+	})(function(p15)
 		-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), roactModule (copy), p14 (ref), textEntryFieldModule (copy)
 		return roactModule.createFragment({
 			PlayerInfo = p14:renderPlayerInfo(),
@@ -236,7 +236,7 @@ function reportDialog.renderPlayerContents(p14) --[[ line: 290 ]]
 	end)
 end
 
-function reportDialog.renderPlaceContents(p16) --[[ line: 314 ]]
+function reportDialog.renderPlaceContents(p16)
 	-- upvalues: withLocalizationModule (ref), isShowUKOSAIllegalContentReportingLink (ref), roactModule (ref), gameIconModule (ref), themedTextLabelModule (ref), textEntryFieldModule (ref)
 	return withLocalizationModule({
 		placeHolderText = "CoreScripts.InGameMenu.Report.AbuseDetailsPlaceHolder",
@@ -244,7 +244,7 @@ function reportDialog.renderPlaceContents(p16) --[[ line: 314 ]]
 			"CoreScripts.InGameMenu.Report.ReportingGame",
 			RBX_NAME = p16.props.placeName
 		}
-	})(function(p17) --[[ line: 321 ]]
+	})(function(p17)
 		-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), roactModule (copy), gameIconModule (copy), themedTextLabelModule (copy), textEntryFieldModule (copy), p16 (ref)
 		return roactModule.createFragment({
 			PlaceInfo = roactModule.createElement("Frame", {
@@ -284,7 +284,7 @@ function reportDialog.renderPlaceContents(p16) --[[ line: 314 ]]
 	end)
 end
 
-function reportDialog.renderContents(p18) --[[ line: 363 ]]
+function reportDialog.renderContents(p18)
 	-- upvalues: constantsModule (ref)
 	return if p18.props.reportType == constantsModule.ReportType.Player then p18:renderPlayerContents() elseif p18.props.reportType == constantsModule.ReportType.Place then p18:renderPlaceContents() else nil
 end
@@ -296,12 +296,12 @@ local t_1 = {
 	[constantsModule.Category.Experience] = "CoreScripts.InGameMenu.Report.Title.Experience"
 }
 
-function reportDialog.categoryTitle(p19) --[[ line: 380 ]]
+function reportDialog.categoryTitle(p19)
 	-- upvalues: constantsModule (ref), t_1 (ref)
 	return if p19.props.reportType == constantsModule.ReportType.Place then t_1[constantsModule.Category.Experience] else t_1[p19.props.reportCategory] or "CoreScripts.InGameMenu.Report.ReportTitle"
 end
 
-function reportDialog.render(p20) --[[ line: 387 ]]
+function reportDialog.render(p20)
 	-- upvalues: withLocalizationModule (ref), getFFlagReportAnythingScreenshotModule (ref), constantsModule (ref), getFFlagReportAnythingMultistepScreenshotModule (ref), reactModule (ref), screenshotFlowStepHandlerModule (ref), screenshotHelperModule (ref), screenshotDialogModule (ref), roactModule (ref), modalDialogModule (ref), buttonStack (ref), buttonType (ref)
 	return withLocalizationModule({
 		cancelText = "CoreScripts.InGameMenu.Cancel",
@@ -309,16 +309,16 @@ function reportDialog.render(p20) --[[ line: 387 ]]
 		toastDefaultTitle = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReport",
 		toastDefaultDescription = "CoreScripts.InGameMenu.Report.Confirmation.ThanksForReportDescription",
 		titleText = p20:categoryTitle()
-	})(function(p21) --[[ line: 394 ]]
+	})(function(p21)
 		-- upvalues: getFFlagReportAnythingScreenshotModule (copy), p20 (ref), constantsModule (copy), getFFlagReportAnythingMultistepScreenshotModule (copy), reactModule (copy), screenshotFlowStepHandlerModule (copy), screenshotHelperModule (copy), screenshotDialogModule (copy), roactModule (copy), modalDialogModule (copy), buttonStack (copy), buttonType (copy)
 		return if not (not getFFlagReportAnythingScreenshotModule() or p20.props.currentPage ~= constantsModule.Page.ScreenshotDialog) then if getFFlagReportAnythingMultistepScreenshotModule() then reactModule.createElement(screenshotFlowStepHandlerModule, {
 			titleText = "Highlight What's Wrong",
 			entryPoint = "experience",
 			dismissAction = p20.onCancel,
 			screenshot = screenshotHelperModule:GetScreenshotContentId(),
-			skipAnnotationAction = function() --[[ line: 403 ]] end,
-			restartAction = function() --[[ line: 404 ]] end,
-			reportAction = function() --[[ line: 405 ]] end
+			skipAnnotationAction = function() end,
+			restartAction = function() end,
+			reportAction = function() end
 		}) else reactModule.createElement(screenshotDialogModule, {
 			titleText = "Highlight What's Wrong",
 			screenshot = screenshotHelperModule:GetScreenshotContentId(),
@@ -348,7 +348,7 @@ function reportDialog.render(p20) --[[ line: 387 ]]
 						buttonType = buttonType.PrimarySystem,
 						props = {
 							isDisabled = not p20:canReport(),
-							onActivated = function() --[[ line: 447 ]]
+							onActivated = function()
 								-- upvalues: p20 (copy), p21 (ref)
 								return p20.onReport(p21.toastDefaultTitle, p21.toastDefaultDescription)
 							end,
@@ -363,14 +363,14 @@ function reportDialog.render(p20) --[[ line: 387 ]]
 	end)
 end
 
-function reportDialog.didUpdate(p22, p23) --[[ line: 461 ]]
+function reportDialog.didUpdate(p22, p23)
 	-- upvalues: roactModule (ref)
 	if p23.isReportDialogOpen and not p22.props.isReportDialogOpen then
 		p22:setState({ descriptionText = "", reasonText = roactModule.None })
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p24, _) --[[ line: 471 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p24, _)
 	-- upvalues: constantsModule (ref)
 	return {
 		reportCategory = p24.report.reportCategory,
@@ -383,10 +383,10 @@ return roactRoduxModule.UNSTABLE_connect2(function(p24, _) --[[ line: 471 ]]
 		screenSize = p24.displayOptions.screenSize,
 		screenshotAnnotationPoints = p24.report.screenshotAnnotationPoints
 	}
-end, function(p25) --[[ line: 483 ]]
+end, function(p25)
 	-- upvalues: navigateBackModule (ref), sendAnalyticsModule (ref), constantsModule (ref), endReportFlowModule (ref), sessionUtilityModule (ref), filterIdentifiedAvatarsModule (ref), screenshotAnnotatedModule (ref), sendReportModule (ref)
 	return {
-		navigateBack = function(p26, p27) --[[ line: 485 ]]
+		navigateBack = function(p26, p27)
 			-- upvalues: p25 (ref), navigateBackModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
 			p25(navigateBackModule())
 			sendAnalyticsModule(constantsModule.Page.ReportForm, constantsModule.Analytics.ReportFlowBack, {
@@ -395,7 +395,7 @@ end, function(p25) --[[ line: 483 ]]
 				descriptionTextChanged = p27
 			})
 		end,
-		closeDialog = function(p28, p29) --[[ line: 493 ]]
+		closeDialog = function(p28, p29)
 			-- upvalues: p25 (ref), endReportFlowModule (copy), sendAnalyticsModule (copy), constantsModule (copy), sessionUtilityModule (copy)
 			p25(endReportFlowModule())
 			sendAnalyticsModule(constantsModule.Page.ReportForm, constantsModule.Analytics.ReportFlowAbandoned, {
@@ -405,12 +405,12 @@ end, function(p25) --[[ line: 483 ]]
 			})
 			sessionUtilityModule.endAbuseReportSession()
 		end,
-		screenshotAnnotated = function(p30, p31, p32) --[[ line: 503 ]]
+		screenshotAnnotated = function(p30, p31, p32)
 			-- upvalues: p25 (ref), filterIdentifiedAvatarsModule (copy), screenshotAnnotatedModule (copy)
 			p25(filterIdentifiedAvatarsModule(p32))
 			p25(screenshotAnnotatedModule(p30, p31, p32))
 		end,
-		sendReport = function(p33, p34, p35, p36, p37, p38, p39) --[[ line: 507 ]]
+		sendReport = function(p33, p34, p35, p36, p37, p38, p39)
 			-- upvalues: p25 (ref), sendReportModule (copy)
 			p25(sendReportModule(p33, p34, p35, p36, p37, p38, p39))
 		end

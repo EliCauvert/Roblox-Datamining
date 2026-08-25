@@ -33,7 +33,7 @@ local var6 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then {
 	lastUpdated = { 26, 7, 21 }
 } else nil
 
-local function buildGeometryFields(p0) --[[ line: 91 ]]
+local function buildGeometryFields(p0)
 	local adSize = p0.adSize
 	local viewportBounds = p0.viewportBounds
 	
@@ -46,7 +46,7 @@ local function buildGeometryFields(p0) --[[ line: 91 ]]
 end
 
 return {
-	logSponsoredAdLoad = function(p1, p2, p3, p4) --[[ line: 103 ]]
+	logSponsoredAdLoad = function(p1, p2, p3, p4)
 		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t (ref), list (ref)
 		local var8 = buildGeometryFields(p2)
 		local t_1 = {
@@ -69,7 +69,7 @@ return {
 		end
 		telemetryService:LogEvent(t, { standardizedFields = list, customFields = t_1 })
 	end,
-	logSponsoredAdViewableImpression = function(p5, p6) --[[ line: 134 ]]
+	logSponsoredAdViewableImpression = function(p5, p6)
 		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t_1 (ref), list (ref)
 		local var10 = buildGeometryFields(p6.geometry)
 		local t = {
@@ -98,7 +98,7 @@ return {
 		end
 		telemetryService:LogEvent(t_1, { standardizedFields = list, customFields = t })
 	end,
-	logSponsoredAdVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then function(p7, p8) --[[ line: 166 | named "logSponsoredAdVideoProgress" ]]
+	logSponsoredAdVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then function(p7, p8)
 		-- upvalues: buildGeometryFields (ref), telemetryService (ref), var6 (ref), list (ref)
 		local var12 = buildGeometryFields(p8.geometry)
 		telemetryService:LogEvent(var6, {
@@ -130,7 +130,7 @@ return {
 			}
 		})
 	end else nil,
-	logSponsoredAdUnload = function(p9, p10, p11) --[[ line: 199 ]]
+	logSponsoredAdUnload = function(p9, p10, p11)
 		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t_2 (ref), list (ref)
 		local var13 = buildGeometryFields(p10.geometry)
 		local t = {

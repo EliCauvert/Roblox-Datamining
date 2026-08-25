@@ -1,7 +1,7 @@
 ﻿local selectTryOnBodyIdsModule = require(script.Parent.selectTryOnBodyIds)
 local fFlagAXMISEnableMultiShopping = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShopping
 
-return function(p0) --[[ line: 9 | named "selectShowColorQuickButton" ]]
+return function(p0)
 	-- upvalues: selectTryOnBodyIdsModule (ref), fFlagAXMISEnableMultiShopping (ref)
 	local var1 = if fFlagAXMISEnableMultiShopping then p0.AvatarExperience.AvatarScene.OutfitTryOn.LastToggledItem else nil
 	

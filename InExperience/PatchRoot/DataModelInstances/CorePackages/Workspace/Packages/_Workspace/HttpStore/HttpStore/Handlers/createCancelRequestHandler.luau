@@ -4,11 +4,11 @@ local signalsModule = require(parent_1.Signals)
 local httpSessionTrackerModule = require(parent.HttpSessionTracker)
 local _ = require(parent_1.InternalHttpStore)
 
-return function(p0) --[[ line: 11 | named "createCancelRequestHandler" ]]
+return function(p0)
 	-- upvalues: signalsModule (ref), httpSessionTrackerModule (ref)
-	return function(p1) --[[ line: 12 ]]
+	return function(p1)
 		-- upvalues: signalsModule (copy), p0 (ref), httpSessionTrackerModule (copy)
-		return signalsModule.createComputed(function(p2) --[[ line: 13 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: p1 (ref), p0 (copy), httpSessionTrackerModule (copy)
 			local var2 = p1(p2)
 			

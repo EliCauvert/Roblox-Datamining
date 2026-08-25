@@ -1,6 +1,6 @@
 ﻿local t = {}
 
-return function(p0, p1) --[[ line: 7 | named "prettyPrintVector3" ]]
+return function(p0, p1)
 	-- upvalues: t (ref)
 	p1 = p1 or 2
 	

@@ -2,7 +2,7 @@
 local _ = require(parent.util.BundlesMetadata)
 local constantsModule = require(parent.Constants)
 
-local function getUGCBodyPartsAssetTypeMap(value, p0, p1) --[[ line: 43 ]]
+local function getUGCBodyPartsAssetTypeMap(value, p0, p1)
 	-- upvalues: constantsModule (ref)
 	assert(value:IsA("Model"))
 	local var2 = p0[p1]
@@ -31,7 +31,7 @@ local function getUGCBodyPartsAssetTypeMap(value, p0, p1) --[[ line: 43 ]]
 	return t
 end
 
-return function(p2, p3, p4, p5) --[[ line: 97 | named "createUGCBodyPartFolders" ]]
+return function(p2, p3, p4, p5)
 	-- upvalues: getUGCBodyPartsAssetTypeMap (ref), constantsModule (ref)
 	assert(p2:IsA("Model"), "Invalid root instance, must be a model")
 	local t = {}

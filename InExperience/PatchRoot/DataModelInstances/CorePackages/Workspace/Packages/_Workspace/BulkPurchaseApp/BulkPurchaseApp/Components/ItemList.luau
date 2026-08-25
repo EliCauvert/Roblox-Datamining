@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local catalogRowItemCard = require(parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogRowItemCard
 
-return function(p0) --[[ line: 17 | named "ItemList" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), catalogRowItemCard (ref)
 	local var1 = useTokens()
 	local t = {

@@ -27,7 +27,7 @@ local var5 = if fFlagAXAvatarSortInDiscoveryUnifiedPurchase then {
 	[appPage.SearchPage] = unifiedLoggingSurface.DISCOVERY_SEARCH_RESULTS
 } else nil
 
-local function _(p0, p1, p2) --[[ line: 56 | named "reportOpenMarketplaceTryOnPropError" ]]
+local function _(p0, p1, p2)
 	-- upvalues: sduiActionType (ref), sduiErrorType (ref)
 	local t = { name = sduiActionType.OpenMarketplaceTryOn, message = p1 }
 	
@@ -37,7 +37,7 @@ local function _(p0, p1, p2) --[[ line: 56 | named "reportOpenMarketplaceTryOnPr
 	p0.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, t, p0.appPage)
 end
 
-return function(p3, _, p4) --[[ line: 69 ]]
+return function(p3, _, p4)
 	-- upvalues: sduiActionType (ref), sduiErrorType (ref), unifiedEventLogEnums (ref), fFlagAXAvatarSortInDiscoveryUnifiedPurchase (ref), var5 (ref), fFlagAXTryOnScreenImprovements (ref), var4 (ref), impressionEnums (ref), AXFixHomepageTryOnScreenAnalytics (ref), appPage (ref), analyticsService (ref), unifiedLoggingSurface (ref), unifiedEventLogConstants (ref), avatarScreen (ref), fFlagAXFixPurchaseSurfaceLogging (ref), fFlagAXEnableHomeTryOnComplexView (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), navigateDown (ref)
 	local var7 = if p3 then p3.actionParams else nil
 	

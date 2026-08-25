@@ -20,7 +20,7 @@ local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 36 ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), useInspectAvatarTooltipModule (ref), useLocalization (ref), reactModule (ref), fFlagProfileInspectAndBuyTooltipGamepadFocusModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), popover (ref), popoverSide (ref), popoverAlign (ref), radius (ref), view (ref), text (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref)
 	local var6 = useTokens()
 	local var7 = useInspectAvatarTooltipModule()
@@ -28,7 +28,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 36 ]]
 		title = "Feature.Profile.Header.InspectAndBuy.Tooltip",
 		body = "Feature.Profile.Description.InspectAndBuy"
 	})
-	reactModule.useImperativeHandle(p1, function() --[[ line: 44 ]]
+	reactModule.useImperativeHandle(p1, function()
 		-- upvalues: var7 (ref)
 		return { onDismiss = var7.onDismiss }
 	end, { var7.onDismiss })

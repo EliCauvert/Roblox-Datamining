@@ -1,7 +1,7 @@
 ﻿local userInputService = game:GetService("UserInputService")
 local fFlagAppChatUseSwipeForRepliesModule = require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatUseSwipeForReplies)
 local t = {
-	[require(script.Parent.MessageFtuxTooltipVariant).Replies] = function() --[[ line: 18 ]]
+	[require(script.Parent.MessageFtuxTooltipVariant).Replies] = function()
 		-- upvalues: userInputService (ref), fFlagAppChatUseSwipeForRepliesModule (ref)
 		return {
 			storageKey = "AppChatEnableRepliesUIFtuxTooltip",
@@ -10,7 +10,7 @@ local t = {
 	end
 }
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return t[p0]()
 end

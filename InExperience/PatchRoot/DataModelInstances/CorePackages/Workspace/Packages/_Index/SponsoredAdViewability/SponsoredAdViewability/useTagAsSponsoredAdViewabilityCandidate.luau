@@ -6,7 +6,7 @@ local sponsoredAdViewabilityRegistryModule = require(script.Parent.sponsoredAdVi
 local _ = require(script.Parent.sponsoredAdViewabilityTypes)
 local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 
-return function(value, p0) --[[ line: 18 | named "useTagAsSponsoredAdViewabilityCandidate" ]]
+return function(value, p0)
 	-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), reactModule (ref), sponsoredAdViewabilityRegistryModule (ref)
 	local var3 = if p0 then p0.encryptedAdTrackingData else nil
 	local var4 = if p0 then p0.tileType else nil
@@ -14,7 +14,7 @@ return function(value, p0) --[[ line: 18 | named "useTagAsSponsoredAdViewability
 	local var6 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.videoPlaybackStateRef else nil
 	local var7 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.videoSource else nil
 	local var8 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.isFullscreen else nil
-	reactModule.useEffect(function() --[[ line: 33 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var4 (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), var5 (ref), value (ref), sponsoredAdViewabilityRegistryModule (copy), var6 (ref), var7 (ref), var8 (ref)
 		if var3 == nil or var4 == nil or fFlagLuaAppSponsoredAdVideoViewabilityEnabled and var5 == nil then return end
 		local current = value.current

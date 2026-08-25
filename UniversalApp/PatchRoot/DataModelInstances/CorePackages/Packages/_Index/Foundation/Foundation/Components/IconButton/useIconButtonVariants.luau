@@ -8,7 +8,7 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local getSharedVariantsModule = require(foundation.Components.Button.getSharedVariants)
 
-local var6 = function(p0) --[[ line: 41 ]]
+local var6 = function(p0)
 	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref)
 	local var7 = getSharedVariantsModule(p0)
 	
@@ -48,7 +48,7 @@ local var6 = function(p0) --[[ line: 41 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ line: 92 ]]
+return function(p1, p2, p3, p4)
 	-- upvalues: variantsContextModule (ref), var6 (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
 	local iconButton = variantsContextModule.useVariants("IconButton", var6, p1)
 	

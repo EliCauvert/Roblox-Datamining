@@ -7,16 +7,16 @@ local var2 = nil
 local t = {}
 local t_1 = {}
 local t_2 = {
-	withTrackers = function(p0, p1) --[[ line: 39 ]]
+	withTrackers = function(p0, p1)
 		-- upvalues: timeToInteractiveTracker (write), intervalPerformanceTracker (write)
 		timeToInteractiveTracker = p0
 		intervalPerformanceTracker = p1
 	end,
-	_setEnabledForTesting = function(value) --[[ line: 44 ]]
+	_setEnabledForTesting = function(value)
 		-- upvalues: var2 (write)
 		var2 = value
 	end,
-	startMountTTI = function(p2) --[[ line: 50 ]]
+	startMountTTI = function(p2)
 		-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref), timeToInteractiveTracker (write)
 		if if var2 ~= nil then textChannelWindowPerfTrackingEnabled else var2 then
 			timeToInteractiveTracker.trackStart("TextChannelWindow_MountTTI_" .. p2)
@@ -24,7 +24,7 @@ local t_2 = {
 			return
 		end
 	end,
-	finishMountTTI = function(p3) --[[ line: 57 ]]
+	finishMountTTI = function(p3)
 		-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref), timeToInteractiveTracker (write)
 		if if var2 ~= nil then textChannelWindowPerfTrackingEnabled else var2 then
 			timeToInteractiveTracker.trackEnd("TextChannelWindow_MountTTI_" .. p3)
@@ -32,7 +32,7 @@ local t_2 = {
 			return
 		end
 	end,
-	startSendInterval = function(p4, p5) --[[ line: 72 ]]
+	startSendInterval = function(p4, p5)
 		-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref), t (write), intervalPerformanceTracker (write), list (ref)
 		if not (if var2 ~= nil then textChannelWindowPerfTrackingEnabled else var2) then return end
 		local var6 = t[p5]
@@ -46,7 +46,7 @@ local t_2 = {
 			return
 		end
 	end,
-	startReceiveInterval = function(p6, p7) --[[ line: 87 ]]
+	startReceiveInterval = function(p6, p7)
 		-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref), t_1 (write), intervalPerformanceTracker (write), list (ref)
 		if not (if var2 ~= nil then textChannelWindowPerfTrackingEnabled else var2) then return end
 		local var8 = t_1[p7]
@@ -60,7 +60,7 @@ local t_2 = {
 			return
 		end
 	end,
-	finishMessageIntervals = function(p8) --[[ line: 104 ]]
+	finishMessageIntervals = function(p8)
 		-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref), t (write), intervalPerformanceTracker (write), t_1 (write)
 		if not (if var2 ~= nil then textChannelWindowPerfTrackingEnabled else var2) then return end
 		for i, v in t do
@@ -76,7 +76,7 @@ local t_2 = {
 			end
 		end
 	end,
-	cancelForChannel = function(p9) --[[ line: 123 ]]
+	cancelForChannel = function(p9)
 		-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref), t (write), intervalPerformanceTracker (write), t_1 (write)
 		if not (if var2 ~= nil then textChannelWindowPerfTrackingEnabled else var2) then return end
 		if t[p9] then
@@ -88,7 +88,7 @@ local t_2 = {
 			intervalPerformanceTracker:cancelTracking("TextChannelWindow_MessageReceiveToRenderInterval_" .. p9)
 		end
 	end,
-	cancelAll = function() --[[ line: 138 ]]
+	cancelAll = function()
 		-- upvalues: t (write), intervalPerformanceTracker (write), t_1 (write)
 		for i in t do
 			intervalPerformanceTracker:cancelTracking("TextChannelWindow_MessageSendToRenderInterval_" .. i)
@@ -101,16 +101,16 @@ local t_2 = {
 	end
 }
 
-local function _() --[[ line: 31 | named "isEnabled" ]]
+local function _()
 	-- upvalues: var2 (write), textChannelWindowPerfTrackingEnabled (ref)
 	return if var2 == nil then textChannelWindowPerfTrackingEnabled else var2
 end
 
-local _ = function(p10) --[[ line: 64 | named "sendIntervalName" ]]
+local _ = function(p10)
 	return "TextChannelWindow_MessageSendToRenderInterval_" .. p10
 end
 
-local _ = function(p11) --[[ line: 68 | named "receiveIntervalName" ]]
+local _ = function(p11)
 	return "TextChannelWindow_MessageReceiveToRenderInterval_" .. p11
 end
 

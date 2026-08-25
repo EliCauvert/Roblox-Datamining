@@ -6,14 +6,14 @@ local localizationModule = require(expChat.Localization)
 local fStringInExpChatRewriteLabelKeyModule = require(expChat.Flags.FStringInExpChatRewriteLabelKey)
 local mergeBindableScalarModule = require(expChat.ChatWindow.Helpers.mergeBindableScalar)
 
-return reactModule.memo(function(p0) --[[ line: 21 | named "RewriteToggle" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: foundationModule (ref), localizationModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), reactModule (ref), mergeBindableScalarModule (ref)
 	local var6 = foundationModule.Hooks.useTokens()
 	local var7 = localizationModule.useLocalization({
 		defaultRewrittenLabelText = "CoreScripts.TextChat.ChatWindow.RewrittenLabel",
 		rewrittenLabelText = fStringInExpChatRewriteLabelKeyModule
 	})
-	local var8 = p0.textTransparency:map(function(p1) --[[ line: 32 ]]
+	local var8 = p0.textTransparency:map(function(p1)
 		return p1 < 1
 	end)
 	
@@ -43,7 +43,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "RewriteToggle" ]]
 			size = foundationModule.Enums.InputSize.XSmall,
 			icon = foundationModule.Enums.IconName.ChevronLargeUp,
 			variant = foundationModule.Enums.ButtonVariant.Utility,
-			Visible = reactModule.joinBindings({ var8, p0.isRewriteMenuOpen }):map(function(p2) --[[ line: 36 ]]
+			Visible = reactModule.joinBindings({ var8, p0.isRewriteMenuOpen }):map(function(p2)
 				return p2[1] and p2[2]
 			end),
 			onActivated = p0.onActivated
@@ -54,7 +54,7 @@ return reactModule.memo(function(p0) --[[ line: 21 | named "RewriteToggle" ]]
 			size = foundationModule.Enums.InputSize.XSmall,
 			icon = foundationModule.Enums.IconName.ChevronLargeDown,
 			variant = foundationModule.Enums.ButtonVariant.Utility,
-			Visible = reactModule.joinBindings({ var8, p0.isRewriteMenuOpen }):map(function(p3) --[[ line: 41 ]]
+			Visible = reactModule.joinBindings({ var8, p0.isRewriteMenuOpen }):map(function(p3)
 				return p3[1] and not p3[2]
 			end),
 			onActivated = p0.onActivated

@@ -2,7 +2,7 @@
 local fFlagLuaAppEdpBackendV2HydrateLegacyDefault = require(verifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault
 local fFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(verifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
 
-return function(p0, p1) --[[ line: 48 | named "isCreatorOfGameVerified" ]]
+return function(p0, p1)
 	-- upvalues: fFlagLuaAppEdpBackendV2HydrateLegacyDefault (ref), fFlagLuaAppEdpBackendV2HydrateLegacyIxp (ref)
 	local creator = nil
 	

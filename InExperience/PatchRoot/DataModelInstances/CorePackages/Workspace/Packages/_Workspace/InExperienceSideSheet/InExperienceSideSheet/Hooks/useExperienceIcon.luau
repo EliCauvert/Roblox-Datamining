@@ -7,11 +7,11 @@ local getRbxThumb = foundationModule.Utility.getRbxThumb
 local thumbnailType = foundationModule.Enums.ThumbnailType
 local thumbnailSize = foundationModule.Enums.ThumbnailSize
 
-return function() --[[ line: 13 | named "useExperienceIcon" ]]
+return function()
 	-- upvalues: getUniverseIdModule (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref)
 	local var4 = getUniverseIdModule()
 	
-	return reactModule.useMemo(function() --[[ line: 16 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var4 (ref), getRbxThumb (copy), thumbnailType (copy), thumbnailSize (copy)
 		return if var4 then getRbxThumb(thumbnailType.GameIcon, var4, thumbnailSize.Small) else nil
 	end, { var4 })

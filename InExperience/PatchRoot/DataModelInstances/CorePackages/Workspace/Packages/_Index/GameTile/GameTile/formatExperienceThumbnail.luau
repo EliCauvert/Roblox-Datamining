@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 1 | named "formatExperienceThumbnail" ]]
+﻿return function(p0, p1, p2)
 	local var0 = 384
 	local var1 = 216
 	

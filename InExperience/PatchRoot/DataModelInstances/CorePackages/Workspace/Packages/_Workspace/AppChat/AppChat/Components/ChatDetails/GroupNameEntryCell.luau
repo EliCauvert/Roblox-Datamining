@@ -18,7 +18,7 @@ local t = {
 	paddingBottom = 12
 }
 
-function GroupNameEntryCell(p0) --[[ line: 40 ]]
+function GroupNameEntryCell(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local var8 = if var7.isDisabled then var7.style.Tokens.Size.Size_300 else 0

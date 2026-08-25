@@ -10,7 +10,7 @@ local view = foundationModule.View
 local gridItemModule = require(inExperienceSideSheet.Components.GridItem)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "GridList" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: signalsReactModule (ref), reactModule (ref), gridItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
 	local var6 = signalsReactModule.useSignalState(p0.integrationsGetter)
 	local t = {}

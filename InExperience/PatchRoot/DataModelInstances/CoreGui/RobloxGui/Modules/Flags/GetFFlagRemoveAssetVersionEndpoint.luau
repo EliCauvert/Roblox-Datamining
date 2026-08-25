@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("RemoveAssetVersionEndpoint", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("RemoveAssetVersionEndpoint")
 end

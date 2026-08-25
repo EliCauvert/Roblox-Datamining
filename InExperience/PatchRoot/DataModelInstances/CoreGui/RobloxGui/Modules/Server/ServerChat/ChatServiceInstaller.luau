@@ -4,7 +4,7 @@ local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local serverUtilModule = require(robloxGui.Modules.Server.ServerUtil)
 local sendChatAnalyticsModule = require(robloxGui.Modules.Server.SendChatAnalytics)
 
-local function LoadScript(p0, p1) --[[ line: 11 ]]
+local function LoadScript(p0, p1)
 	-- upvalues: serverUtilModule (ref)
 	local var7 = script.Parent:WaitForChild(p0)
 	local script = Instance.new("Script")
@@ -20,7 +20,7 @@ local function LoadScript(p0, p1) --[[ line: 11 ]]
 	return script
 end
 
-local function _(p2, p3, p4) --[[ line: 24 | named "LoadModule" ]]
+local function _(p2, p3, p4)
 	-- upvalues: serverUtilModule (ref)
 	local var9 = p2:WaitForChild(p3)
 	local moduleScript = Instance.new("ModuleScript")
@@ -36,13 +36,13 @@ local function _(p2, p3, p4) --[[ line: 24 | named "LoadModule" ]]
 	return moduleScript
 end
 
-local _ = function(p5, p6, p7) --[[ line: 37 | named "GetBoolValue" ]]
+local _ = function(p5, p6, p7)
 	local var11 = p5:FindFirstChild(p6)
 	
 	return if var11 and var11:IsA("BoolValue") then var11.Value else p7
 end
 
-local function makeDefaultLocalizationTable(p8) --[[ line: 47 ]]
+local function makeDefaultLocalizationTable(p8)
 	local chatLocalization = Instance.new("LocalizationTable")
 	chatLocalization.Name = "ChatLocalization"
 	chatLocalization.Archivable = false
@@ -52,7 +52,7 @@ local function makeDefaultLocalizationTable(p8) --[[ line: 47 ]]
 	chatLocalization.Parent = p8
 end
 
-return function() --[[ line: 57 | named "Install" ]]
+return function()
 	-- upvalues: chatService (ref), makeDefaultLocalizationTable (ref), LoadScript (ref), serverUtilModule (ref), serverScriptService (ref), sendChatAnalyticsModule (ref)
 	local t = {}
 	local chatLocalization = chatService:FindFirstChild("ChatLocalization")

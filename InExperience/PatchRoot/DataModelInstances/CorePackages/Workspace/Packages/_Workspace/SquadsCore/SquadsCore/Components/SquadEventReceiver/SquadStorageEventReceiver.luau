@@ -11,20 +11,20 @@ local reactModule = require(parent.React)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useEffect = reactModule.useEffect
 
-return function() --[[ line: 18 ]]
+return function()
 	-- upvalues: useDispatch (ref), useCurrentSquadIdModule (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), constantsModule (ref), useEffect (ref), validateSquadIdModule (ref), fetchActiveSquadModule (ref), roduxSquadsModule (ref)
 	local var9 = useDispatch()
 	local var10 = useCurrentSquadIdModule() or ""
 	local var11, var12 = reactModule.useState(false)
 	local var13 = reactModule.useContext(squadExternalContractContextModule).useIsChatEnabled()
-	reactModule.useEffect(function() --[[ line: 27 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var11 (ref), appStorageService (copy), constantsModule (copy), var10 (ref)
 		if var11 then
 			appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, var10)
 			appStorageService:Flush()
 		end
 	end, { var10, var11 })
-	useEffect(function() --[[ line: 35 ]]
+	useEffect(function()
 		-- upvalues: var13 (ref), appStorageService (copy), constantsModule (copy), validateSquadIdModule (copy), var10 (ref), var9 (ref), fetchActiveSquadModule (copy), roduxSquadsModule (copy), var12 (ref)
 		if not var13 then return end
 		local active_squad_app_storage_keyItem = appStorageService:GetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY)

@@ -22,7 +22,7 @@ local var9 = tModule.strictInterface({
 	logIntervalInSeconds = tModule.optional(tModule.numberPositive)
 })
 
-function t.new(p0) --[[ line: 42 ]]
+function t.new(p0)
 	-- upvalues: var9 (ref), var6 (ref), t (ref), errorQueueModule (ref)
 	local var10, var11 = var9(p0)
 	local t_1 = nil
@@ -48,7 +48,7 @@ function t.new(p0) --[[ line: 42 ]]
 	setmetatable(t_1, t)
 	
 	if t_1._isEnabled then
-		t_1._errorQueue = errorQueueModule.new(function(...) --[[ line: 72 ]]
+		t_1._errorQueue = errorQueueModule.new(function(...)
 			-- upvalues: t_1 (write)
 			t_1:_reportErrorFromErrorQueue(...)
 		end, p0.queueOptions)
@@ -57,37 +57,37 @@ function t.new(p0) --[[ line: 42 ]]
 	return t_1
 end
 
-function t.isTooOldToReportErrors(_) --[[ line: 85 ]]
+function t.isTooOldToReportErrors(_)
 	-- upvalues: runService (ref), fIntOldestUAVersionToReportErrorsModule (ref)
 	local var13 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
 	
 	return if var13 then var13 < fIntOldestUAVersionToReportErrorsModule else false
 end
 
-function t:sendErrorReport(p1, p2) --[[ line: 97 ]]
+function t:sendErrorReport(p1, p2)
 	-- upvalues: var6 (ref)
 	if not self._isEnabled then return end
 	if self:isTooOldToReportErrors() then return end
 	if var6 or _G.__DEV__ then
 		assert(p1:validate())
 	end
-	local ok, status = pcall(function() --[[ line: 113 ]]
+	local ok, status = pcall(function()
 		-- upvalues: self (ref), p1 (ref)
 		return self._httpService:JSONEncode(p1)
 	end)
 	
 	if ok then
-		pcall(function() --[[ line: 122 ]]
+		pcall(function()
 			-- upvalues: self (ref), status (ref), p2 (ref)
 			self._httpService:RequestInternal({
 				Method = "POST",
 				Url = self._reportUrl .. "&format=json",
 				Headers = { ["Content-Type"] = "application/json" },
 				Body = status
-			}):Start(function(_, p3) --[[ line: 132 ]]
+			}):Start(function(_, p3)
 				-- upvalues: p2 (copy), self (copy)
 				if p3.StatusCode == 200 and p2 ~= nil then
-					local ok, status = pcall(function() --[[ line: 136 ]]
+					local ok, status = pcall(function()
 						-- upvalues: self (copy), p3 (ref)
 						return self._httpService:JSONDecode(p3.Body)
 					end)
@@ -104,26 +104,26 @@ function t:sendErrorReport(p1, p2) --[[ line: 97 ]]
 	warn("Cannot convert report to Json")
 end
 
-function t._sendLogToReport(p4, p5, p6) --[[ line: 148 ]]
+function t._sendLogToReport(p4, p5, p6)
 	if type(p6) == "string" and #p6 ~= 0 then
-		pcall(function() --[[ line: 153 ]]
+		pcall(function()
 			-- upvalues: p4 (ref), p5 (ref), p6 (ref)
 			p4._httpService:RequestInternal({
 				Method = "POST",
 				Url = p4._reportUrl .. "&object=" .. p5 .. "&attachment_name=log.txt",
 				Headers = { ["Content-Type"] = "text/plain" },
 				Body = p6
-			}):Start(function(_, _) --[[ line: 163 ]] end)
+			}):Start(function(_, _) end)
 		end)
 		
 		return
 	end
 end
 
-function t:_generateLog() --[[ line: 169 ]]
+function t:_generateLog()
 	if self._generateLogMethod ~= nil and self._logIntervalInSeconds < tick() - self._lastLogTime then
 		self._lastLogTime = tick()
-		local ok, status = pcall(function() --[[ line: 173 ]]
+		local ok, status = pcall(function()
 			-- upvalues: self (ref)
 			return self._generateLogMethod()
 		end)
@@ -132,7 +132,7 @@ function t:_generateLog() --[[ line: 169 ]]
 	end
 end
 
-function t:_generateErrorReport(p7, p8, p9, p10) --[[ line: 185 ]]
+function t:_generateErrorReport(p7, p8, p9, p10)
 	-- upvalues: backtraceReportModule (ref), fFlagLuaAppEnableBacktraceSessionInfoModule (ref)
 	local var14 = if type(p9) == "table" then backtraceReportModule.fromDetails(p9) else backtraceReportModule.fromMessageAndStack(p7, p8)
 	
@@ -148,7 +148,7 @@ function t:_generateErrorReport(p7, p8, p9, p10) --[[ line: 185 ]]
 	return var14
 end
 
-function t:reportErrorImmediately(p11, p12, p13, p14) --[[ line: 211 ]]
+function t:reportErrorImmediately(p11, p12, p13, p14)
 	if not self._isEnabled then return end
 	local var15 = self:_generateErrorReport(p11, p12, p13, p14)
 	
@@ -158,7 +158,7 @@ function t:reportErrorImmediately(p11, p12, p13, p14) --[[ line: 211 ]]
 	self:sendErrorReport(var15, self:_generateLog())
 end
 
-function t:reportErrorDeferred(p15, p16, p17, p18) --[[ line: 228 ]]
+function t:reportErrorDeferred(p15, p16, p17, p18)
 	if not self._isEnabled then return end
 	local formattedText = string.format("%s | %s", p15, p16)
 	local t = {}
@@ -174,7 +174,7 @@ function t:reportErrorDeferred(p15, p16, p17, p18) --[[ line: 228 ]]
 	self._errorQueue:addError(formattedText, t)
 end
 
-function t:_reportErrorFromErrorQueue(_, p19, p20) --[[ line: 255 ]]
+function t:_reportErrorFromErrorQueue(_, p19, p20)
 	local backtraceReport = p19.backtraceReport
 	local log = p19.log
 	backtraceReport:addAttributes({ ErrorCount = p20 })
@@ -183,7 +183,7 @@ end
 
 local iAttributes = backtraceReportModule.IAttributes
 
-function t:updateSharedAttributes(p21) --[[ line: 269 ]]
+function t:updateSharedAttributes(p21)
 	-- upvalues: cryoModule (ref), iAttributes (ref), var6 (ref)
 	local var19 = cryoModule.Dictionary.join(self._sharedAttributes, p21)
 	local var20, var21 = iAttributes(var19)
@@ -200,7 +200,7 @@ end
 
 local iAnnotations = backtraceReportModule.IAnnotations
 
-function t:updateSharedAnnotations(p22) --[[ line: 288 ]]
+function t:updateSharedAnnotations(p22)
 	-- upvalues: cryoModule (ref), iAnnotations (ref), var6 (ref)
 	local var22 = cryoModule.Dictionary.join(self._sharedAnnotations, p22)
 	local var23, var24 = iAnnotations(var22)
@@ -215,13 +215,13 @@ function t:updateSharedAnnotations(p22) --[[ line: 288 ]]
 	self._sharedAnnotations = var22
 end
 
-function t:reportAllErrors() --[[ line: 305 ]]
+function t:reportAllErrors()
 	if self._errorQueue ~= nil then
 		self._errorQueue:reportAllErrors()
 	end
 end
 
-function t:stop() --[[ line: 311 ]]
+function t:stop()
 	self._isEnabled = false
 	
 	if self._errorQueue ~= nil then

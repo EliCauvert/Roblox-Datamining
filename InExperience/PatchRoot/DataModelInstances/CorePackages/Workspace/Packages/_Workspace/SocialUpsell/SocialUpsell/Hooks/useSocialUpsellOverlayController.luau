@@ -14,10 +14,10 @@ local constantsModule = require(socialUpsell.Constants)
 local cryoModule = require(parent.Cryo)
 local var7 = if fFlagEnableAEGIS2CommsFAEUpsell then getOverlayStoreModule(false) else nil
 
-return function(p0) --[[ line: 32 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), var7 (write), constantsModule (ref), cryoModule (ref), setCentralOverlay (ref), centralOverlayType (ref), closeCentralOverlay (ref)
 	local var8 = useDispatch()
-	local var9 = reactModule.useCallback(function(p1, p2) --[[ line: 35 ]]
+	local var9 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: p0 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), var7 (copy), constantsModule (copy), cryoModule (copy), var8 (ref), setCentralOverlay (copy), centralOverlayType (copy)
 		if p0 then
 			if fFlagEnableAEGIS2CommsFAEUpsell and var7 then
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 32 ]]
 			var8(setCentralOverlay(centralOverlayType.SocialUpsellOverlay, { upsellType = p1, data = p2 }))
 		end
 	end, { p0 })
-	local var10 = reactModule.useCallback(function() --[[ line: 53 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), var7 (copy), var8 (ref), closeCentralOverlay (copy)
 		if p0 then
 			if fFlagEnableAEGIS2CommsFAEUpsell and var7 then
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 32 ]]
 		end
 	end, { p0 })
 	
-	return reactModule.useMemo(function() --[[ line: 63 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var9 (ref), var10 (ref)
 		return { openSocialOverlay = var9, closeSocialOverlay = var10 }
 	end, { var9, var10 })

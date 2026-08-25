@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 58 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		id = if p0 == nil or p0.id == nil then "" else p0.id,
@@ -19,7 +19,7 @@ function t_1.new(p0) --[[ line: 58 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 72 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -84,7 +84,7 @@ function t_1:encode() --[[ line: 72 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 126 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var25 = t_1.new()
 	local var26 = 0
@@ -172,7 +172,7 @@ function t_1.decode(p1) --[[ line: 126 ]]
 	return var25
 end
 
-function t_1:jsonEncode() --[[ line: 209 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= "" then
@@ -205,7 +205,7 @@ function t_1:jsonEncode() --[[ line: 209 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 251 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var59 = t_1.new()
 	

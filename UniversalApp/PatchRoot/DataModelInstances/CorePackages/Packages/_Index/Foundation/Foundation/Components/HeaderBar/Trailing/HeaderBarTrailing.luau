@@ -6,7 +6,7 @@ local viewModule = require(foundation.Components.View)
 local constantsModule = require(foundation.Components.HeaderBar.constants)
 local useHeaderBarContextModule = require(foundation.Components.HeaderBar.useHeaderBarContext)
 
-return function(p0) --[[ line: 16 | named "HeaderBarTrailing" ]]
+return function(p0)
 	-- upvalues: useHeaderBarContextModule (ref), reactModule (ref), headerBarContextModule (ref), headerBarSlotModule (ref), viewModule (ref), constantsModule (ref)
 	local var7 = useHeaderBarContextModule()
 	

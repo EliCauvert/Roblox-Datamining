@@ -8,7 +8,7 @@ local _ = require(coreGuiService.RobloxGui.Modules.Stats.StatsAggregator)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 43 ]]
+function t.new(p0)
 	-- upvalues: t (ref), statsUtilsModule (ref), uDim2_1 (ref), uDim2 (ref), uDim2_3 (ref), uDim2_2 (ref)
 	local valueLabel = {}
 	setmetatable(valueLabel, t)
@@ -39,24 +39,24 @@ function t.new(p0) --[[ line: 43 ]]
 	return valueLabel
 end
 
-function t:SetZIndex(p1) --[[ line: 80 ]]
+function t:SetZIndex(p1)
 	self._frame.ZIndex = p1
 	self._titleLabel.ZIndex = p1
 	self.ZIndex = p1
 end
 
-function t:_getTitle() --[[ line: 86 ]]
+function t:_getTitle()
 	-- upvalues: statsUtilsModule (ref)
 	return statsUtilsModule.TypeToShortName[self._statType]
 end
 
-function t:PlaceInParent(p2, p3, p4) --[[ line: 90 ]]
+function t:PlaceInParent(p2, p3, p4)
 	self._frame.Position = p4
 	self._frame.Size = p3
 	self._frame.Parent = p2
 end
 
-function t:SetStatsAggregator(p5) --[[ line: 96 ]]
+function t:SetStatsAggregator(p5)
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
@@ -66,17 +66,17 @@ function t:SetStatsAggregator(p5) --[[ line: 96 ]]
 	self:_refreshVisibility()
 end
 
-function t:SetVisible(p6) --[[ line: 108 ]]
+function t:SetVisible(p6)
 	self.frame.Visible = p6
 	self:_refreshVisibility()
 end
 
-function t:_shouldBeVisible() --[[ line: 113 ]]
+function t:_shouldBeVisible()
 	-- upvalues: statsUtilsModule (ref)
 	return if statsUtilsModule.PerformanceStatsShouldBeVisible() then self._frame.Visible else false
 end
 
-function t:_refreshVisibility() --[[ line: 122 ]]
+function t:_refreshVisibility()
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateFromAggregator()
@@ -86,7 +86,7 @@ function t:_refreshVisibility() --[[ line: 122 ]]
 	self:_stopListening()
 end
 
-function t:_stopListening() --[[ line: 131 ]]
+function t:_stopListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
 		return
@@ -95,10 +95,10 @@ function t:_stopListening() --[[ line: 131 ]]
 	self._listenerId = nil
 end
 
-function t:_startListening() --[[ line: 144 ]]
+function t:_startListening()
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function() --[[ line: 153 ]]
+		self._listenerId = self._aggregator:AddListener(function()
 			-- upvalues: self (ref)
 			self:_updateFromAggregator()
 		end)
@@ -107,11 +107,11 @@ function t:_startListening() --[[ line: 144 ]]
 	end
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged() --[[ line: 158 ]]
+function t:OnPerformanceStatsShouldBeVisibleChanged()
 	self:_refreshVisibility()
 end
 
-function t:_updateFromAggregator() --[[ line: 162 ]]
+function t:_updateFromAggregator()
 	-- upvalues: statsUtilsModule (ref)
 	self._valueLabel.Text = statsUtilsModule.FormatTypedValue(if self._aggregator ~= nil then 0 else self._aggregator:GetLatestValue(), self._statType)
 end

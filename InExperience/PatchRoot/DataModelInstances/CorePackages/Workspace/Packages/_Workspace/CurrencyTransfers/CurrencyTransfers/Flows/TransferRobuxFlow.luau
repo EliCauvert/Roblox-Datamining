@@ -15,21 +15,21 @@ local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurr
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
 local getFFlagCurrencyTransferUseRoactNetworkingModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferUseRoactNetworking)
 
-local function _(p0) --[[ line: 44 | named "normalizeTransferOrigination" ]]
+local function _(p0)
 	-- upvalues: transferOriginationModule (ref)
 	local lowerText = string.lower(p0)
 	
 	return if lowerText == "unknown" then transferOriginationModule.Unknown elseif lowerText == "profile" then transferOriginationModule.Profile elseif lowerText == "chat" then transferOriginationModule.Chat elseif lowerText == "buyrobux" then transferOriginationModule.BuyRobux elseif lowerText == "inexperience" then transferOriginationModule.InExperience else transferOriginationModule.Unknown
 end
 
-local _ = function(p1) --[[ line: 64 | named "validateParams" ]]
+local _ = function(p1)
 	-- upvalues: transferDirectionModule (ref)
 	if p1.direction ~= transferDirectionModule.Send and p1.direction ~= transferDirectionModule.Receive then
 		error(string.format("[TransferRobuxFlow] Invalid direction: '%s'. Must be either TransferDirection.Send or TransferDirection.Receive.", tostring(p1.direction)))
 	end
 end
 
-local function initializeTransferStore(p2, p3) --[[ line: 76 ]]
+local function initializeTransferStore(p2, p3)
 	-- upvalues: getFFlagCurrencyTransferUseRoactNetworkingModule (ref), sharedFlagsModule (ref), httpService (ref), transferOriginationModule (ref), transferDirectionModule (ref), initiateTransferModule (ref), acceptTransferModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref)
 	p2.setNetworkImpl(if getFFlagCurrencyTransferUseRoactNetworkingModule() then p3.networkImpl else nil)
 	
@@ -66,7 +66,7 @@ local function initializeTransferStore(p2, p3) --[[ line: 76 ]]
 	end
 end
 
-local function renderTransferRobuxFlowImmediate(p4) --[[ line: 111 ]]
+local function renderTransferRobuxFlowImmediate(p4)
 	-- upvalues: createTransferStoreModule (ref), initializeTransferStore (ref), reactModule (ref), transferRobuxAppModule (ref)
 	local var20 = createTransferStoreModule()
 	initializeTransferStore(var20, p4)
@@ -74,7 +74,7 @@ local function renderTransferRobuxFlowImmediate(p4) --[[ line: 111 ]]
 	return reactModule.createElement(transferRobuxAppModule, { transferStore = var20 })
 end
 
-local function TransferRobuxFlowContainer(p5) --[[ line: 119 ]]
+local function TransferRobuxFlowContainer(p5)
 	-- upvalues: reactModule (ref), createTransferStoreModule (ref), initializeTransferStore (ref), transferRobuxAppModule (ref)
 	local var21 = reactModule.useRef(nil)
 	local var22 = reactModule.useRef(false)
@@ -91,7 +91,7 @@ local function TransferRobuxFlowContainer(p5) --[[ line: 119 ]]
 	return reactModule.createElement(transferRobuxAppModule, { transferStore = current })
 end
 
-return function(p6) --[[ line: 138 | named "TransferRobuxFlow" ]]
+return function(p6)
 	-- upvalues: transferDirectionModule (ref), sharedFlagsModule (ref), reactModule (ref), TransferRobuxFlowContainer (ref), renderTransferRobuxFlowImmediate (ref)
 	if p6.direction ~= transferDirectionModule.Send and p6.direction ~= transferDirectionModule.Receive then
 		error(string.format("[TransferRobuxFlow] Invalid direction: '%s'. Must be either TransferDirection.Send or TransferDirection.Receive.", tostring(p6.direction)))

@@ -36,9 +36,9 @@ local modalPrompt = require(shareGame.InviteToGamePrompt).new(coreGuiService):wi
 local apiGetCanSendAndCanCustomizeInvitesModule = require(shareGame.Thunks.ApiGetCanSendAndCanCustomizeInvites)
 local getCustomizedInvitePromptParamsModule = require(shareGame.getCustomizedInvitePromptParams)
 
-local function _(p0) --[[ line: 57 | named "canSendGameInviteAsync" ]]
+local function _(p0)
 	-- upvalues: socialService (ref)
-	local ok, status = pcall(function() --[[ line: 58 ]]
+	local ok, status = pcall(function()
 		-- upvalues: socialService (copy), p0 (ref)
 		return socialService:CanSendGameInviteAsync(p0)
 	end)
@@ -46,7 +46,7 @@ local function _(p0) --[[ line: 57 | named "canSendGameInviteAsync" ]]
 	return ok and status
 end
 
-socialService.PromptInviteRequested:Connect(function(p1, p2) --[[ line: 64 ]]
+socialService.PromptInviteRequested:Connect(function(p1, p2)
 	-- upvalues: getFStringGameInviteMenuLayer (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), luaEnableGameInviteModalInvitePromptV2 (ref), IXPServiceWrapper (ref), gameInviteInviteExperimentVariant (write), playersService (ref), getFFlagFixSettingshubImportOrderModule (ref), var6 (write), settings (ref), socialService (ref), gameInviteModalManager (write), getCustomizedInvitePromptTrigger (write), gameInviteConstants (write), gameInviteAnalyticsManager (write), getFFlagEnableNewInviteMenuCustomizationModule (ref), getFFlagEnableInvitePromptLoadingStateModule (ref), modalPrompt (ref), getCustomizedInvitePromptParamsModule (ref), apiGetCanSendAndCanCustomizeInvitesModule (ref)
 	local var15 = false
 	local var16 = getFStringGameInviteMenuLayer()
@@ -97,7 +97,7 @@ socialService.PromptInviteRequested:Connect(function(p1, p2) --[[ line: 64 ]]
 						return
 					end
 				elseif p1 == playersService.LocalPlayer then
-					local ok, status = pcall(function() --[[ line: 58 ]]
+					local ok, status = pcall(function()
 						-- upvalues: socialService (copy), p1 (ref)
 						return socialService:CanSendGameInviteAsync(p1)
 					end)

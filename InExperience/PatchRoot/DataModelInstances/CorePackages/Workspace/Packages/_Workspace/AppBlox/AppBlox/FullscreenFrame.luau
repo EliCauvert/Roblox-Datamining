@@ -5,9 +5,9 @@ local displayModule = require(parent.Display)
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useSignalState = require(parent.SignalsReact).useSignalState
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 10 | named "FullscreenFrame" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useSelector (ref), useSignalState (ref), displayModule (ref), cryoModule (ref), reactModule (ref)
-	local var3 = useSelector(function(p2) --[[ line: 11 ]]
+	local var3 = useSelector(function(p2)
 		return p2.GlobalGuiInset
 	end)
 	local var4 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)

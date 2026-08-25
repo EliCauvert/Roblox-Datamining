@@ -11,13 +11,13 @@ local avatarSwitcherGridInitialNumToRender = game:DefineFastInt("AvatarSwitcherG
 local var6 = game:DefineFastInt("AvatarSwitcherGridOnEndReachedThreshold", 200) / 100
 local var7 = if require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes then game:DefineFastInt("AvatarSwitcherTileSize", 98) else 108
 
-return function(p0) --[[ line: 35 | named "OutfitsGrid" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), outfitsRowModule (ref), var7 (ref), foundationModule (ref), flatList (ref), avatarSwitcherGridWindowSize (ref), avatarSwitcherGridInitialNumToRender (ref), var6 (ref)
 	local var8 = useTokens()
 	local var9, var10 = reactModule.useState(3)
-	reactModule.useEffect(function() --[[ line: 40 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref)
-		task.spawn(function() --[[ line: 41 ]]
+		task.spawn(function()
 			-- upvalues: p0 (copy)
 			p0.fetchNextOutfitsPage()
 		end)
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 35 | named "OutfitsGrid" ]]
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full-full",
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p1) --[[ line: 64 ]]
+		onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
 			-- upvalues: var10 (ref), var7 (copy)
 			var10(math.max(3, math.floor(p1.AbsoluteSize.X / var7)))
 		end, {}),
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 35 | named "OutfitsGrid" ]]
 			}
 		}, {
 			OutfitsList = reactModule.createElement(flatList, {
-				renderItem = reactModule.useCallback(function(p2) --[[ line: 55 ]]
+				renderItem = reactModule.useCallback(function(p2)
 					-- upvalues: reactModule (copy), outfitsRowModule (copy), var9 (ref), p0 (ref)
 					return reactModule.createElement(outfitsRowModule, {
 						outfits = p2.item,
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 35 | named "OutfitsGrid" ]]
 						disabled = p0.disabled
 					})
 				end, { var9 }),
-				data = reactModule.useMemo(function() --[[ line: 46 ]]
+				data = reactModule.useMemo(function()
 					-- upvalues: p0 (ref), var9 (ref)
 					local t = {}
 					

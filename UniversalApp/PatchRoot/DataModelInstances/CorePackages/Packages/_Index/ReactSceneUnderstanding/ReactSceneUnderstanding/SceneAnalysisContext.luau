@@ -5,7 +5,7 @@ local useState = reactModule.useState
 local var2 = reactModule.createContext(nil)
 
 return {
-	Provider = function(p0) --[[ line: 102 ]]
+	Provider = function(p0)
 		-- upvalues: useState (ref), reactModule (ref), var2 (ref)
 		local var3, var4 = useState({})
 		local var5, var6 = useState({})
@@ -28,7 +28,7 @@ return {
 			}
 		}, p0.children)
 	end,
-	use = function() --[[ line: 129 ]]
+	use = function()
 		-- upvalues: reactModule (ref), var2 (ref)
 		local var11 = reactModule.useContext(var2)
 		

@@ -9,17 +9,17 @@ local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
 local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local uDim2 = UDim2.fromOffset(36, 36)
 
-local function _(p0) --[[ line: 16 | named "useJoinBinding" ]]
+local function _(p0)
 	-- upvalues: reactModule (ref), roactModule (ref)
-	return reactModule.useMemo(function() --[[ line: 17 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: roactModule (copy), p0 (ref)
 		return roactModule.joinBindings(p0)
 	end, {})
 end
 
-local _ = function(p1) --[[ line: 22 | named "mapLevelToIcon" ]]
+local _ = function(p1)
 	-- upvalues: constantsModule (ref), default (ref)
-	return function(p2) --[[ line: 24 ]]
+	return function(p2)
 		-- upvalues: constantsModule (copy), default (copy), p1 (ref)
 		local var10 = p2[1]
 		
@@ -27,33 +27,33 @@ local _ = function(p1) --[[ line: 22 | named "mapLevelToIcon" ]]
 	end
 end
 
-local function GenerateGUID() --[[ line: 42 ]]
+local function GenerateGUID()
 	-- upvalues: httpService (ref)
 	return httpService:GenerateGUID()
 end
 
-return function(p3) --[[ line: 55 | named "VRBarVoiceIcon" ]]
+return function(p3)
 	-- upvalues: useVoiceStateModule (ref), reactModule (ref), roactModule (ref), GenerateGUID (ref), constantsModule (ref), runService (ref), default (ref), uDim2 (ref)
 	local var11 = useVoiceStateModule(p3.userId, p3.disable or false)
 	local var12, var13 = reactModule.useBinding(0)
 	local var14, var15 = reactModule.useBinding(var11)
 	local list = { var14, var12 }
-	local var17 = reactModule.useMemo(function() --[[ line: 17 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: roactModule (copy), list (ref)
 		return roactModule.joinBindings(list)
 	end, {})
 	local current = reactModule.useRef(GenerateGUID()).current or ""
 	var15(var11)
 	local var19 = var11 == constantsModule.VOICE_STATE.TALKING
-	reactModule.useEffect(function() --[[ line: 65 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), runService (copy), current (ref), var13 (ref)
 		if var19 then
-			runService:BindToRenderStep(current, 1, function() --[[ line: 67 ]]
+			runService:BindToRenderStep(current, 1, function()
 				-- upvalues: var13 (copy)
 				var13(math.random())
 			end)
 		end
-		return function() --[[ line: 71 ]]
+		return function()
 			-- upvalues: var19 (copy), runService (copy), current (copy)
 			if var19 then
 				runService:UnbindFromRenderStep(current)
@@ -63,11 +63,11 @@ return function(p3) --[[ line: 55 | named "VRBarVoiceIcon" ]]
 	
 	return roactModule.createElement("ImageLabel", {
 		BackgroundTransparency = p3.BackgroundTransparency or 1,
-		Image = reactModule.useMemo(function() --[[ line: 78 ]]
+		Image = reactModule.useMemo(function()
 			-- upvalues: var17 (ref), p3 (ref), constantsModule (copy), default (copy)
 			local iconStyle = p3.iconStyle
 			
-			return var17:map(function(p4) --[[ line: 24 ]]
+			return var17:map(function(p4)
 				-- upvalues: constantsModule (copy), default (copy), iconStyle (ref)
 				local var10 = p4[1]
 				

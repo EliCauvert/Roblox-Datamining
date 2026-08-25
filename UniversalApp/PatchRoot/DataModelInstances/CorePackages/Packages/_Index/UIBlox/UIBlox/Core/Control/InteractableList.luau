@@ -27,7 +27,7 @@ interactableList.validateProps = tModule.strictInterface({
 	itemSize = tModule.optional(tModule.union(tModule.UDim2, bindingValidatorModule(tModule.UDim2)))
 })
 interactableList.defaultProps = {
-	renderList = function(p0, p1, p2) --[[ line: 60 ]]
+	renderList = function(p0, p1, p2)
 		-- upvalues: roactModule (ref)
 		local list = {
 			roactModule.createElement("UIListLayout", {
@@ -56,7 +56,7 @@ interactableList.defaultProps = {
 	selectionMode = selectionModeModule.Single
 }
 
-function interactableList.init(p3) --[[ line: 88 ]]
+function interactableList.init(p3)
 	-- upvalues: selectionModeModule (ref), cryoModule (ref)
 	local t = { interactable = {}, selection = {} }
 	
@@ -69,9 +69,9 @@ function interactableList.init(p3) --[[ line: 88 ]]
 	end
 	p3:setState(t)
 	
-	function p3.setInteractableState(p4, p5) --[[ line: 101 ]]
+	function p3.setInteractableState(p4, p5)
 		-- upvalues: p3 (ref), cryoModule (copy)
-		p3:setState(function(p6) --[[ line: 102 ]]
+		p3:setState(function(p6)
 			-- upvalues: cryoModule (copy), p4 (ref), p5 (ref)
 			return {
 				interactable = cryoModule.Dictionary.join(p6.interactable, { [p4] = p5 })
@@ -79,20 +79,20 @@ function interactableList.init(p3) --[[ line: 88 ]]
 		end)
 	end
 	
-	function p3.setSelection(p7) --[[ line: 110 ]]
+	function p3.setSelection(p7)
 		-- upvalues: p3 (ref)
 		p3:setState({ selection = p7 })
 	end
 end
 
-function interactableList.getSelection(p8) --[[ line: 117 ]]
+function interactableList.getSelection(p8)
 	-- upvalues: selectionModeModule (ref), cryoModule (ref)
 	if p8.props.selection then
 		return p8.props.selection
 	elseif p8.props.selectionMode == selectionModeModule.None then
 		return {}
 	end
-	local var11 = cryoModule.List.filter(p8.state.selection, function(p9) --[[ line: 124 ]]
+	local var11 = cryoModule.List.filter(p8.state.selection, function(p9)
 		-- upvalues: p8 (ref)
 		return p8.props.itemList[p9] ~= nil
 	end)
@@ -108,15 +108,15 @@ function interactableList.getSelection(p8) --[[ line: 117 ]]
 	return if var12 == nil then {} else { var12 }
 end
 
-function interactableList.didMount(p10) --[[ line: 142 ]]
+function interactableList.didMount(p10)
 	if p10.props.selection == nil and p10.props.onSelectionChanged then
 		p10.props.onSelectionChanged(p10:getSelection())
 	end
 end
 
-function interactableList.render(p11) --[[ line: 148 ]]
+function interactableList.render(p11)
 	-- upvalues: controlStateModule (ref), roactModule (ref), interactableListItemModule (ref)
-	return p11.props.renderList(p11.props.itemList, function(p12) --[[ line: 149 ]]
+	return p11.props.renderList(p11.props.itemList, function(p12)
 		-- upvalues: p11 (ref), controlStateModule (copy), roactModule (copy), interactableListItemModule (copy)
 		return roactModule.createElement(interactableListItemModule, {
 			id = p12,

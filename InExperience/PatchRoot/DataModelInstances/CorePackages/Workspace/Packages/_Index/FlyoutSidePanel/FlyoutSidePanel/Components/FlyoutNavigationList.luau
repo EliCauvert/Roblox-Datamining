@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local flyoutNavigationItemModule = require(script.Parent.FlyoutNavigationItem)
 
-return function(p0) --[[ line: 16 | named "FlyoutNavigationList" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), flyoutNavigationItemModule (ref)
 	local var2 = useTokens()
 	
@@ -12,7 +12,7 @@ return function(p0) --[[ line: 16 | named "FlyoutNavigationList" ]]
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p0.layoutOrder
-	}, reactModule.useMemo(function() --[[ line: 18 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), var2 (ref), p0 (ref), flyoutNavigationItemModule (copy)
 		local t = {
 			ListLayout = reactModule.createElement("UIListLayout", {

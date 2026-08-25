@@ -2,12 +2,12 @@
 local reactModule = require(parent.React)
 local useTriggerFeedback = require(parent.InteractionFeedback).useTriggerFeedback
 
-return function() --[[ line: 8 | named "useTriggerGameTileFeedbackCallbacks" ]]
+return function()
 	-- upvalues: useTriggerFeedback (ref), reactModule (ref)
 	local var1 = useTriggerFeedback()
 	local var2 = reactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p0) --[[ line: 11 ]]
+	return reactModule.useCallback(function(p0)
 		-- upvalues: var2 (ref), var1 (ref)
 		local guiState = p0.GuiState
 		
@@ -21,7 +21,7 @@ return function() --[[ line: 8 | named "useTriggerGameTileFeedbackCallbacks" ]]
 			var1("Default", "Press")
 		end
 		var2.current = guiState
-	end, { var1, var2 }), reactModule.useCallback(function() --[[ line: 25 ]]
+	end, { var1, var2 }), reactModule.useCallback(function()
 		-- upvalues: var2 (ref), var1 (ref)
 		if var2.current == Enum.GuiState.Press then
 			var1("Default", "Release")

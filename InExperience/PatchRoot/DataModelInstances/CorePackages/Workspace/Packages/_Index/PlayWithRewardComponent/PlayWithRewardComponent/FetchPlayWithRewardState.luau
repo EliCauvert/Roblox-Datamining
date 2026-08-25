@@ -19,7 +19,7 @@ local luaAppPlayWithRewardBetaIxpTreatmentValue = game:DefineFastString("LuaAppP
 local luaAppPlayWithRewardSkipIxpForShimmer = game:DefineFastFlag("LuaAppPlayWithRewardSkipIxpForShimmer", false)
 local luaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer = game:DefineFastFlag("LuaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer", false)
 
-local function isUniverseIdInPlayWithRewardBetaAllowList(x, y) --[[ line: 31 ]]
+local function isUniverseIdInPlayWithRewardBetaAllowList(x, y)
 	local var17 = x:gsub("^%s+", ""):gsub("%s+$", "")
 	
 	return if var17 == "" or y == "" or y:find(",", 1, true) ~= nil then false else ("," .. var17 .. ","):find("," .. y .. ",", 1, true) ~= nil
@@ -34,17 +34,17 @@ local var13 = tModule.interface({
 })
 local var14 = tModule.interface({ IsEligible = tModule.boolean })
 
-local function _(p0) --[[ line: 54 | named "getDurationSinceStartFetchMs" ]]
+local function _(p0)
 	return (os.clock() - p0) * 1000
 end
 
-local _ = function(p1, p2, _) --[[ line: 58 | named "fetchAd" ]]
+local _ = function(p1, p2, _)
 	local rewardedVideoAdAvailabilityNowForUniverseAsync = p1:GetAdAvailabilityNowForUniverseAsync(Enum.AdFormat.RewardedVideo, tonumber(p2), true)
 	
 	return rewardedVideoAdAvailabilityNowForUniverseAsync or nil
 end
 
-local function fetchPlayWithRewardStateAsync(p3, p4, _, p5) --[[ line: 69 ]]
+local function fetchPlayWithRewardStateAsync(p3, p4, _, p5)
 	-- upvalues: logger (ref), playWithRewardTelemetryModule (ref), var13 (ref), mutedError (ref), playWithRewardAdData (ref)
 	if not p3 then
 		logger:warning(`AdService is not available. Cannot fetch Play with Reward data for universe ID {p4}.`)
@@ -80,14 +80,14 @@ local function fetchPlayWithRewardStateAsync(p3, p4, _, p5) --[[ line: 69 ]]
 	return nil
 end
 
-local function shouldShowShimmer(p6, p7) --[[ line: 134 ]]
+local function shouldShowShimmer(p6, p7)
 	-- upvalues: logger (ref), var14 (ref), luaAppPlayWithRewardSkipIxpForShimmer (ref), luaAppPlayWithRewardUsePlatformSpecificLayerValueForShimmer (ref), userInputService (ref), IXPServiceWrapper (ref), appUserLayers (ref), luaAppPlayWithRewardBetaIxpVariantKey (ref), luaAppPlayWithRewardBetaIxpTreatmentValue (ref)
 	if not p6 then
 		logger:warning(`AdService is not available. Cannot determine whether to show shimmer for universe ID {p7}.`)
 		
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 141 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p6 (ref)
 		return p6:GetUniversalAppAdsEligibility()
 	end)
@@ -114,9 +114,9 @@ local function shouldShowShimmer(p6, p7) --[[ line: 134 ]]
 	end
 end
 
-return function(p8, p9, p10) --[[ line: 167 | named "FetchPlayWithRewardState" ]]
+return function(p8, p9, p10)
 	-- upvalues: fFlagLuaAppRemovePlayWithRewardBetaAllowlist (ref), isUniverseIdInPlayWithRewardBetaAllowList (ref), luaAppPlayWithRewardBetaUniverses (ref), promiseModule (ref), httpService (ref), shouldShowShimmer (ref), playWithRewardTelemetryModule (ref), setPlayWithRewardState (ref), fetchPlayWithRewardStateAsync (ref), logger (ref)
-	return function(p11) --[[ line: 168 ]]
+	return function(p11)
 		-- upvalues: fFlagLuaAppRemovePlayWithRewardBetaAllowlist (copy), isUniverseIdInPlayWithRewardBetaAllowList (copy), luaAppPlayWithRewardBetaUniverses (copy), p9 (ref), promiseModule (copy), httpService (copy), shouldShowShimmer (copy), p8 (ref), playWithRewardTelemetryModule (copy), setPlayWithRewardState (copy), fetchPlayWithRewardStateAsync (copy), p10 (ref), logger (copy)
 		if not fFlagLuaAppRemovePlayWithRewardBetaAllowlist and not isUniverseIdInPlayWithRewardBetaAllowList(luaAppPlayWithRewardBetaUniverses, p9) then
 			return promiseModule.resolve()
@@ -127,9 +127,9 @@ return function(p8, p9, p10) --[[ line: 167 | named "FetchPlayWithRewardState" ]
 			playWithRewardTelemetryModule.logPlayWithRewardShimmerShown(var27, p9)
 			p11:dispatch(setPlayWithRewardState(var27, p9, true, nil))
 		end
-		return promiseModule.new(function(p13, p14) --[[ line: 180 ]]
+		return promiseModule.new(function(p13, p14)
 			-- upvalues: fetchPlayWithRewardStateAsync (copy), p8 (copy), p9 (copy), p10 (copy), var27 (ref), p11 (ref), setPlayWithRewardState (copy)
-			local ok, status = pcall(function() --[[ line: 181 ]]
+			local ok, status = pcall(function()
 				-- upvalues: fetchPlayWithRewardStateAsync (copy), p8 (copy), p9 (copy), p10 (copy), var27 (copy)
 				return fetchPlayWithRewardStateAsync(p8, p9, p10, var27)
 			end)
@@ -142,7 +142,7 @@ return function(p8, p9, p10) --[[ line: 167 | named "FetchPlayWithRewardState" ]
 			end
 			p11:dispatch(setPlayWithRewardState(var27, p9, false, nil))
 			p14(status)
-		end):catch(function(p12) --[[ line: 191 ]]
+		end):catch(function(p12)
 			-- upvalues: logger (copy), p9 (copy)
 			logger:warning(`Promise for fetching Play With Reward data rejected for universe ID {p9}: {tostring(p12)}`)
 		end)

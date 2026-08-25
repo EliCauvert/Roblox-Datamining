@@ -6,7 +6,7 @@ local error = luauPolyfillModule.Error
 local t = {}
 local var2 = newproxy(true)
 
-getmetatable(var2).__tostring = function() --[[ line: 34 ]]
+getmetatable(var2).__tostring = function()
 	return "Value.None"
 end
 
@@ -32,7 +32,7 @@ local maybeUnsubscribe = helpersModule.maybeUnsubscribe
 local toArray = helpersModule.toArray
 local t_1 = {}
 
-local function _(p0, p1) --[[ line: 73 | named "assert" ]]
+local function _(p0, p1)
 	-- upvalues: error (ref)
 	if not p0 then
 		error(error.new(p1 or "assertion failure"))
@@ -42,13 +42,13 @@ end
 local _ = require(script.Parent.entryTypes)
 local _ = require(script.Parent.anyEntryTypes)
 
-local _ = function(p2, p3) --[[ line: 87 | named "valueIs" ]]
+local _ = function(p2, p3)
 	local p2Count = #p2
 	
 	return p2Count > 0 and (p2Count == #p3 and p2[p2Count] == p3[p2Count])
 end
 
-local function valueGet(p4) --[[ line: 98 ]]
+local function valueGet(p4)
 	-- upvalues: var2 (ref), error (ref)
 	if p4[2] ~= nil then
 		error(p4[2])
@@ -62,7 +62,7 @@ local function valueGet(p4) --[[ line: 98 ]]
 	return if p4[1] == var2 then nil else p4[1]
 end
 
-local _ = function(p5) --[[ line: 123 | named "valueCopy" ]]
+local _ = function(p5)
 	return table.clone(p5)
 end
 
@@ -70,7 +70,7 @@ local t_2 = {}
 t_2.__index = t_2
 t_2.count = 0
 
-function t_2.new(p6) --[[ line: 138 ]]
+function t_2.new(p6)
 	-- upvalues: t_2 (ref), set (ref), map (ref)
 	local tbl = setmetatable({}, t_2)
 	tbl.parents = set.new()
@@ -86,7 +86,7 @@ function t_2.new(p6) --[[ line: 138 ]]
 	return tbl
 end
 
-function t_2:peek() --[[ line: 159 ]]
+function t_2:peek()
 	-- upvalues: mightBeDirty (write), rememberParent (write)
 	if #self.value == 1 and not mightBeDirty(self) then
 		rememberParent(self)
@@ -96,7 +96,7 @@ function t_2:peek() --[[ line: 159 ]]
 	return nil
 end
 
-function t_2:recompute(p7) --[[ line: 173 ]]
+function t_2:recompute(p7)
 	-- upvalues: error (ref), rememberParent (write), mightBeDirty (write), reallyRecompute (write), valueGet (ref)
 	if not self.recomputing then
 		error(error.new("already recomputing"))
@@ -106,7 +106,7 @@ function t_2:recompute(p7) --[[ line: 173 ]]
 	return if mightBeDirty(self) then reallyRecompute(self, p7) else valueGet(self.value)
 end
 
-function t_2:setDirty() --[[ line: 183 ]]
+function t_2:setDirty()
 	-- upvalues: reportDirty (write), maybeUnsubscribe (ref)
 	if self.dirty then
 		return
@@ -117,11 +117,11 @@ function t_2:setDirty() --[[ line: 183 ]]
 	maybeUnsubscribe(self)
 end
 
-function t_2:dispose() --[[ line: 198 ]]
+function t_2:dispose()
 	-- upvalues: forgetChildren (write), eachParent (write), forgetChild (write)
 	self:setDirty()
 	forgetChildren(self)
-	eachParent(self, function(p8, _) --[[ line: 216 ]]
+	eachParent(self, function(p8, _)
 		-- upvalues: forgetChild (copy), self (ref)
 		p8:setDirty()
 		forgetChild(p8, self)
@@ -130,11 +130,11 @@ function t_2:dispose() --[[ line: 198 ]]
 	end)
 end
 
-function t_2:forget() --[[ line: 223 ]]
+function t_2:forget()
 	self:dispose()
 end
 
-function t_2:dependOn(p9) --[[ line: 230 ]]
+function t_2:dependOn(p9)
 	-- upvalues: t_1 (ref), set (ref)
 	p9:add(self)
 	
@@ -144,10 +144,10 @@ function t_2:dependOn(p9) --[[ line: 230 ]]
 	self.deps:add(p9)
 end
 
-function t_2:forgetDeps() --[[ line: 240 ]]
+function t_2:forgetDeps()
 	-- upvalues: array (ref), toArray (ref), t_1 (ref)
 	if self.deps then
-		array.forEach(toArray(self.deps), function(p10) --[[ line: 244 ]]
+		array.forEach(toArray(self.deps), function(p10)
 			-- upvalues: self (ref)
 			p10:delete(self)
 		end)
@@ -159,7 +159,7 @@ end
 
 t.Entry = t_2
 
-rememberParent = function(p11) --[[ line: 255 | named "rememberParent" ]]
+rememberParent = function(p11)
 	-- upvalues: parentEntrySlot (ref), mightBeDirty (write), reportDirtyChild (write), reportCleanChild (write)
 	local value = parentEntrySlot:getValue()
 	
@@ -181,7 +181,7 @@ rememberParent = function(p11) --[[ line: 255 | named "rememberParent" ]]
 	return value
 end
 
-reallyRecompute = function(p12, p13) --[[ line: 281 | named "reallyRecompute" ]]
+reallyRecompute = function(p12, p13)
 	-- upvalues: forgetChildren (write), parentEntrySlot (ref), recomputeNewValue (write), maybeSubscribe (write), setClean (write), valueGet (ref)
 	forgetChildren(p12)
 	parentEntrySlot:withValue(p12, recomputeNewValue, { p12, p13 })
@@ -192,7 +192,7 @@ reallyRecompute = function(p12, p13) --[[ line: 281 | named "reallyRecompute" ]]
 	return valueGet(p12.value)
 end
 
-recomputeNewValue = function(_, p14, p15) --[[ line: 298 | named "recomputeNewValue" ]]
+recomputeNewValue = function(_, p14, p15)
 	-- upvalues: var2 (ref)
 	p14.recomputing = true
 	table.clear(p14.value)
@@ -211,11 +211,11 @@ recomputeNewValue = function(_, p14, p15) --[[ line: 298 | named "recomputeNewVa
 	p14.recomputing = false
 end
 
-mightBeDirty = function(p16) --[[ line: 321 | named "mightBeDirty" ]]
+mightBeDirty = function(p16)
 	return p16.dirty or (p16.dirtyChildren ~= nil and p16.dirtyChildren.size > 0)
 end
 
-setClean = function(value) --[[ line: 327 | named "setClean" ]]
+setClean = function(value)
 	-- upvalues: mightBeDirty (write), reportClean (write)
 	value.dirty = false
 	
@@ -225,17 +225,17 @@ setClean = function(value) --[[ line: 327 | named "setClean" ]]
 	reportClean(value)
 end
 
-reportDirty = function(p17) --[[ line: 339 | named "reportDirty" ]]
+reportDirty = function(p17)
 	-- upvalues: eachParent (write), reportDirtyChild (write)
 	eachParent(p17, reportDirtyChild)
 end
 
-reportClean = function(p18) --[[ line: 343 | named "reportClean" ]]
+reportClean = function(p18)
 	-- upvalues: eachParent (write), reportCleanChild (write)
 	eachParent(p18, reportCleanChild)
 end
 
-eachParent = function(p19, p20) --[[ line: 347 | named "eachParent" ]]
+eachParent = function(p19, p20)
 	-- upvalues: toArray (ref)
 	local size = p19.parents.size
 	
@@ -248,7 +248,7 @@ eachParent = function(p19, p20) --[[ line: 347 | named "eachParent" ]]
 	end
 end
 
-reportDirtyChild = function(p21, p22) --[[ line: 360 | named "reportDirtyChild" ]]
+reportDirtyChild = function(p21, p22)
 	-- upvalues: error (ref), mightBeDirty (write), t_1 (ref), set (ref), reportDirty (write)
 	if _G.__DEV__ then
 		local var25, var26 = p21.childValues:has(p22)
@@ -276,7 +276,7 @@ reportDirtyChild = function(p21, p22) --[[ line: 360 | named "reportDirtyChild" 
 	end
 end
 
-reportCleanChild = function(p23, p24) --[[ line: 394 | named "reportCleanChild" ]]
+reportCleanChild = function(p23, p24)
 	-- upvalues: error (ref), mightBeDirty (write), removeDirtyChild (write), reportClean (write)
 	if _G.__DEV__ then
 		local var30, var31 = p23.childValues:has(p24)
@@ -308,7 +308,7 @@ reportCleanChild = function(p23, p24) --[[ line: 394 | named "reportCleanChild" 
 	reportClean(p23)
 end
 
-removeDirtyChild = function(p25, p26) --[[ line: 421 | named "removeDirtyChild" ]]
+removeDirtyChild = function(p25, p26)
 	-- upvalues: t_1 (ref)
 	local dirtyChildren = p25.dirtyChildren
 	
@@ -324,10 +324,10 @@ removeDirtyChild = function(p25, p26) --[[ line: 421 | named "removeDirtyChild" 
 	end
 end
 
-forgetChildren = function(p27) --[[ line: 436 | named "forgetChildren" ]]
+forgetChildren = function(p27)
 	-- upvalues: array (ref), forgetChild (write), error (ref)
 	if p27.childValues.size > 0 then
-		array.forEach(table.clone(p27.childValues:keys()), function(p28) --[[ line: 444 ]]
+		array.forEach(table.clone(p27.childValues:keys()), function(p28)
 			-- upvalues: forgetChild (copy), p27 (ref)
 			forgetChild(p27, p28)
 		end)
@@ -339,16 +339,16 @@ forgetChildren = function(p27) --[[ line: 436 | named "forgetChildren" ]]
 	end
 end
 
-forgetChild = function(p29, p30) --[[ line: 458 | named "forgetChild" ]]
+forgetChild = function(p29, p30)
 	-- upvalues: removeDirtyChild (write)
 	p30.parents:delete(p29)
 	p29.childValues:delete(p30)
 	removeDirtyChild(p29, p30)
 end
 
-maybeSubscribe = function(p31, p32) --[[ line: 464 | named "maybeSubscribe" ]]
+maybeSubscribe = function(p31, p32)
 	-- upvalues: maybeUnsubscribe (ref)
-	if typeof(p31.subscribe) == "function" and not pcall(function() --[[ line: 466 ]]
+	if typeof(p31.subscribe) == "function" and not pcall(function()
 		-- upvalues: maybeUnsubscribe (copy), p31 (ref), p32 (ref)
 		maybeUnsubscribe(p31)
 		p31.unsubscribe = p31.subscribe(table.unpack(p32))

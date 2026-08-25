@@ -2,7 +2,7 @@
 local addUserModule = require(script.Parent.addUser)
 local removeUserModule = require(script.Parent.removeUser)
 
-function difference(p0, p1) --[[ line: 8 ]]
+function difference(p0, p1)
 	local t = {}
 	
 	for i, v in pairs(p0) do
@@ -23,11 +23,11 @@ function difference(p0, p1) --[[ line: 8 ]]
 	return t_1
 end
 
-return function(p2, p3) --[[ line: 33 ]]
+return function(p2, p3)
 	-- upvalues: llamaModule (ref), addUserModule (ref), removeUserModule (ref)
 	local var6 = tostring(p3.namedIds.users)
 	local var7 = p2[var6] or {}
-	local var8 = llamaModule.List.map(llamaModule.Dictionary.values(p3.responseBody.data), function(p4) --[[ line: 37 ]]
+	local var8 = llamaModule.List.map(llamaModule.Dictionary.values(p3.responseBody.data), function(p4)
 		return tostring(p4.id)
 	end)
 	local var9 = difference(var7, var8)

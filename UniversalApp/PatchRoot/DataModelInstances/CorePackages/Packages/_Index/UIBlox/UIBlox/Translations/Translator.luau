@@ -4,7 +4,7 @@ local parent = script.Parent
 local constantsModule = require(parent.Constants)
 local generatedTranslationsModule = require(parent.GeneratedTranslations)
 
-local function _(p0) --[[ line: 9 | named "createUIBloxLocalizationTable" ]]
+local function _(p0)
 	-- upvalues: guiService (ref), constantsModule (ref), generatedTranslationsModule (ref)
 	if guiService:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME) then
 		return
@@ -28,7 +28,7 @@ end
 local var5 = guiService.UIBloxLocalization:GetTranslator("en-us")
 local t = {}
 
-local _ = function(p1) --[[ line: 28 | named "getTranslatorForLocale" ]]
+local _ = function(p1)
 	-- upvalues: t (ref), guiService (ref)
 	local var9 = t[p1]
 	
@@ -41,7 +41,7 @@ local _ = function(p1) --[[ line: 28 | named "getTranslatorForLocale" ]]
 	return var10
 end
 
-local _ = function() --[[ line: 40 | named "getTranslator" ]]
+local _ = function()
 	-- upvalues: localizationService (ref), t (ref), guiService (ref)
 	local robloxLocaleId = localizationService.RobloxLocaleId
 	local var11 = t[robloxLocaleId]
@@ -55,9 +55,9 @@ local _ = function() --[[ line: 40 | named "getTranslator" ]]
 	return var12
 end
 
-local function formatByKeyWithFallback(p2, p3, p4) --[[ line: 44 ]]
+local function formatByKeyWithFallback(p2, p3, p4)
 	-- upvalues: var5 (ref)
-	local ok, status = pcall(function() --[[ line: 45 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p4 (ref), p2 (ref), p3 (ref)
 		return p4:FormatByKey(p2, p3)
 	end)
@@ -66,7 +66,7 @@ local function formatByKeyWithFallback(p2, p3, p4) --[[ line: 44 ]]
 end
 
 return {
-	FormatByKey = function(_, p5, p6) --[[ line: 60 ]]
+	FormatByKey = function(_, p5, p6)
 		-- upvalues: formatByKeyWithFallback (ref), localizationService (ref), t (ref), guiService (ref)
 		local var14
 		local robloxLocaleId = localizationService.RobloxLocaleId
@@ -81,7 +81,7 @@ return {
 		end
 		return formatByKeyWithFallback(p5, p6, var14)
 	end,
-	FormatByKeyForLocale = function(_, p7, p8, p9) --[[ line: 64 ]]
+	FormatByKeyForLocale = function(_, p7, p8, p9)
 		-- upvalues: formatByKeyWithFallback (ref), t (ref), guiService (ref)
 		local var16
 		local var15 = t[p8]

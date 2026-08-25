@@ -18,9 +18,9 @@ local list_2 = {
 	inputSizeModule.Small
 }
 
-local function noop() --[[ line: 55 ]] end
+local function noop() end
 
-local function Section(p0) --[[ line: 57 ]]
+local function Section(p0)
 	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
 	return reactModule.createElement(viewModule, {
 		tag = "col gap-medium size-full-0 auto-y",
@@ -38,14 +38,14 @@ local function Section(p0) --[[ line: 57 ]]
 	})
 end
 
-local function Page(p1) --[[ line: 79 ]]
+local function Page(p1)
 	-- upvalues: reactModule (ref), viewModule (ref)
 	return reactModule.createElement(viewModule, {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0"
 	}, p1.children)
 end
 
-local function createItems(p2, p3) --[[ line: 87 ]]
+local function createItems(p2, p3)
 	-- upvalues: reactModule (ref), noop (ref)
 	local t = {}
 	
@@ -63,7 +63,7 @@ local function createItems(p2, p3) --[[ line: 87 ]]
 	return t
 end
 
-local function staticItems() --[[ line: 105 ]]
+local function staticItems()
 	return {
 		{ label = "Option A", isChecked = true },
 		{ label = "Option B", isChecked = false },
@@ -72,14 +72,14 @@ local function staticItems() --[[ line: 105 ]]
 end
 
 return {
-	create = function(p4) --[[ line: 113 ]]
+	create = function(p4)
 		-- upvalues: reactModule (ref), viewModule (ref), createItems (ref), Page (ref), Section (ref), dashModule (ref), list (ref), staticItems (ref), inputSizeModule (ref), list_1 (ref), list_2 (ref), list_1 (ref)
 		return {
 			summary = p4.summary,
 			stories = {
 				{
 					name = "Playground",
-					story = function(value) --[[ line: 114 ]]
+					story = function(value)
 						-- upvalues: reactModule (copy), p4 (ref), viewModule (copy), createItems (copy)
 						local controls = value.controls
 						local var16, var17 = reactModule.useState({ true, false, true, false })
@@ -90,9 +90,9 @@ return {
 								label = v,
 								hint = if controls.showHints then p4.hints[i] else nil,
 								isChecked = var16[i],
-								onActivated = function(p5) --[[ line: 131 ]]
+								onActivated = function(p5)
 									-- upvalues: var17 (ref), i (ref)
-									var17(function(p6) --[[ line: 132 ]]
+									var17(function(p6)
 										-- upvalues: i (copy), p5 (ref)
 										local cloned = table.clone(p6)
 										cloned[i] = p5
@@ -113,14 +113,14 @@ return {
 				},
 				{
 					name = "Sizing",
-					story = function() --[[ line: 152 ]]
+					story = function()
 						-- upvalues: reactModule (copy), Page (copy), Section (copy), dashModule (copy), list (copy), p4 (ref), createItems (copy), staticItems (copy)
 						return reactModule.createElement(Page, nil, {
 							Size = reactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Size",
 								contentTag = "row gap-xxlarge auto-xy wrap"
-							}, dashModule.map(list, function(p7, p8) --[[ line: 161 ]]
+							}, dashModule.map(list, function(p7, p8)
 								-- upvalues: reactModule (copy), p4 (copy), createItems (copy), staticItems (copy)
 								return reactModule.createElement(p4.Group, { legend = p7, size = p7, LayoutOrder = p8 }, createItems(p4.Item, staticItems()))
 							end))
@@ -129,7 +129,7 @@ return {
 				},
 				{
 					name = "States",
-					story = function() --[[ line: 172 ]]
+					story = function()
 						-- upvalues: reactModule (copy), Page (copy), Section (copy), p4 (ref), inputSizeModule (copy), createItems (copy)
 						return reactModule.createElement(Page, nil, {
 							States = reactModule.createElement(Section, {
@@ -145,14 +145,14 @@ return {
 				{
 					name = "Placement",
 					summary = `placement positions each item's label relative to its {string.lower(p4.itemName)}.`,
-					story = function() --[[ line: 188 ]]
+					story = function()
 						-- upvalues: reactModule (copy), Page (copy), Section (copy), dashModule (copy), list_1 (copy), p4 (ref), createItems (copy), staticItems (copy)
 						return reactModule.createElement(Page, nil, {
 							Placement = reactModule.createElement(Section, {
 								LayoutOrder = 1,
 								name = "Placement",
 								contentTag = "row gap-xxlarge auto-xy wrap"
-							}, dashModule.map(list_1, function(p9, p10) --[[ line: 197 ]]
+							}, dashModule.map(list_1, function(p9, p10)
 								-- upvalues: reactModule (copy), p4 (copy), createItems (copy), staticItems (copy)
 								return reactModule.createElement(p4.Group, { legend = p9, placement = p9, LayoutOrder = p10 }, createItems(p4.Item, staticItems()))
 							end))

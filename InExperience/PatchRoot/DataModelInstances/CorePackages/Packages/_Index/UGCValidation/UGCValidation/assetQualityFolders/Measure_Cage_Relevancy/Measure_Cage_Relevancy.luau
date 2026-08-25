@@ -8,7 +8,7 @@ local UGCMinCageRelevancyThreshold = game:DefineFastInt("UGCMinCageRelevancyThre
 return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
-	run = function(p0, p1) --[[ line: 15 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCMinCageRelevancyThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local handleOuterCage = p1.aqsSummaryData.Measure_Cage_Relevancy.Handle_OuterCage
 		local outerCageFaceRelevantPercent = handleOuterCage and tonumber(handleOuterCage.outer_cage_face_relevant_percent)

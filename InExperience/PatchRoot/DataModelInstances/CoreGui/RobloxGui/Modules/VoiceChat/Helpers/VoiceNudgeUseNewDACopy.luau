@@ -4,12 +4,12 @@ local getFFlagVoiceChatDisruptiveVoiceNudgeForceUseNewDACopyModule = require(scr
 local disruptiveVoiceNudgeVariantIXPLayerName = game:DefineFastString("DisruptiveVoiceNudgeVariantIXPLayerName", "Voice.CivilityAndSafety")
 local disruptiveVoiceNudgeVariantIXPVariableName = game:DefineFastString("DisruptiveVoiceNudgeVariantIXPVariableName", "UseNewDACopy")
 
-return function() --[[ line: 11 | named "VoiceNudgeUseNewDACopy" ]]
+return function()
 	-- upvalues: getFFlagVoiceChatDisruptiveVoiceNudgeForceUseNewDACopyModule (ref), IXPService (ref), disruptiveVoiceNudgeVariantIXPLayerName (ref), disruptiveVoiceNudgeVariantIXPVariableName (ref), name (ref)
 	if getFFlagVoiceChatDisruptiveVoiceNudgeForceUseNewDACopyModule() then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 15 ]]
+	local ok, status = pcall(function()
 		-- upvalues: IXPService (copy), disruptiveVoiceNudgeVariantIXPLayerName (copy)
 		return IXPService:GetUserLayerVariables(disruptiveVoiceNudgeVariantIXPLayerName)
 	end)

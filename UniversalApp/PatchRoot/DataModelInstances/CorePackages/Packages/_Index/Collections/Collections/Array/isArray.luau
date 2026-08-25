@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 16 ]]
+﻿return function(p0)
 	if typeof(p0) ~= "table" then
 		return false
 	elseif next(p0) == nil then

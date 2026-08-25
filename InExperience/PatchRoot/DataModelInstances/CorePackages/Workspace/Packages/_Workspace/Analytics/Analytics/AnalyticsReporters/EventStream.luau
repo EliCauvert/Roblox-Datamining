@@ -1,9 +1,9 @@
 ﻿local userInputService = game:GetService("UserInputService")
-local var1 = if require(script:FindFirstAncestor("Analytics").Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(script.Parent.Parent.getPlatformTarget) else function() --[[ line: 36 | named "getPlatformTarget" ]]
+local var1 = if require(script:FindFirstAncestor("Analytics").Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(script.Parent.Parent.getPlatformTarget) else function()
 	-- upvalues: userInputService (ref)
 	local var3 = "unknownLua"
 	local none = Enum.Platform.None
-	pcall(function() --[[ line: 42 ]]
+	pcall(function()
 		-- upvalues: none (write), userInputService (copy)
 		none = userInputService:GetPlatform()
 	end)
@@ -14,7 +14,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 79 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	local var5 = type(p0)
 	assert(if var5 ~= "table" then var5 == "userdata" else true, "Unexpected value for reportingService")
@@ -24,12 +24,12 @@ function t.new(p0) --[[ line: 79 ]]
 	return t_1
 end
 
-function t:setEnabled(p1) --[[ line: 92 ]]
+function t:setEnabled(p1)
 	assert(type(p1) == "boolean", "Expected isEnabled to be a boolean")
 	self._isEnabled = p1
 end
 
-function t:setRBXEvent(p2, p3, p4) --[[ line: 100 ]]
+function t:setRBXEvent(p2, p3, p4)
 	-- upvalues: var1 (write)
 	local var7 = var1()
 	p4 = p4 or {}
@@ -40,7 +40,7 @@ function t:setRBXEvent(p2, p3, p4) --[[ line: 100 ]]
 	self._reporter:SetRBXEvent(var7, p2, p3, p4)
 end
 
-function t:setRBXEventStream(p5, p6, p7) --[[ line: 116 ]]
+function t:setRBXEventStream(p5, p6, p7)
 	-- upvalues: var1 (write)
 	local var9 = var1()
 	p7 = p7 or {}
@@ -51,13 +51,13 @@ function t:setRBXEventStream(p5, p6, p7) --[[ line: 116 ]]
 	self._reporter:SetRBXEventStream(var9, p5, p6, p7)
 end
 
-function t:releaseRBXEventStream() --[[ line: 129 ]]
+function t:releaseRBXEventStream()
 	-- upvalues: var1 (write)
 	assert(self._isEnabled, "This reporting service is disabled")
 	self._reporter:ReleaseRBXEventStream(var1())
 end
 
-function t:sendEventDeferred(p8, p9, p10) --[[ line: 138 ]]
+function t:sendEventDeferred(p8, p9, p10)
 	-- upvalues: var1 (write)
 	local var11 = var1()
 	p10 = p10 or {}
@@ -68,7 +68,7 @@ function t:sendEventDeferred(p8, p9, p10) --[[ line: 138 ]]
 	self._reporter:SendEventDeferred(var11, p8, p9, p10)
 end
 
-function t:sendEventImmediately(p11, p12, p13) --[[ line: 154 ]]
+function t:sendEventImmediately(p11, p12, p13)
 	-- upvalues: var1 (write)
 	local var13 = var1()
 	p13 = p13 or {}
@@ -79,7 +79,7 @@ function t:sendEventImmediately(p11, p12, p13) --[[ line: 154 ]]
 	self._reporter:SendEventImmediately(var13, p11, p12, p13)
 end
 
-function t:updateHeartbeatObject(p14) --[[ line: 168 ]]
+function t:updateHeartbeatObject(p14)
 	p14 = p14 or {}
 	assert(type(p14) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")

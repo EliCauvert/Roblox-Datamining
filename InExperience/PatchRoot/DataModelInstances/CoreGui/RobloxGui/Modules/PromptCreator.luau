@@ -14,7 +14,7 @@ local var11 = nil
 local var12 = nil
 local var13 = nil
 
-function getViewportSize() --[[ line: 32 ]]
+function getViewportSize()
 	while not game.Workspace.CurrentCamera do
 		game.Workspace.Changed:Wait()
 	end
@@ -74,7 +74,7 @@ end
 if var14 then
 	var32 = 42
 end
-local function createFrame(p0, p1, p2, p3, p4) --[[ line: 125 ]]
+local function createFrame(p0, p1, p2, p3, p4)
 	local frame = Instance.new("Frame")
 	frame.Name = p0
 	frame.Size = p1
@@ -87,7 +87,7 @@ local function createFrame(p0, p1, p2, p3, p4) --[[ line: 125 ]]
 	return frame
 end
 
-local function createTextLabel(p5, p6, p7, p8, p9, p10) --[[ line: 138 ]]
+local function createTextLabel(p5, p6, p7, p8, p9, p10)
 	local textLabel = Instance.new("TextLabel")
 	textLabel.Name = p5
 	textLabel.Size = p6 or UDim2.new(0, 0, 0, 0)
@@ -102,7 +102,7 @@ local function createTextLabel(p5, p6, p7, p8, p9, p10) --[[ line: 138 ]]
 	return textLabel
 end
 
-local function createScrollingTextLabel(p11, p12, p13, p14, p15, p16, p17) --[[ line: 153 ]]
+local function createScrollingTextLabel(p11, p12, p13, p14, p15, p16, p17)
 	-- upvalues: createTextLabel (ref), textService (ref)
 	local var41 = createTextLabel(p11, p12, p13, p14, p15, p16)
 	var41.TextXAlignment = Enum.TextXAlignment.Left
@@ -134,11 +134,11 @@ local function createScrollingTextLabel(p11, p12, p13, p14, p15, p16, p17) --[[ 
 		emptySelectionImage.SelectionImageObject.BackgroundTransparency = 1
 		emptySelectionImage.SelectionImageObject.Image = ""
 		emptySelectionImage.Active = false
-		emptySelectionImage.SelectionGained:connect(function() --[[ line: 189 ]]
+		emptySelectionImage.SelectionGained:connect(function()
 			-- upvalues: scrollingTextParent (ref)
 			scrollingTextParent.BackgroundTransparency = 0.15
 		end)
-		emptySelectionImage.SelectionLost:connect(function() --[[ line: 193 ]]
+		emptySelectionImage.SelectionLost:connect(function()
 			-- upvalues: scrollingTextParent (ref)
 			scrollingTextParent.BackgroundTransparency = 1
 		end)
@@ -152,7 +152,7 @@ local function createScrollingTextLabel(p11, p12, p13, p14, p15, p16, p17) --[[ 
 	return var41
 end
 
-local function _(p18, p19, p20, p21, p22) --[[ line: 210 | named "createImageLabel" ]]
+local function _(p18, p19, p20, p21, p22)
 	local imageLabel = Instance.new("ImageLabel")
 	imageLabel.Name = p18
 	imageLabel.Size = p19
@@ -166,7 +166,7 @@ local function _(p18, p19, p20, p21, p22) --[[ line: 210 | named "createImageLab
 	return imageLabel
 end
 
-local function createImageButtonWithText(p23, p24, p25, p26, p27, p28, p29) --[[ line: 225 ]]
+local function createImageButtonWithText(p23, p24, p25, p26, p27, p28, p29)
 	-- upvalues: createTextLabel (ref), var32 (write)
 	local emptySelectionImage = Instance.new("ImageButton")
 	emptySelectionImage.Name = p23
@@ -185,23 +185,23 @@ local function createImageButtonWithText(p23, p24, p25, p26, p27, p28, p29) --[[
 	local var48 = createTextLabel(p23 .. "Text", UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), p29, var32, p28)
 	var48.ZIndex = 9
 	var48.Parent = emptySelectionImage
-	emptySelectionImage.MouseEnter:connect(function() --[[ line: 245 ]]
+	emptySelectionImage.MouseEnter:connect(function()
 		-- upvalues: emptySelectionImage (ref), p27 (ref)
 		emptySelectionImage.Image = p27
 	end)
-	emptySelectionImage.MouseLeave:connect(function() --[[ line: 248 ]]
+	emptySelectionImage.MouseLeave:connect(function()
 		-- upvalues: emptySelectionImage (ref), p26 (ref)
 		emptySelectionImage.Image = p26
 	end)
-	emptySelectionImage.MouseButton1Click:connect(function() --[[ line: 251 ]]
+	emptySelectionImage.MouseButton1Click:connect(function()
 		-- upvalues: emptySelectionImage (ref), p26 (ref)
 		emptySelectionImage.Image = p26
 	end)
-	emptySelectionImage.SelectionGained:connect(function() --[[ line: 254 ]]
+	emptySelectionImage.SelectionGained:connect(function()
 		-- upvalues: emptySelectionImage (ref), p27 (ref)
 		emptySelectionImage.Image = p27
 	end)
-	emptySelectionImage.SelectionLost:connect(function() --[[ line: 257 ]]
+	emptySelectionImage.SelectionLost:connect(function()
 		-- upvalues: emptySelectionImage (ref), p26 (ref)
 		emptySelectionImage.Image = p26
 	end)
@@ -209,7 +209,7 @@ local function createImageButtonWithText(p23, p24, p25, p26, p27, p28, p29) --[[
 	return emptySelectionImage
 end
 
-local function createPromptDialog() --[[ line: 265 ]]
+local function createPromptDialog()
 	-- upvalues: var12 (write), createFrame (ref), uDim2 (write), uDim2_1 (write), robloxGui (ref), var13 (write)
 	var12 = createFrame("PromptDialog", uDim2, uDim2_1, 1, nil)
 	var12.Visible = false
@@ -220,7 +220,7 @@ local function createPromptDialog() --[[ line: 265 ]]
 	var13.Parent = var12
 end
 
-local _ = function() --[[ line: 276 | named "destroyPromptDialog" ]]
+local _ = function()
 	-- upvalues: var12 (write), var13 (write)
 	if var12 then
 		var12:Destroy()
@@ -229,7 +229,7 @@ local _ = function() --[[ line: 276 | named "destroyPromptDialog" ]]
 	end
 end
 
-function AddDefaultsToPromptOptions(p30, p31) --[[ line: 284 ]]
+function AddDefaultsToPromptOptions(p30, p31)
 	for i, v in pairs(p31) do
 		if p30[i] == nil then
 			p30[i] = v
@@ -237,7 +237,7 @@ function AddDefaultsToPromptOptions(p30, p31) --[[ line: 284 ]]
 	end
 end
 
-function CreatePromptVRorConsole(p32) --[[ line: 293 ]]
+function CreatePromptVRorConsole(p32)
 	-- upvalues: var13 (write), createTextLabel (ref), createFrame (ref), createScrollingTextLabel (ref), createImageButtonWithText (ref)
 	local var49 = 90
 	
@@ -276,7 +276,7 @@ function CreatePromptVRorConsole(p32) --[[ line: 293 ]]
 	var57.Parent = var13
 	var57.ScaleType = slice
 	var57.SliceCenter = rect
-	var57.MouseButton1Click:connect(function() --[[ line: 330 ]]
+	var57.MouseButton1Click:connect(function()
 		OnPromptEnded(true)
 	end)
 	
@@ -285,13 +285,13 @@ function CreatePromptVRorConsole(p32) --[[ line: 293 ]]
 		var58.Parent = var13
 		var58.ScaleType = slice
 		var58.SliceCenter = rect
-		var58.MouseButton1Click:connect(function() --[[ line: 342 ]]
+		var58.MouseButton1Click:connect(function()
 			OnPromptEnded(false)
 		end)
 	end
 end
 
-function CreatePromptPCorTablet(p33) --[[ line: 348 ]]
+function CreatePromptPCorTablet(p33)
 	-- upvalues: createTextLabel (ref), var31 (write), var13 (write), createFrame (ref), var18 (ref), createScrollingTextLabel (ref), createImageButtonWithText (ref)
 	local var65
 	local var59 = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, var31), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p33.WindowTitle)
@@ -333,7 +333,7 @@ function CreatePromptPCorTablet(p33) --[[ line: 348 ]]
 	var67.Parent = var13
 	var67.ScaleType = slice
 	var67.SliceCenter = rect
-	var67.MouseButton1Click:connect(function() --[[ line: 414 ]]
+	var67.MouseButton1Click:connect(function()
 		OnPromptEnded(true)
 	end)
 	
@@ -342,7 +342,7 @@ function CreatePromptPCorTablet(p33) --[[ line: 348 ]]
 		var68.Parent = var13
 		var68.ScaleType = slice
 		var68.SliceCenter = rect
-		var68.MouseButton1Click:connect(function() --[[ line: 432 ]]
+		var68.MouseButton1Click:connect(function()
 			OnPromptEnded(false)
 		end)
 		var68.NextSelectionLeft = var67
@@ -350,7 +350,7 @@ function CreatePromptPCorTablet(p33) --[[ line: 348 ]]
 	end
 end
 
-function CreatePromptPhone(p34) --[[ line: 441 ]]
+function CreatePromptPhone(p34)
 	-- upvalues: createTextLabel (ref), var31 (write), var13 (write), createFrame (ref), createScrollingTextLabel (ref), createImageButtonWithText (ref)
 	local var75
 	local var69 = createTextLabel("WindowTitle", UDim2.new(1, 0, 0, var31), UDim2.new(0, 0, 0, 0), Enum.Font.SourceSansBold, 24, p34.WindowTitle)
@@ -392,7 +392,7 @@ function CreatePromptPhone(p34) --[[ line: 441 ]]
 	var77.Parent = var13
 	var77.ScaleType = slice
 	var77.SliceCenter = rect
-	var77.MouseButton1Click:connect(function() --[[ line: 487 ]]
+	var77.MouseButton1Click:connect(function()
 		OnPromptEnded(true)
 	end)
 	
@@ -401,13 +401,13 @@ function CreatePromptPhone(p34) --[[ line: 441 ]]
 		var78.Parent = var13
 		var78.ScaleType = slice
 		var78.SliceCenter = rect
-		var78.MouseButton1Click:connect(function() --[[ line: 498 ]]
+		var78.MouseButton1Click:connect(function()
 			OnPromptEnded(false)
 		end)
 	end
 end
 
-function CreatePromptFromOptions(p35) --[[ line: 504 ]]
+function CreatePromptFromOptions(p35)
 	-- upvalues: var13 (write), var15 (write), var14 (ref), var17 (ref)
 	var13:ClearAllChildren()
 	
@@ -423,7 +423,7 @@ function CreatePromptFromOptions(p35) --[[ line: 504 ]]
 	CreatePromptPCorTablet(p35)
 end
 
-function SetSelectedObject() --[[ line: 516 ]]
+function SetSelectedObject()
 	-- upvalues: var13 (write), guiService (ref)
 	local cancelButton = var13:FindFirstChild("CancelButton")
 	
@@ -439,16 +439,16 @@ function SetSelectedObject() --[[ line: 516 ]]
 	end
 end
 
-function OnTweenInFinished() --[[ line: 528 ]]
+function OnTweenInFinished()
 	-- upvalues: var20 (write), var14 (ref)
 	if var20 or var14 then
 		SetSelectedObject()
 	end
 end
 
-function ConnectActiveEvents() --[[ line: 534 ]]
+function ConnectActiveEvents()
 	-- upvalues: var15 (write), var20 (write), t_2 (write), userInputService (ref), guiService (ref), var19 (write), var21 (write), var22 (write), var23 (write)
-	local function OnInputChanged(p36) --[[ line: 535 ]]
+	local function OnInputChanged(p36)
 		-- upvalues: var15 (copy), var20 (copy)
 		local userInputType = Enum.UserInputType
 		
@@ -472,7 +472,7 @@ function ConnectActiveEvents() --[[ line: 534 ]]
 	
 	table.insert(t_2, userInputService.InputChanged:connect(OnInputChanged))
 	table.insert(t_2, userInputService.InputBegan:connect(OnInputChanged))
-	table.insert(t_2, guiService.Changed:connect(function(p37) --[[ line: 554 ]]
+	table.insert(t_2, guiService.Changed:connect(function(p37)
 		-- upvalues: var19 (copy), guiService (copy), var21 (copy), var22 (copy), var23 (copy)
 		if var19 then
 			if p37 == "CoreGuiNavigationEnabled" then
@@ -500,7 +500,7 @@ function ConnectActiveEvents() --[[ line: 534 ]]
 	end))
 end
 
-function DisconnectActiveEvents() --[[ line: 576 ]]
+function DisconnectActiveEvents()
 	-- upvalues: t_2 (write)
 	for i, v in ipairs(t_2) do
 		v:Disconnect()
@@ -508,7 +508,7 @@ function DisconnectActiveEvents() --[[ line: 576 ]]
 	t_2 = {}
 end
 
-function ShowPrompt() --[[ line: 583 ]]
+function ShowPrompt()
 	-- upvalues: var12 (write), var14 (ref), userInputService (ref), var15 (write), var11 (write), dialogModule (ref), uDim2_2 (write)
 	var12.Visible = true
 	
@@ -530,9 +530,9 @@ function ShowPrompt() --[[ line: 583 ]]
 	DisableControllerMovement()
 end
 
-function HidePrompt() --[[ line: 603 ]]
+function HidePrompt()
 	-- upvalues: var19 (write), guiService (ref), var21 (write), var22 (write), var23 (write), var14 (ref), userInputService (ref), promptCreatorTransientDialog (ref), var12 (write), var13 (write), var15 (write), uDim2_1 (write), var11 (write)
-	local function onClosed() --[[ line: 604 ]]
+	local function onClosed()
 		-- upvalues: var19 (copy), guiService (copy), var21 (copy), var22 (copy), var23 (copy), var14 (copy), userInputService (copy), promptCreatorTransientDialog (copy), var12 (copy), var13 (copy)
 		var19 = false
 		guiService.CoreGuiNavigationEnabled = var21
@@ -592,7 +592,7 @@ function HidePrompt() --[[ line: 603 ]]
 	end
 end
 
-function DoCreatePrompt(p38) --[[ line: 631 ]]
+function DoCreatePrompt(p38)
 	-- upvalues: var25 (write), t_1 (ref), var26 (write)
 	var25 = p38.PromptCompletedCallback
 	AddDefaultsToPromptOptions(p38, t_1)
@@ -601,16 +601,16 @@ function DoCreatePrompt(p38) --[[ line: 631 ]]
 	ShowPrompt()
 end
 
-function OnPromptEnded(p39) --[[ line: 639 ]]
+function OnPromptEnded(p39)
 	-- upvalues: var25 (write), var26 (write)
 	if var25 then
 		if var26.CancelActive then
-			spawn(function() --[[ line: 642 ]]
+			spawn(function()
 				-- upvalues: var25 (copy), p39 (ref)
 				var25(p39)
 			end)
 		else
-			spawn(function() --[[ line: 644 ]]
+			spawn(function()
 				-- upvalues: var25 (copy)
 				var25(true)
 			end)
@@ -621,30 +621,30 @@ function OnPromptEnded(p39) --[[ line: 639 ]]
 	DisableControllerInput()
 end
 
-function NoOpFunc() --[[ line: 654 ]] end
+function NoOpFunc() end
 
-function EnableControllerMovement() --[[ line: 656 ]]
+function EnableControllerMovement()
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("doNothingThumbstick2PromptCreator")
 	contextActionService:UnbindCoreAction("doNothingAButtonPromptCreator")
 end
 
-function DisableControllerMovement() --[[ line: 661 ]]
+function DisableControllerMovement()
 	-- upvalues: contextActionService (ref)
 	contextActionService:BindCoreAction("doNothingThumbstick2PromptCreator", NoOpFunc, false, Enum.KeyCode.Thumbstick2)
 	contextActionService:BindCoreAction("doNothingAButtonPromptCreator", NoOpFunc, false, Enum.KeyCode.ButtonA)
 end
 
-function EnableControllerInput() --[[ line: 666 ]]
+function EnableControllerInput()
 	-- upvalues: contextActionService (ref), var26 (write), guiService (ref)
-	contextActionService:BindCoreAction("CoreScriptPromptCreatorCancel", function(_, p40, _) --[[ line: 669 ]]
+	contextActionService:BindCoreAction("CoreScriptPromptCreatorCancel", function(_, p40, _)
 		-- upvalues: var26 (copy)
 		if p40 ~= Enum.UserInputState.Begin then return end
 		if var26.CancelActive then
 			OnPromptEnded(false)
 		end
 	end, false, Enum.KeyCode.ButtonB)
-	contextActionService:BindCoreAction("CoreScriptPromptCreatorSelect", function(_, p41, _) --[[ line: 682 ]]
+	contextActionService:BindCoreAction("CoreScriptPromptCreatorSelect", function(_, p41, _)
 		-- upvalues: guiService (copy)
 		if p41 ~= Enum.UserInputState.Begin then return end
 		if guiService.SelectedCoreObject == nil then
@@ -653,13 +653,13 @@ function EnableControllerInput() --[[ line: 666 ]]
 	end, false, Enum.KeyCode.ButtonSelect)
 end
 
-function DisableControllerInput() --[[ line: 694 ]]
+function DisableControllerInput()
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("CoreScriptPromptCreatorCancel")
 	contextActionService:UnbindCoreAction("CoreScriptPromptCreatorSelect")
 end
 
-function valueInTable(p42, p43) --[[ line: 699 ]]
+function valueInTable(p42, p43)
 	for i, v in pairs(p43) do
 		if v == p42 then
 			return true
@@ -668,7 +668,7 @@ function valueInTable(p42, p43) --[[ line: 699 ]]
 	return false
 end
 
-function SetupGamepadSelection() --[[ line: 708 ]]
+function SetupGamepadSelection()
 	-- upvalues: var21 (write), guiService (ref), var22 (write), var23 (write)
 	var21 = guiService.CoreGuiNavigationEnabled
 	var22 = guiService.GuiNavigationEnabled
@@ -682,7 +682,7 @@ end
 if not promptCreatorTransientDialog then
 	createPromptDialog()
 	
-	local function OnInputChanged(p44) --[[ line: 723 ]]
+	local function OnInputChanged(p44)
 		-- upvalues: var15 (write), var20 (write)
 		local userInputType = Enum.UserInputType
 		
@@ -707,7 +707,7 @@ if not promptCreatorTransientDialog then
 	userInputService.InputChanged:connect(OnInputChanged)
 	userInputService.InputBegan:connect(OnInputChanged)
 	
-	local _ = function(p45) --[[ line: 741 | named "OnVREnabled" ]]
+	local _ = function(p45)
 		-- upvalues: var11 (write), dialogModule (ref), var12 (write), var15 (write), robloxGui (ref)
 		if p45 then
 			if not var11 then
@@ -727,7 +727,7 @@ if not promptCreatorTransientDialog then
 		end
 	end
 	
-	spawn(function() --[[ line: 757 ]]
+	spawn(function()
 		-- upvalues: userInputService (ref), var11 (write), dialogModule (ref), var12 (write), var15 (write), robloxGui (ref)
 		if userInputService.VREnabled then
 			if not var11 then
@@ -746,7 +746,7 @@ if not promptCreatorTransientDialog then
 			var12.Parent = robloxGui
 		end
 	end)
-	userInputService.Changed:connect(function(p46) --[[ line: 761 ]]
+	userInputService.Changed:connect(function(p46)
 		-- upvalues: userInputService (ref), var11 (write), dialogModule (ref), var12 (write), var15 (write), robloxGui (ref)
 		if p46 == "VREnabled" then
 			if userInputService.VREnabled then
@@ -767,7 +767,7 @@ if not promptCreatorTransientDialog then
 			end
 		end
 	end)
-	guiService.Changed:connect(function(p47) --[[ line: 767 ]]
+	guiService.Changed:connect(function(p47)
 		-- upvalues: var19 (write), guiService (ref), var21 (write), var22 (write), var23 (write)
 		if var19 then
 			if p47 == "CoreGuiNavigationEnabled" then
@@ -794,7 +794,7 @@ if not promptCreatorTransientDialog then
 		end
 	end)
 end
-function t.CreatePrompt(_, p48) --[[ line: 790 ]]
+function t.CreatePrompt(_, p48)
 	-- upvalues: var19 (write), promptCreatorTransientDialog (ref), createPromptDialog (ref)
 	if var19 then
 		return false
@@ -811,7 +811,7 @@ function t.CreatePrompt(_, p48) --[[ line: 790 ]]
 	return true
 end
 
-function t.IsCurrentlyPrompting(_) --[[ line: 806 ]]
+function t.IsCurrentlyPrompting(_)
 	-- upvalues: var19 (write)
 	return var19
 end

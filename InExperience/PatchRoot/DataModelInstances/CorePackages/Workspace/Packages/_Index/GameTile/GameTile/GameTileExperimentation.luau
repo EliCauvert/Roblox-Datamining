@@ -3,7 +3,7 @@ local experimentCacheManager = require(parent.ExperimentCacheManager).Experiment
 local luaAppGameTileMigrationExpLayer = game:DefineFastString("LuaAppGameTileMigrationExpLayer", "PlayerApp.HomePage.UX.TileLayer")
 local fFlagLuaAppUnifyPlayButtonTileIxp = require(parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTileIxp
 
-local function _(p0) --[[ line: 9 | named "getIsUserInTreatmentAndSendExposureLog" ]]
+local function _(p0)
 	-- upvalues: luaAppGameTileMigrationExpLayer (ref), experimentCacheManager (ref)
 	local var1 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
 	
@@ -16,7 +16,7 @@ local function _(p0) --[[ line: 9 | named "getIsUserInTreatmentAndSendExposureLo
 end
 
 return {
-	getIsTileMigrationEnabled = function() --[[ line: 21 ]]
+	getIsTileMigrationEnabled = function()
 		-- upvalues: luaAppGameTileMigrationExpLayer (ref), experimentCacheManager (ref)
 		local var2 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
 		
@@ -27,7 +27,7 @@ return {
 		end
 		return false
 	end,
-	getIsPlayButtonMigrationEnabled = if fFlagLuaAppUnifyPlayButtonTileIxp then if fFlagLuaAppUnifyPlayButtonTileIxp then function() --[[ line: 26 ]]
+	getIsPlayButtonMigrationEnabled = if fFlagLuaAppUnifyPlayButtonTileIxp then if fFlagLuaAppUnifyPlayButtonTileIxp then function()
 		-- upvalues: luaAppGameTileMigrationExpLayer (ref), experimentCacheManager (ref)
 		local var3 = experimentCacheManager.default:getLayerVariables(luaAppGameTileMigrationExpLayer, true)
 		

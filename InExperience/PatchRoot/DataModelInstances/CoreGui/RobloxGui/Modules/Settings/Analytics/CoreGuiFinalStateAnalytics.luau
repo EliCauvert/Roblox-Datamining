@@ -4,7 +4,7 @@ local eventStream = require(game:GetService("CorePackages").Workspace.Packages.A
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 22 ]]
+function t.new()
 	-- upvalues: eventStream (ref), rbxAnalyticsService (ref), t (ref)
 	local t_1 = { evenStream = eventStream.new(rbxAnalyticsService) }
 	setmetatable(t_1, t)
@@ -12,7 +12,7 @@ function t.new() --[[ line: 22 ]]
 	return t_1
 end
 
-function t:sendCoreGuiFinalAnalytic() --[[ line: 30 ]]
+function t:sendCoreGuiFinalAnalytic()
 	-- upvalues: rbxAnalyticsService (ref), starterGuiService (ref)
 	local t = {
 		placeid = tostring(game.PlaceId),
@@ -24,7 +24,7 @@ function t:sendCoreGuiFinalAnalytic() --[[ line: 30 ]]
 		t[v.Name] = tostring(starterGuiService:GetCoreGuiEnabled(v))
 	end
 	local var5 = ""
-	pcall(function() --[[ line: 43 ]]
+	pcall(function()
 		-- upvalues: var5 (write), starterGuiService (copy)
 		var5 = tostring(starterGuiService:GetCore("ResetButtonCallback"))
 	end)

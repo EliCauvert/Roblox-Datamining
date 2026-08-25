@@ -6,14 +6,14 @@ local var4 = nil
 local var5 = false
 local var6 = nil
 local t = {
-	onError = function(p0) --[[ line: 25 ]]
+	onError = function(p0)
 		-- upvalues: var3 (write), var4 (write)
 		var3 = true
 		var4 = p0
 	end
 }
 local t_1 = {
-	invokeGuardedCallback = function(...) --[[ line: 45 ]]
+	invokeGuardedCallback = function(...)
 		-- upvalues: var3 (write), var4 (write), invokeGuardedCallbackImplModule (ref), t (ref)
 		var3 = false
 		var4 = nil
@@ -21,7 +21,7 @@ local t_1 = {
 	end
 }
 
-function t_1.invokeGuardedCallbackAndCatchFirstError(...) --[[ line: 62 ]]
+function t_1.invokeGuardedCallbackAndCatchFirstError(...)
 	-- upvalues: t_1 (ref), var3 (write), var2 (write), var5 (write), var6 (write)
 	t_1.invokeGuardedCallback(...)
 	
@@ -35,7 +35,7 @@ function t_1.invokeGuardedCallbackAndCatchFirstError(...) --[[ line: 62 ]]
 	end
 end
 
-function t_1.rethrowCaughtError() --[[ line: 80 ]]
+function t_1.rethrowCaughtError()
 	-- upvalues: var5 (write), var6 (write)
 	if var5 then
 		local var10 = var6
@@ -45,12 +45,12 @@ function t_1.rethrowCaughtError() --[[ line: 80 ]]
 	end
 end
 
-function t_1.hasCaughtError() --[[ line: 89 ]]
+function t_1.hasCaughtError()
 	-- upvalues: var3 (write)
 	return var3
 end
 
-function t_1.clearCaughtError() --[[ line: 93 ]]
+function t_1.clearCaughtError()
 	-- upvalues: var3 (write), var4 (write), invariantModule (ref)
 	if var3 then
 		local var11 = var4

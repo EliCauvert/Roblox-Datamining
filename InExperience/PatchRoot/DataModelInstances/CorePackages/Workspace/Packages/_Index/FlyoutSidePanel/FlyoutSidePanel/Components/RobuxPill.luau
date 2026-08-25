@@ -17,15 +17,15 @@ local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
 local fFlagEnableFlyoutMenuRobuxCardRefactor = require(parent.SharedFlags).FFlagEnableFlyoutMenuRobuxCardRefactor
 
-local function _(p0) --[[ line: 31 | named "numWithCommas" ]]
+local function _(p0)
 	return tostring(p0):reverse():gsub("(%d%d%d)", "%1,"):reverse():gsub("^,", "")
 end
 
-return reactModule.memo(function(p1) --[[ line: 35 | named "RobuxPill" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), useDispatch (ref), useLocalization (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), fFlagEnableFlyoutMenuRobuxCardRefactor (ref), foundationModule (ref), icon (ref), iconSize (ref), text (ref), button (ref), inputSize (ref)
 	local var5 = useTokens()
 	local var6 = useDispatch()
-	local var7 = reactModule.useCallback(function() --[[ line: 41 ]]
+	local var7 = reactModule.useCallback(function()
 		-- upvalues: p1 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var6 (ref), navigateDown (copy), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy)
 		p1.closeDrawer()
 		local t = { name = appPage.PurchaseRobux }

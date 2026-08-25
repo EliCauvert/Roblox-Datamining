@@ -10,7 +10,7 @@ local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 22 | named "UpdateWithChangesButton" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), button (ref), inputSize (ref), buttonVariant (ref)
 	return reactModule.createElement(button, {
 		text = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({

@@ -17,22 +17,22 @@ local var6 = t.strictInterface({
 	screenSize = t.Vector2
 })
 
-return roactRodux.UNSTABLE_connect2(function(p3, _) --[[ line: 65 ]]
+return roactRodux.UNSTABLE_connect2(function(p3, _)
 	return {
 		occupiedWidth = 464,
 		currentPage = p3.menuPage,
 		open = p3.isMenuOpen,
 		screenSize = p3.screenSize
 	}
-end, function(p4) --[[ line: 74 ]]
+end, function(p4)
 	-- upvalues: closeMenuModule (ref)
 	return {
-		onActivated = function() --[[ line: 76 ]]
+		onActivated = function()
 			-- upvalues: p4 (ref), closeMenuModule (copy)
 			p4(closeMenuModule)
 		end
 	}
-end)(function(p0) --[[ line: 27 | named "ViewportOverlay" ]]
+end)(function(p0)
 	-- upvalues: globalConfigModule (ref), var6 (ref), vector2 (ref), constantsModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref)
 	if globalConfigModule.propValidation then
 		assert(var6(p0))
@@ -42,7 +42,7 @@ end)(function(p0) --[[ line: 27 | named "ViewportOverlay" ]]
 	end
 	local var7 = p0.currentPage == constantsModule.InitalPageKey
 	
-	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 38 ]]
+	return withFoundationOrUIBloxStyle(function(p1)
 		return {
 			Theme = {
 				Overlay = {
@@ -51,7 +51,7 @@ end)(function(p0) --[[ line: 27 | named "ViewportOverlay" ]]
 				}
 			}
 		}
-	end, function(p2) --[[ line: 44 ]]
+	end, function(p2)
 		-- upvalues: roact (copy), var7 (ref), p0 (ref)
 		return roact.createElement("Frame", {
 			BorderSizePixel = 0,

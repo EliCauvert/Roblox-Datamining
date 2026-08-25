@@ -13,10 +13,10 @@ local getSelectionImageObjectRoundedModule = require(parent.getSelectionImageObj
 local tryOn = require(script.Parent.Common.ControllerShortcutKeycodes).TryOn
 local tryOnButton = roactModule.PureComponent:extend("TryOnButton")
 
-function tryOnButton.init(p0) --[[ line: 22 ]]
+function tryOnButton.init(p0)
 	-- upvalues: getSelectionImageObjectRoundedModule (ref), contextActionService (ref), tryOn (ref)
 	p0.selectedImage = getSelectionImageObjectRoundedModule()
-	contextActionService:BindCoreAction("TryOnGamepadShortcut", function(_, p1, _) --[[ line: 25 ]]
+	contextActionService:BindCoreAction("TryOnGamepadShortcut", function(_, p1, _)
 		-- upvalues: p0 (ref)
 		if p1 == Enum.UserInputState.End then
 			p0:activateButton()
@@ -27,7 +27,7 @@ function tryOnButton.init(p0) --[[ line: 22 ]]
 	end, false, tryOn)
 end
 
-function tryOnButton.activateButton(p2) --[[ line: 34 ]]
+function tryOnButton.activateButton(p2)
 	-- upvalues: constantsModule (ref)
 	if not p2.props.showTryOn then return end
 	local assetInfo = p2.props.assetInfo
@@ -47,12 +47,12 @@ function tryOnButton.activateButton(p2) --[[ line: 34 ]]
 	end
 end
 
-function tryOnButton.willUnmount(_) --[[ line: 61 ]]
+function tryOnButton.willUnmount(_)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("TryOnGamepadShortcut")
 end
 
-function tryOnButton.render(p3) --[[ line: 65 ]]
+function tryOnButton.render(p3)
 	-- upvalues: constantsModule (ref), roactModule (ref), colorsModule (ref), robloxTranslatorModule (ref), appFonts (ref)
 	local tryingOn = p3.props.tryingOnInfo.tryingOn
 	local showTryOn = p3.props.showTryOn
@@ -88,18 +88,18 @@ function tryOnButton.render(p3) --[[ line: 65 ]]
 			TextTransparency = if var11 then 0.5 else 0,
 			SelectionImageObject = p3.selectedImage,
 			ZIndex = 2,
-			[roactModule.Event.SelectionGained] = function(p4) --[[ line: 114 ]]
+			[roactModule.Event.SelectionGained] = function(p4)
 				-- upvalues: colorsModule (copy)
 				p4.Parent.SelectionGainedImage.Visible = true
 				p4.TextColor3 = colorsModule.Carbon
 			end,
-			[roactModule.Event.SelectionLost] = function(p5) --[[ line: 118 ]]
+			[roactModule.Event.SelectionLost] = function(p5)
 				-- upvalues: colorsModule (copy)
 				p5.Parent.SelectionGainedImage.Visible = false
 				p5.TextColor3 = colorsModule.White
 			end,
 			[roactModule.Ref] = p3.props.tryOnButtonRef,
-			[roactModule.Event.Activated] = function() --[[ line: 123 ]]
+			[roactModule.Event.Activated] = function()
 				-- upvalues: p3 (ref)
 				p3:activateButton()
 			end
@@ -107,7 +107,7 @@ function tryOnButton.render(p3) --[[ line: 65 ]]
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _) --[[ line: 130 ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
 	return {
 		locale = p6.locale,
 		view = p6.view,
@@ -115,14 +115,14 @@ return roactRoduxModule.UNSTABLE_connect2(function(p6, _) --[[ line: 130 ]]
 		bundleInfo = p6.bundles,
 		tryingOnInfo = p6.tryingOnInfo
 	}
-end, function(p7) --[[ line: 140 ]]
+end, function(p7)
 	-- upvalues: tryOnItemModule (ref), setTryingOnInfoModule (ref)
 	return {
-		tryOnItem = function(p8, p9, p10, p11, p12) --[[ line: 142 ]]
+		tryOnItem = function(p8, p9, p10, p11, p12)
 			-- upvalues: p7 (ref), tryOnItemModule (copy)
 			p7(tryOnItemModule(p8, p9, p10, p11, p12))
 		end,
-		takeOffItem = function() --[[ line: 145 ]]
+		takeOffItem = function()
 			-- upvalues: p7 (ref), setTryingOnInfoModule (copy)
 			p7(setTryingOnInfoModule(false, nil, nil))
 		end

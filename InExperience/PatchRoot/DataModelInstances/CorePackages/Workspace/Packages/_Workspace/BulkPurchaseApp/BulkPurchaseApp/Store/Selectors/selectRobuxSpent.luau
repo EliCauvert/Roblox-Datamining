@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("BulkPurchaseApp").Store.Types)
 
-return function(p0) --[[ line: 7 | named "selectRobuxSpent" ]]
+return function(p0)
 	local var0 = 0
 	
 	if p0.itemData and p0.itemStatuses then

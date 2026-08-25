@@ -11,7 +11,7 @@ local t = {
 	server = { active = 0, compare = 0, snapshots = {} }
 }
 
-return function(p0, p1) --[[ line: 33 ]]
+return function(p0, p1)
 	-- upvalues: t (ref), setLuauHeapStateModule (ref), immutableModule (ref), setLuauHeapProfileTargetModule (ref), setLuauHeapActiveSnapshotModule (ref), setLuauHeapCompareSnapshotModule (ref)
 	p0 = p0 or t
 	

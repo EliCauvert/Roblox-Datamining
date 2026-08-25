@@ -4,13 +4,13 @@ local wrappersModule = require(foundation.Utility.Wrappers)
 local signal = wrappersModule.Signal
 local connection = wrappersModule.Connection
 
-return function(p0) --[[ line: 10 | named "usePointerPosition" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), signal (ref), connection (ref)
 	local var3, var4 = reactModule.useBinding(Vector2.zero)
-	reactModule.useEffect(function() --[[ line: 13 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var4 (ref), signal (copy), connection (copy)
 		if p0 then
-			local function setPositionFromInput(a) --[[ line: 18 ]]
+			local function setPositionFromInput(a)
 				-- upvalues: var4 (copy)
 				if a.Position.X > 0 or a.Position.Y > 0 then
 					var4(Vector2.new(a.Position.X, a.Position.Y))
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 10 | named "usePointerPosition" ]]
 				signal.Connect(p0.InputEnded, setPositionFromInput)
 			}
 			
-			return function() --[[ line: 30 ]]
+			return function()
 				-- upvalues: list (ref), connection (copy)
 				for i, v in list do
 					connection.Disconnect(v)

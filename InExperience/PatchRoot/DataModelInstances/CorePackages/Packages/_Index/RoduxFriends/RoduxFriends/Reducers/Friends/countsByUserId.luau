@@ -10,11 +10,11 @@ local removeTargetUserFriendshipInStoreModule = require(script.Parent.utils.remo
 local countUserFriendsInStoreModule = require(script.Parent.utils.countUserFriendsInStore)
 local t = { byUserId = {}, countsByUserId = {} }
 
-return function(p0) --[[ line: 20 ]]
+return function(p0)
 	-- upvalues: t (ref), friendshipCreatedModule (ref), llamaModule (ref), addUserModule (ref), friendshipDestroyedModule (ref), removeUserModule (ref), setFriendshipsInStoreModule (ref), countUserFriendsInStoreModule (ref), removeTargetUserFriendshipInStoreModule (ref)
 	local friendsNetworking = p0.friendsNetworking
 	
-	return function(p1, p2) --[[ line: 23 ]]
+	return function(p1, p2)
 		-- upvalues: t (copy), friendshipCreatedModule (copy), llamaModule (copy), addUserModule (copy), friendshipDestroyedModule (copy), removeUserModule (copy), friendsNetworking (ref), setFriendshipsInStoreModule (copy), countUserFriendsInStoreModule (copy), removeTargetUserFriendshipInStoreModule (copy)
 		p1 = p1 or t
 		

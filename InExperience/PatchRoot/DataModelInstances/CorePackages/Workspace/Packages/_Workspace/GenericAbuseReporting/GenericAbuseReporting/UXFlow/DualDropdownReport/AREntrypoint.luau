@@ -12,10 +12,10 @@ local _ = require(genericAbuseReporting.Analytics.submitAnalytics)
 local useActiveDialogModule = require(script.Parent.useActiveDialog)
 local _ = { Form = "Form", Complete = "Complete", Error = "Error" }
 
-return function(p0) --[[ line: 52 | named "AREntrypoint" ]]
+return function(p0)
 	-- upvalues: useActiveDialogModule (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), analyticsProviderModule (ref), localizationKeysProviderModule (ref), dualDropdownReportModule (ref), reportCompleteDialogModule (ref), reportFailedDialogModule (ref)
 	local var8, var9 = useActiveDialogModule()
-	local var10 = reactModule.useCallback(function(p1, p2, p3) --[[ line: 55 ]]
+	local var10 = reactModule.useCallback(function(p1, p2, p3)
 		-- upvalues: p0 (ref), var9 (ref)
 		local var11 = if p0.onSubmitProps.hasNextSteps then p0.onSubmitProps.onProceedToNextStep(p1, p2, p3) else p0.onSubmitProps.onSubmit(p1, p2, p3)
 		
@@ -50,7 +50,7 @@ return function(p0) --[[ line: 52 | named "AREntrypoint" ]]
 						onCloseProps = p0.onCloseProps
 					}),
 					completeDialog = var8 == "Complete" and reactModule.createElement(reportCompleteDialogModule, {
-						onDismiss = reactModule.useCallback(function() --[[ line: 71 ]]
+						onDismiss = reactModule.useCallback(function()
 							-- upvalues: p0 (ref)
 							if p0.onComplete then
 								p0.onComplete()
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 52 | named "AREntrypoint" ]]
 						end, { p0.onComplete })
 					}),
 					errorDialog = var8 == "Error" and reactModule.createElement(reportFailedDialogModule, {
-						onDismiss = reactModule.useCallback(function() --[[ line: 67 ]]
+						onDismiss = reactModule.useCallback(function()
 							-- upvalues: var9 (ref)
 							var9("Form")
 						end, {})

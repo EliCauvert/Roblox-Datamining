@@ -2,7 +2,7 @@
 local recommendationContextTypes = require(parent.Analytics.Enums).RecommendationContextTypes
 local fFlagSocialCarouselMigrateRecommendations = require(parent.Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 
-return function(p0) --[[ line: 9 ]]
+return function(p0)
 	-- upvalues: fFlagSocialCarouselMigrateRecommendations (ref), recommendationContextTypes (ref)
 	if p0 == nil then
 		return nil

@@ -2,11 +2,11 @@
 local t = { __className = "Devtools" }
 t.__index = t
 
-local function _() --[[ line: 43 | named "createTable" ]]
+local function _()
 	return table.create(100)
 end
 
-function t.new(p0, p1, p2) --[[ line: 48 ]]
+function t.new(p0, p1, p2)
 	-- upvalues: t (ref)
 	return setmetatable({
 		shouldTrack = false,
@@ -27,7 +27,7 @@ function t.new(p0, p1, p2) --[[ line: 48 ]]
 	}, t)
 end
 
-function t:_hookIntoStore(p3) --[[ line: 80 ]]
+function t:_hookIntoStore(p3)
 	self.store = p3
 	self.originalReducer = p3._reducer
 	self.originalFlushHandler = p3._flushHandler
@@ -37,7 +37,7 @@ function t:_hookIntoStore(p3) --[[ line: 80 ]]
 	end
 end
 
-function t:trackingReducer(p4, p5) --[[ line: 90 ]]
+function t:trackingReducer(p4, p5)
 	assert(self.originalReducer, "self.originalReducer must exist")
 	local var2 = self.originalReducer(p4, p5)
 	local var3 = (os.clock() - os.clock()) * 1000
@@ -55,7 +55,7 @@ function t:trackingReducer(p4, p5) --[[ line: 90 ]]
 	return var2
 end
 
-function t:trackingFlush(...) --[[ line: 115 ]]
+function t:trackingFlush(...)
 	local processTime = os.clock()
 	self.originalFlushHandler(...)
 	self.totalFlushTimeMs += (os.clock() - processTime) * 1000
@@ -67,13 +67,13 @@ function t:trackingFlush(...) --[[ line: 115 ]]
 	end
 end
 
-function t:startTracking() --[[ line: 130 ]]
-	function self.store._flushHandler(...) --[[ line: 131 ]]
+function t:startTracking()
+	function self.store._flushHandler(...)
 		-- upvalues: self (ref)
 		return self:trackingFlush(...)
 	end
 	
-	function self.store._reducer(...) --[[ line: 134 ]]
+	function self.store._reducer(...)
 		-- upvalues: self (ref)
 		return self:trackingReducer(...)
 	end
@@ -81,7 +81,7 @@ function t:startTracking() --[[ line: 130 ]]
 	self.shouldTrack = true
 end
 
-function t:stopTracking() --[[ line: 140 ]]
+function t:stopTracking()
 	if self.shouldTrack then
 		self.shouldTrack = false
 		self.store._flushHandler = self.originalFlushHandler
@@ -89,7 +89,7 @@ function t:stopTracking() --[[ line: 140 ]]
 	end
 end
 
-function t:clear() --[[ line: 148 ]]
+function t:clear()
 	self.flushCount = 0
 	self.totalFlushTimeMs = 0
 	self.reduceCount = 0
@@ -108,7 +108,7 @@ function t:clear() --[[ line: 148 ]]
 	end
 end
 
-local function getRelevantLineFromTrace(p6) --[[ line: 167 ]]
+local function getRelevantLineFromTrace(p6)
 	local parts = string.split(p6, "\n")
 	
 	for i = 3, #parts do
@@ -122,27 +122,27 @@ local function getRelevantLineFromTrace(p6) --[[ line: 167 ]]
 	return nil
 end
 
-local _ = function(p7) --[[ line: 184 | named "getThunkName" ]]
+local _ = function(p7)
 	-- upvalues: getRelevantLineFromTrace (ref)
 	local var9 = getRelevantLineFromTrace(debug.traceback())
 	
 	return var9 or debug.info(p7, "slf")
 end
 
-function t.makeThunkMiddleware(p8, p9) --[[ line: 192 ]]
+function t.makeThunkMiddleware(p8, p9)
 	-- upvalues: getRelevantLineFromTrace (ref)
-	local function tracebackReporter(p10) --[[ line: 193 ]]
+	local function tracebackReporter(p10)
 		return debug.traceback(p10)
 	end
 	
-	return function(p11, p12) --[[ line: 196 | named "thunkMiddleware" ]]
+	return function(p11, p12)
 		-- upvalues: p8 (ref), p9 (ref), getRelevantLineFromTrace (copy), tracebackReporter (ref)
-		return function(p13) --[[ line: 197 ]]
+		return function(p13)
 			-- upvalues: p8 (copy), p12 (ref), p9 (copy), getRelevantLineFromTrace (copy), tracebackReporter (copy), p11 (ref)
 			if typeof(p13) ~= "function" then
 				return p11(p13)
 			end
-			local ok, status = xpcall(function() --[[ line: 199 ]]
+			local ok, status = xpcall(function()
 				-- upvalues: p8 (copy), p13 (ref), p12 (copy), p9 (copy), getRelevantLineFromTrace (copy)
 				if not p8.shouldTrack then
 					return p13(p12, p9)
@@ -171,7 +171,7 @@ function t.makeThunkMiddleware(p8, p9) --[[ line: 192 ]]
 	end
 end
 
-local _ = function(p14) --[[ line: 243 | named "getTopValue" ]]
+local _ = function(p14)
 	local var15 = nil
 	local var16 = nil
 	
@@ -184,11 +184,11 @@ local _ = function(p14) --[[ line: 243 | named "getTopValue" ]]
 	return var16, var15
 end
 
-local _ = function(p15) --[[ line: 255 | named "fixThunkName" ]]
+local _ = function(p15)
 	return p15:gsub("CoreGui.RobloxGui.Modules.", ""):gsub("CorePackages.Workspace.Packages._Workspace.", "")
 end
 
-function t:getStats() --[[ line: 259 ]]
+function t:getStats()
 	local var17 = nil
 	local var18 = nil
 	local var19 = nil

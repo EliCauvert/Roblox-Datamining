@@ -5,26 +5,26 @@ local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local t = { shareCount = 0, hasShared = false }
 
-return function() --[[ line: 29 | named "createShareCountsStore" ]]
+return function()
 	-- upvalues: createSignal (ref), createComputed (ref), t (ref), cryoModule (ref)
 	local var3, var4 = createSignal({})
 	local t_1 = {}
 	
 	return {
 		getShareInfoByMomentId = var3,
-		getShareInfo = function(p0) --[[ line: 34 ]]
+		getShareInfo = function(p0)
 			-- upvalues: t_1 (ref), createComputed (copy), var3 (ref), t (copy)
 			if t_1[p0] == nil then
-				t_1[p0] = createComputed(function(p1) --[[ line: 36 ]]
+				t_1[p0] = createComputed(function(p1)
 					-- upvalues: var3 (copy), p0 (ref), t (copy)
 					return var3(p1)[p0] or t
 				end)
 			end
 			return t_1[p0]
 		end,
-		setBatchShareCounts = function(value) --[[ line: 43 ]]
+		setBatchShareCounts = function(value)
 			-- upvalues: var4 (ref)
-			var4(function(p2) --[[ line: 44 ]]
+			var4(function(p2)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p2)
 				
@@ -43,14 +43,14 @@ return function() --[[ line: 29 | named "createShareCountsStore" ]]
 				return cloned
 			end)
 		end,
-		setShareCount = function(value, p3, p4) --[[ line: 61 ]]
+		setShareCount = function(value, p3, p4)
 			-- upvalues: var4 (ref), cryoModule (copy)
-			var4(function(p5) --[[ line: 62 ]]
+			var4(function(p5)
 				-- upvalues: cryoModule (copy), value (ref), p3 (ref), p4 (ref)
 				return cryoModule.Dictionary.union(p5, { [value] = { shareCount = p3, hasShared = p4 } })
 			end)
 		end,
-		markShared = function(p6) --[[ line: 72 ]]
+		markShared = function(p6)
 			-- upvalues: var3 (ref), t (copy), var4 (ref), cryoModule (copy)
 			local var8 = var3(false)
 			local var9 = var8[p6] or t
@@ -62,7 +62,7 @@ return function() --[[ line: 29 | named "createShareCountsStore" ]]
 				[p6] = { hasShared = true, shareCount = var9.shareCount + 1 }
 			}))
 		end,
-		clear = function() --[[ line: 86 ]]
+		clear = function()
 			-- upvalues: var4 (ref), t_1 (ref)
 			var4({})
 			table.clear(t_1)

@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.Parent.core)
 local var1 = weakMap.new()
 
 return {
-	getApolloContext = function() --[[ line: 33 ]]
+	getApolloContext = function()
 		-- upvalues: var1 (write), reactModule (ref)
 		local createContext = var1:get(reactModule.createContext)
 		
@@ -16,7 +16,7 @@ return {
 		end
 		return createContext
 	end,
-	resetApolloContext = function() --[[ line: 45 ]]
+	resetApolloContext = function()
 		-- upvalues: var1 (write), weakMap (ref)
 		var1 = weakMap.new()
 	end

@@ -3,13 +3,13 @@ local reactGlobalsModule = require(parent.ReactGlobals)
 local console = require(parent.Shared).console
 local _ = require(parent.LuauPolyfill)
 local t = {
-	isDevToolsPresent = function() --[[ line: 64 ]]
+	isDevToolsPresent = function()
 		-- upvalues: reactGlobalsModule (ref)
 		return reactGlobalsModule.__REACT_DEVTOOLS_GLOBAL_HOOK__ ~= nil
 	end
 }
 
-local function _(p0) --[[ line: 29 | named "isCallable" ]]
+local function _(p0)
 	if typeof(p0) == "function" then
 		return true
 	elseif typeof(p0) == "table" then
@@ -27,7 +27,7 @@ local var2 = nil
 local var3 = nil
 local var4 = false
 
-function t.injectInternals(p1) --[[ line: 68 ]]
+function t.injectInternals(p1)
 	-- upvalues: reactGlobalsModule (ref), console (ref), var2 (write), var3 (write)
 	if reactGlobalsModule.__REACT_DEVTOOLS_GLOBAL_HOOK__ == nil then
 		return false
@@ -37,7 +37,7 @@ function t.injectInternals(p1) --[[ line: 68 ]]
 	if rEACTDEVTOOLSGLOBALHOOK.isDisabled then
 		return true
 	elseif rEACTDEVTOOLSGLOBALHOOK.supportsFiber then
-		local ok, status = pcall(function() --[[ line: 91 ]]
+		local ok, status = pcall(function()
 			-- upvalues: var2 (copy), rEACTDEVTOOLSGLOBALHOOK (ref), p1 (ref), var3 (copy)
 			var2 = rEACTDEVTOOLSGLOBALHOOK.inject(p1)
 			var3 = rEACTDEVTOOLSGLOBALHOOK
@@ -53,7 +53,7 @@ function t.injectInternals(p1) --[[ line: 68 ]]
 	return true
 end
 
-function t.onScheduleRoot(p2, p3) --[[ line: 107 ]]
+function t.onScheduleRoot(p2, p3)
 	-- upvalues: reactGlobalsModule (ref), var3 (write), var2 (write), var4 (write), console (ref)
 	if reactGlobalsModule.__DEV__ and var3 then
 		local ok
@@ -76,7 +76,7 @@ function t.onScheduleRoot(p2, p3) --[[ line: 107 ]]
 	end
 end
 
-function t.onCommitRoot(p4, p5) --[[ line: 127 ]]
+function t.onCommitRoot(p4, p5)
 	-- upvalues: var3 (write), didCapture (ref), enableProfilerTimer (ref), var2 (write), reactGlobalsModule (ref), var4 (write), console (ref)
 	if var3 then
 		local ok
@@ -89,7 +89,7 @@ function t.onCommitRoot(p4, p5) --[[ line: 127 ]]
 			ok = if var9 and rawget(var9, "__call") then true elseif status._isMockFunction then true else false
 		end
 		if ok then
-			ok, status = pcall(function() --[[ line: 133 ]]
+			ok, status = pcall(function()
 				-- upvalues: p4 (ref), didCapture (copy), enableProfilerTimer (copy), var3 (copy), var2 (copy), p5 (ref)
 				local var10 = bit32.band(p4.current.flags, didCapture) == didCapture
 				
@@ -109,7 +109,7 @@ function t.onCommitRoot(p4, p5) --[[ line: 127 ]]
 	end
 end
 
-function t.onCommitUnmount(p6) --[[ line: 152 ]]
+function t.onCommitUnmount(p6)
 	-- upvalues: var3 (write), var2 (write), reactGlobalsModule (ref), var4 (write), console (ref)
 	if var3 then
 		local ok

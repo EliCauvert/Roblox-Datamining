@@ -11,7 +11,7 @@ local displayModule = require(parent.Display)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local view = require(parent.Foundation).View
 
-return function(p0) --[[ line: 31 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
 	local var4 = useStyle()
 	local var5 = if fFlagEnableLeftNavOnConsole then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
@@ -38,9 +38,9 @@ return function(p0) --[[ line: 31 ]]
 			},
 			customEventHandlers = {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = reactModule.useMemo(function() --[[ line: 60 ]]
+					handler = reactModule.useMemo(function()
 						-- upvalues: inputHandlersModule (copy), p0 (ref)
-						return inputHandlersModule.onRelease(function(p1) --[[ line: 61 ]]
+						return inputHandlersModule.onRelease(function(p1)
 							-- upvalues: p0 (copy)
 							p1:cancel()
 							p0.navigateBack()
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 31 ]]
 				}
 			}
 		}, {
-			reactModule.useCallback(function(p2) --[[ line: 50 ]]
+			reactModule.useCallback(function(p2)
 				-- upvalues: reactModule (copy)
 				return reactModule.createElement("TextButton", {
 					BackgroundTransparency = 1,

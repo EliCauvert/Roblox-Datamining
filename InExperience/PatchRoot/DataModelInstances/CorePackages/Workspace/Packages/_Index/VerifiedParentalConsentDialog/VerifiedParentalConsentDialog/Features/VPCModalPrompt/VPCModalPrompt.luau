@@ -6,7 +6,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local alertPromptModule = require(verifiedParentalConsentDialog.Components.AlertPrompt)
 local _ = require(verifiedParentalConsentDialog.VPCModalType)
 
-return function(p0) --[[ line: 22 | named "VPCModalPrompt" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), alertPromptModule (ref), images (ref)
 	local var3 = useLocalization({
 		title = "Common.VerifiedParentalConsent.Label.AskParent",

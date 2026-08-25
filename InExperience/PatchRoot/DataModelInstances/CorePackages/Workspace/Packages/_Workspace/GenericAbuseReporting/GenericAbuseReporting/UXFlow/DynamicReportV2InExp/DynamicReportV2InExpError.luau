@@ -5,7 +5,7 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local empty = foundationModule.Empty
 local view = foundationModule.View
 
-return reactModule.memo(function() --[[ line: 14 | named "DynamicReportV2InExpError" ]]
+return reactModule.memo(function()
 	-- upvalues: useLocalization (ref), reactModule (ref), view (ref), empty (ref)
 	return reactModule.createElement(view, { tag = "align-x-center align-y-center size-full" }, {
 		Empty = reactModule.createElement(empty, {

@@ -20,13 +20,13 @@ if var7 then
 		label = "Feature.Captures.Title.Gallery",
 		initialAvailability = if var7 then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
 		sideSheetPlacement = sideSheetPlacement.Page,
-		activated = function(_) --[[ line: 38 ]]
+		activated = function(_)
 			-- upvalues: inGameMenuIntegrationUtilsModule (ref), capturesPage (ref)
 			inGameMenuIntegrationUtilsModule.toggleIGMPage("CapturesPage", capturesPage:get())
 		end,
 		isActivated = capturesPage,
 		components = {
-			Icon = function(_) --[[ line: 43 ]]
+			Icon = function(_)
 				-- upvalues: updateGalleryIcon (ref), commonIconModule (ref), capturesPage (ref)
 				return if updateGalleryIcon then commonIconModule("Image", nil, capturesPage) else commonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", capturesPage)
 			end

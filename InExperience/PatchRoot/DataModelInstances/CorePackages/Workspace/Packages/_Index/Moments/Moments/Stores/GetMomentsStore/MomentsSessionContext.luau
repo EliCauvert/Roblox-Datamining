@@ -5,7 +5,7 @@ local var2 = reactModule.createContext(nil)
 
 return {
 	MomentsSessionContext = var2,
-	useMomentsSession = function() --[[ line: 27 ]]
+	useMomentsSession = function()
 		-- upvalues: reactModule (ref), var2 (ref), parentModule (ref)
 		local var3 = reactModule.useContext(var2)
 		

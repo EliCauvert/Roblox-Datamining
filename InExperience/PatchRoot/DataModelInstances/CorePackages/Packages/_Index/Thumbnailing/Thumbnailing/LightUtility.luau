@@ -1,5 +1,5 @@
 ﻿local t = {
-	AddLight = function(p0, p1) --[[ line: 80 ]]
+	AddLight = function(p0, p1)
 		local part = Instance.new("Part")
 		part.Anchored = true
 		part.Transparency = 1
@@ -21,7 +21,7 @@ local lightingService = game:GetService("Lighting")
 local colorUtilityModule = require(script.Parent.ColorUtility)
 local vectorUtilityModule = require(script.Parent.VectorUtility)
 
-function t.AddLightsFromExtraParams(p2, p3) --[[ line: 100 ]]
+function t.AddLightsFromExtraParams(p2, p3)
 	-- upvalues: colorUtilityModule (ref), vectorUtilityModule (ref), t (ref), lightingService (ref)
 	local var6 = false
 	local pointLights = p2 and p2.pointLights
@@ -50,7 +50,7 @@ function t.AddLightsFromExtraParams(p2, p3) --[[ line: 100 ]]
 	return var6
 end
 
-function t.AddDefaultPointLightRelativeTo(p4) --[[ line: 134 ]]
+function t.AddDefaultPointLightRelativeTo(p4)
 	-- upvalues: t (ref)
 	t.AddLight({
 		color = Color3.new(1, 1, 1),
@@ -58,7 +58,7 @@ function t.AddDefaultPointLightRelativeTo(p4) --[[ line: 134 ]]
 	}, 0)
 end
 
-function t.SetupSunlightWithJsonConfig(p5) --[[ line: 143 ]]
+function t.SetupSunlightWithJsonConfig(p5)
 	-- upvalues: lightingService (ref)
 	p5 = p5 or {
 		brightness = "1",
@@ -94,7 +94,7 @@ function t.SetupSunlightWithJsonConfig(p5) --[[ line: 143 ]]
 	lightingService.TimeOfDay = p5.timeOfDay or "09:30:00"
 end
 
-function t.SetupSceneLight(p6, p7) --[[ line: 190 ]]
+function t.SetupSceneLight(p6, p7)
 	p6 = p6 or {}
 	p6 = p6.lightType or "SpotLight"
 	p7 = p7 or p6
@@ -117,14 +117,14 @@ function t.SetupSceneLight(p6, p7) --[[ line: 190 ]]
 	part.CFrame = p6.partCFrame
 end
 
-function t.SetupSpotLight(p8, p9) --[[ line: 215 ]]
+function t.SetupSpotLight(p8, p9)
 	-- upvalues: t (ref)
 	p8 = p8 or {}
 	p8.lightType = "SpotLight"
 	t.SetupSceneLight(p8, p9)
 end
 
-function t.SetupSpotLightsIn3PointLighting(p10) --[[ line: 225 ]]
+function t.SetupSpotLightsIn3PointLighting(p10)
 	-- upvalues: t (ref)
 	p10 = p10 or {
 		keyLight = {
@@ -151,7 +151,7 @@ function t.SetupSpotLightsIn3PointLighting(p10) --[[ line: 225 ]]
 	end
 end
 
-function t.SetupSpotLightsIn3PointLightingWithJsonConfig(p11) --[[ line: 251 ]]
+function t.SetupSpotLightsIn3PointLightingWithJsonConfig(p11)
 	-- upvalues: t (ref)
 	p11 = p11 or {
 		rotation = "105",

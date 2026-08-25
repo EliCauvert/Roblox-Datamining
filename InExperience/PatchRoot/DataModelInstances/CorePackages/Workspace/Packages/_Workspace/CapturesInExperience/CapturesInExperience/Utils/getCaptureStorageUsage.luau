@@ -5,7 +5,7 @@ local _ = require(parent.Types)
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-function formatBytes(p0) --[[ line: 12 ]]
+function formatBytes(p0)
 	local list = {
 		"Bytes",
 		"KB",
@@ -24,7 +24,7 @@ function formatBytes(p0) --[[ line: 12 ]]
 	return if list[floored + 1] then string.format(var7, var6, list[floored + 1]) else ""
 end
 
-return function(p1) --[[ line: 31 | named "getCaptureStorageUsage" ]]
+return function(p1)
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), captureService (ref)
 	if #p1 == 0 then return end
 	local t = {}
@@ -36,7 +36,7 @@ return function(p1) --[[ line: 31 | named "getCaptureStorageUsage" ]]
 			end
 		end
 	end
-	local _, status = pcall(function() --[[ line: 47 ]]
+	local _, status = pcall(function()
 		-- upvalues: captureService (copy), t (ref)
 		return captureService:GetCaptureStorageSizeAsync(t)
 	end)

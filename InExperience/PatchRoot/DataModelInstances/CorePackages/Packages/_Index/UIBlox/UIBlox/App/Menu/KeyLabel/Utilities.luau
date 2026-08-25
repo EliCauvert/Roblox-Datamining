@@ -37,7 +37,7 @@ local t = {
 	[Enum.KeyCode.Right] = imagesModule["icons/controls/keys/arrowRight"]
 }
 
-local function getKeyCodeContent(p0) --[[ line: 46 ]]
+local function getKeyCodeContent(p0)
 	-- upvalues: DIRECTIONAL_GAMEPAD_ICONS (ref), GAMEPAD_ICONS (ref), userInputService (ref), t (ref)
 	if type(p0) == "table" then
 		return {
@@ -55,7 +55,7 @@ local function getKeyCodeContent(p0) --[[ line: 46 ]]
 	}
 end
 
-local function getWidthFromContent(p1, p2) --[[ line: 63 ]]
+local function getWidthFromContent(p1, p2)
 	-- upvalues: getTextSizeModule (ref), constantsModule (ref)
 	if p1.inputType == "keyboard" then
 		if type(p1.content) == "string" then
@@ -72,7 +72,7 @@ local function getWidthFromContent(p1, p2) --[[ line: 63 ]]
 	end
 end
 
-function getKeyLabelWidth(p3, p4) --[[ line: 87 ]]
+function getKeyLabelWidth(p3, p4)
 	-- upvalues: getKeyCodeContent (ref), getWidthFromContent (ref)
 	return getWidthFromContent(getKeyCodeContent(p3), p4)
 end

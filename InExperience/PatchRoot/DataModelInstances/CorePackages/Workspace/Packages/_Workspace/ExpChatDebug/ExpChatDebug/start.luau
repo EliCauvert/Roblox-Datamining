@@ -2,7 +2,7 @@
 local getFFlagTextChatEnableUniverseChatTabs = require(parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
 local getFFlagExpChatProtectedChatInternalAPIs = require(parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 
-return function() --[[ line: 6 | named "startDebug" ]]
+return function()
 	-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref), getFFlagTextChatEnableUniverseChatTabs (ref)
 	local coreGuiService = game:GetService("CoreGui")
 	local textChatService = game:GetService("TextChatService")
@@ -56,7 +56,7 @@ return function() --[[ line: 6 | named "startDebug" ]]
 	local UIListLayout = Instance.new("UIListLayout")
 	UIListLayout.Parent = experienceChatDebug
 	
-	local function _() --[[ line: 36 | named "updateContainerLayout" ]]
+	local function _()
 		-- upvalues: list (ref), var5 (write), UIListLayout (ref)
 		local var17 = list[var5]
 		UIListLayout.VerticalAlignment = var17.vertical
@@ -72,7 +72,7 @@ return function() --[[ line: 6 | named "startDebug" ]]
 	imageButton.BackgroundTransparency = 0.3
 	imageButton.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
 	imageButton.Parent = experienceChatDebug
-	imageButton.Activated:Connect(function() --[[ line: 50 ]]
+	imageButton.Activated:Connect(function()
 		-- upvalues: var5 (write), list (ref), UIListLayout (ref)
 		var5 += 1
 		
@@ -84,7 +84,7 @@ return function() --[[ line: 6 | named "startDebug" ]]
 		UIListLayout.HorizontalAlignment = var18.horizontal
 	end)
 	
-	local function clearEntries() --[[ line: 59 ]]
+	local function clearEntries()
 		-- upvalues: t (write)
 		for i, v in t do
 			v:Destroy()
@@ -98,7 +98,7 @@ return function() --[[ line: 6 | named "startDebug" ]]
 	UIListLayout_1.VerticalAlignment = Enum.VerticalAlignment.Bottom
 	UIListLayout_1.Parent = imageButton
 	
-	local function addEntryToContainer(p0, p1, p2) --[[ line: 72 ]]
+	local function addEntryToContainer(p0, p1, p2)
 		-- upvalues: t (write), imageButton (ref)
 		if #t > 10 then
 			local removed = table.remove(t, 1)
@@ -127,7 +127,7 @@ return function() --[[ line: 6 | named "startDebug" ]]
 	local char = utf8.char(128227)
 	local char_1 = utf8.char(128229)
 	
-	local function formatEntry(p3, p4) --[[ line: 102 ]]
+	local function formatEntry(p3, p4)
 		-- upvalues: char (ref), char_1 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), addEntryToContainer (ref)
 		local var23
 		local var21 = if p3.Status == Enum.TextChatMessageStatus.Sending then `{char} Sent` else `{char_1} Rec.`
@@ -141,22 +141,22 @@ return function() --[[ line: 6 | named "startDebug" ]]
 	end
 	
 	if expChatDebuggerIncomingMessageEventEngineFeature then
-		textChatService.OnIncomingMessageEvent:Connect(function(p5) --[[ line: 135 ]]
+		textChatService.OnIncomingMessageEvent:Connect(function(p5)
 			-- upvalues: formatEntry (ref)
 			formatEntry(p5, "Local")
 		end)
 	else
-		textChatService.MessageReceived:Connect(function(p6) --[[ line: 139 ]]
+		textChatService.MessageReceived:Connect(function(p6)
 			-- upvalues: formatEntry (ref)
 			formatEntry(p6, "Local")
 		end)
-		textChatService.SendingMessage:Connect(function(p7) --[[ line: 142 ]]
+		textChatService.SendingMessage:Connect(function(p7)
 			-- upvalues: formatEntry (ref)
 			formatEntry(p7, "Local")
 		end)
 	end
 	if getFFlagTextChatEnableUniverseChatTabs() and expChatDebugGlobalChat then
-		textChatService.UniverseChatMessageReceived:Connect(function(p8) --[[ line: 148 ]]
+		textChatService.UniverseChatMessageReceived:Connect(function(p8)
 			-- upvalues: formatEntry (ref)
 			formatEntry(p8, "Global")
 		end)

@@ -27,14 +27,14 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 local playerListRefactorUsernameFormatting = game:DefineFastFlag("PlayerListRefactorUsernameFormatting", false)
 local getFFlagAddPeoplePageCardLayout = peopleServiceModule.getService("Flags").GetFFlagAddPeoplePageCardLayout
 
-return function(p0) --[[ line: 48 | named "PersonRow" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), reactModule (ref), peopleServiceModule (ref), getFFlagAddPeoplePageCardLayout (ref), useInExperienceCombinedNameModule (ref), useSignalBinding (ref), avatar (ref), inputSize (ref), fFlagPeopleTabUseProfileFrameThumbnailModule (ref), text (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), personButtonRowModule (ref), platformNameModule (ref)
 	local var19
 	local var13 = useTokens()
 	local var14 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
 	local var15 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(tostring(p0.person.UserId)) else nil
 	local var16 = reactModule.useRef(nil)
-	local var17 = reactModule.useCallback(function(p1) --[[ line: 59 ]]
+	local var17 = reactModule.useCallback(function(p1)
 		-- upvalues: peopleServiceModule (copy), p0 (ref), var16 (ref)
 		peopleServiceModule.getService("FocusNavigationService").registerFrame(p1, p0.person.UserId)
 		var16.current = p1
@@ -44,14 +44,14 @@ return function(p0) --[[ line: 48 | named "PersonRow" ]]
 	if getFFlagAddPeoplePageCardLayout() then
 		var19 = useInExperienceCombinedNameModule(p0.person.UserId, p0.person.DisplayName)
 	else
-		local var18 = reactModule.useMemo(function() --[[ line: 69 ]]
+		local var18 = reactModule.useMemo(function()
 			-- upvalues: peopleServiceModule (copy)
 			return peopleServiceModule.getService("PeopleListStore")
 		end, {})
-		var19 = useSignalBinding(reactModule.useMemo(function() --[[ line: 73 ]]
+		var19 = useSignalBinding(reactModule.useMemo(function()
 			-- upvalues: var18 (ref), p0 (ref)
 			return var18.getProfile(p0.person.UserId)
-		end, { p0.person.UserId })):map(function(p2) --[[ line: 79 ]]
+		end, { p0.person.UserId })):map(function(p2)
 			-- upvalues: p0 (ref)
 			return if p2 and string.len(p2) > 0 then p2 else p0.person.DisplayName
 		end)

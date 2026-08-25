@@ -25,12 +25,12 @@ local var3 = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-return function(p0) --[[ line: 33 | named "ThemedTextLabel" ]]
+return function(p0)
 	-- upvalues: globalConfigModule (ref), var3 (ref), withFoundationOrUIBloxStyle (ref), cryo (ref), roact (ref)
 	if globalConfigModule.propValidation then
 		assert(var3(p0))
 	end
-	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 38 ]]
+	return withFoundationOrUIBloxStyle(function(p1)
 		return {
 			Theme = {
 				BackgroundDefault = {
@@ -206,7 +206,7 @@ return function(p0) --[[ line: 33 | named "ThemedTextLabel" ]]
 				}
 			}
 		}
-	end, function(p2) --[[ line: 211 ]]
+	end, function(p2)
 		-- upvalues: p0 (ref), cryo (copy), roact (copy)
 		local var4 = p2.Theme[p0.themeKey or "TextDefault"]
 		local var5 = p2.Font[p0.fontKey or "Body"]

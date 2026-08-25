@@ -17,7 +17,7 @@ avatarExperienceScreenSizeImpressionsDetector.validateProps = tModule.strictInte
 	topBarHeight = tModule.number
 })
 
-function avatarExperienceScreenSizeImpressionsDetector.render(p0) --[[ line: 28 ]]
+function avatarExperienceScreenSizeImpressionsDetector.render(p0)
 	-- upvalues: roactModule (ref), avatarExperienceImpressionsDetectorModule (ref)
 	local screenSize = p0.props.screenSize
 	
@@ -36,7 +36,7 @@ function avatarExperienceScreenSizeImpressionsDetector.render(p0) --[[ line: 28 
 	})
 end
 
-return roactRoduxModule.connect(function(p1, _) --[[ line: 48 ]]
+return roactRoduxModule.connect(function(p1, _)
 	return {
 		topBarHeight = p1.TopBar.topBarHeight,
 		globalGuiInset = p1.GlobalGuiInset,

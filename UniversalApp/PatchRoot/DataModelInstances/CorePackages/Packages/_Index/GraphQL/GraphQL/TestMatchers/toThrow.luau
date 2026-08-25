@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 16 | named "toThrow" ]]
+﻿return function(p0, p1, p2)
 	local ok, status = pcall(p0)
 	
 	if ok then

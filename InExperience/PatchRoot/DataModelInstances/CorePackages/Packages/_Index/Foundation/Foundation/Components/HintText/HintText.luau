@@ -4,7 +4,7 @@ local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 20 | named "HintText" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: reactModule (ref), textModule (ref), withCommonPropsModule (ref)
 	return reactModule.createElement(textModule, withCommonPropsModule(p0, {
 		Text = p0.text,

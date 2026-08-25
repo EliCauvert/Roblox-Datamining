@@ -6,15 +6,15 @@ local name = require(appChat.Logger):new(script.Name)
 local var4 = require(parent.Analytics).Analytics.new(game:GetService("RbxAnalyticsService"))
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 
-return function() --[[ line: 13 ]]
+return function()
 	-- upvalues: name (ref), appChatNetworkingModule (ref), roactChatAnalyticsModule (ref), var4 (ref), setAppLoadedModule (ref)
 	name:info("Fetching chat metadata...")
 	
-	return function(p0) --[[ line: 16 ]]
+	return function(p0)
 		-- upvalues: appChatNetworkingModule (copy), name (copy), roactChatAnalyticsModule (copy), var4 (copy), setAppLoadedModule (copy)
 		local localUserId = p0:getState().LocalUserId
 		
-		return p0:dispatch(appChatNetworkingModule.rodux.GetMetadata.API()):andThen(function(p2) --[[ line: 20 ]]
+		return p0:dispatch(appChatNetworkingModule.rodux.GetMetadata.API()):andThen(function(p2)
 			-- upvalues: name (copy), localUserId (ref), roactChatAnalyticsModule (copy), var4 (copy), p0 (ref), setAppLoadedModule (copy)
 			local isChatEnabled = p2.responseBody.isChatEnabled
 			
@@ -30,7 +30,7 @@ return function() --[[ line: 13 ]]
 			p0:dispatch(setAppLoadedModule(isChatEnabled))
 			
 			return isChatEnabled
-		end):catch(function(p1) --[[ line: 37 ]]
+		end):catch(function(p1)
 			-- upvalues: name (copy)
 			name:warning("FetchChatData failed with error: {}", tostring(p1))
 		end)

@@ -12,7 +12,7 @@ local t = {
 	dateTime = DateTime.fromLocalTime(2000, 1, 1, 0, 0, 0)
 }
 
-return function(p0) --[[ line: 36 | named "TimeSelector" ]]
+return function(p0)
 	-- upvalues: withDefaultsModule (ref), t (ref), dateTimeUtilitiesModule (ref), useScaledValueModule (ref), localizationService (ref), reactModule (ref), dropdownModule (ref), translatorModule (ref), inputSizeModule (ref)
 	local var9 = withDefaultsModule(p0, t)
 	local var10 = dateTimeUtilitiesModule.roundDownToNearestMinute(var9.dateTime)
@@ -20,7 +20,7 @@ return function(p0) --[[ line: 36 | named "TimeSelector" ]]
 	
 	return reactModule.createElement(dropdownModule.Root, {
 		label = "",
-		items = (function() --[[ line: 44 ]]
+		items = (function()
 			-- upvalues: var11 (ref), var10 (ref), localizationService (copy)
 			local t = {}
 			local var13 = var11.Minute % 30 ~= 0

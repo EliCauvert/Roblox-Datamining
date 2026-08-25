@@ -1,7 +1,7 @@
 ﻿local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 20 ]]
+function t.new(p0)
 	-- upvalues: t (ref)
 	return setmetatable({
 		levels = { table.create(p0) },
@@ -10,7 +10,7 @@ function t.new(p0) --[[ line: 20 ]]
 	}, t)
 end
 
-function t:insert(p1) --[[ line: 36 ]]
+function t:insert(p1)
 	self.weightedSketch.cached = false
 	local levels = self.levels
 	table.insert(levels[1], p1)
@@ -22,7 +22,7 @@ function t:insert(p1) --[[ line: 36 ]]
 	end
 end
 
-function compressWeightedKll(p2, p3) --[[ line: 51 ]]
+function compressWeightedKll(p2, p3)
 	local var1 = p2[p3]
 	table.sort(var1)
 	local list = table.create(#var1 // 2)
@@ -38,7 +38,7 @@ function compressWeightedKll(p2, p3) --[[ line: 51 ]]
 	table.clear(p2[p3])
 end
 
-function t:generateWeightedSketch() --[[ line: 77 ]]
+function t:generateWeightedSketch()
 	local t = {}
 	local var4 = 1
 	local var5 = 0
@@ -50,13 +50,13 @@ function t:generateWeightedSketch() --[[ line: 77 ]]
 		end
 		var4 *= 2
 	end
-	table.sort(t, function(p4, p5) --[[ line: 94 ]]
+	table.sort(t, function(p4, p5)
 		return p4.value < p5.value
 	end)
 	self.weightedSketch = { cached = true, weightTuples = t, totalWeight = var5 }
 end
 
-function t:getPercentile(p6) --[[ line: 106 ]]
+function t:getPercentile(p6)
 	if not self.weightedSketch.cached then
 		self:generateWeightedSketch()
 	end

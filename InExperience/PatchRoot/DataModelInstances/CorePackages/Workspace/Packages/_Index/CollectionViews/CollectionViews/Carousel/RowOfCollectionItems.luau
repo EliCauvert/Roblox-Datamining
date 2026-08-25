@@ -6,9 +6,9 @@ local calculateSpacePerItemModule = require(collectionViews.calculateSpacePerIte
 local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
 
-return reactModule.memo(function(p0) --[[ line: 52 | named "RowOfCollectionItems" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), fFlagCollectionViewMathChanges (ref), calculateSpacePerItemModule (ref), argCheckModule (ref)
-	return reactModule.createElement(reactModule.Fragment, nil, reactModule.useMemo(function() --[[ line: 54 ]]
+	return reactModule.createElement(reactModule.Fragment, nil, reactModule.useMemo(function()
 		-- upvalues: p0 (ref), fFlagCollectionViewMathChanges (copy), calculateSpacePerItemModule (copy), reactModule (copy), argCheckModule (copy)
 		if p0.numToRender ~= 0 then
 			local var4
@@ -50,7 +50,7 @@ return reactModule.memo(function(p0) --[[ line: 52 | named "RowOfCollectionItems
 				t.Padding = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 0,
-					Size = if fFlagCollectionViewMathChanges then p0.spacingMetricsBinding:map(function(p1) --[[ line: 100 ]]
+					Size = if fFlagCollectionViewMathChanges then p0.spacingMetricsBinding:map(function(p1)
 						-- upvalues: var5 (ref)
 						return UDim2.fromOffset(math.max(0, var5 * p1.stride - p1.renderedGap), 0)
 					end) else UDim2.new(var5 * uDim2.X.Scale, (var5 - 1) * adjustedGap + var5 * uDim2.X.Offset, 0, 0)

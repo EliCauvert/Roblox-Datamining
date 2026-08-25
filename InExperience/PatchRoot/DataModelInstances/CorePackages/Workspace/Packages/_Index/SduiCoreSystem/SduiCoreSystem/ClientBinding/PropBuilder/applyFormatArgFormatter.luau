@@ -4,12 +4,12 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local localizationService = game:GetService("LocalizationService")
 
-local function _(p0) --[[ line: 30 | named "coerceNumericArg" ]]
+local function _(p0)
 	return if type(p0) == "number" then p0 elseif type(p0) == "string" then tonumber(p0) else nil
 end
 
-local _ = function(p1) --[[ line: 40 | named "tryDateTimeFromIsoString" ]]
-	local ok, status = pcall(function() --[[ line: 41 ]]
+local _ = function(p1)
+	local ok, status = pcall(function()
 		-- upvalues: p1 (ref)
 		return DateTime.fromIsoDate(p1)
 	end)
@@ -17,7 +17,7 @@ local _ = function(p1) --[[ line: 40 | named "tryDateTimeFromIsoString" ]]
 	return if ok and status then status else nil
 end
 
-local function resolveDateTimeForFormat(p2) --[[ line: 52 ]]
+local function resolveDateTimeForFormat(p2)
 	-- upvalues: resolveDateTimeForFormat (ref)
 	if type(p2) == "number" then
 		return DateTime.fromUnixTimestamp(p2)
@@ -27,7 +27,7 @@ local function resolveDateTimeForFormat(p2) --[[ line: 52 ]]
 		if var6 ~= nil then
 			return DateTime.fromUnixTimestamp(var6)
 		end
-		local ok, status = pcall(function() --[[ line: 41 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p2 (ref)
 			return DateTime.fromIsoDate(p2)
 		end)
@@ -39,7 +39,7 @@ local function resolveDateTimeForFormat(p2) --[[ line: 52 ]]
 end
 
 return {
-	applyFormatArgFormatter = function(p3, p4, p5) --[[ line: 78 ]]
+	applyFormatArgFormatter = function(p3, p4, p5)
 		-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref), localizationModule (ref), localizationService (ref), resolveDateTimeForFormat (ref)
 		if p4.type == "TYPE_INVALID" or p4.type == nil then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToParseProp, { message = "Formatter specified without a type" }, p5)

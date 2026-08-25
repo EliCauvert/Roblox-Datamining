@@ -6,16 +6,16 @@ local signalsReactModule = require(parent.SignalsReact)
 local useSessionSummaryModule = require(script.Parent.useSessionSummary)
 
 return {
-	isPublishLatest = function(p0, p1) --[[ line: 25 ]]
+	isPublishLatest = function(p0, p1)
 		return p0 or p1
 	end,
-	usePublishStatus = function(p2) --[[ line: 29 ]]
+	usePublishStatus = function(p2)
 		-- upvalues: reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), creatorAgentChatModule (ref), useSessionSummaryModule (ref)
-		local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 30 ]]
+		local var5 = signalsReactModule.useSignalState(reactModule.useMemo(function()
 			-- upvalues: universeConfigurationModule (copy), p2 (ref)
 			return universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p2.universeId)
 		end, { p2.universeId }).data)
-		local hasPublishedTurn = useSessionSummaryModule(reactModule.useMemo(function() --[[ line: 34 ]]
+		local hasPublishedTurn = useSessionSummaryModule(reactModule.useMemo(function()
 			-- upvalues: creatorAgentChatModule (copy), p2 (ref)
 			return creatorAgentChatModule.getCreatorAgentChatStore().getSessionForProject(p2.universeId, p2.placeId, p2.sessionId)
 		end, { p2.universeId, p2.placeId, p2.sessionId })).hasPublishedTurn

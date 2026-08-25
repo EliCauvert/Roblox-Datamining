@@ -15,7 +15,7 @@ local t = {}
 local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
 t.hasOwn = hasOwnPropertyModule
 
-function t.getTypenameFromStoreObject(p0, p1) --[[ line: 41 ]]
+function t.getTypenameFromStoreObject(p0, p1)
 	-- upvalues: isReference (ref)
 	return if isReference(p1) then p0:get(p1.__ref, "__typename") elseif p1 then p1.__typename else nil
 end
@@ -23,7 +23,7 @@ end
 t.TypeOrFieldNameRegExp = luauRegExpModule("^[_a-zA-Z][_0-9a-zA-Z]*", "i")
 local t_1 = {}
 
-function t.fieldNameFromStoreName(p2) --[[ line: 64 ]]
+function t.fieldNameFromStoreName(p2)
 	-- upvalues: t_1 (ref)
 	if t_1[p2] then
 		return t_1[p2]
@@ -34,12 +34,12 @@ function t.fieldNameFromStoreName(p2) --[[ line: 64 ]]
 	return var6
 end
 
-local function selectionSetMatchesResult(value, p3, p4) --[[ line: 76 ]]
+local function selectionSetMatchesResult(value, p3, p4)
 	-- upvalues: isNonNullObject (ref), array (ref), selectionSetMatchesResult (ref), isField (ref), shouldInclude (ref), resultKeyNameFromFieldf (ref), hasOwnPropertyModule (ref)
-	return if isNonNullObject(p3) then if array.isArray(p3) then array.every(p3, function(p6) --[[ line: 84 ]]
+	return if isNonNullObject(p3) then if array.isArray(p3) then array.every(p3, function(p6)
 		-- upvalues: selectionSetMatchesResult (copy), value (ref), p4 (ref)
 		return selectionSetMatchesResult(value, p6, p4)
-	end) else array.every(value.selections, function(p5) --[[ line: 88 ]]
+	end) else array.every(value.selections, function(p5)
 		-- upvalues: isField (copy), shouldInclude (copy), p4 (ref), resultKeyNameFromFieldf (copy), hasOwnPropertyModule (copy), p3 (ref), selectionSetMatchesResult (copy)
 		if isField(p5) and shouldInclude(p5, p4) then
 			local var7 = resultKeyNameFromFieldf(p5)
@@ -52,12 +52,12 @@ end
 
 t.selectionSetMatchesResult = selectionSetMatchesResult
 
-function t.storeValueIsStoreObject(p7) --[[ line: 116 ]]
+function t.storeValueIsStoreObject(p7)
 	-- upvalues: isNonNullObject (ref), isReference (ref), array (ref)
 	return isNonNullObject(p7) and (not isReference(p7) and not array.isArray(p7))
 end
 
-function t.makeProcessedFieldsMerger() --[[ line: 121 ]]
+function t.makeProcessedFieldsMerger()
 	-- upvalues: deepMerger (ref)
 	return deepMerger.new()
 end

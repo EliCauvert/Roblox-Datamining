@@ -1,4 +1,4 @@
-﻿return function(...) --[[ line: 2 | named "intersect" ]]
+﻿return function(...)
 	local var2
 	local t = {}
 	local var1 = select("#", ...)

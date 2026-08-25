@@ -125,13 +125,13 @@ return {
 	sizesMinMaxY = t_3,
 	rules = { default = list_1, Y = list_2, Orientation = list },
 	keyIndex = t_5,
-	getMinWidthFor = function(a) --[[ line: 86 ]]
+	getMinWidthFor = function(a)
 		-- upvalues: t_1 (ref)
 		local var9 = t_1[a]
 		
 		return if var9 == nil then 0 else var9.minWidth
 	end,
-	getMinHeightFor = function(a) --[[ line: 93 ]]
+	getMinHeightFor = function(a)
 		-- upvalues: t_3 (ref)
 		local var10 = t_3[a]
 		

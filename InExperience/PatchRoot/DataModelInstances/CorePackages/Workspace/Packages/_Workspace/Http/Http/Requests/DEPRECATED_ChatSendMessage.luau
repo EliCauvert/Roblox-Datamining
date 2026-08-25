@@ -3,7 +3,7 @@ local http = script:FindFirstAncestor("Http")
 local urlModule = require(http.Url)
 local _ = require(http.RequestTypes)
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 8 ]]
+return function(p0, p1, p2, p3, p4, p5)
 	-- upvalues: httpService (ref), urlModule (ref)
 	return p0(string.format("%s/send-message", urlModule.CHAT_URL), "POST", {
 		postBody = httpService:JSONEncode({

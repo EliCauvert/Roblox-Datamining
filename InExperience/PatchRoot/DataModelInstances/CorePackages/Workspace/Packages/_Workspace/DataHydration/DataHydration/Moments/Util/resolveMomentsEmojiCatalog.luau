@@ -10,28 +10,28 @@ local parseMomentsEmojiFallbackCatalogModule = require(dataHydration.Moments.Uti
 local validateMomentsEmojiCatalogModule = require(dataHydration.Moments.Util.validateMomentsEmojiCatalog)
 local var9 = decodeEmojiSetsModule.flattenEmojis(decodeEmojiSetsModule.decodeGetEmojiSetsResponse(compiledMomentsEmojiFallbackCatalogModule.COMPILED_MOMENTS_EMOJI_FALLBACK_API_PAYLOAD))
 
-local function shouldUseLegacyWireStringCatalog() --[[ line: 35 ]]
+local function shouldUseLegacyWireStringCatalog()
 	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref)
 	return not fFlagMomentsEmojiSetsApiModule
 end
 
-local function shouldUseUuidFallbackCatalog() --[[ line: 39 ]]
+local function shouldUseUuidFallbackCatalog()
 	-- upvalues: fFlagMomentsReactToFeedItemV2Module (ref)
 	return fFlagMomentsReactToFeedItemV2Module
 end
 
-local function _(p0) --[[ line: 43 | named "resolveFromCachedResponse" ]]
+local function _(p0)
 	-- upvalues: validateMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref)
 	return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p0) then decodeEmojiSetsModule.flattenEmojis(p0) else nil
 end
 
-local _ = function() --[[ line: 50 | named "resolveFromFString" ]]
+local _ = function()
 	-- upvalues: parseMomentsEmojiFallbackCatalogModule (ref), getFStringMomentsEmojiFallbackCatalogJSONModule (ref)
 	return parseMomentsEmojiFallbackCatalogModule.parseMomentsEmojiFallbackCatalogJson(getFStringMomentsEmojiFallbackCatalogJSONModule())
 end
 
 return {
-	resolveMomentsEmojiCatalog = function(p1) --[[ line: 56 ]]
+	resolveMomentsEmojiCatalog = function(p1)
 		-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), hardcodedMomentsEmojisModule (ref), validateMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref), fFlagMomentsReactToFeedItemV2Module (ref), parseMomentsEmojiFallbackCatalogModule (ref), getFStringMomentsEmojiFallbackCatalogJSONModule (ref), var9 (ref)
 		if fFlagMomentsEmojiSetsApiModule then
 			return { source = "legacy", emojis = hardcodedMomentsEmojisModule }

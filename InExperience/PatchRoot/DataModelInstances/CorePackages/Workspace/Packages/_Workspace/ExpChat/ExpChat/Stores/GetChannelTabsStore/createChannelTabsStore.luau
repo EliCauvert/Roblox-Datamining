@@ -12,7 +12,7 @@ local createSignal = signalsModule.createSignal
 local createComputed = signalsModule.createComputed
 local getFixedTabPriority = nil
 
-local function reorderTabs(value) --[[ line: 68 ]]
+local function reorderTabs(value)
 	-- upvalues: getFixedTabPriority (write)
 	local cloned = table.clone(value)
 	local t = {}
@@ -20,7 +20,7 @@ local function reorderTabs(value) --[[ line: 68 ]]
 	for i, v in pairs(cloned) do
 		table.insert(t, v)
 	end
-	table.sort(t, function(p0, p1) --[[ line: 76 ]]
+	table.sort(t, function(p0, p1)
 		-- upvalues: getFixedTabPriority (copy)
 		local var11 = getFixedTabPriority(p0.name)
 		local var12 = getFixedTabPriority(p1.name)
@@ -39,7 +39,7 @@ local function reorderTabs(value) --[[ line: 68 ]]
 	return cloned
 end
 
-local function _(p2, p3) --[[ line: 103 | named "insertTabAndReorder" ]]
+local function _(p2, p3)
 	-- upvalues: reorderTabs (ref)
 	local cloned = table.clone(p2)
 	cloned[p3.name] = p3
@@ -47,7 +47,7 @@ local function _(p2, p3) --[[ line: 103 | named "insertTabAndReorder" ]]
 	return reorderTabs(cloned)
 end
 
-local _ = function(p4, p5) --[[ line: 113 | named "removeTabAndReorder" ]]
+local _ = function(p4, p5)
 	-- upvalues: reorderTabs (ref)
 	local cloned = table.clone(p4)
 	cloned[p5.name] = nil
@@ -55,22 +55,22 @@ local _ = function(p4, p5) --[[ line: 113 | named "removeTabAndReorder" ]]
 	return reorderTabs(cloned)
 end
 
-getFixedTabPriority = function(p6) --[[ line: 126 | named "getFixedTabPriority" ]]
+getFixedTabPriority = function(p6)
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), friendsChatTabNameModule (ref), fFlagExpChatEnableFriendsTab (ref)
 	return if p6 == "RBXGeneral" then 1 elseif p6 == "RBXGlobal" and getFFlagTextChatEnableUniverseChatTabs() then 2 elseif p6 == friendsChatTabNameModule and fFlagExpChatEnableFriendsTab then 3 else nil
 end
 
-return function() --[[ line: 137 | named "createChannelTabsStore" ]]
+return function()
 	-- upvalues: createSignal (ref), createComputed (ref), tutilsModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), reorderTabs (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), getFixedTabPriority (write), fFlagExpChatEnableFriendsTab (ref)
 	local var15, var16 = createSignal({ selectedTabName = nil, allChannelTabs = {} })
 	
 	return {
 		getChannelTabsState = var15,
-		getSelectedTabName = createComputed(function(p7) --[[ line: 146 ]]
+		getSelectedTabName = createComputed(function(p7)
 			-- upvalues: var15 (ref)
 			return var15(p7).selectedTabName
 		end),
-		getUnreadChannels = createComputed(function(p8) --[[ line: 151 ]]
+		getUnreadChannels = createComputed(function(p8)
 			-- upvalues: var15 (ref)
 			local t = {}
 			
@@ -81,7 +81,7 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 			end
 			return t
 		end, tutilsModule.deepEqual),
-		handleIncomingOrOutgoingMessage = function(a, b, p9) --[[ line: 164 ]]
+		handleIncomingOrOutgoingMessage = function(a, b, p9)
 			-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), var16 (ref)
 			if not getFFlagTextChatEnableUniverseChatTabs() and not a.TextChannel or b then return end
 			local name = nil
@@ -95,7 +95,7 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 					return
 				end
 			end
-			var16(function(p10) --[[ line: 186 ]]
+			var16(function(p10)
 				-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), a (ref), name (write)
 				local cloned = table.clone(p10)
 				
@@ -119,9 +119,9 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				return cloned
 			end)
 		end,
-		setSelectedTab = function(value) --[[ line: 241 ]]
+		setSelectedTab = function(value)
 			-- upvalues: var16 (ref)
-			var16(function(p11) --[[ line: 242 ]]
+			var16(function(p11)
 				-- upvalues: value (ref)
 				local cloned = table.clone(p11)
 				cloned.selectedTabName = value
@@ -135,9 +135,9 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				return cloned
 			end)
 		end,
-		setTargetChannel = function(value, p12) --[[ line: 257 ]]
+		setTargetChannel = function(value, p12)
 			-- upvalues: var16 (ref), reorderTabs (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy)
-			var16(function(p13) --[[ line: 258 ]]
+			var16(function(p13)
 				-- upvalues: value (ref), p12 (ref), reorderTabs (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy)
 				local cloned = table.clone(p13)
 				
@@ -174,10 +174,10 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				end
 			end)
 		end,
-		addChannelTab = function(p14, p15) --[[ line: 303 ]]
+		addChannelTab = function(p14, p15)
 			-- upvalues: var16 (ref), reorderTabs (copy), getFixedTabPriority (copy), fFlagExpChatEnableFriendsTab (copy)
 			local name = p14.name
-			var16(function(p16) --[[ line: 306 ]]
+			var16(function(p16)
 				-- upvalues: p15 (ref), p14 (ref), name (ref), reorderTabs (copy), getFixedTabPriority (copy), fFlagExpChatEnableFriendsTab (copy)
 				local cloned = table.clone(p16)
 				local allChannelTabs = cloned.allChannelTabs
@@ -218,9 +218,9 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				return cloned
 			end)
 		end,
-		removeChannelTab = function(p17) --[[ line: 353 ]]
+		removeChannelTab = function(p17)
 			-- upvalues: var16 (ref)
-			var16(function(p18) --[[ line: 354 ]]
+			var16(function(p18)
 				-- upvalues: p17 (ref)
 				local cloned = table.clone(p18)
 				cloned.allChannelTabs = table.clone(cloned.allChannelTabs)
@@ -241,9 +241,9 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				return cloned
 			end)
 		end,
-		handleChannelRemoved = function(p19) --[[ line: 378 ]]
+		handleChannelRemoved = function(p19)
 			-- upvalues: var16 (ref), reorderTabs (copy)
-			var16(function(p20) --[[ line: 379 ]]
+			var16(function(p20)
 				-- upvalues: p19 (ref), reorderTabs (copy)
 				local var37 = p20.allChannelTabs[p19]
 				
@@ -267,9 +267,9 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				return cloned
 			end)
 		end,
-		markChannelUnread = function(p21) --[[ line: 213 ]]
+		markChannelUnread = function(p21)
 			-- upvalues: var16 (ref)
-			var16(function(p22) --[[ line: 214 ]]
+			var16(function(p22)
 				-- upvalues: p21 (ref)
 				local cloned = table.clone(p22)
 				
@@ -282,9 +282,9 @@ return function() --[[ line: 137 | named "createChannelTabsStore" ]]
 				return cloned
 			end)
 		end,
-		setChannelUnreadStatus = function(value, p23) --[[ line: 226 ]]
+		setChannelUnreadStatus = function(value, p23)
 			-- upvalues: var16 (ref)
-			var16(function(p24) --[[ line: 227 ]]
+			var16(function(p24)
 				-- upvalues: value (ref), p23 (ref)
 				if p24.allChannelTabs[value] == nil then
 					return p24

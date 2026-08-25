@@ -11,11 +11,11 @@ local waveformWidth = constantsModule.AudioWaveform.WaveformWidth
 local waveformPadding = constantsModule.AudioWaveform.WaveformPadding
 local waveformMinHeight = constantsModule.AudioWaveform.WaveformMinHeight
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 29 | named "Waveform" ]]
+return reactModule.forwardRef(function(p0, p1)
 	-- upvalues: useTokens (ref), useAudioWaveformModule (ref), reactModule (ref), view (ref), waveformPadding (ref), dashModule (ref), waveformWidth (ref), waveformMinHeight (ref)
 	local var6 = useTokens()
 	local var7 = useAudioWaveformModule(p0.audioAssetId, p0.videoDuration)
-	reactModule.useEffect(function() --[[ line: 33 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		if var7 and #var7 > 0 then
 			p0.onWaveformReady()
@@ -31,7 +31,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 29 | named "Waveform" 
 			Padding = UDim.new(0, waveformPadding)
 		},
 		ref = p1
-	}, dashModule.map(var7, function(p2, p3) --[[ line: 51 ]]
+	}, dashModule.map(var7, function(p2, p3)
 		-- upvalues: reactModule (copy), view (copy), waveformWidth (copy), waveformMinHeight (copy), var6 (ref)
 		return reactModule.createElement(view, {
 			tag = "radius-circle",

@@ -1,6 +1,6 @@
 ﻿local getDeepValueModule = require(script:FindFirstAncestor("AppChat").Utils.getDeepValue)
 
-return function(p0, p1) --[[ line: 5 ]]
+return function(p0, p1)
 	-- upvalues: getDeepValueModule (ref)
 	local var1 = getDeepValueModule(p0, string.format("ChatAppReducer.Conversations.%s", p1 or ""))
 	

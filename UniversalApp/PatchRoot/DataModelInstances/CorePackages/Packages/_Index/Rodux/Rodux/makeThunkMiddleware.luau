@@ -1,17 +1,17 @@
-﻿local function tracebackReporter(p0) --[[ line: 9 ]]
+﻿local function tracebackReporter(p0)
 	return debug.traceback(p0)
 end
 
-return function(p1) --[[ line: 13 | named "makeThunkMiddleware" ]]
+return function(p1)
 	-- upvalues: tracebackReporter (ref)
-	return function(p2, p3) --[[ line: 14 | named "thunkMiddleware" ]]
+	return function(p2, p3)
 		-- upvalues: p1 (ref), tracebackReporter (copy)
-		return function(p4) --[[ line: 15 ]]
+		return function(p4)
 			-- upvalues: p3 (ref), p1 (copy), tracebackReporter (copy), p2 (ref)
 			if typeof(p4) ~= "function" then
 				return p2(p4)
 			end
-			local ok, status = xpcall(function() --[[ line: 17 ]]
+			local ok, status = xpcall(function()
 				-- upvalues: p4 (ref), p3 (copy), p1 (copy)
 				return p4(p3, p1)
 			end, tracebackReporter)

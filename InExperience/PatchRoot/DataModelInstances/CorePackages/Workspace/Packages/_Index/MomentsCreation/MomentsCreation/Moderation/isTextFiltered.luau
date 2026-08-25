@@ -1,3 +1,3 @@
-﻿return function(_) --[[ line: 15 | named "isTextFiltered" ]]
+﻿return function(_)
 	return false
 end

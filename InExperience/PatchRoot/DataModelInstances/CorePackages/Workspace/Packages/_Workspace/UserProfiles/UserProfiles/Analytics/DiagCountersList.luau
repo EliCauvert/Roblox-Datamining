@@ -20,7 +20,7 @@ return {
 	},
 	[eventNamesModule.UserProfilesErrorCode] = {
 		type = diagEventTypes.Counter,
-		name = function(p0) --[[ line: 31 ]]
+		name = function(p0)
 			-- upvalues: eventNamesModule (ref), errorCodesForLoggingModule (ref)
 			local var2 = tostring(p0.status)
 			local userProfilesErrorCode = eventNamesModule.UserProfilesErrorCode

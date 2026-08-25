@@ -2,12 +2,12 @@
 local var0 = require(script.Parent.Parent.NavigationSymbol)("JUMP_TO")
 local t = { JumpTo = var0 }
 setmetatable(t, {
-	__index = function(_, p0) --[[ line: 16 ]]
+	__index = function(_, p0)
 		error(("%q is not a valid member of SwitchActions"):format(tostring(p0)), 2)
 	end
 })
 
-function t.jumpTo(p1) --[[ line: 22 ]]
+function t.jumpTo(p1)
 	-- upvalues: var0 (ref), object (ref)
 	local t = { preserveFocus = true, type = var0 }
 	

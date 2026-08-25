@@ -19,7 +19,7 @@ local t = {
 	[Enum.UserInputType.Touch] = inputModeModule.Touch
 }
 
-return function(p0) --[[ line: 28 | named "getInputMode" ]]
+return function(p0)
 	-- upvalues: t (ref)
 	return t[p0]
 end

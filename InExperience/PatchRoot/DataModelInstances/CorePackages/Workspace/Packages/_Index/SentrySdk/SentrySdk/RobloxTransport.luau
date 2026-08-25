@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(_, p0, p1) --[[ line: 47 ]]
+function t.new(_, p0, p1)
 	-- upvalues: dsnUtilsModule (ref), t (ref)
 	local var2, var3 = dsnUtilsModule.parse_dsn(p0 or "")
 	
@@ -19,16 +19,16 @@ function t.new(_, p0, p1) --[[ line: 47 ]]
 	}, t)
 end
 
-function t:send(p2, p3) --[[ line: 64 ]]
+function t:send(p2, p3)
 	local var4 = self.httpServiceImpl:JSONEncode(p2)
-	local ok, status = pcall(function() --[[ line: 68 ]]
+	local ok, status = pcall(function()
 		-- upvalues: self (ref), var4 (ref), p3 (ref)
 		self.httpServiceImpl:RequestInternal({
 			Method = "POST",
 			Url = self.endpoint,
 			Headers = self.headers,
 			Body = var4
-		}):Start(function(p4, p5) --[[ line: 76 ]]
+		}):Start(function(p4, p5)
 			-- upvalues: p3 (copy)
 			if p3 then
 				if p4 then
@@ -52,7 +52,7 @@ function t:send(p2, p3) --[[ line: 64 ]]
 	end
 end
 
-function t:send_attachments(p6, p7, p8) --[[ line: 110 ]]
+function t:send_attachments(p6, p7, p8)
 	-- upvalues: dsnUtilsModule (ref)
 	local httpServiceImpl = self.httpServiceImpl
 	
@@ -72,14 +72,14 @@ function t:send_attachments(p6, p7, p8) --[[ line: 110 ]]
 		end
 		local joined = table.concat(list, "\n")
 		local var7 = dsnUtilsModule.build_envelope_url(self.dsn)
-		local ok, status = pcall(function() --[[ line: 154 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpServiceImpl (ref), var7 (ref), self (ref), joined (ref), p8 (ref)
 			httpServiceImpl:RequestInternal({
 				Method = "POST",
 				Url = var7,
 				Headers = self.headers,
 				Body = joined
-			}):Start(function(p9, p10) --[[ line: 162 ]]
+			}):Start(function(p9, p10)
 				-- upvalues: p8 (copy)
 				if p8 then
 					if p9 then

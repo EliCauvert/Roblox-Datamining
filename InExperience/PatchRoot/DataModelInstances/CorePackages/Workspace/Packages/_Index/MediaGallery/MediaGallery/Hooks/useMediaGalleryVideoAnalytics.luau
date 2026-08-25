@@ -9,9 +9,9 @@ local videoActions = videoUtilsModule.AnalyticsEnums.VideoActions
 local videoLogger = videoUtilsModule.VideoLogger
 local reportWarning = discoveryAnalyticsModule.Points.reportWarning
 
-return function(p0, p1, p2) --[[ line: 27 | named "useMediaGalleryVideoAnalytics" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), reportWarning (ref), loggingProtocolModule (ref), discoveryVideoPlayEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoEndEvent (ref)
-	local var4 = reactModule.useCallback(function(p3, p4) --[[ line: 28 ]]
+	local var4 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: p2 (ref), reportWarning (copy), loggingProtocolModule (copy), discoveryVideoPlayEvent (copy), p0 (ref), p1 (ref)
 		if not p3 or not p2 then return end
 		local var8 = p2[p3]
@@ -30,7 +30,7 @@ return function(p0, p1, p2) --[[ line: 27 | named "useMediaGalleryVideoAnalytics
 			rootPlaceId = p1
 		})
 	end, { p0, p1, p2 })
-	local var5 = reactModule.useCallback(function(p5, p6, _, p7) --[[ line: 52 ]]
+	local var5 = reactModule.useCallback(function(p5, p6, _, p7)
 		-- upvalues: p2 (ref), reportWarning (copy), loggingProtocolModule (copy), videoLogger (copy), videoActions (copy), p0 (ref)
 		if not p5 or not p2 then return end
 		local var9 = p2[p5]
@@ -49,7 +49,7 @@ return function(p0, p1, p2) --[[ line: 27 | named "useMediaGalleryVideoAnalytics
 			playbackSessionId = p6 or "INVALID_SESSION_ID"
 		}, { loadTime = p7 })
 	end, { p0, p2 })
-	local var6 = reactModule.useCallback(function(p8, p9, p10) --[[ line: 79 ]]
+	local var6 = reactModule.useCallback(function(p8, p9, p10)
 		-- upvalues: p2 (ref), videoLogger (copy), videoActions (copy), p0 (ref)
 		if not p8 or not p2 then return end
 		local var10 = p2[p8]
@@ -66,7 +66,7 @@ return function(p0, p1, p2) --[[ line: 27 | named "useMediaGalleryVideoAnalytics
 			return
 		end
 	end, { p0, p2 })
-	local var7 = reactModule.useCallback(function(p11, p12, p13, p14, p15) --[[ line: 99 ]]
+	local var7 = reactModule.useCallback(function(p11, p12, p13, p14, p15)
 		-- upvalues: p2 (ref), reportWarning (copy), loggingProtocolModule (copy), discoveryVideoEndEvent (copy), p0 (ref), p1 (ref)
 		if not p11 or not p2 then return end
 		local var11 = p2[p11]
@@ -89,7 +89,7 @@ return function(p0, p1, p2) --[[ line: 27 | named "useMediaGalleryVideoAnalytics
 		})
 	end, { p0, p1, p2 })
 	
-	return reactModule.useMemo(function() --[[ line: 133 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: var4 (ref), var5 (ref), var6 (ref), var7 (ref)
 		return {
 			reportVideoPlay = var4,

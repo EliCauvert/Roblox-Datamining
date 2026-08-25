@@ -20,9 +20,9 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	storyRoot = socialCards,
-	mapStory = function(p0) --[[ line: 29 ]]
+	mapStory = function(p0)
 		-- upvalues: t (ref), reactModule (ref), foundationModule (ref), t_1 (ref), appStyleProvider (ref)
-		return function(p1) --[[ line: 30 ]]
+		return function(p1)
 			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), t_1 (copy), appStyleProvider (copy), p0 (ref)
 			local var6 = if p1 then t[p1.theme] else t.Default
 			

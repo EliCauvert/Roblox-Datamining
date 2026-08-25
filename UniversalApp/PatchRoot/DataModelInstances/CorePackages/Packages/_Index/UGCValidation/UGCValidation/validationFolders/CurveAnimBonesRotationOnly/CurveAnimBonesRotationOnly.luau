@@ -19,7 +19,7 @@ end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
 t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 
-function t.fflag() --[[ line: 26 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
 end
@@ -29,7 +29,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 32 ]]
+function t.run(p0, p1)
 	-- upvalues: UGCValidateBoneTranslationMaxDistanceHundredths (ref), curveAnimBoneHierarchyUtilsModule (ref), getFFlagUGCValidateAnimTranslationThresholdModule (ref), curveAnimTranslationUtilsModule (ref), errorSourceStringsModule (ref)
 	local var10 = UGCValidateBoneTranslationMaxDistanceHundredths / 100
 	

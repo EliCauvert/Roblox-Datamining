@@ -10,7 +10,7 @@ local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAddTypesToWidgetItems = avatarExperienceFlagsModule.FFlagAddTypesToWidgetItems
 local fFlagAXOrganicItemPosition = avatarExperienceFlagsModule.FFlagAXOrganicItemPosition
 
-local function isReadyToLog(p0) --[[ line: 90 ]]
+local function isReadyToLog(p0)
 	-- upvalues: itemTypeEnum (ref)
 	local itemType = p0.itemType
 	local itemData = p0.itemData
@@ -57,7 +57,7 @@ local function isReadyToLog(p0) --[[ line: 90 ]]
 	return var9 == true and (var10 == true and var11 == true)
 end
 
-local function buildFields(p1) --[[ line: 126 ]]
+local function buildFields(p1)
 	-- upvalues: fFlagAXOrganicItemPosition (ref), getMarketplaceUnifiedItemTypeModule (ref), getItemSelectionActionModule (ref), unifiedEventLoggingUtilsModule (ref), getTimedOptionForItemDataModule (ref), fFlagAddTypesToWidgetItems (ref), cryoModule (ref)
 	local itemData = p1.itemData
 	local lookData = p1.lookData
@@ -94,7 +94,7 @@ local function buildFields(p1) --[[ line: 126 ]]
 	})
 end
 
-return function(p2) --[[ line: 195 | named "getCatalogItemUnifiedLoggingFields" ]]
+return function(p2)
 	-- upvalues: isReadyToLog (ref), buildFields (ref)
 	return if isReadyToLog(p2) then buildFields(p2) else nil
 end

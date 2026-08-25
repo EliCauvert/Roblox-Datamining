@@ -16,7 +16,7 @@ local t = {
 }
 local list = { "addSessionInfo" }
 
-return function(p0, p1) --[[ line: 29 ]]
+return function(p0, p1)
 	-- upvalues: var2 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref), list (ref)
 	local var5, var6 = var2(p0)
 	

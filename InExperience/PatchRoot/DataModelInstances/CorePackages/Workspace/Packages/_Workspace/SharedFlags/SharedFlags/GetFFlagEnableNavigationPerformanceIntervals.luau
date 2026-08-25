@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableNavigationPerformanceIntervals2", false)
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastFlag("EnableNavigationPerformanceIntervals2")
 end

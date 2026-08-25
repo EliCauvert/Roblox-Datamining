@@ -1,22 +1,22 @@
 ﻿local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 local getFirstFocusableDescendantModule = require(script.Parent.getFirstFocusableDescendant)
 
-local function _(p0) --[[ line: 6 | named "safeDisconnect" ]]
+local function _(p0)
 	if p0 then
 		p0:Disconnect()
 	end
 end
 
-return function(p1) --[[ line: 23 | named "useFirstFocusableDescendantRef" ]]
+return function(p1)
 	-- upvalues: reactModule (ref), getFirstFocusableDescendantModule (ref)
 	local var2 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 26 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getFirstFocusableDescendantModule (copy), var2 (ref), p1 (ref)
 		local var3 = nil
 		local descendantAddedConnection = nil
 		local var5 = nil
 		
-		local function updateFirstFocusable(p2) --[[ line: 31 ]]
+		local function updateFirstFocusable(p2)
 			-- upvalues: var3 (write), var5 (write), getFirstFocusableDescendantModule (copy), updateFirstFocusable (ref), var2 (copy)
 			if var3 then
 				var3:Disconnect()
@@ -27,11 +27,11 @@ return function(p1) --[[ line: 23 | named "useFirstFocusableDescendantRef" ]]
 			local var7 = getFirstFocusableDescendantModule(p2)
 			
 			if var7 then
-				var3 = var7:GetPropertyChangedSignal("Selectable"):Connect(function() --[[ line: 38 ]]
+				var3 = var7:GetPropertyChangedSignal("Selectable"):Connect(function()
 					-- upvalues: updateFirstFocusable (copy), p2 (ref)
 					updateFirstFocusable(p2)
 				end)
-				var5 = var7.AncestryChanged:Connect(function() --[[ line: 42 ]]
+				var5 = var7.AncestryChanged:Connect(function()
 					-- upvalues: updateFirstFocusable (copy), p2 (ref)
 					updateFirstFocusable(p2)
 				end)
@@ -41,14 +41,14 @@ return function(p1) --[[ line: 23 | named "useFirstFocusableDescendantRef" ]]
 		
 		if p1 then
 			updateFirstFocusable(p1)
-			descendantAddedConnection = p1.DescendantAdded:Connect(function() --[[ line: 51 ]]
+			descendantAddedConnection = p1.DescendantAdded:Connect(function()
 				-- upvalues: updateFirstFocusable (ref), p1 (copy)
 				updateFirstFocusable(p1)
 			end)
 		else
 			var2.current = nil
 		end
-		return function() --[[ line: 58 ]]
+		return function()
 			-- upvalues: var3 (write), descendantAddedConnection (write), var5 (write)
 			if var3 then
 				var3:Disconnect()

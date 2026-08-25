@@ -3,12 +3,12 @@ local promiseModule = require(parent.Promise)
 local purchaseWarningModule = require(parent.Enums.PurchaseWarning)
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 
-local function getABTestGroup() --[[ line: 13 ]]
+local function getABTestGroup()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(false)
 end
 
-local function getProductInfo(_, _) --[[ line: 17 ]]
+local function getProductInfo(_, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		AssetId = 1,
@@ -34,12 +34,12 @@ local function getProductInfo(_, _) --[[ line: 17 ]]
 	})
 end
 
-local function getPlayerOwns(_, _, _) --[[ line: 42 ]]
+local function getPlayerOwns(_, _, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(false)
 end
 
-local function performPurchase(_, _, _, _) --[[ line: 46 ]]
+local function performPurchase(_, _, _, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		success = true,
@@ -48,22 +48,22 @@ local function performPurchase(_, _, _, _) --[[ line: 46 ]]
 	})
 end
 
-local function loadAssetForEquip(_) --[[ line: 54 ]]
+local function loadAssetForEquip(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(Instance.new("Tool"))
 end
 
-local function getAccountInfo() --[[ line: 58 ]]
+local function getAccountInfo()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ isPremium = false })
 end
 
-local function getBalanceInfo() --[[ line: 64 ]]
+local function getBalanceInfo()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ robux = 2147483647 })
 end
 
-local function getBundleDetails(_) --[[ line: 70 ]]
+local function getBundleDetails(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		id = 1,
@@ -77,12 +77,12 @@ local function getBundleDetails(_) --[[ line: 70 ]]
 	})
 end
 
-local function getProductPurchasableDetails(_) --[[ line: 95 ]]
+local function getProductPurchasableDetails(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ purchasable = false, reason = "mock-reason", price = 100 })
 end
 
-local function getCatalogItemDetails(_, _) --[[ line: 103 ]]
+local function getCatalogItemDetails(_, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		bundleType = 1,
@@ -169,12 +169,12 @@ local function getCatalogItemDetails(_, _) --[[ line: 103 ]]
 	})
 end
 
-local function getResellers(_, _) --[[ line: 189 ]]
+local function getResellers(_, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ nextPageCursor = nil, data = {} })
 end
 
-local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _) --[[ line: 196 ]]
+local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		roblox_product_id = 50,
@@ -184,32 +184,32 @@ local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _) --[[ 
 	})
 end
 
-local function postPremiumImpression() --[[ line: 212 ]]
+local function postPremiumImpression()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function getPremiumUpsellPrecheck() --[[ line: 216 ]]
+local function getPremiumUpsellPrecheck()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(true)
 end
 
-local function getPurchaseWarning(_) --[[ line: 220 ]]
+local function getPurchaseWarning(_)
 	-- upvalues: promiseModule (ref), purchaseWarningModule (ref)
 	return promiseModule.resolve({ action = purchaseWarningModule.NoAction })
 end
 
-local function postPurchaseWarningAcknowledge() --[[ line: 226 ]]
+local function postPurchaseWarningAcknowledge()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function checkUserPurchaseSettings() --[[ line: 230 ]]
+local function checkUserPurchaseSettings()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ isEligible = false, failureReason = "PurchaseNotEnabled" })
 end
 
-local function getUnifiedPurchaseFlowUserEligibility() --[[ line: 237 ]]
+local function getUnifiedPurchaseFlowUserEligibility()
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		isUserEligibleForUnifiedPurchaseFlow = true,
@@ -217,7 +217,7 @@ local function getUnifiedPurchaseFlowUserEligibility() --[[ line: 237 ]]
 	})
 end
 
-local function getSubscriptionProductInfo(_) --[[ line: 244 ]]
+local function getSubscriptionProductInfo(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		Name = "Mock Subscription",
@@ -232,7 +232,7 @@ local function getSubscriptionProductInfo(_) --[[ line: 244 ]]
 	})
 end
 
-local function GetLookDetailsV2ProductInfo(_) --[[ line: 258 ]]
+local function GetLookDetailsV2ProductInfo(_)
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		look = {
@@ -244,13 +244,13 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 275 ]]
+function t.new(p0, p1)
 	-- upvalues: promiseModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), getCatalogItemDetails (ref), getResellers (ref), getRobuxUpsellProductWithUniverseItemInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getUnifiedPurchaseFlowUserEligibility (ref), getSubscriptionProductInfo (ref), GetLookDetailsV2ProductInfo (ref)
 	local t
 	local _ = nil
 	
 	if p1 or p0 then
-		local var25 = function() --[[ line: 279 ]]
+		local var25 = function()
 			-- upvalues: p0 (ref), promiseModule (copy), p1 (ref)
 			return if p0 then promiseModule.resolve(p0) else promiseModule.reject(p1)
 		end
@@ -301,7 +301,7 @@ function t.new(p0, p1) --[[ line: 275 ]]
 		}
 	end
 	setmetatable(t, {
-		__tostring = function() --[[ line: 333 ]]
+		__tostring = function()
 			return "MockService(Network)"
 		end
 	})

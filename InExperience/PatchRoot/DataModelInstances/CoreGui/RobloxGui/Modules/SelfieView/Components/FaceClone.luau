@@ -58,7 +58,7 @@ end
 local localPlayer = playersService.LocalPlayer
 local var39 = false
 
-function setCloneDirty(value) --[[ line: 93 ]]
+function setCloneDirty(value)
 	-- upvalues: var12 (write)
 	if value then
 		var12 = 0.35
@@ -68,7 +68,7 @@ function setCloneDirty(value) --[[ line: 93 ]]
 	var12 = 0
 end
 
-function createCloneAnchor() --[[ line: 101 ]]
+function createCloneAnchor()
 	-- upvalues: var25 (write), var22 (write)
 	if var25 ~= nil then
 		var25:Destroy()
@@ -79,7 +79,7 @@ function createCloneAnchor() --[[ line: 101 ]]
 	var25 = worldModel
 end
 
-local function _(p0) --[[ line: 113 | named "clearObserver" ]]
+local function _(p0)
 	-- upvalues: t_4 (ref)
 	if t_4[p0] then
 		t_4[p0]:Disconnect()
@@ -87,7 +87,7 @@ local function _(p0) --[[ line: 113 | named "clearObserver" ]]
 	end
 end
 
-function clearCloneCharacter() --[[ line: 120 ]]
+function clearCloneCharacter()
 	-- upvalues: var26 (write), var25 (write)
 	if var26 then
 		var26:Destroy()
@@ -107,7 +107,7 @@ function clearCloneCharacter() --[[ line: 120 ]]
 	createCloneAnchor()
 end
 
-local function clearClone() --[[ line: 139 ]]
+local function clearClone()
 	-- upvalues: t_4 (ref), t_2 (write), var7 (write), var17 (write)
 	stopRenderStepped()
 	
@@ -133,7 +133,7 @@ local function clearClone() --[[ line: 139 ]]
 	clearCloneCharacter()
 end
 
-local function syncTrack(p1, p2) --[[ line: 160 ]]
+local function syncTrack(p1, p2)
 	-- upvalues: var7 (write), var6 (write), localPlayer (ref), t (ref)
 	if not p1 or not p2.Animation then return end
 	local var49 = nil
@@ -154,7 +154,7 @@ local function syncTrack(p1, p2) --[[ line: 160 ]]
 	if var49 then
 		var49:Play()
 		var49.Priority = p2.Priority
-		t[p2] = p2.Stopped:Connect(function() --[[ line: 192 ]]
+		t[p2] = p2.Stopped:Connect(function()
 			-- upvalues: var49 (write), t (copy), p2 (ref)
 			var49:Stop(0)
 			
@@ -165,7 +165,7 @@ local function syncTrack(p1, p2) --[[ line: 160 ]]
 	end
 end
 
-local function updateClone(p3) --[[ line: 201 ]]
+local function updateClone(p3)
 	-- upvalues: clearClone (ref), modelUtilsModule (ref), var26 (write), t_1 (ref), var25 (write), var23 (write), cFrameUtility (ref), characterUtility (ref), var24 (write), var11 (write), var28 (write), var29 (write), var30 (write), var17 (write), animatorAndADFRefactorEngineFeature (ref), selfViewNewPoseSynchronization (ref), var6 (write), syncTrack (ref), t_4 (ref)
 	clearClone()
 	
@@ -274,7 +274,7 @@ local function updateClone(p3) --[[ line: 201 ]]
 			for i, v in ipairs(animator:GetPlayingAnimationTracksCoreScript()) do
 				syncTrack(var17, v)
 			end
-			t_4.AnimationPlayedCoreScript = animator.AnimationPlayedCoreScript:Connect(function(p4) --[[ line: 389 ]]
+			t_4.AnimationPlayedCoreScript = animator.AnimationPlayedCoreScript:Connect(function(p4)
 				-- upvalues: syncTrack (copy), var17 (copy)
 				syncTrack(var17, p4)
 			end)
@@ -285,22 +285,22 @@ local function updateClone(p3) --[[ line: 201 ]]
 	end
 end
 
-local _ = function(p5, p6) --[[ line: 405 | named "hasProperty" ]]
+local _ = function(p5, p6)
 	local _ = p5[p6]
 end
 
-function updateCachedHeadColor(p7) --[[ line: 412 ]]
+function updateCachedHeadColor(p7)
 	-- upvalues: var20 (write), var21 (write)
 	if p7 == nil then return end
 	assert(p7 ~= nil)
 	
-	if pcall(function() --[[ line: 418 ]]
+	if pcall(function()
 		-- upvalues: p7 (ref)
 		local _ = p7.Color
 	end) then
 		var20 = p7.Color
 		
-		if pcall(function() --[[ line: 424 ]]
+		if pcall(function()
 			-- upvalues: p7 (ref)
 			local _ = p7.Size
 		end) then
@@ -309,11 +309,11 @@ function updateCachedHeadColor(p7) --[[ line: 412 ]]
 	end
 end
 
-local _ = function(p8) --[[ line: 435 | named "addHumanoidStateChangedObserver" ]]
+local _ = function(p8)
 	-- upvalues: t_4 (ref)
 	if not p8 then return end
 	if not t_4.HumanoidStateChanged then
-		t_4.HumanoidStateChanged = p8.StateChanged:Connect(function(p9, p10) --[[ line: 440 ]]
+		t_4.HumanoidStateChanged = p8.StateChanged:Connect(function(p9, p10)
 			if p9 == Enum.HumanoidStateType.PlatformStanding and p10 == Enum.HumanoidStateType.Running then
 				setCloneDirty(true)
 			end
@@ -324,16 +324,16 @@ local _ = function(p8) --[[ line: 435 | named "addHumanoidStateChangedObserver" 
 	end
 end
 
-local _ = function(p11) --[[ line: 453 | named "addFaceControlsObserver" ]]
+local _ = function(p11)
 	-- upvalues: t_4 (ref)
 	if not t_4.FaceControlsChanged then
-		t_4.FaceControlsChanged = p11.InternalFacsOverrideChanged:Connect(function() --[[ line: 455 ]]
+		t_4.FaceControlsChanged = p11.InternalFacsOverrideChanged:Connect(function()
 			setCloneDirty(true)
 		end)
 	end
 end
 
-local function characterAdded(p12) --[[ line: 461 ]]
+local function characterAdded(p12)
 	-- upvalues: var22 (write), var31 (write), var27 (write), modelUtilsModule (ref), t_4 (ref), t_5 (ref), var34 (write)
 	if var22 == nil or var31 == nil then return end
 	if not p12 then return end
@@ -363,7 +363,7 @@ local function characterAdded(p12) --[[ line: 461 ]]
 		humanoid = humanoid
 		
 		if humanoid and not t_4[t_5.HumanoidStateChanged] then
-			t_4[t_5.HumanoidStateChanged] = humanoid.StateChanged:Connect(function(p13, p14) --[[ line: 440 ]]
+			t_4[t_5.HumanoidStateChanged] = humanoid.StateChanged:Connect(function(p13, p14)
 				if p13 == Enum.HumanoidStateType.PlatformStanding and p14 == Enum.HumanoidStateType.Running then
 					setCloneDirty(true)
 				end
@@ -376,11 +376,11 @@ local function characterAdded(p12) --[[ line: 461 ]]
 	local faceControls = p12:FindFirstChildWhichIsA("FaceControls", true)
 	
 	if faceControls and not t_4[t_5.FaceControlsChanged] then
-		t_4[t_5.FaceControlsChanged] = faceControls.InternalFacsOverrideChanged:Connect(function() --[[ line: 455 ]]
+		t_4[t_5.FaceControlsChanged] = faceControls.InternalFacsOverrideChanged:Connect(function()
 			setCloneDirty(true)
 		end)
 	end
-	t_4.DescendantAdded = p12.DescendantAdded:Connect(function(p15) --[[ line: 491 ]]
+	t_4.DescendantAdded = p12.DescendantAdded:Connect(function(p15)
 		-- upvalues: var22 (copy), var31 (copy), var27 (copy), modelUtilsModule (copy), p12 (ref), t_4 (copy), t_5 (copy)
 		if var22 == nil or var31 == nil then return end
 		if p15.Name == "Head" then
@@ -388,7 +388,7 @@ local function characterAdded(p12) --[[ line: 461 ]]
 			updateCachedHeadColor(var27)
 		end
 		if p15:IsA("Humanoid") and p15 and not t_4[t_5.HumanoidStateChanged] then
-			t_4[t_5.HumanoidStateChanged] = p15.StateChanged:Connect(function(p16, p17) --[[ line: 440 ]]
+			t_4[t_5.HumanoidStateChanged] = p15.StateChanged:Connect(function(p16, p17)
 				if p16 == Enum.HumanoidStateType.PlatformStanding and p17 == Enum.HumanoidStateType.Running then
 					setCloneDirty(true)
 				end
@@ -398,7 +398,7 @@ local function characterAdded(p12) --[[ line: 461 ]]
 			end)
 		end
 		if p15:IsA("FaceControls") and not t_4[t_5.FaceControlsChanged] then
-			t_4[t_5.FaceControlsChanged] = p15.InternalFacsOverrideChanged:Connect(function() --[[ line: 455 ]]
+			t_4[t_5.FaceControlsChanged] = p15.InternalFacsOverrideChanged:Connect(function()
 				setCloneDirty(true)
 			end)
 		end
@@ -406,7 +406,7 @@ local function characterAdded(p12) --[[ line: 461 ]]
 			setCloneDirty(true)
 		end
 	end)
-	t_4.DescendantRemoving = p12.DescendantRemoving:Connect(function(p18) --[[ line: 514 ]]
+	t_4.DescendantRemoving = p12.DescendantRemoving:Connect(function(p18)
 		-- upvalues: var22 (copy), var31 (copy), modelUtilsModule (copy)
 		if var22 == nil or var31 == nil then return end
 		if p18 and (p18:IsA("MeshPart") or p18:IsA("Accessory")) then
@@ -420,7 +420,7 @@ local function characterAdded(p12) --[[ line: 461 ]]
 	var34 = true
 end
 
-local function createViewport() --[[ line: 536 ]]
+local function createViewport()
 	-- upvalues: var22 (write), var31 (write), var23 (write)
 	if var22 then
 		var22:Destroy()
@@ -448,7 +448,7 @@ local function createViewport() --[[ line: 536 ]]
 	var23.Parent = var22
 end
 
-function ReInit(p19) --[[ line: 570 ]]
+function ReInit(p19)
 	-- upvalues: getFFlagSelfViewVisibilityFix (ref), var33 (write), var39 (write), var27 (write), modelUtilsModule (ref), t_4 (ref), clearClone (ref), createViewport (ref)
 	assert(p19.Character ~= nil)
 	
@@ -475,7 +475,7 @@ function ReInit(p19) --[[ line: 570 ]]
 	startRenderStepped(p19)
 end
 
-local function onCharacterAdded(p20) --[[ line: 592 ]]
+local function onCharacterAdded(p20)
 	-- upvalues: var14 (write), var34 (write), characterAdded (ref), localPlayer (ref), t_4 (ref), t_5 (ref)
 	if var14 then
 		var14:Disconnect()
@@ -497,7 +497,7 @@ local function onCharacterAdded(p20) --[[ line: 592 ]]
 		
 		if not humanoid then return end
 		if not t_4[t_5.HumanoidStateChanged] then
-			t_4[t_5.HumanoidStateChanged] = humanoid.StateChanged:Connect(function(p21, p22) --[[ line: 440 ]]
+			t_4[t_5.HumanoidStateChanged] = humanoid.StateChanged:Connect(function(p21, p22)
 				if p21 == Enum.HumanoidStateType.PlatformStanding and p22 == Enum.HumanoidStateType.Running then
 					setCloneDirty(true)
 				end
@@ -509,7 +509,7 @@ local function onCharacterAdded(p20) --[[ line: 592 ]]
 	end
 end
 
-local _ = function(p23) --[[ line: 610 | named "FindInParents" ]]
+local _ = function(p23)
 	-- upvalues: var31 (write)
 	if not p23 then
 		return nil
@@ -522,7 +522,7 @@ local _ = function(p23) --[[ line: 610 | named "FindInParents" ]]
 	return nil
 end
 
-function clearViewportFrame() --[[ line: 625 ]]
+function clearViewportFrame()
 	-- upvalues: var22 (write), var31 (write)
 	if var22 then
 		var22:Destroy()
@@ -531,7 +531,7 @@ function clearViewportFrame() --[[ line: 625 ]]
 	stopRenderStepped()
 end
 
-local function onOuterContainerVisibilityChanged() --[[ line: 633 ]]
+local function onOuterContainerVisibilityChanged()
 	-- upvalues: var33 (write), var34 (write), var39 (write)
 	if var33 then
 		if var33.Visible then
@@ -547,7 +547,7 @@ local function onOuterContainerVisibilityChanged() --[[ line: 633 ]]
 	end
 end
 
-function playerAdded(p24) --[[ line: 652 ]]
+function playerAdded(p24)
 	-- upvalues: localPlayer (ref), var14 (write), t_4 (ref), onCharacterAdded (ref), characterAdded (ref), clearClone (ref)
 	if p24 ~= nil and p24 == localPlayer then
 		if var14 ~= nil then
@@ -567,7 +567,7 @@ function playerAdded(p24) --[[ line: 652 ]]
 			characterAdded(character)
 		end
 		t_4.CharacterAdded = p24.CharacterAdded:Connect(characterAdded)
-		t_4.CharacterRemoving = p24.CharacterRemoving:Connect(function() --[[ line: 671 ]]
+		t_4.CharacterRemoving = p24.CharacterRemoving:Connect(function()
 			-- upvalues: t_4 (copy), clearClone (copy)
 			if t_4.DescendantAdded then
 				t_4.DescendantAdded:Disconnect()
@@ -595,7 +595,7 @@ function playerAdded(p24) --[[ line: 652 ]]
 	end
 end
 
-function stopRenderStepped() --[[ line: 682 ]]
+function stopRenderStepped()
 	-- upvalues: var13 (write)
 	if var13 then
 		var13:Disconnect()
@@ -603,9 +603,9 @@ function stopRenderStepped() --[[ line: 682 ]]
 	end
 end
 
-function updateClonePartsColor(p25) --[[ line: 689 ]]
+function updateClonePartsColor(p25)
 	-- upvalues: var27 (write), var20 (write), localPlayer (ref), var26 (write)
-	if pcall(function() --[[ line: 690 ]]
+	if pcall(function()
 		-- upvalues: var27 (copy)
 		local _ = var27.Color
 	end) and var27 and var27.Color ~= var20 then
@@ -630,10 +630,10 @@ function updateClonePartsColor(p25) --[[ line: 689 ]]
 	var20 = p25
 end
 
-function startRenderStepped(p26) --[[ line: 722 ]]
+function startRenderStepped(p26)
 	-- upvalues: debugSelfViewPerfBenchmark (ref), runService (ref), var13 (write), getFFlagSelfViewVisibilityFix (ref), var26 (write), var33 (write), var39 (write), var17 (write), localPlayer (ref), var27 (write), modelUtilsModule (ref), t_3 (write), t_2 (write), userInputService (ref), var35 (write), var28 (write), var29 (write), var30 (write), var23 (write), var24 (write), faceAnimatorService (ref), playerViewRemoteEventSupportEngineFeature (ref), var11 (write), var21 (write), var20 (write), var12 (write), updateClone (ref)
 	stopRenderStepped()
-	var13 = (if debugSelfViewPerfBenchmark then runService.Heartbeat else runService.RenderStepped):Connect(function(p27) --[[ line: 729 ]]
+	var13 = (if debugSelfViewPerfBenchmark then runService.Heartbeat else runService.RenderStepped):Connect(function(p27)
 		-- upvalues: debugSelfViewPerfBenchmark (copy), getFFlagSelfViewVisibilityFix (copy), var26 (copy), var33 (copy), var39 (copy), var17 (copy), localPlayer (copy), var27 (copy), modelUtilsModule (copy), t_3 (copy), t_2 (copy), userInputService (copy), var35 (copy), var28 (copy), var29 (copy), var30 (copy), var23 (copy), var24 (copy), faceAnimatorService (copy), playerViewRemoteEventSupportEngineFeature (copy), var11 (copy), var21 (copy), var20 (copy), var12 (copy), updateClone (copy), p26 (ref)
 		if debugSelfViewPerfBenchmark then
 			debug.profilebegin("faceclone")
@@ -801,7 +801,7 @@ function startRenderStepped(p26) --[[ line: 722 ]]
 					var21 = var27.Size
 					setCloneDirty(true)
 				end
-				if pcall(function() --[[ line: 983 ]]
+				if pcall(function()
 					-- upvalues: var27 (copy)
 					local _ = var27.Color
 				end) and var27.Color ~= var20 then
@@ -823,7 +823,7 @@ function startRenderStepped(p26) --[[ line: 722 ]]
 	end)
 end
 
-return function(p28, p29, p30) --[[ line: 1007 | named "Initialize" ]]
+return function(p28, p29, p30)
 	-- upvalues: var31 (write), getFFlagSelfViewVisibilityFix (ref), var32 (write), var33 (write), onOuterContainerVisibilityChanged (ref), createViewport (ref), playersService (ref), localPlayer (ref), t_4 (ref), clearClone (ref)
 	if p29 then
 		var31 = p29
@@ -853,7 +853,7 @@ return function(p28, p29, p30) --[[ line: 1007 | named "Initialize" ]]
 	createViewport()
 	playerAdded(p28)
 	playersService.PlayerAdded:Connect(playerAdded)
-	playersService.PlayerRemoving:Connect(function(p31) --[[ line: 1035 ]]
+	playersService.PlayerRemoving:Connect(function(p31)
 		-- upvalues: localPlayer (copy), t_4 (copy), clearClone (copy)
 		if p31 == localPlayer then
 			if t_4.HumanoidStateChanged then

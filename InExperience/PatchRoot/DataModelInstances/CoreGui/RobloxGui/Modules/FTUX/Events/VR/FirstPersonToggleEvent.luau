@@ -5,7 +5,7 @@ local t = { Name = "FirstPersonToggleEvent" }
 local var3 = false
 local var4 = nil
 
-local function onFirstPersonToggleInput(p0, p1, _) --[[ line: 16 ]]
+local function onFirstPersonToggleInput(p0, p1, _)
 	-- upvalues: var3 (write)
 	if p0 == "FirstPersonToggleAction" and p1 == Enum.UserInputState.Begin then
 		var3 = true
@@ -13,20 +13,20 @@ local function onFirstPersonToggleInput(p0, p1, _) --[[ line: 16 ]]
 	return Enum.ContextActionResult.Pass
 end
 
-function startFirstPersonToggleListener() --[[ line: 26 ]]
+function startFirstPersonToggleListener()
 	-- upvalues: contextActionService (ref), onFirstPersonToggleInput (ref)
 	contextActionService:BindCoreAction("FirstPersonToggleAction", onFirstPersonToggleInput, false, Enum.KeyCode.ButtonR3)
 end
 
-function stopFirstPersonToggleListener() --[[ line: 35 ]]
+function stopFirstPersonToggleListener()
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindAction("FirstPersonToggleAction")
 end
 
-function t.StartEvent(p2) --[[ line: 39 ]]
+function t.StartEvent(p2)
 	-- upvalues: var3 (write), var4 (write), runService (ref)
 	startFirstPersonToggleListener()
-	var4 = runService.RenderStepped:Connect(function(_) --[[ line: 44 | named "onRenderStepped" ]]
+	var4 = runService.RenderStepped:Connect(function(_)
 		-- upvalues: var3 (copy), p2 (ref), var4 (copy)
 		if var3 then
 			stopFirstPersonToggleListener()
@@ -41,7 +41,7 @@ function t.StartEvent(p2) --[[ line: 39 ]]
 	end)
 end
 
-function t.StopEvent() --[[ line: 64 ]]
+function t.StopEvent()
 	-- upvalues: var4 (write)
 	if var4 then
 		var4:Disconnect()

@@ -1,6 +1,6 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 6 | named "parseLegacyError" ]]
+return function(p0)
 	if typeof(p0) ~= "table" or typeof(p0.errors) ~= "table" then
 		return nil
 	end

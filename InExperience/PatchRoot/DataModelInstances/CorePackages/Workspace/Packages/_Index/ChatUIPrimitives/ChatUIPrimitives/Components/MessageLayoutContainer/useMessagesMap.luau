@@ -2,11 +2,11 @@
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 
-return function(p0, p1) --[[ line: 28 | named "useMessagesMap" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), signalsModule (ref)
-	return reactModule.useMemo(function() --[[ line: 32 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: signalsModule (copy), p0 (ref), p1 (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 33 ]]
+		return signalsModule.createComputed(function(p2)
 			-- upvalues: p0 (copy), p1 (copy)
 			local t = {}
 			

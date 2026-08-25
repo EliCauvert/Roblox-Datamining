@@ -11,7 +11,7 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-return function(value) --[[ line: 20 | named "SocialTabsHeader" ]]
+return function(value)
 	-- upvalues: useSocialTabsContextModule (ref), useNavigation (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
 	local var4 = useNavigation()
 	
@@ -24,7 +24,7 @@ return function(value) --[[ line: 20 | named "SocialTabsHeader" ]]
 			icon = iconName.ChevronLargeLeft,
 			size = iconSize.Medium,
 			variant = buttonVariant.Utility,
-			onActivated = reactModule.useCallback(function() --[[ line: 24 ]]
+			onActivated = reactModule.useCallback(function()
 				-- upvalues: var4 (ref)
 				var4.goBack()
 			end, { var4 })

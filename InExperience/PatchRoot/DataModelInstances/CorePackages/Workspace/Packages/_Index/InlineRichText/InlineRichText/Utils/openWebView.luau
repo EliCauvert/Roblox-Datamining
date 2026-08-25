@@ -4,11 +4,11 @@ local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
 local getFFlagEnableUnifiedWebViews = require(parent.SharedFlags).GetFFlagEnableUnifiedWebViews
 
-return function(p0) --[[ line: 10 | named "openWebView" ]]
+return function(p0)
 	-- upvalues: getFFlagEnableUnifiedWebViews (ref), webViewService (ref), browserService (ref), httpService (ref)
 	if getFFlagEnableUnifiedWebViews() then
 		local onWindowClosedConnection = nil
-		onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function() --[[ line: 14 ]]
+		onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
 			-- upvalues: webViewService (copy), onWindowClosedConnection (write)
 			webViewService:CloseWindow()
 			

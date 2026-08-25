@@ -12,13 +12,13 @@ local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.ShareProfile] = function(p0) --[[ line: 24 ]]
+	[enumsModule.ProfileActions.ShareProfile] = function(p0)
 		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), profileSharePolicyEnum (ref), default (ref), contexts (ref), setCurrentToastMessage (ref), textKeysModule (ref)
 		return {
 			variant = buttonVariant.Standard,
 			text = p0.localized[enumsModule.ProfileActions.ShareProfile],
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 29 ]]
+				[profileTypes.User] = function()
 					-- upvalues: p0 (ref), eventNamesModule (copy), profileSharePolicyEnum (copy), default (copy), contexts (copy), setCurrentToastMessage (copy), textKeysModule (copy)
 					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonShareProfile, { buttonSurface = p0.buttonSurface })
 					

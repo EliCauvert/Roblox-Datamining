@@ -1,5 +1,5 @@
 ﻿return {
-	Filter = function(p0, p1) --[[ line: 11 ]]
+	Filter = function(p0, p1)
 		local t = {}
 		
 		for i = 1, #p0 do
@@ -11,7 +11,7 @@
 		end
 		return t
 	end,
-	Map = function(p2, p3) --[[ line: 27 ]]
+	Map = function(p2, p3)
 		local t = {}
 		
 		for i = 1, #p2 do
@@ -19,7 +19,7 @@
 		end
 		return t
 	end,
-	MapReverse = function(p4, p5) --[[ line: 40 ]]
+	MapReverse = function(p4, p5)
 		local t = {}
 		
 		for i = #p4, 1, -1 do
@@ -27,7 +27,7 @@
 		end
 		return t
 	end,
-	FilterMap = function(p6, p7) --[[ line: 56 ]]
+	FilterMap = function(p6, p7)
 		local t = {}
 		
 		for i = 1, #p6 do
@@ -39,7 +39,7 @@
 		end
 		return t
 	end,
-	Fold = function(p8, p9, p10) --[[ line: 74 ]]
+	Fold = function(p8, p9, p10)
 		local var6 = p9
 		
 		for i = 1, #p8 do
@@ -47,7 +47,7 @@
 		end
 		return var6
 	end,
-	FoldDictionary = function(p11, p12, p13) --[[ line: 87 ]]
+	FoldDictionary = function(p11, p12, p13)
 		local var7 = p12
 		
 		for i, v in pairs(p11) do
@@ -55,7 +55,7 @@
 		end
 		return var7
 	end,
-	Take = function(p14, p15, p16) --[[ line: 100 ]]
+	Take = function(p14, p15, p16)
 		p16 = p16 or 1
 		local var8 = p15 + (p16 - 1)
 		
@@ -69,7 +69,7 @@
 		end
 		return t
 	end,
-	Find = function(p17, p18) --[[ line: 122 ]]
+	Find = function(p17, p18)
 		for i, v in ipairs(p17) do
 			if v == p18 then
 				return i

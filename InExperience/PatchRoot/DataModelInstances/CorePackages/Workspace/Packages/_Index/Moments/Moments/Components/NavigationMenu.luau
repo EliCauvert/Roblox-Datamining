@@ -16,11 +16,11 @@ local t = {
 	myMoments = "Feature.Moments.Label.FeedMyMoments"
 }
 
-return function(p0) --[[ line: 43 | named "NavigationMenu" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), useToggleState (ref), reactModule (ref), iconButton (ref), threeDotsHorizontal (ref), buttonVariant (ref), inputSize (ref), menu (ref), foundationModule (ref)
 	local var6 = useLocalization(t)
 	local var7 = useToggleState()
-	local var8 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref)
 		if var7.enabled then
 			var7.disable()
@@ -29,12 +29,12 @@ return function(p0) --[[ line: 43 | named "NavigationMenu" ]]
 		end
 		var7.enable()
 	end, { var7.enabled, var7.enable, var7.disable })
-	local var9 = reactModule.useCallback(function() --[[ line: 58 ]]
+	local var9 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		var7.disable()
 		p0.onNavigateToTrending()
 	end, { var7.disable, p0.onNavigateToTrending })
-	local var10 = reactModule.useCallback(function() --[[ line: 63 ]]
+	local var10 = reactModule.useCallback(function()
 		-- upvalues: var7 (ref), p0 (ref)
 		var7.disable()
 		p0.onNavigateToMyMoments()
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 43 | named "NavigationMenu" ]]
 	return reactModule.createElement(menu, {
 		align = foundationModule.Enums.PopoverAlign.End,
 		isOpen = var7.enabled,
-		items = reactModule.useMemo(function() --[[ line: 68 ]]
+		items = reactModule.useMemo(function()
 			-- upvalues: var6 (ref), var9 (ref), var10 (ref)
 			return {
 				{

@@ -12,7 +12,7 @@ blurredModalPortal.validateProps = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-function blurredModalPortal.render(p0) --[[ line: 20 ]]
+function blurredModalPortal.render(p0)
 	-- upvalues: roact (ref), coreGuiService (ref), constantsModule (ref)
 	return roact.createElement(roact.Portal, { target = coreGuiService }, {
 		InGameMenuModalBlur = roact.createElement("ScreenGui", {
@@ -24,7 +24,7 @@ function blurredModalPortal.render(p0) --[[ line: 20 ]]
 	})
 end
 
-function blurredModalPortal.didUpdate(p1, p2) --[[ line: 34 ]]
+function blurredModalPortal.didUpdate(p1, p2)
 	-- upvalues: VRService (ref), runService (ref)
 	if VRService.VREnabled then return end
 	local enabled = p1.props.Enabled

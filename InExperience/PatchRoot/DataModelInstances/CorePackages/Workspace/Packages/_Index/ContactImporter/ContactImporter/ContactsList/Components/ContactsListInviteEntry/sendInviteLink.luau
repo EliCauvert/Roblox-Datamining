@@ -11,23 +11,23 @@ local promise = dependenciesModule.Promise
 local useAnalyticsModule = require(contactImporter.Analytics.useAnalytics)
 local eventNamesModule = require(contactImporter.Analytics.Enums.EventNames)
 
-local _ = function(p0) --[[ line: 20 ]]
+local _ = function(p0)
 	-- upvalues: promise (ref)
-	return function(p1) --[[ line: 21 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), promise (copy)
-		return p0.smsProtocol:supportsSMS():andThen(function(p2) --[[ line: 22 ]]
+		return p0.smsProtocol:supportsSMS():andThen(function(p2)
 			-- upvalues: p0 (copy), p1 (ref), promise (copy)
 			return if p2 then p0.smsProtocol:sendSMS({ address = p0.address, message = p1 }) else promise.reject()
 		end)
 	end
 end
 
-return function(p3) --[[ line: 32 ]]
+return function(p3)
 	-- upvalues: useDispatch (ref), react (ref), useAnalyticsModule (ref), eventNamesModule (ref), useLocalization (ref), textKeysModule (ref), shareLinksNetworking (ref), shareLinksRodux (ref), promise (ref), roduxContacts (ref)
 	local var5 = useDispatch()
 	local var6, var7 = react.useState(false)
 	
-	local var8 = function() --[[ line: 35 ]]
+	local var8 = function()
 		-- upvalues: var7 (ref)
 		var7(false)
 	end
@@ -35,7 +35,7 @@ return function(p3) --[[ line: 32 ]]
 	local var9 = useAnalyticsModule()
 	local var10 = nil
 	
-	local var11 = function() --[[ line: 41 ]]
+	local var11 = function()
 		-- upvalues: var9 (ref), eventNamesModule (copy), var10 (write), var7 (ref)
 		var9.fireAnalyticsEvent(eventNamesModule.InviteContact, { offNetworkFriendRequestLinkId = var10 })
 		var7(false)
@@ -43,9 +43,9 @@ return function(p3) --[[ line: 32 ]]
 	
 	local var12 = useLocalization({ rootMessage = textKeysModule.SMS_DEFAULT_MESSAGE })
 	
-	local _ = function(p4) --[[ line: 51 ]]
+	local _ = function(p4)
 		-- upvalues: var10 (write)
-		return function(p5) --[[ line: 52 ]]
+		return function(p5)
 			-- upvalues: var10 (copy), p4 (ref)
 			var10 = p5.responseBody.linkId
 			
@@ -54,20 +54,20 @@ return function(p3) --[[ line: 32 ]]
 	end
 	
 	return {
-		sendInvite = function() --[[ line: 61 ]]
+		sendInvite = function()
 			-- upvalues: var7 (ref), var5 (ref), shareLinksNetworking (copy), shareLinksRodux (copy), var12 (ref), var10 (write), p3 (ref), promise (copy), roduxContacts (copy), var11 (ref), var8 (ref)
 			var7(true)
 			
 			return var5(shareLinksNetworking.GenerateLink.API({
 				linkType = shareLinksRodux.Enums.LinkType.FriendInvite.rawValue()
-			})):andThen(function(p8) --[[ line: 52 ]]
+			})):andThen(function(p8)
 				-- upvalues: var10 (copy), var12 (ref)
 				var10 = p8.responseBody.linkId
 				
 				return p8.responseBody.shortUrl .. "\n\n" .. var12.rootMessage
-			end):andThen(function(p6) --[[ line: 21 ]]
+			end):andThen(function(p6)
 				-- upvalues: p3 (ref), promise (copy)
-				return p3.smsProtocol:supportsSMS():andThen(function(p7) --[[ line: 22 ]]
+				return p3.smsProtocol:supportsSMS():andThen(function(p7)
 					-- upvalues: p3 (copy), p6 (ref), promise (copy)
 					return if p7 then p3.smsProtocol:sendSMS({ address = p3.address, message = p6 }) else promise.reject()
 				end)

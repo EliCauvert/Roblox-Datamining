@@ -3,7 +3,7 @@ local serviceModule = require(chromeShared.Service)
 local _ = require(game:GetService("CorePackages").Workspace.Packages.Chrome)
 local useObservableValueModule = require(chromeShared.Hooks.useObservableValue)
 
-return function() --[[ line: 10 ]]
+return function()
 	-- upvalues: useObservableValueModule (ref), serviceModule (ref)
 	return useObservableValueModule(serviceModule:menuList()) or {}
 end

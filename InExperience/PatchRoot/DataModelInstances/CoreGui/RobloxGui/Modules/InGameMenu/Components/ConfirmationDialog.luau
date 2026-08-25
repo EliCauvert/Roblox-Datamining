@@ -38,11 +38,11 @@ confirmationDialog.defaultProps = {
 	blurBackground = false
 }
 
-function confirmationDialog.init(p0) --[[ line: 59 ]]
+function confirmationDialog.init(p0)
 	-- upvalues: roact (ref)
 	p0.state = { isRooted = false }
 	
-	function p0.onAncestryChanged(p1) --[[ line: 64 ]]
+	function p0.onAncestryChanged(p1)
 		-- upvalues: p0 (ref)
 		if p1:IsDescendantOf(game) then
 			p0:setState({ isRooted = true })
@@ -53,11 +53,11 @@ function confirmationDialog.init(p0) --[[ line: 59 ]]
 	p0.buttonContainerRef = roact.createRef()
 end
 
-function confirmationDialog.render(p2) --[[ line: 75 ]]
+function confirmationDialog.render(p2)
 	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), roact (ref), coreGuiService (ref), constantsModule (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), button (ref), buttonType (ref), focusHandlerModule (ref), guiService (ref)
 	local props = p2.props
 	
-	return withFoundationOrUIBloxStyle(function(p3) --[[ line: 78 ]]
+	return withFoundationOrUIBloxStyle(function(p3)
 		return {
 			Theme = {
 				Overlay = {
@@ -81,7 +81,7 @@ function confirmationDialog.render(p2) --[[ line: 75 ]]
 				}
 			}
 		}
-	end, function(p4) --[[ line: 90 ]]
+	end, function(p4)
 		-- upvalues: props (ref), textService (copy), roact (copy), coreGuiService (copy), constantsModule (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), p2 (ref), button (copy), buttonType (copy), focusHandlerModule (copy), guiService (copy)
 		local var12 = p4.Font.Body.RelativeSize * p4.Font.BaseSize
 		local var13 = math.max(textService:GetTextSize(props.bodyText, var12, p4.Font.Body.Font, Vector2.new(295, 1e999)).Y, var12 * 2) + 20 + 20
@@ -182,7 +182,7 @@ function confirmationDialog.render(p2) --[[ line: 75 ]]
 			}),
 			FocusHandler = roact.createElement(focusHandlerModule, {
 				isFocused = p2.state.isRooted and (p2.props.visible and p2.props.inputType == constantsModule.InputType.Gamepad),
-				didFocus = function() --[[ line: 210 ]]
+				didFocus = function()
 					-- upvalues: guiService (copy), p2 (copy)
 					guiService:RemoveSelectionGroup("InGameMenuModalButtonsSelectionParent")
 					guiService:AddSelectionParent("InGameMenuModalButtonsSelectionParent", p2.buttonContainerRef:getValue())
@@ -193,14 +193,14 @@ function confirmationDialog.render(p2) --[[ line: 75 ]]
 	end)
 end
 
-function confirmationDialog.updateBlur(p5) --[[ line: 221 ]]
+function confirmationDialog.updateBlur(p5)
 	-- upvalues: runService (ref)
 	runService:SetRobloxGuiFocused(p5.props.blurBackground and p5.props.visible)
 end
 
-function confirmationDialog.bindActions(p6) --[[ line: 227 ]]
+function confirmationDialog.bindActions(p6)
 	-- upvalues: contextActionService (ref)
-	local function confirmFunc(_, p7, _) --[[ line: 228 ]]
+	local function confirmFunc(_, p7, _)
 		-- upvalues: p6 (ref)
 		if p7 == Enum.UserInputState.Begin then
 			p6.props.onConfirm()
@@ -210,7 +210,7 @@ function confirmationDialog.bindActions(p6) --[[ line: 227 ]]
 	if p6.props.bindReturnToConfirm then
 		contextActionService:BindCoreAction("InGameMenuModalConfirm", confirmFunc, false, Enum.KeyCode.Return)
 	end
-	contextActionService:BindCoreAction("InGameMenuModalCancel", function(_, p8, _) --[[ line: 238 | named "cancelFunc" ]]
+	contextActionService:BindCoreAction("InGameMenuModalCancel", function(_, p8, _)
 		-- upvalues: p6 (ref)
 		if p8 == Enum.UserInputState.Begin then
 			p6.props.onCancel()
@@ -218,13 +218,13 @@ function confirmationDialog.bindActions(p6) --[[ line: 227 ]]
 	end, false, Enum.KeyCode.Escape)
 end
 
-function confirmationDialog.unbindActions(_) --[[ line: 247 ]]
+function confirmationDialog.unbindActions(_)
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("InGameMenuModalConfirm")
 	contextActionService:UnbindCoreAction("InGameMenuModalCancel")
 end
 
-function confirmationDialog.didMount(p9) --[[ line: 252 ]]
+function confirmationDialog.didMount(p9)
 	p9:updateBlur()
 	
 	if p9.props.visible then
@@ -232,7 +232,7 @@ function confirmationDialog.didMount(p9) --[[ line: 252 ]]
 	end
 end
 
-function confirmationDialog.didUpdate(p10) --[[ line: 260 ]]
+function confirmationDialog.didUpdate(p10)
 	p10:updateBlur()
 	
 	if p10.props.visible then
@@ -243,7 +243,7 @@ function confirmationDialog.didUpdate(p10) --[[ line: 260 ]]
 	p10:unbindActions()
 end
 
-function confirmationDialog.willUnmount(p11) --[[ line: 270 ]]
+function confirmationDialog.willUnmount(p11)
 	-- upvalues: runService (ref)
 	if p11.props.blurBackground then
 		runService:SetRobloxGuiFocused(false)

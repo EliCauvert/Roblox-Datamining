@@ -6,7 +6,7 @@ local paddingModule = require(foundation.Components.Padding)
 local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
 local _ = require(foundation.Components.Types)
 
-return function(p0) --[[ line: 16 | named "GuiObjectChildren" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), aspectRatioModule (ref), cornerRadiusModule (ref), getTestIdTagModule (ref), paddingModule (ref)
 	local testId = p0.testId
 	

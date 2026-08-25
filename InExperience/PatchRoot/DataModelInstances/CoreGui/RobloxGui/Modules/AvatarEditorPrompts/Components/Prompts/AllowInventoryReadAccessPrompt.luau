@@ -17,7 +17,7 @@ allowInventoryReadAccessPrompt.validateProps = tModule.strictInterface({
 	setAvatarReadAccessDenied = tModule.callback
 })
 
-function allowInventoryReadAccessPrompt.render(p0) --[[ line: 31 ]]
+function allowInventoryReadAccessPrompt.render(p0)
 	-- upvalues: roactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref)
 	return roactModule.createElement(interactiveAlert, {
 		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptTitle"),
@@ -46,16 +46,16 @@ function allowInventoryReadAccessPrompt.render(p0) --[[ line: 31 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p1) --[[ line: 65 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p1)
 	return { gameName = p1.gameName, screenSize = p1.screenSize }
-end, function(p2) --[[ line: 72 | named "mapDispatchToProps" ]]
+end, function(p2)
 	-- upvalues: setAllowInventoryReadAccessModule (ref)
 	return {
-		setAvatarReadAccessDenied = function() --[[ line: 74 ]]
+		setAvatarReadAccessDenied = function()
 			-- upvalues: p2 (ref), setAllowInventoryReadAccessModule (copy)
 			return p2(setAllowInventoryReadAccessModule(false))
 		end,
-		setAvatarReadAccessAllowed = function() --[[ line: 78 ]]
+		setAvatarReadAccessAllowed = function()
 			-- upvalues: p2 (ref), setAllowInventoryReadAccessModule (copy)
 			return p2(setAllowInventoryReadAccessModule(true))
 		end

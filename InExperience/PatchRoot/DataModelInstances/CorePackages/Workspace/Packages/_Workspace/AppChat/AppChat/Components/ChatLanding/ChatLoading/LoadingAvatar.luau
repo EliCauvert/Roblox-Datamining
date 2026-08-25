@@ -16,11 +16,11 @@ loadingAvatar.defaultProps = {
 	avatarImage = images["component_assets/circle_49_mask"]
 }
 
-function loadingAvatar.render(p0) --[[ line: 25 ]]
+function loadingAvatar.render(p0)
 	-- upvalues: withStyle (ref), roactModule (ref), skeleton (ref), radius (ref), appChatLoadingIndicatorTransparency (ref), imageSetLabel (ref)
 	local var5 = p0.props.cellHeight / 2 - p0.props.avatarSize / 2
 	
-	return withStyle(function(p1) --[[ line: 28 ]]
+	return withStyle(function(p1)
 		-- upvalues: roactModule (copy), p0 (ref), skeleton (copy), var5 (ref), radius (copy), appChatLoadingIndicatorTransparency (copy), imageSetLabel (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

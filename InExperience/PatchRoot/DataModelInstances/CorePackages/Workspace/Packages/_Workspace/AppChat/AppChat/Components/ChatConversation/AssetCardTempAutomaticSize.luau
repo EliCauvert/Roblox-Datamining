@@ -23,12 +23,12 @@ local t = {
 		placeId = nil,
 		universeId = nil,
 		senderUserId = nil,
-		onDetailsOpened = function() --[[ line: 26 ]] end,
-		openGameDetailsPage = function() --[[ line: 27 ]] end
+		onDetailsOpened = function() end,
+		openGameDetailsPage = function() end
 	}
 }
 
-return function(value) --[[ line: 40 | named "AssetCardTemp" ]]
+return function(value)
 	-- upvalues: cryoModule (ref), t (ref), shareLinkContainerModule (ref), placeIdContainerModule (ref), gameCardContainerModule (ref), useScaledValue (ref), constantsModule (ref), roactModule (ref), chatBubbleContainerAutomaticSizeModule (ref)
 	local var9 = cryoModule.Dictionary.union(t, value)
 	local var10 = cryoModule.Dictionary.union(t.additionalProps, var9.additionalProps)

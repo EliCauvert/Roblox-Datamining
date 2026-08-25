@@ -13,11 +13,11 @@ local t = {
 	position = UDim2.fromScale(0, 0)
 }
 
-return function(p0) --[[ line: 30 | named "Cards" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), cardComponent (ref), altTextCard (ref), foundationModule (ref)
 	local var4 = cryoModule.Dictionary.union(t, p0)
 	local var5 = useTokens()
-	local var6 = reactModule.useCallback(function(p1) --[[ line: 34 ]]
+	local var6 = reactModule.useCallback(function(p1)
 		-- upvalues: cardComponent (copy), var4 (ref), cryoModule (copy), reactModule (copy), altTextCard (copy), foundationModule (copy), var5 (ref)
 		local t = {}
 		

@@ -12,7 +12,7 @@ local robloxGui = game:GetService("CoreGui").RobloxGui
 local var5 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
 local var6 = if var5 then 100 else 70
 
-local function _(p0, p1, p2, p3, p4) --[[ line: 34 | named "createImageLabel" ]]
+local function _(p0, p1, p2, p3, p4)
 	local imageLabel = Instance.new("ImageLabel")
 	imageLabel.Name = p0
 	imageLabel.Size = p1
@@ -24,7 +24,7 @@ local function _(p0, p1, p2, p3, p4) --[[ line: 34 | named "createImageLabel" ]]
 	return imageLabel
 end
 
-local function createTextLabel(p5, p6, p7, p8) --[[ line: 46 ]]
+local function createTextLabel(p5, p6, p7, p8)
 	-- upvalues: var5 (ref)
 	local textLabel = Instance.new("TextLabel")
 	textLabel.Name = p5
@@ -88,7 +88,7 @@ speedBarImage.Parent = speedBarClippingFrame
 createTextLabel("SpeedLabel", Enum.TextXAlignment.Left, "Speed", vehicleHudFrame)
 local var19 = createTextLabel("SpeedText", Enum.TextXAlignment.Right, "0", vehicleHudFrame)
 
-local _ = function() --[[ line: 89 | named "getHumanoid" ]]
+local _ = function()
 	-- upvalues: localPlayer (ref)
 	local character = localPlayer and localPlayer.Character
 	
@@ -101,7 +101,7 @@ local _ = function() --[[ line: 89 | named "getHumanoid" ]]
 	end
 end
 
-speedBG = function() --[[ line: 100 | named "onHeartbeat" ]]
+speedBG = function()
 	-- upvalues: var2 (write), var19 (ref), speedBG (ref), speedBarClippingFrame (ref), var5 (ref)
 	if var2 then
 		local magnitude = var2.Velocity.magnitude
@@ -110,14 +110,14 @@ speedBG = function() --[[ line: 100 | named "onHeartbeat" ]]
 	end
 end
 
-local function onVehicleSeatChanged(p9) --[[ line: 110 ]]
+local function onVehicleSeatChanged(p9)
 	-- upvalues: vehicleHudFrame (ref)
 	if p9 == "HeadsUpDisplay" then
 		vehicleHudFrame.Visible = not vehicleHudFrame.Visible
 	end
 end
 
-local function onSeated(p10, p11) --[[ line: 116 ]]
+local function onSeated(p10, p11)
 	-- upvalues: var2 (write), vehicleHudFrame (ref), var3 (write), runService (ref), speedBG (ref), var4 (write), onVehicleSeatChanged (ref)
 	if p10 then
 		if p11 and p11:IsA("VehicleSeat") then
@@ -146,7 +146,7 @@ end
 local var22 = nil
 local var23 = nil
 
-local _ = function() --[[ line: 143 | named "disconnectSeatedConnection" ]]
+local _ = function()
 	-- upvalues: var22 (write)
 	if var22 then
 		var22:Disconnect()
@@ -154,7 +154,7 @@ local _ = function() --[[ line: 143 | named "disconnectSeatedConnection" ]]
 	end
 end
 
-local _ = function() --[[ line: 150 | named "disconnectChildAddedConnection" ]]
+local _ = function()
 	-- upvalues: var23 (write)
 	if var23 then
 		var23:Disconnect()
@@ -162,7 +162,7 @@ local _ = function() --[[ line: 150 | named "disconnectChildAddedConnection" ]]
 	end
 end
 
-local function characterAdded(p12) --[[ line: 157 ]]
+local function characterAdded(p12)
 	-- upvalues: var22 (write), var23 (write), onSeated (ref)
 	if var22 then
 		var22:Disconnect()
@@ -179,7 +179,7 @@ local function characterAdded(p12) --[[ line: 157 ]]
 		
 		return
 	end
-	var23 = p12.ChildAdded:Connect(function(p13) --[[ line: 167 ]]
+	var23 = p12.ChildAdded:Connect(function(p13)
 		-- upvalues: var22 (copy), var23 (copy), onSeated (copy)
 		if p13:IsA("Humanoid") then
 			if var22 then
@@ -198,7 +198,7 @@ end
 if localPlayer.Character then
 	characterAdded(localPlayer.Character)
 end
-localPlayer.CharacterAdded:connect(function(p14) --[[ line: 178 ]]
+localPlayer.CharacterAdded:connect(function(p14)
 	-- upvalues: var2 (write), vehicleHudFrame (ref), var3 (write), var4 (write), characterAdded (ref)
 	if var2 then
 		vehicleHudFrame.Visible = false

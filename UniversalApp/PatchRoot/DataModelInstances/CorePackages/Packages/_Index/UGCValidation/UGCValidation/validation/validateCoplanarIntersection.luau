@@ -5,9 +5,9 @@ local _ = require(parent.util.Types)
 local pcallDeferredModule = require(parent.util.pcallDeferred)
 local analyticsModule = require(parent.Analytics)
 
-local function getTriangleCount(vectorA, vectorB, p0) --[[ line: 16 ]]
+local function getTriangleCount(vectorA, vectorB, p0)
 	-- upvalues: pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
-	local var5, var6 = pcallDeferredModule(function() --[[ line: 21 ]]
+	local var5, var6 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), vectorA (ref)
 		return UGCValidationService:GetEditableMeshTriCount(vectorA.editableMesh)
 	end, vectorB)
@@ -24,7 +24,7 @@ local function getTriangleCount(vectorA, vectorB, p0) --[[ line: 16 ]]
 	return false, { formattedText }
 end
 
-return function(p1, p2, p3) --[[ line: 44 | named "validateCoplanarIntersection" ]]
+return function(p1, p2, p3)
 	-- upvalues: getTriangleCount (ref), getFIntMaxCoplanarIntersectionsPercentageModule (ref), pcallDeferredModule (ref), UGCValidationService (ref), analyticsModule (ref)
 	local currentTime = tick()
 	local isServer = p3.isServer
@@ -34,7 +34,7 @@ return function(p1, p2, p3) --[[ line: 44 | named "validateCoplanarIntersection"
 		return false, var10
 	end
 	local floored = math.floor(getFIntMaxCoplanarIntersectionsPercentageModule() / 100 * var11)
-	local var13, var14 = pcallDeferredModule(function() --[[ line: 62 ]]
+	local var13, var14 = pcallDeferredModule(function()
 		-- upvalues: UGCValidationService (copy), p1 (ref), floored (ref), p2 (ref)
 		return UGCValidationService:IsEditableMeshNumCoplanarIntersectionsOverLimit(p1.editableMesh, floored, p2, true)
 	end, p3)

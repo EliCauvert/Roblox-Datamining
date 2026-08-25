@@ -34,7 +34,7 @@ local t = {
 local t_1 = {
 	eventName = t.EventName,
 	backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
-	formatCustomFields = function(p0) --[[ line: 77 ]]
+	formatCustomFields = function(p0)
 		-- upvalues: playersService (ref), cryoModule (ref), fFlagUniversalFeatureRestrictionReceivers (ref), t (ref)
 		local eventType = p0.eventType
 		local interventionType = p0.interventionType
@@ -73,12 +73,12 @@ local t_1 = {
 	end
 }
 
-local var5 = function(p1) --[[ line: 140 ]]
+local var5 = function(p1)
 	-- upvalues: loggingProtocolModule (ref)
 	return {
 		counterSuffix = p1,
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		formatCustomFields = function(p2) --[[ line: 144 ]]
+		formatCustomFields = function(p2)
 			return {
 				eventType = p2.eventType,
 				interventionType = p2.interventionType,
@@ -89,7 +89,7 @@ local var5 = function(p1) --[[ line: 140 ]]
 end
 
 return {
-	sendAnalyticsEvent = function(p3, p4) --[[ line: 217 ]]
+	sendAnalyticsEvent = function(p3, p4)
 		-- upvalues: default (ref)
 		local loggingTypes = p3.loggingTypes
 		

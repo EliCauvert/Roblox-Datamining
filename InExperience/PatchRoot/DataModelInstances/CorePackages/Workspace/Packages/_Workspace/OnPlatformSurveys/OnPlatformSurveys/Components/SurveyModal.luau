@@ -11,7 +11,7 @@ local view = foundationModule.View
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useSurveyFocusRefsModule = require(onPlatformSurveys.Hooks.useSurveyFocusRefs)
 
-return reactModule.memo(function(p0) --[[ line: 29 | named "SurveyModal" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useScaledValue (ref), useSurveyFocusRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), sheet (ref), dialogSize (ref), text (ref), view (ref)
 	local var5 = p0.isOpen ~= false
 	local onClose = p0.onClose
@@ -25,7 +25,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "SurveyModal" ]]
 		onClose = onClose,
 		size = dialogSize.Large,
 		centerSheetHeight = var10,
-		snapPoints = reactModule.useMemo(function() --[[ line: 47 ]]
+		snapPoints = reactModule.useMemo(function()
 			-- upvalues: var10 (ref)
 			return { var10 }
 		end, { var10 }),
@@ -40,7 +40,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "SurveyModal" ]]
 		Content = reactModule.createElement(sheet.Content, {}, {
 			Body = reactModule.createElement(view, {
 				tag = "col size-full-0 auto-y padding-bottom-small",
-				onAbsoluteSizeChanged = reactModule.useCallback(function(p1) --[[ line: 35 ]]
+				onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
 					-- upvalues: var7 (ref)
 					var7(p1.AbsoluteSize.Y)
 				end, {})
@@ -49,7 +49,7 @@ return reactModule.memo(function(p0) --[[ line: 29 | named "SurveyModal" ]]
 		Actions = p0.footer and reactModule.createElement(sheet.Actions, {}, {
 			Footer = reactModule.createElement(view, {
 				tag = "row size-full-0 auto-y",
-				onAbsoluteSizeChanged = reactModule.useCallback(function(p2) --[[ line: 38 ]]
+				onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
 					-- upvalues: var9 (ref)
 					var9(p2.AbsoluteSize.Y)
 				end, {})

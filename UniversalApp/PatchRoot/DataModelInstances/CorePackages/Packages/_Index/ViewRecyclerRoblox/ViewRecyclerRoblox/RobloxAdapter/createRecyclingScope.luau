@@ -1,14 +1,14 @@
 ﻿local viewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	create = function(p0) --[[ line: 24 ]]
+	create = function(p0)
 		-- upvalues: viewRecyclerModule (ref)
 		local itemViewAdapter = p0.itemViewAdapter
 		local var1 = 0
 		local t = {}
 		local t_1 = {}
 		
-		local function _(p1) --[[ line: 32 | named "getInstance" ]]
+		local function _(p1)
 			-- upvalues: p0 (ref)
 			local var7 = if p0.getInstance ~= nil then p1 else p0.getInstance(p1)
 			assert(typeof(var7) == "Instance" and var7:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
@@ -16,7 +16,7 @@ return {
 			return var7
 		end
 		
-		local function flushLifecycle() --[[ line: 41 ]]
+		local function flushLifecycle()
 			-- upvalues: t_1 (ref), itemViewAdapter (ref), p0 (ref), t (ref)
 			local t_2 = {}
 			
@@ -51,12 +51,12 @@ return {
 			table.clear(t_1)
 		end
 		
-		local batch = itemViewAdapter.batch or function(p2) --[[ line: 71 ]]
+		local batch = itemViewAdapter.batch or function(p2)
 			p2()
 		end
 		local var6 = viewRecyclerModule.Adapter.createRecyclingScope({
 			maxPoolSize = p0.maxPoolSize,
-			onPoolChanged = if p0.diagnostics == nil then nil else function(p3) --[[ line: 90 ]]
+			onPoolChanged = if p0.diagnostics == nil then nil else function(p3)
 				-- upvalues: p0 (ref), viewRecyclerModule (copy)
 				p0.diagnostics({
 					kind = viewRecyclerModule.Diagnostics.EventKind.PoolChanged,
@@ -68,7 +68,7 @@ return {
 				})
 			end,
 			adapter = {
-				create = function(p4) --[[ line: 101 ]]
+				create = function(p4)
 					-- upvalues: itemViewAdapter (ref), p0 (ref), t (ref)
 					local var11 = itemViewAdapter.create(p4)
 					local var12 = if p0.getInstance ~= nil then var11 else p0.getInstance(var11)
@@ -77,11 +77,11 @@ return {
 					
 					return var11
 				end,
-				destroy = function(p5) --[[ line: 107 ]]
+				destroy = function(p5)
 					-- upvalues: t_1 (ref)
 					table.insert(t_1, p5)
 				end,
-				batch = function(p6) --[[ line: 74 ]]
+				batch = function(p6)
 					-- upvalues: var1 (write), batch (ref), flushLifecycle (ref)
 					var1 += 1
 					local ok, status = pcall(batch, p6)
@@ -98,7 +98,7 @@ return {
 		})
 		
 		return {
-			exchange = function(p7, p8, p9) --[[ line: 115 ]]
+			exchange = function(p7, p8, p9)
 				-- upvalues: var6 (ref), var1 (write), flushLifecycle (ref)
 				local var13 = var6.exchange(p7, p8, p9)
 				
@@ -115,7 +115,7 @@ return {
 			getItemViews = var6.getScopeInventory,
 			getVacantItemViews = var6.getVacantRecords,
 			updateItemView = itemViewAdapter.update,
-			destroy = function() --[[ line: 130 ]]
+			destroy = function()
 				-- upvalues: var6 (ref)
 				var6.destroy()
 			end

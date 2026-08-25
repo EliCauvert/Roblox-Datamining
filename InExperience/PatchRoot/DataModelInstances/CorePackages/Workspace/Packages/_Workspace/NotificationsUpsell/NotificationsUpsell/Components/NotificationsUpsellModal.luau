@@ -26,7 +26,7 @@ local sendEventDeferred = require(parent.NotificationsCommon).sendEventDeferred
 local modalEventConstantsModule = require(script.Parent.Parent.Analytics.ModalEventConstants)
 local richTextEscapeModule = require(script.Parent.Parent.Util.RichTextEscape)
 
-return function(p0) --[[ line: 39 ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useCallback (ref), sendEventDeferred (ref), modalEventConstantsModule (ref), playersService (ref), followingsPostFollowModule (ref), var9 (ref), notificationModalsManagerModule (ref), images (ref), useState (ref), useRef (ref), enableConsoleAutoFocusForUEN1 (ref), useEffect (ref), userInputService (ref), guiService (ref), reactModule (ref), reactRobloxModule (ref), interactiveAlert (ref), richTextEscapeModule (ref), buttonType (ref)
 	local var13 = useLocalization({
 		Cancel = "CommonUI.Controls.Action.Cancel",
@@ -38,7 +38,7 @@ return function(p0) --[[ line: 39 ]]
 		NotificationsEnabled = "Feature.Notifications.Response.NotificationsEnabled",
 		SomethingWentWrong = "Feature.Call.Error.Description.Generic"
 	})
-	local var14 = useCallback(function() --[[ line: 52 ]]
+	local var14 = useCallback(function()
 		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (ref)
 		sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
@@ -47,7 +47,7 @@ return function(p0) --[[ line: 39 ]]
 		})
 		p0.CloseModal()
 	end, { p0.CloseModal, p0.ExperienceId })
-	local var15 = useCallback(function() --[[ line: 61 ]]
+	local var15 = useCallback(function()
 		-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (ref), playersService (copy), followingsPostFollowModule (copy), var9 (copy), notificationModalsManagerModule (copy), images (copy), var13 (ref)
 		sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 			[modalEventConstantsModule.ActionType] = modalEventConstantsModule.Clicked,
@@ -61,7 +61,7 @@ return function(p0) --[[ line: 39 ]]
 				[modalEventConstantsModule.ActionType] = modalEventConstantsModule.BackendRequested,
 				[modalEventConstantsModule.UniverseId] = p0.ExperienceId
 			})
-			followingsPostFollowModule(var9, tostring(localPlayer.UserId), tostring(p0.ExperienceId)):andThen(function() --[[ line: 74 ]]
+			followingsPostFollowModule(var9, tostring(localPlayer.UserId), tostring(p0.ExperienceId)):andThen(function()
 				-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (copy), notificationModalsManagerModule (copy), images (copy), var13 (copy)
 				sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.BackendSuccess,
@@ -71,7 +71,7 @@ return function(p0) --[[ line: 39 ]]
 					iconImage = images["icons/common/notificationOn"],
 					toastTitle = if p0.ExperienceName then var13.NotificationsEnabledForExperience:gsub("{experienceName}", p0.ExperienceName) else var13.NotificationsEnabled
 				})
-			end, function() --[[ line: 89 ]]
+			end, function()
 				-- upvalues: sendEventDeferred (copy), modalEventConstantsModule (copy), p0 (copy), notificationModalsManagerModule (copy), images (copy), var13 (copy)
 				sendEventDeferred(modalEventConstantsModule.ModalContext, modalEventConstantsModule.OptInEventName, {
 					[modalEventConstantsModule.ActionType] = modalEventConstantsModule.BackendFailed,
@@ -86,17 +86,17 @@ return function(p0) --[[ line: 39 ]]
 		p0.CloseModal()
 	end, { p0.CloseModal, p0.ExperienceId, var13 })
 	local var16, var17 = useState(Vector2.new(800, 600))
-	local var18 = useCallback(function(p1) --[[ line: 111 ]]
+	local var18 = useCallback(function(p1)
 		-- upvalues: var17 (ref)
 		var17(p1.AbsoluteSize)
 	end, { var17 })
 	local var19 = useRef(nil)
 	
 	if enableConsoleAutoFocusForUEN1 then
-		useEffect(function() --[[ line: 117 ]]
+		useEffect(function()
 			-- upvalues: userInputService (copy), var19 (ref), guiService (copy)
 			if userInputService.GamepadEnabled then
-				task.delay(0.3, function() --[[ line: 124 ]]
+				task.delay(0.3, function()
 					-- upvalues: var19 (copy), guiService (copy)
 					local buttons = var19.current and var19.current:FindFirstChild("Buttons", true)
 					local _2 = buttons and buttons:FindFirstChild("2")
@@ -106,17 +106,17 @@ return function(p0) --[[ line: 39 ]]
 					end
 				end)
 				
-				return function() --[[ line: 132 ]]
+				return function()
 					-- upvalues: guiService (copy)
 					guiService.SelectedCoreObject = nil
 				end
 			end
 		end, {})
 	else
-		useEffect(function() --[[ line: 137 ]]
+		useEffect(function()
 			-- upvalues: userInputService (copy), var19 (ref), guiService (copy)
 			if userInputService.GamepadEnabled then
-				task.delay(0.3, function() --[[ line: 141 ]]
+				task.delay(0.3, function()
 					-- upvalues: var19 (copy), guiService (copy)
 					local buttons = var19.current and var19.current:FindFirstChild("Buttons", true)
 					local _2 = buttons and buttons:FindFirstChild("2")

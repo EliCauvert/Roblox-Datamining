@@ -67,7 +67,7 @@ local var7 = tModule.strictInterface({
 	seeAllFlag = if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then tModule.optional(tModule.number) else nil
 })
 
-local function _(p0) --[[ line: 92 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p0)
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -76,7 +76,7 @@ local function _(p0) --[[ line: 92 | named "addMobileAdvertisingIdToEventParams"
 	end
 end
 
-return function(p1, p2, p3) --[[ line: 99 ]]
+return function(p1, p2, p3)
 	-- upvalues: var7 (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGameDetailEventMobileAdsId (ref), appStorageService (ref), cryoModule (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var5 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var6 (write)
 	local var9, var10 = var7(p3)
 	

@@ -8,28 +8,28 @@ local permissionsProtocol = require(parent_1.PermissionsProtocol).PermissionsPro
 local default = permissionsProtocol.default
 local list = { permissionsProtocol.Permissions.CONTACTS_ACCESS }
 
-return function(p0, p1, p2, p3) --[[ line: 14 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: default (ref), list (ref), permissionsProtocol (ref), contactImporterSyncModule (ref), formatContactsModule (ref), uploadContactsSourcesModule (ref), networkingContacts (ref)
-	return function(p4) --[[ line: 15 ]]
+	return function(p4)
 		-- upvalues: default (copy), list (copy), permissionsProtocol (copy), contactImporterSyncModule (copy), p2 (ref), p0 (ref), p3 (ref), p1 (ref), formatContactsModule (copy), uploadContactsSourcesModule (copy), networkingContacts (copy)
-		default:hasPermissions(list):andThen(function(p5) --[[ line: 18 ]]
+		default:hasPermissions(list):andThen(function(p5)
 			-- upvalues: permissionsProtocol (copy), contactImporterSyncModule (copy), p2 (copy), p0 (copy), p3 (copy), p1 (copy), formatContactsModule (copy), uploadContactsSourcesModule (copy), p4 (ref), networkingContacts (copy)
 			if p5 and p5.status == permissionsProtocol.Status.AUTHORIZED then
 				local unixTimestampMillis = DateTime.now().UnixTimestampMillis
 				
 				if p3 or contactImporterSyncModule:shouldSyncContacts(p2, p0, unixTimestampMillis) then
-					return p1:getContacts():andThen(function(p6) --[[ line: 27 ]]
+					return p1:getContacts():andThen(function(p6)
 						-- upvalues: formatContactsModule (copy), uploadContactsSourcesModule (copy), p4 (copy), networkingContacts (copy)
 						local var4 = formatContactsModule(p6)
 						var4.source = uploadContactsSourcesModule.AutoSync
 						
 						return p4:dispatch(networkingContacts.UploadContactsByUser.API(var4))
-					end):andThen(function() --[[ line: 32 ]]
+					end):andThen(function()
 						-- upvalues: contactImporterSyncModule (copy), p2 (copy), p0 (copy), unixTimestampMillis (ref)
 						return contactImporterSyncModule:updateSyncTimestamp(p2, p0, unixTimestampMillis)
-					end):catch(function() --[[ line: 35 ]] end)
+					end):catch(function() end)
 				end
 			end
-		end):catch(function() --[[ line: 39 ]] end)
+		end):catch(function() end)
 	end
 end

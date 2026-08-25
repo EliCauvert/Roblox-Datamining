@@ -10,34 +10,34 @@ local stackViewTransitionConfigsModule = require(parent.StackViewTransitionConfi
 local t = { mode = require(parent.StackPresentationStyle).Default }
 local stackView = reactModule.Component:extend("StackView")
 
-function stackView.init(p0) --[[ line: 20 ]]
-	function p0._doRender(...) --[[ line: 21 ]]
+function stackView.init(p0)
+	function p0._doRender(...)
 		-- upvalues: p0 (ref)
 		return p0:_render(...)
 	end
 	
-	function p0._doConfigureTransition(...) --[[ line: 25 ]]
+	function p0._doConfigureTransition(...)
 		-- upvalues: p0 (ref)
 		return p0:_configureTransition(...)
 	end
 	
-	function p0._doOnTransitionStart(...) --[[ line: 29 ]]
+	function p0._doOnTransitionStart(...)
 		-- upvalues: p0 (ref)
 		return p0:_onTransitionStart(...)
 	end
 	
-	function p0._doOnTransitionEnd(...) --[[ line: 33 ]]
+	function p0._doOnTransitionEnd(...)
 		-- upvalues: p0 (ref)
 		return p0:_onTransitionEnd(...)
 	end
 	
-	function p0._doOnTransitionStep(...) --[[ line: 37 ]]
+	function p0._doOnTransitionStep(...)
 		-- upvalues: p0 (ref)
 		return p0:_onTransitionStep(...)
 	end
 end
 
-function stackView.render(p1) --[[ line: 42 ]]
+function stackView.render(p1)
 	-- upvalues: reactModule (ref), transitionerModule (ref)
 	return reactModule.createElement(transitionerModule, {
 		render = p1._doRender,
@@ -51,7 +51,7 @@ function stackView.render(p1) --[[ line: 42 ]]
 	})
 end
 
-function stackView.didMount(p2) --[[ line: 61 ]]
+function stackView.didMount(p2)
 	-- upvalues: stackActionsModule (ref)
 	local navigation = p2.props.navigation
 	
@@ -60,7 +60,7 @@ function stackView.didMount(p2) --[[ line: 61 ]]
 	end
 end
 
-function stackView._render(p3, p4, p5) --[[ line: 70 ]]
+function stackView._render(p3, p4, p5)
 	-- upvalues: object (ref), t (ref), reactModule (ref), stackViewLayoutModule (ref)
 	return reactModule.createElement(stackViewLayoutModule, object.assign(object.assign(table.clone(t), p3.props.navigationConfig), {
 		screenProps = p3.props.screenProps,
@@ -70,12 +70,12 @@ function stackView._render(p3, p4, p5) --[[ line: 70 ]]
 	}))
 end
 
-function stackView._configureTransition(p6, p7, p8) --[[ line: 86 ]]
+function stackView._configureTransition(p6, p7, p8)
 	-- upvalues: stackViewTransitionConfigsModule (ref)
 	return stackViewTransitionConfigsModule.getTransitionConfig(p6.props.navigationConfig.transitionConfig, p7, p8, p6.props.navigationConfig.mode).transitionSpec
 end
 
-function stackView._onTransitionStart(p9, p10, p11) --[[ line: 95 ]]
+function stackView._onTransitionStart(p9, p10, p11)
 	local onTransitionStart = p9.props.onTransitionStart or p9.props.navigationConfig.onTransitionStart
 	
 	if onTransitionStart and p10.index ~= p11.index then
@@ -83,7 +83,7 @@ function stackView._onTransitionStart(p9, p10, p11) --[[ line: 95 ]]
 	end
 end
 
-function stackView._onTransitionEnd(p12, p13, p14) --[[ line: 106 ]]
+function stackView._onTransitionEnd(p12, p13, p14)
 	-- upvalues: stackActionsModule (ref)
 	local navigation = p12.props.navigation
 	local onTransitionEnd = p12.props.onTransitionEnd or p12.props.navigationConfig.onTransitionEnd
@@ -97,7 +97,7 @@ function stackView._onTransitionEnd(p12, p13, p14) --[[ line: 106 ]]
 	end
 end
 
-function stackView._onTransitionStep(p15, p16, p17, p18) --[[ line: 128 ]]
+function stackView._onTransitionStep(p15, p16, p17, p18)
 	local onTransitionStep = p15.props.onTransitionStep or p15.props.navigationConfig.onTransitionStep
 	
 	if onTransitionStep and p16.index ~= p17.index then

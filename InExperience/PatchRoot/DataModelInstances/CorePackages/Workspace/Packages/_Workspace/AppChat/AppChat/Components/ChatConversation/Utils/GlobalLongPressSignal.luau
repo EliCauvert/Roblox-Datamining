@@ -2,7 +2,7 @@
 
 return {
 	dismissed = var0,
-	dismiss = function() --[[ line: 14 ]]
+	dismiss = function()
 		-- upvalues: var0 (ref)
 		var0:fire()
 	end

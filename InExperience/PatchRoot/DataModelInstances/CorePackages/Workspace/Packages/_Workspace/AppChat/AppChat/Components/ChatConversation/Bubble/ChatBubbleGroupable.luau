@@ -15,13 +15,13 @@ local t = {
 	alignment = Enum.HorizontalAlignment.Right,
 	children = {},
 	imageStyle = { Transparency = 0, Color3 = Color3.new(0, 0, 0) },
-	onAbsoluteSizeChanged = function(_) --[[ line: 31 ]] end,
+	onAbsoluteSizeChanged = function(_) end,
 	position = UDim2.new(0, 0, 0, 0),
-	setContentWidth = function(_) --[[ line: 34 ]] end,
+	setContentWidth = function(_) end,
 	variant = chatBubbleEnumModule.BUBBLE_VARIANTS.SINGLE
 }
 
-function ChatBubbleGroupable(p0) --[[ line: 38 ]]
+function ChatBubbleGroupable(p0)
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), view (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), getChatBubbleCornerRadiiModule (ref), chatBubbleEnumModule (ref), image (ref)
 	local var8 = cryoModule.Dictionary.union(t, p0)
 	local var9 = var8.alignment == Enum.HorizontalAlignment.Left

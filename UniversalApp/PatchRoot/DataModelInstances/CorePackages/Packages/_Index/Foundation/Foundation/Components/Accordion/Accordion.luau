@@ -13,7 +13,7 @@ local t = {
 	width = UDim.new(1, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | named "Accordion" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
 	local var8 = withDefaultsModule(p0, t)
 	
@@ -23,7 +23,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | 
 		ref = p1
 	}), {
 		AccordionContext = reactModule.createElement(accordionContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 40 ]]
+			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function()
 				-- upvalues: var8 (ref)
 				return {
 					onAccordionItemActivated = var8.onActivated,

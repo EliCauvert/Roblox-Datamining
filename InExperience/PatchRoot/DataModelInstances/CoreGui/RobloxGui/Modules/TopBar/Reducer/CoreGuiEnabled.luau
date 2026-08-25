@@ -16,7 +16,7 @@ return if require(parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then nil else r
 	[Enum.CoreGuiType.Chat] = true,
 	[Enum.CoreGuiType.EmotesMenu] = true
 }, {
-	[require(parent.Actions.UpdateCoreGuiEnabled).name] = function(p0, p1) --[[ line: 41 ]]
+	[require(parent.Actions.UpdateCoreGuiEnabled).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		if p1.coreGuiType ~= Enum.CoreGuiType.All then
 			return cryoModule.Dictionary.join(p0, { [p1.coreGuiType] = p1.enabled })

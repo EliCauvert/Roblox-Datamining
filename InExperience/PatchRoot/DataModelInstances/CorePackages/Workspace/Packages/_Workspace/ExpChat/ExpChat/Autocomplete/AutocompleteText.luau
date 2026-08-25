@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 11 ]]
+function t.new(p0)
 	-- upvalues: t (ref), trieModule (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -12,7 +12,7 @@ function t.new(p0) --[[ line: 11 ]]
 	return t_1
 end
 
-function t:getResults(p1, p2) --[[ line: 22 ]]
+function t:getResults(p1, p2)
 	local var3 = self.trie:autocomplete(p1)
 	
 	return if p2 then p2(var3) else var3

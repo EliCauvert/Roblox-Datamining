@@ -9,9 +9,9 @@ local cryoModule = require(parent.Cryo)
 local getFFlagSocialContextToastEventStream = require(parent.SharedFlags).GetFFlagSocialContextToastEventStream
 local getFFlagEnableReferredPlayerJoinRemoteEvent = require(parent.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent
 
-return function(p0) --[[ line: 44 | named "ToastRoot" ]]
+return function(p0)
 	-- upvalues: useSelector (ref), getFFlagSocialContextToastEventStream (ref), cryoModule (ref), toastTypesModule (ref), reactModule (ref), toastWrapperModule (ref), buttonType (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (ref)
-	local var5 = useSelector(function(p1) --[[ line: 45 ]]
+	local var5 = useSelector(function(p1)
 		return p1.ToastContent
 	end)
 	local var6 = if getFFlagSocialContextToastEventStream() then cryoModule.Dictionary.join(p0.analyticsProps, { toastType = var5.toastType }) else nil

@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("XboxPrimaryNavABLogging", 0)
 
-return function() --[[ line: 8 ]]
+return function()
 	return game:GetFastInt("XboxPrimaryNavABLogging")
 end

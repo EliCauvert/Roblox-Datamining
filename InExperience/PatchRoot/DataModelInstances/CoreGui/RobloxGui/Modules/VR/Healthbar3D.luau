@@ -43,11 +43,11 @@ playerName.TextXAlignment = Enum.TextXAlignment.Left
 playerName.Size = UDim2.new(1, 0, 0, 14)
 playerName.Parent = healthbarContainer
 
-local function _(p0) --[[ line: 67 | named "Color3ToVec3" ]]
+local function _(p0)
 	return Vector3.new(p0.r, p0.g, p0.b)
 end
 
-local function FindChildOfType(p1, p2) --[[ line: 71 ]]
+local function FindChildOfType(p1, p2)
 	for i, v in pairs(p1:GetChildren()) do
 		if v:IsA(p2) then
 			return v
@@ -61,7 +61,7 @@ local t = {
 	[Vector3.new(color3_3.r, color3_3.g, color3_3.b)] = 0.8
 }
 
-local function HealthbarColorTransferFunction(p3) --[[ line: 87 ]]
+local function HealthbarColorTransferFunction(p3)
 	-- upvalues: color3_1 (ref), color3_3 (ref), t (ref)
 	if p3 <= 0.1 then
 		return color3_1
@@ -87,7 +87,7 @@ local function HealthbarColorTransferFunction(p3) --[[ line: 87 ]]
 	return Color3.new(var30.x, var30.y, var30.z)
 end
 
-local _ = function(p4) --[[ line: 113 | named "UpdateHealth" ]]
+local _ = function(p4)
 	-- upvalues: healthbarFill (ref), HealthbarColorTransferFunction (ref)
 	local var33 = p4.Health / p4.MaxHealth
 	
@@ -101,7 +101,7 @@ end
 local var16 = nil
 local var17 = nil
 
-local function RegisterHumanoid(p5) --[[ line: 124 ]]
+local function RegisterHumanoid(p5)
 	-- upvalues: var17 (write), var16 (write), playersService (ref), RegisterHumanoid (ref), healthbarFill (ref), HealthbarColorTransferFunction (ref)
 	if var17 then
 		var17:disconnect()
@@ -112,7 +112,7 @@ local function RegisterHumanoid(p5) --[[ line: 124 ]]
 		var16 = nil
 	end
 	if p5 then
-		var17 = p5.AncestryChanged:connect(function(p6, p7) --[[ line: 135 ]]
+		var17 = p5.AncestryChanged:connect(function(p6, p7)
 			-- upvalues: playersService (copy), p5 (ref), RegisterHumanoid (copy)
 			local localPlayer = playersService.LocalPlayer
 			
@@ -120,7 +120,7 @@ local function RegisterHumanoid(p5) --[[ line: 124 ]]
 				RegisterHumanoid(nil)
 			end
 		end)
-		var16 = p5.HealthChanged:connect(function() --[[ line: 141 ]]
+		var16 = p5.HealthChanged:connect(function()
 			-- upvalues: p5 (ref), healthbarFill (copy), HealthbarColorTransferFunction (copy)
 			local var35 = p5.Health / p5.MaxHealth
 			
@@ -140,7 +140,7 @@ local function RegisterHumanoid(p5) --[[ line: 124 ]]
 	end
 end
 
-local function OnCharacterChildAdded(p8) --[[ line: 146 ]]
+local function OnCharacterChildAdded(p8)
 	-- upvalues: playersService (ref), RegisterHumanoid (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -151,7 +151,7 @@ end
 
 local childAddedConnection = nil
 
-local function OnCharacterAdded(p9) --[[ line: 154 ]]
+local function OnCharacterAdded(p9)
 	-- upvalues: FindChildOfType (ref), RegisterHumanoid (ref), childAddedConnection (write), OnCharacterChildAdded (ref)
 	local var36 = FindChildOfType(p9, "Humanoid")
 	
@@ -165,7 +165,7 @@ local function OnCharacterAdded(p9) --[[ line: 154 ]]
 	childAddedConnection = p9.ChildAdded:connect(OnCharacterChildAdded)
 end
 
-local _ = function(p10) --[[ line: 167 | named "OnPlayerAdded" ]]
+local _ = function(p10)
 	-- upvalues: playerName (ref), OnCharacterAdded (ref), FindChildOfType (ref), RegisterHumanoid (ref), childAddedConnection (write), OnCharacterChildAdded (ref)
 	playerName.Text = p10.Name
 	p10.CharacterAdded:connect(OnCharacterAdded)
@@ -200,7 +200,7 @@ if playersService.LocalPlayer then
 		childAddedConnection = character.ChildAdded:connect(OnCharacterChildAdded)
 	end
 else
-	spawn(function() --[[ line: 179 ]]
+	spawn(function()
 		-- upvalues: playersService (ref), playerName (ref), OnCharacterAdded (ref), FindChildOfType (ref), RegisterHumanoid (ref), childAddedConnection (write), OnCharacterChildAdded (ref)
 		while not playersService.LocalPlayer do
 			playersService.ChildAdded:wait()
@@ -234,7 +234,7 @@ local var24 = nil
 local var25 = nil
 local var26 = nil
 
-local function OnVREnabled(p11) --[[ line: 195 ]]
+local function OnVREnabled(p11)
 	-- upvalues: userInputService (ref), corePackagesService (ref), healthbarBack (ref), healthbarFill (ref), playerName (ref), starterGuiService (ref), var24 (write), var25 (write), var26 (write), healthbarContainer (ref), t_1 (ref)
 	if p11 == "VREnabled" then
 		if userInputService.VREnabled then
@@ -245,7 +245,7 @@ local function OnVREnabled(p11) --[[ line: 195 ]]
 			healthbar:SetType(panel3D.Type.Fixed, { CFrame = CFrame.new(0, 0, -5) })
 			healthbar:SetVisible(true)
 			
-			function healthbar.PreUpdate(p12, _, _, _, _) --[[ line: 207 ]]
+			function healthbar.PreUpdate(p12, _, _, _, _)
 				-- upvalues: panel3D (ref), healthbar (ref)
 				local backpack = panel3D.Get("Backpack") or panel3D.Get("Topbar3D")
 				local topbar3D = panel3D.Get("Topbar3D")
@@ -255,7 +255,7 @@ local function OnVREnabled(p11) --[[ line: 195 ]]
 				end
 			end
 			
-			function healthbar.CalculateTransparency(_) --[[ line: 217 ]]
+			function healthbar.CalculateTransparency(_)
 				-- upvalues: panel3D (ref), healthbarBack (copy), healthbarFill (copy), playerName (copy)
 				local var45
 				local backpack = panel3D.Get("Backpack")
@@ -274,7 +274,7 @@ local function OnVREnabled(p11) --[[ line: 195 ]]
 			
 			local var40 = false
 			
-			local function _() --[[ line: 232 | named "UpdateExclusivePanelOpen" ]]
+			local function _()
 				-- upvalues: VRHub (ref), var40 (write)
 				for i, v in pairs(VRHub:GetOpenedModules()) do
 					if v.VRIsExclusive then
@@ -286,16 +286,16 @@ local function OnVREnabled(p11) --[[ line: 195 ]]
 				var40 = false
 			end
 			
-			local _ = function() --[[ line: 242 | named "CalculateVisibility" ]]
+			local _ = function()
 				-- upvalues: starterGuiService (copy), var40 (write)
 				return starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40
 			end
 			
-			var24 = starterGuiService.CoreGuiChangedSignal:connect(function() --[[ line: 248 ]]
+			var24 = starterGuiService.CoreGuiChangedSignal:connect(function()
 				-- upvalues: healthbar (ref), starterGuiService (copy), var40 (write)
 				healthbar:SetVisible(starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Health) and not var40)
 			end)
-			var25 = VRHub.ModuleOpened.Event:connect(function(_) --[[ line: 252 ]]
+			var25 = VRHub.ModuleOpened.Event:connect(function(_)
 				-- upvalues: VRHub (ref), var40 (write), healthbar (ref), starterGuiService (copy)
 				for i, v in pairs(VRHub:GetOpenedModules()) do
 					if v.VRIsExclusive then
@@ -307,7 +307,7 @@ local function OnVREnabled(p11) --[[ line: 195 ]]
 				end
 				var40 = false
 			end)
-			var26 = VRHub.ModuleClosed.Event:connect(function(_) --[[ line: 256 ]]
+			var26 = VRHub.ModuleClosed.Event:connect(function(_)
 				-- upvalues: VRHub (ref), var40 (write), healthbar (ref), starterGuiService (copy)
 				for i, v in pairs(VRHub:GetOpenedModules()) do
 					if v.VRIsExclusive then

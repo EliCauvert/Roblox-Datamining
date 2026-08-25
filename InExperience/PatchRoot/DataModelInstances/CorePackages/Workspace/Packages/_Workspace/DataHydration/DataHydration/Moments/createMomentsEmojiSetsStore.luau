@@ -11,20 +11,20 @@ local getEmojiSetsModule = require(script.Parent.Requests.getEmojiSets)
 local resolveMomentsEmojiCatalogModule = require(script.Parent.Util.resolveMomentsEmojiCatalog)
 local validateMomentsEmojiCatalogModule = require(script.Parent.Util.validateMomentsEmojiCatalog)
 
-local function shouldRefreshCachedEmojiSets(value) --[[ line: 25 ]]
+local function shouldRefreshCachedEmojiSets(value)
 	return value == nil
 end
 
-return function(value) --[[ line: 29 | named "createMomentsEmojiSetsStore" ]]
+return function(value)
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), httpClientModule (ref), getEmojiSetsModule (ref), validateMomentsEmojiCatalogModule (ref), promiseModule (ref), shouldRefreshCachedEmojiSets (ref), resolveMomentsEmojiCatalogModule (ref)
 	local value_1 = value or {}
 	local var10 = createDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
 		cache = createDataCacheModule(),
-		fetchFn = function(_, _) --[[ line: 36 ]]
+		fetchFn = function(_, _)
 			-- upvalues: httpClientModule (copy), getEmojiSetsModule (copy), value_1 (ref), validateMomentsEmojiCatalogModule (copy), promiseModule (copy)
-			return httpClientModule.asPromise(getEmojiSetsModule(value_1.network)):andThen(function(p0) --[[ line: 41 ]]
+			return httpClientModule.asPromise(getEmojiSetsModule(value_1.network)):andThen(function(p0)
 				-- upvalues: validateMomentsEmojiCatalogModule (copy), promiseModule (copy)
 				return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p0) then p0 else promiseModule.reject("Moments emoji-api returned an invalid or empty catalog")
 			end)
@@ -32,15 +32,15 @@ return function(value) --[[ line: 29 | named "createMomentsEmojiSetsStore" ]]
 	})
 	
 	return {
-		getAndFetchEmojiSets = function() --[[ line: 50 ]]
+		getAndFetchEmojiSets = function()
 			-- upvalues: var10 (ref), shouldRefreshCachedEmojiSets (copy)
 			return var10.getAndFetchItem("emoji-sets", shouldRefreshCachedEmojiSets)
 		end,
-		getEmojis = function(p1) --[[ line: 56 ]]
+		getEmojis = function(p1)
 			-- upvalues: var10 (ref), resolveMomentsEmojiCatalogModule (copy)
 			return resolveMomentsEmojiCatalogModule.resolveMomentsEmojiCatalog(var10.getCachedItem("emoji-sets").data(p1)).emojis
 		end,
-		dispose = function() --[[ line: 61 ]]
+		dispose = function()
 			-- upvalues: var10 (ref)
 			var10.dispose()
 		end

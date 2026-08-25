@@ -4,7 +4,7 @@ local view = require(parent.Foundation).View
 local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "SduiActionBar" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref), fFlagSduiExperienceDetailsSupport (ref)
 	if p0.items == nil or #p0.items == 0 then
 		return nil

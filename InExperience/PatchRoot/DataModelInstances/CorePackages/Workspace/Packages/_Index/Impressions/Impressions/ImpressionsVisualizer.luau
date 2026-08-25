@@ -30,7 +30,7 @@ local t_1 = { BackgroundTransparency = 0.65, BorderSizePixel = 8 }
 local t_2 = {}
 t_2.__index = t_2
 
-local function getTaggedInstances(p0) --[[ line: 82 ]]
+local function getTaggedInstances(p0)
 	-- upvalues: collectionService (ref), constantsModule (ref)
 	local t = {}
 	
@@ -44,14 +44,14 @@ local function getTaggedInstances(p0) --[[ line: 82 ]]
 	return t
 end
 
-function t_2.new(p1, p2) --[[ line: 95 ]]
+function t_2.new(p1, p2)
 	-- upvalues: list (ref), var6 (write), t_2 (ref), debugEnableImpressionsVisualizer (ref), runService (ref)
 	local t = {
 		impressionsTag = p1,
 		highlightedInstances = {},
 		originalInstances = {},
 		highlightColor = list[var6],
-		customKeyMapper = p2 or function(p3) --[[ line: 101 ]]
+		customKeyMapper = p2 or function(p3)
 			return p3
 		end
 	}
@@ -65,7 +65,7 @@ function t_2.new(p1, p2) --[[ line: 95 ]]
 		end
 		if p1 then
 			local var14 = nil
-			t.renderConnection = runService.RenderStepped:Connect(function(p4) --[[ line: 115 ]]
+			t.renderConnection = runService.RenderStepped:Connect(function(p4)
 				-- upvalues: t (ref), var14 (write)
 				if t then
 					t:_step(p4)
@@ -80,13 +80,13 @@ function t_2.new(p1, p2) --[[ line: 95 ]]
 	return t
 end
 
-function t_2:destroy() --[[ line: 131 ]]
+function t_2:destroy()
 	if self.renderConnection then
 		self.renderConnection:Disconnect()
 	end
 end
 
-function t_2:_startHighlightState(p5, p6, p7, p8, p9) --[[ line: 137 ]]
+function t_2:_startHighlightState(p5, p6, p7, p8, p9)
 	local var15 = self.highlightedInstances[p5]
 	
 	if var15 == nil then
@@ -120,7 +120,7 @@ function t_2:_startHighlightState(p5, p6, p7, p8, p9) --[[ line: 137 ]]
 	self.highlightedInstances[p5] = var15
 end
 
-function t_2:_step(p10) --[[ line: 172 ]]
+function t_2:_step(p10)
 	-- upvalues: t_1 (ref), getTaggedInstances (ref), t (ref)
 	assert(self.impressionsTag, "impressionsTag is nil")
 	
@@ -188,7 +188,7 @@ function t_2:_step(p10) --[[ line: 172 ]]
 	end
 end
 
-function t_2:_highlightImpression(p11) --[[ line: 260 ]]
+function t_2:_highlightImpression(p11)
 	-- upvalues: cryoModule (ref), t (ref)
 	if self.highlightedInstances[p11] == nil or self.highlightedInstances[p11].highlightState == "None" then
 		self:_startHighlightState(p11, "Highlight", 1, cryoModule.Dictionary.join(t, {
@@ -200,11 +200,11 @@ function t_2:_highlightImpression(p11) --[[ line: 260 ]]
 	end
 end
 
-function t_2:_clearImpression(p12) --[[ line: 275 ]]
+function t_2:_clearImpression(p12)
 	self.highlightedInstances[p12] = nil
 end
 
-function t_2:onSendImpressions(p13) --[[ line: 279 ]]
+function t_2:onSendImpressions(p13)
 	-- upvalues: debugEnableImpressionsVisualizer (ref)
 	if not debugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag or p13 == nil or #p13 <= 0 then return end
@@ -213,7 +213,7 @@ function t_2:onSendImpressions(p13) --[[ line: 279 ]]
 	end
 end
 
-function t_2:onClearImpressions(p14) --[[ line: 294 ]]
+function t_2:onClearImpressions(p14)
 	-- upvalues: debugEnableImpressionsVisualizer (ref)
 	if not debugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag or p14 == nil or #p14 <= 0 then return end
@@ -222,7 +222,7 @@ function t_2:onClearImpressions(p14) --[[ line: 294 ]]
 	end
 end
 
-function t_2:onClearAllImpressions() --[[ line: 309 ]]
+function t_2:onClearAllImpressions()
 	-- upvalues: debugEnableImpressionsVisualizer (ref)
 	if not debugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag then return end
@@ -235,13 +235,13 @@ function t_2:onClearAllImpressions() --[[ line: 309 ]]
 	self.originalInstances = {}
 end
 
-function t_2:setCustomKeyMapper(p15) --[[ line: 329 ]]
-	self.customKeyMapper = p15 or function(p16) --[[ line: 330 ]]
+function t_2:setCustomKeyMapper(p15)
+	self.customKeyMapper = p15 or function(p16)
 		return p16
 	end
 end
 
-function t_2:setImpressionsTag(p17) --[[ line: 335 ]]
+function t_2:setImpressionsTag(p17)
 	self.impressionsTag = p17
 end
 

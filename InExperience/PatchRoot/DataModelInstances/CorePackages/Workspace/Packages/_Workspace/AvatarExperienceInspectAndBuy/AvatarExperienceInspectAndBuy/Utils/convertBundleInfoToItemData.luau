@@ -6,7 +6,7 @@ local itemTypeEnum = AXCommonModule.Enums.ItemTypeEnum
 local salesLocationType = AXCommonModule.Enums.SalesLocationType
 local tutilsModule = require(parent.tutils)
 
-return function(p0, p1) --[[ line: 20 ]]
+return function(p0, p1)
 	-- upvalues: tutilsModule (ref), itemTypeEnum (ref), salesLocationType (ref)
 	local var3 = if p1 then tutilsModule.fieldCount(p1) else 0
 	local t = {}

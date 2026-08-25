@@ -3,7 +3,7 @@ local boolean = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Boolean
 local _ = require(script.Parent.Parent.core.types)
 local getOperationName = require(script.Parent.Parent.Parent.utilities).getOperationName
 
-function t.transformOperation(p0) --[[ line: 20 ]]
+function t.transformOperation(p0)
 	-- upvalues: boolean (ref), getOperationName (ref)
 	local t = {
 		variables = if boolean.toJSBoolean(p0.variables) then p0.variables else {},

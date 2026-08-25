@@ -6,7 +6,7 @@ local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 local _ = require(currencyTransfers.Enums.TransferDirection)
 local ampWizardTransferConstantsModule = require(currencyTransfers.Constants.AmpWizardTransferConstants)
 
-return function(_) --[[ line: 22 | named "ReceiveBlockSheet" ]]
+return function(_)
 	-- upvalues: useTransferStoreModule (ref), ampWizardTransferConstantsModule (ref), reactModule (ref), transferFAEBlockSheetModule (ref), VPCBlockContainerModule (ref)
 	local var6 = useTransferStoreModule()
 	local direction = var6.getDirection(false)

@@ -1,6 +1,6 @@
 ﻿local workspaceService = game:GetService("Workspace")
 
-return function(p0) --[[ line: 7 ]]
+return function(p0)
 	-- upvalues: workspaceService (ref)
 	if p0 ~= nil and p0.Created ~= nil then
 		local dateTime = DateTime.fromIsoDate(p0.Created)

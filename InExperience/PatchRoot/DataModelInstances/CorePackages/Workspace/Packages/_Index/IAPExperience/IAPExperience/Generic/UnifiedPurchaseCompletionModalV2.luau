@@ -19,7 +19,7 @@ local formatTextWithParamsModule = require(parent.Utility.formatTextWithParams)
 local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNavigationRefs)
 local fFlagEnableLaunchAfterPurchase = require(parent_1.SharedFlags).FFlagEnableLaunchAfterPurchase
 
-return function(p0) --[[ line: 60 | named "UnifiedPurchaseCompletionModalV2" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), useTokens (ref), reactModule (ref), foundationModule (ref), fFlagEnableLaunchAfterPurchase (ref), loggingProtocolModule (ref), unifiedProductPurchaseCompletionModalShownCounter (ref), formatTextWithParamsModule (ref), dialog (ref), dialogSize (ref), view (ref), icon (ref), text (ref), orientation (ref), playSmall (ref), buttonVariant (ref)
 	local var5 = useLocalization({
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 60 | named "UnifiedPurchaseCompletionModalV2" ]]
 	local var11 = fFlagEnableLaunchAfterPurchase and (p0.enableLaunchAfterPurchase == true and not p0.isError)
 	local var12 = reactModule.useRef(p0.buttons.onShown)
 	var12.current = p0.buttons.onShown
-	reactModule.useEffect(function() --[[ line: 84 ]]
+	reactModule.useEffect(function()
 		-- upvalues: loggingProtocolModule (copy), unifiedProductPurchaseCompletionModalShownCounter (copy), fFlagEnableLaunchAfterPurchase (copy), var12 (ref)
 		loggingProtocolModule.default:logRobloxTelemetryCounter(unifiedProductPurchaseCompletionModalShownCounter, 1, {})
 		
@@ -45,15 +45,15 @@ return function(p0) --[[ line: 60 | named "UnifiedPurchaseCompletionModalV2" ]]
 			var12.current()
 		end
 	end, {})
-	local var13 = reactModule.useMemo(function() --[[ line: 91 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var5 (ref)
 		return if p0.title then p0.title elseif p0.isError then var5.ErrorTitle else var5.PurchaseCompleteTitle
 	end, { p0.title, p0.isError })
-	local var14 = reactModule.useMemo(function() --[[ line: 101 ]]
+	local var14 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), var5 (ref), formatTextWithParamsModule (copy)
 		return if p0.bodyText then p0.bodyText elseif p0.isError then var5.GenericErrorBody elseif p0.isMultiItem then var5.MultiItemPurchaseCompleteBody else formatTextWithParamsModule(var5.PurchaseCompleteBody, { ITEM_NAME = p0.itemName or "" })
 	end, { p0.bodyText, p0.isError, p0.isMultiItem, p0.itemName })
-	reactModule.useEffect(function() --[[ line: 115 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var10 (ref), foundationModule (copy)
 		if p0.isError then
 			var10(foundationModule.Enums.IconName.TriangleExclamation)

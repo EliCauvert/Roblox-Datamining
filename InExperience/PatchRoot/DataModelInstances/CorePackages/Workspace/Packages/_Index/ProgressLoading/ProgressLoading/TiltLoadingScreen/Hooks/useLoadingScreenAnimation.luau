@@ -16,7 +16,7 @@ local var5 = motionModule.createState({
 	verified = 0
 })
 
-local function revealed(p0, p1) --[[ line: 25 ]]
+local function revealed(p0, p1)
 	-- upvalues: motionModule (ref)
 	return motionModule.createState(p0, { default = motionModule.transition({ duration = p1 }) })
 end
@@ -42,21 +42,21 @@ local var12 = motionModule.createState({
 	verified = 1
 }, { default = motionModule.transition({ duration = 0 }) })
 
-local function clamp01(value) --[[ line: 54 ]]
+local function clamp01(value)
 	return math.clamp(value, 0, 1)
 end
 
-local function scaleFromReveal(p2) --[[ line: 58 ]]
+local function scaleFromReveal(p2)
 	return math.min(1, math.clamp(p2, 0, 1) * 0.5 + 0.5)
 end
 
-local function slideFromReveal(p3, p4) --[[ line: 62 ]]
+local function slideFromReveal(p3, p4)
 	return UDim.new(0, (1 - math.clamp(p3, 0, 1)) * p4)
 end
 
 local _ = require(tiltLoadingScreen.Types)
 
-return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
+return function(p5)
 	-- upvalues: motionModule (ref), var5 (ref), reactModule (ref), var10 (ref), fFlagTiltLoadingScreenEnterExitHold (ref), ANIMATION (ref), var9 (ref), var7 (ref), var8 (ref), var11 (ref), var12 (ref), runService (ref), TILT_DEGREES (ref), scaleFromReveal (ref), clamp01 (ref), slideFromReveal (ref), LOCKUP (ref)
 	local var16, var17 = motionModule.useMotion(var5)
 	local var18 = reactModule.useRef(var17)
@@ -75,12 +75,12 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 	})
 	local var23, var24 = reactModule.useBinding(0)
 	local var25, var26 = reactModule.useBinding(p5.reducedMotion)
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var26 (ref), p5 (ref)
 		var26(p5.reducedMotion)
 	end, { p5.reducedMotion })
 	
-	local function cancelScheduled() --[[ line: 97 ]]
+	local function cancelScheduled()
 		-- upvalues: var21 (ref)
 		for i, v in var21.current do
 			pcall(task.cancel, v)
@@ -88,19 +88,19 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 		var21.current = {}
 	end
 	
-	local function _(p6, p7) --[[ line: 104 | named "schedule" ]]
+	local function _(p6, p7)
 		-- upvalues: var21 (ref)
 		table.insert(var21.current, task.delay(p6, p7))
 	end
 	
-	local _ = function() --[[ line: 109 | named "canAnimate" ]]
+	local _ = function()
 		-- upvalues: var19 (ref)
 		local current = var19.current
 		
 		return not current.reducedMotion and not current.isDismissing
 	end
 	
-	local function fireEnterComplete() --[[ line: 114 ]]
+	local function fireEnterComplete()
 		-- upvalues: var22 (ref), var20 (ref)
 		if var22.current.enterComplete then return end
 		var22.current.enterComplete = true
@@ -110,7 +110,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 		end
 	end
 	
-	local function startCreator() --[[ line: 124 ]]
+	local function startCreator()
 		-- upvalues: var22 (ref), var19 (ref), var18 (ref), var10 (copy), fFlagTiltLoadingScreenEnterExitHold (copy), ANIMATION (copy), fireEnterComplete (ref), var21 (ref)
 		if not var22.current.creator then
 			local current = var19.current
@@ -126,7 +126,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 135 | named "startTitle" ]]
+	local _ = function()
 		-- upvalues: var22 (ref), var19 (ref), var18 (ref), var9 (copy), ANIMATION (copy), startCreator (ref), var21 (ref)
 		if not var22.current.title and var19.current.contentReady then
 			local current = var19.current
@@ -141,7 +141,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 		end
 	end
 	
-	local function startTimeline() --[[ line: 144 ]]
+	local function startTimeline()
 		-- upvalues: var22 (ref), var19 (ref), var18 (ref), var7 (copy), ANIMATION (copy), var8 (copy), var21 (ref), var9 (copy), startCreator (ref), fFlagTiltLoadingScreenEnterExitHold (copy), var20 (ref)
 		if not var22.current.timeline then
 			local current = var19.current
@@ -149,7 +149,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 			if current.reducedMotion or current.isDismissing then return end
 			var22.current.timeline = true
 			var18.current(var7)
-			table.insert(var21.current, task.delay(ANIMATION.artDelay, function() --[[ line: 150 ]]
+			table.insert(var21.current, task.delay(ANIMATION.artDelay, function()
 				-- upvalues: var19 (copy), var18 (copy), var8 (copy)
 				local current = var19.current
 				
@@ -157,7 +157,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 					var18.current(var8)
 				end
 			end))
-			table.insert(var21.current, task.delay(ANIMATION.cascade, function() --[[ line: 155 ]]
+			table.insert(var21.current, task.delay(ANIMATION.cascade, function()
 				-- upvalues: var22 (copy), var19 (copy), var18 (copy), var9 (copy), ANIMATION (copy), startCreator (copy), var21 (copy)
 				var22.current.cascade = true
 				
@@ -172,7 +172,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 			end))
 			
 			if fFlagTiltLoadingScreenEnterExitHold then
-				table.insert(var21.current, task.delay(ANIMATION.artDur, function() --[[ line: 160 ]]
+				table.insert(var21.current, task.delay(ANIMATION.artDur, function()
 					-- upvalues: var22 (copy), var20 (copy)
 					if not var22.current.title then
 						if var22.current.enterComplete then return end
@@ -188,12 +188,12 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 168 | named "startExitTimeline" ]]
+	local _ = function()
 		-- upvalues: var18 (ref), var11 (copy)
 		var18.current(var11)
 	end
 	
-	local function freeze() --[[ line: 172 ]]
+	local function freeze()
 		-- upvalues: var18 (ref), motionModule (copy), var16 (ref)
 		var18.current(motionModule.createState({
 			keyart = var16.keyart:getValue(),
@@ -204,7 +204,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 		}, { default = motionModule.transition({ duration = 0 }) }))
 	end
 	
-	reactModule.useEffect(function() --[[ line: 184 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), cancelScheduled (ref), var18 (ref), var5 (copy), var11 (copy), var22 (ref), var12 (copy), fFlagTiltLoadingScreenEnterExitHold (copy), var20 (ref), startTimeline (ref), var19 (ref), var9 (copy), ANIMATION (copy), startCreator (ref), var21 (ref)
 		if p5.isDismissing then
 			cancelScheduled()
@@ -251,25 +251,25 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 			end
 		end
 	end, { p5.contentReady, p5.isDismissing, p5.reducedMotion })
-	reactModule.useEffect(function() --[[ line: 207 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p5 (ref), runService (copy), var24 (ref)
 		if p5.reducedMotion or p5.isDismissing then
 			return
 		end
 		local processTime = os.clock()
-		local heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 213 ]]
+		local heartbeatConnection = runService.Heartbeat:Connect(function()
 			-- upvalues: var24 (copy), processTime (ref)
 			var24(os.clock() - processTime)
 		end)
 		
-		return function() --[[ line: 217 ]]
+		return function()
 			-- upvalues: heartbeatConnection (ref)
 			heartbeatConnection:Disconnect()
 		end
 	end, { p5.isDismissing, p5.reducedMotion })
-	reactModule.useEffect(function() --[[ line: 222 ]]
+	reactModule.useEffect(function()
 		-- upvalues: cancelScheduled (ref), freeze (ref)
-		return function() --[[ line: 223 ]]
+		return function()
 			-- upvalues: cancelScheduled (copy), freeze (copy)
 			cancelScheduled()
 			freeze()
@@ -280,7 +280,7 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 	if var32.current == nil then
 		var32.current = {
 			keyart = {
-				rotation = var16.keyart:map(function(p8) --[[ line: 233 ]]
+				rotation = var16.keyart:map(function(p8)
 					-- upvalues: TILT_DEGREES (copy)
 					return TILT_DEGREES * math.clamp(p8, 0, 1)
 				end),
@@ -292,27 +292,27 @@ return function(p5) --[[ line: 76 | named "useLoadingScreenAnimation" ]]
 					reveal = var16.frame,
 					elapsed = var23,
 					shouldReduceMotion = var25
-				}):map(function(p9) --[[ line: 244 ]]
+				}):map(function(p9)
 					-- upvalues: ANIMATION (copy), TILT_DEGREES (copy)
 					local reveal = p9.reveal
 					
 					return -TILT_DEGREES * reveal + (if not p9.shouldReduceMotion then math.sin(p9.elapsed * ANIMATION.wobbleSpeed * 2 * 3.14159265359 * 0.28 + 0.9) * ANIMATION.wobbleAngle * 1.4 * math.clamp(reveal, 0, 1) else 0)
 				end),
 				sizeScale = var16.frame:map(scaleFromReveal),
-				groupTransparency = var16.frame:map(function(p10) --[[ line: 258 ]]
+				groupTransparency = var16.frame:map(function(p10)
 					return math.min(1, (1 - math.clamp(p10, 0, 1)) * 2)
 				end)
 			},
 			title = {
 				reveal = var16.title,
-				slide = var16.title:map(function(p11) --[[ line: 264 ]]
+				slide = var16.title:map(function(p11)
 					-- upvalues: slideFromReveal (copy), LOCKUP (copy)
 					return slideFromReveal(p11, LOCKUP.TITLE_SLIDE)
 				end)
 			},
 			creator = {
 				reveal = var16.creator,
-				slide = var16.creator:map(function(p12) --[[ line: 270 ]]
+				slide = var16.creator:map(function(p12)
 					-- upvalues: slideFromReveal (copy), LOCKUP (copy)
 					return slideFromReveal(p12, LOCKUP.SUB_SLIDE)
 				end)

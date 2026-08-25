@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("VoiceUserAgencyIXPLayerName", "")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("VoiceUserAgencyIXPLayerName")
 end

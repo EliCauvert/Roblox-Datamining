@@ -5,7 +5,7 @@ local myHttpRequestModule = require(trustedContacts.Networking.myHttpRequest)
 local _ = require(trustedContacts.TrustedFriendActions.TFActionsEnum)
 local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
 
-return function(p0, p1) --[[ line: 17 ]]
+return function(p0, p1)
 	-- upvalues: httpModule (ref), fFlagTFPassQRCodeSourceModule (ref), httpService (ref), myHttpRequestModule (ref)
 	local formattedText = string.format("%s/profile-platform-api/v1/profiles/get", httpModule.Url.APIS_URL)
 	local var6 = nil
@@ -32,7 +32,7 @@ return function(p0, p1) --[[ line: 17 ]]
 				}
 			}
 		}
-	}):andThen(function(p2) --[[ line: 50 ]]
+	}):andThen(function(p2)
 		local action
 		if p2 then
 			action = p2.responseBody and (p2.responseBody.components and (p2.responseBody.components.TrustedFriendActions and (p2.responseBody.components.TrustedFriendActions.action or nil)))

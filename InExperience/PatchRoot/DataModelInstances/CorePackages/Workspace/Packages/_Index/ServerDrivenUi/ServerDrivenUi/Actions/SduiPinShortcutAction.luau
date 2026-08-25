@@ -2,11 +2,11 @@
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local pinExperienceShortcut = sduiCoreSystemModule.SduiActionType.PinExperienceShortcut
 
-local function _() --[[ line: 16 | named "isPinShortcutServiceEnabled" ]]
+local function _()
 	return game:GetEngineFeature("PinShortcutServiceEnabled")
 end
 
-return function(p0, _, p1, _) --[[ line: 20 | named "SduiPinShortcutAction" ]]
+return function(p0, _, p1, _)
 	-- upvalues: sduiErrorType (ref), pinExperienceShortcut (ref)
 	local var1 = if p0 then p0.actionParams else nil
 	
@@ -33,7 +33,7 @@ return function(p0, _, p1, _) --[[ line: 20 | named "SduiPinShortcutAction" ]]
 	local gameName = var1.gameName or ""
 	
 	if game:GetEngineFeature("PinShortcutServiceEnabled") then
-		task.spawn(function() --[[ line: 57 ]]
+		task.spawn(function()
 			-- upvalues: p1 (ref), sduiErrorType (copy), pinExperienceShortcut (copy), var2 (ref), universeId (ref), gameName (ref)
 			local ok, status = pcall(game.GetService, game, "PinShortcutService")
 			
@@ -45,7 +45,7 @@ return function(p0, _, p1, _) --[[ line: 20 | named "SduiPinShortcutAction" ]]
 				
 				return
 			end
-			local ok_1, status_1 = pcall(function() --[[ line: 66 ]]
+			local ok_1, status_1 = pcall(function()
 				-- upvalues: status (ref), var2 (copy), universeId (copy), gameName (copy)
 				status:PinExperience(var2, universeId, gameName)
 			end)

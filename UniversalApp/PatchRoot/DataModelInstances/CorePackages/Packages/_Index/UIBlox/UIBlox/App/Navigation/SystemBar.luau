@@ -64,12 +64,12 @@ systemBar.defaultProps = {
 	lastItemPaddingOffset = UDim.new(0, 0)
 }
 
-function systemBar.isPortrait(p0) --[[ line: 145 ]]
+function systemBar.isPortrait(p0)
 	-- upvalues: placementModule (ref)
 	return if p0.props.placement == placementModule.Left then false else p0.props.placement == placementModule.Bottom or p0.state.portrait
 end
 
-function systemBar.renderItem(p1, p2, p3, p4, p5) --[[ line: 155 ]]
+function systemBar.renderItem(p1, p2, p3, p4, p5)
 	-- upvalues: controlStateModule (ref), placementModule (ref), roactModule (ref), badgeStatesModule (ref), tModule (ref), var18 (ref), var19 (ref), var21 (ref), var20 (ref), withAnimationModule (ref), withStyleModule (ref), imageSetComponentModule (ref), var16 (ref), var16 (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), badgeVariantModule (ref), t (ref)
 	local var25
 	if p2.iconOn ~= nil then
@@ -99,9 +99,9 @@ function systemBar.renderItem(p1, p2, p3, p4, p5) --[[ line: 155 ]]
 			var29 = var20
 		end
 	end
-	return withAnimationModule({ positionX = var29, positionY = var30 }, function(p6) --[[ line: 208 ]]
+	return withAnimationModule({ positionX = var29, positionY = var30 }, function(p6)
 		-- upvalues: withStyleModule (copy), roactModule (copy), p2 (ref), imageSetComponentModule (copy), var16 (copy), var16 (copy), p1 (ref), p4 (ref), var26 (ref), var28 (write), statusIndicator (copy), badgeStatesModule (copy), migrateBadgeVariantModule (copy), badgeVariantModule (copy)
-		return withStyleModule(function(p7) --[[ line: 209 ]]
+		return withStyleModule(function(p7)
 			-- upvalues: roactModule (copy), p2 (copy), imageSetComponentModule (copy), p6 (ref), var16 (copy), var16 (copy), p1 (copy), p4 (copy), var26 (copy), var28 (copy), statusIndicator (copy), badgeStatesModule (copy), migrateBadgeVariantModule (copy), badgeVariantModule (copy)
 			return roactModule.createElement(p2.iconImageComponent or imageSetComponentModule.Label, {
 				Position = UDim2.fromOffset(math.floor(p6.positionX + 0.5), math.floor(p6.positionY + 0.5)),
@@ -128,11 +128,11 @@ function systemBar.renderItem(p1, p2, p3, p4, p5) --[[ line: 155 ]]
 	end, t), { LayoutOrder = p5 }
 end
 
-function systemBar.renderPortrait(p8, p9, p10) --[[ line: 244 ]]
+function systemBar.renderPortrait(p8, p9, p10)
 	-- upvalues: withAnimationModule (ref), roactModule (ref), cryoModule (ref), var17 (ref), t (ref)
 	return withAnimationModule({
 		offset = if p8.props.hidden then 0 else -p8.props.experimentalTabSizePortraitY
-	}, function(p11) --[[ line: 247 ]]
+	}, function(p11)
 		-- upvalues: roactModule (copy), cryoModule (copy), p9 (ref), p8 (ref), var17 (copy), p10 (ref)
 		return roactModule.createElement("Frame", cryoModule.Dictionary.join(p9, {
 			ZIndex = 99,
@@ -156,9 +156,9 @@ function systemBar.renderPortrait(p8, p9, p10) --[[ line: 244 ]]
 	end, t)
 end
 
-function systemBar.renderLandscape(p12, p13, p14, p15) --[[ line: 283 ]]
+function systemBar.renderLandscape(p12, p13, p14, p15)
 	-- upvalues: withAnimationModule (ref), roactModule (ref), cryoModule (ref), var22 (ref), var23 (ref), t (ref)
-	return withAnimationModule({ offset = if p12.props.hidden then -64 else 0 }, function(p16) --[[ line: 286 ]]
+	return withAnimationModule({ offset = if p12.props.hidden then -64 else 0 }, function(p16)
 		-- upvalues: roactModule (copy), cryoModule (copy), p13 (ref), p15 (ref), p12 (ref), var22 (copy), var23 (copy), p14 (ref)
 		return roactModule.createElement("Frame", cryoModule.Dictionary.join(p13, {
 			ZIndex = 99,
@@ -181,16 +181,16 @@ function systemBar.renderLandscape(p12, p13, p14, p15) --[[ line: 283 ]]
 	end, t)
 end
 
-function systemBar.renderBackground(value, p17, p18) --[[ line: 316 ]]
+function systemBar.renderBackground(value, p17, p18)
 	-- upvalues: cryoModule (ref), roactModule (ref)
 	if value:isPortrait() then
 		return value:renderPortrait(p17, p18)
 	end
-	local var31 = cryoModule.List.filter(p18, function(_, p19) --[[ line: 323 ]]
+	local var31 = cryoModule.List.filter(p18, function(_, p19)
 		-- upvalues: value (ref)
 		return value.props.itemList[p19].bottomAligned
 	end)
-	local var32 = value:renderLandscape(p17, cryoModule.List.filter(p18, function(_, p20) --[[ line: 320 ]]
+	local var32 = value:renderLandscape(p17, cryoModule.List.filter(p18, function(_, p20)
 		-- upvalues: value (ref)
 		return not value.props.itemList[p20].bottomAligned
 	end))
@@ -204,7 +204,7 @@ function systemBar.renderBackground(value, p17, p18) --[[ line: 316 ]]
 	return var32
 end
 
-function systemBar.renderSafeArea(p21) --[[ line: 337 ]]
+function systemBar.renderSafeArea(p21)
 	-- upvalues: roactModule (ref)
 	local uDim2, uDim2_1
 	local _ = nil
@@ -229,9 +229,9 @@ function systemBar.renderSafeArea(p21) --[[ line: 337 ]]
 	}, p21.props[roactModule.Children])
 end
 
-function systemBar.renderList(p22, p23, p24) --[[ line: 358 ]]
+function systemBar.renderList(p22, p23, p24)
 	-- upvalues: withStyleModule (ref), cryoModule (ref), roactModule (ref)
-	return withStyleModule(function(p25) --[[ line: 359 ]]
+	return withStyleModule(function(p25)
 		-- upvalues: cryoModule (copy), p23 (ref), p24 (ref), roactModule (copy), p22 (ref)
 		local theme = p25.Theme
 		
@@ -242,7 +242,7 @@ function systemBar.renderList(p22, p23, p24) --[[ line: 358 ]]
 			ClipsDescendants = p22.props.clipsDescendants,
 			LayoutOrder = p22.props.layoutOrder,
 			BackgroundTransparency = p22.props.bgTransparency or 1,
-			[roactModule.Change.AbsoluteSize] = function(p26) --[[ line: 371 ]]
+			[roactModule.Change.AbsoluteSize] = function(p26)
 				-- upvalues: p22 (copy)
 				if p22.state.portrait and p26.AbsoluteSize.Y < p26.AbsoluteSize.X then
 					p22:setState({ portrait = false })
@@ -257,7 +257,7 @@ function systemBar.renderList(p22, p23, p24) --[[ line: 358 ]]
 				BorderSizePixel = 0,
 				BackgroundColor3 = theme.NavigationBar.Color,
 				BackgroundTransparency = if p22.props.roundCorners then 1 else theme.NavigationBar.Transparency
-			}, cryoModule.List.map(p23, function(_, p27) --[[ line: 361 ]]
+			}, cryoModule.List.map(p23, function(_, p27)
 				-- upvalues: p24 (copy)
 				return p24(p27)
 			end)),
@@ -268,10 +268,10 @@ function systemBar.renderList(p22, p23, p24) --[[ line: 358 ]]
 	end)
 end
 
-function systemBar.init(p28) --[[ line: 397 ]]
+function systemBar.init(p28)
 	p28:setState({ portrait = true })
 	
-	function p28.onSelectionChanged(p29) --[[ line: 401 ]]
+	function p28.onSelectionChanged(p29)
 		-- upvalues: p28 (ref)
 		if #p29 > 0 then
 			local var35 = p28.props.itemList[p29[1]]
@@ -282,7 +282,7 @@ function systemBar.init(p28) --[[ line: 397 ]]
 		end
 	end
 	
-	function p28.onSafeAreaEvent(p30) --[[ line: 409 ]]
+	function p28.onSafeAreaEvent(p30)
 		-- upvalues: p28 (ref)
 		if p28.props.onSafeAreaChanged then
 			p28.props.onSafeAreaChanged({
@@ -295,7 +295,7 @@ function systemBar.init(p28) --[[ line: 397 ]]
 	end
 end
 
-function systemBar.render(p31) --[[ line: 421 ]]
+function systemBar.render(p31)
 	-- upvalues: roactModule (ref), interactableListModule (ref), var17 (ref), var17 (ref)
 	local itemList = p31.props.itemList
 	local selection = p31.props.selection
@@ -304,11 +304,11 @@ function systemBar.render(p31) --[[ line: 421 ]]
 		itemList = itemList,
 		selection = selection and (if itemList[selection] == nil then nil else { selection }),
 		itemSize = UDim2.fromOffset(var17, var17),
-		renderList = function(...) --[[ line: 437 ]]
+		renderList = function(...)
 			-- upvalues: p31 (ref)
 			return p31:renderList(...)
 		end,
-		renderItem = function(...) --[[ line: 440 ]]
+		renderItem = function(...)
 			-- upvalues: p31 (ref)
 			return p31:renderItem(...)
 		end,

@@ -24,7 +24,7 @@ local t = {
 }
 local var6 = require(parent.Enum.ControlState).Initialize.rawValue()
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 76 ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), var6 (ref), reactModule (ref), useCursorModule (ref), interactableModule (ref)
 	local var7 = cryoModule.Dictionary.join(t, p0)
 	local stateLayer = useStyleModule().Tokens.Component.StateLayer
@@ -65,7 +65,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 76 ]]
 		Selectable = not var7.isDisabled and var7.selectable,
 		SelectionImageObject = var12,
 		[reactModule.Event.Activated] = var7.onActivated,
-		onStateChanged = reactModule.useCallback(function(p2, p3) --[[ line: 122 ]]
+		onStateChanged = reactModule.useCallback(function(p2, p3)
 			-- upvalues: stateLayer (ref), var7 (ref), var9 (ref), var11 (ref)
 			local color = stateLayer[var7.stateStyle][p3.rawValue()].Color
 			var9(color.Color3)

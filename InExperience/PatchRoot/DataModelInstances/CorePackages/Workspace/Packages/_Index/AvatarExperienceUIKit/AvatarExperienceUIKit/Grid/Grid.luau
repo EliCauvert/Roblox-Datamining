@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local mutedError = require(parent.Loggers).mutedError
 local AXDebugGridShouldErrorOnInvalidRowCount = game:DefineFastFlag("AXDebugGridShouldErrorOnInvalidRowCount", false)
 
-local function GridRow(p0) --[[ line: 21 ]]
+local function GridRow(p0)
 	-- upvalues: reactModule (ref)
 	local t = {
 		GridRowLayout = reactModule.createElement("UIListLayout", {
@@ -41,7 +41,7 @@ local function GridRow(p0) --[[ line: 21 ]]
 	}, t)
 end
 
-return reactModule.forwardRef(function(p1, p2) --[[ line: 80 ]]
+return reactModule.forwardRef(function(p1, p2)
 	-- upvalues: AXDebugGridShouldErrorOnInvalidRowCount (ref), mutedError (ref), reactModule (ref), GridRow (ref)
 	local var4 = if p1.itemsPerRow <= 0 then 1 else p1.itemsPerRow
 	

@@ -5,7 +5,7 @@ local expChatGlobalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpCha
 return {
 	name = script.Name,
 	alias = { "/help" },
-	clientRun = function() --[[ line: 9 ]]
+	clientRun = function()
 		-- upvalues: expChatGlobalUserCountEnabledEngineFeature (ref), expChatEnableGlobalOnlineCommand (ref)
 		return if expChatGlobalUserCountEnabledEngineFeature and expChatEnableGlobalOnlineCommand then {
 			metadata = "Roblox.GlobalHelp.Info",

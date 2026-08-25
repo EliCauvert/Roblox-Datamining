@@ -3,7 +3,7 @@ local guiService = game:GetService("GuiService")
 local reactModule = require(corePackagesService.Packages.React)
 local useSelector = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
 
-local var3 = function(p0, p1, p2) --[[ line: 27 ]]
+local var3 = function(p0, p1, p2)
 	local t = {}
 	local x = p0.X
 	local y = p0.Y
@@ -30,7 +30,7 @@ local var3 = function(p0, p1, p2) --[[ line: 27 ]]
 	return t
 end
 
-local var4 = function(p3, p4) --[[ line: 79 ]]
+local var4 = function(p3, p4)
 	-- upvalues: guiService (ref), var3 (ref)
 	local _ = {}
 	local t = {}
@@ -38,7 +38,7 @@ local var4 = function(p3, p4) --[[ line: 79 ]]
 	for i, v in pairs(p4) do
 		table.insert(t, { id = v.id, size = v.size, position = v.position })
 	end
-	table.sort(t, function(p5, p6) --[[ line: 94 ]]
+	table.sort(t, function(p5, p6)
 		return p5.position.X < p6.position.X and p5.position.X + p5.size.X < p6.size.X + p6.position.X
 	end)
 	local guiInset, _ = guiService:GetGuiInset()
@@ -52,7 +52,7 @@ local var4 = function(p3, p4) --[[ line: 79 ]]
 	return rect
 end
 
-local _ = function(p7, p8) --[[ line: 117 ]]
+local _ = function(p7, p8)
 	-- upvalues: var4 (ref), guiService (ref)
 	local var14 = var4(p7, p8)
 	
@@ -61,15 +61,15 @@ local _ = function(p7, p8) --[[ line: 117 ]]
 	end
 end
 
-function KeepOutAreasHandler(_) --[[ line: 124 ]]
+function KeepOutAreasHandler(_)
 	-- upvalues: useSelector (ref), reactModule (ref), var4 (ref), guiService (ref)
-	local var15 = useSelector(function(p9) --[[ line: 125 ]]
+	local var15 = useSelector(function(p9)
 		return p9.displayOptions.screenSize
 	end)
-	local var16 = useSelector(function(p10) --[[ line: 129 ]]
+	local var16 = useSelector(function(p10)
 		return p10.displayOptions.keepOutAreas
 	end)
-	reactModule.useEffect(function() --[[ line: 133 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), var16 (ref), var4 (copy), guiService (copy)
 		local var17 = var4(var15, var16)
 		

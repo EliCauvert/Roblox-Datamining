@@ -7,14 +7,14 @@ local var3 = nil
 local var4 = nil
 local var5 = nil
 
-local function ensureCaches() --[[ line: 14 ]]
+local function ensureCaches()
 	-- upvalues: var5 (write), list (ref), r15plusUtilsModule (ref), var3 (write), var4 (write)
 	if var5 then return end
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
 	
-	local function traverse(p0, p1, p2) --[[ line: 23 ]]
+	local function traverse(p0, p1, p2)
 		-- upvalues: t (ref), t_1 (ref), t_2 (ref), traverse (ref)
 		for i, v in p0 do
 			if v.ClassName == "Bone" then
@@ -44,7 +44,7 @@ local function ensureCaches() --[[ line: 14 ]]
 	var5 = t
 end
 
-function t.hasBoneFolders(p3) --[[ line: 59 ]]
+function t.hasBoneFolders(p3)
 	-- upvalues: t (ref)
 	for i, v in p3:GetDescendants() do
 		if v:IsA("Folder") and t.isBoneFolderName(v.Name) then
@@ -54,21 +54,21 @@ function t.hasBoneFolders(p3) --[[ line: 59 ]]
 	return false
 end
 
-function t.isBoneFolderName(p4) --[[ line: 68 ]]
+function t.isBoneFolderName(p4)
 	-- upvalues: ensureCaches (ref), var5 (write)
 	ensureCaches()
 	
 	return var5[p4] == true
 end
 
-function t.getRootBoneNamesForBodyPart(p5) --[[ line: 73 ]]
+function t.getRootBoneNamesForBodyPart(p5)
 	-- upvalues: ensureCaches (ref), var3 (write)
 	ensureCaches()
 	
 	return var3[p5] or {}
 end
 
-function t.getChildBoneNames(p6) --[[ line: 78 ]]
+function t.getChildBoneNames(p6)
 	-- upvalues: ensureCaches (ref), var4 (write)
 	ensureCaches()
 	

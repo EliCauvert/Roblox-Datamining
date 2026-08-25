@@ -18,14 +18,14 @@ local lifecycleEvents = toastNotificationModule.LifecycleEvents
 local notificationTypeEnum = toastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
 local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), reactModule (ref), squadExternalContractContextModule (ref), default (ref), httpService (ref), eventNamesModule (ref), squadToastActionsAndStatesModule (ref), constantsModule (ref), notificationTypeEnum (ref), actOnPartyNudgeModule (ref), lifecycleEvents (ref), gameParams (ref), experienceService (ref), squadGameJoinOriginModule (ref)
 	local var12 = useDispatch()
 	local var13 = reactModule.useContext(squadExternalContractContextModule)
 	local var14 = var13.useIsChatEnabled()
 	local var15 = var13.useIsLoadingChatSettings()
 	local var16 = reactModule.useRef({})
-	local var17 = reactModule.useCallback(function(p1) --[[ line: 43 ]]
+	local var17 = reactModule.useCallback(function(p1)
 		-- upvalues: var15 (ref), var14 (ref), default (copy)
 		if var15 or var14 then
 			return false
@@ -34,7 +34,7 @@ return function(p0) --[[ line: 34 ]]
 		
 		return true
 	end, { var15, var14 })
-	local var18 = reactModule.useCallback(function(p2, p3, p4) --[[ line: 52 ]]
+	local var18 = reactModule.useCallback(function(p2, p3, p4)
 		-- upvalues: var16 (ref), httpService (copy)
 		var16.current[p2] = {
 			shouldActWhenDismiss = true,
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 34 ]]
 			nudgeType = p4.nudgeType
 		}
 	end, {})
-	local var19 = reactModule.useCallback(function(p5, p6) --[[ line: 64 ]]
+	local var19 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: var13 (ref), eventNamesModule (copy), var16 (ref)
 		var13.fireSquadAnalytics(eventNamesModule.SquadToastActions, {
 			toastAction = p6,
@@ -55,9 +55,9 @@ return function(p0) --[[ line: 34 ]]
 			squadLocation = var13.squadLocation
 		})
 	end, { var13.fireSquadAnalytics, var13.squadLocation })
-	reactModule.useEffect(function() --[[ line: 83 ]]
+	reactModule.useEffect(function()
 		-- upvalues: default (copy), var16 (ref), var19 (ref), squadToastActionsAndStatesModule (copy), constantsModule (copy), notificationTypeEnum (copy), var12 (ref), actOnPartyNudgeModule (copy), var13 (ref), var14 (ref)
-		local var20 = default:listenToDismissNotification(function(p7) --[[ line: 85 ]]
+		local var20 = default:listenToDismissNotification(function(p7)
 			-- upvalues: var16 (copy), var19 (copy), squadToastActionsAndStatesModule (copy), constantsModule (copy), notificationTypeEnum (copy), var12 (copy), actOnPartyNudgeModule (copy), var13 (copy), var14 (copy)
 			if p7.notificationId and var16.current[p7.notificationId] then
 				var19(p7.notificationId, squadToastActionsAndStatesModule.PartyNudgeGeneralDismiss)
@@ -74,7 +74,7 @@ return function(p0) --[[ line: 34 ]]
 			var16.current[p7.notificationId] = nil
 		end)
 		
-		return function() --[[ line: 121 ]]
+		return function()
 			-- upvalues: var20 (ref)
 			if var20 then
 				var20:Disconnect()
@@ -87,9 +87,9 @@ return function(p0) --[[ line: 34 ]]
 		var13.fireSquadAnalytics,
 		var13.squadLocation
 	})
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), var16 (ref), var17 (ref), httpService (copy), constantsModule (copy), default (copy), var19 (ref), squadToastActionsAndStatesModule (copy), gameParams (copy), experienceService (copy), squadGameJoinOriginModule (copy)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadNudgeInvite, function(p8) --[[ line: 138 ]]
+		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadNudgeInvite, function(p8)
 			-- upvalues: var16 (copy), var17 (copy), httpService (copy), constantsModule (copy)
 			if p8 and p8.userActionType == "click" and (p8.notificationData and p8.visualItem) and (p8.visualItem.actionEventParams and p8.visualItem.visualItemName) then
 				local id = p8.notificationData.id
@@ -101,7 +101,7 @@ return function(p0) --[[ line: 34 ]]
 				if httpService:JSONDecode(p8.visualItem.actionEventParams).nudgeType ~= constantsModule.PARTY_TO_ONE_NUDGE_TYPE then return end
 			end
 		end)
-		local userAction_1 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.NudgeForInviterSquad, function(p9) --[[ line: 171 ]]
+		local userAction_1 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.NudgeForInviterSquad, function(p9)
 			-- upvalues: var16 (copy), var17 (copy), httpService (copy), constantsModule (copy), default (copy), var19 (copy), squadToastActionsAndStatesModule (copy), gameParams (copy), experienceService (copy), squadGameJoinOriginModule (copy)
 			if p9 and p9.userActionType == "click" and (p9.notificationData and p9.visualItem) and (p9.visualItem.actionEventParams and p9.visualItem.visualItemName) then
 				local id = p9.notificationData.id
@@ -126,7 +126,7 @@ return function(p0) --[[ line: 34 ]]
 			end
 		end)
 		
-		return function() --[[ line: 217 ]]
+		return function()
 			-- upvalues: userAction (ref), userAction_1 (ref)
 			if userAction then
 				userAction()
@@ -139,9 +139,9 @@ return function(p0) --[[ line: 34 ]]
 		var17, var19, var13, var13.setSquadPrompt, var13.fireSquadAnalytics,
 		var13.squadLocation, p0.currentSquadId
 	})
-	reactModule.useEffect(function() --[[ line: 236 ]]
+	reactModule.useEffect(function()
 		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), var17 (ref), httpService (copy), constantsModule (copy), p0 (ref), default (copy), var18 (ref), var19 (ref), squadToastActionsAndStatesModule (copy)
-		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadNudgeInvite, function(p10) --[[ line: 240 ]]
+		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadNudgeInvite, function(p10)
 			-- upvalues: var17 (copy), httpService (copy), constantsModule (copy), p0 (copy), default (copy), var18 (copy), var19 (copy), squadToastActionsAndStatesModule (copy)
 			local actionEventParams = p10.state.visualItems.button[1].actionEventParams
 			local id = p10.id
@@ -157,7 +157,7 @@ return function(p0) --[[ line: 34 ]]
 			var18(id, p10, var28)
 			var19(id, squadToastActionsAndStatesModule.PartyNudgeDisplay)
 		end)
-		local display_1 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.NudgeForInviterSquad, function(p11) --[[ line: 269 ]]
+		local display_1 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.NudgeForInviterSquad, function(p11)
 			-- upvalues: var17 (copy), httpService (copy), constantsModule (copy), default (copy), p0 (copy), var18 (copy), var19 (copy), squadToastActionsAndStatesModule (copy)
 			local actionEventParams = p11.state.visualItems.button[1].actionEventParams
 			local id = p11.id
@@ -179,7 +179,7 @@ return function(p0) --[[ line: 34 ]]
 			var18(id, p11, var29)
 			var19(id, squadToastActionsAndStatesModule.PartyNudgeDisplay)
 		end)
-		local display_2 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadJoinRequestPrompt, function(p12) --[[ line: 301 ]]
+		local display_2 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadJoinRequestPrompt, function(p12)
 			-- upvalues: var17 (copy), httpService (copy), var18 (copy), var19 (copy), squadToastActionsAndStatesModule (copy)
 			local actionEventParams = p12.state.visualItems.button[1].actionEventParams
 			local id = p12.id
@@ -190,7 +190,7 @@ return function(p0) --[[ line: 34 ]]
 			var18(id, p12, httpService:JSONDecode(actionEventParams))
 			var19(id, squadToastActionsAndStatesModule.PartyNudgeDisplay)
 		end)
-		local display_3 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadAcceptJoinRequest, function(p13) --[[ line: 318 ]]
+		local display_3 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadAcceptJoinRequest, function(p13)
 			-- upvalues: var17 (copy), httpService (copy), var18 (copy), var19 (copy), squadToastActionsAndStatesModule (copy)
 			local actionEventParams = p13.state.visualItems.button[1].actionEventParams
 			local id = p13.id
@@ -202,7 +202,7 @@ return function(p0) --[[ line: 34 ]]
 			var19(id, squadToastActionsAndStatesModule.PartyNudgeDisplay)
 		end)
 		
-		return function() --[[ line: 332 ]]
+		return function()
 			-- upvalues: display (ref), display_1 (ref), display_2 (ref), display_3 (ref)
 			if display then
 				display()

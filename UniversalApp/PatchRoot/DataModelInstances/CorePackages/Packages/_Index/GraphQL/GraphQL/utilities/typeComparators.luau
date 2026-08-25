@@ -7,12 +7,12 @@ local isListType = definitionModule.isListType
 local isNonNullType = definitionModule.isNonNullType
 local isAbstractType = definitionModule.isAbstractType
 
-local function isEqualType(p0, p1) --[[ line: 24 ]]
+local function isEqualType(p0, p1)
 	-- upvalues: isNonNullType (ref), isEqualType (ref), isListType (ref)
 	return p0 == p1 or (if isNonNullType(p0) and isNonNullType(p1) then isEqualType(p0.ofType, p1.ofType) elseif isListType(p0) and isListType(p1) then isEqualType(p0.ofType, p1.ofType) else false)
 end
 
-local function isTypeSubTypeOf(p2, p3, p4) --[[ line: 48 ]]
+local function isTypeSubTypeOf(p2, p3, p4)
 	-- upvalues: isNonNullType (ref), isTypeSubTypeOf (ref), isListType (ref), isAbstractType (ref), isInterfaceType (ref), isObjectType (ref)
 	if p3 == p4 then
 		return true
@@ -36,9 +36,9 @@ end
 return {
 	isEqualType = isEqualType,
 	isTypeSubTypeOf = isTypeSubTypeOf,
-	doTypesOverlap = function(vectorA, vectorB, p5) --[[ line: 97 ]]
+	doTypesOverlap = function(vectorA, vectorB, p5)
 		-- upvalues: isAbstractType (ref), array (ref)
-		return vectorB == p5 or (if isAbstractType(vectorB) then if isAbstractType(p5) then array.some(vectorA:getPossibleTypes(vectorB), function(p6) --[[ line: 106 ]]
+		return vectorB == p5 or (if isAbstractType(vectorB) then if isAbstractType(p5) then array.some(vectorA:getPossibleTypes(vectorB), function(p6)
 			-- upvalues: vectorA (ref), p5 (ref)
 			return vectorA:isSubType(p5, p6)
 		end) else vectorA:isSubType(vectorB, p5) elseif isAbstractType(p5) then vectorA:isSubType(p5, vectorB) else false)

@@ -10,10 +10,10 @@ local iconVariant = require(parent.BuilderIcons).IconVariant
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useProfileInsightsToIconsAndTextsModule = require(script.Parent.useProfileInsightsToIconsAndTexts)
 
-return function(p0) --[[ line: 28 | named "SocialMetadataIconsAndTextsSection" ]]
+return function(p0)
 	-- upvalues: useProfileInsightsToIconsAndTextsModule (ref), useDesignTokens (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), iconVariant (ref), text (ref)
 	local var3 = useProfileInsightsToIconsAndTextsModule(p0.profileInsightIconItems)
-	local var4 = reactModule.useCallback(function(p1, p2) --[[ line: 34 ]]
+	local var4 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: reactModule (copy), view (copy), icon (copy), iconSize (copy), iconVariant (copy), text (copy)
 		return reactModule.createElement(view, {
 			tag = "auto-xy size-0 row align-y-center gap-xsmall padding-x-xsmall",
@@ -37,7 +37,7 @@ return function(p0) --[[ line: 28 | named "SocialMetadataIconsAndTextsSection" ]
 	for i, v in pairs(var3) do
 		table.insert(t, var4(v, i))
 	end
-	return reactModule.useMemo(function() --[[ line: 59 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), view (copy), p0 (ref), t (ref)
 		return reactModule.createElement(view, {
 			tag = {

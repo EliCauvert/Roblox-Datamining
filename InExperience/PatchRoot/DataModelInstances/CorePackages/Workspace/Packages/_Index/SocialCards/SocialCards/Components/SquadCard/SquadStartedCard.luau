@@ -10,7 +10,7 @@ local squadJoinButtonModule = require(parent.Squads.SquadJoinButton)
 local squadComponentAccessWrapperModule = require(parent.Squads.SquadComponentAccessWrapper)
 local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
 
-return function(p0) --[[ line: 23 | named "SquadStartedCard" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), useTokens (ref), useLocalization (ref), reactModule (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), imagePile (ref), foundationModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref)
 	local var4 = useNavigation()
 	local var5 = useTokens()
@@ -55,7 +55,7 @@ return function(p0) --[[ line: 23 | named "SquadStartedCard" ]]
 				LayoutOrder = 1,
 				Size = UDim2.fromOffset(var5.Size.Size_1000, var5.Size.Size_1000)
 			}, {
-				reactModule.useCallback(function(p1) --[[ line: 32 ]]
+				reactModule.useCallback(function(p1)
 					-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (copy), var5 (ref), reactModule (copy), imagePile (copy)
 					local t = {}
 					
@@ -108,7 +108,7 @@ return function(p0) --[[ line: 23 | named "SquadStartedCard" ]]
 				layoutOrder = 3,
 				shouldAnimate = false,
 				conversationId = p0.conversationId,
-				onActivated = function() --[[ line: 133 ]]
+				onActivated = function()
 					-- upvalues: var4 (ref), p0 (ref)
 					var4.navigate("SquadLobby", { conversationId = p0.conversationId })
 				end,

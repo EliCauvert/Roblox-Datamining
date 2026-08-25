@@ -3,7 +3,7 @@ local _ = require(gameFilters.Parent.DiscoveryTypes)
 local gameFilterModelModule = require(gameFilters.DataStore.GameFilterModel)
 local setGameFiltersModule = require(gameFilters.DataStore.SetGameFilters)
 
-return function(p0, p1, p2) --[[ line: 9 ]]
+return function(p0, p1, p2)
 	-- upvalues: gameFilterModelModule (ref), setGameFiltersModule (ref)
 	if not p2 or #p2 == 0 then
 		warn("Found no filters in this sort")

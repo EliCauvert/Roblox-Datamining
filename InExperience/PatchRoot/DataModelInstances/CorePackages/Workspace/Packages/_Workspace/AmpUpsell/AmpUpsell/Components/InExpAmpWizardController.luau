@@ -20,7 +20,7 @@ local inExpAmpWizardDisplayOrder = game:DefineFastInt("InExpAmpWizardDisplayOrde
 local var8 = if fFlagConnectionAmpUpsellOnLeave then require(parent.ApolloClient).ApolloProvider else nil
 local var9 = nil
 
-local function WizardScreenGui(p0) --[[ line: 36 ]]
+local function WizardScreenGui(p0)
 	-- upvalues: useDispatch (ref), inExpAmpWizardDisplayOrder (ref), fFlagConnectionAmpUpsellOnLeave (ref), reactModule (ref), roactModule (ref), setScreenSize (ref), inExpWizardNavigatorModule (ref)
 	local var12 = useDispatch()
 	
@@ -31,7 +31,7 @@ local function WizardScreenGui(p0) --[[ line: 36 ]]
 		DisplayOrder = if fFlagConnectionAmpUpsellOnLeave and p0 and p0.displayOrder then p0.displayOrder else inExpAmpWizardDisplayOrder,
 		Enabled = true,
 		OnTopOfCoreBlur = if fFlagConnectionAmpUpsellOnLeave and p0 and p0.onTopOfCoreBlur then true else nil,
-		[roactModule.Change.AbsoluteSize] = function(p1) --[[ line: 53 ]]
+		[roactModule.Change.AbsoluteSize] = function(p1)
 			-- upvalues: var12 (ref), setScreenSize (copy)
 			var12(setScreenSize(p1.AbsoluteSize))
 		end
@@ -40,7 +40,7 @@ local function WizardScreenGui(p0) --[[ line: 36 ]]
 	})
 end
 
-local function renderAmpWizard(p2, p3) --[[ line: 65 ]]
+local function renderAmpWizard(p2, p3)
 	-- upvalues: var9 (write), reactRobloxModule (ref), fFlagConnectionAmpUpsellOnLeave (ref), reactModule (ref), inExperienceProviderContainer (ref), WizardScreenGui (ref), var8 (write)
 	if var9 == nil then
 		local coreGuiService = game:GetService("CoreGui")
@@ -65,17 +65,17 @@ local function renderAmpWizard(p2, p3) --[[ line: 65 ]]
 end
 
 return {
-	OpenAmpWizardContainerInExp = function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 92 ]]
+	OpenAmpWizardContainerInExp = function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14)
 		-- upvalues: getFFlagEnableDummyAMPWizardModule (ref), httpService (ref), getFFlagInExperienceContainerScreenSizeReducer (ref), getFFlagMoveAmpUpsellOffNavigateDown (ref), var9 (write), fFlagConnectionAmpUpsellOnLeave (ref), renderAmpWizard (ref)
 		if getFFlagEnableDummyAMPWizardModule() then
-			task.delay(0.5, function() --[[ line: 106 ]]
+			task.delay(0.5, function()
 				-- upvalues: p5 (ref), httpService (copy)
 				if p5 then
 					local dummyAMPWizardAccessResponseFastString = game:GetFastString("DummyAMPWizardAccessResponse")
 					local dummyAMPWizardActionsTakenJSONFastString = game:GetFastString("DummyAMPWizardActionsTakenJSON")
 					local t = {}
 					
-					if pcall(function() --[[ line: 112 ]]
+					if pcall(function()
 						-- upvalues: httpService (copy), dummyAMPWizardActionsTakenJSONFastString (ref)
 						httpService:JSONDecode(dummyAMPWizardActionsTakenJSONFastString)
 					end) then
@@ -95,7 +95,7 @@ return {
 				isInExperienceEntry = true,
 				nameSpace = p9,
 				featureName = p4,
-				completionCallback = function(p15, p16) --[[ line: 129 ]]
+				completionCallback = function(p15, p16)
 					-- upvalues: var9 (copy), p5 (ref)
 					if var9 then
 						var9:render(nil)

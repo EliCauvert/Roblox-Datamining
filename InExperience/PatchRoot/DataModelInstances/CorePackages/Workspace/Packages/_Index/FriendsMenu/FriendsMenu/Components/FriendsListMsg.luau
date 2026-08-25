@@ -6,7 +6,7 @@ local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnect
 local useStyle = UIBloxModule.Core.Style.useStyle
 local getLocalizedStrings = localizationHelper.getLocalizedStrings
 
-return function(p0) --[[ line: 19 ]]
+return function(p0)
 	-- upvalues: useStyle (ref), fFlagConnectionsToFriendsRename (ref), getLocalizedStrings (ref), reactModule (ref)
 	local var2 = useStyle()
 	local theme = var2.Theme

@@ -1,9 +1,9 @@
 ﻿local httpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function noopCancel() --[[ line: 12 ]] end
+local function noopCancel() end
 
-local function normalizeResponse(p0) --[[ line: 14 ]]
+local function normalizeResponse(p0)
 	-- upvalues: httpService (ref)
 	return if typeof(p0) == "string" then { statusCode = 200, responseBody = p0 } elseif typeof(p0) == "table" then if p0.statusCode == nil then {
 		statusCode = 200,
@@ -11,13 +11,13 @@ local function normalizeResponse(p0) --[[ line: 14 ]]
 	} else p0 else { statusCode = 200, responseBody = nil }
 end
 
-return function(p1) --[[ line: 27 | named "createMockNetwork" ]]
+return function(p1)
 	-- upvalues: httpService (ref), noopCancel (ref), normalizeResponse (ref)
 	p1 = p1 or {}
 	local routes = p1.routes or {}
 	
 	return {
-		request = function(p2, p3) --[[ line: 31 ]]
+		request = function(p2, p3)
 			-- upvalues: routes (ref), p1 (ref), httpService (copy), noopCancel (copy), normalizeResponse (copy)
 			local respond = nil
 			

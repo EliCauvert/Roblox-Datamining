@@ -38,14 +38,14 @@ local t = {
 	openChat = nil,
 	openReportUser = nil,
 	openRemoveUserDialog = nil,
-	onDismiss = function() --[[ line: 71 ]] end
+	onDismiss = function() end
 }
 local t_1 = { skipFetch = true }
 
-function ParticipantDialogContainerDeprecated(p0) --[[ line: 77 ]]
+function ParticipantDialogContainerDeprecated(p0)
 	-- upvalues: cryoModule (ref), t (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), useDispatch (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t_1 (ref), reactModule (ref), networkingFriendsModule (ref), useLocalization (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogDeprecatedModule (ref)
 	local var16 = cryoModule.Dictionary.join(t, p0)
-	local var17 = useAppPolicyModule(function(p1) --[[ line: 79 ]]
+	local var17 = useAppPolicyModule(function(p1)
 		return p1.getChatViewProfileOption()
 	end)
 	local _ = nil
@@ -55,7 +55,7 @@ function ParticipantDialogContainerDeprecated(p0) --[[ line: 77 ]]
 	
 	if fFlagEnableChatDetailsOpenChatModule then
 		local var21
-		local var19 = useSelector(function(p2) --[[ line: 89 ]]
+		local var19 = useSelector(function(p2)
 			-- upvalues: var16 (ref), conversationModule (copy)
 			local conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
 			local conversationId = conversations and conversations[var16.conversationId]
@@ -67,14 +67,14 @@ function ParticipantDialogContainerDeprecated(p0) --[[ line: 77 ]]
 		if fFlagAppChatMigrateFriendshipStatusesModule then
 			local _ = useGetFriendshipStatus(var16.participantId, if var19 then nil else t_1) == Enum.FriendStatus.Friend
 		else
-			var21 = useSelector(function(p3) --[[ line: 104 ]]
+			var21 = useSelector(function(p3)
 				-- upvalues: var16 (ref)
 				local friends = p3.ChatAppReducer and p3.ChatAppReducer.Friends
 				local friendshipStatus = friends and friends.friendshipStatus
 				
 				return friendshipStatus and friendshipStatus[var16.participantId] == Enum.FriendStatus.Friend
 			end)
-			reactModule.useEffect(function() --[[ line: 110 ]]
+			reactModule.useEffect(function()
 				-- upvalues: var19 (write), var20 (write), networkingFriendsModule (copy), var16 (ref)
 				if var19 then
 					var20(networkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = var16.participantId }))
@@ -90,11 +90,11 @@ function ParticipantDialogContainerDeprecated(p0) --[[ line: 77 ]]
 		removeFromGroupText = var16.removeFromGroupText,
 		cancelText = var16.cancelText
 	})
-	local var23 = reactModule.useMemo(function() --[[ line: 134 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var16 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p4) --[[ line: 137 ]]
+				handler = inputHandlersModule.onRelease(function(p4)
 					-- upvalues: var16 (copy)
 					var16.onDismiss()
 					p4:cancel()

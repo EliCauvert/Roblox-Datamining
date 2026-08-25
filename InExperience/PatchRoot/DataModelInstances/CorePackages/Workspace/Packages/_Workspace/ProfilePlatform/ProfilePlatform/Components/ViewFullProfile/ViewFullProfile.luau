@@ -24,7 +24,7 @@ local fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule = require(profil
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var12 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-function ViewFullProfile(p0) --[[ line: 38 ]]
+function ViewFullProfile(p0)
 	-- upvalues: fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), navigateDownToViewUserProfile (ref), urlBuilder (ref), urlBase (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var12 (ref), navigateDown (ref), horizontalPageMargin (ref), constantsModule (ref), button (ref), buttonType (ref)
 	local var13 = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule then useProfileJsonComponentModule(enumsModule.Components.ViewFullProfile) or {} else nil
 	local var14 = useProfileWrapperContextModule()
@@ -55,7 +55,7 @@ function ViewFullProfile(p0) --[[ line: 38 ]]
 			ViewFullProfile = reactModule.createElement(button, {
 				buttonType = buttonType.Secondary,
 				size = UDim2.new(1, 0, 0, constantsModule.CTA_BUTTON_HEIGHT),
-				onActivated = reactModule.useCallback(function() --[[ line: 74 ]]
+				onActivated = reactModule.useCallback(function()
 					-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), enumsModule (copy), profileType (ref), var16 (ref), navigateDownToViewUserProfile (copy), profileId (ref), var13 (ref), urlBuilder (copy), urlBase (copy), appPage (copy), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var12 (copy), navigateDown (copy)
 					var15.fireAnalyticsEvent(eventNamesModule.ViewPlayerProfileButton, {
 						absolutePosition = var14.sourceInfo.homepageCarouselAbsolutePosition,
@@ -88,7 +88,7 @@ function ViewFullProfile(p0) --[[ line: 38 ]]
 						var16(navigateDown(t))
 					end
 				end, { var16, profileId, var15, var14 }),
-				text = reactModule.useMemo(function() --[[ line: 52 ]]
+				text = reactModule.useMemo(function()
 					-- upvalues: profileType (ref), enumsModule (copy), var17 (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), var13 (ref)
 					if profileType == enumsModule.ProfileTypes.User then
 						return var17.viewFullProfileLabel

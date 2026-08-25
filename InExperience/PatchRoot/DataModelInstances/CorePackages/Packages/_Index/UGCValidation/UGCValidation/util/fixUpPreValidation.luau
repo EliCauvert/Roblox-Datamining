@@ -2,7 +2,7 @@
 local getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule = require(parent.flags.getEngineFeatureEngineSplitHumanoidRigDescriptionInUpload)
 local splitHumanoidRigDescriptionForUploadModule = require(parent.util.SplitHumanoidRigDescriptionForUpload)
 
-return function(p0) --[[ line: 15 | named "fixUpPreValidation" ]]
+return function(p0)
 	-- upvalues: getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule (ref), splitHumanoidRigDescriptionForUploadModule (ref)
 	local var2 = p0:Clone()
 	

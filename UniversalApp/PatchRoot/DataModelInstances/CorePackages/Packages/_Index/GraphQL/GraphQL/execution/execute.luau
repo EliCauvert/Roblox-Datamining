@@ -83,7 +83,7 @@ local collectAndExecuteSubfields = nil
 local _ = nil
 local var32 = nil
 
-local function execute(p0) --[[ line: 225 ]]
+local function execute(p0)
 	-- upvalues: assertValidExecutionArguments (write), buildExecutionContext (write), array (ref), executeOperation (write), buildResponse (write)
 	local schema = p0.schema
 	local document = p0.document
@@ -99,7 +99,7 @@ local function execute(p0) --[[ line: 225 ]]
 	return if array.isArray(var35) or not var35.schema then { errors = var35 } else buildResponse(var35, executeOperation(var35, var35.operation, rootValue))
 end
 
-local function executeSync(p1) --[[ line: 278 ]]
+local function executeSync(p1)
 	-- upvalues: execute (write), isPromise (ref), error_1 (ref)
 	local var36 = execute(p1)
 	
@@ -109,22 +109,22 @@ local function executeSync(p1) --[[ line: 278 ]]
 	return var36
 end
 
-buildResponse = function(p2, p3) --[[ line: 294 | named "buildResponse" ]]
+buildResponse = function(p2, p3)
 	-- upvalues: isPromise (ref), buildResponse (write)
-	return if isPromise(p3) then p3:andThen(function(p4) --[[ line: 301 ]]
+	return if isPromise(p3) then p3:andThen(function(p4)
 		-- upvalues: buildResponse (copy), p2 (ref)
 		return buildResponse(p2, p4)
 	end) elseif #p2.errors == 0 then { data = p3 } else { errors = p2.errors, data = p3 }
 end
 
-assertValidExecutionArguments = function(p5, p6, p7) --[[ line: 320 | named "assertValidExecutionArguments" ]]
+assertValidExecutionArguments = function(p5, p6, p7)
 	-- upvalues: devAssert (ref), assertValidSchema (ref), isObjectLike (ref)
 	devAssert(p6, "Must provide document.")
 	assertValidSchema(p5)
 	devAssert(if p7 ~= nil then isObjectLike(p7) else true, "Variables must be provided as an Object where each property is a variable value. Perhaps look to see if an unparsed JSON string was provided.")
 end
 
-buildExecutionContext = function(p8, p9, p10, p11, p12, p13, p14, p15) --[[ line: 345 | named "buildExecutionContext" ]]
+buildExecutionContext = function(p8, p9, p10, p11, p12, p13, p14, p15)
 	-- upvalues: kind (ref), graphQLError (ref), getVariableValues (ref), var13 (write), var12 (write)
 	local var37 = nil
 	local t = {}
@@ -166,7 +166,7 @@ buildExecutionContext = function(p8, p9, p10, p11, p12, p13, p14, p15) --[[ line
 	}
 end
 
-executeOperation = function(p16, p17, p18) --[[ line: 421 | named "executeOperation" ]]
+executeOperation = function(p16, p17, p18)
 	-- upvalues: getOperationRootType (ref), collectFields (write), map (ref), executeFieldsSerially (write), executeFields (write), isPromise (ref), promiseModule (ref), nullModule (ref)
 	local var42, var43
 	local var40 = getOperationRootType(p16.schema, p17)
@@ -184,7 +184,7 @@ executeOperation = function(p16, p17, p18) --[[ line: 421 | named "executeOperat
 		var43 = status
 	end
 	if isPromise(var43) then
-		return var43:andThen(nil, function(p19) --[[ line: 450 ]]
+		return var43:andThen(nil, function(p19)
 			-- upvalues: p16 (ref), promiseModule (copy), nullModule (copy)
 			table.insert(p16.errors, p19)
 			
@@ -198,16 +198,16 @@ executeOperation = function(p16, p17, p18) --[[ line: 421 | named "executeOperat
 	return nullModule
 end
 
-executeFieldsSerially = function(p20, p21, p22, p23, p24) --[[ line: 467 | named "executeFieldsSerially" ]]
+executeFieldsSerially = function(p20, p21, p22, p23, p24)
 	-- upvalues: promiseReduce (ref), addPath (ref), resolveField (write), isPromise (ref)
-	return promiseReduce(p24:keys(), function(p25, p26) --[[ line: 477 ]]
+	return promiseReduce(p24:keys(), function(p25, p26)
 		-- upvalues: p24 (ref), addPath (copy), p23 (ref), p21 (ref), resolveField (copy), p20 (ref), p22 (ref), isPromise (copy)
 		local var44 = resolveField(p20, p21, p22, p24[p26], addPath(p23, p26, p21.name))
 		
 		if var44 == nil then
 			return p25
 		elseif isPromise(var44) then
-			return var44:andThen(function(p27) --[[ line: 489 ]]
+			return var44:andThen(function(p27)
 				-- upvalues: p25 (ref), p26 (ref)
 				p25[p26] = p27
 				
@@ -220,7 +220,7 @@ executeFieldsSerially = function(p20, p21, p22, p23, p24) --[[ line: 467 | named
 	end, {})
 end
 
-executeFields = function(p28, p29, p30, p31, p32) --[[ line: 508 | named "executeFields" ]]
+executeFields = function(p28, p29, p30, p31, p32)
 	-- upvalues: addPath (ref), resolveField (write), isPromise (ref), promiseForObject (ref)
 	local t = {}
 	local var46 = false
@@ -239,7 +239,7 @@ executeFields = function(p28, p29, p30, p31, p32) --[[ line: 508 | named "execut
 	return if var46 then promiseForObject(t) else t
 end
 
-collectFields = function(p33, p34, p35, p36, p37) --[[ line: 555 | named "collectFields" ]]
+collectFields = function(p33, p34, p35, p36, p37)
 	-- upvalues: kind (ref), shouldIncludeNode (write), getFieldEntryKey (write), doesFragmentConditionMatch (write), collectFields (write)
 	for i, v in ipairs(p35.selections) do
 		if v.kind == kind.FIELD then
@@ -271,7 +271,7 @@ collectFields = function(p33, p34, p35, p36, p37) --[[ line: 555 | named "collec
 	return p36
 end
 
-shouldIncludeNode = function(p38, p39) --[[ line: 616 | named "shouldIncludeNode" ]]
+shouldIncludeNode = function(p38, p39)
 	-- upvalues: getDirectiveValues (ref), graphQLSkipDirective (ref), graphQLIncludeDirective (ref)
 	local var50 = getDirectiveValues(graphQLSkipDirective, p39, p38.variableValues)
 	
@@ -283,7 +283,7 @@ shouldIncludeNode = function(p38, p39) --[[ line: 616 | named "shouldIncludeNode
 	return (var51 and var51["if"]) ~= false
 end
 
-doesFragmentConditionMatch = function(p40, p41, p42) --[[ line: 638 | named "doesFragmentConditionMatch" ]]
+doesFragmentConditionMatch = function(p40, p41, p42)
 	-- upvalues: typeFromAST (ref), isAbstractType (ref)
 	local typeCondition = p41.typeCondition
 	
@@ -295,11 +295,11 @@ doesFragmentConditionMatch = function(p40, p41, p42) --[[ line: 638 | named "doe
 	return var52 == p42 or (if isAbstractType(var52) then p40.schema:isSubType(var52, p42) else false)
 end
 
-getFieldEntryKey = function(p43) --[[ line: 670 | named "getFieldEntryKey" ]]
+getFieldEntryKey = function(p43)
 	return if p43.alias then p43.alias.value else p43.name.value
 end
 
-resolveField = function(p44, p45, p46, p47, p48) --[[ line: 680 | named "resolveField" ]]
+resolveField = function(p44, p45, p46, p47, p48)
 	-- upvalues: var14 (write), buildResolveInfo (write), getArgumentValues (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write)
 	local var53 = var14(p44.schema, p45, p47[1].name.value)
 	
@@ -307,15 +307,15 @@ resolveField = function(p44, p45, p46, p47, p48) --[[ line: 680 | named "resolve
 	local type = var53.type
 	local var54 = if var53.resolve then var53.resolve else p44.fieldResolver
 	local var55 = buildResolveInfo(p44, var53, p47, p45, p48)
-	local ok, status = pcall(function() --[[ line: 711 ]]
+	local ok, status = pcall(function()
 		-- upvalues: getArgumentValues (copy), var53 (ref), p47 (ref), p44 (ref), var54 (ref), p46 (ref), var55 (ref), isPromise (copy), completeValue (copy), type (ref), p48 (ref), locatedError (copy), pathToArray (copy), handleFieldError (copy)
 		local var56 = var54(p46, getArgumentValues(var53, p47[1], p44.variableValues), p44.contextValue, var55)
-		local var57 = if isPromise(var56) then var56:andThen(function(p49) --[[ line: 736 ]]
+		local var57 = if isPromise(var56) then var56:andThen(function(p49)
 			-- upvalues: completeValue (copy), p44 (copy), type (copy), p47 (copy), var55 (copy), p48 (copy)
 			return completeValue(p44, type, p47, var55, p48, p49)
 		end) else completeValue(p44, type, p47, var55, p48, var56)
 		
-		return if isPromise(var57) then var57:andThen(nil, function(p50) --[[ line: 746 ]]
+		return if isPromise(var57) then var57:andThen(nil, function(p50)
 			-- upvalues: locatedError (copy), p47 (copy), pathToArray (copy), p48 (copy), handleFieldError (copy), type (copy), p44 (copy)
 			return handleFieldError(locatedError(p50, p47, pathToArray(p48)), type, p44)
 		end) else var57
@@ -324,7 +324,7 @@ resolveField = function(p44, p45, p46, p47, p48) --[[ line: 680 | named "resolve
 	return if ok then status else handleFieldError(locatedError(status, p47, pathToArray(p48)), type, p44)
 end
 
-buildResolveInfo = function(p51, p52, p53, p54, p55) --[[ line: 766 | named "buildResolveInfo" ]]
+buildResolveInfo = function(p51, p52, p53, p54, p55)
 	return {
 		fieldName = p52.name,
 		fieldNodes = p53,
@@ -339,7 +339,7 @@ buildResolveInfo = function(p51, p52, p53, p54, p55) --[[ line: 766 | named "bui
 	}
 end
 
-handleFieldError = function(p56, p57, p58) --[[ line: 789 | named "handleFieldError" ]]
+handleFieldError = function(p56, p57, p58)
 	-- upvalues: isNonNullType (ref), nullModule (ref)
 	if isNonNullType(p57) then
 		error(p56)
@@ -349,7 +349,7 @@ handleFieldError = function(p56, p57, p58) --[[ line: 789 | named "handleFieldEr
 	return nullModule
 end
 
-completeValue = function(p59, p60, p61, p62, p63, p64) --[[ line: 827 | named "completeValue" ]]
+completeValue = function(p59, p60, p61, p62, p63, p64)
 	-- upvalues: instanceof (ref), error_1 (ref), isNonNullType (ref), completeValue (write), isNillish (ref), nullModule (ref), isListType (ref), completeListValue (write), isLeafType (ref), completeLeafValue (write), isAbstractType (ref), completeAbstractValue (write), isObjectType (ref), completeObjectValue (write), invariant (ref), inspect (ref)
 	if instanceof(p64, error_1) then
 		error(p64)
@@ -376,7 +376,7 @@ completeValue = function(p59, p60, p61, p62, p63, p64) --[[ line: 827 | named "c
 	assert(false, "Cannot complete value of unexpected output type: " .. inspect(p60))
 end
 
-completeListValue = function(p65, p66, p67, p68, p69, p70) --[[ line: 932 | named "completeListValue" ]]
+completeListValue = function(p65, p66, p67, p68, p69, p70)
 	-- upvalues: instanceof (ref), set (ref), isIteratableObject (ref), graphQLError (ref), array (ref), addPath (ref), isPromise (ref), completeValue (write), locatedError (ref), pathToArray (ref), handleFieldError (write), promiseModule (ref)
 	if instanceof(p70, set) then
 		local t = {}
@@ -392,12 +392,12 @@ completeListValue = function(p65, p66, p67, p68, p69, p70) --[[ line: 932 | name
 	local ofType = p66.ofType
 	local var60 = false
 	local var61 = false
-	local var62 = array.from(p70, function(p71, p72) --[[ line: 967 ]]
+	local var62 = array.from(p70, function(p71, p72)
 		-- upvalues: addPath (copy), p69 (ref), isPromise (copy), completeValue (copy), p65 (ref), ofType (ref), p67 (ref), p68 (ref), var60 (write), locatedError (copy), pathToArray (copy), handleFieldError (copy), var61 (write)
 		local var64 = addPath(p69, p72, nil)
-		local ok, status = pcall(function() --[[ line: 972 ]]
+		local ok, status = pcall(function()
 			-- upvalues: isPromise (copy), p71 (ref), completeValue (copy), p65 (copy), ofType (copy), p67 (copy), p68 (copy), var64 (ref), var60 (copy), locatedError (copy), pathToArray (copy), handleFieldError (copy), var61 (copy)
-			local var65 = if isPromise(p71) then p71:andThen(function(p73) --[[ line: 975 ]]
+			local var65 = if isPromise(p71) then p71:andThen(function(p73)
 				-- upvalues: completeValue (copy), p65 (copy), ofType (copy), p67 (copy), p68 (copy), var64 (copy)
 				return completeValue(p65, ofType, p67, p68, var64, p73)
 			end) else completeValue(p65, ofType, p67, p68, var64, p71)
@@ -405,7 +405,7 @@ completeListValue = function(p65, p66, p67, p68, p69, p70) --[[ line: 932 | name
 			if isPromise(var65) then
 				var60 = true
 				
-				return var65:andThen(nil, function(p74) --[[ line: 993 ]]
+				return var65:andThen(nil, function(p74)
 					-- upvalues: locatedError (copy), p67 (copy), pathToArray (copy), var64 (copy), handleFieldError (copy), ofType (copy), p65 (copy)
 					return handleFieldError(locatedError(p74, p67, pathToArray(var64)), ofType, p65)
 				end)
@@ -421,7 +421,7 @@ completeListValue = function(p65, p66, p67, p68, p69, p70) --[[ line: 932 | name
 	return var63
 end
 
-completeLeafValue = function(p75, p76) --[[ line: 1028 | named "completeLeafValue" ]]
+completeLeafValue = function(p75, p76)
 	-- upvalues: error_1 (ref), inspect (ref)
 	local var66 = p75:serialize(p76)
 	
@@ -431,17 +431,17 @@ completeLeafValue = function(p75, p76) --[[ line: 1028 | named "completeLeafValu
 	return var66
 end
 
-completeAbstractValue = function(value, p77, p78, p79, p80, p81) --[[ line: 1048 | named "completeAbstractValue" ]]
+completeAbstractValue = function(value, p77, p78, p79, p80, p81)
 	-- upvalues: isPromise (ref), completeObjectValue (write), ensureValidRuntimeType (write)
 	local var67 = (if p77.resolveType then p77.resolveType else value.typeResolver)(p81, value.contextValue, p79, p77)
 	
-	return if isPromise(var67) then var67:andThen(function(p82) --[[ line: 1066 ]]
+	return if isPromise(var67) then var67:andThen(function(p82)
 		-- upvalues: completeObjectValue (copy), value (ref), ensureValidRuntimeType (copy), p77 (ref), p78 (ref), p79 (ref), p81 (ref), p80 (ref)
 		return completeObjectValue(value, ensureValidRuntimeType(p82, value, p77, p78, p79, p81), p78, p79, p80, p81)
 	end) else completeObjectValue(value, ensureValidRuntimeType(var67, value, p77, p78, p79, p81), p78, p79, p80, p81)
 end
 
-ensureValidRuntimeType = function(p83, p84, p85, p86, p87, p88) --[[ line: 1103 | named "ensureValidRuntimeType" ]]
+ensureValidRuntimeType = function(p83, p84, p85, p86, p87, p88)
 	-- upvalues: graphQLError (ref), isObjectType (ref), inspect (ref)
 	if p83 == nil then
 		error(graphQLError.new(("Abstract type \"%s\" must resolve to an Object type at runtime for field \"%s.%s\". Either the \"%s\" type should provide a \"resolveType\" function or each possible type should provide an \"isTypeOf\" function."):format(p85.name, p87.parentType.name, p87.fieldName, p85.name), p86))
@@ -466,13 +466,13 @@ ensureValidRuntimeType = function(p83, p84, p85, p86, p87, p88) --[[ line: 1103 
 	return var68
 end
 
-completeObjectValue = function(p89, p90, p91, p92, p93, p94) --[[ line: 1190 | named "completeObjectValue" ]]
+completeObjectValue = function(p89, p90, p91, p92, p93, p94)
 	-- upvalues: isPromise (ref), invalidReturnTypeError (write), collectAndExecuteSubfields (write)
 	if p90.isTypeOf ~= nil then
 		local var69 = p90:isTypeOf(p94, p89.contextValue, p92)
 		
 		if isPromise(var69) then
-			return var69:andThen(function(p95) --[[ line: 1206 ]]
+			return var69:andThen(function(p95)
 				-- upvalues: invalidReturnTypeError (copy), p90 (ref), p94 (ref), p91 (ref), collectAndExecuteSubfields (copy), p89 (ref), p93 (ref)
 				if not p95 then
 					error(invalidReturnTypeError(p90, p94, p91))
@@ -486,17 +486,17 @@ completeObjectValue = function(p89, p90, p91, p92, p93, p94) --[[ line: 1190 | n
 	return collectAndExecuteSubfields(p89, p90, p91, p93, p94)
 end
 
-invalidReturnTypeError = function(p96, p97, p98) --[[ line: 1223 | named "invalidReturnTypeError" ]]
+invalidReturnTypeError = function(p96, p97, p98)
 	-- upvalues: graphQLError (ref), inspect (ref)
 	return graphQLError.new(("Expected value of type \"%s\" but got: %s."):format(p96.name, inspect(p97)), p98)
 end
 
-collectAndExecuteSubfields = function(p99, p100, p101, p102, p103) --[[ line: 1234 | named "collectAndExecuteSubfields" ]]
+collectAndExecuteSubfields = function(p99, p100, p101, p102, p103)
 	-- upvalues: var32 (write), executeFields (write)
 	return executeFields(p99, p100, p103, p102, var32(p99, p100, p101))
 end
 
-var32 = memoize3(function(p104, p105, p106) --[[ line: 1250 | named "_collectSubfields" ]]
+var32 = memoize3(function(p104, p105, p106)
 	-- upvalues: map (ref), collectFields (write)
 	local var70 = map.new()
 	local t = {}
@@ -516,11 +516,11 @@ return {
 	buildExecutionContext = buildExecutionContext,
 	collectFields = collectFields,
 	buildResolveInfo = buildResolveInfo,
-	getFieldDef = function(p107, p108, p109) --[[ line: 1358 ]]
+	getFieldDef = function(p107, p108, p109)
 		-- upvalues: schemaMetaFieldDef (ref), typeMetaFieldDef (ref), typeNameMetaFieldDef (ref)
 		return if p109 == schemaMetaFieldDef.name and p107:getQueryType() == p108 then schemaMetaFieldDef elseif p109 == typeMetaFieldDef.name and p107:getQueryType() == p108 then typeMetaFieldDef elseif p109 == typeNameMetaFieldDef.name then typeNameMetaFieldDef else p108:getFields():get(p109)
 	end,
-	defaultFieldResolver = function(p110, p111, p112, p113) --[[ line: 1334 ]]
+	defaultFieldResolver = function(p110, p111, p112, p113)
 		-- upvalues: isObjectLike (ref)
 		if not isObjectLike(p110) and typeof(p110) ~= "function" then
 			return nil
@@ -529,7 +529,7 @@ return {
 		
 		return if typeof(fieldName) == "function" then p110[p113.fieldName](p110, p111, p112, p113) else fieldName
 	end,
-	defaultTypeResolver = function(p114, p115, p116, p117) --[[ line: 1290 ]]
+	defaultTypeResolver = function(p114, p115, p116, p117)
 		-- upvalues: isObjectLike (ref), isPromise (ref), promiseModule (ref)
 		if isObjectLike(p114) and typeof(p114.__typename) == "string" then
 			return p114.__typename
@@ -552,7 +552,7 @@ return {
 			end
 			return var74.name
 		end
-		return if #t > 0 then promiseModule.all(t):andThen(function(p118) --[[ line: 1315 ]]
+		return if #t > 0 then promiseModule.all(t):andThen(function(p118)
 			-- upvalues: var72 (ref)
 			for i = 1, #p118 do
 				if not p118[i] then

@@ -6,7 +6,7 @@ local initiateBundlePurchaseModule = require(purchasePrompt.Thunks.initiateBundl
 local fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule = require(purchasePrompt.Flags.FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsell)
 local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
 
-return function(p0, p1, _, p2) --[[ line: 18 | named "dispatchPurchaseForProductPayload" ]]
+return function(p0, p1, _, p2)
 	-- upvalues: productTypeEnum (ref), initiatePurchaseModule (ref), initiateBundlePurchaseModule (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), fFlagAXMISWithBlackbird (ref)
 	if p1.kind == productTypeEnum.Asset then
 		p0(initiatePurchaseModule(p1.id, Enum.InfoType.Asset, p1.equipIfPurchased, p1.isRobloxPurchase, p1.idempotencyKey, nil, p1.collectibleItemId, p1.collectibleItemInstanceId, p1.collectibleProductId, p1.expectedPrice, nil, p2))

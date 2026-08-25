@@ -13,12 +13,12 @@ local t = {
 	hasTail = false,
 	LayoutOrder = 0,
 	isPending = false,
-	[roact.Change.AbsoluteSize] = function() --[[ line: 20 ]] end
+	[roact.Change.AbsoluteSize] = function() end
 }
 
-return function(p0) --[[ line: 23 | named "PlainText" ]]
+return function(p0)
 	-- upvalues: withStyle (ref), t (ref), textService (ref), roact (ref), chatBubbleContainerAutomaticSizeModule (ref), fixPlainTextAutomaticSizeClippingTextFastFlag (ref)
-	return withStyle(function(p1) --[[ line: 24 ]]
+	return withStyle(function(p1)
 		-- upvalues: p0 (ref), t (copy), textService (copy), roact (copy), chatBubbleContainerAutomaticSizeModule (copy), fixPlainTextAutomaticSizeClippingTextFastFlag (copy)
 		local maxWidth = p0.maxWidth or t.maxWidth
 		local innerPadding = p0.innerPadding or t.innerPadding

@@ -9,7 +9,7 @@ local fFlagAddCommunityLockedToCommunityProfile = require(parent.SharedFlags).FF
 local fFlagAddEventsToCommunityProfileModule = require(profilePlatform.Flags.FFlagAddEventsToCommunityProfile)
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 
-return function() --[[ line: 14 ]]
+return function()
 	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref), fFlagAddSocialLinksToCommunityProfile (ref), fFlagAddVideoToCommunityProfile (ref), fFlagAddCommunityLockedToCommunityProfile (ref), fFlagAddEventsToCommunityProfileModule (ref)
 	local list = {
 		{

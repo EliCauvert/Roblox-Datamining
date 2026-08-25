@@ -16,27 +16,27 @@ local text = foundationModule.Text
 local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
 local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p0) --[[ line: 30 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), reactModule (ref), eventNamesModule (ref), carouselOpenedModule (ref), getCropSize (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), getContentFromObject (ref), fFlagUseRbxstorageInGalleryModule (ref), text (ref), getFormatTimeModule (ref)
 	local var10 = useAnalyticsModule()
 	local var11 = useDispatch()
 	local var12, var13 = reactModule.useState(Vector2.new(0, 0))
 	local var14, var15 = reactModule.useState(Vector2.new(0, 0))
 	local var16, var17 = reactModule.useState(UDim2.fromScale(1, 1))
-	local var18 = reactModule.useCallback(function() --[[ line: 38 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var10 (ref), eventNamesModule (copy), var11 (ref), carouselOpenedModule (copy), p0 (ref)
 		var10.fireEvent(eventNamesModule.CapturesCarouselOpened)
 		var11(carouselOpenedModule(p0.captureIndex))
 	end, {})
-	local var19 = reactModule.useCallback(function(p1) --[[ line: 43 ]]
+	local var19 = reactModule.useCallback(function(p1)
 		-- upvalues: var13 (ref)
 		var13(p1.AbsoluteSize)
 	end, {})
-	local var20 = reactModule.useCallback(function(p2) --[[ line: 47 ]]
+	local var20 = reactModule.useCallback(function(p2)
 		-- upvalues: var15 (ref)
 		var15(p2.Resolution)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), getCropSize (copy), var12 (ref), var14 (ref)
 		var17(getCropSize(var12, var14))
 	end, { var12, var14 })

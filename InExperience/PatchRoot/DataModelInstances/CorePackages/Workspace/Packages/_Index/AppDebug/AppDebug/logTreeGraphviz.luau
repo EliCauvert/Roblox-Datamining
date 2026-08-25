@@ -16,24 +16,24 @@ local t_1 = {
 	[levels.Trace] = 5
 }
 
-local function _(a) --[[ line: 28 | named "maxLevelToGraphvizAttr" ]]
+local function _(a)
 	-- upvalues: t (ref)
 	local var5 = t[a]
 	
 	return var5 and string.format(" fillcolor=%s style=filled", var5) or ""
 end
 
-local _ = function(p0) --[[ line: 33 | named "getLevelRank" ]]
+local _ = function(p0)
 	-- upvalues: t_1 (ref)
 	return t_1[p0] or 0
 end
 
-local _ = function(a, b) --[[ line: 37 | named "maxLogLevel" ]]
+local _ = function(a, b)
 	-- upvalues: t_1 (ref)
 	return if (t_1[b] or 0) < (t_1[a] or 0) then a else b
 end
 
-local function dfsGraphviz(p1, p2) --[[ line: 41 ]]
+local function dfsGraphviz(p1, p2)
 	-- upvalues: t_1 (ref), t (ref), dfsGraphviz (ref)
 	local var6 = ""
 	local var7 = tostring(p1.name)
@@ -53,7 +53,7 @@ local function dfsGraphviz(p1, p2) --[[ line: 41 ]]
 	return var6
 end
 
-return function() --[[ line: 56 ]]
+return function()
 	-- upvalues: logTreeModule (ref), dfsGraphviz (ref)
 	return "digraph {\n" .. dfsGraphviz(logTreeModule.logger("*")) .. "}\n"
 end

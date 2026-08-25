@@ -21,7 +21,7 @@ local foundationProvider = require(parent_1.Foundation).FoundationProvider
 game:DefineFastFlag("FixGameInviteModalLoadTimeIncrease", false)
 local var9 = if not game:GetFastFlag("FixGameInviteModalLoadTimeIncrease") then require(parent_1.RobloxApolloClient).initializeApolloClient({}) else nil
 
-return function(p0) --[[ line: 34 ]]
+return function(p0)
 	-- upvalues: parent (ref), coreGuiService (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), styleProviderWithDefaultTheme (ref), apolloProvider (ref), var9 (write), gameInviteModalModule (ref), gameInviteConstantsModule (ref), reactRobloxModule (ref), foundationProvider (ref)
 	local gameInviteStoreModule = require(parent.State.GameInviteStore)
 	local gameInvite = Instance.new("Folder")

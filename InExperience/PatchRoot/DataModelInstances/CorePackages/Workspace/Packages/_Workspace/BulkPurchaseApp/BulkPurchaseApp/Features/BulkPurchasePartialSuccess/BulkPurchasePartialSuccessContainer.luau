@@ -2,7 +2,7 @@
 local bulkPurchasePartialSuccessModule = require(script.Parent.BulkPurchasePartialSuccess)
 local useBulkPurchasePartialSuccessPropsModule = require(script.Parent.useBulkPurchasePartialSuccessProps)
 
-return function() --[[ line: 8 | named "BulkPurchasePartialSuccessContainer" ]]
+return function()
 	-- upvalues: useBulkPurchasePartialSuccessPropsModule (ref), reactModule (ref), bulkPurchasePartialSuccessModule (ref)
 	return reactModule.createElement(bulkPurchasePartialSuccessModule, useBulkPurchasePartialSuccessPropsModule())
 end

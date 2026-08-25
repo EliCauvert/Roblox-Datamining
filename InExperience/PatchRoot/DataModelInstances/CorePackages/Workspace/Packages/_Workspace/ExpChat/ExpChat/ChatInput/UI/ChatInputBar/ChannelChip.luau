@@ -6,7 +6,7 @@ local useCursor = require(parent.UIBlox).App.SelectionCursor.useCursor
 local configModule = require(expChat.Config)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 
-return function(p0) --[[ line: 13 ]]
+return function(p0)
 	-- upvalues: useCursor (ref), getFFlagTextChatEnableUniverseChatTabs (ref), reactModule (ref), configModule (ref)
 	return reactModule.createElement("TextButton", {
 		AutomaticSize = Enum.AutomaticSize.XY,

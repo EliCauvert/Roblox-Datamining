@@ -6,7 +6,7 @@ local shareLinkClassificationModule = require(script.Parent.ShareLinkClassificat
 local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
 local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
 
-local function _(p0) --[[ line: 21 | named "getTargetIdType" ]]
+local function _(p0)
 	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref)
 	if not fFlagMomentsPassFeedItemIdToBackendApis or p0 == "" then
 		return nil
@@ -16,7 +16,7 @@ local function _(p0) --[[ line: 21 | named "getTargetIdType" ]]
 	return if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
 end
 
-return function(p1) --[[ line: 38 | named "classifyShareLinkV2" ]]
+return function(p1)
 	-- upvalues: shareLinkClassificationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref)
 	if p1.status ~= "Valid" then
 		return { type = shareLinkClassificationModule.Invalid }

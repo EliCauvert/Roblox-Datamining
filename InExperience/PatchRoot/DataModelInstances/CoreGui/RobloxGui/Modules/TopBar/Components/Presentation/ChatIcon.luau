@@ -31,7 +31,7 @@ local _ = game:DefineFastInt("InExperienceChatTooltipDismissDelayMs", 7000)
 local unibarHoldoutChatIconUseNewIconSize = game:DefineFastFlag("UnibarHoldoutChatIconUseNewIconSize", false)
 local gameSettings = UserSettings().GameSettings
 
-local function _() --[[ line: 43 | named "shouldShowEmptyBadge" ]]
+local function _()
 	return game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.TextChatService
 end
 
@@ -46,11 +46,11 @@ chatIcon.validateProps = tModule.strictInterface({
 	removeKeepOutArea = if fFlagTopBarSignalizeKeepOutAreas then nil else tModule.callback
 })
 
-function chatIcon.init(p0) --[[ line: 69 ]]
+function chatIcon.init(p0)
 	-- upvalues: roactModule (ref), chatSelectorModule (ref), gameSettings (ref), var12 (ref), analyticsModule (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref)
 	p0.buttonRef = roactModule.createRef()
 	
-	function p0.chatIconActivated() --[[ line: 72 ]]
+	function p0.chatIconActivated()
 		-- upvalues: chatSelectorModule (copy), gameSettings (copy), var12 (copy), analyticsModule (copy)
 		chatSelectorModule:ToggleVisibility()
 		gameSettings.ChatVisible = chatSelectorModule:GetVisibility()
@@ -65,9 +65,9 @@ function chatIcon.init(p0) --[[ line: 69 ]]
 	end
 end
 
-function chatIcon.render(p1) --[[ line: 85 ]]
+function chatIcon.render(p1)
 	-- upvalues: withStyle (ref), tenFootInterfaceModule (ref), VRService (ref), getExperienceChatVisualConfig (ref), images (ref), fFlagTopBarSignalizeKeepOutAreas (ref), constantsModule (ref), roactModule (ref), iconButtonModule (ref), getFFlagEnableAppChatInExperience (ref), unibarHoldoutChatIconUseNewIconSize (ref), badge (ref), badgeStates (ref)
-	return withStyle(function(_) --[[ line: 86 ]]
+	return withStyle(function(_)
 		-- upvalues: p1 (ref), tenFootInterfaceModule (copy), VRService (copy), getExperienceChatVisualConfig (copy), images (copy), fFlagTopBarSignalizeKeepOutAreas (copy), constantsModule (copy), roactModule (copy), iconButtonModule (copy), getFFlagEnableAppChatInExperience (copy), unibarHoldoutChatIconUseNewIconSize (copy), badge (copy), badgeStates (copy)
 		local var19 = p1.props.topBarEnabled and (p1.props.chatEnabled and (not tenFootInterfaceModule:IsEnabled() and not VRService.VREnabled))
 		local _ = nil
@@ -76,7 +76,7 @@ function chatIcon.render(p1) --[[ line: 85 ]]
 		local iconSize = var20.iconSize
 		local var21 = if not p1.props.chatVisible then images[var20.icon.off] else images[var20.icon.on]
 		
-		local var22 = function(p2) --[[ line: 102 ]]
+		local var22 = function(p2)
 			-- upvalues: var19 (ref), fFlagTopBarSignalizeKeepOutAreas (copy), p1 (copy), constantsModule (copy)
 			if var19 and p2 then
 				if fFlagTopBarSignalizeKeepOutAreas then
@@ -95,7 +95,7 @@ function chatIcon.render(p1) --[[ line: 85 ]]
 			p1.props.removeKeepOutArea(constantsModule.ChatIconKeepOutAreaId)
 		end
 		
-		local var23 = function(p3) --[[ line: 118 ]]
+		local var23 = function(p3)
 			-- upvalues: p1 (copy), var22 (ref)
 			if p3 then
 				p1.buttonRef.current = p3
@@ -138,21 +138,21 @@ function chatIcon.render(p1) --[[ line: 85 ]]
 	end)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4) --[[ line: 167 | named "mapStateToProps" ]]
+return roactRoduxModule.UNSTABLE_connect2(function(p4)
 	return {
 		chatVisible = p4.chat.visible,
 		unreadMessages = p4.chat.unreadMessages,
 		topBarEnabled = p4.displayOptions.topbarEnabled,
 		chatEnabled = p4.coreGuiEnabled[Enum.CoreGuiType.Chat]
 	}
-end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p5) --[[ line: 177 | named "mapDispatchToProps" ]]
+end, if fFlagTopBarSignalizeKeepOutAreas then nil else function(p5)
 	-- upvalues: fFlagTopBarSignalizeKeepOutAreas (ref), setKeepOutAreaModule (ref), removeKeepOutAreaModule (ref)
 	return if fFlagTopBarSignalizeKeepOutAreas then {} else {
-		setKeepOutArea = function(value, p6, p7) --[[ line: 182 ]]
+		setKeepOutArea = function(value, p6, p7)
 			-- upvalues: p5 (ref), setKeepOutAreaModule (copy)
 			return p5(setKeepOutAreaModule(value, p6, p7))
 		end,
-		removeKeepOutArea = function(p8) --[[ line: 185 ]]
+		removeKeepOutArea = function(p8)
 			-- upvalues: p5 (ref), removeKeepOutAreaModule (copy)
 			return p5(removeKeepOutAreaModule(p8))
 		end

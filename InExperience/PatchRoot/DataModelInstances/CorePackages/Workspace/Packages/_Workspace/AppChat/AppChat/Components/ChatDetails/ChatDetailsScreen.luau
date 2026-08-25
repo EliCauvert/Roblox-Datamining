@@ -15,7 +15,7 @@ local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFl
 local getRootedNavigationStoreModule = require(appChat.Stores.GetRootedNavigationStore)
 local chatDetailsScreen = roactModule.PureComponent:extend("ChatDetailsScreen")
 chatDetailsScreen.defaultProps = { navigation = nil }
-chatDetailsScreen.navigationOptions = if getFFlagAppChatEnableRootedNavigationModule() then chatDetailsNavigationOptionsModule.getNavigationOptions else function() --[[ line: 26 | named "navigationOptions" ]]
+chatDetailsScreen.navigationOptions = if getFFlagAppChatEnableRootedNavigationModule() then chatDetailsNavigationOptionsModule.getNavigationOptions else function()
 	-- upvalues: chatDetailsNavigationOptionsModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
 	return {
 		headerText = chatDetailsNavigationOptionsModule.getHeaderText(),
@@ -23,11 +23,11 @@ chatDetailsScreen.navigationOptions = if getFFlagAppChatEnableRootedNavigationMo
 	}
 end
 
-function chatDetailsScreen.init(p0) --[[ line: 38 ]]
+function chatDetailsScreen.init(p0)
 	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), loggerModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), enumScreensModule (ref)
 	p0.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p0.props.navigation, "Party.ChatDetailsPage") else nil
 	
-	function p0.navigateToEditChatMembers(p1) --[[ line: 43 ]]
+	function p0.navigateToEditChatMembers(p1)
 		-- upvalues: loggerModule (copy), getFFlagAppChatEnableRootedNavigationModule (copy), p0 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To EditChatMembers from {screen}")
 		p0.props.navigation.navigate(enumScreensModule.EditChatMembers, if getFFlagAppChatEnableRootedNavigationModule() then {
@@ -36,20 +36,20 @@ function chatDetailsScreen.init(p0) --[[ line: 38 ]]
 		} else { conversation = p1 })
 	end
 	
-	function p0.navigateToToast(p2) --[[ line: 54 ]]
+	function p0.navigateToToast(p2)
 		-- upvalues: loggerModule (copy), p0 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Toast from {screen}")
 		p0.props.navigation.navigate(enumScreensModule.RoactChatToast, p2)
 	end
 	
-	function p0.navigateToDialog(p3, p4) --[[ line: 59 ]]
+	function p0.navigateToDialog(p3, p4)
 		-- upvalues: loggerModule (copy), p0 (ref)
 		loggerModule:info("Navigate To {} from {screen}", p3)
 		p0.props.navigation.navigate(p3, p4)
 	end
 	
 	if getFFlagAppChatEnableRootedNavigationModule() then
-		function p0.closeRootedChatDetails() --[[ line: 65 ]]
+		function p0.closeRootedChatDetails()
 			-- upvalues: p0 (ref)
 			local navigateToRootStack = p0.props.navigation.getScreenProps("navigateToRootStack", nil)
 			
@@ -62,7 +62,7 @@ function chatDetailsScreen.init(p0) --[[ line: 38 ]]
 			end
 		end
 	end
-	function p0.navigateBack() --[[ line: 75 ]]
+	function p0.navigateBack()
 		-- upvalues: p0 (ref), getFFlagAppChatEnableRootedNavigationModule (copy)
 		if p0.props.navigation.isFocused() then
 			if getFFlagAppChatEnableRootedNavigationModule() and p0.props.navigation.getParam("isRooted", false) then
@@ -74,7 +74,7 @@ function chatDetailsScreen.init(p0) --[[ line: 38 ]]
 		end
 	end
 	
-	function p0.navigateToConversation(p5) --[[ line: 85 ]]
+	function p0.navigateToConversation(p5)
 		-- upvalues: loggerModule (copy), getFFlagAppChatEnableRootedNavigationModule (copy), p0 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Conversation from {screen}")
 		p0.props.navigation.navigate(enumScreensModule.ChatConversation, if getFFlagAppChatEnableRootedNavigationModule() then {
@@ -83,7 +83,7 @@ function chatDetailsScreen.init(p0) --[[ line: 38 ]]
 		} else { conversationId = p5 })
 	end
 	
-	function p0.navigateToChatLanding() --[[ line: 96 ]]
+	function p0.navigateToChatLanding()
 		-- upvalues: loggerModule (copy), getFFlagAppChatEnableRootedNavigationModule (copy), p0 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To ChatLanding from {screen}")
 		
@@ -100,7 +100,7 @@ function chatDetailsScreen.init(p0) --[[ line: 38 ]]
 	end
 end
 
-function chatDetailsScreen.render(p6) --[[ line: 112 ]]
+function chatDetailsScreen.render(p6)
 	-- upvalues: loggerModule (ref), roactModule (ref), chatDetailsContainerModule (ref)
 	local navigation = p6.props.navigation
 	assert(type(navigation) ~= "nil", "ChatDetailsScreen should be wrapped with Roact Navigation")
@@ -124,7 +124,7 @@ function chatDetailsScreen.render(p6) --[[ line: 112 ]]
 	})
 end
 
-function chatDetailsScreen.didMount(p7) --[[ line: 135 ]]
+function chatDetailsScreen.didMount(p7)
 	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), enumScreensModule (ref), chatDetailsNavigationOptionsModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), getRootedNavigationStoreModule (ref)
 	loggerModule:info("{screen} mounted")
 	
@@ -136,7 +136,7 @@ function chatDetailsScreen.didMount(p7) --[[ line: 135 ]]
 	end
 end
 
-function chatDetailsScreen.willUnmount(p8) --[[ line: 152 ]]
+function chatDetailsScreen.willUnmount(p8)
 	if p8.ixpSubscription then
 		p8.ixpSubscription.remove()
 	end

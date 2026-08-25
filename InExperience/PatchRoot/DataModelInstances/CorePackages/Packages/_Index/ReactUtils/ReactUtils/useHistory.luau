@@ -3,14 +3,14 @@ local reactUtils = script:FindFirstAncestor("ReactUtils")
 local reactModule = require(reactUtils.Parent.React)
 local LUAU_ANALYZE_ERRORModule = require(reactUtils.LUAU_ANALYZE_ERROR)
 
-return function(p0, p1, p2) --[[ line: 11 | named "useHistory" ]]
+return function(p0, p1, p2)
 	-- upvalues: reactModule (ref), changeHistoryService (ref), LUAU_ANALYZE_ERRORModule (ref)
 	local var4 = reactModule.useRef(p0)
 	local var5 = reactModule.useRef({})
 	local var6 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 16 ]]
+	reactModule.useEffect(function()
 		-- upvalues: changeHistoryService (copy), var5 (ref), var6 (ref), LUAU_ANALYZE_ERRORModule (copy), var4 (ref), p1 (ref)
-		local onUndoConnection = changeHistoryService.OnUndo:Connect(function(p3) --[[ line: 17 ]]
+		local onUndoConnection = changeHistoryService.OnUndo:Connect(function(p3)
 			-- upvalues: var5 (copy), var6 (copy), LUAU_ANALYZE_ERRORModule (copy), var4 (copy), p1 (copy)
 			local current = var5.current
 			local current_1 = var6.current
@@ -30,7 +30,7 @@ return function(p0, p1, p2) --[[ line: 11 | named "useHistory" ]]
 			var5.current = current
 			var6.current = current_1
 		end)
-		local onRedoConnection = changeHistoryService.OnRedo:Connect(function(p4) --[[ line: 48 ]]
+		local onRedoConnection = changeHistoryService.OnRedo:Connect(function(p4)
 			-- upvalues: var5 (copy), var6 (copy), LUAU_ANALYZE_ERRORModule (copy), var4 (copy), p1 (copy)
 			local current = var5.current
 			local current_1 = var6.current
@@ -52,19 +52,19 @@ return function(p0, p1, p2) --[[ line: 11 | named "useHistory" ]]
 			end
 		end)
 		
-		return function() --[[ line: 76 ]]
+		return function()
 			-- upvalues: onUndoConnection (ref), onRedoConnection (ref)
 			onUndoConnection:Disconnect()
 			onRedoConnection:Disconnect()
 		end
 	end, p2)
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var5 (ref), var6 (ref)
 		var5.current = {}
 		var6.current = {}
 	end, p2)
 	
-	return reactModule.useCallback(function(p5, p6) --[[ line: 87 ]]
+	return reactModule.useCallback(function(p5, p6)
 		-- upvalues: var5 (ref), LUAU_ANALYZE_ERRORModule (copy), var6 (ref), changeHistoryService (copy), var4 (ref)
 		local current = var5.current
 		assert(current ~= nil, LUAU_ANALYZE_ERRORModule)

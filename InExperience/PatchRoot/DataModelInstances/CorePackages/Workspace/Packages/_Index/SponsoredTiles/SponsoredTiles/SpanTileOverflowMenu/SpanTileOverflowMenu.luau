@@ -11,12 +11,12 @@ local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFix
 local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
 
-return function(p0) --[[ line: 40 | named "SpanTileOverflowMenu" ]]
+return function(p0)
 	-- upvalues: useOverflowMenuOpen (ref), reactModule (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref), fFlagLuaAppNotInterestedReportPlaceId (ref)
 	local var9
 	local hoverKey = p0.hoverKey
 	local var3 = useOverflowMenuOpen(hoverKey)
-	local var4 = reactModule.useMemo(function() --[[ line: 44 ]]
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref)
 		local t = {}
 		
@@ -25,7 +25,7 @@ return function(p0) --[[ line: 40 | named "SpanTileOverflowMenu" ]]
 		end
 		return table.concat(t, ",")
 	end, { p0.availableMenuItems })
-	local var5 = reactModule.useCallback(function(p1, p2) --[[ line: 53 ]]
+	local var5 = reactModule.useCallback(function(p1, p2)
 		-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p0 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameTileOverflowMenuAction (copy)
 		gameTileOverflowMenuAction({
 			ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p0.appPage,
@@ -42,13 +42,13 @@ return function(p0) --[[ line: 40 | named "SpanTileOverflowMenu" ]]
 		if fFlagLuaAppEnableHomepageOneByTwoTile then p0.contentType else nil
 	})
 	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useCallback(function(p3, p4) --[[ line: 82 ]]
+	local var7 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var6 (ref), var5 (ref)
 		var6.current = true
 		var5(p3, p4)
 	end, { var5 })
 	local var8 = reactModule.useRef(var3)
-	reactModule.useEffect(function() --[[ line: 90 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var3 (ref), var8 (ref), var6 (ref), var5 (ref), var4 (ref)
 		if var3 ~= var8.current then
 			var8.current = var3

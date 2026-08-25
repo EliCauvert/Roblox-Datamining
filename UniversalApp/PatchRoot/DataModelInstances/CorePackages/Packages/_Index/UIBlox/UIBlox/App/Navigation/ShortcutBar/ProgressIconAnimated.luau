@@ -4,7 +4,7 @@ local reactModule = require(script.Parent.Parent.Parent.Parent.Parent.React)
 local _ = require(script.Parent.Types)
 local progressIconModule = require(script.Parent.ProgressIcon)
 
-local function useRenderStepped(p0, p1, p2) --[[ line: 33 ]]
+local function useRenderStepped(p0, p1, p2)
 	-- upvalues: reactModule (ref), runService (ref)
 	local var5 = reactModule.useRef(0)
 	local var6 = reactModule.useRef(0)
@@ -18,7 +18,7 @@ local function useRenderStepped(p0, p1, p2) --[[ line: 33 ]]
 	local animationTriggerTime = p2.animationTriggerTime
 	local animationKeyHoldingTime = p2.animationKeyHoldingTime
 	local animationCoolDownTime = p2.animationCoolDownTime
-	local var7 = reactModule.useCallback(function(p3) --[[ line: 54 ]]
+	local var7 = reactModule.useCallback(function(p3)
 		-- upvalues: var6 (ref), animationTriggerTime (ref), onKeyHolding (ref)
 		var6.current += p3
 		
@@ -26,7 +26,7 @@ local function useRenderStepped(p0, p1, p2) --[[ line: 33 ]]
 			onKeyHolding()
 		end
 	end, { onKeyHolding, animationTriggerTime })
-	local var8 = reactModule.useCallback(function(p4) --[[ line: 61 ]]
+	local var8 = reactModule.useCallback(function(p4)
 		-- upvalues: var5 (ref), animationKeyHoldingTime (ref), onAnimationRunning (ref), onComplete (ref)
 		var5.current = math.clamp(var5.current + p4 / animationKeyHoldingTime, 0, 1)
 		onAnimationRunning(var5.current)
@@ -35,7 +35,7 @@ local function useRenderStepped(p0, p1, p2) --[[ line: 33 ]]
 			onComplete()
 		end
 	end, { onAnimationRunning, animationKeyHoldingTime, onComplete })
-	local var9 = reactModule.useCallback(function(p5) --[[ line: 69 ]]
+	local var9 = reactModule.useCallback(function(p5)
 		-- upvalues: var5 (ref), animationCoolDownTime (ref), onAnimationRunning (ref), onReset (ref)
 		var5.current = math.clamp(var5.current - p5 / animationCoolDownTime, 0, 1)
 		onAnimationRunning(var5.current)
@@ -44,7 +44,7 @@ local function useRenderStepped(p0, p1, p2) --[[ line: 33 ]]
 			onReset()
 		end
 	end, { onAnimationRunning, animationCoolDownTime, onReset })
-	reactModule.useEffect(function() --[[ line: 77 ]]
+	reactModule.useEffect(function()
 		-- upvalues: isKeyHolding (ref), var5 (ref), var8 (ref), isKeyPressed (ref), var7 (ref), isAnimationRunning (ref), var9 (ref), runService (copy), var6 (ref)
 		local renderSteppedConnection = nil
 		local var11 = nil
@@ -60,19 +60,19 @@ local function useRenderStepped(p0, p1, p2) --[[ line: 33 ]]
 		if var11 then
 			renderSteppedConnection = runService.RenderStepped:Connect(var11)
 		end
-		return if renderSteppedConnection then function() --[[ line: 94 ]]
+		return if renderSteppedConnection then function()
 			-- upvalues: isKeyPressed (copy), var6 (copy), renderSteppedConnection (write)
 			if isKeyPressed then
 				var6.current = 0
 			end
 			renderSteppedConnection:Disconnect()
-		end else function() --[[ line: 102 ]] end
+		end else function() end
 	end, {
 		isKeyPressed, isKeyHolding, isAnimationRunning, var7, var8, var9
 	})
 end
 
-return function(p6) --[[ line: 113 | named "ProgressIconAnimated" ]]
+return function(p6)
 	-- upvalues: reactModule (ref), useRenderStepped (ref), userInputService (ref), progressIconModule (ref)
 	local var12, var13 = reactModule.useState(false)
 	local var14, var15 = reactModule.useState(false)
@@ -84,16 +84,16 @@ return function(p6) --[[ line: 113 | named "ProgressIconAnimated" ]]
 		isKeyHolding = var14,
 		isAnimationRunning = var16
 	}, {
-		onKeyHolding = reactModule.useCallback(function() --[[ line: 121 ]]
+		onKeyHolding = reactModule.useCallback(function()
 			-- upvalues: var15 (ref), var17 (ref)
 			var15(true)
 			var17(true)
 		end, {}),
-		onAnimationRunning = reactModule.useCallback(function(p7) --[[ line: 126 ]]
+		onAnimationRunning = reactModule.useCallback(function(p7)
 			-- upvalues: var21 (ref)
 			var21(p7)
 		end, {}),
-		onComplete = reactModule.useCallback(function() --[[ line: 130 ]]
+		onComplete = reactModule.useCallback(function()
 			-- upvalues: var13 (ref), var15 (ref), var17 (ref), var19 (ref), p6 (ref)
 			var13(false)
 			var15(false)
@@ -104,7 +104,7 @@ return function(p6) --[[ line: 113 | named "ProgressIconAnimated" ]]
 				p6.onHoldComplete()
 			end
 		end, { p6.onHoldComplete }),
-		onReset = reactModule.useCallback(function() --[[ line: 140 ]]
+		onReset = reactModule.useCallback(function()
 			-- upvalues: var17 (ref), var21 (ref)
 			var17(false)
 			var21(nil)
@@ -114,7 +114,7 @@ return function(p6) --[[ line: 113 | named "ProgressIconAnimated" ]]
 		animationKeyHoldingTime = p6.animationKeyHoldingTime,
 		animationCoolDownTime = p6.animationCoolDownTime
 	})
-	local var22 = reactModule.useCallback(function(p8) --[[ line: 160 ]]
+	local var22 = reactModule.useCallback(function(p8)
 		-- upvalues: p6 (ref), var13 (ref), var19 (ref), var16 (ref), var15 (ref), var21 (ref)
 		if p8.UserInputType ~= Enum.UserInputType.Keyboard and p8.UserInputType ~= Enum.UserInputType.Gamepad1 then return end
 		if p8.KeyCode == p6.keyCode then
@@ -136,15 +136,15 @@ return function(p6) --[[ line: 113 | named "ProgressIconAnimated" ]]
 			end
 		end
 	end, { p6.keyCode, var16 })
-	reactModule.useEffect(function() --[[ line: 184 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p6 (ref), userInputService (copy), var22 (ref)
 		if p6.progress then
-			return function() --[[ line: 186 ]] end
+			return function() end
 		end
 		local inputBeganConnection = userInputService.InputBegan:Connect(var22)
 		local inputEndedConnection = userInputService.InputEnded:Connect(var22)
 		
-		return function() --[[ line: 191 ]]
+		return function()
 			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref)
 			inputBeganConnection:Disconnect()
 			inputEndedConnection:Disconnect()

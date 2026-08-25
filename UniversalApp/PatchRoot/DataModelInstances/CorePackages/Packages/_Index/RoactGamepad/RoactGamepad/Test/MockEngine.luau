@@ -32,7 +32,7 @@ local t_2 = {
 	[Enum.KeyCode.Right] = "NextSelectionRight"
 }
 
-local function _(p0) --[[ line: 53 | named "defaultInputObject" ]]
+local function _(p0)
 	return {
 		KeyCode = p0,
 		Delta = Vector3.new(),
@@ -42,11 +42,11 @@ local function _(p0) --[[ line: 53 | named "defaultInputObject" ]]
 	}
 end
 
-local _ = function(p1) --[[ line: 64 | named "wrapDisconnector" ]]
+local _ = function(p1)
 	return { Disconnect = p1 }
 end
 
-function t.new() --[[ line: 70 ]]
+function t.new()
 	-- upvalues: createSignalModule (ref), t (ref), cryoModule (ref)
 	local tbl = setmetatable({
 		__mockSelected = nil,
@@ -60,55 +60,55 @@ function t.new() --[[ line: 70 ]]
 		__gamepadDisconnected = createSignalModule()
 	}, t)
 	local t_1 = {
-		getSelection = function() --[[ line: 88 ]]
+		getSelection = function()
 			-- upvalues: tbl (ref)
 			return tbl.__mockSelected
 		end,
-		setSelection = function(value) --[[ line: 91 ]]
+		setSelection = function(value)
 			-- upvalues: tbl (ref)
 			tbl.__mockSelected = value
 			tbl.__selectionChangedSignal:fire()
 		end,
-		getGamepadConnected = function(p2) --[[ line: 97 ]]
+		getGamepadConnected = function(p2)
 			-- upvalues: tbl (ref)
 			return tbl.__connectedGamepads[p2] or false
 		end,
-		getGamepadState = function(p3) --[[ line: 100 ]]
+		getGamepadState = function(p3)
 			-- upvalues: tbl (ref)
 			if tbl.__gamepadStates[p3] == nil then
 				tbl:__initializeGamepadState(p3)
 			end
 			return tbl.__gamepadStates[p3]
 		end,
-		getNavigationGamepads = function(_) --[[ line: 109 ]]
+		getNavigationGamepads = function(_)
 			-- upvalues: cryoModule (copy), tbl (ref)
 			return cryoModule.Dictionary.keys(tbl.__connectedGamepads)
 		end,
-		subscribeToSelectionChanged = function(p4) --[[ line: 112 ]]
+		subscribeToSelectionChanged = function(p4)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__selectionChangedSignal:subscribe(p4) }
 		end,
-		subscribeToInputBegan = function(p5) --[[ line: 117 ]]
+		subscribeToInputBegan = function(p5)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__inputSignal:subscribe(p5) }
 		end,
-		subscribeToInputChanged = function(p6) --[[ line: 122 ]]
+		subscribeToInputChanged = function(p6)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__inputSignal:subscribe(p6) }
 		end,
-		subscribeToInputEnded = function(p7) --[[ line: 127 ]]
+		subscribeToInputEnded = function(p7)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__inputSignal:subscribe(p7) }
 		end,
-		subscribeToRenderStepped = function(p8) --[[ line: 132 ]]
+		subscribeToRenderStepped = function(p8)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__renderStepped:subscribe(p8) }
 		end,
-		subscribeToGamepadConnected = function(p9) --[[ line: 137 ]]
+		subscribeToGamepadConnected = function(p9)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__gamepadConnected:subscribe(p9) }
 		end,
-		subscribeToGamepadDisconnected = function(p10) --[[ line: 142 ]]
+		subscribeToGamepadDisconnected = function(p10)
 			-- upvalues: tbl (ref)
 			return { Disconnect = tbl.__gamepadDisconnected:subscribe(p10) }
 		end
@@ -118,9 +118,9 @@ function t.new() --[[ line: 70 ]]
 	return tbl, t_1
 end
 
-function t:__initializeGamepadState(p11) --[[ line: 154 ]]
+function t:__initializeGamepadState(p11)
 	-- upvalues: cryoModule (ref), list (ref)
-	self.__gamepadStates[p11] = cryoModule.List.map(list, function(p12) --[[ line: 155 ]]
+	self.__gamepadStates[p11] = cryoModule.List.map(list, function(p12)
 		return {
 			KeyCode = p12,
 			Delta = Vector3.new(),
@@ -131,12 +131,12 @@ function t:__initializeGamepadState(p11) --[[ line: 154 ]]
 	end)
 end
 
-function t:simulateSelectionChanged(p13) --[[ line: 160 ]]
+function t:simulateSelectionChanged(p13)
 	self.__mockSelected = p13
 	self.__selectionChangedSignal:fire()
 end
 
-function t:simulateInput(p14) --[[ line: 165 ]]
+function t:simulateInput(p14)
 	-- upvalues: cryoModule (ref), t_1 (ref), t_2 (ref)
 	local var8 = cryoModule.Dictionary.join({
 		Delta = Vector3.new(),
@@ -158,7 +158,7 @@ function t:simulateInput(p14) --[[ line: 165 ]]
 			self:connectGamepad(userInputType)
 		end
 		local var10 = self.__gamepadStates[userInputType]
-		local var11 = cryoModule.List.findWhere(var10, function(p15) --[[ line: 201 ]]
+		local var11 = cryoModule.List.findWhere(var10, function(p15)
 			-- upvalues: var8 (ref)
 			return p15.KeyCode == var8
 		end)
@@ -173,21 +173,21 @@ function t:simulateInput(p14) --[[ line: 165 ]]
 	self.__inputSignal:fire(var8)
 end
 
-function t:renderStep(p16) --[[ line: 222 ]]
+function t:renderStep(p16)
 	if p16 == nil then
 		p16 = 0.033333333333
 	end
 	self.__renderStepped:fire(p16)
 end
 
-function t:connectGamepad(p17) --[[ line: 230 ]]
+function t:connectGamepad(p17)
 	assert(typeof(p17) == "EnumItem" and p17.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
 	self.__connectedGamepads[p17] = true
 	self:__initializeGamepadState(p17)
 	self.__gamepadConnected:fire(p17)
 end
 
-function t:disconnectGamepad(p18) --[[ line: 242 ]]
+function t:disconnectGamepad(p18)
 	assert(typeof(p18) == "EnumItem" and p18.EnumType == Enum.UserInputType, "Invalid argument #1: expected a member of Enum.UserInputType")
 	self.__connectedGamepads[p18] = nil
 	self.__gamepadDisconnected:fire(p18)

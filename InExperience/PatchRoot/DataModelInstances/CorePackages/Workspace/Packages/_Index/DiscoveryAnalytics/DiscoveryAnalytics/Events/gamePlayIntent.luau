@@ -165,7 +165,7 @@ local t = {
 	[constantsModule.Context.InstantPlay] = if fFlagLuaAppContinueSortInstantPlay then var12 else nil
 }
 
-local function _(p0) --[[ line: 214 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p0)
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -174,7 +174,7 @@ local function _(p0) --[[ line: 214 | named "addMobileAdvertisingIdToEventParams
 	end
 end
 
-return function(p1, p2, p3) --[[ line: 221 ]]
+return function(p1, p2, p3)
 	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), cryoModule (ref), telemetryService (ref), var10 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
 	if t[p2] == nil then
 		discoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {p2} to type check gamePlayIntent event parameters`, { eventContext = p2 })

@@ -10,12 +10,12 @@ local var4, var5 = getImageSetDataModule(var3)
 local uiblox = require(parent.Parent.BuilderIcons).Migration.uiblox
 local whitelistedIconAssetsModule = require(parent.whitelistedIconAssets)
 
-local function _(p0, p1) --[[ line: 38 | named "getImagePath" ]]
+local function _(p0, p1)
 	-- upvalues: fallbackImagesModule (ref)
 	return if p0 == nil then fallbackImagesModule[p1] else string.format("rbxasset://%s/SpriteSheets/%s.png", p0, p1)
 end
 
-local var7 = (function() --[[ line: 20 | named "getPackagePath" ]]
+local var7 = (function()
 	-- upvalues: parent (ref), corePackages (ref)
 	if corePackages == nil then
 		return nil
@@ -46,7 +46,7 @@ for i, v in var4 do
 	end
 end
 setmetatable(t, {
-	__index = function(p2, p3) --[[ line: 70 ]]
+	__index = function(p2, p3)
 		-- upvalues: uiblox (ref)
 		if uiblox[p3] then
 			local t = {

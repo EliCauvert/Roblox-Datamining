@@ -11,17 +11,17 @@ local icon = foundationModule.Icon
 local enums = foundationModule.Enums
 local useTokens = foundationModule.Hooks.useTokens
 local extraKeysEnumModule = require(parent.Enums.ExtraKeysEnum)
-local var4 = reactModule.memo(function(p0) --[[ line: 45 ]]
+local var4 = reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), reactModule (ref), text (ref)
 	return reactModule.createElement(text, {
 		tag = "auto-xy text-align-x-center text-align-y-center text-title-large",
 		Text = useLocalization({ action = p0.action }).action
 	})
 end)
-local var5 = reactModule.memo(function(p1) --[[ line: 56 ]]
+local var5 = reactModule.memo(function(p1)
 	-- upvalues: useTokens (ref), reactModule (ref), extraKeysEnumModule (ref), constantsModule (ref), view (ref), icon (ref), enums (ref)
 	local var6 = useTokens()
-	local var7 = reactModule.useMemo(function() --[[ line: 60 ]]
+	local var7 = reactModule.useMemo(function()
 		-- upvalues: p1 (ref), extraKeysEnumModule (copy), constantsModule (copy)
 		local t = {}
 		
@@ -43,7 +43,7 @@ local var5 = reactModule.memo(function(p1) --[[ line: 56 ]]
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center align-y-center auto-xy gap-xsmall row"
-	}, reactModule.useMemo(function() --[[ line: 102 ]]
+	}, reactModule.useMemo(function()
 		-- upvalues: p1 (ref), reactModule (copy), view (copy), var6 (ref), var7 (ref), constantsModule (copy), icon (copy), enums (copy)
 		local t = {}
 		
@@ -68,9 +68,9 @@ local var5 = reactModule.memo(function(p1) --[[ line: 56 ]]
 	end, { var7, p1.addBlankIcon, p1.layoutOrderReversed }))
 end)
 
-return reactModule.memo(reactModule.memo(function(p2) --[[ line: 141 ]]
+return reactModule.memo(reactModule.memo(function(p2)
 	-- upvalues: reactModule (ref), constantsModule (ref), view (ref), var4 (ref), var5 (ref)
-	local var10, var11 = reactModule.useMemo(function() --[[ line: 142 ]]
+	local var10, var11 = reactModule.useMemo(function()
 		-- upvalues: p2 (ref), constantsModule (copy), reactModule (copy), view (copy), var4 (copy), var5 (copy)
 		local t = {}
 		local t_1 = {}

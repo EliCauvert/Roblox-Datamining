@@ -9,12 +9,12 @@ local messageStatus = enumsModule.MessageStatus
 local messageType = enumsModule.MessageType
 local messageVisibility = enumsModule.MessageVisibility
 
-local function _(p0) --[[ line: 43 | named "isChatMessage" ]]
+local function _(p0)
 	-- upvalues: messageType (ref)
 	return if p0 == nil then false else p0.type == messageType.User
 end
 
-local _ = function(value) --[[ line: 50 | named "parseTimestamp" ]]
+local _ = function(value)
 	if value == nil then
 		return nil
 	end
@@ -23,7 +23,7 @@ local _ = function(value) --[[ line: 50 | named "parseTimestamp" ]]
 	return if dateTime then dateTime.UnixTimestamp else nil
 end
 
-local _ = function(p1, p2) --[[ line: 61 | named "timeDiffExceedsThreshold" ]]
+local _ = function(p1, p2)
 	if p1 == nil or p2 == nil then
 		return false
 	end
@@ -48,21 +48,21 @@ local _ = function(p1, p2) --[[ line: 61 | named "timeDiffExceedsThreshold" ]]
 	return if var6 == nil or var8 == nil then false else math.abs(var6 - var8) > 300
 end
 
-local _ = function(p3) --[[ line: 73 | named "isModeratedMessage" ]]
+local _ = function(p3)
 	-- upvalues: messageStatus (ref)
 	return p3 ~= nil and p3.status == messageStatus.Moderated
 end
 
-local _ = function(p4) --[[ line: 77 | named "isHiddenMessage" ]]
+local _ = function(p4)
 	-- upvalues: messageVisibility (ref)
 	return p4 ~= nil and p4.visibility == messageVisibility.Hidden
 end
 
-local _ = function(p5) --[[ line: 81 | named "isReplyMessage" ]]
+local _ = function(p5)
 	return p5 ~= nil and p5.replies_to ~= nil
 end
 
-local function canGroupWithAdjacent(p6, p7) --[[ line: 85 ]]
+local function canGroupWithAdjacent(p6, p7)
 	-- upvalues: messageType (ref), messageVisibility (ref), messageStatus (ref)
 	local var10 = false
 	
@@ -120,7 +120,7 @@ local function canGroupWithAdjacent(p6, p7) --[[ line: 85 ]]
 	return var10
 end
 
-local function computeGroupedVariant(p8, p9, p10) --[[ line: 96 ]]
+local function computeGroupedVariant(p8, p9, p10)
 	-- upvalues: messageType (ref), canGroupWithAdjacent (ref), groupedMessageVariant (ref)
 	if not (if p8 == nil then false else p8.type == messageType.User) then
 		return nil
@@ -138,14 +138,14 @@ local function computeGroupedVariant(p8, p9, p10) --[[ line: 96 ]]
 	return if not (not var16 and not var17) then if not (not var16 and var17) then if var16 and not var17 then groupedMessageVariant.First else groupedMessageVariant.Middle else groupedMessageVariant.Last else groupedMessageVariant.Single
 end
 
-return function(p11, p12) --[[ line: 126 | named "createConversationMessageViewModelStore" ]]
+return function(p11, p12)
 	-- upvalues: signalsModule (ref), messageType (ref), groupedMessageVariant (ref), computeGroupedVariant (ref)
 	local t = {}
 	
 	return {
 		conversationMessageStore = p11,
 		conversationMessageListStore = p12,
-		getGroupedVariant = function(p13, p14) --[[ line: 132 ]]
+		getGroupedVariant = function(p13, p14)
 			-- upvalues: t (ref), signalsModule (copy), p11 (ref), messageType (copy), p12 (ref), groupedMessageVariant (copy), computeGroupedVariant (copy)
 			local var19 = t[p14]
 			
@@ -153,7 +153,7 @@ return function(p11, p12) --[[ line: 126 | named "createConversationMessageViewM
 				local var20 = var19[p13]
 				
 				if var20 == nil then
-					local var21 = signalsModule.createComputed(function(p15) --[[ line: 145 ]]
+					local var21 = signalsModule.createComputed(function(p15)
 						-- upvalues: p11 (copy), p13 (ref), messageType (copy), p12 (copy), p14 (ref), groupedMessageVariant (copy), computeGroupedVariant (copy)
 						local var22 = p11.messages(p15)
 						local var23 = var22[p13]
@@ -181,7 +181,7 @@ return function(p11, p12) --[[ line: 126 | named "createConversationMessageViewM
 				t[p14] = var19
 			end
 		end,
-		evictConversation = function(p16) --[[ line: 174 ]]
+		evictConversation = function(p16)
 			-- upvalues: t (ref)
 			t[p16] = nil
 		end

@@ -3,13 +3,13 @@ local reactModule = require(parent.Parent.React)
 local lerpModule = require(parent.utils.lerp)
 local stackViewOverlayFrame = reactModule.Component:extend("StackViewOverlayFrame")
 
-function stackViewOverlayFrame.init(p0) --[[ line: 10 ]]
+function stackViewOverlayFrame.init(p0)
 	-- upvalues: reactModule (ref)
 	p0._signalDisconnect = nil
 	p0._ref = reactModule.createRef()
 end
 
-function stackViewOverlayFrame.render(p1) --[[ line: 16 ]]
+function stackViewOverlayFrame.render(p1)
 	-- upvalues: lerpModule (ref), reactModule (ref)
 	local navigationOptions = p1.props.navigationOptions
 	
@@ -22,29 +22,29 @@ function stackViewOverlayFrame.render(p1) --[[ line: 16 ]]
 	})
 end
 
-function stackViewOverlayFrame.didUpdate(p2, p3) --[[ line: 31 ]]
+function stackViewOverlayFrame.didUpdate(p2, p3)
 	local transitionChangedSignal = p2.props.transitionChangedSignal
 	
 	if transitionChangedSignal ~= p3.transitionChangedSignal then
 		if p2._signalDisconnect then
 			p2._signalDisconnect()
 		end
-		p2._signalDisconnect = transitionChangedSignal(function(...) --[[ line: 39 ]]
+		p2._signalDisconnect = transitionChangedSignal(function(...)
 			-- upvalues: p2 (ref)
 			p2:_transitionChanged(...)
 		end)
 	end
 end
 
-function stackViewOverlayFrame.didMount(p4) --[[ line: 45 ]]
+function stackViewOverlayFrame.didMount(p4)
 	p4._isMounted = true
-	p4._signalDisconnect = p4.props.transitionChangedSignal(function(...) --[[ line: 47 ]]
+	p4._signalDisconnect = p4.props.transitionChangedSignal(function(...)
 		-- upvalues: p4 (ref)
 		p4:_transitionChanged(...)
 	end)
 end
 
-function stackViewOverlayFrame.willUnmount(p5) --[[ line: 52 ]]
+function stackViewOverlayFrame.willUnmount(p5)
 	p5._isMounted = false
 	
 	if p5._signalDisconnect then
@@ -53,7 +53,7 @@ function stackViewOverlayFrame.willUnmount(p5) --[[ line: 52 ]]
 	end
 end
 
-function stackViewOverlayFrame._transitionChanged(p6, p7) --[[ line: 60 ]]
+function stackViewOverlayFrame._transitionChanged(p6, p7)
 	-- upvalues: lerpModule (ref)
 	if not p6._isMounted then return end
 	if p6._ref.current then

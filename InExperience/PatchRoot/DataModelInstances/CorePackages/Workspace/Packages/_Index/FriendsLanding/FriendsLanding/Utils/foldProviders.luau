@@ -1,6 +1,6 @@
 ﻿local roact = require(script:FindFirstAncestor("FriendsLanding").dependencies).Roact
 
-return function(p0, p1) --[[ line: 6 ]]
+return function(p0, p1)
 	-- upvalues: roact (ref)
 	local var0 = p0
 	

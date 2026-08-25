@@ -13,16 +13,16 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p0) --[[ line: 21 ]]
+					status = function(p0)
 						return p0
 					end,
-					previousStatus = function(p1) --[[ line: 24 ]]
+					previousStatus = function(p1)
 						return p1
 					end,
-					detail = function(p2) --[[ line: 27 ]]
+					detail = function(p2)
 						return p2
 					end,
-					activeDm = function(p3) --[[ line: 30 ]]
+					activeDm = function(p3)
 						return p3
 					end
 				}
@@ -36,10 +36,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					numberActive = function(p4) --[[ line: 44 ]]
+					numberActive = function(p4)
 						return p4
 					end,
-					activeDm = function(p5) --[[ line: 47 ]]
+					activeDm = function(p5)
 						return p5
 					end
 				}
@@ -53,7 +53,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					errorMessage = function(p6) --[[ line: 61 ]]
+					errorMessage = function(p6)
 						return p6
 					end
 				}
@@ -67,7 +67,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					activeDm = function(p7) --[[ line: 75 ]]
+					activeDm = function(p7)
 						return p7
 					end
 				}

@@ -1,7 +1,7 @@
 ﻿local toRectModule = require(script.Parent.toRect)
 local returnValueModule = require(script.Parent.returnValue)
 
-return function(p0, p1, p2) --[[ line: 26 | named "insideLeftOf" ]]
+return function(p0, p1, p2)
 	-- upvalues: toRectModule (ref), returnValueModule (ref)
 	local var2 = -(toRectModule(p0).Max - toRectModule(p1).Max)
 	

@@ -12,7 +12,7 @@ local fFlagUseTeleportTraversalHistory = flagsModule.FFlagUseTeleportTraversalHi
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 51 ]]
+function t.new(p0)
 	-- upvalues: signalsModule (ref), t (ref), memStorageService (ref), httpService (ref)
 	local t_1 = { _connections = {}, _historyKey = "", _history = {} }
 	local var11, var12 = signalsModule.createSignal({})
@@ -22,7 +22,7 @@ function t.new(p0) --[[ line: 51 ]]
 	if p0 == nil or p0 == "" then
 		return setmetatable(t_1, t)
 	end
-	local function initLocalHistory() --[[ line: 62 ]]
+	local function initLocalHistory()
 		-- upvalues: t_1 (ref), p0 (ref), memStorageService (copy), httpService (copy)
 		t_1._historyKey = "TraversalHistory" .. p0
 		local historyKeyItem = memStorageService:GetItem(t_1._historyKey)
@@ -42,7 +42,7 @@ function t.new(p0) --[[ line: 51 ]]
 		t_1._setHistorySignal(t_1._history)
 	end
 	
-	table.insert(t_1._connections, game.Loaded:Connect(function() --[[ line: 82 ]]
+	table.insert(t_1._connections, game.Loaded:Connect(function()
 		-- upvalues: initLocalHistory (ref)
 		initLocalHistory()
 	end))
@@ -50,18 +50,18 @@ function t.new(p0) --[[ line: 51 ]]
 	return setmetatable(t_1, t)
 end
 
-function t:addHistoryEntry(p1) --[[ line: 90 ]]
+function t:addHistoryEntry(p1)
 	table.insert(self._history, 1, p1)
 	self._setHistorySignal(self._history)
 end
 
-function t:addHistoryEntries(p2) --[[ line: 95 ]]
+function t:addHistoryEntries(p2)
 	-- upvalues: cryoModule (ref)
 	self._history = cryoModule.List.join(p2, self._history)
 	self._setHistorySignal(self._history)
 end
 
-local function _(p3, p4) --[[ line: 101 | named "getNMostRecent" ]]
+local function _(p3, p4)
 	if p4 == nil then
 		return p3
 	end
@@ -73,7 +73,7 @@ local function _(p3, p4) --[[ line: 101 | named "getNMostRecent" ]]
 	return t
 end
 
-function t:getHistory(p5) --[[ line: 112 ]]
+function t:getHistory(p5)
 	local history = self._history
 	
 	if p5 == nil then
@@ -87,9 +87,9 @@ function t:getHistory(p5) --[[ line: 112 ]]
 	return t
 end
 
-function t.getUniverseHistorySignal(value, p6) --[[ line: 115 ]]
+function t.getUniverseHistorySignal(value, p6)
 	-- upvalues: signalsModule (ref)
-	return signalsModule.createComputed(function(p7) --[[ line: 116 ]]
+	return signalsModule.createComputed(function(p7)
 		-- upvalues: value (ref), p6 (ref)
 		local var19
 		local var18 = value._historySignal(p7)
@@ -113,7 +113,7 @@ function t.getUniverseHistorySignal(value, p6) --[[ line: 115 ]]
 	end)
 end
 
-function t:getUniverseHistory(p8) --[[ line: 127 ]]
+function t:getUniverseHistory(p8)
 	-- upvalues: fFlagUseTeleportTraversalHistory (ref), useTeleportedPlacesBackHistory2EngineFeature (ref), teleportService (ref), cryoModule (ref)
 	local t = {}
 	
@@ -152,19 +152,19 @@ function t:getUniverseHistory(p8) --[[ line: 127 ]]
 	end
 end
 
-function t:writeHistory() --[[ line: 143 ]]
+function t:writeHistory()
 	-- upvalues: memStorageService (ref), httpService (ref)
 	memStorageService:SetItem(self._historyKey, httpService:JSONEncode(self._history))
 end
 
-function t:disconnect() --[[ line: 147 ]]
+function t:disconnect()
 	for i, v in self._connections do
 		v:Disconnect()
 	end
 	self._connections = {}
 end
 
-local _ = function() --[[ line: 154 | named "getDefaultId" ]]
+local _ = function()
 	-- upvalues: playersService (ref)
 	local var27 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
 	

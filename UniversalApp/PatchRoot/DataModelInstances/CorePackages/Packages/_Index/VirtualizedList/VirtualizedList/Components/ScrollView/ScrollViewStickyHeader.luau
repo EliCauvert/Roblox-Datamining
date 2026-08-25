@@ -5,12 +5,12 @@ local boolean = luauPolyfillModule.Boolean
 local clearTimeout = luauPolyfillModule.clearTimeout
 local setTimeout = luauPolyfillModule.setTimeout
 local t = {
-	new = function(...) --[[ line: 29 ]]
+	new = function(...)
 		return nil
 	end
 }
 local t_1 = {
-	new = function(...) --[[ line: 35 ]]
+	new = function(...)
 		return nil
 	end
 }
@@ -20,7 +20,7 @@ local _ = { OS = "roblox" }
 local var5 = nil
 local scrollViewStickyHeader = reactModule.Component:extend("ScrollViewStickyHeader")
 
-function scrollViewStickyHeader.init(p0, p1) --[[ line: 108 ]]
+function scrollViewStickyHeader.init(p0, p1)
 	-- upvalues: reactModule (ref)
 	warn("ScrollViewStickyHeader not fully implemented")
 	p0.props = p1
@@ -36,13 +36,13 @@ function scrollViewStickyHeader.init(p0, p1) --[[ line: 108 ]]
 	p0._haveReceivedInitialZeroTranslateY = true
 	p0._debounceTimeout = 64
 	
-	function p0.setNextHeaderY(_, p2) --[[ line: 130 ]]
+	function p0.setNextHeaderY(_, p2)
 		-- upvalues: p0 (ref)
 		p0._shouldRecreateTranslateY = true
 		p0.setState({ nextHeaderLayoutY = p2 })
 	end
 	
-	function p0._onLayout(_, p3) --[[ line: 135 ]]
+	function p0._onLayout(_, p3)
 		-- upvalues: p0 (ref), reactModule (copy)
 		local y = p3.nativeEvent.layout.y
 		local height = p3.nativeEvent.layout.height
@@ -59,13 +59,13 @@ function scrollViewStickyHeader.init(p0, p1) --[[ line: 108 ]]
 		end
 	end
 	
-	function p0._setComponentRef(_, p4) --[[ line: 154 ]]
+	function p0._setComponentRef(_, p4)
 		-- upvalues: p0 (ref)
 		p0._ref = p4
 	end
 end
 
-function scrollViewStickyHeader.componentWillUnmount(p5) --[[ line: 159 ]]
+function scrollViewStickyHeader.componentWillUnmount(p5)
 	-- upvalues: boolean (ref), clearTimeout (ref)
 	if p5._translateY ~= nil and p5._animatedValueListenerId ~= nil then
 		p5._translateY:removeListener(p5._animatedValueListenerId)
@@ -75,13 +75,13 @@ function scrollViewStickyHeader.componentWillUnmount(p5) --[[ line: 159 ]]
 	end
 end
 
-function scrollViewStickyHeader.UNSAFE_componentWillReceiveProps(p6, p7) --[[ line: 168 ]]
+function scrollViewStickyHeader.UNSAFE_componentWillReceiveProps(p6, p7)
 	if p7.scrollViewHeight ~= p6.props.scrollViewHeight or p7.scrollAnimatedValue ~= p6.props.scrollAnimatedValue or p7.inverted ~= p6.props.inverted then
 		p6._shouldRecreateTranslateY = true
 	end
 end
 
-function scrollViewStickyHeader.updateTranslateListener(p8, p9, p10, p11) --[[ line: 178 ]]
+function scrollViewStickyHeader.updateTranslateListener(p8, p9, p10, p11)
 	-- upvalues: boolean (ref), t (ref), clearTimeout (ref), setTimeout (ref)
 	if p8._translateY ~= nil and p8._animatedValueListenerId ~= nil then
 		p8._translateY:removeListener(p8._animatedValueListenerId)
@@ -91,7 +91,7 @@ function scrollViewStickyHeader.updateTranslateListener(p8, p9, p10, p11) --[[ l
 	
 	if not p10 then return end
 	if not p8._animatedValueListener then
-		function p8._animatedValueListener(p12) --[[ line: 209 ]]
+		function p8._animatedValueListener(p12)
 			-- upvalues: p8 (ref), boolean (copy), clearTimeout (copy), setTimeout (copy)
 			local value = p12.value
 			
@@ -102,7 +102,7 @@ function scrollViewStickyHeader.updateTranslateListener(p8, p9, p10, p11) --[[ l
 			elseif boolean.toJSBoolean(p8._timer) then
 				clearTimeout(p8._timer)
 			end
-			p8._timer = setTimeout(function() --[[ line: 220 ]]
+			p8._timer = setTimeout(function()
 				-- upvalues: value (ref), p8 (copy)
 				if value ~= p8.state.translateY then
 					p8:setState({ translateY = value })
@@ -116,7 +116,7 @@ function scrollViewStickyHeader.updateTranslateListener(p8, p9, p10, p11) --[[ l
 	p8._animatedValueListenerId = p9:addListener(p8._animatedValueListener)
 end
 
-function scrollViewStickyHeader.render(p13) --[[ line: 233 ]]
+function scrollViewStickyHeader.render(p13)
 	-- upvalues: boolean (ref), t_1 (ref), reactModule (ref), var5 (write)
 	local canonical = p13._ref and (p13._ref._internalInstanceHandle and (p13._ref._internalInstanceHandle.stateNode and boolean.toJSBoolean(p13._ref._internalInstanceHandle.stateNode.canonical)))
 	

@@ -8,13 +8,13 @@ local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
 local fFlagSduiEdpPrefetchPlayability = require(parent.SharedFlags).FFlagSduiEdpPrefetchPlayability
 local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
 
-return function() --[[ line: 13 | named "useNavigateToGameDetails" ]]
+return function()
 	-- upvalues: useDispatch (ref), useNavigation (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), openGameDetails (ref)
 	local var1 = useDispatch()
 	local var2 = useNavigation()
 	local var3 = if fFlagSduiEdpPrefetchPlayability and fFlagLuaAppSduiEdpEnabled then useRoactService(roactNetworking) else nil
 	
-	return reactModule.useCallback(function(p0, p1) --[[ line: 21 ]]
+	return reactModule.useCallback(function(p0, p1)
 		-- upvalues: var1 (ref), openGameDetails (copy), var2 (ref), fFlagSduiEdpPrefetchPlayability (copy), fFlagLuaAppSduiEdpEnabled (copy), var3 (write)
 		var1(openGameDetails(p0, var2, p1, if fFlagSduiEdpPrefetchPlayability and fFlagLuaAppSduiEdpEnabled then var3 else nil))
 	end, {

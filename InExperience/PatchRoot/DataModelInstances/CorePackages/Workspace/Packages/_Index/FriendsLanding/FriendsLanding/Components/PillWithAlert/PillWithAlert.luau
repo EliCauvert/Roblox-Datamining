@@ -17,7 +17,7 @@ local badgeStates = UIBlox.App.Indicator.Enum.BadgeStates
 local styledTextLabel = UIBlox.App.Text.StyledTextLabel
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 
-local var1 = function(p0, p1, p2) --[[ line: 30 ]]
+local var1 = function(p0, p1, p2)
 	-- upvalues: controlState (ref)
 	local var3 = p0[p1] or p0[controlState.Default]
 	local t = {
@@ -41,19 +41,19 @@ pill.validateProps = t.strictInterface({
 	onActivated = t.callback
 })
 
-function pill.init(p3) --[[ line: 58 ]]
+function pill.init(p3)
 	-- upvalues: controlState (ref)
 	p3.state = { controlState = controlState.Initialize }
 	
-	function p3.onStateChanged(_, p4) --[[ line: 63 ]]
+	function p3.onStateChanged(_, p4)
 		-- upvalues: p3 (ref)
 		p3:setState({ controlState = p4 })
 	end
 end
 
-function pill.render(p5) --[[ line: 70 ]]
+function pill.render(p5)
 	-- upvalues: withStyle (ref), controlState (ref), var1 (ref), getIconSize (ref), iconSize (ref), textService (ref), roact (ref), interactable (ref), imageSetLabel (ref), styledTextLabel (ref), badge (ref), badgeStates (ref), skeleton (ref), radius (ref)
-	return withStyle(function(p6) --[[ line: 71 ]]
+	return withStyle(function(p6)
 		-- upvalues: p5 (ref), controlState (copy), var1 (copy), getIconSize (copy), iconSize (copy), textService (copy), roact (copy), interactable (copy), imageSetLabel (copy), styledTextLabel (copy), badge (copy), badgeStates (copy), skeleton (copy), radius (copy)
 		local font = p6.Font
 		local isSelected = p5.props.isSelected

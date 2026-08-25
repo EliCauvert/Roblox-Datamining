@@ -8,7 +8,7 @@ local getSduiTelemetryHandlerNameRegistryModule = require(sduiCoreSystem.getSdui
 local reportUnifiedLoggingActionModule = require(sduiCoreSystem.Analytics.reportUnifiedLoggingAction)
 local fFlagSduiActionSkipUnifiedLogging = require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging
 
-return function(p0, p1, p2, p3, p4) --[[ line: 20 | named "logActionTelemetry" ]]
+return function(p0, p1, p2, p3, p4)
 	-- upvalues: getSduiTelemetryHandlerNameRegistryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiActionSkipUnifiedLogging (ref), reportUnifiedLoggingActionModule (ref)
 	if p0 and p0 ~= "" then
 		local telemetryHandler = getSduiTelemetryHandlerNameRegistryModule().getTelemetryHandler(p0)

@@ -13,16 +13,16 @@ local useFormFactor = momentsCommonModule.Hooks.useFormFactor
 local formFactor = momentsCommonModule.Enums.FormFactor
 local usePreferences = foundationModule.Hooks.usePreferences
 
-return function(p0) --[[ line: 50 | named "ImmersiveChromeController" ]]
+return function(p0)
 	-- upvalues: mediaPreloadProvider (ref), usePreferredInputModule (ref), useFormFactor (ref), usePreferences (ref), formFactor (ref), reactModule (ref), useImmersiveChromeModule (ref)
 	local pager = p0.pager
 	local var6 = mediaPreloadProvider.useMediaControllerProvider()
 	useImmersiveChromeModule({
 		pager = pager,
 		active = p0.active,
-		getActiveIsPlaying = reactModule.useMemo(function() --[[ line: 64 ]]
+		getActiveIsPlaying = reactModule.useMemo(function()
 			-- upvalues: var6 (ref), pager (ref)
-			return function(p1) --[[ line: 65 ]]
+			return function(p1)
 				-- upvalues: var6 (copy), pager (copy)
 				if var6 == nil then
 					return true
@@ -37,9 +37,9 @@ return function(p0) --[[ line: 50 | named "ImmersiveChromeController" ]]
 				return momentId == nil or momentId.getState(p1).isPlaying
 			end
 		end, { pager, var6 }),
-		getIsScrolling = reactModule.useMemo(function() --[[ line: 85 ]]
+		getIsScrolling = reactModule.useMemo(function()
 			-- upvalues: p0 (ref)
-			return function(p2) --[[ line: 86 ]]
+			return function(p2)
 				-- upvalues: p0 (copy)
 				local current = p0.controllerRef.current
 				

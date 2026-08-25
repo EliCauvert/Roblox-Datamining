@@ -44,7 +44,7 @@ local t_2 = {
 	[enumsModule.PresenceTypes.InStudio] = images["icons/logo/studiologo_small"]
 }
 
-return function(p0) --[[ line: 73 | named "contextualPresence" ]]
+return function(p0)
 	-- upvalues: useDispatch (ref), useNavigation (ref), useStyle (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformImproveGameDetailsAnalytics (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), reactModule (ref), useProfileWrapperContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var14 (ref), var13 (ref), t_1 (ref), t (ref), convertPresenceEnumModule (ref), eventNamesModule (ref), networkingPresenceModule (ref), useSelector (ref), presenceModule (ref), presenceType (ref), appPage (ref), openGameDetails (ref), useLocalization (ref), enumsModule (ref), textKeysModule (ref), t_2 (ref), getIconSize (ref), iconSize (ref), playerContext (ref)
 	local var26
 	local var18 = useDispatch()
@@ -58,13 +58,13 @@ return function(p0) --[[ line: 73 | named "contextualPresence" ]]
 	local _ = nil
 	
 	if fFlagProfilePlatformPresenceStoreMigrationModule then
-		useEffectOnMount(function() --[[ line: 89 ]]
+		useEffectOnMount(function()
 			-- upvalues: var14 (copy), profileId (ref)
 			var14.RefreshPresenceByUserId(tostring(profileId))
 		end)
 		local var27, var28 = var13(profileId, t_1)
 		var26 = var27 or (p0.presenceInfoOverride or t)
-		reactModule.useEffect(function() --[[ line: 96 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var24 (ref), var28 (ref), convertPresenceEnumModule (copy), var26 (write), var21 (ref), eventNamesModule (copy)
 			if var24.current then return end
 			if var28 == "Ready" or var28 == "Failed" then
@@ -78,14 +78,14 @@ return function(p0) --[[ line: 73 | named "contextualPresence" ]]
 			end
 		end, { var26, var28, var21 })
 	else
-		useEffectOnMount(function() --[[ line: 116 ]]
+		useEffectOnMount(function()
 			-- upvalues: var18 (ref), networkingPresenceModule (copy), profileId (ref), var23 (ref)
-			var18(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):andThen(function() --[[ line: 118 ]]
+			var18(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):andThen(function()
 				-- upvalues: var23 (copy)
 				var23.current = true
-			end):catch(function(_) --[[ line: 121 ]] end)
+			end):catch(function(_) end)
 		end)
-		local var25 = useSelector(function(p1) --[[ line: 124 ]]
+		local var25 = useSelector(function(p1)
 			-- upvalues: presenceModule (copy), profileId (ref), presenceType (copy)
 			return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
 				lastLocation = "",
@@ -93,7 +93,7 @@ return function(p0) --[[ line: 73 | named "contextualPresence" ]]
 			}
 		end)
 		var26 = if not var23.current then p0.presenceInfoOverride or var25 else var25
-		reactModule.useEffect(function() --[[ line: 135 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var23 (ref), var24 (ref), convertPresenceEnumModule (copy), var26 (write), var21 (ref), eventNamesModule (copy)
 			if var23.current and not var24.current then
 				var24.current = true
@@ -109,7 +109,7 @@ return function(p0) --[[ line: 73 | named "contextualPresence" ]]
 	local var29 = convertPresenceEnumModule(var26.userPresenceType, if fFlagProfilePlatformPresenceStoreMigrationModule then if var26.universeId then tonumber(var26.universeId) else nil else var26.universeId)
 	local lastLocation = var26.lastLocation
 	local universeId = var26.universeId
-	local var30 = reactModule.useCallback(function() --[[ line: 159 ]]
+	local var30 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref), eventNamesModule (copy), fFlagProfilePlatformImproveGameDetailsAnalytics (copy), var22 (ref), var26 (write), appPage (copy), profileId (ref), var18 (ref), openGameDetails (copy), universeId (ref), var19 (ref)
 		var21.fireAnalyticsEvent(eventNamesModule.GameDetailsButton)
 		

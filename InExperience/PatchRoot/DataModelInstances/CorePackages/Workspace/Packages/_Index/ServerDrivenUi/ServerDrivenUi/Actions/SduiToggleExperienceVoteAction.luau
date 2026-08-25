@@ -15,11 +15,11 @@ local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSdu
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 local fFlagLuaAppVoteOptimisticUpdateRaceFix = sharedFlagsModule.FFlagLuaAppVoteOptimisticUpdateRaceFix
 
-local function _(p0) --[[ line: 28 | named "convertBooleanToVoteForAnalytics" ]]
+local function _(p0)
 	return if p0 == true then "UpVoted" elseif p0 == false then "DownVoted" else "NotVoted"
 end
 
-return function(p1, _, p2, _) --[[ line: 38 | named "SduiToggleExperienceVoteAction" ]]
+return function(p1, _, p2, _)
 	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (ref), playersService (ref), gameVote (ref), getFFlagEdpPlayerFeedbackEnabled (ref), getSduiClientPageScope (ref), signalsModule (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	local var7 = if p1 then p1.actionParams else nil
 	
@@ -66,7 +66,7 @@ return function(p1, _, p2, _) --[[ line: 38 | named "SduiToggleExperienceVoteAct
 	end
 	local var15 = votesStore.updateUserVote(universeId, var12)
 	local t_1 = {}
-	t_1.dispose = signalsModule.createEffect(function(p3) --[[ line: 110 ]]
+	t_1.dispose = signalsModule.createEffect(function(p3)
 		-- upvalues: var15 (ref), p2 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), getFFlagEdpPlayerFeedbackEnabled (copy), placeId (ref), game (copy), getSduiClientPageScope (copy), t_1 (ref)
 		local var17 = var15(p3)
 		

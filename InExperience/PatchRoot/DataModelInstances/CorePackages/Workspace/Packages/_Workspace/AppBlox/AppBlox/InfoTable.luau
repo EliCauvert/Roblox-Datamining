@@ -10,7 +10,7 @@ local luaAppInfoTableResponsiveProviderOverride_1 = game:DefineFastFlag("LuaAppI
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local breakpoint = foundationModule.Enums.Breakpoint
 
-local function buildColumnMajorChildren(p0, p1, p2) --[[ line: 27 ]]
+local function buildColumnMajorChildren(p0, p1, p2)
 	-- upvalues: reactModule (ref), foundationModule (ref)
 	local p0Count = #p0
 	local ceiled = math.ceil(p0Count / p1)
@@ -31,7 +31,7 @@ local function buildColumnMajorChildren(p0, p1, p2) --[[ line: 27 ]]
 	return t
 end
 
-return reactModule.memo(function(p3) --[[ line: 75 | named "InfoTable" ]]
+return reactModule.memo(function(p3)
 	-- upvalues: luaAppInfoTableResponsiveProviderOverride_1 (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), buildColumnMajorChildren (ref), foundationModule (ref), luaAppInfoTableResponsiveProviderOverride (ref), useResponsive (ref), cryoModule (ref), breakpoint (ref), useBreakpoint (ref), responsiveProvider (ref)
 	local var11 = if p3.numColumns and p3.numColumns > 0 then p3.numColumns else 1
 	local var12 = nil
@@ -82,10 +82,10 @@ return reactModule.memo(function(p3) --[[ line: 75 | named "InfoTable" ]]
 	end
 	if luaAppInfoTableResponsiveProviderOverride_1 then
 		local _, var24 = useBreakpoint(var14)
-		reactModule.useEffect(function() --[[ line: 120 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var24 (ref), var13 (write)
 			if var24.X > 0 then
-				task.defer(function() --[[ line: 122 ]]
+				task.defer(function()
 					-- upvalues: var13 (copy)
 					var13(true)
 				end)

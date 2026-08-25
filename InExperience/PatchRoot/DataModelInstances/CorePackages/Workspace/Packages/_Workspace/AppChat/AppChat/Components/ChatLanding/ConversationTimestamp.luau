@@ -9,7 +9,7 @@ conversationTimestamp.defaultProps = {
 	currentStyle = nil
 }
 
-function conversationTimestamp.render(p0) --[[ line: 16 ]]
+function conversationTimestamp.render(p0)
 	-- upvalues: roactModule (ref)
 	local textSize = p0.props.textSize
 	local currentStyle = p0.props.currentStyle

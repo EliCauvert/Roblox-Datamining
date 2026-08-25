@@ -26,7 +26,7 @@ local t = {
 	buttonKey = if fFlagInExperienceAddPhoneViewNewCopy then "Feature.AccountSettings.Action.Verify" else "Feature.VerificationUpsell.Action.Next"
 }
 
-local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 69 ]]
+local function getButtonStackProps(p0, p1, p2, p3, p4)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
@@ -44,7 +44,7 @@ local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 69 ]]
 	return { buttonHeight = 48, buttons = list }
 end
 
-return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
+return function(p5)
 	-- upvalues: mergePropsModule (ref), t (ref), fFlagInExperienceAddPhoneViewNewCopy (ref), useStyle (ref), fFlagRenameDeprecatedUIBloxTokens (ref), useLocalization (ref), reactModule (ref), text (ref), useExternalEvent (ref), userInputService (ref), roactModule (ref), countryCodeButtonModule (ref), getFFlagAddMorePhoneUpsellEvents (ref), textField (ref), interactiveAlert (ref), getButtonStackProps (ref), countryCodeDropdownContainer (ref)
 	local var11 = mergePropsModule(t, p5)
 	local var12 = if fFlagInExperienceAddPhoneViewNewCopy then {
@@ -88,7 +88,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 	local maxValue = math.max(text.GetTextWidth(prefix, font, fontSize) + 24, size1200)
 	local var19, var20 = reactModule.useState(300)
 	
-	local var21 = function(p6) --[[ line: 157 ]]
+	local var21 = function(p6)
 		-- upvalues: var20 (ref)
 		var20(p6.AbsoluteSize.X)
 	end
@@ -110,7 +110,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 		vector2_2 = var24.current.AbsolutePosition
 	end
 	local minValue = math.min(var11.screenSize.Y - (vector2.Y + size1200 + small - vector2_1.Y) - small, 400)
-	useExternalEvent(userInputService.InputBegan, reactModule.useCallback(function(p7) --[[ line: 187 ]]
+	useExternalEvent(userInputService.InputBegan, reactModule.useCallback(function(p7)
 		-- upvalues: size1200 (ref), small (ref), vector2_2 (write), var19 (ref), minValue (write), maxValue (ref), var16 (ref), var17 (ref)
 		local var31 = size1200 + small
 		
@@ -152,7 +152,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 			CountryCodeButton = reactModule.createElement(countryCodeButtonModule, {
 				layoutOrder = 1,
 				countryPrefix = "+" .. prefix,
-				onButtonClick = function() --[[ line: 240 ]]
+				onButtonClick = function()
 					-- upvalues: var17 (ref), var16 (ref), getFFlagAddMorePhoneUpsellEvents (copy), var11 (ref)
 					var17(not var16)
 					
@@ -171,7 +171,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 				required = true,
 				LayoutOrder = 2,
 				text = var11.phoneNumber,
-				onChange = function(p8) --[[ line: 257 ]]
+				onChange = function(p8)
 					-- upvalues: var11 (ref)
 					var11.onPhoneNumberTextChange({ Text = p8 })
 				end,
@@ -211,7 +211,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 			title = var15.titleKey,
 			onAbsoluteSizeChanged = var21,
 			onCloseClicked = var11.onClose,
-			middleContent = if fFlagInExperienceAddPhoneViewNewCopy then function() --[[ line: 301 ]]
+			middleContent = if fFlagInExperienceAddPhoneViewNewCopy then function()
 				-- upvalues: reactModule (copy), tokens (ref), var15 (ref), baseSize (ref), var13 (ref), frame (ref), relativeSize (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -270,7 +270,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 						})
 					})
 				})
-			end else function() --[[ line: 360 ]]
+			end else function()
 				-- upvalues: reactModule (copy), tokens (ref), frame (ref), var15 (ref), baseSize (ref), relativeSize (ref), var13 (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -317,7 +317,7 @@ return function(p5) --[[ line: 104 | named "InGameAddPhoneView" ]]
 				dropdownVisible = var16,
 				position = UDim2.new(0, 0, 0, 0),
 				maxHeight = minValue,
-				onCountryCodeSelected = function(p9) --[[ line: 419 ]]
+				onCountryCodeSelected = function(p9)
 					-- upvalues: var11 (ref), var17 (ref)
 					var11.setCountryCode(p9)
 					var17(false)

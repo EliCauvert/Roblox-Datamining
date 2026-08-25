@@ -1,4 +1,4 @@
-﻿return function() --[[ line: 10 ]]
+﻿return function()
 	local _ = 20
 	local _ = { on = "icons/menu/chat_on", off = "icons/menu/chat_off" }
 	

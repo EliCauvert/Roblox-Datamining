@@ -14,7 +14,7 @@ cellExtender.validateProps = tModule.strictInterface({
 	doubleOverlay = tModule.boolean
 })
 
-function cellExtender.render(p0) --[[ line: 28 ]]
+function cellExtender.render(p0)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		BorderSizePixel = 0,

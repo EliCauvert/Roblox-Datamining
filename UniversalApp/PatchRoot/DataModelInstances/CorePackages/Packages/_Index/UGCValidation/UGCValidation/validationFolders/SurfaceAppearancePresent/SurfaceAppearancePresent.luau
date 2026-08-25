@@ -13,7 +13,7 @@ return {
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p0, p1) --[[ line: 39 ]]
+	run = function(p0, p1)
 		-- upvalues: t (ref), errorSourceStringsModule (ref)
 		local rootInstance = p1.rootInstance
 		local var3 = t[p1.consumerConfig.source] == true

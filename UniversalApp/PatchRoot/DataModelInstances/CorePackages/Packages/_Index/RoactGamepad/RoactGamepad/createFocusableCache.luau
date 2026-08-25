@@ -1,10 +1,10 @@
 ﻿local asFocusableModule = require(script.Parent.asFocusable)
 
-local function checkHostProperties(p0) --[[ line: 3 ]]
+local function checkHostProperties(p0)
 	assert(Instance.new(p0):IsA("GuiObject"))
 end
 
-local function _(p1) --[[ line: 9 | named "isValidFocusable" ]]
+local function _(p1)
 	-- upvalues: checkHostProperties (ref)
 	local var2 = typeof(p1)
 	
@@ -16,11 +16,11 @@ local function _(p1) --[[ line: 9 | named "isValidFocusable" ]]
 	return var2 == "function" or var2 == "table"
 end
 
-return function() --[[ line: 25 | named "createFocusableCache" ]]
+return function()
 	-- upvalues: checkHostProperties (ref), asFocusableModule (ref)
 	local t = {}
 	setmetatable(t, {
-		__index = function(_, p2) --[[ line: 29 ]]
+		__index = function(_, p2)
 			-- upvalues: checkHostProperties (copy), asFocusableModule (copy), t (ref)
 			local var5
 			local var4 = typeof(p2)
@@ -39,7 +39,7 @@ return function() --[[ line: 25 | named "createFocusableCache" ]]
 			
 			return var6
 		end,
-		__tostring = function(p3) --[[ line: 39 ]]
+		__tostring = function(p3)
 			local var7 = "{"
 			
 			for i, v in pairs(p3) do

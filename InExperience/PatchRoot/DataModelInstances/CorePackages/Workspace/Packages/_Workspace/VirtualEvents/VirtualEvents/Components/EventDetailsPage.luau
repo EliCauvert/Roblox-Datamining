@@ -31,11 +31,11 @@ local mediaGalleryPreview = appBloxModule.MediaGalleryPreview
 local calcMediaGallerySizesFromWidth = appBloxModule.calcMediaGallerySizesFromWidth
 local listTable = UIBloxModule.App.Table.ListTable
 
-local var19 = function() --[[ line: 40 ]] end
+local var19 = function() end
 
 local t = { onClose = var19, onJoinEvent = var19, onShare = var19 }
 
-return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), useDeviceType (ref), useRoactService (ref), roactNetworking (ref), fFlagLuaAppLimitEventThumbnailToOneModule (ref), fetchEventThumbnailModule (ref), getGalleryItemsModule (ref), fetchEventThumbnailListModule (ref), useMutation (ref), requestsModule (ref), getEventTimerStatusModule (ref), calcMediaGallerySizesFromWidth (ref), responsiveModule (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), useActionBarPropsModule (ref), contentPosition (ref), attendanceModule (ref), mediaGalleryPreview (ref), eventDescriptionModule (ref), listTable (ref), eventHostedByModule (ref), detailsPageTemplate (ref), eventTimerModule (ref)
 	local var21 = cryoModule.Dictionary.join(t, p0)
 	local media = p0.virtualEvent.media
@@ -45,10 +45,10 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 	local var25, var26 = reactModule.useState({})
 	local var27 = if var25[1] then var25[1].imageId else nil
 	local var28 = useRoactService(roactNetworking)
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagLuaAppLimitEventThumbnailToOneModule (copy), fetchEventThumbnailModule (copy), var28 (ref), p0 (ref), var26 (ref), getGalleryItemsModule (copy), media (ref), fetchEventThumbnailListModule (copy)
 		if fFlagLuaAppLimitEventThumbnailToOneModule then
-			fetchEventThumbnailModule(var28, p0.virtualEvent.id):andThen(function(p1) --[[ line: 88 ]]
+			fetchEventThumbnailModule(var28, p0.virtualEvent.id):andThen(function(p1)
 				-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
 				local t = {}
 				
@@ -61,14 +61,14 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 					return
 				end
 				var26(getGalleryItemsModule(media))
-			end, function() --[[ line: 105 ]]
+			end, function()
 				-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
 				var26(getGalleryItemsModule(media))
 			end)
 			
 			return
 		end
-		fetchEventThumbnailListModule(var28, p0.virtualEvent.id):andThen(function(p2) --[[ line: 109 ]]
+		fetchEventThumbnailListModule(var28, p0.virtualEvent.id):andThen(function(p2)
 			-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
 			local t = {}
 			
@@ -88,20 +88,20 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 				return
 			end
 			var26(getGalleryItemsModule(media))
-		end, function() --[[ line: 130 ]]
+		end, function()
 			-- upvalues: var26 (copy), getGalleryItemsModule (copy), media (copy)
 			var26(getGalleryItemsModule(media))
 		end)
 	end, { p0.virtualEvent.id, media })
 	local var29 = useMutation(requestsModule.UPDATE_RSVP_STATUS, {
 		variables = { virtualEventId = p0.virtualEvent.id },
-		update = function(_, p3, p4) --[[ line: 140 ]]
+		update = function(_, p3, p4)
 			-- upvalues: cryoModule (copy)
 			local virtualEvent = p4.data.virtualEventRsvp.virtualEvent
 			p3:modify({
 				id = p3:identify(virtualEvent),
 				fields = {
-					rsvpCounters = function(_, p5) --[[ line: 146 ]]
+					rsvpCounters = function(_, p5)
 						-- upvalues: virtualEvent (ref), cryoModule (copy)
 						return cryoModule.Dictionary.join(p5, {
 							going = p5.going + (if virtualEvent.userRsvpStatus == "going" then 1 else -1)
@@ -111,11 +111,11 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 			})
 		end
 	})
-	local var30 = reactModule.useMemo(function() --[[ line: 157 ]]
+	local var30 = reactModule.useMemo(function()
 		-- upvalues: getEventTimerStatusModule (copy), var21 (ref)
 		return getEventTimerStatusModule(var21.virtualEvent, var21.currentTime)
 	end, { var21.virtualEvent, var21.currentTime })
-	local var31 = reactModule.useCallback(function(p6) --[[ line: 161 ]]
+	local var31 = reactModule.useCallback(function(p6)
 		-- upvalues: calcMediaGallerySizesFromWidth (copy), var22 (ref), var23 (ref)
 		local offset = calcMediaGallerySizesFromWidth(p6.AbsoluteSize.X, 5).contentSize.Y.Offset
 		
@@ -123,13 +123,13 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 			var23(offset)
 		end
 	end, { var22 })
-	local var32 = reactModule.useCallback(function() --[[ line: 170 ]]
+	local var32 = reactModule.useCallback(function()
 		-- upvalues: var21 (ref), var29 (ref)
 		var29[1]({
 			variables = {
 				rsvpStatus = if var21.virtualEvent.userRsvpStatus ~= "going" then "notGoing" else "going"
 			}
-		}):andThen(function(p7) --[[ line: 184 ]]
+		}):andThen(function(p7)
 			-- upvalues: var21 (copy)
 			if var21.onRsvpChanged then
 				var21.onRsvpChanged(p7.data.virtualEventRsvp.virtualEvent.userRsvpStatus, p7.data.virtualEventRsvp.shouldSeeNotificationsUpsellModal)
@@ -143,7 +143,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 	local var37 = useCloseWithBackButton(var36, p0.onClose)
 	local var38 = reactFocusNavigationModule.useFocusGuiObject()
 	local var39, var40 = reactModule.useState(nil)
-	local var41 = reactModule.useCallback(function(p8) --[[ line: 210 ]]
+	local var41 = reactModule.useCallback(function(p8)
 		-- upvalues: var40 (ref), var35 (ref)
 		var40(p8)
 		
@@ -151,7 +151,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 			var35(p8)
 		end
 	end, { var35 })
-	reactModule.useEffect(function() --[[ line: 219 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var39 (ref), var33 (ref), responsiveModule (copy), var38 (ref)
 		if var39 and var33.current == responsiveModule.Input.Directional then
 			var38(var39)
@@ -169,7 +169,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 		titleText = if p0.virtualEvent.eventStatus == "moderated" then "[CONTENT MODERATED]" else var21.virtualEvent.title,
 		thumbnailImageUrl = var27,
 		thumbnailAspectRatio = Vector2.new(16, 9),
-		renderInfoContent = function() --[[ line: 306 ]]
+		renderInfoContent = function()
 			-- upvalues: reactModule (copy), eventTimerModule (copy), var21 (ref), var30 (ref)
 			return reactModule.createElement(eventTimerModule, {
 				virtualEvent = var21.virtualEvent,
@@ -177,7 +177,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 				currentTime = var21.currentTime
 			})
 		end,
-		actionBarProps = if reactModule.useMemo(function() --[[ line: 232 ]]
+		actionBarProps = if reactModule.useMemo(function()
 			-- upvalues: var42 (ref)
 			return var42.button or #var42.icons > 0
 		end, { var42 }) then var42 else nil,
@@ -186,7 +186,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 				portraitLayoutOrder = 1,
 				landscapeLayoutOrder = 1,
 				landscapePosition = contentPosition.Left,
-				renderComponent = function() --[[ line: 242 ]]
+				renderComponent = function()
 					-- upvalues: reactModule (copy), attendanceModule (copy), var21 (ref), var30 (ref)
 					return reactModule.createElement(attendanceModule, { virtualEvent = var21.virtualEvent, eventStatus = var30 })
 				end
@@ -195,7 +195,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 				portraitLayoutOrder = 2,
 				landscapeLayoutOrder = 1,
 				landscapePosition = contentPosition.Right,
-				renderComponent = function() --[[ line: 254 ]]
+				renderComponent = function()
 					-- upvalues: reactModule (copy), var22 (ref), var31 (ref), mediaGalleryPreview (copy), var25 (ref)
 					return reactModule.createElement("Frame", {
 						Size = UDim2.new(1, 0, 0, var22),
@@ -210,7 +210,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 				portraitLayoutOrder = 3,
 				landscapeLayoutOrder = 2,
 				landscapePosition = contentPosition.Left,
-				renderComponent = function() --[[ line: 271 ]]
+				renderComponent = function()
 					-- upvalues: reactModule (copy), eventDescriptionModule (copy), var21 (ref), experienceDetails (ref)
 					return reactModule.createElement(eventDescriptionModule, {
 						description = var21.virtualEvent.description,
@@ -224,7 +224,7 @@ return function(p0) --[[ line: 71 | named "EventDetailsPage" ]]
 				portraitLayoutOrder = 4,
 				landscapeLayoutOrder = 2,
 				landscapePosition = contentPosition.Right,
-				renderComponent = function() --[[ line: 285 ]]
+				renderComponent = function()
 					-- upvalues: reactModule (copy), listTable (copy), eventHostedByModule (copy), var21 (ref)
 					return reactModule.createElement(listTable, {
 						cells = {

@@ -23,7 +23,7 @@ local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
 local useUpdatedRobuxBalanceModule = require(currencyTransfers.Hooks.useUpdatedRobuxBalance)
 local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
 
-return function(_) --[[ line: 46 | named "TransferRobuxSuccessModal" ]]
+return function(_)
 	-- upvalues: useTransferStoreModule (ref), useTokens (ref), useUpdatedRobuxBalanceModule (ref), signalsReactModule (ref), useScaledValue (ref), useLocalization (ref), transferLocalizationKeysModule (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), transferLocaleFormatModule (ref), handleTransferCompleteModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var12 = useTransferStoreModule()
 	local var13 = useTokens()
@@ -33,7 +33,7 @@ return function(_) --[[ line: 46 | named "TransferRobuxSuccessModal" ]]
 	local var17 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxSuccessModal)
 	local var18 = if var15 then formatNumberModule(localizationService.RobloxLocaleId, var15) else "0"
 	
-	local function onComplete() --[[ line: 67 ]]
+	local function onComplete()
 		-- upvalues: handleTransferCompleteModule (copy), var12 (ref)
 		handleTransferCompleteModule(var12)
 	end
@@ -62,7 +62,7 @@ return function(_) --[[ line: 46 | named "TransferRobuxSuccessModal" ]]
 				SuccessMessage = reactModule.createElement(text, {
 					tag = "auto-y text-body-large text-wrap text-align-x-center content-emphasis",
 					LayoutOrder = 2,
-					Text = reactModule.useMemo(function() --[[ line: 60 ]]
+					Text = reactModule.useMemo(function()
 						-- upvalues: transferLocaleFormatModule (copy), var17 (ref), var18 (ref)
 						return transferLocaleFormatModule.substituteAmount(var17.SuccessNotification, tostring(var18))
 					end, { var18, var17.SuccessNotification }),

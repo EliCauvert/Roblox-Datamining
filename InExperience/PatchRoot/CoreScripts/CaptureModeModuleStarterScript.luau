@@ -14,7 +14,7 @@ if game:DefineFastFlag("FeedbackModuleEarlyFontInitialization", false) then
 end
 local messageBusService = game:GetService("MessageBusService")
 local captureModeMessageId = messageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
-game:GetService("GuiService").NativeClose:Connect(function() --[[ line: 28 | named "handleNativeExit" ]]
+game:GetService("GuiService").NativeClose:Connect(function()
 	-- upvalues: messageBusService (ref), captureModeMessageId (ref)
 	messageBusService:Publish(captureModeMessageId, { reason = "nativeExit" })
 	game:GetService("ExperienceStateCaptureService"):ToggleCaptureMode()

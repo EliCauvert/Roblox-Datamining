@@ -13,7 +13,7 @@ local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
 local _ = require(moments.Hooks.useMusicInfo)
 local t = { title = "Feature.Moments.Label.Music" }
 
-return function(p0) --[[ line: 30 | named "MusicModal" ]]
+return function(p0)
 	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), sheet (ref), text (ref), view (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref)
 	local musicInfo = p0.musicInfo
 	

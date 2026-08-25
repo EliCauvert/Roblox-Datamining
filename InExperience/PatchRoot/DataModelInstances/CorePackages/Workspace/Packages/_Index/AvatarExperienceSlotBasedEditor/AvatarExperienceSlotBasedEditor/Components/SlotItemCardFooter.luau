@@ -6,7 +6,7 @@ local text = foundationModule.Text
 local responsiveModule = require(parent.Responsive)
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 
-return function(p0) --[[ line: 18 | named "SlotItemCardFooter" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), text (ref), fFlagAXAddTextXAlignmentProp (ref)
 	local var8
 	local var3 = useTokens()

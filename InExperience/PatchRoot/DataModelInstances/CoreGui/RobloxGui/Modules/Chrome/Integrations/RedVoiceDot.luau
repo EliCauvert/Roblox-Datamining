@@ -8,7 +8,7 @@ local var6 = getStyleTokensModule()
 local color3 = Color3.new(0.918, 0.2, 0.137)
 local uDim2 = UDim2.new(0, var6.Size.Size_100, 0, var6.Size.Size_100)
 
-return function(p0) --[[ line: 17 ]]
+return function(p0)
 	-- upvalues: useVoiceStateModule (ref), playersService (ref), constantsModule (ref), reactModule (ref), uDim2 (ref), color3 (ref)
 	local var9 = useVoiceStateModule(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
 	

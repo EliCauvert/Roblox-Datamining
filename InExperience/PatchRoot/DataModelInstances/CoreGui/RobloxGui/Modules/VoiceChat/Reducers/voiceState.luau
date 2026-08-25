@@ -3,21 +3,21 @@ local cryoModule = require(corePackagesService.Packages.Cryo)
 local var2 = if require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.FFlagEnableVoiceChatStorybookFix)() then require(corePackagesService.Workspace.Packages.VoiceChat).Constants.VOICE_STATE else require(script.Parent.Parent.VoiceChatServiceManager).default.VOICE_STATE
 
 return require(corePackagesService.Packages.Rodux).createReducer({}, {
-	[require(script.Parent.Parent.Actions.VoiceEnabledChanged).name] = function(p0, p1) --[[ line: 26 ]]
+	[require(script.Parent.Parent.Actions.VoiceEnabledChanged).name] = function(p0, p1)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p0, { voiceEnabled = p1.enabled })
 	end,
-	[require(script.Parent.Parent.Actions.ParticipantAdded).name] = function(p2, p3) --[[ line: 32 ]]
+	[require(script.Parent.Parent.Actions.ParticipantAdded).name] = function(p2, p3)
 		-- upvalues: var2 (write), cryoModule (ref)
 		local userId = p3.userId
 		
 		return cryoModule.Dictionary.join(p2, { [userId] = p2[userId] or var2.HIDDEN })
 	end,
-	[require(script.Parent.Parent.Actions.ParticipantRemoved).name] = function(p4, p5) --[[ line: 42 ]]
+	[require(script.Parent.Parent.Actions.ParticipantRemoved).name] = function(p4, p5)
 		-- upvalues: cryoModule (ref)
 		return cryoModule.Dictionary.join(p4, { [p5.userId] = cryoModule.None })
 	end,
-	[require(script.Parent.Parent.Actions.ParticipantsChanged).name] = function(p6, p7) --[[ line: 49 ]]
+	[require(script.Parent.Parent.Actions.ParticipantsChanged).name] = function(p6, p7)
 		-- upvalues: var2 (write)
 		local cloned = table.clone(p6)
 		
@@ -37,7 +37,7 @@ return require(corePackagesService.Packages.Rodux).createReducer({}, {
 		end
 		return cloned
 	end,
-	[require(script.Parent.Parent.Actions.VoiceStateChanged).name] = function(p8, p9) --[[ line: 69 ]]
+	[require(script.Parent.Parent.Actions.VoiceStateChanged).name] = function(p8, p9)
 		-- upvalues: cryoModule (ref)
 		return if p8[p9.userId] then cryoModule.Dictionary.join(p8, { [p9.userId] = p9.newState }) else p8
 	end

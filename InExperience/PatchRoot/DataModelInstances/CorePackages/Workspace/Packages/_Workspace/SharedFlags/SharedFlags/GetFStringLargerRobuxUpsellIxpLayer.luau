@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("InGameRobuxUpsellLargerIxpLayer", "Revenue.RobuxUpsell.InGameUI.Larger")
 
-return function() --[[ line: 3 ]]
+return function()
 	return game:GetFastString("InGameRobuxUpsellLargerIxpLayer")
 end

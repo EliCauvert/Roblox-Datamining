@@ -16,19 +16,19 @@ local myRoduxNetworkingImplModule = require(profilePlatform.Networking.myRoduxNe
 local fFlagEnableCommunityProfileLoadingSkeletonsModule = require(profilePlatform.Flags.FFlagEnableCommunityProfileLoadingSkeletons)
 local t = {}
 
-return function(p0) --[[ line: 38 | named "ExperiencesContainer" ]]
+return function(p0)
 	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), fFlagEnableCommunityProfileLoadingSkeletonsModule (ref), t (ref), cryoModule (ref), useDispatch (ref), networkingGamesModule (ref), fetchGameVotes (ref), myRoduxNetworkingImplModule (ref), useSelector (ref), getDeepValue (ref), experiencesSkeletonModule (ref), experiencesModule (ref)
 	local var12 = useProfileJsonComponentModule(enumsModule.Components.Experiences)
 	local var13, var14 = reactModule.useState(if fFlagEnableCommunityProfileLoadingSkeletonsModule then true else false)
 	local experiences = var12.experiences or t
-	local var16 = reactModule.useMemo(function() --[[ line: 44 ]]
+	local var16 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), experiences (ref)
-		return cryoModule.List.map(experiences, function(p1, _) --[[ line: 45 ]]
+		return cryoModule.List.map(experiences, function(p1, _)
 			return tostring(p1.universeId)
 		end)
 	end, { experiences })
 	local var17 = useDispatch()
-	reactModule.useEffect(function() --[[ line: 52 ]]
+	reactModule.useEffect(function()
 		-- upvalues: cryoModule (copy), var16 (ref), var17 (ref), networkingGamesModule (copy), fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var14 (ref), fetchGameVotes (copy), myRoduxNetworkingImplModule (copy)
 		if cryoModule.isEmpty(var16) then
 			if fFlagEnableCommunityProfileLoadingSkeletonsModule then
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 38 | named "ExperiencesContainer" ]]
 			end
 			return
 		else
-			var17(networkingGamesModule.GetExperiencesDetails.API(var16)):catch(function(_) --[[ line: 55 ]] end):finally(function() --[[ line: 58 ]]
+			var17(networkingGamesModule.GetExperiencesDetails.API(var16)):catch(function(_) end):finally(function()
 				-- upvalues: fFlagEnableCommunityProfileLoadingSkeletonsModule (copy), var14 (copy)
 				if fFlagEnableCommunityProfileLoadingSkeletonsModule then
 					var14(false)
@@ -44,15 +44,15 @@ return function(p0) --[[ line: 38 | named "ExperiencesContainer" ]]
 			end)
 			
 			for i, v in var16 do
-				var17(fetchGameVotes.Fetch(myRoduxNetworkingImplModule, v)):catch(function(_) --[[ line: 64 ]] end)
+				var17(fetchGameVotes.Fetch(myRoduxNetworkingImplModule, v)):catch(function(_) end)
 			end
 		end
 	end, { var16 })
-	local var18 = useSelector(function(p2) --[[ line: 74 ]]
+	local var18 = useSelector(function(p2)
 		-- upvalues: getDeepValue (copy), t (copy)
 		return getDeepValue(p2, "ProfilePlatform.Games.byGameId") or t
 	end)
-	local var19 = reactModule.useMemo(function() --[[ line: 78 ]]
+	local var19 = reactModule.useMemo(function()
 		-- upvalues: var16 (ref), var18 (ref)
 		local t = {}
 		

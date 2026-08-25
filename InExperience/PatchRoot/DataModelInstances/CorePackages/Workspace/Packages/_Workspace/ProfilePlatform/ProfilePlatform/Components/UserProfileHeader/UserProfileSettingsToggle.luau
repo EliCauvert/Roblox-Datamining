@@ -13,7 +13,7 @@ local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfi
 local userProfileSettingsNetworkingModule = require(profilePlatform.Networking.UserProfileSettingsNetworking)
 local refreshProfilePlatformUserProfileHeaderModule = require(profilePlatform.Networking.refreshProfilePlatformUserProfileHeader)
 
-return function(value) --[[ line: 27 | named "UserProfileSettingsToggle" ]]
+return function(value)
 	-- upvalues: useProfileWrapperContextModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), userProfileSettingsNetworkingModule (ref), refreshProfilePlatformUserProfileHeaderModule (ref), horizontalPageMargin (ref), styledTextLabel (ref), toggle (ref), toggleSize (ref)
 	local var7 = useProfileWrapperContextModule()
 	local var8 = useStyle()
@@ -39,9 +39,9 @@ return function(value) --[[ line: 27 | named "UserProfileSettingsToggle" ]]
 			label = "",
 			size = toggleSize.Medium,
 			isChecked = value.isInExperienceNameEnabled,
-			onActivated = reactModule.useCallback(function(p0) --[[ line: 32 ]]
+			onActivated = reactModule.useCallback(function(p0)
 				-- upvalues: var9 (ref), userProfileSettingsNetworkingModule (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var7 (ref)
-				var9(userProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = p0 })):andThen(function(p1) --[[ line: 35 ]]
+				var9(userProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = p0 })):andThen(function(p1)
 					-- upvalues: var9 (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var7 (copy)
 					if p1.responseBody.successfullyUpdated then
 						var9(refreshProfilePlatformUserProfileHeaderModule(var7.profileId))

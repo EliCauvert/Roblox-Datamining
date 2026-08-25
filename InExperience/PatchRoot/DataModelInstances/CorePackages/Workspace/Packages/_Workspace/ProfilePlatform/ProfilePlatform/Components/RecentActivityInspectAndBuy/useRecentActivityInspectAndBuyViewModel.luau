@@ -5,10 +5,10 @@ local _ = require(profilePlatform.Common.Types)
 local useInspectAvatarDataModule = require(profilePlatform.Components.InspectAvatar.useInspectAvatarData)
 local useRecentActivityPurchaseModule = require(script.Parent.useRecentActivityPurchase)
 
-return function(p0) --[[ line: 37 | named "useRecentActivityInspectAndBuyViewModel" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), enumsModule (ref), useInspectAvatarDataModule (ref), useRecentActivityPurchaseModule (ref)
 	local assetIds = p0.assetIds
-	local var5 = useInspectAvatarDataModule(reactModule.useMemo(function() --[[ line: 39 ]]
+	local var5 = useInspectAvatarDataModule(reactModule.useMemo(function()
 		-- upvalues: assetIds (ref), enumsModule (copy)
 		local t = {}
 		
@@ -39,6 +39,6 @@ return function(p0) --[[ line: 37 | named "useRecentActivityInspectAndBuyViewMod
 		onCancelPurchase = var6.onCancelPurchase,
 		onDismissInsufficientRobux = var6.onDismissInsufficientRobux,
 		onClose = p0.onClose,
-		openItemDetails = reactModule.useCallback(function(_, _, _) --[[ line: 56 ]] end, {})
+		openItemDetails = reactModule.useCallback(function(_, _, _) end, {})
 	}
 end

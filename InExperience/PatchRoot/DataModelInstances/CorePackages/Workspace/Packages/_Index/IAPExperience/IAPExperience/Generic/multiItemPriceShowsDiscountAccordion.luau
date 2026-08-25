@@ -2,7 +2,7 @@
 local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local multiItemPriceQualifiesForDetailsDiscountSummaryModule = require(IAPExperience.Generic.multiItemPriceQualifiesForDetailsDiscountSummary)
 
-return function(p0) --[[ line: 16 | named "multiItemPriceShowsDiscountAccordion" ]]
+return function(p0)
 	-- upvalues: multiItemPriceQualifiesForDetailsDiscountSummaryModule (ref)
 	if not p0 then
 		return false

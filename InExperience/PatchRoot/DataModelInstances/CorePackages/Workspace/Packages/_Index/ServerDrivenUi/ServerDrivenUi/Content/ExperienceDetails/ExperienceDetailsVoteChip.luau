@@ -21,11 +21,11 @@ local gameVote = discoveryAnalyticsModule.Events.gameVote
 local useOptimisticUpdateStatusModule = require(script.Parent.Hooks.useOptimisticUpdateStatus)
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 
-local function _(p0) --[[ line: 37 | named "convertBooleanToVoteForAnalytics" ]]
+local function _(p0)
 	return if p0 == true then "UpVoted" elseif p0 == false then "DownVoted" else "NotVoted"
 end
 
-return reactModule.memo(function(p1) --[[ line: 47 | named "ExperienceDetailsVoteChip" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), reactModule (ref), setCurrentToastMessage (ref), toastType (ref), getFFlagEdpPlayerFeedbackEnabled (ref), useOptimisticUpdateStatusModule (ref), playersService (ref), gameVote (ref), votesUtils (ref), iconVariant (ref), useAppPolicy (ref), sduiDualActionChip (ref), foundationModule (ref)
 	local layoutOrder = p1.layoutOrder
 	local universeId = p1.universeId
@@ -34,10 +34,10 @@ return reactModule.memo(function(p1) --[[ line: 47 | named "ExperienceDetailsVot
 	local var13 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchUserVote(universeId).data)
 	local var14 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
 	local rootPlaceId = var14 and var14.rootPlaceId
-	local var16 = useOptimisticUpdateStatusModule(reactModule.useCallback(function(p2) --[[ line: 59 ]]
+	local var16 = useOptimisticUpdateStatusModule(reactModule.useCallback(function(p2)
 		-- upvalues: game (copy), universeId (ref)
 		return game.getVotesStore(false).updateUserVote(universeId, p2)
-	end, { universeId }), reactModule.useCallback(function(p3) --[[ line: 64 ]]
+	end, { universeId }), reactModule.useCallback(function(p3)
 		-- upvalues: var11 (ref), setCurrentToastMessage (copy), toastType (copy), getFFlagEdpPlayerFeedbackEnabled (copy), rootPlaceId (ref), game (copy)
 		if p3 == nil then return end
 		if p3.type == "error" then
@@ -63,7 +63,7 @@ return reactModule.memo(function(p1) --[[ line: 47 | named "ExperienceDetailsVot
 			end
 		end
 	end, { rootPlaceId, var11 }))
-	local var17 = reactModule.useCallback(function(p4) --[[ line: 98 ]]
+	local var17 = reactModule.useCallback(function(p4)
 		-- upvalues: var13 (ref), rootPlaceId (ref), playersService (copy), gameVote (copy), getFFlagEdpPlayerFeedbackEnabled (copy), game (copy), var16 (ref)
 		local userVote = var13 and var13.userVote
 		local var20 = if userVote == p4 then nil else p4
@@ -91,28 +91,28 @@ return reactModule.memo(function(p1) --[[ line: 47 | named "ExperienceDetailsVot
 		var11
 	})
 	
-	return if useAppPolicy(function(p5) --[[ line: 163 ]]
+	return if useAppPolicy(function(p5)
 		return p5.getGamePlaysAndRatings()
 	end) then reactModule.createElement(sduiDualActionChip, {
-		text = reactModule.useMemo(function() --[[ line: 145 ]]
+		text = reactModule.useMemo(function()
 			-- upvalues: votesUtils (copy), var12 (ref)
 			return votesUtils.getRatingDisplayText(var12)
 		end, { var12 }),
 		leadingIconName = foundationModule.Enums.IconName.ThumbUp,
-		leadingIconVariant = reactModule.useMemo(function() --[[ line: 149 ]]
+		leadingIconVariant = reactModule.useMemo(function()
 			-- upvalues: var13 (ref), iconVariant (copy)
 			return if var13 and var13.userVote == true then iconVariant.Filled else iconVariant.Regular
 		end, { var13 }),
-		leadingOnActivated = reactModule.useCallback(function() --[[ line: 137 ]]
+		leadingOnActivated = reactModule.useCallback(function()
 			-- upvalues: var17 (ref)
 			var17(true)
 		end, { var17 }),
 		trailingIconName = foundationModule.Enums.IconName.ThumbDown,
-		trailingIconVariant = reactModule.useMemo(function() --[[ line: 156 ]]
+		trailingIconVariant = reactModule.useMemo(function()
 			-- upvalues: var13 (ref), iconVariant (copy)
 			return if var13 and var13.userVote == false then iconVariant.Filled else iconVariant.Regular
 		end, { var13 }),
-		trailingOnActivated = reactModule.useCallback(function() --[[ line: 141 ]]
+		trailingOnActivated = reactModule.useCallback(function()
 			-- upvalues: var17 (ref)
 			var17(false)
 		end, { var17 }),

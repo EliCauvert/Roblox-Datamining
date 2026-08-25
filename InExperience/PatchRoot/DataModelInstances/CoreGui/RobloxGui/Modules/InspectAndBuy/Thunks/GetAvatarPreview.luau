@@ -19,9 +19,9 @@ local batchItemDetailsPerformFetchKey = avatarExperienceInspectAndBuyModule.Cons
 local fFlagAXWrapInspectAndBuyThunksInTasksModule = require(parent.Flags.FFlagAXWrapInspectAndBuyThunksInTasks)
 local list = { networkModule }
 
-return function(p0) --[[ line: 33 | named "GetAvatarPreview" ]]
+return function(p0)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), performFetch (ref), setAvatarPreviewDetailsModule (ref), fFlagAXEnableBatchItemDetailsFetchV2 (ref), fFlagAXWrapInspectAndBuyThunksInTasksModule (ref), itemTypeEnum (ref), getItemDetailsModule (ref), batchItemDetailsPerformFetchKey (ref), assetInfoModule (ref), bundleInfoModule (ref), setAssetsModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2) --[[ line: 34 ]]
+	return thunkModule.new(script.Name, list, function(p1, p2)
 		-- upvalues: networkModule (copy), p0 (ref), performFetch (copy), setAvatarPreviewDetailsModule (copy), fFlagAXEnableBatchItemDetailsFetchV2 (copy), fFlagAXWrapInspectAndBuyThunksInTasksModule (copy), itemTypeEnum (copy), getItemDetailsModule (copy), batchItemDetailsPerformFetchKey (copy), assetInfoModule (copy), bundleInfoModule (copy), setAssetsModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
 		local var15 = p2[networkModule]
 		local t = {}
@@ -31,16 +31,16 @@ return function(p0) --[[ line: 33 | named "GetAvatarPreview" ]]
 				table.insert(t, { id = v.assetId, meta = v.meta })
 			end
 		end
-		return performFetch.Single("PreviewAvatar", function() --[[ line: 47 ]]
+		return performFetch.Single("PreviewAvatar", function()
 			-- upvalues: var15 (ref), t (ref), p1 (ref), setAvatarPreviewDetailsModule (copy), fFlagAXEnableBatchItemDetailsFetchV2 (copy), fFlagAXWrapInspectAndBuyThunksInTasksModule (copy), itemTypeEnum (copy), getItemDetailsModule (copy), performFetch (copy), batchItemDetailsPerformFetchKey (copy), assetInfoModule (copy), bundleInfoModule (copy), setAssetsModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var15.getPreviewAvatar(t):andThen(function(p3) --[[ line: 48 ]]
+			return var15.getPreviewAvatar(t):andThen(function(p3)
 				-- upvalues: p1 (copy), setAvatarPreviewDetailsModule (copy), fFlagAXEnableBatchItemDetailsFetchV2 (copy), fFlagAXWrapInspectAndBuyThunksInTasksModule (copy), itemTypeEnum (copy), getItemDetailsModule (copy), performFetch (copy), batchItemDetailsPerformFetchKey (copy), var15 (copy), assetInfoModule (copy), bundleInfoModule (copy), setAssetsModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
 				p1:dispatch(setAvatarPreviewDetailsModule(p3))
 				
 				if not fFlagAXEnableBatchItemDetailsFetchV2 and p3.look and p3.look.items then
 					for i, v in p3.look.items do
 						if fFlagAXWrapInspectAndBuyThunksInTasksModule then
-							task.spawn(function() --[[ line: 58 ]]
+							task.spawn(function()
 								-- upvalues: v (ref), itemTypeEnum (copy), p1 (copy), getItemDetailsModule (copy)
 								if v.itemType == itemTypeEnum.Asset then
 									p1:dispatch(getItemDetailsModule(v.id, Enum.AvatarItemType.Asset))
@@ -68,12 +68,12 @@ return function(p0) --[[ line: 33 | named "GetAvatarPreview" ]]
 							})
 						end
 					end
-					performFetch.Single(batchItemDetailsPerformFetchKey, function() --[[ line: 91 ]]
+					performFetch.Single(batchItemDetailsPerformFetchKey, function()
 						-- upvalues: var15 (copy), t (ref), fFlagAXWrapInspectAndBuyThunksInTasksModule (copy), itemTypeEnum (copy), assetInfoModule (copy), bundleInfoModule (copy), p1 (copy), setAssetsModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-						return var15.getBatchItemDetailsV2(t):andThen(function(p4) --[[ line: 94 ]]
+						return var15.getBatchItemDetailsV2(t):andThen(function(p4)
 							-- upvalues: fFlagAXWrapInspectAndBuyThunksInTasksModule (copy), itemTypeEnum (copy), assetInfoModule (copy), bundleInfoModule (copy), p1 (copy), setAssetsModule (copy), setBundlesModule (copy)
 							if fFlagAXWrapInspectAndBuyThunksInTasksModule and p4 and p4.data then
-								task.spawn(function() --[[ line: 96 ]]
+								task.spawn(function()
 									-- upvalues: p4 (ref), itemTypeEnum (copy), assetInfoModule (copy), bundleInfoModule (copy), p1 (copy), setAssetsModule (copy), setBundlesModule (copy)
 									local t = {}
 									local t_1 = {}
@@ -104,18 +104,18 @@ return function(p0) --[[ line: 33 | named "GetAvatarPreview" ]]
 								p1:dispatch(setAssetsModule(t))
 								p1:dispatch(setBundlesModule(t_1))
 							end
-						end, function(_) --[[ line: 126 ]]
+						end, function(_)
 							-- upvalues: p1 (copy), sendCounterModule (copy), constantsModule (copy)
 							p1:dispatch(sendCounterModule(constantsModule.Counters.BatchGetItemDetails .. constantsModule.CounterSuffix.RequestRejected))
 						end)
 					end)(p1)
 					p1:dispatch(sendCounterModule(constantsModule.Counters.BatchGetItemDetails .. constantsModule.CounterSuffix.RequestSucceeded))
 				end
-			end, function(_) --[[ line: 140 ]]
+			end, function(_)
 				-- upvalues: p1 (copy), sendCounterModule (copy), constantsModule (copy)
 				p1:dispatch(sendCounterModule(constantsModule.Counters.GetAvatarPreview .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p1):catch(function(_) --[[ line: 145 ]]
+		end)(p1):catch(function(_)
 			-- upvalues: p1 (ref), sendCounterModule (copy), constantsModule (copy)
 			p1:dispatch(sendCounterModule(constantsModule.Counters.GetAvatarPreview .. constantsModule.CounterSuffix.RequestFailed))
 		end)

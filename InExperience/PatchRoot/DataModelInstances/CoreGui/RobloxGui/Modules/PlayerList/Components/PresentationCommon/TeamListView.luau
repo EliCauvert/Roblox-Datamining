@@ -12,7 +12,7 @@ local fFlagReplacePlayerIconRoduxWithSignal = require(corePackagesService.Worksp
 local fFlagPlayerListUseFocusNavHook = playerListModule.Flags.FFlagPlayerListUseFocusNavHook
 local playerIconInfoStore = require(corePackagesService.Workspace.Packages.PlayerIconInfoStore).PlayerIconInfoStore
 
-return reactModule.memo(function(p0) --[[ line: 61 | named "TeamListView" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useLayoutValues (ref), useStyle (ref), reactModule (ref), teamEntryContainerModule (ref), fFlagReplacePlayerIconRoduxWithSignal (ref), playerIconInfoStore (ref), playerEntryContainerModule (ref), fFlagPlayerListUseFocusNavHook (ref)
 	local var6 = useLayoutValues()
 	local var7 = useStyle()
@@ -49,7 +49,7 @@ return reactModule.memo(function(p0) --[[ line: 61 | named "TeamListView" ]]
 				LayoutOrder = p0.teamPlayersCount * 2
 			})
 		end
-		p0.teamData.players.iterateData(function(p1, p2) --[[ line: 100 ]]
+		p0.teamData.players.iterateData(function(p1, p2)
 			-- upvalues: var9 (write), fFlagReplacePlayerIconRoduxWithSignal (copy), playerIconInfoStore (copy), p0 (ref), t (ref), reactModule (copy), playerEntryContainerModule (copy), var6 (ref), fFlagPlayerListUseFocusNavHook (copy), var7 (ref)
 			var9 += 1
 			local var10 = if fFlagReplacePlayerIconRoduxWithSignal then playerIconInfoStore.getPlayerIconInfoReactive(p1.UserId)(false) else p0.playerIconInfos[p2]

@@ -16,12 +16,12 @@ local iconSize = enums.IconSize
 local inputSize = enums.InputSize
 local t = {
 	enableTestingTheme = false,
-	closeCentralOverlayThunk = function() --[[ line: 32 ]]
+	closeCentralOverlayThunk = function()
 		return { type = "CloseCentralOverlay" }
 	end
 }
 
-return function(p0) --[[ line: 39 | named "SquadVoiceChangers" ]]
+return function(p0)
 	-- upvalues: cryo (ref), t (ref), useNavigation (ref), useLocalUserId (ref), useParticipant (ref), reactModule (ref), voicePackButtonModule (ref), crossExperienceVoiceManager (ref), foundationModule (ref), builderIconsModule (ref), iconSize (ref), enums (ref), inputSize (ref)
 	local var8 = cryo.Dictionary.join(t, p0)
 	local var9 = useNavigation()
@@ -45,7 +45,7 @@ return function(p0) --[[ line: 39 | named "SquadVoiceChangers" ]]
 		{ name = "Dreamy" }, { name = "Powerful" }, { name = "Ghost" }
 	}
 	
-	local function makeButton(p1, p2) --[[ line: 75 ]]
+	local function makeButton(p1, p2)
 		-- upvalues: list (ref), var8 (ref), reactModule (copy), voicePackButtonModule (copy), var13 (ref), var12 (ref), crossExperienceVoiceManager (copy), var10 (ref)
 		local var24
 		local var21 = list[p1] or { name = "Voicepack " .. p1 }
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 39 | named "SquadVoiceChangers" ]]
 		end
 		t.isSelected = var24
 		
-		function t.onActivated() --[[ line: 86 ]]
+		function t.onActivated()
 			-- upvalues: crossExperienceVoiceManager (copy), var22 (ref), var13 (copy), var10 (copy)
 			crossExperienceVoiceManager.default:setVoicePack(var22)
 			
@@ -149,7 +149,7 @@ return function(p0) --[[ line: 39 | named "SquadVoiceChangers" ]]
 				HearMyselfToggle = reactModule.createElement(foundationModule.Toggle, {
 					label = "",
 					size = inputSize.Medium,
-					onActivated = function(_) --[[ line: 191 ]]
+					onActivated = function(_)
 						-- upvalues: var14 (ref), crossExperienceVoiceManager (copy), var10 (ref)
 						if var14 then
 							crossExperienceVoiceManager.default:disableHearMyself(var10)

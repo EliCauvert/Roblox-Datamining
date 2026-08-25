@@ -6,16 +6,16 @@ local platformLeaderboardStoreContextModule = require(parent.Common.PlatformLead
 local fFlagPlatformLeaderboardPersistStoreOnRemount = require(parent_1.SharedFlags).FFlagPlatformLeaderboardPersistStoreOnRemount
 local platformLeaderboardClientStore = platformLeaderboardsClientModule.PlatformLeaderboardClientStore
 
-return reactModule.memo(function(p0) --[[ line: 19 ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (ref), platformLeaderboardsClientModule (ref), reactModule (ref), platformLeaderboardClientStore (ref), platformLeaderboardStoreContextModule (ref)
 	local var3 = if fFlagPlatformLeaderboardPersistStoreOnRemount and p0.store == nil then platformLeaderboardsClientModule.getPlatformLeaderboardClientStore() else nil
-	local var4 = reactModule.useMemo(function() --[[ line: 26 ]]
+	local var4 = reactModule.useMemo(function()
 		-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (copy), p0 (ref), platformLeaderboardClientStore (copy)
 		return if fFlagPlatformLeaderboardPersistStoreOnRemount or p0.store ~= nil or not platformLeaderboardClientStore then nil else platformLeaderboardClientStore.new()
 	end, {})
-	reactModule.useEffect(function() --[[ line: 34 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (copy), var4 (ref)
-		return function() --[[ line: 35 ]]
+		return function()
 			-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (copy), var4 (copy)
 			if not fFlagPlatformLeaderboardPersistStoreOnRemount and var4 then
 				var4:destroy()

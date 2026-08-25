@@ -25,7 +25,7 @@ local var13 = if fFlagAbuseReportSlideOutgoingInputSinkModule then require(gener
 local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local INLINE_LANDSCAPE_WIDTH = layoutSlotsModule.INLINE_LANDSCAPE_WIDTH
 
-return reactModule.memo(function(p0) --[[ line: 51 | named "AbuseReportInline" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useArTranslation (ref), reactModule (ref), animatePresence (ref), feedbackModule (ref), INLINE_LANDSCAPE_WIDTH (ref), fFlagAbuseReportSlideOutgoingInputSinkModule (ref), var13 (write), slideTransitionLegacyModule (ref), view (ref), fFlagAbuseReportV2ScrollNavigationModule (ref), useScrollNavigationBindingsModule (ref), fFlagAbuseReportInlineTitleDisclosureFocus (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), icon (ref), iconName (ref), inputSize (ref), abuseReportTooltipModule (ref)
 	local var14 = useTokens()
 	local translateIntoString = useArTranslation().translateIntoString
@@ -52,13 +52,13 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "AbuseReportInline" ]
 		direction = abuseReportFlow.navigationDirection
 	})
 	local var16, var17 = reactModule.useState(if config.display.titleDisclosure then config.display.titleDisclosure.openByDefault else false)
-	local var18 = reactModule.useCallback(function() --[[ line: 112 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: var17 (ref)
-		var17(function(p1) --[[ line: 113 ]]
+		var17(function(p1)
 			return not p1
 		end)
 	end, {})
-	local var19 = if fFlagAbuseReportInlineTitleDisclosureFocus then useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, reactModule.useCallback(function() --[[ line: 125 ]]
+	local var19 = if fFlagAbuseReportInlineTitleDisclosureFocus then useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, reactModule.useCallback(function()
 		-- upvalues: var17 (ref)
 		var17(false)
 	end, {}), var16, var16) else nil
@@ -77,7 +77,7 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "AbuseReportInline" ]
 				["row flex-between size-full-0 auto-y"] = not p0.shouldUseOverlaidControls
 			}
 		}, {
-			BackButtonContainer = reactModule.useMemo(function() --[[ line: 142 ]]
+			BackButtonContainer = reactModule.useMemo(function()
 				-- upvalues: reactModule (copy), view (copy), p0 (ref), abuseReportFlow (ref), icon (copy), iconName (copy), inputSize (copy)
 				return reactModule.createElement(view, {
 					LayoutOrder = 1,
@@ -102,7 +102,7 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "AbuseReportInline" ]
 				abuseReportFlow.goBack,
 				p0.shouldUseOverlaidControls
 			}),
-			AbuseReportTooltipContainer = reactModule.useMemo(function() --[[ line: 174 ]]
+			AbuseReportTooltipContainer = reactModule.useMemo(function()
 				-- upvalues: config (ref), reactModule (copy), view (copy), p0 (ref), var18 (ref), abuseReportTooltipModule (copy), var16 (ref), fFlagAbuseReportInlineTitleDisclosureFocus (copy), var19 (write), icon (copy), iconName (copy), inputSize (copy)
 				return if config.display.titleDisclosure then reactModule.createElement(view, {
 					LayoutOrder = 3,

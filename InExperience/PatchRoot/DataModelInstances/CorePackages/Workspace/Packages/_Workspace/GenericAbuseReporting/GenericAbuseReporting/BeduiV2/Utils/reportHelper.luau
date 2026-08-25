@@ -8,15 +8,15 @@ local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local fFlagAbuseReportForwardCustomTagFieldsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportForwardCustomTagFields)
 local appendReportAnythingTags = require(genericAbuseReporting.BeduiV2.Utils.appendReportAnythingTags).appendReportAnythingTags
 
-local function tag(p0) --[[ line: 49 ]]
+local function tag(p0)
 	return if p0 then { valueList = { { data = p0 } } } else nil
 end
 
-local function _(p1) --[[ line: 56 | named "isAllCapsKey" ]]
+local function _(p1)
 	return typeof(p1) == "string" and string.match(p1, "^[A-Z_][A-Z0-9_]*$") ~= nil
 end
 
-local function appendCustomTagFields(p2, p3) --[[ line: 60 ]]
+local function appendCustomTagFields(p2, p3)
 	-- upvalues: tag (ref)
 	local custom = p3.data.custom
 	
@@ -32,7 +32,7 @@ local function appendCustomTagFields(p2, p3) --[[ line: 60 ]]
 	end
 end
 
-local function buildVoiceReport(p4, p5) --[[ line: 77 ]]
+local function buildVoiceReport(p4, p5)
 	-- upvalues: playersService (ref), tag (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref), httpService (ref)
 	local t = {}
 	
@@ -63,7 +63,7 @@ local function buildVoiceReport(p4, p5) --[[ line: 77 ]]
 	return httpService:JSONEncode({ tags = t_1 })
 end
 
-local function buildChatReport(p6, p7) --[[ line: 108 ]]
+local function buildChatReport(p6, p7)
 	-- upvalues: playersService (ref), tag (ref), fFlagEnableChatReportingTextChannelTag (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref)
 	local localPlayer = playersService.LocalPlayer
 	local t = {
@@ -91,7 +91,7 @@ local function buildChatReport(p6, p7) --[[ line: 108 ]]
 	return t
 end
 
-local function buildAvatarReport(p8, p9) --[[ line: 151 ]]
+local function buildAvatarReport(p8, p9)
 	-- upvalues: playersService (ref), tag (ref), appendReportAnythingTags (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref)
 	local localPlayer = playersService.LocalPlayer
 	local t = {
@@ -110,7 +110,7 @@ local function buildAvatarReport(p8, p9) --[[ line: 151 ]]
 	return { tags = t }
 end
 
-local function buildPlaceReport(p10, p11) --[[ line: 171 ]]
+local function buildPlaceReport(p10, p11)
 	-- upvalues: playersService (ref), tag (ref), appendReportAnythingTags (ref), fFlagAbuseReportForwardCustomTagFieldsModule (ref), appendCustomTagFields (ref), httpService (ref)
 	local localPlayer = playersService.LocalPlayer
 	local t = {
@@ -130,31 +130,31 @@ local function buildPlaceReport(p10, p11) --[[ line: 171 ]]
 end
 
 return {
-	submitVoiceReport = function(p12, p13) --[[ line: 200 ]]
+	submitVoiceReport = function(p12, p13)
 		-- upvalues: buildVoiceReport (ref), promiseModule (ref), playersService (ref)
 		local var18 = buildVoiceReport(p12, p13)
 		
-		return promiseModule.try(function() --[[ line: 202 ]]
+		return promiseModule.try(function()
 			-- upvalues: playersService (copy), var18 (ref)
 			playersService:ReportAbuseV3(playersService.LocalPlayer, var18)
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitChatReport = function(p14, p15) --[[ line: 208 ]]
+	submitChatReport = function(p14, p15)
 		-- upvalues: buildChatReport (ref), promiseModule (ref), playersService (ref)
 		local var19 = buildChatReport(p14, p15)
 		
-		return promiseModule.try(function() --[[ line: 210 ]]
+		return promiseModule.try(function()
 			-- upvalues: playersService (copy), p15 (ref), var19 (ref)
 			playersService:ReportChatAbuse(p15.eligibleMessages, p15.targetMessages, var19)
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitChatReportWithoutMessage = function(p16) --[[ line: 216 ]]
+	submitChatReportWithoutMessage = function(p16)
 		-- upvalues: promiseModule (ref), playersService (ref)
-		return promiseModule.try(function() --[[ line: 217 ]]
+		return promiseModule.try(function()
 			-- upvalues: p16 (ref), playersService (copy)
 			local var20 = tonumber(p16.data.targetIdStr)
 			playersService:ReportAbuse(var20 and playersService:GetPlayerByUserId(var20), p16.data.category, p16.data.comment or "")
@@ -162,22 +162,22 @@ return {
 			return { responseBody = {} }
 		end)
 	end,
-	submitAvatarReport = function(p17, p18) --[[ line: 225 ]]
+	submitAvatarReport = function(p17, p18)
 		-- upvalues: buildAvatarReport (ref), promiseModule (ref), playersService (ref)
 		local var21 = buildAvatarReport(p17, p18)
 		
-		return promiseModule.try(function() --[[ line: 227 ]]
+		return promiseModule.try(function()
 			-- upvalues: playersService (copy), p17 (ref), var21 (ref)
 			playersService:ReportAvatarAbuse(tonumber(p17.data.targetIdStr), var21)
 			
 			return { responseBody = {} }
 		end)
 	end,
-	submitPlaceReport = function(p19, p20) --[[ line: 233 ]]
+	submitPlaceReport = function(p19, p20)
 		-- upvalues: buildPlaceReport (ref), promiseModule (ref), playersService (ref)
 		local var22 = buildPlaceReport(p19, p20)
 		
-		return promiseModule.try(function() --[[ line: 235 ]]
+		return promiseModule.try(function()
 			-- upvalues: playersService (copy), var22 (ref)
 			playersService:ReportAbuseV3(playersService.LocalPlayer, var22)
 			

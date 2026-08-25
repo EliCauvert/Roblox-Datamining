@@ -16,18 +16,18 @@ local flags = peopleServiceModule.getService("Flags")
 local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
 local fFlagVoiceVolumeControlsPerUserPlayerListButton = flags.FFlagVoiceVolumeControlsPerUserPlayerListButton
 
-local function MemoizedButton(p0) --[[ line: 28 ]]
+local function MemoizedButton(p0)
 	-- upvalues: getFFlagAddPeoplePageCardLayout (ref), reactModule (ref), peopleServiceModule (ref), personButtonModule (ref)
 	local config = p0.config
-	local var12 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function() --[[ line: 36 ]]
+	local var12 = if getFFlagAddPeoplePageCardLayout() then reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local var13 = reactModule.useCallback(function(p1) --[[ line: 41 ]]
+	local var13 = reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref)
 		p0.onButtonMount(p1, p0.buttonId)
 	end, { p0.onButtonMount })
-	local var14 = if getFFlagAddPeoplePageCardLayout() then reactModule.useCallback(function() --[[ line: 46 ]]
+	local var14 = if getFFlagAddPeoplePageCardLayout() then reactModule.useCallback(function()
 		-- upvalues: config (ref), var12 (ref)
 		if config.id == var12.PERSON_BUTTONS.BLOCK_PLAYER then
 			config.onActivated("ingame_menu")
@@ -41,7 +41,7 @@ local function MemoizedButton(p0) --[[ line: 28 ]]
 		config.onActivated(var12.ANALYTICS.ENTRY_POINT.PEOPLE_LIST)
 	end, { config.id, config.onActivated }) else nil
 	
-	return reactModule.useMemo(function() --[[ line: 57 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), personButtonModule (copy), config (ref), getFFlagAddPeoplePageCardLayout (copy), var14 (ref), var13 (ref)
 		return reactModule.createElement(personButtonModule, {
 			text = config.text,
@@ -63,24 +63,24 @@ local function MemoizedButton(p0) --[[ line: 28 ]]
 	})
 end
 
-return function(p2) --[[ line: 91 ]]
+return function(p2)
 	-- upvalues: personButtonConfigsModule (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), reactModule (ref), peopleServiceModule (ref), fFlagVoiceVolumeControlsPerUserPlayerListButton (ref), useSignalState (ref), getFFlagAddPeoplePageCardLayout (ref), muteVolumeButtonModule (ref), MemoizedButton (ref), view (ref)
 	local var15 = personButtonConfigsModule(p2.userId)
 	local var16 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
-	local var17 = reactModule.useMemo(function() --[[ line: 96 ]]
+	local var17 = reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FocusNavigationService")
 	end, {})
-	local var18 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function() --[[ line: 101 ]]
+	local var18 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("Constants")
 	end, {}) else nil
-	local var19 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then useSignalState((if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function() --[[ line: 107 ]]
+	local var19 = if fFlagVoiceVolumeControlsPerUserPlayerListButton then useSignalState((if fFlagVoiceVolumeControlsPerUserPlayerListButton then reactModule.useMemo(function()
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("PeopleVoiceChatStore")
 	end, {}) else nil).getShowVolumeControl) else false
 	local var20 = reactModule.useRef({})
-	local var21 = reactModule.useCallback(function(p3, p4) --[[ line: 118 ]]
+	local var21 = reactModule.useCallback(function(p3, p4)
 		-- upvalues: var20 (ref)
 		if p3 then
 			var20.current[p4] = p3
@@ -89,7 +89,7 @@ return function(p2) --[[ line: 91 ]]
 		end
 		var20.current[p4] = nil
 	end, {})
-	local var22 = reactModule.useMemo(function() --[[ line: 126 ]]
+	local var22 = reactModule.useMemo(function()
 		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var15 (ref)
 		local t = {}
 		
@@ -110,12 +110,12 @@ return function(p2) --[[ line: 91 ]]
 		
 		return table.concat(t, ",")
 	end, { var15 })
-	reactModule.useEffect(function() --[[ line: 146 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagVoiceVolumeControlsPerUserPlayerListButton (copy), var20 (ref), var19 (ref), var18 (ref), getFFlagAddPeoplePageCardLayout (copy), var15 (ref), p2 (ref), var17 (ref)
 		local t = {}
 		
 		if fFlagVoiceVolumeControlsPerUserPlayerListButton then
-			local function _(p5) --[[ line: 151 | named "appendVisibleConfig" ]]
+			local function _(p5)
 				-- upvalues: var20 (copy), t (ref), var19 (copy), var18 (copy)
 				if not p5.shouldShow() then return end
 				local id = var20.current[p5.id]
@@ -189,7 +189,7 @@ return function(p2) --[[ line: 91 ]]
 			end
 		end
 		if #t > 0 then
-			table.sort(t, function(p6, p7) --[[ line: 199 ]]
+			table.sort(t, function(p6, p7)
 				return p6.LayoutOrder < p7.LayoutOrder
 			end)
 			var17.registerButtonRow(p2.userId, t, p2.index or 0)
@@ -201,24 +201,24 @@ return function(p2) --[[ line: 91 ]]
 		var22,
 		var19
 	} else { p2.userId, p2.index, var17, var22 })
-	reactModule.useEffect(function() --[[ line: 224 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (ref), p2 (ref)
-		return function() --[[ line: 225 ]]
+		return function()
 			-- upvalues: var17 (copy), p2 (copy)
 			var17.handlePersonRemoved(p2.userId)
 			var17.unregisterButtonRow(p2.userId)
 		end
 	end, { p2.userId, var17 })
-	local var23 = reactModule.useMemo(function() --[[ line: 231 ]]
+	local var23 = reactModule.useMemo(function()
 		-- upvalues: var17 (ref), p2 (ref)
 		return var17.hasSelectablePlatformButton(p2.userId)
 	end, { p2.userId, var17 })
-	local var24 = reactModule.useMemo(function() --[[ line: 235 ]]
+	local var24 = reactModule.useMemo(function()
 		-- upvalues: var23 (ref)
 		return if var23 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
 	end, { var23 })
 	
-	if not reactModule.useMemo(function() --[[ line: 240 ]]
+	if not reactModule.useMemo(function()
 		-- upvalues: getFFlagAddPeoplePageCardLayout (copy), var15 (ref)
 		if getFFlagAddPeoplePageCardLayout() then
 			for i, v in var15 do

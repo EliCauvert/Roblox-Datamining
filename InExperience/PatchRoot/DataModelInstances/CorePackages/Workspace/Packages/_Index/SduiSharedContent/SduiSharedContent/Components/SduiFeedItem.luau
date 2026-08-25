@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useImpressionsTagger = require(parent.Impressions).useImpressionsTagger
 
-return reactModule.memo(function(p0) --[[ line: 17 | named "SduiFeedItem" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: reactModule (ref), useImpressionsTagger (ref)
 	local var1 = reactModule.useRef(nil)
 	useImpressionsTagger(var1, p0.impressionsTag, p0.index)

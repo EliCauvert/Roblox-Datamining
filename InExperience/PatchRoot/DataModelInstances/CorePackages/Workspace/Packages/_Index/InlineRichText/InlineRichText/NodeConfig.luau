@@ -12,7 +12,7 @@ local var7 = runService:IsStudio()
 local t = {
 	[nodeTypeModule.InlineCustom] = {
 		defaultParent = nodeTypeModule.Root,
-		getDefault = function() --[[ line: 67 ]]
+		getDefault = function()
 			-- upvalues: nodeTypeModule (ref)
 			return {
 				name = "TEXT_SPAN",
@@ -26,7 +26,7 @@ local t = {
 			[nodeTypeModule.EngineTag] = true,
 			[nodeTypeModule.Plaintext] = true
 		},
-		validateRenderResult = function(p0) --[[ line: 80 ]]
+		validateRenderResult = function(p0)
 			-- upvalues: isInlineElement (ref)
 			return isInlineElement(p0)
 		end
@@ -37,13 +37,13 @@ local t = {
 			[nodeTypeModule.EngineTag] = true,
 			[nodeTypeModule.Plaintext] = true
 		},
-		validateRenderResult = function(_) --[[ line: 91 ]]
+		validateRenderResult = function(_)
 			return true
 		end
 	},
 	[nodeTypeModule.Plaintext] = {
 		defaultParent = nodeTypeModule.InlineCustom,
-		getDefault = function() --[[ line: 97 ]]
+		getDefault = function()
 			-- upvalues: nodeTypeModule (ref)
 			return {
 				name = "TEXT",
@@ -54,14 +54,14 @@ local t = {
 			}
 		end,
 		children = {},
-		validateRenderResult = function(_) --[[ line: 107 ]]
+		validateRenderResult = function(_)
 			return true
 		end
 	}
 }
 local var9 = cryoModule.Dictionary.union(t, {
 	[nodeTypeModule.Root] = {
-		getDefault = function() --[[ line: 50 ]]
+		getDefault = function()
 			-- upvalues: nodeTypeModule (ref)
 			return {
 				name = "ROOT",
@@ -72,14 +72,14 @@ local var9 = cryoModule.Dictionary.union(t, {
 			}
 		end,
 		children = { [nodeTypeModule.InlineCustom] = true },
-		validateRenderResult = function(p1) --[[ line: 60 ]]
+		validateRenderResult = function(p1)
 			-- upvalues: reactIsModule (ref)
 			return reactIsModule.isElement(p1)
 		end
 	}
 })
 
-local function getByType(p2) --[[ line: 115 ]]
+local function getByType(p2)
 	-- upvalues: var9 (ref), name (ref)
 	local var13 = var9[p2]
 	
@@ -91,7 +91,7 @@ local function getByType(p2) --[[ line: 115 ]]
 	return nil
 end
 
-local function getByNode(p3) --[[ line: 124 ]]
+local function getByNode(p3)
 	-- upvalues: name (ref), var9 (ref)
 	if not p3 then
 		name:error("getByNode: No node provided")
@@ -109,7 +109,7 @@ local function getByNode(p3) --[[ line: 124 ]]
 	return nil
 end
 
-local var12 = function(p4, p5) --[[ line: 133 ]]
+local var12 = function(p4, p5)
 	-- upvalues: isDescendantModule (ref), var9 (ref)
 	return isDescendantModule(var9, "InlineRichTextNodeConfigGraph", p4.type, p5.type)
 end

@@ -17,11 +17,11 @@ local t = {
 	expectedFailures = {}
 }
 
-local function _(value) --[[ line: 37 | named "getAssetTypeFromUploadEnum" ]]
+local function _(value)
 	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
 end
 
-local function buildEditableMeshesFromSharedData(p0) --[[ line: 44 ]]
+local function buildEditableMeshesFromSharedData(p0)
 	local t = {}
 	
 	for i, v in p0.renderMeshesData do
@@ -37,7 +37,7 @@ local function buildEditableMeshesFromSharedData(p0) --[[ line: 44 ]]
 	return t
 end
 
-function t.run(p1, p2) --[[ line: 61 ]]
+function t.run(p1, p2)
 	-- upvalues: buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), accurateBoundingBoxRasterUtilModule (ref), bodyAssetMasksRendererModule (ref), errorSourceStringsModule (ref)
 	local var8 = if p2.uploadEnum and p2.uploadEnum.assetType then p2.uploadEnum.assetType else nil
 	

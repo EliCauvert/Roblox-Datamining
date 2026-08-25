@@ -27,14 +27,14 @@ local getGameInfoStoreModule = require(dataHydration.Game.GameInfo.getGameInfoSt
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local user_vote_cache_ttl_seconds = game:DefineFastInt("USER_VOTE_CACHE_TTL_SECONDS", 600)
 
-return function() --[[ line: 42 | named "createVotesStore" ]]
+return function()
 	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), dashModule (ref), fetchVotesModule (ref), fFlagLuaAppInExperienceDetailsPrompt (ref), votesUtilsModule (ref), user_vote_cache_ttl_seconds (ref), logResponseError (ref), fetchUserVoteModule (ref), votesStoreTypesModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppDataHydrationOptimisticMutationLayer (ref), signalsModule (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (ref), cryoModule (ref), fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (ref), fFlagSduiExperienceDetailsSupport (ref), getGameInfoStoreModule (ref), requestUserVoteUpdateModule (ref), httpService (ref), reasonNotVoteable (ref), statusCodes (ref), fFlagLuaAppDataHydrationUpdateItem (ref)
 	local var16 = createDataCacheModule()
 	local var17 = createDataResolverModule({
 		cache = var16,
-		fetchFn = function(p0) --[[ line: 46 ]]
+		fetchFn = function(p0)
 			-- upvalues: dashModule (copy), fetchVotesModule (copy), fFlagLuaAppInExperienceDetailsPrompt (copy), votesUtilsModule (copy)
-			return fetchVotesModule(dashModule.keys(p0)):andThen(function(p2) --[[ line: 51 ]]
+			return fetchVotesModule(dashModule.keys(p0)):andThen(function(p2)
 				-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), dashModule (copy), votesUtilsModule (copy)
 				if not p2 then
 					error("No response")
@@ -47,7 +47,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 					end
 				end
 				local t = {}
-				dashModule.forEach(p2.responseBody.data, function(p3) --[[ line: 65 ]]
+				dashModule.forEach(p2.responseBody.data, function(p3)
 					-- upvalues: votesUtilsModule (copy), t (ref)
 					local var21 = nil
 					local upVotes = p3.upVotes
@@ -60,7 +60,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 				end)
 				
 				return t
-			end):catch(function(p1) --[[ line: 81 ]]
+			end):catch(function(p1)
 				error(`Error requesting votes: {p1}`)
 			end)
 		end
@@ -69,13 +69,13 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 	local var19 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var18,
-		logError = function(p4) --[[ line: 92 ]]
+		logError = function(p4)
 			-- upvalues: logResponseError (copy)
 			logResponseError("v1/games/votes/user", p4)
 		end,
-		fetchFn = function(p5, _) --[[ line: 95 ]]
+		fetchFn = function(p5, _)
 			-- upvalues: fetchUserVoteModule (copy), votesStoreTypesModule (copy), discoveryEventErrorLogger (copy)
-			return fetchUserVoteModule(p5):andThen(function(p6) --[[ line: 99 ]]
+			return fetchUserVoteModule(p5):andThen(function(p6)
 				-- upvalues: votesStoreTypesModule (copy), discoveryEventErrorLogger (copy), p5 (ref)
 				local responseBody = p6.responseBody
 				
@@ -102,7 +102,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 		getUserVotes = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var19.getOptimisticCachedItems else var19.getCachedItems,
 		getAndFetchUserVote = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var19.getOptimisticAndFetchItem else var19.getAndFetchItem,
 		getAndFetchUserVotes = if fFlagLuaAppDataHydrationOptimisticMutationLayer then var19.getOptimisticAndFetchItems else var19.getAndFetchItems,
-		updateUserVote = function(p7, p8) --[[ line: 116 ]]
+		updateUserVote = function(p7, p8)
 			-- upvalues: signalsModule (copy), fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var19 (ref), var18 (ref), var16 (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (copy), cryoModule (copy), fFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (copy), votesUtilsModule (copy), fFlagSduiExperienceDetailsSupport (copy), getGameInfoStoreModule (copy), requestUserVoteUpdateModule (copy), httpService (copy), votesStoreTypesModule (copy), reasonNotVoteable (copy), statusCodes (copy), discoveryEventErrorLogger (copy), logResponseError (copy)
 			local var26, var27
 			local var22, var23 = signalsModule.createSignal(nil)
@@ -166,13 +166,13 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 					})
 				end
 				local var38 = if fFlagSduiExperienceDetailsSupport then getGameInfoStoreModule(false).applyVoteChange(p7, var31, p8) else nil
-				requestUserVoteUpdateModule(p7, p8):andThen(function(_) --[[ line: 219 ]]
+				requestUserVoteUpdateModule(p7, p8):andThen(function(_)
 					-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var19 (copy), p7 (ref), var23 (ref), p8 (ref)
 					if fFlagLuaAppDataHydrationOptimisticMutationLayer then
 						var19.commitMutation(p7)
 					end
 					var23({ type = "success", userVote = p8 })
-				end):catch(function(p9) --[[ line: 228 ]]
+				end):catch(function(p9)
 					-- upvalues: fFlagLuaAppDataHydrationOptimisticMutationLayer (copy), var19 (copy), p7 (ref), var30 (ref), var18 (copy), var31 (ref), var33 (ref), var16 (copy), fFlagSduiExperienceDetailsSupport (copy), var38 (write), getGameInfoStoreModule (copy), httpService (copy), votesStoreTypesModule (copy), reasonNotVoteable (copy), statusCodes (copy), var23 (ref), discoveryEventErrorLogger (copy), logResponseError (copy)
 					if fFlagLuaAppDataHydrationOptimisticMutationLayer then
 						var19.clearMutation(p7)
@@ -193,7 +193,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 					local floodCheckThresholdMet = nil
 					
 					if var39 then
-						local ok, status = pcall(function() --[[ line: 259 ]]
+						local ok, status = pcall(function()
 							-- upvalues: httpService (copy), p9 (ref)
 							return httpService:JSONDecode(p9.Body)
 						end)
@@ -233,7 +233,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 				return var22
 			end
 		end,
-		updateVoteItem = if fFlagLuaAppDataHydrationUpdateItem then function(p10, p11, p12) --[[ line: 343 ]]
+		updateVoteItem = if fFlagLuaAppDataHydrationUpdateItem then function(p10, p11, p12)
 			-- upvalues: var16 (ref), votesUtilsModule (copy)
 			var16.updateItem(p10, {
 				downVotes = p11,
@@ -241,7 +241,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 				rating = votesUtilsModule.calculateRating(p12, p11)
 			})
 		end else nil,
-		updateVoteItems = function(p13) --[[ line: 292 ]]
+		updateVoteItems = function(p13)
 			-- upvalues: votesUtilsModule (copy), var16 (ref)
 			local t = {}
 			
@@ -256,14 +256,14 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 		end,
 		updateUserVoteItem = if fFlagLuaAppDataHydrationUpdateItem then var18.updateItem else nil,
 		updateUserVoteItems = var18.updateItems,
-		clear = function() --[[ line: 305 ]]
+		clear = function()
 			-- upvalues: var16 (ref), var17 (ref), var18 (ref), var19 (ref)
 			var16.clear()
 			var17.clear()
 			var18.clear()
 			var19.clear()
 		end,
-		dispose = function() --[[ line: 312 ]]
+		dispose = function()
 			-- upvalues: var16 (ref), var17 (ref), var19 (ref)
 			var16.dispose()
 			var17.dispose()

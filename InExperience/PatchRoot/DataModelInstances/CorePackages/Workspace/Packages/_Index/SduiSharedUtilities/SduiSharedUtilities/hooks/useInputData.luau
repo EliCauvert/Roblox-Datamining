@@ -4,9 +4,9 @@ local reactModule = require(parent.React)
 local signalsReactModule = require(parent.SignalsReact)
 local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
 
-return function(p0, p1) --[[ line: 9 | named "useInputData" ]]
+return function(p0, p1)
 	-- upvalues: reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p2) --[[ line: 10 ]]
+	return signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
 		-- upvalues: getSduiApiStoreModule (copy), p0 (ref), p1 (ref)
 		local var4 = getSduiApiStoreModule()
 		var4.getData(p0).status(p2)

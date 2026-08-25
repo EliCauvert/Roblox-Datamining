@@ -1,8 +1,8 @@
-﻿local function _(p0, p1, p2) --[[ line: 5 | named "compare" ]]
+﻿local function _(p0, p1, p2)
 	return if p0 and p1 then Vector3.new(p2(p0.X, p1.X), p2(p0.Y, p1.Y), p2(p0.Z, p1.Z)) else p0 or p1
 end
 
-return function(a, b, p3, p4) --[[ line: 14 | named "calculateMinMax" ]]
+return function(a, b, p3, p4)
 	local min = math.min
 	local var0 = if a and p3 then Vector3.new(min(a.X, p3.X), min(a.Y, p3.Y), min(a.Z, p3.Z)) else a or p3
 	local max = math.max

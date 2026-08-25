@@ -1,11 +1,11 @@
 ﻿local promiseModule = require(script.Parent.Parent.Promise)
 
-return function(p0) --[[ line: 4 | named "getPremiumUpsellPrecheck" ]]
+return function(p0)
 	-- upvalues: promiseModule (ref)
-	return p0.getPremiumUpsellPrecheck():andThen(function(_) --[[ line: 7 ]]
+	return p0.getPremiumUpsellPrecheck():andThen(function(_)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(true)
-	end):catch(function(_) --[[ line: 10 ]]
+	end):catch(function(_)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(false)
 	end)

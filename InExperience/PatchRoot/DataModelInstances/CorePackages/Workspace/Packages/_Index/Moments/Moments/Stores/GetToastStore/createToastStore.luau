@@ -1,20 +1,20 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
 local createSignal = signalsModule.createSignal
 
-return function() --[[ line: 37 | named "createToastStore" ]]
+return function()
 	-- upvalues: createSignal (ref), signalsModule (ref)
 	local var1 = 0
 	local var2, var3 = createSignal({})
 	
 	return {
 		getToasts = var2,
-		getToast = signalsModule.createComputed(function(p0) --[[ line: 73 ]]
+		getToast = signalsModule.createComputed(function(p0)
 			-- upvalues: var2 (ref)
 			local var4 = var2(p0)
 			
 			return if #var4 == 0 then nil else var4[#var4].data
 		end),
-		triggerToast = function(p1) --[[ line: 41 ]]
+		triggerToast = function(p1)
 			-- upvalues: var1 (write), var2 (ref), var3 (ref)
 			var1 += 1
 			local t = { id = var1, data = p1 }
@@ -35,7 +35,7 @@ return function() --[[ line: 37 | named "createToastStore" ]]
 			end
 			return t.id
 		end,
-		dismissToast = function(p2) --[[ line: 62 ]]
+		dismissToast = function(p2)
 			-- upvalues: var2 (ref), var3 (ref)
 			local t = {}
 			

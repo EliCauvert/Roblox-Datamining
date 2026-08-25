@@ -1,6 +1,6 @@
 ﻿local playersService = game:GetService("Players")
 
-return function(p0) --[[ line: 3 | named "getLocalUserId" ]]
+return function(p0)
 	-- upvalues: playersService (ref)
 	local localPlayer = (p0 or playersService).LocalPlayer
 	

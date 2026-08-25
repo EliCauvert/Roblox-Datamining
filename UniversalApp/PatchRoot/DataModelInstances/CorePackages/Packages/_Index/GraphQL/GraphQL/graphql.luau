@@ -14,15 +14,15 @@ local execute = require(parent.execution.execute).execute
 local t = {}
 local graphqlImpl = nil
 
-function t.graphql(p0) --[[ line: 93 ]]
+function t.graphql(p0)
 	-- upvalues: promiseModule (ref), graphqlImpl (write)
-	return promiseModule.new(function(p1) --[[ line: 95 ]]
+	return promiseModule.new(function(p1)
 		-- upvalues: graphqlImpl (copy), p0 (ref)
 		return p1(graphqlImpl(p0))
 	end)
 end
 
-function t.graphqlSync(p2) --[[ line: 106 ]]
+function t.graphqlSync(p2)
 	-- upvalues: graphqlImpl (write), isPromise (ref), error (ref)
 	local var3 = graphqlImpl(p2)
 	
@@ -32,7 +32,7 @@ function t.graphqlSync(p2) --[[ line: 106 ]]
 	return var3
 end
 
-graphqlImpl = function(p3) --[[ line: 119 | named "graphqlImpl" ]]
+graphqlImpl = function(p3)
 	-- upvalues: validateSchema (ref), parse (ref), validate (ref), execute (ref)
 	local schema = p3.schema
 	local source = p3.source
@@ -48,7 +48,7 @@ graphqlImpl = function(p3) --[[ line: 119 | named "graphqlImpl" ]]
 		return { errors = var4 }
 	end
 	local var5 = nil
-	local ok, status = pcall(function() --[[ line: 138 ]]
+	local ok, status = pcall(function()
 		-- upvalues: var5 (write), parse (copy), source (ref)
 		var5 = parse(source)
 	end)

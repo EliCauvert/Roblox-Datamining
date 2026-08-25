@@ -3,11 +3,11 @@ local configModule = require(expChat.Config)
 local memoizeModule = require(expChat.memoize)
 local fFlagEnableInExpChatRewriteModule = require(expChat.Flags.FFlagEnableInExpChatRewrite)
 
-local _ = function(p0) --[[ line: 7 ]]
+local _ = function(p0)
 	return if p0 ~= nil then p0 == "" else true
 end
 
-return memoizeModule(function(p1, p2) --[[ line: 11 ]]
+return memoizeModule(function(p1, p2)
 	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), configModule (ref)
 	local t = {
 		text = p1.text or "",

@@ -1,7 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("ExpChat").Parent
 local fFlagChatLineReportingGlobalMuteEnabled = require(parent.SharedFlags).FFlagChatLineReportingGlobalMuteEnabled
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3) --[[ line: 17 ]]
+return require(parent.Rodux).makeActionCreator(script.Name, function(p0, p1, p2, p3)
 	-- upvalues: fFlagChatLineReportingGlobalMuteEnabled (ref)
 	return {
 		textChatMessage = p0,

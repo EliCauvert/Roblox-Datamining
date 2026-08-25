@@ -32,9 +32,9 @@ local EDPTTIManager = gameDetailTelemetryModule.EDPTTIManager
 local fFlagEDPTTITrackingEnabled = gameDetailTelemetryModule.FFlagEDPTTITrackingEnabled
 local EDPTTIConstants = gameDetailTelemetryModule.EDPTTIConstants
 
-return function(p0, p1, p2, p3) --[[ line: 47 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: fFlagSignalsNavP3fGameDetails (ref), var8 (ref), fFlagUseNavigationSelectors (ref), selectors (ref), fFlagEDPTTITrackingEnabled (ref), EDPTTIManager (ref), EDPTTIConstants (ref), fFlagLuaAppSduiEdpEnabled (ref), fFlagFixSduiEdpTtiPeekCategory (ref), displayModule (ref), responsiveModule (ref), deviceType (ref), sduiSurfaceLoadTimeTracker (ref), getExperienceDetailsPageKeyModule (ref), cryoModule (ref), fFlagSduiEdpPrefetchPlayability (ref), fetchGamePlayButtonData (ref), fetchExperienceDetailsPageModule (ref), formFactor (ref), useGameDetailsPeekViewModule (ref), appPage (ref), peekViewState (ref), setGameDetailsPeekViewStateModule (ref), fFlagSignalsNavP3Dispatch (ref), var7 (ref), fFlagSignalsNavP2NavigationPrimitives (ref), navigateDown (ref)
-	return function(p4) --[[ line: 48 ]]
+	return function(p4)
 		-- upvalues: fFlagSignalsNavP3fGameDetails (copy), var8 (copy), fFlagUseNavigationSelectors (copy), selectors (copy), fFlagEDPTTITrackingEnabled (copy), EDPTTIManager (copy), EDPTTIConstants (copy), fFlagLuaAppSduiEdpEnabled (copy), fFlagFixSduiEdpTtiPeekCategory (copy), displayModule (copy), responsiveModule (copy), deviceType (copy), sduiSurfaceLoadTimeTracker (copy), getExperienceDetailsPageKeyModule (copy), p0 (ref), p2 (write), cryoModule (copy), fFlagSduiEdpPrefetchPlayability (copy), p3 (ref), fetchGamePlayButtonData (copy), fetchExperienceDetailsPageModule (copy), formFactor (copy), useGameDetailsPeekViewModule (copy), appPage (copy), peekViewState (copy), setGameDetailsPeekViewStateModule (copy), p1 (ref), fFlagSignalsNavP3Dispatch (copy), var7 (copy), fFlagSignalsNavP2NavigationPrimitives (copy), navigateDown (copy)
 		local state = p4:getState()
 		local formFactor_1 = state.FormFactor

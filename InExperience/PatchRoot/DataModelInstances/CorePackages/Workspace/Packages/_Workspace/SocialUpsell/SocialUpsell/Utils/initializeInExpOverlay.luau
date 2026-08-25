@@ -12,7 +12,7 @@ local getOverlayStoreModule = require(socialUpsell.Store.getOverlayStore)
 local var10 = nil
 local var11 = nil
 
-function mount() --[[ line: 20 ]]
+function mount()
 	-- upvalues: var10 (write), var11 (write), coreGuiService (ref), reactRobloxModule (ref), guiService (ref), constantsModule (ref), contextActionService (ref), reactModule (ref), inExpOverlayModule (ref)
 	if not var10 then
 		if not var11 then
@@ -23,11 +23,11 @@ function mount() --[[ line: 20 ]]
 		var10 = reactRobloxModule.createRoot(var11)
 	end
 	guiService:SetMenuIsOpen(true, constantsModule.OVERLAY_MENU_NAME)
-	contextActionService:BindCoreAction(constantsModule.OVERLAY_CORE_ACTION_NAME, function() --[[ line: 33 ]] end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
+	contextActionService:BindCoreAction(constantsModule.OVERLAY_CORE_ACTION_NAME, function() end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
 	var10:render(reactModule.createElement(inExpOverlayModule, { gui = var11 }))
 end
 
-function unmount() --[[ line: 43 ]]
+function unmount()
 	-- upvalues: var10 (write), contextActionService (ref), constantsModule (ref), guiService (ref)
 	if var10 then
 		var10:unmount()
@@ -38,10 +38,10 @@ end
 
 local var12 = nil
 
-return function() --[[ line: 52 ]]
+return function()
 	-- upvalues: getOverlayStoreModule (ref), var12 (write), signalsModule (ref)
 	local var13 = getOverlayStoreModule(false)
-	var12 = signalsModule.createEffect(function(p0) --[[ line: 55 ]]
+	var12 = signalsModule.createEffect(function(p0)
 		-- upvalues: var13 (ref)
 		if var13.getCurrentOverlayType(p0) then
 			mount()

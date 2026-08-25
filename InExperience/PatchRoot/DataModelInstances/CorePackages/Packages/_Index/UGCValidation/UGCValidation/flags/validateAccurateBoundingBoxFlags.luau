@@ -7,25 +7,25 @@ game:DefineFastFlag("UGCValidateAccurateBoundingBoxRasterMethod", false)
 game:DefineFastFlag("UGCValidateAccurateBoundingBoxRasterMethodNeckAttachmentCrop", false)
 game:DefineFastString("UGCValidateAccurateBoundingBoxRasterMethodNeckAttachmentCropMargin", "0.05")
 local t = {
-	targetPercentage = function() --[[ line: 51 ]]
+	targetPercentage = function()
 		return tonumber(game:GetFastString("UGCValidationAccurateBoundingBoxTargetPercentage"))
 	end,
-	percentageWeight = function() --[[ line: 55 ]]
+	percentageWeight = function()
 		return tonumber(game:GetFastString("UGCValidationAccurateBoundingBoxPercentageWeight"))
 	end,
-	maxIterations = function() --[[ line: 59 ]]
+	maxIterations = function()
 		return game:GetFastInt("UGCValidationAccurateBoundingBoxMaxIterations")
 	end,
-	convergedLength = function() --[[ line: 63 ]]
+	convergedLength = function()
 		return tonumber(game:GetFastString("UGCValidationAccurateBoundingBoxConvergedLength"))
 	end,
-	inflationThreshold = function() --[[ line: 67 ]]
+	inflationThreshold = function()
 		return tonumber(game:GetFastString("UGCValidateAccurateBoundingBoxInflationThreshold"))
 	end,
-	neckAttachmentCrop = function() --[[ line: 71 ]]
+	neckAttachmentCrop = function()
 		return game:GetFastFlag("UGCValidateAccurateBoundingBoxRasterMethodNeckAttachmentCrop")
 	end,
-	neckAttachmentCropMargin = function() --[[ line: 75 ]]
+	neckAttachmentCropMargin = function()
 		return tonumber(game:GetFastString("UGCValidateAccurateBoundingBoxRasterMethodNeckAttachmentCropMargin"))
 	end
 }

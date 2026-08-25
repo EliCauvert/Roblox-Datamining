@@ -1,22 +1,22 @@
-﻿return function(p0) --[[ line: 1 ]]
+﻿return function(p0)
 	return {
-		account = function(p1) --[[ line: 4 ]]
+		account = function(p1)
 			-- upvalues: p0 (ref)
 			return p0.fromString("auth:v1/" .. p1 .. "/account")
 		end,
-		connect = function(p2) --[[ line: 8 ]]
+		connect = function(p2)
 			-- upvalues: p0 (ref)
 			return p0.fromString("auth:v1/" .. p2 .. "/connect")
 		end,
-		disconnect = function(p3) --[[ line: 12 ]]
+		disconnect = function(p3)
 			-- upvalues: p0 (ref)
 			return p0.fromString("auth:v1/" .. p3 .. "/disconnect")
 		end,
-		login = function(p4) --[[ line: 16 ]]
+		login = function(p4)
 			-- upvalues: p0 (ref)
 			return p0.fromString("auth:v1/" .. p4 .. "/login")
 		end,
-		signup = function(p5) --[[ line: 20 ]]
+		signup = function(p5)
 			-- upvalues: p0 (ref)
 			return p0.fromString("auth:v1/" .. p5 .. "/signup")
 		end

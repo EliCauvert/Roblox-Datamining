@@ -6,7 +6,7 @@ local reactModule = require(parent.React)
 local _ = require(foundation.Providers.Responsive.ResponsiveContext)
 local styleRuleModule = require(foundation.StyleSheet.StyleRule)
 
-local function createGridStyleRule(p0, p1) --[[ line: 13 ]]
+local function createGridStyleRule(p0, p1)
 	-- upvalues: reactModule (ref), styleRuleModule (ref)
 	return reactModule.createElement(styleRuleModule, {
 		Selector = `{if p1 then `.{p1}-col-{p0}` else `.col-{p0}`} ::UISizeConstraint`,
@@ -14,7 +14,7 @@ local function createGridStyleRule(p0, p1) --[[ line: 13 ]]
 	})
 end
 
-return function(p2) --[[ line: 24 | named "createGridStyleRules" ]]
+return function(p2)
 	-- upvalues: createGridStyleRule (ref), reactModule (ref), styleRuleModule (ref)
 	local breakpoint = p2.breakpoint
 	local grid = p2.grid

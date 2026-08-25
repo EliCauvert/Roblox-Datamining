@@ -8,7 +8,7 @@ local _ = require(squadsCore.Types)
 local urlBuilder = urlBuilderModule.UrlBuilder
 local urlBase = urlBuilderModule.UrlBase
 
-return function(p0, p1, p2) --[[ line: 20 ]]
+return function(p0, p1, p2)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), loggerModule (ref), serializeTableModule (ref), squadLuckyRecommendationErrorModule (ref)
 	local var6 = httpService:RequestInternal({
 		Method = "GET",
@@ -23,7 +23,7 @@ return function(p0, p1, p2) --[[ line: 20 ]]
 		})()
 	})
 	local var7 = false
-	var6:Start(function(_, p3) --[[ line: 44 ]]
+	var6:Start(function(_, p3)
 		-- upvalues: var7 (write), httpService (copy), loggerModule (copy), serializeTableModule (copy), p2 (ref), squadLuckyRecommendationErrorModule (copy), p1 (ref)
 		if var7 then return end
 		if p3 == nil or p3.StatusCode ~= 200 then
@@ -56,7 +56,7 @@ return function(p0, p1, p2) --[[ line: 20 ]]
 		end
 	end)
 	
-	return function() --[[ line: 84 ]]
+	return function()
 		-- upvalues: var7 (write), var6 (ref)
 		var7 = true
 		var6:Cancel()

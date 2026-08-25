@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("InGameAssetReporting").Analysis.SceneAnalysis)
 
-function getPreselectedSurfaceValue(p0) --[[ line: 14 ]]
+function getPreselectedSurfaceValue(p0)
 	if p0 == nil then
 		return nil
 	end

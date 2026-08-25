@@ -5,7 +5,7 @@ local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagS
 local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
 local var2 = 0
 
-local _ = function() --[[ line: 14 ]]
+local _ = function()
 	-- upvalues: var2 (write)
 	var2 += 1
 	
@@ -13,7 +13,7 @@ local _ = function() --[[ line: 14 ]]
 end
 
 return {
-	mock = function(p0, p1) --[[ line: 50 ]]
+	mock = function(p0, p1)
 		-- upvalues: var2 (write), enumsModule (ref)
 		local t = {}
 		local var4 = tostring(p0)
@@ -29,7 +29,7 @@ return {
 		
 		return t
 	end,
-	fromAsset = function(value) --[[ line: 65 ]]
+	fromAsset = function(value)
 		-- upvalues: fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), fFlagSocialEnableProfileInspectAndBuy (ref)
 		local t = {
 			id = tostring(value.id),

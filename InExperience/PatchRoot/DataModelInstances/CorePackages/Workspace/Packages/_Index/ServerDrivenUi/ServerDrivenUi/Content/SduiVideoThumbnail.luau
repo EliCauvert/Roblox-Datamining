@@ -9,7 +9,7 @@ local useTokens = foundationModule.Hooks.useTokens
 local getPlaybackDetectionMethod = videoUtilsModule.getPlaybackDetectionMethod
 local useTagAsViewportAutoplayCandidate = videoUtilsModule.useTagAsViewportAutoplayCandidate
 
-return function(p0) --[[ line: 35 | named "SduiVideoThumbnail" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), useTagAsViewportAutoplayCandidate (ref), sduiCoreSystemModule (ref), responsiveModule (ref), getPlaybackDetectionMethod (ref), cryoModule (ref), videoUtilsModule (ref)
 	local cornerRadius = p0.cornerRadius or useTokens().Radius.Medium
 	local var7 = reactModule.useRef(nil)
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 35 | named "SduiVideoThumbnail" ]]
 			isSelected = p0.isSelected,
 			autoplay = var10 == responsiveModule.Input.Touch,
 			videoPlaybackCoordinator = if p0.videoPlaybackContext then p0.videoPlaybackContext.videoPlaybackCoordinator else nil,
-			onPlaybackChange = reactModule.useCallback(function(p1) --[[ line: 59 ]]
+			onPlaybackChange = reactModule.useCallback(function(p1)
 				-- upvalues: var14 (ref)
 				var14(p1)
 			end, {}),

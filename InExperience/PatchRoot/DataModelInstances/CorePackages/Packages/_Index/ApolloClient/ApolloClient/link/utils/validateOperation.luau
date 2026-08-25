@@ -6,7 +6,7 @@ local object = luauPolyfillModule.Object
 local invariantError = require(parent.jsutils.invariant).InvariantError
 local _ = require(script.Parent.Parent.core.types)
 
-function t.validateOperation(p0) --[[ line: 19 ]]
+function t.validateOperation(p0)
 	-- upvalues: object (ref), array (ref), invariantError (ref)
 	local list = {
 		"query",

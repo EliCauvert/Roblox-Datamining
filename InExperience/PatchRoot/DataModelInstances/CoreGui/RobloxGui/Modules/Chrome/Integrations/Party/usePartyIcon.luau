@@ -12,7 +12,7 @@ local partyVoiceTopbarActivityIndicatorAnimationMs = game:DefineFastInt("PartyVo
 local partyVoiceTopbarActivityIndicatorDebounceMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorDebounceMs", 50)
 local getFFlagEnableCrossExpVoice = sharedFlagsModule.GetFFlagEnableCrossExpVoice
 
-function createAnimations(p0, p1) --[[ line: 32 ]]
+function createAnimations(p0, p1)
 	-- upvalues: partyVoiceTopbarActivityIndicatorAnimationMs (ref)
 	return {
 		ICON_OUT_ANIMATION = {
@@ -38,7 +38,7 @@ function createAnimations(p0, p1) --[[ line: 32 ]]
 	}
 end
 
-function getDisplayImage(p2, p3) --[[ line: 57 ]]
+function getDisplayImage(p2, p3)
 	-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (ref), getColorFromUserIdModule (ref)
 	return {
 		thumbnail = if p2 ~= -1 then p3 else getStandardSizeAvatarHeadShotRbxthumb(tostring(p2)),
@@ -46,7 +46,7 @@ function getDisplayImage(p2, p3) --[[ line: 57 ]]
 	}
 end
 
-function usePartyIcon(p4, p5, p6) --[[ line: 64 ]]
+function usePartyIcon(p4, p5, p6)
 	-- upvalues: getFFlagEnableCrossExpVoice (ref), useLastActiveParticipant (ref), usePrevious (ref), reactModule (ref), useSequentialAnimation (ref), crossExperienceVoiceModule (ref), partyVoiceTopbarActivityIndicatorDebounceMs (ref)
 	if getFFlagEnableCrossExpVoice() then
 		local var8 = useLastActiveParticipant()
@@ -54,27 +54,27 @@ function usePartyIcon(p4, p5, p6) --[[ line: 64 ]]
 		local var10 = usePrevious(var9)
 		local var11, var12 = reactModule.useState(getDisplayImage(var9, p6))
 		local var13, var14 = useSequentialAnimation(if var9 == -1 then p4 else p5)
-		local var15 = reactModule.useMemo(function() --[[ line: 75 ]]
+		local var15 = reactModule.useMemo(function()
 			-- upvalues: p4 (ref), p5 (ref)
 			return createAnimations(p4, p5)
 		end, { p4, p5 })
-		local var16 = reactModule.useCallback(function(p7) --[[ line: 79 ]]
+		local var16 = reactModule.useCallback(function(p7)
 			-- upvalues: var12 (ref), p6 (ref)
-			var12(function(p8) --[[ line: 80 ]]
+			var12(function(p8)
 				-- upvalues: p7 (ref), p6 (copy)
 				local var19 = getDisplayImage(p7, p6)
 				
 				return if p8.thumbnail == var19.thumbnail and p8.backgroundColor == var19.backgroundColor then p8 else var19
 			end)
 		end, { p6, var12 })
-		local var17 = reactModule.useMemo(function() --[[ line: 93 ]]
+		local var17 = reactModule.useMemo(function()
 			-- upvalues: crossExperienceVoiceModule (copy), var14 (ref), partyVoiceTopbarActivityIndicatorDebounceMs (copy)
-			return crossExperienceVoiceModule.Utils.debounce(function(p9, p10) --[[ line: 95 ]]
+			return crossExperienceVoiceModule.Utils.debounce(function(p9, p10)
 				-- upvalues: var14 (copy)
 				var14(p9, p10)
 			end, partyVoiceTopbarActivityIndicatorDebounceMs)
 		end, {})
-		reactModule.useEffect(function() --[[ line: 103 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var10 (ref), var9 (ref), var17 (ref), var15 (ref), var16 (ref), var14 (ref)
 			if var10 == nil or var9 == var10 then
 				var16(var9)
@@ -84,14 +84,14 @@ function usePartyIcon(p4, p5, p6) --[[ line: 64 ]]
 			var17.cancel()
 			
 			if var9 == -1 then
-				var17.call({ var15.AVATAR_OUT_ANIMATION, var15.ICON_IN_ANIMATION }, function() --[[ line: 110 ]]
+				var17.call({ var15.AVATAR_OUT_ANIMATION, var15.ICON_IN_ANIMATION }, function()
 					-- upvalues: var16 (copy)
 					var16(-1)
 				end)
 				
 				return
 			elseif var10 == -1 then
-				var14({ var15.ICON_OUT_ANIMATION, var15.AVATAR_IN_ANIMATION }, function() --[[ line: 118 ]]
+				var14({ var15.ICON_OUT_ANIMATION, var15.AVATAR_IN_ANIMATION }, function()
 					-- upvalues: var16 (copy), var9 (copy)
 					var16(var9)
 				end)

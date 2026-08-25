@@ -8,18 +8,18 @@ local getSpringFromSettingsModule = require(script:FindFirstAncestor("BubbleChat
 local clientSettingsUtilityModule = require(expChat.ClientSettings.ClientSettingsUtility)
 local blankBubble = roactModule.PureComponent:extend("BlankBubble")
 
-function blankBubble.init(p0, p1) --[[ line: 23 ]]
+function blankBubble.init(p0, p1)
 	-- upvalues: roactModule (ref), otterModule (ref)
 	p0.state = {}
 	local var7, var8 = roactModule.createBinding(0)
 	p0.width = var7
 	p0.updateWidth = var8
 	p0.widthMotor = otterModule.createSingleMotor(0)
-	p0.widthMotor:onStep(function(p2) --[[ line: 27 ]]
+	p0.widthMotor:onStep(function(p2)
 		-- upvalues: p0 (ref)
 		p0.updateWidth(math.round(p2))
 	end)
-	p0.frameSize = p0.width:map(function(p3) --[[ line: 31 ]]
+	p0.frameSize = p0.width:map(function(p3)
 		-- upvalues: p0 (ref)
 		return if p0.props.insertSize then UDim2.fromOffset(p3, p0.props.insertSize.Y + p0.props.chatSettings.Padding * 2) else UDim2.fromOffset(p3, 0)
 	end)
@@ -39,13 +39,13 @@ function blankBubble.init(p0, p1) --[[ line: 23 ]]
 	end
 end
 
-function blankBubble.getDerivedStateFromProps(p4, p5) --[[ line: 54 ]]
+function blankBubble.getDerivedStateFromProps(p4, p5)
 	local var13 = if p4.insertSize then p4.insertSize.X + p4.chatSettings.Padding * 2 else 0
 	
 	return if var13 == p5.fullWidth then nil else { fullWidth = var13 }
 end
 
-function blankBubble.render(p6) --[[ line: 69 ]]
+function blankBubble.render(p6)
 	-- upvalues: configModule (ref), roactModule (ref), dictionary (ref)
 	local chatSettings = p6.props.chatSettings
 	local imageLabel = chatSettings.ImageLabel
@@ -112,7 +112,7 @@ function blankBubble.render(p6) --[[ line: 69 ]]
 	return createElement(var15, t, t_1)
 end
 
-function blankBubble.fadeIn(p7) --[[ line: 143 ]]
+function blankBubble.fadeIn(p7)
 	-- upvalues: getSpringFromSettingsModule (ref), clientSettingsUtilityModule (ref)
 	local var19 = getSpringFromSettingsModule(p7.props.chatSettings, "transparency")
 	p7.transparencyMotor:setGoal(var19(p7.props.chatSettings.Transparency))
@@ -120,9 +120,9 @@ function blankBubble.fadeIn(p7) --[[ line: 143 ]]
 	p7.widthMotor:setGoal(getSpringFromSettingsModule(p7.props.chatSettings, "size")(p7.state.fullWidth))
 end
 
-function blankBubble.fadeOut(p8) --[[ line: 157 ]]
+function blankBubble.fadeOut(p8)
 	-- upvalues: getSpringFromSettingsModule (ref)
-	p8.transparencyMotor:onComplete(function() --[[ line: 158 ]]
+	p8.transparencyMotor:onComplete(function()
 		-- upvalues: p8 (ref)
 		if p8.props.onFadeOut then
 			p8.props.onFadeOut()
@@ -133,7 +133,7 @@ function blankBubble.fadeOut(p8) --[[ line: 157 ]]
 	p8.backgroundTransparencyMotor:setGoal(var20(1))
 end
 
-function blankBubble.didUpdate(p9, p10, p11) --[[ line: 169 ]]
+function blankBubble.didUpdate(p9, p10, p11)
 	-- upvalues: getSpringFromSettingsModule (ref)
 	if p10.fadingOut ~= p9.props.fadingOut then
 		if p9.props.fadingOut then
@@ -147,7 +147,7 @@ function blankBubble.didUpdate(p9, p10, p11) --[[ line: 169 ]]
 	end
 end
 
-function blankBubble.didMount(p12) --[[ line: 183 ]]
+function blankBubble.didMount(p12)
 	-- upvalues: getSpringFromSettingsModule (ref), clientSettingsUtilityModule (ref)
 	if not p12.props.fadingOut then
 		local var21 = getSpringFromSettingsModule(p12.props.chatSettings, "size")
@@ -158,7 +158,7 @@ function blankBubble.didMount(p12) --[[ line: 183 ]]
 	end
 end
 
-function blankBubble.willUnmount(p13) --[[ line: 199 ]]
+function blankBubble.willUnmount(p13)
 	p13.transparencyMotor:destroy()
 	p13.backgroundTransparencyMotor:destroy()
 	p13.widthMotor:destroy()

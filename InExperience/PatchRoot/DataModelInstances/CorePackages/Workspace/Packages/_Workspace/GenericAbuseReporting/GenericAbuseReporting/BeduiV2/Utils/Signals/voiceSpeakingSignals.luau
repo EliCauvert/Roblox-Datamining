@@ -3,13 +3,13 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local var2 = reactModule.createContext(nil)
 
-local function createVoiceSpeakingStore() --[[ line: 17 ]]
+local function createVoiceSpeakingStore()
 	-- upvalues: signalsModule (ref)
 	local var5, var6 = signalsModule.createSignal({})
 	local t = {}
 	local t_1 = {}
 	
-	local function _() --[[ line: 22 | named "pruneCache" ]]
+	local function _()
 		-- upvalues: t_1 (ref), t (ref)
 		local processTime = os.clock()
 		
@@ -22,19 +22,19 @@ local function createVoiceSpeakingStore() --[[ line: 17 ]]
 	end
 	
 	return {
-		getIsSpeaking = function(p0) --[[ line: 32 ]]
+		getIsSpeaking = function(p0)
 			-- upvalues: t_1 (ref), t (ref), signalsModule (copy), var5 (ref)
 			t_1[p0] = os.clock()
 			
 			if not t[p0] then
-				t[p0] = signalsModule.createComputed(function(p1) --[[ line: 35 ]]
+				t[p0] = signalsModule.createComputed(function(p1)
 					-- upvalues: var5 (copy), p0 (ref)
 					return var5(p1)[p0] == true
 				end)
 			end
 			return t[p0]
 		end,
-		setParticipants = function(value) --[[ line: 43 ]]
+		setParticipants = function(value)
 			-- upvalues: t_1 (ref), t (ref), var6 (ref)
 			local processTime = os.clock()
 			
@@ -49,7 +49,7 @@ local function createVoiceSpeakingStore() --[[ line: 17 ]]
 	}
 end
 
-local function buildParticipantsMap(p2) --[[ line: 54 ]]
+local function buildParticipantsMap(p2)
 	local t = {}
 	
 	for i, v in pairs(p2) do
@@ -59,7 +59,7 @@ local function buildParticipantsMap(p2) --[[ line: 54 ]]
 end
 
 return {
-	useVoiceSpeakingStore = function() --[[ line: 62 ]]
+	useVoiceSpeakingStore = function()
 		-- upvalues: reactModule (ref), var2 (ref), createVoiceSpeakingStore (ref), buildParticipantsMap (ref)
 		local var12 = reactModule.useContext(var2)
 		local var13 = reactModule.useRef(nil)
@@ -68,18 +68,18 @@ return {
 			var13.current = createVoiceSpeakingStore()
 		end
 		local current = var13.current
-		reactModule.useEffect(function() --[[ line: 71 ]]
+		reactModule.useEffect(function()
 			-- upvalues: var12 (ref), current (ref), buildParticipantsMap (copy)
 			if not var12 then return end
 			if var12.participants then
 				current.setParticipants(buildParticipantsMap(var12.participants))
 			end
-			local eventConnection = var12.participantsUpdate.Event:Connect(function(p3) --[[ line: 80 ]]
+			local eventConnection = var12.participantsUpdate.Event:Connect(function(p3)
 				-- upvalues: current (copy), buildParticipantsMap (copy)
 				current.setParticipants(buildParticipantsMap(p3))
 			end)
 			
-			return function() --[[ line: 84 ]]
+			return function()
 				-- upvalues: eventConnection (ref)
 				eventConnection:Disconnect()
 			end

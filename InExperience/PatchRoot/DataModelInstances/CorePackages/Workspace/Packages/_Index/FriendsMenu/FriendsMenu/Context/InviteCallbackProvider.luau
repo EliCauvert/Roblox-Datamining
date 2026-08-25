@@ -2,7 +2,7 @@
 local reactModule = require(parent.Parent.Parent.React)
 local inviteCallbackContextModule = require(parent.InviteCallbackContext)
 
-return function(p0) --[[ line: 14 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), inviteCallbackContextModule (ref)
 	return reactModule.createElement(inviteCallbackContextModule.Provider, {
 		value = {

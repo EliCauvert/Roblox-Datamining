@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsVideoSurfaceMediaRect", false)
 
-return function() --[[ line: 14 ]]
+return function()
 	return game:GetFastFlag("MomentsVideoSurfaceMediaRect")
 end

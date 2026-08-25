@@ -19,7 +19,7 @@ local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
 local sduiAssociatedItemsRowModule = require(serverDrivenUi.Content.SduiAssociatedItemsRow)
 local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "ExperienceAssociatedItemsRow" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), useDispatch (ref), game (ref), signalsReactModule (ref), reactModule (ref), getFFlagEdpPlayerFeedbackEnabled (ref), setCentralOverlay (ref), centralOverlayType (ref), sduiAssociatedItemsRowModule (ref), cryoModule (ref), gamePlayerFeedbackPrompt (ref)
 	local layoutOrder = p0.layoutOrder
 	local var11 = useTokens()
@@ -28,11 +28,11 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "ExperienceAssociated
 	local var13 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
 	local rootPlaceId = var13 and var13.rootPlaceId
 	local var15 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchUserVote(universeId).data)
-	local var16 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 49 ]]
+	local var16 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: rootPlaceId (ref), game (copy)
 		return if rootPlaceId then game.getUserVoteFeedbackMetadataStore(p1).getUserVoteFeedbackMetadata(rootPlaceId).data(p1) else nil
 	end, { rootPlaceId }))
-	local var17 = reactModule.useCallback(function() --[[ line: 66 ]]
+	local var17 = reactModule.useCallback(function()
 		-- upvalues: rootPlaceId (ref), game (copy)
 		if rootPlaceId then
 			game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)
@@ -55,7 +55,7 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "ExperienceAssociated
 		FeedbackPrompt = if getFFlagEdpPlayerFeedbackEnabled() and (var16 and var16.canSubmitReview) and rootPlaceId then reactModule.createElement(gamePlayerFeedbackPrompt, {
 			LayoutOrder = 2,
 			placeId = rootPlaceId,
-			onButtonClick = reactModule.useCallback(function() --[[ line: 74 ]]
+			onButtonClick = reactModule.useCallback(function()
 				-- upvalues: var16 (ref), var15 (ref), var12 (ref), setCentralOverlay (copy), centralOverlayType (copy), universeId (ref), var17 (ref)
 				if var16 and var16.canSubmitReview and var15 and (var15.userVote == true or var15.userVote == false) then
 					local t = { [true] = "Upvote", [false] = "Downvote" }

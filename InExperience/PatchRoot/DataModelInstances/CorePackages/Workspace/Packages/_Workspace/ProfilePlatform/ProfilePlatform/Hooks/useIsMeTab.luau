@@ -2,7 +2,7 @@
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
 local enumsModule = require(profilePlatform.Common.Enums)
 
-return function() --[[ line: 10 | named "useIsMeTab" ]]
+return function()
 	-- upvalues: useProfileWrapperContextModule (ref), enumsModule (ref)
 	return useProfileWrapperContextModule().headerVariant == enumsModule.ProfileTabVariants.MeTab
 end

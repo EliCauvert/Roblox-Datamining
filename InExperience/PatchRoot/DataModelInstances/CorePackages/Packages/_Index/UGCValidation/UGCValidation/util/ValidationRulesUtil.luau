@@ -17,17 +17,17 @@ local t = {
 		LeftLowerLeg = "LeftKneeRigAttachment",
 		LeftUpperLeg = "LeftHipRigAttachment"
 	},
-	getRules = function(p0) --[[ line: 36 ]]
+	getRules = function(p0)
 		-- upvalues: avatarCreationService (ref)
 		if not p0.rules then
 			p0.rules = avatarCreationService:GetValidationRules()
 		end
 		return p0.rules
 	end,
-	getBodyPartMaxTrianglesRule = function(a, b) --[[ line: 44 ]]
+	getBodyPartMaxTrianglesRule = function(a, b)
 		return a:getRules().MeshRules.BodyPartMaxTriangles[b]
 	end,
-	getMakeupRules = function(p1) --[[ line: 48 ]]
+	getMakeupRules = function(p1)
 		local makeupRules = p1:getRules().MakeupRules
 		local t = {}
 		
@@ -64,7 +64,7 @@ local t = {
 		
 		return t
 	end,
-	getAccessoryRules = function(p2, p3) --[[ line: 89 ]]
+	getAccessoryRules = function(p2, p3)
 		for i, v in p2:getRules().AccessoryRules do
 			local t = {
 				rigidAllowed = v.RigidAllowed,
@@ -81,7 +81,7 @@ local t = {
 	end
 }
 
-function t.getBodyPartRules(p4, p5) --[[ line: 107 ]]
+function t.getBodyPartRules(p4, p5)
 	-- upvalues: t (ref)
 	for i, v in p4:getRules().BodyPartRules do
 		local t_1 = { isBodyPart = true, bounds = {}, subParts = {} }
@@ -109,7 +109,7 @@ function t.getBodyPartRules(p4, p5) --[[ line: 107 ]]
 	end
 end
 
-function t.getFullBodyRulesBounds(p6) --[[ line: 150 ]]
+function t.getFullBodyRulesBounds(p6)
 	local t = {}
 	
 	for i, v in p6:getRules().FullBodyRules.Bounds do
@@ -118,7 +118,7 @@ function t.getFullBodyRulesBounds(p6) --[[ line: 150 ]]
 	return t
 end
 
-function t.getLCSizeLimit(_, p7, p8) --[[ line: 161 ]]
+function t.getLCSizeLimit(_, p7, p8)
 	-- upvalues: t (ref)
 	for i, v in t:getRules().AccessoryRules[p7].Attachments do
 		if p8:FindFirstChild(v.Name) then

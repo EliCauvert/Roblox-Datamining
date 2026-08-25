@@ -23,15 +23,15 @@ local networkContext = require(parent.EconomyCommonCoreScriptHooks).NetworkConte
 local fFlagLuaAppDefaultHttpRetry = require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
 local t = { themeName = "dark", fontName = "gotham" }
 
-local function _() --[[ line: 35 | named "createFocusNavigationService" ]]
+local function _()
 	-- upvalues: reactFocusNavigationModule (ref)
 	return reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl() --[[ line: 39 ]]
+local function createNetworkImpl()
 	-- upvalues: httpRequestModule (ref), fFlagLuaAppDefaultHttpRetry (ref)
 	return httpRequestModule.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 41 ]]
+		requestFunction = function(p0, p1, p2)
 			-- upvalues: httpRequestModule (copy)
 			return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
 		end,
@@ -39,12 +39,12 @@ local function createNetworkImpl() --[[ line: 39 ]]
 	})
 end
 
-local _ = function() --[[ line: 51 | named "createStore" ]]
+local _ = function()
 	-- upvalues: roduxModule (ref), cancelSubscriptionReducerModule (ref)
 	return roduxModule.Store.new(cancelSubscriptionReducerModule, nil, { roduxModule.makeThunkMiddleware() })
 end
 
-return function() --[[ line: 57 | named "renderCancelSubscriptionApp" ]]
+return function()
 	-- upvalues: coreGuiService (ref), roduxModule (ref), cancelSubscriptionReducerModule (ref), createNetworkImpl (ref), reactFocusNavigationModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), t (ref), networkContext (ref), roactRoduxModule (ref), designTokenProvider (ref), selectionCursorProvider (ref), cursorProvider (ref), provider (ref), cancelSubscriptionAppModule (ref), foundationModule (ref), reactRobloxModule (ref)
 	local cancelSubscriptionApp = Instance.new("Folder")
 	cancelSubscriptionApp.Name = "CancelSubscriptionApp"

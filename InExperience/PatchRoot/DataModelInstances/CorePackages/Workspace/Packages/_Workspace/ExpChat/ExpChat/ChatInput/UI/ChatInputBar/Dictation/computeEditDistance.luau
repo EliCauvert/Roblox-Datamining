@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 2 | named "computeEditDistance" ]]
+﻿return function(p0, p1)
 	if p0 == p1 then
 		return 0
 	end

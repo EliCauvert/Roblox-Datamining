@@ -4,7 +4,7 @@ local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
 local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
 local uploadCaptureAssetModule = require(coreScriptsPlayerFeedback.Utils.uploadCaptureAsset)
 
-return function() --[[ line: 25 | named "useCaptureUploads" ]]
+return function()
 	-- upvalues: reactModule (ref), getCaptureKeyModule (ref), uploadCaptureAssetModule (ref)
 	local var4, var5 = reactModule.useState({})
 	local var6 = reactModule.useRef({})
@@ -13,7 +13,7 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 	
 	return {
 		uploadStatuses = var4,
-		anyUploading = reactModule.useMemo(function() --[[ line: 34 ]]
+		anyUploading = reactModule.useMemo(function()
 			-- upvalues: var4 (ref)
 			for i, v in var4 do
 				if v.status == "uploading" then
@@ -22,7 +22,7 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 			end
 			return false
 		end, { var4 }),
-		hasNonModerationFailure = reactModule.useMemo(function() --[[ line: 43 ]]
+		hasNonModerationFailure = reactModule.useMemo(function()
 			-- upvalues: var4 (ref)
 			for i, v in var4 do
 				if v.status == "failed" and v.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then
@@ -31,7 +31,7 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 			end
 			return false
 		end, { var4 }),
-		onCapturesAdded = reactModule.useCallback(function(p0) --[[ line: 54 ]]
+		onCapturesAdded = reactModule.useCallback(function(p0)
 			-- upvalues: getCaptureKeyModule (copy), var4 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref), uploadCaptureAssetModule (copy)
 			local t = {}
 			
@@ -45,7 +45,7 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 					table.insert(t_1, v_1)
 				end
 			end
-			var5(function(p1) --[[ line: 68 ]]
+			var5(function(p1)
 				-- upvalues: t (ref), t_1 (ref), getCaptureKeyModule (copy), var6 (copy)
 				local t_2 = {}
 				
@@ -93,7 +93,7 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 					var8.current += 1
 					local current = var8.current
 					var7.current[var11] = current
-					task.spawn(function() --[[ line: 108 ]]
+					task.spawn(function()
 						-- upvalues: uploadCaptureAssetModule (copy), v_2 (ref), var7 (copy), var11 (ref), current (ref), var6 (copy), var5 (copy)
 						local var16, var17 = uploadCaptureAssetModule(v_2)
 						
@@ -110,7 +110,7 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 						if if var16 == nil then var17 == Enum.UploadCaptureResult.CaptureModerated else true then
 							var6.current[var11] = t
 						end
-						var5(function(p2) --[[ line: 125 ]]
+						var5(function(p2)
 							-- upvalues: var11 (copy), v_2 (copy), t (ref)
 							if p2[var11] then
 								local cloned = table.clone(p2)
@@ -130,9 +130,9 @@ return function() --[[ line: 25 | named "useCaptureUploads" ]]
 				end
 			end
 		end, { var4 }),
-		onCaptureRemoved = reactModule.useCallback(function(p3) --[[ line: 143 ]]
+		onCaptureRemoved = reactModule.useCallback(function(p3)
 			-- upvalues: var5 (ref)
-			var5(function(p4) --[[ line: 144 ]]
+			var5(function(p4)
 				-- upvalues: p3 (ref)
 				local cloned = table.clone(p4)
 				cloned[p3] = nil

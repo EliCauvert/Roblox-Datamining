@@ -2,21 +2,21 @@
 local updateFetchingStatus = require(http.Actions).UpdateFetchingStatus
 local batchUpdateFetchingStatus = require(http.Actions).BatchUpdateFetchingStatus
 
-return function(p0) --[[ line: 5 | named "createPerformFetchMiddleware" ]]
+return function(p0)
 	-- upvalues: batchUpdateFetchingStatus (ref), updateFetchingStatus (ref)
 	local t = {}
 	local var2 = false
 	p0 = p0 or 0
 	
-	return function(p1, p2) --[[ line: 10 ]]
+	return function(p1, p2)
 		-- upvalues: var2 (write), p0 (ref), t (write), batchUpdateFetchingStatus (copy), updateFetchingStatus (copy)
-		local function _() --[[ line: 11 | named "runBatchDispatcher" ]]
+		local function _()
 			-- upvalues: var2 (copy), p0 (copy), t (copy), p2 (ref), batchUpdateFetchingStatus (copy)
 			if var2 then
 				return
 			end
 			var2 = true
-			task.delay(p0, function() --[[ line: 17 ]]
+			task.delay(p0, function()
 				-- upvalues: t (copy), var2 (copy), p2 (copy), batchUpdateFetchingStatus (copy)
 				t = {}
 				var2 = false
@@ -24,14 +24,14 @@ return function(p0) --[[ line: 5 | named "createPerformFetchMiddleware" ]]
 			end)
 		end
 		
-		return function(p3) --[[ line: 26 ]]
+		return function(p3)
 			-- upvalues: updateFetchingStatus (copy), t (copy), var2 (copy), p0 (copy), p2 (ref), batchUpdateFetchingStatus (copy), p1 (ref)
 			if p3.type == updateFetchingStatus.name then
 				table.insert(t, p3)
 				
 				if not var2 then
 					var2 = true
-					task.delay(p0, function() --[[ line: 17 ]]
+					task.delay(p0, function()
 						-- upvalues: t (copy), var2 (copy), p2 (copy), batchUpdateFetchingStatus (copy)
 						t = {}
 						var2 = false
@@ -46,7 +46,7 @@ return function(p0) --[[ line: 5 | named "createPerformFetchMiddleware" ]]
 			end
 			if not var2 then
 				var2 = true
-				task.delay(p0, function() --[[ line: 17 ]]
+				task.delay(p0, function()
 					-- upvalues: t (copy), var2 (copy), p2 (copy), batchUpdateFetchingStatus (copy)
 					t = {}
 					var2 = false

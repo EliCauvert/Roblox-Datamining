@@ -2,7 +2,7 @@
 local outfitDetailsTopBarModule = require(script.Parent.OutfitDetailsTopBar)
 local useOutfitDetailsTopBarPropsModule = require(script.Parent.useOutfitDetailsTopBarProps)
 
-return function(p0) --[[ line: 9 | named "OutfitDetailsTopBarContainer" ]]
+return function(p0)
 	-- upvalues: useOutfitDetailsTopBarPropsModule (ref), reactModule (ref), outfitDetailsTopBarModule (ref)
 	return reactModule.createElement(outfitDetailsTopBarModule, useOutfitDetailsTopBarPropsModule(p0))
 end

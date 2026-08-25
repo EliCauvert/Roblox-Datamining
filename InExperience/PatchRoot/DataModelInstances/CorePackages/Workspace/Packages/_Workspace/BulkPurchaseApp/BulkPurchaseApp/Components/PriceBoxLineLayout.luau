@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local view = require(parent.Foundation).View
 
-return function(p0) --[[ line: 13 | named "PriceBoxLineLayout" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-large size-full-0 auto-y",

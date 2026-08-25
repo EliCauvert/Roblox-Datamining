@@ -17,7 +17,7 @@ local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local useSignalState = signalsReactModule.useSignalState
 local SCRUB_FADE_SECONDS = momentContextModule.SCRUB_FADE_SECONDS
 
-return reactModule.memo(function(p0) --[[ line: 37 | named "PreviewPopover" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: useTokens (ref), momentContextModule (ref), useScreenSize (ref), useDeviceInsets (ref), reactUtilsModule (ref), useSignalState (ref), reactModule (ref), useVideoScrubPreviewModule (ref), SCRUB_FADE_SECONDS (ref), previewPopoverMathModule (ref), view (ref), videoPreviewModule (ref), timeLabelModule (ref)
 	local createElement_1
 	local var10 = useTokens()
@@ -27,12 +27,12 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "PreviewPopover" ]]
 	local var14 = reactUtilsModule.createNextOrder()
 	local controller = var11.controller
 	local var15 = useSignalState(var11.store.getIsScrubbing)
-	local var16 = useVideoScrubPreviewModule(reactModule.useMemo(function() --[[ line: 47 ]]
+	local var16 = useVideoScrubPreviewModule(reactModule.useMemo(function()
 		-- upvalues: controller (ref)
 		return if controller == nil then nil else controller.getVideoPreviewSource()
 	end, { controller }), var15, var11.store.getScrubPosition)
 	local var17, var18 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 55 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var15 (ref), var18 (ref), SCRUB_FADE_SECONDS (copy)
 		if var15 then
 			var18(true)
@@ -40,14 +40,14 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "PreviewPopover" ]]
 			return
 		end
 		local var28 = false
-		task.delay(SCRUB_FADE_SECONDS, function() --[[ line: 61 ]]
+		task.delay(SCRUB_FADE_SECONDS, function()
 			-- upvalues: var28 (write), var18 (copy)
 			if not var28 then
 				var18(false)
 			end
 		end)
 		
-		return function() --[[ line: 66 ]]
+		return function()
 			-- upvalues: var28 (write)
 			var28 = true
 		end
@@ -56,14 +56,14 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "PreviewPopover" ]]
 	local var20 = reactModule.useRef(nil)
 	local var21, var22 = reactModule.useBinding({ position = 0, width = 0 })
 	local var23, var24 = reactModule.useBinding(0)
-	reactModule.useEffect(function() --[[ line: 80 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var19 (ref), var22 (ref)
 		local current = var19.current
 		
 		if current == nil then
 			return
 		end
-		local function update() --[[ line: 86 ]]
+		local function update()
 			-- upvalues: var22 (copy), current (ref)
 			var22({
 				position = current.AbsolutePosition.X,
@@ -78,20 +78,20 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "PreviewPopover" ]]
 		local var30 = current:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
 		local var31 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function() --[[ line: 96 ]]
+		return function()
 			-- upvalues: var30 (ref), var31 (ref)
 			var30:Disconnect()
 			var31:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 104 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), var24 (ref)
 		local current = var20.current
 		
 		if current == nil then
 			return
 		end
-		local function update() --[[ line: 110 ]]
+		local function update()
 			-- upvalues: var24 (copy), current (ref)
 			var24(current.AbsoluteSize.X)
 		end
@@ -99,13 +99,13 @@ return reactModule.memo(function(p0) --[[ line: 37 | named "PreviewPopover" ]]
 		var24(current.AbsoluteSize.X)
 		local var33 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function() --[[ line: 116 ]]
+		return function()
 			-- upvalues: var33 (ref)
 			var33:Disconnect()
 		end
 	end, { var17 })
 	local size100 = var10.Size.Size_100
-	local var25 = reactModule.joinBindings({ p0.progressRatio, var21, var23 }):map(function(p1) --[[ line: 124 ]]
+	local var25 = reactModule.joinBindings({ p0.progressRatio, var21, var23 }):map(function(p1)
 		-- upvalues: previewPopoverMathModule (copy), var12 (ref), var13 (ref), size100 (ref), var10 (ref)
 		local var34 = p1[2]
 		

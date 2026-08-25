@@ -32,7 +32,7 @@ local t = {
 	Marketing = iconName.Wallet
 }
 
-local function getDisplayGroups(p0) --[[ line: 53 ]]
+local function getDisplayGroups(p0)
 	-- upvalues: list (ref)
 	local t = {}
 	
@@ -59,22 +59,22 @@ local function getDisplayGroups(p0) --[[ line: 53 ]]
 	return t_1
 end
 
-local function _(p1) --[[ line: 81 | named "getStatusText" ]]
+local function _(p1)
 	-- upvalues: localizationStringsModule (ref)
 	return if #p1.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif p1.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#p1.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
 end
 
-local function AgentTaskList(p2) --[[ line: 99 ]]
+local function AgentTaskList(p2)
 	-- upvalues: reactModule (ref), scrollView (ref), scrollBarVisibility (ref), view (ref), stateLayerAffordance (ref)
 	local var14, var15 = reactModule.useBinding(0)
 	
 	return reactModule.createElement(scrollView, {
 		tag = "shrink",
 		LayoutOrder = p2.LayoutOrder,
-		Size = var14:map(function(p3) --[[ line: 101 ]]
+		Size = var14:map(function(p3)
 			return UDim2.new(1, 0, 0, p3)
 		end),
-		onAbsoluteCanvasSizeChanged = reactModule.useCallback(function(p4) --[[ line: 104 ]]
+		onAbsoluteCanvasSizeChanged = reactModule.useCallback(function(p4)
 			-- upvalues: var15 (ref)
 			var15(p4.AbsoluteCanvasSize.Y)
 		end, { var15 }),
@@ -99,7 +99,7 @@ local function AgentTaskList(p2) --[[ line: 99 ]]
 	})
 end
 
-local function AgentCard(p5) --[[ line: 145 ]]
+local function AgentCard(p5)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), AgentTaskList (ref)
 	local group = p5.group
 	local var16 = if fFlagBuildLocalization then useLocalization({
@@ -112,7 +112,7 @@ local function AgentCard(p5) --[[ line: 145 ]]
 	}) else nil
 	local var17 = if fFlagBuildLocalization then if #group.tasks == 0 then var16.notStarted elseif group.isComplete then var16.completedTasks else var16.building elseif #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
 	local name = t[group.name]
-	local var18 = reactModule.useCallback(function() --[[ line: 170 ]]
+	local var18 = reactModule.useCallback(function()
 		-- upvalues: p5 (ref), group (ref)
 		p5.onAgentActivated(group)
 	end, { p5.onAgentActivated, group })
@@ -175,7 +175,7 @@ local function AgentCard(p5) --[[ line: 145 ]]
 	})
 end
 
-return reactModule.memo(function(p6) --[[ line: 239 | named "AgentsList" ]]
+return reactModule.memo(function(p6)
 	-- upvalues: useTokens (ref), useScaledValue (ref), getDisplayGroups (ref), reactModule (ref), AgentCard (ref), view (ref)
 	local var20 = useTokens()
 	local var21 = useScaledValue(156)

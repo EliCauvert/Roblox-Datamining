@@ -5,9 +5,9 @@ local _ = require(script.Parent.Parent.types)
 local _ = require(timeToInteractiveTracker.Milestones.types)
 local constantsModule = require(timeToInteractiveTracker.Milestones.constants)
 
-return function(p0, p1) --[[ line: 35 ]]
+return function(p0, p1)
 	-- upvalues: fFlagDebugTimeToInteractiveTrackerModule (ref), name (ref), constantsModule (ref)
-	return function(p2, p3) --[[ line: 36 ]]
+	return function(p2, p3)
 		-- upvalues: p0 (ref), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), constantsModule (copy), p1 (ref)
 		if #p3 == 0 then return end
 		local var4 = p0(false)[p2]
@@ -19,7 +19,7 @@ return function(p0, p1) --[[ line: 35 ]]
 		local startTime = var4.startTime
 		local subphase = constantsModule.DataProcessingCompleted.Subphase
 		
-		local function materializeSubphases(p4) --[[ line: 63 ]]
+		local function materializeSubphases(p4)
 			-- upvalues: startTime (ref), subphase (ref)
 			if p4 == nil then
 				return nil
@@ -44,7 +44,7 @@ return function(p0, p1) --[[ line: 35 ]]
 				subphases = materializeSubphases(v.subphases)
 			})
 		end
-		p1(function(p5) --[[ line: 110 ]]
+		p1(function(p5)
 			-- upvalues: p2 (ref), t (ref)
 			local var9 = p5[p2]
 			

@@ -1,7 +1,7 @@
 ﻿local element = require(script:FindFirstAncestor("Packages").Dev.Rhodium).Element
 local findFirstInstanceModule = require(script.Parent.findFirstInstance)
 
-return function(p0, p1) --[[ line: 12 ]]
+return function(p0, p1)
 	-- upvalues: findFirstInstanceModule (ref), element (ref)
 	local var1 = findFirstInstanceModule(p0, p1)
 	

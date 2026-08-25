@@ -33,7 +33,7 @@ t.DiagCounters = {
 	}
 }
 
-function t.new() --[[ line: 47 ]]
+function t.new()
 	-- upvalues: t (ref)
 	local t_1 = {
 		_eventStreamImpl = nil,
@@ -45,25 +45,25 @@ function t.new() --[[ line: 47 ]]
 	return t_1
 end
 
-function t:withEventStream(p0) --[[ line: 58 ]]
+function t:withEventStream(p0)
 	self._eventStreamImpl = p0
 	
 	return self
 end
 
-function t:withDiag(p1) --[[ line: 63 ]]
+function t:withDiag(p1)
 	self._diagImpl = p1
 	
 	return self
 end
 
-function t:withButtonName(p2) --[[ line: 68 ]]
+function t:withButtonName(p2)
 	self._buttonName = p2
 	
 	return self
 end
 
-function t:onActivatedInviteSent(_, p3, p4, p5, p6) --[[ line: 73 ]]
+function t:onActivatedInviteSent(_, p3, p4, p5, p6)
 	-- upvalues: t (ref)
 	local var6, var7
 	local buttonName = self:_getButtonName()
@@ -94,7 +94,7 @@ function t:onActivatedInviteSent(_, p3, p4, p5, p6) --[[ line: 73 ]]
 	end
 end
 
-function t:inputShareGameEntryPoint(p7, p8) --[[ line: 105 ]]
+function t:inputShareGameEntryPoint(p7, p8)
 	-- upvalues: t (ref)
 	local var11, var12
 	local buttonName = self:_getButtonName()
@@ -118,7 +118,7 @@ function t:inputShareGameEntryPoint(p7, p8) --[[ line: 105 ]]
 	end
 end
 
-function t:linkGenerated(p9) --[[ line: 133 ]]
+function t:linkGenerated(p9)
 	-- upvalues: t (ref)
 	self:_getEventStream():setRBXEventStream("shareLinks", t.EventName.LinkGenerated, {
 		page = "inGameMenu",
@@ -128,7 +128,7 @@ function t:linkGenerated(p9) --[[ line: 133 ]]
 	})
 end
 
-function t:onShareButtonClick(p10) --[[ line: 145 ]]
+function t:onShareButtonClick(p10)
 	-- upvalues: t (ref)
 	self:_getEventStream():setRBXEventStream("shareLinks", t.EventName.ShareButtonClick, {
 		btn = "shareServerInviteLink",
@@ -139,7 +139,7 @@ function t:onShareButtonClick(p10) --[[ line: 145 ]]
 	})
 end
 
-function t:onSearchFocused() --[[ line: 158 ]]
+function t:onSearchFocused()
 	-- upvalues: t (ref)
 	local inviteSearchFocused = t.EventName.InviteSearchFocused
 	local var14 = "inGame"
@@ -156,7 +156,7 @@ function t:onSearchFocused() --[[ line: 158 ]]
 	self:_getEventStream():setRBXEventStream(var14, inviteSearchFocused, t_1)
 end
 
-function t:sendEvent(p11, p12, p13) --[[ line: 173 ]]
+function t:sendEvent(p11, p12, p13)
 	-- upvalues: cryoModule (ref)
 	local join = cryoModule.Dictionary.join
 	join = join(p12.Args, {
@@ -169,7 +169,7 @@ function t:sendEvent(p11, p12, p13) --[[ line: 173 ]]
 	self:_getEventStream():setRBXEventStream(p11, p12.Type, join)
 end
 
-function t:sendGameInviteModalEvent(p14, p15) --[[ line: 187 ]]
+function t:sendGameInviteModalEvent(p14, p15)
 	-- upvalues: cryoModule (ref), t (ref)
 	local t_1 = {
 		place_id = if self:_getIsUniversalApp() and p15 and p15.place_id then p15.place_id else game.PlaceId
@@ -181,25 +181,25 @@ function t:sendGameInviteModalEvent(p14, p15) --[[ line: 187 ]]
 	self:_getEventStream():setRBXEventStream(p14, t.EventName.GameInviteModal, t_1)
 end
 
-function t:_getEventStream() --[[ line: 201 ]]
+function t:_getEventStream()
 	assert(self._eventStreamImpl, "EventStream implementation not found. Did you forget to construct withEventStream?")
 	
 	return self._eventStreamImpl
 end
 
-function t:_getDiag() --[[ line: 206 ]]
+function t:_getDiag()
 	assert(self._diagImpl, "Diag implementation not found. Did you forget to construct withDiag?")
 	
 	return self._diagImpl
 end
 
-function t:_getButtonName() --[[ line: 211 ]]
+function t:_getButtonName()
 	assert(self._buttonName, "ButtonName not found. Did you forget to construct withButtonName?")
 	
 	return self._buttonName
 end
 
-function t:_getIsUniversalApp() --[[ line: 216 ]]
+function t:_getIsUniversalApp()
 	-- upvalues: t (ref)
 	assert(self._buttonName, "ButtonName not found. Did you forget to construct withButtonName?")
 	

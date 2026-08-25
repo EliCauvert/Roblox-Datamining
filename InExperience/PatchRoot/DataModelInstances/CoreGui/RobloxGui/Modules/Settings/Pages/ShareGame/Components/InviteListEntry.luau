@@ -22,17 +22,17 @@ local getFIntThrottleInviteSendEndpointDelayModule = require(modules.Flags.GetFI
 local getFFlagLuaAppEnableOpenTypeSupport = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local rect = Rect.new(10, 10, 10, 10)
 
-return function(p0) --[[ line: 64 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), inviteStatus (ref), playersService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), rect (ref), themeModule (ref), reactRobloxModule (ref), singleUserThumbnailModule (ref), presenceUtilModule (ref), constants (ref), appFonts (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), inviteButtonModule (ref)
 	local user = p0.user
-	local var15 = reactModule.useCallback(function() --[[ line: 66 ]]
+	local var15 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), inviteStatus (copy), user (ref), playersService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), gameInviteEvents (copy), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy)
 		local inviteUser = p0.inviteUser
 		local inviteStatus_1 = p0.inviteStatus
 		local analytics = p0.analytics
 		
 		if inviteStatus_1 and inviteStatus_1 ~= inviteStatus.Failed then return end
-		local var16 = function(p1) --[[ line: 74 ]]
+		local var16 = function(p1)
 			-- upvalues: user (copy), playersService (copy), analytics (ref)
 			if not p1 then return end
 			local list = { user.id }
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 64 ]]
 		end
 		
 		if not getFFlagEnableNewInviteSendEndpointModule() then
-			inviteUser(user.id):andThen(var16, function() --[[ line: 100 ]] end)
+			inviteUser(user.id):andThen(var16, function() end)
 			
 			return
 		end
@@ -51,7 +51,7 @@ return function(p0) --[[ line: 64 ]]
 			recipient = user.id,
 			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p0.launchData ~= nil and p0.launchData ~= "" else nil
 		})
-		inviteUser(user.id, analytics, p0.trigger, p0.inviteMessageId, p0.launchData):andThen(var16, function() --[[ line: 97 ]] end)
+		inviteUser(user.id, analytics, p0.trigger, p0.inviteMessageId, p0.launchData):andThen(var16, function() end)
 	end, { p0.inviteUser, p0.inviteStatus, p0.analytics, user })
 	
 	if getFFlagThrottleInviteSendEndpointModule() then

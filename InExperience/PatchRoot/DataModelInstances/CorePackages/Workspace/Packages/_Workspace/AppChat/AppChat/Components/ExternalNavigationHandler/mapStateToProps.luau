@@ -1,4 +1,4 @@
-﻿return function(p0, _) --[[ line: 1 ]]
+﻿return function(p0, _)
 	return {
 		screen = p0.ChatAppReducer.ExternalNavigationRequest.screen,
 		params = p0.ChatAppReducer.ExternalNavigationRequest.params,

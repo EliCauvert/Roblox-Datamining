@@ -11,7 +11,7 @@ local inputLabelSize = foundationModule.Enums.InputLabelSize
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 
-local function createButtons(p0, p1, p2, p3, p4) --[[ line: 30 ]]
+local function createButtons(p0, p1, p2, p3, p4)
 	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), inputLabel (ref), inputLabelSize (ref), icon (ref), iconSize (ref)
 	local var4 = useTokens()
 	local t = {}
@@ -19,7 +19,7 @@ local function createButtons(p0, p1, p2, p3, p4) --[[ line: 30 ]]
 	
 	for i, v in pairs(p0) do
 		local var8, var9 = reactModule.useState(false)
-		local var10 = reactModule.useCallback(function() --[[ line: 43 ]]
+		local var10 = reactModule.useCallback(function()
 			-- upvalues: var7 (ref), v (ref), p2 (ref), p3 (ref), p1 (ref), var9 (ref)
 			var7(v.value)
 			p2(v.value, v.text)
@@ -32,7 +32,7 @@ local function createButtons(p0, p1, p2, p3, p4) --[[ line: 30 ]]
 		table.insert(t, reactModule.createElement(view, { tag = "auto-xy col gap-xsmall padding-bottom-xsmall" }, {
 			ButtonContainer = reactModule.createElement(view, {
 				tag = "size-full-0 auto-y radius-medium row flex-between",
-				onStateChanged = reactModule.useCallback(function(p5) --[[ line: 52 ]]
+				onStateChanged = reactModule.useCallback(function(p5)
 					-- upvalues: controlState (copy), var9 (ref)
 					if p5 == controlState.Hover or p5 == controlState.Pressed then
 						var9(true)
@@ -74,25 +74,25 @@ local function createButtons(p0, p1, p2, p3, p4) --[[ line: 30 ]]
 	return t
 end
 
-return function(p6) --[[ line: 112 | named "ButtonList" ]]
+return function(p6)
 	-- upvalues: reactModule (ref), cryoModule (ref), useLocalization (ref), createButtons (ref), view (ref)
-	local var11 = useLocalization(reactModule.useMemo(function() --[[ line: 113 ]]
+	local var11 = useLocalization(reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), p6 (ref)
-		return cryoModule.Dictionary.map(p6.options, function(p7) --[[ line: 114 ]]
+		return cryoModule.Dictionary.map(p6.options, function(p7)
 			return p7.localizationKey, p7.value
 		end)
 	end))
 	
 	return reactModule.createElement(view, { tag = "size-full col" }, {
-		createButtons(reactModule.useMemo(function() --[[ line: 128 ]]
+		createButtons(reactModule.useMemo(function()
 			-- upvalues: cryoModule (copy), p6 (ref), var11 (ref)
-			return cryoModule.List.map(p6.options, function(p8) --[[ line: 129 ]]
+			return cryoModule.List.map(p6.options, function(p8)
 				-- upvalues: var11 (copy)
 				return { text = var11[p8.value] or "", value = p8.value }
 			end)
-		end, { p6.options, var11 }), useLocalization(reactModule.useMemo(function() --[[ line: 119 ]]
+		end, { p6.options, var11 }), useLocalization(reactModule.useMemo(function()
 			-- upvalues: cryoModule (copy), p6 (ref)
-			return cryoModule.Dictionary.map(p6.options, function(p9) --[[ line: 120 ]]
+			return cryoModule.Dictionary.map(p6.options, function(p9)
 				return p9.descriptionLocalizationKey, p9.value
 			end)
 		end)), p6.onSelected, p6.setDescription, p6.defaultValue)

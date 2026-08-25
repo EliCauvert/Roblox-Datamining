@@ -8,7 +8,7 @@ local propTypesModule = require(script.Parent.prop_types)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 106 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		hidden = if p0 == nil or p0.hidden == nil then nil else p0.hidden,
@@ -16,7 +16,7 @@ function t_1.new(p0) --[[ line: 106 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 113 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var11 = 0
@@ -41,7 +41,7 @@ function t_1:encode() --[[ line: 113 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 134 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), propTypesModule (ref)
 	local var19 = t_1.new()
 	local var20 = 0
@@ -93,7 +93,7 @@ function t_1.decode(p1) --[[ line: 134 ]]
 	return var19
 end
 
-function t_1:jsonEncode() --[[ line: 182 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.hidden ~= nil then
@@ -105,7 +105,7 @@ function t_1:jsonEncode() --[[ line: 182 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 196 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), propTypesModule (ref)
 	local var39 = t_1.new()
 	
@@ -127,7 +127,7 @@ typeRegistryModule.default:register(t.AccessibilityProps)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 224 ]]
+function t_2.new(p2)
 	-- upvalues: uiComponentTypeModule (ref), t_2 (ref)
 	return setmetatable({
 		component_type = if p2 == nil or p2.component_type == nil then assert(uiComponentTypeModule.UiComponentType.fromNumber(0), "Enum has no 0 default") else p2.component_type,
@@ -138,7 +138,7 @@ function t_2.new(p2) --[[ line: 224 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 241 ]]
+function t_2:encode()
 	-- upvalues: uiComponentTypeModule (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var41 = 0
@@ -193,7 +193,7 @@ function t_2:encode() --[[ line: 241 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 302 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), uiComponentTypeModule (ref), hydrationDataSpecModule (ref), t (ref), analyticsDataModule (ref), propTypesModule (ref)
 	local var62 = t_2.new()
 	local var63 = 0
@@ -263,7 +263,7 @@ function t_2.decode(p3) --[[ line: 302 ]]
 	return var62
 end
 
-function t_2:jsonEncode() --[[ line: 379 ]]
+function t_2:jsonEncode()
 	-- upvalues: uiComponentTypeModule (ref)
 	local t = {}
 	
@@ -295,7 +295,7 @@ function t_2:jsonEncode() --[[ line: 379 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 424 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), uiComponentTypeModule (ref), hydrationDataSpecModule (ref), analyticsDataModule (ref), propTypesModule (ref), t (ref)
 	local var91 = t_2.new()
 	
@@ -350,7 +350,7 @@ typeRegistryModule.default:register(t.ComponentShared)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 510 ]]
+function t_3.new(p4)
 	-- upvalues: t_3 (ref)
 	return setmetatable({
 		key = if p4 == nil or p4.key == nil then "" else p4.key,
@@ -358,7 +358,7 @@ function t_3.new(p4) --[[ line: 510 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 519 ]]
+function t_3:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var96 = 0
@@ -382,7 +382,7 @@ function t_3:encode() --[[ line: 519 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 539 ]]
+function t_3.decode(p5)
 	-- upvalues: t_3 (ref), protoModule (ref), analyticsDataModule (ref)
 	local var103 = t_3.new()
 	local var104 = 0
@@ -434,7 +434,7 @@ function t_3.decode(p5) --[[ line: 539 ]]
 	return var103
 end
 
-function t_3:jsonEncode() --[[ line: 587 ]]
+function t_3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -446,7 +446,7 @@ function t_3:jsonEncode() --[[ line: 587 ]]
 	return t
 end
 
-function t_3:jsonDecode() --[[ line: 601 ]]
+function t_3:jsonDecode()
 	-- upvalues: t_3 (ref), analyticsDataModule (ref)
 	local var123 = t_3.new()
 	

@@ -35,7 +35,7 @@ local getFFlagInExperienceContainerRespectUserTheme = require(parent.SharedFlags
 local fFlagUseSignalsForCountryCodeList = require(parent.SharedFlags).FFlagUseSignalsForCountryCodeList
 local t = { reducer = {} }
 
-return function(p0) --[[ line: 54 | named "InExperienceProviderContainer" ]]
+return function(p0)
 	-- upvalues: useSelectedTheme (ref), cryoModule (ref), t (ref), reactModule (ref), roduxModule (ref), fFlagUseSignalsForCountryCodeList (ref), countryCodeList (ref), fetchingStatus (ref), getFFlagInExperienceContainerScreenSizeReducer (ref), var11 (ref), styleProviderWithDefaultTheme (ref), getFFlagInExperienceContainerRespectUserTheme (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), roactAppPolicy (ref), appFeaturePolicies (ref), roactServices (ref), roactAnalytics (ref), analytics (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), appLinking (ref), getFFlagInExperienceContainerAppLinking (ref), linkingProtocol (ref), selectionCursorProvider (ref), cursorProvider (ref), providerContainer (ref), openWebviewModule (ref)
 	local isNotLight
 	local var13 = useSelectedTheme()
@@ -45,10 +45,10 @@ return function(p0) --[[ line: 54 | named "InExperienceProviderContainer" ]]
 		CountryCodeList = if fFlagUseSignalsForCountryCodeList then nil else countryCodeList,
 		FetchingStatus = fetchingStatus,
 		ScreenSize = if getFFlagInExperienceContainerScreenSizeReducer() then roduxModule.createReducer(Vector2.new(400, 400), {
-			[var11.name] = function(_, p1) --[[ line: 69 ]]
+			[var11.name] = function(_, p1)
 				return p1.screenSize
 			end
-		}) else function(_, _) --[[ line: 73 ]]
+		}) else function(_, _)
 			return Vector2.new(400, 400)
 		end
 	}, var14.reducer)), nil, { roduxModule.thunkMiddleware })

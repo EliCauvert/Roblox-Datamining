@@ -19,7 +19,7 @@ local inExperienceProviderContainer = require(parent.InExperienceContainer).InEx
 local inGameUpsellContainerModule = require(phoneUpsell.Components.InGame.InGameUpsellContainer)
 local var7 = nil
 
-local var8 = function(p0) --[[ line: 29 ]]
+local var8 = function(p0)
 	-- upvalues: useLocalization (ref), useStyle (ref), reactModule (ref), toast (ref), images (ref)
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		PhoneToast = reactModule.createElement(toast, {
@@ -40,7 +40,7 @@ local var8 = function(p0) --[[ line: 29 ]]
 end
 
 return {
-	openPhoneUpsell = function(p1) --[[ line: 54 ]]
+	openPhoneUpsell = function(p1)
 		-- upvalues: var7 (write), reactRobloxModule (ref), openModal (ref), inExperienceProviderContainer (ref), reactModule (ref), inGameUpsellContainerModule (ref), cryoModule (ref), closeModal (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), var8 (ref), getFFlagNotificationModalSetMenuIsOpen (ref)
 		if var7 == nil then
 			local phoneUpsellToasts = Instance.new("Folder")
@@ -52,7 +52,7 @@ return {
 			DisableBackgroundDismiss = true,
 			Props = {
 				children = reactModule.createElement(inGameUpsellContainerModule, cryoModule.Dictionary.join(p1, {
-					closeUpsell = function() --[[ line: 66 ]]
+					closeUpsell = function()
 						-- upvalues: closeModal (copy), p1 (ref)
 						closeModal("PHONE_UPSELL_KEY")
 						
@@ -60,7 +60,7 @@ return {
 							p1.closeUpsell()
 						end
 					end,
-					onSuccess = function() --[[ line: 72 ]]
+					onSuccess = function()
 						-- upvalues: closeModal (copy), p1 (ref), var7 (copy), reactModule (copy), localizationProvider (copy), localization (copy), localizationService (copy), styleProviderWithDefaultTheme (copy), var8 (copy)
 						closeModal("PHONE_UPSELL_KEY")
 						
@@ -81,7 +81,7 @@ return {
 									StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, {}, {
 										Frame = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 											Toast = reactModule.createElement(var8, {
-												onDismissed = function() --[[ line: 97 ]]
+												onDismissed = function()
 													-- upvalues: p1 (copy), var7 (copy)
 													if p1.onSuccess then
 														p1.onSuccess()

@@ -7,13 +7,13 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-local function constantSource() --[[ line: 29 ]]
+local function constantSource()
 	return 0
 end
 
-return function(p0) --[[ line: 33 | named "ChatActionsRow" ]]
+return function(p0)
 	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	local var4 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 34 ]]
+	local var4 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1)
 		-- upvalues: p0 (ref), constantSource (copy)
 		if p0.getIsComposerEmpty ~= nil then
 			return p0.getIsComposerEmpty(p1)
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 33 | named "ChatActionsRow" ]]
 		size = inputSize.Small,
 		variant = if var5 then buttonVariant.Standard elseif not var4 then buttonVariant.Emphasis else buttonVariant.Standard,
 		isDisabled = not var5 and (var4 or p0.isSendDisabled == true),
-		onActivated = function() --[[ line: 59 ]]
+		onActivated = function()
 			-- upvalues: var5 (ref), p0 (ref)
 			if var5 then
 				p0.onStop()

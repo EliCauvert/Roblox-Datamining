@@ -5,7 +5,7 @@ local _ = require(timeToInteractiveTracker.Milestones.types)
 local fFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
 
 return {
-	findLastMilestoneIndex = function(p0, p1) --[[ line: 33 ]]
+	findLastMilestoneIndex = function(p0, p1)
 		for i = #p0, 1, -1 do
 			if p0[i].name ~= p1 then
 				continue
@@ -14,7 +14,7 @@ return {
 		end
 		return nil
 	end,
-	deepCloneMilestones = function(p2) --[[ line: 42 ]]
+	deepCloneMilestones = function(p2)
 		local cloned = table.clone(p2)
 		
 		for i, v in cloned do
@@ -40,16 +40,16 @@ return {
 		end
 		return cloned
 	end,
-	encodeMilestonesJSON = function(p3) --[[ line: 65 ]]
+	encodeMilestonesJSON = function(p3)
 		-- upvalues: httpService (ref)
-		local ok, status = pcall(function() --[[ line: 66 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpService (copy), p3 (ref)
 			return httpService:JSONEncode(p3)
 		end)
 		
 		return if ok then status else nil
 	end,
-	milestonesToProto = function(p4) --[[ line: 81 ]]
+	milestonesToProto = function(p4)
 		local t = {}
 		
 		for i, v in p4 do
@@ -92,7 +92,7 @@ return {
 		end
 		return t
 	end,
-	generateMilestoneStats = function(p5, p6) --[[ line: 150 ]]
+	generateMilestoneStats = function(p5, p6)
 		-- upvalues: fFlagTTITrackerMemoryTrackingModule (ref)
 		local t = {}
 		

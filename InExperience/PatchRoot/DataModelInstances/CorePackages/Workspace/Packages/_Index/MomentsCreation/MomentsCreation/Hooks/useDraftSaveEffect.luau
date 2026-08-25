@@ -8,12 +8,12 @@ local momentsDraftStorageModule = require(momentsCreation.Storage.MomentsDraftSt
 local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
 local eventNames = momentsCommonModule.Analytics.EventNames
 
-return function() --[[ line: 23 | named "useDraftSaveEffect" ]]
+return function()
 	-- upvalues: getCreationFlowStoreModule (ref), reactModule (ref), signalsModule (ref), momentsDraftStorageModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
 	local var7 = getCreationFlowStoreModule(false)
-	reactModule.useEffect(function() --[[ line: 26 ]]
+	reactModule.useEffect(function()
 		-- upvalues: signalsModule (copy), var7 (ref), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy)
-		return signalsModule.createEffect(function(p0) --[[ line: 27 ]]
+		return signalsModule.createEffect(function(p0)
 			-- upvalues: var7 (copy), momentsDraftStorageModule (copy), fireAnalyticsEventModule (copy), eventNames (copy)
 			local selectedCapture = var7.getSelectedCapture(p0)
 			local description = var7.getDescription(p0)

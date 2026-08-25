@@ -72,8 +72,8 @@ rateCount.defaultProps = {
 	voteState = voteStatesModule.notVoted
 }
 
-function rateCount.init(p0) --[[ line: 151 ]]
-	function p0.onVoteDownActivated() --[[ line: 152 ]]
+function rateCount.init(p0)
+	function p0.onVoteDownActivated()
 		-- upvalues: p0 (ref)
 		local onVoteDownActivated = p0.props.onVoteDownActivated
 		
@@ -82,7 +82,7 @@ function rateCount.init(p0) --[[ line: 151 ]]
 		end
 	end
 	
-	function p0.onVoteUpActivated() --[[ line: 159 ]]
+	function p0.onVoteUpActivated()
 		-- upvalues: p0 (ref)
 		local onVoteUpActivated = p0.props.onVoteUpActivated
 		
@@ -92,7 +92,7 @@ function rateCount.init(p0) --[[ line: 151 ]]
 	end
 end
 
-function rateCount.render(p1) --[[ line: 167 ]]
+function rateCount.render(p1)
 	-- upvalues: voteStatesModule (ref), withStyleModule (ref), cryoModule (ref), t (ref), getIconSizeModule (ref), roactModule (ref), label (ref), ratingLarge (ref), genericTextLabelModule (ref), iconButtonModule (ref), voteDownOn (ref), voteDownOff (ref), voteUpOn (ref), voteUpOff (ref)
 	local position = p1.props.position
 	local layoutOrder = p1.props.layoutOrder
@@ -106,7 +106,7 @@ function rateCount.render(p1) --[[ line: 167 ]]
 	local var14 = voteState == voteStatesModule.votedDown
 	local var15 = voteState == voteStatesModule.votedUp
 	
-	return withStyleModule(function(p2) --[[ line: 187 ]]
+	return withStyleModule(function(p2)
 		-- upvalues: cryoModule (copy), t (copy), p1 (ref), getIconSizeModule (copy), roactModule (copy), var13 (write), position (ref), anchorPoint (ref), layoutOrder (ref), label (copy), ratingLarge (copy), genericTextLabelModule (copy), rateText (ref), rateLabel (ref), iconButtonModule (copy), var14 (ref), voteDownOn (copy), voteDownOff (copy), var15 (ref), voteUpOn (copy), voteUpOff (copy)
 		local var16 = cryoModule.Dictionary.join(t, p1.props.styleProps or {})
 		local containerSpacingLeading = var16.containerSpacingLeading

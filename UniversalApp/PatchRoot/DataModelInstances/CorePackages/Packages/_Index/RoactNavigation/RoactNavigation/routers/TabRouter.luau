@@ -4,7 +4,7 @@ local object = require(parent_1.Parent.LuauPolyfill).Object
 local switchRouterModule = require(parent.SwitchRouter)
 local backBehaviorModule = require(parent_1.BackBehavior)
 
-return function(p0, p1) --[[ line: 11 ]]
+return function(p0, p1)
 	-- upvalues: backBehaviorModule (ref), object (ref), switchRouterModule (ref)
 	local t = {
 		resetOnBlur = false,

@@ -3,7 +3,7 @@ local granite = Enum.Material.Granite
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 13 ]]
+function t.new(p0)
 	-- upvalues: t (ref), create (ref), granite (ref)
 	local tbl = setmetatable({}, t)
 	tbl.userCFrame = p0
@@ -50,27 +50,27 @@ function t.new(p0) --[[ line: 13 ]]
 	return tbl
 end
 
-function t:setCFrame(p1) --[[ line: 68 ]]
+function t:setCFrame(p1)
 	self.model:SetPrimaryPartCFrame(p1 * CFrame.Angles(0.349065850399, 0, 0) * CFrame.new(0, -0.03, 0.06))
 end
 
-function t:setCFrameAndScale(p2, p3) --[[ line: 72 ]]
+function t:setCFrameAndScale(p2, p3)
 	self.model:SetPrimaryPartCFrame(p2 * CFrame.Angles(0.349065850399, 0, 0) * CFrame.new(0, -0.03 * p3, 0.06 * p3))
 	self.mesh.Scale = Vector3.new(0.03200000152, 0.03200000152, 0.03200000152) * p3
 end
 
-function t.onButtonInputChanged(_, _, _) --[[ line: 79 ]] end
+function t.onButtonInputChanged(_, _, _) end
 
-function t:onInputBegan(p4) --[[ line: 81 ]]
+function t:onInputBegan(p4)
 	self:onButtonInputChanged(p4, true)
 end
 
-function t.onInputChanged(_, _) --[[ line: 85 ]] end
+function t.onInputChanged(_, _) end
 
-function t:onInputEnded(p5) --[[ line: 87 ]]
+function t:onInputEnded(p5)
 	self:onButtonInputChanged(p5, false)
 end
 
-function t.onTouchpadModeChanged(_, _, _) --[[ line: 91 ]] end
+function t.onTouchpadModeChanged(_, _, _) end
 
 return t

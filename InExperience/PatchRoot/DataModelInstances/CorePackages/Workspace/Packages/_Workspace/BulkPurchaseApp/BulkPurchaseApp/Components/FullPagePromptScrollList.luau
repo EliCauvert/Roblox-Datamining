@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useCursor = require(parent.UIBlox).App.SelectionCursor.useCursor
 
-return function(p0) --[[ line: 15 | named "FullPagePromptScrollList" ]]
+return function(p0)
 	-- upvalues: useDesignTokens (ref), useCursor (ref), reactModule (ref)
 	local var1 = useDesignTokens()
 	local var2 = useCursor(UDim.new(0, var1.Radius.Small), var1.Size.Size_200)
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 15 | named "FullPagePromptScrollList" ]]
 		CanvasSize = UDim2.new(1, -size350, 0, 0),
 		SelectionImageObject = var2,
 		Selectable = var3,
-		[reactModule.Change.AbsoluteCanvasSize] = function(p1) --[[ line: 35 ]]
+		[reactModule.Change.AbsoluteCanvasSize] = function(p1)
 			-- upvalues: var4 (ref)
 			var4(p1.AbsoluteWindowSize.Y < p1.AbsoluteCanvasSize.Y)
 		end

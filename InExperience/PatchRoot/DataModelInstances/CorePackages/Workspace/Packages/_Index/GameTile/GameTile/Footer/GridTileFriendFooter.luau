@@ -14,7 +14,7 @@ local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
 local sortFriendsByPresenceAndRecencyFactoryModule = require(gameTile.sortFriendsByPresenceAndRecencyFactory)
 local fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix
 
-local function useFetchSortedDisplayNames(p0) --[[ line: 55 ]]
+local function useFetchSortedDisplayNames(p0)
 	-- upvalues: useUserProfilesFetch (ref), userProfilesModule (ref), sortFriendsByPresenceAndRecencyFactoryModule (ref)
 	local t = {}
 	local var7 = useUserProfilesFetch({
@@ -37,7 +37,7 @@ local function useFetchSortedDisplayNames(p0) --[[ line: 55 ]]
 end
 
 return {
-	GridTileFriendFooter = function(p1) --[[ line: 77 ]]
+	GridTileFriendFooter = function(p1)
 		-- upvalues: useStyle (ref), useDesignTokens (ref), useTextSizeOffset (ref), useLocalization (ref), fFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (ref), useFetchSortedDisplayNames (ref), reactModule (ref), coPlayFooter (ref), array (ref), colors (ref)
 		local var8 = if p1.useLargerFont then useStyle().Font.Body else useStyle().Font.CaptionHeader
 		local global = useDesignTokens().Global
@@ -72,7 +72,7 @@ return {
 				t_3[i] = var11[i].userId
 			end
 			t_2.users = t_3
-			t_2.labelText = array.join(array.map(var11, function(p2) --[[ line: 48 ]]
+			t_2.labelText = array.join(array.map(var11, function(p2)
 				return p2.displayName
 			end), var10.friendsSeparator)
 			t_2.showEmphasisBorder = p1.showOnlineBorder
@@ -109,7 +109,7 @@ return {
 				t_3[i_1] = friends[i_1].userId
 			end
 			t_2.users = t_3
-			t_2.labelText = array.join(array.map(p1.friends or {}, function(p3) --[[ line: 48 ]]
+			t_2.labelText = array.join(array.map(p1.friends or {}, function(p3)
 				return p3.displayName
 			end), var10.friendsSeparator)
 			t_2.showEmphasisBorder = p1.showOnlineBorder
@@ -131,7 +131,7 @@ return {
 			return createElement(var18, t, t_1)
 		end
 	end,
-	getUserIdsForFacePile = function(p4) --[[ line: 37 ]]
+	getUserIdsForFacePile = function(p4)
 		local t = {}
 		
 		for i = 1, #p4 do
@@ -139,9 +139,9 @@ return {
 		end
 		return t
 	end,
-	getDisplayName = function(p5, p6) --[[ line: 46 ]]
+	getDisplayName = function(p5, p6)
 		-- upvalues: array (ref)
-		return array.join(array.map(p5, function(p7) --[[ line: 48 ]]
+		return array.join(array.map(p5, function(p7)
 			return p7.displayName
 		end), p6)
 	end

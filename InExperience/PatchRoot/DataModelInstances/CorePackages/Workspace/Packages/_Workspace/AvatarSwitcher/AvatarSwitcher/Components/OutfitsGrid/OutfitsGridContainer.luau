@@ -3,7 +3,7 @@ local reactModule = require(avatarSwitcher.Parent.React)
 local outfitsGridModule = require(avatarSwitcher.Components.OutfitsGrid.OutfitsGrid)
 local useOutfitsGridPropsModule = require(avatarSwitcher.Components.OutfitsGrid.useOutfitsGridProps)
 
-return function() --[[ line: 14 | named "OutfitsGridContainer" ]]
+return function()
 	-- upvalues: useOutfitsGridPropsModule (ref), reactModule (ref), outfitsGridModule (ref)
 	return reactModule.createElement(outfitsGridModule, useOutfitsGridPropsModule())
 end

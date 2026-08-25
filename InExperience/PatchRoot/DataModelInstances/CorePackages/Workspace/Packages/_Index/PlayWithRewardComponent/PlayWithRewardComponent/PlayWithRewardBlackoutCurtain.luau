@@ -2,7 +2,7 @@
 local t = {}
 local var2 = nil
 
-function t.show() --[[ line: 9 ]]
+function t.show()
 	-- upvalues: var2 (write), coreGuiService (ref)
 	if var2 and var2.Parent then
 		return
@@ -22,7 +22,7 @@ function t.show() --[[ line: 9 ]]
 	var2 = playWithRewardBlackoutCurtain
 end
 
-function t.hide() --[[ line: 31 ]]
+function t.hide()
 	-- upvalues: var2 (write)
 	if var2 then
 		var2:Destroy()

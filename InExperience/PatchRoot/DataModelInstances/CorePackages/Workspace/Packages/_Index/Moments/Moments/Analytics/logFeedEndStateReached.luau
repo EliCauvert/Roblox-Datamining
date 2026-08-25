@@ -1,7 +1,7 @@
 ﻿local analytics = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon).Analytics
 local eventNames = analytics.EventNames
 
-return function(p0) --[[ line: 23 | named "logFeedEndStateReached" ]]
+return function(p0)
 	-- upvalues: analytics (ref), eventNames (ref)
 	analytics.fireAnalyticsEvent(eventNames.FeedEndStateReached, {
 		source = p0.source,

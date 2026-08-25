@@ -6,7 +6,7 @@ local sduiLogger = sduiCoreSystemModule.SduiLogger
 local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
 local t = {}
 
-return function(p0, p1, p2, p3, _) --[[ line: 23 | named "SduiVirtualEventImpressionsHandler" ]]
+return function(p0, p1, p2, p3, _)
 	-- upvalues: t (ref), sduiLogger (ref), sduiErrors (ref), findAnalyticsFieldInAncestors (ref), virtualEventsModule (ref)
 	if #p1 == 0 or #(p2 or t) == 0 then
 		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogVirtualEventImpressions, {

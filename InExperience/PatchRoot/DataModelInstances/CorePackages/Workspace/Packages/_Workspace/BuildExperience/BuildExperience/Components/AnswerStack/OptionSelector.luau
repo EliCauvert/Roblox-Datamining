@@ -8,7 +8,7 @@ local t = {
 	affordance = foundationModule.Enums.StateLayerAffordance.None
 }
 
-return function(p0) --[[ line: 24 | named "OptionSelector" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), t (ref), text (ref)
 	local var3 = useTokens()
 	local var4 = p0.isSelected == true

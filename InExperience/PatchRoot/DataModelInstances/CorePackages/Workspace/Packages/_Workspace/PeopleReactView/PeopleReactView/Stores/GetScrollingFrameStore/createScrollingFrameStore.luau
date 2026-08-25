@@ -2,7 +2,7 @@
 local signalsModule = require(parent.Signals)
 local fFlagFixVirtualizedGridNumItems = require(parent.PeopleService).getService("Flags").FFlagFixVirtualizedGridNumItems
 
-return function() --[[ line: 21 | named "createScrollingFrameStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), fFlagFixVirtualizedGridNumItems (ref)
 	local var1, var2 = signalsModule.createSignal(0)
 	local var3, var4 = signalsModule.createSignal(0)
@@ -15,7 +15,7 @@ return function() --[[ line: 21 | named "createScrollingFrameStore" ]]
 		var7 = var9
 		var8 = var10
 	end
-	local var11 = if fFlagFixVirtualizedGridNumItems then signalsModule.createComputed(function(p0) --[[ line: 33 ]]
+	local var11 = if fFlagFixVirtualizedGridNumItems then signalsModule.createComputed(function(p0)
 		-- upvalues: var5 (ref), var7 (write)
 		return var5(p0) + var7(p0)
 	end) else nil
@@ -27,7 +27,7 @@ return function() --[[ line: 21 | named "createScrollingFrameStore" ]]
 		getAbsolutePositionY = var1,
 		getAbsoluteSizeY = var3,
 		getCanvasPositionY = if fFlagFixVirtualizedGridNumItems then var11 else var5,
-		setScrollingFrame = function(p1) --[[ line: 42 ]]
+		setScrollingFrame = function(p1)
 			-- upvalues: var12 (write), var13 (write), var14 (write), var2 (ref), var4 (ref), var6 (ref)
 			if var12 then
 				var12:Disconnect()
@@ -41,21 +41,21 @@ return function() --[[ line: 21 | named "createScrollingFrameStore" ]]
 			var2(p1.AbsolutePosition.Y)
 			var4(p1.AbsoluteSize.Y)
 			var6(p1.CanvasPosition.Y)
-			var12 = p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 57 ]]
+			var12 = p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 				-- upvalues: var2 (copy), p1 (ref)
 				var2(p1.AbsolutePosition.Y)
 			end)
-			var13 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 61 ]]
+			var13 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
 				-- upvalues: var4 (copy), p1 (ref)
 				var4(p1.AbsoluteSize.Y)
 			end)
-			var14 = p1:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 65 ]]
+			var14 = p1:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
 				-- upvalues: var6 (copy), p1 (ref)
 				var6(p1.CanvasPosition.Y)
 			end)
 		end,
 		setCanvasPositionYOffset = if fFlagFixVirtualizedGridNumItems then var8 else nil,
-		cleanUp = function() --[[ line: 70 ]]
+		cleanUp = function()
 			-- upvalues: var12 (write), var13 (write), var14 (write)
 			if var12 then
 				var12:Disconnect()

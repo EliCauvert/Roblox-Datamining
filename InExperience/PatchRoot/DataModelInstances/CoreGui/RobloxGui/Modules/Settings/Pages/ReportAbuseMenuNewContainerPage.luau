@@ -22,26 +22,26 @@ local fFlagReportFocusNavIEMButtonsModule = require(robloxGui.Modules.AbuseRepor
 local fFlagStandardizeSafetyIcon = sharedFlagsModule.FFlagStandardizeSafetyIcon
 local fFlagAbuseReportMenuV2_1 = game:DefineFastFlag("SwitchOverToAbuseReportMenuV2", false) and fFlagAbuseReportMenuV2
 local _ = nil
-local var12 = (function() --[[ line: 39 | named "Initialize" ]]
+local var12 = (function()
 	-- upvalues: robloxGui (ref), utilityModule (ref), uiblox (ref), fFlagStandardizeSafetyIcon (ref), iconName (ref), iconVariant (ref), builderIconsModule (ref), fFlagEnableSideSheet (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportMenuV2_1 (ref), roactModule (ref), abuseReportMenuV2 (ref), abuseReportMenu (ref), fFlagInExperienceReportClosingBugfix (ref), var6 (ref), var7 (ref), fFlagHideShortcutsOnReportDropdownModule (ref), fFlagReportFocusNavIEMButtonsModule (ref)
 	local reportAbuseMenuNewContainerPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
-	function reportAbuseMenuNewContainerPage._onHiddenCallback() --[[ line: 43 ]] end
+	function reportAbuseMenuNewContainerPage._onHiddenCallback() end
 	
-	function reportAbuseMenuNewContainerPage._onDisplayedCallback() --[[ line: 44 ]] end
+	function reportAbuseMenuNewContainerPage._onDisplayedCallback() end
 	
-	function reportAbuseMenuNewContainerPage._onDisplayingCallback() --[[ line: 45 ]] end
+	function reportAbuseMenuNewContainerPage._onDisplayingCallback() end
 	
-	function reportAbuseMenuNewContainerPage._onSettingsHiddenCallback() --[[ line: 46 ]] end
+	function reportAbuseMenuNewContainerPage._onSettingsHiddenCallback() end
 	
-	function reportAbuseMenuNewContainerPage._setNextPlayerToReportCallback() --[[ line: 47 ]] end
+	function reportAbuseMenuNewContainerPage._setNextPlayerToReportCallback() end
 	
-	function reportAbuseMenuNewContainerPage._onMenuWidthChange() --[[ line: 48 ]] end
+	function reportAbuseMenuNewContainerPage._onMenuWidthChange() end
 	
-	function reportAbuseMenuNewContainerPage.SetHub(_, p0) --[[ line: 50 ]]
+	function reportAbuseMenuNewContainerPage.SetHub(_, p0)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage.HubRef = p0
-		reportAbuseMenuNewContainerPage.HubRef.SettingsShowSignal:connect(function(p1) --[[ line: 54 ]]
+		reportAbuseMenuNewContainerPage.HubRef.SettingsShowSignal:connect(function(p1)
 			-- upvalues: reportAbuseMenuNewContainerPage (copy)
 			if not p1 then
 				reportAbuseMenuNewContainerPage:onSettingsHidden()
@@ -51,47 +51,47 @@ local var12 = (function() --[[ line: 39 | named "Initialize" ]]
 		return reportAbuseMenuNewContainerPage
 	end
 	
-	function reportAbuseMenuNewContainerPage.showAlert(_, p2, p3, p4) --[[ line: 63 ]]
+	function reportAbuseMenuNewContainerPage.showAlert(_, p2, p3, p4)
 		-- upvalues: utilityModule (copy), reportAbuseMenuNewContainerPage (ref)
 		utilityModule:ShowAlert(p2, p3, reportAbuseMenuNewContainerPage.HubRef, p4)
 	end
 	
-	function reportAbuseMenuNewContainerPage.showReportSentPage(_, p5) --[[ line: 67 ]]
+	function reportAbuseMenuNewContainerPage.showReportSentPage(_, p5)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage.HubRef.ReportSentPageV2:ShowReportedPlayer(p5, true)
 	end
 	
-	function reportAbuseMenuNewContainerPage.HideMenu(_) --[[ line: 71 ]]
+	function reportAbuseMenuNewContainerPage.HideMenu(_)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage.HubRef:SetVisibility(false, true)
 	end
 	
-	function reportAbuseMenuNewContainerPage.ShowMenu(_) --[[ line: 75 ]]
+	function reportAbuseMenuNewContainerPage.ShowMenu(_)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage.HubRef:SetVisibility(true, true, reportAbuseMenuNewContainerPage, nil, "ScreenshotUnhide")
 	end
 	
-	function reportAbuseMenuNewContainerPage.onHidden(_) --[[ line: 79 ]]
+	function reportAbuseMenuNewContainerPage.onHidden(_)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage._onHiddenCallback()
 	end
 	
-	function reportAbuseMenuNewContainerPage.onSettingsHidden(_) --[[ line: 83 ]]
+	function reportAbuseMenuNewContainerPage.onSettingsHidden(_)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage._onSettingsHiddenCallback()
 	end
 	
-	function reportAbuseMenuNewContainerPage.onDisplayed(_) --[[ line: 87 ]]
+	function reportAbuseMenuNewContainerPage.onDisplayed(_)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage._onDisplayedCallback()
 	end
 	
-	function reportAbuseMenuNewContainerPage.onDisplaying(_) --[[ line: 91 ]]
+	function reportAbuseMenuNewContainerPage.onDisplaying(_)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage._onDisplayingCallback()
 	end
 	
-	function reportAbuseMenuNewContainerPage.setNextPlayerToReport(_, p6) --[[ line: 95 ]]
+	function reportAbuseMenuNewContainerPage.setNextPlayerToReport(_, p6)
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage._setNextPlayerToReportCallback(p6)
 	end
@@ -106,87 +106,87 @@ local var12 = (function() --[[ line: 39 | named "Initialize" ]]
 	reportAbuseMenuNewContainerPage.ShouldShowHubBar = true
 	reportAbuseMenuNewContainerPage.ShouldDisableDefaultScroll = fFlagAbuseReportMenuV2 and fFlagAbuseReportMenuV2_1
 	roactModule.mount(roactModule.createElement(if fFlagAbuseReportMenuV2_1 then abuseReportMenuV2 else abuseReportMenu, {
-		hideReportTab = function() --[[ line: 119 ]]
+		hideReportTab = function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage:HideMenu()
 		end,
-		showReportTab = function() --[[ line: 122 ]]
+		showReportTab = function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage:ShowMenu()
 		end,
-		registerOnReportTabHidden = function(p7) --[[ line: 125 ]]
+		registerOnReportTabHidden = function(p7)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._onHiddenCallback = p7
 		end,
-		registerOnReportTabDisplayed = function(p8) --[[ line: 128 ]]
+		registerOnReportTabDisplayed = function(p8)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._onDisplayedCallback = p8
 		end,
-		registerOnReportTabDisplaying = function(p9) --[[ line: 131 ]]
+		registerOnReportTabDisplaying = function(p9)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._onDisplayingCallback = p9
 		end,
-		registerOnMenuWidthChange = function(p10) --[[ line: 134 ]]
+		registerOnMenuWidthChange = function(p10)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._onMenuWidthChange = p10
 		end,
-		registerSetNextPlayerToReport = function(value) --[[ line: 137 ]]
+		registerSetNextPlayerToReport = function(value)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._setNextPlayerToReportCallback = value
 		end,
-		registerOnSettingsHidden = function(value) --[[ line: 140 ]]
+		registerOnSettingsHidden = function(value)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage._onSettingsHiddenCallback = value
 		end,
-		showReportSentPage = function(p11) --[[ line: 143 ]]
+		showReportSentPage = function(p11)
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			reportAbuseMenuNewContainerPage:showReportSentPage(p11)
 		end,
-		onReportComplete = function(p12) --[[ line: 146 ]]
+		onReportComplete = function(p12)
 			-- upvalues: fFlagInExperienceReportClosingBugfix (copy), var6 (copy), var7 (copy), reportAbuseMenuNewContainerPage (ref)
 			if fFlagInExperienceReportClosingBugfix and var6 then
 				var7:setShortcutBar(nil)
 			end
-			reportAbuseMenuNewContainerPage:showAlert(p12, "Ok", function() --[[ line: 150 ]]
+			reportAbuseMenuNewContainerPage:showAlert(p12, "Ok", function()
 				-- upvalues: reportAbuseMenuNewContainerPage (copy)
 				reportAbuseMenuNewContainerPage:HideMenu()
 			end)
 		end,
-		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var6 then function(p13) --[[ line: 156 ]]
+		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule and var6 then function(p13)
 			-- upvalues: var7 (copy)
 			var7:setHideShortcutBar("InExperienceReportDropdown", p13)
 		end else nil,
-		getSettingsHubRef = if fFlagReportFocusNavIEMButtonsModule then function() --[[ line: 161 ]]
+		getSettingsHubRef = if fFlagReportFocusNavIEMButtonsModule then function()
 			-- upvalues: reportAbuseMenuNewContainerPage (ref)
 			return reportAbuseMenuNewContainerPage.HubRef
 		end else nil
 	}), reportAbuseMenuNewContainerPage.Page, "AbuseReportMenu")
 	reportAbuseMenuNewContainerPage.Page.Size = UDim2.new(1, 0, 0, 0)
 	reportAbuseMenuNewContainerPage.Page.AutomaticSize = Enum.AutomaticSize.Y
-	reportAbuseMenuNewContainerPage.Page:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ line: 175 ]]
+	reportAbuseMenuNewContainerPage.Page:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
 		-- upvalues: reportAbuseMenuNewContainerPage (ref)
 		reportAbuseMenuNewContainerPage._onMenuWidthChange(reportAbuseMenuNewContainerPage.Page.AbsoluteSize.X)
 	end)
 	
 	return reportAbuseMenuNewContainerPage
 end)()
-var12.Displayed.Event:connect(function() --[[ line: 185 ]]
+var12.Displayed.Event:connect(function()
 	-- upvalues: var12 (write)
 	var12:onDisplayed()
 end)
 
 if fFlagIEMSettingsPageDisplaying then
-	var12.Displaying.Event:connect(function() --[[ line: 190 ]]
+	var12.Displaying.Event:connect(function()
 		-- upvalues: var12 (write)
 		var12:onDisplaying()
 	end)
 end
-var12.Hidden.Event:connect(function() --[[ line: 195 ]]
+var12.Hidden.Event:connect(function()
 	-- upvalues: var12 (write)
 	var12:onHidden()
 end)
 
-function var12.ReportPlayer(_, p14, p15) --[[ line: 199 ]]
+function var12.ReportPlayer(_, p14, p15)
 	-- upvalues: reportAbuseAnalytics (ref), var12 (write)
 	if p14 then
 		reportAbuseAnalytics:startAbuseReportSession(p15)

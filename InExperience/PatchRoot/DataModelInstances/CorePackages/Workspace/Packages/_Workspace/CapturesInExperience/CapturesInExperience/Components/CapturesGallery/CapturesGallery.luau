@@ -21,20 +21,20 @@ local galleryGridViewModule = require(parent.Components.CapturesGallery.GalleryG
 local fFlagUseCaptureCommonComponentsModule = require(parent.Flags.FFlagUseCaptureCommonComponents)
 local fFlagCapturesGalleryDespawnOnMenuCloseModule = require(parent.Flags.FFlagCapturesGalleryDespawnOnMenuClose)
 
-return function(p0) --[[ line: 38 ]]
+return function(p0)
 	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), useSystemMenuDetectionModule (ref), useSelector (ref), constantsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), carouselOpenedModule (ref), fFlagCapturesGalleryDespawnOnMenuCloseModule (ref), fFlagUseCaptureCommonComponentsModule (ref), captureGridView (ref), galleryActionContainerModule (ref), captureItem (ref), galleryGridViewModule (ref)
 	local var14 = useAnalyticsModule()
 	local var15 = useDispatch()
 	local var16 = useStyle()
 	local var17 = useSystemMenuDetectionModule()
-	local var18 = useSelector(function(p1) --[[ line: 44 ]]
+	local var18 = useSelector(function(p1)
 		-- upvalues: constantsModule (copy)
 		return p1[constantsModule.RoduxKey].Captures
 	end)
 	local var19 = next(var18) == nil
-	local var20 = reactModule.useCallback(function(p2) --[[ line: 55 ]]
+	local var20 = reactModule.useCallback(function(p2)
 		-- upvalues: var14 (ref), eventNamesModule (copy), var15 (ref), carouselOpenedModule (copy)
-		return function() --[[ line: 56 ]]
+		return function()
 			-- upvalues: var14 (copy), eventNamesModule (copy), var15 (copy), carouselOpenedModule (copy), p2 (ref)
 			var14.fireEvent(eventNamesModule.CapturesCarouselOpened)
 			var15(carouselOpenedModule(p2))
@@ -76,7 +76,7 @@ return function(p0) --[[ line: 38 ]]
 			shouldShowShowMoreButton = true,
 			captures = var18,
 			header = reactModule.createElement(galleryActionContainerModule, { isDisabled = false, LayoutOrder = 1, itemCount = #var18 }),
-			renderItem = function(p3, p4) --[[ line: 119 ]]
+			renderItem = function(p3, p4)
 				-- upvalues: reactModule (copy), captureItem (copy), var20 (ref)
 				return reactModule.createElement(captureItem, { capture = p3, onActivated = var20(p4) })
 			end

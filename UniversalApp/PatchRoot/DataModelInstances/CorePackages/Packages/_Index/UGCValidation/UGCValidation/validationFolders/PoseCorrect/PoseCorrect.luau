@@ -18,7 +18,7 @@ local t = {
 	expectedFailures = {}
 }
 
-local function validateAngleFromXYPlane(vectorA, vectorB, p0, p1) --[[ line: 42 ]]
+local function validateAngleFromXYPlane(vectorA, vectorB, p0, p1)
 	-- upvalues: UGCValidatePoseDegFromXYPlane (ref), errorSourceStringsModule (ref)
 	local degrees = math.deg(math.acos(p0:Dot(p1)))
 	
@@ -31,7 +31,7 @@ local function validateAngleFromXYPlane(vectorA, vectorB, p0, p1) --[[ line: 42 
 	end
 end
 
-local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p2, p3, p4, p5) --[[ line: 58 ]]
+local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p2, p3, p4, p5)
 	-- upvalues: errorSourceStringsModule (ref), prettyPrintVector3Module (ref)
 	local degrees = math.deg(math.acos(p2:Dot(p3)))
 	
@@ -49,11 +49,11 @@ local function validateAngleFromWorldXVectorOnXYPlane(vectorA, vectorB, p2, p3, 
 	end
 end
 
-local function _(value) --[[ line: 80 | named "getAssetTypeFromUploadEnum" ]]
+local function _(value)
 	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
 end
 
-function t.run(p6, p7) --[[ line: 87 ]]
+function t.run(p6, p7)
 	-- upvalues: assetCalculatorModule (ref), errorSourceStringsModule (ref), canBeNormalizedModule (ref), validateAngleFromXYPlane (ref), UGCValidatePoseArmMinDegFromXVectorOnXYPlane (ref), UGCValidatePoseArmMaxDegFromXVectorOnXYPlane (ref), UGCValidatePoseLegMinDegFromXVectorOnXYPlane (ref), UGCValidatePoseLegMaxDegFromXVectorOnXYPlane (ref), validateAngleFromWorldXVectorOnXYPlane (ref)
 	local rootInstance = p7.rootInstance
 	local var16 = if p7.uploadEnum and p7.uploadEnum.assetType then p7.uploadEnum.assetType else nil

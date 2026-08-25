@@ -3,7 +3,7 @@ local _ = require(parent.util.Types)
 local validateLayeredClothingAccessoryModule = require(parent.validation.validateLayeredClothingAccessory)
 local validateLayeredClothingAccessoryMeshPartAssetFormatMatchModule = require(parent.validation.validateLayeredClothingAccessoryMeshPartAssetFormatMatch)
 
-return function(value, p0) --[[ line: 9 | named "validateLayeredClothingAccessoryMeshPartAssetFormat" ]]
+return function(value, p0)
 	-- upvalues: validateLayeredClothingAccessoryModule (ref), validateLayeredClothingAccessoryMeshPartAssetFormatMatchModule (ref)
 	assert(p0.instances ~= nil, "instances required in validationContext for validateLayeredClothingAccessoryMeshPartAssetFormat")
 	local instances = p0.instances

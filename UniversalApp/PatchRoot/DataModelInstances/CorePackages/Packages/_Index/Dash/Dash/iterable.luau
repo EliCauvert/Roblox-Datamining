@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(p0) --[[ line: 11 | named "iterable" ]]
+return function(p0)
 	local var0 = 1
 	local var1 = true
 	local var2 = nil
 	local _ = nil
 	
-	return function() --[[ line: 16 ]]
+	return function()
 		-- upvalues: var1 (write), p0 (ref), var0 (write), var2 (write)
 		if var1 then
 			local var3 = p0[var0]

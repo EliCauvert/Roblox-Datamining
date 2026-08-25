@@ -3,7 +3,7 @@ local parent = script:FindFirstAncestor("IdentityVerification").Parent
 local localization = require(parent.RobloxAppLocales).Localization
 local _ = require(parent.UniversalFeatureRestrictions)
 
-return function() --[[ line: 24 | named "buildAgeVerificationFeatureRestrictionOverrides" ]]
+return function()
 	-- upvalues: localization (ref), localizationService (ref)
 	local var1 = localization.new(localizationService.RobloxLocaleId)
 	

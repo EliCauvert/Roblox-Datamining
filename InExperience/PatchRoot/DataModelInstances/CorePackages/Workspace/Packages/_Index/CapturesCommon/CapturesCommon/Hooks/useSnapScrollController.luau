@@ -13,7 +13,7 @@ local useMotor = reactOtterModule.useMotor
 local useRef = reactModule.useRef
 local useState = reactModule.useState
 
-return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: useRef (ref), useState (ref), useCallback (ref), useMotor (ref), reactModule (ref), reactOtterModule (ref), navigationTypeModule (ref), useEffect (ref), useEventConnection (ref), userInputService (ref), isPointWithinBoundsModule (ref)
 	local var6 = useRef(nil)
 	local var7, var8 = useState(p1)
@@ -24,18 +24,18 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 	local var13 = useRef(nil)
 	local var14 = useRef(nil)
 	local var15 = useRef(false)
-	local var16 = useMotor((p1 - 1) * -p2.Y, useCallback(function(p4) --[[ line: 42 ]]
+	local var16 = useMotor((p1 - 1) * -p2.Y, useCallback(function(p4)
 		-- upvalues: var9 (ref)
 		if var9.current then
 			var9.current.Position = UDim2.new(0.5, 0, 0, p4)
 			
 			return
 		end
-	end, {}), useCallback(function() --[[ line: 50 ]]
+	end, {}), useCallback(function()
 		-- upvalues: var10 (ref)
 		var10.current = false
 	end, {}))
-	local var17 = reactModule.useCallback(function(p5, p6) --[[ line: 57 ]]
+	local var17 = reactModule.useCallback(function(p5, p6)
 		-- upvalues: p0 (ref), var9 (ref), var6 (ref), var10 (ref), var15 (ref), p3 (ref), p2 (ref), var16 (ref), reactOtterModule (copy), var8 (ref)
 		if not p0 or not var9.current or (not var6.current or var10.current) or (var15.current or p3 < 1) then return end
 		assert(var9.current ~= nil, "motionRef.current is nil")
@@ -50,7 +50,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 		end
 		var8(clampedValue)
 	end, { p0, p2, p3, var16 })
-	local var18 = reactModule.useCallback(function(p7, p8) --[[ line: 86 ]]
+	local var18 = reactModule.useCallback(function(p7, p8)
 		-- upvalues: navigationTypeModule (copy), var17 (ref), var7 (ref)
 		if p7 == navigationTypeModule.Previous then
 			var17(var7 - 1, p8)
@@ -63,7 +63,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 		end
 		var17(var7, p8)
 	end, { var7, var17 })
-	useEffect(function() --[[ line: 96 ]]
+	useEffect(function()
 		-- upvalues: var9 (ref), var11 (ref), p2 (ref), var10 (ref), var18 (ref), navigationTypeModule (copy)
 		if var9.current and var11.current ~= p2 then
 			var10.current = false
@@ -73,7 +73,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 			return
 		end
 	end, { p2, var18 })
-	useEventConnection(userInputService.TouchPinch, reactModule.useCallback(function(_, _, _, p9, _) --[[ line: 106 ]]
+	useEventConnection(userInputService.TouchPinch, reactModule.useCallback(function(_, _, _, p9, _)
 		-- upvalues: var18 (ref), navigationTypeModule (copy), var15 (ref), var13 (ref)
 		if p9 == Enum.UserInputState.Begin then
 			var18(navigationTypeModule.Current)
@@ -85,7 +85,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 			var13.current = nil
 		end
 	end, { var18 }))
-	useEventConnection(userInputService.TouchStarted, reactModule.useCallback(function(p10) --[[ line: 118 ]]
+	useEventConnection(userInputService.TouchStarted, reactModule.useCallback(function(p10)
 		-- upvalues: p0 (ref), var9 (ref), var6 (ref), var13 (ref), isPointWithinBoundsModule (copy), var12 (ref), var14 (ref), var16 (ref), reactOtterModule (copy)
 		if not p0 or not var9.current or (not var6.current or var13.current) then return end
 		if isPointWithinBoundsModule(Vector2.new(p10.Position.X, p10.Position.Y), var6.current.AbsolutePosition, var6.current.AbsoluteSize) then
@@ -97,7 +97,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 			return
 		end
 	end, { p0, var16 }))
-	useEventConnection(userInputService.TouchMoved, reactModule.useCallback(function(p11) --[[ line: 140 ]]
+	useEventConnection(userInputService.TouchMoved, reactModule.useCallback(function(p11)
 		-- upvalues: p0 (ref), var9 (ref), var6 (ref), var13 (ref), var12 (ref), var14 (ref), var15 (ref), p3 (ref), p2 (ref), var16 (ref), reactOtterModule (copy)
 		if p0 and var9.current and (var6.current and var13.current == p11) and (var12.current and var14.current and not var15.current) then
 			var16(reactOtterModule.instant(math.clamp(var12.current + (p11.Position.Y - var14.current), (p3 - 1) * -p2.Y - 100, 100)))
@@ -105,7 +105,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 			return
 		end
 	end, { p0, p2, p3, var16 }))
-	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p12) --[[ line: 166 ]]
+	useEventConnection(userInputService.TouchSwipe, reactModule.useCallback(function(p12)
 		-- upvalues: p0 (ref), var9 (ref), var6 (ref), var13 (ref), var15 (ref), var10 (ref), var18 (ref), navigationTypeModule (copy)
 		if not p0 or not var9.current or (not var6.current or not var13.current) or (var15.current or var10.current) then return end
 		if p12 == Enum.SwipeDirection.Up then
@@ -119,7 +119,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 		end
 		var18(navigationTypeModule.Current)
 	end, { p0, var18 }))
-	useEventConnection(userInputService.TouchEnded, reactModule.useCallback(function(p13) --[[ line: 190 ]]
+	useEventConnection(userInputService.TouchEnded, reactModule.useCallback(function(p13)
 		-- upvalues: p0 (ref), var9 (ref), var6 (ref), var13 (ref), var12 (ref), var10 (ref), p2 (ref), var18 (ref), navigationTypeModule (copy)
 		if not p0 or not var9.current or (not var6.current or var13.current ~= p13) or (not var12.current or var10.current) then return end
 		local var21 = var9.current.Position.Y.Offset - var12.current
@@ -134,7 +134,7 @@ return function(p0, p1, p2, p3) --[[ line: 26 | named "useSnapScrollController" 
 		var13.current = nil
 		var12.current = nil
 	end, { p0, p2, var18 }))
-	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p14, p15) --[[ line: 218 ]]
+	useEventConnection(userInputService.PointerAction, reactModule.useCallback(function(p14, p15)
 		-- upvalues: p0 (ref), var18 (ref), navigationTypeModule (copy)
 		if not p0 then return end
 		if p14 < 0 or p15.Y < -0.1 then

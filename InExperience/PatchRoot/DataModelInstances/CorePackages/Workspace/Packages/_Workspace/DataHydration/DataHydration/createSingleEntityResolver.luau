@@ -5,7 +5,7 @@ local _ = require(dataHydration.DataHydrationTypes)
 local t = {}
 local t_1 = {}
 
-return function(p0, p1) --[[ line: 44 | named "createSingleEntityResolver" ]]
+return function(p0, p1)
 	-- upvalues: t (ref), t_1 (ref), createDataCacheModule (ref), createDataResolverModule (ref)
 	local var5 = if p1 then p1.cache else t
 	local var6 = if p1 then p1.resolver else t_1
@@ -13,7 +13,7 @@ return function(p0, p1) --[[ line: 44 | named "createSingleEntityResolver" ]]
 	local var8 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var7,
-		fetchFn = function(p2, _) --[[ line: 54 ]]
+		fetchFn = function(p2, _)
 			-- upvalues: p0 (ref)
 			return p0(tonumber(p2))
 		end,
@@ -25,19 +25,19 @@ return function(p0, p1) --[[ line: 44 | named "createSingleEntityResolver" ]]
 	
 	return {
 		cache = var7,
-		get = function(p3) --[[ line: 65 ]]
+		get = function(p3)
 			-- upvalues: var8 (ref)
 			return var8.getCachedItem(tostring(p3))
 		end,
-		fetch = function(p4) --[[ line: 68 ]]
+		fetch = function(p4)
 			-- upvalues: var8 (ref)
 			return var8.fetchItem(tostring(p4))
 		end,
-		getAndFetch = function(p5) --[[ line: 71 ]]
+		getAndFetch = function(p5)
 			-- upvalues: var8 (ref)
 			return var8.getAndFetchItem(tostring(p5))
 		end,
-		update = function(p6, p7) --[[ line: 74 ]]
+		update = function(p6, p7)
 			-- upvalues: var7 (ref)
 			var7.updateItem(tostring(p6), p7)
 		end,

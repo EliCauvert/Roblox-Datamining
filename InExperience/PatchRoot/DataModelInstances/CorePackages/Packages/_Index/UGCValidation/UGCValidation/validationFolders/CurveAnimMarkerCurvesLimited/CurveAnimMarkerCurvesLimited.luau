@@ -18,7 +18,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 24 ]]
+function t.run(p0, p1)
 	-- upvalues: getFIntUGCValidateMaxTotalMarkerCurvesModule (ref), errorSourceStringsModule (ref)
 	local var5 = getFIntUGCValidateMaxTotalMarkerCurvesModule()
 	

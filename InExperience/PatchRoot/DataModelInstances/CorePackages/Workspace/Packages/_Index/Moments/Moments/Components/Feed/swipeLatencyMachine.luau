@@ -1,11 +1,11 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 
-return function(p0) --[[ line: 68 | named "swipeLatencyMachine" ]]
+return function(p0)
 	local now = p0.now
 	local var0 = nil
 	local var1 = 0
 	
-	local function _() --[[ line: 76 | named "tryComplete" ]]
+	local function _()
 		-- upvalues: var0 (write), p0 (ref)
 		if var0 == nil then return end
 		local settledAt = var0.settledAt
@@ -20,12 +20,12 @@ return function(p0) --[[ line: 68 | named "swipeLatencyMachine" ]]
 	
 	local schedule = p0.schedule or task.delay
 	
-	local _ = function(p1) --[[ line: 97 | named "armCap" ]]
+	local _ = function(p1)
 		-- upvalues: p0 (ref), schedule (ref), var1 (write), var0 (write)
 		if p0.capMs <= 0 then
 			return
 		end
-		schedule(p0.capMs / 1000, function() --[[ line: 101 ]]
+		schedule(p0.capMs / 1000, function()
 			-- upvalues: p1 (ref), var1 (copy), var0 (copy)
 			if p1 == var1 then
 				var0 = nil
@@ -36,7 +36,7 @@ return function(p0) --[[ line: 68 | named "swipeLatencyMachine" ]]
 	end
 	
 	return {
-		start = function(p2, p3, p4) --[[ line: 110 ]]
+		start = function(p2, p3, p4)
 			-- upvalues: var1 (write), now (ref), var0 (write), p0 (ref), schedule (ref)
 			var1 += 1
 			local var3 = now()
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 68 | named "swipeLatencyMachine" ]]
 			local var4 = var1
 			
 			if p0.capMs > 0 then
-				schedule(p0.capMs / 1000, function() --[[ line: 101 ]]
+				schedule(p0.capMs / 1000, function()
 					-- upvalues: var4 (ref), var1 (copy), var0 (copy)
 					if var4 == var1 then
 						var0 = nil
@@ -70,7 +70,7 @@ return function(p0) --[[ line: 68 | named "swipeLatencyMachine" ]]
 				p0.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var5.committedAt), var5.dimensions)
 			end
 		end,
-		update = function(p5, p6) --[[ line: 126 ]]
+		update = function(p5, p6)
 			-- upvalues: var0 (write), now (ref), p0 (ref)
 			if var0 == nil then return end
 			if var0.settledAt == nil and p5 then

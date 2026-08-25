@@ -9,7 +9,7 @@ local var2 = t.interface({
 })
 local var3 = t.interface({ width = t.number, filterFriendCounts = t.table })
 
-return function(p0, p1) --[[ line: 19 ]]
+return function(p0, p1)
 	-- upvalues: var3 (ref), var2 (ref), friendsPerLoadGroupModule (ref), llama (ref)
 	assert(var3(p0))
 	assert(var2(p1))

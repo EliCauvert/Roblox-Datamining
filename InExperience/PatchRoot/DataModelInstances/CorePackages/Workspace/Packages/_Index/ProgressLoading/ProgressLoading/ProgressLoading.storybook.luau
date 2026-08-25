@@ -20,9 +20,9 @@ return {
 	storyRoot = progressLoading,
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p0) --[[ line: 22 ]]
+	mapStory = function(p0)
 		-- upvalues: reactModule (ref), foundationProvider (ref), t (ref), t_1 (ref)
-		return function(p1) --[[ line: 23 ]]
+		return function(p1)
 			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p0 (ref)
 			return reactModule.createElement(foundationProvider, {
 				colorMode = if p1 then t[p1.theme] else t.Default,

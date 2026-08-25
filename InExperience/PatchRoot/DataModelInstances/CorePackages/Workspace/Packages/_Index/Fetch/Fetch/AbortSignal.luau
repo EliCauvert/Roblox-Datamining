@@ -2,7 +2,7 @@
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 20 ]]
+function t.new()
 	-- upvalues: t (ref), error (ref)
 	local t_1 = {}
 	setmetatable(t_1, t)
@@ -13,7 +13,7 @@ function t.new() --[[ line: 20 ]]
 	return t_1
 end
 
-function t.abort(p0) --[[ line: 32 ]]
+function t.abort(p0)
 	-- upvalues: t (ref), error (ref)
 	local var2 = t.new()
 	var2.reason = p0 or error.new("Signal Aborted")
@@ -21,11 +21,11 @@ function t.abort(p0) --[[ line: 32 ]]
 	return var2
 end
 
-function t.timeout(p1) --[[ line: 38 ]]
+function t.timeout(p1)
 	-- upvalues: t (ref), error (ref)
 	local var3 = t.new()
 	var3.reason = error.new("TimeoutError")
-	task.delay(p1 / 1000, function() --[[ line: 41 ]]
+	task.delay(p1 / 1000, function()
 		-- upvalues: var3 (ref)
 		var3:fire()
 	end)
@@ -33,17 +33,17 @@ function t.timeout(p1) --[[ line: 38 ]]
 	return var3
 end
 
-function t:throwIfAborted() --[[ line: 47 ]]
+function t:throwIfAborted()
 	if self.aborted then
 		error(self.reason)
 	end
 end
 
-function t:connect(p2) --[[ line: 55 ]]
+function t:connect(p2)
 	return self._signal.Event:Connect(p2)
 end
 
-function t:fire() --[[ line: 60 ]]
+function t:fire()
 	self.aborted = true
 	self._signal:Fire()
 end

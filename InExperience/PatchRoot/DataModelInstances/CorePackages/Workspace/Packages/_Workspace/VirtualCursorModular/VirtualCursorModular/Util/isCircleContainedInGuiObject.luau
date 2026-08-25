@@ -1,4 +1,4 @@
-﻿return function(p0, p1, p2) --[[ line: 3 ]]
+﻿return function(p0, p1, p2)
 	local var0 = 0.5 * p2.AbsoluteSize
 	local var1 = p0 - (p2.AbsolutePosition + var0)
 	local var2 = math.atan2(var1.Y, var1.X) - math.rad(p2.AbsoluteRotation)

@@ -1,6 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").Parent.RobloxSubscriptionPurchaseApp)
 
-return function(p0) --[[ line: 11 | named "getBlackbirdUpsellBannerProductInfo" ]]
+return function(p0)
 	if type(p0) ~= "table" or #p0 == 0 then
 		return nil
 	end

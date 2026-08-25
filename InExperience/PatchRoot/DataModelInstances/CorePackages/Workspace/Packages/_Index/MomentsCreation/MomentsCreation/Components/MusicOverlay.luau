@@ -33,7 +33,7 @@ local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFl
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
 
-return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
+return function(p0)
 	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getMusicStoreModule (ref), useState (ref), useEffect (ref), signalsModule (ref), useAudioPlaybackModule (ref), useCallback (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), reactModule (ref), musicEditorModule (ref), getFFlagMomentsCreationMusicSearchStateFixModule (ref), dashModule (ref), musicPreviewItemModule (ref), text (ref), button (ref), foundationModule (ref), view (ref), icon (ref), textInput (ref), magnifyingGlass (ref), scrollView (ref), scrollBarVisibility (ref)
 	local controller = p0.controller
 	local playback = controller.preview.playback
@@ -47,9 +47,9 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 	local var25, var26 = useState(playback.getTimeLength(false))
 	local var27, var28 = useState(var18.getResults(false))
 	local var29, var30 = useState(var18.getSearchStatus(false))
-	useEffect(function() --[[ line: 81 ]]
+	useEffect(function()
 		-- upvalues: signalsModule (copy), var26 (ref), playback (ref), var28 (ref), var18 (ref), var30 (ref)
-		return signalsModule.createEffect(function(p1) --[[ line: 82 ]]
+		return signalsModule.createEffect(function(p1)
 			-- upvalues: var26 (copy), playback (copy), var28 (copy), var18 (copy), var30 (copy)
 			var26(playback.getTimeLength(p1))
 			var28(var18.getResults(p1))
@@ -57,33 +57,33 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 		end)
 	end, { playback, var18 })
 	local var31, var32 = useState(nil)
-	useEffect(function() --[[ line: 91 ]]
+	useEffect(function()
 		-- upvalues: signalsModule (copy), controller (ref), var32 (ref)
-		return signalsModule.createEffect(function(p2) --[[ line: 92 ]]
+		return signalsModule.createEffect(function(p2)
 			-- upvalues: controller (copy), var32 (copy)
 			local activeSession = controller.getActiveSession(p2)
 			var32(if activeSession ~= nil then nil else activeSession.getDraft(p2))
 		end)
 	end, { controller })
 	local var33 = useAudioPlaybackModule(var21 ~= nil, var21, { autoplay = true, looping = false })
-	useEffect(function() --[[ line: 105 ]]
+	useEffect(function()
 		-- upvalues: playback (ref), var18 (ref), var25 (ref)
 		playback.pause()
 		var18.search("", var25)
 	end, { var25 })
-	useEffect(function() --[[ line: 111 ]]
+	useEffect(function()
 		-- upvalues: var33 (ref), var22 (ref)
 		if not var33.playback.isPlaying then
 			var22(nil)
 		end
 	end, { var33.playback.isPlaying })
-	local var34 = useCallback(function() --[[ line: 117 ]]
+	local var34 = useCallback(function()
 		-- upvalues: playback (ref), controller (ref)
 		playback.play()
 		playback.setMuted(false)
 		controller.discardActiveTool()
 	end, { controller, playback })
-	local var35 = useCallback(function(p3) --[[ line: 123 ]]
+	local var35 = useCallback(function(p3)
 		-- upvalues: controller (ref), var22 (ref), var24 (ref), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -102,7 +102,7 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 		end
 		fireAnalyticsEventModule(eventNames.EditingFlowMusicSelected, t)
 	end, { controller })
-	local var36 = useCallback(function() --[[ line: 148 ]]
+	local var36 = useCallback(function()
 		-- upvalues: controller (ref), var24 (ref), playback (ref)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -112,14 +112,14 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 		var24(false)
 		playback.pause()
 	end, { controller, playback })
-	local var37 = useCallback(function() --[[ line: 157 ]]
+	local var37 = useCallback(function()
 		-- upvalues: var24 (ref), playback (ref), controller (ref)
 		var24(false)
 		playback.play()
 		playback.setMuted(false)
 		controller.commitActiveTool()
 	end, { controller, playback })
-	local var38 = useCallback(function(p4) --[[ line: 164 ]]
+	local var38 = useCallback(function(p4)
 		-- upvalues: controller (ref)
 		local activeSession = controller.getActiveSession(false)
 		local var49 = if activeSession ~= nil then nil else activeSession.getDraft(false)
@@ -128,7 +128,7 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 			activeSession.update({ assetId = var49.assetId, startTime = p4 })
 		end
 	end, { controller })
-	local var39 = useCallback(function(p5) --[[ line: 174 ]]
+	local var39 = useCallback(function(p5)
 		-- upvalues: var21 (ref), var22 (ref), var33 (ref)
 		if var21 == p5 then
 			var22(nil)
@@ -138,14 +138,14 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 		var22(p5)
 		var33.playback.play()
 	end, { var21 })
-	local var40 = useCallback(function() --[[ line: 184 ]]
+	local var40 = useCallback(function()
 		-- upvalues: var21 (ref), var22 (ref), var18 (ref), var19 (ref), var25 (ref)
 		if var21 ~= nil then
 			var22(nil)
 		end
 		var18.search(var19, var25)
 	end, { var21, var19, var25 })
-	local var41 = useCallback(function() --[[ line: 191 ]]
+	local var41 = useCallback(function()
 		-- upvalues: var18 (ref), var19 (ref), var25 (ref)
 		var18.search(var19, var25)
 	end, { var18, var19, var25 })
@@ -167,7 +167,7 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 	return reactModule.createElement(view, {
 		tag = "col align-x-center align-y-top gap-small position-bottom-center anchor-bottom-center size-full-0 radius-medium bg-surface-100",
 		ZIndex = 5,
-		onActivated = function() --[[ line: 253 ]] end,
+		onActivated = function() end,
 		Size = UDim2.fromScale(1, 0.666666666667),
 		stateLayer = {
 			affordance = foundationModule.Enums.StateLayerAffordance.None
@@ -227,7 +227,7 @@ return function(p0) --[[ line: 64 | named "MusicOverlay" ]]
 				scrollBarVisibility = scrollBarVisibility.None,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, if #var27 > 0 then dashModule.map(var27, function(p6, p7) --[[ line: 214 ]]
+		}, if #var27 > 0 then dashModule.map(var27, function(p6, p7)
 			-- upvalues: reactModule (copy), musicPreviewItemModule (copy), var35 (ref), var39 (ref), var21 (ref), var42 (ref)
 			return reactModule.createElement(musicPreviewItemModule, {
 				key = p6.AssetId,

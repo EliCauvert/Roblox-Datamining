@@ -1,4 +1,4 @@
-﻿return function(p0) --[[ line: 3 | named "getCommonItemStatus" ]]
+﻿return function(p0)
 	local var0 = nil
 	
 	for i, v in p0 do

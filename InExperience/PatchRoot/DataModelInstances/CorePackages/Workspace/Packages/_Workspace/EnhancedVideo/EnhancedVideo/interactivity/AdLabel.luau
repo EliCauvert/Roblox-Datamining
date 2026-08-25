@@ -16,7 +16,7 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local enhancedVideoStoreModule = require(parent.Parent.EnhancedVideoStore)
 local useSignalState = require(parent_1.SignalsReact).useSignalState
 
-return if fFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then reactModule.memo(if fFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then function(p4) --[[ line: 114 ]]
+return if fFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then reactModule.memo(if fFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then function(p4)
 	-- upvalues: enhancedVideoStoreModule (ref), useSignalState (ref), reactModule (ref), adLabel (ref)
 	local var15 = enhancedVideoStoreModule(false)
 	
@@ -25,7 +25,7 @@ return if fFlagLuaAppEnhancedVideoAdLabelPropUpdateModule then reactModule.memo(
 		adDisclosureText = useSignalState(var15.getAdDisclosureText),
 		showAdPreferencesUrl = useSignalState(var15.getShowAdPreferencesUrl)
 	})
-end else nil) else reactModule.memo(function(p0) --[[ line: 27 | named "LegacyAdLabel" ]]
+end else nil) else reactModule.memo(function(p0)
 	-- upvalues: useLocalization (ref), enums (ref), enhancedVideoStoreModule (ref), useSignalState (ref), reactModule (ref), adDisclosureTelemetry (ref), view (ref), menu (ref), text (ref), icon (ref), whyThisAdModal (ref)
 	local var5 = useLocalization({
 		adLabel = "Feature.EnhancedVideo.Label.Ad",
@@ -45,13 +45,13 @@ end else nil) else reactModule.memo(function(p0) --[[ line: 27 | named "LegacyAd
 	local var10, var11 = reactModule.useState(false)
 	local var12, var13 = reactModule.useState(false)
 	
-	local function _(p1) --[[ line: 45 | named "toggleMenu" ]]
+	local function _(p1)
 		-- upvalues: adDisclosureTelemetry (copy), var11 (ref)
 		adDisclosureTelemetry.logAdDisclosureMenuToggled(p1)
 		var11(p1)
 	end
 	
-	local _ = function(p2) --[[ line: 50 | named "toggleWhyThisAdModal" ]]
+	local _ = function(p2)
 		-- upvalues: adDisclosureTelemetry (copy), var13 (ref)
 		adDisclosureTelemetry.logAdDisclosureWhyThisAdToggled(p2)
 		var13(p2)
@@ -66,12 +66,12 @@ end else nil) else reactModule.memo(function(p0) --[[ line: 27 | named "LegacyAd
 			size = enums.InputSize.Medium,
 			align = enums.PopoverAlign.End,
 			width = UDim.new(0, 180),
-			onPressedOutside = function() --[[ line: 66 ]]
+			onPressedOutside = function()
 				-- upvalues: adDisclosureTelemetry (copy), var11 (ref)
 				adDisclosureTelemetry.logAdDisclosureMenuToggled(false)
 				var11(false)
 			end,
-			onActivated = function(p3) --[[ line: 69 ]]
+			onActivated = function(p3)
 				-- upvalues: adDisclosureTelemetry (copy), var11 (ref), var13 (ref), p0 (ref)
 				if p3 == "whyThisAd" then
 					adDisclosureTelemetry.logAdDisclosureMenuToggled(false)
@@ -84,7 +84,7 @@ end else nil) else reactModule.memo(function(p0) --[[ line: 27 | named "LegacyAd
 		}, {
 			AdLabel = reactModule.createElement(view, {
 				tag = "size-1300-600 bg-over-media-100 radius-small stroke-standard stroke-default row align-x-center align-y-center",
-				onActivated = function() --[[ line: 79 ]]
+				onActivated = function()
 					-- upvalues: var10 (ref), adDisclosureTelemetry (copy), var11 (ref)
 					local var14 = not var10
 					adDisclosureTelemetry.logAdDisclosureMenuToggled(var14)
@@ -107,7 +107,7 @@ end else nil) else reactModule.memo(function(p0) --[[ line: 27 | named "LegacyAd
 		WhyThisAdModal = if var12 then reactModule.createElement(whyThisAdModal, {
 			adDisclosureBody = if var8 ~= "" then var5.errorAdDisclosureText else var8,
 			showAdPreferencesUrl = var9,
-			onClose = function() --[[ line: 105 ]]
+			onClose = function()
 				-- upvalues: adDisclosureTelemetry (copy), var13 (ref)
 				adDisclosureTelemetry.logAdDisclosureWhyThisAdToggled(false)
 				var13(false)

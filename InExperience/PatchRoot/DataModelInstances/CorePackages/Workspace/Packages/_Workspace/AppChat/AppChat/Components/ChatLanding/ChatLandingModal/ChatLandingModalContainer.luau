@@ -59,7 +59,7 @@ local t_1 = {
 	phone_verify = "ChatLandingPvUpsell"
 }
 
-return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
+return memo(function(_)
 	-- upvalues: useDispatch (ref), useAnalyticsModule (ref), useContext (ref), luaAppNavigationContextModule (ref), useNavigation (ref), useState (ref), useIsInExperienceModule (ref), useSelector (ref), modalConfigurationModule (ref), getDeepValue2Module (ref), t_1 (ref), t (ref), chatLandingModalVariant (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useEffectOnMount (ref), useEffect (ref), chatLandingModalTelemetryModule (ref), useCallback (ref), appPage (ref), unfilteredThreadsAMPFeatureNameModule (ref), fFlagSignalsNavP3Dispatch (ref), var16 (ref), navigateBack (ref), accessResponseEnum (ref), refreshAllUnfilteredThreadsDetailsModule (ref), navigateDown (ref), httpService (ref), fStringCanAccessTrustedContactsAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), modalTelemetryModule (ref), fFlagDebugAppChatFaeModule (ref), fFlagDebugAEGIS1AppChatBannerModule (ref), openTcLearnMoreLinkModule (ref), appChatNetworkingModule (ref), cryoModule (ref), reactModule (ref), useRef (ref), useIsGuiInChatVisibleModule (ref), useRecordModalSeenWithDelayModule (ref), fIntAppChatModalSeenImpressionDelayMsModule (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), appChatFAEBannerModule (ref), chatLandingModalModule (ref), enum (ref), getAgeVerifiedChangedSignal (ref)
 	local var42
 	local var28 = useDispatch()
@@ -68,7 +68,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 	local var31 = useNavigation()
 	local var32, var33 = useState({})
 	local var34 = useIsInExperienceModule()
-	local var35 = useSelector(function(p0) --[[ line: 86 ]]
+	local var35 = useSelector(function(p0)
 		-- upvalues: modalConfigurationModule (copy), getDeepValue2Module (copy)
 		return getDeepValue2Module(p0, "ChatAppReducer.Modals.chatLandingModal") or modalConfigurationModule.default
 	end)
@@ -84,13 +84,13 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		var42 = modalVariant == chatLandingModalVariant.ChatLandingAgeVerifiedCommsUpsellModal and not var32[modalVariant]
 	end
 	local var43 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
-	useEffectOnMount(function() --[[ line: 104 ]]
+	useEffectOnMount(function()
 		-- upvalues: var29 (ref), var41 (ref), var42 (ref)
 		if var29 and var41 and var42 then
 			var29.fireAnalyticsEvent(`{var41}Rendered`)
 		end
 	end)
-	useEffect(function() --[[ line: 109 ]]
+	useEffect(function()
 		-- upvalues: var42 (ref), modalVariant (ref), chatLandingModalVariant (copy), var43 (ref), chatLandingModalTelemetryModule (copy)
 		if var42 and modalVariant == chatLandingModalVariant.AgeAssuranceUpsell then
 			var43.emit(chatLandingModalTelemetryModule.Events.FaeModalShown, {})
@@ -99,7 +99,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 			var43.emit(chatLandingModalTelemetryModule.Events.ModalRendered, { modalVariant = modalVariant })
 		end
 	end, { modalVariant, var42 })
-	local var44 = useCallback(function() --[[ line: 120 ]]
+	local var44 = useCallback(function()
 		-- upvalues: var29 (ref), var41 (ref), appPage (copy), unfilteredThreadsAMPFeatureNameModule (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), var28 (ref), navigateBack (copy), accessResponseEnum (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var34 (ref), navigateDown (copy)
 		if var29 and var41 then
 			var29.fireAnalyticsEvent(`{var41}ContinueClicked`)
@@ -108,7 +108,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 			name = appPage.AmpWizardContainer,
 			extraProps = {
 				featureName = unfilteredThreadsAMPFeatureNameModule,
-				completionCallback = function(p1, _) --[[ line: 128 ]]
+				completionCallback = function(p1, _)
 					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var16 (copy), var28 (copy), navigateBack (copy), accessResponseEnum (copy), var29 (copy), var41 (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var34 (copy)
 					if fFlagSignalsNavP3Dispatch then
 						var16.back(true)
@@ -136,7 +136,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		end
 		var28(navigateDown(t))
 	end, { var28, var29, var41 })
-	local var45 = useCallback(function() --[[ line: 155 ]]
+	local var45 = useCallback(function()
 		-- upvalues: httpService (copy), var43 (ref), chatLandingModalTelemetryModule (copy), appPage (copy), fStringCanAccessTrustedContactsAmpFeature (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), var28 (ref), navigateBack (copy), accessResponseEnum (copy), modalVariant (ref), modalTelemetryModule (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var34 (ref), fFlagDebugAppChatFaeModule (copy), fFlagDebugAEGIS1AppChatBannerModule (copy), navigateDown (copy)
 		local var58 = httpService:GenerateGUID(false)
 		var43.emit(chatLandingModalTelemetryModule.Events.TelemetryFaeButtonClick, {
@@ -150,7 +150,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 				entryPointEventCtx = chatLandingModalTelemetryModule.Constants.EventStreamCtx,
 				metadata = { sessionId = var58 },
 				nameSpace = fStringCanAccessTrustedContactsAmpNameSpace,
-				completionCallback = function(p2, _) --[[ line: 170 ]]
+				completionCallback = function(p2, _)
 					-- upvalues: fFlagSignalsNavP3Dispatch (copy), var16 (copy), var28 (copy), navigateBack (copy), accessResponseEnum (copy), var43 (copy), chatLandingModalTelemetryModule (copy), modalVariant (copy), modalTelemetryModule (copy), refreshAllUnfilteredThreadsDetailsModule (copy), var34 (copy), fFlagDebugAppChatFaeModule (copy), fFlagDebugAEGIS1AppChatBannerModule (copy)
 					if fFlagSignalsNavP3Dispatch then
 						var16.back(true)
@@ -185,14 +185,14 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		end
 		var28(navigateDown(t))
 	end, { var28, var34, var43, modalVariant })
-	local var46 = useCallback(function() --[[ line: 213 ]]
+	local var46 = useCallback(function()
 		-- upvalues: var29 (ref), var41 (ref), var31 (ref), var30 (ref)
 		if var29 and var41 then
 			var29.fireAnalyticsEvent(`{var41}LearnMoreClicked`)
 		end
 		var30.navigateToUnfilteredThreadsLearnMore(if var31 then var31.navigate else nil)
 	end, { var30, var29, var31, var41 })
-	local var47 = useCallback(function() --[[ line: 231 ]]
+	local var47 = useCallback(function()
 		-- upvalues: var29 (ref), var41 (ref), modalVariant (ref), chatLandingModalVariant (copy), var43 (ref), chatLandingModalTelemetryModule (copy), httpService (copy), modalTelemetryModule (copy), var28 (ref), appChatNetworkingModule (copy), var38 (ref), var36 (ref), fFlagDebugAppChatFaeModule (copy), fFlagDebugAEGIS1AppChatBannerModule (copy), var33 (ref), cryoModule (copy), var32 (ref)
 		if var29 and var41 then
 			var29.fireAnalyticsEvent(`{var41}Dismissed`)
@@ -207,7 +207,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 			modalVariant = modalVariant,
 			action = modalTelemetryModule.Enums.ModalActions.Dismiss
 		})
-		var28(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var38, "chat_landing_modal", var36)):catch(function(p3) --[[ line: 251 ]]
+		var28(appChatNetworkingModule.rodux.RecordModalSequenceResponse.API(var38, "chat_landing_modal", var36)):catch(function(p3)
 			warn("Error in ChatLandingModalContainer -> RecordModalSequenceResponse dismissed: " .. tostring(p3), p3)
 		end)
 		
@@ -221,12 +221,12 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		var32, var33, var28, var29, var41, var38, modalVariant, var36, var43
 	})
 	local var48 = ({
-		[chatLandingModalVariant.AgeAssuranceUpsell] = useCallback(function() --[[ line: 227 ]]
+		[chatLandingModalVariant.AgeAssuranceUpsell] = useCallback(function()
 			-- upvalues: var28 (ref), openTcLearnMoreLinkModule (copy)
 			var28(openTcLearnMoreLinkModule())
 		end, { var28 })
 	})[modalVariant]
-	local var49 = useCallback(function(...) --[[ line: 291 ]]
+	local var49 = useCallback(function(...)
 		-- upvalues: var43 (ref), chatLandingModalTelemetryModule (copy), modalVariant (ref), modalTelemetryModule (copy), var48 (ref)
 		var43.emit(chatLandingModalTelemetryModule.Events.ModalAction, {
 			modalVariant = modalVariant,
@@ -235,9 +235,9 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		var48(...)
 	end, { var48, var43, modalVariant })
 	local additionalContent = var35 and (var35.modal_layout and (var35.modal_layout.body and (var35.modal_layout.body.additional_content or {})))
-	local var51 = reactModule.useMemo(function() --[[ line: 304 ]]
+	local var51 = reactModule.useMemo(function()
 		-- upvalues: cryoModule (copy), additionalContent (ref), appChatNetworkingModule (copy), var49 (ref)
-		return cryoModule.List.map(additionalContent, function(p4) --[[ line: 305 ]]
+		return cryoModule.List.map(additionalContent, function(p4)
 			-- upvalues: appChatNetworkingModule (copy), var49 (copy)
 			local t = { type = p4.type, text = p4.text }
 			
@@ -252,7 +252,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		fully_eligible_ftux = var46,
 		[chatLandingModalVariant.AgeAssuranceUpsell] = var45
 	})[modalVariant]
-	local var53 = useCallback(function(...) --[[ line: 323 ]]
+	local var53 = useCallback(function(...)
 		-- upvalues: var43 (ref), chatLandingModalTelemetryModule (copy), modalVariant (ref), modalTelemetryModule (copy), var52 (ref)
 		var43.emit(chatLandingModalTelemetryModule.Events.ModalAction, {
 			modalVariant = modalVariant,
@@ -268,11 +268,11 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		delayMs = fIntAppChatModalSeenImpressionDelayMsModule,
 		canRecordAction = useIsGuiInChatVisibleModule(var54, { var54.current, var42 }) and var42
 	})
-	local var55 = if fFlagDebugAppChatFaeModule then reactModule.useCallback(function() --[[ line: 342 ]]
+	local var55 = if fFlagDebugAppChatFaeModule then reactModule.useCallback(function()
 		-- upvalues: var28 (ref)
 		var28({ type = "DEBUG_ShowAppChatFaeUpsell" })
-	end, { var28 }) else function() --[[ line: 347 ]] end
-	local var56 = if fFlagDebugAEGIS1AppChatBannerModule then reactModule.useCallback(function() --[[ line: 350 ]]
+	end, { var28 }) else function() end
+	local var56 = if fFlagDebugAEGIS1AppChatBannerModule then reactModule.useCallback(function()
 		-- upvalues: var28 (ref)
 		var28({ type = "DEBUG_ShowChatLandingAgeVerifiedTimedModal" })
 	end, { var28 }) else nil
@@ -314,7 +314,7 @@ return memo(function(_) --[[ line: 77 | named "ChatLandingModalContainer" ]]
 		Btn2 = reactModule.createElement("TextButton", {
 			Text = "DEBUG Fire Age Verified event",
 			Size = UDim2.new(0, 200, 0, 50),
-			[reactModule.Event.Activated] = function() --[[ line: 409 ]]
+			[reactModule.Event.Activated] = function()
 				-- upvalues: getAgeVerifiedChangedSignal (copy)
 				getAgeVerifiedChangedSignal():fire()
 			end

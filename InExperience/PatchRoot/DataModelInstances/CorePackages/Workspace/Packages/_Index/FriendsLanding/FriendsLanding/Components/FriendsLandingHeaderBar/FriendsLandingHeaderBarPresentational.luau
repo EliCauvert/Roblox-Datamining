@@ -10,7 +10,7 @@ local getFFlagFixConnectTabSearchBarHeight = dependenciesModule.GetFFlagFixConne
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 18 | named "FriendsLandingHeaderBarPresentational" ]]
+return function(p0)
 	-- upvalues: useUiModeInfo (ref), uiMode (ref), fFlagEnableLeftNavOnConsole (ref), constantsModule (ref), useDesignTokens (ref), reactModule (ref), headerBar (ref), getFFlagFixConnectTabSearchBarHeight (ref)
 	if useUiModeInfo().uiMode == uiMode.TenFoot and not fFlagEnableLeftNavOnConsole then
 		return nil

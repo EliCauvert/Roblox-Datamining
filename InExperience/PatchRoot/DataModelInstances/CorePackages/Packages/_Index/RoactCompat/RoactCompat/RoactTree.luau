@@ -5,13 +5,13 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local warnOnceModule = require(script.Parent.warnOnce)
 
 return {
-	mount = function(p0, p1, p2) --[[ line: 31 ]]
+	mount = function(p0, p1, p2)
 		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), inspect (ref), reactRobloxModule (ref)
 		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 			warnOnceModule("mount", "Please use the createRoot API in ReactRoblox")
 		end
 		if p1 ~= nil and typeof(p1) ~= "Instance" then
-			error(string.format("Cannot mount element (`%s`) into a parent that is not a Roblox Instance (got type `%s`) \n%s", if p0 then tostring(p0.type) else "<unknown>", typeof(p1), (function() --[[ line: 47 ]]
+			error(string.format("Cannot mount element (`%s`) into a parent that is not a Roblox Instance (got type `%s`) \n%s", if p0 then tostring(p0.type) else "<unknown>", typeof(p1), (function()
 				-- upvalues: p1 (write), inspect (copy)
 				return if p1 == nil then "" else inspect(p1)
 			end)()))
@@ -27,7 +27,7 @@ return {
 			p2 = if _G.__ROACT_17_COMPAT_LEGACY_ROOT__ then "ReactLegacyRoot" else "ReactRoot"
 		end
 		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
-			reactRobloxModule.act(function() --[[ line: 82 ]]
+			reactRobloxModule.act(function()
 				-- upvalues: var3 (write), reactRobloxModule (copy), p2 (write), p0 (ref), p1 (write)
 				var3:render(reactRobloxModule.createPortal({ [p2] = p0 }, p1))
 			end)
@@ -36,7 +36,7 @@ return {
 		end
 		return { root = var3, parent = p1, key = p2 }
 	end,
-	update = function(p3, p4) --[[ line: 98 ]]
+	update = function(p3, p4)
 		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactRobloxModule (ref)
 		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 			warnOnceModule("update", "Please use the createRoot API in ReactRoblox")
@@ -45,7 +45,7 @@ return {
 		local parent = p3.parent
 		
 		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
-			reactRobloxModule.act(function() --[[ line: 108 ]]
+			reactRobloxModule.act(function()
 				-- upvalues: p3 (ref), reactRobloxModule (copy), key (ref), p4 (ref), parent (ref)
 				p3.root:render(reactRobloxModule.createPortal({ [key] = p4 }, parent))
 			end)
@@ -56,13 +56,13 @@ return {
 		
 		return p3
 	end,
-	unmount = function(p5) --[[ line: 122 ]]
+	unmount = function(p5)
 		-- upvalues: reactGlobalsModule (ref), warnOnceModule (ref), reactRobloxModule (ref)
 		if reactGlobalsModule.__DEV__ and reactGlobalsModule.__COMPAT_WARNINGS__ then
 			warnOnceModule("unmount", "Please use the createRoot API in ReactRoblox")
 		end
 		if reactGlobalsModule.__ROACT_17_INLINE_ACT__ then
-			reactRobloxModule.act(function() --[[ line: 130 ]]
+			reactRobloxModule.act(function()
 				-- upvalues: p5 (ref)
 				p5.root:unmount()
 			end)

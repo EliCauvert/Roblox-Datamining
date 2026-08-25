@@ -7,7 +7,7 @@ local _ = require(squadsCore.Types)
 local urlBuilder = urlBuilderModule.UrlBuilder
 local urlBase = urlBuilderModule.UrlBase
 
-return function(p0, p1, p2) --[[ line: 17 ]]
+return function(p0, p1, p2)
 	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), loggerModule (ref), serializeTableModule (ref)
 	return httpService:RequestInternal({
 		Method = "GET",
@@ -20,7 +20,7 @@ return function(p0, p1, p2) --[[ line: 17 ]]
 			base = urlBase.APIS,
 			query = { scheduledGroupUpId = p0 }
 		})()
-	}):Start(function(_, p3) --[[ line: 38 ]]
+	}):Start(function(_, p3)
 		-- upvalues: p1 (ref), httpService (copy), loggerModule (copy), serializeTableModule (copy), p2 (ref)
 		if p3.StatusCode == 200 then
 			local body = p3.Body

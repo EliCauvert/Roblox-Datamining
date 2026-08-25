@@ -5,7 +5,7 @@ local sin = math.sin
 local cos = math.cos
 local sqrt = math.sqrt
 
-local function step(p0, p1, p2) --[[ line: 20 ]]
+local function step(p0, p1, p2)
 	-- upvalues: exp (ref), sqrt (ref), cos (ref), sin (ref), abs (ref)
 	local var6, var7
 	local dampingRatio = p0.__dampingRatio
@@ -65,7 +65,7 @@ local function step(p0, p1, p2) --[[ line: 20 ]]
 	return { value = var6, velocity = var7, complete = var21 }
 end
 
-return function(p3, p4) --[[ line: 117 | named "spring" ]]
+return function(p3, p4)
 	-- upvalues: assignModule (ref), step (ref)
 	assert(typeof(p3) == "number")
 	local t = {

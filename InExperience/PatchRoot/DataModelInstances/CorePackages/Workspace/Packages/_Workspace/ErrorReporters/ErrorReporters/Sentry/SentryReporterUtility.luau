@@ -1,8 +1,8 @@
 ﻿local _ = require(script.Parent.ErrorReport)
 local _ = script:FindFirstAncestor("ErrorReporters").Parent
 local t = {
-	safeGet = function(p0, p1) --[[ line: 160 ]]
-		local ok, status = pcall(function() --[[ line: 161 ]]
+	safeGet = function(p0, p1)
+		local ok, status = pcall(function()
 			-- upvalues: p0 (ref), p1 (ref)
 			return p0[p1]
 		end)
@@ -33,13 +33,13 @@ local t = {
 }
 local sentryIncludeRolloutFlagsContext = game:DefineFastFlag("SentryIncludeRolloutFlagsContext", false)
 
-local function _(p2) --[[ line: 126 | named "isJsonCompatible" ]]
+local function _(p2)
 	local var9 = typeof(p2)
 	
 	return p2 == nil or var9 == "string" or var9 == "boolean" or (var9 == "number" and (p2 == p2 and (p2 ~= 1e999 and p2 ~= -1e999)))
 end
 
-local _ = function(value) --[[ line: 192 | named "toUnsignedInt" ]]
+local _ = function(value)
 	if value == nil then
 		return nil
 	end
@@ -48,7 +48,7 @@ local _ = function(value) --[[ line: 192 | named "toUnsignedInt" ]]
 	return if var10 == nil then nil elseif var10 < 0 then 0 else math.floor(var10)
 end
 
-local function convertErrorStackToSentryFrame(p3) --[[ line: 252 ]]
+local function convertErrorStackToSentryFrame(p3)
 	local t = { lineno = tonumber(p3.line) or 0 }
 	
 	if p3.funcName then
@@ -73,7 +73,7 @@ local function convertErrorStackToSentryFrame(p3) --[[ line: 252 ]]
 	return t
 end
 
-function t.parseThreadsToSentry(value) --[[ line: 354 ]]
+function t.parseThreadsToSentry(value)
 	-- upvalues: convertErrorStackToSentryFrame (ref)
 	if not value then
 		return nil
@@ -110,7 +110,7 @@ function t.parseThreadsToSentry(value) --[[ line: 354 ]]
 	return if #t == 0 then nil else { values = t }
 end
 
-local function parseAppContext(p4) --[[ line: 439 ]]
+local function parseAppContext(p4)
 	-- upvalues: t (ref), sentryIncludeRolloutFlagsContext (ref)
 	local t_1 = {}
 	local attributes = p4.attributes
@@ -174,7 +174,7 @@ local function parseAppContext(p4) --[[ line: 439 ]]
 	return t_1
 end
 
-local _ = function(p5) --[[ line: 525 | named "parseNetworkContext" ]]
+local _ = function(p5)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	local networkType = t.safeGet(p5.attributes, "networkType")
@@ -185,7 +185,7 @@ local _ = function(p5) --[[ line: 525 | named "parseNetworkContext" ]]
 	return t_1
 end
 
-local function parseOSContext(p6) --[[ line: 560 ]]
+local function parseOSContext(p6)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	local attributes = p6.attributes
@@ -202,7 +202,7 @@ local function parseOSContext(p6) --[[ line: 560 ]]
 	return t_1
 end
 
-local function parseDeviceContext(p7) --[[ line: 629 ]]
+local function parseDeviceContext(p7)
 	-- upvalues: t (ref)
 	local t_1 = {}
 	local attributes = p7.attributes
@@ -327,7 +327,7 @@ local function parseDeviceContext(p7) --[[ line: 629 ]]
 	return t_1
 end
 
-local function parseCustomMetadataContexts(p8) --[[ line: 728 ]]
+local function parseCustomMetadataContexts(p8)
 	local t = {}
 	local customMetadata = p8.customMetadata
 	
@@ -342,7 +342,7 @@ local function parseCustomMetadataContexts(p8) --[[ line: 728 ]]
 	return t
 end
 
-function t.parseErrorToContext(p9) --[[ line: 792 ]]
+function t.parseErrorToContext(p9)
 	-- upvalues: parseAppContext (ref), t (ref), parseOSContext (ref), parseDeviceContext (ref), parseCustomMetadataContexts (ref)
 	local t_1 = { app = parseAppContext(p9) }
 	local t_2 = {}

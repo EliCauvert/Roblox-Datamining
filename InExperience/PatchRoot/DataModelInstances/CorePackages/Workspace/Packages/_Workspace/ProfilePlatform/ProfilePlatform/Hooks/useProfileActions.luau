@@ -104,7 +104,7 @@ local STATUS_CODES = constantsModule.STATUS_CODES
 local base_url = `{url.BASE_URL}share/g/%s`
 local var57 = tostring(DateTime.now().UnixTimestampMillis)
 
-local function _(p0) --[[ line: 137 | named "areFollowActionsSupportedForProfileType" ]]
+local function _(p0)
 	-- upvalues: enumsModule (ref)
 	return p0 == enumsModule.ProfileTypes.Community
 end
@@ -112,7 +112,7 @@ end
 local var58 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 local t = { skipFetch = true }
 
-return function(p1) --[[ line: 158 ]]
+return function(p1)
 	-- upvalues: useLocalUserId (ref), useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useShortUrl (ref), useGetOrGenerateLinkUrl (ref), useEffectOnce (ref), reactModule (ref), var57 (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), useLocalization (ref), enumsModule (ref), fFlagProfilePlatformAddTC (ref), fFlagProfilePlatformEnableUnlockChatModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableEditLookModule (ref), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnablePlatformProfileContextualMenuOption (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), var38 (ref), t (ref), fFlagProfilePlatformPassPresenceToJoinUserInExperience (ref), useSelector (ref), presenceModule (ref), useAboutSectionsModule (ref), fFlagProfileAboutDetailsUseSheet (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), useActionsComponentRequestModule (ref), useJoinUserInExperience (ref), fFlagProfilePlatformEditBackgroundMenuItemModule_1 (ref), iconName (ref), eventNamesModule (ref), friendRequestNicknamesIXP (ref), useProfileShareLink (ref), contexts (ref), profileSharePolicyEnum (ref), USER_FRIENDING_ERRORS (ref), STATUS_CODES (ref), httpService (ref), setCurrentToastMessage (ref), fFlagProfilePlatformCTAsRefactorModule (ref), profileActionsModule (ref), buttonVariant (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var46 (ref), networkingFriendsModule (ref), images (ref), refreshProfilePlatformActionInfoModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var16 (ref), navigateDown (ref), buttonType (ref), contextualInfoTypes (ref), refreshProfilePlatformModule (ref), enteredChatFromEntryPointModule (ref), chatEntryPointNames (ref), guiService (ref), notificationTypeList (ref), socialStopwatchModule (ref), setAliasModule (ref), foundationModule (ref), fFlagAXEnableProfileTab (ref), refreshProfilePlatformUserInfoModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), default (ref), fFlagEnableAbuseReportRevampFlow (ref), fFlagEnableAbuseReportRevampProfileAndGroupModule (ref), abuseVectorModule (ref), openDynamicAbuseReportModule (ref), closeCentralOverlay (ref), url (ref), myUserBlockingNetworkingModule (ref), USER_BLOCKING_ERRORS (ref), base_url (ref), groupsNetworkingModule (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), urlBuilder (ref), urlBase (ref), var58 (ref), sources (ref), fFlagPendingIncomingTrustedConnectionModule (ref), getPlatformFriendsServiceModule (ref), transferDirection (ref), transferOrigination (ref)
 	local var60 = useLocalUserId()
 	local var61 = useDispatch()
@@ -122,7 +122,7 @@ return function(p1) --[[ line: 158 ]]
 	local var65 = useProfileAnalyticsContextModule()
 	local var66 = useShortUrl()
 	useEffectOnce(useGetOrGenerateLinkUrl(), not (var66 ~= nil))
-	local var67 = reactModule.useMemo(function() --[[ line: 172 ]]
+	local var67 = reactModule.useMemo(function()
 		-- upvalues: var66 (ref), var57 (copy)
 		return string.format("%s&source=ProfileShare&stamp=%s", var66 or "", var57)
 	end, { var66 })
@@ -194,14 +194,14 @@ return function(p1) --[[ line: 158 ]]
 		userNotPassedCaptchaError = textKeysModule.UserNotPassedCaptchaError,
 		tooManyRequestsError = textKeysModule.TooManyRequestsError
 	})
-	local var71 = reactModule.useCallback(function() --[[ line: 287 ]]
+	local var71 = reactModule.useCallback(function()
 		-- upvalues: var63 (ref)
 		var63.navigateTo.previousView(true)
 	end, { var63.navigateTo.previousView })
 	local profileId = var63.profileId
 	local var72 = if fFlagEnablePlatformProfileContextualMenuOption then var63.profilePlatformId else nil
 	local profileType = var63.profileType
-	local var73 = if fFlagProfilePlatformPresenceStoreMigrationModule then var38(profileId, t) elseif fFlagProfilePlatformPassPresenceToJoinUserInExperience then useSelector(function(p2) --[[ line: 302 ]]
+	local var73 = if fFlagProfilePlatformPresenceStoreMigrationModule then var38(profileId, t) elseif fFlagProfilePlatformPassPresenceToJoinUserInExperience then useSelector(function(p2)
 		-- upvalues: presenceModule (copy), profileId (ref)
 		return presenceModule.Selectors.getUserPresenceByUserId(p2, profileId) or {
 			lastLocation = "",
@@ -228,7 +228,7 @@ return function(p1) --[[ line: 158 ]]
 	local var78 = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var63.navigateTo.editEmotes else nil
 	local var79 = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var63.navigateTo.switchAvatar else nil
 	
-	local function getEditBackgroundAction() --[[ line: 341 ]]
+	local function getEditBackgroundAction()
 		-- upvalues: fFlagProfilePlatformEditBackgroundMenuItemModule_1 (copy), var63 (ref), var70 (ref), enumsModule (copy), iconName (copy), var65 (ref), eventNamesModule (copy), p1 (ref)
 		if fFlagProfilePlatformEditBackgroundMenuItemModule_1 then
 			local editBackground = var63.navigateTo.editBackground
@@ -236,7 +236,7 @@ return function(p1) --[[ line: 158 ]]
 			return {
 				text = var70[enumsModule.ProfileActions.EditBackground],
 				icon = iconName.Image,
-				onActivated = function() --[[ line: 347 ]]
+				onActivated = function()
 					-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), editBackground (ref)
 					var65.fireAnalyticsEvent(eventNamesModule.EditAppearanceMenuEditBackground, { buttonSurface = p1 })
 					editBackground()
@@ -268,14 +268,14 @@ return function(p1) --[[ line: 158 ]]
 		[USER_FRIENDING_ERRORS.TOO_MANY_REQUESTS_ERROR] = var70.tooManyRequestsError
 	}
 	
-	local function _(p3, p4, p5) --[[ line: 385 | named "getErrorToastMessage" ]]
+	local function _(p3, p4, p5)
 		-- upvalues: enumsModule (copy), STATUS_CODES (copy), t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref)
 		if p3 == enumsModule.ProfileActions.AddFriend or p3 == enumsModule.ProfileActions.AddFriendFromContacts then
 			return if p4 == STATUS_CODES.BAD_REQUEST then t_1[p5] elseif p4 == STATUS_CODES.UNAUTHORIZED then t_2[p5] elseif p4 == STATUS_CODES.FORBIDDEN then t_3[p5] elseif p4 == STATUS_CODES.TOO_MANY_REQUESTS then t_4[p5] else nil
 		end
 	end
 	
-	local function setErrorToast(value, p6) --[[ line: 400 ]]
+	local function setErrorToast(value, p6)
 		-- upvalues: httpService (copy), enumsModule (copy), STATUS_CODES (copy), t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), var70 (ref), var61 (ref), setCurrentToastMessage (copy)
 		if p6 == nil then
 			var61(setCurrentToastMessage({
@@ -320,7 +320,7 @@ return function(p1) --[[ line: 158 ]]
 		actionsComponentRequest = if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then var76 else nil
 	} else nil
 	
-	return reactModule.useMemo(function() --[[ line: 447 ]]
+	return reactModule.useMemo(function()
 		-- upvalues: fFlagProfilePlatformCTAsRefactorModule (copy), profileActionsModule (copy), var89 (ref), enumsModule (copy), var70 (ref), buttonVariant (copy), var65 (ref), eventNamesModule (copy), p1 (ref), var63 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var46 (copy), profileId (ref), var61 (ref), networkingFriendsModule (copy), var60 (ref), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (ref), friendRequestNicknamesIXP (copy), var81 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), navigateDown (copy), setErrorToast (ref), buttonType (copy), contextualInfoTypes (copy), refreshProfilePlatformModule (copy), profileType (ref), var62 (ref), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), notificationTypeList (copy), socialStopwatchModule (copy), setAliasModule (copy), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), iconName (copy), editAvatar (ref), fFlagProfilePlatformEnableEditLookModule (copy), var78 (ref), var79 (ref), getEditBackgroundAction (ref), foundationModule (copy), fFlagAXEnableProfileTab (copy), editUsername (ref), refreshProfilePlatformUserInfoModule (copy), fFlagMoveInExperienceModeToEditProfile (copy), var77 (ref), qRCodePage (ref), var83 (ref), default (copy), contexts (copy), var67 (ref), textKeysModule (copy), var82 (ref), fFlagEnableAbuseReportRevampFlow (copy), fFlagEnableAbuseReportRevampProfileAndGroupModule (copy), abuseVectorModule (copy), openDynamicAbuseReportModule (copy), closeCentralOverlay (copy), url (copy), myUserBlockingNetworkingModule (copy), USER_BLOCKING_ERRORS (copy), base_url (copy), groupsNetworkingModule (copy), getProfilePlatformModule (copy), getAvailableCommunityComponentsModule (copy), urlBuilder (copy), fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule (copy), urlBase (copy), var58 (copy), fFlagProfilePlatformAddTC (copy), sources (copy), fFlagPendingIncomingTrustedConnectionModule (copy), fFlagProfilePlatformNewProfileHeader (copy), aboutSections (write), fFlagProfileAboutDetailsUseSheet (copy), var74 (write), fFlagEnablePlatformProfileContextualMenuOption (copy), getPlatformFriendsServiceModule (copy), var72 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var64 (ref), transferDirection (copy), transferOrigination (copy), fFlagProfilePlatformEnableTradeItemsModule (copy)
 		if fFlagProfilePlatformCTAsRefactorModule then
 			local t = {}
@@ -338,7 +338,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.AcceptFriendRequest] = {
 					text = var70[enumsModule.ProfileActions.AcceptFriendRequest],
 					variant = buttonVariant.Emphasis,
-					onActivated = function() --[[ line: 473 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), enumsModule (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var46 (copy), profileId (copy), var61 (copy), networkingFriendsModule (copy), var60 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonAcceptFriendRequest, {
 							buttonSurface = p1,
@@ -352,7 +352,7 @@ return function(p1) --[[ line: 158 ]]
 							recommendationSessionId = var63.sourceInfo.recommendationSessionId
 						})
 						
-						return (if fFlagMigrateFriendshipStatusesRemainingActions then var46.AcceptFriendRequest(profileId) else var61(networkingFriendsModule.AcceptFriendRequestFromUserId.API({ targetUserId = profileId, currentUserId = var60 }))):andThen(function() --[[ line: 492 ]]
+						return (if fFlagMigrateFriendshipStatusesRemainingActions then var46.AcceptFriendRequest(profileId) else var61(networkingFriendsModule.AcceptFriendRequestFromUserId.API({ targetUserId = profileId, currentUserId = var60 }))):andThen(function()
 							-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 							var61(setCurrentToastMessage({
 								isLocalized = true,
@@ -366,7 +366,7 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.AcceptOffNetworkFriendRequest] = {
 					text = var70[enumsModule.ProfileActions.AcceptOffNetworkFriendRequest],
-					onActivated = function() --[[ line: 504 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), var63 (copy), var61 (copy), networkingFriendsModule (copy), profileId (copy), var60 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonAddFriendFromContacts, { shareLinkId = var63.sourceInfo.shareLinkId })
 						
@@ -374,7 +374,7 @@ return function(p1) --[[ line: 158 ]]
 							targetUserId = profileId,
 							currentUserId = var60,
 							friendingToken = var63.offNetworkFriendRequestToken
-						})):andThen(function() --[[ line: 512 ]]
+						})):andThen(function()
 							-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 							var61(setCurrentToastMessage({
 								isLocalized = true,
@@ -389,7 +389,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.AddFriend] = {
 					text = var70[enumsModule.ProfileActions.AddFriend],
 					variant = buttonVariant.Emphasis,
-					onActivated = function() --[[ line: 525 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), enumsModule (copy), friendRequestNicknamesIXP (copy), var81 (copy), appPage (copy), profileId (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), var61 (copy), navigateDown (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var46 (copy), networkingFriendsModule (copy), var60 (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy), setErrorToast (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonAddFriend, {
 							buttonSurface = p1,
@@ -414,10 +414,10 @@ return function(p1) --[[ line: 158 ]]
 								targetUserId = profileId,
 								currentUserId = var60,
 								friendshipOriginSourceType = var63.sourceInfo.friendshipOriginSourceType
-							}))):andThen(function() --[[ line: 571 ]]
+							}))):andThen(function()
 								-- upvalues: var61 (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 								return var61(refreshProfilePlatformActionInfoModule(profileId, var76))
-							end):catch(function(p7) --[[ line: 576 ]]
+							end):catch(function(p7)
 								-- upvalues: setErrorToast (copy), enumsModule (copy)
 								setErrorToast(enumsModule.ProfileActions.AddFriend, p7)
 							end)
@@ -439,7 +439,7 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimaryContextual,
 					variant = buttonVariant.Emphasis,
 					text = var70[enumsModule.ProfileActions.AddFriendFromContacts],
-					onActivated = function() --[[ line: 586 ]]
+					onActivated = function()
 						-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var46 (copy), profileId (copy), networkingFriendsModule (copy), var60 (copy), contextualInfoTypes (copy), refreshProfilePlatformModule (copy), profileType (copy), enumsModule (copy), setErrorToast (copy)
 						var61(setCurrentToastMessage({
 							isLocalized = true,
@@ -451,7 +451,7 @@ return function(p1) --[[ line: 158 ]]
 							currentUserId = var60,
 							contactId = profileId,
 							contextType = contextualInfoTypes.Contacts
-						}))):andThen(function() --[[ line: 600 ]]
+						}))):andThen(function()
 							-- upvalues: var61 (copy), refreshProfilePlatformModule (copy), profileType (copy), profileId (copy), enumsModule (copy)
 							return var61(refreshProfilePlatformModule({
 								profileType = profileType,
@@ -462,7 +462,7 @@ return function(p1) --[[ line: 158 ]]
 									enumsModule.Components.ContactDescription
 								}
 							}))
-						end):catch(function(p8) --[[ line: 611 ]]
+						end):catch(function(p8)
 							-- upvalues: setErrorToast (copy), enumsModule (copy)
 							setErrorToast(enumsModule.ProfileActions.AddFriendFromContacts, p8)
 						end)
@@ -473,17 +473,17 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.Secondary,
 					variant = buttonVariant.Subtle,
 					text = var70[enumsModule.ProfileActions.AddFriendFromContactsSent],
-					onActivated = function() --[[ line: 620 ]] end
+					onActivated = function() end
 				},
 				[enumsModule.ProfileActions.Block] = {
 					text = var70[enumsModule.ProfileActions.Block],
-					onActivated = function() --[[ line: 625 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var62 (copy), appPage (copy), profileId (copy), var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonBlock, { buttonSurface = p1 })
 						var62.push(appPage.BlockingModal, {
 							navProps = {
 								userId = profileId,
-								onBlockSuccess = function() --[[ line: 632 ]]
+								onBlockSuccess = function()
 									-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 									var61(setCurrentToastMessage({
 										isLocalized = true,
@@ -499,12 +499,12 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.CannotAddFriend] = {
 					isDisabled = true,
 					text = var70[enumsModule.ProfileActions.CannotAddFriend],
-					onActivated = function() --[[ line: 647 ]] end
+					onActivated = function() end
 				},
 				[enumsModule.ProfileActions.Chat] = {
 					text = var70[enumsModule.ProfileActions.Chat],
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 653 ]]
+					onActivated = function()
 						-- upvalues: p1 (copy), enumsModule (copy), var65 (copy), eventNamesModule (copy), var61 (copy), enteredChatFromEntryPointModule (copy), chatEntryPointNames (copy), guiService (copy), profileId (copy), notificationTypeList (copy)
 						if p1 == enumsModule.ButtonSurface.ContextualMenu then
 							var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonChat, { buttonSurface = p1 })
@@ -517,7 +517,7 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.EditAlias] = {
 					text = var70[enumsModule.ProfileActions.EditAlias],
-					onActivated = function() --[[ line: 670 ]]
+					onActivated = function()
 						-- upvalues: socialStopwatchModule (copy), var65 (copy), eventNamesModule (copy), p1 (copy), var62 (copy), enumsModule (copy), profileId (copy), setAliasModule (copy)
 						socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CustomizeNameOpened)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonSetAlias, { buttonSurface = p1 })
@@ -530,7 +530,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.EditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 					text = var70[enumsModule.ProfileActions.EditAppearance],
 					variant = buttonVariant.Emphasis,
-					onActivated = function() --[[ line: 685 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonEditAppearance, { buttonSurface = p1 })
 					end
@@ -538,7 +538,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.EditAvatar] = {
 					text = var70[enumsModule.ProfileActions.EditAvatar],
 					icon = if fFlagProfilePlatformEnableEditAppearanceMenuModule then iconName.Person else nil,
-					onActivated = function() --[[ line: 695 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), eventNamesModule (copy), p1 (copy), editAvatar (copy)
 						var65.fireAnalyticsEvent(if fFlagProfilePlatformEnableEditAppearanceMenuModule then eventNamesModule.EditAppearanceMenuEditAvatar else eventNamesModule.CTAButtonEditAvatar, { buttonSurface = p1 })
 						editAvatar()
@@ -547,7 +547,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.EditLook] = if fFlagProfilePlatformEnableEditLookModule then {
 					text = var70[enumsModule.ProfileActions.EditLook],
 					icon = iconName.Person,
-					onActivated = function() --[[ line: 711 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), editAvatar (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonEditLook, { buttonSurface = p1 })
 						editAvatar()
@@ -556,7 +556,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.EditEmotes] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 					text = var70[enumsModule.ProfileActions.EditEmotes],
 					icon = iconName.SquareFaceWavingHand,
-					onActivated = function() --[[ line: 723 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var78 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.EditAppearanceMenuEditEmote, { buttonSurface = p1 })
 						var78()
@@ -565,7 +565,7 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.SwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 					text = var70[enumsModule.ProfileActions.SwitchAvatar],
 					icon = iconName.PersonStandingArrowReverse,
-					onActivated = function() --[[ line: 735 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var79 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.EditAppearanceMenuSwitchAvatar, { buttonSurface = p1 })
 						var79()
@@ -577,7 +577,7 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimarySystem,
 					variant = buttonVariant.Standard,
 					text = var70[enumsModule.ProfileActions.EditProfile],
-					onActivated = function() --[[ line: 749 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var62 (copy), enumsModule (copy), fFlagAXEnableProfileTab (copy), var63 (copy), editUsername (copy), var61 (copy), refreshProfilePlatformUserInfoModule (copy), profileId (copy), fFlagMoveInExperienceModeToEditProfile (copy)
 						local var97
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonOpenEditProfilePage, { buttonSurface = p1 })
@@ -593,23 +593,23 @@ return function(p1) --[[ line: 158 ]]
 						end
 						t.fullBleed = var97
 						
-						function t.navigateToEditUsername(p9) --[[ line: 759 ]]
+						function t.navigateToEditUsername(p9)
 							-- upvalues: editUsername (copy), var61 (copy), refreshProfilePlatformUserInfoModule (copy), profileId (copy)
 							editUsername({
 								showToast = p9,
-								onUsernameChanged = function() --[[ line: 762 ]]
+								onUsernameChanged = function()
 									-- upvalues: var61 (copy), refreshProfilePlatformUserInfoModule (copy), profileId (copy)
 									var61(refreshProfilePlatformUserInfoModule(profileId))
 								end
 							})
 						end
 						
-						function t.onIdentityChange() --[[ line: 767 ]]
+						function t.onIdentityChange()
 							-- upvalues: var61 (copy), refreshProfilePlatformUserInfoModule (copy), profileId (copy)
 							var61(refreshProfilePlatformUserInfoModule(profileId))
 						end
 						
-						t.onToggleInExperienceMode = if fFlagMoveInExperienceModeToEditProfile then function() --[[ line: 771 ]]
+						t.onToggleInExperienceMode = if fFlagMoveInExperienceModeToEditProfile then function()
 							-- upvalues: var61 (copy), refreshProfilePlatformUserInfoModule (copy), profileId (copy), var65 (copy), eventNamesModule (copy)
 							var61(refreshProfilePlatformUserInfoModule(profileId))
 							var65.fireAnalyticsEvent(eventNamesModule.ToggleInExperienceModeButton, {})
@@ -619,11 +619,11 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.IgnoreFriendRequest] = {
 					text = var70[enumsModule.ProfileActions.IgnoreFriendRequest],
-					onActivated = function() --[[ line: 781 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var46 (copy), profileId (copy), var61 (copy), networkingFriendsModule (copy), var60 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonIgnoreFriendRequest, { buttonSurface = p1 })
 						
-						return (if fFlagMigrateFriendshipStatusesRemainingActions then var46.DeclineFriendRequest(profileId) else var61(networkingFriendsModule.DeclineFriendRequestFromUserId.API({ targetUserId = profileId, currentUserId = var60 }))):andThen(function() --[[ line: 791 ]]
+						return (if fFlagMigrateFriendshipStatusesRemainingActions then var46.DeclineFriendRequest(profileId) else var61(networkingFriendsModule.DeclineFriendRequestFromUserId.API({ targetUserId = profileId, currentUserId = var60 }))):andThen(function()
 							-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 							var61(setCurrentToastMessage({
 								isLocalized = true,
@@ -641,7 +641,7 @@ return function(p1) --[[ line: 158 ]]
 					isLoading = var77.isLoading,
 					isDisabled = not var77.isInExperience,
 					text = var70[enumsModule.ProfileActions.JoinExperience],
-					onActivated = function() --[[ line: 808 ]]
+					onActivated = function()
 						-- upvalues: var77 (copy)
 						var77.joinExperience()
 					end
@@ -651,12 +651,12 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.Secondary,
 					variant = buttonVariant.Subtle,
 					text = var70[enumsModule.ProfileActions.PendingFriendRequest],
-					onActivated = function() --[[ line: 817 ]] end
+					onActivated = function() end
 				},
 				[enumsModule.ProfileActions.QrCode] = {
 					text = var70[enumsModule.ProfileActions.QrCode],
 					icon = iconName.SquaresGridQr,
-					onActivated = function() --[[ line: 823 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), qRCodePage (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonShareProfileQRCode, { buttonSurface = p1 })
 						qRCodePage()
@@ -667,7 +667,7 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimarySystem,
 					variant = buttonVariant.Standard,
 					text = var70[enumsModule.ProfileActions.ShareProfile],
-					onActivated = function() --[[ line: 835 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var83 (copy), default (copy), contexts (copy), var67 (copy), profileId (copy), var61 (copy), setCurrentToastMessage (copy), textKeysModule (copy), var82 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonShareProfile, { buttonSurface = p1 })
 						
@@ -685,7 +685,7 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.Report] = {
 					text = var70[enumsModule.ProfileActions.Report],
-					onActivated = function() --[[ line: 854 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), profileType (copy), enumsModule (copy), fFlagEnableAbuseReportRevampFlow (copy), fFlagEnableAbuseReportRevampProfileAndGroupModule (copy), abuseVectorModule (copy), var61 (copy), openDynamicAbuseReportModule (copy), profileId (copy), closeCentralOverlay (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy), appPage (copy), url (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), navigateDown (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonReport, { buttonSurface = p1 })
 						local var98 = nil
@@ -699,7 +699,7 @@ return function(p1) --[[ line: 158 ]]
 							var61(openDynamicAbuseReportModule({
 								abuseVector = if profileType == enumsModule.ProfileTypes.Community then abuseVectorModule.Group else abuseVectorModule.UserProfile,
 								targetId = profileId,
-								onClose = function() --[[ line: 873 ]]
+								onClose = function()
 									-- upvalues: var61 (copy), closeCentralOverlay (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 									var61(closeCentralOverlay())
 									var61(refreshProfilePlatformActionInfoModule(profileId, var76))
@@ -724,14 +724,14 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.Unblock] = {
 					text = var70[enumsModule.ProfileActions.Unblock],
-					onActivated = function() --[[ line: 896 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var61 (copy), myUserBlockingNetworkingModule (copy), profileId (copy), var60 (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy), USER_BLOCKING_ERRORS (copy), setCurrentToastMessage (copy), var70 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonUnblock, { buttonSurface = p1 })
 						
-						return var61(myUserBlockingNetworkingModule.UnblockUserById.API({ userId = profileId, currentUserId = var60 })):andThen(function() --[[ line: 904 ]]
+						return var61(myUserBlockingNetworkingModule.UnblockUserById.API({ userId = profileId, currentUserId = var60 })):andThen(function()
 							-- upvalues: var61 (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 							return var61(refreshProfilePlatformActionInfoModule(profileId, var76))
-						end):catch(function(p10) --[[ line: 907 ]]
+						end):catch(function(p10)
 							-- upvalues: USER_BLOCKING_ERRORS (copy), var61 (copy), setCurrentToastMessage (copy), var70 (copy)
 							if p10 ~= nil and tonumber(p10.Body) == USER_BLOCKING_ERRORS.PARENT_BLOCKED_TARGET_USER_ERROR then
 								var61(setCurrentToastMessage({
@@ -764,11 +764,11 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.Unfriend] = {
 					text = var70[enumsModule.ProfileActions.Unfriend],
-					onActivated = function() --[[ line: 949 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var46 (copy), profileId (copy), var61 (copy), networkingFriendsModule (copy), var60 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonUnfriend, { buttonSurface = p1 })
 						
-						return (if fFlagMigrateFriendshipStatusesRemainingActions then var46.Unfriend(profileId) else var61(networkingFriendsModule.UnfriendTargetUserId.API({ targetUserId = profileId, currentUserId = var60 }))):andThen(function() --[[ line: 959 ]]
+						return (if fFlagMigrateFriendshipStatusesRemainingActions then var46.Unfriend(profileId) else var61(networkingFriendsModule.UnfriendTargetUserId.API({ targetUserId = profileId, currentUserId = var60 }))):andThen(function()
 							-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 							var61(setCurrentToastMessage({
 								isLocalized = true,
@@ -782,7 +782,7 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.CopyLink] = {
 					text = var70[enumsModule.ProfileActions.CopyLink],
-					onActivated = function() --[[ line: 971 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), default (copy), contexts (copy), base_url (copy), profileId (copy), var61 (copy), setCurrentToastMessage (copy), textKeysModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCopyLink, { buttonSurface = p1 })
 						default:setClipboardText({
@@ -796,11 +796,11 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimaryContextual,
 					variant = buttonVariant.Emphasis,
 					text = var70[enumsModule.ProfileActions.JoinCommunity],
-					onActivated = function() --[[ line: 989 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), var61 (copy), groupsNetworkingModule (copy), profileId (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonJoinCommunity, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						
-						return var61(groupsNetworkingModule.JoinGroup.API({ groupId = profileId })):andThen(function() --[[ line: 997 ]]
+						return var61(groupsNetworkingModule.JoinGroup.API({ groupId = profileId })):andThen(function()
 							-- upvalues: var61 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 							var61(getProfilePlatformModule.API({
 								includeComponentOrdering = true,
@@ -815,11 +815,11 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimarySystem,
 					variant = buttonVariant.Standard,
 					text = var70[enumsModule.ProfileActions.CancelJoinCommunityRequest],
-					onActivated = function() --[[ line: 1011 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), var61 (copy), groupsNetworkingModule (copy), profileId (copy), var60 (copy), refreshProfilePlatformModule (copy), profileType (copy), enumsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonCancelJoinCommunityRequest, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						
-						return var61(groupsNetworkingModule.CancelJoinGroupRequest.API({ groupId = profileId, userId = var60 })):andThen(function() --[[ line: 1020 ]]
+						return var61(groupsNetworkingModule.CancelJoinGroupRequest.API({ groupId = profileId, userId = var60 })):andThen(function()
 							-- upvalues: var61 (copy), refreshProfilePlatformModule (copy), profileType (copy), profileId (copy), enumsModule (copy)
 							var61(refreshProfilePlatformModule({
 								profileType = profileType,
@@ -833,7 +833,7 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimarySystem,
 					variant = buttonVariant.SubEmphasis,
 					text = var70[enumsModule.ProfileActions.ViewCommunity],
-					onActivated = function() --[[ line: 1035 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), appPage (copy), urlBuilder (copy), profileId (copy), textKeysModule (copy), var61 (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), navigateDown (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonViewCommunity, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						local t = {
@@ -841,7 +841,7 @@ return function(p1) --[[ line: 158 ]]
 							detail = urlBuilder.user.group({ groupId = profileId }),
 							extraProps = {
 								titleKey = textKeysModule.Community,
-								onClose = function() --[[ line: 1046 ]]
+								onClose = function()
 									-- upvalues: var61 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 									var61(getProfilePlatformModule.API({
 										includeComponentOrdering = true,
@@ -865,7 +865,7 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimarySystem,
 					variant = buttonVariant.SubEmphasis,
 					text = var70[enumsModule.ProfileActions.ViewFullProfile],
-					onActivated = function() --[[ line: 1068 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), appPage (copy), urlBuilder (copy), urlBase (copy), profileId (copy), textKeysModule (copy), var61 (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), navigateDown (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonViewFullProfile, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						local t = {
@@ -873,7 +873,7 @@ return function(p1) --[[ line: 158 ]]
 							detail = urlBuilder.new({ base = urlBase.WWW, path = `profiles/{profileId}` })(),
 							extraProps = {
 								titleKey = textKeysModule.Profile,
-								onClose = function() --[[ line: 1082 ]]
+								onClose = function()
 									-- upvalues: var61 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 									var61(getProfilePlatformModule.API({
 										includeComponentOrdering = true,
@@ -895,11 +895,11 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.LeaveCommunity] = {
 					text = var70[enumsModule.ProfileActions.LeaveCommunity],
-					onActivated = function() --[[ line: 1102 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), var61 (copy), groupsNetworkingModule (copy), profileId (copy), var60 (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonLeaveCommunity, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						
-						return var61(groupsNetworkingModule.LeaveGroup.API({ groupId = profileId, userId = var60 })):andThen(function() --[[ line: 1111 ]]
+						return var61(groupsNetworkingModule.LeaveGroup.API({ groupId = profileId, userId = var60 })):andThen(function()
 							-- upvalues: var61 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 							var61(getProfilePlatformModule.API({
 								includeComponentOrdering = true,
@@ -912,11 +912,11 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.MakePrimaryCommunity] = {
 					text = var70[enumsModule.ProfileActions.MakePrimaryCommunity],
-					onActivated = function() --[[ line: 1123 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), var61 (copy), groupsNetworkingModule (copy), profileId (copy), refreshProfilePlatformModule (copy), profileType (copy), enumsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonMakePrimaryCommunity, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						
-						return var61(groupsNetworkingModule.MakePrimaryGroup.API({ groupId = profileId })):andThen(function() --[[ line: 1131 ]]
+						return var61(groupsNetworkingModule.MakePrimaryGroup.API({ groupId = profileId })):andThen(function()
 							-- upvalues: var61 (copy), refreshProfilePlatformModule (copy), profileType (copy), profileId (copy), enumsModule (copy)
 							var61(refreshProfilePlatformModule({
 								profileType = profileType,
@@ -928,11 +928,11 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.RemovePrimaryCommunity] = {
 					text = var70[enumsModule.ProfileActions.RemovePrimaryCommunity],
-					onActivated = function() --[[ line: 1144 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), var61 (copy), groupsNetworkingModule (copy), refreshProfilePlatformModule (copy), profileType (copy), profileId (copy), enumsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonRemovePrimaryCommunity, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						
-						return var61(groupsNetworkingModule.RemovePrimaryGroup.API()):andThen(function() --[[ line: 1150 ]]
+						return var61(groupsNetworkingModule.RemovePrimaryGroup.API()):andThen(function()
 							-- upvalues: var61 (copy), refreshProfilePlatformModule (copy), profileType (copy), profileId (copy), enumsModule (copy)
 							var61(refreshProfilePlatformModule({
 								profileType = profileType,
@@ -946,11 +946,11 @@ return function(p1) --[[ line: 158 ]]
 					buttonType = buttonType.PrimaryContextual,
 					variant = buttonVariant.Standard,
 					text = var70[enumsModule.ProfileActions.Follow],
-					onActivated = function() --[[ line: 1167 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var61 (copy), groupsNetworkingModule (copy), profileId (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonFollow, { buttonSurface = p1 })
 						
-						return var61(groupsNetworkingModule.JoinGroup.API({ groupId = profileId })):andThen(function() --[[ line: 1173 ]]
+						return var61(groupsNetworkingModule.JoinGroup.API({ groupId = profileId })):andThen(function()
 							-- upvalues: var61 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 							var61(getProfilePlatformModule.API({
 								includeComponentOrdering = true,
@@ -963,11 +963,11 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.Unfollow] = if fFlagProfilePlatformUpdateUXForNonSocialCommunitiesModule and profileType == enumsModule.ProfileTypes.Community then {
 					text = var70[enumsModule.ProfileActions.Unfollow],
-					onActivated = function() --[[ line: 1188 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var61 (copy), groupsNetworkingModule (copy), profileId (copy), var60 (copy), getProfilePlatformModule (copy), profileType (copy), getAvailableCommunityComponentsModule (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonUnfollow, { buttonSurface = p1 })
 						
-						return var61(groupsNetworkingModule.LeaveGroup.API({ groupId = profileId, userId = var60 })):andThen(function() --[[ line: 1196 ]]
+						return var61(groupsNetworkingModule.LeaveGroup.API({ groupId = profileId, userId = var60 })):andThen(function()
 							-- upvalues: var61 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
 							var61(getProfilePlatformModule.API({
 								includeComponentOrdering = true,
@@ -980,11 +980,11 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.RemoveTrustedConnection] = {
 					text = var70[enumsModule.ProfileActions.RemoveTrustedConnection],
-					onActivated = function() --[[ line: 1209 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var58 (copy), profileId (copy), var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonRemoveTrustedConnection, { buttonSurface = p1 })
 						
-						return var58.removeTrustedConnectionRequest(profileId):andThen(function() --[[ line: 1213 ]]
+						return var58.removeTrustedConnectionRequest(profileId):andThen(function()
 							-- upvalues: var61 (copy), setCurrentToastMessage (copy), var70 (copy), images (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 							var61(setCurrentToastMessage({
 								isLocalized = true,
@@ -998,14 +998,14 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.AddTrustedConnection] = if fFlagProfilePlatformAddTC then {
 					text = var70[enumsModule.ProfileActions.AddTrustedConnection],
-					onActivated = function() --[[ line: 1226 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var62 (copy), appPage (copy), profileId (copy), sources (copy), var61 (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddTrustedConnection, { buttonSurface = p1 })
 						var62.push(appPage.TrustedContactsModal, {
 							props = {
 								userId = profileId,
 								source = sources.ProfilePlatform,
-								onRequestSent = function() --[[ line: 1234 ]]
+								onRequestSent = function()
 									-- upvalues: var61 (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 									return var61(refreshProfilePlatformActionInfoModule(profileId, var76))
 								end
@@ -1015,7 +1015,7 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.AddTrustedConnectionViaLink] = {
 					text = var70[enumsModule.ProfileActions.AddTrustedConnection],
-					onActivated = function() --[[ line: 1246 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), sources (copy), var62 (copy), appPage (copy), profileId (copy), var61 (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddTrustedConnection, {
 							buttonSurface = p1,
@@ -1026,7 +1026,7 @@ return function(p1) --[[ line: 158 ]]
 								userId = profileId,
 								source = sources.ProfilePlatform,
 								modalVariantOverride = sources.ShareLinkSender,
-								onRequestSent = function() --[[ line: 1256 ]]
+								onRequestSent = function()
 									-- upvalues: var61 (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 									return var61(refreshProfilePlatformActionInfoModule(profileId, var76))
 								end
@@ -1036,13 +1036,13 @@ return function(p1) --[[ line: 158 ]]
 				},
 				[enumsModule.ProfileActions.AddIncomingTrustedConnection] = if fFlagProfilePlatformAddTC then {
 					text = var70[enumsModule.ProfileActions.AddIncomingTrustedConnection],
-					onActivated = function() --[[ line: 1268 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var62 (copy), appPage (copy), profileId (copy), var61 (copy), refreshProfilePlatformActionInfoModule (copy), var76 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection, { buttonSurface = p1 })
 						var62.push(appPage.TrustedContactsModal, {
 							props = {
 								userId = profileId,
-								onRequestAccepted = function() --[[ line: 1275 ]]
+								onRequestAccepted = function()
 									-- upvalues: var61 (copy), refreshProfilePlatformActionInfoModule (copy), profileId (copy), var76 (copy)
 									return var61(refreshProfilePlatformActionInfoModule(profileId, var76))
 								end
@@ -1053,16 +1053,16 @@ return function(p1) --[[ line: 158 ]]
 				[enumsModule.ProfileActions.PendingTrustedConnection] = if fFlagProfilePlatformAddTC then {
 					isDisabled = true,
 					text = var70[enumsModule.ProfileActions.AddTrustedConnection],
-					onActivated = function() --[[ line: 1289 ]] end
+					onActivated = function() end
 				} else nil,
 				[enumsModule.ProfileActions.PendingIncomingTrustedConnection] = if fFlagPendingIncomingTrustedConnectionModule then {
 					isDisabled = true,
 					text = var70[enumsModule.ProfileActions.AddIncomingTrustedConnection],
-					onActivated = function() --[[ line: 1296 ]] end
+					onActivated = function() end
 				} else nil,
 				[enumsModule.ProfileActions.ViewAbout] = if fFlagProfilePlatformNewProfileHeader then {
 					text = var70[enumsModule.ProfileActions.ViewAbout],
-					onActivated = function() --[[ line: 1302 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), var63 (copy), appPage (copy), aboutSections (copy), fFlagProfileAboutDetailsUseSheet (copy), var74 (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), var61 (copy), navigateDown (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.CTAButtonViewFullProfile, { buttonSurface = p1, btnContext = var63.sourceInfo.source })
 						local t = {
@@ -1083,7 +1083,7 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.ViewPlatformProfile] = if fFlagEnablePlatformProfileContextualMenuOption then {
 					text = var70[enumsModule.ProfileActions.ViewPlatformProfile],
-					onActivated = function() --[[ line: 1328 ]]
+					onActivated = function()
 						-- upvalues: var65 (copy), eventNamesModule (copy), p1 (copy), getPlatformFriendsServiceModule (copy), var72 (copy)
 						var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonViewPlatformProfile, { buttonSurface = p1 })
 						getPlatformFriendsServiceModule:ShowProfile(var72)
@@ -1091,7 +1091,7 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.CurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
 					text = var70[enumsModule.ProfileActions.CurrencyTransfer],
-					onActivated = function() --[[ line: 1339 ]]
+					onActivated = function()
 						-- upvalues: p1 (copy), enumsModule (copy), var65 (copy), eventNamesModule (copy), var64 (copy), profileId (copy), transferDirection (copy), transferOrigination (copy)
 						if p1 == enumsModule.ButtonSurface.ContextualMenu then
 							var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCurrencyTransfer, { buttonSurface = p1 })
@@ -1109,7 +1109,7 @@ return function(p1) --[[ line: 158 ]]
 				} else nil,
 				[enumsModule.ProfileActions.TradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
 					text = var70[enumsModule.ProfileActions.TradeItems],
-					onActivated = function() --[[ line: 1362 ]]
+					onActivated = function()
 						-- upvalues: p1 (copy), enumsModule (copy), var65 (copy), eventNamesModule (copy), appPage (copy), url (copy), profileId (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var16 (copy), var61 (copy), navigateDown (copy)
 						if p1 == enumsModule.ButtonSurface.ContextualMenu then
 							var65.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonTradeItems, { buttonSurface = p1 })

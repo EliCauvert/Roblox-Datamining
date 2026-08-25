@@ -13,14 +13,14 @@ local layoutProviderModule = require(parent.LayoutProvider)
 local inviteSingleUserContainerModule = require(parent.InviteSingleUserContainer)
 local loadingModalModule = require(parent.LoadingModal)
 
-local function FoundationStyleLink() --[[ line: 22 ]]
+local function FoundationStyleLink()
 	-- upvalues: useStyleSheet (ref), roactModule (ref)
 	return roactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() })
 end
 
 local fullModalShareGameComponent = roactModule.PureComponent:extend("FullModalShareGameComponent")
 
-function fullModalShareGameComponent.render(p0) --[[ line: 31 ]]
+function fullModalShareGameComponent.render(p0)
 	-- upvalues: getFFlagExtraInviteModalStringValidationModule (ref), roactModule (ref), roactRoduxModule (ref), fFlagFixPromptGameInviteUIButtonScalingModule (ref), FoundationStyleLink (ref), loadingModalModule (ref), layoutProviderModule (ref), shareGameContainerModule (ref), inviteSingleUserContainerModule (ref), modalShareGamePageFrameModule (ref)
 	local isVisible = p0.props.isVisible
 	local analytics = p0.props.analytics
@@ -60,7 +60,7 @@ function fullModalShareGameComponent.render(p0) --[[ line: 31 ]]
 					inviteMessageId = inviteMessageId,
 					launchData = launchData,
 					requestImpl = requestImpl,
-					onAfterClosePage = function() --[[ line: 76 ]]
+					onAfterClosePage = function()
 						-- upvalues: store (ref), onAfterClosePage (ref)
 						local t = {}
 						

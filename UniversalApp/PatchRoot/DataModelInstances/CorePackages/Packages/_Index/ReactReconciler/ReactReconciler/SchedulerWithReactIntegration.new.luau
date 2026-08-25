@@ -31,18 +31,18 @@ local idlePriority = unknownModule.IdlePriority
 local noPriority = unknownModule.NoPriority
 local var4 = nil
 local t = {}
-local var6 = if unstableRequestPaint ~= nil then function() --[[ line: 94 ]] end else unstableRequestPaint
+local var6 = if unstableRequestPaint ~= nil then function() end else unstableRequestPaint
 local var7 = nil
 local var8 = nil
 local var9 = false
 local var10 = unstableNow()
 
-local function now() --[[ line: 118 ]]
+local function now()
 	-- upvalues: unstableNow (ref), var10 (ref)
 	return unstableNow() - var10
 end
 
-local function getCurrentPriorityLevel() --[[ line: 122 ]]
+local function getCurrentPriorityLevel()
 	-- upvalues: unstableGetCurrentPriorityLevel (ref), unstableImmediatePriority (ref), immediatePriority (ref), unstableUserBlockingPriority (ref), userBlockingPriority (ref), unstableNormalPriority (ref), normalPriority (ref), unstableLowPriority (ref), lowPriority (ref), unstableIdlePriority (ref), idlePriority (ref), invariant (ref), noPriority (ref)
 	local var18 = unstableGetCurrentPriorityLevel()
 	
@@ -62,7 +62,7 @@ local function getCurrentPriorityLevel() --[[ line: 122 ]]
 	return noPriority
 end
 
-function reactPriorityToSchedulerPriority(startValue) --[[ line: 141 ]]
+function reactPriorityToSchedulerPriority(startValue)
 	-- upvalues: immediatePriority (ref), unstableImmediatePriority (ref), userBlockingPriority (ref), unstableUserBlockingPriority (ref), normalPriority (ref), unstableNormalPriority (ref), lowPriority (ref), unstableLowPriority (ref), idlePriority (ref), unstableIdlePriority (ref), invariant (ref)
 	if startValue == immediatePriority then
 		return unstableImmediatePriority
@@ -80,17 +80,17 @@ function reactPriorityToSchedulerPriority(startValue) --[[ line: 141 ]]
 	return nil
 end
 
-local function runWithPriority(p0, p1) --[[ line: 160 ]]
+local function runWithPriority(p0, p1)
 	-- upvalues: unstableRunWithPriority (ref)
 	return unstableRunWithPriority(reactPriorityToSchedulerPriority(p0), p1)
 end
 
-local function scheduleCallback(p2, p3, p4) --[[ line: 168 ]]
+local function scheduleCallback(p2, p3, p4)
 	-- upvalues: unstableScheduleCallback (ref)
 	return unstableScheduleCallback(reactPriorityToSchedulerPriority(p2), p3, p4)
 end
 
-local function scheduleSyncCallback(p5) --[[ line: 177 ]]
+local function scheduleSyncCallback(p5)
 	-- upvalues: var7 (write), var8 (write), unstableScheduleCallback (ref), unstableImmediatePriority (ref), var4 (write), t (ref)
 	if var7 == nil then
 		var7 = { p5 }
@@ -101,14 +101,14 @@ local function scheduleSyncCallback(p5) --[[ line: 177 ]]
 	return t
 end
 
-local function cancelCallback(p6) --[[ line: 196 ]]
+local function cancelCallback(p6)
 	-- upvalues: t (ref), unstableCancelCallback (ref)
 	if p6 ~= t then
 		unstableCancelCallback(p6)
 	end
 end
 
-local function flushSyncCallbackQueue() --[[ line: 202 ]]
+local function flushSyncCallbackQueue()
 	-- upvalues: var8 (write), unstableCancelCallback (ref), var4 (write)
 	if var8 ~= nil then
 		local var19 = var8
@@ -118,7 +118,7 @@ local function flushSyncCallbackQueue() --[[ line: 202 ]]
 	return var4()
 end
 
-var4 = function() --[[ line: 211 ]]
+var4 = function()
 	-- upvalues: var9 (write), var7 (write), decoupleUpdatePriorityFromScheduler (ref), getCurrentUpdateLanePriority (ref), reactGlobalsModule (ref), setCurrentUpdateLanePriority (ref), syncLanePriority (ref), runWithPriority (ref), describeError (ref), immediatePriority (ref), unstableRunWithPriority (ref), array (ref), unstableScheduleCallback (ref), unstableImmediatePriority (ref), flushSyncCallbackQueue (ref)
 	if var9 or var7 == nil then
 		return false
@@ -136,7 +136,7 @@ var4 = function() --[[ line: 211 ]]
 			var24 = true
 			local var25 = var7
 			setCurrentUpdateLanePriority(syncLanePriority)
-			local _ = unstableRunWithPriority(reactPriorityToSchedulerPriority(immediatePriority), function() --[[ line: 250 ]]
+			local _ = unstableRunWithPriority(reactPriorityToSchedulerPriority(immediatePriority), function()
 				-- upvalues: var25 (ref), var20 (write)
 				for i, v in var25 do
 					var20 = i
@@ -146,7 +146,7 @@ var4 = function() --[[ line: 211 ]]
 		else
 			local var23 = var7
 			setCurrentUpdateLanePriority(syncLanePriority)
-			local ok, status = xpcall(runWithPriority, describeError, immediatePriority, function() --[[ line: 232 ]]
+			local ok, status = xpcall(runWithPriority, describeError, immediatePriority, function()
 				-- upvalues: var23 (ref), var20 (write)
 				for i, v in var23 do
 					var20 = i
@@ -174,7 +174,7 @@ var4 = function() --[[ line: 211 ]]
 		if reactGlobalsModule.__YOLO__ then
 			var28 = true
 			local var29 = var7
-			local _ = unstableRunWithPriority(reactPriorityToSchedulerPriority(immediatePriority), function() --[[ line: 308 ]]
+			local _ = unstableRunWithPriority(reactPriorityToSchedulerPriority(immediatePriority), function()
 				-- upvalues: var29 (ref), var20 (write)
 				for i, v in var29 do
 					var20 = i
@@ -183,7 +183,7 @@ var4 = function() --[[ line: 211 ]]
 			var7 = nil
 		else
 			local var27 = var7
-			local ok, status = xpcall(runWithPriority, describeError, immediatePriority, function() --[[ line: 292 ]]
+			local ok, status = xpcall(runWithPriority, describeError, immediatePriority, function()
 				-- upvalues: var27 (ref), var20 (write)
 				for i, v in var27 do
 					var20 = i

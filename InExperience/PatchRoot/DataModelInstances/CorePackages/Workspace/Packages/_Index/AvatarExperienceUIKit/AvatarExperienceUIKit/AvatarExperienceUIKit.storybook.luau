@@ -14,18 +14,18 @@ local appStyleProvider_1 = UIBloxModule.App.Style.AppStyleProvider
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
 local localizationProvider = require(parent.Localization).LocalizationProvider
 
-local function createLocalization() --[[ line: 19 ]]
+local function createLocalization()
 	return {
-		Format = function(_, p0) --[[ line: 21 ]]
+		Format = function(_, p0)
 			return p0
 		end,
-		GetLocale = function() --[[ line: 24 ]]
+		GetLocale = function()
 			return "locale"
 		end
 	}
 end
 
-local function createStore() --[[ line: 30 ]]
+local function createStore()
 	-- upvalues: roduxModule (ref)
 	return roduxModule.Store.new(roduxModule.createReducer({}, {}))
 end
@@ -43,9 +43,9 @@ return {
 	group = "AvatarExperience",
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
-	mapStory = function(p1) --[[ line: 59 ]]
+	mapStory = function(p1)
 		-- upvalues: t (ref), reactModule (ref), roactRoduxModule (ref), createStore (ref), foundationProvider (ref), t_1 (ref), appStyleProvider_1 (ref), t_2 (ref), appStyleProvider (ref), designTokenProvider (ref), localizationProvider (ref), createLocalization (ref)
-		return function(p2) --[[ line: 60 ]]
+		return function(p2)
 			-- upvalues: t (copy), reactModule (copy), roactRoduxModule (copy), createStore (copy), foundationProvider (copy), t_1 (copy), p1 (ref), appStyleProvider_1 (copy), t_2 (copy), appStyleProvider (copy), designTokenProvider (copy), localizationProvider (copy), createLocalization (copy)
 			local theme = t[p2.theme]
 			

@@ -10,9 +10,9 @@ local getAssetBundlesModule = require(parent.Thunks.GetAssetBundles)
 local getVersionInfoModule = require(parent.Thunks.GetVersionInfo)
 local list = { networkModule }
 
-return function(value) --[[ line: 19 | named "BatchGetAssets" ]]
+return function(value)
 	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), performFetch (ref), getProductInfoModule (ref), getAssetBundlesModule (ref), getVersionInfoModule (ref), setAssetsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p0, p1) --[[ line: 20 ]]
+	return thunkModule.new(script.Name, list, function(p0, p1)
 		-- upvalues: networkModule (copy), value (ref), performFetch (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
 		local var9 = p1[networkModule]
 		local t = {}
@@ -22,9 +22,9 @@ return function(value) --[[ line: 19 | named "BatchGetAssets" ]]
 				table.insert(t, tonumber(v.assetId))
 			end
 		end
-		return performFetch.Single("BatchGetAssets", function() --[[ line: 30 ]]
+		return performFetch.Single("BatchGetAssets", function()
 			-- upvalues: var9 (ref), t (ref), p0 (ref), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var9.getBatchItemDetails(t, Enum.AvatarItemType.Asset):andThen(function(p2) --[[ line: 31 ]]
+			return var9.getBatchItemDetails(t, Enum.AvatarItemType.Asset):andThen(function(p2)
 				-- upvalues: p0 (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
 				local t = {}
 				
@@ -32,7 +32,7 @@ return function(value) --[[ line: 19 | named "BatchGetAssets" ]]
 					table.insert(t, { assetId = tostring(v.Id) })
 				end
 				for i, v_1 in t do
-					coroutine.wrap(function() --[[ line: 38 ]]
+					coroutine.wrap(function()
 						-- upvalues: p0 (copy), getProductInfoModule (copy), v_1 (ref), getAssetBundlesModule (copy), getVersionInfoModule (copy)
 						p0:dispatch(getProductInfoModule(v_1.assetId))
 						
@@ -44,11 +44,11 @@ return function(value) --[[ line: 19 | named "BatchGetAssets" ]]
 				end
 				p0:dispatch(setAssetsModule(t))
 				p0:dispatch(sendCounterModule(constantsModule.Counters.BatchGetAssets .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_) --[[ line: 60 ]]
+			end, function(_)
 				-- upvalues: p0 (copy), sendCounterModule (copy), constantsModule (copy)
 				p0:dispatch(sendCounterModule(constantsModule.Counters.BatchGetAssets .. constantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p0):catch(function(_) --[[ line: 65 ]]
+		end)(p0):catch(function(_)
 			-- upvalues: p0 (ref), sendCounterModule (copy), constantsModule (copy)
 			p0:dispatch(sendCounterModule(constantsModule.Counters.BatchGetAssets .. constantsModule.CounterSuffix.RequestFailed))
 		end)

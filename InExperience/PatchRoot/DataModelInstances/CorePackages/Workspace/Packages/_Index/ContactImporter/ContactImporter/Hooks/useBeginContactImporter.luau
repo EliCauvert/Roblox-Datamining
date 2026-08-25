@@ -21,26 +21,26 @@ local fFlagAddFriendsPageFAEUpsell = sharedFlagsModule.FFlagAddFriendsPageFAEUps
 local autoPromptStatusModule = require(script.Parent.Parent.Signals.autoPromptStatus)
 local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
 
-return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
+return function(p0)
 	-- upvalues: useNavigation (ref), reactModule (ref), useAppPolicy (ref), getDeepValue (ref), enumScreens (ref), fFlagCIDeeplinkEnabledForAll (ref), roactAppExperimentModule (ref), appUserLayers (ref), permissionsProtocol (ref), fFlagAddFriendsPageFAEUpsell (ref), autoPromptStatusModule (ref), default (ref), list (ref), promiseModule (ref), fFlagCiDeprecateFindFriendsModal (ref), settingsRoute (ref), IXPService (ref), messageBusService (ref), realtimeMessageId (ref)
 	local var10 = useNavigation()
 	local var11, var12 = reactModule.useState(false)
-	local var13 = useAppPolicy(function(p1) --[[ line: 43 ]]
+	local var13 = useAppPolicy(function(p1)
 		return p1.getContactImporterEnabled()
 	end)
 	local var14 = if p0 then p0.entryPoint else nil
 	local var15 = (getDeepValue(var10, "state.routeName") or {}) == enumScreens.ContactImporter
-	local var16 = useAppPolicy(function(p2) --[[ line: 51 ]]
+	local var16 = useAppPolicy(function(p2)
 		return p2.getContactImporterEncouraged()
 	end)
 	local var17 = if not fFlagCIDeeplinkEnabledForAll then roactAppExperimentModule.useUserExperiment({
 		appUserLayers.ContactImporterDevicePermissionNeededModalExposure
-	}, function(p3) --[[ line: 61 ]]
+	}, function(p3)
 		-- upvalues: appUserLayers (copy)
 		return (p3[appUserLayers.ContactImporterDevicePermissionNeededModalExposure] or {}).systemSettingsDeeplinkEnabled
 	end, false) else nil
 	local var18 = not var16
-	local var19 = reactModule.useCallback(function(p4) --[[ line: 70 ]]
+	local var19 = reactModule.useCallback(function(p4)
 		-- upvalues: permissionsProtocol (copy), var12 (ref), var10 (ref), enumScreens (copy), var14 (ref)
 		local var22 = p4.status == permissionsProtocol.Status.AUTHORIZED
 		var12(var22)
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 			var10.navigate(enumScreens.ContactsList, { shouldUpdateUserSettings = true, entrypoint = var14 })
 		end
 	end, { var10, var14 })
-	local var20 = reactModule.useCallback(function(p5) --[[ line: 82 ]]
+	local var20 = reactModule.useCallback(function(p5)
 		-- upvalues: permissionsProtocol (copy), var12 (ref), fFlagAddFriendsPageFAEUpsell (copy), autoPromptStatusModule (copy), var16 (ref), default (copy), list (copy), var19 (ref), promiseModule (copy)
 		local status = p5.status
 		
@@ -63,7 +63,7 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 			if var16 then
 				if fFlagAddFriendsPageFAEUpsell then
 					local processTime = os.clock()
-					default:requestPermissions(list):andThen(function(p6) --[[ line: 101 ]]
+					default:requestPermissions(list):andThen(function(p6)
 						-- upvalues: processTime (ref), permissionsProtocol (copy), autoPromptStatusModule (copy)
 						autoPromptStatusModule.setStatus(if os.clock() - processTime < 0.5 then p6.status == permissionsProtocol.Status.AUTHORIZED else true)
 						
@@ -80,10 +80,10 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 		end
 		return promiseModule.resolve(p5.status)
 	end, { var19, var16 })
-	local var21 = reactModule.useCallback(function() --[[ line: 121 ]]
+	local var21 = reactModule.useCallback(function()
 		-- upvalues: fFlagCiDeprecateFindFriendsModal (copy), var15 (ref), default (copy), list (copy), permissionsProtocol (copy), var12 (ref), var10 (ref), enumScreens (copy), var14 (ref), settingsRoute (copy), var16 (ref), var11 (ref), fFlagCIDeeplinkEnabledForAll (copy), IXPService (copy), appUserLayers (copy), var17 (write), var18 (ref)
 		if fFlagCiDeprecateFindFriendsModal and var15 then
-			default:requestPermissions(list):andThen(function(p7) --[[ line: 123 ]]
+			default:requestPermissions(list):andThen(function(p7)
 				-- upvalues: permissionsProtocol (copy), var12 (copy), var10 (copy), enumScreens (copy), var14 (copy), settingsRoute (copy)
 				if p7.status == permissionsProtocol.Status.AUTHORIZED then
 					var12(true)
@@ -112,7 +112,7 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 			
 			return
 		elseif var18 then
-			default:requestPermissions(list):andThen(function(p8) --[[ line: 154 ]]
+			default:requestPermissions(list):andThen(function(p8)
 				-- upvalues: permissionsProtocol (copy), var10 (copy), enumScreens (copy), var14 (copy), fFlagCIDeeplinkEnabledForAll (copy), IXPService (copy), appUserLayers (copy), var17 (copy), settingsRoute (copy)
 				if p8.status == permissionsProtocol.Status.AUTHORIZED then
 					var10.navigate(enumScreens.ContactsList, { entrypoint = var14 })
@@ -134,7 +134,7 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 	end, {
 		var11, var13, var16, var18, var14, var17
 	})
-	reactModule.useEffect(function() --[[ line: 189 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagAddFriendsPageFAEUpsell (copy), autoPromptStatusModule (copy), default (copy), list (copy), var13 (ref), var16 (ref), var18 (ref), var20 (ref)
 		if fFlagAddFriendsPageFAEUpsell then
 			autoPromptStatusModule.setStatus(nil)
@@ -146,17 +146,17 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 		elseif fFlagAddFriendsPageFAEUpsell then
 			autoPromptStatusModule.setStatus(false)
 		end
-		return if fFlagAddFriendsPageFAEUpsell then function() --[[ line: 203 ]]
+		return if fFlagAddFriendsPageFAEUpsell then function()
 			-- upvalues: autoPromptStatusModule (copy)
 			autoPromptStatusModule.setStatus(nil)
 		end else nil
 	end, { var13, var16, var18 })
-	reactModule.useEffect(function() --[[ line: 211 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var17 (write), fFlagCIDeeplinkEnabledForAll (copy), messageBusService (copy), realtimeMessageId (copy), default (copy), list (copy), permissionsProtocol (copy), var12 (ref)
 		if var17 or fFlagCIDeeplinkEnabledForAll then
-			local var25 = messageBusService:Subscribe(realtimeMessageId, function() --[[ line: 213 ]]
+			local var25 = messageBusService:Subscribe(realtimeMessageId, function()
 				-- upvalues: default (copy), list (copy), permissionsProtocol (copy), var12 (copy)
-				default:hasPermissions(list):andThen(function(p9) --[[ line: 214 ]]
+				default:hasPermissions(list):andThen(function(p9)
 					-- upvalues: permissionsProtocol (copy), var12 (copy)
 					if p9 and p9.status == permissionsProtocol.Status.AUTHORIZED then
 						var12(true)
@@ -164,7 +164,7 @@ return function(p0) --[[ line: 39 | named "useBeginContactImporter" ]]
 				end)
 			end, false, true)
 			
-			return function() --[[ line: 221 ]]
+			return function()
 				-- upvalues: var25 (ref)
 				var25:Disconnect()
 			end

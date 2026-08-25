@@ -45,13 +45,13 @@ local getArgumentMapper = nil
 local getNewType = nil
 local var16 = nil
 
-function t.mapSchema(p0, p1) --[[ line: 172 ]]
+function t.mapSchema(p0, p1)
 	-- upvalues: mapArguments (write), mapFields (write), mapTypes (write), mapDefaultValues (write), mapEnumValues (write), serializeInputValue (ref), isLeafType (ref), parseInputValue (ref), boolean (ref), mapDirectives (write), rewireTypes (ref), graphQLSchema (ref), object (ref), getObjectTypeFromTypeMap (ref)
 	local var19 = if p1 ~= nil then {} else p1
-	local var20 = mapArguments(mapFields(mapTypes(mapDefaultValues(mapEnumValues(mapTypes(mapDefaultValues(p0:getTypeMap(), p0, serializeInputValue), p0, var19, function(p2) --[[ line: 183 ]]
+	local var20 = mapArguments(mapFields(mapTypes(mapDefaultValues(mapEnumValues(mapTypes(mapDefaultValues(p0:getTypeMap(), p0, serializeInputValue), p0, var19, function(p2)
 		-- upvalues: isLeafType (copy)
 		return isLeafType(p2)
-	end), p0, var19), p0, parseInputValue), p0, var19, function(p3) --[[ line: 195 ]]
+	end), p0, var19), p0, parseInputValue), p0, var19, function(p3)
 		-- upvalues: boolean (copy), isLeafType (copy)
 		return not boolean.toJSBoolean(isLeafType(p3))
 	end), p0, var19), p0, var19)
@@ -67,9 +67,9 @@ function t.mapSchema(p0, p1) --[[ line: 172 ]]
 	}))
 end
 
-mapTypes = function(p4, p5, p6, p7) --[[ line: 241 | named "mapTypes" ]]
+mapTypes = function(p4, p5, p6, p7)
 	-- upvalues: map (ref), string (ref), object (ref), getTypeMapper (write)
-	local var22 = if p7 ~= nil then function() --[[ line: 256 ]]
+	local var22 = if p7 ~= nil then function()
 		return true
 	end else p7
 	local var23 = map.new()
@@ -102,12 +102,12 @@ mapTypes = function(p4, p5, p6, p7) --[[ line: 241 | named "mapTypes" ]]
 	return var23
 end
 
-mapEnumValues = function(p8, p9, p10) --[[ line: 313 | named "mapEnumValues" ]]
+mapEnumValues = function(p8, p9, p10)
 	-- upvalues: getEnumValueMapper (write), boolean (ref), mapTypes (write), mapperKind (ref), map (ref), array (ref), object (ref), var16 (write), graphQLEnumType (ref), isEnumType (ref)
 	local var28 = getEnumValueMapper(p10)
 	
 	return if boolean.toJSBoolean(var28) then mapTypes(p8, p9, {
-		[tostring(mapperKind.ENUM_TYPE)] = function(p11) --[[ line: 337 ]]
+		[tostring(mapperKind.ENUM_TYPE)] = function(p11)
 			-- upvalues: map (copy), var28 (ref), p9 (ref), boolean (copy), array (copy), object (copy), var16 (copy), graphQLEnumType (copy)
 			local var29 = p11:toConfig()
 			local values = var29.values
@@ -129,16 +129,16 @@ mapEnumValues = function(p8, p9, p10) --[[ line: 313 | named "mapEnumValues" ]]
 			end
 			return var16(graphQLEnumType.new(object.assign({}, var29, { values = var30 })))
 		end
-	}, function(p12) --[[ line: 391 ]]
+	}, function(p12)
 		-- upvalues: isEnumType (copy)
 		return isEnumType(p12)
 	end) else p8
 end
 
-mapDefaultValues = function(p13, p14, p15) --[[ line: 399 | named "mapDefaultValues" ]]
+mapDefaultValues = function(p13, p14, p15)
 	-- upvalues: mapArguments (write), mapperKind (ref), getNewType (write), object (ref), mapFields (write)
 	local var36 = mapArguments(p13, p14, {
-		[mapperKind.ARGUMENT] = function(p16) --[[ line: 421 ]]
+		[mapperKind.ARGUMENT] = function(p16)
 			-- upvalues: getNewType (copy), p13 (ref), object (copy), p15 (ref)
 			if p16.defaultValue == nil then
 				return p16
@@ -150,7 +150,7 @@ mapDefaultValues = function(p13, p14, p15) --[[ line: 399 | named "mapDefaultVal
 	})
 	
 	return mapFields(var36, p14, {
-		[mapperKind.INPUT_OBJECT_FIELD] = function(p17) --[[ line: 456 ]]
+		[mapperKind.INPUT_OBJECT_FIELD] = function(p17)
 			-- upvalues: getNewType (copy), var36 (ref), object (copy), p15 (ref)
 			if p17.defaultValue == nil then
 				return p17
@@ -162,7 +162,7 @@ mapDefaultValues = function(p13, p14, p15) --[[ line: 399 | named "mapDefaultVal
 	})
 end
 
-getNewType = function(p18, p19) --[[ line: 487 | named "getNewType" ]]
+getNewType = function(p18, p19)
 	-- upvalues: boolean (ref), isListType (ref), getNewType (write), graphQLList (ref), isNonNullType (ref), graphQLNonNull (ref), isNamedType (ref)
 	if boolean.toJSBoolean(isListType(p19)) then
 		local var39 = getNewType(p18, p19.ofType)
@@ -180,7 +180,7 @@ getNewType = function(p18, p19) --[[ line: 487 | named "getNewType" ]]
 	return if name == nil then nil else name
 end
 
-mapFields = function(p20, p21, p22) --[[ line: 521 | named "mapFields" ]]
+mapFields = function(p20, p21, p22)
 	-- upvalues: map (ref), string (ref), boolean (ref), isObjectType (ref), isInterfaceType (ref), isInputObjectType (ref), getFieldMapper (write), object (ref), array (ref), var16 (write), graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
 	local var42 = map.new()
 	
@@ -236,7 +236,7 @@ mapFields = function(p20, p21, p22) --[[ line: 521 | named "mapFields" ]]
 	return var42
 end
 
-mapArguments = function(p23, p24, p25) --[[ line: 688 | named "mapArguments" ]]
+mapArguments = function(p23, p24, p25)
 	-- upvalues: map (ref), string (ref), boolean (ref), isObjectType (ref), isInterfaceType (ref), getArgumentMapper (write), object (ref), array (ref), graphQLObjectType (ref), graphQLInterfaceType (ref), graphQLInputObjectType (ref)
 	local var53 = map.new()
 	
@@ -304,7 +304,7 @@ mapArguments = function(p23, p24, p25) --[[ line: 688 | named "mapArguments" ]]
 	return var53
 end
 
-mapDirectives = function(p26, p27, p28) --[[ line: 884 | named "mapDirectives" ]]
+mapDirectives = function(p26, p27, p28)
 	-- upvalues: getDirectiveMapper (write), object (ref), array (ref)
 	local var67 = getDirectiveMapper(p28)
 	
@@ -325,7 +325,7 @@ mapDirectives = function(p26, p27, p28) --[[ line: 884 | named "mapDirectives" ]
 	return t
 end
 
-local function getTypeSpecifiers(p29, p30) --[[ line: 916 ]]
+local function getTypeSpecifiers(p29, p30)
 	-- upvalues: mapperKind (ref), boolean (ref), isObjectType (ref), array (ref), isInputObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isScalarType (ref)
 	local var70 = p29:getType(p30)
 	local list = { mapperKind.TYPE }
@@ -376,7 +376,7 @@ local function getTypeSpecifiers(p29, p30) --[[ line: 916 ]]
 	return list
 end
 
-getTypeMapper = function(p31, p32, p33) --[[ line: 996 | named "getTypeMapper" ]]
+getTypeMapper = function(p31, p32, p33)
 	-- upvalues: getTypeSpecifiers (ref), array (ref), boolean (ref)
 	local var72 = nil
 	local var73 = array.concat({}, getTypeSpecifiers(p31, p33))
@@ -386,7 +386,7 @@ getTypeMapper = function(p31, p32, p33) --[[ line: 996 | named "getTypeMapper" ]
 	return if var72 == nil then nil else var72
 end
 
-local function getFieldSpecifiers(p34, p35) --[[ line: 1023 ]]
+local function getFieldSpecifiers(p34, p35)
 	-- upvalues: mapperKind (ref), boolean (ref), isObjectType (ref), array (ref), isInterfaceType (ref), isInputObjectType (ref)
 	local var74 = p34:getType(p35)
 	local list = { mapperKind.FIELD }
@@ -420,7 +420,7 @@ local function getFieldSpecifiers(p34, p35) --[[ line: 1023 ]]
 	return list
 end
 
-getFieldMapper = function(p36, p37, p38) --[[ line: 1102 | named "getFieldMapper" ]]
+getFieldMapper = function(p36, p37, p38)
 	-- upvalues: getFieldSpecifiers (ref), array (ref), boolean (ref)
 	local var76 = nil
 	local var77 = array.concat({}, table.unpack(getFieldSpecifiers(p36, p38)))
@@ -430,28 +430,28 @@ getFieldMapper = function(p36, p37, p38) --[[ line: 1102 | named "getFieldMapper
 	return if var76 == nil then nil else var76
 end
 
-getArgumentMapper = function(p39) --[[ line: 1129 | named "getArgumentMapper" ]]
+getArgumentMapper = function(p39)
 	-- upvalues: mapperKind (ref)
 	local ARGUMENT = p39[tostring(mapperKind.ARGUMENT)]
 	
 	return if ARGUMENT == nil then nil else ARGUMENT
 end
 
-getDirectiveMapper = function(p40) --[[ line: 1140 | named "getDirectiveMapper" ]]
+getDirectiveMapper = function(p40)
 	-- upvalues: mapperKind (ref)
 	local DIRECTIVE = p40[tostring(mapperKind.DIRECTIVE)]
 	
 	return if DIRECTIVE == nil then nil else DIRECTIVE
 end
 
-getEnumValueMapper = function(p41) --[[ line: 1151 | named "getEnumValueMapper" ]]
+getEnumValueMapper = function(p41)
 	-- upvalues: mapperKind (ref)
 	local ENUM_VALUE = p41[tostring(mapperKind.ENUM_VALUE)]
 	
 	return if ENUM_VALUE == nil then nil else ENUM_VALUE
 end
 
-function t.correctASTNodes(p42) --[[ line: 1175 ]]
+function t.correctASTNodes(p42)
 	-- upvalues: boolean (ref), isObjectType (ref), object (ref), kind (ref), array (ref), graphQLObjectType (ref), isInterfaceType (ref), graphQLInterfaceType (ref), isInputObjectType (ref), graphQLInputObjectType (ref), isEnumType (ref), graphQLEnumType (ref)
 	if boolean.toJSBoolean(isObjectType(p42)) then
 		local var78 = p42:toConfig()
@@ -469,7 +469,7 @@ function t.correctASTNodes(p42) --[[ line: 1175 ]]
 			var78.astNode = object.assign({}, var78.astNode, { kind = kind.OBJECT_TYPE_DEFINITION, fields = t })
 		end
 		if var78.extensionASTNodes ~= nil then
-			var78.extensionASTNodes = array.map(var78.extensionASTNodes, function(p43) --[[ line: 1206 ]]
+			var78.extensionASTNodes = array.map(var78.extensionASTNodes, function(p43)
 				-- upvalues: object (copy), kind (copy)
 				return object.assign({}, p43, { kind = kind.OBJECT_TYPE_EXTENSION, fields = object.None })
 			end)
@@ -491,7 +491,7 @@ function t.correctASTNodes(p42) --[[ line: 1175 ]]
 			var81.astNode = object.assign({}, var81.astNode, { kind = kind.INTERFACE_TYPE_DEFINITION, fields = t })
 		end
 		if var81.extensionASTNodes ~= nil then
-			var81.extensionASTNodes = array.map(var81.extensionASTNodes, function(p44) --[[ line: 1239 ]]
+			var81.extensionASTNodes = array.map(var81.extensionASTNodes, function(p44)
 				-- upvalues: object (copy), kind (copy)
 				return object.assign({}, p44, {
 					kind = kind.INTERFACE_TYPE_EXTENSION,
@@ -516,7 +516,7 @@ function t.correctASTNodes(p42) --[[ line: 1175 ]]
 			var84.astNode = object.assign({}, var84.astNode, { kind = kind.INPUT_OBJECT_TYPE_DEFINITION, fields = t })
 		end
 		if var84.extensionASTNodes ~= nil then
-			var84.extensionASTNodes = array.map(var84.extensionASTNodes, function(p45) --[[ line: 1275 ]]
+			var84.extensionASTNodes = array.map(var84.extensionASTNodes, function(p45)
 				-- upvalues: object (copy), kind (copy)
 				return object.assign({}, p45, {
 					kind = kind.INPUT_OBJECT_TYPE_EXTENSION,
@@ -543,7 +543,7 @@ function t.correctASTNodes(p42) --[[ line: 1175 ]]
 		var87.astNode = object.assign({}, var87.astNode, { values = t })
 	end
 	if var87.extensionASTNodes ~= nil then
-		var87.extensionASTNodes = array.map(var87.extensionASTNodes, function(p46) --[[ line: 1307 ]]
+		var87.extensionASTNodes = array.map(var87.extensionASTNodes, function(p46)
 			-- upvalues: object (copy)
 			return object.assign({}, p46, { values = object.None })
 		end)

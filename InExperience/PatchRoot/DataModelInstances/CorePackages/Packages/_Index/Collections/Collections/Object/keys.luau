@@ -4,7 +4,7 @@ local setModule = require(parent.Parent.Set)
 local _ = require(parent_1.ES7Types)
 local instanceOfModule = require(parent_1.InstanceOf)
 
-return function(p0) --[[ line: 26 ]]
+return function(p0)
 	-- upvalues: instanceOfModule (ref), setModule (ref)
 	if p0 == nil then
 		error("cannot extract keys from a nil value")

@@ -3,7 +3,7 @@ local filterPurchasableItemsModule = require(script.Parent.filterPurchasableItem
 local getLineItemsFromPurchaseResponseModule = require(script.Parent.getLineItemsFromPurchaseResponse)
 local lineItemToStatusModule = require(script.Parent.lineItemToStatus)
 
-return function(p0, p1) --[[ line: 32 | named "getItemResultsFromResponse" ]]
+return function(p0, p1)
 	-- upvalues: filterPurchasableItemsModule (ref), getLineItemsFromPurchaseResponseModule (ref), lineItemToStatusModule (ref)
 	local var3 = filterPurchasableItemsModule(p1)
 	local var4 = getLineItemsFromPurchaseResponseModule(p0)

@@ -2,7 +2,7 @@
 local utils = require(crossExperienceVoice.dependencies).CrossExperience.Utils
 local useVoiceStatusModule = require(crossExperienceVoice.Hooks.useVoiceStatus)
 
-return function() --[[ line: 10 ]]
+return function()
 	-- upvalues: useVoiceStatusModule (ref), utils (ref)
 	local var2 = useVoiceStatusModule()
 	

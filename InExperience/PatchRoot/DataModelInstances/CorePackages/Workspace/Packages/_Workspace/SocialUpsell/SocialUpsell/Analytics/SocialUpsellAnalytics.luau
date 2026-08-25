@@ -17,16 +17,16 @@ local t = {
 	lastUpdated = { 2025, 9, 26 }
 }
 
-function evaluateUpsellStage(p0, p1, p2) --[[ line: 28 ]]
+function evaluateUpsellStage(p0, p1, p2)
 	-- upvalues: upsellComponentModule (ref), upsellEntrySurfaceTypeModule (ref), fFlagAddAEGIS2AnalyticsModule (ref), upsellStageModule (ref)
 	return if p1 == upsellComponentModule.Modal then if p2 == upsellComponentModule.Modal and (p0 == upsellEntrySurfaceTypeModule.Homepage or fFlagAddAEGIS2AnalyticsModule and (p0 == upsellEntrySurfaceTypeModule.InExperienceChatInputBar or p0 == upsellEntrySurfaceTypeModule.InExperienceVoiceChatIcon)) then upsellStageModule.Fae else upsellStageModule.FaeDetails else upsellStageModule.Fae
 end
 
-local function _(p3, p4, p5) --[[ line: 59 | named "generateUpsellIdentifier" ]]
+local function _(p3, p4, p5)
 	return if p3 and p4 and p5 then p3 .. p4 .. p5 else nil
 end
 
-function logUpsellEvent(p6, p7) --[[ line: 70 ]]
+function logUpsellEvent(p6, p7)
 	-- upvalues: cryoModule (ref), t (ref), rbxAnalyticsService (ref), fFlagAddUpsellEntryComponentToAnalyticsModule (ref), fFlagAddAEGIS2AnalyticsModule (ref), telemetryService (ref)
 	local var10 = cryoModule.Dictionary.join(t, { eventName = p6 })
 	local playSessionId = rbxAnalyticsService:GetPlaySessionId()

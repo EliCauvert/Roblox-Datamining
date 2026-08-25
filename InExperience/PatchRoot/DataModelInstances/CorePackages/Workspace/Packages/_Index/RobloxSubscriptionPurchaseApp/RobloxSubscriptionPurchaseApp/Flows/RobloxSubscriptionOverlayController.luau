@@ -20,7 +20,7 @@ local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Stor
 local var10 = nil
 local list = { roduxModule.thunkMiddleware }
 
-local function close() --[[ line: 42 ]]
+local function close()
 	-- upvalues: var10 (write)
 	if var10 then
 		var10()
@@ -28,17 +28,17 @@ local function close() --[[ line: 42 ]]
 	end
 end
 
-local function ThemedOverlay(p0) --[[ line: 49 ]]
+local function ThemedOverlay(p0)
 	-- upvalues: useSelectedTheme (ref), reactModule (ref), roduxModule (ref), list (ref), roactRoduxModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), localizationService (ref), selectionCursorProvider (ref), cursorProvider (ref), foundationProvider (ref), providerContainer (ref), robloxSubscriptionContainerModule (ref)
 	local var14 = useSelectedTheme()
-	local var15 = reactModule.useMemo(function() --[[ line: 52 ]]
+	local var15 = reactModule.useMemo(function()
 		-- upvalues: roduxModule (copy), list (copy)
 		return roduxModule.Store.new(roduxModule.combineReducers({}), nil, list)
 	end, {})
 	
 	return reactModule.createElement(foundationProvider, { colorMode = if var14 == "light" then "Light" else "Dark" }, {
 		Providers = reactModule.createElement(providerContainer, {
-			providers = reactModule.useMemo(function() --[[ line: 56 ]]
+			providers = reactModule.useMemo(function()
 				-- upvalues: roactRoduxModule (copy), var15 (ref), styleProviderWithDefaultTheme (copy), var14 (ref), localizationProvider (copy), localization (copy), localizationService (copy), selectionCursorProvider (copy), cursorProvider (copy)
 				local t = {}
 				table.insert(t, {
@@ -74,7 +74,7 @@ local function ThemedOverlay(p0) --[[ line: 49 ]]
 end
 
 return {
-	render = function(p1) --[[ line: 94 ]]
+	render = function(p1)
 		-- upvalues: robloxSubscriptionStoreModule (ref), reactRobloxModule (ref), reactModule (ref), ThemedOverlay (ref), close (ref), var10 (write)
 		local var17 = robloxSubscriptionStoreModule.get()
 		var17.triggerUnmountUI()
@@ -84,7 +84,7 @@ return {
 		local var19 = reactRobloxModule.createRoot(robloxSubscriptionPurchaseOverlay)
 		var19:render(reactModule.createElement(ThemedOverlay, { params = p1, onClose = close }))
 		
-		local function cleanup() --[[ line: 108 ]]
+		local function cleanup()
 			-- upvalues: var19 (ref), robloxSubscriptionPurchaseOverlay (ref)
 			var19:unmount()
 			robloxSubscriptionPurchaseOverlay:Destroy()

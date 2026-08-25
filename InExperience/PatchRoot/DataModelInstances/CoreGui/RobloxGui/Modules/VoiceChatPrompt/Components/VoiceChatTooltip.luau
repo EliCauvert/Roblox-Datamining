@@ -16,15 +16,15 @@ local fIntVoiceChatTooltipDelayModule = require(robloxGui.Modules.Flags.FIntVoic
 local constantsModule = require(robloxGui.Modules.TopBar.Constants)
 local topBarHeight = constantsModule.TopBarHeight
 
-return function(p0) --[[ line: 35 | named "VoiceChatTooltip" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref), guiService (ref), fIntVoiceChatTooltipDelayModule (ref), utilityModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), topBarHeight (ref), constantsModule (ref), roactModule (ref), styledTextLabel (ref), coreGuiService (ref), tooltipOrientation (ref), withTooltip (ref)
 	local var11 = useStyle()
 	local var12 = reactModule.useRef(nil)
 	local onClose = p0.onClose
-	reactModule.useEffect(function() --[[ line: 41 ]]
+	reactModule.useEffect(function()
 		-- upvalues: p0 (ref), var12 (ref), guiService (copy), onClose (ref), fIntVoiceChatTooltipDelayModule (copy)
 		if p0.showPrompt then
-			var12.current = guiService.MenuOpened:Connect(function() --[[ line: 43 ]]
+			var12.current = guiService.MenuOpened:Connect(function()
 				-- upvalues: var12 (copy), onClose (copy)
 				if var12.current then
 					var12.current:Disconnect()
@@ -32,7 +32,7 @@ return function(p0) --[[ line: 35 | named "VoiceChatTooltip" ]]
 					onClose()
 				end
 			end)
-			task.delay(fIntVoiceChatTooltipDelayModule, function() --[[ line: 50 ]]
+			task.delay(fIntVoiceChatTooltipDelayModule, function()
 				-- upvalues: var12 (copy), p0 (copy), onClose (copy)
 				if var12.current then
 					var12.current:Disconnect()
@@ -43,7 +43,7 @@ return function(p0) --[[ line: 35 | named "VoiceChatTooltip" ]]
 				end
 			end)
 		end
-		return function() --[[ line: 61 ]]
+		return function()
 			-- upvalues: var12 (copy)
 			if var12.current then
 				var12.current:Disconnect()
@@ -62,7 +62,7 @@ return function(p0) --[[ line: 35 | named "VoiceChatTooltip" ]]
 	return withTooltip({
 		minContentWidth = 240,
 		headerText = p0.titleText,
-		renderCustomComponents = function(_) --[[ line: 83 ]]
+		renderCustomComponents = function(_)
 			-- upvalues: roactModule (copy), styledTextLabel (copy), p0 (ref), var11 (ref)
 			return roactModule.createElement(styledTextLabel, {
 				layoutOrder = 0,
@@ -82,7 +82,7 @@ return function(p0) --[[ line: 35 | named "VoiceChatTooltip" ]]
 		guiTarget = coreGuiService,
 		active = p0.showPrompt,
 		preferredOrientation = tooltipOrientation.Bottom
-	}, function(p1) --[[ line: 106 ]]
+	}, function(p1)
 		-- upvalues: roactModule (copy), var13 (ref), var14 (write), reactModule (copy)
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

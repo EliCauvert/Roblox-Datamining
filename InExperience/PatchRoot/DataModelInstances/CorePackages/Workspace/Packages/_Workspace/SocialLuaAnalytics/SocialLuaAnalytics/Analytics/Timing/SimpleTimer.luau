@@ -1,10 +1,10 @@
 ﻿local loggerModule = require(script.Parent.Parent.Logger)
 
-local _ = function(p0, p1) --[[ line: 3 ]]
+local _ = function(p0, p1)
 	return (p0.UnixTimestampMillis - p1.UnixTimestampMillis) / 1000
 end
 
-return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
+return function(p2)
 	-- upvalues: loggerModule (ref)
 	local var1 = nil
 	local var2 = nil
@@ -13,12 +13,12 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 	local var5 = if p2 then p2.timeoutThreshold else nil
 	local var6 = if p2 then p2.onReachingThreshold else nil
 	
-	local _ = function() --[[ line: 33 ]]
+	local _ = function()
 		-- upvalues: var1 (write), var2 (write)
 		return if var1 and var2 then var2 - var1 else -1
 	end
 	
-	local var7 = function() --[[ line: 40 ]]
+	local var7 = function()
 		-- upvalues: var1 (write), var2 (write), loggerModule (copy)
 		local processTime = nil
 		
@@ -32,17 +32,17 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 		return if var1 and processTime then processTime - var1 else -1
 	end
 	
-	local _ = function() --[[ line: 54 ]]
+	local _ = function()
 		-- upvalues: var4 (write)
 		if var4 then
 			task.cancel(var4)
 		end
 	end
 	
-	local _ = function() --[[ line: 66 ]]
+	local _ = function()
 		-- upvalues: var5 (ref), var6 (ref), var4 (write)
 		if var5 and var6 then
-			var4 = task.delay(var5, function() --[[ line: 73 ]]
+			var4 = task.delay(var5, function()
 				-- upvalues: var4 (copy), var6 (ref)
 				var4 = nil
 				var6()
@@ -53,7 +53,7 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 	end
 	
 	return {
-		start = function(p3) --[[ line: 79 ]]
+		start = function(p3)
 			-- upvalues: var1 (write), var3 (write), var5 (ref), var6 (ref), var4 (write), loggerModule (copy)
 			if var1 then
 				loggerModule:warning("Timer has been already started")
@@ -67,7 +67,7 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 				if not var5 then return end
 				if var6 then
 					local var9 = var6
-					var4 = task.delay(var5, function() --[[ line: 73 ]]
+					var4 = task.delay(var5, function()
 						-- upvalues: var4 (copy), var9 (ref)
 						var4 = nil
 						var9()
@@ -78,7 +78,7 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 				return
 			end
 		end,
-		getStartTimestamp = function() --[[ line: 106 ]]
+		getStartTimestamp = function()
 			-- upvalues: var3 (write), loggerModule (copy)
 			if var3 then
 				return var3
@@ -87,7 +87,7 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 			
 			return nil
 		end,
-		stop = function() --[[ line: 92 ]]
+		stop = function()
 			-- upvalues: var4 (write), var1 (write), var2 (write), loggerModule (copy)
 			if var4 then
 				task.cancel(var4)
@@ -101,7 +101,7 @@ return function(p2) --[[ line: 23 | named "SimpleTimer" ]]
 			end
 			return if var1 and var2 then var2 - var1 else -1
 		end,
-		clear = function() --[[ line: 60 ]]
+		clear = function()
 			-- upvalues: var1 (write), var2 (write), var4 (write)
 			var1 = nil
 			var2 = nil

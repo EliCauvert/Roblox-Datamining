@@ -4,12 +4,12 @@ local getFIntContactImporterModalDisplayMinDaysModule = require(script.Parent.Pa
 local universal_app_contact_importer_storage_keysEngineFeature = game:GetEngineFeature(constantsModule.UNIVERSAL_APP_CONTACT_IMPORTER_STORAGE_KEYS)
 
 return {
-	isUserOptedInLocalStorage = function(_, p0, p1) --[[ line: 18 ]]
+	isUserOptedInLocalStorage = function(_, p0, p1)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then
 			return false
 		end
-		local ok, status = pcall(function() --[[ line: 29 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p0 (ref), constantsModule (copy)
 			return p0:GetItem(constantsModule.LOCAL_STORAGE_KEY_OPTED_IN_USERS)
 		end)
@@ -23,12 +23,12 @@ return {
 		end
 		return false
 	end,
-	shouldUserSeeModalPotentiallyAgain = function(_, p2, p3) --[[ line: 43 ]]
+	shouldUserSeeModalPotentiallyAgain = function(_, p2, p3)
 		-- upvalues: universal_app_contact_importer_storage_keysEngineFeature (ref), constantsModule (ref), getFIntContactImporterModalDisplayMaxCountModule (ref), getFIntContactImporterModalDisplayMinDaysModule (ref)
 		if not universal_app_contact_importer_storage_keysEngineFeature then
 			return true
 		end
-		local ok, status = pcall(function() --[[ line: 49 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p2 (ref), constantsModule (copy)
 			return p2:GetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_DISPLAY_COUNT)
 		end)
@@ -50,7 +50,7 @@ return {
 		if var4 <= getFIntContactImporterModalDisplayMaxCountModule() then
 			return true
 		end
-		local ok_1, status_1 = pcall(function() --[[ line: 69 ]]
+		local ok_1, status_1 = pcall(function()
 			-- upvalues: p2 (ref), constantsModule (copy)
 			return p2:GetItem(constantsModule.LOCAL_STORAGE_KEY_MODAL_TIMESTAMP)
 		end)

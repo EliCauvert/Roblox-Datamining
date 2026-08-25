@@ -16,7 +16,7 @@ local t = {
 	animationConfig = { dampingRatio = 1, frequency = 3 }
 }
 
-return function(p0) --[[ line: 65 | named "NavigationRail" ]]
+return function(p0)
 	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), UIBloxConfigModule (ref), navigationRailAlignmentModule (ref), reactModule (ref), reactOtterModule (ref)
 	assert(#p0.items > 0, "At least one item should be present!")
 	local var7 = cryoModule.Dictionary.join(t, p0)
@@ -35,7 +35,7 @@ return function(p0) --[[ line: 65 | named "NavigationRail" ]]
 		error("NavigationRail alignment type is incorrect!")
 	end
 	local var13, var14 = reactModule.useState(if var7.size then var7.size.X.Offset else 0)
-	local var15 = reactModule.useCallback(function(p1) --[[ line: 99 ]]
+	local var15 = reactModule.useCallback(function(p1)
 		-- upvalues: var7 (ref), var14 (ref)
 		if var7.animated then
 			var14(p1.AbsoluteSize.X)
@@ -44,7 +44,7 @@ return function(p0) --[[ line: 65 | named "NavigationRail" ]]
 	local useAnimatedBinding = reactOtterModule.useAnimatedBinding
 	local var16 = if var7.animated and not var7.isVisible then -var13 else 0
 	useAnimatedBinding, var16 = useAnimatedBinding(var16)
-	reactModule.useEffect(function() --[[ line: 106 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var7 (ref), var16 (ref), reactOtterModule (copy), var13 (ref)
 		if var7.animated then
 			if var7.isVisible then
@@ -89,7 +89,7 @@ return function(p0) --[[ line: 65 | named "NavigationRail" ]]
 			t_1[tostring(i)] = var7.renderItem(v, var21)
 		end
 	end
-	local var20 = useAnimatedBinding:map(function(p2) --[[ line: 145 ]]
+	local var20 = useAnimatedBinding:map(function(p2)
 		return UDim2.new(0, math.floor(p2 + 0.5), 0, 0)
 	end)
 	

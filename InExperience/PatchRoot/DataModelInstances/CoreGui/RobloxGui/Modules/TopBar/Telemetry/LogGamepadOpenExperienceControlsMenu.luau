@@ -11,7 +11,7 @@ local t = {
 	lastUpdated = { 25, 4, 25 }
 }
 
-return function(p0) --[[ line: 24 ]]
+return function(p0)
 	-- upvalues: fFlagLoggingGamepadOpenExpControlsMenuModule (ref), telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref), t (ref)
 	if not fFlagLoggingGamepadOpenExpControlsMenuModule then return end
 	local list, t_1

@@ -25,13 +25,13 @@ local fIntLuaAppPlayButtonWizardCloseDelayMs = require(parent.SharedFlags).FIntL
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local var6 = if fFlagLuaAppPlayButtonAmpAgeCheckFlow then "gameJoinAgeCheckRequired" else nil
 
-return function(p0, p1, p2, p3) --[[ line: 36 ]]
+return function(p0, p1, p2, p3)
 	-- upvalues: useRoactService (ref), roactNetworking (ref), appEventIngestService (ref), useDispatch (ref), reactModule (ref), unlockPlayIntent (ref), fFlagLuaAppParentApprovedExperiences (ref), useContextualParentalControlsUpsellModule (ref), fFlagLuaAppPlayButtonAmpAgeCheckFlow (ref), fetchGamePlayButtonDataModule (ref), playabilityStatusEnum (ref), getFFlagLuaAppFetchPlayabilityKillSwitchModule (ref), fetchGamePlayabilityAndProductInfo (ref), openAmpWizardContainer (ref), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (ref), var6 (ref), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (ref), fFlagLuaAppPlayButtonWizardCloseDelay (ref), delayedAmpWizardCompletionCallbackOverrideModule (ref), fIntLuaAppPlayButtonWizardCloseDelayMs (ref), openAgeVerificationModal (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref)
 	local var14
 	local var7 = useRoactService(roactNetworking)
 	local var8 = useRoactService(appEventIngestService)
 	local var9 = useDispatch()
-	local var10 = reactModule.useCallback(function(p4) --[[ line: 47 ]]
+	local var10 = reactModule.useCallback(function(p4)
 		-- upvalues: unlockPlayIntent (copy), var8 (ref), p1 (ref), p0 (ref), p3 (ref)
 		unlockPlayIntent(var8, {
 			universeId = p1,
@@ -50,19 +50,19 @@ return function(p0, p1, p2, p3) --[[ line: 36 ]]
 	else
 		var14 = useContextualParentalControlsUpsellModule(p1, p2, p3)
 	end
-	local var15 = if fFlagLuaAppPlayButtonAmpAgeCheckFlow then reactModule.useCallback(function() --[[ line: 72 ]]
+	local var15 = if fFlagLuaAppPlayButtonAmpAgeCheckFlow then reactModule.useCallback(function()
 		-- upvalues: var9 (ref), fetchGamePlayButtonDataModule (copy), var7 (ref), p1 (ref)
 		var9(fetchGamePlayButtonDataModule.Fetch(var7, p1, true))
 	end, { var9, var7, p1 }) else nil
 	
-	return reactModule.useCallback(function(p5, p6) --[[ line: 77 ]]
+	return reactModule.useCallback(function(p5, p6)
 		-- upvalues: p0 (ref), playabilityStatusEnum (copy), fFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), fFlagLuaAppParentApprovedExperiences (copy), getFFlagLuaAppFetchPlayabilityKillSwitchModule (copy), var9 (ref), fetchGamePlayabilityAndProductInfo (copy), var7 (ref), p1 (ref), openAmpWizardContainer (copy), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), var15 (write), p3 (ref), var6 (copy), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), fFlagLuaAppPlayButtonWizardCloseDelay (copy), delayedAmpWizardCompletionCallbackOverrideModule (copy), fIntLuaAppPlayButtonWizardCloseDelayMs (copy), openAgeVerificationModal (copy), var10 (ref), var14 (write), var11 (write), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p2 (ref)
 		if not p0 then
 			p2(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
 			
 			return
 		elseif (if p0.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then if p0.playabilityStatus ~= playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls then if fFlagLuaAppPlayButtonAmpAgeCheckFlow then true else fFlagLuaAppParentApprovedExperiences and p0.playabilityStatus == playabilityStatusEnum.ContextualPlayabilityRequireParentApproval else true else true) and not getFFlagLuaAppFetchPlayabilityKillSwitchModule() then
-			var9(fetchGamePlayabilityAndProductInfo.Fetch(var7, p1)):andThen(function(p7) --[[ line: 91 ]]
+			var9(fetchGamePlayabilityAndProductInfo.Fetch(var7, p1)):andThen(function(p7)
 				-- upvalues: playabilityStatusEnum (copy), fFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), var9 (copy), openAmpWizardContainer (copy), fStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), var15 (copy), p3 (copy), var6 (copy), fStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), fFlagLuaAppPlayButtonWizardCloseDelay (copy), delayedAmpWizardCompletionCallbackOverrideModule (copy), fIntLuaAppPlayButtonWizardCloseDelayMs (copy), openAgeVerificationModal (copy), p1 (copy), var10 (copy), var14 (copy), fFlagLuaAppParentApprovedExperiences (copy), var11 (copy), p5 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p6 (ref), p2 (copy)
 				if if p7 ~= playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser then fFlagLuaAppPlayButtonAmpAgeCheckFlow and p7 == playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired else true then
 					if fFlagLuaAppPlayButtonAmpAgeCheckFlow then
@@ -84,7 +84,7 @@ return function(p0, p1, p2, p3) --[[ line: 36 ]]
 				end
 				p2(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
 				var10("GameLaunch")
-			end):catch(function() --[[ line: 152 ]]
+			end):catch(function()
 				-- upvalues: p2 (copy), p5 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p6 (ref), var10 (copy)
 				p2(p5, if fFlagLuaAppDemoModePlayButtonTelemetry then p6 else nil)
 				var10("GameLaunch")

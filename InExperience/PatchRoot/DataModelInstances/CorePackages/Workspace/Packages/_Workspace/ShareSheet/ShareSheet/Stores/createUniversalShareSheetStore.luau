@@ -3,11 +3,11 @@ local signalsModule = require(shareSheet.Parent.Signals)
 local fFlagShareSheetTelemetryRefactorModule = require(shareSheet.Flags.FFlagShareSheetTelemetryRefactor)
 local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
 
-return function() --[[ line: 35 | named "createUniversalShareSheetStore" ]]
+return function()
 	-- upvalues: signalsModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetTelemetryModule (ref)
 	local var4, var5 = signalsModule.createSignal(nil)
 	
-	local function hide(p0) --[[ line: 39 ]]
+	local function hide(p0)
 		-- upvalues: var4 (ref), var5 (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy)
 		local var7 = var4(false)
 		
@@ -29,7 +29,7 @@ return function() --[[ line: 35 | named "createUniversalShareSheetStore" ]]
 	
 	return {
 		getRequest = var4,
-		show = function(p1) --[[ line: 59 ]]
+		show = function(p1)
 			-- upvalues: hide (ref), fFlagShareSheetTelemetryRefactorModule (copy), shareSheetTelemetryModule (copy), var5 (ref)
 			hide(if fFlagShareSheetTelemetryRefactorModule then shareSheetTelemetryModule.CloseReason.Replaced else nil)
 			var5(table.clone(p1))

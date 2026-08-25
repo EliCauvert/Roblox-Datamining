@@ -1,4 +1,4 @@
-﻿return function(value) --[[ line: 5 | named "isPresetMessage" ]]
+﻿return function(value)
 	if value == nil then
 		return false
 	end

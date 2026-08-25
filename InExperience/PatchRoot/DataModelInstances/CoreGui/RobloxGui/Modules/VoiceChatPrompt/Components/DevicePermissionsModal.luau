@@ -29,7 +29,7 @@ local var14 = argCheckModule.wrap(tModule.strictInterface({
 	UserInputService = tModule.table
 }))
 
-local function DevicePermissionsModal(p0, p1) --[[ line: 65 ]]
+local function DevicePermissionsModal(p0, p1)
 	-- upvalues: var14 (ref), getMicDeeplinkDirectionsModule (ref), getPrimingTextModule (ref), textService (ref), getFFlagSupportGamepadNavInVoiceModals (ref), reactModule (ref), UIBloxModule (ref), assetsModule (ref), microphone (ref), button (ref), buttonType (ref), var13 (ref), var11 (ref), var12 (ref)
 	assert(var14(p0))
 	local var16 = getMicDeeplinkDirectionsModule(p0.settingsAppAvailable, p0.UserInputService)

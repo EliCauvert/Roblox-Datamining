@@ -2,11 +2,11 @@
 local t = {}
 
 return {
-	addToSelectionList = function(p0) --[[ line: 5 ]]
+	addToSelectionList = function(p0)
 		-- upvalues: t (write)
 		table.insert(t, p0)
 	end,
-	removeFromSelectionList = function(p1) --[[ line: 9 ]]
+	removeFromSelectionList = function(p1)
 		-- upvalues: unifiedEventLogConstantsModule (ref), t (write)
 		local text = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"
 		local text_1 = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"
@@ -19,11 +19,11 @@ return {
 			end
 		end
 	end,
-	getSelectionList = function() --[[ line: 21 ]]
+	getSelectionList = function()
 		-- upvalues: t (write)
 		return t
 	end,
-	clearSelectionList = function() --[[ line: 25 ]]
+	clearSelectionList = function()
 		-- upvalues: t (write)
 		t = {}
 	end

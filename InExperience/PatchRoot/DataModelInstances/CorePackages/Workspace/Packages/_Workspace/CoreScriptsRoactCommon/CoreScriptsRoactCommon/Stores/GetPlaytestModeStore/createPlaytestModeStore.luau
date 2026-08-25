@@ -15,16 +15,16 @@ local fFlagPlaytestModeExcludeBuildModeModule = require(coreScriptsRoactCommon.F
 local fFlagPlaytestModeExcludeStudioModule = require(coreScriptsRoactCommon.Flags.FFlagPlaytestModeExcludeStudio)
 local fFlagPlaytestModeIncludeTeamTestModule = require(coreScriptsRoactCommon.Flags.FFlagPlaytestModeIncludeTeamTest)
 
-return function() --[[ line: 32 ]]
+return function()
 	-- upvalues: createSignal (ref), signalsModule (ref), getIsPrivatePlaytesterStore (ref), getUniverseConfigurationStore (ref), privacyType (ref), debugEnablePlaytestMode (ref), fFlagPlaytestModeExcludeBuildModeModule (ref), buildModeLaunchModule (ref), fFlagPlaytestModeIncludeTeamTestModule (ref), runService (ref), fFlagAddPlaytestModeAnalyticsModule (ref), playtestModeAnalyticsModule (ref), fFlagPlaytestModeExcludeStudioModule (ref)
 	local var11, var12 = createSignal(false)
-	local var13 = signalsModule.createComputed(function(p0) --[[ line: 35 ]]
+	local var13 = signalsModule.createComputed(function(p0)
 		-- upvalues: getIsPrivatePlaytesterStore (copy)
 		local var15 = getIsPrivatePlaytesterStore(p0).getAndFetch(game.GameId).data(p0)
 		
 		return var15 ~= nil and var15.isPlaytester == true
 	end)
-	local var14 = signalsModule.createComputed(function(p1) --[[ line: 41 ]]
+	local var14 = signalsModule.createComputed(function(p1)
 		-- upvalues: getUniverseConfigurationStore (copy), privacyType (copy)
 		local var16 = getUniverseConfigurationStore(p1).getAndFetchSummary(game.GameId).data(p1)
 		
@@ -32,7 +32,7 @@ return function() --[[ line: 32 ]]
 	end)
 	
 	return {
-		getIsPlaytestMode = signalsModule.createComputed(function(p2) --[[ line: 47 ]]
+		getIsPlaytestMode = signalsModule.createComputed(function(p2)
 			-- upvalues: debugEnablePlaytestMode (copy), fFlagPlaytestModeExcludeBuildModeModule (copy), buildModeLaunchModule (copy), fFlagPlaytestModeIncludeTeamTestModule (copy), runService (copy), fFlagAddPlaytestModeAnalyticsModule (copy), playtestModeAnalyticsModule (copy), var13 (ref), var11 (ref), var14 (ref), fFlagPlaytestModeExcludeStudioModule (copy)
 			if debugEnablePlaytestMode then
 				return true

@@ -9,7 +9,7 @@ local default = loggingProtocolModule.default
 local identificationUtils = require(parent.AvatarIdentification).IdentificationUtils
 local maxValue = math.max(getFIntAdIdentificationMinimumAreaPerMyriadModule() / 10000, 0)
 local t = {
-	getAdsForPoint = function(p0, p1) --[[ line: 175 ]]
+	getAdsForPoint = function(p0, p1)
 		local t = {}
 		
 		for i, v in pairs(p0) do
@@ -40,7 +40,7 @@ local t = {
 		end
 		return t
 	end,
-	getVisibleAds = function() --[[ line: 211 ]]
+	getVisibleAds = function()
 		-- upvalues: adService (ref), playersService (ref), identificationUtils (ref), maxValue (ref), default (ref), loggingProtocolModule (ref), getFIntAdIdentifiedTelemetryThrottleHundredthsPercentModule (ref)
 		local t = {}
 		local t_1 = { totalAds = 0, checkedAds = 0, duration = 0 }
@@ -65,14 +65,14 @@ local t = {
 		local processTime = os.clock()
 		t_1.totalAds = #reportAdInfo
 		
-		local _ = function() --[[ line: 247 ]]
+		local _ = function()
 			-- upvalues: t_1 (ref), processTime (ref)
 			t_1.duration = os.clock() - processTime
 			
 			return t_1
 		end
 		
-		local _ = function() --[[ line: 252 ]]
+		local _ = function()
 			-- upvalues: processTime (ref)
 			return os.clock() - processTime > 0.2
 		end
@@ -169,13 +169,13 @@ local t = {
 	end
 }
 
-function getLocalCharacterPosition(p2) --[[ line: 30 ]]
+function getLocalCharacterPosition(p2)
 	local humanoidRootPart = p2:FindFirstChild("HumanoidRootPart")
 	
 	return if humanoidRootPart then humanoidRootPart.Position else nil
 end
 
-function checkVisibility(p3, p4, p5, p6) --[[ line: 42 ]]
+function checkVisibility(p3, p4, p5, p6)
 	local position = p3.CFrame.Position
 	local viewportSize = p3.ViewportSize
 	local raycastParams = RaycastParams.new()
@@ -208,7 +208,7 @@ function checkVisibility(p3, p4, p5, p6) --[[ line: 42 ]]
 	return var31 / var30
 end
 
-function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9) --[[ line: 90 ]]
+function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9)
 	-- upvalues: identificationUtils (ref)
 	local list = table.create(#p7)
 	
@@ -222,7 +222,7 @@ function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9) --[[ line: 9
 	}
 end
 
-function getAdCenterAndScreenArea(p10, p11) --[[ line: 107 ]]
+function getAdCenterAndScreenArea(p10, p11)
 	local viewportSize = p11.ViewportSize
 	local var41 = Vector3.new(0, 0, 0)
 	local var42 = 0

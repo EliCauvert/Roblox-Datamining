@@ -25,7 +25,7 @@ local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 52 | named "FilmstripSlot" ]]
+return function(p0)
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), menu (ref), popoverSide (ref), popoverAlign (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), icon (ref), iconName (ref), iconSize (ref), inputSize (ref), image (ref), iconButton (ref), badge (ref), iconPosition (ref), badgeVariant (ref), badgeShape (ref), badgeSize (ref)
 	local var6 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ video = localizationStringsModule.MEDIA_SELECTION_VIDEO }) else nil).video else localizationStringsModule.MEDIA_SELECTION_VIDEO
 	local var7 = useTokens()
@@ -133,7 +133,7 @@ return function(p0) --[[ line: 52 | named "FilmstripSlot" ]]
 			BackgroundTransparency = 1,
 			Text = "",
 			ZIndex = 1,
-			[reactModule.Event.Activated] = p0.onEmptySlotPressed or function() --[[ line: 100 ]] end
+			[reactModule.Event.Activated] = p0.onEmptySlotPressed or function() end
 		}),
 		PlusIcon = reactModule.createElement(view, {
 			tag = "align-x-center align-y-center",

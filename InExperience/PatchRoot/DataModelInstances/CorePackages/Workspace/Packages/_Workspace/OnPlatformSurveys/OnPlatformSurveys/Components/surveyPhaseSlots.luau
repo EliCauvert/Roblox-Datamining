@@ -14,7 +14,7 @@ local questionRenderersModule = require(onPlatformSurveys.Components.Questions.q
 local _ = require(onPlatformSurveys.Hooks.inlineSurveyReducer)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-local function LoadingBody(p0) --[[ line: 60 ]]
+local function LoadingBody(p0)
 	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	local size600 = p0.tokens.Size.Size_600
 	
@@ -37,7 +37,7 @@ local function LoadingBody(p0) --[[ line: 60 ]]
 	})
 end
 
-local function QuestionBody(p1) --[[ line: 83 ]]
+local function QuestionBody(p1)
 	-- upvalues: questionRenderersModule (ref), phaseModule (ref), reactModule (ref), view (ref), text (ref)
 	local index = p1.state.questions[p1.state.index]
 	
@@ -58,7 +58,7 @@ local function QuestionBody(p1) --[[ line: 83 ]]
 end
 
 return {
-	getSlots = function(p2, p3, p4, p5) --[[ line: 105 ]]
+	getSlots = function(p2, p3, p4, p5)
 		-- upvalues: phaseModule (ref), reactModule (ref), text (ref), buttonVariant (ref), LoadingBody (ref), QuestionBody (ref), fFlagInlineSurveyEnhancements (ref), inlineSurveyHelpersModule (ref)
 		if p2.phase == phaseModule.Invite then
 			return {

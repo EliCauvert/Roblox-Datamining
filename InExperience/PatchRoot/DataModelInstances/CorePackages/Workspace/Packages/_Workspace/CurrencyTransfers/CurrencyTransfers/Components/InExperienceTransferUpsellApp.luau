@@ -3,14 +3,14 @@ local reactModule = require(currencyTransfers.Parent.React)
 local inExperienceRobuxTransferSubscriptionUpsellModule = require(currencyTransfers.Components.InExperienceRobuxTransferSubscriptionUpsell)
 local useRobuxTransferSubscriptionUpsellListenerEffectModule = require(currencyTransfers.Hooks.useRobuxTransferSubscriptionUpsellListenerEffect)
 
-return function() --[[ line: 16 | named "InExperienceTransferUpsellApp" ]]
+return function()
 	-- upvalues: reactModule (ref), useRobuxTransferSubscriptionUpsellListenerEffectModule (ref), inExperienceRobuxTransferSubscriptionUpsellModule (ref)
 	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useCallback(function() --[[ line: 23 ]]
+	local var6 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
 		var5(false)
 	end, {})
-	useRobuxTransferSubscriptionUpsellListenerEffectModule(reactModule.useCallback(function() --[[ line: 19 ]]
+	useRobuxTransferSubscriptionUpsellListenerEffectModule(reactModule.useCallback(function()
 		-- upvalues: var5 (ref)
 		var5(true)
 	end, {}))

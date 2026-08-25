@@ -21,7 +21,7 @@ local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
 local postUpsellTrialOptInModule = require(phoneUpsell.Http.Requests.PostUpsellTrialOptIn)
 local t = {}
 
-local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 32 ]]
+local function getButtonStackProps(p0, p1, p2, p3, p4)
 	-- upvalues: buttonType (ref)
 	local list = {
 		{
@@ -39,7 +39,7 @@ local function getButtonStackProps(p0, p1, p2, p3, p4) --[[ line: 32 ]]
 	return { buttonHeight = p1, buttons = list }
 end
 
-return function(p5) --[[ line: 64 | named "VoiceTrialUpsell" ]]
+return function(p5)
 	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useRef (ref), useStyle (ref), useLocalization (ref), useRoactService (ref), roactNetworking (ref), postUserOptIn (ref), postUpsellTrialOptInModule (ref), setCurrentToastMessage (ref), toastRoduxModule (ref), images (ref), reactModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert (ref), getButtonStackProps (ref)
 	local var10 = cryoModule.Dictionary.union(t, p5)
 	local t_1 = {
@@ -63,13 +63,13 @@ return function(p5) --[[ line: 64 | named "VoiceTrialUpsell" ]]
 		Modal = reactModule.createElement(interactiveAlert, {
 			title = var15.titleKey,
 			screenSize = if var13 and var13.current then var13.current.AbsoluteSize else Vector2.new(500, 500),
-			buttonStackInfo = getButtonStackProps(var15.buttonKey, var14.Tokens.Size.Size_1200, function() --[[ line: 81 | named "handleTurnOn" ]]
+			buttonStackInfo = getButtonStackProps(var15.buttonKey, var14.Tokens.Size.Size_1200, function()
 				-- upvalues: var10 (ref), postUserOptIn (copy), var16 (ref), postUpsellTrialOptInModule (copy), var12 (ref), setCurrentToastMessage (copy), toastRoduxModule (copy), images (copy), var14 (ref)
 				var10.onClose()
-				postUserOptIn(var16, true, false):andThen(function(_) --[[ line: 84 ]]
+				postUserOptIn(var16, true, false):andThen(function(_)
 					-- upvalues: postUpsellTrialOptInModule (copy), var16 (copy), var10 (copy)
 					return postUpsellTrialOptInModule(var16, var10.upsellCardType)
-				end):andThen(function() --[[ line: 87 ]]
+				end):andThen(function()
 					-- upvalues: var12 (copy), setCurrentToastMessage (copy), toastRoduxModule (copy), images (copy), var14 (copy), var10 (copy)
 					var12(setCurrentToastMessage({
 						toastMessage = "Feature.VerificationUpsell.Heading.VoiceChatTurnedOn",
@@ -80,7 +80,7 @@ return function(p5) --[[ line: 64 | named "VoiceTrialUpsell" ]]
 						toastIconColorStyle = { Color = var14.Tokens.Color.System.Success.Color3 }
 					}))
 					var10.onCompletion()
-				end):catch(function() --[[ line: 100 ]]
+				end):catch(function()
 					-- upvalues: var12 (copy), setCurrentToastMessage (copy), toastRoduxModule (copy), var14 (copy)
 					var12(setCurrentToastMessage({
 						toastMessage = "Feature.VerificationUpsell.Heading.VoiceChatJoinFailed",
@@ -92,7 +92,7 @@ return function(p5) --[[ line: 64 | named "VoiceTrialUpsell" ]]
 				end)
 			end, var15.extraButtonKey, var10.onClose),
 			onCloseClicked = var10.onClose,
-			middleContent = function() --[[ line: 132 ]]
+			middleContent = function()
 				-- upvalues: reactModule (copy), var15 (ref), baseSize (ref), var14 (ref)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

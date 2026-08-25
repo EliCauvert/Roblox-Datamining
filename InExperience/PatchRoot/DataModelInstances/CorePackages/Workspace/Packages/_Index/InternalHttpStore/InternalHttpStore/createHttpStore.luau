@@ -8,10 +8,10 @@ local createGrafanaLoggingHandlerModule = require(parent.GlobalHandlers.createGr
 local _ = require(parent.HttpStoreTypes)
 local t = {}
 
-return function() --[[ line: 31 | named "createHTTPStore" ]]
+return function()
 	-- upvalues: t (write), createFetchSignalModule (ref), createCancelRequestHandlerModule (ref), createNetworkStatsHandlerModule (ref), createGrafanaLoggingHandlerModule (ref), signalsModule (ref), httpSessionTrackerModule (ref)
 	return {
-		fetch = function(p0, p1) --[[ line: 33 ]]
+		fetch = function(p0, p1)
 			-- upvalues: t (copy), createFetchSignalModule (copy), createCancelRequestHandlerModule (copy), createNetworkStatsHandlerModule (copy), createGrafanaLoggingHandlerModule (copy), signalsModule (copy)
 			if p0 and t[p0] then
 				return t[p0].getFetchSignal, t[p0].cancelRequest
@@ -21,7 +21,7 @@ return function() --[[ line: 31 | named "createHTTPStore" ]]
 			local var9 = createNetworkStatsHandlerModule(var7)
 			local var10 = createGrafanaLoggingHandlerModule(var7)
 			
-			local var11 = function() --[[ line: 55 ]]
+			local var11 = function()
 				-- upvalues: var9 (ref), var10 (ref), var8 (ref)
 				var9()
 				var10()
@@ -29,7 +29,7 @@ return function() --[[ line: 31 | named "createHTTPStore" ]]
 			end
 			
 			if p0 then
-				local var12 = signalsModule.createEffect(function(p2) --[[ line: 62 ]]
+				local var12 = signalsModule.createEffect(function(p2)
 					-- upvalues: var7 (write), t (copy), p0 (ref)
 					local var13 = var7(p2)
 					
@@ -38,7 +38,7 @@ return function() --[[ line: 31 | named "createHTTPStore" ]]
 					end
 				end)
 				
-				var11 = function() --[[ line: 69 ]]
+				var11 = function()
 					-- upvalues: var12 (ref), var9 (ref), var10 (ref), var8 (ref), t (copy), p0 (ref)
 					var12()
 					var9()
@@ -51,7 +51,7 @@ return function() --[[ line: 31 | named "createHTTPStore" ]]
 			end
 			return var7, var11
 		end,
-		cancelAll = function() --[[ line: 84 ]]
+		cancelAll = function()
 			-- upvalues: t (copy), httpSessionTrackerModule (copy)
 			for i, v in t do
 				v.cancelRequest()

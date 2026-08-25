@@ -3,12 +3,12 @@ local friendsChatFocusModule = require(parent.FriendsChat.FriendsChatFocus)
 local tabTypes = require(parent.ExpChatShared).TabTypes
 local t = {
 	shouldProceed = false,
-	onFocusKeyPressed = function(_) --[[ line: 35 ]]
+	onFocusKeyPressed = function(_)
 		return Enum.ContextActionResult.Pass
 	end
 }
 
-return function(p0) --[[ line: 45 | named "getTabFocusBehavior" ]]
+return function(p0)
 	-- upvalues: friendsChatFocusModule (ref), t (ref), tabTypes (ref)
 	return if p0 == "FriendsChat" then {
 		shouldProceed = friendsChatFocusModule.canFocus(),

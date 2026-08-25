@@ -3,16 +3,16 @@ local signalModule = require(script.Parent.Parent.Parent.Signal)
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).ServerJobsFormatting.ChartHeaderNames
 local var2 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 11 ]]
+	[chartHeaderNames[1]] = function(p0, p1)
 		return p0.name < p1.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 14 ]]
+	[chartHeaderNames[2]] = function(p2, p3)
 		return p2.dataStats.dataSet:back().data[1] < p3.dataStats.dataSet:back().data[1]
 	end,
-	[chartHeaderNames[3]] = function(p4, p5) --[[ line: 17 ]]
+	[chartHeaderNames[3]] = function(p4, p5)
 		return p4.dataStats.dataSet:back().data[2] < p5.dataStats.dataSet:back().data[2]
 	end,
-	[chartHeaderNames[4]] = function(p6, p7) --[[ line: 20 ]]
+	[chartHeaderNames[4]] = function(p6, p7)
 		return p6.dataStats.dataSet:back().data[3] < p7.dataStats.dataSet:back().data[3]
 	end
 }
@@ -22,7 +22,7 @@ local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getCl
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 32 ]]
+function t_1.new()
 	-- upvalues: t_1 (ref), signalModule (ref), chartHeaderNames (ref)
 	local t = {}
 	setmetatable(t, t_1)
@@ -36,7 +36,7 @@ function t_1.new() --[[ line: 32 ]]
 	return t
 end
 
-function t_1:setSortType(p8) --[[ line: 46 ]]
+function t_1:setSortType(p8)
 	-- upvalues: t (ref)
 	if t[p8] then
 		self._sortType = p8
@@ -47,19 +47,19 @@ function t_1:setSortType(p8) --[[ line: 46 ]]
 	error(string.format("attempted to pass invalid sortType: %s", tostring(p8)), 2)
 end
 
-function t_1:getSortType() --[[ line: 56 ]]
+function t_1:getSortType()
 	return self._sortType
 end
 
-function t_1:Signal() --[[ line: 60 ]]
+function t_1:Signal()
 	return self._serverJobsUpdated
 end
 
-function t_1:getCurrentData() --[[ line: 64 ]]
+function t_1:getCurrentData()
 	return self._sortedJobsData
 end
 
-function t_1:updateServerJobsData(p9) --[[ line: 68 ]]
+function t_1:updateServerJobsData(p9)
 	-- upvalues: circularBufferModule (ref), var2 (ref), maxOfTableModule (ref), minOfTableModule (ref)
 	self._lastUpdate = os.time()
 	
@@ -112,16 +112,16 @@ function t_1:updateServerJobsData(p9) --[[ line: 68 ]]
 	end
 end
 
-function t_1:isRunning() --[[ line: 141 ]]
+function t_1:isRunning()
 	return self._isRunning
 end
 
-function t_1:start() --[[ line: 145 ]]
+function t_1:start()
 	-- upvalues: getClientReplicatorModule (ref)
 	local var17 = getClientReplicatorModule()
 	
 	if var17 and not self._statsListenerConnection then
-		self._statsListenerConnection = var17.StatsReceived:connect(function(p10) --[[ line: 148 ]]
+		self._statsListenerConnection = var17.StatsReceived:connect(function(p10)
 			-- upvalues: self (ref)
 			local jobs = p10.Jobs
 			
@@ -135,7 +135,7 @@ function t_1:start() --[[ line: 145 ]]
 	end
 end
 
-function t_1:stop() --[[ line: 161 ]]
+function t_1:stop()
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil

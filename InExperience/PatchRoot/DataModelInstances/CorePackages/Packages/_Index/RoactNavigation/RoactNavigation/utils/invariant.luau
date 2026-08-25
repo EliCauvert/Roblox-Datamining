@@ -1,10 +1,10 @@
-﻿local var0 = if _G.__DEV__ then function(p0) --[[ line: 15 ]]
+﻿local var0 = if _G.__DEV__ then function(p0)
 	if p0 == nil then
 		error("invariant requires an error message argument")
 	end
-end else function(_) --[[ line: 12 ]] end
+end else function(_) end
 
-return function(p1, p2, ...) --[[ line: 22 | named "invariant" ]]
+return function(p1, p2, ...)
 	-- upvalues: var0 (write)
 	var0(p2)
 	

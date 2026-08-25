@@ -16,7 +16,7 @@ end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
 t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 
-function t.fflag() --[[ line: 23 ]]
+function t.fflag()
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
 end
@@ -26,7 +26,7 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 29 ]]
+function t.run(p0, p1)
 	-- upvalues: curveAnimationHierarchyUtilsModule (ref), curveAnimBoneHierarchyUtilsModule (ref), errorSourceStringsModule (ref)
 	for i, v in p1.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do

@@ -13,7 +13,7 @@ local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
 local videoProgressBarModule = require(script.Parent.VideoProgressBar)
 local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
 
-return function(p0) --[[ line: 45 | named "VideoPlayerBottomOverlay" ]]
+return function(p0)
 	-- upvalues: useTokens (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), reactModule (ref), iconButton (ref), icon (ref), iconVariant (ref), iconSize (ref), videoProgressBarModule (ref), maybeForceDarkTheme (ref)
 	local var5 = useTokens()
 	local var6 = if p0.muteButtonConfig == nil then fFlagLuaAppEdpMediaGalleryFullScreen and (if p0.playButtonConfig == nil then p0.progressBarConfig ~= nil else true) else true
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 45 | named "VideoPlayerBottomOverlay" ]]
 		BorderSizePixel = 0,
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.fromScale(0, 1),
-		Size = UDim2.new(1, 0, 0, reactModule.useMemo(function() --[[ line: 124 ]]
+		Size = UDim2.new(1, 0, 0, reactModule.useMemo(function()
 			-- upvalues: XXLarge (ref), var7 (ref), p0 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), size1000 (ref), size100 (ref), xSmall (ref)
 			local var9 = XXLarge + var7
 			

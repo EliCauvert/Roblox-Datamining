@@ -23,15 +23,15 @@ local var13 = nil
 local var14 = nil
 local var15 = 1e999
 
-local function _(p0) --[[ line: 36 | named "isSelectableGuiObject" ]]
+local function _(p0)
 	return not (not p0:IsA("GuiButton") and not p0:IsA("TextBox")) and (not (not p0.Active or not p0.Selectable) and p0.AbsoluteSize.Magnitude ~= 0)
 end
 
-local _ = function(p1, p2, p3) --[[ line: 50 | named "contains" ]]
+local _ = function(p1, p2, p3)
 	return p2.x <= p1.x and (p2.y <= p1.y and (p1.x <= p3.x and p1.y <= p3.y))
 end
 
-local function handleScrollingFrame(p4, p5, p6) --[[ line: 54 ]]
+local function handleScrollingFrame(p4, p5, p6)
 	-- upvalues: t (ref), inputModule (ref), propertiesModule (ref), abs (ref), cos (ref), sin (ref), max (ref), min (ref), sign (ref), interfaceModule (ref)
 	if not p4:IsA("ScrollingFrame") then
 		return false
@@ -82,7 +82,7 @@ local function handleScrollingFrame(p4, p5, p6) --[[ line: 54 ]]
 	return false
 end
 
-local function findClosestOrOccludingGuiObject(_, p7, p8, p9) --[[ line: 119 ]]
+local function findClosestOrOccludingGuiObject(_, p7, p8, p9)
 	-- upvalues: handleScrollingFrame (ref), var11 (write), var13 (write), rotatePointAroundObjectModule (ref), var15 (write), isCircleContainedInGuiObjectModule (ref), propertiesModule (ref), var14 (write)
 	for i, v in ipairs(p7) do
 		if not handleScrollingFrame(v, p8, p9) then
@@ -119,7 +119,7 @@ local function findClosestOrOccludingGuiObject(_, p7, p8, p9) --[[ line: 119 ]]
 	end
 end
 
-local function handleScrollingInAncestors(p10, p11, p12, p13) --[[ line: 172 ]]
+local function handleScrollingInAncestors(p10, p11, p12, p13)
 	-- upvalues: handleScrollingFrame (ref), var11 (write)
 	local parent = p10.Parent
 	while parent and parent ~= p11 do
@@ -133,7 +133,7 @@ local function handleScrollingInAncestors(p10, p11, p12, p13) --[[ line: 172 ]]
 	end
 end
 
-local function processCursorPosition(p14, p15, p16) --[[ line: 183 ]]
+local function processCursorPosition(p14, p15, p16)
 	-- upvalues: t (ref), var13 (write), var14 (write), var15 (write), guiService (ref), var4 (write), playersService (ref), coreGuiService (ref), var11 (write), findClosestOrOccludingGuiObject (ref), handleScrollingInAncestors (ref)
 	table.clear(t)
 	var13 = nil
@@ -162,12 +162,12 @@ local function processCursorPosition(p14, p15, p16) --[[ line: 183 ]]
 	return var13
 end
 
-local _ = function() --[[ line: 248 | named "getMaxSpeed" ]]
+local _ = function()
 	-- upvalues: guiService (ref), propertiesModule (ref)
 	return guiService:GetScreenResolution().Magnitude * propertiesModule.MaxSpeedRelative
 end
 
-return function(p17, p18) --[[ line: 253 ]]
+return function(p17, p18)
 	-- upvalues: guiService (ref), inputModule (ref), gamepadService (ref), var10 (write), interfaceModule (ref), var11 (write), propertiesModule (ref), processCursorPosition (ref), coreGuiService (ref), var4 (write)
 	local var36 = guiService:GetScreenResolution() + guiService:GetGuiInset()
 	local thumbstickVector = inputModule:GetThumbstickVector()

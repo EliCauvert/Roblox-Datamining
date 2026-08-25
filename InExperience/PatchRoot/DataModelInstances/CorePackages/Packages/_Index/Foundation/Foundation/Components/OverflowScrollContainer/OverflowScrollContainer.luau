@@ -22,7 +22,7 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 47 | named "OverflowScrollContainer" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), usePreferredInputModule (ref), useClippingRectModule (ref), reactOtterModule (ref), otterModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), stateLayerAffordanceModule (ref), visibilityModule (ref), scrimModule (ref)
 	local var17 = withDefaultsModule(p0, t)
 	local var18 = useTokensModule()
@@ -36,7 +36,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 47 | 
 	local var31 = reactModule.useRef(nil)
 	local var32 = useClippingRectModule(var31)
 	local var33, var34 = reactModule.useBinding(0)
-	local var35 = reactOtterModule.useMotor(0, function(p2) --[[ line: 66 ]]
+	local var35 = reactOtterModule.useMotor(0, function(p2)
 		-- upvalues: var31 (ref)
 		local current = var31.current
 		
@@ -46,7 +46,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 47 | 
 			return
 		end
 	end)
-	local var36 = reactModule.useCallback(function(p3) --[[ line: 74 ]]
+	local var36 = reactModule.useCallback(function(p3)
 		-- upvalues: var34 (ref), var22 (ref), var20 (ref)
 		var34(p3.AbsoluteWindowSize.Y)
 		
@@ -56,7 +56,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 47 | 
 		var22(p3.CanvasPosition.X > 0)
 		var20(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
 	end, {})
-	local var37 = reactModule.useCallback(function(p4) --[[ line: 88 ]]
+	local var37 = reactModule.useCallback(function(p4)
 		-- upvalues: var31 (ref), var35 (ref), otterModule (copy), var18 (ref)
 		local current = var31.current
 		
@@ -76,27 +76,27 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 47 | 
 			startingValue = current.CanvasPosition.X
 		}))
 	end, { var18 })
-	local var38 = reactModule.useCallback(function() --[[ line: 113 ]]
+	local var38 = reactModule.useCallback(function()
 		-- upvalues: var37 (ref)
 		var37(-1)
 	end, { var37 })
-	local var39 = reactModule.useCallback(function() --[[ line: 117 ]]
+	local var39 = reactModule.useCallback(function()
 		-- upvalues: var37 (ref)
 		var37(1)
 	end, { var37 })
-	local var40 = reactModule.useCallback(function(p5) --[[ line: 121 ]]
+	local var40 = reactModule.useCallback(function(p5)
 		-- upvalues: var24 (ref), controlStateModule (copy)
 		var24(if p5 ~= controlStateModule.Hover then p5 == controlStateModule.Pressed else true)
 	end, {})
-	local var41 = reactModule.useCallback(function(p6) --[[ line: 125 ]]
+	local var41 = reactModule.useCallback(function(p6)
 		-- upvalues: var26 (ref), controlStateModule (copy)
 		var26(if p6 ~= controlStateModule.Hover then p6 == controlStateModule.Pressed else true)
 	end, {})
-	local var42 = reactModule.useCallback(function(p7) --[[ line: 129 ]]
+	local var42 = reactModule.useCallback(function(p7)
 		-- upvalues: var28 (ref), controlStateModule (copy)
 		var28(if p7 ~= controlStateModule.Hover then p7 == controlStateModule.Pressed else true)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 133 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var31 (ref), var36 (ref)
 		if var31.current then
 			var36(var31.current)
@@ -127,10 +127,10 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 47 | 
 		ScrimLayer = reactModule.createElement(viewModule, {
 			tag = "row flex-between",
 			ZIndex = 2,
-			Position = var32:map(function(p8) --[[ line: 175 ]]
+			Position = var32:map(function(p8)
 				return UDim2.fromOffset(p8.Min.X, 0)
 			end),
-			Size = var32:map(function(p9) --[[ line: 180 ]]
+			Size = var32:map(function(p9)
 				-- upvalues: var17 (ref)
 				return UDim2.new(0, p9.Max.X - p9.Min.X, 1, -var17.scrimBottomInset)
 			end),

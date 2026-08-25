@@ -14,7 +14,7 @@ local getSduiPageEntrySnackbarStore = sduiSharedUtilitiesModule.getSduiPageEntry
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 
-local function showRsvpSuccessToast(p0, p1, p2, p3) --[[ line: 26 ]]
+local function showRsvpSuccessToast(p0, p1, p2, p3)
 	-- upvalues: getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
 	getSduiPageEntrySnackbarStore().show(p1, {
 		title = p0.dependencies.localization:Format("Feature.VirtualEvents.Label.ReminderSetForEventTime"):gsub("{(.-)}", { eventName = p2, eventTime = p3 }),
@@ -22,7 +22,7 @@ local function showRsvpSuccessToast(p0, p1, p2, p3) --[[ line: 26 ]]
 	})
 end
 
-return function(p4, p5, p6, _) --[[ line: 45 ]]
+return function(p4, p5, p6, _)
 	-- upvalues: sduiErrorType (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), virtualEventsModule (ref), getActionTelemetryFieldValue (ref), getExperienceEventInfoStore (ref), setCentralOverlay (ref), centralOverlayType (ref), showRsvpSuccessToast (ref)
 	local var7 = if p4 then p4.actionParams else nil
 	
@@ -58,7 +58,7 @@ return function(p4, p5, p6, _) --[[ line: 45 ]]
 	
 	if (fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport) and var9 then
 		local entryPointKey = var7.entryPointKey or p6.configKey
-		var9:andThen(function(p7) --[[ line: 89 ]]
+		var9:andThen(function(p7)
 			-- upvalues: userRsvp (ref), entryPointKey (ref), var7 (ref), p6 (ref), setCentralOverlay (copy), centralOverlayType (copy), var8 (ref), eventId (ref), showRsvpSuccessToast (copy)
 			if userRsvp ~= true or not entryPointKey then return end
 			local notificationsModalIdentifier = var7.notificationsModalIdentifier
@@ -82,7 +82,7 @@ return function(p4, p5, p6, _) --[[ line: 45 ]]
 			if title and formattedStartDate and var12.userRsvp then
 				showRsvpSuccessToast(p6, entryPointKey, title, formattedStartDate)
 			end
-		end):catch(function() --[[ line: 127 ]]
+		end):catch(function()
 			return nil
 		end)
 	end

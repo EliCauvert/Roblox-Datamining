@@ -20,7 +20,7 @@ local t_1 = {
 }
 
 return {
-	logTileSkipped = function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 40 ]]
+	logTileSkipped = function(p0, p1, p2, p3, p4, p5, p6, p7, p8)
 		-- upvalues: luaAppNullableGridLayoutTelemetryFields (ref), telemetryService (ref), t (ref), list (ref)
 		telemetryService:LogEvent(t, {
 			standardizedFields = list,
@@ -37,7 +37,7 @@ return {
 			}
 		})
 	end,
-	logTilePlaced = function(p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19) --[[ line: 69 ]]
+	logTilePlaced = function(p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19)
 		-- upvalues: luaAppNullableGridLayoutTelemetryFields (ref), fFlagLuaAppFixTotalColsBound (ref), telemetryService (ref), t_1 (ref), list (ref)
 		telemetryService:LogEvent(t_1, {
 			standardizedFields = list,

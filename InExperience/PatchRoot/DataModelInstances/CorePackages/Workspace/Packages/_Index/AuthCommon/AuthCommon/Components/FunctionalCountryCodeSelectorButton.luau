@@ -11,7 +11,7 @@ local getFFlagCountryCodeBoldPrefixEnabledModule = require(authCommon.Flags.GetF
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local _ = require(authCommon.Common.Types)
 
-return function(p0) --[[ line: 28 | named "CountryCodeSelectorButton" ]]
+return function(p0)
 	-- upvalues: getFFlagCountryCodeBoldPrefixEnabledModule (ref), text (ref), appFonts (ref), useStyle (ref), roactModule (ref), white (ref), gray2 (ref)
 	local localizedName = p0.CountryCode.localizedName or ""
 	local text_1 = "+" .. (p0.CountryCode.prefix or "")
@@ -21,7 +21,7 @@ return function(p0) --[[ line: 28 | named "CountryCodeSelectorButton" ]]
 	local formattedText = string.format("%s (%s)", localizedName, text_1)
 	local size = p0.Size
 	local layoutOrder = p0.LayoutOrder
-	local selectionCallback = p0.ListButtonProps.SelectionCallback or function(_) --[[ line: 37 ]] end
+	local selectionCallback = p0.ListButtonProps.SelectionCallback or function(_) end
 	local var9 = useStyle()
 	
 	return roactModule.createElement("TextButton", {
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 28 | named "CountryCodeSelectorButton" ]]
 		BackgroundTransparency = 1,
 		LayoutOrder = layoutOrder,
 		Text = "",
-		[roactModule.Event.Activated] = function() --[[ line: 82 ]]
+		[roactModule.Event.Activated] = function()
 			-- upvalues: selectionCallback (ref), p0 (ref)
 			selectionCallback(p0.CountryCode)
 		end

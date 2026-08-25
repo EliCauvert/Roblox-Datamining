@@ -2,7 +2,7 @@
 local byUserIdModule = require(script.Users.byUserId)
 local byUsernameModule = require(script.Users.byUsername)
 
-return function(p0) --[[ line: 8 ]]
+return function(p0)
 	-- upvalues: roduxModule (ref), byUserIdModule (ref), byUsernameModule (ref)
 	return roduxModule.combineReducers({
 		byUserId = byUserIdModule(p0),

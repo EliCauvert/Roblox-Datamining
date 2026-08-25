@@ -16,7 +16,7 @@ local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-return function(_) --[[ line: 24 | named "DiscoverabilityWithAudit" ]]
+return function(_)
 	-- upvalues: useNavigation (ref), useDispatch (ref), useAnalyticsModule (ref), useLegallySensitiveContentAndActions (ref), consentName (ref), reactModule (ref), eventNamesModule (ref), constantsModule (ref), updateIsDiscoverabilityUnset (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
 	local var7 = useNavigation()
 	local var8 = useDispatch()
@@ -24,14 +24,14 @@ return function(_) --[[ line: 24 | named "DiscoverabilityWithAudit" ]]
 	local var10, var11 = useLegallySensitiveContentAndActions(consentName.phoneNumberDiscoverabilityUpsell, "generic-lua-discoverability-setting-upsell")
 	local wordsOfConsent = var10.wordsOfConsent
 	local updateSettingWithAuditing = var11.updateSettingWithAuditing
-	reactModule.useEffect(function() --[[ line: 37 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var9 (ref), eventNamesModule (copy), constantsModule (copy)
 		var9.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalLoad, {
 			version = "audit_version",
 			wordingVersion = constantsModule.WORDING_VERSION_1
 		})
 	end, {})
-	local var12 = reactModule.useCallback(function() --[[ line: 44 ]]
+	local var12 = reactModule.useCallback(function()
 		-- upvalues: var8 (ref), updateIsDiscoverabilityUnset (copy)
 		var8(updateIsDiscoverabilityUnset({ isDiscoverabilityUnset = false }))
 	end, {})
@@ -48,7 +48,7 @@ return function(_) --[[ line: 24 | named "DiscoverabilityWithAudit" ]]
 				{
 					text = wordsOfConsent.notNow,
 					variant = buttonVariant.Standard,
-					onActivated = function() --[[ line: 56 ]]
+					onActivated = function()
 						-- upvalues: var9 (ref), eventNamesModule (copy), constantsModule (copy), var12 (ref), var7 (ref), param (ref)
 						var9.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalClose, { selected = constantsModule.UNSET })
 						var12()
@@ -59,7 +59,7 @@ return function(_) --[[ line: 24 | named "DiscoverabilityWithAudit" ]]
 				{
 					text = wordsOfConsent.turnOn,
 					variant = buttonVariant.Emphasis,
-					onActivated = function() --[[ line: 68 ]]
+					onActivated = function()
 						-- upvalues: var9 (ref), eventNamesModule (copy), constantsModule (copy), updateSettingWithAuditing (ref), var12 (ref), var7 (ref), param (ref)
 						var9.fireAnalyticsEvent(eventNamesModule.DiscoverabilityModalContinue, { selected = constantsModule.DISCOVERABLE })
 						updateSettingWithAuditing("phoneNumberDiscoverability", "Discoverable")

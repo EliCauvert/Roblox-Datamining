@@ -6,10 +6,10 @@ local _ = require(parent.AnalyticsTypes)
 local sessionIdUpdatedModule = require(parent.Actions.SessionIdUpdated)
 local t = {}
 
-return function(_) --[[ line: 12 ]]
+return function(_)
 	-- upvalues: rodux (ref), t (ref), sessionIdUpdatedModule (ref), dash (ref)
 	return rodux.createReducer(t, {
-		[sessionIdUpdatedModule.name] = function(p0, p1) --[[ line: 14 ]]
+		[sessionIdUpdatedModule.name] = function(p0, p1)
 			-- upvalues: dash (copy), t (copy)
 			return dash.join(p0 or t, { [p1.payload.sessionKey] = p1.payload.sessionId })
 		end

@@ -18,9 +18,9 @@ local _ = {
 	PartialSuccess = "PartialSuccess"
 }
 
-return function(p0, p1, p2) --[[ line: 24 | named "performLookPurchase" ]]
+return function(p0, p1, p2)
 	-- upvalues: logging (ref), promiseModule (ref), purchaseErrorModule (ref), isEconomicRestrictionResponse (ref)
-	return p0.performLookPurchase(p1, p2):andThen(function(p3) --[[ line: 25 ]]
+	return p0.performLookPurchase(p1, p2):andThen(function(p3)
 		-- upvalues: logging (copy), promiseModule (copy), purchaseErrorModule (copy), isEconomicRestrictionResponse (copy)
 		if type(p3) ~= "table" then
 			logging.warn("Response from performLookPurchase is malformed!")
@@ -28,7 +28,7 @@ return function(p0, p1, p2) --[[ line: 24 | named "performLookPurchase" ]]
 			return promiseModule.reject(purchaseErrorModule.UnknownFailure)
 		end
 		return if isEconomicRestrictionResponse(p3) then promiseModule.reject(p3) elseif p3.purchaseLookStatus == "Success" or p3.purchaseLookStatus == "PartialSuccess" then promiseModule.resolve(p3) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
-	end, function(p4) --[[ line: 43 ]]
+	end, function(p4)
 		-- upvalues: promiseModule (copy)
 		return promiseModule.reject(p4)
 	end)

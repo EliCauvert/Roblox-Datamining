@@ -30,29 +30,29 @@ local fFlagExpChatPresetChatAutocompleteEnabledModule = require(expChat.Flags.FF
 local var24 = expChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
 local presetChatContainer = expChatSharedModule.Logger:new("ExpChat/PresetChat/PresetChatContainer")
 
-local function _() --[[ line: 43 | named "getRBXGeneralChannel" ]]
+local function _()
 	-- upvalues: textChatService (ref)
 	local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
 	
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContainer" ]]
+return reactModule.memo(function(value)
 	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), useSelector (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), var24 (ref), sendPresetModule (ref), presetChatContainer (ref), textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
 	local var27 = foundationModule.Hooks.useTokens()
 	local var28 = getPresetChatStoreModule(false)
 	local var29 = useDispatch()
 	local var30 = signalsReactModule.useSignalState(var28.getIsLoading)
 	local var31 = signalsReactModule.useSignalState(var28.getCategoryGroups)
-	local var32 = if fFlagExpChatUseMessagesStore then signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat) else useSelector(function(p0) --[[ line: 64 ]]
+	local var32 = if fFlagExpChatUseMessagesStore then signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat) else useSelector(function(p0)
 		return p0.CanLocalUserChat
 	end)
 	local var33 = localizationModule.useLocalization({ footerDescription = "Feature.Chat.PresetChat.Disclaimer" })
-	local var34 = reactModule.useCallback(function() --[[ line: 73 ]]
+	local var34 = reactModule.useCallback(function()
 		-- upvalues: setIsPresetTrayOpenModule (copy), var28 (ref)
 		setIsPresetTrayOpenModule(var28, false)
 	end, { var28 })
-	local var35 = reactModule.useCallback(function() --[[ line: 77 ]]
+	local var35 = reactModule.useCallback(function()
 		-- upvalues: var34 (ref), var29 (ref), presetTrayKeyboardSelectedModule (copy), expChatSharedModule (copy), constantsModule (copy)
 		var34()
 		var29(presetTrayKeyboardSelectedModule())
@@ -64,7 +64,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 	local var36 = reactModule.useRef(nil)
 	local categoryGroupId = var31 and (#var31 <= 0 and (var31[1].categoryGroupId or ""))
 	local var38, var39 = reactModule.useState(categoryGroupId)
-	reactModule.useEffect(function() --[[ line: 92 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var38 (ref), categoryGroupId (ref), var39 (ref)
 		if var38 == "" and categoryGroupId ~= "" then
 			var39(categoryGroupId)
@@ -73,11 +73,11 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 	local var40 = if fFlagExpChatPresetChatGamepadEnabledModule then signalsReactModule.useSignalState(var28.getIsTrayOpen) else nil
 	local var41 = reactModule.useRef(nil)
 	
-	local function _(p1) --[[ line: 103 | named "isValidSelection" ]]
+	local function _(p1)
 		if p1 == nil then
 			return false
 		end
-		local ok, status = pcall(function() --[[ line: 107 ]]
+		local ok, status = pcall(function()
 			-- upvalues: p1 (ref)
 			return p1:IsDescendantOf(game) and p1:FindFirstAncestorOfClass("ScreenGui") ~= nil
 		end)
@@ -85,7 +85,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 		return ok and status
 	end
 	
-	reactModule.useEffect(function() --[[ line: 114 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagExpChatPresetChatGamepadEnabledModule (copy), var40 (ref), var36 (ref), inputTypeModule (copy), userInputService (copy), var41 (ref), guiService (copy)
 		if fFlagExpChatPresetChatGamepadEnabledModule and not var40 then return end
 		local current = var36.current
@@ -95,7 +95,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 		if var41.current == nil then
 			var41.current = if fFlagExpChatPresetChatGamepadEnabledModule then guiService.SelectedCoreObject else guiService.SelectedObject
 		end
-		task.defer(function() --[[ line: 131 ]]
+		task.defer(function()
 			-- upvalues: current (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
 			local var53
 			local var52 = current
@@ -103,14 +103,14 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 			if var52 == nil then
 				var53 = false
 			else
-				local ok, status = pcall(function() --[[ line: 107 ]]
+				local ok, status = pcall(function()
 					-- upvalues: var52 (ref)
 					return var52:IsDescendantOf(game) and var52:FindFirstAncestorOfClass("ScreenGui") ~= nil
 				end)
 				var53 = ok and status
 			end
 			if var53 then
-				pcall(function() --[[ line: 133 ]]
+				pcall(function()
 					-- upvalues: fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy), current (copy)
 					if fFlagExpChatPresetChatGamepadEnabledModule then
 						guiService.SelectedCoreObject = current
@@ -122,16 +122,16 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 			end
 		end)
 	end, if fFlagExpChatPresetChatGamepadEnabledModule then { var38, var40 } else { var38 })
-	reactModule.useEffect(function() --[[ line: 148 ]]
+	reactModule.useEffect(function()
 		-- upvalues: getTransparencyStoreModule (copy), var41 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
 		local var54 = getTransparencyStoreModule(false)
 		var54.setContextMenuOpen()
 		
-		return function() --[[ line: 151 ]]
+		return function()
 			-- upvalues: var54 (ref), var41 (copy), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
 			var54.clearContextMenuOpen()
 			local current = var41.current
-			pcall(function() --[[ line: 154 ]]
+			pcall(function()
 				-- upvalues: current (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
 				local var56
 				local var55 = current
@@ -139,7 +139,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 				if var55 == nil then
 					var56 = false
 				else
-					local ok, status = pcall(function() --[[ line: 107 ]]
+					local ok, status = pcall(function()
 						-- upvalues: var55 (ref)
 						return var55:IsDescendantOf(game) and var55:FindFirstAncestorOfClass("ScreenGui") ~= nil
 					end)
@@ -164,7 +164,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 			var41.current = nil
 		end
 	end, {})
-	local var42 = reactModule.useCallback(function(p2) --[[ line: 173 ]]
+	local var42 = reactModule.useCallback(function(p2)
 		-- upvalues: fFlagExpChatPresetChatAutocompleteEnabledModule (copy), var28 (ref), var24 (copy), sendPresetModule (copy), value (ref), presetChatContainer (copy), var34 (ref), textChatService (copy), fFlagExpChatUniverseChatPresetEnabledModule (copy)
 		if fFlagExpChatPresetChatAutocompleteEnabledModule then
 			var28.setPresetCooldownEndsAt(os.clock() + var24)
@@ -199,13 +199,13 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 					var34()
 					
 					return
-				elseif not pcall(function() --[[ line: 220 ]]
+				elseif not pcall(function()
 					-- upvalues: textChatService (copy), p2 (ref)
 					textChatService:SendUniverseChatPresetAsync(p2)
 				end) then
 					var28.setPresetCooldownEndsAt(nil)
 				end
-			elseif not pcall(function() --[[ line: 227 ]]
+			elseif not pcall(function()
 				-- upvalues: textChannel (write), p2 (ref)
 				textChannel:SendPresetAsync(p2)
 			end) then
@@ -318,7 +318,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 		} else nil
 		
 		if v then
-			function t_3.onActivated() --[[ line: 347 ]]
+			function t_3.onActivated()
 				-- upvalues: var39 (ref), categoryGroupId_1 (ref)
 				var39(categoryGroupId_1)
 			end

@@ -49,33 +49,33 @@ local fFlagStreamNotificationsStandardizeClickEvents = sharedFlagsModule.FFlagSt
 local fFlagStreamNotificationImpressionLogging = sharedFlagsModule.FFlagStreamNotificationImpressionLogging
 local frameBoundsImpressionsTracker = require(parent.Impressions).FrameBoundsImpressionsTracker
 
-local function _() --[[ line: 76 | named "GetIsFriendCommunicationRestricted" ]]
+local function _()
 	-- upvalues: thirdPartyUserService (ref)
 	return thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
 local streamNotificationDropdownExperimentationModule = require(streamNotifications.StreamNotificationDropdownExperimentation)
 
-local function createImpressionSignal() --[[ line: 112 ]]
+local function createImpressionSignal()
 	local bindableEvent = Instance.new("BindableEvent")
 	
 	return {
-		connect = function(_, p0) --[[ line: 115 ]]
+		connect = function(_, p0)
 			-- upvalues: bindableEvent (ref)
 			return bindableEvent.Event:Connect(p0)
 		end,
-		fire = function() --[[ line: 118 ]]
+		fire = function()
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Fire()
 		end,
-		destroy = function() --[[ line: 121 ]]
+		destroy = function()
 			-- upvalues: bindableEvent (ref)
 			bindableEvent:Destroy()
 		end
 	}
 end
 
-return function(p1) --[[ line: 127 ]]
+return function(p1)
 	-- upvalues: useStyle (ref), streamNotificationDropdownExperimentationModule (ref), useDispatch (ref), useClientTriggerEventHandlerModule (ref), reactModule (ref), enumStreamNotificationsDisplayStateModule (ref), enumStreamNotificationsLoadingMoreStateModule (ref), fFlagStreamNotificationImpressionLogging (ref), createImpressionSignal (ref), userInputService (ref), constantsModule (ref), getStreamNotificationsModule (ref), var17 (ref), sortNotificationsModule (ref), getFStringPCGDKFilteredNotificationTypes (ref), thirdPartyUserService (ref), cryoModule (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), fFlagStreamNotificationsStandardizeClickEvents (ref), clearUnreadNotificationsModule (ref), postReportNotificationModule (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), luaAppNewStreamNotificationsLogFix (ref), type (ref), joinExperience (ref), sessionService (ref), reportEventModule (ref), var3 (ref), postNotificationsApiModule (ref), notificationsCommonModule (ref), metaActionsMenuModule (ref), loading (ref), iconSize (ref), streamNotificationBundleWrapperModule (ref), streamNotificationAnimationWrapperModule (ref), emptyNotificationsModule (ref), guiService (ref), frameBoundsImpressionsTracker (ref)
 	local var35 = useStyle()
 	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
@@ -87,14 +87,14 @@ return function(p1) --[[ line: 127 ]]
 	local var45 = nil
 	local var46 = nil
 	local var47 = nil
-	local showOverlay = p1.showOverlay or function(_) --[[ line: 148 ]] end
+	local showOverlay = p1.showOverlay or function(_) end
 	local var49 = reactModule.useRef(enumStreamNotificationsLoadingMoreStateModule.Loading)
 	local var50, var51 = reactModule.useState(enumStreamNotificationsLoadingMoreStateModule.Loading)
 	local var52 = reactModule.useRef(0)
 	local var53 = reactModule.useRef(nil)
 	local var54 = reactModule.useRef(if fFlagStreamNotificationImpressionLogging then createImpressionSignal() else nil)
 	local var55 = constantsModule.Modal.HeaderHeight + (if userInputService.StatusBarSize then userInputService.StatusBarSize.Y else 0)
-	local var56 = reactModule.useMemo(function() --[[ line: 164 ]]
+	local var56 = reactModule.useMemo(function()
 		-- upvalues: fFlagStreamNotificationImpressionLogging (copy), var39 (ref)
 		if not fFlagStreamNotificationImpressionLogging then
 			return { byNotificationId = {}, byIndex = {} }
@@ -126,14 +126,14 @@ return function(p1) --[[ line: 127 ]]
 		end
 		return { byNotificationId = t, byIndex = t_1 }
 	end, { var39 })
-	reactModule.useEffect(function() --[[ line: 201 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var45 (write)
 		var45()
 	end, {})
-	reactModule.useEffect(function() --[[ line: 205 ]]
+	reactModule.useEffect(function()
 		-- upvalues: fFlagStreamNotificationImpressionLogging (copy), var54 (ref)
 		if fFlagStreamNotificationImpressionLogging then
-			return function() --[[ line: 209 ]]
+			return function()
 				-- upvalues: var54 (copy)
 				if var54.current then
 					var54.current:destroy()
@@ -142,13 +142,13 @@ return function(p1) --[[ line: 127 ]]
 		end
 	end, {})
 	
-	local _ = function(p2) --[[ line: 216 ]]
+	local _ = function(p2)
 		-- upvalues: var49 (ref), var51 (ref)
 		var49.current = p2
 		var51(p2)
 	end
 	
-	var45 = function() --[[ line: 221 ]]
+	var45 = function()
 		-- upvalues: var49 (ref), enumStreamNotificationsLoadingMoreStateModule (copy), var51 (ref), getStreamNotificationsModule (copy), var17 (copy), constantsModule (copy), var52 (ref), sortNotificationsModule (copy), getFStringPCGDKFilteredNotificationTypes (copy), thirdPartyUserService (copy), var40 (ref), cryoModule (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy), var44 (ref), enumStreamNotificationsDisplayStateModule (copy), clearUnreadNotificationsModule (copy), var39 (ref), var45 (write)
 		if var49.current == enumStreamNotificationsLoadingMoreStateModule.NoMoreNotifications then
 			return
@@ -156,7 +156,7 @@ return function(p1) --[[ line: 127 ]]
 		local loading = enumStreamNotificationsLoadingMoreStateModule.Loading
 		var49.current = loading
 		var51(loading)
-		getStreamNotificationsModule(var17, constantsModule.DefaultMaxRows, var52.current):andThen(function(p3) --[[ line: 229 ]]
+		getStreamNotificationsModule(var17, constantsModule.DefaultMaxRows, var52.current):andThen(function(p3)
 			-- upvalues: sortNotificationsModule (copy), getFStringPCGDKFilteredNotificationTypes (copy), thirdPartyUserService (copy), var40 (copy), cryoModule (copy), enumStreamNotificationsLoadingMoreStateModule (copy), var49 (copy), var51 (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), constantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy), var44 (copy), enumStreamNotificationsDisplayStateModule (copy), clearUnreadNotificationsModule (copy), var17 (copy), var52 (copy), var39 (copy), var45 (copy)
 			p3 = sortNotificationsModule(p3)
 			local var71 = getFStringPCGDKFilteredNotificationTypes()
@@ -170,7 +170,7 @@ return function(p1) --[[ line: 127 ]]
 			var73 = t
 			
 			if var73 and #var73 > 0 then
-				var40(function(p4) --[[ line: 251 ]]
+				var40(function(p4)
 					-- upvalues: cryoModule (copy), var73 (write)
 					return cryoModule.List.join(p4, var73)
 				end)
@@ -198,18 +198,18 @@ return function(p1) --[[ line: 127 ]]
 			if var39 and #var39 < constantsModule.DefaultMaxRows then
 				var45()
 			end
-		end):catch(function(_) --[[ line: 284 ]]
+		end):catch(function(_)
 			-- upvalues: var44 (copy), enumStreamNotificationsDisplayStateModule (copy)
 			var44(enumStreamNotificationsDisplayStateModule.ErrorRetrieving)
 		end)
 	end
 	
-	local var57 = function(p5, p6) --[[ line: 289 ]]
+	local var57 = function(p5, p6)
 		-- upvalues: dropdownEnabled (ref), p1 (ref), postReportNotificationModule (copy), var17 (copy), var46 (write), var44 (ref), enumStreamNotificationsDisplayStateModule (copy), var37 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy)
 		if dropdownEnabled then
 			p1.displayStream(false)
 		end
-		local _ = function() --[[ line: 315 ]]
+		local _ = function()
 			-- upvalues: dropdownEnabled (copy), p1 (copy), var44 (copy), enumStreamNotificationsDisplayStateModule (copy)
 			if dropdownEnabled then
 				p1.displayStream(true)
@@ -222,9 +222,9 @@ return function(p1) --[[ line: 127 ]]
 		var37(openDynamicAbuseReportModule({
 			abuseVector = abuseVectorModule.Notifications,
 			targetId = p6.id,
-			onSubmit = function() --[[ line: 301 ]]
+			onSubmit = function()
 				-- upvalues: postReportNotificationModule (copy), var17 (copy), p6 (ref), var46 (copy), p5 (ref), dropdownEnabled (copy), p1 (copy), var44 (copy), enumStreamNotificationsDisplayStateModule (copy)
-				postReportNotificationModule(var17, p6.id):andThen(function(_) --[[ line: 303 ]] end):catch(function(_) --[[ line: 304 ]] end)
+				postReportNotificationModule(var17, p6.id):andThen(function(_) end):catch(function(_) end)
 				var46(p5, p6)
 				
 				if not dropdownEnabled then
@@ -232,7 +232,7 @@ return function(p1) --[[ line: 127 ]]
 				end
 				var44(enumStreamNotificationsDisplayStateModule.Default)
 			end,
-			onClose = function() --[[ line: 327 ]]
+			onClose = function()
 				-- upvalues: var37 (copy), closeCentralOverlay (copy), dropdownEnabled (copy), p1 (copy), var44 (copy), enumStreamNotificationsDisplayStateModule (copy)
 				var37(closeCentralOverlay())
 				
@@ -246,12 +246,12 @@ return function(p1) --[[ line: 127 ]]
 		}))
 	end
 	
-	local _ = function(p7) --[[ line: 335 ]]
+	local _ = function(p7)
 		-- upvalues: var47 (write), var39 (ref), cryoModule (copy), var40 (ref)
 		var47()
 		
 		if var39 and p7 then
-			var40(cryoModule.List.map(var39, function(p8) --[[ line: 338 ]]
+			var40(cryoModule.List.map(var39, function(p8)
 				-- upvalues: p7 (ref)
 				if p8.id == p7 then
 					p8.dismiss = true
@@ -261,16 +261,16 @@ return function(p1) --[[ line: 127 ]]
 		end
 	end
 	
-	local var58 = reactModule.useCallback(function(p9) --[[ line: 349 ]]
+	local var58 = reactModule.useCallback(function(p9)
 		-- upvalues: var39 (ref), cryoModule (copy), var40 (ref)
 		if var39 and p9 then
-			var40(cryoModule.List.filter(var39, function(p10) --[[ line: 351 ]]
+			var40(cryoModule.List.filter(var39, function(p10)
 				-- upvalues: p9 (ref)
 				return p10.id ~= p9 and p10.dismiss ~= true
 			end))
 		end
 	end)
-	local var59 = reactModule.useCallback(function(p11) --[[ line: 360 ]]
+	local var59 = reactModule.useCallback(function(p11)
 		-- upvalues: fFlagStreamNotificationImpressionLogging (copy), var56 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), cryoModule (copy), constantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy)
 		if not fFlagStreamNotificationImpressionLogging then return end
 		for i, v in ipairs(p11) do
@@ -289,7 +289,7 @@ return function(p1) --[[ line: 127 ]]
 			end
 		end
 	end, { var56 })
-	local var60 = reactModule.useCallback(function(p12, p13) --[[ line: 390 ]]
+	local var60 = reactModule.useCallback(function(p12, p13)
 		-- upvalues: var41 (ref), var42 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), cryoModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy), luaAppNewStreamNotificationsLogFix (copy), constantsModule (copy), type (copy), joinExperience (copy), p1 (ref), sessionService (copy), reportEventModule (copy), var3 (copy), postNotificationsApiModule (copy), var17 (copy), var46 (write), var47 (write), var44 (ref), enumStreamNotificationsDisplayStateModule (copy), var57 (ref), var39 (ref), var40 (ref), var38 (ref)
 		p13 = p13 or var41
 		var42(p13)
@@ -320,12 +320,12 @@ return function(p1) --[[ line: 127 ]]
 							})
 						end
 					elseif v.actionType == type.ActionTypeEnum.NotificationApi then
-						postNotificationsApiModule(var17, if p13 then p13.id else nil, v.path or nil):andThen(function(_) --[[ line: 463 ]]
+						postNotificationsApiModule(var17, if p13 then p13.id else nil, v.path or nil):andThen(function(_)
 							-- upvalues: v (ref), var46 (copy), p13 (ref)
 							if v.nextState ~= nil and v.nextState ~= "" then
 								var46(v.nextState, p13)
 							end
-						end):catch(function(_) --[[ line: 468 ]] end)
+						end):catch(function(_) end)
 						var47()
 					elseif v.actionType == type.ActionTypeEnum.Report then
 						var44(enumStreamNotificationsDisplayStateModule.AbuseReport)
@@ -335,7 +335,7 @@ return function(p1) --[[ line: 127 ]]
 						var47()
 						
 						if var39 and id then
-							var40(cryoModule.List.map(var39, function(p14) --[[ line: 338 ]]
+							var40(cryoModule.List.map(var39, function(p14)
 								-- upvalues: id (ref)
 								if p14.id == id then
 									p14.dismiss = true
@@ -349,7 +349,7 @@ return function(p1) --[[ line: 127 ]]
 						end
 						var38(v.path, {
 							clientEventsPayload = p13.content.clientEventsPayload,
-							callback = function() --[[ line: 489 ]]
+							callback = function()
 								-- upvalues: var46 (copy), v (ref), p13 (ref)
 								var46(v.nextState, p13)
 							end
@@ -360,7 +360,7 @@ return function(p1) --[[ line: 127 ]]
 		end
 	end)
 	
-	local var61 = function(p15) --[[ line: 500 ]]
+	local var61 = function(p15)
 		-- upvalues: var42 (ref), var44 (ref), enumStreamNotificationsDisplayStateModule (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), notificationsCommonModule (copy), constantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy)
 		var42(p15)
 		var44(enumStreamNotificationsDisplayStateModule.MetaActions)
@@ -371,7 +371,7 @@ return function(p1) --[[ line: 127 ]]
 		})
 	end
 	
-	var47 = function() --[[ line: 522 ]]
+	var47 = function()
 		-- upvalues: showOverlay (ref), var42 (ref), var43 (ref), enumStreamNotificationsDisplayStateModule (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), notificationsCommonModule (copy), constantsModule (copy), var44 (ref)
 		showOverlay(true)
 		var42(nil)
@@ -385,7 +385,7 @@ return function(p1) --[[ line: 127 ]]
 		var44(enumStreamNotificationsDisplayStateModule.Default)
 	end
 	
-	var46 = function(p16, p17) --[[ line: 539 ]]
+	var46 = function(p16, p17)
 		-- upvalues: var39 (ref), var40 (ref)
 		local t = {}
 		
@@ -400,7 +400,7 @@ return function(p1) --[[ line: 127 ]]
 		var40(t)
 	end
 	
-	local var62 = reactModule.useMemo(function() --[[ line: 555 ]]
+	local var62 = reactModule.useMemo(function()
 		-- upvalues: reactModule (copy), metaActionsMenuModule (copy), var43 (ref), var41 (ref), p1 (ref), var60 (ref), var47 (write)
 		return reactModule.createElement(metaActionsMenuModule, {
 			displayState = var43,
@@ -410,7 +410,7 @@ return function(p1) --[[ line: 127 ]]
 			closeNotificationDisplay = var47
 		})
 	end, { var43, var41 })
-	local var63 = reactModule.useMemo(function() --[[ line: 565 ]]
+	local var63 = reactModule.useMemo(function()
 		-- upvalues: var43 (ref), enumStreamNotificationsDisplayStateModule (copy), reactModule (copy), loading (copy), iconSize (copy), var39 (ref), dropdownEnabled (ref), constantsModule (copy), streamNotificationBundleWrapperModule (copy), var58 (ref), var60 (ref), var61 (ref), fFlagStreamNotificationImpressionLogging (copy), var56 (ref), streamNotificationAnimationWrapperModule (copy), var49 (ref), enumStreamNotificationsLoadingMoreStateModule (copy), var55 (ref), emptyNotificationsModule (copy)
 		if var43 == enumStreamNotificationsDisplayStateModule.Initializing then
 			return reactModule.createElement(loading, {
@@ -506,7 +506,7 @@ return function(p1) --[[ line: 127 ]]
 		var56
 	})
 	
-	local var64 = function(p18) --[[ line: 706 ]]
+	local var64 = function(p18)
 		-- upvalues: var43 (ref), enumStreamNotificationsDisplayStateModule (copy), fFlagStreamNotificationImpressionLogging (copy), var54 (ref), constantsModule (copy), var49 (ref), enumStreamNotificationsLoadingMoreStateModule (copy), var45 (write)
 		local y = p18.AbsoluteCanvasSize.Y
 		local y_1 = p18.AbsoluteWindowSize.Y

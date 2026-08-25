@@ -1,6 +1,6 @@
 ﻿local configModule = require(script:FindFirstAncestor("ExpChat").Config)
 
-return function(p0) --[[ line: 4 ]]
+return function(p0)
 	-- upvalues: configModule (ref)
 	local t = {}
 	

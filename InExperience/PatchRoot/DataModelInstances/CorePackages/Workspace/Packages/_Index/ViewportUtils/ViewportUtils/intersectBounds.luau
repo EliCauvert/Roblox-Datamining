@@ -1,6 +1,6 @@
 ﻿local frozen = table.freeze({ min = Vector2.zero, max = Vector2.zero })
 
-return function(p0, p1) --[[ line: 8 | named "intersectBounds" ]]
+return function(p0, p1)
 	-- upvalues: frozen (ref)
 	local t = {
 		min = Vector2.new(math.max(p0.min.X, p1.min.X), math.max(p0.min.Y, p1.min.Y)),

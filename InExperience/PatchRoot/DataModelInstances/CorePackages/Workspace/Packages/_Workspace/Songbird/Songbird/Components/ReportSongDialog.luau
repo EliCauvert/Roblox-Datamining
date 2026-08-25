@@ -26,7 +26,7 @@ local list = {
 }
 local _ = { Audio = "audio", Image = "image" }
 
-local function buildReport(p0) --[[ line: 57 ]]
+local function buildReport(p0)
 	-- upvalues: abuseEntrypointModule (ref), abuseCategoryModule (ref), httpService (ref)
 	local t = {
 		tags = {
@@ -43,7 +43,7 @@ local function buildReport(p0) --[[ line: 57 ]]
 			VARIANT = { valueList = { { data = p0.variant } } }
 		}
 	}
-	local ok, status = pcall(function() --[[ line: 110 ]]
+	local ok, status = pcall(function()
 		-- upvalues: httpService (copy), t (ref)
 		return httpService:JSONEncode(t)
 	end)
@@ -51,10 +51,10 @@ local function buildReport(p0) --[[ line: 57 ]]
 	return if ok then status else nil
 end
 
-return reactModule.memo(function(p1) --[[ line: 117 | named "ReportSongDialog" ]]
+return reactModule.memo(function(p1)
 	-- upvalues: useLocalUserId (ref), useCallback (ref), list (ref), buildReport (ref), playersService (ref), loggerModule (ref), reactModule (ref), foundationModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), defaultTwoStepReportFlowModule (ref)
 	local var14 = useLocalUserId()
-	local var15 = useCallback(function() --[[ line: 120 ]]
+	local var15 = useCallback(function()
 		-- upvalues: p1 (ref)
 		if p1.onClose then
 			p1.onClose()
@@ -72,7 +72,7 @@ return reactModule.memo(function(p1) --[[ line: 117 | named "ReportSongDialog" ]
 				onCloseProps = { hasPreviousSteps = false, onAbandon = var15 },
 				onSubmitProps = {
 					hasNextSteps = false,
-					onSubmit = useCallback(function(p2, p3) --[[ line: 126 ]]
+					onSubmit = useCallback(function(p2, p3)
 						-- upvalues: list (copy), p1 (ref), buildReport (copy), var14 (ref), playersService (copy), loggerModule (copy)
 						local var16 = p2 == list[1].value
 						local var17 = if var16 then p1.audio.assetId else p1.audio.thumbnailAssetId
@@ -90,7 +90,7 @@ return reactModule.memo(function(p1) --[[ line: 117 | named "ReportSongDialog" ]
 								local localPlayer = playersService.LocalPlayer
 								
 								if localPlayer then
-									local ok, status = pcall(function() --[[ line: 142 ]]
+									local ok, status = pcall(function()
 										-- upvalues: playersService (copy), localPlayer (ref), var18 (ref)
 										playersService:ReportAbuseV3(localPlayer, var18)
 									end)

@@ -14,7 +14,7 @@ return {
 				optional = true
 			}
 		},
-		paramCallback = function(p0) --[[ line: 16 ]]
+		paramCallback = function(p0)
 			return { placeId = p0.id }
 		end
 	},
@@ -35,7 +35,7 @@ return {
 			{ name = "code", pattern = "[a-fA-F0-9]+" },
 			{ name = "type", pattern = regex.oneOf(list) }
 		},
-		paramCallback = function(p1) --[[ line: 22 ]]
+		paramCallback = function(p1)
 			-- upvalues: fFlagAppChatResolveShareLinkV2Module (ref)
 			return if fFlagAppChatResolveShareLinkV2Module then if p1.v == "v2" then { shareLink = { version = 2, linkId = p1.code } } elseif p1.type then {
 				shareLink = { version = 1, linkId = p1.code, linkType = p1.type }

@@ -48,14 +48,14 @@ local var7 = nil
 local _ = nil
 local t_1 = nil
 
-local var9 = function(_, _) --[[ line: 97 ]] end
+local var9 = function(_, _) end
 
 if dEV then
 	var7 = false
 	local t_2 = {}
 	t_1 = {}
 	
-	var9 = function(p0, p1) --[[ line: 119 ]]
+	var9 = function(p0, p1)
 		-- upvalues: invariant (ref), getComponentName (ref), t_2 (write), console (ref)
 		if p0 == nil or type(p0) ~= "table" then return end
 		if not p0._store or p0._store.validated or p0.key ~= nil then return end
@@ -72,7 +72,7 @@ if dEV then
 end
 local isArray = array.isArray
 
-function coerceRef(p2, _, p3) --[[ line: 150 ]]
+function coerceRef(p2, _, p3)
 	-- upvalues: dEV (ref), getComponentName (ref), error (ref)
 	local ref = p3.ref
 	
@@ -87,7 +87,7 @@ function coerceRef(p2, _, p3) --[[ line: 150 ]]
 	return ref
 end
 
-local function _(p4) --[[ line: 323 | named "warnOnFunctionType" ]]
+local function _(p4)
 	-- upvalues: dEV (ref), getComponentName (ref), t_1 (write), console (ref)
 	if dEV then
 		local type = getComponentName(p4.type) or "Component"
@@ -98,16 +98,16 @@ local function _(p4) --[[ line: 323 | named "warnOnFunctionType" ]]
 	end
 end
 
-function resolveLazyType(p5) --[[ line: 342 ]]
+function resolveLazyType(p5)
 	-- upvalues: describeError (ref)
 	local ok, status = xpcall(p5._init, describeError, p5._payload)
 	
 	return if ok then status else p5
 end
 
-local function ChildReconciler(p6) --[[ line: 360 ]]
+local function ChildReconciler(p6)
 	-- upvalues: deletion (ref), createWorkInProgress (ref), placement (ref), hostText (ref), createFiberFromText (ref), dEV (ref), isCompatibleFamilyForHotReloading (ref), enableBlocksAPI (ref), block (ref), REACT_LAZY_TYPE (ref), REACT_BLOCK_TYPE (ref), createFiberFromElement (ref), hostPortal (ref), createFiberFromPortal (ref), fragment (ref), createFiberFromFragment (ref), REACT_ELEMENT_TYPE (ref), REACT_PORTAL_TYPE (ref), enableLazyElements (ref), getComponentName (ref), t_1 (write), console (ref), REACT_FRAGMENT_TYPE (ref), var9 (write), var2 (ref), var7 (write), isArray (ref), getIteratorFn (ref)
-	local function _(p7, p8) --[[ line: 361 | named "deleteChild" ]]
+	local function _(p7, p8)
 		-- upvalues: p6 (ref), deletion (copy)
 		if not p6 then return end
 		local deletions = p7.deletions
@@ -121,7 +121,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		table.insert(deletions, p8)
 	end
 	
-	local _ = function(p9, p10) --[[ line: 375 | named "deleteRemainingChildren" ]]
+	local _ = function(p9, p10)
 		-- upvalues: p6 (ref), deletion (copy)
 		if not p6 then
 			return nil
@@ -145,7 +145,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return nil
 	end
 	
-	local function mapRemainingChildren(_, p11) --[[ line: 394 ]]
+	local function mapRemainingChildren(_, p11)
 		local t = {}
 		local var30 = p11
 		while var30 ~= nil do
@@ -159,7 +159,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return t
 	end
 	
-	local _ = function(p12, p13) --[[ line: 416 | named "useFiber" ]]
+	local _ = function(p12, p13)
 		-- upvalues: createWorkInProgress (copy)
 		local var31 = createWorkInProgress(p12, p13)
 		var31.index = 1
@@ -168,7 +168,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return var31
 	end
 	
-	local _ = function(p14, p15, p16) --[[ line: 426 | named "placeChild" ]]
+	local _ = function(p14, p15, p16)
 		-- upvalues: p6 (ref), placement (copy)
 		p14.index = p16
 		
@@ -192,7 +192,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return index
 	end
 	
-	local _ = function(p17) --[[ line: 454 | named "placeSingleChild" ]]
+	local _ = function(p17)
 		-- upvalues: p6 (ref), placement (copy)
 		if p6 and p17.alternate == nil then
 			p17.flags = bit32.bor(p17.flags, placement)
@@ -200,7 +200,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return p17
 	end
 	
-	local _ = function(p18, p19, p20, p21) --[[ line: 463 | named "updateTextNode" ]]
+	local _ = function(p18, p19, p20, p21)
 		-- upvalues: hostText (copy), createFiberFromText (copy), createWorkInProgress (copy)
 		if p19 == nil or p19.tag ~= hostText then
 			local var32 = createFiberFromText(p20, p18.mode, p21)
@@ -216,7 +216,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return var33
 	end
 	
-	local function updateElement(p22, p23, p24, p25) --[[ line: 483 ]]
+	local function updateElement(p22, p23, p24, p25)
 		-- upvalues: dEV (copy), isCompatibleFamilyForHotReloading (copy), createWorkInProgress (copy), enableBlocksAPI (copy), block (copy), REACT_LAZY_TYPE (copy), REACT_BLOCK_TYPE (copy), createFiberFromElement (copy)
 		if p23 ~= nil then
 			if p23.elementType == p24.type or dEV and isCompatibleFamilyForHotReloading(p23, p24) then
@@ -261,7 +261,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		end
 	end
 	
-	local function updatePortal(p26, p27, p28, p29) --[[ line: 534 ]]
+	local function updatePortal(p26, p27, p28, p29)
 		-- upvalues: hostPortal (copy), createFiberFromPortal (copy), createWorkInProgress (copy)
 		if p27 == nil or p27.tag ~= hostPortal or (p27.stateNode.containerInfo ~= p28.containerInfo or p27.stateNode.implementation ~= p28.implementation) then
 			local var39 = createFiberFromPortal(p28, p26.mode, p29)
@@ -277,7 +277,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return var40
 	end
 	
-	local _ = function(p30, p31, p32, p33, p34) --[[ line: 559 | named "updateFragment" ]]
+	local _ = function(p30, p31, p32, p33, p34)
 		-- upvalues: fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy)
 		if p31 == nil or p31.tag ~= fragment then
 			local var41 = createFiberFromFragment(p32, p30.mode, p33, p34)
@@ -293,7 +293,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return var42
 	end
 	
-	local _ = function(value, p35) --[[ line: 586 | named "assignStableKey" ]]
+	local _ = function(value, p35)
 		if p35.key == nil then
 			local var43 = type(value)
 			
@@ -307,7 +307,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		end
 	end
 	
-	local function createChild(p36, p37, p38, p39) --[[ line: 605 ]]
+	local function createChild(p36, p37, p38, p39)
 		-- upvalues: REACT_ELEMENT_TYPE (copy), createFiberFromElement (copy), REACT_PORTAL_TYPE (copy), createFiberFromPortal (copy), REACT_LAZY_TYPE (copy), enableLazyElements (copy), createChild (ref), createFiberFromFragment (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
 		if p37 == nil then
 			return nil
@@ -361,7 +361,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return nil
 	end
 	
-	local function updateSlot(p40, p41, p42, p43, p44) --[[ line: 676 ]]
+	local function updateSlot(p40, p41, p42, p43, p44)
 		-- upvalues: REACT_ELEMENT_TYPE (copy), REACT_FRAGMENT_TYPE (copy), fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), updateElement (ref), REACT_PORTAL_TYPE (copy), updatePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), updateSlot (ref), hostText (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
 		if p42 == nil then
 			return nil
@@ -455,7 +455,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return nil
 	end
 	
-	local function updateFromMap(p45, p46, p47, p48, p49, p50) --[[ line: 764 ]]
+	local function updateFromMap(p45, p46, p47, p48, p49, p50)
 		-- upvalues: REACT_ELEMENT_TYPE (copy), REACT_FRAGMENT_TYPE (copy), fragment (copy), createFiberFromFragment (copy), createWorkInProgress (copy), updateElement (ref), REACT_PORTAL_TYPE (copy), updatePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), updateFromMap (ref), hostText (copy), createFiberFromText (copy), dEV (copy), getComponentName (copy), t_1 (copy), console (copy)
 		if p48 == nil then
 			return nil
@@ -547,7 +547,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return nil
 	end
 	
-	local function warnOnInvalidKey(p51, p52, p53) --[[ line: 858 ]]
+	local function warnOnInvalidKey(p51, p52, p53)
 		-- upvalues: dEV (copy), REACT_ELEMENT_TYPE (copy), REACT_PORTAL_TYPE (copy), var9 (copy), console (copy), REACT_LAZY_TYPE (copy), enableLazyElements (copy), warnOnInvalidKey (ref)
 		if dEV then
 			if p51 == nil or type(p51) ~= "table" then
@@ -580,7 +580,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return p52
 	end
 	
-	local function reconcileChildrenArray(p54, p55, p56, p57) --[[ line: 900 ]]
+	local function reconcileChildrenArray(p54, p55, p56, p57)
 		-- upvalues: dEV (copy), warnOnInvalidKey (ref), updateSlot (ref), p6 (ref), deletion (copy), placement (copy), createChild (ref), mapRemainingChildren (ref), var2 (copy), updateFromMap (ref)
 		if dEV then
 			local var76 = nil
@@ -788,7 +788,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		end
 	end
 	
-	local function reconcileChildrenIterator(p58, p59, p60, p61, p62) --[[ line: 1127 ]]
+	local function reconcileChildrenIterator(p58, p59, p60, p61, p62)
 		-- upvalues: dEV (copy), var7 (copy), console (copy), warnOnInvalidKey (ref), updateSlot (ref), p6 (ref), deletion (copy), placement (copy), createChild (ref), mapRemainingChildren (ref), updateFromMap (ref)
 		if dEV then
 			if p60.entries == p62 then
@@ -1008,7 +1008,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		end
 	end
 	
-	local function reconcileSingleTextNode(p63, p64, p65, p66) --[[ line: 1340 ]]
+	local function reconcileSingleTextNode(p63, p64, p65, p66)
 		-- upvalues: hostText (copy), p6 (ref), deletion (copy), createWorkInProgress (copy), createFiberFromText (copy)
 		if p64 == nil or p64.tag ~= hostText then
 			if p6 then
@@ -1064,7 +1064,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		end
 	end
 	
-	local function reconcileSingleElement(p67, p68, p69, p70) --[[ line: 1365 ]]
+	local function reconcileSingleElement(p67, p68, p69, p70)
 		-- upvalues: fragment (copy), REACT_FRAGMENT_TYPE (copy), p6 (ref), deletion (copy), createWorkInProgress (copy), dEV (copy), isCompatibleFamilyForHotReloading (copy), createFiberFromFragment (copy), createFiberFromElement (copy)
 		local key = p69.key
 		local var123 = p68
@@ -1185,7 +1185,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return var136
 	end
 	
-	local function reconcileSinglePortal(p71, p72, p73, p74) --[[ line: 1460 ]]
+	local function reconcileSinglePortal(p71, p72, p73, p74)
 		-- upvalues: hostPortal (copy), p6 (ref), deletion (copy), createWorkInProgress (copy), createFiberFromPortal (copy)
 		local key = p73.key
 		local var137 = p72
@@ -1262,7 +1262,7 @@ local function ChildReconciler(p6) --[[ line: 360 ]]
 		return var146
 	end
 	
-	local function reconcileChildFibers(p75, p76, p77, p78) --[[ line: 1499 ]]
+	local function reconcileChildFibers(p75, p76, p77, p78)
 		-- upvalues: REACT_FRAGMENT_TYPE (copy), isArray (copy), REACT_ELEMENT_TYPE (copy), reconcileSingleElement (ref), p6 (ref), placement (copy), REACT_PORTAL_TYPE (copy), reconcileSinglePortal (ref), REACT_LAZY_TYPE (copy), enableLazyElements (copy), reconcileChildFibers (ref), reconcileChildrenArray (ref), reconcileSingleTextNode (ref), getIteratorFn (copy), reconcileChildrenIterator (ref), dEV (copy), getComponentName (copy), t_1 (copy), console (copy), deletion (copy)
 		local var147 = type(p77)
 		
@@ -1345,7 +1345,7 @@ end
 t.reconcileChildFibers = ChildReconciler(true)
 t.mountChildFibers = ChildReconciler(false)
 
-function t.cloneChildFibers(_, p79) --[[ line: 1647 ]]
+function t.cloneChildFibers(_, p79)
 	-- upvalues: createWorkInProgress (ref)
 	if p79.child == nil then return end
 	local child = p79.child
@@ -1361,7 +1361,7 @@ function t.cloneChildFibers(_, p79) --[[ line: 1647 ]]
 	var157.sibling = nil
 end
 
-function t.resetChildFibers(p80, p81) --[[ line: 1674 ]]
+function t.resetChildFibers(p80, p81)
 	-- upvalues: resetWorkInProgress (ref)
 	local child = p80.child
 	while child ~= nil do

@@ -2,7 +2,7 @@
 local reactModule = require(parent.React)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 
-return function(p0) --[[ line: 13 | named "ReportTextEntry" ]]
+return function(p0)
 	-- upvalues: useStyle (ref), reactModule (ref)
 	local var1 = useStyle()
 	local theme = var1.Theme
@@ -42,7 +42,7 @@ return function(p0) --[[ line: 13 | named "ReportTextEntry" ]]
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
-			[reactModule.Change.Text] = function(p1) --[[ line: 56 ]]
+			[reactModule.Change.Text] = function(p1)
 				-- upvalues: p0 (ref)
 				if p0.text ~= p1.Text then
 					p0.onUpdate(p1.Text)

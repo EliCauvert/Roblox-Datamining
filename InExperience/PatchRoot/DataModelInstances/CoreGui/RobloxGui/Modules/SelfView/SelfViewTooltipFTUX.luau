@@ -9,11 +9,11 @@ local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 local promiseModule = require(corePackagesService.Packages.Promise)
 
-return function(p0) --[[ line: 15 ]]
+return function(p0)
 	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), promiseModule (ref), withTooltip (ref)
 	local var7, var8 = reactModule.useState(true)
 	local fallbackText = p0.fallbackText
-	pcall(function() --[[ line: 19 ]]
+	pcall(function()
 		-- upvalues: fallbackText (write), robloxTranslatorModule (copy), p0 (ref)
 		fallbackText = robloxTranslatorModule:FormatByKey(p0.translationKey)
 	end)
@@ -29,7 +29,7 @@ return function(p0) --[[ line: 15 ]]
 	}
 	local inputBeganConnection = nil
 	
-	local _ = function() --[[ line: 35 ]]
+	local _ = function()
 		-- upvalues: var8 (ref), inputBeganConnection (write)
 		var8(false)
 		
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 15 ]]
 		end
 	end
 	
-	inputBeganConnection = userInputService.InputBegan:Connect(function(p1) --[[ line: 44 ]]
+	inputBeganConnection = userInputService.InputBegan:Connect(function(p1)
 		-- upvalues: var8 (ref), inputBeganConnection (write)
 		local userInputType = p1.UserInputType
 		
@@ -52,7 +52,7 @@ return function(p0) --[[ line: 15 ]]
 			end
 		end
 	end)
-	promiseModule.delay(p0.tooltipLifetime):andThen(function() --[[ line: 50 ]]
+	promiseModule.delay(p0.tooltipLifetime):andThen(function()
 		-- upvalues: var8 (ref), inputBeganConnection (write)
 		var8(false)
 		
@@ -62,9 +62,9 @@ return function(p0) --[[ line: 15 ]]
 		end
 	end)
 	
-	return withTooltip(t, t_1, function(p2) --[[ line: 54 ]]
+	return withTooltip(t, t_1, function(p2)
 		-- upvalues: reactModule (copy)
-		local var12 = function(p3) --[[ line: 55 ]]
+		local var12 = function(p3)
 			-- upvalues: p2 (ref)
 			p2(p3)
 		end

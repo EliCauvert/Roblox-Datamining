@@ -36,11 +36,11 @@ local t = {
 	systemButtonText = if getFFlagIsSquadEnabled() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends",
 	pageHeaderText = if getFFlagIsSquadEnabled() then if require(parent.SocialExperiments).ArgoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then if sharedFlagsModule.FFlagAppChatNewChatFixEnabled then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.ChatWithFriends" else "Feature.Chat.Heading.PartyWithFriends" elseif sharedFlagsModule.FFlagConnectionsToFriendsRename then "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections",
 	conversation = conversationModule.empty(),
-	setSystemButtonActivated = function(_) --[[ line: 88 ]] end,
-	setSystemButtonEnabled = function(_) --[[ line: 89 ]] end
+	setSystemButtonActivated = function(_) end,
+	setSystemButtonEnabled = function(_) end
 }
 
-function CreateNewChatContainer(p0) --[[ line: 93 ]]
+function CreateNewChatContainer(p0)
 	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useState (ref), fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayFixSocial (ref), useIsInExperienceModule (ref), useIsGroupChatEnabledModule (ref), useDispatch (ref), useCallback (ref), useAnalyticsModule (ref), promiseModule (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), eventNamesModule (ref), createConversationErrorModule (ref), useEffect (ref), reactModule (ref), fFlagFixPaginatedChatMembersCutoffModule (ref), appNavBarModule (ref), responseIndicator (ref), selectChatMembersContainerModule (ref)
 	local var18 = cryoModule.Dictionary.join(t, p0)
 	local var19 = useRef({})
@@ -57,14 +57,14 @@ function CreateNewChatContainer(p0) --[[ line: 93 ]]
 		var24 = true
 	end
 	local var25 = useDispatch()
-	local var26 = useCallback(function(p1) --[[ line: 114 ]]
+	local var26 = useCallback(function(p1)
 		-- upvalues: var18 (ref)
 		var18.navigateToToast({ toastProps = { toastContent = { toastTitle = p1 } } })
 	end, { var18.navigateToToast })
 	
-	local var27 = function(p2, p3) --[[ line: 124 ]]
+	local var27 = function(p2, p3)
 		-- upvalues: var19 (ref), cryoModule (copy), var20 (ref), var18 (ref)
-		var19.current = cryoModule.List.map(p2, function(p4) --[[ line: 125 ]]
+		var19.current = cryoModule.List.map(p2, function(p4)
 			return p4.id
 		end)
 		local var30 = p3 <= #p2
@@ -76,17 +76,17 @@ function CreateNewChatContainer(p0) --[[ line: 93 ]]
 	end
 	
 	local var28 = useAnalyticsModule()
-	local var29 = useCallback(function(p5) --[[ line: 138 ]]
+	local var29 = useCallback(function(p5)
 		-- upvalues: var21 (ref), var19 (ref), promiseModule (copy), var22 (ref), var25 (ref), createConversationModule (copy), var28 (ref), var18 (ref), parseCreateConversationErrorsModule (copy), var26 (ref), eventNamesModule (copy), createConversationErrorModule (copy)
 		if var21 or not var19.current then
 			return promiseModule.resolve()
 		end
 		var22(true)
 		
-		return var25(createConversationModule(if #var19.current == 1 then "one_to_one" else "group", var19.current, var28, "userCreatedNewConversation")):andThen(function(p7) --[[ line: 159 ]]
+		return var25(createConversationModule(if #var19.current == 1 then "one_to_one" else "group", var19.current, var28, "userCreatedNewConversation")):andThen(function(p7)
 			-- upvalues: var18 (copy)
 			var18.navigateToConversation(p7.id)
-		end):catch(function(p6) --[[ line: 163 ]]
+		end):catch(function(p6)
 			-- upvalues: parseCreateConversationErrorsModule (copy), p5 (ref), var26 (copy), var22 (copy), var28 (copy), eventNamesModule (copy), createConversationErrorModule (copy)
 			var26(if parseCreateConversationErrorsModule(p6) == "participant_chat_disabled" then p5.invalidParticipantText else p5.networkErrorText)
 			var22(false)
@@ -100,7 +100,7 @@ function CreateNewChatContainer(p0) --[[ line: 93 ]]
 	end, {
 		var25, var21, var22, var19, var18.navigateToConversation, var26, var28
 	})
-	useEffect(function() --[[ line: 193 ]]
+	useEffect(function()
 		-- upvalues: var18 (ref), var29 (ref)
 		var18.setSystemButtonActivated(var29)
 	end, { var18.setSystemButtonActivated, var29 })
